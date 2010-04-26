@@ -1,4 +1,4 @@
-package com.anvisics;
+package com.osmand;
 
 public interface Constants {
 	

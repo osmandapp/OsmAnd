@@ -1,4 +1,4 @@
-package com.anvisics.data;
+package com.osmand.data;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Set;
 
 import org.openstreetmap.osmosis.core.domain.v0_6.Entity;
 
-import com.anvisics.NodeUtil.LatLon;
+import com.osmand.NodeUtil.LatLon;
 
 public class Street {
 	

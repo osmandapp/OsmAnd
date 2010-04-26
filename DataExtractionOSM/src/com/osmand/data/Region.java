@@ -1,4 +1,4 @@
-package com.anvisics.data;
+package com.osmand.data;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,9 +9,9 @@ import java.util.Map;
 import org.openstreetmap.osmosis.core.domain.v0_6.Entity;
 import org.openstreetmap.osmosis.core.domain.v0_6.Node;
 
-import com.anvisics.NodeUtil;
-import com.anvisics.NodeUtil.LatLon;
-import com.anvisics.data.City.CityType;
+import com.osmand.NodeUtil;
+import com.osmand.NodeUtil.LatLon;
+import com.osmand.data.City.CityType;
 
 public class Region {
 	private Entity entity;

@@ -1,4 +1,4 @@
-package com.anvisics.data;
+package com.osmand.data;
 
 import java.util.Collection;
 import java.util.Map;
@@ -7,8 +7,8 @@ import java.util.TreeMap;
 import org.openstreetmap.osmosis.core.domain.v0_6.Entity;
 import org.openstreetmap.osmosis.core.domain.v0_6.Node;
 
-import com.anvisics.NodeUtil;
-import com.anvisics.NodeUtil.LatLon;
+import com.osmand.NodeUtil;
+import com.osmand.NodeUtil.LatLon;
 
 public class City {
 	
