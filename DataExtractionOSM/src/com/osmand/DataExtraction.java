@@ -1,4 +1,4 @@
-package com.anvisics;
+package com.osmand;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -55,12 +55,12 @@ import org.openstreetmap.osmosis.core.task.v0_6.Sink;
 import org.openstreetmap.osmosis.core.xml.v0_6.impl.OsmHandler;
 import org.xml.sax.SAXException;
 
-import com.anvisics.MapPanel.IMapLocationListener;
-import com.anvisics.NodeUtil.LatLon;
-import com.anvisics.data.City;
-import com.anvisics.data.Region;
-import com.anvisics.data.Street;
-import com.anvisics.data.City.CityType;
+import com.osmand.MapPanel.IMapLocationListener;
+import com.osmand.NodeUtil.LatLon;
+import com.osmand.data.City;
+import com.osmand.data.Region;
+import com.osmand.data.Street;
+import com.osmand.data.City.CityType;
 
 
 // TO implement

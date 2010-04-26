@@ -1,4 +1,4 @@
-package com.anvisics;
+package com.osmand;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -23,7 +23,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
-import com.anvisics.DataExtraction.ExitListener;
+import com.osmand.DataExtraction.ExitListener;
 
 public class MapPanel extends JPanel {
 	
