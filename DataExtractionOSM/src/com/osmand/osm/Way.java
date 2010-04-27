@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import com.osmand.NodeUtil;
-
 public class Way extends Entity {
 	
 	// lazy loading
@@ -75,7 +73,7 @@ public class Way extends Entity {
 				list.add(n.getLatLon());
 			}
 		}
-		return NodeUtil.getWeightCenter(list);
+		return MapUtils.getWeightCenter(list);
 	}
 	
 	

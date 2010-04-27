@@ -26,6 +26,7 @@ import javax.swing.UIManager;
 import com.osmand.DataExtraction.ExitListener;
 import com.osmand.data.DataTileManager;
 import com.osmand.osm.LatLon;
+import com.osmand.osm.MapUtils;
 
 public class MapPanel extends JPanel {
 	
@@ -47,8 +48,7 @@ public class MapPanel extends JPanel {
 	    frame.addWindowListener(new ExitListener());
 	    Container content = frame.getContentPane();
 	    
-//	    MapPanel panel = new MapPanel(new ZipFile(Constants.pathToTestDataDir  + "MinskTiles.zipp"));
-	    MapPanel panel = new MapPanel(new File(Constants.pathToTestDataDir  + "MinskTiles"));
+	    MapPanel panel = new MapPanel(new File(DefaultLauncherConstants.pathToDirWithTiles));
 	    
 	    content.add(panel, BorderLayout.CENTER);
 	    
@@ -98,11 +98,11 @@ public class MapPanel extends JPanel {
 
 	
 	public double getXTile(){
-		return NodeUtil.getTileNumberX(zoom, longitude);
+		return MapUtils.getTileNumberX(zoom, longitude);
 	}
 	
 	public double getYTile(){
-		return NodeUtil.getTileNumberY(zoom, latitude);
+		return MapUtils.getTileNumberY(zoom, latitude);
 	}
 	
 
@@ -208,16 +208,16 @@ public class MapPanel extends JPanel {
 			}
 			
 			if(points != null){
-				double latDown = NodeUtil.getLatitudeFromTile(zoom, yTileDown);
-				double longDown = NodeUtil.getLongitudeFromTile(zoom, xTileRight);
-				double latUp = NodeUtil.getLatitudeFromTile(zoom, yTileUp);
-				double longUp = NodeUtil.getLongitudeFromTile(zoom, xTileLeft);
+				double latDown = MapUtils.getLatitudeFromTile(zoom, yTileDown);
+				double longDown = MapUtils.getLongitudeFromTile(zoom, xTileRight);
+				double latUp = MapUtils.getLatitudeFromTile(zoom, yTileUp);
+				double longUp = MapUtils.getLongitudeFromTile(zoom, xTileLeft);
 				List<LatLon> objects = points.getObjects(latUp, longUp, latDown, longDown);
 				pointsToDraw.clear();
 				for(LatLon n : objects){
-					int pixX = NodeUtil.getPixelShiftX(zoom, n.getLongitude(), this.longitude, tileSize) +
+					int pixX = MapUtils.getPixelShiftX(zoom, n.getLongitude(), this.longitude, tileSize) +
 									getWidth() / 2;
-					int pixY = NodeUtil.getPixelShiftY(zoom, n.getLatitude(), this.latitude, tileSize) +
+					int pixY = MapUtils.getPixelShiftY(zoom, n.getLatitude(), this.latitude, tileSize) +
 									getHeight() / 2;
 					if(pixX >= 0 && pixY >= 0){
 						pointsToDraw.add(new Point(pixX, pixY));
@@ -302,19 +302,19 @@ public class MapPanel extends JPanel {
 		if (e.getID() == KeyEvent.KEY_RELEASED) {
 			if (e.getKeyCode() == 37) {
 				// LEFT button
-				longitude = NodeUtil.getLongitudeFromTile(zoom, getXTile()-0.5); 
+				longitude = MapUtils.getLongitudeFromTile(zoom, getXTile()-0.5); 
 				processed = true;
 			} else if (e.getKeyCode() == 39) {
 				// RIGHT button
-				longitude = NodeUtil.getLongitudeFromTile(zoom, getXTile()+0.5);
+				longitude = MapUtils.getLongitudeFromTile(zoom, getXTile()+0.5);
 				processed = true;
 			} else if (e.getKeyCode() == 38) {
 				// UP button
-				latitude = NodeUtil.getLatitudeFromTile(zoom, getYTile()-0.5);
+				latitude = MapUtils.getLatitudeFromTile(zoom, getYTile()-0.5);
 				processed = true;
 			} else if (e.getKeyCode() == 40) {
 				// DOWN button
-				latitude = NodeUtil.getLatitudeFromTile(zoom, getYTile()+0.5);
+				latitude = MapUtils.getLatitudeFromTile(zoom, getYTile()+0.5);
 				processed = true;
 			}
 		}
@@ -357,8 +357,8 @@ public class MapPanel extends JPanel {
 		public void dragTo(Point p){
 			double dx = (startDragging.x - (double)p.x)/tileSize; 
 			double dy = (startDragging.y - (double)p.y)/tileSize;
-			double lat = NodeUtil.getLatitudeFromTile(zoom, getYTile() + dy);
-			double lon = NodeUtil.getLongitudeFromTile(zoom, getXTile() + dx);
+			double lat = MapUtils.getLatitudeFromTile(zoom, getYTile() + dy);
+			double lon = MapUtils.getLongitudeFromTile(zoom, getXTile() + dx);
 			setLatLon(lat, lon);
 		}
 		

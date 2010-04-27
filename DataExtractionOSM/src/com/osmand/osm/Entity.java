@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.osmand.osm.OSMSettings.OSMTagKey;
+
 public abstract class Entity {
 	// lazy initializing
 	private Map<String, String> tags = null;
@@ -23,6 +25,10 @@ public abstract class Entity {
 			tags = new LinkedHashMap<String, String>();
 		}
 		return tags.put(key, value);
+	}
+	
+	public String getTag(OSMTagKey key){
+		return getTag(key.getValue());
 	}
 	
 	public String getTag(String key){

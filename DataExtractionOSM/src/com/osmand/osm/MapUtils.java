@@ -1,16 +1,17 @@
-package com.osmand;
-
+package com.osmand.osm;
 
 import java.util.Collection;
 import java.util.List;
 
-import com.osmand.osm.Entity;
-import com.osmand.osm.LatLon;
-import com.osmand.osm.Node;
-
-public class NodeUtil {
-	
-
+/**
+ * This utility class includes : 
+ * 1. distance algorithms
+ * 2. finding center for array of nodes
+ * 3. tile evaluation algorithms
+ *   
+ *
+ */
+public class MapUtils {
 	public static double getDistance(Node e1, Node e2){
 		return getDistance(e1.getLatitude(), e1.getLongitude(), e2.getLatitude(), e2.getLongitude());
 	}
@@ -23,11 +24,6 @@ public class NodeUtil {
 		return getDistance(e1.getLatitude(), e1.getLongitude(), point.getLatitude(), point.getLongitude());
 	}
 	
-	public static void fillList(Collection<? extends Entity> source, List<Long> ids){
-		for(Entity e : source){
-			ids.add(e.getId());
-		}
-	}
 	
 	/**
 	 * Gets distance in meters
@@ -42,6 +38,15 @@ public class NodeUtil {
 		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
 		return R * c * 1000;
 	}
+	
+	
+	/**
+	 * Gets distance in meters
+	 */
+	public static double getDistance(LatLon l1, LatLon l2){
+		return getDistance(l1, l2);
+	}
+	
 
 	public static LatLon getWeightCenter(Collection<LatLon> nodes){
 		if(nodes.isEmpty()){
@@ -69,18 +74,6 @@ public class NodeUtil {
 		return new LatLon(latitude/nodes.size(), longitude/nodes.size());
 	}
 	
-	public static LatLon getLatLon(Node n){
-		return new LatLon(n.getLatitude(), n.getLongitude());
-	}
-	
-
-	
-	/**
-	 * Gets distance in meters
-	 */
-	public static double getDistance(LatLon l1, LatLon l2){
-		return getDistance(l1, l2);
-	}
 	
 	
 	/**
@@ -112,31 +105,18 @@ public class NodeUtil {
 	}
 	
 	public static int getPixelShiftX(int zoom, double long1, double long2, int tileSize){
-		return (int) ((NodeUtil.getTileNumberX(zoom, long1) - NodeUtil.getTileNumberX(zoom, long2)) * tileSize);
+		return (int) ((getTileNumberX(zoom, long1) - getTileNumberX(zoom, long2)) * tileSize);
 	}
 	
 	public static int getPixelShiftY(int zoom, double lat1, double lat2, int tileSize){
-		return (int) ((NodeUtil.getTileNumberY(zoom, lat1) - NodeUtil.getTileNumberY(zoom, lat2)) * tileSize);
+		return (int) ((getTileNumberY(zoom, lat1) - getTileNumberY(zoom, lat2)) * tileSize);
 	}
 	
-	
-	
-	
-	public static boolean isEmpty(String s){
-		return s == null || s.length() == 0;
-	}
-	
-	
-	public static boolean objectEquals(Object a, Object b){
-		if(a == null){
-			return b == null;
-		} else {
-			return a.equals(b);
+	public static void addIdsToList(Collection<? extends Entity> source, List<Long> ids){
+		for(Entity e : source){
+			ids.add(e.getId());
 		}
 	}
 	
-	public static boolean tag(Entity e, String name, String value){
-		String tag = e.getTag(name);
-		return value.equals(tag);
-	}
+
 }

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.osmand.NodeUtil;
+import com.osmand.osm.MapUtils;
 
 /**
  * 
@@ -39,10 +39,10 @@ public class DataTileManager<T> {
 	}
 	
 	public List<T> getObjects(double latitudeUp, double longitudeUp, double latitudeDown, double longitudeDown) {
-		int tileXUp = (int) NodeUtil.getTileNumberX(zoom, longitudeUp);
-		int tileYUp = (int) NodeUtil.getTileNumberY(zoom, latitudeUp);
-		int tileXDown = (int) NodeUtil.getTileNumberX(zoom, longitudeDown);
-		int tileYDown = (int) NodeUtil.getTileNumberY(zoom, latitudeDown);
+		int tileXUp = (int) MapUtils.getTileNumberX(zoom, longitudeUp);
+		int tileYUp = (int) MapUtils.getTileNumberY(zoom, latitudeUp);
+		int tileXDown = (int) MapUtils.getTileNumberX(zoom, longitudeDown);
+		int tileYDown = (int) MapUtils.getTileNumberY(zoom, latitudeDown);
 		List<T> result = new ArrayList<T>();
 		for (int i = tileXUp; i <= tileXDown; i++) {
 			for (int j = tileYUp; j <= tileYDown; j++) {
@@ -58,8 +58,8 @@ public class DataTileManager<T> {
 	 * however the first objects are from closer tile than last
 	 */
 	public List<T> getClosestObjects(double latitude, double longitude, int depth){
-		int tileX = (int) NodeUtil.getTileNumberX(zoom, longitude);
-		int tileY = (int) NodeUtil.getTileNumberY(zoom, latitude);
+		int tileX = (int) MapUtils.getTileNumberX(zoom, longitude);
+		int tileY = (int) MapUtils.getTileNumberY(zoom, latitude);
 		List<T> result = new ArrayList<T>();
 		
 		
@@ -97,8 +97,8 @@ public class DataTileManager<T> {
 	
 	
 	public String evaluateTile(double latitude, double longitude){
-		int tileX = (int) NodeUtil.getTileNumberX(zoom, longitude);
-		int tileY = (int) NodeUtil.getTileNumberY(zoom, latitude);
+		int tileX = (int) MapUtils.getTileNumberX(zoom, longitude);
+		int tileY = (int) MapUtils.getTileNumberY(zoom, latitude);
 		return evTile(tileX, tileY);
 	}
 	
