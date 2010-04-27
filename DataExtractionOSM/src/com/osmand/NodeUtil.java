@@ -2,6 +2,7 @@ package com.osmand;
 
 
 import java.util.Collection;
+import java.util.List;
 
 import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
@@ -20,6 +21,12 @@ public class NodeUtil {
 	
 	public static double getDistance(Node e1, LatLon point){
 		return getDistance(e1.getLatitude(), e1.getLongitude(), point.getLatitude(), point.getLongitude());
+	}
+	
+	public static void fillList(Collection<? extends Entity> source, List<Long> ids){
+		for(Entity e : source){
+			ids.add(e.getId());
+		}
 	}
 	
 	/**

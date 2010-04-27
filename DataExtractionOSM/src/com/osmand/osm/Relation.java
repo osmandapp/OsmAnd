@@ -41,6 +41,17 @@ public class Relation extends Entity {
 		return members.get(id);
 	}
 	
+	public Collection<Long> getMemberIds() {
+		return getMemberIds(null);
+	}
+	
+	public Map<Long, String> getMembersMap() {
+		if(members == null){
+			return Collections.emptyMap();
+		}
+		return Collections.unmodifiableMap(members);
+	}
+	
 	public Collection<Long> getMemberIds(String role) {
 		if (members == null) {
 			return Collections.emptyList();

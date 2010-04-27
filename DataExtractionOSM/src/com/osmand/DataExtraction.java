@@ -9,6 +9,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -150,6 +151,7 @@ public class DataExtraction implements IMapLocationListener {
 					n.putTag("amenity", "shop");
 					amenities.add(n);
 				}
+				// TODO leisure
 				if (n.getTag("place") != null) {
 					places.add(n);
 					if (places.size() % 500 == 0) System.out.println();
@@ -230,12 +232,19 @@ public class DataExtraction implements IMapLocationListener {
        
    
         runUI(country);
+		List<Long> interestedObjects = new ArrayList<Long>();
+		NodeUtil.fillList(places, interestedObjects);
+		NodeUtil.fillList(amenities, interestedObjects);
+		NodeUtil.fillList(mapWays, interestedObjects);
+//		NodeUtil.fillList(buildings, interestedObjects);
+		
+        storage.saveStorage(new FileOutputStream("C:/1_tmp.osm"), interestedObjects, true);
         
         System.out.println();
 		System.out.println("USED Memory " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1e6);
 		System.out.println("TIME : " + (System.currentTimeMillis() - st));
 	}
-
+	
 	
 	///////////////////////////////////////////
 	// 2. Showing UI
