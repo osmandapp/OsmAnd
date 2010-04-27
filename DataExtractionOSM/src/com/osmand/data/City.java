@@ -4,10 +4,10 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.osmand.NodeUtil;
 import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.Node;
+import com.osmand.osm.OSMSettings.OSMTagKey;
 
 public class City {
 	
@@ -30,7 +30,7 @@ public class City {
 
 	public City(Node el){
 		this.el = el;
-		String place = el.getTag("place");
+		String place = el.getTag(OSMTagKey.PLACE);
 		for(CityType t : CityType.values()){
 			if(t.name().equalsIgnoreCase(place)){
 				type = t;
@@ -40,8 +40,8 @@ public class City {
 	}
 	
 	public Street registerBuilding(LatLon point, Entity e){
-		String number = e.getTag("addr:housenumber");
-		String street = e.getTag("addr:street");
+		String number = e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER);
+		String street = e.getTag(OSMTagKey.ADDR_STREET);
 		if( street != null && number != null){
 			if(!streets.containsKey(street)){
 				streets.put(street, new Street(street));
@@ -54,7 +54,7 @@ public class City {
 	
 	
 	public String getName(){
-		return el.getTag("name");
+		return el.getTag(OSMTagKey.NAME);
 	}
 	
 	public CityType getType(){

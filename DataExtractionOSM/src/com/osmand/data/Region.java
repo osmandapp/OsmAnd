@@ -6,11 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.osmand.NodeUtil;
+import com.osmand.Algoritms;
 import com.osmand.data.City.CityType;
 import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
+import com.osmand.osm.MapUtils;
 import com.osmand.osm.Node;
+import com.osmand.osm.OSMSettings.OSMTagKey;
 
 public class Region {
 	private Entity entity;
@@ -35,7 +37,7 @@ public class Region {
 	}
 	
 	public String getName(){
-		return entity == null ? "" : entity.getTag("name");
+		return entity == null ? "" : entity.getTag(OSMTagKey.NAME);
 	}
 	
 	public Collection<City> getCitiesByType(CityType type){
@@ -72,7 +74,7 @@ public class Region {
 		double relDist = Double.POSITIVE_INFINITY;
 		for(CityType t : CityType.values()){
 			for(City c : cities.get(t)){
-				double rel = NodeUtil.getDistance(c.getNode(), point) / t.getRadius();
+				double rel = MapUtils.getDistance(c.getNode(), point) / t.getRadius();
 				if(rel < 1) {
 					return c; // we are in that city
 				}
@@ -95,7 +97,7 @@ public class Region {
 	
 	public City registerCity(Node c){
 		City city = new City(c);
-		if(city.getType() != null && !NodeUtil.isEmpty(city.getName())){
+		if(city.getType() != null && !Algoritms.isEmpty(city.getName())){
 			cities.get(city.getType()).add(city);
 			return city;
 		}
