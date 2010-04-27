@@ -58,6 +58,7 @@ import com.osmand.osm.OSMSettings;
 import com.osmand.osm.Relation;
 import com.osmand.osm.Way;
 import com.osmand.osm.OSMSettings.OSMTagKey;
+import com.osmand.osm.io.OSMStorageWriter;
 import com.osmand.osm.io.OsmBaseStorage;
 
 
@@ -244,7 +245,8 @@ public class DataExtraction implements IMapLocationListener {
 		MapUtils.addIdsToList(mapWays, interestedObjects);
 //		MapUtils.addIdsToList(buildings, interestedObjects);
 		if (DefaultLauncherConstants.writeTestOsmFile != null) {
-			storage.saveStorage(new FileOutputStream(DefaultLauncherConstants.writeTestOsmFile), interestedObjects, true);
+			OSMStorageWriter writer = new OSMStorageWriter(storage.getRegisteredEntities());
+			writer.saveStorage(new FileOutputStream(DefaultLauncherConstants.writeTestOsmFile), interestedObjects, true);
 		}
         
         System.out.println();
