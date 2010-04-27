@@ -4,9 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.openstreetmap.osmosis.core.domain.v0_6.Entity;
-
-import com.osmand.NodeUtil.LatLon;
+import com.osmand.osm.Entity;
+import com.osmand.osm.LatLon;
 
 public class Street {
 	

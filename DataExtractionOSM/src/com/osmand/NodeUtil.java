@@ -1,80 +1,15 @@
 package com.osmand;
 
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
-import org.openstreetmap.osmosis.core.domain.v0_6.Entity;
-import org.openstreetmap.osmosis.core.domain.v0_6.Node;
-import org.openstreetmap.osmosis.core.domain.v0_6.Tag;
-import org.openstreetmap.osmosis.core.domain.v0_6.Way;
-import org.openstreetmap.osmosis.core.domain.v0_6.WayNode;
+import com.osmand.osm.Entity;
+import com.osmand.osm.LatLon;
+import com.osmand.osm.Node;
 
 public class NodeUtil {
 	
-	public static class LatLon {
-		private final double longitude;
-		private final double latitude;
 
-		public LatLon(double latitude, double longitude){
-			this.latitude = latitude;
-			this.longitude = longitude;
-		}
-		@Override
-		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			long temp;
-			temp = Double.doubleToLongBits(latitude);
-			result = prime * result + (int) (temp ^ (temp >>> 32));
-			temp = Double.doubleToLongBits(longitude);
-			result = prime * result + (int) (temp ^ (temp >>> 32));
-			return result;
-		}
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			LatLon other = (LatLon) obj;
-			if (Double.doubleToLongBits(latitude) != Double
-					.doubleToLongBits(other.latitude))
-				return false;
-			if (Double.doubleToLongBits(longitude) != Double
-					.doubleToLongBits(other.longitude))
-				return false;
-			return true;
-		}
-		@Override
-		public String toString() {
-			return "Lat " + latitude +" Lon "+ longitude;
-		}
-		
-		public double getLatitude() {
-			return latitude;
-		}
-		
-		public double getLongitude() {
-			return longitude;
-		}
-		
-	}
-
-	
-	public static String getTag(Entity e, String name){
-		for(Tag t : e.getTags()){
-			if(name.equals(t.getKey())){
-				return t.getValue();
-			}
-		}
-		return null;
-	}
-	
 	public static double getDistance(Node e1, Node e2){
 		return getDistance(e1.getLatitude(), e1.getLongitude(), e2.getLatitude(), e2.getLongitude());
 	}
@@ -131,28 +66,6 @@ public class NodeUtil {
 		return new LatLon(n.getLatitude(), n.getLongitude());
 	}
 	
-	public static LatLon getWeightCenter(Way way, Map<Long, LatLon> nodes){
-		List<WayNode> wayNodes = way.getWayNodes();
-		ArrayList<LatLon> arrayList = new ArrayList<LatLon>(wayNodes.size());
-		for(WayNode n : wayNodes){
-			if(nodes.containsKey(n.getNodeId())){
-				arrayList.add(nodes.get(n.getNodeId()));
-			}
-		}
-		return getWeightCenter(arrayList);
-	}
-	
-	public static LatLon getWeightCenterForNodes(Way way, Map<Long, Node> nodes){
-		List<WayNode> wayNodes = way.getWayNodes();
-		ArrayList<Node> arrayList = new ArrayList<Node>(wayNodes.size());
-		for(WayNode n : wayNodes){
-			if(nodes.containsKey(n.getNodeId())){
-				arrayList.add(nodes.get(n.getNodeId()));
-			}
-		}
-		return getWeightCenterForNodes(arrayList);
-	}
-	
 
 	
 	/**
@@ -191,11 +104,20 @@ public class NodeUtil {
 		return Math.atan(Math.sinh(Math.PI * (1 - 2 * y / (1 << zoom)))) * 180d / Math.PI;
 	}
 	
-	public static boolean isEmpty(String s){
-		return s == null || s.length() == 0;
+	public static int getPixelShiftX(int zoom, double long1, double long2, int tileSize){
+		return (int) ((NodeUtil.getTileNumberX(zoom, long1) - NodeUtil.getTileNumberX(zoom, long2)) * tileSize);
+	}
+	
+	public static int getPixelShiftY(int zoom, double lat1, double lat2, int tileSize){
+		return (int) ((NodeUtil.getTileNumberY(zoom, lat1) - NodeUtil.getTileNumberY(zoom, lat2)) * tileSize);
 	}
 	
 	
+	
+	
+	public static boolean isEmpty(String s){
+		return s == null || s.length() == 0;
+	}
 	
 	
 	public static boolean objectEquals(Object a, Object b){
@@ -207,7 +129,7 @@ public class NodeUtil {
 	}
 	
 	public static boolean tag(Entity e, String name, String value){
-		String tag = getTag(e, name);
+		String tag = e.getTag(name);
 		return value.equals(tag);
 	}
 }

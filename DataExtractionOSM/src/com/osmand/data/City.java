@@ -4,11 +4,10 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.openstreetmap.osmosis.core.domain.v0_6.Entity;
-import org.openstreetmap.osmosis.core.domain.v0_6.Node;
-
 import com.osmand.NodeUtil;
-import com.osmand.NodeUtil.LatLon;
+import com.osmand.osm.Entity;
+import com.osmand.osm.LatLon;
+import com.osmand.osm.Node;
 
 public class City {
 	
@@ -31,7 +30,7 @@ public class City {
 
 	public City(Node el){
 		this.el = el;
-		String place = NodeUtil.getTag(el, "place");
+		String place = el.getTag("place");
 		for(CityType t : CityType.values()){
 			if(t.name().equalsIgnoreCase(place)){
 				type = t;
@@ -41,8 +40,8 @@ public class City {
 	}
 	
 	public Street registerBuilding(LatLon point, Entity e){
-		String number = NodeUtil.getTag(e, "addr:housenumber");
-		String street = NodeUtil.getTag(e, "addr:street");
+		String number = e.getTag("addr:housenumber");
+		String street = e.getTag("addr:street");
 		if( street != null && number != null){
 			if(!streets.containsKey(street)){
 				streets.put(street, new Street(street));
@@ -55,7 +54,7 @@ public class City {
 	
 	
 	public String getName(){
-		return NodeUtil.getTag(el, "name");
+		return el.getTag("name");
 	}
 	
 	public CityType getType(){

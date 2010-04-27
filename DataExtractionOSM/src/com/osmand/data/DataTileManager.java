@@ -38,6 +38,20 @@ public class DataTileManager<T> {
 		} 
 	}
 	
+	public List<T> getObjects(double latitudeUp, double longitudeUp, double latitudeDown, double longitudeDown) {
+		int tileXUp = (int) NodeUtil.getTileNumberX(zoom, longitudeUp);
+		int tileYUp = (int) NodeUtil.getTileNumberY(zoom, latitudeUp);
+		int tileXDown = (int) NodeUtil.getTileNumberX(zoom, longitudeDown);
+		int tileYDown = (int) NodeUtil.getTileNumberY(zoom, latitudeDown);
+		List<T> result = new ArrayList<T>();
+		for (int i = tileXUp; i <= tileXDown; i++) {
+			for (int j = tileYUp; j <= tileYDown; j++) {
+				putObjects(i, j, result);
+			}
+		}
+		return result;
+	}
+	
 	/**
 	 * @depth of the neighbor tile to visit
 	 * returns not exactly sorted list, 
@@ -52,8 +66,8 @@ public class DataTileManager<T> {
 		putObjects(tileX, tileY, result);
 		
 		// that's very difficult way visiting node : 
-		// similar to visit like spiral
-		// however the simplest way could visit by matrix & after that sort tiles by distance (that's less efficient) 
+		// similar to visit by spiral
+		// however the simplest way could be to visit row by row & after sort tiles by distance (that's less efficient) 
 		
 		// go through circle
 		for (int i = 1; i <= depth; i++) {
