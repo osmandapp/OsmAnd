@@ -33,6 +33,9 @@ public abstract class Entity {
 	}
 	
 	public Map<String, String> getTags() {
+		if(tags == null){
+			return Collections.emptyMap();
+		}
 		return Collections.unmodifiableMap(tags);
 	}
 	

@@ -112,12 +112,22 @@ public class MapPanel extends JPanel {
 			for (int i = 0; i < images.length; i++) {
 				for (int j = 0; j < images[i].length; j++) {
 					if(images[i][j] == null){
-						if ((i + j + (int) getXTile() + (int) getYTile()) % 2 == 0) {
-							g.setColor(Color.gray);
-						} else {
-							g.setColor(Color.white);
-						}
-						g.fillRect(i * tileSize+xStartingImage, j * tileSize + yStartingImage, tileSize, tileSize);
+					    int div = 4;
+					    int tileDiv = tileSize / div;
+					    for(int k1 = 0; k1 < div; k1++){
+					    	for(int k2 = 0; k2 < div; k2++){
+					    		if ((k1 + k2) % 2 == 0) {
+									g.setColor(Color.gray);
+								} else {
+									g.setColor(Color.white);
+								}
+					    		g.fillRect(i * tileSize+xStartingImage + k1*tileDiv,
+					    				j * tileSize + yStartingImage + k2*tileDiv, tileDiv, tileDiv);
+						    	
+						    }
+					    }
+						
+						
 					} else {
 						g.drawImage(images[i][j], i * tileSize+xStartingImage, j * tileSize + yStartingImage, this);
 					}
@@ -179,35 +189,29 @@ public class MapPanel extends JPanel {
 					}
 				}
 			}
-			double xTile = getXTile();
-			double yTile = getYTile();
-			double leftX = (getSize().width/2d - (xTile - Math.floor(xTile)) *tileSize)/tileSize;
-			double leftY = (getSize().height/2d - (yTile - Math.floor(yTile)) *tileSize)/tileSize;
 			
-			int xStartInd = (int) (Math.floor(xTile) - Math.ceil(leftX));
-			int yStartInd = (int) (Math.floor(yTile) - Math.ceil(leftY));
+			double xTileLeft = getXTile() -getSize().width/(2d*tileSize);
+		    double xTileRight = getXTile() + getSize().width/(2d*tileSize);
+		    double yTileUp = getYTile() -getSize().height/(2d*tileSize);
+		    double yTileDown = getYTile() + getSize().height/(2d*tileSize);
+		    
+			xStartingImage = - (int) ((xTileLeft - Math.floor(xTileLeft))*tileSize);
+			yStartingImage = - (int) ((yTileUp - Math.floor(yTileUp))*tileSize);
 			
-			xStartingImage = (int) ((leftX - Math.ceil(leftX))*tileSize);
-			yStartingImage = (int) ((leftY - Math.ceil(leftY))*tileSize);
-			
-			int tileXCount = (int) Math.ceil((getSize().width - xStartingImage)/ (double)tileSize );
-			int tileYCount = (int) Math.ceil((getSize().height- yStartingImage)/ (double)tileSize );
+			int tileXCount = ((int)xTileRight - (int) xTileLeft + 1);
+			int tileYCount = ((int)yTileDown - (int) yTileUp + 1);
 			images = new BufferedImage[tileXCount][tileYCount];
 			for(int i=0; i<images.length; i++){
 				for(int j=0; j<images[i].length; j++){
-					images[i][j]= getImageFor(xStartInd + i, yStartInd + j);
+					images[i][j]= getImageFor((int)xTileLeft + i,  (int) yTileUp + j);
 				}
 			}
 			
 			if(points != null){
-				double latDown = NodeUtil.getLatitudeFromTile(zoom, 
-						NodeUtil.getTileNumberY(zoom, latitude) + ((double)getHeight()/tileSize));
-				double longDown = NodeUtil.getLongitudeFromTile(zoom, 
-						NodeUtil.getTileNumberX(zoom, longitude) + ((double)getWidth()/tileSize));
-				double latUp = NodeUtil.getLatitudeFromTile(zoom, 
-						NodeUtil.getTileNumberY(zoom, latitude) - ((double)getHeight()/tileSize));
-				double longUp = NodeUtil.getLongitudeFromTile(zoom, 
-						NodeUtil.getTileNumberX(zoom, longitude) - ((double)getWidth()/tileSize));
+				double latDown = NodeUtil.getLatitudeFromTile(zoom, yTileDown);
+				double longDown = NodeUtil.getLongitudeFromTile(zoom, xTileRight);
+				double latUp = NodeUtil.getLatitudeFromTile(zoom, yTileUp);
+				double longUp = NodeUtil.getLongitudeFromTile(zoom, xTileLeft);
 				List<LatLon> objects = points.getObjects(latUp, longUp, latDown, longDown);
 				pointsToDraw.clear();
 				for(LatLon n : objects){

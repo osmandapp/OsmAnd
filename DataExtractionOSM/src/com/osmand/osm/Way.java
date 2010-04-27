@@ -1,6 +1,7 @@
 package com.osmand.osm;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -31,10 +32,16 @@ public class Way extends Entity {
 	}
 	
 	public List<Long> getNodeIds(){
+		if(nodeIds == null){
+			return Collections.emptyList();
+		}
 		return nodeIds;
 	}
 	
 	public List<Node> getNodes() {
+		if(nodes == null){
+			return Collections.emptyList();
+		}
 		return nodes;
 	}
 	
