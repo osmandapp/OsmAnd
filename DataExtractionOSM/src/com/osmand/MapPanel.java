@@ -24,6 +24,8 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 import com.osmand.DataExtraction.ExitListener;
+import com.osmand.data.DataTileManager;
+import com.osmand.osm.LatLon;
 
 public class MapPanel extends JPanel {
 	
@@ -54,13 +56,20 @@ public class MapPanel extends JPanel {
 	    frame.setVisible(true);
 
 	}
+
+	// name of source map 
+	private String map = "Mapnik";
 	
+	// tile size of map 
 	private final int tileSize = 256;
-	private BufferedImage[][] images;
-	private int xStartingImage = 0;
-	private int yStartingImage = 0;
 	
+	// file name with tiles
 	private final File fileWithTiles;
+
+	// special points to draw
+	private DataTileManager<LatLon> points;
+	
+	// zoom levle
 	private int zoom = 15;
 	
 	// degree measurements (-180, 180)
@@ -72,7 +81,15 @@ public class MapPanel extends JPanel {
 	
 	private List<IMapLocationListener> listeners = new ArrayList<IMapLocationListener>();
 	
-	private String map = "Mapnik";
+	
+	
+	// cached data to draw image
+	private BufferedImage[][] images;
+	private int xStartingImage = 0;
+	private int yStartingImage = 0;
+	private List<Point> pointsToDraw = new ArrayList<Point>(); 
+	
+	
 	
 	public MapPanel(File fileWithTiles) {
 		this.fileWithTiles = fileWithTiles;
@@ -91,12 +108,11 @@ public class MapPanel extends JPanel {
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		System.out.println("draw");
 		if (images != null) {
 			for (int i = 0; i < images.length; i++) {
 				for (int j = 0; j < images[i].length; j++) {
 					if(images[i][j] == null){
-						if((i+j + (int)getXTile() + (int)getYTile()) % 2 == 0){
+						if ((i + j + (int) getXTile() + (int) getYTile()) % 2 == 0) {
 							g.setColor(Color.gray);
 						} else {
 							g.setColor(Color.white);
@@ -109,6 +125,12 @@ public class MapPanel extends JPanel {
 			}
 		}
 		g.setColor(Color.black);
+		// draw user points
+		for(Point p : pointsToDraw){
+			g.drawOval(p.x, p.y, 3, 3);
+			g.fillOval(p.x, p.y, 3, 3);
+		}
+		
 		
 		g.fillOval(getWidth()/2 - 2, getHeight()/2 -2, 4, 4);
 		g.drawOval(getWidth()/2 - 2, getHeight()/2 -2, 4, 4);
@@ -176,6 +198,31 @@ public class MapPanel extends JPanel {
 					images[i][j]= getImageFor(xStartInd + i, yStartInd + j);
 				}
 			}
+			
+			if(points != null){
+				double latDown = NodeUtil.getLatitudeFromTile(zoom, 
+						NodeUtil.getTileNumberY(zoom, latitude) + ((double)getHeight()/tileSize));
+				double longDown = NodeUtil.getLongitudeFromTile(zoom, 
+						NodeUtil.getTileNumberX(zoom, longitude) + ((double)getWidth()/tileSize));
+				double latUp = NodeUtil.getLatitudeFromTile(zoom, 
+						NodeUtil.getTileNumberY(zoom, latitude) - ((double)getHeight()/tileSize));
+				double longUp = NodeUtil.getLongitudeFromTile(zoom, 
+						NodeUtil.getTileNumberX(zoom, longitude) - ((double)getWidth()/tileSize));
+				List<LatLon> objects = points.getObjects(latUp, longUp, latDown, longDown);
+				pointsToDraw.clear();
+				for(LatLon n : objects){
+					int pixX = NodeUtil.getPixelShiftX(zoom, n.getLongitude(), this.longitude, tileSize) +
+									getWidth() / 2;
+					int pixY = NodeUtil.getPixelShiftY(zoom, n.getLatitude(), this.latitude, tileSize) +
+									getHeight() / 2;
+					if(pixX >= 0 && pixY >= 0){
+						pointsToDraw.add(new Point(pixX, pixY));
+					}
+				}
+				
+				
+			}
+			
 			repaint();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -249,17 +296,20 @@ public class MapPanel extends JPanel {
 	protected void processKeyEvent(KeyEvent e) {
 		boolean processed = false;
 		if (e.getID() == KeyEvent.KEY_RELEASED) {
-
 			if (e.getKeyCode() == 37) {
+				// LEFT button
 				longitude = NodeUtil.getLongitudeFromTile(zoom, getXTile()-0.5); 
 				processed = true;
 			} else if (e.getKeyCode() == 39) {
+				// RIGHT button
 				longitude = NodeUtil.getLongitudeFromTile(zoom, getXTile()+0.5);
 				processed = true;
 			} else if (e.getKeyCode() == 38) {
+				// UP button
 				latitude = NodeUtil.getLatitudeFromTile(zoom, getYTile()-0.5);
 				processed = true;
 			} else if (e.getKeyCode() == 40) {
+				// DOWN button
 				latitude = NodeUtil.getLatitudeFromTile(zoom, getYTile()+0.5);
 				processed = true;
 			}
@@ -280,6 +330,14 @@ public class MapPanel extends JPanel {
 			fireMapLocationListeners();
 		}
 		super.processKeyEvent(e);
+	}
+	
+	public DataTileManager<LatLon> getPoints() {
+		return points;
+	}
+	
+	public void setPoints(DataTileManager<LatLon> points) {
+		this.points = points;
 	}
 	
 	public class MapMouseAdapter extends MouseAdapter {

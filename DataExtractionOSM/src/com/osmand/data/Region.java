@@ -6,12 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.openstreetmap.osmosis.core.domain.v0_6.Entity;
-import org.openstreetmap.osmosis.core.domain.v0_6.Node;
-
 import com.osmand.NodeUtil;
-import com.osmand.NodeUtil.LatLon;
 import com.osmand.data.City.CityType;
+import com.osmand.osm.Entity;
+import com.osmand.osm.LatLon;
+import com.osmand.osm.Node;
 
 public class Region {
 	private Entity entity;
@@ -36,7 +35,7 @@ public class Region {
 	}
 	
 	public String getName(){
-		return entity == null ? "" : NodeUtil.getTag(entity, "name");
+		return entity == null ? "" : entity.getTag("name");
 	}
 	
 	public Collection<City> getCitiesByType(CityType type){
