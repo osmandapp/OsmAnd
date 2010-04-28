@@ -44,7 +44,6 @@ import javax.xml.stream.XMLStreamException;
 import org.apache.tools.bzip2.CBZip2InputStream;
 import org.xml.sax.SAXException;
 
-import com.osmand.MapPanel.IMapLocationListener;
 import com.osmand.data.City;
 import com.osmand.data.DataTileManager;
 import com.osmand.data.Region;
