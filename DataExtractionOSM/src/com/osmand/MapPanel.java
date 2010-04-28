@@ -31,10 +31,7 @@ import com.osmand.osm.MapUtils;
 public class MapPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	
-	public interface IMapLocationListener {
-		void locationChanged(double newLatitude, double newLongitude);
-	}
+
 
 	public static void main(String[] args) throws IOException {
 		JFrame frame = new JFrame("Tree of choose");

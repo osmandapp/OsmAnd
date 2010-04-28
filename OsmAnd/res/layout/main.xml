@@ -4,9 +4,11 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-<TextView  
+<ZoomControls android:id="@+id/ZoomControls01" android:layout_width="wrap_content" android:layout_height="wrap_content"></ZoomControls><TextView  
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
     android:text="@string/hello"
     />
+<SurfaceView android:id="@+id/SurfaceView01" android:layout_width="fill_parent" android:layout_height="fill_parent"></SurfaceView>
+
 </LinearLayout>
