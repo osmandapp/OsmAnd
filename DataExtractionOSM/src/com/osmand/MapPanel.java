@@ -70,9 +70,9 @@ public class MapPanel extends JPanel {
 	private int zoom = 15;
 	
 	// degree measurements (-180, 180)
-	// долгота
+	// РґРѕР»РіРѕС‚Р°
 	private double longitude = 27.56;
-	// широта
+	// С€РёСЂРѕС‚Р°
 	// degree measurements (90, -90)
 	private double latitude = 53.9;
 	
@@ -288,7 +288,7 @@ public class MapPanel extends JPanel {
 	
 	protected void fireMapLocationListeners(){
 		for(IMapLocationListener l : listeners){
-			l.locationChanged(latitude, longitude);
+			l.locationChanged(latitude, longitude, null);
 		}
 	}
 	

@@ -15,6 +15,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Paint.Style;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -42,9 +43,9 @@ public class OsmandMapTileView extends View {
 	private int zoom = 15;
 	
 	// degree measurements (-180, 180)
-	// долгота
+	// РґРѕР»РіРѕС‚Р°
 	private double longitude = 27.56;
-	// широта
+	// С€РёСЂРѕС‚Р°
 	// degree measurements (90, -90)
 	private double latitude = 53.9;
 	
@@ -67,9 +68,18 @@ public class OsmandMapTileView extends View {
 	Paint paintWhiteFill;
 	Paint paintBlack;
 	
-	public OsmandMapTileView(Context context, File fileWithTiles) {
+	
+	public OsmandMapTileView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		initView();
+	}
+	
+	public OsmandMapTileView(Context context) {
 		super(context);
-		this.fileWithTiles = fileWithTiles;
+		initView();
+	}
+	
+	public void initView(){
 		paintGrayFill = new Paint();
 		paintGrayFill.setColor(Color.GRAY);
 		paintGrayFill.setStyle(Style.FILL);
@@ -84,10 +94,6 @@ public class OsmandMapTileView extends View {
 		
 		prepareImage();
 		setClickable(true);
-		// TODO !!!!
-//		MapMouseAdapter mouse = new MapMouseAdapter();
-//		addMouseListener(mouse);
-//		addMouseMotionListener(mouse);
 	}
 	
 	
@@ -96,9 +102,10 @@ public class OsmandMapTileView extends View {
 	public void dragTo(PointF p){
 		double dx = (startDragging.x - (double)p.x)/tileSize; 
 		double dy = (startDragging.y - (double)p.y)/tileSize;
-		double lat = MapUtils.getLatitudeFromTile(zoom, getYTile() + dy);
-		double lon = MapUtils.getLongitudeFromTile(zoom, getXTile() + dx);
-		setLatLon(lat, lon);
+		this.latitude = MapUtils.getLatitudeFromTile(zoom, getYTile() + dy);
+		this.longitude = MapUtils.getLongitudeFromTile(zoom, getXTile() + dx);
+		prepareImage();
+		fireMapLocationListeners(this);
 	}
 	
 	@Override
@@ -110,7 +117,6 @@ public class OsmandMapTileView extends View {
 		} else if(event.getAction() == MotionEvent.ACTION_UP) {
 			if(startDragging != null){
 				dragTo(new PointF(event.getX(), event.getY()));
-				fireMapLocationListeners();
 				startDragging = null;
 			}
 		} else if(event.getAction() == MotionEvent.ACTION_MOVE) {
@@ -134,11 +140,14 @@ public class OsmandMapTileView extends View {
 	protected void drawEmptyTile(Canvas cvs, int x, int y){
 		int tileDiv = tileSize / emptyTileDivisor;
 		for (int k1 = 0; k1 < emptyTileDivisor; k1++) {
+			
 			for (int k2 = 0; k2 < emptyTileDivisor; k2++) {
+				int xk = x + tileDiv* k1;
+				int yk = y + tileDiv* k2;
 				if ((k1 + k2) % 2 == 0) {
-					cvs.drawRect(x, y, x + tileDiv, y + tileDiv, paintGrayFill);
+					cvs.drawRect(xk, yk, xk + tileDiv, yk + tileDiv, paintGrayFill);
 				} else {
-					cvs.drawRect(x, y, x + tileDiv, y + tileDiv, paintWhiteFill);
+					cvs.drawRect(xk, yk, xk + tileDiv, yk + tileDiv, paintWhiteFill);
 				}
 			}
 		}
@@ -165,7 +174,7 @@ public class OsmandMapTileView extends View {
  
 	public Bitmap getImageFor(int x, int y) {
 		String file = "/" + zoom + "/" + (x) + "/" + y + ".png";
-		if (!cacheOfImages.containsKey(file)) {
+		if (!cacheOfImages.containsKey(file) && fileWithTiles != null) {
 			File en = new File(fileWithTiles, file);
 			if (cacheOfImages.size() > maxImgCacheSize) {
 				ArrayList<String> list = new ArrayList<String>(cacheOfImages.keySet());
@@ -189,6 +198,7 @@ public class OsmandMapTileView extends View {
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		prepareImage();
+		super.onSizeChanged(w, h, oldw, oldh);
 	}
 	
 	// TODO async loading images (show busy cursor while it is loaded)
@@ -225,13 +235,14 @@ public class OsmandMapTileView extends View {
 	
 	public void setFileWithTiles(File fileWithTiles) {
 		this.fileWithTiles = fileWithTiles;
+		prepareImage();
 	}
 
 	public void setLatLon(double latitude, double longitude){
 		this.latitude = latitude;
 		this.longitude = longitude;
 		prepareImage();
-		fireMapLocationListeners();
+		fireMapLocationListeners(null);
 	}
 	
 	public double getLatitude() {
@@ -246,6 +257,10 @@ public class OsmandMapTileView extends View {
 		return zoom;
 	}
 	
+	public int getTileSize() {
+		return tileSize;
+	}
+	
 
 	public void addMapLocationListener(IMapLocationListener l){
 		listeners.add(l);
@@ -255,103 +270,13 @@ public class OsmandMapTileView extends View {
 		listeners.remove(l);
 	}
 	
-	protected void fireMapLocationListeners(){
+	protected void fireMapLocationListeners(Object source){
 		for(IMapLocationListener l : listeners){
-			l.locationChanged(latitude, longitude);
+			l.locationChanged(latitude, longitude, source);
 		}
 	}
-	
-//	
-//	@Override
-//	protected void processKeyEvent(KeyEvent e) {
-//		boolean processed = false;
-//		if (e.getID() == KeyEvent.KEY_RELEASED) {
-//			if (e.getKeyCode() == 37) {
-//				// LEFT button
-//				longitude = MapUtils.getLongitudeFromTile(zoom, getXTile()-0.5); 
-//				processed = true;
-//			} else if (e.getKeyCode() == 39) {
-//				// RIGHT button
-//				longitude = MapUtils.getLongitudeFromTile(zoom, getXTile()+0.5);
-//				processed = true;
-//			} else if (e.getKeyCode() == 38) {
-//				// UP button
-//				latitude = MapUtils.getLatitudeFromTile(zoom, getYTile()-0.5);
-//				processed = true;
-//			} else if (e.getKeyCode() == 40) {
-//				// DOWN button
-//				latitude = MapUtils.getLatitudeFromTile(zoom, getYTile()+0.5);
-//				processed = true;
-//			}
-//		}
-//		if(e.getID() == KeyEvent.KEY_TYPED){
-//			if(e.getKeyChar() == '+'){
-//				zoom ++;
-//				processed = true;
-//			} else if(e.getKeyChar() == '-'){
-//				zoom --;
-//				processed = true;
-//			}
-//		}
-//		
-//		if(processed){
-//			e.consume();
-//			prepareImage();
-//			fireMapLocationListeners();
-//		}
-//		super.processKeyEvent(e);
-//	}
-//	
-//	
-//	public class MapMouseAdapter extends MouseAdapter {
-//		private Point startDragging = null;
-//		
-//		@Override
-//		public void mouseClicked(MouseEvent e) {
-//			if(e.getButton() == MouseEvent.BUTTON1){
-//				requestFocus();
-//			}
-//		}
-//		
-//		public void dragTo(Point p){
-//			double dx = (startDragging.x - (double)p.x)/tileSize; 
-//			double dy = (startDragging.y - (double)p.y)/tileSize;
-//			double lat = MapUtils.getLatitudeFromTile(zoom, getYTile() + dy);
-//			double lon = MapUtils.getLongitudeFromTile(zoom, getXTile() + dx);
-//			setLatLon(lat, lon);
-//		}
-//		
-//		@Override
-//		public void mouseDragged(MouseEvent e) {
-//			if(startDragging != null){
-//				if(Math.abs(e.getPoint().x - startDragging.x) +  Math.abs(e.getPoint().y - startDragging.y) >= 8){
-//					dragTo(e.getPoint());
-//					startDragging = e.getPoint();
-//				}
-//			}
-//		}
-//		
-//		@Override
-//		public void mousePressed(MouseEvent e) {
-//			if(e.getButton() == MouseEvent.BUTTON3){
-//				if(startDragging == null){
-//					startDragging  = e.getPoint();
-//				}
-//			}
-//		}
-//		@Override
-//		public void mouseReleased(MouseEvent e) {
-//			if(e.getButton() == MouseEvent.BUTTON3){
-//				if(startDragging != null){
-//					dragTo(e.getPoint());
-//					fireMapLocationListeners();
-//					startDragging = null;
-//				}
-//			}
-//			super.mouseReleased(e);
-//		}
-//
-//	}
+
+
 
 
 }

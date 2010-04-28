@@ -419,7 +419,7 @@ public class DataExtraction implements IMapLocationListener {
 	}
 	
 	@Override
-	public void locationChanged(final double newLatitude, final double newLongitude){
+	public void locationChanged(final double newLatitude, final double newLongitude, Object source){
 		Region reg = (Region) amenitiesTree.getUserObject();
 		List<Node> closestAmenities = reg.getClosestAmenities(newLatitude, newLongitude);
 		Collections.sort(closestAmenities, new Comparator<Node>(){
