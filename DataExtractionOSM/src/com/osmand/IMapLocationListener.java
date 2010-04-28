@@ -1,5 +1,5 @@
 package com.osmand;
 
 public interface IMapLocationListener {
-	void locationChanged(double newLatitude, double newLongitude);
+	void locationChanged(double newLatitude, double newLongitude, Object source);
 }
