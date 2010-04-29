@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -42,6 +43,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.tools.bzip2.CBZip2InputStream;
+import org.apache.tools.bzip2.CBZip2OutputStream;
 import org.xml.sax.SAXException;
 
 import com.osmand.data.City;
@@ -114,7 +116,7 @@ public class DataExtraction implements IMapLocationListener {
 			stream = new FileInputStream(DefaultLauncherConstants.pathToOsmFile);
 		} else {
 			stream = new FileInputStream(DefaultLauncherConstants.pathToOsmBz2File);
-			if (stream.read() != 66 || stream.read() != 90)
+			if (stream.read() != 'B' || stream.read() != 'Z')
 				throw new RuntimeException(
 						"The source stream must start with the characters BZ if it is to be read as a BZip2 stream.");
 			else
@@ -156,6 +158,10 @@ public class DataExtraction implements IMapLocationListener {
 				} else if (n.getTag(OSMTagKey.LEISURE) != null) {
 					// TODO temp solution
 					n.putTag(OSMTagKey.AMENITY.getValue(), OSMTagKey.LEISURE.getValue());
+					amenities.add(n);
+				}  else if (n.getTag(OSMTagKey.TOURISM) != null) {
+					// TODO temp solution
+					n.putTag(OSMTagKey.AMENITY.getValue(), OSMTagKey.TOURISM.getValue());
 					amenities.add(n);
 				}
 				if (n.getTag(OSMTagKey.PLACE) != null) {
@@ -220,8 +226,10 @@ public class DataExtraction implements IMapLocationListener {
 			}
         }
         
+        DataTileManager<LatLon> amenitiesManager = new DataTileManager<LatLon>();
         for(Node node : amenities){
         	country.registerAmenity(node);
+        	amenitiesManager.registerObject(node.getLatitude(), node.getLongitude(), node.getLatLon());
         }
         
         
@@ -234,18 +242,24 @@ public class DataExtraction implements IMapLocationListener {
 				}
 			}
 		}
-        mapPanel.setPoints(waysManager);
+        mapPanel.setPoints(amenitiesManager);
        
    
         runUI(country);
 		List<Long> interestedObjects = new ArrayList<Long>();
-		MapUtils.addIdsToList(places, interestedObjects);
+//		MapUtils.addIdsToList(places, interestedObjects);
 		MapUtils.addIdsToList(amenities, interestedObjects);
-		MapUtils.addIdsToList(mapWays, interestedObjects);
+//		MapUtils.addIdsToList(mapWays, interestedObjects);
 //		MapUtils.addIdsToList(buildings, interestedObjects);
 		if (DefaultLauncherConstants.writeTestOsmFile != null) {
 			OSMStorageWriter writer = new OSMStorageWriter(storage.getRegisteredEntities());
-			writer.saveStorage(new FileOutputStream(DefaultLauncherConstants.writeTestOsmFile), interestedObjects, true);
+			OutputStream output = new FileOutputStream(DefaultLauncherConstants.writeTestOsmFile);
+			output.write('B');
+			output.write('Z');
+			output = new CBZip2OutputStream(output);
+			
+			writer.saveStorage(output, interestedObjects, true);
+			output.close();
 		}
         
         System.out.println();
