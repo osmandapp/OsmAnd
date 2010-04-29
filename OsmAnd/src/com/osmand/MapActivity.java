@@ -115,15 +115,9 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			int newY = MapUtils.getPixelShiftY(mapView.getZoom(), 
 					lastKnownLocation.getLatitude(), mapView.getLatitude() , mapView.getTileSize()) + 
 					mapView.getHeight()/2;
-			// TODO clear radius & specify bearing!
-			double tileNumberX = MapUtils.getTileNumberX(mapView.getZoom(), mapView.getLongitude());
-			double tileNumberLeft = tileNumberX - ((double)mapView.getWidth()) / (2d * mapView.getTileSize());
-			double dist = MapUtils.getDistance(mapView.getLatitude(), 
-					MapUtils.getLongitudeFromTile(mapView.getZoom(),tileNumberLeft), mapView.getLatitude(), 
-					MapUtils.getLongitudeFromTile(mapView.getZoom(),tileNumberX));
-			
-			int radius = (int) ((mapView.getWidth()/ (2d*dist))* lastKnownLocation.getAccuracy());
-			
+			// TODO 	specify bearing!
+			int radius = MapUtils.getLengthXFromMeters(mapView.getZoom(), mapView.getLatitude(), mapView.getLongitude(), 
+					lastKnownLocation.getAccuracy(), mapView.getTileSize(), mapView.getWidth());
 			
 			pointOfView.setLocationX(newX);
 			pointOfView.setLocationY(newY);
