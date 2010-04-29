@@ -108,6 +108,17 @@ public class MapUtils {
 		return (int) ((getTileNumberX(zoom, long1) - getTileNumberX(zoom, long2)) * tileSize);
 	}
 	
+	
+	public static int getLengthXFromMeters(int zoom, double latitude, double longitude,  double meters, int tileSize, int widthOfDisplay) {
+		double tileNumberX = MapUtils.getTileNumberX(zoom, longitude);
+		double tileNumberLeft = tileNumberX - ((double) widthOfDisplay) / (2d * tileSize);
+		double tileNumberRight = tileNumberX + ((double) widthOfDisplay) / (2d * tileSize);
+		double dist = getDistance(latitude, getLongitudeFromTile(zoom, tileNumberLeft), latitude, getLongitudeFromTile(zoom,
+				tileNumberRight));
+
+		return (int) ((double) widthOfDisplay / dist * meters);
+	}
+	
 	public static int getPixelShiftY(int zoom, double lat1, double lat2, int tileSize){
 		return (int) ((getTileNumberY(zoom, lat1) - getTileNumberY(zoom, lat2)) * tileSize);
 	}
