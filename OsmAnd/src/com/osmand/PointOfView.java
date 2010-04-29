@@ -11,6 +11,7 @@ public class PointOfView extends View {
 	private Paint location;
 	private Paint area;
 	
+	
 	private int areaRadius = 0;
 	private int locationX = -1;
 	private int locationY = -1;
