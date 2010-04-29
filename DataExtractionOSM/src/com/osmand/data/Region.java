@@ -94,6 +94,7 @@ public class Region {
 	public void registerAmenity(Node n){
 		amenities.registerObject(n.getLatitude(), n.getLongitude(), n);
 	}
+
 	
 	public City registerCity(Node c){
 		City city = new City(c);

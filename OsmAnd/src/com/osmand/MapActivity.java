@@ -9,6 +9,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ZoomControls;
@@ -31,9 +32,13 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     @Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		setContentView(R.layout.main);
 		
+		requestWindowFeature(Window.FEATURE_NO_TITLE);  
+//	     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,   
+//	                                WindowManager.LayoutParams.FLAG_FULLSCREEN); 
+		
+		
+		setContentView(R.layout.main);
 		mapView = (OsmandMapTileView) findViewById(R.id.View01);
 		mapView.setFileWithTiles(new File(Environment.getExternalStorageDirectory(), "osmand/tiles/Mapnik"));
 		mapView.addMapLocationListener(this);
@@ -72,8 +77,6 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		service.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
-		service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, this);
-		
 	}
 
 
@@ -98,6 +101,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO when provider disabled reset lastKnownLocation!
 	}
 	
 	public void validatePointOfView(){

@@ -16,7 +16,8 @@ public class OSMSettings {
 		// POI
 		AMENITY("amenity"),
 		SHOP("shop"),
-		LEISURE("leisure"),
+		LEISURE("leisure"), 
+		TOURISM("tourism"),
 		;
 		
 		private final String value;
