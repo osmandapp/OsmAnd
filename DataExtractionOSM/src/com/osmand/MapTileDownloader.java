@@ -8,9 +8,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
 import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.concurrent.PriorityBlockingQueue;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -24,7 +24,8 @@ public class MapTileDownloader {
 	
 	private ThreadPoolExecutor threadPoolExecutor;
 	private IMapDownloaderCallback callback;
-	private Map<String, DownloadRequest> requestsToLoad;
+	
+	private Set<File> currentlyDownloaded;
 	
 	
 	public static MapTileDownloader getInstance(){
@@ -64,16 +65,15 @@ public class MapTileDownloader {
 			yTile = -1;
 			zoom = -1;
 		}
-		
-		
-		
 	}
 	
 	
 	public MapTileDownloader(int numberOfThreads){
-		threadPoolExecutor = new ThreadPoolExecutor(1, numberOfThreads, DefaultLauncherConstants.TILE_DOWNLOAD_SECONTS_TO_WORK, 
-				TimeUnit.SECONDS, new PriorityBlockingQueue<Runnable>());
-		requestsToLoad = Collections.synchronizedMap(new LinkedHashMap<String, DownloadRequest>());
+		threadPoolExecutor = new ThreadPoolExecutor(numberOfThreads, numberOfThreads, DefaultLauncherConstants.TILE_DOWNLOAD_SECONTS_TO_WORK, 
+				TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+		// 1.6 method but very useful to kill non-running threads
+//		threadPoolExecutor.allowCoreThreadTimeOut(true);
+		currentlyDownloaded = Collections.synchronizedSet(new HashSet<File>());
 		
 	}
 	
@@ -85,14 +85,21 @@ public class MapTileDownloader {
 		return callback;
 	}
 	
+	public boolean isFileCurrentlyDownloaded(File f){
+		return currentlyDownloaded.contains(f);
+	}
+	
 	
 	public void refuseAllPreviousRequests(){
-		requestsToLoad.clear();
+		while(!threadPoolExecutor.getQueue().isEmpty()){
+			threadPoolExecutor.getQueue().remove();
+		}
 	}
 	
 	public void requestToDownload(String url, DownloadRequest request){
-		requestsToLoad.put(url, request);
-		threadPoolExecutor.execute(new DownloadMapWorker(url, request));
+		if (!isFileCurrentlyDownloaded(request.fileToSave)) {
+			threadPoolExecutor.execute(new DownloadMapWorker(url, request));
+		}
 	}
 	
 	
@@ -108,36 +115,33 @@ public class MapTileDownloader {
 		
 		@Override
 		public void run() {
-			synchronized (requestsToLoad) {
-				if(!requestsToLoad.containsKey(downloadUrl)){
-					return;
-				}
-				request = requestsToLoad.remove(downloadUrl);
-			}
-			
 			try {
+				if(log.isDebugEnabled()){
+					log.debug("Start downloading tile : " + downloadUrl);
+				}
 				URL url = new URL(downloadUrl);
-//				if(log.isDebugEnabled()){
-					log.debug("Downloading tile : " + downloadUrl);
-//				}
 				URLConnection connection = url.openConnection();
 				connection.setRequestProperty("User-Agent", DefaultLauncherConstants.APP_NAME+"/"+DefaultLauncherConstants.APP_VERSION);
 				BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
 				try {
-				if(request != null && request.fileToSave != null){
-					request.fileToSave.getParentFile().mkdirs();
-					FileOutputStream stream = new FileOutputStream(request.fileToSave);
-					try {
-						Algoritms.streamCopy(inputStream, stream);
-					} finally {
-						Algoritms.closeStream(stream);
+					if (request != null && request.fileToSave != null) {
+						request.fileToSave.getParentFile().mkdirs();
+
+						FileOutputStream stream = new FileOutputStream(request.fileToSave);
+						currentlyDownloaded.add(request.fileToSave);
+						try {
+							Algoritms.streamCopy(inputStream, stream);
+							stream.flush();
+						} finally {
+							currentlyDownloaded.remove(request.fileToSave);
+							Algoritms.closeStream(stream);
+						}
 					}
-				}
 				} finally {
 					Algoritms.closeStream(inputStream);
 				}
 				if(log.isDebugEnabled()){
-					log.debug("Downloading tile : " + downloadUrl + " successfull");
+					log.debug("Downloading tile : " + downloadUrl + " successfull " + (System.currentTimeMillis() - time) + " ms");
 				}
 				if(callback != null){
 					callback.tileDownloaded(downloadUrl, request);
@@ -151,7 +155,7 @@ public class MapTileDownloader {
 		
 		@Override
 		public int compareTo(DownloadMapWorker o) {
-			return (int) (time - o.time);
+			return 0; //(int) (time - o.time);
 		}
 		
 	}

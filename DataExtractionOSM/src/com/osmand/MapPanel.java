@@ -213,7 +213,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 					cache.remove(list.get(i));
 				}
 			}
-			if(en.exists()){
+			if(en.exists() && !downloader.isFileCurrentlyDownloaded(en)){
 				long time = System.currentTimeMillis();
 				try {
 					cache.put(file, ImageIO.read(en));
@@ -230,8 +230,22 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	}
 	
 	@Override
-	public void tileDownloaded(String dowloadedUrl, DownloadRequest fileSaved) {
-		prepareImage(false);
+	public void tileDownloaded(String dowloadedUrl, DownloadRequest request) {
+		int tileSize = getTileSize();
+		double xTileLeft = getXTile() - getSize().width / (2d * tileSize);
+		double yTileUp = getYTile() - getSize().height / (2d * tileSize);
+		int i = request.xTile - (int)xTileLeft;
+		int j = request.yTile - (int)yTileUp;
+		if(request.zoom == this.zoom && 
+				(i >=0 && i<images.length) && (j>=0 && j< images[i].length)){
+			try {
+				images[i][j] = getImageFor(request.xTile, request.yTile, zoom);
+				repaint();
+			} catch (IOException e) {
+				log.error("Eror reading png " + request.xTile +" " + request.yTile + " zoom : " + zoom, e);
+			}
+			
+		}
 	}
 	
 	public void prepareImage(){
@@ -272,7 +286,8 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 						String urlToLoad = map.getUrlToLoad(x, y, zoom);
 						if(urlToLoad != null){
 							downloader.requestToDownload(urlToLoad, 
-									new DownloadRequest(new File(tilesLocation, getFileForImage(x, y, zoom))));
+									new DownloadRequest(new File(tilesLocation, getFileForImage(x, y, zoom)),
+											x, y, zoom));
 						}
 					}
 				}
@@ -296,7 +311,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 			
 			repaint();
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error("Eror reading png preparing images");
 		}
 	}
 	
