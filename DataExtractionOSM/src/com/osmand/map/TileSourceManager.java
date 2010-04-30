@@ -72,8 +72,9 @@ public class TileSourceManager {
 			list.add(getCloudMadeSource());
 			list.add(getOpenPisteMapSource());
 			list.add(getGoogleMapsSource());
-			list.add(getGoogleMapsSatelliteSource());
-			list.add(getGoogleMapsTerrainSource());
+			// TODO ?
+//			list.add(getGoogleMapsSatelliteSource());
+//			list.add(getGoogleMapsTerrainSource());
 		}
 		return list;
 		
@@ -115,7 +116,7 @@ public class TileSourceManager {
 	}
 	
 	public static TileSourceTemplate getGoogleMapsTerrainSource(){
-		return new TileSourceTemplate("GoogleMaps Terrain", "http://mt3.google.com/mt/v=w2p.87&x={1}&y={2}&z={0}", ".png", 15, 0, 256, 18000);
+		return new TileSourceTemplate("GoogleMaps Terrain", "http://mt3.google.com/mt/v=w2.87&x={1}&y={2}&z={0}", ".png", 15, 0, 256, 18000);
 	}
 	
 }
