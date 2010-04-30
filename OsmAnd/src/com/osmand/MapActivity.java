@@ -76,6 +76,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		});
 		
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+//		service.get
 		service.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
 	}
 
@@ -128,6 +129,18 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			pointOfView.setAreaRadius(radius);
 			pointOfView.invalidate();
 		}
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO switch off gps
+		super.onPause();
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO switch on gps
+		super.onResume();
 	}
 
 

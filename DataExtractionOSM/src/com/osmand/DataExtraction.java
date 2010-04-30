@@ -3,6 +3,7 @@ package com.osmand;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.MenuBar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -427,7 +428,9 @@ public class DataExtraction implements IMapLocationListener {
 			}
 	    });
 	    
-	    
+	    MenuBar bar = new MenuBar();
+	    bar.add(MapPanel.getMenuToChooseSource(mapPanel));
+	    frame.setMenuBar(bar);
 	    frame.setSize(1024, 768);
 	    frame.setVisible(true);
 	}
