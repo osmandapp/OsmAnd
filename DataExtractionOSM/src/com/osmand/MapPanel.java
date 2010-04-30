@@ -5,25 +5,25 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Menu;
+import java.awt.MenuBar;
+import java.awt.MenuItem;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.UnknownHostException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 
 import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
@@ -35,16 +35,39 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.osmand.DataExtraction.ExitListener;
+import com.osmand.MapTileDownloader.DownloadRequest;
+import com.osmand.MapTileDownloader.IMapDownloaderCallback;
 import com.osmand.data.DataTileManager;
+import com.osmand.map.ITileSource;
+import com.osmand.map.TileSourceManager;
+import com.osmand.map.TileSourceManager.TileSourceTemplate;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 
-public class MapPanel extends JPanel {
+public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private static final Log log = LogFactory.getLog(MapPanel.class);
+	protected static final Log log = LogFactory.getLog(MapPanel.class);
 
+	public static Menu getMenuToChooseSource(final MapPanel panel){
+		Menu tiles = new Menu("Source tile");
+		List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
+		for(final TileSourceTemplate l : list){
+			MenuItem menuItem = new MenuItem(l.getName());
+			menuItem.addActionListener(new ActionListener(){
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					panel.setMapName(l);
+				}
+				
+			});
+			tiles.add(menuItem);
+		}
+		
+		return tiles;
+	}
+	
 
 	public static void main(String[] args) throws IOException {
 		JFrame frame = new JFrame("Tree of choose");
@@ -61,33 +84,33 @@ public class MapPanel extends JPanel {
 	    MapPanel panel = new MapPanel(new File(DefaultLauncherConstants.pathToDirWithTiles));
 	    
 	    content.add(panel, BorderLayout.CENTER);
-	    
+
+	    MenuBar bar = new MenuBar();
+	    bar.add(getMenuToChooseSource(panel));
+	    frame.setMenuBar(bar);
 	    frame.setSize(512, 512);
 	    frame.setVisible(true);
 
 	}
 
-	// name of source map 
-	private String map = "Mapnik";
+	private File tilesLocation = null;
 	
-	// tile size of map 
-	private final int tileSize = 256;
-		
-	// file name with tiles
-	private final File fileWithTiles;
+	// name of source map 
+	private ITileSource map = DefaultLauncherConstants.MAP_defaultTileSource;
+	
 
 	// special points to draw
 	private DataTileManager<LatLon> points;
 	
-	// zoom levle
-	private int zoom = 15;
+	// zoom level
+	private int zoom = DefaultLauncherConstants.MAP_startMapZoom;
 	
 	// degree measurements (-180, 180)
 	// долгота
-	private double longitude = 27.56;
+	private double longitude = DefaultLauncherConstants.MAP_startMapLongitude;
 	// широта
 	// degree measurements (90, -90)
-	private double latitude = 53.9;
+	private double latitude = DefaultLauncherConstants.MAP_startMapLatitude;
 	
 	private List<IMapLocationListener> listeners = new ArrayList<IMapLocationListener>();
 	
@@ -97,15 +120,23 @@ public class MapPanel extends JPanel {
 	private int yStartingImage = 0;
 	private List<Point> pointsToDraw = new ArrayList<Point>();
 	
-	private AsyncLoadTileThread autoThread = new AsyncLoadTileThread();
+	private MapTileDownloader downloader = MapTileDownloader.getInstance();
 	Map<String, Image> cache = new HashMap<String, Image>();
 	
 	
 	
 	public MapPanel(File fileWithTiles) {
-		this.fileWithTiles = fileWithTiles;
-		autoThread.start();
-		initUI();
+		tilesLocation = fileWithTiles;
+		downloader.setDownloaderCallback(this);
+		setFocusable(true);
+		addComponentListener(new ComponentAdapter(){
+			public void componentResized(ComponentEvent e) {
+				prepareImage();
+			}
+		});
+		MapMouseAdapter mouse = new MapMouseAdapter();
+		addMouseListener(mouse);
+		addMouseMotionListener(mouse);
 	}
 
 	
@@ -117,176 +148,99 @@ public class MapPanel extends JPanel {
 		return MapUtils.getTileNumberY(zoom, latitude);
 	}
 	
+	public int getTileSize(){
+		return map == null ?  256 : map.getTileSize();
+	}
+	
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		
 		if (images != null) {
 			for (int i = 0; i < images.length; i++) {
 				for (int j = 0; j < images[i].length; j++) {
-					if(images[i][j] == null){
-					    int div = 4;
-					    int tileDiv = tileSize / div;
-					    for(int k1 = 0; k1 < div; k1++){
-					    	for(int k2 = 0; k2 < div; k2++){
-					    		if ((k1 + k2) % 2 == 0) {
+					if (images[i][j] == null) {
+						int div = DefaultLauncherConstants.MAP_divNonLoadedImage;
+						int tileDiv = getTileSize() / div;
+						for (int k1 = 0; k1 < div; k1++) {
+							for (int k2 = 0; k2 < div; k2++) {
+								if ((k1 + k2) % 2 == 0) {
 									g.setColor(Color.gray);
 								} else {
 									g.setColor(Color.white);
 								}
-					    		g.fillRect(i * tileSize+xStartingImage + k1*tileDiv,
-					    				j * tileSize + yStartingImage + k2*tileDiv, tileDiv, tileDiv);
-						    	
-						    }
-					    }
+								g.fillRect(i * getTileSize() + xStartingImage + k1 * tileDiv, j * getTileSize() + yStartingImage + k2
+										* tileDiv, tileDiv, tileDiv);
+
+							}
+						}
 					} else {
-						g.drawImage(images[i][j], i * tileSize+xStartingImage, j * tileSize + yStartingImage, this);
+						g.drawImage(images[i][j], i * getTileSize() + xStartingImage, j * getTileSize() + yStartingImage, this);
 					}
 				}
 			}
 		}
 		g.setColor(Color.black);
 		// draw user points
-		for(Point p : pointsToDraw){
+		for (Point p : pointsToDraw) {
 			g.drawOval(p.x, p.y, 3, 3);
 			g.fillOval(p.x, p.y, 3, 3);
 		}
-	
-		String s = MessageFormat.format("Lat : {0}, lon : {1}, zoom : {2}",latitude, longitude, zoom);
+
+		String s = MessageFormat.format("Lat : {0}, lon : {1}, zoom : {2}", latitude, longitude, zoom);
 		g.drawString(s, 5, 20);
-		
-		
-		g.fillOval(getWidth()/2 - 2, getHeight()/2 -2, 4, 4);
-		g.drawOval(getWidth()/2 - 2, getHeight()/2 -2, 4, 4);
-		g.drawOval(getWidth()/2 - 5, getHeight()/2 -5, 10, 10);
+
+		g.fillOval(getWidth() / 2 - 2, getHeight() / 2 - 2, 4, 4);
+		g.drawOval(getWidth() / 2 - 2, getHeight() / 2 - 2, 4, 4);
+		g.drawOval(getWidth() / 2 - 5, getHeight() / 2 - 5, 10, 10);
 	}
 	
-	public String getFile(int zoom, int x, int y){
-		return map +"/"+zoom+"/"+(x) +"/"+y+".png";
-	}
 	
 	 
-	public Image getImageFor(int x, int y) throws IOException{
-		String file = getFile(zoom, x, y);
+	public String getFileForImage (int x, int y, int zoom){
+		return map.getName() +"/"+zoom+"/"+(x) +"/"+y+".png";
+	}
+	
+	public Image getImageFor(int x, int y, int zoom) throws IOException{
+		if(map == null){
+			return null;
+		}
+		String file = getFileForImage(x, y, zoom);
 		if(!cache.containsKey(file)){
-//			ZipEntry en = fileWithTiles.getEntry(file);
-			File en = new File(fileWithTiles, file);
+			File en = new File(tilesLocation, file);
 			if(cache.size() > 1000){
 				ArrayList<String> list = new ArrayList<String>(cache.keySet());
 				for(int i=0; i<list.size(); i+=2){
 					cache.remove(list.get(i));
 				}
 			}
-//			if(en != null){
 			if(en.exists()){
-//				cache.put(file, ImageIO.read(fileWithTiles.getInputStream(en)));
 				long time = System.currentTimeMillis();
-				cache.put(file, ImageIO.read(en));
-				System.out.println("Loaded " + (System.currentTimeMillis() - time));
-			} else {
-				autoThread.requestTileToLoad(zoom, x, y);
-			}
+				try {
+					cache.put(file, ImageIO.read(en));
+					if(log.isDebugEnabled()){
+						log.debug("Loaded file : " + file + " " + -(time -System.currentTimeMillis())+" ms");
+					}
+				} catch (IIOException e) {
+					log.error("Eror reading png " + x +" " + y + " zoom : " + zoom, e);
+				}
+			} 
 		}
 		
 		return cache.get(file);
 	}
 	
-	public void loadImage(int zoom, int x, int y){
-		try {
-			Image img = null;
-			File en = new File(fileWithTiles, getFile(zoom, x, y));
-			URL url = new URL("http://tile.openstreetmap.org/" + zoom + "/" + x + "/" + y + ".png");
-			en.getParentFile().mkdirs();
-			try {
-				ImageIO.setUseCache(true);
-				javax.imageio.ImageIO.setCacheDirectory(en.getParentFile());
-			} catch (Exception e) {
-				log.warn("cannot set ImageIO cache-directory to " + en.getParent(), e);
-			}
-			try {
-				URLConnection connection = url.openConnection();
-				connection.setRequestProperty("User-Agent", "osmand TilePainter/0.1");
-				img = javax.imageio.ImageIO.read(connection.getInputStream());
-			} catch (UnknownHostException e) {
-				log.info("UnknownHostException, cannot download tile " + url.toExternalForm());
-			} catch (IIOException e) {
-				if (e.getCause() != null && e.getCause() instanceof UnknownHostException) {
-					log.info("UnknownHostException, cannot download tile " + url.toExternalForm(), e);
-				} else {
-					log.warn("cannot download tile " + url.toExternalForm(), e);
-				}
-			}
-			cache.put(getFile(zoom, x, y), img);
-			if (img != null) {
-				try {
-					ImageIO.write((RenderedImage) img, "png", en);
-				} catch (IOException e) {
-					log.warn("cannot save img to " + en.getAbsolutePath(), e);
-				}
-			}
-		} catch (IOException e) {
-			log.warn("cannot download pre-rendered tile [" + e.getClass().getSimpleName() + "]", e);
-		}
+	@Override
+	public void tileDownloaded(String dowloadedUrl, DownloadRequest fileSaved) {
+		prepareImage(false);
 	}
 	
-	
-	public class AsyncLoadTileThread extends Thread {
-		Stack<TileIndex> tilesToLoad = new Stack<TileIndex>();
-		private class TileIndex {
-			int zoom;
-			int x;
-			int y;
-		}
-		
-		public AsyncLoadTileThread() {
-			super("AsyncLoadingTiles");
-		}
-		
-		@Override
-		public void run() {
-			try {
-				while (true) {
-					synchronized (this) {
-						wait();
-					}
-					while (!tilesToLoad.isEmpty()) {
-						TileIndex p = tilesToLoad.pop();
-						if (cache.get(getFile(p.zoom, p.x, p.y)) == null) {
-							loadImage(p.zoom, p.x, p.y);
-							// TODO dead cycle (causes cancelAllPreviousTile)
-							prepareImage();
-						}
-					}
-				}
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		public void cancelAllPreviousTile(){
-			tilesToLoad.clear();
-		}
-		
-		public void requestTileToLoad(int zoom, int x, int y){
-			synchronized (this) {
-				TileIndex ind = new TileIndex();
-				ind.zoom = zoom;
-				ind.x = x;
-				ind.y = y;
-				tilesToLoad.add(ind);
-				notify();
-			}
-			
-		}
-		
-	}
-	
-	
-	
-	// TODO async loading images (show busy cursor while it is loaded)
 	public void prepareImage(){
+		prepareImage(DefaultLauncherConstants.loadMissingImages);
+	}
+	
+	public void prepareImage(boolean loadNecessaryImages){
 		try {
-			
+			int tileSize = getTileSize();
 			if (images != null) {
 				for (int i = 0; i < images.length; i++) {
 					for (int j = 0; j < images[i].length; j++) {
@@ -303,13 +257,24 @@ public class MapPanel extends JPanel {
 			xStartingImage = -(int) ((xTileLeft - Math.floor(xTileLeft)) * tileSize);
 			yStartingImage = -(int) ((yTileUp - Math.floor(yTileUp)) * tileSize);
 
-			autoThread.cancelAllPreviousTile();
+			if(loadNecessaryImages){
+				downloader.refuseAllPreviousRequests();
+			}
 			int tileXCount = ((int) xTileRight - (int) xTileLeft + 1);
 			int tileYCount = ((int) yTileDown - (int) yTileUp + 1);
 			images = new BufferedImage[tileXCount][tileYCount];
 			for (int i = 0; i < images.length; i++) {
 				for (int j = 0; j < images[i].length; j++) {
-					images[i][j] = getImageFor((int) xTileLeft + i, (int) yTileUp + j);
+					int x= (int) xTileLeft + i;
+					int y = (int) yTileUp + j;
+					images[i][j] = getImageFor(x, y, zoom);
+					if(loadNecessaryImages &&  images[i][j] == null && map != null){
+						String urlToLoad = map.getUrlToLoad(x, y, zoom);
+						if(urlToLoad != null){
+							downloader.requestToDownload(urlToLoad, 
+									new DownloadRequest(new File(tilesLocation, getFileForImage(x, y, zoom))));
+						}
+					}
 				}
 			}
 			
@@ -337,19 +302,6 @@ public class MapPanel extends JPanel {
 	
 	
 	
-	private void initUI() {
-		setFocusable(true);
-		addComponentListener(new ComponentAdapter(){
-			public void componentResized(ComponentEvent e) {
-				prepareImage();
-			}
-		});
-		MapMouseAdapter mouse = new MapMouseAdapter();
-		addMouseListener(mouse);
-		addMouseMotionListener(mouse);
-	}
-	
-	
 	public void setZoom(int zoom){
 		this.zoom = zoom;
 		prepareImage();
@@ -374,11 +326,11 @@ public class MapPanel extends JPanel {
 		return zoom;
 	}
 	
-	public String getMap(){
+	public ITileSource getMap(){
 		return map;
 	}
 	
-	public void setMapName(String map){
+	public void setMapName(ITileSource map){
 		this.map = map;
 		prepareImage();
 	}
@@ -422,12 +374,12 @@ public class MapPanel extends JPanel {
 		}
 		if(e.getID() == KeyEvent.KEY_TYPED){
 			if(e.getKeyChar() == '+'){
-				if(zoom < 18){
+				if(zoom < map.getMaximumZoomSupported()){
 					zoom ++;
 					processed = true;
 				}
 			} else if(e.getKeyChar() == '-'){
-				if(zoom > 1){
+				if(zoom > map.getMinimumZoomSupported()){
 					zoom --;
 					processed = true;
 				}
@@ -461,8 +413,8 @@ public class MapPanel extends JPanel {
 		}
 		
 		public void dragTo(Point p){
-			double dx = (startDragging.x - (double)p.x)/tileSize; 
-			double dy = (startDragging.y - (double)p.y)/tileSize;
+			double dx = (startDragging.x - (double)p.x)/getTileSize(); 
+			double dy = (startDragging.y - (double)p.y)/getTileSize();
 			double lat = MapUtils.getLatitudeFromTile(zoom, getYTile() + dy);
 			double lon = MapUtils.getLongitudeFromTile(zoom, getXTile() + dx);
 			setLatLon(lat, lon);
