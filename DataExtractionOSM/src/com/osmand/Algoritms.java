@@ -1,6 +1,7 @@
 package com.osmand;
 
 import java.io.Closeable;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -45,5 +46,18 @@ public class Algoritms {
 		} catch(IOException e){
 			log.warn("Closing stream warn", e);
 		}
+	}
+	
+	public static void updateAllExistingImgTilesToOsmandFormat(File f){
+		if(f.isDirectory()){
+			for(File c : f.listFiles()){
+				updateAllExistingImgTilesToOsmandFormat(c);
+			}
+		} else if(f.getName().endsWith(".png") || f.getName().endsWith(".jpg")){
+			f.renameTo(new File(f.getAbsolutePath() + ".tile"));
+		} else if(f.getName().endsWith(".andnav2")) {
+			f.renameTo(new File(f.getAbsolutePath().substring(0, f.getAbsolutePath().length() - ".andnav2".length()) + ".tile"));
+		}
+			
 	}
 }

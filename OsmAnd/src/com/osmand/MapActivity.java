@@ -40,7 +40,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		
 		setContentView(R.layout.main);
 		mapView = (OsmandMapTileView) findViewById(R.id.View01);
-		mapView.setFileWithTiles(new File(Environment.getExternalStorageDirectory(), "osmand/tiles/Mapnik"));
+		mapView.setFileWithTiles(new File(Environment.getExternalStorageDirectory(), "osmand/tiles/"));
 		mapView.addMapLocationListener(this);
 		
 		ZoomControls zoomControls = (ZoomControls) findViewById(R.id.ZoomControls01);

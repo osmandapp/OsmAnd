@@ -352,8 +352,10 @@ public class DataExtraction implements IMapLocationListener {
 	    final JTextField textField = new JTextField();
 	    final JButton button = new JButton();
 	    button.setText("Set town");
+
+	    
 	    panel.add(textField, BorderLayout.CENTER);
-	    panel.add(button, BorderLayout.EAST);
+	    panel.add(button, BorderLayout.WEST);
 	    
 	    content.add(panel, BorderLayout.NORTH);
 	    

@@ -195,17 +195,28 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	}
 	
 	
-	 
-	public String getFileForImage (int x, int y, int zoom){
-		return map.getName() +"/"+zoom+"/"+(x) +"/"+y+".png";
+
+	
+	public File getTilesLocation() {
+		return tilesLocation;
 	}
 	
-	public Image getImageFor(int x, int y, int zoom) throws IOException{
+	public void setTilesLocation(File tilesLocation) {
+		this.tilesLocation = tilesLocation;
+		prepareImage();
+	}
+	
+	 
+	public String getFileForImage (int x, int y, int zoom, String ext){
+		return map.getName() +"/"+zoom+"/"+(x) +"/"+y+ext+".tile";
+	}
+	
+	public Image getImageFor(int x, int y, int zoom, boolean loadIfNeeded) throws IOException{
 		if(map == null){
 			return null;
 		}
-		String file = getFileForImage(x, y, zoom);
-		if(!cache.containsKey(file)){
+		String file = getFileForImage(x, y, zoom, map.getTileFormat());
+		if(cache.get(file) == null){
 			File en = new File(tilesLocation, file);
 			if(cache.size() > 1000){
 				ArrayList<String> list = new ArrayList<String>(cache.keySet());
@@ -213,17 +224,25 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 					cache.remove(list.get(i));
 				}
 			}
-			if(en.exists() && !downloader.isFileCurrentlyDownloaded(en)){
-				long time = System.currentTimeMillis();
-				try {
-					cache.put(file, ImageIO.read(en));
-					if(log.isDebugEnabled()){
-						log.debug("Loaded file : " + file + " " + -(time -System.currentTimeMillis())+" ms");
+			if (!downloader.isFileCurrentlyDownloaded(en)) {
+				if (en.exists()) {
+					long time = System.currentTimeMillis();
+					try {
+						cache.put(file, ImageIO.read(en));
+						if (log.isDebugEnabled()) {
+							log.debug("Loaded file : " + file + " " + -(time - System.currentTimeMillis()) + " ms");
+						}
+					} catch (IIOException e) {
+						log.error("Eror reading png " + x + " " + y + " zoom : " + zoom, e);
 					}
-				} catch (IIOException e) {
-					log.error("Eror reading png " + x +" " + y + " zoom : " + zoom, e);
+				} 
+				if(loadIfNeeded && cache.get(file) == null){
+					String urlToLoad = map.getUrlToLoad(x, y, zoom);
+					if (urlToLoad != null) {
+						downloader.requestToDownload(urlToLoad, new DownloadRequest(en, x, y, zoom));
+					}
 				}
-			} 
+			}
 		}
 		
 		return cache.get(file);
@@ -239,7 +258,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		if(request.zoom == this.zoom && 
 				(i >=0 && i<images.length) && (j>=0 && j< images[i].length)){
 			try {
-				images[i][j] = getImageFor(request.xTile, request.yTile, zoom);
+				images[i][j] = getImageFor(request.xTile, request.yTile, zoom, false);
 				repaint();
 			} catch (IOException e) {
 				log.error("Eror reading png " + request.xTile +" " + request.yTile + " zoom : " + zoom, e);
@@ -281,15 +300,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 				for (int j = 0; j < images[i].length; j++) {
 					int x= (int) xTileLeft + i;
 					int y = (int) yTileUp + j;
-					images[i][j] = getImageFor(x, y, zoom);
-					if(loadNecessaryImages &&  images[i][j] == null && map != null){
-						String urlToLoad = map.getUrlToLoad(x, y, zoom);
-						if(urlToLoad != null){
-							downloader.requestToDownload(urlToLoad, 
-									new DownloadRequest(new File(tilesLocation, getFileForImage(x, y, zoom)),
-											x, y, zoom));
-						}
-					}
+					images[i][j] = getImageFor(x, y, zoom, loadNecessaryImages);
 				}
 			}
 			
@@ -347,6 +358,12 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 	public void setMapName(ITileSource map){
 		this.map = map;
+		if(map.getMaximumZoomSupported() < this.zoom){
+			zoom = map.getMaximumZoomSupported();
+		}
+		if(map.getMinimumZoomSupported() > this.zoom){
+			zoom = map.getMinimumZoomSupported();
+		}
 		prepareImage();
 	}
 	
