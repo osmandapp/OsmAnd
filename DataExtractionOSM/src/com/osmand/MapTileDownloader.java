@@ -22,10 +22,15 @@ public class MapTileDownloader {
 	private static MapTileDownloader downloader = null;
 	private static Log log = LogFactory.getLog(MapTileDownloader.class);
 	
+	
 	private ThreadPoolExecutor threadPoolExecutor;
 	private IMapDownloaderCallback callback;
 	
 	private Set<File> currentlyDownloaded;
+	
+	private int currentErrors = 0;
+	
+	
 	
 	
 	public static MapTileDownloader getInstance(){
@@ -97,6 +102,11 @@ public class MapTileDownloader {
 	}
 	
 	public void requestToDownload(String url, DownloadRequest request){
+		if(DefaultLauncherConstants.TILE_DOWNLOAD_MAX_ERRORS > 0 && 
+				currentErrors > DefaultLauncherConstants.TILE_DOWNLOAD_MAX_ERRORS){
+			return;
+		}
+		
 		if (!isFileCurrentlyDownloaded(request.fileToSave)) {
 			threadPoolExecutor.execute(new DownloadMapWorker(url, request));
 		}
@@ -147,8 +157,10 @@ public class MapTileDownloader {
 					callback.tileDownloaded(downloadUrl, request);
 				}
 			} catch (UnknownHostException e) {
+				currentErrors++;
 				log.error("UnknownHostException, cannot download tile " + downloadUrl, e);
 			} catch (IOException e) {
+				currentErrors++;
 				log.warn("Cannot download tile : " + downloadUrl, e);
 			}
 		} 

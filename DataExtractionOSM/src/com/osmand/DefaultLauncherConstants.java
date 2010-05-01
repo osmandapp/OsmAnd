@@ -24,6 +24,7 @@ public abstract class DefaultLauncherConstants {
 	public static int MAP_divNonLoadedImage = 8;
 	public static boolean loadMissingImages = true;
 	public static ITileSource MAP_defaultTileSource = TileSourceManager.getMapnikSource();
+	public static boolean showGPSCoordinates = true;
 	
 	
 	// Application constants
@@ -34,7 +35,7 @@ public abstract class DefaultLauncherConstants {
 	// Download manager tile settings
 	public static int TILE_DOWNLOAD_THREADS = 4;
 	public static int TILE_DOWNLOAD_SECONTS_TO_WORK = 25;
-	
+	public static final int TILE_DOWNLOAD_MAX_ERRORS = -1;	
 	
 	
 	

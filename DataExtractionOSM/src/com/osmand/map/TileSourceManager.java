@@ -72,9 +72,12 @@ public class TileSourceManager {
 			list.add(getCloudMadeSource());
 			list.add(getOpenPisteMapSource());
 			list.add(getGoogleMapsSource());
-			// TODO ?
-//			list.add(getGoogleMapsSatelliteSource());
-//			list.add(getGoogleMapsTerrainSource());
+			list.add(getGoogleMapsSatelliteSource());
+			list.add(getGoogleMapsTerrainSource());
+			list.add(getMicrosoftMapsSource());
+			list.add(getMicrosoftEarthSource());
+			list.add(getMicrosoftHybridSource());
+			
 		}
 		return list;
 		
@@ -112,11 +115,74 @@ public class TileSourceManager {
 	}
 	
 	public static TileSourceTemplate getGoogleMapsSatelliteSource(){
-		return new TileSourceTemplate("GoogleMaps Satellite", "http://khm1.google.com/kh/v=37&x={1}&y={2}&z={0}", ".png", 19, 0, 256, 18000);
+		return new TileSourceTemplate("GoogleMaps Satellite", "http://khm1.google.com/kh/v=59&x={1}&y={2}&z={0}", ".jpg", 20, 0, 256, 18000);
 	}
 	
 	public static TileSourceTemplate getGoogleMapsTerrainSource(){
-		return new TileSourceTemplate("GoogleMaps Terrain", "http://mt3.google.com/mt/v=w2.87&x={1}&y={2}&z={0}", ".png", 15, 0, 256, 18000);
+		return new TileSourceTemplate("GoogleMaps Terrain", "http://mt3.google.com/vt/v=w2p.111&hl=en&x={1}&y={2}&z={0}", ".jpg", 15, 0, 256, 18000);
 	}
+	
+	public static TileSourceTemplate getMicrosoftMapsSource(){
+		return new MicrosoftTileSourceTemplate("Microsoft Maps", 'r', "png", ".png", 19, 1, 256, 18000);
+	}
+	
+	public static TileSourceTemplate getMicrosoftEarthSource(){
+		return new MicrosoftTileSourceTemplate("Microsoft Earth", 'a', "jpg", ".jpg", 19, 1, 256, 18000);
+	}
+	
+	public static TileSourceTemplate getMicrosoftHybridSource(){
+		return new MicrosoftTileSourceTemplate("Microsoft Hybrid", 'h', "jpg", ".jpg", 19, 1, 256, 18000);
+	}
+	
+	
+	protected static final char[] NUM_CHAR = { '0', '1', '2', '3' };
+
+	/**
+	 * See: http://msdn.microsoft.com/en-us/library/bb259689.aspx
+	 * @param zoom
+	 * @param tilex
+	 * @param tiley
+	 * @return quadtree encoded tile number
+	 * 
+	 */
+	public static String encodeQuadTree(int zoom, int tilex, int tiley) {
+		char[] tileNum = new char[zoom];
+		for (int i = zoom - 1; i >= 0; i--) {
+			// Binary encoding using ones for tilex and twos for tiley. if a bit
+			// is set in tilex and tiley we get a three.
+			int num = (tilex % 2) | ((tiley % 2) << 1);
+			tileNum[i] = NUM_CHAR[num];
+			tilex >>= 1;
+			tiley >>= 1;
+		}
+		return new String(tileNum);
+	}
+	
+	public static class MicrosoftTileSourceTemplate extends TileSourceTemplate {
+
+		private final char mapTypeChar;
+		int serverNum = 0; // 0..3
+		protected String urlBase = ".ortho.tiles.virtualearth.net/tiles/";
+		protected String urlAppend = "?g=45";
+		private final String tileType;
+
+		public MicrosoftTileSourceTemplate(String name, char mapTypeChar , String type, 
+				String ext, int maxZoom, int minZoom, int tileSize, int avgSize) {
+			super(name, null, ext, maxZoom, minZoom, tileSize, avgSize);
+			this.mapTypeChar = mapTypeChar;
+			this.tileType = type;
+		}
+		
+		
+		@Override
+		public String getUrlToLoad(int x, int y, int zoom) {
+			String tileNum = encodeQuadTree(zoom, x, y);
+//			serverNum = (serverNum + 1) % serverNumMax;
+			return "http://" + mapTypeChar + serverNum + urlBase + mapTypeChar + tileNum + "."
+					+ tileType + urlAppend;
+			
+		}
+	}
+
 	
 }

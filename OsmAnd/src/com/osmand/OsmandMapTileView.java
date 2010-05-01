@@ -2,10 +2,14 @@ package com.osmand;
 
 
 import java.io.File;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -15,23 +19,22 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Paint.Style;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.osmand.MapTileDownloader.DownloadRequest;
+import com.osmand.MapTileDownloader.IMapDownloaderCallback;
+import com.osmand.map.ITileSource;
 import com.osmand.osm.MapUtils;
 
-public class OsmandMapTileView extends View {
+public class OsmandMapTileView extends View implements IMapDownloaderCallback {
 
-	protected final int emptyTileDivisor = 4;
+	protected final int emptyTileDivisor = DefaultLauncherConstants.MAP_divNonLoadedImage;
 	protected final int maxImgCacheSize = 512;
 	
-	
-	/**
-	 * tile size of map 
-	 */
-	private int tileSize = 256;
-	
+	protected static final Log log = LogFactory.getLog(OsmandMapTileView.class);
 	/**
 	 * file or directory with tiles
 	 */
@@ -40,19 +43,21 @@ public class OsmandMapTileView extends View {
 	/**
 	 * zoom level
 	 */
-	private int zoom = 15;
+	private int zoom = DefaultLauncherConstants.MAP_startMapZoom;
 	
-	// degree measurements (-180, 180)
-	// долгота
-	private double longitude = 27.56;
-	// широта
-	// degree measurements (90, -90)
-	private double latitude = 53.9;
+	private double longitude = DefaultLauncherConstants.MAP_startMapLongitude;
+
+	private double latitude = DefaultLauncherConstants.MAP_startMapLatitude;
+	
+	// name of source map 
+	private ITileSource map = DefaultLauncherConstants.MAP_defaultTileSource;
 	
 	/**
 	 * listeners
 	 */
 	private List<IMapLocationListener> listeners = new ArrayList<IMapLocationListener>();
+	
+	private MapTileDownloader downloader = MapTileDownloader.getInstance();
 	
 	
 	// cached data to draw images
@@ -63,10 +68,19 @@ public class OsmandMapTileView extends View {
 	private int yStartingImage = 0;
 	
 	Map<String, Bitmap> cacheOfImages = new WeakHashMap<String, Bitmap>();
+	private PointF startDragging = null;
 	
 	Paint paintGrayFill;
 	Paint paintWhiteFill;
 	Paint paintBlack;
+	final Handler mHandler = new Handler();
+
+    // Create runnable for posting
+    final Runnable invalidateView = new Runnable() {
+        public void run() {
+            invalidate();
+        }
+    };
 	
 	
 	public OsmandMapTileView(Context context, AttributeSet attrs) {
@@ -94,14 +108,18 @@ public class OsmandMapTileView extends View {
 		
 		prepareImage();
 		setClickable(true);
+		downloader.setDownloaderCallback(this);
 	}
 	
+
+	public int getTileSize() {
+		return map == null ? 256 : map.getTileSize();
+	}
 	
-	private PointF startDragging = null;
 
 	public void dragTo(PointF p){
-		double dx = (startDragging.x - (double)p.x)/tileSize; 
-		double dy = (startDragging.y - (double)p.y)/tileSize;
+		double dx = (startDragging.x - (double)p.x)/getTileSize(); 
+		double dy = (startDragging.y - (double)p.y)/getTileSize();
 		this.latitude = MapUtils.getLatitudeFromTile(zoom, getYTile() + dy);
 		this.longitude = MapUtils.getLongitudeFromTile(zoom, getXTile() + dx);
 		prepareImage();
@@ -138,7 +156,7 @@ public class OsmandMapTileView extends View {
 	}
 	
 	protected void drawEmptyTile(Canvas cvs, int x, int y){
-		int tileDiv = tileSize / emptyTileDivisor;
+		int tileDiv = getTileSize() / emptyTileDivisor;
 		for (int k1 = 0; k1 < emptyTileDivisor; k1++) {
 			
 			for (int k2 = 0; k2 < emptyTileDivisor; k2++) {
@@ -160,21 +178,41 @@ public class OsmandMapTileView extends View {
 			for (int i = 0; i < images.length; i++) {
 				for (int j = 0; j < images[i].length; j++) {
 					if (images[i][j] == null) {
-						drawEmptyTile(canvas, i*tileSize+xStartingImage, j * tileSize + yStartingImage);
+						drawEmptyTile(canvas, i*getTileSize()+xStartingImage, j * getTileSize() + yStartingImage);
 					} else {
-						canvas.drawBitmap(images[i][j], i * tileSize + xStartingImage, j * tileSize + yStartingImage, null);
+						canvas.drawBitmap(images[i][j], i * getTileSize() + xStartingImage, j * getTileSize() + yStartingImage, null);
 					}
 				}
 			}
 		}
 		canvas.drawCircle(getWidth()/2, getHeight()/2, 3, paintBlack);
 		canvas.drawCircle(getWidth()/2, getHeight()/2, 6, paintBlack);
+		if (DefaultLauncherConstants.showGPSCoordinates) {
+			canvas.drawText(MessageFormat.format("Lat : {0}, lon : {1}, zoom : {2}", latitude, longitude, zoom), 0, 15, paintBlack);
+		}
 	}
 	
  
-	public Bitmap getImageFor(int x, int y) {
-		String file = "/" + zoom + "/" + (x) + "/" + y + ".png";
-		if (!cacheOfImages.containsKey(file) && fileWithTiles != null) {
+	
+
+	@Override
+	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+		prepareImage();
+		super.onSizeChanged(w, h, oldw, oldh);
+	}
+	
+
+	public String getFileForImage (int x, int y, int zoom, String ext){
+		return map.getName() +"/"+zoom+"/"+(x) +"/"+y+ext+".tile";
+	}
+	
+	public Bitmap getImageFor(int x, int y, int zoom, boolean loadIfNeeded) {
+		if (map == null || fileWithTiles == null || !fileWithTiles.canRead()) {
+			return null;
+		}
+
+		String file = getFileForImage(x, y, zoom, map.getTileFormat());
+		if (cacheOfImages.get(file) == null) {
 			File en = new File(fileWithTiles, file);
 			if (cacheOfImages.size() > maxImgCacheSize) {
 				ArrayList<String> list = new ArrayList<String>(cacheOfImages.keySet());
@@ -184,39 +222,62 @@ public class OsmandMapTileView extends View {
 				}
 				System.gc();
 			}
-			if (en.exists() && en.canRead()) {
-				cacheOfImages.put(file, BitmapFactory.decodeFile(en.getAbsolutePath()));
-			} else {
-				cacheOfImages.put(file, null);
+			if (!downloader.isFileCurrentlyDownloaded(en)) {
+				if (en.exists()) {
+					long time = System.currentTimeMillis();
+					cacheOfImages.put(file, BitmapFactory.decodeFile(en.getAbsolutePath()));
+					if (log.isDebugEnabled()) {
+						log.debug("Loaded file : " + file + " " + -(time - System.currentTimeMillis()) + " ms");
+					}
+				} 
+				if(loadIfNeeded && cacheOfImages.get(file) == null){
+					String urlToLoad = map.getUrlToLoad(x, y, zoom);
+					if (urlToLoad != null) {
+						downloader.requestToDownload(urlToLoad, new DownloadRequest(en, x, y, zoom));
+					}
+				}
 			}
 		}
 
 		return cacheOfImages.get(file);
 	}
 	
-
 	@Override
-	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-		prepareImage();
-		super.onSizeChanged(w, h, oldw, oldh);
+	public void tileDownloaded(String dowloadedUrl, DownloadRequest request) {
+		int tileSize = getTileSize();
+		double xTileLeft = getXTile() - getWidth() / (2d * tileSize);
+		double yTileUp = getYTile() - getHeight() / (2d * tileSize);
+		int i = request.xTile - (int)xTileLeft;
+		int j = request.yTile - (int)yTileUp;
+		if(request.zoom == this.zoom && 
+				(i >= 0 && i < images.length) && (j >= 0 && j < images[i].length)) {
+			images[i][j] = getImageFor(request.xTile, request.yTile, zoom, false);
+			mHandler.post(invalidateView);
+		}
 	}
 	
-	// TODO async loading images (show busy cursor while it is loaded)
-	public void prepareImage() {
-		double xTileLeft = getXTile() - getWidth() / (2d * tileSize);
-		double xTileRight = getXTile() + getWidth() / (2d * tileSize);
-		double yTileUp = getYTile() - getHeight() / (2d * tileSize);
-		double yTileDown = getYTile() + getHeight() / (2d * tileSize);
+	public void prepareImage(){
+		prepareImage(DefaultLauncherConstants.loadMissingImages);
+	}
+	
+	public void prepareImage(boolean loadNecessaryImages) {
+		if (loadNecessaryImages) {
+			downloader.refuseAllPreviousRequests();
+		}
+		double xTileLeft = getXTile() - getWidth() / (2d * getTileSize());
+		double xTileRight = getXTile() + getWidth() / (2d * getTileSize());
+		double yTileUp = getYTile() - getHeight() / (2d * getTileSize());
+		double yTileDown = getYTile() + getHeight() / (2d * getTileSize());
 
-		xStartingImage = -(int) ((xTileLeft - Math.floor(xTileLeft)) * tileSize);
-		yStartingImage = -(int) ((yTileUp - Math.floor(yTileUp)) * tileSize);
+		xStartingImage = -(int) ((xTileLeft - Math.floor(xTileLeft)) * getTileSize());
+		yStartingImage = -(int) ((yTileUp - Math.floor(yTileUp)) * getTileSize());
 
 		int tileXCount = ((int) xTileRight - (int) xTileLeft + 1);
 		int tileYCount = ((int) yTileDown - (int) yTileUp + 1);
 		images = new Bitmap[tileXCount][tileYCount];
 		for (int i = 0; i < images.length; i++) {
 			for (int j = 0; j < images[i].length; j++) {
-				images[i][j] = getImageFor((int) xTileLeft + i, (int) yTileUp + j);
+				images[i][j] = getImageFor((int) xTileLeft + i, (int) yTileUp + j, zoom, loadNecessaryImages);
 			}
 		}
 		invalidate();
@@ -225,12 +286,29 @@ public class OsmandMapTileView extends View {
 	
 	
 	public void setZoom(int zoom){
-		this.zoom = zoom;
-		prepareImage();
+		if (map == null || (map.getMaximumZoomSupported() >= zoom && map.getMinimumZoomSupported() <= zoom)) {
+			this.zoom = zoom;
+			prepareImage();
+		}
 	}
 	
 	public File getFileWithTiles() {
 		return fileWithTiles;
+	}
+	
+	public ITileSource getMap() {
+		return map;
+	}
+	
+	public void setMap(ITileSource map) {
+		this.map = map;
+		if(map.getMaximumZoomSupported() < this.zoom){
+			zoom = map.getMaximumZoomSupported();
+		}
+		if(map.getMinimumZoomSupported() > this.zoom){
+			zoom = map.getMinimumZoomSupported();
+		}
+		prepareImage();
 	}
 	
 	public void setFileWithTiles(File fileWithTiles) {
@@ -257,9 +335,6 @@ public class OsmandMapTileView extends View {
 		return zoom;
 	}
 	
-	public int getTileSize() {
-		return tileSize;
-	}
 	
 
 	public void addMapLocationListener(IMapLocationListener l){
