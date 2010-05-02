@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:orientation="vertical">
+
+
+
+
+<CheckBox android:id="@+id/use_internet_to_download_tile" android:layout_height="wrap_content" android:text="@string/use_internet_to_download_tile" android:layout_width="wrap_content"></CheckBox>
+<View
+ android:layout_width="fill_parent"
+ android:layout_height="2dip" android:background="#FFFFFFFF" />
+
+<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/show_gps_coordinates_text" android:id="@+id/show_gps_coordinates_text"></CheckBox>
+</LinearLayout>
