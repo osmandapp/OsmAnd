@@ -34,6 +34,9 @@ public class OsmandMapTileView extends View implements IMapDownloaderCallback {
 	protected final int emptyTileDivisor = DefaultLauncherConstants.MAP_divNonLoadedImage;
 	protected final int maxImgCacheSize = 512;
 	
+	protected int drawCoordinatesX = 0;
+	protected int drawCoordinatesY = 55;
+	
 	protected static final Log log = LogFactory.getLog(OsmandMapTileView.class);
 	/**
 	 * file or directory with tiles
@@ -188,7 +191,8 @@ public class OsmandMapTileView extends View implements IMapDownloaderCallback {
 		canvas.drawCircle(getWidth()/2, getHeight()/2, 3, paintBlack);
 		canvas.drawCircle(getWidth()/2, getHeight()/2, 6, paintBlack);
 		if (DefaultLauncherConstants.showGPSCoordinates) {
-			canvas.drawText(MessageFormat.format("Lat : {0}, lon : {1}, zoom : {2}", latitude, longitude, zoom), 0, 15, paintBlack);
+			canvas.drawText(MessageFormat.format("Lat : {0}, lon : {1}, zoom : {2}", latitude, longitude, zoom), 
+					drawCoordinatesX, drawCoordinatesY, paintBlack);
 		}
 	}
 	

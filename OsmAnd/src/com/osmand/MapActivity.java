@@ -3,6 +3,7 @@ package com.osmand;
 import java.io.File;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -11,6 +12,7 @@ import android.os.Environment;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ZoomControls;
 
@@ -39,7 +41,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		
 		
 		setContentView(R.layout.main);
-		mapView = (OsmandMapTileView) findViewById(R.id.View01);
+		mapView = (OsmandMapTileView) findViewById(R.id.MapView);
 		mapView.setFileWithTiles(new File(Environment.getExternalStorageDirectory(), "osmand/tiles/"));
 		mapView.addMapLocationListener(this);
 		
@@ -75,8 +77,18 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			
 		});
 		
+		Button goToSettings = (Button)findViewById(R.id.GoToSettingsButton);
+		goToSettings.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				final Intent settings = new Intent(MapActivity.this, SettingsActivity.class);
+				startActivity(settings);
+			}
+			
+		});
+		
+		
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-//		service.get
 		service.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
 	}
 

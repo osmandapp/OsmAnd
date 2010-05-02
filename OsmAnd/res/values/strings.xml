@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="settings_activity">Settings</string>
+    <string name="show_gps_coordinates_text">Show gps coordinates on map</string>
+    <string name="use_internet_to_download_tile">Use internet to download missing tiles</string>
     <string name="hello">Hello World, StartActivity!</string>
     <string name="app_name">OsmAnd</string>
+
 </resources>
