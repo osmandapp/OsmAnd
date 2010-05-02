@@ -1,4 +1,4 @@
-package com.osmand;
+package com.osmand.views;
 
 
 import java.io.File;
@@ -24,6 +24,10 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.osmand.DefaultLauncherConstants;
+import com.osmand.IMapLocationListener;
+import com.osmand.MapTileDownloader;
+import com.osmand.OsmandSettings;
 import com.osmand.MapTileDownloader.DownloadRequest;
 import com.osmand.MapTileDownloader.IMapDownloaderCallback;
 import com.osmand.map.ITileSource;
@@ -53,7 +57,7 @@ public class OsmandMapTileView extends View implements IMapDownloaderCallback {
 	private double latitude = DefaultLauncherConstants.MAP_startMapLatitude;
 	
 	// name of source map 
-	private ITileSource map = DefaultLauncherConstants.MAP_defaultTileSource;
+	private ITileSource map = null;
 	
 	/**
 	 * listeners
@@ -190,7 +194,7 @@ public class OsmandMapTileView extends View implements IMapDownloaderCallback {
 		}
 		canvas.drawCircle(getWidth()/2, getHeight()/2, 3, paintBlack);
 		canvas.drawCircle(getWidth()/2, getHeight()/2, 6, paintBlack);
-		if (DefaultLauncherConstants.showGPSCoordinates) {
+		if (OsmandSettings.showGPSLocationOnMap) {
 			canvas.drawText(MessageFormat.format("Lat : {0}, lon : {1}, zoom : {2}", latitude, longitude, zoom), 
 					drawCoordinatesX, drawCoordinatesY, paintBlack);
 		}
@@ -261,7 +265,7 @@ public class OsmandMapTileView extends View implements IMapDownloaderCallback {
 	}
 	
 	public void prepareImage(){
-		prepareImage(DefaultLauncherConstants.loadMissingImages);
+		prepareImage(OsmandSettings.useInternetToDownloadTiles);
 	}
 	
 	public void prepareImage(boolean loadNecessaryImages) {
