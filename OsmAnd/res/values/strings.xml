@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="map_tile_source_descr">Choose the source of tiles</string>
+    <string name="map_tile_source">Map tile source</string>
+    <string name="map_source">Map source</string>
+    <string name="use_internet">Use internet</string>
+    <string name="show_location">Show location</string>
+    <string name="map_preferences">Map preferences</string>
     <string name="settings_activity">Settings</string>
     <string name="show_gps_coordinates_text">Show gps coordinates on map</string>
     <string name="use_internet_to_download_tile">Use internet to download missing tiles</string>

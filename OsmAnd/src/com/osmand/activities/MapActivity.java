@@ -1,4 +1,4 @@
-package com.osmand;
+package com.osmand.activities;
 
 import java.io.File;
 
@@ -16,7 +16,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ZoomControls;
 
+import com.osmand.IMapLocationListener;
+import com.osmand.OsmandSettings;
+import com.osmand.R;
 import com.osmand.osm.MapUtils;
+import com.osmand.views.OsmandMapTileView;
+import com.osmand.views.PointOfView;
 
 public class MapActivity extends Activity implements LocationListener, IMapLocationListener {
     /** Called when the activity is first created. */
@@ -143,6 +148,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		}
 	}
 	
+	
 	@Override
 	protected void onPause() {
 		// TODO switch off gps
@@ -153,6 +159,9 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	protected void onResume() {
 		// TODO switch on gps
 		super.onResume();
+		if(mapView.getMap() != OsmandSettings.tileSource){
+			mapView.setMap(OsmandSettings.tileSource);
+		}
 	}
 
 
