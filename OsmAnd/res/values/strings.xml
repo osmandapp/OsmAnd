@@ -12,4 +12,7 @@
     <string name="hello">Hello World, StartActivity!</string>
     <string name="app_name">OsmAnd</string>
 
+<string name="exit_Button">Exit</string>
+<string name="map_Button">Map</string>
+<string name="settings_Button">Settings</string>
 </resources>
