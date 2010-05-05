@@ -44,7 +44,14 @@ public class MapTileDownloader {
 	 */
 	public interface IMapDownloaderCallback {
 
-		public void tileDownloaded(String dowloadedUrl, DownloadRequest fileSaved);
+		/**
+		 * Sometimes null cold be passed as request
+		 * That means that there were a lot of requests but
+		 * once method is called 
+		 * (in order to not create a collection of request & reduce calling times) 
+		 * @param fileSaved
+		 */
+		public void tileDownloaded(DownloadRequest request);
 	}
 	
 	/**
@@ -55,15 +62,18 @@ public class MapTileDownloader {
 		public final int zoom;
 		public final int xTile;
 		public final int yTile;
+		public final String url;
 		
-		public DownloadRequest(File fileToSave, int xTile, int yTile, int zoom) {
+		public DownloadRequest(String url, File fileToSave, int xTile, int yTile, int zoom) {
+			this.url = url;
 			this.fileToSave = fileToSave;
 			this.xTile = xTile;
 			this.yTile = yTile;
 			this.zoom = zoom;
 		}
 		
-		public DownloadRequest(File fileToSave) {
+		public DownloadRequest(String url, File fileToSave) {
+			this.url = url;
 			this.fileToSave = fileToSave;
 			xTile = -1;
 			yTile = -1;
@@ -100,68 +110,69 @@ public class MapTileDownloader {
 		}
 	}
 	
-	public void requestToDownload(String url, DownloadRequest request){
+	public void requestToDownload(DownloadRequest request){
 		if(DefaultLauncherConstants.TILE_DOWNLOAD_MAX_ERRORS > 0 && 
 				currentErrors > DefaultLauncherConstants.TILE_DOWNLOAD_MAX_ERRORS){
 			return;
 		}
+		if(request.url == null){
+			return;
+		}
 		
 		if (!isFileCurrentlyDownloaded(request.fileToSave)) {
-			threadPoolExecutor.execute(new DownloadMapWorker(url, request));
+			threadPoolExecutor.execute(new DownloadMapWorker(request));
 		}
 	}
 	
 	
 	private class DownloadMapWorker implements Runnable, Comparable<DownloadMapWorker> {
 		private long time = System.currentTimeMillis();
-		private final String downloadUrl;
 		private DownloadRequest request;
 		
-		private DownloadMapWorker(String downloadUrl, DownloadRequest request){
-			this.downloadUrl = downloadUrl;
+		private DownloadMapWorker(DownloadRequest request){
 			this.request = request;
 		}
 		
 		@Override
 		public void run() {
-			try {
-				if(log.isDebugEnabled()){
-					log.debug("Start downloading tile : " + downloadUrl);
-				}
-				URL url = new URL(downloadUrl);
-				URLConnection connection = url.openConnection();
-				connection.setRequestProperty("User-Agent", DefaultLauncherConstants.APP_NAME+"/"+DefaultLauncherConstants.APP_VERSION);
-				BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
-				try {
-					if (request != null && request.fileToSave != null) {
-						request.fileToSave.getParentFile().mkdirs();
-
-						FileOutputStream stream = new FileOutputStream(request.fileToSave);
-						currentlyDownloaded.add(request.fileToSave);
-						try {
-							Algoritms.streamCopy(inputStream, stream);
-							stream.flush();
-						} finally {
-							currentlyDownloaded.remove(request.fileToSave);
-							Algoritms.closeStream(stream);
-						}
-					}
-				} finally {
-					Algoritms.closeStream(inputStream);
-				}
-				if(log.isDebugEnabled()){
-					log.debug("Downloading tile : " + downloadUrl + " successfull " + (System.currentTimeMillis() - time) + " ms");
-				}
-				if(callback != null){
-					callback.tileDownloaded(downloadUrl, request);
-				}
-			} catch (UnknownHostException e) {
-				currentErrors++;
-				log.error("UnknownHostException, cannot download tile " + downloadUrl, e);
-			} catch (IOException e) {
-				currentErrors++;
-				log.warn("Cannot download tile : " + downloadUrl, e);
+			if(log.isDebugEnabled()){
+				log.debug("Start downloading tile : " + request.url);
 			}
+			if (request != null && request.fileToSave != null && request.url != null) {
+				currentlyDownloaded.add(request.fileToSave);
+				try {
+					request.fileToSave.getParentFile().mkdirs();
+					URL url = new URL(request.url);
+					URLConnection connection = url.openConnection();
+					connection.setRequestProperty("User-Agent", DefaultLauncherConstants.APP_NAME + "/"
+							+ DefaultLauncherConstants.APP_VERSION);
+					BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
+					FileOutputStream stream = null;
+					try {
+						stream = new FileOutputStream(request.fileToSave);
+						Algoritms.streamCopy(inputStream, stream);
+						stream.flush();
+					} finally {
+						Algoritms.closeStream(inputStream);
+						Algoritms.closeStream(stream);
+					}
+					if (log.isDebugEnabled()) {
+						log.debug("Downloading tile : " + request.url + " successfull " + (System.currentTimeMillis() - time) + " ms");
+					}
+				} catch (UnknownHostException e) {
+					currentErrors++;
+					log.error("UnknownHostException, cannot download tile " + request.url, e);
+				} catch (IOException e) {
+					currentErrors++;
+					log.warn("Cannot download tile : " + request.url, e);
+				} finally {
+					currentlyDownloaded.remove(request.fileToSave);
+				}
+				if (callback != null) {
+					callback.tileDownloaded(request);
+				}
+			}
+				
 		} 
 		
 		@Override

@@ -17,7 +17,7 @@ import com.osmand.osm.OSMSettings.OSMTagKey;
 public class Region {
 	private Entity entity;
 	
-	private DataTileManager<Node> amenities = new DataTileManager<Node>();
+	private DataTileManager<Amenity> amenities = new DataTileManager<Amenity>();
 	
 	private Map<CityType, Collection<City>> cities = new HashMap<CityType, Collection<City>>();
 	{
@@ -87,12 +87,12 @@ public class Region {
 		return closest;
 	}
 	
-	public List<Node> getClosestAmenities(double latitude, double longitude){
+	public List<Amenity> getClosestAmenities(double latitude, double longitude){
 		return amenities.getClosestObjects(latitude, longitude, 2);
 	}
 	
-	public void registerAmenity(Node n){
-		amenities.registerObject(n.getLatitude(), n.getLongitude(), n);
+	public void registerAmenity(Amenity a){
+		amenities.registerObject(a.getNode().getLatitude(), a.getNode().getLongitude(), a);
 	}
 
 	

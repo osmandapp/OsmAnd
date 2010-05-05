@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.osmand.R;
+import com.osmand.ResourceManager;
 
 public class MainMenuActivity extends Activity {
 
@@ -47,5 +48,7 @@ public class MainMenuActivity extends Activity {
 				MainMenuActivity.this.finish();
 			}
 		});
+		
+		ResourceManager.getResourceManager().indexingPoi();
 	}
 }

@@ -1,13 +1,6 @@
 package com.osmand.activities;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-import org.apache.tools.bzip2.CBZip2InputStream;
-import org.xml.sax.SAXException;
+import java.text.MessageFormat;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,26 +8,21 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Environment;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 import android.widget.ZoomControls;
 
-import com.osmand.Algoritms;
 import com.osmand.IMapLocationListener;
-import com.osmand.LogUtil;
 import com.osmand.OsmandSettings;
 import com.osmand.R;
-import com.osmand.data.DataTileManager;
-import com.osmand.osm.Entity;
-import com.osmand.osm.LatLon;
+import com.osmand.ResourceManager;
 import com.osmand.osm.MapUtils;
-import com.osmand.osm.Node;
-import com.osmand.osm.OSMSettings.OSMTagKey;
-import com.osmand.osm.io.OsmBaseStorage;
 import com.osmand.views.OsmandMapTileView;
 import com.osmand.views.POIMapLayer;
 import com.osmand.views.PointOfView;
@@ -53,12 +41,6 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	
 	private PointOfView pointOfView;
 	
-	private static final String TILES_PATH = "osmand/tiles/";
-	private static final String POI_PATH = "osmand/poi/";
-	private static final org.apache.commons.logging.Log log = LogUtil.getLog(MapActivity.class);
-
-	private DataTileManager<Node> indexPOI;
-
 	private POIMapLayer poiMapLayer;
 	
     @Override
@@ -72,22 +54,23 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		
 		setContentView(R.layout.main);
 		mapView = (OsmandMapTileView) findViewById(R.id.MapView);
-		mapView.setFileWithTiles(new File(Environment.getExternalStorageDirectory(), TILES_PATH));
-		mapView.addMapLocationListener(this);
+		mapView.setMapLocationListener(this);
+		poiMapLayer = new POIMapLayer();
+		poiMapLayer.setNodeManager(ResourceManager.getResourceManager().getPoiIndex());
+		mapView.addLayer(poiMapLayer);
+		
 		
 		ZoomControls zoomControls = (ZoomControls) findViewById(R.id.ZoomControls01);
 		zoomControls.setOnZoomInClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				mapView.setZoom(mapView.getZoom() + 1);
-				poiMapLayer.setCurrentLocationAndZoom(poiMapLayer.getCurrentLocation(), mapView.getZoom());
 			}
 		});
 		zoomControls.setOnZoomOutClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				mapView.setZoom(mapView.getZoom() - 1);
-				poiMapLayer.setCurrentLocationAndZoom(poiMapLayer.getCurrentLocation(), mapView.getZoom());
 			}
 		});
 		
@@ -109,6 +92,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			
 		});
 		
+		
 		backToMenu = (ImageButton)findViewById(R.id.BackToMenu);
 		backToMenu.setOnClickListener(new OnClickListener(){
 			@Override
@@ -122,62 +106,10 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		service.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
-		indexPOI = indexPOI();
 		
-		poiMapLayer = (POIMapLayer)findViewById(R.id.PoiMapLayer);
-		poiMapLayer.setNodeManager(indexPOI);
+		
 		
 	}
-    
-    private static final boolean indexPOIFlag = false;
-    
-    public DataTileManager<Node> indexPOI(){
-    	File file = new File(Environment.getExternalStorageDirectory(), POI_PATH);
-    	
-    	DataTileManager<Node> r = new DataTileManager<Node>();
-    	if(file.exists() && file.canRead() && indexPOIFlag){
-    		for(File f : file.listFiles() ){
-    			if(f.getName().endsWith(".bz2") || f.getName().endsWith(".osm") ){
-    				if(log.isDebugEnabled()){
-    					log.debug("Starting index POI " + f.getAbsolutePath());
-    				}
-    				boolean zipped = f.getName().endsWith(".bz2");
-    				InputStream stream = null;
-    				try {
-    					OsmBaseStorage storage = new OsmBaseStorage();
-    					stream = new FileInputStream(f);
-    					stream = new BufferedInputStream(stream);
-    					if (zipped) {
-							if (stream.read() != 'B' || stream.read() != 'Z') {
-								log.error("Can't read poi file " + f.getAbsolutePath()
-										+ "The source stream must start with the characters BZ if it is to be read as a BZip2 stream.");
-								continue;
-							} else {
-								stream = new CBZip2InputStream(stream);
-							}
-						}
-    					storage.parseOSM(stream);
-    					for(Entity e : storage.getRegisteredEntities().values()){
-    						if(e instanceof Node && e.getTag(OSMTagKey.AMENITY) != null){
-    							Node n = (Node) e;
-    							r.registerObject(n.getLatitude(), n.getLongitude(), n);
-    						}
-    					}
-    					if(log.isDebugEnabled()){
-        					log.debug("Finishing index POI " + f.getAbsolutePath());
-        				}
-    				} catch(IOException e){
-    					log.error("Can't read poi file " + f.getAbsolutePath(), e);
-    				} catch (SAXException e) {
-    					log.error("Can't read poi file " + f.getAbsolutePath(), e);
-					} finally {
-						Algoritms.closeStream(stream);
-					}
-    			}
-    		}
-    	}
-    	return r; 
-    }
     
 
 
@@ -251,32 +183,54 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		if(mapView.getMap() != OsmandSettings.tileSource){
 			mapView.setMap(OsmandSettings.tileSource);
 		}
-		if((poiMapLayer.getVisibility() == View.VISIBLE) != OsmandSettings.showPoiOverMap){
+		if(mapView.getLayers().contains(poiMapLayer) != OsmandSettings.showPoiOverMap){
 			if(OsmandSettings.showPoiOverMap){
-				poiMapLayer.setVisibility(View.VISIBLE);
+				mapView.addLayer(poiMapLayer);
 			} else {
-				poiMapLayer.setVisibility(View.INVISIBLE);
+				mapView.removeLayer(poiMapLayer);
 			}
 		}
 	}
 	
+	
+	
 	@Override
 	public void onLowMemory() {
 		super.onLowMemory();
-		mapView.onLowMemory();
+		ResourceManager.getResourceManager().onLowMemory();
 	}
 
 
 	@Override
 	public void locationChanged(double newLatitude, double newLongitude, Object source) {
 		// when user start dragging 
-		if(source == mapView && lastKnownLocation != null){
+		if(lastKnownLocation != null){
 			linkLocationWithMap = false;
 			backToLocation.setVisibility(View.VISIBLE);
 		}
-		poiMapLayer.setCurrentLocationAndZoom(new LatLon(newLatitude, newLongitude), mapView.getZoom());
-		
 		validatePointOfView();
-	}    
+	}
+	
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.map_menu, menu);
+		return true;
+	}
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	if(item.getItemId() == R.id.map_show_location){
+    		float f=  (Runtime.getRuntime().totalMemory())/ 1e6f;
+    		String text = MessageFormat.format("Latitude : {0}, longitude : {1}, zoom : {2}, memory : {3}", mapView.getLatitude(), 
+    				mapView.getLongitude(), mapView.getZoom(), f);
+    		Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    		return true;
+    	} else if (item.getItemId() == R.id.map_show_settings) {
+    		final Intent settings = new Intent(MapActivity.this, SettingsActivity.class);
+			startActivity(settings);
+    		return true;
+    	}
+    	return super.onOptionsItemSelected(item);
+    }
     
 }

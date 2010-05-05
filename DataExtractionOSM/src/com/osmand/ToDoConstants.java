@@ -9,18 +9,13 @@ package com.osmand;
  */
 public class ToDoConstants {
 	
-	
-	// use unknown implementation (not written)? How to see debug msgs?
-	// Explanation of how it works 
-	// The task 
-	public int CONFIG_COMMONS_LOGGING_IN_ANDROID = 1;
-	
 	public int SAVE_SETTINGS_IN_ANDROID_BETWEEN_SESSION = 2;
 	
+	// First of all switch off gps listener should be implemented
 	public int IMPLEMENT_ON_STOP_RESUME_ACTIVITY = 3;
 	
 	// OsmandMapTileView.java have problem with class loading (LogFactory, MapTileDownloader) - 
-	// it is not editable in editor
+	// it is not editable in editor ?
 	public int MAKE_MAP_PANEL_EDITABLE_IN_EDITOR = 4;
 	
 	// common parts : work with cache on file system & in memory
@@ -29,12 +24,11 @@ public class ToDoConstants {
 	
 	public int REVISE_MAP_ACTIVITY_HOLD_ALL_ZOOM_LATLON_IN_ONEPLACE = 6;
 	
+	
 	/**
-	 * Resource should cache all resources & free them
-	 * if there is no enough memory @see tile cache in tile view
-	 * @see poi index in map activity
+	 * Write activity to show something about authors / donation ....
 	 */
-	public int INTRODUCE_RESOURCE_MANAGER = 7;
+	public int DESCRIBE_ABOUT_AUTHORS = 8;
 	
 
 }

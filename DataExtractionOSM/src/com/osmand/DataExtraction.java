@@ -47,6 +47,7 @@ import org.apache.tools.bzip2.CBZip2InputStream;
 import org.apache.tools.bzip2.CBZip2OutputStream;
 import org.xml.sax.SAXException;
 
+import com.osmand.data.Amenity;
 import com.osmand.data.City;
 import com.osmand.data.DataTileManager;
 import com.osmand.data.Region;
@@ -132,7 +133,7 @@ public class DataExtraction implements IMapLocationListener {
 		// preloaded data
 		final List<Node> places = new ArrayList<Node>();
 		final List<Entity> buildings = new ArrayList<Entity>();
-		final List<Node> amenities = new ArrayList<Node>();
+		final List<Amenity> amenities = new ArrayList<Amenity>();
 		// highways count
 		final List<Way> mapWays = new ArrayList<Way>();
 		
@@ -150,20 +151,8 @@ public class DataExtraction implements IMapLocationListener {
 			
 			@Override
 			public boolean acceptNodeToLoad(Node n) {
-				if (n.getTag(OSMTagKey.AMENITY) != null) {
-					amenities.add(n);
-				} else if (n.getTag(OSMTagKey.SHOP) != null) {
-					// TODO temp solution
-					n.putTag(OSMTagKey.AMENITY.getValue(), OSMTagKey.SHOP.getValue());
-					amenities.add(n);
-				} else if (n.getTag(OSMTagKey.LEISURE) != null) {
-					// TODO temp solution
-					n.putTag(OSMTagKey.AMENITY.getValue(), OSMTagKey.LEISURE.getValue());
-					amenities.add(n);
-				}  else if (n.getTag(OSMTagKey.TOURISM) != null) {
-					// TODO temp solution
-					n.putTag(OSMTagKey.AMENITY.getValue(), OSMTagKey.TOURISM.getValue());
-					amenities.add(n);
+				if(Amenity.isAmenity(n)){
+					amenities.add(new Amenity(n));
 				}
 				if (n.getTag(OSMTagKey.PLACE) != null) {
 					places.add(n);
@@ -228,9 +217,9 @@ public class DataExtraction implements IMapLocationListener {
         }
         
         DataTileManager<LatLon> amenitiesManager = new DataTileManager<LatLon>();
-        for(Node node : amenities){
-        	country.registerAmenity(node);
-        	amenitiesManager.registerObject(node.getLatitude(), node.getLongitude(), node.getLatLon());
+        for(Amenity a: amenities){
+        	country.registerAmenity(a);
+        	amenitiesManager.registerObject(a.getNode().getLatitude(), a.getNode().getLongitude(), a.getNode().getLatLon());
         }
         
         
@@ -249,7 +238,9 @@ public class DataExtraction implements IMapLocationListener {
         runUI(country);
 		List<Long> interestedObjects = new ArrayList<Long>();
 //		MapUtils.addIdsToList(places, interestedObjects);
-		MapUtils.addIdsToList(amenities, interestedObjects);
+		for(Amenity a : amenities){
+			interestedObjects.add(a.getNode().getId());
+		}
 //		MapUtils.addIdsToList(mapWays, interestedObjects);
 //		MapUtils.addIdsToList(buildings, interestedObjects);
 		if (DefaultLauncherConstants.writeTestOsmFile != null) {
@@ -440,21 +431,21 @@ public class DataExtraction implements IMapLocationListener {
 	@Override
 	public void locationChanged(final double newLatitude, final double newLongitude, Object source){
 		Region reg = (Region) amenitiesTree.getUserObject();
-		List<Node> closestAmenities = reg.getClosestAmenities(newLatitude, newLongitude);
-		Collections.sort(closestAmenities, new Comparator<Node>(){
+		List<Amenity> closestAmenities = reg.getClosestAmenities(newLatitude, newLongitude);
+		Collections.sort(closestAmenities, new Comparator<Amenity>(){
 			@Override
-			public int compare(Node o1, Node o2) {
-				return Double.compare(MapUtils.getDistance(o1, newLatitude, newLongitude), 
-						MapUtils.getDistance(o2, newLatitude, newLongitude));
+			public int compare(Amenity o1, Amenity o2) {
+				return Double.compare(MapUtils.getDistance(o1.getNode(), newLatitude, newLongitude), 
+						MapUtils.getDistance(o2.getNode(), newLatitude, newLongitude));
 			}
 			
 		});
 		
-		Map<String, List<Node>> filter = new TreeMap<String, List<Node>>();
-		for(Node n : closestAmenities){
-			String type = n.getTag(OSMTagKey.AMENITY);
+		Map<String, List<Amenity>> filter = new TreeMap<String, List<Amenity>>();
+		for(Amenity n : closestAmenities){
+			String type = n.getType().toString();
 			if(!filter.containsKey(type)){
-				filter.put(type, new ArrayList<Node>());
+				filter.put(type, new ArrayList<Amenity>());
 			}
 			filter.get(type).add(n);
 		}
@@ -470,11 +461,9 @@ public class DataExtraction implements IMapLocationListener {
 		
 		
 		for(int i=0; i<15 && i < closestAmenities.size(); i++){
-			Node n = closestAmenities.get(i);
-			String type = n.getTag(OSMTagKey.AMENITY);
-			String name = n.getTag(OSMTagKey.NAME);
-			int dist = (int) (MapUtils.getDistance(n, newLatitude, newLongitude));
-			String str = type +" "+(name == null ? n.getId() : name) +" [" +dist+" m ]";
+			Amenity n = closestAmenities.get(i);
+			int dist = (int) (MapUtils.getDistance(n.getNode(), newLatitude, newLongitude));
+			String str = n.getSimpleFormat() + " [" +dist+" m ]";
 			((DefaultMutableTreeNode)amenitiesTree.getChildAt(0)).add(
 					new DataExtractionTreeNode(str, n));
 		}
@@ -492,10 +481,9 @@ public class DataExtraction implements IMapLocationListener {
 			}
 			
 			p.removeAllChildren();
-			for (Node n : filter.get(s)) {
-				String name = n.getTag(OSMTagKey.NAME);
-				int dist = (int) (MapUtils.getDistance(n, newLatitude, newLongitude));
-				String str = (name == null ? n.getId() : name) + " [" + dist + " m ]";
+			for (Amenity n : filter.get(s)) {
+				int dist = (int) (MapUtils.getDistance(n.getNode(), newLatitude, newLongitude));
+				String str = n.getSimpleFormat() + " [" + dist + " m ]";
 				DataExtractionTreeNode node = new DataExtractionTreeNode(str, n);
 				p.add(node);
 			}
