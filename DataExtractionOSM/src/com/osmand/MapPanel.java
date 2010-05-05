@@ -32,7 +32,6 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import com.osmand.DataExtraction.ExitListener;
 import com.osmand.MapTileDownloader.DownloadRequest;
@@ -48,7 +47,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 	private static final long serialVersionUID = 1L;
 	
-	protected static final Log log = LogFactory.getLog(MapPanel.class);
+	protected static final Log log = LogUtil.getLog(MapPanel.class);
 
 	public static Menu getMenuToChooseSource(final MapPanel panel){
 		Menu tiles = new Menu("Source tile");

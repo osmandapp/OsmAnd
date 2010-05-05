@@ -15,12 +15,11 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 public class MapTileDownloader {
 	
 	private static MapTileDownloader downloader = null;
-	private static Log log = LogFactory.getLog(MapTileDownloader.class);
+	private static Log log = LogUtil.getLog(MapTileDownloader.class);
 	
 	
 	private ThreadPoolExecutor threadPoolExecutor;

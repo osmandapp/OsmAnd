@@ -4,6 +4,7 @@
 <PreferenceCategory android:title="@string/map_preferences">
 <CheckBoxPreference android:key="show_gps_location_text" android:title="@string/show_location" android:summary="@string/show_gps_coordinates_text"></CheckBoxPreference>
 <CheckBoxPreference android:key="use_internet_to_download_tiles" android:title="@string/use_internet" android:summary="@string/use_internet_to_download_tile"></CheckBoxPreference>
+<CheckBoxPreference android:key="show_poi_over_map" android:title="@string/show_poi_over_map" android:summary="@string/show_poi_over_map_description"></CheckBoxPreference>
 </PreferenceCategory>
 <PreferenceCategory android:title="@string/map_source"><ListPreference android:title="@string/map_tile_source" android:summary="@string/map_tile_source_descr" android:key="map_tile_sources"></ListPreference>
 </PreferenceCategory>
