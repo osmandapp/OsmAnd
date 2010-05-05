@@ -8,7 +8,8 @@
 <com.osmand.views.POIMapLayer android:id="@+id/PoiMapLayer" android:layout_width="fill_parent" android:layout_height="fill_parent"></com.osmand.views.POIMapLayer>
 <ZoomControls android:id="@+id/ZoomControls01"
 		android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom|right"></ZoomControls>		
+<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom|left" android:id="@+id/BackToMenu" android:background="@drawable/back"></ImageButton>
 <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="top|right" android:id="@+id/BackToLocation" android:background="@drawable/icon"></ImageButton>
-<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/settings_activity" android:layout_gravity="top|left" android:id="@+id/GoToSettingsButton" ></Button>
+
 
 </FrameLayout>

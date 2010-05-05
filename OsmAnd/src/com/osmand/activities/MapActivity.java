@@ -49,6 +49,8 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 
 	private ImageButton backToLocation;
 
+	private ImageButton backToMenu;
+	
 	private PointOfView pointOfView;
 	
 	private static final String TILES_PATH = "osmand/tiles/";
@@ -107,17 +109,17 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			
 		});
 		
-		Button goToSettings = (Button)findViewById(R.id.GoToSettingsButton);
-		goToSettings.setOnClickListener(new OnClickListener(){
+		backToMenu = (ImageButton)findViewById(R.id.BackToMenu);
+		backToMenu.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				final Intent settings = new Intent(MapActivity.this, SettingsActivity.class);
-				startActivity(settings);
+		           Intent intent = new Intent();
+	                setResult(RESULT_OK, intent);
+	                finish();
 			}
 			
 		});
-		
-		
+			
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		service.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
 		indexPOI = indexPOI();
