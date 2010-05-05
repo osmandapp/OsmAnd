@@ -27,8 +27,9 @@ public class MainMenuActivity extends Activity {
 		showMap.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent settings = new Intent(MainMenuActivity.this, MapActivity.class);
-				startActivity(settings);
+				final Intent mapIndent = new Intent(MainMenuActivity.this, MapActivity.class);
+				startActivityForResult(mapIndent, 0);
+
 			}
 		});
 		settingsButton = (Button) findViewById(R.id.SettingsButton);
