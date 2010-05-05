@@ -85,7 +85,9 @@ public class LogUtil {
 
 		@Override
 		public boolean isDebugEnabled() {
-			return android.util.Log.isLoggable(TAG, android.util.Log.DEBUG);
+			// For debur purposes always true
+//			return android.util.Log.isLoggable(TAG, android.util.Log.DEBUG);
+			return true;
 		}
 
 		@Override

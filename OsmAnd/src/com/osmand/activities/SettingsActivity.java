@@ -17,11 +17,9 @@ import com.osmand.map.TileSourceManager.TileSourceTemplate;
 
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener {
 	private static final String use_internet_to_download_tiles = "use_internet_to_download_tiles";
-	private static final String show_gps_location_text = "show_gps_location_text";
 	private static final String map_tile_sources = "map_tile_sources";
 	private static final String show_poi_over_map = "show_poi_over_map";
 	
-	private CheckBoxPreference showGpsLocation;
 	private CheckBoxPreference showPoiOnMap;
 	private CheckBoxPreference useInternetToDownloadTiles;
 	private ListPreference tileSourcePreference;
@@ -31,8 +29,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.settings_pref);
 		PreferenceScreen screen = getPreferenceScreen();
-		showGpsLocation =(CheckBoxPreference) screen.findPreference(show_gps_location_text);
-		showGpsLocation.setOnPreferenceChangeListener(this);
 		useInternetToDownloadTiles =(CheckBoxPreference) screen.findPreference(use_internet_to_download_tiles);
 		useInternetToDownloadTiles.setOnPreferenceChangeListener(this);
 		showPoiOnMap =(CheckBoxPreference) screen.findPreference(show_poi_over_map);
@@ -48,7 +44,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     protected void onResume() {
     	super.onResume();
     	useInternetToDownloadTiles.setChecked(OsmandSettings.useInternetToDownloadTiles);
-    	showGpsLocation.setChecked(OsmandSettings.showGPSLocationOnMap);
     	showPoiOnMap.setChecked(OsmandSettings.showPoiOverMap);
     	
     	List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
@@ -59,15 +54,14 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     	tileSourcePreference.setEntries(entries);
     	tileSourcePreference.setEntryValues(entries);
     	tileSourcePreference.setValue(OsmandSettings.tileSource.getName());
+    	tileSourcePreference.setSummary(tileSourcePreference.getSummary() + "\t\t[" + OsmandSettings.tileSource.getName()+"]");
     	
     }
     
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		if(preference == showGpsLocation){
-			OsmandSettings.showGPSLocationOnMap = (Boolean) newValue;
-		} else if(preference == showPoiOnMap){
+		if(preference == showPoiOnMap){
 			OsmandSettings.showPoiOverMap = (Boolean) newValue;
 		} else if(preference == useInternetToDownloadTiles){
 			OsmandSettings.useInternetToDownloadTiles = (Boolean) newValue;

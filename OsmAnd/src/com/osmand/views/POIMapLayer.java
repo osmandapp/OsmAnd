@@ -1,154 +1,111 @@
 package com.osmand.views;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.logging.Log;
-
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Point;
-import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Toast;
 
-import com.osmand.DefaultLauncherConstants;
-import com.osmand.LogUtil;
-import com.osmand.OsmandSettings;
+import com.osmand.data.Amenity;
 import com.osmand.data.DataTileManager;
-import com.osmand.map.ITileSource;
-import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
-import com.osmand.osm.Node;
-import com.osmand.osm.OSMSettings.OSMTagKey;
 
-public class POIMapLayer extends View {
-	private DataTileManager<Node> nodeManager = null;
-	private LatLon currentLocation = null;
-	private int zoomLevel = DefaultLauncherConstants.MAP_startMapZoom;
-	private Map<Node, Point> points = new LinkedHashMap<Node, Point>();
+public class POIMapLayer implements OsmandMapLayer {
+	private static final int radiusClick = 2; // for 15 level zoom
+	
+	private DataTileManager<Amenity> nodeManager = null;
 	private Paint pointUI;
-	private static final int radiusClick = 16;
-	private Toast previousShownToast =null;
-	private final static Log log = LogUtil.getLog(POIMapLayer.class);
+	private OsmandMapTileView view;
+	private List<Amenity> objects;
 	
 
-	public POIMapLayer(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		initUI();
-	}
-	
-	public POIMapLayer(Context context) {
-		super(context);
-		initUI();
-	}
-
-	private void initUI() {
-		pointUI = new Paint();
-		pointUI.setColor(Color.CYAN);
-		pointUI.setAlpha(150);
-		pointUI.setAntiAlias(true);
-	}
-	
-	@Override
-	protected void onDraw(Canvas canvas) {
-		super.onDraw(canvas);
-		for(Node n : points.keySet()){
-			Point p = points.get(n);
-			canvas.drawCircle(p.x, p.y, radiusClick/2, pointUI);
-		}
-	}
-	
-	public void preparePoints() {
-		points.clear();
-		if (nodeManager != null && currentLocation != null) {
-			double tileNumberX = MapUtils.getTileNumberX(zoomLevel, currentLocation.getLongitude());
-			double tileNumberY = MapUtils.getTileNumberY(zoomLevel, currentLocation.getLatitude());
-			double xTileLeft = tileNumberX - getWidth() / (2d * getTileSize());
-			double xTileRight = tileNumberX + getWidth() / (2d * getTileSize());
-			double yTileUp = tileNumberY - getHeight() / (2d * getTileSize());
-			double yTileDown = tileNumberY + getHeight() / (2d * getTileSize());
-
-			List<Node> objects = nodeManager.getObjects(MapUtils.getLatitudeFromTile(zoomLevel, yTileUp), 
-					MapUtils.getLongitudeFromTile(zoomLevel, xTileLeft), 
-					MapUtils.getLatitudeFromTile(zoomLevel, yTileDown), 
-					MapUtils.getLongitudeFromTile(zoomLevel, xTileRight));
-			for (Node o : objects) {
-				double tileX = MapUtils.getTileNumberX(zoomLevel, o.getLongitude());
-				int x = (int) ((tileX - xTileLeft) * getTileSize());
-				double tileY = MapUtils.getTileNumberY(zoomLevel, o.getLatitude());
-				int y = (int) ((tileY - yTileUp) * getTileSize());
-				points.put(o, new Point(x, y));
-			}
-		}
-		invalidate();
-	}
-	
+	// TODO optimize all evaluations
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		if(event.getAction() == MotionEvent.ACTION_DOWN) {
-
-			if(previousShownToast != null){
-				previousShownToast.cancel();
-				previousShownToast = null;
-			}
-			int x = (int) event.getX();
-			int y = (int) event.getY();
-			
-			for(Node n : points.keySet()){
-				Point p = points.get(n);
-				if(Math.abs(p.x - x) <= radiusClick && Math.abs(p.y - y) <= radiusClick){
-					StringBuilder b = new StringBuilder();
-					b.append("This is an amenity : \n");
-					b.append("type - ").append(n.getTag(OSMTagKey.AMENITY)).append("\n");
-					if(n.getTag(OSMTagKey.NAME) != null){
-						b.append("name - ").append(n.getTag(OSMTagKey.NAME)).append("\n");
-					}
-					b.append("id - ").append(n.getId());
-					
-					previousShownToast = Toast.makeText(getContext(), b.toString(), Toast.LENGTH_SHORT);
-					previousShownToast.show();
-					// TODO use precision
-					log.debug("Precision is " + event.getXPrecision());
+		if(event.getAction() == MotionEvent.ACTION_DOWN && objects != null) {
+			double tileNumberX = MapUtils.getTileNumberX(view.getZoom(), view.getLongitude());
+			double tileNumberY = MapUtils.getTileNumberY(view.getZoom(), view.getLatitude());
+			double xTileLeft = tileNumberX - view.getWidth() / (2d * getTileSize());
+			double yTileUp = tileNumberY - view.getHeight() / (2d * getTileSize());
+			int ex = (int) event.getX();
+			int ey = (int) event.getY();
+			int radius = getRadiusPoi(view.getZoom()) * 3 / 2;
+			for(Amenity n : objects){
+				double tileX = MapUtils.getTileNumberX(view.getZoom(), n.getNode().getLongitude());
+				int x = (int) ((tileX - xTileLeft) * getTileSize());
+				double tileY = MapUtils.getTileNumberY(view.getZoom(), n.getNode().getLatitude());
+				int y = (int) ((tileY - yTileUp) * getTileSize());
+				if(Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius){
+					Toast.makeText(view.getContext(), n.getSimpleFormat(), Toast.LENGTH_SHORT).show();
 					return true;
 				}
 			}
 		} 
-		return super.onTouchEvent(event);
-	}
-	
-	public void setCurrentLocationAndZoom(LatLon currentLocation, int zoom) {
-		this.currentLocation = currentLocation;
-		this.zoomLevel = zoom;
-		preparePoints();
+//		return super.onTouchEvent(event);
+		return false;
 	}
 	
 	public int getTileSize(){
-		ITileSource source = OsmandSettings.tileSource;
-		return source == null ? 256 : source.getTileSize();
+		return view.getTileSize();
 		
 	}
 	
-	public void setNodeManager(DataTileManager<Node> nodeManager) {
+	public void setNodeManager(DataTileManager<Amenity> nodeManager) {
 		this.nodeManager = nodeManager;
-		preparePoints();
+		if(view != null){
+			view.prepareImage();
+		}
 	}
 	
-	public LatLon getCurrentLocation() {
-		return currentLocation;
-	}
-	
-	public DataTileManager<Node> getNodeManager() {
+	public DataTileManager<Amenity> getNodeManager() {
 		return nodeManager;
 	}
 	
+	@Override
+	public void initLayer(OsmandMapTileView view) {
+		this.view = view;
+		pointUI = new Paint();
+		pointUI.setColor(Color.BLUE);
+		pointUI.setAlpha(150);
+		pointUI.setAntiAlias(true);		
+	}
 	
-	public int getZoomLevel() {
-		return zoomLevel;
+	public int getRadiusPoi(int zoom){
+		if(zoom < 15){
+			return 0;
+		} else {
+			return radiusClick << (zoom - 15);
+		} 
+	}
+
+	@Override
+	public void onDraw(Canvas canvas) {
+		if (nodeManager != null && view.getZoom() >= 15) {
+			double tileNumberX = MapUtils.getTileNumberX(view.getZoom(), view.getLongitude());
+			double tileNumberY = MapUtils.getTileNumberY(view.getZoom(), view.getLatitude());
+			double xTileLeft = tileNumberX - view.getWidth() / (2d * getTileSize());
+			double xTileRight = tileNumberX + view.getWidth() / (2d * getTileSize());
+			double yTileUp = tileNumberY - view.getHeight() / (2d * getTileSize());
+			double yTileDown = tileNumberY + view.getHeight() / (2d * getTileSize());
+
+			objects = nodeManager.getObjects(MapUtils.getLatitudeFromTile(view.getZoom(), yTileUp), MapUtils
+					.getLongitudeFromTile(view.getZoom(), xTileLeft), MapUtils.getLatitudeFromTile(view.getZoom(), yTileDown), MapUtils
+					.getLongitudeFromTile(view.getZoom(), xTileRight));
+			for (Amenity o : objects) {
+				double tileX = MapUtils.getTileNumberX(view.getZoom(), o.getNode().getLongitude());
+				int x = (int) ((tileX - xTileLeft) * getTileSize());
+				double tileY = MapUtils.getTileNumberY(view.getZoom(), o.getNode().getLatitude());
+				int y = (int) ((tileY - yTileUp) * getTileSize());
+				canvas.drawCircle(x, y, getRadiusPoi(view.getZoom()), pointUI);
+			}
+		}
+	}
+
+	@Override
+	public void destroyLayer() {
+		
 	}
 
 }

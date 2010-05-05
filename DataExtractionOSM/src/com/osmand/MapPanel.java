@@ -238,7 +238,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 				if(loadIfNeeded && cache.get(file) == null){
 					String urlToLoad = map.getUrlToLoad(x, y, zoom);
 					if (urlToLoad != null) {
-						downloader.requestToDownload(urlToLoad, new DownloadRequest(en, x, y, zoom));
+						downloader.requestToDownload(new DownloadRequest(urlToLoad, en, x, y, zoom));
 					}
 				}
 			}
@@ -248,7 +248,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	}
 	
 	@Override
-	public void tileDownloaded(String dowloadedUrl, DownloadRequest request) {
+	public void tileDownloaded(DownloadRequest request) {
 		int tileSize = getTileSize();
 		double xTileLeft = getXTile() - getSize().width / (2d * tileSize);
 		double yTileUp = getYTile() - getSize().height / (2d * tileSize);
