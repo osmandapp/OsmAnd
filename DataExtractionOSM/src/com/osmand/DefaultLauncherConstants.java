@@ -21,7 +21,7 @@ public abstract class DefaultLauncherConstants {
 	public static double MAP_startMapLongitude = 27.56;
 	public static double MAP_startMapLatitude = 53.9;
 	public static int MAP_startMapZoom = 15;
-	public static int MAP_divNonLoadedImage = 8;
+	public static int MAP_divNonLoadedImage = 16;
 	public static boolean loadMissingImages = true;
 	public static ITileSource MAP_defaultTileSource = TileSourceManager.getMapnikSource();
 	public static boolean showGPSCoordinates = true;
