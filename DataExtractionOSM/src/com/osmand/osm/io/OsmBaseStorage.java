@@ -70,6 +70,7 @@ public class OsmBaseStorage extends DefaultHandler {
 		}
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		try {
+			factory.setFeature("http://xml.org/sax/features/namespace-prefixes", false);
 			return saxParser = factory.newSAXParser();
 		} catch (ParserConfigurationException e) {
 			throw new IllegalStateException(e);
@@ -108,6 +109,8 @@ public class OsmBaseStorage extends DefaultHandler {
 	
 	@Override
 	public void startElement(String uri, String localName, String name, Attributes attributes) throws SAXException {
+		name = saxParser.isNamespaceAware() ? localName : name;
+		
 		if(!parseStarted){
 			if(!ELEM_OSM.equals(name) || !supportedVersions.contains(attributes.getValue(ATTR_VERSION))){
 				throw new OsmVersionNotSupported();
@@ -150,6 +153,7 @@ public class OsmBaseStorage extends DefaultHandler {
 	
 	@Override
 	public void endElement(String uri, String localName, String name) throws SAXException {
+		name = saxParser.isNamespaceAware() ? localName : name;
 		if (ELEM_NODE.equals(name) || ELEM_WAY.equals(name) || ELEM_RELATION.equals(name)) {
 			if(currentParsedEntity != null){
 				if(acceptEntityToLoad(currentParsedEntity)){

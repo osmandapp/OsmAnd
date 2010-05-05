@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry excluding="**/DataExtraction*|**/MapPanel*|com/osmand/osm/io/OSMStorageWriter.java" kind="src" path="use"/>
+	<classpathentry excluding="**/DataExtraction*|**/MapPanel*|com/osmand/osm/io/OSMStorageWriter.java|com/osmand/LogUtil.java" kind="src" path="use"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry kind="lib" path="lib/bzip2-20090327.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
