@@ -20,6 +20,7 @@ public class POIMapLayer implements OsmandMapLayer {
 	private OsmandMapTileView view;
 	private List<Amenity> objects;
 	
+	
 
 	// TODO optimize all evaluations
 	@Override
