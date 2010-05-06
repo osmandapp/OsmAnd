@@ -70,6 +70,10 @@ public class ResourceManager {
 		// TODO start/stop this thread when needed?
 		asyncLoadingTiles.start();
 		dirWithTiles = new File(Environment.getExternalStorageDirectory(), TILES_PATH);
+		if(Environment.getExternalStorageDirectory().canRead()){
+			dirWithTiles.mkdirs();
+		}
+		
 	}
 	
 	/// Working with tiles ///
