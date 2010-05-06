@@ -14,6 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.tools.bzip2.CBZip2InputStream;
 import org.xml.sax.SAXException;
 
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -191,7 +192,7 @@ public class ResourceManager {
 	
 	
 	// POI INDEX //
-	public void indexingPoi(){
+	public void indexingPoi(ProgressDialog dlg){
 		if (poiIndex == null) {
 			File file = new File(Environment.getExternalStorageDirectory(), POI_PATH);
 			poiIndex = new DataTileManager<Amenity>();
@@ -200,6 +201,9 @@ public class ResourceManager {
 					if (f.getName().endsWith(".bz2") || f.getName().endsWith(".osm")) {
 						if (log.isDebugEnabled()) {
 							log.debug("Starting index POI " + f.getAbsolutePath());
+						}
+						if(dlg != null){
+							dlg.setMessage("Indexing poi " + f.getName());
 						}
 						boolean zipped = f.getName().endsWith(".bz2");
 						InputStream stream = null;
@@ -240,7 +244,7 @@ public class ResourceManager {
 	
 	public DataTileManager<Amenity> getPoiIndex() {
 		if(poiIndex == null){
-			indexingPoi();
+			indexingPoi(null);
 		}
 		return poiIndex;
 	}
