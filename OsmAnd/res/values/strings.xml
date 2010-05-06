@@ -17,4 +17,6 @@
 <string name="exit_Button">Exit</string>
 <string name="map_Button">Map</string>
 <string name="settings_Button">Settings</string>
+<string name="search_button">Search</string>
+<color name="menu_background">#CFFACD</color>
 </resources>
