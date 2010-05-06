@@ -2,6 +2,9 @@ package com.osmand.activities;
 
 import java.util.List;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -16,9 +19,6 @@ import com.osmand.map.TileSourceManager;
 import com.osmand.map.TileSourceManager.TileSourceTemplate;
 
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener {
-	private static final String use_internet_to_download_tiles = "use_internet_to_download_tiles";
-	private static final String map_tile_sources = "map_tile_sources";
-	private static final String show_poi_over_map = "show_poi_over_map";
 	
 	private CheckBoxPreference showPoiOnMap;
 	private CheckBoxPreference useInternetToDownloadTiles;
@@ -29,12 +29,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.settings_pref);
 		PreferenceScreen screen = getPreferenceScreen();
-		useInternetToDownloadTiles =(CheckBoxPreference) screen.findPreference(use_internet_to_download_tiles);
+		useInternetToDownloadTiles = (CheckBoxPreference) screen.findPreference(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES);
 		useInternetToDownloadTiles.setOnPreferenceChangeListener(this);
-		showPoiOnMap =(CheckBoxPreference) screen.findPreference(show_poi_over_map);
+		showPoiOnMap =(CheckBoxPreference) screen.findPreference(OsmandSettings.SHOW_POI_OVER_MAP);
 		showPoiOnMap.setOnPreferenceChangeListener(this);
 		
-		tileSourcePreference =(ListPreference) screen.findPreference(map_tile_sources);
+		tileSourcePreference =(ListPreference) screen.findPreference(OsmandSettings.MAP_TILE_SOURCES);
 		tileSourcePreference.setOnPreferenceChangeListener(this);
 		
 		
@@ -43,36 +43,36 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     @Override
     protected void onResume() {
     	super.onResume();
-    	useInternetToDownloadTiles.setChecked(OsmandSettings.useInternetToDownloadTiles);
-    	showPoiOnMap.setChecked(OsmandSettings.showPoiOverMap);
+    	useInternetToDownloadTiles.setChecked(OsmandSettings.isUsingInternetToDownloadTiles(this));
+    	showPoiOnMap.setChecked(OsmandSettings.isShowingPoiOverMap(this));
     	
     	List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
     	String[] entries = new String[list.size()];
     	for(int i=0; i<list.size(); i++){
     		entries[i] = list.get(i).getName();
     	}
+    	
     	tileSourcePreference.setEntries(entries);
     	tileSourcePreference.setEntryValues(entries);
-    	tileSourcePreference.setValue(OsmandSettings.tileSource.getName());
-    	tileSourcePreference.setSummary(tileSourcePreference.getSummary() + "\t\t[" + OsmandSettings.tileSource.getName()+"]");
+    	tileSourcePreference.setValue(OsmandSettings.getMapTileSourceName(this));
+    	tileSourcePreference.setSummary(tileSourcePreference.getSummary() + "\t\t[" + OsmandSettings.getMapTileSourceName(this)+"]");
     	
     }
     
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		Editor edit = prefs.edit();
 		if(preference == showPoiOnMap){
-			OsmandSettings.showPoiOverMap = (Boolean) newValue;
+			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, (Boolean) newValue);
+			edit.commit();
 		} else if(preference == useInternetToDownloadTiles){
-			OsmandSettings.useInternetToDownloadTiles = (Boolean) newValue;
+			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, (Boolean) newValue);
+			edit.commit();
 		} else if (preference == tileSourcePreference) {
-			String newTile = newValue.toString();
-			for (TileSourceTemplate t : TileSourceManager.getKnownSourceTemplates()) {
-				if (t.getName().equals(newTile)) {
-					OsmandSettings.tileSource = t;
-					break;
-				}
-			}
+			edit.putString(OsmandSettings.MAP_TILE_SOURCES, (String) newValue);
+			edit.commit();
 		}
 		return true;
 	}

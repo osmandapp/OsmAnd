@@ -55,10 +55,14 @@ public class OSMStorageWriter {
 				nodes.add((Node) entities.get(l));
 			} else if(entities.get(l) instanceof Way){
 				ways.add((Way) entities.get(l));
-				toResolve.addAll(((Way)entities.get(l)).getNodeIds());
+				if(includeLinks){
+					toResolve.addAll(((Way)entities.get(l)).getNodeIds());
+				}
 			} else if(entities.get(l) instanceof Relation){
 				relations.add((Relation) entities.get(l));
-				toResolve.addAll(((Relation)entities.get(l)).getMemberIds());
+				if(includeLinks){
+					toResolve.addAll(((Relation)entities.get(l)).getMemberIds());
+				}
 			}
 		}
 		

@@ -21,6 +21,7 @@ import com.osmand.data.DataTileManager;
 import com.osmand.data.Region;
 import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
+import com.osmand.osm.MapUtils;
 import com.osmand.osm.Node;
 import com.osmand.osm.OSMSettings;
 import com.osmand.osm.Relation;
@@ -74,34 +75,77 @@ public class DataExtraction  {
 	
 	private static boolean parseSmallFile = true;
 	private static boolean parseOSM = true;
+	private ArrayList<Way> mapWays;
+	private ArrayList<Amenity> amenities;
+	private ArrayList<Entity> buildings;
+	private ArrayList<Node> places;
+	private DataTileManager<Way> waysManager;
 
 	///////////////////////////////////////////
 	// 1. Reading data - preparing data for UI
 	public void testReadingOsmFile() throws ParserConfigurationException, SAXException, IOException, XMLStreamException {
-		
-		InputStream stream ;
+		String f;
 		if(parseSmallFile){
-			stream = new FileInputStream(DefaultLauncherConstants.pathToOsmFile);
+			f = DefaultLauncherConstants.pathToOsmFile;
 		} else {
-			stream = new FileInputStream(DefaultLauncherConstants.pathToOsmBz2File);
+			f = DefaultLauncherConstants.pathToOsmBz2File;
+		}
+		long st = System.currentTimeMillis();
+		
+		Region country;
+		if(parseOSM){
+			country = readCountry(f);
+		} else {
+			country = new Region(null);
+			country.setStorage(new OsmBaseStorage());
+		}
+		
+       
+        OsmExtractionUI ui = new OsmExtractionUI(country);
+        ui.runUI();
+        
+		List<Long> interestedObjects = new ArrayList<Long>();
+//		MapUtils.addIdsToList(places, interestedObjects);
+//		MapUtils.addIdsToList(amenities, interestedObjects);
+		MapUtils.addIdsToList(waysManager.getAllObjects(), interestedObjects);
+//		MapUtils.addIdsToList(buildings, interestedObjects);
+		if (DefaultLauncherConstants.writeTestOsmFile != null) {
+			OSMStorageWriter writer = new OSMStorageWriter(country.getStorage().getRegisteredEntities());
+			OutputStream output = new FileOutputStream(DefaultLauncherConstants.writeTestOsmFile);
+			if (DefaultLauncherConstants.writeTestOsmFile.endsWith(".bz2")) {
+				output.write('B');
+				output.write('Z');
+				output = new CBZip2OutputStream(output);
+			}
+			
+			writer.saveStorage(output, interestedObjects, false);
+			output.close();
+		}
+        
+        System.out.println();
+		System.out.println("USED Memory " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1e6);
+		System.out.println("TIME : " + (System.currentTimeMillis() - st));
+	}
+
+	
+	public Region readCountry(String path) throws IOException, SAXException{
+		InputStream stream = new FileInputStream(path);
+		long st = System.currentTimeMillis();
+		if(path.endsWith(".bz2")){
 			if (stream.read() != 'B' || stream.read() != 'Z')
 				throw new RuntimeException(
 						"The source stream must start with the characters BZ if it is to be read as a BZip2 stream.");
 			else
-				stream = new CBZip2InputStream(stream);
+				stream = new CBZip2InputStream(stream);	
 		}
-		
-		
-		System.out.println("USED Memory " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())/1e6);
-		long st = System.currentTimeMillis();
 		
 
 		// preloaded data
-		final List<Node> places = new ArrayList<Node>();
-		final List<Entity> buildings = new ArrayList<Entity>();
-		final List<Amenity> amenities = new ArrayList<Amenity>();
+		places = new ArrayList<Node>();
+		buildings = new ArrayList<Entity>();
+		amenities = new ArrayList<Amenity>();
 		// highways count
-		final List<Way> mapWays = new ArrayList<Way>();
+		mapWays = new ArrayList<Way>();
 		
 		OsmBaseStorage storage = new OsmBaseStorage(){
 			@Override
@@ -117,6 +161,7 @@ public class DataExtraction  {
 			
 			@Override
 			public boolean acceptNodeToLoad(Node n) {
+				// TODO accept amenity for way! hospital, university, parking, fast_food...
 				if(Amenity.isAmenity(n)){
 					amenities.add(new Amenity(n));
 				}
@@ -143,16 +188,13 @@ public class DataExtraction  {
 			}
 		};
 		
-		
 
-		if (parseOSM) {
-			storage.parseOSM(stream);
-		}
-        
-        System.out.println(System.currentTimeMillis() - st);
+		storage.parseOSM(stream);
+        System.out.println("File parsed : " +(System.currentTimeMillis() - st));
         
         // 1. found towns !
         Region country = new Region(null);
+        country.setStorage(storage);
         for (Node s : places) {
         	String place = s.getTag(OSMTagKey.PLACE);
         	if(place == null){
@@ -188,45 +230,16 @@ public class DataExtraction  {
         }
         
         
-        DataTileManager<LatLon> waysManager = new DataTileManager<LatLon>();
+        waysManager = new DataTileManager<Way>();
         for (Way w : mapWays) {
-			for (Node n : w.getNodes()) {
-				if(n != null){
-					LatLon latLon = n.getLatLon();
-					waysManager.registerObject(latLon.getLatitude(), latLon.getLongitude(), latLon);
-				}
+        	if (w.getTag(OSMTagKey.NAME) != null) {
+				LatLon latLon = MapUtils.getWeightCenterForNodes(w.getNodes());
+				waysManager.registerObject(latLon.getLatitude(), latLon.getLongitude(), w);
 			}
 		}
-       
-        OsmExtractionUI ui = new OsmExtractionUI(country);
-        ui.runUI();
+        /// way with name : МЗОР, ул. ..., 
         
-		List<Long> interestedObjects = new ArrayList<Long>();
-//		MapUtils.addIdsToList(places, interestedObjects);
-		for(Amenity a : amenities){
-			interestedObjects.add(a.getNode().getId());
-		}
-//		MapUtils.addIdsToList(mapWays, interestedObjects);
-//		MapUtils.addIdsToList(buildings, interestedObjects);
-		if (DefaultLauncherConstants.writeTestOsmFile != null) {
-			OSMStorageWriter writer = new OSMStorageWriter(storage.getRegisteredEntities());
-			OutputStream output = new FileOutputStream(DefaultLauncherConstants.writeTestOsmFile);
-			output.write('B');
-			output.write('Z');
-			output = new CBZip2OutputStream(output);
-			
-			writer.saveStorage(output, interestedObjects, true);
-			output.close();
-		}
-        
-        System.out.println();
-		System.out.println("USED Memory " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1e6);
-		System.out.println("TIME : " + (System.currentTimeMillis() - st));
+        return country;
 	}
 	
-	
-	///////////////////////////////////////////
-	// 2. Showing UI
-	
-
 }
