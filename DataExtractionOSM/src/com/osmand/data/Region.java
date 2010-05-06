@@ -13,11 +13,14 @@ import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 import com.osmand.osm.Node;
 import com.osmand.osm.OSMSettings.OSMTagKey;
+import com.osmand.osm.io.OsmBaseStorage;
 
 public class Region {
 	private Entity entity;
 	
 	private DataTileManager<Amenity> amenities = new DataTileManager<Amenity>();
+	
+	private OsmBaseStorage storage;
 	
 	private Map<CityType, Collection<City>> cities = new HashMap<CityType, Collection<City>>();
 	{
@@ -31,6 +34,14 @@ public class Region {
 		this.entity = entity;
 	}
 	
+	
+	public OsmBaseStorage getStorage() {
+		return storage;
+	}
+	
+	public void setStorage(OsmBaseStorage storage) {
+		this.storage = storage;
+	}
 	
 	public void setEntity(Entity e){
 		this.entity = e;

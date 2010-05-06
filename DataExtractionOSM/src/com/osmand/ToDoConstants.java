@@ -9,10 +9,6 @@ package com.osmand;
  */
 public class ToDoConstants {
 	
-	public int SAVE_SETTINGS_IN_ANDROID_BETWEEN_SESSION = 2;
-	
-	// First of all switch off gps listener should be implemented
-	public int IMPLEMENT_ON_STOP_RESUME_ACTIVITY = 3;
 	
 	// OsmandMapTileView.java have problem with class loading (LogFactory, MapTileDownloader) - 
 	// it is not editable in editor ?
@@ -20,7 +16,6 @@ public class ToDoConstants {
 	
 	// common parts : work with cache on file system & in memory
 	public int EXTRACT_COMMON_PARTS_FROM_MAPPANEL_AND_OSMMAPVIEW = 5;
-
 	
 	/**
 	 * Write activity to show something about authors / donation ....

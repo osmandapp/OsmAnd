@@ -43,11 +43,11 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	/**
 	 * zoom level
 	 */
-	private int zoom = DefaultLauncherConstants.MAP_startMapZoom;
+	private int zoom = 3;
 	
-	private double longitude = DefaultLauncherConstants.MAP_startMapLongitude;
+	private double longitude = 0d;
 
-	private double latitude = DefaultLauncherConstants.MAP_startMapLatitude;
+	private double latitude = 0d;
 	
 	// name of source map 
 	private ITileSource map = null;
@@ -231,7 +231,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 	
 	public void prepareImage() {
-		if (OsmandSettings.useInternetToDownloadTiles) {
+		if (OsmandSettings.isUsingInternetToDownloadTiles(getContext())) {
 			downloader.refuseAllPreviousRequests();
 		}
 		int width = getWidth();
@@ -251,7 +251,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 					for (int i = 0; i * tileSize + startingX < width; i++) {
 						for (int j = 0; j * tileSize + startingY < height; j++) {
 							ResourceManager mgr = ResourceManager.getResourceManager();
-							Bitmap bmp = mgr.getTileImageForMapAsync(map, xTileLeft + i, yTileUp + j, zoom, OsmandSettings.useInternetToDownloadTiles);
+							Bitmap bmp = mgr.getTileImageForMapAsync(map, xTileLeft + i, yTileUp + j, zoom, OsmandSettings.isUsingInternetToDownloadTiles(getContext()));
 							if (bmp == null) {
 								drawEmptyTile(canvas, i * tileSize + startingX, j * tileSize + startingY);
 							} else {

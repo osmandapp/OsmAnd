@@ -4,9 +4,12 @@ import java.text.MessageFormat;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,13 +30,16 @@ import com.osmand.views.POIMapLayer;
 import com.osmand.views.PointLocationLayer;
 
 public class MapActivity extends Activity implements LocationListener, IMapLocationListener {
+	
+	private static final String KEY_LAST_LAT = "KEY_LAST_LAT"; 
+	private static final String KEY_LAST_LON = "KEY_LAST_LON";
+	private static final String KEY_LAST_ZOOM = "KEY_LAST_ZOOM";
+	
     /** Called when the activity is first created. */
 	private OsmandMapTileView mapView;
 	
 	private boolean linkLocationWithMap = true; 
 	
-	private Location lastKnownLocation = null;
-
 	private ImageButton backToLocation;
 
 	private ImageButton backToMenu;
@@ -41,6 +47,11 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	private PointLocationLayer locationLayer;
 	
 	private POIMapLayer poiMapLayer;
+	
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		
+	}
+	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +70,20 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		mapView.addLayer(poiMapLayer);
 		locationLayer = new PointLocationLayer();
 		mapView.addLayer(locationLayer);
+		
+		SharedPreferences prefs = getPreferences(MODE_WORLD_READABLE);
+		if(prefs != null && prefs.contains(KEY_LAST_LAT)){
+			mapView.setLatLon(prefs.getFloat(KEY_LAST_LAT, 0f), prefs.getFloat(KEY_LAST_LON, 0f));
+			mapView.setZoom(prefs.getInt(KEY_LAST_ZOOM, 3));
+		} else {
+			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+			Location location = service.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+			if(location != null){
+				mapView.setLatLon(location.getLatitude(), location.getLongitude());
+				mapView.setZoom(14);
+			}
+		}
+		
 		
 		
 		ZoomControls zoomControls = (ZoomControls) findViewById(R.id.ZoomControls01);
@@ -83,7 +108,8 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 				if(!linkLocationWithMap){
 					linkLocationWithMap = true;
 					backToLocation.setVisibility(View.INVISIBLE);
-					if(lastKnownLocation != null){
+					if(locationLayer.getLastKnownLocation() != null){
+						Location lastKnownLocation = locationLayer.getLastKnownLocation();
 						mapView.setLatLon(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
 					}
 				}
@@ -93,35 +119,40 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		
 		
 		backToMenu = (ImageButton)findViewById(R.id.BackToMenu);
-		backToMenu.setOnClickListener(new OnClickListener(){
+		backToMenu.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-		           Intent intent = new Intent();
-	                setResult(RESULT_OK, intent);
-	                finish();
+				Intent intent = new Intent();
+				setResult(RESULT_OK, intent);
+				finish();
+			}
+		});
+	}
+    
+    public void setLocation(Location location){
+    	locationLayer.setLastKnownLocation(location);
+    	if (location != null) {
+			if (linkLocationWithMap) {
+				mapView.setLatLon(location.getLatitude(), location.getLongitude());
+			} 
+		} else {
+			if(!linkLocationWithMap){
+				backToLocation.setVisibility(View.VISIBLE);
 			}
 			
-		});
-			
-		
-	}
+		}
+    }
     
 
 
 	@Override
 	public void onLocationChanged(Location location) {
-		lastKnownLocation = location;
-		if(linkLocationWithMap){
-			mapView.setLatLon(location.getLatitude(), location.getLongitude());
-			locationLayer.setLastKnownLocation(lastKnownLocation);
-		}
-		
+		setLocation(location);
 	}
 
 	@Override
 	public void onProviderDisabled(String provider) {
-		// TODO when provider disabled reset lastKnownLocation!
-		
+		setLocation(null);
 	}
 
 	@Override
@@ -130,33 +161,34 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
-		// TODO when provider disabled reset lastKnownLocation!
-	}
-	
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		// TODO Auto-generated method stub
-		super.onSaveInstanceState(outState);
+		if(LocationProvider.OUT_OF_SERVICE == status){
+			setLocation(null);
+		}
 	}
 	
 	
 	@Override
 	protected void onPause() {
+		super.onPause();
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		service.removeUpdates(this);
-		// TODO switch off gps
-		super.onPause();
+		SharedPreferences prefs = getPreferences(MODE_WORLD_READABLE);
+		Editor edit = prefs.edit();
+		edit.putFloat(KEY_LAST_LAT, (float) mapView.getLatitude());
+		edit.putFloat(KEY_LAST_LON, (float) mapView.getLongitude());
+		edit.putInt(KEY_LAST_ZOOM, mapView.getZoom());
+		edit.commit();
+		
 	}
 	
 	@Override
 	protected void onResume() {
-		// TODO switch on gps
 		super.onResume();
-		if(mapView.getMap() != OsmandSettings.tileSource){
-			mapView.setMap(OsmandSettings.tileSource);
+		if(mapView.getMap() != OsmandSettings.getMapTileSource(this)){
+			mapView.setMap(OsmandSettings.getMapTileSource(this));
 		}
-		if(mapView.getLayers().contains(poiMapLayer) != OsmandSettings.showPoiOverMap){
-			if(OsmandSettings.showPoiOverMap){
+		if(mapView.getLayers().contains(poiMapLayer) != OsmandSettings.isShowingPoiOverMap(this)){
+			if(OsmandSettings.isShowingPoiOverMap(this)){
 				mapView.addLayer(poiMapLayer);
 			} else {
 				mapView.removeLayer(poiMapLayer);
@@ -178,9 +210,17 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	@Override
 	public void locationChanged(double newLatitude, double newLongitude, Object source) {
 		// when user start dragging 
-		if(lastKnownLocation != null){
+		if(locationLayer.getLastKnownLocation() != null){
 			linkLocationWithMap = false;
-			backToLocation.setVisibility(View.VISIBLE);
+			if (backToLocation.getVisibility() != View.VISIBLE) {
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						backToLocation.setVisibility(View.VISIBLE);
+					}
+				});
+			}
+			
 		}
 	}
 	
@@ -192,13 +232,13 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-    	if(item.getItemId() == R.id.map_show_location){
-    		float f=  (Runtime.getRuntime().totalMemory())/ 1e6f;
-    		String text = MessageFormat.format("Latitude : {0}, longitude : {1}, zoom : {2}, memory : {3}", mapView.getLatitude(), 
-    				mapView.getLongitude(), mapView.getZoom(), f);
-    		Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-    		return true;
-    	} else if (item.getItemId() == R.id.map_show_settings) {
+    	if (item.getItemId() == R.id.map_show_location) {
+			float f = (Runtime.getRuntime().totalMemory()) / 1e6f;
+			String text = MessageFormat.format("Latitude : {0}, longitude : {1}, zoom : {2}, memory : {3}", mapView.getLatitude(), mapView
+					.getLongitude(), mapView.getZoom(), f);
+			Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+			return true;
+		} else if (item.getItemId() == R.id.map_show_settings) {
     		final Intent settings = new Intent(MapActivity.this, SettingsActivity.class);
 			startActivity(settings);
     		return true;
