@@ -2,28 +2,26 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" android:orientation="vertical"
-	android:layout_height="fill_parent">
-	<ProgressBar android:id="@+id/ProgressBar01"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:layout_gravity="top|right"></ProgressBar>
-	<TextView android:id="@+id/EmptyLable01" android:layout_width="wrap_content"
-		android:layout_height="wrap_content"></TextView>
+	android:layout_height="fill_parent" android:background="@color/menu_background">
+	<ProgressBar android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_gravity="top|right" android:id="@+id/LoadProgressBar" ></ProgressBar>
+	
 	<Button android:layout_height="wrap_content"
 		android:layout_gravity="center" android:id="@+id/MapButton"
-		android:text="@string/map_Button" android:layout_width="fill_parent"></Button>
-	<TextView android:id="@+id/EmptyLable02" android:layout_width="wrap_content"
-		android:layout_height="wrap_content"></TextView>
+		android:text="@string/map_Button" android:layout_width="200px" android:layout_marginTop="5px"></Button>
+	
 	<Button android:layout_height="wrap_content"
 		android:layout_gravity="center" android:id="@+id/SettingsButton"
-		android:text="@string/settings_Button" android:layout_width="fill_parent"></Button>
+		android:text="@string/settings_Button" android:layout_width="200px" android:layout_marginTop="15px"></Button>
 
 
-	<FrameLayout android:id="@+id/FrameLayout01"
+	<Button android:layout_height="wrap_content" android:id="@+id/SearchButton" android:text="@string/search_button" android:layout_width="200px" android:layout_gravity="center_horizontal" android:layout_marginTop="15px"></Button><FrameLayout android:id="@+id/FrameLayout01"
 		android:layout_height="fill_parent" android:layout_width="fill_parent">
 		<Button android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:layout_gravity="bottom|left"
-			android:text="@string/exit_Button" android:id="@+id/ExitButton"></Button>
+			android:id="@+id/ExitButton" android:background="@drawable/exit"></Button>
 	</FrameLayout>
+
 
 
 
