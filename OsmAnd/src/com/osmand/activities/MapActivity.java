@@ -22,10 +22,9 @@ import com.osmand.IMapLocationListener;
 import com.osmand.OsmandSettings;
 import com.osmand.R;
 import com.osmand.ResourceManager;
-import com.osmand.osm.MapUtils;
 import com.osmand.views.OsmandMapTileView;
 import com.osmand.views.POIMapLayer;
-import com.osmand.views.PointOfView;
+import com.osmand.views.PointLocationLayer;
 
 public class MapActivity extends Activity implements LocationListener, IMapLocationListener {
     /** Called when the activity is first created. */
@@ -39,7 +38,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 
 	private ImageButton backToMenu;
 	
-	private PointOfView pointOfView;
+	private PointLocationLayer locationLayer;
 	
 	private POIMapLayer poiMapLayer;
 	
@@ -58,6 +57,8 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		poiMapLayer = new POIMapLayer();
 		poiMapLayer.setNodeManager(ResourceManager.getResourceManager().getPoiIndex());
 		mapView.addLayer(poiMapLayer);
+		locationLayer = new PointLocationLayer();
+		mapView.addLayer(locationLayer);
 		
 		
 		ZoomControls zoomControls = (ZoomControls) findViewById(R.id.ZoomControls01);
@@ -73,8 +74,6 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 				mapView.setZoom(mapView.getZoom() - 1);
 			}
 		});
-		
-		pointOfView = (PointOfView)findViewById(R.id.PointOfView);
 		
 		backToLocation = (ImageButton)findViewById(R.id.BackToLocation);
 		backToLocation.setVisibility(linkLocationWithMap ? View.INVISIBLE : View.VISIBLE);
@@ -104,10 +103,6 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			
 		});
 			
-		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-		service.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
-		
-		
 		
 	}
     
@@ -118,8 +113,9 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		lastKnownLocation = location;
 		if(linkLocationWithMap){
 			mapView.setLatLon(location.getLatitude(), location.getLongitude());
-		} 
-		validatePointOfView();
+			locationLayer.setLastKnownLocation(lastKnownLocation);
+		}
+		
 	}
 
 	@Override
@@ -137,32 +133,6 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		// TODO when provider disabled reset lastKnownLocation!
 	}
 	
-	public void validatePointOfView(){
-		if(lastKnownLocation == null){
-			if(pointOfView.isVisible()){
-				pointOfView.setLocationX(-1);
-				pointOfView.setLocationY(-1);
-				pointOfView.setAreaRadius(0);
-				pointOfView.invalidate();
-			}
-		} else {
-			int newX = MapUtils.getPixelShiftX(mapView.getZoom(), 
-					lastKnownLocation.getLongitude(), mapView.getLongitude(), mapView.getTileSize()) + 
-					mapView.getWidth()/2;
-			int newY = MapUtils.getPixelShiftY(mapView.getZoom(), 
-					lastKnownLocation.getLatitude(), mapView.getLatitude() , mapView.getTileSize()) + 
-					mapView.getHeight()/2;
-			// TODO 	specify bearing!
-			int radius = MapUtils.getLengthXFromMeters(mapView.getZoom(), mapView.getLatitude(), mapView.getLongitude(), 
-					lastKnownLocation.getAccuracy(), mapView.getTileSize(), mapView.getWidth());
-			
-			pointOfView.setLocationX(newX);
-			pointOfView.setLocationY(newY);
-			pointOfView.setAreaRadius(radius);
-			pointOfView.invalidate();
-		}
-	}
-	
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		// TODO Auto-generated method stub
@@ -172,6 +142,8 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	
 	@Override
 	protected void onPause() {
+		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+		service.removeUpdates(this);
 		// TODO switch off gps
 		super.onPause();
 	}
@@ -190,6 +162,8 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 				mapView.removeLayer(poiMapLayer);
 			}
 		}
+		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+		service.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 0, this);
 	}
 	
 	
@@ -208,7 +182,6 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			linkLocationWithMap = false;
 			backToLocation.setVisibility(View.VISIBLE);
 		}
-		validatePointOfView();
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu) {

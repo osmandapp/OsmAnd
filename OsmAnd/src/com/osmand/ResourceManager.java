@@ -163,7 +163,7 @@ public class ResourceManager {
 			onLowMemory();
 		}
 		
-		if (!downloader.isFileCurrentlyDownloaded(en)) {
+		if (!downloader.isFileCurrentlyDownloaded(en) && req.dirWithTiles.canRead()) {
 			if (en.exists()) {
 				long time = System.currentTimeMillis();
 				cacheOfImages.put(req.fileToLoad, BitmapFactory.decodeFile(en.getAbsolutePath()));

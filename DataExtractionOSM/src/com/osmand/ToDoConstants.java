@@ -22,13 +22,22 @@ public class ToDoConstants {
 	public int EXTRACT_COMMON_PARTS_FROM_MAPPANEL_AND_OSMMAPVIEW = 5;
 
 	
-	public int REVISE_MAP_ACTIVITY_HOLD_ALL_ZOOM_LATLON_IN_ONEPLACE = 6;
-	
-	
 	/**
 	 * Write activity to show something about authors / donation ....
 	 */
 	public int DESCRIBE_ABOUT_AUTHORS = 8;
+	
+	// TODO see all calculations x, y for layers & for MapView
+	
+	//// TODO for releasing version
+	// 1. POI SEARCH NEAR TO YOU
+	// 2. FIX BACK TO your location & gps & point of view (may be compass)
+	// 3. Save settings between session
+	// 4. Revise UI icons/layout
+	// 5. Fix Java Spring to prepare your data!!! (add progress, import/export data)
+	// 6. Enable city/streets/buildings index
+	// 7. Search for city/streets/buildings! 
+	// -------------------
 	
 
 }
