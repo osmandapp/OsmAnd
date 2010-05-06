@@ -38,6 +38,14 @@ public class DataTileManager<T> {
 		} 
 	}
 	
+	public List<T> getAllObjects(){
+		List<T> l = new ArrayList<T>();
+		for(String s : objects.keySet()){
+			l.addAll(objects.get(s));
+		}
+		return l;
+	}
+	
 	public List<T> getObjects(double latitudeUp, double longitudeUp, double latitudeDown, double longitudeDown) {
 		int tileXUp = (int) MapUtils.getTileNumberX(zoom, longitudeUp);
 		int tileYUp = (int) MapUtils.getTileNumberY(zoom, latitudeUp);
@@ -72,7 +80,7 @@ public class DataTileManager<T> {
 		// go through circle
 		for (int i = 1; i <= depth; i++) {
 
-			// goes à
+			// goes ï¿½
 			for (int j = 0; j <= i; j++) {
 				// left & right
 				int dx = j == 0 ? 0 : -1;
@@ -110,38 +118,6 @@ public class DataTileManager<T> {
 		objects.get(tile).add(object);
 		return tile;
 	}
-	
-	
-	
-	// testing way to search
-	public static void print(int x, int y){
-		System.out.println(x + (y-1)*5);
-	}
-	
-	public static void main(String[] args) {
-		int tileX = 3; 
-		int tileY = 3;
-		int depth = 3;
-		for(int i=1; i<=depth; i++){
-			
-			// goes à
-			for(int j=0; j<=i; j++){
-				// left & right
-				int dx = j==0 ? 0 : -1;
-				for(; dx < 1 || (j < i && dx == 1); dx +=2){
-					// north
-					print(tileX + dx * j, tileY + i);
-					// east
-					print(tileX + i, tileY - dx *j);
-					// south
-					print(tileX - dx * j, tileY - i);
-					// west
-					print(tileX - i, tileY + dx *j);
-				}
-			}
-		}
-	}
-	
 	
 	
 

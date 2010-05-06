@@ -1,4 +1,4 @@
-package com.osmand;
+package com.osmand.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -33,7 +33,10 @@ import javax.swing.UIManager;
 
 import org.apache.commons.logging.Log;
 
-import com.osmand.DataExtraction.ExitListener;
+import com.osmand.DefaultLauncherConstants;
+import com.osmand.IMapLocationListener;
+import com.osmand.LogUtil;
+import com.osmand.MapTileDownloader;
 import com.osmand.MapTileDownloader.DownloadRequest;
 import com.osmand.MapTileDownloader.IMapDownloaderCallback;
 import com.osmand.data.DataTileManager;
@@ -77,7 +80,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		}
 		
 		
-	    frame.addWindowListener(new ExitListener());
+	    frame.addWindowListener(new OsmExtractionUI.ExitListener());
 	    Container content = frame.getContentPane();
 	    
 	    MapPanel panel = new MapPanel(new File(DefaultLauncherConstants.pathToDirWithTiles));

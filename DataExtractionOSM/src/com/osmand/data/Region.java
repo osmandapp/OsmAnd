@@ -91,6 +91,10 @@ public class Region {
 		return amenities.getClosestObjects(latitude, longitude, 2);
 	}
 	
+	public DataTileManager<Amenity> getAmenityManager(){
+		return amenities;
+	}
+	
 	public void registerAmenity(Amenity a){
 		amenities.registerObject(a.getNode().getLatitude(), a.getNode().getLongitude(), a);
 	}
