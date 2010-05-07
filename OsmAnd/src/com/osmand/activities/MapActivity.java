@@ -11,6 +11,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -47,6 +49,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	private PointLocationLayer locationLayer;
 	
 	private POIMapLayer poiMapLayer;
+	private WakeLock wakeLock;
 	
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		
@@ -178,7 +181,10 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		edit.putFloat(KEY_LAST_LON, (float) mapView.getLongitude());
 		edit.putInt(KEY_LAST_ZOOM, mapView.getZoom());
 		edit.commit();
-		
+		if (wakeLock != null) {
+			wakeLock.release();
+			wakeLock = null;
+		}
 	}
 	
 	@Override
@@ -196,6 +202,12 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		}
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		service.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 0, this);
+		
+		if (wakeLock == null) {
+			PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+			wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "com.osmand.map");
+			wakeLock.acquire();
+		}
 	}
 	
 	
