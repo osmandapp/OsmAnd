@@ -19,6 +19,7 @@ import com.osmand.data.Amenity;
 import com.osmand.data.City;
 import com.osmand.data.DataTileManager;
 import com.osmand.data.Region;
+import com.osmand.impl.ConsoleProgressImplementation;
 import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
@@ -102,7 +103,7 @@ public class DataExtraction  {
 		
        
         OsmExtractionUI ui = new OsmExtractionUI(country);
-        ui.runUI();
+        ui.createUI();
         
 		List<Long> interestedObjects = new ArrayList<Long>();
 //		MapUtils.addIdsToList(places, interestedObjects);
@@ -167,8 +168,6 @@ public class DataExtraction  {
 				}
 				if (n.getTag(OSMTagKey.PLACE) != null) {
 					places.add(n);
-					if (places.size() % 500 == 0) System.out.println();
-					System.out.print("-");
 				}
 				
 				return true;
@@ -189,7 +188,7 @@ public class DataExtraction  {
 		};
 		
 
-		storage.parseOSM(stream);
+		storage.parseOSM(stream, new ConsoleProgressImplementation());
         System.out.println("File parsed : " +(System.currentTimeMillis() - st));
         
         // 1. found towns !

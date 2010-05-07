@@ -15,6 +15,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import com.osmand.IProgress;
 import com.osmand.osm.Entity;
 import com.osmand.osm.Node;
 import com.osmand.osm.Relation;
@@ -48,6 +49,10 @@ public class OsmBaseStorage extends DefaultHandler {
 	
 	protected Map<Long, Entity> entities = new LinkedHashMap<Long, Entity>();
 	
+	// this is used to show feedback to user
+	private IProgress progress;
+	private InputStream inputStream;
+	
 	
 	
 	/**
@@ -55,11 +60,20 @@ public class OsmBaseStorage extends DefaultHandler {
 	 * @throws IOException
 	 * @throws SAXException - could be
 	 */
-	public synchronized void parseOSM(InputStream stream) throws IOException, SAXException {
+	public synchronized void parseOSM(InputStream stream, IProgress progress) throws IOException, SAXException {
+		this.inputStream = stream;
+		this.progress = progress;
 		SAXParser parser = initSaxParser();
 		parseStarted = false;
 		entities.clear();
+		if(progress != null){
+			progress.startWork(stream.available());
+		}
+		
 		parser.parse(stream, this);
+		if(progress != null){
+			progress.finishTask();
+		}
 		completeReading();
 	}
 	
@@ -110,7 +124,6 @@ public class OsmBaseStorage extends DefaultHandler {
 	@Override
 	public void startElement(String uri, String localName, String name, Attributes attributes) throws SAXException {
 		name = saxParser.isNamespaceAware() ? localName : name;
-		
 		if(!parseStarted){
 			if(!ELEM_OSM.equals(name) || !supportedVersions.contains(attributes.getValue(ATTR_VERSION))){
 				throw new OsmVersionNotSupported();
@@ -118,6 +131,13 @@ public class OsmBaseStorage extends DefaultHandler {
 			parseStarted = true;
 		}
 		if (currentParsedEntity == null) {
+			if(progress != null && !progress.isIndeterminate()){
+				try {
+					progress.remaining(inputStream.available());
+				} catch (IOException e) {
+					progress.startWork(-1);
+				}
+			}
 			if (ELEM_NODE.equals(name)) {
 				currentParsedEntity = new Node(parseDouble(attributes, ATTR_LAT, 0), parseDouble(attributes, ATTR_LON, 0),
 						parseId(attributes, ATTR_ID, -1));
