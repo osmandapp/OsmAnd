@@ -14,7 +14,6 @@ import org.apache.commons.logging.Log;
 import org.apache.tools.bzip2.CBZip2InputStream;
 import org.xml.sax.SAXException;
 
-import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -192,7 +191,7 @@ public class ResourceManager {
 	
 	
 	// POI INDEX //
-	public void indexingPoi(ProgressDialog dlg){
+	public void indexingPoi(IProgress progress){
 		if (poiIndex == null) {
 			File file = new File(Environment.getExternalStorageDirectory(), POI_PATH);
 			poiIndex = new DataTileManager<Amenity>();
@@ -201,9 +200,6 @@ public class ResourceManager {
 					if (f.getName().endsWith(".bz2") || f.getName().endsWith(".osm")) {
 						if (log.isDebugEnabled()) {
 							log.debug("Starting index POI " + f.getAbsolutePath());
-						}
-						if(dlg != null){
-							dlg.setMessage("Indexing poi " + f.getName());
 						}
 						boolean zipped = f.getName().endsWith(".bz2");
 						InputStream stream = null;
@@ -220,7 +216,10 @@ public class ResourceManager {
 									stream = new CBZip2InputStream(stream);
 								}
 							}
-							storage.parseOSM(stream);
+							if(progress != null){
+								progress.startTask("Indexing poi " + f.getName(), stream.available());
+							}
+							storage.parseOSM(stream, progress);
 							for (Entity e : storage.getRegisteredEntities().values()) {
 								if (e instanceof Node && Amenity.isAmenity((Node) e)) {
 									poiIndex.registerObject(((Node)e).getLatitude(), ((Node)e).getLongitude(), new Amenity((Node) e));

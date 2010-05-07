@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.osmand.ProgressDialogImplementation;
 import com.osmand.R;
 import com.osmand.ResourceManager;
 
@@ -33,10 +34,10 @@ public class MainMenuActivity extends Activity {
 		mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
 		Intent mapIndent = new Intent(MainMenuActivity.this, MapActivity.class);
-		Notification notification = new Notification(R.drawable.icon, "Notify",
+		Notification notification = new Notification(R.drawable.icon, "",
 				System.currentTimeMillis());
 		notification.setLatestEventInfo(MainMenuActivity.this, "OsmAnd",
-				"OsmAnd are running in background", PendingIntent.getActivity(
+				"OsmAnd is running in background", PendingIntent.getActivity(
 						this.getBaseContext(), 0, mapIndent,
 						PendingIntent.FLAG_CANCEL_CURRENT));
 		mNotificationManager.notify(APP_NOTIFICATION_ID, notification);
@@ -68,17 +69,14 @@ public class MainMenuActivity extends Activity {
 				MainMenuActivity.this.finish();
 			}
 		});
-
-		// add notification
-
-		final ProgressDialog dlg = ProgressDialog.show(this, "Loading data",
-				"Reading indices...");
+		
+		final ProgressDialog dlg = ProgressDialog.show(this, "Loading data", "Reading indices...");
+		final ProgressDialogImplementation impl = new ProgressDialogImplementation(dlg);
 		new Thread() {
 			@Override
 			public void run() {
 				try {
-					dlg.setMessage("Indexing poi...");
-					ResourceManager.getResourceManager().indexingPoi(dlg);
+					ResourceManager.getResourceManager().indexingPoi(impl);
 				} finally {
 					dlg.dismiss();
 				}
