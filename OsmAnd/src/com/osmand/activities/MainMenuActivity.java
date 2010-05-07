@@ -1,6 +1,9 @@
 package com.osmand.activities;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +20,8 @@ public class MainMenuActivity extends Activity {
 	private Button showMap;
 	private Button exitButton;
 	private Button settingsButton;
+	private NotificationManager mNotificationManager;
+	private int APP_NOTIFICATION_ID;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +30,23 @@ public class MainMenuActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.menu);
 
+		mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+		Intent mapIndent = new Intent(MainMenuActivity.this, MapActivity.class);
+		Notification notification = new Notification(R.drawable.icon, "Notify",
+				System.currentTimeMillis());
+		notification.setLatestEventInfo(MainMenuActivity.this, "OsmAnd",
+				"OsmAnd are running in background", PendingIntent.getActivity(
+						this.getBaseContext(), 0, mapIndent,
+						PendingIntent.FLAG_CANCEL_CURRENT));
+		mNotificationManager.notify(APP_NOTIFICATION_ID, notification);
+
 		showMap = (Button) findViewById(R.id.MapButton);
 		showMap.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent mapIndent = new Intent(MainMenuActivity.this, MapActivity.class);
+				final Intent mapIndent = new Intent(MainMenuActivity.this,
+						MapActivity.class);
 				startActivityForResult(mapIndent, 0);
 
 			}
@@ -38,7 +55,8 @@ public class MainMenuActivity extends Activity {
 		settingsButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent settings = new Intent(MainMenuActivity.this, SettingsActivity.class);
+				final Intent settings = new Intent(MainMenuActivity.this,
+						SettingsActivity.class);
 				startActivity(settings);
 			}
 		});
@@ -46,12 +64,16 @@ public class MainMenuActivity extends Activity {
 		exitButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				mNotificationManager.cancel(APP_NOTIFICATION_ID);
 				MainMenuActivity.this.finish();
 			}
 		});
 
-		final ProgressDialog dlg = ProgressDialog.show(this, "Loading data", "Reading indices...");
-		new Thread(){
+		// add notification
+
+		final ProgressDialog dlg = ProgressDialog.show(this, "Loading data",
+				"Reading indices...");
+		new Thread() {
 			@Override
 			public void run() {
 				try {
@@ -64,6 +86,5 @@ public class MainMenuActivity extends Activity {
 		}.start();
 
 	}
-
 
 }
