@@ -11,6 +11,8 @@ import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.tools.bzip2.CBZip2InputStream;
 import org.apache.tools.bzip2.CBZip2OutputStream;
 import org.xml.sax.SAXException;
@@ -68,6 +70,7 @@ import com.osmand.swing.OsmExtractionUI;
  *
  */
 public class DataExtraction  {
+	private static final Log log = LogFactory.getLog(DataExtraction.class);
 	
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, XMLStreamException {
 		new DataExtraction().testReadingOsmFile();
@@ -95,7 +98,7 @@ public class DataExtraction  {
 		
 		Region country;
 		if(parseOSM){
-			country = readCountry(f);
+			country = readCountry(f, new ConsoleProgressImplementation());
 		} else {
 			country = new Region(null);
 			country.setStorage(new OsmBaseStorage());
@@ -129,8 +132,9 @@ public class DataExtraction  {
 	}
 
 	
-	public Region readCountry(String path) throws IOException, SAXException{
+	public Region readCountry(String path, IProgress progress) throws IOException, SAXException{
 		InputStream stream = new FileInputStream(path);
+		InputStream streamFile = stream;
 		long st = System.currentTimeMillis();
 		if(path.endsWith(".bz2")){
 			if (stream.read() != 'B' || stream.read() != 'Z')
@@ -140,6 +144,9 @@ public class DataExtraction  {
 				stream = new CBZip2InputStream(stream);	
 		}
 		
+		if(progress != null){
+			progress.startTask("Loading file " + path, -1);
+		}
 
 		// preloaded data
 		places = new ArrayList<Node>();
@@ -188,8 +195,10 @@ public class DataExtraction  {
 		};
 		
 
-		storage.parseOSM(stream, new ConsoleProgressImplementation());
-        System.out.println("File parsed : " +(System.currentTimeMillis() - st));
+		storage.parseOSM(stream, progress, streamFile);
+		if (log.isDebugEnabled()) {
+			log.debug("File parsed : " + (System.currentTimeMillis() - st));
+		}
         
         // 1. found towns !
         Region country = new Region(null);

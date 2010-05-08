@@ -59,6 +59,7 @@ public class Amenity {
 		prebuiltMap.put("dentist", AmenityType.HEALTHCARE);
 		prebuiltMap.put("doctors", AmenityType.HEALTHCARE);
 		prebuiltMap.put("veterinary", AmenityType.HEALTHCARE);
+		prebuiltMap.put("first_aid", AmenityType.HEALTHCARE);
 		
 		prebuiltMap.put("architect_office", AmenityType.ENTERTAINMENT);
 		prebuiltMap.put("arts_centre", AmenityType.ENTERTAINMENT);

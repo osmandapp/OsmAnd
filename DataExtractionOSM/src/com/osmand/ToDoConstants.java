@@ -31,8 +31,16 @@ public class ToDoConstants {
 	// 4. Revise UI icons/layout
 	// 5. Fix Java Spring to prepare your data!!! (add progress, import/export data)
 	// 6. Enable city/streets/buildings index
-	// 7. Search for city/streets/buildings! 
+	// 7. Search for city/streets/buildings!
+	// 8. Enable change POI directly on map
 	// -------------------
 	
+	
+	/// SWING version : 
+	// TODO : 
+	// 1. save preferences ? where?
+	// 2. specify area to download tiles ()
+	// 3. implement mouse wheel to zoom (add zoom buttons)
+	// 4. download tiles without using dir tiles
 
 }
