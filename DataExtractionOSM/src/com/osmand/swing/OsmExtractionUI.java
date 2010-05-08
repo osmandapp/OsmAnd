@@ -12,6 +12,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -67,17 +68,17 @@ public class OsmExtractionUI implements IMapLocationListener {
 	private DefaultMutableTreeNode amenitiesTree;
 	private JTree treePlaces;
 	private JList searchList;
-
-	private Region region;
-
 	private JFrame frame;
-
-	private JTextField searchTextField; 
+	private JTextField searchTextField;
+	
+	private Region region;
+	private File workingDir;
 	
 	public OsmExtractionUI(final Region r){
 		this.region = r;
 		createUI();
 		setRegion(r);
+		workingDir = new File(DefaultLauncherConstants.pathToWorkingDir);
 	}
 	
 	public static void main(String[] args) {
@@ -86,7 +87,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 	}
 	
 	public void setRegion(Region region){
-		if(this.region == region){
+		if (this.region == region) {
 			return;
 		}
 		this.region = region;
@@ -94,29 +95,33 @@ public class OsmExtractionUI implements IMapLocationListener {
 		amenitiesTree = new DataExtractionTreeNode("Amenities", region);
 		amenitiesTree.add(new DataExtractionTreeNode("closest", region));
 		root.add(amenitiesTree);
-		
-		for(CityType t : CityType.values()){
-			DefaultMutableTreeNode cityTree = new DataExtractionTreeNode(t.toString(), t);
-			root.add(cityTree);
-			for(City ct : region.getCitiesByType(t)){
-				DefaultMutableTreeNode cityNodeTree = new DataExtractionTreeNode(ct.getName(), ct);
-				cityTree.add(cityNodeTree);
-				
-				for(Street str : ct.getStreets()){
-					DefaultMutableTreeNode strTree = new DataExtractionTreeNode(str.getName(), str);
-					cityNodeTree.add(strTree);
-					for(Entity e : str.getBuildings()){
-						DefaultMutableTreeNode building = new DataExtractionTreeNode(e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER), e);
-						strTree.add(building);
-						
+
+		if (region != null) {
+			for (CityType t : CityType.values()) {
+				DefaultMutableTreeNode cityTree = new DataExtractionTreeNode(t.toString(), t);
+				root.add(cityTree);
+				for (City ct : region.getCitiesByType(t)) {
+					DefaultMutableTreeNode cityNodeTree = new DataExtractionTreeNode(ct.getName(), ct);
+					cityTree.add(cityNodeTree);
+
+					for (Street str : ct.getStreets()) {
+						DefaultMutableTreeNode strTree = new DataExtractionTreeNode(str.getName(), str);
+						cityNodeTree.add(strTree);
+						for (Entity e : str.getBuildings()) {
+							DefaultMutableTreeNode building = new DataExtractionTreeNode(e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER), e);
+							strTree.add(building);
+
+						}
 					}
 				}
 			}
 		}
 		DataTileManager<LatLon> amenitiesManager = new DataTileManager<LatLon>();
-	    for(Amenity a : region.getAmenityManager().getAllObjects()){
-	    	amenitiesManager.registerObject(a.getNode().getLatitude(), a.getNode().getLongitude(), a.getNode().getLatLon());
-	    }
+		if (region != null) {
+			for (Amenity a : region.getAmenityManager().getAllObjects()) {
+				amenitiesManager.registerObject(a.getNode().getLatitude(), a.getNode().getLongitude(), a.getNode().getLatLon());
+			}
+		}
 	    mapPanel.setPoints(amenitiesManager);
 		updateListCities(region, searchTextField.getText(), searchList);
 		mapPanel.updateUI();
@@ -269,7 +274,28 @@ public class OsmExtractionUI implements IMapLocationListener {
 		bar.add(menu);
 		MenuItem loadFile = new MenuItem("Load file...");
 		menu.add(loadFile);
+		MenuItem specifyWorkingDir = new MenuItem("Specify working directory...");
+		menu.add(specifyWorkingDir);
+		
 		bar.add(MapPanel.getMenuToChooseSource(mapPanel));
+		
+		specifyWorkingDir.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fc = new JFileChooser();
+		        fc.setDialogTitle("Choose working directory");
+		        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		        if(workingDir != null){
+		        	fc.setCurrentDirectory(workingDir);
+		        }
+		        if(fc.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION && fc.getSelectedFile() != null && 
+		        		fc.getSelectedFile().isDirectory()){
+		        	workingDir = fc.getSelectedFile();
+		        }
+			}
+			
+		});
 		
 		loadFile.addActionListener(new ActionListener(){
 
@@ -279,7 +305,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 		        fc.setDialogTitle("Choose osm file");
 		        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		        fc.setAcceptAllFileFilterUsed(true);
-		        fc.setCurrentDirectory(new File(DefaultLauncherConstants.pathToDirWithTiles));
+		        fc.setCurrentDirectory(new File(DefaultLauncherConstants.pathToTestDataDir));
 		        //System.out.println("opening fc for extension " + extension);
 		        fc.setFileFilter(new FileFilter(){
 
@@ -296,22 +322,40 @@ public class OsmExtractionUI implements IMapLocationListener {
 
 		        int answer = fc.showOpenDialog(frame) ;
 		        if (answer == JFileChooser.APPROVE_OPTION && fc.getSelectedFile() != null){
-		        	try {
-						Region region = new DataExtraction().readCountry(fc.getSelectedFile().getAbsolutePath());
-						setRegion(region);
-					} catch (IOException e1) {
-						// TODO
-						e1.printStackTrace();
-					} catch (SAXException e1) {
-						// TODO
-						e1.printStackTrace();
-					}
-		        	
+		        	loadCountry(fc.getSelectedFile());
 		        }
 			}
 			
 		});
-		
+	}
+	
+	public void loadCountry(final File f){
+		try {
+    		final ProgressDialog dlg = new ProgressDialog(frame);
+    		dlg.setRunnable(new Runnable(){
+
+				@Override
+				public void run() {
+					Region res;
+					try {
+						res = new DataExtraction().readCountry(f.getAbsolutePath(), dlg);
+					} catch (IOException e) {
+						throw new IllegalArgumentException(e);
+					} catch (SAXException e) {
+						throw new IllegalStateException(e);
+					}
+					dlg.setResult(res);
+				}
+    		});
+			Region region = (Region) dlg.run();
+			setRegion(region);
+		} catch (InterruptedException e1) {
+			// TODO
+			e1.printStackTrace();
+		} catch (InvocationTargetException e1) {
+			// TODO
+			e1.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -376,17 +420,16 @@ public class OsmExtractionUI implements IMapLocationListener {
 		}
 	}
 	
-	public void updateListCities(Region r, String text, JList jList){
-		
+	public void updateListCities(Region r, String text, JList jList) {
 		Collection<City> city;
-		if(r == null){
-			city =  Collections.emptyList();
+		if (r == null) {
+			city = Collections.emptyList();
 		} else {
 			city = r.getSuggestedCities(text, 100);
 		}
 		City[] names = new City[city.size()];
-		int i=0;
-		for(City c : city){
+		int i = 0;
+		for (City c : city) {
 			names[i++] = c;
 		}
 		jList.setListData(names);

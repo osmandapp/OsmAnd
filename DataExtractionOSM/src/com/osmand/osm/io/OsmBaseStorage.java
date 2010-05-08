@@ -52,22 +52,22 @@ public class OsmBaseStorage extends DefaultHandler {
 	// this is used to show feedback to user
 	private IProgress progress;
 	private InputStream inputStream;
+	private InputStream streamForProgress;
 	
 	
 	
-	/**
-	 * @param stream
-	 * @throws IOException
-	 * @throws SAXException - could be
-	 */
-	public synchronized void parseOSM(InputStream stream, IProgress progress) throws IOException, SAXException {
+	public synchronized void parseOSM(InputStream stream, IProgress progress, InputStream streamForProgress) throws IOException, SAXException {
 		this.inputStream = stream;
 		this.progress = progress;
+		this.streamForProgress = streamForProgress;
+		if(streamForProgress == null){
+			streamForProgress = inputStream;
+		}
 		SAXParser parser = initSaxParser();
 		parseStarted = false;
 		entities.clear();
 		if(progress != null){
-			progress.startWork(stream.available());
+			progress.startWork(streamForProgress.available());
 		}
 		
 		parser.parse(stream, this);
@@ -75,6 +75,16 @@ public class OsmBaseStorage extends DefaultHandler {
 			progress.finishTask();
 		}
 		completeReading();
+	}
+	
+	/**
+	 * @param stream
+	 * @throws IOException
+	 * @throws SAXException - could be
+	 */
+	public synchronized void parseOSM(InputStream stream, IProgress progress) throws IOException, SAXException {
+		parseOSM(stream, progress, null);
+		
 	}
 	
 	private SAXParser saxParser;
@@ -130,10 +140,10 @@ public class OsmBaseStorage extends DefaultHandler {
 			}
 			parseStarted = true;
 		}
-		if (currentParsedEntity == null) {
+		if (currentParsedEntity == null && streamForProgress != null) {
 			if(progress != null && !progress.isIndeterminate()){
 				try {
-					progress.remaining(inputStream.available());
+					progress.remaining(streamForProgress.available());
 				} catch (IOException e) {
 					progress.startWork(-1);
 				}
