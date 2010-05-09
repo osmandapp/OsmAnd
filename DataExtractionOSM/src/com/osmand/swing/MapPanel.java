@@ -9,6 +9,7 @@ import java.awt.Menu;
 import java.awt.MenuBar;
 import java.awt.MenuItem;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -16,6 +17,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -27,6 +29,7 @@ import java.util.Map;
 
 import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
@@ -116,6 +119,9 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 	private List<IMapLocationListener> listeners = new ArrayList<IMapLocationListener>();
 	
+	private MapSelectionArea selectionArea = new MapSelectionArea();
+	
+	
 	// cached data to draw image
 	private Image[][] images;
 	private int xStartingImage = 0;
@@ -136,9 +142,13 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 				prepareImage();
 			}
 		});
+		setOpaque(false);
 		MapMouseAdapter mouse = new MapMouseAdapter();
 		addMouseListener(mouse);
 		addMouseMotionListener(mouse);
+		addMouseWheelListener(mouse);
+		
+		addZoomButtons();
 	}
 
 	
@@ -187,13 +197,22 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 			g.drawOval(p.x, p.y, 3, 3);
 			g.fillOval(p.x, p.y, 3, 3);
 		}
-
+		
+		if(selectionArea.isVisible()){
+			g.setColor(new Color(0, 0, 230, 50));
+			Rectangle r = selectionArea.getSelectedArea();
+			g.fillRect(r.x, r.y, r.width, r.height);
+		}
+		
+		g.setColor(Color.black);
 		String s = MessageFormat.format("Lat : {0}, lon : {1}, zoom : {2}", latitude, longitude, zoom);
 		g.drawString(s, 5, 20);
 
 		g.fillOval(getWidth() / 2 - 2, getHeight() / 2 - 2, 4, 4);
 		g.drawOval(getWidth() / 2 - 2, getHeight() / 2 - 2, 4, 4);
 		g.drawOval(getWidth() / 2 - 5, getHeight() / 2 - 5, 10, 10);
+		
+		super.paintComponent(g);
 	}
 	
 	
@@ -331,6 +350,9 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 	
 	public void setZoom(int zoom){
+		if(map != null && (zoom > map.getMaximumZoomSupported() || zoom < map.getMinimumZoomSupported())){
+			return;
+		}
 		this.zoom = zoom;
 		prepareImage();
 	}
@@ -352,6 +374,10 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 	public int getZoom() {
 		return zoom;
+	}
+	
+	public MapSelectionArea getSelectionArea() {
+		return selectionArea;
 	}
 	
 	public ITileSource getMap(){
@@ -434,10 +460,97 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 	public void setPoints(DataTileManager<LatLon> points) {
 		this.points = points;
+		prepareImage();
+	}
+	
+	public void addZoomButtons(){
+		JButton zoomIn = new JButton("+");
+		JButton zoomOut = new JButton("-");
+		zoomIn.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setZoom(getZoom() + 1);
+			}
+		});
+		zoomOut.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setZoom(getZoom() - 1);
+			}
+		});
+		add(zoomIn);
+		add(zoomOut);
+	}
+	
+	public class MapSelectionArea {
+		
+		private double lat1;
+		private double lon1;
+		private double lat2;
+		private double lon2;
+		
+		
+		public double getLat1() {
+			return lat1;
+		}
+		
+		public double getLat2() {
+			return lat2;
+		}
+		
+		public double getLon1() {
+			return lon1;
+		}
+		
+		public double getLon2() {
+			return lon2;
+		}
+		
+		public Rectangle getSelectedArea(){
+			Rectangle r = new Rectangle();
+			r.x = getWidth() / 2 + MapUtils.getPixelShiftX(zoom, lon1, getLongitude(), getTileSize());
+			r.y = getHeight() / 2 + MapUtils.getPixelShiftY(zoom, lat1, getLatitude(), getTileSize());
+			r.width = getWidth() / 2 + MapUtils.getPixelShiftX(zoom, lon2, getLongitude(), getTileSize()) - r.x;
+			r.height = getHeight() / 2 + MapUtils.getPixelShiftY(zoom, lat2, getLatitude(), getTileSize()) - r.y;
+			return r;
+		}
+		
+		public boolean isVisible(){
+			if(lat1 == lat2 || lon1 == lon2){
+				return false;
+			}
+			Rectangle area = getSelectedArea();
+			return area.width > 4 && area.height > 4;
+		}
+		
+		
+		public void setSelectedArea(int x1, int y1, int x2, int y2){
+			int rx1 = Math.min(x1, x2);
+			int rx2 = Math.max(x1, x2);
+			int ry1 = Math.min(y1, y2);
+			int ry2 = Math.max(y1, y2);
+			int zoom = getZoom();
+			double xTile = getXTile();
+			double yTile = getYTile();
+			int wid = getWidth();
+			int h = getHeight();
+			int tileSize = getTileSize();
+			
+			double xTile1 = xTile - (wid / 2 - rx1) / ((double)tileSize);
+			double yTile1 = yTile - (h / 2 - ry1) / ((double)tileSize);
+			double xTile2 = xTile - (wid / 2 - rx2) / ((double)tileSize);
+			double yTile2 = yTile - (h / 2 - ry2) / ((double)tileSize);
+			lat1 = MapUtils.getLatitudeFromTile(zoom, yTile1);
+			lat2 = MapUtils.getLatitudeFromTile(zoom, yTile2);
+			lon1 = MapUtils.getLongitudeFromTile(zoom, xTile1);
+			lon2 = MapUtils.getLongitudeFromTile(zoom, xTile2);
+		}
+		
 	}
 	
 	public class MapMouseAdapter extends MouseAdapter {
 		private Point startDragging = null;
+		private Point startSelecting = null;
 		
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -462,14 +575,29 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 					startDragging = e.getPoint();
 				}
 			}
+			if(startSelecting != null){
+				selectionArea.setSelectedArea(startSelecting.x, startSelecting.y, e.getPoint().x, e.getPoint().y);
+				updateUI();
+			}
 		}
 		
+		@Override
+		public void mouseWheelMoved(MouseWheelEvent e) {
+			if(e.getWheelRotation() < 0){
+				setZoom(getZoom() + 1);
+			} else if(e.getWheelRotation() > 0) {
+				setZoom(getZoom() - 1);
+			}
+			super.mouseWheelMoved(e);
+		}
 		@Override
 		public void mousePressed(MouseEvent e) {
 			if(e.getButton() == MouseEvent.BUTTON3){
 				if(startDragging == null){
 					startDragging  = e.getPoint();
 				}
+			} else if(e.getButton() == MouseEvent.BUTTON1){
+				startSelecting = e.getPoint();
 			}
 		}
 		@Override
@@ -480,6 +608,14 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 					fireMapLocationListeners();
 					startDragging = null;
 				}
+			}
+			if(e.getButton() == MouseEvent.BUTTON1){
+				if(startSelecting != null){
+					selectionArea.setSelectedArea(startSelecting.x, startSelecting.y, e.getPoint().x, e.getPoint().y);
+					startSelecting = null;
+					updateUI();
+				}
+				
 			}
 			super.mouseReleased(e);
 		}

@@ -130,6 +130,11 @@ public class Amenity {
 		return getType().toString() +" : " + getSubType() + " " +(name == null ? node.getId() : name);
 	}
 	
+	public String getStringWithoutType(){
+		String name = node.getTag(OSMTagKey.NAME);
+		return getSubType() + " " +(name == null ? node.getId() : name);
+	}
+	
 	@Override
 	public String toString() {
 		return getSimpleFormat();
