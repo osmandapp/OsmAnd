@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.SwingUtilities;
 
 import com.osmand.IProgress;
 
@@ -45,39 +46,38 @@ public class ProgressDialog extends JDialog implements IProgress {
         initDialog();
     }
     
-    public Object run()  throws InvocationTargetException, InterruptedException {
-    	finished = false;
-    	result = null;
-        new WorkerThread().start();
-        synchronized (this) {
-			if(!finished){
-				setVisible(true);
-			}
+    public Object run() throws InvocationTargetException, InterruptedException {
+		finished = false;
+		result = null;
+		new WorkerThread().start();
+		setVisible(true);
+		if (!finished) {
+			
 		}
-        if(exception != null){
-        	throw exception;
-        }
-        return result;
-    }
+		if (exception != null) {
+			throw exception;
+		}
+		return result;
+	}
     
     private class WorkerThread extends Thread {
     	
     	@Override
     	public void run() {
-    		
     		try {
-    			if(run != null){
-    				run.run();
-    			}
-    		} catch(RuntimeException e){
-    			exception = new InvocationTargetException(e);
-    		} finally {
-    			synchronized (this) {
-    				finished = true;
-    				setVisible(false);
+				if (run != null) {
+					run.run();
 				}
-    			
-    		}
+			} catch (RuntimeException e) {
+				exception = new InvocationTargetException(e);
+			} finally {
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						setVisible(false);
+					}
+				});
+			}
     	}
     	
     }
@@ -119,7 +119,7 @@ public class ProgressDialog extends JDialog implements IProgress {
 	
 	private void updateMessage() {
 		if(!progressBar.isIndeterminate()){
-			label.setText(taskName + String.format("\t%.1f %%", progressBar.getValue() * 100f / ((float) progressBar.getMaximum())));
+			label.setText(taskName + String.format("\t %.1f %%", progressBar.getValue() * 100f / ((float) progressBar.getMaximum())));
 		}
 	}
 
@@ -170,14 +170,23 @@ public class ProgressDialog extends JDialog implements IProgress {
 		if(work == 0){
 			work = 1;
 		}
-		if(work != -1){
-			progressBar.setMinimum(0);
-			progressBar.setMaximum(work);
-			progressBar.setValue(0);
-			progressBar.setIndeterminate(false);
-		} else {
-			progressBar.setIndeterminate(true);
-		}
+		final int w = work;
+		SwingUtilities.invokeLater(new Runnable(){
+
+			@Override
+			public void run() {
+				if(w != -1){
+					progressBar.setMinimum(0);
+					progressBar.setMaximum(w);
+					progressBar.setValue(0);
+					progressBar.setIndeterminate(false);
+				} else {
+					progressBar.setIndeterminate(true);
+				}
+				
+			} 
+		});
+		
 		deltaWork = 0;
 	}
 }
