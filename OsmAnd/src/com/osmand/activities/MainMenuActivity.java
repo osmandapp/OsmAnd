@@ -69,7 +69,7 @@ public class MainMenuActivity extends Activity {
 				MainMenuActivity.this.finish();
 			}
 		});
-		
+		// TODO exception!!! has leaked window !
 		final ProgressDialog dlg = ProgressDialog.show(this, "Loading data", "Reading indices...");
 		final ProgressDialogImplementation impl = new ProgressDialogImplementation(dlg);
 		new Thread() {

@@ -251,7 +251,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 					try {
 						cache.put(file, ImageIO.read(en));
 						if (log.isDebugEnabled()) {
-							log.debug("Loaded file : " + file + " " + -(time - System.currentTimeMillis()) + " ms");
+							log.debug("Loaded file : " + file + " " + (System.currentTimeMillis() - time) + " ms");
 						}
 					} catch (IIOException e) {
 						log.error("Eror reading png " + x + " " + y + " zoom : " + zoom, e);

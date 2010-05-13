@@ -33,16 +33,10 @@ public class ProgressDialog extends JDialog implements IProgress {
 	private String taskName;
 	private int deltaWork;
 
-	
-
-    public ProgressDialog(Component parent, Runnable run){
-    	this(parent);
-		this.run = run;
-        
-    }
     
-    public ProgressDialog(Component parent){
+    public ProgressDialog(Component parent, String name){
     	super(JOptionPane.getFrameForComponent(parent), true);
+    	setTitle(name);
         initDialog();
     }
     

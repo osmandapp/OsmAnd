@@ -47,12 +47,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xml.sax.SAXException;
 
+import com.osmand.Algoritms;
 import com.osmand.DataExtraction;
 import com.osmand.DefaultLauncherConstants;
 import com.osmand.IMapLocationListener;
 import com.osmand.data.Amenity;
 import com.osmand.data.City;
-import com.osmand.data.DataTileManager;
 import com.osmand.data.Region;
 import com.osmand.data.Street;
 import com.osmand.data.Amenity.AmenityType;
@@ -78,36 +78,41 @@ public class OsmExtractionUI implements IMapLocationListener {
 	private DefaultMutableTreeNode amenitiesTree;
 	private JTree treePlaces;
 	private JList searchList;
-	private JFrame frame;
 	private JTextField searchTextField;
+	
+	private JFrame frame;
+	private JLabel statusBarLabel;
 	
 	private Region region;
 	private File workingDir;
+	private JLabel workingDirLabel;
+	private JButton generateDataButton;
+	
 	
 	public OsmExtractionUI(final Region r){
 		this.region = r;
-		createUI();
-		setRegion(r);
 		workingDir = new File(DefaultLauncherConstants.pathToWorkingDir);
+		createUI();
+		setRegion(r, "Region");
 	}
 
 	
-	public void setRegion(Region region){
+	public void setRegion(Region region, String name){
 		if (this.region == region) {
 			return;
 		}
 		this.region = region;
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode();
-		amenitiesTree = new DataExtractionTreeNode("Amenities", region);
-		amenitiesTree.add(new DataExtractionTreeNode("closest", region));
+		DefaultMutableTreeNode root = new DataExtractionTreeNode(name, region);
+		amenitiesTree = new DataExtractionTreeNode("Closest amenities", region);
+		amenitiesTree.add(new DataExtractionTreeNode("First 15", region));
 		for(AmenityType type : AmenityType.values()){
-			amenitiesTree.add(new DataExtractionTreeNode(type.toString().toLowerCase(), type));
+			amenitiesTree.add(new DataExtractionTreeNode(Algoritms.capitalizeFirstLetterAndLowercase(type.toString()), type));
 		}
 		root.add(amenitiesTree);
 
 		if (region != null) {
 			for (CityType t : CityType.values()) {
-				DefaultMutableTreeNode cityTree = new DataExtractionTreeNode(t.toString(), t);
+				DefaultMutableTreeNode cityTree = new DataExtractionTreeNode(Algoritms.capitalizeFirstLetterAndLowercase(t.toString()), t);
 				root.add(cityTree);
 				for (City ct : region.getCitiesByType(t)) {
 					DefaultMutableTreeNode cityNodeTree = new DataExtractionTreeNode(ct.getName(), ct);
@@ -125,15 +130,19 @@ public class OsmExtractionUI implements IMapLocationListener {
 				}
 			}
 		}
-		DataTileManager<LatLon> amenitiesManager = new DataTileManager<LatLon>();
-		if (region != null) {
-			for (Amenity a : region.getAmenityManager().getAllObjects()) {
-				amenitiesManager.registerObject(a.getNode().getLatitude(), a.getNode().getLongitude(), a.getNode().getLatLon());
-			}
+		
+		// amenities could be displayed as dots
+//		DataTileManager<LatLon> amenitiesManager = new DataTileManager<LatLon>();
+//		if (region != null) {
+//			for (Amenity a : region.getAmenityManager().getAllObjects()) {
+//				amenitiesManager.registerObject(a.getNode().getLatitude(), a.getNode().getLongitude(), a.getNode().getLatLon());
+//			}
+//		}
+//	    mapPanel.setPoints(amenitiesManager);
+	    if (searchList != null) {
+			updateListCities(region, searchTextField.getText(), searchList);
 		}
-	    mapPanel.setPoints(amenitiesManager);
-		updateListCities(region, searchTextField.getText(), searchList);
-		mapPanel.updateUI();
+		mapPanel.repaint();
 		treePlaces.setModel(new DefaultTreeModel(root, false));
 	}
         
@@ -144,17 +153,104 @@ public class OsmExtractionUI implements IMapLocationListener {
 	    try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Can't set look and feel", e);
 		}
 		
 		
 	    frame.addWindowListener(new ExitListener());
 	    Container content = frame.getContentPane();
 	    frame.setFocusable(true);
-	    
+	    statusBarLabel = new JLabel();
+	    content.add(statusBarLabel, BorderLayout.SOUTH);
 	    treePlaces = new JTree();
 	    treePlaces.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Region"), false));
-	    searchList = new JList();
+	    	    
+	    JSplitPane panelForTreeAndMap = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JScrollPane(treePlaces), mapPanel);
+	    panelForTreeAndMap.setResizeWeight(0.2);
+	    mapPanel.setFocusable(true);
+	    mapPanel.addMapLocationListener(this);
+	    
+	    
+	    createButtonsBar(content);
+//	    createCitySearchPanel(content);
+	    if(searchList != null){
+	    	JSplitPane pane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, new JScrollPane(searchList), panelForTreeAndMap);
+	    	pane.setResizeWeight(0.2);
+	    	content.add(pane, BorderLayout.CENTER);
+	    } else {
+	    	content.add(panelForTreeAndMap, BorderLayout.CENTER);
+	    }
+	    
+	    
+	    treePlaces.addTreeSelectionListener(new TreeSelectionListener(){
+			@Override
+			public void valueChanged(TreeSelectionEvent e) {
+				if (e.getPath() != null) {
+ 					if (e.getPath().getLastPathComponent() instanceof DefaultMutableTreeNode) {
+						Object o = ((DefaultMutableTreeNode) e.getPath().getLastPathComponent()).getUserObject();
+
+						if (o instanceof City) {
+							City c = (City) o;
+							mapPanel.setLatLon(c.getNode().getLatitude(), c.getNode().getLongitude());
+							mapPanel.requestFocus();
+						}
+						if (o instanceof Amenity) {
+							Amenity c = (Amenity) o;
+							mapPanel.setLatLon(c.getNode().getLatitude(), c.getNode().getLongitude());
+							mapPanel.requestFocus();
+						}
+
+						if (o instanceof Entity) {
+							Entity c = (Entity) o;
+							if (c instanceof Node) {
+								mapPanel.setLatLon(((Node) c).getLatitude(), ((Node) c).getLongitude());
+								mapPanel.requestFocus();
+							} else {
+								DefaultMutableTreeNode n = (DefaultMutableTreeNode) e.getPath().getPathComponent(
+										e.getPath().getPathCount() - 2);
+								if (n.getUserObject() instanceof Street) {
+									Street str = (Street) n.getUserObject();
+									LatLon l = str.getLocationBuilding(c);
+									mapPanel.setLatLon(l.getLatitude(), l.getLongitude());
+									mapPanel.requestFocus();
+								}
+							}
+						}
+					}
+				}
+				
+			}
+	    });
+	}
+	
+	public void createButtonsBar(Container content){
+		JPanel panel = new JPanel(new BorderLayout());
+		content.add(panel, BorderLayout.NORTH);
+		
+		generateDataButton = new JButton();
+		generateDataButton.setText("Generate data ");
+		panel.add(generateDataButton);
+		generateDataButton.setEnabled(workingDir != null);
+		
+		workingDirLabel = new JLabel();
+		workingDirLabel.setText(workingDir == null ? "<working dir unspecified>" : workingDir.getAbsolutePath());
+		panel.add(workingDirLabel);
+	}
+
+	public void createCitySearchPanel(Container content){
+		JPanel panel = new JPanel(new BorderLayout());
+	    searchTextField = new JTextField();
+	    final JButton button = new JButton();
+	    button.setText("Set town");
+
+	    
+	    panel.add(searchTextField, BorderLayout.CENTER);
+	    panel.add(button, BorderLayout.WEST);
+	    
+	    content.add(panel, BorderLayout.NORTH);
+	    
+		
+		searchList = new JList();
 	    searchList.setCellRenderer(new DefaultListCellRenderer(){
 			private static final long serialVersionUID = 4661949460526837891L;
 
@@ -170,32 +266,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 	    		return this;
 	    	}
 	    });
-	    
-	    JSplitPane panelForTreeAndImage = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JScrollPane(treePlaces), mapPanel);
-	    panelForTreeAndImage.setResizeWeight(0.2);
-	    mapPanel.setFocusable(true);
-	    mapPanel.addMapLocationListener(this);
-	    
-	    
-	    
-	    JSplitPane pane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, new JScrollPane(searchList), panelForTreeAndImage);
-	    pane.setResizeWeight(0.2);
-	    content.add(pane, BorderLayout.CENTER);
-	    
-	    final JLabel label = new JLabel();
-	    content.add(label, BorderLayout.SOUTH);
 
-	    JPanel panel = new JPanel(new BorderLayout());
-	    searchTextField = new JTextField();
-	    final JButton button = new JButton();
-	    button.setText("Set town");
-
-	    
-	    panel.add(searchTextField, BorderLayout.CENTER);
-	    panel.add(button, BorderLayout.WEST);
-	    
-	    content.add(panel, BorderLayout.NORTH);
-	    
 	    
 	    updateListCities(region, searchTextField.getText(), searchList);
 	    searchTextField.getDocument().addUndoableEditListener(new UndoableEditListener(){
@@ -221,60 +292,14 @@ public class OsmExtractionUI implements IMapLocationListener {
 					if(selectedCity != null){
 						text += " distance " + MapUtils.getDistance(selectedCity.getNode(), node);
 					}
-					label.setText(text);
+					statusBarLabel.setText(text);
 					mapPanel.setLatLon(node.getLatitude(), node.getLongitude());
 				} else {
 					String text = selectedCity == null ? "" : selectedCity.getName();
-					label.setText(text);
+					statusBarLabel.setText(text);
 				}
-				
-			}
-	    	
-	    });
-	    treePlaces.addTreeSelectionListener(new TreeSelectionListener(){
-			@Override
-			public void valueChanged(TreeSelectionEvent e) {
-				if (e.getPath() != null) {
- 					if (e.getPath().getLastPathComponent() instanceof DefaultMutableTreeNode) {
-						Object o = ((DefaultMutableTreeNode) e.getPath().getLastPathComponent()).getUserObject();
-
-						if (o instanceof City) {
-							City c = (City) o;
-							mapPanel.setLatLon(c.getNode().getLatitude(), c.getNode().getLongitude());
-							mapPanel.requestFocus();
-						}
-						if (o instanceof Amenity) {
-							Amenity c = (Amenity) o;
-							mapPanel.setLatLon(c.getNode().getLatitude(), c.getNode().getLongitude());
-							mapPanel.requestFocus();
-						}
-
-						if (o instanceof Entity) {
-							Entity c = (Entity) o;
-							if (c instanceof Node) {
-								mapPanel.setLatLon(((Node) c).getLatitude(), ((Node) c).getLongitude());
-//								mapPanel.requestFocus();
-							} else {
-								DefaultMutableTreeNode n = (DefaultMutableTreeNode) e.getPath().getPathComponent(
-										e.getPath().getPathCount() - 2);
-								if (n.getUserObject() instanceof Street) {
-									Street str = (Street) n.getUserObject();
-									LatLon l = str.getLocationBuilding(c);
-									mapPanel.setLatLon(l.getLatitude(), l.getLongitude());
-									mapPanel.requestFocus();
-								}
-							}
-						}
-					}
-				}
-				
 			}
 	    });
-	    
-	    MenuBar bar = new MenuBar();
-	    fillMenuWithActions(bar);
-	    
-	    frame.setMenuBar(bar);
 	}
 	
 	public void runUI(){
@@ -285,12 +310,22 @@ public class OsmExtractionUI implements IMapLocationListener {
 	public void fillMenuWithActions(MenuBar bar){
 		Menu menu = new Menu("File");
 		bar.add(menu);
-		MenuItem loadFile = new MenuItem("Load file...");
+		MenuItem loadFile = new MenuItem("Load osm file...");
 		menu.add(loadFile);
 		MenuItem specifyWorkingDir = new MenuItem("Specify working directory...");
 		menu.add(specifyWorkingDir);
+		menu.addSeparator();
+		MenuItem exitMenu= new MenuItem("Exit");
+		menu.add(exitMenu);
 		
 		bar.add(MapPanel.getMenuToChooseSource(mapPanel));
+		
+		exitMenu.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+			}
+		});
 		
 		specifyWorkingDir.addActionListener(new ActionListener(){
 
@@ -305,6 +340,8 @@ public class OsmExtractionUI implements IMapLocationListener {
 		        if(fc.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION && fc.getSelectedFile() != null && 
 		        		fc.getSelectedFile().isDirectory()){
 		        	workingDir = fc.getSelectedFile();
+		        	workingDirLabel.setText(fc.getSelectedFile().getAbsolutePath());
+		        	generateDataButton.setEnabled(true);
 		        }
 			}
 			
@@ -344,7 +381,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 	
 	public void loadCountry(final File f){
 		try {
-    		final ProgressDialog dlg = new ProgressDialog(frame);
+    		final ProgressDialog dlg = new ProgressDialog(frame, "Loading osm file");
     		dlg.setRunnable(new Runnable(){
 
 				@Override
@@ -362,7 +399,8 @@ public class OsmExtractionUI implements IMapLocationListener {
     		});
 			Region region = (Region) dlg.run();
 			if(region != null){
-				setRegion(region);
+				int i = f.getName().indexOf('.');
+				setRegion(region, Algoritms.capitalizeFirstLetterAndLowercase(f.getName().substring(0, i)));
 				frame.setTitle("OsmAnd Map Creator - " + f.getName());
 			} else {
 				//frame.setTitle("OsmAnd Map Creator");
