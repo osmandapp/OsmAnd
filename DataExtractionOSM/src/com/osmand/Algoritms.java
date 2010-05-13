@@ -20,6 +20,16 @@ public class Algoritms {
 	}
 	
 	
+	public static String capitalizeFirstLetterAndLowercase(String s) {
+		if (s != null && s.length() > 1) {
+			// not very efficient algorithm
+			return Character.toUpperCase(s.charAt(0)) + s.substring(1).toLowerCase();
+		} else {
+			return s;
+		}
+	}
+	
+	
 	public static boolean objectEquals(Object a, Object b){
 		if(a == null){
 			return b == null;

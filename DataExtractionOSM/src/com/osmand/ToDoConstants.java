@@ -27,12 +27,14 @@ public class ToDoConstants {
 	//// TODO for releasing version
 	// 1. POI SEARCH NEAR TO YOU
 	// 2. FIX BACK TO your location & gps & point of view (may be compass)
-	// 3. Save settings between session
-	// 4. Revise UI icons/layout
-	// 5. Fix Java Spring to prepare your data!!! (add progress, import/export data)
-	// 6. Enable city/streets/buildings index
+	// 3. Revise UI icons/layout
+	// 4. Fix Java Spring to prepare your data!!! (add progress, import/export data)
+	// 5. Enable city/streets/buildings index
 	// 7. Search for city/streets/buildings!
 	// 8. Enable change POI directly on map
+	// 9. Log to see when exception occured(android)
+	// 10. Specify auto-rotating map (compass).
+	// 11. Print out additional info speed, altitude, number of satellites
 	// -------------------
 	
 	
@@ -40,7 +42,7 @@ public class ToDoConstants {
 	// TODO : 
 	// 1. save preferences ? where?
 	// 2. specify area to download tiles ()
-	// 3. implement mouse wheel to zoom (add zoom buttons)
-	// 4. download tiles without using dir tiles
+	// 3. download tiles without using dir tiles
+	// 4. Config file log & see log from file
 
 }

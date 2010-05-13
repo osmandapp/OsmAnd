@@ -3,6 +3,7 @@ package com.osmand.data;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.osmand.Algoritms;
 import com.osmand.osm.Node;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 
@@ -127,7 +128,8 @@ public class Amenity {
 
 	public String getSimpleFormat(){
 		String name = node.getTag(OSMTagKey.NAME);
-		return getType().toString() +" : " + getSubType() + " " +(name == null ? node.getId() : name);
+		return Algoritms.capitalizeFirstLetterAndLowercase(getType().toString()) +
+					" : " + getSubType() + " " +(name == null ? node.getId() : name);
 	}
 	
 	public String getStringWithoutType(){

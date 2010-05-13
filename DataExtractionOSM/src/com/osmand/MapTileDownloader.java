@@ -161,7 +161,7 @@ public class MapTileDownloader {
 					}
 				} catch (UnknownHostException e) {
 					currentErrors++;
-					log.error("UnknownHostException, cannot download tile " + request.url, e);
+					log.error("UnknownHostException, cannot download tile " + request.url + " " + e.getMessage());
 				} catch (IOException e) {
 					currentErrors++;
 					log.warn("Cannot download tile : " + request.url, e);
