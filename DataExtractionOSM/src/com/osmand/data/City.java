@@ -39,14 +39,18 @@ public class City {
 		}
 	}
 	
+	public Street registerStreet(String street){
+		if(!streets.containsKey(street)){
+			streets.put(street, new Street(street));
+		}
+		return streets.get(street); 
+	}
+	
 	public Street registerBuilding(LatLon point, Entity e){
 		String number = e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER);
 		String street = e.getTag(OSMTagKey.ADDR_STREET);
 		if( street != null && number != null){
-			if(!streets.containsKey(street)){
-				streets.put(street, new Street(street));
-			}
-			streets.get(street).registerBuilding(point, e);
+			registerStreet(street).registerBuilding(point, e);
 			return streets.get(street);
 		}
 		return null;

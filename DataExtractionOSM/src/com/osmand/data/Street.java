@@ -1,16 +1,20 @@
 package com.osmand.data;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
+import com.osmand.osm.Node;
 
 public class Street {
 	
 	private final String name;
-	private Map<Entity, LatLon> buildings = new HashMap<Entity, LatLon>(); 
+	private Map<Entity, LatLon> buildings = new HashMap<Entity, LatLon>();
+	private List<Node> wayNodes = new ArrayList<Node>(); 
 
 	public Street(String name){
 		this.name = name;
@@ -30,6 +34,10 @@ public class Street {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public List<Node> getWayNodes() {
+		return wayNodes;
 	}
 
 }

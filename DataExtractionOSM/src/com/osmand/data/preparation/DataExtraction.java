@@ -1,4 +1,4 @@
-package com.osmand;
+package com.osmand.data.preparation;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -17,10 +17,13 @@ import org.apache.tools.bzip2.CBZip2InputStream;
 import org.apache.tools.bzip2.CBZip2OutputStream;
 import org.xml.sax.SAXException;
 
+import com.osmand.DefaultLauncherConstants;
+import com.osmand.IProgress;
 import com.osmand.data.Amenity;
 import com.osmand.data.City;
 import com.osmand.data.DataTileManager;
 import com.osmand.data.Region;
+import com.osmand.data.Street;
 import com.osmand.impl.ConsoleProgressImplementation;
 import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
@@ -79,7 +82,7 @@ public class DataExtraction  {
 	
 	private static boolean parseSmallFile = true;
 	private static boolean parseOSM = true;
-	private ArrayList<Way> mapWays;
+	private ArrayList<Way> ways;
 	private ArrayList<Amenity> amenities;
 	private ArrayList<Entity> buildings;
 	private ArrayList<Node> places;
@@ -153,7 +156,7 @@ public class DataExtraction  {
 		buildings = new ArrayList<Entity>();
 		amenities = new ArrayList<Amenity>();
 		// highways count
-		mapWays = new ArrayList<Way>();
+		ways = new ArrayList<Way>();
 		
 		OsmBaseStorage storage = new OsmBaseStorage(){
 			@Override
@@ -187,7 +190,7 @@ public class DataExtraction  {
 			@Override
 			public boolean acceptWayToLoad(Way w) {
 				if (OSMSettings.wayForCar(w.getTag(OSMTagKey.HIGHWAY))) {
-					mapWays.add(w);
+					ways.add(w);
 					return true;
 				}
 				return false;
@@ -239,14 +242,23 @@ public class DataExtraction  {
         
         
         waysManager = new DataTileManager<Way>();
-        for (Way w : mapWays) {
+        for (Way w : ways) {
         	if (w.getTag(OSMTagKey.NAME) != null) {
-				LatLon latLon = MapUtils.getWeightCenterForNodes(w.getNodes());
-				waysManager.registerObject(latLon.getLatitude(), latLon.getLongitude(), w);
+        		String street = w.getTag(OSMTagKey.NAME);
+				LatLon center = MapUtils.getWeightCenterForNodes(w.getNodes());
+				City city = country.getClosestCity(center);
+				if (city != null) {
+					Street str = city.registerStreet(street);
+					for(Node n : w.getNodes()){
+						str.getWayNodes().add(n);
+					}
+				}
+				waysManager.registerObject(center.getLatitude(), center.getLongitude(), w);
 			}
 		}
         /// way with name : МЗОР, ул. ..., 
         
+        country.doDataPreparation();
         return country;
 	}
 	
