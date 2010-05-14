@@ -1,4 +1,4 @@
-package com.osmand;
+package com.osmand.data.preparation;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -15,6 +15,10 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
+
+import com.osmand.Algoritms;
+import com.osmand.DefaultLauncherConstants;
+import com.osmand.LogUtil;
 
 public class MapTileDownloader {
 	

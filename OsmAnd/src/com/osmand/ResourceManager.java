@@ -18,9 +18,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 
-import com.osmand.MapTileDownloader.DownloadRequest;
 import com.osmand.data.Amenity;
 import com.osmand.data.DataTileManager;
+import com.osmand.data.preparation.MapTileDownloader;
+import com.osmand.data.preparation.MapTileDownloader.DownloadRequest;
 import com.osmand.map.ITileSource;
 import com.osmand.osm.Entity;
 import com.osmand.osm.Node;

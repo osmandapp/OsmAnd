@@ -2,6 +2,8 @@ package com.osmand.data;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,9 +22,18 @@ public class Region {
 	
 	private DataTileManager<Amenity> amenities = new DataTileManager<Amenity>();
 	
+	private String name;
+	
 	private OsmBaseStorage storage;
 	
-	private Map<CityType, Collection<City>> cities = new HashMap<CityType, Collection<City>>();
+	private static class CityComparator implements Comparator<City>{
+		@Override
+		public int compare(City o1, City o2) {
+			return o1.getName().compareTo(o2.getName());
+		}
+	} 
+	
+	private Map<CityType, List<City>> cities = new HashMap<CityType, List<City>>();
 	{
 		for(CityType type : CityType.values()){
 			cities.put(type, new ArrayList<City>());
@@ -48,11 +59,33 @@ public class Region {
 	}
 	
 	public String getName(){
+		if(name != null){
+			return name;
+		}
 		return entity == null ? "" : entity.getTag(OSMTagKey.NAME);
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public Collection<City> getCitiesByType(CityType type){
 		return cities.get(type);
+	}
+	
+	public int getCitiesCount(CityType type) {
+		if (type == null) {
+			int am = 0;
+			for (CityType t : cities.keySet()) {
+				am += cities.get(t).size();
+			}
+			return am;
+		} else if (!cities.containsKey(type)) {
+			return 0;
+		} else {
+			return cities.get(type).size();
+		}
+
 	}
 	
 	public Collection<City> getCitiesByName(String name){
@@ -121,6 +154,12 @@ public class Region {
 	}
 	
 	
-	
+	public void doDataPreparation(){
+		CityComparator comp = new CityComparator();
+		for(CityType t : cities.keySet()){
+			Collections.sort(cities.get(t), comp);
+		}
+		
+	}
 
 }

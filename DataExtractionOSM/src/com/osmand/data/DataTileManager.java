@@ -119,6 +119,10 @@ public class DataTileManager<T> {
 		return tile;
 	}
 	
+	public boolean isEmpty(){
+		return objects.isEmpty();
+	}
+	
 	
 
 }

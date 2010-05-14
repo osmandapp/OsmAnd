@@ -5,9 +5,6 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Menu;
-import java.awt.MenuBar;
-import java.awt.MenuItem;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -30,7 +27,10 @@ import java.util.Map;
 import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
@@ -39,10 +39,10 @@ import org.apache.commons.logging.Log;
 import com.osmand.DefaultLauncherConstants;
 import com.osmand.IMapLocationListener;
 import com.osmand.LogUtil;
-import com.osmand.MapTileDownloader;
-import com.osmand.MapTileDownloader.DownloadRequest;
-import com.osmand.MapTileDownloader.IMapDownloaderCallback;
 import com.osmand.data.DataTileManager;
+import com.osmand.data.preparation.MapTileDownloader;
+import com.osmand.data.preparation.MapTileDownloader.DownloadRequest;
+import com.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
 import com.osmand.map.ITileSource;
 import com.osmand.map.TileSourceManager;
 import com.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -55,18 +55,28 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 	protected static final Log log = LogUtil.getLog(MapPanel.class);
 
-	public static Menu getMenuToChooseSource(final MapPanel panel){
-		Menu tiles = new Menu("Source tile");
-		List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
+	public static JMenu getMenuToChooseSource(final MapPanel panel){
+		final JMenu tiles = new JMenu("Source tile");
+		final List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
 		for(final TileSourceTemplate l : list){
-			MenuItem menuItem = new MenuItem(l.getName());
+			JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(l.getName());
 			menuItem.addActionListener(new ActionListener(){
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					for(int i=0; i<tiles.getItemCount(); i++){
+						if(list.get(i).equals(l)){
+							((JCheckBoxMenuItem)tiles.getItem(i)).setSelected(true);
+						} else {
+							((JCheckBoxMenuItem)tiles.getItem(i)).setSelected(false);
+						}
+					}
 					panel.setMapName(l);
 				}
 				
 			});
+			if(l.equals(DefaultLauncherConstants.MAP_defaultTileSource)){
+				menuItem.setSelected(true);
+			}
 			tiles.add(menuItem);
 		}
 		
@@ -90,9 +100,9 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	    
 	    content.add(panel, BorderLayout.CENTER);
 
-	    MenuBar bar = new MenuBar();
+	    JMenuBar bar = new JMenuBar();
 	    bar.add(getMenuToChooseSource(panel));
-	    frame.setMenuBar(bar);
+	    frame.setJMenuBar(bar);
 	    frame.setSize(512, 512);
 	    frame.setVisible(true);
 
