@@ -61,7 +61,7 @@ public class DataIndexBuilder {
 		List<Amenity> list = region.getAmenityManager().getAllObjects();
 		List<Long> interestedObjects = new ArrayList<Long>(list.size());
 		for(Amenity a : list)	{
-			interestedObjects.add(a.getNode().getId());
+			interestedObjects.add(a.getEntity().getId());
 		}
 		OutputStream output = checkFile("POI/"+region.getName()+".osm");
 		try {

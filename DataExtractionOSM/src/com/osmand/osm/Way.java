@@ -67,13 +67,7 @@ public class Way extends Entity {
 		if(nodes == null){
 			return null;
 		}
-		List<LatLon> list = new ArrayList<LatLon>(nodes.size());
-		for(Node n : nodes){
-			if(n != null){
-				list.add(n.getLatLon());
-			}
-		}
-		return MapUtils.getWeightCenter(list);
+		return MapUtils.getWeightCenterForNodes(nodes);
 	}
 	
 	

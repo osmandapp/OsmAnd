@@ -40,9 +40,11 @@ public class ToDoConstants {
 	
 	/// SWING version : 
 	// TODO : 
-	// 1. save preferences ? where?
+	// 1. save preferences ? where? (use internet, default dir save and other...)
 	// 2. specify area to download tiles ()
 	// 3. download tiles without using dir tiles
 	// 4. Config file log & see log from file
+	// 5. specify area to load map (filter for osm loading)
+	// 6. Predefine what should be extracted from osm (building, poi or roads)
 
 }

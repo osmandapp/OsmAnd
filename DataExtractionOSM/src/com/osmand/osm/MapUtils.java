@@ -1,5 +1,6 @@
 package com.osmand.osm;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -14,6 +15,10 @@ import java.util.List;
 public class MapUtils {
 	public static double getDistance(Node e1, Node e2){
 		return getDistance(e1.getLatitude(), e1.getLongitude(), e2.getLatitude(), e2.getLongitude());
+	}
+	
+	public static double getDistance(LatLon l, double latitude, double longitude){
+		return getDistance(l.getLatitude(), l.getLongitude(), latitude, longitude);
 	}
 	
 	public static double getDistance(Node e1, double latitude, double longitude){
@@ -46,7 +51,21 @@ public class MapUtils {
 	public static double getDistance(LatLon l1, LatLon l2){
 		return getDistance(l1, l2);
 	}
-	
+
+	public static LatLon getCenter(Entity e){
+		if(e instanceof Node){
+			return ((Node) e).getLatLon();
+		} else if(e instanceof Way){
+			return getWeightCenterForNodes(((Way) e).getNodes());
+		} else if(e instanceof Relation){
+			List<LatLon> list = new ArrayList<LatLon>();
+			for(Entity fe : ((Relation) e).getMembers(null)){
+				list.add(getCenter(fe));
+			}
+			return getWeightCenter(list);
+		}
+		return null;
+	}
 
 	public static LatLon getWeightCenter(Collection<LatLon> nodes){
 		if(nodes.isEmpty()){

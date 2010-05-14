@@ -1,43 +1,77 @@
 package com.osmand.data;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
+import com.osmand.osm.MapUtils;
 import com.osmand.osm.Node;
+import com.osmand.osm.OSMSettings.OSMTagKey;
 
-public class Street {
+public class Street extends MapObject<Entity> {
 	
 	private final String name;
-	private Map<Entity, LatLon> buildings = new HashMap<Entity, LatLon>();
-	private List<Node> wayNodes = new ArrayList<Node>(); 
+	private List<Building> buildings = new ArrayList<Building>(); 
+	private List<Node> wayNodes = new ArrayList<Node>();
+	private Node center = null;
 
 	public Street(String name){
 		this.name = name;
 	}
 	
-	public void registerBuilding(LatLon point, Entity e){
-		buildings.put(e, point);
+	public void registerBuilding(Entity e){
+		Building building = new Building(e);
+		building.setName(e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER));
+		buildings.add(building);
 	}
 	
-	public Set<Entity> getBuildings() {
-		return buildings.keySet();
-	}
-	
-	public LatLon getLocationBuilding(Entity e){
-		return buildings.get(e);
+	public List<Building> getBuildings() {
+		return buildings;
 	}
 	
 	public String getName() {
 		return name;
 	}
+
+	
+	public LatLon getLocation(){
+		if(center == null){
+			calculateCenter();
+		}
+		return center.getLatLon();
+	}
+	
+	protected void calculateCenter(){
+		if(wayNodes.size() == 1){
+			center = wayNodes.get(0);
+			return;
+		}
+		LatLon c = MapUtils.getWeightCenterForNodes(wayNodes);
+		double dist = Double.POSITIVE_INFINITY;
+		for(Node n : wayNodes){
+			double nd = MapUtils.getDistance(n, c);
+			if(nd < dist){
+				center = n;
+				dist = nd;
+			}
+		}
+	}
+	
 	
 	public List<Node> getWayNodes() {
 		return wayNodes;
+	}
+
+	public void doDataPreparation() {
+		calculateCenter();
+		Collections.sort(buildings);
+	}
+
+	@Override
+	public Entity getEntity() {
+		return center;
 	}
 
 }

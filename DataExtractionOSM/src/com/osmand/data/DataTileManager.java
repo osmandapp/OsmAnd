@@ -1,6 +1,7 @@
 package com.osmand.data;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,10 +27,28 @@ public class DataTileManager<T> {
 	
 	public void setZoom(int zoom) {
 		// TODO !!! it is required to reindex all stored objects
-		if(!objects.isEmpty()){
+		if(!isEmpty()){
 			throw new UnsupportedOperationException();
 		}
 		this.zoom = zoom;
+	}
+	
+	public boolean isEmpty(){
+		for(String s : objects.keySet()){
+			if(!objects.get(s).isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public int getObjectsCount(){
+		int x = 0;
+		for(String s : objects.keySet()){
+			x += objects.get(s).size();
+		}
+		
+		return x;
 	}
 	
 	private void putObjects(int tx, int ty, List<T> r){
@@ -65,7 +84,24 @@ public class DataTileManager<T> {
 	 * returns not exactly sorted list, 
 	 * however the first objects are from closer tile than last
 	 */
-	public List<T> getClosestObjects(double latitude, double longitude, int depth){
+	public List<T> getClosestObjects(double latitude, double longitude, int defaultStep){
+		if(isEmpty()){
+			return Collections.emptyList();
+		}
+		int dp = 1;
+		List<T> l = null;
+		while (l == null || l.isEmpty()) {
+			l = getClosestObjects(latitude, longitude, dp, dp + defaultStep);
+			dp += defaultStep;
+		}
+		return l;
+	}
+	
+	public List<T> getClosestObjects(double latitude, double longitude){
+		return getClosestObjects(latitude, longitude, 3);
+	}
+		
+	public List<T> getClosestObjects(double latitude, double longitude, int startDepth, int depth){
 		int tileX = (int) MapUtils.getTileNumberX(zoom, longitude);
 		int tileY = (int) MapUtils.getTileNumberY(zoom, latitude);
 		List<T> result = new ArrayList<T>();
@@ -78,9 +114,9 @@ public class DataTileManager<T> {
 		// however the simplest way could be to visit row by row & after sort tiles by distance (that's less efficient) 
 		
 		// go through circle
-		for (int i = 1; i <= depth; i++) {
+		for (int i = startDepth; i <= depth; i++) {
 
-			// goes �
+			// goes 
 			for (int j = 0; j <= i; j++) {
 				// left & right
 				int dx = j == 0 ? 0 : -1;
@@ -117,10 +153,6 @@ public class DataTileManager<T> {
 		}
 		objects.get(tile).add(object);
 		return tile;
-	}
-	
-	public boolean isEmpty(){
-		return objects.isEmpty();
 	}
 	
 	

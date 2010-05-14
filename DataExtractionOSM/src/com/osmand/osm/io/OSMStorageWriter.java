@@ -1,5 +1,22 @@
 package com.osmand.osm.io;
 
+import static com.osmand.osm.io.OsmBaseStorage.ATTR_ID;
+import static com.osmand.osm.io.OsmBaseStorage.ATTR_K;
+import static com.osmand.osm.io.OsmBaseStorage.ATTR_LAT;
+import static com.osmand.osm.io.OsmBaseStorage.ATTR_LON;
+import static com.osmand.osm.io.OsmBaseStorage.ATTR_REF;
+import static com.osmand.osm.io.OsmBaseStorage.ATTR_ROLE;
+import static com.osmand.osm.io.OsmBaseStorage.ATTR_TYPE;
+import static com.osmand.osm.io.OsmBaseStorage.ATTR_V;
+import static com.osmand.osm.io.OsmBaseStorage.ATTR_VERSION;
+import static com.osmand.osm.io.OsmBaseStorage.ELEM_MEMBER;
+import static com.osmand.osm.io.OsmBaseStorage.ELEM_ND;
+import static com.osmand.osm.io.OsmBaseStorage.ELEM_NODE;
+import static com.osmand.osm.io.OsmBaseStorage.ELEM_OSM;
+import static com.osmand.osm.io.OsmBaseStorage.ELEM_RELATION;
+import static com.osmand.osm.io.OsmBaseStorage.ELEM_TAG;
+import static com.osmand.osm.io.OsmBaseStorage.ELEM_WAY;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -18,8 +35,6 @@ import com.osmand.osm.Relation;
 import com.osmand.osm.Way;
 import com.sun.org.apache.xerces.internal.impl.PropertyManager;
 import com.sun.xml.internal.stream.writers.XMLStreamWriterImpl;
-
-import static com.osmand.osm.io.OsmBaseStorage.*;
 
 public class OSMStorageWriter {
 
