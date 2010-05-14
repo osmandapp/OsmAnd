@@ -5,11 +5,10 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.osmand.osm.Entity;
-import com.osmand.osm.LatLon;
 import com.osmand.osm.Node;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 
-public class City {
+public class City extends MapObject<Node> {
 	
 	public enum CityType {
 		 CITY(10000), TOWN(5000), VILLAGE(1000), HAMLET(300), SUBURB(300);
@@ -46,27 +45,19 @@ public class City {
 		return streets.get(street); 
 	}
 	
-	public Street registerBuilding(LatLon point, Entity e){
+	public Street registerBuilding(Entity e){
 		String number = e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER);
 		String street = e.getTag(OSMTagKey.ADDR_STREET);
 		if( street != null && number != null){
-			registerStreet(street).registerBuilding(point, e);
+			registerStreet(street).registerBuilding(e);
 			return streets.get(street);
 		}
 		return null;
 	}
 	
 	
-	public String getName(){
-		return el.getTag(OSMTagKey.NAME);
-	}
-	
 	public CityType getType(){
 		return type;
-	}
-	
-	public Node getNode(){
-		return  el;
 	}
 	
 	public Collection<Street> getStreets(){
@@ -74,8 +65,19 @@ public class City {
 	}
 	
 	@Override
+	public Node getEntity() {
+		return el;
+	}
+	
+	@Override
 	public String toString() {
 		return "City [" +type+"] " + getName();
+	}
+	
+	public void doDataPreparation(){
+		for(Street s : getStreets()){
+			s.doDataPreparation();
+		}
 	}
 
 }

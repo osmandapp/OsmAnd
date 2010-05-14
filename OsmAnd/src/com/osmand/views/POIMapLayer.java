@@ -34,9 +34,9 @@ public class POIMapLayer implements OsmandMapLayer {
 			int ey = (int) event.getY();
 			int radius = getRadiusPoi(view.getZoom()) * 3 / 2;
 			for(Amenity n : objects){
-				double tileX = MapUtils.getTileNumberX(view.getZoom(), n.getNode().getLongitude());
+				double tileX = MapUtils.getTileNumberX(view.getZoom(), n.getLocation().getLongitude());
 				int x = (int) ((tileX - xTileLeft) * getTileSize());
-				double tileY = MapUtils.getTileNumberY(view.getZoom(), n.getNode().getLatitude());
+				double tileY = MapUtils.getTileNumberY(view.getZoom(), n.getLocation().getLatitude());
 				int y = (int) ((tileY - yTileUp) * getTileSize());
 				if(Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius){
 					Toast.makeText(view.getContext(), n.getSimpleFormat(), Toast.LENGTH_SHORT).show();
@@ -95,9 +95,9 @@ public class POIMapLayer implements OsmandMapLayer {
 					.getLongitudeFromTile(view.getZoom(), xTileLeft), MapUtils.getLatitudeFromTile(view.getZoom(), yTileDown), MapUtils
 					.getLongitudeFromTile(view.getZoom(), xTileRight));
 			for (Amenity o : objects) {
-				double tileX = MapUtils.getTileNumberX(view.getZoom(), o.getNode().getLongitude());
+				double tileX = MapUtils.getTileNumberX(view.getZoom(), o.getLocation().getLongitude());
 				int x = (int) ((tileX - xTileLeft) * getTileSize());
-				double tileY = MapUtils.getTileNumberY(view.getZoom(), o.getNode().getLatitude());
+				double tileY = MapUtils.getTileNumberY(view.getZoom(), o.getLocation().getLatitude());
 				int y = (int) ((tileY - yTileUp) * getTileSize());
 				canvas.drawCircle(x, y, getRadiusPoi(view.getZoom()), pointUI);
 			}

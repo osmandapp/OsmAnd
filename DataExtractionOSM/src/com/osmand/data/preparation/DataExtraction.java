@@ -214,35 +214,20 @@ public class DataExtraction  {
         	if("country".equals(place)){
         		country.setEntity(s);
         	} else {
-        		City registerCity = country.registerCity(s);
-        		if(registerCity == null){
-        			System.out.println(place + " - " + s.getTag(OSMTagKey.NAME));
-        		}
+        		country.registerCity(s);
         	}
 		}
         
-        // 2. found buildings (index addresses)
-        for(Entity b : buildings){
-        	LatLon center = b.getLatLon();
-        	// TODO first of all tag could be checked NodeUtil.getTag(e, "addr:city")
-        	if(center == null){
-        		// no nodes where loaded for this way
-        	} else {
-				City city = country.getClosestCity(center);
-				if (city != null) {
-					city.registerBuilding(center, b);
-				}
-			}
-        }
         
         
         for(Amenity a: amenities){
         	country.registerAmenity(a);
         }
         
-        
+        progress.startTask("Indexing streets...", ways.size());
         waysManager = new DataTileManager<Way>();
         for (Way w : ways) {
+        	progress.progress(1);
         	if (w.getTag(OSMTagKey.NAME) != null) {
         		String street = w.getTag(OSMTagKey.NAME);
 				LatLon center = MapUtils.getWeightCenterForNodes(w.getNodes());
@@ -256,7 +241,26 @@ public class DataExtraction  {
 				waysManager.registerObject(center.getLatitude(), center.getLongitude(), w);
 			}
 		}
-        /// way with name : МЗОР, ул. ..., 
+        progress.finishTask();
+        /// way with name : МЗОР, ул. ...,
+        
+        
+        // found buildings (index addresses)
+        progress.startTask("Indexing buildings...", buildings.size());
+        for(Entity b : buildings){
+        	LatLon center = b.getLatLon();
+        	progress.progress(1);
+        	// TODO first of all tag could be checked NodeUtil.getTag(e, "addr:city")
+        	if(center == null){
+        		// no nodes where loaded for this way
+        	} else {
+				City city = country.getClosestCity(center);
+				if (city != null) {
+					city.registerBuilding(b);
+				}
+			}
+        }
+        progress.finishTask();
         
         country.doDataPreparation();
         return country;

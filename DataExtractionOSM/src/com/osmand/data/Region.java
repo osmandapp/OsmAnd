@@ -33,8 +33,10 @@ public class Region {
 		}
 	} 
 	
+	private DataTileManager<City> cityManager = new DataTileManager<City>(); 
 	private Map<CityType, List<City>> cities = new HashMap<CityType, List<City>>();
 	{
+		cityManager.setZoom(10);
 		for(CityType type : CityType.values()){
 			cities.put(type, new ArrayList<City>());
 		}
@@ -113,18 +115,16 @@ public class Region {
 		return l;
 	}
 	
-	public City getClosestCity(LatLon point){
+	public City getClosestCity(LatLon point) {
 		City closest = null;
 		double relDist = Double.POSITIVE_INFINITY;
-		for(CityType t : CityType.values()){
-			for(City c : cities.get(t)){
-				double rel = MapUtils.getDistance(c.getNode(), point) / t.getRadius();
-				if(rel < 1) {
-					return c; // we are in that city
-				}
-				if(rel < relDist){
-					closest = c;
-					relDist = rel;
+		for (City c : cityManager.getClosestObjects(point.getLatitude(), point.getLongitude())) {
+			double rel = MapUtils.getDistance(c.getEntity(), point) / c.getType().getRadius();
+			if (rel < relDist) {
+				closest = c;
+				relDist = rel;
+				if(relDist < 0.2d){
+					break;
 				}
 			}
 		}
@@ -132,7 +132,7 @@ public class Region {
 	}
 	
 	public List<Amenity> getClosestAmenities(double latitude, double longitude){
-		return amenities.getClosestObjects(latitude, longitude, 2);
+		return amenities.getClosestObjects(latitude, longitude);
 	}
 	
 	public DataTileManager<Amenity> getAmenityManager(){
@@ -140,13 +140,15 @@ public class Region {
 	}
 	
 	public void registerAmenity(Amenity a){
-		amenities.registerObject(a.getNode().getLatitude(), a.getNode().getLongitude(), a);
+		LatLon location = a.getLocation();
+		amenities.registerObject(location.getLatitude(), location.getLongitude(), a);
 	}
 
 	
 	public City registerCity(Node c){
 		City city = new City(c);
 		if(city.getType() != null && !Algoritms.isEmpty(city.getName())){
+			cityManager.registerObject(c.getLatitude(), c.getLongitude(), city);
 			cities.get(city.getType()).add(city);
 			return city;
 		}
@@ -158,7 +160,11 @@ public class Region {
 		CityComparator comp = new CityComparator();
 		for(CityType t : cities.keySet()){
 			Collections.sort(cities.get(t), comp);
+			for(City c : cities.get(t)){
+				c.doDataPreparation();
+			}
 		}
+		
 		
 	}
 

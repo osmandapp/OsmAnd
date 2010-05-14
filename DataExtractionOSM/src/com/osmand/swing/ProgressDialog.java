@@ -105,8 +105,9 @@ public class ProgressDialog extends JDialog implements IProgress {
 	@Override
 	public void progress(int deltaWork) {
 		this.deltaWork += deltaWork;
-		if(change(progressBar.getValue() + deltaWork)){
-			progressBar.setValue(progressBar.getValue() + deltaWork);
+		if(change(progressBar.getValue() + this.deltaWork)){
+			progressBar.setValue(progressBar.getValue() + this.deltaWork);
+			this.deltaWork = 0;
 			updateMessage();
 		}
 	}

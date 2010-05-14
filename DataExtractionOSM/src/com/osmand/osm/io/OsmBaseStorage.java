@@ -45,14 +45,14 @@ public class OsmBaseStorage extends DefaultHandler {
 	
 	protected Entity currentParsedEntity = null;
 	
-	private boolean parseStarted;
+	protected boolean parseStarted;
 	
 	protected Map<Long, Entity> entities = new LinkedHashMap<Long, Entity>();
 	
 	// this is used to show feedback to user
-	private IProgress progress;
-	private InputStream inputStream;
-	private InputStream streamForProgress;
+	protected IProgress progress;
+	protected InputStream inputStream;
+	protected InputStream streamForProgress;
 	
 	
 	
@@ -87,7 +87,7 @@ public class OsmBaseStorage extends DefaultHandler {
 		
 	}
 	
-	private SAXParser saxParser;
+	protected SAXParser saxParser;
 	public SAXParser initSaxParser(){
 		if(saxParser != null){
 			return saxParser;
@@ -123,22 +123,24 @@ public class OsmBaseStorage extends DefaultHandler {
 		return ret;
 	}
 	
-	private static final Set<String> supportedVersions = new HashSet<String>();
+	protected static final Set<String> supportedVersions = new HashSet<String>();
 	static {
 		supportedVersions.add("0.6");
 		supportedVersions.add("0.5");
 	}
 	
-	
+	protected void initRootElement(String uri, String localName, String name, Attributes attributes) throws OsmVersionNotSupported{
+		if(!ELEM_OSM.equals(name) || !supportedVersions.contains(attributes.getValue(ATTR_VERSION))){
+			throw new OsmVersionNotSupported();
+		}
+		parseStarted = true;	
+	}
 	
 	@Override
 	public void startElement(String uri, String localName, String name, Attributes attributes) throws SAXException {
 		name = saxParser.isNamespaceAware() ? localName : name;
 		if(!parseStarted){
-			if(!ELEM_OSM.equals(name) || !supportedVersions.contains(attributes.getValue(ATTR_VERSION))){
-				throw new OsmVersionNotSupported();
-			}
-			parseStarted = true;
+			initRootElement(uri, localName, name, attributes);
 		}
 		if (currentParsedEntity == null && streamForProgress != null) {
 			if(progress != null && !progress.isIndeterminate()){

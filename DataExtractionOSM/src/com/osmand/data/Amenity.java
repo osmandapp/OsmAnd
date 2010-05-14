@@ -7,7 +7,7 @@ import com.osmand.Algoritms;
 import com.osmand.osm.Node;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 
-public class Amenity {
+public class Amenity extends MapObject<Node> {
 	// http://wiki.openstreetmap.org/wiki/Amenity
 	public enum AmenityType {
 		SUSTENANCE, // restaurant, cafe ...
@@ -76,15 +76,10 @@ public class Amenity {
 	}
 	
 	
-	
 	private final Node node;
 
 	public Amenity(Node node){
 		this.node = node;
-	}
-	
-	public Node getNode() {
-		return node;
 	}
 	
 	public String getSubType(){
@@ -124,6 +119,11 @@ public class Amenity {
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public Node getEntity() {
+		return node;
 	}
 
 	public String getSimpleFormat(){
