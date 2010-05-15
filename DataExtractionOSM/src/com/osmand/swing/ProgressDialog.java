@@ -88,6 +88,9 @@ public class ProgressDialog extends JDialog implements IProgress {
         label.setText("Please waiting...");
         progressBar.setIndeterminate(true);
         setSize(550, 100);
+        double x = getParent().getBounds().getCenterX();
+        double y = getParent().getBounds().getCenterY();
+        setLocation((int) x - getWidth() / 2, (int) y - getHeight() / 2);
     }
     
     public Object getResult() {

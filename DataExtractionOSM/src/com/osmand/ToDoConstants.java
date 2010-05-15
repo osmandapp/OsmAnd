@@ -46,5 +46,6 @@ public class ToDoConstants {
 	// 4. Config file log & see log from file
 	// 5. specify area to load map (filter for osm loading)
 	// 6. Predefine what should be extracted from osm (building, poi or roads)
+	// 7. Fix TODO in files (accept amenity - way)
 
 }

@@ -23,15 +23,16 @@ import com.osmand.data.City;
 import com.osmand.data.DataTileManager;
 import com.osmand.data.Region;
 import com.osmand.data.Street;
+import com.osmand.data.City.CityType;
 import com.osmand.impl.ConsoleProgressImplementation;
 import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 import com.osmand.osm.Node;
 import com.osmand.osm.OSMSettings;
-import com.osmand.osm.Relation;
 import com.osmand.osm.Way;
 import com.osmand.osm.OSMSettings.OSMTagKey;
+import com.osmand.osm.io.IOsmStorageFilter;
 import com.osmand.osm.io.OSMStorageWriter;
 import com.osmand.osm.io.OsmBaseStorage;
 import com.osmand.swing.OsmExtractionUI;
@@ -140,7 +141,7 @@ public class DataExtraction  {
 	}
 
 	
-	public Region readCountry(String path, IProgress progress) throws IOException, SAXException{
+	public Region readCountry(String path, IProgress progress, IOsmStorageFilter... filters) throws IOException, SAXException{
 		InputStream stream = new FileInputStream(path);
 		InputStream streamFile = stream;
 		long st = System.currentTimeMillis();
@@ -163,45 +164,40 @@ public class DataExtraction  {
 		// highways count
 		ways = new ArrayList<Way>();
 		
-		OsmBaseStorage storage = new OsmBaseStorage(){
+		IOsmStorageFilter filter = new IOsmStorageFilter(){
 			@Override
-			public boolean acceptEntityToLoad(Entity e) {
+			public boolean acceptEntityToLoad(OsmBaseStorage storage, Entity e) {
 				if ("yes".equals(e.getTag(OSMTagKey.BUILDING))) {
 					if (e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER) != null && e.getTag(OSMTagKey.ADDR_STREET) != null) {
 						buildings.add(e);
 						return true;
 					}
 				}
-				return super.acceptEntityToLoad(e);
-			}
-			
-			@Override
-			public boolean acceptNodeToLoad(Node n) {
-				// TODO accept amenity for way! hospital, university, parking, fast_food...
-				if(Amenity.isAmenity(n)){
-					amenities.add(new Amenity(n));
-				}
-				if (n.getTag(OSMTagKey.PLACE) != null) {
-					places.add(n);
-				}
-				
-				return true;
-			}
-			
-			@Override
-			public boolean acceptRelationToLoad(Relation w) {
-				return false;
-			}
-			@Override
-			public boolean acceptWayToLoad(Way w) {
-				if (OSMSettings.wayForCar(w.getTag(OSMTagKey.HIGHWAY))) {
-					ways.add(w);
+				if(Amenity.isAmenity(e)){
+					amenities.add(new Amenity((Node) e));
 					return true;
 				}
-				return false;
+				if (e instanceof Node && e.getTag(OSMTagKey.PLACE) != null) {
+					places.add((Node) e);
+					return true;
+				}
+				if (e instanceof Way && OSMSettings.wayForCar(e.getTag(OSMTagKey.HIGHWAY))) {
+					ways.add((Way) e);
+					return true;
+				}
+				return e instanceof Node;
 			}
 		};
 		
+		OsmBaseStorage storage = new OsmBaseStorage();
+		if(filters != null){
+			for(IOsmStorageFilter f : filters){
+				if(f != null){
+					storage.getFilters().add(f);
+				}
+			}
+		}
+		storage.getFilters().add(filter);
 
 		storage.parseOSM(stream, progress, streamFile);
 		if (log.isDebugEnabled()) {
@@ -236,14 +232,24 @@ public class DataExtraction  {
         	if (w.getTag(OSMTagKey.NAME) != null) {
         		String street = w.getTag(OSMTagKey.NAME);
 				LatLon center = MapUtils.getWeightCenterForNodes(w.getNodes());
-				City city = country.getClosestCity(center);
-				if (city != null) {
-					Street str = city.registerStreet(street);
-					for(Node n : w.getNodes()){
-						str.getWayNodes().add(n);
+				if (center != null) {
+					City city = country.getClosestCity(center);
+					if(city == null){
+						Node n = new Node(center.getLatitude(), center.getLongitude(), -1);
+						n.putTag(OSMTagKey.PLACE.getValue(), CityType.TOWN.name());
+						n.putTag(OSMTagKey.NAME.getValue(), "Uknown city");
+						country.registerCity(n);
+						city = country.getClosestCity(center);
 					}
+					
+					if (city != null) {
+						Street str = city.registerStreet(street);
+						for (Node n : w.getNodes()) {
+							str.getWayNodes().add(n);
+						}
+					}
+					waysManager.registerObject(center.getLatitude(), center.getLongitude(), w);
 				}
-				waysManager.registerObject(center.getLatitude(), center.getLongitude(), w);
 			}
 		}
         progress.finishTask();
@@ -260,6 +266,13 @@ public class DataExtraction  {
         		// no nodes where loaded for this way
         	} else {
 				City city = country.getClosestCity(center);
+				if(city == null){
+					Node n = new Node(center.getLatitude(), center.getLongitude(), -1);
+					n.putTag(OSMTagKey.PLACE.getValue(), CityType.TOWN.name());
+					n.putTag(OSMTagKey.NAME.getValue(), "Uknown city");
+					country.registerCity(n);
+					city = country.getClosestCity(center);
+				}
 				if (city != null) {
 					city.registerBuilding(b);
 				}
@@ -270,5 +283,6 @@ public class DataExtraction  {
         country.doDataPreparation();
         return country;
 	}
+	
 	
 }

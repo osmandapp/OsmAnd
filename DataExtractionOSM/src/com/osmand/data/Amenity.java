@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.osmand.Algoritms;
+import com.osmand.osm.Entity;
 import com.osmand.osm.Node;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 
@@ -108,7 +109,10 @@ public class Amenity extends MapObject<Node> {
 		return AmenityType.OTHER;
 	}
 	
-	public static boolean isAmenity(Node n){
+	public static boolean isAmenity(Entity n){
+		if(!(n instanceof Node)){
+			return false;
+		}
 		if(n.getTag(OSMTagKey.AMENITY) != null){
 			return true;
 		} else if(n.getTag(OSMTagKey.SHOP) != null){

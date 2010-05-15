@@ -40,7 +40,7 @@ public class Street extends MapObject<Entity> {
 		if(center == null){
 			calculateCenter();
 		}
-		return center.getLatLon();
+		return center == null ? null : center.getLatLon();
 	}
 	
 	protected void calculateCenter(){
@@ -51,10 +51,12 @@ public class Street extends MapObject<Entity> {
 		LatLon c = MapUtils.getWeightCenterForNodes(wayNodes);
 		double dist = Double.POSITIVE_INFINITY;
 		for(Node n : wayNodes){
-			double nd = MapUtils.getDistance(n, c);
-			if(nd < dist){
-				center = n;
-				dist = nd;
+			if (n != null) {
+				double nd = MapUtils.getDistance(n, c);
+				if (nd < dist) {
+					center = n;
+					dist = nd;
+				}
 			}
 		}
 	}
