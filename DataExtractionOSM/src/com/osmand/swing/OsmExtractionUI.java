@@ -59,7 +59,6 @@ import org.apache.commons.logging.LogFactory;
 import org.xml.sax.SAXException;
 
 import com.osmand.Algoritms;
-import com.osmand.DefaultLauncherConstants;
 import com.osmand.ExceptionHandler;
 import com.osmand.IMapLocationListener;
 import com.osmand.data.Amenity;
@@ -83,11 +82,12 @@ public class OsmExtractionUI implements IMapLocationListener {
 	
 	public static void main(String[] args) {
         OsmExtractionUI ui = new OsmExtractionUI(null);
-        ui.runUI();
+        ui.frame.setBounds(DataExtractionSettings.getSettings().getWindowBounds());
+        ui.frame.setVisible(true);
 	}
 	
 	protected City selectedCity;
-	private MapPanel mapPanel = new MapPanel(new File(DefaultLauncherConstants.pathToDirWithTiles));
+	private MapPanel mapPanel;
 	
 	private DataExtractionTreeNode amenitiesTree;
 	private JTree treePlaces;
@@ -98,7 +98,6 @@ public class OsmExtractionUI implements IMapLocationListener {
 	private JLabel statusBarLabel;
 	
 	private Region region;
-	private File workingDir;
 	private JButton generateDataButton;
 	private JCheckBox buildPoiIndex;
 	private JCheckBox buildAddressIndex;
@@ -107,7 +106,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 	
 	public OsmExtractionUI(final Region r){
 		this.region = r;
-		workingDir = new File(DefaultLauncherConstants.pathToWorkingDir);
+		mapPanel = new MapPanel(DataExtractionSettings.getSettings().getTilesDirectory());
 		createUI();
 		setRegion(r, "Region");
 	}
@@ -181,6 +180,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 	    
 	    statusBarLabel = new JLabel();
 	    content.add(statusBarLabel, BorderLayout.SOUTH);
+	    File workingDir = DataExtractionSettings.getSettings().getDefaultWorkingDir();
 	    statusBarLabel.setText(workingDir == null ? "<working directory unspecified>" : "Working directory : " + workingDir.getAbsolutePath());
 	    
 	   
@@ -264,7 +264,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 	}
 	
 	protected void updateButtonsBar() {
-		generateDataButton.setEnabled(workingDir != null && region != null);
+		generateDataButton.setEnabled(region != null);
 		buildAddressIndex.setEnabled(generateDataButton.isEnabled() && region.getCitiesCount(null) > 0);
 		buildPoiIndex.setEnabled(generateDataButton.isEnabled() && !region.getAmenityManager().isEmpty());
 	}
@@ -283,7 +283,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DataIndexBuilder builder = new DataIndexBuilder(workingDir, region);
+				DataIndexBuilder builder = new DataIndexBuilder(DataExtractionSettings.getSettings().getDefaultWorkingDir(), region);
 				StringBuilder msg = new StringBuilder();
 				try {
 					msg.append("Indices checked for ").append(region.getName());
@@ -381,10 +381,6 @@ public class OsmExtractionUI implements IMapLocationListener {
 	    
 	}
 	
-	public void runUI(){
-		frame.setSize(1024, 768);
-	    frame.setVisible(true);
-	}
 	
 	public void fillMenuWithActions(JMenuBar bar){
 		JMenu menu = new JMenu("File");
@@ -412,12 +408,14 @@ public class OsmExtractionUI implements IMapLocationListener {
 				JFileChooser fc = new JFileChooser();
 		        fc.setDialogTitle("Choose working directory");
 		        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		        File workingDir = DataExtractionSettings.getSettings().getDefaultWorkingDir();
 		        if(workingDir != null){
 		        	fc.setCurrentDirectory(workingDir);
 		        }
 		        if(fc.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION && fc.getSelectedFile() != null && 
 		        		fc.getSelectedFile().isDirectory()){
-		        	workingDir = fc.getSelectedFile();
+		        	DataExtractionSettings.getSettings().saveDefaultWorkingDir(fc.getSelectedFile());
+		        	mapPanel.setTilesLocation(DataExtractionSettings.getSettings().getTilesDirectory());
 		        	statusBarLabel.setText("Working directory : " + fc.getSelectedFile().getAbsolutePath());
 		        	updateButtonsBar();
 		        }
@@ -433,7 +431,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 		        fc.setDialogTitle("Choose osm file");
 		        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		        fc.setAcceptAllFileFilterUsed(true);
-		        fc.setCurrentDirectory(new File(DefaultLauncherConstants.pathToTestDataDir));
+		        fc.setCurrentDirectory(DataExtractionSettings.getSettings().getDefaultWorkingDir());
 		        //System.out.println("opening fc for extension " + extension);
 		        fc.setFileFilter(new FileFilter(){
 
@@ -599,10 +597,16 @@ public class OsmExtractionUI implements IMapLocationListener {
 		}
 		
 	}
-	public static class ExitListener extends WindowAdapter {
+	public class ExitListener extends WindowAdapter {
 		public void windowClosing(WindowEvent event) {
+			// save preferences
+			DataExtractionSettings settings = DataExtractionSettings.getSettings();
+			settings.saveDefaultLocation(mapPanel.getLatitude(), mapPanel.getLongitude());
+			settings.saveDefaultZoom(mapPanel.getZoom());
+			settings.saveWindowBounds(frame.getBounds());
 			System.exit(0);
 		}
 	}
 
+	
 }

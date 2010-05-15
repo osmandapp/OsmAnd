@@ -87,7 +87,7 @@ public class MapTileDownloader {
 	
 	
 	public MapTileDownloader(int numberOfThreads){
-		threadPoolExecutor = new ThreadPoolExecutor(numberOfThreads, numberOfThreads, DefaultLauncherConstants.TILE_DOWNLOAD_SECONTS_TO_WORK, 
+		threadPoolExecutor = new ThreadPoolExecutor(numberOfThreads, numberOfThreads, DefaultLauncherConstants.TILE_DOWNLOAD_SECONDS_TO_WORK, 
 				TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
 		// 1.6 method but very useful to kill non-running threads
 //		threadPoolExecutor.allowCoreThreadTimeOut(true);

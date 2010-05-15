@@ -11,7 +11,6 @@ import javax.xml.stream.XMLStreamException;
 
 import org.apache.tools.bzip2.CBZip2OutputStream;
 
-import com.osmand.DefaultLauncherConstants;
 import com.osmand.data.Amenity;
 import com.osmand.data.Region;
 import com.osmand.osm.io.OSMStorageWriter;
@@ -47,7 +46,7 @@ public class DataIndexBuilder {
 			f.delete();
 		}
 		OutputStream output = new FileOutputStream(f);
-		if (DefaultLauncherConstants.writeTestOsmFile.endsWith(".bz2")) {
+		if (name.endsWith(".bz2")) {
 			output.write('B');
 			output.write('Z');
 			output = new CBZip2OutputStream(output);

@@ -20,7 +20,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder.Callback;
 
-import com.osmand.DefaultLauncherConstants;
 import com.osmand.IMapLocationListener;
 import com.osmand.LogUtil;
 import com.osmand.OsmandSettings;
@@ -34,7 +33,7 @@ import com.osmand.views.AnimateDraggingMapThread.AnimateDraggingCallback;
 
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback, AnimateDraggingCallback{
 
-	protected final int emptyTileDivisor = DefaultLauncherConstants.MAP_divNonLoadedImage;
+	protected final int emptyTileDivisor = 16;
 	protected final int timeForDraggingAnimation = 300;
 	protected final int minimumDistanceForDraggingAnimation = 40;
 	

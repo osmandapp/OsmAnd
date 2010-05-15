@@ -41,7 +41,7 @@ public class OsmandSettings {
 				}
 			}
 		}
-		return DefaultLauncherConstants.MAP_defaultTileSource;
+		return TileSourceManager.getMapnikSource();
 	}
 	
 	public static String getMapTileSourceName(Context ctx){
@@ -50,7 +50,7 @@ public class OsmandSettings {
 		if(tileName != null){
 			return tileName;
 		}
-		return DefaultLauncherConstants.MAP_defaultTileSource.getName();
+		return TileSourceManager.getMapnikSource().getName();
 	}
 	
 	
