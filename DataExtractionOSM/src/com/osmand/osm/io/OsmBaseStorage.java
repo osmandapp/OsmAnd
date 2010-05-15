@@ -2,8 +2,10 @@ package com.osmand.osm.io;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -53,7 +55,7 @@ public class OsmBaseStorage extends DefaultHandler {
 	protected IProgress progress;
 	protected InputStream inputStream;
 	protected InputStream streamForProgress;
-	
+	protected List<IOsmStorageFilter> filters = new ArrayList<IOsmStorageFilter>();
 	
 	
 	public synchronized void parseOSM(InputStream stream, IProgress progress, InputStream streamForProgress) throws IOException, SAXException {
@@ -203,6 +205,15 @@ public class OsmBaseStorage extends DefaultHandler {
 	}
 	
 	
+	protected boolean acceptEntityToLoad(Entity entity) {
+		for(IOsmStorageFilter f : filters){
+			if(!f.acceptEntityToLoad(this, entity)){
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public void completeReading(){
 		for(Entity e : entities.values()){
 			e.initializeLinks(entities);
@@ -213,32 +224,14 @@ public class OsmBaseStorage extends DefaultHandler {
 	
 	
 	
-	public boolean acceptEntityToLoad(Entity e){
-		if(e instanceof Way){
-			return acceptWayToLoad((Way) e);
-		} else if(e instanceof Relation){
-			return acceptRelationToLoad((Relation) e);
-		} else if(e instanceof Node){
-			return acceptNodeToLoad((Node) e);
-		}
-		return false;
-	}
-		
-	public boolean acceptWayToLoad(Way w){
-		return true;
-	}
-	
-	public boolean acceptRelationToLoad(Relation w){
-		return true;
-	}
-	
-	public boolean acceptNodeToLoad(Node n){
-		return true;
-	}
+
 
 	
 	public Map<Long, Entity> getRegisteredEntities() {
 		return entities;
 	}
-
+	
+	public List<IOsmStorageFilter> getFilters() {
+		return filters;
+	}
 }

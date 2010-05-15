@@ -9,7 +9,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -56,6 +58,7 @@ import javax.xml.stream.XMLStreamException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.tools.bzip2.CBZip2OutputStream;
 import org.xml.sax.SAXException;
 
 import com.osmand.Algoritms;
@@ -75,6 +78,10 @@ import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 import com.osmand.osm.Node;
+import com.osmand.osm.io.IOsmStorageFilter;
+import com.osmand.osm.io.OSMStorageWriter;
+import com.osmand.osm.io.OsmBoundsFilter;
+import com.osmand.swing.MapPanel.MapSelectionArea;
 
 public class OsmExtractionUI implements IMapLocationListener {
 
@@ -101,7 +108,9 @@ public class OsmExtractionUI implements IMapLocationListener {
 	private JButton generateDataButton;
 	private JCheckBox buildPoiIndex;
 	private JCheckBox buildAddressIndex;
+	private JCheckBox filterAreaToLoad;
 	private TreeModelListener treeModelListener;
+	
 	
 	
 	public OsmExtractionUI(final Region r){
@@ -315,6 +324,11 @@ public class OsmExtractionUI implements IMapLocationListener {
 		panel.add(buildAddressIndex);
 		buildAddressIndex.setSelected(true);
 		
+		filterAreaToLoad = new JCheckBox();
+		filterAreaToLoad.setText("Filtering area when load file");
+		panel.add(filterAreaToLoad);
+		filterAreaToLoad.setSelected(false);
+		
 		updateButtonsBar();
 	}
 
@@ -387,6 +401,8 @@ public class OsmExtractionUI implements IMapLocationListener {
 		bar.add(menu);
 		JMenuItem loadFile = new JMenuItem("Load osm file...");
 		menu.add(loadFile);
+		JMenuItem saveOsmFile = new JMenuItem("Save data to osm file...");
+		menu.add(saveOsmFile);
 		JMenuItem specifyWorkingDir = new JMenuItem("Specify working directory...");
 		menu.add(specifyWorkingDir);
 		menu.addSeparator();
@@ -431,7 +447,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 		        fc.setDialogTitle("Choose osm file");
 		        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		        fc.setAcceptAllFileFilterUsed(true);
-		        fc.setCurrentDirectory(DataExtractionSettings.getSettings().getDefaultWorkingDir());
+		        fc.setCurrentDirectory(DataExtractionSettings.getSettings().getDefaultWorkingDir().getParentFile());
 		        //System.out.println("opening fc for extension " + extension);
 		        fc.setFileFilter(new FileFilter(){
 
@@ -453,9 +469,49 @@ public class OsmExtractionUI implements IMapLocationListener {
 			}
 			
 		});
+		saveOsmFile.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(region == null){
+					return;
+				}
+				JFileChooser fc = new JFileChooser();
+		        fc.setDialogTitle("Choose osm file to save");
+		        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		        fc.setAcceptAllFileFilterUsed(true);
+		        fc.setCurrentDirectory(DataExtractionSettings.getSettings().getDefaultWorkingDir().getParentFile());
+		        //System.out.println("opening fc for extension " + extension);
+		        fc.setFileFilter(new FileFilter(){
+
+					@Override
+					public boolean accept(File f) {
+						return f.isDirectory() || f.getName().endsWith(".bz2") || f.getName().endsWith(".osm");
+					}
+
+					@Override
+					public String getDescription() {
+						return "Osm Files (*.bz2, *.osm)";
+					}
+		        });
+
+		        int answer = fc.showSaveDialog(frame);
+		        if (answer == JFileChooser.APPROVE_OPTION && fc.getSelectedFile() != null){
+		        	saveCountry(fc.getSelectedFile());
+		        }
+			}
+			
+		});
 	}
 	
 	public void loadCountry(final File f){
+		final IOsmStorageFilter filter;
+		if(filterAreaToLoad.isSelected() && mapPanel.getSelectionArea().isVisible()){
+			MapSelectionArea area = mapPanel.getSelectionArea();
+			filter = new OsmBoundsFilter(area.getLat1(), area.getLon1(), area.getLat2(), area.getLon2());
+		} else {
+			filter = null;
+		}
 		try {
     		final ProgressDialog dlg = new ProgressDialog(frame, "Loading osm file");
     		dlg.setRunnable(new Runnable(){
@@ -464,7 +520,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 				public void run() {
 					Region res;
 					try {
-						res = new DataExtraction().readCountry(f.getAbsolutePath(), dlg);
+						res = new DataExtraction().readCountry(f.getAbsolutePath(), dlg, filter);
 					} catch (IOException e) {
 						throw new IllegalArgumentException(e);
 					} catch (SAXException e) {
@@ -484,6 +540,40 @@ public class OsmExtractionUI implements IMapLocationListener {
 			} else {
 				//frame.setTitle("OsmAnd Map Creator");
 			}
+		} catch (InterruptedException e1) {
+			log.error("Interrupted", e1); 
+		} catch (InvocationTargetException e1) {
+			log.error("Exception during operation", e1.getCause());
+		}
+	}
+	
+	public void saveCountry(final File f){
+		final OSMStorageWriter writer = new OSMStorageWriter(region.getStorage().getRegisteredEntities());
+		try {
+    		final ProgressDialog dlg = new ProgressDialog(frame, "Saving osm file");
+    		dlg.setRunnable(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						OutputStream output = new FileOutputStream(f);
+						try {
+							if (f.getName().endsWith(".bz2")) {
+								output.write('B');
+								output.write('Z');
+								output = new CBZip2OutputStream(output);
+							}
+							writer.saveStorage(output, null, false);
+						} finally {
+							output.close();
+						}
+					} catch (IOException e) {
+						throw new IllegalArgumentException(e);
+					} catch (XMLStreamException e) {
+						throw new IllegalArgumentException(e);
+					}
+				}
+			});
+    		dlg.run();
 		} catch (InterruptedException e1) {
 			log.error("Interrupted", e1); 
 		} catch (InvocationTargetException e1) {

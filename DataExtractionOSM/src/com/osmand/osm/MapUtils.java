@@ -81,16 +81,23 @@ public class MapUtils {
 	}
 	
 	public static LatLon getWeightCenterForNodes(Collection<Node> nodes){
-		if(nodes.isEmpty()){
+		if (nodes.isEmpty()) {
 			return null;
 		}
 		double longitude = 0;
 		double latitude = 0;
-		for(Node n : nodes){
-			longitude += n.getLongitude();
-			latitude += n.getLatitude();
+		int count = 0;
+		for (Node n : nodes) {
+			if (n != null) {
+				count++;
+				longitude += n.getLongitude();
+				latitude += n.getLatitude();
+			}
 		}
-		return new LatLon(latitude/nodes.size(), longitude/nodes.size());
+		if (count == 0) {
+			return null;
+		}
+		return new LatLon(latitude/count, longitude/count);
 	}
 	
 	
