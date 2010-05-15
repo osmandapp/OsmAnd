@@ -17,7 +17,6 @@ import org.apache.tools.bzip2.CBZip2InputStream;
 import org.apache.tools.bzip2.CBZip2OutputStream;
 import org.xml.sax.SAXException;
 
-import com.osmand.DefaultLauncherConstants;
 import com.osmand.IProgress;
 import com.osmand.data.Amenity;
 import com.osmand.data.City;
@@ -78,7 +77,13 @@ public class DataExtraction  {
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, XMLStreamException {
 		new DataExtraction().testReadingOsmFile();
 	}
-	
+	// External files
+	public static String pathToTestDataDir = "E:\\Information\\OSM maps\\";
+	public static String pathToOsmFile =  pathToTestDataDir + "minsk.osm";
+	public static String pathToOsmBz2File =  pathToTestDataDir + "belarus_2010_04_01.osm.bz2";
+	public static String pathToWorkingDir = pathToTestDataDir +"osmand\\";
+	public static String pathToDirWithTiles = pathToWorkingDir +"tiles";
+	public static String writeTestOsmFile = "C:\\1_tmp.osm"; // could be null - wo writing
 	
 	private static boolean parseSmallFile = true;
 	private static boolean parseOSM = true;
@@ -93,9 +98,9 @@ public class DataExtraction  {
 	public void testReadingOsmFile() throws ParserConfigurationException, SAXException, IOException, XMLStreamException {
 		String f;
 		if(parseSmallFile){
-			f = DefaultLauncherConstants.pathToOsmFile;
+			f = pathToOsmFile;
 		} else {
-			f = DefaultLauncherConstants.pathToOsmBz2File;
+			f = pathToOsmBz2File;
 		}
 		long st = System.currentTimeMillis();
 		
@@ -116,10 +121,10 @@ public class DataExtraction  {
 //		MapUtils.addIdsToList(amenities, interestedObjects);
 		MapUtils.addIdsToList(waysManager.getAllObjects(), interestedObjects);
 //		MapUtils.addIdsToList(buildings, interestedObjects);
-		if (DefaultLauncherConstants.writeTestOsmFile != null) {
+		if (writeTestOsmFile != null) {
 			OSMStorageWriter writer = new OSMStorageWriter(country.getStorage().getRegisteredEntities());
-			OutputStream output = new FileOutputStream(DefaultLauncherConstants.writeTestOsmFile);
-			if (DefaultLauncherConstants.writeTestOsmFile.endsWith(".bz2")) {
+			OutputStream output = new FileOutputStream(writeTestOsmFile);
+			if (writeTestOsmFile.endsWith(".bz2")) {
 				output.write('B');
 				output.write('Z');
 				output = new CBZip2OutputStream(output);

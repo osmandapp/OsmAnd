@@ -15,6 +15,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +38,6 @@ import javax.swing.UIManager;
 
 import org.apache.commons.logging.Log;
 
-import com.osmand.DefaultLauncherConstants;
 import com.osmand.IMapLocationListener;
 import com.osmand.LogUtil;
 import com.osmand.data.DataTileManager;
@@ -54,6 +55,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	private static final long serialVersionUID = 1L;
 	
 	protected static final Log log = LogUtil.getLog(MapPanel.class);
+	public static final int divNonLoadedImage = 16;
 
 	public static JMenu getMenuToChooseSource(final MapPanel panel){
 		final JMenu tiles = new JMenu("Source tile");
@@ -74,8 +76,9 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 				}
 				
 			});
-			if(l.equals(DefaultLauncherConstants.MAP_defaultTileSource)){
+			if(l.equals(TileSourceManager.getMapnikSource())){
 				menuItem.setSelected(true);
+				panel.setMapName(l);
 			}
 			tiles.add(menuItem);
 		}
@@ -85,19 +88,24 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 
 	public static void main(String[] args) throws IOException {
-		JFrame frame = new JFrame("Tree of choose");
+		JFrame frame = new JFrame("Map view");
 	    try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		
-	    frame.addWindowListener(new OsmExtractionUI.ExitListener());
+		final MapPanel panel = new MapPanel(DataExtractionSettings.getSettings().getTilesDirectory());
+	    frame.addWindowListener(new WindowAdapter(){
+	    	@Override
+	    	public void windowClosing(WindowEvent e) {
+	    		DataExtractionSettings settings = DataExtractionSettings.getSettings();
+				settings.saveDefaultLocation(panel.getLatitude(), panel.getLongitude());
+				settings.saveDefaultZoom(panel.getZoom());
+	    		System.exit(0);
+	    	}
+	    });
 	    Container content = frame.getContentPane();
-	    
-	    MapPanel panel = new MapPanel(new File(DefaultLauncherConstants.pathToDirWithTiles));
-	    
 	    content.add(panel, BorderLayout.CENTER);
 
 	    JMenuBar bar = new JMenuBar();
@@ -111,21 +119,21 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	private File tilesLocation = null;
 	
 	// name of source map 
-	private ITileSource map = DefaultLauncherConstants.MAP_defaultTileSource;
+	private ITileSource map;
 	
 
 	// special points to draw
 	private DataTileManager<LatLon> points;
 	
 	// zoom level
-	private int zoom = DefaultLauncherConstants.MAP_startMapZoom;
+	private int zoom = 1;
 	
 	// degree measurements (-180, 180)
 	// долгота
-	private double longitude = DefaultLauncherConstants.MAP_startMapLongitude;
+	private double longitude;
 	// широта
 	// degree measurements (90, -90)
-	private double latitude = DefaultLauncherConstants.MAP_startMapLatitude;
+	private double latitude;
 	
 	private List<IMapLocationListener> listeners = new ArrayList<IMapLocationListener>();
 	
@@ -145,6 +153,12 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 	public MapPanel(File fileWithTiles) {
 		tilesLocation = fileWithTiles;
+		LatLon defaultLocation = DataExtractionSettings.getSettings().getDefaultLocation();
+		latitude = defaultLocation.getLatitude();
+		longitude = defaultLocation.getLongitude();
+		zoom = DataExtractionSettings.getSettings().getDefaultZoom();
+		
+		
 		downloader.setDownloaderCallback(this);
 		setFocusable(true);
 		addComponentListener(new ComponentAdapter(){
@@ -181,7 +195,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 			for (int i = 0; i < images.length; i++) {
 				for (int j = 0; j < images[i].length; j++) {
 					if (images[i][j] == null) {
-						int div = DefaultLauncherConstants.MAP_divNonLoadedImage;
+						int div = divNonLoadedImage;
 						int tileDiv = getTileSize() / div;
 						for (int k1 = 0; k1 < div; k1++) {
 							for (int k2 = 0; k2 < div; k2++) {
@@ -234,6 +248,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 	public void setTilesLocation(File tilesLocation) {
 		this.tilesLocation = tilesLocation;
+		cache.clear();
 		prepareImage();
 	}
 	
@@ -299,7 +314,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	}
 	
 	public void prepareImage(){
-		prepareImage(DefaultLauncherConstants.loadMissingImages);
+		prepareImage(DataExtractionSettings.getSettings().useInternetToLoadImages());
 	}
 	
 	public void prepareImage(boolean loadNecessaryImages){

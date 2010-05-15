@@ -40,7 +40,7 @@ public class ToDoConstants {
 	
 	/// SWING version : 
 	// TODO : 
-	// 1. save preferences ? where? (use internet, default dir save and other...)
+	// 1. Add preferences dialog (use internet, )
 	// 2. specify area to download tiles ()
 	// 3. download tiles without using dir tiles
 	// 4. Config file log & see log from file
