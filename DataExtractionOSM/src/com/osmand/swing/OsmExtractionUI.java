@@ -110,6 +110,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 	private JCheckBox buildPoiIndex;
 	private JCheckBox buildAddressIndex;
 	private TreeModelListener treeModelListener;
+	private JCheckBox zipIndexFiles;
 	
 	
 	
@@ -279,6 +280,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 		generateDataButton.setEnabled(region != null);
 		buildAddressIndex.setEnabled(generateDataButton.isEnabled() && region.getCitiesCount(null) > 0);
 		buildPoiIndex.setEnabled(generateDataButton.isEnabled() && !region.getAmenityManager().isEmpty());
+		zipIndexFiles.setEnabled(generateDataButton.isEnabled());
 	}
 	
 	public void createButtonsBar(Container content){
@@ -295,26 +297,8 @@ public class OsmExtractionUI implements IMapLocationListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DataIndexBuilder builder = new DataIndexBuilder(DataExtractionSettings.getSettings().getDefaultWorkingDir(), region);
-				StringBuilder msg = new StringBuilder();
-				try {
-					msg.append("Indices checked for ").append(region.getName());
-					if(buildPoiIndex.isEnabled()){
-						builder.buildPOI();
-						msg.append(", POI index ").append("successfully created");
-					}
-					msg.append(".");
-				    JOptionPane pane = new JOptionPane(msg);
-				    JDialog dialog = pane.createDialog(frame, "Generation data");
-				    dialog.setVisible(true);
-				} catch (XMLStreamException e1) {
-					ExceptionHandler.handle(e1);
-				} catch (IOException e1) {
-					ExceptionHandler.handle(e1);
-				}
-				
+				generateData();
 			}
-			
 		});
 		
 		buildPoiIndex = new JCheckBox();
@@ -327,7 +311,55 @@ public class OsmExtractionUI implements IMapLocationListener {
 		panel.add(buildAddressIndex);
 		buildAddressIndex.setSelected(true);
 		
+		zipIndexFiles = new JCheckBox();
+		zipIndexFiles.setText("Zip index files");
+		panel.add(zipIndexFiles);
+		zipIndexFiles.setSelected(true);
+		
 		updateButtonsBar();
+	}
+	
+	protected void generateData() {
+		try {
+    		final ProgressDialog dlg = new ProgressDialog(frame, "Generating data");
+    		dlg.setRunnable(new Runnable(){
+
+				@Override
+				public void run() {
+					dlg.startTask("Generating indices...", -1);
+					DataIndexBuilder builder = new DataIndexBuilder(DataExtractionSettings.getSettings().getDefaultWorkingDir(), region);
+					StringBuilder msg = new StringBuilder();
+					try {
+						builder.setZipped(zipIndexFiles.isSelected());
+						msg.append("Indices checked for ").append(region.getName());
+						if(buildPoiIndex.isEnabled()){
+							dlg.startTask("Generating POI index...", -1);
+							builder.buildPOI();
+							msg.append(", POI index ").append("successfully created");
+						}
+						if(buildAddressIndex.isEnabled()){
+							dlg.startTask("Generating address index...", -1);
+							builder.buildAddress();
+							msg.append(", Address index ").append("successfully created");
+						}
+						msg.append(".");
+					    JOptionPane pane = new JOptionPane(msg);
+					    JDialog dialog = pane.createDialog(frame, "Generation data");
+					    dialog.setVisible(true);
+					} catch (XMLStreamException e1) {
+						throw new IllegalArgumentException(e1);
+					} catch (IOException e1) {
+						throw new IllegalArgumentException(e1);
+					}
+				}
+    		});
+    		dlg.run();
+		} catch (InterruptedException e1) {
+			log.error("Interrupted", e1); 
+		} catch (InvocationTargetException e1) {
+			ExceptionHandler.handle((Exception) e1.getCause());
+		}
+		
 	}
 
 	public void createCitySearchPanel(Container content){
@@ -564,7 +596,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 	}
 	
 	public void saveCountry(final File f){
-		final OSMStorageWriter writer = new OSMStorageWriter(region.getStorage().getRegisteredEntities());
+		final OSMStorageWriter writer = new OSMStorageWriter();
 		try {
     		final ProgressDialog dlg = new ProgressDialog(frame, "Saving osm file");
     		dlg.setRunnable(new Runnable() {
@@ -578,7 +610,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 								output.write('Z');
 								output = new CBZip2OutputStream(output);
 							}
-							writer.saveStorage(output, null, false);
+							writer.saveStorage(output, region.getStorage(), null, false);
 						} finally {
 							output.close();
 						}

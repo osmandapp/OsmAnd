@@ -12,7 +12,6 @@ import com.osmand.osm.OSMSettings.OSMTagKey;
 
 public class Street extends MapObject<Entity> {
 	
-	private final String name;
 	private List<Building> buildings = new ArrayList<Building>(); 
 	private List<Node> wayNodes = new ArrayList<Node>();
 	private Node center = null;
@@ -21,20 +20,21 @@ public class Street extends MapObject<Entity> {
 		this.name = name;
 	}
 	
+	public Street(){}
+	
 	public void registerBuilding(Entity e){
 		Building building = new Building(e);
 		building.setName(e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER));
 		buildings.add(building);
 	}
 	
+	public void registerBuilding(Building building){
+		buildings.add(building);
+	}
+	
 	public List<Building> getBuildings() {
 		return buildings;
 	}
-	
-	public String getName() {
-		return name;
-	}
-
 	
 	public LatLon getLocation(){
 		if(center == null){

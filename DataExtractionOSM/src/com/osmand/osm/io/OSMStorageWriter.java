@@ -16,6 +16,7 @@ import static com.osmand.osm.io.OsmBaseStorage.ELEM_OSM;
 import static com.osmand.osm.io.OsmBaseStorage.ELEM_RELATION;
 import static com.osmand.osm.io.OsmBaseStorage.ELEM_TAG;
 import static com.osmand.osm.io.OsmBaseStorage.ELEM_WAY;
+import static com.osmand.osm.io.OSMIndexStorage.*;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -29,7 +30,17 @@ import java.util.Map.Entry;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import com.osmand.Algoritms;
+import com.osmand.data.Amenity;
+import com.osmand.data.Building;
+import com.osmand.data.City;
+import com.osmand.data.MapObject;
+import com.osmand.data.Region;
+import com.osmand.data.Street;
+import com.osmand.data.Amenity.AmenityType;
+import com.osmand.data.City.CityType;
 import com.osmand.osm.Entity;
+import com.osmand.osm.LatLon;
 import com.osmand.osm.Node;
 import com.osmand.osm.Relation;
 import com.osmand.osm.Way;
@@ -38,17 +49,17 @@ import com.sun.xml.internal.stream.writers.XMLStreamWriterImpl;
 
 public class OSMStorageWriter {
 
-	private final Map<Long, Entity> entities;
 	private final String INDENT = "    ";
 	private final String INDENT2 = INDENT + INDENT;
+	private final String INDENT3 = INDENT + INDENT + INDENT;
 
 
-	public OSMStorageWriter(Map<Long, Entity> entities){
-		this.entities = entities;
+	public OSMStorageWriter(){
 	}
 	
 	
-	public void saveStorage(OutputStream output, Collection<Long> interestedObjects, boolean includeLinks) throws XMLStreamException, IOException {
+	public void saveStorage(OutputStream output, OsmBaseStorage storage, Collection<Long> interestedObjects, boolean includeLinks) throws XMLStreamException, IOException {
+		Map<Long, Entity> entities = storage.getRegisteredEntities();
 		PropertyManager propertyManager = new PropertyManager(PropertyManager.CONTEXT_WRITER);
 //		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 //        String indent = "{http://xml.apache.org/xslt}indent-amount";
@@ -92,7 +103,7 @@ public class OSMStorageWriter {
 			streamWriter.writeAttribute(ATTR_LON, n.getLongitude()+"");
 			streamWriter.writeAttribute(ATTR_ID, n.getId()+"");
 			writeTags(streamWriter, n);
-			streamWriter.writeEndElement();
+			writeEndElement(streamWriter, INDENT);
 		}
 		
 		for(Way w : ways){
@@ -101,10 +112,10 @@ public class OSMStorageWriter {
 			for(Long r : w.getNodeIds()){
 				writeStartElement(streamWriter, ELEM_ND, INDENT2);
 				streamWriter.writeAttribute(ATTR_REF, r+"");
-				streamWriter.writeEndElement();
+				writeEndElement(streamWriter, INDENT2);
 			}
 			writeTags(streamWriter, w);
-			streamWriter.writeEndElement();
+			writeEndElement(streamWriter, INDENT);
 		}
 		
 		for(Relation r : relations){
@@ -118,19 +129,19 @@ public class OSMStorageWriter {
 					s = ""; 
 				}
 				streamWriter.writeAttribute(ATTR_ROLE, s);
-				streamWriter.writeAttribute(ATTR_TYPE, getEntityType(e.getKey()));
-				streamWriter.writeEndElement();
+				streamWriter.writeAttribute(ATTR_TYPE, getEntityType(entities, e.getKey()));
+				writeEndElement(streamWriter, INDENT2);
 			}
 			writeTags(streamWriter, r);
-			streamWriter.writeEndElement();
+			writeEndElement(streamWriter, INDENT);
 		}
 		
-		streamWriter.writeEndElement(); // osm
+		writeEndElement(streamWriter, ""); // osm
 		streamWriter.writeEndDocument();
 		streamWriter.flush();
 	}
 	
-	private String getEntityType(Long id){
+	private String getEntityType(Map<Long, Entity> entities , Long id){
 		Entity e = entities.get(id);
 		if(e instanceof Way){
 			return "way";
@@ -140,11 +151,96 @@ public class OSMStorageWriter {
 		return "node";
 	}
 	
+	
+	public void savePOIIndex(OutputStream output, Region region) throws XMLStreamException, IOException {
+		PropertyManager propertyManager = new PropertyManager(PropertyManager.CONTEXT_WRITER);
+		XMLStreamWriter streamWriter = new XMLStreamWriterImpl(output, propertyManager);
+
+		writeStartElement(streamWriter, ELEM_OSMAND, "");
+		streamWriter.writeAttribute(ATTR_VERSION, OSMAND_VERSION);
+		List<Amenity> amenities = region.getAmenityManager().getAllObjects();
+		for(Amenity n : amenities){
+			if (couldBeWrited(n)) {
+				writeStartElement(streamWriter, ELEM_AMENITY, INDENT);
+				writeAttributesMapObject(streamWriter, n);
+				streamWriter.writeAttribute(ATTR_TYPE, AmenityType.valueToString(n.getType()));
+				streamWriter.writeAttribute(ATTR_SUBTYPE, n.getSubType());
+				writeEndElement(streamWriter, INDENT);
+			}
+		}
+		writeEndElement(streamWriter, ""); // osmand
+		streamWriter.writeEndDocument();
+		streamWriter.flush();
+	}
+	
+	private void writeCity(XMLStreamWriter streamWriter, City c) throws XMLStreamException{
+		writeStartElement(streamWriter, ELEM_CITY, INDENT);
+		writeAttributesMapObject(streamWriter, c);
+		streamWriter.writeAttribute(ATTR_CITYTYPE, CityType.valueToString(c.getType()));
+		for(Street s : c.getStreets()){
+			if (couldBeWrited(s)) {
+				writeStartElement(streamWriter, ELEM_STREET, INDENT2);
+				writeAttributesMapObject(streamWriter, s);
+				for(Building b : s.getBuildings()) {
+					if (couldBeWrited(b)) {
+						writeStartElement(streamWriter, ELEM_BUILDING, INDENT3);
+						writeAttributesMapObject(streamWriter, b);
+						writeEndElement(streamWriter, INDENT3);
+					}
+				}
+				writeEndElement(streamWriter, INDENT2);
+			}
+		}
+		writeEndElement(streamWriter, INDENT);
+	}
+	
+	public void saveAddressIndex(OutputStream output, Region region) throws XMLStreamException, IOException {
+		PropertyManager propertyManager = new PropertyManager(PropertyManager.CONTEXT_WRITER);
+		XMLStreamWriter streamWriter = new XMLStreamWriterImpl(output, propertyManager);
+
+		writeStartElement(streamWriter, ELEM_OSMAND, "");
+		streamWriter.writeAttribute(ATTR_VERSION, OSMAND_VERSION);
+		for(CityType t : CityType.values()){
+			Collection<City> cities = region.getCitiesByType(t);
+			if(cities != null){
+				for(City c : cities){
+					if (couldBeWrited(c)) {
+						writeCity(streamWriter, c);
+					}
+				}
+			}
+		}
+		writeEndElement(streamWriter, ""); // osmand
+		streamWriter.writeEndDocument();
+		streamWriter.flush();
+	}
+	
+	public boolean couldBeWrited(MapObject<? extends Entity> e){
+		if(!Algoritms.isEmpty(e.getName()) && e.getLocation() != null){
+			return true;
+		}
+		return false;
+	}
+	
+	public void writeAttributesMapObject(XMLStreamWriter streamWriter, MapObject<? extends Entity> e) throws XMLStreamException{
+		LatLon location = e.getLocation();
+		streamWriter.writeAttribute(ATTR_LAT, location.getLatitude()+"");
+		streamWriter.writeAttribute(ATTR_LON, location.getLongitude()+"");
+		streamWriter.writeAttribute(ATTR_NAME, e.getName());
+		streamWriter.writeAttribute(ATTR_ID, e.getId()+"");
+	}
+	
+
+	
 	private void writeStartElement(XMLStreamWriter writer, String name, String indent) throws XMLStreamException{
 		writer.writeCharacters("\n"+indent);
 		writer.writeStartElement(name);
 	}
 	
+	private void writeEndElement(XMLStreamWriter writer, String indent) throws XMLStreamException{
+		writer.writeCharacters("\n"+indent);
+		writer.writeEndElement();
+	}
 	
 	private void writeTags(XMLStreamWriter writer, Entity e) throws XMLStreamException{
 		for(Entry<String, String> en : e.getTags().entrySet()){

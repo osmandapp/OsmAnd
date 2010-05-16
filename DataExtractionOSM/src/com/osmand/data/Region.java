@@ -133,6 +133,13 @@ public class Region {
 		amenities.registerObject(location.getLatitude(), location.getLongitude(), a);
 	}
 
+	public void registerCity(City city){
+		if(city.getType() != null && !Algoritms.isEmpty(city.getName()) && city.getLocation() != null){
+			LatLon l = city.getLocation();
+			cityManager.registerObject(l.getLatitude(), l.getLongitude(), city);
+			cities.get(city.getType()).add(city);
+		}
+	}
 	
 	public City registerCity(Node c){
 		City city = new City(c);

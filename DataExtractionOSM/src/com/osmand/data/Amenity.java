@@ -21,6 +21,15 @@ public class Amenity extends MapObject<Node> {
 		SHOP, // convenience (product), clothes...
 		LEISURE, // sport
 		OTHER, // grave-yard, police, post-office
+		;
+		
+		public static AmenityType fromString(String s){
+			return AmenityType.valueOf(s.toUpperCase());
+		}
+		
+		public static String valueToString(AmenityType t){
+			return t.toString().toLowerCase();
+		}
 	}
 	private static Map<String, AmenityType> prebuiltMap = new LinkedHashMap<String, AmenityType>();
 	static {
@@ -78,12 +87,25 @@ public class Amenity extends MapObject<Node> {
 	
 	
 	private final Node node;
+	private String subType;
+	private AmenityType type;
 
 	public Amenity(Node node){
 		this.node = node;
+		this.type = getType(node);
+		this.subType = getSubType(node);
 	}
 	
-	public String getSubType(){
+	public Amenity(){
+		this.node = null;
+	}
+	
+	@Override
+	public Node getEntity() {
+		return node;
+	}
+	
+	protected String getSubType(Node node){
 		if(node.getTag(OSMTagKey.AMENITY) != null){
 			return node.getTag(OSMTagKey.AMENITY);
 		} else if(node.getTag(OSMTagKey.SHOP) != null){
@@ -96,7 +118,7 @@ public class Amenity extends MapObject<Node> {
 		return "";
 	}
 	
-	public AmenityType getType(){
+	protected AmenityType getType(Node node){
 		if(node.getTag(OSMTagKey.SHOP) != null){
 			return AmenityType.SHOP;
 		} else if(node.getTag(OSMTagKey.TOURISM) != null){
@@ -107,6 +129,22 @@ public class Amenity extends MapObject<Node> {
 				return prebuiltMap.get(node.getTag(OSMTagKey.AMENITY));
 		}
 		return AmenityType.OTHER;
+	}
+	
+	public AmenityType getType(){
+		return type;
+	}
+	
+	public String getSubType(){
+		return subType;
+	}
+	
+	public void setType(AmenityType type) {
+		this.type = type;
+	}
+	
+	public void setSubType(String subType) {
+		this.subType = subType;
 	}
 	
 	public static boolean isAmenity(Entity n){
@@ -125,20 +163,15 @@ public class Amenity extends MapObject<Node> {
 		return false;
 	}
 	
-	@Override
-	public Node getEntity() {
-		return node;
-	}
 
 	public String getSimpleFormat(){
-		String name = node.getTag(OSMTagKey.NAME);
+		String name = getName();
 		return Algoritms.capitalizeFirstLetterAndLowercase(getType().toString()) +
 					" : " + getSubType() + " " +(name == null ? node.getId() : name);
 	}
 	
 	public String getStringWithoutType(){
-		String name = node.getTag(OSMTagKey.NAME);
-		return getSubType() + " " +(name == null ? node.getId() : name);
+		return getSubType() + " " +getName();
 	}
 	
 	@Override

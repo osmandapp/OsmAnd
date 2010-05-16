@@ -23,7 +23,8 @@ public class ToDoConstants {
 	public int DESCRIBE_ABOUT_AUTHORS = 8;
 	
 	// TODO see all calculations x, y for layers & for MapView
-	
+
+	// 0. Minimize memory used for index & improve time for read index  
 	//// TODO for releasing version
 	// 1. POI SEARCH NEAR TO YOU
 	// 2. FIX BACK TO your location & gps & point of view (may be compass)
@@ -45,5 +46,6 @@ public class ToDoConstants {
 	// 4. Config file log & see log from file
 	// 6. Predefine what should be extracted from osm (building, poi or roads)
 	// 7. Fix TODO in files (accept amenity - way)
+	// 8. add progress for data generation process
 
 }

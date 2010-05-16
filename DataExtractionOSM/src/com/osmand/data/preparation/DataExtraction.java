@@ -115,7 +115,7 @@ public class DataExtraction  {
         // TODO add interested objects
 		List<Long> interestedObjects = new ArrayList<Long>();
 		if (writeTestOsmFile != null) {
-			OSMStorageWriter writer = new OSMStorageWriter(country.getStorage().getRegisteredEntities());
+			OSMStorageWriter writer = new OSMStorageWriter();
 			OutputStream output = new FileOutputStream(writeTestOsmFile);
 			if (writeTestOsmFile.endsWith(".bz2")) {
 				output.write('B');
@@ -123,7 +123,7 @@ public class DataExtraction  {
 				output = new CBZip2OutputStream(output);
 			}
 			
-			writer.saveStorage(output, interestedObjects, false);
+			writer.saveStorage(output, country.getStorage(), interestedObjects, false);
 			output.close();
 		}
         

@@ -65,7 +65,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	public static final int divNonLoadedImage = 16;
 
 	public static JMenu getMenuToChooseSource(final MapPanel panel){
-		final JMenu tiles = new JMenu("Source tile");
+		final JMenu tiles = new JMenu("Source of tiles");
 		final List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
 		for(final TileSourceTemplate l : list){
 			JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(l.getName());
