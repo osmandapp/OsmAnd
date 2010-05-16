@@ -64,8 +64,26 @@ public class DataIndexBuilder {
 		}
 		OutputStream output = checkFile("POI/"+region.getName()+".osm");
 		try {
-			OSMStorageWriter writer = new OSMStorageWriter(region.getStorage().getRegisteredEntities());
-			writer.saveStorage(output, interestedObjects, false);
+			OSMStorageWriter writer = new OSMStorageWriter();
+			writer.saveStorage(output, region.getStorage(), interestedObjects, false);
+		} finally {
+			output.close();
+		}
+		output = checkFile("POI/"+region.getName()+".osmand");
+		try {
+			OSMStorageWriter writer = new OSMStorageWriter();
+			writer.savePOIIndex(output, region);
+		} finally {
+			output.close();
+		}
+		return this;
+	}
+	
+	public DataIndexBuilder buildAddress() throws XMLStreamException, IOException{
+		OutputStream output = checkFile("Address/"+region.getName()+".osmand");
+		try {
+			OSMStorageWriter writer = new OSMStorageWriter();
+			writer.saveAddressIndex(output, region);
 		} finally {
 			output.close();
 		}
