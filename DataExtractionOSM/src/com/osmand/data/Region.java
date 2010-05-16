@@ -10,20 +10,15 @@ import java.util.Map;
 
 import com.osmand.Algoritms;
 import com.osmand.data.City.CityType;
-import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 import com.osmand.osm.Node;
-import com.osmand.osm.OSMSettings.OSMTagKey;
 import com.osmand.osm.io.OsmBaseStorage;
 
 public class Region {
-	private Entity entity;
 	
 	private DataTileManager<Amenity> amenities = new DataTileManager<Amenity>();
-	
 	private String name;
-	
 	private OsmBaseStorage storage;
 	
 	private static class CityComparator implements Comparator<City>{
@@ -42,10 +37,10 @@ public class Region {
 		}
 	}
 	
-	
-	public Region(Entity entity){
-		this.entity = entity;
+	public Region(){
+		this.name = "Region";
 	}
+	
 	
 	
 	public OsmBaseStorage getStorage() {
@@ -56,15 +51,9 @@ public class Region {
 		this.storage = storage;
 	}
 	
-	public void setEntity(Entity e){
-		this.entity = e;
-	}
 	
 	public String getName(){
-		if(name != null){
-			return name;
-		}
-		return entity == null ? "" : entity.getTag(OSMTagKey.NAME);
+		return name;
 	}
 	
 	public void setName(String name) {
@@ -167,5 +156,4 @@ public class Region {
 		
 		
 	}
-
 }

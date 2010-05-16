@@ -21,6 +21,7 @@ public class City extends MapObject<Node> {
 		 public double getRadius() {
 			return radius;
 		}
+		 
 	}
 	
 	private final Node el;

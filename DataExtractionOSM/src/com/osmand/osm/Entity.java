@@ -61,9 +61,16 @@ public abstract class Entity {
 	 */
 	public abstract LatLon getLatLon();
 	
+	
+	public boolean isVirtual(){
+		return id < 0;
+	}
 
 	@Override
 	public int hashCode() {
+		if (id < 0) {
+			return System.identityHashCode(this);
+		}
 		return (int) id;
 	}
 
@@ -78,6 +85,10 @@ public abstract class Entity {
 		Entity other = (Entity) obj;
 		if (id != other.id)
 			return false;
+		// virtual are not equal
+		if(id < 0){
+			return false;
+		}
 		return true;
 	}
 }

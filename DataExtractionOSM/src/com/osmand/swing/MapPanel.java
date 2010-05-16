@@ -2,6 +2,7 @@ package com.osmand.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -28,9 +29,15 @@ import java.util.Map;
 
 import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
@@ -148,6 +155,10 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 	private MapTileDownloader downloader = MapTileDownloader.getInstance();
 	Map<String, Image> cache = new HashMap<String, Image>();
+
+	private JLabel gpsLocation;
+
+	private JButton areaButton;
 	
 	
 	
@@ -158,6 +169,8 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		longitude = defaultLocation.getLongitude();
 		zoom = DataExtractionSettings.getSettings().getDefaultZoom();
 		
+		
+		addControls();
 		
 		downloader.setDownloaderCallback(this);
 		setFocusable(true);
@@ -172,7 +185,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		addMouseMotionListener(mouse);
 		addMouseWheelListener(mouse);
 		
-		addZoomButtons();
+		
 	}
 
 	
@@ -228,10 +241,8 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 			g.fillRect(r.x, r.y, r.width, r.height);
 		}
 		
+		
 		g.setColor(Color.black);
-		String s = MessageFormat.format("Lat : {0}, lon : {1}, zoom : {2}", latitude, longitude, zoom);
-		g.drawString(s, 5, 20);
-
 		g.fillOval(getWidth() / 2 - 2, getHeight() / 2 - 2, 4, 4);
 		g.drawOval(getWidth() / 2 - 2, getHeight() / 2 - 2, 4, 4);
 		g.drawOval(getWidth() / 2 - 5, getHeight() / 2 - 5, 10, 10);
@@ -292,6 +303,10 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		}
 		
 		return cache.get(file);
+	}
+	
+	public void setAreaActionHandler(Action a){
+		areaButton.setAction(a);
 	}
 	
 	@Override
@@ -428,7 +443,12 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		listeners.remove(l);
 	}
 	
+	private void updateLocationLabel(){
+		gpsLocation.setText(MessageFormat.format("Lat : {0}, lon : {1}, zoom : {2}", latitude, longitude, zoom));
+	}
+	
 	protected void fireMapLocationListeners(){
+		updateLocationLabel();
 		for(IMapLocationListener l : listeners){
 			l.locationChanged(latitude, longitude, null);
 		}
@@ -458,7 +478,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 			}
 		}
 		if(e.getID() == KeyEvent.KEY_TYPED){
-			if(e.getKeyChar() == '+'){
+			if(e.getKeyChar() == '+' || e.getKeyChar() == '=' ){
 				if(zoom < map.getMaximumZoomSupported()){
 					zoom ++;
 					processed = true;
@@ -488,9 +508,27 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		prepareImage();
 	}
 	
-	public void addZoomButtons(){
+	public void addControls(){
+		BoxLayout layout = new BoxLayout(this, BoxLayout.LINE_AXIS);
+		setLayout(layout);
+		setBorder(BorderFactory.createEmptyBorder(2, 10, 10, 10));
+		
+		gpsLocation = new JLabel();
+		gpsLocation.setOpaque(false);
+		updateLocationLabel();
+		
 		JButton zoomIn = new JButton("+");
 		JButton zoomOut = new JButton("-");
+		areaButton = new JButton();
+		areaButton.setAction(new AbstractAction("Preload area"){
+			private static final long serialVersionUID = -5512220294374994021L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+			
+		});
 		zoomIn.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -503,8 +541,17 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 				setZoom(getZoom() - 1);
 			}
 		});
+		
+		add(gpsLocation);
+		add(Box.createHorizontalGlue());
+		add(areaButton);
 		add(zoomIn);
 		add(zoomOut);
+		gpsLocation.setAlignmentY(Component.TOP_ALIGNMENT);
+		areaButton.setVisible(false);
+		areaButton.setAlignmentY(Component.TOP_ALIGNMENT);
+		zoomOut.setAlignmentY(Component.TOP_ALIGNMENT);
+		zoomIn.setAlignmentY(Component.TOP_ALIGNMENT);
 	}
 	
 	public class MapSelectionArea {
@@ -569,6 +616,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 			lat2 = MapUtils.getLatitudeFromTile(zoom, yTile2);
 			lon1 = MapUtils.getLongitudeFromTile(zoom, xTile1);
 			lon2 = MapUtils.getLongitudeFromTile(zoom, xTile2);
+			areaButton.setVisible(isVisible());
 		}
 		
 	}
