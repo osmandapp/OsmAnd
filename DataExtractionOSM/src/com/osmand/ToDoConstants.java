@@ -28,7 +28,6 @@ public class ToDoConstants {
 	// 1. POI SEARCH NEAR TO YOU
 	// 2. FIX BACK TO your location & gps & point of view (may be compass)
 	// 3. Revise UI icons/layout
-	// 4. Fix Java Spring to prepare your data!!! (add progress, import/export data)
 	// 5. Enable city/streets/buildings index
 	// 7. Search for city/streets/buildings!
 	// 8. Enable change POI directly on map
@@ -41,10 +40,9 @@ public class ToDoConstants {
 	/// SWING version : 
 	// TODO : 
 	// 1. Add preferences dialog (use internet, )
-	// 2. specify area to download tiles ()
+	// 2. implement bundle downloading tiles ()
 	// 3. download tiles without using dir tiles
 	// 4. Config file log & see log from file
-	// 5. specify area to load map (filter for osm loading)
 	// 6. Predefine what should be extracted from osm (building, poi or roads)
 	// 7. Fix TODO in files (accept amenity - way)
 

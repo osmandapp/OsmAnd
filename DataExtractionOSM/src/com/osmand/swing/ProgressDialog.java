@@ -24,7 +24,6 @@ public class ProgressDialog extends JDialog implements IProgress {
 	private InvocationTargetException exception = null;
 	
 	private Object result;
-	private boolean finished;
 	
 	
 
@@ -41,13 +40,9 @@ public class ProgressDialog extends JDialog implements IProgress {
     }
     
     public Object run() throws InvocationTargetException, InterruptedException {
-		finished = false;
 		result = null;
 		new WorkerThread().start();
 		setVisible(true);
-		if (!finished) {
-			
-		}
 		if (exception != null) {
 			throw exception;
 		}

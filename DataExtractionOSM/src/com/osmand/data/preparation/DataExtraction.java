@@ -1,5 +1,6 @@
 package com.osmand.data.preparation;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,6 +18,7 @@ import org.apache.tools.bzip2.CBZip2InputStream;
 import org.apache.tools.bzip2.CBZip2OutputStream;
 import org.xml.sax.SAXException;
 
+import com.osmand.Algoritms;
 import com.osmand.IProgress;
 import com.osmand.data.Amenity;
 import com.osmand.data.City;
@@ -35,7 +37,6 @@ import com.osmand.osm.OSMSettings.OSMTagKey;
 import com.osmand.osm.io.IOsmStorageFilter;
 import com.osmand.osm.io.OSMStorageWriter;
 import com.osmand.osm.io.OsmBaseStorage;
-import com.osmand.swing.OsmExtractionUI;
 
 
 // TO implement
@@ -75,9 +76,10 @@ import com.osmand.swing.OsmExtractionUI;
 public class DataExtraction  {
 	private static final Log log = LogFactory.getLog(DataExtraction.class);
 	
-	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, XMLStreamException {
-		new DataExtraction().testReadingOsmFile();
-	}
+//	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, XMLStreamException {
+//		new DataExtraction().testReadingOsmFile();
+//	}
+	
 	// External files
 	public static String pathToTestDataDir = "E:\\Information\\OSM maps\\";
 	public static String pathToOsmFile =  pathToTestDataDir + "minsk.osm";
@@ -85,17 +87,13 @@ public class DataExtraction  {
 	public static String pathToWorkingDir = pathToTestDataDir +"osmand\\";
 	public static String pathToDirWithTiles = pathToWorkingDir +"tiles";
 	public static String writeTestOsmFile = "C:\\1_tmp.osm"; // could be null - wo writing
-	
 	private static boolean parseSmallFile = true;
 	private static boolean parseOSM = true;
-	private ArrayList<Way> ways;
-	private ArrayList<Amenity> amenities;
-	private ArrayList<Entity> buildings;
-	private ArrayList<Node> places;
-	private DataTileManager<Way> waysManager;
+	
+	
 
 	///////////////////////////////////////////
-	// 1. Reading data - preparing data for UI
+	// Test method for local purposes
 	public void testReadingOsmFile() throws ParserConfigurationException, SAXException, IOException, XMLStreamException {
 		String f;
 		if(parseSmallFile){
@@ -107,21 +105,15 @@ public class DataExtraction  {
 		
 		Region country;
 		if(parseOSM){
-			country = readCountry(f, new ConsoleProgressImplementation());
+			country = readCountry(f, new ConsoleProgressImplementation(), null);
 		} else {
-			country = new Region(null);
+			country = new Region();
 			country.setStorage(new OsmBaseStorage());
 		}
 		
        
-        OsmExtractionUI ui = new OsmExtractionUI(country);
-        ui.createUI();
-        
+        // TODO add interested objects
 		List<Long> interestedObjects = new ArrayList<Long>();
-//		MapUtils.addIdsToList(places, interestedObjects);
-//		MapUtils.addIdsToList(amenities, interestedObjects);
-		MapUtils.addIdsToList(waysManager.getAllObjects(), interestedObjects);
-//		MapUtils.addIdsToList(buildings, interestedObjects);
 		if (writeTestOsmFile != null) {
 			OSMStorageWriter writer = new OSMStorageWriter(country.getStorage().getRegisteredEntities());
 			OutputStream output = new FileOutputStream(writeTestOsmFile);
@@ -141,16 +133,17 @@ public class DataExtraction  {
 	}
 
 	
-	public Region readCountry(String path, IProgress progress, IOsmStorageFilter... filters) throws IOException, SAXException{
-		InputStream stream = new FileInputStream(path);
+	public Region readCountry(String path, IProgress progress, IOsmStorageFilter addFilter) throws IOException, SAXException{
+		File f = new File(path);
+		InputStream stream = new FileInputStream(f);
 		InputStream streamFile = stream;
 		long st = System.currentTimeMillis();
-		if(path.endsWith(".bz2")){
-			if (stream.read() != 'B' || stream.read() != 'Z')
-				throw new RuntimeException(
-						"The source stream must start with the characters BZ if it is to be read as a BZip2 stream.");
-			else
-				stream = new CBZip2InputStream(stream);	
+		if (path.endsWith(".bz2")) {
+			if (stream.read() != 'B' || stream.read() != 'Z') {
+				throw new RuntimeException("The source stream must start with the characters BZ if it is to be read as a BZip2 stream.");
+			} else {
+				stream = new CBZip2InputStream(stream);
+			}
 		}
 		
 		if(progress != null){
@@ -158,11 +151,10 @@ public class DataExtraction  {
 		}
 
 		// preloaded data
-		places = new ArrayList<Node>();
-		buildings = new ArrayList<Entity>();
-		amenities = new ArrayList<Amenity>();
-		// highways count
-		ways = new ArrayList<Way>();
+		final ArrayList<Node> places = new ArrayList<Node>();
+		final ArrayList<Entity> buildings = new ArrayList<Entity>();
+		final ArrayList<Amenity> amenities = new ArrayList<Amenity>();
+		final ArrayList<Way> ways = new ArrayList<Way>();
 		
 		IOsmStorageFilter filter = new IOsmStorageFilter(){
 			@Override
@@ -190,12 +182,8 @@ public class DataExtraction  {
 		};
 		
 		OsmBaseStorage storage = new OsmBaseStorage();
-		if(filters != null){
-			for(IOsmStorageFilter f : filters){
-				if(f != null){
-					storage.getFilters().add(f);
-				}
-			}
+		if (addFilter != null) {
+			storage.getFilters().add(addFilter);
 		}
 		storage.getFilters().add(filter);
 
@@ -204,29 +192,59 @@ public class DataExtraction  {
 			log.debug("File parsed : " + (System.currentTimeMillis() - st));
 		}
         
-        // 1. found towns !
-        Region country = new Region(null);
+        // 1. Initialize region
+        Region country = new Region();
+        int i = f.getName().indexOf('.');
+        country.setName(Algoritms.capitalizeFirstLetterAndLowercase(f.getName().substring(0, i)));
         country.setStorage(storage);
-        for (Node s : places) {
-        	String place = s.getTag(OSMTagKey.PLACE);
-        	if(place == null){
-        		continue;
-        	}
-        	if("country".equals(place)){
-        		country.setEntity(s);
+
+        // 2. Reading amenities
+        readingAmenities(amenities, country);
+
+        // 3. Reading cities
+        readingCities(places, country);
+
+        // 4. Reading streets
+        readingStreets(progress, ways, country);
+        
+        // 5. reading buildings
+        readingBuildings(progress, buildings, country);
+        
+        country.doDataPreparation();
+        return country;
+	}
+
+
+	private void readingBuildings(IProgress progress, final ArrayList<Entity> buildings, Region country) {
+		// found buildings (index addresses)
+        progress.startTask("Indexing buildings...", buildings.size());
+        for(Entity b : buildings){
+        	LatLon center = b.getLatLon();
+        	progress.progress(1);
+        	// TODO first of all tag could be checked NodeUtil.getTag(e, "addr:city")
+        	if(center == null){
+        		// no nodes where loaded for this way
         	} else {
-        		country.registerCity(s);
-        	}
-		}
-        
-        
-        
-        for(Amenity a: amenities){
-        	country.registerAmenity(a);
+				City city = country.getClosestCity(center);
+				if(city == null){
+					Node n = new Node(center.getLatitude(), center.getLongitude(), -1);
+					n.putTag(OSMTagKey.PLACE.getValue(), CityType.TOWN.name());
+					n.putTag(OSMTagKey.NAME.getValue(), "Uknown city");
+					country.registerCity(n);
+					city = country.getClosestCity(center);
+				}
+				if (city != null) {
+					city.registerBuilding(b);
+				}
+			}
         }
-        
-        progress.startTask("Indexing streets...", ways.size());
-        waysManager = new DataTileManager<Way>();
+        progress.finishTask();
+	}
+
+
+	private void readingStreets(IProgress progress, final ArrayList<Way> ways, Region country) {
+		progress.startTask("Indexing streets...", ways.size());
+        DataTileManager<Way> waysManager = new DataTileManager<Way>();
         for (Way w : ways) {
         	progress.progress(1);
         	if (w.getTag(OSMTagKey.NAME) != null) {
@@ -254,35 +272,24 @@ public class DataExtraction  {
 		}
         progress.finishTask();
         /// way with name : МЗОР, ул. ...,
-        
-        
-        // found buildings (index addresses)
-        progress.startTask("Indexing buildings...", buildings.size());
-        for(Entity b : buildings){
-        	LatLon center = b.getLatLon();
-        	progress.progress(1);
-        	// TODO first of all tag could be checked NodeUtil.getTag(e, "addr:city")
-        	if(center == null){
-        		// no nodes where loaded for this way
-        	} else {
-				City city = country.getClosestCity(center);
-				if(city == null){
-					Node n = new Node(center.getLatitude(), center.getLongitude(), -1);
-					n.putTag(OSMTagKey.PLACE.getValue(), CityType.TOWN.name());
-					n.putTag(OSMTagKey.NAME.getValue(), "Uknown city");
-					country.registerCity(n);
-					city = country.getClosestCity(center);
-				}
-				if (city != null) {
-					city.registerBuilding(b);
-				}
-			}
-        }
-        progress.finishTask();
-        
-        country.doDataPreparation();
-        return country;
 	}
+
+
+	private void readingAmenities(final ArrayList<Amenity> amenities, Region country) {
+		for(Amenity a: amenities){
+        	country.registerAmenity(a);
+        }
+	}
+
 	
+	public void readingCities(ArrayList<Node> places, Region country) {
+		for (Node s : places) {
+			String place = s.getTag(OSMTagKey.PLACE);
+			if (place == null) {
+				continue;
+			}
+			country.registerCity(s);
+		}
+	}
 	
 }
