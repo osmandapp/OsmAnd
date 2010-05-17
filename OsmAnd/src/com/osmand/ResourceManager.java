@@ -5,13 +5,15 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Stack;
 import java.util.TreeMap;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import org.apache.commons.logging.Log;
-import org.apache.tools.bzip2.CBZip2InputStream;
 import org.xml.sax.SAXException;
 
 import android.graphics.Bitmap;
@@ -24,10 +26,7 @@ import com.osmand.data.Region;
 import com.osmand.data.preparation.MapTileDownloader;
 import com.osmand.data.preparation.MapTileDownloader.DownloadRequest;
 import com.osmand.map.ITileSource;
-import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
-import com.osmand.osm.Node;
-import com.osmand.osm.io.OsmBaseStorage;
 import com.osmand.osm.io.OsmIndexStorage;
 
 /**
@@ -196,121 +195,102 @@ public class ResourceManager {
 		return cacheOfImages.get(req.fileToLoad);
 	}
 	
+	private interface IndexVisitor {
+		/**
+		 * returns if entry was visited succesfully
+		 */
+		public boolean visitEntry(String entryName, InputStream stream) throws IOException, SAXException;
+	}
 	
-	// POI INDEX //
-	public void indexingPoi(IProgress progress){
-		if (poiIndex == null) {
-			File file = new File(Environment.getExternalStorageDirectory(), POI_PATH);
-			poiIndex = new DataTileManager<Amenity>();
-			if (file.exists() && file.canRead()) {
-				for (File f : file.listFiles()) {
-					if (f.getName().endsWith(".bz2") || f.getName().endsWith(".osm") || f.getName().endsWith(".osmand")) {
-						long start = System.currentTimeMillis();
-						if (log.isDebugEnabled()) {
-							log.debug("Starting index POI " + f.getAbsolutePath());
-						}
-						boolean zipped = f.getName().endsWith(".bz2");
-						InputStream stream = null;
-						try {
-							OsmBaseStorage storage;
-							boolean indexStorage = false;
-							if(f.getName().contains(".osmand")){
-								storage = new OsmIndexStorage(new Region());
-								indexStorage = true;
-							} else {
-								storage = new OsmBaseStorage();
-							}
-							stream = new FileInputStream(f);
-//							stream = new BufferedInputStream(stream);
-							InputStream streamForProgress = stream;
-							if (zipped) {
-								if (stream.read() != 'B' || stream.read() != 'Z') {
-									log.error("Can't read poi file " + f.getAbsolutePath()
-											+ "The source stream must start with the characters BZ if it is to be read as a BZip2 stream.");
-									continue;
-								} else {
-									stream = new CBZip2InputStream(stream);
-								}
-							}
-							if(progress != null){
-								progress.startTask("Indexing poi " + f.getName(), stream.available());
-							}
-							storage.parseOSM(stream, progress, streamForProgress);
-							if(indexStorage){
-								Region region = ((OsmIndexStorage) storage).getRegion();
-								for(Amenity a : region.getAmenityManager().getAllObjects()){
-									LatLon location = a.getLocation();
-									poiIndex.registerObject(location.getLatitude(), location.getLongitude(), a);
-								}
-							} else {
-								for (Entity e : storage.getRegisteredEntities().values()) {
-									if (e instanceof Node && Amenity.isAmenity((Node) e)) {
-										poiIndex.registerObject(((Node) e).getLatitude(), ((Node) e).getLongitude(), new Amenity((Node) e));
-									}
-								}
-							}
-							if (log.isDebugEnabled()) {
-								log.debug("Finishing index POI " + f.getAbsolutePath() + " " +(System.currentTimeMillis() - start)+"ms");
-							}
-						} catch (IOException e) {
-							log.error("Can't read poi file " + f.getAbsolutePath(), e);
-						} catch (SAXException e) {
-							log.error("Can't read poi file " + f.getAbsolutePath(), e);
-						} finally {
-							Algoritms.closeStream(stream);
-						}
+	
+	public void indexingFiles(String pathToIndex, String ext, IProgress progress, String objectToIndex, IndexVisitor visitor) {
+		File file = new File(Environment.getExternalStorageDirectory(), pathToIndex);
+		if (file.exists() && file.canRead()) {
+			for (File f : file.listFiles()) {
+				InputStream stream = null;
+				ZipFile zipFile = null;
+				Enumeration<? extends ZipEntry> entries = null;
+				try {
+					if (f.getName().endsWith(".zip")) {
+						zipFile = new ZipFile(f);
+						entries = zipFile.entries();
+					} else {
+						stream = new FileInputStream(f);
 					}
+				} catch (IOException e) {
+					log.error("Can't read file " + f.getAbsolutePath(), e);
+					continue;
 				}
+				String entryName = f.getName();
+				do {
+					try {
+						if (entries != null && entries.hasMoreElements()) {
+							ZipEntry entry = entries.nextElement();
+							entryName = entry.getName();
+							stream = zipFile.getInputStream(entry);
+						}
+
+						if (entryName != null && entryName.endsWith(ext)) {
+							long start = System.currentTimeMillis();
+							if (log.isDebugEnabled()) {
+								log.debug("Starting index " + objectToIndex + " " + f.getAbsolutePath());
+							}
+
+							if (progress != null) {
+								progress.startTask("Indexing " + objectToIndex + " " + f.getName(), stream.available());
+							}
+							visitor.visitEntry(f.getName(), stream);
+							if (log.isDebugEnabled()) {
+								log.debug("Finished index " + objectToIndex + " " + f.getAbsolutePath() + " "
+										+ (System.currentTimeMillis() - start) + "ms");
+							}
+						}
+					} catch (IOException e) {
+						log.error("Can't read file " + f.getAbsolutePath(), e);
+					} catch (SAXException e) {
+						log.error("Can't read file " + f.getAbsolutePath(), e);
+					} finally {
+						Algoritms.closeStream(stream);
+					}
+				} while (zipFile != null && entries.hasMoreElements());
 			}
 		}
 	}
 	
-	public void indexingAddresses(IProgress progress){
-			File file = new File(Environment.getExternalStorageDirectory(), ADDRESS_PATH);
-			if (file.exists() && file.canRead()) {
-				for (File f : file.listFiles()) {
-					if (f.getName().endsWith(".osmand.bz2") || f.getName().endsWith(".osmand")) {
-						long start = System.currentTimeMillis();
-						if (log.isDebugEnabled()) {
-							log.debug("Starting index address " + f.getAbsolutePath());
-						}
-						boolean zipped = f.getName().endsWith(".bz2");
-						InputStream stream = null;
-						String name = f.getName().substring(0, f.getName().indexOf('.'));
-						Region region = new Region();
-						region.setName(name);
-						addressMap.put(name, region);
-						try {
-							OsmIndexStorage storage = new OsmIndexStorage(region);
-							stream = new FileInputStream(f);
-//							stream = new BufferedInputStream(stream);
-							InputStream streamForProgress = stream;
-							if (zipped) {
-								if (stream.read() != 'B' || stream.read() != 'Z') {
-									log.error("Can't read index file " + f.getAbsolutePath()
-											+ "The source stream must start with the characters BZ if it is to be read as a BZip2 stream.");
-									continue;
-								} else {
-									stream = new CBZip2InputStream(stream);
-								}
-							}
-							if(progress != null){
-								progress.startTask("Indexing address " + f.getName(), stream.available());
-							}
-							storage.parseOSM(stream, progress, streamForProgress);
-							if (log.isDebugEnabled()) {
-								log.debug("Finishing index address " + f.getAbsolutePath() + " " +(System.currentTimeMillis() - start)+"ms");
-							}
-						} catch (IOException e) {
-							log.error("Can't read index file " + f.getAbsolutePath(), e);
-						} catch (SAXException e) {
-							log.error("Can't read index file " + f.getAbsolutePath(), e);
-						} finally {
-							Algoritms.closeStream(stream);
-						}
+	// POI INDEX //
+	public void indexingPoi(final IProgress progress) {
+		if (poiIndex == null) {
+			poiIndex = new DataTileManager<Amenity>();
+			indexingFiles(POI_PATH, ".osmand", progress, "POI", new IndexVisitor() {
+				@Override
+				public boolean visitEntry(String entryName, InputStream stream) throws IOException, SAXException {
+					OsmIndexStorage storage = new OsmIndexStorage(new Region());
+					storage.parseOSM(stream, progress);
+					Region region = ((OsmIndexStorage) storage).getRegion();
+					for (Amenity a : region.getAmenityManager().getAllObjects()) {
+						LatLon location = a.getLocation();
+						poiIndex.registerObject(location.getLatitude(), location.getLongitude(), a);
 					}
+					return true;
 				}
+
+			});
+		}
+	}
+	
+	public void indexingAddresses(final IProgress progress){
+		indexingFiles(ADDRESS_PATH, ".osmand", progress, "address", new IndexVisitor() {
+			@Override
+			public boolean visitEntry(String entryName, InputStream stream) throws IOException, SAXException {
+				String name = entryName.substring(0, entryName.indexOf('.'));
+				Region region = new Region();
+				region.setName(name);
+				addressMap.put(name, region);
+				OsmIndexStorage storage = new OsmIndexStorage(region);
+				storage.parseOSM(stream, progress);
+				return true;
 			}
+		});
 	}
 	
 	public DataTileManager<Amenity> getPoiIndex() {

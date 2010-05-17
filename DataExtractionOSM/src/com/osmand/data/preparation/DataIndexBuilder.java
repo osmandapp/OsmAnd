@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import javax.xml.stream.XMLStreamException;
-
-import org.apache.tools.bzip2.CBZip2OutputStream;
 
 import com.osmand.data.Amenity;
 import com.osmand.data.Region;
@@ -36,21 +36,25 @@ public class DataIndexBuilder {
 	}
 	
 	protected OutputStream checkFile(String name) throws IOException {
-		if (zipped && !name.endsWith(".bz2")) {
-			name += ".bz2";
+		String fileName = name;
+		if (zipped) {
+			// change name
+			name = new File(name).getName();
+			fileName += ".zip";
 		}
-		File f = new File(workingDir, name);
+		File f = new File(workingDir, fileName);
 		f.mkdirs();
 		// remove existing file
 		if (f.exists()) {
 			f.delete();
 		}
-		OutputStream output = new FileOutputStream(f);
-		if (name.endsWith(".bz2")) {
-			output.write('B');
-			output.write('Z');
-			output = new CBZip2OutputStream(output);
-		}
+		OutputStream output =  new FileOutputStream(f);
+		if(zipped){
+			ZipOutputStream zipStream = new ZipOutputStream(output);
+			zipStream.setLevel(5);
+			zipStream.putNextEntry(new ZipEntry(name));
+			output = zipStream;
+		} 
 		return output;
 	}
 	
@@ -62,14 +66,7 @@ public class DataIndexBuilder {
 		for(Amenity a : list)	{
 			interestedObjects.add(a.getEntity().getId());
 		}
-		OutputStream output = checkFile("POI/"+region.getName()+".osm");
-		try {
-			OsmStorageWriter writer = new OsmStorageWriter();
-			writer.saveStorage(output, region.getStorage(), interestedObjects, false);
-		} finally {
-			output.close();
-		}
-		output = checkFile("POI/"+region.getName()+".osmand");
+		OutputStream output = checkFile("POI/"+region.getName()+".osmand");
 		try {
 			OsmStorageWriter writer = new OsmStorageWriter();
 			writer.savePOIIndex(output, region);
