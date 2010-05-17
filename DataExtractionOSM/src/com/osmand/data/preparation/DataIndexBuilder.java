@@ -13,7 +13,7 @@ import org.apache.tools.bzip2.CBZip2OutputStream;
 
 import com.osmand.data.Amenity;
 import com.osmand.data.Region;
-import com.osmand.osm.io.OSMStorageWriter;
+import com.osmand.osm.io.OsmStorageWriter;
 
 
 public class DataIndexBuilder {
@@ -64,14 +64,14 @@ public class DataIndexBuilder {
 		}
 		OutputStream output = checkFile("POI/"+region.getName()+".osm");
 		try {
-			OSMStorageWriter writer = new OSMStorageWriter();
+			OsmStorageWriter writer = new OsmStorageWriter();
 			writer.saveStorage(output, region.getStorage(), interestedObjects, false);
 		} finally {
 			output.close();
 		}
 		output = checkFile("POI/"+region.getName()+".osmand");
 		try {
-			OSMStorageWriter writer = new OSMStorageWriter();
+			OsmStorageWriter writer = new OsmStorageWriter();
 			writer.savePOIIndex(output, region);
 		} finally {
 			output.close();
@@ -82,7 +82,7 @@ public class DataIndexBuilder {
 	public DataIndexBuilder buildAddress() throws XMLStreamException, IOException{
 		OutputStream output = checkFile("Address/"+region.getName()+".osmand");
 		try {
-			OSMStorageWriter writer = new OSMStorageWriter();
+			OsmStorageWriter writer = new OsmStorageWriter();
 			writer.saveAddressIndex(output, region);
 		} finally {
 			output.close();

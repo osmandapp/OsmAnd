@@ -35,7 +35,7 @@ import com.osmand.osm.OSMSettings;
 import com.osmand.osm.Way;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 import com.osmand.osm.io.IOsmStorageFilter;
-import com.osmand.osm.io.OSMStorageWriter;
+import com.osmand.osm.io.OsmStorageWriter;
 import com.osmand.osm.io.OsmBaseStorage;
 
 
@@ -115,7 +115,7 @@ public class DataExtraction  {
         // TODO add interested objects
 		List<Long> interestedObjects = new ArrayList<Long>();
 		if (writeTestOsmFile != null) {
-			OSMStorageWriter writer = new OSMStorageWriter();
+			OsmStorageWriter writer = new OsmStorageWriter();
 			OutputStream output = new FileOutputStream(writeTestOsmFile);
 			if (writeTestOsmFile.endsWith(".bz2")) {
 				output.write('B');

@@ -93,7 +93,7 @@ public class OSMIndexStorage extends OsmBaseStorage {
 			a.setType(AmenityType.fromString(attributes.getValue(ATTR_TYPE)));
 			a.setSubType(attributes.getValue(ATTR_SUBTYPE));
 			parseMapObject(a, attributes);
-			region.registerAmenity(a);
+			currentParsedStreet.registerBuilding(building);
 		} else {
 			super.startElement(uri, localName, name, attributes);
 		}

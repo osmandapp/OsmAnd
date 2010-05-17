@@ -38,7 +38,7 @@ public class Region extends MapObject<Entity> {
 	}
 	
 	public Region(){
-		this.name = "Region";
+		name = "Region";
 	}
 	
 	public OsmBaseStorage getStorage() {

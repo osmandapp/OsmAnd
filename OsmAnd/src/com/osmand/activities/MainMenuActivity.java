@@ -77,6 +77,7 @@ public class MainMenuActivity extends Activity {
 			public void run() {
 				try {
 					ResourceManager.getResourceManager().indexingPoi(impl);
+					ResourceManager.getResourceManager().indexingAddresses(impl);
 				} finally {
 					dlg.dismiss();
 				}
