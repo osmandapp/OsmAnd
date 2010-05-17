@@ -14,7 +14,6 @@ public class Street extends MapObject<Entity> {
 	
 	private List<Building> buildings = new ArrayList<Building>(); 
 	private List<Node> wayNodes = new ArrayList<Node>();
-	private Node center = null;
 
 	public Street(String name){
 		this.name = name;
@@ -37,15 +36,15 @@ public class Street extends MapObject<Entity> {
 	}
 	
 	public LatLon getLocation(){
-		if(center == null){
+		if(entity == null){
 			calculateCenter();
 		}
-		return center == null ? null : center.getLatLon();
+		return entity == null ? null : entity.getLatLon();
 	}
 	
 	protected void calculateCenter(){
 		if(wayNodes.size() == 1){
-			center = wayNodes.get(0);
+			entity = wayNodes.get(0);
 			return;
 		}
 		LatLon c = MapUtils.getWeightCenterForNodes(wayNodes);
@@ -54,7 +53,7 @@ public class Street extends MapObject<Entity> {
 			if (n != null) {
 				double nd = MapUtils.getDistance(n, c);
 				if (nd < dist) {
-					center = n;
+					entity = n;
 					dist = nd;
 				}
 			}
@@ -69,11 +68,6 @@ public class Street extends MapObject<Entity> {
 	public void doDataPreparation() {
 		calculateCenter();
 		Collections.sort(buildings);
-	}
-
-	@Override
-	public Entity getEntity() {
-		return center;
 	}
 
 }

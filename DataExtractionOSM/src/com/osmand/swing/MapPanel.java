@@ -311,20 +311,24 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 	@Override
 	public void tileDownloaded(DownloadRequest request) {
+		if(request == null){
+			prepareImage(false);
+			return;	
+		}
 		int tileSize = getTileSize();
 		double xTileLeft = getXTile() - getSize().width / (2d * tileSize);
 		double yTileUp = getYTile() - getSize().height / (2d * tileSize);
 		int i = request.xTile - (int)xTileLeft;
 		int j = request.yTile - (int)yTileUp;
-		if(request.zoom == this.zoom && 
-				(i >=0 && i<images.length) && (j>=0 && j< images[i].length)){
+		if (request.zoom == this.zoom && (i >= 0 && i < images.length) && (j >= 0 && j < images[i].length)) {
 			try {
+				System.out.println();
 				images[i][j] = getImageFor(request.xTile, request.yTile, zoom, false);
 				repaint();
 			} catch (IOException e) {
-				log.error("Eror reading png " + request.xTile +" " + request.yTile + " zoom : " + zoom, e);
+				log.error("Eror reading png " + request.xTile + " " + request.yTile + " zoom : " + zoom, e);
 			}
-			
+
 		}
 	}
 	

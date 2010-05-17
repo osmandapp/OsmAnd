@@ -260,9 +260,14 @@ public class OsmExtractionUI implements IMapLocationListener {
 		        DefaultMutableTreeNode node;
 		        node = (DefaultMutableTreeNode)
 		                 (e.getTreePath().getLastPathComponent());
-		        if(node instanceof DataExtractionTreeNode && ((DataExtractionTreeNode) node).getModelObject() instanceof Region){
-		        	Region r = (Region) ((DataExtractionTreeNode) node).getModelObject();
-		        	r.setName(node.getUserObject().toString());
+		        if(node instanceof DataExtractionTreeNode){
+		        	if(((DataExtractionTreeNode) node).getModelObject() instanceof Region){
+		        		Region r = (Region) ((DataExtractionTreeNode) node).getModelObject();
+		        		r.setName(node.getUserObject().toString());
+		        	} else if(((DataExtractionTreeNode) node).getModelObject() instanceof MapObject<?>){
+		        		MapObject<?> r = (MapObject<?>) ((DataExtractionTreeNode) node).getModelObject();
+		        		r.setName(node.getUserObject().toString());
+		        	}
 		        }
 		    }
 		    public void treeNodesInserted(TreeModelEvent e) {
@@ -726,7 +731,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 				Object node = tree.getLastSelectedPathComponent();
 				if (node instanceof DataExtractionTreeNode) {
 					DataExtractionTreeNode treeNode = (DataExtractionTreeNode) node;
-					if (treeNode.getModelObject() instanceof Region) {
+					if (treeNode.getModelObject() instanceof Region || treeNode.getModelObject() instanceof MapObject<?>) {
 						return true;
 					}
 				}

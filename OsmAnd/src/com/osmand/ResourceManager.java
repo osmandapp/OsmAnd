@@ -207,7 +207,8 @@ public class ResourceManager {
 						try {
 							OsmBaseStorage storage = new OsmBaseStorage();
 							stream = new FileInputStream(f);
-							stream = new BufferedInputStream(stream);
+//							stream = new BufferedInputStream(stream);
+							InputStream streamForProgress = stream;
 							if (zipped) {
 								if (stream.read() != 'B' || stream.read() != 'Z') {
 									log.error("Can't read poi file " + f.getAbsolutePath()
@@ -220,7 +221,7 @@ public class ResourceManager {
 							if(progress != null){
 								progress.startTask("Indexing poi " + f.getName(), stream.available());
 							}
-							storage.parseOSM(stream, progress);
+							storage.parseOSM(stream, progress, streamForProgress);
 							for (Entity e : storage.getRegisteredEntities().values()) {
 								if (e instanceof Node && Amenity.isAmenity((Node) e)) {
 									poiIndex.registerObject(((Node)e).getLatitude(), ((Node)e).getLongitude(), new Amenity((Node) e));

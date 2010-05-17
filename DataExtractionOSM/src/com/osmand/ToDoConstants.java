@@ -35,6 +35,9 @@ public class ToDoConstants {
 	// 9. Log to see when exception occured(android)
 	// 10. Specify auto-rotating map (compass).
 	// 11. Print out additional info speed, altitude, number of satellites
+	// 12. Show point where are you going (the arrow not the point)
+	// 13. Save point as favourite
+	// 14. Show zoom level directly on map
 	// -------------------
 	
 	
@@ -44,8 +47,10 @@ public class ToDoConstants {
 	// 2. implement bundle downloading tiles ()
 	// 3. download tiles without using dir tiles
 	// 4. Config file log & see log from file
-	// 6. Predefine what should be extracted from osm (building, poi or roads)
+	// 6. Predefine before file loading what should be extracted from osm (building, poi or roads)
 	// 7. Fix TODO in files (accept amenity - way)
-	// 8. add progress for data generation process
+	// 9. Normalizing streets
+	// 10. Reinvent index mechanism (save in zip file with tile indexes, save city/town addresses separately, read partially !)
+	// 11. Street setName() change in city index!
 
 }
