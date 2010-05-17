@@ -16,7 +16,7 @@ import static com.osmand.osm.io.OsmBaseStorage.ELEM_OSM;
 import static com.osmand.osm.io.OsmBaseStorage.ELEM_RELATION;
 import static com.osmand.osm.io.OsmBaseStorage.ELEM_TAG;
 import static com.osmand.osm.io.OsmBaseStorage.ELEM_WAY;
-import static com.osmand.osm.io.OSMIndexStorage.*;
+import static com.osmand.osm.io.OsmIndexStorage.*;
 
 import java.io.IOException;
 import java.io.OutputStream;

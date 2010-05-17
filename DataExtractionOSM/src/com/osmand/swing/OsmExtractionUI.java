@@ -80,7 +80,7 @@ import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 import com.osmand.osm.Node;
 import com.osmand.osm.io.IOsmStorageFilter;
-import com.osmand.osm.io.OSMStorageWriter;
+import com.osmand.osm.io.OsmStorageWriter;
 import com.osmand.osm.io.OsmBoundsFilter;
 import com.osmand.swing.MapPanel.MapSelectionArea;
 
@@ -601,7 +601,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 	}
 	
 	public void saveCountry(final File f){
-		final OSMStorageWriter writer = new OSMStorageWriter();
+		final OsmStorageWriter writer = new OsmStorageWriter();
 		try {
     		final ProgressDialog dlg = new ProgressDialog(frame, "Saving osm file");
     		dlg.setRunnable(new Runnable() {

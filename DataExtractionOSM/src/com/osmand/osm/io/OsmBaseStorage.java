@@ -61,10 +61,10 @@ public class OsmBaseStorage extends DefaultHandler {
 	public synchronized void parseOSM(InputStream stream, IProgress progress, InputStream streamForProgress) throws IOException, SAXException {
 		this.inputStream = stream;
 		this.progress = progress;
-		this.streamForProgress = streamForProgress;
 		if(streamForProgress == null){
 			streamForProgress = inputStream;
 		}
+		this.streamForProgress = streamForProgress;
 		SAXParser parser = initSaxParser();
 		parseStarted = false;
 		entities.clear();
@@ -144,8 +144,8 @@ public class OsmBaseStorage extends DefaultHandler {
 		if(!parseStarted){
 			initRootElement(uri, localName, name, attributes);
 		}
-		if (currentParsedEntity == null && streamForProgress != null) {
-			if(progress != null && !progress.isIndeterminate()){
+		if (currentParsedEntity == null) {
+			if(progress != null && !progress.isIndeterminate() && streamForProgress != null){
 				try {
 					progress.remaining(streamForProgress.available());
 				} catch (IOException e) {
