@@ -47,14 +47,14 @@ import com.osmand.osm.Way;
 import com.sun.org.apache.xerces.internal.impl.PropertyManager;
 import com.sun.xml.internal.stream.writers.XMLStreamWriterImpl;
 
-public class OSMStorageWriter {
+public class OsmStorageWriter {
 
 	private final String INDENT = "    ";
 	private final String INDENT2 = INDENT + INDENT;
 	private final String INDENT3 = INDENT + INDENT + INDENT;
 
 
-	public OSMStorageWriter(){
+	public OsmStorageWriter(){
 	}
 	
 	

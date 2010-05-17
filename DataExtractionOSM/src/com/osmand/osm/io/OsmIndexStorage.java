@@ -13,7 +13,7 @@ import com.osmand.data.Amenity.AmenityType;
 import com.osmand.data.City.CityType;
 import com.osmand.osm.Entity;
 
-public class OSMIndexStorage extends OsmBaseStorage {
+public class OsmIndexStorage extends OsmBaseStorage {
 	protected static final String ELEM_OSMAND = "osmand";
 	protected static final String ELEM_INDEX = "index";
 	protected static final String ELEM_CITY = "city";
@@ -31,8 +31,12 @@ public class OSMIndexStorage extends OsmBaseStorage {
 	protected Region region;
 	
 	
-	public OSMIndexStorage(Region region){
+	public OsmIndexStorage(Region region){
 		this.region = region;
+	}
+	
+	public Region getRegion() {
+		return region;
 	}
 	
 	protected City currentParsedCity = null;
@@ -72,7 +76,7 @@ public class OSMIndexStorage extends OsmBaseStorage {
 			initRootElement(uri, localName, name, attributes);
 		} else if(ELEM_INDEX.equals(name)){
 		} else if(ELEM_CITY.equals(name)){
-			CityType t = CityType.valueOf(attributes.getValue(ATTR_CITYTYPE));
+			CityType t = CityType.valueFromString(attributes.getValue(ATTR_CITYTYPE));
 			City c = new City(t);
 			parseMapObject(c, attributes);					
 			region.registerCity(c);
@@ -93,7 +97,8 @@ public class OSMIndexStorage extends OsmBaseStorage {
 			a.setType(AmenityType.fromString(attributes.getValue(ATTR_TYPE)));
 			a.setSubType(attributes.getValue(ATTR_SUBTYPE));
 			parseMapObject(a, attributes);
-			currentParsedStreet.registerBuilding(building);
+			region.registerAmenity(a);
+			
 		} else {
 			super.startElement(uri, localName, name, attributes);
 		}
