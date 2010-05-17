@@ -2,7 +2,7 @@
 <resources>
     <string name="show_poi_over_map_description">Show POI on map</string>
     <string name="show_poi_over_map">Show POI</string>
-    <string name="map_tile_source_descr">Choose the source of tiles</string>
+    <string name="map_tile_source_descr">Choose the source of tiles:</string>
     <string name="map_tile_source">Map tile source</string>
     <string name="map_source">Map source</string>
     <string name="use_internet">Use internet</string>

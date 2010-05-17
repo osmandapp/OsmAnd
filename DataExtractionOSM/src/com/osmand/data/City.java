@@ -41,12 +41,11 @@ public class City extends MapObject<Node> {
 		}
 	}
 	
-	private Node el;
 	private CityType type = null;
 	private Map<String, Street> streets = new TreeMap<String, Street>(); 
 
 	public City(Node el){
-		this.el = el;
+		super(el);
 		type = CityType.valueFromString(el.getTag(OSMTagKey.PLACE));
 	}
 	
@@ -85,11 +84,6 @@ public class City extends MapObject<Node> {
 	
 	public Collection<Street> getStreets(){
 		return streets.values();
-	}
-	
-	@Override
-	public Node getEntity() {
-		return el;
 	}
 	
 	@Override

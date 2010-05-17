@@ -10,9 +10,22 @@ public abstract class MapObject<T extends Entity> implements Comparable<MapObjec
 	protected String name = null;
 	protected LatLon location = null;
 	protected Long id = null;
-	
 	// could be null
-	public abstract T getEntity();
+	protected T entity = null;
+
+	public MapObject(){}
+	
+	public MapObject(T e){
+		entity = e;
+	}
+	
+	public T getEntity(){
+		return entity;
+	}
+	
+	public void setEntity(T e){
+		entity = e;
+	}
 	
 	public void setId(Long id) {
 		this.id = id;

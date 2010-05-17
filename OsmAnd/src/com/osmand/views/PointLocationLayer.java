@@ -13,6 +13,7 @@ public class PointLocationLayer implements OsmandMapLayer {
 	private Paint area;
 	
 	protected Location lastKnownLocation = null;
+	protected final static int RADIUS = 7;
 	private OsmandMapTileView view;
 
 	private void initUI() {
@@ -52,9 +53,9 @@ public class PointLocationLayer implements OsmandMapLayer {
 					.getAccuracy(), view.getTileSize(), view.getWidth());
 
 			if (locationX >= 0 && locationY >= 0) {
-				canvas.drawCircle(locationX, locationY, 4, location);
+				canvas.drawCircle(locationX, locationY, RADIUS, location);
 			}
-			if (radius > 4) {
+			if (radius > RADIUS) {
 				canvas.drawCircle(locationX, locationY, radius, area);
 			}
 		}

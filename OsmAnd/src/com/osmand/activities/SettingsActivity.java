@@ -42,22 +42,22 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     
     @Override
     protected void onResume() {
-    	super.onResume();
-    	useInternetToDownloadTiles.setChecked(OsmandSettings.isUsingInternetToDownloadTiles(this));
-    	showPoiOnMap.setChecked(OsmandSettings.isShowingPoiOverMap(this));
-    	
-    	List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
-    	String[] entries = new String[list.size()];
-    	for(int i=0; i<list.size(); i++){
-    		entries[i] = list.get(i).getName();
-    	}
-    	
-    	tileSourcePreference.setEntries(entries);
-    	tileSourcePreference.setEntryValues(entries);
-    	tileSourcePreference.setValue(OsmandSettings.getMapTileSourceName(this));
-    	tileSourcePreference.setSummary(tileSourcePreference.getSummary() + "\t\t[" + OsmandSettings.getMapTileSourceName(this)+"]");
-    	
-    }
+		super.onResume();
+		useInternetToDownloadTiles.setChecked(OsmandSettings.isUsingInternetToDownloadTiles(this));
+		showPoiOnMap.setChecked(OsmandSettings.isShowingPoiOverMap(this));
+
+		List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
+		String[] entries = new String[list.size()];
+		for (int i = 0; i < list.size(); i++) {
+			entries[i] = list.get(i).getName();
+		}
+
+		tileSourcePreference.setEntries(entries);
+		tileSourcePreference.setEntryValues(entries);
+		tileSourcePreference.setValue(OsmandSettings.getMapTileSourceName(this));
+		String mapName = " " +OsmandSettings.getMapTileSourceName(this);
+		tileSourcePreference.setSummary(tileSourcePreference.getSummary() + mapName);
+	}
     
 
 	@Override
@@ -73,6 +73,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		} else if (preference == tileSourcePreference) {
 			edit.putString(OsmandSettings.MAP_TILE_SOURCES, (String) newValue);
 			edit.commit();
+			String summary = tileSourcePreference.getSummary().toString();
+			if (summary.lastIndexOf(':') != -1) {
+				summary = summary.substring(0, summary.lastIndexOf(':') + 1);
+			} 
+			summary += " " + OsmandSettings.getMapTileSourceName(this);
+			tileSourcePreference.setSummary(summary);
+			
 		}
 		return true;
 	}
