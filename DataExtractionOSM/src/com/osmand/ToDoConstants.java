@@ -40,6 +40,10 @@ public class ToDoConstants {
 	// 14. Show zoom level directly on map
 	// -------------------
 	
+	// BUGS Androd :
+	// 1. When firstly run osmand navigation (from notification bar) show map & go to menu shows desktop.
+	//      No chance to close application 
+	
 	
 	/// SWING version : 
 	// TODO : 
@@ -52,5 +56,6 @@ public class ToDoConstants {
 	// 9. Normalizing streets
 	// 10. Reinvent index mechanism (save in zip file with tile indexes, save city/town addresses separately, read partially !)
 	// 11. Street setName() change in city index!
+	// 12. Invent different file extensions for poi.index, address.index,...
 
 }
