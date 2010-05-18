@@ -69,4 +69,9 @@ public class ConsoleProgressImplementation implements IProgress {
 		this.lastPercentPrint = 0;
 	}
 
+	@Override
+	public boolean isInterrupted() {
+		return false;
+	}
+
 }

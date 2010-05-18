@@ -35,8 +35,8 @@ import com.osmand.osm.OSMSettings;
 import com.osmand.osm.Way;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 import com.osmand.osm.io.IOsmStorageFilter;
-import com.osmand.osm.io.OsmStorageWriter;
 import com.osmand.osm.io.OsmBaseStorage;
+import com.osmand.osm.io.OsmStorageWriter;
 
 
 // TO implement
@@ -210,6 +210,9 @@ public class DataExtraction  {
         // 5. reading buildings
         readingBuildings(progress, buildings, country);
         
+        // 6. normalizing streets
+        normalizingStreets(progress, country);
+        
         country.doDataPreparation();
         return country;
 	}
@@ -262,9 +265,7 @@ public class DataExtraction  {
 					
 					if (city != null) {
 						Street str = city.registerStreet(street);
-						for (Node n : w.getNodes()) {
-							str.getWayNodes().add(n);
-						}
+						str.getWayNodes().add(w);
 					}
 					waysManager.registerObject(center.getLatitude(), center.getLongitude(), w);
 				}
@@ -289,6 +290,88 @@ public class DataExtraction  {
 				continue;
 			}
 			country.registerCity(s);
+		}
+	}
+	String[] SUFFIXES = new String[] {"просп.", "пер.", "пр.","заул.", "проспект", "переул.", "бул.", "бульвар"};
+	String[] DEFAUTL_SUFFIXES = new String[] {"улица", "ул."};
+	
+	private int checkSuffix(String name, String suffix){
+		int i = -1;
+		boolean searchAgain = false;
+		do {
+			i = name.indexOf(suffix, i);
+			searchAgain = false;
+			if (i > 0) {
+				if (Character.isLetterOrDigit(name.charAt(i -1))) {
+					i ++;
+					searchAgain = true;
+				}
+			}
+		} while (searchAgain);
+		return i; 
+	}
+	
+	private String cutSuffix(String name, int ind, int suffixLength){
+		String newName = name.substring(0, ind);
+		if (name.length() > ind + suffixLength + 1) {
+			newName += name.substring(ind + suffixLength + 1);
+		}
+		return newName.trim();
+	}
+	
+	private String putSuffixToEnd(String name, int ind, int suffixLength) {
+		if (name.length() <= ind + suffixLength) {
+			return name;
+		
+		}
+		String newName;
+		if(ind > 0){
+			newName = name.substring(0, ind);
+			newName += name.substring(ind + suffixLength);
+			newName += name.substring(ind - 1, ind + suffixLength );
+		} else {
+			newName = name.substring(suffixLength + 1) + name.charAt(suffixLength) + name.substring(0, suffixLength);
+		}
+		
+		return newName.trim();
+	}
+	
+	public void normalizingStreets(IProgress progress, Region region){
+		progress.startTask("Normalizing name streets...", -1);
+		for(CityType t : CityType.values()){
+			for(City c : region.getCitiesByType(t)){
+				ArrayList<Street> list = new ArrayList<Street>(c.getStreets());
+				for (Street s : list) {
+					String name = s.getName();
+					String newName = name.trim();
+					boolean processed = newName.length() != name.length();
+					for (String ch : DEFAUTL_SUFFIXES) {
+						int ind = checkSuffix(newName, ch);
+						if (ind != -1) {
+							newName = cutSuffix(newName, ind, ch.length());
+							processed = true;
+							break;
+						}
+					}
+
+					if (!processed) {
+						for (String ch : SUFFIXES) {
+							int ind = checkSuffix(newName, ch);
+							if (ind != -1) {
+								newName = putSuffixToEnd(newName, ind, ch.length());
+								processed = true;
+								break;
+							}
+						}
+					}
+					if (processed) {
+						if(c.getStreet(name) != s){
+							System.out.println(name);
+						}
+						s.setName(newName);
+					}
+				}
+			}
 		}
 	}
 	

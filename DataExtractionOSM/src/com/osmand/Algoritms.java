@@ -38,6 +38,18 @@ public class Algoritms {
 		}
 	}
 	
+	public static int extractFirstIntegerNumber(String s) {
+		int i = 0;
+		for (int k = 0; k < s.length(); k++) {
+			if (Character.isDigit(s.charAt(k))) {
+				i = i * 10 + (s.charAt(k) - '0');
+			} else {
+				break;
+			}
+		}
+		return i;
+	}
+	
 	
 	public static void streamCopy(InputStream in, OutputStream out) throws IOException{
 		byte[] b = new byte[BUFFER_SIZE];

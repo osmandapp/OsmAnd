@@ -68,6 +68,7 @@ import com.osmand.IMapLocationListener;
 import com.osmand.data.Amenity;
 import com.osmand.data.Building;
 import com.osmand.data.City;
+import com.osmand.data.DataTileManager;
 import com.osmand.data.MapObject;
 import com.osmand.data.Region;
 import com.osmand.data.Street;
@@ -79,6 +80,7 @@ import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 import com.osmand.osm.Node;
+import com.osmand.osm.Way;
 import com.osmand.osm.io.IOsmStorageFilter;
 import com.osmand.osm.io.OsmStorageWriter;
 import com.osmand.osm.io.OsmBoundsFilter;
@@ -109,8 +111,10 @@ public class OsmExtractionUI implements IMapLocationListener {
 	private JButton generateDataButton;
 	private JCheckBox buildPoiIndex;
 	private JCheckBox buildAddressIndex;
+	private JCheckBox normalizingStreets;
 	private TreeModelListener treeModelListener;
 	private JCheckBox zipIndexFiles;
+	
 	
 	
 	
@@ -127,14 +131,14 @@ public class OsmExtractionUI implements IMapLocationListener {
 		}
 		this.region = region;
 		DefaultMutableTreeNode root = new DataExtractionTreeNode(name, region);
-		amenitiesTree = new DataExtractionTreeNode("Closest amenities", region);
-		amenitiesTree.add(new DataExtractionTreeNode("First 15", region));
-		for(AmenityType type : AmenityType.values()){
-			amenitiesTree.add(new DataExtractionTreeNode(Algoritms.capitalizeFirstLetterAndLowercase(type.toString()), type));
-		}
-		root.add(amenitiesTree);
-
 		if (region != null) {
+			amenitiesTree = new DataExtractionTreeNode("Closest amenities", region);
+			amenitiesTree.add(new DataExtractionTreeNode("First 15", region));
+			for (AmenityType type : AmenityType.values()) {
+				amenitiesTree.add(new DataExtractionTreeNode(Algoritms.capitalizeFirstLetterAndLowercase(type.toString()), type));
+			}
+			root.add(amenitiesTree);
+
 			for (CityType t : CityType.values()) {
 				DefaultMutableTreeNode cityTree = new DataExtractionTreeNode(Algoritms.capitalizeFirstLetterAndLowercase(t.toString()), t);
 				root.add(cityTree);
@@ -169,7 +173,9 @@ public class OsmExtractionUI implements IMapLocationListener {
 		DefaultTreeModel newModel = new DefaultTreeModel(root, false);
 		newModel.addTreeModelListener(treeModelListener);
 		treePlaces.setModel(newModel);
+		
 		updateButtonsBar();
+		locationChanged(mapPanel.getLatitude(), mapPanel.getLongitude(), this);
 	}
         
 	
@@ -237,6 +243,15 @@ public class OsmExtractionUI implements IMapLocationListener {
 							MapObject<Entity> c = (MapObject<Entity>) o;
 							LatLon location = c.getLocation();
 							if(location != null){
+								if(o instanceof Street){
+									DataTileManager<Way> ways = new DataTileManager<Way>();
+									for(Way w : ((Street)o).getWayNodes()){
+										LatLon l = w.getLatLon();
+										ways.registerObject(l.getLatitude(), l.getLongitude(), w);
+									}
+									mapPanel.setPoints(ways);
+									mapPanel.requestFocus();
+								} 
 								mapPanel.setLatLon(location.getLatitude(), location.getLongitude());
 								mapPanel.requestFocus();
 							}
@@ -283,9 +298,10 @@ public class OsmExtractionUI implements IMapLocationListener {
 	
 	protected void updateButtonsBar() {
 		generateDataButton.setEnabled(region != null);
-		buildAddressIndex.setEnabled(generateDataButton.isEnabled() && region.getCitiesCount(null) > 0);
-		buildPoiIndex.setEnabled(generateDataButton.isEnabled() && !region.getAmenityManager().isEmpty());
-		zipIndexFiles.setEnabled(generateDataButton.isEnabled());
+		normalizingStreets.setVisible(region == null);
+		buildAddressIndex.setEnabled(region == null || region.getCitiesCount(null) > 0);
+		buildPoiIndex.setEnabled(region == null || !region.getAmenityManager().isEmpty());
+		zipIndexFiles.setVisible(region != null);
 	}
 	
 	public void createButtonsBar(Container content){
@@ -293,13 +309,11 @@ public class OsmExtractionUI implements IMapLocationListener {
 		content.add(panel, BorderLayout.NORTH);
 		
 		generateDataButton = new JButton();
-		generateDataButton.setText("Generate data ");
+		generateDataButton.setText("Generate data");
 		generateDataButton.setToolTipText("Data with selected preferences will be generated in working directory." +
 				" 	The index files will be named as region in tree. All existing data will be overwritten.");
 		panel.add(generateDataButton);
-		
 		generateDataButton.addActionListener(new ActionListener(){
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				generateData();
@@ -315,6 +329,11 @@ public class OsmExtractionUI implements IMapLocationListener {
 		buildAddressIndex.setText("Build Address index");
 		panel.add(buildAddressIndex);
 		buildAddressIndex.setSelected(true);
+		
+		normalizingStreets = new JCheckBox();
+		normalizingStreets.setText("Normalizing streets");
+		panel.add(normalizingStreets);
+		normalizingStreets.setSelected(true);
 		
 		zipIndexFiles = new JCheckBox();
 		zipIndexFiles.setText("Zip index files");
@@ -438,6 +457,8 @@ public class OsmExtractionUI implements IMapLocationListener {
 		menu.add(loadFile);
 		JMenuItem loadSpecifiedAreaFile = new JMenuItem("Load osm file for specifed area...");
 		menu.add(loadSpecifiedAreaFile);
+		JMenuItem closeCurrentFile = new JMenuItem("Close current file");
+		menu.add(closeCurrentFile);
 		menu.addSeparator();
 		JMenuItem saveOsmFile = new JMenuItem("Save data to osm file...");
 		menu.add(saveOsmFile);
@@ -454,6 +475,15 @@ public class OsmExtractionUI implements IMapLocationListener {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 			}
+		});
+		closeCurrentFile.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setRegion(null, "Region");
+				frame.setTitle("OsmAnd Map Creator");
+			}
+			
 		});
 		specifyWorkingDir.addActionListener(new ActionListener(){
 

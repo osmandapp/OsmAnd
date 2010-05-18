@@ -39,6 +39,10 @@ public class ProgressDialog extends JDialog implements IProgress {
         initDialog();
     }
     
+    public boolean isInterrupted(){
+    	return !isVisible();
+    }
+    
     public Object run() throws InvocationTargetException, InterruptedException {
 		result = null;
 		new WorkerThread().start();

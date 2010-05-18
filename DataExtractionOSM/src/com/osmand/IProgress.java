@@ -23,5 +23,6 @@ public interface IProgress {
 	
 	public boolean isIndeterminate();
 	
+	public boolean isInterrupted();
 
 }

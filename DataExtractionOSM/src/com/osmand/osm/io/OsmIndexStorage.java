@@ -83,7 +83,7 @@ public class OsmIndexStorage extends OsmBaseStorage {
 			currentParsedCity = c;
 		} else if(ELEM_STREET.equals(name)){
 			assert currentParsedCity != null;
-			Street street = new Street();
+			Street street = new Street(currentParsedCity);
 			parseMapObject(street, attributes);
 			currentParsedCity.registerStreet(street);
 			currentParsedStreet = street;

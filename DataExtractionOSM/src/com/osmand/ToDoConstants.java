@@ -36,7 +36,7 @@ public class ToDoConstants {
 	// 10. Specify auto-rotating map (compass).
 	// 11. Print out additional info speed, altitude, number of satellites
 	// 12. Show point where are you going (the arrow not the point)
-	// 13. Save point as favourite
+	// 13. Save point as favourit
 	// 14. Show zoom level directly on map
 	// -------------------
 	
@@ -48,7 +48,6 @@ public class ToDoConstants {
 	/// SWING version : 
 	// TODO : 
 	// 1. Add preferences dialog (use internet, )
-	// 2. implement bundle downloading tiles ()
 	// 3. download tiles without using dir tiles
 	// 4. Config file log & see log from file
 	// 6. Predefine before file loading what should be extracted from osm (building, poi or roads)

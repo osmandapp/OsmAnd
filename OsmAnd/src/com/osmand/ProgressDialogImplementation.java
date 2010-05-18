@@ -81,6 +81,10 @@ public class ProgressDialogImplementation implements IProgress {
 		work = -1;
 		progress = 0;
 	}
+	@Override
+	public boolean isInterrupted() {
+		return false;
+	}
 
 	
 

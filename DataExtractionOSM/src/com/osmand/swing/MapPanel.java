@@ -18,6 +18,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Line2D;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -54,8 +57,11 @@ import com.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
 import com.osmand.map.ITileSource;
 import com.osmand.map.TileSourceManager;
 import com.osmand.map.TileSourceManager.TileSourceTemplate;
+import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
+import com.osmand.osm.Node;
+import com.osmand.osm.Way;
 
 public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
@@ -130,7 +136,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 
 	// special points to draw
-	private DataTileManager<LatLon> points;
+	private DataTileManager<? extends Entity> points;
 	
 	// zoom level
 	private int zoom = 1;
@@ -152,6 +158,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	private int xStartingImage = 0;
 	private int yStartingImage = 0;
 	private List<Point> pointsToDraw = new ArrayList<Point>();
+	private List<Line2D> linesToDraw = new ArrayList<Line2D>();
 	
 	private MapTileDownloader downloader = MapTileDownloader.getInstance();
 	Map<String, Image> cache = new HashMap<String, Image>();
@@ -233,6 +240,30 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		for (Point p : pointsToDraw) {
 			g.drawOval(p.x, p.y, 3, 3);
 			g.fillOval(p.x, p.y, 3, 3);
+		}
+		
+		g.setColor(Color.orange);
+		// draw user points
+		int[] xPoints = new int[4];
+		int[] yPoints = new int[4];
+		for (Line2D p : linesToDraw) {
+			AffineTransform transform = new AffineTransform();
+			
+			transform.translate(p.getX1(), p.getY1());
+//			transform.scale(p.getX2() - p.getX1(), p.getY2() - p.getY1());
+			transform.rotate(p.getX2() - p.getX1(), p.getY2() - p.getY1());
+			xPoints[1] = xPoints[0] = 0;
+			xPoints[2] = xPoints[3] = (int) Math.sqrt((p.getX2() - p.getX1())*(p.getX2() - p.getX1()) + 
+					(p.getY2() - p.getY1())*(p.getY2() - p.getY1())) +1;
+			yPoints[3] = yPoints[0] = 0;
+			yPoints[2] = yPoints[1] = 2;
+			for(int i=0; i< 4; i++){
+				Point2D po = transform.transform(new Point(xPoints[i], yPoints[i]), null);
+				xPoints[i] = (int) po.getX();
+				yPoints[i] = (int) po.getY();
+			}
+			g.drawPolygon(xPoints, yPoints, 4);
+			g.fillPolygon(xPoints, yPoints, 4);
 		}
 		
 		if(selectionArea.isVisible()){
@@ -374,14 +405,36 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 				double longDown = MapUtils.getLongitudeFromTile(zoom, xTileRight);
 				double latUp = MapUtils.getLatitudeFromTile(zoom, yTileUp);
 				double longUp = MapUtils.getLongitudeFromTile(zoom, xTileLeft);
-				List<LatLon> objects = points.getObjects(latUp, longUp, latDown, longDown);
+				List<? extends Entity> objects = points.getObjects(latUp, longUp, latDown, longDown);
 				pointsToDraw.clear();
-				for (LatLon n : objects) {
-					int pixX = MapUtils.getPixelShiftX(zoom, n.getLongitude(), this.longitude, tileSize) + getWidth() / 2;
-					int pixY = MapUtils.getPixelShiftY(zoom, n.getLatitude(), this.latitude, tileSize) + getHeight() / 2;
-					if (pixX >= 0 && pixY >= 0) {
-						pointsToDraw.add(new Point(pixX, pixY));
-					}
+				linesToDraw.clear();
+				for (Entity e : objects) {
+					if(e instanceof Way){
+						List<Node> nodes = ((Way)e).getNodes();
+						if (nodes.size() > 1) {
+							int prevPixX = 0;
+							int prevPixY = 0;
+							for (int i = 0; i < nodes.size(); i++) {
+								Node n = nodes.get(i);
+								int pixX = MapUtils.getPixelShiftX(zoom, n.getLongitude(), this.longitude, tileSize) + getWidth() / 2;
+								int pixY = MapUtils.getPixelShiftY(zoom, n.getLatitude(), this.latitude, tileSize) + getHeight() / 2;
+								if (i > 0) {
+									linesToDraw.add(new Line2D.Float(pixX, pixY, prevPixX, prevPixY));
+								}
+								prevPixX = pixX;
+								prevPixY = pixY;
+							}
+						}
+						
+					} else if(e instanceof Node){
+						Node n = (Node) e;
+						int pixX = MapUtils.getPixelShiftX(zoom, n.getLongitude(), this.longitude, tileSize) + getWidth() / 2;
+						int pixY = MapUtils.getPixelShiftY(zoom, n.getLatitude(), this.latitude, tileSize) + getHeight() / 2;
+						if (pixX >= 0 && pixY >= 0) {
+							pointsToDraw.add(new Point(pixX, pixY));
+						}
+					} else {
+					} 
 				}
 			}
 			
@@ -504,11 +557,11 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		super.processKeyEvent(e);
 	}
 	
-	public DataTileManager<LatLon> getPoints() {
+	public DataTileManager<? extends Entity> getPoints() {
 		return points;
 	}
 	
-	public void setPoints(DataTileManager<LatLon> points) {
+	public void setPoints(DataTileManager<? extends Entity> points) {
 		this.points = points;
 		prepareImage();
 	}
