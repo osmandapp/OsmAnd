@@ -86,23 +86,16 @@ public class Amenity extends MapObject<Node> {
 	}
 	
 	
-	private final Node node;
 	private String subType;
 	private AmenityType type;
 
 	public Amenity(Node node){
-		this.node = node;
+		this.entity = node;
 		this.type = getType(node);
 		this.subType = getSubType(node);
 	}
 	
 	public Amenity(){
-		this.node = null;
-	}
-	
-	@Override
-	public Node getEntity() {
-		return node;
 	}
 	
 	protected String getSubType(Node node){
@@ -148,6 +141,7 @@ public class Amenity extends MapObject<Node> {
 	}
 	
 	public static boolean isAmenity(Entity n){
+		// TODO allow ways to be amenity!
 		if(!(n instanceof Node)){
 			return false;
 		}
@@ -165,9 +159,8 @@ public class Amenity extends MapObject<Node> {
 	
 
 	public String getSimpleFormat(){
-		String name = getName();
 		return Algoritms.capitalizeFirstLetterAndLowercase(getType().toString()) +
-					" : " + getSubType() + " " +(name == null ? node.getId() : name);
+					" : " + getSubType() + " " +getName();
 	}
 	
 	public String getStringWithoutType(){

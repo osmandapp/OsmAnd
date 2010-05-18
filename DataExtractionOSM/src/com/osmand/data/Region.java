@@ -120,7 +120,9 @@ public class Region extends MapObject<Entity> {
 	
 	public void registerAmenity(Amenity a){
 		LatLon location = a.getLocation();
-		amenities.registerObject(location.getLatitude(), location.getLongitude(), a);
+		if(location != null){
+			amenities.registerObject(location.getLatitude(), location.getLongitude(), a);
+		}
 	}
 
 	public void registerCity(City city){

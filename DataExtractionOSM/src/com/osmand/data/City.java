@@ -12,7 +12,8 @@ import com.osmand.osm.OSMSettings.OSMTagKey;
 public class City extends MapObject<Node> {
 	
 	public enum CityType {
-		CITY(10000), TOWN(5000), VILLAGE(1000), HAMLET(300), SUBURB(300);
+		// that's tricky way to play with that numbers (to avoid including suburbs in city & vice verse)
+		CITY(10000), TOWN(5000), VILLAGE(1300), HAMLET(1000), SUBURB(300);
 
 		private double radius;
 
@@ -42,6 +43,7 @@ public class City extends MapObject<Node> {
 	}
 	
 	private CityType type = null;
+	// Be attentive ! Working with street names ignoring case
 	private Map<String, Street> streets = new TreeMap<String, Street>(); 
 
 	public City(Node el){
@@ -53,16 +55,30 @@ public class City extends MapObject<Node> {
 		this.type = type;
 	}
 	
+	
 	public Street registerStreet(String street){
-		if(!streets.containsKey(street)){
-			streets.put(street, new Street(street));
+		if(!streets.containsKey(street.toLowerCase())){
+			streets.put(street.toLowerCase(), new Street(this, street));
 		}
-		return streets.get(street); 
+		return streets.get(street.toLowerCase()); 
+	}
+	
+	public Street unregisterStreet(String name){
+		return streets.remove(name.toLowerCase()); 
 	}
 	
 	public Street registerStreet(Street street){
-		if(!Algoritms.isEmpty(street.getName())){
-			return streets.put(street.getName(), street);
+		String name = street.getName().toLowerCase();
+		if(!Algoritms.isEmpty(name)){
+			if(!streets.containsKey(name)){
+				return streets.put(name, street);
+			} else {
+				// try to merge streets
+				Street prev = streets.get(name);
+				prev.getWayNodes().addAll(street.getWayNodes());
+				prev.getBuildings().addAll(street.getBuildings());
+				return prev;
+			}
 		}
 		return null;
 	}
@@ -72,11 +88,10 @@ public class City extends MapObject<Node> {
 		String street = e.getTag(OSMTagKey.ADDR_STREET);
 		if( street != null && number != null){
 			registerStreet(street).registerBuilding(e);
-			return streets.get(street);
+			return streets.get(street.toLowerCase());
 		}
 		return null;
 	}
-	
 	
 	public CityType getType(){
 		return type;
@@ -84,6 +99,10 @@ public class City extends MapObject<Node> {
 	
 	public Collection<Street> getStreets(){
 		return streets.values();
+	}
+	
+	public Street getStreet(String name){
+		return streets.get(name.toLowerCase());
 	}
 	
 	@Override
