@@ -107,6 +107,14 @@ public class MapTileDownloader {
 		return currentlyDownloaded.contains(f);
 	}
 	
+	public boolean isSomethingBeingDownloaded(){
+		return !currentlyDownloaded.isEmpty();
+	}
+	
+	public int getRemainingWorkers(){
+		return (int) (threadPoolExecutor.getTaskCount());
+	}
+	
 	
 	public void refuseAllPreviousRequests(){
 		while(!threadPoolExecutor.getQueue().isEmpty()){
@@ -130,7 +138,7 @@ public class MapTileDownloader {
 	
 	
 	private class DownloadMapWorker implements Runnable, Comparable<DownloadMapWorker> {
-		private long time = System.currentTimeMillis();
+		
 		private DownloadRequest request;
 		
 		private DownloadMapWorker(DownloadRequest request){
@@ -143,6 +151,7 @@ public class MapTileDownloader {
 				log.debug("Start downloading tile : " + request.url);
 			}
 			if (request != null && request.fileToSave != null && request.url != null) {
+				long time = System.currentTimeMillis();
 				currentlyDownloaded.add(request.fileToSave);
 				try {
 					request.fileToSave.getParentFile().mkdirs();

@@ -398,6 +398,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 			return;
 		}
 		this.zoom = zoom;
+		updateLocationLabel();
 		prepareImage();
 	}
 
@@ -529,7 +530,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				new TileBundleDownloadDialog(MapPanel.this, MapPanel.this).showDialog();
 			}
 			
 		});
