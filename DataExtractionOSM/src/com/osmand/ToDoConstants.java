@@ -14,9 +14,6 @@ public class ToDoConstants {
 	// it is not editable in editor ?
 	public int MAKE_MAP_PANEL_EDITABLE_IN_EDITOR = 4;
 	
-	// common parts : work with cache on file system & in memory
-	public int EXTRACT_COMMON_PARTS_FROM_MAPPANEL_AND_OSMMAPVIEW = 5;
-	
 	/**
 	 * Write activity to show something about authors / donation ....
 	 */
@@ -32,12 +29,13 @@ public class ToDoConstants {
 	// 5. Enable city/streets/buildings index
 	// 7. Search for city/streets/buildings!
 	// 8. Enable change POI directly on map
-	// 9. Log to see when exception occured(android)
+	// 9. Log to see when exception occurred (android)
 	// 10. Specify auto-rotating map (compass).
 	// 11. Print out additional info speed, altitude, number of satellites
 	// 12. Show point where are you going (the arrow not the point)
-	// 13. Save point as favourit
+	// 13. Save point as favorite
 	// 14. Show zoom level directly on map
+	// 15. Investigate interruption of progress (is it available & how to support it) 
 	// -------------------
 	
 	// BUGS Androd :
@@ -47,14 +45,15 @@ public class ToDoConstants {
 	
 	/// SWING version : 
 	// TODO : 
-	// 1. Add preferences dialog (use internet, )
-	// 3. download tiles without using dir tiles
-	// 4. Config file log & see log from file
-	// 6. Predefine before file loading what should be extracted from osm (building, poi or roads)
-	// 7. Fix TODO in files (accept amenity - way)
-	// 9. Normalizing streets
-	// 10. Reinvent index mechanism (save in zip file with tile indexes, save city/town addresses separately, read partially !)
-	// 11. Street setName() change in city index!
-	// 12. Invent different file extensions for poi.index, address.index,...
+	// 0. Create build.xml & build product for release purposes 
+	// 1. Add preferences dialog (use internet, Normalizing streets) !!!
+	// 2. Predefine before file loading what should be extracted from osm (building, poi or roads) !
+	// 3. Fix TODO in files (accept amenity - way)
+	// 4. Interrupt thread when progress dialog is closed
+	
+	// 5. download tiles without using dir tiles
+	// 6. Config file log & see log from file
+	// 7. Reinvent index mechanism (save in zip file with tile indexes, save city/town addresses separately, read partially !)
+	// 8. Invent different file extensions for poi.index, address.index,...
 
 }
