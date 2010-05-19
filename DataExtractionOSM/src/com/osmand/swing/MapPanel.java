@@ -248,9 +248,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		int[] yPoints = new int[4];
 		for (Line2D p : linesToDraw) {
 			AffineTransform transform = new AffineTransform();
-			
 			transform.translate(p.getX1(), p.getY1());
-//			transform.scale(p.getX2() - p.getX1(), p.getY2() - p.getY1());
 			transform.rotate(p.getX2() - p.getX1(), p.getY2() - p.getY1());
 			xPoints[1] = xPoints[0] = 0;
 			xPoints[2] = xPoints[3] = (int) Math.sqrt((p.getX2() - p.getX1())*(p.getX2() - p.getX1()) + 
