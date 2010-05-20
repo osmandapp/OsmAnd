@@ -90,6 +90,14 @@ public class DataExtraction  {
 	public static String writeTestOsmFile = "C:\\1_tmp.osm"; // could be null - wo writing
 	private static boolean parseSmallFile = true;
 	private static boolean parseOSM = true;
+
+	private final boolean loadAllObjects;
+
+	private final boolean normalizeStreets;
+
+	private final boolean indexAddress;
+
+	private final boolean indexPOI;
 	
 	
 
@@ -113,8 +121,9 @@ public class DataExtraction  {
 		}
 		
        
-        // TODO add interested objects
+        
 		List<Long> interestedObjects = new ArrayList<Long>();
+		// add interested objects
 		if (writeTestOsmFile != null) {
 			OsmStorageWriter writer = new OsmStorageWriter();
 			OutputStream output = new FileOutputStream(writeTestOsmFile);
@@ -131,6 +140,21 @@ public class DataExtraction  {
         System.out.println();
 		System.out.println("USED Memory " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1e6);
 		System.out.println("TIME : " + (System.currentTimeMillis() - st));
+	}
+	
+	public DataExtraction(){
+		this.indexPOI = true;
+		this.indexAddress = true;
+		this.loadAllObjects = false;
+		this.normalizeStreets = true;
+	}
+	
+	public DataExtraction(boolean indexAddress, boolean indexPOI, boolean normalizeStreets, boolean loadAllObjects){
+		this.indexAddress = indexAddress;
+		this.indexPOI = indexPOI;
+		this.normalizeStreets = normalizeStreets;
+		this.loadAllObjects = loadAllObjects;
+		
 	}
 
 	
@@ -160,13 +184,15 @@ public class DataExtraction  {
 		IOsmStorageFilter filter = new IOsmStorageFilter(){
 			@Override
 			public boolean acceptEntityToLoad(OsmBaseStorage storage, Entity e) {
-				if ("yes".equals(e.getTag(OSMTagKey.BUILDING))) {
-					if (e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER) != null && e.getTag(OSMTagKey.ADDR_STREET) != null) {
-						buildings.add(e);
-						return true;
+				if (indexAddress) {
+					if ("yes".equals(e.getTag(OSMTagKey.BUILDING))) {
+						if (e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER) != null && e.getTag(OSMTagKey.ADDR_STREET) != null) {
+							buildings.add(e);
+							return true;
+						}
 					}
 				}
-				if(Amenity.isAmenity(e)){
+				if (indexPOI && Amenity.isAmenity(e)) {
 					amenities.add(new Amenity((Node) e));
 					return true;
 				}
@@ -174,11 +200,13 @@ public class DataExtraction  {
 					places.add((Node) e);
 					return true;
 				}
-				if (e instanceof Way && OSMSettings.wayForCar(e.getTag(OSMTagKey.HIGHWAY))) {
-					ways.add((Way) e);
-					return true;
+				if (indexAddress) {
+					if (e instanceof Way && OSMSettings.wayForCar(e.getTag(OSMTagKey.HIGHWAY))) {
+						ways.add((Way) e);
+						return true;
+					}
 				}
-				return e instanceof Node;
+				return (e instanceof Node && indexAddress) || loadAllObjects;
 			}
 		};
 		
@@ -200,19 +228,25 @@ public class DataExtraction  {
         country.setStorage(storage);
 
         // 2. Reading amenities
-        readingAmenities(amenities, country);
+        if(indexPOI){
+        	readingAmenities(amenities, country);
+        }
 
         // 3. Reading cities
         readingCities(places, country);
 
-        // 4. Reading streets
-        readingStreets(progress, ways, country);
+        if (indexAddress) {
+			// 4. Reading streets
+			readingStreets(progress, ways, country);
+
+			// 5. reading buildings
+			readingBuildings(progress, buildings, country);
+		}
         
-        // 5. reading buildings
-        readingBuildings(progress, buildings, country);
-        
-        // 6. normalizing streets
-        normalizingStreets(progress, country);
+        if(normalizeStreets){
+        	// 	6. normalizing streets
+        	normalizingStreets(progress, country);
+        }
         
         country.doDataPreparation();
         return country;
@@ -367,9 +401,6 @@ public class DataExtraction  {
 						}
 					}
 					if (processed) {
-						if(c.getStreet(name) != s){
-							System.out.println(name);
-						}
 						s.setName(newName);
 					}
 				}

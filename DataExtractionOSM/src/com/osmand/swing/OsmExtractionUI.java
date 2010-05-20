@@ -114,6 +114,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 	private JCheckBox normalizingStreets;
 	private TreeModelListener treeModelListener;
 	private JCheckBox zipIndexFiles;
+	private JCheckBox loadingAllData;
 	
 	
 	
@@ -299,6 +300,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 	protected void updateButtonsBar() {
 		generateDataButton.setEnabled(region != null);
 		normalizingStreets.setVisible(region == null);
+		loadingAllData.setVisible(region == null);
 		buildAddressIndex.setEnabled(region == null || region.getCitiesCount(null) > 0);
 		buildPoiIndex.setEnabled(region == null || !region.getAmenityManager().isEmpty());
 		zipIndexFiles.setVisible(region != null);
@@ -334,6 +336,11 @@ public class OsmExtractionUI implements IMapLocationListener {
 		normalizingStreets.setText("Normalizing streets");
 		panel.add(normalizingStreets);
 		normalizingStreets.setSelected(true);
+
+		loadingAllData = new JCheckBox();
+		loadingAllData.setText("Loading all osm data");
+		panel.add(loadingAllData);
+		loadingAllData.setSelected(false);
 		
 		zipIndexFiles = new JCheckBox();
 		zipIndexFiles.setText("Zip index files");
@@ -621,7 +628,9 @@ public class OsmExtractionUI implements IMapLocationListener {
 				public void run() {
 					Region res;
 					try {
-						res = new DataExtraction().readCountry(f.getAbsolutePath(), dlg, filter);
+						DataExtraction dataExtraction = new DataExtraction(buildAddressIndex.isSelected(), buildPoiIndex.isSelected(),
+								normalizingStreets.isSelected(), loadingAllData.isSelected());
+						res = dataExtraction.readCountry(f.getAbsolutePath(), dlg, filter);
 					} catch (IOException e) {
 						throw new IllegalArgumentException(e);
 					} catch (SAXException e) {
