@@ -2,6 +2,8 @@ package com.osmand.swing;
 
 import java.awt.Rectangle;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.prefs.Preferences;
 
 import com.osmand.osm.LatLon;
@@ -72,10 +74,85 @@ public class DataExtractionSettings {
 		preferences.putInt("window_height", r.height);
 	}
 	
+	
+	
 	public boolean useInternetToLoadImages(){
-		// TODO save the property if needed
-		return true;
+		return preferences.getBoolean("use_internet", true);
 	}
 	
+	public void setUseInterentToLoadImages(boolean b){
+		preferences.putBoolean("use_internet", b);
+	}
+	
+	
+	String[] SUFFIXES = new String[] {"av.", "avenue", "просп.", "пер.", "пр.","заул.", "проспект", "переул.", "бул.", "бульвар", "тракт"};
+	String[] DEFAUTL_SUFFIXES = new String[] {"str.", "street", "улица", "ул."};
+	public String[] getSuffixesToNormalizeStreets(){
+		String s = preferences.get("suffixes_normalize_streets", null);
+		if(s == null){
+			return SUFFIXES;
+		}
+		List<String> l = new ArrayList<String>();
+		int i = 0;
+		int nextI = 0;
+		while((nextI=s.indexOf(',',i)) >= 0){
+			String t = s.substring(i, nextI).trim();
+			if(t.length() > 0){
+				l.add(t);
+			}
+			i = nextI + 1;
+		}
+		return l.toArray(new String[l.size()]);
+	}
+	
+	public String[] getDefaultSuffixesToNormalizeStreets(){
+		String s = preferences.get("default_suffixes_normalize_streets", null);
+		if(s == null){
+			return DEFAUTL_SUFFIXES;
+		}
+		List<String> l = new ArrayList<String>();
+		int i = 0;
+		int nextI = 0;
+		while((nextI=s.indexOf(',',i)) >= 0){
+			String t = s.substring(i, nextI).trim();
+			if(t.length() > 0){
+				l.add(t);
+			}
+			i = nextI + 1;
+		}
+		return l.toArray(new String[l.size()]);
+	}
+	
+	public String getSuffixesToNormalizeStreetsString(){
+		String s = preferences.get("suffixes_normalize_streets", null);
+		if(s == null){
+			StringBuilder b = new StringBuilder();
+			for(String st : SUFFIXES){
+				b.append(st).append(", ");
+			}
+			return b.toString();
+		}
+		return s;
+	}
+	
+	public String getDefaultSuffixesToNormalizeStreetsString(){
+		String s = preferences.get("default_suffixes_normalize_streets", null);
+		if(s == null){
+			StringBuilder b = new StringBuilder();
+			for(String st : DEFAUTL_SUFFIXES){
+				b.append(st).append(", ");
+			}
+			return b.toString();
+		}
+		return s;
+	}
+	
+	public void setDefaultSuffixesToNormalizeStreets(String s){
+		preferences.put("default_suffixes_normalize_streets", s);
+	}
+	
+	public void setSuffixesToNormalizeStreets(String s){
+		preferences.put("suffixes_normalize_streets", s);
+	}
 	
 }

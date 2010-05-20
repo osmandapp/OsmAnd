@@ -470,6 +470,13 @@ public class OsmExtractionUI implements IMapLocationListener {
 		
 		bar.add(MapPanel.getMenuToChooseSource(mapPanel));
 		
+		menu = new JMenu("Window");
+		bar.add(menu);
+		JMenuItem settings = new JMenuItem("Settings...");
+		menu.add(settings);
+		
+		
+		
 		exitMenu.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -482,6 +489,13 @@ public class OsmExtractionUI implements IMapLocationListener {
 			public void actionPerformed(ActionEvent e) {
 				setRegion(null, "Region");
 				frame.setTitle("OsmAnd Map Creator");
+			}
+		});
+		settings.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				OsmExtractionPreferencesDialog dlg = new OsmExtractionPreferencesDialog(frame);
+				dlg.showDialog();
 			}
 			
 		});
