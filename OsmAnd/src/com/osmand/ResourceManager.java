@@ -25,6 +25,7 @@ import com.osmand.data.DataTileManager;
 import com.osmand.data.Region;
 import com.osmand.data.preparation.MapTileDownloader;
 import com.osmand.data.preparation.MapTileDownloader.DownloadRequest;
+import com.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
 import com.osmand.map.ITileSource;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.io.OsmIndexStorage;
@@ -148,7 +149,9 @@ public class ResourceManager {
 					}
 					if(update){
 						// use downloader callback
-						downloader.getDownloaderCallback().tileDownloaded(null);
+						for(IMapDownloaderCallback c : downloader.getDownloaderCallbacks()){
+							c.tileDownloaded(null);
+						}
 					}
 					sleep(750);
 				} catch (InterruptedException e) {

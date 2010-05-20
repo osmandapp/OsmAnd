@@ -27,6 +27,7 @@ import com.osmand.IMapLocationListener;
 import com.osmand.OsmandSettings;
 import com.osmand.R;
 import com.osmand.ResourceManager;
+import com.osmand.data.preparation.MapTileDownloader;
 import com.osmand.views.OsmandMapTileView;
 import com.osmand.views.POIMapLayer;
 import com.osmand.views.PointLocationLayer;
@@ -67,6 +68,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		
 		setContentView(R.layout.main);
 		mapView = (OsmandMapTileView) findViewById(R.id.MapView);
+		MapTileDownloader.getInstance().addDownloaderCallback(mapView);
 		mapView.setMapLocationListener(this);
 		poiMapLayer = new POIMapLayer();
 		poiMapLayer.setNodeManager(ResourceManager.getResourceManager().getPoiIndex());
@@ -131,6 +133,12 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			}
 		});
 	}
+    
+    @Override
+    protected void onDestroy() {
+    	super.onDestroy();
+    	MapTileDownloader.getInstance().removeDownloaderCallback(mapView);
+    }
     
     public void setLocation(Location location){
     	locationLayer.setLastKnownLocation(location);
