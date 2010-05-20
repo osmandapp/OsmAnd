@@ -31,6 +31,7 @@ public class ProgressDialog extends JDialog implements IProgress {
 	private static final float deltaToChange = 0.01f;
 	private String taskName;
 	private int deltaWork;
+	private WorkerThread workerThread;
 
     
     public ProgressDialog(Component parent, String name){
@@ -43,10 +44,19 @@ public class ProgressDialog extends JDialog implements IProgress {
     	return !isVisible();
     }
     
-    public Object run() throws InvocationTargetException, InterruptedException {
+    @SuppressWarnings("deprecation")
+	public Object run() throws InvocationTargetException, InterruptedException {
 		result = null;
-		new WorkerThread().start();
+		workerThread = new WorkerThread();
+		workerThread.start();
 		setVisible(true);
+		if(workerThread.checkIsLive()){
+			// that's really bad solution unless we don't find any problems with that
+			// means monitor objects & we continue to use because otherwise
+			// we should protect all places where it is used regular checks that process is interrupted
+			workerThread.stop();
+			throw new InterruptedException();
+		}
 		if (exception != null) {
 			throw exception;
 		}
@@ -54,13 +64,19 @@ public class ProgressDialog extends JDialog implements IProgress {
 	}
     
     private class WorkerThread extends Thread {
+    	private boolean isLive = true;
     	
+    	
+    	public boolean checkIsLive(){
+    		return isLive;
+    	}
     	@Override
     	public void run() {
     		try {
 				if (run != null) {
 					run.run();
 				}
+				isLive = false;
 			} catch (RuntimeException e) {
 				exception = new InvocationTargetException(e);
 			} finally {

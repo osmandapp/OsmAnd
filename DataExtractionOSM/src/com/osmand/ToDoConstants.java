@@ -45,15 +45,12 @@ public class ToDoConstants {
 	
 	/// SWING version : 
 	// TODO : 
-	// 0. Create build.xml & build product for release purposes 
-	// 1. Add preferences dialog (use internet, Normalizing streets) !!!
-	// 2. Predefine before file loading what should be extracted from osm (building, poi or roads) !
-	// 3. Fix TODO in files (accept amenity - way)
-	// 4. Interrupt thread when progress dialog is closed
+	// 1. Predefine before file loading what should be extracted from osm (building, poi or roads) !
+	// 2. Fix TODO in files (accept amenity - way)
 	
-	// 5. download tiles without using dir tiles
-	// 6. Config file log & see log from file
-	// 7. Reinvent index mechanism (save in zip file with tile indexes, save city/town addresses separately, read partially !)
-	// 8. Invent different file extensions for poi.index, address.index,...
+	// 3. download tiles without using dir tiles
+	// 4. Config file log & see log from file
+	// 5. Reinvent index mechanism (save in zip file with tile indexes, save city/town addresses separately, read partially !)
+	// 6. Invent different file extensions for poi.index, address.index,...
 
 }

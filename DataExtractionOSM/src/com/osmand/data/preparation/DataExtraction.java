@@ -37,6 +37,7 @@ import com.osmand.osm.OSMSettings.OSMTagKey;
 import com.osmand.osm.io.IOsmStorageFilter;
 import com.osmand.osm.io.OsmBaseStorage;
 import com.osmand.osm.io.OsmStorageWriter;
+import com.osmand.swing.DataExtractionSettings;
 
 
 // TO implement
@@ -292,8 +293,7 @@ public class DataExtraction  {
 			country.registerCity(s);
 		}
 	}
-	String[] SUFFIXES = new String[] {"просп.", "пер.", "пр.","заул.", "проспект", "переул.", "бул.", "бульвар"};
-	String[] DEFAUTL_SUFFIXES = new String[] {"улица", "ул."};
+	
 	
 	private int checkSuffix(String name, String suffix){
 		int i = -1;
@@ -338,6 +338,8 @@ public class DataExtraction  {
 	
 	public void normalizingStreets(IProgress progress, Region region){
 		progress.startTask("Normalizing name streets...", -1);
+		String[] defaultSuffixes = DataExtractionSettings.getSettings().getDefaultSuffixesToNormalizeStreets();
+		String[] suffixes = DataExtractionSettings.getSettings().getSuffixesToNormalizeStreets();
 		for(CityType t : CityType.values()){
 			for(City c : region.getCitiesByType(t)){
 				ArrayList<Street> list = new ArrayList<Street>(c.getStreets());
@@ -345,7 +347,7 @@ public class DataExtraction  {
 					String name = s.getName();
 					String newName = name.trim();
 					boolean processed = newName.length() != name.length();
-					for (String ch : DEFAUTL_SUFFIXES) {
+					for (String ch : defaultSuffixes) {
 						int ind = checkSuffix(newName, ch);
 						if (ind != -1) {
 							newName = cutSuffix(newName, ind, ch.length());
@@ -355,7 +357,7 @@ public class DataExtraction  {
 					}
 
 					if (!processed) {
-						for (String ch : SUFFIXES) {
+						for (String ch : suffixes) {
 							int ind = checkSuffix(newName, ch);
 							if (ind != -1) {
 								newName = putSuffixToEnd(newName, ind, ch.length());
