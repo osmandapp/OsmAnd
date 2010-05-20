@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -27,7 +29,7 @@ public class MapTileDownloader {
 	
 	
 	private ThreadPoolExecutor threadPoolExecutor;
-	private IMapDownloaderCallback callback;
+	private List<IMapDownloaderCallback> callbacks = new ArrayList<IMapDownloaderCallback>();
 	
 	private Set<File> currentlyDownloaded;
 	
@@ -95,12 +97,16 @@ public class MapTileDownloader {
 		
 	}
 	
-	public void setDownloaderCallback(IMapDownloaderCallback callback){
-		this.callback = callback;
+	public void addDownloaderCallback(IMapDownloaderCallback callback){
+		callbacks.add(callback);
 	}
 	
-	public IMapDownloaderCallback getDownloaderCallback() {
-		return callback;
+	public void removeDownloaderCallback(IMapDownloaderCallback callback){
+		callbacks.remove(callback);
+	}
+	
+	public List<IMapDownloaderCallback> getDownloaderCallbacks() {
+		return callbacks;
 	}
 	
 	public boolean isFileCurrentlyDownloaded(File f){
@@ -181,8 +187,8 @@ public class MapTileDownloader {
 				} finally {
 					currentlyDownloaded.remove(request.fileToSave);
 				}
-				if (callback != null) {
-					callback.tileDownloaded(request);
+				for(IMapDownloaderCallback c : callbacks){
+					c.tileDownloaded(request);
 				}
 			}
 				

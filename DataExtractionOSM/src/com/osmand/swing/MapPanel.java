@@ -179,7 +179,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		
 		addControls();
 		
-		downloader.setDownloaderCallback(this);
+		downloader.addDownloaderCallback(this);
 		setFocusable(true);
 		addComponentListener(new ComponentAdapter(){
 			public void componentResized(ComponentEvent e) {
@@ -194,6 +194,17 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		
 		
 	}
+	
+	@Override
+	public void setVisible(boolean flag) {
+		super.setVisible(flag);
+		if(!flag){
+			downloader.removeDownloaderCallback(this);
+ 		} else {
+ 			downloader.addDownloaderCallback(this);
+ 		}
+	}
+
 
 	
 	public double getXTile(){

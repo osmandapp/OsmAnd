@@ -53,8 +53,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	private IMapLocationListener locationListener;
 	
-	private MapTileDownloader downloader = MapTileDownloader.getInstance();
-	
 	private List<OsmandMapLayer> layers = new ArrayList<OsmandMapLayer>();
 	
 	// UI Part
@@ -98,10 +96,14 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 		setClickable(true);
 		getHolder().addCallback(this);
-		downloader.setDownloaderCallback(this);
+		
 		animatedDraggingThread = new AnimateDraggingMapThread();
 		animatedDraggingThread.setCallback(this);
 	}
+	
+	
+	
+	
 	
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
@@ -231,7 +233,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	public void prepareImage() {
 		if (OsmandSettings.isUsingInternetToDownloadTiles(getContext())) {
-			downloader.refuseAllPreviousRequests();
+			 MapTileDownloader.getInstance().refuseAllPreviousRequests();
 		}
 		int width = getWidth();
 		int height = getHeight();

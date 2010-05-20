@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -196,9 +197,10 @@ public class TileBundleDownloadDialog extends JDialog {
 			}
 			
 		});
-		IMapDownloaderCallback previousCallback = instance.getDownloaderCallback();
-		instance.setDownloaderCallback(new IMapDownloaderCallback(){
-
+		ArrayList<IMapDownloaderCallback> previousCallbacks = 
+			new ArrayList<IMapDownloaderCallback>(instance.getDownloaderCallbacks());
+		instance.getDownloaderCallbacks().clear();
+		instance.addDownloaderCallback(new IMapDownloaderCallback(){
 			@Override
 			public void tileDownloaded(DownloadRequest request) {
 				// TODO request could be null if bundle loading?
@@ -206,6 +208,7 @@ public class TileBundleDownloadDialog extends JDialog {
 			}
 			
 		});
+		
 		
 		try {
 			progressDialog.run();
@@ -215,7 +218,8 @@ public class TileBundleDownloadDialog extends JDialog {
 		} catch (InterruptedException e) {
 			ExceptionHandler.handle(e);
 		} finally {
-			instance.setDownloaderCallback(previousCallback);
+			instance.getDownloaderCallbacks().clear();
+			instance.getDownloaderCallbacks().addAll(previousCallbacks);
 		}
 		
 	}

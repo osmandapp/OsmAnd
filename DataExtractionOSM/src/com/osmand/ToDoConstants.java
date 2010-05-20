@@ -19,8 +19,6 @@ public class ToDoConstants {
 	 */
 	public int DESCRIBE_ABOUT_AUTHORS = 8;
 	
-	// TODO see all calculations x, y for layers & for MapView
-
 	// 0. Minimize memory used for index & improve time for read index  
 	//// TODO for releasing version
 	// 1. POI SEARCH NEAR TO YOU
@@ -45,8 +43,8 @@ public class ToDoConstants {
 	
 	/// SWING version : 
 	// TODO : 
-	// 1. Predefine before file loading what should be extracted from osm (building, poi or roads) !
-	// 2. Fix TODO in files (accept amenity - way)
+	// 1. Accept amenity as way
+	// 1. Fix TODO in files
 	
 	// 3. download tiles without using dir tiles
 	// 4. Config file log & see log from file
