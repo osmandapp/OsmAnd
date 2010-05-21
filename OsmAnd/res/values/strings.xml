@@ -19,4 +19,6 @@
 <string name="settings_Button">Settings</string>
 <string name="search_button">Search</string>
 <color name="menu_background">#CFFACD</color>
+<string name="search_activity">search</string>
+<color name="color_white">#FFFFFF</color>
 </resources>

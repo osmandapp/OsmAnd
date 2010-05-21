@@ -21,6 +21,7 @@ public class MainMenuActivity extends Activity {
 	private Button showMap;
 	private Button exitButton;
 	private Button settingsButton;
+	private Button searchButton;
 	private NotificationManager mNotificationManager;
 	private int APP_NOTIFICATION_ID;
 
@@ -61,6 +62,20 @@ public class MainMenuActivity extends Activity {
 				startActivity(settings);
 			}
 		});
+		
+		searchButton = (Button) findViewById(R.id.SearchButton);
+		searchButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Bundle bundle = new Bundle();
+				bundle.putString(SearchActivity.ANENITY_TYPE, null);
+				final Intent search = new Intent(MainMenuActivity.this,
+						SearchActivity.class);
+				search.putExtras(bundle);
+				startActivity(search);
+			}
+		});
+		
 		exitButton = (Button) findViewById(R.id.ExitButton);
 		exitButton.setOnClickListener(new OnClickListener() {
 			@Override

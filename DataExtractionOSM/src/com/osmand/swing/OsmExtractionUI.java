@@ -16,7 +16,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.EventObject;
 import java.util.List;
 import java.util.Map;
@@ -82,8 +81,8 @@ import com.osmand.osm.MapUtils;
 import com.osmand.osm.Node;
 import com.osmand.osm.Way;
 import com.osmand.osm.io.IOsmStorageFilter;
-import com.osmand.osm.io.OsmStorageWriter;
 import com.osmand.osm.io.OsmBoundsFilter;
+import com.osmand.osm.io.OsmStorageWriter;
 import com.osmand.swing.MapPanel.MapSelectionArea;
 
 public class OsmExtractionUI implements IMapLocationListener {
@@ -691,14 +690,9 @@ public class OsmExtractionUI implements IMapLocationListener {
 	public void locationChanged(final double newLatitude, final double newLongitude, Object source){
 		if (amenitiesTree != null) {
 			Region reg = (Region) amenitiesTree.getModelObject();
-			List<Amenity> closestAmenities = reg.getClosestAmenities(newLatitude, newLongitude);
-			Collections.sort(closestAmenities, new Comparator<Amenity>() {
-				@Override
-				public int compare(Amenity o1, Amenity o2) {
-					return Double.compare(MapUtils.getDistance(o2.getLocation(), newLatitude, newLongitude), MapUtils.getDistance(o2.getLocation(),
-							newLatitude, newLongitude));
-				}
-			});
+			List<Amenity> closestAmenities = reg.getAmenityManager().getClosestObjects(newLatitude, newLongitude, 0, 5);
+			MapUtils.sortListOfMapObject(closestAmenities, newLatitude, newLongitude);
+			
 
 			Map<AmenityType, List<Amenity>> filter = new TreeMap<AmenityType, List<Amenity>>();
 			for (Amenity n : closestAmenities) {
