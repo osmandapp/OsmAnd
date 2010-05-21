@@ -69,9 +69,7 @@ public class ResourceManager {
 	private MapTileDownloader downloader = MapTileDownloader.getInstance();
 	
 	public AsyncLoadingThread asyncLoadingTiles = new AsyncLoadingThread();
-
 	
-
 	
 	public ResourceManager() {
 		// TODO start/stop this thread when needed?
@@ -317,6 +315,5 @@ public class ResourceManager {
 			}
 		}
 		System.gc();
-	}
-	
+	}	
 }

@@ -2,7 +2,11 @@ package com.osmand.osm;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+
+import com.osmand.data.MapObject;
 
 /**
  * This utility class includes : 
@@ -153,6 +157,16 @@ public class MapUtils {
 		for(Entity e : source){
 			ids.add(e.getId());
 		}
+	}
+	
+	public static void sortListOfMapObject(List<? extends MapObject<?>> list, final double lat, final double lon){
+		Collections.sort(list, new Comparator<MapObject<?>>() {
+			@Override
+			public int compare(MapObject<?> o1, MapObject<?> o2) {
+				return Double.compare(MapUtils.getDistance(o1.getLocation(), lat, lon), MapUtils.getDistance(o2.getLocation(),
+						lat, lon));
+			}
+		});
 	}
 	
 

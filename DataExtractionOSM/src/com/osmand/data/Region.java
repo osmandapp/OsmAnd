@@ -110,10 +110,7 @@ public class Region extends MapObject<Entity> {
 		return closest;
 	}
 	
-	public List<Amenity> getClosestAmenities(double latitude, double longitude){
-		return amenities.getClosestObjects(latitude, longitude);
-	}
-	
+
 	public DataTileManager<Amenity> getAmenityManager(){
 		return amenities;
 	}

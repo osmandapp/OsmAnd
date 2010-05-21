@@ -5,7 +5,6 @@ import java.text.MessageFormat;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -28,15 +27,13 @@ import com.osmand.OsmandSettings;
 import com.osmand.R;
 import com.osmand.ResourceManager;
 import com.osmand.data.preparation.MapTileDownloader;
+import com.osmand.osm.LatLon;
 import com.osmand.views.OsmandMapTileView;
 import com.osmand.views.POIMapLayer;
 import com.osmand.views.PointLocationLayer;
 
 public class MapActivity extends Activity implements LocationListener, IMapLocationListener {
 	
-	private static final String KEY_LAST_LAT = "KEY_LAST_LAT"; 
-	private static final String KEY_LAST_LON = "KEY_LAST_LON";
-	private static final String KEY_LAST_ZOOM = "KEY_LAST_ZOOM";
 	
     /** Called when the activity is first created. */
 	private OsmandMapTileView mapView;
@@ -51,10 +48,6 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	
 	private POIMapLayer poiMapLayer;
 	private WakeLock wakeLock;
-	
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-		
-	}
 	
 	
     @Override
@@ -76,10 +69,11 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		locationLayer = new PointLocationLayer();
 		mapView.addLayer(locationLayer);
 		
-		SharedPreferences prefs = getPreferences(MODE_WORLD_READABLE);
-		if(prefs != null && prefs.contains(KEY_LAST_LAT)){
-			mapView.setLatLon(prefs.getFloat(KEY_LAST_LAT, 0f), prefs.getFloat(KEY_LAST_LON, 0f));
-			mapView.setZoom(prefs.getInt(KEY_LAST_ZOOM, 3));
+		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
+		if(prefs != null && prefs.contains(OsmandSettings.LAST_KNOWN_MAP_LAT)){
+			LatLon l = OsmandSettings.getLastKnownMapLocation(this);
+			mapView.setLatLon(l.getLatitude(), l.getLongitude());
+			mapView.setZoom(OsmandSettings.getLastKnownMapZoom(this));
 		} else {
 			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 			Location location = service.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -183,12 +177,8 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		super.onPause();
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		service.removeUpdates(this);
-		SharedPreferences prefs = getPreferences(MODE_WORLD_READABLE);
-		Editor edit = prefs.edit();
-		edit.putFloat(KEY_LAST_LAT, (float) mapView.getLatitude());
-		edit.putFloat(KEY_LAST_LON, (float) mapView.getLongitude());
-		edit.putInt(KEY_LAST_ZOOM, mapView.getZoom());
-		edit.commit();
+		OsmandSettings.setLastKnownMapLocation(this, (float) mapView.getLatitude(), (float) mapView.getLongitude());
+		OsmandSettings.setLastKnownMapZoom(this, mapView.getZoom());
 		if (wakeLock != null) {
 			wakeLock.release();
 			wakeLock = null;
