@@ -2,7 +2,10 @@ package com.osmand.views;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Paint.Style;
 import android.location.Location;
 import android.view.MotionEvent;
 
@@ -10,11 +13,13 @@ import com.osmand.osm.MapUtils;
 
 public class PointLocationLayer implements OsmandMapLayer {
 	private Paint location;
+	private Paint bearing;
 	private Paint area;
 	
 	protected Location lastKnownLocation = null;
 	protected final static int RADIUS = 7;
 	private OsmandMapTileView view;
+	private Path pathForDirection;
 
 	private void initUI() {
 		location = new Paint();
@@ -25,6 +30,14 @@ public class PointLocationLayer implements OsmandMapLayer {
 		area = new Paint();
 		area.setColor(Color.BLUE);
 		area.setAlpha(40);		
+		
+		bearing = new Paint();
+		bearing.setColor(Color.BLUE);
+		bearing.setAlpha(150);
+		bearing.setAntiAlias(true);
+		bearing.setStyle(Style.FILL);
+		
+		pathForDirection = new Path();
 	}
 	
 	public void initLayer(OsmandMapTileView view) {
@@ -42,13 +55,10 @@ public class PointLocationLayer implements OsmandMapLayer {
 	@Override
 	public void onDraw(Canvas canvas) {
 		if (isLocationVisible(lastKnownLocation)) {
-			int locationX = MapUtils.getPixelShiftX(view.getZoom(), lastKnownLocation.getLongitude(), view.getLongitude(), view
-					.getTileSize())
-					+ view.getWidth() / 2;
-			int locationY = MapUtils
-					.getPixelShiftY(view.getZoom(), lastKnownLocation.getLatitude(), view.getLatitude(), view.getTileSize())
-					+ view.getHeight() / 2;
-			// TODO specify bearing!
+			int locationX = MapUtils.getPixelShiftX(view.getZoom(), lastKnownLocation.getLongitude(), view.getLongitude(), 
+					view.getTileSize()) + view.getWidth() / 2;
+			int locationY = MapUtils.getPixelShiftY(view.getZoom(), 
+					lastKnownLocation.getLatitude(), view.getLatitude(), view.getTileSize()) + view.getHeight() / 2;
 			int radius = MapUtils.getLengthXFromMeters(view.getZoom(), view.getLatitude(), view.getLongitude(), lastKnownLocation
 					.getAccuracy(), view.getTileSize(), view.getWidth());
 
@@ -58,6 +68,34 @@ public class PointLocationLayer implements OsmandMapLayer {
 			if (radius > RADIUS) {
 				canvas.drawCircle(locationX, locationY, radius, area);
 			}
+			if(lastKnownLocation.hasBearing()){
+				float bearing = lastKnownLocation.getBearing();
+				int radiusBearing = 30;
+				if(lastKnownLocation.hasSpeed()){
+					radiusBearing = 
+						Math.max(MapUtils.getLengthXFromMeters(view.getZoom(), view.getLatitude(), view.getLongitude(), 
+							lastKnownLocation.getSpeed(), view.getTileSize(), view.getWidth()) * 2, radiusBearing);
+				}
+				radiusBearing += RADIUS /2;
+				
+				pathForDirection.reset();
+				pathForDirection.moveTo(0, 0);
+				pathForDirection.lineTo((float) RADIUS, 1f);
+				pathForDirection.lineTo((float) -RADIUS, 1f);
+				pathForDirection.lineTo(0, 0);
+				Matrix m = new Matrix();
+				m.reset();
+				m.postScale(1, radiusBearing*0.5f);
+				m.postTranslate(0, -radiusBearing);
+				m.postTranslate(locationX, locationY);
+				m.postRotate(bearing, locationX, locationY);
+				
+				pathForDirection.transform(m);
+				canvas.drawPath(pathForDirection, this.bearing);
+			}
+			
+			
+
 		}
 	}
 

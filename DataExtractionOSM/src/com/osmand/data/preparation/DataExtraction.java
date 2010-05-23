@@ -193,7 +193,7 @@ public class DataExtraction  {
 					}
 				}
 				if (indexPOI && Amenity.isAmenity(e)) {
-					amenities.add(new Amenity((Node) e));
+					amenities.add(new Amenity(e));
 					return true;
 				}
 				if (e instanceof Node && e.getTag(OSMTagKey.PLACE) != null) {

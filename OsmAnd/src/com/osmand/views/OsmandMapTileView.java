@@ -56,7 +56,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private List<OsmandMapLayer> layers = new ArrayList<OsmandMapLayer>();
 	
 	// UI Part
-
 	private AnimateDraggingMapThread animatedDraggingThread;
 	
 	private PointF startDragging = null;
@@ -248,6 +247,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		synchronized (holder) {
 			Canvas canvas = holder.lockCanvas();
 			if (canvas != null) {
+//				canvas.rotate(45);
 				try {
 					for (int i = 0; i * tileSize + startingX < width; i++) {
 						for (int j = 0; j * tileSize + startingY < height; j++) {
@@ -285,8 +285,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				(i + getTileSize() >= 0 && i < getWidth()) && (j + getTileSize() >= 0 && j < getHeight())) {
 			SurfaceHolder holder = getHolder();
 			synchronized (holder) {
+				// TODO
 				Canvas canvas = holder.lockCanvas(new Rect(i, j, getTileSize() + i, getTileSize() + j));
 				if (canvas != null) {
+//					canvas.rotate(45);
 					try {
 						ResourceManager mgr = ResourceManager.getResourceManager();
 						Bitmap bmp = mgr.getTileImageForMapSync(map, request.xTile, request.yTile, zoom, false);
