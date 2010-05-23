@@ -135,16 +135,22 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     }
     
     public void setLocation(Location location){
-    	locationLayer.setLastKnownLocation(location);
+    	// Do very strange manipulation to call redraw only once
+    	locationLayer.setLastKnownLocation(location, true);
     	if (location != null) {
 			if (linkLocationWithMap) {
-				mapView.setLatLon(location.getLatitude(), location.getLongitude());
-			} 
+				if (location.hasBearing() && OsmandSettings.isRotateMapToBearing(this)) {
+					mapView.setRotateWithLocation(-location.getBearing(), location.getLatitude(), location.getLongitude());
+				} else {
+					mapView.setLatLon(location.getLatitude(), location.getLongitude());
+				}
+			} else {
+				mapView.prepareImage();
+			}
 		} else {
-			if(!linkLocationWithMap){
+			if (!linkLocationWithMap) {
 				backToLocation.setVisibility(View.VISIBLE);
 			}
-			
 		}
     }
     
@@ -190,6 +196,9 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		super.onResume();
 		if(mapView.getMap() != OsmandSettings.getMapTileSource(this)){
 			mapView.setMap(OsmandSettings.getMapTileSource(this));
+		}
+		if(!OsmandSettings.isRotateMapToBearing(this)){
+			mapView.setRotate(0);
 		}
 		if(mapView.getLayers().contains(poiMapLayer) != OsmandSettings.isShowingPoiOverMap(this)){
 			if(OsmandSettings.isShowingPoiOverMap(this)){

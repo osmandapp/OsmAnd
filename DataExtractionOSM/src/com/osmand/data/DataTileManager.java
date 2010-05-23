@@ -88,7 +88,7 @@ public class DataTileManager<T> {
 		if(isEmpty()){
 			return Collections.emptyList();
 		}
-		int dp = 1;
+		int dp = 0;
 		List<T> l = null;
 		while (l == null || l.isEmpty()) {
 			l = getClosestObjects(latitude, longitude, dp, dp + defaultStep);
@@ -106,8 +106,10 @@ public class DataTileManager<T> {
 		int tileY = (int) MapUtils.getTileNumberY(zoom, latitude);
 		List<T> result = new ArrayList<T>();
 		
-		
-		putObjects(tileX, tileY, result);
+		if(startDepth <= 0){
+			putObjects(tileX, tileY, result);
+			startDepth = 1;
+		}
 		
 		// that's very difficult way visiting node : 
 		// similar to visit by spiral
