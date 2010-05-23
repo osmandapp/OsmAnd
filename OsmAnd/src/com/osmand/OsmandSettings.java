@@ -30,6 +30,13 @@ public class OsmandSettings {
 		return prefs.getBoolean(SHOW_POI_OVER_MAP, false);
 	}
 	
+	// this value string is synchronized with android.xml preference name
+	public static final String ROTATE_MAP_TO_BEARING = "rotate_map_to_bearing";
+	public static boolean isRotateMapToBearing(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(ROTATE_MAP_TO_BEARING, false);
+	}
+	
 	
 	// this value string is synchronized with android.xml preference name
 	public static final String MAP_TILE_SOURCES = "map_tile_sources";

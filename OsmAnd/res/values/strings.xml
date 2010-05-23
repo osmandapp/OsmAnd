@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="rotate_map_to_bearing_descr">Rotate map to bearing of your direction</string>
+    <string name="rotate_map_to_bearing">Rotate map</string>
     <string name="show_poi_over_map_description">Show POI on map</string>
     <string name="show_poi_over_map">Show POI</string>
     <string name="map_tile_source_descr">Choose the source of tiles:</string>

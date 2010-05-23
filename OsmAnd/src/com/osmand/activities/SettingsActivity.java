@@ -23,6 +23,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private CheckBoxPreference showPoiOnMap;
 	private CheckBoxPreference useInternetToDownloadTiles;
 	private ListPreference tileSourcePreference;
+	private CheckBoxPreference rotateMapToBearing;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		useInternetToDownloadTiles.setOnPreferenceChangeListener(this);
 		showPoiOnMap =(CheckBoxPreference) screen.findPreference(OsmandSettings.SHOW_POI_OVER_MAP);
 		showPoiOnMap.setOnPreferenceChangeListener(this);
+		rotateMapToBearing =(CheckBoxPreference) screen.findPreference(OsmandSettings.ROTATE_MAP_TO_BEARING);
+		rotateMapToBearing.setOnPreferenceChangeListener(this);
 		
 		tileSourcePreference =(ListPreference) screen.findPreference(OsmandSettings.MAP_TILE_SOURCES);
 		tileSourcePreference.setOnPreferenceChangeListener(this);
@@ -45,6 +48,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		super.onResume();
 		useInternetToDownloadTiles.setChecked(OsmandSettings.isUsingInternetToDownloadTiles(this));
 		showPoiOnMap.setChecked(OsmandSettings.isShowingPoiOverMap(this));
+		rotateMapToBearing.setChecked(OsmandSettings.isRotateMapToBearing(this));
 
 		List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
 		String[] entries = new String[list.size()];
@@ -69,6 +73,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.commit();
 		} else if(preference == useInternetToDownloadTiles){
 			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, (Boolean) newValue);
+			edit.commit();
+		} else if(preference == rotateMapToBearing){
+			edit.putBoolean(OsmandSettings.ROTATE_MAP_TO_BEARING, (Boolean) newValue);
 			edit.commit();
 		} else if (preference == tileSourcePreference) {
 			edit.putString(OsmandSettings.MAP_TILE_SOURCES, (String) newValue);

@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Paint.Style;
 import android.location.Location;
+import android.util.FloatMath;
 import android.view.MotionEvent;
 
 import com.osmand.osm.MapUtils;
@@ -52,6 +53,7 @@ public class PointLocationLayer implements OsmandMapLayer {
 	}
 	
 	
+	// TODO simplify calculation if possible
 	@Override
 	public void onDraw(Canvas canvas) {
 		if (isLocationVisible(lastKnownLocation)) {
@@ -62,9 +64,7 @@ public class PointLocationLayer implements OsmandMapLayer {
 			int radius = MapUtils.getLengthXFromMeters(view.getZoom(), view.getLatitude(), view.getLongitude(), lastKnownLocation
 					.getAccuracy(), view.getTileSize(), view.getWidth());
 
-			if (locationX >= 0 && locationY >= 0) {
-				canvas.drawCircle(locationX, locationY, RADIUS, location);
-			}
+			canvas.drawCircle(locationX, locationY, RADIUS, location);
 			if (radius > RADIUS) {
 				canvas.drawCircle(locationX, locationY, radius, area);
 			}
@@ -103,12 +103,15 @@ public class PointLocationLayer implements OsmandMapLayer {
 		if(l == null || view == null){
 			return false;
 		}
-		int newX = MapUtils.getPixelShiftX(view.getZoom(), 
-				l.getLongitude(), view.getLongitude(), view.getTileSize()) + 
-				view.getWidth()/2;
-		int newY = MapUtils.getPixelShiftY(view.getZoom(), 
-				l.getLatitude(), view.getLatitude() , view.getTileSize()) + 
-				view.getHeight()/2;
+		int cx = view.getWidth()/2;
+		int cy = view.getHeight()/2;
+		int dx = MapUtils.getPixelShiftX(view.getZoom(), 
+				l.getLongitude(), view.getLongitude(), view.getTileSize());
+		int dy = MapUtils.getPixelShiftY(view.getZoom(), 
+				l.getLatitude(), view.getLatitude() , view.getTileSize());
+		float rad = (float) Math.toRadians(view.getRotate());
+		int newX = (int) (dx * FloatMath.cos(rad) - dy * FloatMath.sin(rad) + cx);
+		int newY = (int) (dx * FloatMath.sin(rad) + dy * FloatMath.cos(rad) + cy);
 		int radius = MapUtils.getLengthXFromMeters(view.getZoom(), view.getLatitude(), view.getLongitude(), 
 				l.getAccuracy(), view.getTileSize(), view.getWidth());
 		if(newX >= 0 && newX <= view.getWidth() && newY >=0 && newY <= view.getHeight()){
@@ -127,11 +130,13 @@ public class PointLocationLayer implements OsmandMapLayer {
 		return lastKnownLocation;
 	}
 	
-	public void setLastKnownLocation(Location lastKnownLocation) {
-		boolean redraw = isLocationVisible(this.lastKnownLocation) || isLocationVisible(lastKnownLocation);
+	public void setLastKnownLocation(Location lastKnownLocation, boolean doNotRedraw) {
 		this.lastKnownLocation = lastKnownLocation;
-		if(redraw){
-			view.prepareImage();
+		if (!doNotRedraw) {
+			boolean redraw = isLocationVisible(this.lastKnownLocation) || isLocationVisible(lastKnownLocation);
+			if (redraw) {
+				view.prepareImage();
+			}
 		}
 	}
 

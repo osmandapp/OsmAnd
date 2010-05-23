@@ -13,8 +13,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.util.AttributeSet;
+import android.util.FloatMath;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -48,6 +50,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	private double latitude = 0d;
 	
+	private float rotate = 0;
+	
 	// name of source map 
 	private ITileSource map = null;
 	
@@ -65,6 +69,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	Paint paintGrayFill;
 	Paint paintWhiteFill;
 	Paint paintBlack;
+	Paint paintBitmap;
 	
 
 	
@@ -84,14 +89,21 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		paintGrayFill = new Paint();
 		paintGrayFill.setColor(Color.GRAY);
 		paintGrayFill.setStyle(Style.FILL);
-		
+		// when map rotate
+		paintGrayFill.setAntiAlias(true);
+
 		paintWhiteFill = new Paint();
 		paintWhiteFill.setColor(Color.WHITE);
 		paintWhiteFill.setStyle(Style.FILL);
+		// when map rotate
+		paintWhiteFill.setAntiAlias(true);
 		
 		paintBlack = new Paint();
 		paintBlack.setStyle(Style.STROKE);
 		paintBlack.setColor(Color.BLACK);
+		
+		paintBitmap = new Paint();
+		paintBitmap.setFilterBitmap(true);
 
 		setClickable(true);
 		getHolder().addCallback(this);
@@ -140,12 +152,12 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 	
 
-	public double getXTile(){
-		return MapUtils.getTileNumberX(zoom, longitude);
+	public float getXTile(){
+		return (float) MapUtils.getTileNumberX(zoom, longitude);
 	}
 	
-	public double getYTile(){
-		return MapUtils.getTileNumberY(zoom, latitude);
+	public float getYTile(){
+		return (float) MapUtils.getTileNumberY(zoom, latitude);
 	}
 	
 	
@@ -155,6 +167,27 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			this.zoom = zoom;
 			prepareImage();
 		}
+	}
+	
+	public void setRotate(float rotate) {
+		float dif = this.rotate - rotate;
+		if (dif > 2 || dif < -2) {
+			this.rotate = rotate;
+			animatedDraggingThread.stopDragging();
+			prepareImage();
+		}
+	}
+	
+	public void setRotateWithLocation(float rotate, double latitude, double longitude){
+		animatedDraggingThread.stopDragging();
+		this.rotate = rotate;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		prepareImage();
+	}
+	
+	public float getRotate() {
+		return rotate;
 	}
 	
 	public ITileSource getMap() {
@@ -230,33 +263,59 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 	}
 	
+	protected void calculateTileRectangle(RectF pixRect, float cx, float cy, RectF tileRect){
+		float x1 = calcDiffTileX(pixRect.left - cx, pixRect.top - cy);
+		float x2 = calcDiffTileX(pixRect.left - cx, pixRect.bottom - cy);
+		float x3 = calcDiffTileX(pixRect.right - cx, pixRect.top - cy);
+		float x4 = calcDiffTileX(pixRect.right - cx, pixRect.bottom - cy);
+		float y1 = calcDiffTileY(pixRect.left - cx, pixRect.top - cy);
+		float y2 = calcDiffTileY(pixRect.left - cx, pixRect.bottom - cy);
+		float y3 = calcDiffTileY(pixRect.right - cx, pixRect.top - cy);
+		float y4 = calcDiffTileY(pixRect.right - cx, pixRect.bottom - cy);
+		float l = Math.min(Math.min(x1, x2), Math.min(x3, x4)) + getXTile();
+		float r = Math.max(Math.max(x1, x2), Math.max(x3, x4)) + getXTile();
+		float t = Math.min(Math.min(y1, y2), Math.min(y3, y4)) + getYTile();
+		float b = Math.max(Math.max(y1, y2), Math.max(y3, y4)) + getYTile();
+		tileRect.set(l, t, r, b);
+	}
+	
+	// used only to save space & reuse 
+	protected RectF tilesRect = new RectF();
+	protected RectF boundsRect = new RectF();
+	
 	public void prepareImage() {
 		if (OsmandSettings.isUsingInternetToDownloadTiles(getContext())) {
 			 MapTileDownloader.getInstance().refuseAllPreviousRequests();
 		}
-		int width = getWidth();
-		int height = getHeight();
 		int tileSize = getTileSize();
-		
-		int xTileLeft = (int) Math.floor(getXTile() - width / (2d * getTileSize()));
-		int yTileUp = (int) Math.floor(getYTile() - height / (2d * getTileSize()));
-		int startingX = (int) ((xTileLeft - getXTile()) * getTileSize() + getWidth() / 2);
-		int startingY = (int) ((yTileUp - getYTile()) * getTileSize() + getHeight() / 2);
+		float tileX = getXTile();
+		float tileY = getYTile();
 		
 		SurfaceHolder holder = getHolder();
 		synchronized (holder) {
 			Canvas canvas = holder.lockCanvas();
 			if (canvas != null) {
-//				canvas.rotate(45);
+				ResourceManager mgr = ResourceManager.getResourceManager();
+				boolean useInternet = OsmandSettings.isUsingInternetToDownloadTiles(getContext());
+				float w = getWidth() / 2;
+				float h = getHeight() / 2;
+				canvas.rotate(rotate, w , h);
+				boundsRect.set(0, 0, getWidth(), getHeight());
+				calculateTileRectangle(boundsRect, w, h, tilesRect);
 				try {
-					for (int i = 0; i * tileSize + startingX < width; i++) {
-						for (int j = 0; j * tileSize + startingY < height; j++) {
-							ResourceManager mgr = ResourceManager.getResourceManager();
-							Bitmap bmp = mgr.getTileImageForMapAsync(map, xTileLeft + i, yTileUp + j, zoom, OsmandSettings.isUsingInternetToDownloadTiles(getContext()));
+					int left = (int) FloatMath.floor(tilesRect.left);
+					int top = (int) FloatMath.floor(tilesRect.top);
+					int width = (int) (FloatMath.ceil(tilesRect.right) - left);
+					int height = (int) (FloatMath.ceil(tilesRect.bottom) - top);
+					for (int i = 0; i <width; i++) {
+						for (int j = 0; j< height; j++) {
+							float x1 = (i + left - tileX) * tileSize + w;
+							float y1 = (j + top - tileY) * tileSize + h;
+							Bitmap bmp = mgr.getTileImageForMapAsync(map, left + i, top + j, zoom, useInternet);
 							if (bmp == null) {
-								drawEmptyTile(canvas, i * tileSize + startingX, j * tileSize + startingY);
+								drawEmptyTile(canvas, (int) x1, (int) y1);
 							} else {
-								canvas.drawBitmap(bmp, i * tileSize + startingX, j * tileSize + startingY, null);
+								canvas.drawBitmap(bmp, x1, y1, paintBitmap);
 							}
 						}
 					}
@@ -270,7 +329,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	
 	public void tileDownloaded(DownloadRequest request) {
-		if(request == null){
+		// TODO estimate bounds for rotated map
+		if(request == null || rotate != 0){
 			// we don't know exact images were changed
 			prepareImage();
 			return;
@@ -285,10 +345,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				(i + getTileSize() >= 0 && i < getWidth()) && (j + getTileSize() >= 0 && j < getHeight())) {
 			SurfaceHolder holder = getHolder();
 			synchronized (holder) {
-				// TODO
 				Canvas canvas = holder.lockCanvas(new Rect(i, j, getTileSize() + i, getTileSize() + j));
 				if (canvas != null) {
-//					canvas.rotate(45);
+					canvas.rotate(rotate,getWidth()/2, getHeight()/2);
 					try {
 						ResourceManager mgr = ResourceManager.getResourceManager();
 						Bitmap bmp = mgr.getTileImageForMapSync(map, request.xTile, request.yTile, zoom, false);
@@ -309,14 +368,26 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	
 	/////////////////////////////////// DRAGGING PART ///////////////////////////////////////
+	public float calcDiffTileY(float dx, float dy){
+		float rad = (float) Math.toRadians(rotate);
+		return (-FloatMath.sin(rad) * dx + FloatMath.cos(rad) * dy) / getTileSize();
+	}
+	
+	public float calcDiffTileX(float dx, float dy){
+		float rad = (float) Math.toRadians(rotate);
+		return (FloatMath.cos(rad) * dx + FloatMath.sin(rad) * dy) / getTileSize();
+	}
 	
 	
 	@Override
 	public void dragTo(float fromX, float fromY, float toX, float toY){
-		float dx = (fromX - toX)/getTileSize(); 
-		float dy = (fromY - toY)/getTileSize();
-		this.latitude = MapUtils.getLatitudeFromTile(zoom, getYTile() + dy);
-		this.longitude = MapUtils.getLongitudeFromTile(zoom, getXTile() + dx);
+		float dx = (fromX - toX) ; 
+		float dy = (fromY - toY);
+		float fy = calcDiffTileY(dx, dy);
+		float fx = calcDiffTileX(dx, dy);
+		
+		this.latitude = MapUtils.getLatitudeFromTile(zoom, getYTile() + fy);
+		this.longitude = MapUtils.getLongitudeFromTile(zoom, getXTile() + fx);
 		prepareImage();
 		if(locationListener != null){
 			locationListener.locationChanged(latitude, longitude, this);

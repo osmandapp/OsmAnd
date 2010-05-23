@@ -112,6 +112,12 @@ public class SearchActivity extends ListActivity {
 		AmenityAdapter(Object list) {
 			super(SearchActivity.this, R.layout.searchlist, (List<?>) list);
 		}
+		
+		@Override
+		public int getCount() {
+			int c = super.getCount();
+			return c > 20 ? 20 : c;
+		}
 
 		public View getView(int position, View convertView, ViewGroup parent) {
 			LayoutInflater inflater = getLayoutInflater();
