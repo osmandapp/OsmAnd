@@ -5,10 +5,9 @@ import java.util.Map;
 
 import com.osmand.Algoritms;
 import com.osmand.osm.Entity;
-import com.osmand.osm.Node;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 
-public class Amenity extends MapObject<Node> {
+public class Amenity extends MapObject<Entity> {
 	// http://wiki.openstreetmap.org/wiki/Amenity
 	public enum AmenityType {
 		SUSTENANCE, // restaurant, cafe ...
@@ -89,16 +88,16 @@ public class Amenity extends MapObject<Node> {
 	private String subType;
 	private AmenityType type;
 
-	public Amenity(Node node){
-		this.entity = node;
-		this.type = getType(node);
-		this.subType = getSubType(node);
+	public Amenity(Entity entity){
+		this.entity = entity;
+		this.type = getType(entity);
+		this.subType = getSubType(entity);
 	}
 	
 	public Amenity(){
 	}
 	
-	protected String getSubType(Node node){
+	protected String getSubType(Entity node){
 		if(node.getTag(OSMTagKey.AMENITY) != null){
 			return node.getTag(OSMTagKey.AMENITY);
 		} else if(node.getTag(OSMTagKey.SHOP) != null){
@@ -111,7 +110,7 @@ public class Amenity extends MapObject<Node> {
 		return "";
 	}
 	
-	protected AmenityType getType(Node node){
+	protected AmenityType getType(Entity node){
 		if(node.getTag(OSMTagKey.SHOP) != null){
 			return AmenityType.SHOP;
 		} else if(node.getTag(OSMTagKey.TOURISM) != null){
@@ -141,10 +140,6 @@ public class Amenity extends MapObject<Node> {
 	}
 	
 	public static boolean isAmenity(Entity n){
-		// TODO allow ways to be amenity!
-		if(!(n instanceof Node)){
-			return false;
-		}
 		if(n.getTag(OSMTagKey.AMENITY) != null){
 			return true;
 		} else if(n.getTag(OSMTagKey.SHOP) != null){

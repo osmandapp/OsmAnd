@@ -104,6 +104,27 @@ public class MapUtils {
 		return new LatLon(latitude/count, longitude/count);
 	}
 	
+	public static double checkLongitude(double longitude) {
+		while (longitude < -180 || longitude > 180) {
+			if (longitude < 0) {
+				longitude += 360;
+			} else {
+				longitude -= 360;
+			}
+		}
+		return longitude;
+	}
+	
+	public static double checkLatitude(double latitude) {
+		while (latitude < -90 || latitude > 90) {
+			if (latitude < 0) {
+				latitude += 180;
+			} else {
+				latitude -= 180;
+			}
+		}
+		return latitude;
+	}
 	
 	
 	/**
@@ -113,14 +134,15 @@ public class MapUtils {
 	// degree latitude measurements (90, -90) [53.9]
 	 */
 	
-	// TODO check boundaries
 	public static double getTileNumberX(int zoom, double longitude){
+		longitude = checkLongitude(longitude);
 		int n = 1 << zoom;
 		return (longitude + 180d)/360d * n;
 	}
 	
 	public static double getTileNumberY(int zoom,  double latitude){
 		int n = 1 << zoom;
+		latitude = checkLatitude(latitude);
 		double eval = Math.log( Math.tan(Math.toRadians(latitude)) + 1/Math.cos(Math.toRadians(latitude)) );
 		return  (1 - eval / Math.PI) / 2 * n;
 	}

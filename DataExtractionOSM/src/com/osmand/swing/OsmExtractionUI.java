@@ -112,7 +112,6 @@ public class OsmExtractionUI implements IMapLocationListener {
 	private JCheckBox buildAddressIndex;
 	private JCheckBox normalizingStreets;
 	private TreeModelListener treeModelListener;
-	private JCheckBox zipIndexFiles;
 	private JCheckBox loadingAllData;
 	
 	
@@ -300,9 +299,12 @@ public class OsmExtractionUI implements IMapLocationListener {
 		generateDataButton.setEnabled(region != null);
 		normalizingStreets.setVisible(region == null);
 		loadingAllData.setVisible(region == null);
-		buildAddressIndex.setEnabled(region == null || region.getCitiesCount(null) > 0);
-		buildPoiIndex.setEnabled(region == null || !region.getAmenityManager().isEmpty());
-		zipIndexFiles.setVisible(region != null);
+		if(region == null && !buildAddressIndex.isEnabled()){
+			buildAddressIndex.setEnabled(true);
+		}
+		if(region == null && !buildPoiIndex.isEnabled()){
+			buildPoiIndex.setEnabled(false);
+		}
 	}
 	
 	public void createButtonsBar(Container content){
@@ -341,11 +343,6 @@ public class OsmExtractionUI implements IMapLocationListener {
 		panel.add(loadingAllData);
 		loadingAllData.setSelected(false);
 		
-		zipIndexFiles = new JCheckBox();
-		zipIndexFiles.setText("Zip index files");
-		panel.add(zipIndexFiles);
-		zipIndexFiles.setSelected(true);
-		
 		updateButtonsBar();
 	}
 	
@@ -360,8 +357,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 					DataIndexBuilder builder = new DataIndexBuilder(DataExtractionSettings.getSettings().getDefaultWorkingDir(), region);
 					StringBuilder msg = new StringBuilder();
 					try {
-						builder.setZipped(zipIndexFiles.isSelected());
-						msg.append("Indices checked for ").append(region.getName());
+						msg.append("Indices for ").append(region.getName());
 						if(buildPoiIndex.isEnabled()){
 							dlg.startTask("Generating POI index...", -1);
 							builder.buildPOI();
@@ -629,6 +625,12 @@ public class OsmExtractionUI implements IMapLocationListener {
 					try {
 						DataExtraction dataExtraction = new DataExtraction(buildAddressIndex.isSelected(), buildPoiIndex.isSelected(),
 								normalizingStreets.isSelected(), loadingAllData.isSelected());
+						if(!buildAddressIndex.isSelected()){
+							buildAddressIndex.setEnabled(false);
+						}
+						if(!buildPoiIndex.isSelected()){
+							buildPoiIndex.setEnabled(false);
+						}
 						res = dataExtraction.readCountry(f.getAbsolutePath(), dlg, filter);
 					} catch (IOException e) {
 						throw new IllegalArgumentException(e);
