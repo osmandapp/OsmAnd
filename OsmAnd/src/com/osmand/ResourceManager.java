@@ -29,6 +29,7 @@ import com.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
 import com.osmand.map.ITileSource;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.io.OsmIndexStorage;
+import com.osmand.osm.io.OsmLuceneRepository;
 
 /**
  * Resource manager is responsible to work with all resources 
@@ -43,6 +44,7 @@ public class ResourceManager {
 	private static final String POI_PATH = "osmand/poi/";
 	private static final String ADDRESS_PATH = "osmand/address/";
 	private static final String TILES_PATH = "osmand/tiles/";
+	private static final String LUCENE_PATH = "osmand/lucene/";
 	
 	private static final Log log = LogUtil.getLog(ResourceManager.class);
 	
@@ -69,6 +71,8 @@ public class ResourceManager {
 	private MapTileDownloader downloader = MapTileDownloader.getInstance();
 	
 	public AsyncLoadingThread asyncLoadingTiles = new AsyncLoadingThread();
+	
+	protected OsmLuceneRepository amenityIndexSearcher = new OsmLuceneRepository();
 	
 	
 	public ResourceManager() {
@@ -279,6 +283,14 @@ public class ResourceManager {
 		}
 	}
 	
+	public void indexingLucene(final IProgress progress){
+		// read index
+		File file = new File(Environment.getExternalStorageDirectory(), LUCENE_PATH);
+		if (file.exists() && file.canRead()) {
+			amenityIndexSearcher.indexing(progress, file);
+		}
+	}
+	
 	public void indexingAddresses(final IProgress progress){
 		indexingFiles(ADDRESS_PATH, ".osmand", progress, "address", new IndexVisitor() {
 			@Override
@@ -302,7 +314,11 @@ public class ResourceManager {
 	}
 	
 	
+	public OsmLuceneRepository getAmenityIndexSearcher(){
+		return amenityIndexSearcher;
+	}
 	
+
 	/// On low memory method ///
 	public void onLowMemory() {
 		log.info("On low memory : cleaning tiles - size = " + cacheOfImages.size());

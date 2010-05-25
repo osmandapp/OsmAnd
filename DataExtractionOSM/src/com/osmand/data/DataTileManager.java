@@ -68,8 +68,8 @@ public class DataTileManager<T> {
 	public List<T> getObjects(double latitudeUp, double longitudeUp, double latitudeDown, double longitudeDown) {
 		int tileXUp = (int) MapUtils.getTileNumberX(zoom, longitudeUp);
 		int tileYUp = (int) MapUtils.getTileNumberY(zoom, latitudeUp);
-		int tileXDown = (int) MapUtils.getTileNumberX(zoom, longitudeDown);
-		int tileYDown = (int) MapUtils.getTileNumberY(zoom, latitudeDown);
+		int tileXDown = (int) MapUtils.getTileNumberX(zoom, longitudeDown) + 1;
+		int tileYDown = (int) MapUtils.getTileNumberY(zoom, latitudeDown) + 1;
 		List<T> result = new ArrayList<T>();
 		for (int i = tileXUp; i <= tileXDown; i++) {
 			for (int j = tileYUp; j <= tileYDown; j++) {
