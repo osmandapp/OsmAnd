@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -59,7 +60,7 @@ public class DataIndexBuilder {
 	}
 	
 	
-	public DataIndexBuilder buildPOI() throws XMLStreamException, IOException { 
+	public DataIndexBuilder buildPOI() throws XMLStreamException, IOException, SQLException { 
 		
 		List<Amenity> list = region.getAmenityManager().getAllObjects();
 		List<Long> interestedObjects = new ArrayList<Long>(list.size());
@@ -75,6 +76,8 @@ public class DataIndexBuilder {
 		}
 		OsmStorageWriter writer = new OsmStorageWriter();
 		writer.saveLuceneIndex(new File(workingDir, "lucene"), region);
+		writer.saveSQLLitePOIIndex(new File(workingDir, "POI/"+region.getName()+".db"), region);
+		
 		return this;
 	}
 	

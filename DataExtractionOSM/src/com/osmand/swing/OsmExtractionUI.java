@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -372,6 +373,8 @@ public class OsmExtractionUI implements IMapLocationListener {
 					    JOptionPane pane = new JOptionPane(msg);
 					    JDialog dialog = pane.createDialog(frame, "Generation data");
 					    dialog.setVisible(true);
+					} catch (SQLException e1) {
+						throw new IllegalArgumentException(e1);
 					} catch (XMLStreamException e1) {
 						throw new IllegalArgumentException(e1);
 					} catch (IOException e1) {
