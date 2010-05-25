@@ -37,6 +37,13 @@ public class OsmandSettings {
 		return prefs.getBoolean(ROTATE_MAP_TO_BEARING, false);
 	}
 	
+	// this value string is synchronized with android.xml preference name
+	public static final String MAP_VIEW_3D = "map_view_3d";
+	public static boolean isMapView3D(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(MAP_VIEW_3D, false);
+	}
+	
 	
 	// this value string is synchronized with android.xml preference name
 	public static final String MAP_TILE_SOURCES = "map_tile_sources";

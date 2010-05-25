@@ -16,8 +16,17 @@ import static com.osmand.osm.io.OsmBaseStorage.ELEM_OSM;
 import static com.osmand.osm.io.OsmBaseStorage.ELEM_RELATION;
 import static com.osmand.osm.io.OsmBaseStorage.ELEM_TAG;
 import static com.osmand.osm.io.OsmBaseStorage.ELEM_WAY;
-import static com.osmand.osm.io.OsmIndexStorage.*;
+import static com.osmand.osm.io.OsmIndexStorage.ATTR_CITYTYPE;
+import static com.osmand.osm.io.OsmIndexStorage.ATTR_NAME;
+import static com.osmand.osm.io.OsmIndexStorage.ATTR_SUBTYPE;
+import static com.osmand.osm.io.OsmIndexStorage.ELEM_AMENITY;
+import static com.osmand.osm.io.OsmIndexStorage.ELEM_BUILDING;
+import static com.osmand.osm.io.OsmIndexStorage.ELEM_CITY;
+import static com.osmand.osm.io.OsmIndexStorage.ELEM_OSMAND;
+import static com.osmand.osm.io.OsmIndexStorage.ELEM_STREET;
+import static com.osmand.osm.io.OsmIndexStorage.OSMAND_VERSION;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -30,7 +39,21 @@ import java.util.Map.Entry;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import org.apache.commons.logging.Log;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.document.Field.Index;
+import org.apache.lucene.document.Field.Store;
+import org.apache.lucene.index.CorruptIndexException;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriter.MaxFieldLength;
+import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.store.LockObtainFailedException;
+import org.apache.lucene.util.Version;
+
 import com.osmand.Algoritms;
+import com.osmand.LogUtil;
 import com.osmand.data.Amenity;
 import com.osmand.data.Building;
 import com.osmand.data.City;
@@ -52,6 +75,9 @@ public class OsmStorageWriter {
 	private final String INDENT = "    ";
 	private final String INDENT2 = INDENT + INDENT;
 	private final String INDENT3 = INDENT + INDENT + INDENT;
+	private static final Log log = LogUtil.getLog(OsmStorageWriter.class);
+	
+	private static final Version VERSION = Version.LUCENE_30;
 
 
 	public OsmStorageWriter(){
@@ -149,6 +175,45 @@ public class OsmStorageWriter {
 			return "relation";
 		} 
 		return "node";
+	}
+	
+	public void saveLuceneIndex(File dir, Region region) throws CorruptIndexException, LockObtainFailedException, IOException{
+		long now = System.currentTimeMillis();
+		IndexWriter writer = null;
+		try {
+			// Make a lucene writer and create new Lucene index with arg3 = true
+			writer = new IndexWriter(FSDirectory.open(dir), new StandardAnalyzer(VERSION), true, MaxFieldLength.LIMITED);
+			for (Amenity a : region.getAmenityManager().getAllObjects()) {
+				index(a, writer);
+			}
+			writer.optimize();
+		} finally {
+			try {
+				writer.close();
+			} catch (Exception t) {
+				log.error("Failed to close index.", t);
+				throw new RuntimeException(t);
+			}
+			log.info(String.format("Indexing done in %s ms.", System.currentTimeMillis() - now));
+		}
+
+	}
+	
+	// TODO externalize strings
+	protected void index(Amenity amenity, IndexWriter writer) throws CorruptIndexException, IOException {
+		Document document = new Document();
+		document.add(new Field("id",""+amenity.getEntity().getId(),Store.YES, Index.NOT_ANALYZED));
+		LatLon latLon = amenity.getEntity().getLatLon();
+		document.add(new Field("name",amenity.getName(),Store.YES, Index.NOT_ANALYZED));
+		document.add(new Field("longitude",OsmLuceneRepository.formatLongitude(latLon.getLongitude()),Store.YES, Index.ANALYZED));
+		document.add(new Field("latitude",OsmLuceneRepository.formatLatitude(latLon.getLatitude()),Store.YES, Index.ANALYZED));
+		document.add(new Field("type",amenity.getType().name(),Store.YES, Index.ANALYZED));
+		document.add(new Field("subtype",amenity.getSubType(),Store.YES, Index.ANALYZED));
+		//for (Entry<String, String> entry:amenity.getNode().getTags().entrySet()) {
+		//	document.add(new Field(entry.getKey(),entry.getValue(),Store.YES, Index.NOT_ANALYZED));
+		//}
+		
+		writer.addDocument(document);
 	}
 	
 	

@@ -64,7 +64,10 @@ public class MapUtils {
 		} else if(e instanceof Relation){
 			List<LatLon> list = new ArrayList<LatLon>();
 			for(Entity fe : ((Relation) e).getMembers(null)){
-				list.add(getCenter(fe));
+				LatLon c = getCenter(fe);
+				if(c != null){
+					list.add(c);
+				}
 			}
 			return getWeightCenter(list);
 		}

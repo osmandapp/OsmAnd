@@ -8,15 +8,18 @@ import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
+import com.osmand.ResourceManager;
 import com.osmand.data.Amenity;
 import com.osmand.data.DataTileManager;
 import com.osmand.osm.MapUtils;
+import com.osmand.osm.io.OsmLuceneRepository;
 
 public class POIMapLayer implements OsmandMapLayer {
 	private static final int radiusClick = 2; // for 15 level zoom
 	
 	private DataTileManager<Amenity> nodeManager = null;
 	private Paint pointUI;
+	private Paint pointAltUI;
 	private OsmandMapTileView view;
 	private List<Amenity> objects;
 	
@@ -70,7 +73,12 @@ public class POIMapLayer implements OsmandMapLayer {
 		pointUI = new Paint();
 		pointUI.setColor(Color.BLUE);
 		pointUI.setAlpha(150);
-		pointUI.setAntiAlias(true);		
+		pointUI.setAntiAlias(true);
+		
+		pointAltUI = new Paint();
+		pointAltUI.setColor(Color.GREEN);
+		pointAltUI.setAlpha(150);
+		pointAltUI.setAntiAlias(true);
 	}
 	
 	public int getRadiusPoi(int zoom){
@@ -83,24 +91,41 @@ public class POIMapLayer implements OsmandMapLayer {
 
 	@Override
 	public void onDraw(Canvas canvas) {
-		if (nodeManager != null && view.getZoom() >= 15) {
+		
+		if (view.getZoom() >= 15) {
 			double tileNumberX = MapUtils.getTileNumberX(view.getZoom(), view.getLongitude());
 			double tileNumberY = MapUtils.getTileNumberY(view.getZoom(), view.getLatitude());
 			double xTileLeft = tileNumberX - view.getWidth() / (2d * getTileSize());
 			double xTileRight = tileNumberX + view.getWidth() / (2d * getTileSize());
 			double yTileUp = tileNumberY - view.getHeight() / (2d * getTileSize());
 			double yTileDown = tileNumberY + view.getHeight() / (2d * getTileSize());
-
-			objects = nodeManager.getObjects(MapUtils.getLatitudeFromTile(view.getZoom(), yTileUp), MapUtils
-					.getLongitudeFromTile(view.getZoom(), xTileLeft), MapUtils.getLatitudeFromTile(view.getZoom(), yTileDown), MapUtils
-					.getLongitudeFromTile(view.getZoom(), xTileRight));
-			for (Amenity o : objects) {
-				double tileX = MapUtils.getTileNumberX(view.getZoom(), o.getLocation().getLongitude());
-				int x = (int) ((tileX - xTileLeft) * getTileSize());
-				double tileY = MapUtils.getTileNumberY(view.getZoom(), o.getLocation().getLatitude());
-				int y = (int) ((tileY - yTileUp) * getTileSize());
-				canvas.drawCircle(x, y, getRadiusPoi(view.getZoom()), pointUI);
+			double topLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), yTileUp);
+			double leftLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), xTileLeft);
+			double bottomLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), yTileDown);
+			double rightLongitude= MapUtils.getLongitudeFromTile(view.getZoom(), xTileRight);
+			
+			OsmLuceneRepository searcher = ResourceManager.getResourceManager().getAmenityIndexSearcher();
+			if (searcher != null) {
+				objects = searcher.searchAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude);
+				for (Amenity o : objects) {
+					double tileX = MapUtils.getTileNumberX(view.getZoom(), o.getLocation().getLongitude());
+					int x = (int) ((tileX - xTileLeft) * getTileSize());
+					double tileY = MapUtils.getTileNumberY(view.getZoom(), o.getLocation().getLatitude());
+					int y = (int) ((tileY - yTileUp) * getTileSize());
+					canvas.drawCircle(x, y, getRadiusPoi(view.getZoom()), pointAltUI);
+				}
+			} 
+			if (nodeManager != null) {
+				objects = nodeManager.getObjects(topLatitude, leftLongitude, bottomLatitude, rightLongitude);
+				for (Amenity o : objects) {
+					double tileX = MapUtils.getTileNumberX(view.getZoom(), o.getLocation().getLongitude());
+					int x = (int) ((tileX - xTileLeft) * getTileSize());
+					double tileY = MapUtils.getTileNumberY(view.getZoom(), o.getLocation().getLatitude());
+					int y = (int) ((tileY - yTileUp) * getTileSize());
+					canvas.drawCircle(x, y, getRadiusPoi(view.getZoom()), pointAltUI);
+				}
 			}
+			
 		}
 	}
 

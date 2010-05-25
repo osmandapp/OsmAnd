@@ -4,5 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/bzip2-20090327.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-core-3.0.1.jar" sourcepath="C:/docs/lucene/lucene-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

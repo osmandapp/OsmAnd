@@ -59,7 +59,7 @@ public class DataIndexBuilder {
 	}
 	
 	
-	public DataIndexBuilder buildPOI() throws XMLStreamException, IOException{
+	public DataIndexBuilder buildPOI() throws XMLStreamException, IOException { 
 		
 		List<Amenity> list = region.getAmenityManager().getAllObjects();
 		List<Long> interestedObjects = new ArrayList<Long>(list.size());
@@ -73,6 +73,8 @@ public class DataIndexBuilder {
 		} finally {
 			output.close();
 		}
+		OsmStorageWriter writer = new OsmStorageWriter();
+		writer.saveLuceneIndex(new File(workingDir, "lucene"), region);
 		return this;
 	}
 	
