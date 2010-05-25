@@ -74,6 +74,8 @@ public class ResourceManager {
 	
 	protected OsmLuceneRepository amenityIndexSearcher = new OsmLuceneRepository();
 	
+	protected OsmSQLLiteRepository amenityRepository = new OsmSQLLiteRepository();
+	
 	
 	public ResourceManager() {
 		// TODO start/stop this thread when needed?
@@ -280,6 +282,16 @@ public class ResourceManager {
 				}
 
 			});
+			
+			File file = new File(Environment.getExternalStorageDirectory(), POI_PATH);
+			if (file.exists() && file.canRead()) {
+				for (File f : file.listFiles()) {
+					if(f.getName().endsWith(".db")){
+						progress.startTask("Indexing poi " + f.getName(), -1);
+						amenityRepository.initialize(progress, f);
+					}
+				}
+			}
 		}
 	}
 	
@@ -311,6 +323,10 @@ public class ResourceManager {
 			indexingPoi(null);
 		}
 		return poiIndex;
+	}
+	
+	public OsmSQLLiteRepository getAmenityRepository() {
+		return amenityRepository;
 	}
 	
 	

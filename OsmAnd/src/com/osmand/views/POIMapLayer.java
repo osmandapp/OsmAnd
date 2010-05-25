@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
+import com.osmand.OsmSQLLiteRepository;
 import com.osmand.ResourceManager;
 import com.osmand.data.Amenity;
 import com.osmand.data.DataTileManager;
@@ -115,8 +116,20 @@ public class POIMapLayer implements OsmandMapLayer {
 					canvas.drawCircle(x, y, getRadiusPoi(view.getZoom()), pointAltUI);
 				}
 			} 
+			
+			OsmSQLLiteRepository sqlLite = ResourceManager.getResourceManager().getAmenityRepository();
+			if (sqlLite != null) {
+				objects = sqlLite.searchAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude);
+				for (Amenity o : objects) {
+					double tileX = MapUtils.getTileNumberX(view.getZoom(), o.getLocation().getLongitude());
+					int x = (int) ((tileX - xTileLeft) * getTileSize());
+					double tileY = MapUtils.getTileNumberY(view.getZoom(), o.getLocation().getLatitude());
+					int y = (int) ((tileY - yTileUp) * getTileSize());
+					canvas.drawCircle(x, y, getRadiusPoi(view.getZoom()), pointAltUI);
+				}
+			}
 			if (nodeManager != null) {
-				objects = nodeManager.getObjects(topLatitude, leftLongitude, bottomLatitude, rightLongitude);
+				List<Amenity> objects = nodeManager.getObjects(topLatitude, leftLongitude, bottomLatitude, rightLongitude);
 				for (Amenity o : objects) {
 					double tileX = MapUtils.getTileNumberX(view.getZoom(), o.getLocation().getLongitude());
 					int x = (int) ((tileX - xTileLeft) * getTileSize());

@@ -29,6 +29,11 @@ import static com.osmand.osm.io.OsmIndexStorage.OSMAND_VERSION;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -212,8 +217,53 @@ public class OsmStorageWriter {
 		//for (Entry<String, String> entry:amenity.getNode().getTags().entrySet()) {
 		//	document.add(new Field(entry.getKey(),entry.getValue(),Store.YES, Index.NOT_ANALYZED));
 		//}
-		
 		writer.addDocument(document);
+	}
+	
+	
+	public void saveSQLLitePOIIndex(File file, Region region) throws  SQLException{
+		long now = System.currentTimeMillis();
+		try {
+			Class.forName("org.sqlite.JDBC");
+		} catch (ClassNotFoundException e) {
+			log.error("Illegal configuration", e);
+			throw new IllegalStateException(e);
+		}
+        Connection conn = DriverManager.getConnection("jdbc:sqlite:"+file.getAbsolutePath());
+
+        final int batchSize = 500;
+		try {
+			Statement stat = conn.createStatement();
+	        stat.executeUpdate("create table poi (id long, latitude double, longitude double, name, type, subtype);");
+	        stat.executeUpdate("create index LatLonIndex ON poi (latitude, longitude);");
+	        PreparedStatement prep = conn.prepareStatement(
+	            "insert into poi values (?, ?, ?, ?, ? ,? );");
+	        conn.setAutoCommit(false);
+	        int currentCount = 0;
+			for (Amenity a : region.getAmenityManager().getAllObjects()) {
+				prep.setLong(1, a.getId());
+				prep.setDouble(2, a.getLocation().getLatitude());
+				prep.setDouble(3, a.getLocation().getLongitude());
+				prep.setString(4, a.getName());
+				prep.setString(5, AmenityType.valueToString(a.getType()));
+				prep.setString(6, a.getSubType());
+				prep.addBatch();
+				currentCount++;
+				if(currentCount >= batchSize){
+					prep.executeBatch();
+					currentCount = 0;
+				}
+				
+			}
+			if(currentCount > 0){
+				prep.executeBatch();
+			}
+			conn.setAutoCommit(true);
+		} finally {
+			conn.close();
+			log.info(String.format("Indexing sqllite done in %s ms.", System.currentTimeMillis() - now));
+		}
+
 	}
 	
 	
