@@ -76,17 +76,17 @@ public class ProgressDialog extends JDialog implements IProgress {
 				if (run != null) {
 					run.run();
 				}
-				isLive = false;
 			} catch (RuntimeException e) {
 				exception = new InvocationTargetException(e);
 			} finally {
-				SwingUtilities.invokeLater(new Runnable() {
-					@Override
-					public void run() {
-						setVisible(false);
-					}
-				});
+				isLive = false;
 			}
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					setVisible(false);
+				}
+			});
     	}
     	
     }
