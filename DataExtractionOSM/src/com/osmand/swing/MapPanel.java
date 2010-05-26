@@ -170,6 +170,8 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 	
 	public MapPanel(File fileWithTiles) {
+		ImageIO.setUseCache(false);
+		
 		tilesLocation = fileWithTiles;
 		LatLon defaultLocation = DataExtractionSettings.getSettings().getDefaultLocation();
 		latitude = defaultLocation.getLatitude();
@@ -315,20 +317,30 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		String file = getFileForImage(x, y, zoom, map.getTileFormat());
 		if(cache.get(file) == null){
 			File en = new File(tilesLocation, file);
-			if(cache.size() > 1000){
+			if(cache.size() > 100){
 				ArrayList<String> list = new ArrayList<String>(cache.keySet());
 				for(int i=0; i<list.size(); i+=2){
-					cache.remove(list.get(i));
+					Image remove = cache.remove(list.get(i));
+					remove.flush();
+				}
+				if(log.isInfoEnabled()){
+					log.info("Before running gc on map tiles. Total Memory : " + (Runtime.getRuntime().totalMemory() >> 20) + " Mb. Used memory : " 
+						+ ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) >> 20) + " Mb");
+				}
+				System.gc();
+				if(log.isInfoEnabled()){
+					log.info("After running gc on map tiles. Total Memory : " + (Runtime.getRuntime().totalMemory() >> 20) + " Mb. Used memory : " 
+						+ ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) >> 20) + " Mb");
 				}
 			}
 			if (!downloader.isFileCurrentlyDownloaded(en)) {
 				if (en.exists()) {
-					long time = System.currentTimeMillis();
+//					long time = System.currentTimeMillis();
 					try {
 						cache.put(file, ImageIO.read(en));
-						if (log.isDebugEnabled()) {
-							log.debug("Loaded file : " + file + " " + (System.currentTimeMillis() - time) + " ms");
-						}
+//						if (log.isDebugEnabled()) {
+//							log.debug("Loaded file : " + file + " " + (System.currentTimeMillis() - time) + " ms");
+//						}
 					} catch (IIOException e) {
 						log.error("Eror reading png " + x + " " + y + " zoom : " + zoom, e);
 					}
@@ -511,7 +523,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	}
 	
 	private void updateLocationLabel(){
-		gpsLocation.setText(MessageFormat.format("Lat : {0}, lon : {1}, zoom : {2}", latitude, longitude, zoom));
+		gpsLocation.setText(MessageFormat.format("Lat : {0,number,#.####}, lon : {1,number,#.####}, zoom : {2}", latitude, longitude, zoom));
 	}
 	
 	protected void fireMapLocationListeners(){
