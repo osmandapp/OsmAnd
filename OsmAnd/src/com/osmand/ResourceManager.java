@@ -119,7 +119,7 @@ public class ResourceManager {
 		}
 		File en = new File(req.dirWithTiles, req.fileToLoad);
 		if (cacheOfImages.size() > maxImgCacheSize) {
-			onLowMemory();
+			clearTiles();
 		}
 		
 		if (!downloader.isFileCurrentlyDownloaded(en) && req.dirWithTiles.canRead()) {
@@ -198,19 +198,30 @@ public class ResourceManager {
 	public void searchAmenitiesAsync(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, List<Amenity> toFill){
 		for(AmenityIndexRepository index : amenityRepositories){
 			if(index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)){
-				if(!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, toFill)){
-					// TODO add request to another thread
-					index.evaluateCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, toFill);
+				if(!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, toFill, true)){
+					asyncLoadingTiles.requestToLoadAmenities(
+							new AmenityLoadRequest(index, topLatitude, leftLongitude, bottomLatitude, rightLongitude));
 				}
 			}
 		}
 	}
 	
-	
+	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
 
 	/// On low memory method ///
 	public void onLowMemory() {
 		log.info("On low memory : cleaning tiles - size = " + cacheOfImages.size());
+		clearTiles();
+		for(AmenityIndexRepository r : amenityRepositories){
+			r.clearCache();
+		}
+		
+		// TODO clear addresses indexes
+		System.gc();
+	}	
+	
+	
+	protected void clearTiles(){
 		ArrayList<String> list = new ArrayList<String>(cacheOfImages.keySet());
 		// remove first images (as we think they are older)
 		for (int i = 0; i < list.size()/2; i ++) {
@@ -219,10 +230,7 @@ public class ResourceManager {
 				bmp.recycle();
 			}
 		}
-		// TODO clear amenity indexes & addresses indexes
-		System.gc();
-	}	
-	
+	}
 	
 	
 	
@@ -241,12 +249,33 @@ public class ResourceManager {
 		}
 	}
 	
+	private static class AmenityLoadRequest {
+		public final AmenityIndexRepository repository;
+		public final double topLatitude;
+		public final double bottomLatitude;
+		public final double leftLongitude;
+		public final double rightLongitude;
+		
+		public AmenityLoadRequest(AmenityIndexRepository repository, double topLatitude, double leftLongitude, 
+				double bottomLatitude, double rightLongitude) {
+			super();
+			this.bottomLatitude = bottomLatitude;
+			this.leftLongitude = leftLongitude;
+			this.repository = repository;
+			this.rightLongitude = rightLongitude;
+			this.topLatitude = topLatitude;
+		}
+		
+		
+		
+	}
+	
 	
 	public class AsyncLoadingThread extends Thread {
-		Stack<TileLoadDownloadRequest> requests = new Stack<TileLoadDownloadRequest>();
+		Stack<Object> requests = new Stack<Object>();
 		
 		public AsyncLoadingThread(){
-			super("Async loading tiles");
+			super("Loader map objects (tiles, poi)");
 		}
 		
 		@Override
@@ -254,10 +283,21 @@ public class ResourceManager {
 			while(true){
 				try {
 					boolean update = false;
+					boolean amenityLoaded = false;
 					while(!requests.isEmpty()){
-						TileLoadDownloadRequest r = requests.pop();
+						Object req = requests.pop();
+						if(req instanceof TileLoadDownloadRequest){
+							TileLoadDownloadRequest r = (TileLoadDownloadRequest) req;
 						if(cacheOfImages.get(r.fileToLoad) == null) {
 							update |= getRequestedImageTile(r) != null;
+						}
+						} else if(req instanceof AmenityLoadRequest){
+							if(!amenityLoaded){
+								AmenityLoadRequest r = (AmenityLoadRequest) req;
+								r.repository.evaluateCachedAmenities(r.topLatitude, r.leftLongitude, 
+										r.bottomLatitude, r.rightLongitude, null);
+								amenityLoaded = true;
+							}
 						}
 					}
 					if(update){
@@ -276,6 +316,9 @@ public class ResourceManager {
 		}
 		
 		public void requestToLoadImage(TileLoadDownloadRequest req){
+			requests.push(req);
+		}
+		public void requestToLoadAmenities(AmenityLoadRequest req){
 			requests.push(req);
 		}
 	};

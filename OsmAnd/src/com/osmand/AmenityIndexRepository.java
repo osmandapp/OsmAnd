@@ -68,6 +68,14 @@ public class AmenityIndexRepository {
 	}
 	
 	
+	public void clearCache(){
+		cachedAmenities.clear();
+		cTopLatitude = 0;
+		cBottomLatitude = 0;
+		cRightLongitude = 0;
+		cLeftLongitude = 0;
+	}
+	
 	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, List<Amenity> toFill){
 		cachedAmenities.clear();
 		cTopLatitude = topLatitude + (topLatitude -bottomLatitude);
@@ -78,12 +86,13 @@ public class AmenityIndexRepository {
 		checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, toFill);
 	}
 
-	public boolean checkCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, List<Amenity> toFill){
+	public boolean checkCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, List<Amenity> toFill, boolean fillFound){
 		if (db == null) {
 			return true;
 		}
-		if (cTopLatitude >= topLatitude && cLeftLongitude <= leftLongitude && cRightLongitude >= rightLongitude
-				&& cBottomLatitude <= bottomLatitude) {
+		boolean inside = cTopLatitude >= topLatitude && cLeftLongitude <= leftLongitude && cRightLongitude >= rightLongitude
+				&& cBottomLatitude <= bottomLatitude;
+		if((inside || fillFound) && toFill != null){
 			for(Amenity a : cachedAmenities){
 				LatLon location = a.getLocation();
 				if (location.getLatitude() <= topLatitude && location.getLongitude() >= leftLongitude && location.getLongitude() <= rightLongitude
@@ -91,9 +100,11 @@ public class AmenityIndexRepository {
 					toFill.add(a);
 				}
 			}
-			return true;
 		}
-		return false;
+		return inside;
+	}
+	public boolean checkCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, List<Amenity> toFill){
+		return checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, toFill, false);
 	}
 
 	public void initialize(final IProgress progress, File file) {
