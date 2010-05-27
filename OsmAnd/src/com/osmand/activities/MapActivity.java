@@ -5,6 +5,10 @@ import java.text.MessageFormat;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -33,13 +37,12 @@ import com.osmand.views.POIMapLayer;
 import com.osmand.views.PointLocationLayer;
 import com.osmand.views.PointNavigationLayer;
 
-public class MapActivity extends Activity implements LocationListener, IMapLocationListener {
+public class MapActivity extends Activity implements LocationListener, IMapLocationListener, SensorEventListener {
 	
 	
     /** Called when the activity is first created. */
 	private OsmandMapTileView mapView;
 	
-	private boolean linkLocationWithMap = true; 
 	private ImageButton backToLocation;
 	private ImageButton backToMenu;
 	
@@ -48,7 +51,16 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	private POIMapLayer poiMapLayer;
 	
 	private WakeLock wakeLock;
+	private boolean sensorRegistered = false;
 	
+	private final static String BACK_TO_LOCATION = "BACK_TO_LOCATION";
+	private final static String POINT_NAVIGATE_LAT = "POINT_NAVIGATE_LAT";
+	private final static String POINT_NAVIGATE_LON = "POINT_NAVIGATE_LON";
+	
+	
+	private boolean getBackToLocation(){
+		return getPreferences(MODE_WORLD_READABLE).getBoolean(BACK_TO_LOCATION, true);
+	}
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +69,6 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		requestWindowFeature(Window.FEATURE_NO_TITLE);  
 //	     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,   
 //	                                WindowManager.LayoutParams.FLAG_FULLSCREEN); 
-		
 		
 		setContentView(R.layout.main);
 		mapView = (OsmandMapTileView) findViewById(R.id.MapView);
@@ -69,6 +80,11 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		mapView.addLayer(navigationLayer);
 		locationLayer = new PointLocationLayer();
 		mapView.addLayer(locationLayer);
+		SharedPreferences lprefs = getPreferences(MODE_WORLD_READABLE);
+		if(lprefs.contains(POINT_NAVIGATE_LAT)){
+			navigationLayer.setPointToNavigate(new LatLon(lprefs.getFloat(POINT_NAVIGATE_LAT, 0), 
+					lprefs.getFloat(POINT_NAVIGATE_LON, 0)));
+		}
 		
 		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
 		if(prefs != null && prefs.contains(OsmandSettings.LAST_KNOWN_MAP_LAT)){
@@ -99,14 +115,13 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 				mapView.setZoom(mapView.getZoom() - 1);
 			}
 		});
-		
 		backToLocation = (ImageButton)findViewById(R.id.BackToLocation);
-		backToLocation.setVisibility(linkLocationWithMap ? View.INVISIBLE : View.VISIBLE);
+		backToLocation.setVisibility(View.INVISIBLE);
 		backToLocation.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				if(!linkLocationWithMap){
-					linkLocationWithMap = true;
+				if(!getBackToLocation()){
+					getPreferences(MODE_WORLD_READABLE).edit().putBoolean(BACK_TO_LOCATION, true).commit();
 					backToLocation.setVisibility(View.INVISIBLE);
 					if(locationLayer.getLastKnownLocation() != null){
 						Location lastKnownLocation = locationLayer.getLastKnownLocation();
@@ -132,14 +147,41 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     @Override
     protected void onDestroy() {
     	super.onDestroy();
+    	SharedPreferences lprefs = getPreferences(MODE_WORLD_READABLE);
+    	if(navigationLayer.getPointToNavigate() == null){
+    		lprefs.edit().remove(POINT_NAVIGATE_LAT).remove(POINT_NAVIGATE_LON).commit();
+    	} else {
+    		LatLon p = navigationLayer.getPointToNavigate();
+    		lprefs.edit().putFloat(POINT_NAVIGATE_LAT, (float) p.getLatitude()).
+    					  putFloat(POINT_NAVIGATE_LON, (float) p.getLongitude()).commit();
+    	}
     	MapTileDownloader.getInstance().removeDownloaderCallback(mapView);
     }
     
     public void setLocation(Location location){
     	// Do very strange manipulation to call redraw only once
+    	
+    	// show point view only if gps enabled
+    	if(location == null){
+    		if(sensorRegistered) {
+    			((SensorManager) getSystemService(SENSOR_SERVICE)).unregisterListener(this);
+    			sensorRegistered = false;
+    			locationLayer.setHeading(null, true);
+    		}
+    	} else {
+    		if(!sensorRegistered && OsmandSettings.isShowingViewAngle(this)){
+    			SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
+    			Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+    			if (s != null) {
+    				sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_UI);
+    			}
+    			sensorRegistered = true;
+    		}
+    	}
+    	
     	locationLayer.setLastKnownLocation(location, true);
     	if (location != null) {
-			if (linkLocationWithMap) {
+			if (getBackToLocation()) {
 				if (location.hasBearing() && OsmandSettings.isRotateMapToBearing(this)) {
 					mapView.setRotateWithLocation(-location.getBearing(), location.getLatitude(), location.getLongitude());
 				} else {
@@ -149,7 +191,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 				mapView.prepareImage();
 			}
 		} else {
-			if (!linkLocationWithMap) {
+			if (!getBackToLocation()) {
 				backToLocation.setVisibility(View.VISIBLE);
 			}
 		}
@@ -195,6 +237,11 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		super.onPause();
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		service.removeUpdates(this);
+		
+		SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
+		sensorMgr.unregisterListener(this);
+		sensorRegistered = false;
+		
 		OsmandSettings.setLastKnownMapLocation(this, (float) mapView.getLatitude(), (float) mapView.getLongitude());
 		OsmandSettings.setLastKnownMapZoom(this, mapView.getZoom());
 		if (wakeLock != null) {
@@ -212,6 +259,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		if(!OsmandSettings.isRotateMapToBearing(this)){
 			mapView.setRotate(0);
 		}
+		
 		if(mapView.getLayers().contains(poiMapLayer) != OsmandSettings.isShowingPoiOverMap(this)){
 			if(OsmandSettings.isShowingPoiOverMap(this)){
 				mapView.addLayer(poiMapLayer);
@@ -221,6 +269,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		}
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		service.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 0, this);
+		
 		
 		if (wakeLock == null) {
 			PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
@@ -242,7 +291,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	public void locationChanged(double newLatitude, double newLongitude, Object source) {
 		// when user start dragging 
 		if(locationLayer.getLastKnownLocation() != null){
-			linkLocationWithMap = false;
+			getPreferences(MODE_WORLD_READABLE).edit().putBoolean(BACK_TO_LOCATION, false).commit();
 			if (backToLocation.getVisibility() != View.VISIBLE) {
 				runOnUiThread(new Runnable() {
 					@Override
@@ -284,5 +333,14 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     	}
     	return super.onOptionsItemSelected(item);
     }
+
+	@Override
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+	}
+
+	@Override
+	public void onSensorChanged(SensorEvent event) {
+		locationLayer.setHeading(event.values[0], false);
+	}
     
 }

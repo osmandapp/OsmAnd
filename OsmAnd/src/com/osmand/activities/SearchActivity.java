@@ -70,7 +70,7 @@ public class SearchActivity extends ListActivity {
 		filter = new TreeMap<AmenityType, List<Amenity>>();
 		LatLon lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(this);
 		List<Amenity> closestAmenities = resourceManager.searchAmenities(lastKnownMapLocation.getLatitude(),
-				lastKnownMapLocation.getLongitude(), 13, 500);
+				lastKnownMapLocation.getLongitude(), 12, 500);
 		MapUtils.sortListOfMapObject(closestAmenities, lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude());
 		for (Amenity n : closestAmenities) {
 			AmenityType type = n.getType();

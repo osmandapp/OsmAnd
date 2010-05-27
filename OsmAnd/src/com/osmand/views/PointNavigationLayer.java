@@ -64,8 +64,8 @@ public class PointNavigationLayer implements OsmandMapLayer {
 			float bearing = calculations[1];
 			pathForDirection.reset();
 			pathForDirection.moveTo(0, 0);
-			pathForDirection.lineTo(0.5f, 1f);
-			pathForDirection.lineTo(-0.5f, 1f);
+			pathForDirection.lineTo(0.5f, 1.5f);
+			pathForDirection.lineTo(-0.5f, 1.5f);
 			pathForDirection.lineTo(0, 0);
 			float radiusBearing = DIST_TO_SHOW ;
 			Matrix m = new Matrix();

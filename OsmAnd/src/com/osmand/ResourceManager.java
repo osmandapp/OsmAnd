@@ -148,7 +148,7 @@ public class ResourceManager {
 	// POI INDEX //
 	public void indexingPoi(final IProgress progress) {
 		File file = new File(Environment.getExternalStorageDirectory(), POI_PATH);
-		amenityRepositories.clear();
+		clearAmenities();
 		if (file.exists() && file.canRead()) {
 			for (File f : file.listFiles()) {
 				if (f.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
@@ -164,7 +164,7 @@ public class ResourceManager {
 		
 	public void indexingAddresses(final IProgress progress){
 		File file = new File(Environment.getExternalStorageDirectory(), ADDRESS_PATH);
-		addressMap.clear();
+		clearAddresses();
 		if (file.exists() && file.canRead()) {
 			for (File f : file.listFiles()) {
 				if (f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)) {
@@ -207,7 +207,24 @@ public class ResourceManager {
 	}
 	
 	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
+	
+	public void clearAmenities(){
+		for(AmenityIndexRepository r : amenityRepositories){
+			r.close();
+		}
+		amenityRepositories.clear();
+	}
+	
+	public void clearAddresses(){
+		// TODO close db connections
+		addressMap.clear();
+	}
 
+	public synchronized void close(){
+		clearAmenities();
+		clearAddresses();
+	}
+	
 	/// On low memory method ///
 	public void onLowMemory() {
 		log.info("On low memory : cleaning tiles - size = " + cacheOfImages.size());

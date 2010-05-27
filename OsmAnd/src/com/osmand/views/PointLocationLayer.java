@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.location.Location;
 import android.view.MotionEvent;
@@ -12,14 +13,22 @@ import android.view.MotionEvent;
 import com.osmand.osm.MapUtils;
 
 public class PointLocationLayer implements OsmandMapLayer {
+	protected final static int RADIUS = 7;
+	protected final static int HEADING_RADIUS = 60;
+	protected final static float HEADING_ANGLE = 60;
+	
 	private Paint location;
 	private Paint bearing;
 	private Paint area;
+	private Paint headingPaint;
+	private Path pathForDirection;
 	
 	protected Location lastKnownLocation = null;
-	protected final static int RADIUS = 7;
+	
 	private OsmandMapTileView view;
-	private Path pathForDirection;
+	
+	private Float heading = null;
+	
 
 	private void initUI() {
 		location = new Paint();
@@ -30,6 +39,12 @@ public class PointLocationLayer implements OsmandMapLayer {
 		area = new Paint();
 		area.setColor(Color.BLUE);
 		area.setAlpha(40);		
+		
+		headingPaint = new Paint();
+		headingPaint.setColor(Color.BLUE);
+		headingPaint.setAlpha(50);
+		headingPaint.setAntiAlias(true);
+		headingPaint.setStyle(Style.FILL);
 		
 		bearing = new Paint();
 		bearing.setColor(Color.BLUE);
@@ -51,6 +66,10 @@ public class PointLocationLayer implements OsmandMapLayer {
 		return false;
 	}
 	
+	private RectF getHeadingRect(int locationX, int locationY){
+		int rad = Math.min(3*view.getWidth()/8, 3*view.getHeight()/8);
+		return new RectF(locationX - rad, locationY - rad, locationX + rad, locationY + rad);
+	}
 	
 	// TODO simplify calculation if possible
 	@Override
@@ -67,6 +86,11 @@ public class PointLocationLayer implements OsmandMapLayer {
 			if (radius > RADIUS) {
 				canvas.drawCircle(locationX, locationY, radius, area);
 			}
+			if(heading != null){
+				canvas.drawArc(getHeadingRect(locationX, locationY), 
+						heading - HEADING_ANGLE/ 2 - 90, HEADING_ANGLE, true, headingPaint);
+			}
+			
 			if(lastKnownLocation.hasBearing()){
 				float bearing = lastKnownLocation.getBearing();
 				int radiusBearing = 30;
@@ -84,7 +108,7 @@ public class PointLocationLayer implements OsmandMapLayer {
 				pathForDirection.lineTo(0, 0);
 				Matrix m = new Matrix();
 				m.reset();
-				m.postScale(1, radiusBearing*0.5f);
+				m.postScale(1, radiusBearing * 0.5f);
 				m.postTranslate(0, -radiusBearing);
 				m.postTranslate(locationX, locationY);
 				m.postRotate(bearing, locationX, locationY);
@@ -93,8 +117,6 @@ public class PointLocationLayer implements OsmandMapLayer {
 				canvas.drawPath(pathForDirection, this.bearing);
 			}
 			
-			
-
 		}
 	}
 
@@ -108,6 +130,17 @@ public class PointLocationLayer implements OsmandMapLayer {
 	
 	public Location getLastKnownLocation() {
 		return lastKnownLocation;
+	}
+	
+	public void setHeading(Float heading, boolean doNotRedraw){
+		this.heading = heading;
+		if(!doNotRedraw && isLocationVisible(this.lastKnownLocation)){
+			view.prepareImage();
+		}
+	}
+	
+	public Float getHeading() {
+		return heading;
 	}
 	
 	public void setLastKnownLocation(Location lastKnownLocation, boolean doNotRedraw) {
