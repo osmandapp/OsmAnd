@@ -9,7 +9,7 @@ import com.osmand.osm.Entity;
 import com.osmand.osm.Node;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 
-public class City extends MapObject<Node> {
+public class City extends MapObject {
 	
 	public enum CityType {
 		// that's tricky way to play with that numbers (to avoid including suburbs in city & vice verse)
@@ -65,6 +65,10 @@ public class City extends MapObject<Node> {
 	
 	public Street unregisterStreet(String name){
 		return streets.remove(name.toLowerCase()); 
+	}
+	
+	public void removeAllStreets(){
+		streets.clear();
 	}
 	
 	public Street registerStreet(Street street){

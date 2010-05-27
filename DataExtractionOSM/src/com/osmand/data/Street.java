@@ -13,7 +13,7 @@ import com.osmand.osm.Node;
 import com.osmand.osm.Way;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 
-public class Street extends MapObject<Entity> {
+public class Street extends MapObject {
 	
 	private List<Building> buildings = new ArrayList<Building>(); 
 	private List<Way> wayNodes = new ArrayList<Way>();
@@ -42,18 +42,7 @@ public class Street extends MapObject<Entity> {
 		return buildings;
 	}
 	
-	public LatLon getLocation(){
-		if(entity == null){
-			calculateCenter();
-		}
-		return entity == null ? null : entity.getLatLon();
-	}
-	
 	protected void calculateCenter(){
-		if(wayNodes.size() == 1){
-			entity = wayNodes.get(0);
-			return;
-		}
 		List<Node> nodes = new ArrayList<Node>();
 		for(Way w : wayNodes){
 			nodes.addAll(w.getNodes());
@@ -65,8 +54,8 @@ public class Street extends MapObject<Entity> {
 			if (n != null) {
 				double nd = MapUtils.getDistance(n, c);
 				if (nd < dist) {
-					entity = n;
 					dist = nd;
+					location = n.getLatLon();
 				}
 			}
 		}
@@ -74,13 +63,16 @@ public class Street extends MapObject<Entity> {
 	
 	@Override
 	public void setName(String name) {
-		if(name.equals(getName())){
+		if (name.equals(getName())) {
 			return;
 		}
-		Street unregisterStreet = city.unregisterStreet(getName());
-		assert unregisterStreet == this;
-		super.setName(name);
-		city.registerStreet(this);
+		if (city.getStreet(getName()) == this) {
+			city.unregisterStreet(getName());
+			super.setName(name);
+			city.registerStreet(this);
+		} else {
+			super.setName(name);
+		}
 	}
 	
 	
@@ -89,17 +81,28 @@ public class Street extends MapObject<Entity> {
 	}
 
 	public void doDataPreparation() {
-		calculateCenter();
 		Collections.sort(buildings, new Comparator<Building>(){
-
 			@Override
 			public int compare(Building o1, Building o2) {
 				int i1 = Algoritms.extractFirstIntegerNumber(o1.getName());
 				int i2 = Algoritms.extractFirstIntegerNumber(o2.getName());
 				return i1 - i2;
 			}
-			
 		});
+		calculateCenter();
+		if(location == null){
+			List<LatLon> nodes = new ArrayList<LatLon>();
+			for(Building b : buildings){
+				nodes.add(b.getLocation());
+			}
+			location = MapUtils.getWeightCenter(nodes);
+		}
+		if (wayNodes.size() > 0) {
+			this.id = wayNodes.get(0).getId();
+		} else {
+			this.id = buildings.get(0).getId();
+		}
+		
 	}
 
 }

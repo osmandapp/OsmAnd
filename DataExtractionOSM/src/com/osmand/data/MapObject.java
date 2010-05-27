@@ -5,26 +5,27 @@ import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 
-public abstract class MapObject<T extends Entity> implements Comparable<MapObject<T>> {
+public abstract class MapObject implements Comparable<MapObject> {
 	
 	protected String name = null;
 	protected LatLon location = null;
 	protected Long id = null;
-	// could be null
-	protected T entity = null;
 
 	public MapObject(){}
 	
-	public MapObject(T e){
-		entity = e;
+	public MapObject(Entity e){
+		setEntity(e);
 	}
 	
-	public T getEntity(){
-		return entity;
-	}
 	
-	public void setEntity(T e){
-		entity = e;
+	public void setEntity(Entity e){
+		this.id = e.getId();
+		if(this.name == null){
+			this.name = e.getTag(OSMTagKey.NAME);
+		}
+		if(this.location == null){
+			this.location = MapUtils.getCenter(e);
+		}
 	}
 	
 	public void setId(Long id) {
@@ -35,10 +36,6 @@ public abstract class MapObject<T extends Entity> implements Comparable<MapObjec
 		if(id != null){
 			return id;
 		}
-		T e = getEntity();
-		if(e != null){
-			return e.getId();
-		}
 		return null;
 	}
 	
@@ -46,13 +43,8 @@ public abstract class MapObject<T extends Entity> implements Comparable<MapObjec
 		if (this.name != null) {
 			return this.name;
 		}
-		Entity e = getEntity();
-		if (e != null) {
-			String name = getEntity().getTag(OSMTagKey.NAME);
-			if (name != null) {
-				return name;
-			}
-			return e.getId() + "";
+		if (id != null) {
+			return id + "";
 		} else {
 			return "";
 		}
@@ -63,10 +55,7 @@ public abstract class MapObject<T extends Entity> implements Comparable<MapObjec
 	}
 	
 	public LatLon getLocation(){
-		if(location != null){
-			return location;
-		}
-		return MapUtils.getCenter(getEntity());
+		return location;
 	}
 	
 	public void setLocation(double latitude, double longitude){
@@ -74,8 +63,12 @@ public abstract class MapObject<T extends Entity> implements Comparable<MapObjec
 	}
 	
 	@Override
-	public int compareTo(MapObject<T> o) {
+	public int compareTo(MapObject o) {
 		return getName().compareTo(o.getName());
+	}
+	
+	public void doDataPreparation() {
+		
 	}
 
 }

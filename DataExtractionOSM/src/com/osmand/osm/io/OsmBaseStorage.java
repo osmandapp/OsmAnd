@@ -193,7 +193,7 @@ public class OsmBaseStorage extends DefaultHandler {
 				if(acceptEntityToLoad(currentParsedEntity)){
 					Entity oldEntity = entities.put(currentParsedEntity.getId(), currentParsedEntity);
 					if(oldEntity!= null){
-						throw new UnsupportedOperationException("Entity with id=" + oldEntity.getId() +" is duplicated in osm map");
+						// throw new UnsupportedOperationException("Entity with id=" + oldEntity.getId() +" is duplicated in osm map");
 					}
 				} else {
 //					System.gc();

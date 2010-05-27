@@ -53,7 +53,7 @@ public class MapUtils {
 	 * Gets distance in meters
 	 */
 	public static double getDistance(LatLon l1, LatLon l2){
-		return getDistance(l1, l2);
+		return getDistance(l1.getLatitude(), l1.getLongitude(), l2.getLatitude(), l2.getLongitude());
 	}
 
 	public static LatLon getCenter(Entity e){
@@ -184,15 +184,14 @@ public class MapUtils {
 		}
 	}
 	
-	public static void sortListOfMapObject(List<? extends MapObject<?>> list, final double lat, final double lon){
-		Collections.sort(list, new Comparator<MapObject<?>>() {
+	public static void sortListOfMapObject(List<? extends MapObject> list, final double lat, final double lon){
+		Collections.sort(list, new Comparator<MapObject>() {
 			@Override
-			public int compare(MapObject<?> o1, MapObject<?> o2) {
+			public int compare(MapObject o1, MapObject o2) {
 				return Double.compare(MapUtils.getDistance(o1.getLocation(), lat, lon), MapUtils.getDistance(o2.getLocation(),
 						lat, lon));
 			}
 		});
 	}
-	
 
 }

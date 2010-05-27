@@ -22,11 +22,11 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 
-import com.osmand.IMapLocationListener;
 import com.osmand.OsmandSettings;
 import com.osmand.R;
 import com.osmand.ResourceManager;
 import com.osmand.data.preparation.MapTileDownloader;
+import com.osmand.map.IMapLocationListener;
 import com.osmand.osm.LatLon;
 import com.osmand.views.OsmandMapTileView;
 import com.osmand.views.POIMapLayer;
@@ -64,7 +64,6 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		MapTileDownloader.getInstance().addDownloaderCallback(mapView);
 		mapView.setMapLocationListener(this);
 		poiMapLayer = new POIMapLayer();
-		poiMapLayer.setNodeManager(ResourceManager.getResourceManager().getPoiIndex());
 		mapView.addLayer(poiMapLayer);
 		locationLayer = new PointLocationLayer();
 		mapView.addLayer(locationLayer);

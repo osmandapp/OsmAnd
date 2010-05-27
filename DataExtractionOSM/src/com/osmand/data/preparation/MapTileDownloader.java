@@ -19,10 +19,18 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.logging.Log;
 
 import com.osmand.Algoritms;
-import com.osmand.DefaultLauncherConstants;
 import com.osmand.LogUtil;
 
 public class MapTileDownloader {
+	// Application constants
+	public static String APP_NAME = "OsmAnd";
+	public static String APP_VERSION = "0.1";
+	
+	
+	// Download manager tile settings
+	public static int TILE_DOWNLOAD_THREADS = 4;
+	public static int TILE_DOWNLOAD_SECONDS_TO_WORK = 25;
+	public static final int TILE_DOWNLOAD_MAX_ERRORS = -1;
 	
 	private static MapTileDownloader downloader = null;
 	private static Log log = LogUtil.getLog(MapTileDownloader.class);
@@ -40,7 +48,7 @@ public class MapTileDownloader {
 	
 	public static MapTileDownloader getInstance(){
 		if(downloader == null){
-			downloader = new MapTileDownloader(DefaultLauncherConstants.TILE_DOWNLOAD_THREADS);
+			downloader = new MapTileDownloader(TILE_DOWNLOAD_THREADS);
 		}
 		return downloader;
 	}
@@ -89,7 +97,7 @@ public class MapTileDownloader {
 	
 	
 	public MapTileDownloader(int numberOfThreads){
-		threadPoolExecutor = new ThreadPoolExecutor(numberOfThreads, numberOfThreads, DefaultLauncherConstants.TILE_DOWNLOAD_SECONDS_TO_WORK, 
+		threadPoolExecutor = new ThreadPoolExecutor(numberOfThreads, numberOfThreads, TILE_DOWNLOAD_SECONDS_TO_WORK, 
 				TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
 		// 1.6 method but very useful to kill non-running threads
 //		threadPoolExecutor.allowCoreThreadTimeOut(true);
@@ -129,8 +137,8 @@ public class MapTileDownloader {
 	}
 	
 	public void requestToDownload(DownloadRequest request){
-		if(DefaultLauncherConstants.TILE_DOWNLOAD_MAX_ERRORS > 0 && 
-				currentErrors > DefaultLauncherConstants.TILE_DOWNLOAD_MAX_ERRORS){
+		if(TILE_DOWNLOAD_MAX_ERRORS > 0 && 
+				currentErrors > TILE_DOWNLOAD_MAX_ERRORS){
 			return;
 		}
 		if(request.url == null){
@@ -163,8 +171,7 @@ public class MapTileDownloader {
 					request.fileToSave.getParentFile().mkdirs();
 					URL url = new URL(request.url);
 					URLConnection connection = url.openConnection();
-					connection.setRequestProperty("User-Agent", DefaultLauncherConstants.APP_NAME + "/"
-							+ DefaultLauncherConstants.APP_VERSION);
+					connection.setRequestProperty("User-Agent", APP_NAME + "/" + APP_VERSION);
 					BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
 					FileOutputStream stream = null;
 					try {

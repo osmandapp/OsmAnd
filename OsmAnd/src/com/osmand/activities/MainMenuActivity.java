@@ -93,7 +93,6 @@ public class MainMenuActivity extends Activity {
 				try {
 					ResourceManager.getResourceManager().indexingPoi(impl);
 					ResourceManager.getResourceManager().indexingAddresses(impl);
-					ResourceManager.getResourceManager().indexingLucene(impl);
 				} finally {
 					dlg.dismiss();
 				}

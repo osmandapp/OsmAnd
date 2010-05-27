@@ -10,30 +10,27 @@ import java.util.Map;
 
 import com.osmand.Algoritms;
 import com.osmand.data.City.CityType;
-import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 import com.osmand.osm.Node;
 import com.osmand.osm.io.OsmBaseStorage;
 
-public class Region extends MapObject<Entity> {
-	
+public class Region extends MapObject {
 	private DataTileManager<Amenity> amenities = new DataTileManager<Amenity>();
 	private OsmBaseStorage storage;
-	
-	private static class CityComparator implements Comparator<City>{
-		@Override
-		public int compare(City o1, City o2) {
-			return o1.getName().compareTo(o2.getName());
-		}
-	} 
-	
 	private DataTileManager<City> cityManager = new DataTileManager<City>(); 
 	private Map<CityType, List<City>> cities = new HashMap<CityType, List<City>>();
 	{
 		cityManager.setZoom(10);
 		for(CityType type : CityType.values()){
 			cities.put(type, new ArrayList<City>());
+		}
+	}
+	
+	private static class CityComparator implements Comparator<City>{
+		@Override
+		public int compare(City o1, City o2) {
+			return o1.getName().compareTo(o2.getName());
 		}
 	}
 	
@@ -98,7 +95,7 @@ public class Region extends MapObject<Entity> {
 		City closest = null;
 		double relDist = Double.POSITIVE_INFINITY;
 		for (City c : cityManager.getClosestObjects(point.getLatitude(), point.getLongitude())) {
-			double rel = MapUtils.getDistance(c.getEntity(), point) / c.getType().getRadius();
+			double rel = MapUtils.getDistance(c.getLocation(), point) / c.getType().getRadius();
 			if (rel < relDist) {
 				closest = c;
 				relDist = rel;
