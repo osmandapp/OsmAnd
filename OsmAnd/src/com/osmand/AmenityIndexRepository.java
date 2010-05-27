@@ -68,7 +68,7 @@ public class AmenityIndexRepository {
 	}
 	
 	
-	public void clearCache(){
+	public synchronized void clearCache(){
 		cachedAmenities.clear();
 		cTopLatitude = 0;
 		cBottomLatitude = 0;
@@ -76,7 +76,7 @@ public class AmenityIndexRepository {
 		cLeftLongitude = 0;
 	}
 	
-	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, List<Amenity> toFill){
+	public synchronized void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, List<Amenity> toFill){
 		cachedAmenities.clear();
 		cTopLatitude = topLatitude + (topLatitude -bottomLatitude);
 		cBottomLatitude = bottomLatitude - (topLatitude -bottomLatitude);
@@ -86,7 +86,7 @@ public class AmenityIndexRepository {
 		checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, toFill);
 	}
 
-	public boolean checkCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, List<Amenity> toFill, boolean fillFound){
+	public synchronized boolean checkCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, List<Amenity> toFill, boolean fillFound){
 		if (db == null) {
 			return true;
 		}

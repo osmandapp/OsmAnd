@@ -31,6 +31,7 @@ import com.osmand.osm.LatLon;
 import com.osmand.views.OsmandMapTileView;
 import com.osmand.views.POIMapLayer;
 import com.osmand.views.PointLocationLayer;
+import com.osmand.views.PointNavigationLayer;
 
 public class MapActivity extends Activity implements LocationListener, IMapLocationListener {
 	
@@ -39,14 +40,13 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	private OsmandMapTileView mapView;
 	
 	private boolean linkLocationWithMap = true; 
-	
 	private ImageButton backToLocation;
-
 	private ImageButton backToMenu;
 	
 	private PointLocationLayer locationLayer;
-	
+	private PointNavigationLayer navigationLayer;
 	private POIMapLayer poiMapLayer;
+	
 	private WakeLock wakeLock;
 	
 	
@@ -65,6 +65,8 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		mapView.setMapLocationListener(this);
 		poiMapLayer = new POIMapLayer();
 		mapView.addLayer(poiMapLayer);
+		navigationLayer = new PointNavigationLayer();
+		mapView.addLayer(navigationLayer);
 		locationLayer = new PointLocationLayer();
 		mapView.addLayer(locationLayer);
 		
@@ -152,8 +154,19 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			}
 		}
     }
-    
 
+	public void navigateToPoint(LatLon point){
+		navigationLayer.setPointToNavigate(point);
+	}
+	
+	public Location getLastKnownLocation(){
+		return locationLayer.getLastKnownLocation();
+	}
+	
+	public LatLon getPointToNavigate(){
+		return navigationLayer.getPointToNavigate();
+	}
+    
 
 	@Override
 	public void onLocationChanged(Location location) {
@@ -247,7 +260,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		inflater.inflate(R.menu.map_menu, menu);
 		return true;
 	}
-    
+	
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	if (item.getItemId() == R.id.map_show_location) {
@@ -260,6 +273,14 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     		final Intent settings = new Intent(MapActivity.this, SettingsActivity.class);
 			startActivity(settings);
     		return true;
+    	}  else if (item.getItemId() == R.id.map_navigate_to_point) {
+    		if(navigationLayer.getPointToNavigate() != null){
+    			item.setTitle(R.string.navigate_to_point);
+    			navigateToPoint(null);
+    		} else {
+    			item.setTitle(R.string.stop_navigation);
+    			navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
+    		}
     	}
     	return super.onOptionsItemSelected(item);
     }

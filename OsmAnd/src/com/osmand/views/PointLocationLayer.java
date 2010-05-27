@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Paint.Style;
 import android.location.Location;
-import android.util.FloatMath;
 import android.view.MotionEvent;
 
 import com.osmand.osm.MapUtils;
@@ -103,26 +102,7 @@ public class PointLocationLayer implements OsmandMapLayer {
 		if(l == null || view == null){
 			return false;
 		}
-		int cx = view.getWidth()/2;
-		int cy = view.getHeight()/2;
-		int dx = MapUtils.getPixelShiftX(view.getZoom(), 
-				l.getLongitude(), view.getLongitude(), view.getTileSize());
-		int dy = MapUtils.getPixelShiftY(view.getZoom(), 
-				l.getLatitude(), view.getLatitude() , view.getTileSize());
-		float rad = (float) Math.toRadians(view.getRotate());
-		int newX = (int) (dx * FloatMath.cos(rad) - dy * FloatMath.sin(rad) + cx);
-		int newY = (int) (dx * FloatMath.sin(rad) + dy * FloatMath.cos(rad) + cy);
-		int radius = MapUtils.getLengthXFromMeters(view.getZoom(), view.getLatitude(), view.getLongitude(), 
-				l.getAccuracy(), view.getTileSize(), view.getWidth());
-		if(newX >= 0 && newX <= view.getWidth() && newY >=0 && newY <= view.getHeight()){
-			return true;
-		} else {
-			// check radius (simplified version
-			if (newX + radius >= 0 && newX - radius <= view.getWidth() && newY + radius >= 0 && newY - radius <= view.getHeight()) {
-				return true;
-			}
-		}
-		return false;
+		return view.isPointOnTheMap(l.getLatitude(), l.getLongitude());
 	}
 	
 	
