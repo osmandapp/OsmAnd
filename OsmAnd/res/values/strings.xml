@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="stop_navigation">Unmark location</string>
+    <string name="navigate_to_point">Mark location</string>
     <string name="map_view_3d_descr">Enable 3D view of the map</string>
     <string name="map_view_3d">Map View 3D</string>
     <string name="rotate_map_to_bearing_descr">Rotate map to bearing of your direction</string>

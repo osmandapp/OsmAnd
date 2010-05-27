@@ -379,6 +379,20 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 	
 	
+	public boolean isPointOnTheMap(double latitude, double longitude){
+		int cx = getWidth()/2;
+		int cy = getHeight()/2;
+		int dx = MapUtils.getPixelShiftX(zoom, longitude, this.longitude, getTileSize());
+		int dy = MapUtils.getPixelShiftY(zoom, latitude, this.latitude , getTileSize());
+		float rad = (float) Math.toRadians(rotate);
+		int newX = (int) (dx * FloatMath.cos(rad) - dy * FloatMath.sin(rad) + cx);
+		int newY = (int) (dx * FloatMath.sin(rad) + dy * FloatMath.cos(rad) + cy);
+		if(newX >= 0 && newX <= getWidth() && newY >=0 && newY <= getHeight()){
+			return true;
+		} 
+		return false;
+	}
+	
 	@Override
 	public void dragTo(float fromX, float fromY, float toX, float toY){
 		float dx = (fromX - toX) ; 
