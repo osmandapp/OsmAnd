@@ -31,6 +31,13 @@ public class OsmandSettings {
 	}
 	
 	// this value string is synchronized with android.xml preference name
+	public static final String SHOW_VIEW_ANGLE = "show_view_angle";
+	public static boolean isShowingViewAngle(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(SHOW_VIEW_ANGLE, true);
+	}
+	
+	// this value string is synchronized with android.xml preference name
 	public static final String ROTATE_MAP_TO_BEARING = "rotate_map_to_bearing";
 	public static boolean isRotateMapToBearing(Context ctx){
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);

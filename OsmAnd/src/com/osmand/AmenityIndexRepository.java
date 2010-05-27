@@ -58,7 +58,7 @@ public class AmenityIndexRepository {
 				}
 			} while(query.moveToNext());
 		}
-		query.deactivate();
+		query.close();
 		
 		if (log.isDebugEnabled()) {
 			log.debug(String.format("Search for %s done in %s ms found %s.", 
@@ -126,6 +126,12 @@ public class AmenityIndexRepository {
 			log.debug("Initializing db " + file.getAbsolutePath() + " " + (System.currentTimeMillis() - start) + "ms");
 		}
 		
+	}
+	
+	public void close(){
+		if(db != null){
+			db.close();
+		}
 	}
 	
 	public String getName() {

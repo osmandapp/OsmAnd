@@ -24,6 +24,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private CheckBoxPreference useInternetToDownloadTiles;
 	private ListPreference tileSourcePreference;
 	private CheckBoxPreference rotateMapToBearing;
+	private CheckBoxPreference showViewAngle;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		showPoiOnMap.setOnPreferenceChangeListener(this);
 		rotateMapToBearing =(CheckBoxPreference) screen.findPreference(OsmandSettings.ROTATE_MAP_TO_BEARING);
 		rotateMapToBearing.setOnPreferenceChangeListener(this);
+		showViewAngle =(CheckBoxPreference) screen.findPreference(OsmandSettings.SHOW_VIEW_ANGLE);
+		showViewAngle.setOnPreferenceChangeListener(this);
 		
 		tileSourcePreference =(ListPreference) screen.findPreference(OsmandSettings.MAP_TILE_SOURCES);
 		tileSourcePreference.setOnPreferenceChangeListener(this);
@@ -49,6 +52,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		useInternetToDownloadTiles.setChecked(OsmandSettings.isUsingInternetToDownloadTiles(this));
 		showPoiOnMap.setChecked(OsmandSettings.isShowingPoiOverMap(this));
 		rotateMapToBearing.setChecked(OsmandSettings.isRotateMapToBearing(this));
+		showViewAngle.setChecked(OsmandSettings.isShowingViewAngle(this));
 
 		List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
 		String[] entries = new String[list.size()];
@@ -76,6 +80,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.commit();
 		} else if(preference == rotateMapToBearing){
 			edit.putBoolean(OsmandSettings.ROTATE_MAP_TO_BEARING, (Boolean) newValue);
+			edit.commit();
+		} else if(preference == showViewAngle){
+			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, (Boolean) newValue);
 			edit.commit();
 		} else if (preference == tileSourcePreference) {
 			edit.putString(OsmandSettings.MAP_TILE_SOURCES, (String) newValue);
