@@ -48,12 +48,12 @@ import javax.swing.UIManager;
 
 import org.apache.commons.logging.Log;
 
-import com.osmand.IMapLocationListener;
 import com.osmand.LogUtil;
 import com.osmand.data.DataTileManager;
 import com.osmand.data.preparation.MapTileDownloader;
 import com.osmand.data.preparation.MapTileDownloader.DownloadRequest;
 import com.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
+import com.osmand.map.IMapLocationListener;
 import com.osmand.map.ITileSource;
 import com.osmand.map.TileSourceManager;
 import com.osmand.map.TileSourceManager.TileSourceTemplate;

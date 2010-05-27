@@ -22,13 +22,13 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder.Callback;
 
-import com.osmand.IMapLocationListener;
 import com.osmand.LogUtil;
 import com.osmand.OsmandSettings;
 import com.osmand.ResourceManager;
 import com.osmand.data.preparation.MapTileDownloader;
 import com.osmand.data.preparation.MapTileDownloader.DownloadRequest;
 import com.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
+import com.osmand.map.IMapLocationListener;
 import com.osmand.map.ITileSource;
 import com.osmand.osm.MapUtils;
 import com.osmand.views.AnimateDraggingMapThread.AnimateDraggingCallback;

@@ -64,7 +64,6 @@ import org.xml.sax.SAXException;
 
 import com.osmand.Algoritms;
 import com.osmand.ExceptionHandler;
-import com.osmand.IMapLocationListener;
 import com.osmand.data.Amenity;
 import com.osmand.data.Building;
 import com.osmand.data.City;
@@ -74,12 +73,14 @@ import com.osmand.data.Region;
 import com.osmand.data.Street;
 import com.osmand.data.Amenity.AmenityType;
 import com.osmand.data.City.CityType;
+import com.osmand.data.index.DataIndexReader;
+import com.osmand.data.index.DataIndexWriter;
+import com.osmand.data.index.IndexConstants;
 import com.osmand.data.preparation.DataExtraction;
-import com.osmand.data.preparation.DataIndexBuilder;
+import com.osmand.map.IMapLocationListener;
 import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
-import com.osmand.osm.Node;
 import com.osmand.osm.Way;
 import com.osmand.osm.io.IOsmStorageFilter;
 import com.osmand.osm.io.OsmBoundsFilter;
@@ -232,15 +233,14 @@ public class OsmExtractionUI implements IMapLocationListener {
 		treePlaces.setEditable(true);
 		treePlaces.setCellEditor(new RegionCellEditor(treePlaces, (DefaultTreeCellRenderer) treePlaces.getCellRenderer()));
 		treePlaces.addTreeSelectionListener(new TreeSelectionListener() {
-			@SuppressWarnings("unchecked")
 			@Override
 			public void valueChanged(TreeSelectionEvent e) {
 				if (e.getPath() != null) {
 					if (e.getPath().getLastPathComponent() instanceof DataExtractionTreeNode) {
 						Object o = ((DataExtractionTreeNode) e.getPath().getLastPathComponent()).getModelObject();
 
-						if (o instanceof MapObject<?>) {
-							MapObject<Entity> c = (MapObject<Entity>) o;
+						if (o instanceof MapObject) {
+							MapObject c = (MapObject) o;
 							LatLon location = c.getLocation();
 							if(location != null){
 								if(o instanceof Street){
@@ -279,8 +279,8 @@ public class OsmExtractionUI implements IMapLocationListener {
 		        	if(((DataExtractionTreeNode) node).getModelObject() instanceof Region){
 		        		Region r = (Region) ((DataExtractionTreeNode) node).getModelObject();
 		        		r.setName(node.getUserObject().toString());
-		        	} else if(((DataExtractionTreeNode) node).getModelObject() instanceof MapObject<?>){
-		        		MapObject<?> r = (MapObject<?>) ((DataExtractionTreeNode) node).getModelObject();
+		        	} else if(((DataExtractionTreeNode) node).getModelObject() instanceof MapObject){
+		        		MapObject r = (MapObject) ((DataExtractionTreeNode) node).getModelObject();
 		        		r.setName(node.getUserObject().toString());
 		        	}
 		        }
@@ -355,27 +355,28 @@ public class OsmExtractionUI implements IMapLocationListener {
 				@Override
 				public void run() {
 					dlg.startTask("Generating indices...", -1);
-					DataIndexBuilder builder = new DataIndexBuilder(DataExtractionSettings.getSettings().getDefaultWorkingDir(), region);
+					DataIndexWriter builder = new DataIndexWriter(DataExtractionSettings.getSettings().getDefaultWorkingDir(), region);
 					StringBuilder msg = new StringBuilder();
 					try {
 						msg.append("Indices for ").append(region.getName());
-						if(buildPoiIndex.isEnabled()){
+						if(buildPoiIndex.isSelected()){
 							dlg.startTask("Generating POI index...", -1);
-							builder.buildPOI();
+							builder.writePOI();
 							msg.append(", POI index ").append("successfully created");
 						}
-						if(buildAddressIndex.isEnabled()){
+						if(buildAddressIndex.isSelected()){
 							dlg.startTask("Generating address index...", -1);
-							builder.buildAddress();
+							builder.writeAddress();
 							msg.append(", Address index ").append("successfully created");
 						}
+						new DataIndexReader().testIndex(new File(
+								DataExtractionSettings.getSettings().getDefaultWorkingDir(), 
+								IndexConstants.ADDRESS_INDEX_DIR+region.getName()+IndexConstants.ADDRESS_INDEX_EXT));
 						msg.append(".");
 					    JOptionPane pane = new JOptionPane(msg);
 					    JDialog dialog = pane.createDialog(frame, "Generation data");
 					    dialog.setVisible(true);
 					} catch (SQLException e1) {
-						throw new IllegalArgumentException(e1);
-					} catch (XMLStreamException e1) {
 						throw new IllegalArgumentException(e1);
 					} catch (IOException e1) {
 						throw new IllegalArgumentException(e1);
@@ -441,10 +442,10 @@ public class OsmExtractionUI implements IMapLocationListener {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if(searchList.getSelectedValue() != null){
-					Node node = ((City)searchList.getSelectedValue()).getEntity();
+					LatLon node = ((City)searchList.getSelectedValue()).getLocation();
 					String text = "Lat : " + node.getLatitude() + " Lon " + node.getLongitude();
 					if(selectedCity != null){
-						text += " distance " + MapUtils.getDistance(selectedCity.getEntity(), node);
+						text += " distance " + MapUtils.getDistance(node, node);
 					}
 					mapPanel.setLatLon(node.getLatitude(), node.getLongitude());
 				}
@@ -627,7 +628,8 @@ public class OsmExtractionUI implements IMapLocationListener {
 					Region res;
 					try {
 						DataExtraction dataExtraction = new DataExtraction(buildAddressIndex.isSelected(), buildPoiIndex.isSelected(),
-								normalizingStreets.isSelected(), loadingAllData.isSelected());
+								normalizingStreets.isSelected(), loadingAllData.isSelected(), 
+								DataExtractionSettings.getSettings().getDefaultWorkingDir());
 						if(!buildAddressIndex.isSelected()){
 							buildAddressIndex.setEnabled(false);
 						}
@@ -638,6 +640,8 @@ public class OsmExtractionUI implements IMapLocationListener {
 					} catch (IOException e) {
 						throw new IllegalArgumentException(e);
 					} catch (SAXException e) {
+						throw new IllegalStateException(e);
+					} catch (SQLException e) {
 						throw new IllegalStateException(e);
 					}
 					dlg.setResult(res);
@@ -783,7 +787,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 				Object node = tree.getLastSelectedPathComponent();
 				if (node instanceof DataExtractionTreeNode) {
 					DataExtractionTreeNode treeNode = (DataExtractionTreeNode) node;
-					if (treeNode.getModelObject() instanceof Region || treeNode.getModelObject() instanceof MapObject<?>) {
+					if (treeNode.getModelObject() instanceof Region || treeNode.getModelObject() instanceof MapObject) {
 						return true;
 					}
 				}

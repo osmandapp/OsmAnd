@@ -14,7 +14,6 @@ public class ToDoConstants {
 	
 	// TODO ANDROID
 //	 1. POI search near to map location (show categories & type). First cut. (implement incremental search)
-//	 0. Minimize memory used for index & improve time for reading index  
 //	 3. Revise osmand UI. Preparing new icons.
 //	 2. Showing compass on the map : use device compass if exists(?)
 //	 5. Search for city/streets/buildings
@@ -33,6 +32,9 @@ public class ToDoConstants {
 //   23. Implement moving point from center to bottom (for rotating map). 
 //       It is not very useful to see what was before.
 	
+//   24. Implement ResourceManager on Low memory (clear previous all addresses cities, remove all amenities cache)
+//       Use async loading tile thread, to preload amenities also.
+	
 	// FIXME Bugs Android :
 	// 0. FIX TODO for partial loading rotated map
 	// 1. When firstly run osmand navigation (from notification bar) show map & go to menu shows desktop.
@@ -43,8 +45,7 @@ public class ToDoConstants {
 	// TODO SWING: 
 	// 1. Download tiles without using dir tiles
 	// 2. Configure file log & see log from file
-	// 3. Reinvent index mechanism (save in zip file with tile indexes, save city/town addresses separately, read partially !)
-	// 4. Invent different file extensions for poi.index, address.index,...
+	// 5. Implement supress warning for duplicate id
 	
 	
 	// DONE ANDROID :
@@ -52,10 +53,12 @@ public class ToDoConstants {
 //	 10. Specify auto-rotating map (bearing of your direction)
 //   22. Investigate 3D tile view (how it is done in osmand). Looking not very good, because of
 //        angle of perspective (best perspective angle = 60) use 
-//  	android.graphics.Camera.rotateX(6), getMatrix(m), canvas.concat(m) (find example in internet)
+//  	android.graphics.Camera.rotateX(60), getMatrix(m), canvas.concat(m) (find example in internet)
 //      Problems : to calculate how to drag point on map, to calculate how many tiles are needed, is location visible .... 
+//	 0. Minimize memory used for index & improve time for reading index  
 	
 	// DONE SWING
-	
+	// 3. Reinvent index mechanism (save in zip file with tile indexes, save city/town addresses separately, read partially !)
+	// 4. Invent different file extensions for poi.index, address.index,...	
 
 }

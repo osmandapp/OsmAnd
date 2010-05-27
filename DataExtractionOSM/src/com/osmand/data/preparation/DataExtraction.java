@@ -2,20 +2,21 @@ package com.osmand.data.preparation;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.stream.XMLStreamException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.tools.bzip2.CBZip2InputStream;
-import org.apache.tools.bzip2.CBZip2OutputStream;
 import org.xml.sax.SAXException;
 
 import com.osmand.Algoritms;
@@ -26,7 +27,6 @@ import com.osmand.data.DataTileManager;
 import com.osmand.data.Region;
 import com.osmand.data.Street;
 import com.osmand.data.City.CityType;
-import com.osmand.impl.ConsoleProgressImplementation;
 import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
@@ -36,12 +36,8 @@ import com.osmand.osm.Way;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 import com.osmand.osm.io.IOsmStorageFilter;
 import com.osmand.osm.io.OsmBaseStorage;
-import com.osmand.osm.io.OsmStorageWriter;
 import com.osmand.swing.DataExtractionSettings;
 
-
-// TO implement
-// 1. Full structured search for town/street/building.
 
 /**
  * http://wiki.openstreetmap.org/wiki/OSM_tags_for_routing#Is_inside.2Foutside
@@ -76,89 +72,163 @@ import com.osmand.swing.DataExtractionSettings;
  */
 public class DataExtraction  {
 	private static final Log log = LogFactory.getLog(DataExtraction.class);
-	
-//	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, XMLStreamException {
-//		new DataExtraction().testReadingOsmFile();
-//	}
-	
-	// External files
-	public static String pathToTestDataDir = "E:\\Information\\OSM maps\\";
-	public static String pathToOsmFile =  pathToTestDataDir + "minsk.osm";
-	public static String pathToOsmBz2File =  pathToTestDataDir + "belarus_2010_04_01.osm.bz2";
-	public static String pathToWorkingDir = pathToTestDataDir +"osmand\\";
-	public static String pathToDirWithTiles = pathToWorkingDir +"tiles";
-	public static String writeTestOsmFile = "C:\\1_tmp.osm"; // could be null - wo writing
-	private static boolean parseSmallFile = true;
-	private static boolean parseOSM = true;
 
+	public static final int BATCH_SIZE = 5000;
+	public static final String NODES_DB = "nodes.db";
+	
 	private final boolean loadAllObjects;
-
 	private final boolean normalizeStreets;
-
 	private final boolean indexAddress;
-
 	private final boolean indexPOI;
+	private File workingDir = null;
 	
-	
-
-	///////////////////////////////////////////
-	// Test method for local purposes
-	public void testReadingOsmFile() throws ParserConfigurationException, SAXException, IOException, XMLStreamException {
-		String f;
-		if(parseSmallFile){
-			f = pathToOsmFile;
-		} else {
-			f = pathToOsmBz2File;
-		}
-		long st = System.currentTimeMillis();
-		
-		Region country;
-		if(parseOSM){
-			country = readCountry(f, new ConsoleProgressImplementation(), null);
-		} else {
-			country = new Region();
-			country.setStorage(new OsmBaseStorage());
-		}
-		
-       
-        
-		List<Long> interestedObjects = new ArrayList<Long>();
-		// add interested objects
-		if (writeTestOsmFile != null) {
-			OsmStorageWriter writer = new OsmStorageWriter();
-			OutputStream output = new FileOutputStream(writeTestOsmFile);
-			if (writeTestOsmFile.endsWith(".bz2")) {
-				output.write('B');
-				output.write('Z');
-				output = new CBZip2OutputStream(output);
-			}
-			
-			writer.saveStorage(output, country.getStorage(), interestedObjects, false);
-			output.close();
-		}
-        
-        System.out.println();
-		System.out.println("USED Memory " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1e6);
-		System.out.println("TIME : " + (System.currentTimeMillis() - st));
-	}
-	
-	public DataExtraction(){
-		this.indexPOI = true;
-		this.indexAddress = true;
-		this.loadAllObjects = false;
-		this.normalizeStreets = true;
-	}
-	
-	public DataExtraction(boolean indexAddress, boolean indexPOI, boolean normalizeStreets, boolean loadAllObjects){
+	public DataExtraction(boolean indexAddress, boolean indexPOI, boolean normalizeStreets, boolean loadAllObjects, File workingDir){
 		this.indexAddress = indexAddress;
 		this.indexPOI = indexPOI;
 		this.normalizeStreets = normalizeStreets;
 		this.loadAllObjects = loadAllObjects;
+		this.workingDir = workingDir;
 		
 	}
 
 	
-	public Region readCountry(String path, IProgress progress, IOsmStorageFilter addFilter) throws IOException, SAXException{
+	protected class DataExtractionOsmFilter implements IOsmStorageFilter {
+		final ArrayList<Node> places;
+		final ArrayList<Entity> buildings;
+		final ArrayList<Entity> amenities;
+		final ArrayList<Way> ways;
+
+		int currentCount = 0;
+		private Connection conn;
+		private PreparedStatement prep;
+
+		public DataExtractionOsmFilter(ArrayList<Entity> amenities, ArrayList<Entity> buildings, ArrayList<Node> places,
+				ArrayList<Way> ways) {
+			this.amenities = amenities;
+			this.buildings = buildings;
+			this.places = places;
+			this.ways = ways;
+		}
+
+		public void initDatabase() throws SQLException {
+			try {
+				Class.forName("org.sqlite.JDBC");
+			} catch (ClassNotFoundException e) {
+				log.error("Illegal configuration", e);
+				throw new IllegalStateException(e);
+			}
+
+			File file = new File(workingDir, NODES_DB);
+			// to save space
+			if(file.exists()){
+				file.delete();
+			}
+			// creating nodes db to fast access for all nodes
+			conn = DriverManager.getConnection("jdbc:sqlite:" + file.getAbsolutePath());
+
+			// prepare tables
+			Statement stat = conn.createStatement();
+			stat.executeUpdate("drop table if exists node;");
+			stat.executeUpdate("create table node (id long, latitude double, longitude double);");
+			stat.executeUpdate("create index IdIndex ON node (id);");
+			stat.close();
+
+			prep = conn.prepareStatement("insert into node values (?, ?, ?);");
+			conn.setAutoCommit(false);
+		}
+
+		public void correlateData(OsmBaseStorage storage, IProgress progress) throws SQLException {
+			if (currentCount > 0) {
+				prep.executeBatch();
+			}
+			prep.close();
+			conn.setAutoCommit(true);
+			final PreparedStatement pselect = conn.prepareStatement("select * from node where id = ?");
+			Map<Long, Entity> map = new LinkedHashMap<Long, Entity>();
+			progress.startTask("Correlating data...", storage.getRegisteredEntities().size());
+			for (Entity e : storage.getRegisteredEntities().values()) {
+				progress.progress(1);
+				if (e instanceof Way) {
+					map.clear();
+					for (Long i : ((Way) e).getNodeIds()) {
+						pselect.setLong(1, i);
+						if (pselect.execute()) {
+							ResultSet rs = pselect.getResultSet();
+							if (rs.next()) {
+								map.put(i, new Node(rs.getDouble(2), rs.getDouble(3), rs.getLong(1)));
+							}
+							rs.close();
+						}
+					}
+					e.initializeLinks(map);
+				}
+			}
+		}
+
+		public void close() {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+
+		@Override
+		public boolean acceptEntityToLoad(OsmBaseStorage storage, Entity e) {
+			boolean processed = false;
+			if (indexAddress) {
+				if ("yes".equals(e.getTag(OSMTagKey.BUILDING))) {
+					if (e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER) != null && e.getTag(OSMTagKey.ADDR_STREET) != null) {
+						buildings.add(e);
+						processed = true;
+					}
+				}
+			}
+			if (indexPOI && Amenity.isAmenity(e)) {
+				amenities.add(e);
+				processed = true;
+			}
+			if (e instanceof Node && e.getTag(OSMTagKey.PLACE) != null) {
+				places.add((Node) e);
+				processed = true;
+			}
+			if (indexAddress) {
+				// suppose that streets are way for car
+				if (e instanceof Way && OSMSettings.wayForCar(e.getTag(OSMTagKey.HIGHWAY)) && e.getTag(OSMTagKey.NAME) != null) {
+					ways.add((Way) e);
+					processed = true;
+				}
+			}
+			// put all nodes into temporary db to get only required nodes after loading all data 
+			try {
+				if (e instanceof Node && indexAddress) {
+					currentCount++;
+					prep.setLong(1, e.getId());
+					prep.setDouble(2, ((Node) e).getLatitude());
+					prep.setDouble(3, ((Node) e).getLongitude());
+					prep.addBatch();
+					if (currentCount >= BATCH_SIZE) {
+						prep.executeBatch();
+						currentCount = 0;
+					}
+				}
+			} catch (SQLException ex) {
+				log.error("Could not save node", ex);
+			}
+			return processed || loadAllObjects;
+		}
+
+	}
+	
+	
+	public Region readCountry(String path, IProgress progress, IOsmStorageFilter addFilter) throws IOException, SAXException, SQLException{
+		// data to load & index
+		final ArrayList<Node> places = new ArrayList<Node>();
+		final ArrayList<Entity> buildings = new ArrayList<Entity>();
+		final ArrayList<Entity> amenities = new ArrayList<Entity>();
+		final ArrayList<Way> ways = new ArrayList<Way>();
+		
 		File f = new File(path);
 		InputStream stream = new FileInputStream(f);
 		InputStream streamFile = stream;
@@ -174,51 +244,33 @@ public class DataExtraction  {
 		if(progress != null){
 			progress.startTask("Loading file " + path, -1);
 		}
-
-		// preloaded data
-		final ArrayList<Node> places = new ArrayList<Node>();
-		final ArrayList<Entity> buildings = new ArrayList<Entity>();
-		final ArrayList<Amenity> amenities = new ArrayList<Amenity>();
-		final ArrayList<Way> ways = new ArrayList<Way>();
-		
-		IOsmStorageFilter filter = new IOsmStorageFilter(){
-			@Override
-			public boolean acceptEntityToLoad(OsmBaseStorage storage, Entity e) {
-				if (indexAddress) {
-					if ("yes".equals(e.getTag(OSMTagKey.BUILDING))) {
-						if (e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER) != null && e.getTag(OSMTagKey.ADDR_STREET) != null) {
-							buildings.add(e);
-							return true;
-						}
-					}
-				}
-				if (indexPOI && Amenity.isAmenity(e)) {
-					amenities.add(new Amenity(e));
-					return true;
-				}
-				if (e instanceof Node && e.getTag(OSMTagKey.PLACE) != null) {
-					places.add((Node) e);
-					return true;
-				}
-				if (indexAddress) {
-					if (e instanceof Way && OSMSettings.wayForCar(e.getTag(OSMTagKey.HIGHWAY))) {
-						ways.add((Way) e);
-						return true;
-					}
-				}
-				return (e instanceof Node && indexAddress) || loadAllObjects;
-			}
-		};
-		
-		OsmBaseStorage storage = new OsmBaseStorage();
-		if (addFilter != null) {
+        OsmBaseStorage storage = new OsmBaseStorage();
+        if (addFilter != null) {
 			storage.getFilters().add(addFilter);
 		}
-		storage.getFilters().add(filter);
 
-		storage.parseOSM(stream, progress, streamFile);
-		if (log.isDebugEnabled()) {
-			log.debug("File parsed : " + (System.currentTimeMillis() - st));
+        DataExtractionOsmFilter filter = new DataExtractionOsmFilter(amenities, buildings, places, ways);
+        storage.getFilters().add(filter);
+        // 0. Loading osm file
+		try {
+			// 0.1 init database to store temporary data
+			filter.initDatabase();
+			
+			// 0.2 parsing osm itself
+			storage.parseOSM(stream, progress, streamFile);
+			if (log.isInfoEnabled()) {
+				log.info("File parsed : " + (System.currentTimeMillis() - st));
+			}
+			progress.finishTask();
+			
+			// 0.3 Correlating data (linking way & node)
+			filter.correlateData(storage, progress);
+			
+		} finally {
+			if (log.isInfoEnabled()) {
+				log.info("File indexed : " + (System.currentTimeMillis() - st));
+			}
+			filter.close();
 		}
         
         // 1. Initialize region
@@ -228,9 +280,9 @@ public class DataExtraction  {
         country.setStorage(storage);
 
         // 2. Reading amenities
-        if(indexPOI){
-        	readingAmenities(amenities, country);
-        }
+		if (indexPOI) {
+			readingAmenities(amenities, country);
+		}
 
         // 3. Reading cities
         readingCities(places, country);
@@ -247,7 +299,7 @@ public class DataExtraction  {
         	// 	6. normalizing streets
         	normalizingStreets(progress, country);
         }
-        
+        // 7. Call data preparation to sort cities, calculate center location, assign id to objects 
         country.doDataPreparation();
         return country;
 	}
@@ -311,9 +363,9 @@ public class DataExtraction  {
 	}
 
 
-	private void readingAmenities(final ArrayList<Amenity> amenities, Region country) {
-		for(Amenity a: amenities){
-        	country.registerAmenity(a);
+	private void readingAmenities(final ArrayList<Entity> amenities, Region country) {
+		for(Entity a: amenities){
+        	country.registerAmenity(new Amenity(a));
         }
 	}
 

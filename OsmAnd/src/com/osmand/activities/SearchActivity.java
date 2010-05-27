@@ -24,7 +24,6 @@ import com.osmand.OsmandSettings;
 import com.osmand.R;
 import com.osmand.ResourceManager;
 import com.osmand.data.Amenity;
-import com.osmand.data.DataTileManager;
 import com.osmand.data.Amenity.AmenityType;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
@@ -67,11 +66,11 @@ public class SearchActivity extends ListActivity {
 	}
 
 	private void createAmenityFilter() {
-		DataTileManager<Amenity> poiIndex = ResourceManager.getResourceManager().getPoiIndex();
+		ResourceManager resourceManager = ResourceManager.getResourceManager();
 		filter = new TreeMap<AmenityType, List<Amenity>>();
 		LatLon lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(this);
-		List<Amenity> closestAmenities = poiIndex.getClosestObjects(lastKnownMapLocation.getLatitude(),
-				lastKnownMapLocation.getLongitude(), 0, 5);
+		List<Amenity> closestAmenities = resourceManager.searchAmenities(lastKnownMapLocation.getLatitude(),
+				lastKnownMapLocation.getLongitude(), 13, 500);
 		MapUtils.sortListOfMapObject(closestAmenities, lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude());
 		for (Amenity n : closestAmenities) {
 			AmenityType type = n.getType();
