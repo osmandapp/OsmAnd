@@ -131,9 +131,7 @@ public class MapTileDownloader {
 	
 	
 	public void refuseAllPreviousRequests(){
-		while(!threadPoolExecutor.getQueue().isEmpty()){
-			threadPoolExecutor.getQueue().remove();
-		}
+		threadPoolExecutor.getQueue().clear();
 	}
 	
 	public void requestToDownload(DownloadRequest request){
