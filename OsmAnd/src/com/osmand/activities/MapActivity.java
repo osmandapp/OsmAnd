@@ -328,6 +328,9 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     		final Intent settings = new Intent(MapActivity.this, SettingsActivity.class);
 			startActivity(settings);
     		return true;
+		} else if (item.getItemId() == R.id.map_specify_point) {
+			openChangeLocationDialog();
+			return true;
     	}  else if (item.getItemId() == R.id.map_navigate_to_point) {
     		if(navigationLayer.getPointToNavigate() != null){
     			item.setTitle(R.string.navigate_to_point);
@@ -339,6 +342,11 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     	}
     	return super.onOptionsItemSelected(item);
     }
+
+	private void openChangeLocationDialog() {
+		NavigatePointDialog dlg = new NavigatePointDialog(this, mapView);
+		dlg.showDialog();
+	}
 
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
