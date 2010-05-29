@@ -38,9 +38,13 @@ public class AmenityIndexRepository {
 	
 	
 	private final String[] columns = IndexConstants.generateColumnNames(IndexPoiTable.values());
-	public List<Amenity> searchAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int limit, List<Amenity> amenities){
+	public List<Amenity> searchAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int limit, AmenityType type, List<Amenity> amenities){
 		long now = System.currentTimeMillis();
-		Cursor query = db.query(IndexPoiTable.getTable(), columns, "? < latitude AND latitude < ? AND ? < longitude AND longitude < ?", 
+		String squery = "? < latitude AND latitude < ? AND ? < longitude AND longitude < ?";
+		if(type != null){
+			squery += " AND type = " + AmenityType.valueToString(type);
+		}
+		Cursor query = db.query(IndexPoiTable.getTable(), columns, squery, 
 				new String[]{Double.toString(bottomLatitude), 
 				Double.toString(topLatitude), Double.toString(leftLongitude), Double.toString(rightLongitude)}, null, null, null);
 		if(query.moveToFirst()){
@@ -82,7 +86,7 @@ public class AmenityIndexRepository {
 		cBottomLatitude = bottomLatitude - (topLatitude -bottomLatitude);
 		cLeftLongitude = leftLongitude - (rightLongitude - leftLongitude);
 		cRightLongitude = rightLongitude + (rightLongitude - leftLongitude);
-		searchAmenities(cTopLatitude, cLeftLongitude, cBottomLatitude, cRightLongitude, -1, cachedAmenities);
+		searchAmenities(cTopLatitude, cLeftLongitude, cBottomLatitude, cRightLongitude, -1, null, cachedAmenities);
 		checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, toFill);
 	}
 
