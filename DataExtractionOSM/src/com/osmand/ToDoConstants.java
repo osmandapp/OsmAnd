@@ -15,13 +15,14 @@ public class ToDoConstants {
 	// TODO ANDROID
 //  25. POI search near to map location (show categories & type). Second cut. (implement incremental search)
 
-//	 3. Revise osmand UI. Preparing new icons (revise UI 18, 2, ).
+//	 3. Revise osmand UI. Preparing new icons (revise UI 18, 2, ). Main application icon, back to location icon.
 //	 13. Save point as favorite & introduce favorite points dialog
 //	 14. Show zoom level on map
 
 //   24. Implement ResourceManager, load cities/streets/buildings on Low memory (clear previous all addresses cities).
 //	  5. Search for city/streets/buildings
-//	 15. Investigate interruption of any long running operation & implement where it is needed
+//	 15. Investigate interruption of any long running operation & implement where it is needed. 
+//       Fix progress information (loading indices).
 //   21. Implement zooming tile (if tile doesn't exist local, we can zoom in previous tile).
 
 //	  8. Enable change POI directly on map (requires OSM login)
@@ -29,14 +30,11 @@ public class ToDoConstants {
 //   20. Implement save track/route to gpx (?)
 	
 	// FIXME Bugs Android :
-	// 0. FIX TODO for partial loading rotated map
 	// 1. When firstly run osmand navigation (from notification bar) show map & go to menu shows desktop.
 	//      No chance to close application 
-	// 3. Fix progress information (loading indices) for android version
-	// 4. Fix when POI selected & enable button backToLocation
-	// 5. Call ResourceManager.close when it is needed
 	// 6. Understand concept of application where to save/restore global setting. 
     //    (for example reset navigate to point, reset link map with location). It should be reset after user call exit.
+	//     Call ResourceManager.close when it is needed.
 	// 8. Introduce activity search by location (unify with existing dialog)
 	// 9. When all features will be ready we can remove show location from context menu
 	

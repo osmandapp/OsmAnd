@@ -97,11 +97,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		}
 		
 		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
-		if(prefs != null && prefs.contains(OsmandSettings.LAST_KNOWN_MAP_LAT)){
-			LatLon l = OsmandSettings.getLastKnownMapLocation(this);
-			mapView.setLatLon(l.getLatitude(), l.getLongitude());
-			mapView.setZoom(OsmandSettings.getLastKnownMapZoom(this));
-		} else {
+		if(prefs == null || !prefs.contains(OsmandSettings.LAST_KNOWN_MAP_LAT)){
 			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 			Location location = service.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 			if(location != null){
@@ -126,7 +122,6 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			}
 		});
 		backToLocation = (ImageButton)findViewById(R.id.BackToLocation);
-		backToLocation.setVisibility(View.INVISIBLE);
 		backToLocation.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -278,6 +273,17 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			mapView.setRotate(0);
 		}
 		mapView.setMapPosition(OsmandSettings.getPositionOnMap(this));
+		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
+		if(prefs != null && prefs.contains(OsmandSettings.LAST_KNOWN_MAP_LAT)){
+			LatLon l = OsmandSettings.getLastKnownMapLocation(this);
+			mapView.setLatLon(l.getLatitude(), l.getLongitude());
+			mapView.setZoom(OsmandSettings.getLastKnownMapZoom(this));
+		}
+		if(getLastKnownLocation() != null){
+			backToLocation.setVisibility(View.VISIBLE);
+		} else {
+			backToLocation.setVisibility(View.INVISIBLE);
+		}
 		
 
 		if(mapView.getLayers().contains(poiMapLayer) != OsmandSettings.isShowingPoiOverMap(this)){
