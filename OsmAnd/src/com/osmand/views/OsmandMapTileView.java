@@ -273,9 +273,17 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	
 	private void drawOverMap(Canvas canvas){
-		canvas.drawCircle(getCenterPointX(), getCenterPointY(), 3, paintBlack);
-		canvas.drawCircle(getCenterPointX(), getCenterPointY(), 6, paintBlack);
-		for(OsmandMapLayer layer : layers){
+		int w = getCenterPointX();
+		int h = getCenterPointY();
+		canvas.drawCircle(w, h, 3, paintBlack);
+		canvas.drawCircle(w, h, 6, paintBlack);
+		
+		for (OsmandMapLayer layer : layers) {
+			canvas.restore();
+			canvas.save();
+			if (!layer.drawInScreenPixels()) {
+				canvas.rotate(rotate, w, h);
+			}
 			layer.onDraw(canvas);
 		}
 	}
@@ -332,7 +340,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			if (canvas != null) {
 				ResourceManager mgr = ResourceManager.getResourceManager();
 				boolean useInternet = OsmandSettings.isUsingInternetToDownloadTiles(getContext());
-				
+				canvas.save();
 				canvas.rotate(rotate, w , h);
 				boundsRect.set(0, 0, getWidth(), getHeight());
 				calculateTileRectangle(boundsRect, w, h, tileX, tileY, tilesRect);

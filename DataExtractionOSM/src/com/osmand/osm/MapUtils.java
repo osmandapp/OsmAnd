@@ -1,5 +1,6 @@
 package com.osmand.osm;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -193,5 +194,17 @@ public class MapUtils {
 			}
 		});
 	}
+	
 
+	public static String getFormattedDistance(int meters){
+		if(meters >= 100000){
+			return meters / 1000 + " km"; 
+		} else if(meters >= 10000){
+			return MessageFormat.format("{0, number, #.#} km", ((float) meters) / 1000);
+		} else if(meters > 1500){
+			return MessageFormat.format("{0, number, #.##} km", ((float) meters) / 1000);
+		} else {
+			return meters + " m";
+		}
+	}
 }

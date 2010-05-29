@@ -155,6 +155,11 @@ public class PointLocationLayer implements OsmandMapLayer {
 		
 	}
 
+	@Override
+	public boolean drawInScreenPixels() {
+		return false;
+	}
+
 
 
 
