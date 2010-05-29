@@ -25,6 +25,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private ListPreference tileSourcePreference;
 	private CheckBoxPreference rotateMapToBearing;
 	private CheckBoxPreference showViewAngle;
+	private ListPreference positionOnMap;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		showViewAngle =(CheckBoxPreference) screen.findPreference(OsmandSettings.SHOW_VIEW_ANGLE);
 		showViewAngle.setOnPreferenceChangeListener(this);
 		
+		positionOnMap =(ListPreference) screen.findPreference(OsmandSettings.POSITION_ON_MAP);
+		positionOnMap.setOnPreferenceChangeListener(this);
 		tileSourcePreference =(ListPreference) screen.findPreference(OsmandSettings.MAP_TILE_SOURCES);
 		tileSourcePreference.setOnPreferenceChangeListener(this);
 		
@@ -53,6 +56,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		showPoiOnMap.setChecked(OsmandSettings.isShowingPoiOverMap(this));
 		rotateMapToBearing.setChecked(OsmandSettings.isRotateMapToBearing(this));
 		showViewAngle.setChecked(OsmandSettings.isShowingViewAngle(this));
+		String[] e = new String[] { "Center", "Bottom" };
+		positionOnMap.setEntryValues(e);
+		positionOnMap.setEntries(e);
+		positionOnMap.setValueIndex(OsmandSettings.getPositionOnMap(this));
+		
 
 		List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
 		String[] entries = new String[list.size()];
@@ -83,6 +91,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.commit();
 		} else if(preference == showViewAngle){
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, (Boolean) newValue);
+			edit.commit();
+		} else if(preference == positionOnMap){
+			edit.putInt(OsmandSettings.POSITION_ON_MAP, positionOnMap.findIndexOfValue((String) newValue));
 			edit.commit();
 		} else if (preference == tileSourcePreference) {
 			edit.putString(OsmandSettings.MAP_TILE_SOURCES, (String) newValue);

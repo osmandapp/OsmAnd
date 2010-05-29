@@ -71,14 +71,11 @@ public class PointLocationLayer implements OsmandMapLayer {
 		return new RectF(locationX - rad, locationY - rad, locationX + rad, locationY + rad);
 	}
 	
-	// TODO simplify calculation if possible
 	@Override
 	public void onDraw(Canvas canvas) {
 		if (isLocationVisible(lastKnownLocation)) {
-			int locationX = MapUtils.getPixelShiftX(view.getZoom(), lastKnownLocation.getLongitude(), view.getLongitude(), 
-					view.getTileSize()) + view.getWidth() / 2;
-			int locationY = MapUtils.getPixelShiftY(view.getZoom(), 
-					lastKnownLocation.getLatitude(), view.getLatitude(), view.getTileSize()) + view.getHeight() / 2;
+			int locationX = view.getMapXForPoint(lastKnownLocation.getLongitude());
+			int locationY = view.getMapYForPoint(lastKnownLocation.getLatitude());
 			int radius = MapUtils.getLengthXFromMeters(view.getZoom(), view.getLatitude(), view.getLongitude(), lastKnownLocation
 					.getAccuracy(), view.getTileSize(), view.getWidth());
 
@@ -124,7 +121,7 @@ public class PointLocationLayer implements OsmandMapLayer {
 		if(l == null || view == null){
 			return false;
 		}
-		return view.isPointOnTheMap(l.getLatitude(), l.getLongitude());
+		return view.isPointOnTheRotatedMap(l.getLatitude(), l.getLongitude());
 	}
 	
 	
@@ -135,7 +132,7 @@ public class PointLocationLayer implements OsmandMapLayer {
 	public void setHeading(Float heading, boolean doNotRedraw){
 		this.heading = heading;
 		if(!doNotRedraw && isLocationVisible(this.lastKnownLocation)){
-			view.prepareImage();
+			view.refreshMap();
 		}
 	}
 	
@@ -148,7 +145,7 @@ public class PointLocationLayer implements OsmandMapLayer {
 		if (!doNotRedraw) {
 			boolean redraw = isLocationVisible(this.lastKnownLocation) || isLocationVisible(lastKnownLocation);
 			if (redraw) {
-				view.prepareImage();
+				view.refreshMap();
 			}
 		}
 	}

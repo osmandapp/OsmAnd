@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="position_on_map_descr">Choose postion on the map</string>
+    <string name="position_on_map">Position on the map</string>
     <string name="map_specify_point">Specify point</string>
     <string name="show_view_angle_descr">Show aspect of vew based on compass</string>
     <string name="show_view_angle">Show aspect of view</string>
