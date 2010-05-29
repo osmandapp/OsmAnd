@@ -164,11 +164,6 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     }
     
     public void setLocation(Location location){
-    	// TODO remove that !!
-    	if(location != null){
-    		location.setSpeed(30);
-    		location.setBearing(90);
-    	}
     	// Do very strange manipulation to call redraw only once
     	
     	// show point view only if gps enabled

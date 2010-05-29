@@ -323,6 +323,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	// used only to save space & reuse 
 	protected RectF tilesRect = new RectF();
 	protected Rect boundsRect = new Rect();
+	protected RectF bitmapToDraw = new RectF();
+	protected Rect bitmapToZoom = new Rect();
 	
 	public void refreshMap() {
 		if (OsmandSettings.isUsingInternetToDownloadTiles(getContext())) {
@@ -353,9 +355,24 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 						for (int j = 0; j< height; j++) {
 							float x1 = (i + left - tileX) * tileSize + w;
 							float y1 = (j + top - tileY) * tileSize + h;
+							// asking tile image async
 							Bitmap bmp = mgr.getTileImageForMapAsync(map, left + i, top + j, zoom, useInternet);
 							if (bmp == null) {
-								drawEmptyTile(canvas, (int) x1, (int) y1);
+								// asking if there is small version of the map (in cache)
+								if(useInternet){
+									bmp = mgr.getTileImageFromCache(map, (left + i) / 2, (top + j) / 2, zoom - 1);
+								} else {
+									bmp = mgr.getTileImageForMapAsync(map, (left + i) / 2, (top + j) / 2, zoom - 1, false);
+								}
+								if(bmp == null){
+									drawEmptyTile(canvas, (int) x1, (int) y1);
+								} else {
+									int xZoom = (left + i) % 2 == 0 ? 0 : tileSize / 2;
+									int yZoom = (top + j) % 2 == 0 ? 0 : tileSize / 2;;
+									bitmapToZoom.set(xZoom, yZoom, xZoom + tileSize / 2, yZoom + tileSize / 2);
+									bitmapToDraw.set(x1, y1, x1 + tileSize, y1 + tileSize);
+									canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
+								}
 							} else {
 								canvas.drawBitmap(bmp, x1, y1, paintBitmap);
 							}

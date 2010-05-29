@@ -6,16 +6,15 @@ package com.osmand;
  */
 public class ToDoConstants {
 	
-	
 	/**
 	 * Write activity to show something about authors / donation ....
 	 */
 	public int DESCRIBE_ABOUT_AUTHORS = 8;
 
 	// TODO ANDROID
-//  25. POI search near to map location (show categories & type). Second cut. (implement incremental search)
+//   25. POI search near to map location (show categories & type). Second cut. (implement incremental search)
 
-//	 3. Revise osmand UI. Preparing new icons (revise UI 18, 2, ). Main application icon, back to location icon.
+//	  3. Revise osmand UI. Preparing new icons (revise UI 18, 2, ). Main application icon, back to location icon.
 //	 13. Save point as favorite & introduce favorite points dialog
 //	 14. Show zoom level on map
 
@@ -23,7 +22,6 @@ public class ToDoConstants {
 //	  5. Search for city/streets/buildings
 //	 15. Investigate interruption of any long running operation & implement where it is needed. 
 //       Fix progress information (loading indices).
-//   21. Implement zooming tile (if tile doesn't exist local, we can zoom in previous tile).
 
 //	  8. Enable change POI directly on map (requires OSM login)
 //   16. Support open street bugs api.
@@ -41,13 +39,13 @@ public class ToDoConstants {
 	// TODO SWING: 
 	// 1. Download tiles without using dir tiles
 	// 2. Configure file log & see log from file (add uncaught exception handling)
-	// 5. Implement supress warning for duplicate id
+	// 5. Implement suppress warning for duplicate id
 	// 6. Implement renaming/deleting street/building/city
 	// 7. Implement saving bundle of tiles in different folder
-
 	
 	
 	// DONE ANDROID :
+//  21. Implement zooming tile (if tile doesn't exist local, we can zoom in previous tile).
 //	11. Print out additional info speed, altitude, number of satellites
 //  19. Show how map is rotated where north/south on map (do not consider compass)
 //  23. Implement moving point from center to bottom (for rotating map)
@@ -56,7 +54,6 @@ public class ToDoConstants {
 //   2. Showing compass on the map : use device compass if exists(?)
 //  18. Implement go to point
 
-	
 	// DONE SWING
 
 }
