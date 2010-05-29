@@ -82,15 +82,19 @@ public class ResourceManager {
 	
 	
 	public Bitmap getTileImageForMapAsync(ITileSource map, int x, int y, int zoom, boolean loadFromInternetIfNeeded) {
-		return getTileImageForMap(map, x, y, zoom, loadFromInternetIfNeeded, false);
+		return getTileImageForMap(map, x, y, zoom, loadFromInternetIfNeeded, false, true);
+	}
+	
+	public Bitmap getTileImageFromCache(ITileSource map, int x, int y, int zoom){
+		return getTileImageForMap(map, x, y, zoom, false, false, false);
 	}
 	
 	public Bitmap getTileImageForMapSync(ITileSource map, int x, int y, int zoom, boolean loadFromInternetIfNeeded) {
-		return getTileImageForMap(map, x, y, zoom, loadFromInternetIfNeeded, true);
+		return getTileImageForMap(map, x, y, zoom, loadFromInternetIfNeeded, true, true);
 	}
 	
 	protected Bitmap getTileImageForMap(ITileSource map, int x, int y, int zoom, 
-			boolean loadFromInternetIfNeeded, boolean sync) {
+			boolean loadFromInternetIfNeeded, boolean sync, boolean loadFromFs) {
 		if (map == null) {
 			return null;
 		}
@@ -98,7 +102,7 @@ public class ResourceManager {
 		builder.append(map.getName()).append('/').append(zoom).	append('/').append(x).
 				append('/').append(y).append(map.getTileFormat()).append(".tile");
 		String file = builder.toString();
-		if (cacheOfImages.get(file) == null) {
+		if (loadFromFs && cacheOfImages.get(file) == null) {
 			String url = loadFromInternetIfNeeded ? map.getUrlToLoad(x, y, zoom) : null;
 			TileLoadDownloadRequest req = new TileLoadDownloadRequest(dirWithTiles, file, url, new File(dirWithTiles, file), 
 					x, y, zoom);
