@@ -82,7 +82,7 @@ public class AmenityIndexRepository {
 		cBottomLatitude = bottomLatitude - (topLatitude -bottomLatitude);
 		cLeftLongitude = leftLongitude - (rightLongitude - leftLongitude);
 		cRightLongitude = rightLongitude + (rightLongitude - leftLongitude);
-		searchAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, -1, cachedAmenities);
+		searchAmenities(cTopLatitude, cLeftLongitude, cBottomLatitude, cRightLongitude, -1, cachedAmenities);
 		checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, toFill);
 	}
 

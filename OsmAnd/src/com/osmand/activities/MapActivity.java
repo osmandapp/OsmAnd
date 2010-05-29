@@ -162,6 +162,10 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     }
     
     public void setLocation(Location location){
+    	if(location != null){
+    		location.setSpeed(30);
+    		location.setBearing(90);
+    	}
     	// Do very strange manipulation to call redraw only once
     	
     	// show point view only if gps enabled
@@ -191,7 +195,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 					mapView.setLatLon(location.getLatitude(), location.getLongitude());
 				}
 			} else {
-				mapView.prepareImage();
+				mapView.refreshMap();
 				if(backToLocation.getVisibility() != View.VISIBLE){
 					backToLocation.setVisibility(View.VISIBLE);
 				}
@@ -265,6 +269,8 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		if(!OsmandSettings.isRotateMapToBearing(this)){
 			mapView.setRotate(0);
 		}
+		mapView.setMapPosition(OsmandSettings.getPositionOnMap(this));
+		
 
 		if(mapView.getLayers().contains(poiMapLayer) != OsmandSettings.isShowingPoiOverMap(this)){
 			if(OsmandSettings.isShowingPoiOverMap(this)){
@@ -360,7 +366,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			Message m = Message.obtain(sensorHandler, new Runnable(){
 				@Override
 				public void run() {
-					mapView.prepareImage();
+					mapView.refreshMap();
 				}
 			});
 			m.what = 1;

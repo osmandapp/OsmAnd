@@ -10,7 +10,6 @@ import android.location.Location;
 import android.view.MotionEvent;
 
 import com.osmand.osm.LatLon;
-import com.osmand.osm.MapUtils;
 
 public class PointNavigationLayer implements OsmandMapLayer {
 	protected final static int RADIUS = 10;
@@ -52,10 +51,8 @@ public class PointNavigationLayer implements OsmandMapLayer {
 			return;
 		}
 		if (isLocationVisible()) {
-			int locationX = MapUtils.getPixelShiftX(view.getZoom(), pointToNavigate.getLongitude(), view.getLongitude(), 
-					view.getTileSize()) + view.getWidth() / 2;
-			int locationY = MapUtils.getPixelShiftY(view.getZoom(), 
-					pointToNavigate.getLatitude(), view.getLatitude(), view.getTileSize()) + view.getHeight() / 2;
+			int locationX = view.getMapXForPoint(pointToNavigate.getLongitude());
+			int locationY = view.getMapYForPoint(pointToNavigate.getLatitude());
 
 			canvas.drawCircle(locationX, locationY, RADIUS, point);
 		} else {
@@ -72,8 +69,8 @@ public class PointNavigationLayer implements OsmandMapLayer {
 			m.reset();
 			m.postScale(RADIUS * 2, RADIUS * 2);
 			m.postTranslate(0, -radiusBearing);
-			m.postTranslate(view.getWidth() / 2, view.getHeight() / 2);
-			m.postRotate(bearing, view.getWidth() / 2, view.getHeight() / 2);
+			m.postTranslate(view.getCenterPointX(), view.getCenterPointY());
+			m.postRotate(bearing, view.getCenterPointX(), view.getCenterPointY());
 			pathForDirection.transform(m);
 			canvas.drawPath(pathForDirection, point);
 		}
@@ -83,7 +80,7 @@ public class PointNavigationLayer implements OsmandMapLayer {
 		if(pointToNavigate == null || view == null){
 			return false;
 		}
-		return view.isPointOnTheMap(pointToNavigate.getLatitude(), pointToNavigate.getLongitude());
+		return view.isPointOnTheRotatedMap(pointToNavigate.getLatitude(), pointToNavigate.getLongitude());
 	}
 	
 	
@@ -93,7 +90,7 @@ public class PointNavigationLayer implements OsmandMapLayer {
 	
 	public void setPointToNavigate(LatLon pointToNavigate) {
 		this.pointToNavigate = pointToNavigate;
-		view.prepareImage();
+		view.refreshMap();
 	}
 
 	@Override

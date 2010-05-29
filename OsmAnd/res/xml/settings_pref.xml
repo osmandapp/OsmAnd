@@ -7,6 +7,8 @@
 <CheckBoxPreference android:key="show_poi_over_map" android:title="@string/show_poi_over_map" android:summary="@string/show_poi_over_map_description"></CheckBoxPreference>
 <CheckBoxPreference android:key="rotate_map_to_bearing" android:title="@string/rotate_map_to_bearing" android:summary="@string/rotate_map_to_bearing_descr"></CheckBoxPreference>
 <CheckBoxPreference android:key="show_view_angle" android:title="@string/show_view_angle" android:summary="@string/show_view_angle_descr"></CheckBoxPreference>
+
+<ListPreference android:key="position_on_map" android:title="@string/position_on_map" android:summary="@string/position_on_map_descr"></ListPreference>
 </PreferenceCategory>
 <PreferenceCategory android:title="@string/map_source"><ListPreference android:title="@string/map_tile_source" android:summary="@string/map_tile_source_descr" android:key="map_tile_sources"></ListPreference>
 </PreferenceCategory>
