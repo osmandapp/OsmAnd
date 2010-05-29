@@ -187,7 +187,7 @@ public class ResourceManager {
 		for(AmenityIndexRepository index : amenityRepositories){
 			if(index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)){
 				if(!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, amenities)){
-					index.searchAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, limit, amenities);
+					index.searchAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, limit, null, amenities);
 				}
 			}
 		}

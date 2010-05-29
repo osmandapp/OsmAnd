@@ -37,8 +37,6 @@ public class ToDoConstants {
 	// 5. Call ResourceManager.close when it is needed
 	// 6. Understand concept of application where to save/restore global setting. 
     //    (for example reset navigate to point, reset link map with location). It should be reset after user call exit.
-	// 7. Implement search amenities by type (!). 
-	//     Rewrite search activity in order to limit amenities not to all types.
 	// 8. Introduce activity search by location (unify with existing dialog)
 	// 9. When all features will be ready we can remove show location from context menu
 	
