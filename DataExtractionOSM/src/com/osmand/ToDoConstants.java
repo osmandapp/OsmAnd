@@ -21,10 +21,7 @@ public class ToDoConstants {
 
 //   24. Implement ResourceManager, load cities/streets/buildings on Low memory (clear previous all addresses cities).
 //	  5. Search for city/streets/buildings
-	
 //	 15. Investigate interruption of any long running operation & implement where it is needed
-//	 11. Print out additional info speed, altitude, number of satellites
-//   19. Show how map is rotated where north/south on map (do not consider compass)
 //   21. Implement zooming tile (if tile doesn't exist local, we can zoom in previous tile).
 
 //	  8. Enable change POI directly on map (requires OSM login)
@@ -55,10 +52,12 @@ public class ToDoConstants {
 	
 	
 	// DONE ANDROID :
+//	11. Print out additional info speed, altitude, number of satellites
+//  19. Show how map is rotated where north/south on map (do not consider compass)
 //  23. Implement moving point from center to bottom (for rotating map)
 //  17. Enable go to location by specifying coordinates
 //	 9. Configure file log & see log from file (when exception happened to see from device)
-//  2. Showing compass on the map : use device compass if exists(?)
+//   2. Showing compass on the map : use device compass if exists(?)
 //  18. Implement go to point
 
 	

@@ -98,7 +98,9 @@ public class PointNavigationLayer implements OsmandMapLayer {
 		
 	}
 
-
-
+	@Override
+	public boolean drawInScreenPixels() {
+		return false;
+	}
 
 }

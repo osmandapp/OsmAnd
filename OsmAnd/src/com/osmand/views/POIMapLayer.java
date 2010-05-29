@@ -105,4 +105,9 @@ public class POIMapLayer implements OsmandMapLayer {
 		
 	}
 
+	@Override
+	public boolean drawInScreenPixels() {
+		return false;
+	}
+
 }

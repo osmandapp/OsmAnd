@@ -13,5 +13,7 @@ public interface OsmandMapLayer {
 	public void destroyLayer();
 	
 	public boolean onTouchEvent(MotionEvent event);
+	
+	public boolean drawInScreenPixels();
 
 }

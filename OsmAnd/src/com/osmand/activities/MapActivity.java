@@ -34,6 +34,7 @@ import com.osmand.ResourceManager;
 import com.osmand.data.preparation.MapTileDownloader;
 import com.osmand.map.IMapLocationListener;
 import com.osmand.osm.LatLon;
+import com.osmand.views.MapInfoLayer;
 import com.osmand.views.OsmandMapTileView;
 import com.osmand.views.POIMapLayer;
 import com.osmand.views.PointLocationLayer;
@@ -51,11 +52,12 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	private PointLocationLayer locationLayer;
 	private PointNavigationLayer navigationLayer;
 	private POIMapLayer poiMapLayer;
+	private MapInfoLayer mapInfoLayer;
 	
 	private WakeLock wakeLock;
 	private boolean sensorRegistered = false;
 	private Handler sensorHandler = new Handler();
-	
+
 	private final static String BACK_TO_LOCATION = "BACK_TO_LOCATION";
 	private final static String POINT_NAVIGATE_LAT = "POINT_NAVIGATE_LAT";
 	private final static String POINT_NAVIGATE_LON = "POINT_NAVIGATE_LON";
@@ -83,6 +85,11 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		mapView.addLayer(navigationLayer);
 		locationLayer = new PointLocationLayer();
 		mapView.addLayer(locationLayer);
+		mapInfoLayer = new MapInfoLayer(this);
+		mapView.addLayer(mapInfoLayer);
+		
+		
+		
 		SharedPreferences lprefs = getPreferences(MODE_WORLD_READABLE);
 		if(lprefs.contains(POINT_NAVIGATE_LAT)){
 			navigationLayer.setPointToNavigate(new LatLon(lprefs.getFloat(POINT_NAVIGATE_LAT, 0), 
@@ -162,6 +169,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     }
     
     public void setLocation(Location location){
+    	// TODO remove that !!
     	if(location != null){
     		location.setSpeed(30);
     		location.setBearing(90);
@@ -373,5 +381,6 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			sensorHandler.sendMessage(m);
 		}
 	}
+	
     
 }
