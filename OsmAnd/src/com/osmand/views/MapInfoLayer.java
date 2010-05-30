@@ -4,10 +4,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.location.Location;
-import android.view.MotionEvent;
 
 import com.osmand.activities.MapActivity;
 import com.osmand.osm.MapUtils;
@@ -130,10 +130,6 @@ public class MapInfoLayer implements OsmandMapLayer {
 		
 	}
 
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		return false;
-	}
 	
 	@Override
 	public void destroyLayer() {
@@ -142,6 +138,16 @@ public class MapInfoLayer implements OsmandMapLayer {
 	@Override
 	public boolean drawInScreenPixels() {
 		return true;
+	}
+
+	@Override
+	public boolean onLongPressEvent(PointF point) {
+		return false;
+	}
+
+	@Override
+	public boolean onTouchEvent(PointF point) {
+		return false;
 	}
 
 

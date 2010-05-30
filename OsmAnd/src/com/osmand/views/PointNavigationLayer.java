@@ -5,9 +5,9 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PointF;
 import android.graphics.Paint.Style;
 import android.location.Location;
-import android.view.MotionEvent;
 
 import com.osmand.osm.LatLon;
 
@@ -39,11 +39,6 @@ public class PointNavigationLayer implements OsmandMapLayer {
 	}
 
 
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		return false;
-	}
-	
 	
 	@Override
 	public void onDraw(Canvas canvas) {
@@ -100,6 +95,16 @@ public class PointNavigationLayer implements OsmandMapLayer {
 
 	@Override
 	public boolean drawInScreenPixels() {
+		return false;
+	}
+
+	@Override
+	public boolean onLongPressEvent(PointF point) {
+		return false;
+	}
+
+	@Override
+	public boolean onTouchEvent(PointF point) {
 		return false;
 	}
 

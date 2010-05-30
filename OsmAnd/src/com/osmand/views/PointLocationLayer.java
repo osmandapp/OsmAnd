@@ -5,10 +5,10 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.location.Location;
-import android.view.MotionEvent;
 
 import com.osmand.osm.MapUtils;
 
@@ -61,10 +61,6 @@ public class PointLocationLayer implements OsmandMapLayer {
 	}
 
 
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		return false;
-	}
 	
 	private RectF getHeadingRect(int locationX, int locationY){
 		int rad = Math.min(3*view.getWidth()/8, 3*view.getHeight()/8);
@@ -157,6 +153,16 @@ public class PointLocationLayer implements OsmandMapLayer {
 
 	@Override
 	public boolean drawInScreenPixels() {
+		return false;
+	}
+
+	@Override
+	public boolean onLongPressEvent(PointF point) {
+		return false;
+	}
+
+	@Override
+	public boolean onTouchEvent(PointF point) {
 		return false;
 	}
 

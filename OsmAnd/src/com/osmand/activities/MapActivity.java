@@ -18,6 +18,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,6 +29,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 
+import com.osmand.LogUtil;
 import com.osmand.OsmandSettings;
 import com.osmand.R;
 import com.osmand.ResourceManager;
@@ -125,9 +127,9 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		backToLocation.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
+				backToLocation.setVisibility(View.INVISIBLE);
 				if(!isMapLinkedToLocation()){
 					getPreferences(MODE_WORLD_READABLE).edit().putBoolean(BACK_TO_LOCATION, true).commit();
-					backToLocation.setVisibility(View.INVISIBLE);
 					if(locationLayer.getLastKnownLocation() != null){
 						Location lastKnownLocation = locationLayer.getLastKnownLocation();
 						mapView.setLatLon(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
@@ -152,14 +154,6 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     @Override
     protected void onDestroy() {
     	super.onDestroy();
-    	SharedPreferences lprefs = getPreferences(MODE_WORLD_READABLE);
-    	if(navigationLayer.getPointToNavigate() == null){
-    		lprefs.edit().remove(POINT_NAVIGATE_LAT).remove(POINT_NAVIGATE_LON).commit();
-    	} else {
-    		LatLon p = navigationLayer.getPointToNavigate();
-    		lprefs.edit().putFloat(POINT_NAVIGATE_LAT, (float) p.getLatitude()).
-    					  putFloat(POINT_NAVIGATE_LON, (float) p.getLongitude()).commit();
-    	}
     	MapTileDownloader.getInstance().removeDownloaderCallback(mapView);
     }
     
@@ -169,12 +163,14 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     	// show point view only if gps enabled
     	if(location == null){
     		if(sensorRegistered) {
+    			Log.d(LogUtil.TAG, "Disable sensor");
     			((SensorManager) getSystemService(SENSOR_SERVICE)).unregisterListener(this);
     			sensorRegistered = false;
     			locationLayer.setHeading(null, true);
     		}
     	} else {
     		if(!sensorRegistered && OsmandSettings.isShowingViewAngle(this)){
+    			Log.d(LogUtil.TAG, "Enable sensor");
     			SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
     			Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ORIENTATION);
     			if (s != null) {
@@ -183,7 +179,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     			sensorRegistered = true;
     		}
     	}
-    	
+    	Log.d(LogUtil.TAG, "Location changed");
     	locationLayer.setLastKnownLocation(location, true);
     	if (location != null) {
 			if (isMapLinkedToLocation()) {
@@ -267,6 +263,9 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		if(!OsmandSettings.isRotateMapToBearing(this)){
 			mapView.setRotate(0);
 		}
+		if(!OsmandSettings.isShowingViewAngle(this)){
+			locationLayer.setHeading(null, true);
+		}
 		mapView.setMapPosition(OsmandSettings.getPositionOnMap(this));
 		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
 		if(prefs != null && prefs.contains(OsmandSettings.LAST_KNOWN_MAP_LAT)){
@@ -274,7 +273,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			mapView.setLatLon(l.getLatitude(), l.getLongitude());
 			mapView.setZoom(OsmandSettings.getLastKnownMapZoom(this));
 		}
-		if(getLastKnownLocation() != null){
+		if(getLastKnownLocation() != null && !isMapLinkedToLocation()){
 			backToLocation.setVisibility(View.VISIBLE);
 		} else {
 			backToLocation.setVisibility(View.INVISIBLE);
@@ -312,7 +311,9 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	public void locationChanged(double newLatitude, double newLongitude, Object source) {
 		// when user start dragging 
 		if(locationLayer.getLastKnownLocation() != null){
-			getPreferences(MODE_WORLD_READABLE).edit().putBoolean(BACK_TO_LOCATION, false).commit();
+			if(isMapLinkedToLocation()){
+				getPreferences(MODE_WORLD_READABLE).edit().putBoolean(BACK_TO_LOCATION, false).commit();
+			}
 			if (backToLocation.getVisibility() != View.VISIBLE) {
 				runOnUiThread(new Runnable() {
 					@Override
@@ -328,6 +329,14 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.map_menu, menu);
+		MenuItem item = menu.findItem(R.id.map_navigate_to_point);
+		if (item != null) {
+			if (getPreferences(MODE_WORLD_READABLE).contains(POINT_NAVIGATE_LAT)) {
+				item.setTitle(R.string.stop_navigation);
+			} else {
+				item.setTitle(R.string.navigate_to_point);
+			}
+		}
 		return true;
 	}
 	
@@ -348,9 +357,13 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			return true;
     	}  else if (item.getItemId() == R.id.map_navigate_to_point) {
     		if(navigationLayer.getPointToNavigate() != null){
+    			getPreferences(MODE_WORLD_READABLE).edit().remove(POINT_NAVIGATE_LAT).remove(POINT_NAVIGATE_LON).commit();
     			item.setTitle(R.string.navigate_to_point);
     			navigateToPoint(null);
     		} else {
+    			getPreferences(MODE_WORLD_READABLE).edit().
+    				putFloat(POINT_NAVIGATE_LAT, (float) mapView.getLatitude()).
+    				putFloat(POINT_NAVIGATE_LON, (float) mapView.getLongitude()).commit();
     			item.setTitle(R.string.stop_navigation);
     			navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
     		}
@@ -371,7 +384,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	public void onSensorChanged(SensorEvent event) {
 		// using that strange technique because sensor produces a lot of events & hangs the system
 		locationLayer.setHeading(event.values[0], true);
-		if(!sensorHandler.hasMessages(1)){
+		if(!sensorHandler.hasMessages(1) && locationLayer.isLocationVisible(locationLayer.getLastKnownLocation())){
 			Message m = Message.obtain(sensorHandler, new Runnable(){
 				@Override
 				public void run() {

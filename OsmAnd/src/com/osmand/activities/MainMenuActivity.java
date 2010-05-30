@@ -47,9 +47,9 @@ public class MainMenuActivity extends Activity {
 	public void startApplication(){
 		if(!applicationAlreadyStarted){
 			// TODO exception!!! has leaked window ?
-			final ProgressDialog dlg = ProgressDialog.show(this, "Loading data", "Reading indices...");
+			final ProgressDialog dlg = ProgressDialog.show(this, "Loading data", "Reading indices...", true);
 			final ProgressDialogImplementation impl = new ProgressDialogImplementation(dlg);
-			new Thread("Reader indexes") {
+			impl.setRunnable("Initializing app", new Runnable(){
 				@Override
 				public void run() {
 					try {
@@ -59,7 +59,8 @@ public class MainMenuActivity extends Activity {
 						dlg.dismiss();
 					}
 				}
-			}.start();
+			});
+			impl.run();
 			applicationAlreadyStarted = true;
 			Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
 			
