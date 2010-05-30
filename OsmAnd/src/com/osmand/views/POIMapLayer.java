@@ -6,9 +6,9 @@ import java.util.List;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.view.MotionEvent;
 import android.widget.Toast;
 
 import com.osmand.ResourceManager;
@@ -16,7 +16,8 @@ import com.osmand.data.Amenity;
 import com.osmand.osm.MapUtils;
 
 public class POIMapLayer implements OsmandMapLayer {
-	private static final int radiusClick = 2; // for 15 level zoom
+	// it is very slow to use with 15 level
+	private static final int startZoom = 16;
 	
 	private Paint pointAltUI;
 	private OsmandMapTileView view;
@@ -24,13 +25,17 @@ public class POIMapLayer implements OsmandMapLayer {
 
 	private ResourceManager resourceManager;
 	
+	@Override
+	public boolean onLongPressEvent(PointF point) {
+		return false;
+	}
 	
 
 	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		if (event.getAction() == MotionEvent.ACTION_DOWN && objects != null) {
-			int ex = (int) event.getX();
-			int ey = (int) event.getY();
+	public boolean onTouchEvent(PointF point) {
+		if (objects != null) {
+			int ex = (int) point.x;
+			int ey = (int) point.y;
 			int radius = getRadiusPoi(view.getZoom()) * 3 / 2;
 			try {
 				for (int i = 0; i < objects.size(); i++) {
@@ -46,7 +51,6 @@ public class POIMapLayer implements OsmandMapLayer {
 				// that's really rare case, but is much efficient than introduce synchronized block
 			}
 		}
-		// return super.onTouchEvent(event);
 		return false;
 	}
 	
@@ -68,11 +72,15 @@ public class POIMapLayer implements OsmandMapLayer {
 	}
 	
 	public int getRadiusPoi(int zoom){
-		if(zoom < 15){
+		if(zoom < startZoom){
 			return 0;
+		} else if(zoom == 16){
+			return 6;
+		} else if(zoom == 17){
+			return 10;
 		} else {
-			return radiusClick << (zoom - 15);
-		} 
+			return 14;
+		}
 	}
 
 	Rect pixRect = new Rect();
@@ -80,7 +88,7 @@ public class POIMapLayer implements OsmandMapLayer {
 	
 	@Override
 	public void onDraw(Canvas canvas) {
-		if (view.getZoom() >= 15) {
+		if (view.getZoom() >= startZoom) {
 			pixRect.set(0, 0, view.getWidth(), view.getHeight());
 			view.calculateTileRectangle(pixRect, view.getCenterPointX(), 
 					view.getCenterPointY(), view.getXTile(), view.getYTile(), tileRect);

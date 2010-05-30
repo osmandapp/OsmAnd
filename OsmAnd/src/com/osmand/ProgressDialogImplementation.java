@@ -14,6 +14,7 @@ public class ProgressDialogImplementation implements IProgress {
 	private String message = "";
 	
 	private Handler mViewUpdateHandler;
+	private Thread run;
 
 	public ProgressDialogImplementation(final ProgressDialog dlg){
 		mViewUpdateHandler = new Handler(){
@@ -23,6 +24,17 @@ public class ProgressDialogImplementation implements IProgress {
 				dlg.setMessage(message);
 			}
 		};
+	}
+	
+	public void setRunnable(String threadName, Runnable run){
+		this.run = new Thread(run, threadName);
+	}
+	
+	public void run(){
+		if(run == null){
+			throw new IllegalStateException();
+		}
+		run.start();
 	}
 
 	@Override

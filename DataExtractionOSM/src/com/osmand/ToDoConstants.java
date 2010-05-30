@@ -20,9 +20,7 @@ public class ToDoConstants {
 
 //   24. Implement ResourceManager, load cities/streets/buildings on Low memory (clear previous all addresses cities).
 //	  5. Search for city/streets/buildings
-//	 15. Investigate interruption of any long running operation & implement where it is needed. 
-//       Fix progress information (loading indices).
-
+ 
 //	  8. Enable change POI directly on map (requires OSM login)
 //   16. Support open street bugs api.
 //   20. Implement save track/route to gpx (?)
@@ -37,14 +35,19 @@ public class ToDoConstants {
 	// 9. When all features will be ready we can remove show location from context menu
 	
 	// TODO SWING: 
-	// 1. Download tiles without using dir tiles
 	// 2. Configure file log & see log from file (add uncaught exception handling)
 	// 5. Implement suppress warning for duplicate id
 	// 6. Implement renaming/deleting street/building/city
+	// 8. Implement basic transliteration version
 	// 7. Implement saving bundle of tiles in different folder
+	// 1. Download tiles without using dir tiles
 	
 	
 	// DONE ANDROID :
+//	 15. Investigate interruption of any long running operation & implement where it is needed.
+	//   ProgressDialogImplementation should support setOnCancelListener or obtain CANCEL message & 
+	//   throw InterruptedException in all methods (remaining, progress, startTask, ...) when call it.
+	//   Otherwise thread could be stopped however it is not good method.
 //  21. Implement zooming tile (if tile doesn't exist local, we can zoom in previous tile).
 //	11. Print out additional info speed, altitude, number of satellites
 //  19. Show how map is rotated where north/south on map (do not consider compass)

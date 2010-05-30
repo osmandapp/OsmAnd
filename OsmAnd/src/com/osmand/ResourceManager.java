@@ -93,12 +93,14 @@ public class ResourceManager {
 		return getTileImageForMap(map, x, y, zoom, loadFromInternetIfNeeded, true, true);
 	}
 	
-	protected Bitmap getTileImageForMap(ITileSource map, int x, int y, int zoom, 
+	// introduce cache in order save memory
+	protected StringBuilder builder = new StringBuilder(40);
+	protected synchronized Bitmap getTileImageForMap(ITileSource map, int x, int y, int zoom, 
 			boolean loadFromInternetIfNeeded, boolean sync, boolean loadFromFs) {
 		if (map == null) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(40);
+		builder.setLength(0);
 		builder.append(map.getName()).append('/').append(zoom).	append('/').append(x).
 				append('/').append(y).append(map.getTileFormat()).append(".tile");
 		String file = builder.toString();
