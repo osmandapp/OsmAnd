@@ -26,13 +26,13 @@ public class ToDoConstants {
 //   20. Implement save track/route to gpx (?)
 	
 	// TODO search story : 
-	// 1) Implement loading villages when user types more than 2 symbols
 	// 2) Find intersection of streets
 	// 3) Shows progress dialog (?)
-	// 4) Implement finding buildings
-	// 5) Show on map
 	// 6) Show street on map
-	// 7) Show distance to the village (to distinguish)
+	// 8) Show message (that user should input more than 2 symbols to get all)
+	// 9) Loading cities in another thread
+	// 10. fix bug with landscape layout (search address)
+	
 	
 	// FIXME Bugs Android :
 	// 1. When firstly run osmand navigation (from notification bar) show map & go to menu shows desktop.
