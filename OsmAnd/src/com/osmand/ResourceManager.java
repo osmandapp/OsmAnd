@@ -2,6 +2,7 @@ package com.osmand;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,6 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 
 import com.osmand.data.Amenity;
-import com.osmand.data.Region;
 import com.osmand.data.index.IndexConstants;
 import com.osmand.data.preparation.MapTileDownloader;
 import com.osmand.data.preparation.MapTileDownloader.DownloadRequest;
@@ -58,10 +58,9 @@ public class ResourceManager {
 	private MapTileDownloader downloader = MapTileDownloader.getInstance();
 
 	// Indexes
-	private Map<String, Region> addressMap = new TreeMap<String, Region>();
+	private Map<String, RegionAddressRepository> addressMap = new TreeMap<String, RegionAddressRepository>();
 	
 	protected List<AmenityIndexRepository> amenityRepositories = new ArrayList<AmenityIndexRepository>();
-	
 	
 	public AsyncLoadingThread asyncLoadingTiles = new AsyncLoadingThread();
 	
@@ -154,7 +153,7 @@ public class ResourceManager {
 	// POI INDEX //
 	public void indexingPoi(final IProgress progress) {
 		File file = new File(Environment.getExternalStorageDirectory(), POI_PATH);
-		clearAmenities();
+		closeAmenities();
 		if (file.exists() && file.canRead()) {
 			for (File f : file.listFiles()) {
 				if (f.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
@@ -170,7 +169,7 @@ public class ResourceManager {
 		
 	public void indexingAddresses(final IProgress progress){
 		File file = new File(Environment.getExternalStorageDirectory(), ADDRESS_PATH);
-		clearAddresses();
+		closeAddresses();
 		if (file.exists() && file.canRead()) {
 			for (File f : file.listFiles()) {
 				if (f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)) {
@@ -212,23 +211,35 @@ public class ResourceManager {
 		}
 	}
 	
-	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
+	////////////////////////////////////////////// Working with address ///////////////////////////////////////////
 	
-	public void clearAmenities(){
+	public RegionAddressRepository getRegionRepository(String name){
+		return addressMap.get(name);
+	}
+	
+	public Collection<RegionAddressRepository> getAddressRepositories(){
+		return addressMap.values();
+	}
+	
+	////////////////////////////////////////////// Closing methods ////////////////////////////////////////////////
+	
+	public void closeAmenities(){
 		for(AmenityIndexRepository r : amenityRepositories){
 			r.close();
 		}
 		amenityRepositories.clear();
 	}
 	
-	public void clearAddresses(){
-		// TODO close db connections
+	public void closeAddresses(){
+		for(RegionAddressRepository r : addressMap.values()){
+			r.close();
+		}
 		addressMap.clear();
 	}
 
 	public synchronized void close(){
-		clearAmenities();
-		clearAddresses();
+		closeAmenities();
+		closeAddresses();
 	}
 	
 	/// On low memory method ///

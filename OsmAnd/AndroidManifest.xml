@@ -18,7 +18,7 @@
 
 <activity android:name=".activities.search.SearchPOIActivity" android:label="@string/searchpoi_activity"></activity>
 <activity android:name=".activities.search.SearchPOIListActivity"></activity>
-<activity android:name=".activities.search.SearchAddress"></activity>
+<activity android:name=".activities.search.SearchAddressActivity"></activity>
 </application>
 
 

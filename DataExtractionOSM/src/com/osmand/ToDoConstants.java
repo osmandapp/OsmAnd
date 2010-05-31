@@ -34,6 +34,10 @@ public class ToDoConstants {
 	// 8. Introduce activity search by location (unify with existing dialog)
 	// 9. When all features will be ready we can remove show location from context menu
 	
+	// Performance improvements Android :
+	// 1. Introducing one place where refreshMap will be called using postMessage mechanism (delay more than > 50 ? ms)
+	// 2. Introducing cache of file names that are on disk (creating new File() consumes a lot of memory)
+	
 	// TODO SWING: 
 	// 2. Configure file log & see log from file (add uncaught exception handling)
 	// 5. Implement suppress warning for duplicate id

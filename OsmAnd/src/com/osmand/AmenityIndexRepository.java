@@ -133,15 +133,19 @@ public class AmenityIndexRepository {
 			dataBottomLatitude = query.getDouble(2);
 			dataLeftLongitude = query.getDouble(3);
 		}
+		query.close();
 		if (log.isDebugEnabled()) {
 			log.debug("Initializing db " + file.getAbsolutePath() + " " + (System.currentTimeMillis() - start) + "ms");
 		}
 		
 	}
 	
-	public void close(){
+	public synchronized void close(){
 		if(db != null){
 			db.close();
+			dataRightLongitude  = dataLeftLongitude = dataBottomLatitude= dataTopLatitude = 0;
+			cachedAmenities.clear();
+			cTopLatitude = cBottomLatitude = cLeftLongitude = cRightLongitude = 0; 
 		}
 	}
 	

@@ -117,5 +117,40 @@ public class OsmandSettings {
 		edit.putInt(LAST_KNOWN_MAP_ZOOM, zoom);
 		edit.commit();
 	}
+	
+	public static final String LAST_SEARCHED_REGION = "last_searched_region";
+	public static final String LAST_SEARCHED_CITY = "last_searched_city";
+	public static final String LAST_SEARCHED_STREET = "last_searched_street";
+	
+	public static String getLastSearchedRegion(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getString(LAST_SEARCHED_REGION, "");
+	}
+	
+	public static boolean setLastSearchedRegion(Context ctx, String region){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putString(LAST_SEARCHED_REGION, region).commit();
+	}
 
+	public static Long getLastSearchedCity(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getLong(LAST_SEARCHED_CITY, -1);
+	}
+	
+	public static boolean setLastSearchedCity(Context ctx, Long cityId){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putLong(LAST_SEARCHED_CITY, cityId).commit();
+	}
+
+	public static String getLastSearchedStreet(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getString(LAST_SEARCHED_STREET, "");
+	}
+	
+	public static boolean setLastSearchedStreet(Context ctx, String street){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putString(LAST_SEARCHED_STREET, street).commit();
+	}
+
+	
 }

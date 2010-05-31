@@ -113,7 +113,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 			}
 			if(cachedSpeed > 0){
 				canvas.drawRoundRect(boundsForSpeed, 3, 3, paintAlphaGray);
-				canvas.drawText(cachedSpeedString, boundsForSpeed.left + 5, boundsForSpeed.bottom - 9, paintBlack);
+				canvas.drawText(cachedSpeedString, boundsForSpeed.left + 15, boundsForSpeed.bottom - 9, paintBlack);
 			}
 		}
 		if(cachedDistString != null){

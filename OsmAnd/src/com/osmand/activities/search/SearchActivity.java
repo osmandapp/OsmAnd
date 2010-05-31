@@ -35,7 +35,7 @@ public class SearchActivity extends TabActivity {
 //		});
         TabHost host = getTabHost();  
         host.addTab(host.newTabSpec("Search_POI").setIndicator("Search POI").setContent(new Intent(this, SearchPOIListActivity.class)));  
-        host.addTab(host.newTabSpec("Search_Adress").setIndicator("Search Address").setContent(new Intent(this, SearchAddress.class)));
+        host.addTab(host.newTabSpec("Search_Adress").setIndicator("Search Address").setContent(new Intent(this, SearchAddressActivity.class)));
 	}
 
 }

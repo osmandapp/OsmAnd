@@ -55,6 +55,9 @@ public class City extends MapObject {
 		this.type = type;
 	}
 	
+	public boolean isEmptyWithStreets(){
+		return streets.isEmpty();
+	}
 	
 	public Street registerStreet(String street){
 		if(!streets.containsKey(street.toLowerCase())){
