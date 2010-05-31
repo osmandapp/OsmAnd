@@ -33,4 +33,6 @@
 <string name="search_activity">search</string>
 <color name="color_white">#FFFFFF</color>
 <color name="color_red">#FF0000</color>
+<string name="searchpoi_activity">searchpoi_activity</string>
+<string name="search_POI_level_btn">Find more</string>
 </resources>

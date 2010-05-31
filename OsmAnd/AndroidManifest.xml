@@ -14,9 +14,11 @@
 		</activity>
 		<activity android:name=".activities.SettingsActivity"
 			android:label="@string/settings_activity"></activity>
-					<activity android:name=".activities.SearchActivity"
-			android:label="@string/search_activity"></activity>
+					<activity android:label="@string/search_activity" android:name=".activities.search.SearchActivity"></activity>
 
+<activity android:name=".activities.search.SearchPOIActivity" android:label="@string/searchpoi_activity"></activity>
+<activity android:name=".activities.search.SearchPOIListActivity"></activity>
+<activity android:name=".activities.search.SearchAddress"></activity>
 </application>
 
 

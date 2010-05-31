@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	android:orientation="horizontal">
+
+	<ImageView android:id="@+id/poi_icon" android:layout_width="25px"
+		android:paddingLeft="2px" android:paddingRight="2px"
+		android:paddingTop="2px" android:layout_height="fill_parent" />
+	
+	<TextView android:id="@+id/poidistance_label"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:textSize="25px" />
+	<TextView android:id="@+id/poi_label" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:textSize="25px" />
+
+</LinearLayout>

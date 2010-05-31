@@ -28,6 +28,7 @@ import com.osmand.LogUtil;
 import com.osmand.ProgressDialogImplementation;
 import com.osmand.R;
 import com.osmand.ResourceManager;
+import com.osmand.activities.search.SearchActivity;
 
 public class MainMenuActivity extends Activity {
 
@@ -126,11 +127,9 @@ public class MainMenuActivity extends Activity {
 		searchButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Bundle bundle = new Bundle();
-				bundle.putString(SearchActivity.ANENITY_TYPE, null);
 				final Intent search = new Intent(MainMenuActivity.this,
 						SearchActivity.class);
-				search.putExtras(bundle);
+//				search.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 				startActivity(search);
 			}
 		});
