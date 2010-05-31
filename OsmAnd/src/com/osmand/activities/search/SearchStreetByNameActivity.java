@@ -25,10 +25,10 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	}
 	
 	@Override
-	public List<Street> getObjects() {
+	public List<Street> getObjects(String filter) {
 		List<Street> l = new ArrayList<Street>();
 		if(city != null){
-			region.fillWithSuggestedStreets(city, "", l);
+			region.fillWithSuggestedStreets(city, filter, l);
 		}
 		return l;
 	}

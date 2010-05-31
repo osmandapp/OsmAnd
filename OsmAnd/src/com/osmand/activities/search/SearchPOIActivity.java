@@ -129,8 +129,11 @@ public class SearchPOIActivity extends ListActivity {
 		
 
 		public View getView(int position, View convertView, ViewGroup parent) {
-			LayoutInflater inflater = getLayoutInflater();
-			View row = inflater.inflate(R.layout.searchpoi_list, parent, false);
+			View row = convertView;
+			if (row == null) {
+				LayoutInflater inflater = getLayoutInflater();
+				row = inflater.inflate(R.layout.searchpoi_list, parent, false);
+			}
 			TextView label = (TextView) row.findViewById(R.id.poi_label);
 			TextView distanceLabel = (TextView) row.findViewById(R.id.poidistance_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.poi_icon);

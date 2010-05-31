@@ -12,9 +12,11 @@ import com.osmand.OsmandSettings;
 import com.osmand.R;
 import com.osmand.RegionAddressRepository;
 import com.osmand.ResourceManager;
+import com.osmand.activities.MapActivity;
 import com.osmand.data.Building;
 import com.osmand.data.City;
 import com.osmand.data.Street;
+import com.osmand.osm.LatLon;
 
 public class SearchAddressActivity extends Activity {
 
@@ -66,6 +68,29 @@ public class SearchAddressActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				startActivity(new Intent(SearchAddressActivity.this, SearchBuildingByNameActivity.class));
+			}
+		});
+		showOnMap.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				LatLon l = null;
+				int zoom = 12;
+				if (building != null) {
+					l = building.getLocation();
+					zoom = 16;
+				} else if (street != null) {
+					l = street.getLocation();
+					zoom = 14;
+				} else if (city != null) {
+					l = city.getLocation();
+					zoom = 12;
+				}
+				if (l != null) {
+					OsmandSettings.setLastKnownMapLocation(SearchAddressActivity.this, l.getLatitude(), l.getLongitude());
+					OsmandSettings.setLastKnownMapZoom(SearchAddressActivity.this, zoom);
+					startActivity(new Intent(SearchAddressActivity.this, MapActivity.class));
+				}
+
 			}
 		});
 		findViewById(R.id.ResetBuilding).setOnClickListener(new View.OnClickListener(){
@@ -151,6 +176,9 @@ public class SearchAddressActivity extends Activity {
 			city = region.getCityById(OsmandSettings.getLastSearchedCity(this));
 			if(city != null){
 				street = region.getStreetByName(city, OsmandSettings.getLastSearchedStreet(this));
+				if(street != null){
+					building = region.getBuildingByName(street, OsmandSettings.getLastSearchedBuilding(this));
+				}
 			}
 		}
 		

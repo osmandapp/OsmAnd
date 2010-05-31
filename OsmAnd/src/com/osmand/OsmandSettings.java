@@ -121,6 +121,7 @@ public class OsmandSettings {
 	public static final String LAST_SEARCHED_REGION = "last_searched_region";
 	public static final String LAST_SEARCHED_CITY = "last_searched_city";
 	public static final String LAST_SEARCHED_STREET = "last_searched_street";
+	public static final String LAST_SEARCHED_BUILDING = "last_searched_building";
 	
 	public static String getLastSearchedRegion(Context ctx){
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
@@ -150,6 +151,16 @@ public class OsmandSettings {
 	public static boolean setLastSearchedStreet(Context ctx, String street){
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		return prefs.edit().putString(LAST_SEARCHED_STREET, street).commit();
+	}
+	
+	public static String getLastSearchedBuilding(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getString(LAST_SEARCHED_BUILDING, "");
+	}
+	
+	public static boolean setLastSearchedBuilding(Context ctx, String building){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putString(LAST_SEARCHED_BUILDING, building).commit();
 	}
 
 	

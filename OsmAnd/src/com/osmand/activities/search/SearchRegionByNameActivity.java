@@ -12,7 +12,7 @@ import com.osmand.ResourceManager;
 public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<RegionAddressRepository> {
 	
 	@Override
-	public List<RegionAddressRepository> getObjects() {
+	public List<RegionAddressRepository> getObjects(String filter) {
 		return new ArrayList<RegionAddressRepository>(ResourceManager.getResourceManager().getAddressRepositories());
 	}
 	
