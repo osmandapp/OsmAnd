@@ -173,8 +173,10 @@ public class ResourceManager {
 		if (file.exists() && file.canRead()) {
 			for (File f : file.listFiles()) {
 				if (f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)) {
-					// TODO fill in address index
-					
+					RegionAddressRepository repository = new RegionAddressRepository();
+					progress.startTask("Indexing address" + f.getName(), -1);
+					repository.initialize(progress, f);
+					addressMap.put(repository.getName(), repository);
 				}
 			}
 		}

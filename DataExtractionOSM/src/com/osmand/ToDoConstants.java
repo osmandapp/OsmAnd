@@ -25,6 +25,15 @@ public class ToDoConstants {
 //   16. Support open street bugs api.
 //   20. Implement save track/route to gpx (?)
 	
+	// TODO search story : 
+	// 1) Implement loading villages when user types more than 2 symbols
+	// 2) Find intersection of streets
+	// 3) Shows progress dialog (?)
+	// 4) Implement finding buildings
+	// 5) Show on map
+	// 6) Show street on map
+	// 7) Show distance to the village (to distinguish)
+	
 	// FIXME Bugs Android :
 	// 1. When firstly run osmand navigation (from notification bar) show map & go to menu shows desktop.
 	//      No chance to close application 

@@ -2,6 +2,7 @@ package com.osmand.activities.search;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -34,12 +35,40 @@ public class SearchAddressActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.search_address);
 		
-		 showOnMap = (Button) findViewById(R.id.ShowOnMap);
-		 streetButton = (Button) findViewById(R.id.StreetButton);
-		 cityButton = (Button) findViewById(R.id.CityButton);
-		 countryButton = (Button) findViewById(R.id.CountryButton);
-		 buildingButton = (Button) findViewById(R.id.BuildingButton);
-		 findViewById(R.id.ResetBuilding).setOnClickListener(new View.OnClickListener(){
+		showOnMap = (Button) findViewById(R.id.ShowOnMap);
+		streetButton = (Button) findViewById(R.id.StreetButton);
+		cityButton = (Button) findViewById(R.id.CityButton);
+		countryButton = (Button) findViewById(R.id.CountryButton);
+		buildingButton = (Button) findViewById(R.id.BuildingButton);
+		attachListeners(); 
+	}
+	
+	private void attachListeners() {
+		countryButton.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(SearchAddressActivity.this, SearchRegionByNameActivity.class));
+			}
+		});
+		cityButton.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(SearchAddressActivity.this, SearchCityByNameActivity.class));
+			}
+		});
+		streetButton.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(SearchAddressActivity.this, SearchStreetByNameActivity.class));
+			}
+		});
+		buildingButton.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(SearchAddressActivity.this, SearchBuildingByNameActivity.class));
+			}
+		});
+		findViewById(R.id.ResetBuilding).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				building = null;
@@ -73,8 +102,9 @@ public class SearchAddressActivity extends Activity {
 					updateUI();
 				}
 		 });
+		
 	}
-	
+
 	protected void updateUI(){
 		findViewById(R.id.ResetCountry).setEnabled(region != null);
 		if(region == null){

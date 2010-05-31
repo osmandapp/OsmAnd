@@ -127,9 +127,7 @@ public class MainMenuActivity extends Activity {
 		searchButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent search = new Intent(MainMenuActivity.this,
-						SearchActivity.class);
-//				search.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+				final Intent search = new Intent(MainMenuActivity.this, SearchActivity.class);
 				startActivity(search);
 			}
 		});
