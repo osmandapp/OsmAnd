@@ -3,24 +3,27 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent" android:orientation="vertical">
+  
+   
 <TextView android:text="Select city or street or building" android:id="@+id/TextView" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center_horizontal"
 		  android:layout_marginTop = "5dp">
 </TextView>
+<ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content">
 <TableLayout android:id="@+id/TableLayout" android:stretchColumns="1" android:layout_width="fill_parent" android:layout_height="wrap_content">
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp">
 <TextView android:text="Region" android:id="@+id/TextView">
 </TextView>
 <Button android:id="@+id/CountryButton" android:text="@string/ChooseCountry">
 </Button>
-<ImageButton android:id="@+id/ResetCountry" android:background="@drawable/icon">
+<ImageButton android:id="@+id/ResetCountry" android:background="@drawable/icon"  android:layout_marginRight = "5dp">
 </ImageButton>
 </TableRow>
-<TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp">
+<TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp" >
 <TextView android:text="City" android:id="@+id/TextView">
 </TextView>
 <Button android:id="@+id/CityButton" android:text="@string/choose_city">
 </Button>
-<ImageButton android:id="@+id/ResetCity" android:background="@drawable/icon">
+<ImageButton android:id="@+id/ResetCity" android:background="@drawable/icon"  android:layout_marginRight = "5dp">
 </ImageButton>
 </TableRow>
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp">
@@ -28,7 +31,7 @@
 </TextView>
 <Button android:id="@+id/StreetButton" android:text="@string/choose_street">
 </Button>
-<ImageButton android:id="@+id/ResetStreet" android:background="@drawable/icon">
+<ImageButton android:id="@+id/ResetStreet" android:background="@drawable/icon"  android:layout_marginRight = "5dp">
 </ImageButton>
 </TableRow>
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp">
@@ -36,14 +39,15 @@
 </TextView>
 <Button android:id="@+id/BuildingButton" android:text="@string/choose_building">
 </Button>
-<ImageButton android:id="@+id/ResetBuilding" android:background="@drawable/icon">
+<ImageButton android:id="@+id/ResetBuilding" android:background="@drawable/icon" android:layout_marginRight = "5dp">
 </ImageButton>
 </TableRow>
 </TableLayout> 
-  
+ </ScrollView> 
 <LinearLayout  android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:layout_height="fill_parent"  android:orientation="vertical"
 					android:gravity="right|bottom">
 <Button android:text="Show on map" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ShowOnMap">
 </Button>
 </LinearLayout>
+
 </LinearLayout>

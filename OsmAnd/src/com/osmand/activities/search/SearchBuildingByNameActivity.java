@@ -10,32 +10,37 @@ import com.osmand.OsmandSettings;
 import com.osmand.RegionAddressRepository;
 import com.osmand.ResourceManager;
 import com.osmand.data.City;
+import com.osmand.data.Street;
 
-public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City> {
+public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<Street> {
 	private RegionAddressRepository region;
+	private City city;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		region = ResourceManager.getResourceManager().getRegionRepository(OsmandSettings.getLastSearchedRegion(this));
+		if(region != null){
+			city = region.getCityById(OsmandSettings.getLastSearchedCity(this));
+		}
 		super.onCreate(savedInstanceState);
 	}
 	
 	@Override
-	public List<City> getObjects() {
-		List<City> l = new ArrayList<City>();
-		if(region != null){
-			region.fillWithSuggestedCities("", l, null);
+	public List<Street> getObjects() {
+		List<Street> l = new ArrayList<Street>();
+		if(city != null){
+			region.fillWithSuggestedStreets(city, "", l);
 		}
 		return l;
 	}
 	
 	@Override
-	public void updateTextView(City obj, TextView txt) {
+	public void updateTextView(Street obj, TextView txt) {
 		txt.setText(obj.getName());
 	}
 	
 	@Override
-	public void itemSelected(City obj) {
-		OsmandSettings.setLastSearchedCity(this, obj.getId());
+	public void itemSelected(Street obj) {
+		OsmandSettings.setLastSearchedStreet(this, obj.getName());
 		finish();
 		
 	}

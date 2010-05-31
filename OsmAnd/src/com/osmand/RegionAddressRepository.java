@@ -58,6 +58,10 @@ public class RegionAddressRepository {
 	}
 	
 	public City getCityById(Long id){
+		if(id == -1){
+			// do not preload cities for that case
+			return null;
+		}
 		preloadCities();
 		return cities.get(id); 
 	}
@@ -79,6 +83,25 @@ public class RegionAddressRepository {
 			}
 		}
 		return null;
+	}
+	
+	public void fillWithSuggestedStreets(City c, String name, List<Street> streetsToFill){
+		preloadStreets(c);
+		name = name.toLowerCase();
+		int ind = 0;
+		if(name.length() == 0){
+			streetsToFill.addAll(c.getStreets());
+			return;
+		}
+		for (Street s : c.getStreets()) {
+			String lowerCase = s.getName().toLowerCase();
+			if (lowerCase.startsWith(name)) {
+				streetsToFill.add(ind, s);
+				ind++;
+			} else if (lowerCase.contains(name)) {
+				streetsToFill.add(s);
+			}
+		}
 	}
 	
 	public void fillWithSuggestedCities(String name, List<City> citiesToFill, List<City> source){
@@ -139,8 +162,15 @@ public class RegionAddressRepository {
 	
 	public void preloadCities(){
 		if (cities.isEmpty()) {
-			Cursor query = db.query(IndexCityTable.getTable(), IndexConstants.generateColumnNames(IndexCityTable.values()), null, null,
-					null, null, null);
+			log.debug("Start loading cities for " +getName());
+			// TODO allow cities of all types
+			StringBuilder where = new StringBuilder();
+			where.append(IndexCityTable.CITY_TYPE.toString()).append('=').
+				  append('\'').append(CityType.valueToString(CityType.CITY)).append('\'').append(" or ").
+				  append(IndexCityTable.CITY_TYPE.toString()).append('=').
+				  append('\'').append(CityType.valueToString(CityType.TOWN)).append('\'');
+			Cursor query = db.query(IndexCityTable.getTable(), IndexConstants.generateColumnNames(IndexCityTable.values()), 
+					where.toString(), null, null, null, null);
 			if(query.moveToFirst()){
 				do {
 					CityType type = CityType.valueFromString(query.getString(IndexCityTable.CITY_TYPE.ordinal()));
@@ -160,6 +190,7 @@ public class RegionAddressRepository {
 					
 				} while(query.moveToNext());
 			}
+			log.debug("Loaded " + cities.size() + " cities");
 			query.close();
 		}
 	}
