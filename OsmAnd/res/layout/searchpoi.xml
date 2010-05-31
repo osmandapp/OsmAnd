@@ -2,10 +2,10 @@
 	<!-- This file is at /res/layout/list.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="wrap_content">
-	<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="right" android:text="@string/search_POI_level_btn" android:id="@+id/SearchPOILevelButton"></Button><ListView android:id="@android:id/list" android:layout_width="fill_parent"
-		android:layout_height="0dip" android:layout_weight="1"
-		android:stackFromBottom="true" android:transcriptMode="normal" ></ListView>
+	android:layout_height="fill_parent">
+	<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="right" android:text="@string/search_POI_level_btn" android:id="@+id/SearchPOILevelButton"></Button>
+	<ListView android:id="@android:id/list" android:layout_width="fill_parent"
+		android:layout_height="fill_parent"></ListView>
 	
 
 </LinearLayout>

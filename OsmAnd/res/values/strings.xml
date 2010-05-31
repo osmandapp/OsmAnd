@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="search_address">Search address</string>
+    <string name="choose_building">Choose building</string>
+    <string name="choose_street">Choose street</string>
+    <string name="choose_city">Choose city</string>
+    <string name="ChooseCountry">Choose country</string>
     <string name="position_on_map_descr">Choose postion on the map</string>
     <string name="position_on_map">Position on the map</string>
     <string name="map_specify_point">Specify point</string>

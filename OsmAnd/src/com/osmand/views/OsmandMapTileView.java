@@ -530,7 +530,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 	
 	public boolean isDifferenceSmallToDrag(PointF point, MotionEvent event){
-		return Math.abs(point.x - event.getX()) + Math.abs(point.y - event.getY()) <= 10;
+		return Math.abs(point.x - event.getX()) <= 8 && Math.abs(point.y - event.getY()) <= 8;
 	}
 	
 	
@@ -594,6 +594,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		PointF point = startDragging;
 		if (point != null) {
 			startDragging = null;
+			if(log.isDebugEnabled()){
+				log.debug("On long click event "+  point.x + " " + point.y);
+			}
 			for (int i = layers.size() - 1; i >= 0; i--) {
 				if (layers.get(i).onLongPressEvent(point)) {
 					return true;
@@ -608,6 +611,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		PointF point = startDragging;
 		if (point != null) {
 			startDragging = null;
+			if(log.isDebugEnabled()){
+				log.debug("On click event "+  point.x + " " + point.y);
+			}
 			for (int i = layers.size() - 1; i >= 0; i--) {
 				if (layers.get(i).onTouchEvent(point)) {
 					return;
