@@ -5,7 +5,6 @@ package com.osmand.activities.search;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -20,7 +19,6 @@ import android.widget.TextView;
 
 import com.osmand.Algoritms;
 import com.osmand.R;
-import com.osmand.data.Amenity;
 import com.osmand.data.Amenity.AmenityType;
 
 /**
@@ -31,7 +29,6 @@ public class SearchPOIListActivity extends ListActivity {
 
 
 	List<String> amenityList = new ArrayList<String>();
-	Map<AmenityType, List<Amenity>> filter;
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -55,8 +52,9 @@ public class SearchPOIListActivity extends ListActivity {
 		if (amenityType != null) {
 			Bundle bundle = new Bundle();
 			bundle.putString(SearchPOIActivity.ANENITY_TYPE, amenityList.get(position));
-			Intent newIntent = new Intent(this.getApplicationContext(), SearchPOIActivity.class);
+			Intent newIntent = new Intent(SearchPOIListActivity.this, SearchPOIActivity.class);
 			newIntent.putExtras(bundle);
+			newIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 			startActivityForResult(newIntent, 0);
 		}
 	}

@@ -3,10 +3,8 @@
  */
 package com.osmand.activities.search;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -46,6 +44,7 @@ public class SearchPOIActivity extends ListActivity {
 
 	private Button searchPOILevel;
 	private int zoom = 12;
+	private int maxCount = 500;
 
 	private AmenityType amenityType;
 
@@ -65,9 +64,11 @@ public class SearchPOIActivity extends ListActivity {
 		Bundle bundle = this.getIntent().getExtras();
 		String anemity = bundle.getString(ANENITY_TYPE);
 		if (anemity != null) {
+			ResourceManager resourceManager = ResourceManager.getResourceManager();
+			LatLon lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(this);
 			amenityType = findAmenityType(anemity);
-			createAmenityFilter(zoom);
-			amenityList = filter.get(amenityType);
+			amenityList = resourceManager.searchAmenities(amenityType, lastKnownMapLocation.getLatitude(),
+			lastKnownMapLocation.getLongitude(), zoom, maxCount);
 			if(amenityList != null) {
 				amenityAdapter = new AmenityAdapter(amenityList);
 				setListAdapter(amenityAdapter);
@@ -76,30 +77,12 @@ public class SearchPOIActivity extends ListActivity {
 	}
 
 
-
-	private void createAmenityFilter(int zoom) {
-		ResourceManager resourceManager = ResourceManager.getResourceManager();
-		filter = new TreeMap<AmenityType, List<Amenity>>();
-		LatLon lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(this);
-		List<Amenity> closestAmenities = resourceManager.searchAmenities(lastKnownMapLocation.getLatitude(),
-				lastKnownMapLocation.getLongitude(), zoom, 500);
-		MapUtils.sortListOfMapObject(closestAmenities, lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude());
-		for (Amenity n : closestAmenities) {
-			AmenityType type = n.getType();
-			if (!filter.containsKey(type)) {
-				filter.put(type, new ArrayList<Amenity>());
-			}
-			filter.get(type).add(n);
-		}
-
-	}
-
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
 		if(prefs != null ){
 			Amenity amenity = amenityList.get(position);
 			OsmandSettings.setLastKnownMapLocation(this,amenity.getLocation().getLatitude(),amenity.getLocation().getLongitude());
-			Intent newIntent = new Intent(this.getApplicationContext(), MapActivity.class);
+			Intent newIntent = new Intent(SearchPOIActivity.this, MapActivity.class);
 			startActivity(newIntent);
 		}
 	}

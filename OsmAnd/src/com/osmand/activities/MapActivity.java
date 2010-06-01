@@ -19,6 +19,7 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -144,12 +145,25 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		backToMenu.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent();
-				setResult(RESULT_OK, intent);
-				finish();
+				Intent newIntent = new Intent(MapActivity.this, MainMenuActivity.class);
+				newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(newIntent);
 			}
 		});
 	}
+    
+ 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getRepeatCount() == 0) {
+			Intent newIntent = new Intent(MapActivity.this, MainMenuActivity.class);
+			newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(newIntent);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
     
     @Override
     protected void onDestroy() {
