@@ -221,12 +221,6 @@ public class OsmBaseStorage extends DefaultHandler {
 	}
 	
 
-	
-	
-	
-
-
-	
 	public Map<Long, Entity> getRegisteredEntities() {
 		return entities;
 	}

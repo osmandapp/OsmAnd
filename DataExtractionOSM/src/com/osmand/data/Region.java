@@ -1,5 +1,6 @@
 package com.osmand.data;
 
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -27,10 +28,19 @@ public class Region extends MapObject {
 		}
 	}
 	
-	private static class CityComparator implements Comparator<City>{
+	public static class CityComparator implements Comparator<City>{
+		private final boolean en;
+		public CityComparator(boolean en){
+			this.en = en;
+		}
+		Collator collator = Collator.getInstance(); 
 		@Override
 		public int compare(City o1, City o2) {
-			return o1.getName().compareTo(o2.getName());
+			if(en){
+				return collator.compare(o1.getEnName(), o2.getEnName());
+			} else {
+				return collator.compare(o1.getName(), o2.getName());
+			}
 		}
 	}
 	
@@ -139,7 +149,7 @@ public class Region extends MapObject {
 	
 	
 	public void doDataPreparation(){
-		CityComparator comp = new CityComparator();
+		CityComparator comp = new CityComparator(false);
 		for(CityType t : cities.keySet()){
 			Collections.sort(cities.get(t), comp);
 			for(City c : cities.get(t)){

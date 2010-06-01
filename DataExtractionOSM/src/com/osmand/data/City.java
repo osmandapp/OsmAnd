@@ -1,5 +1,6 @@
 package com.osmand.data;
 
+import java.text.Collator;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
@@ -44,7 +45,7 @@ public class City extends MapObject {
 	
 	private CityType type = null;
 	// Be attentive ! Working with street names ignoring case
-	private Map<String, Street> streets = new TreeMap<String, Street>(); 
+	private Map<String, Street> streets = new TreeMap<String, Street>(Collator.getInstance()); 
 
 	public City(Node el){
 		super(el);
@@ -74,8 +75,9 @@ public class City extends MapObject {
 		streets.clear();
 	}
 	
-	public Street registerStreet(Street street){
-		String name = street.getName().toLowerCase();
+	public Street registerStreet(Street street, boolean en){
+		String name = en ? street.getEnName(): street.getName();
+		name = name.toLowerCase();
 		if(!Algoritms.isEmpty(name)){
 			if(!streets.containsKey(name)){
 				return streets.put(name, street);
@@ -88,6 +90,10 @@ public class City extends MapObject {
 			}
 		}
 		return null;
+	}
+	
+	public Street registerStreet(Street street){
+		return registerStreet(street, false);
 	}
 	
 	public Street registerBuilding(Entity e){

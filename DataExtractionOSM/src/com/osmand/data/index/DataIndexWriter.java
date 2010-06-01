@@ -67,22 +67,24 @@ public class DataIndexWriter {
         Connection conn = DriverManager.getConnection("jdbc:sqlite:"+file.getAbsolutePath());
 		try {
 			Statement stat = conn.createStatement();
-			assert IndexPoiTable.values().length == 6;
+			assert IndexPoiTable.values().length == 8;
 	        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexPoiTable.values()));
 	        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexPoiTable.values()));
 	        stat.close();
 	        
 	        PreparedStatement prep = conn.prepareStatement(
-	            IndexConstants.generatePrepareStatementToInsert(IndexPoiTable.getTable(), 6));
+	            IndexConstants.generatePrepareStatementToInsert(IndexPoiTable.getTable(), 8));
 	        conn.setAutoCommit(false);
 	        int currentCount = 0;
 			for (Amenity a : region.getAmenityManager().getAllObjects()) {
 				prep.setLong(IndexPoiTable.ID.ordinal() + 1, a.getId());
 				prep.setDouble(IndexPoiTable.LATITUDE.ordinal() + 1, a.getLocation().getLatitude());
 				prep.setDouble(IndexPoiTable.LONGITUDE.ordinal() + 1, a.getLocation().getLongitude());
+				prep.setString(IndexPoiTable.NAME_EN.ordinal() + 1, a.getEnName());
 				prep.setString(IndexPoiTable.NAME.ordinal() + 1, a.getName());
 				prep.setString(IndexPoiTable.TYPE.ordinal() + 1, AmenityType.valueToString(a.getType()));
 				prep.setString(IndexPoiTable.SUBTYPE.ordinal() + 1, a.getSubType());
+				prep.setString(IndexPoiTable.OPENING_HOURS.ordinal() + 1 , a.getOpeningHours());
 				prep.addBatch();
 				currentCount++;
 				if(currentCount >= BATCH_SIZE){
@@ -114,10 +116,10 @@ public class DataIndexWriter {
         Connection conn = DriverManager.getConnection("jdbc:sqlite:"+file.getAbsolutePath());
 		try {
 			Statement stat = conn.createStatement();
-			assert IndexCityTable.values().length == 5;
-			assert IndexBuildingTable.values().length == 5;
+			assert IndexCityTable.values().length == 6;
+			assert IndexBuildingTable.values().length == 6;
 			assert IndexStreetNodeTable.values().length == 5;
-			assert IndexStreetTable.values().length == 5;
+			assert IndexStreetTable.values().length == 6;
 			
 	        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexCityTable.values()));
 	        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexCityTable.values()));
@@ -130,11 +132,11 @@ public class DataIndexWriter {
 	        stat.close();
 	        
 	        PreparedStatement prepCity = conn.prepareStatement(
-	            IndexConstants.generatePrepareStatementToInsert(IndexCityTable.getTable(), 5));
+	            IndexConstants.generatePrepareStatementToInsert(IndexCityTable.getTable(), 6));
 	        PreparedStatement prepStreet = conn.prepareStatement(
-		            IndexConstants.generatePrepareStatementToInsert(IndexStreetTable.getTable(), 5));
+		            IndexConstants.generatePrepareStatementToInsert(IndexStreetTable.getTable(), 6));
 	        PreparedStatement prepBuilding = conn.prepareStatement(
-		            IndexConstants.generatePrepareStatementToInsert(IndexBuildingTable.getTable(), 5));
+		            IndexConstants.generatePrepareStatementToInsert(IndexBuildingTable.getTable(), 6));
 	        PreparedStatement prepStreetNode = conn.prepareStatement(
 		            IndexConstants.generatePrepareStatementToInsert(IndexStreetNodeTable.getTable(), 5));
 	        Map<PreparedStatement, Integer> count = new HashMap<PreparedStatement, Integer>();
@@ -153,6 +155,7 @@ public class DataIndexWriter {
 					prepCity.setDouble(IndexCityTable.LATITUDE.ordinal() + 1, city.getLocation().getLatitude());
 					prepCity.setDouble(IndexCityTable.LONGITUDE.ordinal() + 1, city.getLocation().getLongitude());
 					prepCity.setString(IndexCityTable.NAME.ordinal() + 1, city.getName());
+					prepCity.setString(IndexCityTable.NAME_EN.ordinal() + 1, city.getEnName());
 					prepCity.setString(IndexCityTable.CITY_TYPE.ordinal() + 1, CityType.valueToString(city.getType()));
 					addBatch(count, prepCity);
 					
@@ -161,6 +164,7 @@ public class DataIndexWriter {
 							continue;
 						}
 						prepStreet.setLong(IndexStreetTable.ID.ordinal() + 1, street.getId());
+						prepStreet.setString(IndexStreetTable.NAME_EN.ordinal() + 1, street.getEnName());
 						prepStreet.setDouble(IndexStreetTable.LATITUDE.ordinal() + 1, street.getLocation().getLatitude());
 						prepStreet.setDouble(IndexStreetTable.LONGITUDE.ordinal() + 1, street.getLocation().getLongitude());
 						prepStreet.setString(IndexStreetTable.NAME.ordinal() + 1, street.getName());
@@ -189,6 +193,7 @@ public class DataIndexWriter {
 							prepBuilding.setDouble(IndexBuildingTable.LATITUDE.ordinal() + 1, building.getLocation().getLatitude());
 							prepBuilding.setDouble(IndexBuildingTable.LONGITUDE.ordinal() + 1, building.getLocation().getLongitude());
 							prepBuilding.setString(IndexBuildingTable.NAME.ordinal() + 1, building.getName());
+							prepBuilding.setString(IndexBuildingTable.NAME_EN.ordinal() + 1, building.getEnName());
 							prepBuilding.setLong(IndexBuildingTable.STREET.ordinal() + 1, street.getId());
 							addBatch(count, prepBuilding);
 						}

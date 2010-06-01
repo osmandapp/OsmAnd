@@ -1,5 +1,7 @@
 package com.osmand.data;
 
+import java.text.Collator;
+
 import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
@@ -8,6 +10,7 @@ import com.osmand.osm.OSMSettings.OSMTagKey;
 public abstract class MapObject implements Comparable<MapObject> {
 	
 	protected String name = null;
+	protected String enName = null;
 	protected LatLon location = null;
 	protected Long id = null;
 
@@ -39,6 +42,14 @@ public abstract class MapObject implements Comparable<MapObject> {
 		return null;
 	}
 	
+	public String getName(boolean en){
+		if(en){
+			return getEnName();
+		} else {
+			return getName();
+		}
+	}
+	
 	public String getName() {
 		if (this.name != null) {
 			return this.name;
@@ -54,6 +65,14 @@ public abstract class MapObject implements Comparable<MapObject> {
 		this.name = name;
 	}
 	
+	public String getEnName() {
+		return enName;
+	}
+	
+	public void setEnName(String enName) {
+		this.enName = enName;
+	}
+	
 	public LatLon getLocation(){
 		return location;
 	}
@@ -64,7 +83,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 	
 	@Override
 	public int compareTo(MapObject o) {
-		return getName().compareTo(o.getName());
+		return Collator.getInstance().compare(getName(), o.getName());
 	}
 	
 	public void doDataPreparation() {

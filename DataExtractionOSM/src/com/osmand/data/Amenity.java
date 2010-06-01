@@ -87,12 +87,13 @@ public class Amenity extends MapObject {
 	
 	private String subType;
 	private AmenityType type;
+	private String openingHours;
 
 	public Amenity(Entity entity){
 		super(entity);
 		this.type = getType(entity);
 		this.subType = getSubType(entity);
-		
+		this.openingHours = entity.getTag(OSMTagKey.OPENING_HOURS);
 	}
 	
 	public Amenity(){
@@ -153,19 +154,27 @@ public class Amenity extends MapObject {
 		return false;
 	}
 	
-
-	public String getSimpleFormat(){
-		return Algoritms.capitalizeFirstLetterAndLowercase(getType().toString()) +
-					" : " + getSubType() + " " +getName();
+	public String getOpeningHours() {
+		return openingHours;
 	}
 	
-	public String getStringWithoutType(){
-		return getSubType() + " " +getName();
+	public void setOpeningHours(String openingHours) {
+		this.openingHours = openingHours;
+	}
+	
+
+	public String getSimpleFormat(boolean en){
+		return Algoritms.capitalizeFirstLetterAndLowercase(getType().toString()) +
+					" : " + getSubType() + " " +getName(en);
+	}
+	
+	public String getStringWithoutType(boolean en){
+		return getSubType() + " " +getName(en);
 	}
 	
 	@Override
 	public String toString() {
-		return getSimpleFormat();
+		return getSimpleFormat(false);
 	}
 	
 	

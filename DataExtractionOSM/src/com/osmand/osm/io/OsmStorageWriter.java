@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
@@ -29,6 +30,7 @@ import java.util.Map.Entry;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import com.ibm.icu.text.Transliterator;
 import com.osmand.Algoritms;
 import com.osmand.data.MapObject;
 import com.osmand.osm.Entity;
@@ -168,5 +170,15 @@ public class OsmStorageWriter {
 			writer.writeAttribute(ATTR_V, en.getValue());
 			writer.writeEndElement();
 		}
+	}
+	
+	public static void main(String[] args) {
+		
+		Transliterator inst = Transliterator.getInstance("Any-Latin;NFD;[:Nonspacing Mark:] Remove;NFC");
+		Enumeration<String> e = Transliterator.getAvailableIDs();
+		while(e.hasMoreElements()){
+			System.out.println(e.nextElement());
+		}
+		System.out.println(inst.transliterate("Привет всемь жаваыфайу ы х й к ще цуккак у ваа"));
 	}
 }
