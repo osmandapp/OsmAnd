@@ -54,7 +54,6 @@ public class SearchPOIListActivity extends ListActivity {
 			bundle.putString(SearchPOIActivity.ANENITY_TYPE, amenityList.get(position));
 			Intent newIntent = new Intent(SearchPOIListActivity.this, SearchPOIActivity.class);
 			newIntent.putExtras(bundle);
-			newIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 			startActivityForResult(newIntent, 0);
 		}
 	}

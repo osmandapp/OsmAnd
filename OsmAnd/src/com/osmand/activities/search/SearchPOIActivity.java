@@ -44,20 +44,31 @@ public class SearchPOIActivity extends ListActivity {
 
 	private Button searchPOILevel;
 	private int zoom = 12;
-	private int maxCount = 500;
+	private int maxCount = 100;
 
 	private AmenityType amenityType;
 
 	private AmenityAdapter amenityAdapter;
 
+	private LatLon lastKnownMapLocation;
+
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		setContentView(R.layout.searchpoi);
-		searchPOILevel =  (Button) findViewById(R.id.SearchPOILevelButton);
+		searchPOILevel = (Button) findViewById(R.id.SearchPOILevelButton);
 		searchPOILevel.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				ResourceManager resourceManager = ResourceManager.getResourceManager();
+				if ( zoom  > 7) {
+					--zoom;
+				}
+				amenityList = resourceManager.searchAmenities(amenityType, lastKnownMapLocation.getLatitude(), lastKnownMapLocation
+						.getLongitude(), zoom, -1);
+				if (amenityList != null) {
+					amenityAdapter.setNewModel(amenityList);
+				}
 
 			}
 		});
@@ -65,23 +76,22 @@ public class SearchPOIActivity extends ListActivity {
 		String anemity = bundle.getString(ANENITY_TYPE);
 		if (anemity != null) {
 			ResourceManager resourceManager = ResourceManager.getResourceManager();
-			LatLon lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(this);
+			lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(this);
 			amenityType = findAmenityType(anemity);
-			amenityList = resourceManager.searchAmenities(amenityType, lastKnownMapLocation.getLatitude(),
-			lastKnownMapLocation.getLongitude(), zoom, maxCount);
-			if(amenityList != null) {
+			amenityList = resourceManager.searchAmenities(amenityType, lastKnownMapLocation.getLatitude(), lastKnownMapLocation
+					.getLongitude(), zoom, maxCount);
+			if (amenityList != null) {
 				amenityAdapter = new AmenityAdapter(amenityList);
 				setListAdapter(amenityAdapter);
 			}
-		} 
+		}
 	}
-
 
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
-		if(prefs != null ){
+		if (prefs != null) {
 			Amenity amenity = amenityList.get(position);
-			OsmandSettings.setLastKnownMapLocation(this,amenity.getLocation().getLatitude(),amenity.getLocation().getLongitude());
+			OsmandSettings.setLastKnownMapLocation(this, amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude());
 			Intent newIntent = new Intent(SearchPOIActivity.this, MapActivity.class);
 			startActivity(newIntent);
 		}
@@ -101,15 +111,17 @@ public class SearchPOIActivity extends ListActivity {
 	class AmenityAdapter extends ArrayAdapter {
 		AmenityAdapter(Object list) {
 			super(SearchPOIActivity.this, R.layout.searchpoi_list, (List<?>) list);
+			this.setNotifyOnChange(false);
 		}
-		
-		@Override
-		public int getCount() {
-			int c = super.getCount();
-			return c > 20 ? 20 : c;
+
+		public void setNewModel(List<?> amenityList) {
+			((AmenityAdapter) getListAdapter()).clear();
+			for(Object obj: amenityList){
+				this.add(obj);
+			}
+			this.notifyDataSetChanged();
+			
 		}
-		
-		
 
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
@@ -130,12 +142,12 @@ public class SearchPOIActivity extends ListActivity {
 					String str = anemity.getStringWithoutType();
 					label.setText(str);
 					icon.setImageResource(R.drawable.poi);
-					distanceLabel.setText(" " +dist + " m  ");
+					distanceLabel.setText(" " + dist + " m  ");
 				}
 			}
 			return (row);
 		}
-
+		
 		private Object getModel(int position) {
 			return (((AmenityAdapter) getListAdapter()).getItem(position));
 		}

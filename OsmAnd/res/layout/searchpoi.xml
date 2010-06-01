@@ -3,7 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
-	<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="right" android:text="@string/search_POI_level_btn" android:id="@+id/SearchPOILevelButton"></Button>
+	<Button android:layout_gravity="right" android:text="@string/search_POI_level_btn" android:id="@+id/SearchPOILevelButton" android:layout_height="wrap_content" android:layout_width="fill_parent"></Button>
 	<ListView android:id="@android:id/list" android:layout_width="fill_parent"
 		android:layout_height="fill_parent"></ListView>
 	

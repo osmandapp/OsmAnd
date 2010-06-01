@@ -157,9 +157,9 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK
                 && event.getRepeatCount() == 0) {
-			Intent newIntent = new Intent(MapActivity.this, MainMenuActivity.class);
-			newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(newIntent);
+//			Intent newIntent = new Intent(MapActivity.this, MainMenuActivity.class);
+//			newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(newIntent);
             return true;
         }
         return super.onKeyDown(keyCode, event);

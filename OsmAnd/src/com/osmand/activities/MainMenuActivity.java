@@ -139,6 +139,7 @@ public class MainMenuActivity extends Activity {
 			public void onClick(View v) {
 				mNotificationManager.cancel(APP_NOTIFICATION_ID);
 				MainMenuActivity.this.finish();
+				System.exit(0);
 			}
 		});
 		
