@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.widget.Toast;
 
+import com.osmand.OsmandSettings;
 import com.osmand.ResourceManager;
 import com.osmand.data.Amenity;
 import com.osmand.osm.MapUtils;
@@ -43,7 +44,11 @@ public class POIMapLayer implements OsmandMapLayer {
 					int x = view.getRotatedMapXForPoint(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 					int y = view.getRotatedMapYForPoint(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
-						Toast.makeText(view.getContext(), n.getSimpleFormat(), Toast.LENGTH_SHORT).show();
+						String format = n.getSimpleFormat(OsmandSettings.usingEnglishNames(view.getContext()));
+						if(n.getOpeningHours() != null){
+							format += "\n Opening hours : " + n.getOpeningHours();
+						}
+						Toast.makeText(view.getContext(), format, Toast.LENGTH_SHORT).show();
 						return true;
 					}
 				}

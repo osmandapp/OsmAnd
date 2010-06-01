@@ -139,7 +139,7 @@ public class SearchPOIActivity extends ListActivity {
 					LatLon lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(SearchPOIActivity.this);
 					int dist = (int) (MapUtils.getDistance(anemity.getLocation(), lastKnownMapLocation.getLatitude(), lastKnownMapLocation
 							.getLongitude()));
-					String str = anemity.getStringWithoutType();
+					String str = anemity.getStringWithoutType(OsmandSettings.usingEnglishNames(SearchPOIActivity.this));
 					label.setText(str);
 					icon.setImageResource(R.drawable.poi);
 					distanceLabel.setText(" " + dist + " m  ");

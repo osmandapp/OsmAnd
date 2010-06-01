@@ -31,7 +31,6 @@ public class SearchAddressActivity extends Activity {
 	private City city = null;
 	private Street street = null;
 	private Building building = null;
-	private ProgressDialog dlg;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -143,7 +142,7 @@ public class SearchAddressActivity extends Activity {
 		if(city == null){
 			cityButton.setText(R.string.choose_city);
 		} else {
-			cityButton.setText(city.getName());
+			cityButton.setText(city.getName(region.useEnglishNames()));
 		}
 		cityButton.setEnabled(region != null);
 		
@@ -151,7 +150,7 @@ public class SearchAddressActivity extends Activity {
 		if(street == null){
 			streetButton.setText(R.string.choose_street);
 		} else {
-			streetButton.setText(street.getName());
+			streetButton.setText(street.getName(region.useEnglishNames()));
 		}
 		streetButton.setEnabled(city != null);
 		
@@ -159,7 +158,7 @@ public class SearchAddressActivity extends Activity {
 		if(building == null){
 			buildingButton.setText(R.string.choose_building);
 		} else {
-			buildingButton.setText(building.getName());
+			buildingButton.setText(building.getName(region.useEnglishNames()));
 		}
 		buildingButton.setEnabled(street != null);
 		showOnMap.setEnabled(building != null || city != null || street != null);
@@ -167,6 +166,9 @@ public class SearchAddressActivity extends Activity {
 	
 	public void loadData(){
 		if (region != null) {
+			if(region.useEnglishNames() != OsmandSettings.usingEnglishNames(this)){
+				region.setUseEnglishNames(OsmandSettings.usingEnglishNames(this));
+			}
 			city = region.getCityById(OsmandSettings.getLastSearchedCity(SearchAddressActivity.this));
 			if (city != null) {
 				street = region.getStreetByName(city, OsmandSettings.getLastSearchedStreet(SearchAddressActivity.this));
@@ -178,43 +180,51 @@ public class SearchAddressActivity extends Activity {
 		}		
 	}
 	
+	protected void startLoadDataInThread(String progressMsg){
+		final ProgressDialog dlg = ProgressDialog.show(this, "Loading", progressMsg, true);
+		new Thread("Loader search data") {
+			@Override
+			public void run() {
+				try {
+					loadData();
+				} finally {
+					dlg.dismiss();
+					runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							updateUI();
+						}
+					});
+				}
+			}
+		}.start();
+	}
+	
 	@Override
 	protected void onResume() {
 		super.onResume();
 		
 		region = null;
-		
 		String lastSearchedRegion = OsmandSettings.getLastSearchedRegion(SearchAddressActivity.this);
 		region = ResourceManager.getResourceManager().getRegionRepository(lastSearchedRegion);
 		String progressMsg = null;
-		// try to determine whether progress dialog & new thread needed 
-		if(!region.areCitiesPreloaded()){
-			progressMsg = "Loading cities...";
-		} else if(city == null || city.getId() != OsmandSettings.getLastSearchedCity(this)){
-			progressMsg = "Loading streets/buildings...";
+		// try to determine whether progress dialog & new thread needed
+		if (region != null) {
+			Long cityId = OsmandSettings.getLastSearchedCity(this);
+			if (!region.areCitiesPreloaded()) {
+				progressMsg = "Loading cities...";
+			} else if (cityId != -1 && region.getCityById(cityId).isEmptyWithStreets()) {
+				progressMsg = "Loading streets/buildings...";
+			} else if (OsmandSettings.usingEnglishNames(this) != region.useEnglishNames()) {
+				progressMsg = "Converting native/english names...";
+			}
 		}
 		city = null;
 		street = null;
 		building = null;
 		
 		if (progressMsg != null) {
-			dlg = ProgressDialog.show(this, "Loading", progressMsg, true);
-			new Thread("Loader search data") {
-				@Override
-				public void run() {
-					try {
-						loadData();
-					} finally {
-						dlg.dismiss();
-						runOnUiThread(new Runnable() {
-							@Override
-							public void run() {
-								updateUI();
-							}
-						});
-					}
-				}
-			}.start();
+			startLoadDataInThread(progressMsg);
 		} else {
 			loadData();
 			updateUI();
@@ -224,15 +234,16 @@ public class SearchAddressActivity extends Activity {
 	
 	@Override
 	protected void onPause() {
-		if(building == null && OsmandSettings.getLastSearchedBuilding(this).length() > 0){
-			OsmandSettings.setLastSearchedBuilding(this, "");
-		}
-		if(street == null && OsmandSettings.getLastSearchedStreet(this).length() > 0){
-			OsmandSettings.setLastSearchedStreet(this, "");
-		}
-		if(city == null && OsmandSettings.getLastSearchedCity(this) != -1){
-			OsmandSettings.setLastSearchedCity(this, -1l);
-		}
+		// Do not reset settings (cause it is not so necessary)
+//		if(building == null && OsmandSettings.getLastSearchedBuilding(this).length() > 0){
+//			OsmandSettings.setLastSearchedBuilding(this, "");
+//		}
+//		if(street == null && OsmandSettings.getLastSearchedStreet(this).length() > 0){
+//			OsmandSettings.setLastSearchedStreet(this, "");
+//		}
+//		if(city == null && OsmandSettings.getLastSearchedCity(this) != -1){
+//			OsmandSettings.setLastSearchedCity(this, -1l);
+//		}
 		super.onPause();
 	}
 	

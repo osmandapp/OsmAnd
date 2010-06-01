@@ -42,12 +42,12 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 	
 	@Override
 	public void updateTextView(Building obj, TextView txt) {
-		txt.setText(obj.getName());
+		txt.setText(obj.getName(region.useEnglishNames()));
 	}
 	
 	@Override
 	public void itemSelected(Building obj) {
-		OsmandSettings.setLastSearchedBuilding(this, obj.getName());
+		OsmandSettings.setLastSearchedBuilding(this, obj.getName(region.useEnglishNames()));
 		finish();
 		
 	}

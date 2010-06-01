@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="use_english_names_descr">Select use native or english names</string>
+    <string name="use_english_names">Use english names</string>
+    <string name="app_settings">Application settings</string>
     <string name="search_address">Search address</string>
     <string name="choose_building">Choose building</string>
     <string name="choose_street">Choose street</string>

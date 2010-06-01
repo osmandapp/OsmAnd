@@ -1,7 +1,5 @@
 package com.osmand.activities;
 
-import java.text.MessageFormat;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,7 +25,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
-import android.widget.Toast;
 import android.widget.ZoomControls;
 
 import com.osmand.LogUtil;
@@ -356,13 +353,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-    	if (item.getItemId() == R.id.map_show_location) {
-			float f = (Runtime.getRuntime().totalMemory()) / 1e6f;
-			String text = MessageFormat.format("Latitude : {0}, longitude : {1}, zoom : {2}, memory : {3}", mapView.getLatitude(), mapView
-					.getLongitude(), mapView.getZoom(), f);
-			Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-			return true;
-		} else if (item.getItemId() == R.id.map_show_settings) {
+		if (item.getItemId() == R.id.map_show_settings) {
     		final Intent settings = new Intent(MapActivity.this, SettingsActivity.class);
 			startActivity(settings);
     		return true;
@@ -386,7 +377,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     }
 
 	private void openChangeLocationDialog() {
-		NavigatePointDialog dlg = new NavigatePointDialog(this, mapView);
+		NavigatePointActivity dlg = new NavigatePointActivity(this, mapView);
 		dlg.showDialog();
 	}
 

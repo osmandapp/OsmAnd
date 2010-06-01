@@ -3,6 +3,8 @@
  */
 package com.osmand.activities.search;
 
+import com.osmand.activities.NavigatePointActivity;
+
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ public class SearchActivity extends TabActivity {
         TabHost host = getTabHost();  
         host.addTab(host.newTabSpec("Search_POI").setIndicator("Search POI").setContent(new Intent(this, SearchPOIListActivity.class)));  
         host.addTab(host.newTabSpec("Search_Address").setIndicator("Search Address").setContent(new Intent(this, SearchAddressActivity.class)));
+        host.addTab(host.newTabSpec("Search_Location").setIndicator("Search Location").setContent(new Intent(this, NavigatePointActivity.class)));
 	}
 
 }

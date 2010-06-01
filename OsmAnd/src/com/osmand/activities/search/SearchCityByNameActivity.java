@@ -38,9 +38,9 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	@Override
 	public void updateTextView(City obj, TextView txt) {
 		if(getFilter().length() > 2){
-			txt.setText(obj.getName() + " - " + MapUtils.getFormattedDistance((int) MapUtils.getDistance(obj.getLocation(), location)));
+			txt.setText(obj.getName(region.useEnglishNames()) + " - " + MapUtils.getFormattedDistance((int) MapUtils.getDistance(obj.getLocation(), location)));
 		} else {
-			txt.setText(obj.getName());
+			txt.setText(obj.getName(region.useEnglishNames()));
 		}
 	}
 	

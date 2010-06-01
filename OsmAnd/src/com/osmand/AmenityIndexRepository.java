@@ -54,8 +54,10 @@ public class AmenityIndexRepository {
 				am.setLocation(query.getDouble(IndexPoiTable.LATITUDE.ordinal()), 
 							query.getDouble(IndexPoiTable.LONGITUDE.ordinal()));
 				am.setName(query.getString(IndexPoiTable.NAME.ordinal() ));
+				am.setEnName(query.getString(IndexPoiTable.NAME_EN.ordinal()));
 				am.setType(AmenityType.fromString(query.getString(IndexPoiTable.TYPE.ordinal())));
 				am.setSubType(query.getString(IndexPoiTable.SUBTYPE.ordinal()));
+				am.setOpeningHours(query.getString(IndexPoiTable.OPENING_HOURS.ordinal()));
 				amenities.add(am);
 				if(limit != -1 && amenities.size() >= limit){
 					break;

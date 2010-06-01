@@ -12,4 +12,6 @@
 </PreferenceCategory>
 <PreferenceCategory android:title="@string/map_source"><ListPreference android:title="@string/map_tile_source" android:summary="@string/map_tile_source_descr" android:key="map_tile_sources"></ListPreference>
 </PreferenceCategory>
+<PreferenceCategory android:title="@string/app_settings"><CheckBoxPreference android:summary="@string/use_english_names_descr" android:title="@string/use_english_names" android:key="use_english_names"></CheckBoxPreference>
+</PreferenceCategory>
 </PreferenceScreen>

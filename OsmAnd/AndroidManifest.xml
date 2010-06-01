@@ -15,6 +15,7 @@
 		<activity android:label="@string/search_activity" android:name=".activities.search.SearchActivity"></activity>
 	    <activity android:name=".activities.search.SearchPOIActivity" android:label="@string/searchpoi_activity"></activity>
         <activity android:name=".activities.search.SearchPOIListActivity"></activity>
+        <activity android:name=".activities.NavigatePointActivity"></activity>
         
         <activity android:name=".activities.search.SearchAddressActivity"></activity>
         <activity android:name=".activities.search.SearchCityByNameActivity"></activity>
