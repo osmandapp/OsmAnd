@@ -54,11 +54,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 		if (this.name != null) {
 			return this.name;
 		}
-		if (id != null) {
-			return id + "";
-		} else {
-			return "";
-		}
+		return "";
 	}
 	
 	public void setName(String name) {
@@ -66,7 +62,10 @@ public abstract class MapObject implements Comparable<MapObject> {
 	}
 	
 	public String getEnName() {
-		return enName;
+		if(this.enName != null){
+			return this.enName;
+		}
+		return "";
 	}
 	
 	public void setEnName(String enName) {
