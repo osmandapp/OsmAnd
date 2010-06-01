@@ -1,6 +1,7 @@
 package com.osmand;
 
 import java.io.File;
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -59,7 +60,7 @@ public class ResourceManager {
 	private MapTileDownloader downloader = MapTileDownloader.getInstance();
 
 	// Indexes
-	private Map<String, RegionAddressRepository> addressMap = new TreeMap<String, RegionAddressRepository>();
+	private Map<String, RegionAddressRepository> addressMap = new TreeMap<String, RegionAddressRepository>(Collator.getInstance());
 	
 	protected List<AmenityIndexRepository> amenityRepositories = new ArrayList<AmenityIndexRepository>();
 	
@@ -253,8 +254,10 @@ public class ResourceManager {
 		for(AmenityIndexRepository r : amenityRepositories){
 			r.clearCache();
 		}
+		for(RegionAddressRepository r : addressMap.values()){
+			r.clearCities();
+		}
 		
-		// TODO clear addresses indexes
 		System.gc();
 	}	
 	

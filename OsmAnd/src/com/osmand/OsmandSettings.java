@@ -61,6 +61,18 @@ public class OsmandSettings {
 		return prefs.getBoolean(MAP_VIEW_3D, false);
 	}
 	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String USE_ENGLISH_NAMES = "use_english_names";
+	public static boolean usingEnglishNames(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(USE_ENGLISH_NAMES, false);
+	}
+	
+	public static boolean setUseEnglishNames(Context ctx, boolean useEnglishNames){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putBoolean(USE_ENGLISH_NAMES, useEnglishNames).commit();
+	}
+	
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String MAP_TILE_SOURCES = "map_tile_sources";

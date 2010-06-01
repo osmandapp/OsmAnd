@@ -37,12 +37,12 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	
 	@Override
 	public void updateTextView(Street obj, TextView txt) {
-		txt.setText(obj.getName());
+		txt.setText(obj.getName(region.useEnglishNames()));
 	}
 	
 	@Override
 	public void itemSelected(Street obj) {
-		OsmandSettings.setLastSearchedStreet(this, obj.getName());
+		OsmandSettings.setLastSearchedStreet(this, obj.getName(region.useEnglishNames()));
 		finish();
 		
 	}

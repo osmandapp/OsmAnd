@@ -3,10 +3,12 @@ package com.osmand;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.TreeMap;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 
@@ -15,6 +17,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.osmand.data.Building;
 import com.osmand.data.City;
+import com.osmand.data.Region;
 import com.osmand.data.Street;
 import com.osmand.data.City.CityType;
 import com.osmand.data.index.IndexConstants;
@@ -28,7 +31,9 @@ public class RegionAddressRepository {
 	private SQLiteDatabase db;
 	private String name;
 	private LinkedHashMap<Long, City> cities = new LinkedHashMap<Long, City>();
-	private TreeMap<CityType, List<City>> cityTypes = new TreeMap<CityType, List<City>>();
+	private Map<CityType, List<City>> cityTypes = new HashMap<CityType, List<City>>();
+	
+	private boolean useEnglishNames = false;
 	
 	public void initialize(final IProgress progress, File file) {
 		long start = System.currentTimeMillis();
@@ -44,6 +49,7 @@ public class RegionAddressRepository {
 	}
 	
 	public void close(){
+		clearCities();
 		if(db != null){
 			db.close();
 		}
@@ -83,11 +89,38 @@ public class RegionAddressRepository {
 			preloadBuildings(street);
 		}
 		for(Building b : street.getBuildings()){
-			if(b.getName().equals(name)){
+			String bName = useEnglishNames ? b.getEnName() : b.getName();
+			if(bName.equals(name)){
 				return b;
 			}
 		}
 		return null;
+	}
+	
+	public boolean useEnglishNames(){
+		return useEnglishNames;
+	}
+	
+	public void setUseEnglishNames(boolean useEnglishNames) {
+		this.useEnglishNames = useEnglishNames;
+		// sort streets
+		for (City c : cities.values()) {
+			if (!c.isEmptyWithStreets()) {
+				ArrayList<Street> list = new ArrayList<Street>(c.getStreets());
+				c.removeAllStreets();
+				for (Street s : list) {
+					c.registerStreet(s, useEnglishNames);
+				}
+			}
+		}
+		// sort cities
+		ArrayList<City> list = new ArrayList<City>(cities.values());
+		Collections.sort(list,  new Region.CityComparator(useEnglishNames));
+		cities.clear();
+		cityTypes.clear();
+		for(City c : list){
+			registerCity(c);
+		}
 	}
 	
 	public void fillWithSuggestedBuildings(Street street, String name, List<Building> buildingsToFill){
@@ -99,7 +132,8 @@ public class RegionAddressRepository {
 			return;
 		}
 		for (Building building : street.getBuildings()) {
-			String lowerCase = building.getName().toLowerCase();
+			String bName = useEnglishNames ? building.getEnName() : building.getName();
+			String lowerCase = bName.toLowerCase();
 			if (lowerCase.startsWith(name)) {
 				buildingsToFill.add(ind, building);
 				ind++;
@@ -118,7 +152,8 @@ public class RegionAddressRepository {
 			return;
 		}
 		for (Street s : c.getStreets()) {
-			String lowerCase = s.getName().toLowerCase();
+			String sName = useEnglishNames ? s.getEnName() : s.getName();
+			String lowerCase = sName.toLowerCase();
 			if (lowerCase.startsWith(name)) {
 				streetsToFill.add(ind, s);
 				ind++;
@@ -138,7 +173,8 @@ public class RegionAddressRepository {
 				} else {
 					name = name.toLowerCase();
 					for (City c : cityTypes.get(t)) {
-						String lowerCase = c.getName().toLowerCase();
+						String cName = useEnglishNames ? c.getEnName() : c.getName();
+						String lowerCase = cName.toLowerCase();
 						if(lowerCase.startsWith(name)){
 							citiesToFill.add(c);
 						}
@@ -151,7 +187,8 @@ public class RegionAddressRepository {
 			name = name.toLowerCase();
 			Collection<City> src = cities.values();
 			for (City c : src) {
-				String lowerCase = c.getName().toLowerCase();
+				String cName = useEnglishNames ? c.getEnName() : c.getName();
+				String lowerCase = cName.toLowerCase();
 				if (lowerCase.startsWith(name)) {
 					citiesToFill.add(ind, c);
 					ind++;
@@ -168,7 +205,7 @@ public class RegionAddressRepository {
 				  append(IndexCityTable.CITY_TYPE.toString()).append(" not in (").
 				  append('\'').append(CityType.valueToString(CityType.CITY)).append('\'').append(", ").
 				  append('\'').append(CityType.valueToString(CityType.TOWN)).append('\'').append(") and ").
-				  append(IndexCityTable.NAME.toString()).append(" LIKE '"+name+"%'");
+				  append(useEnglishNames ? IndexCityTable.NAME_EN.toString() : IndexCityTable.NAME.toString()).append(" LIKE '"+name+"%'");
 			Cursor query = db.query(IndexCityTable.getTable(), IndexConstants.generateColumnNames(IndexCityTable.values()), 
 					where.toString(), null, null, null, null);
 			if (query.moveToFirst()) {
@@ -195,6 +232,7 @@ public class RegionAddressRepository {
 					building.setLocation(query.getDouble(IndexBuildingTable.LATITUDE.ordinal()), query.getDouble(IndexBuildingTable.LONGITUDE
 							.ordinal()));
 					building.setName(query.getString(IndexBuildingTable.NAME.ordinal()));
+					building.setEnName(query.getString(IndexBuildingTable.NAME_EN.ordinal()));
 					street.registerBuilding(building);
 				} while (query.moveToNext());
 			}
@@ -215,7 +253,8 @@ public class RegionAddressRepository {
 					street.setLocation(query.getDouble(IndexStreetTable.LATITUDE.ordinal()), query.getDouble(IndexStreetTable.LONGITUDE
 							.ordinal()));
 					street.setName(query.getString(IndexStreetTable.NAME.ordinal()));
-					city.registerStreet(street);
+					street.setEnName(query.getString(IndexStreetTable.NAME_EN.ordinal()));
+					city.registerStreet(street, useEnglishNames);
 				} while (query.moveToNext());
 			}
 			query.close();
@@ -240,6 +279,7 @@ public class RegionAddressRepository {
 			city.setLocation(query.getDouble(IndexCityTable.LATITUDE.ordinal()), query.getDouble(IndexCityTable.LONGITUDE
 					.ordinal()));
 			city.setName(query.getString(IndexCityTable.NAME.ordinal()));
+			city.setEnName(query.getString(IndexCityTable.NAME_EN.ordinal()));
 			return city;
 		}
 		return null;
