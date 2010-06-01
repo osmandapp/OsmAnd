@@ -57,6 +57,10 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 		});
 	}
 	
+	public boolean isFilterableByDefault(){
+		return false;
+	}
+	
 	public Editable getFilter(){
 		return searchText.getText();
 	}
@@ -65,14 +69,20 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 		runOnUiThread(new Runnable(){
 			@Override
 			public void run() {
+				((NamesAdapter)getListAdapter()).setNotifyOnChange(false);
 				for(T o : objects){
 					((NamesAdapter)getListAdapter()).add(o);
 				}
+				((NamesAdapter)getListAdapter()).notifyDataSetChanged();
 			}
 		});
 	}
 	
 	public void setText(final String filter) {
+		if(isFilterableByDefault()){
+			((NamesAdapter) getListAdapter()).getFilter().filter(filter);
+			return;
+		}
 		((NamesAdapter) getListAdapter()).clear();
 
 		if(handlerToLoop == null){

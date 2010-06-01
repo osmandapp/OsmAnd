@@ -4,7 +4,6 @@
 package com.osmand.activities.search;
 
 import java.util.List;
-import java.util.Map;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -38,13 +37,12 @@ public class SearchPOIActivity extends ListActivity {
 
 	public static final String ANENITY_TYPE = "amenity_type";
 
-	Map<AmenityType, List<Amenity>> filter;
-
 	private List<Amenity> amenityList;
 
 	private Button searchPOILevel;
-	private int zoom = 12;
-	private int maxCount = 100;
+	private final static int maxCount = 100;
+	private final static int finalZoom = 8;
+	private int zoom = 13;
 
 	private AmenityType amenityType;
 
@@ -61,14 +59,16 @@ public class SearchPOIActivity extends ListActivity {
 			@Override
 			public void onClick(View v) {
 				ResourceManager resourceManager = ResourceManager.getResourceManager();
-				if ( zoom  > 7) {
+				if ( zoom  > finalZoom) {
 					--zoom;
 				}
 				amenityList = resourceManager.searchAmenities(amenityType, lastKnownMapLocation.getLatitude(), lastKnownMapLocation
 						.getLongitude(), zoom, -1);
 				if (amenityList != null) {
+					MapUtils.sortListOfMapObject(amenityList, lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude());
 					amenityAdapter.setNewModel(amenityList);
 				}
+				searchPOILevel.setEnabled(zoom > finalZoom);
 
 			}
 		});
@@ -80,7 +80,9 @@ public class SearchPOIActivity extends ListActivity {
 			amenityType = findAmenityType(anemity);
 			amenityList = resourceManager.searchAmenities(amenityType, lastKnownMapLocation.getLatitude(), lastKnownMapLocation
 					.getLongitude(), zoom, maxCount);
+			
 			if (amenityList != null) {
+				MapUtils.sortListOfMapObject(amenityList, lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude());
 				amenityAdapter = new AmenityAdapter(amenityList);
 				setListAdapter(amenityAdapter);
 			}
@@ -115,6 +117,7 @@ public class SearchPOIActivity extends ListActivity {
 		}
 
 		public void setNewModel(List<?> amenityList) {
+			setNotifyOnChange(false);
 			((AmenityAdapter) getListAdapter()).clear();
 			for(Object obj: amenityList){
 				this.add(obj);

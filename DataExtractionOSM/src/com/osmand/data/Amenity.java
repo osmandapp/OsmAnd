@@ -165,11 +165,15 @@ public class Amenity extends MapObject {
 
 	public String getSimpleFormat(boolean en){
 		return Algoritms.capitalizeFirstLetterAndLowercase(getType().toString()) +
-					" : " + getSubType() + " " +getName(en);
+					" : " + getStringWithoutType(en);
 	}
 	
 	public String getStringWithoutType(boolean en){
-		return getSubType() + " " +getName(en);
+		String n = getName(en);
+		if(n.length() == 0){
+			return getSubType();
+		}
+		return getSubType() + " " + n;
 	}
 	
 	@Override
