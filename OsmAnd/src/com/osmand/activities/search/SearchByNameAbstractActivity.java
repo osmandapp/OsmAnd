@@ -4,6 +4,9 @@ import java.util.List;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -20,6 +23,7 @@ import com.osmand.R;
 public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 
 	private EditText searchText;
+	private Handler handlerToLoop;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +60,36 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 	public Editable getFilter(){
 		return searchText.getText();
 	}
-	public void setText(String filter){
-		((NamesAdapter)getListAdapter()).clear();
-		for(T o : getObjects(filter)){
-			((NamesAdapter)getListAdapter()).add(o);
+	
+	protected void updateUIList(final List<T> objects){
+		runOnUiThread(new Runnable(){
+			@Override
+			public void run() {
+				for(T o : objects){
+					((NamesAdapter)getListAdapter()).add(o);
+				}
+			}
+		});
+	}
+	
+	public void setText(final String filter) {
+		((NamesAdapter) getListAdapter()).clear();
+
+		if(handlerToLoop == null){
+			return;
 		}
+		handlerToLoop.removeMessages(1);
+		Message msg = Message.obtain(handlerToLoop, new Runnable() {
+			@Override
+			public void run() {
+				List<T> loadedObjects = getObjects(filter);
+				if(!handlerToLoop.hasMessages(1)){
+					updateUIList(loadedObjects);
+				}
+			}
+		});
+		msg.what = 1;
+		handlerToLoop.sendMessageDelayed(msg, 150);
 	}
 
 	public abstract List<T> getObjects(String filter);
@@ -74,6 +103,40 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		T repo = (T) getListAdapter().getItem(position);
 		itemSelected(repo);
+	}
+	
+	@Override
+	protected void onResume() {
+		synchronized (this) {
+			if (handlerToLoop == null) {
+				new Thread("Filter data") {
+					@Override
+					public void run() {
+						Looper.prepare();
+						handlerToLoop = new Handler();
+						Looper.loop();
+					}
+				}.start();
+			}
+			
+		}
+		super.onResume();
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		synchronized (this) {
+			if(handlerToLoop != null){
+				handlerToLoop.post(new Runnable(){
+					@Override
+					public void run() {
+						Looper.myLooper().quit();
+					}
+				});
+				handlerToLoop = null;
+			}
+		}
 	}
 	
 

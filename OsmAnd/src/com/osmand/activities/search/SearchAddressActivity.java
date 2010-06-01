@@ -188,7 +188,7 @@ public class SearchAddressActivity extends Activity {
 		region = ResourceManager.getResourceManager().getRegionRepository(lastSearchedRegion);
 		String progressMsg = null;
 		// try to determine whether progress dialog & new thread needed 
-		if(region.areCitiesPreloaded()){
+		if(!region.areCitiesPreloaded()){
 			progressMsg = "Loading cities...";
 		} else if(city == null || city.getId() != OsmandSettings.getLastSearchedCity(this)){
 			progressMsg = "Loading streets/buildings...";
