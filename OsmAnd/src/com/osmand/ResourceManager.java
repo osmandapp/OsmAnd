@@ -16,6 +16,7 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 
 import com.osmand.data.Amenity;
+import com.osmand.data.Amenity.AmenityType;
 import com.osmand.data.index.IndexConstants;
 import com.osmand.data.preparation.MapTileDownloader;
 import com.osmand.data.preparation.MapTileDownloader.DownloadRequest;
@@ -182,8 +183,9 @@ public class ResourceManager {
 		}
 	}
 	
-	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
-	public List<Amenity> searchAmenities(double latitude, double longitude, int zoom, int limit) {
+	// //////////////////////////////////////////// Working with amenities
+	// ////////////////////////////////////////////////
+	public List<Amenity> searchAmenities(AmenityType type, double latitude, double longitude, int zoom, int limit) {
 		double tileNumberX = Math.floor(MapUtils.getTileNumberX(zoom, longitude));
 		double tileNumberY = Math.floor(MapUtils.getTileNumberY(zoom, latitude));
 		double topLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY);
@@ -191,14 +193,14 @@ public class ResourceManager {
 		double leftLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX);
 		double rightLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX + 1);
 		List<Amenity> amenities = new ArrayList<Amenity>();
-		for(AmenityIndexRepository index : amenityRepositories){
-			if(index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)){
-				if(!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, amenities)){
-					index.searchAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, limit, null, amenities);
+		for (AmenityIndexRepository index : amenityRepositories) {
+			if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
+				if (!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, amenities)) {
+					index.searchAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, limit, type, amenities);
 				}
 			}
 		}
-		
+
 		return amenities;
 	}
 	

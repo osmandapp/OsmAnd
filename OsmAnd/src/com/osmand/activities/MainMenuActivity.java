@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
@@ -144,6 +145,16 @@ public class MainMenuActivity extends Activity {
 		startApplication();
 	}
 	
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_SEARCH
+                && event.getRepeatCount() == 0) {
+			final Intent search = new Intent(MainMenuActivity.this, SearchActivity.class);
+			startActivity(search);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 	
 	private class DefaultExceptionHandler implements UncaughtExceptionHandler {
 		

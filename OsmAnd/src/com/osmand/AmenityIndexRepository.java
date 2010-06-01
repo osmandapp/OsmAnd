@@ -42,7 +42,7 @@ public class AmenityIndexRepository {
 		long now = System.currentTimeMillis();
 		String squery = "? < latitude AND latitude < ? AND ? < longitude AND longitude < ?";
 		if(type != null){
-			squery += " AND type = " + AmenityType.valueToString(type);
+			squery += " AND type = " + "'" +AmenityType.valueToString(type)+ "'";
 		}
 		Cursor query = db.query(IndexPoiTable.getTable(), columns, squery, 
 				new String[]{Double.toString(bottomLatitude), 

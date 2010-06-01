@@ -9,7 +9,7 @@
 	
 	<TextView android:id="@+id/poidistance_label"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:textSize="25px" />
+		android:textSize="25px" android:maxWidth="100px" android:minWidth="100px"/>
 	<TextView android:id="@+id/poi_label" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:textSize="25px" />
 
