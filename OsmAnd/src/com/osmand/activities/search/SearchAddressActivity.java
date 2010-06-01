@@ -2,6 +2,7 @@ package com.osmand.activities.search;
 
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +31,7 @@ public class SearchAddressActivity extends Activity {
 	private City city = null;
 	private Street street = null;
 	private Building building = null;
+	private ProgressDialog dlg;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ public class SearchAddressActivity extends Activity {
 		cityButton = (Button) findViewById(R.id.CityButton);
 		countryButton = (Button) findViewById(R.id.CountryButton);
 		buildingButton = (Button) findViewById(R.id.BuildingButton);
-		attachListeners(); 
+		attachListeners();
 	}
 	
 	private void attachListeners() {
@@ -163,26 +165,75 @@ public class SearchAddressActivity extends Activity {
 		showOnMap.setEnabled(building != null || city != null || street != null);
 	}
 	
+	public void loadData(){
+		if (region != null) {
+			city = region.getCityById(OsmandSettings.getLastSearchedCity(SearchAddressActivity.this));
+			if (city != null) {
+				street = region.getStreetByName(city, OsmandSettings.getLastSearchedStreet(SearchAddressActivity.this));
+				if (street != null) {
+					building = region.getBuildingByName(street, OsmandSettings
+							.getLastSearchedBuilding(SearchAddressActivity.this));
+				}
+			}
+		}		
+	}
+	
 	@Override
 	protected void onResume() {
 		super.onResume();
+		
 		region = null;
+		
+		String lastSearchedRegion = OsmandSettings.getLastSearchedRegion(SearchAddressActivity.this);
+		region = ResourceManager.getResourceManager().getRegionRepository(lastSearchedRegion);
+		String progressMsg = null;
+		// try to determine whether progress dialog & new thread needed 
+		if(region.areCitiesPreloaded()){
+			progressMsg = "Loading cities...";
+		} else if(city == null || city.getId() != OsmandSettings.getLastSearchedCity(this)){
+			progressMsg = "Loading streets/buildings...";
+		}
 		city = null;
 		street = null;
 		building = null;
-		String lastSearchedRegion = OsmandSettings.getLastSearchedRegion(this);
-		region = ResourceManager.getResourceManager().getRegionRepository(lastSearchedRegion);
-		if(region != null){
-			city = region.getCityById(OsmandSettings.getLastSearchedCity(this));
-			if(city != null){
-				street = region.getStreetByName(city, OsmandSettings.getLastSearchedStreet(this));
-				if(street != null){
-					building = region.getBuildingByName(street, OsmandSettings.getLastSearchedBuilding(this));
+		
+		if (progressMsg != null) {
+			dlg = ProgressDialog.show(this, "Loading", progressMsg, true);
+			new Thread("Loader search data") {
+				@Override
+				public void run() {
+					try {
+						loadData();
+					} finally {
+						dlg.dismiss();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								updateUI();
+							}
+						});
+					}
 				}
-			}
+			}.start();
+		} else {
+			loadData();
+			updateUI();
 		}
 		
-		updateUI();
+	}
+	
+	@Override
+	protected void onPause() {
+		if(building == null && OsmandSettings.getLastSearchedBuilding(this).length() > 0){
+			OsmandSettings.setLastSearchedBuilding(this, "");
+		}
+		if(street == null && OsmandSettings.getLastSearchedStreet(this).length() > 0){
+			OsmandSettings.setLastSearchedStreet(this, "");
+		}
+		if(city == null && OsmandSettings.getLastSearchedCity(this) != -1){
+			OsmandSettings.setLastSearchedCity(this, -1l);
+		}
+		super.onPause();
 	}
 	
 

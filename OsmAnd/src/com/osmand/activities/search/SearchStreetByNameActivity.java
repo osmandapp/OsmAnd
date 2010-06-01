@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.osmand.OsmandSettings;
+import com.osmand.R;
 import com.osmand.RegionAddressRepository;
 import com.osmand.ResourceManager;
 import com.osmand.data.City;
@@ -22,6 +23,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 			city = region.getCityById(OsmandSettings.getLastSearchedCity(this));
 		}
 		super.onCreate(savedInstanceState);
+		((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_street);
 	}
 	
 	@Override

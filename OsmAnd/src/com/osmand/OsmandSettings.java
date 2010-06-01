@@ -122,6 +122,7 @@ public class OsmandSettings {
 	public static final String LAST_SEARCHED_CITY = "last_searched_city";
 	public static final String LAST_SEARCHED_STREET = "last_searched_street";
 	public static final String LAST_SEARCHED_BUILDING = "last_searched_building";
+	public static final String LAST_SEARCHED_INTERSECTED_STREET = "last_searched_intersected_street";
 	
 	public static String getLastSearchedRegion(Context ctx){
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
@@ -140,7 +141,9 @@ public class OsmandSettings {
 	
 	public static boolean setLastSearchedCity(Context ctx, Long cityId){
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putLong(LAST_SEARCHED_CITY, cityId).commit();
+		return prefs.edit().
+							putLong(LAST_SEARCHED_CITY, cityId).putString(LAST_SEARCHED_STREET, "").putString(LAST_SEARCHED_BUILDING, "").
+							commit();
 	}
 
 	public static String getLastSearchedStreet(Context ctx){
@@ -150,7 +153,7 @@ public class OsmandSettings {
 	
 	public static boolean setLastSearchedStreet(Context ctx, String street){
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putString(LAST_SEARCHED_STREET, street).commit();
+		return prefs.edit().putString(LAST_SEARCHED_STREET, street).putString(LAST_SEARCHED_BUILDING, "").commit();
 	}
 	
 	public static String getLastSearchedBuilding(Context ctx){
@@ -160,7 +163,21 @@ public class OsmandSettings {
 	
 	public static boolean setLastSearchedBuilding(Context ctx, String building){
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putString(LAST_SEARCHED_BUILDING, building).commit();
+		return prefs.edit().putString(LAST_SEARCHED_BUILDING, building).remove(LAST_SEARCHED_INTERSECTED_STREET).commit();
+	}
+	
+	
+	public static String getLastSearchedIntersectedStreet(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		if(!prefs.contains(LAST_SEARCHED_INTERSECTED_STREET)){
+			return null;
+		}
+		return prefs.getString(LAST_SEARCHED_INTERSECTED_STREET, "");
+	}
+	
+	public static boolean setLastSearchedIntersectedStreet(Context ctx, String street){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putString(LAST_SEARCHED_INTERSECTED_STREET, street).commit();
 	}
 
 	
