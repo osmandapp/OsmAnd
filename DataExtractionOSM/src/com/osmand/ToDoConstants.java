@@ -11,6 +11,9 @@ public class ToDoConstants {
 	 */
 	public int DESCRIBE_ABOUT_AUTHORS = 8;
 
+	// TODO team : 
+	// 1. write letters (UI/strings)
+	
 	// TODO ANDROID
 //   25. POI search near to map location (show categories & type). Second cut. (implement incremental search)
 
@@ -24,14 +27,13 @@ public class ToDoConstants {
 //	  8. Enable change POI directly on map (requires OSM login)
 //   16. Support open street bugs api.
 //   20. Implement save track/route to gpx (?)
+//   24. Show the whole street on map (when it is chosen in search activity). Possibly extend that story to show layer with streets.
+//   25. Show opened/closed amenities.	
 	
 	// TODO search story : 
 	// 2) Find intersection of streets
-	// 3) Shows progress dialog (?)
-	// 6) Show street on map
-	// 8) Show message (that user should input more than 2 symbols to get all)
-	// 9) Loading cities in another thread
-	// 10. fix bug with landscape layout (search address)
+	// 9) Loading cities (data) in another thread
+	// 10) fix bug with landscape layout (search address)
 	
 	
 	// FIXME Bugs Android :
@@ -53,6 +55,7 @@ public class ToDoConstants {
 	// 6. Implement renaming/deleting street/building/city
 	// 8. Implement basic transliteration version
 	// 7. Implement saving bundle of tiles in different folder
+	// 9. Using Collator in all TreeSet/TreeMap/Comparators
 	// 1. Download tiles without using dir tiles
 	
 	

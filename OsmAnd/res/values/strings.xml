@@ -40,4 +40,8 @@
 <color name="color_red">#FF0000</color>
 <string name="searchpoi_activity">searchpoi_activity</string>
 <string name="search_POI_level_btn">Find more</string>
+<string name="incremental_search_city">Search city incrementally. In order to find villages input more than 3 first symbols.</string>
+<string name="incremental_search_street">Search street incrementally</string>
+<string name="incremental_search_building">Search building incrementally</string>
+<string name="choose_available_region">Choose region</string>
 </resources>

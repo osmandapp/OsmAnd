@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.osmand.OsmandSettings;
+import com.osmand.R;
 import com.osmand.RegionAddressRepository;
 import com.osmand.ResourceManager;
 import com.osmand.data.Building;
@@ -27,6 +28,7 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 			}
 		}
 		super.onCreate(savedInstanceState);
+		((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_building);
 	}
 	
 	@Override

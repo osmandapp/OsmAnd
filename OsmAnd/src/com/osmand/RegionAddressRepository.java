@@ -58,6 +58,10 @@ public class RegionAddressRepository {
 		cityTypes.clear();
 	}
 	
+	public boolean areCitiesPreloaded(){
+		return !cities.isEmpty();
+	}
+	
 	public City getCityById(Long id){
 		if(id == -1){
 			// do not preload cities for that case
