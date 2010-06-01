@@ -42,12 +42,23 @@
 <ImageButton android:id="@+id/ResetBuilding" android:background="@drawable/icon" android:layout_marginRight = "5dp">
 </ImageButton>
 </TableRow>
-</TableLayout> 
- </ScrollView> 
-<LinearLayout  android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:layout_height="fill_parent"  android:orientation="vertical"
-					android:gravity="right|bottom">
+<TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp" >
+<RadioGroup android:orientation="horizontal" android:layout_span="3">
+<RadioButton android:text="Building" android:id="@+id/RadioBuilding" android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
+<RadioButton android:text="Intersected street" android:id="@+id/RadioIntersStreet" android:layout_width="wrap_content" android:layout_marginLeft = "5dp" android:layout_height="wrap_content"></RadioButton>
+
+</RadioGroup>
+</TableRow>
+<TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp" >
+<LinearLayout  android:id="@+id/LinearLayout" android:layout_width="wrap_content" android:layout_height="wrap_content"  
+				android:layout_span="3"	android:gravity="right|bottom" android:layout_marginRight = "5dp" android:layout_marginTop = "10dp">
 <Button android:text="Show on map" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ShowOnMap">
 </Button>
+
 </LinearLayout>
+</TableRow>
+</TableLayout> 
+
+</ScrollView> 
 
 </LinearLayout>

@@ -16,25 +16,21 @@ public class ToDoConstants {
 	
 	// TODO ANDROID
 //   25. POI search near to map location (show categories & type). Second cut. (implement incremental search)
-
-//	  3. Revise osmand UI. Preparing new icons (revise UI 18, 2, ). Main application icon, back to location icon.
 //	 13. Save point as favorite & introduce favorite points dialog
+	
+//	  3. Revise osmand UI. Preparing new icons (revise UI 18, 2, ). Main application icon, back to location icon.
 //	 14. Show zoom level on map
 
 //   24. Implement ResourceManager, load cities/streets/buildings on Low memory (clear previous all addresses cities).
-//	  5. Search for city/streets/buildings
- 
+
+//   25. Show opened/closed amenities.
+//   27. Search intersection of streets.	
+//   26. Show the whole street on map (when it is chosen in search activity). Possibly extend that story to show layer with streets.
+	
 //	  8. Enable change POI directly on map (requires OSM login)
 //   16. Support open street bugs api.
 //   20. Implement save track/route to gpx (?)
-//   24. Show the whole street on map (when it is chosen in search activity). Possibly extend that story to show layer with streets.
-//   25. Show opened/closed amenities.	
-	
-	// TODO search story : 
-	// 2) Find intersection of streets
-	// 9) Loading cities (data) in another thread
-	// 10) fix bug with landscape layout (search address)
-	
+
 	
 	// FIXME Bugs Android :
 	// 1. When firstly run osmand navigation (from notification bar) show map & go to menu shows desktop.
@@ -44,6 +40,7 @@ public class ToDoConstants {
 	//     Call ResourceManager.close when it is needed.
 	// 8. Introduce activity search by location (unify with existing dialog)
 	// 9. When all features will be ready we can remove show location from context menu
+	// 10. Notification is gone after clear all notifications
 	
 	// Performance improvements Android :
 	// 1. Introducing one place where refreshMap will be called using postMessage mechanism (delay more than > 50 ? ms)
@@ -60,6 +57,7 @@ public class ToDoConstants {
 	
 	
 	// DONE ANDROID :
+//	  5. Search for city/streets/buildings
 //	 15. Investigate interruption of any long running operation & implement where it is needed.
 	//   ProgressDialogImplementation should support setOnCancelListener or obtain CANCEL message & 
 	//   throw InterruptedException in all methods (remaining, progress, startTask, ...) when call it.
