@@ -105,7 +105,7 @@ public class IndexConstants {
 
 	
 	public enum IndexPoiTable implements IndexColumn {
-		ID("long"), LATITUDE("double", true), LONGITUDE("double", true), NAME, TYPE, SUBTYPE;
+		ID("long"), LATITUDE("double", true), LONGITUDE("double", true), OPENING_HOURS, NAME, NAME_EN, TYPE, SUBTYPE;
 		boolean index = false;
 		String type = null;
 		private IndexPoiTable(){}
@@ -135,7 +135,7 @@ public class IndexConstants {
 		
 		
 	public enum IndexCityTable implements IndexColumn {
-		ID("long"), LATITUDE("double", true), LONGITUDE("double", true), NAME, CITY_TYPE;
+		ID("long"), LATITUDE("double", true), LONGITUDE("double", true), NAME, NAME_EN, CITY_TYPE;
 		boolean index = false;
 		String type = null;
 
@@ -171,7 +171,7 @@ public class IndexConstants {
 	}
 	
 	public enum IndexStreetTable implements IndexColumn {
-		ID("long"), LATITUDE("double", true), LONGITUDE("double", true), NAME, CITY("long", true);
+		ID("long"), LATITUDE("double", true), LONGITUDE("double", true), NAME, NAME_EN, CITY("long", true);
 		boolean index = false;
 		String type = null;
 
@@ -243,7 +243,7 @@ public class IndexConstants {
 	}
 	
 	public enum IndexBuildingTable implements IndexColumn {
-		ID("long"), LATITUDE("double"), LONGITUDE("double"), NAME, STREET("long", true);
+		ID("long"), LATITUDE("double"), LONGITUDE("double"), NAME, NAME_EN, STREET("long", true);
 		boolean index = false;
 		String type = null;
 

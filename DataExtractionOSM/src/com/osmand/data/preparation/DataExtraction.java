@@ -19,11 +19,14 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.tools.bzip2.CBZip2InputStream;
 import org.xml.sax.SAXException;
 
+import com.ibm.icu.text.Transliterator;
 import com.osmand.Algoritms;
 import com.osmand.IProgress;
 import com.osmand.data.Amenity;
+import com.osmand.data.Building;
 import com.osmand.data.City;
 import com.osmand.data.DataTileManager;
+import com.osmand.data.MapObject;
 import com.osmand.data.Region;
 import com.osmand.data.Street;
 import com.osmand.data.City.CityType;
@@ -169,6 +172,7 @@ public class DataExtraction  {
 			if (conn != null) {
 				try {
 					conn.close();
+					new File(workingDir, NODES_DB).delete();
 				} catch (SQLException e) {
 				}
 			}
@@ -301,7 +305,33 @@ public class DataExtraction  {
         }
         // 7. Call data preparation to sort cities, calculate center location, assign id to objects 
         country.doDataPreparation();
+        // 8. Transliterate names to english
+        Transliterator latin = Transliterator.getInstance("Any-Latin;NFD;[:Nonspacing Mark:] Remove;NFC");
+        if(latin != null){
+        	convertEnglishName(country, latin);
+        	for(CityType c : CityType.values() ){
+        		for(City city : country.getCitiesByType(c)){
+        			convertEnglishName(city, latin);
+        			for(Street s : city.getStreets()){
+        				convertEnglishName(s, latin);
+        				for(Building b : s.getBuildings()){
+        					convertEnglishName(b, latin);
+        				}
+        			}
+        		}
+        	}
+        	for(Amenity a : country.getAmenityManager().getAllObjects()){
+        		convertEnglishName(a, latin);
+        	}
+        }
         return country;
+	}
+	
+	private void convertEnglishName(MapObject o, Transliterator transliterator){
+		String name = o.getName();
+		if(name != null){
+			o.setEnName(transliterator.transliterate(name));
+		}
 	}
 
 

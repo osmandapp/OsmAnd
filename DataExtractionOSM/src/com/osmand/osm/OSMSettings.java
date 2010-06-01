@@ -18,6 +18,7 @@ public class OSMSettings {
 		SHOP("shop"),
 		LEISURE("leisure"), 
 		TOURISM("tourism"),
+		OPENING_HOURS("opening_hours"),
 		;
 		
 		private final String value;

@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EventObject;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import javax.swing.AbstractAction;
 import javax.swing.DefaultListCellRenderer;
@@ -73,9 +73,7 @@ import com.osmand.data.Region;
 import com.osmand.data.Street;
 import com.osmand.data.Amenity.AmenityType;
 import com.osmand.data.City.CityType;
-import com.osmand.data.index.DataIndexReader;
 import com.osmand.data.index.DataIndexWriter;
-import com.osmand.data.index.IndexConstants;
 import com.osmand.data.preparation.DataExtraction;
 import com.osmand.map.IMapLocationListener;
 import com.osmand.osm.Entity;
@@ -369,9 +367,9 @@ public class OsmExtractionUI implements IMapLocationListener {
 							builder.writeAddress();
 							msg.append(", Address index ").append("successfully created");
 						}
-						new DataIndexReader().testIndex(new File(
-								DataExtractionSettings.getSettings().getDefaultWorkingDir(), 
-								IndexConstants.ADDRESS_INDEX_DIR+region.getName()+IndexConstants.ADDRESS_INDEX_EXT));
+//						new DataIndexReader().testIndex(new File(
+//								DataExtractionSettings.getSettings().getDefaultWorkingDir(), 
+//								IndexConstants.ADDRESS_INDEX_DIR+region.getName()+IndexConstants.ADDRESS_INDEX_EXT));
 						msg.append(".");
 					    JOptionPane pane = new JOptionPane(msg);
 					    JDialog dialog = pane.createDialog(frame, "Generation data");
@@ -703,7 +701,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 			MapUtils.sortListOfMapObject(closestAmenities, newLatitude, newLongitude);
 			
 
-			Map<AmenityType, List<Amenity>> filter = new TreeMap<AmenityType, List<Amenity>>();
+			Map<AmenityType, List<Amenity>> filter = new HashMap<AmenityType, List<Amenity>>();
 			for (Amenity n : closestAmenities) {
 				AmenityType type = n.getType();
 				if (!filter.containsKey(type)) {
@@ -719,7 +717,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 				if (filter.get(type) != null) {
 					for (Amenity n : filter.get(type)) {
 						int dist = (int) (MapUtils.getDistance(n.getLocation(), newLatitude, newLongitude));
-						String str = n.getStringWithoutType() + " [" + dist + " m ]";
+						String str = n.getStringWithoutType(false) + " [" + dist + " m ]";
 						DataExtractionTreeNode node = new DataExtractionTreeNode(str, n);
 						((DefaultMutableTreeNode) amenitiesTree.getChildAt(i)).add(node);
 					}
@@ -731,7 +729,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 			for (int i = 0; i < 15 && i < closestAmenities.size(); i++) {
 				Amenity n = closestAmenities.get(i);
 				int dist = (int) (MapUtils.getDistance(n.getLocation(), newLatitude, newLongitude));
-				String str = n.getSimpleFormat() + " [" + dist + " m ]";
+				String str = n.getSimpleFormat(false) + " [" + dist + " m ]";
 				((DefaultMutableTreeNode) amenitiesTree.getChildAt(0)).add(new DataExtractionTreeNode(str, n));
 				((DefaultTreeModel)treePlaces.getModel()).nodeStructureChanged(amenitiesTree.getChildAt(0));
 			}

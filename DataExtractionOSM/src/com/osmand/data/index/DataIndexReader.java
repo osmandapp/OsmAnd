@@ -41,6 +41,7 @@ public class DataIndexReader {
 		while(set.next()){
 			City city = new City(CityType.valueFromString(set.getString(IndexCityTable.CITY_TYPE.ordinal() + 1)));
 			city.setName(set.getString(IndexCityTable.NAME.ordinal() + 1));
+			city.setEnName(set.getString(IndexCityTable.NAME_EN.ordinal() + 1));
 			city.setLocation(set.getDouble(IndexCityTable.LATITUDE.ordinal() + 1), 
 					set.getDouble(IndexCityTable.LONGITUDE.ordinal() + 1));
 			city.setId(set.getLong(IndexCityTable.ID.ordinal() + 1));
@@ -60,6 +61,7 @@ public class DataIndexReader {
 		while(set.next()){
 			Street street = new Street(city);
 			street.setName(set.getString(IndexStreetTable.NAME.ordinal() + 1));
+			street.setEnName(set.getString(IndexStreetTable.NAME_EN.ordinal() + 1));
 			street.setLocation(set.getDouble(IndexStreetTable.LATITUDE.ordinal() + 1), 
 					set.getDouble(IndexStreetTable.LONGITUDE.ordinal() + 1));
 			street.setId(set.getLong(IndexStreetTable.ID.ordinal() + 1));
@@ -78,6 +80,7 @@ public class DataIndexReader {
 		while(set.next()){
 			Building building = new Building();
 			building.setName(set.getString(IndexBuildingTable.NAME.ordinal() + 1));
+			building.setEnName(set.getString(IndexBuildingTable.NAME_EN.ordinal() + 1));
 			building.setLocation(set.getDouble(IndexBuildingTable.LATITUDE.ordinal() + 1), 
 					set.getDouble(IndexBuildingTable.LONGITUDE.ordinal() + 1));
 			building.setId(set.getLong(IndexBuildingTable.ID.ordinal() + 1));
