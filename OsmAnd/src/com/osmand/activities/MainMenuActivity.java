@@ -132,7 +132,7 @@ public class MainMenuActivity extends Activity {
 				startActivity(search);
 			}
 		});
-		
+/*		
 		exitButton = (Button) findViewById(R.id.ExitButton);
 		exitButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -140,7 +140,7 @@ public class MainMenuActivity extends Activity {
 				mNotificationManager.cancel(APP_NOTIFICATION_ID);
 				MainMenuActivity.this.finish();
 			}
-		});
+		});*/
 		
 		startApplication();
 	}
