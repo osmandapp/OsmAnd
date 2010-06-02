@@ -93,7 +93,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 			@Override
 			public void run() {
 				List<T> loadedObjects = getObjects(filter);
-				if(!handlerToLoop.hasMessages(1)){
+				if(handlerToLoop != null && !handlerToLoop.hasMessages(1)){
 					updateUIList(loadedObjects);
 				}
 			}
