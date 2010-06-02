@@ -15,6 +15,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -43,7 +44,9 @@ public class TileBundleDownloadDialog extends JDialog {
 	private JSpinner endSpinner;
 	private JButton downloadButton;
 	private JButton cancelButton;
+	private JButton specifyFolder;
 	private File tilesLocation;
+
 
 	public TileBundleDownloadDialog(Component parent, MapPanel panel){
     	super(JOptionPane.getFrameForComponent(parent), true);
@@ -104,6 +107,9 @@ public class TileBundleDownloadDialog extends JDialog {
         JPanel buttonControls = new JPanel();
         buttonControls.setLayout(new BoxLayout(buttonControls, BoxLayout.X_AXIS));
         buttonControls.add(Box.createHorizontalGlue());
+        specifyFolder = new JButton("Specify different folder");
+        buttonControls.add(specifyFolder);
+        buttonControls.add(Box.createHorizontalStrut(3));
         downloadButton = new JButton("Download tiles");
         buttonControls.add(downloadButton);
         buttonControls.add(Box.createHorizontalStrut(3));
@@ -141,6 +147,23 @@ public class TileBundleDownloadDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				downloadTiles();
+			}
+			
+		});
+		specifyFolder.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fc = new JFileChooser();
+		        fc.setDialogTitle("Choose working directory");
+		        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		        if(tilesLocation != null){
+		        	fc.setCurrentDirectory(tilesLocation);
+		        }
+		        if(fc.showOpenDialog(TileBundleDownloadDialog.this) == JFileChooser.APPROVE_OPTION && fc.getSelectedFile() != null && 
+		        		fc.getSelectedFile().isDirectory()){
+		        	tilesLocation = fc.getSelectedFile();
+		        }
 			}
 			
 		});

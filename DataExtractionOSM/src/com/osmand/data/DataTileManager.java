@@ -148,6 +148,14 @@ public class DataTileManager<T> {
 		return evTile(tileX, tileY);
 	}
 	
+	public void unregisterObject(double latitude, double longitude, T object){
+		String tile = evaluateTile(latitude, longitude);
+		if(objects.containsKey(tile)){
+			objects.get(tile).remove(object);
+		}
+		
+	}
+	
 	public String registerObject(double latitude, double longitude, T object){
 		String tile = evaluateTile(latitude, longitude);
 		if(!objects.containsKey(tile)){

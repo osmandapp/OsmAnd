@@ -61,6 +61,10 @@ public class Street extends MapObject {
 		}
 	}
 	
+	public boolean isRegisteredInCity(){
+		return city.getStreet(getName()) == this;
+	}
+	
 	@Override
 	public void setName(String name) {
 		if (name.equals(getName())) {
@@ -69,7 +73,11 @@ public class Street extends MapObject {
 		if (city.getStreet(getName()) == this) {
 			city.unregisterStreet(getName());
 			super.setName(name);
-			city.registerStreet(this);
+			Street s = city.registerStreet(this);
+			if(s != this){
+				// that case means that street unregistered
+//				city = null;
+			}
 		} else {
 			super.setName(name);
 		}
@@ -78,6 +86,10 @@ public class Street extends MapObject {
 	
 	public List<Way> getWayNodes() {
 		return wayNodes;
+	}
+	
+	public City getCity() {
+		return city;
 	}
 
 	public void doDataPreparation() {

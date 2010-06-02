@@ -137,6 +137,14 @@ public class Region extends MapObject {
 		}
 	}
 	
+	public void unregisterCity(City city){
+		if(city != null && city.getType() != null){
+			LatLon l = city.getLocation();
+			cityManager.unregisterObject(l.getLatitude(), l.getLongitude(), city);
+			cities.get(city.getType()).remove(city);
+		}
+	}
+	
 	public City registerCity(Node c){
 		City city = new City(c);
 		if(city.getType() != null && !Algoritms.isEmpty(city.getName())){
