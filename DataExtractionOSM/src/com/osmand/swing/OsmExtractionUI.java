@@ -6,6 +6,8 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -24,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -37,6 +40,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
@@ -56,6 +60,7 @@ import javax.swing.tree.DefaultTreeCellEditor;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeCellEditor;
+import javax.swing.tree.TreePath;
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.commons.logging.Log;
@@ -127,6 +132,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 	private JCheckBox normalizingStreets;
 	private TreeModelListener treeModelListener;
 	private JCheckBox loadingAllData;
+	
 		
 	
 	
@@ -144,7 +150,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 		this.region = region;
 		DefaultMutableTreeNode root = new DataExtractionTreeNode(name, region);
 		if (region != null) {
-			amenitiesTree = new DataExtractionTreeNode("Closest amenities", region);
+			amenitiesTree = new DataExtractionTreeNode("Amenities", region);
 			amenitiesTree.add(new DataExtractionTreeNode("First 15", region));
 			for (AmenityType type : AmenityType.values()) {
 				amenitiesTree.add(new DataExtractionTreeNode(Algoritms.capitalizeFirstLetterAndLowercase(type.toString()), type));
@@ -235,7 +241,15 @@ public class OsmExtractionUI implements IMapLocationListener {
 	    JMenuBar bar = new JMenuBar();
 	    fillMenuWithActions(bar);
 	    
+	    JPopupMenu popupMenu = new JPopupMenu();
+	    fillPopupMenuWithActions(popupMenu);
+	    treePlaces.add(popupMenu);
+	    treePlaces.addMouseListener(new PopupTrigger(popupMenu));
+	    
+	    
 	    frame.setJMenuBar(bar);
+	    
+	    
 	}
 	
 	public JTree createTree(Container content) {
@@ -283,18 +297,23 @@ public class OsmExtractionUI implements IMapLocationListener {
 		
 		treeModelListener = new TreeModelListener() {
 		    public void treeNodesChanged(TreeModelEvent e) {
-		        DefaultMutableTreeNode node;
-		        node = (DefaultMutableTreeNode)
-		                 (e.getTreePath().getLastPathComponent());
-		        if(node instanceof DataExtractionTreeNode){
-		        	if(((DataExtractionTreeNode) node).getModelObject() instanceof Region){
-		        		Region r = (Region) ((DataExtractionTreeNode) node).getModelObject();
-		        		r.setName(node.getUserObject().toString());
-		        	} else if(((DataExtractionTreeNode) node).getModelObject() instanceof MapObject){
-		        		MapObject r = (MapObject) ((DataExtractionTreeNode) node).getModelObject();
-		        		r.setName(node.getUserObject().toString());
-		        	}
-		        }
+				for (Object node : e.getChildren()) {
+					if (node instanceof DataExtractionTreeNode) {
+						DataExtractionTreeNode n = ((DataExtractionTreeNode) node);
+						if (n.getModelObject() instanceof MapObject) {
+							MapObject r = (MapObject) n.getModelObject();
+							String newName = n.getUserObject().toString();
+							if(!r.getName().equals(newName)){
+								r.setName(n.getUserObject().toString());
+							}
+							if (r instanceof Street && !((Street) r).isRegisteredInCity()) {
+								DefaultMutableTreeNode parent = ((DefaultMutableTreeNode) n.getParent());
+								parent.remove(n);
+								((DefaultTreeModel) treePlaces.getModel()).nodeStructureChanged(parent);
+							}
+						}
+					}
+				}
 		    }
 		    public void treeNodesInserted(TreeModelEvent e) {
 		    }
@@ -306,6 +325,8 @@ public class OsmExtractionUI implements IMapLocationListener {
 		treePlaces.getModel().addTreeModelListener(treeModelListener);
 		return treePlaces;
 	}
+	
+	
 	
 	protected void updateButtonsBar() {
 		generateDataButton.setEnabled(region != null);
@@ -380,6 +401,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 							builder.writeAddress();
 							msg.append(", Address index ").append("successfully created");
 						}
+						
 //						new DataIndexReader().testIndex(new File(
 //								DataExtractionSettings.getSettings().getDefaultWorkingDir(), 
 //								IndexConstants.ADDRESS_INDEX_DIR+region.getName()+IndexConstants.ADDRESS_INDEX_EXT));
@@ -467,6 +489,64 @@ public class OsmExtractionUI implements IMapLocationListener {
 	}
 	
 	
+	public void fillPopupMenuWithActions(JPopupMenu menu) {
+		Action delete = new AbstractAction("Delete") {
+			private static final long serialVersionUID = 7476603434847164396L;
+
+			public void actionPerformed(ActionEvent e) {
+				TreePath[] p = treePlaces.getSelectionPaths();
+				if(p != null && 
+						JOptionPane.OK_OPTION == 
+							JOptionPane.showConfirmDialog(frame, "Are you sure about deleting " +p.length + " resources ? ")){
+				for(TreePath path : treePlaces.getSelectionPaths()){
+					Object node = path.getLastPathComponent();
+					if (node instanceof DataExtractionTreeNode) {
+						DataExtractionTreeNode n = ((DataExtractionTreeNode) node);
+						if(n.getParent() instanceof DataExtractionTreeNode){
+							DataExtractionTreeNode parent = ((DataExtractionTreeNode) n.getParent());
+							boolean remove = false;
+							if (n.getModelObject() instanceof Street) {
+								((City)parent.getModelObject()).unregisterStreet(((Street)n.getModelObject()).getName());
+								remove = true;
+							} else if (n.getModelObject() instanceof Building) {
+								((Street)parent.getModelObject()).getBuildings().remove(n.getModelObject());
+								remove = true;
+							} else if (n.getModelObject() instanceof City) {
+								Region r = (Region) ((DataExtractionTreeNode)parent.getParent()).getModelObject();
+								r.unregisterCity((City) n.getModelObject());
+								remove = true;
+							} else if (n.getModelObject() instanceof Amenity) {
+								Region r = (Region) ((DataExtractionTreeNode)parent.getParent().getParent()).getModelObject();
+								Amenity am = (Amenity) n.getModelObject();
+								r.getAmenityManager().unregisterObject(am.getLocation().getLatitude(), am.getLocation().getLongitude(), am);
+								remove = true;
+							}
+							if(remove){
+								parent.remove(n);
+								((DefaultTreeModel) treePlaces.getModel()).nodeStructureChanged(parent);
+							}
+						}
+					}
+				}
+				
+				}
+			}
+		};
+		menu.add(delete);
+		Action rename= new AbstractAction("Rename") {
+			private static final long serialVersionUID = -8257594433235073767L;
+
+			public void actionPerformed(ActionEvent e) {
+				TreePath path = treePlaces.getSelectionPath();
+				if(path != null){
+					treePlaces.startEditingAtPath(path);
+				}
+			}
+		};
+		menu.add(rename);
+
+	}
+	
 	public void fillMenuWithActions(JMenuBar bar){
 		JMenu menu = new JMenu("File");
 		bar.add(menu);
@@ -501,10 +581,14 @@ public class OsmExtractionUI implements IMapLocationListener {
 			public void actionPerformed(ActionEvent e) {
 				File file = new File(OsmExtractionUI.LOG_PATH);
 				if (file != null && file.exists()) {
-					try {
-						Runtime.getRuntime().exec(new String[] { "notepad.exe", file.getAbsolutePath() }); //$NON-NLS-1$
-					} catch (IOException es) {
-						ExceptionHandler.handle("Failed to open log file ", es);
+					if (System.getProperty("os.name").startsWith("Windows")) {
+						try {
+							Runtime.getRuntime().exec(new String[] { "notepad.exe", file.getAbsolutePath() }); //$NON-NLS-1$
+						} catch (IOException es) {
+							ExceptionHandler.handle("Failed to open log file ", es);
+						}
+					} else {
+						JOptionPane.showMessageDialog(frame, "Open log file manually " + LOG_PATH);
 					}
 
 				} else {
@@ -841,6 +925,30 @@ public class OsmExtractionUI implements IMapLocationListener {
 			System.exit(0);
 		}
 	}
+	
+	private class PopupTrigger extends MouseAdapter {
+		
+		private final JPopupMenu popupMenu;
+		
+	    public PopupTrigger(JPopupMenu popupMenu) {
+			this.popupMenu = popupMenu;
+		}
+		public void mouseReleased(MouseEvent e)
+	    {
+	      if (e.isPopupTrigger())
+	      {
+	        int x = e.getX();
+	        int y = e.getY();
+	        TreePath path = treePlaces.getPathForLocation(x, y);
+	        if (path != null) {
+	        	if(!treePlaces.getSelectionModel().isPathSelected(path)){
+	        		treePlaces.setSelectionPath(path);
+	        	}
+	        	popupMenu.show(treePlaces, x, y);
+	        }
+	      }
+	    }
+	  }
 
 	
 }
