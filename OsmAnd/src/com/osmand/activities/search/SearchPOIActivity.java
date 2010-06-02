@@ -59,7 +59,7 @@ public class SearchPOIActivity extends ListActivity {
 			@Override
 			public void onClick(View v) {
 				ResourceManager resourceManager = ResourceManager.getResourceManager();
-				if ( zoom  > finalZoom) {
+				if (zoom > finalZoom) {
 					--zoom;
 				}
 				amenityList = resourceManager.searchAmenities(amenityType, lastKnownMapLocation.getLatitude(), lastKnownMapLocation
@@ -78,9 +78,14 @@ public class SearchPOIActivity extends ListActivity {
 			ResourceManager resourceManager = ResourceManager.getResourceManager();
 			lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(this);
 			amenityType = findAmenityType(anemity);
-			amenityList = resourceManager.searchAmenities(amenityType, lastKnownMapLocation.getLatitude(), lastKnownMapLocation
-					.getLongitude(), zoom, maxCount);
-			
+			if (amenityType != null) {
+				amenityList = resourceManager.searchAmenities(amenityType, lastKnownMapLocation.getLatitude(), lastKnownMapLocation
+						.getLongitude(), zoom, maxCount);
+			} else {
+				amenityList = resourceManager.searchAmenities(amenityType, lastKnownMapLocation.getLatitude(), lastKnownMapLocation
+						.getLongitude(), zoom, 15);
+			}
+
 			if (amenityList != null) {
 				MapUtils.sortListOfMapObject(amenityList, lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude());
 				amenityAdapter = new AmenityAdapter(amenityList);
@@ -119,11 +124,11 @@ public class SearchPOIActivity extends ListActivity {
 		public void setNewModel(List<?> amenityList) {
 			setNotifyOnChange(false);
 			((AmenityAdapter) getListAdapter()).clear();
-			for(Object obj: amenityList){
+			for (Object obj : amenityList) {
 				this.add(obj);
 			}
 			this.notifyDataSetChanged();
-			
+
 		}
 
 		public View getView(int position, View convertView, ViewGroup parent) {
@@ -150,7 +155,7 @@ public class SearchPOIActivity extends ListActivity {
 			}
 			return (row);
 		}
-		
+
 		private Object getModel(int position) {
 			return (((AmenityAdapter) getListAdapter()).getItem(position));
 		}
