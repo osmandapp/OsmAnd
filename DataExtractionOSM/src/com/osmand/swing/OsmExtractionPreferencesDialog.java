@@ -32,6 +32,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 	private JTextField streetDefaultSuffixes;
 
 	private JCheckBox useInternet;
+	private JCheckBox supressWarning;
 
 	public OsmExtractionPreferencesDialog(Component parent){
     	super(JOptionPane.getFrameForComponent(parent), true);
@@ -41,7 +42,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
     }
 	
 	public void showDialog(){
-		setSize(600, 220);
+		setSize(600, 250);
         double x = getParent().getBounds().getCenterX();
         double y = getParent().getBounds().getCenterY();
         setLocation((int) x - getWidth() / 2, (int) y - getHeight() / 2);
@@ -74,7 +75,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 	
 	private void createGeneralSection(JPanel root) {
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(1, 1, 5, 5));
+		panel.setLayout(new GridLayout(2, 1, 5, 5));
 		panel.setBorder(BorderFactory.createTitledBorder("General"));
 		root.add(panel);
 		
@@ -82,6 +83,11 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		useInternet.setText("Use internet to download tiles");
 		useInternet.setSelected(DataExtractionSettings.getSettings().useInternetToLoadImages());
 		panel.add(useInternet);
+		
+		supressWarning = new JCheckBox();
+		supressWarning.setText("Supress warnings for duplicated id in osm file");
+		supressWarning.setSelected(DataExtractionSettings.getSettings().isSupressWarningsForDuplicatedId());
+		panel.add(supressWarning);
 		panel.setMaximumSize(new Dimension(Short.MAX_VALUE, panel.getPreferredSize().height));
 		
 	}
@@ -163,6 +169,9 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		}
 		if(settings.useInternetToLoadImages() != useInternet.isSelected()){
 			settings.setUseInterentToLoadImages(useInternet.isSelected());
+		}
+		if(settings.isSupressWarningsForDuplicatedId() != supressWarning.isSelected()){
+			settings.setSupressWarningsForDuplicatedId	(supressWarning.isSelected());
 		}
 		
 	}

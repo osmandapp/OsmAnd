@@ -30,10 +30,9 @@ public class ToDoConstants {
 
 	
 	// FIXME Bugs Android :
-	// Investigate good transliterate 
 	// 6. Understand concept of application where to save/restore global setting. 
     //    (for example reset navigate to point, reset link map with location). It should be reset after user call exit.
-	//     Call ResourceManager.close when it is needed.
+	//     Call ResourceManager.close when it is needed (+).
 	// 10. Notification is gone after clear all notifications
 	
 	// Performance improvements Android :
@@ -41,8 +40,6 @@ public class ToDoConstants {
 
 	
 	// TODO SWING : in release 0.1
-	// 5. Implement suppress warning for duplicate id (+)
-	// 2. Configure file log & see log from file (add uncaught exception handling) (+)
 	// 6. Implement renaming/deleting street/building/city (+)
 	// 7. Implement saving bundle of tiles in different folder (+)
 	
@@ -70,4 +67,5 @@ public class ToDoConstants {
 
 	// DONE SWING
 	// 8. Implement basic transliteration version
+	// 2. Configure file log & see log from file (add uncaught exception handling)
 }
