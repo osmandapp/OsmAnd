@@ -329,7 +329,7 @@ public class DataExtraction  {
 	
 	private void convertEnglishName(MapObject o, Transliterator transliterator){
 		String name = o.getName();
-		if(name != null){
+		if(name != null && o.getEnName() == null){
 			o.setEnName(transliterator.transliterate(name));
 		}
 	}

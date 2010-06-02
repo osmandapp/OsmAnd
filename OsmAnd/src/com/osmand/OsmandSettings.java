@@ -191,6 +191,11 @@ public class OsmandSettings {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		return prefs.edit().putString(LAST_SEARCHED_INTERSECTED_STREET, street).commit();
 	}
+	
+	public static boolean removeLastSearchedIntersectedStreet(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().remove(LAST_SEARCHED_INTERSECTED_STREET).commit();
+	}
 
 	
 }

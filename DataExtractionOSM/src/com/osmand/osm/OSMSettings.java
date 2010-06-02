@@ -4,6 +4,7 @@ public class OSMSettings {
 	
 	public enum OSMTagKey {
 		NAME("name"),
+		NAME_EN("name:en"),
 		// ways
 		HIGHWAY("highway"),
 		BUILDING("building"),

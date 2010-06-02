@@ -22,6 +22,17 @@ public class Way extends Entity {
 		nodeIds.add(id);
 	}
 	
+	public void addNode(Node n){
+		if(nodeIds == null){
+			nodeIds = new ArrayList<Long>();
+		}
+		if(nodes == null){
+			nodes = new ArrayList<Node>();
+		}
+		nodeIds.add(n.getId());
+		nodes.add(n);
+	}
+	
 	public Long removeNodeByIndex(int i){
 		if(nodeIds == null){
 			return null;

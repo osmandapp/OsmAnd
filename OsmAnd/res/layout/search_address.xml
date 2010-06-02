@@ -35,7 +35,7 @@
 </ImageButton>
 </TableRow>
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp">
-<TextView android:text="Bulding" android:id="@+id/TextView">
+<TextView android:text="Bulding" android:id="@+id/BuildingText">
 </TextView>
 <Button android:id="@+id/BuildingButton" android:text="@string/choose_building">
 </Button>
@@ -43,7 +43,7 @@
 </ImageButton>
 </TableRow>
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp" >
-<RadioGroup android:orientation="horizontal" android:layout_span="3">
+<RadioGroup android:orientation="horizontal" android:layout_span="3" android:id="@+id/RadioGroup" >
 <RadioButton android:text="Building" android:id="@+id/RadioBuilding" android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
 <RadioButton android:text="Intersected street" android:id="@+id/RadioIntersStreet" android:layout_width="wrap_content" android:layout_marginLeft = "5dp" android:layout_height="wrap_content"></RadioButton>
 
