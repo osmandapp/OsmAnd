@@ -286,7 +286,7 @@ public class SearchAddressActivity extends Activity {
 			Long cityId = OsmandSettings.getLastSearchedCity(this);
 			if (!region.areCitiesPreloaded()) {
 				progressMsg = "Loading cities...";
-			} else if (cityId != -1 && region.getCityById(cityId).isEmptyWithStreets()) {
+			} else if (cityId != -1 && region.getCityById(cityId) != null && region.getCityById(cityId).isEmptyWithStreets()) {
 				progressMsg = "Loading streets/buildings...";
 			} else if (OsmandSettings.usingEnglishNames(this) != region.useEnglishNames()) {
 				progressMsg = "Converting native/english names...";

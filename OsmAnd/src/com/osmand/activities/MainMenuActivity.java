@@ -132,17 +132,30 @@ public class MainMenuActivity extends Activity {
 				startActivity(search);
 			}
 		});
-/*		
+		
+		/*
 		exitButton = (Button) findViewById(R.id.ExitButton);
 		exitButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mNotificationManager.cancel(APP_NOTIFICATION_ID);
-				MainMenuActivity.this.finish();
+				finishApplication();
 			}
-		});*/
+		}); */
 		
 		startApplication();
+	}
+	
+	protected void finishApplication(){
+		mNotificationManager.cancel(APP_NOTIFICATION_ID);
+		boolean force = false;
+		ResourceManager.getResourceManager().close();
+		applicationAlreadyStarted = false;
+		if (force) {
+			int pid = android.os.Process.myPid();
+			android.os.Process.killProcess(pid);
+		} else {
+			MainMenuActivity.this.finish();
+		}
 	}
 	
     @Override
