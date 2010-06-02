@@ -56,6 +56,7 @@ public class OsmBaseStorage extends DefaultHandler {
 	protected InputStream inputStream;
 	protected InputStream streamForProgress;
 	protected List<IOsmStorageFilter> filters = new ArrayList<IOsmStorageFilter>();
+	protected boolean supressWarnings = true;
 	
 	
 	public synchronized void parseOSM(InputStream stream, IProgress progress, InputStream streamForProgress) throws IOException, SAXException {
@@ -87,6 +88,13 @@ public class OsmBaseStorage extends DefaultHandler {
 	public synchronized void parseOSM(InputStream stream, IProgress progress) throws IOException, SAXException {
 		parseOSM(stream, progress, null);
 		
+	}
+	
+	public boolean isSupressWarnings() {
+		return supressWarnings;
+	}
+	public void setSupressWarnings(boolean supressWarnings) {
+		this.supressWarnings = supressWarnings;
 	}
 	
 	protected SAXParser saxParser;
@@ -192,8 +200,8 @@ public class OsmBaseStorage extends DefaultHandler {
 			if(currentParsedEntity != null){
 				if(acceptEntityToLoad(currentParsedEntity)){
 					Entity oldEntity = entities.put(currentParsedEntity.getId(), currentParsedEntity);
-					if(oldEntity!= null){
-						// throw new UnsupportedOperationException("Entity with id=" + oldEntity.getId() +" is duplicated in osm map");
+					if(!supressWarnings && oldEntity!= null){
+						throw new UnsupportedOperationException("Entity with id=" + oldEntity.getId() +" is duplicated in osm map");
 					}
 				} else {
 //					System.gc();

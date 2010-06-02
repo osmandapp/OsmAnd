@@ -14,12 +14,13 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import net.sf.junidecode.Junidecode;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.tools.bzip2.CBZip2InputStream;
 import org.xml.sax.SAXException;
 
-import com.ibm.icu.text.Transliterator;
 import com.osmand.Algoritms;
 import com.osmand.IProgress;
 import com.osmand.data.Amenity;
@@ -249,6 +250,7 @@ public class DataExtraction  {
 			progress.startTask("Loading file " + path, -1);
 		}
         OsmBaseStorage storage = new OsmBaseStorage();
+        storage.setSupressWarnings(DataExtractionSettings.getSettings().isSupressWarningsForDuplicatedId());
         if (addFilter != null) {
 			storage.getFilters().add(addFilter);
 		}
@@ -306,31 +308,32 @@ public class DataExtraction  {
         // 7. Call data preparation to sort cities, calculate center location, assign id to objects 
         country.doDataPreparation();
         // 8. Transliterate names to english
-        Transliterator latin = Transliterator.getInstance("Any-Latin;NFD;[:Nonspacing Mark:] Remove;NFC");
-        if(latin != null){
-        	convertEnglishName(country, latin);
-        	for(CityType c : CityType.values() ){
-        		for(City city : country.getCitiesByType(c)){
-        			convertEnglishName(city, latin);
-        			for(Street s : city.getStreets()){
-        				convertEnglishName(s, latin);
-        				for(Building b : s.getBuildings()){
-        					convertEnglishName(b, latin);
-        				}
-        			}
-        		}
-        	}
-        	for(Amenity a : country.getAmenityManager().getAllObjects()){
-        		convertEnglishName(a, latin);
-        	}
-        }
+        
+        convertEnglishName(country);
+        for (CityType c : CityType.values()) {
+        	for (City city : country.getCitiesByType(c)) {
+				convertEnglishName(city);
+				for (Street s : city.getStreets()) {
+					convertEnglishName(s);
+					for (Building b : s.getBuildings()) {
+						convertEnglishName(b);
+					}
+				}
+			}
+		}
+        for (Amenity a : country.getAmenityManager().getAllObjects()) {
+			convertEnglishName(a);
+		}
         return country;
 	}
+	// icu4j example - icu is not good in transliteration russian names
+//	Transliterator latin = Transliterator.getInstance("Any-Latin;NFD;[:Nonspacing Mark:] Remove;NFC");
 	
-	private void convertEnglishName(MapObject o, Transliterator transliterator){
+	private void convertEnglishName(MapObject o){
 		String name = o.getName();
 		if(name != null && o.getEnName() == null){
-			o.setEnName(transliterator.transliterate(name));
+			o.setEnName(Junidecode.unidecode(name));
+//			o.setEnName(transliterator.transliterate(name));
 		}
 	}
 

@@ -84,6 +84,14 @@ public class DataExtractionSettings {
 		preferences.putBoolean("use_internet", b);
 	}
 	
+	public boolean isSupressWarningsForDuplicatedId(){
+		return preferences.getBoolean("supress_duplicated_id", true);
+	}
+	
+	public void setSupressWarningsForDuplicatedId(boolean b){
+		preferences.putBoolean("supress_duplicated_id", b);
+	}
+	
 	
 	String[] SUFFIXES = new String[] {"av.", "avenue", "просп.", "пер.", "пр.","заул.", "проспект", "переул.", "бул.", "бульвар", "тракт"};
 	String[] DEFAUTL_SUFFIXES = new String[] {"str.", "street", "улица", "ул."};

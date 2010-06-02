@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.Thread.UncaughtExceptionHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -87,12 +88,25 @@ import com.osmand.swing.MapPanel.MapSelectionArea;
 
 public class OsmExtractionUI implements IMapLocationListener {
 
-	private static final Log log = LogFactory.getLog(OsmExtractionUI.class);  
+	private static final Log log = LogFactory.getLog(OsmExtractionUI.class);
+	public static final String LOG_PATH  = System.getProperty("user.home")+"/Application Data/Osmand/osmand.log";
+	public static OsmExtractionUI MAIN_APP;
 	
 	public static void main(String[] args) {
-        OsmExtractionUI ui = new OsmExtractionUI(null);
-        ui.frame.setBounds(DataExtractionSettings.getSettings().getWindowBounds());
-        ui.frame.setVisible(true);
+		// first of all config log
+		new File(LOG_PATH).getParentFile().mkdirs();
+		final UncaughtExceptionHandler defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
+		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler(){
+			@Override
+			public void uncaughtException(Thread t, Throwable e) {
+				log.error("Error in thread " + t.getName(), e);
+				defaultHandler.uncaughtException(t, e);
+			}
+		});
+		
+        MAIN_APP = new OsmExtractionUI(null);
+        MAIN_APP.frame.setBounds(DataExtractionSettings.getSettings().getWindowBounds());
+        MAIN_APP.frame.setVisible(true);
 	}
 	
 	protected City selectedCity;
@@ -113,8 +127,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 	private JCheckBox normalizingStreets;
 	private TreeModelListener treeModelListener;
 	private JCheckBox loadingAllData;
-	
-	
+		
 	
 	
 	public OsmExtractionUI(final Region r){
@@ -478,8 +491,28 @@ public class OsmExtractionUI implements IMapLocationListener {
 		bar.add(menu);
 		JMenuItem settings = new JMenuItem("Settings...");
 		menu.add(settings);
+		menu.addSeparator();
+		JMenuItem openLogFile = new JMenuItem("Open log file...");
+		menu.add(openLogFile);
 		
-		
+
+		openLogFile.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				File file = new File(OsmExtractionUI.LOG_PATH);
+				if (file != null && file.exists()) {
+					try {
+						Runtime.getRuntime().exec(new String[] { "notepad.exe", file.getAbsolutePath() }); //$NON-NLS-1$
+					} catch (IOException es) {
+						ExceptionHandler.handle("Failed to open log file ", es);
+					}
+
+				} else {
+					ExceptionHandler.handle("Log file is not found");
+				}
+			}
+		});
+
 		
 		exitMenu.addActionListener(new ActionListener(){
 			@Override
@@ -616,6 +649,10 @@ public class OsmExtractionUI implements IMapLocationListener {
         return fc;
 	}
 	
+	public JFrame getFrame() {
+		return frame;
+	}
+	
 	public void loadCountry(final File f, final IOsmStorageFilter filter){
 		try {
     		final ProgressDialog dlg = new ProgressDialog(frame, "Loading osm file");
@@ -655,7 +692,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 		} catch (InterruptedException e1) {
 			log.error("Interrupted", e1); 
 		} catch (InvocationTargetException e1) {
-			log.error("Exception during operation", e1.getCause());
+			ExceptionHandler.handle("Exception during operation", e1.getCause());
 		}
 	}
 	
@@ -689,7 +726,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 		} catch (InterruptedException e1) {
 			log.error("Interrupted", e1); 
 		} catch (InvocationTargetException e1) {
-			log.error("Exception during operation", e1.getCause());
+			ExceptionHandler.handle("Log file is not found", e1.getCause());
 		}
 	}
 	

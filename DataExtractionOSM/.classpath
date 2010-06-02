@@ -5,6 +5,6 @@
 	<classpathentry kind="lib" path="lib/bzip2-20090327.jar"/>
 	<classpathentry kind="lib" path="lib/sqlitejdbc-v056.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/icu4j-4_4_1.jar" sourcepath="C:/Download/icu4j-4_4_1-src.jar"/>
+	<classpathentry kind="lib" path="lib/junidecode-0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
