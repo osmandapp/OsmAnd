@@ -27,7 +27,6 @@ import com.osmand.data.Amenity.AmenityType;
  */
 public class SearchPOIListActivity extends ListActivity {
 
-
 	List<String> amenityList = new ArrayList<String>();
 
 	@Override
@@ -40,6 +39,7 @@ public class SearchPOIListActivity extends ListActivity {
 	}
 
 	private void createAmenityTypeList() {
+		amenityList.add(getResources().getString(R.string.Closest_Anemities));
 		for (AmenityType type : AmenityType.values()) {
 			amenityList.add(Algoritms.capitalizeFirstLetterAndLowercase(type.toString()));
 		}
@@ -48,14 +48,16 @@ public class SearchPOIListActivity extends ListActivity {
 
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		AmenityType amenityType = findAmenityType(amenityList.get(position));
+		Bundle bundle = new Bundle();
+		Intent newIntent = new Intent(SearchPOIListActivity.this, SearchPOIActivity.class);
 		// folder selected
 		if (amenityType != null) {
-			Bundle bundle = new Bundle();
 			bundle.putString(SearchPOIActivity.ANENITY_TYPE, amenityList.get(position));
-			Intent newIntent = new Intent(SearchPOIListActivity.this, SearchPOIActivity.class);
-			newIntent.putExtras(bundle);
-			startActivityForResult(newIntent, 0);
+		} else {
+			bundle.putString(SearchPOIActivity.ANENITY_TYPE, "Closest_Anenities");
 		}
+		newIntent.putExtras(bundle);
+		startActivityForResult(newIntent, 0);
 	}
 
 	private AmenityType findAmenityType(String string) {
