@@ -331,7 +331,7 @@ public class DataExtraction  {
 	
 	private void convertEnglishName(MapObject o){
 		String name = o.getName();
-		if(name != null && o.getEnName() == null){
+		if(name != null && (o.getEnName() == null || o.getEnName().isEmpty())){
 			o.setEnName(Junidecode.unidecode(name));
 //			o.setEnName(transliterator.transliterate(name));
 		}
