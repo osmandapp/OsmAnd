@@ -39,7 +39,7 @@ public class SearchPOIListActivity extends ListActivity {
 	}
 
 	private void createAmenityTypeList() {
-		amenityList.add(getResources().getString(R.string.Closest_Anemities));
+		amenityList.add(getResources().getString(R.string.Closest_Amenities));
 		for (AmenityType type : AmenityType.values()) {
 			amenityList.add(Algoritms.capitalizeFirstLetterAndLowercase(type.toString()));
 		}
@@ -52,9 +52,9 @@ public class SearchPOIListActivity extends ListActivity {
 		Intent newIntent = new Intent(SearchPOIListActivity.this, SearchPOIActivity.class);
 		// folder selected
 		if (amenityType != null) {
-			bundle.putString(SearchPOIActivity.ANENITY_TYPE, amenityList.get(position));
+			bundle.putString(SearchPOIActivity.AMENITY_TYPE, amenityList.get(position));
 		} else {
-			bundle.putString(SearchPOIActivity.ANENITY_TYPE, "Closest_Anenities");
+			bundle.putString(SearchPOIActivity.AMENITY_TYPE, "Closest_Amenities");
 		}
 		newIntent.putExtras(bundle);
 		startActivityForResult(newIntent, 0);

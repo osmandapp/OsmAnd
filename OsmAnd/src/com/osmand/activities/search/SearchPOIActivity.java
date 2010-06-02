@@ -37,7 +37,7 @@ import com.osmand.osm.MapUtils;
  */
 public class SearchPOIActivity extends ListActivity {
 
-	public static final String ANENITY_TYPE = "amenity_type";
+	public static final String AMENITY_TYPE = "amenity_type";
 
 	private List<Amenity> amenityList;
 
@@ -76,7 +76,7 @@ public class SearchPOIActivity extends ListActivity {
 		});
 
 		Bundle bundle = this.getIntent().getExtras();
-		String anemity = bundle.getString(ANENITY_TYPE);
+		String anemity = bundle.getString(AMENITY_TYPE);
 		if (anemity != null) {
 			ResourceManager resourceManager = ResourceManager.getResourceManager();
 			lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(this);
@@ -86,7 +86,7 @@ public class SearchPOIActivity extends ListActivity {
 						.getLongitude(), zoom, maxCount);
 			} else {
 				amenityList = resourceManager.searchAmenities(amenityType, lastKnownMapLocation.getLatitude(), lastKnownMapLocation
-						.getLongitude(), zoom, 15);
+						.getLongitude(), zoom, 30);
 			}
 
 			if (amenityList != null) {
@@ -104,10 +104,10 @@ public class SearchPOIActivity extends ListActivity {
 			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
 				Amenity amenity = amenityList.get(pos);
 				String format = amenity.getSimpleFormat(OsmandSettings.usingEnglishNames(v.getContext()));
-			      if(amenity.getOpeningHours() != null){
-			       format += "\n Opening hours : " + amenity.getOpeningHours();
-			      }
-			      Toast.makeText(v.getContext(), format, Toast.LENGTH_SHORT).show();
+				if (amenity.getOpeningHours() != null) {
+					format += "\nOpening hours : " + amenity.getOpeningHours();
+				}
+				Toast.makeText(v.getContext(), format, Toast.LENGTH_LONG).show();
 				return true;
 			}
 		});

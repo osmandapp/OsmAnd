@@ -49,5 +49,5 @@
 <string name="incremental_search_building">Search building incrementally</string>
 <string name="choose_available_region">Choose region</string>
 <string name="choose_intersected_street">Choose intersected street</string>
-<string name="Closest_Anemities">Closest Anemities</string>
+<string name="Closest_Amenities">Closest amenities</string>
 </resources>
