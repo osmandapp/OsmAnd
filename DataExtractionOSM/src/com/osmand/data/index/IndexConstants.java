@@ -207,7 +207,7 @@ public class IndexConstants {
 	}
 	
 	public enum IndexStreetNodeTable implements IndexColumn {
-		ID("long"), LATITUDE("double"), LONGITUDE("double"), STREET("long", true), WAY("long", true);
+		ID("long", true), LATITUDE("double"), LONGITUDE("double"), STREET("long", true), WAY("long", true);
 		boolean index = false;
 		String type = null;
 

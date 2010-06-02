@@ -26,6 +26,9 @@ public abstract class MapObject implements Comparable<MapObject> {
 		if(this.name == null){
 			this.name = e.getTag(OSMTagKey.NAME);
 		}
+		if(this.enName == null){
+			this.enName = e.getTag(OSMTagKey.NAME_EN);
+		}
 		if(this.location == null){
 			this.location = MapUtils.getCenter(e);
 		}

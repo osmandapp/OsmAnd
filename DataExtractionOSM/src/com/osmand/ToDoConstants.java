@@ -17,11 +17,9 @@ public class ToDoConstants {
 //   29. Show opened/closed amenities (in search poi).
 //	 13. Save point as favorite & introduce favorite points dialog
 	
-	
 //	  3. Revise osmand UI. Preparing new icons (revise UI 18, 2, ). Main application icon, back to location icon.
 //	 14. Show zoom level on map
 
-//   27. Search intersection of streets (+)
 
 	 // NOT in release 0.1
 //	  8. Enable change POI directly on map (requires OSM login)
@@ -32,6 +30,7 @@ public class ToDoConstants {
 
 	
 	// FIXME Bugs Android :
+	// Investigate good transliterate 
 	// 6. Understand concept of application where to save/restore global setting. 
     //    (for example reset navigate to point, reset link map with location). It should be reset after user call exit.
 	//     Call ResourceManager.close when it is needed.
@@ -52,6 +51,7 @@ public class ToDoConstants {
 	
 	
 	// DONE ANDROID :
+//  27. Search intersection of streets
 //  24. Implement ResourceManager, load cities/streets/buildings on Low memory (clear previous all addresses cities).
 //  28. Implement transliteration search for android version	
 //	 5. Search for city/streets/buildings

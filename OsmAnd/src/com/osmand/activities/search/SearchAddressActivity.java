@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.osmand.OsmandSettings;
 import com.osmand.R;
@@ -18,6 +21,8 @@ import com.osmand.data.Building;
 import com.osmand.data.City;
 import com.osmand.data.Street;
 import com.osmand.osm.LatLon;
+import com.osmand.osm.Node;
+import com.osmand.osm.Way;
 
 public class SearchAddressActivity extends Activity {
 
@@ -31,6 +36,8 @@ public class SearchAddressActivity extends Activity {
 	private City city = null;
 	private Street street = null;
 	private Building building = null;
+	private Street street2 = null;
+	private boolean radioBuilding = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +75,13 @@ public class SearchAddressActivity extends Activity {
 		buildingButton.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(SearchAddressActivity.this, SearchBuildingByNameActivity.class));
+				if(radioBuilding){
+					OsmandSettings.removeLastSearchedIntersectedStreet(SearchAddressActivity.this);
+					startActivity(new Intent(SearchAddressActivity.this, SearchBuildingByNameActivity.class));
+				} else {
+					OsmandSettings.setLastSearchedIntersectedStreet(SearchAddressActivity.this, "");
+					startActivity(new Intent(SearchAddressActivity.this, SearchStreet2ByNameActivity.class));
+				}
 			}
 		});
 		showOnMap.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +89,27 @@ public class SearchAddressActivity extends Activity {
 			public void onClick(View v) {
 				LatLon l = null;
 				int zoom = 12;
-				if (building != null) {
+				if (street2 != null && street != null) {
+					region.preloadWayNodes(street2);
+					region.preloadWayNodes(street);
+					Node inters = null;
+					for(Way w : street2.getWayNodes()){
+						for(Way w2 : street.getWayNodes()){
+							for(Node n : w.getNodes()){
+								for(Node n2 : w2.getNodes()){
+									if(n.getId() == n2.getId()){
+										inters = n;
+										break;
+									}
+								}
+							}
+						}
+					}
+					if(inters != null){
+						l = inters.getLatLon();
+						zoom = 16; 
+					}
+				} else if (building != null) {
 					l = building.getLocation();
 					zoom = 16;
 				} else if (street != null) {
@@ -128,7 +161,39 @@ public class SearchAddressActivity extends Activity {
 					updateUI();
 				}
 		 });
-		
+		 ((RadioGroup)findViewById(R.id.RadioGroup)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+
+				@Override
+				public void onCheckedChanged(RadioGroup group, int checkedId) {
+					SearchAddressActivity.this.radioBuilding = checkedId == R.id.RadioBuilding;
+					if(radioBuilding){
+						SearchAddressActivity.this.street2 = null;
+					} else {
+						SearchAddressActivity.this.building = null;
+					}
+					updateBuildingSection();
+				}
+				
+			});
+	}
+	
+	protected void updateBuildingSection(){
+		if(radioBuilding){
+			((TextView)findViewById(R.id.BuildingText)).setText("Building");
+			if(building == null){
+				((TextView)findViewById(R.id.BuildingButton)).setText(R.string.choose_building);
+			} else {
+				((TextView)findViewById(R.id.BuildingButton)).setText(building.getName(region.useEnglishNames()));
+			}
+		} else {
+			((TextView)findViewById(R.id.BuildingText)).setText("Street 2");
+			if(street2 == null){
+				((TextView)findViewById(R.id.BuildingButton)).setText(R.string.choose_intersected_street);
+			} else {
+				((TextView)findViewById(R.id.BuildingButton)).setText(street2.getName(region.useEnglishNames()));
+			}
+		}
+		findViewById(R.id.ResetBuilding).setEnabled(building != null || street2 != null);
 	}
 
 	protected void updateUI(){
@@ -154,13 +219,15 @@ public class SearchAddressActivity extends Activity {
 		}
 		streetButton.setEnabled(city != null);
 		
-		findViewById(R.id.ResetBuilding).setEnabled(building != null);
-		if(building == null){
-			buildingButton.setText(R.string.choose_building);
+		if(radioBuilding){
+			((RadioButton)findViewById(R.id.RadioBuilding)).setChecked(true);
 		} else {
-			buildingButton.setText(building.getName(region.useEnglishNames()));
+			((RadioButton)findViewById(R.id.RadioIntersStreet)).setChecked(true);
 		}
+		updateBuildingSection();
+		
 		buildingButton.setEnabled(street != null);
+		
 		showOnMap.setEnabled(building != null || city != null || street != null);
 	}
 	
@@ -173,8 +240,14 @@ public class SearchAddressActivity extends Activity {
 			if (city != null) {
 				street = region.getStreetByName(city, OsmandSettings.getLastSearchedStreet(SearchAddressActivity.this));
 				if (street != null) {
-					building = region.getBuildingByName(street, OsmandSettings
-							.getLastSearchedBuilding(SearchAddressActivity.this));
+					String str = OsmandSettings.getLastSearchedIntersectedStreet(SearchAddressActivity.this);
+					radioBuilding = str == null;
+					if(str != null){
+						street2 = region.getStreetByName(city, str);
+					} else {
+						building = region.getBuildingByName(street, OsmandSettings
+								.getLastSearchedBuilding(SearchAddressActivity.this));
+					}
 				}
 			}
 		}		

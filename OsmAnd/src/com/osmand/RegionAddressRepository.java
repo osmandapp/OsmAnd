@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 
@@ -23,7 +25,10 @@ import com.osmand.data.City.CityType;
 import com.osmand.data.index.IndexConstants;
 import com.osmand.data.index.IndexConstants.IndexBuildingTable;
 import com.osmand.data.index.IndexConstants.IndexCityTable;
+import com.osmand.data.index.IndexConstants.IndexStreetNodeTable;
 import com.osmand.data.index.IndexConstants.IndexStreetTable;
+import com.osmand.osm.Node;
+import com.osmand.osm.Way;
 
 
 public class RegionAddressRepository {
@@ -143,6 +148,31 @@ public class RegionAddressRepository {
 		}
 	}
 	
+	public void fillWithSuggestedStreetsIntersectStreets(City city, Street st, List<Street> streetsToFill) {
+		if (st != null) {
+			Set<Long> strIds = new TreeSet<Long>();
+			log.debug("Start loading instersection streets for " + city.getName());
+			Cursor query = db.rawQuery("SELECT B.STREET FROM street_node A JOIN street_node B ON A.ID = B.ID WHERE A.STREET = ?", 
+					new String[] { st.getId() + "" });
+			if (query.moveToFirst()) {
+				do {
+					if (st.getId() != query.getLong(0)) {
+						strIds.add(query.getLong(0));
+					}
+				} while (query.moveToNext());
+			}
+			query.close();
+			for (Street s : city.getStreets()) {
+				if (strIds.contains(s.getId())) {
+					streetsToFill.add(s);
+				}
+			}
+			log.debug("Loaded " + strIds.size() + " streets");
+			preloadWayNodes(st);
+		}
+	}
+	
+	
 	public void fillWithSuggestedStreets(City c, String name, List<Street> streetsToFill){
 		preloadStreets(c);
 		name = name.toLowerCase();
@@ -218,6 +248,33 @@ public class RegionAddressRepository {
 			
 			log.debug("Loaded citites " + (citiesToFill.size() - initialsize));
 		}
+	}
+	
+    public void preloadWayNodes(Street street){
+    	if(street.getWayNodes().isEmpty()){
+    		Cursor query = db.query(IndexStreetNodeTable.getTable(), IndexConstants.generateColumnNames(IndexStreetNodeTable.values()), "? = street",
+					new String[] { street.getId() + "" }, null, null, null);
+			log.debug("Start loading waynodes for "  + street.getName());
+			Map<Long, Way> ways = new LinkedHashMap<Long, Way>();
+			if (query.moveToFirst()) {
+				do {
+					Node n = new Node(query.getDouble(IndexStreetNodeTable.LATITUDE.ordinal()),
+							query.getDouble(IndexBuildingTable.LONGITUDE.ordinal()),
+							query.getLong(IndexStreetNodeTable.ID.ordinal()));
+					long way = query.getLong(IndexStreetNodeTable.WAY.ordinal());
+					if(!ways.containsKey(way)){
+						ways.put(way, new Way(way));
+					}
+					ways.get(way).addNode(n);
+				} while (query.moveToNext());
+			}
+			query.close();
+			for(Way w : ways.values()){
+				street.getWayNodes().add(w);
+			}
+			log.debug("Loaded " + ways.size() + " ways");
+    	}
+		
 	}
 	
 	public void preloadBuildings(Street street){
