@@ -13,11 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.osmand.Algoritms;
 import com.osmand.OsmandSettings;
@@ -72,6 +74,7 @@ public class SearchPOIActivity extends ListActivity {
 
 			}
 		});
+
 		Bundle bundle = this.getIntent().getExtras();
 		String anemity = bundle.getString(ANENITY_TYPE);
 		if (anemity != null) {
@@ -92,6 +95,22 @@ public class SearchPOIActivity extends ListActivity {
 				setListAdapter(amenityAdapter);
 			}
 		}
+		// ListActivity has a ListView, which you can get with:
+		ListView lv = getListView();
+
+		// Then you can create a listener like so:
+		lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
+				Amenity amenity = amenityList.get(pos);
+				String format = amenity.getSimpleFormat(OsmandSettings.usingEnglishNames(v.getContext()));
+			      if(amenity.getOpeningHours() != null){
+			       format += "\n Opening hours : " + amenity.getOpeningHours();
+			      }
+			      Toast.makeText(v.getContext(), format, Toast.LENGTH_SHORT).show();
+				return true;
+			}
+		});
 	}
 
 	public void onListItemClick(ListView parent, View v, int position, long id) {
@@ -149,7 +168,11 @@ public class SearchPOIActivity extends ListActivity {
 							.getLongitude()));
 					String str = anemity.getStringWithoutType(OsmandSettings.usingEnglishNames(SearchPOIActivity.this));
 					label.setText(str);
-					icon.setImageResource(R.drawable.poi);
+					if(anemity.getOpeningHours() != null) {
+						icon.setImageResource(R.drawable.poi);
+					} else{
+						icon.setImageResource(R.drawable.closed_poi);
+					}
 					distanceLabel.setText(" " + dist + " m  ");
 				}
 			}
