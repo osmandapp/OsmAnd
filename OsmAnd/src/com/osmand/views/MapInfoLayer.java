@@ -24,6 +24,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 	private Paint fillBlack;
 	private Paint fillRed;
 	private RectF boundsForCompass;
+	private RectF boundsForZoom;
 	private RectF boundsForDist;
 	private RectF boundsForSpeed;
 	private Paint paintAlphaGray;
@@ -35,6 +36,8 @@ public class MapInfoLayer implements OsmandMapLayer {
 	private int cachedMeters = 0;
 	private String cachedSpeedString = null;
 	private int cachedSpeed = 0;
+	private int cachedZoom = 0;
+	private String cachedZoomString = "";
 	
 	
 	public MapInfoLayer(MapActivity map){
@@ -67,7 +70,8 @@ public class MapInfoLayer implements OsmandMapLayer {
 		
 		boundsForCompass = new RectF(0, 0, 32, 32);
 		boundsForDist = new RectF(32, 0, 110, 32);
-		boundsForSpeed = new RectF(0, 32, 110, 64);
+		boundsForZoom = new RectF(0, 32, 32, 64);
+		boundsForSpeed = new RectF(32, 32, 110, 64);
 		
 		pathForCompass = new Path();
 		pathForCompass.moveTo(9, 15.5f);
@@ -101,28 +105,44 @@ public class MapInfoLayer implements OsmandMapLayer {
 					cachedDistString = null;
 				} else {
 					cachedDistString = MapUtils.getFormattedDistance(cachedMeters);
-					boundsForDist.right = paintBlack.measureText(cachedDistString) + 25 + boundsForDist.left;
-					boundsForSpeed.right = boundsForDist.right;
+					float right = paintBlack.measureText(cachedDistString) + 25 + boundsForDist.left;
+					if(cachedSpeedString != null){
+						boundsForSpeed.right = boundsForDist.right = Math.max(right, boundsForDist.right);
+					} else {
+						boundsForDist.right = right;
+					}
 				}
 			}
 		}
+		if(view.getZoom() != cachedZoom){
+			cachedZoom = view.getZoom();
+			cachedZoomString = view.getZoom()+"";
+		}
+		// draw zoom
+		canvas.drawRoundRect(boundsForZoom, 3, 3, paintAlphaGray);
+		canvas.drawText(cachedZoomString, boundsForZoom.left + 5, boundsForZoom.bottom - 9, paintBlack);
+		
+		// draw speed 	
 		if(map.getLastKnownLocation() != null && map.getLastKnownLocation().hasSpeed()){
 			if(cachedSpeed != (int) map.getLastKnownLocation().getSpeed()){
 				cachedSpeed = (int) map.getLastKnownLocation().getSpeed();
 				cachedSpeedString = ((int) (cachedSpeed * 3.6d)) + " km/h";
+				float right = paintBlack.measureText(cachedSpeedString) + 8 + boundsForSpeed.left;
+				boundsForSpeed.right = boundsForDist.right = Math.max(right, boundsForDist.right);
 			}
 			if(cachedSpeed > 0){
 				canvas.drawRoundRect(boundsForSpeed, 3, 3, paintAlphaGray);
-				canvas.drawText(cachedSpeedString, boundsForSpeed.left + 15, boundsForSpeed.bottom - 9, paintBlack);
+				canvas.drawText(cachedSpeedString, boundsForSpeed.left + 8, boundsForSpeed.bottom - 9, paintBlack);
 			}
 		}
+		// draw distance to point
 		if(cachedDistString != null){
 			canvas.drawRoundRect(boundsForDist, 3, 3, paintAlphaGray);
 			canvas.drawCircle(boundsForDist.left + 8, boundsForDist.bottom - 15, 4, fillRed);
 			canvas.drawText(cachedDistString, boundsForDist.left + 15, boundsForDist.bottom - 9, paintBlack);
 		}
 		
-		// draw the last because it use rotating
+		// draw compass the last because it use rotating
 		canvas.drawRoundRect(boundsForCompass, 3, 3, paintAlphaGray);
 		canvas.rotate(view.getRotate(), 15, 15);
 		canvas.drawPath(pathForCompass2, fillRed);
