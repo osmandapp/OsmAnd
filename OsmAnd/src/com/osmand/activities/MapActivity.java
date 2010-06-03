@@ -38,6 +38,7 @@ import com.osmand.R;
 import com.osmand.ResourceManager;
 import com.osmand.activities.FavouritesActivity.FavouritePoint;
 import com.osmand.activities.FavouritesActivity.FavouritesDbHelper;
+import com.osmand.activities.search.SearchActivity;
 import com.osmand.data.preparation.MapTileDownloader;
 import com.osmand.map.IMapLocationListener;
 import com.osmand.osm.LatLon;
@@ -150,7 +151,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			@Override
 			public void onClick(View v) {
 				Intent newIntent = new Intent(MapActivity.this, MainMenuActivity.class);
-				newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(newIntent);
 			}
 		});
@@ -159,11 +160,10 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
  
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK
+        if (keyCode == KeyEvent.KEYCODE_SEARCH
                 && event.getRepeatCount() == 0) {
-//			Intent newIntent = new Intent(MapActivity.this, MainMenuActivity.class);
-//			newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(newIntent);
+			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
+			startActivity(newIntent);
             return true;
         }
         return super.onKeyDown(keyCode, event);
