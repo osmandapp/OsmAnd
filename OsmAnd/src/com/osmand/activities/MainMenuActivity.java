@@ -97,12 +97,13 @@ public class MainMenuActivity extends Activity {
 
 		mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-		Intent mapIndent = new Intent(MainMenuActivity.this, MapActivity.class);
+		Intent notificationIndent = new Intent(MainMenuActivity.this, MapActivity.class);
+		notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		Notification notification = new Notification(R.drawable.icon, "",
 				System.currentTimeMillis());
 		notification.setLatestEventInfo(MainMenuActivity.this, "OsmAnd",
 				"OsmAnd is running in background", PendingIntent.getActivity(
-						this.getBaseContext(), 0, mapIndent,
+						this.getBaseContext(), 0, notificationIndent,
 						PendingIntent.FLAG_UPDATE_CURRENT));
 		mNotificationManager.notify(APP_NOTIFICATION_ID, notification);
 

@@ -141,9 +141,14 @@ public class OsmandSettings {
 		return prefs.getString(LAST_SEARCHED_REGION, "");
 	}
 	
-	public static boolean setLastSearchedRegion(Context ctx, String region){
+	public static boolean setLastSearchedRegion(Context ctx, String region) {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putString(LAST_SEARCHED_REGION, region).commit();
+		Editor edit = prefs.edit().putString(LAST_SEARCHED_REGION, region).putLong(LAST_SEARCHED_CITY, -1).
+							putString(LAST_SEARCHED_STREET,"").putString(LAST_SEARCHED_BUILDING, "");
+		if (prefs.contains(LAST_SEARCHED_INTERSECTED_STREET)) {
+			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, "");
+		}
+		return edit.commit();
 	}
 
 	public static Long getLastSearchedCity(Context ctx){
@@ -153,9 +158,12 @@ public class OsmandSettings {
 	
 	public static boolean setLastSearchedCity(Context ctx, Long cityId){
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().
-							putLong(LAST_SEARCHED_CITY, cityId).putString(LAST_SEARCHED_STREET, "").putString(LAST_SEARCHED_BUILDING, "").
-							commit();
+		Editor edit = prefs.edit().putLong(LAST_SEARCHED_CITY, cityId).putString(LAST_SEARCHED_STREET, "").
+							putString(LAST_SEARCHED_BUILDING, "");
+		if(prefs.contains(LAST_SEARCHED_INTERSECTED_STREET)){
+			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, "");
+		}
+		return edit.commit();
 	}
 
 	public static String getLastSearchedStreet(Context ctx){
@@ -165,7 +173,11 @@ public class OsmandSettings {
 	
 	public static boolean setLastSearchedStreet(Context ctx, String street){
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putString(LAST_SEARCHED_STREET, street).putString(LAST_SEARCHED_BUILDING, "").commit();
+		Editor edit = prefs.edit().putString(LAST_SEARCHED_STREET, street).putString(LAST_SEARCHED_BUILDING, "");
+		if(prefs.contains(LAST_SEARCHED_INTERSECTED_STREET)){
+			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, "");
+		}
+		return edit.commit();
 	}
 	
 	public static String getLastSearchedBuilding(Context ctx){

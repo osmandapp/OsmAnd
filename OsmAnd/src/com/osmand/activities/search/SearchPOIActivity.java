@@ -86,11 +86,16 @@ public class SearchPOIActivity extends ListActivity {
 						.getLongitude(), zoom, maxCount);
 			} else {
 				amenityList = resourceManager.searchAmenities(amenityType, lastKnownMapLocation.getLatitude(), lastKnownMapLocation
-						.getLongitude(), zoom, 30);
+						.getLongitude(), zoom, maxCount);
 			}
 
 			if (amenityList != null) {
 				MapUtils.sortListOfMapObject(amenityList, lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude());
+				if(amenityType == null){
+					while (amenityList.size() > 30) {
+						amenityList.remove(amenityList.size() - 1);
+					}
+				}
 				amenityAdapter = new AmenityAdapter(amenityList);
 				setListAdapter(amenityAdapter);
 			}

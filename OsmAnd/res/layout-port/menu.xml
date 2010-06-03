@@ -15,7 +15,7 @@
 					android:textColor="#FFFFFF"
 					android:textStyle="bold"
 					android:layout_width="140dip"
-					android:layout_height="70dip"
+					android:layout_height="90dip"
 					android:drawableLeft="@drawable/map"/>
 					
 			<Button 
@@ -25,7 +25,7 @@
 					android:textColor="#FFFFFF"
 					android:textStyle="bold"
 					android:layout_width="140dip"
-					android:layout_height="70dip"
+					android:layout_height="90dip"
 					android:drawableLeft="@drawable/find"/>	
 		</TableRow>
 		<TableRow>
@@ -36,7 +36,7 @@
 					android:textColor="#FFFFFF"
 					android:textStyle="bold"
 					android:layout_width="140dip"
-					android:layout_height="70dip"
+					android:layout_height="90dip"
 					android:drawableLeft="@drawable/favorites"/>
 			<Button 
 					android:id="@+id/SettingsButton"
@@ -45,7 +45,7 @@
 					android:textColor="#FFFFFF"
 					android:textStyle="bold"
 					android:layout_width="140dip"
-					android:layout_height="70dip"
+					android:layout_height="90dip"
 					android:drawableLeft="@drawable/settings"/>
 		</TableRow>
 	</TableLayout>

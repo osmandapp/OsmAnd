@@ -139,6 +139,7 @@ public class SearchAddressActivity extends Activity {
 				public void onClick(View v) {
 					street = null;
 					building = null;
+					street2 = null;
 					updateUI();
 				}
 		 });
@@ -147,6 +148,7 @@ public class SearchAddressActivity extends Activity {
 				public void onClick(View v) {
 					city = null;
 					street = null;
+					street2 = null;
 					building = null;
 					updateUI();
 				}
@@ -157,6 +159,7 @@ public class SearchAddressActivity extends Activity {
 					region = null;
 					city = null;
 					street = null;
+					street2 = null;
 					building = null;
 					updateUI();
 				}

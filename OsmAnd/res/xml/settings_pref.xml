@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceCategory android:title="@string/app_settings"><CheckBoxPreference android:summary="@string/use_english_names_descr" android:title="@string/use_english_names" android:key="use_english_names"></CheckBoxPreference>
+</PreferenceCategory>
 <PreferenceCategory android:title="@string/map_preferences">
 
 <CheckBoxPreference android:key="use_internet_to_download_tiles" android:title="@string/use_internet" android:summary="@string/use_internet_to_download_tile"></CheckBoxPreference>
@@ -12,6 +14,5 @@
 </PreferenceCategory>
 <PreferenceCategory android:title="@string/map_source"><ListPreference android:title="@string/map_tile_source" android:summary="@string/map_tile_source_descr" android:key="map_tile_sources"></ListPreference>
 </PreferenceCategory>
-<PreferenceCategory android:title="@string/app_settings"><CheckBoxPreference android:summary="@string/use_english_names_descr" android:title="@string/use_english_names" android:key="use_english_names"></CheckBoxPreference>
-</PreferenceCategory>
+
 </PreferenceScreen>
