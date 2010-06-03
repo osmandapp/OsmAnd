@@ -103,7 +103,7 @@ public class MainMenuActivity extends Activity {
 		notification.setLatestEventInfo(MainMenuActivity.this, "OsmAnd",
 				"OsmAnd is running in background", PendingIntent.getActivity(
 						this.getBaseContext(), 0, mapIndent,
-						PendingIntent.FLAG_CANCEL_CURRENT));
+						PendingIntent.FLAG_UPDATE_CURRENT));
 		mNotificationManager.notify(APP_NOTIFICATION_ID, notification);
 
 		showMap = (Button) findViewById(R.id.MapButton);
