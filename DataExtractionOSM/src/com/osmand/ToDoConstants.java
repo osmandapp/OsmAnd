@@ -10,14 +10,8 @@ public class ToDoConstants {
 	 * Write activity to show something about authors / donation ....
 	 */
 	public int DESCRIBE_ABOUT_AUTHORS = 8;
-
 	
-	// TODO ANDROID in release 0.1
-//	 13. Save point as favorite & introduce favorite points dialog
-//	  3. Revise osmand UI. Preparing new icons (revise UI 18, 2, ). Main application icon, back to location icon.
-//	 14. Show zoom level on map
-
-	 // NOT in release 0.1
+	 // TODO ANDROID NOT in release 0.1
 //	  8. Enable change POI directly on map (requires OSM login)
 //   16. Support open street bugs api.
 //   20. Implement save track/route to gpx (?)
@@ -36,7 +30,10 @@ public class ToDoConstants {
 	
 	
 	// DONE ANDROID :
+//  13. Save point as favorite & introduce favorite points dialog
 //  29. Show opened/closed amenities (in search poi).
+//   3. Revise osmand UI. Preparing new icons (revise UI 18, 2, ). Main application icon, back to location icon.
+//	14. Show zoom level on map
 	
 	// DONE SWING
 }
