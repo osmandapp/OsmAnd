@@ -4,16 +4,20 @@
 	android:layout_width="fill_parent" android:orientation="vertical"
 	android:layout_height="fill_parent" android:background="@color/menu_background">
 	
-	<Button android:layout_height="55dp" 
+	<Button android:layout_height="45dp" android:textStyle="bold" 
 		android:layout_gravity="center" android:id="@+id/MapButton" 
 		android:text="@string/map_Button" android:layout_width="300dp" android:layout_marginTop="10dp"></Button>
 	
-	<Button android:layout_height="55dp" android:id="@+id/SearchButton" android:text="@string/search_button" 
-	android:layout_width="300dp" android:layout_gravity="center" android:layout_marginTop="20dp"></Button>
+	<Button android:layout_height="45dp" android:id="@+id/SearchButton" android:text="@string/search_button" android:textStyle="bold" 
+	android:layout_width="300dp" android:layout_gravity="center" android:layout_marginTop="10dp"></Button>
 	
-	<Button android:layout_height="55dp" 
+	<Button android:id="@+id/FavoritesButton" android:text="@string/favorites_Button" android:layout_marginTop="10dp"
+					android:textStyle="bold" android:layout_width="300dp" android:layout_gravity="center" 
+					android:layout_height="45dp"/>
+	
+	<Button android:layout_height="45dp" android:textStyle="bold" 
 		android:layout_gravity="center" android:id="@+id/SettingsButton"
-		android:text="@string/settings_Button" android:layout_width="300dp" android:layout_marginTop="20dp"></Button>
+		android:text="@string/settings_Button" android:layout_width="300dp" android:layout_marginTop="10dp"></Button>
 	<FrameLayout android:id="@+id/FrameLayout01"
 		android:layout_height="fill_parent" android:layout_width="fill_parent">
 		<Button android:layout_width="wrap_content" 
