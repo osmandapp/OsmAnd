@@ -38,7 +38,7 @@
 <string name="settings_Button">Settings</string>
 <string name="favorites_Button">Favorites</string>
 <string name="search_button">Search</string>
-<color name="menu_background">#CFFACD</color>
+<color name="menu_background">#FF9030</color>
 <string name="search_activity">Search</string>
 <color name="color_white">#FFFFFF</color>
 <color name="color_red">#FF0000</color>

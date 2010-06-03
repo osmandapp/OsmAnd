@@ -25,6 +25,7 @@ public class ToDoConstants {
 //   30. Performance issue with map drawing : 
 //       introduce one place where refreshMap will be called using postMessage mechanism (delay more than > 50 ? ms).
 //       Introducing cache of file names that are on disk (creating new File() consumes a lot of memory) 	
+//   31. Translation.	
 
 	
 	// FIXME Bugs Android :
