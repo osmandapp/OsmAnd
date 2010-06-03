@@ -133,7 +133,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		backToLocation.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				backToLocation.setVisibility(View.INVISIBLE);
+				backToLocation.setVisibility(View.VISIBLE);
 				if(!isMapLinkedToLocation()){
 					getPreferences(MODE_WORLD_READABLE).edit().putBoolean(BACK_TO_LOCATION, true).commit();
 					if(locationLayer.getLastKnownLocation() != null){
@@ -213,8 +213,8 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 				}
 			}
 		} else {
-			if(backToLocation.getVisibility() != View.INVISIBLE){
-				backToLocation.setVisibility(View.INVISIBLE);
+			if(backToLocation.getVisibility() != View.VISIBLE){
+				backToLocation.setVisibility(View.VISIBLE);
 			}
 		}
     }

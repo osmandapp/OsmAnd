@@ -7,8 +7,8 @@
 
 <ZoomControls android:id="@+id/ZoomControls01"
 		android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom|right"></ZoomControls>		
-<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom|left" android:id="@+id/BackToMenu" android:background="@drawable/back"></ImageButton>
-<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="top|right" android:id="@+id/BackToLocation" android:background="@drawable/icon"></ImageButton>
+<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom|left" android:id="@+id/BackToMenu" android:background="@drawable/back_menu"></ImageButton>
+<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="top|right" android:id="@+id/BackToLocation" android:background="@drawable/back_location"></ImageButton>
 
 
 </FrameLayout>
