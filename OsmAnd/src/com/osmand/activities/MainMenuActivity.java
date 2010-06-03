@@ -41,8 +41,10 @@ public class MainMenuActivity extends Activity {
 	private Button exitButton;
 	private Button settingsButton;
 	private Button searchButton;
+	private Button favouritesButton;
 	private NotificationManager mNotificationManager;
 	private int APP_NOTIFICATION_ID;
+	
 	
 
 	
@@ -108,8 +110,7 @@ public class MainMenuActivity extends Activity {
 		showMap.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent mapIndent = new Intent(MainMenuActivity.this,
-						MapActivity.class);
+				final Intent mapIndent = new Intent(MainMenuActivity.this, MapActivity.class);
 				startActivityForResult(mapIndent, 0);
 
 			}
@@ -118,8 +119,16 @@ public class MainMenuActivity extends Activity {
 		settingsButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent settings = new Intent(MainMenuActivity.this,
-						SettingsActivity.class);
+				final Intent settings = new Intent(MainMenuActivity.this, SettingsActivity.class);
+				startActivity(settings);
+			}
+		});
+		
+		favouritesButton = (Button) findViewById(R.id.FavoritesButton);
+		favouritesButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final Intent settings = new Intent(MainMenuActivity.this, FavouritesActivity.class);
 				startActivity(settings);
 			}
 		});
@@ -135,7 +144,7 @@ public class MainMenuActivity extends Activity {
 		
 		
 		exitButton = (Button) findViewById(R.id.ExitButton);
-		exitButton.setVisibility(View.INVISIBLE);
+//		exitButton.setVisibility(View.INVISIBLE);
 		exitButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

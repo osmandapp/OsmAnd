@@ -1,6 +1,9 @@
 package com.osmand.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
@@ -24,13 +27,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 import android.widget.ZoomControls;
 
 import com.osmand.LogUtil;
 import com.osmand.OsmandSettings;
 import com.osmand.R;
 import com.osmand.ResourceManager;
+import com.osmand.activities.FavouritesActivity.FavouritePoint;
+import com.osmand.activities.FavouritesActivity.FavouritesDbHelper;
 import com.osmand.data.preparation.MapTileDownloader;
 import com.osmand.map.IMapLocationListener;
 import com.osmand.osm.LatLon;
@@ -357,6 +364,9 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     		final Intent settings = new Intent(MapActivity.this, SettingsActivity.class);
 			startActivity(settings);
     		return true;
+		} else if (item.getItemId() == R.id.map_add_to_favourite) {
+			addFavouritePoint();
+			return true;
 		} else if (item.getItemId() == R.id.map_specify_point) {
 			openChangeLocationDialog();
 			return true;
@@ -374,6 +384,33 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     		}
     	}
     	return super.onOptionsItemSelected(item);
+    }
+    
+    private void addFavouritePoint(){
+    	final FavouritePoint p = new FavouritesActivity.FavouritePoint();
+    	p.setLatitude(mapView.getLatitude());
+    	p.setLongitude(mapView.getLongitude());
+    	p.setName("Favourite");
+    	
+    	Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Input name of favourite point");
+		final EditText editText = new EditText(this);
+		builder.setView(editText);
+		builder.setNegativeButton("Cancel", null);
+		builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				FavouritesDbHelper helper = new FavouritesActivity.FavouritesDbHelper(MapActivity.this);
+				p.setName(editText.getText().toString());
+				boolean added = helper.addFavourite(p);
+				if (added) {
+					Toast.makeText(MapActivity.this, "Favourite point " + p.getName() + " was succesfully added.", Toast.LENGTH_SHORT)
+							.show();
+				}
+				helper.close();
+			}
+		});
+		builder.create().show();
     }
 
 	private void openChangeLocationDialog() {

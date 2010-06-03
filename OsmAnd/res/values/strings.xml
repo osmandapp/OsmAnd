@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="add_to_favourite">Add to Favourites</string>
     <string name="use_english_names_descr">Select use native or english names</string>
     <string name="use_english_names">Use english names</string>
     <string name="app_settings">Application settings</string>
