@@ -15,7 +15,7 @@
 </TextView>
 <Button android:id="@+id/CountryButton" android:text="@string/ChooseCountry">
 </Button>
-<ImageButton android:id="@+id/ResetCountry" android:background="@drawable/icon"  android:layout_marginRight = "5dp">
+<ImageButton android:id="@+id/ResetCountry" android:layout_marginRight = "5dp" android:background="@drawable/reset">
 </ImageButton>
 </TableRow>
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp" >
@@ -23,7 +23,7 @@
 </TextView>
 <Button android:id="@+id/CityButton" android:text="@string/choose_city">
 </Button>
-<ImageButton android:id="@+id/ResetCity" android:background="@drawable/icon"  android:layout_marginRight = "5dp">
+<ImageButton android:id="@+id/ResetCity" android:layout_marginRight = "5dp" android:background="@drawable/reset">
 </ImageButton>
 </TableRow>
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp">
@@ -31,7 +31,7 @@
 </TextView>
 <Button android:id="@+id/StreetButton" android:text="@string/choose_street">
 </Button>
-<ImageButton android:id="@+id/ResetStreet" android:background="@drawable/icon"  android:layout_marginRight = "5dp">
+<ImageButton android:id="@+id/ResetStreet" android:layout_marginRight = "5dp" android:background="@drawable/reset">
 </ImageButton>
 </TableRow>
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp">
@@ -39,7 +39,7 @@
 </TextView>
 <Button android:id="@+id/BuildingButton" android:text="@string/choose_building">
 </Button>
-<ImageButton android:id="@+id/ResetBuilding" android:background="@drawable/icon" android:layout_marginRight = "5dp">
+<ImageButton android:id="@+id/ResetBuilding" android:layout_marginRight = "5dp" android:background="@drawable/reset">
 </ImageButton>
 </TableRow>
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp" >
