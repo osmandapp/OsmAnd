@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!-- This file is at /res/layout/list.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<ListView android:id="@android:id/list" android:layout_width="fill_parent"
+		android:layout_height="fill_parent" ></ListView>
+	
+
+</LinearLayout>

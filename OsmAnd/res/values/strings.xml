@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="favourites_activity">List of favourite points</string>
+    <string name="add_to_favourite">Add to Favourites</string>
+    <string name="use_english_names_descr">Select use native or english names</string>
+    <string name="use_english_names">Use english names</string>
+    <string name="app_settings">Application settings</string>
+    <string name="search_address">Search address</string>
+    <string name="choose_building">Choose building</string>
+    <string name="choose_street">Choose street</string>
+    <string name="choose_city">Choose city</string>
+    <string name="ChooseCountry">Choose country</string>
+    <string name="position_on_map_descr">Choose postion on the map</string>
+    <string name="position_on_map">Position on the map</string>
+    <string name="map_specify_point">Specify point</string>
+    <string name="show_view_angle_descr">Show aspect of vew based on compass</string>
+    <string name="show_view_angle">Show aspect of view</string>
+    <string name="stop_navigation">Unmark location</string>
+    <string name="navigate_to_point">Mark location</string>
+    <string name="map_view_3d_descr">Enable 3D view of the map</string>
+    <string name="map_view_3d">Map View 3D</string>
+    <string name="rotate_map_to_bearing_descr">Rotate map to bearing of your direction</string>
+    <string name="rotate_map_to_bearing">Rotate map</string>
+    <string name="show_poi_over_map_description">Show POI on map</string>
+    <string name="show_poi_over_map">Show POI</string>
+    <string name="map_tile_source_descr">Choose the source of tiles:</string>
+    <string name="map_tile_source">Map tile source</string>
+    <string name="map_source">Map source</string>
+    <string name="use_internet">Use internet</string>
+    <string name="show_location">Show location</string>
+    <string name="map_preferences">Map preferences</string>
+    <string name="settings_activity">Settings</string>
+    <string name="show_gps_coordinates_text">Show gps coordinates on map</string>
+    <string name="use_internet_to_download_tile">Use internet to download missing tiles</string>
+    <string name="hello">Hello World, StartActivity!</string>
+    <string name="app_name">OsmAnd</string>
+
+<string name="exit_Button">Exit</string>
+<string name="map_Button">Map</string>
+<string name="settings_Button">Settings</string>
+<string name="favorites_Button">Favorites</string>
+<string name="search_button">Search</string>
+<color name="menu_background">#FF9030</color>
+<string name="search_activity">Search</string>
+<color name="color_white">#FFFFFF</color>
+<color name="color_red">#FF0000</color>
+<string name="searchpoi_activity">Choose poi</string>
+<string name="search_POI_level_btn">Find more</string>
+<string name="incremental_search_city">Search city incrementally. In order to find villages input more than 3 first symbols.</string>
+<string name="incremental_search_street">Search street incrementally</string>
+<string name="incremental_search_building">Search building incrementally</string>
+<string name="choose_available_region">Choose region</string>
+<string name="choose_intersected_street">Choose intersected street</string>
+<string name="Closest_Amenities">Closest amenities</string>
+</resources>

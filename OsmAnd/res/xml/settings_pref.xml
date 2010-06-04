@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceCategory android:title="@string/app_settings"><CheckBoxPreference android:summary="@string/use_english_names_descr" android:title="@string/use_english_names" android:key="use_english_names"></CheckBoxPreference>
+</PreferenceCategory>
+<PreferenceCategory android:title="@string/map_preferences">
+
+<CheckBoxPreference android:key="use_internet_to_download_tiles" android:title="@string/use_internet" android:summary="@string/use_internet_to_download_tile"></CheckBoxPreference>
+<CheckBoxPreference android:key="show_poi_over_map" android:title="@string/show_poi_over_map" android:summary="@string/show_poi_over_map_description"></CheckBoxPreference>
+<CheckBoxPreference android:key="rotate_map_to_bearing" android:title="@string/rotate_map_to_bearing" android:summary="@string/rotate_map_to_bearing_descr"></CheckBoxPreference>
+<CheckBoxPreference android:key="show_view_angle" android:title="@string/show_view_angle" android:summary="@string/show_view_angle_descr"></CheckBoxPreference>
+
+<ListPreference android:key="position_on_map" android:title="@string/position_on_map" android:summary="@string/position_on_map_descr"></ListPreference>
+</PreferenceCategory>
+<PreferenceCategory android:title="@string/map_source"><ListPreference android:title="@string/map_tile_source" android:summary="@string/map_tile_source_descr" android:key="map_tile_sources"></ListPreference>
+</PreferenceCategory>
+
+</PreferenceScreen>
