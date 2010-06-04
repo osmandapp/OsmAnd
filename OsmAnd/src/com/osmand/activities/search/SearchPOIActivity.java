@@ -44,6 +44,7 @@ public class SearchPOIActivity extends ListActivity {
 	private Button searchPOILevel;
 	private final static int maxCount = 100;
 	private final static int finalZoom = 8;
+	private final static int limitOfClosest = 30;
 	private int zoom = 13;
 
 	private AmenityType amenityType;
@@ -86,13 +87,13 @@ public class SearchPOIActivity extends ListActivity {
 						.getLongitude(), zoom, maxCount);
 			} else {
 				amenityList = resourceManager.searchAmenities(amenityType, lastKnownMapLocation.getLatitude(), lastKnownMapLocation
-						.getLongitude(), zoom, maxCount);
+						.getLongitude(), zoom + 2, maxCount);
 			}
 
 			if (amenityList != null) {
 				MapUtils.sortListOfMapObject(amenityList, lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude());
 				if(amenityType == null){
-					while (amenityList.size() > 30) {
+					while (amenityList.size() > limitOfClosest) {
 						amenityList.remove(amenityList.size() - 1);
 					}
 				}
