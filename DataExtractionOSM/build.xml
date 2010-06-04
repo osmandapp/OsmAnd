@@ -1,0 +1,49 @@
+<!--  build JAR libraty -->
+<project name="DataExtractionOSM" default="build" basedir=".">
+
+	<target name="jar">
+		<path id="build-classpath">
+			<fileset dir="lib">
+				<include name="*.jar"/>
+			</fileset>
+		</path>
+		<manifestclasspath property="lib.list" jarfile="OsmAndMapCreator.jar">
+			<classpath refid="build-classpath"/>
+		</manifestclasspath>
+		<echo>list is  ${lib.list}</echo>
+
+		<delete file="OsmAndMapCreator.jar" />
+		<delete file="MANIFEST.MF" />
+		<manifest file="MANIFEST.MF">
+			<attribute name="Built-By" value="${user.name}" />
+			<attribute name="Main-Class" value="com.osmand.swing.OsmExtractionUI" />
+			<attribute name="Class-Path" value="${lib.list}"/>
+		</manifest>
+
+		<jar destfile="OsmAndMapCreator.jar" manifest="MANIFEST.MF">
+			<fileset dir="bin">
+				<include name="**/*.class" />
+			</fileset>
+			<fileset dir="src">
+				<include name="**/*.java" />
+			</fileset>
+		</jar>
+		
+		<delete file="MANIFEST.MF" />
+	</target>
+	
+	<target name="build" depends="jar">
+		<delete dir="build"/>
+		<copy todir="build">
+			<fileset dir=".">
+				<include name="OsmAndMapCreator.jar"/>
+				<include name="lib/**"/>
+				<include name="run.bat"/>
+				<include name="run.sh"/>
+			</fileset>
+		</copy>
+		<delete file="OsmAndMapCreator.jar" />
+	</target>
+
+</project>
+
