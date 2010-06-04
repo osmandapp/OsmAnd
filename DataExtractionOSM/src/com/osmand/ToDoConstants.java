@@ -20,7 +20,9 @@ public class ToDoConstants {
 //       introduce one place where refreshMap will be called using postMessage mechanism (delay more than > 50 ? ms).
 //       Introducing cache of file names that are on disk (creating new File() consumes a lot of memory) 	
 //   31. Translation.	
-//   32. Introduce POI predefined filters (car filter(other-fuel, transportation-car_wash, show-car) and others)	
+//   32. Introduce POI predefined filters (car filter(other-fuel, transportation-car_wash, show-car) and others)
+//   33. Build transport locations (investigate)
+//   34. Investigate routing (bicycle, car)	
 
 	
 	// FIXME Bugs Android :
