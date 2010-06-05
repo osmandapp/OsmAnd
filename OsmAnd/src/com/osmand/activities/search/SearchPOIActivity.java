@@ -86,7 +86,7 @@ public class SearchPOIActivity extends ListActivity {
 						.getLongitude(), zoom, maxCount);
 			} else {
 				amenityList = resourceManager.searchAmenities(amenityType, lastKnownMapLocation.getLatitude(), lastKnownMapLocation
-						.getLongitude(), zoom, maxCount);
+						.getLongitude(), zoom + 2, maxCount);
 			}
 
 			if (amenityList != null) {

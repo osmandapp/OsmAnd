@@ -55,6 +55,7 @@ public class Amenity extends MapObject {
 		prebuiltMap.put("car_rental", AmenityType.TRANSPORTATION);
 		prebuiltMap.put("car_sharing", AmenityType.TRANSPORTATION);
 		prebuiltMap.put("car_wash", AmenityType.TRANSPORTATION);
+		prebuiltMap.put("fuel", AmenityType.TRANSPORTATION);
 		prebuiltMap.put("grit_bin", AmenityType.TRANSPORTATION);
 		prebuiltMap.put("parking", AmenityType.TRANSPORTATION);
 		prebuiltMap.put("taxi", AmenityType.TRANSPORTATION);
