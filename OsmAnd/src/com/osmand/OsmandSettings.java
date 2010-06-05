@@ -33,6 +33,18 @@ public class OsmandSettings {
 		return prefs.getBoolean(SHOW_POI_OVER_MAP, false);
 	}
 	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String USER_NAME = "user_name";
+	public static String getUserName(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getString(USER_NAME, "NoName");
+	}
+	
+	public static boolean setUserName(Context ctx, String name){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putString(USER_NAME, name).commit();
+	}
+	
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SHOW_OSM_BUGS = "show_osm_bugs";

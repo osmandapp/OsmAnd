@@ -99,7 +99,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		mapView.addLayer(locationLayer);
 		mapInfoLayer = new MapInfoLayer(this);
 		mapView.addLayer(mapInfoLayer);
-		osmBugsLayer = new OsmBugsLayer();
+		osmBugsLayer = new OsmBugsLayer(this);
 		
 		
 		
@@ -160,6 +160,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 				startActivity(newIntent);
 			}
 		});
+		
 	}
     
  
@@ -225,6 +226,13 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     }
 
 	public void navigateToPoint(LatLon point){
+		if(point != null){
+			getPreferences(MODE_WORLD_READABLE).edit().
+			putFloat(POINT_NAVIGATE_LAT, (float) mapView.getLatitude()).
+			putFloat(POINT_NAVIGATE_LON, (float) mapView.getLongitude()).commit();
+		} else {
+			getPreferences(MODE_WORLD_READABLE).edit().remove(POINT_NAVIGATE_LAT).remove(POINT_NAVIGATE_LON).commit();
+		}
 		navigationLayer.setPointToNavigate(point);
 	}
 	
@@ -357,6 +365,23 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		}
 	}
 	
+	@Override
+	public void onSensorChanged(SensorEvent event) {
+		// using that strange technique because sensor produces a lot of events & hangs the system
+		locationLayer.setHeading(event.values[0], true);
+		if(!sensorHandler.hasMessages(1) && locationLayer.isLocationVisible(locationLayer.getLastKnownLocation())){
+			Message m = Message.obtain(sensorHandler, new Runnable(){
+				@Override
+				public void run() {
+					mapView.refreshMap();
+				}
+			});
+			m.what = 1;
+			sensorHandler.sendMessage(m);
+		}
+	}
+	
+	
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.map_menu, menu);
@@ -377,29 +402,42 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     		final Intent settings = new Intent(MapActivity.this, SettingsActivity.class);
 			startActivity(settings);
     		return true;
-		} else if (item.getItemId() == R.id.map_add_to_favourite) {
-			addFavouritePoint();
+		} else if (item.getItemId() == R.id.map_mark_point) {
+			markPoint();
 			return true;
 		} else if (item.getItemId() == R.id.map_specify_point) {
 			openChangeLocationDialog();
 			return true;
     	}  else if (item.getItemId() == R.id.map_navigate_to_point) {
     		if(navigationLayer.getPointToNavigate() != null){
-    			getPreferences(MODE_WORLD_READABLE).edit().remove(POINT_NAVIGATE_LAT).remove(POINT_NAVIGATE_LON).commit();
-    			item.setTitle(R.string.navigate_to_point);
     			navigateToPoint(null);
     		} else {
-    			getPreferences(MODE_WORLD_READABLE).edit().
-    				putFloat(POINT_NAVIGATE_LAT, (float) mapView.getLatitude()).
-    				putFloat(POINT_NAVIGATE_LON, (float) mapView.getLongitude()).commit();
-    			item.setTitle(R.string.stop_navigation);
     			navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
     		}
     	}
     	return super.onOptionsItemSelected(item);
     }
     
-    private void addFavouritePoint(){
+    protected void markPoint(){
+    	Builder builder = new AlertDialog.Builder(this);
+    	builder.setItems(new String[]{"Navigate to point", "Add to favourites", "Open osm bug"}, new DialogInterface.OnClickListener(){
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				if(which == 0){
+					navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
+				} else if(which == 1){
+					addFavouritePoint();
+				} else if(which == 2){
+					osmBugsLayer.openBug(MapActivity.this, getLayoutInflater(), mapView);
+				}
+			}
+    	});
+		builder.create().show();
+    }
+    
+    
+    protected void addFavouritePoint(){
     	final FavouritePoint p = new FavouritesActivity.FavouritePoint();
     	p.setLatitude(mapView.getLatitude());
     	p.setLongitude(mapView.getLongitude());
@@ -435,21 +473,6 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 	}
 
-	@Override
-	public void onSensorChanged(SensorEvent event) {
-		// using that strange technique because sensor produces a lot of events & hangs the system
-		locationLayer.setHeading(event.values[0], true);
-		if(!sensorHandler.hasMessages(1) && locationLayer.isLocationVisible(locationLayer.getLastKnownLocation())){
-			Message m = Message.obtain(sensorHandler, new Runnable(){
-				@Override
-				public void run() {
-					mapView.refreshMap();
-				}
-			});
-			m.what = 1;
-			sensorHandler.sendMessage(m);
-		}
-	}
-	
+
     
 }

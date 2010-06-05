@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -28,6 +29,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private ListPreference positionOnMap;
 	private CheckBoxPreference useEnglishNames;
 	private CheckBoxPreference showOsmBugs;
+	private EditTextPreference userName;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		showOsmBugs.setOnPreferenceChangeListener(this);
 		useEnglishNames =(CheckBoxPreference) screen.findPreference(OsmandSettings.USE_ENGLISH_NAMES);
 		useEnglishNames.setOnPreferenceChangeListener(this);
+		userName = (EditTextPreference) screen.findPreference(OsmandSettings.USER_NAME);
+		userName.setOnPreferenceChangeListener(this);
 		
 		positionOnMap =(ListPreference) screen.findPreference(OsmandSettings.POSITION_ON_MAP);
 		positionOnMap.setOnPreferenceChangeListener(this);
@@ -68,6 +72,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		positionOnMap.setEntryValues(e);
 		positionOnMap.setEntries(e);
 		positionOnMap.setValueIndex(OsmandSettings.getPositionOnMap(this));
+		userName.setText(OsmandSettings.getUserName(this));
 		
 
 		List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
@@ -99,6 +104,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.commit();
 		} else if(preference == useEnglishNames){
 			edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, (Boolean) newValue);
+			edit.commit();
+		} else if(preference == userName){
+			edit.putString(OsmandSettings.USER_NAME, (String) newValue);
 			edit.commit();
 		} else if(preference == showViewAngle){
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, (Boolean) newValue);
