@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -259,8 +260,8 @@ public class OsmBugsLayer implements OsmandMapLayer {
 		b.append("lat=").append(latitude);
 		b.append("&lon=").append(longitude);
 		text = text + " [" + authorName +" "+ dateFormat.format(new Date())+ "]";
-		b.append("&text=").append(text);
-		b.append("&name=").append(authorName);
+		b.append("&text=").append(URLEncoder.encode(text));
+		b.append("&name=").append(URLEncoder.encode(authorName));
 		return editingPOI(b.toString(), "creating bug");
 	}
 	
@@ -269,8 +270,8 @@ public class OsmBugsLayer implements OsmandMapLayer {
 		b.append("http://openstreetbugs.schokokeks.org/api/0.1/editPOIexec?");
 		b.append("id=").append(id);
 		text = text + " [" + authorName +" "+ dateFormat.format(new Date())+ "]";
-		b.append("&text=").append(text);
-		b.append("&name=").append(authorName);
+		b.append("&text=").append(URLEncoder.encode(text));
+		b.append("&name=").append(URLEncoder.encode(authorName));
 		return editingPOI(b.toString(), "adding comment");
 	}
 	
@@ -283,8 +284,8 @@ public class OsmBugsLayer implements OsmandMapLayer {
 	
 	
 	private boolean editingPOI(String urlStr, String debugAction){
-		urlStr = urlStr.replace(" ", "%20");
 		try {
+			log.debug("Action " + debugAction + " " + urlStr);
 			URL url = new URL(urlStr);
 			URLConnection connection = url.openConnection();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -299,7 +300,6 @@ public class OsmBugsLayer implements OsmandMapLayer {
 		} 
 		return false;
 	}
-	
 	
 	protected List<OpenStreetBug> loadingBugs(double topLatitude, double leftLongitude, double bottomLatitude,double rightLongitude){
 		List<OpenStreetBug> bugs = new ArrayList<OpenStreetBug>();
