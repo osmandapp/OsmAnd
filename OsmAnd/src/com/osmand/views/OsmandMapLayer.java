@@ -16,6 +16,12 @@ public interface OsmandMapLayer {
 	
 	public boolean onLongPressEvent(PointF point);
 	
+	/**
+	 * This method returns whether canvas should be rotated as 
+	 * map rotated before {@link #onDraw(Canvas)}.
+	 * If the layer draws simply layer over screen (not over map)
+	 * it should return true.
+	 */
 	public boolean drawInScreenPixels();
 
 }

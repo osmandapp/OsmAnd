@@ -26,7 +26,6 @@ public class PointNavigationLayer implements OsmandMapLayer {
 	private void initUI() {
 		point = new Paint();
 		point.setColor(Color.rgb(250, 80, 80));
-		point.setAlpha(230);
 		point.setAntiAlias(true);
 		point.setStyle(Style.FILL);
 

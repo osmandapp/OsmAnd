@@ -33,6 +33,14 @@ public class OsmandSettings {
 		return prefs.getBoolean(SHOW_POI_OVER_MAP, false);
 	}
 	
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String SHOW_OSM_BUGS = "show_osm_bugs";
+	public static boolean isShowingOsmBugs(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(SHOW_OSM_BUGS, false);
+	}
+	
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SHOW_VIEW_ANGLE = "show_view_angle";
 	public static boolean isShowingViewAngle(Context ctx){
