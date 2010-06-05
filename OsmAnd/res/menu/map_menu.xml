@@ -2,7 +2,7 @@
 <menu
   xmlns:android="http://schemas.android.com/apk/res/android">
 <group android:id="@+id/map_context_menu" android:menuCategory="container"><item android:id="@+id/map_show_settings" android:title="@string/settings_Button"></item>
-<item android:id="@+id/map_add_to_favourite" android:title="@string/add_to_favourite"></item>
+<item android:title="@string/mark_point" android:id="@+id/map_mark_point"></item>
 <item android:title="@string/navigate_to_point" android:id="@+id/map_navigate_to_point"></item>
 <item android:title="@string/map_specify_point" android:id="@+id/map_specify_point"></item>
 

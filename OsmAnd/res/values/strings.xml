@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="user_name_descr">Input user name to communicate osm</string>
+    <string name="user_name">User name</string>
+    <string name="mark_point">Mark point</string>
     <string name="show_osm_bugs_descr">Show open street bugs on map</string>
     <string name="show_osm_bugs">Show open street bugs</string>
     <string name="favourites_activity">List of favourite points</string>
