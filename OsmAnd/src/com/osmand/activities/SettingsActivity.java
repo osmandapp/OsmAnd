@@ -27,6 +27,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private CheckBoxPreference showViewAngle;
 	private ListPreference positionOnMap;
 	private CheckBoxPreference useEnglishNames;
+	private CheckBoxPreference showOsmBugs;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		rotateMapToBearing.setOnPreferenceChangeListener(this);
 		showViewAngle =(CheckBoxPreference) screen.findPreference(OsmandSettings.SHOW_VIEW_ANGLE);
 		showViewAngle.setOnPreferenceChangeListener(this);
+		showOsmBugs =(CheckBoxPreference) screen.findPreference(OsmandSettings.SHOW_OSM_BUGS);
+		showOsmBugs.setOnPreferenceChangeListener(this);
 		useEnglishNames =(CheckBoxPreference) screen.findPreference(OsmandSettings.USE_ENGLISH_NAMES);
 		useEnglishNames.setOnPreferenceChangeListener(this);
 		
@@ -59,6 +62,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		showPoiOnMap.setChecked(OsmandSettings.isShowingPoiOverMap(this));
 		rotateMapToBearing.setChecked(OsmandSettings.isRotateMapToBearing(this));
 		showViewAngle.setChecked(OsmandSettings.isShowingViewAngle(this));
+		showOsmBugs.setChecked(OsmandSettings.isShowingOsmBugs(this));
 		useEnglishNames.setChecked(OsmandSettings.usingEnglishNames(this));
 		String[] e = new String[] { "Center", "Bottom" };
 		positionOnMap.setEntryValues(e);
@@ -98,6 +102,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.commit();
 		} else if(preference == showViewAngle){
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, (Boolean) newValue);
+			edit.commit();
+		} else if(preference == showOsmBugs){
+			edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, (Boolean) newValue);
 			edit.commit();
 		} else if(preference == positionOnMap){
 			edit.putInt(OsmandSettings.POSITION_ON_MAP, positionOnMap.findIndexOfValue((String) newValue));

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="show_osm_bugs_descr">Show open street bugs on map</string>
+    <string name="show_osm_bugs">Show open street bugs</string>
     <string name="favourites_activity">List of favourite points</string>
     <string name="add_to_favourite">Add to Favourites</string>
     <string name="use_english_names_descr">Select use native or english names</string>
@@ -21,7 +23,7 @@
     <string name="map_view_3d">Map View 3D</string>
     <string name="rotate_map_to_bearing_descr">Rotate map to bearing of your direction</string>
     <string name="rotate_map_to_bearing">Rotate map</string>
-    <string name="show_poi_over_map_description">Show POI on map</string>
+    <string name="show_poi_over_map_description">Show POI on map (zoom &gt; 15)</string>
     <string name="show_poi_over_map">Show POI</string>
     <string name="map_tile_source_descr">Choose the source of tiles:</string>
     <string name="map_tile_source">Map tile source</string>

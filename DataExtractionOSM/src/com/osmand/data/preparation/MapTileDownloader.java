@@ -24,7 +24,7 @@ import com.osmand.LogUtil;
 public class MapTileDownloader {
 	// Application constants
 	public static String APP_NAME = "OsmAnd";
-	public static String APP_VERSION = "0.1";
+	public static String APP_VERSION = "0.2";
 	
 	
 	// Download manager tile settings
@@ -131,7 +131,15 @@ public class MapTileDownloader {
 	
 	
 	public void refuseAllPreviousRequests(){
-		threadPoolExecutor.getQueue().clear();
+		//FIXME it could cause NPE in android implementation think abou different style
+		// That's very strange because exception in impl of queue (possibly wrong impl)
+//		threadPoolExecutor.getQueue().clear();
+		while(!threadPoolExecutor.getQueue().isEmpty()){
+			try {
+				threadPoolExecutor.getQueue().take();
+			} catch (InterruptedException e) {
+			}
+		}
 	}
 	
 	public void requestToDownload(DownloadRequest request){

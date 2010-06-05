@@ -11,7 +11,7 @@ public class ToDoConstants {
 	 */
 	public int DESCRIBE_ABOUT_AUTHORS = 8;
 	
-	 // TODO ANDROID NOT in release 0.1
+	 // TODO ANDROID 
 //	  8. Enable change POI directly on map (requires OSM login)
 //   16. Support open street bugs api.
 //   20. Implement save track/route to gpx (?)
@@ -22,14 +22,13 @@ public class ToDoConstants {
 //   31. Translation.	
 //   32. Introduce POI predefined filters (car filter(other-fuel, transportation-car_wash, show-car) and others)
 //   33. Build transport locations (investigate)
-//   34. Investigate routing (bicycle, car)	
+//   34. Investigate routing (bicycle, car)
+//   35. Enable trackball navigation in android	
 
 	
-	// FIXME Bugs Android :
-	// 10. Notification is gone after clear all notifications (TODO test)
-	
-	// TODO swing NOT in release 0.1
+	// TODO swing 
 	// 1. Download tiles without using dir tiles
+	// 2. Internal (Simplify MapPanel - introduce layers for it) 
 	
 	
 	// DONE ANDROID :

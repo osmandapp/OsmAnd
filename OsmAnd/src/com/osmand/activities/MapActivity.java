@@ -43,6 +43,7 @@ import com.osmand.data.preparation.MapTileDownloader;
 import com.osmand.map.IMapLocationListener;
 import com.osmand.osm.LatLon;
 import com.osmand.views.MapInfoLayer;
+import com.osmand.views.OsmBugsLayer;
 import com.osmand.views.OsmandMapTileView;
 import com.osmand.views.POIMapLayer;
 import com.osmand.views.PointLocationLayer;
@@ -61,10 +62,13 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	private PointNavigationLayer navigationLayer;
 	private POIMapLayer poiMapLayer;
 	private MapInfoLayer mapInfoLayer;
+	private OsmBugsLayer osmBugsLayer;
 	
 	private WakeLock wakeLock;
 	private boolean sensorRegistered = false;
 	private Handler sensorHandler = new Handler();
+
+	
 
 	private final static String BACK_TO_LOCATION = "BACK_TO_LOCATION";
 	private final static String POINT_NAVIGATE_LAT = "POINT_NAVIGATE_LAT";
@@ -95,6 +99,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		mapView.addLayer(locationLayer);
 		mapInfoLayer = new MapInfoLayer(this);
 		mapView.addLayer(mapInfoLayer);
+		osmBugsLayer = new OsmBugsLayer();
 		
 		
 		
@@ -305,6 +310,14 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 				mapView.removeLayer(poiMapLayer);
 			}
 		}
+		if(mapView.getLayers().contains(osmBugsLayer) != OsmandSettings.isShowingOsmBugs(this)){
+			if(OsmandSettings.isShowingOsmBugs(this)){
+				mapView.addLayer(osmBugsLayer);
+			} else {
+				mapView.removeLayer(osmBugsLayer);
+			}
+		}
+		
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		service.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 0, this);
 		

@@ -104,7 +104,9 @@ public class OsmExtractionUI implements IMapLocationListener {
 		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler(){
 			@Override
 			public void uncaughtException(Thread t, Throwable e) {
-				log.error("Error in thread " + t.getName(), e);
+				if(!(e instanceof ThreadDeath)){
+					log.error("Error in thread " + t.getName(), e);
+				}
 				defaultHandler.uncaughtException(t, e);
 			}
 		});
