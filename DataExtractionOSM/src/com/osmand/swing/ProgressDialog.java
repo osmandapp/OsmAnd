@@ -28,7 +28,7 @@ public class ProgressDialog extends JDialog implements IProgress {
 	
 
 	// Progress variables
-	private static final float deltaToChange = 0.01f;
+	private static final float deltaToChange = 0.001f;
 	private String taskName;
 	private int deltaWork;
 	private WorkerThread workerThread;

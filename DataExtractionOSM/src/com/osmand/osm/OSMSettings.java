@@ -19,6 +19,10 @@ public class OSMSettings {
 		SHOP("shop"),
 		LEISURE("leisure"), 
 		TOURISM("tourism"),
+		SPORT("sport"), 
+		HISTORIC("historic"),
+		NATURAL("natural"),
+		INTERNET_ACCESS("internet_access"),
 		OPENING_HOURS("opening_hours"),
 		;
 		

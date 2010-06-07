@@ -19,6 +19,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import com.osmand.IProgress;
 import com.osmand.osm.Entity;
+import com.osmand.osm.EntityInfo;
 import com.osmand.osm.Node;
 import com.osmand.osm.Relation;
 import com.osmand.osm.Way;
@@ -38,6 +39,11 @@ public class OsmBaseStorage extends DefaultHandler {
 	protected static final String ATTR_ID = "id";
 	protected static final String ATTR_LAT = "lat";
 	protected static final String ATTR_LON = "lon";
+	protected static final String ATTR_TIMESTAMP = "timestamp";
+	protected static final String ATTR_UID = "uid";
+	protected static final String ATTR_USER = "user";
+	protected static final String ATTR_VISIBLE = "visible";
+	protected static final String ATTR_CHANGESET = "changeset";
 	protected static final String ATTR_K = "k";
 	protected static final String ATTR_V = "v";
 	
@@ -46,10 +52,12 @@ public class OsmBaseStorage extends DefaultHandler {
 	protected static final String ATTR_ROLE = "role";
 	
 	protected Entity currentParsedEntity = null;
+	protected EntityInfo currentParsedEntityInfo = null;
 	
 	protected boolean parseStarted;
 	
 	protected Map<Long, Entity> entities = new LinkedHashMap<Long, Entity>();
+	protected Map<Long, EntityInfo> entityInfo = new LinkedHashMap<Long, EntityInfo>();
 	
 	// this is used to show feedback to user
 	protected IProgress progress;
@@ -57,11 +65,15 @@ public class OsmBaseStorage extends DefaultHandler {
 	protected InputStream streamForProgress;
 	protected List<IOsmStorageFilter> filters = new ArrayList<IOsmStorageFilter>();
 	protected boolean supressWarnings = true;
+	protected boolean parseEntityInfo;
 	
 	
-	public synchronized void parseOSM(InputStream stream, IProgress progress, InputStream streamForProgress) throws IOException, SAXException {
+	
+	public synchronized void parseOSM(InputStream stream, IProgress progress, InputStream streamForProgress, 
+			boolean entityInfo) throws IOException, SAXException {
 		this.inputStream = stream;
 		this.progress = progress;
+		parseEntityInfo = entityInfo;
 		if(streamForProgress == null){
 			streamForProgress = inputStream;
 		}
@@ -69,6 +81,7 @@ public class OsmBaseStorage extends DefaultHandler {
 		SAXParser parser = initSaxParser();
 		parseStarted = false;
 		entities.clear();
+		this.entityInfo.clear();
 		if(progress != null){
 			progress.startWork(streamForProgress.available());
 		}
@@ -78,6 +91,11 @@ public class OsmBaseStorage extends DefaultHandler {
 			progress.finishTask();
 		}
 		completeReading();
+	}
+	
+	public synchronized void parseOSM(InputStream stream, IProgress progress, InputStream streamForProgress) 
+				throws IOException, SAXException{
+		parseOSM(stream, progress, streamForProgress, true);
 	}
 	
 	/**
@@ -170,6 +188,15 @@ public class OsmBaseStorage extends DefaultHandler {
 			} else {
 				// this situation could be logged as unhandled
 			}
+			if(parseEntityInfo && currentParsedEntity != null){
+				currentParsedEntityInfo = new EntityInfo();
+				currentParsedEntityInfo.setChangeset(attributes.getValue(ATTR_CHANGESET));
+				currentParsedEntityInfo.setTimestamp(attributes.getValue(ATTR_TIMESTAMP));
+				currentParsedEntityInfo.setUser(attributes.getValue(ATTR_USER));
+				currentParsedEntityInfo.setVersion(attributes.getValue(ATTR_VERSION));
+				currentParsedEntityInfo.setVisible(attributes.getValue(ATTR_VISIBLE));
+				currentParsedEntityInfo.setUid(attributes.getValue(ATTR_UID));
+			}
 		} else {
 			if (ELEM_TAG.equals(name)) {
 				String key = attributes.getValue(ATTR_K);
@@ -200,6 +227,9 @@ public class OsmBaseStorage extends DefaultHandler {
 			if(currentParsedEntity != null){
 				if(acceptEntityToLoad(currentParsedEntity)){
 					Entity oldEntity = entities.put(currentParsedEntity.getId(), currentParsedEntity);
+					if(parseEntityInfo && currentParsedEntityInfo != null){
+						entityInfo.put(currentParsedEntity.getId(), currentParsedEntityInfo);
+					}
 					if(!supressWarnings && oldEntity!= null){
 						throw new UnsupportedOperationException("Entity with id=" + oldEntity.getId() +" is duplicated in osm map");
 					}
@@ -228,6 +258,9 @@ public class OsmBaseStorage extends DefaultHandler {
 		}
 	}
 	
+	public Map<Long, EntityInfo> getRegisteredEntityInfo() {
+		return entityInfo;
+	} 
 
 	public Map<Long, Entity> getRegisteredEntities() {
 		return entities;
