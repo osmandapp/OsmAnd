@@ -121,7 +121,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		
 		
 		
-		ZoomControls zoomControls = (ZoomControls) findViewById(R.id.ZoomControls01);
+		ZoomControls zoomControls = (ZoomControls) findViewById(R.id.ZoomControls);
 		zoomControls.setOnZoomInClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

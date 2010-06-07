@@ -4,9 +4,9 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 <com.osmand.views.OsmandMapTileView android:id="@+id/MapView" android:layout_width="fill_parent" android:layout_height="fill_parent"></com.osmand.views.OsmandMapTileView>
+<com.osmand.views.OsmZoomControls android:id="@+id/ZoomControls"
+		android:layout_width="100dp" android:layout_height="wrap_content" android:layout_gravity="bottom|right">></com.osmand.views.OsmZoomControls >
 
-<ZoomControls android:id="@+id/ZoomControls01"
-		android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom|right"></ZoomControls>		
 <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom|left" android:id="@+id/BackToMenu" android:background="@drawable/back_menu"></ImageButton>
 <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="top|right" android:id="@+id/BackToLocation" android:background="@drawable/back_location"></ImageButton>
 

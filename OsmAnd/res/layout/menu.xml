@@ -1,44 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" 
 	android:layout_height="fill_parent" android:background="@drawable/background_rot">
-	
-	<Button android:layout_height="45dp"  android:layout_gravity="center"
+	<TableLayout android:layout_gravity="center"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+		<TableRow>
+			<Button
 					android:id="@+id/MapButton" 
 					android:text="@string/map_Button" 
 					android:background="@drawable/btn_orange"
 					android:textColor="#FFFFFF"
 					android:textStyle="bold"
-					android:drawableLeft="@drawable/map" 
-					android:layout_width="300dp" android:layout_marginTop="10dp"></Button>
+					android:layout_width="180dip"
+					android:layout_height="70dip"
+					android:drawableLeft="@drawable/map"/>
 					
-	
-	<Button android:layout_height="45dp"  android:layout_gravity="center"
-					android:id="@+id/SearchButton" 
+			<Button 
+					android:id="@+id/SearchButton"
 					android:text="@string/search_button" 
 					android:background="@drawable/btn_orange"
 					android:textColor="#FFFFFF"
 					android:textStyle="bold"
-					android:drawableLeft="@drawable/find" 
-					android:layout_width="300dp" android:layout_marginTop="10dp"></Button>				
-	<Button android:layout_height="45dp"  android:layout_gravity="center"
-					android:id="@+id/FavoritesButton" 
-					android:text="@string/favorites_Button" 
+					android:layout_width="180dip"
+					android:layout_height="70dip"
+					android:drawableLeft="@drawable/find"/>	
+		</TableRow>
+		<TableRow>
+			<Button 
+					android:id="@+id/FavoritesButton"
+					android:text="@string/favorites_Button"
 					android:background="@drawable/btn_orange"
 					android:textColor="#FFFFFF"
 					android:textStyle="bold"
-					android:drawableLeft="@drawable/favorites" 
-					android:layout_width="300dp" android:layout_marginTop="10dp"></Button>		
-	<Button android:layout_height="45dp"  android:layout_gravity="center"
-					android:id="@+id/SettingsButton" 
-					android:text="@string/settings_Button" 
+					android:layout_width="180dip"
+					android:layout_height="70dip"
+					android:drawableLeft="@drawable/favorites"/>
+			<Button 
+					android:id="@+id/SettingsButton"
+					android:text="@string/settings_Button"
 					android:background="@drawable/btn_orange"
 					android:textColor="#FFFFFF"
 					android:textStyle="bold"
-					android:drawableLeft="@drawable/settings" 
-					android:layout_width="300dp" android:layout_marginTop="10dp"></Button>		
-	<FrameLayout android:id="@+id/FrameLayout01"
+					android:layout_width="180dip"
+					android:layout_height="70dip"
+					android:drawableLeft="@drawable/settings"/>
+		</TableRow>
+	</TableLayout>				
+	
+	<FrameLayout android:id="@+id/FrameLayout"
 		android:layout_height="fill_parent" android:layout_width="fill_parent">
 		<Button android:layout_width="wrap_content" 
 			android:layout_marginLeft="5dp" android:layout_marginBottom ="5dp"
@@ -46,7 +57,4 @@
 			android:id="@+id/ExitButton" android:background="@drawable/exit"></Button>
 	</FrameLayout>
 
-
-
-
-</LinearLayout>
+</FrameLayout>
