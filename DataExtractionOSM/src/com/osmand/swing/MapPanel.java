@@ -44,6 +44,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.UIManager;
 
 import org.apache.commons.logging.Log;
@@ -152,6 +153,9 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 	private MapSelectionArea selectionArea = new MapSelectionArea();
 	
+	private LatLon startRoute;
+	private LatLon endRoute;
+	
 	
 	// cached data to draw image
 	private Image[][] images;
@@ -166,6 +170,11 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	private JLabel gpsLocation;
 
 	private JButton areaButton;
+	
+	private JPopupMenu popupMenu;
+	private Point popupMenuPoint;
+	
+	private boolean willBePopupShown = false;
 	
 	
 	
@@ -221,6 +230,25 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		return map == null ?  256 : map.getTileSize();
 	}
 	
+	
+	public int getMapXForPoint(double longitude){
+		double tileX = MapUtils.getTileNumberX(zoom, longitude);
+		return (int) ((tileX - getXTile()) * getTileSize() + getCenterPointX());
+	}
+	private double getCenterPointX() {
+		return getWidth() / 2;
+	}
+
+
+	public int getMapYForPoint(double latitude){
+		double tileY = MapUtils.getTileNumberY(zoom, latitude);
+		return (int) ((tileY - getYTile()) * getTileSize() + getCenterPointY());
+	}
+
+	private double getCenterPointY() {
+		return getHeight() / 2;
+	}
+
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -254,8 +282,21 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 			g.drawOval(p.x, p.y, 3, 3);
 			g.fillOval(p.x, p.y, 3, 3);
 		}
-		
-		g.setColor(Color.orange);
+		g.setColor(Color.green);
+		if(startRoute != null){
+			int x = getMapXForPoint(startRoute.getLongitude());
+			int y = getMapYForPoint(startRoute.getLatitude());
+			g.drawOval(x, y, 12, 12);
+			g.fillOval(x, y, 12, 12);
+		}
+		g.setColor(Color.red);
+		if(endRoute != null){
+			int x = getMapXForPoint(endRoute.getLongitude());
+			int y = getMapYForPoint(endRoute.getLatitude());
+			g.drawOval(x, y, 12, 12);
+			g.fillOval(x, y, 12, 12);
+		}
+		g.setColor(Color.black);
 		// draw user points
 		int[] xPoints = new int[4];
 		int[] yPoints = new int[4];
@@ -631,6 +672,54 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		areaButton.setAlignmentY(Component.TOP_ALIGNMENT);
 		zoomOut.setAlignmentY(Component.TOP_ALIGNMENT);
 		zoomIn.setAlignmentY(Component.TOP_ALIGNMENT);
+		popupMenu = new JPopupMenu();
+		fillPopupMenuWithActions(popupMenu);
+	}
+	
+	public void fillPopupMenuWithActions(JPopupMenu menu) {
+		Action start = new AbstractAction("Mark start point") {
+			private static final long serialVersionUID = 507156107455281238L;
+
+			public void actionPerformed(ActionEvent e) {
+				double fy = (popupMenuPoint.y - getCenterPointY()) / getTileSize();
+				double fx = (popupMenuPoint.x - getCenterPointX()) / getTileSize();
+				double latitude = MapUtils.getLatitudeFromTile(zoom, getYTile() + fy);
+				double longitude = MapUtils.getLongitudeFromTile(zoom, getXTile() + fx);
+				startRoute = new LatLon(latitude, longitude);
+				repaint();
+			}
+		};
+		menu.add(start);
+		Action end= new AbstractAction("Mark end point") {
+			private static final long serialVersionUID = 4446789424902471319L;
+
+			public void actionPerformed(ActionEvent e) {
+				double fy = (popupMenuPoint.y - getCenterPointY()) / getTileSize();
+				double fx = (popupMenuPoint.x - getCenterPointX()) / getTileSize();
+				double latitude = MapUtils.getLatitudeFromTile(zoom, getYTile() + fy);
+				double longitude = MapUtils.getLongitudeFromTile(zoom, getXTile() + fx);
+				endRoute = new LatLon(latitude, longitude);
+				repaint();
+			}
+		};
+		menu.add(end);
+		Action route = new AbstractAction("Calculate route") {
+			private static final long serialVersionUID = 507156107455281238L;
+
+			public void actionPerformed(ActionEvent e) {
+				List<Way> ways = RoutingHelper.route(startRoute, endRoute);
+				DataTileManager<Way> points = new DataTileManager<Way>();
+				points.setZoom(11);
+				for(Way w : ways){
+					LatLon n = w.getLatLon();
+					points.registerObject(n.getLatitude(), n.getLongitude(), w);
+				}
+				MapPanel.this.points = points;
+				prepareImage();
+			}
+		};
+		menu.add(route);
+
 	}
 	
 	public class MapSelectionArea {
@@ -706,9 +795,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			if(e.getButton() == MouseEvent.BUTTON1){
-				requestFocus();
-			}
+			requestFocus();
 		}
 		
 		public void dragTo(Point p){
@@ -721,6 +808,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		
 		@Override
 		public void mouseDragged(MouseEvent e) {
+			willBePopupShown = false;
 			if(startDragging != null){
 				if(Math.abs(e.getPoint().x - startDragging.x) +  Math.abs(e.getPoint().y - startDragging.y) >= 8){
 					dragTo(e.getPoint());
@@ -751,7 +839,9 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 			} else if(e.getButton() == MouseEvent.BUTTON1){
 				startSelecting = e.getPoint();
 			}
+			willBePopupShown = true;
 		}
+
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			if(e.getButton() == MouseEvent.BUTTON3){
@@ -765,10 +855,16 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 				if(startSelecting != null){
 					selectionArea.setSelectedArea(startSelecting.x, startSelecting.y, e.getPoint().x, e.getPoint().y);
 					startSelecting = null;
-					updateUI();
 				}
-				
 			}
+			
+			// possible bug if popup neither button1|| button3
+			if(willBePopupShown && e.isPopupTrigger()){
+				popupMenuPoint = new Point(e.getX(), e.getY());
+				popupMenu.show(MapPanel.this, e.getX(), e.getY());
+				
+				willBePopupShown = false;
+			}			
 			super.mouseReleased(e);
 		}
 

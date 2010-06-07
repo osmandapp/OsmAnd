@@ -9,6 +9,7 @@ import com.osmand.osm.OSMSettings.OSMTagKey;
 
 public class Amenity extends MapObject {
 	// http://wiki.openstreetmap.org/wiki/Amenity
+	// POI tags : amenity, leisure, shop, sport, tourism, historic; accessories (internet-access), natural ?
 	public enum AmenityType {
 		SUSTENANCE, // restaurant, cafe ...
 		EDUCATION, // school, ...

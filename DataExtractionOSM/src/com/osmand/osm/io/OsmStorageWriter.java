@@ -1,14 +1,19 @@
 package com.osmand.osm.io;
 
+import static com.osmand.osm.io.OsmBaseStorage.ATTR_CHANGESET;
 import static com.osmand.osm.io.OsmBaseStorage.ATTR_ID;
 import static com.osmand.osm.io.OsmBaseStorage.ATTR_K;
 import static com.osmand.osm.io.OsmBaseStorage.ATTR_LAT;
 import static com.osmand.osm.io.OsmBaseStorage.ATTR_LON;
 import static com.osmand.osm.io.OsmBaseStorage.ATTR_REF;
 import static com.osmand.osm.io.OsmBaseStorage.ATTR_ROLE;
+import static com.osmand.osm.io.OsmBaseStorage.ATTR_TIMESTAMP;
 import static com.osmand.osm.io.OsmBaseStorage.ATTR_TYPE;
+import static com.osmand.osm.io.OsmBaseStorage.ATTR_UID;
+import static com.osmand.osm.io.OsmBaseStorage.ATTR_USER;
 import static com.osmand.osm.io.OsmBaseStorage.ATTR_V;
 import static com.osmand.osm.io.OsmBaseStorage.ATTR_VERSION;
+import static com.osmand.osm.io.OsmBaseStorage.ATTR_VISIBLE;
 import static com.osmand.osm.io.OsmBaseStorage.ELEM_MEMBER;
 import static com.osmand.osm.io.OsmBaseStorage.ELEM_ND;
 import static com.osmand.osm.io.OsmBaseStorage.ELEM_NODE;
@@ -32,6 +37,7 @@ import javax.xml.stream.XMLStreamWriter;
 import com.osmand.Algoritms;
 import com.osmand.data.MapObject;
 import com.osmand.osm.Entity;
+import com.osmand.osm.EntityInfo;
 import com.osmand.osm.Node;
 import com.osmand.osm.Relation;
 import com.osmand.osm.Way;
@@ -50,6 +56,7 @@ public class OsmStorageWriter {
 	
 	public void saveStorage(OutputStream output, OsmBaseStorage storage, Collection<Long> interestedObjects, boolean includeLinks) throws XMLStreamException, IOException {
 		Map<Long, Entity> entities = storage.getRegisteredEntities();
+		Map<Long, EntityInfo> entityInfo = storage.getRegisteredEntityInfo();
 		PropertyManager propertyManager = new PropertyManager(PropertyManager.CONTEXT_WRITER);
 //		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 //        String indent = "{http://xml.apache.org/xslt}indent-amount";
@@ -92,6 +99,7 @@ public class OsmStorageWriter {
 			streamWriter.writeAttribute(ATTR_LAT, n.getLatitude()+"");
 			streamWriter.writeAttribute(ATTR_LON, n.getLongitude()+"");
 			streamWriter.writeAttribute(ATTR_ID, n.getId()+"");
+			writeEntityAttributes(streamWriter, entityInfo.get(n.getId()));
 			writeTags(streamWriter, n);
 			writeEndElement(streamWriter, INDENT);
 		}
@@ -99,6 +107,7 @@ public class OsmStorageWriter {
 		for(Way w : ways){
 			writeStartElement(streamWriter, ELEM_WAY, INDENT);
 			streamWriter.writeAttribute(ATTR_ID, w.getId()+"");
+			writeEntityAttributes(streamWriter, entityInfo.get(w.getId()));
 			for(Long r : w.getNodeIds()){
 				writeStartElement(streamWriter, ELEM_ND, INDENT2);
 				streamWriter.writeAttribute(ATTR_REF, r+"");
@@ -111,6 +120,7 @@ public class OsmStorageWriter {
 		for(Relation r : relations){
 			writeStartElement(streamWriter, ELEM_RELATION, INDENT);
 			streamWriter.writeAttribute(ATTR_ID, r.getId()+"");
+			writeEntityAttributes(streamWriter, entityInfo.get(r.getId()));
 			for(Entry<Long, String> e : r.getMembersMap().entrySet()){
 				writeStartElement(streamWriter, ELEM_MEMBER, INDENT2);
 				streamWriter.writeAttribute(ATTR_REF, e.getKey()+"");
@@ -129,6 +139,29 @@ public class OsmStorageWriter {
 		writeEndElement(streamWriter, ""); // osm
 		streamWriter.writeEndDocument();
 		streamWriter.flush();
+	}
+	
+	private void writeEntityAttributes(XMLStreamWriter writer, EntityInfo info) throws XMLStreamException{
+		if(info != null){
+			if(info.getChangeset() != null){
+				writer.writeAttribute(ATTR_CHANGESET, info.getChangeset());
+			}
+			if(info.getTimestamp() != null){
+				writer.writeAttribute(ATTR_TIMESTAMP, info.getTimestamp());
+			}
+			if(info.getUid() != null){
+				writer.writeAttribute(ATTR_UID, info.getUid());
+			}
+			if(info.getUser() != null){
+				writer.writeAttribute(ATTR_USER, info.getUser());
+			}
+			if(info.getVisible() != null){
+				writer.writeAttribute(ATTR_VISIBLE, info.getVisible());
+			}
+			if(info.getVersion() != null){
+				writer.writeAttribute(ATTR_VERSION, info.getVersion());
+			}
+		}
 	}
 	
 	private String getEntityType(Map<Long, Entity> entities , Long id){
@@ -169,18 +202,5 @@ public class OsmStorageWriter {
 			writer.writeEndElement();
 		}
 	}
-	
-	/*public static void main(String[] args) {
-		
-//		Transliterator inst = Transliterator.getInstance("Any-Latin;NFD;[:Nonspacing Mark:] Remove;NFKC");
-		Transliterator inst = Transliterator.getInstance("Any-Latin;");
-		Enumeration<String> e = Transliterator.getAvailableIDs();
-		while(e.hasMoreElements()){
-			System.out.println(e.nextElement());
-		}
-		String str = "Привет Гомель жаль прощаться до скорой встречи когда ы ";
-		System.out.println(Junidecode.unidecode(str));
-		System.out.println(inst.transliterate(str));
-	}*/
 }
 

@@ -84,13 +84,18 @@ public class DataExtraction  {
 	private final boolean normalizeStreets;
 	private final boolean indexAddress;
 	private final boolean indexPOI;
+	private final boolean parseEntityInfo;
 	private File workingDir = null;
+
 	
-	public DataExtraction(boolean indexAddress, boolean indexPOI, boolean normalizeStreets, boolean loadAllObjects, File workingDir){
+	
+	public DataExtraction(boolean indexAddress, boolean indexPOI, boolean normalizeStreets, 
+			boolean loadAllObjects, boolean parseEntityInfo, File workingDir){
 		this.indexAddress = indexAddress;
 		this.indexPOI = indexPOI;
 		this.normalizeStreets = normalizeStreets;
 		this.loadAllObjects = loadAllObjects;
+		this.parseEntityInfo = parseEntityInfo;
 		this.workingDir = workingDir;
 		
 	}
@@ -263,7 +268,7 @@ public class DataExtraction  {
 			filter.initDatabase();
 			
 			// 0.2 parsing osm itself
-			storage.parseOSM(stream, progress, streamFile);
+			storage.parseOSM(stream, progress, streamFile, parseEntityInfo);
 			if (log.isInfoEnabled()) {
 				log.info("File parsed : " + (System.currentTimeMillis() - st));
 			}

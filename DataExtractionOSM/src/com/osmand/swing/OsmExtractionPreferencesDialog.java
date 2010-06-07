@@ -28,11 +28,11 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 	private JButton cancelButton;
 
 	private JTextField streetSuffixes;
-
 	private JTextField streetDefaultSuffixes;
 
 	private JCheckBox useInternet;
 	private JCheckBox supressWarning;
+	private JCheckBox loadWholeOsmInfo;
 
 	public OsmExtractionPreferencesDialog(Component parent){
     	super(JOptionPane.getFrameForComponent(parent), true);
@@ -42,7 +42,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
     }
 	
 	public void showDialog(){
-		setSize(600, 250);
+		setSize(600, 280);
         double x = getParent().getBounds().getCenterX();
         double y = getParent().getBounds().getCenterY();
         setLocation((int) x - getWidth() / 2, (int) y - getHeight() / 2);
@@ -75,7 +75,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 	
 	private void createGeneralSection(JPanel root) {
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(2, 1, 5, 5));
+		panel.setLayout(new GridLayout(3, 1, 5, 5));
 		panel.setBorder(BorderFactory.createTitledBorder("General"));
 		root.add(panel);
 		
@@ -88,6 +88,11 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		supressWarning.setText("Supress warnings for duplicated id in osm file");
 		supressWarning.setSelected(DataExtractionSettings.getSettings().isSupressWarningsForDuplicatedId());
 		panel.add(supressWarning);
+		
+		loadWholeOsmInfo = new JCheckBox();
+		loadWholeOsmInfo.setText("Load whole osm info (to save valid osm file - use in JOSM...)");
+		loadWholeOsmInfo.setSelected(DataExtractionSettings.getSettings().getLoadEntityInfo());
+		panel.add(loadWholeOsmInfo);
 		panel.setMaximumSize(new Dimension(Short.MAX_VALUE, panel.getPreferredSize().height));
 		
 	}
@@ -172,6 +177,9 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		}
 		if(settings.isSupressWarningsForDuplicatedId() != supressWarning.isSelected()){
 			settings.setSupressWarningsForDuplicatedId	(supressWarning.isSelected());
+		}
+		if(settings.getLoadEntityInfo() != loadWholeOsmInfo.isSelected()){
+			settings.setLoadEntityInfo(loadWholeOsmInfo.isSelected());
 		}
 		
 	}

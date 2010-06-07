@@ -750,6 +750,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 					try {
 						DataExtraction dataExtraction = new DataExtraction(buildAddressIndex.isSelected(), buildPoiIndex.isSelected(),
 								normalizingStreets.isSelected(), loadingAllData.isSelected(), 
+								DataExtractionSettings.getSettings().getLoadEntityInfo(), 
 								DataExtractionSettings.getSettings().getDefaultWorkingDir());
 						if(!buildAddressIndex.isSelected()){
 							buildAddressIndex.setEnabled(false);

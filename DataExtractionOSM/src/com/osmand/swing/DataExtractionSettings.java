@@ -58,6 +58,14 @@ public class DataExtractionSettings {
 		preferences.putInt("default_zoom",  zoom);
 	}
 	
+	public boolean getLoadEntityInfo(){
+		return preferences.getBoolean("load_entity_info",  true);
+	}
+	
+	public void setLoadEntityInfo(boolean loadEntityInfo){
+		preferences.putBoolean("load_entity_info",  loadEntityInfo);
+	}
+	
 	public Rectangle getWindowBounds(){
 		Rectangle r = new Rectangle();
 		r.x = preferences.getInt("window_x",  0);
