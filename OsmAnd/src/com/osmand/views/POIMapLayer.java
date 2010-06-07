@@ -18,7 +18,7 @@ import com.osmand.osm.MapUtils;
 
 public class POIMapLayer implements OsmandMapLayer {
 	// it is very slow to use with 15 level
-	private static final int startZoom = 16;
+	private static final int startZoom = 15;
 	
 	private Paint pointAltUI;
 	private OsmandMapTileView view;
@@ -79,6 +79,8 @@ public class POIMapLayer implements OsmandMapLayer {
 	public int getRadiusPoi(int zoom){
 		if(zoom < startZoom){
 			return 0;
+		} else if(zoom == 15){
+			return 7;
 		} else if(zoom == 16){
 			return 10;
 		} else if(zoom == 17){
