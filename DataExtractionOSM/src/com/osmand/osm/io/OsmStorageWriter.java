@@ -62,7 +62,6 @@ public class OsmStorageWriter {
 //        String indent = "{http://xml.apache.org/xslt}indent-amount";
 //        transformer.setOutputProperty(indent, "4");
         
-        
 		XMLStreamWriter streamWriter = new XMLStreamWriterImpl(output, propertyManager);
 		List<Node> nodes = new ArrayList<Node>();
 		List<Way> ways = new ArrayList<Way>();
@@ -99,7 +98,7 @@ public class OsmStorageWriter {
 			streamWriter.writeAttribute(ATTR_LAT, n.getLatitude()+"");
 			streamWriter.writeAttribute(ATTR_LON, n.getLongitude()+"");
 			streamWriter.writeAttribute(ATTR_ID, n.getId()+"");
-			writeEntityAttributes(streamWriter, entityInfo.get(n.getId()));
+			writeEntityAttributes(streamWriter, n, entityInfo.get(n.getId()));
 			writeTags(streamWriter, n);
 			writeEndElement(streamWriter, INDENT);
 		}
@@ -107,7 +106,7 @@ public class OsmStorageWriter {
 		for(Way w : ways){
 			writeStartElement(streamWriter, ELEM_WAY, INDENT);
 			streamWriter.writeAttribute(ATTR_ID, w.getId()+"");
-			writeEntityAttributes(streamWriter, entityInfo.get(w.getId()));
+			writeEntityAttributes(streamWriter, w, entityInfo.get(w.getId()));
 			for(Long r : w.getNodeIds()){
 				writeStartElement(streamWriter, ELEM_ND, INDENT2);
 				streamWriter.writeAttribute(ATTR_REF, r+"");
@@ -120,7 +119,7 @@ public class OsmStorageWriter {
 		for(Relation r : relations){
 			writeStartElement(streamWriter, ELEM_RELATION, INDENT);
 			streamWriter.writeAttribute(ATTR_ID, r.getId()+"");
-			writeEntityAttributes(streamWriter, entityInfo.get(r.getId()));
+			writeEntityAttributes(streamWriter, r, entityInfo.get(r.getId()));
 			for(Entry<Long, String> e : r.getMembersMap().entrySet()){
 				writeStartElement(streamWriter, ELEM_MEMBER, INDENT2);
 				streamWriter.writeAttribute(ATTR_REF, e.getKey()+"");
@@ -141,8 +140,15 @@ public class OsmStorageWriter {
 		streamWriter.flush();
 	}
 	
-	private void writeEntityAttributes(XMLStreamWriter writer, EntityInfo info) throws XMLStreamException{
+	private void writeEntityAttributes(XMLStreamWriter writer, Entity i, EntityInfo info) throws XMLStreamException{
+		if(i.getId() < 0 && (info == null || info.getAction() == null)){
+			writer.writeAttribute("action", "modify");
+		}
 		if(info != null){
+			// for josm editor
+			if(info.getAction() != null){
+				writer.writeAttribute("action", info.getAction());
+			}
 			if(info.getChangeset() != null){
 				writer.writeAttribute(ATTR_CHANGESET, info.getChangeset());
 			}

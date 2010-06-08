@@ -195,6 +195,16 @@ public class MapUtils {
 		});
 	}
 	
+	public static void sortListOfEntities(List<? extends Entity> list, final double lat, final double lon){
+		Collections.sort(list, new Comparator<Entity>() {
+			@Override
+			public int compare(Entity o1, Entity o2) {
+				return Double.compare(MapUtils.getDistance(o1.getLatLon(), lat, lon), MapUtils.getDistance(o2.getLatLon(),
+						lat, lon));
+			}
+		});
+	}
+	
 
 	public static String getFormattedDistance(int meters){
 		if(meters >= 100000){

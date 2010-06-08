@@ -10,8 +10,15 @@ public class EntityInfo {
 	String visible;
 	String version;
 	String changeset;
+	String action;
 	
 	
+	public String getAction() {
+		return action;
+	}
+	public void setAction(String action) {
+		this.action = action;
+	}
 	public String getTimestamp() {
 		return timestamp;
 	}
