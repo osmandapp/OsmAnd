@@ -81,10 +81,10 @@ public class ResourceManager {
 	
 	////////////////////////////////////////////// Working with tiles ////////////////////////////////////////////////
 	
-	
 	public Bitmap getTileImageForMapAsync(ITileSource map, int x, int y, int zoom, boolean loadFromInternetIfNeeded) {
 		return getTileImageForMap(map, x, y, zoom, loadFromInternetIfNeeded, false, true);
 	}
+	
 	
 	public Bitmap getTileImageFromCache(ITileSource map, int x, int y, int zoom){
 		return getTileImageForMap(map, x, y, zoom, false, false, false);
@@ -99,10 +99,18 @@ public class ResourceManager {
 		return false;
 	}
 	
+	public void clearTileImageForMap(ITileSource map, int x, int y, int zoom){
+		getTileImageForMap(map, x, y, zoom, true, false, false, true);
+	}
+	protected Bitmap getTileImageForMap(ITileSource map, int x, int y, int zoom, 
+			boolean loadFromInternetIfNeeded, boolean sync, boolean loadFromFs) {
+		return getTileImageForMap(map, x, y, zoom, loadFromInternetIfNeeded, sync, loadFromFs, false);
+	}
+	
 	// introduce cache in order save memory
 	protected StringBuilder builder = new StringBuilder(40);
 	protected synchronized Bitmap getTileImageForMap(ITileSource map, int x, int y, int zoom, 
-			boolean loadFromInternetIfNeeded, boolean sync, boolean loadFromFs) {
+			boolean loadFromInternetIfNeeded, boolean sync, boolean loadFromFs, boolean deleteBefore) {
 		if (map == null) {
 			return null;
 		}
@@ -110,6 +118,14 @@ public class ResourceManager {
 		builder.append(map.getName()).append('/').append(zoom).	append('/').append(x).
 				append('/').append(y).append(map.getTileFormat()).append(".tile");
 		String file = builder.toString();
+		if(deleteBefore){
+			cacheOfImages.remove(file);
+			File f = new File(dirWithTiles, file);
+			if(f.exists()){
+				f.delete();
+			}
+		}
+		
 		if (loadFromFs && cacheOfImages.get(file) == null) {
 			String url = loadFromInternetIfNeeded ? map.getUrlToLoad(x, y, zoom) : null;
 			TileLoadDownloadRequest req = new TileLoadDownloadRequest(dirWithTiles, file, url, new File(dirWithTiles, file), 

@@ -1,9 +1,5 @@
 package com.osmand.osm.util;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,11 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.UIManager;
-import javax.xml.stream.XMLStreamException;
-
 import org.xml.sax.SAXException;
 
 import com.osmand.data.DataTileManager;
@@ -40,8 +31,6 @@ import com.osmand.osm.Way;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 import com.osmand.osm.io.IOsmStorageFilter;
 import com.osmand.osm.io.OsmBaseStorage;
-import com.osmand.osm.io.OsmStorageWriter;
-import com.osmand.swing.DataExtractionSettings;
 import com.osmand.swing.MapPanel;
 
 public class MinskTransReader {

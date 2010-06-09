@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
   xmlns:android="http://schemas.android.com/apk/res/android">
-<group android:id="@+id/map_context_menu" android:menuCategory="container"><item android:id="@+id/map_show_settings" android:title="@string/settings_Button"></item>
-<item android:title="@string/mark_point" android:id="@+id/map_mark_point"></item>
-<item android:title="@string/navigate_to_point" android:id="@+id/map_navigate_to_point"></item>
-<item android:title="@string/map_specify_point" android:id="@+id/map_specify_point"></item>
-
+<group android:id="@+id/map_context_menu" android:menuCategory="container">
+<item android:title="@string/mark_point" android:id="@+id/map_mark_point" android:icon="@android:drawable/ic_menu_mylocation"></item>
+<item android:id="@+id/map_navigate_to_point" android:title="@string/stop_navigation" android:visible="false" android:icon="@android:drawable/ic_menu_close_clear_cancel"></item>
+<item android:id="@+id/map_reload_tile" android:title="@string/update_tile" android:icon="@android:drawable/ic_menu_view"></item>
+<item android:title="@string/map_specify_point" android:id="@+id/map_specify_point" android:icon="@android:drawable/ic_menu_search"></item>
+<item android:id="@+id/map_show_settings" android:title="@string/settings_Button" android:icon="@android:drawable/ic_menu_preferences"></item>
 </group>
 
 </menu>

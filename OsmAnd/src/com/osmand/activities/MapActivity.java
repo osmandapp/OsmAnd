@@ -6,6 +6,7 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.PointF;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -66,6 +67,8 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	
 	private WakeLock wakeLock;
 	private boolean sensorRegistered = false;
+
+	private MenuItem navigateToPointMenu;
 
 	private boolean isMapLinkedToLocation(){
 		return OsmandSettings.isMapSyncToGpsLocation(this);
@@ -149,6 +152,22 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			}
 		});
 		
+		mapView.setOnLongClickListener(new OsmandMapTileView.OnLongClickListener(){
+
+			@Override
+			public boolean onLongPressEvent(PointF point) {
+				float dx = point.x - mapView.getCenterPointX();
+				float dy = point.y - mapView.getCenterPointY();
+				float fy = mapView.calcDiffTileY(dx, dy);
+				float fx = mapView.calcDiffTileX(dx, dy);
+				double latitude = MapUtils.getLatitudeFromTile(mapView.getZoom(), mapView.getYTile() + fy);
+				double longitude = MapUtils.getLongitudeFromTile(mapView.getZoom(), mapView.getXTile() + fx);
+				contextMenuPoint(latitude, longitude);
+				return true;
+			}
+			
+		});
+		
 	}
     
  
@@ -172,6 +191,10 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     		double lon = MapUtils.getLongitudeFromTile(mapView.getZoom(), x);
     		setMapLocation(lat, lon);
     		return true;
+    		// that doesn't work for now
+//    	} else if(event.getAction() == MotionEvent.ACTION_UP){
+//    		contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
+//    		return true;
     	}
     	return super.onTrackballEvent(event);
     }
@@ -225,13 +248,13 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     }
 
 	public void navigateToPoint(LatLon point){
-		
 		if(point != null){
 			OsmandSettings.setPointToNavigate(this, point.getLatitude(), point.getLongitude());
 		} else {
 			OsmandSettings.clearPointToNavigate(this);
 		}
 		navigationLayer.setPointToNavigate(point);
+		updateNavigateToPointMenu();
 	}
 	
 	public Location getLastKnownLocation(){
@@ -373,18 +396,21 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		locationLayer.setHeading(event.values[0]);
 	}
 	
+	private void updateNavigateToPointMenu(){
+		if (navigateToPointMenu != null) {
+			if (OsmandSettings.getPointToNavigate(this) != null) {
+				navigateToPointMenu.setVisible(true);
+			} else {
+				navigateToPointMenu.setVisible(false);
+			}
+		}
+	}
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.map_menu, menu);
-		MenuItem item = menu.findItem(R.id.map_navigate_to_point);
-		if (item != null) {
-			if (OsmandSettings.getPointToNavigate(this) != null) {
-				item.setTitle(R.string.stop_navigation);
-			} else {
-				item.setTitle(R.string.navigate_to_point);
-			}
-		}
+		navigateToPointMenu = menu.findItem(R.id.map_navigate_to_point);
+		updateNavigateToPointMenu();
 		return true;
 	}
 	
@@ -395,7 +421,10 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			startActivity(settings);
     		return true;
 		} else if (item.getItemId() == R.id.map_mark_point) {
-			markPoint();
+			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
+			return true;
+		} else if (item.getItemId() == R.id.map_reload_tile) {
+			reloadTile(mapView.getZoom(), mapView.getLatitude(), mapView.getLongitude());
 			return true;
 		} else if (item.getItemId() == R.id.map_specify_point) {
 			openChangeLocationDialog();
@@ -410,18 +439,36 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     	return super.onOptionsItemSelected(item);
     }
     
-    protected void markPoint(){
+    protected void reloadTile(final int zoom, final double latitude, final double longitude){
     	Builder builder = new AlertDialog.Builder(this);
-    	builder.setItems(new String[]{"Navigate to point", "Add to favourites", "Open osm bug"}, new DialogInterface.OnClickListener(){
+    	builder.setMessage("Tile image will be removed from file system. Do you want to reload tile from internet?");
+    	builder.setNegativeButton("Cancel", null);
+    	builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				int x = (int) MapUtils.getTileNumberX(zoom, longitude);
+				int y = (int) MapUtils.getTileNumberY(zoom, latitude);
+				ResourceManager.getResourceManager().clearTileImageForMap(mapView.getMap(), x, y, zoom);
+				mapView.refreshMap();
+			}
+    	});
+		builder.create().show();
+    }
+    
+    protected void contextMenuPoint(final double latitude, final double longitude){
+    	Builder builder = new AlertDialog.Builder(this);
+    	builder.setItems(new String[]{"Navigate to point", "Add to favourites", "Update map",  "Open osm bug"}, new DialogInterface.OnClickListener(){
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if(which == 0){
-					navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
+					navigateToPoint(new LatLon(latitude, longitude));
 				} else if(which == 1){
-					addFavouritePoint();
+					addFavouritePoint(latitude, longitude);
 				} else if(which == 2){
-					osmBugsLayer.openBug(MapActivity.this, getLayoutInflater(), mapView);
+					reloadTile(mapView.getZoom(), latitude, longitude);
+				} else if(which == 3){
+					osmBugsLayer.openBug(MapActivity.this, getLayoutInflater(), mapView, latitude, longitude);
 				}
 			}
     	});
@@ -429,10 +476,10 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     }
     
     
-    protected void addFavouritePoint(){
+    protected void addFavouritePoint(double latitude, double longitude){
     	final FavouritePoint p = new FavouritesActivity.FavouritePoint();
-    	p.setLatitude(mapView.getLatitude());
-    	p.setLongitude(mapView.getLongitude());
+    	p.setLatitude(latitude);
+    	p.setLongitude(longitude);
     	p.setName("Favourite");
     	
     	Builder builder = new AlertDialog.Builder(this);

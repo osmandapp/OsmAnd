@@ -113,6 +113,9 @@ public class MapInfoLayer implements OsmandMapLayer {
 					}
 				}
 			}
+		} else {
+			cachedMeters = 0;
+			cachedDistString = null;
 		}
 		if(view.getZoom() != cachedZoom){
 			cachedZoom = view.getZoom();

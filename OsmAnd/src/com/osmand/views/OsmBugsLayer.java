@@ -338,7 +338,7 @@ public class OsmBugsLayer implements OsmandMapLayer {
 	}
 	
 
-	public void openBug(final Context ctx, LayoutInflater layoutInflater, final OsmandMapTileView mapView){
+	public void openBug(final Context ctx, LayoutInflater layoutInflater, final OsmandMapTileView mapView,  final double latitude, final double longitude){
 		Builder builder = new AlertDialog.Builder(ctx);
 		builder.setTitle("Input text of bug");
 		final View view = layoutInflater.inflate(R.layout.open_bug, null);
@@ -351,7 +351,7 @@ public class OsmBugsLayer implements OsmandMapLayer {
 				String text = ((EditText)view.findViewById(R.id.BugMessage)).getText().toString();
 				String author = ((EditText)view.findViewById(R.id.AuthorName)).getText().toString();
 				OsmandSettings.setUserName(ctx, author);
-				boolean bug = createNewBug(mapView.getLatitude(), mapView.getLongitude(), 
+				boolean bug = createNewBug(latitude, longitude, 
 						text, author);
 		    	if (bug) {
 		    		Toast.makeText(ctx, "Bug was successfully created", Toast.LENGTH_LONG).show();
