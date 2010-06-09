@@ -16,6 +16,16 @@ public class ToDoConstants {
 //		}
 //	}
 	
+	// PREPARE RELEASE OPTIONS LIST : 
+	// 1. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
+	// 2. Translation (support russian)
+	// 3. POI Search ( 1) predefined filters, 2) choose subtype's, 3) filter by name, 4) opening hours (filter))
+	// 4. Support old-versionned resources (1) odb indexes, 2) favourites table, 3) atomic settings (?))
+	// 5. Swing refactoring MapPanel (support layers)
+	// 6. Support vector road rendering (new index file)
+	// 7. Suppport navigation for calculated route.
+	// 8. Editing POI on map
+	
 	
 	
 	/**
@@ -34,15 +44,21 @@ public class ToDoConstants {
 //   32. Introduce POI predefined filters (car filter(other-fuel, transportation-car_wash, show-car) and others)
 //   33. Build transport locations (investigate)
 //   34. Investigate routing (bicycle, car)
-//   35. Enable trackball navigation in android
 //   36. Postcode search
+//   37. Get rid of exit button (!). Think about when notification should go & how clear resources if it is necessary
+//   38. Add Button in search navigate to.	
 	
 	
 	// BUGS Android
 	//  1. Fix bug with navigation layout (less zoom controls) (fixed).
+	//  4. Fix layout problems with add comment (fixed)
     //  3. Implement clear existing area with tiles (update map)
 	//  2. Include to amenity index : historic, sport, ....
-	//  4. Fix layout problems with add comment
+	//  5. Implement caching files existing on FS, implement specific method in RM
+	//  7. Fix set location (clear sync with gps)
+	// Improvements
+	//  6. Implement context menu for long press & trackball press
+
 	
 	
 	// TODO swing
@@ -60,6 +76,7 @@ public class ToDoConstants {
 //  29. Show opened/closed amenities (in search poi).
 //   3. Revise osmand UI. Preparing new icons (revise UI 18, 2, ). Main application icon, back to location icon.
 //	14. Show zoom level on map
+//  35. Enable trackball navigation in android
 	
 	// DONE SWING
 }

@@ -125,9 +125,9 @@ public class PointLocationLayer implements OsmandMapLayer {
 		return lastKnownLocation;
 	}
 	
-	public void setHeading(Float heading, boolean doNotRedraw){
+	public void setHeading(Float heading){
 		this.heading = heading;
-		if(!doNotRedraw && isLocationVisible(this.lastKnownLocation)){
+		if(!view.mapIsRefreshing() && isLocationVisible(this.lastKnownLocation)){
 			view.refreshMap();
 		}
 	}
@@ -136,13 +136,11 @@ public class PointLocationLayer implements OsmandMapLayer {
 		return heading;
 	}
 	
-	public void setLastKnownLocation(Location lastKnownLocation, boolean doNotRedraw) {
+	public void setLastKnownLocation(Location lastKnownLocation) {
 		this.lastKnownLocation = lastKnownLocation;
-		if (!doNotRedraw) {
-			boolean redraw = isLocationVisible(this.lastKnownLocation) || isLocationVisible(lastKnownLocation);
-			if (redraw) {
-				view.refreshMap();
-			}
+		boolean redraw = isLocationVisible(this.lastKnownLocation) || isLocationVisible(lastKnownLocation);
+		if (redraw) {
+			view.refreshMap();
 		}
 	}
 

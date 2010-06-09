@@ -2,19 +2,20 @@
 <TableLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
-  android:layout_height="fill_parent" android:stretchColumns="1">
-  <TableRow >
+  android:layout_height="fill_parent">
+  <TableRow>
   <TextView android:id="@+id/TextView"  android:layout_marginLeft="5dp"
-  			android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Message"></TextView>
+  			android:layout_height="wrap_content" android:text="Message"></TextView>
   <EditText android:text="" android:id="@+id/BugMessage" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
-  			android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+  			android:layout_height="wrap_content" android:layout_weight="1"></EditText>
   </TableRow>
-  <TableRow >
+  <TableRow>
   <TextView android:text="Author name" android:id="@+id/TextView" android:layout_marginLeft="5dp"
-  			android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+  			android:layout_height="wrap_content"></TextView>
   <EditText android:text="NoName" android:id="@+id/AuthorName" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
-  			android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+  			android:layout_height="wrap_content"  android:layout_weight="1"></EditText>
   </TableRow>
+  
 
 
 </TableLayout>

@@ -6,7 +6,6 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -21,26 +20,26 @@ import com.osmand.LogUtil;
 import com.osmand.OsmandSettings;
 import com.osmand.R;
 import com.osmand.osm.LatLon;
-import com.osmand.views.OsmandMapTileView;
 
 public class NavigatePointActivity extends Activity {
 	Dialog dlg;
-	OsmandMapTileView view; 
+	MapActivity activity; 
 	int currentFormat = Location.FORMAT_DEGREES;
 	
 	// dialog constructor
-	public NavigatePointActivity(Context ctx, OsmandMapTileView view){
-		this.view = view;
-		dlg =  new Dialog(ctx);
+	public NavigatePointActivity(MapActivity activity){
+		this.activity = activity;
+		dlg =  new Dialog(activity);
 	}
-	
+	// activity constructor
 	public NavigatePointActivity() {
 	}
 	
 	public void showDialog(){
 		dlg.setContentView(R.layout.navigate_point);
 		dlg.setTitle("Navigate to point");
-		initUI(view.getLatitude(), view.getLongitude());
+		LatLon loc = activity.getMapLocation();
+		initUI(loc.getLatitude(), loc.getLongitude());
 		dlg.show();
 	}
 	
@@ -75,7 +74,7 @@ public class NavigatePointActivity extends Activity {
 		((TextView)findViewById(R.id.LatitudeEdit)).setText(convert(latitude, Location.FORMAT_DEGREES));
 		((TextView)findViewById(R.id.LongitudeEdit)).setText(convert(longitude, Location.FORMAT_DEGREES));
 		((RadioButton)findViewById(R.id.Format1)).setChecked(true);
-		((RadioGroup)findViewById(R.id.RadioGroup01)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+		((RadioGroup)findViewById(R.id.RadioGroup)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
 
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -112,10 +111,11 @@ public class NavigatePointActivity extends Activity {
 					// TODO there is a bug in that convert if min = 59.23 or sec = 59.32 or deg=179.3
 					double lat = Location.convert(((TextView) findViewById(R.id.LatitudeEdit)).getText().toString());
 					double lon = Location.convert(((TextView) findViewById(R.id.LongitudeEdit)).getText().toString());
-					if(view != null) {
-						view.setLatLon(lat, lon);
+					// in case when it is dialog
+					if(activity != null) {
+						activity.setMapLocation(lat, lon);
 					} else {
-						OsmandSettings.setLastKnownMapLocation(NavigatePointActivity.this, lat, lon);
+						OsmandSettings.setMapLocationToShow(NavigatePointActivity.this, lat, lon);
 					}
 					close();
 				} catch (RuntimeException e) {

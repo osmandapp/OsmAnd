@@ -123,7 +123,7 @@ public class SearchPOIActivity extends ListActivity {
 		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
 		if (prefs != null) {
 			Amenity amenity = amenityList.get(position);
-			OsmandSettings.setLastKnownMapLocation(this, amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude());
+			OsmandSettings.setMapLocationToShow(this, amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude());
 			Intent newIntent = new Intent(SearchPOIActivity.this, MapActivity.class);
 			startActivity(newIntent);
 		}
