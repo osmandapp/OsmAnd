@@ -120,7 +120,7 @@ public class SearchAddressActivity extends Activity {
 					zoom = 12;
 				}
 				if (l != null) {
-					OsmandSettings.setLastKnownMapLocation(SearchAddressActivity.this, l.getLatitude(), l.getLongitude());
+					OsmandSettings.setMapLocationToShow(SearchAddressActivity.this, l.getLatitude(), l.getLongitude());
 					OsmandSettings.setLastKnownMapZoom(SearchAddressActivity.this, zoom);
 					startActivity(new Intent(SearchAddressActivity.this, MapActivity.class));
 				}

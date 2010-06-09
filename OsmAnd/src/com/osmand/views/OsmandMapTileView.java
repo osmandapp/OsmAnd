@@ -15,6 +15,8 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Paint.Style;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.util.FloatMath;
 import android.view.MotionEvent;
@@ -66,6 +68,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private List<OsmandMapLayer> layers = new ArrayList<OsmandMapLayer>();
 	
 	// UI Part
+	// handler to refresh map (in ui thread - not necessary in ui thread, but msg queue is desirable). 
+	protected Handler handler = new Handler();
+	
 	private AnimateDraggingMapThread animatedDraggingThread;
 	
 	private PointF startDragging = null;
@@ -189,15 +194,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			refreshMap();
 		}
 	}
-	
-	public void setRotateWithLocation(float rotate, double latitude, double longitude){
-		animatedDraggingThread.stopDragging();
-		this.rotate = rotate;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		refreshMap();
-	}
-	
+
 	public float getRotate() {
 		return rotate;
 	}
@@ -335,7 +332,11 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	protected RectF bitmapToDraw = new RectF();
 	protected Rect bitmapToZoom = new Rect();
 	
-	public void refreshMap() {
+	private void refreshMapInternal(){
+		if(handler.hasMessages(1)){
+			return;
+		}
+		
 		if (OsmandSettings.isUsingInternetToDownloadTiles(getContext())) {
 			 MapTileDownloader.getInstance().refuseAllPreviousRequests();
 		}
@@ -370,7 +371,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 								// asking if there is small version of the map (in cache)
 								if(useInternet){
 									bmp = mgr.getTileImageFromCache(map, (left + i) / 2, (top + j) / 2, zoom - 1);
-								} else {
+								} else if(!mgr.tileExistOnFileSystem(map, left + i, top + j, zoom)){
 									bmp = mgr.getTileImageForMapAsync(map, (left + i) / 2, (top + j) / 2, zoom - 1, false);
 								}
 								if(bmp == null){
@@ -392,6 +393,23 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 					holder.unlockCanvasAndPost(canvas);
 				}
 			}
+		}
+		
+	}
+	
+	public boolean mapIsRefreshing(){
+		return handler.hasMessages(1);
+	}
+	public void refreshMap() {
+		if(!handler.hasMessages(1)){
+			Message msg = Message.obtain(handler, new Runnable(){
+				@Override
+				public void run() { 
+					refreshMapInternal();
+				}
+			});
+			msg.what = 1;
+			handler.sendMessageDelayed(msg, 20);
 		}
 	}
 	

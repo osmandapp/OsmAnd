@@ -4,18 +4,18 @@
   android:layout_width="fill_parent"
   android:layout_height="fill_parent" android:orientation="vertical">
 
-<TextView android:id="@+id/TextView03" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:text="Input latitude &amp; longitude in the selected format (D - degrees, M - minutes, S - seconds)" android:layout_marginTop="10dp" android:layout_marginBottom="10dp"></TextView>
-<LinearLayout android:id="@+id/LinearLayout01" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-<TextView android:id="@+id/TextView01" android:layout_width="130dp" android:layout_height="wrap_content" android:text="Latitude" android:layout_marginLeft="5dp"></TextView>
+<TextView android:id="@+id/TextView" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:text="Input latitude &amp; longitude in the selected format (D - degrees, M - minutes, S - seconds)" android:layout_marginTop="10dp" android:layout_marginBottom="10dp"></TextView>
+<LinearLayout android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+<TextView android:id="@+id/TextView" android:layout_width="130dp" android:layout_height="wrap_content" android:text="Latitude" android:layout_marginLeft="5dp"></TextView>
 <EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/LatitudeEdit" android:layout_marginRight="5dp" android:inputType="number|time"></EditText>
 </LinearLayout>
 
-<LinearLayout android:id="@+id/LinearLayout02" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-<TextView android:text="Longitude" android:id="@+id/TextView02" android:layout_width="130dp" android:layout_height="wrap_content" android:layout_marginLeft="5dp"></TextView>
+<LinearLayout android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+<TextView android:text="Longitude" android:id="@+id/TextView" android:layout_width="130dp" android:layout_height="wrap_content" android:layout_marginLeft="5dp"></TextView>
 <EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/LongitudeEdit" android:layout_marginRight="5dp" android:inputType="number|time"></EditText>
 </LinearLayout>
 
-<RadioGroup android:id="@+id/RadioGroup01" android:layout_marginLeft="5dp" android:layout_marginTop="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" >
+<RadioGroup android:id="@+id/RadioGroup" android:layout_marginLeft="5dp" android:layout_marginTop="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" >
 <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="DDD.DDD" android:id="@+id/Format1" ></RadioButton>
 <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Format2" android:text="DDD:MM.MMM" ></RadioButton>
 <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Format3" android:text="DDD:MM:SS.SSS"></RadioButton>
@@ -23,7 +23,7 @@
 
 <TextView android:id="@+id/ValidateTextView" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="" android:gravity="center" android:textColor="@color/color_red"></TextView>
 
-<LinearLayout android:id="@+id/LinearLayout02" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="horizontal" 
+<LinearLayout android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="horizontal" 
 	android:gravity="bottom|center">
     <Button android:layout_width="125dp" android:layout_height="wrap_content" android:text="Show on map" android:id="@+id/ShowOnMap"></Button>
     <Button android:layout_width="125dp" android:layout_height="wrap_content" android:text="Cancel" android:id="@+id/Cancel"></Button>

@@ -78,7 +78,7 @@ public class FavouritesActivity extends ListActivity {
 		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
 		if (prefs != null) {
 			FavouritePoint point = favouritesList.get(position);
-			OsmandSettings.setLastKnownMapLocation(this, point.getLatitude(), point.getLongitude());
+			OsmandSettings.setMapLocationToShow(this, point.getLatitude(), point.getLongitude());
 			Intent newIntent = new Intent(FavouritesActivity.this, MapActivity.class);
 			startActivity(newIntent);
 		}

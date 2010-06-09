@@ -94,6 +94,11 @@ public class ResourceManager {
 		return getTileImageForMap(map, x, y, zoom, loadFromInternetIfNeeded, true, true);
 	}
 	
+	public boolean tileExistOnFileSystem(ITileSource map, int x, int y, int zoom){
+		// TODO implement
+		return false;
+	}
+	
 	// introduce cache in order save memory
 	protected StringBuilder builder = new StringBuilder(40);
 	protected synchronized Bitmap getTileImageForMap(ITileSource map, int x, int y, int zoom, 

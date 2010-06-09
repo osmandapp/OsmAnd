@@ -122,6 +122,7 @@ public class OsmandSettings {
 	// This value is a key for saving last known location shown on the map
 	public static final String LAST_KNOWN_MAP_LAT = "last_known_map_lat";
 	public static final String LAST_KNOWN_MAP_LON = "last_known_map_lon";
+	public static final String IS_MAP_SYNC_TO_GPS_LOCATION = "is_map_sync_to_gps_location";
 	public static final String LAST_KNOWN_MAP_ZOOM = "last_known_map_zoom";
 	public static LatLon getLastKnownMapLocation(Context ctx){
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
@@ -130,12 +131,31 @@ public class OsmandSettings {
 		return new LatLon(lat, lon);
 	}
 	
+	public static void setMapLocationToShow(Context ctx, double latitude, double longitude){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		Editor edit = prefs.edit();
+		edit.putFloat(LAST_KNOWN_MAP_LAT, (float) latitude);
+		edit.putFloat(LAST_KNOWN_MAP_LON, (float) longitude);
+		edit.putBoolean(IS_MAP_SYNC_TO_GPS_LOCATION, false);
+		edit.commit();
+	}
+	
+	// Do not use that method if you want to show point on map. Use setMapLocationToShow 
 	public static void setLastKnownMapLocation(Context ctx, double latitude, double longitude){
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		Editor edit = prefs.edit();
 		edit.putFloat(LAST_KNOWN_MAP_LAT, (float) latitude);
 		edit.putFloat(LAST_KNOWN_MAP_LON, (float) longitude);
 		edit.commit();
+	}
+	
+	public static boolean setSyncMapToGpsLocation(Context ctx, boolean value){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putBoolean(IS_MAP_SYNC_TO_GPS_LOCATION, value).commit();
+	}
+	public static boolean isMapSyncToGpsLocation(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(IS_MAP_SYNC_TO_GPS_LOCATION, true);
 	}
 	
 	public static int getLastKnownMapZoom(Context ctx){
@@ -148,6 +168,30 @@ public class OsmandSettings {
 		Editor edit = prefs.edit();
 		edit.putInt(LAST_KNOWN_MAP_ZOOM, zoom);
 		edit.commit();
+	}
+	
+	
+	public final static String POINT_NAVIGATE_LAT = "point_navigate_lat";
+	public final static String POINT_NAVIGATE_LON = "point_navigate_lon";
+	
+	public static LatLon getPointToNavigate(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		float lat = prefs.getFloat(POINT_NAVIGATE_LAT, 0);
+		float lon = prefs.getFloat(POINT_NAVIGATE_LON, 0);
+		if(lat == 0 && lon == 0){
+			return null;
+		}
+		return new LatLon(lat, lon);
+	}
+	
+	public static boolean clearPointToNavigate(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().remove(POINT_NAVIGATE_LAT).remove(POINT_NAVIGATE_LON).commit();
+	}
+	
+	public static boolean setPointToNavigate(Context ctx, double latitude, double longitude){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putFloat(POINT_NAVIGATE_LAT, (float) latitude).putFloat(POINT_NAVIGATE_LON, (float) longitude).commit();
 	}
 	
 	public static final String LAST_SEARCHED_REGION = "last_searched_region";

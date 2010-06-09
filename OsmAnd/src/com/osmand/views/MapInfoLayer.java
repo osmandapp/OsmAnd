@@ -50,7 +50,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		paintBlack = new Paint();
 		paintBlack.setStyle(Style.STROKE);
 		paintBlack.setColor(Color.BLACK);
-		paintBlack.setTextSize(18);
+		paintBlack.setTextSize(23);
 		paintBlack.setAntiAlias(true);
 		
 		paintAlphaGray = new Paint();

@@ -15,8 +15,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.util.Log;
@@ -24,6 +22,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
@@ -42,6 +41,7 @@ import com.osmand.activities.search.SearchActivity;
 import com.osmand.data.preparation.MapTileDownloader;
 import com.osmand.map.IMapLocationListener;
 import com.osmand.osm.LatLon;
+import com.osmand.osm.MapUtils;
 import com.osmand.views.MapInfoLayer;
 import com.osmand.views.OsmBugsLayer;
 import com.osmand.views.OsmandMapTileView;
@@ -66,17 +66,9 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	
 	private WakeLock wakeLock;
 	private boolean sensorRegistered = false;
-	private Handler sensorHandler = new Handler();
 
-	
-
-	private final static String BACK_TO_LOCATION = "BACK_TO_LOCATION";
-	private final static String POINT_NAVIGATE_LAT = "POINT_NAVIGATE_LAT";
-	private final static String POINT_NAVIGATE_LON = "POINT_NAVIGATE_LON";
-	
-	
 	private boolean isMapLinkedToLocation(){
-		return getPreferences(MODE_WORLD_READABLE).getBoolean(BACK_TO_LOCATION, true);
+		return OsmandSettings.isMapSyncToGpsLocation(this);
 	}
 	
     @Override
@@ -102,12 +94,8 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		osmBugsLayer = new OsmBugsLayer(this);
 		
 		
-		
-		SharedPreferences lprefs = getPreferences(MODE_WORLD_READABLE);
-		if(lprefs.contains(POINT_NAVIGATE_LAT)){
-			navigationLayer.setPointToNavigate(new LatLon(lprefs.getFloat(POINT_NAVIGATE_LAT, 0), 
-					lprefs.getFloat(POINT_NAVIGATE_LON, 0)));
-		}
+		LatLon pointToNavigate = OsmandSettings.getPointToNavigate(this);
+		navigationLayer.setPointToNavigate(pointToNavigate);
 		
 		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
 		if(prefs == null || !prefs.contains(OsmandSettings.LAST_KNOWN_MAP_LAT)){
@@ -140,7 +128,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			public void onClick(View v) {
 				backToLocation.setVisibility(View.INVISIBLE);
 				if(!isMapLinkedToLocation()){
-					getPreferences(MODE_WORLD_READABLE).edit().putBoolean(BACK_TO_LOCATION, true).commit();
+					OsmandSettings.setSyncMapToGpsLocation(MapActivity.this, true);
 					if(locationLayer.getLastKnownLocation() != null){
 						Location lastKnownLocation = locationLayer.getLastKnownLocation();
 						mapView.setLatLon(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
@@ -166,13 +154,26 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
  
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_SEARCH
-                && event.getRepeatCount() == 0) {
+        if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
 			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
 			startActivity(newIntent);
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+    @Override
+    public boolean onTrackballEvent(MotionEvent event) {
+    	if(event.getAction() == MotionEvent.ACTION_MOVE){
+    		float x = event.getX();
+    		float y = event.getY();
+    		x = (float) (MapUtils.getTileNumberX(mapView.getZoom() , mapView.getLongitude()) + x / 3);
+    		y = (float) (MapUtils.getTileNumberY(mapView.getZoom(), mapView.getLatitude()) + y / 3);
+    		double lat = MapUtils.getLatitudeFromTile(mapView.getZoom(), y);
+    		double lon = MapUtils.getLongitudeFromTile(mapView.getZoom(), x);
+    		setMapLocation(lat, lon);
+    		return true;
+    	}
+    	return super.onTrackballEvent(event);
     }
     
     @Override
@@ -190,7 +191,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     			Log.d(LogUtil.TAG, "Disable sensor");
     			((SensorManager) getSystemService(SENSOR_SERVICE)).unregisterListener(this);
     			sensorRegistered = false;
-    			locationLayer.setHeading(null, true);
+    			locationLayer.setHeading(null);
     		}
     	} else {
     		if(!sensorRegistered && OsmandSettings.isShowingViewAngle(this)){
@@ -204,16 +205,14 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     		}
     	}
     	Log.d(LogUtil.TAG, "Location changed");
-    	locationLayer.setLastKnownLocation(location, true);
+    	locationLayer.setLastKnownLocation(location);
     	if (location != null) {
 			if (isMapLinkedToLocation()) {
 				if (location.hasBearing() && OsmandSettings.isRotateMapToBearing(this)) {
-					mapView.setRotateWithLocation(-location.getBearing(), location.getLatitude(), location.getLongitude());
-				} else {
-					mapView.setLatLon(location.getLatitude(), location.getLongitude());
+					mapView.setRotate(-location.getBearing());
 				}
+				mapView.setLatLon(location.getLatitude(), location.getLongitude());
 			} else {
-				mapView.refreshMap();
 				if(backToLocation.getVisibility() != View.VISIBLE){
 					backToLocation.setVisibility(View.VISIBLE);
 				}
@@ -226,18 +225,21 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     }
 
 	public void navigateToPoint(LatLon point){
+		
 		if(point != null){
-			getPreferences(MODE_WORLD_READABLE).edit().
-			putFloat(POINT_NAVIGATE_LAT, (float) mapView.getLatitude()).
-			putFloat(POINT_NAVIGATE_LON, (float) mapView.getLongitude()).commit();
+			OsmandSettings.setPointToNavigate(this, point.getLatitude(), point.getLongitude());
 		} else {
-			getPreferences(MODE_WORLD_READABLE).edit().remove(POINT_NAVIGATE_LAT).remove(POINT_NAVIGATE_LON).commit();
+			OsmandSettings.clearPointToNavigate(this);
 		}
 		navigationLayer.setPointToNavigate(point);
 	}
 	
 	public Location getLastKnownLocation(){
 		return locationLayer.getLastKnownLocation();
+	}
+	
+	public LatLon getMapLocation(){
+		return new LatLon(mapView.getLatitude(), mapView.getLongitude());
 	}
 	
 	public LatLon getPointToNavigate(){
@@ -295,7 +297,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			mapView.setRotate(0);
 		}
 		if(!OsmandSettings.isShowingViewAngle(this)){
-			locationLayer.setHeading(null, true);
+			locationLayer.setHeading(null);
 		}
 		mapView.setMapPosition(OsmandSettings.getPositionOnMap(this));
 		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
@@ -304,11 +306,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			mapView.setLatLon(l.getLatitude(), l.getLongitude());
 			mapView.setZoom(OsmandSettings.getLastKnownMapZoom(this));
 		}
-		if(getLastKnownLocation() != null && !isMapLinkedToLocation()){
-			backToLocation.setVisibility(View.VISIBLE);
-		} else {
-			backToLocation.setVisibility(View.INVISIBLE);
-		}
+		backToLocation.setVisibility(View.INVISIBLE);
 		
 
 		if(mapView.getLayers().contains(poiMapLayer) != OsmandSettings.isShowingPoiOverMap(this)){
@@ -351,7 +349,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		// when user start dragging 
 		if(locationLayer.getLastKnownLocation() != null){
 			if(isMapLinkedToLocation()){
-				getPreferences(MODE_WORLD_READABLE).edit().putBoolean(BACK_TO_LOCATION, false).commit();
+				OsmandSettings.setSyncMapToGpsLocation(MapActivity.this, false);
 			}
 			if (backToLocation.getVisibility() != View.VISIBLE) {
 				runOnUiThread(new Runnable() {
@@ -361,24 +359,18 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 					}
 				});
 			}
-			
 		}
+	}
+	
+	public void setMapLocation(double lat, double lon){
+		mapView.setLatLon(lat, lon);
+		locationChanged(lat, lon, this);
 	}
 	
 	@Override
 	public void onSensorChanged(SensorEvent event) {
-		// using that strange technique because sensor produces a lot of events & hangs the system
-		locationLayer.setHeading(event.values[0], true);
-		if(!sensorHandler.hasMessages(1) && locationLayer.isLocationVisible(locationLayer.getLastKnownLocation())){
-			Message m = Message.obtain(sensorHandler, new Runnable(){
-				@Override
-				public void run() {
-					mapView.refreshMap();
-				}
-			});
-			m.what = 1;
-			sensorHandler.sendMessage(m);
-		}
+		// Attention : sensor produces a lot of events & can hang the system
+		locationLayer.setHeading(event.values[0]);
 	}
 	
 	
@@ -387,7 +379,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		inflater.inflate(R.menu.map_menu, menu);
 		MenuItem item = menu.findItem(R.id.map_navigate_to_point);
 		if (item != null) {
-			if (getPreferences(MODE_WORLD_READABLE).contains(POINT_NAVIGATE_LAT)) {
+			if (OsmandSettings.getPointToNavigate(this) != null) {
 				item.setTitle(R.string.stop_navigation);
 			} else {
 				item.setTitle(R.string.navigate_to_point);
@@ -465,7 +457,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     }
 
 	private void openChangeLocationDialog() {
-		NavigatePointActivity dlg = new NavigatePointActivity(this, mapView);
+		NavigatePointActivity dlg = new NavigatePointActivity(this);
 		dlg.showDialog();
 	}
 
