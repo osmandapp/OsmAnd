@@ -45,6 +45,13 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	protected final int timeForDraggingAnimation = 300;
 	protected final int minimumDistanceForDraggingAnimation = 40;
 	
+	public interface OnLongClickListener {
+		public boolean onLongPressEvent(PointF point);
+	}
+	public interface OnClickListener {
+		public boolean onPressEvent(PointF point);
+	}
+	
 	
 	protected static final Log log = LogUtil.getLog(OsmandMapTileView.class);
 	/**
@@ -64,6 +71,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private ITileSource map = null;
 	
 	private IMapLocationListener locationListener;
+	
+	private OnLongClickListener onLongClickListener;
+	
+	private OnClickListener onClickListener;
 	
 	private List<OsmandMapLayer> layers = new ArrayList<OsmandMapLayer>();
 	
@@ -120,8 +131,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 		setClickable(true);
 		setLongClickable(true);
-		setOnLongClickListener(this);
-		setOnClickListener(this);
+		super.setOnLongClickListener(this);
+		super.setOnClickListener(this);
 		
 		getHolder().addCallback(this);
 		
@@ -620,8 +631,20 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 					return true;
 				}
 			}
+			if(onLongClickListener != null && onLongClickListener.onLongPressEvent(point)){
+				return true;
+			}
 		}
+		
 		return false;
+	}
+	
+	public void setOnLongClickListener(OnLongClickListener l) {
+		this.onLongClickListener = l;
+	}
+	
+	public void setOnClickListener(OnClickListener l) {
+		this.onClickListener = l;
 	}
 
 	@Override
@@ -637,9 +660,13 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 					return;
 				}
 			}
+			if(onClickListener != null && onClickListener.onPressEvent(point)){
+				return;
+			}
 		}
 	}
 	
+
 	
 
 

@@ -46,24 +46,25 @@ public class ToDoConstants {
 //   34. Investigate routing (bicycle, car)
 //   36. Postcode search
 //   37. Get rid of exit button (!). Think about when notification should go & how clear resources if it is necessary
-//   38. Add Button in search navigate to.	
+//   38. Add button in search "navigate to".	
 	
 	
 	// BUGS Android
-	//  1. Fix bug with navigation layout (less zoom controls) (fixed).
-	//  4. Fix layout problems with add comment (fixed)
-    //  3. Implement clear existing area with tiles (update map)
+	//  1. Fix bug with navigation layout (less zoom controls) [fixed].
+	//  4. Fix layout problems with add comment [fixed]
+	//  7. Fix set location (clear sync with gps) [fixed]
+    //  3. Implement clear existing area with tiles (update map) [fixed]
+	//  6. Implement context menu for long press & trackball press [fixed - trackball todo]
 	//  2. Include to amenity index : historic, sport, ....
 	//  5. Implement caching files existing on FS, implement specific method in RM
-	//  7. Fix set location (clear sync with gps)
-	// Improvements
-	//  6. Implement context menu for long press & trackball press
+
 
 	
 	
 	// TODO swing
 	// 2. Internal (Simplify MapPanel - introduce layers for it)ю
 	// 3. Implement clear progress.
+	// 4. Fix issues with big files (such as netherlands)
 	// 1. Download tiles without using dir tiles
 
 
