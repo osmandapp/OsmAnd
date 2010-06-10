@@ -12,16 +12,21 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 
+import org.apache.commons.logging.Log;
+
 import com.osmand.IProgress;
+import com.osmand.LogUtil;
 
 
 public class ProgressDialog extends JDialog implements IProgress {
 
 	private static final long serialVersionUID = -3915486672514402269L;
+	private final static Log log = LogUtil.getLog(ProgressDialog.class);
 	private JProgressBar progressBar;
 	private JLabel label;
 	private Runnable run;
 	private InvocationTargetException exception = null;
+	 
 	
 	private Object result;
 	
@@ -32,6 +37,9 @@ public class ProgressDialog extends JDialog implements IProgress {
 	private String taskName;
 	private int deltaWork;
 	private WorkerThread workerThread;
+	private String genProgress;
+	
+	private long previousTaskStarted = 0;
 
     
     public ProgressDialog(Component parent, String name){
@@ -132,7 +140,8 @@ public class ProgressDialog extends JDialog implements IProgress {
 	
 	private void updateMessage() {
 		if(!progressBar.isIndeterminate()){
-			label.setText(taskName + String.format("\t %.1f %%", progressBar.getValue() * 100f / ((float) progressBar.getMaximum())));
+			String format = String.format("\t %.1f %%", progressBar.getValue() * 100f / ((float) progressBar.getMaximum()));
+			label.setText(taskName +  format + (genProgress == null ? "" : ("   " + genProgress)));
 		}
 	}
 
@@ -157,13 +166,28 @@ public class ProgressDialog extends JDialog implements IProgress {
 	public boolean isIndeterminate(){
 		return progressBar.isIndeterminate();
 	}
+	
+	@Override
+	public void setGeneralProgress(String genProgress) {
+		this.genProgress = genProgress;
+		
+	}
 
 	@Override
 	public void startTask(String taskName, int work) {
+		if (log.isDebugEnabled()) {
+			if (previousTaskStarted == 0) {
+				log.debug(taskName + " started");
+			} else {
+				log.debug(taskName + " started after " + (System.currentTimeMillis() - previousTaskStarted) + " ms");
+			}
+			log.debug("Total mem: " + Runtime.getRuntime().totalMemory() + " free : " + Runtime.getRuntime().freeMemory());
+		}
+		previousTaskStarted = System.currentTimeMillis();
 		if(taskName == null){
 			taskName = "";
 		}
-		label.setText(taskName);
+		label.setText(taskName + (genProgress == null ? "" : ("   "+genProgress)));
 		this.taskName = taskName;
 		startWork(work);
 	}

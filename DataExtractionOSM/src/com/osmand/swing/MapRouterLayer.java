@@ -1,5 +1,9 @@
 package com.osmand.swing;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,6 +13,9 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JPopupMenu;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -20,16 +27,80 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import com.osmand.ExceptionHandler;
+import com.osmand.data.DataTileManager;
 import com.osmand.osm.LatLon;
+import com.osmand.osm.MapUtils;
 import com.osmand.osm.Way;
 
-public class RoutingHelper {
+public class MapRouterLayer implements MapPanelLayer {
+
+	private MapPanel map;
+	private LatLon startRoute;
+	private LatLon endRoute;
+	@Override
+	public void destroyLayer() {
+		
+	}
+
+	@Override
+	public void initLayer(MapPanel map) {
+		this.map = map;
+		fillPopupMenuWithActions(map.getPopupMenu());
+	}
+
+	public void fillPopupMenuWithActions(JPopupMenu menu) {
+		Action start = new AbstractAction("Mark start point") {
+			private static final long serialVersionUID = 507156107455281238L;
+
+			public void actionPerformed(ActionEvent e) {
+				Point popupMenuPoint = map.getPopupMenuPoint();
+				double fy = (popupMenuPoint.y - map.getCenterPointY()) / map.getTileSize();
+				double fx = (popupMenuPoint.x - map.getCenterPointX()) / map.getTileSize();
+				double latitude = MapUtils.getLatitudeFromTile(map.getZoom(), map.getYTile() + fy);
+				double longitude = MapUtils.getLongitudeFromTile(map.getZoom(), map.getXTile() + fx);
+				startRoute = new LatLon(latitude, longitude);
+				map.repaint();
+			}
+		};
+		menu.add(start);
+		Action end= new AbstractAction("Mark end point") {
+			private static final long serialVersionUID = 4446789424902471319L;
+
+			public void actionPerformed(ActionEvent e) {
+				Point popupMenuPoint = map.getPopupMenuPoint();
+				double fy = (popupMenuPoint.y - map.getCenterPointY()) / map.getTileSize();
+				double fx = (popupMenuPoint.x - map.getCenterPointX()) / map.getTileSize();
+				double latitude = MapUtils.getLatitudeFromTile(map.getZoom(), map.getYTile() + fy);
+				double longitude = MapUtils.getLongitudeFromTile(map.getZoom(), map.getXTile() + fx);
+				endRoute = new LatLon(latitude, longitude);
+				map.repaint();
+			}
+		};
+		menu.add(end);
+		Action route = new AbstractAction("Calculate route") {
+			private static final long serialVersionUID = 507156107455281238L;
+
+			public void actionPerformed(ActionEvent e) {
+				List<Way> ways = route(startRoute, endRoute);
+				DataTileManager<Way> points = new DataTileManager<Way>();
+				points.setZoom(11);
+				for(Way w : ways){
+					LatLon n = w.getLatLon();
+					points.registerObject(n.getLatitude(), n.getLongitude(), w);
+				}
+				map.setPoints(points);
+			}
+		};
+		menu.add(route);
+
+	}
+	
+	
 	// for vector rendering we should extract from osm
 	// 1. Ways (different kinds) with tag highway= ?,highway=stop ...
 	// 2. Junction = roundabout
 	// 3. barrier, traffic_calming=bump
 	// 4. Save {name, ref} of way to unify it
-
 	
 	// + for future routing we should extract from osm
 	// 1. oneway 
@@ -38,8 +109,6 @@ public class RoutingHelper {
 	// 4. traffic_signals
 	// 5. max_heigtht, max_width, min_speed, ...
 	// 6. incline ?
-
-
 
 	public static List<Way> route(LatLon start, LatLon end){
 		List<Way> res = new ArrayList<Way>();
@@ -110,4 +179,28 @@ public class RoutingHelper {
 		}
 		return res;
 	}
+
+	@Override
+	public void prepareToDraw() {
+	}
+
+	
+	@Override
+	public void paintLayer(Graphics g) {
+		g.setColor(Color.green);
+		if(startRoute != null){
+			int x = map.getMapXForPoint(startRoute.getLongitude());
+			int y = map.getMapYForPoint(startRoute.getLatitude());
+			g.drawOval(x, y, 12, 12);
+			g.fillOval(x, y, 12, 12);
+		}
+		g.setColor(Color.red);
+		if(endRoute != null){
+			int x = map.getMapXForPoint(endRoute.getLongitude());
+			int y = map.getMapYForPoint(endRoute.getLatitude());
+			g.drawOval(x, y, 12, 12);
+			g.fillOval(x, y, 12, 12);
+		}
+	}
+
 }

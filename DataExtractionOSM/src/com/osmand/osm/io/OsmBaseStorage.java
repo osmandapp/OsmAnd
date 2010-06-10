@@ -60,6 +60,7 @@ public class OsmBaseStorage extends DefaultHandler {
 	protected Map<Long, EntityInfo> entityInfo = new LinkedHashMap<Long, EntityInfo>();
 	
 	// this is used to show feedback to user
+	protected int progressEntity = 0;
 	protected IProgress progress;
 	protected InputStream inputStream;
 	protected InputStream streamForProgress;
@@ -164,6 +165,8 @@ public class OsmBaseStorage extends DefaultHandler {
 		parseStarted = true;	
 	}
 	
+	private static final int moduleProgress = 1 << 10;
+	
 	@Override
 	public void startElement(String uri, String localName, String name, Attributes attributes) throws SAXException {
 		name = saxParser.isNamespaceAware() ? localName : name;
@@ -171,7 +174,9 @@ public class OsmBaseStorage extends DefaultHandler {
 			initRootElement(uri, localName, name, attributes);
 		}
 		if (currentParsedEntity == null) {
-			if(progress != null && !progress.isIndeterminate() && streamForProgress != null){
+			progressEntity ++;
+			if(progress != null && ((progressEntity & moduleProgress) == 0) && 
+					!progress.isIndeterminate() && streamForProgress != null){
 				try {
 					progress.remaining(streamForProgress.available());
 				} catch (IOException e) {
