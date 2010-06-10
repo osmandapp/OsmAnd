@@ -19,6 +19,8 @@ public interface IProgress {
 	
 	public void remaining(int remainingWork);
 	
+	public void setGeneralProgress(String genProgress);
+	
 	public void finishTask();
 	
 	public boolean isIndeterminate();

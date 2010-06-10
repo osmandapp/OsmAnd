@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import net.sf.junidecode.Junidecode;
 
 import org.apache.commons.logging.Log;
@@ -31,6 +33,7 @@ import com.osmand.data.MapObject;
 import com.osmand.data.Region;
 import com.osmand.data.Street;
 import com.osmand.data.City.CityType;
+import com.osmand.impl.ConsoleProgressImplementation;
 import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
@@ -231,6 +234,23 @@ public class DataExtraction  {
 
 	}
 	
+	// Information about progress for belarus.osm [165 seconds]
+//	FINE: Loading file E:\Information\OSM maps\belarus_2010_06_02.osm started - 61%
+//	FINE: Correlating data... started after 101921 ms - 10%
+//	FINE: Indexing poi... started after 17062 ms - 0 %
+//	FINE: Indexing cities... started after 47 ms - 0%
+//	FINE: Indexing streets... started after 94 ms - 10%
+//	FINE: Indexing buildings... started after 16531 ms - 20 %
+//	FINE: Normalizing name streets... started after 30890 ms - 0%
+	
+	// minsk.bz2 [36]
+//	FINE: Loading file E:\Information\OSM maps\minsk_extr.bz2 started - 63%
+//	FINE: Correlating data... started after 23829 ms - 27%
+//	FINE: Indexing poi... started after 10547 ms - 0%
+//	FINE: Indexing cities... started after 31 ms - 0%
+//	FINE: Indexing streets... started after 94 ms - 0%
+//	FINE: Indexing buildings... started after 672 ms - 1%
+//	FINE: Normalizing name streets... started after 2421 ms - 7%
 	
 	public Region readCountry(String path, IProgress progress, IOsmStorageFilter addFilter) throws IOException, SAXException, SQLException{
 		// data to load & index
@@ -268,12 +288,14 @@ public class DataExtraction  {
 			filter.initDatabase();
 			
 			// 0.2 parsing osm itself
+			progress.setGeneralProgress("[40 of 100]");
 			storage.parseOSM(stream, progress, streamFile, parseEntityInfo);
 			if (log.isInfoEnabled()) {
 				log.info("File parsed : " + (System.currentTimeMillis() - st));
 			}
 			progress.finishTask();
 			
+			progress.setGeneralProgress("[55 of 100]");
 			// 0.3 Correlating data (linking way & node)
 			filter.correlateData(storage, progress);
 			
@@ -291,25 +313,33 @@ public class DataExtraction  {
         country.setStorage(storage);
 
         // 2. Reading amenities
+        progress.setGeneralProgress("[60 of 100]");
+        progress.startTask("Indexing poi...", -1);
 		if (indexPOI) {
 			readingAmenities(amenities, country);
 		}
 
         // 3. Reading cities
+		progress.setGeneralProgress("[65 of 100]");
+        progress.startTask("Indexing cities...", -1);
         readingCities(places, country);
 
         if (indexAddress) {
 			// 4. Reading streets
+        	progress.setGeneralProgress("[80 of 100]");
 			readingStreets(progress, ways, country);
 
 			// 5. reading buildings
+			progress.setGeneralProgress("[95 of 100]");
 			readingBuildings(progress, buildings, country);
 		}
         
+        progress.setGeneralProgress("[100 of 100]");
         if(normalizeStreets){
         	// 	6. normalizing streets
         	normalizingStreets(progress, country);
         }
+        
         // 7. Call data preparation to sort cities, calculate center location, assign id to objects 
         country.doDataPreparation();
         // 8. Transliterate names to english
@@ -496,6 +526,61 @@ public class DataExtraction  {
 				}
 			}
 		}
+	}
+	
+	// Performance testing methods
+	public static void main(String[] args) throws IOException, SAXException, SQLException, ParserConfigurationException {
+		ArrayList<Entity> amenities = new ArrayList<Entity>();
+		ArrayList<Entity> buildings = new ArrayList<Entity>();
+		ArrayList<Node> places = new ArrayList<Node>();
+		ArrayList<Way> ways = new ArrayList<Way>();
+		
+		long time = System.currentTimeMillis();
+		OsmBaseStorage storage = new OsmBaseStorage();
+		String path = "E:\\Information\\OSM maps\\belarus_2010_06_02.osm";
+//		String path = "E:\\Information\\OSM maps\\minsk_extr.bz2";
+//		String path = "E:\\Information\\OSM maps\\netherlands.osm.bz2";
+		String wDir = "E:\\Information\\OSM maps\\osmand\\";
+		
+		
+		File f = new File(path);
+		InputStream stream = new FileInputStream(f);
+		InputStream streamFile = stream;
+		if (path.endsWith(".bz2")) {
+			if (stream.read() != 'B' || stream.read() != 'Z') {
+				throw new RuntimeException("The source stream must start with the characters BZ if it is to be read as a BZip2 stream.");
+			} else {
+				stream = new CBZip2InputStream(stream);
+			}
+		}
+		// only sax parser
+//		if(true){
+//			SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
+//			parser.parse(f, new DefaultHandler());
+//			System.out.println("All time " + (System.currentTimeMillis() - time) + " ms"); //
+//		}
+		
+		
+		storage.getFilters().add(new IOsmStorageFilter(){
+			@Override
+			public boolean acceptEntityToLoad(OsmBaseStorage storage, Entity entity) {
+				return false;
+			}
+		});
+		DataExtraction e = new DataExtraction(true, true, true, false, true, new File(wDir));
+		
+		DataExtractionOsmFilter filter = e.new DataExtractionOsmFilter(amenities, buildings, places, ways); 
+		filter.initDatabase();
+		storage.getFilters().add(filter);
+		
+		// belarus.osm - 22 843 (only sax), 33 344 (wo filter), 82 829 (filter)
+//		storage.parseOSM(stream, null, streamFile, false);  
+		// belarus.osm - 46 938 (wo filter), 98 188 (filter)
+		// netherlands.osm - 1743 511 (wo filter)
+		storage.parseOSM(stream, new ConsoleProgressImplementation(), streamFile, true);
+		System.out.println("Total mem: " + Runtime.getRuntime().totalMemory() + " free : " + Runtime.getRuntime().freeMemory());
+		System.out.println("All time " + (System.currentTimeMillis() - time) + " ms"); //
+		System.out.println(amenities.size() + " " + buildings.size() + " " + places.size() + " " + ways.size());
 	}
 	
 }

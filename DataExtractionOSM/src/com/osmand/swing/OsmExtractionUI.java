@@ -655,7 +655,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 		        	panel.setLatLon(mapPanel.getLatitude(), mapPanel.getLongitude());
 		        	panel.setZoom(mapPanel.getZoom());
 		        	final StringBuilder res = new StringBuilder();
-		        	panel.setAreaActionHandler(new AbstractAction("Select area"){
+		        	panel.getLayer(MapInformationLayer.class).setAreaActionHandler(new AbstractAction("Select area"){
 						private static final long serialVersionUID = -3452957517341961969L;
 						@Override
 						public void actionPerformed(ActionEvent e) {

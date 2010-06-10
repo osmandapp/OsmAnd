@@ -13,8 +13,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -67,7 +69,7 @@ public class MinskTransReader {
 	
 	public static final String pathToRoutes = "E:/routes.txt";
 	public static final String pathToStops = "E:/stops.txt";
-	public static final String pathToMinsk = "E:\\Information\\OSM maps\\data.osm";
+	public static final String pathToMinsk = "E:\\Information\\OSM maps\\minsk_streets.osm";
 	public static final String pathToSave = "E:\\Information\\OSM maps\\data_edit.osm";
 	
 	public static void main(String[] args) throws IOException, SAXException, XMLStreamException {
@@ -202,7 +204,6 @@ public class MinskTransReader {
 				}
 			}
 		}
-		
 		for(Node stop : busStops.getAllObjects()){
 			if(!usedNodes.contains(stop) && "yes".equals(stop.getTag("generated"))){
 				EntityInfo info = storage.getRegisteredEntityInfo().get(stop.getId());
@@ -226,8 +227,11 @@ public class MinskTransReader {
 			@Override
 			public boolean acceptEntityToLoad(OsmBaseStorage storage, Entity entity) {
 				if(entity.getTag("route") != null){
-					definedRoutes.put(entity.getTag("route") + "_" + entity.getTag("ref"), (Relation) entity);
-					return true;
+					String route = entity.getTag("route");
+					if(route.equals("bus") || route.equals("tram") || route.equals("trolleybus") || route.equals("subway")){
+						definedRoutes.put(entity.getTag("route") + "_" + entity.getTag("ref"), (Relation) entity);
+						return true;
+					}
 				}
 				if(entity.getTag(OSMTagKey.HIGHWAY) != null && entity.getTag(OSMTagKey.HIGHWAY).equals("bus_stop")){
 					LatLon e = entity.getLatLon();
@@ -247,6 +251,58 @@ public class MinskTransReader {
 		registerNewRoutesAndEditExisting(stopsMap, routes, storage, definedRoutes, correlated);
 		System.out.println("End time : " + (System.currentTimeMillis() - time));
 		return storage;
+	}
+	
+	protected static boolean validateRoute(String routeStr, Map<String, TransportStop> trStops, Map<String, Node> correlated, Relation relation, TransportRoute route, boolean direct){
+		Collection<Entity> stops = relation.getMembers("stop");
+		routeStr += direct ? "_forward" : "_backward";
+		if(stops.size() != 2){
+			System.out.println("[INVALID ] " + routeStr + " : doesn't contain start/final stop.");
+			return false;
+		}
+		List<Entity> list = new ArrayList<Entity>(relation.getMembers(direct?"forward:stop" : "backward:stop"));
+		if((list.size() + 2) != route.routeStops.size()){
+			System.out.println("[INVALID ] " + routeStr + " number of stops isn't equal (" +  
+					((list.size() + 2)) + " relation != " + route.routeStops.size() + " route) ");
+			return false;
+		}
+		Iterator<Entity> it = stops.iterator();
+		Entity start = it.next();
+		Entity end = it.next();
+		if(direct){
+			list.add(0, start);
+			list.add(end);
+		} else {
+			list.add(0, end);
+			list.add(start);
+		}
+		for(int i=0; i<list.size(); i++){
+			String st = route.routeStops.get(i);
+			Node correlatedNode = correlated.get(st);
+			TransportStop trStop = trStops.get(st);
+			String stStr = trStop.stopId + " " + trStop.name;
+			Entity e = list.get(i);
+			if(correlatedNode == null){
+				double dist = MapUtils.getDistance(e.getLatLon(), trStop.latitude, trStop.longitude);
+				if(dist > 20){
+					System.out.println("[INVALID ]" + routeStr + " stop " + (i+1) + " was not correlated " + stStr + " distance = " + dist);
+					return false;
+				}
+				
+			} else if(correlatedNode.getId() != e.getId()){
+				double dist = MapUtils.getDistance(correlatedNode, e.getLatLon());
+				if(i==list.size() - 1 && !direct && dist < 150){
+					continue;
+				} 
+				String eStop = e.getId() + " " + e.getTag(OSMTagKey.NAME);
+				System.out.println("[INVALID ] " + routeStr + " stop " + (i+1) + " wrong : " + stStr + " != "  + eStop + " dist = " + dist + 
+						" current correlated to " + correlatedNode.getId());
+				return false;
+			}
+			
+		}
+		
+		return true;
 	}
 
 	protected static long id = -55000;
@@ -276,6 +332,10 @@ public class MinskTransReader {
 
 			if (definedRoutes.containsKey(s)) {
 				checkedRoutes.put(s, definedRoutes.get(s));
+				boolean valid = validateRoute(s, stopsMap, correlated, definedRoutes.get(s), r, direct);
+				if(valid){
+					System.err.println("VALID " + s + " " + direct);
+				}
 				// System.out.println("Already registered " + s);
 			} else {
 				if (!checkedRoutes.containsKey(s)) {

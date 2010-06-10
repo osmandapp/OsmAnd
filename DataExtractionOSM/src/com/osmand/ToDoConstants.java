@@ -16,16 +16,6 @@ public class ToDoConstants {
 //		}
 //	}
 	
-	// PREPARE RELEASE OPTIONS LIST : 
-	// 1. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
-	// 2. Translation (support russian) +
-	// 3. POI Search ( 1) predefined filters, 2) choose subtype's, 3) filter by name, 4) opening hours (filter)) +
-	// 4. Support old-versionned resources (1) odb indexes, 2) favourites table, 3) atomic settings (?))
-	// 5. Swing refactoring MapPanel (support layers) +
-	// 6. Support vector road rendering (new index file) !
-	// 7. Suppport navigation for calculated route. !
-	// 8. Editing POI on map +
-	
 	
 	
 	/**
@@ -35,33 +25,31 @@ public class ToDoConstants {
 	
 	 // TODO ANDROID 
 //	  8. Enable change POI directly on map (requires OSM login)
-//   30. Performance issue with map drawing : 
 //   31. Translation.	
 //   32. Introduce POI predefined filters (car filter(other-fuel, transportation-car_wash, show-car) and others)
-//   33. Build transport locations (investigate)
-//   34. Investigate routing (bicycle, car)
+// 		 ( 1) predefined filters, 2) choose subtype's, 3) filter by name, 4) opening hours (filter)) 
+//   33. Build transport locations. Create transport index (transport-stops) (investigate)
+//   34. Suppport navigation for calculated route (example of get route from internet is in swing app).
 //   36. Postcode search
 //   37. Get rid of exit button (!). Think about when notification should go & how clear resources if it is necessary
 //   38. Add button in search "navigate to".
+//   39. Support old-versionned resources (1) odb indexes, 2) favourites table, 3) atomic settings (?))
 //   20. Implement save track/route to gpx (?)
 //   26. Show the whole street on map (when it is chosen in search activity). Possibly extend that story to show layer with streets.
+//   40. Support simple vector road rendering (require new index file)
+//   41. POI layer over map (shows poi by selected filter)
+//   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
 	
 	// BUGS Android
-	//  1. Fix bug with navigation layout (less zoom controls) [fixed].
-	//  4. Fix layout problems with add comment [fixed]
-	//  7. Fix set location (clear sync with gps) [fixed]
-    //  3. Implement clear existing area with tiles (update map) [fixed]
-	//  6. Implement context menu for long press & trackball press [fixed - trackball todo]
 	//  2. Include to amenity index : historic, sport, ....
 	//  5. Improvement : Implement caching files existing on FS, implement specific method in RM
 	//     Introducing cache of file names that are on disk (creating new File() consumes a lot of memory) 	
 
 	
 	// TODO swing
-	// 2. Internal (Simplify MapPanel - introduce layers for it)ю
 	// 3. Implement clear progress.
 	// 4. Fix issues with big files (such as netherlands)
-	// 1. Download tiles without using dir tiles
+	// 1. Download tiles without using dir tiles (?)
 
 	
 	
@@ -74,4 +62,5 @@ public class ToDoConstants {
 //  35. Enable trackball navigation in android
 	
 	// DONE SWING
+	// 2. Internal (Simplify MapPanel - introduce layers for it)
 }
