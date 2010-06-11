@@ -10,7 +10,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.osmand.data.Amenity;
-import com.osmand.data.Amenity.AmenityType;
+import com.osmand.data.AmenityType;
 import com.osmand.data.index.IndexConstants;
 import com.osmand.data.index.IndexConstants.IndexPoiTable;
 import com.osmand.osm.LatLon;

@@ -17,7 +17,7 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 
 import com.osmand.data.Amenity;
-import com.osmand.data.Amenity.AmenityType;
+import com.osmand.data.AmenityType;
 import com.osmand.data.index.IndexConstants;
 import com.osmand.data.preparation.MapTileDownloader;
 import com.osmand.data.preparation.MapTileDownloader.DownloadRequest;

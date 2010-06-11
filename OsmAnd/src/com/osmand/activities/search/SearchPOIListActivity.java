@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import com.osmand.Algoritms;
 import com.osmand.R;
-import com.osmand.data.Amenity.AmenityType;
+import com.osmand.data.AmenityType;
 
 /**
  * @author Maxim Frolov

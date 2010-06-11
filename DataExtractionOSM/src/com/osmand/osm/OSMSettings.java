@@ -23,6 +23,7 @@ public class OSMSettings {
 		HISTORIC("historic"),
 		NATURAL("natural"),
 		INTERNET_ACCESS("internet_access"),
+		
 		OPENING_HOURS("opening_hours"),
 		;
 		

@@ -14,11 +14,11 @@ import org.apache.commons.logging.Log;
 
 import com.osmand.LogUtil;
 import com.osmand.data.Amenity;
+import com.osmand.data.AmenityType;
 import com.osmand.data.Building;
 import com.osmand.data.City;
 import com.osmand.data.Region;
 import com.osmand.data.Street;
-import com.osmand.data.Amenity.AmenityType;
 import com.osmand.data.City.CityType;
 import com.osmand.data.index.IndexConstants.IndexBuildingTable;
 import com.osmand.data.index.IndexConstants.IndexCityTable;
