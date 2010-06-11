@@ -176,12 +176,13 @@ public class ProgressDialog extends JDialog implements IProgress {
 	@Override
 	public void startTask(String taskName, int work) {
 		if (log.isDebugEnabled()) {
+			log.debug("Memory before task exec: " + Runtime.getRuntime().totalMemory() + " free : " + Runtime.getRuntime().freeMemory());
 			if (previousTaskStarted == 0) {
 				log.debug(taskName + " started");
 			} else {
 				log.debug(taskName + " started after " + (System.currentTimeMillis() - previousTaskStarted) + " ms");
 			}
-			log.debug("Total mem: " + Runtime.getRuntime().totalMemory() + " free : " + Runtime.getRuntime().freeMemory());
+			
 		}
 		previousTaskStarted = System.currentTimeMillis();
 		if(taskName == null){

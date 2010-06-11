@@ -29,7 +29,6 @@ public class ToDoConstants {
 // 		 ( 1) predefined filters, 2) choose subtype's, 3) filter by name, 4) opening hours (filter))
 
 //   41. POI layer over map (shows poi by selected filter)
-//  32b. Include to amenity index : historic, sport, ....
 //	  8. Enable change POI directly on map (requires OSM login)
 //   33. Build transport locations. Create transport index (transport-stops) (investigate)
 //   39. Support old-versionned resources (1) odb indexes, 2) favourites table, 3) atomic settings (?))
@@ -54,7 +53,8 @@ public class ToDoConstants {
 
 	
 	// TODO swing
-	// 4. Fix issues with big files (such as netherlands) - save memory
+	// 4. Fix issues with big files (such as netherlands) - save memory (!)
+	// Current result : for big file (1 - task  60-80% time, 90% memory)
 	
 	// 1. Download tiles without using dir tiles (?)
 
