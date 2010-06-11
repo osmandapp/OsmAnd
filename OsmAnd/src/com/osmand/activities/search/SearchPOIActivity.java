@@ -27,7 +27,7 @@ import com.osmand.R;
 import com.osmand.ResourceManager;
 import com.osmand.activities.MapActivity;
 import com.osmand.data.Amenity;
-import com.osmand.data.Amenity.AmenityType;
+import com.osmand.data.AmenityType;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 
