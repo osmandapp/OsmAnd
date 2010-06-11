@@ -105,7 +105,7 @@ public class POIMapLayer implements OsmandMapLayer {
 			double rightLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.right);
 
 			objects.clear();
-			resourceManager.searchAmenitiesAsync(topLatitude, leftLongitude, bottomLatitude, rightLongitude, objects);
+			resourceManager.searchAmenitiesAsync(topLatitude, leftLongitude, bottomLatitude, rightLongitude, null, objects);
 			for (Amenity o : objects) {
 				int x = view.getMapXForPoint(o.getLocation().getLongitude());
 				int y = view.getMapYForPoint(o.getLocation().getLatitude());

@@ -17,7 +17,7 @@
         <activity android:name=".activities.FavouritesActivity" android:label="@string/favourites_activity"></activity>
         
         <activity android:name=".activities.search.SearchPOIActivity" android:label="@string/searchpoi_activity"></activity>
-        <activity android:name=".activities.search.SearchPOIListActivity"></activity>
+        <activity android:name=".activities.search.SearchPoiFilterActivity"></activity>
         <activity android:name=".activities.search.SearchAddressActivity"></activity>
         <activity android:name=".activities.search.SearchCityByNameActivity"></activity>
         <activity android:name=".activities.search.SearchRegionByNameActivity"></activity>

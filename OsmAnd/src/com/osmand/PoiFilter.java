@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.osmand.data.Amenity;
 import com.osmand.data.AmenityType;
+import com.osmand.data.index.IndexConstants.IndexPoiTable;
 
 public class PoiFilter {
 	
@@ -14,6 +15,8 @@ public class PoiFilter {
 	public static String USER_PREFIX = "user_";
 	
 	private Map<AmenityType, List<String>> acceptedTypes = new LinkedHashMap<AmenityType, List<String>>();
+	private String filterByName = null;
+
 	private String filterId;
 	private String name;
 	private final boolean isStandardFilter;
@@ -96,12 +99,70 @@ public class PoiFilter {
 		}
 	}
 	
+	public String buildSqlWhereFilter(){
+		if(AmenityType.values().length == acceptedTypes.size()){
+			boolean wildcard = true;
+			for(AmenityType a : acceptedTypes.keySet()){
+				if(acceptedTypes.get(a) != null){
+					wildcard = false;
+					break;
+				}
+			}
+			if(wildcard){
+				return null;
+			}
+		}
+		if(acceptedTypes.size() == 0){
+			return "1 > 1"; 
+		}
+		StringBuilder b = new StringBuilder();
+		b.append("(");
+		boolean first = true;
+		for(AmenityType a : acceptedTypes.keySet()){
+			if(first){
+				first = false;
+			} else {
+				b.append(" OR ");
+			}
+			b.append("(");
+			b.append(IndexPoiTable.TYPE.name().toLowerCase()).append(" = '").append(AmenityType.valueToString(a)).append("'");
+			if(acceptedTypes.get(a) != null){
+				List<String> list = acceptedTypes.get(a);
+				b.append(" AND ");
+				b.append(IndexPoiTable.SUBTYPE.name().toLowerCase()).append(" IN (");
+				boolean bfirst = true;
+				for(String s : list){
+					if(bfirst){
+						bfirst = false;
+					} else {
+						b.append(", ");
+					}
+					b.append("'").append(s).append("'");
+				}
+				b.append(")");
+			}
+			b.append(")");
+		}
+			
+		b.append(")");
+		return b.toString();
+		
+	}
+	
 	public void selectSubTypesToAccept(AmenityType t, List<String> accept){
 		acceptedTypes.put(t, accept);
 	}
 	
 	public String getFilterId(){
 		return filterId;
+	}
+	
+	public String getFilterByName() {
+		return filterByName;
+	}
+	
+	public void setFilterByName(String filterByName) {
+		this.filterByName = filterByName;
 	}
 	
 	public boolean isStandardFilter(){

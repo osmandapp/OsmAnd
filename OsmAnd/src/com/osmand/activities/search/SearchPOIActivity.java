@@ -21,13 +21,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.osmand.Algoritms;
 import com.osmand.OsmandSettings;
+import com.osmand.PoiFilter;
+import com.osmand.PoiFiltersHelper;
 import com.osmand.R;
 import com.osmand.ResourceManager;
 import com.osmand.activities.MapActivity;
 import com.osmand.data.Amenity;
-import com.osmand.data.AmenityType;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 
@@ -37,7 +37,7 @@ import com.osmand.osm.MapUtils;
  */
 public class SearchPOIActivity extends ListActivity {
 
-	public static final String AMENITY_TYPE = "amenity_type";
+	public static final String AMENITY_FILTER = "amenity_filter";
 
 	private List<Amenity> amenityList;
 
@@ -47,7 +47,7 @@ public class SearchPOIActivity extends ListActivity {
 	private final static int limitOfClosest = 30;
 	private int zoom = 13;
 
-	private AmenityType amenityType;
+	private PoiFilter filter;
 
 	private AmenityAdapter amenityAdapter;
 
@@ -65,7 +65,7 @@ public class SearchPOIActivity extends ListActivity {
 				if (zoom > finalZoom) {
 					--zoom;
 				}
-				amenityList = resourceManager.searchAmenities(amenityType, lastKnownMapLocation.getLatitude(), lastKnownMapLocation
+				amenityList = resourceManager.searchAmenities(filter, lastKnownMapLocation.getLatitude(), lastKnownMapLocation
 						.getLongitude(), zoom, -1);
 				if (amenityList != null) {
 					MapUtils.sortListOfMapObject(amenityList, lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude());
@@ -77,22 +77,18 @@ public class SearchPOIActivity extends ListActivity {
 		});
 
 		Bundle bundle = this.getIntent().getExtras();
-		String anemity = bundle.getString(AMENITY_TYPE);
-		if (anemity != null) {
+		String filterId = bundle.getString(AMENITY_FILTER);
+		if (filterId != null) {
 			ResourceManager resourceManager = ResourceManager.getResourceManager();
 			lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(this);
-			amenityType = findAmenityType(anemity);
-			if (amenityType != null) {
-				amenityList = resourceManager.searchAmenities(amenityType, lastKnownMapLocation.getLatitude(), lastKnownMapLocation
+			filter = PoiFiltersHelper.getFilterById(this, filterId);
+			amenityList = resourceManager.searchAmenities(filter, lastKnownMapLocation.getLatitude(), lastKnownMapLocation
 						.getLongitude(), zoom, maxCount);
-			} else {
-				amenityList = resourceManager.searchAmenities(amenityType, lastKnownMapLocation.getLatitude(), lastKnownMapLocation
-						.getLongitude(), zoom + 2, maxCount);
-			}
 
 			if (amenityList != null) {
 				MapUtils.sortListOfMapObject(amenityList, lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude());
-				if(amenityType == null){
+				// TODO filter closest pois
+				if(filter.isStandardFilter()){
 					while (amenityList.size() > limitOfClosest) {
 						amenityList.remove(amenityList.size() - 1);
 					}
@@ -129,27 +125,16 @@ public class SearchPOIActivity extends ListActivity {
 		}
 	}
 
-	private AmenityType findAmenityType(String string) {
-		for (AmenityType type : AmenityType.values()) {
-			if (string.equals(Algoritms.capitalizeFirstLetterAndLowercase(type.toString()))) {
-				return type;
-			}
-		}
-		return null;
-
-	}
-
-	@SuppressWarnings("unchecked")
-	class AmenityAdapter extends ArrayAdapter {
-		AmenityAdapter(Object list) {
-			super(SearchPOIActivity.this, R.layout.searchpoi_list, (List<?>) list);
+	class AmenityAdapter extends ArrayAdapter<Amenity> {
+		AmenityAdapter(List<Amenity> list) {
+			super(SearchPOIActivity.this, R.layout.searchpoi_list, list);
 			this.setNotifyOnChange(false);
 		}
 
-		public void setNewModel(List<?> amenityList) {
+		public void setNewModel(List<Amenity> amenityList) {
 			setNotifyOnChange(false);
 			((AmenityAdapter) getListAdapter()).clear();
-			for (Object obj : amenityList) {
+			for (Amenity obj : amenityList) {
 				this.add(obj);
 			}
 			this.notifyDataSetChanged();
@@ -165,28 +150,19 @@ public class SearchPOIActivity extends ListActivity {
 			TextView label = (TextView) row.findViewById(R.id.poi_label);
 			TextView distanceLabel = (TextView) row.findViewById(R.id.poidistance_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.poi_icon);
-			Object model = getModel(position);
-			if (model instanceof Amenity) {
-				Amenity anemity = (Amenity) model;
-				if (anemity != null) {
-					LatLon lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(SearchPOIActivity.this);
-					int dist = (int) (MapUtils.getDistance(anemity.getLocation(), lastKnownMapLocation.getLatitude(), lastKnownMapLocation
-							.getLongitude()));
-					String str = anemity.getStringWithoutType(OsmandSettings.usingEnglishNames(SearchPOIActivity.this));
-					label.setText(str);
-					if(anemity.getOpeningHours() != null) {
-						icon.setImageResource(R.drawable.poi);
-					} else{
-						icon.setImageResource(R.drawable.closed_poi);
-					}
-					distanceLabel.setText(" " + dist + " m  ");
-				}
+			Amenity amenity = getItem(position);
+			LatLon lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(SearchPOIActivity.this);
+			int dist = (int) (MapUtils.getDistance(amenity.getLocation(), lastKnownMapLocation.getLatitude(), lastKnownMapLocation
+					.getLongitude()));
+			String str = amenity.getStringWithoutType(OsmandSettings.usingEnglishNames(SearchPOIActivity.this));
+			label.setText(str);
+			if (amenity.getOpeningHours() != null) {
+				icon.setImageResource(R.drawable.poi);
+			} else {
+				icon.setImageResource(R.drawable.closed_poi);
 			}
+			distanceLabel.setText(" " + dist + " m  ");
 			return (row);
-		}
-
-		private Object getModel(int position) {
-			return (((AmenityAdapter) getListAdapter()).getItem(position));
 		}
 	}
 

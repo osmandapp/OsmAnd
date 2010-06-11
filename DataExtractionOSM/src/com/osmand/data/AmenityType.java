@@ -5,6 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.osmand.Algoritms;
+
 // http://wiki.openstreetmap.org/wiki/Amenity
 // POI tags : amenity, leisure, shop, sport, tourism, historic; accessories (internet-access), natural ?
 public enum AmenityType {
@@ -23,7 +25,11 @@ public enum AmenityType {
 	;
 	
 	public static AmenityType fromString(String s){
-		return AmenityType.valueOf(s.toUpperCase());
+		try {
+			return AmenityType.valueOf(s.toUpperCase());
+		} catch (IllegalArgumentException e) {
+			return AmenityType.OTHER;
+		}
 	}
 	
 	public static String valueToString(AmenityType t){
@@ -42,6 +48,10 @@ public enum AmenityType {
 			}
 		}
 		return list;
+	}
+	
+	public static String toPublicString(AmenityType t){
+		return Algoritms.capitalizeFirstLetterAndLowercase(t.toString().replace('_', ' '));
 	}
 	
 

@@ -28,7 +28,7 @@ public class PoiFiltersHelper {
 		return null;
 	}
 	
-	private static List<PoiFilter> cacheUserDefinedFilters = new ArrayList<PoiFilter>();
+	private static List<PoiFilter> cacheUserDefinedFilters;
 	public static List<PoiFilter> getUserDefinedPoiFilters(Context ctx){
 		if(cacheUserDefinedFilters == null){
 			cacheUserDefinedFilters = new ArrayList<PoiFilter>();
@@ -37,7 +37,7 @@ public class PoiFiltersHelper {
 		return cacheUserDefinedFilters;
 	}
 	
-	private static List<PoiFilter> cacheOsmDefinedFilters = new ArrayList<PoiFilter>();
+	private static List<PoiFilter> cacheOsmDefinedFilters;
 	public static List<PoiFilter> getOsmDefinedPoiFilters(Context ctx){
 		if(cacheOsmDefinedFilters == null){
 			cacheOsmDefinedFilters = new ArrayList<PoiFilter>();

@@ -49,7 +49,10 @@ public class ToDoConstants {
 	// BUGS Android
 
 	//  5. Improvement : Implement caching files existing on FS, implement specific method in RM
-	//     Introducing cache of file names that are on disk (creating new File() consumes a lot of memory) 	
+	//     Introducing cache of file names that are on disk (creating new File() consumes a lot of memory)
+	
+	// BUGS Swing 
+	// 1. Bug renaming region
 
 	
 	// TODO swing
