@@ -1,6 +1,5 @@
 package com.osmand.data;
 
-import com.osmand.Algoritms;
 import com.osmand.osm.Entity;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 
@@ -98,8 +97,7 @@ public class Amenity extends MapObject {
 	
 
 	public String getSimpleFormat(boolean en){
-		return Algoritms.capitalizeFirstLetterAndLowercase(getType().toString()) +
-					" : " + getStringWithoutType(en);
+		return AmenityType.toPublicString(type) + " : " + getStringWithoutType(en);
 	}
 	
 	public String getStringWithoutType(boolean en){

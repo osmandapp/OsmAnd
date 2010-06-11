@@ -23,7 +23,7 @@ public class SearchActivity extends TabActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         TabHost host = getTabHost();  
-        host.addTab(host.newTabSpec("Search_POI").setIndicator("POI").setContent(new Intent(this, SearchPOIListActivity.class)));  
+        host.addTab(host.newTabSpec("Search_POI").setIndicator("POI").setContent(new Intent(this, SearchPoiFilterActivity.class)));  
         host.addTab(host.newTabSpec("Search_Address").setIndicator("Address").setContent(new Intent(this, SearchAddressActivity.class)));
         host.addTab(host.newTabSpec("Search_Location").setIndicator("Location").setContent(new Intent(this, NavigatePointActivity.class)));
 	}

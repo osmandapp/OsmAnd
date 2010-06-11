@@ -17,7 +17,6 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 
 import com.osmand.data.Amenity;
-import com.osmand.data.AmenityType;
 import com.osmand.data.index.IndexConstants;
 import com.osmand.data.preparation.MapTileDownloader;
 import com.osmand.data.preparation.MapTileDownloader.DownloadRequest;
@@ -205,9 +204,8 @@ public class ResourceManager {
 		}
 	}
 	
-	// //////////////////////////////////////////// Working with amenities
-	// ////////////////////////////////////////////////
-	public List<Amenity> searchAmenities(AmenityType type, double latitude, double longitude, int zoom, int limit) {
+	// //////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
+	public List<Amenity> searchAmenities(PoiFilter filter, double latitude, double longitude, int zoom, int limit) {
 		double tileNumberX = Math.floor(MapUtils.getTileNumberX(zoom, longitude));
 		double tileNumberY = Math.floor(MapUtils.getTileNumberY(zoom, latitude));
 		double topLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY);
@@ -217,8 +215,8 @@ public class ResourceManager {
 		List<Amenity> amenities = new ArrayList<Amenity>();
 		for (AmenityIndexRepository index : amenityRepositories) {
 			if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
-				if (!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, amenities)) {
-					index.searchAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, limit, type, amenities);
+				if (!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, filter.getFilterId(), amenities)) {
+					index.searchAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, limit, filter, amenities);
 				}
 			}
 		}
@@ -226,12 +224,13 @@ public class ResourceManager {
 		return amenities;
 	}
 	
-	public void searchAmenitiesAsync(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, List<Amenity> toFill){
+	public void searchAmenitiesAsync(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, PoiFilter filter, List<Amenity> toFill){
+		String filterId = filter == null ? null : filter.getFilterId();
 		for(AmenityIndexRepository index : amenityRepositories){
 			if(index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)){
-				if(!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, toFill, true)){
+				if(!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, filterId, toFill, true)){
 					asyncLoadingTiles.requestToLoadAmenities(
-							new AmenityLoadRequest(index, topLatitude, leftLongitude, bottomLatitude, rightLongitude));
+							new AmenityLoadRequest(index, topLatitude, leftLongitude, bottomLatitude, rightLongitude, filter));
 				}
 			}
 		}
@@ -317,15 +316,17 @@ public class ResourceManager {
 		public final double bottomLatitude;
 		public final double leftLongitude;
 		public final double rightLongitude;
+		public final PoiFilter filter;
 		
 		public AmenityLoadRequest(AmenityIndexRepository repository, double topLatitude, double leftLongitude, 
-				double bottomLatitude, double rightLongitude) {
+				double bottomLatitude, double rightLongitude, PoiFilter filter) {
 			super();
 			this.bottomLatitude = bottomLatitude;
 			this.leftLongitude = leftLongitude;
 			this.repository = repository;
 			this.rightLongitude = rightLongitude;
 			this.topLatitude = topLatitude;
+			this.filter = filter;
 		}
 		
 		
@@ -348,21 +349,21 @@ public class ResourceManager {
 					boolean amenityLoaded = false;
 					while(!requests.isEmpty()){
 						Object req = requests.pop();
-						if(req instanceof TileLoadDownloadRequest){
+						if (req instanceof TileLoadDownloadRequest) {
 							TileLoadDownloadRequest r = (TileLoadDownloadRequest) req;
-						if(cacheOfImages.get(r.fileToLoad) == null) {
-							update |= getRequestedImageTile(r) != null;
-						}
+							if (cacheOfImages.get(r.fileToLoad) == null) {
+								update |= getRequestedImageTile(r) != null;
+							}
 						} else if(req instanceof AmenityLoadRequest){
 							if(!amenityLoaded){
 								AmenityLoadRequest r = (AmenityLoadRequest) req;
 								r.repository.evaluateCachedAmenities(r.topLatitude, r.leftLongitude, 
-										r.bottomLatitude, r.rightLongitude, null);
+										r.bottomLatitude, r.rightLongitude, r.filter, null);
 								amenityLoaded = true;
 							}
 						}
 					}
-					if(update){
+					if(update || amenityLoaded){
 						// use downloader callback
 						for(IMapDownloaderCallback c : downloader.getDownloaderCallbacks()){
 							c.tileDownloaded(null);
