@@ -22,7 +22,7 @@ public class PoiFilter {
 	private String name;
 	private final boolean isStandardFilter;
 	
-	private final static int finalZoom = 8;
+	private final static int finalZoom = 6;
 	private final static int initialZoom = 13;
 	private final static int maxCount = 200;
 	private int zoom = initialZoom;
@@ -67,8 +67,8 @@ public class PoiFilter {
 	}
 	
 	public String getSearchArea(){
-		if(zoom <= 15){
-			int d = (int) (1.5 * (1 << (zoom - 15)));
+		if(zoom <= 14){
+			int d = (int) (1 * (1 << (14 - zoom)));
 			return " < " + d + " km";
 		} else {
 			return " < 500 m";
@@ -78,7 +78,7 @@ public class PoiFilter {
 	public List<Amenity> initializeNewSearch(double lat, double lon, int firstTimeLimit){
 		zoom = initialZoom;
 		if(areAllTypesAccepted()){
-			zoom += 2;
+			zoom += 1;
 		}
 		List<Amenity> amenityList = ResourceManager.getResourceManager().searchAmenities(this, lat, lon, zoom, maxCount);
 		MapUtils.sortListOfMapObject(amenityList, lat, lon);

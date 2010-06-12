@@ -12,7 +12,6 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -42,8 +41,10 @@ import com.osmand.osm.MapUtils;
  */
 public class FavouritesActivity extends ListActivity {
 
-	public static final int DELETE_ITEM = 0;
-	public static final int EDIT_ITEM = 1;
+	public static final int NAVIGATE_TO = 0;
+	public static final int DELETE_ITEM = 1;
+	public static final int EDIT_ITEM = 2;
+	
 
 	private List<FavouritePoint> favouritesList;
 	private FavouritesDbHelper helper;
@@ -67,28 +68,31 @@ public class FavouritesActivity extends ListActivity {
 			@Override
 			public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 				menu.setHeaderTitle("Context menu");
-				menu.add(0, EDIT_ITEM, 0, "Edit favourite");
-				menu.add(0, DELETE_ITEM, 1, "Delete favourite");
+				menu.add(0, NAVIGATE_TO, 0, "Navigate to");
+				menu.add(0, EDIT_ITEM, 1, "Edit favourite");
+				menu.add(0, DELETE_ITEM, 2, "Delete favourite");
 			}
         	
         });
 	}
 
 	public void onListItemClick(ListView parent, View v, int position, long id) {
-		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
-		if (prefs != null) {
-			FavouritePoint point = favouritesList.get(position);
-			OsmandSettings.setMapLocationToShow(this, point.getLatitude(), point.getLongitude());
-			Intent newIntent = new Intent(FavouritesActivity.this, MapActivity.class);
-			startActivity(newIntent);
-		}
+		FavouritePoint point = favouritesList.get(position);
+		OsmandSettings.setMapLocationToShow(this, point.getLatitude(), point.getLongitude());
+		Intent newIntent = new Intent(FavouritesActivity.this, MapActivity.class);
+		startActivity(newIntent);
 	}
 	
 	@Override
       public boolean onContextItemSelected(MenuItem aItem) {
 		AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) aItem.getMenuInfo();
 		final FavouritePoint point = (FavouritePoint) favouritesList.get(menuInfo.position);
-		if(aItem.getItemId() == EDIT_ITEM){
+		if(aItem.getItemId() == NAVIGATE_TO){
+			OsmandSettings.setMapLocationToShow(this, point.getLatitude(), point.getLongitude());
+			OsmandSettings.setPointToNavigate(this, point.getLatitude(), point.getLongitude());
+			Intent newIntent = new Intent(FavouritesActivity.this, MapActivity.class);
+			startActivity(newIntent);
+		} else if(aItem.getItemId() == EDIT_ITEM){
 			Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle("Input new name of favourite point");
 			final EditText editText = new EditText(this);

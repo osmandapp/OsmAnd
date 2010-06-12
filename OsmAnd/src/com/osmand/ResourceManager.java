@@ -207,16 +207,16 @@ public class ResourceManager {
 	
 	// //////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
 	public List<Amenity> searchAmenities(PoiFilter filter, double latitude, double longitude, int zoom, int limit) {
-		double tileNumberX = Math.floor(MapUtils.getTileNumberX(zoom, longitude));
-		double tileNumberY = Math.floor(MapUtils.getTileNumberY(zoom, latitude));
-		double topLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY);
-		double bottomLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY + 1);
-		double leftLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX);
-		double rightLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX + 1);
+		double tileNumberX = MapUtils.getTileNumberX(zoom, longitude);
+		double tileNumberY = MapUtils.getTileNumberY(zoom, latitude);
+		double topLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY - 0.5);
+		double bottomLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY + 0.5);
+		double leftLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX - 0.5);
+		double rightLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX + 0.5);
 		List<Amenity> amenities = new ArrayList<Amenity>();
 		for (AmenityIndexRepository index : amenityRepositories) {
 			if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
-				if (!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, filter.getFilterId(), amenities)) {
+				if (!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, filter.getFilterId(), amenities)) {
 					index.searchAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, limit, filter, amenities);
 				}
 			}
@@ -225,13 +225,13 @@ public class ResourceManager {
 		return amenities;
 	}
 	
-	public void searchAmenitiesAsync(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, PoiFilter filter, List<Amenity> toFill){
+	public void searchAmenitiesAsync(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, PoiFilter filter, List<Amenity> toFill){
 		String filterId = filter == null ? null : filter.getFilterId();
 		for(AmenityIndexRepository index : amenityRepositories){
 			if(index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)){
-				if(!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, filterId, toFill, true)){
+				if(!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, filterId, toFill, true)){
 					asyncLoadingTiles.requestToLoadAmenities(
-							new AmenityLoadRequest(index, topLatitude, leftLongitude, bottomLatitude, rightLongitude, filter));
+							new AmenityLoadRequest(index, topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, filter));
 				}
 			}
 		}
@@ -318,15 +318,17 @@ public class ResourceManager {
 		public final double leftLongitude;
 		public final double rightLongitude;
 		public final PoiFilter filter;
+		public final int zoom;
 		
 		public AmenityLoadRequest(AmenityIndexRepository repository, double topLatitude, double leftLongitude, 
-				double bottomLatitude, double rightLongitude, PoiFilter filter) {
+				double bottomLatitude, double rightLongitude, int zoom, PoiFilter filter) {
 			super();
 			this.bottomLatitude = bottomLatitude;
 			this.leftLongitude = leftLongitude;
 			this.repository = repository;
 			this.rightLongitude = rightLongitude;
 			this.topLatitude = topLatitude;
+			this.zoom = zoom;
 			this.filter = filter;
 		}
 		
@@ -359,7 +361,7 @@ public class ResourceManager {
 							if(!amenityLoaded){
 								AmenityLoadRequest r = (AmenityLoadRequest) req;
 								r.repository.evaluateCachedAmenities(r.topLatitude, r.leftLongitude, 
-										r.bottomLatitude, r.rightLongitude, POIMapLayer.LIMIT_POI, r.filter, null);
+										r.bottomLatitude, r.rightLongitude, r.zoom, POIMapLayer.LIMIT_POI, r.filter, null);
 								amenityLoaded = true;
 							}
 						}

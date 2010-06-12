@@ -34,6 +34,7 @@ public class AmenityIndexRepository {
 	private double cBottomLatitude;
 	private double cLeftLongitude;
 	private double cRightLongitude;
+	private int cZoom;
 	private String cFilterId;
 	
 	
@@ -86,15 +87,16 @@ public class AmenityIndexRepository {
 		cRightLongitude = 0;
 		cLeftLongitude = 0;
 		cFilterId = null;
+		cZoom = 0;
 	}
 	
-	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int limit, PoiFilter filter, List<Amenity> toFill){
-		cachedAmenities.clear();
+	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, int limit,  PoiFilter filter, List<Amenity> toFill){
 		cTopLatitude = topLatitude + (topLatitude -bottomLatitude);
 		cBottomLatitude = bottomLatitude - (topLatitude -bottomLatitude);
 		cLeftLongitude = leftLongitude - (rightLongitude - leftLongitude);
 		cRightLongitude = rightLongitude + (rightLongitude - leftLongitude);
 		cFilterId = filter == null? null :filter.getFilterId();
+		cZoom = zoom;
 		// first of all put all entities in temp list in order to not freeze other read threads
 		ArrayList<Amenity> tempList = new ArrayList<Amenity>();
 		searchAmenities(cTopLatitude, cLeftLongitude, cBottomLatitude, cRightLongitude, limit, filter, tempList);
@@ -103,15 +105,15 @@ public class AmenityIndexRepository {
 			cachedAmenities.addAll(tempList);
 		}
 		
-		checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, filter.getFilterId(), toFill);
+		checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, cZoom, filter.getFilterId(), toFill);
 	}
 
-	public synchronized boolean checkCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, String filterId, List<Amenity> toFill, boolean fillFound){
+	public synchronized boolean checkCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, String filterId, List<Amenity> toFill, boolean fillFound){
 		if (db == null) {
 			return true;
 		}
 		boolean inside = cTopLatitude >= topLatitude && cLeftLongitude <= leftLongitude && cRightLongitude >= rightLongitude
-				&& cBottomLatitude <= bottomLatitude;
+				&& cBottomLatitude <= bottomLatitude && zoom == cZoom;
 		if((inside || fillFound) && toFill != null && Algoritms.objectEquals(filterId, cFilterId)){
 			for(Amenity a : cachedAmenities){
 				LatLon location = a.getLocation();
@@ -123,8 +125,8 @@ public class AmenityIndexRepository {
 		}
 		return inside;
 	}
-	public boolean checkCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, String filterId, List<Amenity> toFill){
-		return checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, filterId, toFill, false);
+	public boolean checkCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, String filterId, List<Amenity> toFill){
+		return checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, filterId, toFill, false);
 	}
 
 	public void initialize(final IProgress progress, File file) {

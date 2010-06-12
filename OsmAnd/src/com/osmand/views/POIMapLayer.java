@@ -20,7 +20,7 @@ import com.osmand.osm.MapUtils;
 public class POIMapLayer implements OsmandMapLayer {
 	// it is very slow to use with 15 level
 	private static final int startZoom = 10;
-	public static final int LIMIT_POI = 100;
+	public static final int LIMIT_POI = 200;
 	
 	
 	private Paint pointAltUI;
@@ -117,7 +117,7 @@ public class POIMapLayer implements OsmandMapLayer {
 			double rightLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.right);
 
 			objects.clear();
-			resourceManager.searchAmenitiesAsync(topLatitude, leftLongitude, bottomLatitude, rightLongitude, filter, objects);
+			resourceManager.searchAmenitiesAsync(topLatitude, leftLongitude, bottomLatitude, rightLongitude, view.getZoom(), filter, objects);
 			for (Amenity o : objects) {
 				int x = view.getMapXForPoint(o.getLocation().getLongitude());
 				int y = view.getMapYForPoint(o.getLocation().getLatitude());

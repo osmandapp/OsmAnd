@@ -42,15 +42,55 @@ public class PoiFiltersHelper {
 		list.add("car_wash");
 		list.add("car_repair");
 		types.put(AmenityType.TRANSPORTATION, list);
-		
 		list = new ArrayList<String>();
 		list.add("car");
+		list.add("car_repair");
 		types.put(AmenityType.SHOP, list);
-		
 		filters.add(new PoiFilter("Car aid", null, types));
 		types.clear();
 		
 		
+		types.put(AmenityType.HISTORIC, null);
+		types.put(AmenityType.TOURISM, null);
+		list = new ArrayList<String>();
+		list.add("internet_access");
+		list.add("bench");
+		list.add("embassy");
+		list.add("emergency_phone");
+		list.add("marketplace");
+		list.add("post_office");
+		list.add("recycling");
+		list.add("telephone");
+		list.add("toilets");
+		list.add("waste_basket");
+		list.add("waste_disposal");
+		types.put(AmenityType.OTHER, list);
+		filters.add(new PoiFilter("For tourists", null, types));
+		types.clear();
+		
+		list = new ArrayList<String>();
+		list.add("fuel");
+		types.put(AmenityType.TRANSPORTATION, list);
+		filters.add(new PoiFilter("Fuel", null, types));
+		types.clear();
+		
+		list = new ArrayList<String>();
+		list.add("alcohol");
+		list.add("bakery");
+		list.add("beverages");
+		list.add("butcher");
+		list.add("convenience");
+		list.add("department_store");
+		list.add("convenience");
+		list.add("farm");
+		list.add("general");
+		list.add("ice_cream");
+		list.add("kiosk");
+		list.add("supermarket");
+		list.add("variety_store");
+		types.put(AmenityType.SHOP, list);
+		filters.add(new PoiFilter("Food shop", null, types));
+		types.clear();
 		
 		return filters;
 	}
