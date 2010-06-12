@@ -31,6 +31,7 @@ public class SearchAddressActivity extends Activity {
 	private Button cityButton;
 	private Button countryButton;
 	private Button buildingButton;
+	private Button navigateTo;
 	
 	private RegionAddressRepository region = null;
 	private City city = null;
@@ -38,6 +39,7 @@ public class SearchAddressActivity extends Activity {
 	private Building building = null;
 	private Street street2 = null;
 	private boolean radioBuilding = true;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class SearchAddressActivity extends Activity {
 		setContentView(R.layout.search_address);
 		
 		showOnMap = (Button) findViewById(R.id.ShowOnMap);
+		navigateTo = (Button) findViewById(R.id.NavigateTo);
 		streetButton = (Button) findViewById(R.id.StreetButton);
 		cityButton = (Button) findViewById(R.id.CityButton);
 		countryButton = (Button) findViewById(R.id.CountryButton);
@@ -84,47 +87,16 @@ public class SearchAddressActivity extends Activity {
 				}
 			}
 		});
+		navigateTo.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showOnMap(true);
+			}
+		});
 		showOnMap.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				LatLon l = null;
-				int zoom = 12;
-				if (street2 != null && street != null) {
-					region.preloadWayNodes(street2);
-					region.preloadWayNodes(street);
-					Node inters = null;
-					for(Way w : street2.getWayNodes()){
-						for(Way w2 : street.getWayNodes()){
-							for(Node n : w.getNodes()){
-								for(Node n2 : w2.getNodes()){
-									if(n.getId() == n2.getId()){
-										inters = n;
-										break;
-									}
-								}
-							}
-						}
-					}
-					if(inters != null){
-						l = inters.getLatLon();
-						zoom = 16; 
-					}
-				} else if (building != null) {
-					l = building.getLocation();
-					zoom = 16;
-				} else if (street != null) {
-					l = street.getLocation();
-					zoom = 14;
-				} else if (city != null) {
-					l = city.getLocation();
-					zoom = 12;
-				}
-				if (l != null) {
-					OsmandSettings.setMapLocationToShow(SearchAddressActivity.this, l.getLatitude(), l.getLongitude());
-					OsmandSettings.setLastKnownMapZoom(SearchAddressActivity.this, zoom);
-					startActivity(new Intent(SearchAddressActivity.this, MapActivity.class));
-				}
-
+				showOnMap(false);
 			}
 		});
 		findViewById(R.id.ResetBuilding).setOnClickListener(new View.OnClickListener(){
@@ -178,6 +150,50 @@ public class SearchAddressActivity extends Activity {
 				}
 				
 			});
+	}
+	
+	public void showOnMap(boolean navigateTo){
+		LatLon l = null;
+		int zoom = 12;
+		if (street2 != null && street != null) {
+			region.preloadWayNodes(street2);
+			region.preloadWayNodes(street);
+			Node inters = null;
+			for(Way w : street2.getWayNodes()){
+				for(Way w2 : street.getWayNodes()){
+					for(Node n : w.getNodes()){
+						for(Node n2 : w2.getNodes()){
+							if(n.getId() == n2.getId()){
+								inters = n;
+								break;
+							}
+						}
+					}
+				}
+			}
+			if(inters != null){
+				l = inters.getLatLon();
+				zoom = 16; 
+			}
+		} else if (building != null) {
+			l = building.getLocation();
+			zoom = 16;
+		} else if (street != null) {
+			l = street.getLocation();
+			zoom = 14;
+		} else if (city != null) {
+			l = city.getLocation();
+			zoom = 12;
+		}
+		if (l != null) {
+			if(navigateTo){
+				OsmandSettings.setPointToNavigate(SearchAddressActivity.this, l.getLatitude(), l.getLongitude());
+			} 
+			OsmandSettings.setMapLocationToShow(SearchAddressActivity.this, l.getLatitude(), l.getLongitude());
+			OsmandSettings.setLastKnownMapZoom(SearchAddressActivity.this, zoom);
+			
+			startActivity(new Intent(SearchAddressActivity.this, MapActivity.class));
+		}
 	}
 	
 	protected void updateBuildingSection(){

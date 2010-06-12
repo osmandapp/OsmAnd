@@ -52,6 +52,8 @@
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp" >
 <LinearLayout  android:id="@+id/LinearLayout" android:layout_width="wrap_content" android:layout_height="wrap_content"  
 				android:layout_span="3"	android:gravity="right|bottom" android:layout_marginRight = "5dp" android:layout_marginTop = "10dp">
+<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/NavigateTo" android:text="@string/navigate_to">
+</Button>
 <Button android:text="Show on map" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ShowOnMap">
 </Button>
 

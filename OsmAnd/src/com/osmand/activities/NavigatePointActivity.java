@@ -50,7 +50,7 @@ public class NavigatePointActivity extends Activity {
 		setContentView(R.layout.navigate_point);
 		setTitle("Navigate to point");
 		initUI(loc.getLatitude(), loc.getLongitude());
-		((Button) findViewById(R.id.Cancel)).setVisibility(View.INVISIBLE);
+		((Button) findViewById(R.id.Cancel)).setText(getString(R.string.navigate_to));
 	}
 	
 	@Override
@@ -101,29 +101,40 @@ public class NavigatePointActivity extends Activity {
 		((Button) findViewById(R.id.Cancel)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				close();
+				if(dlg == null){
+					showOnMap(true);
+				} else {
+					close();
+				}
 			}
 		});
 		((Button) findViewById(R.id.ShowOnMap)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				try {
-					// TODO there is a bug in that convert if min = 59.23 or sec = 59.32 or deg=179.3
-					double lat = Location.convert(((TextView) findViewById(R.id.LatitudeEdit)).getText().toString());
-					double lon = Location.convert(((TextView) findViewById(R.id.LongitudeEdit)).getText().toString());
-					// in case when it is dialog
-					if(activity != null) {
-						activity.setMapLocation(lat, lon);
-					} else {
-						OsmandSettings.setMapLocationToShow(NavigatePointActivity.this, lat, lon);
-					}
-					close();
-				} catch (RuntimeException e) {
-					((TextView) findViewById(R.id.ValidateTextView)).setText("Locations are invalid");
-					Log.w(LogUtil.TAG, "Convertion failed", e);
-				}
+				showOnMap(false);
 			}
 		});
+	}
+	
+	public void showOnMap(boolean navigate){
+		try {
+			// TODO there is a bug in android implementation : doesn't convert if min = 59.23 or sec = 59.32 or deg=179.3
+			double lat = Location.convert(((TextView) findViewById(R.id.LatitudeEdit)).getText().toString());
+			double lon = Location.convert(((TextView) findViewById(R.id.LongitudeEdit)).getText().toString());
+			// in case when it is dialog
+			if(activity != null) {
+				activity.setMapLocation(lat, lon);
+			} else {
+				OsmandSettings.setMapLocationToShow(this, lat, lon);
+			}
+			if(navigate){
+				OsmandSettings.setPointToNavigate(this, lat, lon);
+			}
+			close();
+		} catch (RuntimeException e) {
+			((TextView) findViewById(R.id.ValidateTextView)).setText("Locations are invalid");
+			Log.w(LogUtil.TAG, "Convertion failed", e);
+		}
 	}
 	
 	

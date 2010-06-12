@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="navigate_to">Navigate to</string>
     <string name="update_tile">Update map</string>
     <string name="reload_tile">Reload tile</string>
     <string name="user_name_descr">Input user name to communicate osm</string>

@@ -36,23 +36,26 @@ import com.osmand.osm.MapUtils;
  */
 public class SearchPOIActivity extends ListActivity {
 
-	public static final String AMENITY_FILTER = "amenity_filter";
+	public static final String AMENITY_FILTER = "com.osmand.amenity_filter";
 
 
 	private Button searchPOILevel;
 	private PoiFilter filter;
 	private AmenityAdapter amenityAdapter;
 	private LatLon lastKnownMapLocation;
+	private TextView searchArea;
 
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		setContentView(R.layout.searchpoi);
 		searchPOILevel = (Button) findViewById(R.id.SearchPOILevelButton);
+		searchArea = (TextView) findViewById(R.id.SearchAreaText);
 		searchPOILevel.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				amenityAdapter.setNewModel(filter.searchFurther(lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
+				searchArea.setText(filter.getSearchArea());
 				searchPOILevel.setEnabled(filter.isSearchFurtherAvailable());
 
 			}
@@ -60,13 +63,15 @@ public class SearchPOIActivity extends ListActivity {
 
 		Bundle bundle = this.getIntent().getExtras();
 		String filterId = bundle.getString(AMENITY_FILTER);
-		if (filterId != null) {
-			lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(this);
-			filter = PoiFiltersHelper.getFilterById(this, filterId);
-			amenityAdapter = new AmenityAdapter(filter.initializeNewSearch(lastKnownMapLocation.getLatitude(), 
-					lastKnownMapLocation.getLongitude(), 40));
+		lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(this);
+		filter = PoiFiltersHelper.getFilterById(this, filterId);
+		if (filter != null) {
+			amenityAdapter = new AmenityAdapter(filter.initializeNewSearch(lastKnownMapLocation.getLatitude(), lastKnownMapLocation
+					.getLongitude(), 40));
 			setListAdapter(amenityAdapter);
+			searchArea.setText(filter.getSearchArea());
 		}
+
 		// ListActivity has a ListView, which you can get with:
 		ListView lv = getListView();
 
@@ -74,7 +79,7 @@ public class SearchPOIActivity extends ListActivity {
 		lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
-				Amenity amenity = ((AmenityAdapter)getListAdapter()).getItem(pos);
+				Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(pos);
 				String format = amenity.getSimpleFormat(OsmandSettings.usingEnglishNames(v.getContext()));
 				if (amenity.getOpeningHours() != null) {
 					format += "\nOpening hours : " + amenity.getOpeningHours();
@@ -84,6 +89,8 @@ public class SearchPOIActivity extends ListActivity {
 			}
 		});
 	}
+
+
 
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
