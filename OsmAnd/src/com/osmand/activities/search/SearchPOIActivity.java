@@ -38,14 +38,10 @@ public class SearchPOIActivity extends ListActivity {
 
 	public static final String AMENITY_FILTER = "amenity_filter";
 
-	private List<Amenity> amenityList;
 
 	private Button searchPOILevel;
-
 	private PoiFilter filter;
-
 	private AmenityAdapter amenityAdapter;
-
 	private LatLon lastKnownMapLocation;
 
 	@Override
@@ -56,8 +52,7 @@ public class SearchPOIActivity extends ListActivity {
 		searchPOILevel.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				amenityList = filter.searchFurther(lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude());
-				amenityAdapter.setNewModel(amenityList);
+				amenityAdapter.setNewModel(filter.searchFurther(lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
 				searchPOILevel.setEnabled(filter.isSearchFurtherAvailable());
 
 			}
@@ -79,7 +74,7 @@ public class SearchPOIActivity extends ListActivity {
 		lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
-				Amenity amenity = amenityList.get(pos);
+				Amenity amenity = ((AmenityAdapter)getListAdapter()).getItem(pos);
 				String format = amenity.getSimpleFormat(OsmandSettings.usingEnglishNames(v.getContext()));
 				if (amenity.getOpeningHours() != null) {
 					format += "\nOpening hours : " + amenity.getOpeningHours();
@@ -93,7 +88,7 @@ public class SearchPOIActivity extends ListActivity {
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
 		if (prefs != null) {
-			Amenity amenity = amenityList.get(position);
+			Amenity amenity = ((AmenityAdapter)getListAdapter()).getItem(position);
 			OsmandSettings.setMapLocationToShow(this, amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude());
 			Intent newIntent = new Intent(SearchPOIActivity.this, MapActivity.class);
 			startActivity(newIntent);
