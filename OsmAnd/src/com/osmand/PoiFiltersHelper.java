@@ -1,7 +1,9 @@
 package com.osmand;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.osmand.data.AmenityType;
 
@@ -28,11 +30,35 @@ public class PoiFiltersHelper {
 		return null;
 	}
 	
+	public static List<PoiFilter> getUserDefinedDefaultFilters(Context ctx){
+		List<PoiFilter> filters = new ArrayList<PoiFilter>();
+		Map<AmenityType, List<String>> types = new LinkedHashMap<AmenityType, List<String>>();
+
+		List<String> list = new ArrayList<String>();
+		list.add("fuel");
+		list.add("car_wash");
+		list.add("car_repair");
+		types.put(AmenityType.TRANSPORTATION, list);
+		
+		list = new ArrayList<String>();
+		list.add("car");
+		types.put(AmenityType.SHOP, list);
+		
+		filters.add(new PoiFilter("Car aid", null, types));
+		types.clear();
+		
+		
+		
+		return filters;
+	}
+	
 	private static List<PoiFilter> cacheUserDefinedFilters;
 	public static List<PoiFilter> getUserDefinedPoiFilters(Context ctx){
 		if(cacheUserDefinedFilters == null){
 			cacheUserDefinedFilters = new ArrayList<PoiFilter>();
+			
 			// TODO
+			cacheUserDefinedFilters.addAll(getUserDefinedDefaultFilters(ctx));
 		}
 		return cacheUserDefinedFilters;
 	}
@@ -41,6 +67,8 @@ public class PoiFiltersHelper {
 	public static List<PoiFilter> getOsmDefinedPoiFilters(Context ctx){
 		if(cacheOsmDefinedFilters == null){
 			cacheOsmDefinedFilters = new ArrayList<PoiFilter>();
+			// for test purposes
+			cacheOsmDefinedFilters.addAll(getUserDefinedPoiFilters(ctx));
 			cacheOsmDefinedFilters.add(new PoiFilter(null));
 			for(AmenityType t : AmenityType.values()){
 				cacheOsmDefinedFilters.add(new PoiFilter(t));

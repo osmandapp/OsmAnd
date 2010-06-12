@@ -25,7 +25,6 @@ import com.osmand.OsmandSettings;
 import com.osmand.PoiFilter;
 import com.osmand.PoiFiltersHelper;
 import com.osmand.R;
-import com.osmand.ResourceManager;
 import com.osmand.activities.MapActivity;
 import com.osmand.data.Amenity;
 import com.osmand.osm.LatLon;
@@ -42,10 +41,6 @@ public class SearchPOIActivity extends ListActivity {
 	private List<Amenity> amenityList;
 
 	private Button searchPOILevel;
-	private final static int maxCount = 100;
-	private final static int finalZoom = 8;
-	private final static int limitOfClosest = 30;
-	private int zoom = 13;
 
 	private PoiFilter filter;
 
@@ -61,17 +56,9 @@ public class SearchPOIActivity extends ListActivity {
 		searchPOILevel.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ResourceManager resourceManager = ResourceManager.getResourceManager();
-				if (zoom > finalZoom) {
-					--zoom;
-				}
-				amenityList = resourceManager.searchAmenities(filter, lastKnownMapLocation.getLatitude(), lastKnownMapLocation
-						.getLongitude(), zoom, -1);
-				if (amenityList != null) {
-					MapUtils.sortListOfMapObject(amenityList, lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude());
-					amenityAdapter.setNewModel(amenityList);
-				}
-				searchPOILevel.setEnabled(zoom > finalZoom);
+				amenityList = filter.searchFurther(lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude());
+				amenityAdapter.setNewModel(amenityList);
+				searchPOILevel.setEnabled(filter.isSearchFurtherAvailable());
 
 			}
 		});
@@ -79,23 +66,11 @@ public class SearchPOIActivity extends ListActivity {
 		Bundle bundle = this.getIntent().getExtras();
 		String filterId = bundle.getString(AMENITY_FILTER);
 		if (filterId != null) {
-			ResourceManager resourceManager = ResourceManager.getResourceManager();
 			lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(this);
 			filter = PoiFiltersHelper.getFilterById(this, filterId);
-			amenityList = resourceManager.searchAmenities(filter, lastKnownMapLocation.getLatitude(), lastKnownMapLocation
-						.getLongitude(), zoom, maxCount);
-
-			if (amenityList != null) {
-				MapUtils.sortListOfMapObject(amenityList, lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude());
-				// TODO filter closest pois
-				if(filter.isStandardFilter()){
-					while (amenityList.size() > limitOfClosest) {
-						amenityList.remove(amenityList.size() - 1);
-					}
-				}
-				amenityAdapter = new AmenityAdapter(amenityList);
-				setListAdapter(amenityAdapter);
-			}
+			amenityAdapter = new AmenityAdapter(filter.initializeNewSearch(lastKnownMapLocation.getLatitude(), 
+					lastKnownMapLocation.getLongitude(), 40));
+			setListAdapter(amenityAdapter);
 		}
 		// ListActivity has a ListView, which you can get with:
 		ListView lv = getListView();
@@ -161,7 +136,8 @@ public class SearchPOIActivity extends ListActivity {
 			} else {
 				icon.setImageResource(R.drawable.closed_poi);
 			}
-			distanceLabel.setText(" " + dist + " m  ");
+			
+			distanceLabel.setText(" " + MapUtils.getFormattedDistance(dist));
 			return (row);
 		}
 	}
