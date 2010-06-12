@@ -40,7 +40,7 @@ public class RegionAddressRepository {
 	
 	private boolean useEnglishNames = false;
 	
-	public void initialize(final IProgress progress, File file) {
+	public boolean initialize(final IProgress progress, File file) {
 		long start = System.currentTimeMillis();
 		if(db != null){
 			// close previous db
@@ -48,9 +48,14 @@ public class RegionAddressRepository {
 		}
 		db = SQLiteDatabase.openOrCreateDatabase(file, null);
 		name = file.getName().substring(0, file.getName().indexOf('.'));
+		if(db.getVersion() != IndexConstants.ADDRESS_TABLE_VERSION){
+			return false;
+		}
+		
 		if (log.isDebugEnabled()) {
 			log.debug("Initializing address db " + file.getAbsolutePath() + " " + (System.currentTimeMillis() - start) + "ms");
 		}
+		return true;
 	}
 	
 	public void close(){

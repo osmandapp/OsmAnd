@@ -2,6 +2,9 @@ package com.osmand.data.index;
 
 public class IndexConstants {
 	
+	public final static int POI_TABLE_VERSION = 0;
+	public final static int ADDRESS_TABLE_VERSION = 0;
+	
 	public static final String POI_INDEX_DIR = "POI/";
 	public static final String ADDRESS_INDEX_DIR = "Address/";
 	

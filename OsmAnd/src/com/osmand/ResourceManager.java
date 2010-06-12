@@ -174,35 +174,47 @@ public class ResourceManager {
 	
     ////////////////////////////////////////////// Working with indexes ////////////////////////////////////////////////
 	// POI INDEX //
-	public void indexingPoi(final IProgress progress) {
+	public List<String> indexingPoi(final IProgress progress) {
 		File file = new File(Environment.getExternalStorageDirectory(), POI_PATH);
+		List<String> warnings = new ArrayList<String>();
 		closeAmenities();
 		if (file.exists() && file.canRead()) {
 			for (File f : file.listFiles()) {
 				if (f.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
 					AmenityIndexRepository repository = new AmenityIndexRepository();
 					progress.startTask("Indexing poi " + f.getName(), -1);
-					repository.initialize(progress, f);
-					amenityRepositories.add(repository);
+					boolean initialized = repository.initialize(progress, f);
+					if (initialized) {
+						amenityRepositories.add(repository);
+					}else {
+						warnings.add("The version of index '" + f.getName() +"'is not supported");
+					}
 				}
 			}
 		}
+		return warnings;
 	}
 	
 		
-	public void indexingAddresses(final IProgress progress){
+	public List<String> indexingAddresses(final IProgress progress){
 		File file = new File(Environment.getExternalStorageDirectory(), ADDRESS_PATH);
+		List<String> warnings = new ArrayList<String>();
 		closeAddresses();
 		if (file.exists() && file.canRead()) {
 			for (File f : file.listFiles()) {
 				if (f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)) {
 					RegionAddressRepository repository = new RegionAddressRepository();
 					progress.startTask("Indexing address" + f.getName(), -1);
-					repository.initialize(progress, f);
-					addressMap.put(repository.getName(), repository);
+					boolean initialized = repository.initialize(progress, f);
+					if (initialized) {
+						addressMap.put(repository.getName(), repository);
+					} else {
+						warnings.add("The version of index '" + f.getName() +"'is not supported");
+					}
 				}
 			}
 		}
+		return warnings;
 	}
 	
 	// //////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////

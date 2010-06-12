@@ -129,7 +129,7 @@ public class AmenityIndexRepository {
 		return checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, filterId, toFill, false);
 	}
 
-	public void initialize(final IProgress progress, File file) {
+	public boolean initialize(final IProgress progress, File file) {
 		long start = System.currentTimeMillis();
 		if(db != null){
 			// close previous db
@@ -137,6 +137,10 @@ public class AmenityIndexRepository {
 		}
 		db = SQLiteDatabase.openOrCreateDatabase(file, null);
 		name = file.getName().substring(0, file.getName().indexOf('.'));
+		if(db.getVersion() != IndexConstants.POI_TABLE_VERSION){
+			return false;
+		}
+		
 		Cursor query = db.query(IndexPoiTable.getTable(), new String[]{"MAX(latitude)", "MAX(longitude)", "MIN(latitude)", "MIN(longitude)"}, null, null,null, null, null);
 		if(query.moveToFirst()){
 			dataTopLatitude = query.getDouble(0);
@@ -148,7 +152,7 @@ public class AmenityIndexRepository {
 		if (log.isDebugEnabled()) {
 			log.debug("Initializing db " + file.getAbsolutePath() + " " + (System.currentTimeMillis() - start) + "ms");
 		}
-		
+		return true;
 	}
 	
 	public synchronized void close(){

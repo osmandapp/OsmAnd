@@ -171,7 +171,10 @@ public class PoiFilter {
 			
 		b.append(")");
 		return b.toString();
-		
+	}
+	
+	public Map<AmenityType, List<String>> getAcceptedTypes(){
+		return new LinkedHashMap<AmenityType, List<String>>(acceptedTypes);
 	}
 	
 	public void selectSubTypesToAccept(AmenityType t, List<String> accept){
