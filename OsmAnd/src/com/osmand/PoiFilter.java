@@ -8,6 +8,7 @@ import java.util.Map;
 import com.osmand.data.Amenity;
 import com.osmand.data.AmenityType;
 import com.osmand.data.index.IndexConstants.IndexPoiTable;
+import com.osmand.osm.MapUtils;
 
 public class PoiFilter {
 	
@@ -20,6 +21,12 @@ public class PoiFilter {
 	private String filterId;
 	private String name;
 	private final boolean isStandardFilter;
+	
+	private final static int finalZoom = 8;
+	private final static int initialZoom = 13;
+	private final static int maxCount = 200;
+	private int zoom = initialZoom;
+	
 	
 	// constructor for standard filters
 	public PoiFilter(AmenityType type){
@@ -48,23 +55,38 @@ public class PoiFilter {
 	
 	
 	public boolean isSearchFurtherAvailable(){
-		return false;
+		return zoom > finalZoom;
 	}
 	
-	public List<Amenity> searchFurther(){
-		return null;
+	public List<Amenity> searchFurther(double latitude, double longitude){
+		zoom --;
+		List<Amenity> amenityList = ResourceManager.getResourceManager().searchAmenities(this, latitude, longitude, zoom, -1);
+		MapUtils.sortListOfMapObject(amenityList, latitude, longitude);
+		
+		return amenityList;
 	}
 	
 	public String getSearchArea(){
-		return null;
+		if(zoom <= 15){
+			int d = (int) (1.5 * (1 << (zoom - 15)));
+			return " < " + d + " km";
+		} else {
+			return " < 500 m";
+		}
 	}
 	
-	public List<Amenity> getLastSearchedResults(){
-		return null;
-	}
-	
-	public List<Amenity> initializeNewSearch(double lat, double lon){
-		return null; 
+	public List<Amenity> initializeNewSearch(double lat, double lon, int firstTimeLimit){
+		zoom = initialZoom;
+		if(areAllTypesAccepted()){
+			zoom += 2;
+		}
+		List<Amenity> amenityList = ResourceManager.getResourceManager().searchAmenities(this, lat, lon, zoom, maxCount);
+		MapUtils.sortListOfMapObject(amenityList, lat, lon);
+		while (amenityList.size() > firstTimeLimit) {
+			amenityList.remove(amenityList.size() - 1);
+		}
+		
+		return amenityList; 
 	}
 	
 	public String getName(){
@@ -90,6 +112,18 @@ public class PoiFilter {
 		return acceptedTypes.get(type) == null;
 	}
 	
+	public boolean areAllTypesAccepted(){
+		if(AmenityType.values().length == acceptedTypes.size()){
+			for(AmenityType a : acceptedTypes.keySet()){
+				if(acceptedTypes.get(a) != null){
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+	
 	
 	public void setTypeToAccept(AmenityType type, boolean accept){
 		if(accept){
@@ -100,17 +134,8 @@ public class PoiFilter {
 	}
 	
 	public String buildSqlWhereFilter(){
-		if(AmenityType.values().length == acceptedTypes.size()){
-			boolean wildcard = true;
-			for(AmenityType a : acceptedTypes.keySet()){
-				if(acceptedTypes.get(a) != null){
-					wildcard = false;
-					break;
-				}
-			}
-			if(wildcard){
-				return null;
-			}
+		if(areAllTypesAccepted()){
+			return null;
 		}
 		if(acceptedTypes.size() == 0){
 			return "1 > 1"; 
