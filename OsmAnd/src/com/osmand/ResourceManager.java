@@ -23,6 +23,7 @@ import com.osmand.data.preparation.MapTileDownloader.DownloadRequest;
 import com.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
 import com.osmand.map.ITileSource;
 import com.osmand.osm.MapUtils;
+import com.osmand.views.POIMapLayer;
 
 /**
  * Resource manager is responsible to work with all resources 
@@ -358,7 +359,7 @@ public class ResourceManager {
 							if(!amenityLoaded){
 								AmenityLoadRequest r = (AmenityLoadRequest) req;
 								r.repository.evaluateCachedAmenities(r.topLatitude, r.leftLongitude, 
-										r.bottomLatitude, r.rightLongitude, r.filter, null);
+										r.bottomLatitude, r.rightLongitude, POIMapLayer.LIMIT_POI, r.filter, null);
 								amenityLoaded = true;
 							}
 						}

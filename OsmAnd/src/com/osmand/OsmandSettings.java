@@ -273,5 +273,19 @@ public class OsmandSettings {
 		return prefs.edit().remove(LAST_SEARCHED_INTERSECTED_STREET).commit();
 	}
 
+	public static final String SELECTED_POI_FILTER_FOR_MAP = "selected_poi_filter_for_map";
+	public static boolean setPoiFilterForMap(Context ctx, String filterId){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putString(SELECTED_POI_FILTER_FOR_MAP, filterId).commit();
+	}
 	
+	public static PoiFilter getPoiFilterForMap(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		String filterId = prefs.getString(SELECTED_POI_FILTER_FOR_MAP, null);
+		PoiFilter filter = PoiFiltersHelper.getFilterById(ctx, filterId);
+		if(filter != null){
+			return filter;
+		}
+		return new PoiFilter(null);
+	}
 }

@@ -330,6 +330,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			mapView.setZoom(OsmandSettings.getLastKnownMapZoom(this));
 		}
 		backToLocation.setVisibility(View.INVISIBLE);
+		poiMapLayer.setFilter(OsmandSettings.getPoiFilterForMap(this));
 		
 
 		if(mapView.getLayers().contains(poiMapLayer) != OsmandSettings.isShowingPoiOverMap(this)){

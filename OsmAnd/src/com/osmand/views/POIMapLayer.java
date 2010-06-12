@@ -12,23 +12,35 @@ import android.graphics.RectF;
 import android.widget.Toast;
 
 import com.osmand.OsmandSettings;
+import com.osmand.PoiFilter;
 import com.osmand.ResourceManager;
 import com.osmand.data.Amenity;
 import com.osmand.osm.MapUtils;
 
 public class POIMapLayer implements OsmandMapLayer {
 	// it is very slow to use with 15 level
-	private static final int startZoom = 15;
+	private static final int startZoom = 10;
+	public static final int LIMIT_POI = 100;
+	
 	
 	private Paint pointAltUI;
 	private OsmandMapTileView view;
 	private List<Amenity> objects = new ArrayList<Amenity>();
 
 	private ResourceManager resourceManager;
+	private PoiFilter filter;
 	
 	@Override
 	public boolean onLongPressEvent(PointF point) {
 		return false;
+	}
+	
+	public PoiFilter getFilter() {
+		return filter;
+	}
+	
+	public void setFilter(PoiFilter filter) {
+		this.filter = filter;
 	}
 	
 
@@ -79,7 +91,7 @@ public class POIMapLayer implements OsmandMapLayer {
 	public int getRadiusPoi(int zoom){
 		if(zoom < startZoom){
 			return 0;
-		} else if(zoom == 15){
+		} else if(zoom <= 15){
 			return 7;
 		} else if(zoom == 16){
 			return 10;
@@ -105,7 +117,7 @@ public class POIMapLayer implements OsmandMapLayer {
 			double rightLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.right);
 
 			objects.clear();
-			resourceManager.searchAmenitiesAsync(topLatitude, leftLongitude, bottomLatitude, rightLongitude, null, objects);
+			resourceManager.searchAmenitiesAsync(topLatitude, leftLongitude, bottomLatitude, rightLongitude, filter, objects);
 			for (Amenity o : objects) {
 				int x = view.getMapXForPoint(o.getLocation().getLongitude());
 				int y = view.getMapYForPoint(o.getLocation().getLatitude());
