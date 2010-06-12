@@ -31,9 +31,11 @@ import com.osmand.osm.Way;
 
 public class DataIndexWriter {
 	
+	
 	private final File workingDir;
 	private final Region region;
 	private static final Log log = LogUtil.getLog(DataIndexWriter.class);
+	
 	
 	private static final int BATCH_SIZE = 1000;
 
@@ -70,6 +72,7 @@ public class DataIndexWriter {
 			assert IndexPoiTable.values().length == 8;
 	        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexPoiTable.values()));
 	        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexPoiTable.values()));
+	        stat.execute("PRAGMA user_version = " + IndexConstants.POI_TABLE_VERSION);
 	        stat.close();
 	        
 	        PreparedStatement prep = conn.prepareStatement(
@@ -129,6 +132,7 @@ public class DataIndexWriter {
 	        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexStreetNodeTable.values()));
 	        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexStreetTable.values()));
 	        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexStreetTable.values()));
+	        stat.execute("PRAGMA user_version = " + IndexConstants.ADDRESS_TABLE_VERSION);
 	        stat.close();
 	        
 	        PreparedStatement prepCity = conn.prepareStatement(

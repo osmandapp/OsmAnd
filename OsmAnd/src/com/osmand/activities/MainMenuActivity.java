@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -24,6 +26,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.osmand.LogUtil;
 import com.osmand.ProgressDialogImplementation;
@@ -57,8 +60,10 @@ public class MainMenuActivity extends Activity {
 				@Override
 				public void run() {
 					try {
-						ResourceManager.getResourceManager().indexingPoi(impl);
-						ResourceManager.getResourceManager().indexingAddresses(impl);
+						List<String> warnings = new ArrayList<String>();
+						warnings.addAll(ResourceManager.getResourceManager().indexingPoi(impl));
+						warnings.addAll(ResourceManager.getResourceManager().indexingAddresses(impl));
+						showWarnings(warnings);
 					} finally {
 						dlg.dismiss();
 					}
@@ -66,6 +71,7 @@ public class MainMenuActivity extends Activity {
 			});
 			impl.run();
 			applicationAlreadyStarted = true;
+			
 			Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
 			
 			long size = getPreferences(MODE_WORLD_READABLE).getLong(EXCEPTION_FILE_SIZE, 0);
@@ -154,6 +160,28 @@ public class MainMenuActivity extends Activity {
 		}); 
 		
 		startApplication();
+	}
+	
+	protected void showWarnings(List<String> warnings) {
+		if (!warnings.isEmpty()) {
+			final StringBuilder b = new StringBuilder();
+			boolean f = true;
+			for (String w : warnings) {
+				if(f){
+					f = false;
+				} else {
+					b.append('\n');
+				}
+				b.append(w);
+			}
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					Toast.makeText(MainMenuActivity.this, b.toString(), Toast.LENGTH_LONG).show();
+
+				}
+			});
+		}
 	}
 	
 	protected void finishApplication(){

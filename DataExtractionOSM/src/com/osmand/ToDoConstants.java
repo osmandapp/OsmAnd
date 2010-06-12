@@ -23,16 +23,12 @@ public class ToDoConstants {
 	public int DESCRIBE_ABOUT_AUTHORS = 8;
 	
 	 // TODO ANDROID 
-
 //   31. Translation.	
 //   32. Introduce POI predefined filters (car filter(other-fuel, transportation-car_wash, show-car) and others)
 // 		 ( 1) predefined filters, 2) choose subtype's, 3) filter by name, 4) opening hours (filter))
-//	     [TODO database support]
-
-//   41. POI layer over map (shows poi by selected filter) [TODO]
+	
 //	  8. Enable change POI directly on map (requires OSM login)
 //   33. Build transport locations. Create transport index (transport-stops) (investigate) [TODO]
-//   39. Support old-versionned resources (1) odb indexes, 2) favourites table, 3) atomic settings (?)) [TODO]
 
 //   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
 //   36. Postcode search
@@ -42,7 +38,7 @@ public class ToDoConstants {
 //   40. Support simple vector road rendering (require new index file)
 
 
-	
+//   43. Enable poi filter by name	
 //   26. Show the whole street on map (when it is chosen in search activity). Possibly extend that story to show layer with streets. (?)
 //   20. Implement save track/route to gpx (?)
 	
@@ -63,6 +59,8 @@ public class ToDoConstants {
 	
 	
 	// DONE ANDROID :
+//  39. Support old-versionned resources (1) odb indexes, 2) favourites table, 3) atomic settings (?)) [TODO]
+//  41. POI layer over map (shows poi by selected filter)
 //  38. Add button in search "navigate to" 
 //  16. Support open street bugs api (supports viewing, deleting).
 //  13. Save point as favorite & introduce favorite points dialog

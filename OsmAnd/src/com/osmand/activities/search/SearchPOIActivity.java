@@ -3,6 +3,7 @@
  */
 package com.osmand.activities.search;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ListActivity;
@@ -63,15 +64,13 @@ public class SearchPOIActivity extends ListActivity {
 
 		Bundle bundle = this.getIntent().getExtras();
 		String filterId = bundle.getString(AMENITY_FILTER);
-		lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(this);
 		filter = PoiFiltersHelper.getFilterById(this, filterId);
+
 		if (filter != null) {
-			amenityAdapter = new AmenityAdapter(filter.initializeNewSearch(lastKnownMapLocation.getLatitude(), lastKnownMapLocation
-					.getLongitude(), 40));
+			amenityAdapter = new AmenityAdapter(new ArrayList<Amenity>());
 			setListAdapter(amenityAdapter);
 			searchArea.setText(filter.getSearchArea());
 		}
-
 		// ListActivity has a ListView, which you can get with:
 		ListView lv = getListView();
 
@@ -88,6 +87,19 @@ public class SearchPOIActivity extends ListActivity {
 				return true;
 			}
 		});
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		// TODO think where this code should be placed (onCreate() - save last search results or onResume() - search time)
+		lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(this);
+		if (filter != null) {
+			amenityAdapter.setNewModel(filter.initializeNewSearch(lastKnownMapLocation.getLatitude(), 
+					lastKnownMapLocation.getLongitude(), 40));
+			searchPOILevel.setEnabled(filter.isSearchFurtherAvailable());
+			searchArea.setText(filter.getSearchArea());
+		}
 	}
 
 
