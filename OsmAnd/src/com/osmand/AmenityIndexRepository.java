@@ -88,7 +88,7 @@ public class AmenityIndexRepository {
 		cFilterId = null;
 	}
 	
-	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, PoiFilter filter, List<Amenity> toFill){
+	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int limit, PoiFilter filter, List<Amenity> toFill){
 		cachedAmenities.clear();
 		cTopLatitude = topLatitude + (topLatitude -bottomLatitude);
 		cBottomLatitude = bottomLatitude - (topLatitude -bottomLatitude);
@@ -97,7 +97,7 @@ public class AmenityIndexRepository {
 		cFilterId = filter == null? null :filter.getFilterId();
 		// first of all put all entities in temp list in order to not freeze other read threads
 		ArrayList<Amenity> tempList = new ArrayList<Amenity>();
-		searchAmenities(cTopLatitude, cLeftLongitude, cBottomLatitude, cRightLongitude, -1, filter, tempList);
+		searchAmenities(cTopLatitude, cLeftLongitude, cBottomLatitude, cRightLongitude, limit, filter, tempList);
 		synchronized (this) {
 			cachedAmenities.clear();
 			cachedAmenities.addAll(tempList);

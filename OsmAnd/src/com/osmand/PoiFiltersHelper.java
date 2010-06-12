@@ -12,6 +12,9 @@ import android.content.Context;
 public class PoiFiltersHelper {
 
 	public static PoiFilter getFilterById(Context ctx, String filterId){
+		if(filterId == null){
+			return null;
+		}
 		if(filterId.startsWith(PoiFilter.USER_PREFIX)){
 			List<PoiFilter> filters = getUserDefinedPoiFilters(ctx);
 			for(PoiFilter f : filters){
