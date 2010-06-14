@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="save_current_track_descr">Save current track to SD</string>
+    <string name="save_current_track">Save current track</string>
+    <string name="save_track_interval_descr">Choose time interval to save track</string>
+    <string name="save_track_interval">Save track interval</string>
+    <string name="monitor_preferences">Monitoring settings</string>
+    <string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
+    <string name="save_track_to_gpx">Save track to gpx</string>
     <string name="navigate_to">Navigate to</string>
     <string name="update_tile">Update map</string>
     <string name="reload_tile">Reload tile</string>
@@ -29,14 +36,14 @@
     <string name="map_view_3d">Map View 3D</string>
     <string name="rotate_map_to_bearing_descr">Rotate map to bearing of your direction</string>
     <string name="rotate_map_to_bearing">Rotate map</string>
-    <string name="show_poi_over_map_description">Show POI on map (zoom &gt; 15)</string>
+    <string name="show_poi_over_map_description">Show POI over map (use last chosen filter)</string>
     <string name="show_poi_over_map">Show POI</string>
     <string name="map_tile_source_descr">Choose the source of tiles:</string>
     <string name="map_tile_source">Map tile source</string>
     <string name="map_source">Map source</string>
     <string name="use_internet">Use internet</string>
     <string name="show_location">Show location</string>
-    <string name="map_preferences">Map preferences</string>
+    <string name="map_preferences">Map settings</string>
     <string name="settings_activity">Settings</string>
     <string name="show_gps_coordinates_text">Show gps coordinates on map</string>
     <string name="use_internet_to_download_tile">Use internet to download missing tiles</string>

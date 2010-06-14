@@ -5,7 +5,9 @@ import java.util.ArrayList;
 
 
 public class TileSourceManager {
-	
+//	 transport "http://tile.xn--pnvkarte-m4a.de/tilegen/${z}/${x}/${y}.png", {numZoomLevels: 19,displayInLayerSwitcher:true,buffer:0});
+//   var navdebug = new OpenLayers.Layer.OSM("Navigation Debug", "http://ec2-184-73-15-218.compute-1.amazonaws.com/6700/256/${z}/${x}/${y}.png", {numZoomLevels: 18,displayInLayerSwitcher:true,buffer:0});
+//   "Mapsurfer Road", "http://tiles1.mapsurfer.net/tms_r.ashx?", {  numZoomLevels: 19, isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true })
 	public static class TileSourceTemplate implements ITileSource {
 		private int maxZoom;
 		private int minZoom;
@@ -97,12 +99,16 @@ public class TileSourceManager {
 			list.add(getMapnikSource());
 			list.add(getOsmaRenderSource());
 			list.add(getCycleMapSource());
+			list.add(getMapSurferSource());
+			list.add(getNavigationDebugSource());
 //			list.add(getAerialMapSource());
+			
 			list.add(getCloudMadeSource());
 			list.add(getOpenPisteMapSource());
 			list.add(getGoogleMapsSource());
 			list.add(getGoogleMapsSatelliteSource());
 			list.add(getGoogleMapsTerrainSource());
+			
 			list.add(getMicrosoftMapsSource());
 			list.add(getMicrosoftEarthSource());
 			list.add(getMicrosoftHybridSource());
@@ -134,6 +140,15 @@ public class TileSourceManager {
 	public static TileSourceTemplate getCloudMadeSource(){
 		return new TileSourceTemplate("Cloudmade", "http://tile.cloudmade.com/7ded028e030c5929b28bf823486ce84f/1/256/{0}/{1}/{2}.png", ".png", 18, 0, 256, 18000);
 	}
+	
+	public static TileSourceTemplate getMapSurferSource(){
+		return new TileSourceTemplate("MapSurfer", "http://tiles1.mapsurfer.net/tms_r.ashx?z={0}&x={1}&y={2}", ".png", 19, 0, 256, 18000);
+	}
+	
+	public static TileSourceTemplate getNavigationDebugSource(){
+		return new TileSourceTemplate("NavigationDebug", "http://ec2-184-73-15-218.compute-1.amazonaws.com/6700/256/{0}/{1}/{2}.png", ".png", 18, 0, 256, 18000);
+	}
+	
 	
 	public static TileSourceTemplate getOpenPisteMapSource(){
 		return new TileSourceTemplate("OpenPisteMap", "http://openpistemap.org/tiles/contours/{0}/{1}/{2}.png", ".png", 17, 0, 256, 18000);
