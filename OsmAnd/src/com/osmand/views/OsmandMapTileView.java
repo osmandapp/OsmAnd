@@ -330,10 +330,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		float y2 = calcDiffPixelY(tileRect.left - ctilex, tileRect.bottom - ctiley);
 		float y3 = calcDiffPixelY(tileRect.right - ctilex, tileRect.top - ctiley);
 		float y4 = calcDiffPixelY(tileRect.right - ctilex, tileRect.bottom - ctiley);
-		int l = (int) (Math.min(Math.min(x1, x2), Math.min(x3, x4)) + cx);
-		int r = (int) (Math.max(Math.max(x1, x2), Math.max(x3, x4)) + cx);
-		int t = (int) (Math.min(Math.min(y1, y2), Math.min(y3, y4)) + cy);
-		int b = (int) (Math.max(Math.max(y1, y2), Math.max(y3, y4)) + cy);
+		int l = Math.round(Math.min(Math.min(x1, x2), Math.min(x3, x4)) + cx);
+		int r = Math.round(Math.max(Math.max(x1, x2), Math.max(x3, x4)) + cx);
+		int t = Math.round(Math.min(Math.min(y1, y2), Math.min(y3, y4)) + cy);
+		int b = Math.round(Math.max(Math.max(y1, y2), Math.max(y3, y4)) + cy);
 		pixelRect.set(l, t, r, b);
 	}
 	
@@ -426,9 +426,15 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	
 	public void tileDownloaded(DownloadRequest request) {
-		if (request == null) {
+		if (request == null || rotate != 0 ) {
+			// if image is rotated call refresh the whole canvas
+    		// because we can't find dirty rectangular region but all pixels should be drawn
+			
 			// we don't know exact images were changed
 			refreshMap();
+			return;
+		}
+		if(request.error){
 			return;
 		}
 		if (request.zoom != this.zoom) {
@@ -443,6 +449,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		synchronized (holder) {
 			tilesRect.set(request.xTile, request.yTile, request.xTile + 1, request.yTile + 1);
 			calculatePixelRectangle(boundsRect, w, h, tileX, tileY, tilesRect);
+			
 			if(boundsRect.left > getWidth() || boundsRect.right < 0 || boundsRect.bottom < 0 || boundsRect.top > getHeight()){
 				return;
 			}
@@ -452,18 +459,19 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				try {
 					ResourceManager mgr = ResourceManager.getResourceManager();
 					Bitmap bmp = mgr.getTileImageForMapSync(map, request.xTile, request.yTile, zoom, false);
-					float x = (request.xTile - getXTile()) * getTileSize() + w;
-					float y = (request.yTile - getYTile()) * getTileSize() + h;
+					float x = (request.xTile - tileX) * getTileSize() + w;
+					float y = (request.yTile - tileY) * getTileSize() + h;
 					if (bmp == null) {
 						drawEmptyTile(canvas, x, y);
 					} else {
-						canvas.drawBitmap(bmp, x, y, null);
+						canvas.drawBitmap(bmp, x, y, paintBitmap);
 					}
 					drawOverMap(canvas);
 				} finally {
 					holder.unlockCanvasAndPost(canvas);
 				}
 			}
+			
 		}
 	}
 	

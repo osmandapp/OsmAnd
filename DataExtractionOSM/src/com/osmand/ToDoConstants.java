@@ -26,7 +26,7 @@ public class ToDoConstants {
 //   32. Introduce POI predefined filters (car filter(other-fuel, transportation-car_wash, show-car) and others)
 // 		 ( 1) predefined filters, 2) choose subtype's, 3) filter by name, 4) opening hours (filter))
 	
-//   20. Implement save track/route to gpx
+
 //	  8. Enable change POI directly on map (requires OSM login)
 //   33. Build transport locations. Create transport index (transport-stops) (investigate) [TODO]
 //   44. Introduce settings presets (car/bicycle/pedestrian/default) - show different icons for car (bigger), 
@@ -40,29 +40,24 @@ public class ToDoConstants {
 //   34. Suppport navigation for calculated route (example of get route from internet is in swing app).
 //   40. Support simple vector road rendering (require new index file)
 
-//   43. Enable poi filter by name	
+//   43. Enable poi filter by name (?)	
 //   26. Show the whole street on map (when it is chosen in search activity). Possibly extend that story to show layer with streets. (?)
-
 	
 	// BUGS Android
 	//  5. Improvement : Implement caching files existing on FS, implement specific method in RM
 	//     Introducing cache of file names that are on disk (creating new File() consumes a lot of memory)
-	//  6. Bug : loading from internet tile (when internet is not accessible). For rotated map investigate loading tile mechanism.
-	// 
 	
-	// BUGS Swing 
-	// 1. Bug renaming region
-
+ 
 	
 	// TODO swing
 	// 4. Fix issues with big files (such as netherlands) - save memory (!)
 	// Current result : for big file (1 - task  60-80% time, 90% memory)
-	
 	// 1. Download tiles without using dir tiles (?)
-
+	
+	// BUGS Swing
 	
 	// DONE ANDROID :
-
+    //  20. Implement save track/route to gpx
 	
 	// DONE SWING
 
