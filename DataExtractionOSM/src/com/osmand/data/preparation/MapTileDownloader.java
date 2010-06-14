@@ -73,6 +73,7 @@ public class MapTileDownloader {
 		public final int xTile;
 		public final int yTile;
 		public final String url;
+		public boolean error;
 		
 		public DownloadRequest(String url, File fileToSave, int xTile, int yTile, int zoom) {
 			this.url = url;
@@ -88,6 +89,10 @@ public class MapTileDownloader {
 			xTile = -1;
 			yTile = -1;
 			zoom = -1;
+		}
+		
+		public void setError(boolean error){
+			this.error = error;
 		}
 	}
 	
@@ -163,12 +168,16 @@ public class MapTileDownloader {
 		
 		@Override
 		public void run() {
-			if(log.isDebugEnabled()){
-				log.debug("Start downloading tile : " + request.url);
-			}
 			if (request != null && request.fileToSave != null && request.url != null) {
-				long time = System.currentTimeMillis();
+				if(currentlyDownloaded.contains(request.fileToSave)){
+					return;
+				}
+				
 				currentlyDownloaded.add(request.fileToSave);
+				if(log.isDebugEnabled()){
+					log.debug("Start downloading tile : " + request.url);
+				}
+				long time = System.currentTimeMillis();
 				try {
 					request.fileToSave.getParentFile().mkdirs();
 					URL url = new URL(request.url);
@@ -189,9 +198,11 @@ public class MapTileDownloader {
 					}
 				} catch (UnknownHostException e) {
 					currentErrors++;
+					request.setError(true);
 					log.error("UnknownHostException, cannot download tile " + request.url + " " + e.getMessage());
 				} catch (IOException e) {
 					currentErrors++;
+					request.setError(true);
 					log.warn("Cannot download tile : " + request.url, e);
 				} finally {
 					currentlyDownloaded.remove(request.fileToSave);

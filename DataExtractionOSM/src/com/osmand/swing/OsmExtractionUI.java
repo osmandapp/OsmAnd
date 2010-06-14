@@ -105,7 +105,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 			@Override
 			public void uncaughtException(Thread t, Throwable e) {
 				if(!(e instanceof ThreadDeath)){
-					log.error("Error in thread " + t.getName(), e);
+					ExceptionHandler.handle("Error in thread " + t.getName(), e);
 				}
 				defaultHandler.uncaughtException(t, e);
 			}
@@ -299,24 +299,26 @@ public class OsmExtractionUI implements IMapLocationListener {
 		
 		treeModelListener = new TreeModelListener() {
 		    public void treeNodesChanged(TreeModelEvent e) {
-				for (Object node : e.getChildren()) {
-					if (node instanceof DataExtractionTreeNode) {
-						DataExtractionTreeNode n = ((DataExtractionTreeNode) node);
-						if (n.getModelObject() instanceof MapObject) {
-							MapObject r = (MapObject) n.getModelObject();
-							String newName = n.getUserObject().toString();
-							if(!r.getName().equals(newName)){
-								r.setName(n.getUserObject().toString());
-							}
-							if (r instanceof Street && !((Street) r).isRegisteredInCity()) {
-								DefaultMutableTreeNode parent = ((DefaultMutableTreeNode) n.getParent());
-								parent.remove(n);
-								((DefaultTreeModel) treePlaces.getModel()).nodeStructureChanged(parent);
-							}
+				Object node = e.getTreePath().getLastPathComponent();
+				if(e.getChildren() != null && e.getChildren().length > 0){
+					node =e.getChildren()[0];
+				}
+				if (node instanceof DataExtractionTreeNode) {
+					DataExtractionTreeNode n = ((DataExtractionTreeNode) node);
+					if (n.getModelObject() instanceof MapObject) {
+						MapObject r = (MapObject) n.getModelObject();
+						String newName = n.getUserObject().toString();
+						if (!r.getName().equals(newName)) {
+							r.setName(n.getUserObject().toString());
+						}
+						if (r instanceof Street && !((Street) r).isRegisteredInCity()) {
+							DefaultMutableTreeNode parent = ((DefaultMutableTreeNode) n.getParent());
+							parent.remove(n);
+							((DefaultTreeModel) treePlaces.getModel()).nodeStructureChanged(parent);
 						}
 					}
 				}
-		    }
+			}
 		    public void treeNodesInserted(TreeModelEvent e) {
 		    }
 		    public void treeNodesRemoved(TreeModelEvent e) {
