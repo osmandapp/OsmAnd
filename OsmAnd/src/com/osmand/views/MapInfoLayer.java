@@ -35,7 +35,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 	private String cachedDistString = null;
 	private int cachedMeters = 0;
 	private String cachedSpeedString = null;
-	private int cachedSpeed = 0;
+	private float cachedSpeed = 0;
 	private int cachedZoom = 0;
 	private String cachedZoomString = "";
 	
@@ -127,9 +127,9 @@ public class MapInfoLayer implements OsmandMapLayer {
 		
 		// draw speed 	
 		if(map.getLastKnownLocation() != null && map.getLastKnownLocation().hasSpeed()){
-			if(cachedSpeed != (int) map.getLastKnownLocation().getSpeed()){
+			if(Math.abs(map.getLastKnownLocation().getSpeed() - cachedSpeed) > .3f){
 				cachedSpeed = (int) map.getLastKnownLocation().getSpeed();
-				cachedSpeedString = ((int) (cachedSpeed * 3.6d)) + " km/h";
+				cachedSpeedString = ((int) (cachedSpeed * 3.6f)) + " km/h";
 				float right = paintBlack.measureText(cachedSpeedString) + 8 + boundsForSpeed.left;
 				boundsForSpeed.right = boundsForDist.right = Math.max(right, boundsForDist.right);
 			}

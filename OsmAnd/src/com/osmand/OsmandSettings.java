@@ -45,6 +45,23 @@ public class OsmandSettings {
 		return prefs.edit().putString(USER_NAME, name).commit();
 	}
 	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String SAVE_CURRENT_TRACK = "save_current_track";
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String SAVE_TRACK_TO_GPX = "save_track_to_gpx";
+	public static boolean isSavingTrackToGpx(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(SAVE_TRACK_TO_GPX, false);
+	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String SAVE_TRACK_INTERVAL = "save_track_interval";
+	public static int getSavingTrackInterval(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getInt(SAVE_TRACK_INTERVAL, 5);
+	}
+	
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SHOW_OSM_BUGS = "show_osm_bugs";

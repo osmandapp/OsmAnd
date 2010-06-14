@@ -20,13 +20,9 @@ import org.apache.commons.logging.Log;
 
 import com.osmand.Algoritms;
 import com.osmand.LogUtil;
+import com.osmand.Version;
 
 public class MapTileDownloader {
-	// Application constants
-	public static String APP_NAME = "OsmAnd";
-	public static String APP_VERSION = "0.2";
-	
-	
 	// Download manager tile settings
 	public static int TILE_DOWNLOAD_THREADS = 4;
 	public static int TILE_DOWNLOAD_SECONDS_TO_WORK = 25;
@@ -177,7 +173,7 @@ public class MapTileDownloader {
 					request.fileToSave.getParentFile().mkdirs();
 					URL url = new URL(request.url);
 					URLConnection connection = url.openConnection();
-					connection.setRequestProperty("User-Agent", APP_NAME + "/" + APP_VERSION);
+					connection.setRequestProperty("User-Agent", Version.APP_NAME_VERSION);
 					BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
 					FileOutputStream stream = null;
 					try {

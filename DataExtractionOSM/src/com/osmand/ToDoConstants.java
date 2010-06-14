@@ -16,7 +16,6 @@ public class ToDoConstants {
 //		}
 //	}
 	
-	
 	/**
 	 * Write activity to show something about authors / donation ....
 	 */
@@ -27,8 +26,12 @@ public class ToDoConstants {
 //   32. Introduce POI predefined filters (car filter(other-fuel, transportation-car_wash, show-car) and others)
 // 		 ( 1) predefined filters, 2) choose subtype's, 3) filter by name, 4) opening hours (filter))
 	
+//   20. Implement save track/route to gpx
 //	  8. Enable change POI directly on map (requires OSM login)
 //   33. Build transport locations. Create transport index (transport-stops) (investigate) [TODO]
+//   44. Introduce settings presets (car/bicycle/pedestrian/default) - show different icons for car (bigger), 
+//		  possibly change fonts, position
+//   45. Autozoom feature (for car navigatoin) 	
 
 //   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
 //   36. Postcode search
@@ -37,14 +40,15 @@ public class ToDoConstants {
 //   34. Suppport navigation for calculated route (example of get route from internet is in swing app).
 //   40. Support simple vector road rendering (require new index file)
 
-
 //   43. Enable poi filter by name	
 //   26. Show the whole street on map (when it is chosen in search activity). Possibly extend that story to show layer with streets. (?)
-//   20. Implement save track/route to gpx (?)
+
 	
 	// BUGS Android
 	//  5. Improvement : Implement caching files existing on FS, implement specific method in RM
 	//     Introducing cache of file names that are on disk (creating new File() consumes a lot of memory)
+	//  6. Bug : loading from internet tile (when internet is not accessible). For rotated map investigate loading tile mechanism.
+	// 
 	
 	// BUGS Swing 
 	// 1. Bug renaming region
@@ -57,19 +61,9 @@ public class ToDoConstants {
 	// 1. Download tiles without using dir tiles (?)
 
 	
-	
 	// DONE ANDROID :
-//  39. Support old-versionned resources (1) odb indexes, 2) favourites table, 3) atomic settings (?)) [TODO]
-//  41. POI layer over map (shows poi by selected filter)
-//  38. Add button in search "navigate to" 
-//  16. Support open street bugs api (supports viewing, deleting).
-//  13. Save point as favorite & introduce favorite points dialog
-//  29. Show opened/closed amenities (in search poi).
-//   3. Revise osmand UI. Preparing new icons (revise UI 18, 2, ). Main application icon, back to location icon.
-//	14. Show zoom level on map
-//  35. Enable trackball navigation in android
+
 	
 	// DONE SWING
-	// 2. Internal (Simplify MapPanel - introduce layers for it)
-	// 3. Implement clear progress.
+
 }

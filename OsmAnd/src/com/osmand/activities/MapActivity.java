@@ -64,11 +64,14 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	private POIMapLayer poiMapLayer;
 	private MapInfoLayer mapInfoLayer;
 	private OsmBugsLayer osmBugsLayer;
+	private SavingTrackHelper savingTrackHelper;
 	
 	private WakeLock wakeLock;
 	private boolean sensorRegistered = false;
 
 	private MenuItem navigateToPointMenu;
+
+	
 
 	private boolean isMapLinkedToLocation(){
 		return OsmandSettings.isMapSyncToGpsLocation(this);
@@ -95,6 +98,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		mapInfoLayer = new MapInfoLayer(this);
 		mapView.addLayer(mapInfoLayer);
 		osmBugsLayer = new OsmBugsLayer(this);
+		savingTrackHelper = new SavingTrackHelper(this);
 		
 		
 		LatLon pointToNavigate = OsmandSettings.getPointToNavigate(this);
@@ -202,11 +206,11 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     @Override
     protected void onDestroy() {
     	super.onDestroy();
+    	savingTrackHelper.close();
     	MapTileDownloader.getInstance().removeDownloaderCallback(mapView);
     }
     
     public void setLocation(Location location){
-    	// Do very strange manipulation to call redraw only once
     	
     	// show point view only if gps enabled
     	if(location == null){
@@ -272,6 +276,10 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 
 	@Override
 	public void onLocationChanged(Location location) {
+		if(location != null && OsmandSettings.isSavingTrackToGpx(this)){
+			savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), 
+					location.getAltitude(), location.getSpeed(), location.getTime());
+		}
 		setLocation(location);
 	}
 

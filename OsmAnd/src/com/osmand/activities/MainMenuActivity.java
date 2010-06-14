@@ -90,7 +90,9 @@ public class MainMenuActivity extends Activity {
 					getPreferences(MODE_WORLD_READABLE).edit().putLong(EXCEPTION_FILE_SIZE, 0).commit();
 				}
 			}
-			
+			SavingTrackHelper helper = new SavingTrackHelper(this);
+			helper.saveDataToGpx();
+			helper.close();
 		}
 	}
 	

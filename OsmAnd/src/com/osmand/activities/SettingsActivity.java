@@ -30,6 +30,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private CheckBoxPreference useEnglishNames;
 	private CheckBoxPreference showOsmBugs;
 	private EditTextPreference userName;
+	private CheckBoxPreference saveTrackToGpx;
+	private ListPreference saveTrackInterval;
+	private Preference saveCurrentTrack;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,10 +49,18 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		showViewAngle.setOnPreferenceChangeListener(this);
 		showOsmBugs =(CheckBoxPreference) screen.findPreference(OsmandSettings.SHOW_OSM_BUGS);
 		showOsmBugs.setOnPreferenceChangeListener(this);
+		
 		useEnglishNames =(CheckBoxPreference) screen.findPreference(OsmandSettings.USE_ENGLISH_NAMES);
 		useEnglishNames.setOnPreferenceChangeListener(this);
 		userName = (EditTextPreference) screen.findPreference(OsmandSettings.USER_NAME);
 		userName.setOnPreferenceChangeListener(this);
+		
+		saveTrackToGpx =(CheckBoxPreference) screen.findPreference(OsmandSettings.SAVE_TRACK_TO_GPX);
+		saveTrackToGpx.setOnPreferenceChangeListener(this);
+		saveTrackInterval =(ListPreference) screen.findPreference(OsmandSettings.SAVE_TRACK_INTERVAL);
+		saveTrackInterval.setOnPreferenceChangeListener(this);
+		saveCurrentTrack =(Preference) screen.findPreference(OsmandSettings.SAVE_CURRENT_TRACK);
+		saveCurrentTrack.setOnPreferenceChangeListener(this);
 		
 		positionOnMap =(ListPreference) screen.findPreference(OsmandSettings.POSITION_ON_MAP);
 		positionOnMap.setOnPreferenceChangeListener(this);
@@ -67,12 +78,17 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		rotateMapToBearing.setChecked(OsmandSettings.isRotateMapToBearing(this));
 		showViewAngle.setChecked(OsmandSettings.isShowingViewAngle(this));
 		showOsmBugs.setChecked(OsmandSettings.isShowingOsmBugs(this));
+		saveTrackToGpx.setChecked(OsmandSettings.isSavingTrackToGpx(this));
 		useEnglishNames.setChecked(OsmandSettings.usingEnglishNames(this));
 		String[] e = new String[] { "Center", "Bottom" };
 		positionOnMap.setEntryValues(e);
 		positionOnMap.setEntries(e);
 		positionOnMap.setValueIndex(OsmandSettings.getPositionOnMap(this));
 		userName.setText(OsmandSettings.getUserName(this));
+		
+		saveTrackInterval.setEntries(new String[]{"1 second", "2 seconds", "5 seconds", "15 seconds", "30 seconds", "1 minute", "5 minute"});
+		saveTrackInterval.setEntryValues(new String[]{"1", "2", "5", "15", "30", "60", "300"});
+		saveTrackInterval.setValue(OsmandSettings.getSavingTrackInterval(this)+"");
 		
 
 		List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
@@ -104,6 +120,16 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.commit();
 		} else if(preference == useEnglishNames){
 			edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, (Boolean) newValue);
+			edit.commit();
+		} else if(preference == saveTrackToGpx){
+			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, (Boolean) newValue);
+			edit.commit();
+		} else if(preference == saveCurrentTrack){
+			SavingTrackHelper helper = new SavingTrackHelper(this);
+			helper.saveDataToGpx();
+			helper.close();
+		} else if(preference == saveTrackInterval){
+			edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, Integer.parseInt(newValue.toString()));
 			edit.commit();
 		} else if(preference == userName){
 			edit.putString(OsmandSettings.USER_NAME, (String) newValue);

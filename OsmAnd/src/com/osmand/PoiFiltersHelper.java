@@ -101,7 +101,7 @@ public class PoiFiltersHelper {
 	private static List<PoiFilter> cacheUserDefinedFilters;
 	public static List<PoiFilter> getUserDefinedPoiFilters(Context ctx){
 		if(cacheUserDefinedFilters == null){
-			ctx.deleteDatabase(PoiFilterDbHelper.DATABASE_NAME);
+			////ctx.deleteDatabase(PoiFilterDbHelper.DATABASE_NAME);
 			
 			cacheUserDefinedFilters = new ArrayList<PoiFilter>();
 			PoiFilterDbHelper helper = new PoiFilterDbHelper(ctx);
