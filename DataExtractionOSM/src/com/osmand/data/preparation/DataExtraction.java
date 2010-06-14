@@ -11,8 +11,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -32,6 +35,8 @@ import com.osmand.data.DataTileManager;
 import com.osmand.data.MapObject;
 import com.osmand.data.Region;
 import com.osmand.data.Street;
+import com.osmand.data.TransportRoute;
+import com.osmand.data.TransportStop;
 import com.osmand.data.City.CityType;
 import com.osmand.impl.ConsoleProgressImplementation;
 import com.osmand.osm.Entity;
@@ -39,6 +44,7 @@ import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 import com.osmand.osm.Node;
 import com.osmand.osm.OSMSettings;
+import com.osmand.osm.Relation;
 import com.osmand.osm.Way;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 import com.osmand.osm.io.IOsmStorageFilter;
@@ -88,14 +94,18 @@ public class DataExtraction  {
 	private final boolean indexAddress;
 	private final boolean indexPOI;
 	private final boolean parseEntityInfo;
+	private final boolean indexTransport;
 	private File workingDir = null;
 
 	
+
 	
-	public DataExtraction(boolean indexAddress, boolean indexPOI, boolean normalizeStreets, 
+	
+	public DataExtraction(boolean indexAddress, boolean indexPOI, boolean indexTransport, boolean normalizeStreets, 
 			boolean loadAllObjects, boolean parseEntityInfo, File workingDir){
 		this.indexAddress = indexAddress;
 		this.indexPOI = indexPOI;
+		this.indexTransport = indexTransport;
 		this.normalizeStreets = normalizeStreets;
 		this.loadAllObjects = loadAllObjects;
 		this.parseEntityInfo = parseEntityInfo;
@@ -109,17 +119,20 @@ public class DataExtraction  {
 		final ArrayList<Entity> buildings;
 		final ArrayList<Entity> amenities;
 		final ArrayList<Way> ways;
+		final ArrayList<Relation> transport;
 
 		int currentCount = 0;
 		private Connection conn;
 		private PreparedStatement prep;
+		
 
 		public DataExtractionOsmFilter(ArrayList<Entity> amenities, ArrayList<Entity> buildings, ArrayList<Node> places,
-				ArrayList<Way> ways) {
+				ArrayList<Way> ways, ArrayList<Relation> transport) {
 			this.amenities = amenities;
 			this.buildings = buildings;
 			this.places = places;
 			this.ways = ways;
+			this.transport = transport;
 		}
 
 		public void initDatabase() throws SQLException {
@@ -158,18 +171,25 @@ public class DataExtraction  {
 			final PreparedStatement pselect = conn.prepareStatement("select * from node where id = ?");
 			Map<Long, Entity> map = new LinkedHashMap<Long, Entity>();
 			progress.startTask("Correlating data...", storage.getRegisteredEntities().size());
-			for (Entity e : storage.getRegisteredEntities().values()) {
+			Collection<Entity> values = new ArrayList<Entity>(storage.getRegisteredEntities().values());
+			for (Entity e : values) {
 				progress.progress(1);
-				if (e instanceof Way) {
+				if (e instanceof Way || e instanceof Relation) {
 					map.clear();
-					for (Long i : ((Way) e).getNodeIds()) {
-						pselect.setLong(1, i);
-						if (pselect.execute()) {
-							ResultSet rs = pselect.getResultSet();
-							if (rs.next()) {
-								map.put(i, new Node(rs.getDouble(2), rs.getDouble(3), rs.getLong(1)));
+					Collection<Long> ids = e instanceof Way ? ((Way) e).getNodeIds() : ((Relation) e).getMemberIds();
+					for (Long i : ids) {
+						if (!storage.getRegisteredEntities().containsKey(i)) {
+							pselect.setLong(1, i);
+							if (pselect.execute()) {
+								ResultSet rs = pselect.getResultSet();
+								if (rs.next()) {
+									storage.getRegisteredEntities().put(i, new Node(rs.getDouble(2), rs.getDouble(3), rs.getLong(1)));
+								}
+								rs.close();
 							}
-							rs.close();
+						}
+						if(storage.getRegisteredEntities().containsKey(i)){
+							map.put(i, storage.getRegisteredEntities().get(i));
 						}
 					}
 					e.initializeLinks(map);
@@ -213,9 +233,18 @@ public class DataExtraction  {
 					processed = true;
 				}
 			}
+			if(indexTransport){
+				if(e instanceof Relation && e.getTag(OSMTagKey.ROUTE) != null){
+					transport.add((Relation) e);
+					processed = true;
+				}
+				if(e instanceof Way){
+					processed = true;
+				}
+			}
 			// put all nodes into temporary db to get only required nodes after loading all data 
 			try {
-				if (e instanceof Node && indexAddress) {
+				if (e instanceof Node) {
 					currentCount++;
 					prep.setLong(1, e.getId());
 					prep.setDouble(2, ((Node) e).getLatitude());
@@ -233,6 +262,7 @@ public class DataExtraction  {
 		}
 
 	}
+	// netherlands.osm.bz2 1674 seconds - read
 	
 	// Information about progress for belarus.osm [165 seconds] - 580mb
 //	FINE: Loading file E:\Information\OSM maps\belarus_2010_06_02.osm started - 61%
@@ -289,6 +319,7 @@ public class DataExtraction  {
 		final ArrayList<Entity> buildings = new ArrayList<Entity>();
 		final ArrayList<Entity> amenities = new ArrayList<Entity>();
 		final ArrayList<Way> ways = new ArrayList<Way>();
+		final ArrayList<Relation> transport = new ArrayList<Relation>();
 		
 		File f = new File(path);
 		InputStream stream = new FileInputStream(f);
@@ -311,7 +342,7 @@ public class DataExtraction  {
 			storage.getFilters().add(addFilter);
 		}
 
-        DataExtractionOsmFilter filter = new DataExtractionOsmFilter(amenities, buildings, places, ways);
+        DataExtractionOsmFilter filter = new DataExtractionOsmFilter(amenities, buildings, places, ways, transport);
         storage.getFilters().add(filter);
         // 0. Loading osm file
 		try {
@@ -370,10 +401,15 @@ public class DataExtraction  {
         	// 	6. normalizing streets
         	normalizingStreets(progress, country);
         }
-        
-        // 7. Call data preparation to sort cities, calculate center location, assign id to objects 
+
+        // 7. Indexing transport
+        if(indexTransport){
+        	readingTransport(transport, country, progress);
+        }
+        // 8. Call data preparation to sort cities, calculate center location, assign id to objects 
         country.doDataPreparation();
-        // 8. Transliterate names to english
+        
+        // 9. Transliterate names to english
         
         convertEnglishName(country);
         for (CityType c : CityType.values()) {
@@ -390,6 +426,17 @@ public class DataExtraction  {
         for (Amenity a : country.getAmenityManager().getAllObjects()) {
 			convertEnglishName(a);
 		}
+        for(List<TransportRoute> r : country.getTransportRoutes().values()){
+        	for(TransportRoute route : r){
+        		convertEnglishName(route);
+        		for(TransportStop s : route.getBackwardStops()){
+        			convertEnglishName(s);
+        		}
+        		for(TransportStop s : route.getForwardStops()){
+        			convertEnglishName(s);
+        		}
+        	}
+        }
         return country;
 	}
 	// icu4j example - icu is not good in transliteration russian names
@@ -461,7 +508,63 @@ public class DataExtraction  {
         /// way with name : МЗОР, ул. ...,
 	}
 
-
+	
+	public void readingTransport(final ArrayList<Relation> transport, Region country, IProgress progress){
+		progress.startTask("Reading transport...", -1);
+		Map<String, List<TransportRoute>> routes = country.getTransportRoutes();
+		Map<Long, TransportStop> routeStops = new LinkedHashMap<Long, TransportStop>();
+		for(Relation rel : transport){
+			String ref = rel.getTag(OSMTagKey.REF);
+			String route = rel.getTag(OSMTagKey.ROUTE);
+			if(route == null || ref == null){
+				continue;
+			}
+			String operator = rel.getTag(OSMTagKey.OPERATOR);
+			if(operator != null){
+				route = operator + " : " + route;
+			} 
+			if(!routes.containsKey(route)){
+				routes.put(route, new ArrayList<TransportRoute>());
+			}
+			
+			TransportRoute r = new TransportRoute(rel, ref);
+			for(Entry<Entity, String> e: rel.getMemberEntities().entrySet()){
+				if(e.getValue().contains("stop")){
+					if(e.getKey() instanceof Node){
+						if(!routeStops.containsKey(e.getKey().getId())){
+							routeStops.put(e.getKey().getId(), new TransportStop(e.getKey()));
+						}
+						TransportStop stop = routeStops.get(e.getKey().getId());
+						boolean forward = e.getValue().contains("forward") || !e.getValue().contains("backward");
+						if(forward){
+							r.getForwardStops().add(stop);
+						} else {
+							r.getBackwardStops().add(stop);
+						}
+					}
+					
+				} else if(e.getKey() instanceof Way){
+					r.addWay((Way) e.getKey());
+				}
+			}
+			if(r.getBackwardStops().isEmpty() && !r.getForwardStops().isEmpty()){
+				List<TransportStop> stops = r.getBackwardStops();
+				for(TransportStop s : r.getForwardStops()){
+					stops.add(0, s);
+				}
+			} else if(!r.getForwardStops().isEmpty()){
+				if(r.getForwardStops().get(0) != r.getBackwardStops().get(r.getBackwardStops().size() - 1)){
+					r.getBackwardStops().add(r.getForwardStops().get(0));
+				}
+			} else {
+				continue;
+			}
+			routes.get(route).add(r);
+		}
+		
+		progress.finishTask();
+	}
+	
 	private void readingAmenities(final ArrayList<Entity> amenities, Region country) {
 		for(Entity a: amenities){
         	country.registerAmenity(new Amenity(a));
@@ -564,6 +667,7 @@ public class DataExtraction  {
 		ArrayList<Entity> amenities = new ArrayList<Entity>();
 		ArrayList<Entity> buildings = new ArrayList<Entity>();
 		ArrayList<Node> places = new ArrayList<Node>();
+		ArrayList<Relation> transport = new ArrayList<Relation>();
 		ArrayList<Way> ways = new ArrayList<Way>();
 		
 		long time = System.currentTimeMillis();
@@ -598,9 +702,9 @@ public class DataExtraction  {
 				return false;
 			}
 		});
-		DataExtraction e = new DataExtraction(true, true, true, false, true, new File(wDir));
+		DataExtraction e = new DataExtraction(true, true, true, true, false, true, new File(wDir));
 		
-		DataExtractionOsmFilter filter = e.new DataExtractionOsmFilter(amenities, buildings, places, ways); 
+		DataExtractionOsmFilter filter = e.new DataExtractionOsmFilter(amenities, buildings, places, ways, transport); 
 		filter.initDatabase();
 		storage.getFilters().add(filter);
 		

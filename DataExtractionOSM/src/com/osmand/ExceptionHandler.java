@@ -26,7 +26,7 @@ public class ExceptionHandler {
 			String text;
 			String title;
 			if (e != null) {
-				text = e.getMessage();
+				text = e+" ";
 				title = msg;
 			} else {
 				title = "Error occured";
