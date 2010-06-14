@@ -8,6 +8,10 @@ public class OSMSettings {
 		// ways
 		HIGHWAY("highway"),
 		BUILDING("building"),
+		// transport
+		ROUTE("route"),
+		OPERATOR("operator"),
+		REF("ref"),
 		
 		// address
 		PLACE("place"),

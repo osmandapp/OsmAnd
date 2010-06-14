@@ -68,6 +68,10 @@ public class Relation extends Entity {
 		return l;
 	}
 	
+	public Map<Entity, String> getMemberEntities() {
+		return memberEntities;
+	}
+	
 	public Collection<Entity> getMembers(String role) {
 		if (memberEntities == null) {
 			return Collections.emptyList();

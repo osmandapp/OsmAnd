@@ -1,7 +1,6 @@
 package com.osmand.swing;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -27,7 +26,6 @@ import java.util.Map;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
@@ -46,14 +44,10 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.UIManager;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-import javax.swing.event.UndoableEditEvent;
-import javax.swing.event.UndoableEditListener;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellEditor;
@@ -78,6 +72,8 @@ import com.osmand.data.DataTileManager;
 import com.osmand.data.MapObject;
 import com.osmand.data.Region;
 import com.osmand.data.Street;
+import com.osmand.data.TransportRoute;
+import com.osmand.data.TransportStop;
 import com.osmand.data.City.CityType;
 import com.osmand.data.index.DataIndexWriter;
 import com.osmand.data.preparation.DataExtraction;
@@ -85,6 +81,7 @@ import com.osmand.map.IMapLocationListener;
 import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
+import com.osmand.osm.Node;
 import com.osmand.osm.Way;
 import com.osmand.osm.io.IOsmStorageFilter;
 import com.osmand.osm.io.OsmBoundsFilter;
@@ -131,6 +128,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 	private JButton generateDataButton;
 	private JCheckBox buildPoiIndex;
 	private JCheckBox buildAddressIndex;
+	private JCheckBox buildTransportIndex;
 	private JCheckBox normalizingStreets;
 	private TreeModelListener treeModelListener;
 	private JCheckBox loadingAllData;
@@ -158,6 +156,19 @@ public class OsmExtractionUI implements IMapLocationListener {
 				amenitiesTree.add(new DataExtractionTreeNode(Algoritms.capitalizeFirstLetterAndLowercase(type.toString()), type));
 			}
 			root.add(amenitiesTree);
+			
+			DataExtractionTreeNode transport = new DataExtractionTreeNode("Transport", region);
+			root.add(transport);
+			for(String s : region.getTransportRoutes().keySet()){
+				DataExtractionTreeNode trRoute = new DataExtractionTreeNode(s, s);
+				transport.add(trRoute);
+				List<TransportRoute> list = region.getTransportRoutes().get(s);
+				for(TransportRoute r : list){
+					DataExtractionTreeNode route = new DataExtractionTreeNode(r.getRef(), r);
+					trRoute.add(route);
+				}
+				
+			}
 
 			for (CityType t : CityType.values()) {
 				DefaultMutableTreeNode cityTree = new DataExtractionTreeNode(Algoritms.capitalizeFirstLetterAndLowercase(t.toString()), t);
@@ -178,14 +189,6 @@ public class OsmExtractionUI implements IMapLocationListener {
 			}
 		}
 		
-		// amenities could be displayed as dots
-//		DataTileManager<LatLon> amenitiesManager = new DataTileManager<LatLon>();
-//		if (region != null) {
-//			for (Amenity a : region.getAmenityManager().getAllObjects()) {
-//				amenitiesManager.registerObject(a.getNode().getLatitude(), a.getNode().getLongitude(), a.getNode().getLatLon());
-//			}
-//		}
-//	    mapPanel.setPoints(amenitiesManager);
 	    if (searchList != null) {
 			updateListCities(region, searchTextField.getText(), searchList);
 		}
@@ -282,6 +285,25 @@ public class OsmExtractionUI implements IMapLocationListener {
 								mapPanel.setLatLon(location.getLatitude(), location.getLongitude());
 								mapPanel.requestFocus();
 							}
+							if(o instanceof TransportRoute){
+								DataTileManager<Entity> ways = new DataTileManager<Entity>();
+								for(Way w : ((TransportRoute)o).getWays()){
+									LatLon l = w.getLatLon();
+									ways.registerObject(l.getLatitude(), l.getLongitude(), w);
+								}
+								for(TransportStop w : ((TransportRoute)o).getBackwardStops()){
+									LatLon l = w.getLocation();
+									ways.registerObject(l.getLatitude(), l.getLongitude(), 
+											new Node(l.getLatitude(), l.getLongitude(), w.getId()));
+								}
+								for(TransportStop w : ((TransportRoute)o).getForwardStops()){
+									LatLon l = w.getLocation();
+									ways.registerObject(l.getLatitude(), l.getLongitude(), 
+											new Node(l.getLatitude(), l.getLongitude(), w.getId()));
+								}
+								mapPanel.setPoints(ways);
+								mapPanel.requestFocus();
+							} 
 							
 						} else if (o instanceof Entity) {
 							Entity c = (Entity) o;
@@ -340,7 +362,10 @@ public class OsmExtractionUI implements IMapLocationListener {
 			buildAddressIndex.setEnabled(true);
 		}
 		if(region == null && !buildPoiIndex.isEnabled()){
-			buildPoiIndex.setEnabled(false);
+			buildPoiIndex.setEnabled(true);
+		}
+		if(region == null && !buildTransportIndex.isEnabled()){
+			buildTransportIndex.setEnabled(true);
 		}
 	}
 	
@@ -374,6 +399,11 @@ public class OsmExtractionUI implements IMapLocationListener {
 		normalizingStreets.setText("Normalizing streets");
 		panel.add(normalizingStreets);
 		normalizingStreets.setSelected(true);
+		
+		buildTransportIndex = new JCheckBox();
+		buildTransportIndex.setText("Build transport index");
+		panel.add(buildTransportIndex);
+		buildTransportIndex.setSelected(true);
 
 		loadingAllData = new JCheckBox();
 		loadingAllData.setText("Loading all osm data");
@@ -405,6 +435,9 @@ public class OsmExtractionUI implements IMapLocationListener {
 							builder.writeAddress();
 							msg.append(", Address index ").append("successfully created");
 						}
+						if(buildTransportIndex.isSelected()){
+							// TODO
+						}
 						
 //						new DataIndexReader().testIndex(new File(
 //								DataExtractionSettings.getSettings().getDefaultWorkingDir(), 
@@ -427,69 +460,6 @@ public class OsmExtractionUI implements IMapLocationListener {
 			ExceptionHandler.handle((Exception) e1.getCause());
 		}
 		
-	}
-
-	public void createCitySearchPanel(Container content){
-		JPanel panel = new JPanel(new BorderLayout());
-	    searchTextField = new JTextField();
-	    final JButton button = new JButton();
-	    button.setText("Set town");
-
-	    
-	    panel.add(searchTextField, BorderLayout.CENTER);
-	    panel.add(button, BorderLayout.WEST);
-	    
-	    content.add(panel, BorderLayout.NORTH);
-	    
-		
-		searchList = new JList();
-	    searchList.setCellRenderer(new DefaultListCellRenderer(){
-			private static final long serialVersionUID = 4661949460526837891L;
-
-			@Override
-	    	public Component getListCellRendererComponent(JList list,
-	    			Object value, int index, boolean isSelected,
-	    			boolean cellHasFocus) {
-	    		super.getListCellRendererComponent(list, value, index, isSelected,
-	    				cellHasFocus);
-	    		if(value instanceof City){
-	    			setText(((City)value).getName());
-	    		}
-	    		return this;
-	    	}
-	    });
-
-	    
-	    updateListCities(region, searchTextField.getText(), searchList);
-	    searchTextField.getDocument().addUndoableEditListener(new UndoableEditListener(){
-			@Override
-			public void undoableEditHappened(UndoableEditEvent e) {
-	    		updateListCities(region, searchTextField.getText(), searchList);
-			}
-	    });
-	    
-	    button.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				selectedCity = (City)searchList.getSelectedValue();
-			}
-	    });
-
-	    searchList.addListSelectionListener(new ListSelectionListener(){
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				if(searchList.getSelectedValue() != null){
-					LatLon node = ((City)searchList.getSelectedValue()).getLocation();
-					String text = "Lat : " + node.getLatitude() + " Lon " + node.getLongitude();
-					if(selectedCity != null){
-						text += " distance " + MapUtils.getDistance(node, node);
-					}
-					mapPanel.setLatLon(node.getLatitude(), node.getLongitude());
-				}
-			}
-	    });
-	    
-	    
 	}
 	
 	
@@ -751,11 +721,14 @@ public class OsmExtractionUI implements IMapLocationListener {
 					Region res;
 					try {
 						DataExtraction dataExtraction = new DataExtraction(buildAddressIndex.isSelected(), buildPoiIndex.isSelected(),
-								normalizingStreets.isSelected(), loadingAllData.isSelected(), 
+								buildTransportIndex.isSelected(), normalizingStreets.isSelected(), loadingAllData.isSelected(), 
 								DataExtractionSettings.getSettings().getLoadEntityInfo(), 
 								DataExtractionSettings.getSettings().getDefaultWorkingDir());
 						if(!buildAddressIndex.isSelected()){
 							buildAddressIndex.setEnabled(false);
+						}
+						if(!buildTransportIndex.isSelected()){
+							buildTransportIndex.setEnabled(false);
 						}
 						if(!buildPoiIndex.isSelected()){
 							buildPoiIndex.setEnabled(false);

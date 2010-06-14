@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ public class Region extends MapObject {
 	private DataTileManager<Amenity> amenities = new DataTileManager<Amenity>();
 	private OsmBaseStorage storage;
 	private DataTileManager<City> cityManager = new DataTileManager<City>(); 
+	private Map<String, List<TransportRoute>> routes = new LinkedHashMap<String, List<TransportRoute>>();
 	private Map<CityType, List<City>> cities = new HashMap<CityType, List<City>>();
 	{
 		cityManager.setZoom(10);
@@ -155,6 +157,10 @@ public class Region extends MapObject {
 		return null;
 	}
 	
+	public Map<String, List<TransportRoute>> getTransportRoutes() {
+		return routes;
+	}
+	
 	
 	public void doDataPreparation(){
 		CityComparator comp = new CityComparator(false);
@@ -163,6 +169,17 @@ public class Region extends MapObject {
 			for(City c : cities.get(t)){
 				c.doDataPreparation();
 			}
+		}
+		for(String s : routes.keySet()){
+			List<TransportRoute> trans = routes.get(s);
+			Collections.sort(trans, new Comparator<TransportRoute>(){
+				@Override
+				public int compare(TransportRoute o1, TransportRoute o2) {
+					int i1 = Algoritms.extractFirstIntegerNumber(o1.getRef());
+					int i2 = Algoritms.extractFirstIntegerNumber(o2.getRef());
+					return i1 - i2;
+				}
+			});
 		}
 		
 		
