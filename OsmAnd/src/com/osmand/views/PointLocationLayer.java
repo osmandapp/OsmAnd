@@ -10,6 +10,7 @@ import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.location.Location;
 
+import com.osmand.OsmandSettings.ApplicationMode;
 import com.osmand.osm.MapUtils;
 
 public class PointLocationLayer implements OsmandMapLayer {
@@ -22,6 +23,7 @@ public class PointLocationLayer implements OsmandMapLayer {
 	private Paint area;
 	private Paint headingPaint;
 	private Path pathForDirection;
+	private ApplicationMode preset = ApplicationMode.DEFAULT;
 	
 	protected Location lastKnownLocation = null;
 	
@@ -147,6 +149,14 @@ public class PointLocationLayer implements OsmandMapLayer {
 	@Override
 	public void destroyLayer() {
 		
+	}
+	
+	public ApplicationMode getPreset() {
+		return preset;
+	}
+	
+	public void setSettingsPreset(ApplicationMode preset) {
+		this.preset = preset;
 	}
 
 	@Override

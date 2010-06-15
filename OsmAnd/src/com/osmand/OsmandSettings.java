@@ -13,6 +13,22 @@ import com.osmand.osm.LatLon;
 
 public class OsmandSettings {
 	
+	public enum ApplicationMode {
+		DEFAULT("Default"),
+		CAR("Car"),
+		BICYCLE("Bicycle"),
+		PEDESTRIAN("Pedestrian");
+		
+		private final String name;
+		ApplicationMode(String name){
+			this.name = name;
+		}
+		@Override
+		public String toString() {
+			return name;
+		}
+	}
+	
 	// These settings are stored in SharedPreferences
 	public static final String SHARED_PREFERENCES_NAME = "com.osmand.settings";
 	
@@ -46,6 +62,23 @@ public class OsmandSettings {
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
+	public static final String APPLICATION_MODE = "application_mode";
+	public static ApplicationMode getApplicationMode(Context ctx) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		String s = prefs.getString(APPLICATION_MODE, ApplicationMode.DEFAULT.name());
+		try {
+			return ApplicationMode.valueOf(s);
+		} catch (IllegalArgumentException e) {
+			return ApplicationMode.DEFAULT;
+		}
+	}
+	
+	public static boolean setApplicationMode(Context ctx, ApplicationMode p){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putString(APPLICATION_MODE, p.name()).commit();
+	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SAVE_CURRENT_TRACK = "save_current_track";
 	
 	// this value string is synchronized with settings_pref.xml preference name
@@ -75,6 +108,13 @@ public class OsmandSettings {
 	public static boolean isShowingViewAngle(Context ctx){
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		return prefs.getBoolean(SHOW_VIEW_ANGLE, true);
+	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String AUTO_ZOOM_MAP = "auto_zoom_map";
+	public static boolean isAutoZoomEnabled(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(AUTO_ZOOM_MAP, false);
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
