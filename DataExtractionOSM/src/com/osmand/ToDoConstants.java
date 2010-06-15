@@ -22,25 +22,43 @@ public class ToDoConstants {
 	public int DESCRIBE_ABOUT_AUTHORS = 8;
 	
 	 // TODO ANDROID 
-//   31. Translation.	
-//   32. Introduce POI predefined filters (car filter(other-fuel, transportation-car_wash, show-car) and others)
-// 		 ( 1) predefined filters, 2) choose subtype's, 3) filter by name, 4) opening hours (filter))
+//   31. Translation.
+//	     GOT : olga
 	
+//   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
+	
+//   32. Introduce POI predefined filters (car filter(other-fuel, transportation-car_wash, show-car) and others)
+// 		 DONE : back end (POI filter object, save, delete, read) 
+//	     TODO : activity to create/edit new index, activity to read both user defined/osm standard, add actions to remove/create
 
 //	  8. Enable change POI directly on map (requires OSM login)
-//   33. Build transport locations. Create transport index (transport-stops) (investigate) [TODO]
+//	     GOT : Victor
+//	     DONE : Victor investigation
+//		 TODO:
+	
+//   33. Build transport locations. Create transport index (transport-stops) (investigate)
+//       GOT : Victor	
+//		 DONE: Load transport routes in swing. 
+//	     TODO: Create transport index, create transport activity
+	
 //   44. Introduce settings presets (car/bicycle/pedestrian/default) - show different icons for car (bigger), 
 //		  possibly change fonts, position
-//   45. Autozoom feature (for car navigatoin) 	
+//	     GOT : Victor
+	
+//   45. Autozoom feature (for car navigation) 	
 
-//   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
 //   36. Postcode search
+	
 //   37. Get rid of exit button (!). Think about when notification should go & how clear resources if it is necessary
 	
 //   34. Suppport navigation for calculated route (example of get route from internet is in swing app).
+//	     IDEA : Victor have ideas
+	
+	
+	
+	// FUTURE RELEASES 
+//   43. Enable poi filter by name (?)
 //   40. Support simple vector road rendering (require new index file)
-
-//   43. Enable poi filter by name (?)	
 //   26. Show the whole street on map (when it is chosen in search activity). Possibly extend that story to show layer with streets. (?)
 	
 	// BUGS Android
