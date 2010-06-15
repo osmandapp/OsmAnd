@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="search_settings">Search settings</string>
+    <string name="osm_settings">Osm settings</string>
+    <string name="auto_zoom_map_descr">Auto zoom map according to the speed</string>
+    <string name="auto_zoom_map">Auto zoom map</string>
+    <string name="additional_settings">Additional settings</string>
+    <string name="settings_preset_descr">Select predefined settings</string>
+    <string name="settings_preset">Application mode</string>
+    <string name="settings">Settings</string>
     <string name="save_current_track_descr">Save current track to SD</string>
     <string name="save_current_track">Save current track</string>
     <string name="save_track_interval_descr">Choose time interval to save track</string>

@@ -41,15 +41,19 @@ public class ToDoConstants {
 //		 DONE: Load transport routes in swing. 
 //	     TODO: Create transport index, create transport activity
 	
-//   44. Introduce settings presets (car/bicycle/pedestrian/default) - show different icons for car (bigger), 
-//		  possibly change fonts, position
-//	     GOT : Victor
+//   44. Introduce settings presets (car/bicycle/pedestrian/default) - show different icons for car (bigger), possibly change fonts, position
+//	     DONE : Introduce settings property in settings screen
+//       TODO : check if all is correct, change visible icon over map for car
 	
-//   45. Autozoom feature (for car navigation) 	
+//   45. Autozoom feature (for car navigation) 
+//	     DONE : settings preferences done
+//	     TODO : add to Map activity algorithm of auto zooming in setLocation method 
 
 //   36. Postcode search
 	
 //   37. Get rid of exit button (!). Think about when notification should go & how clear resources if it is necessary
+//       DONE : 	
+//	     TODO : add to app settings preference (Refresh indexes).
 	
 //   34. Suppport navigation for calculated route (example of get route from internet is in swing app).
 //	     IDEA : Victor have ideas
@@ -58,7 +62,7 @@ public class ToDoConstants {
 	
 	// FUTURE RELEASES 
 //   43. Enable poi filter by name (?)
-//   40. Support simple vector road rendering (require new index file)
+//   40. Support simple vector road rendering (require new index file) (?)
 //   26. Show the whole street on map (when it is chosen in search activity). Possibly extend that story to show layer with streets. (?)
 	
 	// BUGS Android
