@@ -140,7 +140,7 @@ public class DataIndexWriter {
 	        PreparedStatement prepStreet = conn.prepareStatement(
 		            IndexConstants.generatePrepareStatementToInsert(IndexStreetTable.getTable(), 6));
 	        PreparedStatement prepBuilding = conn.prepareStatement(
-		            IndexConstants.generatePrepareStatementToInsert(IndexBuildingTable.getTable(), 6));
+		            IndexConstants.generatePrepareStatementToInsert(IndexBuildingTable.getTable(), 7));
 	        PreparedStatement prepStreetNode = conn.prepareStatement(
 		            IndexConstants.generatePrepareStatementToInsert(IndexStreetNodeTable.getTable(), 5));
 	        Map<PreparedStatement, Integer> count = new HashMap<PreparedStatement, Integer>();
@@ -199,6 +199,8 @@ public class DataIndexWriter {
 							prepBuilding.setString(IndexBuildingTable.NAME.ordinal() + 1, building.getName());
 							prepBuilding.setString(IndexBuildingTable.NAME_EN.ordinal() + 1, building.getEnName());
 							prepBuilding.setLong(IndexBuildingTable.STREET.ordinal() + 1, street.getId());
+							prepBuilding.setString(IndexBuildingTable.POSTCODE.ordinal()+1, building.getPostcode() == null ? null : building.getPostcode().toUpperCase());
+							
 							addBatch(count, prepBuilding);
 						}
 					}

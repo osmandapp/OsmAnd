@@ -1,6 +1,7 @@
 package com.osmand;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -19,6 +20,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.osmand.data.Building;
 import com.osmand.data.City;
+import com.osmand.data.PostcodeBasedStreet;
 import com.osmand.data.Region;
 import com.osmand.data.Street;
 import com.osmand.data.City.CityType;
@@ -91,7 +93,14 @@ public class RegionAddressRepository {
 		if(city.isEmptyWithStreets()){
 			preloadStreets(city);
 		}
-		return city.getStreet(name);
+		if (city.getPostcodes().isEmpty()) {
+			preloadPostcodes(city);
+		}
+		Street street = city.getStreet(name);
+		if (street == null) {
+			street = city.getPostcodes().contains(name.toUpperCase()) ? new PostcodeBasedStreet(city, name) : null;
+		}
+		return street;
 	}
 	
 	public Building getBuildingByName(Street street, String name){
@@ -180,12 +189,27 @@ public class RegionAddressRepository {
 	
 	public void fillWithSuggestedStreets(City c, String name, List<Street> streetsToFill){
 		preloadStreets(c);
+		preloadPostcodes(c);
 		name = name.toLowerCase();
+		
 		int ind = 0;
 		if(name.length() == 0){
 			streetsToFill.addAll(c.getStreets());
 			return;
+		} else if (name.length() >= 2 &&
+				   Character.isDigit(name.charAt(0)) &&
+				   Character.isDigit(name.charAt(1))) {
+			// also try to identify postcodes
+			for (String code:c.getPostcodes()) {
+				code = code.toLowerCase();
+				if (code.startsWith(name)) {
+					streetsToFill.add(ind++,new PostcodeBasedStreet(c, code));
+				} else {
+					streetsToFill.add(new PostcodeBasedStreet(c, code));
+				}
+			}
 		}
+		ind = 0;
 		for (Street s : c.getStreets()) {
 			String sName = useEnglishNames ? s.getEnName() : s.getName();
 			String lowerCase = sName.toLowerCase();
@@ -204,7 +228,10 @@ public class RegionAddressRepository {
 			EnumSet<CityType> set = EnumSet.of(CityType.CITY, CityType.TOWN); 
 			for(CityType t : set){
 				if(name.length() == 0){
-					citiesToFill.addAll(cityTypes.get(t));
+					List<City> list = cityTypes.get(t);
+					if (list != null) {
+						citiesToFill.addAll(list);
+					}
 				} else {
 					name = name.toLowerCase();
 					for (City c : cityTypes.get(t)) {
@@ -281,11 +308,44 @@ public class RegionAddressRepository {
     	}
 		
 	}
+    
+    public void preloadPostcodes(City city) {
+    	if (city.getPostcodes().isEmpty()) {
+    		// check if it possible to load postcodes
+    		try {
+	    		Cursor query = db.query(true, IndexBuildingTable.getTable(), new String[]{IndexBuildingTable.POSTCODE.toString()},null,null,null,null,null,null);
+				log.debug("Start loading postcodes for "  + city.getName());
+				if (query.moveToFirst()) {
+					do {
+						String postcode = query.getString(0);
+						if (postcode != null) {
+							city.getPostcodes().add(postcode);
+						}
+					} while (query.moveToNext());
+				}
+				query.close();
+				log.debug("Loaded " + city.getPostcodes().size() + " buildings");
+    		} catch (Throwable t) {
+    			log.warn("Can't load postcodes information. It might be that you are using old version of index.", t);
+    		}
+    	}
+    }
 	
 	public void preloadBuildings(Street street){
 		if (street.getBuildings().isEmpty()) {
-			Cursor query = db.query(IndexBuildingTable.getTable(), IndexConstants.generateColumnNames(IndexBuildingTable.values()), "? = street",
-					new String[] { street.getId() + "" }, null, null, null);
+			Cursor query = null;
+			if (street instanceof PostcodeBasedStreet) {
+				// this is postcode
+				query = db.query(IndexBuildingTable.getTable(), IndexConstants.generateColumnNames(IndexBuildingTable.values()), "? = postcode",
+						new String[] { street.getName().toUpperCase()}, null, null, null);
+			} else {
+				IndexBuildingTable[] columns = IndexBuildingTable.values();
+				IndexBuildingTable[] columnsWithoutPostcode = new IndexBuildingTable[columns.length-1];
+				// we don't need postcode information here
+				System.arraycopy(columns, 0, columnsWithoutPostcode, 0, columnsWithoutPostcode.length);
+				query = db.query(IndexBuildingTable.getTable(), IndexConstants.generateColumnNames(columnsWithoutPostcode), "? = street",
+						new String[] { street.getId() + "" }, null, null, null);
+			}
 			log.debug("Start loading buildings for "  + street.getName());
 			if (query.moveToFirst()) {
 				do {
