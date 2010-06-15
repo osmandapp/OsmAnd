@@ -23,7 +23,7 @@ public class PointLocationLayer implements OsmandMapLayer {
 	private Paint area;
 	private Paint headingPaint;
 	private Path pathForDirection;
-	private ApplicationMode preset = ApplicationMode.DEFAULT;
+	private ApplicationMode appMode = ApplicationMode.DEFAULT;
 	
 	protected Location lastKnownLocation = null;
 	
@@ -77,7 +77,13 @@ public class PointLocationLayer implements OsmandMapLayer {
 			int radius = MapUtils.getLengthXFromMeters(view.getZoom(), view.getLatitude(), view.getLongitude(), lastKnownLocation
 					.getAccuracy(), view.getTileSize(), view.getWidth());
 
-			canvas.drawCircle(locationX, locationY, RADIUS, location);
+			if(appMode == ApplicationMode.CAR){
+				if(!lastKnownLocation.hasBearing()){
+					canvas.drawCircle(locationX, locationY, RADIUS * 2.5f, location);
+				}
+			} else {
+				canvas.drawCircle(locationX, locationY, RADIUS, location);
+			}
 			if (radius > RADIUS) {
 				canvas.drawCircle(locationX, locationY, radius, area);
 			}
@@ -103,8 +109,16 @@ public class PointLocationLayer implements OsmandMapLayer {
 				pathForDirection.lineTo(0, 0);
 				Matrix m = new Matrix();
 				m.reset();
-				m.postScale(1, radiusBearing * 0.5f);
-				m.postTranslate(0, -radiusBearing);
+				if(appMode == ApplicationMode.CAR){
+					m.postScale(2.5f, radiusBearing * 1.5f);
+					m.postTranslate(0, -radiusBearing/2);
+				} else if(appMode == ApplicationMode.BICYCLE){
+					m.postScale(2f, radiusBearing);
+					m.postTranslate(0, -radiusBearing/2);
+				} else {
+					m.postScale(1, radiusBearing * 0.5f);
+					m.postTranslate(0, -radiusBearing);
+				}
 				m.postTranslate(locationX, locationY);
 				m.postRotate(bearing, locationX, locationY);
 				
@@ -150,15 +164,12 @@ public class PointLocationLayer implements OsmandMapLayer {
 	public void destroyLayer() {
 		
 	}
-	
-	public ApplicationMode getPreset() {
-		return preset;
+	public ApplicationMode getAppMode() {
+		return appMode;
 	}
-	
-	public void setSettingsPreset(ApplicationMode preset) {
-		this.preset = preset;
+	public void setAppMode(ApplicationMode appMode) {
+		this.appMode = appMode;
 	}
-
 	@Override
 	public boolean drawInScreenPixels() {
 		return false;

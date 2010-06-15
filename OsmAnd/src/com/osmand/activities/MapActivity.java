@@ -101,6 +101,8 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		savingTrackHelper = new SavingTrackHelper(this);
 		
 		
+		locationLayer.setAppMode(OsmandSettings.getApplicationMode(this));
+		
 		LatLon pointToNavigate = OsmandSettings.getPointToNavigate(this);
 		navigationLayer.setPointToNavigate(pointToNavigate);
 		
@@ -232,8 +234,19 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     		}
     	}
     	Log.d(LogUtil.TAG, "Location changed");
+		// TODO delete
+    	if(locationLayer.getLastKnownLocation() != null){
+    		location.setSpeed(location.distanceTo(locationLayer.getLastKnownLocation()));
+    	}
     	locationLayer.setLastKnownLocation(location);
     	if (location != null) {
+    		if(OsmandSettings.isAutoZoomEnabled(this) && location.hasSpeed()){
+    			int z = defineZoomFromSpeed(location.getSpeed());
+    			if(mapView.getZoom() != z){
+    				mapView.setZoom(z);
+    			}
+    			
+    		}
 			if (isMapLinkedToLocation()) {
 				if (location.hasBearing() && OsmandSettings.isRotateMapToBearing(this)) {
 					mapView.setRotate(-location.getBearing());
@@ -249,6 +262,18 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 				backToLocation.setVisibility(View.INVISIBLE);
 			}
 		}
+    }
+    
+    public int defineZoomFromSpeed(float speed){
+    	speed *= 3.6;
+    	if(speed < 20){
+    		return 17;
+    	} else if(speed < 60){
+    		return 16;
+    	} else if(speed < 120){
+    		return 15;
+    	}
+    	return 14;
     }
 
 	public void navigateToPoint(LatLon point){
