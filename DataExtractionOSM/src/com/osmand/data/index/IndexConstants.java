@@ -246,7 +246,7 @@ public class IndexConstants {
 	}
 	
 	public enum IndexBuildingTable implements IndexColumn {
-		ID("long"), LATITUDE("double"), LONGITUDE("double"), NAME, NAME_EN, STREET("long", true);
+		ID("long"), LATITUDE("double"), LONGITUDE("double"), NAME, NAME_EN, STREET("long", true), POSTCODE;
 		boolean index = false;
 		String type = null;
 

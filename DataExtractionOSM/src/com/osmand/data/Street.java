@@ -28,10 +28,11 @@ public class Street extends MapObject {
 		this.city = city;
 	}
 	
-	public void registerBuilding(Entity e){
+	public Building registerBuilding(Entity e){
 		Building building = new Building(e);
 		building.setName(e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER));
 		buildings.add(building);
+		return building;
 	}
 	
 	public void registerBuilding(Building building){

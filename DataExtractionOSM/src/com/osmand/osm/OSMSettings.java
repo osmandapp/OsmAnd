@@ -17,6 +17,7 @@ public class OSMSettings {
 		PLACE("place"),
 		ADDR_HOUSE_NUMBER("addr:housenumber"),
 		ADDR_STREET("addr:street"),
+		ADDR_POSTCODE("addr:postcode"),
 		
 		// POI
 		AMENITY("amenity"),
