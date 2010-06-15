@@ -40,14 +40,6 @@ public class ToDoConstants {
 //       GOT : Victor	
 //		 DONE: Load transport routes in swing. 
 //	     TODO: Create transport index, create transport activity
-	
-//   44. Introduce settings presets (car/bicycle/pedestrian/default) - show different icons for car (bigger), possibly change fonts, position
-//	     DONE : Introduce settings property in settings screen
-//       TODO : check if all is correct, change visible icon over map for car
-	
-//   45. Autozoom feature (for car navigation) 
-//	     DONE : settings preferences done
-//	     TODO : add to Map activity algorithm of auto zooming in setLocation method 
 
 //   36. Postcode search
 	
@@ -69,7 +61,6 @@ public class ToDoConstants {
 	//  5. Improvement : Implement caching files existing on FS, implement specific method in RM
 	//     Introducing cache of file names that are on disk (creating new File() consumes a lot of memory)
 	
- 
 	
 	// TODO swing
 	// 4. Fix issues with big files (such as netherlands) - save memory (!)
@@ -79,6 +70,8 @@ public class ToDoConstants {
 	// BUGS Swing
 	
 	// DONE ANDROID :
+    //  45. Autozoom feature (for car navigation)
+    //  44. Introduce settings presets (car/bicycle/pedestrian/default) - show different icons for car (bigger), possibly change fonts, position
     //  20. Implement save track/route to gpx
 	
 	// DONE SWING

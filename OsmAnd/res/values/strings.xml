@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="search_settings">Search settings</string>
-    <string name="osm_settings">Osm settings</string>
+    <string name="osm_settings_descr">Specify osm settings: show bugs, osm login</string>
+    <string name="monitor_preferences_descr">Specify monitor settings : save track</string>
+    <string name="search_settings_descr">Specify search settings</string>
+    <string name="map_preferences_descr">Specify map settings : rotation, poi filter</string>
+    <string name="search_settings">Search</string>
+    <string name="osm_settings">Osm</string>
     <string name="auto_zoom_map_descr">Auto zoom map according to the speed</string>
     <string name="auto_zoom_map">Auto zoom map</string>
     <string name="additional_settings">Additional settings</string>
@@ -12,7 +16,7 @@
     <string name="save_current_track">Save current track</string>
     <string name="save_track_interval_descr">Choose time interval to save track</string>
     <string name="save_track_interval">Save track interval</string>
-    <string name="monitor_preferences">Monitoring settings</string>
+    <string name="monitor_preferences">Monitoring</string>
     <string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
     <string name="save_track_to_gpx">Save track to gpx</string>
     <string name="navigate_to">Navigate to</string>
@@ -51,7 +55,7 @@
     <string name="map_source">Map source</string>
     <string name="use_internet">Use internet</string>
     <string name="show_location">Show location</string>
-    <string name="map_preferences">Map settings</string>
+    <string name="map_preferences">Map</string>
     <string name="settings_activity">Settings</string>
     <string name="show_gps_coordinates_text">Show gps coordinates on map</string>
     <string name="use_internet_to_download_tile">Use internet to download missing tiles</string>
