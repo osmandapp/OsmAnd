@@ -5,6 +5,7 @@ import java.util.List;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -76,7 +77,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		tileSourcePreference =(ListPreference) screen.findPreference(OsmandSettings.MAP_TILE_SOURCES);
 		tileSourcePreference.setOnPreferenceChangeListener(this);
 		
-		
     }
     
     @Override
@@ -94,7 +94,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		saveTrackToGpx.setChecked(OsmandSettings.isSavingTrackToGpx(this));
 		useEnglishNames.setChecked(OsmandSettings.usingEnglishNames(this));
 		autoZoom.setChecked(OsmandSettings.isAutoZoomEnabled(this));
-		String[] e = new String[] { "Center", "Bottom" };
+		Resources resources = this.getResources();
+		String[] e = new String[] {resources.getString(R.string.position_on_map_center), 
+				resources.getString(R.string.position_on_map_bottom)};
 		positionOnMap.setEntryValues(e);
 		positionOnMap.setEntries(e);
 		positionOnMap.setValueIndex(OsmandSettings.getPositionOnMap(this));
@@ -108,7 +110,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		String[] values = new String[presets.length];
 		String[] valueEntries = new String[presets.length];
 		for(int i=0; i<presets.length; i++){
-			values[i] = presets[i].toString();
+			values[i] = ApplicationMode.toHumanString(presets[i], this);
 			valueEntries[i] = presets[i].name();
 		}
 		applicationMode.setEntries(values);
