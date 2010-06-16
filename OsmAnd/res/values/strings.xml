@@ -79,4 +79,10 @@
 <string name="choose_available_region">Choose region</string>
 <string name="choose_intersected_street">Choose intersected street</string>
 <string name="Closest_Amenities">Closest amenities</string>
+<string name="app_mode_default">Default</string>
+<string name="app_mode_car">Car</string>
+<string name="app_mode_bicycle">Bicycle</string>
+<string name="app_mode_pedestrian">Pedestrian</string>
+<string name="position_on_map_center">Center</string>
+<string name="position_on_map_bottom">Bottom</string>
 </resources>
