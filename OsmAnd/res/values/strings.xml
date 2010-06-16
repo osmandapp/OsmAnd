@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="user_password_descr">Input osm password</string>
+    <string name="user_password">User password</string>
     <string name="osm_settings_descr">Specify osm settings: show bugs, osm login</string>
     <string name="monitor_preferences_descr">Specify monitor settings : save track</string>
     <string name="search_settings_descr">Specify search settings</string>

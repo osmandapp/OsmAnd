@@ -218,6 +218,15 @@ public class ResourceManager {
 	}
 	
 	// //////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
+	public List<AmenityIndexRepository> searchRepositories(double latitude, double longitude) {
+		List<AmenityIndexRepository> repos = new ArrayList<AmenityIndexRepository>();
+		for (AmenityIndexRepository index : amenityRepositories) {
+			if (index.checkContains(latitude,longitude)) {
+				repos.add(index);
+			}
+		}
+		return repos;
+	}
 	public List<Amenity> searchAmenities(PoiFilter filter, double latitude, double longitude, int zoom, int limit) {
 		double tileNumberX = MapUtils.getTileNumberX(zoom, longitude);
 		double tileNumberY = MapUtils.getTileNumberY(zoom, latitude);

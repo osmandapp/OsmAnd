@@ -56,6 +56,7 @@ public class PoiFiltersHelper {
 		types.put(AmenityType.HISTORIC, null);
 		types.put(AmenityType.TOURISM, null);
 		list = new ArrayList<String>();
+		list.add("place_of_worship");
 		list.add("internet_access");
 		list.add("bench");
 		list.add("embassy");

@@ -20,7 +20,8 @@ public enum AmenityType {
 	TOURISM, // [TAG] hotel, sights, museum .. 
 	HISTORIC, // [TAG] historic places, monuments (should we unify tourism/historic)
 	SHOP, // [TAG] convenience (product), clothes...
-	LEISURE_AND_SPORT, // [TAG] sport
+	LEISURE, // [TAG] leisure
+	SPORT, // [TAG] sport
 	OTHER, // grave-yard, police, post-office [+Internet_access]
 	;
 	
@@ -151,76 +152,76 @@ public enum AmenityType {
 		amenityMap.put("video", AmenityType.SHOP);
 		
 		
-		amenityMap.put("dog_park", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("sports_centre", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("golf_course", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("stadium", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("track", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("pitch", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("water_park", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("marina", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("slipway", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("fishing", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("nature_reserve", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("park", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("playground", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("garden", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("common", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("ice_rink", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("miniature_golf", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("dance", AmenityType.LEISURE_AND_SPORT);
+		amenityMap.put("dog_park", AmenityType.LEISURE);
+		amenityMap.put("sports_centre", AmenityType.LEISURE);
+		amenityMap.put("golf_course", AmenityType.LEISURE);
+		amenityMap.put("stadium", AmenityType.LEISURE);
+		amenityMap.put("track", AmenityType.LEISURE);
+		amenityMap.put("pitch", AmenityType.LEISURE);
+		amenityMap.put("water_park", AmenityType.LEISURE);
+		amenityMap.put("marina", AmenityType.LEISURE);
+		amenityMap.put("slipway", AmenityType.LEISURE);
+		amenityMap.put("fishing", AmenityType.LEISURE);
+		amenityMap.put("nature_reserve", AmenityType.LEISURE);
+		amenityMap.put("park", AmenityType.LEISURE);
+		amenityMap.put("playground", AmenityType.LEISURE);
+		amenityMap.put("garden", AmenityType.LEISURE);
+		amenityMap.put("common", AmenityType.LEISURE);
+		amenityMap.put("ice_rink", AmenityType.LEISURE);
+		amenityMap.put("miniature_golf", AmenityType.LEISURE);
+		amenityMap.put("dance", AmenityType.LEISURE);
 		
 		
-		amenityMap.put("9pin", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("10pin", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("archery", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("athletics", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("australian_football", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("baseball", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("basketball", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("beachvolleyball", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("boules", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("bowls", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("canoe", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("chess", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("climbing", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("cricket", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("cricket_nets", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("croquet", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("cycling", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("diving", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("dog_racing", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("equestrian", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("football", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("golf", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("gymnastics", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("hockey", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("horse_racing", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("ice_stock", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("korfball", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("motor", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("multi", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("orienteering", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("paddle_tennis", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("paragliding", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("pelota", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("racquet", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("rowing", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("rugby", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("shooting", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("skating", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("skateboard", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("skiing", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("soccer", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("swimming", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("table_tennis", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("team_handball", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("tennis", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("toboggan", AmenityType.LEISURE_AND_SPORT);
-		amenityMap.put("volleyball", AmenityType.LEISURE_AND_SPORT);
+		amenityMap.put("9pin", AmenityType.SPORT);
+		amenityMap.put("10pin", AmenityType.SPORT);
+		amenityMap.put("archery", AmenityType.SPORT);
+		amenityMap.put("athletics", AmenityType.SPORT);
+		amenityMap.put("australian_football", AmenityType.SPORT);
+		amenityMap.put("baseball", AmenityType.SPORT);
+		amenityMap.put("basketball", AmenityType.SPORT);
+		amenityMap.put("beachvolleyball", AmenityType.SPORT);
+		amenityMap.put("boules", AmenityType.SPORT);
+		amenityMap.put("bowls", AmenityType.SPORT);
+		amenityMap.put("canoe", AmenityType.SPORT);
+		amenityMap.put("chess", AmenityType.SPORT);
+		amenityMap.put("climbing", AmenityType.SPORT);
+		amenityMap.put("cricket", AmenityType.SPORT);
+		amenityMap.put("cricket_nets", AmenityType.SPORT);
+		amenityMap.put("croquet", AmenityType.SPORT);
+		amenityMap.put("cycling", AmenityType.SPORT);
+		amenityMap.put("diving", AmenityType.SPORT);
+		amenityMap.put("dog_racing", AmenityType.SPORT);
+		amenityMap.put("equestrian", AmenityType.SPORT);
+		amenityMap.put("football", AmenityType.SPORT);
+		amenityMap.put("golf", AmenityType.SPORT);
+		amenityMap.put("gymnastics", AmenityType.SPORT);
+		amenityMap.put("hockey", AmenityType.SPORT);
+		amenityMap.put("horse_racing", AmenityType.SPORT);
+		amenityMap.put("ice_stock", AmenityType.SPORT);
+		amenityMap.put("korfball", AmenityType.SPORT);
+		amenityMap.put("motor", AmenityType.SPORT);
+		amenityMap.put("multi", AmenityType.SPORT);
+		amenityMap.put("orienteering", AmenityType.SPORT);
+		amenityMap.put("paddle_tennis", AmenityType.SPORT);
+		amenityMap.put("paragliding", AmenityType.SPORT);
+		amenityMap.put("pelota", AmenityType.SPORT);
+		amenityMap.put("racquet", AmenityType.SPORT);
+		amenityMap.put("rowing", AmenityType.SPORT);
+		amenityMap.put("rugby", AmenityType.SPORT);
+		amenityMap.put("shooting", AmenityType.SPORT);
+		amenityMap.put("skating", AmenityType.SPORT);
+		amenityMap.put("skateboard", AmenityType.SPORT);
+		amenityMap.put("skiing", AmenityType.SPORT);
+		amenityMap.put("soccer", AmenityType.SPORT);
+		amenityMap.put("swimming", AmenityType.SPORT);
+		amenityMap.put("table_tennis", AmenityType.SPORT);
+		amenityMap.put("team_handball", AmenityType.SPORT);
+		amenityMap.put("tennis", AmenityType.SPORT);
+		amenityMap.put("toboggan", AmenityType.SPORT);
+		amenityMap.put("volleyball", AmenityType.SPORT);
 		
 		// amenity sub type
-		amenityMap.put("place_of_worship", AmenityType.HISTORIC);
+		amenityMap.put("place_of_worship", AmenityType.OTHER);
 		
 		amenityMap.put("restaurant", AmenityType.SUSTENANCE);
 		amenityMap.put("food_court", AmenityType.SUSTENANCE);

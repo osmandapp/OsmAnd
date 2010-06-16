@@ -8,7 +8,6 @@ import java.util.List;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -102,16 +101,11 @@ public class SearchPOIActivity extends ListActivity {
 		}
 	}
 
-
-
 	public void onListItemClick(ListView parent, View v, int position, long id) {
-		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
-		if (prefs != null) {
-			Amenity amenity = ((AmenityAdapter)getListAdapter()).getItem(position);
-			OsmandSettings.setMapLocationToShow(this, amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude());
-			Intent newIntent = new Intent(SearchPOIActivity.this, MapActivity.class);
-			startActivity(newIntent);
-		}
+		Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
+		OsmandSettings.setMapLocationToShow(this, amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude());
+		Intent newIntent = new Intent(SearchPOIActivity.this, MapActivity.class);
+		startActivity(newIntent);
 	}
 
 	class AmenityAdapter extends ArrayAdapter<Amenity> {

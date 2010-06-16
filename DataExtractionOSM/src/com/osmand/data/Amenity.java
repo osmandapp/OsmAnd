@@ -20,6 +20,23 @@ public class Amenity extends MapObject {
 	public Amenity(){
 	}
 	
+	public String convertToAmenityTag(){
+		switch (getType()) {
+		case SHOP:
+			return OSMTagKey.SHOP.getValue();
+		case LEISURE:
+			return OSMTagKey.LEISURE.getValue();
+		case HISTORIC:
+			return OSMTagKey.HISTORIC.getValue();
+		case TOURISM:
+			return OSMTagKey.TOURISM.getValue();
+		case SPORT:
+			return OSMTagKey.SPORT.getValue();
+		default:
+			return OSMTagKey.AMENITY.getValue();
+		}
+	}
+	
 	protected String getSubType(Entity node) {
 		if (node.getTag(OSMTagKey.SHOP) != null) {
 			return node.getTag(OSMTagKey.SHOP);
@@ -44,8 +61,10 @@ public class Amenity extends MapObject {
 			return AmenityType.SHOP;
 		} else if(node.getTag(OSMTagKey.TOURISM) != null){
 			return AmenityType.TOURISM;
-		} else if(node.getTag(OSMTagKey.LEISURE) != null || node.getTag(OSMTagKey.SPORT) != null){
-			return AmenityType.LEISURE_AND_SPORT;
+		} else if(node.getTag(OSMTagKey.LEISURE) != null){
+			return AmenityType.LEISURE;
+		} else if(node.getTag(OSMTagKey.SPORT) != null){
+			return AmenityType.SPORT;
 		} else if(node.getTag(OSMTagKey.HISTORIC) != null){
 			return AmenityType.HISTORIC;
 		} else if(AmenityType.amenityMap.containsKey(node.getTag(OSMTagKey.AMENITY))){
@@ -76,6 +95,8 @@ public class Amenity extends MapObject {
 		} else if(n.getTag(OSMTagKey.SHOP) != null){
 			return true;
 		} else if(n.getTag(OSMTagKey.LEISURE) != null){
+			return true;
+		} else if(n.getTag(OSMTagKey.SPORT) != null){
 			return true;
 		} else if(n.getTag(OSMTagKey.TOURISM) != null){
 			return true;

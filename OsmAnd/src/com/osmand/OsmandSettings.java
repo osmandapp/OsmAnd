@@ -24,7 +24,7 @@ public class OsmandSettings {
 		PEDESTRIAN(R.string.app_mode_pedestrian);
 
 		private final int key;
-
+		
 		ApplicationMode(int key) {
 			this.key = key;
 		}
@@ -68,7 +68,18 @@ public class OsmandSettings {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		return prefs.edit().putString(USER_NAME, name).commit();
 	}
-
+	
+	public static final String USER_PASSWORD = "user_password";
+	public static String getUserPassword(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getString(USER_PASSWORD, "");
+	}
+	
+	public static boolean setUserPassword(Context ctx, String name){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putString(USER_PASSWORD, name).commit();
+	}
+	
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String APPLICATION_MODE = "application_mode";
 
@@ -299,7 +310,7 @@ public class OsmandSettings {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		Editor edit = prefs.edit().putLong(LAST_SEARCHED_CITY, cityId).putString(LAST_SEARCHED_STREET, "").putString(
 				LAST_SEARCHED_BUILDING, "");
-		if (prefs.contains(LAST_SEARCHED_INTERSECTED_STREET)) {
+		if(prefs.contains(LAST_SEARCHED_INTERSECTED_STREET)){
 			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, "");
 		}
 		return edit.commit();

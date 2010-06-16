@@ -1,7 +1,6 @@
 package com.osmand;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -311,24 +310,21 @@ public class RegionAddressRepository {
     
     public void preloadPostcodes(City city) {
     	if (city.getPostcodes().isEmpty()) {
-    		// check if it possible to load postcodes
-    		try {
-	    		Cursor query = db.query(true, IndexBuildingTable.getTable(), new String[]{IndexBuildingTable.POSTCODE.toString()},null,null,null,null,null,null);
-				log.debug("Start loading postcodes for "  + city.getName());
-				if (query.moveToFirst()) {
-					do {
-						String postcode = query.getString(0);
-						if (postcode != null) {
-							city.getPostcodes().add(postcode);
-						}
-					} while (query.moveToNext());
-				}
-				query.close();
-				log.debug("Loaded " + city.getPostcodes().size() + " buildings");
-    		} catch (Throwable t) {
-    			log.warn("Can't load postcodes information. It might be that you are using old version of index.", t);
-    		}
-    	}
+			// check if it possible to load postcodes
+			Cursor query = db.query(true, IndexBuildingTable.getTable(), new String[] { IndexBuildingTable.POSTCODE.toString() }, null,
+					null, null, null, null, null);
+			log.debug("Start loading postcodes for " + city.getName());
+			if (query.moveToFirst()) {
+				do {
+					String postcode = query.getString(0);
+					if (postcode != null) {
+						city.getPostcodes().add(postcode);
+					}
+				} while (query.moveToNext());
+			}
+			query.close();
+			log.debug("Loaded " + city.getPostcodes().size() + " postcodes ");
+		}
     }
 	
 	public void preloadBuildings(Street street){

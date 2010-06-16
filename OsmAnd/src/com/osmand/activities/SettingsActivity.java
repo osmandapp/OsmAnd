@@ -37,6 +37,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private Preference saveCurrentTrack;
 	private ListPreference applicationMode;
 	private CheckBoxPreference autoZoom;
+	private EditTextPreference userPassword;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		useEnglishNames.setOnPreferenceChangeListener(this);
 		userName = (EditTextPreference) screen.findPreference(OsmandSettings.USER_NAME);
 		userName.setOnPreferenceChangeListener(this);
+		userPassword = (EditTextPreference) screen.findPreference(OsmandSettings.USER_PASSWORD);
+		userPassword.setOnPreferenceChangeListener(this);
 		
 		saveTrackToGpx =(CheckBoxPreference) screen.findPreference(OsmandSettings.SAVE_TRACK_TO_GPX);
 		saveTrackToGpx.setOnPreferenceChangeListener(this);
@@ -101,6 +104,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		positionOnMap.setEntries(e);
 		positionOnMap.setValueIndex(OsmandSettings.getPositionOnMap(this));
 		userName.setText(OsmandSettings.getUserName(this));
+		userPassword.setText(OsmandSettings.getUserPassword(this));
 		
 		saveTrackInterval.setEntries(new String[]{"1 second", "2 seconds", "5 seconds", "15 seconds", "30 seconds", "1 minute", "5 minute"});
 		saveTrackInterval.setEntryValues(new String[]{"1", "2", "5", "15", "30", "60", "300"});
@@ -169,6 +173,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			helper.close();
 		} else if(preference == saveTrackInterval){
 			edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, Integer.parseInt(newValue.toString()));
+			edit.commit();
+		} else if(preference == userPassword){
+			edit.putString(OsmandSettings.USER_PASSWORD, (String) newValue);
 			edit.commit();
 		} else if(preference == userName){
 			edit.putString(OsmandSettings.USER_NAME, (String) newValue);
