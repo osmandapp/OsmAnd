@@ -79,6 +79,35 @@ public class AmenityIndexRepository {
 		return amenities;
 	}
 	
+	public boolean addAmenity(long id, double latitude, double longitude, String name, String nameEn, AmenityType t, String subType, String openingHours){
+		assert IndexPoiTable.values().length == 8;
+		db.execSQL("INSERT INTO " + IndexPoiTable.getTable() + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
+				new Object[]{id, latitude, longitude, openingHours, name, nameEn,AmenityType.valueToString(t), subType});
+		return true;
+	}
+	
+	public boolean updateAmenity(long id, double latitude, double longitude, String name, String nameEn, AmenityType t, String subType, String openingHours){
+		StringBuilder b = new StringBuilder();
+		b.append("UPDATE " + IndexPoiTable.getTable() + " SET ");
+		b.append(IndexPoiTable.LATITUDE.name()).append(" = ?").append(", ").
+		  append(IndexPoiTable.LONGITUDE.name()).append(" = ?").append(", ").
+		  append(IndexPoiTable.OPENING_HOURS.name()).append(" = ?").append(", ").
+		  append(IndexPoiTable.NAME.name()).append(" = ?").append(", ").
+		  append(IndexPoiTable.NAME_EN.name()).append(" = ?").append(", ").
+		  append(IndexPoiTable.TYPE.name()).append(" = ?").append(", ").
+		  append(IndexPoiTable.SUBTYPE.name()).append(" = ?").append(" ").
+		  append(" WHERE ").append(IndexPoiTable.ID.name()).append(" = ?");
+		
+		db.execSQL(b.toString(),			
+				new Object[]{latitude, longitude, openingHours, name, nameEn,AmenityType.valueToString(t), subType, id});
+		return true;
+	}
+	
+	public boolean deleteAmenity(long id){
+		db.execSQL("DELETE FROM " + IndexPoiTable.getTable()+ " WHERE id="+id);
+		return true;
+	}
+	
 	
 	public synchronized void clearCache(){
 		cachedAmenities.clear();
@@ -168,6 +197,12 @@ public class AmenityIndexRepository {
 		return name;
 	}
 	
+	public boolean checkContains(double latitude, double longitude){
+		if(latitude < dataTopLatitude && latitude > dataBottomLatitude && longitude > dataLeftLongitude && longitude < dataRightLongitude){
+			return true;
+		}
+		return false;
+	}
 	
 	public boolean checkContains(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude){
 		if(rightLongitude < dataLeftLongitude || leftLongitude > dataRightLongitude){

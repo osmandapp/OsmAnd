@@ -2,8 +2,10 @@ package com.osmand.data.index;
 
 public class IndexConstants {
 	
+	// Important : Every time you change schema of db upgrade version!!! 
+	// If you want that new application support old index : put upgrade code in android app ResourceManager
 	public final static int POI_TABLE_VERSION = 0;
-	public final static int ADDRESS_TABLE_VERSION = 0;
+	public final static int ADDRESS_TABLE_VERSION = 1;
 	
 	public static final String POI_INDEX_DIR = "POI/";
 	public static final String ADDRESS_INDEX_DIR = "Address/";

@@ -28,6 +28,7 @@
 <PreferenceScreen android:title="@string/osm_settings" android:summary="@string/osm_settings_descr">
 <CheckBoxPreference android:key="show_osm_bugs" android:title="@string/show_osm_bugs" android:summary="@string/show_osm_bugs_descr"></CheckBoxPreference>
 <EditTextPreference android:title="@string/user_name" android:summary="@string/user_name_descr" android:key="user_name"></EditTextPreference>
+<EditTextPreference android:title="@string/user_password"  android:password="true" android:summary="@string/user_password_descr" android:key="user_password"></EditTextPreference>
 </PreferenceScreen>
 
 </PreferenceScreen>

@@ -20,6 +20,10 @@ public abstract class Entity {
 		return id;
 	}
 	
+	public String removeTag(String key){
+		return tags.remove(key);
+	}
+	
 	public String putTag(String key, String value){
 		if(tags == null){
 			tags = new LinkedHashMap<String, String>();

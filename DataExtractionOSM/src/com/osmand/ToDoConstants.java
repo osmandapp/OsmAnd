@@ -31,17 +31,11 @@ public class ToDoConstants {
 // 		 DONE : back end (POI filter object, save, delete, read) 
 //	     TODO : activity to create/edit new index, activity to read both user defined/osm standard, add actions to remove/create
 
-//	  8. Enable change POI directly on map (requires OSM login)
-//	     GOT : Victor
-//	     DONE : Victor investigation
-//		 TODO:
-	
 //   33. Build transport locations. Create transport index (transport-stops) (investigate)
 //       GOT : Victor	
 //		 DONE: Load transport routes in swing. 
 //	     TODO: Create transport index, create transport activity
 
-//   36. Postcode search
 	
 //   37. Get rid of exit button (!). Think about when notification should go & how clear resources if it is necessary
 //       DONE : 	
@@ -49,7 +43,6 @@ public class ToDoConstants {
 	
 //   34. Suppport navigation for calculated route (example of get route from internet is in swing app).
 //	     IDEA : Victor have ideas
-	
 	
 	
 	// FUTURE RELEASES 
@@ -70,6 +63,8 @@ public class ToDoConstants {
 	// BUGS Swing
 	
 	// DONE ANDROID :
+    //  36. Postcode search
+    //   8. Enable change POI directly on map (requires OSM login)
     //  45. Autozoom feature (for car navigation)
     //  44. Introduce settings presets (car/bicycle/pedestrian/default) - show different icons for car (bigger), possibly change fonts, position
     //  20. Implement save track/route to gpx

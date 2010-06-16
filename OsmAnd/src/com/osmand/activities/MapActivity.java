@@ -355,6 +355,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		if(!OsmandSettings.isShowingViewAngle(this)){
 			locationLayer.setHeading(null);
 		}
+		poiMapLayer.setFilter(OsmandSettings.getPoiFilterForMap(this));
 		mapView.setMapPosition(OsmandSettings.getPositionOnMap(this));
 		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
 		if(prefs != null && prefs.contains(OsmandSettings.LAST_KNOWN_MAP_LAT)){
@@ -363,7 +364,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			mapView.setZoom(OsmandSettings.getLastKnownMapZoom(this));
 		}
 		backToLocation.setVisibility(View.INVISIBLE);
-		poiMapLayer.setFilter(OsmandSettings.getPoiFilterForMap(this));
+		
 		
 
 		if(mapView.getLayers().contains(poiMapLayer) != OsmandSettings.isShowingPoiOverMap(this)){
@@ -491,7 +492,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     
     protected void contextMenuPoint(final double latitude, final double longitude){
     	Builder builder = new AlertDialog.Builder(this);
-    	builder.setItems(new String[]{"Navigate to point", "Add to favourites", "Update map",  "Open osm bug"}, new DialogInterface.OnClickListener(){
+    	builder.setItems(new String[]{"Navigate to point", "Add to favourites", "Update map",  "Open osm bug", "Create POI"}, new DialogInterface.OnClickListener(){
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -503,6 +504,9 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 					reloadTile(mapView.getZoom(), latitude, longitude);
 				} else if(which == 3){
 					osmBugsLayer.openBug(MapActivity.this, getLayoutInflater(), mapView, latitude, longitude);
+				} else if(which == 4){
+					EditingPOIActivity activity = new EditingPOIActivity(MapActivity.this, mapView);
+					activity.showCreateDialog(latitude, longitude);
 				}
 			}
     	});

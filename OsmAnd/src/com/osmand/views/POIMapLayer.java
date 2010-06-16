@@ -3,6 +3,10 @@ package com.osmand.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,6 +18,7 @@ import android.widget.Toast;
 import com.osmand.OsmandSettings;
 import com.osmand.PoiFilter;
 import com.osmand.ResourceManager;
+import com.osmand.activities.EditingPOIActivity;
 import com.osmand.data.Amenity;
 import com.osmand.osm.MapUtils;
 
@@ -32,6 +37,27 @@ public class POIMapLayer implements OsmandMapLayer {
 	
 	@Override
 	public boolean onLongPressEvent(PointF point) {
+		final Amenity n = getAmenityFromPoint(point);
+		if(n != null){
+			Context ctx = view.getContext();
+			Builder builder = new AlertDialog.Builder(ctx);
+			final EditingPOIActivity edit = new EditingPOIActivity(ctx, view);
+			builder.setItems(new String[]{"Modify", "Delete"}, new DialogInterface.OnClickListener(){
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					if(which == 0){
+						edit.showEditDialog(n.getId());
+					} else {
+						edit.showDeleteDialog(n.getId());
+					}
+					
+				}
+				
+			});
+			builder.show();
+			return true;
+		}
 		return false;
 	}
 	
@@ -43,9 +69,7 @@ public class POIMapLayer implements OsmandMapLayer {
 		this.filter = filter;
 	}
 	
-
-	@Override
-	public boolean onTouchEvent(PointF point) {
+	public Amenity getAmenityFromPoint(PointF point){
 		if (objects != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
@@ -56,17 +80,27 @@ public class POIMapLayer implements OsmandMapLayer {
 					int x = view.getRotatedMapXForPoint(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 					int y = view.getRotatedMapYForPoint(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
-						String format = n.getSimpleFormat(OsmandSettings.usingEnglishNames(view.getContext()));
-						if(n.getOpeningHours() != null){
-							format += "\n Opening hours : " + n.getOpeningHours();
-						}
-						Toast.makeText(view.getContext(), format, Toast.LENGTH_SHORT).show();
-						return true;
+						return n;
 					}
 				}
 			} catch (IndexOutOfBoundsException e) {
 				// that's really rare case, but is much efficient than introduce synchronized block
 			}
+		}
+		return null;
+	}
+	
+
+	@Override
+	public boolean onTouchEvent(PointF point) {
+		Amenity n = getAmenityFromPoint(point);
+		if(n != null){
+			String format = n.getSimpleFormat(OsmandSettings.usingEnglishNames(view.getContext()));
+			if(n.getOpeningHours() != null){
+				format += "\nOpening hours : " + n.getOpeningHours();
+			}
+			Toast.makeText(view.getContext(), format, Toast.LENGTH_SHORT).show();
+			return true;
 		}
 		return false;
 	}
