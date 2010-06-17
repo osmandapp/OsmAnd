@@ -1,6 +1,7 @@
 package com.osmand;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -105,25 +106,25 @@ public class PoiFiltersHelper {
 			////ctx.deleteDatabase(PoiFilterDbHelper.DATABASE_NAME);
 			
 			cacheUserDefinedFilters = new ArrayList<PoiFilter>();
+			PoiFilter filter = new PoiFilter("Custom filter", PoiFilter.CUSTOM_FILTER_ID, null);
+			cacheUserDefinedFilters.add(filter);
 			PoiFilterDbHelper helper = new PoiFilterDbHelper(ctx);
 			cacheUserDefinedFilters.addAll(helper.getFilters());
 			helper.close();
 		}
-		return cacheUserDefinedFilters;
+		return Collections.unmodifiableList(cacheUserDefinedFilters);
 	}
 	
 	private static List<PoiFilter> cacheOsmDefinedFilters;
 	public static List<PoiFilter> getOsmDefinedPoiFilters(Context ctx){
 		if(cacheOsmDefinedFilters == null){
 			cacheOsmDefinedFilters = new ArrayList<PoiFilter>();
-			// TODO for test purposes
-			cacheOsmDefinedFilters.addAll(getUserDefinedPoiFilters(ctx));
 			cacheOsmDefinedFilters.add(new PoiFilter(null));
 			for(AmenityType t : AmenityType.values()){
 				cacheOsmDefinedFilters.add(new PoiFilter(t));
 			}
 		}
-		return cacheOsmDefinedFilters;
+		return Collections.unmodifiableList(cacheOsmDefinedFilters);
 	}
 	
 	public static boolean removePoiFilter(Context ctx, PoiFilter filter){

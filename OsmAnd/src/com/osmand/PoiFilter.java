@@ -12,8 +12,9 @@ import com.osmand.osm.MapUtils;
 
 public class PoiFilter {
 	
-	public static String STD_PREFIX = "std_";
-	public static String USER_PREFIX = "user_";
+	public final static String STD_PREFIX = "std_";
+	public final static String USER_PREFIX = "user_";
+	public final static String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id";
 	
 	private Map<AmenityType, List<String>> acceptedTypes = new LinkedHashMap<AmenityType, List<String>>();
 	private String filterByName = null;
@@ -34,9 +35,7 @@ public class PoiFilter {
 		filterId = STD_PREFIX + type;
 		name = type == null ? "Closest poi" : Algoritms.capitalizeFirstLetterAndLowercase(type.name()).replace('_', ' ');
 		if(type == null){
-			for(AmenityType t : AmenityType.values()){
-				acceptedTypes.put(t, null);
-			}
+			initSearchAll();
 		} else {
 			acceptedTypes.put(type, null);
 		}
@@ -50,7 +49,17 @@ public class PoiFilter {
 		}
 		this.filterId = filterId;
 		this.name = name;
-		this.acceptedTypes.putAll(acceptedTypes);
+		if(acceptedTypes == null){
+			initSearchAll();
+		} else {
+			this.acceptedTypes.putAll(acceptedTypes);
+		}
+	}
+	
+	private void initSearchAll(){
+		for(AmenityType t : AmenityType.values()){
+			acceptedTypes.put(t, null);
+		}
 	}
 	
 	
@@ -184,6 +193,7 @@ public class PoiFilter {
 	public String getFilterId(){
 		return filterId;
 	}
+	
 	
 	public String getFilterByName() {
 		return filterByName;

@@ -46,19 +46,23 @@ public class ToDoConstants {
 	
 	
 	// FUTURE RELEASES 
-//   43. Enable poi filter by name (?)
-//   40. Support simple vector road rendering (require new index file) (?)
-//   26. Show the whole street on map (when it is chosen in search activity). Possibly extend that story to show layer with streets. (?)
+    //   43. Enable poi filter by name (?)
+    //   40. Support simple vector road rendering (require new index file) (?)
+    //   26. Show the whole street on map (when it is chosen in search activity). Possibly extend that story to show layer with streets. (?)
 	
 	// BUGS Android
 	//  5. Improvement : Implement caching files existing on FS, implement specific method in RM
 	//     Introducing cache of file names that are on disk (creating new File() consumes a lot of memory)
+	//  6. Improvement postal_code search : replace search city <-> postal_code (show streets for postal_code) 
 	
 	
 	// TODO swing
-	// 4. Fix issues with big files (such as netherlands) - save memory (!)
+	// 4. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !
 	// Current result : for big file (1 - task  60-80% time, 90% memory)
 	// 1. Download tiles without using dir tiles (?)
+	// 5. Improve address indexing (use relations). 
+    //	  Use relation "postal_code" to assign postcodes, use relation "a6" (to accumulate streets!), 
+	//	  "a3" to read all cities & define boundaries for city (& define that street in city). 
 	
 	// BUGS Swing
 	
