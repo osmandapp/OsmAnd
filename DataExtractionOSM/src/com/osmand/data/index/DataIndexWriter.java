@@ -119,10 +119,8 @@ public class DataIndexWriter {
         Connection conn = DriverManager.getConnection("jdbc:sqlite:"+file.getAbsolutePath());
 		try {
 			Statement stat = conn.createStatement();
-			assert IndexCityTable.values().length == 6;
-			assert IndexBuildingTable.values().length == 6;
-			assert IndexStreetNodeTable.values().length == 5;
-			assert IndexStreetTable.values().length == 6;
+			
+
 			
 	        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexCityTable.values()));
 	        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexCityTable.values()));
@@ -136,13 +134,13 @@ public class DataIndexWriter {
 	        stat.close();
 	        
 	        PreparedStatement prepCity = conn.prepareStatement(
-	            IndexConstants.generatePrepareStatementToInsert(IndexCityTable.getTable(), 6));
+	            IndexConstants.generatePrepareStatementToInsert(IndexCityTable.getTable(), IndexCityTable.values().length));
 	        PreparedStatement prepStreet = conn.prepareStatement(
-		            IndexConstants.generatePrepareStatementToInsert(IndexStreetTable.getTable(), 6));
+		            IndexConstants.generatePrepareStatementToInsert(IndexStreetTable.getTable(), IndexStreetTable.values().length));
 	        PreparedStatement prepBuilding = conn.prepareStatement(
-		            IndexConstants.generatePrepareStatementToInsert(IndexBuildingTable.getTable(), 7));
+		            IndexConstants.generatePrepareStatementToInsert(IndexBuildingTable.getTable(), IndexBuildingTable.values().length));
 	        PreparedStatement prepStreetNode = conn.prepareStatement(
-		            IndexConstants.generatePrepareStatementToInsert(IndexStreetNodeTable.getTable(), 5));
+		            IndexConstants.generatePrepareStatementToInsert(IndexStreetNodeTable.getTable(), IndexStreetNodeTable.values().length));
 	        Map<PreparedStatement, Integer> count = new HashMap<PreparedStatement, Integer>();
 	        count.put(prepStreet, 0);
 	        count.put(prepCity, 0);
@@ -155,6 +153,7 @@ public class DataIndexWriter {
 	        		if(city.getId() == null || city.getLocation() == null){
 						continue;
 					}
+	        		assert IndexCityTable.values().length == 6;
 	        		prepCity.setLong(IndexCityTable.ID.ordinal() + 1, city.getId());
 					prepCity.setDouble(IndexCityTable.LATITUDE.ordinal() + 1, city.getLocation().getLatitude());
 					prepCity.setDouble(IndexCityTable.LONGITUDE.ordinal() + 1, city.getLocation().getLongitude());
@@ -163,10 +162,12 @@ public class DataIndexWriter {
 					prepCity.setString(IndexCityTable.CITY_TYPE.ordinal() + 1, CityType.valueToString(city.getType()));
 					addBatch(count, prepCity);
 					
+					
 					for(Street street : city.getStreets()){
 						if(street.getId() == null || street.getLocation() == null){
 							continue;
 						}
+						assert IndexStreetTable.values().length == 6;
 						prepStreet.setLong(IndexStreetTable.ID.ordinal() + 1, street.getId());
 						prepStreet.setString(IndexStreetTable.NAME_EN.ordinal() + 1, street.getEnName());
 						prepStreet.setDouble(IndexStreetTable.LATITUDE.ordinal() + 1, street.getLocation().getLatitude());
@@ -179,6 +180,7 @@ public class DataIndexWriter {
 								if(n == null){
 									continue;
 								}
+								assert IndexStreetNodeTable.values().length == 5;
 								prepStreetNode.setLong(IndexStreetNodeTable.ID.ordinal() + 1, n.getId());
 								prepStreetNode.setDouble(IndexStreetNodeTable.LATITUDE.ordinal() + 1, n.getLatitude());
 								prepStreetNode.setDouble(IndexStreetNodeTable.LONGITUDE.ordinal() + 1, n.getLongitude());
@@ -193,6 +195,7 @@ public class DataIndexWriter {
 							if(building.getId() == null || building.getLocation() == null){
 								continue;
 							}
+							assert IndexBuildingTable.values().length == 7;
 							prepBuilding.setLong(IndexBuildingTable.ID.ordinal() + 1, building.getId());
 							prepBuilding.setDouble(IndexBuildingTable.LATITUDE.ordinal() + 1, building.getLocation().getLatitude());
 							prepBuilding.setDouble(IndexBuildingTable.LONGITUDE.ordinal() + 1, building.getLocation().getLongitude());

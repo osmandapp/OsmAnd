@@ -3,10 +3,12 @@
  */
 package com.osmand.activities.search;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,12 +30,18 @@ import com.osmand.R;
 public class SearchPoiFilterActivity extends ListActivity {
 
 
+	private Typeface typeFace;
+
+
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		setContentView(R.layout.searchpoilist);
-		List<PoiFilter> filters = PoiFiltersHelper.getOsmDefinedPoiFilters(this);
+		
+		List<PoiFilter> filters = new ArrayList<PoiFilter>(PoiFiltersHelper.getUserDefinedPoiFilters(this)) ;
+		filters.addAll(PoiFiltersHelper.getOsmDefinedPoiFilters(this));
 		setListAdapter(new AmenityAdapter(filters));
+		typeFace = Typeface.create((String)null, Typeface.ITALIC);
 	}
 
 
@@ -61,7 +69,10 @@ public class SearchPoiFilterActivity extends ListActivity {
 			ImageView icon = (ImageView) row.findViewById(R.id.folder_icon);
 			PoiFilter model = getItem(position);
 			label.setText(model.getName());
-			icon.setImageResource(R.drawable.folder);
+			if(model.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)){
+				label.setTypeface(typeFace);
+			}
+			icon.setImageResource(model.isStandardFilter() ? R.drawable.folder : R.drawable.favorites);
 			return (row);
 		}
 

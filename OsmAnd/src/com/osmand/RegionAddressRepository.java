@@ -37,6 +37,7 @@ public class RegionAddressRepository {
 	private SQLiteDatabase db;
 	private String name;
 	private LinkedHashMap<Long, City> cities = new LinkedHashMap<Long, City>();
+	
 	private Map<CityType, List<City>> cityTypes = new HashMap<CityType, List<City>>();
 	
 	private boolean useEnglishNames = false;
@@ -199,7 +200,7 @@ public class RegionAddressRepository {
 				   Character.isDigit(name.charAt(0)) &&
 				   Character.isDigit(name.charAt(1))) {
 			// also try to identify postcodes
-			for (String code:c.getPostcodes()) {
+			for (String code : c.getPostcodes()) {
 				code = code.toLowerCase();
 				if (code.startsWith(name)) {
 					streetsToFill.add(ind++,new PostcodeBasedStreet(c, code));
@@ -335,11 +336,7 @@ public class RegionAddressRepository {
 				query = db.query(IndexBuildingTable.getTable(), IndexConstants.generateColumnNames(IndexBuildingTable.values()), "? = postcode",
 						new String[] { street.getName().toUpperCase()}, null, null, null);
 			} else {
-				IndexBuildingTable[] columns = IndexBuildingTable.values();
-				IndexBuildingTable[] columnsWithoutPostcode = new IndexBuildingTable[columns.length-1];
-				// we don't need postcode information here
-				System.arraycopy(columns, 0, columnsWithoutPostcode, 0, columnsWithoutPostcode.length);
-				query = db.query(IndexBuildingTable.getTable(), IndexConstants.generateColumnNames(columnsWithoutPostcode), "? = street",
+				query = db.query(IndexBuildingTable.getTable(), IndexConstants.generateColumnNames(IndexBuildingTable.values()), "? = street",
 						new String[] { street.getId() + "" }, null, null, null);
 			}
 			log.debug("Start loading buildings for "  + street.getName());
