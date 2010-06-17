@@ -123,12 +123,20 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			@Override
 			public void onClick(View v) {
 				mapView.setZoom(mapView.getZoom() + 1);
+				// user can preview map manually switch off auto zoom while user don't press back to location
+				if(OsmandSettings.isAutoZoomEnabled(MapActivity.this)){
+					locationChanged(mapView.getLatitude(), mapView.getLongitude(), null);
+				}
 			}
 		});
 		zoomControls.setOnZoomOutClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				mapView.setZoom(mapView.getZoom() - 1);
+				// user can preview map manually switch off auto zoom while user don't press back to location
+				if(OsmandSettings.isAutoZoomEnabled(MapActivity.this)){
+					locationChanged(mapView.getLatitude(), mapView.getLongitude(), null);
+				}
 			}
 		});
 		backToLocation = (ImageButton)findViewById(R.id.BackToLocation);
@@ -240,14 +248,13 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     	}
     	locationLayer.setLastKnownLocation(location);
     	if (location != null) {
-    		if(OsmandSettings.isAutoZoomEnabled(this) && location.hasSpeed()){
-    			int z = defineZoomFromSpeed(location.getSpeed());
-    			if(mapView.getZoom() != z){
-    				mapView.setZoom(z);
-    			}
-    			
-    		}
 			if (isMapLinkedToLocation()) {
+				if(OsmandSettings.isAutoZoomEnabled(this) && location.hasSpeed()){
+	    			int z = defineZoomFromSpeed(location.getSpeed(), mapView.getZoom());
+	    			if(mapView.getZoom() != z){
+	    				mapView.setZoom(z);
+	    			}
+	    		}
 				if (location.hasBearing() && OsmandSettings.isRotateMapToBearing(this)) {
 					mapView.setRotate(-location.getBearing());
 				}
@@ -264,13 +271,15 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		}
     }
     
-    public int defineZoomFromSpeed(float speed){
+    public int defineZoomFromSpeed(float speed, int currentZoom){
     	speed *= 3.6;
-    	if(speed < 20){
+    	if(speed < 4){
+    		return currentZoom;
+    	} else if(speed < 20){
     		return 17;
-    	} else if(speed < 60){
+    	} else if(speed < 45){
     		return 16;
-    	} else if(speed < 120){
+    	} else if(speed < 80){
     		return 15;
     	}
     	return 14;
