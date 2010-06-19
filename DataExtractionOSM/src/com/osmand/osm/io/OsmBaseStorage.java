@@ -26,30 +26,30 @@ import com.osmand.osm.Way;
 
 public class OsmBaseStorage extends DefaultHandler {
 
-	protected static final String ELEM_OSM = "osm";
-	protected static final String ELEM_NODE = "node";
-	protected static final String ELEM_TAG = "tag";
-	protected static final String ELEM_WAY = "way";
-	protected static final String ELEM_ND = "nd";
-	protected static final String ELEM_RELATION = "relation";
-	protected static final String ELEM_MEMBER = "member";
+	protected static final String ELEM_OSM = "osm"; //$NON-NLS-1$
+	protected static final String ELEM_NODE = "node"; //$NON-NLS-1$
+	protected static final String ELEM_TAG = "tag"; //$NON-NLS-1$
+	protected static final String ELEM_WAY = "way"; //$NON-NLS-1$
+	protected static final String ELEM_ND = "nd"; //$NON-NLS-1$
+	protected static final String ELEM_RELATION = "relation"; //$NON-NLS-1$
+	protected static final String ELEM_MEMBER = "member"; //$NON-NLS-1$
 	
 	
-	protected static final String ATTR_VERSION = "version";
-	protected static final String ATTR_ID = "id";
-	protected static final String ATTR_LAT = "lat";
-	protected static final String ATTR_LON = "lon";
-	protected static final String ATTR_TIMESTAMP = "timestamp";
-	protected static final String ATTR_UID = "uid";
-	protected static final String ATTR_USER = "user";
-	protected static final String ATTR_VISIBLE = "visible";
-	protected static final String ATTR_CHANGESET = "changeset";
-	protected static final String ATTR_K = "k";
-	protected static final String ATTR_V = "v";
+	protected static final String ATTR_VERSION = "version"; //$NON-NLS-1$
+	protected static final String ATTR_ID = "id"; //$NON-NLS-1$
+	protected static final String ATTR_LAT = "lat"; //$NON-NLS-1$
+	protected static final String ATTR_LON = "lon"; //$NON-NLS-1$
+	protected static final String ATTR_TIMESTAMP = "timestamp"; //$NON-NLS-1$
+	protected static final String ATTR_UID = "uid"; //$NON-NLS-1$
+	protected static final String ATTR_USER = "user"; //$NON-NLS-1$
+	protected static final String ATTR_VISIBLE = "visible"; //$NON-NLS-1$
+	protected static final String ATTR_CHANGESET = "changeset"; //$NON-NLS-1$
+	protected static final String ATTR_K = "k"; //$NON-NLS-1$
+	protected static final String ATTR_V = "v"; //$NON-NLS-1$
 	
-	protected static final String ATTR_TYPE = "type";
-	protected static final String ATTR_REF = "ref";
-	protected static final String ATTR_ROLE = "role";
+	protected static final String ATTR_TYPE = "type"; //$NON-NLS-1$
+	protected static final String ATTR_REF = "ref"; //$NON-NLS-1$
+	protected static final String ATTR_ROLE = "role"; //$NON-NLS-1$
 	
 	protected Entity currentParsedEntity = null;
 	protected EntityInfo currentParsedEntityInfo = null;
@@ -123,7 +123,7 @@ public class OsmBaseStorage extends DefaultHandler {
 		}
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		try {
-			factory.setFeature("http://xml.org/sax/features/namespace-prefixes", false);
+			factory.setFeature("http://xml.org/sax/features/namespace-prefixes", false); //$NON-NLS-1$
 			return saxParser = factory.newSAXParser();
 		} catch (ParserConfigurationException e) {
 			throw new IllegalStateException(e);
@@ -154,8 +154,8 @@ public class OsmBaseStorage extends DefaultHandler {
 	
 	protected static final Set<String> supportedVersions = new HashSet<String>();
 	static {
-		supportedVersions.add("0.6");
-		supportedVersions.add("0.5");
+		supportedVersions.add("0.6"); //$NON-NLS-1$
+		supportedVersions.add("0.5"); //$NON-NLS-1$
 	}
 	
 	protected void initRootElement(String uri, String localName, String name, Attributes attributes) throws OsmVersionNotSupported{

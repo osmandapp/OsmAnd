@@ -183,7 +183,7 @@ public class RoutingHelper {
 					float bearingMovement = currentLocation.bearingTo(routeNodes.get(currentRoute));
 					float d = Math.abs(currentLocation.distanceTo(routeNodes.get(currentRoute)) * FloatMath.sin((bearingMovement - bearing)*3.14f/180f));
 					if(d > 50) {
-						log.info("Recalculate route, because correlation  : " + d);
+						log.info("Recalculate route, because correlation  : " + d); //$NON-NLS-1$
 						calculateRoute = true;
 					}
 				} 
@@ -197,12 +197,12 @@ public class RoutingHelper {
 							float f1 = currentLocation.distanceTo(routeNodes.get(currentRoute - 1)) + d;
 							float c = routeNodes.get(currentRoute - 1).distanceTo(routeNodes.get(currentRoute));
 							if (c * 2 < d + f1) {
-								log.info("Recalculate route, because too far from points : " + d + " " + f1 + " >> " + c);
+								log.info("Recalculate route, because too far from points : " + d + " " + f1 + " >> " + c); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 								calculateRoute = true;
 							}
 						} else {
 							// that case is needed
-							log.info("Recalculate route, because too far from start : " + d);
+							log.info("Recalculate route, because too far from start : " + d); //$NON-NLS-1$
 							calculateRoute = true;
 						}
 					}
@@ -288,7 +288,7 @@ public class RoutingHelper {
 							}
 							lastTimeEvaluatedRoute = System.currentTimeMillis();
 						}
-					}, "Calculating route");
+					}, "Calculating route"); //$NON-NLS-1$
 					currentRunningJob.start();
 				}
 			}
@@ -372,29 +372,29 @@ public class RoutingHelper {
 		if (start != null && end != null) {
 			List<Location> res = new ArrayList<Location>();
 			if(log.isInfoEnabled()){
-				log.info("Start finding route from " + start + " to " + end);
+				log.info("Start finding route from " + start + " to " + end); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			try {
 				StringBuilder uri = new StringBuilder();
-				uri.append("http://www.yournavigation.org/api/1.0/gosmore.php?format=kml");
-				uri.append("&flat=").append(start.getLatitude());
-				uri.append("&flon=").append(start.getLongitude());
-				uri.append("&tlat=").append(end.getLatitude());
-				uri.append("&tlon=").append(end.getLongitude());
+				uri.append("http://www.yournavigation.org/api/1.0/gosmore.php?format=kml"); //$NON-NLS-1$
+				uri.append("&flat=").append(start.getLatitude()); //$NON-NLS-1$
+				uri.append("&flon=").append(start.getLongitude()); //$NON-NLS-1$
+				uri.append("&tlat=").append(end.getLatitude()); //$NON-NLS-1$
+				uri.append("&tlon=").append(end.getLongitude()); //$NON-NLS-1$
 				if(ApplicationMode.PEDESTRIAN== mode){
-					uri.append("&v=foot") ;
+					uri.append("&v=foot") ; //$NON-NLS-1$
 				} else if(ApplicationMode.BICYCLE == mode){
-					uri.append("&v=bicycle") ;
+					uri.append("&v=bicycle") ; //$NON-NLS-1$
 				} else {
-					uri.append("&v=motorcar");
+					uri.append("&v=motorcar"); //$NON-NLS-1$
 				}
-				uri.append("&fast=1").append("&layer=mapnik");
+				uri.append("&fast=1").append("&layer=mapnik"); //$NON-NLS-1$ //$NON-NLS-2$
 
 				URL url = new URL(uri.toString());
 				URLConnection connection = url.openConnection();
 				DocumentBuilder dom = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 				Document doc = dom.parse(new InputSource(new InputStreamReader(connection.getInputStream())));
-				NodeList list = doc.getElementsByTagName("coordinates");
+				NodeList list = doc.getElementsByTagName("coordinates"); //$NON-NLS-1$
 				for(int i=0; i<list.getLength(); i++){
 					Node item = list.item(i);
 					String str = item.getFirstChild().getNodeValue();
@@ -410,7 +410,7 @@ public class RoutingHelper {
 							try {
 								double lon = Double.parseDouble(coordinate.substring(0, s));
 								double lat = Double.parseDouble(coordinate.substring(s + 1));
-								Location l = new Location("router");
+								Location l = new Location("router"); //$NON-NLS-1$
 								l.setLatitude(lat);
 								l.setLongitude(lon);
 								res.add(l);
@@ -428,16 +428,16 @@ public class RoutingHelper {
 					}
 				}
 				if(log.isInfoEnabled()){
-					log.info("Finding route contained " + res.size() + " points for " + (System.currentTimeMillis() - time) + " ms");
+					log.info("Finding route contained " + res.size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}
 
 				return new RouteCalculationResult(res, null);
 			} catch (IOException e) {
-				log.error("Failed to find route ", e);
+				log.error("Failed to find route ", e); //$NON-NLS-1$
 			} catch (ParserConfigurationException e) {
-				log.error("Failed to find route ", e);
+				log.error("Failed to find route ", e); //$NON-NLS-1$
 			} catch (SAXException e) {
-				log.error("Failed to find route ", e);
+				log.error("Failed to find route ", e); //$NON-NLS-1$
 			}
 		}
 		return new RouteCalculationResult(null, null);

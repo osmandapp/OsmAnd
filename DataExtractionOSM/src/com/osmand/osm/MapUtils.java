@@ -210,9 +210,9 @@ public class MapUtils {
 		if(meters >= 100000){
 			return meters / 1000 + " km"; 
 		} else if(meters >= 10000){
-			return MessageFormat.format("{0, number, #.#} km", ((float) meters) / 1000);
+			return MessageFormat.format("{0, number, #.#}"+" km", ((float) meters) / 1000); //$NON-NLS-1$
 		} else if(meters > 1500){
-			return MessageFormat.format("{0, number, #.##} km", ((float) meters) / 1000);
+			return MessageFormat.format("{0, number, #.##}"+" km", ((float) meters) / 1000); //$NON-NLS-1$
 		} else {
 			return meters + " m";
 		}

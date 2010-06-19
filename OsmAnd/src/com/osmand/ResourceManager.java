@@ -2,6 +2,7 @@ package com.osmand;
 
 import java.io.File;
 import java.text.Collator;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -187,7 +188,7 @@ public class ResourceManager {
 					if (initialized) {
 						amenityRepositories.add(repository);
 					}else {
-						warnings.add("The version of index '" + f.getName() +"'is not supported");
+						warnings.add(MessageFormat.format("The version of index ''{0}''is not supported", f.getName()));
 					}
 				}
 			}
@@ -209,7 +210,7 @@ public class ResourceManager {
 					if (initialized) {
 						addressMap.put(repository.getName(), repository);
 					} else {
-						warnings.add("The version of index '" + f.getName() +"'is not supported");
+						warnings.add(MessageFormat.format("The version of index ''{0}''is not supported", f.getName()));
 					}
 				}
 			}

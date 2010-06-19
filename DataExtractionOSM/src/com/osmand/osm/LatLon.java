@@ -38,7 +38,7 @@ public class LatLon {
 		}
 		@Override
 		public String toString() {
-			return "Lat " + latitude +" Lon "+ longitude;
+			return "Lat " + latitude +" Lon "+ longitude; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		
 		public double getLatitude() {
