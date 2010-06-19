@@ -27,6 +27,10 @@ public class ToDoConstants {
 	
 //   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
 	
+//   37. Get rid of exit button (!). Think about when notification should go & how clear resources if it is necessary
+//      DONE : 	
+//	     TODO : add to app settings preference (Refresh indexes).
+	
 //   32. Introduce POI predefined filters (car filter(other-fuel, transportation-car_wash, show-car) and others)
 // 		 DONE : back end (POI filter object, save, delete, read) 
 //	     TODO : activity to create/edit new index, activity to read both user defined/osm standard, add actions to remove/create
@@ -36,19 +40,24 @@ public class ToDoConstants {
 //		 DONE: Load transport routes in swing. 
 //	     TODO: Create transport index, create transport activity
 
-	
-//   37. Get rid of exit button (!). Think about when notification should go & how clear resources if it is necessary
-//       DONE : 	
-//	     TODO : add to app settings preference (Refresh indexes).
+
 	
 //   34. Suppport navigation for calculated route (example of get route from internet is in swing app).
 //	     IDEA : Victor have ideas
 	
 	
-	// FUTURE RELEASES 
+	// FUTURE RELEASES
+	//   48. Enable change favourite point (for example fav - "car") means last point you left car. It is not static point.
     //   43. Enable poi filter by name (?)
+	//   44. Show gps status (possibly open existing gps-compass app (free) or suggest to install it - no sense to write own activity)
+	//   45. Get clear <Use internet> settings. Move that setting on top settings screen. 
+	//       That setting should rule all activities that use internet. It should ask whenever internet is used 
+	//		(would you like to use internet for that operation - if using internet is not checked). 
+	//		Internet using now for : edit POI osm, show osm bugs layer, download tiles.
     //   40. Support simple vector road rendering (require new index file) (?)
     //   26. Show the whole street on map (when it is chosen in search activity). Possibly extend that story to show layer with streets. (?)
+	//   46. Implement downloading strategy for tiles (do not load 17 zoom, load only 16 for example) - try to scale 15 zoom for 17 (?)
+	//   47. Internet connectivity could be checked before trying to use
 	
 	// BUGS Android
 	//  5. Improvement : Implement caching files existing on FS, implement specific method in RM

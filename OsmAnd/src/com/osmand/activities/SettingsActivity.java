@@ -38,6 +38,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private ListPreference applicationMode;
 	private CheckBoxPreference autoZoom;
 	private EditTextPreference userPassword;
+	private CheckBoxPreference useInternetToCalculateRoute;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		applicationMode =(ListPreference) screen.findPreference(OsmandSettings.APPLICATION_MODE);
 		applicationMode.setOnPreferenceChangeListener(this);
 		
+		useInternetToCalculateRoute = (CheckBoxPreference) screen.findPreference(OsmandSettings.USE_INTERNET_TO_CALCULATE_ROUTE);
+		useInternetToCalculateRoute.setOnPreferenceChangeListener(this);
 		useInternetToDownloadTiles = (CheckBoxPreference) screen.findPreference(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES);
 		useInternetToDownloadTiles.setOnPreferenceChangeListener(this);
 		showPoiOnMap =(CheckBoxPreference) screen.findPreference(OsmandSettings.SHOW_POI_OVER_MAP);
@@ -89,6 +92,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	}
     
     public void updateAllSettings(){
+    	useInternetToCalculateRoute.setChecked(OsmandSettings.isUsingInternetToCalculateRoute(this));
     	useInternetToDownloadTiles.setChecked(OsmandSettings.isUsingInternetToDownloadTiles(this));
 		showPoiOnMap.setChecked(OsmandSettings.isShowingPoiOverMap(this));
 		rotateMapToBearing.setChecked(OsmandSettings.isRotateMapToBearing(this));
@@ -155,6 +159,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		} else if(preference == showPoiOnMap){
 			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, (Boolean) newValue);
 			edit.commit();
+		} else if(preference == useInternetToCalculateRoute){
+			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_CALCULATE_ROUTE, (Boolean) newValue);
+			edit.commit();
 		} else if(preference == useInternetToDownloadTiles){
 			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, (Boolean) newValue);
 			edit.commit();
@@ -206,6 +213,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	public void setAppMode(ApplicationMode preset, Editor edit){
 		if(preset == ApplicationMode.CAR){
 			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, true);
+			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_CALCULATE_ROUTE, true);
 //			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, _);
 			edit.putBoolean(OsmandSettings.ROTATE_MAP_TO_BEARING, true);
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, false);
@@ -219,6 +227,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			
 		} else if(preset == ApplicationMode.BICYCLE){
 //			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
+//			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_CALCULATE_ROUTE, _);
 			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
 			edit.putBoolean(OsmandSettings.ROTATE_MAP_TO_BEARING, true);
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, false);
@@ -232,6 +241,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			
 		} else if(preset == ApplicationMode.PEDESTRIAN){
 //			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
+			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_CALCULATE_ROUTE, false);
 			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
 			edit.putBoolean(OsmandSettings.ROTATE_MAP_TO_BEARING, false);
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, true);
@@ -247,6 +257,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			
 		} else if(preset == ApplicationMode.DEFAULT){
 //			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
+			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_CALCULATE_ROUTE, false);
 			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
 			edit.putBoolean(OsmandSettings.ROTATE_MAP_TO_BEARING, false);
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, false);

@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -77,7 +76,12 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		try {
 			for (String f : data.keySet()) {
-				FileOutputStream output = new FileOutputStream(new File(dir, f + ".gpx"));
+				File fout = new File(dir, f + ".gpx");
+				int ind = 1;
+				while(fout.exists()){
+					fout = new File(dir, f + "_"+(++ind)+".gpx");
+				}
+				FileOutputStream output = new FileOutputStream(fout);
 				XmlSerializer serializer = Xml.newSerializer();
 				serializer.setOutput(output, "UTF-8");
 				serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
@@ -127,6 +131,18 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			log.error("Error saving gpx");
 			Toast.makeText(ctx, "Exception occurred while saving gpx", Toast.LENGTH_LONG);
 		}
+	}
+	
+	public boolean hasDataToSave(){
+		SQLiteDatabase db = getReadableDatabase();
+		if(db != null){
+			Cursor q = db.query(false, TRACK_NAME, new String[0], null, null, null, null, null, null);
+			boolean m = q.moveToFirst();
+			q.close();
+			return m;
+		}
+		
+		return false;
 	}
 	
 	public void saveDataToGpx(){
@@ -188,13 +204,14 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		
 		db = getWritableDatabase();
 		if(db != null){
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(new java.util.Date());
-			cal.set(Calendar.HOUR_OF_DAY, 0);
-			cal.set(Calendar.MINUTE, 0);
-			cal.set(Calendar.SECOND, 0);
-			cal.set(Calendar.MILLISECOND, 0);
-			db.execSQL("DELETE FROM " + TRACK_NAME+ " WHERE " + TRACK_COL_DATE + " <= ?", new Object[]{cal.getTimeInMillis()});
+//			Calendar cal = Calendar.getInstance();
+//			cal.setTime(new java.util.Date());
+//			cal.set(Calendar.HOUR_OF_DAY, 0);
+//			cal.set(Calendar.MINUTE, 0);
+//			cal.set(Calendar.SECOND, 0);
+//			cal.set(Calendar.MILLISECOND, 0);
+			// remove all from db
+			db.execSQL("DELETE FROM " + TRACK_NAME+ " WHERE " + TRACK_COL_DATE + " <= ?", new Object[]{System.currentTimeMillis()});
 		}
 	}
 	

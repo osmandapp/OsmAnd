@@ -49,6 +49,7 @@ import com.osmand.views.OsmandMapTileView;
 import com.osmand.views.POIMapLayer;
 import com.osmand.views.PointLocationLayer;
 import com.osmand.views.PointNavigationLayer;
+import com.osmand.views.RouteLayer;
 
 public class MapActivity extends Activity implements LocationListener, IMapLocationListener, SensorEventListener {
 	
@@ -65,11 +66,15 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	private MapInfoLayer mapInfoLayer;
 	private OsmBugsLayer osmBugsLayer;
 	private SavingTrackHelper savingTrackHelper;
+	private RoutingHelper routingHelper;
+	private RouteLayer routeLayer;
 	
 	private WakeLock wakeLock;
 	private boolean sensorRegistered = false;
 
 	private MenuItem navigateToPointMenu;
+
+	
 
 	
 
@@ -99,11 +104,18 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		mapView.addLayer(mapInfoLayer);
 		osmBugsLayer = new OsmBugsLayer(this);
 		savingTrackHelper = new SavingTrackHelper(this);
+		routingHelper = new RoutingHelper(this);
+		routeLayer = new RouteLayer(routingHelper);
+		mapView.addLayer(routeLayer);
 		
 		
 		locationLayer.setAppMode(OsmandSettings.getApplicationMode(this));
 		
 		LatLon pointToNavigate = OsmandSettings.getPointToNavigate(this);
+		if(OsmandSettings.isUsingInternetToCalculateRoute(this)){
+			routingHelper.setAppMode(OsmandSettings.getApplicationMode(this));
+			routingHelper.setFinalLocation(pointToNavigate);
+		}
 		navigationLayer.setPointToNavigate(pointToNavigate);
 		
 		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
@@ -220,6 +232,8 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     	MapTileDownloader.getInstance().removeDownloaderCallback(mapView);
     }
     
+    
+    
     public void setLocation(Location location){
     	
     	// show point view only if gps enabled
@@ -242,11 +256,13 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     		}
     	}
     	Log.d(LogUtil.TAG, "Location changed");
-		// TODO delete
-    	if(locationLayer.getLastKnownLocation() != null){
+		// TODO delete !!! (only for test purposes)
+    	if(!location.hasSpeed() && locationLayer.getLastKnownLocation() != null){
     		location.setSpeed(location.distanceTo(locationLayer.getLastKnownLocation()));
     	}
+    	
     	locationLayer.setLastKnownLocation(location);
+    	routingHelper.setCurrentLocation(location);
     	if (location != null) {
 			if (isMapLinkedToLocation()) {
 				if(OsmandSettings.isAutoZoomEnabled(this) && location.hasSpeed()){
@@ -291,6 +307,11 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		} else {
 			OsmandSettings.clearPointToNavigate(this);
 		}
+		routingHelper.setFinalLocation(point);
+		// TODO do it more clear
+		if(routingHelper.getLastFixedLocation() != null){
+			routingHelper.setCurrentLocation(routingHelper.getLastFixedLocation());
+		}
 		navigationLayer.setPointToNavigate(point);
 		updateNavigateToPointMenu();
 	}
@@ -305,6 +326,10 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	
 	public LatLon getPointToNavigate(){
 		return navigationLayer.getPointToNavigate();
+	}
+	
+	public RoutingHelper getRoutingHelper() {
+		return routingHelper;
 	}
     
 
@@ -434,6 +459,10 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		locationChanged(lat, lon, this);
 	}
 	
+	public OsmandMapTileView getMapView() {
+		return mapView;
+	}
+	
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 		// Attention : sensor produces a lot of events & can hang the system
@@ -514,7 +543,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 				} else if(which == 3){
 					osmBugsLayer.openBug(MapActivity.this, getLayoutInflater(), mapView, latitude, longitude);
 				} else if(which == 4){
-					EditingPOIActivity activity = new EditingPOIActivity(MapActivity.this, mapView);
+					EditingPOIActivity activity = new EditingPOIActivity(MapActivity.this);
 					activity.showCreateDialog(latitude, longitude);
 				}
 			}

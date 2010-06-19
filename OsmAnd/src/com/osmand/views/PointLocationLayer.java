@@ -153,8 +153,8 @@ public class PointLocationLayer implements OsmandMapLayer {
 	}
 	
 	public void setLastKnownLocation(Location lastKnownLocation) {
-		this.lastKnownLocation = lastKnownLocation;
 		boolean redraw = isLocationVisible(this.lastKnownLocation) || isLocationVisible(lastKnownLocation);
+		this.lastKnownLocation = lastKnownLocation;
 		if (redraw) {
 			view.refreshMap();
 		}
