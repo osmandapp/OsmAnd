@@ -175,14 +175,14 @@ public class MapTileDownloader {
 				
 				currentlyDownloaded.add(request.fileToSave);
 				if(log.isDebugEnabled()){
-					log.debug("Start downloading tile : " + request.url);
+					log.debug("Start downloading tile : " + request.url); //$NON-NLS-1$
 				}
 				long time = System.currentTimeMillis();
 				try {
 					request.fileToSave.getParentFile().mkdirs();
 					URL url = new URL(request.url);
 					URLConnection connection = url.openConnection();
-					connection.setRequestProperty("User-Agent", Version.APP_NAME_VERSION);
+					connection.setRequestProperty("User-Agent", Version.APP_NAME_VERSION); //$NON-NLS-1$
 					BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
 					FileOutputStream stream = null;
 					try {
@@ -194,16 +194,16 @@ public class MapTileDownloader {
 						Algoritms.closeStream(stream);
 					}
 					if (log.isDebugEnabled()) {
-						log.debug("Downloading tile : " + request.url + " successfull " + (System.currentTimeMillis() - time) + " ms");
+						log.debug("Downloading tile : " + request.url + " successfull " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 					}
 				} catch (UnknownHostException e) {
 					currentErrors++;
 					request.setError(true);
-					log.error("UnknownHostException, cannot download tile " + request.url + " " + e.getMessage());
+					log.error("UnknownHostException, cannot download tile " + request.url + " " + e.getMessage()); //$NON-NLS-1$  //$NON-NLS-2$
 				} catch (IOException e) {
 					currentErrors++;
 					request.setError(true);
-					log.warn("Cannot download tile : " + request.url, e);
+					log.warn("Cannot download tile : " + request.url, e); //$NON-NLS-1$
 				} finally {
 					currentlyDownloaded.remove(request.fileToSave);
 				}

@@ -55,8 +55,8 @@ public class OsmBugsLayer implements OsmandMapLayer {
 	private List<OpenStreetBug> objects = new ArrayList<OpenStreetBug>();
 	private Paint pointClosedUI;
 	private Paint pointOpenedUI;
-	private Pattern patternToParse = Pattern.compile("putAJAXMarker\\((\\d*), ((\\d|\\.)*), ((\\d|\\.)*), '([^']*)', (\\d)\\);");
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm aaa", Locale.US);
+	private Pattern patternToParse = Pattern.compile("putAJAXMarker\\((\\d*), ((\\d|\\.)*), ((\\d|\\.)*), '([^']*)', (\\d)\\);"); //$NON-NLS-1$
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm aaa", Locale.US); //$NON-NLS-1$
 	
 	private double cTopLatitude;
 	private double cBottomLatitude;
@@ -75,7 +75,7 @@ public class OsmBugsLayer implements OsmandMapLayer {
 		this.view = view;
 		synchronized (this) {
 			if (handlerToLoop == null) {
-				new Thread("Open street bugs layer") {
+				new Thread("Open street bugs layer") { //$NON-NLS-1$
 					@Override
 					public void run() {
 						Looper.prepare();
@@ -261,47 +261,47 @@ public class OsmBugsLayer implements OsmandMapLayer {
 	
 	public boolean createNewBug(double latitude, double longitude, String text, String authorName){
 		StringBuilder b = new StringBuilder();
-		b.append("http://openstreetbugs.schokokeks.org/api/0.1/addPOIexec?");
-		b.append("lat=").append(latitude);
-		b.append("&lon=").append(longitude);
-		text = text + " [" + authorName +" "+ dateFormat.format(new Date())+ "]";
-		b.append("&text=").append(URLEncoder.encode(text));
-		b.append("&name=").append(URLEncoder.encode(authorName));
-		return editingPOI(b.toString(), "creating bug");
+		b.append("http://openstreetbugs.schokokeks.org/api/0.1/addPOIexec?"); //$NON-NLS-1$
+		b.append("lat=").append(latitude); //$NON-NLS-1$
+		b.append("&lon=").append(longitude); //$NON-NLS-1$
+		text = text + " [" + authorName +" "+ dateFormat.format(new Date())+ "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		b.append("&text=").append(URLEncoder.encode(text)); //$NON-NLS-1$
+		b.append("&name=").append(URLEncoder.encode(authorName)); //$NON-NLS-1$
+		return editingPOI(b.toString(), "creating bug"); //$NON-NLS-1$
 	}
 	
 	public boolean addingComment(long id, String text, String authorName){
 		StringBuilder b = new StringBuilder();
-		b.append("http://openstreetbugs.schokokeks.org/api/0.1/editPOIexec?");
-		b.append("id=").append(id);
-		text = text + " [" + authorName +" "+ dateFormat.format(new Date())+ "]";
-		b.append("&text=").append(URLEncoder.encode(text));
-		b.append("&name=").append(URLEncoder.encode(authorName));
-		return editingPOI(b.toString(), "adding comment");
+		b.append("http://openstreetbugs.schokokeks.org/api/0.1/editPOIexec?"); //$NON-NLS-1$
+		b.append("id=").append(id); //$NON-NLS-1$
+		text = text + " [" + authorName +" "+ dateFormat.format(new Date())+ "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		b.append("&text=").append(URLEncoder.encode(text)); //$NON-NLS-1$
+		b.append("&name=").append(URLEncoder.encode(authorName)); //$NON-NLS-1$
+		return editingPOI(b.toString(), "adding comment"); //$NON-NLS-1$
 	}
 	
 	public boolean closingBug(long id){
 		StringBuilder b = new StringBuilder();
-		b.append("http://openstreetbugs.schokokeks.org/api/0.1/closePOIexec?");
-		b.append("id=").append(id);
-		return editingPOI(b.toString(),"closing bug");
+		b.append("http://openstreetbugs.schokokeks.org/api/0.1/closePOIexec?"); //$NON-NLS-1$
+		b.append("id=").append(id); //$NON-NLS-1$
+		return editingPOI(b.toString(),"closing bug"); //$NON-NLS-1$
 	}
 	
 	
 	private boolean editingPOI(String urlStr, String debugAction){
 		try {
-			log.debug("Action " + debugAction + " " + urlStr);
+			log.debug("Action " + debugAction + " " + urlStr); //$NON-NLS-1$ //$NON-NLS-2$
 			URL url = new URL(urlStr);
 			URLConnection connection = url.openConnection();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			while(reader.readLine() != null){
 			}
-			log.debug("Action " + debugAction + " successfull");
+			log.debug("Action " + debugAction + " successfull"); //$NON-NLS-1$ //$NON-NLS-2$
 			return true;
 		} catch (IOException e) {
-			log.error("Error " +debugAction, e);
+			log.error("Error " +debugAction, e); //$NON-NLS-1$
 		} catch (RuntimeException e) {
-			log.error("Error "+debugAction, e);
+			log.error("Error "+debugAction, e); //$NON-NLS-1$
 		} 
 		return false;
 	}
@@ -309,11 +309,11 @@ public class OsmBugsLayer implements OsmandMapLayer {
 	protected List<OpenStreetBug> loadingBugs(double topLatitude, double leftLongitude, double bottomLatitude,double rightLongitude){
 		List<OpenStreetBug> bugs = new ArrayList<OpenStreetBug>();
 		StringBuilder b = new StringBuilder();
-		b.append("http://openstreetbugs.schokokeks.org/api/0.1/getBugs?");
-		b.append("b=").append(bottomLatitude);
-		b.append("&t=").append(topLatitude);
-		b.append("&l=").append(leftLongitude);
-		b.append("&r=").append(rightLongitude);
+		b.append("http://openstreetbugs.schokokeks.org/api/0.1/getBugs?"); //$NON-NLS-1$
+		b.append("b=").append(bottomLatitude); //$NON-NLS-1$
+		b.append("&t=").append(topLatitude); //$NON-NLS-1$
+		b.append("&l=").append(leftLongitude); //$NON-NLS-1$
+		b.append("&r=").append(rightLongitude); //$NON-NLS-1$
 		try {
 			URL url = new URL(b.toString());
 			URLConnection connection = url.openConnection();
@@ -326,17 +326,17 @@ public class OsmBugsLayer implements OsmandMapLayer {
 					bug.setId(Long.parseLong(matcher.group(1)));
 					bug.setLongitude(Double.parseDouble(matcher.group(2)));
 					bug.setLatitude(Double.parseDouble(matcher.group(4)));
-					bug.setName(matcher.group(6).replace("<hr />", "\n"));
-					bug.setOpened(matcher.group(7).equals("0"));
+					bug.setName(matcher.group(6).replace("<hr />", "\n")); //$NON-NLS-1$ //$NON-NLS-2$
+					bug.setOpened(matcher.group(7).equals("0")); //$NON-NLS-1$
 					bugs.add(bug);
 				}
 			}
 		} catch (IOException e) {
-			log.warn("Error loading bugs", e);
+			log.warn("Error loading bugs", e); //$NON-NLS-1$
 		} catch (NumberFormatException e) {
-			log.warn("Error loading bugs", e);
+			log.warn("Error loading bugs", e); //$NON-NLS-1$
 		} catch (RuntimeException e) {
-			log.warn("Error loading bugs", e);
+			log.warn("Error loading bugs", e); //$NON-NLS-1$
 		} 
 		
 		return bugs;

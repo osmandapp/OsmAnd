@@ -58,7 +58,7 @@ public class TileSourceManager {
 
 		@Override
 		public String getUrlToLoad(int x, int y, int zoom) {
-			return MessageFormat.format(urlToLoad, zoom+"", x+"", y+"");
+			return MessageFormat.format(urlToLoad, zoom, x, y);
 		}
 
 

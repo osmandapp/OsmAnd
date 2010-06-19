@@ -64,11 +64,11 @@ import com.osmand.views.OsmandMapTileView;
 public class EditingPOIActivity {
 	
 //	private final static String SITE_API = "http://api06.dev.openstreetmap.org/";
-	private final static String SITE_API = "http://api.openstreetmap.org/";
+	private final static String SITE_API = "http://api.openstreetmap.org/"; //$NON-NLS-1$
 	
-	private static final String DELETE_ACTION = "delete"; // NON-NLS
-	private static final String MODIFY_ACTION = "modify"; // NON-NLS
-	private static final String CREATE_ACTION = "create"; // NON-NLS
+	private static final String DELETE_ACTION = "delete";  //$NON-NLS-1$
+	private static final String MODIFY_ACTION = "modify"; //$NON-NLS-1$
+	private static final String CREATE_ACTION = "create";  //$NON-NLS-1$
 	
 	private Dialog dlg;
 	private final Context ctx;
@@ -105,7 +105,7 @@ public class EditingPOIActivity {
 		dlg = new Dialog(ctx);
 		Node n = new Node(latitude, longitude, -1);
 		n.putTag(OSMTagKey.AMENITY.getValue(), "");
-		n.putTag(OSMTagKey.OPENING_HOURS.getValue(), "Mo-Su 08:00-20:00");
+		n.putTag(OSMTagKey.OPENING_HOURS.getValue(), "Mo-Su 08:00-20:00"); //$NON-NLS-1$
 		dlg.setTitle(R.string.poi_create_title);
 		showDialog(n);
 	}
@@ -167,7 +167,7 @@ public class EditingPOIActivity {
 						AmenityType aType = AmenityType.values()[which];
 						if(aType != a.getType()){
 							a.setType(aType);
-							a.setSubType("");
+							a.setSubType(""); //$NON-NLS-1$
 							updateType(a);
 						}
 					}
@@ -230,24 +230,24 @@ public class EditingPOIActivity {
 			DefaultHttpClient httpclient = new DefaultHttpClient(params);
 
 			if (doAuthenticate) {
-				UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(OsmandSettings.getUserName(ctx) + ":"
+				UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(OsmandSettings.getUserName(ctx) + ":" //$NON-NLS-1$
 						+ OsmandSettings.getUserPassword(ctx));
 				httpclient.getCredentialsProvider().setCredentials(new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT), credentials);
 			}
 			HttpRequestBase method = null;
-			if (requestMethod.equals("GET")) {
+			if (requestMethod.equals("GET")) { //$NON-NLS-1$
 				method = new HttpGet(url);
-			} else if (requestMethod.equals("POST")) {
+			} else if (requestMethod.equals("POST")) { //$NON-NLS-1$
 				method = new HttpPost(url);
-			} else if (requestMethod.equals("PUT")) {
+			} else if (requestMethod.equals("PUT")) { //$NON-NLS-1$
 				method = new HttpPut(url);
-			} else if (requestMethod.equals("DELETE")) {
+			} else if (requestMethod.equals("DELETE")) { //$NON-NLS-1$
 				method = new HttpDelete(url);
 				
 			} else {
-				throw new IllegalArgumentException(requestMethod + " is invalid method");
+				throw new IllegalArgumentException(requestMethod + " is invalid method"); //$NON-NLS-1$
 			}
-			if (requestMethod.equals("PUT") || requestMethod.equals("POST") || requestMethod.equals("DELETE")) {
+			if (requestMethod.equals("PUT") || requestMethod.equals("POST") || requestMethod.equals("DELETE")) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				// TODO
 //				connection.setDoOutput(true);
 //				connection.setRequestProperty("Content-type", "text/xml");
@@ -266,9 +266,9 @@ public class EditingPOIActivity {
 				
 				String msg;
 				if(response.getStatusLine() != null){
-					msg = userOperation + " failed" ;
+					msg = userOperation + " failed" ; //$NON-NLS-1$
 				} else {
-					msg = userOperation + " failed " + response.getStatusLine().getStatusCode() +" : "+ 
+					msg = userOperation + " failed " + response.getStatusLine().getStatusCode() +" : "+   //$NON-NLS-1$//$NON-NLS-2$
 							response.getStatusLine().getReasonPhrase();
 				}
 				log.error(msg);
@@ -276,11 +276,11 @@ public class EditingPOIActivity {
 			} else {
 				InputStream is = response.getEntity().getContent();
 				if (is != null) {
-					BufferedReader in = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+					BufferedReader in = new BufferedReader(new InputStreamReader(is, "UTF-8")); //$NON-NLS-1$
 					String s;
 					while ((s = in.readLine()) != null) {
 						responseBody.append(s);
-						responseBody.append("\n");
+						responseBody.append("\n"); //$NON-NLS-1$
 					}
 					is.close();
 				}
@@ -288,17 +288,17 @@ public class EditingPOIActivity {
 				return responseBody.toString();
 			}
 		} catch (MalformedURLException e) {
-			log.error(userOperation + " failed", e);
+			log.error(userOperation + " failed", e); //$NON-NLS-1$
 			Toast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_error_unexpected_template), userOperation), Toast.LENGTH_LONG).show();
 		} catch (IOException e) {
-			log.error(userOperation + " failed", e);
-			Toast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_error_io_error_template), userOperation), Toast.LENGTH_LONG).show();
+			log.error(userOperation + " failed", e); //$NON-NLS-1$
+			Toast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_error_unexpected_template), userOperation), Toast.LENGTH_LONG).show();
 		}
 		return null; 
 		
 	}
 	private String sendRequest(String url, String requestMethod, String requestBody, String userOperation, boolean doAuthenticate) {
-		log.info("Sending request " + url);
+		log.info("Sending request " + url); //$NON-NLS-1$
 //		if(true){
 //			return sendRequsetThroughHttpClient(url, requestMethod, requestBody, userOperation, doAuthenticate);
 //		}
@@ -310,16 +310,16 @@ public class EditingPOIActivity {
 			connection.setRequestMethod(requestMethod);
 			StringBuilder responseBody = new StringBuilder();
 			if (doAuthenticate) {
-				String token = OsmandSettings.getUserName(ctx) + ":" + OsmandSettings.getUserPassword(ctx);
-				connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8")));
+				String token = OsmandSettings.getUserName(ctx) + ":" + OsmandSettings.getUserPassword(ctx); //$NON-NLS-1$
+				connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 			connection.setDoInput(true);
-			if (requestMethod.equals("PUT") || requestMethod.equals("POST") || requestMethod.equals("DELETE")) {
+			if (requestMethod.equals("PUT") || requestMethod.equals("POST") || requestMethod.equals("DELETE")) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				connection.setDoOutput(true);
-				connection.setRequestProperty("Content-type", "text/xml");
+				connection.setRequestProperty("Content-type", "text/xml"); //$NON-NLS-1$ //$NON-NLS-2$
 				OutputStream out = connection.getOutputStream();
 				if (requestBody != null) {
-					BufferedWriter bwr = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"), 1024);
+					BufferedWriter bwr = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"), 1024); //$NON-NLS-1$
 					bwr.write(requestBody);
 					bwr.flush();
 				}
@@ -331,12 +331,12 @@ public class EditingPOIActivity {
 				log.error(msg);
 				Toast.makeText(ctx, msg, Toast.LENGTH_LONG).show();
 			} else {
-				log.info("Response : " + connection.getResponseMessage());
+				log.info("Response : " + connection.getResponseMessage()); //$NON-NLS-1$
 				// populate return fields.
 				responseBody.setLength(0);
 				InputStream i = connection.getInputStream();
 				if (i != null) {
-					BufferedReader in = new BufferedReader(new InputStreamReader(i, "UTF-8"), 256);
+					BufferedReader in = new BufferedReader(new InputStreamReader(i, "UTF-8"), 256); //$NON-NLS-1$
 					String s;
 					boolean f = true;
 					while ((s = in.readLine()) != null) {
@@ -372,27 +372,27 @@ public class EditingPOIActivity {
 		XmlSerializer ser = Xml.newSerializer();
 		try {
 			ser.setOutput(writer);
-			ser.startDocument("UTF-8", true);
-			ser.startTag(null, "osm");
-			ser.startTag(null, "changeset");
+			ser.startDocument("UTF-8", true); //$NON-NLS-1$
+			ser.startTag(null, "osm"); //$NON-NLS-1$
+			ser.startTag(null, "changeset"); //$NON-NLS-1$
 
-			ser.startTag(null, "tag");
-			ser.attribute(null, "k", "comment");
-			ser.attribute(null, "v", comment);
-			ser.endTag(null, "tag");
+			ser.startTag(null, "tag"); //$NON-NLS-1$
+			ser.attribute(null, "k", "comment"); //$NON-NLS-1$ //$NON-NLS-2$
+			ser.attribute(null, "v", comment); //$NON-NLS-1$
+			ser.endTag(null, "tag"); //$NON-NLS-1$
 
-			ser.startTag(null, "tag");
-			ser.attribute(null, "k", "created_by");
-			ser.attribute(null, "v", Version.APP_NAME_VERSION);
-			ser.endTag(null, "tag");
-			ser.endTag(null, "changeset");
-			ser.endTag(null, "osm");
+			ser.startTag(null, "tag"); //$NON-NLS-1$
+			ser.attribute(null, "k", "created_by"); //$NON-NLS-1$ //$NON-NLS-2$
+			ser.attribute(null, "v", Version.APP_NAME_VERSION); //$NON-NLS-1$
+			ser.endTag(null, "tag"); //$NON-NLS-1$
+			ser.endTag(null, "changeset"); //$NON-NLS-1$
+			ser.endTag(null, "osm"); //$NON-NLS-1$
 			ser.endDocument();
 			writer.close();
 		} catch (IOException e) {
-			log.error("Unhandled exception", e);
+			log.error("Unhandled exception", e); //$NON-NLS-1$
 		}
-		String response = sendRequest(SITE_API + "api/0.6/changeset/create/", "PUT", writer.getBuffer().toString(), "Opening changeset", true);
+		String response = sendRequest(SITE_API + "api/0.6/changeset/create/", "PUT", writer.getBuffer().toString(), "Opening changeset", true); //$NON-NLS-1$ //$NON-NLS-2$
 		if (response != null && response.length() > 0) {
 			id = Long.parseLong(response);
 		}
@@ -401,32 +401,32 @@ public class EditingPOIActivity {
 	}
 	
 	public void closeChangeSet(long id){
-		String response = sendRequest(SITE_API+"api/0.6/changeset/"+id+"/close", "PUT", "", "Closing changeset", true);
-		log.info("Response : " + response);
+		String response = sendRequest(SITE_API+"api/0.6/changeset/"+id+"/close", "PUT", "", "Closing changeset", true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		log.info("Response : " + response); //$NON-NLS-1$
 	}
 	
 	private void writeNode(Node n, EntityInfo i, XmlSerializer ser, long changeSetId, String user) throws IllegalArgumentException, IllegalStateException, IOException{
-		ser.startTag(null, "node");
-		ser.attribute(null, "id", n.getId()+"");
-		ser.attribute(null, "lat", n.getLatitude()+"");
-		ser.attribute(null, "lon", n.getLongitude()+"");
+		ser.startTag(null, "node"); //$NON-NLS-1$
+		ser.attribute(null, "id", n.getId()+""); //$NON-NLS-1$ //$NON-NLS-2$
+		ser.attribute(null, "lat", n.getLatitude()+""); //$NON-NLS-1$ //$NON-NLS-2$
+		ser.attribute(null, "lon", n.getLongitude()+""); //$NON-NLS-1$ //$NON-NLS-2$
 		if (i != null) {
 			// ser.attribute(null, "timestamp", i.getETimestamp());
 			// ser.attribute(null, "uid", i.getUid());
 			// ser.attribute(null, "user", i.getUser());
-			ser.attribute(null, "visible", i.getVisible());
-			ser.attribute(null, "version", i.getVersion());
+			ser.attribute(null, "visible", i.getVisible()); //$NON-NLS-1$
+			ser.attribute(null, "version", i.getVersion()); //$NON-NLS-1$
 		}
-		ser.attribute(null, "changeset", changeSetId+"");
+		ser.attribute(null, "changeset", changeSetId+""); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		for(String k : n.getTagKeySet()){
 			String val = n.getTag(k);
-			ser.startTag(null, "tag");
-			ser.attribute(null, "k", k);
-			ser.attribute(null, "v", val);
-			ser.endTag(null, "tag");
+			ser.startTag(null, "tag"); //$NON-NLS-1$
+			ser.attribute(null, "k", k); //$NON-NLS-1$
+			ser.attribute(null, "v", val); //$NON-NLS-1$
+			ser.endTag(null, "tag"); //$NON-NLS-1$
 		}
-		ser.endTag(null, "node");
+		ser.endTag(null, "node"); //$NON-NLS-1$
 	}
 	
 	private void updateNodeInIndexes(String action, Node n){
@@ -466,30 +466,30 @@ public class EditingPOIActivity {
 			XmlSerializer ser = Xml.newSerializer();
 			try {
 				ser.setOutput(writer);
-				ser.startDocument("UTF-8", true);
-				ser.startTag(null, "osmChange");
-				ser.attribute(null, "version", "0.6");
-				ser.attribute(null, "generator", Version.APP_NAME);
+				ser.startDocument("UTF-8", true); //$NON-NLS-1$
+				ser.startTag(null, "osmChange"); //$NON-NLS-1$
+				ser.attribute(null, "version", "0.6");  //$NON-NLS-1$ //$NON-NLS-2$
+				ser.attribute(null, "generator", Version.APP_NAME); //$NON-NLS-1$
 				ser.startTag(null, action);
-				ser.attribute(null, "version", "0.6");
-				ser.attribute(null, "generator", Version.APP_NAME);
+				ser.attribute(null, "version", "0.6"); //$NON-NLS-1$ //$NON-NLS-2$
+				ser.attribute(null, "generator", Version.APP_NAME); //$NON-NLS-1$
 				writeNode(n, info, ser, changeSetId, OsmandSettings.getUserName(ctx));
 				ser.endTag(null, action);
-				ser.endTag(null, "osmChange");
+				ser.endTag(null, "osmChange"); //$NON-NLS-1$
 				ser.endDocument();
 			} catch (IOException e) {
-				log.error("Unhandled exception", e);
+				log.error("Unhandled exception", e); //$NON-NLS-1$
 			}
-			String res = sendRequest(SITE_API+"api/0.6/changeset/"+changeSetId + "/upload", "POST",
+			String res = sendRequest(SITE_API+"api/0.6/changeset/"+changeSetId + "/upload", "POST", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 					writer.getBuffer().toString(), "Commiting node", true);
-			log.debug(res+"");
+			log.debug(res+""); //$NON-NLS-1$
 			if (res != null) {
 				if (CREATE_ACTION.equals(action)) {
 					long newId = n.getId();
-					int i = res.indexOf("new_id=\"");
+					int i = res.indexOf("new_id=\""); //$NON-NLS-1$
 					if (i > 0) {
-						i = i + "new_id=\"".length();
-						int end = res.indexOf("\"", i);
+						i = i + "new_id=\"".length(); //$NON-NLS-1$
+						int end = res.indexOf("\"", i); //$NON-NLS-1$
 						if (end > 0) {
 							newId = Long.parseLong(res.substring(i, end));
 							Node newN = new Node(n.getLatitude(), n.getLongitude(), newId);
@@ -511,7 +511,7 @@ public class EditingPOIActivity {
 	
 	public Node loadNode(long id) {
 		try {
-			String res = sendRequest(SITE_API+"api/0.6/node/"+id, "GET", null, "Loading poi " + id, false);
+			String res = sendRequest(SITE_API+"api/0.6/node/"+id, "GET", null, "Loading poi " + id, false); //$NON-NLS-1$ //$NON-NLS-2$
 			if(res != null){
 				OsmBaseStorage st = new OsmBaseStorage();
 				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true);
@@ -523,10 +523,10 @@ public class EditingPOIActivity {
 			}
 			
 		} catch (IOException e) {
-			log.error("Loading node failed" + id, e);
+			log.error("Loading node failed" + id, e); //$NON-NLS-1$
 			Toast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_io_error), Toast.LENGTH_LONG).show();
 		} catch (SAXException e) {
-			log.error("Loading node failed" + id, e);
+			log.error("Loading node failed" + id, e); //$NON-NLS-1$
 			Toast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_io_error), Toast.LENGTH_LONG).show();
 		}
 		return null;

@@ -16,7 +16,7 @@ public class ConsoleProgressImplementation implements IProgress {
 	
 	@Override
 	public void finishTask() {
-		System.out.println("Task " + currentTask + " is finished ");
+		System.out.println("Task " + currentTask + " is finished "); //$NON-NLS-1$ //$NON-NLS-2$
 		this.currentTask = null;
 		
 	}
@@ -34,7 +34,7 @@ public class ConsoleProgressImplementation implements IProgress {
 	
 	private void printIfNeeded() {
 		if(getCurrentPercent() - lastPercentPrint >= deltaPercentsToPrint){
-			System.out.println(MessageFormat.format("Done {0} %.", getCurrentPercent()));
+			System.out.println(MessageFormat.format("Done {0} %.", getCurrentPercent())); //$NON-NLS-1$
 			this.lastPercentPrint = getCurrentPercent();
 		}
 	}
@@ -53,7 +53,7 @@ public class ConsoleProgressImplementation implements IProgress {
 	public void startTask(String taskName, int work) {
 		if(!Algoritms.objectEquals(currentTask, taskName)){
 			this.currentTask = taskName;
-			System.out.println("Started new task : " + currentTask  + " - " + work);
+			System.out.println("Started new task : " + currentTask  + " - " + work); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		startWork(work);
 		
@@ -63,7 +63,7 @@ public class ConsoleProgressImplementation implements IProgress {
 	public void startWork(int work) {
 		if(this.work != work){
 			this.work = work;
-			System.out.println("Amount of work was changed to " + work);
+			System.out.println("Amount of work was changed to " + work); //$NON-NLS-1$
 		}
 		this.currentDone = 0;
 		this.lastPercentPrint = 0;

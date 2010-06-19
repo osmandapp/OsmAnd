@@ -65,7 +65,7 @@ public class Algoritms {
 				stream.close();
 			}
 		} catch(IOException e){
-			log.warn("Closing stream warn", e);
+			log.warn("Closing stream warn", e); //$NON-NLS-1$
 		}
 	}
 	
@@ -74,10 +74,10 @@ public class Algoritms {
 			for(File c : f.listFiles()){
 				updateAllExistingImgTilesToOsmandFormat(c);
 			}
-		} else if(f.getName().endsWith(".png") || f.getName().endsWith(".jpg")){
-			f.renameTo(new File(f.getAbsolutePath() + ".tile"));
-		} else if(f.getName().endsWith(".andnav2")) {
-			f.renameTo(new File(f.getAbsolutePath().substring(0, f.getAbsolutePath().length() - ".andnav2".length()) + ".tile"));
+		} else if(f.getName().endsWith(".png") || f.getName().endsWith(".jpg")){ //$NON-NLS-1$ //$NON-NLS-2$
+			f.renameTo(new File(f.getAbsolutePath() + ".tile")); //$NON-NLS-1$
+		} else if(f.getName().endsWith(".andnav2")) { //$NON-NLS-1$
+			f.renameTo(new File(f.getAbsolutePath().substring(0, f.getAbsolutePath().length() - ".andnav2".length()) + ".tile")); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 			
 	}

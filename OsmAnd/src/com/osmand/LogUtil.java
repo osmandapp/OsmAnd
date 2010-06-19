@@ -16,7 +16,7 @@ import org.apache.commons.logging.Log;
  *  
  */
 public class LogUtil {
-	public static String TAG = "com.osmand";
+	public static String TAG = "com.osmand"; //$NON-NLS-1$
 	private static class OsmandLogImplementation implements Log {
 		
 		private final String fullName;
@@ -29,35 +29,35 @@ public class LogUtil {
 		@Override
 		public void debug(Object message) {
 			if(isDebugEnabled()){
-				android.util.Log.d(TAG, name + " " + message);
+				android.util.Log.d(TAG, name + " " + message); //$NON-NLS-1$
 			}
 		}
 
 		@Override
 		public void debug(Object message, Throwable t) {
 			if(isDebugEnabled()){
-				android.util.Log.d(TAG, name + " " + message, t);
+				android.util.Log.d(TAG, name + " " + message, t); //$NON-NLS-1$
 			}
 		}
 
 		@Override
 		public void error(Object message) {
 			if(isErrorEnabled()){
-				android.util.Log.e(TAG, name + " " + message);
+				android.util.Log.e(TAG, name + " " + message); //$NON-NLS-1$
 			}
 		}
 
 		@Override
 		public void error(Object message, Throwable t) {
 			if(isErrorEnabled()){
-				android.util.Log.e(TAG, name + " " + message, t);
+				android.util.Log.e(TAG, name + " " + message, t); //$NON-NLS-1$
 			}
 		}
 
 		@Override
 		public void fatal(Object message) {
 			if(isFatalEnabled()){
-				android.util.Log.e(TAG, name + " " + message);
+				android.util.Log.e(TAG, name + " " + message); //$NON-NLS-1$
 			}
 			
 		}
@@ -65,21 +65,21 @@ public class LogUtil {
 		@Override
 		public void fatal(Object message, Throwable t) {
 			if(isFatalEnabled()){
-				android.util.Log.e(TAG, name + " " + message, t);
+				android.util.Log.e(TAG, name + " " + message, t); //$NON-NLS-1$
 			}
 		}
 
 		@Override
 		public void info(Object message) {
 			if(isInfoEnabled()){
-				android.util.Log.i(TAG, name + " " + message);
+				android.util.Log.i(TAG, name + " " + message); //$NON-NLS-1$
 			}
 		}
 
 		@Override
 		public void info(Object message, Throwable t) {
 			if(isInfoEnabled()){
-				android.util.Log.i(TAG, name + " " + message, t);
+				android.util.Log.i(TAG, name + " " + message, t); //$NON-NLS-1$
 			}
 		}
 
@@ -118,28 +118,28 @@ public class LogUtil {
 		@Override
 		public void trace(Object message) {
 			if(isTraceEnabled()){
-				android.util.Log.d(TAG, name + " " + message);
+				android.util.Log.d(TAG, name + " " + message); //$NON-NLS-1$
 			}
 		}
 
 		@Override
 		public void trace(Object message, Throwable t) {
 			if(isTraceEnabled()){
-				android.util.Log.d(TAG, name + " " + message, t);
+				android.util.Log.d(TAG, name + " " + message, t); //$NON-NLS-1$
 			}	
 		}
 
 		@Override
 		public void warn(Object message) {
 			if(isWarnEnabled()){
-				android.util.Log.w(TAG, name + " " + message);
+				android.util.Log.w(TAG, name + " " + message); //$NON-NLS-1$
 			}
 		}
 
 		@Override
 		public void warn(Object message, Throwable t) {
 			if(isWarnEnabled()){
-				android.util.Log.w(TAG, name + " " + message, t);
+				android.util.Log.w(TAG, name + " " + message, t); //$NON-NLS-1$
 			}
 		}
 	}

@@ -93,7 +93,7 @@ public class NavigatePointActivity extends Activity {
 					((TextView)findViewById(R.id.LongitudeEdit)).setText(convert(lon, newFormat));
 				} catch (RuntimeException e) {
 					((TextView) findViewById(R.id.ValidateTextView)).setText("Locations are invalid");
-					Log.w(LogUtil.TAG, "Convertion failed", e);
+					Log.w(LogUtil.TAG, "Convertion failed", e); //$NON-NLS-1$
 				}
 			}
 			
@@ -133,7 +133,7 @@ public class NavigatePointActivity extends Activity {
 			close();
 		} catch (RuntimeException e) {
 			((TextView) findViewById(R.id.ValidateTextView)).setText("Locations are invalid");
-			Log.w(LogUtil.TAG, "Convertion failed", e);
+			Log.w(LogUtil.TAG, "Convertion failed", e); //$NON-NLS-1$
 		}
 	}
 	
@@ -145,10 +145,10 @@ public class NavigatePointActivity extends Activity {
 
 	public static String convert(double coordinate, int outputType) {
 		if (coordinate < -180.0 || coordinate > 180.0 || Double.isNaN(coordinate)) {
-			throw new IllegalArgumentException("coordinate=" + coordinate);
+			throw new IllegalArgumentException("coordinate=" + coordinate); //$NON-NLS-1$
 		}
 		if ((outputType != FORMAT_DEGREES) && (outputType != FORMAT_MINUTES) && (outputType != FORMAT_SECONDS)) {
-			throw new IllegalArgumentException("outputType=" + outputType);
+			throw new IllegalArgumentException("outputType=" + outputType); //$NON-NLS-1$
 		}
 
 		StringBuilder sb = new StringBuilder();
@@ -159,7 +159,7 @@ public class NavigatePointActivity extends Activity {
 			coordinate = -coordinate;
 		}
 
-		DecimalFormat df = new DecimalFormat("###.#####", new DecimalFormatSymbols(Locale.US));
+		DecimalFormat df = new DecimalFormat("###.#####", new DecimalFormatSymbols(Locale.US)); //$NON-NLS-1$
 		if (outputType == FORMAT_MINUTES || outputType == FORMAT_SECONDS) {
 			int degrees = (int) Math.floor(coordinate);
 			sb.append(degrees);

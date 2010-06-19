@@ -35,9 +35,9 @@ import com.osmand.views.POIMapLayer;
  */
 public class ResourceManager {
 
-	private static final String POI_PATH = "osmand/" + IndexConstants.POI_INDEX_DIR;
-	private static final String ADDRESS_PATH = "osmand/" + IndexConstants.ADDRESS_INDEX_DIR;
-	private static final String TILES_PATH = "osmand/tiles/";
+	private static final String POI_PATH = "osmand/" + IndexConstants.POI_INDEX_DIR; //$NON-NLS-1$
+	private static final String ADDRESS_PATH = "osmand/" + IndexConstants.ADDRESS_INDEX_DIR; //$NON-NLS-1$
+	private static final String TILES_PATH = "osmand/tiles/"; //$NON-NLS-1$
 	
 	private static final Log log = LogUtil.getLog(ResourceManager.class);
 	
@@ -116,7 +116,7 @@ public class ResourceManager {
 		}
 		builder.setLength(0);
 		builder.append(map.getName()).append('/').append(zoom).	append('/').append(x).
-				append('/').append(y).append(map.getTileFormat()).append(".tile");
+				append('/').append(y).append(map.getTileFormat()).append(".tile"); //$NON-NLS-1$
 		String file = builder.toString();
 		if(deleteBefore){
 			cacheOfImages.remove(file);
@@ -155,7 +155,7 @@ public class ResourceManager {
 				long time = System.currentTimeMillis();
 				cacheOfImages.put(req.fileToLoad, BitmapFactory.decodeFile(en.getAbsolutePath()));
 				if (log.isDebugEnabled()) {
-					log.debug("Loaded file : " + req.fileToLoad + " " + -(time - System.currentTimeMillis()) + " ms");
+					log.debug("Loaded file : " + req.fileToLoad + " " + -(time - System.currentTimeMillis()) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}
 			} 
 			
@@ -291,7 +291,7 @@ public class ResourceManager {
 	
 	/// On low memory method ///
 	public void onLowMemory() {
-		log.info("On low memory : cleaning tiles - size = " + cacheOfImages.size());
+		log.info("On low memory : cleaning tiles - size = " + cacheOfImages.size()); //$NON-NLS-1$
 		clearTiles();
 		for(AmenityIndexRepository r : amenityRepositories){
 			r.clearCache();
@@ -362,7 +362,7 @@ public class ResourceManager {
 		Stack<Object> requests = new Stack<Object>();
 		
 		public AsyncLoadingThread(){
-			super("Loader map objects (tiles, poi)");
+			super("Loader map objects (tiles, poi)"); //$NON-NLS-1$
 		}
 		
 		@Override

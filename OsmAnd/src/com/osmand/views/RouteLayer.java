@@ -72,7 +72,7 @@ public class RouteLayer implements OsmandMapLayer {
 			double rightLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.right);
 			helper.fillLocationsToShow(topLatitude, leftLongitude, bottomLatitude, rightLongitude, points);
 			if((System.currentTimeMillis() - time) > 40){
-				Log.e(LogUtil.TAG, "Calculate route layer " + (System.currentTimeMillis() - time));
+				Log.e(LogUtil.TAG, "Calculate route layer " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
 			}
 			
 			if (points.size() > 0) {

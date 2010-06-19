@@ -23,13 +23,15 @@ public class ToDoConstants {
 	
 	 // TODO ANDROID 
 //   31. Translation.
-//	     GOT : olga
+//	     DONE : partially olga
+//       TODO : everywhere put non-nls, check all translated into russian [swing could not be translated]	
 	
 //   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
+//		 Some icons are not fine (as back menu from map - it is blured).
 	
 //   37. Get rid of exit button (!). Think about when notification should go & how clear resources if it is necessary
 //      DONE : 	
-//	     TODO : add to app settings preference (Refresh indexes).
+//	    TODO : add to app settings preference (Refresh indexes).
 	
 //   32. Introduce POI predefined filters (car filter(other-fuel, transportation-car_wash, show-car) and others)
 // 		 DONE : back end (POI filter object, save, delete, read) 
@@ -53,15 +55,16 @@ public class ToDoConstants {
 	//       That setting should rule all activities that use internet. It should ask whenever internet is used 
 	//		(would you like to use internet for that operation - if using internet is not checked). 
 	//		Internet using now for : edit POI osm, show osm bugs layer, download tiles.
+	//   47. Internet connectivity could be checked before trying to use
+	//   46. Implement downloading strategy for tiles (do not load 17 zoom, load only 16 for example) - try to scale 15 zoom for 17 (?)
     //   40. Support simple vector road rendering (require new index file) (?)
     //   26. Show the whole street on map (when it is chosen in search activity). Possibly extend that story to show layer with streets. (?)
-	//   46. Implement downloading strategy for tiles (do not load 17 zoom, load only 16 for example) - try to scale 15 zoom for 17 (?)
-	//   47. Internet connectivity could be checked before trying to use
+
 	
 	// BUGS Android
+	//  6. Improvement postal_code search : replace search city <-> postal_code (show streets for postal_code)
 	//  5. Improvement : Implement caching files existing on FS, implement specific method in RM
 	//     Introducing cache of file names that are on disk (creating new File() consumes a lot of memory)
-	//  6. Improvement postal_code search : replace search city <-> postal_code (show streets for postal_code)
 	//  7. Update map is duplicated in target & in update menu (context menu)
 	
 	

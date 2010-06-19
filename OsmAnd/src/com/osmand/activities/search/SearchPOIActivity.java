@@ -36,7 +36,7 @@ import com.osmand.osm.MapUtils;
  */
 public class SearchPOIActivity extends ListActivity {
 
-	public static final String AMENITY_FILTER = "com.osmand.amenity_filter";
+	public static final String AMENITY_FILTER = "com.osmand.amenity_filter"; //$NON-NLS-1$
 
 
 	private Button searchPOILevel;
@@ -145,7 +145,7 @@ public class SearchPOIActivity extends ListActivity {
 				icon.setImageResource(R.drawable.closed_poi);
 			}
 			
-			distanceLabel.setText(" " + MapUtils.getFormattedDistance(dist));
+			distanceLabel.setText(" " + MapUtils.getFormattedDistance(dist)); //$NON-NLS-1$
 			return (row);
 		}
 	}

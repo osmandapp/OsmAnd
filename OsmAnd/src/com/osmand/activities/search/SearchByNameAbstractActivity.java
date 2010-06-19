@@ -30,7 +30,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.search_by_name);
-		NamesAdapter namesAdapter = new NamesAdapter(getObjects(""));
+		NamesAdapter namesAdapter = new NamesAdapter(getObjects("")); //$NON-NLS-1$
 		setListAdapter(namesAdapter);
 		searchText = (EditText) findViewById(R.id.SearchText);
 		searchText.addTextChangedListener(new TextWatcher(){
@@ -51,7 +51,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 
 			@Override
 			public void onClick(View v) {
-				searchText.setText("");
+				searchText.setText(""); //$NON-NLS-1$
 			}
 			
 		});
@@ -119,7 +119,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 	protected void onResume() {
 		synchronized (this) {
 			if (handlerToLoop == null) {
-				new Thread("Filter data") {
+				new Thread("Filter data") { //$NON-NLS-1$
 					@Override
 					public void run() {
 						Looper.prepare();

@@ -12,9 +12,9 @@ import com.osmand.osm.MapUtils;
 
 public class PoiFilter {
 	
-	public final static String STD_PREFIX = "std_";
-	public final static String USER_PREFIX = "user_";
-	public final static String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id";
+	public final static String STD_PREFIX = "std_"; //$NON-NLS-1$
+	public final static String USER_PREFIX = "user_"; //$NON-NLS-1$
+	public final static String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id"; //$NON-NLS-1$
 	
 	private Map<AmenityType, List<String>> acceptedTypes = new LinkedHashMap<AmenityType, List<String>>();
 	private String filterByName = null;
@@ -33,7 +33,7 @@ public class PoiFilter {
 	public PoiFilter(AmenityType type){
 		isStandardFilter = true;
 		filterId = STD_PREFIX + type;
-		name = type == null ? Messages.getMessage("poi_filter_closest_poi") : AmenityType.toPublicString(type);
+		name = type == null ? Messages.getMessage("poi_filter_closest_poi") : AmenityType.toPublicString(type); //$NON-NLS-1$
 		if(type == null){
 			initSearchAll();
 		} else {
@@ -147,38 +147,38 @@ public class PoiFilter {
 			return null;
 		}
 		if(acceptedTypes.size() == 0){
-			return "1 > 1"; 
+			return "1 > 1";  //$NON-NLS-1$
 		}
 		StringBuilder b = new StringBuilder();
-		b.append("(");
+		b.append("("); //$NON-NLS-1$
 		boolean first = true;
 		for(AmenityType a : acceptedTypes.keySet()){
 			if(first){
 				first = false;
 			} else {
-				b.append(" OR ");
+				b.append(" OR "); //$NON-NLS-1$
 			}
-			b.append("(");
-			b.append(IndexPoiTable.TYPE.name().toLowerCase()).append(" = '").append(AmenityType.valueToString(a)).append("'");
+			b.append("("); //$NON-NLS-1$
+			b.append(IndexPoiTable.TYPE.name().toLowerCase()).append(" = '").append(AmenityType.valueToString(a)).append("'"); //$NON-NLS-1$ //$NON-NLS-2$
 			if(acceptedTypes.get(a) != null){
 				List<String> list = acceptedTypes.get(a);
-				b.append(" AND ");
-				b.append(IndexPoiTable.SUBTYPE.name().toLowerCase()).append(" IN (");
+				b.append(" AND "); //$NON-NLS-1$
+				b.append(IndexPoiTable.SUBTYPE.name().toLowerCase()).append(" IN ("); //$NON-NLS-1$
 				boolean bfirst = true;
 				for(String s : list){
 					if(bfirst){
 						bfirst = false;
 					} else {
-						b.append(", ");
+						b.append(", "); //$NON-NLS-1$
 					}
-					b.append("'").append(s).append("'");
+					b.append("'").append(s).append("'"); //$NON-NLS-1$ //$NON-NLS-2$
 				}
-				b.append(")");
+				b.append(")"); //$NON-NLS-1$
 			}
-			b.append(")");
+			b.append(")"); //$NON-NLS-1$
 		}
 			
-		b.append(")");
+		b.append(")"); //$NON-NLS-1$
 		return b.toString();
 	}
 	

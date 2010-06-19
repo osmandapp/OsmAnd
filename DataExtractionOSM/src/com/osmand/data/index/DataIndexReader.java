@@ -25,12 +25,12 @@ public class DataIndexReader {
 	
 	public Connection getConnection(File file) throws SQLException{
 		try {
-			Class.forName("org.sqlite.JDBC");
+			Class.forName("org.sqlite.JDBC"); //$NON-NLS-1$
 		} catch (ClassNotFoundException e) {
-			log.error("Illegal configuration", e);
+			log.error("Illegal configuration", e); //$NON-NLS-1$
 			throw new IllegalStateException(e);
 		}
-        return DriverManager.getConnection("jdbc:sqlite:"+file.getAbsolutePath());
+        return DriverManager.getConnection("jdbc:sqlite:"+file.getAbsolutePath()); //$NON-NLS-1$
 	}
 	
 	
@@ -57,7 +57,7 @@ public class DataIndexReader {
 		List<Street> streets = new ArrayList<Street>();
 		Statement stat = c.createStatement();
 		ResultSet set = stat.executeQuery(IndexConstants.generateSelectSQL(IndexStreetTable.values(), 
-				IndexStreetTable.CITY.toString() +" = " + city.getId()));
+				IndexStreetTable.CITY.toString() +" = " + city.getId())); //$NON-NLS-1$
 		while(set.next()){
 			Street street = new Street(city);
 			street.setName(set.getString(IndexStreetTable.NAME.ordinal() + 1));
@@ -76,7 +76,7 @@ public class DataIndexReader {
 		List<Building> buildings = new ArrayList<Building>();
 		Statement stat = c.createStatement();
 		ResultSet set = stat.executeQuery(IndexConstants.generateSelectSQL(IndexBuildingTable.values(), 
-				IndexBuildingTable.STREET.toString() +" = " + street.getId()));
+				IndexBuildingTable.STREET.toString() +" = " + street.getId())); //$NON-NLS-1$
 		while(set.next()){
 			Building building = new Building();
 			building.setName(set.getString(IndexBuildingTable.NAME.ordinal() + 1));
@@ -95,11 +95,11 @@ public class DataIndexReader {
 		Connection c = getConnection(f);
 		try {
 			for (City city : readCities(c)) {
-				System.out.println("CITY " + city.getName());
+				System.out.println("CITY " + city.getName()); //$NON-NLS-1$
 				for (Street s : readStreets(c, city)) {
-					System.out.println("\tSTREET " + s.getName());
+					System.out.println("\tSTREET " + s.getName()); //$NON-NLS-1$
 					for (Building b : readBuildings(c, s)) {
-						System.out.println("\t\tBULDING " + b.getName());
+						System.out.println("\t\tBULDING " + b.getName()); //$NON-NLS-1$
 					}
 				}
 

@@ -47,7 +47,7 @@ public class Region extends MapObject {
 	}
 	
 	public Region(){
-		name = "Region";
+		name = "Region"; //$NON-NLS-1$
 	}
 	
 	public OsmBaseStorage getStorage() {

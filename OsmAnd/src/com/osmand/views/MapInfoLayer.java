@@ -40,7 +40,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 	private String cachedSpeedString = null;
 	private float cachedSpeed = 0;
 	private int cachedZoom = 0;
-	private String cachedZoomString = "";
+	private String cachedZoomString = ""; //$NON-NLS-1$
 	private int centerMiniRouteY;
 	private int centerMiniRouteX;
 	private float scaleMiniRoute;
@@ -144,7 +144,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		}
 		if(view.getZoom() != cachedZoom){
 			cachedZoom = view.getZoom();
-			cachedZoomString = view.getZoom()+"";
+			cachedZoomString = view.getZoom()+""; //$NON-NLS-1$
 		}
 		// draw zoom
 		canvas.drawRoundRect(boundsForZoom, 3, 3, paintAlphaGray);

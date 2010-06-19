@@ -50,7 +50,7 @@ public class DataIndexWriter {
 		f.mkdirs();
 		// remove existing file
 		if (f.exists()) {
-			log.warn("Remove existing index : " + f.getAbsolutePath());
+			log.warn("Remove existing index : " + f.getAbsolutePath()); //$NON-NLS-1$
 			f.delete();
 		}
 		return f;
@@ -61,18 +61,18 @@ public class DataIndexWriter {
 		File file = checkFile(IndexConstants.POI_INDEX_DIR+region.getName()+IndexConstants.POI_INDEX_EXT);
 		long now = System.currentTimeMillis();
 		try {
-			Class.forName("org.sqlite.JDBC");
+			Class.forName("org.sqlite.JDBC"); //$NON-NLS-1$
 		} catch (ClassNotFoundException e) {
-			log.error("Illegal configuration", e);
+			log.error("Illegal configuration", e); //$NON-NLS-1$
 			throw new IllegalStateException(e);
 		}
-        Connection conn = DriverManager.getConnection("jdbc:sqlite:"+file.getAbsolutePath());
+        Connection conn = DriverManager.getConnection("jdbc:sqlite:"+file.getAbsolutePath()); //$NON-NLS-1$
 		try {
 			Statement stat = conn.createStatement();
 			assert IndexPoiTable.values().length == 8;
 	        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexPoiTable.values()));
 	        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexPoiTable.values()));
-	        stat.execute("PRAGMA user_version = " + IndexConstants.POI_TABLE_VERSION);
+	        stat.execute("PRAGMA user_version = " + IndexConstants.POI_TABLE_VERSION); //$NON-NLS-1$
 	        stat.close();
 	        
 	        PreparedStatement prep = conn.prepareStatement(
@@ -102,7 +102,7 @@ public class DataIndexWriter {
 			conn.setAutoCommit(true);
 		} finally {
 			conn.close();
-			log.info(String.format("Indexing poi done in %s ms.", System.currentTimeMillis() - now));
+			log.info(String.format("Indexing poi done in %s ms.", System.currentTimeMillis() - now)); //$NON-NLS-1$
 		}
 		return this;
 	}
@@ -111,12 +111,12 @@ public class DataIndexWriter {
 		File file = checkFile(IndexConstants.ADDRESS_INDEX_DIR+region.getName()+IndexConstants.ADDRESS_INDEX_EXT);
 		long now = System.currentTimeMillis();
 		try {
-			Class.forName("org.sqlite.JDBC");
+			Class.forName("org.sqlite.JDBC"); //$NON-NLS-1$
 		} catch (ClassNotFoundException e) {
-			log.error("Illegal configuration", e);
+			log.error("Illegal configuration", e); //$NON-NLS-1$
 			throw new IllegalStateException(e);
 		}
-        Connection conn = DriverManager.getConnection("jdbc:sqlite:"+file.getAbsolutePath());
+        Connection conn = DriverManager.getConnection("jdbc:sqlite:"+file.getAbsolutePath()); //$NON-NLS-1$
 		try {
 			Statement stat = conn.createStatement();
 			
@@ -130,7 +130,7 @@ public class DataIndexWriter {
 	        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexStreetNodeTable.values()));
 	        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexStreetTable.values()));
 	        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexStreetTable.values()));
-	        stat.execute("PRAGMA user_version = " + IndexConstants.ADDRESS_TABLE_VERSION);
+	        stat.execute("PRAGMA user_version = " + IndexConstants.ADDRESS_TABLE_VERSION); //$NON-NLS-1$
 	        stat.close();
 	        
 	        PreparedStatement prepCity = conn.prepareStatement(
@@ -220,7 +220,7 @@ public class DataIndexWriter {
 			conn.setAutoCommit(true);
 		} finally {
 			conn.close();
-			log.info(String.format("Indexing address done in %s ms.", System.currentTimeMillis() - now));
+			log.info(String.format("Indexing address done in %s ms.", System.currentTimeMillis() - now)); //$NON-NLS-1$
 		}
 		return this;
 	}

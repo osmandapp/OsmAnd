@@ -632,7 +632,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		if (point != null) {
 			startDragging = null;
 			if(log.isDebugEnabled()){
-				log.debug("On long click event "+  point.x + " " + point.y);
+				log.debug("On long click event "+  point.x + " " + point.y); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			for (int i = layers.size() - 1; i >= 0; i--) {
 				if (layers.get(i).onLongPressEvent(point)) {
@@ -661,7 +661,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		if (point != null) {
 			startDragging = null;
 			if(log.isDebugEnabled()){
-				log.debug("On click event "+  point.x + " " + point.y);
+				log.debug("On click event "+  point.x + " " + point.y); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			for (int i = layers.size() - 1; i >= 0; i--) {
 				if (layers.get(i).onTouchEvent(point)) {

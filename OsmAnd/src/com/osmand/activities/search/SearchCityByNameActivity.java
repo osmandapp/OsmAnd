@@ -37,8 +37,10 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	
 	@Override
 	public void updateTextView(City obj, TextView txt) {
-		if(getFilter().length() > 2){
-			txt.setText(obj.getName(region.useEnglishNames()) + " - " + MapUtils.getFormattedDistance((int) MapUtils.getDistance(obj.getLocation(), location)));
+		LatLon l = obj.getLocation();
+		if (getFilter().length() > 2 && location != null && l != null) {
+			txt.setText(obj.getName(region.useEnglishNames()) + " - " + //$NON-NLS-1$
+					MapUtils.getFormattedDistance((int) MapUtils.getDistance(l, location))); 
 		} else {
 			txt.setText(obj.getName(region.useEnglishNames()));
 		}

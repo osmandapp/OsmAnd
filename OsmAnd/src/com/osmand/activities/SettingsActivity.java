@@ -118,8 +118,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				resources.getString(R.string.interval_30_seconds),
 				resources.getString(R.string.interval_1_minute),
 				resources.getString(R.string.interval_5_minutes)});				
-		saveTrackInterval.setEntryValues(new String[]{"1", "2", "5", "15", "30", "60", "300"});
-		saveTrackInterval.setValue(OsmandSettings.getSavingTrackInterval(this)+"");
+		saveTrackInterval.setEntryValues(new String[]{"1", "2", "5", "15", "30", "60", "300"}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+		saveTrackInterval.setValue(OsmandSettings.getSavingTrackInterval(this)+""); //$NON-NLS-1$
 		
 		ApplicationMode[] presets = ApplicationMode.values(); 
 		String[] values = new String[presets.length];
@@ -142,7 +142,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		tileSourcePreference.setEntries(entries);
 		tileSourcePreference.setEntryValues(entries);
 		tileSourcePreference.setValue(OsmandSettings.getMapTileSourceName(this));
-		String mapName = " " +OsmandSettings.getMapTileSourceName(this);
+		String mapName = " " +OsmandSettings.getMapTileSourceName(this); //$NON-NLS-1$
 		String summary = tileSourcePreference.getSummary().toString();
 		if (summary.lastIndexOf(':') != -1) {
 			summary = summary.substring(0, summary.lastIndexOf(':') + 1);
@@ -210,7 +210,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			if (summary.lastIndexOf(':') != -1) {
 				summary = summary.substring(0, summary.lastIndexOf(':') + 1);
 			} 
-			summary += " " + OsmandSettings.getMapTileSourceName(this);
+			summary += " " + OsmandSettings.getMapTileSourceName(this); //$NON-NLS-1$
 			tileSourcePreference.setSummary(summary);
 			
 		}

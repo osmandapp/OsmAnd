@@ -124,8 +124,8 @@ public class RoutingHelper {
 	
 	public boolean finishAtLocation(Location currentLocation) {
 		Location lastPoint = routeNodes.get(routeNodes.size() - 1);
-		if(currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < 50){
-			if(lastFixedLocation != null && lastFixedLocation.distanceTo(lastPoint) < 50){
+		if(currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < 60){
+			if(lastFixedLocation != null && lastFixedLocation.distanceTo(lastPoint) < 60){
 				// TODO mark as finished 
 				showMessage("You arrived at destination point");
 				currentRoute = routeNodes.size() - 1;

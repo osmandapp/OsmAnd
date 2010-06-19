@@ -403,7 +403,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 		buildTransportIndex = new JCheckBox();
 		buildTransportIndex.setText("Build transport index");
 		panel.add(buildTransportIndex);
-		buildTransportIndex.setSelected(true);
+		buildTransportIndex.setSelected(false);
 
 		loadingAllData = new JCheckBox();
 		loadingAllData.setText("Loading all osm data");
