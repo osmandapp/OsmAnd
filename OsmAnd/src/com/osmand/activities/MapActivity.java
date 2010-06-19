@@ -194,7 +194,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 				float fx = mapView.calcDiffTileX(dx, dy);
 				double latitude = MapUtils.getLatitudeFromTile(mapView.getZoom(), mapView.getYTile() + fy);
 				double longitude = MapUtils.getLongitudeFromTile(mapView.getZoom(), mapView.getXTile() + fx);
-				contextMenuPoint(latitude, longitude);
+				contextMenuPoint(latitude, longitude, false);
 				return true;
 			}
 			
@@ -508,7 +508,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			startActivity(settings);
     		return true;
 		} else if (item.getItemId() == R.id.map_mark_point) {
-			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
+			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude(), true);
 			return true;
 		} else if (item.getItemId() == R.id.map_reload_tile) {
 			reloadTile(mapView.getZoom(), mapView.getLatitude(), mapView.getLongitude());
@@ -542,16 +542,27 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		builder.create().show();
     }
     
-    protected void contextMenuPoint(final double latitude, final double longitude){
+    protected void contextMenuPoint(final double latitude, final double longitude, boolean menu){
     	Builder builder = new AlertDialog.Builder(this);
     	Resources resources = this.getResources();
-    	builder.setItems(new String[]{
+    	String[] res;
+    	if(menu){
+    		res = new String[]{
     			resources.getString(R.string.context_menu_item_navigate_point),
     			resources.getString(R.string.context_menu_item_add_favorite),
-    			resources.getString(R.string.context_menu_item_update_map),
     			resources.getString(R.string.context_menu_item_open_bug),
-    			resources.getString(R.string.context_menu_item_create_poi)
-    		}, new DialogInterface.OnClickListener(){
+    			resources.getString(R.string.context_menu_item_create_poi),
+    		};
+    	} else {
+    		res = new String[]{
+        			resources.getString(R.string.context_menu_item_navigate_point),
+        			resources.getString(R.string.context_menu_item_add_favorite),
+        			resources.getString(R.string.context_menu_item_open_bug),
+        			resources.getString(R.string.context_menu_item_create_poi),
+        			resources.getString(R.string.context_menu_item_update_map),
+        	};
+    	}
+    	builder.setItems(res, new DialogInterface.OnClickListener(){
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -560,12 +571,12 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 				} else if(which == 1){
 					addFavouritePoint(latitude, longitude);
 				} else if(which == 2){
-					reloadTile(mapView.getZoom(), latitude, longitude);
-				} else if(which == 3){
 					osmBugsLayer.openBug(MapActivity.this, getLayoutInflater(), mapView, latitude, longitude);
-				} else if(which == 4){
+				} else if(which == 3){
 					EditingPOIActivity activity = new EditingPOIActivity(MapActivity.this);
 					activity.showCreateDialog(latitude, longitude);
+				} else if(which == 4){
+					reloadTile(mapView.getZoom(), latitude, longitude);
 				}
 			}
     	});

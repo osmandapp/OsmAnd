@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="use_online_routing_descr">Использовать интернет для расчета маршрута</string>
+    <string name="use_online_routing">Online маршрутизация</string>
 	<string name="user_password_descr">Указать пароль для работы с OSM</string>
     <string name="user_password">Пароль</string>
     <string name="osm_settings_descr">Упраление слоем open street bugs, установка osm логина </string>
@@ -75,7 +77,7 @@
 <color name="color_red">#FF0000</color>
 <string name="searchpoi_activity">Выберите poi</string>
 <string name="search_POI_level_btn">Найти еще</string>
-<string name="incremental_search_city">Выберите город. Чтобы найти дереавню введите как минимум 3 первых буквы.</string>
+<string name="incremental_search_city">Выберите город. Введите 3 первых буквы, чтобы найти деревню, 2 цифры - индекс.</string>
 <string name="incremental_search_street">Выберите улицу</string>
 <string name="incremental_search_building">Выберите здание</string>
 <string name="choose_available_region">Выберите регион</string>

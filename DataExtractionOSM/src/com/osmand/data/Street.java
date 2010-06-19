@@ -63,7 +63,7 @@ public class Street extends MapObject {
 	}
 	
 	public boolean isRegisteredInCity(){
-		return city.getStreet(getName()) == this;
+		return city != null && city.getStreet(getName()) == this;
 	}
 	
 	@Override
@@ -71,7 +71,7 @@ public class Street extends MapObject {
 		if (name.equals(getName())) {
 			return;
 		}
-		if (city.getStreet(getName()) == this) {
+		if (city != null && city.getStreet(getName()) == this) {
 			city.unregisterStreet(getName());
 			super.setName(name);
 			Street s = city.registerStreet(this);
@@ -92,8 +92,8 @@ public class Street extends MapObject {
 	public City getCity() {
 		return city;
 	}
-
-	public void doDataPreparation() {
+	
+	public void sortBuildings(){
 		Collections.sort(buildings, new Comparator<Building>(){
 			@Override
 			public int compare(Building o1, Building o2) {
@@ -102,6 +102,10 @@ public class Street extends MapObject {
 				return i1 - i2;
 			}
 		});
+	}
+
+	public void doDataPreparation() {
+		sortBuildings();
 		calculateCenter();
 		if(location == null){
 			List<LatLon> nodes = new ArrayList<LatLon>();

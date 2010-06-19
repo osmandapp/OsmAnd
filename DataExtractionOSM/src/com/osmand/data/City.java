@@ -3,9 +3,7 @@ package com.osmand.data;
 import java.text.Collator;
 import java.util.Collection;
 import java.util.Map;
-import java.util.SortedSet;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 import com.osmand.Algoritms;
 import com.osmand.osm.Entity;
@@ -48,7 +46,6 @@ public class City extends MapObject {
 	private CityType type = null;
 	// Be attentive ! Working with street names ignoring case
 	private Map<String, Street> streets = new TreeMap<String, Street>(Collator.getInstance()); 
-	private SortedSet<String> postcodes = new TreeSet<String>();
 	
 	public City(Node el){
 		super(el);
@@ -99,15 +96,11 @@ public class City extends MapObject {
 		return registerStreet(street, false);
 	}
 	
-	public Street registerBuilding(Entity e){
+	public Building registerBuilding(Entity e){
 		String number = e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER);
 		String street = e.getTag(OSMTagKey.ADDR_STREET);
 		if( street != null && number != null){
-			Building building = registerStreet(street).registerBuilding(e);
-			if (building.getPostcode() != null) {
-				postcodes.add(building.getPostcode());
-			}
-			return streets.get(street.toLowerCase());
+			return registerStreet(street).registerBuilding(e);
 		}
 		return null;
 	}

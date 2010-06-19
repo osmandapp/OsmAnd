@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.SortedSet;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
@@ -21,7 +21,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.osmand.data.Building;
 import com.osmand.data.City;
-import com.osmand.data.PostcodeBasedStreet;
+import com.osmand.data.MapObject;
+import com.osmand.data.PostCode;
 import com.osmand.data.Region;
 import com.osmand.data.Street;
 import com.osmand.data.City.CityType;
@@ -41,7 +42,7 @@ public class RegionAddressRepository {
 	private LinkedHashMap<Long, City> cities = new LinkedHashMap<Long, City>();
 	
 	private Map<CityType, List<City>> cityTypes = new HashMap<CityType, List<City>>();
-	private SortedSet<String> postCodes = new TreeSet<String>(Collator.getInstance());
+	private Map<String, PostCode> postCodes = new TreeMap<String, PostCode>(Collator.getInstance());
 	
 	private boolean useEnglishNames = false;
 	
@@ -86,6 +87,14 @@ public class RegionAddressRepository {
 		return !cities.isEmpty();
 	}
 	
+	public PostCode getPostcode(String name){
+		if(name == null){
+			return null;
+		}
+		preloadPostcodes();
+		return postCodes.get(name.toUpperCase());
+	}
+	
 	public City getCityById(Long id){
 		if(id == -1){
 			// do not preload cities for that case
@@ -95,18 +104,14 @@ public class RegionAddressRepository {
 		return cities.get(id); 
 	}
 	
-	public Street getStreetByName(City city, String name){
-		if(city.isEmptyWithStreets()){
-			preloadStreets(city);
+	
+	public Street getStreetByName(MapObject city, String name) {
+		preloadStreets(city);
+		if (city instanceof City) {
+			return ((City) city).getStreet(name);
+		} else {
+			return ((PostCode) city).getStreet(name);
 		}
-		if (postCodes.isEmpty()) {
-			preloadPostcodes();
-		}
-		Street street = city.getStreet(name);
-		if (street == null) {
-			street = postCodes.contains(name.toUpperCase()) ? new PostcodeBasedStreet(city, name) : null;
-		}
-		return street;
 	}
 	
 	public Building getBuildingByName(Street street, String name){
@@ -148,15 +153,22 @@ public class RegionAddressRepository {
 		}
 	}
 	
-	public void fillWithSuggestedBuildings(Street street, String name, List<Building> buildingsToFill){
+	public void fillWithSuggestedBuildings(PostCode postcode, Street street, String name, List<Building> buildingsToFill){
 		preloadBuildings(street);
 		name = name.toLowerCase();
 		int ind = 0;
-		if(name.length() == 0){
+		boolean empty = name.length() == 0;
+		if(empty && postcode == null){
 			buildingsToFill.addAll(street.getBuildings());
 			return;
 		}
 		for (Building building : street.getBuildings()) {
+			if(postcode != null && !postcode.getName().equals(building.getPostcode())){
+				continue;
+			} else if(empty){
+				buildingsToFill.add(building);
+				continue;
+			}
 			String bName = useEnglishNames ? building.getEnName() : building.getName();
 			String lowerCase = bName.toLowerCase();
 			if (lowerCase.startsWith(name)) {
@@ -193,30 +205,21 @@ public class RegionAddressRepository {
 	}
 	
 	
-	public void fillWithSuggestedStreets(City c, String name, List<Street> streetsToFill){
-		preloadStreets(c);
-		preloadPostcodes();
+	public void fillWithSuggestedStreets(MapObject o, String name, List<Street> streetsToFill){
+		assert o instanceof PostCode || o instanceof City;
+		City city = (City) (o instanceof City ? o : null); 
+		PostCode post = (PostCode) (o instanceof PostCode ? o : null);
+		preloadStreets(o);
 		name = name.toLowerCase();
 		
+		Collection<Street> streets = post == null ? city.getStreets() : post.getStreets() ; 
 		int ind = 0;
 		if(name.length() == 0){
-			streetsToFill.addAll(c.getStreets());
+			streetsToFill.addAll(streets);
 			return;
-		} else if (name.length() >= 2 &&
-				   Character.isDigit(name.charAt(0)) &&
-				   Character.isDigit(name.charAt(1))) {
-			// also try to identify postcodes
-			for (String code : postCodes) {
-				code = code.toLowerCase();
-				if (code.startsWith(name)) {
-					streetsToFill.add(ind++,new PostcodeBasedStreet(c, code));
-				} else {
-					streetsToFill.add(new PostcodeBasedStreet(c, code));
-				}
-			}
 		}
 		ind = 0;
-		for (Street s : c.getStreets()) {
+		for (Street s : streets) {
 			String sName = useEnglishNames ? s.getEnName() : s.getName();
 			String lowerCase = sName.toLowerCase();
 			if (lowerCase.startsWith(name)) {
@@ -228,7 +231,7 @@ public class RegionAddressRepository {
 		}
 	}
 	
-	public void fillWithSuggestedCities(String name, List<City> citiesToFill){
+	public void fillWithSuggestedCities(String name, List<MapObject> citiesToFill){
 		preloadCities();
 		// essentially index is created that cities towns are first in cities map
 		int ind = 0;
@@ -236,18 +239,13 @@ public class RegionAddressRepository {
 				   Character.isDigit(name.charAt(0)) &&
 				   Character.isDigit(name.charAt(1))) {
 			preloadPostcodes();
-			name = name.toLowerCase();
 			// also try to identify postcodes
-			for (String code : postCodes) {
-				String lcode = code.toLowerCase();
-				// TODO postcode
-				City c = new City(CityType.CITY);
-				c.setName(code);
-				c.setEnName(code);
-				if (lcode.startsWith(name)) {
-					citiesToFill.add(ind++,c);
-				} else if(lcode.contains(name)){
-					citiesToFill.add(c);
+			String uName = name.toUpperCase();
+			for (String code : postCodes.keySet()) {
+				if (code.startsWith(uName)) {
+					citiesToFill.add(ind++, postCodes.get(code));
+				} else if(code.contains(uName)){
+					citiesToFill.add(postCodes.get(code));
 				}
 			}
 			
@@ -346,7 +344,7 @@ public class RegionAddressRepository {
 				do {
 					String postcode = query.getString(0);
 					if (postcode != null) {
-						postCodes.add(postcode);
+						postCodes.put(postcode, new PostCode(postcode));
 					}
 				} while (query.moveToNext());
 			}
@@ -357,15 +355,8 @@ public class RegionAddressRepository {
 	
 	public void preloadBuildings(Street street){
 		if (street.getBuildings().isEmpty()) {
-			Cursor query = null;
-			if (street instanceof PostcodeBasedStreet) {
-				// this is postcode
-				query = db.query(IndexBuildingTable.getTable(), IndexConstants.generateColumnNames(IndexBuildingTable.values()), "? = postcode", //$NON-NLS-1$
-						new String[] { street.getName().toUpperCase()}, null, null, null);
-			} else {
-				query = db.query(IndexBuildingTable.getTable(), IndexConstants.generateColumnNames(IndexBuildingTable.values()), "? = street", //$NON-NLS-1$
+			Cursor query = db.query(IndexBuildingTable.getTable(), IndexConstants.generateColumnNames(IndexBuildingTable.values()), "? = street", //$NON-NLS-1$
 						new String[] { street.getId() + "" }, null, null, null); //$NON-NLS-1$
-			}
 			log.debug("Start loading buildings for "  + street.getName()); //$NON-NLS-1$
 			if (query.moveToFirst()) {
 				do {
@@ -375,16 +366,21 @@ public class RegionAddressRepository {
 							.ordinal()));
 					building.setName(query.getString(IndexBuildingTable.NAME.ordinal()));
 					building.setEnName(query.getString(IndexBuildingTable.NAME_EN.ordinal()));
+					building.setPostcode(query.getString(IndexBuildingTable.POSTCODE.ordinal()));
 					street.registerBuilding(building);
 				} while (query.moveToNext());
+				street.sortBuildings();
 			}
 			query.close();
 			log.debug("Loaded " + street.getBuildings().size() + " buildings"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 	
-	public void preloadStreets(City city){
-		if (city.isEmptyWithStreets()) {
+	public void preloadStreets(MapObject o){
+		assert o instanceof PostCode || o instanceof City;
+		City city = (City) (o instanceof City ? o : null); 
+		PostCode post = (PostCode) (o instanceof PostCode ? o : null);
+		if (city != null && city.isEmptyWithStreets()) {
 			log.debug("Start loading streets for "  + city.getName()); //$NON-NLS-1$
 			Cursor query = db.query(IndexStreetTable.getTable(), IndexConstants.generateColumnNames(IndexStreetTable.values()), "? = city", //$NON-NLS-1$
 					new String[] { city.getId() + "" }, null, null, null); //$NON-NLS-1$
@@ -401,6 +397,33 @@ public class RegionAddressRepository {
 			}
 			query.close();
 			log.debug("Loaded " + city.getStreets().size() + " streets"); //$NON-NLS-1$ //$NON-NLS-2$
+		} else if(post != null && post.isEmptyWithStreets()){
+			log.debug("Start loading streets for "  + post.getName()); //$NON-NLS-1$
+			Cursor query = db.rawQuery("SELECT B.CITY, B.ID,B.LATITUDE, B.LONGITUDE, B.NAME, B.NAME_EN FROM building A JOIN street B ON A.street = B.ID WHERE A.postcode = ?",  //$NON-NLS-1$
+					new String[] { post.getName() + "" }); //$NON-NLS-1$
+			if (query.moveToFirst()) {
+				do {
+					city = getCityById(query.getLong(0));
+					Street street = null;
+					if(city != null){
+						preloadStreets(city);
+						street = city.getStreet(useEnglishNames ? query.getString(5) : query.getString(4));
+					} 
+					if(street == null){
+						street = new Street(city);
+						street.setId(query.getLong(1));
+						street.setLocation(query.getDouble(2), query.getDouble(3));
+						street.setName(query.getString(4));
+						street.setEnName(query.getString(5));
+						if(city != null){
+							city.registerStreet(street, useEnglishNames);
+						}
+					}
+					post.registerStreet(street, useEnglishNames);
+				} while (query.moveToNext());
+			}
+			query.close();
+			log.debug("Loaded " +post.getStreets().size() + " streets"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 	

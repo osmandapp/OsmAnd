@@ -115,24 +115,39 @@ public class DataExtraction  {
 
 	
 	protected class DataExtractionOsmFilter implements IOsmStorageFilter {
-		final ArrayList<Node> places;
-		final ArrayList<Entity> buildings;
-		final ArrayList<Entity> amenities;
-		final ArrayList<Way> ways;
-		final ArrayList<Relation> transport;
+		ArrayList<Node> places = new ArrayList<Node>();
+		ArrayList<Entity> buildings = new ArrayList<Entity>();
+		ArrayList<Entity> amenities = new ArrayList<Entity>();
+		ArrayList<Way> ways = new ArrayList<Way>();
+		ArrayList<Relation> transport = new ArrayList<Relation>();
+		Map<Long, String> postalCodes = new LinkedHashMap<Long, String>();
 
 		int currentCount = 0;
 		private Connection conn;
 		private PreparedStatement prep;
 		
 
-		public DataExtractionOsmFilter(ArrayList<Entity> amenities, ArrayList<Entity> buildings, ArrayList<Node> places,
-				ArrayList<Way> ways, ArrayList<Relation> transport) {
-			this.amenities = amenities;
-			this.buildings = buildings;
-			this.places = places;
-			this.ways = ways;
-			this.transport = transport;
+		public DataExtractionOsmFilter() {
+		}
+		
+		public ArrayList<Node> getPlaces() {
+			return places;
+		}
+		public ArrayList<Entity> getBuildings() {
+			return buildings;
+		}
+		public ArrayList<Entity> getAmenities() {
+			return amenities;
+		}
+		public ArrayList<Way> getWays() {
+			return ways;
+		}
+		public ArrayList<Relation> getTransport() {
+			return transport;
+		}
+		
+		public Map<Long, String> getPostalCodes() {
+			return postalCodes;
 		}
 
 		public void initDatabase() throws SQLException {
@@ -232,6 +247,15 @@ public class DataExtraction  {
 					ways.add((Way) e);
 					processed = true;
 				}
+				if(e instanceof Relation){
+					if(e.getTag(OSMTagKey.POSTAL_CODE) != null){
+						String tag = e.getTag(OSMTagKey.POSTAL_CODE);
+						for(Long l : ((Relation)e).getMemberIds()){
+							postalCodes.put(l, tag);
+						}
+					}
+					// do not need to mark processed
+				}
 			}
 			if(indexTransport){
 				if(e instanceof Relation && e.getTag(OSMTagKey.ROUTE) != null){
@@ -314,12 +338,7 @@ public class DataExtraction  {
 
 	
 	public Region readCountry(String path, IProgress progress, IOsmStorageFilter addFilter) throws IOException, SAXException, SQLException{
-		// data to load & index
-		final ArrayList<Node> places = new ArrayList<Node>();
-		final ArrayList<Entity> buildings = new ArrayList<Entity>();
-		final ArrayList<Entity> amenities = new ArrayList<Entity>();
-		final ArrayList<Way> ways = new ArrayList<Way>();
-		final ArrayList<Relation> transport = new ArrayList<Relation>();
+
 		
 		File f = new File(path);
 		InputStream stream = new FileInputStream(f);
@@ -342,7 +361,14 @@ public class DataExtraction  {
 			storage.getFilters().add(addFilter);
 		}
 
-        DataExtractionOsmFilter filter = new DataExtractionOsmFilter(amenities, buildings, places, ways, transport);
+        DataExtractionOsmFilter filter = new DataExtractionOsmFilter();
+		// data to load & index
+		final ArrayList<Node> places = filter.getPlaces();
+		final ArrayList<Entity> buildings = filter.getBuildings();
+		final ArrayList<Entity> amenities = filter.getAmenities();
+		final ArrayList<Way> ways = filter.getWays();
+		final ArrayList<Relation> transport = filter.getTransport();
+		Map<Long, String> postalCodes = filter.getPostalCodes();
         storage.getFilters().add(filter);
         // 0. Loading osm file
 		try {
@@ -393,7 +419,7 @@ public class DataExtraction  {
 
 			// 5. reading buildings
 			progress.setGeneralProgress("[95 of 100]");
-			readingBuildings(progress, buildings, country);
+			readingBuildings(progress, buildings, country, postalCodes);
 		}
         
         progress.setGeneralProgress("[100 of 100]");
@@ -451,7 +477,7 @@ public class DataExtraction  {
 	}
 
 
-	private void readingBuildings(IProgress progress, final ArrayList<Entity> buildings, Region country) {
+	private void readingBuildings(IProgress progress, final ArrayList<Entity> buildings, Region country, Map<Long, String> postalCodes) {
 		// found buildings (index addresses)
         progress.startTask("Indexing buildings...", buildings.size());
         for(Entity b : buildings){
@@ -470,7 +496,10 @@ public class DataExtraction  {
 					city = country.getClosestCity(center);
 				}
 				if (city != null) {
-					city.registerBuilding(b);
+					Building building = city.registerBuilding(b);
+					if(postalCodes.containsKey(building.getId()) ){
+						building.setPostcode(postalCodes.get(building.getId()));
+					}
 				}
 			}
         }
@@ -664,12 +693,6 @@ public class DataExtraction  {
 	
 	// Performance testing methods
 	public static void main(String[] args) throws IOException, SAXException, SQLException, ParserConfigurationException {
-		ArrayList<Entity> amenities = new ArrayList<Entity>();
-		ArrayList<Entity> buildings = new ArrayList<Entity>();
-		ArrayList<Node> places = new ArrayList<Node>();
-		ArrayList<Relation> transport = new ArrayList<Relation>();
-		ArrayList<Way> ways = new ArrayList<Way>();
-		
 		long time = System.currentTimeMillis();
 		OsmBaseStorage storage = new OsmBaseStorage();
 		String path = "E:\\Information\\OSM maps\\belarus_2010_06_02.osm";
@@ -704,7 +727,7 @@ public class DataExtraction  {
 		});
 		DataExtraction e = new DataExtraction(true, true, true, true, false, true, new File(wDir));
 		
-		DataExtractionOsmFilter filter = e.new DataExtractionOsmFilter(amenities, buildings, places, ways, transport); 
+		DataExtractionOsmFilter filter = e.new DataExtractionOsmFilter(); 
 		filter.initDatabase();
 		storage.getFilters().add(filter);
 		
@@ -715,7 +738,7 @@ public class DataExtraction  {
 		storage.parseOSM(stream, new ConsoleProgressImplementation(), streamFile, true);
 		System.out.println("Total mem: " + Runtime.getRuntime().totalMemory() + " free : " + Runtime.getRuntime().freeMemory());
 		System.out.println("All time " + (System.currentTimeMillis() - time) + " ms"); //
-		System.out.println(amenities.size() + " " + buildings.size() + " " + places.size() + " " + ways.size());
+//		System.out.println(amenities.size() + " " + buildings.size() + " " + places.size() + " " + ways.size());
 	}
 	
 }
