@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.osmand.OsmandSettings;
 import com.osmand.PoiFilter;
+import com.osmand.R;
 import com.osmand.ResourceManager;
 import com.osmand.activities.EditingPOIActivity;
 import com.osmand.data.Amenity;
@@ -42,7 +43,10 @@ public class POIMapLayer implements OsmandMapLayer {
 			Context ctx = view.getContext();
 			Builder builder = new AlertDialog.Builder(ctx);
 			final EditingPOIActivity edit = new EditingPOIActivity(ctx, view);
-			builder.setItems(new String[]{"Modify", "Delete"}, new DialogInterface.OnClickListener(){
+			builder.setItems(new String[]{
+					this.view.getResources().getString(R.string.poi_context_menu_modify),
+					this.view.getResources().getString(R.string.poi_context_menu_delete)
+					}, new DialogInterface.OnClickListener(){
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
