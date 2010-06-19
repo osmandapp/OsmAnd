@@ -198,14 +198,14 @@ public class SearchAddressActivity extends Activity {
 	
 	protected void updateBuildingSection(){
 		if(radioBuilding){
-			((TextView)findViewById(R.id.BuildingText)).setText("Building");
+			((TextView)findViewById(R.id.BuildingText)).setText(R.string.search_address_building);
 			if(building == null){
 				((TextView)findViewById(R.id.BuildingButton)).setText(R.string.choose_building);
 			} else {
 				((TextView)findViewById(R.id.BuildingButton)).setText(building.getName(region.useEnglishNames()));
 			}
 		} else {
-			((TextView)findViewById(R.id.BuildingText)).setText("Street 2");
+			((TextView)findViewById(R.id.BuildingText)).setText(R.string.search_address_street);
 			if(street2 == null){
 				((TextView)findViewById(R.id.BuildingButton)).setText(R.string.choose_intersected_street);
 			} else {

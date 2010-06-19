@@ -110,7 +110,14 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		userName.setText(OsmandSettings.getUserName(this));
 		userPassword.setText(OsmandSettings.getUserPassword(this));
 		
-		saveTrackInterval.setEntries(new String[]{"1 second", "2 seconds", "5 seconds", "15 seconds", "30 seconds", "1 minute", "5 minute"});
+		saveTrackInterval.setEntries(new String[]{
+				resources.getString(R.string.interval_1_second),
+				resources.getString(R.string.interval_2_seconds),
+				resources.getString(R.string.interval_5_seconds),
+				resources.getString(R.string.interval_15_seconds),
+				resources.getString(R.string.interval_30_seconds),
+				resources.getString(R.string.interval_1_minute),
+				resources.getString(R.string.interval_5_minutes)});				
 		saveTrackInterval.setEntryValues(new String[]{"1", "2", "5", "15", "30", "60", "300"});
 		saveTrackInterval.setValue(OsmandSettings.getSavingTrackInterval(this)+"");
 		

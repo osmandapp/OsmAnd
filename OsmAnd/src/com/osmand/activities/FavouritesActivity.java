@@ -3,6 +3,7 @@
  */
 package com.osmand.activities;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -67,10 +69,10 @@ public class FavouritesActivity extends ListActivity {
 
 			@Override
 			public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-				menu.setHeaderTitle("Context menu");
-				menu.add(0, NAVIGATE_TO, 0, "Navigate to");
-				menu.add(0, EDIT_ITEM, 1, "Edit favourite");
-				menu.add(0, DELETE_ITEM, 2, "Delete favourite");
+				menu.setHeaderTitle(R.string.favourites_context_menu_title);
+				menu.add(0, NAVIGATE_TO, 0, R.string.favourites_context_menu_navigate);
+				menu.add(0, EDIT_ITEM, 1, R.string.favourites_context_menu_edit);
+				menu.add(0, DELETE_ITEM, 2, R.string.favourites_context_menu_delete);
 			}
         	
         });
@@ -94,12 +96,12 @@ public class FavouritesActivity extends ListActivity {
 			startActivity(newIntent);
 		} else if(aItem.getItemId() == EDIT_ITEM){
 			Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle("Input new name of favourite point");
+			builder.setTitle(R.string.favourites_edit_dialog_title);
 			final EditText editText = new EditText(this);
 			builder.setView(editText);
 			editText.setText(point.getName());
-			builder.setNegativeButton("Cancel", null);
-			builder.setPositiveButton("Apply", new DialogInterface.OnClickListener() {
+			builder.setNegativeButton(R.string.default_buttons_cancel, null);
+			builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					boolean editied = helper.editFavouriteName(point, editText.getText().toString());
@@ -112,15 +114,16 @@ public class FavouritesActivity extends ListActivity {
 			builder.create().show();
 			return true;
 		} if(aItem.getItemId() == DELETE_ITEM){
+			final Resources resources = this.getResources();
 			Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage("Are you sure about deleting favourite point?");
-			builder.setNegativeButton("No", null);
-			builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+			builder.setMessage(R.string.favourites_remove_dialog_title);
+			builder.setNegativeButton(R.string.default_buttons_no, null);
+			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					boolean deleted = helper.deleteFavourite(point);
 					if (deleted) {
-						Toast.makeText(FavouritesActivity.this, "Favourite point " + point.getName() + " was succesfully deleted.",
+						Toast.makeText(FavouritesActivity.this, MessageFormat.format(resources.getString(R.string.favourites_remove_dialog_success), point.getName()),
 								Toast.LENGTH_SHORT).show();
 						favouritesList.remove(point);
 						favouritesAdapter.notifyDataSetChanged();

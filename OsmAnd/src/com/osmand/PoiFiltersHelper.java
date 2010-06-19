@@ -50,7 +50,7 @@ public class PoiFiltersHelper {
 		list.add("car");
 		list.add("car_repair");
 		types.put(AmenityType.SHOP, list);
-		filters.add(new PoiFilter("Car aid", null, types));
+		filters.add(new PoiFilter(Messages.getMessage("poi_filter_car_aid"), null, types));
 		types.clear();
 		
 		
@@ -70,13 +70,13 @@ public class PoiFiltersHelper {
 		list.add("waste_basket");
 		list.add("waste_disposal");
 		types.put(AmenityType.OTHER, list);
-		filters.add(new PoiFilter("For tourists", null, types));
+		filters.add(new PoiFilter(Messages.getMessage("poi_filter_for_tourists"), null, types));
 		types.clear();
 		
 		list = new ArrayList<String>();
 		list.add("fuel");
 		types.put(AmenityType.TRANSPORTATION, list);
-		filters.add(new PoiFilter("Fuel", null, types));
+		filters.add(new PoiFilter(Messages.getMessage("poi_filter_fuel"), null, types));
 		types.clear();
 		
 		list = new ArrayList<String>();
@@ -94,7 +94,7 @@ public class PoiFiltersHelper {
 		list.add("supermarket");
 		list.add("variety_store");
 		types.put(AmenityType.SHOP, list);
-		filters.add(new PoiFilter("Food shop", null, types));
+		filters.add(new PoiFilter(Messages.getMessage("poi_filter_food_shop"), null, types));
 		types.clear();
 		
 		return filters;
@@ -106,7 +106,7 @@ public class PoiFiltersHelper {
 			////ctx.deleteDatabase(PoiFilterDbHelper.DATABASE_NAME);
 			
 			cacheUserDefinedFilters = new ArrayList<PoiFilter>();
-			PoiFilter filter = new PoiFilter("Custom filter", PoiFilter.CUSTOM_FILTER_ID, null);
+			PoiFilter filter = new PoiFilter(Messages.getMessage("poi_filter_custom_filter"), PoiFilter.CUSTOM_FILTER_ID, null);
 			cacheUserDefinedFilters.add(filter);
 			PoiFilterDbHelper helper = new PoiFilterDbHelper(ctx);
 			cacheUserDefinedFilters.addAll(helper.getFilters());

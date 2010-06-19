@@ -37,7 +37,7 @@ public class NavigatePointActivity extends Activity {
 	
 	public void showDialog(){
 		dlg.setContentView(R.layout.navigate_point);
-		dlg.setTitle("Navigate to point");
+		dlg.setTitle(R.string.map_specify_point);
 		LatLon loc = activity.getMapLocation();
 		initUI(loc.getLatitude(), loc.getLongitude());
 		dlg.show();
@@ -48,7 +48,7 @@ public class NavigatePointActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		LatLon loc = OsmandSettings.getLastKnownMapLocation(this);
 		setContentView(R.layout.navigate_point);
-		setTitle("Navigate to point");
+		setTitle(R.string.map_specify_point);
 		initUI(loc.getLatitude(), loc.getLongitude());
 		((Button) findViewById(R.id.Cancel)).setText(getString(R.string.navigate_to));
 	}

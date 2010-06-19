@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="user_password_descr">Указать пароль для работы с OSM</string>
+    <string name="user_password">Пароль</string>
     <string name="osm_settings_descr">Упраление слоем open street bugs, установка osm логина </string>
     <string name="monitor_preferences_descr">Включение мониторинга, установка интервала сохранения</string>
     <string name="search_settings_descr">Настройка параметров поиска</string>
     <string name="map_preferences_descr">Настройка источника, параметров карты, доступа в Интернет</string>
     <string name="search_settings">Поиск</string>
     <string name="osm_settings">Osm</string>
-    <string name="auto_zoom_map_descr">Автоматически измемять масштаб карты при изменении скорости</string>
+    <string name="auto_zoom_map_descr">Автоматически изменять масштаб карты при изменении скорости</string>
     <string name="auto_zoom_map">Масштаб</string>
     <string name="additional_settings">Дополнительные настройки</string>
     <string name="settings_preset_descr">Выбор режима работы приложения</string>
@@ -19,12 +21,12 @@
     <string name="monitor_preferences">Мониторинг</string>
     <string name="save_track_to_gpx_descrp">Сохранять путь в gpx формате в папку track</string>
     <string name="save_track_to_gpx">Мониторить</string>
-    <string name="navigate_to">Перейти к</string>
+    <string name="navigate_to">Идти к</string>
     <string name="update_tile">Обновить карту</string>
     <string name="reload_tile">Обновить часть карты</string>
     <string name="user_name_descr">Указать имя пользователя для работы с OSM</string>
     <string name="user_name">Имя пользователя</string>
-    <string name="mark_point">Цель</string>
+    <string name="mark_point">Точка</string>
     <string name="show_osm_bugs_descr">Показывать слой Open Street Bugs</string>
     <string name="show_osm_bugs">Open Street Bugs</string>
     <string name="favourites_activity">Список избранных точек</string>
@@ -36,7 +38,7 @@
     <string name="choose_building">Выберите здание</string>
     <string name="choose_street">Выберите улицу</string>
     <string name="choose_city">Выберите город</string>
-    <string name="ChooseCountry">Выберите страну</string>
+    <string name="ChooseCountry">Выберите регион</string>
     <string name="position_on_map_descr">Установить расположение текущей позиции на карте</string>
     <string name="position_on_map">Текущая позиция</string>
     <string name="map_specify_point">Перейти к точке</string>
@@ -77,7 +79,7 @@
 <string name="incremental_search_street">Search street incrementally</string>
 <string name="incremental_search_building">Search building incrementally</string>
 <string name="choose_available_region">Choose region</string>
-<string name="choose_intersected_street">Choose intersected street</string>
+<string name="choose_intersected_street">Выберите пересечение улиц</string>
 <string name="Closest_Amenities">Closest amenities</string>
 <string name="app_mode_default">По умолчанию</string>
 <string name="app_mode_car">Автомобиль</string>
@@ -85,4 +87,52 @@
 <string name="app_mode_pedestrian">Пешеход</string>
 <string name="position_on_map_center">В центре</string>
 <string name="position_on_map_bottom">Внизу</string>
+<string name="interval_1_second">1 секунда</string>
+<string name="interval_2_seconds">2 секунды</string>
+<string name="interval_5_seconds">5 секунд</string>
+<string name="interval_15_seconds">15 секунд</string>
+<string name="interval_30_seconds">30 секунд</string>
+<string name="interval_1_minute">1 минута</string>
+<string name="interval_5_minutes">5 минут</string>
+<string name="navigate_point_top_text">Введите широту и долготу в выбранном формате (Г - градусы, М - минуты, С - секунды)</string>
+<string name="navigate_point_latitude">Широта</string>
+<string name="navigate_point_longitude">Долгота</string>
+<string name="navigate_point_format_D">ГГГ.ГГГГ</string>
+<string name="navigate_point_format_DM">ГГГ:ММ.МММММ</string>
+<string name="navigate_point_format_DMS">ГГГ:ММ:СС.ССССС</string>
+<string name="search_shown_on_map">Показать</string>
+<string name="navigate_point_cancel">Отмена</string>
+<string name="search_address_top_text">Выберите адрес</string>
+<string name="search_address_region">Регион</string>
+<string name="search_address_city">Город</string>
+<string name="search_address_street">Улица</string>
+<string name="search_address_building">Здание</string>
+<string name="search_address_building_option">Здание</string>
+<string name="search_address_street_option">Пересечение улиц</string>
+<string name="search_tabs_address">Адрес</string>
+<string name="search_tabs_location">Координаты</string>
+<string name="context_menu_item_navigate_point">Идти к точке</string>
+<string name="context_menu_item_add_favorite">Добавить к избранным</string>
+<string name="context_menu_item_update_map">Обновить карту</string>
+<string name="context_menu_item_open_bug">Создать open street bug</string>
+<string name="context_menu_item_create_poi">Добавить poi</string>
+<string name="context_menu_item_update_map_confirm">Вы действительно хотите удалить эту часть карты с диска и загрузить ее из Интернет?</string>
+<string name="default_buttons_yes">Да</string>
+<string name="default_buttons_cancel">Отмена</string>
+<string name="default_buttons_apply">Применить</string><string name="default_buttons_add">Добавить</string><string name="default_buttons_no">Нет</string><string name="add_favorite_dialog_top_text">Введите имя точки</string>
+<string name="add_favorite_dialog_default_favourite_name">Избранная</string>
+<string name="add_favorite_dialog_favourite_added_template">Точка '{0}' была успешно добавлена к Избранным.</string>
+
+<string name="favourites_context_menu_title">Контекстное меню</string>
+<string name="favourites_context_menu_navigate">Показать</string>
+<string name="favourites_context_menu_edit">Редактировать точку</string>
+<string name="favourites_context_menu_delete">Удалить точку</string>
+<string name="favourites_edit_dialog_title">Введите новое имя точки</string>
+
+<string name="favourites_remove_dialog_title">Вы действительно хотите удалить точку из Избранных?</string>
+<string name="favourites_remove_dialog_success">Точка {0} была успешно удалена из Избранных.</string>
+
+<string name="osb_add_dialog_title">Введите текст для Open Street Bug</string>
+<string name="osb_add_dialog_success">Open Streen Bug был успешно создан</string>
+<string name="osb_add_dialog_error">Произошла ошибка. Open Street Bug не был создан.</string>
 </resources>

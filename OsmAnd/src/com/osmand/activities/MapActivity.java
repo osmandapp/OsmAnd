@@ -1,11 +1,16 @@
 package com.osmand.activities;
 
+import java.text.MessageFormat;
+
+import org.apache.http.entity.StringEntity;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.PointF;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -18,6 +23,7 @@ import android.location.LocationProvider;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -526,9 +532,9 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     
     protected void reloadTile(final int zoom, final double latitude, final double longitude){
     	Builder builder = new AlertDialog.Builder(this);
-    	builder.setMessage("Tile image will be removed from file system. Do you want to reload tile from internet?");
-    	builder.setNegativeButton("Cancel", null);
-    	builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+    	builder.setMessage(R.string.context_menu_item_update_map_confirm);
+    	builder.setNegativeButton(R.string.default_buttons_cancel, null);
+    	builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				int x = (int) MapUtils.getTileNumberX(zoom, longitude);
@@ -542,7 +548,14 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     
     protected void contextMenuPoint(final double latitude, final double longitude){
     	Builder builder = new AlertDialog.Builder(this);
-    	builder.setItems(new String[]{"Navigate to point", "Add to favourites", "Update map",  "Open osm bug", "Create POI"}, new DialogInterface.OnClickListener(){
+    	Resources resources = this.getResources();
+    	builder.setItems(new String[]{
+    			resources.getString(R.string.context_menu_item_navigate_point),
+    			resources.getString(R.string.context_menu_item_add_favorite),
+    			resources.getString(R.string.context_menu_item_update_map),
+    			resources.getString(R.string.context_menu_item_open_bug),
+    			resources.getString(R.string.context_menu_item_create_poi)
+    		}, new DialogInterface.OnClickListener(){
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -565,24 +578,25 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     
     
     protected void addFavouritePoint(double latitude, double longitude){
+    	final Resources resources = this.getResources();
     	final FavouritePoint p = new FavouritesActivity.FavouritePoint();
     	p.setLatitude(latitude);
     	p.setLongitude(longitude);
-    	p.setName("Favourite");
+    	p.setName(resources.getString(R.string.add_favorite_dialog_default_favourite_name));
     	
     	Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Input name of favourite point");
+		builder.setTitle(R.string.add_favorite_dialog_top_text);
 		final EditText editText = new EditText(this);
 		builder.setView(editText);
-		builder.setNegativeButton("Cancel", null);
-		builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				FavouritesDbHelper helper = new FavouritesActivity.FavouritesDbHelper(MapActivity.this);
 				p.setName(editText.getText().toString());
 				boolean added = helper.addFavourite(p);
 				if (added) {
-					Toast.makeText(MapActivity.this, "Favourite point " + p.getName() + " was succesfully added.", Toast.LENGTH_SHORT)
+					Toast.makeText(MapActivity.this, MessageFormat.format(resources.getString(R.string.add_favorite_dialog_favourite_added_template), p.getName()), Toast.LENGTH_SHORT)
 							.show();
 				}
 				helper.close();
