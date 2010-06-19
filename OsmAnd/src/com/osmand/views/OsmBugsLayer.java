@@ -340,12 +340,12 @@ public class OsmBugsLayer implements OsmandMapLayer {
 
 	public void openBug(final Context ctx, LayoutInflater layoutInflater, final OsmandMapTileView mapView,  final double latitude, final double longitude){
 		Builder builder = new AlertDialog.Builder(ctx);
-		builder.setTitle("Input text of bug");
+		builder.setTitle(R.string.osb_add_dialog_title);
 		final View view = layoutInflater.inflate(R.layout.open_bug, null);
 		builder.setView(view);
 		((EditText)view.findViewById(R.id.AuthorName)).setText(OsmandSettings.getUserName(ctx));
-		builder.setNegativeButton("Cancel", null);
-		builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				String text = ((EditText)view.findViewById(R.id.BugMessage)).getText().toString();
@@ -354,13 +354,13 @@ public class OsmBugsLayer implements OsmandMapLayer {
 				boolean bug = createNewBug(latitude, longitude, 
 						text, author);
 		    	if (bug) {
-		    		Toast.makeText(ctx, "Bug was successfully created", Toast.LENGTH_LONG).show();
+		    		Toast.makeText(ctx, ctx.getResources().getString(R.string.osb_add_dialog_success), Toast.LENGTH_LONG).show();
 					clearCache();
 					if (mapView.getLayers().contains(OsmBugsLayer.this)) {
 						mapView.refreshMap();
 					}
 				} else {
-					Toast.makeText(ctx, "Exception occured : bug was not created", Toast.LENGTH_LONG).show();
+					Toast.makeText(ctx, ctx.getResources().getString(R.string.osb_add_dialog_error), Toast.LENGTH_LONG).show();
 				}
 			}
 		});

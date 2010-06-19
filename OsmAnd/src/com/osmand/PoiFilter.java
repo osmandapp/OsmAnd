@@ -33,7 +33,7 @@ public class PoiFilter {
 	public PoiFilter(AmenityType type){
 		isStandardFilter = true;
 		filterId = STD_PREFIX + type;
-		name = type == null ? "Closest poi" : Algoritms.capitalizeFirstLetterAndLowercase(type.name()).replace('_', ' ');
+		name = type == null ? Messages.getMessage("poi_filter_closest_poi") : AmenityType.toPublicString(type);
 		if(type == null){
 			initSearchAll();
 		} else {

@@ -5,13 +5,13 @@
   android:layout_height="fill_parent" android:orientation="vertical">
   
    
-<TextView android:text="Select city or street or building" android:id="@+id/TextView" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center_horizontal"
-		  android:layout_marginTop = "5dp">
+<TextView android:id="@+id/TextView" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center_horizontal"
+		  android:layout_marginTop = "5dp" android:text="@string/search_address_top_text">
 </TextView>
 <ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content">
 <TableLayout android:id="@+id/TableLayout" android:stretchColumns="1" android:layout_width="fill_parent" android:layout_height="wrap_content">
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp">
-<TextView android:text="Region" android:id="@+id/TextView">
+<TextView android:id="@+id/TextView" android:text="@string/search_address_region">
 </TextView>
 <Button android:id="@+id/CountryButton" android:text="@string/ChooseCountry">
 </Button>
@@ -19,7 +19,7 @@
 </ImageButton>
 </TableRow>
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp" >
-<TextView android:text="City" android:id="@+id/TextView">
+<TextView android:id="@+id/TextView" android:text="@string/search_address_city">
 </TextView>
 <Button android:id="@+id/CityButton" android:text="@string/choose_city">
 </Button>
@@ -27,7 +27,7 @@
 </ImageButton>
 </TableRow>
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp">
-<TextView android:text="Street" android:id="@+id/TextView">
+<TextView android:id="@+id/TextView" android:text="@string/search_address_street">
 </TextView>
 <Button android:id="@+id/StreetButton" android:text="@string/choose_street">
 </Button>
@@ -35,7 +35,7 @@
 </ImageButton>
 </TableRow>
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp">
-<TextView android:text="Bulding" android:id="@+id/BuildingText">
+<TextView android:id="@+id/BuildingText" android:text="@string/search_address_building">
 </TextView>
 <Button android:id="@+id/BuildingButton" android:text="@string/choose_building">
 </Button>
@@ -44,17 +44,17 @@
 </TableRow>
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp" >
 <RadioGroup android:orientation="horizontal" android:layout_span="3" android:id="@+id/RadioGroup" >
-<RadioButton android:text="Building" android:id="@+id/RadioBuilding" android:layout_width="wrap_content" android:layout_height="wrap_content"></RadioButton>
-<RadioButton android:text="Intersected street" android:id="@+id/RadioIntersStreet" android:layout_width="wrap_content" android:layout_marginLeft = "5dp" android:layout_height="wrap_content"></RadioButton>
+<RadioButton android:id="@+id/RadioBuilding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/search_address_building_option"></RadioButton>
+<RadioButton android:id="@+id/RadioIntersStreet" android:layout_width="wrap_content" android:layout_marginLeft = "5dp" android:layout_height="wrap_content" android:text="@string/search_address_street_option"></RadioButton>
 
 </RadioGroup>
 </TableRow>
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp" >
 <LinearLayout  android:id="@+id/LinearLayout" android:layout_width="wrap_content" android:layout_height="wrap_content"  
 				android:layout_span="3"	android:gravity="right|bottom" android:layout_marginRight = "5dp" android:layout_marginTop = "10dp">
-<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/NavigateTo" android:text="@string/navigate_to">
+<Button android:layout_height="wrap_content" android:id="@+id/NavigateTo" android:text="@string/navigate_to" android:layout_width="100dip">
 </Button>
-<Button android:text="Show on map" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ShowOnMap">
+<Button android:layout_height="wrap_content" android:id="@+id/ShowOnMap" android:text="@string/search_shown_on_map" android:layout_width="100dip">
 </Button>
 
 </LinearLayout>
