@@ -49,6 +49,7 @@ public class ToDoConstants {
 	
 	
 	// FUTURE RELEASES
+	//   49. Calculate route from specified point (not from your location only)
 	//   48. Enable change favourite point (for example fav - "car") means last point you left car. It is not static point.
     //   43. Enable poi filter by name (?)
 	//   44. Show gps status (possibly open existing gps-compass app (free) or suggest to install it - no sense to write own activity)
@@ -70,21 +71,16 @@ public class ToDoConstants {
 	
 	
 	// TODO swing
-	// 4. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !
-	// Current result : for big file (1 - task  60-80% time, 90% memory)
 	// 1. Download tiles without using dir tiles (?)
-	// 5. Improve address indexing (use relations). 
-    //	  Use relation "postal_code" to assign postcodes, use relation "a6" (to accumulate streets!), 
-	//	  "a3" to read all cities & define boundaries for city (& define that street in city). 
+	// 9. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !
+	// Current result : for big file (1 - task  60-80% time, 90% memory)
+	// 10. Improve address indexing (use relations). 
+    //	  use relation "a6" (to accumulate streets!),  "a3" to read all cities & define boundaries for city (& define that street in city). 
 	
 	// BUGS Swing
 	
 	// DONE ANDROID :
-    //  36. Postcode search
-    //   8. Enable change POI directly on map (requires OSM login)
-    //  45. Autozoom feature (for car navigation)
-    //  44. Introduce settings presets (car/bicycle/pedestrian/default) - show different icons for car (bigger), possibly change fonts, position
-    //  20. Implement save track/route to gpx
+
 	
 	// DONE SWING
 
