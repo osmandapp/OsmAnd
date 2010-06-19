@@ -53,7 +53,6 @@ public class MainMenuActivity extends Activity {
 	
 	public void startApplication(){
 		if(!applicationAlreadyStarted){
-			// TODO exception!!! has leaked window ?
 			final ProgressDialog dlg = ProgressDialog.show(this, "Loading data", "Reading indices...", true);
 			final ProgressDialogImplementation impl = new ProgressDialogImplementation(dlg);
 			impl.setRunnable("Initializing app", new Runnable(){
@@ -63,6 +62,12 @@ public class MainMenuActivity extends Activity {
 						List<String> warnings = new ArrayList<String>();
 						warnings.addAll(ResourceManager.getResourceManager().indexingPoi(impl));
 						warnings.addAll(ResourceManager.getResourceManager().indexingAddresses(impl));
+						SavingTrackHelper helper = new SavingTrackHelper(MainMenuActivity.this);
+						if (helper.hasDataToSave()) {
+							impl.startTask("Saving gpx tracks to SD...", -1);
+							helper.saveDataToGpx();
+						}
+						helper.close();
 						showWarnings(warnings);
 					} finally {
 						dlg.dismiss();
@@ -90,9 +95,6 @@ public class MainMenuActivity extends Activity {
 					getPreferences(MODE_WORLD_READABLE).edit().putLong(EXCEPTION_FILE_SIZE, 0).commit();
 				}
 			}
-			SavingTrackHelper helper = new SavingTrackHelper(this);
-			helper.saveDataToGpx();
-			helper.close();
 		}
 	}
 	

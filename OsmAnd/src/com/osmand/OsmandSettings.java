@@ -47,6 +47,14 @@ public class OsmandSettings {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		return prefs.getBoolean(USE_INTERNET_TO_DOWNLOAD_TILES, true);
 	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String USE_INTERNET_TO_CALCULATE_ROUTE = "use_internet_to_calculate_route";
+
+	public static boolean isUsingInternetToCalculateRoute(Context ctx) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(USE_INTERNET_TO_CALCULATE_ROUTE, false);
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SHOW_POI_OVER_MAP = "show_poi_over_map";

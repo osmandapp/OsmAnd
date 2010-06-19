@@ -87,7 +87,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 	}
 
 	public boolean distChanged(int oldDist, int dist){
-		if(oldDist != 0 && Math.abs(((float) dist - oldDist)/oldDist) < 0.01){
+		if(oldDist != 0 && ((oldDist - dist > 100) || (Math.abs(((float) dist - oldDist)/oldDist) < 0.01))){
 			return false;
 		}
 		return true;
@@ -96,10 +96,17 @@ public class MapInfoLayer implements OsmandMapLayer {
 	@Override
 	public void onDraw(Canvas canvas) {
 		if(map.getPointToNavigate() != null){
-			Location.distanceBetween(view.getLatitude(), view.getLongitude(), map.getPointToNavigate().getLatitude(),
-					map.getPointToNavigate().getLongitude(), calculations);
-			if(distChanged(cachedMeters, (int)calculations[0])){
-				cachedMeters = (int)calculations[0];
+			int d = 0;
+			if(map.getRoutingHelper().getFinalLocation() != null){
+				d = map.getRoutingHelper().getDistance();
+			} 
+			if (d == 0) {
+				Location.distanceBetween(view.getLatitude(), view.getLongitude(), map.getPointToNavigate().getLatitude(), map
+						.getPointToNavigate().getLongitude(), calculations);
+				d = (int) calculations[0];
+			}
+			if(distChanged(cachedMeters, d)){
+				cachedMeters = d;
 				if(cachedMeters <= 20){
 					cachedMeters = 0;
 					cachedDistString = null;
@@ -128,7 +135,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		// draw speed 	
 		if(map.getLastKnownLocation() != null && map.getLastKnownLocation().hasSpeed()){
 			if(Math.abs(map.getLastKnownLocation().getSpeed() - cachedSpeed) > .3f){
-				cachedSpeed = (int) map.getLastKnownLocation().getSpeed();
+				cachedSpeed = map.getLastKnownLocation().getSpeed();
 				cachedSpeedString = ((int) (cachedSpeed * 3.6f)) + " km/h";
 				float right = paintBlack.measureText(cachedSpeedString) + 8 + boundsForSpeed.left;
 				boundsForSpeed.right = boundsForDist.right = Math.max(right, boundsForDist.right);

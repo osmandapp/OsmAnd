@@ -51,6 +51,8 @@ public class RegionAddressRepository {
 		db = SQLiteDatabase.openOrCreateDatabase(file, null);
 		name = file.getName().substring(0, file.getName().indexOf('.'));
 		if(db.getVersion() != IndexConstants.ADDRESS_TABLE_VERSION){
+			db.close();
+			db = null;
 			return false;
 		}
 		
