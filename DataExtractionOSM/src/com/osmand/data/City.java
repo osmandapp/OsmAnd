@@ -116,10 +116,6 @@ public class City extends MapObject {
 		return type;
 	}
 	
-	public SortedSet<String> getPostcodes() {
-		return postcodes;
-	}
-	
 	public Collection<Street> getStreets(){
 		return streets.values();
 	}
@@ -130,7 +126,7 @@ public class City extends MapObject {
 	
 	@Override
 	public String toString() {
-		return "City [" +type+"] " + getName();
+		return "City [" +type+"] " + getName(); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	public void doDataPreparation(){

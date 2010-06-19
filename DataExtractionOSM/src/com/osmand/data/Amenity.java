@@ -49,11 +49,11 @@ public class Amenity extends MapObject {
 		} else if (node.getTag(OSMTagKey.HISTORIC) != null) {
 			return node.getTag(OSMTagKey.HISTORIC);
 		} else if (node.getTag(OSMTagKey.INTERNET_ACCESS) != null) {
-			return "internet_access";
+			return "internet_access"; //$NON-NLS-1$
 		} else if (node.getTag(OSMTagKey.AMENITY) != null) {
 			return node.getTag(OSMTagKey.AMENITY);
 		}
-		return "";
+		return ""; //$NON-NLS-1$
 	}
 	
 	protected AmenityType getType(Entity node){
@@ -118,7 +118,7 @@ public class Amenity extends MapObject {
 	
 
 	public String getSimpleFormat(boolean en){
-		return AmenityType.toPublicString(type) + " : " + getStringWithoutType(en);
+		return AmenityType.toPublicString(type) + " : " + getStringWithoutType(en); //$NON-NLS-1$
 	}
 	
 	public String getStringWithoutType(boolean en){
@@ -126,7 +126,7 @@ public class Amenity extends MapObject {
 		if(n.length() == 0){
 			return getSubType();
 		}
-		return getSubType() + " " + n;
+		return getSubType() + " " + n; //$NON-NLS-1$
 	}
 	
 	@Override

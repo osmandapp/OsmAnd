@@ -77,7 +77,7 @@ public class AnimateDraggingMapThread implements Runnable {
 		ay = vy * a;
 		time = System.currentTimeMillis();
 		stopped = false;
-		Thread thread = new Thread(this,"Animatable dragging");
+		Thread thread = new Thread(this,"Animatable dragging"); //$NON-NLS-1$
 		thread.start();
 	}
 	

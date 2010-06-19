@@ -2,8 +2,6 @@ package com.osmand.activities;
 
 import java.text.MessageFormat;
 
-import org.apache.http.entity.StringEntity;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -23,7 +21,6 @@ import android.location.LocationProvider;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -248,14 +245,14 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     	// show point view only if gps enabled
     	if(location == null){
     		if(sensorRegistered) {
-    			Log.d(LogUtil.TAG, "Disable sensor");
+    			Log.d(LogUtil.TAG, "Disable sensor"); //$NON-NLS-1$
     			((SensorManager) getSystemService(SENSOR_SERVICE)).unregisterListener(this);
     			sensorRegistered = false;
     			locationLayer.setHeading(null);
     		}
     	} else {
     		if(!sensorRegistered && OsmandSettings.isShowingViewAngle(this)){
-    			Log.d(LogUtil.TAG, "Enable sensor");
+    			Log.d(LogUtil.TAG, "Enable sensor"); //$NON-NLS-1$
     			SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
     			Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ORIENTATION);
     			if (s != null) {
@@ -264,7 +261,6 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     			sensorRegistered = true;
     		}
     	}
-    	Log.d(LogUtil.TAG, "Location changed");
 		// TODO delete !!! (only for test purposes) devices support that information (possibly keep for other providers?)
     	if(!location.hasSpeed() && locationLayer.getLastKnownLocation() != null){
     		float d = location.distanceTo(locationLayer.getLastKnownLocation());
@@ -440,7 +436,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		
 		if (wakeLock == null) {
 			PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
-			wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "com.osmand.map");
+			wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "com.osmand.map"); //$NON-NLS-1$
 			wakeLock.acquire();
 		}
 	}

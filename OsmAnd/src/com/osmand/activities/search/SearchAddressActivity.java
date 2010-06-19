@@ -82,7 +82,7 @@ public class SearchAddressActivity extends Activity {
 					OsmandSettings.removeLastSearchedIntersectedStreet(SearchAddressActivity.this);
 					startActivity(new Intent(SearchAddressActivity.this, SearchBuildingByNameActivity.class));
 				} else {
-					OsmandSettings.setLastSearchedIntersectedStreet(SearchAddressActivity.this, "");
+					OsmandSettings.setLastSearchedIntersectedStreet(SearchAddressActivity.this, ""); //$NON-NLS-1$
 					startActivity(new Intent(SearchAddressActivity.this, SearchStreet2ByNameActivity.class));
 				}
 			}
@@ -274,7 +274,7 @@ public class SearchAddressActivity extends Activity {
 	
 	protected void startLoadDataInThread(String progressMsg){
 		final ProgressDialog dlg = ProgressDialog.show(this, "Loading", progressMsg, true);
-		new Thread("Loader search data") {
+		new Thread("Loader search data") { //$NON-NLS-1$
 			@Override
 			public void run() {
 				try {

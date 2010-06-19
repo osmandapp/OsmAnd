@@ -42,12 +42,12 @@ public class AmenityIndexRepository {
 	private final String[] columns = IndexConstants.generateColumnNames(IndexPoiTable.values());
 	public List<Amenity> searchAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int limit, PoiFilter filter, List<Amenity> amenities){
 		long now = System.currentTimeMillis();
-		String squery = "? < latitude AND latitude < ? AND ? < longitude AND longitude < ?";
+		String squery = "? < latitude AND latitude < ? AND ? < longitude AND longitude < ?"; //$NON-NLS-1$
 		
 		if(filter != null){
 			String sql = filter.buildSqlWhereFilter();
 			if(sql != null){
-				squery += " AND " + sql;
+				squery += " AND " + sql; //$NON-NLS-1$
 			}
 		}
 		Cursor query = db.query(IndexPoiTable.getTable(), columns, squery, 
@@ -73,30 +73,30 @@ public class AmenityIndexRepository {
 		query.close();
 		
 		if (log.isDebugEnabled()) {
-			log.debug(String.format("Search for %s done in %s ms found %s.", 
-					topLatitude + " " + leftLongitude, System.currentTimeMillis() - now, amenities.size()));
+			log.debug(String.format("Search for %s done in %s ms found %s.",  //$NON-NLS-1$
+					topLatitude + " " + leftLongitude, System.currentTimeMillis() - now, amenities.size())); //$NON-NLS-1$
 		}
 		return amenities;
 	}
 	
 	public boolean addAmenity(long id, double latitude, double longitude, String name, String nameEn, AmenityType t, String subType, String openingHours){
 		assert IndexPoiTable.values().length == 8;
-		db.execSQL("INSERT INTO " + IndexPoiTable.getTable() + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 
+		db.execSQL("INSERT INTO " + IndexPoiTable.getTable() + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)",  //$NON-NLS-1$ //$NON-NLS-2$
 				new Object[]{id, latitude, longitude, openingHours, name, nameEn,AmenityType.valueToString(t), subType});
 		return true;
 	}
 	
 	public boolean updateAmenity(long id, double latitude, double longitude, String name, String nameEn, AmenityType t, String subType, String openingHours){
 		StringBuilder b = new StringBuilder();
-		b.append("UPDATE " + IndexPoiTable.getTable() + " SET ");
-		b.append(IndexPoiTable.LATITUDE.name()).append(" = ?").append(", ").
-		  append(IndexPoiTable.LONGITUDE.name()).append(" = ?").append(", ").
-		  append(IndexPoiTable.OPENING_HOURS.name()).append(" = ?").append(", ").
-		  append(IndexPoiTable.NAME.name()).append(" = ?").append(", ").
-		  append(IndexPoiTable.NAME_EN.name()).append(" = ?").append(", ").
-		  append(IndexPoiTable.TYPE.name()).append(" = ?").append(", ").
-		  append(IndexPoiTable.SUBTYPE.name()).append(" = ?").append(" ").
-		  append(" WHERE ").append(IndexPoiTable.ID.name()).append(" = ?");
+		b.append("UPDATE " + IndexPoiTable.getTable() + " SET "); //$NON-NLS-1$ //$NON-NLS-2$
+		b.append(IndexPoiTable.LATITUDE.name()).append(" = ?").append(", "). //$NON-NLS-1$ //$NON-NLS-2$
+		  append(IndexPoiTable.LONGITUDE.name()).append(" = ?").append(", "). //$NON-NLS-1$ //$NON-NLS-2$
+		  append(IndexPoiTable.OPENING_HOURS.name()).append(" = ?").append(", "). //$NON-NLS-1$ //$NON-NLS-2$
+		  append(IndexPoiTable.NAME.name()).append(" = ?").append(", "). //$NON-NLS-1$ //$NON-NLS-2$
+		  append(IndexPoiTable.NAME_EN.name()).append(" = ?").append(", "). //$NON-NLS-1$ //$NON-NLS-2$
+		  append(IndexPoiTable.TYPE.name()).append(" = ?").append(", "). //$NON-NLS-1$ //$NON-NLS-2$
+		  append(IndexPoiTable.SUBTYPE.name()).append(" = ?").append(" "). //$NON-NLS-1$ //$NON-NLS-2$
+		  append(" WHERE ").append(IndexPoiTable.ID.name()).append(" = ?"); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		db.execSQL(b.toString(),			
 				new Object[]{latitude, longitude, openingHours, name, nameEn,AmenityType.valueToString(t), subType, id});
@@ -104,7 +104,7 @@ public class AmenityIndexRepository {
 	}
 	
 	public boolean deleteAmenity(long id){
-		db.execSQL("DELETE FROM " + IndexPoiTable.getTable()+ " WHERE id="+id);
+		db.execSQL("DELETE FROM " + IndexPoiTable.getTable()+ " WHERE id="+id); //$NON-NLS-1$ //$NON-NLS-2$
 		return true;
 	}
 	
@@ -172,7 +172,7 @@ public class AmenityIndexRepository {
 			return false;
 		}
 		
-		Cursor query = db.query(IndexPoiTable.getTable(), new String[]{"MAX(latitude)", "MAX(longitude)", "MIN(latitude)", "MIN(longitude)"}, null, null,null, null, null);
+		Cursor query = db.query(IndexPoiTable.getTable(), new String[]{"MAX(latitude)", "MAX(longitude)", "MIN(latitude)", "MIN(longitude)"}, null, null,null, null, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		if(query.moveToFirst()){
 			dataTopLatitude = query.getDouble(0);
 			dataRightLongitude = query.getDouble(1);
@@ -181,7 +181,7 @@ public class AmenityIndexRepository {
 		}
 		query.close();
 		if (log.isDebugEnabled()) {
-			log.debug("Initializing db " + file.getAbsolutePath() + " " + (System.currentTimeMillis() - start) + "ms");
+			log.debug("Initializing db " + file.getAbsolutePath() + " " + (System.currentTimeMillis() - start) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		return true;
 	}

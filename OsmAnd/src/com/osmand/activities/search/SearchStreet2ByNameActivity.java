@@ -38,7 +38,7 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 	
 	protected void startLoadDataInThread(String progressMsg){
 		final ProgressDialog dlg = ProgressDialog.show(this, "Loading", progressMsg, true);
-		new Thread("Loader search data") {
+		new Thread("Loader search data") { //$NON-NLS-1$
 			@Override
 			public void run() {
 				try {

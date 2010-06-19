@@ -32,13 +32,14 @@ import com.osmand.LogUtil;
 import com.osmand.ProgressDialogImplementation;
 import com.osmand.R;
 import com.osmand.ResourceManager;
+import com.osmand.Version;
 import com.osmand.activities.search.SearchActivity;
 
 public class MainMenuActivity extends Activity {
 
 	private static boolean applicationAlreadyStarted = false;
-	private static final String EXCEPTION_PATH = "/osmand/exception.log";
-	private static final String EXCEPTION_FILE_SIZE = "/osmand/exception.log";
+	private static final String EXCEPTION_PATH = "/osmand/exception.log"; //$NON-NLS-1$
+	private static final String EXCEPTION_FILE_SIZE = "/osmand/exception.log"; //$NON-NLS-1$
 	
 	private Button showMap;
 	private Button exitButton;
@@ -55,7 +56,7 @@ public class MainMenuActivity extends Activity {
 		if(!applicationAlreadyStarted){
 			final ProgressDialog dlg = ProgressDialog.show(this, "Loading data", "Reading indices...", true);
 			final ProgressDialogImplementation impl = new ProgressDialogImplementation(dlg);
-			impl.setRunnable("Initializing app", new Runnable(){
+			impl.setRunnable("Initializing app", new Runnable(){ //$NON-NLS-1$
 				@Override
 				public void run() {
 					try {
@@ -109,9 +110,9 @@ public class MainMenuActivity extends Activity {
 
 		Intent notificationIndent = new Intent(MainMenuActivity.this, MapActivity.class);
 		notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		Notification notification = new Notification(R.drawable.icon, "",
+		Notification notification = new Notification(R.drawable.icon, "", //$NON-NLS-1$
 				System.currentTimeMillis());
-		notification.setLatestEventInfo(MainMenuActivity.this, "OsmAnd",
+		notification.setLatestEventInfo(MainMenuActivity.this, Version.APP_NAME,
 				"OsmAnd is running in background", PendingIntent.getActivity(
 						this.getBaseContext(), 0, notificationIndent,
 						PendingIntent.FLAG_UPDATE_CURRENT));
@@ -222,8 +223,8 @@ public class MainMenuActivity extends Activity {
 				PrintStream printStream = new PrintStream(out);
 				ex.printStackTrace(printStream);
 				StringBuilder msg = new StringBuilder();
-				msg.append("Exception occured in thread " + thread.toString() + " : ").
-				   append(DateFormat.format("MMMM dd, yyyy h:mm:ss", System.currentTimeMillis())).append("\n").
+				msg.append("Exception occured in thread " + thread.toString() + " : "). //$NON-NLS-1$ //$NON-NLS-2$
+				   append(DateFormat.format("MMMM dd, yyyy h:mm:ss", System.currentTimeMillis())).append("\n").  //$NON-NLS-1$//$NON-NLS-2$
 					append(new String(out.toByteArray()));
 
 				if(Environment.getExternalStorageDirectory().canRead()){
@@ -234,7 +235,7 @@ public class MainMenuActivity extends Activity {
 				defaultHandler.uncaughtException(thread, ex);
 			} catch (Exception e) {
 				// swallow all exceptions
-				Log.e(LogUtil.TAG, "Exception while handle other exception", e);
+				Log.e(LogUtil.TAG, "Exception while handle other exception", e); //$NON-NLS-1$
 			}
 			
 		}

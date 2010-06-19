@@ -4,8 +4,7 @@ import java.util.ResourceBundle;
 
 public class Messages {
 
-
-	private static ResourceBundle bundle = ResourceBundle.getBundle("messages");
+	private static ResourceBundle bundle = ResourceBundle.getBundle("messages"); //$NON-NLS-1$
 	
 
 	public static String getMessage(String key){

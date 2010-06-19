@@ -138,7 +138,7 @@ public class DataTileManager<T> {
 	}
 	
 	private String evTile(int tileX, int tileY){
-		return tileX +"_"+tileY;
+		return tileX +"_"+tileY; //$NON-NLS-1$
 	}
 	
 	

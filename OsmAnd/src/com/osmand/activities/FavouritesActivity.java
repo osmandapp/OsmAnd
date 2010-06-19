@@ -140,13 +140,13 @@ public class FavouritesActivity extends ListActivity {
 	public static class FavouritesDbHelper extends SQLiteOpenHelper {
 
 	    private static final int DATABASE_VERSION = 1;
-	    private static final String FAVOURITE_TABLE_NAME = "favourite";
-	    private static final String FAVOURITE_COL_NAME = "name";
-	    private static final String FAVOURITE_COL_LAT = "latitude";
-	    private static final String FAVOURITE_COL_LON = "longitude";
-	    private static final String FAVOURITE_TABLE_CREATE =   "CREATE TABLE " + FAVOURITE_TABLE_NAME + " (" +
-	                FAVOURITE_COL_NAME + " TEXT, " + FAVOURITE_COL_LAT + " double, " +
-	                FAVOURITE_COL_LON + " double);";
+	    private static final String FAVOURITE_TABLE_NAME = "favourite"; //$NON-NLS-1$
+	    private static final String FAVOURITE_COL_NAME = "name"; //$NON-NLS-1$
+	    private static final String FAVOURITE_COL_LAT = "latitude"; //$NON-NLS-1$
+	    private static final String FAVOURITE_COL_LON = "longitude"; //$NON-NLS-1$
+	    private static final String FAVOURITE_TABLE_CREATE =   "CREATE TABLE " + FAVOURITE_TABLE_NAME + " (" + //$NON-NLS-1$ //$NON-NLS-2$
+	                FAVOURITE_COL_NAME + " TEXT, " + FAVOURITE_COL_LAT + " double, " + //$NON-NLS-1$ //$NON-NLS-2$
+	                FAVOURITE_COL_LON + " double);"; //$NON-NLS-1$
 
 	    FavouritesDbHelper(Context context) {
 	        super(context, FAVOURITE_TABLE_NAME, null, DATABASE_VERSION);
@@ -155,7 +155,7 @@ public class FavouritesActivity extends ListActivity {
 	    public boolean addFavourite(FavouritePoint p){
 	    	SQLiteDatabase db = getWritableDatabase();
 	    	if(db != null){
-	    		db.execSQL("INSERT INTO " + FAVOURITE_TABLE_NAME + " VALUES (?, ?, ?)",new Object[]{p.getName(), p.getLatitude(), p.getLongitude()});
+	    		db.execSQL("INSERT INTO " + FAVOURITE_TABLE_NAME + " VALUES (?, ?, ?)",new Object[]{p.getName(), p.getLatitude(), p.getLongitude()}); //$NON-NLS-1$ //$NON-NLS-2$
 	    		return true;
 	    	}
 	    	return false;
@@ -165,7 +165,7 @@ public class FavouritesActivity extends ListActivity {
 	    	SQLiteDatabase db = getReadableDatabase();
 	    	ArrayList<FavouritePoint> list = new ArrayList<FavouritePoint>();
 	    	if(db != null){
-	    		Cursor query = db.rawQuery("SELECT " + FAVOURITE_COL_NAME +", " + FAVOURITE_COL_LAT +"," + FAVOURITE_COL_LON +" FROM " + 
+	    		Cursor query = db.rawQuery("SELECT " + FAVOURITE_COL_NAME +", " + FAVOURITE_COL_LAT +"," + FAVOURITE_COL_LON +" FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ 
 	    				FAVOURITE_TABLE_NAME, null);
 	    		if(query.moveToFirst()){
 	    			do {
@@ -184,7 +184,7 @@ public class FavouritesActivity extends ListActivity {
 	    public boolean editFavouriteName(FavouritePoint p, String newName){
 	    	SQLiteDatabase db = getWritableDatabase();
 	    	if(db != null){
-	    		db.execSQL("UPDATE " + FAVOURITE_TABLE_NAME + " SET name = ? WHERE name = ?",new Object[]{newName, p.getName()});
+	    		db.execSQL("UPDATE " + FAVOURITE_TABLE_NAME + " SET name = ? WHERE name = ?",new Object[]{newName, p.getName()}); //$NON-NLS-1$ //$NON-NLS-2$
 	    		p.setName(newName);
 	    		return true;
 	    	}
@@ -194,7 +194,7 @@ public class FavouritesActivity extends ListActivity {
 	    public boolean deleteFavourite(FavouritePoint p){
 	    	SQLiteDatabase db = getWritableDatabase();
 	    	if(db != null){
-	    		db.execSQL("DELETE FROM " + FAVOURITE_TABLE_NAME + " WHERE name = ?",new Object[]{p.getName()});
+	    		db.execSQL("DELETE FROM " + FAVOURITE_TABLE_NAME + " WHERE name = ?",new Object[]{p.getName()}); //$NON-NLS-1$ //$NON-NLS-2$
 	    		return true;
 	    	}
 	    	return false;
@@ -243,7 +243,7 @@ public class FavouritesActivity extends ListActivity {
 		
 		@Override
 		public String toString() {
-			return "Favourite " + getName();
+			return "Favourite " + getName(); //$NON-NLS-1$
 		}
 	}
 	@Override

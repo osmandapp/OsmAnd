@@ -11,7 +11,7 @@ public class ProgressDialogImplementation implements IProgress {
 	private int progress;
 	private int work;
 	private int deltaWork;
-	private String message = "";
+	private String message = ""; //$NON-NLS-1$
 	
 	private Handler mViewUpdateHandler;
 	private Thread run;
@@ -47,7 +47,7 @@ public class ProgressDialogImplementation implements IProgress {
 	}
 	
 	private void updateMessage() {
-		message = taskName + String.format(" %.1f %%", this.progress * 100f / ((float) this.work));
+		message = taskName + String.format(" %.1f %%", this.progress * 100f / ((float) this.work)); //$NON-NLS-1$
 		mViewUpdateHandler.sendEmptyMessage(0);
 	}
 
@@ -76,7 +76,7 @@ public class ProgressDialogImplementation implements IProgress {
 	@Override
 	public void startTask(String taskName, int work) {
 		if(taskName == null){
-			taskName = "";
+			taskName = ""; //$NON-NLS-1$
 		}
 		message = taskName;
 		mViewUpdateHandler.sendEmptyMessage(0);
