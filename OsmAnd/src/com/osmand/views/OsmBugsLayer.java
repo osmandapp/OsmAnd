@@ -21,6 +21,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -199,7 +200,11 @@ public class OsmBugsLayer implements OsmandMapLayer {
 					int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
 					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
 						Builder builder = new AlertDialog.Builder(view.getContext());
-				    	builder.setItems(new String[]{"Add comment", "Close bug"}, new DialogInterface.OnClickListener(){
+						Resources resources = view.getContext().getResources();
+				    	builder.setItems(new String[]{
+				    			resources.getString(R.string.osb_comment_menu_item),
+				    			resources.getString(R.string.osb_close_menu_item)
+				    		}, new DialogInterface.OnClickListener(){
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								if(which == 0){
@@ -369,12 +374,12 @@ public class OsmBugsLayer implements OsmandMapLayer {
 	
 	public void commentBug(final Context ctx, LayoutInflater layoutInflater, final OpenStreetBug bug){
 		Builder builder = new AlertDialog.Builder(ctx);
-		builder.setTitle("Adding comment to bug");
+		builder.setTitle(R.string.osb_comment_dialog_title);
 		final View view = layoutInflater.inflate(R.layout.open_bug, null);
 		builder.setView(view);
 		((EditText)view.findViewById(R.id.AuthorName)).setText(OsmandSettings.getUserName(ctx));
-		builder.setNegativeButton("Cancel", null);
-		builder.setPositiveButton("Add comment", new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setPositiveButton(R.string.osb_comment_dialog_add_button, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				String text = ((EditText)view.findViewById(R.id.BugMessage)).getText().toString();
@@ -382,13 +387,13 @@ public class OsmBugsLayer implements OsmandMapLayer {
 				OsmandSettings.setUserName(ctx, author);
 				boolean added = addingComment(bug.getId(), text, author);
 		    	if (added) {
-		    		Toast.makeText(ctx, "Comment was successfully added", Toast.LENGTH_LONG).show();
+		    		Toast.makeText(ctx, ctx.getResources().getString(R.string.osb_comment_dialog_success), Toast.LENGTH_LONG).show();
 					clearCache();
 					if (OsmBugsLayer.this.view.getLayers().contains(OsmBugsLayer.this)) {
 						OsmBugsLayer.this.view.refreshMap();
 					}
 				} else {
-					Toast.makeText(ctx, "Exception occured : comment was not added", Toast.LENGTH_LONG).show();
+					Toast.makeText(ctx, ctx.getResources().getString(R.string.osb_comment_dialog_error), Toast.LENGTH_LONG).show();
 				}
 			}
 		});
@@ -397,20 +402,20 @@ public class OsmBugsLayer implements OsmandMapLayer {
 	
 	public void closeBug(final Context ctx, LayoutInflater layoutInflater, final OpenStreetBug bug){
 		Builder builder = new AlertDialog.Builder(ctx);
-		builder.setTitle("Closing bug");
-		builder.setNegativeButton("Cancel", null);
-		builder.setPositiveButton("Close bug", new DialogInterface.OnClickListener() {
+		builder.setTitle(R.string.osb_close_dialog_title);
+		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setPositiveButton(R.string.osb_close_dialog_close_button, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				boolean closed = closingBug(bug.getId());
 		    	if (closed) {
-		    		Toast.makeText(ctx, "Bug was successfully added", Toast.LENGTH_LONG).show();
+		    		Toast.makeText(ctx, ctx.getResources().getString(R.string.osb_close_dialog_success), Toast.LENGTH_LONG).show();
 					clearCache();
 					if (OsmBugsLayer.this.view.getLayers().contains(OsmBugsLayer.this)) {
 						OsmBugsLayer.this.view.refreshMap();
 					}
 				} else {
-					Toast.makeText(ctx, "Exception occured : bug was not closed", Toast.LENGTH_LONG).show();
+					Toast.makeText(ctx, ctx.getResources().getString(R.string.osb_close_dialog_error), Toast.LENGTH_LONG).show();
 				}
 			}
 		});

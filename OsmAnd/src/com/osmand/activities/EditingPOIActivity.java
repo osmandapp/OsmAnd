@@ -12,6 +12,7 @@ import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.MessageFormat;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -35,6 +36,7 @@ import android.app.Dialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.util.Xml;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -94,7 +96,7 @@ public class EditingPOIActivity {
 		Node n = loadNode(id);
 		if(n != null){
 			dlg = new Dialog(ctx);
-			dlg.setTitle("Edit POI");
+			dlg.setTitle(R.string.poi_edit_title);
 			showDialog(n);
 		}
 	}
@@ -104,29 +106,29 @@ public class EditingPOIActivity {
 		Node n = new Node(latitude, longitude, -1);
 		n.putTag(OSMTagKey.AMENITY.getValue(), "");
 		n.putTag(OSMTagKey.OPENING_HOURS.getValue(), "Mo-Su 08:00-20:00");
-		dlg.setTitle("Create POI");
+		dlg.setTitle(R.string.poi_create_title);
 		showDialog(n);
 	}
 	
 	public void showDeleteDialog(long id){
 		final Node n = loadNode(id);
 		if(n == null){
-			Toast.makeText(ctx, "POI doesn't found", Toast.LENGTH_LONG).show();
+			Toast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
 			return;
 		}
 		
 		Builder builder = new AlertDialog.Builder(ctx);
-		builder.setTitle("Are you sure to delete " + n.getTag(OSMTagKey.NAME)+" (enter comment) ?");
+		builder.setTitle(MessageFormat.format(this.view.getResources().getString(R.string.poi_remove_confirm_template), n.getTag(OSMTagKey.NAME)));
 		final EditText comment = new EditText(ctx);
-		comment.setText("Delete POI");
+		comment.setText(R.string.poi_remove_title);
 		builder.setView(comment);
-		builder.setNegativeButton("Cancel", null);
-		builder.setPositiveButton("Delete", new DialogInterface.OnClickListener(){
+		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setPositiveButton(R.string.default_buttons_delete, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				String c = comment.getText().toString();
 				if(commitNode(DELETE_ACTION, n, entityInfo, c)){ // NON-NLS
-					Toast.makeText(ctx, "POI was successfully deleted", Toast.LENGTH_LONG).show();
+					Toast.makeText(ctx, ctx.getResources().getString(R.string.poi_remove_success), Toast.LENGTH_LONG).show();
 					if(view != null){
 						view.refreshMap();
 					}
@@ -183,7 +185,8 @@ public class EditingPOIActivity {
 		((Button)dlg.findViewById(R.id.Commit)).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				String msg  = n.getId() == -1 ? "added" : "changed";
+				Resources resources = v.getResources();
+				String msg  = n.getId() == -1 ? resources.getString(R.string.poi_action_add) : resources.getString(R.string.poi_action_change);
 				String action = n.getId() == -1 ? CREATE_ACTION: MODIFY_ACTION; 
 				n.putTag(a.convertToAmenityTag(), typeText.getText().toString());
 				n.putTag(OSMTagKey.NAME.getValue(), nameText.getText().toString());
@@ -193,7 +196,7 @@ public class EditingPOIActivity {
 					n.putTag(OSMTagKey.OPENING_HOURS.getValue(), openingHours.getText().toString());
 			}
 				if (commitNode(action, n, entityInfo, commentText.getText().toString())) {
-					Toast.makeText(ctx, "POI was successfully " + msg, Toast.LENGTH_LONG).show();
+					Toast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_action_succeded_template), msg), Toast.LENGTH_LONG).show();
 					if(view != null){
 						view.refreshMap();
 					}
@@ -286,10 +289,10 @@ public class EditingPOIActivity {
 			}
 		} catch (MalformedURLException e) {
 			log.error(userOperation + " failed", e);
-			Toast.makeText(ctx, "Unexpected exception while " + userOperation + " ocurred", Toast.LENGTH_LONG).show();
+			Toast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_error_unexpected_template), userOperation), Toast.LENGTH_LONG).show();
 		} catch (IOException e) {
 			log.error(userOperation + " failed", e);
-			Toast.makeText(ctx, "Input/output exception while " + userOperation + " ocurred", Toast.LENGTH_LONG).show();
+			Toast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_error_io_error_template), userOperation), Toast.LENGTH_LONG).show();
 		}
 		return null; 
 		
@@ -354,10 +357,10 @@ public class EditingPOIActivity {
 			Toast.makeText(ctx, msg, Toast.LENGTH_LONG).show();
 		} catch (MalformedURLException e) {
 			log.error(userOperation + " failed" , e);
-			Toast.makeText(ctx, "Unexpected exception while "+ userOperation+" ocurred", Toast.LENGTH_LONG).show();
+			Toast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_error_unexpected_template), userOperation), Toast.LENGTH_LONG).show();
 		} catch (IOException e) {
 			log.error(userOperation + " failed" , e);
-			Toast.makeText(ctx, "Input/output exception while "+ userOperation+" ocurred", Toast.LENGTH_LONG).show();
+			Toast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_error_io_error_template), userOperation), Toast.LENGTH_LONG).show();
 		}
 
 		return null;
@@ -450,7 +453,7 @@ public class EditingPOIActivity {
 	
 	public boolean commitNode(String action, Node n, EntityInfo info, String comment){
 		if(info == null && !CREATE_ACTION.equals(action)){
-			Toast.makeText(ctx, "Info about node was not loaded", Toast.LENGTH_LONG).show();
+			Toast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();
 			return false;
 		}
 		
@@ -521,10 +524,10 @@ public class EditingPOIActivity {
 			
 		} catch (IOException e) {
 			log.error("Loading node failed" + id, e);
-			Toast.makeText(ctx, "Input/output exception ocurred", Toast.LENGTH_LONG).show();
+			Toast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_io_error), Toast.LENGTH_LONG).show();
 		} catch (SAXException e) {
 			log.error("Loading node failed" + id, e);
-			Toast.makeText(ctx, "Input/output exception ocurred", Toast.LENGTH_LONG).show();
+			Toast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_io_error), Toast.LENGTH_LONG).show();
 		}
 		return null;
 	}

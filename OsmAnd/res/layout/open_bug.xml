@@ -5,15 +5,15 @@
   android:layout_height="fill_parent">
   <TableRow>
   <TextView android:id="@+id/TextView"  android:layout_marginLeft="5dp"
-  			android:layout_height="wrap_content" android:text="Message"></TextView>
+  			android:layout_height="wrap_content" android:text="@string/osb_comment_dialog_message"></TextView>
   <EditText android:text="" android:id="@+id/BugMessage" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
   			android:layout_height="wrap_content" android:layout_weight="1"></EditText>
   </TableRow>
   <TableRow>
-  <TextView android:text="Author name" android:id="@+id/TextView" android:layout_marginLeft="5dp"
-  			android:layout_height="wrap_content"></TextView>
-  <EditText android:text="NoName" android:id="@+id/AuthorName" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
-  			android:layout_height="wrap_content"  android:layout_weight="1"></EditText>
+  <TextView android:id="@+id/TextView" android:layout_marginLeft="5dp"
+  			android:layout_height="wrap_content" android:text="@string/osb_comment_dialog_author"></TextView>
+  <EditText android:id="@+id/AuthorName" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
+  			android:layout_height="wrap_content"  android:layout_weight="1" android:text="NoName"></EditText>
   </TableRow>
   
 

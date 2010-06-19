@@ -5,7 +5,7 @@
   android:layout_height="fill_parent" android:orientation="vertical">
 <TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
 <TableRow>
-<TextView android:text="Name" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+<TextView android:text="@string/poi_dialog_name" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
 <EditText android:text="" android:id="@+id/Name" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content" android:layout_weight="1"></EditText>
 </TableRow>
 <TableRow>
@@ -14,18 +14,18 @@
 <!--  <EditText android:text="" android:id="@+id/Type" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content" android:layout_weight="1"/>  -->
 </TableRow>
 <TableRow>
-<TextView android:text="Opening hours" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
-<EditText android:text="" android:hint="Mo-Su 08:00-18:00" android:id="@+id/OpeningHours" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content" android:layout_weight="1"></EditText>
+<TextView android:text="@string/poi_dialog_opening_hours" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+<EditText android:text="" android:hint="Mo-Su 08:00-20:00" android:id="@+id/OpeningHours" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content" android:layout_weight="1"></EditText>
 </TableRow>
 <TableRow>
-<TextView android:text="Comment" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
-<EditText android:text="POI changing" android:id="@+id/Comment" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content" android:layout_weight="1"></EditText>
+<TextView android:text="@string/poi_dialog_comment" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+<EditText android:text="@string/poi_dialog_comment_default" android:id="@+id/Comment" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content" android:layout_weight="1"></EditText>
 </TableRow>
 </TableLayout>
-<TextView android:text="All other tags are preserved" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+<TextView android:text="@string/poi_dialog_other_tags_message" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
 <LinearLayout android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="horizontal" 
 	android:gravity="bottom|center">
-    <Button android:layout_width="125dp" android:layout_height="wrap_content" android:text="Commit" android:id="@+id/Commit"></Button>
-    <Button android:layout_width="125dp" android:layout_height="wrap_content" android:text="Cancel" android:id="@+id/Cancel"></Button>
+    <Button android:layout_width="125dp" android:layout_height="wrap_content" android:text="@string/default_buttons_commit" android:id="@+id/Commit"></Button>
+    <Button android:layout_width="125dp" android:layout_height="wrap_content" android:text="@string/default_buttons_cancel" android:id="@+id/Cancel"></Button>
 </LinearLayout>
 </LinearLayout>
