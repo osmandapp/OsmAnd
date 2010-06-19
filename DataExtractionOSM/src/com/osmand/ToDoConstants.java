@@ -40,10 +40,9 @@ public class ToDoConstants {
 //		 DONE: Load transport routes in swing. 
 //	     TODO: Create transport index, create transport activity
 
-
-	
 //   34. Suppport navigation for calculated route (example of get route from internet is in swing app).
-//	     IDEA : Victor have ideas
+//	     DONE : MiniMap done, Routing settings done, RouteLayer done, RoutingHelper done.
+//	     TODO : Test again?
 	
 	
 	// FUTURE RELEASES
@@ -62,7 +61,8 @@ public class ToDoConstants {
 	// BUGS Android
 	//  5. Improvement : Implement caching files existing on FS, implement specific method in RM
 	//     Introducing cache of file names that are on disk (creating new File() consumes a lot of memory)
-	//  6. Improvement postal_code search : replace search city <-> postal_code (show streets for postal_code) 
+	//  6. Improvement postal_code search : replace search city <-> postal_code (show streets for postal_code)
+	//  7. Update map is duplicated in target & in update menu (context menu)
 	
 	
 	// TODO swing

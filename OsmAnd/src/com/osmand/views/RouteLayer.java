@@ -29,6 +29,7 @@ public class RouteLayer implements OsmandMapLayer {
 	private Paint paint;
 
 	private Path path;
+	private float pathBearing;
 	
 	public RouteLayer(RoutingHelper helper){
 		this.helper = helper;
@@ -39,7 +40,7 @@ public class RouteLayer implements OsmandMapLayer {
 		boundsRect = new Rect(0, 0, view.getWidth(), view.getHeight());
 		tileRect = new RectF();
 		paint = new Paint();
-		paint.setColor(Color.GRAY);
+		paint.setColor(Color.BLUE);
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(14);
 		paint.setAlpha(150);
@@ -53,11 +54,16 @@ public class RouteLayer implements OsmandMapLayer {
 	}
 
 	
+	
 	@Override
 	public void onDraw(Canvas canvas) {
+		path.reset();
 		if (helper.hasPointsToShow()) {
 			long time = System.currentTimeMillis();
-			boundsRect = new Rect(0, 0, view.getWidth(), view.getHeight());
+			int w = view.getWidth();
+			int h = view.getHeight();
+			boundsRect = new Rect(-w / 2, -h, 3 * w / 2, h);
+//			boundsRect = new Rect(0, 0, w, h);
 			view.calculateTileRectangle(boundsRect, view.getCenterPointX(), view.getCenterPointY(), view.getXTile(), view.getYTile(),
 					tileRect);
 			double topLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), tileRect.top);
@@ -68,14 +74,18 @@ public class RouteLayer implements OsmandMapLayer {
 			if((System.currentTimeMillis() - time) > 40){
 				Log.e(LogUtil.TAG, "Calculate route layer " + (System.currentTimeMillis() - time));
 			}
+			
 			if (points.size() > 0) {
 				int px = view.getMapXForPoint(points.get(0).getLongitude());
 				int py = view.getMapYForPoint(points.get(0).getLatitude());
-				path.reset();
 				path.moveTo(px, py);
-				for (Location o : points) {
+				for (int i=1; i<points.size(); i++) {
+					Location o = points.get(i);
 					int x = view.getMapXForPoint(o.getLongitude());
 					int y = view.getMapYForPoint(o.getLatitude());
+					if (i == 1) {
+						pathBearing = (float) (Math.atan2(y - py, x - px) / Math.PI * 180);
+					}
 					path.lineTo(x, y);
 				}
 				canvas.drawPath(path, paint);
@@ -83,6 +93,15 @@ public class RouteLayer implements OsmandMapLayer {
 		}
 	}
 
+	
+	// to show further direction
+	public Path getPath() {
+		return path;
+	}
+	
+	public float getPathBearing(){
+		return pathBearing;
+	}
 
 	
 	@Override

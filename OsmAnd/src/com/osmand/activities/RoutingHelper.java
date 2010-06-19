@@ -117,6 +117,10 @@ public class RoutingHelper {
 	}
 	
 	
+	public boolean isRouterEnabled(){
+		return finalLocation != null && lastFixedLocation != null;
+	}
+	
 	
 	public boolean finishAtLocation(Location currentLocation) {
 		Location lastPoint = routeNodes.get(routeNodes.size() - 1);
@@ -237,9 +241,12 @@ public class RoutingHelper {
 		currentRoute = 0;
 	}
 	
-	public int getDistance(){
+	public synchronized int getDistance(double lat, double lon){
 		if(listDistance != null && currentRoute < listDistance.length){
-			return listDistance[currentRoute];
+			int dist = listDistance[currentRoute];
+			Location l = routeNodes.get(currentRoute);
+			dist += MapUtils.getDistance(lat, lon, l.getLatitude(), l.getLongitude());
+			return dist;
 		}
 		return 0;
 	}
@@ -323,16 +330,17 @@ public class RoutingHelper {
 			}
 		}
 		
-		for(int i=currentRoute; i<routeNodes.size(); i++){
+		for (int i = currentRoute; i < routeNodes.size(); i++) {
 			Location ls = routeNodes.get(i);
 			if(leftLongitude <= ls.getLongitude() && ls.getLongitude() <= rightLongitude &&
 					bottomLatitude <= ls.getLatitude() && ls.getLatitude() <= topLatitude){
 				l.add(ls);
-				if (i > currentRoute) {
-					l.add(0, ls);
-					previousVisible = true;
-				} else if(lastFixedLocation != null){
-					l.add(0, ls);
+				if (!previousVisible) {
+					if (i > currentRoute) {
+						l.add(0, routeNodes.get(i - 1));
+					} else if (lastFixedLocation != null) {
+						l.add(0, lastFixedLocation);
+					}
 				}
 				previousVisible = true;
 			} else if(previousVisible){

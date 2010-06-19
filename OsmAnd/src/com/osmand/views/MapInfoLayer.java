@@ -17,8 +17,10 @@ public class MapInfoLayer implements OsmandMapLayer {
 
 	private OsmandMapTileView view;
 	private final MapActivity map;
+	private final RouteLayer routeLayer;
 	
 	private Paint paintBlack;
+	private Paint paintMiniRoute;
 	private Path pathForCompass;
 	private Path pathForCompass2;
 	private Paint fillBlack;
@@ -26,6 +28,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 	private RectF boundsForCompass;
 	private RectF boundsForZoom;
 	private RectF boundsForDist;
+	private RectF boundsForMiniRoute;
 	private RectF boundsForSpeed;
 	private Paint paintAlphaGray;
 	
@@ -38,10 +41,14 @@ public class MapInfoLayer implements OsmandMapLayer {
 	private float cachedSpeed = 0;
 	private int cachedZoom = 0;
 	private String cachedZoomString = "";
+	private int centerMiniRouteY;
+	private int centerMiniRouteX;
+	private float scaleMiniRoute;
 	
 	
-	public MapInfoLayer(MapActivity map){
+	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
+		this.routeLayer = layer;
 	}
 
 	@Override
@@ -63,15 +70,26 @@ public class MapInfoLayer implements OsmandMapLayer {
 		fillBlack.setColor(Color.BLACK);
 		fillBlack.setAntiAlias(true);
 		
+		paintMiniRoute = new Paint();
+		paintMiniRoute.setStyle(Style.STROKE);
+		paintMiniRoute.setStrokeWidth(35);
+		paintMiniRoute.setColor(Color.BLUE);
+		paintMiniRoute.setAntiAlias(true);
+		
 		fillRed = new Paint();
 		fillRed.setStyle(Style.FILL_AND_STROKE);
 		fillRed.setColor(Color.RED);
 		fillRed.setAntiAlias(true);
 		
-		boundsForCompass = new RectF(0, 0, 32, 32);
-		boundsForDist = new RectF(32, 0, 110, 32);
-		boundsForZoom = new RectF(0, 32, 32, 64);
-		boundsForSpeed = new RectF(32, 32, 110, 64);
+		boundsForCompass = new RectF(0, 0, 35, 32);
+		boundsForDist = new RectF(35, 0, 110, 32);
+		boundsForZoom = new RectF(0, 32, 35, 64);
+		boundsForSpeed = new RectF(35, 32, 110, 64);
+		
+		boundsForMiniRoute = new RectF(0, 64, 96, 196);
+		centerMiniRouteX = 48;
+		centerMiniRouteY= 160;
+		scaleMiniRoute = 0.1f;
 		
 		pathForCompass = new Path();
 		pathForCompass.moveTo(9, 15.5f);
@@ -87,7 +105,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 	}
 
 	public boolean distChanged(int oldDist, int dist){
-		if(oldDist != 0 && ((oldDist - dist > 100) || (Math.abs(((float) dist - oldDist)/oldDist) < 0.01))){
+		if(oldDist != 0 && oldDist - dist < 100 && Math.abs(((float) dist - oldDist)/oldDist) < 0.01){
 			return false;
 		}
 		return true;
@@ -97,8 +115,8 @@ public class MapInfoLayer implements OsmandMapLayer {
 	public void onDraw(Canvas canvas) {
 		if(map.getPointToNavigate() != null){
 			int d = 0;
-			if(map.getRoutingHelper().getFinalLocation() != null){
-				d = map.getRoutingHelper().getDistance();
+			if(map.getRoutingHelper().isRouterEnabled()){
+				d = map.getRoutingHelper().getDistance(view.getLatitude(), view.getLongitude());
 			} 
 			if (d == 0) {
 				Location.distanceBetween(view.getLatitude(), view.getLongitude(), map.getPointToNavigate().getLatitude(), map
@@ -130,7 +148,8 @@ public class MapInfoLayer implements OsmandMapLayer {
 		}
 		// draw zoom
 		canvas.drawRoundRect(boundsForZoom, 3, 3, paintAlphaGray);
-		canvas.drawText(cachedZoomString, boundsForZoom.left + 5, boundsForZoom.bottom - 9, paintBlack);
+		canvas.drawRoundRect(boundsForZoom, 3, 3, paintBlack);
+		canvas.drawText(cachedZoomString, boundsForZoom.left + 5, boundsForZoom.bottom - 7, paintBlack);
 		
 		// draw speed 	
 		if(map.getLastKnownLocation() != null && map.getLastKnownLocation().hasSpeed()){
@@ -142,21 +161,44 @@ public class MapInfoLayer implements OsmandMapLayer {
 			}
 			if(cachedSpeed > 0){
 				canvas.drawRoundRect(boundsForSpeed, 3, 3, paintAlphaGray);
+				canvas.drawRoundRect(boundsForSpeed, 3, 3, paintBlack);
 				canvas.drawText(cachedSpeedString, boundsForSpeed.left + 8, boundsForSpeed.bottom - 9, paintBlack);
 			}
 		}
 		// draw distance to point
 		if(cachedDistString != null){
 			canvas.drawRoundRect(boundsForDist, 3, 3, paintAlphaGray);
+			canvas.drawRoundRect(boundsForDist, 3, 3, paintBlack);
 			canvas.drawCircle(boundsForDist.left + 8, boundsForDist.bottom - 15, 4, fillRed);
 			canvas.drawText(cachedDistString, boundsForDist.left + 15, boundsForDist.bottom - 9, paintBlack);
 		}
 		
+		
+
+			
+		if(routeLayer != null && !routeLayer.getPath().isEmpty()){
+			canvas.save();
+			canvas.clipRect(boundsForMiniRoute);
+			canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintAlphaGray);
+			canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintBlack);
+			
+			canvas.translate(centerMiniRouteX - view.getCenterPointX(), centerMiniRouteY - view.getCenterPointY());
+			canvas.scale(scaleMiniRoute, scaleMiniRoute, view.getCenterPointX(), view.getCenterPointY());
+			canvas.rotate(view.getRotate(), view.getCenterPointX(), view.getCenterPointY());
+			
+			canvas.drawCircle(view.getCenterPointX(), view.getCenterPointY(), 3/scaleMiniRoute, fillBlack);
+			canvas.drawPath(routeLayer.getPath(), paintMiniRoute);
+			canvas.restore();
+		}
+		
 		// draw compass the last because it use rotating
 		canvas.drawRoundRect(boundsForCompass, 3, 3, paintAlphaGray);
+		canvas.drawRoundRect(boundsForCompass, 3, 3, paintBlack);
 		canvas.rotate(view.getRotate(), 15, 15);
 		canvas.drawPath(pathForCompass2, fillRed);
 		canvas.drawPath(pathForCompass, fillBlack);
+		
+		
 		
 	}
 
