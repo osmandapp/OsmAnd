@@ -160,8 +160,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 	
 	public void addLayer(OsmandMapLayer layer){
-		layers.add(layer);
 		layer.initLayer(this);
+		layers.add(layer);
 	}
 	
 	public void removeLayer(OsmandMapLayer layer){

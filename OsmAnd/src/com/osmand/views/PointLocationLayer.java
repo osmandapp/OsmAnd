@@ -20,6 +20,7 @@ public class PointLocationLayer implements OsmandMapLayer {
 	
 	private Paint location;
 	private Paint bearing;
+	private Paint bearingOver;
 	private Paint area;
 	private Paint headingPaint;
 	private Path pathForDirection;
@@ -53,6 +54,11 @@ public class PointLocationLayer implements OsmandMapLayer {
 		bearing.setAlpha(150);
 		bearing.setAntiAlias(true);
 		bearing.setStyle(Style.FILL);
+		
+		bearingOver = new Paint();
+		bearingOver.setColor(Color.BLACK);
+		bearingOver.setAntiAlias(true);
+		bearingOver.setStyle(Style.STROKE);
 		
 		pathForDirection = new Path();
 	}
@@ -124,6 +130,7 @@ public class PointLocationLayer implements OsmandMapLayer {
 				
 				pathForDirection.transform(m);
 				canvas.drawPath(pathForDirection, this.bearing);
+				canvas.drawPath(pathForDirection, this.bearingOver);
 			}
 			
 		}
@@ -169,6 +176,11 @@ public class PointLocationLayer implements OsmandMapLayer {
 	}
 	public void setAppMode(ApplicationMode appMode) {
 		this.appMode = appMode;
+		if(this.appMode == ApplicationMode.CAR || this.appMode == ApplicationMode.BICYCLE){
+			this.bearing.setAlpha(180);
+		} else {
+			this.bearing.setAlpha(150);
+		}
 	}
 	@Override
 	public boolean drawInScreenPixels() {

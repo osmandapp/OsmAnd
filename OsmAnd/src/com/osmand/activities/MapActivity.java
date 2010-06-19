@@ -96,17 +96,20 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		mapView.setMapLocationListener(this);
 		poiMapLayer = new POIMapLayer();
 		mapView.addLayer(poiMapLayer);
+		routingHelper = new RoutingHelper(this);
+		routeLayer = new RouteLayer(routingHelper);
+		mapView.addLayer(routeLayer);
+		osmBugsLayer = new OsmBugsLayer(this);
+		mapInfoLayer = new MapInfoLayer(this, routeLayer);
+		mapView.addLayer(mapInfoLayer);
 		navigationLayer = new PointNavigationLayer();
 		mapView.addLayer(navigationLayer);
 		locationLayer = new PointLocationLayer();
 		mapView.addLayer(locationLayer);
-		mapInfoLayer = new MapInfoLayer(this);
-		mapView.addLayer(mapInfoLayer);
-		osmBugsLayer = new OsmBugsLayer(this);
+		
 		savingTrackHelper = new SavingTrackHelper(this);
-		routingHelper = new RoutingHelper(this);
-		routeLayer = new RouteLayer(routingHelper);
-		mapView.addLayer(routeLayer);
+		
+		
 		
 		
 		locationLayer.setAppMode(OsmandSettings.getApplicationMode(this));
@@ -256,9 +259,18 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     		}
     	}
     	Log.d(LogUtil.TAG, "Location changed");
-		// TODO delete !!! (only for test purposes)
+		// TODO delete !!! (only for test purposes) devices support that information (possibly keep for other providers?)
     	if(!location.hasSpeed() && locationLayer.getLastKnownLocation() != null){
-    		location.setSpeed(location.distanceTo(locationLayer.getLastKnownLocation()));
+    		float d = location.distanceTo(locationLayer.getLastKnownLocation());
+    		if(d > 100){
+    			d = 100;
+    		}
+    		location.setSpeed(d);
+    	}
+    	if(!location.hasBearing() && locationLayer.getLastKnownLocation() != null){
+    		if(locationLayer.getLastKnownLocation().distanceTo(location) > 10){
+    			location.setBearing(locationLayer.getLastKnownLocation().bearingTo(location));
+    		}
     	}
     	
     	locationLayer.setLastKnownLocation(location);
