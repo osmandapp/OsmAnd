@@ -320,9 +320,14 @@ public class SearchAddressActivity extends Activity {
 
 		if (region != null) {
 			Long cityId = OsmandSettings.getLastSearchedCity(this);
+			String postcode = OsmandSettings.getLastSearchedPostcode(this);
 			if (!region.areCitiesPreloaded()) {
 				progressMsg = "Loading cities...";
+			} else if (postcode != null && !region.arePostcodesPreloaded()) {
+				progressMsg = "Loading postcodes...";
 			} else if (cityId != -1 && region.getCityById(cityId) != null && region.getCityById(cityId).isEmptyWithStreets()) {
+				progressMsg = "Loading streets/buildings...";
+			} else if (postcode != null && region.getPostcode(postcode) != null && region.getPostcode(postcode).isEmptyWithStreets()) {
 				progressMsg = "Loading streets/buildings...";
 			} else if (OsmandSettings.usingEnglishNames(this) != region.useEnglishNames()) {
 				progressMsg = "Converting native/english names...";

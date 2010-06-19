@@ -86,6 +86,9 @@ public class RegionAddressRepository {
 	public boolean areCitiesPreloaded(){
 		return !cities.isEmpty();
 	}
+	public boolean arePostcodesPreloaded(){
+		return !postCodes.isEmpty();
+	}
 	
 	public PostCode getPostcode(String name){
 		if(name == null){
