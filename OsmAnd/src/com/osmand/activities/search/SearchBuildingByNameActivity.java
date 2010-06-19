@@ -12,18 +12,24 @@ import com.osmand.RegionAddressRepository;
 import com.osmand.ResourceManager;
 import com.osmand.data.Building;
 import com.osmand.data.City;
+import com.osmand.data.PostCode;
 import com.osmand.data.Street;
 
 public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<Building> {
 	private RegionAddressRepository region;
 	private City city;
 	private Street street;
+	private PostCode postcode;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		region = ResourceManager.getResourceManager().getRegionRepository(OsmandSettings.getLastSearchedRegion(this));
 		if(region != null){
+			postcode = region.getPostcode(OsmandSettings.getLastSearchedPostcode(this));
 			city = region.getCityById(OsmandSettings.getLastSearchedCity(this));
-			if(city != null){
+			if(postcode != null){
+				street = region.getStreetByName(postcode, OsmandSettings.getLastSearchedStreet(this));
+			} else if(city != null){
 				street = region.getStreetByName(city, OsmandSettings.getLastSearchedStreet(this));
 			}
 		}
@@ -35,7 +41,7 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 	public List<Building> getObjects(String filter) {
 		List<Building> l = new ArrayList<Building>();
 		if(street != null){
-			region.fillWithSuggestedBuildings(street, filter, l);
+			region.fillWithSuggestedBuildings(postcode, street, filter, l);
 		}
 		return l;
 	}

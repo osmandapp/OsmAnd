@@ -19,6 +19,8 @@ import com.osmand.ResourceManager;
 import com.osmand.activities.MapActivity;
 import com.osmand.data.Building;
 import com.osmand.data.City;
+import com.osmand.data.MapObject;
+import com.osmand.data.PostCode;
 import com.osmand.data.Street;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.Node;
@@ -35,6 +37,7 @@ public class SearchAddressActivity extends Activity {
 	
 	private RegionAddressRepository region = null;
 	private City city = null;
+	private PostCode postcode = null;
 	private Street street = null;
 	private Building building = null;
 	private Street street2 = null;
@@ -118,6 +121,7 @@ public class SearchAddressActivity extends Activity {
 		 findViewById(R.id.ResetCity).setOnClickListener(new View.OnClickListener(){
 				@Override
 				public void onClick(View v) {
+					postcode = null;
 					city = null;
 					street = null;
 					street2 = null;
@@ -129,6 +133,7 @@ public class SearchAddressActivity extends Activity {
 				@Override
 				public void onClick(View v) {
 					region = null;
+					postcode = null;
 					city = null;
 					street = null;
 					street2 = null;
@@ -222,11 +227,15 @@ public class SearchAddressActivity extends Activity {
 		} else {
 			countryButton.setText(region.getName());
 		}
-		findViewById(R.id.ResetCity).setEnabled(city != null);
-		if(city == null){
+		findViewById(R.id.ResetCity).setEnabled(postcode != null || city != null);
+		if(city == null && postcode == null){
 			cityButton.setText(R.string.choose_city);
 		} else {
-			cityButton.setText(city.getName(region.useEnglishNames()));
+			if(postcode != null){
+				cityButton.setText(postcode.getName());
+			} else {
+				cityButton.setText(city.getName(region.useEnglishNames()));
+			}
 		}
 		cityButton.setEnabled(region != null);
 		
@@ -236,7 +245,7 @@ public class SearchAddressActivity extends Activity {
 		} else {
 			streetButton.setText(street.getName(region.useEnglishNames()));
 		}
-		streetButton.setEnabled(city != null);
+		streetButton.setEnabled(city != null || postcode != null);
 		
 		if(radioBuilding){
 			((RadioButton)findViewById(R.id.RadioBuilding)).setChecked(true);
@@ -247,7 +256,8 @@ public class SearchAddressActivity extends Activity {
 		
 		buildingButton.setEnabled(street != null);
 		
-		showOnMap.setEnabled(building != null || city != null || street != null);
+		showOnMap.setEnabled(city != null || street != null);
+		navigateTo.setEnabled(city != null || street != null);
 	}
 	
 	public void loadData(){
@@ -255,17 +265,23 @@ public class SearchAddressActivity extends Activity {
 			if(region.useEnglishNames() != OsmandSettings.usingEnglishNames(this)){
 				region.setUseEnglishNames(OsmandSettings.usingEnglishNames(this));
 			}
-			city = region.getCityById(OsmandSettings.getLastSearchedCity(SearchAddressActivity.this));
-			if (city != null) {
-				street = region.getStreetByName(city, OsmandSettings.getLastSearchedStreet(SearchAddressActivity.this));
+			String postcodeStr = OsmandSettings.getLastSearchedPostcode(this);
+			if(postcodeStr != null){
+				postcode = region.getPostcode(postcodeStr);
+			} else {
+				city = region.getCityById(OsmandSettings.getLastSearchedCity(SearchAddressActivity.this));
+			}
+			
+			if (postcode != null || city != null) {
+				MapObject o = postcode == null ? city : postcode;
+				street = region.getStreetByName(o, OsmandSettings.getLastSearchedStreet(SearchAddressActivity.this));
 				if (street != null) {
 					String str = OsmandSettings.getLastSearchedIntersectedStreet(SearchAddressActivity.this);
 					radioBuilding = str == null;
 					if(str != null){
-						street2 = region.getStreetByName(city, str);
+						street2 = region.getStreetByName(o, str);
 					} else {
-						building = region.getBuildingByName(street, OsmandSettings
-								.getLastSearchedBuilding(SearchAddressActivity.this));
+						building = region.getBuildingByName(street, OsmandSettings.getLastSearchedBuilding(SearchAddressActivity.this));
 					}
 				}
 			}
@@ -301,6 +317,7 @@ public class SearchAddressActivity extends Activity {
 		region = ResourceManager.getResourceManager().getRegionRepository(lastSearchedRegion);
 		String progressMsg = null;
 		// try to determine whether progress dialog & new thread needed
+
 		if (region != null) {
 			Long cityId = OsmandSettings.getLastSearchedCity(this);
 			if (!region.areCitiesPreloaded()) {
@@ -311,6 +328,7 @@ public class SearchAddressActivity extends Activity {
 				progressMsg = "Converting native/english names...";
 			}
 		}
+		postcode = null;
 		city = null;
 		street = null;
 		building = null;

@@ -12,11 +12,13 @@ import com.osmand.R;
 import com.osmand.RegionAddressRepository;
 import com.osmand.ResourceManager;
 import com.osmand.data.City;
+import com.osmand.data.PostCode;
 import com.osmand.data.Street;
 
 public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<Street> {
 	private RegionAddressRepository region;
 	private City city;
+	private PostCode postcode;
 	private Street street1;
 	volatile private List<Street> initialList = new ArrayList<Street>();
 	private List<Street> filterList = new ArrayList<Street>();
@@ -24,9 +26,17 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 	protected void onCreate(Bundle savedInstanceState) {
 		region = ResourceManager.getResourceManager().getRegionRepository(OsmandSettings.getLastSearchedRegion(this));
 		if(region != null){
+			postcode = region.getPostcode(OsmandSettings.getLastSearchedPostcode(this));
 			city = region.getCityById(OsmandSettings.getLastSearchedCity(this));
-			if(city != null){
+			if(postcode != null){
+				street1 = region.getStreetByName(postcode, (OsmandSettings.getLastSearchedStreet(this)));
+				if(street1 != null){
+					city = street1.getCity();
+				}
+			} else if(city != null){
 				street1 = region.getStreetByName(city, (OsmandSettings.getLastSearchedStreet(this)));
+			}
+			if(city != null){
 				startLoadDataInThread("Finding streets...");
 			}
 		}
