@@ -5,25 +5,32 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.osmand.Algoritms;
+import com.osmand.Messages;
 
 // http://wiki.openstreetmap.org/wiki/Amenity
 // POI tags : amenity, leisure, shop, sport, tourism, historic; accessories (internet-access), natural ?
 public enum AmenityType {
 	// Some of those types are subtypes of Amenity tag 
-	SUSTENANCE, // restaurant, cafe ...
-	EDUCATION, // school, ...
-	TRANSPORTATION, // car_wash, parking, ...
-	FINANCE, // bank, atm, ...
-	HEALTHCARE, // hospital ...
-	ENTERTAINMENT, // cinema, ... (+! sauna, brothel)
-	TOURISM, // [TAG] hotel, sights, museum .. 
-	HISTORIC, // [TAG] historic places, monuments (should we unify tourism/historic)
-	SHOP, // [TAG] convenience (product), clothes...
-	LEISURE, // [TAG] leisure
-	SPORT, // [TAG] sport
-	OTHER, // grave-yard, police, post-office [+Internet_access]
+	SUSTENANCE("amenity_type_sustenance"), // restaurant, cafe ... //$NON-NLS-1$
+	EDUCATION("amenity_type_education"), // school, ... //$NON-NLS-1$
+	TRANSPORTATION("amenity_type_transportation"), // car_wash, parking, ... //$NON-NLS-1$
+	FINANCE("amenity_type_finance"), // bank, atm, ... //$NON-NLS-1$
+	HEALTHCARE("amenity_type_healthcare"), // hospital ...
+	ENTERTAINMENT("amenity_type_entertainment"), // cinema, ... (+! sauna, brothel)
+	TOURISM("amenity_type_tourism"), // [TAG] hotel, sights, museum .. 
+	HISTORIC("amenity_type_historic"), // [TAG] historic places, monuments (should we unify tourism/historic)
+	SHOP("amenity_type_shop"), // [TAG] convenience (product), clothes...
+	LEISURE("amenity_type_leisure"), // [TAG] leisure
+	SPORT("amenity_type_sport"), // [TAG] sport
+	OTHER("amenity_type_other"), // grave-yard, police, post-office [+Internet_access]
 	;
+	
+	private String name;
+	
+	private AmenityType(String name)
+	{
+		this.name = name;	
+	}
 	
 	public static AmenityType fromString(String s){
 		try {
@@ -52,7 +59,8 @@ public enum AmenityType {
 	}
 	
 	public static String toPublicString(AmenityType t){
-		return Algoritms.capitalizeFirstLetterAndLowercase(t.toString().replace('_', ' '));
+//		return Algoritms.capitalizeFirstLetterAndLowercase(t.toString().replace('_', ' '));
+		return Messages.getMessage(t.name);
 	}
 	
 
@@ -94,7 +102,7 @@ public enum AmenityType {
 		amenityMap.put("beauty", AmenityType.SHOP);
 		amenityMap.put("beverages", AmenityType.SHOP);
 		amenityMap.put("bicycle", AmenityType.SHOP);
-		amenityMap.put("books", AmenityType.SHOP);
+		amenityMap.put("books", AmenityType.SHOP); //$NON-NLS-1$
 		amenityMap.put("boutique", AmenityType.SHOP);
 		amenityMap.put("butcher", AmenityType.SHOP);
 		amenityMap.put("car", AmenityType.SHOP);
@@ -120,10 +128,10 @@ public enum AmenityType {
 		amenityMap.put("glaziery", AmenityType.SHOP);
 		amenityMap.put("greengrocer", AmenityType.SHOP);
 		amenityMap.put("hairdresser", AmenityType.SHOP);
-		amenityMap.put("hardware", AmenityType.SHOP);
-		amenityMap.put("hearing_aids", AmenityType.SHOP);
-		amenityMap.put("hifi", AmenityType.SHOP);
-		amenityMap.put("ice_cream", AmenityType.SHOP);
+		amenityMap.put("hardware", AmenityType.SHOP); //$NON-NLS-1$
+		amenityMap.put("hearing_aids", AmenityType.SHOP); //$NON-NLS-1$
+		amenityMap.put("hifi", AmenityType.SHOP); //$NON-NLS-1$
+		amenityMap.put("ice_cream", AmenityType.SHOP); //$NON-NLS-1$
 		amenityMap.put("hardware", AmenityType.SHOP);
 		amenityMap.put("hearing_aids", AmenityType.SHOP);
 		amenityMap.put("hifi", AmenityType.SHOP);
