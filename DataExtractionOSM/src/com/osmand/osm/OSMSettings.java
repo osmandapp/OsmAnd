@@ -3,33 +3,33 @@ package com.osmand.osm;
 public class OSMSettings {
 	
 	public enum OSMTagKey {
-		NAME("name"),
-		NAME_EN("name:en"),
+		NAME("name"), //$NON-NLS-1$
+		NAME_EN("name:en"), //$NON-NLS-1$
 		// ways
-		HIGHWAY("highway"),
-		BUILDING("building"),
+		HIGHWAY("highway"), //$NON-NLS-1$
+		BUILDING("building"), //$NON-NLS-1$
 		// transport
-		ROUTE("route"),
-		OPERATOR("operator"),
-		REF("ref"),
+		ROUTE("route"), //$NON-NLS-1$
+		OPERATOR("operator"), //$NON-NLS-1$
+		REF("ref"), //$NON-NLS-1$
 		
 		// address
-		PLACE("place"),
-		ADDR_HOUSE_NUMBER("addr:housenumber"),
-		ADDR_STREET("addr:street"),
-		ADDR_POSTCODE("addr:postcode"),
+		PLACE("place"), //$NON-NLS-1$
+		ADDR_HOUSE_NUMBER("addr:housenumber"), //$NON-NLS-1$
+		ADDR_STREET("addr:street"), //$NON-NLS-1$
+		ADDR_POSTCODE("addr:postcode"), //$NON-NLS-1$
 		
 		// POI
-		AMENITY("amenity"),
-		SHOP("shop"),
-		LEISURE("leisure"), 
-		TOURISM("tourism"),
-		SPORT("sport"), 
-		HISTORIC("historic"),
-		NATURAL("natural"),
-		INTERNET_ACCESS("internet_access"),
+		AMENITY("amenity"), //$NON-NLS-1$
+		SHOP("shop"), //$NON-NLS-1$
+		LEISURE("leisure"),  //$NON-NLS-1$
+		TOURISM("tourism"), //$NON-NLS-1$
+		SPORT("sport"),  //$NON-NLS-1$
+		HISTORIC("historic"), //$NON-NLS-1$
+		NATURAL("natural"), //$NON-NLS-1$
+		INTERNET_ACCESS("internet_access"), //$NON-NLS-1$
 		
-		OPENING_HOURS("opening_hours"),
+		OPENING_HOURS("opening_hours"), //$NON-NLS-1$
 		;
 		
 		private final String value;
@@ -53,9 +53,9 @@ public class OSMSettings {
 	
 	public static boolean wayForCar(String tagHighway){
 		if(tagHighway != null){
-			String[] cars = new String[]{"trunk", "motorway", "primary", "secondary", "tertiary", "service", "residential",
-										"trunk_link", "motorway_link", "primary_link", "secondary_link", "residential_link", 
-										"tertiary_link", "track" };
+			String[] cars = new String[]{"trunk", "motorway", "primary", "secondary", "tertiary", "service", "residential", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+										"trunk_link", "motorway_link", "primary_link", "secondary_link", "residential_link",  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+										"tertiary_link", "track" }; //$NON-NLS-1$ //$NON-NLS-2$
 			for(String c : cars){
 				if(c.equals(tagHighway)){
 					return true;

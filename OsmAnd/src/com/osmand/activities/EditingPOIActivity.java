@@ -104,7 +104,7 @@ public class EditingPOIActivity {
 	public void showCreateDialog(double latitude, double longitude){
 		dlg = new Dialog(ctx);
 		Node n = new Node(latitude, longitude, -1);
-		n.putTag(OSMTagKey.AMENITY.getValue(), "");
+		n.putTag(OSMTagKey.AMENITY.getValue(), ""); //$NON-NLS-1$
 		n.putTag(OSMTagKey.OPENING_HOURS.getValue(), "Mo-Su 08:00-20:00"); //$NON-NLS-1$
 		dlg.setTitle(R.string.poi_create_title);
 		showDialog(n);
@@ -341,7 +341,7 @@ public class EditingPOIActivity {
 					boolean f = true;
 					while ((s = in.readLine()) != null) {
 						if(!f){
-							responseBody.append("\n");
+							responseBody.append("\n"); //$NON-NLS-1$
 						} else {
 							f = false;
 						}
@@ -514,7 +514,7 @@ public class EditingPOIActivity {
 			String res = sendRequest(SITE_API+"api/0.6/node/"+id, "GET", null, "Loading poi " + id, false); //$NON-NLS-1$ //$NON-NLS-2$
 			if(res != null){
 				OsmBaseStorage st = new OsmBaseStorage();
-				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true);
+				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true); //$NON-NLS-1$
 				Entity entity = st.getRegisteredEntities().get(id);
 				entityInfo = st.getRegisteredEntityInfo().get(id);
 				if(entity instanceof Node){

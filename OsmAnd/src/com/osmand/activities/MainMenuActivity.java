@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,8 +85,8 @@ public class MainMenuActivity extends Activity {
 			File file = new File(Environment.getExternalStorageDirectory(), EXCEPTION_PATH);
 			if(file.exists() && file.length() > 0){
 				if(size != file.length()){
-					String msg = "Previous application run was crashed. Log file is in " + EXCEPTION_PATH +". ";
-					msg += "Please raise the issue and attach log file.";
+					String msg = MessageFormat.format("Previous application run was crashed. Log file is at {0}.  Please raise the issue and attach log file.",
+							EXCEPTION_PATH);
 					Builder builder = new AlertDialog.Builder(MainMenuActivity.this);
 					builder.setMessage(msg).setNeutralButton("Close", null).show();
 					getPreferences(MODE_WORLD_READABLE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
