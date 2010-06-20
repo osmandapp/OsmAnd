@@ -5,7 +5,7 @@
 <item android:title="@string/mark_point" android:id="@+id/map_mark_point" android:icon="@android:drawable/ic_menu_mylocation"></item>
 <item android:title="@string/show_gps_status" android:id="@+id/map_show_gps_status" android:icon="@android:drawable/ic_menu_compass"></item>
 <item android:id="@+id/map_navigate_to_point" android:title="@string/stop_navigation" android:visible="false" android:icon="@android:drawable/ic_menu_close_clear_cancel"></item>
-<item android:id="@+id/map_reload_tile" android:title="@string/update_tile" android:icon="@android:drawable/ic_menu_view"></item>
+<item android:id="@+id/map_get_directions" android:title="@string/get_directions" android:icon="@android:drawable/ic_menu_directions"></item>
 <item android:title="@string/map_specify_point" android:id="@+id/map_specify_point" android:icon="@android:drawable/ic_menu_search"></item>
 <item android:id="@+id/map_show_settings" android:title="@string/settings_Button" android:icon="@android:drawable/ic_menu_preferences"></item>
 </group>

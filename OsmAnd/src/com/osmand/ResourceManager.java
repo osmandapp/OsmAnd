@@ -55,6 +55,7 @@ public class ResourceManager {
 	protected final int maxImgCacheSize = 64;
 	
 	protected Map<String, Bitmap> cacheOfImages = new LinkedHashMap<String, Bitmap>();
+	protected Map<String, Boolean> imagesOnFS = new LinkedHashMap<String, Boolean>() ;
 	
 	protected File dirWithTiles ;
 	
@@ -82,52 +83,99 @@ public class ResourceManager {
 	
 	////////////////////////////////////////////// Working with tiles ////////////////////////////////////////////////
 	
-	public Bitmap getTileImageForMapAsync(ITileSource map, int x, int y, int zoom, boolean loadFromInternetIfNeeded) {
-		return getTileImageForMap(map, x, y, zoom, loadFromInternetIfNeeded, false, true);
+	public void indexingImageTiles(IProgress progress){
+		progress.startTask(Messages.getMessage("reading_cached_tiles"), -1); //$NON-NLS-1$
+		imagesOnFS.clear();
+		for(File c : dirWithTiles.listFiles()){
+			indexImageTilesFS("", c); //$NON-NLS-1$
+		}
+	}
+	
+	private void indexImageTilesFS(String prefix, File f){
+		if(f.isDirectory()){
+			for(File c : f.listFiles()){
+				indexImageTilesFS(prefix +f.getName() +"/" , c); //$NON-NLS-1$
+			}
+		} else if(f.getName().endsWith(".tile")){ //$NON-NLS-1$
+			imagesOnFS.put(prefix + f.getName(), Boolean.TRUE);
+		}
 	}
 	
 	
-	public Bitmap getTileImageFromCache(ITileSource map, int x, int y, int zoom){
-		return getTileImageForMap(map, x, y, zoom, false, false, false);
+	public Bitmap getTileImageForMapAsync(String file, ITileSource map, int x, int y, int zoom, boolean loadFromInternetIfNeeded) {
+		return getTileImageForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, false, true);
 	}
 	
-	public Bitmap getTileImageForMapSync(ITileSource map, int x, int y, int zoom, boolean loadFromInternetIfNeeded) {
-		return getTileImageForMap(map, x, y, zoom, loadFromInternetIfNeeded, true, true);
+	
+	public Bitmap getTileImageFromCache(String file){
+		return cacheOfImages.get(file);
 	}
 	
-	public boolean tileExistOnFileSystem(ITileSource map, int x, int y, int zoom){
-		// TODO implement
-		return false;
+	
+	public Bitmap getTileImageForMapSync(String file, ITileSource map, int x, int y, int zoom, boolean loadFromInternetIfNeeded) {
+		return getTileImageForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, true, true);
 	}
 	
-	public void clearTileImageForMap(ITileSource map, int x, int y, int zoom){
-		getTileImageForMap(map, x, y, zoom, true, false, false, true);
+	public synchronized void tileDownloaded(String file){
+		imagesOnFS.put(file, Boolean.TRUE);
 	}
-	protected Bitmap getTileImageForMap(ITileSource map, int x, int y, int zoom, 
+	
+	public synchronized boolean tileExistOnFileSystem(String file){
+		if(!imagesOnFS.containsKey(file)){
+			if(new File(dirWithTiles, file).exists()){
+				imagesOnFS.put(file, Boolean.TRUE);
+			} else {
+				imagesOnFS.put(file, null);
+			}
+		}
+		return imagesOnFS.get(file) != null;		
+	}
+	
+	public void clearTileImageForMap(String file, ITileSource map, int x, int y, int zoom){
+		getTileImageForMap(file, map, x, y, zoom, true, false, true, true);
+	}
+	
+	/**
+	 * @param file - null could be passed if you do not call very often with that param
+	 */
+	protected Bitmap getTileImageForMap(String file, ITileSource map, int x, int y, int zoom, 
 			boolean loadFromInternetIfNeeded, boolean sync, boolean loadFromFs) {
-		return getTileImageForMap(map, x, y, zoom, loadFromInternetIfNeeded, sync, loadFromFs, false);
+		return getTileImageForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, sync, loadFromFs, false);
 	}
-	
+
 	// introduce cache in order save memory
 	protected StringBuilder builder = new StringBuilder(40);
-	protected synchronized Bitmap getTileImageForMap(ITileSource map, int x, int y, int zoom, 
-			boolean loadFromInternetIfNeeded, boolean sync, boolean loadFromFs, boolean deleteBefore) {
-		if (map == null) {
-			return null;
-		}
+	public synchronized String calculateTileId(ITileSource map, int x, int y, int zoom){
 		builder.setLength(0);
 		builder.append(map.getName()).append('/').append(zoom).	append('/').append(x).
 				append('/').append(y).append(map.getTileFormat()).append(".tile"); //$NON-NLS-1$
 		String file = builder.toString();
+		return file;
+	}
+	
+
+	protected synchronized Bitmap getTileImageForMap(String file, ITileSource map, int x, int y, int zoom,
+			boolean loadFromInternetIfNeeded, boolean sync, boolean loadFromFs, boolean deleteBefore) {
+		if (file == null) {
+			file = calculateTileId(map, x, y, zoom);
+			if(file == null){
+				return null;
+			}
+		}
+		
 		if(deleteBefore){
 			cacheOfImages.remove(file);
 			File f = new File(dirWithTiles, file);
 			if(f.exists()){
 				f.delete();
+				imagesOnFS.put(file, null);
 			}
 		}
 		
 		if (loadFromFs && cacheOfImages.get(file) == null) {
+			if(!loadFromInternetIfNeeded && !tileExistOnFileSystem(file)){
+				return null;
+			}
 			String url = loadFromInternetIfNeeded ? map.getUrlToLoad(x, y, zoom) : null;
 			TileLoadDownloadRequest req = new TileLoadDownloadRequest(dirWithTiles, file, url, new File(dirWithTiles, file), 
 					x, y, zoom);
@@ -177,6 +225,8 @@ public class ResourceManager {
 
 	public List<String> reloadIndexes(IProgress progress){
 		close();
+		// do it lazy
+		// indexingImageTiles(progress);
 		List<String> warnings = new ArrayList<String>();
 		warnings.addAll(indexingPoi(progress));
 		warnings.addAll(indexingAddresses(progress));
@@ -296,6 +346,7 @@ public class ResourceManager {
 	}
 
 	public synchronized void close(){
+		imagesOnFS.clear();
 		closeAmenities();
 		closeAddresses();
 	}

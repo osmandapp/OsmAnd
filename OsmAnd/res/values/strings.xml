@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="only_show">Only show</string>
+	<string name="follow">Follow</string>
+	<string name="recalculate_route_to_your_location">Recalculate route according to your location</string>
+	<string name="follow_route">Follow to the route</string>
+	<string name="mark_final_location_first">Please mark point navigate to first</string>
+	<string name="get_directions">Directions</string>
 	<string name="gps_status_app_not_found">Gps status app could not be found</string>
     <string name="show_gps_status">Show gps status</string>
 	<string name="opening_hours">Opening hours : </string>
