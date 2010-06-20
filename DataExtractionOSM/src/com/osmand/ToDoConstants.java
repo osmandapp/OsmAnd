@@ -30,10 +30,6 @@ public class ToDoConstants {
 //	     DONE : MiniMap done, Routing settings done, RouteLayer done, RoutingHelper done.
 //	     TODO : Test again?
 	
-//   37. Get rid of exit button (!). Think about when notification should go & how clear resources if it is necessary
-//       DONE : 	
-//       TODO : add to app settings preference (Refresh indexes).
-	
 //   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
 //		 Some icons are not fine (as back menu from map - it is blured).
 	
@@ -80,6 +76,8 @@ public class ToDoConstants {
 	// BUGS Swing
 	
 	// DONE ANDROID :
+    //  37. Get rid of exit button (!). Think about when notification should go & how clear resources if it is necessary
+    //      DONE : add to app settings preference (Refresh indexes).
 
 	
 	// DONE SWING
