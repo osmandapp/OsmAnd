@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="gps_status_app_not_found">Gps status app could not be found</string>
+    <string name="show_gps_status">Show gps status</string>
 	<string name="opening_hours">Opening hours : </string>
 	<string name="opening_changeset">Openging changeset</string>
 	<string name="closing_changeset">Closing changeset</string>
