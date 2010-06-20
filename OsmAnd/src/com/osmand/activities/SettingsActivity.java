@@ -224,7 +224,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	}
 	
 	public void reloadIndexes(){
-		final ProgressDialog dlg = ProgressDialog.show(this, "Loading data", "Reading indices...", true);
+		final ProgressDialog dlg = ProgressDialog.show(this, getString(R.string.loading_data), getString(R.string.reading_indexes), true);
 		final ProgressDialogImplementation impl = new ProgressDialogImplementation(dlg);
 		impl.setRunnable("Initializing app", new Runnable(){ //$NON-NLS-1$
 			@Override

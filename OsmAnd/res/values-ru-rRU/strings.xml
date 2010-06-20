@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="finished_task">Окончен : </string>
 	<string name="reload_indexes_descr">Перезагрузить индексы с SD</string>
     <string name="reload_indexes">Обновить индексы</string>
 	<string name="use_online_routing_descr">Использовать интернет для расчета маршрута</string>

@@ -97,7 +97,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		Notification notification = new Notification(R.drawable.icon, "", //$NON-NLS-1$
 				System.currentTimeMillis());
 		notification.setLatestEventInfo(this, Version.APP_NAME,
-				"Go back to OsmAnd map", PendingIntent.getActivity(
+				getString(R.string.go_back_to_osmand), PendingIntent.getActivity(
 						this.getBaseContext(), 0, notificationIndent,
 						PendingIntent.FLAG_UPDATE_CURRENT));
 		return notification;

@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.osmand.LogUtil;
 import com.osmand.OsmandSettings;
+import com.osmand.R;
 import com.osmand.Version;
 
 public class SavingTrackHelper extends SQLiteOpenHelper {
@@ -126,10 +127,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			}
 		} catch (RuntimeException e) {
 			log.error("Error saving gpx", e); //$NON-NLS-1$
-			Toast.makeText(ctx, "Exception occurred while saving gpx", Toast.LENGTH_LONG);
+			Toast.makeText(ctx, ctx.getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_LONG);
 		} catch (IOException e) {
 			log.error("Error saving gpx", e); //$NON-NLS-1$
-			Toast.makeText(ctx, "Exception occurred while saving gpx", Toast.LENGTH_LONG);
+			Toast.makeText(ctx, ctx.getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_LONG);
 		}
 	}
 	

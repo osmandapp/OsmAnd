@@ -1,6 +1,7 @@
 package com.osmand;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
@@ -15,8 +16,10 @@ public class ProgressDialogImplementation implements IProgress {
 	
 	private Handler mViewUpdateHandler;
 	private Thread run;
+	private Context context;
 
 	public ProgressDialogImplementation(final ProgressDialog dlg){
+		context = dlg.getContext();
 		mViewUpdateHandler = new Handler(){
 			@Override
 			public void handleMessage(Message msg) {
@@ -87,7 +90,7 @@ public class ProgressDialogImplementation implements IProgress {
 	@Override
 	public void finishTask() {
 		if (taskName != null) {
-			message = "Finished : " + taskName;
+			message = context.getResources().getString(R.string.finished_task) + taskName;
 			mViewUpdateHandler.sendEmptyMessage(0);
 		}
 		work = -1;

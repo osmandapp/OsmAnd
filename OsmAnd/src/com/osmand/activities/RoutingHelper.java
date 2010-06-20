@@ -22,6 +22,7 @@ import android.util.FloatMath;
 import android.widget.Toast;
 
 import com.osmand.LogUtil;
+import com.osmand.R;
 import com.osmand.OsmandSettings.ApplicationMode;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
@@ -94,7 +95,7 @@ public class RoutingHelper {
 		if(currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < 60){
 			if(lastFixedLocation != null && lastFixedLocation.distanceTo(lastPoint) < 60){
 				// TODO mark as finished 
-				showMessage("You arrived at destination point");
+				showMessage(activity.getString(R.string.arrived_at_destination));
 				currentRoute = routeNodes.size() - 1;
 			}
 			lastFixedLocation = currentLocation;
@@ -241,16 +242,16 @@ public class RoutingHelper {
 								currentRunningJob = null;
 							}
 							if(res.isCalculated()){
-								showMessage("New route is calculated distance : " + MapUtils.getFormattedDistance(sumDistance(res.list)));
+								showMessage(activity.getString(R.string.new_route_calculated_dist) + MapUtils.getFormattedDistance(sumDistance(res.list)));
 								// be aware that is non ui thread
 								activity.getMapView().refreshMap();
 							} else {
 								if(res.errorMessage != null){
-									showMessage("Error calculating route : " + res.errorMessage);
+									showMessage(activity.getString(R.string.error_calculating_route)+ res.errorMessage);
 								} else if(res.list == null){
-									showMessage("Error occurred while calculating route");
+									showMessage(activity.getString(R.string.error_calculating_route_occured));
 								} else {
-									showMessage("Empty route is calculated");
+									showMessage(activity.getString(R.string.empty_route_calculated));
 								}
 							}
 							lastTimeEvaluatedRoute = System.currentTimeMillis();
