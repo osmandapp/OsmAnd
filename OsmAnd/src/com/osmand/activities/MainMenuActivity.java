@@ -49,7 +49,8 @@ public class MainMenuActivity extends Activity {
 	
 	public void startApplication(){
 		if(!applicationAlreadyStarted){
-			final ProgressDialog dlg = ProgressDialog.show(this, "Loading data", "Reading indices...", true);
+			
+			final ProgressDialog dlg = ProgressDialog.show(this, getString(R.string.loading_data), getString(R.string.reading_indexes), true);
 			final ProgressDialogImplementation impl = new ProgressDialogImplementation(dlg);
 			impl.setRunnable("Initializing app", new Runnable(){ //$NON-NLS-1$
 				@Override
@@ -58,7 +59,7 @@ public class MainMenuActivity extends Activity {
 						List<String> warnings = ResourceManager.getResourceManager().reloadIndexes(impl);
 						SavingTrackHelper helper = new SavingTrackHelper(MainMenuActivity.this);
 						if (helper.hasDataToSave()) {
-							impl.startTask("Saving gpx tracks to SD...", -1);
+							impl.startTask(getString(R.string.saving_gpx_tracks), -1);
 							helper.saveDataToGpx();
 						}
 						helper.close();
@@ -77,10 +78,10 @@ public class MainMenuActivity extends Activity {
 			File file = new File(Environment.getExternalStorageDirectory(), EXCEPTION_PATH);
 			if(file.exists() && file.length() > 0){
 				if(size != file.length()){
-					String msg = MessageFormat.format("Previous application run was crashed. Log file is at {0}.  Please raise the issue and attach log file.",
+					String msg = MessageFormat.format(getString(R.string.previous_run_crashed),
 							EXCEPTION_PATH);
 					Builder builder = new AlertDialog.Builder(MainMenuActivity.this);
-					builder.setMessage(msg).setNeutralButton("Close", null).show();
+					builder.setMessage(msg).setNeutralButton(getString(R.string.close), null).show();
 					getPreferences(MODE_WORLD_READABLE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
 				}
 				

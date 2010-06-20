@@ -192,12 +192,13 @@ public class ResourceManager {
 			for (File f : file.listFiles()) {
 				if (f.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
 					AmenityIndexRepository repository = new AmenityIndexRepository();
-					progress.startTask("Indexing poi " + f.getName(), -1);
+					
+					progress.startTask(Messages.getMessage("indexing_poi") + f.getName(), -1); //$NON-NLS-1$
 					boolean initialized = repository.initialize(progress, f);
 					if (initialized) {
 						amenityRepositories.add(repository);
 					}else {
-						warnings.add(MessageFormat.format("The version of index ''{0}''is not supported", f.getName()));
+						warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
 					}
 				}
 			}
@@ -214,12 +215,12 @@ public class ResourceManager {
 			for (File f : file.listFiles()) {
 				if (f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)) {
 					RegionAddressRepository repository = new RegionAddressRepository();
-					progress.startTask("Indexing address" + f.getName(), -1);
+					progress.startTask(Messages.getMessage("indexing_address") + f.getName(), -1); //$NON-NLS-1$
 					boolean initialized = repository.initialize(progress, f);
 					if (initialized) {
 						addressMap.put(repository.getName(), repository);
 					} else {
-						warnings.add(MessageFormat.format("The version of index ''{0}''is not supported", f.getName()));
+						warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
 					}
 				}
 			}

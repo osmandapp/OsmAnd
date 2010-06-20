@@ -78,9 +78,9 @@ public class PoiFilter {
 	public String getSearchArea(){
 		if(zoom <= 14){
 			int d = (int) (1 * (1 << (14 - zoom)));
-			return " < " + d + " km";
+			return " < " + d + " " + Messages.getMessage(Messages.KEY_KM);  //$NON-NLS-1$//$NON-NLS-2$
 		} else {
-			return " < 500 m";
+			return " < 500 " + Messages.getMessage(Messages.KEY_M);  //$NON-NLS-1$
 		}
 	}
 	

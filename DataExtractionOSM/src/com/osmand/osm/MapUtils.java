@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import com.osmand.Messages;
 import com.osmand.data.MapObject;
 
 /**
@@ -208,13 +209,13 @@ public class MapUtils {
 
 	public static String getFormattedDistance(int meters){
 		if(meters >= 100000){
-			return meters / 1000 + " km"; 
+			return meters / 1000 + " " + Messages.getMessage(Messages.KEY_KM);   //$NON-NLS-1$
 		} else if(meters >= 10000){
-			return MessageFormat.format("{0, number, #.#}"+" km", ((float) meters) / 1000); //$NON-NLS-1$
+			return MessageFormat.format("{0, number, #.#} "+Messages.getMessage(Messages.KEY_KM), ((float) meters) / 1000); //$NON-NLS-1$ 
 		} else if(meters > 1500){
-			return MessageFormat.format("{0, number, #.##}"+" km", ((float) meters) / 1000); //$NON-NLS-1$
+			return MessageFormat.format("{0, number, #.##}"+Messages.getMessage(Messages.KEY_KM), ((float) meters) / 1000); //$NON-NLS-1$ 
 		} else {
-			return meters + " m";
+			return meters + " "+Messages.getMessage(Messages.KEY_M); //$NON-NLS-1$ 
 		}
 	}
 }

@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="poi">POI</string>
+	<string name="error_occurred_saving_gpx">Error occurred while saving gpx</string>
+	<string name="error_calculating_route">Error calculating route : </string>
+	<string name="error_calculating_route_occured">Error occurred while calculating route</string>
+	<string name="empty_route_calculated">Empty route is calculated</string>									
+	<string name="new_route_calculated_dist">New route is calculated, distance :</string>
+	<string name="arrived_at_destination">You arrived at destination point</string>
+	<string name="invalid_locations">Locations are invalid</string>
+	<string name="go_back_to_osmand">Go back to OsmAnd map</string>
+	<string name="close">Close</string>
+	<string name="loading_data">Loading data</string>
+	<string name="reading_indexes">Reading indices...</string>
+	<string name="previous_run_crashed">Previous application run was crashed. Log file is at {0}.  Please raise the issue and attach log file.</string>
+	<string name="saving_gpx_tracks">Saving gpx tracks to SD...</string>
+	<string name="finished_task">Finished : </string>
     <string name="reload_indexes_descr">Reload data indexes from SD</string>
     <string name="reload_indexes">Reload indexes</string>
     <string name="use_online_routing_descr">Use internet to calculate route</string>
