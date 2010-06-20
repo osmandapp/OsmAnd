@@ -174,6 +174,15 @@ public class ResourceManager {
 	}
 	
     ////////////////////////////////////////////// Working with indexes ////////////////////////////////////////////////
+
+	public List<String> reloadIndexes(IProgress progress){
+		close();
+		List<String> warnings = new ArrayList<String>();
+		warnings.addAll(indexingPoi(progress));
+		warnings.addAll(indexingAddresses(progress));
+		return warnings;
+	}
+	
 	// POI INDEX //
 	public List<String> indexingPoi(final IProgress progress) {
 		File file = new File(Environment.getExternalStorageDirectory(), POI_PATH);

@@ -48,11 +48,11 @@
 		</TableRow>
 	</TableLayout>
 	
-	<FrameLayout android:id="@+id/FrameLayout01" android:layout_gravity="bottom|left"
+	 <!--  <FrameLayout android:id="@+id/FrameLayout01" android:layout_gravity="bottom|left"
 		android:layout_height="wrap_content" android:layout_width="fill_parent">
 		<Button android:layout_width="wrap_content"
 			android:layout_marginLeft="5dp" android:layout_marginBottom ="5dp"
 			android:layout_height="wrap_content" android:layout_gravity="bottom|left"
 			android:id="@+id/ExitButton" android:background="@drawable/exit"></Button>
-	</FrameLayout>
+	</FrameLayout>  -->
 </FrameLayout>

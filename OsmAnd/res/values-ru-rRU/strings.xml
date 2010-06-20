@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="reload_indexes_descr">Перезагрузить индексы с SD</string>
+    <string name="reload_indexes">Обновить индексы</string>
 	<string name="use_online_routing_descr">Использовать интернет для расчета маршрута</string>
     <string name="use_online_routing">Online маршрутизация</string>
 	<string name="user_password_descr">Указать пароль для работы с OSM</string>
     <string name="user_password">Пароль</string>
     <string name="osm_settings_descr">Упраление слоем open street bugs, установка osm логина </string>
     <string name="monitor_preferences_descr">Включение мониторинга, установка интервала сохранения</string>
-    <string name="search_settings_descr">Настройка параметров поиска</string>
+    <string name="data_settings_descr">Настройка данных : язык, обновление данных</string>
     <string name="map_preferences_descr">Настройка источника, параметров карты, доступа в Интернет</string>
-    <string name="search_settings">Поиск</string>
+    <string name="data_settings">Данные</string>
     <string name="osm_settings">Osm</string>
     <string name="auto_zoom_map_descr">Автоматически изменять масштаб карты при изменении скорости</string>
     <string name="auto_zoom_map">Масштаб</string>

@@ -7,14 +7,10 @@ import java.io.FileWriter;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Intent;
@@ -33,7 +29,6 @@ import com.osmand.LogUtil;
 import com.osmand.ProgressDialogImplementation;
 import com.osmand.R;
 import com.osmand.ResourceManager;
-import com.osmand.Version;
 import com.osmand.activities.search.SearchActivity;
 
 public class MainMenuActivity extends Activity {
@@ -43,12 +38,11 @@ public class MainMenuActivity extends Activity {
 	private static final String EXCEPTION_FILE_SIZE = "/osmand/exception.log"; //$NON-NLS-1$
 	
 	private Button showMap;
-	private Button exitButton;
 	private Button settingsButton;
 	private Button searchButton;
 	private Button favouritesButton;
-	private NotificationManager mNotificationManager;
-	private int APP_NOTIFICATION_ID;
+	
+	
 	
 	
 
@@ -61,9 +55,7 @@ public class MainMenuActivity extends Activity {
 				@Override
 				public void run() {
 					try {
-						List<String> warnings = new ArrayList<String>();
-						warnings.addAll(ResourceManager.getResourceManager().indexingPoi(impl));
-						warnings.addAll(ResourceManager.getResourceManager().indexingAddresses(impl));
+						List<String> warnings = ResourceManager.getResourceManager().reloadIndexes(impl);
 						SavingTrackHelper helper = new SavingTrackHelper(MainMenuActivity.this);
 						if (helper.hasDataToSave()) {
 							impl.startTask("Saving gpx tracks to SD...", -1);
@@ -107,17 +99,6 @@ public class MainMenuActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.menu);
 
-		mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-		Intent notificationIndent = new Intent(MainMenuActivity.this, MapActivity.class);
-		notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		Notification notification = new Notification(R.drawable.icon, "", //$NON-NLS-1$
-				System.currentTimeMillis());
-		notification.setLatestEventInfo(MainMenuActivity.this, Version.APP_NAME,
-				"OsmAnd is running in background", PendingIntent.getActivity(
-						this.getBaseContext(), 0, notificationIndent,
-						PendingIntent.FLAG_UPDATE_CURRENT));
-		mNotificationManager.notify(APP_NOTIFICATION_ID, notification);
 
 		showMap = (Button) findViewById(R.id.MapButton);
 		showMap.setOnClickListener(new OnClickListener() {
@@ -156,14 +137,14 @@ public class MainMenuActivity extends Activity {
 		});
 		
 		
-		exitButton = (Button) findViewById(R.id.ExitButton);
+//		exitButton = (Button) findViewById(R.id.ExitButton);
 //		exitButton.setVisibility(View.INVISIBLE);
-		exitButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finishApplication();
-			}
-		}); 
+//		exitButton.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				finishApplication();
+//			}
+//		}); 
 		
 		startApplication();
 	}
@@ -191,7 +172,6 @@ public class MainMenuActivity extends Activity {
 	}
 	
 	protected void finishApplication(){
-		mNotificationManager.cancel(APP_NOTIFICATION_ID);
 		ResourceManager.getResourceManager().close();
 		applicationAlreadyStarted = false;
 		MainMenuActivity.this.finish();
