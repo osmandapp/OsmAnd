@@ -22,9 +22,6 @@ public class ToDoConstants {
 	public int DESCRIBE_ABOUT_AUTHORS = 8;
 	
 	 // TODO ANDROID 
-//   31. Translation.
-//	     DONE : partially olga
-//       TODO : everywhere put non-nls, check all translated into russian [swing could not be translated]
 
 //   34. Suppport navigation for calculated route (example of get route from internet is in swing app).
 //	     DONE : MiniMap done, Routing settings done, RouteLayer done, RoutingHelper done.
@@ -78,6 +75,7 @@ public class ToDoConstants {
 	// DONE ANDROID :
     //  37. Get rid of exit button (!). Think about when notification should go & how clear resources if it is necessary
     //      DONE : add to app settings preference (Refresh indexes).
+	//  31. Translation.
 
 	
 	// DONE SWING
