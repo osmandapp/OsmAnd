@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="only_show">Только показать</string>
+	<string name="follow">Следовать</string>
+	<string name="recalculate_route_to_your_location">Пересчитывать маршрут в зависимости от местоположения</string>
+	<string name="follow_route">Следовать по маршруту</string>
+	<string name="mark_final_location_first">Отметьте сначала точку назначения</string>
+	<string name="get_directions">Маршрут</string>
 	<string name="gps_status_app_not_found">Приложение Gps status не найдено</string>
 	<string name="show_gps_status">GPS статус</string>
 	<string name="opening_hours">Рабочие часы: </string>
@@ -128,7 +134,7 @@
 <string name="interval_30_seconds">30 секунд</string>
 <string name="interval_1_minute">1 минута</string>
 <string name="interval_5_minutes">5 минут</string>
-<string name="navigate_point_top_text">Введите широту и долготу в выбранном формате (Г - градусы, М - минуты, С - секунды)</string>
+<string name="navigate_point_top_text">Введите широту и долготу в формате (Г - градусы, М - минуты, С - секунды)</string>
 <string name="navigate_point_latitude">Широта</string>
 <string name="navigate_point_longitude">Долгота</string>
 <string name="navigate_point_format_D">ГГГ.ГГГГ</string>
@@ -158,7 +164,7 @@
 <string name="add_favorite_dialog_favourite_added_template">Точка '{0}' была успешно добавлена к Избранным.</string>
 
 <string name="favourites_context_menu_title">Контекстное меню</string>
-<string name="favourites_context_menu_navigate">Показать</string>
+<string name="favourites_context_menu_navigate">Идти к</string>
 <string name="favourites_context_menu_edit">Редактировать точку</string>
 <string name="favourites_context_menu_delete">Удалить точку</string>
 <string name="favourites_edit_dialog_title">Введите новое имя точки</string>

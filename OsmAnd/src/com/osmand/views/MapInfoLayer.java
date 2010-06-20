@@ -64,7 +64,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		paintAlphaGray = new Paint();
 		paintAlphaGray.setStyle(Style.FILL_AND_STROKE);
 		paintAlphaGray.setColor(Color.LTGRAY);
-		paintAlphaGray.setAlpha(150);
+		paintAlphaGray.setAlpha(180); // do not make very transparent (to hide route)
 		
 		fillBlack = new Paint();
 		fillBlack.setStyle(Style.FILL_AND_STROKE);
@@ -90,7 +90,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		boundsForMiniRoute = new RectF(0, 64, 96, 196);
 		centerMiniRouteX = 48;
 		centerMiniRouteY= 160;
-		scaleMiniRoute = 0.1f;
+		scaleMiniRoute = 0.15f;
 		
 		pathForCompass = new Path();
 		pathForCompass.moveTo(9, 15.5f);

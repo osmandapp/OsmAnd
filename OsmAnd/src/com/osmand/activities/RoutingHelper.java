@@ -68,8 +68,16 @@ public class RoutingHelper {
 		
 	}
 	
-	public void setFinalLocation(LatLon finalLocation){
+	
+	public void setFinalAndCurrentLocation(LatLon finalLocation, Location currentLocation){
 		this.finalLocation = finalLocation;
+		evalWaitInterval = 3000;
+		// to update route
+		setCurrentLocation(currentLocation);
+	}
+	
+	public void setFinalLocation(LatLon finalLocation){
+		setFinalAndCurrentLocation(finalLocation, getLastFixedLocation());
 	}
 	
 	public void setAppMode(ApplicationMode mode){
@@ -94,13 +102,12 @@ public class RoutingHelper {
 		Location lastPoint = routeNodes.get(routeNodes.size() - 1);
 		if(currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < 60){
 			if(lastFixedLocation != null && lastFixedLocation.distanceTo(lastPoint) < 60){
-				// TODO mark as finished 
 				showMessage(activity.getString(R.string.arrived_at_destination));
 				currentRoute = routeNodes.size() - 1;
+				// clear final location to prevent all time showing message
+				finalLocation = null;
 			}
 			lastFixedLocation = currentLocation;
-			// ??? even if you go away from place you can't navigate once time
-//			finalLocation = null
 			return true;
 		}
 		return false;
@@ -234,7 +241,7 @@ public class RoutingHelper {
 									// reset error wait interval
 									evalWaitInterval = 3000;
 								} else {
-									evalWaitInterval = evalWaitInterval * 3 / 2;
+									evalWaitInterval = evalWaitInterval * 4 / 3;
 									if(evalWaitInterval > 120000){
 										evalWaitInterval  = 120000;
 									}

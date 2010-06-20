@@ -79,7 +79,7 @@ public class RouteLayer implements OsmandMapLayer {
 				int px = view.getMapXForPoint(points.get(0).getLongitude());
 				int py = view.getMapYForPoint(points.get(0).getLatitude());
 				path.moveTo(px, py);
-				for (int i=1; i<points.size(); i++) {
+				for (int i = 1; i < points.size(); i++) {
 					Location o = points.get(i);
 					int x = view.getMapXForPoint(o.getLongitude());
 					int y = view.getMapYForPoint(o.getLatitude());

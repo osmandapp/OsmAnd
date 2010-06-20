@@ -24,6 +24,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -50,6 +51,8 @@ import com.osmand.activities.FavouritesActivity.FavouritePoint;
 import com.osmand.activities.FavouritesActivity.FavouritesDbHelper;
 import com.osmand.activities.search.SearchActivity;
 import com.osmand.data.preparation.MapTileDownloader;
+import com.osmand.data.preparation.MapTileDownloader.DownloadRequest;
+import com.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
 import com.osmand.map.IMapLocationListener;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
@@ -65,7 +68,12 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 
 	private static final String GPS_STATUS_ACTIVITY = "com.eclipsim.gpsstatus2.GPSStatus"; //$NON-NLS-1$
 	private static final String GPS_STATUS_COMPONENT = "com.eclipsim.gpsstatus2"; //$NON-NLS-1$
-//	private static final String GPS_STATUS_ACTIVITY = "com.eclipsim.gpsstatus2"; //$NON-NLS-1$
+	
+	private static final int GPS_TIMEOUT_REQUEST = 2000;
+	private static final int GPS_DIST_REQUEST = 5;
+	
+	private boolean providerSupportsBearing = false;
+	private boolean providerSupportsSpeed = false;
 	
     /** Called when the activity is first created. */
 	private OsmandMapTileView mapView;
@@ -80,13 +88,13 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	private OsmBugsLayer osmBugsLayer;
 	private SavingTrackHelper savingTrackHelper;
 	private RoutingHelper routingHelper;
+	private boolean calculateRouteOnGps = true;
 	private RouteLayer routeLayer;
 	
 	private WakeLock wakeLock;
 	private boolean sensorRegistered = false;
 
 	private MenuItem navigateToPointMenu;
-
 	private NotificationManager mNotificationManager;
 	private int APP_NOTIFICATION_ID;
 	
@@ -120,7 +128,18 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		setContentView(R.layout.main);
 		
 		mapView = (OsmandMapTileView) findViewById(R.id.MapView);
-		MapTileDownloader.getInstance().addDownloaderCallback(mapView);
+		MapTileDownloader.getInstance().addDownloaderCallback(new IMapDownloaderCallback(){
+			@Override
+			public void tileDownloaded(DownloadRequest request) {
+				if(request != null && !request.error && request.fileToSave != null){
+					ResourceManager mgr = ResourceManager.getResourceManager();
+					String tile = mgr.calculateTileId(mapView.getMap(), request.xTile, request.yTile, request.zoom);
+					mgr.tileDownloaded(tile);
+				}
+				mapView.tileDownloaded(request);
+			}
+		});
+		
 		mapView.setMapLocationListener(this);
 		poiMapLayer = new POIMapLayer();
 		mapView.addLayer(poiMapLayer);
@@ -145,7 +164,10 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		LatLon pointToNavigate = OsmandSettings.getPointToNavigate(this);
 		if(OsmandSettings.isUsingInternetToCalculateRoute(this)){
 			routingHelper.setAppMode(OsmandSettings.getApplicationMode(this));
+			calculateRouteOnGps = true;
 			routingHelper.setFinalLocation(pointToNavigate);
+		} else {
+			routingHelper.setFinalLocation(null);
 		}
 		navigationLayer.setPointToNavigate(pointToNavigate);
 		
@@ -279,8 +301,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     
     
     
-    public void setLocation(Location location){
-    	
+    private void registerUnregisterSensor(Location location){
     	// show point view only if gps enabled
     	if(location == null){
     		if(sensorRegistered) {
@@ -300,22 +321,35 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     			sensorRegistered = true;
     		}
     	}
-		// TODO delete !!! (only for test purposes) devices support that information (possibly keep for other providers?)
-    	if(!location.hasSpeed() && locationLayer.getLastKnownLocation() != null){
-    		float d = location.distanceTo(locationLayer.getLastKnownLocation());
-    		if(d > 100){
-    			d = 100;
-    		}
-    		location.setSpeed(d);
+    }
+    
+    private void updateSpeedBearing(Location location) {
+		// For gps it's bad way. It's widely used for testing purposes
+    	if(!providerSupportsSpeed && locationLayer.getLastKnownLocation() != null){
+    		if (locationLayer.getLastKnownLocation().distanceTo(location) > 3) {
+				float d = location.distanceTo(locationLayer.getLastKnownLocation());
+				if (d > 100) {
+					d = 100;
+				}
+				location.setSpeed(d);
+			}
     	}
-    	if(!location.hasBearing() && locationLayer.getLastKnownLocation() != null){
+    	if(!providerSupportsBearing && locationLayer.getLastKnownLocation() != null){
     		if(locationLayer.getLastKnownLocation().distanceTo(location) > 10){
     			location.setBearing(locationLayer.getLastKnownLocation().bearingTo(location));
     		}
     	}
+	}
+    
+    public void setLocation(Location location){
+    	
+    	registerUnregisterSensor(location);
+    	updateSpeedBearing(location);
     	
     	locationLayer.setLastKnownLocation(location);
-    	routingHelper.setCurrentLocation(location);
+    	if(calculateRouteOnGps){
+    		routingHelper.setCurrentLocation(location);
+    	}
     	if (location != null) {
 			if (isMapLinkedToLocation()) {
 				if(OsmandSettings.isAutoZoomEnabled(this) && location.hasSpeed()){
@@ -344,13 +378,15 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     	speed *= 3.6;
     	if(speed < 4){
     		return currentZoom;
-    	} else if(speed < 20){
+    	} else if(speed < 30){
+    		// less than 30 - show 17 
     		return 17;
-    	} else if(speed < 45){
+    	} else if(speed < 50){
     		return 16;
     	} else if(speed < 80){
     		return 15;
     	}
+    	// more than 80 - show 14 (it is slow)
     	return 14;
     }
 
@@ -360,10 +396,11 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		} else {
 			OsmandSettings.clearPointToNavigate(this);
 		}
-		routingHelper.setFinalLocation(point);
-		// TODO do it more clear
-		if(routingHelper.getLastFixedLocation() != null){
-			routingHelper.setCurrentLocation(routingHelper.getLastFixedLocation());
+		if(OsmandSettings.isUsingInternetToCalculateRoute(this)){
+			calculateRouteOnGps = true;
+			routingHelper.setFinalLocation(point);
+		} else {
+			routingHelper.setFinalLocation(null);
 		}
 		navigationLayer.setPointToNavigate(point);
 		updateNavigateToPointMenu();
@@ -404,10 +441,33 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	public void onProviderEnabled(String provider) {
 	}
 
+	
+	private boolean isRunningOnEmulator(){
+		if (Build.DEVICE.equals("generic")) { //$NON-NLS-1$ 
+			return true;
+		}  
+		return false;
+	}
+	
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
-		if(LocationProvider.OUT_OF_SERVICE == status){
-			setLocation(null);
+		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+		if (LocationManager.GPS_PROVIDER.equals(provider)) {
+			LocationProvider prov = service.getProvider(LocationManager.NETWORK_PROVIDER);
+			if (LocationProvider.OUT_OF_SERVICE == status || LocationProvider.TEMPORARILY_UNAVAILABLE == status) {
+				if(LocationProvider.OUT_OF_SERVICE == status){
+					setLocation(null);
+				}
+				service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
+				providerSupportsBearing = prov == null ? false : prov.supportsBearing() && !isRunningOnEmulator();
+				providerSupportsSpeed = prov == null ? false : prov.supportsSpeed() && !isRunningOnEmulator();
+			} else if (LocationProvider.AVAILABLE == status) {
+				service.removeUpdates(this);
+				service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
+				prov = service.getProvider(LocationManager.GPS_PROVIDER);
+				providerSupportsBearing = prov == null ? false : prov.supportsBearing() && !isRunningOnEmulator();
+				providerSupportsSpeed = prov == null ? false : prov.supportsSpeed() && !isRunningOnEmulator();
+			}
 		}
 	}
 	
@@ -470,7 +530,16 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		}
 		
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-		service.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 0, this);
+		
+		service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
+		LocationProvider prov = service.getProvider(LocationManager.GPS_PROVIDER);
+		if(!service.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+			service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
+			prov = service.getProvider(LocationManager.NETWORK_PROVIDER);
+		}
+		
+		providerSupportsBearing = prov == null ? false : prov.supportsBearing() && !isRunningOnEmulator();
+		providerSupportsSpeed = prov == null ? false : prov.supportsSpeed() && !isRunningOnEmulator();
 		
 		
 		if (wakeLock == null) {
@@ -559,8 +628,8 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		} else if (item.getItemId() == R.id.map_mark_point) {
 			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude(), true);
 			return true;
-		} else if (item.getItemId() == R.id.map_reload_tile) {
-			reloadTile(mapView.getZoom(), mapView.getLatitude(), mapView.getLongitude());
+		} else if (item.getItemId() == R.id.map_get_directions) {
+			getDirections(mapView.getLatitude(), mapView.getLongitude());
 			return true;
 		} else if (item.getItemId() == R.id.map_specify_point) {
 			openChangeLocationDialog();
@@ -575,6 +644,40 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     	return super.onOptionsItemSelected(item);
     }
     
+    protected void getDirections(final double lat, final double lon){
+    	if(navigationLayer.getPointToNavigate() == null){
+			Toast.makeText(this, R.string.mark_final_location_first, Toast.LENGTH_LONG).show();
+			return;
+		}
+    	Builder builder = new AlertDialog.Builder(this);
+    	builder.setTitle(R.string.follow_route);
+    	builder.setMessage(R.string.recalculate_route_to_your_location);
+    	builder.setPositiveButton(R.string.follow, new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				routingHelper.setFinalLocation(navigationLayer.getPointToNavigate());
+				Location map = new Location("map"); //$NON-NLS-1$
+				map.setLatitude(lat);
+				map.setLongitude(lon);
+				calculateRouteOnGps = true;
+				routingHelper.setFinalAndCurrentLocation(navigationLayer.getPointToNavigate(), map);
+			}
+    	});
+    	builder.setNegativeButton(R.string.only_show, new DialogInterface.OnClickListener(){
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+				Location map = new Location("map"); //$NON-NLS-1$
+				map.setLatitude(lat);
+				map.setLongitude(lon);
+				calculateRouteOnGps = false;
+				routingHelper.setFinalAndCurrentLocation(navigationLayer.getPointToNavigate(), map);
+			}
+    	});
+    	builder.show();
+    }
+    
     protected void reloadTile(final int zoom, final double latitude, final double longitude){
     	Builder builder = new AlertDialog.Builder(this);
     	builder.setMessage(R.string.context_menu_item_update_map_confirm);
@@ -584,7 +687,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			public void onClick(DialogInterface dialog, int which) {
 				int x = (int) MapUtils.getTileNumberX(zoom, longitude);
 				int y = (int) MapUtils.getTileNumberY(zoom, latitude);
-				ResourceManager.getResourceManager().clearTileImageForMap(mapView.getMap(), x, y, zoom);
+				ResourceManager.getResourceManager().clearTileImageForMap(null, mapView.getMap(), x, y, zoom);
 				mapView.refreshMap();
 			}
     	});
@@ -594,23 +697,13 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     protected void contextMenuPoint(final double latitude, final double longitude, boolean menu){
     	Builder builder = new AlertDialog.Builder(this);
     	Resources resources = this.getResources();
-    	String[] res;
-    	if(menu){
-    		res = new String[]{
-    			resources.getString(R.string.context_menu_item_navigate_point),
-    			resources.getString(R.string.context_menu_item_add_favorite),
-    			resources.getString(R.string.context_menu_item_open_bug),
-    			resources.getString(R.string.context_menu_item_create_poi),
-    		};
-    	} else {
-    		res = new String[]{
+    	String[] res = new String[]{
         			resources.getString(R.string.context_menu_item_navigate_point),
         			resources.getString(R.string.context_menu_item_add_favorite),
         			resources.getString(R.string.context_menu_item_open_bug),
         			resources.getString(R.string.context_menu_item_create_poi),
         			resources.getString(R.string.context_menu_item_update_map),
         	};
-    	}
     	builder.setItems(res, new DialogInterface.OnClickListener(){
 
 			@Override

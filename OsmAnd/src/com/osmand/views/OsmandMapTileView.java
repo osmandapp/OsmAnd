@@ -376,21 +376,42 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 						for (int j = 0; j< height; j++) {
 							float x1 = (i + left - tileX) * tileSize + w;
 							float y1 = (j + top - tileY) * tileSize + h;
+							String ordImgTile = mgr.calculateTileId(map, left + i, top + j, zoom);
 							// asking tile image async
-							Bitmap bmp = mgr.getTileImageForMapAsync(map, left + i, top + j, zoom, useInternet);
+							boolean imgExist = mgr.tileExistOnFileSystem(ordImgTile);
+							Bitmap bmp = null;
+							if (imgExist || useInternet) {
+								bmp = mgr.getTileImageForMapAsync(ordImgTile, map, left + i, top + j, zoom, useInternet);
+							}
 							if (bmp == null) {
+								int div = 2;
 								// asking if there is small version of the map (in cache)
-								if(useInternet){
-									bmp = mgr.getTileImageFromCache(map, (left + i) / 2, (top + j) / 2, zoom - 1);
-								} else if(!mgr.tileExistOnFileSystem(map, left + i, top + j, zoom)){
-									bmp = mgr.getTileImageForMapAsync(map, (left + i) / 2, (top + j) / 2, zoom - 1, false);
+								String imgTile2 = mgr.calculateTileId(map, (left + i) / 2, (top + j) / 2, zoom - 1);
+								String imgTile4 = mgr.calculateTileId(map, (left + i) / 4, (top + j) / 4, zoom - 2);
+								if(useInternet || imgExist){
+									bmp = mgr.getTileImageFromCache(imgTile2);
+									div = 2;
+									if(bmp == null){
+										bmp = mgr.getTileImageFromCache(imgTile4);
+										div = 4;
+									}
 								}
+								if(!useInternet && !imgExist){
+									if(mgr.tileExistOnFileSystem(imgTile2)){
+										bmp = mgr.getTileImageForMapAsync(imgTile2, map, (left + i) / 2, (top + j) / 2, zoom - 1, false);
+										div = 2;
+									} else if(mgr.tileExistOnFileSystem(imgTile4)){
+										bmp = mgr.getTileImageForMapAsync(imgTile4, map, (left + i) / 4, (top + j) / 4, zoom - 2, false);
+										div = 4;
+									}
+								}
+								
 								if(bmp == null){
 									drawEmptyTile(canvas, (int) x1, (int) y1);
 								} else {
-									int xZoom = (left + i) % 2 == 0 ? 0 : tileSize / 2;
-									int yZoom = (top + j) % 2 == 0 ? 0 : tileSize / 2;;
-									bitmapToZoom.set(xZoom, yZoom, xZoom + tileSize / 2, yZoom + tileSize / 2);
+									int xZoom = ((left + i) % div) * tileSize / div;
+									int yZoom = ((top + j) % div) * tileSize / div;;
+									bitmapToZoom.set(xZoom, yZoom, xZoom + tileSize / div, yZoom + tileSize / div);
 									bitmapToDraw.set(x1, y1, x1 + tileSize, y1 + tileSize);
 									canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
 								}
@@ -458,7 +479,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				canvas.rotate(rotate, w , h);
 				try {
 					ResourceManager mgr = ResourceManager.getResourceManager();
-					Bitmap bmp = mgr.getTileImageForMapSync(map, request.xTile, request.yTile, zoom, false);
+					Bitmap bmp = mgr.getTileImageForMapSync(null, map, request.xTile, request.yTile, request.zoom, false);
 					float x = (request.xTile - tileX) * getTileSize() + w;
 					float y = (request.yTile - tileY) * getTileSize() + h;
 					if (bmp == null) {

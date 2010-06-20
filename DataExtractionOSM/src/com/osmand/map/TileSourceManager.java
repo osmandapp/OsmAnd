@@ -58,7 +58,8 @@ public class TileSourceManager {
 
 		@Override
 		public String getUrlToLoad(int x, int y, int zoom) {
-			return MessageFormat.format(urlToLoad, zoom, x, y);
+			// use int to string not format numbers! (non-nls)
+			return MessageFormat.format(urlToLoad, zoom+"", x+"", y+""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 
 

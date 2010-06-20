@@ -119,8 +119,8 @@ public class POIMapLayer implements OsmandMapLayer {
 		this.view = view;
 
 		pointAltUI = new Paint();
-		pointAltUI.setColor(Color.GREEN);
-		pointAltUI.setAlpha(150);
+		pointAltUI.setColor(Color.rgb(255, 128, 0));
+		pointAltUI.setAlpha(200);
 		pointAltUI.setAntiAlias(true);
 		resourceManager = ResourceManager.getResourceManager();
 		pixRect.set(0, 0, view.getWidth(), view.getHeight());
