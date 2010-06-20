@@ -327,7 +327,7 @@ public class EditingPOIActivity {
 			}
 			connection.connect();
 			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-				String msg = userOperation + " failed : " + connection.getResponseMessage();
+				String msg = userOperation + ctx.getString(R.string.failed_op) + connection.getResponseMessage();
 				log.error(msg);
 				Toast.makeText(ctx, msg, Toast.LENGTH_LONG).show();
 			} else {
@@ -352,14 +352,14 @@ public class EditingPOIActivity {
 			}
 		} catch (NullPointerException e) {
 			// that's tricky case why NPE is thrown to fix that problem httpClient could be used
-			String msg = "Authorization failed";
+			String msg = ctx.getString(R.string.auth_failed);
 			log.error(msg , e);
 			Toast.makeText(ctx, msg, Toast.LENGTH_LONG).show();
 		} catch (MalformedURLException e) {
-			log.error(userOperation + " failed" , e);
+			log.error(userOperation + ctx.getString(R.string.failed_op) , e);
 			Toast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_error_unexpected_template), userOperation), Toast.LENGTH_LONG).show();
 		} catch (IOException e) {
-			log.error(userOperation + " failed" , e);
+			log.error(userOperation + ctx.getString(R.string.failed_op) , e);
 			Toast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_error_io_error_template), userOperation), Toast.LENGTH_LONG).show();
 		}
 
@@ -392,7 +392,7 @@ public class EditingPOIActivity {
 		} catch (IOException e) {
 			log.error("Unhandled exception", e); //$NON-NLS-1$
 		}
-		String response = sendRequest(SITE_API + "api/0.6/changeset/create/", "PUT", writer.getBuffer().toString(), "Opening changeset", true); //$NON-NLS-1$ //$NON-NLS-2$
+		String response = sendRequest(SITE_API + "api/0.6/changeset/create/", "PUT", writer.getBuffer().toString(), ctx.getString(R.string.opening_changeset), true); //$NON-NLS-1$ //$NON-NLS-2$
 		if (response != null && response.length() > 0) {
 			id = Long.parseLong(response);
 		}
@@ -401,7 +401,7 @@ public class EditingPOIActivity {
 	}
 	
 	public void closeChangeSet(long id){
-		String response = sendRequest(SITE_API+"api/0.6/changeset/"+id+"/close", "PUT", "", "Closing changeset", true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		String response = sendRequest(SITE_API+"api/0.6/changeset/"+id+"/close", "PUT", "", ctx.getString(R.string.closing_changeset), true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		log.info("Response : " + response); //$NON-NLS-1$
 	}
 	
@@ -481,7 +481,7 @@ public class EditingPOIActivity {
 				log.error("Unhandled exception", e); //$NON-NLS-1$
 			}
 			String res = sendRequest(SITE_API+"api/0.6/changeset/"+changeSetId + "/upload", "POST", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-					writer.getBuffer().toString(), "Commiting node", true);
+					writer.getBuffer().toString(), ctx.getString(R.string.commiting_node), true);
 			log.debug(res+""); //$NON-NLS-1$
 			if (res != null) {
 				if (CREATE_ACTION.equals(action)) {
@@ -511,7 +511,7 @@ public class EditingPOIActivity {
 	
 	public Node loadNode(long id) {
 		try {
-			String res = sendRequest(SITE_API+"api/0.6/node/"+id, "GET", null, "Loading poi " + id, false); //$NON-NLS-1$ //$NON-NLS-2$
+			String res = sendRequest(SITE_API+"api/0.6/node/"+id, "GET", null, ctx.getString(R.string.loading_poi_obj) + id, false); //$NON-NLS-1$ //$NON-NLS-2$
 			if(res != null){
 				OsmBaseStorage st = new OsmBaseStorage();
 				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true); //$NON-NLS-1$

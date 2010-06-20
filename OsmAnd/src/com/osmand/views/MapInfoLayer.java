@@ -9,6 +9,7 @@ import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.location.Location;
 
+import com.osmand.Messages;
 import com.osmand.activities.MapActivity;
 import com.osmand.osm.MapUtils;
 
@@ -155,7 +156,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		if(map.getLastKnownLocation() != null && map.getLastKnownLocation().hasSpeed()){
 			if(Math.abs(map.getLastKnownLocation().getSpeed() - cachedSpeed) > .3f){
 				cachedSpeed = map.getLastKnownLocation().getSpeed();
-				cachedSpeedString = ((int) (cachedSpeed * 3.6f)) + " km/h";
+				cachedSpeedString = ((int) (cachedSpeed * 3.6f)) + Messages.getMessage(Messages.KEY_KM_H);
 				float right = paintBlack.measureText(cachedSpeedString) + 8 + boundsForSpeed.left;
 				boundsForSpeed.right = boundsForDist.right = Math.max(right, boundsForDist.right);
 			}

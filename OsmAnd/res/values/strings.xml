@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="opening_hours">Opening hours : </string>
+	<string name="opening_changeset">Openging changeset</string>
+	<string name="closing_changeset">Closing changeset</string>
+	<string name="commiting_node">Commiting node</string>
+	<string name="loading_poi_obj">Loading poi </string>
+	<string name="auth_failed"> Authorization failed</string>
+	<string name="failed_op"> failed : </string>
+	<string name="converting_names">Converting native/english names...</string>
+	<string name="loading_streets_buildings">Loading streets/buildings...</string>
+	<string name="loading_postcodes">Loading postcodes...</string>
+	<string name="loading_streets">Loading streets...</string>
+	<string name="loading_cities">Loading cities...</string>
+	<string name="loading">Loading</string>
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">Error occurred while saving gpx</string>
 	<string name="error_calculating_route">Error calculating route : </string>

@@ -37,7 +37,7 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 				street1 = region.getStreetByName(city, (OsmandSettings.getLastSearchedStreet(this)));
 			}
 			if(city != null){
-				startLoadDataInThread("Finding streets...");
+				startLoadDataInThread(getString(R.string.loading_streets));
 			}
 		}
 		
@@ -47,7 +47,7 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 	
 	
 	protected void startLoadDataInThread(String progressMsg){
-		final ProgressDialog dlg = ProgressDialog.show(this, "Loading", progressMsg, true);
+		final ProgressDialog dlg = ProgressDialog.show(this, getString(R.string.loading), progressMsg, true);
 		new Thread("Loader search data") { //$NON-NLS-1$
 			@Override
 			public void run() {

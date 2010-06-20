@@ -101,7 +101,7 @@ public class POIMapLayer implements OsmandMapLayer {
 		if(n != null){
 			String format = n.getSimpleFormat(OsmandSettings.usingEnglishNames(view.getContext()));
 			if(n.getOpeningHours() != null){
-				format += "\nOpening hours : " + n.getOpeningHours();
+				format += "\n" + view.getContext().getString(R.string.opening_hours) + n.getOpeningHours(); //$NON-NLS-1$
 			}
 			Toast.makeText(view.getContext(), format, Toast.LENGTH_SHORT).show();
 			return true;

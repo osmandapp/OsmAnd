@@ -289,7 +289,7 @@ public class SearchAddressActivity extends Activity {
 	}
 	
 	protected void startLoadDataInThread(String progressMsg){
-		final ProgressDialog dlg = ProgressDialog.show(this, "Loading", progressMsg, true);
+		final ProgressDialog dlg = ProgressDialog.show(this, getString(R.string.loading), progressMsg, true);
 		new Thread("Loader search data") { //$NON-NLS-1$
 			@Override
 			public void run() {
@@ -322,15 +322,15 @@ public class SearchAddressActivity extends Activity {
 			Long cityId = OsmandSettings.getLastSearchedCity(this);
 			String postcode = OsmandSettings.getLastSearchedPostcode(this);
 			if (!region.areCitiesPreloaded()) {
-				progressMsg = "Loading cities...";
+				progressMsg = getString(R.string.loading_cities);
 			} else if (postcode != null && !region.arePostcodesPreloaded()) {
-				progressMsg = "Loading postcodes...";
+				progressMsg = getString(R.string.loading_postcodes);
 			} else if (cityId != -1 && region.getCityById(cityId) != null && region.getCityById(cityId).isEmptyWithStreets()) {
-				progressMsg = "Loading streets/buildings...";
+				progressMsg = getString(R.string.loading_streets_buildings);
 			} else if (postcode != null && region.getPostcode(postcode) != null && region.getPostcode(postcode).isEmptyWithStreets()) {
-				progressMsg = "Loading streets/buildings...";
+				progressMsg = getString(R.string.loading_streets_buildings);
 			} else if (OsmandSettings.usingEnglishNames(this) != region.useEnglishNames()) {
-				progressMsg = "Converting native/english names...";
+				progressMsg = getString(R.string.converting_names);
 			}
 		}
 		postcode = null;
