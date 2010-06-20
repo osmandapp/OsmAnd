@@ -23,10 +23,6 @@ public class ToDoConstants {
 	
 	 // TODO ANDROID 
 
-//   34. Suppport navigation for calculated route (example of get route from internet is in swing app).
-//	     DONE : MiniMap done, Routing settings done, RouteLayer done, RoutingHelper done.
-//	     TODO : Test again?
-	
 //   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
 //		 Some icons are not fine (as back menu from map - it is blured).
 	
@@ -43,16 +39,17 @@ public class ToDoConstants {
 	
 	// FUTURE RELEASES
 	//   49. Calculate route from specified point (not from your location only)
-	//   48. Enable change favourite point (for example fav - "car") means last point you left car. It is not static point.
-    //   43. Enable poi filter by name (?)
-	//   44. Show gps status (possibly open existing gps-compass app (free) or suggest to install it - no sense to write own activity)
+	//   48. Enable change favorite point :  (for example fav - "car") means last point you left car. It is not static point, 
+	//		 you can always use the same name for different locations.
+	//   50. Invent opening hours editor in order to edit POI hours better on device
+	//   48. Implement console application that prepare indexes to upload on server... 
+	// 		 0) run in background 1) download from internet 2) generates indices for Europe (take care about memory) 3) upload?
+    //   43. Enable poi filter by name
 	//   45. Get clear <Use internet> settings. Move that setting on top settings screen. 
 	//       That setting should rule all activities that use internet. It should ask whenever internet is used 
 	//		(would you like to use internet for that operation - if using internet is not checked). 
 	//		Internet using now for : edit POI osm, show osm bugs layer, download tiles.
 	//   47. Internet connectivity could be checked before trying to use
-	//   48. Implement console application that prepare indexes to upload on server... 
-	// 		 0) run in background 1) download from internet 2) generates indices for Europe (take care about memory) 3) upload?  
 	//   46. Implement downloading strategy for tiles (do not load 17 zoom, load only 16 for example) - try to scale 15 zoom for 17 (?)
     //   40. Support simple vector road rendering (require new index file) (?)
     //   26. Show the whole street on map (when it is chosen in search activity). Possibly extend that story to show layer with streets. (?)
@@ -64,10 +61,10 @@ public class ToDoConstants {
 	
 	
 	// TODO swing
-	// 1. Download tiles without using dir tiles (?)
 	// 9. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !
 	// Current result : for big file (1 - task  60-80% time, 90% memory)
-	// 10. Improve address indexing (use relations). 
+	// 1. Download tiles without using dir tiles (?)
+ 	// 10. Improve address indexing (use relations). 
     //	  use relation "a6" (to accumulate streets!),  "a3" to read all cities & define boundaries for city (& define that street in city). 
 	
 	// BUGS Swing
@@ -76,6 +73,9 @@ public class ToDoConstants {
     //  37. Get rid of exit button (!). Think about when notification should go & how clear resources if it is necessary
     //      DONE : add to app settings preference (Refresh indexes).
 	//  31. Translation.
+	//  34. Suppport navigation for calculated route (example of get route from internet is in swing app).
+	//    DONE : MiniMap done, Routing settings done, RouteLayer done, RoutingHelper done.
+	//  44. Show gps status (possibly open existing gps-compass app (free) or suggest to install it - no sense to write own activity)
 
 	
 	// DONE SWING

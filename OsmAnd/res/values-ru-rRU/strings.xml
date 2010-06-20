@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="opening_hours">Рабочие часы: </string>
+	<string name="gps_status_app_not_found">Приложение Gps status не найдено</string>
+	<string name="show_gps_status">GPS статус</string>
+	<string name="opening_hours">Рабочие часы: </string>
 	<string name="opening_changeset">Открытие пакета правок</string>
 	<string name="closing_changeset">Закрытие пакета правок</string>
 	<string name="commiting_node">Сохранения объекта</string>

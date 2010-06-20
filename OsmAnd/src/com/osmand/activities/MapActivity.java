@@ -8,9 +8,12 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.AlertDialog.Builder;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.PointF;
 import android.hardware.Sensor;
@@ -59,7 +62,10 @@ import com.osmand.views.PointNavigationLayer;
 import com.osmand.views.RouteLayer;
 
 public class MapActivity extends Activity implements LocationListener, IMapLocationListener, SensorEventListener {
-	
+
+	private static final String GPS_STATUS_ACTIVITY = "com.eclipsim.gpsstatus2.GPSStatus"; //$NON-NLS-1$
+	private static final String GPS_STATUS_COMPONENT = "com.eclipsim.gpsstatus2"; //$NON-NLS-1$
+//	private static final String GPS_STATUS_ACTIVITY = "com.eclipsim.gpsstatus2"; //$NON-NLS-1$
 	
     /** Called when the activity is first created. */
 	private OsmandMapTileView mapView;
@@ -540,6 +546,16 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     		final Intent settings = new Intent(MapActivity.this, SettingsActivity.class);
 			startActivity(settings);
     		return true;
+		} else if (item.getItemId() == R.id.map_show_gps_status) {
+			Intent intent = new Intent();
+			intent.setComponent(new ComponentName(GPS_STATUS_COMPONENT, GPS_STATUS_ACTIVITY));
+			ResolveInfo resolved = getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+			if(resolved != null){
+				startActivity(intent);
+			} else {
+				Toast.makeText(this, getString(R.string.gps_status_app_not_found), Toast.LENGTH_LONG).show();
+			}
+			return true;
 		} else if (item.getItemId() == R.id.map_mark_point) {
 			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude(), true);
 			return true;
