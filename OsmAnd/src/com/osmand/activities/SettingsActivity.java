@@ -2,6 +2,7 @@ package com.osmand.activities;
 
 import java.util.List;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -14,14 +15,18 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
+import android.widget.Toast;
 
 import com.osmand.OsmandSettings;
+import com.osmand.ProgressDialogImplementation;
 import com.osmand.R;
+import com.osmand.ResourceManager;
 import com.osmand.OsmandSettings.ApplicationMode;
 import com.osmand.map.TileSourceManager;
 import com.osmand.map.TileSourceManager.TileSourceTemplate;
 
-public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener {
+public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
 	
 	private CheckBoxPreference showPoiOnMap;
 	private CheckBoxPreference useInternetToDownloadTiles;
@@ -39,6 +44,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private CheckBoxPreference autoZoom;
 	private EditTextPreference userPassword;
 	private CheckBoxPreference useInternetToCalculateRoute;
+	private Preference reloadIndexes;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +72,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		
 		useEnglishNames =(CheckBoxPreference) screen.findPreference(OsmandSettings.USE_ENGLISH_NAMES);
 		useEnglishNames.setOnPreferenceChangeListener(this);
+		reloadIndexes =(Preference) screen.findPreference(OsmandSettings.RELOAD_INDEXES);
+		reloadIndexes.setOnPreferenceClickListener(this);
+		
 		userName = (EditTextPreference) screen.findPreference(OsmandSettings.USER_NAME);
 		userName.setOnPreferenceChangeListener(this);
 		userPassword = (EditTextPreference) screen.findPreference(OsmandSettings.USER_PASSWORD);
@@ -76,7 +85,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		saveTrackInterval =(ListPreference) screen.findPreference(OsmandSettings.SAVE_TRACK_INTERVAL);
 		saveTrackInterval.setOnPreferenceChangeListener(this);
 		saveCurrentTrack =(Preference) screen.findPreference(OsmandSettings.SAVE_CURRENT_TRACK);
-		saveCurrentTrack.setOnPreferenceChangeListener(this);
+		saveCurrentTrack.setOnPreferenceClickListener(this);
+		
 		
 		positionOnMap =(ListPreference) screen.findPreference(OsmandSettings.POSITION_ON_MAP);
 		positionOnMap.setOnPreferenceChangeListener(this);
@@ -181,10 +191,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		} else if(preference == saveTrackToGpx){
 			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, (Boolean) newValue);
 			edit.commit();
-		} else if(preference == saveCurrentTrack){
-			SavingTrackHelper helper = new SavingTrackHelper(this);
-			helper.saveDataToGpx();
-			helper.close();
 		} else if(preference == saveTrackInterval){
 			edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, Integer.parseInt(newValue.toString()));
 			edit.commit();
@@ -215,6 +221,44 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			
 		}
 		return true;
+	}
+	
+	public void reloadIndexes(){
+		final ProgressDialog dlg = ProgressDialog.show(this, "Loading data", "Reading indices...", true);
+		final ProgressDialogImplementation impl = new ProgressDialogImplementation(dlg);
+		impl.setRunnable("Initializing app", new Runnable(){ //$NON-NLS-1$
+			@Override
+			public void run() {
+				try {
+					showWarnings(ResourceManager.getResourceManager().reloadIndexes(impl));
+				} finally {
+					dlg.dismiss();
+				}
+			}
+		});
+		impl.run();
+
+	}
+	protected void showWarnings(List<String> warnings) {
+		if (!warnings.isEmpty()) {
+			final StringBuilder b = new StringBuilder();
+			boolean f = true;
+			for (String w : warnings) {
+				if(f){
+					f = false;
+				} else {
+					b.append('\n');
+				}
+				b.append(w);
+			}
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					Toast.makeText(SettingsActivity.this, b.toString(), Toast.LENGTH_LONG).show();
+
+				}
+			});
+		}
 	}
 		
 	public void setAppMode(ApplicationMode preset, Editor edit){
@@ -277,6 +321,20 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 //			edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
 			
 		}
+	}
+
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		if(preference == reloadIndexes){
+			reloadIndexes();
+			return true;
+		} else if(preference == saveCurrentTrack){
+			SavingTrackHelper helper = new SavingTrackHelper(this);
+			helper.saveDataToGpx();
+			helper.close();
+			return true;
+		}
+		return false;
 	}
 
 }

@@ -46,6 +46,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.osmand.AmenityIndexRepository;
+import com.osmand.Base64;
 import com.osmand.LogUtil;
 import com.osmand.OsmandSettings;
 import com.osmand.R;
@@ -58,7 +59,6 @@ import com.osmand.osm.EntityInfo;
 import com.osmand.osm.Node;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 import com.osmand.osm.io.OsmBaseStorage;
-import com.osmand.util.Base64;
 import com.osmand.views.OsmandMapTileView;
 
 public class EditingPOIActivity {

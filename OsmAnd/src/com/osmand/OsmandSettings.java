@@ -108,6 +108,8 @@ public class OsmandSettings {
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SAVE_CURRENT_TRACK = "save_current_track"; //$NON-NLS-1$
+	
+	public static final String RELOAD_INDEXES = "reload_indexes"; //$NON-NLS-1$
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SAVE_TRACK_TO_GPX = "save_track_to_gpx"; //$NON-NLS-1$

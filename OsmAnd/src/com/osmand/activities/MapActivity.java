@@ -4,6 +4,9 @@ import java.text.MessageFormat;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -39,6 +42,7 @@ import com.osmand.LogUtil;
 import com.osmand.OsmandSettings;
 import com.osmand.R;
 import com.osmand.ResourceManager;
+import com.osmand.Version;
 import com.osmand.activities.FavouritesActivity.FavouritePoint;
 import com.osmand.activities.FavouritesActivity.FavouritesDbHelper;
 import com.osmand.activities.search.SearchActivity;
@@ -77,12 +81,26 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 
 	private MenuItem navigateToPointMenu;
 
+	private NotificationManager mNotificationManager;
+	private int APP_NOTIFICATION_ID;
 	
 
 	
 
 	private boolean isMapLinkedToLocation(){
 		return OsmandSettings.isMapSyncToGpsLocation(this);
+	}
+	
+	private Notification getNotification(){
+		Intent notificationIndent = new Intent(this, MapActivity.class);
+		notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		Notification notification = new Notification(R.drawable.icon, "", //$NON-NLS-1$
+				System.currentTimeMillis());
+		notification.setLatestEventInfo(this, Version.APP_NAME,
+				"Go back to OsmAnd map", PendingIntent.getActivity(
+						this.getBaseContext(), 0, notificationIndent,
+						PendingIntent.FLAG_UPDATE_CURRENT));
+		return notification;
 	}
 	
     @Override
@@ -94,6 +112,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 //	                                WindowManager.LayoutParams.FLAG_FULLSCREEN); 
 		
 		setContentView(R.layout.main);
+		
 		mapView = (OsmandMapTileView) findViewById(R.id.MapView);
 		MapTileDownloader.getInstance().addDownloaderCallback(mapView);
 		mapView.setMapLocationListener(this);
@@ -232,9 +251,23 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     }
     
     @Override
+    protected void onStart() {
+    	super.onStart();
+    	
+    }
+    
+    @Override
+    protected void onStop() {
+    	mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		mNotificationManager.notify(APP_NOTIFICATION_ID, getNotification());
+    	super.onStop();
+    }
+    
+    @Override
     protected void onDestroy() {
     	super.onDestroy();
     	savingTrackHelper.close();
+    	mNotificationManager.cancel(APP_NOTIFICATION_ID);
     	MapTileDownloader.getInstance().removeDownloaderCallback(mapView);
     }
     
