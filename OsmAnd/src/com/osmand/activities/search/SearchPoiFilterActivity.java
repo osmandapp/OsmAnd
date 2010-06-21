@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -22,6 +23,7 @@ import com.osmand.OsmandSettings;
 import com.osmand.PoiFilter;
 import com.osmand.PoiFiltersHelper;
 import com.osmand.R;
+import com.osmand.activities.EditPOIFilterActivity;
 
 /**
  * @author Maxim Frolov
@@ -42,6 +44,26 @@ public class SearchPoiFilterActivity extends ListActivity {
 		filters.addAll(PoiFiltersHelper.getOsmDefinedPoiFilters(this));
 		setListAdapter(new AmenityAdapter(filters));
 		typeFace = Typeface.create((String)null, Typeface.ITALIC);
+		
+		// ListActivity has a ListView, which you can get with:
+		ListView lv = getListView();
+
+		// Then you can create a listener like so:
+		lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
+				PoiFilter poi = ((AmenityAdapter) getListAdapter()).getItem(pos);
+				if(!poi.isStandardFilter()) {
+					Bundle bundle = new Bundle();
+					Intent newIntent = new Intent(SearchPoiFilterActivity.this, EditPOIFilterActivity.class);
+					// folder selected
+					bundle.putString(SearchPOIActivity.AMENITY_FILTER, poi.getFilterId());
+					newIntent.putExtras(bundle);
+					startActivityForResult(newIntent, 0);
+				}
+				return true;
+			}
+		});
 	}
 
 

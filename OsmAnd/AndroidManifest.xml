@@ -25,6 +25,7 @@
         <activity android:name=".activities.search.SearchStreet2ByNameActivity"></activity>
         <activity android:name=".activities.search.SearchBuildingByNameActivity"></activity>
         
+<activity android:name=".activities.EditPOIFilterActivity"></activity>
 </application>
 
 
