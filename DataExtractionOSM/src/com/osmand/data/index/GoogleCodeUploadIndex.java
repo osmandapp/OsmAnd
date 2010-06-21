@@ -250,8 +250,8 @@ public class GoogleCodeUploadIndex {
     
     public static void main(String[] args) throws IOException {
 		GoogleCodeUploadIndex uploadIndex = new GoogleCodeUploadIndex();
-    	uploadIndex.setLabels("");
-		uploadIndex.setProjectName("osmand");
+//    	uploadIndex.setLabels("");
+//		uploadIndex.setProjectName("osmand");
 //		uploadIndex.setFileName(_);
 //		uploadIndex.setTargetFileName(_);
 //		uploadIndex.setUserName(_);

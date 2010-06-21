@@ -47,7 +47,7 @@ public class DataIndexWriter {
 	protected File checkFile(String name) throws IOException {
 		String fileName = name;
 		File f = new File(workingDir, fileName);
-		f.mkdirs();
+		f.getParentFile().mkdirs();
 		// remove existing file
 		if (f.exists()) {
 			log.warn("Remove existing index : " + f.getAbsolutePath()); //$NON-NLS-1$
@@ -56,9 +56,12 @@ public class DataIndexWriter {
 		return f;
 	}
 	
+	public DataIndexWriter writePOI() throws IOException, SQLException {
+		return writePOI(IndexConstants.POI_INDEX_DIR+region.getName()+IndexConstants.POI_INDEX_EXT);
+	}
 	
-	public DataIndexWriter writePOI() throws IOException, SQLException { 
-		File file = checkFile(IndexConstants.POI_INDEX_DIR+region.getName()+IndexConstants.POI_INDEX_EXT);
+	public DataIndexWriter writePOI(String fileName) throws IOException, SQLException { 
+		File file = checkFile(fileName);
 		long now = System.currentTimeMillis();
 		try {
 			Class.forName("org.sqlite.JDBC"); //$NON-NLS-1$
@@ -108,7 +111,11 @@ public class DataIndexWriter {
 	}
 	
 	public DataIndexWriter writeAddress() throws IOException, SQLException{
-		File file = checkFile(IndexConstants.ADDRESS_INDEX_DIR+region.getName()+IndexConstants.ADDRESS_INDEX_EXT);
+		return writeAddress(IndexConstants.ADDRESS_INDEX_DIR+region.getName()+IndexConstants.ADDRESS_INDEX_EXT);
+	}
+	
+	public DataIndexWriter writeAddress(String fileName) throws IOException, SQLException{
+		File file = checkFile(fileName);
 		long now = System.currentTimeMillis();
 		try {
 			Class.forName("org.sqlite.JDBC"); //$NON-NLS-1$
