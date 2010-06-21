@@ -3,8 +3,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android">
 
 <ListPreference android:summary="@string/settings_preset_descr" android:title="@string/settings_preset" android:key="application_mode"></ListPreference>
-
-<CheckBoxPreference android:key="use_internet_to_calculate_route" android:title="@string/use_online_routing" android:summary="@string/use_online_routing_descr"></CheckBoxPreference>
+<!--  <CheckBoxPreference android:key="use_internet_to_calculate_route" android:title="@string/use_online_routing" android:summary="@string/use_online_routing_descr"></CheckBoxPreference>  -->
 <PreferenceScreen android:title="@string/map_preferences" android:summary="@string/map_preferences_descr">
 <CheckBoxPreference android:key="use_internet_to_download_tiles" android:title="@string/use_internet" android:summary="@string/use_internet_to_download_tile"></CheckBoxPreference>
 <ListPreference android:title="@string/map_tile_source" android:summary="@string/map_tile_source_descr" android:key="map_tile_sources"></ListPreference>
