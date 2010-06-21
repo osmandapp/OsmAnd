@@ -88,7 +88,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	private OsmBugsLayer osmBugsLayer;
 	private SavingTrackHelper savingTrackHelper;
 	private RoutingHelper routingHelper;
-	private boolean calculateRouteOnGps = true;
+	private boolean calculateRouteOnGps = false;
 	private RouteLayer routeLayer;
 	
 	private WakeLock wakeLock;
@@ -162,13 +162,8 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		locationLayer.setAppMode(OsmandSettings.getApplicationMode(this));
 		
 		LatLon pointToNavigate = OsmandSettings.getPointToNavigate(this);
-		if(OsmandSettings.isUsingInternetToCalculateRoute(this)){
-			routingHelper.setAppMode(OsmandSettings.getApplicationMode(this));
-			calculateRouteOnGps = true;
-			routingHelper.setFinalLocation(pointToNavigate);
-		} else {
-			routingHelper.setFinalLocation(null);
-		}
+		routingHelper.setAppMode(OsmandSettings.getApplicationMode(this));
+		routingHelper.setFinalAndCurrentLocation(pointToNavigate, null);
 		navigationLayer.setPointToNavigate(pointToNavigate);
 		
 		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
@@ -396,11 +391,9 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		} else {
 			OsmandSettings.clearPointToNavigate(this);
 		}
-		if(OsmandSettings.isUsingInternetToCalculateRoute(this)){
-			calculateRouteOnGps = true;
-			routingHelper.setFinalLocation(point);
-		} else {
-			routingHelper.setFinalLocation(null);
+		routingHelper.setFinalAndCurrentLocation(point, null);
+		if(point == null){
+			calculateRouteOnGps = false;
 		}
 		navigationLayer.setPointToNavigate(point);
 		updateNavigateToPointMenu();
@@ -655,7 +648,6 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     	builder.setPositiveButton(R.string.follow, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				routingHelper.setFinalLocation(navigationLayer.getPointToNavigate());
 				Location map = new Location("map"); //$NON-NLS-1$
 				map.setLatitude(lat);
 				map.setLongitude(lon);

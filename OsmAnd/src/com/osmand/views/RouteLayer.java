@@ -62,8 +62,12 @@ public class RouteLayer implements OsmandMapLayer {
 			long time = System.currentTimeMillis();
 			int w = view.getWidth();
 			int h = view.getHeight();
-			boundsRect = new Rect(-w / 2, -h, 3 * w / 2, h);
-//			boundsRect = new Rect(0, 0, w, h);
+			if(helper.getCurrentLocation() != null &&
+					view.isPointOnTheRotatedMap(helper.getCurrentLocation().getLatitude(), helper.getCurrentLocation().getLongitude())){
+				boundsRect = new Rect(-w / 2, -h, 3 * w / 2, h);
+			} else {
+				boundsRect = new Rect(0, -h, w, h);
+			}
 			view.calculateTileRectangle(boundsRect, view.getCenterPointX(), view.getCenterPointY(), view.getXTile(), view.getYTile(),
 					tileRect);
 			double topLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), tileRect.top);
@@ -71,7 +75,7 @@ public class RouteLayer implements OsmandMapLayer {
 			double bottomLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), tileRect.bottom);
 			double rightLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.right);
 			helper.fillLocationsToShow(topLatitude, leftLongitude, bottomLatitude, rightLongitude, points);
-			if((System.currentTimeMillis() - time) > 40){
+			if((System.currentTimeMillis() - time) > 80){
 				Log.e(LogUtil.TAG, "Calculate route layer " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
 			}
 			

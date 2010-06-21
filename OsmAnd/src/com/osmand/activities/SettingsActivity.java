@@ -43,7 +43,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private ListPreference applicationMode;
 	private CheckBoxPreference autoZoom;
 	private EditTextPreference userPassword;
-	private CheckBoxPreference useInternetToCalculateRoute;
 	private Preference reloadIndexes;
 	
     @Override
@@ -55,8 +54,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		applicationMode =(ListPreference) screen.findPreference(OsmandSettings.APPLICATION_MODE);
 		applicationMode.setOnPreferenceChangeListener(this);
 		
-		useInternetToCalculateRoute = (CheckBoxPreference) screen.findPreference(OsmandSettings.USE_INTERNET_TO_CALCULATE_ROUTE);
-		useInternetToCalculateRoute.setOnPreferenceChangeListener(this);
 		useInternetToDownloadTiles = (CheckBoxPreference) screen.findPreference(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES);
 		useInternetToDownloadTiles.setOnPreferenceChangeListener(this);
 		showPoiOnMap =(CheckBoxPreference) screen.findPreference(OsmandSettings.SHOW_POI_OVER_MAP);
@@ -102,7 +99,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	}
     
     public void updateAllSettings(){
-    	useInternetToCalculateRoute.setChecked(OsmandSettings.isUsingInternetToCalculateRoute(this));
     	useInternetToDownloadTiles.setChecked(OsmandSettings.isUsingInternetToDownloadTiles(this));
 		showPoiOnMap.setChecked(OsmandSettings.isShowingPoiOverMap(this));
 		rotateMapToBearing.setChecked(OsmandSettings.isRotateMapToBearing(this));
@@ -175,9 +171,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.commit();
 		} else if(preference == showPoiOnMap){
 			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, (Boolean) newValue);
-			edit.commit();
-		} else if(preference == useInternetToCalculateRoute){
-			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_CALCULATE_ROUTE, (Boolean) newValue);
 			edit.commit();
 		} else if(preference == useInternetToDownloadTiles){
 			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, (Boolean) newValue);

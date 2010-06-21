@@ -69,15 +69,17 @@ public class RoutingHelper {
 	}
 	
 	
-	public void setFinalAndCurrentLocation(LatLon finalLocation, Location currentLocation){
+	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, Location currentLocation){
 		this.finalLocation = finalLocation;
+		this.routeNodes.clear();
+		listDistance = null;
 		evalWaitInterval = 3000;
 		// to update route
 		setCurrentLocation(currentLocation);
 	}
 	
 	public void setFinalLocation(LatLon finalLocation){
-		setFinalAndCurrentLocation(finalLocation, getLastFixedLocation());
+		setFinalAndCurrentLocation(finalLocation, getCurrentLocation());
 	}
 	
 	public void setAppMode(ApplicationMode mode){
@@ -113,7 +115,7 @@ public class RoutingHelper {
 		return false;
 	}
 	
-	public Location getLastFixedLocation() {
+	public Location getCurrentLocation() {
 		return lastFixedLocation;
 	}
 	

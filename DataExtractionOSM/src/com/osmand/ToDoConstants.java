@@ -21,23 +21,24 @@ public class ToDoConstants {
 // 		 DONE : back end (POI filter object, save, delete, read) 
 //	     TODO : activity to create/edit new index, activity to read both user defined/osm standard, add actions to remove/create
 
-//   33. Build transport locations. Create transport index (transport-stops) (investigate)
-//       GOT : Victor	
-//		 DONE: Load transport routes in swing. 
-//	     TODO: Create transport index, create transport activity
-
-	
 	
 	// FUTURE RELEASES
+	//   33. Build transport locations. Create transport index (transport-stops) (investigate)
+	//  DONE: Load transport routes in swing.	
+	//	IDEA TO HAVE :   
+
 	//   48. Enable change favorite point :  (for example fav - "car") means last point you left car. It is not static point, 
 	//		 you can always use the same name for different locations.
 	//   51. Implement console application that prepare indexes to upload on server... 
 	// 		 0) run in background 1) download from internet 2) generates indices for Europe (take care about memory) 3) upload?
-	//   50. Invent opening hours editor in order to edit POI hours better on device
-	//   52. Make good distribution of POI on map (when POI a lot they are coupling in one place on the south)
-    //   43. Enable poi filter by name
 	//   46. Implement downloading strategy for tiles : select max zoom to download [16,15,14,...]
 	// 		 That means you can save internet because from [16 -> zoom -> 18], [14 -> zoom -> 16 - suitable for speed > 40], ...
+	//   50. Invent opening hours editor in order to edit POI hours better on device
+	//   52. Make good distribution of POI on map (when POI a lot they are coupling in one place on the south)
+	//   53. Add progress bars (for search adresses activity - show that something is loaded in background), 
+	//		 to internet communication activities [editing/commiting/deleting poi], do not hide edit poi dialog if operation failed 
+	//		 [move close buttons from alertdialog to own view] 
+    //   43. Enable poi filter by name
 	//   45. Get clear <Use internet> settings. Move that setting on top settings screen. 
 	//       That setting should rule all activities that use internet. It should ask whenever internet is used 
 	//		(would you like to use internet for that operation - if using internet is not checked). 
@@ -59,13 +60,7 @@ public class ToDoConstants {
 	// BUGS Swing
 	
 	// DONE ANDROID :
-	//  49. Calculate route from specified point (not from your location only)
-    //  37. Get rid of exit button (!). Think about when notification should go & how clear resources if it is necessary
-    //      DONE : add to app settings preference (Refresh indexes).
-	//  31. Translation.
-	//  34. Suppport navigation for calculated route (example of get route from internet is in swing app).
-	//    DONE : MiniMap done, Routing settings done, RouteLayer done, RoutingHelper done.
-	//  44. Show gps status (possibly open existing gps-compass app (free) or suggest to install it - no sense to write own activity)
+
 
 	
 	// DONE SWING
