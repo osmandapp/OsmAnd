@@ -1,0 +1,191 @@
+package com.osmand.data.index;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.text.MessageFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import org.apache.commons.logging.Log;
+
+import com.osmand.LogUtil;
+import com.osmand.data.Region;
+import com.osmand.data.preparation.DataExtraction;
+import com.osmand.impl.ConsoleProgressImplementation;
+
+public class IndexBatchCreator {
+	protected static final Log log = LogUtil.getLog(IndexBatchCreator.class);
+	protected static final String SITE_TO_DOWNLOAD = "http://download.geofabrik.de/osm/europe/"; //$NON-NLS-1$
+	protected static final String[] countriesToDownload = new String[] {
+		"albania", "andorra", "austria", // 5.3, 0.4, 100 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		"belarus", "belgium", "bosnia-herzegovina", // 39, 43, 4.1 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		"bulgaria", "croatia", "cyprus",  // 13, 12, 5 //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		"denmark", "estonia", "faroe_islands", // 75, 38, 1.5 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		"finland", "greece", "hungary", //80, 25, 14 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		"iceland", "ireland", "isle_of_man", // 5.9, 27, 1.1 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		"kosovo", "latvia", "liechtenstein", // 8.2, 6.5, 0.2 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		"lithuania", "luxembourg", "macedonia", // 5, 5, 4 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		"malta", "moldova", "monaco", //0.8, 5, 0.6 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		"montenegro", "norway", "poland", // 1.2, 56, 87 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		"portugal", "romania", "serbia", // 10, 25, 10 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		"slovakia", "slovenia", "spain", // 69, 10, 123 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		"sweden", "switzerland", "turkey", // 88, 83, 17 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		"ukraine", // 19 //$NON-NLS-1$
+		// TOTAL : 1129 MB
+		// "france", "czech_republic", "germany", // 519, 168, 860
+		// "great_britain", "italy", "netherlands", // 281, 246, 375
+		// ADD TO TOTAL : 2449 MB
+
+	};
+	
+	
+	boolean downloadFiles = false;
+	boolean generateIndexes = false;
+	boolean uploadIndexes = false;
+	File osmDirFiles;
+	File indexDirFiles;
+	String user;
+	String password;
+	
+	
+	public static void main(String[] args) {
+		IndexBatchCreator creator = new IndexBatchCreator();
+		if(args.length < 1 || !new File(args[0]).exists()) {
+			throw new IllegalArgumentException("Please specify directory with .osm or .osm.bz2 files as first arg"); //$NON-NLS-1$
+		}
+		creator.osmDirFiles = new File(args[0]); 
+		if(args.length < 2 || !new File(args[1]).exists()) {
+			throw new IllegalArgumentException("Please specify directory with generated index files as second arg"); //$NON-NLS-1$
+		}
+		creator.indexDirFiles = new File(args[1]);
+		for(int i=2; i<args.length; i++){
+			if("-downloadOsm".equals(args[i])){ //$NON-NLS-1$
+				creator.downloadFiles = true;
+			} else if("-genIndexes".equals(args[i])){ //$NON-NLS-1$
+				creator.generateIndexes = true;
+			} else if("-upload".equals(args[i])){ //$NON-NLS-1$
+				creator.uploadIndexes = true;
+			} else if(args[i].startsWith("-guser=")){ //$NON-NLS-1$
+				creator.user = args[i].substring("-guser=".length()); //$NON-NLS-1$
+			} else if(args[i].startsWith("-gpassword=")){ //$NON-NLS-1$
+				creator.password = args[i].substring("-gpassword=".length()); //$NON-NLS-1$
+			}
+		}
+		creator.runBatch();
+	}
+	
+	public void runBatch(){
+		// TODO validate all params before running batch
+		
+		if(downloadFiles){
+			downloadFiles();
+		}
+		if(generateIndexes){
+			generatedIndexes();
+		}
+		if(uploadIndexes){
+			uploadIndexes();
+		}
+	}
+	
+	protected void downloadFiles(){
+		// clean before downloading
+		for(File f : osmDirFiles.listFiles()){
+			log.info("Delete old file " + f.getName());  //$NON-NLS-1$
+			f.delete();
+		}
+		for(String country : countriesToDownload){
+			String url = SITE_TO_DOWNLOAD + country +".osm.bz2"; //$NON-NLS-1$
+			log.info("Downloading country " + country + " from " + url);  //$NON-NLS-1$//$NON-NLS-2$
+			downloadFile(url, new File(osmDirFiles, country +".osm.bz2")); //$NON-NLS-1$
+		}
+		System.out.println("DOWNLOADING FILES FINISHED");
+	}
+	
+	private final static int DOWNLOAD_DEBUG = 1 << 20;
+	private final static int MB = 1 << 20;
+	private final static int BUFFER_SIZE = 1 << 15;
+	protected void downloadFile(String url, File toSave) {
+		byte[] buffer = new byte[BUFFER_SIZE];
+		int count = 0;
+		int downloaded = 0;
+		int mbDownloaded = 0;
+		try {
+			FileOutputStream ostream = new FileOutputStream(toSave);
+			InputStream stream = new URL(url).openStream();
+			while ((count = stream.read(buffer)) != -1) {
+				ostream.write(buffer, 0, count);
+				downloaded += count;
+				if(downloaded > DOWNLOAD_DEBUG){
+					downloaded -= DOWNLOAD_DEBUG;
+					mbDownloaded += (DOWNLOAD_DEBUG>>20);
+					log.info(mbDownloaded +" megabytes downloaded of " + toSave.getName());
+				}
+			}
+			ostream.close();
+			stream.close();
+		} catch (IOException e) {
+			log.error("Input/output exception " + toSave.getName() + " downloading from " + url, e); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+	}
+	
+	protected void generatedIndexes() {
+		for (File f : osmDirFiles.listFiles()) {
+			if (f.getName().endsWith(".osm.bz2") || f.getName().endsWith(".osm")) {
+				System.gc();
+				generateIndex(f);
+			}
+		}
+		System.out.println("GENERATING INDEXES FINISHED ");
+	}
+	protected void generateIndex(File f){
+		DataExtraction extr = new DataExtraction(true, true, false, true, false, false, indexDirFiles);
+		try {
+			Region country = extr.readCountry(f.getAbsolutePath(), new ConsoleProgressImplementation(9), null);
+			DataIndexWriter dataIndexWriter = new DataIndexWriter(indexDirFiles, country);
+			String name = country.getName();
+			dataIndexWriter.writeAddress(name + "_" + IndexConstants.ADDRESS_TABLE_VERSION + IndexConstants.ADDRESS_INDEX_EXT);
+			dataIndexWriter.writePOI(name + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT);
+		} catch (Exception e) {
+			log.error("Exception generating indexes for " + f.getName()); //$NON-NLS-1$ 
+		}
+	}
+	
+	protected void uploadIndexes(){
+		MessageFormat format = new MessageFormat("{0,date,dd.MM.yyyy} : {1, number,##.#} MB", Locale.US);
+		for(File f : indexDirFiles.listFiles()){
+			String summary;
+			double mbLengh = (double)f.length() / MB;
+			String descriptionFile = "{"+format.format(new Object[]{new Date(), mbLengh})+"}";
+			if(f.getName().endsWith(IndexConstants.POI_INDEX_EXT)){
+				String regionName = f.getName().substring(0, f.getName().length() - IndexConstants.POI_INDEX_EXT.length() - 2);
+				summary = "POI index for " + regionName + " " + descriptionFile;
+			} else if(f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)){
+				String regionName = f.getName().substring(0, f.getName().length() - IndexConstants.ADDRESS_INDEX_EXT.length() - 2);
+				summary = "Adress index for " + regionName + " " + descriptionFile;	
+			} else { 
+				continue;
+			}
+			GoogleCodeUploadIndex uploader = new GoogleCodeUploadIndex();
+			uploader.setFileName(f.getAbsolutePath());
+			uploader.setTargetFileName(f.getName());
+			uploader.setProjectName("osmand");
+			uploader.setUserName(user);
+			uploader.setPassword(password);
+			uploader.setLabels("Type-Archive, Testdata");
+			uploader.setSummary(summary);
+			try {
+				uploader.upload();
+			} catch (IOException e) {
+				log.error("Input/output exception uploading " + f.getName(), e);
+			}
+		}
+		System.out.println("UPLOADING INDEXES FINISHED ");
+		
+	}
+	
+
+}

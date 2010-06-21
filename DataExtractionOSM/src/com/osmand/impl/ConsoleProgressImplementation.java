@@ -11,8 +11,17 @@ public class ConsoleProgressImplementation implements IProgress {
 	String currentTask;
 	int work;
 	int currentDone;
+	double delta;
+	private long previousTaskStarted = 0;
 	
 	double lastPercentPrint = 0;
+	public ConsoleProgressImplementation(){
+		delta = deltaPercentsToPrint;
+	}
+	
+	public ConsoleProgressImplementation(double deltaToPrint){
+		delta = deltaToPrint;
+	}
 	
 	@Override
 	public void finishTask() {
@@ -33,7 +42,7 @@ public class ConsoleProgressImplementation implements IProgress {
 	}
 	
 	private void printIfNeeded() {
-		if(getCurrentPercent() - lastPercentPrint >= deltaPercentsToPrint){
+		if(getCurrentPercent() - lastPercentPrint >= delta){
 			System.out.println(MessageFormat.format("Done {0} %.", getCurrentPercent())); //$NON-NLS-1$
 			this.lastPercentPrint = getCurrentPercent();
 		}
@@ -53,10 +62,15 @@ public class ConsoleProgressImplementation implements IProgress {
 	public void startTask(String taskName, int work) {
 		if(!Algoritms.objectEquals(currentTask, taskName)){
 			this.currentTask = taskName;
-			System.out.println("Started new task : " + currentTask  + " - " + work); //$NON-NLS-1$ //$NON-NLS-2$
+			System.out.println("Memory before task exec: " + Runtime.getRuntime().totalMemory() + " free : " + Runtime.getRuntime().freeMemory()); //$NON-NLS-1$ //$NON-NLS-2$
+			if (previousTaskStarted == 0) {
+				System.out.println(taskName + " started - " + work); //$NON-NLS-1$
+			} else {
+				System.out.println(taskName + " started after " + (System.currentTimeMillis() - previousTaskStarted) + " ms" + " - " + work); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			}
+			previousTaskStarted = System.currentTimeMillis();
 		}
 		startWork(work);
-		
 	}
 
 	@Override
