@@ -147,9 +147,9 @@ public class IndexBatchCreator {
 			Region country = extr.readCountry(f.getAbsolutePath(), new ConsoleProgressImplementation(9), null);
 			DataIndexWriter dataIndexWriter = new DataIndexWriter(indexDirFiles, country);
 			String name = country.getName();
-			dataIndexWriter.writeAddress(name + "_" + IndexConstants.ADDRESS_TABLE_VERSION + IndexConstants.ADDRESS_INDEX_EXT);
-			dataIndexWriter.writePOI(name + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT);
-		} catch (Exception e) {
+			dataIndexWriter.writeAddress(name + "_" + IndexConstants.ADDRESS_TABLE_VERSION + IndexConstants.ADDRESS_INDEX_EXT, f.lastModified());
+			dataIndexWriter.writePOI(name + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT, f.lastModified());
+		} catch (Exception e) { 
 			log.error("Exception generating indexes for " + f.getName()); //$NON-NLS-1$ 
 		}
 	}
@@ -159,7 +159,8 @@ public class IndexBatchCreator {
 		for(File f : indexDirFiles.listFiles()){
 			String summary;
 			double mbLengh = (double)f.length() / MB;
-			String descriptionFile = "{"+format.format(new Object[]{new Date(), mbLengh})+"}";
+			
+			String descriptionFile = "{"+format.format(new Object[]{new Date(f.lastModified()), mbLengh})+"}";
 			if(f.getName().endsWith(IndexConstants.POI_INDEX_EXT)){
 				String regionName = f.getName().substring(0, f.getName().length() - IndexConstants.POI_INDEX_EXT.length() - 2);
 				summary = "POI index for " + regionName + " " + descriptionFile;
@@ -168,6 +169,9 @@ public class IndexBatchCreator {
 				summary = "Adress index for " + regionName + " " + descriptionFile;	
 			} else { 
 				continue;
+			}
+			if(mbLengh > 90){
+				System.err.println("ERROR : file " + f.getName() + " exceeded 90 mb!!! Could not be uploaded.");
 			}
 			GoogleCodeUploadIndex uploader = new GoogleCodeUploadIndex();
 			uploader.setFileName(f.getAbsolutePath());

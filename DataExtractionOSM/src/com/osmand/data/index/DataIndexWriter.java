@@ -57,10 +57,10 @@ public class DataIndexWriter {
 	}
 	
 	public DataIndexWriter writePOI() throws IOException, SQLException {
-		return writePOI(IndexConstants.POI_INDEX_DIR+region.getName()+IndexConstants.POI_INDEX_EXT);
+		return writePOI(IndexConstants.POI_INDEX_DIR+region.getName()+IndexConstants.POI_INDEX_EXT, null);
 	}
 	
-	public DataIndexWriter writePOI(String fileName) throws IOException, SQLException { 
+	public DataIndexWriter writePOI(String fileName, Long date) throws IOException, SQLException { 
 		File file = checkFile(fileName);
 		long now = System.currentTimeMillis();
 		try {
@@ -107,14 +107,17 @@ public class DataIndexWriter {
 			conn.close();
 			log.info(String.format("Indexing poi done in %s ms.", System.currentTimeMillis() - now)); //$NON-NLS-1$
 		}
+		if(date != null){
+			file.setLastModified(date);
+		}
 		return this;
 	}
 	
 	public DataIndexWriter writeAddress() throws IOException, SQLException{
-		return writeAddress(IndexConstants.ADDRESS_INDEX_DIR+region.getName()+IndexConstants.ADDRESS_INDEX_EXT);
+		return writeAddress(IndexConstants.ADDRESS_INDEX_DIR+region.getName()+IndexConstants.ADDRESS_INDEX_EXT, null);
 	}
 	
-	public DataIndexWriter writeAddress(String fileName) throws IOException, SQLException{
+	public DataIndexWriter writeAddress(String fileName, Long date) throws IOException, SQLException{
 		File file = checkFile(fileName);
 		long now = System.currentTimeMillis();
 		try {
@@ -228,6 +231,9 @@ public class DataIndexWriter {
 		} finally {
 			conn.close();
 			log.info(String.format("Indexing address done in %s ms.", System.currentTimeMillis() - now)); //$NON-NLS-1$
+		}
+		if(date != null){
+			file.setLastModified(date);
 		}
 		return this;
 	}
