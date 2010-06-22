@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="fav_points_edited">Отредактирована избранная точка</string>
+	<string name="fav_points_not_exist">Не существует избранных точек</string>
+	<string name="update_existing">Заменить</string>
 	<string name="only_show">Только показать</string>
 	<string name="follow">Следовать</string>
 	<string name="recalculate_route_to_your_location">Пересчитывать маршрут в зависимости от местоположения</string>

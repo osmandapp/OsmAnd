@@ -155,6 +155,8 @@ public class FavouritesActivity extends ListActivity {
 	    public boolean addFavourite(FavouritePoint p){
 	    	SQLiteDatabase db = getWritableDatabase();
 	    	if(db != null){
+	    		// delete with same name before
+	    		deleteFavourite(p);
 	    		db.execSQL("INSERT INTO " + FAVOURITE_TABLE_NAME + " VALUES (?, ?, ?)",new Object[]{p.getName(), p.getLatitude(), p.getLongitude()}); //$NON-NLS-1$ //$NON-NLS-2$
 	    		return true;
 	    	}
@@ -186,6 +188,17 @@ public class FavouritesActivity extends ListActivity {
 	    	if(db != null){
 	    		db.execSQL("UPDATE " + FAVOURITE_TABLE_NAME + " SET name = ? WHERE name = ?",new Object[]{newName, p.getName()}); //$NON-NLS-1$ //$NON-NLS-2$
 	    		p.setName(newName);
+	    		return true;
+	    	}
+	    	return false;
+	    }
+	    
+	    public boolean editFavourite(FavouritePoint p, double lat, double lon){
+	    	SQLiteDatabase db = getWritableDatabase();
+	    	if(db != null){
+	    		db.execSQL("UPDATE " + FAVOURITE_TABLE_NAME + " SET latitude = ?, longitude = ? WHERE name = ?",new Object[]{lat, lon, p.getName()}); //$NON-NLS-1$ //$NON-NLS-2$ 
+	    		p.setLatitude(lat);
+	    		p.setLongitude(lon);
 	    		return true;
 	    	}
 	    	return false;

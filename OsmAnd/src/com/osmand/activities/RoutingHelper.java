@@ -31,7 +31,8 @@ public class RoutingHelper {
 	
 	private static final org.apache.commons.logging.Log log = LogUtil.getLog(RoutingHelper.class);
 
-	private final MapActivity activity;
+	// activity to show messages & refresh map when route is calculated
+	private MapActivity activity;
 	
 	private List<Location> routeNodes = new ArrayList<Location>();
 	private int[] listDistance = null;
@@ -63,10 +64,16 @@ public class RoutingHelper {
 	// END TEST CODE
 	
 	
-	public RoutingHelper(MapActivity activity){
-		this.activity = activity;
-		
+	private RoutingHelper(){
 	}
+	
+	private static RoutingHelper INSTANCE = new RoutingHelper(); 
+	public static RoutingHelper getInstance(MapActivity activity){
+		INSTANCE.activity = activity;
+		return INSTANCE;
+	}
+	
+	
 	
 	
 	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, Location currentLocation){
@@ -104,7 +111,9 @@ public class RoutingHelper {
 		Location lastPoint = routeNodes.get(routeNodes.size() - 1);
 		if(currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < 60){
 			if(lastFixedLocation != null && lastFixedLocation.distanceTo(lastPoint) < 60){
-				showMessage(activity.getString(R.string.arrived_at_destination));
+				if(activity != null){
+					showMessage(activity.getString(R.string.arrived_at_destination));
+				}
 				currentRoute = routeNodes.size() - 1;
 				// clear final location to prevent all time showing message
 				finalLocation = null;
@@ -250,17 +259,19 @@ public class RoutingHelper {
 								}
 								currentRunningJob = null;
 							}
-							if(res.isCalculated()){
-								showMessage(activity.getString(R.string.new_route_calculated_dist) + MapUtils.getFormattedDistance(sumDistance(res.list)));
-								// be aware that is non ui thread
-								activity.getMapView().refreshMap();
-							} else {
-								if(res.errorMessage != null){
-									showMessage(activity.getString(R.string.error_calculating_route)+ res.errorMessage);
-								} else if(res.list == null){
-									showMessage(activity.getString(R.string.error_calculating_route_occured));
+							if (activity != null) {
+								if (res.isCalculated()) {
+									showMessage(activity.getString(R.string.new_route_calculated_dist) + MapUtils.getFormattedDistance(sumDistance(res.list)));
+									// be aware that is non ui thread
+									activity.getMapView().refreshMap();
 								} else {
-									showMessage(activity.getString(R.string.empty_route_calculated));
+									if (res.errorMessage != null) {
+										showMessage(activity.getString(R.string.error_calculating_route) + res.errorMessage);
+									} else if (res.list == null) {
+										showMessage(activity.getString(R.string.error_calculating_route_occured));
+									} else {
+										showMessage(activity.getString(R.string.empty_route_calculated));
+									}
 								}
 							}
 							lastTimeEvaluatedRoute = System.currentTimeMillis();
@@ -283,12 +294,14 @@ public class RoutingHelper {
 	}
 	
 	private void showMessage(final String msg){
-		activity.runOnUiThread(new Runnable(){
-			@Override
-			public void run() {
-				Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
-			}
-		});
+		if (activity != null) {
+			activity.runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
+				}
+			});
+		}
 	}
 	
 	public boolean hasPointsToShow(){

@@ -1,6 +1,7 @@
 package com.osmand.activities;
 
 import java.text.MessageFormat;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -42,6 +43,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 
+import com.osmand.Algoritms;
 import com.osmand.LogUtil;
 import com.osmand.OsmandSettings;
 import com.osmand.R;
@@ -81,15 +83,18 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	private ImageButton backToLocation;
 	private ImageButton backToMenu;
 	
+	// the order of layer should be preserved ! when you are inserting new layer
+	private RouteLayer routeLayer;
+	private OsmBugsLayer osmBugsLayer;
+	private POIMapLayer poiMapLayer;
 	private PointLocationLayer locationLayer;
 	private PointNavigationLayer navigationLayer;
-	private POIMapLayer poiMapLayer;
 	private MapInfoLayer mapInfoLayer;
-	private OsmBugsLayer osmBugsLayer;
+	
 	private SavingTrackHelper savingTrackHelper;
 	private RoutingHelper routingHelper;
 	private boolean calculateRouteOnGps = false;
-	private RouteLayer routeLayer;
+	
 	
 	private WakeLock wakeLock;
 	private boolean sensorRegistered = false;
@@ -98,7 +103,6 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	private NotificationManager mNotificationManager;
 	private int APP_NOTIFICATION_ID;
 	
-
 	
 
 	private boolean isMapLinkedToLocation(){
@@ -141,29 +145,34 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		});
 		
 		mapView.setMapLocationListener(this);
-		poiMapLayer = new POIMapLayer();
-		mapView.addLayer(poiMapLayer);
-		routingHelper = new RoutingHelper(this);
+		routingHelper = RoutingHelper.getInstance(this);
+		// 1. route layer
 		routeLayer = new RouteLayer(routingHelper);
 		mapView.addLayer(routeLayer);
+		// 2. osm bugs layer
 		osmBugsLayer = new OsmBugsLayer(this);
-		mapInfoLayer = new MapInfoLayer(this, routeLayer);
-		mapView.addLayer(mapInfoLayer);
+		// 3. poi layer
+		poiMapLayer = new POIMapLayer();
+		// 4. point navigation layer
 		navigationLayer = new PointNavigationLayer();
 		mapView.addLayer(navigationLayer);
+		// 5. point location layer 
 		locationLayer = new PointLocationLayer();
 		mapView.addLayer(locationLayer);
+		// 6. map info layer
+		mapInfoLayer = new MapInfoLayer(this, routeLayer);
+		mapView.addLayer(mapInfoLayer);
+
 		
 		savingTrackHelper = new SavingTrackHelper(this);
-		
-		
-		
-		
 		locationLayer.setAppMode(OsmandSettings.getApplicationMode(this));
-		
 		LatLon pointToNavigate = OsmandSettings.getPointToNavigate(this);
+		
 		routingHelper.setAppMode(OsmandSettings.getApplicationMode(this));
-		routingHelper.setFinalAndCurrentLocation(pointToNavigate, null);
+		if(!Algoritms.objectEquals(routingHelper.getFinalLocation(), pointToNavigate)){
+			routingHelper.setFinalAndCurrentLocation(pointToNavigate, null);
+		}
+		
 		navigationLayer.setPointToNavigate(pointToNavigate);
 		
 		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
@@ -320,7 +329,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     
     private void updateSpeedBearing(Location location) {
 		// For gps it's bad way. It's widely used for testing purposes
-    	if(!providerSupportsSpeed && locationLayer.getLastKnownLocation() != null){
+    	if(!providerSupportsSpeed && locationLayer.getLastKnownLocation() != null && location != null){
     		if (locationLayer.getLastKnownLocation().distanceTo(location) > 3) {
 				float d = location.distanceTo(locationLayer.getLastKnownLocation());
 				if (d > 100) {
@@ -329,7 +338,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 				location.setSpeed(d);
 			}
     	}
-    	if(!providerSupportsBearing && locationLayer.getLastKnownLocation() != null){
+    	if(!providerSupportsBearing && locationLayer.getLastKnownLocation() != null && location != null){
     		if(locationLayer.getLastKnownLocation().distanceTo(location) > 10){
     			location.setBearing(locationLayer.getLastKnownLocation().bearingTo(location));
     		}
@@ -337,7 +346,9 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	}
     
     public void setLocation(Location location){
-    	
+    	if(Log.isLoggable(LogUtil.TAG, Log.DEBUG)){
+    		Log.d(LogUtil.TAG, "Location changed " + location.getProvider()); //$NON-NLS-1$
+    	}
     	registerUnregisterSensor(location);
     	updateSpeedBearing(location);
     	
@@ -509,14 +520,14 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 
 		if(mapView.getLayers().contains(poiMapLayer) != OsmandSettings.isShowingPoiOverMap(this)){
 			if(OsmandSettings.isShowingPoiOverMap(this)){
-				mapView.addLayer(poiMapLayer);
+				mapView.addLayer(poiMapLayer, routeLayer);
 			} else {
 				mapView.removeLayer(poiMapLayer);
 			}
 		}
 		if(mapView.getLayers().contains(osmBugsLayer) != OsmandSettings.isShowingOsmBugs(this)){
 			if(OsmandSettings.isShowingOsmBugs(this)){
-				mapView.addLayer(osmBugsLayer);
+				mapView.addLayer(osmBugsLayer, routeLayer);
 			} else {
 				mapView.removeLayer(osmBugsLayer);
 			}
@@ -718,7 +729,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     }
     
     
-    protected void addFavouritePoint(double latitude, double longitude){
+    protected void addFavouritePoint(final double latitude, final double longitude){
     	final Resources resources = this.getResources();
     	final FavouritePoint p = new FavouritesActivity.FavouritePoint();
     	p.setLatitude(latitude);
@@ -730,6 +741,35 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		final EditText editText = new EditText(this);
 		builder.setView(editText);
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setNeutralButton(R.string.update_existing, new DialogInterface.OnClickListener(){
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Builder b = new AlertDialog.Builder(MapActivity.this);
+				final FavouritesDbHelper helper = new FavouritesActivity.FavouritesDbHelper(MapActivity.this);
+				final List<FavouritePoint> points = helper.getFavouritePoints();
+				final String[] ar = new String[points.size()];
+				for(int i=0;i<ar.length; i++){	
+					ar[i]=points.get(i).getName();
+				}
+				b.setItems(ar, new DialogInterface.OnClickListener(){
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						if(helper.editFavourite(points.get(which), latitude, longitude)){
+							Toast.makeText(MapActivity.this, getString(R.string.fav_points_edited), Toast.LENGTH_SHORT).show();
+						}
+						helper.close();
+					}
+				});
+				if(ar.length == 0){
+					Toast.makeText(MapActivity.this, getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
+					helper.close();
+				}  else {
+					b.show();
+				}
+			}
+			
+		});
 		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -737,7 +777,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 				p.setName(editText.getText().toString());
 				boolean added = helper.addFavourite(p);
 				if (added) {
-					Toast.makeText(MapActivity.this, MessageFormat.format(resources.getString(R.string.add_favorite_dialog_favourite_added_template), p.getName()), Toast.LENGTH_SHORT)
+					Toast.makeText(MapActivity.this, MessageFormat.format(getString(R.string.add_favorite_dialog_favourite_added_template), p.getName()), Toast.LENGTH_SHORT)
 							.show();
 				}
 				helper.close();

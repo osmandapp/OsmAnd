@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.text.MessageFormat;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Locale;
 
@@ -35,8 +37,8 @@ public class IndexBatchCreator {
 		"sweden", "switzerland", "turkey", // 88, 83, 17 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		"ukraine", // 19 //$NON-NLS-1$
 		// TOTAL : 1129 MB
-		// "france", "czech_republic", "germany", // 519, 168, 860
-		// "great_britain", "italy", "netherlands", // 281, 246, 375
+		// "czech_republic", "great_britain", "italy", // 168, 281, 246, 
+		// "netherlands", "france",  "germany", //519, 375, 860
 		// ADD TO TOTAL : 2449 MB
 
 	};
@@ -93,10 +95,10 @@ public class IndexBatchCreator {
 	
 	protected void downloadFiles(){
 		// clean before downloading
-		for(File f : osmDirFiles.listFiles()){
-			log.info("Delete old file " + f.getName());  //$NON-NLS-1$
-			f.delete();
-		}
+//		for(File f : osmDirFiles.listFiles()){
+//			log.info("Delete old file " + f.getName());  //$NON-NLS-1$
+//			f.delete();
+//		}
 		for(String country : countriesToDownload){
 			String url = SITE_TO_DOWNLOAD + country +".osm.bz2"; //$NON-NLS-1$
 			log.info("Downloading country " + country + " from " + url);  //$NON-NLS-1$//$NON-NLS-2$
@@ -133,7 +135,7 @@ public class IndexBatchCreator {
 	}
 	
 	protected void generatedIndexes() {
-		for (File f : osmDirFiles.listFiles()) {
+		for (File f : getSortedFiles(osmDirFiles)) {
 			if (f.getName().endsWith(".osm.bz2") || f.getName().endsWith(".osm")) {
 				System.gc();
 				generateIndex(f);
@@ -154,9 +156,20 @@ public class IndexBatchCreator {
 		}
 	}
 	
+	protected File[] getSortedFiles(File dir){
+		File[] listFiles = dir.listFiles();
+		Arrays.sort(listFiles, new Comparator<File>(){
+			@Override
+			public int compare(File o1, File o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+		});
+		return listFiles;
+	}
+	
 	protected void uploadIndexes(){
 		MessageFormat format = new MessageFormat("{0,date,dd.MM.yyyy} : {1, number,##.#} MB", Locale.US);
-		for(File f : indexDirFiles.listFiles()){
+		for(File f : getSortedFiles(indexDirFiles)){
 			String summary;
 			double mbLengh = (double)f.length() / MB;
 			

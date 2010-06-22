@@ -159,6 +159,16 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		// TODO clear cache ?
 	}
 	
+	public void addLayer(OsmandMapLayer layer, OsmandMapLayer afterIt){
+		layer.initLayer(this);
+		int i = layers.indexOf(afterIt);
+		if(i == -1){
+			layers.add(layer);
+		} else {
+			layers.add(i, layer);
+		}
+	}
+	
 	public void addLayer(OsmandMapLayer layer){
 		layer.initLayer(this);
 		layers.add(layer);
