@@ -17,10 +17,6 @@ public class ToDoConstants {
 //   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
 //		 Some icons are not fine (as back menu from map - it is blured).
 	
-//   32. Introduce POI predefined filters (car filter(other-fuel, transportation-car_wash, show-car) and others)
-// 		 DONE : back end (POI filter object, save, delete, read) 
-//	     TODO : activity to create/edit new index, activity to read both user defined/osm standard, add actions to remove/create
-
 	
 	// FUTURE RELEASES
 	//   54. Invent screen to update index from internet (from osmand.googlecode.com)
@@ -57,6 +53,7 @@ public class ToDoConstants {
 	// BUGS Swing
 	
 	// DONE ANDROID :
+	//   32. Introduce POI predefined filters (car filter(other-fuel, transportation-car_wash, show-car) and others)
 	//   48. Enable change favorite point :  (for example fav - "car") means last point you left car. It is not static point, 
 	//		 you can always use the same name for different locations.
 	//   52. Make good distribution of POI on map (when POI a lot they are coupling in one place on the south)

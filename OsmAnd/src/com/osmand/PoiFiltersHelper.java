@@ -6,12 +6,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.osmand.data.AmenityType;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
+
+import com.osmand.data.AmenityType;
 
 public class PoiFiltersHelper {
 
@@ -127,41 +128,40 @@ public class PoiFiltersHelper {
 		return Collections.unmodifiableList(cacheOsmDefinedFilters);
 	}
 	
-	public static boolean removePoiFilter(Context ctx, PoiFilter filter){
+	public static PoiFilterDbHelper getPoiDbHelper(Context ctx){
+		return new PoiFilterDbHelper(ctx);
+	}
+	
+	
+	public static boolean removePoiFilter(PoiFilterDbHelper helper, PoiFilter filter){
 		if(filter.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)){
 			return false;
 		}
-		PoiFilterDbHelper helper = new PoiFilterDbHelper(ctx);
 		boolean res = helper.deleteFilter(filter);
 		if(res){
 			cacheUserDefinedFilters.remove(filter);
 		}
-		helper.close();
 		return res;
 	}
 	
-	public static boolean createPoiFilter(Context ctx, PoiFilter filter){
-		PoiFilterDbHelper helper = new PoiFilterDbHelper(ctx);
+	public static boolean createPoiFilter(PoiFilterDbHelper helper, PoiFilter filter){
 		boolean res = helper.addFilter(filter, helper.getWritableDatabase(), false);
 		if(res){
 			cacheUserDefinedFilters.add(filter);
 		}
-		helper.close();
 		return res;
 	}
 	
-	public static boolean editPoiFilter(Context ctx, PoiFilter filter){
+	public static boolean editPoiFilter(PoiFilterDbHelper helper, PoiFilter filter){
 		if(filter.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)){
 			return false;
 		}
-		PoiFilterDbHelper helper = new PoiFilterDbHelper(ctx);
 		boolean res = helper.editFilter(filter);
-		helper.close();
 		return res;
 	}
 	
 	
-	protected static class PoiFilterDbHelper extends SQLiteOpenHelper {
+	public static class PoiFilterDbHelper extends SQLiteOpenHelper {
 
 		public static final String DATABASE_NAME = "poi_filters"; //$NON-NLS-1$
 	    private static final int DATABASE_VERSION = 1;
@@ -198,29 +198,35 @@ public class PoiFiltersHelper {
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		}
 	    
-	    public boolean addFilter(PoiFilter p, SQLiteDatabase db, boolean addOnlyCategories){
+	    protected boolean addFilter(PoiFilter p, SQLiteDatabase db, boolean addOnlyCategories){
 	    	if(db != null){
 	    		if(!addOnlyCategories){
 	    			db.execSQL("INSERT INTO " + FILTER_NAME + " VALUES (?, ?, ?)",new Object[]{p.getName(), p.getFilterId(), p.getFilterByName()}); //$NON-NLS-1$ //$NON-NLS-2$
 	    		}
 	    		Map<AmenityType, List<String>> types = p.getAcceptedTypes();
+	    		SQLiteStatement insertCategories = db.compileStatement("INSERT INTO " +  CATEGORIES_NAME + " VALUES (?, ?, ?)"); //$NON-NLS-1$ //$NON-NLS-2$
 	    		for(AmenityType a : types.keySet()){
 	    			if(types.get(a) == null){
-	    				db.execSQL("INSERT INTO " +  CATEGORIES_NAME + " VALUES (?, ?, ?)", //$NON-NLS-1$ //$NON-NLS-2$
-	    						new Object[]{p.getFilterId(), AmenityType.valueToString(a), null});
+		    			insertCategories.bindString(1, p.getFilterId());
+						insertCategories.bindString(2, AmenityType.valueToString(a));
+						insertCategories.bindNull(3);
+    					insertCategories.execute();
 	    			} else {
 	    				for(String s : types.get(a)){
-	    					db.execSQL("INSERT INTO " +  CATEGORIES_NAME + " VALUES (?, ?, ?)", //$NON-NLS-1$ //$NON-NLS-2$
-		    						new Object[]{p.getFilterId(), AmenityType.valueToString(a), s});
+	    					insertCategories.bindString(1, p.getFilterId());
+	    					insertCategories.bindString(2, AmenityType.valueToString(a));
+	    					insertCategories.bindString(3, s);
+	    					insertCategories.execute();
 	    				}
 	    			}
 	    		}
+	    		insertCategories.close();
 	    		return true;
 	    	}
 	    	return false;
 	    }
 	    
-	    public List<PoiFilter> getFilters(){
+	    protected List<PoiFilter> getFilters(){
 	    	SQLiteDatabase db = getReadableDatabase();
 	    	ArrayList<PoiFilter> list = new ArrayList<PoiFilter>();
 	    	if(db != null){
@@ -265,7 +271,7 @@ public class PoiFiltersHelper {
 	    	return list;
 	    }
 	    
-	    public boolean editFilter(PoiFilter filter) {
+	    protected boolean editFilter(PoiFilter filter) {
 			SQLiteDatabase db = getWritableDatabase();
 			if (db != null) {
 				db.execSQL("DELETE FROM " + CATEGORIES_NAME + " WHERE " + CATEGORIES_FILTER_ID + " = ?",  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -278,7 +284,7 @@ public class PoiFiltersHelper {
 			return false;
 		}
 	    
-	    public boolean deleteFilter(PoiFilter p){
+	    protected boolean deleteFilter(PoiFilter p){
 	    	SQLiteDatabase db = getWritableDatabase();
 	    	if(db != null){
 	    		db.execSQL("DELETE FROM " + FILTER_NAME + " WHERE " +FILTER_COL_ID + " = ?",new Object[]{p.getFilterId()}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$

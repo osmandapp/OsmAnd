@@ -30,10 +30,10 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.osmand.OsmandSettings;
 import com.osmand.PoiFilter;
 import com.osmand.PoiFiltersHelper;
 import com.osmand.R;
+import com.osmand.PoiFiltersHelper.PoiFilterDbHelper;
 import com.osmand.activities.search.SearchPOIActivity;
 import com.osmand.data.AmenityType;
 
@@ -45,6 +45,7 @@ public class EditPOIFilterActivity extends ListActivity {
 
 	private Button filterLevel;
 	private PoiFilter filter;
+	private PoiFilterDbHelper helper;
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -55,9 +56,10 @@ public class EditPOIFilterActivity extends ListActivity {
 		filterLevel.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				OsmandSettings.setPoiFilterForMap(EditPOIFilterActivity.this, filter.getFilterId());
-				OsmandSettings.setShowPoiOverMap(EditPOIFilterActivity.this, true);
-				Intent newIntent = new Intent(EditPOIFilterActivity.this, MapActivity.class);
+				Intent newIntent = new Intent(EditPOIFilterActivity.this, SearchPOIActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putString(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
+				newIntent.putExtras(bundle);
 				startActivity(newIntent);
 			}
 		});
@@ -67,6 +69,18 @@ public class EditPOIFilterActivity extends ListActivity {
 		filter = PoiFiltersHelper.getFilterById(this, filterId);
 
 		setListAdapter(new AmenityAdapter(AmenityType.getCategories()));
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		helper = PoiFiltersHelper.getPoiDbHelper(this);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		helper.close();
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -85,7 +99,7 @@ public class EditPOIFilterActivity extends ListActivity {
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					if (PoiFiltersHelper.removePoiFilter(EditPOIFilterActivity.this, filter)) {
+					if (PoiFiltersHelper.removePoiFilter(helper, filter)) {
 						Toast.makeText(
 								EditPOIFilterActivity.this,
 								MessageFormat.format(EditPOIFilterActivity.this.getText(R.string.edit_filter_delete_message).toString(),
@@ -106,7 +120,7 @@ public class EditPOIFilterActivity extends ListActivity {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					PoiFilter nFilter = new PoiFilter(editText.getText().toString(), null, filter.getAcceptedTypes());
-					if (PoiFiltersHelper.createPoiFilter(EditPOIFilterActivity.this, nFilter)) {
+					if (PoiFiltersHelper.createPoiFilter(helper, nFilter)) {
 						Toast.makeText(
 								EditPOIFilterActivity.this,
 								MessageFormat.format(EditPOIFilterActivity.this.getText(R.string.edit_filter_create_message).toString(),
@@ -120,12 +134,12 @@ public class EditPOIFilterActivity extends ListActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+	
 	private void showDialog(final AmenityType amenity) {
 		Builder builder = new AlertDialog.Builder(this);
 		ScrollView scroll = new ScrollView(this);
 		ListView listView = new ListView(this);
-		final List<String> accepted = new ArrayList<String>();
+		
 		final LinkedHashSet<String> subCategories = new LinkedHashSet<String>(AmenityType.getSubCategories(amenity));
 		List<String> subtypes = filter.getAcceptedSubtypes(amenity);
 		boolean allSubTypesAccepted = subtypes == null;
@@ -139,40 +153,42 @@ public class EditPOIFilterActivity extends ListActivity {
 		}
 
 		final String[] array = subCategories.toArray(new String[0]);
-		boolean[] selected = new boolean[array.length];
+		final boolean[] selected = new boolean[array.length];
 		for (int i = 0; i < selected.length; i++) {
 			if (allSubTypesAccepted) {
 				selected[i] = true;
-				accepted.add(array[i]);
 			} else {
 				selected[i] = acceptedCategories.contains(array[i]);
-				if (selected[i]) {
-					accepted.add(array[i]);
-				}
 			}
 		}
 
 		scroll.addView(listView);
 		builder.setView(scroll);
-		builder.setNegativeButton(EditPOIFilterActivity.this.getText(R.string.default_buttons_cancel), new DialogInterface.OnClickListener() {
+		builder.setNeutralButton(EditPOIFilterActivity.this.getText(R.string.close), new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				List<String> accepted = new ArrayList<String>();
+				for (int i = 0; i < selected.length; i++) {
+					if(selected[i]){
+						accepted.add(array[i]);
+					}
+				}
 				if (subCategories.size() == accepted.size()) {
 					filter.selectSubTypesToAccept(amenity, null);
 				} else {
 					filter.selectSubTypesToAccept(amenity, accepted);
 				}
-				PoiFiltersHelper.editPoiFilter(EditPOIFilterActivity.this, filter);
+				PoiFiltersHelper.editPoiFilter(helper, filter);
 				((AmenityAdapter) EditPOIFilterActivity.this.getListAdapter()).notifyDataSetInvalidated();
 			}
 		});
 	
-		builder.setNeutralButton(EditPOIFilterActivity.this.getText(R.string.default_buttons_selectall), new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(EditPOIFilterActivity.this.getText(R.string.default_buttons_selectall), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				filter.selectSubTypesToAccept(amenity, null);
-				PoiFiltersHelper.editPoiFilter(EditPOIFilterActivity.this, filter);
+				PoiFiltersHelper.editPoiFilter(helper, filter);
 				((AmenityAdapter) EditPOIFilterActivity.this.getListAdapter()).notifyDataSetInvalidated();
 			}
 		});
@@ -181,16 +197,22 @@ public class EditPOIFilterActivity extends ListActivity {
 
 			@Override
 			public void onClick(DialogInterface dialog, int item, boolean isChecked) {
-				if (isChecked && !accepted.contains(array[item])) {
-					accepted.add(array[item]);
-				} else if (!isChecked && accepted.contains(array[item])) {
-					accepted.remove(array[item]);
-				}
-
+				selected[item] = isChecked;
 			}
 		});
 		builder.show();
 
+	}
+	
+	
+	@Override
+	public AmenityAdapter getListAdapter() {
+		return (AmenityAdapter) super.getListAdapter();
+	}
+	
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		showDialog(getListAdapter().getItem(position));
 	}
 
 	class AmenityAdapter extends ArrayAdapter<AmenityType> {
@@ -217,7 +239,6 @@ public class EditPOIFilterActivity extends ListActivity {
 
 		private void addRowListener(final AmenityType model, final TextView text, final CheckBox check) {
 			text.setOnClickListener(new OnClickListener() {
-
 				@Override
 				public void onClick(View v) {
 					showDialog(model);
@@ -225,7 +246,6 @@ public class EditPOIFilterActivity extends ListActivity {
 			});
 
 			check.setOnClickListener(new OnClickListener() {
-
 				@Override
 				public void onClick(View v) {
 					if (check.isChecked()) {
@@ -233,7 +253,7 @@ public class EditPOIFilterActivity extends ListActivity {
 						showDialog(model);
 					} else {
 						filter.setTypeToAccept(model, false);
-						PoiFiltersHelper.editPoiFilter(EditPOIFilterActivity.this, filter);
+						PoiFiltersHelper.editPoiFilter(helper, filter);
 					}
 				}
 			});
