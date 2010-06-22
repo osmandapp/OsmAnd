@@ -39,9 +39,7 @@ public class SearchPoiFilterActivity extends ListActivity {
 		super.onCreate(icicle);
 		setContentView(R.layout.searchpoilist);
 		
-		List<PoiFilter> filters = new ArrayList<PoiFilter>(PoiFiltersHelper.getUserDefinedPoiFilters(this)) ;
-		filters.addAll(PoiFiltersHelper.getOsmDefinedPoiFilters(this));
-		setListAdapter(new AmenityAdapter(filters));
+		
 		typeFace = Typeface.create((String)null, Typeface.ITALIC);
 		
 		// ListActivity has a ListView, which you can get with:
@@ -52,28 +50,42 @@ public class SearchPoiFilterActivity extends ListActivity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
 				PoiFilter poi = ((AmenityAdapter) getListAdapter()).getItem(pos);
-				if(!poi.isStandardFilter()) {
-					Bundle bundle = new Bundle();
-					Intent newIntent = new Intent(SearchPoiFilterActivity.this, EditPOIFilterActivity.class);
-					// folder selected
-					bundle.putString(SearchPOIActivity.AMENITY_FILTER, poi.getFilterId());
-					newIntent.putExtras(bundle);
-					startActivityForResult(newIntent, 0);
-				}
+				showEditActivity(poi);
 				return true;
 			}
 		});
 	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		List<PoiFilter> filters = new ArrayList<PoiFilter>(PoiFiltersHelper.getUserDefinedPoiFilters(this)) ;
+		filters.addAll(PoiFiltersHelper.getOsmDefinedPoiFilters(this));
+		setListAdapter(new AmenityAdapter(filters));
+	}
 
-
+	private void showEditActivity(PoiFilter poi) {
+		if(!poi.isStandardFilter()) {
+			Bundle bundle = new Bundle();
+			Intent newIntent = new Intent(SearchPoiFilterActivity.this, EditPOIFilterActivity.class);
+			// folder selected
+			bundle.putString(SearchPOIActivity.AMENITY_FILTER, poi.getFilterId());
+			newIntent.putExtras(bundle);
+			startActivityForResult(newIntent, 0);
+		}
+	}
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		PoiFilter filter = ((AmenityAdapter) getListAdapter()).getItem(position);
+		if(filter.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)){
+			showEditActivity(filter);
+			return;
+		}
 		Bundle bundle = new Bundle();
 		Intent newIntent = new Intent(SearchPoiFilterActivity.this, SearchPOIActivity.class);
 		bundle.putString(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
 		newIntent.putExtras(bundle);
 		startActivityForResult(newIntent, 0);
 	}
+
 
 
 	class AmenityAdapter extends ArrayAdapter<PoiFilter> {

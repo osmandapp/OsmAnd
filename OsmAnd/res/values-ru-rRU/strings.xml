@@ -216,4 +216,10 @@
 <string name="default_buttons_commit">Сохранить</string>
 <string name="default_buttons_reset">Сброс</string>
 <string name="filter_current_poiButton">Фильтровать</string>
+<string name="edit_filter_delete_menu_item">Удалить</string>
+<string name="edit_filter_save_as_menu_item">Сохранить как</string>
+<string name="edit_filter_delete_dialog_title">Вы действительно хотите удалить текущий фильтр?</string>
+<string name="edit_filter_delete_message">Фильтр {0} удален</string>
+<string name="edit_filter_create_message">Фильтр {0} создан</string>
+<string name="default_buttons_selectall">Выделить все</string>
 </resources>
