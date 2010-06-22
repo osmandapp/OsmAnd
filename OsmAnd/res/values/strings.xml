@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="fav_points_edited">Favorite point was edited</string>
+	<string name="fav_points_not_exist">None of favorite points exist</string>
+	<string name="update_existing">Replace</string>
 	<string name="only_show">Only show</string>
 	<string name="follow">Follow</string>
 	<string name="recalculate_route_to_your_location">Recalculate route according to your location</string>

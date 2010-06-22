@@ -27,17 +27,14 @@ public class ToDoConstants {
 	//  DONE: Load transport routes in swing.	
 	//	IDEA TO HAVE :   
 
-	//   48. Enable change favorite point :  (for example fav - "car") means last point you left car. It is not static point, 
-	//		 you can always use the same name for different locations.
-	//   51. Implement console application that prepare indexes to upload on server... 
-	// 		 0) run in background 1) download from internet 2) generates indices for Europe (take care about memory) 3) upload?
+	//   54. Invent screen to update index from internet (from osmand.googlecode.com)
 	//   46. Implement downloading strategy for tiles : select max zoom to download [16,15,14,...]
 	// 		 That means you can save internet because from [16 -> zoom -> 18], [14 -> zoom -> 16 - suitable for speed > 40], ...
 	//   50. Invent opening hours editor in order to edit POI hours better on device
-	//   52. Make good distribution of POI on map (when POI a lot they are coupling in one place on the south)
 	//   53. Add progress bars (for search adresses activity - show that something is loaded in background), 
 	//		 to internet communication activities [editing/commiting/deleting poi], do not hide edit poi dialog if operation failed 
-	//		 [move close buttons from alertdialog to own view] 
+	//		 [move close buttons from alertdialog to own view]
+	//   55. Update POI data from internet for selected area [suggest to create new POI index or extend exising of none exist]
     //   43. Enable poi filter by name
 	//   45. Get clear <Use internet> settings. Move that setting on top settings screen. 
 	//       That setting should rule all activities that use internet. It should ask whenever internet is used 
@@ -60,7 +57,11 @@ public class ToDoConstants {
 	// BUGS Swing
 	
 	// DONE ANDROID :
-
+	//   48. Enable change favorite point :  (for example fav - "car") means last point you left car. It is not static point, 
+	//		 you can always use the same name for different locations.
+	//   52. Make good distribution of POI on map (when POI a lot they are coupling in one place on the south)
+	//   51. Implement console application that prepare indexes to upload on server... 
+	// 		 0) run in background 1) download from internet 2) generates indices for Europe (take care about memory) 3) upload?
 
 	
 	// DONE SWING

@@ -2,11 +2,15 @@ package com.osmand.impl;
 
 import java.text.MessageFormat;
 
+import org.apache.commons.logging.Log;
+
 import com.osmand.Algoritms;
 import com.osmand.IProgress;
+import com.osmand.LogUtil;
 
 public class ConsoleProgressImplementation implements IProgress {
-	public static double deltaPercentsToPrint = 3.5; 
+	public static double deltaPercentsToPrint = 3.5;
+	private static Log log = LogUtil.getLog(ConsoleProgressImplementation.class);
 	
 	String currentTask;
 	int work;
@@ -25,7 +29,7 @@ public class ConsoleProgressImplementation implements IProgress {
 	
 	@Override
 	public void finishTask() {
-		System.out.println("Task " + currentTask + " is finished "); //$NON-NLS-1$ //$NON-NLS-2$
+		log.info("Task " + currentTask + " is finished "); //$NON-NLS-1$ //$NON-NLS-2$
 		this.currentTask = null;
 		
 	}
@@ -62,11 +66,11 @@ public class ConsoleProgressImplementation implements IProgress {
 	public void startTask(String taskName, int work) {
 		if(!Algoritms.objectEquals(currentTask, taskName)){
 			this.currentTask = taskName;
-			System.out.println("Memory before task exec: " + Runtime.getRuntime().totalMemory() + " free : " + Runtime.getRuntime().freeMemory()); //$NON-NLS-1$ //$NON-NLS-2$
+			log.info("Memory before task exec: " + Runtime.getRuntime().totalMemory() + " free : " + Runtime.getRuntime().freeMemory()); //$NON-NLS-1$ //$NON-NLS-2$
 			if (previousTaskStarted == 0) {
-				System.out.println(taskName + " started - " + work); //$NON-NLS-1$
+				log.info(taskName + " started - " + work); //$NON-NLS-1$
 			} else {
-				System.out.println(taskName + " started after " + (System.currentTimeMillis() - previousTaskStarted) + " ms" + " - " + work); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				log.info(taskName + " started after " + (System.currentTimeMillis() - previousTaskStarted) + " ms" + " - " + work); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 			previousTaskStarted = System.currentTimeMillis();
 		}

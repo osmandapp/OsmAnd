@@ -50,6 +50,9 @@ public class AmenityIndexRepository {
 				squery += " AND " + sql; //$NON-NLS-1$
 			}
 		}
+		if(limit != -1){
+			squery += " ORDER BY RANDOM() LIMIT " +limit; //$NON-NLS-1$
+		}
 		Cursor query = db.query(IndexPoiTable.getTable(), columns, squery, 
 				new String[]{Double.toString(bottomLatitude), 
 				Double.toString(topLatitude), Double.toString(leftLongitude), Double.toString(rightLongitude)}, null, null, null);
