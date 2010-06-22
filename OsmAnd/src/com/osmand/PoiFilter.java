@@ -1,5 +1,6 @@
 package com.osmand;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -107,7 +108,7 @@ public class PoiFilter {
 	 * @return null if all subtypes are accepted/ empty list if type is not accepted at all
 	 */
 	public List<String> getAcceptedSubtypes(AmenityType type){
-		if(acceptedTypes.containsKey(type)){
+		if(!acceptedTypes.containsKey(type)){
 			return Collections.emptyList();
 		}
 		return acceptedTypes.get(type);
@@ -136,7 +137,7 @@ public class PoiFilter {
 	
 	public void setTypeToAccept(AmenityType type, boolean accept){
 		if(accept){
-			acceptedTypes.put(type, null);
+			acceptedTypes.put(type, new ArrayList<String>());
 		} else {
 			acceptedTypes.remove(type);
 		}
@@ -177,7 +178,6 @@ public class PoiFilter {
 			}
 			b.append(")"); //$NON-NLS-1$
 		}
-			
 		b.append(")"); //$NON-NLS-1$
 		return b.toString();
 	}

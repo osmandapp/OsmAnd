@@ -10,6 +10,6 @@
 		
 		
 	<TextView android:id="@+id/filter_poi_label"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:textSize="25px"></TextView>
 </LinearLayout>

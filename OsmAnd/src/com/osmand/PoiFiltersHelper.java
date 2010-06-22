@@ -128,10 +128,13 @@ public class PoiFiltersHelper {
 	}
 	
 	public static boolean removePoiFilter(Context ctx, PoiFilter filter){
+		if(filter.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)){
+			return false;
+		}
 		PoiFilterDbHelper helper = new PoiFilterDbHelper(ctx);
 		boolean res = helper.deleteFilter(filter);
 		if(res){
-			getUserDefinedPoiFilters(ctx).remove(filter);
+			cacheUserDefinedFilters.remove(filter);
 		}
 		helper.close();
 		return res;
@@ -141,13 +144,16 @@ public class PoiFiltersHelper {
 		PoiFilterDbHelper helper = new PoiFilterDbHelper(ctx);
 		boolean res = helper.addFilter(filter, helper.getWritableDatabase(), false);
 		if(res){
-			getUserDefinedPoiFilters(ctx).add(filter);
+			cacheUserDefinedFilters.add(filter);
 		}
 		helper.close();
 		return res;
 	}
 	
 	public static boolean editPoiFilter(Context ctx, PoiFilter filter){
+		if(filter.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)){
+			return false;
+		}
 		PoiFilterDbHelper helper = new PoiFilterDbHelper(ctx);
 		boolean res = helper.editFilter(filter);
 		helper.close();

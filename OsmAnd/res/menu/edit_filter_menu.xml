@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+<group android:menuCategory="container" android:id="@+id/edit_filter_context_menu">
+<item android:title="@string/edit_filter_save_as_menu_item" android:id="@+id/edit_filter_save_as" android:icon="@android:drawable/ic_menu_save"></item>
+<item android:title="@string/edit_filter_delete_menu_item" android:id="@+id/edit_filter_delete" android:icon="@android:drawable/ic_menu_delete"></item>
+</group>
+</menu>
