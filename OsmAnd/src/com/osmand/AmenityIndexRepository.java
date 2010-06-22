@@ -146,6 +146,7 @@ public class AmenityIndexRepository {
 		}
 		boolean inside = cTopLatitude >= topLatitude && cLeftLongitude <= leftLongitude && cRightLongitude >= rightLongitude
 				&& cBottomLatitude <= bottomLatitude && zoom == cZoom;
+		boolean noNeedToSearch = inside &&  Algoritms.objectEquals(filterId, cFilterId);
 		if((inside || fillFound) && toFill != null && Algoritms.objectEquals(filterId, cFilterId)){
 			for(Amenity a : cachedAmenities){
 				LatLon location = a.getLocation();
@@ -155,7 +156,7 @@ public class AmenityIndexRepository {
 				}
 			}
 		}
-		return inside;
+		return noNeedToSearch;
 	}
 	public boolean checkCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, String filterId, List<Amenity> toFill){
 		return checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, filterId, toFill, false);

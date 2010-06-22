@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.osmand.OsmandSettings;
 import com.osmand.PoiFilter;
 import com.osmand.PoiFiltersHelper;
 import com.osmand.R;
@@ -71,8 +70,6 @@ public class SearchPoiFilterActivity extends ListActivity {
 		PoiFilter filter = ((AmenityAdapter) getListAdapter()).getItem(position);
 		Bundle bundle = new Bundle();
 		Intent newIntent = new Intent(SearchPoiFilterActivity.this, SearchPOIActivity.class);
-		// folder selected
-		OsmandSettings.setPoiFilterForMap(this, filter.getFilterId());
 		bundle.putString(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
 		newIntent.putExtras(bundle);
 		startActivityForResult(newIntent, 0);

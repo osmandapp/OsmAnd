@@ -63,6 +63,11 @@ public class OsmandSettings {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		return prefs.getBoolean(SHOW_POI_OVER_MAP, false);
 	}
+	
+	public static boolean setShowPoiOverMap(Context ctx, boolean val) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putBoolean(SHOW_POI_OVER_MAP, val).commit();
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String USER_NAME = "user_name"; //$NON-NLS-1$

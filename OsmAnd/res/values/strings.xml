@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="show_poi_on_map">Show on map</string>
 	<string name="fav_points_edited">Favorite point was edited</string>
 	<string name="fav_points_not_exist">None of favorite points exist</string>
 	<string name="update_existing">Replace</string>

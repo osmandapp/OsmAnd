@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="show_poi_on_map">Показать на карте</string>
 	<string name="fav_points_edited">Отредактирована избранная точка</string>
 	<string name="fav_points_not_exist">Не существует избранных точек</string>
 	<string name="update_existing">Заменить</string>

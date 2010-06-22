@@ -40,10 +40,14 @@ public class SearchPOIActivity extends ListActivity {
 
 
 	private Button searchPOILevel;
+	private Button showOnMap;
 	private PoiFilter filter;
 	private AmenityAdapter amenityAdapter;
 	private LatLon lastKnownMapLocation;
 	private TextView searchArea;
+
+
+	
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -64,7 +68,18 @@ public class SearchPOIActivity extends ListActivity {
 		Bundle bundle = this.getIntent().getExtras();
 		String filterId = bundle.getString(AMENITY_FILTER);
 		filter = PoiFiltersHelper.getFilterById(this, filterId);
-
+		
+		showOnMap = (Button) findViewById(R.id.ShowOnMap);
+		showOnMap.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				OsmandSettings.setPoiFilterForMap(SearchPOIActivity.this, filter.getFilterId());
+				OsmandSettings.setShowPoiOverMap(SearchPOIActivity.this, true);
+				Intent newIntent = new Intent(SearchPOIActivity.this, MapActivity.class);
+				startActivity(newIntent);
+			}
+		});
+		showOnMap.setEnabled(filter != null);
 		if (filter != null) {
 			amenityAdapter = new AmenityAdapter(new ArrayList<Amenity>());
 			setListAdapter(amenityAdapter);
