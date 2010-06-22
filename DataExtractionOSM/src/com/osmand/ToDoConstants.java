@@ -23,10 +23,6 @@ public class ToDoConstants {
 
 	
 	// FUTURE RELEASES
-	//   33. Build transport locations. Create transport index (transport-stops) (investigate)
-	//  DONE: Load transport routes in swing.	
-	//	IDEA TO HAVE :   
-
 	//   54. Invent screen to update index from internet (from osmand.googlecode.com)
 	//   46. Implement downloading strategy for tiles : select max zoom to download [16,15,14,...]
 	// 		 That means you can save internet because from [16 -> zoom -> 18], [14 -> zoom -> 16 - suitable for speed > 40], ...
@@ -40,7 +36,11 @@ public class ToDoConstants {
 	//       That setting should rule all activities that use internet. It should ask whenever internet is used 
 	//		(would you like to use internet for that operation - if using internet is not checked). 
 	//		Internet using now for : edit POI osm, show osm bugs layer, download tiles.
-	//   47. Internet connectivity could be checked before trying to use
+	//   56. Investigate usage CloudMade API for calculating route.
+	//   33. Build transport locations. Create transport index (transport-stops) (investigate)
+	// 		 DONE: Load transport routes in swing.	
+	//		 IDEA TO HAVE :   
+	//   47. Internet connectivity could be checked before trying to use (?)
     //   40. Support simple vector road rendering (require new index file) (?)
     //   26. Show the whole street on map (when it is chosen in search activity). Possibly extend that story to show layer with streets. (?)
 
