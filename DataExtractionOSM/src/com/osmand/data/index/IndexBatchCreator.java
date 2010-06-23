@@ -19,6 +19,10 @@ import com.osmand.data.preparation.DataExtraction;
 import com.osmand.impl.ConsoleProgressImplementation;
 
 public class IndexBatchCreator {
+	// config params
+	private static final boolean indexPOI = true;
+	private static final boolean indexAddress = true;
+	
 	protected static final Log log = LogUtil.getLog(IndexBatchCreator.class);
 	protected static final String SITE_TO_DOWNLOAD = "http://download.geofabrik.de/osm/europe/"; //$NON-NLS-1$
 	protected static final String[] countriesToDownload = new String[] {
@@ -144,13 +148,17 @@ public class IndexBatchCreator {
 		System.out.println("GENERATING INDEXES FINISHED ");
 	}
 	protected void generateIndex(File f){
-		DataExtraction extr = new DataExtraction(true, true, false, true, false, false, indexDirFiles);
+		DataExtraction extr = new DataExtraction(indexAddress, indexPOI, false, true, false, false, indexDirFiles);
 		try {
 			Region country = extr.readCountry(f.getAbsolutePath(), new ConsoleProgressImplementation(9), null);
 			DataIndexWriter dataIndexWriter = new DataIndexWriter(indexDirFiles, country);
 			String name = country.getName();
-			dataIndexWriter.writeAddress(name + "_" + IndexConstants.ADDRESS_TABLE_VERSION + IndexConstants.ADDRESS_INDEX_EXT, f.lastModified());
-			dataIndexWriter.writePOI(name + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT, f.lastModified());
+			if(indexAddress){
+				dataIndexWriter.writeAddress(name + "_" + IndexConstants.ADDRESS_TABLE_VERSION + IndexConstants.ADDRESS_INDEX_EXT, f.lastModified());
+			}
+			if(indexPOI){
+				dataIndexWriter.writePOI(name + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT, f.lastModified());
+			}
 		} catch (Exception e) { 
 			log.error("Exception generating indexes for " + f.getName()); //$NON-NLS-1$ 
 		}
