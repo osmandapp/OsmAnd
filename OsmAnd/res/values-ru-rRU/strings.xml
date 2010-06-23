@@ -9,7 +9,7 @@
 	<string name="downloading">Загрузка...</string>
 	<string name="downloading_list_indexes">Загружается список доступных индексов</string>
 	<string name="list_index_files_was_not_loaded">Не найдены доступные индекс файлы с osmand.googlecode.com</string>
-    <string name="select_index_file_to_download">Выберите файл индекса для загрузки из интернета. Если вы не можете найти регион, вы можете создать его самостоятельно.
+    <string name="select_index_file_to_download">Если вы не можете найти регион, вы можете создать его самостоятельно.
 Читайте на osmand.googlecode.com .</string>
 	<string name="show_poi_on_map">Показать на карте</string>
 	<string name="fav_points_edited">Отредактирована избранная точка</string>

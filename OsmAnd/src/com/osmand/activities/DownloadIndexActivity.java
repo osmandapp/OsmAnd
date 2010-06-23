@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -112,7 +114,7 @@ public class DownloadIndexActivity extends ListActivity {
 			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.ADDRESS_PATH);
 			regionName += IndexConstants.ADDRESS_INDEX_EXT;
 		} else if(key.endsWith(IndexConstants.POI_INDEX_EXT)){
-			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.ADDRESS_PATH);
+			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.POI_PATH);
 			regionName += IndexConstants.POI_INDEX_EXT;
 		}
 		if(parent != null){
@@ -133,8 +135,10 @@ public class DownloadIndexActivity extends ListActivity {
 				try {
 					FileOutputStream out = new FileOutputStream(file);
 					try {
-						InputStream is = DownloaderIndexFromGoogleCode.getInputStreamToLoadIndex(key);
-						impl.startTask(getString(R.string.downloading_file), is.available());
+						URL url = DownloaderIndexFromGoogleCode.getInputStreamToLoadIndex(key);
+						URLConnection conn = url.openConnection();
+						InputStream is = conn.getInputStream();
+						impl.startTask(getString(R.string.downloading_file), conn.getContentLength());
 						byte[] buffer = new byte[BUFFER_SIZE];
 						int read = 0;
 						while((read = is.read(buffer)) != -1){
@@ -158,6 +162,8 @@ public class DownloadIndexActivity extends ListActivity {
 				} catch (IOException e) {
 					log.error("Exception ocurred", e); //$NON-NLS-1$
 					showWarning(getString(R.string.error_io_error));
+					// Possibly file is corrupted
+					file.delete();
 				} finally {
 					dlg.dismiss();
 				}
@@ -170,7 +176,7 @@ public class DownloadIndexActivity extends ListActivity {
 		runOnUiThread(new Runnable(){
 			@Override
 			public void run() {
-				Toast.makeText(DownloadIndexActivity.this, messages, Toast.LENGTH_LONG);
+				Toast.makeText(DownloadIndexActivity.this, messages, Toast.LENGTH_LONG).show();
 			}
 			
 		});
