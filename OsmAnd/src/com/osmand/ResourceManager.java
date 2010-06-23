@@ -64,7 +64,7 @@ public class ResourceManager {
 	// Indexes
 	private Map<String, RegionAddressRepository> addressMap = new TreeMap<String, RegionAddressRepository>(Collator.getInstance());
 	
-	protected List<AmenityIndexRepository> amenityRepositories = new ArrayList<AmenityIndexRepository>();
+	protected Map<String, AmenityIndexRepository> amenityRepositories = new LinkedHashMap<String, AmenityIndexRepository>();
 	
 	public AsyncLoadingThread asyncLoadingTiles = new AsyncLoadingThread();
 	
@@ -253,7 +253,7 @@ public class ResourceManager {
 			progress.startTask(Messages.getMessage("indexing_poi") + f.getName(), -1); //$NON-NLS-1$
 			boolean initialized = repository.initialize(progress, f);
 			if (initialized) {
-				amenityRepositories.add(repository);
+				amenityRepositories.put(repository.getName(), repository);
 			}else {
 				warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
 			}
@@ -289,7 +289,7 @@ public class ResourceManager {
 	// //////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
 	public List<AmenityIndexRepository> searchRepositories(double latitude, double longitude) {
 		List<AmenityIndexRepository> repos = new ArrayList<AmenityIndexRepository>();
-		for (AmenityIndexRepository index : amenityRepositories) {
+		for (AmenityIndexRepository index : amenityRepositories.values()) {
 			if (index.checkContains(latitude,longitude)) {
 				repos.add(index);
 			}
@@ -304,7 +304,7 @@ public class ResourceManager {
 		double leftLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX - 0.5);
 		double rightLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX + 0.5);
 		List<Amenity> amenities = new ArrayList<Amenity>();
-		for (AmenityIndexRepository index : amenityRepositories) {
+		for (AmenityIndexRepository index : amenityRepositories.values()) {
 			if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
 				if (!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, filter.getFilterId(), amenities)) {
 					index.searchAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, limit, filter, amenities);
@@ -317,7 +317,7 @@ public class ResourceManager {
 	
 	public void searchAmenitiesAsync(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, PoiFilter filter, List<Amenity> toFill){
 		String filterId = filter == null ? null : filter.getFilterId();
-		for(AmenityIndexRepository index : amenityRepositories){
+		for(AmenityIndexRepository index : amenityRepositories.values()){
 			if(index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)){
 				if(!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, filterId, toFill, true)){
 					asyncLoadingTiles.requestToLoadAmenities(
@@ -340,7 +340,7 @@ public class ResourceManager {
 	////////////////////////////////////////////// Closing methods ////////////////////////////////////////////////
 	
 	public void closeAmenities(){
-		for(AmenityIndexRepository r : amenityRepositories){
+		for(AmenityIndexRepository r : amenityRepositories.values()){
 			r.close();
 		}
 		amenityRepositories.clear();
@@ -363,7 +363,7 @@ public class ResourceManager {
 	public void onLowMemory() {
 		log.info("On low memory : cleaning tiles - size = " + cacheOfImages.size()); //$NON-NLS-1$
 		clearTiles();
-		for(AmenityIndexRepository r : amenityRepositories){
+		for(AmenityIndexRepository r : amenityRepositories.values()){
 			r.clearCache();
 		}
 		for(RegionAddressRepository r : addressMap.values()){

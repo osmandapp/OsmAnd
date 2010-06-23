@@ -2,7 +2,6 @@ package com.osmand.data.index;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -107,9 +106,9 @@ public class DownloaderIndexFromGoogleCode {
 		return files;
 	}
 	
-	public static InputStream getInputStreamToLoadIndex(String indexName) throws IOException{
+	public static URL getInputStreamToLoadIndex(String indexName) throws IOException{
 		URL url = new URL("http://osmand.googlecode.com/files/"+indexName); //$NON-NLS-1$
-		return url.openStream();
+		return url;
 	}
 
 }

@@ -9,7 +9,7 @@ import android.os.Message;
 
 public class ProgressDialogImplementation implements IProgress {
 	
-	private static final float deltaToChange = 0.04f;
+	private static final float deltaToChange = 0.023f;
 	private String taskName;
 	private int progress;
 	private int work;
@@ -60,8 +60,9 @@ public class ProgressDialogImplementation implements IProgress {
 	@Override
 	public void progress(int deltaWork) {
 		this.deltaWork += deltaWork;
-		if(change(progress + deltaWork)){
-			this.progress += deltaWork;
+		if(change(progress + this.deltaWork)){
+			this.progress += this.deltaWork;
+			this.deltaWork = 0;
 			updateMessage();
 		}
 	}
