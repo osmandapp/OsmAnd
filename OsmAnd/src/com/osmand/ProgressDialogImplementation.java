@@ -2,6 +2,8 @@ package com.osmand;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.os.Handler;
 import android.os.Message;
 
@@ -18,15 +20,30 @@ public class ProgressDialogImplementation implements IProgress {
 	private Thread run;
 	private Context context;
 
-	public ProgressDialogImplementation(final ProgressDialog dlg){
+	public ProgressDialogImplementation(final ProgressDialog dlg, boolean cancelable){
 		context = dlg.getContext();
+		if(cancelable){
+			dlg.setOnCancelListener(new OnCancelListener(){
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					if(run != null){
+						run.stop();
+					}
+					
+				}
+			});
+		}
 		mViewUpdateHandler = new Handler(){
 			@Override
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
 				dlg.setMessage(message);
 			}
-		};
+		};	
+	}
+	
+	public ProgressDialogImplementation(final ProgressDialog dlg){
+		this(dlg, false);
 	}
 	
 	public void setRunnable(String threadName, Runnable run){

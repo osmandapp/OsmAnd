@@ -23,7 +23,10 @@ public class DownloaderIndexFromGoogleCode {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws URISyntaxException, IOException {
-		System.out.println(getIndexFiles(new String[] {".addr.odb",".poi.odb"}, new String[] {"0", "0"})); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		Map<String, String> indexFiles = DownloaderIndexFromGoogleCode.getIndexFiles(new String[] { IndexConstants.ADDRESS_INDEX_EXT,
+				IndexConstants.POI_INDEX_EXT }, new String[] {
+				IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "" }); //$NON-NLS-1$//$NON-NLS-2$
+		System.out.println(indexFiles);
 	}
 	
 	private static StringBuilder getContent() {
@@ -57,7 +60,7 @@ public class DownloaderIndexFromGoogleCode {
 				prevI = i;
 			}
 			int j = i - 1;
-			while (content.charAt(j) == '_' || Character.isLetterOrDigit(content.charAt(j))) {
+			while (content.charAt(j) == '_' || Character.isLetterOrDigit(content.charAt(j)) || content.charAt(j) == '-') {
 				j--;
 			}
 			if(!content.substring(j + 1, i).endsWith("_"+version)){ //$NON-NLS-1$

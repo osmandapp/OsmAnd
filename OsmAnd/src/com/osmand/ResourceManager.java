@@ -36,9 +36,9 @@ import com.osmand.views.POIMapLayer;
  */
 public class ResourceManager {
 
-	private static final String POI_PATH = "osmand/" + IndexConstants.POI_INDEX_DIR; //$NON-NLS-1$
-	private static final String ADDRESS_PATH = "osmand/" + IndexConstants.ADDRESS_INDEX_DIR; //$NON-NLS-1$
-	private static final String TILES_PATH = "osmand/tiles/"; //$NON-NLS-1$
+	public static final String POI_PATH = "osmand/" + IndexConstants.POI_INDEX_DIR; //$NON-NLS-1$
+	public static final String ADDRESS_PATH = "osmand/" + IndexConstants.ADDRESS_INDEX_DIR; //$NON-NLS-1$
+	public static final String TILES_PATH = "osmand/tiles/"; //$NON-NLS-1$
 	
 	private static final Log log = LogUtil.getLog(ResourceManager.class);
 	
@@ -240,20 +240,24 @@ public class ResourceManager {
 		closeAmenities();
 		if (file.exists() && file.canRead()) {
 			for (File f : file.listFiles()) {
-				if (f.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
-					AmenityIndexRepository repository = new AmenityIndexRepository();
-					
-					progress.startTask(Messages.getMessage("indexing_poi") + f.getName(), -1); //$NON-NLS-1$
-					boolean initialized = repository.initialize(progress, f);
-					if (initialized) {
-						amenityRepositories.add(repository);
-					}else {
-						warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
-					}
-				}
+				indexingPoi(progress, warnings, f);
 			}
 		}
 		return warnings;
+	}
+	
+	public void indexingPoi(final IProgress progress, List<String> warnings, File f) {
+		if (f.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
+			AmenityIndexRepository repository = new AmenityIndexRepository();
+			
+			progress.startTask(Messages.getMessage("indexing_poi") + f.getName(), -1); //$NON-NLS-1$
+			boolean initialized = repository.initialize(progress, f);
+			if (initialized) {
+				amenityRepositories.add(repository);
+			}else {
+				warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+			}
+		}
 	}
 	
 		
@@ -263,19 +267,23 @@ public class ResourceManager {
 		closeAddresses();
 		if (file.exists() && file.canRead()) {
 			for (File f : file.listFiles()) {
-				if (f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)) {
-					RegionAddressRepository repository = new RegionAddressRepository();
-					progress.startTask(Messages.getMessage("indexing_address") + f.getName(), -1); //$NON-NLS-1$
-					boolean initialized = repository.initialize(progress, f);
-					if (initialized) {
-						addressMap.put(repository.getName(), repository);
-					} else {
-						warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
-					}
-				}
+				indexingAddress(progress, warnings, f);
 			}
 		}
 		return warnings;
+	}
+
+	public void indexingAddress(final IProgress progress, List<String> warnings, File f) {
+		if (f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)) {
+			RegionAddressRepository repository = new RegionAddressRepository();
+			progress.startTask(Messages.getMessage("indexing_address") + f.getName(), -1); //$NON-NLS-1$
+			boolean initialized = repository.initialize(progress, f);
+			if (initialized) {
+				addressMap.put(repository.getName(), repository);
+			} else {
+				warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+			}
+		}
 	}
 	
 	// //////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////

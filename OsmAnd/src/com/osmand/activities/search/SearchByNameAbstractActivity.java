@@ -16,6 +16,7 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.osmand.R;
@@ -24,6 +25,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 
 	private EditText searchText;
 	private Handler handlerToLoop;
+	private ProgressBar progress;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 		setContentView(R.layout.search_by_name);
 		NamesAdapter namesAdapter = new NamesAdapter(getObjects("")); //$NON-NLS-1$
 		setListAdapter(namesAdapter);
+		progress = (ProgressBar) findViewById(R.id.ProgressBar);
 		searchText = (EditText) findViewById(R.id.SearchText);
 		searchText.addTextChangedListener(new TextWatcher(){
 
@@ -47,6 +50,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 			}
 			
 		});
+		progress.setVisibility(View.INVISIBLE);
 		findViewById(R.id.ResetButton).setOnClickListener(new View.OnClickListener(){
 
 			@Override
@@ -74,6 +78,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 					((NamesAdapter)getListAdapter()).add(o);
 				}
 				((NamesAdapter)getListAdapter()).notifyDataSetChanged();
+				progress.setVisibility(View.INVISIBLE);
 			}
 		});
 	}
@@ -92,6 +97,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 		Message msg = Message.obtain(handlerToLoop, new Runnable() {
 			@Override
 			public void run() {
+				showProgress(View.VISIBLE);
 				List<T> loadedObjects = getObjects(filter);
 				if(handlerToLoop != null && !handlerToLoop.hasMessages(1)){
 					updateUIList(loadedObjects);
@@ -100,6 +106,18 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 		});
 		msg.what = 1;
 		handlerToLoop.sendMessageDelayed(msg, 150);
+	}
+	
+	private void showProgress(final int v){
+		runOnUiThread(new Runnable(){
+
+			@Override
+			public void run() {
+				progress.setVisibility(v);
+				
+			}
+			
+		});
 	}
 
 	public abstract List<T> getObjects(String filter);

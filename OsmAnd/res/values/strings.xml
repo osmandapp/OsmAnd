@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="download_sd_dir_not_accessible">Directory on SD card to save index is not accessible</string>
+	<string name="download_question">Do you want to download {0} - {1} ?</string>
+	<string name="address">Address</string>
+	<string name="download_index_success">Index downloaded successfully</string>
+	<string name="error_io_error">Input/output error occured.</string>
+	<string name="downloading_file">Downloading file</string>
+	<string name="downloading">Downloading...</string>
+	<string name="downloading_list_indexes">Downloading list of available indexes</string>
+	<string name="list_index_files_was_not_loaded">The index files are not loaded from osmand.googlecode.com. If you can't find your region, you can make it yourself. See osmand.googlecode.com.</string>
+    <string name="select_index_file_to_download">Select index file to download from internet</string>
 	<string name="show_poi_on_map">Show on map</string>
 	<string name="fav_points_edited">Favorite point was edited</string>
 	<string name="fav_points_not_exist">None of favorite points exist</string>
@@ -42,6 +52,8 @@
 	<string name="finished_task">Finished : </string>
     <string name="reload_indexes_descr">Reload data indexes from SD</string>
     <string name="reload_indexes">Reload indexes</string>
+    <string name="download_indexes_descr">Download indexes from internet</string>
+    <string name="download_indexes">Download indexes</string>
     <string name="use_online_routing_descr">Use internet to calculate route</string>
     <string name="use_online_routing">Use online routing</string>
     <string name="user_password_descr">Input osm password</string>
@@ -154,7 +166,6 @@
 <string name="search_address_building_option">Building</string>
 <string name="search_address_street_option">Intersected street</string>
 
-<string name="search_tabs_address">Address</string>
 <string name="search_tabs_location">Location</string>
 
 <string name="context_menu_item_navigate_point">Navigate to point</string>
@@ -203,9 +214,9 @@
 <string name="poi_action_add">Add</string>
 <string name="poi_action_change">Change</string>
 <string name="poi_action_succeded_template">Action {0} completed successfully.</string>
-<string name="poi_error_unexpected_template">Unexpected error occured while preforming action {0}.</string>
-<string name="poi_error_io_error_template">Input/output error occured while preforming action {0}.</string>
-<string name="poi_error_io_error">Input/output error occured.</string>
+<string name="poi_error_unexpected_template">Unexpected error occured while performing action {0}.</string>
+<string name="poi_error_io_error_template">Input/output error occured while performing action {0}.</string>
+
 <string name="poi_error_info_not_loaded">Info about node was not loaded</string>
 
 <string name="poi_dialog_name">Name</string>

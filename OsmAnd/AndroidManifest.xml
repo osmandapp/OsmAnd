@@ -14,6 +14,7 @@
 		<activity android:name=".activities.SettingsActivity" android:label="@string/settings_activity"></activity>
 		<activity android:name=".activities.search.SearchActivity" android:label="@string/search_activity" ></activity>
         <activity android:name=".activities.NavigatePointActivity"></activity>
+        <activity android:name=".activities.DownloadIndexActivity"></activity>
         <activity android:name=".activities.FavouritesActivity" android:label="@string/favourites_activity"></activity>
         
         <activity android:name=".activities.search.SearchPOIActivity" android:label="@string/searchpoi_activity"></activity>

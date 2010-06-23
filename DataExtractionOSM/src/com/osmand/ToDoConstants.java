@@ -19,12 +19,10 @@ public class ToDoConstants {
 	
 	
 	// FUTURE RELEASES
-	//   54. Invent screen to update index from internet (from osmand.googlecode.com)
 	//   46. Implement downloading strategy for tiles : select max zoom to download [16,15,14,...]
 	// 		 That means you can save internet because from [16 -> zoom -> 18], [14 -> zoom -> 16 - suitable for speed > 40], ...
 	//   50. Invent opening hours editor in order to edit POI hours better on device
-	//   53. Add progress bars (for search adresses activity - show that something is loaded in background), 
-	//		 to internet communication activities [editing/commiting/deleting poi], do not hide edit poi dialog if operation failed 
+	//   53. Add progress bars : to internet communication activities [editing/commiting/deleting poi], do not hide edit poi dialog if operation failed 
 	//		 [move close buttons from alertdialog to own view]
 	//   55. Update POI data from internet for selected area [suggest to create new POI index or extend exising of none exist]
     //   43. Enable poi filter by name
@@ -53,6 +51,7 @@ public class ToDoConstants {
 	// BUGS Swing
 	
 	// DONE ANDROID :
+	//   54. Invent screen to update index from internet (from osmand.googlecode.com)
 	//   32. Introduce POI predefined filters (car filter(other-fuel, transportation-car_wash, show-car) and others)
 	//   48. Enable change favorite point :  (for example fav - "car") means last point you left car. It is not static point, 
 	//		 you can always use the same name for different locations.
