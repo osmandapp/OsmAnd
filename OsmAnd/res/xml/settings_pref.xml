@@ -17,6 +17,7 @@
 <PreferenceScreen android:title="@string/data_settings" android:summary="@string/data_settings_descr">
 <CheckBoxPreference android:summary="@string/use_english_names_descr" android:title="@string/use_english_names" android:key="use_english_names"></CheckBoxPreference>
 <Preference android:title="@string/reload_indexes" android:key="reload_indexes" android:summary="@string/reload_indexes_descr"></Preference>
+<Preference android:title="@string/download_indexes" android:key="download_indexes" android:summary="@string/download_indexes_descr"></Preference>
 </PreferenceScreen>
 
 <PreferenceScreen android:title="@string/monitor_preferences" android:summary="@string/monitor_preferences_descr">

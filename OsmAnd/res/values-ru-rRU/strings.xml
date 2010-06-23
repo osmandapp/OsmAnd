@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="download_sd_dir_not_accessible">Директория на SD карточка не доступна для сохранения</string>
+	<string name="download_question">Вы хотите загрузить {0} - {1} ?</string>
+	<string name="address">Адрес</string>
+	<string name="download_index_success">Индекс успешно загружен</string>
+	<string name="error_io_error">Произошла ошибка ввода/вывода.</string>
+	<string name="downloading_file">Загрузка файла</string>
+	<string name="downloading">Загрузка...</string>
+	<string name="downloading_list_indexes">Загружается список доступных индексов</string>
+	<string name="list_index_files_was_not_loaded">Не найдены доступные индекс файлы с osmand.googlecode.com</string>
+    <string name="select_index_file_to_download">Выберите файл индекса для загрузки из интернета. Если вы не можете найти регион, вы можете создать его самостоятельно.
+Читайте на osmand.googlecode.com .</string>
 	<string name="show_poi_on_map">Показать на карте</string>
 	<string name="fav_points_edited">Отредактирована избранная точка</string>
 	<string name="fav_points_not_exist">Не существует избранных точек</string>
@@ -42,6 +53,8 @@
 	<string name="finished_task">Окончен : </string>
 	<string name="reload_indexes_descr">Перезагрузить индексы с SD</string>
     <string name="reload_indexes">Обновить индексы</string>
+    <string name="download_indexes_descr">Загрузить индекс файлы из интернета</string>
+    <string name="download_indexes">Загрузить индексы</string>
 	<string name="use_online_routing_descr">Использовать интернет для расчета маршрута</string>
     <string name="use_online_routing">Online маршрутизация</string>
 	<string name="user_password_descr">Указать пароль для работы с OSM</string>
@@ -153,7 +166,7 @@
 <string name="search_address_building">Здание</string>
 <string name="search_address_building_option">Здание</string>
 <string name="search_address_street_option">Пересечение улиц</string>
-<string name="search_tabs_address">Адрес</string>
+
 <string name="search_tabs_location">Координаты</string>
 <string name="context_menu_item_navigate_point">Идти к точке</string>
 <string name="context_menu_item_add_favorite">Добавить к избранным</string>
@@ -203,7 +216,6 @@
 <string name="poi_action_succeded_template">Действие {0} успешно завершено.</string>
 <string name="poi_error_unexpected_template">Неожиданная ошибка произошла при выполнении действия {0}.</string>
 <string name="poi_error_io_error_template">Ошибка ввода/вывода произошла при выполнении действия {0}.</string>
-<string name="poi_error_io_error">Произошла ошибка ввода/вывода.</string>
 <string name="poi_error_info_not_loaded">Произошла ошибка при загрузке информации о POI</string>
 
 <string name="poi_dialog_name">Имя</string>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
@@ -44,6 +45,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private CheckBoxPreference autoZoom;
 	private EditTextPreference userPassword;
 	private Preference reloadIndexes;
+	private Preference downloadIndexes;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		useEnglishNames.setOnPreferenceChangeListener(this);
 		reloadIndexes =(Preference) screen.findPreference(OsmandSettings.RELOAD_INDEXES);
 		reloadIndexes.setOnPreferenceClickListener(this);
+		downloadIndexes =(Preference) screen.findPreference(OsmandSettings.DOWNLOAD_INDEXES);
+		downloadIndexes.setOnPreferenceClickListener(this);
 		
 		userName = (EditTextPreference) screen.findPreference(OsmandSettings.USER_NAME);
 		userName.setOnPreferenceChangeListener(this);
@@ -318,7 +322,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if(preference == reloadIndexes){
+		if(preference == downloadIndexes){
+			startActivity(new Intent(this, DownloadIndexActivity.class));
+			return true;
+		} else if(preference == reloadIndexes){
 			reloadIndexes();
 			return true;
 		} else if(preference == saveCurrentTrack){
