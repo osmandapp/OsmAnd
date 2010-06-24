@@ -96,6 +96,10 @@ public class RouteLayer implements OsmandMapLayer {
 			}
 		}
 	}
+	
+	public RoutingHelper getHelper() {
+		return helper;
+	}
 
 	
 	// to show further direction

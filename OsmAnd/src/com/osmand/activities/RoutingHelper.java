@@ -1,21 +1,7 @@
 package com.osmand.activities;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
 import android.location.Location;
 import android.util.FloatMath;
@@ -24,6 +10,7 @@ import android.widget.Toast;
 import com.osmand.LogUtil;
 import com.osmand.R;
 import com.osmand.OsmandSettings.ApplicationMode;
+import com.osmand.activities.RouteProvider.RouteCalculationResult;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 
@@ -34,8 +21,14 @@ public class RoutingHelper {
 	// activity to show messages & refresh map when route is calculated
 	private MapActivity activity;
 	
+	// instead of this properties RouteCalculationResult could be used
 	private List<Location> routeNodes = new ArrayList<Location>();
+	private List<RouteDirectionInfo> directionInfo = null;
 	private int[] listDistance = null;
+
+	// Note always currentRoute > get(currentDirectionInfo).routeOffset, 
+	//         but currentRoute <= get(currentDirectionInfo+1).routeOffset 
+	private int currentDirectionInfo = 0;
 	private int currentRoute = 0;
 	
 	
@@ -46,6 +39,8 @@ public class RoutingHelper {
 	private int evalWaitInterval = 3000;
 
 	private ApplicationMode mode;
+	
+	private RouteProvider provider = new RouteProvider();
 	
 	
 	// TEST CODE
@@ -80,6 +75,7 @@ public class RoutingHelper {
 		this.finalLocation = finalLocation;
 		this.routeNodes.clear();
 		listDistance = null;
+		directionInfo = null;
 		evalWaitInterval = 3000;
 		// to update route
 		setCurrentLocation(currentLocation);
@@ -114,7 +110,7 @@ public class RoutingHelper {
 				if(activity != null){
 					showMessage(activity.getString(R.string.arrived_at_destination));
 				}
-				currentRoute = routeNodes.size() - 1;
+				updateCurrentRoute(routeNodes.size() - 1);
 				// clear final location to prevent all time showing message
 				finalLocation = null;
 			}
@@ -128,6 +124,17 @@ public class RoutingHelper {
 		return lastFixedLocation;
 	}
 	
+	private void updateCurrentRoute(int currentRoute){
+		this.currentRoute = currentRoute;
+		if(directionInfo != null){
+			while(currentDirectionInfo < directionInfo.size() - 1 && 
+					directionInfo.get(currentDirectionInfo + 1).routePointOffset < currentRoute){
+				currentDirectionInfo ++;
+			}
+			
+		}
+	}
+	
 	
 	public void setCurrentLocation(Location currentLocation) {
 		if(finalLocation == null || currentLocation == null){
@@ -138,13 +145,15 @@ public class RoutingHelper {
 			if(routeNodes.isEmpty() || routeNodes.size() <= currentRoute){
 				calculateRoute = true;
 			} else {
+				// Check whether user follow by route in correct direction
+				
 				// 1. try to mark passed route (move forward)
 				float dist = currentLocation.distanceTo(routeNodes.get(currentRoute));
 				while(currentRoute + 1 < routeNodes.size()){
 					float newDist = currentLocation.distanceTo(routeNodes.get(currentRoute + 1));
 					if (newDist < dist) {
 						// that node already passed
-						currentRoute++;
+						updateCurrentRoute(currentRoute + 1);
 						dist = newDist;
 					} else {
 						break;
@@ -160,7 +169,7 @@ public class RoutingHelper {
 					float bearing = routeNodes.get(currentRoute).bearingTo(routeNodes.get(currentRoute + 1));
 					float bearingMovement = currentLocation.bearingTo(routeNodes.get(currentRoute));
 					if(Math.abs(bearing - bearingMovement) > 130 && Math.abs(bearing - bearingMovement) < 230){
-						currentRoute++;
+						updateCurrentRoute(currentRoute + 1);
 					}
 				}
 				// 4. evaluate distance to the route and reevaluate if needed
@@ -214,16 +223,11 @@ public class RoutingHelper {
 		}
 	}
 	
-	private void setNewRoute(List<Location> locations){
-		routeNodes = locations;
-		listDistance = new int[locations.size()];
-		if (!locations.isEmpty()) {
-			listDistance[locations.size() - 1] = 0;
-			for (int i = locations.size() - 1; i > 0; i--) {
-				listDistance[i - 1] = (int) locations.get(i - 1).distanceTo(locations.get(i));
-				listDistance[i - 1] += listDistance[i];
-			}
-		}
+	private void setNewRoute(RouteCalculationResult res){
+		routeNodes = res.getLocations();
+		directionInfo = res.getDirections();
+		listDistance = res.getListDistance();
+		currentDirectionInfo = 0;
 		currentRoute = 0;
 	}
 	
@@ -237,6 +241,46 @@ public class RoutingHelper {
 		return 0;
 	}
 	
+	public RouteDirectionInfo getNextRouteDirectionInfo(){
+		if(directionInfo != null && currentDirectionInfo < directionInfo.size() - 1){
+			return directionInfo.get(currentDirectionInfo + 1);
+		}
+		return null;
+	}
+	
+	public int getDistanceToNextRouteDirection() {
+		if (directionInfo != null && currentDirectionInfo < directionInfo.size()) {
+			int dist = listDistance[currentRoute];
+			if (currentDirectionInfo < directionInfo.size() - 1) {
+				dist -= listDistance[directionInfo.get(currentDirectionInfo + 1).routePointOffset];
+			}
+			if(lastFixedLocation != null){
+				dist += lastFixedLocation.distanceTo(routeNodes.get(currentRoute));
+			}
+			return dist;
+		}
+		return 0;
+	}
+	
+	public synchronized int getLeftTime(){
+		if(directionInfo != null && currentDirectionInfo < directionInfo.size()){
+			int t = directionInfo.get(currentDirectionInfo).afterLeftTime;
+			int e = directionInfo.get(currentDirectionInfo).expectedTime;
+			if (e > 0) {
+				int passedDist = listDistance[directionInfo.get(currentDirectionInfo).routePointOffset] - listDistance[currentRoute];
+				int wholeDist = listDistance[directionInfo.get(currentDirectionInfo).routePointOffset];
+				if (currentDirectionInfo < directionInfo.size() - 1) {
+					wholeDist -= listDistance[directionInfo.get(currentDirectionInfo + 1).routePointOffset];
+				}
+				if (wholeDist > 0) {
+					t = (int) (t + ((float)e) * (1 - (float) passedDist / (float) wholeDist));
+				}
+			}
+			return t;
+		}
+		return 0;
+	}
+	
 	public void calculateRoute(final Location start, final LatLon end){
 		if(currentRunningJob == null){
 			// do not evaluate very often
@@ -245,10 +289,10 @@ public class RoutingHelper {
 					currentRunningJob = new Thread(new Runnable() {
 						@Override
 						public void run() {
-							RouteCalculationResult res = calculateRouteImpl(start, end);
+							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode);
 							synchronized (RoutingHelper.this) {
 								if (res.isCalculated()) {
-									setNewRoute(res.list);
+									setNewRoute(res);
 									// reset error wait interval
 									evalWaitInterval = 3000;
 								} else {
@@ -261,13 +305,15 @@ public class RoutingHelper {
 							}
 							if (activity != null) {
 								if (res.isCalculated()) {
-									showMessage(activity.getString(R.string.new_route_calculated_dist) + MapUtils.getFormattedDistance(sumDistance(res.list)));
+									int[] dist = res.getListDistance();
+									int l = dist != null && dist.length > 0 ? dist[0] : 0;
+									showMessage(activity.getString(R.string.new_route_calculated_dist) + MapUtils.getFormattedDistance(l));
 									// be aware that is non ui thread
 									activity.getMapView().refreshMap();
 								} else {
-									if (res.errorMessage != null) {
-										showMessage(activity.getString(R.string.error_calculating_route) + res.errorMessage);
-									} else if (res.list == null) {
+									if (res.getErrorMessage() != null) {
+										showMessage(activity.getString(R.string.error_calculating_route) + res.getErrorMessage());
+									} else if (res.getLocations() == null) {
 										showMessage(activity.getString(R.string.error_calculating_route_occured));
 									} else {
 										showMessage(activity.getString(R.string.empty_route_calculated));
@@ -281,16 +327,6 @@ public class RoutingHelper {
 				}
 			}
 		}
-	}
-	
-	private int sumDistance(List<Location> locations) {
-		int d = 0;
-		if (locations.size() > 1) {
-			for (int i = 1; i < locations.size(); i++) {
-				d += locations.get(i - 1).distanceTo(locations.get(i));
-			}
-		}
-		return d;
 	}
 	
 	private void showMessage(final String msg){
@@ -344,95 +380,30 @@ public class RoutingHelper {
 	}
 	
 	
-	private static class RouteCalculationResult {
-		public List<Location> list;
-		public String errorMessage;
-		public RouteCalculationResult( List<Location> list, String errorMessage) {
-			this.errorMessage = errorMessage;
-			this.list = list;
-		}
-		public boolean isCalculated(){
-			return list != null && !list.isEmpty();
-		}
+
+	
+	public static enum TurnType {
+		C , // continue (go straight)
+		TL, // turn left
+		TSLL, // turn slight left
+		TSHL, // turn sharp left
+		TR, // turn right
+		TSLR, // turn slight right
+		TSHR, // turn sharp right
+		TU, // U-turn
 		
+		// TODO Exit3...
 	}
 	
-	private RouteCalculationResult calculateRouteImpl(Location start, LatLon end){
-		long time = System.currentTimeMillis();
-		if (start != null && end != null) {
-			List<Location> res = new ArrayList<Location>();
-			if(log.isInfoEnabled()){
-				log.info("Start finding route from " + start + " to " + end); //$NON-NLS-1$ //$NON-NLS-2$
-			}
-			try {
-				StringBuilder uri = new StringBuilder();
-				uri.append("http://www.yournavigation.org/api/1.0/gosmore.php?format=kml"); //$NON-NLS-1$
-				uri.append("&flat=").append(start.getLatitude()); //$NON-NLS-1$
-				uri.append("&flon=").append(start.getLongitude()); //$NON-NLS-1$
-				uri.append("&tlat=").append(end.getLatitude()); //$NON-NLS-1$
-				uri.append("&tlon=").append(end.getLongitude()); //$NON-NLS-1$
-				if(ApplicationMode.PEDESTRIAN== mode){
-					uri.append("&v=foot") ; //$NON-NLS-1$
-				} else if(ApplicationMode.BICYCLE == mode){
-					uri.append("&v=bicycle") ; //$NON-NLS-1$
-				} else {
-					uri.append("&v=motorcar"); //$NON-NLS-1$
-				}
-				uri.append("&fast=1").append("&layer=mapnik"); //$NON-NLS-1$ //$NON-NLS-2$
-
-				URL url = new URL(uri.toString());
-				URLConnection connection = url.openConnection();
-				DocumentBuilder dom = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-				Document doc = dom.parse(new InputSource(new InputStreamReader(connection.getInputStream())));
-				NodeList list = doc.getElementsByTagName("coordinates"); //$NON-NLS-1$
-				for(int i=0; i<list.getLength(); i++){
-					Node item = list.item(i);
-					String str = item.getFirstChild().getNodeValue();
-					if(str == null){
-						continue;
-					}
-					int st = 0;
-					int next = 0;
-					while((next = str.indexOf('\n', st)) != -1){
-						String coordinate = str.substring(st, next + 1);
-						int s = coordinate.indexOf(',');
-						if (s != -1) {
-							try {
-								double lon = Double.parseDouble(coordinate.substring(0, s));
-								double lat = Double.parseDouble(coordinate.substring(s + 1));
-								Location l = new Location("router"); //$NON-NLS-1$
-								l.setLatitude(lat);
-								l.setLongitude(lon);
-								res.add(l);
-							} catch (NumberFormatException e) {
-							}
-						}
-						st = next + 1;
-					}
-				}
-				if(list.getLength() == 0){
-					if(doc.getChildNodes().getLength() == 1){
-						Node item = doc.getChildNodes().item(0);
-						return new RouteCalculationResult(null, item.getNodeValue());
-						
-					}
-				}
-				if(log.isInfoEnabled()){
-					log.info("Finding route contained " + res.size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				}
-
-				return new RouteCalculationResult(res, null);
-			} catch (IOException e) {
-				log.error("Failed to find route ", e); //$NON-NLS-1$
-			} catch (ParserConfigurationException e) {
-				log.error("Failed to find route ", e); //$NON-NLS-1$
-			} catch (SAXException e) {
-				log.error("Failed to find route ", e); //$NON-NLS-1$
-			}
-		}
-		return new RouteCalculationResult(null, null);
+	public static class RouteDirectionInfo {
+		public String descriptionRoute;
+		public int expectedTime;
+		public float turnAngle;
+		public TurnType turnType;
+		public int routePointOffset;
+		public int afterLeftTime;
 	}
-	
+
 	
 
 }
