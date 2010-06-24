@@ -76,6 +76,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	
 	private boolean providerSupportsBearing = false;
 	private boolean providerSupportsSpeed = false;
+	private String currentLocationProvider = null;
 	
     /** Called when the activity is first created. */
 	private OsmandMapTileView mapView;
@@ -462,15 +463,24 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 				if(LocationProvider.OUT_OF_SERVICE == status){
 					setLocation(null);
 				}
-				service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
-				providerSupportsBearing = prov == null ? false : prov.supportsBearing() && !isRunningOnEmulator();
-				providerSupportsSpeed = prov == null ? false : prov.supportsSpeed() && !isRunningOnEmulator();
+				if(!isRunningOnEmulator() && service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+					if(!Algoritms.objectEquals(currentLocationProvider, LocationManager.NETWORK_PROVIDER)){
+						currentLocationProvider = LocationManager.NETWORK_PROVIDER;
+						service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
+						providerSupportsBearing = prov == null ? false : prov.supportsBearing() && !isRunningOnEmulator();
+						providerSupportsSpeed = prov == null ? false : prov.supportsSpeed() && !isRunningOnEmulator();
+					}
+				}
 			} else if (LocationProvider.AVAILABLE == status) {
-				service.removeUpdates(this);
-				service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
-				prov = service.getProvider(LocationManager.GPS_PROVIDER);
-				providerSupportsBearing = prov == null ? false : prov.supportsBearing() && !isRunningOnEmulator();
-				providerSupportsSpeed = prov == null ? false : prov.supportsSpeed() && !isRunningOnEmulator();
+				if(!Algoritms.objectEquals(currentLocationProvider, LocationManager.GPS_PROVIDER)){
+					currentLocationProvider = LocationManager.GPS_PROVIDER;
+					service.removeUpdates(this);
+					service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
+					prov = service.getProvider(LocationManager.GPS_PROVIDER);
+					providerSupportsBearing = prov == null ? false : prov.supportsBearing() && !isRunningOnEmulator();
+					providerSupportsSpeed = prov == null ? false : prov.supportsSpeed() && !isRunningOnEmulator();
+				}
+				
 			}
 		}
 	}

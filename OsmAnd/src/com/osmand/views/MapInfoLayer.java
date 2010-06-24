@@ -8,33 +8,46 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.location.Location;
+import android.text.format.DateFormat;
 
 import com.osmand.Messages;
 import com.osmand.activities.MapActivity;
+import com.osmand.activities.RoutingHelper.RouteDirectionInfo;
+import com.osmand.activities.RoutingHelper.TurnType;
 import com.osmand.osm.MapUtils;
 
 public class MapInfoLayer implements OsmandMapLayer {
 
 
 	private OsmandMapTileView view;
+	private boolean showMiniMap = false;
 	private final MapActivity map;
 	private final RouteLayer routeLayer;
 	
-	private Paint paintBlack;
-	private Paint paintMiniRoute;
+	
+	
 	private Path pathForCompass;
 	private Path pathForCompass2;
+	private Path pathForTurn;
+	
+	private Paint paintBlack;
+	private Paint paintMiniRoute;
 	private Paint fillBlack;
 	private Paint fillRed;
+	private Paint paintAlphaGray;
+	private Paint paintRouteDirection;
+	
 	private RectF boundsForCompass;
 	private RectF boundsForZoom;
 	private RectF boundsForDist;
 	private RectF boundsForMiniRoute;
+	private RectF boundsForLeftTime;
 	private RectF boundsForSpeed;
-	private Paint paintAlphaGray;
 	
 	
 	
+	private String cachedLeftTimeString = null;
+	private long cachedLeftTime = 0;
 	private float[] calculations = new float[1];
 	private String cachedDistString = null;
 	private int cachedMeters = 0;
@@ -66,6 +79,11 @@ public class MapInfoLayer implements OsmandMapLayer {
 		paintAlphaGray.setColor(Color.LTGRAY);
 		paintAlphaGray.setAlpha(180); // do not make very transparent (to hide route)
 		
+		paintRouteDirection = new Paint();
+		paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
+		paintRouteDirection.setColor(Color.rgb(100, 0, 255));
+		paintRouteDirection.setAntiAlias(true);
+		
 		fillBlack = new Paint();
 		fillBlack.setStyle(Style.FILL_AND_STROKE);
 		fillBlack.setColor(Color.BLACK);
@@ -86,8 +104,10 @@ public class MapInfoLayer implements OsmandMapLayer {
 		boundsForDist = new RectF(35, 0, 110, 32);
 		boundsForZoom = new RectF(0, 32, 35, 64);
 		boundsForSpeed = new RectF(35, 32, 110, 64);
-		
 		boundsForMiniRoute = new RectF(0, 64, 96, 196);
+		boundsForLeftTime = new RectF(0, 0, 75, 32);
+		
+		
 		centerMiniRouteX = 48;
 		centerMiniRouteY= 160;
 		scaleMiniRoute = 0.15f;
@@ -103,6 +123,8 @@ public class MapInfoLayer implements OsmandMapLayer {
 		pathForCompass2.lineTo(22f, 15.5f);
 		pathForCompass2.lineTo(15.5f, 2f);
 		pathForCompass2.lineTo(9, 15);
+		
+		pathForTurn = new Path();
 	}
 
 	public boolean distChanged(int oldDist, int dist){
@@ -174,23 +196,9 @@ public class MapInfoLayer implements OsmandMapLayer {
 			canvas.drawText(cachedDistString, boundsForDist.left + 15, boundsForDist.bottom - 9, paintBlack);
 		}
 		
-		
-
-			
-		if(routeLayer != null && !routeLayer.getPath().isEmpty()){
-			canvas.save();
-			canvas.clipRect(boundsForMiniRoute);
-			canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintAlphaGray);
-			canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintBlack);
-			
-			canvas.translate(centerMiniRouteX - view.getCenterPointX(), centerMiniRouteY - view.getCenterPointY());
-			canvas.scale(scaleMiniRoute, scaleMiniRoute, view.getCenterPointX(), view.getCenterPointY());
-			canvas.rotate(view.getRotate(), view.getCenterPointX(), view.getCenterPointY());
-			
-			canvas.drawCircle(view.getCenterPointX(), view.getCenterPointY(), 3/scaleMiniRoute, fillBlack);
-			canvas.drawPath(routeLayer.getPath(), paintMiniRoute);
-			canvas.restore();
-		}
+	
+		// draw route information
+		drawRouteInfo(canvas);
 		
 		// draw compass the last because it use rotating
 		canvas.drawRoundRect(boundsForCompass, 3, 3, paintAlphaGray);
@@ -198,9 +206,85 @@ public class MapInfoLayer implements OsmandMapLayer {
 		canvas.rotate(view.getRotate(), 15, 15);
 		canvas.drawPath(pathForCompass2, fillRed);
 		canvas.drawPath(pathForCompass, fillBlack);
-		
-		
-		
+	}
+	
+	
+	private void calcTurnPath(TurnType turnType){
+		pathForTurn.reset();
+//		if(turnType == TurnType.C){
+			int c = (int) ((boundsForMiniRoute.right - boundsForMiniRoute.left) /2 + boundsForMiniRoute.left); 
+			pathForTurn.moveTo(c + 8, boundsForMiniRoute.bottom - 32);
+			pathForTurn.lineTo(c + 8, boundsForMiniRoute.top + 32);
+			pathForTurn.lineTo(c + 20, boundsForMiniRoute.top + 32);
+			pathForTurn.lineTo(c, boundsForMiniRoute.top + 5);
+			pathForTurn.lineTo(c - 20, boundsForMiniRoute.top + 32);
+			pathForTurn.lineTo(c - 8, boundsForMiniRoute.top + 32);
+			pathForTurn.lineTo(c - 8, boundsForMiniRoute.bottom - 32);
+			pathForTurn.close();
+//		}
+	}
+
+	private void drawRouteInfo(Canvas canvas) {
+		if(routeLayer != null && routeLayer.getHelper().isRouterEnabled()){
+			if (showMiniMap) {
+				if (!routeLayer.getPath().isEmpty()) {
+					canvas.save();
+					canvas.clipRect(boundsForMiniRoute);
+					canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintAlphaGray);
+					canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintBlack);
+					canvas.translate(centerMiniRouteX - view.getCenterPointX(), centerMiniRouteY - view.getCenterPointY());
+					canvas.scale(scaleMiniRoute, scaleMiniRoute, view.getCenterPointX(), view.getCenterPointY());
+					canvas.rotate(view.getRotate(), view.getCenterPointX(), view.getCenterPointY());
+					canvas.drawCircle(view.getCenterPointX(), view.getCenterPointY(), 3 / scaleMiniRoute, fillBlack);
+					canvas.drawPath(routeLayer.getPath(), paintMiniRoute);
+					canvas.restore();
+				}
+			} else {
+				int d = routeLayer.getHelper().getDistanceToNextRouteDirection();
+				if(d > 0){
+					canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintAlphaGray);
+					canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintBlack);
+					RouteDirectionInfo next = routeLayer.getHelper().getNextRouteDirectionInfo();
+					if(next != null){
+						calcTurnPath(next.turnType);
+						canvas.drawPath(pathForTurn, paintRouteDirection);
+						canvas.drawPath(pathForTurn, paintBlack);
+						canvas.drawText(MapUtils.getFormattedDistance(d), 
+								boundsForMiniRoute.left + 10, boundsForMiniRoute.bottom - 9, paintBlack);
+					}
+				} else {
+					// TEST
+//					canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintAlphaGray);
+//					canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintBlack);
+//					calcTurnPath(TurnType.C);
+//					canvas.drawPath(pathForTurn, paintRouteDirection);
+//					canvas.drawPath(pathForTurn, paintBlack);
+//					canvas.drawText(MapUtils.getFormattedDistance(300), 
+//							boundsForMiniRoute.left + 10, boundsForMiniRoute.bottom - 9, paintBlack);
+				}
+			}
+			
+			
+			int time = routeLayer.getHelper().getLeftTime() * 1000;
+			if(time == 0){
+				cachedLeftTime = 0;
+				cachedLeftTimeString = null;
+			} else {
+				if(Math.abs(System.currentTimeMillis() + time - cachedLeftTime) > 30000){
+					cachedLeftTime = System.currentTimeMillis() + time;
+					cachedLeftTimeString = DateFormat.format("k:mm", cachedLeftTime).toString(); //$NON-NLS-1$
+				}
+			}
+			if(cachedLeftTimeString != null) {
+				int w = (int) (boundsForLeftTime.right - boundsForLeftTime.left); 
+				boundsForLeftTime.right = view.getWidth();
+				boundsForLeftTime.left = view.getWidth() - w;
+				canvas.drawRoundRect(boundsForLeftTime, 3, 3, paintAlphaGray);
+				canvas.drawRoundRect(boundsForLeftTime, 3, 3, paintBlack);
+				canvas.drawText(cachedLeftTimeString, boundsForLeftTime.left + 5, boundsForLeftTime.bottom - 9, paintBlack);
+				
+			}
+		} 
 	}
 
 	
@@ -220,6 +304,11 @@ public class MapInfoLayer implements OsmandMapLayer {
 
 	@Override
 	public boolean onTouchEvent(PointF point) {
+		if(boundsForMiniRoute.contains(point.x, point.y) && routeLayer != null && routeLayer.getHelper().isRouterEnabled()){
+			showMiniMap = !showMiniMap;
+			view.refreshMap();
+			return true;
+		}
 		return false;
 	}
 
