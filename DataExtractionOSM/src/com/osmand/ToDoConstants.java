@@ -14,13 +14,14 @@ public class ToDoConstants {
 	public int DESCRIBE_ABOUT_AUTHORS = 8;
 	
 	 // TODO ANDROID 
-//   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
-//		 Some icons are not fine (as back menu from map - it is blured).
-	
-	
-	// FUTURE RELEASES
+	//   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
+	//		 Some icons are not fine (as back menu from map - it is blured).
+	//   56. Add usage of CloudMade API for calculating route (show next turn & distance to it instead of mini map).
+	//   57. Implement routing information about expected time arriving
+	//   58. Implement difference about show route/follow route (show travel time/arrival time, show mini map/next turn, etc)
 	//   46. Implement downloading strategy for tiles : select max zoom to download [16,15,14,...]
 	// 		 That means you can save internet because from [16 -> zoom -> 18], [14 -> zoom -> 16 - suitable for speed > 40], ...
+	//   58. Upload/Download zip-index from site & unzip them on phone
 	//   50. Invent opening hours editor in order to edit POI hours better on device
 	//   53. Add progress bars : to internet communication activities [editing/commiting/deleting poi], do not hide edit poi dialog if operation failed 
 	//		 [move close buttons from alertdialog to own view]
@@ -30,7 +31,7 @@ public class ToDoConstants {
 	//       That setting should rule all activities that use internet. It should ask whenever internet is used 
 	//		(would you like to use internet for that operation - if using internet is not checked). 
 	//		Internet using now for : edit POI osm, show osm bugs layer, download tiles.
-	//   56. Investigate usage CloudMade API for calculating route.
+	
 	//   33. Build transport locations. Create transport index (transport-stops) (investigate)
 	// 		 DONE: Load transport routes in swing.	
 	//		 IDEA TO HAVE :   
@@ -51,14 +52,6 @@ public class ToDoConstants {
 	// BUGS Swing
 	
 	// DONE ANDROID :
-	//   54. Invent screen to update index from internet (from osmand.googlecode.com)
-	//   32. Introduce POI predefined filters (car filter(other-fuel, transportation-car_wash, show-car) and others)
-	//   48. Enable change favorite point :  (for example fav - "car") means last point you left car. It is not static point, 
-	//		 you can always use the same name for different locations.
-	//   52. Make good distribution of POI on map (when POI a lot they are coupling in one place on the south)
-	//   51. Implement console application that prepare indexes to upload on server... 
-	// 		 0) run in background 1) download from internet 2) generates indices for Europe (take care about memory) 3) upload?
-
 	
 	// DONE SWING
 

@@ -286,55 +286,6 @@ public class DataExtraction  {
 		}
 
 	}
-	// netherlands.osm.bz2 1674 seconds - read
-	
-	// Information about progress for belarus.osm [165 seconds] - 580mb
-//	FINE: Loading file E:\Information\OSM maps\belarus_2010_06_02.osm started - 61%
-//	FINE: Correlating data... started after 101921 ms - 10%
-//	FINE: Indexing poi... started after 17062 ms - 0 %
-//	FINE: Indexing cities... started after 47 ms - 0%
-//	FINE: Indexing streets... started after 94 ms - 10%
-//	FINE: Indexing buildings... started after 16531 ms - 20 %
-//	FINE: Normalizing name streets... started after 30890 ms - 0%
-	
-	// belarus.osm.bz2 [273 ms] - 40mb
-//	FINE: Memory before task exec: 16 252 928 free : 11 676 888
-//	FINE: Loading file E:\Information\OSM maps\belarus osm\belarus_2010_06_02.osm.bz2 started - 73 % 
-//	FINE: Memory before task exec: 95 760 384 free : 17 704 984
-//	FINE: Correlating data... started after 203 657 ms - 7 %
-//	FINE: Indexing poi... started after 20 204 ms
-//	FINE: Indexing cities... started after 62 ms
-//	FINE: Memory before task exec: 95 760 384 free : 45 752 80
-//	FINE: Indexing streets... started after 94 ms - 7 %
-//	FINE: Memory before task exec: 167 510 016 free : 91 616 528
-//	FINE: Indexing buildings... started after 18 672 ms - 13 %
-//	FINE: Memory before task exec: 167 510 016 free : 76 993 976
-//	FINE: Normalizing name streets... started after 32 719 ms
-	
-	// minsk.bz2 [36] - 4mb
-//	FINE: Total mem: 16252928 free : 8370296
-//	FINE: Loading file E:\Information\OSM maps\minsk_extr.bz2 started - 63% - 90 % (memory)
-//	FINE: Total mem: 64139264 free : 25069688
-//	FINE: Correlating data... started after 23829 ms - 27%
-//	FINE: Indexing poi... started after 10547 ms - 0%
-//	FINE: Indexing cities... started after 31 ms - 0%
-//	FINE: Indexing streets... started after 94 ms - 1%
-//	FINE: Indexing buildings... started after 672 ms - 7%
-//	FINE: Normalizing name streets... started after 2421 ms - 0%
-//	FINE: Total mem: 64139264 free : 22226792
-	
-	// chech.bz2 [1090 ms] - 185mb
-//	FINE: Total mem: 16 252 928 free : 9 132 960
-//	FINE: Loading file E:\Information\OSM maps\czech_republic.osm.bz2 started - 78 % - 90 % (memory)
-//	FINE: Total mem: 226 877 440 free : 42 500 592
-//	FINE: Correlating data... started after 857 788 ms  - 5 %
-//	FINE: Indexing poi... started after 58 173 ms
-//	FINE: Total mem: 259 522 560 free : 77 918 344
-//	FINE: Indexing cities... started after 171 ms
-//	FINE: Indexing streets... started after 188 ms - 12 %
-//	FINE: Indexing buildings... started after 135 250 ms -  3 %
-//	FINE: Normalizing name streets... started after 36 657 ms
-//	FINE: Total mem: 259 522 560 free : 8 697 952
 
 	
 	public Region readCountry(String path, IProgress progress, IOsmStorageFilter addFilter) throws IOException, SAXException, SQLException{

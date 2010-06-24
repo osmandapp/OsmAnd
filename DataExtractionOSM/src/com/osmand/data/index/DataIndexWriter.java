@@ -114,10 +114,10 @@ public class DataIndexWriter {
 	}
 	
 	public DataIndexWriter writeAddress() throws IOException, SQLException{
-		return writeAddress(IndexConstants.ADDRESS_INDEX_DIR+region.getName()+IndexConstants.ADDRESS_INDEX_EXT, null);
+		return writeAddress(IndexConstants.ADDRESS_INDEX_DIR+region.getName()+IndexConstants.ADDRESS_INDEX_EXT, null, true);
 	}
 	
-	public DataIndexWriter writeAddress(String fileName, Long date) throws IOException, SQLException{
+	public DataIndexWriter writeAddress(String fileName, Long date, boolean writeWayNodes) throws IOException, SQLException{
 		File file = checkFile(fileName);
 		long now = System.currentTimeMillis();
 		try {
@@ -185,20 +185,21 @@ public class DataIndexWriter {
 						prepStreet.setString(IndexStreetTable.NAME.ordinal() + 1, street.getName());
 						prepStreet.setLong(IndexStreetTable.CITY.ordinal() + 1, city.getId());
 						addBatch(count, prepStreet);
-						for(Way way : street.getWayNodes()){
-							for(Node n : way.getNodes()){
-								if(n == null){
-									continue;
+						if (writeWayNodes) {
+							for (Way way : street.getWayNodes()) {
+								for (Node n : way.getNodes()) {
+									if (n == null) {
+										continue;
+									}
+									assert IndexStreetNodeTable.values().length == 5;
+									prepStreetNode.setLong(IndexStreetNodeTable.ID.ordinal() + 1, n.getId());
+									prepStreetNode.setDouble(IndexStreetNodeTable.LATITUDE.ordinal() + 1, n.getLatitude());
+									prepStreetNode.setDouble(IndexStreetNodeTable.LONGITUDE.ordinal() + 1, n.getLongitude());
+									prepStreetNode.setLong(IndexStreetNodeTable.WAY.ordinal() + 1, way.getId());
+									prepStreetNode.setLong(IndexStreetNodeTable.STREET.ordinal() + 1, street.getId());
+									addBatch(count, prepStreetNode);
 								}
-								assert IndexStreetNodeTable.values().length == 5;
-								prepStreetNode.setLong(IndexStreetNodeTable.ID.ordinal() + 1, n.getId());
-								prepStreetNode.setDouble(IndexStreetNodeTable.LATITUDE.ordinal() + 1, n.getLatitude());
-								prepStreetNode.setDouble(IndexStreetNodeTable.LONGITUDE.ordinal() + 1, n.getLongitude());
-								prepStreetNode.setLong(IndexStreetNodeTable.WAY.ordinal() + 1, way.getId());
-								prepStreetNode.setLong(IndexStreetNodeTable.STREET.ordinal() + 1, street.getId());
-								addBatch(count, prepStreetNode);
 							}
-							
 						}
 						
 						for(Building building : street.getBuildings()){
