@@ -21,6 +21,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -92,6 +93,21 @@ public class MapRouterLayer implements MapPanelLayer {
 			}
 		};
 		menu.add(route);
+		Action altroute = new AbstractAction("Calculate alternative route") {
+			private static final long serialVersionUID = 507156107455281238L;
+
+			public void actionPerformed(ActionEvent e) {
+				List<Way> ways = alternateRoute(startRoute, endRoute);
+				DataTileManager<Way> points = new DataTileManager<Way>();
+				points.setZoom(11);
+				for(Way w : ways){
+					LatLon n = w.getLatLon();
+					points.registerObject(n.getLatitude(), n.getLongitude(), w);
+				}
+				map.setPoints(points);
+			}
+		};
+		menu.add(altroute);
 
 	}
 	
@@ -134,7 +150,6 @@ public class MapRouterLayer implements MapPanelLayer {
 					while ((s = reader.readLine()) != null) {
 						if (fist) {
 							fist = false;
-							System.out.println(s);
 						}
 						content.append(s).append("\n");
 					}
@@ -179,7 +194,85 @@ public class MapRouterLayer implements MapPanelLayer {
 		}
 		return res;
 	}
+	
+	
 
+		
+	public List<Way> alternateRoute(LatLon start, LatLon end) {
+		List<Way> res = new ArrayList<Way>();
+		long time = System.currentTimeMillis();
+		System.out.println("Cloud made route from " + start + " to " + end);
+		if (start != null && end != null) {
+			try {
+				StringBuilder uri = new StringBuilder();
+				// possibly hide that API key because it is privacy of osmand
+				uri.append("http://routes.cloudmade.com/A6421860EBB04234AB5EF2D049F2CD8F/api/0.3/");
+				 
+				uri.append(start.getLatitude()+"").append(",");
+				uri.append(start.getLongitude()+"").append(",");
+				uri.append(end.getLatitude()+"").append(",");
+				uri.append(end.getLongitude()+"").append("/");
+				uri.append("car.gpx").append("?lang=ru");
+
+				URL url = new URL(uri.toString());
+				URLConnection connection = url.openConnection();	
+				StringBuilder content = new StringBuilder();
+				BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+				{
+					String s = null;
+					boolean fist = true;
+					while ((s = reader.readLine()) != null) {
+						if (fist) {
+							fist = false;
+						}
+						content.append(s).append("\n");
+					}
+					System.out.println(content);
+				}
+				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+				DocumentBuilder dom = factory.newDocumentBuilder();
+				Document doc = dom.parse(new InputSource(new StringReader(content.toString())));
+				NodeList list = doc.getElementsByTagName("wpt");
+				Way w = new Way(-1);
+				for (int i = 0; i < list.getLength(); i++) {
+					Element item = (Element) list.item(i);
+					try {
+						double lon = Double.parseDouble(item.getAttribute("lon"));
+						double lat = Double.parseDouble(item.getAttribute("lat"));
+						w.addNode(new com.osmand.osm.Node(lat, lon, -1));
+					} catch (NumberFormatException e) {
+					}
+				}
+				list = doc.getElementsByTagName("rtept");
+				for (int i = 0; i < list.getLength(); i++) {
+					Element item = (Element) list.item(i);
+					try {
+						double lon = Double.parseDouble(item.getAttribute("lon"));
+						double lat = Double.parseDouble(item.getAttribute("lat"));
+						System.out.println("Lat " + lat + " lon " + lon);
+						System.out.println("Distance : " + item.getElementsByTagName("distance").item(0).getTextContent());
+						System.out.println("Time : " + item.getElementsByTagName("time").item(0).getTextContent());
+						System.out.println("Offset : " + item.getElementsByTagName("offset").item(0).getTextContent());
+						System.out.println("Direction : " + item.getElementsByTagName("direction").item(0).getTextContent());
+					} catch (NumberFormatException e) {
+					}
+				}
+				
+				if (!w.getNodes().isEmpty()) {
+					res.add(w);
+				}
+			} catch (IOException e) {
+				ExceptionHandler.handle(e);
+			} catch (ParserConfigurationException e) {
+				ExceptionHandler.handle(e);
+			} catch (SAXException e) {
+				ExceptionHandler.handle(e);
+			}
+			System.out.println("Finding cloudmade routes " + res.size() + " " + (System.currentTimeMillis() - time) + " ms");
+		}
+		return res;
+	}
+	
 	@Override
 	public void prepareToDraw() {
 	}
