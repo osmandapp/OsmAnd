@@ -48,6 +48,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private Preference reloadIndexes;
 	private Preference downloadIndexes;
 	private ListPreference routerPreference;
+	private ListPreference maxLevelToDownload;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -93,6 +94,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		
 		positionOnMap =(ListPreference) screen.findPreference(OsmandSettings.POSITION_ON_MAP);
 		positionOnMap.setOnPreferenceChangeListener(this);
+		maxLevelToDownload =(ListPreference) screen.findPreference(OsmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE);
+		maxLevelToDownload.setOnPreferenceChangeListener(this);
 		tileSourcePreference =(ListPreference) screen.findPreference(OsmandSettings.MAP_TILE_SOURCES);
 		tileSourcePreference.setOnPreferenceChangeListener(this);
 		routerPreference =(ListPreference) screen.findPreference(OsmandSettings.ROUTER_SERVICE);
@@ -155,6 +158,16 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		routerPreference.setEntries(entries);
 		routerPreference.setEntryValues(entries);
 		routerPreference.setValue(entry);
+		
+		int startZoom = 12;
+		int endZoom = 19;
+		entries = new String[endZoom - startZoom + 1];
+		for (int i = startZoom; i <= endZoom; i++) {
+			entries[i - startZoom] = i + ""; //$NON-NLS-1$
+		}
+		maxLevelToDownload.setEntries(entries);
+		maxLevelToDownload.setEntryValues(entries);
+		maxLevelToDownload.setValue(OsmandSettings.getMaximumLevelToDownloadTile(this)+""); //$NON-NLS-1$
 		
 
 		List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
@@ -219,6 +232,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.commit();
 		} else if(preference == positionOnMap){
 			edit.putInt(OsmandSettings.POSITION_ON_MAP, positionOnMap.findIndexOfValue((String) newValue));
+			edit.commit();
+		} else if (preference == maxLevelToDownload) {
+			edit.putInt(OsmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE, Integer.parseInt((String) newValue));
 			edit.commit();
 		} else if (preference == routerPreference) {
 			RouteService s = null;

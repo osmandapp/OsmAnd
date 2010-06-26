@@ -373,6 +373,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			if (canvas != null) {
 				ResourceManager mgr = ResourceManager.getResourceManager();
 				boolean useInternet = OsmandSettings.isUsingInternetToDownloadTiles(getContext());
+				int maxLevel = OsmandSettings.getMaximumLevelToDownloadTile(getContext());
 				canvas.save();
 				canvas.rotate(rotate, w , h);
 				boundsRect.set(0, 0, getWidth(), getHeight());
@@ -390,7 +391,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 							// asking tile image async
 							boolean imgExist = mgr.tileExistOnFileSystem(ordImgTile);
 							Bitmap bmp = null;
-							if (imgExist || useInternet) {
+							boolean originalBeLoaded = useInternet && zoom <= maxLevel;
+							if (imgExist || originalBeLoaded) {
 								bmp = mgr.getTileImageForMapAsync(ordImgTile, map, left + i, top + j, zoom, useInternet);
 							}
 							if (bmp == null) {
@@ -398,7 +400,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 								// asking if there is small version of the map (in cache)
 								String imgTile2 = mgr.calculateTileId(map, (left + i) / 2, (top + j) / 2, zoom - 1);
 								String imgTile4 = mgr.calculateTileId(map, (left + i) / 4, (top + j) / 4, zoom - 2);
-								if(useInternet || imgExist){
+								if(originalBeLoaded || imgExist){
 									bmp = mgr.getTileImageFromCache(imgTile2);
 									div = 2;
 									if(bmp == null){
@@ -406,12 +408,12 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 										div = 4;
 									}
 								}
-								if(!useInternet && !imgExist){
-									if(mgr.tileExistOnFileSystem(imgTile2)){
-										bmp = mgr.getTileImageForMapAsync(imgTile2, map, (left + i) / 2, (top + j) / 2, zoom - 1, false);
+								if(!originalBeLoaded && !imgExist){
+									if (mgr.tileExistOnFileSystem(imgTile2) || (useInternet && zoom - 1 <= maxLevel)) {
+										bmp = mgr.getTileImageForMapAsync(imgTile2, map, (left + i) / 2, (top + j) / 2, zoom - 1, useInternet);
 										div = 2;
-									} else if(mgr.tileExistOnFileSystem(imgTile4)){
-										bmp = mgr.getTileImageForMapAsync(imgTile4, map, (left + i) / 4, (top + j) / 4, zoom - 2, false);
+									} else if (mgr.tileExistOnFileSystem(imgTile4) || (useInternet && zoom - 2 <= maxLevel)) {
+										bmp = mgr.getTileImageForMapAsync(imgTile4, map, (left + i) / 4, (top + j) / 4, zoom - 2, useInternet);
 										div = 4;
 									}
 								}

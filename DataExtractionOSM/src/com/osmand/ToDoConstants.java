@@ -17,14 +17,14 @@ public class ToDoConstants {
 	 // TODO ANDROID 
 	//   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
 	//		 Some icons are not fine (as back menu from map - it is blured).
+	//       Got by Andrei
 	
-	//   46. Implement downloading strategy for tiles : select max zoom to download [16,15,14,...]
-	// 		 That means you can save internet because from [16 -> zoom -> 18], [14 -> zoom -> 16 - suitable for speed > 40], ...
-	
-	//   61. Provide route information for YOURS (calclate turns/angle/expected time)
-    //   60. Audio guidance for routing
-	//   58. Upload/Download zip-index from site & unzip them on phone
 	//   50. Invent opening hours editor in order to edit POI hours better on device
+	//		 GOT by Olga
+	
+    //   60. Audio guidance for routing
+	//   61. Provide route information for YOURS (calclate turns/angle/expected time)
+	//   58. Upload/Download zip-index from site & unzip them on phone
 	//   53. Add progress bars : to internet communication activities [editing/commiting/deleting poi], do not hide edit poi dialog if operation failed 
 	//		 [move close buttons from alertdialog to own view]
 	//   55. Update POI data from internet for selected area [suggest to create new POI index or extend exising of none exist]
@@ -58,6 +58,8 @@ public class ToDoConstants {
 	//   57. Implement routing information about expected time arriving
 	//   58. Implement difference about show route/follow route (show travel time/arrival time, show mini map/next turn, etc)
 	//   59. Show route information (directions/time, ....). Now is shown in context menu route (about route)
+	//   46. Implement downloading strategy for tiles : select max zoom to download [16,15,14,...]
+	// 		 That means you can save internet because from [16 -> zoom -> 18], [14 -> zoom -> 16 - suitable for speed > 40], ...
 	
 	// DONE SWING
 
