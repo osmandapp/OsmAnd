@@ -94,7 +94,6 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	
 	private SavingTrackHelper savingTrackHelper;
 	private RoutingHelper routingHelper;
-	private boolean calculateRouteOnGps = false;
 	
 	
 	private WakeLock wakeLock;
@@ -171,7 +170,11 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		
 		routingHelper.setAppMode(OsmandSettings.getApplicationMode(this));
 		if(!Algoritms.objectEquals(routingHelper.getFinalLocation(), pointToNavigate)){
+			// there is no way how to clear mode. Only user can do : clear point to navigate, exit from app & set up new point.
+			// that case help to not calculate route at all.
+			routingHelper.setFollowingMode(false);
 			routingHelper.setFinalAndCurrentLocation(pointToNavigate, null);
+
 		}
 		
 		navigationLayer.setPointToNavigate(pointToNavigate);
@@ -354,7 +357,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     	updateSpeedBearing(location);
     	
     	locationLayer.setLastKnownLocation(location);
-    	if(calculateRouteOnGps){
+    	if(routingHelper.isFollowingMode()){
     		routingHelper.setCurrentLocation(location);
     	}
     	if (location != null) {
@@ -405,7 +408,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		}
 		routingHelper.setFinalAndCurrentLocation(point, null);
 		if(point == null){
-			calculateRouteOnGps = false;
+			routingHelper.setFollowingMode(false);
 		}
 		navigationLayer.setPointToNavigate(point);
 		updateNavigateToPointMenu();
@@ -507,6 +510,8 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	@Override
 	protected void onResume() {
 		super.onResume();
+		// routing helper with current activity
+		routingHelper = RoutingHelper.getInstance(this);
 		if(mapView.getMap() != OsmandSettings.getMapTileSource(this)){
 			mapView.setMap(OsmandSettings.getMapTileSource(this));
 		}
@@ -672,10 +677,18 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 				Location map = new Location("map"); //$NON-NLS-1$
 				map.setLatitude(lat);
 				map.setLongitude(lon);
-				calculateRouteOnGps = true;
+				routingHelper.setFollowingMode(true);
 				routingHelper.setFinalAndCurrentLocation(navigationLayer.getPointToNavigate(), map);
 			}
     	});
+    	if(routingHelper.isRouterEnabled()){
+    		builder.setNeutralButton(R.string.route_about, new DialogInterface.OnClickListener(){
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					startActivity(new Intent(MapActivity.this, ShowRouteInfoActivity.class));
+				}
+    		});
+    	}
     	builder.setNegativeButton(R.string.only_show, new DialogInterface.OnClickListener(){
 
 			@Override
@@ -684,11 +697,12 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 				Location map = new Location("map"); //$NON-NLS-1$
 				map.setLatitude(lat);
 				map.setLongitude(lon);
-				calculateRouteOnGps = false;
+				routingHelper.setFollowingMode(false);
 				routingHelper.setFinalAndCurrentLocation(navigationLayer.getPointToNavigate(), map);
 			}
     	});
     	builder.show();
+    	
     }
     
     protected void reloadTile(final int zoom, final double latitude, final double longitude){

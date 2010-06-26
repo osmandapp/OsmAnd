@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="route_about">О маршруте</string>
+	<string name="route_general_information">Общая протяженность = {0}, время в пути = ''{1}''.</string>
+	<string name="router_service_descr">Выберите сервис для прокладки маршрута</string>
+	<string name="router_service">Прокладка маршрута</string>
 	<string name="download_sd_dir_not_accessible">Директория на SD карточка не доступна для сохранения</string>
 	<string name="download_question">Вы хотите загрузить {0} - {1} ?</string>
 	<string name="address">Адрес</string>

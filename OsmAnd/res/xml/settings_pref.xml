@@ -18,13 +18,14 @@
 <CheckBoxPreference android:summary="@string/use_english_names_descr" android:title="@string/use_english_names" android:key="use_english_names"></CheckBoxPreference>
 <Preference android:title="@string/reload_indexes" android:key="reload_indexes" android:summary="@string/reload_indexes_descr"></Preference>
 <Preference android:title="@string/download_indexes" android:key="download_indexes" android:summary="@string/download_indexes_descr"></Preference>
+<ListPreference android:title="@string/router_service" android:key="router_service" android:summary="@string/router_service_descr"></ListPreference>
 </PreferenceScreen>
 
 <PreferenceScreen android:title="@string/monitor_preferences" android:summary="@string/monitor_preferences_descr">
 <CheckBoxPreference android:summary="@string/save_track_to_gpx_descrp" android:title="@string/save_track_to_gpx" android:key="save_track_to_gpx"></CheckBoxPreference>
 <ListPreference android:summary="@string/save_track_interval_descr" android:title="@string/save_track_interval" android:key="save_track_interval"></ListPreference>
 <Preference android:summary="@string/save_current_track_descr" android:title="@string/save_current_track" android:key="save_current_track"></Preference>
-</PreferenceScreen>
+</PreferenceScreen>	
 
 <PreferenceScreen android:title="@string/osm_settings" android:summary="@string/osm_settings_descr">
 <CheckBoxPreference android:key="show_osm_bugs" android:title="@string/show_osm_bugs" android:summary="@string/show_osm_bugs_descr"></CheckBoxPreference>

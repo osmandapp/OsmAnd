@@ -176,6 +176,8 @@ public class EditPOIFilterActivity extends ListActivity {
 				}
 				if (subCategories.size() == accepted.size()) {
 					filter.selectSubTypesToAccept(amenity, null);
+				} else if(accepted.size() == 0){
+					filter.setTypeToAccept(amenity, false);
 				} else {
 					filter.selectSubTypesToAccept(amenity, accepted);
 				}

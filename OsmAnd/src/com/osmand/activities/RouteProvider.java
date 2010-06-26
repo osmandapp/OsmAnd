@@ -32,6 +32,17 @@ import com.osmand.osm.LatLon;
 public class RouteProvider {
 	private static final org.apache.commons.logging.Log log = LogUtil.getLog(RouteProvider.class);
 	
+	public enum RouteService {
+		CLOUDMADE("CloudMade"), YOURS("YOURS"); //$NON-NLS-1$ //$NON-NLS-2$
+		private final String name;
+		private RouteService(String name){
+			this.name = name;
+		}
+		public String getName() {
+			return name;
+		}
+	}
+	
 	public RouteProvider(){
 	}
 	
@@ -75,11 +86,15 @@ public class RouteProvider {
 					listDistance[i - 1] += listDistance[i];
 				}
 			}
-			if(directions != null){
-				int sum =0;
-				for(int i=directions.size() - 1; i>=0; i--){
+			if (directions != null) {
+				int sum = 0;
+				for (int i = directions.size() - 1; i >= 0; i--) {
 					directions.get(i).afterLeftTime = sum;
 					sum += directions.get(i).expectedTime;
+					directions.get(i).distance = listDistance[directions.get(i).routePointOffset];
+					if(i < directions.size() - 1){
+						directions.get(i).distance -=listDistance[directions.get(i + 1).routePointOffset];
+					}
 				}
 			}
 		}
@@ -93,15 +108,19 @@ public class RouteProvider {
 		
 	}
 
-	public RouteCalculationResult calculateRouteImpl(Location start, LatLon end, ApplicationMode mode){
+	public RouteCalculationResult calculateRouteImpl(Location start, LatLon end, ApplicationMode mode, RouteService type){
 		long time = System.currentTimeMillis();
 		if (start != null && end != null) {
 			if(log.isInfoEnabled()){
-				log.info("Start finding route from " + start + " to " + end); //$NON-NLS-1$ //$NON-NLS-2$
+				log.info("Start finding route from " + start + " to " + end +" using " + type.getName()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 			try {
-//				RouteCalculationResult res = findYOURSRoute(start, end, mode);
-				RouteCalculationResult res = findCloudMadeRoute(start, end, mode);
+				RouteCalculationResult res;
+				if (type == RouteService.YOURS) {
+					res = findYOURSRoute(start, end, mode);
+				} else {
+					res = findCloudMadeRoute(start, end, mode);
+				}
 				if(log.isInfoEnabled() && res.locations != null){
 					log.info("Finding route contained " + res.locations.size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}
@@ -221,6 +240,7 @@ public class RouteProvider {
 		if(list.getLength() > 0){
 			directions = new ArrayList<RouteDirectionInfo>();
 		}
+		RouteDirectionInfo previous = null;
 		for (int i = 0; i < list.getLength(); i++) {
 			Element item = (Element) list.item(i);
 			try {
@@ -242,11 +262,48 @@ public class RouteProvider {
 				}
 				int offset = Integer.parseInt(getContentFromNode(item, "offset")); //$NON-NLS-1$
 				dirInfo.routePointOffset = offset;
+				
+				if(previous != null && previous.turnType != TurnType.C && previous.turnType != null){
+					// calculate angle
+					if(previous.routePointOffset > 0){
+						float paz = res.get(previous.routePointOffset - 1).bearingTo(res.get(previous.routePointOffset));
+						float caz;
+						if(previous.turnType.isExit() && dirInfo.routePointOffset < res.size() - 1){
+							caz = res.get(dirInfo.routePointOffset).bearingTo(res.get(dirInfo.routePointOffset + 1));
+						} else {
+							caz = res.get(dirInfo.routePointOffset - 1).bearingTo(res.get(dirInfo.routePointOffset));
+						}
+						float angle = caz  - paz;
+						if(angle < 0){
+							angle += 360;
+						}
+						if(previous.turnAngle == 0f){
+							previous.turnAngle = angle;
+						}
+					}
+				} 
+				
 				directions.add(dirInfo);
+				
+				previous = dirInfo;
 			} catch (NumberFormatException e) {
 				log.info("Exception", e); //$NON-NLS-1$
 			} catch (IllegalArgumentException e) {
 				log.info("Exception", e); //$NON-NLS-1$
+			}
+		}
+		if(previous != null && previous.turnType != TurnType.C && previous.turnType != null){
+			// calculate angle
+			if(previous.routePointOffset > 0 && previous.routePointOffset < res.size() - 1){
+				float paz = res.get(previous.routePointOffset - 1).bearingTo(res.get(previous.routePointOffset));
+				float caz = res.get(previous.routePointOffset).bearingTo(res.get(res.size() -1));
+				float angle = caz  - paz;
+				if(angle < 0){
+					angle += 360;
+				}
+				if(previous.turnAngle == 0f){
+					previous.turnAngle = angle;
+				}
 			}
 		}
 		

@@ -24,6 +24,7 @@ import com.osmand.ProgressDialogImplementation;
 import com.osmand.R;
 import com.osmand.ResourceManager;
 import com.osmand.OsmandSettings.ApplicationMode;
+import com.osmand.activities.RouteProvider.RouteService;
 import com.osmand.map.TileSourceManager;
 import com.osmand.map.TileSourceManager.TileSourceTemplate;
 
@@ -46,6 +47,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private EditTextPreference userPassword;
 	private Preference reloadIndexes;
 	private Preference downloadIndexes;
+	private ListPreference routerPreference;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -93,6 +95,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		positionOnMap.setOnPreferenceChangeListener(this);
 		tileSourcePreference =(ListPreference) screen.findPreference(OsmandSettings.MAP_TILE_SOURCES);
 		tileSourcePreference.setOnPreferenceChangeListener(this);
+		routerPreference =(ListPreference) screen.findPreference(OsmandSettings.ROUTER_SERVICE);
+		routerPreference.setOnPreferenceChangeListener(this);
 		
     }
     
@@ -141,10 +145,20 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		applicationMode.setEntries(values);
 		applicationMode.setEntryValues(valueEntries);
 		applicationMode.setValue(OsmandSettings.getApplicationMode(this).name());
+
+		
+		String[] entries = new String[RouteService.values().length];
+		String entry = OsmandSettings.getRouterService(this).getName();
+		for(int i=0; i<entries.length; i++){
+			entries[i] = RouteService.values()[i].getName();
+		}
+		routerPreference.setEntries(entries);
+		routerPreference.setEntryValues(entries);
+		routerPreference.setValue(entry);
 		
 
 		List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
-		String[] entries = new String[list.size()];
+		entries = new String[list.size()];
 		for (int i = 0; i < list.size(); i++) {
 			entries[i] = list.get(i).getName();
 		}
@@ -205,6 +219,18 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.commit();
 		} else if(preference == positionOnMap){
 			edit.putInt(OsmandSettings.POSITION_ON_MAP, positionOnMap.findIndexOfValue((String) newValue));
+			edit.commit();
+		} else if (preference == routerPreference) {
+			RouteService s = null;
+			for(RouteService r : RouteService.values()){
+				if(r.getName().equals(newValue)){
+					s = r;
+					break;
+				}
+			}
+			if(s != null){
+				edit.putInt(OsmandSettings.ROUTER_SERVICE, s.ordinal());
+			}
 			edit.commit();
 		} else if (preference == tileSourcePreference) {
 			edit.putString(OsmandSettings.MAP_TILE_SOURCES, (String) newValue);
