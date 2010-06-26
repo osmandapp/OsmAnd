@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="route_about">About route</string>
+	<string name="route_general_information">Overall distance = {0}, travelling time = ''{1}''.</string>
+	<string name="router_service_descr">Choose routing service</string>
+	<string name="router_service">Routing</string>
 	<string name="download_sd_dir_not_accessible">Directory on SD card to save index is not accessible</string>
 	<string name="download_question">Do you want to download {0} - {1} ?</string>
 	<string name="address">Address</string>

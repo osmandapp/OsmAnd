@@ -1,16 +1,20 @@
 package com.osmand.activities;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import android.app.Activity;
 import android.location.Location;
 import android.util.FloatMath;
 import android.widget.Toast;
 
 import com.osmand.LogUtil;
+import com.osmand.OsmandSettings;
 import com.osmand.R;
 import com.osmand.OsmandSettings.ApplicationMode;
 import com.osmand.activities.RouteProvider.RouteCalculationResult;
+import com.osmand.activities.RouteProvider.RouteService;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 
@@ -19,7 +23,9 @@ public class RoutingHelper {
 	private static final org.apache.commons.logging.Log log = LogUtil.getLog(RoutingHelper.class);
 
 	// activity to show messages & refresh map when route is calculated
-	private MapActivity activity;
+	private Activity activity;
+	
+	private boolean isFollowingMode = false;
 	
 	// instead of this properties RouteCalculationResult could be used
 	private List<Location> routeNodes = new ArrayList<Location>();
@@ -63,13 +69,20 @@ public class RoutingHelper {
 	}
 	
 	private static RoutingHelper INSTANCE = new RoutingHelper(); 
-	public static RoutingHelper getInstance(MapActivity activity){
-		INSTANCE.activity = activity;
+	public static RoutingHelper getInstance(Activity ctx){
+		INSTANCE.activity = ctx;
 		return INSTANCE;
 	}
 	
 	
 	
+	public boolean isFollowingMode() {
+		return isFollowingMode;
+	}
+	
+	public void setFollowingMode(boolean isFollowingMode) {
+		this.isFollowingMode = isFollowingMode;
+	}
 	
 	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, Location currentLocation){
 		this.finalLocation = finalLocation;
@@ -107,9 +120,7 @@ public class RoutingHelper {
 		Location lastPoint = routeNodes.get(routeNodes.size() - 1);
 		if(currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < 60){
 			if(lastFixedLocation != null && lastFixedLocation.distanceTo(lastPoint) < 60){
-				if(activity != null){
-					showMessage(activity.getString(R.string.arrived_at_destination));
-				}
+				showMessage(activity.getString(R.string.arrived_at_destination));
 				updateCurrentRoute(routeNodes.size() - 1);
 				// clear final location to prevent all time showing message
 				finalLocation = null;
@@ -231,21 +242,38 @@ public class RoutingHelper {
 		currentRoute = 0;
 	}
 	
-	public synchronized int getDistance(double lat, double lon){
+	public synchronized int getLeftDistance(){
 		if(listDistance != null && currentRoute < listDistance.length){
 			int dist = listDistance[currentRoute];
 			Location l = routeNodes.get(currentRoute);
-			dist += MapUtils.getDistance(lat, lon, l.getLatitude(), l.getLongitude());
+			if(lastFixedLocation != null){
+				dist += lastFixedLocation.distanceTo(l);
+			}
 			return dist;
 		}
 		return 0;
 	}
+	
+	public Location getLocationFromRouteDirection(RouteDirectionInfo i){
+		if(i.routePointOffset < routeNodes.size()){
+			return routeNodes.get(i.routePointOffset);
+		}
+		return null;
+	}
+	
 	
 	public RouteDirectionInfo getNextRouteDirectionInfo(){
 		if(directionInfo != null && currentDirectionInfo < directionInfo.size() - 1){
 			return directionInfo.get(currentDirectionInfo + 1);
 		}
 		return null;
+	}
+	
+	public List<RouteDirectionInfo> getRouteDirections(){
+		if(directionInfo != null && currentDirectionInfo < directionInfo.size()){
+			return directionInfo.subList(currentDirectionInfo, directionInfo.size());
+		}
+		return Collections.emptyList();
 	}
 	
 	public int getDistanceToNextRouteDirection() {
@@ -282,6 +310,7 @@ public class RoutingHelper {
 	}
 	
 	public void calculateRoute(final Location start, final LatLon end){
+		final RouteService service = OsmandSettings.getRouterService(activity);
 		if(currentRunningJob == null){
 			// do not evaluate very often
 			if (System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval) {
@@ -289,7 +318,7 @@ public class RoutingHelper {
 					currentRunningJob = new Thread(new Runnable() {
 						@Override
 						public void run() {
-							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode);
+							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service);
 							synchronized (RoutingHelper.this) {
 								if (res.isCalculated()) {
 									setNewRoute(res);
@@ -303,13 +332,15 @@ public class RoutingHelper {
 								}
 								currentRunningJob = null;
 							}
-							if (activity != null) {
+							
 								if (res.isCalculated()) {
 									int[] dist = res.getListDistance();
 									int l = dist != null && dist.length > 0 ? dist[0] : 0;
 									showMessage(activity.getString(R.string.new_route_calculated_dist) + MapUtils.getFormattedDistance(l));
-									// be aware that is non ui thread
-									activity.getMapView().refreshMap();
+									if (activity instanceof MapActivity) {
+										// be aware that is non ui thread
+										((MapActivity) activity).getMapView().refreshMap();
+									}
 								} else {
 									if (res.getErrorMessage() != null) {
 										showMessage(activity.getString(R.string.error_calculating_route) + res.getErrorMessage());
@@ -319,7 +350,6 @@ public class RoutingHelper {
 										showMessage(activity.getString(R.string.empty_route_calculated));
 									}
 								}
-							}
 							lastTimeEvaluatedRoute = System.currentTimeMillis();
 						}
 					}, "Calculating route"); //$NON-NLS-1$
@@ -382,26 +412,63 @@ public class RoutingHelper {
 	
 
 	
-	public static enum TurnType {
-		C , // continue (go straight)
-		TL, // turn left
-		TSLL, // turn slight left
-		TSHL, // turn sharp left
-		TR, // turn right
-		TSLR, // turn slight right
-		TSHR, // turn sharp right
-		TU, // U-turn
+	public static class TurnType {
+		public static final TurnType C = new TurnType("C"); // continue (go straight) //$NON-NLS-1$
+		public static final TurnType TL = new TurnType("TL"); // turn left //$NON-NLS-1$
+		public static final TurnType TSLL = new TurnType("TSLL"); // turn slight left //$NON-NLS-1$
+		public static final TurnType TSHL = new TurnType("TSHL"); // turn sharp left //$NON-NLS-1$
+		public static final TurnType TR = new TurnType("TR"); // turn right //$NON-NLS-1$
+		public static final TurnType TSLR = new TurnType("TSLR"); // turn slight right //$NON-NLS-1$
+		public static final TurnType TSHR = new TurnType("TSHR"); // turn sharp right //$NON-NLS-1$
+		public static final TurnType TU = new TurnType("TU"); // U-turn //$NON-NLS-1$
+		public static TurnType[] vals = new TurnType[] {C, TL, TSLL, TSHL, TR, TSLR, TSHR, TU}; 
 		
-		// TODO Exit3...
+		
+		public static TurnType valueOf(String s){
+			for(TurnType v : vals){
+				if(v.getValue().equals(s)){
+					return v;
+				}
+			}
+			if(s!= null && s.startsWith("EXIT")){ //$NON-NLS-1$
+				return getExitTurn(Integer.parseInt(s.substring(4)));
+			}
+			return null;
+		}
+		
+		private final String value;
+		private int exitOut;
+		
+		public static TurnType getExitTurn(int out){
+			return new TurnType("EXIT", out); //$NON-NLS-1$
+		}
+		private TurnType(String value, int exitOut){
+			this.value = value;
+			this.exitOut = exitOut;
+		}
+		private TurnType(String value){
+			this.value = value;
+		}
+		public String getValue() {
+			return value;
+		}
+		public int getExitOut() {
+			return exitOut;
+		}
+		public boolean isExit(){
+			return value.equals("EXIT"); //$NON-NLS-1$
+		}
 	}
 	
 	public static class RouteDirectionInfo {
-		public String descriptionRoute;
+		public String descriptionRoute = ""; //$NON-NLS-1$
 		public int expectedTime;
-		public float turnAngle;
+		public float turnAngle; // calculated CW head rotation if previous direction to NORTH 
 		public TurnType turnType;
 		public int routePointOffset;
+		// calculated vars
 		public int afterLeftTime;
+		public int distance;
 	}
 
 	

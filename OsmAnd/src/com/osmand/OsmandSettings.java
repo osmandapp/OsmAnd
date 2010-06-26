@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import com.osmand.activities.RouteProvider.RouteService;
 import com.osmand.map.ITileSource;
 import com.osmand.map.TileSourceManager;
 import com.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -110,6 +111,24 @@ public class OsmandSettings {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		return prefs.edit().putString(APPLICATION_MODE, p.name()).commit();
 	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String ROUTER_SERVICE = "router_service"; //$NON-NLS-1$
+
+	public static RouteService getRouterService(Context ctx) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		int ord = prefs.getInt(ROUTER_SERVICE, RouteService.CLOUDMADE.ordinal());
+		if(ord < RouteService.values().length){
+			return RouteService.values()[ord];
+		} else {
+			return RouteService.CLOUDMADE;
+		}
+	}
+
+	public static boolean setRouterService(Context ctx, RouteService p) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putInt(ROUTER_SERVICE, p.ordinal()).commit();
+	}	
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SAVE_CURRENT_TRACK = "save_current_track"; //$NON-NLS-1$

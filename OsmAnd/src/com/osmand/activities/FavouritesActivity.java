@@ -38,7 +38,6 @@ import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 
 /**
- * @author Maxim Frolov
  * 
  */
 public class FavouritesActivity extends ListActivity {

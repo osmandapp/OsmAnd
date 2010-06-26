@@ -66,7 +66,7 @@ public class RouteLayer implements OsmandMapLayer {
 					view.isPointOnTheRotatedMap(helper.getCurrentLocation().getLatitude(), helper.getCurrentLocation().getLongitude())){
 				boundsRect = new Rect(-w / 2, -h, 3 * w / 2, h);
 			} else {
-				boundsRect = new Rect(0, -h, w, h);
+				boundsRect = new Rect(0, 0, w, h);
 			}
 			view.calculateTileRectangle(boundsRect, view.getCenterPointX(), view.getCenterPointY(), view.getXTile(), view.getYTile(),
 					tileRect);
