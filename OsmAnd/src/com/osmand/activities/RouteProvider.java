@@ -250,20 +250,21 @@ public class RouteProvider {
 				if(stime != null){
 					dirInfo.expectedTime = Integer.parseInt(stime);
 				}
-				String sturn = getContentFromNode(item, "turn-angle"); //$NON-NLS-1$
-				if(sturn != null){
-					dirInfo.turnAngle = (float) Double.parseDouble(sturn);
-				}
 				String stype = getContentFromNode(item, "turn"); //$NON-NLS-1$
 				if(stype != null){
 					dirInfo.turnType = TurnType.valueOf(stype.toUpperCase());
 				} else {
-					dirInfo.turnType = TurnType.C;
+					dirInfo.turnType = TurnType.valueOf(TurnType.C);
 				}
+				String sturn = getContentFromNode(item, "turn-angle"); //$NON-NLS-1$
+				if(sturn != null){
+					dirInfo.turnType.setTurnAngle((float) Double.parseDouble(sturn));
+				}
+				
 				int offset = Integer.parseInt(getContentFromNode(item, "offset")); //$NON-NLS-1$
 				dirInfo.routePointOffset = offset;
 				
-				if(previous != null && previous.turnType != TurnType.C && previous.turnType != null){
+				if(previous != null && previous.turnType != null && !TurnType.C.equals(previous.turnType.getValue())){
 					// calculate angle
 					if(previous.routePointOffset > 0){
 						float paz = res.get(previous.routePointOffset - 1).bearingTo(res.get(previous.routePointOffset));
@@ -273,12 +274,15 @@ public class RouteProvider {
 						} else {
 							caz = res.get(dirInfo.routePointOffset - 1).bearingTo(res.get(dirInfo.routePointOffset));
 						}
-						float angle = caz  - paz;
+						float angle = caz  - paz + 60f; // that magic number helps to fix some errors
 						if(angle < 0){
 							angle += 360;
+						} else if(angle > 360){
+							angle -= 360;
 						}
-						if(previous.turnAngle == 0f){
-							previous.turnAngle = angle;
+
+						if(previous.turnType.getTurnAngle() < 0.5f){
+							previous.turnType.setTurnAngle(angle);
 						}
 					}
 				} 
@@ -292,7 +296,7 @@ public class RouteProvider {
 				log.info("Exception", e); //$NON-NLS-1$
 			}
 		}
-		if(previous != null && previous.turnType != TurnType.C && previous.turnType != null){
+		if(previous != null && previous.turnType != null && !TurnType.C.equals(previous.turnType.getValue())){
 			// calculate angle
 			if(previous.routePointOffset > 0 && previous.routePointOffset < res.size() - 1){
 				float paz = res.get(previous.routePointOffset - 1).bearingTo(res.get(previous.routePointOffset));
@@ -301,8 +305,8 @@ public class RouteProvider {
 				if(angle < 0){
 					angle += 360;
 				}
-				if(previous.turnAngle == 0f){
-					previous.turnAngle = angle;
+				if(previous.turnType.getTurnAngle() < 0.5f){
+					previous.turnType.setTurnAngle(angle);
 				}
 			}
 		}

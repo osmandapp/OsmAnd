@@ -413,39 +413,53 @@ public class RoutingHelper {
 
 	
 	public static class TurnType {
-		public static final TurnType C = new TurnType("C"); // continue (go straight) //$NON-NLS-1$
-		public static final TurnType TL = new TurnType("TL"); // turn left //$NON-NLS-1$
-		public static final TurnType TSLL = new TurnType("TSLL"); // turn slight left //$NON-NLS-1$
-		public static final TurnType TSHL = new TurnType("TSHL"); // turn sharp left //$NON-NLS-1$
-		public static final TurnType TR = new TurnType("TR"); // turn right //$NON-NLS-1$
-		public static final TurnType TSLR = new TurnType("TSLR"); // turn slight right //$NON-NLS-1$
-		public static final TurnType TSHR = new TurnType("TSHR"); // turn sharp right //$NON-NLS-1$
-		public static final TurnType TU = new TurnType("TU"); // U-turn //$NON-NLS-1$
-		public static TurnType[] vals = new TurnType[] {C, TL, TSLL, TSHL, TR, TSLR, TSHR, TU}; 
+		public static final String C = "C"; // continue (go straight) //$NON-NLS-1$
+		public static final String TL = "TL"; // turn left //$NON-NLS-1$
+		public static final String TSLL = "TSLL"; // turn slight left //$NON-NLS-1$
+		public static final String TSHL = "TSHL"; // turn sharp left //$NON-NLS-1$
+		public static final String TR = "TR"; // turn right //$NON-NLS-1$
+		public static final String TSLR = "TSLR"; // turn slight right //$NON-NLS-1$
+		public static final String TSHR = "TSHR"; // turn sharp right //$NON-NLS-1$
+		public static final String TU = "TU"; // U-turn //$NON-NLS-1$
+		public static String[] predefinedTypes = new String[] {C, TL, TSLL, TSHL, TR, TSLR, TSHR, TU}; 
 		
 		
 		public static TurnType valueOf(String s){
-			for(TurnType v : vals){
-				if(v.getValue().equals(s)){
-					return v;
+			for(String v : predefinedTypes){
+				if(v.equals(s)){
+					return new TurnType(v);
 				}
 			}
 			if(s!= null && s.startsWith("EXIT")){ //$NON-NLS-1$
-				return getExitTurn(Integer.parseInt(s.substring(4)));
+				return getExitTurn(Integer.parseInt(s.substring(4)), 0);
 			}
 			return null;
 		}
 		
 		private final String value;
 		private int exitOut;
+		// calculated CW head rotation if previous direction to NORTH
+		private float turnAngle;
 		
-		public static TurnType getExitTurn(int out){
-			return new TurnType("EXIT", out); //$NON-NLS-1$
+		public static TurnType getExitTurn(int out, float angle){
+			TurnType r = new TurnType("EXIT", out); //$NON-NLS-1$
+			r.setTurnAngle(angle);
+			return r;
 		}
 		private TurnType(String value, int exitOut){
 			this.value = value;
 			this.exitOut = exitOut;
 		}
+		
+		public float getTurnAngle() {
+			return turnAngle;
+		}
+		
+		public void setTurnAngle(float turnAngle) {
+			this.turnAngle = turnAngle;
+		}
+		
+		
 		private TurnType(String value){
 			this.value = value;
 		}
@@ -463,7 +477,6 @@ public class RoutingHelper {
 	public static class RouteDirectionInfo {
 		public String descriptionRoute = ""; //$NON-NLS-1$
 		public int expectedTime;
-		public float turnAngle; // calculated CW head rotation if previous direction to NORTH 
 		public TurnType turnType;
 		public int routePointOffset;
 		// calculated vars
