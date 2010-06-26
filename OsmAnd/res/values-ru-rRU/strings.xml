@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="max_level_download_tile">Уровень детализация</string>
+	<string name="max_level_download_tile_descr">Выберите максимальный уровень для загрузки из интернета</string>
 	<string name="route_about">О маршруте</string>
 	<string name="route_general_information">Общая протяженность = {0}, время в пути = ''{1}''.</string>
 	<string name="router_service_descr">Выберите сервис для прокладки маршрута</string>

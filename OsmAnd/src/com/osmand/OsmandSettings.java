@@ -190,6 +190,14 @@ public class OsmandSettings {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		return prefs.getInt(POSITION_ON_MAP, CENTER_CONSTANT);
 	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String MAX_LEVEL_TO_DOWNLOAD_TILE = "max_level_download_tile"; //$NON-NLS-1$
+
+	public static int getMaximumLevelToDownloadTile(Context ctx) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getInt(MAX_LEVEL_TO_DOWNLOAD_TILE, 18);
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String MAP_VIEW_3D = "map_view_3d"; //$NON-NLS-1$

@@ -211,9 +211,9 @@ public class MapUtils {
 		if(meters >= 100000){
 			return meters / 1000 + " " + Messages.getMessage(Messages.KEY_KM);   //$NON-NLS-1$
 		} else if(meters >= 10000){
-			return MessageFormat.format("{0, number, #.#} "+Messages.getMessage(Messages.KEY_KM), ((float) meters) / 1000); //$NON-NLS-1$ 
+			return MessageFormat.format("{0,number,#.#} "+Messages.getMessage(Messages.KEY_KM), ((float) meters) / 1000); //$NON-NLS-1$ 
 		} else if(meters > 1500){
-			return MessageFormat.format("{0, number, #.##}"+Messages.getMessage(Messages.KEY_KM), ((float) meters) / 1000); //$NON-NLS-1$ 
+			return MessageFormat.format("{0,number,#.##}"+Messages.getMessage(Messages.KEY_KM), ((float) meters) / 1000); //$NON-NLS-1$ 
 		} else {
 			return meters + " "+Messages.getMessage(Messages.KEY_M); //$NON-NLS-1$ 
 		}
