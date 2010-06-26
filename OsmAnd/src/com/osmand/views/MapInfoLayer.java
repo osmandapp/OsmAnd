@@ -10,6 +10,7 @@ import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.location.Location;
 import android.text.format.DateFormat;
+import android.util.FloatMath;
 
 import com.osmand.Algoritms;
 import com.osmand.Messages;
@@ -61,7 +62,8 @@ public class MapInfoLayer implements OsmandMapLayer {
 	private int centerMiniRouteX;
 	private float scaleMiniRoute;
 	private Matrix pathTransform;
-	private TurnType cachedTurnType;
+	private TurnType cachedTurnType = null;
+	private String cachedExitOut = null;
 	
 	
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
@@ -217,7 +219,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 	
 	
 	private void drawRouteInfo(Canvas canvas) {
-		if(routeLayer != null && routeLayer.getHelper().isRouterEnabled() && !routeLayer.getHelper().isFollowingMode() ){
+		if(routeLayer != null && routeLayer.getHelper().isRouterEnabled() && routeLayer.getHelper().isFollowingMode() ){
 			int d = routeLayer.getHelper().getDistanceToNextRouteDirection();
 			if (showMiniMap || d == 0) {
 				if (!routeLayer.getPath().isEmpty()) {
@@ -240,9 +242,17 @@ public class MapInfoLayer implements OsmandMapLayer {
 					if (!Algoritms.objectEquals(cachedTurnType, next.turnType)) {
 						cachedTurnType = next.turnType;
 						calcTurnPath(pathForTurn, cachedTurnType, pathTransform);
+						if(cachedTurnType.getExitOut() > 0){
+							cachedExitOut = cachedTurnType.getExitOut()+""; //$NON-NLS-1$
+						} else {
+							cachedExitOut = null;
+						}
 					}
 					canvas.drawPath(pathForTurn, paintRouteDirection);
 					canvas.drawPath(pathForTurn, paintBlack);
+					if(cachedExitOut != null){
+						canvas.drawText(cachedExitOut, boundsForMiniRoute.centerX() - 6, boundsForMiniRoute.centerY() - 9, paintBlack);
+					}
 					canvas.drawText(MapUtils.getFormattedDistance(d), boundsForMiniRoute.left + 10, boundsForMiniRoute.bottom - 9,
 							paintBlack);
 				}
@@ -272,19 +282,13 @@ public class MapInfoLayer implements OsmandMapLayer {
 				canvas.drawText(cachedLeftTimeString, boundsForLeftTime.left + 5, boundsForLeftTime.bottom - 9, paintBlack);
 				
 			}
-		}  else {
-			// TEST
-			// TODO remove
-//			canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintAlphaGray);
-//			canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintBlack);
-//			canvas.drawPath(pathForTurn, paintRouteDirection);
-//			canvas.drawPath(pathForTurn, paintBlack);
-//			canvas.drawText(MapUtils.getFormattedDistance(300), 
-//					boundsForMiniRoute.left + 15, boundsForMiniRoute.bottom - 9, paintBlack);
 		}
 	}
 
 	public static void calcTurnPath(Path pathForTurn, TurnType turnType, Matrix transform) {
+		if(turnType == null){
+			return;
+		}
 		pathForTurn.reset();
 		// draw path 96x96
 		int c = 48;
@@ -295,7 +299,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		float spartArrowL = (float) ((sarrowL - w / Math.sqrt(2)) / 2);
 		float hpartArrowL = (float) (harrowL - w) / 2;
 
-		if (turnType == TurnType.C) {
+		if (TurnType.C.equals(turnType.getValue())) {
 			int h = 65;
 
 			pathForTurn.rMoveTo(w / 2, 0);
@@ -305,8 +309,8 @@ public class MapInfoLayer implements OsmandMapLayer {
 			pathForTurn.rLineTo(-harrowL / 2, harrowL / 2);
 			pathForTurn.rLineTo(hpartArrowL, 0);
 			pathForTurn.rLineTo(0, h);
-		} else if (turnType == TurnType.TR || turnType == TurnType.TL) {
-			int b = turnType == TurnType.TR ? 1 : -1;
+		} else if (TurnType.TR.equals(turnType.getValue())|| TurnType.TL.equals(turnType.getValue())) {
+			int b = TurnType.TR.equals(turnType.getValue())? 1 : -1;
 			int h = 36;
 			float quadShiftX = 22;
 			float quadShiftY = 22;
@@ -320,8 +324,8 @@ public class MapInfoLayer implements OsmandMapLayer {
 			pathForTurn.rLineTo(0, hpartArrowL);
 			pathForTurn.rQuadTo(-b * (quadShiftX + w), 0, -b * (quadShiftX + w), quadShiftY + w);
 			pathForTurn.rLineTo(0, h);
-		} else if (turnType == TurnType.TSLR || turnType == TurnType.TSLL) {
-			int b = turnType == TurnType.TSLR ? 1 : -1;
+		} else if (TurnType.TSLR.equals(turnType.getValue()) || TurnType.TSLL.equals(turnType.getValue())) {
+			int b = TurnType.TSLR.equals(turnType.getValue()) ? 1 : -1;
 			int h = 40;
 			int quadShiftY = 22;
 			float quadShiftX = (float) (quadShiftY / (1 + Math.sqrt(2)));
@@ -337,8 +341,8 @@ public class MapInfoLayer implements OsmandMapLayer {
 			pathForTurn.rLineTo(b * spartArrowL, spartArrowL);
 			pathForTurn.rQuadTo(b * nQuadShiftX, -nQuadShiftX, b * nQuadShiftX, nQuadShifty);
 			pathForTurn.rLineTo(0, h);
-		} else if (turnType == TurnType.TSHR || turnType == TurnType.TSHL) {
-			int b = turnType == TurnType.TSHR ? 1 : -1;
+		} else if (TurnType.TSHR.equals(turnType.getValue()) || TurnType.TSHL.equals(turnType.getValue())) {
+			int b = TurnType.TSHR.equals(turnType.getValue()) ? 1 : -1;
 			int h = 45;
 			float quadShiftX = 22;
 			float quadShiftY = -(float) (quadShiftX / (1 + Math.sqrt(2)));
@@ -354,7 +358,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 			pathForTurn.rLineTo(-b * spartArrowL, spartArrowL);
 			pathForTurn.rCubicTo(b * nQuadShiftX / 2, nQuadShiftX / 2, b * nQuadShiftX, nQuadShiftX / 2, b * nQuadShiftX, nQuadShiftY);
 			pathForTurn.rLineTo(0, h);
-		} else if(turnType == TurnType.TU){
+		} else if(TurnType.TU.equals(turnType.getValue())) {
 			int h = 54;
 			float quadShiftX = 13;
 			float quadShiftY = 13;
@@ -370,8 +374,39 @@ public class MapInfoLayer implements OsmandMapLayer {
 			pathForTurn.rQuadTo(0, -quadShiftX, quadShiftX, -quadShiftY);
 			pathForTurn.rQuadTo(quadShiftX, 0, quadShiftX, quadShiftY);
 			pathForTurn.rLineTo(0, h);
-		} else if(turnType != null && turnType.isExit()){
-			// TODO !!! & check how it works
+		} else if (turnType != null && turnType.isExit()) {
+			float t = turnType.getTurnAngle();
+			if (t >= 170 && t < 220) {
+				t = 220;
+			} else if (t > 160 && t < 170) {
+				t = 160;
+			}
+			float sweepAngle = (t - 360) - 180;
+			if (sweepAngle < -360) {
+				sweepAngle += 360;
+			}
+			float r1 = 32f;
+			float r2 = 24f;
+			float angleToRot = 0.3f;
+			
+			pathForTurn.moveTo(48, 48 + r1 + 8);
+			pathForTurn.lineTo(48, 48 + r1);
+			RectF r = new RectF(48 - r1, 48 - r1, 48 + r1, 48 + r1);
+			pathForTurn.arcTo(r, 90, sweepAngle);
+			float angleRad = (float) ((180 + sweepAngle)*Math.PI/180f);
+			
+			pathForTurn.lineTo(48 + (r1 + 4) * FloatMath.sin(angleRad), 48 - (r1 + 4) * FloatMath.cos(angleRad));
+			pathForTurn.lineTo(48 + (r1 + 6) * FloatMath.sin(angleRad + angleToRot/2), 48 - (r1 + 6) * FloatMath.cos(angleRad + angleToRot/2));
+			pathForTurn.lineTo(48 + (r1 + 12) * FloatMath.sin(angleRad - angleToRot/2), 48 - (r1 + 12) * FloatMath.cos(angleRad - angleToRot/2));
+			pathForTurn.lineTo(48 + (r1 + 6) * FloatMath.sin(angleRad - 3*angleToRot/2), 48 - (r1 + 6) * FloatMath.cos(angleRad - 3*angleToRot/2));
+			pathForTurn.lineTo(48 + (r1 + 4) * FloatMath.sin(angleRad - angleToRot), 48 - (r1 + 4) * FloatMath.cos(angleRad - angleToRot));
+			pathForTurn.lineTo(48 + r2 * FloatMath.sin(angleRad - angleToRot), 48 - r2 * FloatMath.cos(angleRad - angleToRot));
+			
+			r.set(48 - r2, 48 - r2, 48 + r2, 48 + r2);
+			pathForTurn.arcTo(r, 360 + sweepAngle + 90, -sweepAngle);
+			pathForTurn.lineTo(40, 48 + r2);
+			pathForTurn.lineTo(40, 48 + r1 + 8);
+			pathForTurn.close();
 		}
 		pathForTurn.close();
 		pathForTurn.transform(transform);

@@ -60,7 +60,7 @@ public class ShowRouteInfoActivity extends ListActivity {
 	}
 
 	public void onListItemClick(ListView parent, View v, int position, long id) {
-		RouteDirectionInfo item = ((RouteInfoAdapter)getListAdapter()).getItem(position);
+		RouteDirectionInfo item = ((RouteInfoAdapter)getListAdapter()).getItem(position - 1);
 		RoutingHelper inst = RoutingHelper.getInstance(this);
 		Location loc = inst.getLocationFromRouteDirection(item);
 		if(loc != null){
