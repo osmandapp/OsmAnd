@@ -118,7 +118,7 @@ public class SearchPOIActivity extends ListActivity {
 
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
-		OsmandSettings.setMapLocationToShow(this, amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude());
+		OsmandSettings.setMapLocationToShow(this, amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), getString(R.string.poi)+" : " + amenity.getSimpleFormat(OsmandSettings.usingEnglishNames(this))); //$NON-NLS-1$
 		Intent newIntent = new Intent(SearchPOIActivity.this, MapActivity.class);
 		startActivity(newIntent);
 	}

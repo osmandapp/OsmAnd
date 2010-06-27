@@ -1,6 +1,8 @@
 package com.osmand.activities.search;
 
 
+import java.text.MessageFormat;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -42,6 +44,7 @@ public class SearchAddressActivity extends Activity {
 	private Building building = null;
 	private Street street2 = null;
 	private boolean radioBuilding = true;
+	private Button searchOnline;
 	
 
 	@Override
@@ -56,10 +59,21 @@ public class SearchAddressActivity extends Activity {
 		cityButton = (Button) findViewById(R.id.CityButton);
 		countryButton = (Button) findViewById(R.id.CountryButton);
 		buildingButton = (Button) findViewById(R.id.BuildingButton);
+		searchOnline = (Button) findViewById(R.id.SearchOnline);
 		attachListeners();
 	}
 	
 	private void attachListeners() {
+		if (getParent() instanceof SearchActivity) {
+			searchOnline.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					((SearchActivity) getParent()).startSearchAddressOnline();
+				}
+			});
+		} else {
+			searchOnline.setVisibility(View.INVISIBLE);
+		}
 		countryButton.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -159,7 +173,9 @@ public class SearchAddressActivity extends Activity {
 	
 	public void showOnMap(boolean navigateTo){
 		LatLon l = null;
+		String historyName = null;
 		int zoom = 12;
+		boolean en = OsmandSettings.usingEnglishNames(this);
 		if (street2 != null && street != null) {
 			region.preloadWayNodes(street2);
 			region.preloadWayNodes(street);
@@ -178,23 +194,28 @@ public class SearchAddressActivity extends Activity {
 			}
 			if(inters != null){
 				l = inters.getLatLon();
+				historyName = MessageFormat.format(getString(R.string.search_history_int_streets), 
+						street.getName(en), street2.getName(en), city.getName(en)); 
 				zoom = 16; 
 			}
 		} else if (building != null) {
 			l = building.getLocation();
+			historyName = MessageFormat.format(getString(R.string.search_history_building), building.getName(en), street.getName(en), city.getName(en));
 			zoom = 16;
 		} else if (street != null) {
 			l = street.getLocation();
+			historyName = MessageFormat.format(getString(R.string.search_history_street), street.getName(en), city.getName(en));
 			zoom = 14;
 		} else if (city != null) {
 			l = city.getLocation();
+			historyName = MessageFormat.format(getString(R.string.search_history_city), city.getName(en));
 			zoom = 12;
 		}
 		if (l != null) {
 			if(navigateTo){
 				OsmandSettings.setPointToNavigate(SearchAddressActivity.this, l.getLatitude(), l.getLongitude());
 			} 
-			OsmandSettings.setMapLocationToShow(SearchAddressActivity.this, l.getLatitude(), l.getLongitude());
+			OsmandSettings.setMapLocationToShow(SearchAddressActivity.this, l.getLatitude(), l.getLongitude(), historyName);
 			OsmandSettings.setLastKnownMapZoom(SearchAddressActivity.this, zoom);
 			
 			startActivity(new Intent(SearchAddressActivity.this, MapActivity.class));

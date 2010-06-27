@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="clear_all">Очистить все</string>
+	<string name="history">История</string>
+	<string name="uploading_data">Загрузка данных...</string>
+	<string name="uploading">Загрузка</string>
+	<string name="search_nothing_found">По вашему запросу ничего не найдено</string>
+	<string name="searching">Поиск</string>
+	<string name="searching_address">Поиск адреса...</string>
+	<string name="search_osm_nominatim">Поиск адреса используя Osm Nominatim</string>
+	<string name="hint_search_online">Город, улица, дом</string>
+	<string name="search_offline_address">Локальный</string>
+	<string name="search_online_address">Интернет</string>
 	<string name="max_level_download_tile">Уровень детализация</string>
 	<string name="max_level_download_tile_descr">Выберите максимальный уровень для загрузки из интернета</string>
 	<string name="route_about">О маршруте</string>
@@ -35,7 +46,7 @@
 	<string name="commiting_node">Сохранения объекта</string>
 	<string name="loading_poi_obj">Загрузка poi </string>
 	<string name="auth_failed">Авторизация не прошла</string>
-	<string name="failed_op">, ошибка : </string>
+	<string name="failed_op">, ошибка</string>
 	<string name="converting_names">Конвертация имен английский/родных...</string>
 	<string name="loading_streets_buildings">Загружаются дома/улицы...</string>
 	<string name="loading_postcodes">Загружаются почтовые индексы...</string>
@@ -47,7 +58,7 @@
 	<string name="error_calculating_route">Ошибка прокладки маршрута: </string>
 	<string name="error_calculating_route_occured">Ошибка во время прокладки маршрута</string>
 	<string name="empty_route_calculated">Пустой путь рассчитан</string>									
-	<string name="new_route_calculated_dist">Проложен новый путь, расстояние :</string>
+	<string name="new_route_calculated_dist">Проложен новый путь, расстояние : </string>
 	<string name="arrived_at_destination">Вы прибыли в пункт назначения</string>
 	<string name="invalid_locations">Координаты неправильные</string>
 	<string name="go_back_to_osmand">Вернуться к OsmAnd карте</string>
@@ -115,7 +126,7 @@
     <string name="rotate_map_to_bearing">Вращать карту</string>
     <string name="show_poi_over_map_description">Показывать слой POI</string>
     <string name="show_poi_over_map">POI</string>
-    <string name="map_tile_source_descr">Загружать недостающие части карты из:</string>
+    <string name="map_tile_source_descr">Загружать недостающие части карты из : </string>
     <string name="map_tile_source">Источник данных</string>
     <string name="map_source">Источник карты</string>
     <string name="use_internet">Интернет</string>
@@ -217,8 +228,8 @@
 <string name="poi_remove_title">Удаление POI</string>
 <string name="default_buttons_delete">Удалить</string>
 <string name="poi_remove_success">POI был успешно удален.</string>
-<string name="poi_action_add">Дабавить</string>
-<string name="poi_action_change">Изменить</string>
+<string name="poi_action_add">добавления</string>
+<string name="poi_action_change">изменения</string>
 <string name="poi_action_succeded_template">Действие {0} успешно завершено.</string>
 <string name="poi_error_unexpected_template">Неожиданная ошибка произошла при выполнении действия {0}.</string>
 <string name="poi_error_io_error_template">Ошибка ввода/вывода произошла при выполнении действия {0}.</string>
