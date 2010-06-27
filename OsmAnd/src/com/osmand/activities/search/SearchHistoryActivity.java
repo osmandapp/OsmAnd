@@ -24,6 +24,7 @@ import com.osmand.osm.MapUtils;
 public class SearchHistoryActivity extends ListActivity {
 	private LatLon location;
 	private SearchHistoryHelper helper;
+	private Button clearButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,23 +37,23 @@ public class SearchHistoryActivity extends ListActivity {
 		helper = SearchHistoryHelper.getInstance();
 		
 		
-		
+		clearButton = new Button(this);
+		clearButton.setText(R.string.clear_all);
+		clearButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				helper.removeAll(SearchHistoryActivity.this);
+				setListAdapter(new HistoryAdapter(helper.getHistoryEntries(SearchHistoryActivity.this)));
+			}
+		});
 	}
 	@Override
 	protected void onResume() {
 		super.onResume();
 		List<HistoryEntry> historyEntries = helper.getHistoryEntries(this);
 		
+		getListView().removeFooterView(clearButton);
 		if (!historyEntries.isEmpty()) {
-			Button clearButton = new Button(this);
-			clearButton.setText(R.string.clear_all);
-			clearButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					helper.removeAll(SearchHistoryActivity.this);
-					setListAdapter(new HistoryAdapter(helper.getHistoryEntries(SearchHistoryActivity.this)));
-				}
-			});
 			getListView().addFooterView(clearButton);
 		}
 		setListAdapter(new HistoryAdapter(historyEntries));

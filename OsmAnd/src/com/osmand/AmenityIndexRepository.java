@@ -224,8 +224,8 @@ public class AmenityIndexRepository {
 		String latCol = IndexPoiTable.LATITUDE.name();
 		String lonCol = IndexPoiTable.LONGITUDE.name();
 		db.execSQL("DELETE FROM " + IndexPoiTable.getTable() + " WHERE " + //$NON-NLS-1$ //$NON-NLS-2$
-				lonCol + ">= ? AND ? <=" + lonCol + " AND " + //$NON-NLS-1$//$NON-NLS-2$
-				latCol + ">= ? AND ? <=" + latCol, new Double[] { leftLon, rightLon, bottomLat, topLat }); //$NON-NLS-1$
+				lonCol + ">= ? AND ? >=" + lonCol + " AND " + //$NON-NLS-1$//$NON-NLS-2$
+				latCol + ">= ? AND ? >=" + latCol, new Double[] { leftLon, rightLon, bottomLat, topLat }); //$NON-NLS-1$
 		
 		SQLiteStatement stat = db.compileStatement(IndexConstants.generatePrepareStatementToInsert(IndexPoiTable.getTable(), 8));
 		for (Amenity a : amenities) {
