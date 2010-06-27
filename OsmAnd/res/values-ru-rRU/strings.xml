@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<string name="search_history_city">Город : {0}</string>
+	<string name="search_history_street">Улица : {0}, {1}</string>
+	<string name="search_history_int_streets">Пересечение улиц : {0} x {1} в {2}</string>
+	<string name="search_history_building">Здание : {0}, {1}, {2}</string>
+	<string name="search_history_navigate_to">Переместиться в широта = {0}, долгота= {1}</string>
+	<string name="favorite">Избранное</string>
 	<string name="clear_all">Очистить все</string>
 	<string name="history">История</string>
 	<string name="uploading_data">Загрузка данных...</string>

@@ -194,17 +194,20 @@ public class SearchAddressActivity extends Activity {
 			}
 			if(inters != null){
 				l = inters.getLatLon();
+				String cityName = postcode != null? postcode.getName() :  city.getName(en);
 				historyName = MessageFormat.format(getString(R.string.search_history_int_streets), 
-						street.getName(en), street2.getName(en), city.getName(en)); 
+						street.getName(en), street2.getName(en), cityName); 
 				zoom = 16; 
 			}
 		} else if (building != null) {
 			l = building.getLocation();
-			historyName = MessageFormat.format(getString(R.string.search_history_building), building.getName(en), street.getName(en), city.getName(en));
+			String cityName = postcode != null? postcode.getName() :  city.getName(en);
+			historyName = MessageFormat.format(getString(R.string.search_history_building), building.getName(en), street.getName(en), cityName);
 			zoom = 16;
 		} else if (street != null) {
 			l = street.getLocation();
-			historyName = MessageFormat.format(getString(R.string.search_history_street), street.getName(en), city.getName(en));
+			String cityName = postcode != null? postcode.getName() :  city.getName(en);
+			historyName = MessageFormat.format(getString(R.string.search_history_street), street.getName(en), cityName);
 			zoom = 14;
 		} else if (city != null) {
 			l = city.getLocation();
