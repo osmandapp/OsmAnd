@@ -57,6 +57,7 @@ import com.osmand.data.Amenity;
 import com.osmand.data.AmenityType;
 import com.osmand.osm.Entity;
 import com.osmand.osm.EntityInfo;
+import com.osmand.osm.MapUtils;
 import com.osmand.osm.Node;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 import com.osmand.osm.io.OsmBaseStorage;
@@ -88,12 +89,14 @@ public class EditingPOIActivity {
 		this.view = view;
 	}
 	
-	public void showEditDialog(long id){
-		Node n = loadNode(id);
+	public void showEditDialog(Amenity a){
+		Node n = loadNode(a);
 		if(n != null){
 			dlg = new Dialog(ctx);
 			dlg.setTitle(R.string.poi_edit_title);
 			showDialog(n);
+		} else {
+			Toast.makeText(ctx, ctx.getString(R.string.poi_error_poi_not_found), Toast.LENGTH_SHORT).show();
 		}
 	}
 	
@@ -106,8 +109,8 @@ public class EditingPOIActivity {
 		showDialog(n);
 	}
 	
-	public void showDeleteDialog(long id){
-		final Node n = loadNode(id);
+	public void showDeleteDialog(Amenity a){
+		final Node n = loadNode(a);
 		if(n == null){
 			Toast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
 			return;
@@ -542,24 +545,27 @@ public class EditingPOIActivity {
 		}
 	}
 	
-	public Node loadNode(long id) {
+	public Node loadNode(Amenity n) {
 		try {
-			String res = sendRequest(SITE_API+"api/0.6/node/"+id, "GET", null, ctx.getString(R.string.loading_poi_obj) + id, false); //$NON-NLS-1$ //$NON-NLS-2$
+			String res = sendRequest(SITE_API+"api/0.6/node/"+n.getId(), "GET", null, ctx.getString(R.string.loading_poi_obj) + n.getId(), false); //$NON-NLS-1$ //$NON-NLS-2$
 			if(res != null){
 				OsmBaseStorage st = new OsmBaseStorage();
 				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true); //$NON-NLS-1$
-				Entity entity = st.getRegisteredEntities().get(id);
-				entityInfo = st.getRegisteredEntityInfo().get(id);
+				Entity entity = st.getRegisteredEntities().get(n.getId());
+				entityInfo = st.getRegisteredEntityInfo().get(n.getId());
 				if(entity instanceof Node){
-					return (Node) entity;
+					// check whether this is node (because id of node could be the same as relation) 
+					if(MapUtils.getDistance(entity.getLatLon(), n.getLocation()) < 50){
+						return (Node) entity;
+					}
 				}
 			}
 			
 		} catch (IOException e) {
-			log.error("Loading node failed" + id, e); //$NON-NLS-1$
+			log.error("Loading node failed" + n.getId(), e); //$NON-NLS-1$
 			Toast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
 		} catch (SAXException e) {
-			log.error("Loading node failed" + id, e); //$NON-NLS-1$
+			log.error("Loading node failed" + n.getId(), e); //$NON-NLS-1$
 			Toast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
 		}
 		return null;

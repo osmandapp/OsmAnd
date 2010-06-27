@@ -315,7 +315,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 	}
 	
-	protected void calculateTileRectangle(Rect pixRect, float cx, float cy, float ctilex, float ctiley, RectF tileRect){
+	public void calculateTileRectangle(Rect pixRect, float cx, float cy, float ctilex, float ctiley, RectF tileRect){
 		float x1 = calcDiffTileX(pixRect.left - cx, pixRect.top - cy);
 		float x2 = calcDiffTileX(pixRect.left - cx, pixRect.bottom - cy);
 		float x3 = calcDiffTileX(pixRect.right - cx, pixRect.top - cy);
@@ -331,7 +331,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		tileRect.set(l, t, r, b);
 	}
 	
-	protected void calculatePixelRectangle(Rect pixelRect, float cx, float cy, float ctilex, float ctiley, RectF tileRect){
+	public void calculatePixelRectangle(Rect pixelRect, float cx, float cy, float ctilex, float ctiley, RectF tileRect){
 		float x1 = calcDiffPixelX(tileRect.left - ctilex, tileRect.top - ctiley);
 		float x2 = calcDiffPixelX(tileRect.left - ctilex, tileRect.bottom - ctiley);
 		float x3 = calcDiffPixelX(tileRect.right - ctilex, tileRect.top - ctiley);
@@ -444,6 +444,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	public boolean mapIsRefreshing(){
 		return handler.hasMessages(1);
 	}
+	// this method could be called in non UI thread
 	public void refreshMap() {
 		if(!handler.hasMessages(1)){
 			Message msg = Message.obtain(handler, new Runnable(){

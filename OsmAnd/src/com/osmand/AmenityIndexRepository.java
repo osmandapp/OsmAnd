@@ -1,19 +1,28 @@
 package com.osmand;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
+import org.xml.sax.SAXException;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 
 import com.osmand.data.Amenity;
 import com.osmand.data.AmenityType;
 import com.osmand.data.index.IndexConstants;
 import com.osmand.data.index.IndexConstants.IndexPoiTable;
+import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
+import com.osmand.osm.Node;
+import com.osmand.osm.io.IOsmStorageFilter;
+import com.osmand.osm.io.OsmBaseStorage;
 
 public class AmenityIndexRepository {
 	private static final Log log = LogUtil.getLog(AmenityIndexRepository.class);
@@ -203,6 +212,37 @@ public class AmenityIndexRepository {
 		return name;
 	}
 	
+	private void bindString(SQLiteStatement s, int i, String v){
+		if(v == null){
+			s.bindNull(i);
+		} else {
+			s.bindString(i, v);
+		}
+	}
+	
+	public boolean updateAmenities(List<Amenity> amenities, double leftLon, double topLat, double rightLon, double bottomLat){
+		String latCol = IndexPoiTable.LATITUDE.name();
+		String lonCol = IndexPoiTable.LONGITUDE.name();
+		db.execSQL("DELETE FROM " + IndexPoiTable.getTable() + " WHERE " + //$NON-NLS-1$ //$NON-NLS-2$
+				lonCol + ">= ? AND ? <=" + lonCol + " AND " + //$NON-NLS-1$//$NON-NLS-2$
+				latCol + ">= ? AND ? <=" + latCol, new Double[] { leftLon, rightLon, bottomLat, topLat }); //$NON-NLS-1$
+		
+		SQLiteStatement stat = db.compileStatement(IndexConstants.generatePrepareStatementToInsert(IndexPoiTable.getTable(), 8));
+		for (Amenity a : amenities) {
+			stat.bindLong(IndexPoiTable.ID.ordinal() + 1, a.getId());
+			stat.bindDouble(IndexPoiTable.LATITUDE.ordinal() + 1, a.getLocation().getLatitude());
+			stat.bindDouble(IndexPoiTable.LONGITUDE.ordinal() + 1, a.getLocation().getLongitude());
+			bindString(stat, IndexPoiTable.NAME_EN.ordinal() + 1, a.getEnName());
+			bindString(stat, IndexPoiTable.NAME.ordinal() + 1, a.getName());
+			bindString(stat, IndexPoiTable.TYPE.ordinal() + 1, AmenityType.valueToString(a.getType()));
+			bindString(stat, IndexPoiTable.SUBTYPE.ordinal() + 1, a.getSubType());
+			bindString(stat, IndexPoiTable.OPENING_HOURS.ordinal() + 1 , a.getOpeningHours());
+			stat.execute();
+		}
+		stat.close();
+		return true;
+	}
+	
 	public boolean checkContains(double latitude, double longitude){
 		if(latitude < dataTopLatitude && latitude > dataBottomLatitude && longitude > dataLeftLongitude && longitude < dataRightLongitude){
 			return true;
@@ -221,5 +261,40 @@ public class AmenityIndexRepository {
 	}
 
 
+	private final static String SITE_API = "http://api.openstreetmap.org/"; //$NON-NLS-1$
 	
+	public static boolean loadingPOIs(List<Amenity> amenities, double leftLon, double topLat, double righLon, double bottomLat) {
+		try {
+			// bbox=left,bottom,right,top
+			String u = SITE_API+"api/0.6/map?bbox="+leftLon+","+bottomLat+","+righLon+","+topLat;  //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+			URL url = new URL(u);
+			log.info("Start loading poi : " + u); //$NON-NLS-1$
+			InputStream is = url.openStream();
+			OsmBaseStorage st = new OsmBaseStorage();
+			final List<Entity> amen = new ArrayList<Entity>();
+			st.getFilters().add(new IOsmStorageFilter(){
+				@Override
+				public boolean acceptEntityToLoad(OsmBaseStorage storage, Entity entity) {
+					if(Amenity.isAmenity(entity)){
+						amen.add(entity);
+						return true;
+					}
+					// to 
+					return entity instanceof Node;
+				}
+			});
+			st.parseOSM(is, null, null, false);
+			for (Entity e : amen) {
+				amenities.add(new Amenity(e));
+			}
+			log.info("Loaded " +amenities.size() + " amenities");  //$NON-NLS-1$//$NON-NLS-2$
+		} catch (IOException e) {
+			log.error("Loading nodes failed", e); //$NON-NLS-1$
+			return false;
+		} catch (SAXException e) {
+			log.error("Loading nodes failed", e); //$NON-NLS-1$
+			return false;
+		}
+		return true;
+	}
 }

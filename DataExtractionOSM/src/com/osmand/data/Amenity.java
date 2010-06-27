@@ -28,6 +28,8 @@ public class Amenity extends MapObject {
 			return OSMTagKey.LEISURE.getValue();
 		case HISTORIC:
 			return OSMTagKey.HISTORIC.getValue();
+		case NATURAL:
+			return OSMTagKey.NATURAL.getValue();
 		case TOURISM:
 			return OSMTagKey.TOURISM.getValue();
 		case SPORT:
@@ -40,6 +42,8 @@ public class Amenity extends MapObject {
 	protected String getSubType(Entity node) {
 		if (node.getTag(OSMTagKey.SHOP) != null) {
 			return node.getTag(OSMTagKey.SHOP);
+		} else if (node.getTag(OSMTagKey.NATURAL) != null) {
+			return node.getTag(OSMTagKey.NATURAL);
 		} else if (node.getTag(OSMTagKey.TOURISM) != null) {
 			return node.getTag(OSMTagKey.TOURISM);
 		} else if (node.getTag(OSMTagKey.SPORT) != null) {
@@ -59,6 +63,8 @@ public class Amenity extends MapObject {
 	protected AmenityType getType(Entity node){
 		if(node.getTag(OSMTagKey.SHOP) != null){
 			return AmenityType.SHOP;
+		} else if(node.getTag(OSMTagKey.NATURAL) != null){
+			return AmenityType.NATURAL;
 		} else if(node.getTag(OSMTagKey.TOURISM) != null){
 			return AmenityType.TOURISM;
 		} else if(node.getTag(OSMTagKey.LEISURE) != null){
@@ -93,6 +99,8 @@ public class Amenity extends MapObject {
 		if(n.getTag(OSMTagKey.AMENITY) != null){
 			return true;
 		} else if(n.getTag(OSMTagKey.SHOP) != null){
+			return true;
+		} else if(n.getTag(OSMTagKey.NATURAL) != null){
 			return true;
 		} else if(n.getTag(OSMTagKey.LEISURE) != null){
 			return true;

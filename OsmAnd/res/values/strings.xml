@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="update_poi_success">POI data was updated successfully ({0} were loaded)</string>
+	<string name="update_poi_error_local">Error updating local indexes</string>
+	<string name="update_poi_error_loading">Error while loading data from server</string>
+	<string name="update_poi_no_offline_poi_index">There is no offline poi indexes available for this area</string>
+	<string name="update_poi_is_not_available_for_zoom">Updating poi is not available for small zoom</string>
+	<string name="context_menu_item_update_poi">Update poi</string>
+	<string name="context_menu_item_update_map_confirm">Are you sure about updating local data with internet data?</string>
 	<string name="search_history_city">City : {0}</string>
 	<string name="search_history_street">Street : {0}, {1}</string>
 	<string name="search_history_int_streets">Intersection streets : {0} x {1} in {2}</string>
@@ -197,7 +204,7 @@ See osmand.googlecode.com.</string>
 <string name="context_menu_item_update_map">Update map</string>
 <string name="context_menu_item_open_bug">Open osm bug</string>
 <string name="context_menu_item_create_poi">Create POI</string>
-<string name="context_menu_item_update_map_confirm">Tile image will be removed from file system. Do you want to reload tile from internet?</string>
+
 <string name="default_buttons_yes">Yes</string>
 <string name="default_buttons_cancel">Cancel</string>
 <string name="default_buttons_apply">Apply</string><string name="default_buttons_add">Add</string><string name="default_buttons_no">No</string><string name="add_favorite_dialog_top_text">Input name of favourite point</string>
@@ -230,7 +237,7 @@ See osmand.googlecode.com.</string>
 <string name="osb_comment_dialog_author">Author name</string>
 <string name="poi_edit_title">Edit POI</string>
 <string name="poi_create_title">Create POI</string>
-<string name="poi_error_poi_not_found">POI hasn't found</string>
+<string name="poi_error_poi_not_found">Node can not be found or amenity is not a single node</string>
 <string name="poi_remove_confirm_template">Are you sure to delete {0} (enter comment) ?</string>
 <string name="poi_remove_title">Delete POI</string>
 <string name="default_buttons_delete">Delete</string>

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="search_history_city">Город : {0}</string>
+	<string name="update_poi_success">Данные POI были успешно обновлены ({0} объектов загружено)</string>
+	<string name="update_poi_error_local">Ошибка сохранения POI в локальный индекс</string>
+	<string name="update_poi_error_loading">Ошибка загрузки данных с сервера</string>
+	<string name="update_poi_no_offline_poi_index">Для данной области не имеется ни одного локального индекса POI</string>
+	<string name="update_poi_is_not_available_for_zoom">Обновление POI не доступно для такой большой области</string>
+	<string name="context_menu_item_update_poi">Обновить POI</string>
+	<string name="context_menu_item_update_map_confirm">Вы действительно хотите обновить локальные данные, загрузив их из Интернета?</string>
+	<string name="search_history_city">Город : {0}</string>
 	<string name="search_history_street">Улица : {0}, {1}</string>
 	<string name="search_history_int_streets">Пересечение улиц : {0} x {1} в {2}</string>
 	<string name="search_history_building">Здание : {0}, {1}, {2}</string>
@@ -196,7 +203,7 @@
 <string name="context_menu_item_update_map">Обновить карту</string>
 <string name="context_menu_item_open_bug">Создать open street bug</string>
 <string name="context_menu_item_create_poi">Добавить poi</string>
-<string name="context_menu_item_update_map_confirm">Вы действительно хотите удалить эту часть карты с диска и загрузить ее из Интернет?</string>
+
 <string name="default_buttons_yes">Да</string>
 <string name="default_buttons_cancel">Отмена</string>
 <string name="default_buttons_apply">Применить</string><string name="default_buttons_add">Добавить</string><string name="default_buttons_no">Нет</string><string name="add_favorite_dialog_top_text">Введите имя точки</string>
@@ -229,7 +236,7 @@
 <string name="osb_comment_dialog_author">Автор</string>
 <string name="poi_edit_title">Редактирование POI</string>
 <string name="poi_create_title">Добавление POI</string>
-<string name="poi_error_poi_not_found">POI не найден</string>
+<string name="poi_error_poi_not_found">POI не найден или он не является точкой</string>
 <string name="poi_remove_confirm_template">Вы действительно хотите удалить {0}?</string>
 <string name="poi_remove_title">Удаление POI</string>
 <string name="default_buttons_delete">Удалить</string>

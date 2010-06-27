@@ -3,25 +3,27 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent" android:orientation="vertical">
-<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:stretchColumns="1">
 <TableRow>
-<TextView android:text="@string/poi_dialog_name" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
-<EditText android:text="" android:id="@+id/Name" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content" android:layout_weight="1"></EditText>
+<TextView android:text="@string/poi_dialog_name" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+<!--  bug with width set it to 100 -->
+<EditText android:text="" android:id="@+id/Name" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content" android:layout_width ="100dp"></EditText>
 </TableRow>
 <TableRow>
-<Button android:text="&lt;Type&gt;" android:id="@+id/TypeButton" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
-<AutoCompleteTextView android:text="" android:id="@+id/Type" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content" android:layout_weight="1"/>
-<!--  <EditText android:text="" android:id="@+id/Type" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content" android:layout_weight="1"/>  -->
+<Button android:text="&lt;Type&gt;" android:id="@+id/TypeButton" android:layout_width="wrap_content" android:layout_height="wrap_content"/> 
+<AutoCompleteTextView android:text="" android:id="@+id/Type" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content"  android:layout_width ="fill_parent"/>   
+<!--  <EditText android:text="" android:id="@+id/Type" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content" android:layout_width = "fill_parent" />-->
 </TableRow>
 <TableRow>
-<TextView android:text="@string/poi_dialog_opening_hours" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
-<EditText android:text="" android:hint="Mo-Su 08:00-20:00" android:id="@+id/OpeningHours" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content" android:layout_weight="1"></EditText>
+<TextView android:text="@string/poi_dialog_opening_hours" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+<EditText android:text="" android:hint="Mo-Su 08:00-20:00" android:id="@+id/OpeningHours" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_width ="fill_parent"  android:layout_height="wrap_content"></EditText>
 </TableRow>
 <TableRow>
-<TextView android:text="@string/poi_dialog_comment" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
-<EditText android:text="@string/poi_dialog_comment_default" android:id="@+id/Comment" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content" android:layout_weight="1"></EditText>
+<TextView android:text="@string/poi_dialog_comment" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+<EditText android:text="@string/poi_dialog_comment_default" android:id="@+id/Comment" android:layout_marginLeft="5dp" android:layout_width ="fill_parent" android:layout_marginRight="5dp" android:layout_height="wrap_content"></EditText>
 </TableRow>
 </TableLayout>
+
 <TextView android:text="@string/poi_dialog_other_tags_message" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
 <LinearLayout android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="horizontal" 
 	android:gravity="bottom|center">

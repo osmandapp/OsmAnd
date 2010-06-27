@@ -296,6 +296,7 @@ public class ResourceManager {
 		}
 		return repos;
 	}
+	
 	public List<Amenity> searchAmenities(PoiFilter filter, double latitude, double longitude, int zoom, int limit) {
 		double tileNumberX = MapUtils.getTileNumberX(zoom, longitude);
 		double tileNumberY = MapUtils.getTileNumberY(zoom, latitude);

@@ -19,6 +19,7 @@ public enum AmenityType {
 	ENTERTAINMENT("amenity_type_entertainment"), // cinema, ... (+! sauna, brothel) //$NON-NLS-1$
 	TOURISM("amenity_type_tourism"), // [TAG] hotel, sights, museum .. //$NON-NLS-1$ 
 	HISTORIC("amenity_type_historic"), // [TAG] historic places, monuments (should we unify tourism/historic) //$NON-NLS-1$
+	NATURAL("amenity_type_natural"), // [TAG] natural places, monuments (should we unify tourism/historic) //$NON-NLS-1$
 	SHOP("amenity_type_shop"), // [TAG] convenience (product), clothes... //$NON-NLS-1$
 	LEISURE("amenity_type_leisure"), // [TAG] leisure //$NON-NLS-1$
 	SPORT("amenity_type_sport"), // [TAG] sport //$NON-NLS-1$
@@ -282,6 +283,31 @@ public enum AmenityType {
 		amenityMap.put("theatre", AmenityType.ENTERTAINMENT); //$NON-NLS-1$
 		amenityMap.put("sauna", AmenityType.ENTERTAINMENT); //$NON-NLS-1$
 		amenityMap.put("brothel", AmenityType.ENTERTAINMENT); //$NON-NLS-1$
+		
+		amenityMap.put("bay", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("beach", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("cave_entrance", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("cliff", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("coastline", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("fell", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("glacier", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("heath", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("land", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("heath", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("marsh", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("mud", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("peak", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("sand", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("scree", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("scrub", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("spring", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("stone", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("tree", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("volcano", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("water", AmenityType.NATURAL); //$NON-NLS-1$
+		amenityMap.put("wetland", AmenityType.NATURAL); //$NON-NLS-1$
+		
+		
 		
 		amenityMap.put("internet_access", AmenityType.OTHER); //$NON-NLS-1$
 		amenityMap.put("bench", AmenityType.OTHER); //$NON-NLS-1$

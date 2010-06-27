@@ -23,8 +23,7 @@ public class ToDoConstants {
 	
     //   60. Audio guidance for routing
 	//   61. Provide route information for YOURS (calclate turns/angle/expected time). 
-	//		 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m)
-	//   55. Update POI data from internet for selected area [suggest to create new POI index or extend exising of none exist]
+	//		 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m) [dacha]
 	
 	
     //   43. Enable poi filter by name
@@ -41,6 +40,7 @@ public class ToDoConstants {
 	//   63. Support simple offline routing(require new index file) (?)
 
 	// BUGS Android
+	//  FIXME !!!! Check agains ID is not unique ! (for relation/node/way - it could be the same)
 	
 	// TODO swing
 	// 9. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !
@@ -52,6 +52,7 @@ public class ToDoConstants {
 	// BUGS Swing
 	
 	//  DONE ANDROID :
+	//   55. Update POI data from internet for selected area (do not suggest to create or extend POI index)  
 	//   62. History of searched points	 (once point was selected to go/to show it is saved in history db and could be shown)
 	//   47. Internet connectivity could be checked before trying to use [merged with 45]
     //   26. Show the whole street on map (when it is chosen in search activity). Possibly extend that story to show layer with streets. 
