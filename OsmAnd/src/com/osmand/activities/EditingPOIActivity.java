@@ -33,6 +33,7 @@ import org.xmlpull.v1.XmlSerializer;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -81,11 +82,6 @@ public class EditingPOIActivity {
 	private EditText commentText;
 	private final static Log log = LogUtil.getLog(EditingPOIActivity.class);
 
-	public EditingPOIActivity(final Context ctx){
-		this.ctx = ctx;
-		this.view = null;
-	}
-	
 
 	public EditingPOIActivity(final Context ctx, OsmandMapTileView view){
 		this.ctx = ctx;
@@ -127,12 +123,15 @@ public class EditingPOIActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				String c = comment.getText().toString();
-				if(commitNode(DELETE_ACTION, n, entityInfo, c)){ // NON-NLS
-					Toast.makeText(ctx, ctx.getResources().getString(R.string.poi_remove_success), Toast.LENGTH_LONG).show();
-					if(view != null){
-						view.refreshMap();
+				commitNode(DELETE_ACTION, n, entityInfo, c, new Runnable(){
+					@Override
+					public void run() {
+						Toast.makeText(ctx, ctx.getResources().getString(R.string.poi_remove_success), Toast.LENGTH_LONG).show();
+						if(view != null){
+							view.refreshMap();
+						}						
 					}
-				}
+				});
 			}
 		});
 		builder.show();
@@ -186,22 +185,28 @@ public class EditingPOIActivity {
 			@Override
 			public void onClick(View v) {
 				Resources resources = v.getResources();
-				String msg  = n.getId() == -1 ? resources.getString(R.string.poi_action_add) : resources.getString(R.string.poi_action_change);
-				String action = n.getId() == -1 ? CREATE_ACTION: MODIFY_ACTION; 
+				final String msg = n.getId() == -1 ? resources.getString(R.string.poi_action_add) : resources
+						.getString(R.string.poi_action_change);
+				String action = n.getId() == -1 ? CREATE_ACTION : MODIFY_ACTION;
 				n.putTag(a.convertToAmenityTag(), typeText.getText().toString());
 				n.putTag(OSMTagKey.NAME.getValue(), nameText.getText().toString());
-				if(openingHours.getText().toString().length() == 0){
+				if (openingHours.getText().toString().length() == 0) {
 					n.removeTag(OSMTagKey.OPENING_HOURS.getValue());
-				} else { 
+				} else {
 					n.putTag(OSMTagKey.OPENING_HOURS.getValue(), openingHours.getText().toString());
-			}
-				if (commitNode(action, n, entityInfo, commentText.getText().toString())) {
-					Toast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_action_succeded_template), msg), Toast.LENGTH_LONG).show();
-					if(view != null){
-						view.refreshMap();
-					}
 				}
-				dlg.dismiss();
+				commitNode(action, n, entityInfo, commentText.getText().toString(), new Runnable() {
+					@Override
+					public void run() {
+						Toast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_action_succeded_template), msg),
+								Toast.LENGTH_LONG).show();
+						if (view != null) {
+							view.refreshMap();
+						}
+						dlg.dismiss();
+
+					}
+				});
 			}
 		});
 		
@@ -216,6 +221,16 @@ public class EditingPOIActivity {
 		List<String> subCategories = AmenityType.getSubCategories(a.getType());
 		ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(ctx, R.layout.list_textview, subCategories.toArray());
 		typeText.setAdapter(adapter);
+	}
+	
+	private void showWarning(final String msg){
+		view.post(new Runnable(){
+			@Override
+			public void run() {
+				Toast.makeText(ctx, msg, Toast.LENGTH_LONG).show();
+			}
+			
+		});
 	}
 	
 	
@@ -266,13 +281,13 @@ public class EditingPOIActivity {
 				
 				String msg;
 				if(response.getStatusLine() != null){
-					msg = userOperation + " failed" ; //$NON-NLS-1$
+					msg = userOperation + " " +ctx.getString(R.string.failed_op); //$NON-NLS-1$
 				} else {
-					msg = userOperation + " failed " + response.getStatusLine().getStatusCode() +" : "+   //$NON-NLS-1$//$NON-NLS-2$
+					msg = userOperation + " " + ctx.getString(R.string.failed_op) + response.getStatusLine().getStatusCode() + " : " + //$NON-NLS-1$//$NON-NLS-2$
 							response.getStatusLine().getReasonPhrase();
 				}
 				log.error(msg);
-				Toast.makeText(ctx, msg, Toast.LENGTH_LONG).show();
+				showWarning(msg);
 			} else {
 				InputStream is = response.getEntity().getContent();
 				if (is != null) {
@@ -289,10 +304,10 @@ public class EditingPOIActivity {
 			}
 		} catch (MalformedURLException e) {
 			log.error(userOperation + " failed", e); //$NON-NLS-1$
-			Toast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_error_unexpected_template), userOperation), Toast.LENGTH_LONG).show();
+			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.poi_error_unexpected_template), userOperation));
 		} catch (IOException e) {
 			log.error(userOperation + " failed", e); //$NON-NLS-1$
-			Toast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_error_unexpected_template), userOperation), Toast.LENGTH_LONG).show();
+			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.poi_error_unexpected_template), userOperation));
 		}
 		return null; 
 		
@@ -327,9 +342,9 @@ public class EditingPOIActivity {
 			}
 			connection.connect();
 			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-				String msg = userOperation + ctx.getString(R.string.failed_op) + connection.getResponseMessage();
+				String msg = userOperation + " " + ctx.getString(R.string.failed_op) + " : " +  connection.getResponseMessage();  //$NON-NLS-1$//$NON-NLS-2$
 				log.error(msg);
-				Toast.makeText(ctx, msg, Toast.LENGTH_LONG).show();
+				showWarning(msg);
 			} else {
 				log.info("Response : " + connection.getResponseMessage()); //$NON-NLS-1$
 				// populate return fields.
@@ -354,13 +369,13 @@ public class EditingPOIActivity {
 			// that's tricky case why NPE is thrown to fix that problem httpClient could be used
 			String msg = ctx.getString(R.string.auth_failed);
 			log.error(msg , e);
-			Toast.makeText(ctx, msg, Toast.LENGTH_LONG).show();
+			showWarning(msg);
 		} catch (MalformedURLException e) {
-			log.error(userOperation + ctx.getString(R.string.failed_op) , e);
-			Toast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_error_unexpected_template), userOperation), Toast.LENGTH_LONG).show();
+			log.error(userOperation + " " + ctx.getString(R.string.failed_op) , e); //$NON-NLS-1$
+			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.poi_error_unexpected_template), userOperation));
 		} catch (IOException e) {
-			log.error(userOperation + ctx.getString(R.string.failed_op) , e);
-			Toast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_error_io_error_template), userOperation), Toast.LENGTH_LONG).show();
+			log.error(userOperation + " " + ctx.getString(R.string.failed_op) , e); //$NON-NLS-1$
+			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.poi_error_io_error_template), userOperation));
 		}
 
 		return null;
@@ -451,12 +466,30 @@ public class EditingPOIActivity {
 		
 	}
 	
-	public boolean commitNode(String action, Node n, EntityInfo info, String comment){
-		if(info == null && !CREATE_ACTION.equals(action)){
+	
+	public void commitNode(final String action, final Node n, final EntityInfo info, final String comment, final Runnable successAction) {
+		if (info == null && !CREATE_ACTION.equals(action)) {
 			Toast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();
-			return false;
+			return;
 		}
-		
+		final ProgressDialog progress = ProgressDialog.show(ctx, ctx.getString(R.string.uploading), ctx.getString(R.string.uploading_data));
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					if (commitNodeImpl(action, n, info, comment)) {
+						view.post(successAction);
+					}
+				} finally {
+					progress.dismiss();
+				}
+
+			}
+		}, "EditingPoi").start(); //$NON-NLS-1$
+	}
+	
+	public boolean commitNodeImpl(String action, Node n, EntityInfo info, String comment){
 		long changeSetId = openChangeSet(comment, n.getLatitude(), n.getLongitude());
 		if(changeSetId < 0){
 			return false;

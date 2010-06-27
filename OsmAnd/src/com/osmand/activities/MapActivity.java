@@ -742,7 +742,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 				} else if(which == 2){
 					osmBugsLayer.openBug(MapActivity.this, getLayoutInflater(), mapView, latitude, longitude);
 				} else if(which == 3){
-					EditingPOIActivity activity = new EditingPOIActivity(MapActivity.this);
+					EditingPOIActivity activity = new EditingPOIActivity(MapActivity.this, mapView);
 					activity.showCreateDialog(latitude, longitude);
 				} else if(which == 4){
 					reloadTile(mapView.getZoom(), latitude, longitude);

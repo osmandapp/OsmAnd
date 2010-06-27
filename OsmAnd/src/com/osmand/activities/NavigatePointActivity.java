@@ -2,6 +2,7 @@ package com.osmand.activities;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.MessageFormat;
 import java.util.Locale;
 
 import android.app.Activity;
@@ -125,7 +126,7 @@ public class NavigatePointActivity extends Activity {
 			if(activity != null) {
 				activity.setMapLocation(lat, lon);
 			} else {
-				OsmandSettings.setMapLocationToShow(this, lat, lon);
+				OsmandSettings.setMapLocationToShow(this, lat, lon, MessageFormat.format(getString(R.string.search_history_navigate_to), lat, lon));
 			}
 			if(navigate){
 				OsmandSettings.setPointToNavigate(this, lat, lon);

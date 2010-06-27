@@ -8,7 +8,7 @@
 <TextView android:id="@+id/TextView" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center_horizontal"
 		  android:layout_marginTop = "5dp" android:text="@string/search_address_top_text">
 </TextView>
-<ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content">
+<ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1">
 <TableLayout android:id="@+id/TableLayout" android:stretchColumns="1" android:layout_width="fill_parent" android:layout_height="wrap_content">
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp">
 <TextView android:id="@+id/TextView" android:text="@string/search_address_region">
@@ -49,18 +49,27 @@
 
 </RadioGroup>
 </TableRow>
-<TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp" >
-<LinearLayout  android:id="@+id/LinearLayout" android:layout_width="wrap_content" android:layout_height="wrap_content"  
-				android:layout_span="3"	android:gravity="right|bottom" android:layout_marginRight = "5dp" android:layout_marginTop = "10dp">
-<Button android:layout_height="wrap_content" android:id="@+id/NavigateTo" android:text="@string/navigate_to" android:layout_width="100dip">
-</Button>
-<Button android:layout_height="wrap_content" android:id="@+id/ShowOnMap" android:text="@string/search_shown_on_map" android:layout_width="100dip">
-</Button>
 
-</LinearLayout>
-</TableRow>
 </TableLayout> 
+</ScrollView>
 
-</ScrollView> 
+
+<LinearLayout  android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:layout_height="wrap_content"  
+				android:layout_marginRight = "5dp" android:layout_marginTop = "5dp">
+<LinearLayout  android:id="@+id/LinearLayout" android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:gravity="left|bottom" >
+<Button android:layout_height="wrap_content" android:id="@+id/SearchOnline" android:text="@string/search_online_address" 
+			android:layout_width="wrap_content">
+</Button>
+</LinearLayout>
+				
+<LinearLayout  android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:gravity="right|bottom" >
+<Button android:layout_height="wrap_content" android:id="@+id/NavigateTo" android:text="@string/navigate_to" android:layout_width="wrap_content">
+</Button>
+<Button android:layout_height="wrap_content" android:id="@+id/ShowOnMap" android:text="@string/search_shown_on_map" android:layout_width="wrap_content">
+</Button>
+</LinearLayout>
+</LinearLayout> 
 
 </LinearLayout>

@@ -116,6 +116,10 @@ public class PoiFiltersHelper {
 		return Collections.unmodifiableList(cacheUserDefinedFilters);
 	}
 	
+	public static String getOsmDefinedFilterId(AmenityType t){
+		return PoiFilter.STD_PREFIX + t;
+	}
+	
 	private static List<PoiFilter> cacheOsmDefinedFilters;
 	public static List<PoiFilter> getOsmDefinedPoiFilters(Context ctx){
 		if(cacheOsmDefinedFilters == null){

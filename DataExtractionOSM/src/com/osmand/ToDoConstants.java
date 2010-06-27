@@ -18,30 +18,28 @@ public class ToDoConstants {
 	//   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
 	//		 Some icons are not fine (as back menu from map - it is blured).
 	//       Got by Andrei
-	
 	//   50. Invent opening hours editor in order to edit POI hours better on device
 	//		 GOT by Olga
 	
     //   60. Audio guidance for routing
-	//   61. Provide route information for YOURS (calclate turns/angle/expected time)
-	//   58. Upload/Download zip-index from site & unzip them on phone
-	//   53. Add progress bars : to internet communication activities [editing/commiting/deleting poi], do not hide edit poi dialog if operation failed 
-	//		 [move close buttons from alertdialog to own view]
+	//   61. Provide route information for YOURS (calclate turns/angle/expected time). 
+	//		 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m)
 	//   55. Update POI data from internet for selected area [suggest to create new POI index or extend exising of none exist]
+	
+	
     //   43. Enable poi filter by name
+	//   58. Upload/Download zip-index from site & unzip them on phone
 	//   45. Get clear <Use internet> settings. Move that setting on top settings screen. 
 	//       That setting should rule all activities that use internet. It should ask whenever internet is used 
 	//		(would you like to use internet for that operation - if using internet is not checked). 
 	//		Internet using now for : edit POI osm, show osm bugs layer, download tiles.
-	
 	//   33. Build transport locations. Create transport index (transport-stops) (investigate)
 	// 		 DONE: Load transport routes in swing.	
-	//		 IDEA TO HAVE :   
-	//   47. Internet connectivity could be checked before trying to use (?)
-    //   40. Support simple vector road rendering (require new index file) (?)
-    //   26. Show the whole street on map (when it is chosen in search activity). Possibly extend that story to show layer with streets. (?)
+	//		 IDEA TO HAVE :
+	   
+	//   40. Support simple vector road rendering (require new index file) (?)
+	//   63. Support simple offline routing(require new index file) (?)
 
-	
 	// BUGS Android
 	
 	// TODO swing
@@ -53,7 +51,13 @@ public class ToDoConstants {
 	
 	// BUGS Swing
 	
-	// DONE ANDROID :
+	//  DONE ANDROID :
+	//   62. History of searched points	 (once point was selected to go/to show it is saved in history db and could be shown)
+	//   47. Internet connectivity could be checked before trying to use [merged with 45]
+    //   26. Show the whole street on map (when it is chosen in search activity). Possibly extend that story to show layer with streets. 
+	// 		 [Closed : because it is not necessary]
+	//   53. Add progress bars : to internet communication activities [editing/commiting/deleting poi], do not hide edit poi dialog if operation failed
+	//   63. Implement internet search address [OSM Nominatim]
 	//   56. Add usage of CloudMade API for calculating route (show next turn & distance to it instead of mini map).
 	//   57. Implement routing information about expected time arriving
 	//   58. Implement difference about show route/follow route (show travel time/arrival time, show mini map/next turn, etc)

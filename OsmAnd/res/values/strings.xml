@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="search_history_city">City : {0}</string>
+	<string name="search_history_street">Street : {0}, {1}</string>
+	<string name="search_history_int_streets">Intersection streets : {0} x {1} in {2}</string>
+	<string name="search_history_building">Building : {0}, {1}, {2}</string>
+	<string name="search_history_navigate_to">Navigate to lat = {0}, lon = {1}</string>
+	<string name="favorite">Favorite</string>
+	<string name="clear_all">Clear all</string>
+	<string name="history">History</string>
+	<string name="uploading_data">Uploading data...</string>
+	<string name="uploading">Uploading</string>
+	<string name="search_nothing_found">Nothing was found</string>
+	<string name="searching">Searching</string>
+	<string name="searching_address">Searching address...</string>
+	<string name="search_osm_nominatim">Search address using Osm Nominatim</string>
+	<string name="hint_search_online">House number, street, city</string>
+	<string name="search_offline_address">Offline</string>
+	<string name="search_online_address">Internet</string>
 	<string name="max_level_download_tile">Max zoom level</string>
 	<string name="max_level_download_tile_descr">Choose max zoom level to download using internet</string>
 	<string name="route_about">About route</string>
@@ -35,7 +52,7 @@ See osmand.googlecode.com.</string>
 	<string name="commiting_node">Commiting node</string>
 	<string name="loading_poi_obj">Loading poi </string>
 	<string name="auth_failed"> Authorization failed</string>
-	<string name="failed_op"> failed : </string>
+	<string name="failed_op">failed</string>
 	<string name="converting_names">Converting native/english names...</string>
 	<string name="loading_streets_buildings">Loading streets/buildings...</string>
 	<string name="loading_postcodes">Loading postcodes...</string>
@@ -47,7 +64,7 @@ See osmand.googlecode.com.</string>
 	<string name="error_calculating_route">Error calculating route : </string>
 	<string name="error_calculating_route_occured">Error occurred while calculating route</string>
 	<string name="empty_route_calculated">Empty route is calculated</string>									
-	<string name="new_route_calculated_dist">New route is calculated, distance :</string>
+	<string name="new_route_calculated_dist">New route is calculated, distance : </string>
 	<string name="arrived_at_destination">You arrived at destination point</string>
 	<string name="invalid_locations">Locations are invalid</string>
 	<string name="go_back_to_osmand">Go back to OsmAnd map</string>
@@ -115,7 +132,7 @@ See osmand.googlecode.com.</string>
     <string name="rotate_map_to_bearing">Rotate map</string>
     <string name="show_poi_over_map_description">Show POI over map (use last chosen filter)</string>
     <string name="show_poi_over_map">Show POI</string>
-    <string name="map_tile_source_descr">Choose the source of tiles:</string>
+    <string name="map_tile_source_descr">Choose the source of tiles : </string>
     <string name="map_tile_source">Map tile source</string>
     <string name="map_source">Map source</string>
     <string name="use_internet">Use internet</string>
@@ -218,8 +235,8 @@ See osmand.googlecode.com.</string>
 <string name="poi_remove_title">Delete POI</string>
 <string name="default_buttons_delete">Delete</string>
 <string name="poi_remove_success">POI was successfully deleted</string>
-<string name="poi_action_add">Add</string>
-<string name="poi_action_change">Change</string>
+<string name="poi_action_add">add</string>
+<string name="poi_action_change">change</string>
 <string name="poi_action_succeded_template">Action {0} completed successfully.</string>
 <string name="poi_error_unexpected_template">Unexpected error occured while performing action {0}.</string>
 <string name="poi_error_io_error_template">Input/output error occured while performing action {0}.</string>

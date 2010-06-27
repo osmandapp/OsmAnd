@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 import com.osmand.activities.RouteProvider.RouteService;
+import com.osmand.activities.search.SearchHistoryHelper;
 import com.osmand.map.ITileSource;
 import com.osmand.map.TileSourceManager;
 import com.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -260,12 +261,19 @@ public class OsmandSettings {
 	}
 
 	public static void setMapLocationToShow(Context ctx, double latitude, double longitude) {
+		setMapLocationToShow(ctx, latitude, longitude, null);
+	}
+	
+	public static void setMapLocationToShow(Context ctx, double latitude, double longitude, String historyDescription) {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		Editor edit = prefs.edit();
 		edit.putFloat(LAST_KNOWN_MAP_LAT, (float) latitude);
 		edit.putFloat(LAST_KNOWN_MAP_LON, (float) longitude);
 		edit.putBoolean(IS_MAP_SYNC_TO_GPS_LOCATION, false);
 		edit.commit();
+		if(historyDescription != null){
+			SearchHistoryHelper.getInstance().addNewItemToHistory(latitude, longitude, historyDescription, ctx);
+		}
 	}
 
 	// Do not use that method if you want to show point on map. Use setMapLocationToShow
