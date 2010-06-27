@@ -1,6 +1,7 @@
 package com.osmand.activities;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -8,6 +9,7 @@ import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
 import android.content.ComponentName;
 import android.content.DialogInterface;
@@ -17,6 +19,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.PointF;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -29,6 +33,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.util.FloatMath;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -44,6 +49,7 @@ import android.widget.Toast;
 import android.widget.ZoomControls;
 
 import com.osmand.Algoritms;
+import com.osmand.AmenityIndexRepository;
 import com.osmand.LogUtil;
 import com.osmand.OsmandSettings;
 import com.osmand.R;
@@ -52,6 +58,7 @@ import com.osmand.Version;
 import com.osmand.activities.FavouritesActivity.FavouritePoint;
 import com.osmand.activities.FavouritesActivity.FavouritesDbHelper;
 import com.osmand.activities.search.SearchActivity;
+import com.osmand.data.Amenity;
 import com.osmand.data.preparation.MapTileDownloader;
 import com.osmand.data.preparation.MapTileDownloader.DownloadRequest;
 import com.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
@@ -709,16 +716,90 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     	Builder builder = new AlertDialog.Builder(this);
     	builder.setMessage(R.string.context_menu_item_update_map_confirm);
     	builder.setNegativeButton(R.string.default_buttons_cancel, null);
-    	builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener(){
+    	builder.setPositiveButton(R.string.context_menu_item_update_map, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				int x = (int) MapUtils.getTileNumberX(zoom, longitude);
-				int y = (int) MapUtils.getTileNumberY(zoom, latitude);
-				ResourceManager.getResourceManager().clearTileImageForMap(null, mapView.getMap(), x, y, zoom);
+				Rect pixRect = new Rect(0, 0, mapView.getWidth(), mapView.getHeight());
+		    	RectF tilesRect = new RectF();
+		    	mapView.calculateTileRectangle(pixRect, mapView.getCenterPointX(), mapView.getCenterPointY(), 
+		    			mapView.getXTile(), mapView.getYTile(), tilesRect);
+		    	int left = (int) FloatMath.floor(tilesRect.left);
+				int top = (int) FloatMath.floor(tilesRect.top);
+				int width = (int) (FloatMath.ceil(tilesRect.right) - left);
+				int height = (int) (FloatMath.ceil(tilesRect.bottom) - top);
+				for (int i = 0; i <width; i++) {
+					for (int j = 0; j< height; j++) {
+						ResourceManager.getResourceManager().clearTileImageForMap(null, mapView.getMap(), i + left, j + top, zoom);	
+					}
+				}
+				
+				
 				mapView.refreshMap();
 			}
     	});
+    	builder.setNeutralButton(R.string.context_menu_item_update_poi, new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				updatePoiDb(zoom, latitude, longitude);
+				
+			}
+    	});
 		builder.create().show();
+    }
+    
+    protected void showToast(final String msg){
+    	runOnUiThread(new Runnable(){
+			@Override
+			public void run() {
+				Toast.makeText(MapActivity.this, msg, Toast.LENGTH_LONG).show();
+			}
+    	});
+    }
+    
+    protected void updatePoiDb(int zoom, double latitude, double longitude){
+    	if(zoom < 15){
+    		Toast.makeText(this, getString(R.string.update_poi_is_not_available_for_zoom), Toast.LENGTH_SHORT).show();
+    		return;
+    	}
+    	final List<AmenityIndexRepository> repos = ResourceManager.getResourceManager().searchRepositories(latitude, longitude);
+    	if(repos.isEmpty()){
+    		Toast.makeText(this, getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_SHORT).show();
+    		return;
+    	}
+    	Rect pixRect = new Rect(-mapView.getWidth()/2, -mapView.getHeight()/2, 3*mapView.getWidth()/2, 3*mapView.getHeight()/2);
+    	RectF tileRect = new RectF();
+    	mapView.calculateTileRectangle(pixRect, mapView.getCenterPointX(), mapView.getCenterPointY(), 
+    			mapView.getXTile(), mapView.getYTile(), tileRect);
+    	final double leftLon = MapUtils.getLongitudeFromTile(zoom, tileRect.left); 
+    	final double topLat = MapUtils.getLatitudeFromTile(zoom, tileRect.top);
+		final double rightLon = MapUtils.getLongitudeFromTile(zoom, tileRect.right);
+		final double bottomLat = MapUtils.getLatitudeFromTile(zoom, tileRect.bottom);
+    	
+    	final ProgressDialog dlg = ProgressDialog.show(this, getString(R.string.loading), getString(R.string.loading_data));
+    	new Thread(new Runnable(){
+			@Override
+			public void run() {
+				try {
+					List<Amenity> amenities = new ArrayList<Amenity>();
+					boolean loadingPOIs = AmenityIndexRepository.loadingPOIs(amenities, leftLon, topLat, rightLon, bottomLat);
+					if(!loadingPOIs){
+						showToast(getString(R.string.update_poi_error_loading));
+					} else {
+						for(AmenityIndexRepository r  : repos){
+							r.updateAmenities(amenities, leftLon, topLat, rightLon, bottomLat);
+						}
+						showToast(MessageFormat.format(getString(R.string.update_poi_success), amenities.size()));
+						mapView.refreshMap();
+					}
+				} catch(Exception e) {
+					Log.e(LogUtil.TAG, "Error updating local data", e); //$NON-NLS-1$
+					showToast(getString(R.string.update_poi_error_local));
+				}finally {
+					dlg.dismiss();
+				}
+			}
+    	}, "LoadingPOI").start(); //$NON-NLS-1$
+    	
     }
     
     protected void contextMenuPoint(final double latitude, final double longitude, boolean menu){
@@ -729,7 +810,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
         			resources.getString(R.string.context_menu_item_add_favorite),
         			resources.getString(R.string.context_menu_item_open_bug),
         			resources.getString(R.string.context_menu_item_create_poi),
-        			resources.getString(R.string.context_menu_item_update_map),
+        			resources.getString(R.string.context_menu_item_update_map)
         	};
     	builder.setItems(res, new DialogInterface.OnClickListener(){
 
