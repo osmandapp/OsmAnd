@@ -19,6 +19,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.FloatMath;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -44,6 +45,11 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	protected final int emptyTileDivisor = 16;
 	protected final int timeForDraggingAnimation = 300;
 	protected final int minimumDistanceForDraggingAnimation = 40;
+	
+	public interface OnTrackBallListener{
+		public boolean onTrackBallEvent(MotionEvent e);
+		public boolean onTrackBallPressed();
+	}
 	
 	public interface OnLongClickListener {
 		public boolean onLongPressEvent(PointF point);
@@ -75,6 +81,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private OnLongClickListener onLongClickListener;
 	
 	private OnClickListener onClickListener;
+	
+	private OnTrackBallListener trackBallDelegate;
 	
 	private List<OsmandMapLayer> layers = new ArrayList<OsmandMapLayer>();
 	
@@ -131,6 +139,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 		setClickable(true);
 		setLongClickable(true);
+		setFocusable(true);
 		super.setOnLongClickListener(this);
 		super.setOnClickListener(this);
 		
@@ -139,8 +148,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		animatedDraggingThread = new AnimateDraggingMapThread();
 		animatedDraggingThread.setCallback(this);
 	}
-	
-	
 	
 	
 	
@@ -658,6 +665,26 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 		
 		return true;
+	}
+	
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		if(trackBallDelegate != null && keyCode == KeyEvent.KEYCODE_DPAD_CENTER){
+			return trackBallDelegate.onTrackBallPressed();
+		}
+		return super.onKeyUp(keyCode, event);
+	}
+	
+	@Override
+	public boolean onTrackballEvent(MotionEvent event) {
+		if(trackBallDelegate != null){
+			trackBallDelegate.onTrackBallEvent(event);
+		}
+		return super.onTrackballEvent(event);
+	}
+	
+	public void setTrackBallDelegate(OnTrackBallListener trackBallDelegate) {
+		this.trackBallDelegate = trackBallDelegate;
 	}
 	
 	@Override

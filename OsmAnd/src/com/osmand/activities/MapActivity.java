@@ -139,6 +139,18 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		setContentView(R.layout.main);
 		
 		mapView = (OsmandMapTileView) findViewById(R.id.MapView);
+		mapView.setTrackBallDelegate(new OsmandMapTileView.OnTrackBallListener(){
+			@Override
+			public boolean onTrackBallEvent(MotionEvent e) {
+				return MapActivity.this.onTrackballEvent(e);
+			}
+
+			@Override
+			public boolean onTrackBallPressed() {
+				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude(), true);
+	        	return true;
+			}
+		});
 		MapTileDownloader.getInstance().addDownloaderCallback(new IMapDownloaderCallback(){
 			@Override
 			public void tileDownloaded(DownloadRequest request) {
@@ -236,6 +248,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		});
 		
 		
+		
 		backToMenu = (ImageButton)findViewById(R.id.BackToMenu);
 		backToMenu.setOnClickListener(new OnClickListener() {
 			@Override
@@ -285,11 +298,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     		double lon = MapUtils.getLongitudeFromTile(mapView.getZoom(), x);
     		setMapLocation(lat, lon);
     		return true;
-    		// that doesn't work for now
-//    	} else if(event.getAction() == MotionEvent.ACTION_UP){
-//    		contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
-//    		return true;
-    	}
+    	} 
     	return super.onTrackballEvent(event);
     }
     
