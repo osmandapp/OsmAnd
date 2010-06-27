@@ -114,7 +114,9 @@ public class SearchHistoryHelper {
 		if(i == loadedEntries.size()){
 			i = -1;
 		}
-		updateModelAt(model, helper, i);
+		if (i != 0) {
+			updateModelAt(model, helper, i);
+		}
 		helper.close();
 		return model;
 	}
