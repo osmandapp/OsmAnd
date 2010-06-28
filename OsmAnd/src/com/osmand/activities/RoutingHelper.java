@@ -162,13 +162,41 @@ public class RoutingHelper {
 				float dist = currentLocation.distanceTo(routeNodes.get(currentRoute));
 				while(currentRoute + 1 < routeNodes.size()){
 					float newDist = currentLocation.distanceTo(routeNodes.get(currentRoute + 1));
-					if (newDist < dist) {
+					boolean proccesed = false;
+					if (newDist < dist){
+						if(newDist > 150){
+							if(log.isDebugEnabled()){
+								log.debug("Processed distance : " + newDist + " " + dist);  //$NON-NLS-1$//$NON-NLS-2$
+							}
+							proccesed = true;
+						} else {
+							// case if you are getting close to the next point after turn
+							//  but you haven't turned before (could be checked bearing)
+							if(currentLocation.hasBearing() || lastFixedLocation != null){
+								float bearingToPoint = currentLocation.bearingTo(routeNodes.get(currentRoute));
+								float bearingBetweenPoints = routeNodes.get(currentRoute).bearingTo(routeNodes.get(currentRoute+1));
+								float bearing = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation.bearingTo(currentLocation);
+								if(Math.abs(bearing - bearingToPoint) >
+									Math.abs(bearing - bearingBetweenPoints)){
+									if(log.isDebugEnabled()){
+										log.debug("Processed point bearing : " + Math.abs(currentLocation.getBearing() - bearingToPoint) + " " //$NON-NLS-1$ //$NON-NLS-2$
+												+ Math.abs(currentLocation.getBearing() - bearingBetweenPoints));
+									}
+									proccesed = true;
+								}
+							}
+							
+							
+						}
+					}
+					if(proccesed){
 						// that node already passed
 						updateCurrentRoute(currentRoute + 1);
 						dist = newDist;
 					} else {
 						break;
 					}
+						
 				}
 				// 2. check if destination found
 				if(finishAtLocation(currentLocation)){
@@ -179,7 +207,11 @@ public class RoutingHelper {
 				if(currentRoute + 1 < routeNodes.size()){
 					float bearing = routeNodes.get(currentRoute).bearingTo(routeNodes.get(currentRoute + 1));
 					float bearingMovement = currentLocation.bearingTo(routeNodes.get(currentRoute));
-					if(Math.abs(bearing - bearingMovement) > 130 && Math.abs(bearing - bearingMovement) < 230){
+					// only 35 degrees for that case because it wrong catches sharp turns 
+					if(Math.abs(bearing - bearingMovement) > 140 && Math.abs(bearing - bearingMovement) < 220){
+						if(log.isDebugEnabled()){
+							log.debug("Processed point movement bearing  : "+bearingMovement +" bearing " + bearing); //$NON-NLS-1$ //$NON-NLS-2$
+						}
 						updateCurrentRoute(currentRoute + 1);
 					}
 				}
