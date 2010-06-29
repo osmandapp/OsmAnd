@@ -349,15 +349,23 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     
     private void updateSpeedBearing(Location location) {
 		// For gps it's bad way. It's widely used for testing purposes
-    	if(!providerSupportsSpeed && locationLayer.getLastKnownLocation() != null && location != null){
-    		if (locationLayer.getLastKnownLocation().distanceTo(location) > 3) {
+		if (!providerSupportsSpeed && locationLayer.getLastKnownLocation() != null && location != null) {
+			if (locationLayer.getLastKnownLocation().distanceTo(location) > 3) {
 				float d = location.distanceTo(locationLayer.getLastKnownLocation());
-				if (d > 100) {
-					d = 100;
+				long time = location.getTime() - locationLayer.getLastKnownLocation().getTime();
+				float speed;
+				if (time == 0) {
+					speed = 0;
+				} else {
+					speed = ((float) d * 1000) / time ;
 				}
-				location.setSpeed(d);
+
+				if (speed > 100) {
+					speed = 100;
+				}
+				location.setSpeed(speed);
 			}
-    	}
+		}
     	if(!providerSupportsBearing && locationLayer.getLastKnownLocation() != null && location != null){
     		if(locationLayer.getLastKnownLocation().distanceTo(location) > 10){
     			location.setBearing(locationLayer.getLastKnownLocation().bearingTo(location));
