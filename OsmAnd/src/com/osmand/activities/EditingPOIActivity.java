@@ -562,10 +562,10 @@ public class EditingPOIActivity {
 			}
 			
 		} catch (IOException e) {
-			log.error("Loading node failed" + n.getId(), e); //$NON-NLS-1$
+			log.error("Loading node failed " + n.getId(), e); //$NON-NLS-1$
 			Toast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
 		} catch (SAXException e) {
-			log.error("Loading node failed" + n.getId(), e); //$NON-NLS-1$
+			log.error("Loading node failed " + n.getId(), e); //$NON-NLS-1$
 			Toast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
 		}
 		return null;

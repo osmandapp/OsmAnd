@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="hello">Navigation application OsmAnd</string>
 	<string name="update_poi_success">POI data was updated successfully ({0} were loaded)</string>
 	<string name="update_poi_error_local">Error updating local indexes</string>
 	<string name="update_poi_error_loading">Error while loading data from server</string>
@@ -148,8 +149,8 @@ See osmand.googlecode.com.</string>
     <string name="settings_activity">Settings</string>
     <string name="show_gps_coordinates_text">Show gps coordinates on map</string>
     <string name="use_internet_to_download_tile">Use internet to download missing tiles</string>
-    <string name="hello">Hello World, StartActivity!</string>
     <string name="app_name">OsmAnd</string>
+    <string name="app_description">Navigation application</string>
 
 <string name="exit_Button">Exit</string>
 <string name="map_Button">Map</string>

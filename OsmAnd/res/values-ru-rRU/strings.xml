@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="hello">Навигационное приложение OsmAnd</string>
 	<string name="update_poi_success">Данные POI были успешно обновлены ({0} объектов загружено)</string>
 	<string name="update_poi_error_local">Ошибка сохранения POI в локальный индекс</string>
 	<string name="update_poi_error_loading">Ошибка загрузки данных с сервера</string>
@@ -148,8 +149,8 @@
     <string name="settings_activity">Настройки</string>
     <string name="show_gps_coordinates_text">Показать gps координаты на карте</string>
     <string name="use_internet_to_download_tile">Использовать Интернет для загрузки недостающих частей карты</string>
-    <string name="hello">Hello World, StartActivity!</string>
     <string name="app_name">OsmAnd</string>
+    <string name="app_description">Навигационное приложение</string>
 
 <string name="exit_Button">Выход</string>
 <string name="map_Button">Карта</string>
