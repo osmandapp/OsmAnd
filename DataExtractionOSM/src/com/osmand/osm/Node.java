@@ -37,7 +37,7 @@ public class Node extends Entity {
 	}
 	
 	@Override
-	public void initializeLinks(Map<Long, Entity> entities) {
+	public void initializeLinks(Map<EntityId, Entity> entities) {
 		// nothing to initialize
 		
 	}

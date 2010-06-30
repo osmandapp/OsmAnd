@@ -4,6 +4,7 @@ import com.osmand.osm.Entity;
 import com.osmand.osm.Node;
 import com.osmand.osm.Relation;
 import com.osmand.osm.Way;
+import com.osmand.osm.Entity.EntityId;
 
 public class OsmBoundsFilter implements IOsmStorageFilter {
 	
@@ -41,7 +42,7 @@ public class OsmBoundsFilter implements IOsmStorageFilter {
 			return false;
 		}
 		if(entity instanceof Relation){
-			for(Long l : ((Relation) entity).getMemberIds()){
+			for(EntityId l : ((Relation) entity).getMemberIds()){
 				if(storage.getRegisteredEntities().containsKey(l)){
 					return true;
 				}

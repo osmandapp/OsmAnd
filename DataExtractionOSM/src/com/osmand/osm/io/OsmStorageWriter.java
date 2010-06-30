@@ -41,6 +41,7 @@ import com.osmand.osm.EntityInfo;
 import com.osmand.osm.Node;
 import com.osmand.osm.Relation;
 import com.osmand.osm.Way;
+import com.osmand.osm.Entity.EntityId;
 import com.sun.org.apache.xerces.internal.impl.PropertyManager;
 import com.sun.xml.internal.stream.writers.XMLStreamWriterImpl;
 
@@ -54,9 +55,9 @@ public class OsmStorageWriter {
 	}
 	
 	
-	public void saveStorage(OutputStream output, OsmBaseStorage storage, Collection<Long> interestedObjects, boolean includeLinks) throws XMLStreamException, IOException {
-		Map<Long, Entity> entities = storage.getRegisteredEntities();
-		Map<Long, EntityInfo> entityInfo = storage.getRegisteredEntityInfo();
+	public void saveStorage(OutputStream output, OsmBaseStorage storage, Collection<EntityId> interestedObjects, boolean includeLinks) throws XMLStreamException, IOException {
+		Map<EntityId, Entity> entities = storage.getRegisteredEntities();
+		Map<EntityId, EntityInfo> entityInfo = storage.getRegisteredEntityInfo();
 		PropertyManager propertyManager = new PropertyManager(PropertyManager.CONTEXT_WRITER);
 //		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 //        String indent = "{http://xml.apache.org/xslt}indent-amount";
@@ -69,16 +70,16 @@ public class OsmStorageWriter {
 		if(interestedObjects == null){
 			interestedObjects = entities.keySet();
 		}
-		Stack<Long> toResolve = new Stack<Long>();
+		Stack<EntityId> toResolve = new Stack<EntityId>();
 		toResolve.addAll(interestedObjects);
 		while(!toResolve.isEmpty()){
-			Long l = toResolve.pop();
+			EntityId l = toResolve.pop();
 			if(entities.get(l) instanceof Node){
 				nodes.add((Node) entities.get(l));
 			} else if(entities.get(l) instanceof Way){
 				ways.add((Way) entities.get(l));
 				if(includeLinks){
-					toResolve.addAll(((Way)entities.get(l)).getNodeIds());
+					toResolve.addAll(((Way)entities.get(l)).getEntityIds());
 				}
 			} else if(entities.get(l) instanceof Relation){
 				relations.add((Relation) entities.get(l));
@@ -120,15 +121,15 @@ public class OsmStorageWriter {
 			writeStartElement(streamWriter, ELEM_RELATION, INDENT);
 			streamWriter.writeAttribute(ATTR_ID, r.getId()+"");
 			writeEntityAttributes(streamWriter, r, entityInfo.get(r.getId()));
-			for(Entry<Long, String> e : r.getMembersMap().entrySet()){
+			for(Entry<EntityId, String> e : r.getMembersMap().entrySet()){
 				writeStartElement(streamWriter, ELEM_MEMBER, INDENT2);
-				streamWriter.writeAttribute(ATTR_REF, e.getKey()+"");
+				streamWriter.writeAttribute(ATTR_REF, e.getKey().getId()+"");
 				String s = e.getValue();
 				if(s == null){
 					s = ""; 
 				}
 				streamWriter.writeAttribute(ATTR_ROLE, s);
-				streamWriter.writeAttribute(ATTR_TYPE, getEntityType(entities, e.getKey()));
+				streamWriter.writeAttribute(ATTR_TYPE, e.getKey().getType().toString().toLowerCase());
 				writeEndElement(streamWriter, INDENT2);
 			}
 			writeTags(streamWriter, r);
@@ -170,18 +171,6 @@ public class OsmStorageWriter {
 		}
 	}
 	
-	private String getEntityType(Map<Long, Entity> entities , Long id){
-		Entity e = entities.get(id);
-		if(e instanceof Way){
-			return "way";
-		} else if(e instanceof Relation){
-			return "relation";
-		} 
-		return "node";
-	}
-	
-	
-		
 	public boolean couldBeWrited(MapObject e){
 		if(!Algoritms.isEmpty(e.getName()) && e.getLocation() != null){
 			return true;
