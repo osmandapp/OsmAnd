@@ -32,7 +32,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<MapOb
 	public List<MapObject> getObjects(String filter) {
 		List<MapObject> l = new ArrayList<MapObject>();
 		if(region != null){
-			region.fillWithSuggestedCities(filter, l);
+			region.fillWithSuggestedCities(filter, l, location);
 		}
 		return l;
 	}
