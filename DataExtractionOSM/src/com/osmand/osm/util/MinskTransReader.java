@@ -39,6 +39,8 @@ import com.osmand.osm.MapUtils;
 import com.osmand.osm.Node;
 import com.osmand.osm.Relation;
 import com.osmand.osm.Way;
+import com.osmand.osm.Entity.EntityId;
+import com.osmand.osm.Entity.EntityType;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 import com.osmand.osm.io.IOsmStorageFilter;
 import com.osmand.osm.io.OsmBaseStorage;
@@ -351,7 +353,7 @@ public class MinskTransReader {
 					relation.putTag("type", "route");
 					relation.putTag("generated", "yes");
 					checkedRoutes.put(s, relation);
-					storage.getRegisteredEntities().put(relation.getId(), relation);
+					storage.getRegisteredEntities().put(new EntityId(EntityType.RELATION, relation.getId()), relation);
 					System.out.println("[ADD] Registered new route " + s);
 				} 
 				Relation relation = checkedRoutes.get(s);
@@ -372,19 +374,19 @@ public class MinskTransReader {
 							throw new IllegalArgumentException("Something wrong check " + st.stopId);
 						}
 						node.putTag("generated", "yes");
-						storage.getRegisteredEntities().put(node.getId(), node);
+						storage.getRegisteredEntities().put(new EntityId(EntityType.NODE, node.getId()), node);
 						System.out.println("[ADD] Added new bus_stop : " + node.getId() + " " + st.name + " minsktrans_stop_id " + st.stopId);
 						correlated.put(stop, node);
 					}
 					if (i == 0 || i == r.routeStops.size() - 1) {
 						if (direct) {
-							relation.addMember(correlated.get(stop).getId(), "stop");
+							relation.addMember(correlated.get(stop).getId(), EntityType.NODE, "stop");
 						}
 					} else {
 						if (direct) {
-							relation.addMember(correlated.get(stop).getId(), "forward:stop");
+							relation.addMember(correlated.get(stop).getId(), EntityType.NODE, "forward:stop");
 						} else {
-							relation.addMember(correlated.get(stop).getId(), "backward:stop");
+							relation.addMember(correlated.get(stop).getId(), EntityType.NODE, "backward:stop");
 						}
 					}
 

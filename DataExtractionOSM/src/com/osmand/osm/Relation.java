@@ -8,10 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Relation extends Entity {
-
+	
 	// lazyLoading
-	Map<Long, String> members = null;
+	Map<EntityId, String> members = null;
 	Map<Entity, String> memberEntities = null;
+	
 	
 	
 	
@@ -19,14 +20,14 @@ public class Relation extends Entity {
 		super(id);
 	}
 	
-	public void addMember(Long id, String role){
+	public void addMember(Long id, EntityType type, String role){
 		if(members == null){
-			members = new LinkedHashMap<Long, String>(); 
+			members = new LinkedHashMap<EntityId, String>(); 
 		}
-		members.put(id, role);
+		members.put(new EntityId(type, id), role);
 	}
 	
-	public String removeMember(Long id){
+	public String removeMember(EntityType e, Long id){
 		if(members == null){
 			return null; 
 		}
@@ -41,26 +42,26 @@ public class Relation extends Entity {
 		return members.get(id);
 	}
 	
-	public Collection<Long> getMemberIds() {
+	public Collection<EntityId> getMemberIds() {
 		return getMemberIds(null);
 	}
 	
-	public Map<Long, String> getMembersMap() {
+	public Map<EntityId, String> getMembersMap() {
 		if(members == null){
 			return Collections.emptyMap();
 		}
 		return Collections.unmodifiableMap(members);
 	}
 	
-	public Collection<Long> getMemberIds(String role) {
+	public Collection<EntityId> getMemberIds(String role) {
 		if (members == null) {
 			return Collections.emptyList();
 		}
 		if (role == null) {
 			return members.keySet();
 		}
-		List<Long> l = new ArrayList<Long>();
-		for (Long m : members.keySet()) {
+		List<EntityId> l = new ArrayList<EntityId>();
+		for (EntityId m : members.keySet()) {
 			if (role.equals(members.get(m))) {
 				l.add(m);
 			}
@@ -89,14 +90,14 @@ public class Relation extends Entity {
 	}
 	
 	@Override
-	public void initializeLinks(Map<Long, Entity> entities){
+	public void initializeLinks(Map<EntityId, Entity> entities){
 		if (members != null) {
 			if(memberEntities == null){
 				memberEntities = new LinkedHashMap<Entity, String>();
 			} else {
 				memberEntities.clear();
 			}
-			for(Long l : members.keySet()){
+			for(EntityId l : members.keySet()){
 				if(l != null && entities.get(l) != null){
 					memberEntities.put(entities.get(l), members.get(l));
 				}

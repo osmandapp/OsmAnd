@@ -46,6 +46,8 @@ import com.osmand.osm.Node;
 import com.osmand.osm.OSMSettings;
 import com.osmand.osm.Relation;
 import com.osmand.osm.Way;
+import com.osmand.osm.Entity.EntityId;
+import com.osmand.osm.Entity.EntityType;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 import com.osmand.osm.io.IOsmStorageFilter;
 import com.osmand.osm.io.OsmBaseStorage;
@@ -120,11 +122,18 @@ public class DataExtraction  {
 		ArrayList<Entity> amenities = new ArrayList<Entity>();
 		ArrayList<Way> ways = new ArrayList<Way>();
 		ArrayList<Relation> transport = new ArrayList<Relation>();
-		Map<Long, String> postalCodes = new LinkedHashMap<Long, String>();
+		Map<EntityId, String> postalCodes = new LinkedHashMap<EntityId, String>();
 
-		int currentCount = 0;
+		
 		private Connection conn;
-		private PreparedStatement prep;
+		
+		private boolean preloadRelationAndWaysIntoDB = false; 
+		int currentCountNode = 0;
+		private PreparedStatement prepNode;
+		int currentRelationsCount = 0;
+		private PreparedStatement prepRelations;
+		int currentWaysCount = 0;
+		private PreparedStatement prepWays;
 		
 
 		public DataExtractionOsmFilter() {
@@ -146,7 +155,7 @@ public class DataExtraction  {
 			return transport;
 		}
 		
-		public Map<Long, String> getPostalCodes() {
+		public Map<EntityId, String> getPostalCodes() {
 			return postalCodes;
 		}
 
@@ -171,45 +180,97 @@ public class DataExtraction  {
 			stat.executeUpdate("drop table if exists node;");
 			stat.executeUpdate("create table node (id long, latitude double, longitude double);");
 			stat.executeUpdate("create index IdIndex ON node (id);");
+			stat.executeUpdate("drop table if exists ways;");
+			stat.executeUpdate("create table ways (id long, node long);");
+			stat.executeUpdate("create index IdWIndex ON ways (id);");
+			stat.executeUpdate("drop table if exists relations;");
+			stat.executeUpdate("create table relations (id long, member long, type byte, role text);");
+			stat.executeUpdate("create index IdRIndex ON relations (id);");
 			stat.close();
 
-			prep = conn.prepareStatement("insert into node values (?, ?, ?);");
+			prepNode = conn.prepareStatement("insert into node values (?, ?, ?);");
+			prepWays = conn.prepareStatement("insert into ways values (?, ?);");
+			prepRelations = conn.prepareStatement("insert into relations values (?, ?, ?, ?);");
+			preloadRelationAndWaysIntoDB = indexTransport;
 			conn.setAutoCommit(false);
 		}
 
 		public void correlateData(OsmBaseStorage storage, IProgress progress) throws SQLException {
-			if (currentCount > 0) {
-				prep.executeBatch();
+			if (currentCountNode > 0) {
+				prepNode.executeBatch();
 			}
-			prep.close();
+			prepNode.close();
+			if (currentWaysCount > 0) {
+				prepWays.executeBatch();
+			}
+			prepWays.close();
+			if (currentRelationsCount > 0) {
+				prepRelations.executeBatch();
+			}
+			prepRelations.close();
 			conn.setAutoCommit(true);
-			final PreparedStatement pselect = conn.prepareStatement("select * from node where id = ?");
-			Map<Long, Entity> map = new LinkedHashMap<Long, Entity>();
+			
+			final PreparedStatement pselectNode = conn.prepareStatement("select * from node where id = ?");
+			final PreparedStatement pselectWay = conn.prepareStatement("select * from ways where id = ?");
+			final PreparedStatement pselectRelation = conn.prepareStatement("select * from relations where id = ?");
+			
+			Map<EntityId, Entity> map = new LinkedHashMap<EntityId, Entity>();
 			progress.startTask("Correlating data...", storage.getRegisteredEntities().size());
-			Collection<Entity> values = new ArrayList<Entity>(storage.getRegisteredEntities().values());
-			for (Entity e : values) {
+			ArrayList<Entity> values = new ArrayList<Entity>(storage.getRegisteredEntities().values());
+			for (int ind = 0; ind < values.size(); ind++) {
+				Entity e = values.get(ind);
 				progress.progress(1);
-				if (e instanceof Way || e instanceof Relation) {
-					map.clear();
-					Collection<Long> ids = e instanceof Way ? ((Way) e).getNodeIds() : ((Relation) e).getMemberIds();
-					for (Long i : ids) {
-						if (!storage.getRegisteredEntities().containsKey(i)) {
-							pselect.setLong(1, i);
-							if (pselect.execute()) {
-								ResultSet rs = pselect.getResultSet();
+				if (e instanceof Node) {
+					continue;
+				}
+				map.clear();
+				Collection<EntityId> ids = e instanceof Way ? ((Way) e).getEntityIds() : ((Relation) e).getMemberIds();
+				for (EntityId i : ids) {
+					if (!storage.getRegisteredEntities().containsKey(i)) {
+						if (i.getType() == EntityType.NODE) {
+							pselectNode.setLong(1, i.getId());
+							if (pselectNode.execute()) {
+								ResultSet rs = pselectNode.getResultSet();
 								if (rs.next()) {
 									storage.getRegisteredEntities().put(i, new Node(rs.getDouble(2), rs.getDouble(3), rs.getLong(1)));
 								}
 								rs.close();
 							}
-						}
-						if(storage.getRegisteredEntities().containsKey(i)){
-							map.put(i, storage.getRegisteredEntities().get(i));
+						} else if (i.getType() == EntityType.WAY) {
+							pselectWay.setLong(1, i.getId());
+							if (pselectWay.execute()) {
+								ResultSet rs = pselectWay.getResultSet();
+								Way way = new Way(i.getId());
+								storage.getRegisteredEntities().put(i, way); 
+								while (rs.next()) {
+									way.addNode(rs.getLong(2));
+								}
+								// add way to load referred nodes
+								values.add(way);
+								rs.close();
+							}
+						} else if (i.getType() == EntityType.RELATION) {
+							pselectRelation.setLong(1, i.getId());
+							if (pselectRelation.execute()) {
+								ResultSet rs = pselectNode.getResultSet();
+								Relation rel = new Relation(i.getId());
+								storage.getRegisteredEntities().put(i, rel);
+								while (rs.next()) {
+									rel.addMember(rs.getLong(1), EntityType.values()[rs.getByte(2)], rs.getString(3));
+								}
+								// do not load relation members recursively ? It is not needed for transport, address, poi before
+								rs.close();
+							}
 						}
 					}
-					e.initializeLinks(map);
+					if (storage.getRegisteredEntities().containsKey(i)) {
+						map.put(i, storage.getRegisteredEntities().get(i));
+					}
 				}
+				e.initializeLinks(map);
 			}
+			
+			pselectNode.close();
 		}
 
 		public void close() {
@@ -250,7 +311,7 @@ public class DataExtraction  {
 				if(e instanceof Relation){
 					if(e.getTag(OSMTagKey.POSTAL_CODE) != null){
 						String tag = e.getTag(OSMTagKey.POSTAL_CODE);
-						for(Long l : ((Relation)e).getMemberIds()){
+						for(EntityId l : ((Relation)e).getMemberIds()){
 							postalCodes.put(l, tag);
 						}
 					}
@@ -262,25 +323,48 @@ public class DataExtraction  {
 					transport.add((Relation) e);
 					processed = true;
 				}
-				if(e instanceof Way){
-					processed = true;
-				}
 			}
 			// put all nodes into temporary db to get only required nodes after loading all data 
 			try {
 				if (e instanceof Node) {
-					currentCount++;
-					prep.setLong(1, e.getId());
-					prep.setDouble(2, ((Node) e).getLatitude());
-					prep.setDouble(3, ((Node) e).getLongitude());
-					prep.addBatch();
-					if (currentCount >= BATCH_SIZE) {
-						prep.executeBatch();
-						currentCount = 0;
+					currentCountNode++;
+					prepNode.setLong(1, e.getId());
+					prepNode.setDouble(2, ((Node) e).getLatitude());
+					prepNode.setDouble(3, ((Node) e).getLongitude());
+					prepNode.addBatch();
+					if (currentCountNode >= BATCH_SIZE) {
+						prepNode.executeBatch();
+						currentCountNode = 0;
+					}
+				} else if(preloadRelationAndWaysIntoDB) {
+					if (e instanceof Way) {
+						for(Long i : ((Way)e).getNodeIds()){
+							currentWaysCount ++;
+							prepWays.setLong(1, e.getId());
+							prepWays.setLong(2, i);
+							prepWays.addBatch();
+						}
+						if (currentWaysCount >= BATCH_SIZE) {
+							prepWays.executeBatch();
+							currentWaysCount = 0;
+						}
+					} else {
+						for(Entry<EntityId,String> i : ((Relation)e).getMembersMap().entrySet()){
+							currentRelationsCount ++;
+							prepRelations.setLong(1, e.getId());
+							prepRelations.setLong(2, i.getKey().getId());
+							prepRelations.setLong(3, i.getKey().getType().ordinal());
+							prepRelations.setString(4, i.getValue());
+							prepWays.addBatch();
+						}
+						if (currentRelationsCount >= BATCH_SIZE) {
+							prepRelations.executeBatch();
+							currentRelationsCount = 0;
+						}
 					}
 				}
 			} catch (SQLException ex) {
-				log.error("Could not save node", ex);
+				log.error("Could not save in db", ex);
 			}
 			return processed || loadAllObjects;
 		}
@@ -289,8 +373,6 @@ public class DataExtraction  {
 
 	
 	public Region readCountry(String path, IProgress progress, IOsmStorageFilter addFilter) throws IOException, SAXException, SQLException{
-
-		
 		File f = new File(path);
 		InputStream stream = new FileInputStream(f);
 		InputStream streamFile = stream;
@@ -319,13 +401,13 @@ public class DataExtraction  {
 		final ArrayList<Entity> amenities = filter.getAmenities();
 		final ArrayList<Way> ways = filter.getWays();
 		final ArrayList<Relation> transport = filter.getTransport();
-		Map<Long, String> postalCodes = filter.getPostalCodes();
+		Map<EntityId, String> postalCodes = filter.getPostalCodes();
         storage.getFilters().add(filter);
         // 0. Loading osm file
+
 		try {
 			// 0.1 init database to store temporary data
 			filter.initDatabase();
-			
 			// 0.2 parsing osm itself
 			progress.setGeneralProgress("[40 of 100]");
 			storage.parseOSM(stream, progress, streamFile, parseEntityInfo);
@@ -428,7 +510,7 @@ public class DataExtraction  {
 	}
 
 
-	private void readingBuildings(IProgress progress, final ArrayList<Entity> buildings, Region country, Map<Long, String> postalCodes) {
+	private void readingBuildings(IProgress progress, final ArrayList<Entity> buildings, Region country, Map<EntityId, String> postalCodes) {
 		// found buildings (index addresses)
         progress.startTask("Indexing buildings...", buildings.size());
         for(Entity b : buildings){
@@ -448,8 +530,9 @@ public class DataExtraction  {
 				}
 				if (city != null) {
 					Building building = city.registerBuilding(b);
-					if(postalCodes.containsKey(building.getId()) ){
-						building.setPostcode(postalCodes.get(building.getId()));
+					EntityId i = building.getEntityId();
+					if(postalCodes.containsKey(i) ){
+						building.setPostcode(postalCodes.get(i));
 					}
 				}
 			}

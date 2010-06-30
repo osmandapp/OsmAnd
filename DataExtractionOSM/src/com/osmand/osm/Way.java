@@ -47,6 +47,17 @@ public class Way extends Entity {
 		return nodeIds;
 	}
 	
+	public List<EntityId> getEntityIds(){
+		if(nodeIds == null){
+			return Collections.emptyList();
+		}
+		List<EntityId> ls = new ArrayList<EntityId>();
+		for(Long l : nodeIds){
+			ls.add(new EntityId(EntityType.NODE, l));
+		}
+		return ls;
+	}
+	
 	public List<Node> getNodes() {
 		if(nodes == null){
 			return Collections.emptyList();
@@ -55,7 +66,7 @@ public class Way extends Entity {
 	}
 	
 	@Override
-	public void initializeLinks(Map<Long, Entity> entities) {
+	public void initializeLinks(Map<EntityId, Entity> entities) {
 		if (nodeIds != null) {
 			if(nodes == null){
 				 nodes = new ArrayList<Node>();
@@ -63,11 +74,7 @@ public class Way extends Entity {
 				nodes.clear();
 			}
 			for (int i = 0; i < nodeIds.size(); i++) {
-				if(entities.get(nodeIds.get(i)) instanceof Node){
-					nodes.add((Node) entities.get(nodeIds.get(i)));
-				} else {
-					nodes.add(null);
-				}
+				nodes.add((Node) entities.get(new EntityId(EntityType.NODE,nodeIds.get(i))));
 			}
 		}
 		

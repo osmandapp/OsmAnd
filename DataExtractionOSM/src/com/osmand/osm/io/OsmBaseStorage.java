@@ -23,6 +23,8 @@ import com.osmand.osm.EntityInfo;
 import com.osmand.osm.Node;
 import com.osmand.osm.Relation;
 import com.osmand.osm.Way;
+import com.osmand.osm.Entity.EntityId;
+import com.osmand.osm.Entity.EntityType;
 
 public class OsmBaseStorage extends DefaultHandler {
 
@@ -56,8 +58,8 @@ public class OsmBaseStorage extends DefaultHandler {
 	
 	protected boolean parseStarted;
 	
-	protected Map<Long, Entity> entities = new LinkedHashMap<Long, Entity>();
-	protected Map<Long, EntityInfo> entityInfo = new LinkedHashMap<Long, EntityInfo>();
+	protected Map<EntityId, Entity> entities = new LinkedHashMap<EntityId, Entity>();
+	protected Map<EntityId, EntityInfo> entityInfo = new LinkedHashMap<EntityId, EntityInfo>();
 	
 	// this is used to show feedback to user
 	protected int progressEntity = 0;
@@ -216,7 +218,8 @@ public class OsmBaseStorage extends DefaultHandler {
 			} else if (ELEM_MEMBER.equals(name)) {
 				Long id = parseId(attributes, ATTR_REF, -1);
 				if(id != -1 && currentParsedEntity instanceof Relation){
-					((Relation)currentParsedEntity).addMember(id, attributes.getValue(ATTR_ROLE));
+					EntityType type = EntityType.valueOf(attributes.getValue(ATTR_TYPE).toUpperCase());
+					((Relation)currentParsedEntity).addMember(id, type, attributes.getValue(ATTR_ROLE));
 				}
 
 			}  else {
@@ -228,12 +231,21 @@ public class OsmBaseStorage extends DefaultHandler {
 	@Override
 	public void endElement(String uri, String localName, String name) throws SAXException {
 		name = saxParser.isNamespaceAware() ? localName : name;
-		if (ELEM_NODE.equals(name) || ELEM_WAY.equals(name) || ELEM_RELATION.equals(name)) {
+		EntityType type = null;
+		if (ELEM_NODE.equals(name)){
+			type = EntityType.NODE; 
+		} else if (ELEM_WAY.equals(name)){
+			type = EntityType.WAY;
+		} else if (ELEM_RELATION.equals(name)){
+			type = EntityType.RELATION;
+		}
+		if (type != null) {
 			if(currentParsedEntity != null){
 				if(acceptEntityToLoad(currentParsedEntity)){
-					Entity oldEntity = entities.put(currentParsedEntity.getId(), currentParsedEntity);
+					EntityId entityId = new EntityId(type, currentParsedEntity.getId());
+					Entity oldEntity = entities.put(entityId, currentParsedEntity);
 					if(parseEntityInfo && currentParsedEntityInfo != null){
-						entityInfo.put(currentParsedEntity.getId(), currentParsedEntityInfo);
+						entityInfo.put(entityId, currentParsedEntityInfo);
 					}
 					if(!supressWarnings && oldEntity!= null){
 						throw new UnsupportedOperationException("Entity with id=" + oldEntity.getId() +" is duplicated in osm map"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -263,11 +275,11 @@ public class OsmBaseStorage extends DefaultHandler {
 		}
 	}
 	
-	public Map<Long, EntityInfo> getRegisteredEntityInfo() {
+	public Map<EntityId, EntityInfo> getRegisteredEntityInfo() {
 		return entityInfo;
 	} 
 
-	public Map<Long, Entity> getRegisteredEntities() {
+	public Map<EntityId, Entity> getRegisteredEntities() {
 		return entities;
 	}
 	

@@ -5,6 +5,8 @@ import java.text.Collator;
 import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
+import com.osmand.osm.Entity.EntityId;
+import com.osmand.osm.Entity.EntityType;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 
 public abstract class MapObject implements Comparable<MapObject> {
@@ -13,6 +15,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 	protected String enName = null;
 	protected LatLon location = null;
 	protected Long id = null;
+	protected EntityType type = null;
 
 	public MapObject(){}
 	
@@ -23,6 +26,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 	
 	public void setEntity(Entity e){
 		this.id = e.getId();
+		this.type = EntityType.valueOf(e);
 		if(this.name == null){
 			this.name = e.getTag(OSMTagKey.NAME);
 		}
@@ -32,6 +36,14 @@ public abstract class MapObject implements Comparable<MapObject> {
 		if(this.location == null){
 			this.location = MapUtils.getCenter(e);
 		}
+	}
+	
+	public EntityId getEntityId(){
+		EntityType t = type;
+		if(t == null){
+			t = EntityType.NODE;
+		}
+		return new EntityId(t, id);
 	}
 	
 	public void setId(Long id) {

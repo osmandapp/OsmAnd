@@ -21,10 +21,14 @@ public class ToDoConstants {
 	//   50. Invent opening hours editor in order to edit POI hours better on device
 	//		 GOT by Olga
 	
+	// TODO sort hamlets by distance
     //   60. Audio guidance for routing
 	//   61. Provide route information for YOURS (calclate turns/angle/expected time). 
 	//		 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m) [dacha]
-	
+	//   33. Build transport locations. Create transport index (transport-stops) (investigate)
+	// 		 DONE: Load transport routes in swing.	
+	//		 IDEA TO HAVE :
+
 	
     //   43. Enable poi filter by name
 	//   58. Upload/Download zip-index from site & unzip them on phone
@@ -32,9 +36,6 @@ public class ToDoConstants {
 	//       That setting should rule all activities that use internet. It should ask whenever internet is used 
 	//		(would you like to use internet for that operation - if using internet is not checked). 
 	//		Internet using now for : edit POI osm, show osm bugs layer, download tiles.
-	//   33. Build transport locations. Create transport index (transport-stops) (investigate)
-	// 		 DONE: Load transport routes in swing.	
-	//		 IDEA TO HAVE :
 	   
 	//   40. Support simple vector road rendering (require new index file) (?)
 	//   63. Support simple offline routing(require new index file) (?)
