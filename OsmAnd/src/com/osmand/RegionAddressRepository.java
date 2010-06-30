@@ -5,6 +5,7 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -31,6 +32,8 @@ import com.osmand.data.index.IndexConstants.IndexBuildingTable;
 import com.osmand.data.index.IndexConstants.IndexCityTable;
 import com.osmand.data.index.IndexConstants.IndexStreetNodeTable;
 import com.osmand.data.index.IndexConstants.IndexStreetTable;
+import com.osmand.osm.LatLon;
+import com.osmand.osm.MapUtils;
 import com.osmand.osm.Node;
 import com.osmand.osm.Way;
 
@@ -45,6 +48,38 @@ public class RegionAddressRepository {
 	private Map<String, PostCode> postCodes = new TreeMap<String, PostCode>(Collator.getInstance());
 	
 	private boolean useEnglishNames = false;
+	
+	public static class MapObjectNameDistanceComparator implements Comparator<MapObject> {
+		
+		private final boolean useEnName;
+		private Collator collator = Collator.getInstance();
+		private final LatLon location;
+
+		public MapObjectNameDistanceComparator(boolean useEnName, LatLon location){
+			this.useEnName = useEnName;
+			this.location = location;
+		}
+
+		@Override
+		public int compare(MapObject object1, MapObject object2) {
+			if(object1 == null || object2 == null){
+				return object2 == object1 ? 0 : (object1 == null ? -1 : 1); 
+			} else {
+				int c = collator.compare(object1.getName(useEnName), object2.getName(useEnName));
+				if(c == 0 && location != null){
+					LatLon l1 = object1.getLocation();
+					LatLon l2 = object2.getLocation();
+					if(l1 == null || l2 == null){
+						return l2 == l1 ? 0 : (l1 == null ? -1 : 1);
+					}
+					return Double.compare(MapUtils.getDistance(location, l1), MapUtils.getDistance(location, l2));
+				}
+				return c;
+			}
+		}
+		
+	}
+	
 	
 	public boolean initialize(final IProgress progress, File file) {
 		long start = System.currentTimeMillis();
@@ -234,7 +269,7 @@ public class RegionAddressRepository {
 		}
 	}
 	
-	public void fillWithSuggestedCities(String name, List<MapObject> citiesToFill){
+	public void fillWithSuggestedCities(String name, List<MapObject> citiesToFill, LatLon currentLocation){
 		preloadCities();
 		// essentially index is created that cities towns are first in cities map
 		int ind = 0;
@@ -299,12 +334,16 @@ public class RegionAddressRepository {
 			Cursor query = db.query(IndexCityTable.getTable(), IndexConstants.generateColumnNames(IndexCityTable.values()), 
 					where.toString(), null, null, null, null);
 			if (query.moveToFirst()) {
+				List<City> hamlets = new ArrayList<City>();
 				do {
-					citiesToFill.add(parseCityFromCursor(query));
+					hamlets.add(parseCityFromCursor(query));
 				} while (query.moveToNext());
+				Collections.sort(hamlets, new MapObjectNameDistanceComparator(useEnglishNames, currentLocation));
+				citiesToFill.addAll(hamlets);
 			}
 			query.close();
-
+			
+			
 			
 			log.debug("Loaded citites " + (citiesToFill.size() - initialsize)); //$NON-NLS-1$
 		}
