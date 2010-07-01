@@ -18,6 +18,7 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 
 import com.osmand.data.Amenity;
+import com.osmand.data.TransportStop;
 import com.osmand.data.index.IndexConstants;
 import com.osmand.data.preparation.MapTileDownloader;
 import com.osmand.data.preparation.MapTileDownloader.DownloadRequest;
@@ -36,9 +37,13 @@ import com.osmand.views.POIMapLayer;
  */
 public class ResourceManager {
 
-	public static final String POI_PATH = "osmand/" + IndexConstants.POI_INDEX_DIR; //$NON-NLS-1$
-	public static final String ADDRESS_PATH = "osmand/" + IndexConstants.ADDRESS_INDEX_DIR; //$NON-NLS-1$
-	public static final String TILES_PATH = "osmand/tiles/"; //$NON-NLS-1$
+	public static final String APP_DIR = "osmand/"; //$NON-NLS-1$
+	public static final String POI_PATH = APP_DIR + IndexConstants.POI_INDEX_DIR; 
+	public static final String ADDRESS_PATH = APP_DIR + IndexConstants.ADDRESS_INDEX_DIR;
+	public static final String TRANSPORT_PATH = APP_DIR + IndexConstants.TRANSPORT_INDEX_DIR;
+	public static final String TILES_PATH = APP_DIR+"tiles/"; //$NON-NLS-1$
+	
+	public static final int LIMIT_TRANSPORT = 200;
 	
 	private static final Log log = LogUtil.getLog(ResourceManager.class);
 	
@@ -65,6 +70,8 @@ public class ResourceManager {
 	private Map<String, RegionAddressRepository> addressMap = new TreeMap<String, RegionAddressRepository>(Collator.getInstance());
 	
 	protected Map<String, AmenityIndexRepository> amenityRepositories = new LinkedHashMap<String, AmenityIndexRepository>();
+	
+	protected Map<String, TransportIndexRepository> transportRepositories = new LinkedHashMap<String, TransportIndexRepository>();
 	
 	public AsyncLoadingThread asyncLoadingTiles = new AsyncLoadingThread();
 	
@@ -230,6 +237,7 @@ public class ResourceManager {
 		List<String> warnings = new ArrayList<String>();
 		warnings.addAll(indexingPoi(progress));
 		warnings.addAll(indexingAddresses(progress));
+		warnings.addAll(indexingTransport(progress));
 		return warnings;
 	}
 	
@@ -286,8 +294,34 @@ public class ResourceManager {
 		}
 	}
 	
-	// //////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
-	public List<AmenityIndexRepository> searchRepositories(double latitude, double longitude) {
+	
+	public List<String> indexingTransport(final IProgress progress){
+		File file = new File(Environment.getExternalStorageDirectory(), TRANSPORT_PATH);
+		List<String> warnings = new ArrayList<String>();
+		closeTransport();
+		if (file.exists() && file.canRead()) {
+			for (File f : file.listFiles()) {
+				indexingTransport(progress, warnings, f);
+			}
+		}
+		return warnings;
+	}
+
+	public void indexingTransport(final IProgress progress, List<String> warnings, File f) {
+		if (f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)) {
+			TransportIndexRepository repository = new TransportIndexRepository();
+			progress.startTask(Messages.getMessage("indexing_transport") + f.getName(), -1); //$NON-NLS-1$
+			boolean initialized = repository.initialize(progress, f);
+			if (initialized) {
+				transportRepositories.put(repository.getName(), repository);
+			} else {
+				warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+			}
+		}
+	}
+	
+	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
+	public List<AmenityIndexRepository> searchAmenityRepositories(double latitude, double longitude) {
 		List<AmenityIndexRepository> repos = new ArrayList<AmenityIndexRepository>();
 		for (AmenityIndexRepository index : amenityRepositories.values()) {
 			if (index.checkContains(latitude,longitude)) {
@@ -338,6 +372,47 @@ public class ResourceManager {
 		return addressMap.values();
 	}
 	
+	////////////////////////////////////////////// Working with transport ////////////////////////////////////////////////
+	public List<TransportIndexRepository> searchTransportRepositories(double latitude, double longitude) {
+		List<TransportIndexRepository> repos = new ArrayList<TransportIndexRepository>();
+		for (TransportIndexRepository index : transportRepositories.values()) {
+			if (index.checkContains(latitude,longitude)) {
+				repos.add(index);
+			}
+		}
+		return repos;
+	}
+	public List<TransportStop> searchTransportStops(double latitude, double longitude, int zoom, int limit) {
+		double tileNumberX = MapUtils.getTileNumberX(zoom, longitude);
+		double tileNumberY = MapUtils.getTileNumberY(zoom, latitude);
+		double topLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY - 0.5);
+		double bottomLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY + 0.5);
+		double leftLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX - 0.5);
+		double rightLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX + 0.5);
+		List<TransportStop> stops = new ArrayList<TransportStop>();
+		for (TransportIndexRepository index : transportRepositories.values()) {
+			if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
+				if (!index.checkCachedObjects(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, stops)) {
+					index.searchTransportStops(topLatitude, leftLongitude, bottomLatitude, rightLongitude, limit, stops);
+				}
+			}
+		}
+
+		return stops;
+	}
+	
+	public void searchTransportAsync(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, List<TransportStop> toFill){
+		for(TransportIndexRepository index : transportRepositories.values()){
+			if(index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)){
+				if(!index.checkCachedObjects(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, toFill, true)){
+					asyncLoadingTiles.requestToLoadTransport(
+							new TransportLoadRequest(index, topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom));
+				}
+			}
+		}
+	}
+	
+	
 	////////////////////////////////////////////// Closing methods ////////////////////////////////////////////////
 	
 	public void closeAmenities(){
@@ -353,11 +428,19 @@ public class ResourceManager {
 		}
 		addressMap.clear();
 	}
+	
+	public void closeTransport(){
+		for(TransportIndexRepository r : transportRepositories.values()){
+			r.close();
+		}
+		transportRepositories.clear();
+	}
 
 	public synchronized void close(){
 		imagesOnFS.clear();
 		closeAmenities();
 		closeAddresses();
+		closeTransport();
 	}
 	
 	/// On low memory method ///
@@ -423,11 +506,27 @@ public class ResourceManager {
 			this.zoom = zoom;
 			this.filter = filter;
 		}
-		
-		
-		
 	}
 	
+	private static class TransportLoadRequest {
+		public final TransportIndexRepository repository;
+		public final double topLatitude;
+		public final double bottomLatitude;
+		public final double leftLongitude;
+		public final double rightLongitude;
+		public final int zoom;
+		
+		public TransportLoadRequest(TransportIndexRepository repository, double topLatitude, double leftLongitude, 
+				double bottomLatitude, double rightLongitude, int zoom) {
+			super();
+			this.bottomLatitude = bottomLatitude;
+			this.leftLongitude = leftLongitude;
+			this.repository = repository;
+			this.rightLongitude = rightLongitude;
+			this.topLatitude = topLatitude;
+			this.zoom = zoom;
+		}
+	}
 	
 	public class AsyncLoadingThread extends Thread {
 		Stack<Object> requests = new Stack<Object>();
@@ -442,6 +541,7 @@ public class ResourceManager {
 				try {
 					boolean update = false;
 					boolean amenityLoaded = false;
+					boolean transportLoaded = false;
 					while(!requests.isEmpty()){
 						Object req = requests.pop();
 						if (req instanceof TileLoadDownloadRequest) {
@@ -456,9 +556,16 @@ public class ResourceManager {
 										r.bottomLatitude, r.rightLongitude, r.zoom, POIMapLayer.LIMIT_POI, r.filter, null);
 								amenityLoaded = true;
 							}
+						} else if(req instanceof TransportLoadRequest){
+							if(!transportLoaded){
+								TransportLoadRequest r = (TransportLoadRequest) req;
+								r.repository.evaluateCachedTransportStops(r.topLatitude, r.leftLongitude, 
+										r.bottomLatitude, r.rightLongitude, r.zoom, LIMIT_TRANSPORT, null);
+								transportLoaded = true;
+							}
 						}
 					}
-					if(update || amenityLoaded){
+					if(update || amenityLoaded || transportLoaded){
 						// use downloader callback
 						for(IMapDownloaderCallback c : downloader.getDownloaderCallbacks()){
 							c.tileDownloaded(null);
@@ -477,6 +584,10 @@ public class ResourceManager {
 			requests.push(req);
 		}
 		public void requestToLoadAmenities(AmenityLoadRequest req){
+			requests.push(req);
+		}
+		
+		public void requestToLoadTransport(TransportLoadRequest req){
 			requests.push(req);
 		}
 	};

@@ -290,7 +290,7 @@ public class IndexConstants {
 	
 	// Transport Index
 	public enum IndexTransportStop implements IndexColumn {
-		ID("long"), LATITUDE("double", true), LONGITUDE("double", true), NAME, NAME_EN; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		ID("long"), LATITUDE("double", true), LONGITUDE("double", true), NAME, NAME_EN; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		boolean index = false;
 		String type = null;
 
@@ -327,7 +327,7 @@ public class IndexConstants {
 	
 	
 	public enum IndexTransportRouteStop implements IndexColumn {
-		STOP("long"), ROUTE("long", true), DIRECTION("boolean"); //$NON-NLS-1$ //$NON-NLS-2$
+		STOP("long"), ROUTE("long", true), DIRECTION("boolean"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		boolean index = false;
 		String type = null;
 

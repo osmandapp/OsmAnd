@@ -73,8 +73,9 @@ public class DownloadIndexActivity extends ListActivity {
 		try {
 			log.debug("Start loading list of index files"); //$NON-NLS-1$
 			Map<String, String> indexFiles = DownloaderIndexFromGoogleCode.getIndexFiles(new String[] { IndexConstants.ADDRESS_INDEX_EXT,
-					IndexConstants.POI_INDEX_EXT }, new String[] {
-					IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "" }); //$NON-NLS-1$//$NON-NLS-2$
+					IndexConstants.POI_INDEX_EXT, IndexConstants.TRANSPORT_INDEX_EXT, }, new String[] {
+					IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "",//$NON-NLS-1$//$NON-NLS-2$
+					IndexConstants.TRANSPORT_TABLE_VERSION + "",});  //$NON-NLS-1$
 			if (indexFiles != null && !indexFiles.isEmpty()) {
 				return indexFiles;
 			} else {
@@ -116,6 +117,9 @@ public class DownloadIndexActivity extends ListActivity {
 		} else if(key.endsWith(IndexConstants.POI_INDEX_EXT)){
 			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.POI_PATH);
 			regionName += IndexConstants.POI_INDEX_EXT;
+		} else if(key.endsWith(IndexConstants.TRANSPORT_INDEX_EXT)){
+			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.TRANSPORT_PATH);
+			regionName += IndexConstants.TRANSPORT_INDEX_EXT;
 		}
 		if(parent != null){
 			parent.mkdirs();
@@ -150,6 +154,8 @@ public class DownloadIndexActivity extends ListActivity {
 							ResourceManager.getResourceManager().indexingAddress(impl, warnings, file);
 						} else if(file.getName().endsWith(IndexConstants.POI_INDEX_EXT)){
 							ResourceManager.getResourceManager().indexingPoi(impl, warnings, file);
+						} else if(file.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)){
+							ResourceManager.getResourceManager().indexingTransport(impl, warnings, file);
 						}
 						if(warnings.isEmpty()){
 							showWarning(getString(R.string.download_index_success));
@@ -200,7 +206,15 @@ public class DownloadIndexActivity extends ListActivity {
 			TextView description = (TextView) row.findViewById(R.id.download_descr);
 			Entry<String, String> e = getItem(position);
 			int l = e.getKey().lastIndexOf('_');
-			String s = e.getKey().endsWith(IndexConstants.POI_INDEX_EXT) ? getString(R.string.poi) : getString(R.string.address);
+			String s = ""; //$NON-NLS-1$
+			if(e.getKey().endsWith(IndexConstants.POI_INDEX_EXT)){
+				s = getString(R.string.poi);
+			} else if(e.getKey().endsWith(IndexConstants.ADDRESS_INDEX_EXT)){
+				s = getString(R.string.address);
+			} else if(e.getKey().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)){
+				s = "Transport";
+			}
+			
 			item.setText(s + "\n " + e.getKey().substring(0, l)); //$NON-NLS-1$
 			description.setText(e.getValue().replace(':', '\n'));
 			return row;

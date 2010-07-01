@@ -72,6 +72,7 @@ import com.osmand.views.POIMapLayer;
 import com.osmand.views.PointLocationLayer;
 import com.osmand.views.PointNavigationLayer;
 import com.osmand.views.RouteLayer;
+import com.osmand.views.TransportStopsLayer;
 
 public class MapActivity extends Activity implements LocationListener, IMapLocationListener, SensorEventListener {
 
@@ -95,6 +96,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	private RouteLayer routeLayer;
 	private OsmBugsLayer osmBugsLayer;
 	private POIMapLayer poiMapLayer;
+	private TransportStopsLayer transportStopsLayer;
 	private PointLocationLayer locationLayer;
 	private PointNavigationLayer navigationLayer;
 	private MapInfoLayer mapInfoLayer;
@@ -172,13 +174,16 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		osmBugsLayer = new OsmBugsLayer(this);
 		// 3. poi layer
 		poiMapLayer = new POIMapLayer();
-		// 4. point navigation layer
+		// 4. poi layer
+		transportStopsLayer = new TransportStopsLayer();
+		mapView.addLayer(transportStopsLayer);
+		// 5. point navigation layer
 		navigationLayer = new PointNavigationLayer();
 		mapView.addLayer(navigationLayer);
-		// 5. point location layer 
+		// 6. point location layer 
 		locationLayer = new PointLocationLayer();
 		mapView.addLayer(locationLayer);
-		// 6. map info layer
+		// 7. map info layer
 		mapInfoLayer = new MapInfoLayer(this, routeLayer);
 		mapView.addLayer(mapInfoLayer);
 
@@ -778,7 +783,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     		Toast.makeText(this, getString(R.string.update_poi_is_not_available_for_zoom), Toast.LENGTH_SHORT).show();
     		return;
     	}
-    	final List<AmenityIndexRepository> repos = ResourceManager.getResourceManager().searchRepositories(latitude, longitude);
+    	final List<AmenityIndexRepository> repos = ResourceManager.getResourceManager().searchAmenityRepositories(latitude, longitude);
     	if(repos.isEmpty()){
     		Toast.makeText(this, getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_SHORT).show();
     		return;
@@ -918,5 +923,4 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	}
 
 
-    
 }

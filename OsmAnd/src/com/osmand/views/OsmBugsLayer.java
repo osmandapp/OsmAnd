@@ -237,7 +237,7 @@ public class OsmBugsLayer implements OsmandMapLayer {
 					int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
 					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
 						String format = "Bug : " + n.getName(); //$NON-NLS-1$
-						Toast.makeText(view.getContext(), format, Toast.LENGTH_SHORT).show();
+						Toast.makeText(view.getContext(), format, Toast.LENGTH_LONG).show();
 						return true;
 					}
 				}
