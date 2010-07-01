@@ -11,7 +11,6 @@ import org.apache.commons.logging.Log;
 import org.xml.sax.SAXException;
 
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
 import com.osmand.data.Amenity;
@@ -24,28 +23,13 @@ import com.osmand.osm.Node;
 import com.osmand.osm.io.IOsmStorageFilter;
 import com.osmand.osm.io.OsmBaseStorage;
 
-public class AmenityIndexRepository {
+public class AmenityIndexRepository extends BaseLocationIndexRepository<Amenity> {
 	private static final Log log = LogUtil.getLog(AmenityIndexRepository.class);
 	public final static int LIMIT_AMENITIES = 500;
 
-	
-	private SQLiteDatabase db;
-	private double dataTopLatitude;
-	private double dataBottomLatitude;
-	private double dataLeftLongitude;
-	private double dataRightLongitude;
-	
-	private String name;
-	
+		
 	// cache amenities
-	private List<Amenity> cachedAmenities = new ArrayList<Amenity>();
-	private double cTopLatitude;
-	private double cBottomLatitude;
-	private double cLeftLongitude;
-	private double cRightLongitude;
-	private int cZoom;
 	private String cFilterId;
-	
 	
 	
 	private final String[] columns = IndexConstants.generateColumnNames(IndexPoiTable.values());
@@ -122,13 +106,8 @@ public class AmenityIndexRepository {
 	
 	
 	public synchronized void clearCache(){
-		cachedAmenities.clear();
-		cTopLatitude = 0;
-		cBottomLatitude = 0;
-		cRightLongitude = 0;
-		cLeftLongitude = 0;
+		super.clearCache();
 		cFilterId = null;
-		cZoom = 0;
 	}
 	
 	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, int limit,  PoiFilter filter, List<Amenity> toFill){
@@ -142,8 +121,8 @@ public class AmenityIndexRepository {
 		ArrayList<Amenity> tempList = new ArrayList<Amenity>();
 		searchAmenities(cTopLatitude, cLeftLongitude, cBottomLatitude, cRightLongitude, limit, filter, tempList);
 		synchronized (this) {
-			cachedAmenities.clear();
-			cachedAmenities.addAll(tempList);
+			cachedObjects.clear();
+			cachedObjects.addAll(tempList);
 		}
 		
 		checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, cZoom, filter.getFilterId(), toFill);
@@ -157,7 +136,7 @@ public class AmenityIndexRepository {
 				&& cBottomLatitude <= bottomLatitude && zoom == cZoom;
 		boolean noNeedToSearch = inside &&  Algoritms.objectEquals(filterId, cFilterId);
 		if((inside || fillFound) && toFill != null && Algoritms.objectEquals(filterId, cFilterId)){
-			for(Amenity a : cachedAmenities){
+			for(Amenity a : cachedObjects){
 				LatLon location = a.getLocation();
 				if (location.getLatitude() <= topLatitude && location.getLongitude() >= leftLongitude && location.getLongitude() <= rightLongitude
 						&& location.getLatitude() >= bottomLatitude) {
@@ -172,53 +151,10 @@ public class AmenityIndexRepository {
 	}
 
 	public boolean initialize(final IProgress progress, File file) {
-		long start = System.currentTimeMillis();
-		if(db != null){
-			// close previous db
-			db.close();
-		}
-		db = SQLiteDatabase.openOrCreateDatabase(file, null);
-		name = file.getName().substring(0, file.getName().indexOf('.'));
-		if(db.getVersion() != IndexConstants.POI_TABLE_VERSION){
-			db.close();
-			db = null;
-			return false;
-		}
-		
-		Cursor query = db.query(IndexPoiTable.getTable(), new String[]{"MAX(latitude)", "MAX(longitude)", "MIN(latitude)", "MIN(longitude)"}, null, null,null, null, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		if(query.moveToFirst()){
-			dataTopLatitude = query.getDouble(0);
-			dataRightLongitude = query.getDouble(1);
-			dataBottomLatitude = query.getDouble(2);
-			dataLeftLongitude = query.getDouble(3);
-		}
-		query.close();
-		if (log.isDebugEnabled()) {
-			log.debug("Initializing db " + file.getAbsolutePath() + " " + (System.currentTimeMillis() - start) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		}
-		return true;
+		return super.initialize(progress, file, IndexConstants.POI_TABLE_VERSION, IndexPoiTable.getTable());
 	}
 	
-	public synchronized void close(){
-		if(db != null){
-			db.close();
-			dataRightLongitude  = dataLeftLongitude = dataBottomLatitude= dataTopLatitude = 0;
-			cachedAmenities.clear();
-			cTopLatitude = cBottomLatitude = cLeftLongitude = cRightLongitude = 0; 
-		}
-	}
 	
-	public String getName() {
-		return name;
-	}
-	
-	private void bindString(SQLiteStatement s, int i, String v){
-		if(v == null){
-			s.bindNull(i);
-		} else {
-			s.bindString(i, v);
-		}
-	}
 	
 	public boolean updateAmenities(List<Amenity> amenities, double leftLon, double topLat, double rightLon, double bottomLat){
 		String latCol = IndexPoiTable.LATITUDE.name();
@@ -242,24 +178,6 @@ public class AmenityIndexRepository {
 		stat.close();
 		return true;
 	}
-	
-	public boolean checkContains(double latitude, double longitude){
-		if(latitude < dataTopLatitude && latitude > dataBottomLatitude && longitude > dataLeftLongitude && longitude < dataRightLongitude){
-			return true;
-		}
-		return false;
-	}
-	
-	public boolean checkContains(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude){
-		if(rightLongitude < dataLeftLongitude || leftLongitude > dataRightLongitude){
-			return false;
-		}
-		if(topLatitude < dataBottomLatitude || bottomLatitude > dataTopLatitude){
-			return false;
-		}
-		return true;
-	}
-
 
 	private final static String SITE_API = "http://api.openstreetmap.org/"; //$NON-NLS-1$
 	

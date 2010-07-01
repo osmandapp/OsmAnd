@@ -448,7 +448,7 @@ public class EditingPOIActivity {
 	}
 	
 	private void updateNodeInIndexes(String action, Node n){
-		List<AmenityIndexRepository> repos = ResourceManager.getResourceManager().searchRepositories(n.getLatitude(), n.getLongitude());
+		List<AmenityIndexRepository> repos = ResourceManager.getResourceManager().searchAmenityRepositories(n.getLatitude(), n.getLongitude());
 		if(DELETE_ACTION.equals(action)){
 			for(AmenityIndexRepository r: repos){
 				r.deleteAmenity(n.getId());
