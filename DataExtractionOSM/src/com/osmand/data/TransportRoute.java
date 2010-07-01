@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.osmand.osm.MapUtils;
 import com.osmand.osm.Relation;
 import com.osmand.osm.Way;
 
@@ -12,6 +13,8 @@ public class TransportRoute extends MapObject {
 	private List<TransportStop> forwardStops = new ArrayList<TransportStop>();
 	private List<TransportStop> backwardStops = new ArrayList<TransportStop>();
 	private String ref;
+	private String operator;
+	private String type;
 	
 	public TransportRoute(Relation r, String ref){
 		super(r);
@@ -46,6 +49,33 @@ public class TransportRoute extends MapObject {
 	
 	public void setRef(String ref) {
 		this.ref = ref;
+	}
+	
+	public String getOperator() {
+		return operator;
+	}
+	
+	public void setOperator(String operator) {
+		this.operator = operator;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	public int getAvgBothDistance(){
+		int d = 0;
+		for(int i=1; i< backwardStops.size(); i++){
+			d += MapUtils.getDistance(backwardStops.get(i-1).getLocation(), backwardStops.get(i).getLocation());
+		}
+		for(int i=1; i< forwardStops.size(); i++){
+			d += MapUtils.getDistance(forwardStops.get(i-1).getLocation(), forwardStops.get(i).getLocation());
+		}
+		return d;
 	}
 	
 	

@@ -12,9 +12,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -323,6 +327,17 @@ public class DataExtraction  {
 					transport.add((Relation) e);
 					processed = true;
 				}
+				if(e instanceof Node && "bus_stop".equals(e.getTag(OSMTagKey.HIGHWAY))){
+					// load all stops in order to get their names
+					processed = true;
+				}
+				
+				if (e instanceof Node && e.getTag(OSMTagKey.RAILWAY) != null) {
+					if ("tram_stop".equals(e.getTag(OSMTagKey.RAILWAY)) || "station".equals(e.getTag(OSMTagKey.RAILWAY))) {
+						// load all stops in order to get their names
+						processed = true;
+					}
+				}
 			}
 			// put all nodes into temporary db to get only required nodes after loading all data 
 			try {
@@ -571,6 +586,19 @@ public class DataExtraction  {
         /// way with name : МЗОР, ул. ...,
 	}
 
+	private static Set<String> acceptedRoutes = new HashSet<String>();
+	static {
+		acceptedRoutes.add("bus");
+		acceptedRoutes.add("trolleybus");
+		acceptedRoutes.add("share_taxi");
+		
+		acceptedRoutes.add("subway");
+		acceptedRoutes.add("train");
+		
+		acceptedRoutes.add("tram");
+		
+		acceptedRoutes.add("ferry");
+	}
 	
 	public void readingTransport(final ArrayList<Relation> transport, Region country, IProgress progress){
 		progress.startTask("Reading transport...", -1);
@@ -579,10 +607,18 @@ public class DataExtraction  {
 		for(Relation rel : transport){
 			String ref = rel.getTag(OSMTagKey.REF);
 			String route = rel.getTag(OSMTagKey.ROUTE);
+			String operator = rel.getTag(OSMTagKey.OPERATOR);
 			if(route == null || ref == null){
 				continue;
 			}
-			String operator = rel.getTag(OSMTagKey.OPERATOR);
+			if(!acceptedRoutes.contains(route)){
+				continue;
+			}
+			TransportRoute r = new TransportRoute(rel, ref);
+			r.setOperator(operator);
+			r.setType(route);
+			
+			
 			if(operator != null){
 				route = operator + " : " + route;
 			} 
@@ -590,42 +626,109 @@ public class DataExtraction  {
 				routes.put(route, new ArrayList<TransportRoute>());
 			}
 			
-			TransportRoute r = new TransportRoute(rel, ref);
-			for(Entry<Entity, String> e: rel.getMemberEntities().entrySet()){
+			
+			final Map<TransportStop, Integer> forwardStops = new LinkedHashMap<TransportStop, Integer>();
+			final Map<TransportStop, Integer> backwardStops = new LinkedHashMap<TransportStop, Integer>();
+			int currentStop = 0;
+			int forwardStop = 0;
+			int backwardStop = 0;
+			for (Entry<Entity, String> e : rel.getMemberEntities().entrySet()) {
 				if(e.getValue().contains("stop")){
 					if(e.getKey() instanceof Node){
 						if(!routeStops.containsKey(e.getKey().getId())){
 							routeStops.put(e.getKey().getId(), new TransportStop(e.getKey()));
 						}
 						TransportStop stop = routeStops.get(e.getKey().getId());
-						boolean forward = e.getValue().contains("forward") || !e.getValue().contains("backward");
-						if(forward){
+						boolean forward = e.getValue().contains("forward");
+						boolean backward = e.getValue().contains("backward");
+						currentStop++;
+						if(forward || !backward){
+							forwardStop ++;
+						}
+						if(backward){
+							backwardStop ++;
+						}
+						boolean common = !forward && !backward;
+						int index = -1;
+						int i = e.getValue().length() -1;
+						int accum = 1;
+						while(i >= 0 && Character.isDigit(e.getValue().charAt(i))){
+							if(index < 0){
+								index = 0;
+							}
+							index = accum * Character.getNumericValue(e.getValue().charAt(i)) + index; 
+							accum *= 10;
+							i --;
+						}
+						if(index < 0){
+							index = forward ? forwardStop : (backward ? backwardStop : currentStop) ;
+						}
+						if(forward || common){
+							forwardStops.put(stop, index);
 							r.getForwardStops().add(stop);
-						} else {
+						}
+						if(backward || common){
+							if(common){
+								// put with negative index
+								backwardStops.put(stop, -index);
+							} else {
+								backwardStops.put(stop, index);
+							}
+							
 							r.getBackwardStops().add(stop);
 						}
+						
 					}
 					
 				} else if(e.getKey() instanceof Way){
 					r.addWay((Way) e.getKey());
 				}
 			}
-			if(r.getBackwardStops().isEmpty() && !r.getForwardStops().isEmpty()){
-				List<TransportStop> stops = r.getBackwardStops();
-				for(TransportStop s : r.getForwardStops()){
-					stops.add(0, s);
-				}
-			} else if(!r.getForwardStops().isEmpty()){
-				if(r.getForwardStops().get(0) != r.getBackwardStops().get(r.getBackwardStops().size() - 1)){
-					r.getBackwardStops().add(r.getForwardStops().get(0));
-				}
-			} else {
+			if(forwardStops.isEmpty() && backwardStops.isEmpty()){
 				continue;
 			}
+			Collections.sort(r.getForwardStops(), new Comparator<TransportStop>(){
+				@Override
+				public int compare(TransportStop o1, TransportStop o2) {
+					return forwardStops.get(o1) - forwardStops.get(o2);
+				}
+			});
+			// all common stops are with negative index (reeval them)
+			for(TransportStop s : new ArrayList<TransportStop>(backwardStops.keySet())){
+				if(backwardStops.get(s) < 0){
+					backwardStops.put(s, backwardStops.size() + backwardStops.get(s) -1);
+				}
+			}
+			Collections.sort(r.getBackwardStops(), new Comparator<TransportStop>(){
+				@Override
+				public int compare(TransportStop o1, TransportStop o2) {
+					return backwardStops.get(o1) - backwardStops.get(o2);
+				}
+			});
 			routes.get(route).add(r);
+			
+			// validate that all is ok
+//			if (validateTransportStops(r.getBackwardStops(), r) && validateTransportStops(r.getForwardStops(), r)) {
+//				System.out.println("Route " + r + " is valid ");
+//			}
+			
 		}
 		
 		progress.finishTask();
+	}
+	
+	protected boolean validateTransportStops(List<TransportStop> stops, TransportRoute r){
+		boolean valid = true;
+		for (int i = 2; i < stops.size(); i++) {
+			TransportStop s1 = stops.get(i - 2);
+			TransportStop s2 = stops.get(i - 1);
+			TransportStop s3 = stops.get(i);
+			if (MapUtils.getDistance(s1.getLocation(), s2.getLocation())  > MapUtils.getDistance(s1.getLocation(), s3.getLocation()) * 1.3) {
+				System.out.println("SOMETHING WRONG with " + i + "th of  " + r.getRef() +" "+ r );
+				valid = false;
+			}
+		}
+		return valid;
 	}
 	
 	private void readingAmenities(final ArrayList<Entity> amenities, Region country) {
@@ -733,6 +836,7 @@ public class DataExtraction  {
 //		String path = "E:\\Information\\OSM maps\\minsk_extr.bz2";
 //		String path = "E:\\Information\\OSM maps\\netherlands.osm.bz2";
 		String wDir = "E:\\Information\\OSM maps\\osmand\\";
+
 		
 		
 		File f = new File(path);

@@ -403,7 +403,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 		buildTransportIndex = new JCheckBox();
 		buildTransportIndex.setText("Build transport index");
 		panel.add(buildTransportIndex);
-		buildTransportIndex.setSelected(false);
+		buildTransportIndex.setSelected(true);
 
 		loadingAllData = new JCheckBox();
 		loadingAllData.setText("Loading all osm data");
@@ -433,10 +433,12 @@ public class OsmExtractionUI implements IMapLocationListener {
 						if(buildAddressIndex.isSelected()){
 							dlg.startTask("Generating address index...", -1);
 							builder.writeAddress();
-							msg.append(", Address index ").append("successfully created");
+							msg.append(", address index ").append("successfully created");
 						}
 						if(buildTransportIndex.isSelected()){
-							// TODO
+							dlg.startTask("Generating transport index...", -1);
+							builder.writeTransport();
+							msg.append(", transport index ").append("successfully created");
 						}
 						
 //						new DataIndexReader().testIndex(new File(
@@ -753,6 +755,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 			}
 		} catch (InterruptedException e1) {
 			log.error("Interrupted", e1); 
+			updateButtonsBar();
 		} catch (InvocationTargetException e1) {
 			ExceptionHandler.handle("Exception during operation", e1.getCause());
 		}

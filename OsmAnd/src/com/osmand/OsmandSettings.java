@@ -158,7 +158,7 @@ public class OsmandSettings {
 
 	public static boolean isShowingViewAngle(Context ctx) {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.getBoolean(SHOW_VIEW_ANGLE, true);
+		return prefs.getBoolean(SHOW_VIEW_ANGLE, false);
 	}
 
 	// this value string is synchronized with settings_pref.xml preference name
@@ -290,7 +290,7 @@ public class OsmandSettings {
 
 	public static int getLastKnownMapZoom(Context ctx) {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.getInt(LAST_KNOWN_MAP_ZOOM, 3);
+		return prefs.getInt(LAST_KNOWN_MAP_ZOOM, 5);
 	}
 
 	public static void setLastKnownMapZoom(Context ctx, int zoom) {
