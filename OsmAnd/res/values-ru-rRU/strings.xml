@@ -28,7 +28,7 @@
 	<string name="max_level_download_tile">Уровень детализация</string>
 	<string name="max_level_download_tile_descr">Выберите максимальный уровень для загрузки из интернета</string>
 	<string name="route_about">О маршруте</string>
-	<string name="route_general_information">Общая протяженность = {0}, время в пути = ''{1}''.</string>
+	<string name="route_general_information">Общая протяженность = {0}, время в пути = \'\'{1}\'\'.</string>
 	<string name="router_service_descr">Выберите сервис для прокладки маршрута</string>
 	<string name="router_service">Прокладка маршрута</string>
 	<string name="download_sd_dir_not_accessible">Директория на SD карточка не доступна для сохранения</string>
@@ -209,7 +209,7 @@
 <string name="default_buttons_cancel">Отмена</string>
 <string name="default_buttons_apply">Применить</string><string name="default_buttons_add">Добавить</string><string name="default_buttons_no">Нет</string><string name="add_favorite_dialog_top_text">Введите имя точки</string>
 <string name="add_favorite_dialog_default_favourite_name">Избранная</string>
-<string name="add_favorite_dialog_favourite_added_template">Точка '{0}' была успешно добавлена к Избранным.</string>
+<string name="add_favorite_dialog_favourite_added_template">Точка \'{0}\' была успешно добавлена к Избранным.</string>
 
 <string name="favourites_context_menu_title">Контекстное меню</string>
 <string name="favourites_context_menu_navigate">Идти к</string>
