@@ -4,14 +4,17 @@ public class IndexConstants {
 	
 	// Important : Every time you change schema of db upgrade version!!! 
 	// If you want that new application support old index : put upgrade code in android app ResourceManager
+	public final static int TRANSPORT_TABLE_VERSION = 0;
 	public final static int POI_TABLE_VERSION = 0;
 	public final static int ADDRESS_TABLE_VERSION = 1;
 	
 	public static final String POI_INDEX_DIR = "POI/"; //$NON-NLS-1$
 	public static final String ADDRESS_INDEX_DIR = "Address/"; //$NON-NLS-1$
+	public static final String TRANSPORT_INDEX_DIR = "Transport/"; //$NON-NLS-1$
 	
 	public static final String POI_INDEX_EXT = ".poi.odb"; //$NON-NLS-1$
 	public static final String ADDRESS_INDEX_EXT = ".addr.odb"; //$NON-NLS-1$
+	public static final String TRANSPORT_INDEX_EXT = ".trans.odb"; //$NON-NLS-1$
 	
 	public interface IndexColumn {
 		public boolean isIndex();
@@ -108,6 +111,7 @@ public class IndexConstants {
 		return b.toString();
 	}
 
+	// POI index
 	
 	public enum IndexPoiTable implements IndexColumn {
 		ID("long"), LATITUDE("double", true), LONGITUDE("double", true), OPENING_HOURS, NAME, NAME_EN, TYPE, SUBTYPE; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -137,7 +141,8 @@ public class IndexConstants {
 			return index;
 		}
 	}
-		
+	
+	// Address index		
 		
 	public enum IndexCityTable implements IndexColumn {
 		ID("long"), LATITUDE("double", true), LONGITUDE("double", true), NAME, NAME_EN, CITY_TYPE; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -282,4 +287,115 @@ public class IndexConstants {
 			return index;
 		}
 	}
+	
+	// Transport Index
+	public enum IndexTransportStop implements IndexColumn {
+		ID("long"), LATITUDE("double", true), LONGITUDE("double", true), NAME, NAME_EN; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		boolean index = false;
+		String type = null;
+
+		private IndexTransportStop() {
+		}
+
+		private IndexTransportStop(String type) {
+			this.type = type;
+		}
+
+		private IndexTransportStop(String type, boolean index) {
+			this(type);
+			this.index = index;
+		}
+
+		public static String getTable() {
+			return "transport_stop"; //$NON-NLS-1$
+		}
+
+		public String getTableName() {
+			return getTable();
+		}
+
+		@Override
+		public String getType() {
+			return type;
+		}
+
+		@Override
+		public boolean isIndex() {
+			return index;
+		}
+	}
+	
+	
+	public enum IndexTransportRouteStop implements IndexColumn {
+		STOP("long"), ROUTE("long", true), DIRECTION("boolean"); //$NON-NLS-1$ //$NON-NLS-2$
+		boolean index = false;
+		String type = null;
+
+		private IndexTransportRouteStop() {
+		}
+
+		private IndexTransportRouteStop(String type) {
+			this.type = type;
+		}
+
+		private IndexTransportRouteStop(String type, boolean index) {
+			this(type);
+			this.index = index;
+		}
+
+		public static String getTable() {
+			return "transport_route_stop"; //$NON-NLS-1$
+		}
+
+		public String getTableName() {
+			return getTable();
+		}
+
+		@Override
+		public String getType() {
+			return type;
+		}
+
+		@Override
+		public boolean isIndex() {
+			return index;
+		}
+	}
+	
+	public enum IndexTransportRoute implements IndexColumn {
+		ID("long", true), TYPE, OPERATOR, REF, NAME, NAME_EN, DIST("int"); //$NON-NLS-1$ //$NON-NLS-2$
+		boolean index = false;
+		String type = null;
+
+		private IndexTransportRoute() {
+		}
+
+		private IndexTransportRoute(String type) {
+			this.type = type;
+		}
+
+		private IndexTransportRoute(String type, boolean index) {
+			this(type);
+			this.index = index;
+		}
+
+		public static String getTable() {
+			return "transport_route"; //$NON-NLS-1$
+		}
+
+		public String getTableName() {
+			return getTable();
+		}
+
+		@Override
+		public String getType() {
+			return type;
+		}
+
+		@Override
+		public boolean isIndex() {
+			return index;
+		}
+	}
+	
 }

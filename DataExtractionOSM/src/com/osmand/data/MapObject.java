@@ -103,5 +103,10 @@ public abstract class MapObject implements Comparable<MapObject> {
 	public void doDataPreparation() {
 		
 	}
+	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + " " + name +"("+id+")";
+	}
 
 }
