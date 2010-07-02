@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="show_transport_over_map_description">Show public transport stops on map</string>
+	<string name="show_transport_over_map">Show transport stops</string>
 	<string name="hello">Navigation application OsmAnd</string>
 	<string name="update_poi_success">POI data was updated successfully ({0} were loaded)</string>
 	<string name="update_poi_error_local">Error updating local indexes</string>

@@ -174,9 +174,8 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		osmBugsLayer = new OsmBugsLayer(this);
 		// 3. poi layer
 		poiMapLayer = new POIMapLayer();
-		// 4. poi layer
+		// 4. transport layer
 		transportStopsLayer = new TransportStopsLayer();
-		mapView.addLayer(transportStopsLayer);
 		// 5. point navigation layer
 		navigationLayer = new PointNavigationLayer();
 		mapView.addLayer(navigationLayer);
@@ -353,7 +352,8 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     }
     
     private void updateSpeedBearing(Location location) {
-		// For gps it's bad way. It's widely used for testing purposes
+		// For network/gps it's bad way (not accurate). It's widely used for testing purposes
+    	// possibly keep using only for emulator case
 		if (!providerSupportsSpeed && locationLayer.getLastKnownLocation() != null && location != null) {
 			if (locationLayer.getLastKnownLocation().distanceTo(location) > 3) {
 				float d = location.distanceTo(locationLayer.getLastKnownLocation());
@@ -561,6 +561,13 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		backToLocation.setVisibility(View.INVISIBLE);
 		
 		
+		if(mapView.getLayers().contains(transportStopsLayer) != OsmandSettings.isShowingTransportOverMap(this)){
+			if(OsmandSettings.isShowingTransportOverMap(this)){
+				mapView.addLayer(transportStopsLayer, routeLayer);
+			} else {
+				mapView.removeLayer(transportStopsLayer);
+			}
+		}
 
 		if(mapView.getLayers().contains(poiMapLayer) != OsmandSettings.isShowingPoiOverMap(this)){
 			if(OsmandSettings.isShowingPoiOverMap(this)){

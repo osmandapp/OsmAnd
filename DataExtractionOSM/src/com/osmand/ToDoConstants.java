@@ -29,6 +29,7 @@ public class ToDoConstants {
 	//		 IDEA TO HAVE :
 	
 
+	//   66. Transport routing (show next stop, total distance, show stop get out).
     //   43. Enable poi filter by name
 	//   58. Upload/Download zip-index from site & unzip them on phone
 	//   45. Get clear <Use internet> settings. Move that setting on top settings screen. 
