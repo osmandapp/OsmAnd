@@ -26,7 +26,7 @@ public class ToDoConstants {
 	//		 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m) [dacha]
 	//   33. Build transport locations. Create transport index (transport-stops) (investigate)
 	// 		 DONE : Load transport routes in swing, init	
-	//		 TODO : add progress calculating (fix performance), fix area radius
+	//		 TODO : add progress calculating, add intermediate points, add menu for stops 
 	
 
 	//   66. Transport routing (show next stop, total distance, show stop get out).
@@ -42,7 +42,7 @@ public class ToDoConstants {
 	//   40. Support simple vector road rendering (require new index file) (?)
 	//   63. Support simple offline routing(require new index file) (?)
 
-	// BUGS Android
+	// FIXME BUGS Android
 	//  FIXME !!!! Check agains ID is not unique ! (for relation/node/way - it could be the same) - checked for data extraction & index creator
 	// 	REFACTOR Settings activity ( for check box properties!)
 	//  Download index show current index information
@@ -57,19 +57,7 @@ public class ToDoConstants {
 	// BUGS Swing
 	
 	//  DONE ANDROID :
-	//   55. Update POI data from internet for selected area (do not suggest to create or extend POI index)  
-	//   62. History of searched points	 (once point was selected to go/to show it is saved in history db and could be shown)
-	//   47. Internet connectivity could be checked before trying to use [merged with 45]
-    //   26. Show the whole street on map (when it is chosen in search activity). Possibly extend that story to show layer with streets. 
-	// 		 [Closed : because it is not necessary]
-	//   53. Add progress bars : to internet communication activities [editing/commiting/deleting poi], do not hide edit poi dialog if operation failed
-	//   63. Implement internet search address [OSM Nominatim]
-	//   56. Add usage of CloudMade API for calculating route (show next turn & distance to it instead of mini map).
-	//   57. Implement routing information about expected time arriving
-	//   58. Implement difference about show route/follow route (show travel time/arrival time, show mini map/next turn, etc)
-	//   59. Show route information (directions/time, ....). Now is shown in context menu route (about route)
-	//   46. Implement downloading strategy for tiles : select max zoom to download [16,15,14,...]
-	// 		 That means you can save internet because from [16 -> zoom -> 18], [14 -> zoom -> 16 - suitable for speed > 40], ...
+
 	
 	// DONE SWING
 

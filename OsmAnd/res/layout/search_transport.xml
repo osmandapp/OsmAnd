@@ -4,6 +4,7 @@
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 	<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+		<ProgressBar android:id="@+id/ProgressBar" android:layout_width="wrap_content" android:layout_height="wrap_content"></ProgressBar>
 		<Button  android:text="@string/search_POI_level_btn" android:id="@+id/SearchPOILevelButton" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1"></Button>
 		<TextView android:layout_width="wrap_content" android:text="" android:id="@+id/SearchAreaText" android:layout_height="wrap_content"/>
 		

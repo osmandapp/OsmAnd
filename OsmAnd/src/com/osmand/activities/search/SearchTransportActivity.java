@@ -75,19 +75,14 @@ public class SearchTransportActivity extends ListActivity {
 	}
 	
 	public String getSearchArea(){
-		// TODO
-		if(zoom <= 14){
-			int d = (int) (1 * (1 << (14 - zoom)));
-			return " < " + d + " " + Messages.getMessage(Messages.KEY_KM);  //$NON-NLS-1$//$NON-NLS-2$
-		} else {
-			return " < 500 " + Messages.getMessage(Messages.KEY_M);  //$NON-NLS-1$
-		}
+		return " < " + 125 * (1 << (17 - zoom)) + " " + Messages.getMessage(Messages.KEY_M); //$NON-NLS-1$//$NON-NLS-2$
 	}
 	public boolean isSearchFurtherAvailable() {
 		return zoom >= finalZoom;
 	}
 	
 	public void searchFurther(){
+		// TODO use progress
 		if (lastKnownMapLocation != null) {
 			List<TransportIndexRepository> rs = ResourceManager.getResourceManager().searchTransportRepositories(lastKnownMapLocation.getLatitude(), 
 					lastKnownMapLocation.getLongitude());
@@ -96,7 +91,7 @@ public class SearchTransportActivity extends ListActivity {
 				searchTransportLevel.setEnabled(isSearchFurtherAvailable());
 				List<RouteInfoLocation> res = repo.searchTransportRouteStops(lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude(), 
 						locationToGo, zoom);
-				// TODO add progress
+
 				stopsAdapter.setNewModel(res);
 			} else {
 				repo = null;
@@ -127,10 +122,12 @@ public class SearchTransportActivity extends ListActivity {
 		for(TransportStop st : stops){
 			String n = st.getName(OsmandSettings.usingEnglishNames(this));
 			if(locationToGo != null){
-				n += " - " + MapUtils.getFormattedDistance((int) MapUtils.getDistance(locationToGo, st.getLocation())); //$NON-NLS-1$
-			}
+				n += " - [" + MapUtils.getFormattedDistance((int) MapUtils.getDistance(locationToGo, st.getLocation())) +"]"; //$NON-NLS-1$ //$NON-NLS-2$
+			} 
+			n = MapUtils.getFormattedDistance((int) MapUtils.getDistance(lastKnownMapLocation, st.getLocation())) +" - " + n; //$NON-NLS-1$
 			items.add(n);
 		}
+		// TODO show menu mark as intermediate mark on map
 		builder.setItems(items.toArray(new String[items.size()]), null);
 		builder.show();
 	}
@@ -166,10 +163,13 @@ public class SearchTransportActivity extends ListActivity {
 			TransportRoute route = stop.getRoute();
 			StringBuilder labelW = new StringBuilder(150);
 			labelW.append(route.getType()).append(" ").append(route.getRef()); //$NON-NLS-1$
+			labelW.append(" - ["); //$NON-NLS-1$
 			if (locationToGo != null) {
-				labelW.append(" - ").append(MapUtils.getFormattedDistance(stop.getDistToLocation())); //$NON-NLS-1$
+				labelW.append(MapUtils.getFormattedDistance(stop.getDistToLocation()));
+			} else {
+				labelW.append("no target");
 			}
-			labelW.append("\n").append(route.getName(OsmandSettings.usingEnglishNames(SearchTransportActivity.this))); //$NON-NLS-1$
+			labelW.append("]\n").append(route.getName(OsmandSettings.usingEnglishNames(SearchTransportActivity.this))); //$NON-NLS-1$
 			label.setText(labelW.toString());
 			// TODO icons
 			if (stop.getDistToLocation() < 400) {
