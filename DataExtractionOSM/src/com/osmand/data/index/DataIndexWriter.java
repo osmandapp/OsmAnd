@@ -340,7 +340,7 @@ public class DataIndexWriter {
 			assert IndexTransportRouteStop.values().length == 3;
 			prepRouteStops.setLong(IndexTransportRouteStop.ROUTE.ordinal() + 1, r.getId());
 			prepRouteStops.setLong(IndexTransportRouteStop.STOP.ordinal() + 1, s.getId());
-			prepRouteStops.setBoolean(IndexTransportRouteStop.DIRECTION.ordinal() + 1, direction);
+			prepRouteStops.setInt(IndexTransportRouteStop.DIRECTION.ordinal() + 1, direction ? 1 : 0);
 			addBatch(count, prepRouteStops);
 		}
 	}

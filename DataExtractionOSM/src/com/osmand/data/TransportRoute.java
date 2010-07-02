@@ -15,10 +15,14 @@ public class TransportRoute extends MapObject {
 	private String ref;
 	private String operator;
 	private String type;
+	private Integer dist = null;
 	
 	public TransportRoute(Relation r, String ref){
 		super(r);
 		this.ref = ref;
+	}
+	
+	public TransportRoute(){
 	}
 	
 	public List<TransportStop> getForwardStops() {
@@ -65,6 +69,17 @@ public class TransportRoute extends MapObject {
 	
 	public void setType(String type) {
 		this.type = type;
+	}
+	
+	public int getDistance(){
+		if(dist == null){
+			dist = getAvgBothDistance();
+		}
+		return dist;
+	}
+	
+	public void setDistance(Integer dist) {
+		this.dist = dist;
 	}
 	
 	public int getAvgBothDistance(){
