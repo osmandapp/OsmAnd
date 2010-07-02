@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	android:orientation="horizontal">
+
+	<ImageView android:id="@+id/search_icon" android:layout_width="25px"
+		android:paddingLeft="2px" android:paddingRight="2px"
+		android:paddingTop="2px" android:layout_height="fill_parent" />
+	
+	<TextView android:id="@+id/distance"
+		android:layout_width="wrap_content" android:layout_height="fill_parent" android:gravity="left|center_vertical"
+		android:textSize="21px" android:maxWidth="70dp" android:minWidth="70dp"/>
+	<TextView android:id="@+id/label" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:textSize="21px" />
+
+</LinearLayout>

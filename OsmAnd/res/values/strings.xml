@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="transport">Transport</string>
+	<!--  TODO rus -->
 	<string name="show_transport_over_map_description">Show public transport stops on map</string>
 	<string name="show_transport_over_map">Show transport stops</string>
 	<string name="hello">Navigation application OsmAnd</string>

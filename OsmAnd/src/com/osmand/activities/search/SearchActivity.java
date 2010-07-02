@@ -30,6 +30,7 @@ public class SearchActivity extends TabActivity {
         addressSpec = host.newTabSpec("Search_Address").setIndicator(getString(R.string.address)).setContent(new Intent(this, SearchAddressActivity.class));//$NON-NLS-1$
         host.addTab(addressSpec); 
         host.addTab(host.newTabSpec("Search_Location").setIndicator(getString(R.string.search_tabs_location)).setContent(new Intent(this, NavigatePointActivity.class))); //$NON-NLS-1$
+        host.addTab(host.newTabSpec("Search_Transport").setIndicator(getString(R.string.transport)).setContent(new Intent(this, SearchTransportActivity.class))); //$NON-NLS-1$
         host.addTab(host.newTabSpec("Search_History").setIndicator(getString(R.string.history)).setContent(new Intent(this, SearchHistoryActivity.class))); //$NON-NLS-1$
 	}
 	

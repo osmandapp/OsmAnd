@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!-- This file is at /res/layout/list.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+		<Button  android:text="@string/search_POI_level_btn" android:id="@+id/SearchPOILevelButton" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1"></Button>
+		<TextView android:layout_width="wrap_content" android:text="" android:id="@+id/SearchAreaText" android:layout_height="wrap_content"/>
+		
+	</LinearLayout>
+	<ListView android:id="@android:id/list" android:layout_width="fill_parent"
+		android:layout_height="fill_parent"></ListView>
+</LinearLayout>

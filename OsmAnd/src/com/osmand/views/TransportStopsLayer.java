@@ -3,6 +3,7 @@ package com.osmand.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.osmand.OsmandSettings;
 import com.osmand.ResourceManager;
 import com.osmand.TransportIndexRepository;
+import com.osmand.activities.search.SearchTransportActivity;
 import com.osmand.data.TransportStop;
 import com.osmand.osm.MapUtils;
 
@@ -144,8 +146,8 @@ public class TransportStopsLayer implements OsmandMapLayer {
 
 	@Override
 	public boolean onLongPressEvent(PointF point) {
-		// TODO open search transport
-		return false;
+		view.getContext().startActivity(new Intent(view.getContext(), SearchTransportActivity.class));
+		return true;
 	}
 
 }
