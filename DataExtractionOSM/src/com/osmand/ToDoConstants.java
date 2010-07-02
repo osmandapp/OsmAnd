@@ -26,7 +26,7 @@ public class ToDoConstants {
 	//		 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m) [dacha]
 	//   33. Build transport locations. Create transport index (transport-stops) (investigate)
 	// 		 DONE : Load transport routes in swing, init	
-	//		 TODO : add progress calculating, add intermediate points, add menu for stops 
+	//		 TODO : add intermediate points, add menu for stops (show map) 
 	
 
 	//   66. Transport routing (show next stop, total distance, show stop get out).

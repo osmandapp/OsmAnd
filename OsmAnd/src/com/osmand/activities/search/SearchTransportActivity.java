@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.osmand.Messages;
@@ -49,6 +50,7 @@ public class SearchTransportActivity extends ListActivity {
 	private final static int finalZoom = 13;
 	private final static int initialZoom = 17;
 	private int zoom = initialZoom;
+	private ProgressBar progress;
 
 	
 	
@@ -68,9 +70,11 @@ public class SearchTransportActivity extends ListActivity {
 				}
 			}
 		});
-
+		progress = (ProgressBar) findViewById(R.id.ProgressBar);
+		progress.setVisibility(View.INVISIBLE);
 		stopsAdapter = new TransportStopAdapter(new ArrayList<RouteInfoLocation>());
 		setListAdapter(stopsAdapter);
+		searchArea.setText(getSearchArea());
 
 	}
 	
@@ -82,17 +86,22 @@ public class SearchTransportActivity extends ListActivity {
 	}
 	
 	public void searchFurther(){
-		// TODO use progress
+		// use progress
+		searchTransportLevel.setEnabled(false);
 		if (lastKnownMapLocation != null) {
 			List<TransportIndexRepository> rs = ResourceManager.getResourceManager().searchTransportRepositories(lastKnownMapLocation.getLatitude(), 
 					lastKnownMapLocation.getLongitude());
 			if(!rs.isEmpty()){
 				repo = rs.get(0);
-				searchTransportLevel.setEnabled(isSearchFurtherAvailable());
-				List<RouteInfoLocation> res = repo.searchTransportRouteStops(lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude(), 
-						locationToGo, zoom);
-
-				stopsAdapter.setNewModel(res);
+				progress.setVisibility(View.VISIBLE);
+				new Thread(new Runnable(){
+					@Override
+					public void run() {
+						List<RouteInfoLocation> res = repo.searchTransportRouteStops(lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude(), 
+								locationToGo, zoom);
+						updateUIList(res);
+					}
+				},"SearchingTransport").start(); //$NON-NLS-1$
 			} else {
 				repo = null;
 				stopsAdapter.clear();
@@ -100,8 +109,6 @@ public class SearchTransportActivity extends ListActivity {
 		} else {
 			stopsAdapter.clear();
 		}
-		searchTransportLevel.setEnabled(isSearchFurtherAvailable());
-		searchArea.setText(getSearchArea());
 	}
 	
 	@Override
@@ -111,8 +118,19 @@ public class SearchTransportActivity extends ListActivity {
 		locationToGo = OsmandSettings.getPointToNavigate(this);
 		searchFurther();
 	}
-
-
+	
+	protected void updateUIList(final List<RouteInfoLocation> stopsList){
+		runOnUiThread(new Runnable(){
+			@Override
+			public void run() {
+				stopsAdapter.setNewModel(stopsList);
+				searchTransportLevel.setEnabled(isSearchFurtherAvailable());
+				searchArea.setText(getSearchArea());
+				progress.setVisibility(View.INVISIBLE);
+			}
+		});
+	}
+	
 
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		RouteInfoLocation item = ((TransportStopAdapter)getListAdapter()).getItem(position);
@@ -123,8 +141,9 @@ public class SearchTransportActivity extends ListActivity {
 			String n = st.getName(OsmandSettings.usingEnglishNames(this));
 			if(locationToGo != null){
 				n += " - [" + MapUtils.getFormattedDistance((int) MapUtils.getDistance(locationToGo, st.getLocation())) +"]"; //$NON-NLS-1$ //$NON-NLS-2$
-			} 
-			n = MapUtils.getFormattedDistance((int) MapUtils.getDistance(lastKnownMapLocation, st.getLocation())) +" - " + n; //$NON-NLS-1$
+			} else {
+				n = MapUtils.getFormattedDistance((int) MapUtils.getDistance(lastKnownMapLocation, st.getLocation())) +" - " + n; //$NON-NLS-1$
+			}
 			items.add(n);
 		}
 		// TODO show menu mark as intermediate mark on map
@@ -167,12 +186,12 @@ public class SearchTransportActivity extends ListActivity {
 			if (locationToGo != null) {
 				labelW.append(MapUtils.getFormattedDistance(stop.getDistToLocation()));
 			} else {
-				labelW.append("no target");
+				labelW.append("none");
 			}
 			labelW.append("]\n").append(route.getName(OsmandSettings.usingEnglishNames(SearchTransportActivity.this))); //$NON-NLS-1$
 			label.setText(labelW.toString());
 			// TODO icons
-			if (stop.getDistToLocation() < 400) {
+			if (locationToGo == null || stop.getDistToLocation() < 400) {
 				icon.setImageResource(R.drawable.poi);
 			} else {
 				icon.setImageResource(R.drawable.closed_poi);
