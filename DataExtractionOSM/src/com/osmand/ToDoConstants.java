@@ -44,6 +44,8 @@ public class ToDoConstants {
 
 	// BUGS Android
 	//  FIXME !!!! Check agains ID is not unique ! (for relation/node/way - it could be the same) - checked for data extraction & index creator
+	// 	REFACTOR Settings activity ( for check box properties!)
+	//  Download index show current index information
 	
 	// TODO swing
 	// 9. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !
