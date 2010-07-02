@@ -25,8 +25,8 @@ public class ToDoConstants {
 	//   61. Provide route information for YOURS (calclate turns/angle/expected time). 
 	//		 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m) [dacha]
 	//   33. Build transport locations. Create transport index (transport-stops) (investigate)
-	// 		 DONE: Load transport routes in swing.	
-	//		 IDEA TO HAVE :
+	// 		 DONE : Load transport routes in swing, init	
+	//		 TODO : add progress calculating (fix performance), fix area radius
 	
 
 	//   66. Transport routing (show next stop, total distance, show stop get out).

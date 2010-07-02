@@ -3,17 +3,24 @@ package com.osmand;
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 
 import android.database.Cursor;
 
+import com.osmand.data.TransportRoute;
 import com.osmand.data.TransportStop;
 import com.osmand.data.index.IndexConstants;
 import com.osmand.data.index.IndexConstants.IndexTransportRoute;
 import com.osmand.data.index.IndexConstants.IndexTransportRouteStop;
 import com.osmand.data.index.IndexConstants.IndexTransportStop;
+import com.osmand.osm.LatLon;
+import com.osmand.osm.MapUtils;
 
 public class TransportIndexRepository extends BaseLocationIndexRepository<TransportStop> {
 	 private static final Log log = LogUtil.getLog(TransportIndexRepository.class);
@@ -74,7 +81,7 @@ public class TransportIndexRepository extends BaseLocationIndexRepository<Transp
 
 		if (cacheSQLRouteDescriptions == null) {
 			StringBuilder sql = new StringBuilder(200);
-			sql.append("SELECT ").append(IndexTransportRoute.REF).append(",").append(IndexTransportRoute.TYPE) //$NON-NLS-1$//$NON-NLS-2$
+			sql.append("SELECT DISTINCT ").append(IndexTransportRoute.REF).append(",").append(IndexTransportRoute.TYPE) //$NON-NLS-1$//$NON-NLS-2$
 					.append(",").append(IndexTransportRoute.NAME).append(",").append(IndexTransportRoute.NAME_EN); //$NON-NLS-1$ //$NON-NLS-2$
 			sql.append(" FROM ").append(IndexTransportRoute.getTable()).append(" JOIN ").append(IndexTransportRouteStop.getTable()); //$NON-NLS-1$ //$NON-NLS-2$
 			sql.append(" ON ").append(IndexTransportRoute.getTable()).append(".").append(IndexTransportRoute.ID).append(" = "); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -113,5 +120,238 @@ public class TransportIndexRepository extends BaseLocationIndexRepository<Transp
 		}
 		
 		checkCachedObjects(topLatitude, leftLongitude, bottomLatitude, rightLongitude, cZoom, toFill);
+	}
+	
+	
+	private static String cacheSQLRoutes = null;
+	public List<RouteInfoLocation> searchTransportRouteStops(double latitude, double longitude, LatLon locationToGo, int zoom) {
+		long now = System.currentTimeMillis();
+		LatLon loc = new LatLon(latitude, longitude);
+		double tileNumberX = MapUtils.getTileNumberX(zoom, longitude);
+		double tileNumberY = MapUtils.getTileNumberY(zoom, latitude);
+		double topLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY - 0.5);
+		double bottomLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY + 0.5);
+		double leftLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX - 0.5);
+		double rightLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX + 0.5);
+		assert IndexTransportRoute.values().length == 7;
+		int shift = IndexTransportRoute.values().length;
+		assert IndexTransportStop.values().length == 5;
+		int shift2 = IndexTransportStop.values().length;
+		if(cacheSQLRoutes == null){
+			StringBuilder sql = new StringBuilder(200);
+			sql.append("SELECT "); //$NON-NLS-1$
+			String[] cols = IndexConstants.generateColumnNames(IndexTransportRoute.values());
+			for(int i=0; i<cols.length; i++){
+				if(i>0){
+					sql.append(", "); //$NON-NLS-1$
+				}
+				sql.append(IndexTransportRoute.getTable()).append(".").append(cols[i]); //$NON-NLS-1$
+			}
+			cols = IndexConstants.generateColumnNames(IndexTransportStop.values());
+			for(int i=0; i<cols.length; i++){
+				sql.append(", ").append(IndexTransportStop.getTable()).append(".").append(cols[i]); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+			sql.append(", ").append(IndexTransportRouteStop.getTable()).append(".").append(IndexTransportRouteStop.DIRECTION); //$NON-NLS-1$ //$NON-NLS-2$
+			
+			sql.append(" FROM ").append(IndexTransportStop.getTable()); //$NON-NLS-1$
+			// join with stops table
+			sql.append(" JOIN ").append(IndexTransportRouteStop.getTable()); //$NON-NLS-1$ 
+			sql.append(" ON ").append(IndexTransportStop.getTable()).append(".").append(IndexTransportStop.ID); //$NON-NLS-1$ //$NON-NLS-2$
+			sql.append(" = ").append(IndexTransportRouteStop.getTable()).append(".").append(IndexTransportRouteStop.STOP); //$NON-NLS-1$ //$NON-NLS-2$
+			// join with route table
+			sql.append(" JOIN ").append(IndexTransportRoute.getTable()); //$NON-NLS-1$ 
+			sql.append(" ON ").append(IndexTransportRoute.getTable()).append(".").append(IndexTransportRoute.ID); //$NON-NLS-1$ //$NON-NLS-2$
+			sql.append(" = ").append(IndexTransportRouteStop.getTable()).append(".").append(IndexTransportRouteStop.ROUTE); //$NON-NLS-1$ //$NON-NLS-2$
+
+			sql.append(" WHERE ").append("? < latitude AND latitude < ? AND ? < longitude AND longitude < ?"); //$NON-NLS-1$ //$NON-NLS-2$
+			cacheSQLRoutes = sql.toString();
+		}
+		Cursor query = db.rawQuery(cacheSQLRoutes, 
+				new String[] {bottomLatitude + "" , topLatitude + "" , leftLongitude + "" , rightLongitude + "" }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		
+		Map<Long, RouteInfoLocation> registeredRoutes = new LinkedHashMap<Long, RouteInfoLocation>();
+		if (query.moveToFirst()) {
+			do {
+				TransportRoute route = new TransportRoute();
+				route.setId(query.getLong(IndexTransportRoute.ID.ordinal()));
+				route.setDistance(query.getInt(IndexTransportRoute.DIST.ordinal()));
+				route.setName(query.getString(IndexTransportRoute.NAME.ordinal()));
+				route.setEnName(query.getString(IndexTransportRoute.NAME_EN.ordinal()));
+				route.setRef(query.getString(IndexTransportRoute.REF.ordinal()));
+				route.setOperator(query.getString(IndexTransportRoute.OPERATOR.ordinal()));
+				route.setType(query.getString(IndexTransportRoute.TYPE.ordinal()));
+				TransportStop s = new TransportStop();
+				s.setId(query.getLong(shift + IndexTransportStop.ID.ordinal()));
+				s.setName(query.getString(shift + IndexTransportStop.NAME.ordinal()));
+				s.setEnName(query.getString(shift + IndexTransportStop.NAME_EN.ordinal()));
+				s.setLocation(query.getDouble(shift + IndexTransportStop.LATITUDE.ordinal()), 
+						query.getDouble(shift + IndexTransportStop.LONGITUDE.ordinal()));
+				boolean direction = query.getInt(shift2 + shift) > 0; 
+				long idToPut = route.getId() << 1 + (direction ? 1 : 0);
+				if(registeredRoutes.containsKey(idToPut)){
+					TransportStop st = registeredRoutes.get(idToPut).getStart();
+					if(MapUtils.getDistance(loc, st.getLocation()) < MapUtils.getDistance(loc, s.getLocation())){
+						continue;
+					}
+				}
+				RouteInfoLocation r = new RouteInfoLocation();
+				r.setRoute(route);
+				r.setStart(s);
+				r.setDirection(direction);
+				registeredRoutes.put(idToPut, r);
+				
+				
+			} while (query.moveToNext());
+		}
+		query.close();
+
+		if (log.isDebugEnabled()) {
+			log.debug(String.format("Search for routes done in %s ms found %s.", //$NON-NLS-1$
+					System.currentTimeMillis() - now, registeredRoutes.size())); 
+		}
+		
+		ArrayList<RouteInfoLocation> list = new ArrayList<RouteInfoLocation>(registeredRoutes.values());
+		preloadRouteStopsAndCalculateDistance(loc, locationToGo, list);
+		return list;
+		
+	}
+
+	private static String cacheSQLRouteStops = null;
+	protected void preloadRouteStopsAndCalculateDistance(final LatLon loc, LatLon locationToGo, List<RouteInfoLocation> listRoutes){
+		long now = System.currentTimeMillis();
+		// TODO do 1 request
+		if(cacheSQLRouteStops  == null){
+			StringBuilder sql = new StringBuilder(200);
+			sql.append("SELECT "); //$NON-NLS-1$
+			String[] cols = IndexConstants.generateColumnNames(IndexTransportStop.values());
+			for(int i=0; i<cols.length; i++){
+				if(i>0){
+					sql.append(", "); //$NON-NLS-1$
+				}
+				sql.append(IndexTransportStop.getTable()).append(".").append(cols[i]); //$NON-NLS-1$
+			}
+			
+			sql.append(" FROM ").append(IndexTransportRouteStop.getTable()); //$NON-NLS-1$
+			// join with stops table
+			sql.append(" JOIN ").append(IndexTransportStop.getTable()); //$NON-NLS-1$ 
+			sql.append(" ON ").append(IndexTransportStop.getTable()).append(".").append(IndexTransportStop.ID); //$NON-NLS-1$ //$NON-NLS-2$
+			sql.append(" = ").append(IndexTransportRouteStop.getTable()).append(".").append(IndexTransportRouteStop.STOP); //$NON-NLS-1$ //$NON-NLS-2$
+
+			sql.append(" WHERE ").append("? = ").  //$NON-NLS-1$//$NON-NLS-2$
+				append(IndexTransportRouteStop.getTable()).append(".").append(IndexTransportRouteStop.ROUTE); //$NON-NLS-1$
+			sql.append(" AND ?=").append(IndexTransportRouteStop.getTable()).append(".").append(IndexTransportRouteStop.DIRECTION); //$NON-NLS-1$ //$NON-NLS-2$
+			cacheSQLRouteStops = sql.toString();
+		}
+		
+		for(RouteInfoLocation i : listRoutes){
+			int dist = 0;
+			if(locationToGo != null){
+				dist = (int) MapUtils.getDistance(locationToGo, i.getStart().getLocation());
+			}
+
+			Cursor query = db.rawQuery(cacheSQLRouteStops, 
+					new String[] {i.getRoute().getId()+"", i.getDirection()?"1":"0"}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			if (query.moveToFirst()) {
+				// load only part of the route
+				boolean found = false;
+				do {
+					TransportStop st = null;
+					if(found){
+						st = new TransportStop();
+						st.setId(query.getLong(IndexTransportStop.ID.ordinal()));
+						st.setLocation(query.getDouble(IndexTransportStop.LATITUDE.ordinal()), 
+									query.getDouble(IndexTransportStop.LONGITUDE.ordinal()));
+						st.setName(query.getString(IndexTransportStop.NAME.ordinal() ));
+						st.setEnName(query.getString(IndexTransportStop.NAME_EN.ordinal()));
+					} else if(query.getLong(IndexTransportStop.ID.ordinal())== i.getStart().getId()){
+						st = i.getStart();
+						found = true;
+					}
+					
+					if(found){
+						if(locationToGo != null){
+							double d = MapUtils.getDistance(locationToGo,st.getLocation());
+							if(d < dist){
+								dist = (int) d;
+							}
+						}
+						if(i.direction){
+							i.getRoute().getForwardStops().add(st);
+						} else {
+							i.getRoute().getBackwardStops().add(st);
+						}
+					}
+				} while (query.moveToNext());
+			}
+			query.close();
+			
+			if(locationToGo != null){
+				i.setDistToLocation(dist);
+			}
+		}
+		
+		if (log.isDebugEnabled()) {
+			log.debug(String.format("Loading routes done in %s ms for %s routes.", //$NON-NLS-1$
+					System.currentTimeMillis() - now, listRoutes.size())); 
+		}
+		
+		if(locationToGo != null){
+			Collections.sort(listRoutes, new Comparator<RouteInfoLocation>(){
+				@Override
+				public int compare(RouteInfoLocation object1, RouteInfoLocation object2) {
+					return object1.getDistToLocation() - object2.getDistToLocation();
+				}
+				
+			});
+		} else {
+			Collections.sort(listRoutes, new Comparator<RouteInfoLocation>(){
+				@Override
+				public int compare(RouteInfoLocation object1, RouteInfoLocation object2) {
+					return Double.compare(MapUtils.getDistance(loc, object1.getStart().getLocation()),
+							MapUtils.getDistance(loc, object2.getStart().getLocation()));
+				}
+				
+			});
+		}
+		
+	}
+	
+	public static class RouteInfoLocation {
+		private TransportStop start;
+		private TransportRoute route;
+		private int distToLocation;
+		private boolean direction;
+		
+		public TransportStop getStart() {
+			return start;
+		}
+		
+		public TransportRoute getRoute() {
+			return route;
+		}
+		
+		public boolean getDirection(){
+			return direction;
+		}
+		
+		public void setDirection(boolean direction) {
+			this.direction = direction;
+		}
+		
+		public int getDistToLocation() {
+			return distToLocation;
+		}
+		
+		public void setStart(TransportStop start) {
+			this.start = start;
+		}
+		
+		public void setRoute(TransportRoute route) {
+			this.route = route;
+		}
+		
+		public void setDistToLocation(int distToLocation) {
+			this.distToLocation = distToLocation;
+		}
 	}
 }

@@ -22,6 +22,7 @@
         <activity android:name=".activities.search.SearchPoiFilterActivity"></activity>
         <activity android:name=".activities.search.SearchAddressOnlineActivity"></activity>
         <activity android:name=".activities.search.SearchAddressActivity"></activity>
+        <activity android:name=".activities.search.SearchTransportActivity"></activity>
         <activity android:name=".activities.search.SearchHistoryActivity"></activity>
         <activity android:name=".activities.search.SearchCityByNameActivity"></activity>
         <activity android:name=".activities.search.SearchRegionByNameActivity"></activity>

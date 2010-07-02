@@ -212,7 +212,7 @@ public class DownloadIndexActivity extends ListActivity {
 			} else if(e.getKey().endsWith(IndexConstants.ADDRESS_INDEX_EXT)){
 				s = getString(R.string.address);
 			} else if(e.getKey().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)){
-				s = "Transport";
+				s = getString(R.string.transport);
 			}
 			
 			item.setText(s + "\n " + e.getKey().substring(0, l)); //$NON-NLS-1$

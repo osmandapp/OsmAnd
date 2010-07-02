@@ -382,24 +382,7 @@ public class ResourceManager {
 		}
 		return repos;
 	}
-	public List<TransportStop> searchTransportStops(double latitude, double longitude, int zoom, int limit) {
-		double tileNumberX = MapUtils.getTileNumberX(zoom, longitude);
-		double tileNumberY = MapUtils.getTileNumberY(zoom, latitude);
-		double topLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY - 0.5);
-		double bottomLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY + 0.5);
-		double leftLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX - 0.5);
-		double rightLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX + 0.5);
-		List<TransportStop> stops = new ArrayList<TransportStop>();
-		for (TransportIndexRepository index : transportRepositories.values()) {
-			if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
-				if (!index.checkCachedObjects(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, stops)) {
-					index.searchTransportStops(topLatitude, leftLongitude, bottomLatitude, rightLongitude, limit, stops);
-				}
-			}
-		}
-
-		return stops;
-	}
+	
 	
 	public void searchTransportAsync(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, List<TransportStop> toFill){
 		for(TransportIndexRepository index : transportRepositories.values()){
