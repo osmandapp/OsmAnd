@@ -50,6 +50,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private Preference downloadIndexes;
 	private ListPreference routerPreference;
 	private ListPreference maxLevelToDownload;
+	private CheckBoxPreference showTransport;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		autoZoom.setOnPreferenceChangeListener(this);
 		showOsmBugs =(CheckBoxPreference) screen.findPreference(OsmandSettings.SHOW_OSM_BUGS);
 		showOsmBugs.setOnPreferenceChangeListener(this);
+		showTransport =(CheckBoxPreference) screen.findPreference(OsmandSettings.SHOW_TRANSPORT_OVER_MAP);
+		showTransport.setOnPreferenceChangeListener(this);
 		
 		useEnglishNames =(CheckBoxPreference) screen.findPreference(OsmandSettings.USE_ENGLISH_NAMES);
 		useEnglishNames.setOnPreferenceChangeListener(this);
@@ -116,6 +119,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		rotateMapToBearing.setChecked(OsmandSettings.isRotateMapToBearing(this));
 		showViewAngle.setChecked(OsmandSettings.isShowingViewAngle(this));
 		showOsmBugs.setChecked(OsmandSettings.isShowingOsmBugs(this));
+		showTransport.setChecked(OsmandSettings.isShowingTransportOverMap(this));
 		saveTrackToGpx.setChecked(OsmandSettings.isSavingTrackToGpx(this));
 		useEnglishNames.setChecked(OsmandSettings.usingEnglishNames(this));
 		autoZoom.setChecked(OsmandSettings.isAutoZoomEnabled(this));
@@ -200,6 +204,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			updateAllSettings();
 		} else if(preference == autoZoom){
 			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, (Boolean) newValue);
+			edit.commit();
+		} else if(preference == showTransport){
+			edit.putBoolean(OsmandSettings.SHOW_TRANSPORT_OVER_MAP, (Boolean) newValue);
 			edit.commit();
 		} else if(preference == showPoiOnMap){
 			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, (Boolean) newValue);

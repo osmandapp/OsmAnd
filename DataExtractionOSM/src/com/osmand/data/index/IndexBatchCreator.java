@@ -22,6 +22,7 @@ public class IndexBatchCreator {
 	// config params
 	private static final boolean indexPOI = true;
 	private static final boolean indexAddress = false;
+	private static final boolean indexTransport = true;
 	private static final boolean writeWayNodes = true;
 	
 	protected static final Log log = LogUtil.getLog(IndexBatchCreator.class);
@@ -152,7 +153,7 @@ public class IndexBatchCreator {
 		System.out.println("GENERATING INDEXES FINISHED ");
 	}
 	protected void generateIndex(File f){
-		DataExtraction extr = new DataExtraction(indexAddress, indexPOI, false, true, false, false, indexDirFiles);
+		DataExtraction extr = new DataExtraction(indexAddress, indexPOI, indexTransport, indexAddress, false, false, indexDirFiles);
 		try {
 			Region country = extr.readCountry(f.getAbsolutePath(), new ConsoleProgressImplementation(9), null);
 			DataIndexWriter dataIndexWriter = new DataIndexWriter(indexDirFiles, country);
@@ -162,6 +163,9 @@ public class IndexBatchCreator {
 			}
 			if(indexPOI){
 				dataIndexWriter.writePOI(name + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT, f.lastModified());
+			}
+			if(indexTransport){
+				dataIndexWriter.writeTransport(name + "_" + IndexConstants.TRANSPORT_TABLE_VERSION + IndexConstants.TRANSPORT_INDEX_EXT, f.lastModified());
 			}
 		} catch (Exception e) { 
 			log.error("Exception generating indexes for " + f.getName()); //$NON-NLS-1$ 
@@ -191,7 +195,10 @@ public class IndexBatchCreator {
 				summary = "POI index for " + regionName + " " + descriptionFile;
 			} else if(f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)){
 				String regionName = f.getName().substring(0, f.getName().length() - IndexConstants.ADDRESS_INDEX_EXT.length() - 2);
-				summary = "Adress index for " + regionName + " " + descriptionFile;	
+				summary = "Adress index for " + regionName + " " + descriptionFile;
+			} else if(f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)){
+				String regionName = f.getName().substring(0, f.getName().length() - IndexConstants.TRANSPORT_INDEX_EXT.length() - 2);
+				summary = "Transport index for " + regionName + " " + descriptionFile;
 			} else { 
 				continue;
 			}

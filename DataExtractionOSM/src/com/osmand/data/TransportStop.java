@@ -7,5 +7,8 @@ public class TransportStop extends MapObject {
 	public TransportStop(Entity e){
 		super(e);
 	}
+	
+	public TransportStop(){
+	}
 
 }
