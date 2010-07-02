@@ -326,6 +326,7 @@ public class DataIndexWriter {
 
 	private void writeRouteStops(PreparedStatement prepRouteStops, PreparedStatement prepStops, Map<PreparedStatement, Integer> count,
 			Set<Long> writtenStops, TransportRoute r, List<TransportStop> stops, boolean direction) throws SQLException {
+		int i = 0;
 		for(TransportStop s : stops){
 			if (!writtenStops.contains(s.getId())) {
 				assert IndexTransportStop.values().length == 5;
@@ -337,10 +338,11 @@ public class DataIndexWriter {
 				addBatch(count, prepStops);
 				writtenStops.add(s.getId());
 			}
-			assert IndexTransportRouteStop.values().length == 3;
+			assert IndexTransportRouteStop.values().length == 4;
 			prepRouteStops.setLong(IndexTransportRouteStop.ROUTE.ordinal() + 1, r.getId());
 			prepRouteStops.setLong(IndexTransportRouteStop.STOP.ordinal() + 1, s.getId());
 			prepRouteStops.setInt(IndexTransportRouteStop.DIRECTION.ordinal() + 1, direction ? 1 : 0);
+			prepRouteStops.setInt(IndexTransportRouteStop.ORD.ordinal() + 1, i++);
 			addBatch(count, prepRouteStops);
 		}
 	}

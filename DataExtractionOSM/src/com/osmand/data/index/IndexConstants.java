@@ -327,7 +327,7 @@ public class IndexConstants {
 	
 	
 	public enum IndexTransportRouteStop implements IndexColumn {
-		STOP("long", true), ROUTE("long", true), DIRECTION("short"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		STOP("long", true), ROUTE("long", true), ORD("int"), DIRECTION("short"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		boolean index = false;
 		String type = null;
 
