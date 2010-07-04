@@ -25,12 +25,14 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.osmand.Algoritms;
 import com.osmand.Messages;
 import com.osmand.OsmandSettings;
 import com.osmand.R;
 import com.osmand.ResourceManager;
 import com.osmand.TransportIndexRepository;
 import com.osmand.TransportIndexRepository.RouteInfoLocation;
+import com.osmand.activities.TransportRouteHelper;
 import com.osmand.data.TransportRoute;
 import com.osmand.data.TransportStop;
 import com.osmand.osm.LatLon;
@@ -64,7 +66,7 @@ public class SearchTransportActivity extends ListActivity {
 	private TransportRouteAdapter intermediateListAdapater;
 	
 
-	private static List<RouteInfoLocation> lastEditedRoute = new ArrayList<RouteInfoLocation>();
+	
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -88,25 +90,37 @@ public class SearchTransportActivity extends ListActivity {
 		
 		
 		ListView intermediateList = (ListView) findViewById(R.id.listView);
-		intermediateListAdapater = new TransportRouteAdapter(lastEditedRoute);
+		intermediateListAdapater = new TransportRouteAdapter(TransportRouteHelper.getInstance().getRoute());
 		intermediateList.setAdapter(intermediateListAdapater);
-		intermediateListAdapater.add(null);
+		if(intermediateList.getCount() == 0){
+			intermediateListAdapater.add(null);
+		}
 
-		lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(this);
-		destinationLocation = OsmandSettings.getPointToNavigate(this);
-		searchTransport();
 	}
 	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		lastEditedRoute.clear();
+		ArrayList<RouteInfoLocation> lastEditedRoute = new ArrayList<RouteInfoLocation>(); 
 		for(int i= 0; i< intermediateListAdapater.getCount(); i++){
 			RouteInfoLocation item = intermediateListAdapater.getItem(i);
 			if(item != null){
 				lastEditedRoute.add(item);
 			}
 		}
+		TransportRouteHelper.getInstance().setRoute(lastEditedRoute);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(!Algoritms.objectEquals(OsmandSettings.getLastKnownMapLocation(this), this.lastKnownMapLocation) ||
+				!Algoritms.objectEquals(OsmandSettings.getPointToNavigate(this), this.destinationLocation)){
+			lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(this);
+			destinationLocation = OsmandSettings.getPointToNavigate(this);
+			searchTransport();			
+		}
+		
 	}
 	
 	public String getSearchArea(){
@@ -176,7 +190,8 @@ public class SearchTransportActivity extends ListActivity {
 		for (TransportStop s : stops) {
 			if (s == route.getStart()) {
 				stInd = ind;
-			} else if (s == route.getStop()) {
+			} 
+			if (s == route.getStop()) {
 				eInd = ind;
 			}
 			if (ind > stInd && ind <= eInd) {
@@ -187,10 +202,17 @@ public class SearchTransportActivity extends ListActivity {
 		text.append(getString(R.string.transport_route_distance)).append(" ").append(MapUtils.getFormattedDistance((int) dist));  //$NON-NLS-1$/
 		if(!part){
 			text.append(", ").append(getString(R.string.transport_stops_to_pass)).append(" ").append(eInd - stInd);   //$NON-NLS-1$ //$NON-NLS-2$
-			String before = MapUtils.getFormattedDistance((int) MapUtils.getDistance(getEndStop(position - 1), route.getStart().getLocation()));
-			String after = MapUtils.getFormattedDistance((int) MapUtils.getDistance(getStartStop(position + 1), route.getStop().getLocation()));
-			text.append(", ").append(getString(R.string.transport_to_go_before)).append(" ").append(before).append(", ");  //$NON-NLS-2$//$NON-NLS-3$ //$NON-NLS-1$
-			text.append(getString(R.string.transport_to_go_after)).append(" ").append(after);  //$NON-NLS-1$
+			LatLon endStop = getEndStop(position - 1);
+			if (endStop != null) {
+				String before = MapUtils.getFormattedDistance((int) MapUtils.getDistance(endStop, route.getStart().getLocation()));
+				text.append(", ").append(getString(R.string.transport_to_go_before)).append(" ").append(before); //$NON-NLS-2$//$NON-NLS-1$
+			}
+
+			LatLon stStop = getStartStop(position + 1);
+			if (stStop != null) {
+				String after = MapUtils.getFormattedDistance((int) MapUtils.getDistance(stStop, route.getStop().getLocation()));
+				text.append(", ").append(getString(R.string.transport_to_go_after)).append(" ").append(after); //$NON-NLS-1$ //$NON-NLS-2$
+			}
 		}
 		
 		return text.toString();
@@ -218,8 +240,10 @@ public class SearchTransportActivity extends ListActivity {
 			if(locationToGo != null){
 				n.append(name).append(" - ["); //$NON-NLS-1$
 				n.append(MapUtils.getFormattedDistance((int) MapUtils.getDistance(locationToGo, st.getLocation()))).append("]"); //$NON-NLS-1$ 
-			} else {
+			} else if(locationToStart != null){
 				n.append("[").append(MapUtils.getFormattedDistance((int) MapUtils.getDistance(locationToStart, st.getLocation()))).append("] - "); //$NON-NLS-1$ //$NON-NLS-2$
+				n.append(name);
+			} else {
 				n.append(name);
 			}
 			items.add(n.toString());
@@ -270,7 +294,7 @@ public class SearchTransportActivity extends ListActivity {
 	public void showContextMenuOnRoute(final RouteInfoLocation route, final int routeInd) {
 		Builder b = new AlertDialog.Builder(this);
 		List<TransportStop> stops = route.getDirection() ? route.getRoute().getForwardStops() : route.getRoute().getBackwardStops();
-		boolean en = OsmandSettings.isUsingInternetToDownloadTiles(this);
+		boolean en = OsmandSettings.usingEnglishNames(this);
 		
 		String info = getInformation(route, stops, routeInd, false);
 		StringBuilder txt = new StringBuilder(300);
@@ -337,7 +361,6 @@ public class SearchTransportActivity extends ListActivity {
 		return getStartStop(getCurrentRouteLocation() + 1);
 	}
 	
-	// TODO always check for null
 	public LatLon getStartStop(int position){
 		if(position == intermediateListAdapater.getCount()){
 			return destinationLocation;
@@ -349,8 +372,6 @@ public class SearchTransportActivity extends ListActivity {
 		return item.getStart().getLocation();
 	}
 
-	
-	// TODO always check for null
 	public LatLon getEndStop(int position){
 		if(position == -1){
 			return lastKnownMapLocation;
@@ -417,7 +438,8 @@ public class SearchTransportActivity extends ListActivity {
 			} else {
 				icon.setImageResource(R.drawable.closed_poi);
 			}
-			int dist = (int) (MapUtils.getDistance(stop.getStart().getLocation(), locationToStart));
+			
+			int dist = locationToStart == null ? 0 : (int) (MapUtils.getDistance(stop.getStart().getLocation(), locationToStart));
 			distanceLabel.setText(" " + MapUtils.getFormattedDistance(dist)); //$NON-NLS-1$
 
 			return (row);
@@ -432,13 +454,13 @@ public class SearchTransportActivity extends ListActivity {
 
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			View row = convertView;
-			int currentRouteLocation = getCurrentRouteLocation();
-			if(position == currentRouteLocation){
+			final RouteInfoLocation info = getItem(position);
+			if(info == null){
 				TextView text = new TextView(getContext());
 				LatLon st = getStartStop(position + 1);
 				LatLon end = getEndStop(position - 1);
 
-				if(st != null){
+				if(st != null && end != null){
 					int dist = (int) MapUtils.getDistance(st, end);
 					text.setText(MessageFormat.format(getString(R.string.transport_searching_route), MapUtils.getFormattedDistance(dist)));
 				} else {
@@ -460,12 +482,12 @@ public class SearchTransportActivity extends ListActivity {
 				});
 				return text;
 			}
-			
+			int currentRouteLocation = getCurrentRouteLocation();
 			if (row == null || row instanceof TextView) {
 				LayoutInflater inflater = getLayoutInflater();
 				row = inflater.inflate(R.layout.search_transport_route_item, parent, false);
 			}
-			final RouteInfoLocation info = getItem(position);
+			
 			TextView label = (TextView) row.findViewById(R.id.label);
 			ImageButton icon = (ImageButton) row.findViewById(R.id.remove);
 			
@@ -482,8 +504,11 @@ public class SearchTransportActivity extends ListActivity {
 				int startDist = (int) MapUtils.getDistance(getEndStop(position - 1), info.getStart().getLocation());
 				labelW.append(getString(R.string.transport_to_go_before)).append(" ").append(MapUtils.getFormattedDistance(startDist)); //$NON-NLS-1$
 				if (position == getCount() - 1) {
-					int endDist = (int) MapUtils.getDistance(getStartStop(position + 1), info.getStop().getLocation());
-					labelW.append(", ").append(getString(R.string.transport_to_go_after)).append(" ").append(MapUtils.getFormattedDistance(endDist));  //$NON-NLS-1$ //$NON-NLS-2$
+					LatLon stop = getStartStop(position + 1);
+					if(stop != null) {
+						int endDist = (int) MapUtils.getDistance(stop, info.getStop().getLocation());
+						labelW.append(", ").append(getString(R.string.transport_to_go_after)).append(" ").append(MapUtils.getFormattedDistance(endDist));  //$NON-NLS-1$ //$NON-NLS-2$
+					}
 				}
 
 				labelW.append(")"); //$NON-NLS-1$ 
