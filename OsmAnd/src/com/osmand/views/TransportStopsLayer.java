@@ -13,6 +13,7 @@ import android.graphics.RectF;
 import android.widget.Toast;
 
 import com.osmand.OsmandSettings;
+import com.osmand.R;
 import com.osmand.ResourceManager;
 import com.osmand.TransportIndexRepository;
 import com.osmand.activities.search.SearchTransportActivity;
@@ -76,8 +77,8 @@ public class TransportStopsLayer implements OsmandMapLayer {
 		TransportStop n = getFromPoint(point);
 		if(n != null){
 			StringBuilder text = new StringBuilder(250);
-			text.append("Stop").append(" : ").append(n.getName(OsmandSettings.usingEnglishNames(view.getContext()))); //$NON-NLS-2$
-			text.append("\n").append("Routes").append(" : ");  //$NON-NLS-1$//$NON-NLS-3$
+			text.append(view.getContext().getString(R.string.transport_Stop)).append(" : ").append(n.getName(OsmandSettings.usingEnglishNames(view.getContext()))); //$NON-NLS-1$
+			text.append("\n").append(view.getContext().getString(R.string.transport_Routes)).append(" : ");  //$NON-NLS-1$ //$NON-NLS-2$
 			List<TransportIndexRepository> reps = ResourceManager.getResourceManager().searchTransportRepositories(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 			if(!reps.isEmpty()){
 				List<String> l;

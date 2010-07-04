@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="transport_Routes">Маршруты</string>
 	<string name="transport_Stop">Остановка</string>
 	<string name="transport_stops">остановок</string>
 	<string name="transport_searching_transport">Искать транспорт (нет цели)</string>
 	<string name="transport_searching_route">Искать {0} маршрут </string>
 	<string name="transport_search_none">нету</string>
-	<string name="transport_search_after">Искать маршрут после</string>	
-	<string name="transport_search_before">Искать маршрут до</string>
-	<string name="transport_finish_search">Остановить поиск</string>
+	<string name="transport_search_after">Маршрут после</string>	
+	<string name="transport_search_before">Маршрут до</string>
+	<string name="transport_finish_search">Закончить поиск</string>
 	<string name="transport_stop_to_go_out">Выберите остановку</string>
 	<string name="transport_to_go_after">идти после</string>
 	<string name="transport_to_go_before">идти до</string>
@@ -146,7 +147,7 @@
     <string name="ChooseCountry">Выберите регион</string>
     <string name="position_on_map_descr">Установить расположение текущей позиции на карте</string>
     <string name="position_on_map">Текущая позиция</string>
-    <string name="map_specify_point">Перейти к точке</string>
+    <string name="map_specify_point">Координаты</string>
     <string name="show_view_angle_descr">Показывать угол обзора в соответствии с компасом</string>
     <string name="show_view_angle">Угол обзора</string>
     <string name="stop_navigation">Снять отметку</string>

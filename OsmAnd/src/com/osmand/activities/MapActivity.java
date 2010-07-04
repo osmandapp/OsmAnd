@@ -58,6 +58,7 @@ import com.osmand.Version;
 import com.osmand.activities.FavouritesActivity.FavouritePoint;
 import com.osmand.activities.FavouritesActivity.FavouritesDbHelper;
 import com.osmand.activities.search.SearchActivity;
+import com.osmand.activities.search.SearchTransportActivity;
 import com.osmand.data.Amenity;
 import com.osmand.data.preparation.MapTileDownloader;
 import com.osmand.data.preparation.MapTileDownloader.DownloadRequest;
@@ -682,6 +683,9 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			} else {
 				Toast.makeText(this, getString(R.string.gps_status_app_not_found), Toast.LENGTH_LONG).show();
 			}
+			return true;
+		} else if (item.getItemId() == R.id.map_transport) {
+			startActivity(new Intent(this, SearchTransportActivity.class));
 			return true;
 		} else if (item.getItemId() == R.id.map_mark_point) {
 			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude(), true);

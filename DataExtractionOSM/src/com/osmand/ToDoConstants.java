@@ -24,9 +24,7 @@ public class ToDoConstants {
     //   60. Audio guidance for routing
 	//   61. Provide route information for YOURS (calclate turns/angle/expected time). 
 	//		 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m) [dacha]
-	//   33. Build transport locations. Create transport index (transport-stops) (investigate)
-	// 		 DONE : Load transport routes in swing, init	
-	//		 TODO : add show on map key stops, update current stop with gps, add transport activity to map (remove tab)
+
 	
 
 	//   66. Transport routing (show next stop, total distance, show stop get out).
@@ -46,6 +44,8 @@ public class ToDoConstants {
 	//  FIXME !!!! Check agains ID is not unique ! (for relation/node/way - it could be the same) - checked for data extraction & index creator
 	// 	REFACTOR Settings activity ( for check box properties!)
 	//  Download index show current index information
+	//  Fix bugs with test data (bug with follow turn / left time / add turn)
+	//  Fix description on android
 	
 	// TODO swing
 	// 9. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !
@@ -57,7 +57,8 @@ public class ToDoConstants {
 	// BUGS Swing
 	
 	//  DONE ANDROID :
-
+	//   33. Build transport locations. Create transport index (transport-stops) (investigate)
+	// 		 Not implemented  : show key/transit stops on map, follow mode (show next stop) 	
 	
 	// DONE SWING
 
