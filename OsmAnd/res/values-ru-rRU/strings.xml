@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="transport_Stop">Остановка</string>
+	<string name="transport_stops">остановок</string>
+	<string name="transport_searching_transport">Искать транспорт (нет цели)</string>
+	<string name="transport_searching_route">Искать {0} маршрут </string>
+	<string name="transport_search_none">нету</string>
+	<string name="transport_search_after">Искать маршрут после</string>	
+	<string name="transport_search_before">Искать маршрут до</string>
+	<string name="transport_finish_search">Остановить поиск</string>
+	<string name="transport_stop_to_go_out">Выберите остановку</string>
+	<string name="transport_to_go_after">идти после</string>
+	<string name="transport_to_go_before">идти до</string>
+	<string name="transport_stops_to_pass">остановок в пути</string>
+	<string name="transport_route_distance">Длина пути</string>
+	<string name="transport">Транспорт</string>
+	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">Показать остановки транспорта на карте</string>
 	<string name="show_transport_over_map">Показать транспорт</string>
 	<string name="hello">Навигационное приложение OsmAnd</string>
@@ -56,7 +71,7 @@
 	<string name="get_directions">Маршрут</string>
 	<string name="gps_status_app_not_found">Приложение Gps status не найдено</string>
 	<string name="show_gps_status">GPS статус</string>
-	<string name="opening_hours">Рабочие часы: </string>
+	<string name="opening_hours">Рабочие часы : </string>
 	<string name="opening_changeset">Открытие пакета правок</string>
 	<string name="closing_changeset">Закрытие пакета правок</string>
 	<string name="commiting_node">Сохранения объекта</string>
@@ -71,7 +86,7 @@
 	<string name="loading">Загрузка</string>
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">Ошибка во время сохранения пути в gpx</string>
-	<string name="error_calculating_route">Ошибка прокладки маршрута: </string>
+	<string name="error_calculating_route">Ошибка прокладки маршрута : </string>
 	<string name="error_calculating_route_occured">Ошибка во время прокладки маршрута</string>
 	<string name="empty_route_calculated">Пустой путь рассчитан</string>									
 	<string name="new_route_calculated_dist">Проложен новый путь, расстояние : </string>
@@ -211,7 +226,7 @@
 <string name="default_buttons_cancel">Отмена</string>
 <string name="default_buttons_apply">Применить</string><string name="default_buttons_add">Добавить</string><string name="default_buttons_no">Нет</string><string name="add_favorite_dialog_top_text">Введите имя точки</string>
 <string name="add_favorite_dialog_default_favourite_name">Избранная</string>
-<string name="add_favorite_dialog_favourite_added_template">Точка \'{0}\' была успешно добавлена к Избранным.</string>
+<string name="add_favorite_dialog_favourite_added_template">Точка \'\'{0}\'\' была успешно добавлена к Избранным.</string>
 
 <string name="favourites_context_menu_title">Контекстное меню</string>
 <string name="favourites_context_menu_navigate">Идти к</string>

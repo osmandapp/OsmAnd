@@ -83,6 +83,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	private static final int GPS_DIST_REQUEST = 5;
 	
 	private boolean providerSupportsBearing = false;
+	@SuppressWarnings("unused")
 	private boolean providerSupportsSpeed = false;
 	private String currentLocationProvider = null;
 	
@@ -354,7 +355,9 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     private void updateSpeedBearing(Location location) {
 		// For network/gps it's bad way (not accurate). It's widely used for testing purposes
     	// possibly keep using only for emulator case
-		if (!providerSupportsSpeed && locationLayer.getLastKnownLocation() != null && location != null) {
+//		if (!providerSupportsSpeed
+    	if (isRunningOnEmulator()
+    			&& locationLayer.getLastKnownLocation() != null && location != null) {
 			if (locationLayer.getLastKnownLocation().distanceTo(location) > 3) {
 				float d = location.distanceTo(locationLayer.getLastKnownLocation());
 				long time = location.getTime() - locationLayer.getLastKnownLocation().getTime();

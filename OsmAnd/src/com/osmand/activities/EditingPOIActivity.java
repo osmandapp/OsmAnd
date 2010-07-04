@@ -266,7 +266,7 @@ public class EditingPOIActivity {
 				throw new IllegalArgumentException(requestMethod + " is invalid method"); //$NON-NLS-1$
 			}
 			if (requestMethod.equals("PUT") || requestMethod.equals("POST") || requestMethod.equals("DELETE")) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				// TODO
+				// TODO add when needed
 //				connection.setDoOutput(true);
 //				connection.setRequestProperty("Content-type", "text/xml");
 //				OutputStream out = connection.getOutputStream();
