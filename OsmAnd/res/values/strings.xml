@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="transport_Stop">Stop</string>
+	<string name="transport_stops">stops</string>
+	<string name="transport_searching_transport">Searching transport (no target)</string>
+	<string name="transport_searching_route">Searching for {0} route</string>
+	<string name="transport_search_none">none</string>
+	<string name="transport_search_after">Search route after</string>	
+	<string name="transport_search_before">Search route before</string>
+	<string name="transport_finish_search">Finish search</string>
+	<string name="transport_stop_to_go_out">Choose stop to go out</string>
+	<string name="transport_to_go_after">to go after</string>
+	<string name="transport_to_go_before">to go before</string>
+	<string name="transport_stops_to_pass">stops to pass</string>
+	<string name="transport_route_distance">Route distance</string>
 	<string name="transport">Transport</string>
-	<!--  TODO rus -->
+	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">Show public transport stops on map</string>
 	<string name="show_transport_over_map">Show transport stops</string>
 	<string name="hello">Navigation application OsmAnd</string>
@@ -94,7 +107,7 @@ See osmand.googlecode.com.</string>
     <string name="use_online_routing">Use online routing</string>
     <string name="user_password_descr">Input osm password</string>
     <string name="user_password">User password</string>
-    <string name="osm_settings_descr">Specify osm settings: show bugs, osm login</string>
+    <string name="osm_settings_descr">Specify osm settings : show bugs, osm login</string>
     <string name="monitor_preferences_descr">Specify monitor settings : save track</string>
     <string name="data_settings_descr">Specify data settings : language, update data</string>
     <string name="map_preferences_descr">Specify map settings : rotation, poi filter</string>
@@ -214,7 +227,7 @@ See osmand.googlecode.com.</string>
 <string name="default_buttons_cancel">Cancel</string>
 <string name="default_buttons_apply">Apply</string><string name="default_buttons_add">Add</string><string name="default_buttons_no">No</string><string name="add_favorite_dialog_top_text">Input name of favourite point</string>
 <string name="add_favorite_dialog_default_favourite_name">Favourite</string>
-<string name="add_favorite_dialog_favourite_added_template">Favourite point \'{0}\' was added successfully.</string>
+<string name="add_favorite_dialog_favourite_added_template">Favourite point \'\'{0}\'\' was added successfully.</string>
 
 <string name="favourites_context_menu_title">Context menu</string>
 <string name="favourites_context_menu_navigate">Navigate to</string>

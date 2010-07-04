@@ -257,7 +257,7 @@ public class TransportIndexRepository extends BaseLocationIndexRepository<Transp
 
 		int qShift = IndexTransportStop.values().length;
 
-		Map<Long, Integer> distanceToLoc = new LinkedHashMap<Long, Integer>();
+		Map<Long, TransportStop> distanceToLoc = new LinkedHashMap<Long, TransportStop>();
 
 		Cursor query = db.rawQuery(sql.toString(), new String[] {}); 
 		if (query.moveToFirst()) {
@@ -280,18 +280,15 @@ public class TransportIndexRepository extends BaseLocationIndexRepository<Transp
 				} else if (query.getLong(IndexTransportStop.ID.ordinal()) == i.getStart().getId()) {
 					st = i.getStart();
 					found = true;
-					Integer dist = null;
-					if (locationToGo != null) {
-						dist = (int) MapUtils.getDistance(locationToGo, i.getStart().getLocation());
-					}
-					distanceToLoc.put(id, dist);
+					distanceToLoc.put(id, st);
 				}
 
 				if (found) {
 					if (locationToGo != null) {
 						double d = MapUtils.getDistance(locationToGo, st.getLocation());
-						if (d < distanceToLoc.get(id)) {
-							distanceToLoc.put(id, (int) d);
+						double dbase = MapUtils.getDistance(locationToGo, distanceToLoc.get(id).getLocation());
+						if (d < dbase) {
+							distanceToLoc.put(id, st);
 						}
 					}
 					if (i.direction) {
@@ -308,10 +305,11 @@ public class TransportIndexRepository extends BaseLocationIndexRepository<Transp
 		
 		if (locationToGo != null) {
 			for (Long l : registeredRoutes.keySet()) {
-				Integer dist = distanceToLoc.get(l);
+				Integer dist = (int) MapUtils.getDistance(locationToGo, distanceToLoc.get(l).getLocation());
 				if (dist != null) {
 					registeredRoutes.get(l).setDistToLocation(dist);
 				}
+				registeredRoutes.get(l).setStop(distanceToLoc.get(l));
 			}
 		}
 
@@ -325,7 +323,9 @@ public class TransportIndexRepository extends BaseLocationIndexRepository<Transp
 			Collections.sort(listRoutes, new Comparator<RouteInfoLocation>() {
 				@Override
 				public int compare(RouteInfoLocation object1, RouteInfoLocation object2) {
-					return object1.getDistToLocation() - object2.getDistToLocation();
+					int x = (int) (MapUtils.getDistance(loc, object1.getStart().getLocation()) + object1.getDistToLocation());
+					int y = (int) (MapUtils.getDistance(loc, object2.getStart().getLocation()) + object2.getDistToLocation());
+					return  x - y;
 				}
 
 			});
@@ -344,7 +344,9 @@ public class TransportIndexRepository extends BaseLocationIndexRepository<Transp
 	
 	public static class RouteInfoLocation {
 		private TransportStop start;
+		private TransportStop stop;
 		private TransportRoute route;
+		private int stopNumbers;
 		private int distToLocation;
 		private boolean direction;
 		
@@ -370,6 +372,22 @@ public class TransportIndexRepository extends BaseLocationIndexRepository<Transp
 		
 		public void setStart(TransportStop start) {
 			this.start = start;
+		}
+		
+		public TransportStop getStop() {
+			return stop;
+		}
+		
+		public int getStopNumbers() {
+			return stopNumbers;
+		}
+		
+		public void setStopNumbers(int stopNumbers) {
+			this.stopNumbers = stopNumbers;
+		}
+		
+		public void setStop(TransportStop stop) {
+			this.stop = stop;
 		}
 		
 		public void setRoute(TransportRoute route) {
