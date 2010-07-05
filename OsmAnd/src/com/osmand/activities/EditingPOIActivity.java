@@ -13,6 +13,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.MessageFormat;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -38,13 +40,20 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.text.format.DateFormat;
 import android.util.Xml;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
+import android.widget.TimePicker.OnTimeChangedListener;
 
 import com.osmand.AmenityIndexRepository;
 import com.osmand.Base64;
@@ -58,6 +67,7 @@ import com.osmand.data.AmenityType;
 import com.osmand.osm.Entity;
 import com.osmand.osm.EntityInfo;
 import com.osmand.osm.Node;
+import com.osmand.osm.OpeningHoursParser;
 import com.osmand.osm.Entity.EntityId;
 import com.osmand.osm.Entity.EntityType;
 import com.osmand.osm.OSMSettings.OSMTagKey;
@@ -79,9 +89,11 @@ public class EditingPOIActivity {
 	private AutoCompleteTextView typeText;
 	private EditText nameText;
 	private Button typeButton;
+	private Button openHoursButton;
 	private EditText openingHours;
 	private EntityInfo entityInfo;
 	private EditText commentText;
+
 	private final static Log log = LogUtil.getLog(EditingPOIActivity.class);
 
 
@@ -118,7 +130,7 @@ public class EditingPOIActivity {
 		}
 		
 		Builder builder = new AlertDialog.Builder(ctx);
-		builder.setTitle(MessageFormat.format(this.view.getResources().getString(R.string.poi_remove_confirm_template), n.getTag(OSMTagKey.NAME)));
+		builder.setTitle(MessageFormat.format(this.view.getResources().getString(R.string.poi_remove_confirm_template), a.getSimpleFormat(OsmandSettings.usingEnglishNames(ctx))));
 		final EditText comment = new EditText(ctx);
 		comment.setText(R.string.poi_remove_title);
 		builder.setView(comment);
@@ -148,6 +160,7 @@ public class EditingPOIActivity {
 		nameText.setText(a.getName());
 		typeText = ((AutoCompleteTextView)dlg.findViewById(R.id.Type));
 		typeButton = ((Button)dlg.findViewById(R.id.TypeButton));
+		openHoursButton = ((Button)dlg.findViewById(R.id.OpenHoursButton));
 		openingHours = ((EditText)dlg.findViewById(R.id.OpeningHours));
 		openingHours.setText(a.getOpeningHours());
 		typeText = ((AutoCompleteTextView)dlg.findViewById(R.id.Type));
@@ -155,6 +168,15 @@ public class EditingPOIActivity {
 		commentText = ((EditText)dlg.findViewById(R.id.Comment));
 		updateType(a);
 		
+		
+		openHoursButton.setOnClickListener(new View.OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				editOpenHoursDlg();
+			}
+			
+		});
 		
 		typeButton.setOnClickListener(new View.OnClickListener(){
 			@Override
@@ -237,6 +259,29 @@ public class EditingPOIActivity {
 		});
 	}
 	
+
+	
+
+	
+	private void editOpenHoursDlg(){
+		final int[][] time = OpeningHoursParser.parseOpenedHours(openingHours.getText().toString());
+		if(time == null){
+			Toast.makeText(ctx, "Opening hours format is not supported for editing", Toast.LENGTH_LONG).show();
+			return;
+		}
+		
+		Builder builder = new AlertDialog.Builder(ctx);
+		final OpeningHoursView v = new OpeningHoursView(ctx);
+		builder.setView(v.createOpeningHoursEditView(time));
+		builder.setPositiveButton(ctx.getString(R.string.default_buttons_apply), new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				openingHours.setText(OpeningHoursParser.toStringOpenedHours(v.getTime()));
+			}
+		});
+		builder.setNegativeButton(ctx.getString(R.string.default_buttons_cancel), null);
+		builder.show();
+	}
 	
 	
 	

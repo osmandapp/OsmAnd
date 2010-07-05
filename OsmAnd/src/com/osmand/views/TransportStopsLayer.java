@@ -37,7 +37,7 @@ public class TransportStopsLayer implements OsmandMapLayer {
 
 		pointAltUI = new Paint();
 		pointAltUI.setColor(Color.rgb(0, 0, 255));
-		pointAltUI.setAlpha(200);
+		pointAltUI.setAlpha(150);
 		pointAltUI.setAntiAlias(true);
 		resourceManager = ResourceManager.getResourceManager();
 		pixRect.set(0, 0, view.getWidth(), view.getHeight());

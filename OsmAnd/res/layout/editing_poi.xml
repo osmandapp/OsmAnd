@@ -11,11 +11,11 @@
 </TableRow>
 <TableRow>
 <Button android:text="&lt;Type&gt;" android:id="@+id/TypeButton" android:layout_width="wrap_content" android:layout_height="wrap_content"/> 
-<AutoCompleteTextView android:text="" android:id="@+id/Type" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content"  android:layout_width ="fill_parent"/>   
+<AutoCompleteTextView android:text="" android:id="@+id/Type" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content"  android:layout_width ="fill_parent"/>    
 <!--  <EditText android:text="" android:id="@+id/Type" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content" android:layout_width = "fill_parent" /> -->
 </TableRow>
 <TableRow>
-<TextView android:text="@string/poi_dialog_opening_hours" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+<Button android:text="@string/poi_dialog_opening_hours" android:id="@+id/OpenHoursButton" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 <EditText android:text="" android:hint="Mo-Su 08:00-20:00" android:id="@+id/OpeningHours" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_width ="100dp"  android:layout_height="wrap_content"></EditText>
 </TableRow>
 <TableRow>
