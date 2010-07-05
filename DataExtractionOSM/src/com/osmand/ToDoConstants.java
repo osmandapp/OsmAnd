@@ -18,14 +18,11 @@ public class ToDoConstants {
 	//   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
 	//		 Some icons are not fine (as back menu from map - it is blured).
 	//       Got by Andrei
+
 	//   50. Invent opening hours editor in order to edit POI hours better on device
-	//		 GOT by Olga
-	
     //   60. Audio guidance for routing
 	//   61. Provide route information for YOURS (calclate turns/angle/expected time). 
 	//		 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m) [dacha]
-
-
 	
     //   43. Enable poi filter by name
 	//   58. Upload/Download zip-index from site & unzip them on phone
@@ -43,7 +40,6 @@ public class ToDoConstants {
 	// FIXME BUGS Android
 	//  FIXME !!!! Check agains ID is not unique ! (for relation/node/way - it could be the same) - checked for data extraction & index creator
 	// 	REFACTOR Settings activity ( for check box properties!)
-	//  Download index show current index information
 	//  Fix bugs with test data (bug with follow turn / left time / add turn)
 	//  Fix description on android
 	//  Improvement : Show stops in the transport route

@@ -8,7 +8,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -87,29 +89,42 @@ public class DownloadIndexActivity extends ListActivity {
 		}
 	}
 	
-	
+	private final static int MB = 1 << 20;
 	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		final Entry<String, String> e = ((DownloadIndexAdapter)getListAdapter()).getItem(position);
-		Builder builder = new AlertDialog.Builder(this);
+		
 		int ls = e.getKey().lastIndexOf('_');
 		final String regionName = e.getKey().substring(0, ls);
-		builder.setMessage(MessageFormat.format(getString(R.string.download_question), regionName, e.getValue()));
-		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener(){
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				downloadFile(e.getKey(), regionName);
+		final File fileToSave = resolveFileName(e.getKey(), regionName);
+		if (fileToSave != null) {
+			Builder builder = new AlertDialog.Builder(this);
+			if(!fileToSave.exists()){
+				builder.setMessage(MessageFormat.format(getString(R.string.download_question), regionName, e.getValue()));
+			} else {
+				MessageFormat format = new MessageFormat("{0,date,dd.MM.yyyy} : {1, number,##.#} MB", Locale.US); //$NON-NLS-1$
+				String description = format.format(new Object[]{new Date(fileToSave.lastModified()), ((float)fileToSave.length() / MB)});
+				builder.setMessage(MessageFormat.format(getString(R.string.download_question_exist), regionName, description, e.getValue()));
+				
 			}
-		});
-		builder.setNegativeButton(R.string.default_buttons_no, null);
-		builder.show();
+			
+			
+			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					downloadFile(e.getKey(), fileToSave);
+				}
+			});
+			builder.setNegativeButton(R.string.default_buttons_no, null);
+			builder.show();
+		}
 	}
 	
 	private static final int BUFFER_SIZE = 32256; 
 	
-	protected void downloadFile(final String key, String regionName) {
+	private File resolveFileName(String key, String regionName){
 		File parent = null;
 		if(key.endsWith(IndexConstants.ADDRESS_INDEX_EXT)){
 			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.ADDRESS_PATH);
@@ -126,9 +141,14 @@ public class DownloadIndexActivity extends ListActivity {
 		}
 		if(parent == null || !parent.exists()){
 			Toast.makeText(DownloadIndexActivity.this, getString(R.string.download_sd_dir_not_accessible), Toast.LENGTH_LONG);
-			return;
+			return null;
 		}
-		final File file = new File(parent, regionName);
+		File file = new File(parent, regionName);
+		return file;
+	}
+	
+	protected void downloadFile(final String key, final File file) {
+		
 		final ProgressDialog dlg = ProgressDialog.show(this, getString(R.string.downloading), getString(R.string.downloading_file), true, true);
 		dlg.show();
 		final ProgressDialogImplementation impl = new ProgressDialogImplementation(dlg, true);
