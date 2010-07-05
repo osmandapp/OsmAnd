@@ -363,7 +363,7 @@ public class IndexConstants {
 	}
 	
 	public enum IndexTransportRoute implements IndexColumn {
-		ID("long", true), TYPE, OPERATOR, REF(null, true), NAME, NAME_EN, DIST("int"); //$NON-NLS-1$ //$NON-NLS-2$
+		ID("long", true), TYPE(null, true), OPERATOR, REF(null, true), NAME, NAME_EN, DIST("int"); //$NON-NLS-1$ //$NON-NLS-2$
 		boolean index = false;
 		String type = null;
 

@@ -127,10 +127,11 @@ public class TransportStopsLayer implements OsmandMapLayer {
 
 			objects.clear();
 			resourceManager.searchTransportAsync(topLatitude, leftLongitude, bottomLatitude, rightLongitude, view.getZoom(), objects);
+			int r = 3 * getRadiusPoi(view.getZoom()) / 4;
 			for (TransportStop o : objects) {
 				int x = view.getMapXForPoint(o.getLocation().getLongitude());
 				int y = view.getMapYForPoint(o.getLocation().getLatitude());
-				canvas.drawCircle(x, y, getRadiusPoi(view.getZoom()), pointAltUI);
+				canvas.drawRect(x - r, y - r, x + r, y + r, pointAltUI);
 			}
 
 		}

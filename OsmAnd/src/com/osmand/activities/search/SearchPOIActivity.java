@@ -95,7 +95,7 @@ public class SearchPOIActivity extends ListActivity {
 				Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(pos);
 				String format = amenity.getSimpleFormat(OsmandSettings.usingEnglishNames(v.getContext()));
 				if (amenity.getOpeningHours() != null) {
-					format += "\n"+getString(R.id.OpeningHours) + amenity.getOpeningHours(); //$NON-NLS-1$
+					format += "\n"+getString(R.string.opening_hours) + " : " + amenity.getOpeningHours(); //$NON-NLS-1$ //$NON-NLS-2$
 				}
 				Toast.makeText(v.getContext(), format, Toast.LENGTH_LONG).show();
 				return true;

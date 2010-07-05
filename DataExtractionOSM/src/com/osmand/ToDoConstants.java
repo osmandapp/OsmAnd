@@ -25,9 +25,8 @@ public class ToDoConstants {
 	//   61. Provide route information for YOURS (calclate turns/angle/expected time). 
 	//		 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m) [dacha]
 
-	
 
-	//   66. Transport routing (show next stop, total distance, show stop get out).
+	
     //   43. Enable poi filter by name
 	//   58. Upload/Download zip-index from site & unzip them on phone
 	//   45. Get clear <Use internet> settings. Move that setting on top settings screen. 
@@ -35,6 +34,7 @@ public class ToDoConstants {
 	//		(would you like to use internet for that operation - if using internet is not checked). 
 	//		Internet using now for : edit POI osm, show osm bugs layer, download tiles.
 
+	//   66. Transport routing (show next stop, total distance, show stop get out) (?).
 	//   64. Traffic information (?)
 	//   65. Intermediate points (?)
 	//   40. Support simple vector road rendering (require new index file) (?)
@@ -46,6 +46,7 @@ public class ToDoConstants {
 	//  Download index show current index information
 	//  Fix bugs with test data (bug with follow turn / left time / add turn)
 	//  Fix description on android
+	//  Improvement : Show stops in the transport route
 	
 	// TODO swing
 	// 9. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !
