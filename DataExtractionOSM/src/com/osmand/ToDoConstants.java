@@ -37,12 +37,18 @@ public class ToDoConstants {
 	//   40. Support simple vector road rendering (require new index file) (?)
 	//   63. Support simple offline routing(require new index file) (?)
 
+
 	// FIXME BUGS Android
 	//  FIXME !!!! Check agains ID is not unique ! (for relation/node/way - it could be the same) - checked for data extraction & index creator
 	// 	REFACTOR Settings activity ( for check box properties!)
 	//  Fix bugs with test data (bug with follow turn / left time / add turn)
-	//  Fix description on android
+	//  show POI choose near by or last map selection. 
+	//  Show poi direction (using sensor)
+	//  double tap to zoom
+	//  hide center point (enable only when trackball using)
+	//  forbid rotate map to landscape
 	//  Improvement : Show stops in the transport route
+	//  BUG : loshitsa delete POI
 	
 	// TODO swing
 	// 9. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !

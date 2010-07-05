@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+<LinearLayout android:layout_width="wrap_content" android:layout_height="fill_parent" android:orientation="vertical">
+<CheckBox android:text="" android:id="@+id/Day1" android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
+<CheckBox android:text="" android:id="@+id/Day2" android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
+<CheckBox android:text="" android:id="@+id/Day3" android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
+<CheckBox android:text="" android:id="@+id/Day4" android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
+<CheckBox android:text="" android:id="@+id/Day5" android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
+<CheckBox android:text="" android:id="@+id/Day6" android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
+<CheckBox android:text="" android:id="@+id/Day7" android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
+
+
+</LinearLayout>
+<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" android:gravity="center" android:layout_marginLeft="5dp">
+
+
+<TextView android:text="" android:id="@+id/TimeText" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+<TimePicker android:id="@+id/TimePickerStart" android:layout_width="wrap_content" android:layout_height="wrap_content"></TimePicker>
+<TimePicker android:id="@+id/TimePickerEnd" android:layout_width="wrap_content" android:layout_height="wrap_content"></TimePicker>
+
+</LinearLayout>
+</LinearLayout>
+</ScrollView>
+
