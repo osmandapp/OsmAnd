@@ -51,6 +51,7 @@
 	<string name="router_service">Прокладка маршрута</string>
 	<string name="download_sd_dir_not_accessible">Директория на SD карточка не доступна для сохранения</string>
 	<string name="download_question">Вы хотите загрузить {0} - {1} ?</string>
+	<string name="download_question_exist">Индекс для {0} уже существует ({1}). Вы хотите его обновить ({2}) ?</string>
 	<string name="address">Адрес</string>
 	<string name="download_index_success">Индекс успешно загружен</string>
 	<string name="error_io_error">Произошла ошибка ввода/вывода.</string>

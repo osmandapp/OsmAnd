@@ -51,6 +51,7 @@
 	<string name="router_service">Routing</string>
 	<string name="download_sd_dir_not_accessible">Directory on SD card to save index is not accessible</string>
 	<string name="download_question">Do you want to download {0} - {1} ?</string>
+	<string name="download_question_exist">Index for {0} already exists ({1}). Do you want to update it ({2}) ?</string>
 	<string name="address">Address</string>
 	<string name="download_index_success">Index downloaded successfully</string>
 	<string name="error_io_error">Input/output error occured.</string>
