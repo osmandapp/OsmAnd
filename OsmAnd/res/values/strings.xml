@@ -72,7 +72,7 @@ See osmand.googlecode.com.</string>
 	<string name="get_directions">Directions</string>
 	<string name="gps_status_app_not_found">Gps status app could not be found</string>
     <string name="show_gps_status">Show gps status</string>
-	<string name="opening_hours">Opening hours : </string>
+	<string name="opening_hours">Opening hours</string>
 	<string name="opening_changeset">Openging changeset</string>
 	<string name="closing_changeset">Closing changeset</string>
 	<string name="commiting_node">Commiting node</string>

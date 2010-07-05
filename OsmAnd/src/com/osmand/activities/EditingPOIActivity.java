@@ -57,8 +57,9 @@ import com.osmand.data.Amenity;
 import com.osmand.data.AmenityType;
 import com.osmand.osm.Entity;
 import com.osmand.osm.EntityInfo;
-import com.osmand.osm.MapUtils;
 import com.osmand.osm.Node;
+import com.osmand.osm.Entity.EntityId;
+import com.osmand.osm.Entity.EntityType;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 import com.osmand.osm.io.OsmBaseStorage;
 import com.osmand.views.OsmandMapTileView;
@@ -551,14 +552,10 @@ public class EditingPOIActivity {
 			if(res != null){
 				OsmBaseStorage st = new OsmBaseStorage();
 				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true); //$NON-NLS-1$
-				Entity entity = st.getRegisteredEntities().get(n.getId());
-				entityInfo = st.getRegisteredEntityInfo().get(n.getId());
-				if(entity instanceof Node){
-					// check whether this is node (because id of node could be the same as relation) 
-					if(MapUtils.getDistance(entity.getLatLon(), n.getLocation()) < 50){
-						return (Node) entity;
-					}
-				}
+				EntityId id = new Entity.EntityId(EntityType.NODE, n.getId());
+				Node entity = (Node) st.getRegisteredEntities().get(id);
+				entityInfo = st.getRegisteredEntityInfo().get(id);
+				return entity;
 			}
 			
 		} catch (IOException e) {

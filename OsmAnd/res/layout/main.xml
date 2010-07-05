@@ -8,7 +8,7 @@
 		android:layout_width="100dp" android:layout_height="wrap_content" android:layout_gravity="bottom|right">></com.osmand.views.OsmZoomControls >
 
 <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom|left" android:id="@+id/BackToMenu" android:background="@drawable/back_menu"></ImageButton>
-<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="top|right" android:layout_marginTop="32px" android:id="@+id/BackToLocation" android:background="@drawable/back_location"></ImageButton>
+<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="top|right" android:id="@+id/BackToLocation" android:background="@drawable/back_location"></ImageButton>
 
 
 </FrameLayout>
