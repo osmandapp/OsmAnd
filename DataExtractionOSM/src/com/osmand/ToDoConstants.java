@@ -40,8 +40,8 @@ public class ToDoConstants {
 	// FIXME BUGS Android
 	//  double tap to zoom [done]
 	//  forbid rotate map to landscape [ done]
-
-	// 	REFACTOR Settings activity ( for check box properties!)
+	// 	REFACTOR Settings activity ( for check box properties!) [partially done]
+	
 	//  show POI choose near by or last map selection. 
 	//  Show poi direction (using sensor)
 	//  hide center point (enable only when trackball using)
