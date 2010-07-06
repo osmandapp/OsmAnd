@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="opening_hours_not_supported">Opening hours format is not supported for editing</string>
+	<string name="add_new_rule">Add new rule</string>
 	<string name="transport_Routes">Routes</string>
 	<string name="transport_Stop">Stop</string>
 	<string name="transport_stops">stops</string>

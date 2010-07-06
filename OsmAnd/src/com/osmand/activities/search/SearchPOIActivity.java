@@ -4,6 +4,7 @@
 package com.osmand.activities.search;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import android.app.ListActivity;
@@ -29,6 +30,8 @@ import com.osmand.activities.MapActivity;
 import com.osmand.data.Amenity;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
+import com.osmand.osm.OpeningHoursParser;
+import com.osmand.osm.OpeningHoursParser.OpeningHoursRule;
 
 /**
  * @author Maxim Frolov
@@ -159,9 +162,28 @@ public class SearchPOIActivity extends ListActivity {
 			String str = amenity.getStringWithoutType(OsmandSettings.usingEnglishNames(SearchPOIActivity.this));
 			label.setText(str);
 			if (amenity.getOpeningHours() != null) {
-				icon.setImageResource(R.drawable.poi);
+				List<OpeningHoursRule> rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
+				if(rs == null){
+					icon.setImageResource(R.drawable.poi);
+				} else {
+					Calendar inst = Calendar.getInstance();
+					inst.setTimeInMillis(System.currentTimeMillis());
+					boolean work = false;
+					for(OpeningHoursRule p : rs){
+						if(p.isOpenedForTime(inst)){
+							work = true;
+							break;
+						}
+					}
+					if(work){
+						icon.setImageResource(R.drawable.opened_poi);
+					} else {
+						icon.setImageResource(R.drawable.closed_poi);
+					}
+				}
+				
 			} else {
-				icon.setImageResource(R.drawable.closed_poi);
+				icon.setImageResource(R.drawable.poi);
 			}
 			
 			distanceLabel.setText(" " + MapUtils.getFormattedDistance(dist)); //$NON-NLS-1$

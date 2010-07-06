@@ -434,9 +434,9 @@ public class SearchTransportActivity extends ListActivity {
 			label.setText(labelW.toString());
 			// TODO icons
 			if (locationToGo != null && stop.getDistToLocation() < 400) {
-				icon.setImageResource(R.drawable.poi);
+				icon.setImageResource(R.drawable.opened_poi);
 			} else {
-				icon.setImageResource(R.drawable.closed_poi);
+				icon.setImageResource(R.drawable.poi);
 			}
 			
 			int dist = locationToStart == null ? 0 : (int) (MapUtils.getDistance(stop.getStart().getLocation(), locationToStart));

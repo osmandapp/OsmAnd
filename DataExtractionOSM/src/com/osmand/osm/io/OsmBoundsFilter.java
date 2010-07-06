@@ -34,7 +34,7 @@ public class OsmBoundsFilter implements IOsmStorageFilter {
 		// filter if one of the instance exists
 		// IMPORTANT : The main assumption is that order is preserved in osm file (first are node, way, relation)!!!
 		if(entity instanceof Way){
-			for(Long l : ((Way) entity).getNodeIds()){
+			for(EntityId l : ((Way) entity).getEntityIds()){
 				if(storage.getRegisteredEntities().containsKey(l)){
 					return true;
 				}

@@ -19,14 +19,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.FloatMath;
+import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
+import android.view.GestureDetector.OnDoubleTapListener;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.SurfaceHolder.Callback;
-import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 
 import com.osmand.LogUtil;
 import com.osmand.OsmandSettings;
@@ -40,7 +40,7 @@ import com.osmand.osm.MapUtils;
 import com.osmand.views.AnimateDraggingMapThread.AnimateDraggingCallback;
 
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, 
-			Callback, AnimateDraggingCallback, OnLongClickListener, OnClickListener{
+			Callback, AnimateDraggingCallback, OnGestureListener, OnDoubleTapListener {
 
 	protected final int emptyTileDivisor = 16;
 	protected final int timeForDraggingAnimation = 300;
@@ -92,10 +92,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	private AnimateDraggingMapThread animatedDraggingThread;
 	
-	private PointF startDragging = null;
-	private PointF autoStartDragging = null;
-	private long autoStartDraggingTime = 0;
-	private boolean wasMapDraggedOnTouch = false;
+	private GestureDetector gestureDetector;
 	
 	Paint paintGrayFill;
 	Paint paintWhiteFill;
@@ -140,13 +137,13 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		setClickable(true);
 		setLongClickable(true);
 		setFocusable(true);
-		super.setOnLongClickListener(this);
-		super.setOnClickListener(this);
 		
 		getHolder().addCallback(this);
 		
 		animatedDraggingThread = new AnimateDraggingMapThread();
 		animatedDraggingThread.setCallback(this);
+		gestureDetector = new GestureDetector(getContext(), this);
+		gestureDetector.setOnDoubleTapListener(this);
 	}
 	
 	
@@ -594,79 +591,39 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 	
 	
-	public boolean wasMapDraggingAccelerated(MotionEvent event){
-		if(autoStartDragging == null){
-			return false;
-		}
-		if(event.getEventTime() - autoStartDraggingTime < timeForDraggingAnimation){
-			float dist = Math.abs(event.getX() - autoStartDragging.x) + Math.abs(event.getY() - autoStartDragging.y);
-			if(dist > minimumDistanceForDraggingAnimation){
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	public boolean isDifferenceSmallToDrag(PointF point, MotionEvent event){
-		return Math.abs(point.x - event.getX()) <= 8 && Math.abs(point.y - event.getY()) <= 8;
-	}
-	
-	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		if(event.getAction() == MotionEvent.ACTION_DOWN) {
-			animatedDraggingThread.stopDragging();
-			// possibly solution to always reset start dragging ? (in order someone forget to do it)
-			if(startDragging == null){
-				autoStartDragging = new PointF(event.getX(), event.getY());
-				autoStartDraggingTime = event.getEventTime();
-				startDragging = new PointF(event.getX(), event.getY());
-				wasMapDraggedOnTouch = false;
-			}
-			// registering long press action
-			return super.onTouchEvent(event);
-		} else if(event.getAction() == MotionEvent.ACTION_UP) {
-			if(startDragging != null){
-				if (wasMapDraggedOnTouch || !isDifferenceSmallToDrag(startDragging, event)) {
-					dragTo(startDragging.x, startDragging.y, event.getX(), event.getY());
-					startDragging = null;
-					if (wasMapDraggingAccelerated(event)) {
-						float timeDist = (int) (event.getEventTime() - autoStartDraggingTime);
-						if (timeDist < 20) {
-							timeDist = 20;
-						}
-						animatedDraggingThread.startDragging(timeDist, autoStartDragging.x, autoStartDragging.y, event.getX(), event.getY());
-					}
-				} else {
-					// Do not forget to reset startDragging = null in performClick()
-					// give chance to run performClick() or performLongClick()
-					return super.onTouchEvent(event);
-				}
-			}
-		} else if(event.getAction() == MotionEvent.ACTION_MOVE) {
-			if(startDragging != null && !isDifferenceSmallToDrag(startDragging, event)){
-				// try to not drag map if that first time & diff small
-				if (wasMapDraggedOnTouch || !isDifferenceSmallToDrag(startDragging, event)) {
-					if(!wasMapDraggedOnTouch){
-						cancelLongPress();
-						wasMapDraggedOnTouch = true;
-					}
-					dragTo(startDragging.x, startDragging.y, event.getX(), event.getY());
-					// save memory do not create new PointF
-					startDragging.x = event.getX();
-					startDragging.y = event.getY();
-					if (event.getEventTime() - autoStartDraggingTime > timeForDraggingAnimation) {
-						autoStartDraggingTime = event.getEventTime();
-						autoStartDragging.x = event.getX();
-						autoStartDragging.y = event.getY();
-					}
-				}
-			}
-		}
-		
+//		dumpEvent(event);
+		/*return */ gestureDetector.onTouchEvent(event);
 		return true;
 	}
 	
+	private void dumpEvent(MotionEvent event) {
+		String names[] = { "DOWN" , "UP" , "MOVE" , "CANCEL" , "OUTSIDE" ,
+			      "POINTER_DOWN" , "POINTER_UP" , "7?" , "8?" , "9?" };
+			   StringBuilder sb = new StringBuilder();
+			   int action = event.getAction();
+			   int actionCode = action & 255;
+			   sb.append("event ACTION_" ).append(names[actionCode]);
+			   if (actionCode == 5
+			         || actionCode == 6) {
+			      sb.append("(pid " ).append(action >> 8);
+			      sb.append(")" );
+			   }
+			   sb.append("[" );
+//			   for (int i = 0; i < event.getPointerCount(); i++) {
+//			      sb.append("#" ).append(i);
+//			      sb.append("(pid " ).append(event.getPointerId(i));
+//			      sb.append(")=" ).append((int) event.getX(i));
+//			      sb.append("," ).append((int) event.getY(i));
+//			      if (i + 1 < event.getPointerCount())
+//			         sb.append(";" );
+//			   }
+			   sb.append("]" );
+			   android.util.Log.d("com.osmand", sb.toString());
+		
+	}
+
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if(trackBallDelegate != null && keyCode == KeyEvent.KEYCODE_DPAD_CENTER){
@@ -687,26 +644,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		this.trackBallDelegate = trackBallDelegate;
 	}
 	
-	@Override
-	public boolean onLongClick(View v) {
-		PointF point = startDragging;
-		if (point != null) {
-			startDragging = null;
-			if(log.isDebugEnabled()){
-				log.debug("On long click event "+  point.x + " " + point.y); //$NON-NLS-1$ //$NON-NLS-2$
-			}
-			for (int i = layers.size() - 1; i >= 0; i--) {
-				if (layers.get(i).onLongPressEvent(point)) {
-					return true;
-				}
-			}
-			if(onLongClickListener != null && onLongClickListener.onLongPressEvent(point)){
-				return true;
-			}
-		}
-		
-		return false;
-	}
 	
 	public void setOnLongClickListener(OnLongClickListener l) {
 		this.onLongClickListener = l;
@@ -716,23 +653,83 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		this.onClickListener = l;
 	}
 
+
 	@Override
-	public void onClick(View v) {
-		PointF point = startDragging;
-		if (point != null) {
-			startDragging = null;
-			if(log.isDebugEnabled()){
-				log.debug("On click event "+  point.x + " " + point.y); //$NON-NLS-1$ //$NON-NLS-2$
-			}
-			for (int i = layers.size() - 1; i >= 0; i--) {
-				if (layers.get(i).onTouchEvent(point)) {
-					return;
-				}
-			}
-			if(onClickListener != null && onClickListener.onPressEvent(point)){
+	public boolean onDown(MotionEvent e) {
+		animatedDraggingThread.stopDragging();
+		return false;
+	}
+
+	@Override
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+		animatedDraggingThread.startDragging(Math.abs(velocityX/1000), Math.abs(velocityY/1000), e1.getX(), e1.getY(), e2.getX(), e2.getY());
+		return true;
+	}
+
+	@Override
+	public void onLongPress(MotionEvent e) {
+		if(log.isDebugEnabled()){
+			log.debug("On long click event "+  e.getX() + " " + e.getY()); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		PointF point = new PointF(e.getX(), e.getY());
+		for (int i = layers.size() - 1; i >= 0; i--) {
+			if (layers.get(i).onLongPressEvent(point)) {
 				return;
 			}
 		}
+		if(onLongClickListener != null && onLongClickListener.onLongPressEvent(point)){
+			return;
+		}
+	}
+
+	@Override
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+		dragTo(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY());
+		return true;
+	}
+
+	@Override
+	public void onShowPress(MotionEvent e) {
+	}
+
+	@Override
+	public boolean onSingleTapUp(MotionEvent e) {
+		PointF point = new PointF(e.getX(), e.getY());
+		if(log.isDebugEnabled()){
+			log.debug("On click event "+  point.x + " " + point.y); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		for (int i = layers.size() - 1; i >= 0; i--) {
+			if (layers.get(i).onTouchEvent(point)) {
+				return true;
+			}
+		}
+		if(onClickListener != null && onClickListener.onPressEvent(point)){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean onDoubleTap(MotionEvent e) {
+		float dx = e.getX() - getCenterPointX();
+		float dy = e.getY() - getCenterPointY();
+		float fy = calcDiffTileY(dx, dy);
+		float fx = calcDiffTileX(dx, dy);
+		double latitude = MapUtils.getLatitudeFromTile(getZoom(), getYTile() + fy);
+		double longitude = MapUtils.getLongitudeFromTile(getZoom(), getXTile() + fx);
+		setLatLon(latitude, longitude);
+		setZoom(zoom + 1);
+		return true;
+	}
+
+	@Override
+	public boolean onDoubleTapEvent(MotionEvent e) {
+		return false;
+	}
+
+	@Override
+	public boolean onSingleTapConfirmed(MotionEvent e) {
+		return false;
 	}
 	
 
