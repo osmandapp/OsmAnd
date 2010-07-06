@@ -3,6 +3,8 @@ package com.osmand.views;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 
@@ -11,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -593,24 +596,78 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-//		dumpEvent(event);
+//		checkMultiTouchEvent(event);
 		/*return */ gestureDetector.onTouchEvent(event);
 		return true;
 	}
 	
-	private void dumpEvent(MotionEvent event) {
-		String names[] = { "DOWN" , "UP" , "MOVE" , "CANCEL" , "OUTSIDE" ,
-			      "POINTER_DOWN" , "POINTER_UP" , "7?" , "8?" , "9?" };
-			   StringBuilder sb = new StringBuilder();
-			   int action = event.getAction();
-			   int actionCode = action & 255;
-			   sb.append("event ACTION_" ).append(names[actionCode]);
-			   if (actionCode == 5
-			         || actionCode == 6) {
-			      sb.append("(pid " ).append(action >> 8);
-			      sb.append(")" );
-			   }
-			   sb.append("[" );
+	private static Pattern x2Pattern = Pattern.compile("x2=([0-9]+)"); //$NON-NLS-1$
+	private static Pattern y2Pattern = Pattern.compile("y2=([0-9]+)"); //$NON-NLS-1$
+	private int lastX2 = 0;
+	private int lastY2 = 0;
+	private PointF mtStart = null;
+	private PointF mtStart2 = null;
+	private int mtZoom = 0;
+	private float mtDist = 0;
+	private boolean checkMultiTouchEvent(MotionEvent event) {
+		String str = event.toString();
+		Matcher m = x2Pattern.matcher(str);
+//		log.debug(str);
+		if(m.find()){
+			int x2= Integer.parseInt(m.group(1));
+			m = y2Pattern.matcher(str);
+			if(m.find()){
+				int y2= Integer.parseInt(m.group(1));
+				if (x2 != lastX2 && y2 != lastY2) {
+					float dx = x2 - event.getX();
+					float dy = y2 - event.getY();
+					float dist = FloatMath.sqrt(dx*dx+dy*dy);
+					if (dist > 0) {
+						if (mtStart == null) {
+							mtStart = new PointF(event.getX(), event.getY());
+							mtStart2 = new PointF(x2, y2);
+							mtZoom = zoom;
+							mtDist = dist;
+							log.debug("Multitouch  dist="+mtDist);
+						} else {
+							if(dist < mtDist){
+								dist *= 0.6f;
+							} else {
+								dist *= 1.3f;
+							}
+							int dz = (int) (Math.log(dist/mtDist) / Math.log(2));
+							log.debug("Mt dist=" +dist);
+							if (mtZoom + dz != zoom) {
+								setZoom(mtZoom + dz);
+							}
+						}
+						lastX2 = x2;
+						lastY2 = y2;
+//						log.debug("Multi touch x=" + event.getX() + " y=" + event.getY() + " x2=" + x2 + " y2=" + y2 + " dist="
+//								+ dist +" mt="+mtDist);
+					}
+					return true;
+				} else if(event.getAction() == MotionEvent.ACTION_UP){
+					log.debug("UP");
+					mtStart = null;
+					mtStart2 = null;
+					return true;
+				}
+			}
+		}
+		return mtStart != null;
+//		String names[] = { "DOWN" , "UP" , "MOVE" , "CANCEL" , "OUTSIDE" ,
+//			      "POINTER_DOWN" , "POINTER_UP" , "7?" , "8?" , "9?" };
+//			   StringBuilder sb = new StringBuilder();
+//			   int action = event.getAction();
+//			   int actionCode = action & 255;
+//			   sb.append("event ACTION_" ).append(names[actionCode]);
+//			   if (actionCode == 5
+//			         || actionCode == 6) {
+//			      sb.append("(pid " ).append(action >> 8);
+//			      sb.append(")" );
+//			   }
+//			   sb.append("[" );
 //			   for (int i = 0; i < event.getPointerCount(); i++) {
 //			      sb.append("#" ).append(i);
 //			      sb.append("(pid " ).append(event.getPointerId(i));
@@ -619,8 +676,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 //			      if (i + 1 < event.getPointerCount())
 //			         sb.append(";" );
 //			   }
-			   sb.append("]" );
-			   android.util.Log.d("com.osmand", sb.toString());
 		
 	}
 
@@ -662,12 +717,18 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	@Override
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+		if(mtStart != null){
+			return true;
+		}
 		animatedDraggingThread.startDragging(Math.abs(velocityX/1000), Math.abs(velocityY/1000), e1.getX(), e1.getY(), e2.getX(), e2.getY());
 		return true;
 	}
 
 	@Override
 	public void onLongPress(MotionEvent e) {
+		if(mtStart != null){
+			return;
+		}
 		if(log.isDebugEnabled()){
 			log.debug("On long click event "+  e.getX() + " " + e.getY()); //$NON-NLS-1$ //$NON-NLS-2$
 		}
@@ -684,7 +745,11 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	@Override
 	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+		if(mtStart != null){
+			return true;
+		}
 		dragTo(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY());
+		
 		return true;
 	}
 
@@ -694,6 +759,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	@Override
 	public boolean onSingleTapUp(MotionEvent e) {
+		if(mtStart != null){
+			return true;
+		}
 		PointF point = new PointF(e.getX(), e.getY());
 		if(log.isDebugEnabled()){
 			log.debug("On click event "+  point.x + " " + point.y); //$NON-NLS-1$ //$NON-NLS-2$

@@ -543,6 +543,11 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	@Override
 	protected void onResume() {
 		super.onResume();
+		
+		if(OsmandSettings.getMapOrientation(this) != getRequestedOrientation()){
+			setRequestedOrientation(OsmandSettings.getMapOrientation(this));
+		}
+		
 		// routing helper with current activity
 		routingHelper = RoutingHelper.getInstance(this);
 		if(mapView.getMap() != OsmandSettings.getMapTileSource(this)){

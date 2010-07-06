@@ -17,7 +17,6 @@ public class ToDoConstants {
 	 // TODO ANDROID 
 	//   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
 	//		 Some icons are not fine (as back menu from map - it is blured).
-	//       Got by Andrei
 
 
     //   60. Audio guidance for routing
@@ -40,13 +39,13 @@ public class ToDoConstants {
 
 	// FIXME BUGS Android
 	//  double tap to zoom [done]
+	//  forbid rotate map to landscape [ done]
+
 	// 	REFACTOR Settings activity ( for check box properties!)
-	//  Fix bugs with test data (bug with follow turn / left time / add turn)
 	//  show POI choose near by or last map selection. 
 	//  Show poi direction (using sensor)
-
 	//  hide center point (enable only when trackball using)
-	//  forbid rotate map to landscape
+	//  Fix bugs with test data (bug with follow turn / left time / add turn)
 	//  Improvement : Show stops in the transport route
 	
 	// TODO swing

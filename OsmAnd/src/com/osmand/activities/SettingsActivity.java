@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -51,6 +52,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private ListPreference routerPreference;
 	private ListPreference maxLevelToDownload;
 	private CheckBoxPreference showTransport;
+	private ListPreference mapScreenOrientation;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,6 +100,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		
 		positionOnMap =(ListPreference) screen.findPreference(OsmandSettings.POSITION_ON_MAP);
 		positionOnMap.setOnPreferenceChangeListener(this);
+		mapScreenOrientation =(ListPreference) screen.findPreference(OsmandSettings.MAP_SCREEN_ORIENTATION);
+		mapScreenOrientation.setOnPreferenceChangeListener(this);
 		maxLevelToDownload =(ListPreference) screen.findPreference(OsmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE);
 		maxLevelToDownload.setOnPreferenceChangeListener(this);
 		tileSourcePreference =(ListPreference) screen.findPreference(OsmandSettings.MAP_TILE_SOURCES);
@@ -123,14 +127,16 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		saveTrackToGpx.setChecked(OsmandSettings.isSavingTrackToGpx(this));
 		useEnglishNames.setChecked(OsmandSettings.usingEnglishNames(this));
 		autoZoom.setChecked(OsmandSettings.isAutoZoomEnabled(this));
+		userName.setText(OsmandSettings.getUserName(this));
+		userPassword.setText(OsmandSettings.getUserPassword(this));
+		
 		Resources resources = this.getResources();
 		String[] e = new String[] {resources.getString(R.string.position_on_map_center), 
 				resources.getString(R.string.position_on_map_bottom)};
 		positionOnMap.setEntryValues(e);
 		positionOnMap.setEntries(e);
 		positionOnMap.setValueIndex(OsmandSettings.getPositionOnMap(this));
-		userName.setText(OsmandSettings.getUserName(this));
-		userPassword.setText(OsmandSettings.getUserPassword(this));
+		
 		
 		saveTrackInterval.setEntries(new String[]{
 				resources.getString(R.string.interval_1_second),
@@ -142,6 +148,17 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				resources.getString(R.string.interval_5_minutes)});				
 		saveTrackInterval.setEntryValues(new String[]{"1", "2", "5", "15", "30", "60", "300"}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 		saveTrackInterval.setValue(OsmandSettings.getSavingTrackInterval(this)+""); //$NON-NLS-1$
+		
+		
+
+		mapScreenOrientation.setEntries(new String[]{
+				resources.getString(R.string.map_orientation_portrait),
+				resources.getString(R.string.map_orientation_landscape),
+				resources.getString(R.string.map_orientation_default),
+				});				
+		mapScreenOrientation.setEntryValues(new String[]{ActivityInfo.SCREEN_ORIENTATION_PORTRAIT+"", //$NON-NLS-1$
+				ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE+"", ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED+""}); //$NON-NLS-1$ //$NON-NLS-2$
+		mapScreenOrientation.setValue(OsmandSettings.getMapOrientation(this)+""); //$NON-NLS-1$
 		
 		ApplicationMode[] presets = ApplicationMode.values(); 
 		String[] values = new String[presets.length];
@@ -225,6 +242,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.commit();
 		} else if(preference == saveTrackToGpx){
 			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, (Boolean) newValue);
+			edit.commit();
+		} else if(preference == mapScreenOrientation){
+			edit.putInt(OsmandSettings.MAP_SCREEN_ORIENTATION, Integer.parseInt(newValue.toString()));
 			edit.commit();
 		} else if(preference == saveTrackInterval){
 			edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, Integer.parseInt(newValue.toString()));

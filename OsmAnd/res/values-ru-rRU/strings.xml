@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="map_orientation_default">По умолчанию</string>
+	<string name="map_orientation_portrait">Портрет</string>
+	<string name="map_orientation_landscape">Пейзаж</string>
+	<string name="map_screen_orientation">Ориентация экрана</string>
+	<string name="map_screen_orientation_descr">Выберите ориентацию экрана</string>
 	<string name="opening_hours_not_supported">Формат времени работы не поддерживается для редактирования</string>
 	<string name="add_new_rule">Новое правило</string>
 	<string name="transport_Routes">Маршруты</string>
