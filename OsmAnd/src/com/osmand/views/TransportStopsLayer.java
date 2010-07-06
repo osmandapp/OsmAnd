@@ -148,8 +148,11 @@ public class TransportStopsLayer implements OsmandMapLayer {
 
 	@Override
 	public boolean onLongPressEvent(PointF point) {
-		view.getContext().startActivity(new Intent(view.getContext(), SearchTransportActivity.class));
-		return true;
+		if(getFromPoint(point) != null){
+			view.getContext().startActivity(new Intent(view.getContext(), SearchTransportActivity.class));
+			return true;
+		}
+		return false;
 	}
 
 }

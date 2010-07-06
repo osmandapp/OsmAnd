@@ -19,7 +19,7 @@ public class ToDoConstants {
 	//		 Some icons are not fine (as back menu from map - it is blured).
 	//       Got by Andrei
 
-	//   50. Invent opening hours editor in order to edit POI hours better on device
+
     //   60. Audio guidance for routing
 	//   61. Provide route information for YOURS (calclate turns/angle/expected time). 
 	//		 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m) [dacha]
@@ -39,16 +39,15 @@ public class ToDoConstants {
 
 
 	// FIXME BUGS Android
-	//  FIXME !!!! Check agains ID is not unique ! (for relation/node/way - it could be the same) - checked for data extraction & index creator
+	//  double tap to zoom [done]
 	// 	REFACTOR Settings activity ( for check box properties!)
 	//  Fix bugs with test data (bug with follow turn / left time / add turn)
 	//  show POI choose near by or last map selection. 
 	//  Show poi direction (using sensor)
-	//  double tap to zoom
+
 	//  hide center point (enable only when trackball using)
 	//  forbid rotate map to landscape
 	//  Improvement : Show stops in the transport route
-	//  BUG : loshitsa delete POI
 	
 	// TODO swing
 	// 9. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !
@@ -61,7 +60,8 @@ public class ToDoConstants {
 	
 	//  DONE ANDROID :
 	//   33. Build transport locations. Create transport index (transport-stops) (investigate)
-	// 		 Not implemented  : show key/transit stops on map, follow mode (show next stop) 	
+	// 		 Not implemented  : show key/transit stops on map, follow mode (show next stop)
+	//   50. Invent opening hours editor in order to edit POI hours better on device
 	
 	// DONE SWING
 

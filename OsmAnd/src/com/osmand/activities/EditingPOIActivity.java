@@ -13,8 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.MessageFormat;
-import java.util.Arrays;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -40,20 +39,13 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.text.format.DateFormat;
 import android.util.Xml;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
-import android.widget.TimePicker.OnTimeChangedListener;
 
 import com.osmand.AmenityIndexRepository;
 import com.osmand.Base64;
@@ -66,11 +58,14 @@ import com.osmand.data.Amenity;
 import com.osmand.data.AmenityType;
 import com.osmand.osm.Entity;
 import com.osmand.osm.EntityInfo;
+import com.osmand.osm.MapUtils;
 import com.osmand.osm.Node;
 import com.osmand.osm.OpeningHoursParser;
 import com.osmand.osm.Entity.EntityId;
 import com.osmand.osm.Entity.EntityType;
 import com.osmand.osm.OSMSettings.OSMTagKey;
+import com.osmand.osm.OpeningHoursParser.BasicDayOpeningHourRule;
+import com.osmand.osm.OpeningHoursParser.OpeningHoursRule;
 import com.osmand.osm.io.OsmBaseStorage;
 import com.osmand.views.OsmandMapTileView;
 
@@ -117,7 +112,7 @@ public class EditingPOIActivity {
 		dlg = new Dialog(ctx);
 		Node n = new Node(latitude, longitude, -1);
 		n.putTag(OSMTagKey.AMENITY.getValue(), ""); //$NON-NLS-1$
-		n.putTag(OSMTagKey.OPENING_HOURS.getValue(), "Mo-Su 08:00-20:00"); //$NON-NLS-1$
+		n.putTag(OSMTagKey.OPENING_HOURS.getValue(), ""); //$NON-NLS-1$
 		dlg.setTitle(R.string.poi_create_title);
 		showDialog(n);
 	}
@@ -130,7 +125,7 @@ public class EditingPOIActivity {
 		}
 		
 		Builder builder = new AlertDialog.Builder(ctx);
-		builder.setTitle(MessageFormat.format(this.view.getResources().getString(R.string.poi_remove_confirm_template), a.getSimpleFormat(OsmandSettings.usingEnglishNames(ctx))));
+		builder.setTitle(MessageFormat.format(this.view.getResources().getString(R.string.poi_remove_confirm_template), a.getStringWithoutType(OsmandSettings.usingEnglishNames(ctx))));
 		final EditText comment = new EditText(ctx);
 		comment.setText(R.string.poi_remove_title);
 		builder.setView(comment);
@@ -264,15 +259,29 @@ public class EditingPOIActivity {
 
 	
 	private void editOpenHoursDlg(){
-		final int[][] time = OpeningHoursParser.parseOpenedHours(openingHours.getText().toString());
+		List<OpeningHoursRule> time = OpeningHoursParser.parseOpenedHours(openingHours.getText().toString());
+		List<BasicDayOpeningHourRule> simple = null;
+		if(time  != null){
+			simple = new ArrayList<BasicDayOpeningHourRule>();
+			for(OpeningHoursRule r : time){
+				if(r instanceof BasicDayOpeningHourRule){
+					simple.add((BasicDayOpeningHourRule) r);
+				} else {
+					time = null;
+					break;
+				}
+			}
+		}
+		
+		
 		if(time == null){
-			Toast.makeText(ctx, "Opening hours format is not supported for editing", Toast.LENGTH_LONG).show();
+			Toast.makeText(ctx, ctx.getString(R.string.opening_hours_not_supported), Toast.LENGTH_LONG).show();
 			return;
 		}
 		
 		Builder builder = new AlertDialog.Builder(ctx);
 		final OpeningHoursView v = new OpeningHoursView(ctx);
-		builder.setView(v.createOpeningHoursEditView(time));
+		builder.setView(v.createOpeningHoursEditView(simple));
 		builder.setPositiveButton(ctx.getString(R.string.default_buttons_apply), new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -600,7 +609,11 @@ public class EditingPOIActivity {
 				EntityId id = new Entity.EntityId(EntityType.NODE, n.getId());
 				Node entity = (Node) st.getRegisteredEntities().get(id);
 				entityInfo = st.getRegisteredEntityInfo().get(id);
-				return entity;
+				// check whether this is node (because id of node could be the same as relation) 
+				if(MapUtils.getDistance(entity.getLatLon(), n.getLocation()) < 50){
+					return entity;
+				}
+				return null;
 			}
 			
 		} catch (IOException e) {

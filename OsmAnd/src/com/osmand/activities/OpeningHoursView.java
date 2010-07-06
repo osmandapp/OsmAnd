@@ -1,119 +1,70 @@
 package com.osmand.activities;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.graphics.Typeface;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 import android.widget.TimePicker.OnTimeChangedListener;
 
 import com.osmand.R;
-import com.osmand.osm.OpeningHoursParser;
+import com.osmand.osm.OpeningHoursParser.BasicDayOpeningHourRule;
+import com.osmand.osm.OpeningHoursParser.OpeningHoursRule;
 
 public class OpeningHoursView {
 	
 	private final Context ctx;
-	private int selectedDay = -1;
-	private int[][] time;
+	private int selectedRule = 0;
+	private TimeAdapter time;
 	private TimePicker timePickerStart;
 	private TimePicker timePickerEnd;
 	
-	private boolean firstTime = true;
 	private boolean notifyingTime = true;
+	private ListView list;
 
 	public OpeningHoursView(Context ctx){
 		this.ctx = ctx;
 	}
 	
-	public View createOpeningHoursEditView(int[][] t){
-		this.time = t;
+	public View createOpeningHoursEditView(List<BasicDayOpeningHourRule> t){
+		this.time = new TimeAdapter(t);
+		// editing object
+		time.add(null);
 		LayoutInflater inflater = (LayoutInflater)ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view = inflater.inflate(R.layout.open_hours_edit, null);
 		timePickerStart = (TimePicker)view.findViewById(R.id.TimePickerStart);
 		timePickerEnd = (TimePicker)view.findViewById(R.id.TimePickerEnd);
-		final TextView timeText =(TextView)view.findViewById(R.id.TimeText);
-		
-		
+		list = (ListView)view.findViewById(R.id.ListView);
+		list.setAdapter(time);
 		OnTimeChangedListener onTimeChangedListener = new TimePicker.OnTimeChangedListener(){
 			@Override
 			public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-				if(selectedDay == -1 || !notifyingTime){
+				if(selectedRule == -1 || !notifyingTime || time.getItem(selectedRule) == null){
 					return;
 				}
 				if(view == timePickerStart ){
-					time[selectedDay][0] = hourOfDay * 60 + minute;
+					time.getItem(selectedRule).setStartTime(hourOfDay * 60 + minute);
 				} else {
-					time[selectedDay][1] = hourOfDay * 60 + minute;
+					time.getItem(selectedRule).setEndTime(hourOfDay * 60 + minute);
 				}
-				
-				timeText.setText(OpeningHoursParser.toStringOpenedHours(time));
-				
+				time.notifyDataSetChanged();
 			}
 		};
-		
-		Calendar inst = Calendar.getInstance();
-		int first = inst.getFirstDayOfWeek();
-		int[] ids = new int[]{R.id.Day1, R.id.Day2, R.id.Day3, R.id.Day4, R.id.Day5, R.id.Day6, R.id.Day7};
-		for (int i = 0; i < 7; i++) {
-			int d = (first + i - 1) % 7 + 1; 
-			final CheckBox day = (CheckBox) view.findViewById(ids[i]);
-			inst.set(Calendar.DAY_OF_WEEK, d);
-			day.setText(DateFormat.format("E", inst)); //$NON-NLS-1$
-			final int pos = (d + 5) % 7;
-			if(time[pos][0] >= 0 && time[pos][1] >= 0){
-				day.setChecked(true);
-			} else {
-				day.setChecked(false);
-			}
-			day.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
-				
-				@Override
-				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					// try to unselect not current day 
-					if(selectedDay != pos && !isChecked){
-						selectedDay = pos;
-						if(firstTime){
-							Toast.makeText(ctx, "Press once to select day, twice to unselect it", Toast.LENGTH_LONG).show();
-							firstTime = false;
-						}
-						// select it again
-						day.setChecked(true);
-					} else {
-						// uncheck
-						if(!isChecked){
-							time[pos][0] = -1;
-							time[pos][1] = -1;
-							selectedDay = -1;
-						} else {
-							// check again
-							if (selectedDay > -1 && pos != selectedDay) {
-								time[pos][0] = time[selectedDay][0];
-								time[pos][1] = time[selectedDay][1];
-							}
-							if (time[pos][0] < 0) {
-								time[pos][0] = 8 * 60;
-							}
-							if (time[pos][1] < 0) {
-								time[pos][1] = 20 * 60;
-							}
-							selectedDay = pos;
-						}
-					}
-					timeText.setText(OpeningHoursParser.toStringOpenedHours(time));
-					updateTimePickers();
-					
-				}
-				
-			});
-		}
-		
-		// init 
 		
 		timePickerEnd.setIs24HourView(true);
 		timePickerStart.setIs24HourView(true);
@@ -121,28 +72,158 @@ public class OpeningHoursView {
 		timePickerStart.setCurrentMinute(0);
 		timePickerEnd.setCurrentHour(20);
 		timePickerEnd.setCurrentMinute(0);
-		timeText.setText(OpeningHoursParser.toStringOpenedHours(time));
-		
-		
+
 		timePickerEnd.setOnTimeChangedListener(onTimeChangedListener);
 		timePickerStart.setOnTimeChangedListener(onTimeChangedListener);
 		
+		updateTimePickers();
+		
 		return view;
 	}
+	
+	private class TimeAdapter extends ArrayAdapter<BasicDayOpeningHourRule> {
 		
-	public void updateTimePickers(){
-		if(selectedDay > -1){
-			notifyingTime = false;
-			timePickerStart.setCurrentHour(time[selectedDay][0] / 60);
-			timePickerStart.setCurrentMinute(time[selectedDay][0] % 60);
-			timePickerEnd.setCurrentHour(time[selectedDay][1] / 60);
-			timePickerEnd.setCurrentMinute(time[selectedDay][1] % 60);
-			notifyingTime = true;
+		public TimeAdapter(List<BasicDayOpeningHourRule> l ){
+			super(ctx, R.layout.open_hours_list_item, l);
+		}
+		public View getView(final int position, View convertView, ViewGroup parent) {
+			View row = convertView;
+			final BasicDayOpeningHourRule item = getItem(position);
+			if(item == null){
+				TextView text = new TextView(getContext());
+				text.setText(ctx.getString(R.string.add_new_rule));
+				text.setTextSize(21);
+				text.setTypeface(null, Typeface.ITALIC);
+				text.setOnClickListener(new View.OnClickListener(){
+
+					@Override
+					public void onClick(View v) {
+						BasicDayOpeningHourRule r = new BasicDayOpeningHourRule();
+						r.setStartTime(9*60);
+						r.setEndTime(20*60);
+						boolean[] days = r.getDays();
+						Arrays.fill(days, true);
+						showDaysDialog(r, position);
+					}
+					
+				});
+				return text;
+			}
+			if(row == null || row instanceof TextView){
+				LayoutInflater inflater = (LayoutInflater)ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				row = inflater.inflate(R.layout.open_hours_list_item, parent, false);
+			}
+			TextView label = (TextView)row.findViewById(R.id.label);
+			ImageView icon = (ImageView)row.findViewById(R.id.remove);
+			if(selectedRule == position){
+				label.setTypeface(null, Typeface.BOLD);
+				label.setTextSize(22);
+			} else {
+				label.setTypeface(null);
+				label.setTextSize(20);
+			}
+
+			label.setText(item.toRuleString());
+			icon.setOnClickListener(new View.OnClickListener(){
+				@Override
+				public void onClick(View v) {
+					time.remove(item);
+					selectedRule = time.getPosition(null);
+					updateTimePickers();
+				}
+				
+			});
+			View.OnClickListener clickListener = new View.OnClickListener(){
+				@Override
+				public void onClick(View v) {
+					if(selectedRule == position){
+						showDaysDialog(item, -1);
+					} else {
+						selectedRule = position;
+						updateTimePickers();
+						time.notifyDataSetChanged();
+					}
+				}
+				
+			};
+			label.setOnClickListener(clickListener);
+			return row;
 		}
 	}
 	
-	public int[][] getTime() {
-		return time;
+	public void showDaysDialog(final BasicDayOpeningHourRule item, final int positionToAdd) {
+		Builder b = new AlertDialog.Builder(ctx);
+
+		boolean add = positionToAdd > -1;
+		Calendar inst = Calendar.getInstance();
+		final int first = inst.getFirstDayOfWeek();
+		final boolean[] dayToShow = new boolean[7];
+		String[] daysToShow = new String[7];
+		for (int i = 0; i < 7; i++) {
+			int d = (first + i - 1) % 7 + 1;
+			inst.set(Calendar.DAY_OF_WEEK, d);
+			daysToShow[i] = DateFormat.format("EEEE", inst).toString(); //$NON-NLS-1$
+			final int pos = (d + 5) % 7;
+			dayToShow[i] = item.getDays()[pos];
+		}
+		b.setMultiChoiceItems(daysToShow, dayToShow, new OnMultiChoiceClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				dayToShow[which] = isChecked;
+
+			}
+
+		});
+		b.setPositiveButton(add ? ctx.getString(R.string.default_buttons_add) : ctx.getString(R.string.default_buttons_apply),
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						boolean[] days = item.getDays();
+						for (int i = 0; i < 7; i++) {
+							days[(first + 5 + i) % 7] = dayToShow[i];
+						}
+						if (positionToAdd != -1) {
+							time.insert(item, positionToAdd);
+							selectedRule = positionToAdd;
+						} else {
+							time.notifyDataSetChanged();
+						}
+						updateTimePickers();
+
+					}
+
+				});
+
+		b.setNegativeButton(ctx.getString(R.string.default_buttons_cancel), null);
+
+		b.show();
+
+	}
+		
+	public void updateTimePickers() {
+		if (selectedRule > -1) {
+			BasicDayOpeningHourRule item = time.getItem(selectedRule);
+			if (item != null) {
+				notifyingTime = false;
+				timePickerStart.setCurrentHour(item.getStartTime() / 60);
+				timePickerStart.setCurrentMinute(item.getStartTime() % 60);
+				timePickerEnd.setCurrentHour(item.getEndTime() / 60);
+				timePickerEnd.setCurrentMinute(item.getEndTime() % 60);
+				notifyingTime = true;
+			}
+		}
+	}
+	
+	public List<OpeningHoursRule> getTime() {
+		List<OpeningHoursRule> rules = new ArrayList<OpeningHoursRule>();
+		for (int i = 0; i < time.getCount(); i++) {
+			BasicDayOpeningHourRule r = time.getItem(i);
+			if (r != null) {
+				rules.add(r);
+			}
+		}
+		return rules;
 	}
 
 }

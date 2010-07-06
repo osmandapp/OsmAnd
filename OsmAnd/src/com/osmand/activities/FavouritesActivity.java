@@ -283,7 +283,7 @@ public class FavouritesActivity extends ListActivity {
 			TextView distanceLabel = (TextView) row.findViewById(R.id.favouritedistance_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 			FavouritePoint model = (FavouritePoint) getItem(position);
-			icon.setImageResource(R.drawable.poi);
+			icon.setImageResource(R.drawable.opened_poi);
 			LatLon lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(FavouritesActivity.this);
 			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(), 
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));

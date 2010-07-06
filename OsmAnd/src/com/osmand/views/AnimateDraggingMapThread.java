@@ -67,10 +67,16 @@ public class AnimateDraggingMapThread implements Runnable {
 		while(currentThread != null){}
 	}
 	
-	public void startDragging(float  dTime, float  startX, float  startY, float  endX, float  endY){
-		stopDraggingSync();
+	public void startDragging(float dTime, float  startX, float  startY, float  endX, float  endY){
 		vx = Math.abs((endX - startX)/dTime);
 		vy = Math.abs((endY - startY)/dTime);
+		startDragging(vx, vy, startX, startY, endX, endY);
+	}
+	
+	public void startDragging(float velocityX, float velocityY, float  startX, float  startY, float  endX, float  endY){
+		stopDraggingSync();
+		vx = velocityX;
+		vy = velocityY;
 		dirX = (byte) (endX > startX ? 1 : -1);
 		dirY = (byte) (endY > startY ? 1 : -1);
 		ax = vx * a;
