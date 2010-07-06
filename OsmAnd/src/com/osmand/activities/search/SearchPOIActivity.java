@@ -160,15 +160,20 @@ public class SearchPOIActivity extends ListActivity implements LocationListener,
 			if (location == null) {
 				searchedLocation = l;
 				amenityAdapter.setNewModel(filter.initializeNewSearch(l.getLatitude(), l.getLongitude(), 40));
+				searchPOILevel.setText(R.string.search_POI_level_btn);
 				searchPOILevel.setEnabled(filter.isSearchFurtherAvailable());
 				searchArea.setText(filter.getSearchArea());
 				handled = true;
 			} else if (searchedLocation != null && l.distanceTo(searchedLocation) > 80) {
 				amenityAdapter.setNewModel(filter.searchAgain(l.getLatitude(), l.getLongitude()));
-				searchPOILevel.setEnabled(filter.isSearchFurtherAvailable());
-				searchArea.setText(filter.getSearchArea());
 				handled = true;
-			} else if(location.distanceTo(l) > 8){
+			} else if(location.distanceTo(l) > 6){
+				handled = true;
+			}
+		} else {
+			if(location != null){
+				searchPOILevel.setText(R.string.search_poi_location);
+				searchPOILevel.setEnabled(false);
 				handled = true;
 			}
 		}
@@ -223,7 +228,7 @@ public class SearchPOIActivity extends ListActivity implements LocationListener,
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 		// Attention : sensor produces a lot of events & can hang the system
-		if(heading != null && heading - event.values[0] < 4){
+		if(heading != null && Math.abs(heading - event.values[0]) < 4){
 			// this is very small variation
 			return;
 		}
@@ -261,6 +266,11 @@ public class SearchPOIActivity extends ListActivity implements LocationListener,
 			searchArea.setText(filter.getSearchArea());
 		} else {
 			searchPOILevel.setEnabled(false);
+		}
+		if(searchNearBy && location == null){
+			searchPOILevel.setText(R.string.search_poi_location);
+		} else {
+			searchPOILevel.setText(R.string.search_POI_level_btn);
 		}
 		showOnMap.setEnabled(filter != null);
 		if (searchNearBy) {

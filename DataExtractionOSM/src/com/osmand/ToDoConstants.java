@@ -13,7 +13,7 @@ public class ToDoConstants {
 	 */
 	public int DESCRIBE_ABOUT_AUTHORS = 8;
 
-	// Prepare update : android description, sites, screenshots
+	// Prepare update : android description, sites(osmand/wiki), screenshots, Amerika indexes & poi/transport.index 
 	
 	 // TODO ANDROID 
 	//   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
@@ -45,7 +45,7 @@ public class ToDoConstants {
 	//  show POI choose near by or last map selection [done] 
 	//  Show poi direction (using sensor) [done]
 	
-	//  hide center point (enable only when trackball using)?
+	//  hide center point (enable only when trackball using) [hide with delay 500 ms]?
 	//  Fix bugs with test data (bug with follow turn / left time / add turn)
 	//  Improvement : Show stops in the transport route
 	
