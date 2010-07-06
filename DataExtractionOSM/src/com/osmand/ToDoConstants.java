@@ -13,16 +13,14 @@ public class ToDoConstants {
 	 */
 	public int DESCRIBE_ABOUT_AUTHORS = 8;
 
-	// Prepare update : android description, sites(osmand/wiki), screenshots, Amerika indexes & poi/transport.index 
+	 
 	
-	 // TODO ANDROID 
-	//   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
-	//		 Some icons are not fine (as back menu from map - it is blured).
+	 // TODO ANDROID
+	// Prepare update v 0.2.1: android description, sites(osmand/wiki), screenshots, Amerika indexes & poi/transport.index
 
-
-    //   60. Audio guidance for routing
 	//   61. Provide route information for YOURS (calclate turns/angle/expected time). 
 	//		 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m) [dacha]
+    //   60. Audio guidance for routing
 	
     //   43. Enable poi filter by name
 	//   58. Upload/Download zip-index from site & unzip them on phone
@@ -41,6 +39,7 @@ public class ToDoConstants {
 	// FIXME BUGS Android
 	// 1. Fix bugs with test data (bug with follow turn / left time / add turn)
 	// 2. Improvement : Show stops in the transport route
+	// 3. Pinch zoom
 	
 	// TODO swing
 	// 9. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !
@@ -56,6 +55,9 @@ public class ToDoConstants {
 	// 		 Not implemented  : show key/transit stops on map, follow mode (show next stop)
 	//   50. Invent opening hours editor in order to edit POI hours better on device
 	//   67. Improve POI search show direction where to go in search & introduce option show near you
+	//   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
+	//		 Some icons are not fine (as back menu from map - it is blured).
+
 	
 	// DONE SWING
 

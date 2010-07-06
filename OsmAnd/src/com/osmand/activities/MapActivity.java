@@ -638,7 +638,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		});
 		msg.what = 7;
 		mapPositionHandler.removeMessages(7);
-		mapPositionHandler.sendMessageDelayed(msg, 3500);
+		mapPositionHandler.sendMessageDelayed(msg, 2500);
 		
 	}
 	
