@@ -32,27 +32,60 @@ import com.osmand.map.TileSourceManager.TileSourceTemplate;
 
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
 	
-	private CheckBoxPreference showPoiOnMap;
-	private CheckBoxPreference useInternetToDownloadTiles;
-	private ListPreference tileSourcePreference;
-	private CheckBoxPreference rotateMapToBearing;
-	private CheckBoxPreference showViewAngle;
-	private ListPreference positionOnMap;
-	private CheckBoxPreference useEnglishNames;
-	private CheckBoxPreference showOsmBugs;
-	private EditTextPreference userName;
-	private CheckBoxPreference saveTrackToGpx;
-	private ListPreference saveTrackInterval;
-	private Preference saveCurrentTrack;
-	private ListPreference applicationMode;
-	private CheckBoxPreference autoZoom;
+	private class BooleanPreference {
+		private final boolean defValue;
+		private final String id;
+		private CheckBoxPreference pref;
+
+		public BooleanPreference(String id, boolean defValue){
+			this.id = id;
+			this.defValue = defValue;
+		}
+		
+		public String getId() {
+			return id;
+		}
+		
+		public boolean getDefValue() {
+			return defValue;
+		}
+		
+		public void setPref(CheckBoxPreference pref) {
+			this.pref = pref;
+		}
+		public CheckBoxPreference getPref() {
+			return pref;
+		}
+	}
+	
 	private EditTextPreference userPassword;
+	private EditTextPreference userName;
+	
+	private Preference saveCurrentTrack;
 	private Preference reloadIndexes;
 	private Preference downloadIndexes;
+
+	private ListPreference applicationMode;
+	private ListPreference saveTrackInterval;
+	private ListPreference tileSourcePreference;
+	private ListPreference positionOnMap;
 	private ListPreference routerPreference;
 	private ListPreference maxLevelToDownload;
-	private CheckBoxPreference showTransport;
 	private ListPreference mapScreenOrientation;
+	
+
+	
+	private BooleanPreference[] booleanPreferences = new BooleanPreference[]{
+			new BooleanPreference(OsmandSettings.SHOW_POI_OVER_MAP, OsmandSettings.SHOW_POI_OVER_MAP_DEF ),
+			new BooleanPreference(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES_DEF),
+			new BooleanPreference(OsmandSettings.ROTATE_MAP_TO_BEARING, OsmandSettings.ROTATE_MAP_TO_BEARING_DEF),
+			new BooleanPreference(OsmandSettings.SHOW_VIEW_ANGLE, OsmandSettings.SHOW_VIEW_ANGLE_DEF),
+			new BooleanPreference(OsmandSettings.USE_ENGLISH_NAMES, OsmandSettings.USE_ENGLISH_NAMES_DEF),
+			new BooleanPreference(OsmandSettings.SHOW_OSM_BUGS, OsmandSettings.SHOW_OSM_BUGS_DEF),
+			new BooleanPreference(OsmandSettings.AUTO_ZOOM_MAP, OsmandSettings.AUTO_ZOOM_MAP_DEF),
+			new BooleanPreference(OsmandSettings.SHOW_TRANSPORT_OVER_MAP, OsmandSettings.SHOW_TRANSPORT_OVER_MAP_DEF),
+			new BooleanPreference(OsmandSettings.SAVE_TRACK_TO_GPX, OsmandSettings.SAVE_TRACK_TO_GPX_DEF),
+	};
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,41 +96,27 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		applicationMode =(ListPreference) screen.findPreference(OsmandSettings.APPLICATION_MODE);
 		applicationMode.setOnPreferenceChangeListener(this);
 		
-		useInternetToDownloadTiles = (CheckBoxPreference) screen.findPreference(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES);
-		useInternetToDownloadTiles.setOnPreferenceChangeListener(this);
-		showPoiOnMap =(CheckBoxPreference) screen.findPreference(OsmandSettings.SHOW_POI_OVER_MAP);
-		showPoiOnMap.setOnPreferenceChangeListener(this);
-		rotateMapToBearing =(CheckBoxPreference) screen.findPreference(OsmandSettings.ROTATE_MAP_TO_BEARING);
-		rotateMapToBearing.setOnPreferenceChangeListener(this);
-		showViewAngle =(CheckBoxPreference) screen.findPreference(OsmandSettings.SHOW_VIEW_ANGLE);
-		showViewAngle.setOnPreferenceChangeListener(this);
-		autoZoom =(CheckBoxPreference) screen.findPreference(OsmandSettings.AUTO_ZOOM_MAP);
-		autoZoom.setOnPreferenceChangeListener(this);
-		showOsmBugs =(CheckBoxPreference) screen.findPreference(OsmandSettings.SHOW_OSM_BUGS);
-		showOsmBugs.setOnPreferenceChangeListener(this);
-		showTransport =(CheckBoxPreference) screen.findPreference(OsmandSettings.SHOW_TRANSPORT_OVER_MAP);
-		showTransport.setOnPreferenceChangeListener(this);
+		for(BooleanPreference b : booleanPreferences){
+			CheckBoxPreference p = (CheckBoxPreference) screen.findPreference(b.getId());
+			p.setOnPreferenceChangeListener(this);
+			b.setPref(p);
+		}
 		
-		useEnglishNames =(CheckBoxPreference) screen.findPreference(OsmandSettings.USE_ENGLISH_NAMES);
-		useEnglishNames.setOnPreferenceChangeListener(this);
 		reloadIndexes =(Preference) screen.findPreference(OsmandSettings.RELOAD_INDEXES);
 		reloadIndexes.setOnPreferenceClickListener(this);
 		downloadIndexes =(Preference) screen.findPreference(OsmandSettings.DOWNLOAD_INDEXES);
 		downloadIndexes.setOnPreferenceClickListener(this);
+		saveCurrentTrack =(Preference) screen.findPreference(OsmandSettings.SAVE_CURRENT_TRACK);
+		saveCurrentTrack.setOnPreferenceClickListener(this);
 		
 		userName = (EditTextPreference) screen.findPreference(OsmandSettings.USER_NAME);
 		userName.setOnPreferenceChangeListener(this);
 		userPassword = (EditTextPreference) screen.findPreference(OsmandSettings.USER_PASSWORD);
 		userPassword.setOnPreferenceChangeListener(this);
 		
-		saveTrackToGpx =(CheckBoxPreference) screen.findPreference(OsmandSettings.SAVE_TRACK_TO_GPX);
-		saveTrackToGpx.setOnPreferenceChangeListener(this);
+		
 		saveTrackInterval =(ListPreference) screen.findPreference(OsmandSettings.SAVE_TRACK_INTERVAL);
 		saveTrackInterval.setOnPreferenceChangeListener(this);
-		saveCurrentTrack =(Preference) screen.findPreference(OsmandSettings.SAVE_CURRENT_TRACK);
-		saveCurrentTrack.setOnPreferenceClickListener(this);
-		
-		
 		positionOnMap =(ListPreference) screen.findPreference(OsmandSettings.POSITION_ON_MAP);
 		positionOnMap.setOnPreferenceChangeListener(this);
 		mapScreenOrientation =(ListPreference) screen.findPreference(OsmandSettings.MAP_SCREEN_ORIENTATION);
@@ -118,15 +137,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	}
     
     public void updateAllSettings(){
-    	useInternetToDownloadTiles.setChecked(OsmandSettings.isUsingInternetToDownloadTiles(this));
-		showPoiOnMap.setChecked(OsmandSettings.isShowingPoiOverMap(this));
-		rotateMapToBearing.setChecked(OsmandSettings.isRotateMapToBearing(this));
-		showViewAngle.setChecked(OsmandSettings.isShowingViewAngle(this));
-		showOsmBugs.setChecked(OsmandSettings.isShowingOsmBugs(this));
-		showTransport.setChecked(OsmandSettings.isShowingTransportOverMap(this));
-		saveTrackToGpx.setChecked(OsmandSettings.isSavingTrackToGpx(this));
-		useEnglishNames.setChecked(OsmandSettings.usingEnglishNames(this));
-		autoZoom.setChecked(OsmandSettings.isAutoZoomEnabled(this));
+    	SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+    	for(BooleanPreference b : booleanPreferences){
+    		b.getPref().setChecked(prefs.getBoolean(b.getId(), b.getDefValue()));
+    	}
 		userName.setText(OsmandSettings.getUserName(this));
 		userPassword.setText(OsmandSettings.getUserPassword(this));
 		
@@ -214,35 +228,27 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		Editor edit = prefs.edit();
-		if(preference == applicationMode){
+		// handle boolean prefences
+		BooleanPreference p = null;
+		for(BooleanPreference b : booleanPreferences){
+			if(b.getPref() == preference){
+				p = b;
+				break;
+			}
+		}
+		if(p != null){
+			edit.putBoolean(p.getId(), (Boolean)newValue);
+			if(p.getId() == OsmandSettings.SHOW_POI_OVER_MAP && ((Boolean) newValue)){
+				edit.putString(OsmandSettings.SELECTED_POI_FILTER_FOR_MAP, PoiFiltersHelper.getOsmDefinedFilterId(null));
+			}
+			
+			edit.commit();
+			
+		} else if(preference == applicationMode){
 			edit.putString(OsmandSettings.APPLICATION_MODE, (String) newValue);
 			setAppMode(ApplicationMode.valueOf(newValue.toString()), edit);
 			edit.commit();
 			updateAllSettings();
-		} else if(preference == autoZoom){
-			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, (Boolean) newValue);
-			edit.commit();
-		} else if(preference == showTransport){
-			edit.putBoolean(OsmandSettings.SHOW_TRANSPORT_OVER_MAP, (Boolean) newValue);
-			edit.commit();
-		} else if(preference == showPoiOnMap){
-			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, (Boolean) newValue);
-			if((Boolean)newValue){
-				edit.putString(OsmandSettings.SELECTED_POI_FILTER_FOR_MAP, PoiFiltersHelper.getOsmDefinedFilterId(null));
-			}
-			edit.commit();
-		} else if(preference == useInternetToDownloadTiles){
-			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, (Boolean) newValue);
-			edit.commit();
-		} else if(preference == rotateMapToBearing){
-			edit.putBoolean(OsmandSettings.ROTATE_MAP_TO_BEARING, (Boolean) newValue);
-			edit.commit();
-		} else if(preference == useEnglishNames){
-			edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, (Boolean) newValue);
-			edit.commit();
-		} else if(preference == saveTrackToGpx){
-			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, (Boolean) newValue);
-			edit.commit();
 		} else if(preference == mapScreenOrientation){
 			edit.putInt(OsmandSettings.MAP_SCREEN_ORIENTATION, Integer.parseInt(newValue.toString()));
 			edit.commit();
@@ -255,12 +261,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		} else if(preference == userName){
 			edit.putString(OsmandSettings.USER_NAME, (String) newValue);
 			edit.commit();
-		} else if(preference == showViewAngle){
-			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, (Boolean) newValue);
-			edit.commit();
-		} else if(preference == showOsmBugs){
-			edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, (Boolean) newValue);
-			edit.commit();
+		
 		} else if(preference == positionOnMap){
 			edit.putInt(OsmandSettings.POSITION_ON_MAP, positionOnMap.findIndexOfValue((String) newValue));
 			edit.commit();
@@ -406,5 +407,4 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		return false;
 	}
-
 }
