@@ -30,19 +30,21 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.osmand.OsmandSettings;
 import com.osmand.PoiFilter;
 import com.osmand.PoiFiltersHelper;
 import com.osmand.R;
 import com.osmand.PoiFiltersHelper.PoiFilterDbHelper;
 import com.osmand.activities.search.SearchPOIActivity;
 import com.osmand.data.AmenityType;
+import com.osmand.osm.LatLon;
 
 /**
  * @author Frolov
  * 
  */
 public class EditPOIFilterActivity extends ListActivity {
-
+	public static final String AMENITY_FILTER = "com.osmand.amenity_filter"; //$NON-NLS-1$
 	private Button filterLevel;
 	private PoiFilter filter;
 	private PoiFilterDbHelper helper;
@@ -56,16 +58,31 @@ public class EditPOIFilterActivity extends ListActivity {
 		filterLevel.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent newIntent = new Intent(EditPOIFilterActivity.this, SearchPOIActivity.class);
-				Bundle bundle = new Bundle();
-				bundle.putString(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
-				newIntent.putExtras(bundle);
-				startActivity(newIntent);
+				AlertDialog.Builder b = new AlertDialog.Builder(EditPOIFilterActivity.this);
+				b.setItems(new String[]{getString(R.string.search_nearby), getString(R.string.search_near_map)}, new DialogInterface.OnClickListener(){
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Bundle bundle = new Bundle();
+						Intent newIntent = new Intent(EditPOIFilterActivity.this, SearchPOIActivity.class);
+						bundle.putString(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
+						if(which == 1){
+							LatLon last = OsmandSettings.getLastKnownMapLocation(EditPOIFilterActivity.this);
+							if(last != null){
+								bundle.putDouble(SearchPOIActivity.SEARCH_LAT, last.getLatitude());
+								bundle.putDouble(SearchPOIActivity.SEARCH_LON, last.getLongitude());
+							}
+							
+						}
+						newIntent.putExtras(bundle);
+						startActivity(newIntent);
+					}
+				});
+				b.show();
 			}
 		});
 
 		Bundle bundle = this.getIntent().getExtras();
-		String filterId = bundle.getString(SearchPOIActivity.AMENITY_FILTER);
+		String filterId = bundle.getString(AMENITY_FILTER);
 		filter = PoiFiltersHelper.getFilterById(this, filterId);
 
 		setListAdapter(new AmenityAdapter(AmenityType.getCategories()));

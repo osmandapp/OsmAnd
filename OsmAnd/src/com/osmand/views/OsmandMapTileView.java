@@ -103,9 +103,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	Paint paintBitmap;
 	
 	
-
-	
-	
 	public OsmandMapTileView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		initView();
@@ -163,7 +160,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
-		// TODO clear cache ?
 	}
 	
 	public void addLayer(OsmandMapLayer layer, OsmandMapLayer afterIt){

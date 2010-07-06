@@ -217,9 +217,10 @@ public class SearchAddressActivity extends Activity {
 		if (l != null) {
 			if(navigateTo){
 				OsmandSettings.setPointToNavigate(SearchAddressActivity.this, l.getLatitude(), l.getLongitude());
-			} 
-			OsmandSettings.setMapLocationToShow(SearchAddressActivity.this, l.getLatitude(), l.getLongitude(), historyName);
-			OsmandSettings.setLastKnownMapZoom(SearchAddressActivity.this, zoom);
+			} else {
+				OsmandSettings.setMapLocationToShow(SearchAddressActivity.this, l.getLatitude(), l.getLongitude(), historyName);
+				OsmandSettings.setLastKnownMapZoom(SearchAddressActivity.this, zoom);
+			}
 			
 			startActivity(new Intent(SearchAddressActivity.this, MapActivity.class));
 		}

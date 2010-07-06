@@ -99,6 +99,12 @@ public class PoiFilter {
 		return amenityList; 
 	}
 	
+	public List<Amenity> searchAgain(double lat, double lon){
+		List<Amenity> amenityList = ResourceManager.getResourceManager().searchAmenities(this, lat, lon, zoom, maxCount);
+		MapUtils.sortListOfMapObject(amenityList, lat, lon);
+		return amenityList;
+	}
+	
 	public String getName(){
 		return name;
 	}

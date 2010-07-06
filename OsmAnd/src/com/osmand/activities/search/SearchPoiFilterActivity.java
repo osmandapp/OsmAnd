@@ -6,7 +6,9 @@ package com.osmand.activities.search;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -19,17 +21,18 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.osmand.OsmandSettings;
 import com.osmand.PoiFilter;
 import com.osmand.PoiFiltersHelper;
 import com.osmand.R;
 import com.osmand.activities.EditPOIFilterActivity;
+import com.osmand.osm.LatLon;
 
 /**
  * @author Maxim Frolov
  * 
  */
 public class SearchPoiFilterActivity extends ListActivity {
-
 
 	private Typeface typeFace;
 
@@ -68,22 +71,37 @@ public class SearchPoiFilterActivity extends ListActivity {
 			Bundle bundle = new Bundle();
 			Intent newIntent = new Intent(SearchPoiFilterActivity.this, EditPOIFilterActivity.class);
 			// folder selected
-			bundle.putString(SearchPOIActivity.AMENITY_FILTER, poi.getFilterId());
+			bundle.putString(EditPOIFilterActivity.AMENITY_FILTER, poi.getFilterId());
 			newIntent.putExtras(bundle);
 			startActivityForResult(newIntent, 0);
 		}
 	}
 	public void onListItemClick(ListView parent, View v, int position, long id) {
-		PoiFilter filter = ((AmenityAdapter) getListAdapter()).getItem(position);
+		final PoiFilter filter = ((AmenityAdapter) getListAdapter()).getItem(position);
 		if(filter.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)){
 			showEditActivity(filter);
 			return;
 		}
-		Bundle bundle = new Bundle();
-		Intent newIntent = new Intent(SearchPoiFilterActivity.this, SearchPOIActivity.class);
-		bundle.putString(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
-		newIntent.putExtras(bundle);
-		startActivityForResult(newIntent, 0);
+		AlertDialog.Builder b = new AlertDialog.Builder(this);
+		b.setItems(new String[]{getString(R.string.search_nearby), getString(R.string.search_near_map)}, new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Bundle bundle = new Bundle();
+				Intent newIntent = new Intent(SearchPoiFilterActivity.this, SearchPOIActivity.class);
+				bundle.putString(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
+				if(which == 1){
+					LatLon last = OsmandSettings.getLastKnownMapLocation(SearchPoiFilterActivity.this);
+					if(last != null){
+						bundle.putDouble(SearchPOIActivity.SEARCH_LAT, last.getLatitude());
+						bundle.putDouble(SearchPOIActivity.SEARCH_LON, last.getLongitude());
+					}
+					
+				}
+				newIntent.putExtras(bundle);
+				startActivityForResult(newIntent, 0);
+			}
+		});
+		b.show();
 	}
 
 

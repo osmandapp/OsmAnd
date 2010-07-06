@@ -89,7 +89,7 @@ public class FavouritesActivity extends ListActivity {
 		AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) aItem.getMenuInfo();
 		final FavouritePoint point = (FavouritePoint) favouritesList.get(menuInfo.position);
 		if(aItem.getItemId() == NAVIGATE_TO){
-			OsmandSettings.setMapLocationToShow(this, point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName()); //$NON-NLS-1$
+//			OsmandSettings.setMapLocationToShow(this, point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName()); //$NON-NLS-1$
 			OsmandSettings.setPointToNavigate(this, point.getLatitude(), point.getLongitude());
 			Intent newIntent = new Intent(FavouritesActivity.this, MapActivity.class);
 			startActivity(newIntent);
