@@ -122,14 +122,16 @@ public class NavigatePointActivity extends Activity {
 			// TODO there is a bug in android implementation : doesn't convert if min = 59.23 or sec = 59.32 or deg=179.3
 			double lat = Location.convert(((TextView) findViewById(R.id.LatitudeEdit)).getText().toString());
 			double lon = Location.convert(((TextView) findViewById(R.id.LongitudeEdit)).getText().toString());
-			// in case when it is dialog
-			if(activity != null) {
-				activity.setMapLocation(lat, lon);
-			} else {
-				OsmandSettings.setMapLocationToShow(this, lat, lon, MessageFormat.format(getString(R.string.search_history_navigate_to), lat, lon));
-			}
+			
 			if(navigate){
 				OsmandSettings.setPointToNavigate(this, lat, lon);
+			} else {
+				// in case when it is dialog
+				if(activity != null) {
+					activity.setMapLocation(lat, lon);
+				} else {
+					OsmandSettings.setMapLocationToShow(this, lat, lon, MessageFormat.format(getString(R.string.search_history_navigate_to), lat, lon));
+				}
 			}
 			close();
 		} catch (RuntimeException e) {

@@ -62,9 +62,13 @@ public class AnimateDraggingMapThread implements Runnable {
 	 */
 	public void stopDraggingSync(){
 		// wait until current thread != null
-		// TODO implement better method for waintg
 		stopped = true;
-		while(currentThread != null){}
+		while(currentThread != null){
+			try {
+				currentThread.join();
+			} catch (InterruptedException e) {
+			}
+		}
 	}
 	
 	public void startDragging(float dTime, float  startX, float  startY, float  endX, float  endY){

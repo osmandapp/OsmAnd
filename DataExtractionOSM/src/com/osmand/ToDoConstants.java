@@ -12,7 +12,8 @@ public class ToDoConstants {
 	 * Write activity to show something about authors / donation ....
 	 */
 	public int DESCRIBE_ABOUT_AUTHORS = 8;
-	
+
+	// Prepare update : android description, sites, screenshots
 	
 	 // TODO ANDROID 
 	//   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
@@ -41,10 +42,10 @@ public class ToDoConstants {
 	//  double tap to zoom [done]
 	//  forbid rotate map to landscape [ done]
 	// 	REFACTOR Settings activity ( for check box properties!) [partially done]
+	//  show POI choose near by or last map selection [done] 
+	//  Show poi direction (using sensor) [done]
 	
-	//  show POI choose near by or last map selection. 
-	//  Show poi direction (using sensor)
-	//  hide center point (enable only when trackball using)
+	//  hide center point (enable only when trackball using)?
 	//  Fix bugs with test data (bug with follow turn / left time / add turn)
 	//  Improvement : Show stops in the transport route
 	
