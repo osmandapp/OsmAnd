@@ -26,8 +26,8 @@ public class IndexBatchCreator {
 	private static final boolean writeWayNodes = true;
 	
 	protected static final Log log = LogUtil.getLog(IndexBatchCreator.class);
-	protected static final String SITE_TO_DOWNLOAD = "http://download.geofabrik.de/osm/europe/"; //$NON-NLS-1$
-	protected static final String[] countriesToDownload = new String[] {
+	protected static final String SITE_TO_DOWNLOAD1 = "http://download.geofabrik.de/osm/europe/"; //$NON-NLS-1$
+	protected static final String[] countriesToDownload1 = new String[] {
 		"albania", "andorra", "austria", // 5.3, 0.4, 100 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		"belarus", "belgium", "bosnia-herzegovina", // 39, 43, 4.1 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		"bulgaria", "croatia", "cyprus",  // 13, 12, 5 //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
@@ -53,6 +53,25 @@ public class IndexBatchCreator {
 		// poi : "france",  "germany" - out of memory
 
 	};
+	
+	protected static final String SITE_TO_DOWNLOAD2 = "http://downloads.cloudmade.com/"; //$NON-NLS-1$
+	// us states
+	protected static final String[] usStates = new String[] {
+		"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut",
+		"Delaware",	"District_of_Columbia", "Florida", "Georgia", "Guantanamo_Bay",	"Hawaii",
+		"Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine",
+		"Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", 
+		"Montana", "Nebraska", "Nevada", "New_Hampshire", "New_Jersey", "New_Mexico",
+		"New_York",	"North_Carolina", "North_Dakota", "Ohio", "Oklahoma", "Oregon",
+		"Pennsylvania", "Rhode Island",	"South Carolina", "South Dakota", "Tennessee",
+		"Texas", "Utah", "Vermont", "Virginia", "Washington", "West_Virginia", "Wisconsin", "Wyoming",
+	};
+	protected static final String[] canadaStates = new String[] {
+		"Alberta","British_Columbia","Manitoba","New_Brunswick","Newfoundland",
+		"Nova_Scotia","Nunavut", "Nw_Territories","Ontario","Pr_Edwrd_Island",
+		"Quebec","Saskatchewan","Yukon",
+	};
+	
 	
 	
 	boolean downloadFiles = false;
@@ -108,10 +127,24 @@ public class IndexBatchCreator {
 //			log.info("Delete old file " + f.getName());  //$NON-NLS-1$
 //			f.delete();
 //		}
-		for(String country : countriesToDownload){
-			String url = SITE_TO_DOWNLOAD + country +".osm.bz2"; //$NON-NLS-1$
+		for(String country : countriesToDownload1){
+			String url = SITE_TO_DOWNLOAD1 + country +".osm.bz2"; //$NON-NLS-1$
 			log.info("Downloading country " + country + " from " + url);  //$NON-NLS-1$//$NON-NLS-2$
 			downloadFile(url, new File(osmDirFiles, country +".osm.bz2")); //$NON-NLS-1$
+		}
+		
+		for(String country : usStates){
+			country = country.toLowerCase();
+			String url = SITE_TO_DOWNLOAD2 + "north_america/united_states/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+			log.info("Downloading country " + country + " from " + url);  //$NON-NLS-1$//$NON-NLS-2$
+			downloadFile(url, new File(osmDirFiles, "US_"+country +".osm.bz2")); //$NON-NLS-1$
+		}
+		
+		for(String country : canadaStates){
+			country = country.toLowerCase();
+			String url = SITE_TO_DOWNLOAD2 + "north_america/canada/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+			log.info("Downloading country " + country + " from " + url);  //$NON-NLS-1$//$NON-NLS-2$
+			downloadFile(url, new File(osmDirFiles, "Canada_"+country +".osm.bz2")); //$NON-NLS-1$
 		}
 		System.out.println("DOWNLOADING FILES FINISHED");
 	}
@@ -147,7 +180,12 @@ public class IndexBatchCreator {
 		for (File f : getSortedFiles(osmDirFiles)) {
 			if (f.getName().endsWith(".osm.bz2") || f.getName().endsWith(".osm")) {
 				System.gc();
-				generateIndex(f);
+				try {
+					generateIndex(f);
+				} catch (OutOfMemoryError e) {
+					log.error("OutOfMemory", e);
+					System.gc();
+				}
 			}
 		}
 		System.out.println("GENERATING INDEXES FINISHED ");
