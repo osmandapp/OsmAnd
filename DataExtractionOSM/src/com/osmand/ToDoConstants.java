@@ -39,15 +39,8 @@ public class ToDoConstants {
 
 
 	// FIXME BUGS Android
-	//  double tap to zoom [done]
-	//  forbid rotate map to landscape [ done]
-	// 	REFACTOR Settings activity ( for check box properties!) [partially done]
-	//  show POI choose near by or last map selection [done] 
-	//  Show poi direction (using sensor) [done]
-	
-	//  hide center point (enable only when trackball using) [hide with delay 500 ms]?
-	//  Fix bugs with test data (bug with follow turn / left time / add turn)
-	//  Improvement : Show stops in the transport route
+	// 1. Fix bugs with test data (bug with follow turn / left time / add turn)
+	// 2. Improvement : Show stops in the transport route
 	
 	// TODO swing
 	// 9. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !
@@ -62,6 +55,7 @@ public class ToDoConstants {
 	//   33. Build transport locations. Create transport index (transport-stops) (investigate)
 	// 		 Not implemented  : show key/transit stops on map, follow mode (show next stop)
 	//   50. Invent opening hours editor in order to edit POI hours better on device
+	//   67. Improve POI search show direction where to go in search & introduce option show near you
 	
 	// DONE SWING
 
