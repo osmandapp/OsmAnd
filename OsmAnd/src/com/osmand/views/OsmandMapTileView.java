@@ -13,7 +13,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -76,6 +75,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	private int mapPosition;
 	
+	private boolean showMapPosition = true;
+	
 	// name of source map 
 	private ITileSource map = null;
 	
@@ -99,7 +100,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	Paint paintGrayFill;
 	Paint paintWhiteFill;
-	Paint paintBlack;
+	Paint paintCenter;
 	Paint paintBitmap;
 	
 	
@@ -127,9 +128,11 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		// when map rotate
 		paintWhiteFill.setAntiAlias(true);
 		
-		paintBlack = new Paint();
-		paintBlack.setStyle(Style.STROKE);
-		paintBlack.setColor(Color.BLACK);
+		paintCenter = new Paint();
+		paintCenter.setStyle(Style.STROKE);
+		paintCenter.setColor(Color.rgb(60, 60, 60));
+		paintCenter.setStrokeWidth(2);
+		paintCenter.setAntiAlias(true);
 		
 		paintBitmap = new Paint();
 		paintBitmap.setFilterBitmap(true);
@@ -219,6 +222,15 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 	}
 
+	
+	public boolean isShowMapPosition() {
+		return showMapPosition;
+	}
+	
+	public void setShowMapPosition(boolean showMapPosition) {
+		this.showMapPosition = showMapPosition;
+	}
+	
 	public float getRotate() {
 		return rotate;
 	}
@@ -305,8 +317,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private void drawOverMap(Canvas canvas){
 		int w = getCenterPointX();
 		int h = getCenterPointY();
-		canvas.drawCircle(w, h, 3, paintBlack);
-		canvas.drawCircle(w, h, 6, paintBlack);
+		if (showMapPosition) {
+			canvas.drawCircle(w, h, 3, paintCenter);
+			canvas.drawCircle(w, h, 7, paintCenter);
+		}
 		
 		for (OsmandMapLayer layer : layers) {
 			canvas.restore();

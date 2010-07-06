@@ -31,6 +31,8 @@ import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.util.FloatMath;
@@ -112,6 +114,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 
 	private MenuItem navigateToPointMenu;
 	private NotificationManager mNotificationManager;
+	private Handler mapPositionHandler = null;
 	private int APP_NOTIFICATION_ID;
 	
 	
@@ -146,6 +149,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		mapView.setTrackBallDelegate(new OsmandMapTileView.OnTrackBallListener(){
 			@Override
 			public boolean onTrackBallEvent(MotionEvent e) {
+				showAndHideMapPosition();
 				return MapActivity.this.onTrackballEvent(e);
 			}
 
@@ -221,6 +225,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			@Override
 			public void onClick(View v) {
 				mapView.setZoom(mapView.getZoom() + 1);
+				showAndHideMapPosition();
 				// user can preview map manually switch off auto zoom while user don't press back to location
 				if(OsmandSettings.isAutoZoomEnabled(MapActivity.this)){
 					locationChanged(mapView.getLatitude(), mapView.getLongitude(), null);
@@ -231,6 +236,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			@Override
 			public void onClick(View v) {
 				mapView.setZoom(mapView.getZoom() - 1);
+				showAndHideMapPosition();
 				// user can preview map manually switch off auto zoom while user don't press back to location
 				if(OsmandSettings.isAutoZoomEnabled(MapActivity.this)){
 					locationChanged(mapView.getLatitude(), mapView.getLongitude(), null);
@@ -611,8 +617,30 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 			wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "com.osmand.map"); //$NON-NLS-1$
 			wakeLock.acquire();
 		}
+		showAndHideMapPosition();
 	}
 	
+	
+	public void showAndHideMapPosition(){
+		mapView.setShowMapPosition(true);
+		if(mapPositionHandler == null){
+			mapPositionHandler = new Handler();
+		}
+		Message msg = Message.obtain(mapPositionHandler, new Runnable(){
+			@Override
+			public void run() {
+				if(mapView.isShowMapPosition()){
+					mapView.setShowMapPosition(false);
+					mapView.refreshMap();
+				}
+			}
+			
+		});
+		msg.what = 7;
+		mapPositionHandler.removeMessages(7);
+		mapPositionHandler.sendMessageDelayed(msg, 3500);
+		
+	}
 	
 	
 	@Override
