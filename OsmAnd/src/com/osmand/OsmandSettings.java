@@ -5,6 +5,7 @@ import java.util.List;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.ActivityInfo;
 
 import com.osmand.activities.RouteProvider.RouteService;
 import com.osmand.activities.search.SearchHistoryHelper;
@@ -165,7 +166,15 @@ public class OsmandSettings {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		return prefs.getBoolean(SHOW_OSM_BUGS, false);
 	}
-
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String MAP_SCREEN_ORIENTATION = "map_screen_orientation"; //$NON-NLS-1$
+	
+	public static int getMapOrientation(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getInt(MAP_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+	}
+	
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SHOW_VIEW_ANGLE = "show_view_angle"; //$NON-NLS-1$
 

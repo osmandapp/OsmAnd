@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="map_orientation_default">Default</string>
+	<string name="map_orientation_portrait">Portrait</string>
+	<string name="map_orientation_landscape">Landscape</string>
+	<string name="map_screen_orientation">Map screen orientation</string>
+	<string name="map_screen_orientation_descr">Choose screen orientation</string>
 	<string name="opening_hours_not_supported">Opening hours format is not supported for editing</string>
 	<string name="add_new_rule">Add new rule</string>
 	<string name="transport_Routes">Routes</string>
