@@ -154,7 +154,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			file.mkdirs();
 			if (file.exists()) {
 				Cursor query = db.rawQuery("SELECT " + TRACK_COL_LAT + "," + TRACK_COL_LON + "," + TRACK_COL_ALTITUDE + "," //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-						+ TRACK_COL_SPEED + "," + TRACK_COL_DATE + " FROM " + TRACK_NAME, null); //$NON-NLS-1$ //$NON-NLS-2$
+						+ TRACK_COL_SPEED + "," + TRACK_COL_DATE + " FROM " + TRACK_NAME +" ORDER BY " + TRACK_COL_DATE +" ASC", null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 				long previousTime = 0;
 				Map<String, List<List<TrkPt>>> data = new LinkedHashMap<String, List<List<TrkPt>>>();
 				List<TrkPt> segment = new ArrayList<TrkPt>();
