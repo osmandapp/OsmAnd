@@ -65,7 +65,8 @@ public class SearchPOIActivity extends ListActivity implements LocationListener,
 	public static final String SEARCH_LON = "com.osmand.am_search_lon"; //$NON-NLS-1$
 	private static final int GPS_TIMEOUT_REQUEST = 2000;
 	private static final int GPS_DIST_REQUEST = 5;
-
+	private static final int MIN_DISTANCE_TO_RESEARCH = 70;
+	private static final int MIN_DISTANCE_TO_UPDATE = 6;
 
 
 	private Button searchPOILevel;
@@ -164,10 +165,10 @@ public class SearchPOIActivity extends ListActivity implements LocationListener,
 				searchPOILevel.setEnabled(filter.isSearchFurtherAvailable());
 				searchArea.setText(filter.getSearchArea());
 				handled = true;
-			} else if (searchedLocation != null && l.distanceTo(searchedLocation) > 80) {
+			} else if (searchedLocation != null && l.distanceTo(searchedLocation) > MIN_DISTANCE_TO_RESEARCH) {
 				amenityAdapter.setNewModel(filter.searchAgain(l.getLatitude(), l.getLongitude()));
 				handled = true;
-			} else if(location.distanceTo(l) > 6){
+			} else if(location.distanceTo(l) > MIN_DISTANCE_TO_UPDATE){
 				handled = true;
 			}
 		} else {

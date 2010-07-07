@@ -49,7 +49,7 @@ public class MainMenuActivity extends Activity {
 	
 	public void startApplication(){
 		if(!applicationAlreadyStarted){
-			
+			// Algoritms.removeAllFiles(new File(Environment.getExternalStorageDirectory(), "/osmand/tiles/Mapnik/18"));
 			final ProgressDialog dlg = ProgressDialog.show(this, getString(R.string.loading_data), getString(R.string.reading_indexes), true);
 			final ProgressDialogImplementation impl = new ProgressDialogImplementation(dlg);
 			impl.setRunnable("Initializing app", new Runnable(){ //$NON-NLS-1$

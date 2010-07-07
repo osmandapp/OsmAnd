@@ -336,6 +336,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		if(preset == ApplicationMode.CAR){
 			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, true);
 //			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, _);
+			edit.putBoolean(OsmandSettings.SHOW_TRANSPORT_OVER_MAP, false);
 			edit.putBoolean(OsmandSettings.ROTATE_MAP_TO_BEARING, true);
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, false);
 			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, true);
