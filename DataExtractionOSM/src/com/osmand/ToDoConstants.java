@@ -13,11 +13,8 @@ public class ToDoConstants {
 	 */
 	public int DESCRIBE_ABOUT_AUTHORS = 8;
 
-	// pinch zoom, fix bugs with test data
-	 
 	
 	// TODO ANDROID
-	// Prepare update v 0.2.1:  screenshots, android description, sites(osmand/wiki), US/canada indexes & poi/transport.index
 
 	//   61. Provide route information for YOURS (calclate turns/angle/expected time). 
 	//		 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m) [dacha]

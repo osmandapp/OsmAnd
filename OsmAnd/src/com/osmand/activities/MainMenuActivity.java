@@ -13,7 +13,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.format.DateFormat;
@@ -33,17 +35,16 @@ import com.osmand.activities.search.SearchActivity;
 
 public class MainMenuActivity extends Activity {
 
+	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
 	private static boolean applicationAlreadyStarted = false;
 	private static final String EXCEPTION_PATH = "/osmand/exception.log"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = "/osmand/exception.log"; //$NON-NLS-1$
+	
 	
 	private Button showMap;
 	private Button settingsButton;
 	private Button searchButton;
 	private Button favouritesButton;
-	
-	
-	
 	
 
 	
@@ -99,6 +100,8 @@ public class MainMenuActivity extends Activity {
 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.menu);
+		
+		
 
 
 		showMap = (Button) findViewById(R.id.MapButton);
@@ -148,6 +151,24 @@ public class MainMenuActivity extends Activity {
 //		}); 
 		
 		startApplication();
+		
+		SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);
+		if(!pref.contains(FIRST_TIME_APP_RUN)){
+			pref.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
+			Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(R.string.first_time_msg);
+			builder.setPositiveButton(R.string.first_time_download, new DialogInterface.OnClickListener(){
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					startActivity(new Intent(MainMenuActivity.this, DownloadIndexActivity.class));
+				}
+				
+			});
+			builder.setNegativeButton(R.string.first_time_continue, null);
+			
+			builder.show();
+		}
 	}
 	
 	protected void showWarnings(List<String> warnings) {

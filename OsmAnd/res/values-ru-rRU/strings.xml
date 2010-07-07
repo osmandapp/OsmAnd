@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="first_time_continue">Продолжить</string>
+	<string name="first_time_download">Загрузить индексы</string>
+	<string name="first_time_msg">Спасибо за то, что выбрали OsmAnd. \n
+Для полноценного использования приложения вам потребуются файлы индексы, которые необходимо загрузить (Настройки/Данные) или подготовить. После загрузки вам будет доступен : поиск по адресу, поиск POI, поиск транспорта.</string>
 	<string name="search_poi_location">Поиск сигнала...</string>
 	<string name="search_near_map">Искать возле видимой карты</string>
 	<string name="search_nearby">Искать рядом</string>
