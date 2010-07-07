@@ -259,12 +259,16 @@ public class SearchPOIActivity extends ListActivity implements LocationListener,
 	@Override
 	protected void onResume() {
 		super.onResume();
+		if(searchNearBy){
+			location = null;
+		}
 		if (filter != null && location != null) {
 			searchedLocation = location;
 			amenityAdapter.setNewModel(filter.initializeNewSearch(location.getLatitude(), location.getLongitude(), 40));
 			searchPOILevel.setEnabled(filter.isSearchFurtherAvailable());
 			searchArea.setText(filter.getSearchArea());
 		} else {
+			amenityAdapter.notifyDataSetChanged();
 			searchPOILevel.setEnabled(false);
 		}
 		if(searchNearBy && location == null){
@@ -276,8 +280,9 @@ public class SearchPOIActivity extends ListActivity implements LocationListener,
 		if (searchNearBy) {
 			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 			service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
-			if (!service.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+			if (!isRunningOnEmulator() && !service.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 				service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
+				currentLocationProvider = LocationManager.NETWORK_PROVIDER;
 			}
 		}
 	}
@@ -314,6 +319,7 @@ public class SearchPOIActivity extends ListActivity implements LocationListener,
 			SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
 			sensorMgr.unregisterListener(this);
 			sensorRegistered = false;
+			currentLocationProvider = null;
 		}
 	}
 
@@ -411,6 +417,7 @@ public class SearchPOIActivity extends ListActivity implements LocationListener,
 			for (Amenity obj : amenityList) {
 				this.add(obj);
 			}
+			setNotifyOnChange(true);
 			this.notifyDataSetChanged();
 
 		}

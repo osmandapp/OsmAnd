@@ -537,6 +537,7 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
 		sensorMgr.unregisterListener(this);
 		sensorRegistered = false;
+		currentLocationProvider = null;
 		
 		OsmandSettings.setLastKnownMapLocation(this, (float) mapView.getLatitude(), (float) mapView.getLongitude());
 		OsmandSettings.setLastKnownMapZoom(this, mapView.getZoom());
@@ -603,11 +604,14 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		
 		service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
 		LocationProvider prov = service.getProvider(LocationManager.GPS_PROVIDER);
-		if(!service.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+		if(!service.isProviderEnabled(LocationManager.GPS_PROVIDER) && !isRunningOnEmulator()){
 			service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
 			prov = service.getProvider(LocationManager.NETWORK_PROVIDER);
+			currentLocationProvider = LocationManager.NETWORK_PROVIDER;
+		} else {
+			currentLocationProvider = LocationManager.GPS_PROVIDER;
 		}
-		
+		 
 		providerSupportsBearing = prov == null ? false : prov.supportsBearing() && !isRunningOnEmulator();
 		providerSupportsSpeed = prov == null ? false : prov.supportsSpeed() && !isRunningOnEmulator();
 		
