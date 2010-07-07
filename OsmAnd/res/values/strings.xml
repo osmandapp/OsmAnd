@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="first_time_continue">Continue</string>
+	<string name="first_time_download">Download indexes</string>
+	<string name="first_time_msg">Thank you for choosing OsmAnd. \nTo be able to use all features of application you need index files, which you can download (Settings/Data) or prepare by yourself. After that you can use : search by address, search POI, search transport.</string>
 	<string name="search_poi_location">Searching signal...</string>
 	<string name="search_near_map">Search near last map location</string>
 	<string name="search_nearby">Search nearby</string>
