@@ -68,7 +68,7 @@ public class OpeningHoursView {
 		
 		timePickerEnd.setIs24HourView(true);
 		timePickerStart.setIs24HourView(true);
-		timePickerStart.setCurrentHour(8);
+		timePickerStart.setCurrentHour(9);
 		timePickerStart.setCurrentMinute(0);
 		timePickerEnd.setCurrentHour(20);
 		timePickerEnd.setCurrentMinute(0);
@@ -99,10 +99,14 @@ public class OpeningHoursView {
 					@Override
 					public void onClick(View v) {
 						BasicDayOpeningHourRule r = new BasicDayOpeningHourRule();
-						r.setStartTime(9*60);
-						r.setEndTime(20*60);
+						r.setStartTime(timePickerStart.getCurrentHour()*60 + timePickerStart.getCurrentMinute());
+						r.setEndTime(timePickerEnd.getCurrentHour()*60 + timePickerEnd.getCurrentMinute());
+						
 						boolean[] days = r.getDays();
-						Arrays.fill(days, true);
+						if(position == 0){
+							// first time full all
+							Arrays.fill(days, true);
+						}
 						showDaysDialog(r, position);
 					}
 					

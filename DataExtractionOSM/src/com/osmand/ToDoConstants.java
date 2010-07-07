@@ -16,7 +16,7 @@ public class ToDoConstants {
 	 
 	
 	 // TODO ANDROID
-	// Prepare update v 0.2.1: android description, sites(osmand/wiki), screenshots, Amerika indexes & poi/transport.index
+	// Prepare update v 0.2.1:  screenshots, // android description, sites(osmand/wiki), US/canada indexes & poi/transport.index
 
 	//   61. Provide route information for YOURS (calclate turns/angle/expected time). 
 	//		 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m) [dacha]
@@ -53,10 +53,6 @@ public class ToDoConstants {
 	//  DONE ANDROID :
 	//   33. Build transport locations. Create transport index (transport-stops) (investigate)
 	// 		 Not implemented  : show key/transit stops on map, follow mode (show next stop)
-	//   50. Invent opening hours editor in order to edit POI hours better on device
-	//   67. Improve POI search show direction where to go in search & introduce option show near you
-	//   42. Revise UI (icons/layouts). Support different devices. Add inactive/focus(!) icon versions.
-	//		 Some icons are not fine (as back menu from map - it is blured).
 
 	
 	// DONE SWING

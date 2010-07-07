@@ -48,7 +48,7 @@ public class OpeningHoursParser {
 			if(p < 0){
 				p+=7;
 			}
-			int time = cal.get(Calendar.HOUR) * 60 + cal.get(Calendar.MINUTE);
+			int time = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE);
 			// one day working 10 - 20 (not 20 - 04)
 			if(startTime < endTime || endTime == -1){
 				if(days[d]){
