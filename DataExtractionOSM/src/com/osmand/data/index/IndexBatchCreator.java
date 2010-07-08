@@ -32,7 +32,7 @@ public class IndexBatchCreator {
 	protected static final String[] countriesToDownload1 = new String[] {
 //		"albania", "andorra", "austria", // 5.3, 0.4, 100 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 //		"belarus", "belgium", "bosnia-herzegovina", // 39, 43, 4.1 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"bulgaria", "croatia", "cyprus",  // 13, 12, 5 //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+//		"bulgaria", "croatia", "cyprus",  // 13, 12, 5 //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 //		"denmark", "estonia", "faroe_islands", // 75, 38, 1.5 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 //		"finland", "greece", "hungary", //80, 25, 14 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 //		"iceland", "ireland", "isle_of_man", // 5.9, 27, 1.1 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -59,14 +59,14 @@ public class IndexBatchCreator {
 	protected static final String SITE_TO_DOWNLOAD2 = "http://downloads.cloudmade.com/"; //$NON-NLS-1$
 	// us states
 	protected static final String[] usStates = new String[] {
-//		"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut",
-//		"Delaware",	"District_of_Columbia", "Florida", "Georgia", "Guantanamo_Bay",	"Hawaii",
-//		"Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine",
-//		"Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", 
-//		"Montana", "Nebraska", "Nevada", "New_Hampshire", "New_Jersey", "New_Mexico",
-//		"New_York",	"North_Carolina", "North_Dakota", "Ohio", "Oklahoma", "Oregon",
-//		"Pennsylvania", "Rhode Island",	"South Carolina", "South Dakota", "Tennessee",
-//		"Texas", "Utah", "Vermont", "Virginia", "Washington", "West_Virginia", "Wisconsin", "Wyoming",
+		"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut",
+		"Delaware",	"District_of_Columbia", "Florida", "Georgia", "Guantanamo_Bay",	"Hawaii",
+		"Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine",
+		"Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", 
+		"Montana", "Nebraska", "Nevada", "New_Hampshire", "New_Jersey", "New_Mexico",
+		"New_York",	"North_Carolina", "North_Dakota", "Ohio", "Oklahoma", "Oregon",
+		"Pennsylvania", "Rhode Island",	"South Carolina", "South Dakota", "Tennessee",
+		"Texas", "Utah", "Vermont", "Virginia", "Washington", "West_Virginia", "Wisconsin", "Wyoming",
 	};
 	protected static final String[] canadaStates = new String[] {
 //		"Alberta","British_Columbia","Manitoba","New_Brunswick","Newfoundland",
@@ -137,6 +137,7 @@ public class IndexBatchCreator {
 			File f = new File(osmDirFiles, country +".osm.bz2");
 			downloadFile(url, f); //$NON-NLS-1$
 			generateIndex(f, alreadyGeneratedFiles, alreadyUploadedFiles);
+			System.gc();
 		}
 		
 		for(String country : usStates){
@@ -192,45 +193,46 @@ public class IndexBatchCreator {
 				continue;
 			}
 			if (f.getName().endsWith(".osm.bz2") || f.getName().endsWith(".osm")) {
-				System.gc();
-				try {
-					generateIndex(f, alreadyGeneratedFiles, alreadyUploadedFiles);
-				} catch (OutOfMemoryError e) {
-					log.error("OutOfMemory", e);
-					System.gc();
-				}
+				generateIndex(f, alreadyGeneratedFiles, alreadyUploadedFiles);
 			}
 		}
 		System.out.println("GENERATING INDEXES FINISHED ");
 	}
-	protected void generateIndex(File f, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles){
-		if(!generateIndexes){
+	protected void generateIndex(File f, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
+		if (!generateIndexes) {
 			return;
 		}
-		DataExtraction extr = new DataExtraction(indexAddress, indexPOI, indexTransport, indexAddress, false, false, indexDirFiles);
 		try {
-			alreadyGeneratedFiles.add(f.getName());
-			Region country = extr.readCountry(f.getAbsolutePath(), new ConsoleProgressImplementation(9), null);
-			DataIndexWriter dataIndexWriter = new DataIndexWriter(indexDirFiles, country);
-			String name = country.getName();
-			if(indexAddress){
-				String fName = name + "_" + IndexConstants.ADDRESS_TABLE_VERSION + IndexConstants.ADDRESS_INDEX_EXT;
-				dataIndexWriter.writeAddress(fName, f.lastModified(), writeWayNodes);
-				uploadIndex(new File(indexDirFiles, fName), alreadyUploadedFiles);
+			DataExtraction extr = new DataExtraction(indexAddress, indexPOI, indexTransport, indexAddress, false, false, indexDirFiles);
+			try {
+				alreadyGeneratedFiles.add(f.getName());
+				Region country = extr.readCountry(f.getAbsolutePath(), new ConsoleProgressImplementation(9), null);
+				DataIndexWriter dataIndexWriter = new DataIndexWriter(indexDirFiles, country);
+				String name = country.getName();
+				if (indexAddress) {
+					String fName = name + "_" + IndexConstants.ADDRESS_TABLE_VERSION + IndexConstants.ADDRESS_INDEX_EXT;
+					dataIndexWriter.writeAddress(fName, f.lastModified(), writeWayNodes);
+					uploadIndex(new File(indexDirFiles, fName), alreadyUploadedFiles);
+				}
+				if (indexPOI) {
+					String fName = name + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT;
+					dataIndexWriter.writePOI(fName, f.lastModified());
+					uploadIndex(new File(indexDirFiles, fName), alreadyUploadedFiles);
+				}
+				if (indexTransport) {
+					String fName = name + "_" + IndexConstants.TRANSPORT_TABLE_VERSION + IndexConstants.TRANSPORT_INDEX_EXT;
+					dataIndexWriter.writeTransport(fName, f.lastModified());
+					uploadIndex(new File(indexDirFiles, fName), alreadyUploadedFiles);
+				}
+			} catch (Exception e) {
+				log.error("Exception generating indexes for " + f.getName()); //$NON-NLS-1$ 
 			}
-			if(indexPOI){
-				String fName = name + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT;
-				dataIndexWriter.writePOI(fName, f.lastModified());
-				uploadIndex(new File(indexDirFiles, fName), alreadyUploadedFiles);
-			}
-			if(indexTransport){
-				String fName = name + "_" + IndexConstants.TRANSPORT_TABLE_VERSION + IndexConstants.TRANSPORT_INDEX_EXT;
-				dataIndexWriter.writeTransport(fName, f.lastModified());
-				uploadIndex(new File(indexDirFiles, fName), alreadyUploadedFiles);
-			}
-		} catch (Exception e) { 
-			log.error("Exception generating indexes for " + f.getName()); //$NON-NLS-1$ 
+		} catch (OutOfMemoryError e) {
+			System.gc();
+			log.error("OutOfMemory", e);
+
 		}
+		System.gc();
 	}
 	
 	protected File[] getSortedFiles(File dir){
