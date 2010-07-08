@@ -113,18 +113,19 @@ public class IndexBatchCreator {
 	
 	public void runBatch(){
 		Set<String> alreadyUploadedFiles = new LinkedHashSet<String>();
+		Set<String> alreadyGeneratedFiles = new LinkedHashSet<String>();
 		if(downloadFiles){
-			downloadFiles();
+			downloadFiles(alreadyGeneratedFiles, alreadyUploadedFiles);
 		}
 		if(generateIndexes){
-			generatedIndexes(alreadyUploadedFiles);
+			generatedIndexes(alreadyGeneratedFiles, alreadyUploadedFiles);
 		}
 		if(uploadIndexes){
 			uploadIndexes(alreadyUploadedFiles);
 		}
 	}
 	
-	protected void downloadFiles(){
+	protected void downloadFiles(Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles){
 		// clean before downloading
 //		for(File f : osmDirFiles.listFiles()){
 //			log.info("Delete old file " + f.getName());  //$NON-NLS-1$
@@ -133,21 +134,27 @@ public class IndexBatchCreator {
 		for(String country : countriesToDownload1){
 			String url = SITE_TO_DOWNLOAD1 + country +".osm.bz2"; //$NON-NLS-1$
 			log.info("Downloading country " + country + " from " + url);  //$NON-NLS-1$//$NON-NLS-2$
-			downloadFile(url, new File(osmDirFiles, country +".osm.bz2")); //$NON-NLS-1$
+			File f = new File(osmDirFiles, country +".osm.bz2");
+			downloadFile(url, f); //$NON-NLS-1$
+			generateIndex(f, alreadyGeneratedFiles, alreadyUploadedFiles);
 		}
 		
 		for(String country : usStates){
 			country = country.toLowerCase();
 			String url = SITE_TO_DOWNLOAD2 + "north_america/united_states/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
 			log.info("Downloading country " + country + " from " + url);  //$NON-NLS-1$//$NON-NLS-2$
-			downloadFile(url, new File(osmDirFiles, "US_"+country +".osm.bz2")); //$NON-NLS-1$
+			File f = new File(osmDirFiles, "US_"+country +".osm.bz2"); //$NON-NLS-1$
+			downloadFile(url, f); 
+			generateIndex(f, alreadyGeneratedFiles, alreadyUploadedFiles);
 		}
 		
 		for(String country : canadaStates){
 			country = country.toLowerCase();
 			String url = SITE_TO_DOWNLOAD2 + "north_america/canada/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
 			log.info("Downloading country " + country + " from " + url);  //$NON-NLS-1$//$NON-NLS-2$
-			downloadFile(url, new File(osmDirFiles, "Canada_"+country +".osm.bz2")); //$NON-NLS-1$
+			File f = new File(osmDirFiles, "Canada_"+country +".osm.bz2"); //$NON-NLS-1$
+			downloadFile(url, f); 
+			generateIndex(f, alreadyGeneratedFiles, alreadyUploadedFiles);
 		}
 		System.out.println("DOWNLOADING FILES FINISHED");
 	}
@@ -179,12 +186,15 @@ public class IndexBatchCreator {
 		}
 	}
 	
-	protected void generatedIndexes(Set<String> alreadyUploadedFiles) {
+	protected void generatedIndexes(Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
 		for (File f : getSortedFiles(osmDirFiles)) {
+			if (alreadyGeneratedFiles.contains(f.getName())) {
+				continue;
+			}
 			if (f.getName().endsWith(".osm.bz2") || f.getName().endsWith(".osm")) {
 				System.gc();
 				try {
-					generateIndex(f, alreadyUploadedFiles);
+					generateIndex(f, alreadyGeneratedFiles, alreadyUploadedFiles);
 				} catch (OutOfMemoryError e) {
 					log.error("OutOfMemory", e);
 					System.gc();
@@ -193,9 +203,13 @@ public class IndexBatchCreator {
 		}
 		System.out.println("GENERATING INDEXES FINISHED ");
 	}
-	protected void generateIndex(File f, Set<String> alreadyUploadedFiles){
+	protected void generateIndex(File f, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles){
+		if(!generateIndexes){
+			return;
+		}
 		DataExtraction extr = new DataExtraction(indexAddress, indexPOI, indexTransport, indexAddress, false, false, indexDirFiles);
 		try {
+			alreadyGeneratedFiles.add(f.getName());
 			Region country = extr.readCountry(f.getAbsolutePath(), new ConsoleProgressImplementation(9), null);
 			DataIndexWriter dataIndexWriter = new DataIndexWriter(indexDirFiles, country);
 			String name = country.getName();
@@ -232,13 +246,18 @@ public class IndexBatchCreator {
 	
 	protected void uploadIndexes(Set<String> alreadyUploadedFiles){
 		for(File f : getSortedFiles(indexDirFiles)){
-			uploadIndex(f, alreadyUploadedFiles);
+			if(!alreadyUploadedFiles.contains(f.getName())){
+				uploadIndex(f, alreadyUploadedFiles);
+			}
 		}
 		System.out.println("UPLOADING INDEXES FINISHED ");
 		
 	}
 	
 	protected void uploadIndex(File f, Set<String> alreadyUploadedFiles){
+		if(!uploadIndexes){
+			return;
+		}
 		MessageFormat format = new MessageFormat("{0,date,dd.MM.yyyy} : {1, number,##.#} MB", Locale.US);
 		String summary;
 		double mbLengh = (double)f.length() / MB;
