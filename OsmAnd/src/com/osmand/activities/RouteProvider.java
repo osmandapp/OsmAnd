@@ -231,7 +231,7 @@ public class RouteProvider {
 				} else if(delta < 110){
 					type = TurnType.valueOf(TurnType.TL);
 					description = getString(ctx, R.string.route_tl);
-				} else if(delta < 125){
+				} else if(delta < 135){
 					type = TurnType.valueOf(TurnType.TSHL);
 					description = getString(ctx, R.string.route_tshl);
 				} else if(delta < 225){
@@ -272,17 +272,61 @@ public class RouteProvider {
 		
 
 		
-		int sum = 0;
-		for (int i = directions.size() - 1; i >= 0; i--) {
-			directions.get(i).afterLeftTime = sum;
-			sum += directions.get(i).expectedTime;
-		}
-
 		if(res.directions == null || res.directions.isEmpty()){
 			res.directions = new ArrayList<RouteDirectionInfo>(directions);
 		} else {
-			// TODO try to add missing turns
-//			res.directions = new ArrayList<RouteDirectionInfo>(directions);
+			int currentDirection= 0;
+			// one more
+			for (int i = 0; i <= res.directions.size() && currentDirection < directions.size(); i++) {
+				while(currentDirection < directions.size()){
+					int distanceAfter = 0;
+					if (i < res.directions.size()) {
+						RouteDirectionInfo resInfo = res.directions.get(i);
+						int r1 = directions.get(currentDirection).routePointOffset;
+						int r2 = resInfo.routePointOffset;
+						distanceAfter = listDistance[resInfo.routePointOffset];
+						float dist = locations.get(r1).distanceTo(locations.get(r2));
+						// take into account that move roundabout is special turn that could be very lengthy
+						if (dist < 100) {
+							// the same turn duplicate
+							currentDirection++;
+							continue; // while cycle
+						} else if (directions.get(currentDirection).routePointOffset > resInfo.routePointOffset) {
+							// check it at the next point
+							break;
+						}
+					}
+					
+					// add turn because it was missed
+					RouteDirectionInfo toAdd = directions.get(currentDirection);
+					float calcSpeed = toAdd.expectedTime == 0 ? speed :((float) toAdd.distance / toAdd.expectedTime);
+					
+					if(i > 0){
+						// update previous
+						RouteDirectionInfo previous = res.directions.get(i - 1);
+						calcSpeed = previous.expectedTime == 0 ? calcSpeed :((float) previous.distance / previous.expectedTime);
+						previous.distance = listDistance[previous.routePointOffset] - listDistance[toAdd.routePointOffset];
+						previous.expectedTime = (int) ((float) previous.distance / calcSpeed); 
+					}
+					toAdd.distance = listDistance[toAdd.routePointOffset] - distanceAfter;
+					toAdd.expectedTime = (int) ((float) toAdd.distance / calcSpeed);
+					if(i < res.directions.size()){
+						res.directions.add(i, toAdd);
+					} else {
+						res.directions.add(toAdd);
+					}
+					
+					i++;
+					currentDirection++;
+				}
+			}
+			
+		}
+		
+		int sum = 0;
+		for (int i = res.directions.size() - 1; i >= 0; i--) {
+			res.directions.get(i).afterLeftTime = sum;
+			sum += res.directions.get(i).expectedTime;
 		}
 	}
 

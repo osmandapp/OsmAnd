@@ -532,7 +532,7 @@ public class RoutingHelper {
 		
 		// calculated vars
 		
-		// after action (for i.e. after turn to next turn)
+		// after action (excluding expectedTime)
 		public int afterLeftTime;
 		// distance after action (for i.e. after turn to next turn)
 		public int distance;
