@@ -66,7 +66,11 @@ public class MapUtils {
 		} else if(e instanceof Relation){
 			List<LatLon> list = new ArrayList<LatLon>();
 			for(Entity fe : ((Relation) e).getMembers(null)){
-				LatLon c = getCenter(fe);
+				LatLon c = null;
+				// skip relations to avoid circular dependencies
+				if(!(fe instanceof Relation)){
+					c = getCenter(fe);
+				}
 				if(c != null){
 					list.add(c);
 				}
