@@ -108,7 +108,7 @@ public class ProgressDialogImplementation implements IProgress {
 	@Override
 	public void finishTask() {
 		if (taskName != null) {
-			message = context.getResources().getString(R.string.finished_task) + taskName;
+			message = context.getResources().getString(R.string.finished_task) +" : "+ taskName; //$NON-NLS-1$
 			mViewUpdateHandler.sendEmptyMessage(0);
 		}
 		work = -1;

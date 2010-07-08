@@ -194,10 +194,10 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 
 		
 		savingTrackHelper = new SavingTrackHelper(this);
-		locationLayer.setAppMode(OsmandSettings.getApplicationMode(this));
+		
 		LatLon pointToNavigate = OsmandSettings.getPointToNavigate(this);
 		
-		routingHelper.setAppMode(OsmandSettings.getApplicationMode(this));
+		
 		if(!Algoritms.objectEquals(routingHelper.getFinalLocation(), pointToNavigate)){
 			// there is no way how to clear mode. Only user can do : clear point to navigate, exit from app & set up new point.
 			// that case help to not calculate route at all.
@@ -566,6 +566,9 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		if(!OsmandSettings.isShowingViewAngle(this)){
 			locationLayer.setHeading(null);
 		}
+		locationLayer.setAppMode(OsmandSettings.getApplicationMode(this));
+		routingHelper.setAppMode(OsmandSettings.getApplicationMode(this));
+		
 		poiMapLayer.setFilter(OsmandSettings.getPoiFilterForMap(this));
 		mapView.setMapPosition(OsmandSettings.getPositionOnMap(this));
 		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);

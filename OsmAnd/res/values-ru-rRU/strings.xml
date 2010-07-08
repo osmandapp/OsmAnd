@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="route_tr">Поверните направо и двигайтесь</string>
+	<string name="route_tshr">Поверните резко направо и двигайтесь</string>
+	<string name="route_tslr">Поверните направо и двигайтесь</string>
+	<string name="route_tl">Поверните налево и двигайтесь</string>
+	<string name="route_tshl">Поверните резко налево и двигайтесь</string>
+	<string name="route_tsll">Поверните налево и двигайтесь</string>
+	<string name="route_tu">Выполните разворот и двигайтесь</string>
+	<string name="route_head">Двигайтесь</string>
 	<string name="first_time_continue">Продолжить</string>
 	<string name="first_time_download">Загрузить индексы</string>
 	<string name="first_time_msg">Спасибо за то, что выбрали OsmAnd. \n
@@ -102,10 +110,10 @@
 	<string name="loading">Загрузка</string>
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">Ошибка во время сохранения пути в gpx</string>
-	<string name="error_calculating_route">Ошибка прокладки маршрута : </string>
+	<string name="error_calculating_route">Ошибка прокладки маршрута</string>
 	<string name="error_calculating_route_occured">Ошибка во время прокладки маршрута</string>
 	<string name="empty_route_calculated">Пустой путь рассчитан</string>									
-	<string name="new_route_calculated_dist">Проложен новый путь, расстояние : </string>
+	<string name="new_route_calculated_dist">Проложен новый путь, расстояние</string>
 	<string name="arrived_at_destination">Вы прибыли в пункт назначения</string>
 	<string name="invalid_locations">Координаты неправильные</string>
 	<string name="go_back_to_osmand">Вернуться к OsmAnd карте</string>
@@ -114,7 +122,7 @@
 	<string name="reading_indexes">Чтение индексов...</string>
 	<string name="previous_run_crashed">Предыдущий запуск приложения был неудачен. Лог файл в {0}.  Пожалуйста откройте баг и присоедините лог файл.</string>
 	<string name="saving_gpx_tracks">Сохранение gpx путей на SD...</string>
-	<string name="finished_task">Окончен : </string>
+	<string name="finished_task">Окончен</string>
 	<string name="reload_indexes_descr">Перезагрузить индексы с SD</string>
     <string name="reload_indexes">Обновить индексы</string>
     <string name="download_indexes_descr">Загрузить индекс файлы из интернета</string>

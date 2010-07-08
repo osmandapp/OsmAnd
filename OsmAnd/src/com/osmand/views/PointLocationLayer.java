@@ -86,7 +86,7 @@ public class PointLocationLayer implements OsmandMapLayer {
 			if(appMode == ApplicationMode.CAR){
 				if(!lastKnownLocation.hasBearing()){
 					canvas.drawCircle(locationX, locationY, RADIUS * 2.5f, location);
-					canvas.drawCircle(locationX, locationY, RADIUS, bearingOver);
+					canvas.drawCircle(locationX, locationY, RADIUS * 2.5f, bearingOver);
 				}
 			} else {
 				canvas.drawCircle(locationX, locationY, RADIUS, location);

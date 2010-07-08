@@ -16,9 +16,9 @@ public class ToDoConstants {
 	
 	// TODO ANDROID
 
-	//   61. Provide route information for YOURS (calclate turns/angle/expected time). 
-	//		 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m) [dacha]
-    //   60. Audio guidance for routing
+	//   61. Provide route information for YOURS (calclate turns/angle/expected time) [done] 
+	//		 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m) [dacha] !
+    //   60. Audio guidance for routing !
 	
     //   43. Enable poi filter by name
 	//   58. Upload/Download zip-index from site & unzip them on phone
@@ -29,15 +29,14 @@ public class ToDoConstants {
 
 	//   66. Transport routing (show next stop, total distance, show stop get out) (?).
 	//   64. Traffic information (?)
-	//   65. Intermediate points (?)
+	//   65. Intermediate points - for better control routing, to avoid traffic jam ...(?)
 	//   40. Support simple vector road rendering (require new index file) (?)
 	//   63. Support simple offline routing(require new index file) (?)
 
 
 	// FIXME BUGS Android
-	// 1. Fix bugs with test data (bug with follow turn / left time / add turn)
-	// 2. Improvement : Show stops in the transport route
-	// 3. Pinch zoom
+	// 1. Improvement : Show stops in the transport route 
+	// 2. Pinch zoom !!!
 	
 	// TODO swing
 	// 9. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !
