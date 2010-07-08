@@ -15,10 +15,10 @@ public class ToDoConstants {
 
 	
 	// TODO ANDROID
-
-	//   61. Provide route information for YOURS (calclate turns/angle/expected time) [done] 
-	//		 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m) [dacha] !
+	//   for 0.3
     //   60. Audio guidance for routing !
+	//   68. Implement service to app work with screen offline 
+	//		 (introduce special settings how often update location to monitoring & audio guidance)
 	
     //   43. Enable poi filter by name
 	//   58. Upload/Download zip-index from site & unzip them on phone
@@ -48,6 +48,8 @@ public class ToDoConstants {
 	// BUGS Swing
 	
 	//  DONE ANDROID :
+	//   61. Provide route information for YOURS (calclate turns/angle/expected time) 
+	//		 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m) [dacha] !
 	//   33. Build transport locations. Create transport index (transport-stops) (investigate)
 	// 		 Not implemented  : show key/transit stops on map, follow mode (show next stop)
 

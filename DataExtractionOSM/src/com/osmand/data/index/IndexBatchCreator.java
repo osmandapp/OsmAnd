@@ -23,12 +23,13 @@ import com.osmand.impl.ConsoleProgressImplementation;
 public class IndexBatchCreator {
 	// config params
 	private static final boolean indexPOI = true;
-	private static final boolean indexAddress = false;
+	private static final boolean indexAddress = true;
 	private static final boolean indexTransport = true;
 	private static final boolean writeWayNodes = true;
 	
 	protected static final Log log = LogUtil.getLog(IndexBatchCreator.class);
 	protected static final String SITE_TO_DOWNLOAD1 = "http://download.geofabrik.de/osm/europe/"; //$NON-NLS-1$
+	// TODO transport for all - it should be small!!!
 	protected static final String[] countriesToDownload1 = new String[] {
 //		"albania", "andorra", "austria", // 5.3, 0.4, 100 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 //		"belarus", "belgium", "bosnia-herzegovina", // 39, 43, 4.1 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -58,8 +59,9 @@ public class IndexBatchCreator {
 	
 	protected static final String SITE_TO_DOWNLOAD2 = "http://downloads.cloudmade.com/"; //$NON-NLS-1$
 	// us states
+	// TODO address
 	protected static final String[] usStates = new String[] {
-		"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut",
+		"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", 
 		"Delaware",	"District_of_Columbia", "Florida", "Georgia", "Guantanamo_Bay",	"Hawaii",
 		"Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine",
 		"Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", 
@@ -68,10 +70,11 @@ public class IndexBatchCreator {
 		"Pennsylvania", "Rhode Island",	"South Carolina", "South Dakota", "Tennessee",
 		"Texas", "Utah", "Vermont", "Virginia", "Washington", "West_Virginia", "Wisconsin", "Wyoming",
 	};
+	// TODO address
 	protected static final String[] canadaStates = new String[] {
-//		"Alberta","British_Columbia","Manitoba","New_Brunswick","Newfoundland",
-//		"Nova_Scotia","Nunavut", "Nw_Territories","Ontario","Pr_Edwrd_Island",
-//		"Quebec","Saskatchewan","Yukon",
+		"Alberta","British_Columbia","Manitoba","New_Brunswick","Newfoundland",
+		"Nova_Scotia","Nunavut", "Nw_Territories","Ontario","Pr_Edwrd_Island",
+		"Quebec","Saskatchewan","Yukon",
 	};
 	
 	
@@ -277,9 +280,9 @@ public class IndexBatchCreator {
 		} else { 
 			return;
 		}
-		if(mbLengh > 90){
+		if(mbLengh > 100){
 			System.err.println("ERROR : file " + f.getName() + " exceeded 90 mb!!! Could not be uploaded.");
-			// return; // ? do not try?
+			return; // restriction for google code
 		}
 		alreadyUploadedFiles.add(f.getName());
 		GoogleCodeUploadIndex uploader = new GoogleCodeUploadIndex();

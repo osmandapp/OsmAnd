@@ -235,7 +235,7 @@ public class DownloadIndexActivity extends ListActivity {
 				s = getString(R.string.transport);
 			}
 			
-			item.setText(s + "\n " + e.getKey().substring(0, l)); //$NON-NLS-1$
+			item.setText(s + "\n " + e.getKey().substring(0, l).replace('_', ' ')); //$NON-NLS-1$
 			description.setText(e.getValue().replace(':', '\n'));
 			return row;
 		}
