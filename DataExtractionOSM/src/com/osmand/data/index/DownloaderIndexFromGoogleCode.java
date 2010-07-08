@@ -31,7 +31,7 @@ public class DownloaderIndexFromGoogleCode {
 	
 	private static StringBuilder getContent() {
 		try {
-			URL url = new URL("http://code.google.com/p/osmand/downloads/list"); //$NON-NLS-1$
+			URL url = new URL("http://code.google.com/p/osmand/downloads/list?num=500&start=0"); //$NON-NLS-1$
 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
 			StringBuilder b = new StringBuilder();
