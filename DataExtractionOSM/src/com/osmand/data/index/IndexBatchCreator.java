@@ -30,23 +30,23 @@ public class IndexBatchCreator {
 	protected static final Log log = LogUtil.getLog(IndexBatchCreator.class);
 	protected static final String SITE_TO_DOWNLOAD1 = "http://download.geofabrik.de/osm/europe/"; //$NON-NLS-1$
 	protected static final String[] countriesToDownload1 = new String[] {
-		"albania", "andorra", "austria", // 5.3, 0.4, 100 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"belarus", "belgium", "bosnia-herzegovina", // 39, 43, 4.1 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"albania", "andorra", "austria", // 5.3, 0.4, 100 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"belarus", "belgium", "bosnia-herzegovina", // 39, 43, 4.1 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		"bulgaria", "croatia", "cyprus",  // 13, 12, 5 //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
-		"denmark", "estonia", "faroe_islands", // 75, 38, 1.5 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"finland", "greece", "hungary", //80, 25, 14 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"iceland", "ireland", "isle_of_man", // 5.9, 27, 1.1 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"kosovo", "latvia", "liechtenstein", // 8.2, 6.5, 0.2 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"lithuania", "luxembourg", "macedonia", // 5, 5, 4 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"malta", "moldova", "monaco", //0.8, 5, 0.6 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"montenegro", "norway", "poland", // 1.2, 56, 87 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"portugal", "romania", "serbia", // 10, 25, 10 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"slovakia", "slovenia", "spain", // 69, 10, 123 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"sweden", "switzerland", "turkey", // 88, 83, 17 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"ukraine", // 19 //$NON-NLS-1$
+//		"denmark", "estonia", "faroe_islands", // 75, 38, 1.5 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"finland", "greece", "hungary", //80, 25, 14 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"iceland", "ireland", "isle_of_man", // 5.9, 27, 1.1 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"kosovo", "latvia", "liechtenstein", // 8.2, 6.5, 0.2 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"lithuania", "luxembourg", "macedonia", // 5, 5, 4 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"malta", "moldova", "monaco", //0.8, 5, 0.6 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"montenegro", "norway", "poland", // 1.2, 56, 87 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"portugal", "romania", "serbia", // 10, 25, 10 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"slovakia", "slovenia", "spain", // 69, 10, 123 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"sweden", "switzerland", "turkey", // 88, 83, 17 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"ukraine", // 19 //$NON-NLS-1$
 //		 TOTAL : 1129 MB
-		 "great_britain",  "italy", // 281, 246, 
-		 "czech_republic", "netherlands", // 168, 375,  
+//		 "great_britain",  "italy", // 281, 246, 
+//		 "czech_republic", "netherlands", // 168, 375,  
 //		 "france",  "germany", //519, 860
 		// ADD TO TOTAL : 2449 MB
 		
@@ -59,19 +59,19 @@ public class IndexBatchCreator {
 	protected static final String SITE_TO_DOWNLOAD2 = "http://downloads.cloudmade.com/"; //$NON-NLS-1$
 	// us states
 	protected static final String[] usStates = new String[] {
-		"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut",
-		"Delaware",	"District_of_Columbia", "Florida", "Georgia", "Guantanamo_Bay",	"Hawaii",
-		"Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine",
-		"Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", 
-		"Montana", "Nebraska", "Nevada", "New_Hampshire", "New_Jersey", "New_Mexico",
-		"New_York",	"North_Carolina", "North_Dakota", "Ohio", "Oklahoma", "Oregon",
-		"Pennsylvania", "Rhode Island",	"South Carolina", "South Dakota", "Tennessee",
-		"Texas", "Utah", "Vermont", "Virginia", "Washington", "West_Virginia", "Wisconsin", "Wyoming",
+//		"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut",
+//		"Delaware",	"District_of_Columbia", "Florida", "Georgia", "Guantanamo_Bay",	"Hawaii",
+//		"Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine",
+//		"Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", 
+//		"Montana", "Nebraska", "Nevada", "New_Hampshire", "New_Jersey", "New_Mexico",
+//		"New_York",	"North_Carolina", "North_Dakota", "Ohio", "Oklahoma", "Oregon",
+//		"Pennsylvania", "Rhode Island",	"South Carolina", "South Dakota", "Tennessee",
+//		"Texas", "Utah", "Vermont", "Virginia", "Washington", "West_Virginia", "Wisconsin", "Wyoming",
 	};
 	protected static final String[] canadaStates = new String[] {
-		"Alberta","British_Columbia","Manitoba","New_Brunswick","Newfoundland",
-		"Nova_Scotia","Nunavut", "Nw_Territories","Ontario","Pr_Edwrd_Island",
-		"Quebec","Saskatchewan","Yukon",
+//		"Alberta","British_Columbia","Manitoba","New_Brunswick","Newfoundland",
+//		"Nova_Scotia","Nunavut", "Nw_Territories","Ontario","Pr_Edwrd_Island",
+//		"Quebec","Saskatchewan","Yukon",
 	};
 	
 	
@@ -215,18 +215,18 @@ public class IndexBatchCreator {
 			String name = country.getName();
 			if(indexAddress){
 				String fName = name + "_" + IndexConstants.ADDRESS_TABLE_VERSION + IndexConstants.ADDRESS_INDEX_EXT;
-				uploadIndex(new File(indexDirFiles, fName), alreadyUploadedFiles);
 				dataIndexWriter.writeAddress(fName, f.lastModified(), writeWayNodes);
+				uploadIndex(new File(indexDirFiles, fName), alreadyUploadedFiles);
 			}
 			if(indexPOI){
 				String fName = name + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT;
-				uploadIndex(new File(indexDirFiles, fName), alreadyUploadedFiles);
 				dataIndexWriter.writePOI(fName, f.lastModified());
+				uploadIndex(new File(indexDirFiles, fName), alreadyUploadedFiles);
 			}
 			if(indexTransport){
 				String fName = name + "_" + IndexConstants.TRANSPORT_TABLE_VERSION + IndexConstants.TRANSPORT_INDEX_EXT;
-				uploadIndex(new File(indexDirFiles, fName), alreadyUploadedFiles);
 				dataIndexWriter.writeTransport(fName, f.lastModified());
+				uploadIndex(new File(indexDirFiles, fName), alreadyUploadedFiles);
 			}
 		} catch (Exception e) { 
 			log.error("Exception generating indexes for " + f.getName()); //$NON-NLS-1$ 
