@@ -21,13 +21,16 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import android.content.Context;
 import android.location.Location;
 
 import com.osmand.LogUtil;
+import com.osmand.R;
 import com.osmand.OsmandSettings.ApplicationMode;
 import com.osmand.activities.RoutingHelper.RouteDirectionInfo;
 import com.osmand.activities.RoutingHelper.TurnType;
 import com.osmand.osm.LatLon;
+import com.osmand.osm.MapUtils;
 
 public class RouteProvider {
 	private static final org.apache.commons.logging.Log log = LogUtil.getLog(RouteProvider.class);
@@ -49,7 +52,7 @@ public class RouteProvider {
 	
 	public static class RouteCalculationResult {
 		private final List<Location> locations;
-		private final List<RouteDirectionInfo> directions;
+		private List<RouteDirectionInfo> directions;
 		private final String errorMessage;
 		private int[] listDistance = null;
 		
@@ -108,7 +111,7 @@ public class RouteProvider {
 		
 	}
 
-	public RouteCalculationResult calculateRouteImpl(Location start, LatLon end, ApplicationMode mode, RouteService type){
+	public RouteCalculationResult calculateRouteImpl(Location start, LatLon end, ApplicationMode mode, RouteService type, Context ctx){
 		long time = System.currentTimeMillis();
 		if (start != null && end != null) {
 			if(log.isInfoEnabled()){
@@ -118,8 +121,11 @@ public class RouteProvider {
 				RouteCalculationResult res;
 				if (type == RouteService.YOURS) {
 					res = findYOURSRoute(start, end, mode);
+					addMissingTurnsToRoute(res, mode, ctx);
 				} else {
 					res = findCloudMadeRoute(start, end, mode);
+					// for test purpose
+					addMissingTurnsToRoute(res, mode, ctx);
 				}
 				if(log.isInfoEnabled() && res.locations != null){
 					log.info("Finding route contained " + res.locations.size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -134,6 +140,150 @@ public class RouteProvider {
 			}
 		}
 		return new RouteCalculationResult(null);
+	}
+	
+	protected String getString(Context ctx, int resId){
+		if(ctx == null){
+			return ""; //$NON-NLS-1$
+		}
+		return ctx.getString(resId);
+	}
+	
+	protected void addMissingTurnsToRoute(RouteCalculationResult res, ApplicationMode mode, Context ctx){
+		if(!res.isCalculated()){
+			return;
+		}
+		// speed m/s
+		float speed = 1.5f;
+		int minDistanceForTurn = 5;
+		if(mode == ApplicationMode.CAR){
+			speed = 15.3f;
+			minDistanceForTurn = 25;
+		} else if(mode == ApplicationMode.BICYCLE){
+			speed = 5.5f;
+			minDistanceForTurn = 12;
+		}
+		
+
+		List<RouteDirectionInfo> directions = new ArrayList<RouteDirectionInfo>();
+		int[] listDistance = res.getListDistance();
+		List<Location> locations = res.getLocations();
+		
+		
+		int previousLocation = 0;
+		int prevBearingLocation = 0;
+		RouteDirectionInfo previousInfo = new RouteDirectionInfo();
+		previousInfo.turnType = TurnType.valueOf(TurnType.C);
+		previousInfo.routePointOffset = 0;
+		previousInfo.descriptionRoute = getString(ctx, R.string.route_head);
+		directions.add(previousInfo);
+		
+		int distForTurn = 0;
+		float previousBearing = 0;
+		int startTurnPoint = 0;
+		
+		
+		for (int i = 1; i < locations.size() - 1; i++) {
+			
+			Location next = locations.get(i + 1);
+			Location current = locations.get(i);
+			float bearing = current.bearingTo(next);
+			// try to get close to current location if possible
+			while(prevBearingLocation < i - 1){
+				if(locations.get(prevBearingLocation + 1).distanceTo(current) > 70){
+					prevBearingLocation ++;
+				} else {
+					break;
+				}
+			}
+			
+			if(distForTurn == 0){
+				// measure only after turn
+				previousBearing = locations.get(prevBearingLocation).bearingTo(current);
+				startTurnPoint = i;
+			}
+			
+			TurnType type = null;
+			String description = null;
+			float delta = previousBearing - bearing;
+			while(delta < 0){
+				delta += 360;
+			}
+			while(delta > 360){
+				delta -= 360;
+			}
+			
+			distForTurn += locations.get(i).distanceTo(locations.get(i + 1)); 
+			if (i < locations.size() - 1 &&  distForTurn < minDistanceForTurn) {
+				// For very smooth turn we try to accumulate whole distance
+				// simply skip that turn needed for situation
+				// 1) if you are going to have U-turn - not 2 left turns
+				// 2) if there is a small gap between roads (turn right and after 4m next turn left) - so the direction head
+				continue;
+			}
+			
+			
+			if(delta > 50 && delta < 310){
+				
+				if(delta < 70){
+					type = TurnType.valueOf(TurnType.TSLL);
+					description = getString(ctx, R.string.route_tsll);
+				} else if(delta < 110){
+					type = TurnType.valueOf(TurnType.TL);
+					description = getString(ctx, R.string.route_tl);
+				} else if(delta < 125){
+					type = TurnType.valueOf(TurnType.TSHL);
+					description = getString(ctx, R.string.route_tshl);
+				} else if(delta < 225){
+					type = TurnType.valueOf(TurnType.TU);
+					description = getString(ctx, R.string.route_tu);
+				} else if(delta < 250){
+					description = getString(ctx, R.string.route_tshr);
+					type = TurnType.valueOf(TurnType.TSHR);
+				} else if(delta < 290){
+					description = getString(ctx, R.string.route_tr);
+					type = TurnType.valueOf(TurnType.TR);
+				} else {
+					description = getString(ctx, R.string.route_tslr);
+					type = TurnType.valueOf(TurnType.TSLR);
+				}
+				
+				// calculate for previousRoute 
+				previousInfo.distance = listDistance[previousLocation]- listDistance[i];
+				previousInfo.expectedTime = (int) (previousInfo.distance / speed);
+				previousInfo.descriptionRoute += " " + MapUtils.getFormattedDistance(previousInfo.distance); //$NON-NLS-1$
+
+				previousInfo = new RouteDirectionInfo();
+				previousInfo.turnType = type;
+				previousInfo.turnType.setTurnAngle(360 - delta);
+				previousInfo.descriptionRoute = description;
+				previousInfo.routePointOffset = startTurnPoint;
+				directions.add(previousInfo);
+				previousLocation = startTurnPoint;
+				prevBearingLocation = i; // for bearing using current location
+			}
+			// clear dist for turn
+			distForTurn = 0;
+		} 
+			
+		previousInfo.distance = listDistance[previousLocation];
+		previousInfo.expectedTime = (int) (previousInfo.distance / speed);
+		previousInfo.descriptionRoute += " " + MapUtils.getFormattedDistance(previousInfo.distance); //$NON-NLS-1$
+		
+
+		
+		int sum = 0;
+		for (int i = directions.size() - 1; i >= 0; i--) {
+			directions.get(i).afterLeftTime = sum;
+			sum += directions.get(i).expectedTime;
+		}
+
+		if(res.directions == null || res.directions.isEmpty()){
+			res.directions = new ArrayList<RouteDirectionInfo>(directions);
+		} else {
+			// TODO try to add missing turns
+//			res.directions = new ArrayList<RouteDirectionInfo>(directions);
+		}
 	}
 
 

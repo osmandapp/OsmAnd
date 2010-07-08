@@ -1,5 +1,7 @@
 package com.osmand.views;
 
+import java.util.Calendar;
+
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -270,7 +272,8 @@ public class MapInfoLayer implements OsmandMapLayer {
 				}
 				if(Math.abs(toFindTime - cachedLeftTime) > 30000){
 					cachedLeftTime = toFindTime;
-					cachedLeftTimeString = DateFormat.format("kk:mm", cachedLeftTime).toString(); //$NON-NLS-1$
+					Calendar c = Calendar.getInstance();
+					cachedLeftTimeString = DateFormat.format("kk:mm", cachedLeftTime - c.getTimeZone().getOffset(0) ).toString(); //$NON-NLS-1$
 				}
 			}
 			if(cachedLeftTimeString != null) {

@@ -4,6 +4,7 @@
 package com.osmand.activities;
 
 import java.text.MessageFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import android.app.ListActivity;
@@ -39,9 +40,6 @@ import com.osmand.views.MapInfoLayer;
  */
 public class ShowRouteInfoActivity extends ListActivity {
 
-	
-
-	
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -50,7 +48,8 @@ public class ShowRouteInfoActivity extends ListActivity {
 		lv.setId(android.R.id.list);
 		TextView header = new TextView(this);
 		RoutingHelper helper = RoutingHelper.getInstance(this);
-		int time = helper.getLeftTime()* 1000;
+		Calendar c = Calendar.getInstance();
+		int time = helper.getLeftTime() * 1000 - c.getTimeZone().getOffset(0);
 		int dist = helper.getLeftDistance();
 		header.setText(MessageFormat.format(getString(R.string.route_general_information), MapUtils.getFormattedDistance(dist),
 				DateFormat.format("kk:mm", time))); //$NON-NLS-1$
@@ -138,7 +137,7 @@ public class ShowRouteInfoActivity extends ListActivity {
 			if(model.expectedTime < 3600){
 				timeLabel.setText(DateFormat.format("mm:ss", model.expectedTime * 1000)); //$NON-NLS-1$
 			} else {
-				timeLabel.setText(DateFormat.format("k:mm:ss", model.expectedTime * 1000)); //$NON-NLS-1$
+				timeLabel.setText(DateFormat.format("kk:mm:ss", model.expectedTime * 1000)); //$NON-NLS-1$
 			}
 			return row;
 		}

@@ -215,6 +215,21 @@ public class RoutingHelper {
 						updateCurrentRoute(currentRoute + 1);
 					}
 				}
+				
+				// 3.5 check that we already pass very sharp turn by missing one point (so our turn is sharper than expected)
+				// instead of that rule possible could be introduced another if the dist < 5m mark the location as already passed
+				if(currentRoute + 2 < routeNodes.size()){
+					float bearing = routeNodes.get(currentRoute + 1).bearingTo(routeNodes.get(currentRoute + 2));
+					float bearingMovement = currentLocation.bearingTo(routeNodes.get(currentRoute + 1));
+					// only 15 degrees for that case because it wrong catches sharp turns 
+					if(Math.abs(bearing - bearingMovement) > 165 && Math.abs(bearing - bearingMovement) < 195){
+						if(log.isDebugEnabled()){
+							log.debug("Processed point movement bearing 2 : "+bearingMovement +" bearing " + bearing); //$NON-NLS-1$ //$NON-NLS-2$
+						}
+						updateCurrentRoute(currentRoute + 2);
+					}
+				}
+				
 				// 4. evaluate distance to the route and reevaluate if needed
 				if(currentRoute > 0){
 					float bearing = routeNodes.get(currentRoute - 1).bearingTo(routeNodes.get(currentRoute));
@@ -350,7 +365,7 @@ public class RoutingHelper {
 					currentRunningJob = new Thread(new Runnable() {
 						@Override
 						public void run() {
-							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service);
+							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, activity);
 							synchronized (RoutingHelper.this) {
 								if (res.isCalculated()) {
 									setNewRoute(res);
@@ -368,14 +383,14 @@ public class RoutingHelper {
 								if (res.isCalculated()) {
 									int[] dist = res.getListDistance();
 									int l = dist != null && dist.length > 0 ? dist[0] : 0;
-									showMessage(activity.getString(R.string.new_route_calculated_dist) + MapUtils.getFormattedDistance(l));
+									showMessage(activity.getString(R.string.new_route_calculated_dist) +" : "+ MapUtils.getFormattedDistance(l)); //$NON-NLS-1$
 									if (activity instanceof MapActivity) {
 										// be aware that is non ui thread
 										((MapActivity) activity).getMapView().refreshMap();
 									}
 								} else {
 									if (res.getErrorMessage() != null) {
-										showMessage(activity.getString(R.string.error_calculating_route) + res.getErrorMessage());
+										showMessage(activity.getString(R.string.error_calculating_route)+" : " + res.getErrorMessage()); //$NON-NLS-1$
 									} else if (res.getLocations() == null) {
 										showMessage(activity.getString(R.string.error_calculating_route_occured));
 									} else {
@@ -508,11 +523,18 @@ public class RoutingHelper {
 	
 	public static class RouteDirectionInfo {
 		public String descriptionRoute = ""; //$NON-NLS-1$
+		// expected time after route point
 		public int expectedTime;
+		
 		public TurnType turnType;
+		// location when you should action (turn or go ahead)
 		public int routePointOffset;
+		
 		// calculated vars
+		
+		// after action (for i.e. after turn to next turn)
 		public int afterLeftTime;
+		// distance after action (for i.e. after turn to next turn)
 		public int distance;
 	}
 

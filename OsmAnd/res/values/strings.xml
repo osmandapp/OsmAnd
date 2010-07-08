@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="route_tr">Turn right and go</string>
+	<string name="route_tshr">Turn sharply right and go</string>
+	<string name="route_tslr">Turn slightly right and go</string>
+	<string name="route_tl">Turn left and go</string>
+	<string name="route_tshl">Turn sharply left and go</string>
+	<string name="route_tsll">Turn slightly left and go</string>
+	<string name="route_tu">Make U-turn and go</string>
+	<string name="route_head">Head</string>
 	<string name="first_time_continue">Continue</string>
 	<string name="first_time_download">Download indexes</string>
 	<string name="first_time_msg">Thank you for choosing OsmAnd. \nTo be able to use all features of application you need index files, which you can download (Settings/Data) or prepare by yourself. After that you can use : search by address, search POI, search transport.</string>
@@ -101,10 +109,10 @@ See osmand.googlecode.com.</string>
 	<string name="loading">Loading</string>
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">Error occurred while saving gpx</string>
-	<string name="error_calculating_route">Error calculating route : </string>
+	<string name="error_calculating_route">Error calculating route</string>
 	<string name="error_calculating_route_occured">Error occurred while calculating route</string>
 	<string name="empty_route_calculated">Empty route is calculated</string>									
-	<string name="new_route_calculated_dist">New route is calculated, distance : </string>
+	<string name="new_route_calculated_dist">New route is calculated, distance</string>
 	<string name="arrived_at_destination">You arrived at destination point</string>
 	<string name="invalid_locations">Locations are invalid</string>
 	<string name="go_back_to_osmand">Go back to OsmAnd map</string>
@@ -113,7 +121,7 @@ See osmand.googlecode.com.</string>
 	<string name="reading_indexes">Reading indices...</string>
 	<string name="previous_run_crashed">Previous application run was crashed. Log file is at {0}.  Please raise the issue and attach log file.</string>
 	<string name="saving_gpx_tracks">Saving gpx tracks to SD...</string>
-	<string name="finished_task">Finished : </string>
+	<string name="finished_task">Finished</string>
     <string name="reload_indexes_descr">Reload data indexes from SD</string>
     <string name="reload_indexes">Reload indexes</string>
     <string name="download_indexes_descr">Download indexes from internet</string>
