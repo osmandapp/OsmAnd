@@ -9,7 +9,9 @@ import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.Locale;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 
@@ -110,14 +112,15 @@ public class IndexBatchCreator {
 	}
 	
 	public void runBatch(){
+		Set<String> alreadyUploadedFiles = new LinkedHashSet<String>();
 		if(downloadFiles){
 			downloadFiles();
 		}
 		if(generateIndexes){
-			generatedIndexes();
+			generatedIndexes(alreadyUploadedFiles);
 		}
 		if(uploadIndexes){
-			uploadIndexes();
+			uploadIndexes(alreadyUploadedFiles);
 		}
 	}
 	
@@ -176,12 +179,12 @@ public class IndexBatchCreator {
 		}
 	}
 	
-	protected void generatedIndexes() {
+	protected void generatedIndexes(Set<String> alreadyUploadedFiles) {
 		for (File f : getSortedFiles(osmDirFiles)) {
 			if (f.getName().endsWith(".osm.bz2") || f.getName().endsWith(".osm")) {
 				System.gc();
 				try {
-					generateIndex(f);
+					generateIndex(f, alreadyUploadedFiles);
 				} catch (OutOfMemoryError e) {
 					log.error("OutOfMemory", e);
 					System.gc();
@@ -190,20 +193,26 @@ public class IndexBatchCreator {
 		}
 		System.out.println("GENERATING INDEXES FINISHED ");
 	}
-	protected void generateIndex(File f){
+	protected void generateIndex(File f, Set<String> alreadyUploadedFiles){
 		DataExtraction extr = new DataExtraction(indexAddress, indexPOI, indexTransport, indexAddress, false, false, indexDirFiles);
 		try {
 			Region country = extr.readCountry(f.getAbsolutePath(), new ConsoleProgressImplementation(9), null);
 			DataIndexWriter dataIndexWriter = new DataIndexWriter(indexDirFiles, country);
 			String name = country.getName();
 			if(indexAddress){
-				dataIndexWriter.writeAddress(name + "_" + IndexConstants.ADDRESS_TABLE_VERSION + IndexConstants.ADDRESS_INDEX_EXT, f.lastModified(), writeWayNodes);
+				String fName = name + "_" + IndexConstants.ADDRESS_TABLE_VERSION + IndexConstants.ADDRESS_INDEX_EXT;
+				uploadIndex(new File(indexDirFiles, fName), alreadyUploadedFiles);
+				dataIndexWriter.writeAddress(fName, f.lastModified(), writeWayNodes);
 			}
 			if(indexPOI){
-				dataIndexWriter.writePOI(name + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT, f.lastModified());
+				String fName = name + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT;
+				uploadIndex(new File(indexDirFiles, fName), alreadyUploadedFiles);
+				dataIndexWriter.writePOI(fName, f.lastModified());
 			}
 			if(indexTransport){
-				dataIndexWriter.writeTransport(name + "_" + IndexConstants.TRANSPORT_TABLE_VERSION + IndexConstants.TRANSPORT_INDEX_EXT, f.lastModified());
+				String fName = name + "_" + IndexConstants.TRANSPORT_TABLE_VERSION + IndexConstants.TRANSPORT_INDEX_EXT;
+				uploadIndex(new File(indexDirFiles, fName), alreadyUploadedFiles);
+				dataIndexWriter.writeTransport(fName, f.lastModified());
 			}
 		} catch (Exception e) { 
 			log.error("Exception generating indexes for " + f.getName()); //$NON-NLS-1$ 
@@ -221,45 +230,52 @@ public class IndexBatchCreator {
 		return listFiles;
 	}
 	
-	protected void uploadIndexes(){
-		MessageFormat format = new MessageFormat("{0,date,dd.MM.yyyy} : {1, number,##.#} MB", Locale.US);
+	protected void uploadIndexes(Set<String> alreadyUploadedFiles){
 		for(File f : getSortedFiles(indexDirFiles)){
-			String summary;
-			double mbLengh = (double)f.length() / MB;
-			
-			String descriptionFile = "{"+format.format(new Object[]{new Date(f.lastModified()), mbLengh})+"}";
-			if(f.getName().endsWith(IndexConstants.POI_INDEX_EXT)){
-				String regionName = f.getName().substring(0, f.getName().length() - IndexConstants.POI_INDEX_EXT.length() - 2);
-				summary = "POI index for " + regionName + " " + descriptionFile;
-			} else if(f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)){
-				String regionName = f.getName().substring(0, f.getName().length() - IndexConstants.ADDRESS_INDEX_EXT.length() - 2);
-				summary = "Adress index for " + regionName + " " + descriptionFile;
-			} else if(f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)){
-				String regionName = f.getName().substring(0, f.getName().length() - IndexConstants.TRANSPORT_INDEX_EXT.length() - 2);
-				summary = "Transport index for " + regionName + " " + descriptionFile;
-			} else { 
-				continue;
-			}
-			if(mbLengh > 90){
-				System.err.println("ERROR : file " + f.getName() + " exceeded 90 mb!!! Could not be uploaded.");
-			}
-			GoogleCodeUploadIndex uploader = new GoogleCodeUploadIndex();
-			uploader.setFileName(f.getAbsolutePath());
-			uploader.setTargetFileName(f.getName());
-			uploader.setProjectName("osmand");
-			uploader.setUserName(user);
-			uploader.setPassword(password);
-			uploader.setLabels("Type-Archive, Testdata");
-			uploader.setSummary(summary);
-			try {
-				uploader.upload();
-			} catch (IOException e) {
-				log.error("Input/output exception uploading " + f.getName(), e);
-			}
+			uploadIndex(f, alreadyUploadedFiles);
 		}
 		System.out.println("UPLOADING INDEXES FINISHED ");
 		
 	}
+	
+	protected void uploadIndex(File f, Set<String> alreadyUploadedFiles){
+		MessageFormat format = new MessageFormat("{0,date,dd.MM.yyyy} : {1, number,##.#} MB", Locale.US);
+		String summary;
+		double mbLengh = (double)f.length() / MB;
+		
+		String descriptionFile = "{"+format.format(new Object[]{new Date(f.lastModified()), mbLengh})+"}";
+		if(f.getName().endsWith(IndexConstants.POI_INDEX_EXT)){
+			String regionName = f.getName().substring(0, f.getName().length() - IndexConstants.POI_INDEX_EXT.length() - 2);
+			summary = "POI index for " + regionName + " " + descriptionFile;
+		} else if(f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)){
+			String regionName = f.getName().substring(0, f.getName().length() - IndexConstants.ADDRESS_INDEX_EXT.length() - 2);
+			summary = "Adress index for " + regionName + " " + descriptionFile;
+		} else if(f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)){
+			String regionName = f.getName().substring(0, f.getName().length() - IndexConstants.TRANSPORT_INDEX_EXT.length() - 2);
+			summary = "Transport index for " + regionName + " " + descriptionFile;
+		} else { 
+			return;
+		}
+		if(mbLengh > 90){
+			System.err.println("ERROR : file " + f.getName() + " exceeded 90 mb!!! Could not be uploaded.");
+			// return; // ? do not try?
+		}
+		alreadyUploadedFiles.add(f.getName());
+		GoogleCodeUploadIndex uploader = new GoogleCodeUploadIndex();
+		uploader.setFileName(f.getAbsolutePath());
+		uploader.setTargetFileName(f.getName());
+		uploader.setProjectName("osmand");
+		uploader.setUserName(user);
+		uploader.setPassword(password);
+		uploader.setLabels("Type-Archive, Testdata");
+		uploader.setSummary(summary);
+		try {
+			uploader.upload();
+		} catch (IOException e) {
+			log.error("Input/output exception uploading " + f.getName(), e);
+		}
+	}
+	
 	
 
 }
