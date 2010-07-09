@@ -161,13 +161,13 @@ public class IndexBatchCreator {
 		// france
 		for(String country : franceProvinces){
 			String url = SITE_TO_DOWNLOAD1 +"france/" + country +".osm.bz2"; //$NON-NLS-1$
-			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles);
+			downloadFile(url, "France_"+country, alreadyGeneratedFiles, alreadyUploadedFiles);
 		}
 		
 		// germany
 		for(String country : germanyLands){
 			String url = SITE_TO_DOWNLOAD1 +"germany/" + country +".osm.bz2"; //$NON-NLS-1$
-			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles);
+			downloadFile(url, "Germany_"+country, alreadyGeneratedFiles, alreadyUploadedFiles);
 		}
 		
 		// usa
