@@ -24,7 +24,6 @@ public class ToDoConstants {
 	
 	// Not clear if it is really needed 
     //   43. Enable poi filter by name
-	//   58. Upload/Download zip-index from site & unzip them on phone
 	//   45. Get clear <Use internet> settings. Move that setting on top settings screen. 
 	//       That setting should rule all activities that use internet. It should ask whenever internet is used 
 	//		(would you like to use internet for that operation - if using internet is not checked). 
@@ -55,6 +54,7 @@ public class ToDoConstants {
 	//		 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m) [dacha] !
 	//   33. Build transport locations. Create transport index (transport-stops) (investigate)
 	// 		 Not implemented  : show key/transit stops on map, follow mode (show next stop)
+	//   58. Upload/Download zip-index from site & unzip them on phone
 
 	
 	// DONE SWING

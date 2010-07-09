@@ -32,7 +32,7 @@ public class IndexBatchCreator {
 	
 	protected static final Log log = LogUtil.getLog(IndexBatchCreator.class);
 	protected static final String SITE_TO_DOWNLOAD1 = "http://download.geofabrik.de/osm/europe/"; //$NON-NLS-1$
-	// TODO transport for all - it should be small!!!
+	
 	protected static final String[] countriesToDownload1 = new String[] {
 //		"albania", "andorra", "austria", // 5.3, 0.4, 100 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 //		"belarus", "belgium", "bosnia-herzegovina", // 39, 43, 4.1 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -48,17 +48,30 @@ public class IndexBatchCreator {
 //		"slovakia", "slovenia", "spain", // 69, 10, 123 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 //		"sweden", "switzerland", "turkey", // 88, 83, 17 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 //		"ukraine", // 19 //$NON-NLS-1$
-//		 TOTAL : 1129 MB
+//		 TOTAL : 1129 MB 
+//		 "czech_republic", "netherlands", // 168, 375,
 //		 "great_britain",  "italy", // 281, 246, 
-//		 "czech_republic", "netherlands", // 168, 375,  
-//		 "france",  "germany", //519, 860
 		// ADD TO TOTAL : 2449 MB
-		
-		// currently : austria, spain address > 100 MB
-		// address : "great_britain",  "italy", "france",  "germany" - out of memory
-		// poi : "france",  "germany" - out of memory
+		// TODO transport, poi : "czech_republic", "netherlands", "great_britain",  "italy" 
+		//      address : "great_britain",  "italy" - out of memory
 
 	};
+
+	// TODO all
+	protected static final String[] franceProvinces = new String[] {
+		"alsace","aquitaine", "auvergne", "basse-normandie", "bourgogne", "bretagne", "centre",
+		"champagne-ardenne", "corse", "franche-comte", "haute-normandie", "ile-de-france",
+		"languedoc-roussillon", "limousin", "lorraine", "midi-pyrenees", "nord-pas-de-calais",
+		"pays-de-la-loire", "picardie","poitou-charentes", "provence-alpes-cote-d-azur", "rhone-alpes"
+	};
+	
+	// TODO all
+	protected static final String[] germanyLands = new String[] {
+		"baden-wuerttemberg","bayern", "berlin", "brandenburg", "bremen", "hamburg", "hessen",
+		"mecklenburg-vorpommern", "niedersachsen", "nordrhein-westfalen", "rheinland-pfalz", "saarland",
+		"sachsen-anhalt", "sachsen", "schleswig-holstein", "thueringen",
+	};
+
 	
 	protected static final String SITE_TO_DOWNLOAD2 = "http://downloads.cloudmade.com/"; //$NON-NLS-1$
 	// us states
@@ -73,12 +86,12 @@ public class IndexBatchCreator {
 //		"Pennsylvania", "Rhode Island",	"South Carolina", "South Dakota", "Tennessee",
 //		"Texas", "Utah", "Vermont", "Virginia", "Washington", "West_Virginia", "Wisconsin", "Wyoming",
 	};
+	
 	protected static final String[] canadaStates = new String[] {
 //		"Alberta","British_Columbia","Manitoba","New_Brunswick","Newfoundland",
 //		"Nova_Scotia","Nunavut", "Nw_Territories","Ontario","Pr_Edwrd_Island",
 //		"Quebec","Saskatchewan","Yukon",
 	};
-	
 	
 	
 	boolean downloadFiles = false;
@@ -130,37 +143,45 @@ public class IndexBatchCreator {
 		}
 	}
 	
+
+	
 	protected void downloadFiles(Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles){
 		// clean before downloading
 //		for(File f : osmDirFiles.listFiles()){
 //			log.info("Delete old file " + f.getName());  //$NON-NLS-1$
 //			f.delete();
 //		}
+		
+		// europe
 		for(String country : countriesToDownload1){
 			String url = SITE_TO_DOWNLOAD1 + country +".osm.bz2"; //$NON-NLS-1$
-			log.info("Downloading country " + country + " from " + url);  //$NON-NLS-1$//$NON-NLS-2$
-			File f = new File(osmDirFiles, country +".osm.bz2");
-			downloadFile(url, f); //$NON-NLS-1$
-			generateIndex(f, alreadyGeneratedFiles, alreadyUploadedFiles);
-			System.gc();
+			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles);
 		}
 		
+		// france
+		for(String country : franceProvinces){
+			String url = SITE_TO_DOWNLOAD1 +"france/" + country +".osm.bz2"; //$NON-NLS-1$
+			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles);
+		}
+		
+		// germany
+		for(String country : germanyLands){
+			String url = SITE_TO_DOWNLOAD1 +"germany/" + country +".osm.bz2"; //$NON-NLS-1$
+			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles);
+		}
+		
+		// usa
 		for(String country : usStates){
 			country = country.toLowerCase();
 			String url = SITE_TO_DOWNLOAD2 + "north_america/united_states/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
-			log.info("Downloading country " + country + " from " + url);  //$NON-NLS-1$//$NON-NLS-2$
-			File f = new File(osmDirFiles, "US_"+country +".osm.bz2"); //$NON-NLS-1$
-			downloadFile(url, f); 
-			generateIndex(f, alreadyGeneratedFiles, alreadyUploadedFiles);
+			downloadFile(url, "US_"+country, alreadyGeneratedFiles, alreadyUploadedFiles);
 		}
-		
+
+		// canada
 		for(String country : canadaStates){
 			country = country.toLowerCase();
 			String url = SITE_TO_DOWNLOAD2 + "north_america/canada/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
-			log.info("Downloading country " + country + " from " + url);  //$NON-NLS-1$//$NON-NLS-2$
-			File f = new File(osmDirFiles, "Canada_"+country +".osm.bz2"); //$NON-NLS-1$
-			downloadFile(url, f); 
-			generateIndex(f, alreadyGeneratedFiles, alreadyUploadedFiles);
+			downloadFile(url, "Canada_"+country, alreadyGeneratedFiles, alreadyUploadedFiles); 
 		}
 		System.out.println("DOWNLOADING FILES FINISHED");
 	}
@@ -168,12 +189,14 @@ public class IndexBatchCreator {
 	private final static int DOWNLOAD_DEBUG = 1 << 20;
 	private final static int MB = 1 << 20;
 	private final static int BUFFER_SIZE = 1 << 15;
-	protected void downloadFile(String url, File toSave) {
+	protected void downloadFile(String url, String country, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
 		byte[] buffer = new byte[BUFFER_SIZE];
 		int count = 0;
 		int downloaded = 0;
 		int mbDownloaded = 0;
+		File toSave = new File(osmDirFiles, country+".osm.bz2");
 		try {
+			log.info("Downloading country " + country + " from " + url);  //$NON-NLS-1$//$NON-NLS-2$
 			FileOutputStream ostream = new FileOutputStream(toSave);
 			InputStream stream = new URL(url).openStream();
 			while ((count = stream.read(buffer)) != -1) {
@@ -187,9 +210,11 @@ public class IndexBatchCreator {
 			}
 			ostream.close();
 			stream.close();
+			generateIndex(toSave, alreadyGeneratedFiles, alreadyUploadedFiles);
 		} catch (IOException e) {
 			log.error("Input/output exception " + toSave.getName() + " downloading from " + url, e); //$NON-NLS-1$ //$NON-NLS-2$
 		}
+		
 	}
 	
 	protected void generatedIndexes(Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
@@ -295,6 +320,7 @@ public class IndexBatchCreator {
 				while((read = is.read(BUFFER)) != -1){
 					zout.write(BUFFER, 0, read);
 				}
+				is.close();
 				zout.close();
 			} catch (IOException e) {
 				log.error("Exception while zipping file");

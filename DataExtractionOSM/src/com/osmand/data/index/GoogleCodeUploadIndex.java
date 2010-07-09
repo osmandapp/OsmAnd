@@ -71,7 +71,6 @@ public class GoogleCodeUploadIndex {
     }
     
 
-    private int MB = 1 << 20;
     /**
      * Uploads the contents of the file {@link #fileName} to the project's
      * Google Code upload url. Performs the basic http authentication required
@@ -126,15 +125,8 @@ public class GoogleCodeUploadIndex {
         sendLine(out, ""); //$NON-NLS-1$
         int count;
         byte[] buf = new byte[8192];
-        int uploaded = 0;
-        int mb = 0;
         while ( (count = in.read(buf)) >= 0 ) {
             out.write(buf, 0, count);
-            uploaded += count;
-            if(uploaded > MB){
-            	uploaded = 0;
-            	log("Uploaded " + (++mb) + " megabytes ");
-            }
         }
         in.close();
         sendLine(out, ""); //$NON-NLS-1$
