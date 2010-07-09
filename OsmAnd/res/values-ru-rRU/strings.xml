@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="unzipping_file">Файл распаковывается</string>
 	<string name="route_tr">Поверните направо и двигайтесь</string>
 	<string name="route_tshr">Поверните резко направо и двигайтесь</string>
 	<string name="route_tslr">Поверните направо и двигайтесь</string>

@@ -1,6 +1,7 @@
 package com.osmand.activities;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,6 +14,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import org.apache.commons.logging.Log;
 
@@ -74,10 +77,14 @@ public class DownloadIndexActivity extends ListActivity {
 	protected Map<String, String> downloadIndex(){
 		try {
 			log.debug("Start loading list of index files"); //$NON-NLS-1$
-			Map<String, String> indexFiles = DownloaderIndexFromGoogleCode.getIndexFiles(new String[] { IndexConstants.ADDRESS_INDEX_EXT,
-					IndexConstants.POI_INDEX_EXT, IndexConstants.TRANSPORT_INDEX_EXT, }, new String[] {
+			Map<String, String> indexFiles = DownloaderIndexFromGoogleCode.getIndexFiles(new String[] { 
+					IndexConstants.ADDRESS_INDEX_EXT, IndexConstants.POI_INDEX_EXT, IndexConstants.TRANSPORT_INDEX_EXT, 
+					IndexConstants.ADDRESS_INDEX_EXT_ZIP, IndexConstants.POI_INDEX_EXT_ZIP, IndexConstants.TRANSPORT_INDEX_EXT_ZIP, }, 
+					new String[] {
 					IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "",//$NON-NLS-1$//$NON-NLS-2$
-					IndexConstants.TRANSPORT_TABLE_VERSION + "",});  //$NON-NLS-1$
+					IndexConstants.TRANSPORT_TABLE_VERSION + "", //$NON-NLS-1$
+					IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "",//$NON-NLS-1$//$NON-NLS-2$
+					IndexConstants.TRANSPORT_TABLE_VERSION + ""});  //$NON-NLS-1$
 			if (indexFiles != null && !indexFiles.isEmpty()) {
 				return indexFiles;
 			} else {
@@ -129,18 +136,27 @@ public class DownloadIndexActivity extends ListActivity {
 		if(key.endsWith(IndexConstants.ADDRESS_INDEX_EXT)){
 			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.ADDRESS_PATH);
 			regionName += IndexConstants.ADDRESS_INDEX_EXT;
+		} else if(key.endsWith(IndexConstants.ADDRESS_INDEX_EXT_ZIP)){
+			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.ADDRESS_PATH);
+			regionName += IndexConstants.ADDRESS_INDEX_EXT_ZIP;
 		} else if(key.endsWith(IndexConstants.POI_INDEX_EXT)){
 			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.POI_PATH);
 			regionName += IndexConstants.POI_INDEX_EXT;
+		} else if(key.endsWith(IndexConstants.POI_INDEX_EXT_ZIP)){
+			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.POI_PATH);
+			regionName += IndexConstants.POI_INDEX_EXT_ZIP;
 		} else if(key.endsWith(IndexConstants.TRANSPORT_INDEX_EXT)){
 			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.TRANSPORT_PATH);
 			regionName += IndexConstants.TRANSPORT_INDEX_EXT;
+		} else if(key.endsWith(IndexConstants.TRANSPORT_INDEX_EXT_ZIP)){
+			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.TRANSPORT_PATH);
+			regionName += IndexConstants.TRANSPORT_INDEX_EXT_ZIP;
 		}
 		if(parent != null){
 			parent.mkdirs();
 		}
 		if(parent == null || !parent.exists()){
-			Toast.makeText(DownloadIndexActivity.this, getString(R.string.download_sd_dir_not_accessible), Toast.LENGTH_LONG);
+			Toast.makeText(DownloadIndexActivity.this, getString(R.string.download_sd_dir_not_accessible), Toast.LENGTH_LONG).show();
 			return null;
 		}
 		File file = new File(parent, regionName);
@@ -158,32 +174,55 @@ public class DownloadIndexActivity extends ListActivity {
 			public void run() {
 				try {
 					FileOutputStream out = new FileOutputStream(file);
-					try {
-						URL url = DownloaderIndexFromGoogleCode.getInputStreamToLoadIndex(key);
-						URLConnection conn = url.openConnection();
-						InputStream is = conn.getInputStream();
-						impl.startTask(getString(R.string.downloading_file), conn.getContentLength());
-						byte[] buffer = new byte[BUFFER_SIZE];
-						int read = 0;
-						while((read = is.read(buffer)) != -1){
-							out.write(buffer, 0, read);
-							impl.progress(read);
+					URL url = DownloaderIndexFromGoogleCode.getInputStreamToLoadIndex(key);
+					URLConnection conn = url.openConnection();
+					InputStream is = conn.getInputStream();
+					impl.startTask(getString(R.string.downloading_file), conn.getContentLength());
+					byte[] buffer = new byte[BUFFER_SIZE];
+					int read = 0;
+					while((read = is.read(buffer)) != -1){
+						out.write(buffer, 0, read);
+						impl.progress(read);
+					}
+					out.close();
+						
+					File toIndex = file;
+					if(file.getName().endsWith(".zip")){ //$NON-NLS-1$
+						impl.startTask(getString(R.string.unzipping_file), -1);
+						toIndex = new File(file.getParentFile(), file.getName().substring(0, file.getName().length() - 3) + "odb"); //$NON-NLS-1$
+						ZipInputStream zipIn = new ZipInputStream(new FileInputStream(file));
+						ZipEntry entry = null;
+						boolean found = false;
+						while(!found) {
+							if(entry != null){
+								zipIn.closeEntry();
+							}
+							entry = zipIn.getNextEntry();
+							found = entry == null || entry.getName().endsWith(".odb"); //$NON-NLS-1$
+						} 
+						if(entry != null){
+							out = new FileOutputStream(toIndex);
+							while((read = zipIn.read(buffer)) != -1){
+								out.write(buffer, 0, read);
+							}
+							out.close();
 						}
-						ArrayList<String> warnings = new ArrayList<String>();
-						if(file.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)){
-							ResourceManager.getResourceManager().indexingAddress(impl, warnings, file);
-						} else if(file.getName().endsWith(IndexConstants.POI_INDEX_EXT)){
-							ResourceManager.getResourceManager().indexingPoi(impl, warnings, file);
-						} else if(file.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)){
-							ResourceManager.getResourceManager().indexingTransport(impl, warnings, file);
-						}
-						if(warnings.isEmpty()){
-							showWarning(getString(R.string.download_index_success));
-						} else {
-							showWarning(warnings.get(0));
-						}
-					} finally {
-						out.close();
+						zipIn.close();
+						file.delete(); // zip is no needed more
+					}
+						
+					ArrayList<String> warnings = new ArrayList<String>();
+					if(toIndex.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)){
+						ResourceManager.getResourceManager().indexingAddress(impl, warnings, toIndex);
+					} else if(toIndex.getName().endsWith(IndexConstants.POI_INDEX_EXT)){
+						ResourceManager.getResourceManager().indexingPoi(impl, warnings, toIndex);
+					} else if(toIndex.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)){
+						ResourceManager.getResourceManager().indexingTransport(impl, warnings, toIndex);
+					}
+					if(warnings.isEmpty()){
+						showWarning(getString(R.string.download_index_success));
+					} else {
+						showWarning(warnings.get(0));
 					}
 				} catch (IOException e) {
 					log.error("Exception ocurred", e); //$NON-NLS-1$
@@ -227,15 +266,18 @@ public class DownloadIndexActivity extends ListActivity {
 			Entry<String, String> e = getItem(position);
 			int l = e.getKey().lastIndexOf('_');
 			String s = ""; //$NON-NLS-1$
-			if(e.getKey().endsWith(IndexConstants.POI_INDEX_EXT)){
+			if(e.getKey().endsWith(IndexConstants.POI_INDEX_EXT) || e.getKey().endsWith(IndexConstants.POI_INDEX_EXT_ZIP)){
 				s = getString(R.string.poi);
-			} else if(e.getKey().endsWith(IndexConstants.ADDRESS_INDEX_EXT)){
+			} else if(e.getKey().endsWith(IndexConstants.ADDRESS_INDEX_EXT) || e.getKey().endsWith(IndexConstants.ADDRESS_INDEX_EXT_ZIP)){
 				s = getString(R.string.address);
-			} else if(e.getKey().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)){
+			} else if(e.getKey().endsWith(IndexConstants.TRANSPORT_INDEX_EXT) || e.getKey().endsWith(IndexConstants.TRANSPORT_INDEX_EXT_ZIP)){
 				s = getString(R.string.transport);
 			}
-			
-			item.setText(s + "\n " + e.getKey().substring(0, l).replace('_', ' ')); //$NON-NLS-1$
+			String name = e.getKey().substring(0, l).replace('_', ' ');
+			if(e.getKey().endsWith(".zip")){ //$NON-NLS-1$
+				name += " (zip)"; //$NON-NLS-1$
+			}
+			item.setText(s + "\n " + name); //$NON-NLS-1$
 			description.setText(e.getValue().replace(':', '\n'));
 			return row;
 		}

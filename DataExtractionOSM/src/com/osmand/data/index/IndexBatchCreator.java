@@ -1,6 +1,7 @@
 package com.osmand.data.index;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,6 +13,8 @@ import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.Set;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.logging.Log;
 
@@ -61,20 +64,19 @@ public class IndexBatchCreator {
 	// us states
 	// TODO address
 	protected static final String[] usStates = new String[] {
-		"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", 
-		"Delaware",	"District_of_Columbia", "Florida", "Georgia", "Guantanamo_Bay",	"Hawaii",
-		"Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine",
-		"Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", 
-		"Montana", "Nebraska", "Nevada", "New_Hampshire", "New_Jersey", "New_Mexico",
-		"New_York",	"North_Carolina", "North_Dakota", "Ohio", "Oklahoma", "Oregon",
-		"Pennsylvania", "Rhode Island",	"South Carolina", "South Dakota", "Tennessee",
-		"Texas", "Utah", "Vermont", "Virginia", "Washington", "West_Virginia", "Wisconsin", "Wyoming",
+//		"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", 
+//		"Delaware",	"District_of_Columbia", "Florida", "Georgia", "Guantanamo_Bay",	"Hawaii",
+//		"Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine",
+//		"Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", 
+//		"Montana", "Nebraska", "Nevada", "New_Hampshire", "New_Jersey", "New_Mexico",
+//		"New_York",	"North_Carolina", "North_Dakota", "Ohio", "Oklahoma", "Oregon",
+//		"Pennsylvania", "Rhode Island",	"South Carolina", "South Dakota", "Tennessee",
+//		"Texas", "Utah", "Vermont", "Virginia", "Washington", "West_Virginia", "Wisconsin", "Wyoming",
 	};
-	// TODO address
 	protected static final String[] canadaStates = new String[] {
-		"Alberta","British_Columbia","Manitoba","New_Brunswick","Newfoundland",
-		"Nova_Scotia","Nunavut", "Nw_Territories","Ontario","Pr_Edwrd_Island",
-		"Quebec","Saskatchewan","Yukon",
+//		"Alberta","British_Columbia","Manitoba","New_Brunswick","Newfoundland",
+//		"Nova_Scotia","Nunavut", "Nw_Territories","Ontario","Pr_Edwrd_Island",
+//		"Quebec","Saskatchewan","Yukon",
 	};
 	
 	
@@ -266,24 +268,51 @@ public class IndexBatchCreator {
 		MessageFormat format = new MessageFormat("{0,date,dd.MM.yyyy} : {1, number,##.#} MB", Locale.US);
 		String summary;
 		double mbLengh = (double)f.length() / MB;
-		
-		String descriptionFile = "{"+format.format(new Object[]{new Date(f.lastModified()), mbLengh})+"}";
-		if(f.getName().endsWith(IndexConstants.POI_INDEX_EXT)){
-			String regionName = f.getName().substring(0, f.getName().length() - IndexConstants.POI_INDEX_EXT.length() - 2);
-			summary = "POI index for " + regionName + " " + descriptionFile;
-		} else if(f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)){
-			String regionName = f.getName().substring(0, f.getName().length() - IndexConstants.ADDRESS_INDEX_EXT.length() - 2);
-			summary = "Adress index for " + regionName + " " + descriptionFile;
-		} else if(f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)){
-			String regionName = f.getName().substring(0, f.getName().length() - IndexConstants.TRANSPORT_INDEX_EXT.length() - 2);
-			summary = "Transport index for " + regionName + " " + descriptionFile;
+		String regionName;
+		if(f.getName().endsWith(IndexConstants.POI_INDEX_EXT) || f.getName().endsWith(IndexConstants.POI_INDEX_EXT_ZIP)){
+			regionName = f.getName().substring(0, f.getName().length() - IndexConstants.POI_INDEX_EXT.length() - 2);
+			summary = "POI index for " ;
+		} else if(f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT) || f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT_ZIP)){
+			regionName = f.getName().substring(0, f.getName().length() - IndexConstants.ADDRESS_INDEX_EXT.length() - 2);
+			summary = "Adress index for " ;
+		} else if(f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT) || f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT_ZIP)){
+			regionName = f.getName().substring(0, f.getName().length() - IndexConstants.TRANSPORT_INDEX_EXT.length() - 2);
+			summary = "Transport index for ";
 		} else { 
 			return;
 		}
+		if(mbLengh > 5 && f.getName().endsWith(".odb")){
+			String zipFileName = f.getName().subSequence(0, f.getName().length() - 4)+".zip";
+			File zFile = new File(f.getParentFile(), zipFileName);
+			log.info("Zipping file " + f.getName());
+			try {
+				ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(zFile));
+				zout.setLevel(9);
+				zout.putNextEntry(new ZipEntry(f.getName()));
+				FileInputStream is = new FileInputStream(f);
+				byte[] BUFFER = new byte[8192];
+				int read = 0;
+				while((read = is.read(BUFFER)) != -1){
+					zout.write(BUFFER, 0, read);
+				}
+				zout.close();
+			} catch (IOException e) {
+				log.error("Exception while zipping file");
+			}
+			if(f.delete()){
+				log.info("Source odb file was deleted");
+			}
+			f = zFile;
+			
+		}
+		mbLengh = (double)f.length() / MB;
 		if(mbLengh > 100){
-			System.err.println("ERROR : file " + f.getName() + " exceeded 90 mb!!! Could not be uploaded.");
+			System.err.println("ERROR : file " + f.getName() + " exceeded 100 mb!!! Could not be uploaded.");
 			return; // restriction for google code
 		}
+		String descriptionFile = "{"+format.format(new Object[]{new Date(f.lastModified()), mbLengh})+"}";
+		summary +=  regionName + " " + descriptionFile;
+		
 		alreadyUploadedFiles.add(f.getName());
 		GoogleCodeUploadIndex uploader = new GoogleCodeUploadIndex();
 		uploader.setFileName(f.getAbsolutePath());
