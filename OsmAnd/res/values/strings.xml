@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="unzipping_file">File is unzipping</string>
 	<string name="route_tr">Turn right and go</string>
 	<string name="route_tshr">Turn sharply right and go</string>
 	<string name="route_tslr">Turn slightly right and go</string>

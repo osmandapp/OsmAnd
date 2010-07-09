@@ -19,7 +19,10 @@ public class ToDoConstants {
     //   60. Audio guidance for routing !
 	//   68. Implement service to app work with screen offline 
 	//		 (introduce special settings how often update location to monitoring & audio guidance)
+	//   69. Multitouch zoom
+	//   Improvement : Show stops in the transport route on the map
 	
+	// Not clear if it is really needed 
     //   43. Enable poi filter by name
 	//   58. Upload/Download zip-index from site & unzip them on phone
 	//   45. Get clear <Use internet> settings. Move that setting on top settings screen. 
@@ -27,6 +30,7 @@ public class ToDoConstants {
 	//		(would you like to use internet for that operation - if using internet is not checked). 
 	//		Internet using now for : edit POI osm, show osm bugs layer, download tiles.
 
+	// Unscheduled (complex)
 	//   66. Transport routing (show next stop, total distance, show stop get out) (?).
 	//   64. Traffic information (?)
 	//   65. Intermediate points - for better control routing, to avoid traffic jam ...(?)
@@ -34,15 +38,14 @@ public class ToDoConstants {
 	//   63. Support simple offline routing(require new index file) (?)
 
 
-	// FIXME BUGS Android
-	// 1. Improvement : Show stops in the transport route 
-	// 2. Pinch zoom !!!
+	// BUGS Android
+ 
 	
 	// TODO swing
 	// 9. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !
-	// Current result : for big file (1 - task  60-80% time, 90% memory)
-	// 1. Download tiles without using dir tiles (?)
- 	// 10. Improve address indexing (use relations). 
+	// Current result : for big file (1 - task  60-80% time, 90% memory) (?)
+	// 1. Download tiles without using dir tiles (?) 
+ 	// 10. Improve address indexing (use relations). (?)
     //	  use relation "a6" (to accumulate streets!),  "a3" to read all cities & define boundaries for city (& define that street in city). 
 	
 	// BUGS Swing
