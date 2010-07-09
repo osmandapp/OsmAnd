@@ -269,11 +269,13 @@ public class MapInfoLayer implements OsmandMapLayer {
 				long toFindTime = time;
 				if(followingMode){
 					toFindTime += System.currentTimeMillis();
+				} else {
+					Calendar c = Calendar.getInstance();
+					toFindTime -= c.getTimeZone().getOffset(0);
 				}
 				if(Math.abs(toFindTime - cachedLeftTime) > 30000){
 					cachedLeftTime = toFindTime;
-					Calendar c = Calendar.getInstance();
-					cachedLeftTimeString = DateFormat.format("kk:mm", cachedLeftTime - c.getTimeZone().getOffset(0) ).toString(); //$NON-NLS-1$
+					cachedLeftTimeString = DateFormat.format("kk:mm", cachedLeftTime).toString(); //$NON-NLS-1$
 				}
 			}
 			if(cachedLeftTimeString != null) {
