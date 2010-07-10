@@ -228,7 +228,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		zoomControls.setOnZoomInClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mapView.setZoom(mapView.getZoom() + 1);
+				mapView.getAnimatedDraggingThread().startZooming(mapView.getZoom(), mapView.getZoom() + 1);
 				showAndHideMapPosition();
 				// user can preview map manually switch off auto zoom while user don't press back to location
 				if(OsmandSettings.isAutoZoomEnabled(MapActivity.this)){
@@ -239,7 +239,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		zoomControls.setOnZoomOutClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mapView.setZoom(mapView.getZoom() - 1);
+				mapView.getAnimatedDraggingThread().startZooming(mapView.getZoom(), mapView.getZoom() - 1);
 				showAndHideMapPosition();
 				// user can preview map manually switch off auto zoom while user don't press back to location
 				if(OsmandSettings.isAutoZoomEnabled(MapActivity.this)){
