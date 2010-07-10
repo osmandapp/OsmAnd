@@ -218,17 +218,24 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	public void setZoom(float zoom){
 		if (map == null || (map.getMaximumZoomSupported() >= zoom && map.getMinimumZoomSupported() <= zoom)) {
-			animatedDraggingThread.stopDragging();
+			animatedDraggingThread.stopAnimating();
 			this.zoom = zoom;
 			refreshMap();
 		}
+	}
+	
+	// for internal usage
+	@Override
+	public void zoomTo(float zoom) {
+		this.zoom = zoom;
+		refreshMap();
 	}
 	
 	public void setRotate(float rotate) {
 		float dif = this.rotate - rotate;
 		if (dif > 2 || dif < -2) {
 			this.rotate = rotate;
-			animatedDraggingThread.stopDragging();
+			animatedDraggingThread.stopAnimating();
 			refreshMap();
 		}
 	}
@@ -262,7 +269,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 	
 	public void setLatLon(double latitude, double longitude){
-		animatedDraggingThread.stopDragging();
+		animatedDraggingThread.stopAnimating();
 		this.latitude = latitude;
 		this.longitude = longitude;
 		refreshMap();
@@ -631,7 +638,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		if(event.getAction() == MotionEvent.ACTION_DOWN){
-			animatedDraggingThread.stopDragging();
+			animatedDraggingThread.stopAnimating();
 		}
 		if (!multiTouchSupport.onTouchEvent(event)) {
 			/* return */gestureDetector.onTouchEvent(event);
@@ -671,7 +678,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	@Override
 	public boolean onDown(MotionEvent e) {
-		animatedDraggingThread.stopDragging();
+		animatedDraggingThread.stopAnimating();
 		return false;
 	}
 	
@@ -700,6 +707,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 		animatedDraggingThread.startDragging(Math.abs(velocityX/1000), Math.abs(velocityY/1000), e1.getX(), e1.getY(), e2.getX(), e2.getY());
 		return true;
+	}
+	
+	public AnimateDraggingMapThread getAnimatedDraggingThread() {
+		return animatedDraggingThread;
 	}
 
 	@Override
