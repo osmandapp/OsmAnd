@@ -58,12 +58,12 @@ import com.osmand.osm.OpeningHoursParser.OpeningHoursRule;
  * @author Maxim Frolov
  * 
  */
-public class SearchPOIActivity extends ListActivity implements LocationListener, SensorEventListener {
+public class SearchPOIActivity extends ListActivity implements SensorEventListener {
 
 	public static final String AMENITY_FILTER = "com.osmand.amenity_filter"; //$NON-NLS-1$
 	public static final String SEARCH_LAT = "com.osmand.am_search_lat"; //$NON-NLS-1$
 	public static final String SEARCH_LON = "com.osmand.am_search_lon"; //$NON-NLS-1$
-	private static final int GPS_TIMEOUT_REQUEST = 2000;
+	private static final int GPS_TIMEOUT_REQUEST = 1000;
 	private static final int GPS_DIST_REQUEST = 5;
 	private static final int MIN_DISTANCE_TO_RESEARCH = 70;
 	private static final int MIN_DISTANCE_TO_UPDATE = 6;
@@ -192,12 +192,51 @@ public class SearchPOIActivity extends ListActivity implements LocationListener,
 		return false;
 	}
 	
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
-		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-		if (LocationManager.GPS_PROVIDER.equals(provider)) {
-			if (LocationProvider.OUT_OF_SERVICE == status || LocationProvider.TEMPORARILY_UNAVAILABLE == status) {
-				if (LocationProvider.OUT_OF_SERVICE == status) {
+
+	// Working with location listeners
+	private LocationListener networkListener = new LocationListener(){
+		@Override
+		public void onLocationChanged(Location location) {
+			setLocation(location);
+		}
+
+		@Override
+		public void onProviderDisabled(String provider) {
+			setLocation(null);
+		}
+
+		@Override
+		public void onProviderEnabled(String provider) {
+		}
+
+		@Override
+		public void onStatusChanged(String provider, int status, Bundle extras) {
+			if(LocationProvider.OUT_OF_SERVICE == status){
+				setLocation(null);
+			}
+		}
+	};
+	private LocationListener gpsListener = new LocationListener(){
+		@Override
+		public void onLocationChanged(Location location) {
+			setLocation(location);
+		}
+
+		@Override
+		public void onProviderDisabled(String provider) {
+			setLocation(null);
+		}
+
+		@Override
+		public void onProviderEnabled(String provider) {
+		}
+
+		@Override
+		public void onStatusChanged(String provider, int status, Bundle extras) {
+			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+			// do not change provider for temporarily unavailable (possible bug for htc hero 2.1 ?)
+			if (LocationProvider.OUT_OF_SERVICE == status /*|| LocationProvider.TEMPORARILY_UNAVAILABLE == status*/) {
+				if(LocationProvider.OUT_OF_SERVICE == status){
 					setLocation(null);
 				}
 				if (!isRunningOnEmulator() && service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
@@ -209,22 +248,11 @@ public class SearchPOIActivity extends ListActivity implements LocationListener,
 			} else if (LocationProvider.AVAILABLE == status) {
 				if (!Algoritms.objectEquals(currentLocationProvider, LocationManager.GPS_PROVIDER)) {
 					currentLocationProvider = LocationManager.GPS_PROVIDER;
-					service.removeUpdates(this);
-					service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
+					service.removeUpdates(networkListener);
 				}
-
 			}
 		}
-	}
-	
-	@Override
-	public void onLocationChanged(Location location) {
-		setLocation(location);
-	}
-	@Override
-	public void onProviderDisabled(String provider) {
-		setLocation(null);
-	}
+	};
 	
 	@Override
 	public void onSensorChanged(SensorEvent event) {
@@ -247,11 +275,6 @@ public class SearchPOIActivity extends ListActivity implements LocationListener,
 		}
 		
 	}
-
-	@Override
-	public void onProviderEnabled(String provider) {
-	}
-
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 	}
@@ -280,14 +303,13 @@ public class SearchPOIActivity extends ListActivity implements LocationListener,
 		showOnMap.setEnabled(filter != null);
 		if (searchNearBy) {
 			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-			service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
+			service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, gpsListener);
+			currentLocationProvider = LocationManager.GPS_PROVIDER;
 			if(!isRunningOnEmulator()){
 				// try to always  ask for network provide it is faster way to find location
-				service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
+				service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, networkListener);
 				currentLocationProvider = LocationManager.NETWORK_PROVIDER;
-			} else {
-				currentLocationProvider = LocationManager.GPS_PROVIDER;
-			}
+			} 
 		}
 	}
 	
@@ -318,7 +340,8 @@ public class SearchPOIActivity extends ListActivity implements LocationListener,
 		super.onPause();
 		if (searchNearBy) {
 			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-			service.removeUpdates(this);
+			service.removeUpdates(gpsListener);
+			service.removeUpdates(networkListener);
 
 			SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
 			sensorMgr.unregisterListener(this);
