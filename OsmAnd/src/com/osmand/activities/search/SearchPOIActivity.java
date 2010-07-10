@@ -281,9 +281,12 @@ public class SearchPOIActivity extends ListActivity implements LocationListener,
 		if (searchNearBy) {
 			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 			service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
-			if (!isRunningOnEmulator() && !service.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+			if(!isRunningOnEmulator()){
+				// try to always  ask for network provide it is faster way to find location
 				service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
 				currentLocationProvider = LocationManager.NETWORK_PROVIDER;
+			} else {
+				currentLocationProvider = LocationManager.GPS_PROVIDER;
 			}
 		}
 	}

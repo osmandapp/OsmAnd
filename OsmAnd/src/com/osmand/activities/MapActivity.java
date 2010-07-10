@@ -212,6 +212,9 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		if(prefs == null || !prefs.contains(OsmandSettings.LAST_KNOWN_MAP_LAT)){
 			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 			Location location = service.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+			if(location == null){
+				location = service.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+			}
 			if(location != null){
 				mapView.setLatLon(location.getLatitude(), location.getLongitude());
 				mapView.setZoom(14);
@@ -606,14 +609,14 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		
 		service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
-		LocationProvider prov = service.getProvider(LocationManager.GPS_PROVIDER);
-		if(!service.isProviderEnabled(LocationManager.GPS_PROVIDER) && !isRunningOnEmulator()){
+		if(!isRunningOnEmulator()){
+			// try to always  ask for network provide it is faster way to find location
 			service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
-			prov = service.getProvider(LocationManager.NETWORK_PROVIDER);
 			currentLocationProvider = LocationManager.NETWORK_PROVIDER;
 		} else {
 			currentLocationProvider = LocationManager.GPS_PROVIDER;
 		}
+		LocationProvider  prov = service.getProvider(currentLocationProvider); 
 		 
 		providerSupportsBearing = prov == null ? false : prov.supportsBearing() && !isRunningOnEmulator();
 		providerSupportsSpeed = prov == null ? false : prov.supportsSpeed() && !isRunningOnEmulator();
