@@ -7,6 +7,7 @@ package com.osmand.views;
 public class AnimateDraggingMapThread implements Runnable {
 	public interface AnimateDraggingCallback {
 		public void dragTo(float curX, float curY, float newX, float newY);
+		
 	}
 	
 	private float curX;

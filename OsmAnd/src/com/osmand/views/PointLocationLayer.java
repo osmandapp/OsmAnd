@@ -80,7 +80,7 @@ public class PointLocationLayer implements OsmandMapLayer {
 		if (isLocationVisible(lastKnownLocation)) {
 			int locationX = view.getMapXForPoint(lastKnownLocation.getLongitude());
 			int locationY = view.getMapYForPoint(lastKnownLocation.getLatitude());
-			int radius = MapUtils.getLengthXFromMeters(view.getZoom(), view.getLatitude(), view.getLongitude(), lastKnownLocation
+			int radius = MapUtils.getLengthXFromMeters(view.getFloatZoom(), view.getLatitude(), view.getLongitude(), lastKnownLocation
 					.getAccuracy(), view.getTileSize(), view.getWidth());
 
 			if(appMode == ApplicationMode.CAR){
@@ -105,7 +105,7 @@ public class PointLocationLayer implements OsmandMapLayer {
 				int radiusBearing = 30;
 				if(lastKnownLocation.hasSpeed()){
 					radiusBearing = 
-						Math.max(MapUtils.getLengthXFromMeters(view.getZoom(), view.getLatitude(), view.getLongitude(), 
+						Math.max(MapUtils.getLengthXFromMeters(view.getFloatZoom(), view.getLatitude(), view.getLongitude(), 
 							lastKnownLocation.getSpeed(), view.getTileSize(), view.getWidth()) * 2, radiusBearing);
 				}
 				radiusBearing += RADIUS /2;

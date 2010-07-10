@@ -279,13 +279,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 
 			@Override
 			public boolean onLongPressEvent(PointF point) {
-				float dx = point.x - mapView.getCenterPointX();
-				float dy = point.y - mapView.getCenterPointY();
-				float fy = mapView.calcDiffTileY(dx, dy);
-				float fx = mapView.calcDiffTileX(dx, dy);
-				double latitude = MapUtils.getLatitudeFromTile(mapView.getZoom(), mapView.getYTile() + fy);
-				double longitude = MapUtils.getLongitudeFromTile(mapView.getZoom(), mapView.getXTile() + fx);
-				contextMenuPoint(latitude, longitude, false);
+				LatLon l = mapView.getLatLonFromScreenPoint(point.x, point.y);
+				contextMenuPoint(l.getLatitude(), l.getLongitude(), false);
 				return true;
 			}
 			
@@ -308,11 +303,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     	if(event.getAction() == MotionEvent.ACTION_MOVE){
     		float x = event.getX();
     		float y = event.getY();
-    		x = (float) (MapUtils.getTileNumberX(mapView.getZoom() , mapView.getLongitude()) + x / 3);
-    		y = (float) (MapUtils.getTileNumberY(mapView.getZoom(), mapView.getLatitude()) + y / 3);
-    		double lat = MapUtils.getLatitudeFromTile(mapView.getZoom(), y);
-    		double lon = MapUtils.getLongitudeFromTile(mapView.getZoom(), x);
-    		setMapLocation(lat, lon);
+    		LatLon l = mapView.getLatLonFromScreenPoint(mapView.getCenterPointX() + x * 15, mapView.getCenterPointY() + y * 15);
+    		setMapLocation(l.getLatitude(), l.getLongitude());
     		return true;
     	} 
     	return super.onTrackballEvent(event);

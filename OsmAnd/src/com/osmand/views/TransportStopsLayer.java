@@ -67,10 +67,6 @@ public class TransportStopsLayer implements OsmandMapLayer {
 
 
 	
-	public int getTileSize(){
-		return view.getTileSize();
-	}
-
 	
 	@Override
 	public boolean onTouchEvent(PointF point) {

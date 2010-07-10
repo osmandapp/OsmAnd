@@ -109,10 +109,6 @@ public class POIMapLayer implements OsmandMapLayer {
 		return false;
 	}
 	
-	public int getTileSize(){
-		return view.getTileSize();
-		
-	}
 	
 	@Override
 	public void initLayer(OsmandMapTileView view) {
