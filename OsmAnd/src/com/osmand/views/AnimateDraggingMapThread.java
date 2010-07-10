@@ -59,7 +59,9 @@ public class AnimateDraggingMapThread implements Runnable {
 					}
 				}
 				if (!stopped && callback != null) {
-					callback.dragTo(curX, curY, newX, newY);
+					if (vx > 0 || vy > 0) {
+						callback.dragTo(curX, curY, newX, newY);
+					}
 					if(newZ > 0){
 						callback.zoomTo(newZ);
 					}
@@ -108,6 +110,7 @@ public class AnimateDraggingMapThread implements Runnable {
 		} else {
 			dirZ = -1;
 		}
+		vx = 0;
 		curZ = zoomStart;
 		endZ = zoomEnd;
 		timeZ = 600;
@@ -129,6 +132,9 @@ public class AnimateDraggingMapThread implements Runnable {
 		vy = velocityY;
 		dirX = (byte) (endX > startX ? 1 : -1);
 		dirY = (byte) (endY > startY ? 1 : -1);
+		curZ = 0;
+		endZ = 0;
+		timeZ = 0;
 		ax = vx * a;
 		ay = vy * a;
 		time = System.currentTimeMillis();
