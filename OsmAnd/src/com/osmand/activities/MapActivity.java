@@ -77,12 +77,13 @@ import com.osmand.views.PointNavigationLayer;
 import com.osmand.views.RouteLayer;
 import com.osmand.views.TransportStopsLayer;
 
-public class MapActivity extends Activity implements LocationListener, IMapLocationListener, SensorEventListener {
+public class MapActivity extends Activity implements IMapLocationListener, SensorEventListener {
 
 	private static final String GPS_STATUS_ACTIVITY = "com.eclipsim.gpsstatus2.GPSStatus"; //$NON-NLS-1$
 	private static final String GPS_STATUS_COMPONENT = "com.eclipsim.gpsstatus2"; //$NON-NLS-1$
 	
-	private static final int GPS_TIMEOUT_REQUEST = 2000;
+	// stupid error but anyway hero 2.1 : always lost gps signal (temporarily unavailable) for timeout = 2000
+	private static final int GPS_TIMEOUT_REQUEST = 1000;
 	private static final int GPS_DIST_REQUEST = 5;
 	
 	private boolean providerSupportsBearing = false;
@@ -395,6 +396,10 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
     	if(Log.isLoggable(LogUtil.TAG, Log.DEBUG)){
     		Log.d(LogUtil.TAG, "Location changed " + location.getProvider()); //$NON-NLS-1$
     	}
+    	if(location != null && OsmandSettings.isSavingTrackToGpx(this)){
+			savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), 
+					location.getAltitude(), location.getSpeed(), location.getTime());
+		}
     	registerUnregisterSensor(location);
     	updateSpeedBearing(location);
     	
@@ -471,26 +476,6 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 	public RoutingHelper getRoutingHelper() {
 		return routingHelper;
 	}
-    
-
-	@Override
-	public void onLocationChanged(Location location) {
-		if(location != null && OsmandSettings.isSavingTrackToGpx(this)){
-			savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), 
-					location.getAltitude(), location.getSpeed(), location.getTime());
-		}
-		setLocation(location);
-	}
-
-	@Override
-	public void onProviderDisabled(String provider) {
-		setLocation(null);
-	}
-
-	@Override
-	public void onProviderEnabled(String provider) {
-	}
-
 	
 	private boolean isRunningOnEmulator(){
 		if (Build.DEVICE.equals("generic")) { //$NON-NLS-1$ 
@@ -498,18 +483,57 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		}  
 		return false;
 	}
-	
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
-		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-		if (LocationManager.GPS_PROVIDER.equals(provider)) {
+    
+
+	// Working with location listeners
+	private LocationListener networkListener = new LocationListener(){
+		@Override
+		public void onLocationChanged(Location location) {
+			setLocation(location);
+		}
+
+		@Override
+		public void onProviderDisabled(String provider) {
+			setLocation(null);
+		}
+
+		@Override
+		public void onProviderEnabled(String provider) {
+		}
+
+		@Override
+		public void onStatusChanged(String provider, int status, Bundle extras) {
+			if(LocationProvider.OUT_OF_SERVICE == status){
+				setLocation(null);
+			}
+		}
+	};
+	private LocationListener gpsListener = new LocationListener(){
+		@Override
+		public void onLocationChanged(Location location) {
+			setLocation(location);
+		}
+
+		@Override
+		public void onProviderDisabled(String provider) {
+			setLocation(null);
+		}
+
+		@Override
+		public void onProviderEnabled(String provider) {
+		}
+
+		@Override
+		public void onStatusChanged(String provider, int status, Bundle extras) {
+			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 			LocationProvider prov = service.getProvider(LocationManager.NETWORK_PROVIDER);
-			if (LocationProvider.OUT_OF_SERVICE == status || LocationProvider.TEMPORARILY_UNAVAILABLE == status) {
+			// do not change provider for temporarily unavailable (possible bug for htc hero 2.1 ?)
+			if (LocationProvider.OUT_OF_SERVICE == status /*|| LocationProvider.TEMPORARILY_UNAVAILABLE == status*/) {
 				if(LocationProvider.OUT_OF_SERVICE == status){
 					setLocation(null);
 				}
-				if(!isRunningOnEmulator() && service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
-					if(!Algoritms.objectEquals(currentLocationProvider, LocationManager.NETWORK_PROVIDER)){
+				if (!isRunningOnEmulator() && service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+					if (!Algoritms.objectEquals(currentLocationProvider, LocationManager.NETWORK_PROVIDER)) {
 						currentLocationProvider = LocationManager.NETWORK_PROVIDER;
 						service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
 						providerSupportsBearing = prov == null ? false : prov.supportsBearing() && !isRunningOnEmulator();
@@ -517,25 +541,26 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 					}
 				}
 			} else if (LocationProvider.AVAILABLE == status) {
-				if(!Algoritms.objectEquals(currentLocationProvider, LocationManager.GPS_PROVIDER)){
+				if (!Algoritms.objectEquals(currentLocationProvider, LocationManager.GPS_PROVIDER)) {
 					currentLocationProvider = LocationManager.GPS_PROVIDER;
-					service.removeUpdates(this);
-					service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
+					service.removeUpdates(networkListener);
 					prov = service.getProvider(LocationManager.GPS_PROVIDER);
 					providerSupportsBearing = prov == null ? false : prov.supportsBearing() && !isRunningOnEmulator();
 					providerSupportsSpeed = prov == null ? false : prov.supportsSpeed() && !isRunningOnEmulator();
 				}
-				
 			}
+
 		}
-	}
+	};
 	
+
 	
 	@Override
 	protected void onPause() {
 		super.onPause();
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-		service.removeUpdates(this);
+		service.removeUpdates(gpsListener);
+		service.removeUpdates(networkListener);
 		
 		SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
 		sensorMgr.unregisterListener(this);
@@ -607,17 +632,15 @@ public class MapActivity extends Activity implements LocationListener, IMapLocat
 		}
 		
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-		
-		service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
+		service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, gpsListener);
+		currentLocationProvider = LocationManager.GPS_PROVIDER;
 		if(!isRunningOnEmulator()){
-			// try to always  ask for network provide it is faster way to find location
-			service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
+			// try to always  ask for network provide : it is faster way to find location
+			service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, networkListener);
 			currentLocationProvider = LocationManager.NETWORK_PROVIDER;
-		} else {
-			currentLocationProvider = LocationManager.GPS_PROVIDER;
 		}
+		
 		LocationProvider  prov = service.getProvider(currentLocationProvider); 
-		 
 		providerSupportsBearing = prov == null ? false : prov.supportsBearing() && !isRunningOnEmulator();
 		providerSupportsSpeed = prov == null ? false : prov.supportsSpeed() && !isRunningOnEmulator();
 		
