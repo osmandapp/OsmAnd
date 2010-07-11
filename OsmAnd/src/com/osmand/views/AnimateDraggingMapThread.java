@@ -1,5 +1,7 @@
 package com.osmand.views;
 
+import android.util.FloatMath;
+
 import com.osmand.osm.MapUtils;
 
 /**
@@ -181,19 +183,22 @@ public class AnimateDraggingMapThread implements Runnable {
 		thread.start();
 	}
 	
-	public void startMoving(double curLat, double curLon, double finalLat, double finalLon, int curZoom, int endZoom, int tileSize, boolean notifyListener){
+	public void startMoving(double curLat, double curLon, double finalLat, double finalLon, int curZoom, int endZoom, int tileSize, float rotate, boolean notifyListener){
 		stopAnimatingSync();
 		this.notifyListener = notifyListener;
 		curZ = curZoom;
 		intZ = curZoom;
-		moveX = (float) ((MapUtils.getTileNumberX(intZ, curLon) - MapUtils.getTileNumberX(intZ, finalLon)) * tileSize);
-		moveY = (float) ((MapUtils.getTileNumberY(intZ, curLat) - MapUtils.getTileNumberY(intZ, finalLat)) * tileSize);
+		float mX = (float) ((MapUtils.getTileNumberX(intZ, curLon) - MapUtils.getTileNumberX(intZ, finalLon)) * tileSize);
+		float mY = (float) ((MapUtils.getTileNumberY(intZ, curLat) - MapUtils.getTileNumberY(intZ, finalLat)) * tileSize);
 		// todo calculate right with rotated map!!!
-		while (Math.abs(moveX) + Math.abs(moveY) > 1200 && intZ > 4) {
+		while (Math.abs(mX) + Math.abs(mY) > 1200 && intZ > 4) {
 			intZ--;
-			moveX = (float) ((MapUtils.getTileNumberX(intZ, curLon) - MapUtils.getTileNumberX(intZ, finalLon)) * tileSize);
-			moveY = (float) ((MapUtils.getTileNumberY(intZ, curLat) - MapUtils.getTileNumberY(intZ, finalLat)) * tileSize);
+			mX = (float) ((MapUtils.getTileNumberX(intZ, curLon) - MapUtils.getTileNumberX(intZ, finalLon)) * tileSize);
+			mY = (float) ((MapUtils.getTileNumberY(intZ, curLat) - MapUtils.getTileNumberY(intZ, finalLat)) * tileSize);
 		}
+		float rad = (float) Math.toRadians(rotate);
+		moveX = FloatMath.cos(rad) * mX - FloatMath.sin(rad) * mY; 
+		moveY = FloatMath.sin(rad) * mX + FloatMath.cos(rad) * mY;
 		if(curZoom < intZ){
 			dirIntZ = 1;
 		} else {
@@ -209,6 +214,9 @@ public class AnimateDraggingMapThread implements Runnable {
 		endZ = endZoom;
 		
 		timeZInt = Math.abs(curZoom - intZ) * 300;
+		if (timeZInt > 1200) {
+			timeZInt = 1200;
+		}
 		timeZEnd = 500;
 		timeMove = (int) (Math.abs(moveX) + Math.abs(moveY) * 4);
 		if(timeMove > 2000){

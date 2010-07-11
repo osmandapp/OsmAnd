@@ -446,7 +446,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 			if(pointToNavigate != null){
 				int fZoom = view.getZoom() < 15 ? 15 : view.getZoom(); 
 				thread.startMoving(view.getLatitude(), view.getLongitude(), pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), 
-						view.getZoom(), fZoom, view.getSourceTileSize(), true);
+						view.getZoom(), fZoom, view.getSourceTileSize(), view.getRotate(), true);
 			}
 		}
 		return false;

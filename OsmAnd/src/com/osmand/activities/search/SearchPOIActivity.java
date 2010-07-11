@@ -355,9 +355,10 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			OsmandSettings.setPoiFilterForMap(SearchPOIActivity.this, filter.getFilterId());
 			OsmandSettings.setShowPoiOverMap(SearchPOIActivity.this, true);
 		}
+		int z = OsmandSettings.getLastKnownMapZoom(this);
 		Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
-		OsmandSettings.setMapLocationToShow(this, amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 16, 
-				getString(R.string.poi)+" : " + amenity.getSimpleFormat(OsmandSettings.usingEnglishNames(this))); //$NON-NLS-1$
+		OsmandSettings.setMapLocationToShow(this, amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 
+				Math.max(16, z), getString(R.string.poi)+" : " + amenity.getSimpleFormat(OsmandSettings.usingEnglishNames(this))); //$NON-NLS-1$
 		Intent newIntent = new Intent(SearchPOIActivity.this, MapActivity.class);
 		startActivity(newIntent);
 	}
@@ -439,7 +440,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 
 		public void setNewModel(List<Amenity> amenityList) {
 			setNotifyOnChange(false);
-			((AmenityAdapter) getListAdapter()).clear();
+			clear();
 			for (Amenity obj : amenityList) {
 				this.add(obj);
 			}
