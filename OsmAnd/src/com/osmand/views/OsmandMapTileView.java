@@ -65,7 +65,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	/**
 	 * zoom level - could be float to show zoomed tiles
 	 */
-	// TODO rotated zoom calculation check where it is could be needed???
 	private float zoom = 3;
 	
 	private double longitude = 0d;
@@ -206,6 +205,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return m * tileSize;
 	}
 	
+	public int getSourceTileSize() {
+		return map == null ? 256 : map.getTileSize();
+	}
+	
 
 	public float getXTile(){
 		return (float) MapUtils.getTileNumberX(zoom, longitude);
@@ -226,10 +229,13 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	// for internal usage
 	@Override
-	public void zoomTo(float zoom) {
+	public void zoomTo(float zoom, boolean notify) {
 		if (map == null || (map.getMaximumZoomSupported() >= zoom && map.getMinimumZoomSupported() <= zoom)) {
 			this.zoom = zoom;
 			refreshMap();
+			if(notify && locationListener != null){
+				locationListener.locationChanged(latitude, longitude, this);
+			}
 		}
 	}
 	
@@ -622,19 +628,27 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 	
 	@Override
-	public void dragTo(float fromX, float fromY, float toX, float toY){
+	public void dragTo(float fromX, float fromY, float toX, float toY, boolean notify){
 		float dx = (fromX - toX) ; 
 		float dy = (fromY - toY);
+		moveTo(dx, dy);
+		if(locationListener != null && notify){
+			locationListener.locationChanged(latitude, longitude, this);
+		}
+	}
+	
+	public void moveTo(float dx, float dy) {
 		float fy = calcDiffTileY(dx, dy);
 		float fx = calcDiffTileX(dx, dy);
 		
 		this.latitude = MapUtils.getLatitudeFromTile(zoom, getYTile() + fy);
 		this.longitude = MapUtils.getLongitudeFromTile(zoom, getXTile() + fx);
 		refreshMap();
-		if(locationListener != null){
-			locationListener.locationChanged(latitude, longitude, this);
-		}
+		// do not notify here listener
+		
 	}
+	
+	
 	
 	
 	@Override
@@ -738,7 +752,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	@Override
 	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-		dragTo(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY());
+		dragTo(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
 		return true;
 	}
 

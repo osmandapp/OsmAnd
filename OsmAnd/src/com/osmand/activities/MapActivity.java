@@ -31,6 +31,7 @@ import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
@@ -68,6 +69,7 @@ import com.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
 import com.osmand.map.IMapLocationListener;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
+import com.osmand.views.AnimateDraggingMapThread;
 import com.osmand.views.MapInfoLayer;
 import com.osmand.views.OsmBugsLayer;
 import com.osmand.views.OsmandMapTileView;
@@ -228,6 +230,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		zoomControls.setOnZoomInClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				mapView.getAnimatedDraggingThread().stopAnimatingSync();
 				mapView.getAnimatedDraggingThread().startZooming(mapView.getZoom(), mapView.getZoom() + 1);
 				showAndHideMapPosition();
 				// user can preview map manually switch off auto zoom while user don't press back to location
@@ -239,6 +242,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		zoomControls.setOnZoomOutClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				mapView.getAnimatedDraggingThread().stopAnimatingSync();
 				mapView.getAnimatedDraggingThread().startZooming(mapView.getZoom(), mapView.getZoom() - 1);
 				showAndHideMapPosition();
 				// user can preview map manually switch off auto zoom while user don't press back to location
@@ -256,7 +260,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					OsmandSettings.setSyncMapToGpsLocation(MapActivity.this, true);
 					if(locationLayer.getLastKnownLocation() != null){
 						Location lastKnownLocation = locationLayer.getLastKnownLocation();
-						mapView.setLatLon(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+						AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
+						int fZoom = mapView.getZoom() < 15 ? 15 : mapView.getZoom();
+						thread.startMoving(mapView.getLatitude(), mapView.getLongitude(), 
+								lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), mapView.getZoom(), fZoom, 
+								mapView.getSourceTileSize(), false);
 					}
 				}
 			}
@@ -589,14 +597,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		locationLayer.setAppMode(OsmandSettings.getApplicationMode(this));
 		routingHelper.setAppMode(OsmandSettings.getApplicationMode(this));
 		
+		
 		poiMapLayer.setFilter(OsmandSettings.getPoiFilterForMap(this));
 		mapView.setMapPosition(OsmandSettings.getPositionOnMap(this));
-		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
-		if(prefs != null && prefs.contains(OsmandSettings.LAST_KNOWN_MAP_LAT)){
-			LatLon l = OsmandSettings.getLastKnownMapLocation(this);
-			mapView.setLatLon(l.getLatitude(), l.getLongitude());
-			mapView.setZoom(OsmandSettings.getLastKnownMapZoom(this));
-		}
+		
 		backToLocation.setVisibility(View.INVISIBLE);
 		
 		
@@ -642,7 +646,32 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "com.osmand.map"); //$NON-NLS-1$
 			wakeLock.acquire();
 		}
+		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
+		if(prefs != null && prefs.contains(OsmandSettings.LAST_KNOWN_MAP_LAT)){
+			LatLon l = OsmandSettings.getLastKnownMapLocation(this);
+			mapView.setLatLon(l.getLatitude(), l.getLongitude());
+			mapView.setZoom(OsmandSettings.getLastKnownMapZoom(this));
+			LatLon latLon = OsmandSettings.getAndClearMapLocationToShow(this);
+			LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
+			if(latLon != null && !latLon.equals(cur)){
+				mapView.getAnimatedDraggingThread().startMoving(cur.getLatitude(), cur.getLongitude(), 
+						latLon.getLatitude(), latLon.getLongitude(), 
+						mapView.getZoom(), OsmandSettings.getMapZoomToShow(this), mapView.getSourceTileSize(), true);
+			}
+		}
+		checkExternalStorage();
 		showAndHideMapPosition();
+	}
+	
+	public void checkExternalStorage(){
+		String state = Environment.getExternalStorageState();
+		if(Environment.MEDIA_MOUNTED.equals(state)){
+			// ok
+		} else if(Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)){
+			Toast.makeText(this, R.string.sd_mounted_ro, Toast.LENGTH_LONG).show();
+		} else {
+			Toast.makeText(this, R.string.sd_unmounted, Toast.LENGTH_LONG).show();
+		}
 	}
 	
 	

@@ -16,9 +16,11 @@ import android.util.FloatMath;
 
 import com.osmand.Algoritms;
 import com.osmand.Messages;
+import com.osmand.OsmandSettings;
 import com.osmand.activities.MapActivity;
 import com.osmand.activities.RoutingHelper.RouteDirectionInfo;
 import com.osmand.activities.RoutingHelper.TurnType;
+import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 
 public class MapInfoLayer implements OsmandMapLayer {
@@ -437,6 +439,15 @@ public class MapInfoLayer implements OsmandMapLayer {
 			showMiniMap = !showMiniMap;
 			view.refreshMap();
 			return true;
+		}
+		if(cachedDistString != null && boundsForDist.contains(point.x, point.y)){
+			AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
+			LatLon pointToNavigate = OsmandSettings.getPointToNavigate(view.getContext());
+			if(pointToNavigate != null){
+				int fZoom = view.getZoom() < 15 ? 15 : view.getZoom(); 
+				thread.startMoving(view.getLatitude(), view.getLongitude(), pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), 
+						view.getZoom(), fZoom, view.getSourceTileSize(), true);
+			}
 		}
 		return false;
 	}

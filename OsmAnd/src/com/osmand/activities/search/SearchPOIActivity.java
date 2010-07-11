@@ -123,8 +123,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 				OsmandSettings.setPoiFilterForMap(SearchPOIActivity.this, filter.getFilterId());
 				OsmandSettings.setShowPoiOverMap(SearchPOIActivity.this, true);
 				if(searchNearBy && location != null){
-					OsmandSettings.setMapLocationToShow(SearchPOIActivity.this, location.getLatitude(), location.getLongitude());
-					OsmandSettings.setLastKnownMapZoom(SearchPOIActivity.this, 15);
+					OsmandSettings.setMapLocationToShow(SearchPOIActivity.this, location.getLatitude(), location.getLongitude(), 15);
 				}
 				Intent newIntent = new Intent(SearchPOIActivity.this, MapActivity.class);
 				startActivity(newIntent);
@@ -356,9 +355,8 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			OsmandSettings.setShowPoiOverMap(SearchPOIActivity.this, true);
 		}
 		Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
-		OsmandSettings.setMapLocationToShow(this, amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 
+		OsmandSettings.setMapLocationToShow(this, amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 16, 
 				getString(R.string.poi)+" : " + amenity.getSimpleFormat(OsmandSettings.usingEnglishNames(this))); //$NON-NLS-1$
-		OsmandSettings.setLastKnownMapZoom(this, 16);
 		Intent newIntent = new Intent(SearchPOIActivity.this, MapActivity.class);
 		startActivity(newIntent);
 	}
