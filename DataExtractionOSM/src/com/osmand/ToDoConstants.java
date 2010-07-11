@@ -19,7 +19,6 @@ public class ToDoConstants {
     //   60. Audio guidance for routing !
 	//   68. Implement service to app work with screen offline 
 	//		 (introduce special settings how often update location to monitoring & audio guidance)
-	//   69. Multitouch zoom, animated zoom, animate map shift (when select some point to see)!
 	//   Improvement : Show stops in the transport route on the map
 	
 	// Not clear if it is really needed 
@@ -55,6 +54,7 @@ public class ToDoConstants {
 	//   33. Build transport locations. Create transport index (transport-stops) (investigate)
 	// 		 Not implemented  : show key/transit stops on map, follow mode (show next stop)
 	//   58. Upload/Download zip-index from site & unzip them on phone
+	//   69. Multitouch zoom, animated zoom, animate map shift (when select some point to see)!
 
 	
 	// DONE SWING

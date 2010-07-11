@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="sd_unmounted">Карточка SD недоступна. \nВы не сможете работать с картой.</string>
+	<string name="sd_mounted_ro">Карточка SD доступна только для чтения. \nВы не сможете загружать карты из интернета.</string>
 	<string name="unzipping_file">Файл распаковывается</string>
 	<string name="route_tr">Поверните направо и двигайтесь</string>
 	<string name="route_tshr">Поверните резко направо и двигайтесь</string>
