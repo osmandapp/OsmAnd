@@ -132,8 +132,17 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		showOnMap.setEnabled(filter != null);
 		if (filter != null) {
 			amenityAdapter = new AmenityAdapter(new ArrayList<Amenity>());
+			if(location == null){
+				filter.clearPreviousZoom();
+			} else {
+				searchedLocation = location;
+				amenityAdapter.setNewModel(filter.initializeNewSearch(location.getLatitude(), location.getLongitude(), 40));
+			}
 			setListAdapter(amenityAdapter);
+			searchPOILevel.setEnabled(filter.isSearchFurtherAvailable());
 			searchArea.setText(filter.getSearchArea());
+		} else {
+			searchPOILevel.setEnabled(false);
 		}
 		// ListActivity has a ListView, which you can get with:
 		ListView lv = getListView();
@@ -159,7 +168,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		if (l != null && filter != null) {
 			if (location == null) {
 				searchedLocation = l;
-				amenityAdapter.setNewModel(filter.initializeNewSearch(l.getLatitude(), l.getLongitude(), 40));
+				amenityAdapter.setNewModel(filter.searchAgain(l.getLatitude(), l.getLongitude()));
 				searchPOILevel.setText(R.string.search_POI_level_btn);
 				searchPOILevel.setEnabled(filter.isSearchFurtherAvailable());
 				searchArea.setText(filter.getSearchArea());
@@ -284,13 +293,6 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		super.onResume();
 		if(searchNearBy){
 			location = null;
-		}
-		if (filter != null && location != null) {
-			searchedLocation = location;
-			amenityAdapter.setNewModel(filter.initializeNewSearch(location.getLatitude(), location.getLongitude(), 40));
-			searchPOILevel.setEnabled(filter.isSearchFurtherAvailable());
-			searchArea.setText(filter.getSearchArea());
-		} else {
 			amenityAdapter.notifyDataSetChanged();
 			searchPOILevel.setEnabled(false);
 		}
@@ -299,7 +301,6 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		} else {
 			searchPOILevel.setText(R.string.search_POI_level_btn);
 		}
-		showOnMap.setEnabled(filter != null);
 		if (searchNearBy) {
 			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 			service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, gpsListener);
