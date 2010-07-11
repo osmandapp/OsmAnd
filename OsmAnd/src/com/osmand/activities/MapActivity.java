@@ -264,7 +264,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 						int fZoom = mapView.getZoom() < 15 ? 15 : mapView.getZoom();
 						thread.startMoving(mapView.getLatitude(), mapView.getLongitude(), 
 								lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), mapView.getZoom(), fZoom, 
-								mapView.getSourceTileSize(), false);
+								mapView.getSourceTileSize(), mapView.getRotate(), false);
 					}
 				}
 			}
@@ -656,7 +656,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			if(latLon != null && !latLon.equals(cur)){
 				mapView.getAnimatedDraggingThread().startMoving(cur.getLatitude(), cur.getLongitude(), 
 						latLon.getLatitude(), latLon.getLongitude(), 
-						mapView.getZoom(), OsmandSettings.getMapZoomToShow(this), mapView.getSourceTileSize(), true);
+						mapView.getZoom(), OsmandSettings.getMapZoomToShow(this), 
+						mapView.getSourceTileSize(), mapView.getRotate(), true);
 			}
 		}
 		checkExternalStorage();
@@ -739,6 +740,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	
 	private void updateNavigateToPointMenu(){
 		if (navigateToPointMenu != null) {
+			navigateToPointMenu.setTitle(routingHelper.isFollowingMode() ? R.string.stop_routing : R.string.stop_navigation);
 			if (OsmandSettings.getPointToNavigate(this) != null) {
 				navigateToPointMenu.setVisible(true);
 			} else {
@@ -785,7 +787,14 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			return true;
     	}  else if (item.getItemId() == R.id.map_navigate_to_point) {
     		if(navigationLayer.getPointToNavigate() != null){
-    			navigateToPoint(null);
+    			if(routingHelper.getFinalLocation() != null){
+    				routingHelper.setFinalAndCurrentLocation(null, null);
+    				routingHelper.setFollowingMode(false);
+    				mapView.refreshMap();
+    				updateNavigateToPointMenu();
+    			} else {
+    				navigateToPoint(null);
+    			}
     		} else {
     			navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
     		}
@@ -804,11 +813,15 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     	builder.setPositiveButton(R.string.follow, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Location map = new Location("map"); //$NON-NLS-1$
-				map.setLatitude(lat);
-				map.setLongitude(lon);
+				Location location = locationLayer.getLastKnownLocation();
+				if(location == null){
+					location = new Location("map"); //$NON-NLS-1$
+					location.setLatitude(lat);
+					location.setLongitude(lon);
+				} 
 				routingHelper.setFollowingMode(true);
-				routingHelper.setFinalAndCurrentLocation(navigationLayer.getPointToNavigate(), map);
+				routingHelper.setFinalAndCurrentLocation(navigationLayer.getPointToNavigate(), location);
+				updateNavigateToPointMenu();
 			}
     	});
     	if(routingHelper.isRouterEnabled()){
@@ -828,6 +841,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				map.setLatitude(lat);
 				map.setLongitude(lon);
 				routingHelper.setFollowingMode(false);
+				updateNavigateToPointMenu();
 				routingHelper.setFinalAndCurrentLocation(navigationLayer.getPointToNavigate(), map);
 			}
     	});

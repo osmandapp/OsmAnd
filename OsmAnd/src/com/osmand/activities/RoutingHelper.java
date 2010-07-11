@@ -165,10 +165,22 @@ public class RoutingHelper {
 					boolean proccesed = false;
 					if (newDist < dist){
 						if(newDist > 150){
-							if(log.isDebugEnabled()){
+							// may be that check is really not needed ? only for start position
+							if(currentRoute > 0 ){
+								// check that we are not far from the route (if we are on the route distance doesn't matter) 
+								float bearing = routeNodes.get(currentRoute - 1).bearingTo(routeNodes.get(currentRoute));
+								float bearingMovement = currentLocation.bearingTo(routeNodes.get(currentRoute));
+								float d = Math.abs(currentLocation.distanceTo(routeNodes.get(currentRoute)) * FloatMath.sin((bearingMovement - bearing)*3.14f/180f));
+								if(d > 50){
+									proccesed = true;
+								}
+							} else {
+								proccesed = true;
+							}
+							if(proccesed && log.isDebugEnabled()){
 								log.debug("Processed distance : " + newDist + " " + dist);  //$NON-NLS-1$//$NON-NLS-2$
 							}
-							proccesed = true;
+							
 						} else {
 							// case if you are getting close to the next point after turn
 							//  but you haven't turned before (could be checked bearing)

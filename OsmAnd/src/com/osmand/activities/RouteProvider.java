@@ -57,14 +57,14 @@ public class RouteProvider {
 		private int[] listDistance = null;
 		
 		public RouteCalculationResult(String errorMessage) {
-			this(null, null, errorMessage);
+			this(null, null, null, null, errorMessage);
 		}
-		public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, String errorMessage) {
+		public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, Location start, LatLon end, String errorMessage) {
 			this.directions = directions;
 			this.errorMessage = errorMessage;
 			this.locations = list;
 			if (list != null) {
-				prepareResult();
+				prepareResult(start, end);
 			}
 		}
 		
@@ -80,7 +80,41 @@ public class RouteProvider {
 			return listDistance;
 		}
 		
-		private void prepareResult() {
+		private void prepareResult(Location start, LatLon end) {
+
+			if (locations != null && !locations.isEmpty()) {
+				// if there is no closest points to start - add it
+				if (locations.get(0).distanceTo(start) > 200) {
+					// add start point
+					locations.add(0, start);
+				}
+				if (directions != null) {
+					for (RouteDirectionInfo i : directions) {
+						i.routePointOffset++;
+					}
+					RouteDirectionInfo info = new RouteDirectionInfo();
+					info.turnType = TurnType.valueOf(TurnType.C);
+					info.routePointOffset = 0;
+					info.descriptionRoute = "" ;//getString(ctx, R.string.route_head); //$NON-NLS-1$
+					directions.add(0, info);
+				}
+				// check points for duplicates (it is very bad for routing) - cloudmade could return it 
+				for (int i = 0; i < locations.size() - 1; ) {
+					if(locations.get(i).distanceTo(locations.get(i+1)) == 0){
+						locations.remove(i);
+						if (directions != null) {
+							for (RouteDirectionInfo info : directions) {
+								if(info.routePointOffset > i){
+									info.routePointOffset--;
+								}
+							}
+						}
+					} else {
+						i++;
+					}
+				}
+			}
+			
 			listDistance = new int[locations.size()];
 			if (!locations.isEmpty()) {
 				listDistance[locations.size() - 1] = 0;
@@ -121,11 +155,11 @@ public class RouteProvider {
 				RouteCalculationResult res;
 				if (type == RouteService.YOURS) {
 					res = findYOURSRoute(start, end, mode);
-					addMissingTurnsToRoute(res, mode, ctx);
+					addMissingTurnsToRoute(res, start, end, mode, ctx);
 				} else {
-					res = findCloudMadeRoute(start, end, mode);
+					res = findCloudMadeRoute(start, end, mode, ctx);
 					// for test purpose
-					addMissingTurnsToRoute(res, mode, ctx);
+					addMissingTurnsToRoute(res, start, end, mode, ctx);
 				}
 				if(log.isInfoEnabled() && res.locations != null){
 					log.info("Finding route contained " + res.locations.size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -149,7 +183,7 @@ public class RouteProvider {
 		return ctx.getString(resId);
 	}
 	
-	protected void addMissingTurnsToRoute(RouteCalculationResult res, ApplicationMode mode, Context ctx){
+	protected void addMissingTurnsToRoute(RouteCalculationResult res, Location start, LatLon end, ApplicationMode mode, Context ctx){
 		if(!res.isCalculated()){
 			return;
 		}
@@ -163,6 +197,8 @@ public class RouteProvider {
 			speed = 5.5f;
 			minDistanceForTurn = 12;
 		}
+		
+		// add start point if needed 
 		
 
 		List<RouteDirectionInfo> directions = new ArrayList<RouteDirectionInfo>();
@@ -386,11 +422,11 @@ public class RouteProvider {
 				
 			}
 		}
-		return new RouteCalculationResult(res, null, null);
+		return new RouteCalculationResult(res, null, start, end, null);
 	}
 	
 	
-	protected RouteCalculationResult findCloudMadeRoute(Location start, LatLon end, ApplicationMode mode) throws MalformedURLException, IOException,
+	protected RouteCalculationResult findCloudMadeRoute(Location start, LatLon end, ApplicationMode mode, Context ctx) throws MalformedURLException, IOException,
 	ParserConfigurationException, FactoryConfigurationError, SAXException {
 		List<Location> res = new ArrayList<Location>();
 		List<RouteDirectionInfo> directions = null;
@@ -506,8 +542,7 @@ public class RouteProvider {
 		}
 		
 		
-		
-		return new RouteCalculationResult(res, directions, null);
+		return new RouteCalculationResult(res, directions, start, end, null);
 	}
 	
 	private String getContentFromNode(Element item, String tagName){

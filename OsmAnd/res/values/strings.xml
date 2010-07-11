@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="stop_routing">Отменить маршрут</string>
 	<string name="sd_unmounted">SD card is not accessible. \nYou can\'t see map and find anything.</string>
 	<string name="sd_mounted_ro">SD card is read-only accessible. \nYou can see only preloaded map and can\'t download from internet.</string>
 	<string name="unzipping_file">File is unzipping</string>
