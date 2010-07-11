@@ -184,6 +184,7 @@ public class AnimateDraggingMapThread implements Runnable {
 	public void startMoving(double curLat, double curLon, double finalLat, double finalLon, int curZoom, int endZoom, int tileSize, boolean notifyListener){
 		stopAnimatingSync();
 		this.notifyListener = notifyListener;
+		curZ = curZoom;
 		intZ = curZoom;
 		moveX = (float) ((MapUtils.getTileNumberX(intZ, curLon) - MapUtils.getTileNumberX(intZ, finalLon)) * tileSize);
 		moveY = (float) ((MapUtils.getTileNumberY(intZ, curLat) - MapUtils.getTileNumberY(intZ, finalLat)) * tileSize);
@@ -204,6 +205,7 @@ public class AnimateDraggingMapThread implements Runnable {
 		} else {
 			dirZ = -1;
 		}
+		
 		endZ = endZoom;
 		
 		timeZInt = Math.abs(curZoom - intZ) * 300;

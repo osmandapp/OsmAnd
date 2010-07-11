@@ -315,7 +315,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	//////////////////////////////// DRAWING MAP PART /////////////////////////////////////////////
 	
 	protected void drawEmptyTile(Canvas cvs, float x, float y){
-		int tileDiv = (int) (getTileSize() / emptyTileDivisor);
+		float tileDiv = (getTileSize() / emptyTileDivisor);
 		for (int k1 = 0; k1 < emptyTileDivisor; k1++) {
 			for (int k2 = 0; k2 < emptyTileDivisor; k2++) {
 				float xk = x + tileDiv* k1 ;

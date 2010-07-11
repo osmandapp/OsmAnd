@@ -26,7 +26,7 @@ public class PoiFilter {
 	
 	private final static int finalZoom = 6;
 	private final static int initialZoom = 13;
-	private final static int maxCount = 200;
+	private final static int maxInitialCount = 200;
 	private int zoom = initialZoom;
 	
 	
@@ -85,12 +85,21 @@ public class PoiFilter {
 		}
 	}
 	
-	public List<Amenity> initializeNewSearch(double lat, double lon, int firstTimeLimit){
-		zoom = initialZoom;
+	public void clearPreviousZoom(){
+		zoom = getInitialZoom();
+	}
+	
+	private int getInitialZoom(){
+		int zoom = initialZoom;
 		if(areAllTypesAccepted()){
 			zoom += 1;
 		}
-		List<Amenity> amenityList = ResourceManager.getResourceManager().searchAmenities(this, lat, lon, zoom, maxCount);
+		return zoom; 
+	}
+	
+	public List<Amenity> initializeNewSearch(double lat, double lon, int firstTimeLimit){
+		zoom = getInitialZoom();
+		List<Amenity> amenityList = ResourceManager.getResourceManager().searchAmenities(this, lat, lon, zoom, maxInitialCount);
 		MapUtils.sortListOfMapObject(amenityList, lat, lon);
 		while (amenityList.size() > firstTimeLimit) {
 			amenityList.remove(amenityList.size() - 1);
@@ -100,7 +109,11 @@ public class PoiFilter {
 	}
 	
 	public List<Amenity> searchAgain(double lat, double lon){
-		List<Amenity> amenityList = ResourceManager.getResourceManager().searchAmenities(this, lat, lon, zoom, maxCount);
+		int limit = -1;
+		if(zoom == getInitialZoom()){
+			limit = maxInitialCount;
+		}
+		List<Amenity> amenityList = ResourceManager.getResourceManager().searchAmenities(this, lat, lon, zoom, limit);
 		MapUtils.sortListOfMapObject(amenityList, lat, lon);
 		return amenityList;
 	}

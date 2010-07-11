@@ -108,11 +108,12 @@ public class DownloadIndexActivity extends ListActivity {
 		final File fileToSave = resolveFileName(e.getKey(), regionName);
 		if (fileToSave != null) {
 			Builder builder = new AlertDialog.Builder(this);
-			if(!fileToSave.exists()){
+			File toCheck = new File(fileToSave.getParent(), fileToSave.getName().substring(fileToSave.getName().length() - 4) +".odb"); //$NON-NLS-1$
+			if(!toCheck.exists()){
 				builder.setMessage(MessageFormat.format(getString(R.string.download_question), regionName, e.getValue()));
 			} else {
 				MessageFormat format = new MessageFormat("{0,date,dd.MM.yyyy} : {1, number,##.#} MB", Locale.US); //$NON-NLS-1$
-				String description = format.format(new Object[]{new Date(fileToSave.lastModified()), ((float)fileToSave.length() / MB)});
+				String description = format.format(new Object[]{new Date(toCheck.lastModified()), ((float)toCheck.length() / MB)});
 				builder.setMessage(MessageFormat.format(getString(R.string.download_question_exist), regionName, description, e.getValue()));
 				
 			}
