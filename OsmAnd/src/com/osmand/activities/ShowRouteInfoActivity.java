@@ -35,6 +35,7 @@ import com.osmand.activities.RoutingHelper.TurnType;
 import com.osmand.osm.MapUtils;
 import com.osmand.views.MapInfoLayer;
 import com.osmand.voice.CommandPlayer;
+import com.osmand.voice.CommandPlayer.CommandBuilder;
 
 /**
  * 
@@ -65,8 +66,26 @@ public class ShowRouteInfoActivity extends ListActivity {
 		Location loc = inst.getLocationFromRouteDirection(item);
 		CommandPlayer player = CommandPlayer.getInstance(this);
 		if(player != null){
-			// TODO temp solution
-			player.newCommandBuilder().prepareTurnLeft(300).play();
+			// TODO temp solution roundabout
+			CommandBuilder builder = player.newCommandBuilder();
+			if(item.turnType.getValue() == TurnType.C){
+				builder.goAhead(item.distance);
+			} else if(item.turnType.getValue() == TurnType.TU){
+				builder.makeUT(item.distance);
+			} else if(item.turnType.getValue() == TurnType.TL){
+				builder.turnLeft(item.distance);
+			} else if(item.turnType.getValue() == TurnType.TSLL) { 
+				builder.turnSLLeft(item.distance);
+			} else if(item.turnType.getValue() == TurnType.TSHL) { 
+				builder.turnSHLeft(item.distance);
+			} else if(item.turnType.getValue() == TurnType.TR){
+				builder.turnRight(item.distance);
+			} else if(item.turnType.getValue() == TurnType.TSLR) { 
+				builder.turnSLRight(item.distance);
+			} else if(item.turnType.getValue() == TurnType.TSHR) { 
+				builder.turnSHRight(item.distance);
+			}
+			builder.play();
 		}
 		if(loc != null){
 			OsmandSettings.setMapLocationToShow(this, loc.getLatitude(),loc.getLongitude());
