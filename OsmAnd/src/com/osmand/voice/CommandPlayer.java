@@ -155,82 +155,6 @@ public class CommandPlayer {
 		return new CommandBuilder();
 	}
 	
-	protected static final String P_VERSION = "version";  //$NON-NLS-1$
-	protected static final String P_RESOLVE = "resolve";  //$NON-NLS-1$
-	
-	protected static final String С_PREPARE_TURN_LEFT = "prepare_turn_left";  //$NON-NLS-1$
-	protected static final String С_PREPARE_TURN_RIGHT = "prepare_turn_right";  //$NON-NLS-1$
-	protected static final String С_PREAMBLE = "preamble";  //$NON-NLS-1$
-	
-	protected static final String DELAY_CONST = "delay_"; //$NON-NLS-1$
-	
-	public class CommandBuilder {
-		
-		
-		private boolean alreadyExecuted = false;
-		private List<Struct> listStruct = new ArrayList<Struct>();
-		
-		public CommandBuilder(){
-			this(true);
-		}
-		
-		public CommandBuilder(boolean preamble) {
-			if (preamble) {
-				addCommand(С_PREAMBLE);
-			}
-		}
-		
-		private void checkState(){
-			if(alreadyExecuted){
-				throw new IllegalArgumentException();
-			}
-		}
-		
-		private CommandBuilder addCommand(String name, Object... args){
-			checkState();
-			Term[] list = new Term[args.length];
-			for (int i = 0; i < args.length; i++) {
-				Object o = args[i];
-				if(o instanceof java.lang.Number){
-					if(o instanceof java.lang.Double){
-						list[i] = new alice.tuprolog.Double((Double) o);
-					} else if(o instanceof java.lang.Float){
-						list[i] = new alice.tuprolog.Float((Float) o);
-					} else if(o instanceof java.lang.Long){
-						list[i] = new alice.tuprolog.Long((Long) o);
-					} else {
-						list[i] = new alice.tuprolog.Int(((java.lang.Number)o).intValue());
-					}
-				} else if(o instanceof String){
-					list[i] = new Struct((String) o);
-				}
-				if(list[i]== null){
-					throw new NullPointerException(name +" " + o); //$NON-NLS-1$
-				}
-			}
-			Struct struct = new Struct(name, list);
-			listStruct.add(struct);
-			return this;
-		}
-		
-		public CommandBuilder prepareTurnLeft(double dist){
-			return addCommand(С_PREPARE_TURN_LEFT, dist);
-		}
-		
-		public CommandBuilder prepareTurnRight(double dist){
-			return addCommand(С_PREPARE_TURN_LEFT, dist);
-		}
-		
-		public void play(){
-			CommandPlayer.this.playCommands(this);
-		}
-		
-		protected List<String> execute(){
-			alreadyExecuted = true;
-			return CommandPlayer.this.execute(listStruct);
-		}
-		
-	}
 	
 	protected List<String> execute(List<Struct> listCmd){
 		Struct list = new Struct(listCmd.toArray(new Term[listCmd.size()]));
@@ -305,6 +229,184 @@ public class CommandPlayer {
 			}
 		}
 	}
+	
+	
+	
+	protected static final String P_VERSION = "version";  //$NON-NLS-1$
+	protected static final String P_RESOLVE = "resolve";  //$NON-NLS-1$
+	
+	protected static final String A_LEFT = "left"; //$NON-NLS-1$
+	protected static final String A_LEFT_SH = "left_sh"; //$NON-NLS-1$
+	protected static final String A_LEFT_SL = "left_sl"; //$NON-NLS-1$
+	protected static final String A_RIGHT = "right"; //$NON-NLS-1$
+	protected static final String A_RIGHT_SH = "right_sh"; //$NON-NLS-1$
+	protected static final String A_RIGHT_SL = "right_sl"; //$NON-NLS-1$
+	
+	protected static final String С_PREPARE_TURN = "prepare_turn";  //$NON-NLS-1$
+	protected static final String С_PREPARE_MAKE_UT = "prepare_make_ut";  //$NON-NLS-1$
+	protected static final String С_GO_AHEAD = "go_ahead";  //$NON-NLS-1$
+	protected static final String С_TURN = "turn";  //$NON-NLS-1$
+	protected static final String С_MAKE_UT = "make_ut";  //$NON-NLS-1$
+	protected static final String С_PREAMBLE = "preamble";  //$NON-NLS-1$
+	
+	protected static final String DELAY_CONST = "delay_"; //$NON-NLS-1$
+	
+	public class CommandBuilder {
+		
+		
+		private boolean alreadyExecuted = false;
+		private List<Struct> listStruct = new ArrayList<Struct>();
+		
+		public CommandBuilder(){
+			this(true);
+		}
+		
+		public CommandBuilder(boolean preamble) {
+			if (preamble) {
+				addCommand(С_PREAMBLE);
+			}
+		}
+		
+		private void checkState(){
+			if(alreadyExecuted){
+				throw new IllegalArgumentException();
+			}
+		}
+		
+		private CommandBuilder addCommand(String name, Object... args){
+			checkState();
+			Term[] list = new Term[args.length];
+			for (int i = 0; i < args.length; i++) {
+				Object o = args[i];
+				if(o instanceof java.lang.Number){
+					if(o instanceof java.lang.Double){
+						list[i] = new alice.tuprolog.Double((Double) o);
+					} else if(o instanceof java.lang.Float){
+						list[i] = new alice.tuprolog.Float((Float) o);
+					} else if(o instanceof java.lang.Long){
+						list[i] = new alice.tuprolog.Long((Long) o);
+					} else {
+						list[i] = new alice.tuprolog.Int(((java.lang.Number)o).intValue());
+					}
+				} else if(o instanceof String){
+					list[i] = new Struct((String) o);
+				}
+				if(list[i]== null){
+					throw new NullPointerException(name +" " + o); //$NON-NLS-1$
+				}
+			}
+			Struct struct = new Struct(name, list);
+			listStruct.add(struct);
+			return this;
+		}
+		
+		
+		public CommandBuilder goAhead(){
+			return addCommand(С_GO_AHEAD);
+		}
+		
+		public CommandBuilder goAhead(double dist){
+			return addCommand(С_GO_AHEAD, dist);
+		}
+		
+		public CommandBuilder makeUT(){
+			return addCommand(С_MAKE_UT);
+		}
+		
+		public CommandBuilder makeUT(double dist){
+			return addCommand(С_MAKE_UT, dist);
+		}
+		
+		public CommandBuilder prepareMakeUT(double dist){
+			return addCommand(С_PREPARE_MAKE_UT, dist);
+		}
+		
+		
+		public CommandBuilder turnLeft(){
+			return addCommand(С_TURN, A_LEFT);
+		}
+		
+		public CommandBuilder turnSLLeft(){
+			return addCommand(С_TURN, A_LEFT_SL);
+		}
+		
+		public CommandBuilder turnSHLeft(){
+			return addCommand(С_TURN, A_LEFT_SH);
+		}
+		
+		public CommandBuilder turnRight(){
+			return addCommand(С_TURN, A_RIGHT);
+		}
+		
+		public CommandBuilder turnSLRight(){
+			return addCommand(С_TURN, A_RIGHT_SL);
+		}
+		
+		public CommandBuilder turnSHRight(){
+			return addCommand(С_TURN, A_RIGHT_SL);
+		}
+		
+		
+		public CommandBuilder turnLeft(double dist){
+			return addCommand(С_TURN, A_LEFT, dist);
+		}
+		
+		public CommandBuilder turnSLLeft(double dist){
+			return addCommand(С_TURN, A_LEFT_SL, dist);
+		}
+		
+		public CommandBuilder turnSHLeft(double dist){
+			return addCommand(С_TURN, A_LEFT_SH, dist);
+		}
+		
+		public CommandBuilder turnRight(double dist){
+			return addCommand(С_TURN, A_RIGHT, dist);
+		}
+
+		public CommandBuilder turnSLRight(double dist){
+			return addCommand(С_TURN, A_RIGHT_SL, dist);
+		}
+		
+		public CommandBuilder turnSHRight(double dist){
+			return addCommand(С_TURN, A_RIGHT_SL, dist);
+		}
+		
+		public CommandBuilder prepareTurnLeft(double dist){
+			return addCommand(С_PREPARE_TURN, A_LEFT, dist);
+		}
+		
+		public CommandBuilder prepareTurnSLLeft(double dist){
+			return addCommand(С_PREPARE_TURN, A_LEFT_SL, dist);
+		}
+		public CommandBuilder prepareTurnSHLeft(double dist){
+			return addCommand(С_PREPARE_TURN, A_LEFT_SH, dist);
+		}
+		
+		public CommandBuilder prepareTurnRight(double dist){
+			return addCommand(С_PREPARE_TURN, A_RIGHT, dist);
+		}
+		
+		public CommandBuilder prepareTurnSLRight(double dist){
+			return addCommand(С_PREPARE_TURN, A_RIGHT_SL, dist);
+		}
+		
+		public CommandBuilder prepareTurnSHRight(double dist){
+			return addCommand(С_PREPARE_TURN, A_RIGHT_SH, dist);
+		}
+	
+		
+		
+		public void play(){
+			CommandPlayer.this.playCommands(this);
+		}
+		
+		protected List<String> execute(){
+			alreadyExecuted = true;
+			return CommandPlayer.this.execute(listStruct);
+		}
+		
+	}
+	
 	
 }	
 	
