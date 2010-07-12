@@ -1,6 +1,9 @@
 package com.osmand.activities;
 
+import java.io.File;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -9,6 +12,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
+import android.os.Environment;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -29,6 +33,7 @@ import com.osmand.OsmandSettings.ApplicationMode;
 import com.osmand.activities.RouteProvider.RouteService;
 import com.osmand.map.TileSourceManager;
 import com.osmand.map.TileSourceManager.TileSourceTemplate;
+import com.osmand.voice.CommandPlayer;
 
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
 	
@@ -72,7 +77,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private ListPreference routerPreference;
 	private ListPreference maxLevelToDownload;
 	private ListPreference mapScreenOrientation;
-	
+	private ListPreference voicePreference;
 
 	
 	private BooleanPreference[] booleanPreferences = new BooleanPreference[]{
@@ -86,6 +91,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			new BooleanPreference(OsmandSettings.SHOW_TRANSPORT_OVER_MAP, OsmandSettings.SHOW_TRANSPORT_OVER_MAP_DEF),
 			new BooleanPreference(OsmandSettings.SAVE_TRACK_TO_GPX, OsmandSettings.SAVE_TRACK_TO_GPX_DEF),
 	};
+	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -127,6 +133,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		tileSourcePreference.setOnPreferenceChangeListener(this);
 		routerPreference =(ListPreference) screen.findPreference(OsmandSettings.ROUTER_SERVICE);
 		routerPreference.setOnPreferenceChangeListener(this);
+		voicePreference =(ListPreference) screen.findPreference(OsmandSettings.VOICE_PROVIDER);
+		voicePreference.setOnPreferenceChangeListener(this);
 		
     }
     
@@ -194,6 +202,31 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		routerPreference.setEntries(entries);
 		routerPreference.setEntryValues(entries);
 		routerPreference.setValue(entry);
+
+		// read available voice data
+		File extStorage = new File(Environment.getExternalStorageDirectory(), CommandPlayer.VOICE_DIR);
+		Set<String> setFiles = new LinkedHashSet<String>();
+		if (extStorage.exists()) {
+			for (File f : extStorage.listFiles()) {
+				if (f.isDirectory()) {
+					setFiles.add(f.getName());
+				}
+			}
+		}
+		String provider = OsmandSettings.getVoiceProvider(this);
+		entries = new String[setFiles.size() + 1];
+		int k = 0; 
+		entries[k++] = getString(R.string.voice_not_use);
+		for(String s : setFiles){
+			entries[k++] = s;
+		}
+		voicePreference.setEntries(entries);
+		voicePreference.setEntryValues(entries);
+		if(setFiles.contains(provider)){
+			voicePreference.setValue(provider);
+		} else {
+			voicePreference.setValueIndex(0);
+		}
 		
 		int startZoom = 12;
 		int endZoom = 19;
@@ -280,6 +313,15 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				edit.putInt(OsmandSettings.ROUTER_SERVICE, s.ordinal());
 			}
 			edit.commit();
+		} else if (preference == voicePreference) {
+			int i = voicePreference.findIndexOfValue((String) newValue);
+			if(i==0){
+				edit.putString(OsmandSettings.VOICE_PROVIDER, null);
+			} else {
+				edit.putString(OsmandSettings.VOICE_PROVIDER, (String) newValue);
+			}
+			edit.commit();
+			CommandPlayer.init(this);
 		} else if (preference == tileSourcePreference) {
 			edit.putString(OsmandSettings.MAP_TILE_SOURCES, (String) newValue);
 			edit.commit();

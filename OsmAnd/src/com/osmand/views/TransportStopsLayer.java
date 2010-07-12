@@ -44,6 +44,7 @@ public class TransportStopsLayer implements OsmandMapLayer {
 	}
 	
 	public TransportStop getFromPoint(PointF point){
+		TransportStop result = null;
 		if (objects != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
@@ -54,14 +55,15 @@ public class TransportStopsLayer implements OsmandMapLayer {
 					int x = view.getRotatedMapXForPoint(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 					int y = view.getRotatedMapYForPoint(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
-						return n;
+						radius = Math.max(Math.abs(x - ex), Math.abs(y - ey));
+						result = n;
 					}
 				}
 			} catch (IndexOutOfBoundsException e) {
 				// that's really rare case, but is much efficient than introduce synchronized block
 			}
 		}
-		return null;
+		return result;
 	}
 	
 

@@ -32,6 +32,7 @@ import com.osmand.ProgressDialogImplementation;
 import com.osmand.R;
 import com.osmand.ResourceManager;
 import com.osmand.activities.search.SearchActivity;
+import com.osmand.voice.CommandPlayer;
 
 public class MainMenuActivity extends Activity {
 
@@ -57,7 +58,14 @@ public class MainMenuActivity extends Activity {
 				@Override
 				public void run() {
 					try {
+						// initializing voice prolog subsystem
+						
 						List<String> warnings = ResourceManager.getResourceManager().reloadIndexes(impl);
+						impl.startTask(getString(R.string.voice_data_initializing), -1);
+						String w = CommandPlayer.init(MainMenuActivity.this);
+						if(w != null){
+							warnings.add(w);
+						}
 						SavingTrackHelper helper = new SavingTrackHelper(MainMenuActivity.this);
 						if (helper.hasDataToSave()) {
 							impl.startTask(getString(R.string.saving_gpx_tracks), -1);
@@ -100,9 +108,6 @@ public class MainMenuActivity extends Activity {
 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.menu);
-		
-		
-
 
 		showMap = (Button) findViewById(R.id.MapButton);
 		showMap.setOnClickListener(new OnClickListener() {
@@ -110,7 +115,6 @@ public class MainMenuActivity extends Activity {
 			public void onClick(View v) {
 				final Intent mapIndent = new Intent(MainMenuActivity.this, MapActivity.class);
 				startActivityForResult(mapIndent, 0);
-
 			}
 		});
 		settingsButton = (Button) findViewById(R.id.SettingsButton);

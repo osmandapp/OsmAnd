@@ -22,6 +22,7 @@
 <Preference android:title="@string/reload_indexes" android:key="reload_indexes" android:summary="@string/reload_indexes_descr"></Preference>
 <Preference android:title="@string/download_indexes" android:key="download_indexes" android:summary="@string/download_indexes_descr"></Preference>
 <ListPreference android:title="@string/router_service" android:key="router_service" android:summary="@string/router_service_descr"></ListPreference>
+<ListPreference android:title="@string/voice_provider" android:key="voice_provider" android:summary="@string/voice_provider_descr"></ListPreference>
 </PreferenceScreen>
 
 <PreferenceScreen android:title="@string/monitor_preferences" android:summary="@string/monitor_preferences_descr">

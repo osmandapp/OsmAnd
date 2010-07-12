@@ -34,6 +34,7 @@ import com.osmand.activities.RoutingHelper.RouteDirectionInfo;
 import com.osmand.activities.RoutingHelper.TurnType;
 import com.osmand.osm.MapUtils;
 import com.osmand.views.MapInfoLayer;
+import com.osmand.voice.CommandPlayer;
 
 /**
  * 
@@ -62,6 +63,11 @@ public class ShowRouteInfoActivity extends ListActivity {
 		RouteDirectionInfo item = ((RouteInfoAdapter)getListAdapter()).getItem(position - 1);
 		RoutingHelper inst = RoutingHelper.getInstance(this);
 		Location loc = inst.getLocationFromRouteDirection(item);
+		CommandPlayer player = CommandPlayer.getInstance(this);
+		if(player != null){
+			// TODO temp solution
+			player.newCommandBuilder().prepareTurnLeft(300).play();
+		}
 		if(loc != null){
 			OsmandSettings.setMapLocationToShow(this, loc.getLatitude(),loc.getLongitude());
 			startActivity(new Intent(this, MapActivity.class));

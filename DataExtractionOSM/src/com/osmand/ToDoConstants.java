@@ -20,9 +20,11 @@ public class ToDoConstants {
 	//   68. Implement service to app work with screen offline 
 	//		 (introduce special settings how often update location to monitoring & audio guidance)
 	//   Improvement : Show stops in the transport route on the map
+	//   Improvement : redesign poi selecting (show on map )
+	//   69. Add phone information to POI
 	
 	// Not clear if it is really needed 
-    //   43. Enable poi filter by name
+    //   43. Enable poi filter by name (find lake by name or shop) - case sensitive search DB!
 	//   45. Get clear <Use internet> settings. Move that setting on top settings screen. 
 	//       That setting should rule all activities that use internet. It should ask whenever internet is used 
 	//		(would you like to use internet for that operation - if using internet is not checked). 
@@ -31,7 +33,7 @@ public class ToDoConstants {
 	// Unscheduled (complex)
 	//   66. Transport routing (show next stop, total distance, show stop get out) (?).
 	//   64. Traffic information (?)
-	//   65. Intermediate points - for better control routing, to avoid traffic jam ...(?)
+	//   65. Intermediate points - for better control routing, to avoid traffic jams ...(?)
 	//   40. Support simple vector road rendering (require new index file) (?)
 	//   63. Support simple offline routing(require new index file) (?)
 

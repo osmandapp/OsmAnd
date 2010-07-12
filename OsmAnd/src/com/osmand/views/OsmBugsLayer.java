@@ -190,60 +190,59 @@ public class OsmBugsLayer implements OsmandMapLayer {
 	
 	@Override
 	public boolean onLongPressEvent(PointF point) {
-		if (objects != null && !objects.isEmpty()) {
+		final OpenStreetBug bug = getBugFromPoint(point);
+		if(bug != null){
+			Builder builder = new AlertDialog.Builder(view.getContext());
+			Resources resources = view.getContext().getResources();
+	    	builder.setItems(new String[]{
+	    			resources.getString(R.string.osb_comment_menu_item),
+	    			resources.getString(R.string.osb_close_menu_item)
+	    		}, new DialogInterface.OnClickListener(){
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					if(which == 0){
+						commentBug(view.getContext(), activity.getLayoutInflater(), bug);
+					} else if(which == 1){
+						closeBug(view.getContext(), activity.getLayoutInflater(), bug);
+					}
+				}
+	    	});
+			builder.create().show();
+			return true;
+		}
+		return false;
+	}
+	
+	public OpenStreetBug getBugFromPoint(PointF point){
+		OpenStreetBug result = null;
+		if (objects != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
 			int radius = getRadiusBug(view.getZoom()) * 3 / 2;
 			try {
-				for (final OpenStreetBug n : objects) {
+				for (int i = 0; i < objects.size(); i++) {
+					OpenStreetBug n = objects.get(i);
 					int x = view.getRotatedMapXForPoint(n.getLatitude(), n.getLongitude());
 					int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
 					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
-						Builder builder = new AlertDialog.Builder(view.getContext());
-						Resources resources = view.getContext().getResources();
-				    	builder.setItems(new String[]{
-				    			resources.getString(R.string.osb_comment_menu_item),
-				    			resources.getString(R.string.osb_close_menu_item)
-				    		}, new DialogInterface.OnClickListener(){
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								if(which == 0){
-									commentBug(view.getContext(), activity.getLayoutInflater(), n);
-								} else if(which == 1){
-									closeBug(view.getContext(), activity.getLayoutInflater(), n);
-								}
-							}
-				    	});
-						builder.create().show();
-						return true;
+						radius = Math.max(Math.abs(x - ex), Math.abs(y - ey));
+						result = n;
 					}
 				}
 			} catch (IndexOutOfBoundsException e) {
 				// that's really rare case, but is much efficient than introduce synchronized block
 			}
 		}
-		return false;
+		return result;
 	}
 
 	@Override
 	public boolean onTouchEvent(PointF point) {
-		if (objects != null && !objects.isEmpty()) {
-			int ex = (int) point.x;
-			int ey = (int) point.y;
-			int radius = getRadiusBug(view.getZoom()) * 3 / 2;
-			try {
-				for (OpenStreetBug n : objects) {
-					int x = view.getRotatedMapXForPoint(n.getLatitude(), n.getLongitude());
-					int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
-					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
-						String format = "Bug : " + n.getName(); //$NON-NLS-1$
-						Toast.makeText(view.getContext(), format, Toast.LENGTH_LONG).show();
-						return true;
-					}
-				}
-			} catch (IndexOutOfBoundsException e) {
-				// that's really rare case, but is much efficient than introduce synchronized block
-			}
+		OpenStreetBug bug = getBugFromPoint(point);
+		if(bug != null){
+			String format = "Bug : " + bug.getName(); //$NON-NLS-1$
+			Toast.makeText(view.getContext(), format, Toast.LENGTH_LONG).show();
+			return true;
 		}
 		return false;
 	}
