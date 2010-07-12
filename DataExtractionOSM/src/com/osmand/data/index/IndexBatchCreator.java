@@ -26,7 +26,7 @@ import com.osmand.impl.ConsoleProgressImplementation;
 public class IndexBatchCreator {
 	// config params
 	private static final boolean indexPOI = true;
-	private static final boolean indexAddress = true;
+	private static final boolean indexAddress = false;
 	private static final boolean indexTransport = true;
 	private static final boolean writeWayNodes = true;
 	
@@ -52,30 +52,27 @@ public class IndexBatchCreator {
 //		 "czech_republic", "netherlands", // 168, 375,
 //		 "great_britain",  "italy", // 281, 246, 
 		// ADD TO TOTAL : 2449 MB
-		// TODO transport, poi : "czech_republic", "netherlands", "great_britain",  "italy" 
-		//      address : "great_britain",  "italy" - out of memory
+		// TODO "great_britain",  "italy" (address out of memory, poi, transport) + netherlands
 
 	};
 
-	// TODO all
 	protected static final String[] franceProvinces = new String[] {
-		"alsace","aquitaine", "auvergne", "basse-normandie", "bourgogne", "bretagne", "centre",
-		"champagne-ardenne", "corse", "franche-comte", "haute-normandie", "ile-de-france",
-		"languedoc-roussillon", "limousin", "lorraine", "midi-pyrenees", "nord-pas-de-calais",
-		"pays-de-la-loire", "picardie","poitou-charentes", "provence-alpes-cote-d-azur", "rhone-alpes"
+//		"alsace","aquitaine", "auvergne", "basse-normandie", "bourgogne", "bretagne", "centre",
+//		"champagne-ardenne", "corse", "franche-comte", "haute-normandie", "ile-de-france",
+//		"languedoc-roussillon", "limousin", "lorraine", "midi-pyrenees", "nord-pas-de-calais",
+//		"pays-de-la-loire", "picardie","poitou-charentes", "provence-alpes-cote-d-azur", "rhone-alpes"
 	};
 	
-	// TODO all
 	protected static final String[] germanyLands = new String[] {
-		"baden-wuerttemberg","bayern", "berlin", "brandenburg", "bremen", "hamburg", "hessen",
-		"mecklenburg-vorpommern", "niedersachsen", "nordrhein-westfalen", "rheinland-pfalz", "saarland",
-		"sachsen-anhalt", "sachsen", "schleswig-holstein", "thueringen",
+//		"baden-wuerttemberg","bayern", "berlin", "brandenburg", "bremen", "hamburg", "hessen",
+//		"mecklenburg-vorpommern", "niedersachsen", "nordrhein-westfalen", "rheinland-pfalz", "saarland",
+//		"sachsen-anhalt", "sachsen", "schleswig-holstein", "thueringen",
 	};
 
 	
 	protected static final String SITE_TO_DOWNLOAD2 = "http://downloads.cloudmade.com/"; //$NON-NLS-1$
 	// us states
-	// TODO address
+	// Address (out of memory) : California ? , Florida ?, Georgia ?
 	protected static final String[] usStates = new String[] {
 //		"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", 
 //		"Delaware",	"District_of_Columbia", "Florida", "Georgia", "Guantanamo_Bay",	"Hawaii",
@@ -255,7 +252,7 @@ public class IndexBatchCreator {
 					uploadIndex(new File(indexDirFiles, fName), alreadyUploadedFiles);
 				}
 			} catch (Exception e) {
-				log.error("Exception generating indexes for " + f.getName()); //$NON-NLS-1$ 
+				log.error("Exception generating indexes for " + f.getName(), e); //$NON-NLS-1$ 
 			}
 		} catch (OutOfMemoryError e) {
 			System.gc();
@@ -323,7 +320,7 @@ public class IndexBatchCreator {
 				is.close();
 				zout.close();
 			} catch (IOException e) {
-				log.error("Exception while zipping file");
+				log.error("Exception while zipping file", e);
 			}
 			if(f.delete()){
 				log.info("Source odb file was deleted");

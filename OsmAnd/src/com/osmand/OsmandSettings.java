@@ -495,4 +495,28 @@ public class OsmandSettings {
 		}
 		return new PoiFilter(null);
 	}
+	
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String VOICE_PROVIDER = "voice_provider"; //$NON-NLS-1$
+	
+	public static String getVoiceProvider(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getString(VOICE_PROVIDER, null);
+	}
+	
+	public static final String VOICE_MUTE = "voice_mute"; //$NON-NLS-1$
+	public static final boolean VOICE_MUTE_DEF = false;
+	
+	public static boolean isVoiceMute(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(VOICE_MUTE, VOICE_MUTE_DEF);
+	}
+	
+	public static boolean setVoiceMute(Context ctx, boolean mute){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putBoolean(VOICE_MUTE, mute).commit();
+	}
+	
+	
 }

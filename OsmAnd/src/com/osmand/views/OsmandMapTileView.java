@@ -694,7 +694,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	@Override
 	public boolean onDown(MotionEvent e) {
-		animatedDraggingThread.stopAnimating();
+		// enable double tap animation	
+//		animatedDraggingThread.stopAnimating();
 		return false;
 	}
 	
@@ -792,8 +793,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	@Override
 	public boolean onDoubleTap(MotionEvent e) {
 		LatLon l = getLatLonFromScreenPoint(e.getX(), e.getY());
-		setLatLon(l.getLatitude(), l.getLongitude());
-		setZoom(zoom + 1);
+		getAnimatedDraggingThread().startMoving(getLatitude(), getLongitude(), 
+				l.getLatitude(), l.getLongitude(), getZoom(), getZoom() + 1, getSourceTileSize(), getRotate(), true);
 		return true;
 	}
 
