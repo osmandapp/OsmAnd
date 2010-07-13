@@ -21,6 +21,8 @@ public class ToDoConstants {
 	//		 (introduce special settings how often update location to monitoring & audio guidance)
 	//   Improvement : Show stops in the transport route on the map
 	//   Improvement : redesign poi selecting (show on map )
+	///  Better : improve zooming (better zoom out)
+	//   BUG with search area for poi/transport bounds region
 	//   69. Add phone information to POI
 	
 	// Not clear if it is really needed 

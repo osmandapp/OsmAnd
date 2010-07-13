@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import org.apache.commons.logging.Log;
 
 import android.content.Context;
+import android.graphics.PointF;
 import android.util.FloatMath;
 import android.view.MotionEvent;
 
@@ -21,7 +22,7 @@ public class MultiTouchSupport {
 
     public interface MultiTouchZoomListener {
     	
-    	public void onZoomStarted(float distance);
+    	public void onZoomStarted(float distance, PointF centerPoint);
     	
     	public void onZooming(float distance, float relativeToStart);
     	
@@ -70,6 +71,7 @@ public class MultiTouchSupport {
     private boolean inZoomMode = false;
     private float zoomStartedDistance = 100;
     private float previousZoom = 1;
+    private PointF centerPoint = new PointF();
     
     public boolean onTouchEvent(MotionEvent event){
     	if(!isMultiTouchSupported()){
@@ -91,7 +93,8 @@ public class MultiTouchSupport {
 			float distance = FloatMath.sqrt((x2 - x1)*(x2 -x1) + (y2-y1)*(y2-y1));
 			previousZoom = distance / zoomStartedDistance;
 			if (actionCode == ACTION_POINTER_DOWN) {
-				listener.onZoomStarted(distance);
+				centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
+				listener.onZoomStarted(distance, centerPoint);
 				zoomStartedDistance = distance;
 				inZoomMode = true;
 				return true;

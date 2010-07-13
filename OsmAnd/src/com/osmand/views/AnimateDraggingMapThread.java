@@ -213,14 +213,15 @@ public class AnimateDraggingMapThread implements Runnable {
 		
 		endZ = endZoom;
 		
-		timeZInt = Math.abs(curZoom - intZ) * 300;
-		if (timeZInt > 1200) {
-			timeZInt = 1200;
-		}
+//		timeZInt = Math.abs(curZoom - intZ) * 300;
+//		if (timeZInt > 900) {
+//			
+//		}
+		timeZInt = 600;
 		timeZEnd = 500;
 		timeMove = (int) (Math.abs(moveX) + Math.abs(moveY) * 4);
-		if(timeMove > 2000){
-			timeMove = 2000;
+		if(timeMove > 2200){
+			timeMove = 2200;
 		}
 		animateDrag = false;
 		phaseOfMoving = (byte) (intZ == curZoom ? 1 : 0);

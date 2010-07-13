@@ -97,6 +97,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private AnimateDraggingMapThread animatedDraggingThread;
 	
 	private float initialMultiTouchZoom;
+	private PointF initialMultiTouchCenterPoint;
+	private LatLon initialMultiTouchLocation;
 	
 	private GestureDetector gestureDetector;
 	
@@ -701,22 +703,31 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	@Override
 	public void onZoomEnded(float distance, float relativeToStart) {
-		float dz = (float) (Math.log(relativeToStart) / Math.log(2) * 1.5);
-		initialMultiTouchZoom = (float) Math.round(initialMultiTouchZoom + dz);
-		setZoom(initialMultiTouchZoom);
+		onZooming(distance, relativeToStart);
 	}
 	
 	 
 	@Override
-	public void onZoomStarted(float distance) {
+	public void onZoomStarted(float distance, PointF centerPoint) {
+		initialMultiTouchCenterPoint = centerPoint;
+		initialMultiTouchLocation = getLatLonFromScreenPoint(centerPoint.x, centerPoint.y);
 		initialMultiTouchZoom = zoom;
 	}
 	
 	@Override
 	public void onZooming(float distance, float relativeToStart) {
 		float dz = (float) (Math.log(relativeToStart) / Math.log(2) * 1.5);
+		float dtx = calcDiffTileX(getCenterPointX() - initialMultiTouchCenterPoint.x, getCenterPointY() - initialMultiTouchCenterPoint.y);
+		float dty = calcDiffTileY(getCenterPointX() - initialMultiTouchCenterPoint.x, getCenterPointY() - initialMultiTouchCenterPoint.y);
+		double tx = MapUtils.getTileNumberX(getFloatZoom(), initialMultiTouchLocation.getLongitude());
+		double ty = MapUtils.getTileNumberY(getFloatZoom(), initialMultiTouchLocation.getLatitude());
+		double lat = MapUtils.getLatitudeFromTile(getFloatZoom(), ty + dty);
+		double lon = MapUtils.getLongitudeFromTile(getFloatZoom(), tx + dtx);
+		
+		
 		if(Math.abs(initialMultiTouchZoom + dz - zoom) > 0.05){
 			setZoom(initialMultiTouchZoom + dz);
+			setLatLon(lat, lon);
 		}
 	}
 
