@@ -21,6 +21,7 @@ import com.osmand.LogUtil;
 import com.osmand.OsmandSettings;
 import com.osmand.R;
 import com.osmand.osm.LatLon;
+import com.osmand.views.OsmandMapTileView;
 
 public class NavigatePointActivity extends Activity {
 	Dialog dlg;
@@ -128,7 +129,9 @@ public class NavigatePointActivity extends Activity {
 			} else {
 				// in case when it is dialog
 				if(activity != null) {
-					activity.setMapLocation(lat, lon);
+					OsmandMapTileView v = activity.getMapView();
+					activity.getMapView().getAnimatedDraggingThread().startMoving(v.getLatitude(), v.getLongitude(),
+							lat, lon, v.getZoom(), v.getZoom(), v.getSourceTileSize(), v.getRotate(), true);
 				} else {
 					OsmandSettings.setMapLocationToShow(this, lat, lon, MessageFormat.format(getString(R.string.search_history_navigate_to), lat, lon));
 				}
