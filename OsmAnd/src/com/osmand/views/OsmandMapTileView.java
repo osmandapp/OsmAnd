@@ -703,7 +703,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	@Override
 	public void onZoomEnded(float distance, float relativeToStart) {
-		onZooming(distance, relativeToStart);
+		float dz = (float) (Math.log(relativeToStart) / Math.log(2) * 1.5);
+		float calcZoom = initialMultiTouchZoom + dz;
+		setZoom(Math.round(calcZoom));
+		zoomPositionChanged(getFloatZoom());
 	}
 	
 	 
@@ -713,21 +716,24 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		initialMultiTouchLocation = getLatLonFromScreenPoint(centerPoint.x, centerPoint.y);
 		initialMultiTouchZoom = zoom;
 	}
+	private void zoomPositionChanged(float calcZoom){
+		float dtx = calcDiffTileX(getCenterPointX() - initialMultiTouchCenterPoint.x, getCenterPointY() - initialMultiTouchCenterPoint.y);
+		float dty = calcDiffTileY(getCenterPointX() - initialMultiTouchCenterPoint.x, getCenterPointY() - initialMultiTouchCenterPoint.y);
+		double tx = MapUtils.getTileNumberX(calcZoom, initialMultiTouchLocation.getLongitude());
+		double ty = MapUtils.getTileNumberY(calcZoom, initialMultiTouchLocation.getLatitude());
+		double lat = MapUtils.getLatitudeFromTile(calcZoom, ty + dty);
+		double lon = MapUtils.getLongitudeFromTile(calcZoom, tx + dtx);
+		setLatLon(lat, lon);
+	}
+	
 	
 	@Override
 	public void onZooming(float distance, float relativeToStart) {
 		float dz = (float) (Math.log(relativeToStart) / Math.log(2) * 1.5);
-		float dtx = calcDiffTileX(getCenterPointX() - initialMultiTouchCenterPoint.x, getCenterPointY() - initialMultiTouchCenterPoint.y);
-		float dty = calcDiffTileY(getCenterPointX() - initialMultiTouchCenterPoint.x, getCenterPointY() - initialMultiTouchCenterPoint.y);
-		double tx = MapUtils.getTileNumberX(getFloatZoom(), initialMultiTouchLocation.getLongitude());
-		double ty = MapUtils.getTileNumberY(getFloatZoom(), initialMultiTouchLocation.getLatitude());
-		double lat = MapUtils.getLatitudeFromTile(getFloatZoom(), ty + dty);
-		double lon = MapUtils.getLongitudeFromTile(getFloatZoom(), tx + dtx);
-		
-		
-		if(Math.abs(initialMultiTouchZoom + dz - zoom) > 0.05){
-			setZoom(initialMultiTouchZoom + dz);
-			setLatLon(lat, lon);
+		float calcZoom = initialMultiTouchZoom + dz;
+		if(Math.abs(calcZoom - zoom) > 0.05){
+			setZoom(calcZoom);
+			zoomPositionChanged(calcZoom);
 		}
 	}
 
