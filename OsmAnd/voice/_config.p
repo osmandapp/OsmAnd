@@ -24,14 +24,37 @@ turn(Turn) == M :- turn(Turn, M).
 prepare_make_ut(Dist) == ['Prepare_to.ogg', 'in.ogg', delay_450, D, delay_450, 'Turn_back.ogg'] :- 
 		distance(Dist) == D.
 
+prepare_roundabout(Dist) == ['Prepare_to.ogg', 'in.ogg', delay_450, D, delay_450, 'roundabout.ogg'] :- 
+		distance(Dist) == D.
+
 make_ut(Dist) == ['in.ogg', delay_450, D, delay_450, 'Turn_back.ogg'] :- 
 			distance(Dist) == D.
 make_ut == ['Turn_back.ogg'].
 
+roundabout(Dist, Exit) == ['in.ogg', delay_450, D, delay_450, 'roundabout.ogg', delay_450, 'DO.ogg', delay_250, E, 'the_exit.ogg'] :- 
+			distance(Dist) == D, nth(Exit, E).
+roundabout(Exit) == ['DO.ogg', delay_250,  E, 'the_exit.ogg'] :- nth(Exit, E).
 
-go_ahead(Dist) == ['continue.ogg', D]:- distance(Dist) == D.
+and_arrive_destination == ['arrive_at_destination.ogg'].
+then == ['then', delay_350].
+reached_destination == ['you_reached.ogg',delay_250, 'TO_DESTINATION.ogg'].
+bear_right == ['bear_right.ogg'].
+bear_left == ['bear_left.ogg'].
+route_recalc(_Dist) == ['recalc.ogg'].
+
+go_ahead(Dist) == ['Drive.ogg', delay_250,  D]:- distance(Dist) == D.
 go_ahead == ['continue.ogg'].
 
+%% 
+nth(1, '1st.ogg').
+nth(2, '2nd.ogg').
+nth(3, '3rd.ogg').
+nth(4, '4th.ogg').
+nth(5, '5th.ogg').
+nth(6, '6th.ogg').
+nth(7, '7th.ogg').
+nth(8, '8th.ogg').
+nth(9, '9th.ogg').
 
 %%% distance measure
 distance(Dist) == [F, 'meters.ogg'] :- Dist < 1000, dist(Dist, F).
