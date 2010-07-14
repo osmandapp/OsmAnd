@@ -354,7 +354,8 @@ public class OsmBugsLayer implements OsmandMapLayer {
 			public void onClick(DialogInterface dialog, int which) {
 				String text = ((EditText)view.findViewById(R.id.BugMessage)).getText().toString();
 				String author = ((EditText)view.findViewById(R.id.AuthorName)).getText().toString();
-				OsmandSettings.setUserName(ctx, author);
+				// do not set name as author it is ridiculous in that case
+//				OsmandSettings.setUserName(ctx, author);
 				boolean bug = createNewBug(latitude, longitude, 
 						text, author);
 		    	if (bug) {
