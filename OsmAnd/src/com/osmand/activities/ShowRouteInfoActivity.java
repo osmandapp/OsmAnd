@@ -43,13 +43,15 @@ import com.osmand.voice.CommandPlayer.CommandBuilder;
 public class ShowRouteInfoActivity extends ListActivity {
 
 
+	private RoutingHelper helper;
+
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		ListView lv = new ListView(this);
 		lv.setId(android.R.id.list);
 		TextView header = new TextView(this);
-		RoutingHelper helper = RoutingHelper.getInstance(this);
+		helper = RoutingHelper.getInstance(this);
 		Calendar c = Calendar.getInstance();
 		int time = helper.getLeftTime() * 1000 - c.getTimeZone().getOffset(0);
 		int dist = helper.getLeftDistance();
@@ -62,11 +64,9 @@ public class ShowRouteInfoActivity extends ListActivity {
 
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		RouteDirectionInfo item = ((RouteInfoAdapter)getListAdapter()).getItem(position - 1);
-		RoutingHelper inst = RoutingHelper.getInstance(this);
-		Location loc = inst.getLocationFromRouteDirection(item);
+		Location loc = helper.getLocationFromRouteDirection(item);
 		CommandPlayer player = CommandPlayer.getInstance(this);
 		if(player != null){
-			// TODO temp solution roundabout
 			CommandBuilder builder = player.newCommandBuilder();
 			if(item.turnType.getValue() == TurnType.C){
 				builder.goAhead(item.distance);
@@ -84,6 +84,8 @@ public class ShowRouteInfoActivity extends ListActivity {
 				builder.turnSLRight(item.distance);
 			} else if(item.turnType.getValue() == TurnType.TSHR) { 
 				builder.turnSHRight(item.distance);
+			} else if(item.turnType.isRoundAbout()) { 
+				builder.roundAbout(item.distance, item.turnType.getExitOut());
 			}
 			builder.play();
 		}

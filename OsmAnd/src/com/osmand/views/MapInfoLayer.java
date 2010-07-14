@@ -381,7 +381,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 			pathForTurn.rQuadTo(0, -quadShiftX, quadShiftX, -quadShiftY);
 			pathForTurn.rQuadTo(quadShiftX, 0, quadShiftX, quadShiftY);
 			pathForTurn.rLineTo(0, h);
-		} else if (turnType != null && turnType.isExit()) {
+		} else if (turnType != null && turnType.isRoundAbout()) {
 			float t = turnType.getTurnAngle();
 			if (t >= 170 && t < 220) {
 				t = 220;

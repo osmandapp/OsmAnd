@@ -499,16 +499,20 @@ public class RouteProvider {
 					if(previous.routePointOffset > 0){
 						float paz = res.get(previous.routePointOffset - 1).bearingTo(res.get(previous.routePointOffset));
 						float caz;
-						if(previous.turnType.isExit() && dirInfo.routePointOffset < res.size() - 1){
+						if(previous.turnType.isRoundAbout() && dirInfo.routePointOffset < res.size() - 1){
 							caz = res.get(dirInfo.routePointOffset).bearingTo(res.get(dirInfo.routePointOffset + 1));
 						} else {
 							caz = res.get(dirInfo.routePointOffset - 1).bearingTo(res.get(dirInfo.routePointOffset));
 						}
-						float angle = caz  - paz + 60f; // that magic number helps to fix some errors
+						float angle = caz  - paz + 15; 
 						if(angle < 0){
 							angle += 360;
 						} else if(angle > 360){
 							angle -= 360;
+						}
+						// that magic number helps to fix some errors for turn
+						if(angle < 100){
+							angle += 45;
 						}
 
 						if(previous.turnType.getTurnAngle() < 0.5f){

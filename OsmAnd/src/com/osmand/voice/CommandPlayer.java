@@ -243,7 +243,9 @@ public class CommandPlayer {
 	protected static final String A_RIGHT_SL = "right_sl"; //$NON-NLS-1$
 	
 	protected static final String С_PREPARE_TURN = "prepare_turn";  //$NON-NLS-1$
+	protected static final String С_PREPARE_ROUNDABOUT = "prepare_roundabout";  //$NON-NLS-1$
 	protected static final String С_PREPARE_MAKE_UT = "prepare_make_ut";  //$NON-NLS-1$
+	protected static final String С_ROUNDABOUT = "roundabout";  //$NON-NLS-1$
 	protected static final String С_GO_AHEAD = "go_ahead";  //$NON-NLS-1$
 	protected static final String С_TURN = "turn";  //$NON-NLS-1$
 	protected static final String С_MAKE_UT = "make_ut";  //$NON-NLS-1$
@@ -392,6 +394,18 @@ public class CommandPlayer {
 		
 		public CommandBuilder prepareTurnSHRight(double dist){
 			return addCommand(С_PREPARE_TURN, A_RIGHT_SH, dist);
+		}
+		
+		public CommandBuilder prepareRoundAbout(double dist){
+			return addCommand(С_PREPARE_ROUNDABOUT, dist);
+		}
+		
+		public CommandBuilder roundAbout(double dist, int exit){
+			return addCommand(С_ROUNDABOUT, dist, exit);
+		}
+		
+		public CommandBuilder roundAbout(int exit){
+			return addCommand(С_ROUNDABOUT, exit);
 		}
 	
 		

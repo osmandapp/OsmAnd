@@ -528,7 +528,7 @@ public class RoutingHelper {
 		public int getExitOut() {
 			return exitOut;
 		}
-		public boolean isExit(){
+		public boolean isRoundAbout(){
 			return value.equals("EXIT"); //$NON-NLS-1$
 		}
 	}
