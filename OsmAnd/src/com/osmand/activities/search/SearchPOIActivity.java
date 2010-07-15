@@ -28,14 +28,19 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -74,6 +79,8 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 	private PoiFilter filter;
 	private AmenityAdapter amenityAdapter;
 	private TextView searchArea;
+	private EditText searchFilter;
+	private View searchFilterLayout;
 	
 	private boolean searchNearBy = false;
 	private Location location = null; 
@@ -83,6 +90,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 	private String currentLocationProvider = null;
 	private boolean sensorRegistered = false;
 	private Handler uiHandler;
+	
 
 	
 	@Override
@@ -92,6 +100,8 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		uiHandler = new Handler();
 		searchPOILevel = (Button) findViewById(R.id.SearchPOILevelButton);
 		searchArea = (TextView) findViewById(R.id.SearchAreaText);
+		searchFilter = (EditText) findViewById(R.id.SearchFilter);
+		searchFilterLayout = findViewById(R.id.SearchFilterLayout);
 		searchPOILevel.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -101,6 +111,22 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 				searchPOILevel.setEnabled(filter.isSearchFurtherAvailable());
 
 			}
+		});
+		searchFilter.addTextChangedListener(new TextWatcher(){
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				amenityAdapter.getFilter().filter(s);
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			}
+			
 		});
 
 		Bundle bundle = this.getIntent().getExtras();
@@ -200,6 +226,29 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		return false;
 	}
 	
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		boolean m = super.onCreateOptionsMenu(menu);
+		final MenuItem me = menu.add(R.string.show_poi_filter);
+		me.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener(){
+
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				if(searchFilterLayout.getVisibility() == View.INVISIBLE){
+					searchFilterLayout.setVisibility(View.VISIBLE);
+					me.setTitle(R.string.hide_poi_filter);
+				} else {
+					searchFilter.setText(""); //$NON-NLS-1$
+					searchFilterLayout.setVisibility(View.INVISIBLE);
+					me.setTitle(R.string.show_poi_filter);
+				}
+				return true;
+			}
+			
+		});
+		return m;
+	}
 
 	// Working with location listeners
 	private LocationListener networkListener = new LocationListener(){
