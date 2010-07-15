@@ -14,7 +14,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.http.HttpResponse;
@@ -39,6 +41,8 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Xml;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -172,6 +176,30 @@ public class EditingPOIActivity {
 			}
 			
 		});
+		typeText.addTextChangedListener(new TextWatcher(){
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				String str = s.toString();
+				AmenityType t = AmenityType.getAmenityMap().get(str);
+				if(t != null && a.getType() != t){
+					a.setType(t);
+					typeButton.setText(AmenityType.toPublicString(t));
+					updateSubTypesAdapter(t);
+				}
+				
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			}
+		});
+
+		
 		
 		typeButton.setOnClickListener(new View.OnClickListener(){
 			@Override
@@ -235,13 +263,22 @@ public class EditingPOIActivity {
 		dlg.show();
 	}
 	
+	private void updateSubTypesAdapter(AmenityType t){
+		Set<String> subCategories = new LinkedHashSet<String>(AmenityType.getSubCategories(t));
+		for(String s : AmenityType.getAmenityMap().keySet()){
+			if(!subCategories.contains(s)){
+				subCategories.add(s);
+			}
+		}
+		
+		ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(ctx, R.layout.list_textview, subCategories.toArray());
+		typeText.setAdapter(adapter);
+	}
+	
 	private void updateType(Amenity a){
 		typeText.setText(a.getSubType());
 		typeButton.setText(AmenityType.toPublicString(a.getType()));
-		
-		List<String> subCategories = AmenityType.getSubCategories(a.getType());
-		ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(ctx, R.layout.list_textview, subCategories.toArray());
-		typeText.setAdapter(adapter);
+		updateSubTypesAdapter(a.getType());
 	}
 	
 	private void showWarning(final String msg){
