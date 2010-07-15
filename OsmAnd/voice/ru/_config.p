@@ -31,9 +31,9 @@ make_ut(Dist) == ['in.ogg', delay_300, D, delay_300, 'Turn_back.ogg'] :-
 			distance(Dist) == D.
 make_ut == ['Turn_back.ogg'].
 
-roundabout(Dist, Exit) == ['in.ogg', delay_300, D, delay_300, 'roundabout.ogg', delay_250, 'DO.ogg', delay_250, E, 'the_exit.ogg'] :- 
+roundabout(Dist, _Angle, Exit) == ['in.ogg', delay_300, D, delay_300, 'roundabout.ogg', delay_250, 'DO.ogg', delay_250, E, 'the_exit.ogg'] :- 
 			distance(Dist) == D, nth(Exit, E).
-roundabout(Exit) == ['DO.ogg', delay_250,  E, 'the_exit.ogg'] :- nth(Exit, E).
+roundabout(_Angle, Exit) == ['DO.ogg', delay_250,  E, 'the_exit.ogg'] :- nth(Exit, E).
 
 and_arrive_destination == ['arrive_at_destination.ogg'].
 then == ['then.ogg', delay_350].

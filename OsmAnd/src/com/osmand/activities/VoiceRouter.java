@@ -116,7 +116,7 @@ public class VoiceRouter {
 				if(tParam != null){
 					play.turn(tParam);
 				} else if(next.turnType.isRoundAbout()){
-					play.roundAbout(next.turnType.getExitOut());
+					play.roundAbout(next.turnType.getTurnAngle(), next.turnType.getExitOut());
 				} else if(next.turnType.getValue().equals(TurnType.TU)){
 					play.makeUT();
 				} else if(next.turnType.getValue().equals(TurnType.C)){
@@ -131,7 +131,7 @@ public class VoiceRouter {
 					if (t2Param != null) {
 						play.then().turn(t2Param, next.distance);
 					} else if (nextNext.turnType.isRoundAbout()) {
-						play.then().roundAbout(next.distance, next.turnType.getExitOut());
+						play.then().roundAbout(next.distance, next.turnType.getTurnAngle(), next.turnType.getExitOut());
 					} else if (nextNext.turnType.getValue().equals(TurnType.TU)) {
 						play.then().makeUT(next.distance);
 					}
