@@ -347,7 +347,7 @@ public class OsmBugsLayer implements OsmandMapLayer {
 		builder.setTitle(R.string.osb_add_dialog_title);
 		final View view = layoutInflater.inflate(R.layout.open_bug, null);
 		builder.setView(view);
-		((EditText)view.findViewById(R.id.AuthorName)).setText(OsmandSettings.getUserName(ctx));
+		((EditText)view.findViewById(R.id.AuthorName)).setText(OsmandSettings.getUserNameForOsmBug(ctx));
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
 			@Override
@@ -355,7 +355,7 @@ public class OsmBugsLayer implements OsmandMapLayer {
 				String text = ((EditText)view.findViewById(R.id.BugMessage)).getText().toString();
 				String author = ((EditText)view.findViewById(R.id.AuthorName)).getText().toString();
 				// do not set name as author it is ridiculous in that case
-//				OsmandSettings.setUserName(ctx, author);
+				OsmandSettings.setUserNameForOsmBug(ctx, author);
 				boolean bug = createNewBug(latitude, longitude, 
 						text, author);
 		    	if (bug) {
@@ -377,14 +377,14 @@ public class OsmBugsLayer implements OsmandMapLayer {
 		builder.setTitle(R.string.osb_comment_dialog_title);
 		final View view = layoutInflater.inflate(R.layout.open_bug, null);
 		builder.setView(view);
-		((EditText)view.findViewById(R.id.AuthorName)).setText(OsmandSettings.getUserName(ctx));
+		((EditText)view.findViewById(R.id.AuthorName)).setText(OsmandSettings.getUserNameForOsmBug(ctx));
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.osb_comment_dialog_add_button, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				String text = ((EditText)view.findViewById(R.id.BugMessage)).getText().toString();
 				String author = ((EditText)view.findViewById(R.id.AuthorName)).getText().toString();
-//				OsmandSettings.setUserName(ctx, author);
+				OsmandSettings.setUserNameForOsmBug(ctx, author);
 				boolean added = addingComment(bug.getId(), text, author);
 		    	if (added) {
 		    		Toast.makeText(ctx, ctx.getResources().getString(R.string.osb_comment_dialog_success), Toast.LENGTH_LONG).show();

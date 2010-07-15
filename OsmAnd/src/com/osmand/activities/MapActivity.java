@@ -116,6 +116,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private boolean sensorRegistered = false;
 
 	private MenuItem navigateToPointMenu;
+	private MenuItem muteMenu;
 	private NotificationManager mNotificationManager;
 	private Handler mapPositionHandler = null;
 	private int APP_NOTIFICATION_ID;
@@ -747,12 +748,21 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				navigateToPointMenu.setVisible(false);
 			}
 		}
+		if(muteMenu != null){
+			muteMenu.setTitle(routingHelper.getVoiceRouter().isMute() ? R.string.menu_mute_on : R.string.menu_mute_off);
+			if (routingHelper.getFinalLocation() != null && routingHelper.isFollowingMode()) {
+				muteMenu.setVisible(true);
+			} else {
+				muteMenu.setVisible(false);
+			}
+		}
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.map_menu, menu);
 		navigateToPointMenu = menu.findItem(R.id.map_navigate_to_point);
+		muteMenu = menu.findItem(R.id.map_mute);
 		updateNavigateToPointMenu();
 		return true;
 	}
@@ -784,6 +794,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			return true;
 		} else if (item.getItemId() == R.id.map_specify_point) {
 			openChangeLocationDialog();
+			return true;
+		} else if (item.getItemId() == R.id.map_mute) {
+			routingHelper.getVoiceRouter().setMute(!routingHelper.getVoiceRouter().isMute());
+			updateNavigateToPointMenu();
 			return true;
     	}  else if (item.getItemId() == R.id.map_navigate_to_point) {
     		if(navigationLayer.getPointToNavigate() != null){

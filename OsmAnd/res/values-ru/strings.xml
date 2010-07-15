@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<string name="menu_mute_off">Без звука</string>
+	<string name="menu_mute_on">Звук</string>
 	<string name="voice_not_use">Не использовать</string>
 	<string name="voice_provider_descr">Выберите голос для маршрутизации</string>
 	<string name="voice_provider">Голосовые данные</string>
