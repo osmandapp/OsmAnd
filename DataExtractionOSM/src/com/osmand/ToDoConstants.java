@@ -22,11 +22,18 @@ public class ToDoConstants {
 	//   Improvement : Show stops in the transport route on the map
 	//   Improvement : redesign poi selecting (show on map )
 	///  Better : improve zooming (better zoom out)
+	//   Add menu mute for voice
 	//   BUG with search area for poi/transport bounds region
+	//   BUG with foot navigation (unavailable for cloudmade)
+	//   BUG animated move more precise check final location
+	//   BUG turn concatenation
+	///  BUG Settings for osm bug creator name (save)
+	//   BUG 9
+	
 	//   69. Add phone information to POI
 	
 	// Not clear if it is really needed 
-    //   43. Enable poi filter by name (find lake by name or shop) - case sensitive search DB!
+    //   43. Enable poi filter by name (find lake by name or shop) - case sensitive search DB - make only search filter (on UI)!
 	//   45. Get clear <Use internet> settings. Move that setting on top settings screen. 
 	//       That setting should rule all activities that use internet. It should ask whenever internet is used 
 	//		(would you like to use internet for that operation - if using internet is not checked). 
@@ -41,7 +48,6 @@ public class ToDoConstants {
 
 
 	// BUGS Android
- 
 	
 	// TODO swing
 	// 9. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !

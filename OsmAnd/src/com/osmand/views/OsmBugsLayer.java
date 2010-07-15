@@ -384,7 +384,7 @@ public class OsmBugsLayer implements OsmandMapLayer {
 			public void onClick(DialogInterface dialog, int which) {
 				String text = ((EditText)view.findViewById(R.id.BugMessage)).getText().toString();
 				String author = ((EditText)view.findViewById(R.id.AuthorName)).getText().toString();
-				OsmandSettings.setUserName(ctx, author);
+//				OsmandSettings.setUserName(ctx, author);
 				boolean added = addingComment(bug.getId(), text, author);
 		    	if (added) {
 		    		Toast.makeText(ctx, ctx.getResources().getString(R.string.osb_comment_dialog_success), Toast.LENGTH_LONG).show();

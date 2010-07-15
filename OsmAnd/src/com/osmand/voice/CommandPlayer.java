@@ -4,6 +4,7 @@ package com.osmand.voice;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -39,13 +40,17 @@ public class CommandPlayer {
 	private static CommandPlayer instance = null;
 
 	protected Context ctx;
+	// or zip file
 	private File voiceDir;
+//	private ZipFile voiceZipFile;
 	
 	// resolving commands to play
 	private Prolog prologSystem;
 	
 	// playing media
 	private MediaPlayer mediaPlayer;
+	// indicates that player is ready to play first file
+	private boolean playNext = true;
 	private List<String> filesToPlay = new ArrayList<String>();
 
 	/**
@@ -107,20 +112,29 @@ public class CommandPlayer {
 				return ctx.getString(R.string.voice_data_unavailable);
 			}
 		}
+		
+		// see comments while it is impossible to read from zip
+//		voiceZipFile = null;
 		if(voiceDir != null) {
 			long time = System.currentTimeMillis();
-			File config = new File(voiceDir, "_config.p"); //$NON-NLS-1$
-			boolean wrong = !config.exists();
-				
-			if (!wrong) {
-
-				try {
-					prologSystem.setTheory(new Theory(new FileInputStream(config)));
-				} catch (InvalidTheoryException e) {
-					log.error("Loading voice config exception " + voiceProvider, e); //$NON-NLS-1$
-				} catch (IOException e) {
-					log.error("Loading voice config exception " + voiceProvider, e); //$NON-NLS-1$
+			boolean wrong = false;
+			try {
+				InputStream config;
+//				if (voiceDir.getName().endsWith(".zip")) { //$NON-NLS-1$
+//					voiceZipFile = new ZipFile(voiceDir);
+//					config = voiceZipFile.getInputStream(voiceZipFile.getEntry("_config.p")); //$NON-NLS-1$
+//				} else {
+					config = new FileInputStream(new File(voiceDir, "_config.p")); //$NON-NLS-1$
+//				}
+				if (!wrong) {
+					prologSystem.setTheory(new Theory(config));
 				}
+			} catch (InvalidTheoryException e) {
+				log.error("Loading voice config exception " + voiceProvider, e); //$NON-NLS-1$
+				wrong = true;
+			} catch (IOException e) {
+				log.error("Loading voice config exception " + voiceProvider, e); //$NON-NLS-1$
+				wrong = true;
 			}
 			if(wrong){
 				return ctx.getString(R.string.voice_data_corrupted);
@@ -186,14 +200,25 @@ public class CommandPlayer {
 		playQueue();
 	}
 	
-	private void playQueue() {
-		boolean playNext = true;
+	private synchronized void playQueue() {
 		while (!filesToPlay.isEmpty() && playNext) {
 			String f = filesToPlay.remove(0);
 			if (f != null && voiceDir != null) {
-				File file = new File(voiceDir, f);
-				if (file.exists()) {
+				boolean exists = false;
+//				if(voiceZipFile != null){
+//					ZipEntry entry = voiceZipFile.getEntry(f);
+//					exists = entry != null;
+//					voiceZipFile.getInputStream(entry);
+//					
+//				} else {
+					File file = new File(voiceDir, f);
+					exists = file.exists();
+//				}
+				if (exists) {
+					log.debug("Playing file : " + f); //$NON-NLS-1$
+					playNext = false;
 					try {
+						// Can't play sound file from zip it seams to be impossible only unpack and play!!!
 						mediaPlayer.setDataSource(file.getAbsolutePath());
 						mediaPlayer.prepare();
 						mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -215,18 +240,21 @@ public class CommandPlayer {
 									Thread.sleep(sleep);
 								} catch (InterruptedException e) {
 								}
+								playNext = true;
 								playQueue();
 							}
 						});
-						playNext = false;
+						
 						mediaPlayer.start();
 					} catch (Exception e) {
 						log.error("Error while playing voice command", e); //$NON-NLS-1$
 						playNext = true;
 						
 					}
+				} else {
+					log.info("Play file not found : " + f); //$NON-NLS-1$
 				}
-			}
+			} 
 		}
 	}
 	
@@ -235,12 +263,12 @@ public class CommandPlayer {
 	protected static final String P_VERSION = "version";  //$NON-NLS-1$
 	protected static final String P_RESOLVE = "resolve";  //$NON-NLS-1$
 	
-	protected static final String A_LEFT = "left"; //$NON-NLS-1$
-	protected static final String A_LEFT_SH = "left_sh"; //$NON-NLS-1$
-	protected static final String A_LEFT_SL = "left_sl"; //$NON-NLS-1$
-	protected static final String A_RIGHT = "right"; //$NON-NLS-1$
-	protected static final String A_RIGHT_SH = "right_sh"; //$NON-NLS-1$
-	protected static final String A_RIGHT_SL = "right_sl"; //$NON-NLS-1$
+	public static final String A_LEFT = "left"; //$NON-NLS-1$
+	public static final String A_LEFT_SH = "left_sh"; //$NON-NLS-1$
+	public static final String A_LEFT_SL = "left_sl"; //$NON-NLS-1$
+	public static final String A_RIGHT = "right"; //$NON-NLS-1$
+	public static final String A_RIGHT_SH = "right_sh"; //$NON-NLS-1$
+	public static final String A_RIGHT_SL = "right_sl"; //$NON-NLS-1$
 	
 	protected static final String С_PREPARE_TURN = "prepare_turn";  //$NON-NLS-1$
 	protected static final String С_PREPARE_ROUNDABOUT = "prepare_roundabout";  //$NON-NLS-1$
@@ -250,6 +278,13 @@ public class CommandPlayer {
 	protected static final String С_TURN = "turn";  //$NON-NLS-1$
 	protected static final String С_MAKE_UT = "make_ut";  //$NON-NLS-1$
 	protected static final String С_PREAMBLE = "preamble";  //$NON-NLS-1$
+	protected static final String С_AND_ARRIVE_DESTINATION = "and_arrive_destination";  //$NON-NLS-1$
+	protected static final String С_THEN = "then";  //$NON-NLS-1$
+	protected static final String С_REACHED_DESTINATION = "reached_destination";  //$NON-NLS-1$
+	protected static final String С_BEAR_LEFT = "bear_left";  //$NON-NLS-1$
+	protected static final String С_BEAR_RIGHT = "bear_right";  //$NON-NLS-1$
+	protected static final String С_ROUTE_RECALC = "route_recalc";  //$NON-NLS-1$
+	
 	
 	protected static final String DELAY_CONST = "delay_"; //$NON-NLS-1$
 	
@@ -298,6 +333,7 @@ public class CommandPlayer {
 				}
 			}
 			Struct struct = new Struct(name, list);
+			log.debug("Adding command : " + name); //$NON-NLS-1$
 			listStruct.add(struct);
 			return this;
 		}
@@ -324,76 +360,22 @@ public class CommandPlayer {
 		}
 		
 		
-		public CommandBuilder turnLeft(){
-			return addCommand(С_TURN, A_LEFT);
+		public CommandBuilder turn(String param){
+			return addCommand(С_TURN, param);
 		}
 		
-		public CommandBuilder turnSLLeft(){
-			return addCommand(С_TURN, A_LEFT_SL);
+		public CommandBuilder turn(String param, double dist){
+			return addCommand(С_TURN, param, dist);
 		}
 		
-		public CommandBuilder turnSHLeft(){
-			return addCommand(С_TURN, A_LEFT_SH);
-		}
-		
-		public CommandBuilder turnRight(){
-			return addCommand(С_TURN, A_RIGHT);
-		}
-		
-		public CommandBuilder turnSLRight(){
-			return addCommand(С_TURN, A_RIGHT_SL);
-		}
-		
-		public CommandBuilder turnSHRight(){
-			return addCommand(С_TURN, A_RIGHT_SL);
-		}
-		
-		
-		public CommandBuilder turnLeft(double dist){
-			return addCommand(С_TURN, A_LEFT, dist);
-		}
-		
-		public CommandBuilder turnSLLeft(double dist){
-			return addCommand(С_TURN, A_LEFT_SL, dist);
-		}
-		
-		public CommandBuilder turnSHLeft(double dist){
-			return addCommand(С_TURN, A_LEFT_SH, dist);
-		}
-		
-		public CommandBuilder turnRight(double dist){
-			return addCommand(С_TURN, A_RIGHT, dist);
-		}
-
-		public CommandBuilder turnSLRight(double dist){
-			return addCommand(С_TURN, A_RIGHT_SL, dist);
-		}
-		
-		public CommandBuilder turnSHRight(double dist){
-			return addCommand(С_TURN, A_RIGHT_SL, dist);
-		}
-		
-		public CommandBuilder prepareTurnLeft(double dist){
-			return addCommand(С_PREPARE_TURN, A_LEFT, dist);
-		}
-		
-		public CommandBuilder prepareTurnSLLeft(double dist){
-			return addCommand(С_PREPARE_TURN, A_LEFT_SL, dist);
-		}
-		public CommandBuilder prepareTurnSHLeft(double dist){
-			return addCommand(С_PREPARE_TURN, A_LEFT_SH, dist);
-		}
-		
-		public CommandBuilder prepareTurnRight(double dist){
-			return addCommand(С_PREPARE_TURN, A_RIGHT, dist);
-		}
-		
-		public CommandBuilder prepareTurnSLRight(double dist){
-			return addCommand(С_PREPARE_TURN, A_RIGHT_SL, dist);
-		}
-		
-		public CommandBuilder prepareTurnSHRight(double dist){
-			return addCommand(С_PREPARE_TURN, A_RIGHT_SH, dist);
+		/**
+		 * 
+		 * @param param A_LEFT, A_RIGHT, ...
+		 * @param dist
+		 * @return
+		 */
+		public CommandBuilder prepareTurn(String param, double dist){
+			return addCommand(С_PREPARE_TURN, param, dist);
 		}
 		
 		public CommandBuilder prepareRoundAbout(double dist){
@@ -406,6 +388,30 @@ public class CommandPlayer {
 		
 		public CommandBuilder roundAbout(int exit){
 			return addCommand(С_ROUNDABOUT, exit);
+		}
+		
+		public CommandBuilder andArriveAtDestination(){
+			return addCommand(С_AND_ARRIVE_DESTINATION);
+		}
+		
+		public CommandBuilder arrivedAtDestination(){
+			return addCommand(С_REACHED_DESTINATION);
+		}
+		
+		public CommandBuilder bearLeft(){
+			return addCommand(С_BEAR_LEFT);
+		}
+		
+		public CommandBuilder bearRight(){
+			return addCommand(С_BEAR_RIGHT);
+		}
+		
+		public CommandBuilder then(){
+			return addCommand(С_THEN);
+		}
+		
+		public CommandBuilder newRouteCalculated(double dist){
+			return addCommand(С_ROUTE_RECALC, dist);
 		}
 	
 		

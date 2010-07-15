@@ -7,11 +7,11 @@ preamble - [].
 
 
 %% TURNS 
-turn('left', ['turn.ogg', 'left.ogg']).
-turn('left_sh', ['turn_sharply.ogg', 'left.ogg']).
+turn('left', ['turn.ogg', delay_350, 'left.ogg']).
+turn('left_sh', ['turn_sharply.ogg', delay_350, 'left.ogg']).
 turn('left_sl', ['turn_slightly_left.ogg']).
-turn('right', ['turn.ogg', 'right.ogg']).
-turn('right_sh', ['turn_sharply.ogg', 'right.ogg']).
+turn('right', ['turn.ogg', delay_350, 'right.ogg']).
+turn('right_sh', ['turn_sharply.ogg', delay_350,'right.ogg']).
 turn('right_sl', ['turn_slightly_right.ogg']).
 
 prepare_turn(Turn, Dist) == ['Prepare_to.ogg', 'in.ogg', delay_450, D, delay_450, M] :- 
@@ -21,22 +21,22 @@ turn(Turn, Dist) == ['in.ogg', delay_450, D, delay_450, M] :-
 turn(Turn) == M :- turn(Turn, M).
 
 
-prepare_make_ut(Dist) == ['Prepare_to.ogg', 'in.ogg', delay_450, D, delay_450, 'Turn_back.ogg'] :- 
+prepare_make_ut(Dist) == ['Prepare_to.ogg', 'in.ogg', delay_300, D, delay_300,'Turn_back.ogg'] :- 
 		distance(Dist) == D.
 
-prepare_roundabout(Dist) == ['Prepare_to.ogg', 'in.ogg', delay_450, D, delay_450, 'roundabout.ogg'] :- 
+prepare_roundabout(Dist) == ['Prepare_to.ogg', 'in.ogg', delay_300, D, delay_300, 'roundabout.ogg'] :- 
 		distance(Dist) == D.
 
-make_ut(Dist) == ['in.ogg', delay_450, D, delay_450, 'Turn_back.ogg'] :- 
+make_ut(Dist) == ['in.ogg', delay_300, D, delay_300, 'Turn_back.ogg'] :- 
 			distance(Dist) == D.
 make_ut == ['Turn_back.ogg'].
 
-roundabout(Dist, Exit) == ['in.ogg', delay_450, D, delay_450, 'roundabout.ogg', delay_450, 'DO.ogg', delay_250, E, 'the_exit.ogg'] :- 
+roundabout(Dist, Exit) == ['in.ogg', delay_300, D, delay_300, 'roundabout.ogg', delay_250, 'DO.ogg', delay_250, E, 'the_exit.ogg'] :- 
 			distance(Dist) == D, nth(Exit, E).
 roundabout(Exit) == ['DO.ogg', delay_250,  E, 'the_exit.ogg'] :- nth(Exit, E).
 
 and_arrive_destination == ['arrive_at_destination.ogg'].
-then == ['then', delay_350].
+then == ['then.ogg', delay_350].
 reached_destination == ['you_reached.ogg',delay_250, 'TO_DESTINATION.ogg'].
 bear_right == ['bear_right.ogg'].
 bear_left == ['bear_left.ogg'].
