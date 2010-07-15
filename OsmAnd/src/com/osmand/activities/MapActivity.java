@@ -828,7 +828,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     		builder.setNeutralButton(R.string.route_about, new DialogInterface.OnClickListener(){
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					startActivity(new Intent(MapActivity.this, ShowRouteInfoActivity.class));
+					Intent intent = new Intent(MapActivity.this, ShowRouteInfoActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(intent);
 				}
     		});
     	}
@@ -836,7 +838,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				
 				Location map = new Location("map"); //$NON-NLS-1$
 				map.setLatitude(lat);
 				map.setLongitude(lon);

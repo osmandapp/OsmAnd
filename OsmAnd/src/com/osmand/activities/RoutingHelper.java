@@ -34,8 +34,8 @@ public class RoutingHelper {
 
 	// Note always currentRoute > get(currentDirectionInfo).routeOffset, 
 	//         but currentRoute <= get(currentDirectionInfo+1).routeOffset 
-	private int currentDirectionInfo = 0;
-	private int currentRoute = 0;
+	protected int currentDirectionInfo = 0;
+	protected int currentRoute = 0;
 	
 	
 	private LatLon finalLocation;
@@ -47,6 +47,7 @@ public class RoutingHelper {
 	private ApplicationMode mode;
 	
 	private RouteProvider provider = new RouteProvider();
+	private VoiceRouter voiceRouter;
 	
 	
 	// TEST CODE
@@ -66,11 +67,13 @@ public class RoutingHelper {
 	
 	
 	private RoutingHelper(){
+		voiceRouter = new VoiceRouter(this);
 	}
 	
 	private static RoutingHelper INSTANCE = new RoutingHelper(); 
 	public static RoutingHelper getInstance(Activity ctx){
 		INSTANCE.activity = ctx;
+		INSTANCE.voiceRouter.init(ctx);
 		return INSTANCE;
 	}
 	
@@ -100,6 +103,7 @@ public class RoutingHelper {
 	
 	public void setAppMode(ApplicationMode mode){
 		this.mode = mode;
+		voiceRouter.updateAppMode();
 	}
 	
 	public ApplicationMode getAppMode() {
@@ -115,12 +119,17 @@ public class RoutingHelper {
 		return finalLocation != null && lastFixedLocation != null;
 	}
 	
+	public VoiceRouter getVoiceRouter() {
+		return voiceRouter;
+	}
+	
 	
 	public boolean finishAtLocation(Location currentLocation) {
 		Location lastPoint = routeNodes.get(routeNodes.size() - 1);
 		if(currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < 60){
 			if(lastFixedLocation != null && lastFixedLocation.distanceTo(lastPoint) < 60){
 				showMessage(activity.getString(R.string.arrived_at_destination));
+				voiceRouter.arrivedDestinationPoint();
 				updateCurrentRoute(routeNodes.size() - 1);
 				// clear final location to prevent all time showing message
 				finalLocation = null;
@@ -286,6 +295,7 @@ public class RoutingHelper {
 //				}
 			}
 		}
+		voiceRouter.updateStatus();
 
 		lastFixedLocation = currentLocation;
 		if(calculateRoute){
@@ -299,6 +309,9 @@ public class RoutingHelper {
 		listDistance = res.getListDistance();
 		currentDirectionInfo = 0;
 		currentRoute = 0;
+		if(isFollowingMode){
+			voiceRouter.newRouteIsCalculated();
+		}
 	}
 	
 	public synchronized int getLeftDistance(){
@@ -324,6 +337,12 @@ public class RoutingHelper {
 	public RouteDirectionInfo getNextRouteDirectionInfo(){
 		if(directionInfo != null && currentDirectionInfo < directionInfo.size() - 1){
 			return directionInfo.get(currentDirectionInfo + 1);
+		}
+		return null;
+	}
+	public RouteDirectionInfo getNextNextRouteDirectionInfo(){
+		if(directionInfo != null && currentDirectionInfo < directionInfo.size() - 2){
+			return directionInfo.get(currentDirectionInfo + 2);
 		}
 		return null;
 	}
@@ -509,11 +528,13 @@ public class RoutingHelper {
 			this.value = value;
 			this.exitOut = exitOut;
 		}
-		
+
+		// calculated CW head rotation if previous direction to NORTH
 		public float getTurnAngle() {
 			return turnAngle;
 		}
 		
+
 		public void setTurnAngle(float turnAngle) {
 			this.turnAngle = turnAngle;
 		}

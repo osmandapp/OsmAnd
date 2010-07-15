@@ -34,8 +34,6 @@ import com.osmand.activities.RoutingHelper.RouteDirectionInfo;
 import com.osmand.activities.RoutingHelper.TurnType;
 import com.osmand.osm.MapUtils;
 import com.osmand.views.MapInfoLayer;
-import com.osmand.voice.CommandPlayer;
-import com.osmand.voice.CommandPlayer.CommandBuilder;
 
 /**
  * 
@@ -65,30 +63,6 @@ public class ShowRouteInfoActivity extends ListActivity {
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		RouteDirectionInfo item = ((RouteInfoAdapter)getListAdapter()).getItem(position - 1);
 		Location loc = helper.getLocationFromRouteDirection(item);
-		CommandPlayer player = CommandPlayer.getInstance(this);
-		if(player != null){
-			CommandBuilder builder = player.newCommandBuilder();
-			if(item.turnType.getValue() == TurnType.C){
-				builder.goAhead(item.distance);
-			} else if(item.turnType.getValue() == TurnType.TU){
-				builder.makeUT(item.distance);
-			} else if(item.turnType.getValue() == TurnType.TL){
-				builder.turnLeft(item.distance);
-			} else if(item.turnType.getValue() == TurnType.TSLL) { 
-				builder.turnSLLeft(item.distance);
-			} else if(item.turnType.getValue() == TurnType.TSHL) { 
-				builder.turnSHLeft(item.distance);
-			} else if(item.turnType.getValue() == TurnType.TR){
-				builder.turnRight(item.distance);
-			} else if(item.turnType.getValue() == TurnType.TSLR) { 
-				builder.turnSLRight(item.distance);
-			} else if(item.turnType.getValue() == TurnType.TSHR) { 
-				builder.turnSHRight(item.distance);
-			} else if(item.turnType.isRoundAbout()) { 
-				builder.roundAbout(item.distance, item.turnType.getExitOut());
-			}
-			builder.play();
-		}
 		if(loc != null){
 			OsmandSettings.setMapLocationToShow(this, loc.getLatitude(),loc.getLongitude());
 			startActivity(new Intent(this, MapActivity.class));
