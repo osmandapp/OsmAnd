@@ -8,25 +8,16 @@ package com.osmand;
  */
 public class ToDoConstants {
 	
-	/**
-	 * Write activity to show something about authors / donation ....
-	 */
-	public int DESCRIBE_ABOUT_AUTHORS = 8;
-
-	
 	// TODO ANDROID
 	//   for 0.3
 	//   68. Implement service to app work with screen offline 
 	//		 (introduce special settings how often update location to monitoring & audio guidance & add new item to status bar)
+
+	
 	//   Improvement : Show stops in the transport route on the map
 	//   Improvement : redesign poi selecting (show on map )
-	///  Better : improve zooming (better zoom out)
-	//   BUG animated move more precise check final location
-	//   BUG 9!
-	//   BUG delete file if download failed !!! (check it)
 	//   BUG add button show my location
-	//   TODO update site with voice information
-    //   43. Enable poi filter by name (find lake by name or shop) - case sensitive search DB - make only search filter (on UI)!	
+	
 
 	
 	// Not clear if it is really needed 
@@ -54,6 +45,7 @@ public class ToDoConstants {
 	// BUGS Swing
 	
 	//  DONE ANDROID :
+    //   43. Enable poi filter by name (find lake by name or shop) - case sensitive search DB - make only search filter (on UI)!
 	//   45. Get clear <Use internet> settings. Move that setting on top settings screen. 
 	//       That setting should rule all activities that use internet. It should ask whenever internet is used 
 	//		(would you like to use internet for that operation - if using internet is not checked). 

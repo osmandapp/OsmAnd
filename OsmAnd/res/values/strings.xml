@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="hide_poi_filter">Hide filter</string>
+	<string name="show_poi_filter">Show filter</string>
+	<string name="search_poi_filter">Filter</string>
 	<string name="menu_mute_off">Mute off</string>
 	<string name="menu_mute_on">Mute</string>
 	<string name="voice_not_use">Not use</string>
