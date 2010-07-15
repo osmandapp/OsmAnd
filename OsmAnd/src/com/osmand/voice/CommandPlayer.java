@@ -382,12 +382,12 @@ public class CommandPlayer {
 			return addCommand(С_PREPARE_ROUNDABOUT, dist);
 		}
 		
-		public CommandBuilder roundAbout(double dist, int exit){
-			return addCommand(С_ROUNDABOUT, dist, exit);
+		public CommandBuilder roundAbout(double dist, double angle, int exit){
+			return addCommand(С_ROUNDABOUT, dist, angle, exit);
 		}
 		
-		public CommandBuilder roundAbout(int exit){
-			return addCommand(С_ROUNDABOUT, exit);
+		public CommandBuilder roundAbout(double angle, int exit){
+			return addCommand(С_ROUNDABOUT, angle, exit);
 		}
 		
 		public CommandBuilder andArriveAtDestination(){
