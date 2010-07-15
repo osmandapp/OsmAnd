@@ -108,7 +108,7 @@ public class DownloadIndexActivity extends ListActivity {
 		final File fileToSave = resolveFileName(e.getKey(), regionName);
 		if (fileToSave != null) {
 			Builder builder = new AlertDialog.Builder(this);
-			File toCheck = new File(fileToSave.getParent(), fileToSave.getName().substring(fileToSave.getName().length() - 4) +".odb"); //$NON-NLS-1$
+			File toCheck = new File(fileToSave.getParent(), fileToSave.getName().substring(0, fileToSave.getName().length() - 4) +".odb"); //$NON-NLS-1$
 			if(!toCheck.exists()){
 				builder.setMessage(MessageFormat.format(getString(R.string.download_question), regionName, e.getValue()));
 			} else {
@@ -176,14 +176,22 @@ public class DownloadIndexActivity extends ListActivity {
 				try {
 					FileOutputStream out = new FileOutputStream(file);
 					URL url = DownloaderIndexFromGoogleCode.getInputStreamToLoadIndex(key);
+					
 					URLConnection conn = url.openConnection();
+					conn.setReadTimeout(30000);
+					conn.setConnectTimeout(30000);
 					InputStream is = conn.getInputStream();
-					impl.startTask(getString(R.string.downloading_file), conn.getContentLength());
+					int length = conn.getContentLength();
+					impl.startTask(getString(R.string.downloading_file), length);
 					byte[] buffer = new byte[BUFFER_SIZE];
 					int read = 0;
 					while((read = is.read(buffer)) != -1){
 						out.write(buffer, 0, read);
 						impl.progress(read);
+						length -= read;
+					}
+					if(length > 0){
+						throw new IOException("File was not fully read"); //$NON-NLS-1$
 					}
 					out.close();
 						
