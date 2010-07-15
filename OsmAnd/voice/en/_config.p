@@ -7,7 +7,7 @@ preamble - [].
 
 
 %% TURNS 
-turn('left', ['turn.ogg', 'left-e.ogg']).
+turn('left', ['turn.ogg',   'left-e.ogg']).
 turn('left_sh', ['sharp_left-e.ogg']).
 turn('left_sl', ['turn.ogg', 'left-e.ogg']).
 turn('right', ['turn.ogg', 'right-e.ogg']).
@@ -16,7 +16,7 @@ turn('right_sl', ['turn.ogg', 'right-e.ogg']).
 
 prepare_turn(Turn, Dist) == ['Prepare_to-a.ogg', 'after-m.ogg', delay_450, D, delay_450, M] :- 
 			distance(Dist) == D, turn(Turn, M).
-turn(Turn, Dist) == ['after-m.ogg', delay_450, D, delay_450, M] :- 
+turn(Turn, Dist) == ['after-m.ogg', delay_250, D, delay_250, M] :- 
 			distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 

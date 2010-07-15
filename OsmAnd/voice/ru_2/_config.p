@@ -14,9 +14,9 @@ turn('right', ['turn_right-e.ogg']).
 turn('right_sh', ['turn_sharp_right-e.ogg']).
 turn('right_sl', ['turn_slightly_right-e.ogg']).
 
-prepare_turn(Turn, Dist) == ['Prepare_to.ogg', 'after-m.ogg', delay_450, D, delay_450, M] :- 
+prepare_turn(Turn, Dist) == ['Prepare_to.ogg', 'after-m.ogg', delay_300, D, delay_300, M] :- 
 			distance(Dist) == D, turn(Turn, M).
-turn(Turn, Dist) == ['after-m.ogg', delay_450, D, delay_450, M] :- 
+turn(Turn, Dist) == ['after-m.ogg', delay_300, D, delay_300, M] :- 
 			distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
@@ -31,7 +31,7 @@ make_ut(Dist) == ['after-m.ogg', delay_300, D, delay_300, 'turn_back-e.ogg'] :-
 			distance(Dist) == D.
 make_ut == ['turn_back-e.ogg'].
 
-roundabout(Dist, _Angle, Exit) == ['after-m.ogg', delay_300, D, delay_300, 'enter_the_roundabout-e.ogg', delay_250, 'after-m.ogg', 
+roundabout(Dist, _Angle, Exit) == ['after-m.ogg', delay_300, D, delay_300, 'enter_the_roundabout-e.ogg', delay_250, 'and_take_the.ogg', 
 		delay_250, E, 'exit-e.ogg'] :- distance(Dist) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['taking_the.ogg', delay_250,  E, 'exit-e.ogg'] :- nth(Exit, E).
 

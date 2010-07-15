@@ -149,7 +149,7 @@ public class VoiceRouter {
 				if (tParam != null) {
 					play.turn(tParam, dist);
 				} else if (next.turnType.isRoundAbout()) {
-					play.roundAbout(dist, next.turnType.getExitOut());
+					play.roundAbout(dist,  next.turnType.getTurnAngle(), next.turnType.getExitOut());
 				} else if (next.turnType.getValue().equals(TurnType.TU)) {
 					play.makeUT(dist);
 				} else {
