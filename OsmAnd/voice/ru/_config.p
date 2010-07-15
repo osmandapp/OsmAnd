@@ -14,9 +14,9 @@ turn('right', ['turn.ogg', delay_350, 'right.ogg']).
 turn('right_sh', ['turn_sharply.ogg', delay_350,'right.ogg']).
 turn('right_sl', ['turn_slightly_right.ogg']).
 
-prepare_turn(Turn, Dist) == ['Prepare_to.ogg', 'in.ogg', delay_450, D, delay_450, M] :- 
+prepare_turn(Turn, Dist) == ['Prepare_to.ogg', 'in.ogg', delay_300, D, delay_300, M] :- 
 			distance(Dist) == D, turn(Turn, M).
-turn(Turn, Dist) == ['in.ogg', delay_450, D, delay_450, M] :- 
+turn(Turn, Dist) == ['in.ogg', delay_250, D, delay_250, M] :- 
 			distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
