@@ -94,6 +94,20 @@ public class OsmandSettings {
 		return prefs.edit().putString(USER_NAME, name).commit();
 	}
 	
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String USER_OSM_BUG_NAME = "user_osm_bug_name"; //$NON-NLS-1$
+
+	public static String getUserNameForOsmBug(Context ctx) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getString(USER_OSM_BUG_NAME, "NoName"); //$NON-NLS-1$
+	}
+
+	public static boolean setUserNameForOsmBug(Context ctx, String name) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putString(USER_OSM_BUG_NAME, name).commit();
+	}
+	
 	public static final String USER_PASSWORD = "user_password"; //$NON-NLS-1$
 	public static String getUserPassword(Context ctx){
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);

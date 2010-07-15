@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="menu_mute_off">Mute off</string>
+	<string name="menu_mute_on">Mute</string>
 	<string name="voice_not_use">Not use</string>
 	<string name="voice_provider_descr">Choose voice data for routing</string>
 	<string name="voice_provider">Voice data</string>
