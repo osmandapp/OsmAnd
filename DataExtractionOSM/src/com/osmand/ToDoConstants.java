@@ -11,14 +11,18 @@ public class ToDoConstants {
 	// TODO ANDROID
 	//   for 0.3
 	//   68. Implement service to app work with screen offline 
-	//		 (introduce special settings how often update location to monitoring & audio guidance & add new item to status bar)
+	//		 (audio guidance & add new item to status bar & introduce error interval for building)
 	//    for offline service save gpx (combine in one trkseg)
+	//   71. Implement different mechanism for tiles (see rmaps)
 
 	//   Improvement : Show stops in the transport route on the map 
 	// 	 Improvement : show favorites on the map?
-	//   Improvement : show detailed route on the map with turns and show route information directly
+	//   Improvement : show detailed route on the map with turns and show route information directly (like in gmaps)
 	//   Improvement : redesign poi selecting (show on map )
 	//   Improvement : progress while loading tiles
+	//   Improvement : download with wget
+	//   Improvement : cloudmade as map?
+	//   Yandex traffic : http://jgo.maps.yandex.net/tiles?l=trf
 	//   BUG add button show my location
 	
 
@@ -30,7 +34,7 @@ public class ToDoConstants {
 
 	// Unscheduled (complex)
 	//   66. Transport routing (show next stop, total distance, show stop get out) (?).
-	//   64. Traffic information (?)
+	//   64. Traffic information (?) - rmaps?
 	//   65. Intermediate points - for better control routing, to avoid traffic jams ...(?)
 	//   40. Support simple vector road rendering (require new index file) (?)
 	//   63. Support simple offline routing(require new index file) (?)

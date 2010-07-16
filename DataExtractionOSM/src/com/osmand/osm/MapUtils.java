@@ -143,34 +143,34 @@ public class MapUtils {
 	// degree latitude measurements (90, -90) [53.9]
 	 */
 	
-	public static double getTileNumberX(int zoom, double longitude){
+	public static double getTileNumberX(float zoom, double longitude){
 		longitude = checkLongitude(longitude);
-		int n = 1 << zoom;
-		return (longitude + 180d)/360d * n;
+		return (longitude + 180d)/360d * getPowZoom(zoom);
 	}
 	
-	public static double getTileNumberY(int zoom,  double latitude){
-		int n = 1 << zoom;
+	public static double getTileNumberY(float zoom,  double latitude){
 		latitude = checkLatitude(latitude);
 		double eval = Math.log( Math.tan(Math.toRadians(latitude)) + 1/Math.cos(Math.toRadians(latitude)) );
-		return  (1 - eval / Math.PI) / 2 * n;
+		return  (1 - eval / Math.PI) / 2 * getPowZoom(zoom);
 	}
 	
-	public static double getLongitudeFromTile(int zoom, double x) {
-		return x / (1 << zoom) * 360.0 - 180.0;
+	public static double getLongitudeFromTile(float zoom, double x) {
+		return x / getPowZoom(zoom) * 360.0 - 180.0;
 	}
 	
-	
-	public static double getLatitudeFromTile(int zoom, double y){
-		return Math.atan(Math.sinh(Math.PI * (1 - 2 * y / (1 << zoom)))) * 180d / Math.PI;
+	private static float getPowZoom(float zoom){
+		if(zoom - Math.ceil(zoom) < 0.05f){
+			return 1 << ((int)zoom); 
+		} else {
+			return (float) Math.pow(2, zoom);
+		}
 	}
 	
-	public static int getPixelShiftX(int zoom, double long1, double long2, int tileSize){
-		return (int) ((getTileNumberX(zoom, long1) - getTileNumberX(zoom, long2)) * tileSize);
+	public static double getLatitudeFromTile(float zoom, double y){
+		return Math.atan(Math.sinh(Math.PI * (1 - 2 * y / getPowZoom(zoom)))) * 180d / Math.PI;
 	}
 	
-	
-	public static int getLengthXFromMeters(int zoom, double latitude, double longitude,  double meters, int tileSize, int widthOfDisplay) {
+	public static int getLengthXFromMeters(float zoom, double latitude, double longitude,  double meters, float tileSize, int widthOfDisplay) {
 		double tileNumberX = MapUtils.getTileNumberX(zoom, longitude);
 		double tileNumberLeft = tileNumberX - ((double) widthOfDisplay) / (2d * tileSize);
 		double tileNumberRight = tileNumberX + ((double) widthOfDisplay) / (2d * tileSize);
@@ -179,6 +179,11 @@ public class MapUtils {
 
 		return (int) ((double) widthOfDisplay / dist * meters);
 	}
+	
+	public static int getPixelShiftX(int zoom, double long1, double long2, int tileSize){
+		return (int) ((getTileNumberX(zoom, long1) - getTileNumberX(zoom, long2)) * tileSize);
+	}
+	
 	
 	public static int getPixelShiftY(int zoom, double lat1, double lat2, int tileSize){
 		return (int) ((getTileNumberY(zoom, lat1) - getTileNumberY(zoom, lat2)) * tileSize);
