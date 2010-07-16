@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="network_provider">Network</string>
+	<string name="gps_provider">GPS</string>
+	<string name="int_min">min.</string>
+	<string name="background_service_int_descr">Choose interval to determine location for background service</string>
+	<string name="background_service_int">Positioning interval</string>
+	<string name="background_service_provider_descr">Choose location provider for background service</string>
+	<string name="background_service_provider">Location provider</string>
+	<string name="background_router_service_descr">Enable background service to track position in long time periods</string>
+	<string name="background_router_service">Router service</string>
+	<string name="off_router_service_no_gps_available">Background routing service OsmAnd requires turned on location.</string>
+	<string name="routing_settings_descr">Specify routing options</string>
+	<string name="routing_settings">Routing</string>
 	<string name="hide_poi_filter">Hide filter</string>
 	<string name="show_poi_filter">Show filter</string>
 	<string name="search_poi_filter">Filter</string>

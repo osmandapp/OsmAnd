@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
+import android.location.LocationManager;
 import android.os.Environment;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -78,6 +79,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private ListPreference maxLevelToDownload;
 	private ListPreference mapScreenOrientation;
 	private ListPreference voicePreference;
+	private ListPreference routeServiceInterval;
+	private ListPreference routeServiceProvider;
+	private CheckBoxPreference routeServiceEnabled;
 
 	
 	private BooleanPreference[] booleanPreferences = new BooleanPreference[]{
@@ -91,6 +95,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			new BooleanPreference(OsmandSettings.SHOW_TRANSPORT_OVER_MAP, OsmandSettings.SHOW_TRANSPORT_OVER_MAP_DEF),
 			new BooleanPreference(OsmandSettings.SAVE_TRACK_TO_GPX, OsmandSettings.SAVE_TRACK_TO_GPX_DEF),
 	};
+	
 	
 	
     @Override
@@ -136,6 +141,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		voicePreference =(ListPreference) screen.findPreference(OsmandSettings.VOICE_PROVIDER);
 		voicePreference.setOnPreferenceChangeListener(this);
 		
+		routeServiceInterval =(ListPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_INTERVAL);
+		routeServiceInterval.setOnPreferenceChangeListener(this);
+		routeServiceProvider =(ListPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_PROVIDER);
+		routeServiceProvider.setOnPreferenceChangeListener(this);
+		routeServiceEnabled =(CheckBoxPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_ENABLED);
+		routeServiceEnabled.setOnPreferenceChangeListener(this);
+		
     }
     
     @Override
@@ -171,7 +183,20 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		saveTrackInterval.setEntryValues(new String[]{"1", "2", "5", "15", "30", "60", "300"}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 		saveTrackInterval.setValue(OsmandSettings.getSavingTrackInterval(this)+""); //$NON-NLS-1$
 		
+		String[] ints = new String[]{"1", "2", "5", "8", "10", "15", "20", "25", "30", "40", "60", };  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$ //$NON-NLS-11$
+		String[] intDescriptions = new String[ints.length];
+		for(int i=0; i<intDescriptions.length; i++){
+			intDescriptions[i] = ints[i] + " " + getString(R.string.int_min); //$NON-NLS-1$
+		}
+		routeServiceInterval.setEntries(intDescriptions);				
+		routeServiceInterval.setEntryValues(ints);
+		routeServiceInterval.setValue(OsmandSettings.getServiceOffInterval(this)/60000+""); //$NON-NLS-1$
 		
+		routeServiceProvider.setEntries(new String[]{getString(R.string.gps_provider), getString(R.string.network_provider)});				
+		routeServiceProvider.setEntryValues(new String[]{LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER});
+		routeServiceProvider.setValue(OsmandSettings.getServiceOffProvider(this)); 
+		
+		routeServiceEnabled.setChecked(OsmandSettings.getServiceOffEnabled(this));
 
 		mapScreenOrientation.setEntries(new String[]{
 				resources.getString(R.string.map_orientation_portrait),
@@ -294,13 +319,20 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		} else if(preference == userName){
 			edit.putString(OsmandSettings.USER_NAME, (String) newValue);
 			edit.commit();
-		
 		} else if(preference == positionOnMap){
 			edit.putInt(OsmandSettings.POSITION_ON_MAP, positionOnMap.findIndexOfValue((String) newValue));
 			edit.commit();
 		} else if (preference == maxLevelToDownload) {
 			edit.putInt(OsmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE, Integer.parseInt((String) newValue));
 			edit.commit();
+		} else if (preference == routeServiceInterval) {
+			edit.putInt(OsmandSettings.SERVICE_OFF_INTERVAL, Integer.parseInt((String) newValue) * 60000);
+			edit.commit();
+		} else if (preference == routeServiceProvider) {
+			edit.putString(OsmandSettings.SERVICE_OFF_PROVIDER, (String) newValue);
+			edit.commit();
+		} else if (preference == routeServiceEnabled) {
+			// TODO !!!
 		} else if (preference == routerPreference) {
 			RouteService s = null;
 			for(RouteService r : RouteService.values()){
