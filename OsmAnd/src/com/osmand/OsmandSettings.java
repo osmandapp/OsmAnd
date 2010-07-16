@@ -577,6 +577,15 @@ public class OsmandSettings {
 	}
 	
 	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String SERVICE_OFF_ERROR_INTERVAL = "service_off_error_interval"; //$NON-NLS-1$
+	public static final int SERVICE_OFF_ERROR_INTERVAL_DEF = 60 * 1000;
+	public static int getServiceOffErrorInterval(Context ctx) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getInt(SERVICE_OFF_ERROR_INTERVAL, SERVICE_OFF_ERROR_INTERVAL_DEF);
+	}
+	
+	
 	
 	
 }

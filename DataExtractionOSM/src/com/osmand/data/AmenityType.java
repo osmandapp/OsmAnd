@@ -59,6 +59,10 @@ public enum AmenityType {
 		return list;
 	}
 	
+	public static Map<String, AmenityType> getAmenityMap(){
+		return amenityMap;
+	}
+	
 	public static String toPublicString(AmenityType t){
 //		return Algoritms.capitalizeFirstLetterAndLowercase(t.toString().replace('_', ' '));
 		return Messages.getMessage(t.name);
