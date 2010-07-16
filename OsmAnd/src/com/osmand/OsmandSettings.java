@@ -533,6 +533,19 @@ public class OsmandSettings {
 		return prefs.edit().putBoolean(VOICE_MUTE, mute).commit();
 	}
 	
+	// for background service
+	public static final String MAP_ACTIVITY_ENABLED = "map_activity_enabled"; //$NON-NLS-1$
+	public static final boolean MAP_ACTIVITY_ENABLED_DEF = false; 
+	public static boolean getMapActivityEnabled(Context ctx) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(MAP_ACTIVITY_ENABLED, MAP_ACTIVITY_ENABLED_DEF);
+	}
+	
+	public static boolean setMapActivityEnabled(Context ctx, boolean en) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putBoolean(MAP_ACTIVITY_ENABLED, en).commit();
+	}
+	
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SERVICE_OFF_ENABLED = "service_off_enabled"; //$NON-NLS-1$
 	public static final boolean SERVICE_OFF_ENABLED_DEF = false; 

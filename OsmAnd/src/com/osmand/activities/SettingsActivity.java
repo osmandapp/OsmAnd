@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,6 +26,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.widget.Toast;
 
+import com.osmand.NavigationService;
 import com.osmand.OsmandSettings;
 import com.osmand.PoiFiltersHelper;
 import com.osmand.ProgressDialogImplementation;
@@ -183,7 +185,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		saveTrackInterval.setEntryValues(new String[]{"1", "2", "5", "15", "30", "60", "300"}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 		saveTrackInterval.setValue(OsmandSettings.getSavingTrackInterval(this)+""); //$NON-NLS-1$
 		
-		String[] ints = new String[]{"1", "2", "5", "8", "10", "15", "20", "25", "30", "40", "60", };  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$ //$NON-NLS-11$
+		String[] ints = new String[]{"1", "2", "5", "8", "10", "15", "20", "25", "30", "40", "45", "60", "90" };  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$ //$NON-NLS-11$ //$NON-NLS-12$ //$NON-NLS-13$
 		String[] intDescriptions = new String[ints.length];
 		for(int i=0; i<intDescriptions.length; i++){
 			intDescriptions[i] = ints[i] + " " + getString(R.string.int_min); //$NON-NLS-1$
@@ -332,7 +334,17 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.putString(OsmandSettings.SERVICE_OFF_PROVIDER, (String) newValue);
 			edit.commit();
 		} else if (preference == routeServiceEnabled) {
-			// TODO !!!
+			Intent serviceIntent = new Intent(this, NavigationService.class);
+			if ((Boolean) newValue) {
+				ComponentName name = startService(serviceIntent);
+				if (name == null) {
+					routeServiceEnabled.setChecked(OsmandSettings.getServiceOffEnabled(this));
+				}
+			} else {
+				if(!stopService(serviceIntent)){
+					routeServiceEnabled.setChecked(OsmandSettings.getServiceOffEnabled(this));
+				}
+			}
 		} else if (preference == routerPreference) {
 			RouteService s = null;
 			for(RouteService r : RouteService.values()){
