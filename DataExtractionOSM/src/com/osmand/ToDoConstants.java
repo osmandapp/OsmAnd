@@ -12,10 +12,13 @@ public class ToDoConstants {
 	//   for 0.3
 	//   68. Implement service to app work with screen offline 
 	//		 (introduce special settings how often update location to monitoring & audio guidance & add new item to status bar)
+	//    for offline service save gpx (combine in one trkseg)
 
-	
-	//   Improvement : Show stops in the transport route on the map
+	//   Improvement : Show stops in the transport route on the map 
+	// 	 Improvement : show favorites on the map?
+	//   Improvement : show detailed route on the map with turns and show route information directly
 	//   Improvement : redesign poi selecting (show on map )
+	//   Improvement : progress while loading tiles
 	//   BUG add button show my location
 	
 

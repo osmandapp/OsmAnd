@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="network_provider">Сеть</string>
+	<string name="gps_provider">GPS</string>
+	<string name="int_min">мин.</string>
+	<string name="background_service_int_descr">Выберите интервал позиционирования для фонового сервиса</string>
+	<string name="background_service_int">Интервал позиционирования</string>
+	<string name="background_service_provider_descr">Выберите источник позиционирования для фонового сервиса</string>
+	<string name="background_service_provider">Источник позиционирования</string>
+	<string name="background_router_service_descr">Включить фоновый сервис для позиционирования через долгий период времени</string>
+	<string name="background_router_service">Сервис навигации</string>
+	<string name="off_router_service_no_gps_available">Сервис маршрутизации OsmAnd включен, отключив позиционирование, он перестает вести по маршруту.</string>
+	<string name="routing_settings_descr">Изменить настройки маршрутизации</string>
+	<string name="routing_settings">Маршрутизация</string>
 	<string name="hide_poi_filter">Скрыть фильтр</string>
 	<string name="show_poi_filter">Показать фильтр</string>
 	<string name="search_poi_filter">Фильтр</string>

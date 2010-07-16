@@ -235,12 +235,12 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				if(searchFilterLayout.getVisibility() == View.INVISIBLE){
+				if(searchFilterLayout.getVisibility() == View.GONE){
 					searchFilterLayout.setVisibility(View.VISIBLE);
 					me.setTitle(R.string.hide_poi_filter);
 				} else {
 					searchFilter.setText(""); //$NON-NLS-1$
-					searchFilterLayout.setVisibility(View.INVISIBLE);
+					searchFilterLayout.setVisibility(View.GONE);
 					me.setTitle(R.string.show_poi_filter);
 				}
 				return true;

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
+import android.location.LocationManager;
 
 import com.osmand.activities.RouteProvider.RouteService;
 import com.osmand.activities.search.SearchHistoryHelper;
@@ -531,6 +532,38 @@ public class OsmandSettings {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		return prefs.edit().putBoolean(VOICE_MUTE, mute).commit();
 	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String SERVICE_OFF_ENABLED = "service_off_enabled"; //$NON-NLS-1$
+	public static final boolean SERVICE_OFF_ENABLED_DEF = false; 
+	public static boolean getServiceOffEnabled(Context ctx) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(SERVICE_OFF_ENABLED, SERVICE_OFF_ENABLED_DEF);
+	}
+	
+	public static boolean setServiceOffEnabled(Context ctx, boolean en) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putBoolean(SERVICE_OFF_ENABLED, en).commit();
+	}
+	
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String SERVICE_OFF_PROVIDER = "service_off_provider"; //$NON-NLS-1$
+	public static String getServiceOffProvider(Context ctx) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getString(SERVICE_OFF_PROVIDER, LocationManager.GPS_PROVIDER);
+	}
+	
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String SERVICE_OFF_INTERVAL = "service_off_interval"; //$NON-NLS-1$
+	public static final int SERVICE_OFF_INTERVAL_DEF = 5 * 60 * 1000;
+	public static int getServiceOffInterval(Context ctx) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getInt(SERVICE_OFF_INTERVAL, SERVICE_OFF_INTERVAL_DEF);
+	}
+	
+	
 	
 	
 }

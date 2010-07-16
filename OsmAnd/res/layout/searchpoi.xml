@@ -8,10 +8,12 @@
 		<Button  android:text="@string/search_POI_level_btn" android:id="@+id/SearchPOILevelButton" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1"></Button>
 		<TextView android:layout_width="wrap_content" android:text="" android:id="@+id/SearchAreaText" android:layout_height="wrap_content"/>
 	</LinearLayout>
-	<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/SearchFilterLayout" android:visibility="invisible">
+	
+	<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/SearchFilterLayout" android:visibility="gone">
 		<TextView android:layout_width="wrap_content" android:text="@string/search_poi_filter" android:id="@+id/TextView" android:layout_height="wrap_content"/>
 		<EditText android:layout_marginLeft = "5dp"  android:layout_marginRight = "5dp" android:layout_width="fill_parent" android:text="" android:id="@+id/SearchFilter" android:layout_height="wrap_content"/>
 	</LinearLayout>
-	<ListView android:id="@android:id/list" android:layout_width="fill_parent"
+	<ListView android:id="@android:id/list" android:layout_width="fill_parent" 
 		android:layout_height="fill_parent"></ListView>
+	
 </LinearLayout>
