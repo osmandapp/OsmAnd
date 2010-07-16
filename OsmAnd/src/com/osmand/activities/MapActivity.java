@@ -574,6 +574,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			wakeLock.release();
 			wakeLock = null;
 		}
+		OsmandSettings.setMapActivityEnabled(this, false);
 	}
 	
 	@Override
@@ -661,6 +662,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 						mapView.getSourceTileSize(), mapView.getRotate(), true);
 			}
 		}
+		OsmandSettings.setMapActivityEnabled(this, true);
 		checkExternalStorage();
 		showAndHideMapPosition();
 	}

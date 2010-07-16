@@ -56,8 +56,8 @@ public class NavigationService extends Service implements LocationListener {
 
 	@Override
 	public void onLocationChanged(Location location) {
-		// TODO check that MapActivity is not foreground
-		if(location != null){
+		if(location != null && !OsmandSettings.getMapActivityEnabled(this)){
+			// TODO update voice navigation
 			savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(), 
 					location.getSpeed(), location.getTime());
 		}
