@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="where_am_i">Где я?</string>
 	<string name="network_provider">Сеть</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_min">мин.</string>

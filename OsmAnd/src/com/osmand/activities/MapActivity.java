@@ -256,18 +256,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		backToLocation.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				backToLocation.setVisibility(View.INVISIBLE);
-				if(!isMapLinkedToLocation()){
-					OsmandSettings.setSyncMapToGpsLocation(MapActivity.this, true);
-					if(locationLayer.getLastKnownLocation() != null){
-						Location lastKnownLocation = locationLayer.getLastKnownLocation();
-						AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
-						int fZoom = mapView.getZoom() < 15 ? 15 : mapView.getZoom();
-						thread.startMoving(mapView.getLatitude(), mapView.getLongitude(), 
-								lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), mapView.getZoom(), fZoom, 
-								mapView.getSourceTileSize(), mapView.getRotate(), false);
-					}
-				}
+				backToLocationImpl();
 			}
 			
 		});
@@ -533,7 +522,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				if(LocationProvider.OUT_OF_SERVICE == status){
 					setLocation(null);
 				}
-				if (!isRunningOnEmulator() && service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+				// do not use it in routing
+				if (!isRunningOnEmulator() && !routingHelper.isFollowingMode() && 
+						service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
 					if (!Algoritms.objectEquals(currentLocationProvider, LocationManager.NETWORK_PROVIDER)) {
 						currentLocationProvider = LocationManager.NETWORK_PROVIDER;
 						service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
@@ -775,6 +766,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     		final Intent settings = new Intent(MapActivity.this, SettingsActivity.class);
 			startActivity(settings);
     		return true;
+		} else if (item.getItemId() == R.id.map_where_am_i) {
+			backToLocationImpl();
+        	return true;
 		} else if (item.getItemId() == R.id.map_show_gps_status) {
 			Intent intent = new Intent();
 			intent.setComponent(new ComponentName(GPS_STATUS_COMPONENT, GPS_STATUS_ACTIVITY));
@@ -1052,6 +1046,21 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+	}
+
+	protected void backToLocationImpl() {
+		backToLocation.setVisibility(View.INVISIBLE);
+		if(!isMapLinkedToLocation()){
+			OsmandSettings.setSyncMapToGpsLocation(MapActivity.this, true);
+			if(locationLayer.getLastKnownLocation() != null){
+				Location lastKnownLocation = locationLayer.getLastKnownLocation();
+				AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
+				int fZoom = mapView.getZoom() < 15 ? 15 : mapView.getZoom();
+				thread.startMoving(mapView.getLatitude(), mapView.getLongitude(), 
+						lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), mapView.getZoom(), fZoom, 
+						mapView.getSourceTileSize(), mapView.getRotate(), false);
+			}
+		}
 	}
 
 

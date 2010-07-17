@@ -87,17 +87,18 @@ public class RouteProvider {
 				if (locations.get(0).distanceTo(start) > 200) {
 					// add start point
 					locations.add(0, start);
+					if (directions != null) {
+						for (RouteDirectionInfo i : directions) {
+							i.routePointOffset++;
+						}
+						RouteDirectionInfo info = new RouteDirectionInfo();
+						info.turnType = TurnType.valueOf(TurnType.C);
+						info.routePointOffset = 0;
+						info.descriptionRoute = "" ;//getString(ctx, R.string.route_head); //$NON-NLS-1$
+						directions.add(0, info);
+					}	
 				}
-				if (directions != null) {
-					for (RouteDirectionInfo i : directions) {
-						i.routePointOffset++;
-					}
-					RouteDirectionInfo info = new RouteDirectionInfo();
-					info.turnType = TurnType.valueOf(TurnType.C);
-					info.routePointOffset = 0;
-					info.descriptionRoute = "" ;//getString(ctx, R.string.route_head); //$NON-NLS-1$
-					directions.add(0, info);
-				}
+				
 				// check points for duplicates (it is very bad for routing) - cloudmade could return it 
 				for (int i = 0; i < locations.size() - 1; ) {
 					if(locations.get(i).distanceTo(locations.get(i+1)) == 0){
@@ -198,7 +199,6 @@ public class RouteProvider {
 			minDistanceForTurn = 12;
 		}
 		
-		// add start point if needed 
 		
 
 		List<RouteDirectionInfo> directions = new ArrayList<RouteDirectionInfo>();
