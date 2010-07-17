@@ -57,7 +57,8 @@ public class ResourceManager {
 	}
 	
 	// it is not good investigated but no more than 64 (satellite images)
-	protected final int maxImgCacheSize = 64;
+	// Only 8 MB (from 16 Mb whole mem) available for images : image 64K * 128 = 8 MB (8 bit), 64 - 16 bit, 32 - 128 bit 
+	protected final int maxImgCacheSize = 48;
 	
 	protected Map<String, Bitmap> cacheOfImages = new LinkedHashMap<String, Bitmap>();
 	protected Map<String, Boolean> imagesOnFS = new LinkedHashMap<String, Boolean>() ;
@@ -105,6 +106,8 @@ public class ResourceManager {
 			}
 		} else if(f.getName().endsWith(".tile")){ //$NON-NLS-1$
 			imagesOnFS.put(prefix + f.getName(), Boolean.TRUE);
+		} else if(f.getName().endsWith(".sqlitedb")){ //$NON-NLS-1$
+			// TODO
 		}
 	}
 	
@@ -211,7 +214,7 @@ public class ResourceManager {
 				long time = System.currentTimeMillis();
 				cacheOfImages.put(req.fileToLoad, BitmapFactory.decodeFile(en.getAbsolutePath()));
 				if (log.isDebugEnabled()) {
-					log.debug("Loaded file : " + req.fileToLoad + " " + -(time - System.currentTimeMillis()) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					log.debug("Loaded file : " + req.fileToLoad + " " + -(time - System.currentTimeMillis()) + " ms " + cacheOfImages.size()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}
 			} 
 			
@@ -442,6 +445,7 @@ public class ResourceManager {
 	
 	
 	protected void clearTiles(){
+		log.info("Cleaning tiles - size = " + cacheOfImages.size()); //$NON-NLS-1$
 		ArrayList<String> list = new ArrayList<String>(cacheOfImages.keySet());
 		// remove first images (as we think they are older)
 		for (int i = 0; i < list.size()/2; i ++) {

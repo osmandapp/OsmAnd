@@ -43,7 +43,7 @@ bear_left == ['bear_left.ogg'].
 route_recalc(_Dist) == ['recalc.ogg'].
 
 go_ahead(Dist) == ['Drive.ogg', delay_250,  D]:- distance(Dist) == D.
-go_ahead == ['continue.ogg'].
+go_ahead == ['continue.ogg', 'stright.ogg'].
 
 %% 
 nth(1, '1st.ogg').

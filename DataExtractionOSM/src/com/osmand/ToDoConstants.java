@@ -11,20 +11,24 @@ public class ToDoConstants {
 	// TODO ANDROID
 	//   for 0.3
 	//   68. Implement service to app work with screen offline 
-	//		 (audio guidance & add new item to status bar & introduce error interval for building)
+	//		 (audio guidance & add new item to status bar & introduce error interval for gps building)
 	//    for offline service save gpx (combine in one trkseg)
-	//   71. Implement different mechanism for tiles (see rmaps)
+	//   71. Implement different mechanism for tiles (big sqlite planet see rmaps)
 
 	//   Improvement : Show stops in the transport route on the map 
 	// 	 Improvement : show favorites on the map?
+	//   Improvement : hard to press on the POI/....
 	//   Improvement : show detailed route on the map with turns and show route information directly (like in gmaps)
 	//   Improvement : redesign poi selecting (show on map )
 	//   Improvement : progress while loading tiles
 	//   Improvement : download with wget
 	//   Improvement : cloudmade as map?
 	//   Yandex traffic : http://jgo.maps.yandex.net/tiles?l=trf
-	//   BUG add button show my location
 	
+	// FIXME 
+	// 1. Bug with duplicated turns
+	// 2. Bug with network location while routing (?)
+	// 3. TODO options : using trackball as an option
 
 	
 	// Not clear if it is really needed 

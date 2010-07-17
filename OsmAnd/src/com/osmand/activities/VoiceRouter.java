@@ -119,8 +119,9 @@ public class VoiceRouter {
 					play.roundAbout(next.turnType.getTurnAngle(), next.turnType.getExitOut());
 				} else if(next.turnType.getValue().equals(TurnType.TU)){
 					play.makeUT();
-				} else if(next.turnType.getValue().equals(TurnType.C)){
-					play.goAhead();
+					// do not say it
+//				} else if(next.turnType.getValue().equals(TurnType.C)){
+//					play.goAhead();
 				} else {
 					isplay = false;
 				}
