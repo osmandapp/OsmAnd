@@ -30,7 +30,7 @@
         <activity android:name=".activities.search.SearchStreet2ByNameActivity"></activity>
         <activity android:name=".activities.search.SearchBuildingByNameActivity"></activity>
 		<activity android:name=".activities.EditPOIFilterActivity"></activity>
-		<service android:process="@string/process_navigation_service" android:label="@string/process_navigation_service" android:name=".NavigationService">
+		<service android:process="com.osmand" android:label="@string/process_navigation_service" android:name=".NavigationService">
 			<intent-filter><action android:name="com.osmand.NavigationService"></action></intent-filter>
 		</service>
 </application>
