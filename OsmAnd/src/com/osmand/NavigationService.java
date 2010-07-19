@@ -8,9 +8,11 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Binder;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.widget.Toast;
 
+import com.osmand.activities.RoutingHelper;
 import com.osmand.activities.SavingTrackHelper;
 
 public class NavigationService extends Service implements LocationListener {
@@ -22,6 +24,9 @@ public class NavigationService extends Service implements LocationListener {
 	private int serviceOffInterval;
 	private String serviceOffProvider;
 	private SavingTrackHelper savingTrackHelper;
+	private Handler handler;
+	private int serviceError;
+	private RoutingHelper routingHelper;
 	
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -30,16 +35,38 @@ public class NavigationService extends Service implements LocationListener {
 	
 	
 	
+	private void delayedAction(final boolean register, long delay){
+		handler.postDelayed(new Runnable(){
+
+			@Override
+			public void run() {
+				LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+				if(register){
+					locationManager.requestLocationUpdates(serviceOffProvider, serviceOffInterval, 0, NavigationService.this);
+					delayedAction(false, serviceError);
+				} else {
+					locationManager.removeUpdates(NavigationService.this);
+					delayedAction(true, serviceOffInterval);
+				}
+				
+			}
+			
+		}, serviceError);
+
+	}
+	
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		setForeground(true);
-		LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+		handler = new Handler();
+		
 		serviceOffInterval = OsmandSettings.getServiceOffInterval(this);
 		serviceOffProvider = OsmandSettings.getServiceOffProvider(this);
-		locationManager.requestLocationUpdates(serviceOffProvider, serviceOffInterval, 0, this);
+		serviceError = OsmandSettings.getServiceOffErrorInterval(this);
 		savingTrackHelper = new SavingTrackHelper(this);
-		
+		delayedAction(true, 500);
+		routingHelper = RoutingHelper.getInstance(this);
 		OsmandSettings.setServiceOffEnabled(this, true);
 	}
 	
@@ -57,9 +84,11 @@ public class NavigationService extends Service implements LocationListener {
 	@Override
 	public void onLocationChanged(Location location) {
 		if(location != null && !OsmandSettings.getMapActivityEnabled(this)){
-			// TODO update voice navigation
 			savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(), 
 					location.getSpeed(), location.getTime());
+			if(routingHelper.isFollowingMode()){
+				routingHelper.setCurrentLocation(location);
+			}
 		}
 		
 	}

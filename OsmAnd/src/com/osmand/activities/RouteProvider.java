@@ -306,6 +306,17 @@ public class RouteProvider {
 		previousInfo.expectedTime = (int) (previousInfo.distance / speed);
 		previousInfo.descriptionRoute += " " + MapUtils.getFormattedDistance(previousInfo.distance); //$NON-NLS-1$
 		
+		// add last direction go straight (to show arrow in screen after all turns)
+		if(previousInfo.distance > 350){
+			RouteDirectionInfo info = new RouteDirectionInfo();
+			info.expectedTime = 0;
+			info.distance = 0;
+			info.descriptionRoute = ""; //$NON-NLS-1$
+			info.turnType = TurnType.valueOf(TurnType.C);
+			info.routePointOffset = locations.size() - 1;
+			directions.add(info);
+		}
+		
 
 		
 		if(res.directions == null || res.directions.isEmpty()){
