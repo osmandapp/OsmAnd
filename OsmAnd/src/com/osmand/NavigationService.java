@@ -1,8 +1,14 @@
 package com.osmand;
 
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -20,6 +26,8 @@ public class NavigationService extends Service implements LocationListener {
 	public static class NavigationServiceBinder extends Binder {
 		
 	}
+	private final static int NOTIFICATION_SERVICE_ID = 1;
+	public final static String OSMAND_STOP_SERVICE_ACTION  = "OSMAND_STOP_SERVICE_ACTION"; //$NON-NLS-1$
 	private NavigationServiceBinder binder = new NavigationServiceBinder();
 	private int serviceOffInterval;
 	private String serviceOffProvider;
@@ -27,6 +35,8 @@ public class NavigationService extends Service implements LocationListener {
 	private Handler handler;
 	private int serviceError;
 	private RoutingHelper routingHelper;
+	private Notification notification;
+	
 	
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -51,7 +61,7 @@ public class NavigationService extends Service implements LocationListener {
 				
 			}
 			
-		}, serviceError);
+		}, delay);
 
 	}
 	
@@ -63,11 +73,29 @@ public class NavigationService extends Service implements LocationListener {
 		
 		serviceOffInterval = OsmandSettings.getServiceOffInterval(this);
 		serviceOffProvider = OsmandSettings.getServiceOffProvider(this);
-		serviceError = OsmandSettings.getServiceOffErrorInterval(this);
+		serviceError = OsmandSettings.getServiceOffWaitInterval(this);
 		savingTrackHelper = new SavingTrackHelper(this);
 		delayedAction(true, 500);
 		routingHelper = RoutingHelper.getInstance(this);
 		OsmandSettings.setServiceOffEnabled(this, true);
+		
+		registerReceiver(new BroadcastReceiver(){
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				NavigationService.this.stopSelf();
+			}
+			
+		}, new IntentFilter(OSMAND_STOP_SERVICE_ACTION));
+		
+		Intent notificationIntent = new Intent(OSMAND_STOP_SERVICE_ACTION);
+		notification = new Notification(R.drawable.icon, "", //$NON-NLS-1$
+				System.currentTimeMillis());
+		notification.flags = Notification.FLAG_NO_CLEAR;
+		notification.setLatestEventInfo(this, Version.APP_NAME,
+				getString(R.string.service_stop_background_service), PendingIntent.getBroadcast(this, 0, notificationIntent, 
+						PendingIntent.FLAG_UPDATE_CURRENT));
+		NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		mNotificationManager.notify(NOTIFICATION_SERVICE_ID, notification);
 	}
 	
 	
@@ -77,6 +105,9 @@ public class NavigationService extends Service implements LocationListener {
 		LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 		locationManager.removeUpdates(this);
 		OsmandSettings.setServiceOffEnabled(this, false);
+		NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		mNotificationManager.cancel(NOTIFICATION_SERVICE_ID);
+		
 	}
 
 

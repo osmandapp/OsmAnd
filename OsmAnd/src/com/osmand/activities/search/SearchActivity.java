@@ -3,15 +3,15 @@
  */
 package com.osmand.activities.search;
 
-import com.osmand.R;
-import com.osmand.activities.NavigatePointActivity;
-
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
+
+import com.osmand.R;
+import com.osmand.activities.NavigatePointActivity;
 
 /**
  * @author Maxim Frolov

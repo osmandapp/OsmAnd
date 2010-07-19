@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="use_trackball_descr">Use trackball to move map</string>
+	<string name="use_trackball">Use trackball</string>
+	<string name="background_service_wait_int_descr">Choose wait interval determining location</string>
+	<string name="background_service_wait_int">Wait interval</string>
+	<string name="service_stop_background_service">Switch off background navigation service</string>
 	<string name="where_am_i">Where am I?</string>
 	<string name="process_navigation_service">Osmand navigation service</string>
 	<string name="network_provider">Network</string>
 	<string name="gps_provider">GPS</string>
+	<string name="int_seconds">seconds</string>
 	<string name="int_min">min.</string>
 	<string name="background_service_int_descr">Choose interval to determine location for background service</string>
 	<string name="background_service_int">Positioning interval</string>

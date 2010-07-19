@@ -298,7 +298,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     }
     @Override
     public boolean onTrackballEvent(MotionEvent event) {
-    	if(event.getAction() == MotionEvent.ACTION_MOVE){
+    	if(event.getAction() == MotionEvent.ACTION_MOVE && OsmandSettings.isUsingTrackBall(this)){
     		float x = event.getX();
     		float y = event.getY();
     		LatLon l = mapView.getLatLonFromScreenPoint(mapView.getCenterPointX() + x * 15, mapView.getCenterPointY() + y * 15);

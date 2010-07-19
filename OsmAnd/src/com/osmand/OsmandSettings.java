@@ -52,6 +52,16 @@ public class OsmandSettings {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		return prefs.getBoolean(USE_INTERNET_TO_DOWNLOAD_TILES, USE_INTERNET_TO_DOWNLOAD_TILES_DEF);
 	}
+
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String USE_TRACKBALL_FOR_MOVEMENTS = "use_trackball_for_movements"; //$NON-NLS-1$
+	public static final boolean USE_TRACKBALL_FOR_MOVEMENTS_DEF = true;
+
+	public static boolean isUsingTrackBall(Context ctx) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(USE_TRACKBALL_FOR_MOVEMENTS, USE_TRACKBALL_FOR_MOVEMENTS_DEF);
+	}
 	
 
 	// this value string is synchronized with settings_pref.xml preference name
@@ -578,11 +588,11 @@ public class OsmandSettings {
 	
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public static final String SERVICE_OFF_ERROR_INTERVAL = "service_off_error_interval"; //$NON-NLS-1$
-	public static final int SERVICE_OFF_ERROR_INTERVAL_DEF = 60 * 1000;
-	public static int getServiceOffErrorInterval(Context ctx) {
+	public static final String SERVICE_OFF_WAIT_INTERVAL = "service_off_wait_interval"; //$NON-NLS-1$
+	public static final int SERVICE_OFF_WAIT_INTERVAL_DEF = 90 * 1000;
+	public static int getServiceOffWaitInterval(Context ctx) {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.getInt(SERVICE_OFF_ERROR_INTERVAL, SERVICE_OFF_ERROR_INTERVAL_DEF);
+		return prefs.getInt(SERVICE_OFF_WAIT_INTERVAL, SERVICE_OFF_WAIT_INTERVAL_DEF);
 	}
 	
 	

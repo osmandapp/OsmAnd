@@ -10,9 +10,6 @@ public class ToDoConstants {
 	
 	// TODO ANDROID
 	//   for 0.3
-	//   68. Implement service to app work with screen offline 
-	//		 (audio guidance & add new item to status bar & introduce error interval for gps building)
-	//    for offline service save gpx (combine in one trkseg)
 	//   71. Implement different mechanism for tiles (big sqlite planet see rmaps)
 
 	//   Improvement : Show stops in the transport route on the map 
@@ -31,9 +28,7 @@ public class ToDoConstants {
 	
 	// FIXME 
 	// 2. Bug with network location while routing (?) - fixed ?
-	// 3. TODO options : using trackball as an option
-	// 4. Add last turn as go straight (+)
-	// 5. After return if there was previous route (countinue follow)
+	// 5. After return if there was previous route (continue follow)
 	// 6. Bug 13.
  
 
@@ -63,6 +58,8 @@ public class ToDoConstants {
 	// BUGS Swing
 	
 	//  DONE ANDROID :
+	//   68. Implement service to app work with screen offline 
+	//		 (audio guidance & add new item to status bar & introduce error interval for gps in buildings)
 
 
 	
