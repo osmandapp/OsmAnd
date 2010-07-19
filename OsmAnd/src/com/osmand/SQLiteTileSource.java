@@ -72,7 +72,8 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public String getUrlToLoad(int x, int y, int zoom) {
-		if(getDatabase().isReadOnly()){
+		SQLiteDatabase db = getDatabase();
+		if(db == null || db.isReadOnly()){
 			return null;
 		}
 		return base != null ? base.getUrlToLoad(x, y, zoom) : null;
@@ -110,21 +111,29 @@ public class SQLiteTileSource implements ITileSource {
 	}
 	
 	private SQLiteDatabase getDatabase(){
-		if(db == null){
+		if(db == null && file.exists()){
 			db = SQLiteDatabase.openDatabase(file.getAbsolutePath(), null, 0);
 		}
 		return db;
 	}
 	
 	public boolean exists(int x, int y, int zoom) {
-		Cursor cursor = getDatabase().rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		SQLiteDatabase db = getDatabase();
+		if(db == null){
+			return false;
+		}
+		Cursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 		boolean e =  cursor.moveToFirst();
 		cursor.close();
 		return e;
 	}
 
 	public Bitmap getImage(int x, int y, int zoom) {
-		Cursor cursor = getDatabase().rawQuery("SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		SQLiteDatabase db = getDatabase();
+		if(db == null){
+			return null;
+		}
+		Cursor cursor = db.rawQuery("SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 		byte[] blob = null;
 		if(cursor.moveToFirst()) {
 			blob = cursor.getBlob(0);
@@ -141,15 +150,20 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public void deleteImage(int x, int y, int zoom) {
-		if(getDatabase().isReadOnly()){
+		SQLiteDatabase db = getDatabase();
+		if(db == null || db.isReadOnly()){
 			return;
 		}
-		getDatabase().execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 	}
 
 	private final int BUF_SIZE = 1024;
 	
 	public void insertImage(int x, int y, int zoom, File fileToSave) throws IOException {
+		SQLiteDatabase db = getDatabase();
+		if(db == null || db.isReadOnly()){
+			return;
+		}
 		if(exists(x, y, zoom)){
 			return;
 		}
@@ -161,7 +175,7 @@ public class SQLiteTileSource implements ITileSource {
 			buf.put(b, 0, i);
 		}
 		
-		SQLiteStatement statement = getDatabase().compileStatement("INSERT INTO tiles VALUES(?, ?, ?, ?, ?)"); //$NON-NLS-1$
+		SQLiteStatement statement = db.compileStatement("INSERT INTO tiles VALUES(?, ?, ?, ?, ?)"); //$NON-NLS-1$
 		statement.bindLong(1, x);
 		statement.bindLong(2, y);
 		statement.bindLong(3, 17 - zoom);
@@ -181,7 +195,7 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public boolean couldBeDownloadedFromInternet() {
-		if(getDatabase().isReadOnly() || base == null){
+		if(getDatabase() == null || getDatabase().isReadOnly() || base == null){
 			return false;
 		}
 		return base.couldBeDownloadedFromInternet();

@@ -72,7 +72,7 @@ public class SQLiteBigPlanetIndex {
 								if (l > 0) {
 									pStatement.setInt(1, x);
 									pStatement.setInt(2, y);
-									pStatement.setInt(3, zoom);
+									pStatement.setInt(3, 17 - zoom);
 									pStatement.setInt(4, 0);
 									pStatement.setBytes(5, buf);
 									pStatement.addBatch();

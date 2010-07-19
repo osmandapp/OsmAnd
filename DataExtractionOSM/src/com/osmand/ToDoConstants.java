@@ -10,9 +10,6 @@ public class ToDoConstants {
 	
 	// TODO ANDROID
 	//   for 0.3
-	//   71. Implement different mechanism for tiles (big sqlite planet see rmaps)
-	      // 1) doc, 2) test (update map, download from internet...), 3) add button menu create sqlite db
-
 	//   Improvement : Show stops in the transport route on the map 
 	// 	 Improvement : show favorites on the map?
 	//   Improvement : hard to press on the POI/....
@@ -60,7 +57,7 @@ public class ToDoConstants {
 	//  DONE ANDROID :
 	//   68. Implement service to app work with screen offline 
 	//		 (audio guidance & add new item to status bar & introduce error interval for gps in buildings)
-
+	//   71. Implement different mechanism for tiles (big sqlite planet see rmaps)
 
 	
 	// DONE SWING
