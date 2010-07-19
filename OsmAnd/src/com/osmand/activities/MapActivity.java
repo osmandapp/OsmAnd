@@ -57,6 +57,7 @@ import com.osmand.LogUtil;
 import com.osmand.OsmandSettings;
 import com.osmand.R;
 import com.osmand.ResourceManager;
+import com.osmand.SQLiteTileSource;
 import com.osmand.Version;
 import com.osmand.activities.FavouritesActivity.FavouritePoint;
 import com.osmand.activities.FavouritesActivity.FavouritesDbHelper;
@@ -67,6 +68,7 @@ import com.osmand.data.preparation.MapTileDownloader;
 import com.osmand.data.preparation.MapTileDownloader.DownloadRequest;
 import com.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
 import com.osmand.map.IMapLocationListener;
+import com.osmand.map.ITileSource;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 import com.osmand.views.AnimateDraggingMapThread;
@@ -168,10 +170,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			public void tileDownloaded(DownloadRequest request) {
 				if(request != null && !request.error && request.fileToSave != null){
 					ResourceManager mgr = ResourceManager.getResourceManager();
-					String tile = mgr.calculateTileId(mapView.getMap(), request.xTile, request.yTile, request.zoom);
-					mgr.tileDownloaded(tile);
+					mgr.tileDownloaded(request);
 				}
 				mapView.tileDownloaded(request);
+				
 			}
 		});
 		
@@ -588,8 +590,13 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 		// routing helper with current activity
 		routingHelper = RoutingHelper.getInstance(this);
-		if(mapView.getMap() != OsmandSettings.getMapTileSource(this)){
-			mapView.setMap(OsmandSettings.getMapTileSource(this));
+		ITileSource source = OsmandSettings.getMapTileSource(this);
+		if(!Algoritms.objectEquals(mapView.getMap(), source)){
+			if(mapView.getMap() instanceof SQLiteTileSource){
+				((SQLiteTileSource)mapView.getMap()).closeDB();
+			}
+			ResourceManager.getResourceManager().setMapSource(source);
+			mapView.setMap(source);
 		}
 		if(!OsmandSettings.isRotateMapToBearing(this)){
 			mapView.setRotate(0);

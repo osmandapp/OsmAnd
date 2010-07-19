@@ -15,4 +15,8 @@ public interface ITileSource {
 	
 	public String getTileFormat();
 	
+	public int getBitDensity();
+	
+	public boolean couldBeDownloadedFromInternet();
+	
 }

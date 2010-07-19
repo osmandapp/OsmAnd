@@ -424,7 +424,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			Canvas canvas = holder.lockCanvas();
 			if (canvas != null) {
 				ResourceManager mgr = ResourceManager.getResourceManager();
-				boolean useInternet = OsmandSettings.isUsingInternetToDownloadTiles(getContext());
+				boolean useInternet = OsmandSettings.isUsingInternetToDownloadTiles(getContext()) && map.couldBeDownloadedFromInternet();
 				int maxLevel = OsmandSettings.getMaximumLevelToDownloadTile(getContext());
 				canvas.save();
 				canvas.rotate(rotate, w , h);
@@ -441,7 +441,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 							float y1 = (j + top - tileY) * ftileSize + h;
 							String ordImgTile = mgr.calculateTileId(map, left + i, top + j, nzoom);
 							// asking tile image async
-							boolean imgExist = mgr.tileExistOnFileSystem(ordImgTile);
+							boolean imgExist = mgr.tileExistOnFileSystem(ordImgTile, map, left + i, top + j, nzoom);
 							Bitmap bmp = null;
 							boolean originalBeLoaded = useInternet && nzoom <= maxLevel;
 							if (imgExist || originalBeLoaded) {
@@ -461,10 +461,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 									}
 								}
 								if(!originalBeLoaded && !imgExist){
-									if (mgr.tileExistOnFileSystem(imgTile2) || (useInternet && nzoom - 1 <= maxLevel)) {
+									if (mgr.tileExistOnFileSystem(imgTile2, map, (left + i) / 2, (top + j) / 2, nzoom - 1) || (useInternet && nzoom - 1 <= maxLevel)) {
 										bmp = mgr.getTileImageForMapAsync(imgTile2, map, (left + i) / 2, (top + j) / 2, nzoom - 1, useInternet);
 										div = 2;
-									} else if (mgr.tileExistOnFileSystem(imgTile4) || (useInternet && nzoom - 2 <= maxLevel)) {
+									} else if (mgr.tileExistOnFileSystem(imgTile4, map, (left + i) / 4, (top + j) / 4, nzoom - 2) || (useInternet && nzoom - 2 <= maxLevel)) {
 										bmp = mgr.getTileImageForMapAsync(imgTile4, map, (left + i) / 4, (top + j) / 4, nzoom - 2, useInternet);
 										div = 4;
 									}

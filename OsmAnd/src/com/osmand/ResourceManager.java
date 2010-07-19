@@ -1,6 +1,7 @@
 package com.osmand;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.Collator;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public class ResourceManager {
 	
 	// it is not good investigated but no more than 64 (satellite images)
 	// Only 8 MB (from 16 Mb whole mem) available for images : image 64K * 128 = 8 MB (8 bit), 64 - 16 bit, 32 - 32 bit 
-	protected final int maxImgCacheSize = 48;
+	protected int maxImgCacheSize = 48;
 	
 	protected Map<String, Bitmap> cacheOfImages = new LinkedHashMap<String, Bitmap>();
 	protected Map<String, Boolean> imagesOnFS = new LinkedHashMap<String, Boolean>() ;
@@ -107,7 +108,7 @@ public class ResourceManager {
 		} else if(f.getName().endsWith(".tile")){ //$NON-NLS-1$
 			imagesOnFS.put(prefix + f.getName(), Boolean.TRUE);
 		} else if(f.getName().endsWith(".sqlitedb")){ //$NON-NLS-1$
-			// TODO
+			// nothing to do here
 		}
 	}
 	
@@ -126,13 +127,34 @@ public class ResourceManager {
 		return getTileImageForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, true, true);
 	}
 	
-	public synchronized void tileDownloaded(String file){
-		imagesOnFS.put(file, Boolean.TRUE);
+	public synchronized void tileDownloaded(DownloadRequest request){
+		if(request instanceof TileLoadDownloadRequest){
+			TileLoadDownloadRequest req = ((TileLoadDownloadRequest) request);
+			imagesOnFS.put(req.tileId, Boolean.TRUE);
+			if(req.fileToSave != null && req.tileSource instanceof SQLiteTileSource){
+				try {
+					((SQLiteTileSource) req.tileSource).insertImage(req.xTile, req.yTile, req.zoom, req.fileToSave);
+				} catch (IOException e) {
+					log.warn("File "+req.fileToSave.getName() + " couldn't be read", e);  //$NON-NLS-1$//$NON-NLS-2$
+				}
+				req.fileToSave.delete();
+			}
+		}
+		
 	}
 	
-	public synchronized boolean tileExistOnFileSystem(String file){
+	public synchronized boolean tileExistOnFileSystem(String file, ITileSource map, int x, int y, int zoom){
 		if(!imagesOnFS.containsKey(file)){
-			if(new File(dirWithTiles, file).exists()){
+			boolean ex = false;
+			if(map instanceof SQLiteTileSource){
+				ex = ((SQLiteTileSource) map).exists(x, y, zoom);
+			} else {
+				if(file == null){
+					file = calculateTileId(map, x, y, zoom);
+				}
+				ex = new File(dirWithTiles, file).exists();
+			}
+			if (ex) {
 				imagesOnFS.put(file, Boolean.TRUE);
 			} else {
 				imagesOnFS.put(file, null);
@@ -157,78 +179,106 @@ public class ResourceManager {
 	protected StringBuilder builder = new StringBuilder(40);
 	public synchronized String calculateTileId(ITileSource map, int x, int y, int zoom){
 		builder.setLength(0);
-		builder.append(map.getName()).append('/').append(zoom).	append('/').append(x).
+		builder.append(map.getName());
+		if(map instanceof SQLiteTileSource){
+			builder.append('@');
+		} else {
+			builder.append('/');
+		}
+		builder.append(zoom).append('/').append(x).
 				append('/').append(y).append(map.getTileFormat()).append(".tile"); //$NON-NLS-1$
 		String file = builder.toString();
 		return file;
 	}
 	
 
-	protected synchronized Bitmap getTileImageForMap(String file, ITileSource map, int x, int y, int zoom,
+	protected synchronized Bitmap getTileImageForMap(String tileId, ITileSource map, int x, int y, int zoom,
 			boolean loadFromInternetIfNeeded, boolean sync, boolean loadFromFs, boolean deleteBefore) {
-		if (file == null) {
-			file = calculateTileId(map, x, y, zoom);
-			if(file == null){
+		if (tileId == null) {
+			tileId = calculateTileId(map, x, y, zoom);
+			if(tileId == null){
 				return null;
 			}
 		}
 		
 		if(deleteBefore){
-			cacheOfImages.remove(file);
-			File f = new File(dirWithTiles, file);
-			if(f.exists()){
-				f.delete();
-				imagesOnFS.put(file, null);
+			cacheOfImages.remove(tileId);
+			if (map instanceof SQLiteTileSource) {
+				((SQLiteTileSource) map).deleteImage(x, y, zoom);
+			} else {
+				File f = new File(dirWithTiles, tileId);
+				if (f.exists()) {
+					f.delete();
+				}
 			}
+			imagesOnFS.put(tileId, null);
 		}
 		
-		if (loadFromFs && cacheOfImages.get(file) == null) {
-			if(!loadFromInternetIfNeeded && !tileExistOnFileSystem(file)){
+		if (loadFromFs && cacheOfImages.get(tileId) == null) {
+			if(!loadFromInternetIfNeeded && !tileExistOnFileSystem(tileId, map, x, y, zoom)){
 				return null;
 			}
 			String url = loadFromInternetIfNeeded ? map.getUrlToLoad(x, y, zoom) : null;
-			TileLoadDownloadRequest req = new TileLoadDownloadRequest(dirWithTiles, file, url, new File(dirWithTiles, file), 
-					x, y, zoom);
+			File toSave = null;
+			if (url != null) {
+				if (map instanceof SQLiteTileSource) {
+					ITileSource base = ((SQLiteTileSource) map).getBase();
+					toSave = new File(dirWithTiles, calculateTileId(base, x, y, zoom));
+				} else {
+					toSave = new File(dirWithTiles, tileId);
+				}
+			}
+			TileLoadDownloadRequest req = new TileLoadDownloadRequest(dirWithTiles, url, toSave, 
+					tileId, map, x, y, zoom);
 			if(sync){
 				return getRequestedImageTile(req);
 			} else {
 				asyncLoadingTiles.requestToLoadImage(req);
 			}
 		}
-		return cacheOfImages.get(file);
+		return cacheOfImages.get(tileId);
 	}
 	
 	
 	
 	private Bitmap getRequestedImageTile(TileLoadDownloadRequest req){
-		if(req.fileToLoad == null || req.dirWithTiles == null){
+		if(req.tileId == null || req.dirWithTiles == null){
 			return null;
 		}
-		File en = new File(req.dirWithTiles, req.fileToLoad);
 		if (cacheOfImages.size() > maxImgCacheSize) {
 			clearTiles();
 		}
-		
-		if (!downloader.isFileCurrentlyDownloaded(en) && req.dirWithTiles.canRead()) {
-			if (en.exists()) {
-				long time = System.currentTimeMillis();
-				cacheOfImages.put(req.fileToLoad, BitmapFactory.decodeFile(en.getAbsolutePath()));
-				if (log.isDebugEnabled()) {
-					log.debug("Loaded file : " + req.fileToLoad + " " + -(time - System.currentTimeMillis()) + " ms " + cacheOfImages.size()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		if (req.dirWithTiles.canRead() && !downloader.isFileCurrentlyDownloaded(req.fileToSave)) {
+			long time = System.currentTimeMillis();
+			Bitmap bmp = null;
+			if (req.tileSource instanceof SQLiteTileSource) {
+				bmp = ((SQLiteTileSource) req.tileSource).getImage(req.xTile, req.yTile, req.zoom);
+			} else {
+				File en = new File(req.dirWithTiles, req.tileId);
+				if (en.exists()) {
+					bmp = BitmapFactory.decodeFile(en.getAbsolutePath());
 				}
-			} 
-			
-			if(cacheOfImages.get(req.fileToLoad) == null && req.url != null){
+			}
+
+			if (bmp != null) {
+				cacheOfImages.put(req.tileId, bmp);
+				if (log.isDebugEnabled()) {
+					log.debug("Loaded file : " + req.tileId + " " + -(time - System.currentTimeMillis()) + " ms " + cacheOfImages.size()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				}
+			}
+
+			if (cacheOfImages.get(req.tileId) == null && req.url != null) {
 				// TODO we could check that network is available (context is required)
-//				ConnectivityManager mgr = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-//				NetworkInfo info = mgr.getActiveNetworkInfo();
-//				if (info != null && info.isConnected()) {
-//					downloader.requestToDownload(req);
-//				}
+				// ConnectivityManager mgr = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+				// NetworkInfo info = mgr.getActiveNetworkInfo();
+				// if (info != null && info.isConnected()) {
+				// downloader.requestToDownload(req);
+				// }
 				downloader.requestToDownload(req);
 			}
+
 		}
-		return cacheOfImages.get(req.fileToLoad);
+		return cacheOfImages.get(req.tileId);
 	}
 	
     ////////////////////////////////////////////// Working with indexes ////////////////////////////////////////////////
@@ -444,6 +494,25 @@ public class ResourceManager {
 	}	
 	
 	
+	public synchronized void setMapSource(ITileSource source){
+		log.info("Clear cache with new source " + cacheOfImages.size()); //$NON-NLS-1$
+		ArrayList<String> list = new ArrayList<String>(cacheOfImages.keySet());
+		// remove first images (as we think they are older)
+		for (int i = 0; i < list.size(); i ++) {
+			Bitmap bmp = cacheOfImages.remove(list.get(i));
+			if(bmp != null){
+				bmp.recycle();
+			}
+		}
+		if(source == null || source.getBitDensity() == 0){
+			maxImgCacheSize = 48;
+		} else {
+			maxImgCacheSize = 1024 / source.getBitDensity();
+		}
+		
+	}
+	
+	
 	protected synchronized void clearTiles(){
 		log.info("Cleaning tiles - size = " + cacheOfImages.size()); //$NON-NLS-1$
 		ArrayList<String> list = new ArrayList<String>(cacheOfImages.keySet());
@@ -462,14 +531,16 @@ public class ResourceManager {
 
 	private static class TileLoadDownloadRequest extends DownloadRequest {
 
-		public final String fileToLoad;
+		public final String tileId;
 		public final File dirWithTiles; 
+		public final ITileSource tileSource;
 		
-		public TileLoadDownloadRequest(File dirWithTiles, 
-				String fileToLoad, String url, File fileToSave, int tileX, int tileY, int zoom) {
+		public TileLoadDownloadRequest(File dirWithTiles, String url, File fileToSave, 
+				String tileId, ITileSource source, int tileX, int tileY, int zoom) {
 			super(url, fileToSave, tileX, tileY, zoom);
 			this.dirWithTiles = dirWithTiles;
-			this.fileToLoad = fileToLoad;
+			tileSource = source;
+			this.tileId = tileId;
 		}
 	}
 	
@@ -533,7 +604,7 @@ public class ResourceManager {
 						Object req = requests.pop();
 						if (req instanceof TileLoadDownloadRequest) {
 							TileLoadDownloadRequest r = (TileLoadDownloadRequest) req;
-							if (cacheOfImages.get(r.fileToLoad) == null) {
+							if (cacheOfImages.get(r.tileId) == null) {
 								update |= getRequestedImageTile(r) != null;
 							}
 						} else if(req instanceof AmenityLoadRequest){

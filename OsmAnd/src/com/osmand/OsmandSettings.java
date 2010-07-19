@@ -1,5 +1,6 @@
 package com.osmand;
 
+import java.io.File;
 import java.util.List;
 
 import android.content.Context;
@@ -7,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
 import android.location.LocationManager;
+import android.os.Environment;
 
 import com.osmand.activities.RouteProvider.RouteService;
 import com.osmand.activities.search.SearchHistoryHelper;
@@ -278,6 +280,10 @@ public class OsmandSettings {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		String tileName = prefs.getString(MAP_TILE_SOURCES, null);
 		if (tileName != null) {
+			if(tileName.endsWith(SQLiteTileSource.EXT)){
+				File file = new File(Environment.getExternalStorageDirectory(), ResourceManager.TILES_PATH);
+				return new SQLiteTileSource(new File(file, tileName));
+			}
 			List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
 			for (TileSourceTemplate l : list) {
 				if (l.getName().equals(tileName)) {
