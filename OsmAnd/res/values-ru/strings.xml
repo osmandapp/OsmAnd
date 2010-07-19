@@ -100,7 +100,7 @@
 	<string name="hint_search_online">Город, улица, дом</string>
 	<string name="search_offline_address">Локальный</string>
 	<string name="search_online_address">Интернет</string>
-	<string name="max_level_download_tile">Уровень детализация</string>
+	<string name="max_level_download_tile">Уровень детализации</string>
 	<string name="max_level_download_tile_descr">Выберите максимальный уровень для загрузки из интернета</string>
 	<string name="route_about">О маршруте</string>
 	<string name="route_general_information">Общая протяженность = {0}, время в пути = \'\'{1}\'\'.</string>
