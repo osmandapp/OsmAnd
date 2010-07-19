@@ -42,6 +42,10 @@
 				<include name="run.sh"/>
 			</fileset>
 		</copy>
+		<zip destfile="build.zip">
+			<fileset dir="build">
+			</fileset>
+		</zip>
 		<delete file="OsmAndMapCreator.jar" />
 	</target>
 
