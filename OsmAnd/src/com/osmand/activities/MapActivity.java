@@ -473,18 +473,28 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}  
 		return false;
 	}
+	
+	private boolean useOnlyGPS(){
+		return (routingHelper != null && routingHelper.isFollowingMode()) || isRunningOnEmulator();
+	}
     
 
 	// Working with location listeners
 	private LocationListener networkListener = new LocationListener(){
+		
 		@Override
 		public void onLocationChanged(Location location) {
-			setLocation(location);
+			// double check about use only gps
+			if(!useOnlyGPS()){
+				setLocation(location);
+			}
 		}
 
 		@Override
 		public void onProviderDisabled(String provider) {
-			setLocation(null);
+			if(!useOnlyGPS()){
+				setLocation(null);
+			}
 		}
 
 		@Override
@@ -493,7 +503,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 
 		@Override
 		public void onStatusChanged(String provider, int status, Bundle extras) {
-			if(LocationProvider.OUT_OF_SERVICE == status){
+			if(LocationProvider.OUT_OF_SERVICE == status && !useOnlyGPS()){
 				setLocation(null);
 			}
 		}
@@ -523,7 +533,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					setLocation(null);
 				}
 				// do not use it in routing
-				if (!isRunningOnEmulator() && !routingHelper.isFollowingMode() && 
+				if (!useOnlyGPS() &&  
 						service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
 					if (!Algoritms.objectEquals(currentLocationProvider, LocationManager.NETWORK_PROVIDER)) {
 						currentLocationProvider = LocationManager.NETWORK_PROVIDER;
@@ -623,7 +633,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, gpsListener);
 		currentLocationProvider = LocationManager.GPS_PROVIDER;
-		if(!isRunningOnEmulator()){
+		if(!useOnlyGPS()){
 			// try to always  ask for network provide : it is faster way to find location
 			service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, networkListener);
 			currentLocationProvider = LocationManager.NETWORK_PROVIDER;

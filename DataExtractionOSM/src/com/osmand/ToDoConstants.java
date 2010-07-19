@@ -24,11 +24,18 @@ public class ToDoConstants {
 	//   Improvement : download with wget
 	//   Improvement : cloudmade as map?
 	//   Yandex traffic : http://jgo.maps.yandex.net/tiles?l=trf
+	//   Improvement : show route info after route is calculated and/or calculate route from context menu
+	//					(continue follow previous route)
+	//   Improvement : show route info (directly after route is calc & do not show if it is not calc)
+
 	
 	// FIXME 
-	// 1. Bug with duplicated turns
-	// 2. Bug with network location while routing (?)
+	// 2. Bug with network location while routing (?) - fixed ?
 	// 3. TODO options : using trackball as an option
+	// 4. Add last turn as go straight (+)
+	// 5. After return if there was previous route (countinue follow)
+	// 6. Bug 13.
+ 
 
 	
 	// Not clear if it is really needed 
@@ -56,18 +63,7 @@ public class ToDoConstants {
 	// BUGS Swing
 	
 	//  DONE ANDROID :
-    //   43. Enable poi filter by name (find lake by name or shop) - case sensitive search DB - make only search filter (on UI)!
-	//   45. Get clear <Use internet> settings. Move that setting on top settings screen. 
-	//       That setting should rule all activities that use internet. It should ask whenever internet is used 
-	//		(would you like to use internet for that operation - if using internet is not checked). 
-	//		Internet using now for : edit POI osm, show osm bugs layer, download tiles - not needed.
-	//   58. Upload/Download zip-index from site & unzip them on phone
-	//   69. Multitouch zoom, animated zoom, animate map shift (when select some point to see)!
-    //   60. Audio guidance for routing !
-	//   61. Provide route information for YOURS (calclate turns/angle/expected time) 
-	//		 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m) [dacha] !
-	//   33. Build transport locations. Create transport index (transport-stops) (investigate)
-	// 		 Not implemented  : show key/transit stops on map, follow mode (show next stop)
+
 
 	
 	// DONE SWING

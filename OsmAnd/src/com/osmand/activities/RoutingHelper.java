@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
 import android.location.Location;
 import android.util.FloatMath;
 import android.widget.Toast;
@@ -23,7 +24,7 @@ public class RoutingHelper {
 	private static final org.apache.commons.logging.Log log = LogUtil.getLog(RoutingHelper.class);
 
 	// activity to show messages & refresh map when route is calculated
-	private Activity activity;
+	private Context context;
 	
 	private boolean isFollowingMode = false;
 	
@@ -71,8 +72,8 @@ public class RoutingHelper {
 	}
 	
 	private static RoutingHelper INSTANCE = new RoutingHelper(); 
-	public static RoutingHelper getInstance(Activity ctx){
-		INSTANCE.activity = ctx;
+	public static RoutingHelper getInstance(Context ctx){
+		INSTANCE.context = ctx;
 		INSTANCE.voiceRouter.init(ctx);
 		return INSTANCE;
 	}
@@ -128,7 +129,7 @@ public class RoutingHelper {
 		Location lastPoint = routeNodes.get(routeNodes.size() - 1);
 		if(currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < 60){
 			if(lastFixedLocation != null && lastFixedLocation.distanceTo(lastPoint) < 60){
-				showMessage(activity.getString(R.string.arrived_at_destination));
+				showMessage(context.getString(R.string.arrived_at_destination));
 				voiceRouter.arrivedDestinationPoint();
 				updateCurrentRoute(routeNodes.size() - 1);
 				// clear final location to prevent all time showing message
@@ -388,7 +389,7 @@ public class RoutingHelper {
 	}
 	
 	public void calculateRoute(final Location start, final LatLon end){
-		final RouteService service = OsmandSettings.getRouterService(activity);
+		final RouteService service = OsmandSettings.getRouterService(context);
 		if(currentRunningJob == null){
 			// do not evaluate very often
 			if (System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval) {
@@ -396,7 +397,7 @@ public class RoutingHelper {
 					currentRunningJob = new Thread(new Runnable() {
 						@Override
 						public void run() {
-							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, activity);
+							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context);
 							synchronized (RoutingHelper.this) {
 								if (res.isCalculated()) {
 									setNewRoute(res);
@@ -414,18 +415,18 @@ public class RoutingHelper {
 								if (res.isCalculated()) {
 									int[] dist = res.getListDistance();
 									int l = dist != null && dist.length > 0 ? dist[0] : 0;
-									showMessage(activity.getString(R.string.new_route_calculated_dist) +" : "+ MapUtils.getFormattedDistance(l)); //$NON-NLS-1$
-									if (activity instanceof MapActivity) {
+									showMessage(context.getString(R.string.new_route_calculated_dist) +" : "+ MapUtils.getFormattedDistance(l)); //$NON-NLS-1$
+									if (context instanceof MapActivity) {
 										// be aware that is non ui thread
-										((MapActivity) activity).getMapView().refreshMap();
+										((MapActivity) context).getMapView().refreshMap();
 									}
 								} else {
 									if (res.getErrorMessage() != null) {
-										showMessage(activity.getString(R.string.error_calculating_route)+" : " + res.getErrorMessage()); //$NON-NLS-1$
+										showMessage(context.getString(R.string.error_calculating_route)+" : " + res.getErrorMessage()); //$NON-NLS-1$
 									} else if (res.getLocations() == null) {
-										showMessage(activity.getString(R.string.error_calculating_route_occured));
+										showMessage(context.getString(R.string.error_calculating_route_occured));
 									} else {
-										showMessage(activity.getString(R.string.empty_route_calculated));
+										showMessage(context.getString(R.string.empty_route_calculated));
 									}
 								}
 							lastTimeEvaluatedRoute = System.currentTimeMillis();
@@ -438,11 +439,11 @@ public class RoutingHelper {
 	}
 	
 	private void showMessage(final String msg){
-		if (activity != null) {
-			activity.runOnUiThread(new Runnable() {
+		if (context instanceof Activity) {
+			((Activity)context).runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-					Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
+					Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 				}
 			});
 		}

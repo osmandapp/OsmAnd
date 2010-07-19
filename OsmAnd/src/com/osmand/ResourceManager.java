@@ -57,7 +57,7 @@ public class ResourceManager {
 	}
 	
 	// it is not good investigated but no more than 64 (satellite images)
-	// Only 8 MB (from 16 Mb whole mem) available for images : image 64K * 128 = 8 MB (8 bit), 64 - 16 bit, 32 - 128 bit 
+	// Only 8 MB (from 16 Mb whole mem) available for images : image 64K * 128 = 8 MB (8 bit), 64 - 16 bit, 32 - 32 bit 
 	protected final int maxImgCacheSize = 48;
 	
 	protected Map<String, Bitmap> cacheOfImages = new LinkedHashMap<String, Bitmap>();
@@ -444,7 +444,7 @@ public class ResourceManager {
 	}	
 	
 	
-	protected void clearTiles(){
+	protected synchronized void clearTiles(){
 		log.info("Cleaning tiles - size = " + cacheOfImages.size()); //$NON-NLS-1$
 		ArrayList<String> list = new ArrayList<String>(cacheOfImages.keySet());
 		// remove first images (as we think they are older)
