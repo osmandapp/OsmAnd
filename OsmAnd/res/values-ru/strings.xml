@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="use_trackball_descr">Использовать трекбол, чтобы перемещать карту</string>
+	<string name="use_trackball">Использовать трекбол</string>
+	<string name="background_service_wait_int_descr">Выберите время поиска позиции сервиса</string>
+	<string name="background_service_wait_int">Время ожидания</string>
+	<string name="service_stop_background_service">Остановить фоновый сервис</string>
 	<string name="where_am_i">Где я?</string>
 	<string name="network_provider">Сеть</string>
 	<string name="gps_provider">GPS</string>
+	<string name="int_seconds">секунд</string>
 	<string name="int_min">мин.</string>
 	<string name="background_service_int_descr">Выберите интервал позиционирования для сервиса</string>
 	<string name="background_service_int">Интервал позиционирования</string>
