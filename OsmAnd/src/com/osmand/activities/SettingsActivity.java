@@ -1,6 +1,7 @@
 package com.osmand.activities;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -34,6 +35,7 @@ import com.osmand.PoiFiltersHelper;
 import com.osmand.ProgressDialogImplementation;
 import com.osmand.R;
 import com.osmand.ResourceManager;
+import com.osmand.SQLiteTileSource;
 import com.osmand.OsmandSettings.ApplicationMode;
 import com.osmand.activities.RouteProvider.RouteService;
 import com.osmand.map.TileSourceManager;
@@ -101,6 +103,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			new BooleanPreference(OsmandSettings.SHOW_TRANSPORT_OVER_MAP, OsmandSettings.SHOW_TRANSPORT_OVER_MAP_DEF),
 			new BooleanPreference(OsmandSettings.SAVE_TRACK_TO_GPX, OsmandSettings.SAVE_TRACK_TO_GPX_DEF),
 	};
+	private BroadcastReceiver broadcastReceiver;
 	
 	
 	
@@ -157,13 +160,14 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		routeServiceEnabled.setOnPreferenceChangeListener(this);
 		
 		
-		registerReceiver(new BroadcastReceiver(){
+		broadcastReceiver = new BroadcastReceiver(){
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				routeServiceEnabled.setChecked(false);
 			}
 			
-		}, new IntentFilter(NavigationService.OSMAND_STOP_SERVICE_ACTION));
+		};
+		registerReceiver(broadcastReceiver, new IntentFilter(NavigationService.OSMAND_STOP_SERVICE_ACTION));
     }
     
     @Override
@@ -171,6 +175,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		super.onResume();
 		updateAllSettings();
 	}
+    
+    @Override
+    protected void onDestroy() {
+    	super.onDestroy();
+    	unregisterReceiver(broadcastReceiver);
+    }
     
     public void updateAllSettings(){
     	SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
@@ -291,13 +301,34 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		
 
 		List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
-		entries = new String[list.size()];
-		for (int i = 0; i < list.size(); i++) {
-			entries[i] = list.get(i).getName();
+		List<File> sqLiteFiles = new ArrayList<File>();
+		
+		File dir = new File(Environment.getExternalStorageDirectory(), ResourceManager.TILES_PATH);
+		if (dir != null) {
+			for (File f : dir.listFiles()) {
+				if (f.getName().endsWith(SQLiteTileSource.EXT)) {
+					sqLiteFiles.add(f);
+				}
+			}
 		}
+		
+		entries = new String[list.size() + sqLiteFiles.size()];
+		valueEntries = new String[list.size() + sqLiteFiles.size()];
+		for (int i = 0; i < list.size(); i++) {
+			entries[i + sqLiteFiles.size()] = list.get(i).getName();
+			valueEntries[i  + sqLiteFiles.size()] = list.get(i).getName();
+		}
+		for (int i = 0; i < sqLiteFiles.size(); i++) {
+			String n = sqLiteFiles.get(i).getName();
+			entries[i] = n.substring(0, n.indexOf('.'));
+			valueEntries[i] = sqLiteFiles.get(i).getName();
+		}
+		
+		
+		
 
 		tileSourcePreference.setEntries(entries);
-		tileSourcePreference.setEntryValues(entries);
+		tileSourcePreference.setEntryValues(valueEntries);
 		tileSourcePreference.setValue(OsmandSettings.getMapTileSourceName(this));
 		String mapName = " " +OsmandSettings.getMapTileSourceName(this); //$NON-NLS-1$
 		String summary = tileSourcePreference.getSummary().toString();

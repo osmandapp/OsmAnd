@@ -11,6 +11,7 @@ public class ToDoConstants {
 	// TODO ANDROID
 	//   for 0.3
 	//   71. Implement different mechanism for tiles (big sqlite planet see rmaps)
+	      // 1) doc, 2) test (update map, download from internet...), 3) add button menu create sqlite db
 
 	//   Improvement : Show stops in the transport route on the map 
 	// 	 Improvement : show favorites on the map?
@@ -19,7 +20,6 @@ public class ToDoConstants {
 	//   Improvement : redesign poi selecting (show on map )
 	//   Improvement : progress while loading tiles
 	//   Improvement : download with wget
-	//   Improvement : cloudmade as map?
 	//   Yandex traffic : http://jgo.maps.yandex.net/tiles?l=trf
 	//   Improvement : show route info after route is calculated and/or calculate route from context menu
 	//					(continue follow previous route)

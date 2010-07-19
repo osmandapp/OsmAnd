@@ -16,8 +16,9 @@ public class TileSourceManager {
 		private String urlToLoad;
 		private String ext;
 		private int avgSize;
+		private int bitDensity;
 		
-		public TileSourceTemplate(String name, String urlToLoad, String ext, int maxZoom, int minZoom, int tileSize,  int avgSize) {
+		public TileSourceTemplate(String name, String urlToLoad, String ext, int maxZoom, int minZoom, int tileSize, int bitDensity, int avgSize) {
 			this.maxZoom = maxZoom;
 			this.minZoom = minZoom;
 			this.name = name;
@@ -25,8 +26,13 @@ public class TileSourceManager {
 			this.urlToLoad = urlToLoad;
 			this.ext = ext;
 			this.avgSize = avgSize;
+			this.bitDensity = bitDensity;
 		}
 
+		@Override
+		public int getBitDensity() {
+			return bitDensity;
+		}
 		
 		public int getAverageSize(){
 			return avgSize;
@@ -60,6 +66,11 @@ public class TileSourceManager {
 		public String getUrlToLoad(int x, int y, int zoom) {
 			// use int to string not format numbers! (non-nls)
 			return MessageFormat.format(urlToLoad, zoom+"", x+"", y+""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		}
+		
+		@Override
+		public boolean couldBeDownloadedFromInternet() {
+			return true;
 		}
 
 
@@ -123,60 +134,60 @@ public class TileSourceManager {
 	
 	
 	public static TileSourceTemplate getMapnikSource(){
-		return new TileSourceTemplate("Mapnik", "http://tile.openstreetmap.org/{0}/{1}/{2}.png", ".png", 18, 1, 256, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		return new TileSourceTemplate("Mapnik", "http://tile.openstreetmap.org/{0}/{1}/{2}.png", ".png", 18, 1, 256, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	public static TileSourceTemplate getOsmaRenderSource(){
-		return new TileSourceTemplate("OsmaRender", "http://tah.openstreetmap.org/Tiles/tile/{0}/{1}/{2}.png", ".png", 17, 1, 256, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		return new TileSourceTemplate("OsmaRender", "http://tah.openstreetmap.org/Tiles/tile/{0}/{1}/{2}.png", ".png", 17, 1, 256, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	public static TileSourceTemplate getCycleMapSource(){
-		return new TileSourceTemplate("CycleMap", "http://b.andy.sandbox.cloudmade.com/tiles/cycle/{0}/{1}/{2}.png", ".png", 17, 0, 256, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		return new TileSourceTemplate("CycleMap", "http://b.andy.sandbox.cloudmade.com/tiles/cycle/{0}/{1}/{2}.png", ".png", 17, 0, 256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	public static TileSourceTemplate getAerialMapSource(){
-		return new TileSourceTemplate("OpenAerialMap", "http://tile.openaerialmap.org/tiles/1.0.0/openaerialmap-900913/{0}/{1}/{2}.jpg", ".jpg", 13, 0, 256, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		return new TileSourceTemplate("OpenAerialMap", "http://tile.openaerialmap.org/tiles/1.0.0/openaerialmap-900913/{0}/{1}/{2}.jpg", ".jpg", 13, 0, 256, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	public static TileSourceTemplate getCloudMadeSource(){
-		return new TileSourceTemplate("Cloudmade", "http://tile.cloudmade.com/7ded028e030c5929b28bf823486ce84f/1/256/{0}/{1}/{2}.png", ".png", 18, 0, 256, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		return new TileSourceTemplate("Cloudmade", "http://tile.cloudmade.com/7ded028e030c5929b28bf823486ce84f/1/256/{0}/{1}/{2}.png", ".png", 18, 0, 256, 16, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	public static TileSourceTemplate getMapSurferSource(){
-		return new TileSourceTemplate("MapSurfer", "http://tiles1.mapsurfer.net/tms_r.ashx?z={0}&x={1}&y={2}", ".png", 19, 0, 256, 18000);//$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return new TileSourceTemplate("MapSurfer", "http://tiles1.mapsurfer.net/tms_r.ashx?z={0}&x={1}&y={2}", ".png", 19, 0, 256, 16, 18000);//$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	public static TileSourceTemplate getNavigationDebugSource(){
-		return new TileSourceTemplate("NavigationDebug", "http://ec2-184-73-15-218.compute-1.amazonaws.com/6700/256/{0}/{1}/{2}.png", ".png", 18, 0, 256, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return new TileSourceTemplate("NavigationDebug", "http://ec2-184-73-15-218.compute-1.amazonaws.com/6700/256/{0}/{1}/{2}.png", ".png", 18, 0, 256, 16, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	
 	public static TileSourceTemplate getOpenPisteMapSource(){
-		return new TileSourceTemplate("OpenPisteMap", "http://openpistemap.org/tiles/contours/{0}/{1}/{2}.png", ".png", 17, 0, 256, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return new TileSourceTemplate("OpenPisteMap", "http://openpistemap.org/tiles/contours/{0}/{1}/{2}.png", ".png", 17, 0, 256, 32, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	public static TileSourceTemplate getGoogleMapsSource(){
-		return new TileSourceTemplate("GoogleMaps", "http://mt3.google.com/vt/v=w2.97&x={1}&y={2}&z={0}", ".png", 19, 0, 256, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return new TileSourceTemplate("GoogleMaps", "http://mt3.google.com/vt/v=w2.97&x={1}&y={2}&z={0}", ".png", 19, 0, 256, 16, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	public static TileSourceTemplate getGoogleMapsSatelliteSource(){
-		return new TileSourceTemplate("GoogleMaps Satellite", "http://khm1.google.com/kh/v=59&x={1}&y={2}&z={0}", ".jpg", 20, 0, 256, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return new TileSourceTemplate("GoogleMaps Satellite", "http://khm1.google.com/kh/v=59&x={1}&y={2}&z={0}", ".jpg", 20, 0, 256, 32, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	public static TileSourceTemplate getGoogleMapsTerrainSource(){
-		return new TileSourceTemplate("GoogleMaps Terrain", "http://mt3.google.com/vt/v=w2p.111&hl=en&x={1}&y={2}&z={0}", ".jpg", 15, 0, 256, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return new TileSourceTemplate("GoogleMaps Terrain", "http://mt3.google.com/vt/v=w2p.111&hl=en&x={1}&y={2}&z={0}", ".jpg", 15, 0, 256, 32, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	public static TileSourceTemplate getMicrosoftMapsSource(){
-		return new MicrosoftTileSourceTemplate("Microsoft Maps", 'r', "png", ".png", 19, 1, 256, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return new MicrosoftTileSourceTemplate("Microsoft Maps", 'r', "png", ".png", 19, 1, 256, 16, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	public static TileSourceTemplate getMicrosoftEarthSource(){
-		return new MicrosoftTileSourceTemplate("Microsoft Earth", 'a', "jpg", ".jpg", 19, 1, 256, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return new MicrosoftTileSourceTemplate("Microsoft Earth", 'a', "jpg", ".jpg", 19, 1, 256, 32, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	public static TileSourceTemplate getMicrosoftHybridSource(){
-		return new MicrosoftTileSourceTemplate("Microsoft Hybrid", 'h', "jpg", ".jpg", 19, 1, 256, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return new MicrosoftTileSourceTemplate("Microsoft Hybrid", 'h', "jpg", ".jpg", 19, 1, 256, 32, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	
@@ -212,8 +223,8 @@ public class TileSourceManager {
 		private final String tileType;
 
 		public MicrosoftTileSourceTemplate(String name, char mapTypeChar , String type, 
-				String ext, int maxZoom, int minZoom, int tileSize, int avgSize) {
-			super(name, null, ext, maxZoom, minZoom, tileSize, avgSize);
+				String ext, int maxZoom, int minZoom, int tileSize, int bitDensity, int avgSize) {
+			super(name, null, ext, maxZoom, minZoom, tileSize, bitDensity, avgSize);
 			this.mapTypeChar = mapTypeChar;
 			this.tileType = type;
 		}

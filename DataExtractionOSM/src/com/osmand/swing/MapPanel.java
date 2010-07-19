@@ -65,7 +65,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 			menuItem.addActionListener(new ActionListener(){
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					for(int i=0; i<tiles.getItemCount(); i++){
+					for(int i=0; i<list.size()	; i++){
 						if(list.get(i).equals(l)){
 							((JCheckBoxMenuItem)tiles.getItem(i)).setSelected(true);
 						} else {

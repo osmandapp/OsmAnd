@@ -78,6 +78,7 @@ import com.osmand.data.City.CityType;
 import com.osmand.data.index.DataIndexWriter;
 import com.osmand.data.preparation.DataExtraction;
 import com.osmand.map.IMapLocationListener;
+import com.osmand.map.ITileSource;
 import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
@@ -541,7 +542,11 @@ public class OsmExtractionUI implements IMapLocationListener {
 		JMenuItem exitMenu= new JMenuItem("Exit");
 		menu.add(exitMenu);
 		
-		bar.add(MapPanel.getMenuToChooseSource(mapPanel));
+		JMenu tileSource = MapPanel.getMenuToChooseSource(mapPanel);
+		tileSource.addSeparator();
+		JMenuItem sqliteDB = new JMenuItem("Create sqlite database");
+		tileSource.add(sqliteDB);
+		bar.add(tileSource);
 		
 		menu = new JMenu("Window");
 		bar.add(menu);
@@ -569,6 +574,39 @@ public class OsmExtractionUI implements IMapLocationListener {
 
 				} else {
 					ExceptionHandler.handle("Log file is not found");
+				}
+			}
+		});
+		
+		sqliteDB.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				final String regionName = region == null ? "Region" : region.getName();
+				final ITileSource map = mapPanel.getMap();
+				if(map != null){
+					try {
+			    		final ProgressDialog dlg = new ProgressDialog(frame, "Creating index");
+			    		dlg.setRunnable(new Runnable(){
+
+							@Override
+							public void run() {
+								try {
+									SQLiteBigPlanetIndex.createSQLiteDatabase(DataExtractionSettings.getSettings().getTilesDirectory(), regionName, map.getName());
+								} catch (SQLException e1) {
+									throw new IllegalArgumentException(e1);
+								} catch (IOException e1) {
+									throw new IllegalArgumentException(e1);
+								}
+							}
+			    		});
+			    		dlg.run();
+					} catch (InterruptedException e1) {
+						log.error("Interrupted", e1); 
+					} catch (InvocationTargetException e1) {
+						ExceptionHandler.handle("Can't create big planet sqlite index", (Exception) e1.getCause());
+					}
+					
+					
 				}
 			}
 		});
