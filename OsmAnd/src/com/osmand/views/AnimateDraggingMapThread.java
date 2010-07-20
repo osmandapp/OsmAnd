@@ -13,6 +13,8 @@ public class AnimateDraggingMapThread implements Runnable {
 		
 		public void dragTo(float curX, float curY, float newX, float newY, boolean notify);
 		
+		public void setLatLon(double latitude, double longitude, boolean notify);
+		
 		public void zoomTo(float zoom, boolean notify);
 		
 		
@@ -44,6 +46,8 @@ public class AnimateDraggingMapThread implements Runnable {
 	private int timeMove;
 	private float moveX;
 	private float moveY;
+	private double moveLat;
+	private double moveLon;
 	
 	private volatile Thread currentThread = null;
 	private AnimateDraggingCallback callback = null;
@@ -126,6 +130,7 @@ public class AnimateDraggingMapThread implements Runnable {
 						curY = newY;
 						if(curX == moveX && curY == moveY){
 							phaseOfMoving ++;
+							callback.setLatLon(moveLat, moveLon, notifyListener);
 						}
 					}
 				}
@@ -185,6 +190,7 @@ public class AnimateDraggingMapThread implements Runnable {
 	
 	public void startMoving(double curLat, double curLon, double finalLat, double finalLon, int curZoom, int endZoom, int tileSize, float rotate, boolean notifyListener){
 		stopAnimatingSync();
+		
 		this.notifyListener = notifyListener;
 		curZ = curZoom;
 		intZ = curZoom;
@@ -199,6 +205,8 @@ public class AnimateDraggingMapThread implements Runnable {
 		float rad = (float) Math.toRadians(rotate);
 		moveX = FloatMath.cos(rad) * mX - FloatMath.sin(rad) * mY; 
 		moveY = FloatMath.sin(rad) * mX + FloatMath.cos(rad) * mY;
+		moveLat = finalLat;
+		moveLon = finalLon;
 		if(curZoom < intZ){
 			dirIntZ = 1;
 		} else {

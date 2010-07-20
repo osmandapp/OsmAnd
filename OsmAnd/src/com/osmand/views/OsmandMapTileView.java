@@ -639,6 +639,17 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 	}
 	
+	@Override
+	public void setLatLon(double latitude, double longitude, boolean notify) {
+		this.latitude = latitude;
+		this.longitude = longitude;
+		refreshMap();
+		if(locationListener != null && notify){
+			locationListener.locationChanged(latitude, longitude, this);
+		}
+		
+	}
+	
 	public void moveTo(float dx, float dy) {
 		float fy = calcDiffTileY(dx, dy);
 		float fx = calcDiffTileX(dx, dy);
