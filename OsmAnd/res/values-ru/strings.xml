@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="continue_follow_previous_route">Предыдущий маршрут был не закончен. Продолжить следовать по нему?</string>
 	<string name="context_menu_item_search_poi">Искать POI</string>
 	<string name="context_menu_item_show_route">Маршрут от точки</string>
 	<string name="use_trackball_descr">Использовать трекбол, чтобы перемещать карту</string>

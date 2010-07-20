@@ -17,12 +17,10 @@ public class ToDoConstants {
 	
 	//   Improvement : progress while loading tiles
 	//   Improvement : download with wget
-	//   Yandex traffic : http://jgo.maps.yandex.net/tiles?l=trf
 
 	//   Imrpovement : show vehicle for calculating route
 	//   Improvement : show detailed route on the map with turns and show route information directly (like in gmaps)
 	//   Improvement : show route info after route is calculated (-)
-	//	 Improvement : after return if there was previous route (continue follow)
 	
 	// Not clear if it is really needed 
 	//   69. Add phone information to POI
@@ -31,7 +29,7 @@ public class ToDoConstants {
 
 	// Unscheduled (complex)
 	//   66. Transport routing (show next stop, total distance, show stop get out) (?).
-	//   64. Traffic information (?) - rmaps?
+	//   64. Traffic information (?) - rmaps (http://jgo.maps.yandex.net/tiles?l=trf)?
 	//   65. Intermediate points - for better control routing, to avoid traffic jams ...(?)
 	//   40. Support simple vector road rendering (require new index file) (?)
 	//   63. Support simple offline routing(require new index file) (?)
