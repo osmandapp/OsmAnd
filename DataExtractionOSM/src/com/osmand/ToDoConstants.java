@@ -16,7 +16,8 @@ public class ToDoConstants {
 	// 	 Improvement : show favorites on the map?
 	
 	//   Improvement : progress while loading tiles
-	//   Improvement : download with wget
+	//   Improvement : download with wget or multi downloader
+	//   Improvement : use NameFinder for search POI/address near location
 
 	//   Imrpovement : show vehicle for calculating route
 	//   Improvement : show detailed route on the map with turns and show route information directly (like in gmaps)

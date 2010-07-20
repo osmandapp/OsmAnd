@@ -1017,6 +1017,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					Intent intent = new Intent(MapActivity.this, SearchPoiFilterActivity.class);
 					intent.putExtra(SearchPoiFilterActivity.SEARCH_LAT, latitude);
 					intent.putExtra(SearchPoiFilterActivity.SEARCH_LON, longitude);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(intent);
 				} else if(which == 2){
 					showRoute(latitude, longitude);

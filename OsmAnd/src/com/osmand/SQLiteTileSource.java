@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
+import org.apache.commons.logging.Log;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
@@ -18,6 +20,8 @@ public class SQLiteTileSource implements ITileSource {
 
 	
 	public static final String EXT = ".sqlitedb"; //$NON-NLS-1$
+	private static final Log log = LogUtil.getLog(SQLiteTileSource.class); 
+	
 	private ITileSource base;
 	private String name;
 	private SQLiteDatabase db;
@@ -122,9 +126,13 @@ public class SQLiteTileSource implements ITileSource {
 		if(db == null){
 			return false;
 		}
+		long time = System.currentTimeMillis();
 		Cursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 		boolean e =  cursor.moveToFirst();
 		cursor.close();
+		if (log.isDebugEnabled()) {
+			log.debug("Checking tile existance x = " + x + " y = " + y + " z = " + zoom + " for " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		}
 		return e;
 	}
 

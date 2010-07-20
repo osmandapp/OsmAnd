@@ -127,7 +127,7 @@ public class ResourceManager {
 		return getTileImageForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, true, true);
 	}
 	
-	public synchronized void tileDownloaded(DownloadRequest request){
+	public void tileDownloaded(DownloadRequest request){
 		if(request instanceof TileLoadDownloadRequest){
 			TileLoadDownloadRequest req = ((TileLoadDownloadRequest) request);
 			imagesOnFS.put(req.tileId, Boolean.TRUE);
