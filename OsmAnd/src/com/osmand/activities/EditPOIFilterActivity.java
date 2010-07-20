@@ -30,14 +30,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.osmand.OsmandSettings;
 import com.osmand.PoiFilter;
 import com.osmand.PoiFiltersHelper;
 import com.osmand.R;
 import com.osmand.PoiFiltersHelper.PoiFilterDbHelper;
 import com.osmand.activities.search.SearchPOIActivity;
 import com.osmand.data.AmenityType;
-import com.osmand.osm.LatLon;
 
 /**
  * @author Frolov
@@ -48,36 +46,28 @@ public class EditPOIFilterActivity extends ListActivity {
 	private Button filterLevel;
 	private PoiFilter filter;
 	private PoiFilterDbHelper helper;
+	public static final String SEARCH_LAT = "SEARCH_LAT"; //$NON-NLS-1$
+	public static final String SEARCH_LON = "SEARCH_LON"; //$NON-NLS-1$
+	
 
 	@Override
-	public void onCreate(Bundle icicle) {
+	public void onCreate(final Bundle icicle) {
 		super.onCreate(icicle);
 		setContentView(R.layout.editing_poi_filter);
+		
 
 		filterLevel = (Button) findViewById(R.id.filter_currentButton);
 		filterLevel.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				AlertDialog.Builder b = new AlertDialog.Builder(EditPOIFilterActivity.this);
-				b.setItems(new String[]{getString(R.string.search_nearby), getString(R.string.search_near_map)}, new DialogInterface.OnClickListener(){
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Bundle bundle = new Bundle();
-						Intent newIntent = new Intent(EditPOIFilterActivity.this, SearchPOIActivity.class);
-						bundle.putString(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
-						if(which == 1){
-							LatLon last = OsmandSettings.getLastKnownMapLocation(EditPOIFilterActivity.this);
-							if(last != null){
-								bundle.putDouble(SearchPOIActivity.SEARCH_LAT, last.getLatitude());
-								bundle.putDouble(SearchPOIActivity.SEARCH_LON, last.getLongitude());
-							}
-							
-						}
-						newIntent.putExtras(bundle);
-						startActivity(newIntent);
-					}
-				});
-				b.show();
+				Bundle extras = getIntent().getExtras();
+				Intent newIntent = new Intent(EditPOIFilterActivity.this, SearchPOIActivity.class);
+				newIntent.putExtra(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
+				if(extras != null && extras.containsKey(SEARCH_LAT) && extras.containsKey(SEARCH_LON)){
+					newIntent.putExtra(SearchPOIActivity.SEARCH_LAT, extras.getDouble(SEARCH_LAT));
+					newIntent.putExtra(SearchPOIActivity.SEARCH_LON, extras.getDouble(SEARCH_LON));
+				}
+				startActivity(newIntent);
 			}
 		});
 

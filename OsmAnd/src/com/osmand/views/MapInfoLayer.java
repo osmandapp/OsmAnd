@@ -435,7 +435,8 @@ public class MapInfoLayer implements OsmandMapLayer {
 
 	@Override
 	public boolean onTouchEvent(PointF point) {
-		if(boundsForMiniRoute.contains(point.x, point.y) && routeLayer != null && routeLayer.getHelper().isRouterEnabled()){
+		if(boundsForMiniRoute.contains(point.x, point.y) && routeLayer != null && routeLayer.getHelper().isRouterEnabled() &&
+				routeLayer.getHelper().isFollowingMode()){
 			showMiniMap = !showMiniMap;
 			view.refreshMap();
 			return true;
