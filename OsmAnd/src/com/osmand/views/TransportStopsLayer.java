@@ -99,7 +99,7 @@ public class TransportStopsLayer implements OsmandMapLayer {
 		if(zoom < startZoom){
 			return 0;
 		} else if(zoom <= 15){
-			return 7;
+			return 8;
 		} else if(zoom == 16){
 			return 10;
 		} else if(zoom == 17){

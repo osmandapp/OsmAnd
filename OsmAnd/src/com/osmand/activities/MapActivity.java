@@ -62,6 +62,7 @@ import com.osmand.Version;
 import com.osmand.activities.FavouritesActivity.FavouritePoint;
 import com.osmand.activities.FavouritesActivity.FavouritesDbHelper;
 import com.osmand.activities.search.SearchActivity;
+import com.osmand.activities.search.SearchPoiFilterActivity;
 import com.osmand.activities.search.SearchTransportActivity;
 import com.osmand.data.Amenity;
 import com.osmand.data.preparation.MapTileDownloader;
@@ -751,7 +752,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	
 	private void updateNavigateToPointMenu(){
 		if (navigateToPointMenu != null) {
-			navigateToPointMenu.setTitle(routingHelper.isFollowingMode() ? R.string.stop_routing : R.string.stop_navigation);
+			navigateToPointMenu.setTitle(routingHelper.getFinalLocation() != null ? R.string.stop_routing : R.string.stop_navigation);
 			if (OsmandSettings.getPointToNavigate(this) != null) {
 				navigateToPointMenu.setVisible(true);
 			} else {
@@ -851,7 +852,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				updateNavigateToPointMenu();
 			}
     	});
-    	if(routingHelper.isRouterEnabled()){
+    	if(routingHelper.isRouterEnabled() && routingHelper.isRouteCalculated()){
     		builder.setNeutralButton(R.string.route_about, new DialogInterface.OnClickListener(){
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -865,16 +866,19 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Location map = new Location("map"); //$NON-NLS-1$
-				map.setLatitude(lat);
-				map.setLongitude(lon);
-				routingHelper.setFollowingMode(false);
-				updateNavigateToPointMenu();
-				routingHelper.setFinalAndCurrentLocation(navigationLayer.getPointToNavigate(), map);
+				showRoute(lat, lon);
 			}
     	});
     	builder.show();
-    	
+    }
+    
+    private void showRoute(double lat, double lon){
+    	Location map = new Location("map"); //$NON-NLS-1$
+		map.setLatitude(lat);
+		map.setLongitude(lon);
+		routingHelper.setFollowingMode(false);
+		updateNavigateToPointMenu();
+		routingHelper.setFinalAndCurrentLocation(navigationLayer.getPointToNavigate(), map);
     }
     
     protected void reloadTile(final int zoom, final double latitude, final double longitude){
@@ -972,9 +976,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     	Resources resources = this.getResources();
     	String[] res = new String[]{
         			resources.getString(R.string.context_menu_item_navigate_point),
+        			resources.getString(R.string.context_menu_item_search_poi),
+        			resources.getString(R.string.context_menu_item_show_route),
         			resources.getString(R.string.context_menu_item_add_favorite),
-        			resources.getString(R.string.context_menu_item_open_bug),
         			resources.getString(R.string.context_menu_item_create_poi),
+        			resources.getString(R.string.context_menu_item_open_bug),
         			resources.getString(R.string.context_menu_item_update_map)
         	};
     	builder.setItems(res, new DialogInterface.OnClickListener(){
@@ -984,13 +990,20 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				if(which == 0){
 					navigateToPoint(new LatLon(latitude, longitude));
 				} else if(which == 1){
-					addFavouritePoint(latitude, longitude);
+					Intent intent = new Intent(MapActivity.this, SearchPoiFilterActivity.class);
+					intent.putExtra(SearchPoiFilterActivity.SEARCH_LAT, latitude);
+					intent.putExtra(SearchPoiFilterActivity.SEARCH_LON, longitude);
+					startActivity(intent);
 				} else if(which == 2){
-					osmBugsLayer.openBug(MapActivity.this, getLayoutInflater(), mapView, latitude, longitude);
+					showRoute(latitude, longitude);
 				} else if(which == 3){
+					addFavouritePoint(latitude, longitude);
+				} else if(which == 4){
 					EditingPOIActivity activity = new EditingPOIActivity(MapActivity.this, mapView);
 					activity.showCreateDialog(latitude, longitude);
-				} else if(which == 4){
+				} else if(which == 5){
+					osmBugsLayer.openBug(MapActivity.this, getLayoutInflater(), mapView, latitude, longitude);
+				} else if(which == 6){
 					reloadTile(mapView.getZoom(), latitude, longitude);
 				}
 			}

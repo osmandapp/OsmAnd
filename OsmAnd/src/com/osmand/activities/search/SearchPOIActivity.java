@@ -9,6 +9,7 @@ import java.util.List;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -96,6 +97,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.searchpoi);
 		uiHandler = new Handler();
 		searchPOILevel = (Button) findViewById(R.id.SearchPOILevelButton);
@@ -148,7 +150,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			public void onClick(View v) {
 				OsmandSettings.setPoiFilterForMap(SearchPOIActivity.this, filter.getFilterId());
 				OsmandSettings.setShowPoiOverMap(SearchPOIActivity.this, true);
-				if(searchNearBy && location != null){
+				if(/*searchNearBy && */location != null){
 					OsmandSettings.setMapLocationToShow(SearchPOIActivity.this, location.getLatitude(), location.getLongitude(), 15);
 				}
 				Intent newIntent = new Intent(SearchPOIActivity.this, MapActivity.class);
@@ -537,9 +539,10 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 					}
 				}
 			}
-			if(heading != null && location != null){
+			if(location != null){
 				DirectionDrawable draw = new DirectionDrawable();
-				draw.setAngle(mes[1] - heading + 180);
+				float a = heading != null ? heading : 0;
+				draw.setAngle(mes[1] - a + 180);
 				draw.setOpenedColor(opened);
 				icon.setImageDrawable(draw);
 			} else {

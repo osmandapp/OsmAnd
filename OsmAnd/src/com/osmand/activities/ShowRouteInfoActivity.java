@@ -42,21 +42,28 @@ public class ShowRouteInfoActivity extends ListActivity {
 
 
 	private RoutingHelper helper;
+	private TextView header;
 
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		ListView lv = new ListView(this);
 		lv.setId(android.R.id.list);
-		TextView header = new TextView(this);
+		header = new TextView(this);
 		helper = RoutingHelper.getInstance(this);
+		
+		lv.addHeaderView(header);
+		setContentView(lv);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
 		Calendar c = Calendar.getInstance();
 		int time = helper.getLeftTime() * 1000 - c.getTimeZone().getOffset(0);
 		int dist = helper.getLeftDistance();
 		header.setText(MessageFormat.format(getString(R.string.route_general_information), MapUtils.getFormattedDistance(dist),
 				DateFormat.format("kk:mm", time))); //$NON-NLS-1$
-		lv.addHeaderView(header);
-		setContentView(lv);
 		setListAdapter(new RouteInfoAdapter(RoutingHelper.getInstance(this).getRouteDirections()));
 	}
 

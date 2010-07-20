@@ -128,11 +128,11 @@ public class POIMapLayer implements OsmandMapLayer {
 		if(zoom < startZoom){
 			return 0;
 		} else if(zoom <= 15){
-			return 7;
-		} else if(zoom == 16){
 			return 10;
-		} else if(zoom == 17){
+		} else if(zoom == 16){
 			return 14;
+		} else if(zoom == 17){
+			return 16;
 		} else {
 			return 18;
 		}
