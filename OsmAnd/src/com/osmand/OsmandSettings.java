@@ -602,6 +602,18 @@ public class OsmandSettings {
 	}
 	
 	
+	public static final String FOLLOW_TO_THE_ROUTE = "follow_to_route"; //$NON-NLS-1$
+	
+	public static boolean isFollowingByRoute(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(FOLLOW_TO_THE_ROUTE, false);
+	}
+	
+	public static boolean setFollowingByRoute(Context ctx, boolean val){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putBoolean(FOLLOW_TO_THE_ROUTE, val).commit();
+	}
+	
 	
 	
 }

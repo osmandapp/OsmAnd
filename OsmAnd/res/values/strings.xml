@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="continue_follow_previous_route">Previous route was unfinished. Do you want to continue follow with it? </string>
 	<string name="context_menu_item_search_poi">Search POI</string>
 	<string name="context_menu_item_show_route">Show route from</string>
 	<string name="use_trackball_descr">Use trackball to move map</string>

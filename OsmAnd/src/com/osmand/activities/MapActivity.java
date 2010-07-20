@@ -212,6 +212,29 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			routingHelper.setFinalAndCurrentLocation(pointToNavigate, null);
 
 		}
+		if(OsmandSettings.isFollowingByRoute(this)){
+			if(pointToNavigate == null){
+				OsmandSettings.setFollowingByRoute(this, false);
+			} else if(!routingHelper.isRouteCalculated()){
+				Builder builder = new AlertDialog.Builder(this);
+				builder.setMessage(R.string.continue_follow_previous_route);
+				builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener(){
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						routingHelper.setFollowingMode(true);
+					}
+				});
+				builder.setNegativeButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener(){
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						OsmandSettings.setFollowingByRoute(MapActivity.this, false);
+						routingHelper.setFinalLocation(null);
+						mapView.refreshMap();
+					}
+				});
+				builder.show();
+			}
+		}
 		
 		navigationLayer.setPointToNavigate(pointToNavigate);
 		
@@ -752,7 +775,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	
 	private void updateNavigateToPointMenu(){
 		if (navigateToPointMenu != null) {
-			navigateToPointMenu.setTitle(routingHelper.getFinalLocation() != null ? R.string.stop_routing : R.string.stop_navigation);
+			navigateToPointMenu.setTitle(routingHelper.isRouteCalculated() ? R.string.stop_routing : R.string.stop_navigation);
 			if (OsmandSettings.getPointToNavigate(this) != null) {
 				navigateToPointMenu.setVisible(true);
 			} else {
@@ -815,10 +838,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			return true;
     	}  else if (item.getItemId() == R.id.map_navigate_to_point) {
     		if(navigationLayer.getPointToNavigate() != null){
-    			if(routingHelper.getFinalLocation() != null){
+    			if(routingHelper.isRouteCalculated()){
     				routingHelper.setFinalAndCurrentLocation(null, null);
     				routingHelper.setFollowingMode(false);
-    				mapView.refreshMap();
     				updateNavigateToPointMenu();
     			} else {
     				navigateToPoint(null);
@@ -826,6 +848,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     		} else {
     			navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
     		}
+			mapView.refreshMap();
     	}
     	return super.onOptionsItemSelected(item);
     }
@@ -849,6 +872,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				} 
 				routingHelper.setFollowingMode(true);
 				routingHelper.setFinalAndCurrentLocation(navigationLayer.getPointToNavigate(), location);
+				OsmandSettings.setFollowingByRoute(MapActivity.this, true);
 				updateNavigateToPointMenu();
 			}
     	});

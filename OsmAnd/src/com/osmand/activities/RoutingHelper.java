@@ -133,10 +133,12 @@ public class RoutingHelper {
 		if(currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < 60){
 			if(lastFixedLocation != null && lastFixedLocation.distanceTo(lastPoint) < 60){
 				showMessage(context.getString(R.string.arrived_at_destination));
+				OsmandSettings.setFollowingByRoute(context, false);
 				voiceRouter.arrivedDestinationPoint();
 				updateCurrentRoute(routeNodes.size() - 1);
 				// clear final location to prevent all time showing message
 				finalLocation = null;
+				
 			}
 			lastFixedLocation = currentLocation;
 			return true;
