@@ -49,6 +49,7 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 import android.widget.ZoomControls;
 
 import com.osmand.Algoritms;
@@ -59,6 +60,7 @@ import com.osmand.R;
 import com.osmand.ResourceManager;
 import com.osmand.SQLiteTileSource;
 import com.osmand.Version;
+import com.osmand.OsmandSettings.ApplicationMode;
 import com.osmand.activities.FavouritesActivity.FavouritePoint;
 import com.osmand.activities.FavouritesActivity.FavouritesDbHelper;
 import com.osmand.activities.search.SearchActivity;
@@ -861,7 +863,18 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}
     	Builder builder = new AlertDialog.Builder(this);
     	builder.setTitle(R.string.follow_route);
-    	builder.setMessage(R.string.recalculate_route_to_your_location);
+    	View view = getLayoutInflater().inflate(R.layout.calculate_route, null);
+    	ToggleButton car = (ToggleButton) view.findViewById(R.id.CarButton);
+    	ToggleButton bicyle = (ToggleButton) view.findViewById(R.id.BicycleButton);
+    	ToggleButton pedestrian = (ToggleButton) view.findViewById(R.id.PedestrianButton);
+    	if(OsmandSettings.getApplicationMode(this) == ApplicationMode.BICYCLE){
+    		bicyle.setChecked(true);
+    	} else if(OsmandSettings.getApplicationMode(this) == ApplicationMode.PEDESTRIAN){
+    		pedestrian.setChecked(true);
+    	} else if(OsmandSettings.getApplicationMode(this) == ApplicationMode.CAR){
+    		car.setChecked(true);
+    	}
+    	builder.setView(view);
     	builder.setPositiveButton(R.string.follow, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
