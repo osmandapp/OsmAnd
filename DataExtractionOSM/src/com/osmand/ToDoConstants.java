@@ -15,11 +15,11 @@ public class ToDoConstants {
 	//   1.4 show detailed route on the map with turns and show route information directly (like in gmaps)
 	
 	//   2. Using NameFinder to search online
-	//   3. Show route info after route calc
+	//   3. Show route info after route calc (+)
 	//   4. show vehicle for calculating route
 	
 	//  BUGS
-	//   ISSUE 21.
+	//   ISSUE 21. (+, +, +)
 	//   ISSUE 23.
 
 	

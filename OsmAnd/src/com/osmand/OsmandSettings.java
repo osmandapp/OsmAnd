@@ -614,6 +614,18 @@ public class OsmandSettings {
 		return prefs.edit().putBoolean(FOLLOW_TO_THE_ROUTE, val).commit();
 	}
 	
+	public static final String SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME = "show_arrival_time"; //$NON-NLS-1$
+	
+	public static boolean isShowingArrivalTime(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME, true);
+	}
+	
+	public static boolean setShowingArrivalTime(Context ctx, boolean val){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putBoolean(SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME, val).commit();
+	}
+	
 	
 	
 }

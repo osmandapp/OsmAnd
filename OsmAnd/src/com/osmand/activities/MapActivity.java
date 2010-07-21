@@ -222,9 +222,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						routingHelper.setFollowingMode(true);
+						
 					}
 				});
-				builder.setNegativeButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener(){
+				builder.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener(){
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						OsmandSettings.setFollowingByRoute(MapActivity.this, false);

@@ -1,7 +1,5 @@
 package com.osmand.views;
 
-import java.util.Calendar;
-
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -31,6 +29,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 	private final MapActivity map;
 	private final RouteLayer routeLayer;
 	
+	private boolean showArrivalTime = true; 
 	
 	
 	private Path pathForCompass;
@@ -138,6 +137,8 @@ public class MapInfoLayer implements OsmandMapLayer {
 		pathForTurn = new Path();
 		pathTransform = new Matrix();
 		pathTransform.setTranslate(boundsForMiniRoute.left, boundsForMiniRoute.top);
+		
+		showArrivalTime = OsmandSettings.isShowingArrivalTime(view.getContext());
 	}
 
 	public boolean distChanged(int oldDist, int dist){
@@ -223,61 +224,72 @@ public class MapInfoLayer implements OsmandMapLayer {
 	
 	
 	private void drawRouteInfo(Canvas canvas) {
-		if(routeLayer != null && routeLayer.getHelper().isRouterEnabled() && routeLayer.getHelper().isFollowingMode() ){
-			int d = routeLayer.getHelper().getDistanceToNextRouteDirection();
-			if (showMiniMap || d == 0) {
-				if (!routeLayer.getPath().isEmpty()) {
-					canvas.save();
-					canvas.clipRect(boundsForMiniRoute);
+		if(routeLayer != null && routeLayer.getHelper().isRouterEnabled()){
+			if (routeLayer.getHelper().isFollowingMode()) {
+				int d = routeLayer.getHelper().getDistanceToNextRouteDirection();
+				if (showMiniMap || d == 0) {
+					if (!routeLayer.getPath().isEmpty()) {
+						canvas.save();
+						canvas.clipRect(boundsForMiniRoute);
+						canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintAlphaGray);
+						canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintBlack);
+						canvas.translate(centerMiniRouteX - view.getCenterPointX(), centerMiniRouteY - view.getCenterPointY());
+						canvas.scale(scaleMiniRoute, scaleMiniRoute, view.getCenterPointX(), view.getCenterPointY());
+						canvas.rotate(view.getRotate(), view.getCenterPointX(), view.getCenterPointY());
+						canvas.drawCircle(view.getCenterPointX(), view.getCenterPointY(), 3 / scaleMiniRoute, fillBlack);
+						canvas.drawPath(routeLayer.getPath(), paintMiniRoute);
+						canvas.restore();
+					}
+				} else {
 					canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintAlphaGray);
 					canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintBlack);
-					canvas.translate(centerMiniRouteX - view.getCenterPointX(), centerMiniRouteY - view.getCenterPointY());
-					canvas.scale(scaleMiniRoute, scaleMiniRoute, view.getCenterPointX(), view.getCenterPointY());
-					canvas.rotate(view.getRotate(), view.getCenterPointX(), view.getCenterPointY());
-					canvas.drawCircle(view.getCenterPointX(), view.getCenterPointY(), 3 / scaleMiniRoute, fillBlack);
-					canvas.drawPath(routeLayer.getPath(), paintMiniRoute);
-					canvas.restore();
-				}
-			} else {
-				canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintAlphaGray);
-				canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintBlack);
-				RouteDirectionInfo next = routeLayer.getHelper().getNextRouteDirectionInfo();
-				if (next != null) {
-					if (!Algoritms.objectEquals(cachedTurnType, next.turnType)) {
-						cachedTurnType = next.turnType;
-						calcTurnPath(pathForTurn, cachedTurnType, pathTransform);
-						if(cachedTurnType.getExitOut() > 0){
-							cachedExitOut = cachedTurnType.getExitOut()+""; //$NON-NLS-1$
-						} else {
-							cachedExitOut = null;
+					RouteDirectionInfo next = routeLayer.getHelper().getNextRouteDirectionInfo();
+					if (next != null) {
+						if (!Algoritms.objectEquals(cachedTurnType, next.turnType)) {
+							cachedTurnType = next.turnType;
+							calcTurnPath(pathForTurn, cachedTurnType, pathTransform);
+							if (cachedTurnType.getExitOut() > 0) {
+								cachedExitOut = cachedTurnType.getExitOut() + ""; //$NON-NLS-1$
+							} else {
+								cachedExitOut = null;
+							}
 						}
+						canvas.drawPath(pathForTurn, paintRouteDirection);
+						canvas.drawPath(pathForTurn, paintBlack);
+						if (cachedExitOut != null) {
+							canvas.drawText(cachedExitOut, boundsForMiniRoute.centerX() - 6, boundsForMiniRoute.centerY() - 9, paintBlack);
+						}
+						canvas.drawText(MapUtils.getFormattedDistance(d), boundsForMiniRoute.left + 10, boundsForMiniRoute.bottom - 9,
+								paintBlack);
 					}
-					canvas.drawPath(pathForTurn, paintRouteDirection);
-					canvas.drawPath(pathForTurn, paintBlack);
-					if(cachedExitOut != null){
-						canvas.drawText(cachedExitOut, boundsForMiniRoute.centerX() - 6, boundsForMiniRoute.centerY() - 9, paintBlack);
-					}
-					canvas.drawText(MapUtils.getFormattedDistance(d), boundsForMiniRoute.left + 10, boundsForMiniRoute.bottom - 9,
-							paintBlack);
 				}
 			}
 			
 			boolean followingMode = routeLayer.getHelper().isFollowingMode();
-			int time = routeLayer.getHelper().getLeftTime() * 1000;
+			int time = routeLayer.getHelper().getLeftTime();
 			if(time == 0){
 				cachedLeftTime = 0;
 				cachedLeftTimeString = null;
 			} else {
-				long toFindTime = time;
-				if(followingMode){
-					toFindTime += System.currentTimeMillis();
+				if(followingMode && showArrivalTime){
+					long toFindTime = time * 1000 + System.currentTimeMillis();
+					if(Math.abs(toFindTime - cachedLeftTime) > 30000){
+						cachedLeftTime = toFindTime;
+						if(DateFormat.is24HourFormat(map)){
+							cachedLeftTimeString = DateFormat.format("kk:mm",toFindTime).toString(); //$NON-NLS-1$
+						} else {
+							cachedLeftTimeString = DateFormat.format("k:mm aa",toFindTime).toString(); //$NON-NLS-1$
+						}
+						boundsForLeftTime.left = - paintBlack.measureText(cachedLeftTimeString) - 10 + boundsForLeftTime.right;
+					}
 				} else {
-					Calendar c = Calendar.getInstance();
-					toFindTime -= c.getTimeZone().getOffset(0);
-				}
-				if(Math.abs(toFindTime - cachedLeftTime) > 30000){
-					cachedLeftTime = toFindTime;
-					cachedLeftTimeString = DateFormat.format("kk:mm", cachedLeftTime).toString(); //$NON-NLS-1$
+					if(Math.abs(time - cachedLeftTime) > 30){
+						cachedLeftTime = time;
+						int hours = time / (60 * 60);
+						int minutes = (time / 60) % 60;
+						cachedLeftTimeString = String.format("%d:%02d", hours, minutes); //$NON-NLS-1$
+						boundsForLeftTime.left = - paintBlack.measureText(cachedLeftTimeString) - 10 + boundsForLeftTime.right;
+					}
 				}
 			}
 			if(cachedLeftTimeString != null) {
@@ -435,11 +447,18 @@ public class MapInfoLayer implements OsmandMapLayer {
 
 	@Override
 	public boolean onTouchEvent(PointF point) {
-		if(boundsForMiniRoute.contains(point.x, point.y) && routeLayer != null && routeLayer.getHelper().isRouterEnabled() &&
-				routeLayer.getHelper().isFollowingMode()){
-			showMiniMap = !showMiniMap;
-			view.refreshMap();
-			return true;
+		if (routeLayer != null && routeLayer.getHelper().isRouterEnabled()) {
+			if (boundsForMiniRoute.contains(point.x, point.y) && routeLayer.getHelper().isFollowingMode()) {
+				showMiniMap = !showMiniMap;
+				view.refreshMap();
+				return true;
+			}
+			if (boundsForLeftTime.contains(point.x, point.y) && routeLayer.getHelper().isFollowingMode()) {
+				showArrivalTime = !showArrivalTime;
+				OsmandSettings.setShowingArrivalTime(view.getContext(), showArrivalTime);
+				view.refreshMap();
+				return true;
+			}
 		}
 		if(cachedDistString != null && boundsForDist.contains(point.x, point.y)){
 			AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
