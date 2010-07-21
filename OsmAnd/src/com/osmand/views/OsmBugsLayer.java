@@ -144,7 +144,7 @@ public class OsmBugsLayer implements OsmandMapLayer {
 		if(zoom < startZoom){
 			return 0;
 		} else if(zoom <= 12){
-			return 6;
+			return 8;
 		} else if(zoom <= 15){
 			return 10;
 		} else if(zoom == 16){

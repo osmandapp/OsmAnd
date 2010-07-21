@@ -2,6 +2,7 @@ package com.osmand.activities;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import android.app.Activity;
@@ -30,6 +31,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
+import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -58,6 +60,8 @@ import com.osmand.Algoritms;
 import com.osmand.AmenityIndexRepository;
 import com.osmand.LogUtil;
 import com.osmand.OsmandSettings;
+import com.osmand.PoiFilter;
+import com.osmand.PoiFiltersHelper;
 import com.osmand.R;
 import com.osmand.ResourceManager;
 import com.osmand.SQLiteTileSource;
@@ -69,6 +73,7 @@ import com.osmand.activities.search.SearchActivity;
 import com.osmand.activities.search.SearchPoiFilterActivity;
 import com.osmand.activities.search.SearchTransportActivity;
 import com.osmand.data.Amenity;
+import com.osmand.data.AmenityType;
 import com.osmand.data.preparation.MapTileDownloader;
 import com.osmand.data.preparation.MapTileDownloader.DownloadRequest;
 import com.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
@@ -77,6 +82,7 @@ import com.osmand.map.ITileSource;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 import com.osmand.views.AnimateDraggingMapThread;
+import com.osmand.views.FavoritesLayer;
 import com.osmand.views.MapInfoLayer;
 import com.osmand.views.OsmBugsLayer;
 import com.osmand.views.OsmandMapTileView;
@@ -110,6 +116,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private RouteLayer routeLayer;
 	private OsmBugsLayer osmBugsLayer;
 	private POIMapLayer poiMapLayer;
+	private FavoritesLayer favoritesLayer;
 	private TransportStopsLayer transportStopsLayer;
 	private PointLocationLayer locationLayer;
 	private PointNavigationLayer navigationLayer;
@@ -150,6 +157,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 				
+		// for voice navigation
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);  
 //	     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,   
 //	                                WindowManager.LayoutParams.FLAG_FULLSCREEN); 
@@ -191,15 +200,17 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		osmBugsLayer = new OsmBugsLayer(this);
 		// 3. poi layer
 		poiMapLayer = new POIMapLayer();
-		// 4. transport layer
+		// 4. favorites layer
+		favoritesLayer = new FavoritesLayer(this);
+		// 5. transport layer
 		transportStopsLayer = new TransportStopsLayer();
-		// 5. point navigation layer
+		// 6. point navigation layer
 		navigationLayer = new PointNavigationLayer();
 		mapView.addLayer(navigationLayer);
-		// 6. point location layer 
+		// 7. point location layer 
 		locationLayer = new PointLocationLayer();
 		mapView.addLayer(locationLayer);
-		// 7. map info layer
+		// 8. map info layer
 		mapInfoLayer = new MapInfoLayer(this, routeLayer);
 		mapView.addLayer(mapInfoLayer);
 
@@ -619,11 +630,22 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		locationLayer.setAppMode(OsmandSettings.getApplicationMode(this));
 		routingHelper.setAppMode(OsmandSettings.getApplicationMode(this));
 		mapView.setMapPosition(OsmandSettings.getPositionOnMap(this));
+		updateLayers();
+	}
+	
+	private void updateLayers(){
 		if(mapView.getLayers().contains(transportStopsLayer) != OsmandSettings.isShowingTransportOverMap(this)){
 			if(OsmandSettings.isShowingTransportOverMap(this)){
 				mapView.addLayer(transportStopsLayer, routeLayer);
 			} else {
 				mapView.removeLayer(transportStopsLayer);
+			}
+		}
+		if(mapView.getLayers().contains(osmBugsLayer) != OsmandSettings.isShowingOsmBugs(this)){
+			if(OsmandSettings.isShowingOsmBugs(this)){
+				mapView.addLayer(osmBugsLayer, routeLayer);
+			} else {
+				mapView.removeLayer(osmBugsLayer);
 			}
 		}
 
@@ -634,13 +656,15 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				mapView.removeLayer(poiMapLayer);
 			}
 		}
-		if(mapView.getLayers().contains(osmBugsLayer) != OsmandSettings.isShowingOsmBugs(this)){
-			if(OsmandSettings.isShowingOsmBugs(this)){
-				mapView.addLayer(osmBugsLayer, routeLayer);
+		
+		if(mapView.getLayers().contains(favoritesLayer) != OsmandSettings.isShowingFavorites(this)){
+			if(OsmandSettings.isShowingFavorites(this)){
+				mapView.addLayer(favoritesLayer, routeLayer);
 			} else {
-				mapView.removeLayer(osmBugsLayer);
+				mapView.removeLayer(favoritesLayer);
 			}
 		}
+		
 	}
 	
 	@Override
@@ -664,6 +688,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 		updateApplicationModeSettings();
 
+		favoritesLayer.reloadFavorites();
 		poiMapLayer.setFilter(OsmandSettings.getPoiFilterForMap(this));
 		backToLocation.setVisibility(View.INVISIBLE);
 		
@@ -837,6 +862,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			return true;
 		} else if (item.getItemId() == R.id.map_get_directions) {
 			getDirections(mapView.getLatitude(), mapView.getLongitude());
+			return true;
+		} else if (item.getItemId() == R.id.map_layers) {
+			openLayerSelectionDialog();
 			return true;
 		} else if (item.getItemId() == R.id.map_specify_point) {
 			openChangeLocationDialog();
@@ -1044,7 +1072,89 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     	
     }
     
-    protected void contextMenuPoint(final double latitude, final double longitude, boolean menu){
+	private void openLayerSelectionDialog(){
+		List<String> layersList = new ArrayList<String>();
+		layersList.add(getString(R.string.layer_map));
+		layersList.add(getString(R.string.layer_poi));
+		layersList.add(getString(R.string.layer_transport));
+		layersList.add(getString(R.string.layer_osm_bugs));
+		layersList.add(getString(R.string.layer_favorites));
+		if(routingHelper != null && routingHelper.isRouteCalculated()){
+			layersList.add(getString(R.string.layer_route));
+		}
+		if(!TransportRouteHelper.getInstance().getRoute().isEmpty()){
+			layersList.add(getString(R.string.layer_transport_route));
+		}
+		final boolean[] selected = new boolean[layersList.size()];
+		Arrays.fill(selected, true);
+		selected[1] = OsmandSettings.isShowingPoiOverMap(this);
+		selected[2] = OsmandSettings.isShowingTransportOverMap(this);
+		selected[3] = OsmandSettings.isShowingOsmBugs(this);
+		selected[4] = OsmandSettings.isShowingFavorites(this);
+		Builder builder = new AlertDialog.Builder(this);
+		builder.setMultiChoiceItems(layersList.toArray(new String[layersList.size()]), selected, new DialogInterface.OnMultiChoiceClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int item, boolean isChecked) {
+				if (item == 0) {
+					// TODO show another builder with all sources
+				} else if(item == 1){
+					if(isChecked){
+						selectPOIFilterLayer();
+					}
+					OsmandSettings.setShowPoiOverMap(MapActivity.this, isChecked);
+				} else if(item == 2){
+					OsmandSettings.setShowTransortOverMap(MapActivity.this, isChecked);
+				} else if(item == 3){
+					OsmandSettings.setShowingOsmBugs(MapActivity.this, isChecked);
+				} else if(item == 4){
+					OsmandSettings.setShowingFavorites(MapActivity.this, isChecked);
+				}
+				// TODO others
+				updateLayers();
+				mapView.refreshMap();
+			}
+		});
+		builder.show();
+	}
+	
+	private void selectPOIFilterLayer(){
+		final List<PoiFilter> userDefined = new ArrayList<PoiFilter>();
+		List<String> list = new ArrayList<String>();
+		list.add(getString(R.string.any_poi));
+		for(PoiFilter f : PoiFiltersHelper.getUserDefinedPoiFilters(this)){
+			if (!f.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)) {
+				userDefined.add(f);
+				list.add(f.getName());
+			}
+		}
+		for(AmenityType t : AmenityType.values()){
+			list.add(AmenityType.toPublicString(t));
+		}
+		Builder builder = new AlertDialog.Builder(this);
+		builder.setItems(list.toArray(new String[list.size()]), new DialogInterface.OnClickListener(){
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				String filterId;
+				if (which == 0) {
+					filterId = PoiFiltersHelper.getOsmDefinedFilterId(null);
+				} else if (which <= userDefined.size()) {
+					filterId = userDefined.get(which - 1).getFilterId();
+				} else {
+					filterId = PoiFiltersHelper.getOsmDefinedFilterId(AmenityType.values()[which - userDefined.size() - 1]);
+				}
+				OsmandSettings.setPoiFilterForMap(MapActivity.this, filterId);
+				poiMapLayer.setFilter(PoiFiltersHelper.getFilterById(MapActivity.this, filterId));
+				mapView.refreshMap();
+			}
+			
+		});
+		builder.show();
+	}
+
+    
+    public void contextMenuPoint(final double latitude, final double longitude, boolean menu){
     	Builder builder = new AlertDialog.Builder(this);
     	Resources resources = this.getResources();
     	String[] res = new String[]{
@@ -1106,8 +1216,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				final FavouritesDbHelper helper = new FavouritesActivity.FavouritesDbHelper(MapActivity.this);
 				final List<FavouritePoint> points = helper.getFavouritePoints();
 				final String[] ar = new String[points.size()];
-				for(int i=0;i<ar.length; i++){	
-					ar[i]=points.get(i).getName();
+				for (int i = 0; i < ar.length; i++) {
+					ar[i] = points.get(i).getName();
 				}
 				b.setItems(ar, new DialogInterface.OnClickListener(){
 					@Override
@@ -1116,6 +1226,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 							Toast.makeText(MapActivity.this, getString(R.string.fav_points_edited), Toast.LENGTH_SHORT).show();
 						}
 						helper.close();
+						favoritesLayer.reloadFavorites();
 					}
 				});
 				if(ar.length == 0){
@@ -1138,6 +1249,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 							.show();
 				}
 				helper.close();
+				favoritesLayer.reloadFavorites();
 			}
 		});
 		builder.create().show();
@@ -1147,7 +1259,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		NavigatePointActivity dlg = new NavigatePointActivity(this);
 		dlg.showDialog();
 	}
-
+	
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 	}
@@ -1166,6 +1278,5 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			}
 		}
 	}
-
 
 }

@@ -92,15 +92,17 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
 	
 	private BooleanPreference[] booleanPreferences = new BooleanPreference[]{
-			new BooleanPreference(OsmandSettings.SHOW_POI_OVER_MAP, OsmandSettings.SHOW_POI_OVER_MAP_DEF ),
+//			new BooleanPreference(OsmandSettings.SHOW_TRANSPORT_OVER_MAP, OsmandSettings.SHOW_TRANSPORT_OVER_MAP_DEF),
+//			new BooleanPreference(OsmandSettings.SHOW_POI_OVER_MAP, OsmandSettings.SHOW_POI_OVER_MAP_DEF ),
+//			new BooleanPreference(OsmandSettings.SHOW_OSM_BUGS, OsmandSettings.SHOW_OSM_BUGS_DEF),
 			new BooleanPreference(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES_DEF),
 			new BooleanPreference(OsmandSettings.ROTATE_MAP_TO_BEARING, OsmandSettings.ROTATE_MAP_TO_BEARING_DEF),
 			new BooleanPreference(OsmandSettings.SHOW_VIEW_ANGLE, OsmandSettings.SHOW_VIEW_ANGLE_DEF),
 			new BooleanPreference(OsmandSettings.USE_TRACKBALL_FOR_MOVEMENTS, OsmandSettings.USE_TRACKBALL_FOR_MOVEMENTS_DEF),
 			new BooleanPreference(OsmandSettings.USE_ENGLISH_NAMES, OsmandSettings.USE_ENGLISH_NAMES_DEF),
-			new BooleanPreference(OsmandSettings.SHOW_OSM_BUGS, OsmandSettings.SHOW_OSM_BUGS_DEF),
+			
 			new BooleanPreference(OsmandSettings.AUTO_ZOOM_MAP, OsmandSettings.AUTO_ZOOM_MAP_DEF),
-			new BooleanPreference(OsmandSettings.SHOW_TRANSPORT_OVER_MAP, OsmandSettings.SHOW_TRANSPORT_OVER_MAP_DEF),
+
 			new BooleanPreference(OsmandSettings.SAVE_TRACK_TO_GPX, OsmandSettings.SAVE_TRACK_TO_GPX_DEF),
 	};
 	private BroadcastReceiver broadcastReceiver;
