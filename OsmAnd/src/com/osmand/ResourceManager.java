@@ -507,7 +507,7 @@ public class ResourceManager {
 		if(source == null || source.getBitDensity() == 0){
 			maxImgCacheSize = 48;
 		} else {
-			maxImgCacheSize = 1024 / source.getBitDensity();
+			maxImgCacheSize = 512 / source.getBitDensity();
 		}
 		
 	}

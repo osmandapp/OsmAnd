@@ -8,20 +8,25 @@ package com.osmand;
  */
 public class ToDoConstants {
 	
-	// TODO ANDROID
-	//   for 0.3
-
-	//   Improvement : Show layers (?)
-	//   Improvement : Show stops in the transport route on the map
-	// 	 Improvement : show favorites on the map?
+	// TODO ANDROID 0.3
+	//	Improvements 
+	//   1. Show layers (?) -
+	//	 0) map 1) transport 2) Poi (choose filter) 3) Favorites 4) Route (gmaps) 5) Transport route ? 6) Traffic ? 7) NameFinder
+	//   1.4 show detailed route on the map with turns and show route information directly (like in gmaps)
 	
-	//   Improvement : progress while loading tiles
-	//   Improvement : download with wget or multi downloader
-	//   Improvement : use NameFinder for search POI/address near location
+	//   2. Using NameFinder to search online
+	//   3. Show route info after route calc
+	//   4. show vehicle for calculating route
+	
+	//  BUGS
+	//   ISSUE 21.
+	//   ISSUE 23.
 
-	//   Imrpovement : show vehicle for calculating route
-	//   Improvement : show detailed route on the map with turns and show route information directly (like in gmaps)
-	//   Improvement : show route info after route is calculated (-)
+	
+	// TODO
+	//   Improvements
+	//   5. Download with wget
+	//   6. progress while map is loading
 	
 	// Not clear if it is really needed 
 	//   69. Add phone information to POI
@@ -29,7 +34,7 @@ public class ToDoConstants {
 
 
 	// Unscheduled (complex)
-	//   66. Transport routing (show next stop, total distance, show stop get out) (?).
+	//   66. Transport routing (show next stop, total distance, show stop get out, voice) (?).
 	//   64. Traffic information (?) - rmaps (http://jgo.maps.yandex.net/tiles?l=trf)?
 	//   65. Intermediate points - for better control routing, to avoid traffic jams ...(?)
 	//   40. Support simple vector road rendering (require new index file) (?)

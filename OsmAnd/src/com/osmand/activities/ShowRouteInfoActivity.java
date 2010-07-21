@@ -4,7 +4,6 @@
 package com.osmand.activities;
 
 import java.text.MessageFormat;
-import java.util.Calendar;
 import java.util.List;
 
 import android.app.ListActivity;
@@ -19,7 +18,6 @@ import android.graphics.Paint.Style;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,11 +57,11 @@ public class ShowRouteInfoActivity extends ListActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Calendar c = Calendar.getInstance();
-		int time = helper.getLeftTime() * 1000 - c.getTimeZone().getOffset(0);
 		int dist = helper.getLeftDistance();
+		int hours = helper.getLeftTime() / (60 * 60);
+		int minutes = (helper.getLeftTime() / 60) % 60;
 		header.setText(MessageFormat.format(getString(R.string.route_general_information), MapUtils.getFormattedDistance(dist),
-				DateFormat.format("kk:mm", time))); //$NON-NLS-1$
+				hours, minutes)); 
 		setListAdapter(new RouteInfoAdapter(RoutingHelper.getInstance(this).getRouteDirections()));
 	}
 
@@ -142,10 +140,13 @@ public class ShowRouteInfoActivity extends ListActivity {
 			((RouteDrawable) icon.getDrawable()).setRouteType(model.turnType);
 			distanceLabel.setText(MapUtils.getFormattedDistance(model.distance));
 			label.setText(model.descriptionRoute);
-			if(model.expectedTime < 3600){
-				timeLabel.setText(DateFormat.format("mm:ss", model.expectedTime * 1000)); //$NON-NLS-1$
+			int seconds = model.expectedTime % 60;
+			int min = (model.expectedTime / 60) % 60;
+			int hours = (model.expectedTime / 3600);
+			if (hours == 0) {
+				timeLabel.setText(String.format("%02d:%02d", min, seconds)); //$NON-NLS-1$
 			} else {
-				timeLabel.setText(DateFormat.format("kk:mm:ss", model.expectedTime * 1000)); //$NON-NLS-1$
+				timeLabel.setText(String.format("%d:%02d:%02d", hours, min, seconds)); //$NON-NLS-1$ 
 			}
 			return row;
 		}

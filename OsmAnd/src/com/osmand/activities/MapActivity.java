@@ -132,12 +132,12 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	
 	private Notification getNotification(){
 		Intent notificationIndent = new Intent(this, MapActivity.class);
-		notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 		Notification notification = new Notification(R.drawable.icon, "", //$NON-NLS-1$
 				System.currentTimeMillis());
 		notification.setLatestEventInfo(this, Version.APP_NAME,
 				getString(R.string.go_back_to_osmand), PendingIntent.getActivity(
-						this.getBaseContext(), 0, notificationIndent,
+						this, 0, notificationIndent,
 						PendingIntent.FLAG_UPDATE_CURRENT));
 		return notification;
 	}
