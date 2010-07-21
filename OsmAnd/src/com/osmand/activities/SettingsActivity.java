@@ -476,7 +476,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 	}
 		
-	public void setAppMode(ApplicationMode preset, Editor edit){
+	public static void setAppMode(ApplicationMode preset, Editor edit){
 		if(preset == ApplicationMode.CAR){
 			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, true);
 //			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, _);

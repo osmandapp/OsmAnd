@@ -15,8 +15,8 @@
    height="48"
    id="svg2"
    inkscape:version="0.47 r22583"
-   sodipodi:docname="car_icon_svg.svg"
-   inkscape:export-filename="C:\Projects\android\osmand\trunk\OsmAnd\res\drawable\car_icon.png"
+   sodipodi:docname="car_icon_on_svg.svg"
+   inkscape:export-filename="C:\Projects\android\osmand\trunk\OsmAnd\res\drawable\car_icon_off.png"
    inkscape:export-xdpi="100"
    inkscape:export-ydpi="100">
   <metadata
@@ -27,7 +27,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -57,11 +57,11 @@
     <linearGradient
        id="linearGradient4172">
       <stop
-         style="stop-color:#e6e6e6;stop-opacity:1;"
+         style="stop-color:#646464;stop-opacity:1;"
          offset="0"
          id="stop4174" />
       <stop
-         style="stop-color:#646464;stop-opacity:1;"
+         style="stop-color:#e6e6e6;stop-opacity:1;"
          offset="1"
          id="stop4176" />
     </linearGradient>
@@ -95,7 +95,7 @@
        gradientUnits="userSpaceOnUse" />
   </defs>
   <rect
-     style="fill:url(#radialGradient4146);fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:2.03200000000000000;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+     style="fill:url(#radialGradient4146);fill-opacity:1;fill-rule:nonzero;stroke:#a0a0a0;stroke-width:2.03200000000000000;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
      id="rect3650"
      width="44.968418"
      height="44.968418"
