@@ -16,7 +16,7 @@ public class ToDoConstants {
 	
 	//   2. Using NameFinder to search online
 	//   3. Show route info after route calc (+)
-	//   4. show vehicle for calculating route
+	//   4. show vehicle for calculating route (+)
 	
 	//  BUGS
 	//   ISSUE 21. (+, +, +)

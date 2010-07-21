@@ -6,8 +6,8 @@
 
 <TextView android:id="@+id/TextView" android:layout_width="fill_parent" android:textSize="18dp" android:layout_height="wrap_content" android:gravity="center" android:layout_marginTop="10dp" android:layout_marginBottom="10dp" android:text="@string/recalculate_route_to_your_location"></TextView>
 <LinearLayout android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:gravity="center" android:layout_height="wrap_content" android:orientation="horizontal">
-<ToggleButton android:textOn="" android:textOff="" android:id="@+id/CarButton" android:layout_width="wrap_content" android:layout_height="wrap_content"  android:background="@drawable/car_icon" android:layout_marginLeft="10dp" />
-<ToggleButton android:textOn="" android:textOff="" android:checked="true" android:id="@+id/BicycleButton" android:layout_width="wrap_content" android:layout_height="wrap_content"  android:layout_marginLeft="10dp" android:background="@drawable/bicycle_icon"/>
+<ToggleButton android:textOn="" android:textOff=""  android:id="@+id/CarButton" android:layout_width="wrap_content" android:layout_height="wrap_content"  android:background="@drawable/car_icon" android:layout_marginLeft="10dp" />
+<ToggleButton android:textOn="" android:textOff="" android:id="@+id/BicycleButton" android:layout_width="wrap_content" android:layout_height="wrap_content"  android:layout_marginLeft="10dp" android:background="@drawable/bicycle_icon"/>
 <ToggleButton android:textOn="" android:textOff="" android:id="@+id/PedestrianButton" android:layout_width="wrap_content" android:layout_height="wrap_content"  android:layout_marginLeft="10dp" android:background="@drawable/pedestrian_icon"/>
 </LinearLayout>
 

@@ -13,8 +13,8 @@
    width="48"
    id="svg2939"
    inkscape:version="0.47 r22583"
-   sodipodi:docname="pedestrian_icon_svg.svg"
-   inkscape:export-filename="c:\Projects\android\osmand\trunk\OsmAnd\res\drawable\pedestrian_icon.png"
+   sodipodi:docname="pedestrian_icon_on_svg.svg"
+   inkscape:export-filename="C:\Projects\android\osmand\trunk\OsmAnd\res\drawable\pedestrian_icon_off.png"
    inkscape:export-xdpi="100"
    inkscape:export-ydpi="100">
   <metadata
@@ -25,7 +25,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -34,11 +34,11 @@
     <linearGradient
        id="linearGradient3628">
       <stop
-         style="stop-color:#e6e6e6;stop-opacity:1;"
+         style="stop-color:#646464;stop-opacity:1;"
          offset="0"
          id="stop3630" />
       <stop
-         style="stop-color:#646464;stop-opacity:1;"
+         style="stop-color:#e6e6e6;stop-opacity:1;"
          offset="1"
          id="stop3632" />
     </linearGradient>
@@ -95,19 +95,19 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1071"
-     inkscape:window-height="686"
+     inkscape:window-width="1322"
+     inkscape:window-height="904"
      id="namedview2947"
      showgrid="false"
-     inkscape:zoom="9.5869498"
-     inkscape:cx="7.5606469"
+     inkscape:zoom="14.120475"
+     inkscape:cx="15.075633"
      inkscape:cy="24.932298"
      inkscape:window-x="153"
      inkscape:window-y="41"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg2939" />
   <rect
-     style="fill:url(#radialGradient4206);fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.97400000000000000;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+     style="fill:url(#radialGradient4206);fill-opacity:1;fill-rule:nonzero;stroke:#a0a0a0;stroke-width:1.97400000000000000;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
      id="rect2854"
      width="45.026001"
      height="45.026001"

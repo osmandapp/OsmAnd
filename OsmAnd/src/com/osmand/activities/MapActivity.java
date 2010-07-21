@@ -15,6 +15,7 @@ import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
@@ -46,6 +47,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -607,24 +609,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		OsmandSettings.setMapActivityEnabled(this, false);
 	}
 	
-	@Override
-	protected void onResume() {
-		super.onResume();
-		
-		if(OsmandSettings.getMapOrientation(this) != getRequestedOrientation()){
-			setRequestedOrientation(OsmandSettings.getMapOrientation(this));
-		}
-		
-		// routing helper with current activity
-		routingHelper = RoutingHelper.getInstance(this);
-		ITileSource source = OsmandSettings.getMapTileSource(this);
-		if(!Algoritms.objectEquals(mapView.getMap(), source)){
-			if(mapView.getMap() instanceof SQLiteTileSource){
-				((SQLiteTileSource)mapView.getMap()).closeDB();
-			}
-			ResourceManager.getResourceManager().setMapSource(source);
-			mapView.setMap(source);
-		}
+	private void updateApplicationModeSettings(){
 		if(!OsmandSettings.isRotateMapToBearing(this)){
 			mapView.setRotate(0);
 		}
@@ -633,14 +618,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}
 		locationLayer.setAppMode(OsmandSettings.getApplicationMode(this));
 		routingHelper.setAppMode(OsmandSettings.getApplicationMode(this));
-		
-		
-		poiMapLayer.setFilter(OsmandSettings.getPoiFilterForMap(this));
 		mapView.setMapPosition(OsmandSettings.getPositionOnMap(this));
-		
-		backToLocation.setVisibility(View.INVISIBLE);
-		
-		
 		if(mapView.getLayers().contains(transportStopsLayer) != OsmandSettings.isShowingTransportOverMap(this)){
 			if(OsmandSettings.isShowingTransportOverMap(this)){
 				mapView.addLayer(transportStopsLayer, routeLayer);
@@ -663,6 +641,34 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				mapView.removeLayer(osmBugsLayer);
 			}
 		}
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
+		if(OsmandSettings.getMapOrientation(this) != getRequestedOrientation()){
+			setRequestedOrientation(OsmandSettings.getMapOrientation(this));
+		}
+		
+		// routing helper with current activity
+		routingHelper = RoutingHelper.getInstance(this);
+		ITileSource source = OsmandSettings.getMapTileSource(this);
+		if(!Algoritms.objectEquals(mapView.getMap(), source)){
+			if(mapView.getMap() instanceof SQLiteTileSource){
+				((SQLiteTileSource)mapView.getMap()).closeDB();
+			}
+			ResourceManager.getResourceManager().setMapSource(source);
+			mapView.setMap(source);
+		}
+		
+		updateApplicationModeSettings();
+
+		poiMapLayer.setFilter(OsmandSettings.getPoiFilterForMap(this));
+		backToLocation.setVisibility(View.INVISIBLE);
+		
+		
+
 		
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, gpsListener);
@@ -864,15 +870,44 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     	Builder builder = new AlertDialog.Builder(this);
     	builder.setTitle(R.string.follow_route);
     	View view = getLayoutInflater().inflate(R.layout.calculate_route, null);
-    	ToggleButton car = (ToggleButton) view.findViewById(R.id.CarButton);
-    	ToggleButton bicyle = (ToggleButton) view.findViewById(R.id.BicycleButton);
-    	ToggleButton pedestrian = (ToggleButton) view.findViewById(R.id.PedestrianButton);
-    	if(OsmandSettings.getApplicationMode(this) == ApplicationMode.BICYCLE){
-    		bicyle.setChecked(true);
-    	} else if(OsmandSettings.getApplicationMode(this) == ApplicationMode.PEDESTRIAN){
-    		pedestrian.setChecked(true);
-    	} else if(OsmandSettings.getApplicationMode(this) == ApplicationMode.CAR){
-    		car.setChecked(true);
+    	final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
+    	buttons[ApplicationMode.CAR.ordinal()] = (ToggleButton) view.findViewById(R.id.CarButton);
+    	buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
+    	buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
+    	ApplicationMode appMode = OsmandSettings.getApplicationMode(this);
+    	for(int i=0; i< buttons.length; i++){
+    		if(buttons[i] != null){
+    			final int ind = i;
+    			ToggleButton b = buttons[i];
+    			b.setChecked(appMode == ApplicationMode.values()[i]);
+    			b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+						if(isChecked){
+							if (OsmandSettings.getApplicationMode(MapActivity.this) != ApplicationMode.values()[ind]) {
+								Editor edit = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_WRITEABLE).edit();
+								edit.putString(OsmandSettings.APPLICATION_MODE, ApplicationMode.values()[ind].name());
+								SettingsActivity.setAppMode(ApplicationMode.values()[ind], edit);
+								edit.commit();
+								for (int j = 0; j < buttons.length; j++) {
+									if (buttons[j] != null) {
+										buttons[j].setChecked(ind == j);
+									}
+								}
+								updateApplicationModeSettings();	
+								mapView.refreshMap();
+							}
+						} else {
+							// revert state	
+							if (OsmandSettings.getApplicationMode(MapActivity.this) == ApplicationMode.values()[ind]){ 
+								buttons[ind].setChecked(true);
+							}
+						}
+						
+					}
+    				
+    			});
+    		}
     	}
     	builder.setView(view);
     	builder.setPositiveButton(R.string.follow, new DialogInterface.OnClickListener(){
