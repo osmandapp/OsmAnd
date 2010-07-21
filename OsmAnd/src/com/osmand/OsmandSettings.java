@@ -199,6 +199,25 @@ public class OsmandSettings {
 		return prefs.getBoolean(SHOW_OSM_BUGS, SHOW_OSM_BUGS_DEF);
 	}
 	
+	public static boolean setShowingOsmBugs(Context ctx, boolean val) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putBoolean(SHOW_OSM_BUGS, val).commit();
+	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String SHOW_FAVORITES = "show_favorites"; //$NON-NLS-1$
+	public static final boolean SHOW_FAVORITES_DEF = false;
+
+	public static boolean isShowingFavorites(Context ctx) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(SHOW_FAVORITES, SHOW_FAVORITES_DEF);
+	}
+	
+	public static boolean setShowingFavorites(Context ctx, boolean val) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putBoolean(SHOW_FAVORITES, val).commit();
+	}
+	
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String MAP_SCREEN_ORIENTATION = "map_screen_orientation"; //$NON-NLS-1$
 	

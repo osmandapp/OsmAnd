@@ -79,6 +79,7 @@ public class FavouritesActivity extends ListActivity {
 
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		FavouritePoint point = favouritesList.get(position);
+		OsmandSettings.setShowingFavorites(this, true);
 		OsmandSettings.setMapLocationToShow(this, point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName()); //$NON-NLS-1$
 		Intent newIntent = new Intent(FavouritesActivity.this, MapActivity.class);
 		startActivity(newIntent);
@@ -147,7 +148,7 @@ public class FavouritesActivity extends ListActivity {
 	                FAVOURITE_COL_NAME + " TEXT, " + FAVOURITE_COL_LAT + " double, " + //$NON-NLS-1$ //$NON-NLS-2$
 	                FAVOURITE_COL_LON + " double);"; //$NON-NLS-1$
 
-	    FavouritesDbHelper(Context context) {
+	    public FavouritesDbHelper(Context context) {
 	        super(context, FAVOURITE_TABLE_NAME, null, DATABASE_VERSION);
 	    }
 	    

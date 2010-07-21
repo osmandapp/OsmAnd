@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="any_poi">Все</string>
+	<string name="layer_transport_route">Маршрут на транспорте</string>
+	<string name="layer_route">Маршрут</string>
+	<string name="layer_favorites">Избранные</string>
+	<string name="layer_osm_bugs">Osm bugs</string>
+	<string name="layer_transport">Остановки транспорта</string>
+	<string name="layer_poi">POI</string>
+	<string name="layer_map">Карта источник</string>
+	<string name="menu_layers">Слои</string>
 	<string name="continue_follow_previous_route">Предыдущий маршрут был не закончен. Продолжить следовать по нему?</string>
 	<string name="context_menu_item_search_poi">Искать POI</string>
 	<string name="context_menu_item_show_route">Маршрут от точки</string>
@@ -169,7 +178,7 @@
     <string name="use_online_routing">Online маршрутизация</string>
 	<string name="user_password_descr">Указать пароль для работы с OSM</string>
     <string name="user_password">Пароль</string>
-    <string name="osm_settings_descr">Упраление слоем open street bugs, установка osm логина </string>
+    <string name="osm_settings_descr">Установка osm логина</string>
     <string name="monitor_preferences_descr">Включение мониторинга, установка интервала сохранения</string>
     <string name="data_settings_descr">Настройка данных : язык, обновление данных</string>
     <string name="map_preferences_descr">Настройка источника, параметров карты, доступа в Интернет</string>

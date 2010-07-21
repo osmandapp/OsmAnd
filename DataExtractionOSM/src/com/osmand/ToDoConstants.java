@@ -11,10 +11,12 @@ public class ToDoConstants {
 	// TODO ANDROID 0.3
 	//	Improvements 
 	//   1. Show layers (?) -
-	//	 0) map 1) transport 2) Poi (choose filter) 3) Favorites 4) Route (gmaps) 5) Transport route ? 6) Traffic ? 7) NameFinder
+	//	 0) map 1) transport (+)  2) Poi (choose filter) 3) osm bugs (+) 3) Favorites(+) 
+	//		4) Route (gmaps) - 5) Transport route - 
+	//   and remove from settings (+)
 	//   1.4 show detailed route on the map with turns and show route information directly (like in gmaps)
 	
-	//   2. Using NameFinder to search online
+	//   2. Using NameFinder to search online -
 	//   3. Show route info after route calc (+)
 	//   4. show vehicle for calculating route (+)
 	
@@ -30,7 +32,7 @@ public class ToDoConstants {
 	
 	// Not clear if it is really needed 
 	//   69. Add phone information to POI
-	//   70. Show building numbers over map
+	//   70. Show building numbers over map (require changin address index - index 2 more columns lat/lon for fast search)
 
 
 	// Unscheduled (complex)
