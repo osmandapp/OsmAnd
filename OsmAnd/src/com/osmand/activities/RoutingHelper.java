@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.util.FloatMath;
 import android.widget.Toast;
@@ -317,6 +318,10 @@ public class RoutingHelper {
 		currentRoute = 0;
 		if(isFollowingMode){
 			voiceRouter.newRouteIsCalculated();
+		} else {
+			Intent intent = new Intent(context, ShowRouteInfoActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			context.startActivity(intent);
 		}
 	}
 	

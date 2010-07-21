@@ -106,7 +106,7 @@
 	<string name="max_level_download_tile">Max zoom level</string>
 	<string name="max_level_download_tile_descr">Choose max zoom level to download using internet</string>
 	<string name="route_about">About route</string>
-	<string name="route_general_information">Overall distance = {0}, travelling time = \'\'{1}\'\'.</string>
+	<string name="route_general_information">Overall distance = {0}, travelling time = {1} h {2} m.</string>
 	<string name="router_service_descr">Choose routing service</string>
 	<string name="router_service">Routing</string>
 	<string name="download_sd_dir_not_accessible">Directory on SD card to save index is not accessible</string>
