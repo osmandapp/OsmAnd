@@ -4,6 +4,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -195,7 +196,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		routingHelper = RoutingHelper.getInstance(this);
 		// 1. route layer
 		routeLayer = new RouteLayer(routingHelper);
-		mapView.addLayer(routeLayer);
+		mapView.addLayer(routeLayer, 1);
 		// 2. osm bugs layer
 		osmBugsLayer = new OsmBugsLayer(this);
 		// 3. poi layer
@@ -206,13 +207,13 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		transportStopsLayer = new TransportStopsLayer();
 		// 6. point navigation layer
 		navigationLayer = new PointNavigationLayer();
-		mapView.addLayer(navigationLayer);
+		mapView.addLayer(navigationLayer, 6);
 		// 7. point location layer 
 		locationLayer = new PointLocationLayer();
-		mapView.addLayer(locationLayer);
+		mapView.addLayer(locationLayer, 7);
 		// 8. map info layer
 		mapInfoLayer = new MapInfoLayer(this, routeLayer);
-		mapView.addLayer(mapInfoLayer);
+		mapView.addLayer(mapInfoLayer, 8);
 
 		
 		savingTrackHelper = new SavingTrackHelper(this);
@@ -636,14 +637,14 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private void updateLayers(){
 		if(mapView.getLayers().contains(transportStopsLayer) != OsmandSettings.isShowingTransportOverMap(this)){
 			if(OsmandSettings.isShowingTransportOverMap(this)){
-				mapView.addLayer(transportStopsLayer, routeLayer);
+				mapView.addLayer(transportStopsLayer, 5);
 			} else {
 				mapView.removeLayer(transportStopsLayer);
 			}
 		}
 		if(mapView.getLayers().contains(osmBugsLayer) != OsmandSettings.isShowingOsmBugs(this)){
 			if(OsmandSettings.isShowingOsmBugs(this)){
-				mapView.addLayer(osmBugsLayer, routeLayer);
+				mapView.addLayer(osmBugsLayer, 2);
 			} else {
 				mapView.removeLayer(osmBugsLayer);
 			}
@@ -651,7 +652,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 
 		if(mapView.getLayers().contains(poiMapLayer) != OsmandSettings.isShowingPoiOverMap(this)){
 			if(OsmandSettings.isShowingPoiOverMap(this)){
-				mapView.addLayer(poiMapLayer, routeLayer);
+				mapView.addLayer(poiMapLayer, 3);
 			} else {
 				mapView.removeLayer(poiMapLayer);
 			}
@@ -659,12 +660,20 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 		if(mapView.getLayers().contains(favoritesLayer) != OsmandSettings.isShowingFavorites(this)){
 			if(OsmandSettings.isShowingFavorites(this)){
-				mapView.addLayer(favoritesLayer, routeLayer);
+				mapView.addLayer(favoritesLayer, 4);
 			} else {
 				mapView.removeLayer(favoritesLayer);
 			}
 		}
 		
+	}
+	
+	private void updateMapSource(ITileSource newSource){
+		if(mapView.getMap() instanceof SQLiteTileSource){
+			((SQLiteTileSource)mapView.getMap()).closeDB();
+		}
+		ResourceManager.getResourceManager().setMapSource(newSource);
+		mapView.setMap(newSource);
 	}
 	
 	@Override
@@ -679,11 +688,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		routingHelper = RoutingHelper.getInstance(this);
 		ITileSource source = OsmandSettings.getMapTileSource(this);
 		if(!Algoritms.objectEquals(mapView.getMap(), source)){
-			if(mapView.getMap() instanceof SQLiteTileSource){
-				((SQLiteTileSource)mapView.getMap()).closeDB();
-			}
-			ResourceManager.getResourceManager().setMapSource(source);
-			mapView.setMap(source);
+			updateMapSource(source);
 		}
 		
 		updateApplicationModeSettings();
@@ -1097,7 +1102,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			@Override
 			public void onClick(DialogInterface dialog, int item, boolean isChecked) {
 				if (item == 0) {
-					// TODO show another builder with all sources
+					dialog.dismiss();
+					selectMapLayer();
 				} else if(item == 1){
 					if(isChecked){
 						selectPOIFilterLayer();
@@ -1146,6 +1152,24 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				}
 				OsmandSettings.setPoiFilterForMap(MapActivity.this, filterId);
 				poiMapLayer.setFilter(PoiFiltersHelper.getFilterById(MapActivity.this, filterId));
+				mapView.refreshMap();
+			}
+			
+		});
+		builder.show();
+	}
+	
+	private void selectMapLayer(){
+		Map<String, String> entriesMap = SettingsActivity.getTileSourceEntries();
+		Builder builder = new AlertDialog.Builder(this);
+		final ArrayList<String> keys = new ArrayList<String>(entriesMap.keySet());
+		builder.setItems(entriesMap.values().toArray(new String[entriesMap.size()]), new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Editor edit = OsmandSettings.getWriteableEditor(MapActivity.this);
+				edit.putString(OsmandSettings.MAP_TILE_SOURCES, keys.get(which));
+				edit.commit();
+				updateMapSource(OsmandSettings.getMapTileSource(MapActivity.this));
 				mapView.refreshMap();
 			}
 			
