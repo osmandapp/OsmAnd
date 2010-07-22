@@ -359,12 +359,12 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 		
 		for (OsmandMapLayer layer : layers) {
-			canvas.restore();
 			canvas.save();
 			if (!layer.drawInScreenPixels()) {
 				canvas.rotate(rotate, w, h);
 			}
 			layer.onDraw(canvas);
+			canvas.restore();
 		}
 	}
 	

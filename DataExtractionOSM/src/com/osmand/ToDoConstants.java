@@ -10,16 +10,16 @@ public class ToDoConstants {
 	
 	// TODO ANDROID 0.3
 	//	Improvements 
-	//   1. Show layers (?) -
-	//	 0) map 1) transport (+)  2) Poi (choose filter) (+) 3) osm bugs (+) 3) Favorites(+) 
-	//		4) Route (gmaps) - 5) Transport route - 
+	//   1. Show layers (?) (+)
+	//	 0) map + 1) transport (+)  2) Poi (choose filter) (+) 3) osm bugs (+) 3) Favorites(+) 
+	//		4) Route (gmaps) + 5) Transport route - 
 	//   and remove from settings (+)
-	//   1.4 show detailed route on the map with turns and show route information directly (like in gmaps)
+	//   1.4 show detailed route on the map with turns and show route information directly (like in gmaps) (+)
 	
 	//   2. Using NameFinder to search online -
 	//   3. Show route info after route calc (+)
 	//   4. show vehicle for calculating route (+)
-	//   5. Add zorders list to OsmandMapView
+	//   5. Add zorders list to OsmandMapView (+)
 	
 	//  BUGS
 	//   ISSUE 21. (+, +, +)
