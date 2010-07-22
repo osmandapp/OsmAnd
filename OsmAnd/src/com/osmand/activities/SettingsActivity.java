@@ -1,9 +1,10 @@
 package com.osmand.activities;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import android.app.ProgressDialog;
@@ -302,32 +303,15 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		maxLevelToDownload.setValue(OsmandSettings.getMaximumLevelToDownloadTile(this)+""); //$NON-NLS-1$
 		
 
-		List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
-		List<File> sqLiteFiles = new ArrayList<File>();
-		
-		File dir = new File(Environment.getExternalStorageDirectory(), ResourceManager.TILES_PATH);
-		if (dir != null) {
-			for (File f : dir.listFiles()) {
-				if (f.getName().endsWith(SQLiteTileSource.EXT)) {
-					sqLiteFiles.add(f);
-				}
-			}
+		Map<String, String> entriesMap = getTileSourceEntries();
+		entries = new String[entriesMap.size()];
+		valueEntries = new String[entriesMap.size()];
+		int ki = 0;
+		for(Map.Entry<String, String> es : entriesMap.entrySet()){
+			entries[ki] = es.getValue();
+			valueEntries[ki] = es.getKey();
+			ki++;
 		}
-		
-		entries = new String[list.size() + sqLiteFiles.size()];
-		valueEntries = new String[list.size() + sqLiteFiles.size()];
-		for (int i = 0; i < list.size(); i++) {
-			entries[i + sqLiteFiles.size()] = list.get(i).getName();
-			valueEntries[i  + sqLiteFiles.size()] = list.get(i).getName();
-		}
-		for (int i = 0; i < sqLiteFiles.size(); i++) {
-			String n = sqLiteFiles.get(i).getName();
-			entries[i] = n.substring(0, n.indexOf('.'));
-			valueEntries[i] = sqLiteFiles.get(i).getName();
-		}
-		
-		
-		
 
 		tileSourcePreference.setEntries(entries);
 		tileSourcePreference.setEntryValues(valueEntries);
@@ -338,6 +322,25 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			summary = summary.substring(0, summary.lastIndexOf(':') + 1);
 		}
 		tileSourcePreference.setSummary(summary + mapName);
+    }
+    
+    public static Map<String, String> getTileSourceEntries(){
+    	
+		Map<String, String> map = new LinkedHashMap<String, String>();
+		File dir = new File(Environment.getExternalStorageDirectory(), ResourceManager.TILES_PATH);
+		if (dir != null && dir.canRead()) {
+			for (File f : dir.listFiles()) {
+				if (f.getName().endsWith(SQLiteTileSource.EXT)) {
+					String n = f.getName();
+					map.put(f.getName(), n.substring(0, n.indexOf('.')));
+				}
+			}
+		}
+		for(TileSourceTemplate l : TileSourceManager.getKnownSourceTemplates()){
+			map.put(l.getName(), l.getName());
+		}
+		return map;
+		
     }
     
 

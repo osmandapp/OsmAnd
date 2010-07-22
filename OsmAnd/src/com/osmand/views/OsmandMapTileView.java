@@ -2,7 +2,9 @@ package com.osmand.views;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 
@@ -89,6 +91,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private OnTrackBallListener trackBallDelegate;
 	
 	private List<OsmandMapLayer> layers = new ArrayList<OsmandMapLayer>();
+	private Map<OsmandMapLayer, Float> zOrders = new HashMap<OsmandMapLayer, Float>();
 	
 	// UI Part
 	// handler to refresh map (in ui thread - not necessary in ui thread, but msg queue is desirable). 
@@ -172,23 +175,23 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	public void surfaceDestroyed(SurfaceHolder holder) {
 	}
 	
-	public void addLayer(OsmandMapLayer layer, OsmandMapLayer afterIt){
-		layer.initLayer(this);
-		int i = layers.indexOf(afterIt);
-		if(i == -1){
-			layers.add(layer);
-		} else {
-			layers.add(i, layer);
-		}
-	}
 	
-	public void addLayer(OsmandMapLayer layer){
+	
+	public void addLayer(OsmandMapLayer layer, float zOrder){
+		int i=0;
+		for(i=0; i<layers.size(); i++){
+			if(zOrders.get(layers.get(i)) > zOrder){
+				break;
+			}
+		}
 		layer.initLayer(this);
-		layers.add(layer);
+		layers.add(i, layer);
+		zOrders.put(layer, zOrder);
 	}
 	
 	public void removeLayer(OsmandMapLayer layer){
 		layers.remove(layer);
+		zOrders.remove(layer);
 		layer.destroyLayer();
 	}
 	
