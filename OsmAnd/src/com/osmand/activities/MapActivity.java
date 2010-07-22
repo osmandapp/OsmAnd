@@ -701,7 +701,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 		updateApplicationModeSettings();
 
-		favoritesLayer.reloadFavorites();
+		favoritesLayer.reloadFavorites(this);
 		poiMapLayer.setFilter(OsmandSettings.getPoiFilterForMap(this));
 		backToLocation.setVisibility(View.INVISIBLE);
 		
@@ -1271,7 +1271,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 							Toast.makeText(MapActivity.this, getString(R.string.fav_points_edited), Toast.LENGTH_SHORT).show();
 						}
 						helper.close();
-						favoritesLayer.reloadFavorites();
+						favoritesLayer.reloadFavorites(MapActivity.this);
 					}
 				});
 				if(ar.length == 0){
@@ -1294,7 +1294,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 							.show();
 				}
 				helper.close();
-				favoritesLayer.reloadFavorites();
+				favoritesLayer.reloadFavorites(MapActivity.this);
 			}
 		});
 		builder.create().show();

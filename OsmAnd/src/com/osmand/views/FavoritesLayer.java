@@ -2,6 +2,7 @@ package com.osmand.views;
 
 import java.util.List;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
@@ -71,7 +72,7 @@ public class FavoritesLayer implements OsmandMapLayer {
 		paintBlack.setStrokeWidth(2);
 		
 		pixRect.set(0, 0, view.getWidth(), view.getHeight());
-		reloadFavorites();
+		reloadFavorites(view.getContext());
 	}
 
 	@Override
@@ -79,8 +80,8 @@ public class FavoritesLayer implements OsmandMapLayer {
 		
 	}
 	
-	public void reloadFavorites(){
-		FavouritesDbHelper helper = new FavouritesActivity.FavouritesDbHelper(view.getContext());
+	public void reloadFavorites(Context ctx){
+		FavouritesDbHelper helper = new FavouritesActivity.FavouritesDbHelper(ctx);
 		favouritePoints = helper.getFavouritePoints();
 		helper.close();
 	}
