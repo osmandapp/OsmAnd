@@ -53,6 +53,7 @@ import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.ZoomControls;
@@ -90,6 +91,7 @@ import com.osmand.views.OsmandMapTileView;
 import com.osmand.views.POIMapLayer;
 import com.osmand.views.PointLocationLayer;
 import com.osmand.views.PointNavigationLayer;
+import com.osmand.views.RouteInfoLayer;
 import com.osmand.views.RouteLayer;
 import com.osmand.views.TransportStopsLayer;
 
@@ -122,6 +124,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private PointLocationLayer locationLayer;
 	private PointNavigationLayer navigationLayer;
 	private MapInfoLayer mapInfoLayer;
+	private RouteInfoLayer routeInfoLayer;
 	
 	private SavingTrackHelper savingTrackHelper;
 	private RoutingHelper routingHelper;
@@ -135,6 +138,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private NotificationManager mNotificationManager;
 	private Handler mapPositionHandler = null;
 	private int APP_NOTIFICATION_ID;
+	
 	
 	
 
@@ -194,6 +198,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 		mapView.setMapLocationListener(this);
 		routingHelper = RoutingHelper.getInstance(this);
+		
 		// 1. route layer
 		routeLayer = new RouteLayer(routingHelper);
 		mapView.addLayer(routeLayer, 1);
@@ -214,6 +219,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		// 8. map info layer
 		mapInfoLayer = new MapInfoLayer(this, routeLayer);
 		mapView.addLayer(mapInfoLayer, 8);
+		// 9. route info layer
+		routeInfoLayer = new RouteInfoLayer(routingHelper, (LinearLayout) findViewById(R.id.RouteLayout));
+		mapView.addLayer(routeInfoLayer, 9);
 
 		
 		savingTrackHelper = new SavingTrackHelper(this);
@@ -1084,10 +1092,12 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		layersList.add(getString(R.string.layer_transport));
 		layersList.add(getString(R.string.layer_osm_bugs));
 		layersList.add(getString(R.string.layer_favorites));
-		if(routingHelper != null && routingHelper.isRouteCalculated()){
+		final int routeInfoInd = routeInfoLayer.couldBeVisible() ? layersList.size() : -1;
+		if(routeInfoLayer.couldBeVisible()){
 			layersList.add(getString(R.string.layer_route));
 		}
-		if(!TransportRouteHelper.getInstance().getRoute().isEmpty()){
+		final int transportRouteInfoInd = TransportRouteHelper.getInstance().getRoute().isEmpty() ? - 1 : layersList.size(); 
+		if(transportRouteInfoInd > -1){
 			layersList.add(getString(R.string.layer_transport_route));
 		}
 		final boolean[] selected = new boolean[layersList.size()];
@@ -1096,6 +1106,14 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		selected[2] = OsmandSettings.isShowingTransportOverMap(this);
 		selected[3] = OsmandSettings.isShowingOsmBugs(this);
 		selected[4] = OsmandSettings.isShowingFavorites(this);
+		if(routeInfoInd != -1){
+			selected[routeInfoInd] = routeInfoLayer.isUserDefinedVisible(); 
+		}
+		if(transportRouteInfoInd != -1){
+			// TODO
+			selected[transportRouteInfoInd] = true; 
+		}
+		
 		Builder builder = new AlertDialog.Builder(this);
 		builder.setMultiChoiceItems(layersList.toArray(new String[layersList.size()]), selected, new DialogInterface.OnMultiChoiceClickListener() {
 
@@ -1115,8 +1133,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					OsmandSettings.setShowingOsmBugs(MapActivity.this, isChecked);
 				} else if(item == 4){
 					OsmandSettings.setShowingFavorites(MapActivity.this, isChecked);
+				} else if(item == routeInfoInd){
+					routeInfoLayer.setVisible(isChecked);
+				} else if(item == transportRouteInfoInd){
+					// TODO
 				}
-				// TODO others
 				updateLayers();
 				mapView.refreshMap();
 			}
