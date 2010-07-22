@@ -93,6 +93,7 @@ import com.osmand.views.PointLocationLayer;
 import com.osmand.views.PointNavigationLayer;
 import com.osmand.views.RouteInfoLayer;
 import com.osmand.views.RouteLayer;
+import com.osmand.views.TransportInfoLayer;
 import com.osmand.views.TransportStopsLayer;
 
 public class MapActivity extends Activity implements IMapLocationListener, SensorEventListener {
@@ -121,6 +122,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private POIMapLayer poiMapLayer;
 	private FavoritesLayer favoritesLayer;
 	private TransportStopsLayer transportStopsLayer;
+	private TransportInfoLayer transportInfoLayer;
 	private PointLocationLayer locationLayer;
 	private PointNavigationLayer navigationLayer;
 	private MapInfoLayer mapInfoLayer;
@@ -210,6 +212,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		favoritesLayer = new FavoritesLayer(this);
 		// 5. transport layer
 		transportStopsLayer = new TransportStopsLayer();
+		// 5.5 transport info layer 
+		transportInfoLayer = new TransportInfoLayer(TransportRouteHelper.getInstance());
+		mapView.addLayer(transportInfoLayer, 5.5f);
 		// 6. point navigation layer
 		navigationLayer = new PointNavigationLayer();
 		mapView.addLayer(navigationLayer, 6);
@@ -1110,8 +1115,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			selected[routeInfoInd] = routeInfoLayer.isUserDefinedVisible(); 
 		}
 		if(transportRouteInfoInd != -1){
-			// TODO
-			selected[transportRouteInfoInd] = true; 
+			selected[transportRouteInfoInd] = transportInfoLayer.isVisible(); 
 		}
 		
 		Builder builder = new AlertDialog.Builder(this);
@@ -1136,7 +1140,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				} else if(item == routeInfoInd){
 					routeInfoLayer.setVisible(isChecked);
 				} else if(item == transportRouteInfoInd){
-					// TODO
+					transportInfoLayer.setVisible(isChecked);
 				}
 				updateLayers();
 				mapView.refreshMap();
