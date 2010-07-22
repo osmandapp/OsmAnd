@@ -49,6 +49,7 @@ import android.widget.Toast;
 
 import com.osmand.Algoritms;
 import com.osmand.LogUtil;
+import com.osmand.NameFinderPoiFilter;
 import com.osmand.OsmandSettings;
 import com.osmand.PoiFilter;
 import com.osmand.PoiFiltersHelper;
@@ -99,26 +100,52 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		super.onCreate(icicle);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.searchpoi);
+		Bundle bundle = this.getIntent().getExtras();
+		String filterId = bundle.getString(AMENITY_FILTER);
+		filter = PoiFiltersHelper.getFilterById(this, filterId);
+		
 		uiHandler = new Handler();
 		searchPOILevel = (Button) findViewById(R.id.SearchPOILevelButton);
 		searchArea = (TextView) findViewById(R.id.SearchAreaText);
 		searchFilter = (EditText) findViewById(R.id.SearchFilter);
 		searchFilterLayout = findViewById(R.id.SearchFilterLayout);
+		showOnMap = (Button) findViewById(R.id.ShowOnMap);
+		
 		searchPOILevel.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				amenityAdapter.setNewModel(filter.searchFurther(location.getLatitude(), location.getLongitude()));
+				if(isNameFinderFilter()){
+					String query = searchFilter.getText().toString();
+					if(query.length() == 0){
+						Toast.makeText(SearchPOIActivity.this, R.string.poi_namefinder_query_empty, Toast.LENGTH_LONG).show();
+						return;
+					}
+					String res = ((NameFinderPoiFilter) filter).searchOnline(location.getLatitude(), location.getLongitude(), query);
+					if(res != null){
+						Toast.makeText(SearchPOIActivity.this, res, Toast.LENGTH_LONG).show();
+					}
+					amenityAdapter.setNewModel(((NameFinderPoiFilter) filter).getSearchedAmenities());
+					showOnMap.setEnabled(amenityAdapter.getCount() > 0);
+				} else {
+					amenityAdapter.setNewModel(filter.searchFurther(location.getLatitude(), location.getLongitude()));
+				}
+				
 				searchedLocation = location;
 				searchArea.setText(filter.getSearchArea());
 				searchPOILevel.setEnabled(filter.isSearchFurtherAvailable());
 
 			}
 		});
+		if(isNameFinderFilter()){
+			searchFilterLayout.setVisibility(View.VISIBLE);
+		}
 		searchFilter.addTextChangedListener(new TextWatcher(){
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				amenityAdapter.getFilter().filter(s);
+				if(!isNameFinderFilter()){
+					amenityAdapter.getFilter().filter(s);
+				}
 			}
 
 			@Override
@@ -131,9 +158,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			
 		});
 
-		Bundle bundle = this.getIntent().getExtras();
-		String filterId = bundle.getString(AMENITY_FILTER);
-		filter = PoiFiltersHelper.getFilterById(this, filterId);
+		
 		if(bundle.containsKey(SEARCH_LAT) && bundle.containsKey(SEARCH_LON)){
 			location = new Location("internal"); //$NON-NLS-1$
 			location.setLatitude(bundle.getDouble(SEARCH_LAT));
@@ -144,7 +169,12 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			searchNearBy = true;
 		}
 		
-		showOnMap = (Button) findViewById(R.id.ShowOnMap);
+		if(isNameFinderFilter()){
+			showOnMap.setEnabled(false);
+		} else {
+			showOnMap.setEnabled(filter != null);
+		}
+		
 		showOnMap.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -157,12 +187,12 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 				startActivity(newIntent);
 			}
 		});
-		showOnMap.setEnabled(filter != null);
+		
 		if (filter != null) {
 			amenityAdapter = new AmenityAdapter(new ArrayList<Amenity>());
 			if(location == null){
 				filter.clearPreviousZoom();
-			} else {
+			} else if(!isNameFinderFilter()) {
 				searchedLocation = location;
 				amenityAdapter.setNewModel(filter.initializeNewSearch(location.getLatitude(), location.getLongitude(), 40));
 			}
@@ -196,8 +226,12 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		if (l != null && filter != null) {
 			if (location == null) {
 				searchedLocation = l;
-				amenityAdapter.setNewModel(filter.searchAgain(l.getLatitude(), l.getLongitude()));
-				searchPOILevel.setText(R.string.search_POI_level_btn);
+				if (!isNameFinderFilter()) {
+					amenityAdapter.setNewModel(filter.searchAgain(l.getLatitude(), l.getLongitude()));
+					searchPOILevel.setText(R.string.search_POI_level_btn);
+				} else {
+					searchPOILevel.setText(R.string.search_button);
+				}
 				searchPOILevel.setEnabled(filter.isSearchFurtherAvailable());
 				searchArea.setText(filter.getSearchArea());
 				handled = true;
@@ -228,27 +262,32 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		return false;
 	}
 	
+	public boolean isNameFinderFilter(){
+		return filter instanceof NameFinderPoiFilter; 
+	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		boolean m = super.onCreateOptionsMenu(menu);
-		final MenuItem me = menu.add(R.string.show_poi_filter);
-		me.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener(){
+		if (!isNameFinderFilter()) {
+			final MenuItem me = menu.add(R.string.show_poi_filter);
+			me.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				if(searchFilterLayout.getVisibility() == View.GONE){
-					searchFilterLayout.setVisibility(View.VISIBLE);
-					me.setTitle(R.string.hide_poi_filter);
-				} else {
-					searchFilter.setText(""); //$NON-NLS-1$
-					searchFilterLayout.setVisibility(View.GONE);
-					me.setTitle(R.string.show_poi_filter);
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					if (searchFilterLayout.getVisibility() == View.GONE) {
+						searchFilterLayout.setVisibility(View.VISIBLE);
+						me.setTitle(R.string.hide_poi_filter);
+					} else {
+						searchFilter.setText(""); //$NON-NLS-1$
+						searchFilterLayout.setVisibility(View.GONE);
+						me.setTitle(R.string.show_poi_filter);
+					}
+					return true;
 				}
-				return true;
-			}
-			
-		});
+
+			});
+		}
 		return m;
 	}
 
@@ -349,6 +388,8 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		}
 		if(searchNearBy && location == null){
 			searchPOILevel.setText(R.string.search_poi_location);
+		} else if(isNameFinderFilter()){
+			searchPOILevel.setText(R.string.search_button);
 		} else {
 			searchPOILevel.setText(R.string.search_POI_level_btn);
 		}

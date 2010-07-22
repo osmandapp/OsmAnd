@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="poi_namefinder_query_empty">Input search query to find POI</string>
 	<string name="any_poi">Any</string>
 	<string name="layer_transport_route">Transport route</string>
 	<string name="layer_route">Route</string>
