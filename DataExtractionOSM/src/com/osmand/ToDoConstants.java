@@ -8,25 +8,10 @@ package com.osmand;
  */
 public class ToDoConstants {
 	
-	// TODO ANDROID 0.3
-	//	Improvements 
-	//   1. Show layers (?) (+)
-	//	 0) map + 1) transport (+)  2) Poi (choose filter) (+) 3) osm bugs (+) 3) Favorites(+) 
-	//		4) Route (gmaps) + 5) Transport route - 
-	//   and remove from settings (+)
-	//   1.4 show detailed route on the map with turns and show route information directly (like in gmaps) (+)
-	
-	//   2. Using NameFinder to search online (+)
-	//   3. Show route info after route calc (+)
-	//   4. show vehicle for calculating route (+)
-	//   5. Add zorders list to OsmandMapView (+)
-	
-	//  BUGS
-	//   ISSUE 21. (+, +, +)
-	//   ISSUE 23.
 
 	
 	// TODO
+	
 	//   Improvements
 	//   5. Download with wget
 	//   6. progress while map is loading
@@ -34,7 +19,6 @@ public class ToDoConstants {
 	// Not clear if it is really needed 
 	//   69. Add phone information to POI
 	//   70. Show building numbers over map (require changin address index - index 2 more columns lat/lon for fast search)
-
 
 	// Unscheduled (complex)
 	//   66. Transport routing (show next stop, total distance, show stop get out, voice) (?).
@@ -58,6 +42,9 @@ public class ToDoConstants {
 	//   68. Implement service to app work with screen offline 
 	//		 (audio guidance & add new item to status bar & introduce error interval for gps in buildings)
 	//   71. Implement different mechanism for tiles (big sqlite planet see rmaps)
+	//   72. Implement layers menu in map view (select/unselect vector layers to show)
+	//   73. Implement addition POI filter to search online without sd indexes
+	//   74. Implement preview route : show next turn & description (in "show only" route mode) & preview transport route.
 
 	// DONE SWING
 
