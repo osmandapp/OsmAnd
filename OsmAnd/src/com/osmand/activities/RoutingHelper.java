@@ -6,7 +6,6 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.location.Location;
 import android.util.FloatMath;
 import android.widget.Toast;
@@ -23,6 +22,16 @@ import com.osmand.osm.MapUtils;
 public class RoutingHelper {
 	
 	private static final org.apache.commons.logging.Log log = LogUtil.getLog(RoutingHelper.class);
+	
+	public static interface IRouteInformationListener {
+		
+		public void newRouteIsCalculated();
+		
+		public void routeWasCancelled();
+	}
+	
+	
+	private List<IRouteInformationListener> listeners = new ArrayList<IRouteInformationListener>();
 
 	// activity to show messages & refresh map when route is calculated
 	private Context context;
@@ -95,8 +104,12 @@ public class RoutingHelper {
 		listDistance = null;
 		directionInfo = null;
 		evalWaitInterval = 3000;
+		for(IRouteInformationListener l : listeners){
+			l.routeWasCancelled();
+		}
 		// to update route
 		setCurrentLocation(currentLocation);
+		
 	}
 	
 	public void setFinalLocation(LatLon finalLocation){
@@ -160,6 +173,14 @@ public class RoutingHelper {
 			}
 			
 		}
+	}
+	
+	public void addListener(IRouteInformationListener l){
+		listeners.add(l);
+	}
+	
+	public boolean removeListener(IRouteInformationListener l){
+		return listeners.remove(l);
 	}
 	
 	
@@ -318,10 +339,9 @@ public class RoutingHelper {
 		currentRoute = 0;
 		if(isFollowingMode){
 			voiceRouter.newRouteIsCalculated();
-		} else {
-			Intent intent = new Intent(context, ShowRouteInfoActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			context.startActivity(intent);
+		} 
+		for(IRouteInformationListener l : listeners){
+			l.newRouteIsCalculated();
 		}
 	}
 	

@@ -10,5 +10,10 @@
 <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom|left" android:id="@+id/BackToMenu" android:background="@drawable/back_menu"></ImageButton>
 <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="top|right" android:id="@+id/BackToLocation" android:background="@drawable/back_location"></ImageButton>
 
+<LinearLayout android:layout_width="wrap_content" android:id="@+id/RouteLayout" android:orientation="horizontal" android:layout_height="wrap_content" android:layout_gravity="bottom|center" android:layout_marginBottom="12dp" >
+<Button android:layout_width="wrap_content" android:id="@+id/PreviousButton" android:layout_height="wrap_content" android:background="@android:drawable/ic_media_previous"/>
+<Button android:layout_width="wrap_content" android:id="@+id/InfoButton" android:layout_height="wrap_content" android:background="@android:drawable/ic_dialog_info" android:layout_marginLeft="8dp"/>
+<Button android:layout_width="wrap_content" android:id="@+id/NextButton" android:layout_height="wrap_content" android:background="@android:drawable/ic_media_next" android:layout_marginLeft="8dp" android:layout_marginRight="15dp"/>
+</LinearLayout>
 
 </FrameLayout>
