@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.osmand.NameFinderPoiFilter;
 import com.osmand.PoiFilter;
 import com.osmand.PoiFiltersHelper;
 import com.osmand.R;
@@ -71,6 +72,7 @@ public class SearchPoiFilterActivity extends ListActivity {
 		super.onResume();
 		List<PoiFilter> filters = new ArrayList<PoiFilter>(PoiFiltersHelper.getUserDefinedPoiFilters(this)) ;
 		filters.addAll(PoiFiltersHelper.getOsmDefinedPoiFilters(this));
+		filters.add(NameFinderPoiFilter.getInstance());
 		setListAdapter(new AmenityAdapter(filters));
 	}
 

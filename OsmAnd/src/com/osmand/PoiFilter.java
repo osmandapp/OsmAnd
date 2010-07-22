@@ -20,8 +20,8 @@ public class PoiFilter {
 	private Map<AmenityType, List<String>> acceptedTypes = new LinkedHashMap<AmenityType, List<String>>();
 	private String filterByName = null;
 
-	private String filterId;
-	private String name;
+	protected String filterId;
+	protected String name;
 	private final boolean isStandardFilter;
 	
 	private final static int finalZoom = 6;

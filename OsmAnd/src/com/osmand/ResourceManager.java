@@ -25,6 +25,7 @@ import com.osmand.data.preparation.MapTileDownloader;
 import com.osmand.data.preparation.MapTileDownloader.DownloadRequest;
 import com.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
 import com.osmand.map.ITileSource;
+import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 import com.osmand.views.POIMapLayer;
 
@@ -404,12 +405,24 @@ public class ResourceManager {
 	}
 	
 	public void searchAmenitiesAsync(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, PoiFilter filter, List<Amenity> toFill){
-		String filterId = filter == null ? null : filter.getFilterId();
-		for(AmenityIndexRepository index : amenityRepositories.values()){
-			if(index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)){
-				if(!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, filterId, toFill, true)){
-					asyncLoadingTiles.requestToLoadAmenities(
-							new AmenityLoadRequest(index, topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, filter));
+		if(filter instanceof NameFinderPoiFilter){
+			List<Amenity> amenities = ((NameFinderPoiFilter) filter).getSearchedAmenities();
+			for(Amenity a : amenities){
+				LatLon l = a.getLocation();
+				if(l != null && l.getLatitude() <= topLatitude && l.getLatitude() >= bottomLatitude && l.getLongitude() >= leftLongitude && l.getLongitude() <= rightLongitude){
+					toFill.add(a);
+				}
+			}
+			
+		} else {
+			String filterId = filter == null ? null : filter.getFilterId();
+			for (AmenityIndexRepository index : amenityRepositories.values()) {
+				if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
+					if (!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, filterId, toFill,
+							true)) {
+						asyncLoadingTiles.requestToLoadAmenities(new AmenityLoadRequest(index, topLatitude, leftLongitude, bottomLatitude,
+								rightLongitude, zoom, filter));
+					}
 				}
 			}
 		}

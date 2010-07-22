@@ -20,6 +20,9 @@ public class PoiFiltersHelper {
 		if(filterId == null){
 			return null;
 		}
+		if(filterId.equals(NameFinderPoiFilter.FILTER_ID)){
+			return NameFinderPoiFilter.getInstance();
+		}
 		if(filterId.startsWith(PoiFilter.USER_PREFIX)){
 			List<PoiFilter> filters = getUserDefinedPoiFilters(ctx);
 			for(PoiFilter f : filters){
