@@ -39,12 +39,6 @@ public class ToDoConstants {
 	// BUGS Swing
 	
 	//  DONE ANDROID :
-	//   68. Implement service to app work with screen offline 
-	//		 (audio guidance & add new item to status bar & introduce error interval for gps in buildings)
-	//   71. Implement different mechanism for tiles (big sqlite planet see rmaps)
-	//   72. Implement layers menu in map view (select/unselect vector layers to show)
-	//   73. Implement addition POI filter to search online without sd indexes
-	//   74. Implement preview route : show next turn & description (in "show only" route mode) & preview transport route.
 
 	// DONE SWING
 
