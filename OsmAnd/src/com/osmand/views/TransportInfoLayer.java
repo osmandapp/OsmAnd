@@ -58,8 +58,8 @@ public class TransportInfoLayer implements OsmandMapLayer {
 
 	@Override
 	public void onDraw(Canvas canvas) {
-		List<RouteInfoLocation> list = routeHelper.getRoute();
-		if(!list.isEmpty() && visible){
+		if(routeHelper.routeIsCalculated() && visible){
+			List<RouteInfoLocation> list = routeHelper.getRoute();
 			pixRect.set(0, 0, view.getWidth(), view.getHeight());
 			view.calculateTileRectangle(pixRect, view.getCenterPointX(), 
 					view.getCenterPointY(), view.getXTile(), view.getYTile(), tileRect);
@@ -68,6 +68,10 @@ public class TransportInfoLayer implements OsmandMapLayer {
 			double bottomLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), tileRect.bottom);
 			double rightLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.right);
 			for(RouteInfoLocation l : list){
+				if(l == null){
+					// once l is null in list
+					continue;
+				}
 				TransportRoute route = l.getRoute();
 				boolean start = false;
 				boolean end = false;

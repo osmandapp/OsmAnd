@@ -19,10 +19,9 @@ public class ToDoConstants {
 	// Not clear if it is really needed 
 	//   69. Add phone information to POI
 	//   70. Show building numbers over map (require changin address index - index 2 more columns lat/lon for fast search)
+	//   66. Transport routing (show next stop, total distance, show stop get out, voice) (needed ?).
 
 	// Unscheduled (complex)
-	//   66. Transport routing (show next stop, total distance, show stop get out, voice) (?).
-	//   64. Traffic information (?) - rmaps (http://jgo.maps.yandex.net/tiles?l=trf)?
 	//   65. Intermediate points - for better control routing, to avoid traffic jams ...(?)
 	//   40. Support simple vector road rendering (require new index file) (?)
 	//   63. Support simple offline routing(require new index file) (?)
@@ -38,8 +37,9 @@ public class ToDoConstants {
 	
 	// BUGS Swing
 	
-	//  DONE ANDROID :
-
+	// DONE ANDROID :
+	//   64. Traffic information  - yandex traffic
+	
 	// DONE SWING
 
 }

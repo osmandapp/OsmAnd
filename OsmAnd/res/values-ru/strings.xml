@@ -3,6 +3,8 @@
 	<string name="poi_namefinder_query_empty">Введите запрос для поиска POI</string>
 	<string name="any_poi">Все</string>
 	<string name="layer_transport_route">Маршрут на транспорте</string>
+	<string name="thanks_yandex_traffic">Спасибо Yandex за то, что они предоставили информацию о пробках. Установите Yandex как домашнюю страницу.</string>
+	<string name="layer_yandex_traffic">Yandex трафик</string>
 	<string name="layer_route">Маршрут</string>
 	<string name="layer_favorites">Избранные</string>
 	<string name="layer_osm_bugs">Osm bugs</string>

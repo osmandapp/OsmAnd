@@ -154,6 +154,45 @@ public class MapUtils {
 		return  (1 - eval / Math.PI) / 2 * getPowZoom(zoom);
 	}
 	
+	public static double getTileEllipsoidNumberY(float zoom, double latitude){
+		final double E2 = (double) latitude * Math.PI / 180;
+		final long sradiusa = 6378137;
+		final long sradiusb = 6356752;
+		final double J2 = (double) Math.sqrt(sradiusa * sradiusa - sradiusb * sradiusb)	/ sradiusa;
+		final double M2 = (double) Math.log((1 + Math.sin(E2))
+				/ (1 - Math.sin(E2)))/ 2- J2	* Math.log((1 + J2 * Math.sin(E2))/ (1 - J2 * Math.sin(E2))) / 2;
+		final double B2 = getPowZoom(zoom);
+		return Math.floor(B2 / 2 - M2 * B2 / 2 / Math.PI);
+	}
+	
+	public static double getLatitudeFromEllipsoidTileY(float zoom, float tileNumberY){
+		final double MerkElipsK = 0.0000001;
+		final long sradiusa = 6378137;
+		final long sradiusb = 6356752;
+		final double FExct = (double) Math.sqrt(sradiusa * sradiusa
+				- sradiusb * sradiusb)
+				/ sradiusa;
+		final double TilesAtZoom = getPowZoom(zoom);
+		double result = (tileNumberY - TilesAtZoom / 2)
+				/ -(TilesAtZoom / (2 * Math.PI));
+		result = (2 * Math.atan(Math.exp(result)) - Math.PI / 2) * 180
+				/ Math.PI;
+		double Zu = result / (180 / Math.PI);
+		double yy = (tileNumberY - TilesAtZoom / 2);
+
+		double Zum1 = Zu;
+		Zu = Math.asin(1 - ((1 + Math.sin(Zum1)) * Math.pow(1 - FExct * Math.sin(Zum1), FExct))
+				/ (Math.exp((2 * yy) / -(TilesAtZoom / (2 * Math.PI))) * Math.pow(1 + FExct * Math.sin(Zum1), FExct)));
+		while (Math.abs(Zum1 - Zu) >= MerkElipsK) {
+			Zum1 = Zu;
+			Zu = Math.asin(1 - ((1 + Math.sin(Zum1)) * Math.pow(1 - FExct * Math.sin(Zum1), FExct))
+					/ (Math.exp((2 * yy) / -(TilesAtZoom / (2 * Math.PI))) * Math.pow(1 + FExct * Math.sin(Zum1), FExct)));
+		}
+
+		return Zu * 180 / Math.PI;
+	}
+	
+	
 	public static double getLongitudeFromTile(float zoom, double x) {
 		return x / getPowZoom(zoom) * 360.0 - 180.0;
 	}

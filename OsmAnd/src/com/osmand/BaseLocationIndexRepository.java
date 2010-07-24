@@ -57,10 +57,10 @@ public class BaseLocationIndexRepository<T extends MapObject> {
 		
 		Cursor query = db.query(tableLocation, new String[]{"MAX(latitude)", "MAX(longitude)", "MIN(latitude)", "MIN(longitude)"}, null, null,null, null, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		if(query.moveToFirst()){
-			dataTopLatitude = query.getDouble(0) + 2;
-			dataRightLongitude = query.getDouble(1) + 2.5;
-			dataBottomLatitude = query.getDouble(2) - 2;
-			dataLeftLongitude = query.getDouble(3) - 2.5;
+			dataTopLatitude = query.getDouble(0) + 1;
+			dataRightLongitude = query.getDouble(1) + 1.5;
+			dataBottomLatitude = query.getDouble(2) - 1;
+			dataLeftLongitude = query.getDouble(3) - 1.5;
 		}
 		query.close();
 		if (log.isDebugEnabled()) {
