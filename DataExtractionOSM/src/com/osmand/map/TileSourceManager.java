@@ -3,8 +3,6 @@ package com.osmand.map;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
-import com.osmand.osm.MapUtils;
-
 
 public class TileSourceManager {
 //	 transport "http://tile.xn--pnvkarte-m4a.de/tilegen/${z}/${x}/${y}.png", {numZoomLevels: 19,displayInLayerSwitcher:true,buffer:0});
@@ -179,60 +177,6 @@ public class TileSourceManager {
 	
 	public static TileSourceTemplate getGoogleMapsTerrainSource(){
 		return new TileSourceTemplate("GoogleMaps Terrain", "http://mt3.google.com/vt/v=w2p.111&hl=en&x={1}&y={2}&z={0}", ".jpg", 15, 0, 256, 32, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-	}
-	
-	
-
-	// TODO
-//	BufferedInputStream in = new BufferedInputStream(new URL("http://jgo.maps.yandex.net/trf/stat.js").openStream(), 1024);
-//
-//	ByteArrayOutputStream dataStream = new ByteArrayOutputStream();
-//	BufferedOutputStream out = new BufferedOutputStream(dataStream, 1024);
-//	Algoritms.streamCopy(in, out);
-//	out.flush();
-//
-//	String str = dataStream.toString();
-//	//JSONObject json = new JSONObject(str.replace("YMaps.TrafficLoader.onLoad(\"stat\",", "").replace("});", "}"));
-//	int start = str.indexOf("timestamp:");
-//	start = str.indexOf("\"", start) + 1;
-//	int end = str.indexOf("\"", start);
-//	String mTimeStamp = str.substring(start, end);
-//	Algoritms.closeStream(in);
-//	Algoritms.closeStream(out);
-//	String r = "http://jgo.maps.yandex.net/tiles?l=trf&x="+((int)tileX) +"&y="+((int)tileY)+"&z=13&ts="+mTimeStamp;
-//	System.out.println(r);
-//	InputStream is = new URL(r).openStream();
-//	dataStream = new ByteArrayOutputStream();
-//	out = new BufferedOutputStream(dataStream, 1024);
-//	Algoritms.streamCopy(is, out);
-//	out.flush();
-//	System.out.println(dataStream.toString());
-//	Algoritms.closeStream(is);
-//	Algoritms.closeStream(out)
-	public static TileSourceTemplate getYandexTrafficSource(){
-		return new TileSourceTemplate("Yandex traffic", "http://jgo.maps.yandex.net/tiles?l=trf&x={1}&y={2}&z={0}&tm=1279836000", ".png", 17, 5, 256, 32, 18000){ //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			
-			@Override
-			public String getUrlToLoad(int x, int y, int zoom) {
-				double lat = MapUtils.getLatitudeFromTile(zoom, y);
-				final double E2 = (double) lat * Math.PI / 180;
-				final long sradiusa = 6378137;
-				final long sradiusb = 6356752;
-				final double J2 = (double) Math.sqrt(sradiusa * sradiusa
-						- sradiusb * sradiusb)
-						/ sradiusa;
-				final double M2 = (double) Math.log((1 + Math.sin(E2))
-						/ (1 - Math.sin(E2)))
-						/ 2
-						- J2
-						* Math.log((1 + J2 * Math.sin(E2))
-								/ (1 - J2 * Math.sin(E2))) / 2;
-				final double B2 = (double) (1 << zoom);
-				int ny = (int) Math.floor(B2 / 2 - M2 * B2 / 2 / Math.PI);
-				System.out.println(y +" != " + ny);
-				return super.getUrlToLoad(x, ny, zoom);
-			}
-		};
 	}
 	
 	public static TileSourceTemplate getMicrosoftMapsSource(){

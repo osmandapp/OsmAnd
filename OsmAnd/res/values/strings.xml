@@ -3,6 +3,8 @@
 	<string name="poi_namefinder_query_empty">Input search query to find POI</string>
 	<string name="any_poi">Any</string>
 	<string name="layer_transport_route">Transport route</string>
+	<string name="thanks_yandex_traffic">Thanks to Yandex that they give information about traffic.</string>
+	<string name="layer_yandex_traffic">Yandex traffic</string>
 	<string name="layer_route">Route</string>
 	<string name="layer_favorites">Favorites</string>
 	<string name="layer_osm_bugs">Osm bugs</string>

@@ -357,7 +357,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			canvas.drawCircle(w, h, 3, paintCenter);
 			canvas.drawCircle(w, h, 7, paintCenter);
 		}
-		
+		canvas.restore();
 		for (OsmandMapLayer layer : layers) {
 			canvas.save();
 			if (!layer.drawInScreenPixels()) {
@@ -550,6 +550,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			}
 			Canvas canvas = holder.lockCanvas(boundsRect);
 			if (canvas != null) {
+				canvas.save();
 				canvas.rotate(rotate, w , h);
 				try {
 					ResourceManager mgr = ResourceManager.getResourceManager();

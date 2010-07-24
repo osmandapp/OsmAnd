@@ -118,6 +118,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	
 	// the order of layer should be preserved ! when you are inserting new layer
 	private RouteLayer routeLayer;
+	private YandexTrafficLayer trafficLayer;
 	private OsmBugsLayer osmBugsLayer;
 	private POIMapLayer poiMapLayer;
 	private FavoritesLayer favoritesLayer;
@@ -204,6 +205,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		// 1. route layer
 		routeLayer = new RouteLayer(routingHelper);
 		mapView.addLayer(routeLayer, 1);
+		// 2. route layer
+		trafficLayer = new YandexTrafficLayer();
+		mapView.addLayer(trafficLayer, 1.5f);
 		// 2. osm bugs layer
 		osmBugsLayer = new OsmBugsLayer(this);
 		// 3. poi layer
@@ -388,25 +392,22 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     
     
     private void registerUnregisterSensor(Location location){
+    	boolean show = OsmandSettings.isShowingViewAngle(this);
     	// show point view only if gps enabled
-    	if(location == null){
-    		if(sensorRegistered) {
-    			Log.d(LogUtil.TAG, "Disable sensor"); //$NON-NLS-1$
-    			((SensorManager) getSystemService(SENSOR_SERVICE)).unregisterListener(this);
-    			sensorRegistered = false;
-    			locationLayer.setHeading(null);
-    		}
-    	} else {
-    		if(!sensorRegistered && OsmandSettings.isShowingViewAngle(this)){
-    			Log.d(LogUtil.TAG, "Enable sensor"); //$NON-NLS-1$
-    			SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
-    			Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ORIENTATION);
-    			if (s != null) {
-    				sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_UI);
-    			}
-    			sensorRegistered = true;
-    		}
-    	}
+		if (sensorRegistered && (location == null || !show)) {
+			Log.d(LogUtil.TAG, "Disable sensor"); //$NON-NLS-1$
+			((SensorManager) getSystemService(SENSOR_SERVICE)).unregisterListener(this);
+			sensorRegistered = false;
+			locationLayer.setHeading(null);
+		} else if (!sensorRegistered && (location != null && show)) {
+			Log.d(LogUtil.TAG, "Enable sensor"); //$NON-NLS-1$
+			SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
+			Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+			if (s != null) {
+				sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_UI);
+			}
+			sensorRegistered = true;
+		}
     }
     
     private void updateSpeedBearing(Location location) {
@@ -502,6 +503,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		routingHelper.setFinalAndCurrentLocation(point, null);
 		if(point == null){
 			routingHelper.setFollowingMode(false);
+			OsmandSettings.setFollowingByRoute(MapActivity.this, false);
 		}
 		navigationLayer.setPointToNavigate(point);
 		updateNavigateToPointMenu();
@@ -895,6 +897,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     		if(navigationLayer.getPointToNavigate() != null){
     			if(routingHelper.isRouteCalculated()){
     				routingHelper.setFinalAndCurrentLocation(null, null);
+    				OsmandSettings.setFollowingByRoute(MapActivity.this, false);
     				routingHelper.setFollowingMode(false);
     				updateNavigateToPointMenu();
     			} else {
@@ -1101,16 +1104,20 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		if(routeInfoLayer.couldBeVisible()){
 			layersList.add(getString(R.string.layer_route));
 		}
-		final int transportRouteInfoInd = TransportRouteHelper.getInstance().getRoute().isEmpty() ? - 1 : layersList.size(); 
+		final int transportRouteInfoInd = !TransportRouteHelper.getInstance().routeIsCalculated() ? - 1 : layersList.size(); 
 		if(transportRouteInfoInd > -1){
 			layersList.add(getString(R.string.layer_transport_route));
 		}
+		final int trafficInd = layersList.size();
+		layersList.add(getString(R.string.layer_yandex_traffic));
+		
 		final boolean[] selected = new boolean[layersList.size()];
 		Arrays.fill(selected, true);
 		selected[1] = OsmandSettings.isShowingPoiOverMap(this);
 		selected[2] = OsmandSettings.isShowingTransportOverMap(this);
 		selected[3] = OsmandSettings.isShowingOsmBugs(this);
 		selected[4] = OsmandSettings.isShowingFavorites(this);
+		selected[trafficInd] = trafficLayer.isVisible();
 		if(routeInfoInd != -1){
 			selected[routeInfoInd] = routeInfoLayer.isUserDefinedVisible(); 
 		}
@@ -1141,6 +1148,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					routeInfoLayer.setVisible(isChecked);
 				} else if(item == transportRouteInfoInd){
 					transportInfoLayer.setVisible(isChecked);
+				} else if(item == trafficInd){
+					trafficLayer.setVisible(isChecked);
 				}
 				updateLayers();
 				mapView.refreshMap();
