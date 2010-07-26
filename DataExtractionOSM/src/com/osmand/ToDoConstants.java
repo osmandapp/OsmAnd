@@ -11,6 +11,10 @@ public class ToDoConstants {
 
 	
 	// TODO
+	//  77. Implement upload gps track onto osm server
+	//  78. Add ruler to the main tile view
+	//  79. Download any WMS layer and add to swing version
+	//  80. Export/import points
 	
 	//   Improvements
 	//   5. Download with wget
