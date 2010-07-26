@@ -118,7 +118,7 @@ public class OsmandSettings {
 
 	public static String getUserNameForOsmBug(Context ctx) {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.getString(USER_OSM_BUG_NAME, "NoName"); //$NON-NLS-1$
+		return prefs.getString(USER_OSM_BUG_NAME, "NoName/Osmand"); //$NON-NLS-1$
 	}
 
 	public static boolean setUserNameForOsmBug(Context ctx, String name) {

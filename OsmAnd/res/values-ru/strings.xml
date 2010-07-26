@@ -293,7 +293,7 @@
 <string name="context_menu_item_navigate_point">Идти к точке</string>
 <string name="context_menu_item_add_favorite">Добавить к избранным</string>
 <string name="context_menu_item_update_map">Обновить карту</string>
-<string name="context_menu_item_open_bug">Создать open street bug</string>
+<string name="context_menu_item_open_bug">Создать open street ошибку</string>
 <string name="context_menu_item_create_poi">Добавить poi</string>
 
 <string name="default_buttons_yes">Да</string>
