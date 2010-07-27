@@ -32,32 +32,33 @@ public class DownloaderIndexFromGoogleCode {
 		System.out.println(indexFiles);
 	}
 	
-	private static StringBuilder getContent() {
+	private static Map<String, String> getContent(String[] ext, String[] version) {
+		Map<String, String> files = new TreeMap<String, String>();
 		try {
 			URL url = new URL("http://code.google.com/p/osmand/downloads/list?num=1500&start=0"); //$NON-NLS-1$
 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-			StringBuilder b = new StringBuilder();
 			String s = null;
+			String prevFile = null;
 			while ((s = reader.readLine()) != null) {
-				b.append(s);
+				for(int i=0; i<ext.length; i++){
+					prevFile = getIndexFiles(files, s, prevFile, ext[i], version[i]);
+				}
 			}
-			return b;
 		} catch (MalformedURLException e) {
 			log.error("Unexpected exception", e); //$NON-NLS-1$
-			return null;
 		} catch (IOException e) {
 			log.error("Input/Output exception", e); //$NON-NLS-1$
-			return null;
+			
 		}
+		return files;
 	}
 	
 
-	private static void getIndexFiles(Map<String, String> files , StringBuilder content, String ext, String version){
+	private static String getIndexFiles(Map<String, String> files, String content, String prevFile, String ext, String version){
 		int i = 0;
 		int prevI = -1;
-		String prevFile = null;
-		while ((i = content.indexOf(ext, i)) != -1) {
+		if((i = content.indexOf(ext, i)) != -1) {
 			if(prevI > i){
 				files.put(prevFile, null);
 				prevI = i;
@@ -66,48 +67,27 @@ public class DownloaderIndexFromGoogleCode {
 			while (content.charAt(j) == '_' || Character.isLetterOrDigit(content.charAt(j)) || content.charAt(j) == '-') {
 				j--;
 			}
-			if(!content.substring(j + 1, i).endsWith("_"+version)){ //$NON-NLS-1$
-				i++;
-				continue;
+			if(content.substring(j + 1, i).endsWith("_"+version)){ //$NON-NLS-1$
+				prevFile = content.substring(j + 1, i) + ext;
 			}
-			prevFile = content.substring(j + 1, i) + ext;
-			String description = null;
-			prevI = content.indexOf("{", i); //$NON-NLS-1$
-			if(prevI > 0){
-				j = content.indexOf("}", prevI); //$NON-NLS-1$
-				if(j > 0 && j - prevI < 40){
-					description = content.substring(prevI + 1, j);
-				}
-			}
-			if(!files.containsKey(prevFile) || files.get(prevFile) == null){
-				files.put(prevFile, description);
-			} else {
-				prevI = i;
-			}
-			i++;
+			
 		}
+		if (prevFile != null && ((i = content.indexOf('{')) != -1)) {
+			int j = content.indexOf('}');
+			if (j != -1 && j - i < 40) {
+				String description = content.substring(i, j + 1);
+				files.put(prevFile, description);
+			}
+		}
+		return prevFile;
 	}
 	
 	public static Map<String, String> getIndexFiles(String[] ext, String[] version){
-		StringBuilder content = getContent();
-		if(content == null){
-			return null;
-		}
-		Map<String, String> files = new TreeMap<String, String>();
-		for(int i=0; i<ext.length; i++){
-			getIndexFiles(files, content, ext[i], version[i]);
-		}
-		return files;
+		return getContent(ext, version);
 	}
 	
 	public static Map<String, String> getIndexFiles(String ext, String version){
-		StringBuilder content = getContent();
-		if(content == null){
-			return null;
-		}
-		Map<String, String> files = new TreeMap<String, String>();
-		getIndexFiles(files, content, ext, version);
-		return files;
+		return getContent(new String[]{ext}, new String[]{version});
 	}
 	
 	public static URL getInputStreamToLoadIndex(String indexName) throws IOException{
