@@ -38,6 +38,7 @@ import com.osmand.osm.MapUtils;
 public class SearchAddressOnlineActivity extends ListActivity {
 	
 	private LatLon location;
+	private ProgressDialog progressDlg;
 	private final static Log log = LogUtil.getLog(SearchAddressOnlineActivity.class);
 
 	@Override
@@ -71,7 +72,7 @@ public class SearchAddressOnlineActivity extends ListActivity {
 			return;
 		}
 		
-		final ProgressDialog dlg = ProgressDialog.show(this, getString(R.string.searching), getString(R.string.searching_address));
+		progressDlg = ProgressDialog.show(this, getString(R.string.searching), getString(R.string.searching_address));
 		new Thread(new Runnable(){
 			@Override
 			public void run() {
@@ -118,12 +119,14 @@ public class SearchAddressOnlineActivity extends ListActivity {
 					log.error("Error searching address", e); //$NON-NLS-1$
 					showResult(R.string.error_io_error, null);
 				} finally {
-					dlg.dismiss();
+					if(progressDlg != null){
+						progressDlg.dismiss();
+						progressDlg = null;
+					}
 				}
 			}
 			
 		}, "SearchingAddress").start(); //$NON-NLS-1$
-		
 	}
 	
 	private void showResult(final int warning, final List<Place> places) {
@@ -137,6 +140,16 @@ public class SearchAddressOnlineActivity extends ListActivity {
 				}
 			}
 		});
+	}
+	
+
+	@Override
+	protected void onStop() {
+		if(progressDlg != null){
+			progressDlg.dismiss();
+			progressDlg = null;
+		}
+		super.onStop();
 	}
 	
 	@Override

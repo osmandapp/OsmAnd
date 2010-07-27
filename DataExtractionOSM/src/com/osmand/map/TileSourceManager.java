@@ -1,20 +1,31 @@
 package com.osmand.map;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
+
+import org.apache.commons.logging.Log;
+
+import com.osmand.Algoritms;
+import com.osmand.LogUtil;
+import com.osmand.osm.MapUtils;
 
 
 public class TileSourceManager {
-//	 transport "http://tile.xn--pnvkarte-m4a.de/tilegen/${z}/${x}/${y}.png", {numZoomLevels: 19,displayInLayerSwitcher:true,buffer:0});
-//   var navdebug = new OpenLayers.Layer.OSM("Navigation Debug", "http://ec2-184-73-15-218.compute-1.amazonaws.com/6700/256/${z}/${x}/${y}.png", {numZoomLevels: 18,displayInLayerSwitcher:true,buffer:0});
-//   "Mapsurfer Road", "http://tiles1.mapsurfer.net/tms_r.ashx?", {  numZoomLevels: 19, isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true })
+	private static final Log log = LogUtil.getLog(TileSourceManager.class);
+
 	public static class TileSourceTemplate implements ITileSource {
 		private int maxZoom;
 		private int minZoom;
 		private String name;
-		private int tileSize;
-		private String urlToLoad;
-		private String ext;
+		protected int tileSize;
+		protected String urlToLoad;
+		protected String ext;
 		private int avgSize;
 		private int bitDensity;
 		
@@ -100,8 +111,54 @@ public class TileSourceManager {
 			return true;
 		}
 		
+	}
+	
+	public static class WMSSourceTemplate extends TileSourceTemplate {
+
+		public WMSSourceTemplate(String name, String wmsUrl) {
+			super("WMS " + name, wmsUrl, ".jpg", 18, 3, 256, 16, 20000); //$NON-NLS-1$ //$NON-NLS-2$
+		}
 		
+		@Override
+		public String getUrlToLoad(int x, int y, int zoom) {
+			double yEnd = MapUtils.getLatitudeFromTile(zoom, y + 1);
+			double yStart = MapUtils.getLatitudeFromTile(zoom, y );
+			double xStart = MapUtils.getLongitudeFromTile(zoom, x);
+			double xEnd = MapUtils.getLongitudeFromTile(zoom, x + 1);
+			StringBuilder load = new StringBuilder();
+			load.append(urlToLoad).append("bbox=").append(xStart).append(','). //$NON-NLS-1$
+				 append(yEnd).append(',').append(xEnd).append(',').append(yStart);
+			load.append("&srs=EPSG:4326").append("&width=").append(tileSize).append("&height=").append(tileSize); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			return load.toString();
+		}
 		
+	}
+	
+	public static java.util.List<TileSourceTemplate> getUserDefinedTemplates(File tilesDir){
+		java.util.List<TileSourceTemplate> ts = new ArrayList<TileSourceTemplate>();
+		if (tilesDir != null) {
+			for (File f : tilesDir.listFiles()) {
+				File ch = new File(f, "url"); //$NON-NLS-1$
+				if (f.isDirectory() && ch.exists()) {
+					try {
+						BufferedReader read = new BufferedReader(new InputStreamReader(new FileInputStream(ch), "UTF-8")); //$NON-NLS-1$
+						String url = read.readLine();
+						read.close();
+						if (!Algoritms.isEmpty(url)) {
+							url = url.replaceAll(Pattern.quote("{$x}"), "{1}"); //$NON-NLS-1$ //$NON-NLS-2$
+							url = url.replaceAll(Pattern.quote("{$z}"), "{0}");  //$NON-NLS-1$//$NON-NLS-2$
+							url = url.replaceAll(Pattern.quote("{$y}"), "{2}"); //$NON-NLS-1$ //$NON-NLS-2$
+							TileSourceTemplate t = new TileSourceTemplate(f.getName(), url, ".jpg", 18, 1, 256, 16, 20000); //$NON-NLS-1$
+							ts.add(t);
+						}
+					} catch (IOException e) {
+						log.info("Mailformed dir " + f.getName(), e); //$NON-NLS-1$
+					}
+
+				}
+			}
+		}
+		return ts;
 	}
 	
 	static java.util.List<TileSourceTemplate> list;
@@ -113,14 +170,12 @@ public class TileSourceManager {
 			list.add(getCycleMapSource());
 			list.add(getMapSurferSource());
 			list.add(getNavigationDebugSource());
-//			list.add(getAerialMapSource());
 			
 			list.add(getCloudMadeSource());
 			list.add(getOpenPisteMapSource());
 			list.add(getGoogleMapsSource());
 			list.add(getGoogleMapsSatelliteSource());
 			list.add(getGoogleMapsTerrainSource());
-//			list.add(getYandexTrafficSource());
 			
 			list.add(getMicrosoftMapsSource());
 			list.add(getMicrosoftEarthSource());
@@ -192,7 +247,9 @@ public class TileSourceManager {
 	}
 	
 	
-	
+	// WMS layers : http://whoots.mapwarper.net/tms/{$z}/{$x}/{$y}/ {layer}/{Path}
+	// 1. Landsat http://onearth.jpl.nasa.gov/wms.cgi global_mosaic (NOT WORK)
+	// 2. Genshtab http://wms.latlon.org gshtab
 	
 	protected static final char[] NUM_CHAR = { '0', '1', '2', '3' };
 

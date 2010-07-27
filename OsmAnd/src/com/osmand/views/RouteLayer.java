@@ -10,6 +10,8 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Paint.Cap;
+import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.location.Location;
 import android.util.Log;
@@ -45,6 +47,8 @@ public class RouteLayer implements OsmandMapLayer {
 		paint.setStrokeWidth(14);
 		paint.setAlpha(150);
 		paint.setAntiAlias(true);
+		paint.setStrokeCap(Cap.ROUND);
+		paint.setStrokeJoin(Join.ROUND);
 		path = new Path();
 	}
 	

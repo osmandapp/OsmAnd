@@ -22,6 +22,7 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 	private Street street1;
 	volatile private List<Street> initialList = new ArrayList<Street>();
 	private List<Street> filterList = new ArrayList<Street>();
+	private ProgressDialog progressDlg;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		region = ResourceManager.getResourceManager().getRegionRepository(OsmandSettings.getLastSearchedRegion(this));
@@ -45,9 +46,17 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 		((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_street);
 	}
 	
+	@Override
+	protected void onStop() {
+		if(progressDlg != null){
+			progressDlg.dismiss();
+			progressDlg = null;
+		}
+		super.onStop();
+	}
 	
 	protected void startLoadDataInThread(String progressMsg){
-		final ProgressDialog dlg = ProgressDialog.show(this, getString(R.string.loading), progressMsg, true);
+		progressDlg = ProgressDialog.show(this, getString(R.string.loading), progressMsg, true);
 		new Thread("Loader search data") { //$NON-NLS-1$
 			@Override
 			public void run() {
@@ -56,13 +65,17 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 					region.fillWithSuggestedStreetsIntersectStreets(city, street1, t);
 					initialList = t;
 				} finally {
-					dlg.dismiss();
-					runOnUiThread(new Runnable() {
-						@Override
-						public void run() {
-							setText(getFilter().toString());
-						}
-					});
+					if(progressDlg != null){
+						progressDlg.dismiss();
+						progressDlg = null;
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								setText(getFilter().toString());
+							}
+						});
+					}
+					
 				}
 			}
 		}.start();

@@ -524,7 +524,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 
 	}
 	
-	public void fillMenuWithActions(JMenuBar bar){
+	public void fillMenuWithActions(final JMenuBar bar){
 		JMenu menu = new JMenu("File");
 		bar.add(menu);
 		JMenuItem loadFile = new JMenuItem("Load osm file...");
@@ -543,8 +543,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 		menu.add(exitMenu);
 		
 		JMenu tileSource = MapPanel.getMenuToChooseSource(mapPanel);
-		tileSource.addSeparator();
-		JMenuItem sqliteDB = new JMenuItem("Create sqlite database");
+		final JMenuItem sqliteDB = new JMenuItem("Create sqlite database");
 		tileSource.add(sqliteDB);
 		bar.add(tileSource);
 		
@@ -650,6 +649,10 @@ public class OsmExtractionUI implements IMapLocationListener {
 		        	DataExtractionSettings.getSettings().saveDefaultWorkingDir(fc.getSelectedFile());
 		        	mapPanel.setTilesLocation(DataExtractionSettings.getSettings().getTilesDirectory());
 		        	statusBarLabel.setText("Working directory : " + fc.getSelectedFile().getAbsolutePath());
+		        	JMenu tileSource = MapPanel.getMenuToChooseSource(mapPanel);
+		    		tileSource.add(sqliteDB);
+		    		bar.remove(1);
+		    		bar.add(tileSource, 1);
 		        	updateButtonsBar();
 		        }
 			}

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -141,8 +142,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private NotificationManager mNotificationManager;
 	private Handler mapPositionHandler = null;
 	private int APP_NOTIFICATION_ID;
+	private int currentScreenOrientation;
 	
-	
+	private Dialog progressDlg = null;
 	
 
 	private boolean isMapLinkedToLocation(){
@@ -378,6 +380,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     protected void onStop() {
     	mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		mNotificationManager.notify(APP_NOTIFICATION_ID, getNotification());
+		if(progressDlg != null){
+			progressDlg.dismiss();
+			progressDlg = null;
+		}
     	super.onStop();
     }
     
@@ -613,6 +619,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}
 	};
 	
+	
 
 	
 	@Override
@@ -698,6 +705,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		if(OsmandSettings.getMapOrientation(this) != getRequestedOrientation()){
 			setRequestedOrientation(OsmandSettings.getMapOrientation(this));
 		}
+		currentScreenOrientation = getWindow().getWindowManager().getDefaultDisplay().getOrientation();
 		
 		// routing helper with current activity
 		routingHelper = RoutingHelper.getInstance(this);
@@ -824,7 +832,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 		// Attention : sensor produces a lot of events & can hang the system
-		locationLayer.setHeading(event.values[0]);
+		float val = event.values[0];
+		if(currentScreenOrientation == 1){
+			val += 90;
+		}
+		locationLayer.setHeading(val);
 	}
 	
 	private void updateNavigateToPointMenu(){
@@ -1066,7 +1078,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		final double rightLon = MapUtils.getLongitudeFromTile(zoom, tileRect.right);
 		final double bottomLat = MapUtils.getLatitudeFromTile(zoom, tileRect.bottom);
     	
-    	final ProgressDialog dlg = ProgressDialog.show(this, getString(R.string.loading), getString(R.string.loading_data));
+    	progressDlg = ProgressDialog.show(this, getString(R.string.loading), getString(R.string.loading_data));
     	new Thread(new Runnable(){
 			@Override
 			public void run() {
@@ -1085,8 +1097,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				} catch(Exception e) {
 					Log.e(LogUtil.TAG, "Error updating local data", e); //$NON-NLS-1$
 					showToast(getString(R.string.update_poi_error_local));
-				}finally {
-					dlg.dismiss();
+				} finally {
+					if(progressDlg !=null){
+						progressDlg.dismiss();
+						progressDlg = null;
+					}
 				}
 			}
     	}, "LoadingPOI").start(); //$NON-NLS-1$

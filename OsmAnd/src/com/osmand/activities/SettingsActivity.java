@@ -91,6 +91,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private ListPreference routeServiceProvider;
 	private CheckBoxPreference routeServiceEnabled;
 
+	private ProgressDialog progressDlg;
 	
 	private BooleanPreference[] booleanPreferences = new BooleanPreference[]{
 //			new BooleanPreference(OsmandSettings.SHOW_TRANSPORT_OVER_MAP, OsmandSettings.SHOW_TRANSPORT_OVER_MAP_DEF),
@@ -107,6 +108,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			new BooleanPreference(OsmandSettings.SAVE_TRACK_TO_GPX, OsmandSettings.SAVE_TRACK_TO_GPX_DEF),
 	};
 	private BroadcastReceiver broadcastReceiver;
+
 	
 	
 	
@@ -444,20 +446,31 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	}
 	
 	public void reloadIndexes(){
-		final ProgressDialog dlg = ProgressDialog.show(this, getString(R.string.loading_data), getString(R.string.reading_indexes), true);
-		final ProgressDialogImplementation impl = new ProgressDialogImplementation(dlg);
+		progressDlg = ProgressDialog.show(this, getString(R.string.loading_data), getString(R.string.reading_indexes), true);
+		final ProgressDialogImplementation impl = new ProgressDialogImplementation(progressDlg);
 		impl.setRunnable("Initializing app", new Runnable(){ //$NON-NLS-1$
 			@Override
 			public void run() {
 				try {
 					showWarnings(ResourceManager.getResourceManager().reloadIndexes(impl));
 				} finally {
-					dlg.dismiss();
+					if(progressDlg !=null){
+						progressDlg.dismiss();
+						progressDlg = null;
+					}
 				}
 			}
 		});
 		impl.run();
-
+	}
+	
+	@Override
+	protected void onStop() {
+		if(progressDlg !=null){
+			progressDlg.dismiss();
+			progressDlg = null;
+		}
+		super.onStop();
 	}
 	protected void showWarnings(List<String> warnings) {
 		if (!warnings.isEmpty()) {

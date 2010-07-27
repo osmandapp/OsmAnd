@@ -44,34 +44,46 @@ import com.osmand.data.index.IndexConstants;
 public class DownloadIndexActivity extends ListActivity {
 	
 	private final static Log log = LogUtil.getLog(DownloadIndexActivity.class);
+	private ProgressDialog progressDlg = null; 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.download_index);
 		
-		final ProgressDialog dlg = ProgressDialog.show(this, getString(R.string.downloading), getString(R.string.downloading_list_indexes));
-		dlg.setCancelable(true);
+		progressDlg = ProgressDialog.show(this, getString(R.string.downloading), getString(R.string.downloading_list_indexes));
+		progressDlg.setCancelable(true);
 		
 		new Thread(new Runnable(){
 			@Override
 			public void run() {
 				final Map<String, String> indexFiles = downloadIndex();
-				dlg.dismiss();
-				runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						if (indexFiles != null) {
-							setListAdapter(new DownloadIndexAdapter(new ArrayList<Entry<String,String>>(indexFiles.entrySet())));
-						} else {
-							Toast.makeText(DownloadIndexActivity.this, R.string.list_index_files_was_not_loaded, Toast.LENGTH_LONG).show();
+				if(progressDlg != null){
+					progressDlg.dismiss();
+					progressDlg = null;
+					runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							if (indexFiles != null) {
+								setListAdapter(new DownloadIndexAdapter(new ArrayList<Entry<String,String>>(indexFiles.entrySet())));
+							} else {
+								Toast.makeText(DownloadIndexActivity.this, R.string.list_index_files_was_not_loaded, Toast.LENGTH_LONG).show();
+							}
 						}
-					}
-				});
-
+					});
+				}
 			}
 		}, "DownloadIndexes").start(); //$NON-NLS-1$
 		
+	}
+	
+	@Override
+	protected void onStop() {
+		if(progressDlg != null){
+			progressDlg.dismiss();
+			progressDlg = null;
+		}
+		super.onStop();
 	}
 	
 	protected Map<String, String> downloadIndex(){
@@ -166,9 +178,9 @@ public class DownloadIndexActivity extends ListActivity {
 	
 	protected void downloadFile(final String key, final File file) {
 		
-		final ProgressDialog dlg = ProgressDialog.show(this, getString(R.string.downloading), getString(R.string.downloading_file), true, true);
-		dlg.show();
-		final ProgressDialogImplementation impl = new ProgressDialogImplementation(dlg, true);
+		progressDlg = ProgressDialog.show(this, getString(R.string.downloading), getString(R.string.downloading_file), true, true);
+		progressDlg.show();
+		final ProgressDialogImplementation impl = new ProgressDialogImplementation(progressDlg, true);
 		impl.setRunnable("DownloadIndex", new Runnable(){ //$NON-NLS-1$
 
 			@Override
@@ -239,7 +251,10 @@ public class DownloadIndexActivity extends ListActivity {
 					// Possibly file is corrupted
 					file.delete();
 				} finally {
-					dlg.dismiss();
+					if(progressDlg != null){
+						progressDlg.dismiss();
+						progressDlg = null;
+					}
 				}
 			}
 		});

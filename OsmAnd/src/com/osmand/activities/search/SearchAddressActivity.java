@@ -46,6 +46,8 @@ public class SearchAddressActivity extends Activity {
 	private boolean radioBuilding = true;
 	private Button searchOnline;
 	
+	private ProgressDialog progressDlg;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -225,6 +227,15 @@ public class SearchAddressActivity extends Activity {
 		}
 	}
 	
+	@Override
+	protected void onStop() {
+		if(progressDlg != null){
+			progressDlg.dismiss();
+			progressDlg = null;
+		}
+		super.onStop();
+	}
+	
 	protected void updateBuildingSection(){
 		if(radioBuilding){
 			((TextView)findViewById(R.id.BuildingText)).setText(R.string.search_address_building);
@@ -313,20 +324,23 @@ public class SearchAddressActivity extends Activity {
 	}
 	
 	protected void startLoadDataInThread(String progressMsg){
-		final ProgressDialog dlg = ProgressDialog.show(this, getString(R.string.loading), progressMsg, true);
+		progressDlg = ProgressDialog.show(this, getString(R.string.loading), progressMsg, true);
 		new Thread("Loader search data") { //$NON-NLS-1$
 			@Override
 			public void run() {
 				try {
 					loadData();
 				} finally {
-					dlg.dismiss();
-					runOnUiThread(new Runnable() {
-						@Override
-						public void run() {
-							updateUI();
-						}
-					});
+					if (progressDlg != null) {
+						progressDlg.dismiss();
+						progressDlg = null;
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								updateUI();
+							}
+						});
+					}
 				}
 			}
 		}.start();
