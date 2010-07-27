@@ -6,11 +6,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,7 +53,7 @@ public class OsmBugsLayer implements OsmandMapLayer {
 	private Paint pointClosedUI;
 	private Paint pointOpenedUI;
 	private Pattern patternToParse = Pattern.compile("putAJAXMarker\\((\\d*), ((\\d|\\.)*), ((\\d|\\.)*), '([^']*)', (\\d)\\);"); //$NON-NLS-1$
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm aaa", Locale.US); //$NON-NLS-1$
+//	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm aaa", Locale.US); //$NON-NLS-1$
 	
 	private double cTopLatitude;
 	private double cBottomLatitude;
@@ -263,7 +260,7 @@ public class OsmBugsLayer implements OsmandMapLayer {
 		b.append("http://openstreetbugs.schokokeks.org/api/0.1/addPOIexec?"); //$NON-NLS-1$
 		b.append("lat=").append(latitude); //$NON-NLS-1$
 		b.append("&lon=").append(longitude); //$NON-NLS-1$
-		text = text + " [" + authorName +" "+ dateFormat.format(new Date())+ "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		text = text + " [" + authorName + "]"; //$NON-NLS-1$ //$NON-NLS-2$
 		b.append("&text=").append(URLEncoder.encode(text)); //$NON-NLS-1$
 		b.append("&name=").append(URLEncoder.encode(authorName)); //$NON-NLS-1$
 		return editingPOI(b.toString(), "creating bug"); //$NON-NLS-1$
@@ -273,7 +270,7 @@ public class OsmBugsLayer implements OsmandMapLayer {
 		StringBuilder b = new StringBuilder();
 		b.append("http://openstreetbugs.schokokeks.org/api/0.1/editPOIexec?"); //$NON-NLS-1$
 		b.append("id=").append(id); //$NON-NLS-1$
-		text = text + " [" + authorName +" "+ dateFormat.format(new Date())+ "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		text = text + " [" + authorName + "]"; //$NON-NLS-1$ //$NON-NLS-2$
 		b.append("&text=").append(URLEncoder.encode(text)); //$NON-NLS-1$
 		b.append("&name=").append(URLEncoder.encode(authorName)); //$NON-NLS-1$
 		return editingPOI(b.toString(), "adding comment"); //$NON-NLS-1$

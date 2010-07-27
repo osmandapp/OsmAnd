@@ -50,7 +50,7 @@ public class SQLiteTileSource implements ITileSource {
 	
 	@Override
 	public int getBitDensity() {
-		return base != null ? base.getBitDensity() : 32;
+		return base != null ? base.getBitDensity() : 16;
 	}
 
 	@Override
