@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.text.MessageFormat;
 
 import org.apache.commons.logging.Log;
 
@@ -15,6 +16,7 @@ import android.graphics.BitmapFactory;
 
 import com.osmand.map.ITileSource;
 import com.osmand.map.TileSourceManager;
+import com.osmand.map.TileSourceManager.TileSourceTemplate;
 
 public class SQLiteTileSource implements ITileSource {
 
@@ -23,6 +25,7 @@ public class SQLiteTileSource implements ITileSource {
 	private static final Log log = LogUtil.getLog(SQLiteTileSource.class); 
 	
 	private ITileSource base;
+	private String urlTemplate = null;
 	private String name;
 	private SQLiteDatabase db;
 	private final File file;
@@ -34,9 +37,10 @@ public class SQLiteTileSource implements ITileSource {
 		i = name.lastIndexOf('.');
 		if(i > 0){
 			String sourceName = name.substring(i+1);
-			for(ITileSource is : TileSourceManager.getKnownSourceTemplates()){
+			for(TileSourceTemplate is : TileSourceManager.getKnownSourceTemplates()){
 				if(is.getName().equalsIgnoreCase(sourceName)){
 					base = is;
+					urlTemplate = is.getUrlTemplate();
 					break;
 				}
 			}
@@ -77,10 +81,10 @@ public class SQLiteTileSource implements ITileSource {
 	@Override
 	public String getUrlToLoad(int x, int y, int zoom) {
 		SQLiteDatabase db = getDatabase();
-		if(db == null || db.isReadOnly()){
+		if(db == null || db.isReadOnly() || urlTemplate == null){
 			return null;
 		}
-		return base != null ? base.getUrlToLoad(x, y, zoom) : null;
+		return MessageFormat.format(urlTemplate, zoom+"", x+"", y+"");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 	}
 
 	@Override
@@ -117,6 +121,13 @@ public class SQLiteTileSource implements ITileSource {
 	private SQLiteDatabase getDatabase(){
 		if(db == null && file.exists()){
 			db = SQLiteDatabase.openDatabase(file.getAbsolutePath(), null, 0);
+			try {
+				String template = db.compileStatement("SELECT url FROM info").simpleQueryForString(); //$NON-NLS-1$
+				if(!Algoritms.isEmpty(template)){
+					urlTemplate = template;
+				}
+			} catch (RuntimeException e) {
+			}
 		}
 		return db;
 	}
@@ -203,10 +214,10 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public boolean couldBeDownloadedFromInternet() {
-		if(getDatabase() == null || getDatabase().isReadOnly() || base == null){
+		if(getDatabase() == null || getDatabase().isReadOnly()){
 			return false;
 		}
-		return base.couldBeDownloadedFromInternet();
+		return urlTemplate != null;
 	}
 	
 	

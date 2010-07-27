@@ -590,7 +590,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 							@Override
 							public void run() {
 								try {
-									SQLiteBigPlanetIndex.createSQLiteDatabase(DataExtractionSettings.getSettings().getTilesDirectory(), regionName, map.getName());
+									SQLiteBigPlanetIndex.createSQLiteDatabase(DataExtractionSettings.getSettings().getTilesDirectory(), regionName, map);
 								} catch (SQLException e1) {
 									throw new IllegalArgumentException(e1);
 								} catch (IOException e1) {

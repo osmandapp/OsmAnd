@@ -44,6 +44,7 @@ public class ResourceManager {
 	public static final String ADDRESS_PATH = APP_DIR + IndexConstants.ADDRESS_INDEX_DIR;
 	public static final String TRANSPORT_PATH = APP_DIR + IndexConstants.TRANSPORT_INDEX_DIR;
 	public static final String TILES_PATH = APP_DIR+"tiles/"; //$NON-NLS-1$
+	public static final String TEMP_SOURCE_TO_LOAD = "temp"; //$NON-NLS-1$
 	
 	public static final int LIMIT_TRANSPORT = 200;
 	
@@ -139,6 +140,14 @@ public class ResourceManager {
 					log.warn("File "+req.fileToSave.getName() + " couldn't be read", e);  //$NON-NLS-1$//$NON-NLS-2$
 				}
 				req.fileToSave.delete();
+				String[] l = req.fileToSave.getParentFile().list();
+				if(l == null || l.length == 0){
+					req.fileToSave.getParentFile().delete();
+					l = req.fileToSave.getParentFile().getParentFile().list();
+					if(l == null || l.length == 0){
+						req.fileToSave.getParentFile().getParentFile().delete();
+					}
+				}
 			}
 		}
 		
@@ -180,14 +189,19 @@ public class ResourceManager {
 	protected StringBuilder builder = new StringBuilder(40);
 	public synchronized String calculateTileId(ITileSource map, int x, int y, int zoom){
 		builder.setLength(0);
-		builder.append(map.getName());
+		if(map == null){
+			builder.append(TEMP_SOURCE_TO_LOAD); 
+		} else {
+			builder.append(map.getName());
+		}
+			
 		if(map instanceof SQLiteTileSource){
 			builder.append('@');
 		} else {
 			builder.append('/');
 		}
 		builder.append(zoom).append('/').append(x).
-				append('/').append(y).append(map.getTileFormat()).append(".tile"); //$NON-NLS-1$
+				append('/').append(y).append(map == null ?  ".jpg" : map.getTileFormat()).append(".tile"); //$NON-NLS-1$ //$NON-NLS-2$
 		String file = builder.toString();
 		return file;
 	}
@@ -223,8 +237,7 @@ public class ResourceManager {
 			File toSave = null;
 			if (url != null) {
 				if (map instanceof SQLiteTileSource) {
-					ITileSource base = ((SQLiteTileSource) map).getBase();
-					toSave = new File(dirWithTiles, calculateTileId(base, x, y, zoom));
+					toSave = new File(dirWithTiles, calculateTileId(((SQLiteTileSource) map).getBase(), x, y, zoom));
 				} else {
 					toSave = new File(dirWithTiles, tileId);
 				}
