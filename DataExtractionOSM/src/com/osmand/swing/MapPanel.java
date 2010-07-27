@@ -22,11 +22,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
+import javax.swing.AbstractAction;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -37,6 +39,7 @@ import javax.swing.UIManager;
 
 import org.apache.commons.logging.Log;
 
+import com.osmand.Algoritms;
 import com.osmand.LogUtil;
 import com.osmand.data.DataTileManager;
 import com.osmand.data.preparation.MapTileDownloader;
@@ -57,30 +60,75 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	protected static final Log log = LogUtil.getLog(MapPanel.class);
 	public static final int divNonLoadedImage = 16;
 
+	
 	public static JMenu getMenuToChooseSource(final MapPanel panel){
 		final JMenu tiles = new JMenu("Source of tiles");
+		final JMenu userDefined = new JMenu("User defined");
 		final List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
+		final List<TileSourceTemplate> udf = TileSourceManager.getUserDefinedTemplates(DataExtractionSettings.getSettings().getTilesDirectory());
+		final Map<TileSourceTemplate, JCheckBoxMenuItem> items = new LinkedHashMap<TileSourceTemplate, JCheckBoxMenuItem>();
+		tiles.add(userDefined);
+		userDefined.add(new AbstractAction("Create new tile source"){
+			private static final long serialVersionUID = -8286622335859339130L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				NewTileSourceDialog dlg = new NewTileSourceDialog(panel);
+				dlg.showDialog();
+				List<TileSourceTemplate> templates = TileSourceManager.getUserDefinedTemplates(DataExtractionSettings.getSettings().getTilesDirectory());
+				TileSourceTemplate added =null;
+				for(final TileSourceTemplate te : templates){
+					if(!items.containsKey(te)){
+						added = te;
+						JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(te.getName());
+						userDefined.add(menuItem);
+						items.put(added, menuItem);
+						menuItem.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								for (final Map.Entry<TileSourceTemplate, JCheckBoxMenuItem> es : items.entrySet()) {
+									es.getValue().setSelected(te.equals(es.getKey()));
+								}
+								panel.setMapName(te);
+							}
+						});
+					}
+				}
+				if(added != null){
+					for (final Map.Entry<TileSourceTemplate, JCheckBoxMenuItem> es : items.entrySet()) {
+						es.getValue().setSelected(added.equals(es.getKey()));
+					}
+					panel.setMapName(added);
+				}
+			}
+		});
+		
 		for(final TileSourceTemplate l : list){
 			JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(l.getName());
-			menuItem.addActionListener(new ActionListener(){
+			tiles.add(menuItem);
+			items.put(l, menuItem);
+		}
+		
+		for(final TileSourceTemplate l : udf){
+			JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(l.getName());
+			userDefined.add(menuItem);
+			items.put(l, menuItem);
+		}
+
+		
+		for (final Map.Entry<TileSourceTemplate, JCheckBoxMenuItem> em : items.entrySet()) {
+			if(Algoritms.objectEquals(panel.getMap(), em.getKey())){
+				em.getValue().setSelected(true);
+			}
+			em.getValue().addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					for(int i=0; i<list.size()	; i++){
-						if(list.get(i).equals(l)){
-							((JCheckBoxMenuItem)tiles.getItem(i)).setSelected(true);
-						} else {
-							((JCheckBoxMenuItem)tiles.getItem(i)).setSelected(false);
-						}
+					for (final Map.Entry<TileSourceTemplate, JCheckBoxMenuItem> es : items.entrySet()) {
+						es.getValue().setSelected(em.getKey().equals(es.getKey()));
 					}
-					panel.setMapName(l);
+					panel.setMapName(em.getKey());
 				}
-				
 			});
-			if(l.equals(TileSourceManager.getMapnikSource())){
-				menuItem.setSelected(true);
-				panel.setMapName(l);
-			}
-			tiles.add(menuItem);
 		}
 		
 		return tiles;
@@ -119,7 +167,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	private File tilesLocation = null;
 	
 	// name of source map 
-	private ITileSource map;
+	private ITileSource map = TileSourceManager.getMapnikSource();
 	
 	// zoom level
 	private int zoom = 1;

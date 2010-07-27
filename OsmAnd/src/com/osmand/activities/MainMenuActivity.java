@@ -46,14 +46,15 @@ public class MainMenuActivity extends Activity {
 	private Button settingsButton;
 	private Button searchButton;
 	private Button favouritesButton;
+	private ProgressDialog progressDlg;
 	
 
 	
 	public void startApplication(){
 		if(!applicationAlreadyStarted){
 			// Algoritms.removeAllFiles(new File(Environment.getExternalStorageDirectory(), "/osmand/tiles/Mapnik/18"));
-			final ProgressDialog dlg = ProgressDialog.show(this, getString(R.string.loading_data), getString(R.string.reading_indexes), true);
-			final ProgressDialogImplementation impl = new ProgressDialogImplementation(dlg);
+			progressDlg = ProgressDialog.show(this, getString(R.string.loading_data), getString(R.string.reading_indexes), true);
+			final ProgressDialogImplementation impl = new ProgressDialogImplementation(progressDlg);
 			impl.setRunnable("Initializing app", new Runnable(){ //$NON-NLS-1$
 				@Override
 				public void run() {
@@ -74,7 +75,10 @@ public class MainMenuActivity extends Activity {
 						helper.close();
 						showWarnings(warnings);
 					} finally {
-						dlg.dismiss();
+						if(progressDlg != null){
+							progressDlg.dismiss();
+							progressDlg = null;
+						}
 					}
 				}
 			});
@@ -173,6 +177,15 @@ public class MainMenuActivity extends Activity {
 			
 			builder.show();
 		}
+	}
+	
+	@Override
+	protected void onStop() {
+		if(progressDlg != null){
+			progressDlg.dismiss();
+			progressDlg = null;
+		}
+		super.onStop();
 	}
 	
 	protected void showWarnings(List<String> warnings) {

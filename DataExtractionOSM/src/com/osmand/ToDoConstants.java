@@ -11,10 +11,18 @@ public class ToDoConstants {
 
 	
 	// TODO
-	//  77. Implement upload gps track onto osm server
+	//  77. Implement upload gps track onto osm server (? not implemented yet on OSM?)
 	//  78. Add ruler to the main tile view
-	//  79. Download any WMS layer and add to swing version
-	//  80. Export/import points
+	//  80. Export/import favorite points
+	//  81. Add some objects to POI to help navigation (
+	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?).
+	//  79. Download any WMS layer and add to swing version (add tile manager ${x}, ${y}, ${z} to swing and to android)
+
+	
+	// BUGS :
+	//   1. Show different aspect view for landscape mode (+)
+	//   2. Fix out of memory downloading screen (+)
+	//   3. Fix view not attached (+)
 	
 	//   Improvements
 	//   5. Download with wget
@@ -22,7 +30,7 @@ public class ToDoConstants {
 	
 	// Not clear if it is really needed 
 	//   69. Add phone information to POI
-	//   70. Show building numbers over map (require changin address index - index 2 more columns lat/lon for fast search)
+	//   70. Show building numbers over map (require changing address index - index 2 more columns lat/lon for fast search)
 	//   66. Transport routing (show next stop, total distance, show stop get out, voice) (needed ?).
 
 	// Unscheduled (complex)
