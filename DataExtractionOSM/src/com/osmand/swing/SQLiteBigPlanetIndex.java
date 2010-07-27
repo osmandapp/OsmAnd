@@ -12,13 +12,15 @@ import java.sql.Statement;
 import org.apache.commons.logging.Log;
 
 import com.osmand.LogUtil;
+import com.osmand.map.ITileSource;
+import com.osmand.map.TileSourceManager.TileSourceTemplate;
 
 public class SQLiteBigPlanetIndex {
 	private static final Log log = LogUtil.getLog(SQLiteBigPlanetIndex.class);
 	
 	private static final int BATCH_SIZE = 50;
 	
-	public static void createSQLiteDatabase(File dirWithTiles, String regionName, String tileSource) throws SQLException, IOException {
+	public static void createSQLiteDatabase(File dirWithTiles, String regionName, ITileSource template) throws SQLException, IOException {
 		long now = System.currentTimeMillis();
 		try {
 			Class.forName("org.sqlite.JDBC"); //$NON-NLS-1$
@@ -26,26 +28,36 @@ public class SQLiteBigPlanetIndex {
 			log.error("Illegal configuration", e); //$NON-NLS-1$
 			throw new IllegalStateException(e);
 		}
-		File fileToWrite = new File(dirWithTiles, regionName + "." + tileSource + ".sqlitedb");
+		File fileToWrite = new File(dirWithTiles, regionName + "." + template.getName() + ".sqlitedb");
 		fileToWrite.delete();
 		Connection conn = DriverManager.getConnection("jdbc:sqlite:" + fileToWrite.getAbsolutePath()); //$NON-NLS-1$
 		Statement statement = conn.createStatement();
 		statement.execute("CREATE TABLE tiles (x int, y int, z int, s int, image blob, PRIMARY KEY (x,y,z,s))");
 		statement.execute("CREATE INDEX IND on tiles (x,y,z,s)");
-		statement.execute("CREATE TABLE info(minzoom,maxzoom)");
+		statement.execute("CREATE TABLE info(minzoom,maxzoom,url)");
 		statement.execute("CREATE TABLE android_metadata (locale TEXT)");
 		statement.close();
+		
+
+		PreparedStatement pStatement = conn.prepareStatement("INSERT INTO INFO VALUES(?,?,?)");
+		if (template instanceof TileSourceTemplate) {
+			pStatement.setInt(1, template.getMinimumZoomSupported());
+			pStatement.setInt(2, template.getMaximumZoomSupported());
+			pStatement.setString(3, ((TileSourceTemplate) template).getUrlTemplate());
+			pStatement.execute();
+		}
+		pStatement.close();
+		
 
 		conn.setAutoCommit(false);
-		
-		PreparedStatement pStatement = conn.prepareStatement("INSERT INTO tiles VALUES (?, ?, ?, ?, ?)");
+		pStatement = conn.prepareStatement("INSERT INTO tiles VALUES (?, ?, ?, ?, ?)");
 		int ch = 0;
 		int bufSize = 32 * 1024;
 		byte[] buf = new byte[bufSize];
 		int maxZoom = 17;
 		int minZoom = 1;
 		
-		File rootDir = new File(dirWithTiles, tileSource);
+		File rootDir = new File(dirWithTiles, template.getName());
 		for(File z : rootDir.listFiles()){
 			try {
 				int zoom = Integer.parseInt(z.getName());

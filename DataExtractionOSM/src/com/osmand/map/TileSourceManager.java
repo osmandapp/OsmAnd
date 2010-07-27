@@ -29,6 +29,11 @@ public class TileSourceManager {
 		private int avgSize;
 		private int bitDensity;
 		
+		// default constructor
+		public TileSourceTemplate(String name, String urlToLoad){
+			this(name, urlToLoad, ".jpg", 18, 1, 256, 16, 20000); //$NON-NLS-1$
+		}
+		
 		public TileSourceTemplate(String name, String urlToLoad, String ext, int maxZoom, int minZoom, int tileSize, int bitDensity, int avgSize) {
 			this.maxZoom = maxZoom;
 			this.minZoom = minZoom;
@@ -76,12 +81,19 @@ public class TileSourceManager {
 		@Override
 		public String getUrlToLoad(int x, int y, int zoom) {
 			// use int to string not format numbers! (non-nls)
+			if(urlToLoad == null){
+				return null;
+			}
 			return MessageFormat.format(urlToLoad, zoom+"", x+"", y+""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		
+		
+		public String getUrlTemplate(){
+			return urlToLoad;
+		}
 		@Override
 		public boolean couldBeDownloadedFromInternet() {
-			return true;
+			return urlToLoad != null;
 		}
 
 

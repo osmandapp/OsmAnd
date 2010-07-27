@@ -16,8 +16,7 @@ public class ToDoConstants {
 	//  80. Export/import favorite points
 	//  81. Add some objects to POI to help navigation (
 	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?).
-	//  79. Download any WMS layer and add to swing version (add tile manager ${x}, ${y}, ${z} to swing and to android)
-
+	
 	
 	// BUGS :
 	//   1. Show different aspect view for landscape mode (+)
@@ -51,6 +50,7 @@ public class ToDoConstants {
 	
 	// DONE ANDROID :
 	//   64. Traffic information  - yandex traffic
+	//   79. Download any WMS layer and add to swing version (add tile manager ${x}, ${y}, ${z} to swing and to android)
 	
 	// DONE SWING
 
