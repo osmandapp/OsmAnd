@@ -17,12 +17,6 @@ public class ToDoConstants {
 	//  81. Add some objects to POI to help navigation (
 	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?).
 	
-	
-	// BUGS :
-	//   1. Show different aspect view for landscape mode (+)
-	//   2. Fix out of memory downloading screen (+)
-	//   3. Fix view not attached (+)
-	
 	//   Improvements
 	//   5. Download with wget
 	//   6. progress while map is loading

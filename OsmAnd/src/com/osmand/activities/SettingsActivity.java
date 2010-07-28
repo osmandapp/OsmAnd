@@ -334,7 +334,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			for (File f : dir.listFiles()) {
 				if (f.getName().endsWith(SQLiteTileSource.EXT)) {
 					String n = f.getName();
-					map.put(f.getName(), n.substring(0, n.indexOf('.')));
+					map.put(f.getName(), n.substring(0, n.lastIndexOf('.')));
 				} else if(f.isDirectory() && !f.getName().equals(ResourceManager.TEMP_SOURCE_TO_LOAD)){
 					map.put(f.getName(), f.getName());
 				}
