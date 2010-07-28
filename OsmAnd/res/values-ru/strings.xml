@@ -293,7 +293,7 @@
 <string name="context_menu_item_navigate_point">Идти к точке</string>
 <string name="context_menu_item_add_favorite">Добавить к избранным</string>
 <string name="context_menu_item_update_map">Обновить карту</string>
-<string name="context_menu_item_open_bug">Создать open street ошибку</string>
+<string name="context_menu_item_open_bug">Сообщить об ошибке на карте</string>
 <string name="context_menu_item_create_poi">Добавить poi</string>
 
 <string name="default_buttons_yes">Да</string>
@@ -311,9 +311,9 @@
 <string name="favourites_remove_dialog_title">Вы действительно хотите удалить точку из Избранных?</string>
 <string name="favourites_remove_dialog_success">Точка {0} была успешно удалена из Избранных.</string>
 
-<string name="osb_add_dialog_title">Введите текст для Open Street Bug</string>
-<string name="osb_add_dialog_success">Open Streen Bug был успешно создан</string>
-<string name="osb_add_dialog_error">Произошла ошибка. Open Street Bug не был создан.</string>
+<string name="osb_add_dialog_title">Подробно опишите ошибку</string>
+<string name="osb_add_dialog_success">Спасибо, ваше замечание добавлено в базу</string>
+<string name="osb_add_dialog_error">Произошла ошибка. Описание не было создано</string>
 <string name="osb_comment_dialog_title">Добавление коментария к Open Street Bug</string>
 <string name="osb_comment_dialog_add_button">Добавить</string>
 <string name="osb_comment_dialog_success">Коментарий был успешно добавлен</string>

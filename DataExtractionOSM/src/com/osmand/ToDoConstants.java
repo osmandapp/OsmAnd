@@ -16,6 +16,8 @@ public class ToDoConstants {
 	//  80. Export/import favorite points
 	//  81. Add some objects to POI to help navigation (
 	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?).
+	//  82. Add overzoom +2 for Mapnik
+	//  83. Add monitoring service to internet (?)
 	
 	//   Improvements
 	//   5. Download with wget
