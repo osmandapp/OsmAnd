@@ -27,6 +27,7 @@ import com.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
 import com.osmand.map.ITileSource;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
+import com.osmand.render.RenderMapsRepositories;
 import com.osmand.views.POIMapLayer;
 
 /**
@@ -41,6 +42,7 @@ public class ResourceManager {
 
 	public static final String APP_DIR = "osmand/"; //$NON-NLS-1$
 	public static final String POI_PATH = APP_DIR + IndexConstants.POI_INDEX_DIR; 
+	public static final String MAPS_PATH = APP_DIR;
 	public static final String ADDRESS_PATH = APP_DIR + IndexConstants.ADDRESS_INDEX_DIR;
 	public static final String TRANSPORT_PATH = APP_DIR + IndexConstants.TRANSPORT_INDEX_DIR;
 	public static final String TILES_PATH = APP_DIR+"tiles/"; //$NON-NLS-1$
@@ -76,6 +78,8 @@ public class ResourceManager {
 	protected Map<String, AmenityIndexRepository> amenityRepositories = new LinkedHashMap<String, AmenityIndexRepository>();
 	
 	protected Map<String, TransportIndexRepository> transportRepositories = new LinkedHashMap<String, TransportIndexRepository>();
+	
+	protected RenderMapsRepositories renderer = new RenderMapsRepositories();
 	
 	public AsyncLoadingThread asyncLoadingTiles = new AsyncLoadingThread();
 	
@@ -305,6 +309,25 @@ public class ResourceManager {
 		warnings.addAll(indexingPoi(progress));
 		warnings.addAll(indexingAddresses(progress));
 		warnings.addAll(indexingTransport(progress));
+		warnings.addAll(indexingMaps(progress));
+		return warnings;
+	}
+	
+	public List<String> indexingMaps(final IProgress progress) {
+		File file = new File(Environment.getExternalStorageDirectory(), MAPS_PATH);
+		List<String> warnings = new ArrayList<String>();
+		renderer.clearAllResources();
+		if (file.exists() && file.canRead()) {
+			for (File f : file.listFiles()) {
+				if (f.getName().endsWith(IndexConstants.MAP_INDEX_EXT)) {
+					progress.startTask(Messages.getMessage("indexing_map") + f.getName(), -1); //$NON-NLS-1$
+					boolean initialized = renderer.initializeNewResource(progress, f);
+					if (!initialized) {
+						warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+					}
+				}
+			}
+		}
 		return warnings;
 	}
 	
@@ -500,6 +523,7 @@ public class ResourceManager {
 
 	public synchronized void close(){
 		imagesOnFS.clear();
+		renderer.clearAllResources();
 		closeAmenities();
 		closeAddresses();
 		closeTransport();
@@ -515,6 +539,7 @@ public class ResourceManager {
 		for(RegionAddressRepository r : addressMap.values()){
 			r.clearCities();
 		}
+		renderer.clearCache();
 		
 		System.gc();
 	}	

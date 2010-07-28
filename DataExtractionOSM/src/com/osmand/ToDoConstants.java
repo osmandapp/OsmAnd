@@ -8,20 +8,17 @@ package com.osmand;
  */
 public class ToDoConstants {
 	
-
-	
 	// TODO
-	//  77. Implement upload gps track onto osm server (? not implemented yet on OSM?)
-	//  78. Add ruler to the main tile view
+	//  78. Add ruler to the main tile view (100m, 200m,...) 
 	//  80. Export/import favorite points
 	//  81. Add some objects to POI to help navigation (
 	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?).
 	//  82. Add overzoom +2 for Mapnik
-	//  83. Add monitoring service to internet (?)
+	//  83. Add monitoring service to send locations to internet (?)
 	
 	//   Improvements
-	//   5. Download with wget
-	//   6. progress while map is loading
+	//   ! Download with wget
+	//   ! progress while map is loading
 	
 	// Not clear if it is really needed 
 	//   69. Add phone information to POI
@@ -47,6 +44,8 @@ public class ToDoConstants {
 	// DONE ANDROID :
 	//   64. Traffic information  - yandex traffic
 	//   79. Download any WMS layer and add to swing version (add tile manager ${x}, ${y}, ${z} to swing and to android)
+	//   77. Implement upload gps track onto osm server (? not implemented yet on OSM?) - 
+	//		 not really needed, because gps tracks should be prepared before loading to OSM (OSM is not ready for it)
 	
 	// DONE SWING
 

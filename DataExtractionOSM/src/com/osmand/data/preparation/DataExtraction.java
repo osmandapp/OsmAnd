@@ -42,6 +42,7 @@ import com.osmand.data.Street;
 import com.osmand.data.TransportRoute;
 import com.osmand.data.TransportStop;
 import com.osmand.data.City.CityType;
+import com.osmand.data.index.IndexConstants;
 import com.osmand.impl.ConsoleProgressImplementation;
 import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
@@ -93,7 +94,8 @@ public class DataExtraction  {
 	private static final Log log = LogFactory.getLog(DataExtraction.class);
 
 	public static final int BATCH_SIZE = 5000;
-	public static final String NODES_DB = "nodes.db";
+	public static final String TEMP_NODES_DB = "nodes"+IndexConstants.MAP_INDEX_EXT;
+	
 	
 	private final boolean loadAllObjects;
 	private final boolean normalizeStreets;
@@ -132,15 +134,27 @@ public class DataExtraction  {
 		private Connection conn;
 		
 		private boolean preloadRelationAndWaysIntoDB = false; 
+		private boolean createWholeOsmDB = false;
+		
 		int currentCountNode = 0;
 		private PreparedStatement prepNode;
 		int currentRelationsCount = 0;
 		private PreparedStatement prepRelations;
 		int currentWaysCount = 0;
 		private PreparedStatement prepWays;
+		int currentTagsCount = 0;
+		private PreparedStatement prepTags;
+		private final String regionName;
+		private File dbFile;
 		
 
+		public DataExtractionOsmFilter(String regionName) {
+			this.regionName = regionName;
+		}
+		
 		public DataExtractionOsmFilter() {
+			createWholeOsmDB = false;
+			this.regionName = null;
 		}
 		
 		public ArrayList<Node> getPlaces() {
@@ -170,31 +184,39 @@ public class DataExtraction  {
 				log.error("Illegal configuration", e);
 				throw new IllegalStateException(e);
 			}
-
-			File file = new File(workingDir, NODES_DB);
+			if(createWholeOsmDB){
+				dbFile = new File(workingDir, regionName+IndexConstants.MAP_INDEX_EXT); 
+			} else {
+				dbFile = new File(workingDir, TEMP_NODES_DB);
+			}
 			// to save space
-			if(file.exists()){
-				file.delete();
+			if(dbFile.exists()){
+				dbFile.delete();
 			}
 			// creating nodes db to fast access for all nodes
-			conn = DriverManager.getConnection("jdbc:sqlite:" + file.getAbsolutePath());
+			conn = DriverManager.getConnection("jdbc:sqlite:" + dbFile.getAbsolutePath());
 
 			// prepare tables
 			Statement stat = conn.createStatement();
 			stat.executeUpdate("drop table if exists node;");
 			stat.executeUpdate("create table node (id long, latitude double, longitude double);");
-			stat.executeUpdate("create index IdIndex ON node (id);");
+			stat.executeUpdate("create index IdIndex ON node (id, latitude, longitude);");
 			stat.executeUpdate("drop table if exists ways;");
 			stat.executeUpdate("create table ways (id long, node long);");
-			stat.executeUpdate("create index IdWIndex ON ways (id);");
+			stat.executeUpdate("create index IdWIndex ON ways (id, node);");
 			stat.executeUpdate("drop table if exists relations;");
 			stat.executeUpdate("create table relations (id long, member long, type byte, role text);");
-			stat.executeUpdate("create index IdRIndex ON relations (id);");
+			stat.executeUpdate("create index IdRIndex ON relations (id, member, type);");
+			stat.executeUpdate("drop table if exists tags;");
+			stat.executeUpdate("create table tags (id long, type byte, key, value);");
+			stat.executeUpdate("create index IdTIndex ON tags (id, type);");
+			stat.execute("PRAGMA user_version = " + IndexConstants.MAP_TABLE_VERSION); //$NON-NLS-1$
 			stat.close();
 
 			prepNode = conn.prepareStatement("insert into node values (?, ?, ?);");
 			prepWays = conn.prepareStatement("insert into ways values (?, ?);");
 			prepRelations = conn.prepareStatement("insert into relations values (?, ?, ?, ?);");
+			prepTags = conn.prepareStatement("insert into tags values (?, ?, ?, ?);");
 			preloadRelationAndWaysIntoDB = indexTransport;
 			conn.setAutoCommit(false);
 		}
@@ -212,6 +234,10 @@ public class DataExtraction  {
 				prepRelations.executeBatch();
 			}
 			prepRelations.close();
+			if (currentTagsCount > 0) {
+				prepTags.executeBatch();
+			}
+			prepTags.close();
 			conn.setAutoCommit(true);
 			
 			final PreparedStatement pselectNode = conn.prepareStatement("select * from node where id = ?");
@@ -281,7 +307,9 @@ public class DataExtraction  {
 			if (conn != null) {
 				try {
 					conn.close();
-					new File(workingDir, NODES_DB).delete();
+					if(!createWholeOsmDB){
+						dbFile.delete();
+					}
 				} catch (SQLException e) {
 				}
 			}
@@ -351,7 +379,7 @@ public class DataExtraction  {
 						prepNode.executeBatch();
 						currentCountNode = 0;
 					}
-				} else if(preloadRelationAndWaysIntoDB) {
+				} else if(preloadRelationAndWaysIntoDB || createWholeOsmDB) {
 					if (e instanceof Way) {
 						for(Long i : ((Way)e).getNodeIds()){
 							currentWaysCount ++;
@@ -378,6 +406,20 @@ public class DataExtraction  {
 						}
 					}
 				}
+				if(createWholeOsmDB){
+					for(Entry<String,String> i : e.getTags().entrySet()){
+						currentTagsCount ++;
+						prepTags.setLong(1, e.getId());
+						prepTags.setLong(2, EntityType.valueOf(e).ordinal());
+						prepTags.setString(3, i.getKey());
+						prepTags.setString(4, i.getValue());
+						prepTags.addBatch();
+					}
+					if (currentTagsCount >= BATCH_SIZE) {
+						prepTags.executeBatch();
+						currentTagsCount = 0;
+					}
+				}
 			} catch (SQLException ex) {
 				log.error("Could not save in db", ex);
 			}
@@ -390,6 +432,9 @@ public class DataExtraction  {
 	public Region readCountry(String path, IProgress progress, IOsmStorageFilter addFilter) throws IOException, SAXException, SQLException{
 		File f = new File(path);
 		InputStream stream = new FileInputStream(f);
+		int i = f.getName().indexOf('.');
+		String regionName = Algoritms.capitalizeFirstLetterAndLowercase(f.getName().substring(0, i)); 
+		
 		InputStream streamFile = stream;
 		long st = System.currentTimeMillis();
 		if (path.endsWith(".bz2")) {
@@ -409,7 +454,7 @@ public class DataExtraction  {
 			storage.getFilters().add(addFilter);
 		}
 
-        DataExtractionOsmFilter filter = new DataExtractionOsmFilter();
+        DataExtractionOsmFilter filter = new DataExtractionOsmFilter(regionName);
 		// data to load & index
 		final ArrayList<Node> places = filter.getPlaces();
 		final ArrayList<Entity> buildings = filter.getBuildings();
@@ -444,8 +489,8 @@ public class DataExtraction  {
         
         // 1. Initialize region
         Region country = new Region();
-        int i = f.getName().indexOf('.');
-        country.setName(Algoritms.capitalizeFirstLetterAndLowercase(f.getName().substring(0, i)));
+        
+        country.setName(regionName);
         country.setStorage(storage);
 
         // 2. Reading amenities
