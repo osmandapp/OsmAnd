@@ -208,8 +208,8 @@ See osmand.googlecode.com.</string>
     <string name="mark_point">Target</string>
     <string name="show_osm_bugs_descr">Show open street bugs on map</string>
     <string name="show_osm_bugs">Show open street bugs</string>
-    <string name="favourites_activity">List of favourite points</string>
-    <string name="add_to_favourite">Add to Favourites</string>
+    <string name="favourites_activity">List of favorite points</string>
+    <string name="add_to_favourite">Add to Favorites</string>
     <string name="use_english_names_descr">Select use native or english names</string>
     <string name="use_english_names">Use english names</string>
     <string name="app_settings">Application settings</string>
@@ -292,22 +292,22 @@ See osmand.googlecode.com.</string>
 <string name="search_tabs_location">Location</string>
 
 <string name="context_menu_item_navigate_point">Navigate to point</string>
-<string name="context_menu_item_add_favorite">Add to favourites</string>
+<string name="context_menu_item_add_favorite">Add to favorites</string>
 <string name="context_menu_item_update_map">Update map</string>
 <string name="context_menu_item_open_bug">Open osm bug</string>
 <string name="context_menu_item_create_poi">Create POI</string>
 
 <string name="default_buttons_yes">Yes</string>
 <string name="default_buttons_cancel">Cancel</string>
-<string name="default_buttons_apply">Apply</string><string name="default_buttons_add">Add</string><string name="default_buttons_no">No</string><string name="add_favorite_dialog_top_text">Input name of favourite point</string>
-<string name="add_favorite_dialog_default_favourite_name">Favourite</string>
-<string name="add_favorite_dialog_favourite_added_template">Favourite point \'\'{0}\'\' was added successfully.</string>
+<string name="default_buttons_apply">Apply</string><string name="default_buttons_add">Add</string><string name="default_buttons_no">No</string><string name="add_favorite_dialog_top_text">Input name of favorite point</string>
+<string name="add_favorite_dialog_default_favourite_name">Favorite</string>
+<string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>
 
 <string name="favourites_context_menu_title">Context menu</string>
 <string name="favourites_context_menu_navigate">Navigate to</string>
-<string name="favourites_context_menu_edit">Edit favourite</string>
-<string name="favourites_context_menu_delete">Delete favourite</string>
-<string name="favourites_edit_dialog_title">Input new name of favourite point</string>
+<string name="favourites_context_menu_edit">Edit favorite</string>
+<string name="favourites_context_menu_delete">Delete favorite</string>
+<string name="favourites_edit_dialog_title">Input new name of favorite point</string>
 
 <string name="favourites_remove_dialog_title">Are you sure about deleting favourite point?</string>
 <string name="favourites_remove_dialog_success">Favourite point {0} was succesfully deleted.</string>

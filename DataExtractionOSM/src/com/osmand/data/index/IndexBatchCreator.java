@@ -26,53 +26,53 @@ import com.osmand.impl.ConsoleProgressImplementation;
 public class IndexBatchCreator {
 	// config params
 	private static final boolean indexPOI = true;
-	private static final boolean indexAddress = false;
-	private static final boolean indexTransport = false;
+	private static final boolean indexAddress = true;
+	private static final boolean indexTransport = true;
 	private static final boolean writeWayNodes = true;
 	
 	protected static final Log log = LogUtil.getLog(IndexBatchCreator.class);
 	protected static final String SITE_TO_DOWNLOAD1 = "http://download.geofabrik.de/osm/europe/"; //$NON-NLS-1$
 	
-	protected static final String[] countriesToDownload1 = new String[] {
-		"albania", "andorra", "austria", // 5.3, 0.4, 100 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"belarus", "belgium", "bosnia-herzegovina", // 39, 43, 4.1 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"bulgaria", "croatia", "cyprus",  // 13, 12, 5 //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
-		"denmark", "estonia", "faroe_islands", // 75, 38, 1.5 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"finland", "greece", "hungary", //80, 25, 14 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"iceland", "ireland", "isle_of_man", // 5.9, 27, 1.1 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"kosovo", "latvia", "liechtenstein", // 8.2, 6.5, 0.2 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"lithuania", "luxembourg", "macedonia", // 5, 5, 4 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"malta", "moldova", "monaco", //0.8, 5, 0.6 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"montenegro", "norway", "poland", // 1.2, 56, 87 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"portugal", "romania", "serbia", // 10, 25, 10 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"slovakia", "slovenia", "spain", // 69, 10, 123 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"sweden", "switzerland", "turkey", // 88, 83, 17 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"ukraine", // 19 //$NON-NLS-1$
-//		 TOTAL : 1129 MB 
-		 "czech_republic", "netherlands", // 168, 375,
-		 "great_britain",  "italy", // 281, 246, 
+	protected static final String[] europeCountries = new String[] {
+//		"albania", "andorra", "austria", // 5.3, 0.4, 100 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"belarus", "belgium", "bosnia-herzegovina", // 39, 43, 4.1 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"bulgaria", "croatia", "cyprus",  // 13, 12, 5 //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+//		"denmark", "estonia", "faroe_islands", // 75, 38, 1.5 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"finland", "greece", "hungary", //80, 25, 14 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"iceland", "ireland", "isle_of_man", // 5.9, 27, 1.1 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"kosovo", "latvia", "liechtenstein", // 8.2, 6.5, 0.2 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"lithuania", "luxembourg", "macedonia", // 5, 5, 4 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"malta", "moldova", "monaco", //0.8, 5, 0.6 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"montenegro", "norway", "poland", // 1.2, 56, 87 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"portugal", "romania", "serbia", // 10, 25, 10 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"slovakia", "slovenia", "spain", // 69, 10, 123 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"sweden", "switzerland", "turkey", // 88, 83, 17 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"ukraine", // 19 //$NON-NLS-1$
+		//TOTAL : 1129 MB 
+//		 "czech_republic", "netherlands", // 168, 375,
+//		 "great_britain",  "italy", // 281, 246, 
 		// ADD TO TOTAL : 2449 MB
-		// TODO "great_britain",  "italy" (address out of memory, poi, transport) + netherlands
+		// TODO "great_britain",  "italy" (address out of memory)
 
 	};
 
 	protected static final String[] franceProvinces = new String[] {
-		"alsace","aquitaine", "auvergne", "basse-normandie", "bourgogne", "bretagne", "centre",
-		"champagne-ardenne", "corse", "franche-comte", "haute-normandie", "ile-de-france",
-		"languedoc-roussillon", "limousin", "lorraine", "midi-pyrenees", "nord-pas-de-calais",
-		"pays-de-la-loire", "picardie","poitou-charentes", "provence-alpes-cote-d-azur", "rhone-alpes"
+//		"alsace","aquitaine", "auvergne", "basse-normandie", "bourgogne", "bretagne", "centre",
+//		"champagne-ardenne", "corse", "franche-comte", "haute-normandie", "ile-de-france",
+//		"languedoc-roussillon", "limousin", "lorraine", "midi-pyrenees", "nord-pas-de-calais",
+//		"pays-de-la-loire", "picardie","poitou-charentes", "provence-alpes-cote-d-azur", "rhone-alpes"
 	};
 	
 	protected static final String[] germanyLands = new String[] {
-		"baden-wuerttemberg","bayern", "berlin", "brandenburg", "bremen", "hamburg", "hessen",
-		"mecklenburg-vorpommern", "niedersachsen", "nordrhein-westfalen", "rheinland-pfalz", "saarland",
-		"sachsen-anhalt", "sachsen", "schleswig-holstein", "thueringen",
+//		"baden-wuerttemberg","bayern", "berlin", "brandenburg", "bremen", "hamburg", "hessen",
+//		"mecklenburg-vorpommern", "niedersachsen", "nordrhein-westfalen", "rheinland-pfalz", "saarland",
+//		"sachsen-anhalt", "sachsen", "schleswig-holstein", "thueringen",
 	};
 
 	
 	protected static final String SITE_TO_DOWNLOAD2 = "http://downloads.cloudmade.com/"; //$NON-NLS-1$
 	// us states
-	// Address (out of memory) : California ? , Florida ?, Georgia ?
+	// TODO Address (out of memory) : California ? , Florida ?, Georgia ?, ...
 	protected static final String[] usStates = new String[] {
 //		"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", 
 //		"Delaware",	"District_of_Columbia", "Florida", "Georgia", "Guantanamo_Bay",	"Hawaii",
@@ -89,6 +89,24 @@ public class IndexBatchCreator {
 //		"Nova_Scotia","Nunavut", "Nw_Territories","Ontario","Pr_Edwrd_Island",
 //		"Quebec","Saskatchewan","Yukon",
 	};
+	
+	
+	protected static final String SITE_TO_DOWNLOAD3 = "http://gis-lab.info/data/osm/"; //$NON-NLS-1$
+	protected static final String[] russiaStates = new String[] {
+//		"adygeya", "altay", "altayskiy","amur","arkhan","astrakhan",
+//		"bashkir", "belgorod","bryansk","buryat","chechen", "chel",
+//		"chukot", "chuvash", "dagestan","evrey", "ingush", "irkutsk",
+//	    "ivanov","kabardin","kalinin","kalmyk","kaluzh","kamch","karach","karel",
+//	    "kemerovo","khabar","khakas","khanty","kirov","komi","kostrom","krasnodar",
+//	    "krasnoyarsk","kurgan","kursk","leningrad","lipetsk","magadan","mariyel","mordov","moscow","mosobl","murmansk",
+//	    "nenec","nizhegorod","novgorod","novosib","omsk","orenburg","orlovsk","osetiya",
+//	    "penz","perm","prim","pskov","rostov","ryazan","sakhalin","samar","saratov","smol",
+//	    "stavrop","stpeter","sverdl","tambov","tatar","tomsk","tul","tumen","tver","tyva","udmurt",
+//	    "ulyan","vladimir","volgograd","vologda","voronezh","yakut","yamal","yarosl","zabaikal",
+	};
+	
+	
+	
 	
 	
 	boolean downloadFiles = false;
@@ -150,7 +168,7 @@ public class IndexBatchCreator {
 //		}
 		
 		// europe
-		for(String country : countriesToDownload1){
+		for(String country : europeCountries){
 			String url = SITE_TO_DOWNLOAD1 + country +".osm.bz2"; //$NON-NLS-1$
 			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles);
 		}
@@ -180,6 +198,13 @@ public class IndexBatchCreator {
 			String url = SITE_TO_DOWNLOAD2 + "north_america/canada/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
 			downloadFile(url, "Canada_"+country, alreadyGeneratedFiles, alreadyUploadedFiles); 
 		}
+		// russia
+		for(String country : russiaStates){
+			country = country.toLowerCase();
+			String url = SITE_TO_DOWNLOAD3 + country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+			downloadFile(url, "Russia_"+country, alreadyGeneratedFiles, alreadyUploadedFiles); 
+		}
+		
 		System.out.println("DOWNLOADING FILES FINISHED");
 	}
 	
