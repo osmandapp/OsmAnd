@@ -26,7 +26,7 @@ import com.osmand.impl.ConsoleProgressImplementation;
 public class IndexBatchCreator {
 	// config params
 	private static final boolean indexPOI = true;
-	private static final boolean indexAddress = true;
+	private static final boolean indexAddress = false;
 	private static final boolean indexTransport = true;
 	private static final boolean writeWayNodes = true;
 	
@@ -88,6 +88,24 @@ public class IndexBatchCreator {
 //		"Alberta","British_Columbia","Manitoba","New_Brunswick","Newfoundland",
 //		"Nova_Scotia","Nunavut", "Nw_Territories","Ontario","Pr_Edwrd_Island",
 //		"Quebec","Saskatchewan","Yukon",
+	};
+	
+	protected static final String[] southAmerica = new String[] {
+//		"Argentina","Bolivia","Brazil","Chile","Colombia",
+//		"Ecuador","Falkland_Islands", "French_Guiana","Guyana","Paraguay",
+//		"Peru","Suriname","Uruguay","Venezuela"
+	};
+	
+	// TODO only australia, new zealand created
+	// TODO australia out of memory address
+	protected static final String[] oceania = new String[] {
+//		"Australia","New_Zealand",
+//		"American_Samoa","Baker_Island","Cocos_Keeling_Islands","Cook_Islands",
+//		"Federated_States_of_Micronesia","Fiji", "French_Polynesia","Guam","Howland_Island",
+//		"Independent_State_of_Samoa","Jarvis_Island","Johnston_Atoll","Kiribati",
+//		"Marshall_Islands","Midway_Islands","Nauru","New_Caledonia",
+//		"Niue","Norfolk_Island","Northern_Mariana_Islands","Papua_New_Guinea","Pitcairn_Islands",
+//		"Republic_of_Palau","Solomon_Islands","Tokelau","Tonga","Tuvalu","Vanuatu","Wake_Island","Wallis_and_Futuna",
 	};
 	
 	
@@ -166,7 +184,7 @@ public class IndexBatchCreator {
 //			log.info("Delete old file " + f.getName());  //$NON-NLS-1$
 //			f.delete();
 //		}
-		
+		// EUROPE //
 		// europe
 		for(String country : europeCountries){
 			String url = SITE_TO_DOWNLOAD1 + country +".osm.bz2"; //$NON-NLS-1$
@@ -184,7 +202,8 @@ public class IndexBatchCreator {
 			String url = SITE_TO_DOWNLOAD1 +"germany/" + country +".osm.bz2"; //$NON-NLS-1$
 			downloadFile(url, "Germany_"+country, alreadyGeneratedFiles, alreadyUploadedFiles);
 		}
-		
+
+		// TODO NORTH AMERICA partially //
 		// usa
 		for(String country : usStates){
 			country = country.toLowerCase();
@@ -198,12 +217,31 @@ public class IndexBatchCreator {
 			String url = SITE_TO_DOWNLOAD2 + "north_america/canada/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
 			downloadFile(url, "Canada_"+country, alreadyGeneratedFiles, alreadyUploadedFiles); 
 		}
+		
+		// SOUTH AMERICA//
+		for(String country : southAmerica){
+			country = country.toLowerCase();
+			String url = SITE_TO_DOWNLOAD2 + "south_america/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
+		}
+		
+		// TODO ASIA only russia done //
 		// russia
 		for(String country : russiaStates){
 			country = country.toLowerCase();
 			String url = SITE_TO_DOWNLOAD3 + country+"/"+country +".osm.bz2"; //$NON-NLS-1$
 			downloadFile(url, "Russia_"+country, alreadyGeneratedFiles, alreadyUploadedFiles); 
 		}
+
+		// OCEANIA //
+		for(String country : oceania){
+			country = country.toLowerCase();
+			String url = SITE_TO_DOWNLOAD2 + "oceania/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
+		}
+
+		// TODO AFRICA not done //
+		// TODO Antarctica not done //
 		
 		System.out.println("DOWNLOADING FILES FINISHED");
 	}

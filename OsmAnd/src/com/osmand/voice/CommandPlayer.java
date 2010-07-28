@@ -195,7 +195,7 @@ public class CommandPlayer {
 		return files;
 	}
 	
-	public void playCommands(CommandBuilder builder){
+	public synchronized void playCommands(CommandBuilder builder){
 		filesToPlay.addAll(builder.execute());
 		playQueue();
 	}
