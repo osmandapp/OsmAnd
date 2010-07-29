@@ -2,9 +2,9 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" 
-	android:layout_height="fill_parent" android:background="@drawable/background_rot">
-	<TableLayout android:layout_gravity="center"
-				android:layout_width="wrap_content"
+	android:layout_height="fill_parent" android:background="@drawable/background">
+	<TableLayout android:layout_gravity="center_vertical"
+				android:layout_width="fill_parent"
 				android:layout_height="wrap_content">
 		<TableRow>
 			<Button
@@ -13,8 +13,11 @@
 					android:background="@drawable/btn_orange"
 					android:textColor="#FFFFFF"
 					android:textStyle="bold"
-					android:layout_width="180dip"
-					android:layout_height="70dip"
+					android:layout_weight="0.5"
+					android:layout_marginLeft="1dp"
+					android:layout_marginRight="2dp"
+					android:layout_width="fill_parent"
+					android:layout_height="80dip"
 					android:drawableLeft="@drawable/map"/>
 					
 			<Button 
@@ -23,8 +26,11 @@
 					android:background="@drawable/btn_orange"
 					android:textColor="#FFFFFF"
 					android:textStyle="bold"
-					android:layout_width="180dip"
-					android:layout_height="70dip"
+					android:layout_weight="0.5"
+					android:layout_marginLeft="1dp"
+					android:layout_marginRight="2dp"
+					android:layout_width="fill_parent"
+					android:layout_height="80dip"
 					android:drawableLeft="@drawable/find"/>	
 		</TableRow>
 		<TableRow>
@@ -34,8 +40,11 @@
 					android:background="@drawable/btn_orange"
 					android:textColor="#FFFFFF"
 					android:textStyle="bold"
-					android:layout_width="180dip"
-					android:layout_height="70dip"
+					android:layout_marginLeft="1dp"
+					android:layout_weight="0.5"
+					android:layout_marginRight="2dp"
+					android:layout_width="fill_parent"
+					android:layout_height="80dip"
 					android:drawableLeft="@drawable/favorites"/>
 			<Button 
 					android:id="@+id/SettingsButton"
@@ -43,8 +52,11 @@
 					android:background="@drawable/btn_orange"
 					android:textColor="#FFFFFF"
 					android:textStyle="bold"
-					android:layout_width="180dip"
-					android:layout_height="70dip"
+					android:layout_weight="0.5"
+					android:layout_marginLeft="2dp"
+					android:layout_marginRight="1dp"
+					android:layout_width="fill_parent"
+					android:layout_height="80dip"
 					android:drawableLeft="@drawable/settings"/>
 		</TableRow>
 	</TableLayout>				

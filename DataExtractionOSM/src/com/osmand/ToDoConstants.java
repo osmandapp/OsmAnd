@@ -10,10 +10,11 @@ public class ToDoConstants {
 	
 	// TODO
 	//  78. Add ruler to the main tile view (100m, 200m,...)
-	//  82. Add overzoom +2 for Mapnik (!)
 	//  80. Export/import favorite points
 	//  81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
 	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?).
+	//  84. Send letter to developer
+
 
 	
 	//   Improvements
@@ -24,6 +25,7 @@ public class ToDoConstants {
 	//   69. Add phone information to POI
 	//   70. Show building numbers over map (require changing address index - index 2 more columns lat/lon for fast search)
 	//   66. Transport routing (show next stop, total distance, show stop get out, voice) (needed ?).
+	//   85. Enable on/off screen for bike navigation (?)
 	//   83. Add monitoring service to send locations to internet (?)
 
 	// Unscheduled (complex)
@@ -47,6 +49,7 @@ public class ToDoConstants {
 	// BUGS Swing
 	
 	// DONE ANDROID :
+	//   82. Add overzoom +2 for Mapnik 
 	//   64. Traffic information  - yandex traffic
 	//   79. Download any WMS layer and add to swing version (add tile manager ${x}, ${y}, ${z} to swing and to android)
 	//   77. Implement upload gps track onto osm server (? not implemented yet on OSM?) - 
