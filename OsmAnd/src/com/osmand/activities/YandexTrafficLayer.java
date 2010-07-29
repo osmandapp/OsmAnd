@@ -183,7 +183,7 @@ public class YandexTrafficLayer implements OsmandMapLayer {
 	}
 	
 	protected void downloadTile(String tileId, int tileX, int tileY, int zoom, String timeStamp) throws IOException{
-		if(zoom >= 17){
+		if(zoom > 17){
 			return;
 		}
 		String u = "http://jgo.maps.yandex.net/tiles?l=trf&x="+tileX +"&y="+tileY+"&z="+zoom+"&tm="+timeStamp;  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$//$NON-NLS-4$
