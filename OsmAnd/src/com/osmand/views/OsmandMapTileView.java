@@ -46,6 +46,8 @@ import com.osmand.views.MultiTouchSupport.MultiTouchZoomListener;
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, 
 			Callback, AnimateDraggingCallback, OnGestureListener, OnDoubleTapListener, MultiTouchZoomListener {
 
+	public static final int OVERZOOM_IN = 2;
+	
 	protected final int emptyTileDivisor = 16;
 	protected final int timeForDraggingAnimation = 300;
 	protected final int minimumDistanceForDraggingAnimation = 40;
@@ -225,7 +227,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	
 	public void setZoom(float zoom){
-		if (map == null || (map.getMaximumZoomSupported() >= zoom && map.getMinimumZoomSupported() <= zoom)) {
+		if (map == null || ((map.getMaximumZoomSupported() + OVERZOOM_IN) >= zoom && map.getMinimumZoomSupported() <= zoom)) {
 			animatedDraggingThread.stopAnimating();
 			this.zoom = zoom;
 			refreshMap();
@@ -235,7 +237,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	// for internal usage
 	@Override
 	public void zoomTo(float zoom, boolean notify) {
-		if (map == null || (map.getMaximumZoomSupported() >= zoom && map.getMinimumZoomSupported() <= zoom)) {
+		if (map == null || ((map.getMaximumZoomSupported() + OVERZOOM_IN) >= zoom && map.getMinimumZoomSupported() <= zoom)) {
 			this.zoom = zoom;
 			refreshMap();
 			if(notify && locationListener != null){
@@ -272,8 +274,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	public void setMap(ITileSource map) {
 		this.map = map;
-		if(map.getMaximumZoomSupported() < this.zoom){
-			zoom = map.getMaximumZoomSupported();
+		if(map.getMaximumZoomSupported() + OVERZOOM_IN < this.zoom){
+			zoom = map.getMaximumZoomSupported() + OVERZOOM_IN;
 		}
 		if(map.getMinimumZoomSupported() > this.zoom){
 			zoom = map.getMinimumZoomSupported();
@@ -428,7 +430,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			if (canvas != null) {
 				ResourceManager mgr = ResourceManager.getResourceManager();
 				boolean useInternet = OsmandSettings.isUsingInternetToDownloadTiles(getContext()) && map.couldBeDownloadedFromInternet();
-				int maxLevel = OsmandSettings.getMaximumLevelToDownloadTile(getContext());
+				int maxLevel = Math.min(OsmandSettings.getMaximumLevelToDownloadTile(getContext()), map.getMaximumZoomSupported());
 				canvas.save();
 				canvas.rotate(rotate, w , h);
 				boundsRect.set(0, 0, getWidth(), getHeight());
