@@ -16,6 +16,8 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.format.DateFormat;
@@ -88,15 +90,36 @@ public class MainMenuActivity extends Activity {
 			Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
 			
 			long size = getPreferences(MODE_WORLD_READABLE).getLong(EXCEPTION_FILE_SIZE, 0);
-			File file = new File(Environment.getExternalStorageDirectory(), EXCEPTION_PATH);
+			final File file = new File(Environment.getExternalStorageDirectory(), EXCEPTION_PATH);
 			if(file.exists() && file.length() > 0){
-				if(size != file.length()){
+//				if(size != file.length()){
 					String msg = MessageFormat.format(getString(R.string.previous_run_crashed),
 							EXCEPTION_PATH);
 					Builder builder = new AlertDialog.Builder(MainMenuActivity.this);
-					builder.setMessage(msg).setNeutralButton(getString(R.string.close), null).show();
+					builder.setMessage(msg).setNeutralButton(getString(R.string.close), null);
+					builder.setPositiveButton(R.string.send_report, new DialogInterface.OnClickListener(){
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							Intent intent = new Intent(Intent.ACTION_SEND);
+							intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"vics001@gmail.com"}); //$NON-NLS-1$
+							intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+							intent.setType("vnd.android.cursor.dir/email");  //$NON-NLS-1$
+							intent.putExtra(Intent.EXTRA_SUBJECT, "OsmAnd bug"); //$NON-NLS-1$
+							StringBuilder text = new StringBuilder();
+							text.append("\nDevice : ").append(Build.DEVICE); //$NON-NLS-1$
+							text.append("\nBrand : ").append(Build.BRAND); //$NON-NLS-1$
+							text.append("\nModel : ").append(Build.MODEL); //$NON-NLS-1$
+							text.append("\nProduct : ").append(Build.PRODUCT); //$NON-NLS-1$
+							text.append("\nBuild : ").append(Build.DISPLAY); //$NON-NLS-1$
+							text.append("\nVersion : ").append(Build.VERSION.RELEASE); //$NON-NLS-1$
+							intent.putExtra(Intent.EXTRA_TEXT, text.toString());
+							startActivity(Intent.createChooser(intent, getString(R.string.send_report)));
+						}
+						
+					});
+					builder.show();
 					getPreferences(MODE_WORLD_READABLE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
-				}
+//				}
 				
 			} else {
 				if(size > 0){
