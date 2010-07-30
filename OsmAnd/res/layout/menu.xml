@@ -3,10 +3,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" 
 	android:layout_height="fill_parent" android:background="@drawable/background">
-	<TableLayout android:layout_gravity="center_vertical"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content">
-		<TableRow>
+	<LinearLayout android:layout_width="fill_parent"  android:layout_height="fill_parent" android:orientation="vertical">
+	<LinearLayout android:layout_weight="0.3" android:layout_height="0dp" android:layout_width="fill_parent"/>
+	<TableLayout android:layout_width="fill_parent" android:layout_weight="0.4" android:layout_height="0dp">
+		<LinearLayout android:layout_height="fill_parent" android:layout_weight="0.5">
 			<Button
 					android:id="@+id/MapButton" 
 					android:text="@string/map_Button" 
@@ -17,7 +17,7 @@
 					android:layout_marginLeft="1dp"
 					android:layout_marginRight="2dp"
 					android:layout_width="fill_parent"
-					android:layout_height="80dip"
+					android:layout_height="fill_parent"
 					android:drawableLeft="@drawable/map"/>
 					
 			<Button 
@@ -30,10 +30,10 @@
 					android:layout_marginLeft="1dp"
 					android:layout_marginRight="2dp"
 					android:layout_width="fill_parent"
-					android:layout_height="80dip"
+					android:layout_height="fill_parent"
 					android:drawableLeft="@drawable/find"/>	
-		</TableRow>
-		<TableRow>
+		</LinearLayout>
+		<LinearLayout android:layout_height="fill_parent" android:layout_weight="0.5">
 			<Button 
 					android:id="@+id/FavoritesButton"
 					android:text="@string/favorites_Button"
@@ -44,7 +44,7 @@
 					android:layout_weight="0.5"
 					android:layout_marginRight="2dp"
 					android:layout_width="fill_parent"
-					android:layout_height="80dip"
+					android:layout_height="fill_parent"
 					android:drawableLeft="@drawable/favorites"/>
 			<Button 
 					android:id="@+id/SettingsButton"
@@ -56,17 +56,11 @@
 					android:layout_marginLeft="2dp"
 					android:layout_marginRight="1dp"
 					android:layout_width="fill_parent"
-					android:layout_height="80dip"
+					android:layout_height="fill_parent"
 					android:drawableLeft="@drawable/settings"/>
-		</TableRow>
+		</LinearLayout>
 	</TableLayout>				
-	
-	<!--  <FrameLayout android:id="@+id/FrameLayout"
-		android:layout_height="fill_parent" android:layout_width="fill_parent">
-		<Button android:layout_width="wrap_content" 
-			android:layout_marginLeft="5dp" android:layout_marginBottom ="5dp"
-			android:layout_height="wrap_content" android:layout_gravity="bottom|left"
-			android:id="@+id/ExitButton" android:background="@drawable/exit"></Button>
-	</FrameLayout> -->
+	<LinearLayout android:layout_weight="0.3" android:layout_height="0dp"  android:layout_width="fill_parent"/>
+	</LinearLayout>  
 
 </FrameLayout>

@@ -43,7 +43,7 @@ public class ToDoConstants {
 	// TODO swing
 	// 9. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !
 	// Current result : for big file (1 - task  60-80% time, 90% memory) (?)
- 	// 10. Improve address indexing (use relations). (?)
+ 	// 10. Improve address indexing (use relations). (?) // SLOBODSKAYA 157
     //	  use relation "a6" (to accumulate streets!),  "a3" to read all cities & define boundaries for city (& define that street in city). 
 	
 	// BUGS Swing
