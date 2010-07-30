@@ -12,17 +12,17 @@ public class ToDoConstants {
 	//  80. Export/import favorite points
 	//  81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
 	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?).
-	//  84. Send letter to developer when app crashes
+
 	
 	// TODO BUGS Android
-	// 2. GPS - network switch
 	// 3. different screens better support
-	// 5. route bug show further
 	
+	// 2. GPS - network switch (+?)
+	// 5. route bug show further (+)
 	// 4. save state yandex traffic (+)
 	// 1. Alert no addresses (+)
 
-	//   Improvements
+	// Improvements
 	//   ! Download with wget
 	//   ! progress while map is loading
 	
@@ -38,7 +38,6 @@ public class ToDoConstants {
 	//   40. Support simple vector road rendering (require new index file) (?)
 	//   63. Support simple offline routing(require new index file) (?)
 
-
 	
 	// TODO swing
 	// 9. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !
@@ -49,6 +48,7 @@ public class ToDoConstants {
 	// BUGS Swing
 	
 	// DONE ANDROID :
+	//   84. Send letter to developer when app crashes 
 	//   78. Add ruler to the main tile view (100m, 200m,...) (+)
 	//   82. Add overzoom +2 for Mapnik 
 	//   64. Traffic information  - yandex traffic

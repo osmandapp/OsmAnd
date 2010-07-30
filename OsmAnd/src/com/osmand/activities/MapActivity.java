@@ -549,7 +549,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		@Override
 		public void onLocationChanged(Location location) {
 			// double check about use only gps
-			if(!useOnlyGPS()){
+			// that strange situation but it could happen?
+			if(!Algoritms.objectEquals(currentLocationProvider, LocationManager.GPS_PROVIDER) &&  
+					!useOnlyGPS()){
 				setLocation(location);
 			}
 		}

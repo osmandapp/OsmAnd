@@ -92,7 +92,7 @@ public class MainMenuActivity extends Activity {
 			long size = getPreferences(MODE_WORLD_READABLE).getLong(EXCEPTION_FILE_SIZE, 0);
 			final File file = new File(Environment.getExternalStorageDirectory(), EXCEPTION_PATH);
 			if(file.exists() && file.length() > 0){
-//				if(size != file.length()){
+				if(size != file.length()){
 					String msg = MessageFormat.format(getString(R.string.previous_run_crashed),
 							EXCEPTION_PATH);
 					Builder builder = new AlertDialog.Builder(MainMenuActivity.this);
@@ -119,7 +119,7 @@ public class MainMenuActivity extends Activity {
 					});
 					builder.show();
 					getPreferences(MODE_WORLD_READABLE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
-//				}
+				}
 				
 			} else {
 				if(size > 0){
