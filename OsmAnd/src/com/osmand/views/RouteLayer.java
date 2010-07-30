@@ -78,7 +78,9 @@ public class RouteLayer implements OsmandMapLayer {
 			double leftLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.left);
 			double bottomLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), tileRect.bottom);
 			double rightLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.right);
-			helper.fillLocationsToShow(topLatitude, leftLongitude, bottomLatitude, rightLongitude, points);
+			double lat = topLatitude - bottomLatitude + 0.1;
+			double lon = rightLongitude - leftLongitude + 0.1;
+			helper.fillLocationsToShow(topLatitude +lat, leftLongitude - lon, bottomLatitude - lat, rightLongitude + lon, points);
 			if((System.currentTimeMillis() - time) > 80){
 				Log.e(LogUtil.TAG, "Calculate route layer " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
 			}
