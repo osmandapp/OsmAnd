@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="send_report">Отправить отчет</string>
 	<string name="none_region_found">Не найден ни один индекс на SD карточке. Можете загрузить их с интернета.</string>
 	<string name="poi_namefinder_query_empty">Введите запрос для поиска POI</string>
 	<string name="any_poi">Все</string>
