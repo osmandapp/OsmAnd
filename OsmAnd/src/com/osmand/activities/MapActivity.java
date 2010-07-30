@@ -687,7 +687,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				mapView.removeLayer(favoritesLayer);
 			}
 		}
-		
+		trafficLayer.setVisible(OsmandSettings.isShowingYandexTraffic(this));
 	}
 	
 	private void updateMapSource(ITileSource newSource){
@@ -1164,7 +1164,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				} else if(item == transportRouteInfoInd){
 					transportInfoLayer.setVisible(isChecked);
 				} else if(item == trafficInd){
-					trafficLayer.setVisible(isChecked);
+					OsmandSettings.setShowingYandexTraffic(MapActivity.this, isChecked);
 				}
 				updateLayers();
 				mapView.refreshMap();
