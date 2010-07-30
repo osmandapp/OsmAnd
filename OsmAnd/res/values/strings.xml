@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="none_region_found">None region were found on SD card. Try to download region from internet.</string>
 	<string name="poi_namefinder_query_empty">Input search query to find POI</string>
 	<string name="any_poi">Any</string>
 	<string name="layer_transport_route">Transport route</string>
@@ -257,7 +258,7 @@ See osmand.googlecode.com.</string>
 <string name="incremental_search_city">Search city incrementally. In order to find villages/postcodes input more than 3 first symbols.</string>
 <string name="incremental_search_street">Search street incrementally</string>
 <string name="incremental_search_building">Search building incrementally</string>
-<string name="choose_available_region">Choose region</string>
+<string name="choose_available_region">Choose region from list</string>
 <string name="choose_intersected_street">Choose intersected street</string>
 <string name="Closest_Amenities">Closest amenities</string>
 <string name="app_mode_default">Default</string>

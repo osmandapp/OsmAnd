@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="none_region_found">Не найден ни один индекс на SD карточке. Можете загрузить их с интернета.</string>
 	<string name="poi_namefinder_query_empty">Введите запрос для поиска POI</string>
 	<string name="any_poi">Все</string>
 	<string name="layer_transport_route">Маршрут на транспорте</string>
@@ -257,7 +258,7 @@
 <string name="incremental_search_city">Выберите город. Введите 3 первых буквы, чтобы найти деревню, 2 цифры - индекс.</string>
 <string name="incremental_search_street">Выберите улицу</string>
 <string name="incremental_search_building">Выберите здание</string>
-<string name="choose_available_region">Выберите регион</string>
+<string name="choose_available_region">Выберите регион из списка</string>
 <string name="choose_intersected_street">Выберите пересечение улиц</string>
 <string name="Closest_Amenities">Closest amenities</string>
 <string name="app_mode_default">По умолчанию</string>

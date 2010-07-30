@@ -216,6 +216,20 @@ public class OsmandSettings {
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
+	public static final String SHOW_YANDEX_TRAFFIC = "show_yandex_traffic"; //$NON-NLS-1$
+	public static final boolean SHOW_YANDEX_TRAFFIC_DEF = false;
+
+	public static boolean isShowingYandexTraffic(Context ctx) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(SHOW_YANDEX_TRAFFIC, SHOW_YANDEX_TRAFFIC_DEF);
+	}
+	
+	public static boolean setShowingYandexTraffic(Context ctx, boolean val) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putBoolean(SHOW_YANDEX_TRAFFIC, val).commit();
+	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SHOW_FAVORITES = "show_favorites"; //$NON-NLS-1$
 	public static final boolean SHOW_FAVORITES_DEF = false;
 

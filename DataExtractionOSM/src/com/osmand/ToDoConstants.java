@@ -9,14 +9,19 @@ package com.osmand;
 public class ToDoConstants {
 	
 	// TODO
-	//  78. Add ruler to the main tile view (100m, 200m,...)
 	//  80. Export/import favorite points
 	//  81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
 	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?).
-	//  84. Send letter to developer
-
-
+	//  84. Send letter to developer when app crashes
 	
+	// TODO BUGS Android
+	// 2. GPS - network switch
+	// 3. different screens better support
+	// 5. route bug show further
+	
+	// 4. save state yandex traffic (+)
+	// 1. Alert no addresses (+)
+
 	//   Improvements
 	//   ! Download with wget
 	//   ! progress while map is loading
@@ -34,21 +39,17 @@ public class ToDoConstants {
 	//   63. Support simple offline routing(require new index file) (?)
 
 
-	// TODO BUGS Android
-	// 1. Alert no addresses (!)
-	// 2. GPS - network switch
-	// 3. different screens better support
-	// 4. save state yandex traffic
 	
 	// TODO swing
 	// 9. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !
 	// Current result : for big file (1 - task  60-80% time, 90% memory) (?)
- 	// 10. Improve address indexing (use relations). (?) // SLOBODSKAYA 157
+ 	// 10. Improve address indexing (use relations). (?) // SLOBODSKAYA 157, 95
     //	  use relation "a6" (to accumulate streets!),  "a3" to read all cities & define boundaries for city (& define that street in city). 
 	
 	// BUGS Swing
 	
 	// DONE ANDROID :
+	//   78. Add ruler to the main tile view (100m, 200m,...) (+)
 	//   82. Add overzoom +2 for Mapnik 
 	//   64. Traffic information  - yandex traffic
 	//   79. Download any WMS layer and add to swing version (add tile manager ${x}, ${y}, ${z} to swing and to android)

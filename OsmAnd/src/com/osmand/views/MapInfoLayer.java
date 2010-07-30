@@ -11,10 +11,12 @@ import android.graphics.Paint.Style;
 import android.location.Location;
 import android.text.format.DateFormat;
 import android.util.FloatMath;
+import android.view.View;
 
 import com.osmand.Algoritms;
 import com.osmand.Messages;
 import com.osmand.OsmandSettings;
+import com.osmand.R;
 import com.osmand.activities.MapActivity;
 import com.osmand.activities.RoutingHelper.RouteDirectionInfo;
 import com.osmand.activities.RoutingHelper.TurnType;
@@ -150,6 +152,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 	
 	@Override
 	public void onDraw(Canvas canvas) {
+		// prepare data (left distance, speed)
 		if(map.getPointToNavigate() != null){
 			int d = 0;
 			if(map.getRoutingHelper().isRouterEnabled()){
@@ -210,6 +213,8 @@ public class MapInfoLayer implements OsmandMapLayer {
 			canvas.drawText(cachedDistString, boundsForDist.left + 15, boundsForDist.bottom - 9, paintBlack);
 		}
 		
+		// draw ruler
+		drawRuler(canvas);
 	
 		// draw route information
 		drawRouteInfo(canvas);
@@ -223,6 +228,67 @@ public class MapInfoLayer implements OsmandMapLayer {
 	}
 	
 	
+	// cache values for ruler
+	int rulerDistPix = 0;
+	String rulerDistName = null;
+	int rulerBaseLine = 50;
+	float rulerTextLen = 0;
+	// cache properties
+	int rulerCZoom = 0;
+	double rulerCTileX = 0;
+	double rulerCTileY = 0;
+
+	
+	private void drawRuler(Canvas canvas) {
+		// occupy length over screen
+		double screenPercent = 0.2;
+		
+				
+		// update cache
+		if (view.getFloatZoom() != (int) view.getFloatZoom()) {
+			rulerDistName = null;
+		} else if(view.getFloatZoom() != rulerCZoom || 
+				Math.abs(view.getXTile() - rulerCTileX) +  Math.abs(view.getYTile() - rulerCTileY) > 1){
+			rulerCZoom = (int) view.getFloatZoom();
+			rulerCTileX = view.getXTile();
+			rulerCTileY = view.getYTile();
+			double latitude = view.getLatitude();
+			double tileNumberLeft = rulerCTileX - ((double) view.getWidth()) / (2d * view.getTileSize());
+			double tileNumberRight = rulerCTileX + ((double) view.getWidth()) / (2d * view.getTileSize());
+			double dist = MapUtils.getDistance(latitude, MapUtils.getLongitudeFromTile(view.getFloatZoom(), tileNumberLeft), latitude,
+					MapUtils.getLongitudeFromTile(view.getFloatZoom(), tileNumberRight));
+
+			dist *= screenPercent;
+			int baseDist = 50;
+			byte pointer = 0;
+			while (dist > baseDist) {
+				if (pointer++ % 3 == 2) {
+					baseDist = baseDist * 5 / 2;
+				} else {
+					baseDist *= 2;
+				}
+			}
+
+			rulerDistPix = (int) (view.getWidth() * screenPercent / dist * baseDist);
+			rulerDistName = MapUtils.getFormattedDistance(baseDist);
+			rulerBaseLine = view.getHeight() - 70;
+			if(view.getParent() instanceof View){
+				View zoomControls = ((View) view.getParent()).findViewById(R.id.ZoomControls);
+				if(zoomControls != null){
+					rulerBaseLine = zoomControls.getTop() - 5;
+				}
+			}
+			rulerTextLen = paintBlack.measureText(rulerDistName);
+		} 
+		if (rulerDistName != null) {
+			int w2 = view.getWidth() - 5;
+			canvas.drawLine(w2 - rulerDistPix, rulerBaseLine, w2, rulerBaseLine, paintBlack);
+			canvas.drawLine(w2 - rulerDistPix, rulerBaseLine, w2 - rulerDistPix, rulerBaseLine - 10, paintBlack);
+			canvas.drawLine(w2, rulerBaseLine, w2, rulerBaseLine - 10, paintBlack);
+			canvas.drawText(rulerDistName, w2 - (rulerDistPix + rulerTextLen)/2 + 1, rulerBaseLine - 5, paintBlack);
+		}
+	}
+
 	private void drawRouteInfo(Canvas canvas) {
 		if(routeLayer != null && routeLayer.getHelper().isRouterEnabled()){
 			if (routeLayer.getHelper().isFollowingMode()) {

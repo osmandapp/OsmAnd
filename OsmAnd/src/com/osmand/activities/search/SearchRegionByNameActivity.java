@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.osmand.OsmandSettings;
 import com.osmand.R;
@@ -17,6 +18,9 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		((TextView)findViewById(R.id.Label)).setText(R.string.choose_available_region);
+		if(ResourceManager.getResourceManager().getAddressRepositories().isEmpty()){
+			Toast.makeText(this, R.string.none_region_found, Toast.LENGTH_LONG).show();
+		}
 	}
 	
 	@Override
