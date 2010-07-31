@@ -3,9 +3,12 @@
  */
 package com.osmand.activities;
 
+import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -18,8 +21,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +39,8 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import com.osmand.OsmandSettings;
 import com.osmand.R;
+import com.osmand.ResourceManager;
+import com.osmand.activities.SavingTrackHelper.WptPt;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 
@@ -45,6 +52,11 @@ public class FavouritesActivity extends ListActivity {
 	public static final int NAVIGATE_TO = 0;
 	public static final int DELETE_ITEM = 1;
 	public static final int EDIT_ITEM = 2;
+	
+	public static final int EXPORT_ID = 0;
+	public static final int IMPORT_ID = 1;
+	
+	public static final String FILE_TO_SAVE = "favourites.gpx"; //$NON-NLS-1$
 	
 
 	private List<FavouritePoint> favouritesList;
@@ -86,15 +98,15 @@ public class FavouritesActivity extends ListActivity {
 	}
 	
 	@Override
-      public boolean onContextItemSelected(MenuItem aItem) {
+	public boolean onContextItemSelected(MenuItem aItem) {
 		AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) aItem.getMenuInfo();
 		final FavouritePoint point = (FavouritePoint) favouritesList.get(menuInfo.position);
-		if(aItem.getItemId() == NAVIGATE_TO){
-//			OsmandSettings.setMapLocationToShow(this, point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName()); //$NON-NLS-1$
+		if (aItem.getItemId() == NAVIGATE_TO) {
+			//OsmandSettings.setMapLocationToShow(this, point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName()); //$NON-NLS-1$
 			OsmandSettings.setPointToNavigate(this, point.getLatitude(), point.getLongitude());
 			Intent newIntent = new Intent(FavouritesActivity.this, MapActivity.class);
 			startActivity(newIntent);
-		} else if(aItem.getItemId() == EDIT_ITEM){
+		} else if (aItem.getItemId() == EDIT_ITEM) {
 			Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle(R.string.favourites_edit_dialog_title);
 			final EditText editText = new EditText(this);
@@ -113,7 +125,8 @@ public class FavouritesActivity extends ListActivity {
 			});
 			builder.create().show();
 			return true;
-		} if(aItem.getItemId() == DELETE_ITEM){
+		}
+		if (aItem.getItemId() == DELETE_ITEM) {
 			final Resources resources = this.getResources();
 			Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage(R.string.favourites_remove_dialog_title);
@@ -123,7 +136,8 @@ public class FavouritesActivity extends ListActivity {
 				public void onClick(DialogInterface dialog, int which) {
 					boolean deleted = helper.deleteFavourite(point);
 					if (deleted) {
-						Toast.makeText(FavouritesActivity.this, MessageFormat.format(resources.getString(R.string.favourites_remove_dialog_success), point.getName()),
+						Toast.makeText(FavouritesActivity.this,
+								MessageFormat.format(resources.getString(R.string.favourites_remove_dialog_success), point.getName()),
 								Toast.LENGTH_SHORT).show();
 						favouritesList.remove(point);
 						favouritesAdapter.notifyDataSetChanged();
@@ -135,6 +149,73 @@ public class FavouritesActivity extends ListActivity {
 			return true;
 		}
 		return false;
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuItem item = menu.add(0, EXPORT_ID, 0, R.string.export_fav);
+		item.setIcon(android.R.drawable.ic_menu_save);
+		item = menu.add(0, IMPORT_ID, 0, R.string.import_fav);
+		item.setIcon(android.R.drawable.ic_menu_upload);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if(item.getItemId() == EXPORT_ID){
+			File appDir = new File(Environment.getExternalStorageDirectory(), ResourceManager.APP_DIR);
+			if(favouritesList == null || favouritesList.isEmpty()){
+				Toast.makeText(this, R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
+			} else if(!appDir.exists()){
+				Toast.makeText(this, R.string.sd_dir_not_accessible, Toast.LENGTH_LONG).show();
+			} else {
+				File f = new File(appDir, FILE_TO_SAVE);
+				List<WptPt> wpt = new ArrayList<WptPt>();
+				for(FavouritePoint p : favouritesList){
+					WptPt pt = new WptPt();
+					pt.lat = p.latitude;
+					pt.lon = p.longitude;
+					pt.name = p.name;
+					wpt.add(pt);
+				}
+				if(SavingTrackHelper.saveToXMLFiles(f, wpt, this)){
+					Toast.makeText(this, MessageFormat.format(getString(R.string.fav_saved_sucessfully), f.getAbsolutePath()), 
+							Toast.LENGTH_LONG).show();
+				}
+			}
+		} else if(item.getItemId() == IMPORT_ID){
+			File appDir = new File(Environment.getExternalStorageDirectory(), ResourceManager.APP_DIR);
+			File f = new File(appDir, FILE_TO_SAVE);
+			if(!f.exists()){
+				Toast.makeText(this, MessageFormat.format(getString(R.string.fav_file_to_load_not_found), f.getAbsolutePath()), Toast.LENGTH_LONG).show();
+			} else {
+				Set<String> existedPoints = new LinkedHashSet<String>();
+				if(favouritesList != null){
+					for(FavouritePoint fp : favouritesList){
+						existedPoints.add(fp.name);
+					}
+				}
+				List<WptPt> points = new ArrayList<WptPt>();
+				if(SavingTrackHelper.readWptPtFromFile(f, points, this)){
+					for(WptPt p : points){
+						if(!existedPoints.contains(p.name)){
+							FavouritePoint fp = new FavouritePoint();
+							fp.name = p.name;
+							fp.latitude = p.lat;
+							fp.longitude = p.lon;
+							helper.addFavourite(fp);
+							favouritesList.add(fp);
+						}
+					}
+					Toast.makeText(this, R.string.fav_imported_sucessfully, Toast.LENGTH_SHORT).show();
+					favouritesAdapter.notifyDataSetChanged();
+				}
+			}
+		} else {
+			return false;
+		}
+		return true;
 	}
 	
 	public static class FavouritesDbHelper extends SQLiteOpenHelper {

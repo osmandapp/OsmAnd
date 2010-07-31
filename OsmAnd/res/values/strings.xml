@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="fav_imported_sucessfully">Favorite points were succesfully imported</string>
+	<string name="fav_file_to_load_not_found">GPX file to load favorite points is not found at {0}</string>
+	<string name="fav_saved_sucessfully">Favorite points were succesfully saved to {0}</string>
+	<string name="no_fav_to_save">No favorite points to save</string>
+	<string name="import_fav">Import</string>
+	<string name="export_fav">Export</string>
+	<string name="error_occurred_loading_gpx">Error occurred while loading gpx</string>
 	<string name="send_report">Send report</string>
 	<string name="none_region_found">None region were found on SD card. Try to download region from internet.</string>
 	<string name="poi_namefinder_query_empty">Input search query to find POI</string>
@@ -123,7 +130,7 @@
 	<string name="route_general_information">Overall distance = {0}, travelling time = {1} h {2} m.</string>
 	<string name="router_service_descr">Choose routing service</string>
 	<string name="router_service">Routing</string>
-	<string name="download_sd_dir_not_accessible">Directory on SD card to save index is not accessible</string>
+	<string name="sd_dir_not_accessible">Directory on SD card to save is not accessible</string>
 	<string name="download_question">Do you want to download {0} - {1} ?</string>
 	<string name="download_question_exist">Index for {0} already exists ({1}). Do you want to update it ({2}) ?</string>
 	<string name="address">Address</string>

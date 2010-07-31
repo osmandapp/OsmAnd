@@ -169,7 +169,7 @@ public class DownloadIndexActivity extends ListActivity {
 			parent.mkdirs();
 		}
 		if(parent == null || !parent.exists()){
-			Toast.makeText(DownloadIndexActivity.this, getString(R.string.download_sd_dir_not_accessible), Toast.LENGTH_LONG).show();
+			Toast.makeText(DownloadIndexActivity.this, getString(R.string.sd_dir_not_accessible), Toast.LENGTH_LONG).show();
 			return null;
 		}
 		File file = new File(parent, regionName);

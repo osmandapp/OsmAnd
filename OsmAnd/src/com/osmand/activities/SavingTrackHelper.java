@@ -1,6 +1,7 @@
 package com.osmand.activities;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -11,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
 import android.content.Context;
@@ -64,7 +67,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 	}
 	
-	private static class TrkPt {
+	public static class TrkPt {
 		public double lat;
 		public double lon;
 		public double ele;
@@ -72,8 +75,99 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		public long time;
 	}
 	
+	public static class WptPt {
+		public double lat;
+		public double lon;
+		public String name;
+	}
 	
-	protected void saveToXMLFiles(File dir, Map<String, List<List<TrkPt>>> data ){
+	public static boolean readWptPtFromFile(File fout, List<WptPt> readTo, Context ctx){
+		try {
+			XmlPullParser parser = Xml.newPullParser();
+			parser.setInput(new FileInputStream(fout), "UTF-8"); //$NON-NLS-1$
+			int tok;
+			WptPt current = null;
+			while((tok=parser.next()) != XmlPullParser.END_DOCUMENT){
+				if(tok == XmlPullParser.START_TAG){
+					if(parser.getName().equals("wpt")){ //$NON-NLS-1$
+						try {
+							current = new WptPt();
+							current.lat = Double.parseDouble(parser.getAttributeValue("", "lat")); //$NON-NLS-1$ //$NON-NLS-2$
+							current.lon = Double.parseDouble(parser.getAttributeValue("", "lon")); //$NON-NLS-1$ //$NON-NLS-2$
+						} catch (NumberFormatException e) {
+							current= null;
+							
+						}
+					} else if(current != null && parser.getName().equals("name")){ //$NON-NLS-1$
+						if(parser.next() == XmlPullParser.TEXT){
+							current.name = parser.getText();
+						}
+					}
+				} else if(tok == XmlPullParser.END_TAG){
+					if(parser.getName().equals("wpt")){ //$NON-NLS-1$
+						if(current != null && current.name != null){
+							readTo.add(current);
+						}
+						current = null;
+					}
+				}
+			}
+			return true;
+		} catch (IOException e) {
+			log.error("Error loading gpx", e); //$NON-NLS-1$
+			Toast.makeText(ctx, ctx.getString(R.string.error_occurred_loading_gpx), Toast.LENGTH_LONG).show();
+			return false;
+		} catch (XmlPullParserException e) {
+			log.error("Error loading gpx", e); //$NON-NLS-1$
+			Toast.makeText(ctx, ctx.getString(R.string.error_occurred_loading_gpx), Toast.LENGTH_LONG).show();
+			return false;
+		}
+		
+	}
+	
+	
+	public static boolean saveToXMLFiles(File fout, List<WptPt> data, Context ctx ){
+		try {
+			FileOutputStream output = new FileOutputStream(fout);
+			XmlSerializer serializer = Xml.newSerializer();
+			serializer.setOutput(output, "UTF-8"); //$NON-NLS-1$
+			serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true); //$NON-NLS-1$
+			serializer.startDocument("UTF-8", true); //$NON-NLS-1$
+			serializer.startTag(null, "gpx"); //$NON-NLS-1$
+			serializer.attribute(null, "version", "1.1"); //$NON-NLS-1$ //$NON-NLS-2$
+			serializer.attribute(null, "creator", Version.APP_NAME_VERSION); //$NON-NLS-1$
+			serializer.attribute("xmlns", "xsi", "http://www.w3.org/2001/XMLSchema-instance"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			serializer.attribute("xsi", "schemaLocation", "http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			serializer.attribute(null, "xmlns", "http://www.topografix.com/GPX/1/1"); //$NON-NLS-1$ //$NON-NLS-2$
+
+			for (WptPt l : data) {
+				serializer.startTag(null, "wpt"); //$NON-NLS-1$
+				serializer.attribute(null, "lat", l.lat + ""); //$NON-NLS-1$ //$NON-NLS-2$
+				serializer.attribute(null, "lon", l.lon + ""); //$NON-NLS-1$ //$NON-NLS-2$
+				serializer.startTag(null, "name"); //$NON-NLS-1$
+				serializer.text(l.name);
+				serializer.endTag(null, "name"); //$NON-NLS-1$
+				serializer.endTag(null, "wpt"); //$NON-NLS-1$
+			}
+
+			serializer.endTag(null, "gpx"); //$NON-NLS-1$
+			serializer.flush();
+			serializer.endDocument();
+
+			return true;
+		} catch (RuntimeException e) {
+			log.error("Error saving gpx", e); //$NON-NLS-1$
+			Toast.makeText(ctx, ctx.getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_LONG).show();
+			return false;
+		} catch (IOException e) {
+			log.error("Error saving gpx", e); //$NON-NLS-1$
+			Toast.makeText(ctx, ctx.getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_LONG).show();
+			return false;
+		}
+		
+	}
+	
+	public static void saveToXMLFiles(File dir, Map<String, List<List<TrkPt>>> data, Context ctx){
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); //$NON-NLS-1$
 		try {
 			for (String f : data.keySet()) {
@@ -127,10 +221,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			}
 		} catch (RuntimeException e) {
 			log.error("Error saving gpx", e); //$NON-NLS-1$
-			Toast.makeText(ctx, ctx.getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_LONG);
+			Toast.makeText(ctx, ctx.getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_LONG).show();
 		} catch (IOException e) {
 			log.error("Error saving gpx", e); //$NON-NLS-1$
-			Toast.makeText(ctx, ctx.getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_LONG);
+			Toast.makeText(ctx, ctx.getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_LONG).show();
 		}
 	}
 	
@@ -199,7 +293,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					} while (query.moveToNext());
 				}
 				query.close();
-				saveToXMLFiles(file, data);
+				saveToXMLFiles(file, data, ctx);
 			}
 		}
 		
