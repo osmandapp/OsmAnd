@@ -16,6 +16,8 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,6 +35,7 @@ import com.osmand.LogUtil;
 import com.osmand.ProgressDialogImplementation;
 import com.osmand.R;
 import com.osmand.ResourceManager;
+import com.osmand.Version;
 import com.osmand.activities.search.SearchActivity;
 import com.osmand.voice.CommandPlayer;
 
@@ -112,6 +115,14 @@ public class MainMenuActivity extends Activity {
 							text.append("\nProduct : ").append(Build.PRODUCT); //$NON-NLS-1$
 							text.append("\nBuild : ").append(Build.DISPLAY); //$NON-NLS-1$
 							text.append("\nVersion : ").append(Build.VERSION.RELEASE); //$NON-NLS-1$
+							text.append("\nApp Version : ").append(Version.APP_NAME_VERSION); //$NON-NLS-1$
+							try {
+								PackageInfo info = getPackageManager().getPackageInfo(getPackageResourcePath(),	0);
+								if (info != null) {
+									text.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode); //$NON-NLS-1$ //$NON-NLS-2$
+								}
+							} catch (NameNotFoundException e) {
+							}
 							intent.putExtra(Intent.EXTRA_TEXT, text.toString());
 							startActivity(Intent.createChooser(intent, getString(R.string.send_report)));
 						}

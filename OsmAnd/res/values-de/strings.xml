@@ -121,7 +121,7 @@
 	<string name="route_general_information">{0} Gesamtentfernung\n{1}:{2}Reisezeit</string>
 	<string name="router_service_descr">Dienst zur Streckenberechnung wählen</string>
 	<string name="router_service">Streckenberechnungsdienst</string>
-	<string name="download_sd_dir_not_accessible">Directory on SD card to save index is not accessible</string>
+	<string name="sd_dir_not_accessible">Directory on SD card to save is not accessible</string>
 	<string name="download_question">Do you want to download {0} - {1} ?</string>
 	<string name="download_question_exist">Index for {0} already exists ({1}). Do you want to update it ({2}) ?</string>
 	<string name="address">Adresse</string>

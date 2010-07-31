@@ -8,23 +8,18 @@ package com.osmand;
  */
 public class ToDoConstants {
 	
-	// TODO
-	//  80. Export/import favorite points
-	//  81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
-	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?).
+	// TODO max 85
+	//  ! 81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
+	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?),
+	//  railway( station, subway?) - issue 17
 
 	
 	// TODO BUGS Android
-	// 3. different screens better support
+	// ! 3. different screens better support
 	
-	// 2. GPS - network switch (+?)
-	// 5. route bug show further (+)
-	// 4. save state yandex traffic (+)
-	// 1. Alert no addresses (+)
-
 	// Improvements
-	//   ! Download with wget
-	//   ! progress while map is loading
+	// ! Download with wget
+	// ! progress while map is loading
 	
 	// Not clear if it is really needed 
 	//   69. Add phone information to POI
@@ -42,12 +37,13 @@ public class ToDoConstants {
 	// TODO swing
 	// 9. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !
 	// Current result : for big file (1 - task  60-80% time, 90% memory) (?)
- 	// 10. Improve address indexing (use relations). (?) // SLOBODSKAYA 157, 95
+ 	// ! 10. Improve address indexing (use relations). (?) // SLOBODSKAYA 157, 95
     //	  use relation "a6" (to accumulate streets!),  "a3" to read all cities & define boundaries for city (& define that street in city). 
 	
 	// BUGS Swing
 	
 	// DONE ANDROID :
+	//   80. Export/import favorite points
 	//   84. Send letter to developer when app crashes 
 	//   78. Add ruler to the main tile view (100m, 200m,...) (+)
 	//   82. Add overzoom +2 for Mapnik 

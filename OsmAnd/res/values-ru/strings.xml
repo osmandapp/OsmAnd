@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="fav_imported_sucessfully">Избранные точки успешно импортированы</string>
+	<string name="fav_file_to_load_not_found">GPX файл, содержащий точки, не был найден в {0}</string>
+	<string name="fav_saved_sucessfully">Избранные точки сохранены в {0}</string>
+	<string name="no_fav_to_save">Нет избранных точек для сохранения</string>
+	<string name="import_fav">Импортировать</string>
+	<string name="export_fav">Экспортировать</string>
+	<string name="error_occurred_loading_gpx">Произошла ошибка во время загрузки gpx</string>
 	<string name="send_report">Отправить отчет</string>
 	<string name="none_region_found">Не найден ни один индекс на SD карточке. Можете загрузить их с интернета.</string>
 	<string name="poi_namefinder_query_empty">Введите запрос для поиска POI</string>
@@ -123,7 +130,7 @@
 	<string name="route_general_information">Общая протяженность = {0}, время в пути = {1} ч. {2} мин.</string>
 	<string name="router_service_descr">Выберите сервис для прокладки маршрута</string>
 	<string name="router_service">Прокладка маршрута</string>
-	<string name="download_sd_dir_not_accessible">Директория на SD карточка не доступна для сохранения</string>
+	<string name="sd_dir_not_accessible">Директория на SD карточке не доступна для сохранения</string>
 	<string name="download_question">Вы хотите загрузить {0} - {1} ?</string>
 	<string name="download_question_exist">Индекс для {0} уже существует ({1}). Вы хотите его обновить ({2}) ?</string>
 	<string name="address">Адрес</string>
