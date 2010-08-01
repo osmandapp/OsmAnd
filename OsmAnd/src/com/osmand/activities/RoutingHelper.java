@@ -380,7 +380,12 @@ public class RoutingHelper {
 	
 	public List<RouteDirectionInfo> getRouteDirections(){
 		if(directionInfo != null && currentDirectionInfo < directionInfo.size()){
-			return directionInfo.subList(currentDirectionInfo, directionInfo.size());
+			if(currentDirectionInfo == 0){
+				return directionInfo;
+			}
+			if(currentDirectionInfo < directionInfo.size() - 1){
+				return directionInfo.subList(currentDirectionInfo + 1, directionInfo.size());
+			}
 		}
 		return Collections.emptyList();
 	}

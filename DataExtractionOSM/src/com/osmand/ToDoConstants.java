@@ -16,7 +16,12 @@ public class ToDoConstants {
 	
 	// TODO BUGS Android
 	// ! 3. different screens better support
-	
+	// 5. add progress saving track from settings
+	// 6. Add car choose for show only route from point
+	// 7. Remove speed length arrow
+	// 8. Give message before 3km & take into account speed (to say faster)
+	// 9. Check again cancel route!
+
 	// Improvements
 	// ! Download with wget
 	// ! progress while map is loading

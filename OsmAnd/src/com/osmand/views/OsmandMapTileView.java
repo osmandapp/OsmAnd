@@ -756,7 +756,11 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	@Override
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-		animatedDraggingThread.startDragging(Math.abs(velocityX/1000), Math.abs(velocityY/1000), e1.getX(), e1.getY(), e2.getX(), e2.getY());
+		if(Math.abs(e1.getX() - e2.getX()) + Math.abs(e1.getX() - e2.getX()) > 50){
+			animatedDraggingThread.startDragging(Math.abs(velocityX/1000), Math.abs(velocityY/1000), e1.getX(), e1.getY(), e2.getX(), e2.getY());
+		} else {
+			onScroll(e1, e2, e1.getX() - e2.getX(), e1.getY() - e2.getY());
+		}
 		return true;
 	}
 	

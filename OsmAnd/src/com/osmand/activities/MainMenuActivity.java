@@ -117,7 +117,7 @@ public class MainMenuActivity extends Activity {
 							text.append("\nVersion : ").append(Build.VERSION.RELEASE); //$NON-NLS-1$
 							text.append("\nApp Version : ").append(Version.APP_NAME_VERSION); //$NON-NLS-1$
 							try {
-								PackageInfo info = getPackageManager().getPackageInfo(getPackageResourcePath(),	0);
+								PackageInfo info = getPackageManager().getPackageInfo(getPackageName(),	0);
 								if (info != null) {
 									text.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode); //$NON-NLS-1$ //$NON-NLS-2$
 								}
