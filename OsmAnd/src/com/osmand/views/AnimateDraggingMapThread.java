@@ -29,7 +29,7 @@ public class AnimateDraggingMapThread implements Runnable {
 	private float ay;
 	private byte dirX;
 	private byte dirY;
-	private final float  a = 0.001f;
+	private final float  a = 0.0014f;
 	
 	private long time;
 	private volatile boolean stopped;
@@ -113,7 +113,7 @@ public class AnimateDraggingMapThread implements Runnable {
 					vy -= ay * dt;
 					curX = newX;
 					curY = newY;
-					conditionToCountinue = vx > 0 || vy > 0;
+					conditionToCountinue = vx > 0.5 || vy > 0.5;
 				} else {
 					if(phaseOfMoving == 0){
 						curZ = newZ;

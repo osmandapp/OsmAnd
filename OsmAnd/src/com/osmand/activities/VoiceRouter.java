@@ -76,7 +76,7 @@ public class VoiceRouter {
 		}
 		RouteDirectionInfo next = router.getNextRouteDirectionInfo();
 		int dist = router.getDistanceToNextRouteDirection();
-		if(next == null && currentDirection > 0) {
+		if((next == null || next.distance == 0) && currentDirection > 0) {
 			if(currentStatus == 0){
 				CommandBuilder play = getNewCommandPlayerToPlay();
 				if(play != null){
@@ -127,15 +127,18 @@ public class VoiceRouter {
 				}
 				
 				if (nextNext != null && next.distance <= TURN_IN_DISTANCE) {
-					isplay = true;
 					String t2Param = getTurnType(nextNext.turnType);
 					if (t2Param != null) {
-						play.then().turn(t2Param, next.distance);
+						if(isplay) { play.then(); }
+						play.turn(t2Param, next.distance);
 					} else if (nextNext.turnType.isRoundAbout()) {
-						play.then().roundAbout(next.distance, next.turnType.getTurnAngle(), next.turnType.getExitOut());
+						if(isplay) { play.then(); }
+						play.roundAbout(next.distance, nextNext.turnType.getTurnAngle(), nextNext.turnType.getExitOut());
 					} else if (nextNext.turnType.getValue().equals(TurnType.TU)) {
-						play.then().makeUT(next.distance);
+						if(isplay) { play.then(); }
+						play.makeUT(next.distance);
 					}
+					isplay = true;
 				}
 				if(isplay){
 					play.play();
@@ -160,7 +163,8 @@ public class VoiceRouter {
 				if (nextNext != null && next.distance <= TURN_DISTANCE) {
 					TurnType t = nextNext.turnType;
 					isPlay = true;
-					if (next.turnType.getValue().equals(TurnType.C)) {
+					if (next.turnType.getValue().equals(TurnType.C) && 
+							!TurnType.C.equals(t.getValue())) {
 						play.goAhead(dist);
 					}
 					if (TurnType.TL.equals(t.getValue()) || TurnType.TSHL.equals(t.getValue()) || TurnType.TSLL.equals(t.getValue())
@@ -219,6 +223,7 @@ public class VoiceRouter {
 			play.newRouteCalculated(router.getLeftDistance()).play();
 		}
 		currentDirection = router.currentDirectionInfo;
+		currentStatus = 0;
 	}
 
 	public void arrivedDestinationPoint() {

@@ -259,7 +259,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 					MapUtils.getLongitudeFromTile(view.getFloatZoom(), tileNumberRight));
 
 			dist *= screenPercent;
-			int baseDist = 50;
+			int baseDist = 5;
 			byte pointer = 0;
 			while (dist > baseDist) {
 				if (pointer++ % 3 == 2) {

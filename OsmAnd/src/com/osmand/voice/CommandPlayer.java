@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -333,7 +334,9 @@ public class CommandPlayer {
 				}
 			}
 			Struct struct = new Struct(name, list);
-			log.debug("Adding command : " + name); //$NON-NLS-1$
+			if(log.isDebugEnabled()){
+				log.debug("Adding command : " + name + " " + Arrays.toString(args)); //$NON-NLS-1$ //$NON-NLS-2$
+			}
 			listStruct.add(struct);
 			return this;
 		}

@@ -114,6 +114,19 @@ public class RouteProvider {
 						i++;
 					}
 				}
+				// Remove unnecessary go straight from CloudMade 
+				if(directions != null){
+					for (int i = 1; i < directions.size() - 1; ) {
+						RouteDirectionInfo r = directions.get(i);
+						if(r.turnType.getValue().equals(TurnType.C)){
+							RouteDirectionInfo prev = directions.get(i-1);
+							prev.expectedTime += r.expectedTime;
+							directions.remove(i);
+						} else {
+							i++;
+						}
+					}
+				}
 			}
 			
 			listDistance = new int[locations.size()];
@@ -193,7 +206,7 @@ public class RouteProvider {
 		int minDistanceForTurn = 5;
 		if(mode == ApplicationMode.CAR){
 			speed = 15.3f;
-			minDistanceForTurn = 25;
+			minDistanceForTurn = 35;
 		} else if(mode == ApplicationMode.BICYCLE){
 			speed = 5.5f;
 			minDistanceForTurn = 12;
@@ -307,7 +320,7 @@ public class RouteProvider {
 		previousInfo.descriptionRoute += " " + MapUtils.getFormattedDistance(previousInfo.distance); //$NON-NLS-1$
 		
 		// add last direction go straight (to show arrow in screen after all turns)
-		if(previousInfo.distance > 350){
+		if(previousInfo.distance > 100){
 			RouteDirectionInfo info = new RouteDirectionInfo();
 			info.expectedTime = 0;
 			info.distance = 0;
