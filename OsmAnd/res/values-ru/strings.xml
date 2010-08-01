@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="show_route">Показать маршрут</string>
 	<string name="fav_imported_sucessfully">Избранные точки успешно импортированы</string>
 	<string name="fav_file_to_load_not_found">GPX файл, содержащий точки, не был найден в {0}</string>
 	<string name="fav_saved_sucessfully">Избранные точки сохранены в {0}</string>
@@ -23,7 +24,7 @@
 	<string name="menu_layers">Слои</string>
 	<string name="continue_follow_previous_route">Предыдущий маршрут был не закончен. Продолжить следовать по нему?</string>
 	<string name="context_menu_item_search_poi">Искать POI</string>
-	<string name="context_menu_item_show_route">Маршрут от точки</string>
+	<string name="context_menu_item_show_route">Маршрут от</string>
 	<string name="use_trackball_descr">Использовать трекбол, чтобы перемещать карту</string>
 	<string name="use_trackball">Использовать трекбол</string>
 	<string name="background_service_wait_int_descr">Выберите время поиска позиции сервиса</string>

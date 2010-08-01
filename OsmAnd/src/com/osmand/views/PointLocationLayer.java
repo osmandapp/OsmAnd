@@ -103,10 +103,11 @@ public class PointLocationLayer implements OsmandMapLayer {
 			if(lastKnownLocation.hasBearing()){
 				float bearing = lastKnownLocation.getBearing();
 				int radiusBearing = 30;
-				if(lastKnownLocation.hasSpeed()){
+				if(lastKnownLocation.hasSpeed() && appMode != ApplicationMode.CAR){
 					radiusBearing = 
 						Math.max(MapUtils.getLengthXFromMeters(view.getFloatZoom(), view.getLatitude(), view.getLongitude(), 
 							lastKnownLocation.getSpeed(), view.getTileSize(), view.getWidth()) * 2, radiusBearing);
+					radiusBearing = Math.min(radiusBearing, view.getHeight() / 4);
 				}
 				radiusBearing += RADIUS /2;
 				

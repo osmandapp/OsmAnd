@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="show_route">Show route</string>
 	<string name="fav_imported_sucessfully">Favorite points were succesfully imported</string>
 	<string name="fav_file_to_load_not_found">GPX file to load favorite points is not found at {0}</string>
 	<string name="fav_saved_sucessfully">Favorite points were succesfully saved to {0}</string>
@@ -23,7 +24,7 @@
 	<string name="menu_layers">Layers</string>
 	<string name="continue_follow_previous_route">Previous route was unfinished. Do you want to continue follow with it? </string>
 	<string name="context_menu_item_search_poi">Search POI</string>
-	<string name="context_menu_item_show_route">Show route from</string>
+	<string name="context_menu_item_show_route">Route from</string>
 	<string name="use_trackball_descr">Use trackball to move map</string>
 	<string name="use_trackball">Use trackball</string>
 	<string name="background_service_wait_int_descr">Choose wait interval determining location</string>

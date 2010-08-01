@@ -566,8 +566,28 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			return true;
 		} else if(preference == saveCurrentTrack){
 			SavingTrackHelper helper = new SavingTrackHelper(this);
-			helper.saveDataToGpx();
-			helper.close();
+			if (helper.hasDataToSave()) {
+				progressDlg = ProgressDialog.show(this, getString(R.string.saving_gpx_tracks), getString(R.string.saving_gpx_tracks), true);
+				final ProgressDialogImplementation impl = new ProgressDialogImplementation(progressDlg);
+				impl.setRunnable("SavingGPX", new Runnable() { //$NON-NLS-1$
+					@Override
+					public void run() {
+							try {
+								SavingTrackHelper helper = new SavingTrackHelper(SettingsActivity.this);
+								helper.saveDataToGpx();
+								helper.close();
+							} finally {
+								if (progressDlg != null) {
+									progressDlg.dismiss();
+									progressDlg = null;
+								}
+							}
+						}
+					});
+				impl.run();
+			} else {
+				helper.close();
+			}
 			return true;
 		}
 		return false;
