@@ -156,7 +156,7 @@ public class OsmBugsLayer implements OsmandMapLayer {
 	public void requestToLoad(double topLatitude, double leftLongitude, double bottomLatitude,double rightLongitude, final int zoom){
 		boolean inside = cTopLatitude >= topLatitude && cLeftLongitude <= leftLongitude && cRightLongitude >= rightLongitude
 						&& cBottomLatitude <= bottomLatitude;
-		if(!inside || (czoom != zoom && objects.size() >= SEARCH_LIMIT)){
+		if((!inside || (czoom != zoom && objects.size() >= SEARCH_LIMIT)) && handlerToLoop != null){
 			handlerToLoop.removeMessages(1);
 			final double nTopLatitude = topLatitude + (topLatitude -bottomLatitude);
 			final double nBottomLatitude = bottomLatitude - (topLatitude -bottomLatitude);
