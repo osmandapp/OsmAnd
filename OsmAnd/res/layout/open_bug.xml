@@ -2,18 +2,18 @@
 <TableLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
-  android:layout_height="fill_parent">
+  android:layout_height="fill_parent" android:stretchColumns="1">
   <TableRow>
   <TextView android:id="@+id/TextView"  android:layout_marginLeft="5dp"
   			android:layout_height="wrap_content" android:text="@string/osb_comment_dialog_message"></TextView>
   <EditText android:text="" android:id="@+id/BugMessage" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
-  			android:layout_height="wrap_content" android:layout_weight="1"></EditText>
+  			android:layout_height="wrap_content" ></EditText>
   </TableRow>
   <TableRow>
   <TextView android:id="@+id/TextView" android:layout_marginLeft="5dp"
   			android:layout_height="wrap_content" android:text="@string/osb_comment_dialog_author"></TextView>
   <EditText android:id="@+id/AuthorName" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
-  			android:layout_height="wrap_content"  android:layout_weight="1" android:text="NoName"></EditText>
+  			android:layout_height="wrap_content"  android:text="NoName"></EditText>
   </TableRow>
   
 

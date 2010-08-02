@@ -67,12 +67,13 @@ public class FavouritesActivity extends ListActivity {
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
-		setContentView(R.layout.favourites);
+		ListView lv = new ListView(this);
+		lv.setId(android.R.id.list);
+		setContentView(lv);
 
 		helper = new FavouritesDbHelper(this);
 		favouritesList = helper.getFavouritePoints();
 		
-		ListView lv = getListView();
 		favouritesAdapter = new FavouritesAdapter(favouritesList);
 		lv.setAdapter(favouritesAdapter);
 		/* Add Context-Menu listener to the ListView. */

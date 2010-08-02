@@ -6,10 +6,10 @@
   
 	<CheckBox android:id="@+id/filter_poi_check"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:textSize="25px"></CheckBox>
+		android:textSize="25sp"></CheckBox>
 		
 		
 	<TextView android:id="@+id/filter_poi_label"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:textSize="25px"></TextView>
+		android:textSize="25sp"></TextView>
 </LinearLayout>
