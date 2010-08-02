@@ -3,14 +3,14 @@
 	android:layout_width="fill_parent" android:layout_height="wrap_content"
 	android:orientation="horizontal">
 
-	<ImageView android:id="@+id/favourite_icon" android:layout_width="25px"
-		android:paddingLeft="2px" android:paddingRight="2px"
-		android:paddingTop="2px" android:layout_height="fill_parent" />
+	<ImageView android:id="@+id/favourite_icon" android:layout_width="25dp"
+		android:paddingLeft="2dp" android:paddingRight="2dp"
+		android:paddingTop="2dp" android:layout_height="fill_parent" />
 	
 	<TextView android:id="@+id/favouritedistance_label"
 		android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center"
-		android:textSize="25px" android:maxWidth="150px" android:minWidth="100px"/>
-	<TextView android:id="@+id/favourite_label" android:layout_width="wrap_content" android:layout_marginLeft="10px"
-		android:layout_height="wrap_content" android:textSize="25px" />
+		android:textSize="23sp" android:maxWidth="150dp" android:minWidth="100dp"/>
+	<TextView android:id="@+id/favourite_label" android:layout_width="wrap_content" android:layout_marginLeft="10dp"
+		android:layout_height="wrap_content" android:textSize="23sp" />
 
 </LinearLayout>

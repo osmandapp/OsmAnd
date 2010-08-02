@@ -125,12 +125,12 @@ public class IndexBatchCreator {
 	
 	// TODO Japan
 	protected static final String[] asia = new String[] { 
-			"Afghanistan", "Bahrain", "Bangladesh", "Bhutan", "British_Indian_Ocean_Territory", "Brunei", "Cambodia", 
-			"China", "Christmas_Island", "Democratic_Republic_of_Timor-Leste", "Gaza_Strip", "India", "Indonesia", "Iran", 
-			"Iraq", "Israel", "Jordan", "Kazakhstan", "Kuwait", "Kyrgyzstan", "Laos", "Lebanon", "Macau", "Malaysia", 
-			"Maldives", "Mongolia", "Nepal", "North_Korea", "Oman", "Pakistan", "Paracel_Islands", "Philippines", "Qatar", 
-			"Saudi_Arabia", "Singapore", "South_Korea", "Spratly_Islands", "Sri_Lanka", "Syria", "Taiwan", "Tajikistan", 
-//			"Thailand", "Turkey", "Turkmenistan", "Union_of_Myanmar", "United_Arab_Emirates", "Uzbekistan", "Vietnam", "Yemen", 
+//			"Afghanistan", "Bahrain", "Bangladesh", "Bhutan", "British_Indian_Ocean_Territory", "Brunei", "Cambodia", 
+//			"China", "Christmas_Island", "Democratic_Republic_of_Timor-Leste", "Gaza_Strip", "India", "Indonesia", "Iran", 
+//			"Iraq", "Israel", "Jordan", "Kazakhstan", "Kuwait", "Kyrgyzstan", "Laos", "Lebanon", "Macau", "Malaysia", 
+//			"Maldives", "Mongolia", "Nepal", "North_Korea", "Oman", "Pakistan", "Paracel_Islands", "Philippines", "Qatar", 
+//			"Saudi_Arabia", "Singapore", "South_Korea", "Spratly_Islands", "Sri_Lanka", "Syria", "Taiwan", "Tajikistan", 
+//			"Thailand", "Turkmenistan", "Union_of_Myanmar", "United_Arab_Emirates", "Uzbekistan", "Vietnam", "Yemen", 
 	};
 	
 	

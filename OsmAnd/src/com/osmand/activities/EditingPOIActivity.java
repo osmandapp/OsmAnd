@@ -270,7 +270,6 @@ public class EditingPOIActivity {
 				subCategories.add(s);
 			}
 		}
-		
 		ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(ctx, R.layout.list_textview, subCategories.toArray());
 		typeText.setAdapter(adapter);
 	}
