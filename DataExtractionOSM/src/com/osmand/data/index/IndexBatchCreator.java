@@ -26,7 +26,7 @@ import com.osmand.impl.ConsoleProgressImplementation;
 public class IndexBatchCreator {
 	// config params
 	private static final boolean indexPOI = true;
-	private static final boolean indexAddress = false;
+	private static final boolean indexAddress = true;
 	private static final boolean indexTransport = true;
 	private static final boolean writeWayNodes = true;
 	
@@ -123,8 +123,15 @@ public class IndexBatchCreator {
 //	    "ulyan","vladimir","volgograd","vologda","voronezh","yakut","yamal","yarosl","zabaikal",
 	};
 	
-	
-	
+	// TODO Japan
+	protected static final String[] asia = new String[] { 
+			"Afghanistan", "Bahrain", "Bangladesh", "Bhutan", "British_Indian_Ocean_Territory", "Brunei", "Cambodia", 
+			"China", "Christmas_Island", "Democratic_Republic_of_Timor-Leste", "Gaza_Strip", "India", "Indonesia", "Iran", 
+			"Iraq", "Israel", "Jordan", "Kazakhstan", "Kuwait", "Kyrgyzstan", "Laos", "Lebanon", "Macau", "Malaysia", 
+			"Maldives", "Mongolia", "Nepal", "North_Korea", "Oman", "Pakistan", "Paracel_Islands", "Philippines", "Qatar", 
+			"Saudi_Arabia", "Singapore", "South_Korea", "Spratly_Islands", "Sri_Lanka", "Syria", "Taiwan", "Tajikistan", 
+//			"Thailand", "Turkey", "Turkmenistan", "Union_of_Myanmar", "United_Arab_Emirates", "Uzbekistan", "Vietnam", "Yemen", 
+	};
 	
 	
 	boolean downloadFiles = false;
@@ -225,7 +232,13 @@ public class IndexBatchCreator {
 			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
 		}
 		
-		// TODO ASIA only russia done //
+		// ASIA //
+		for(String country : asia){
+			country = country.toLowerCase();
+			String url = SITE_TO_DOWNLOAD2 + "asia/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
+		}
+		
 		// russia
 		for(String country : russiaStates){
 			country = country.toLowerCase();
