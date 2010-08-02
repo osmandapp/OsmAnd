@@ -115,8 +115,9 @@ public class RouteProvider {
 					}
 				}
 				// Remove unnecessary go straight from CloudMade 
-				if(directions != null){
-					for (int i = 1; i < directions.size() - 1; ) {
+				// Remove also last direction because it will be added after
+				if(directions != null && directions.size() > 1){
+					for (int i = 1; i < directions.size(); ) {
 						RouteDirectionInfo r = directions.get(i);
 						if(r.turnType.getValue().equals(TurnType.C)){
 							RouteDirectionInfo prev = directions.get(i-1);
@@ -320,7 +321,7 @@ public class RouteProvider {
 		previousInfo.descriptionRoute += " " + MapUtils.getFormattedDistance(previousInfo.distance); //$NON-NLS-1$
 		
 		// add last direction go straight (to show arrow in screen after all turns)
-		if(previousInfo.distance > 100){
+		if(previousInfo.distance > 80){
 			RouteDirectionInfo info = new RouteDirectionInfo();
 			info.expectedTime = 0;
 			info.distance = 0;

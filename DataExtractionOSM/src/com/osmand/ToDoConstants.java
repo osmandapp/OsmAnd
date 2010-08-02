@@ -17,11 +17,6 @@ public class ToDoConstants {
 	// TODO BUGS Android
 	// ! 3. different screens better support
 	
-	// 6. Add car choose for show only route from point (+)
-	// 8. Check again cancel route (+)
-	// 7. Remove speed length arrow (+)
-	// 5. add progress saving track from settings (+)
-
 	// Improvements
 	// ! Download with wget
 	// ! progress while map is loading
@@ -49,14 +44,6 @@ public class ToDoConstants {
 	// BUGS Swing
 	
 	// DONE ANDROID :
-	//   80. Export/import favorite points
-	//   84. Send letter to developer when app crashes 
-	//   78. Add ruler to the main tile view (100m, 200m,...) (+)
-	//   82. Add overzoom +2 for Mapnik 
-	//   64. Traffic information  - yandex traffic
-	//   79. Download any WMS layer and add to swing version (add tile manager ${x}, ${y}, ${z} to swing and to android)
-	//   77. Implement upload gps track onto osm server (? not implemented yet on OSM?) - 
-	//		 not really needed, because gps tracks should be prepared before loading to OSM (OSM is not ready for it)
 	
 	// DONE SWING
 
