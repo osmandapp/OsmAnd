@@ -1,5 +1,6 @@
 package com.osmand.views;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -7,11 +8,15 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.graphics.Paint.Cap;
+import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.location.Location;
 import android.text.format.DateFormat;
+import android.util.DisplayMetrics;
 import android.util.FloatMath;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.osmand.Algoritms;
 import com.osmand.Messages;
@@ -69,6 +74,10 @@ public class MapInfoLayer implements OsmandMapLayer {
 	private Matrix pathTransform;
 	private TurnType cachedTurnType = null;
 	private String cachedExitOut = null;
+	private DisplayMetrics dm;
+	
+	private float scaleCoefficient;
+	private float roundCorner;
 	
 	
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
@@ -80,9 +89,20 @@ public class MapInfoLayer implements OsmandMapLayer {
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 		paintBlack = new Paint();
+		WindowManager mgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
+		dm = new DisplayMetrics();
+		mgr.getDefaultDisplay().getMetrics(dm);
+		scaleCoefficient = dm.density;
+		if(Math.min(dm.widthPixels/dm.densityDpi, dm.heightPixels/dm.densityDpi) > 2.5f){
+			// large screen
+			scaleCoefficient *= 1.5f;
+		}
+		
+		roundCorner = 3* scaleCoefficient;
+		
 		paintBlack.setStyle(Style.STROKE);
 		paintBlack.setColor(Color.BLACK);
-		paintBlack.setTextSize(23);
+		paintBlack.setTextSize(23 * scaleCoefficient);
 		paintBlack.setAntiAlias(true);
 		
 		paintAlphaGray = new Paint();
@@ -102,8 +122,10 @@ public class MapInfoLayer implements OsmandMapLayer {
 		
 		paintMiniRoute = new Paint();
 		paintMiniRoute.setStyle(Style.STROKE);
-		paintMiniRoute.setStrokeWidth(35);
+		paintMiniRoute.setStrokeWidth(35 * scaleCoefficient);
 		paintMiniRoute.setColor(Color.BLUE);
+		paintMiniRoute.setStrokeJoin(Join.ROUND);
+		paintMiniRoute.setStrokeCap(Cap.ROUND);
 		paintMiniRoute.setAntiAlias(true);
 		
 		fillRed = new Paint();
@@ -118,29 +140,47 @@ public class MapInfoLayer implements OsmandMapLayer {
 		boundsForMiniRoute = new RectF(0, 64, 96, 196);
 		
 		boundsForLeftTime = new RectF(0, 0, 75, 32);
+
+		// Scale to have proper view
+		scaleRect(boundsForCompass);
+		scaleRect(boundsForDist);
+		scaleRect(boundsForZoom);
+		scaleRect(boundsForSpeed);
+		scaleRect(boundsForMiniRoute);
+		scaleRect(boundsForLeftTime);
 		
 		
-		centerMiniRouteX = 48;
-		centerMiniRouteY= 160;
+		
+		centerMiniRouteX = (int) (boundsForMiniRoute.width()/2);
+		centerMiniRouteY= (int) (boundsForMiniRoute.top + 3 * boundsForMiniRoute.height() /4);
 		scaleMiniRoute = 0.15f;
 		
 		pathForCompass = new Path();
-		pathForCompass.moveTo(9, 15.5f);
-		pathForCompass.lineTo(22f, 15.5f);
-		pathForCompass.lineTo(15.5f, 30f);
-		pathForCompass.lineTo(9, 15.5f);
-		
+		pathForCompass.moveTo(9 * scaleCoefficient, 15.5f * scaleCoefficient);
+		pathForCompass.lineTo(22f * scaleCoefficient, 15.5f * scaleCoefficient);
+		pathForCompass.lineTo(15.5f * scaleCoefficient, 30f * scaleCoefficient);
+		pathForCompass.lineTo(9 * scaleCoefficient, 15.5f * scaleCoefficient);
+
 		pathForCompass2 = new Path();
-		pathForCompass2.moveTo(9, 15.5f);
-		pathForCompass2.lineTo(22f, 15.5f);
-		pathForCompass2.lineTo(15.5f, 2f);
-		pathForCompass2.lineTo(9, 15);
+		pathForCompass2.moveTo(9 * scaleCoefficient, 15.5f * scaleCoefficient);
+		pathForCompass2.lineTo(22f * scaleCoefficient, 15.5f * scaleCoefficient);
+		pathForCompass2.lineTo(15.5f * scaleCoefficient, 2f * scaleCoefficient);
+		pathForCompass2.lineTo(9 * scaleCoefficient, 15.5f * scaleCoefficient);
 		
 		pathForTurn = new Path();
 		pathTransform = new Matrix();
-		pathTransform.setTranslate(boundsForMiniRoute.left, boundsForMiniRoute.top);
+		pathTransform.postScale(scaleCoefficient, scaleCoefficient);
+		pathTransform.postTranslate(boundsForMiniRoute.left, boundsForMiniRoute.top);
+		
 		
 		showArrivalTime = OsmandSettings.isShowingArrivalTime(view.getContext());
+	}
+	
+	private void scaleRect(RectF r){
+		r.bottom *= scaleCoefficient;
+		r.left *= scaleCoefficient;
+		r.right *= scaleCoefficient;
+		r.top *= scaleCoefficient;
 	}
 
 	public boolean distChanged(int oldDist, int dist){
@@ -170,7 +210,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 					cachedDistString = null;
 				} else {
 					cachedDistString = MapUtils.getFormattedDistance(cachedMeters);
-					float right = paintBlack.measureText(cachedDistString) + 25 + boundsForDist.left;
+					float right = paintBlack.measureText(cachedDistString) + 25 * scaleCoefficient + boundsForDist.left;
 					if(cachedSpeedString != null){
 						boundsForSpeed.right = boundsForDist.right = Math.max(right, boundsForDist.right);
 					} else {
@@ -187,30 +227,33 @@ public class MapInfoLayer implements OsmandMapLayer {
 			cachedZoomString = view.getZoom()+""; //$NON-NLS-1$
 		}
 		// draw zoom
-		canvas.drawRoundRect(boundsForZoom, 3, 3, paintAlphaGray);
-		canvas.drawRoundRect(boundsForZoom, 3, 3, paintBlack);
-		canvas.drawText(cachedZoomString, boundsForZoom.left + 5, boundsForZoom.bottom - 7, paintBlack);
+		canvas.drawRoundRect(boundsForZoom, roundCorner, roundCorner, paintAlphaGray);
+		canvas.drawRoundRect(boundsForZoom, roundCorner, roundCorner, paintBlack);
+		canvas.drawText(cachedZoomString, boundsForZoom.left + 5 * scaleCoefficient, boundsForZoom.bottom - 8 * scaleCoefficient,
+				paintBlack);
 		
 		// draw speed 	
 		if(map.getLastKnownLocation() != null && map.getLastKnownLocation().hasSpeed()){
 			if(Math.abs(map.getLastKnownLocation().getSpeed() - cachedSpeed) > .3f){
 				cachedSpeed = map.getLastKnownLocation().getSpeed();
 				cachedSpeedString = ((int) (cachedSpeed * 3.6f)) + Messages.getMessage(Messages.KEY_KM_H);
-				float right = paintBlack.measureText(cachedSpeedString) + 8 + boundsForSpeed.left;
+				float right = paintBlack.measureText(cachedSpeedString) + 8 * scaleCoefficient + boundsForSpeed.left;
 				boundsForSpeed.right = boundsForDist.right = Math.max(right, boundsForDist.right);
 			}
 			if(cachedSpeed > 0){
-				canvas.drawRoundRect(boundsForSpeed, 3, 3, paintAlphaGray);
-				canvas.drawRoundRect(boundsForSpeed, 3, 3, paintBlack);
-				canvas.drawText(cachedSpeedString, boundsForSpeed.left + 8, boundsForSpeed.bottom - 9, paintBlack);
+				canvas.drawRoundRect(boundsForSpeed, roundCorner, roundCorner, paintAlphaGray);
+				canvas.drawRoundRect(boundsForSpeed, roundCorner, roundCorner, paintBlack);
+				canvas.drawText(cachedSpeedString, boundsForSpeed.left + 8 * scaleCoefficient, boundsForSpeed.bottom - 9f * scaleCoefficient, paintBlack);
 			}
 		}
 		// draw distance to point
 		if(cachedDistString != null){
-			canvas.drawRoundRect(boundsForDist, 3, 3, paintAlphaGray);
-			canvas.drawRoundRect(boundsForDist, 3, 3, paintBlack);
-			canvas.drawCircle(boundsForDist.left + 8, boundsForDist.bottom - 15, 4, fillRed);
-			canvas.drawText(cachedDistString, boundsForDist.left + 15, boundsForDist.bottom - 9, paintBlack);
+			canvas.drawRoundRect(boundsForDist, roundCorner, roundCorner, paintAlphaGray);
+			canvas.drawRoundRect(boundsForDist, roundCorner, roundCorner, paintBlack);
+			canvas.drawCircle(boundsForDist.left + 8 * scaleCoefficient, boundsForDist.bottom - 15 * scaleCoefficient,
+					4 * scaleCoefficient, fillRed);
+			canvas.drawText(cachedDistString, boundsForDist.left + 15 * scaleCoefficient, boundsForDist.bottom - 9f * scaleCoefficient,
+					paintBlack);
 		}
 		
 		// draw ruler
@@ -219,10 +262,10 @@ public class MapInfoLayer implements OsmandMapLayer {
 		// draw route information
 		drawRouteInfo(canvas);
 		
-		// draw compass the last because it use rotating
-		canvas.drawRoundRect(boundsForCompass, 3, 3, paintAlphaGray);
-		canvas.drawRoundRect(boundsForCompass, 3, 3, paintBlack);
-		canvas.rotate(view.getRotate(), 15, 15);
+		// draw compass the last (!) because it use rotating
+		canvas.drawRoundRect(boundsForCompass, roundCorner, roundCorner, paintAlphaGray);
+		canvas.drawRoundRect(boundsForCompass, roundCorner, roundCorner, paintBlack);
+		canvas.rotate(view.getRotate(), 15 * scaleCoefficient, 15 * scaleCoefficient);
 		canvas.drawPath(pathForCompass2, fillRed);
 		canvas.drawPath(pathForCompass, fillBlack);
 	}
@@ -271,21 +314,21 @@ public class MapInfoLayer implements OsmandMapLayer {
 
 			rulerDistPix = (int) (view.getWidth() * screenPercent / dist * baseDist);
 			rulerDistName = MapUtils.getFormattedDistance(baseDist);
-			rulerBaseLine = view.getHeight() - 70;
+			rulerBaseLine = (int) (view.getHeight() - 70 * dm.density);
 			if(view.getParent() instanceof View){
 				View zoomControls = ((View) view.getParent()).findViewById(R.id.ZoomControls);
 				if(zoomControls != null){
-					rulerBaseLine = zoomControls.getTop() - 5;
+					rulerBaseLine = (int) (zoomControls.getTop() - 5 * dm.density);
 				}
 			}
 			rulerTextLen = paintBlack.measureText(rulerDistName);
 		} 
 		if (rulerDistName != null) {
-			int w2 = view.getWidth() - 5;
+			int w2 = (int) (view.getWidth() - 5 * dm.density);
 			canvas.drawLine(w2 - rulerDistPix, rulerBaseLine, w2, rulerBaseLine, paintBlack);
-			canvas.drawLine(w2 - rulerDistPix, rulerBaseLine, w2 - rulerDistPix, rulerBaseLine - 10, paintBlack);
-			canvas.drawLine(w2, rulerBaseLine, w2, rulerBaseLine - 10, paintBlack);
-			canvas.drawText(rulerDistName, w2 - (rulerDistPix + rulerTextLen)/2 + 1, rulerBaseLine - 5, paintBlack);
+			canvas.drawLine(w2 - rulerDistPix, rulerBaseLine, w2 - rulerDistPix, rulerBaseLine - 10 * dm.density, paintBlack);
+			canvas.drawLine(w2, rulerBaseLine, w2, rulerBaseLine - 10 * dm.density, paintBlack);
+			canvas.drawText(rulerDistName, w2 - (rulerDistPix + rulerTextLen)/2 + 1, rulerBaseLine - 5 * dm.density, paintBlack);
 		}
 	}
 
@@ -297,8 +340,8 @@ public class MapInfoLayer implements OsmandMapLayer {
 					if (!routeLayer.getPath().isEmpty()) {
 						canvas.save();
 						canvas.clipRect(boundsForMiniRoute);
-						canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintAlphaGray);
-						canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintBlack);
+						canvas.drawRoundRect(boundsForMiniRoute, roundCorner, roundCorner, paintAlphaGray);
+						canvas.drawRoundRect(boundsForMiniRoute, roundCorner, roundCorner, paintBlack);
 						canvas.translate(centerMiniRouteX - view.getCenterPointX(), centerMiniRouteY - view.getCenterPointY());
 						canvas.scale(scaleMiniRoute, scaleMiniRoute, view.getCenterPointX(), view.getCenterPointY());
 						canvas.rotate(view.getRotate(), view.getCenterPointX(), view.getCenterPointY());
@@ -307,8 +350,8 @@ public class MapInfoLayer implements OsmandMapLayer {
 						canvas.restore();
 					}
 				} else {
-					canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintAlphaGray);
-					canvas.drawRoundRect(boundsForMiniRoute, 3, 3, paintBlack);
+					canvas.drawRoundRect(boundsForMiniRoute, roundCorner, roundCorner, paintAlphaGray);
+					canvas.drawRoundRect(boundsForMiniRoute, roundCorner, roundCorner, paintBlack);
 					RouteDirectionInfo next = routeLayer.getHelper().getNextRouteDirectionInfo();
 					if (next != null) {
 						if (!Algoritms.objectEquals(cachedTurnType, next.turnType)) {
@@ -323,10 +366,11 @@ public class MapInfoLayer implements OsmandMapLayer {
 						canvas.drawPath(pathForTurn, paintRouteDirection);
 						canvas.drawPath(pathForTurn, paintBlack);
 						if (cachedExitOut != null) {
-							canvas.drawText(cachedExitOut, boundsForMiniRoute.centerX() - 6, boundsForMiniRoute.centerY() - 9, paintBlack);
+							canvas.drawText(cachedExitOut, boundsForMiniRoute.centerX() - 6 * scaleCoefficient, 
+									boundsForMiniRoute.centerY() - 9 * scaleCoefficient, paintBlack);
 						}
-						canvas.drawText(MapUtils.getFormattedDistance(d), boundsForMiniRoute.left + 10, boundsForMiniRoute.bottom - 9,
-								paintBlack);
+						canvas.drawText(MapUtils.getFormattedDistance(d), boundsForMiniRoute.left + 10 * scaleCoefficient, 
+								boundsForMiniRoute.bottom - 9 * scaleCoefficient, paintBlack);
 					}
 				}
 			}
@@ -346,7 +390,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 						} else {
 							cachedLeftTimeString = DateFormat.format("k:mm aa",toFindTime).toString(); //$NON-NLS-1$
 						}
-						boundsForLeftTime.left = - paintBlack.measureText(cachedLeftTimeString) - 10 + boundsForLeftTime.right;
+						boundsForLeftTime.left = - paintBlack.measureText(cachedLeftTimeString) - 10 * scaleCoefficient + boundsForLeftTime.right;
 					}
 				} else {
 					if(Math.abs(time - cachedLeftTime) > 30){
@@ -354,7 +398,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 						int hours = time / (60 * 60);
 						int minutes = (time / 60) % 60;
 						cachedLeftTimeString = String.format("%d:%02d", hours, minutes); //$NON-NLS-1$
-						boundsForLeftTime.left = - paintBlack.measureText(cachedLeftTimeString) - 10 + boundsForLeftTime.right;
+						boundsForLeftTime.left = - paintBlack.measureText(cachedLeftTimeString) - 10 * scaleCoefficient + boundsForLeftTime.right;
 					}
 				}
 			}
@@ -362,20 +406,21 @@ public class MapInfoLayer implements OsmandMapLayer {
 				int w = (int) (boundsForLeftTime.right - boundsForLeftTime.left); 
 				boundsForLeftTime.right = view.getWidth();
 				boundsForLeftTime.left = view.getWidth() - w;
-				canvas.drawRoundRect(boundsForLeftTime, 3, 3, paintAlphaGray);
-				canvas.drawRoundRect(boundsForLeftTime, 3, 3, paintBlack);
-				canvas.drawText(cachedLeftTimeString, boundsForLeftTime.left + 5, boundsForLeftTime.bottom - 9, paintBlack);
+				canvas.drawRoundRect(boundsForLeftTime, roundCorner, roundCorner, paintAlphaGray);
+				canvas.drawRoundRect(boundsForLeftTime, roundCorner, roundCorner, paintBlack);
+				canvas.drawText(cachedLeftTimeString, boundsForLeftTime.left + 5 * scaleCoefficient, boundsForLeftTime.bottom - 9 * scaleCoefficient, paintBlack);
 				
 			}
 		}
 	}
 
+	// draw path 96x96
 	public static void calcTurnPath(Path pathForTurn, TurnType turnType, Matrix transform) {
 		if(turnType == null){
 			return;
 		}
 		pathForTurn.reset();
-		// draw path 96x96
+
 		int c = 48;
 		int w = 16;
 		pathForTurn.moveTo(c, 94);

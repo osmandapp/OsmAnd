@@ -26,10 +26,11 @@ public class ToDoConstants {
 	//    3.2 Fix all layers (RouteInfoLayer+!
 	//			FavoritesLayer, OsmBugsLayer,  POIMapLayer, TransportInfoLayer, TransportStopsLayer (+)
 	// 			PointLocationLayer, PointNavigationLayer, YandexTrafficLayer(+) 
-	//    3.3  route_info_list_item.xml, ShowRouteInfoActivity, main.xml (+) 
-	//    3.4 Fix map zoom by default map (in 1.5 for high density) OsmandMapTileView
-	//    3.5 MapInfoLayer
-	//    3.6 Touch distance events : MultiTouchSupport, AnimateDraggingMapThread (? timeMove)
+	//    3.3  route_info_list_item.xml, ShowRouteInfoActivity, main.xml (+)
+	//    3.4 MapInfoLayer (+)
+	//    3.5 Touch distance events : MultiTouchSupport, AnimateDraggingMapThread (? timeMove) (+)
+	
+	//    3.6 Fix map zoom by default map (in 1.5 for high density) OsmandMapTileView
 	//    4. Icon back to location (+)
 	
 	// Improvements

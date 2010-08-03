@@ -20,12 +20,14 @@ import android.graphics.Paint.Style;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.FloatMath;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.WindowManager;
 import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.SurfaceHolder.Callback;
@@ -49,8 +51,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	public static final int OVERZOOM_IN = 2;
 	
 	protected final int emptyTileDivisor = 16;
-	protected final int timeForDraggingAnimation = 300;
-	protected final int minimumDistanceForDraggingAnimation = 40;
 	
 	public interface OnTrackBallListener{
 		public boolean onTrackBallEvent(MotionEvent e);
@@ -113,6 +113,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	Paint paintWhiteFill;
 	Paint paintCenter;
 	Paint paintBitmap;
+
+	private DisplayMetrics dm;
 	
 	
 	public OsmandMapTileView(Context context, AttributeSet attrs) {
@@ -159,6 +161,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		gestureDetector = new GestureDetector(getContext(), this);
 		multiTouchSupport = new MultiTouchSupport(getContext(), this);
 		gestureDetector.setOnDoubleTapListener(this);
+		
+		WindowManager mgr = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+		dm = new DisplayMetrics();
+		mgr.getDefaultDisplay().getMetrics(dm);
 	}
 	
 	
@@ -356,8 +362,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		int w = getCenterPointX();
 		int h = getCenterPointY();
 		if (showMapPosition) {
-			canvas.drawCircle(w, h, 3, paintCenter);
-			canvas.drawCircle(w, h, 7, paintCenter);
+			canvas.drawCircle(w, h, 3 * dm.density, paintCenter);
+			canvas.drawCircle(w, h, 7 * dm.density, paintCenter);
 		}
 		canvas.restore();
 		for (OsmandMapLayer layer : layers) {
@@ -756,7 +762,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	@Override
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-		if(Math.abs(e1.getX() - e2.getX()) + Math.abs(e1.getX() - e2.getX()) > 50){
+		if(Math.abs(e1.getX() - e2.getX()) + Math.abs(e1.getX() - e2.getX()) > 50 * dm.density){
 			animatedDraggingThread.startDragging(Math.abs(velocityX/1000), Math.abs(velocityY/1000), e1.getX(), e1.getY(), e2.getX(), e2.getY());
 		} else {
 			onScroll(e1, e2, e1.getX() - e2.getX(), e1.getY() - e2.getY());
