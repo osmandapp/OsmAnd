@@ -1,5 +1,6 @@
 package com.osmand.views;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -9,6 +10,8 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.location.Location;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 import com.osmand.OsmandSettings.ApplicationMode;
 import com.osmand.osm.MapUtils;
@@ -27,10 +30,11 @@ public class PointLocationLayer implements OsmandMapLayer {
 	private ApplicationMode appMode = ApplicationMode.DEFAULT;
 	
 	protected Location lastKnownLocation = null;
-	
+	private DisplayMetrics dm;
 	private OsmandMapTileView view;
 	
 	private Float heading = null;
+	
 	
 
 	private void initUI() {
@@ -66,6 +70,9 @@ public class PointLocationLayer implements OsmandMapLayer {
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 		initUI();
+		dm = new DisplayMetrics();
+		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
+		wmgr.getDefaultDisplay().getMetrics(dm);
 	}
 
 
@@ -80,17 +87,17 @@ public class PointLocationLayer implements OsmandMapLayer {
 		if (isLocationVisible(lastKnownLocation)) {
 			int locationX = view.getMapXForPoint(lastKnownLocation.getLongitude());
 			int locationY = view.getMapYForPoint(lastKnownLocation.getLatitude());
-			int radius = MapUtils.getLengthXFromMeters(view.getFloatZoom(), view.getLatitude(), view.getLongitude(), lastKnownLocation
-					.getAccuracy(), view.getTileSize(), view.getWidth());
+			int radius = MapUtils.getLengthXFromMeters(view.getFloatZoom(), view.getLatitude(), view.getLongitude(), 
+					lastKnownLocation.getAccuracy(), view.getTileSize(), view.getWidth());
 
 			if(appMode == ApplicationMode.CAR){
 				if(!lastKnownLocation.hasBearing()){
-					canvas.drawCircle(locationX, locationY, RADIUS * 2.5f, location);
-					canvas.drawCircle(locationX, locationY, RADIUS * 2.5f, bearingOver);
+					canvas.drawCircle(locationX, locationY, RADIUS * 2.5f * dm.density, location);
+					canvas.drawCircle(locationX, locationY, RADIUS * 2.5f * dm.density, bearingOver);
 				}
 			} else {
-				canvas.drawCircle(locationX, locationY, RADIUS, location);
-				canvas.drawCircle(locationX, locationY, RADIUS, bearingOver);
+				canvas.drawCircle(locationX, locationY, RADIUS * dm.density, location);
+				canvas.drawCircle(locationX, locationY, RADIUS * dm.density, bearingOver);
 			}
 			if (radius > RADIUS) {
 				canvas.drawCircle(locationX, locationY, radius, area);
@@ -102,14 +109,14 @@ public class PointLocationLayer implements OsmandMapLayer {
 			
 			if(lastKnownLocation.hasBearing()){
 				float bearing = lastKnownLocation.getBearing();
-				int radiusBearing = 30;
+				int radiusBearing = (int) (30 * dm.density);
 				if(lastKnownLocation.hasSpeed() && appMode != ApplicationMode.CAR){
 					radiusBearing = 
 						Math.max(MapUtils.getLengthXFromMeters(view.getFloatZoom(), view.getLatitude(), view.getLongitude(), 
 							lastKnownLocation.getSpeed(), view.getTileSize(), view.getWidth()) * 2, radiusBearing);
 					radiusBearing = Math.min(radiusBearing, view.getHeight() / 4);
 				}
-				radiusBearing += RADIUS /2;
+				radiusBearing += RADIUS * dm.density /2;
 				
 				pathForDirection.reset();
 				pathForDirection.moveTo(0, 0);
@@ -119,13 +126,13 @@ public class PointLocationLayer implements OsmandMapLayer {
 				Matrix m = new Matrix();
 				m.reset();
 				if(appMode == ApplicationMode.CAR){
-					m.postScale(2.5f, radiusBearing * 1.5f);
+					m.postScale(2.5f * dm.density, radiusBearing * 1.5f);
 					m.postTranslate(0, -radiusBearing/2);
 				} else if(appMode == ApplicationMode.BICYCLE){
-					m.postScale(2f, radiusBearing);
+					m.postScale(2 * dm.density, radiusBearing);
 					m.postTranslate(0, -radiusBearing/2);
 				} else {
-					m.postScale(1, radiusBearing * 0.5f);
+					m.postScale(dm.density, radiusBearing * 0.5f);
 					m.postTranslate(0, -radiusBearing);
 				}
 				m.postTranslate(locationX, locationY);

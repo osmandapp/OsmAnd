@@ -14,10 +14,12 @@ import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Rect;
 import android.graphics.Paint.Style;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +43,7 @@ public class ShowRouteInfoActivity extends ListActivity {
 
 	private RoutingHelper helper;
 	private TextView header;
+	private DisplayMetrics dm;
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -52,6 +55,8 @@ public class ShowRouteInfoActivity extends ListActivity {
 		
 		lv.addHeaderView(header);
 		setContentView(lv);
+		dm = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(dm);
 	}
 	
 	@Override
@@ -61,11 +66,19 @@ public class ShowRouteInfoActivity extends ListActivity {
 		int hours = helper.getLeftTime() / (60 * 60);
 		int minutes = (helper.getLeftTime() / 60) % 60;
 		header.setText(MessageFormat.format(getString(R.string.route_general_information), MapUtils.getFormattedDistance(dist),
-				hours, minutes)); 
+				hours, minutes));
+		float f = Math.min(dm.widthPixels/dm.densityDpi,dm.heightPixels/dm.densityDpi);
+		if (f >= 3) {
+			// large screen
+			header.setTextSize(dm.scaledDensity * 23);
+		}
 		setListAdapter(new RouteInfoAdapter(RoutingHelper.getInstance(this).getRouteDirections()));
 	}
 
 	public void onListItemClick(ListView parent, View v, int position, long id) {
+		if(position == 0){
+			return;
+		}
 		RouteDirectionInfo item = ((RouteInfoAdapter)getListAdapter()).getItem(position - 1);
 		Location loc = helper.getLocationFromRouteDirection(item);
 		if(loc != null){
@@ -78,23 +91,31 @@ public class ShowRouteInfoActivity extends ListActivity {
 	class RouteDrawable extends Drawable {
 		Paint paintRouteDirection;
 		Path p = new Path();
-		Matrix m = new Matrix();
+		Path dp = new Path();
+		
 		public RouteDrawable(){
-			m.setScale(0.33f, 0.33f);
 			paintRouteDirection = new Paint();
 			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
 			paintRouteDirection.setColor(Color.rgb(100, 0, 255));
 			paintRouteDirection.setAntiAlias(true);
 		}
 		
+
+		@Override
+		protected void onBoundsChange(Rect bounds) {
+			Matrix m = new Matrix();
+			m.setScale(bounds.width()/96f, bounds.height()/96f);
+			p.transform(m, dp);
+		}
 		
 		public void setRouteType(TurnType t){
-			MapInfoLayer.calcTurnPath(p, t, m);
+			MapInfoLayer.calcTurnPath(p, t, null);
+			onBoundsChange(getBounds());
 		}
 
 		@Override
 		public void draw(Canvas canvas) {
-			canvas.drawPath(p, paintRouteDirection);
+			canvas.drawPath(dp, paintRouteDirection);
 		}
 
 		@Override

@@ -1,5 +1,6 @@
 package com.osmand.views;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -8,6 +9,8 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Paint.Style;
 import android.location.Location;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 import com.osmand.osm.LatLon;
 
@@ -21,6 +24,7 @@ public class PointNavigationLayer implements OsmandMapLayer {
 	private OsmandMapTileView view;
 	private Path pathForDirection;
 	private float[] calculations = new float[2];
+	private DisplayMetrics dm;
 	
 
 	private void initUI() {
@@ -34,6 +38,9 @@ public class PointNavigationLayer implements OsmandMapLayer {
 	
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
+		dm = new DisplayMetrics();
+		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
+		wmgr.getDefaultDisplay().getMetrics(dm);
 		initUI();
 	}
 
@@ -48,7 +55,7 @@ public class PointNavigationLayer implements OsmandMapLayer {
 			int locationX = view.getMapXForPoint(pointToNavigate.getLongitude());
 			int locationY = view.getMapYForPoint(pointToNavigate.getLatitude());
 
-			canvas.drawCircle(locationX, locationY, RADIUS, point);
+			canvas.drawCircle(locationX, locationY, RADIUS * dm.density, point);
 		} else {
 			Location.distanceBetween(view.getLatitude(), view.getLongitude(), pointToNavigate.getLatitude(),
 					pointToNavigate.getLongitude(), calculations);
@@ -58,11 +65,11 @@ public class PointNavigationLayer implements OsmandMapLayer {
 			pathForDirection.lineTo(0.5f, 1.5f);
 			pathForDirection.lineTo(-0.5f, 1.5f);
 			pathForDirection.lineTo(0, 0);
-			float radiusBearing = DIST_TO_SHOW ;
+			float radiusBearing = DIST_TO_SHOW;
 			Matrix m = new Matrix();
 			m.reset();
-			m.postScale(RADIUS * 2, RADIUS * 2);
-			m.postTranslate(0, -radiusBearing);
+			m.postScale(RADIUS * dm.density * 2, RADIUS * 2 * dm.density);
+			m.postTranslate(0, - radiusBearing * dm.density );
 			m.postTranslate(view.getCenterPointX(), view.getCenterPointY());
 			m.postRotate(bearing, view.getCenterPointX(), view.getCenterPointY());
 			pathForDirection.transform(m);
