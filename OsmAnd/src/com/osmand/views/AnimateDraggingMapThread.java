@@ -226,7 +226,7 @@ public class AnimateDraggingMapThread implements Runnable {
 //		}
 		timeZInt = 600;
 		timeZEnd = 500;
-		timeMove = (int) (Math.abs(moveX) + Math.abs(moveY) * 4);
+		timeMove = (int) (Math.abs(moveX) + Math.abs(moveY) * 3);
 		if(timeMove > 2200){
 			timeMove = 2200;
 		}
