@@ -12,10 +12,15 @@ public class ToDoConstants {
 	//  ! 81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
 	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?),
 	//  railway( station, subway?) - issue 17
+	//    82. Rotate map according compass
 
 	
 	// TODO BUGS Android
-	// ! 3. different screens better support
+	// !! 3. different screens better support
+	///   3.1 after search_address_online.xml (+)
+	//    3.2 Fix all layers, route_info_list_item.xml, main.xml
+	//    3.3 Fix map zoom by default map (in 1.5 for high density)
+	//    4. Icon back to location
 	
 	// Improvements
 	// ! Download with wget
@@ -38,7 +43,7 @@ public class ToDoConstants {
 	// TODO swing
 	// 9. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !
 	// Current result : for big file (1 - task  60-80% time, 90% memory) (?)
- 	// ! 10. Improve address indexing (use relations). (?) // SLOBODSKAYA 157, 95
+ 	// !! 10. Improve address indexing (use relations). (?) // SLOBODSKAYA 157, 95
     //	  use relation "a6" (to accumulate streets!),  "a3" to read all cities & define boundaries for city (& define that street in city). 
 	
 	// BUGS Swing
