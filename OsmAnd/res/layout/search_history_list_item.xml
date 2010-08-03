@@ -5,10 +5,10 @@
   android:layout_height="wrap_content" android:orientation="horizontal">
 	<TextView android:id="@+id/distance_label" android:layout_marginLeft="5dp"
 		android:layout_width="80dp" android:layout_height="fill_parent" android:gravity="left"
-		android:textSize="20px"/>
+		android:textSize="20sp"/>
 	<TextView android:id="@+id/label" android:layout_weight="1" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:textSize="20px" />
+		android:layout_height="wrap_content" android:textSize="20sp" />
 	<ImageButton android:id="@+id/remove" android:layout_width="wrap_content" android:background="@drawable/reset" 
-		android:paddingLeft="2px" android:paddingRight="2px"
-		android:paddingTop="2px" android:layout_height="wrap_content" />
+		android:paddingLeft="2dp" android:paddingRight="2dp"
+		android:paddingTop="2dp" android:layout_height="wrap_content" />
 </LinearLayout>
