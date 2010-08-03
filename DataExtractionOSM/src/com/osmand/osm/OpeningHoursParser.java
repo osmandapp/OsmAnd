@@ -58,10 +58,10 @@ public class OpeningHoursParser {
 				}
 				return false;
 			} else {
-				if (time <= endTime && days[p]) {
+				if (time >= startTime && days[p]) {
 					// check in previous day
 					return true;
-				} else if (time <= startTime && days[d]) {
+				} else if (time <= endTime && days[d]) {
 					// check in previous day
 					return true;
 				}

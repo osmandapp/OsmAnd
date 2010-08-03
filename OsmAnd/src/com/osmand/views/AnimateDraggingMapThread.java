@@ -196,7 +196,6 @@ public class AnimateDraggingMapThread implements Runnable {
 		intZ = curZoom;
 		float mX = (float) ((MapUtils.getTileNumberX(intZ, curLon) - MapUtils.getTileNumberX(intZ, finalLon)) * tileSize);
 		float mY = (float) ((MapUtils.getTileNumberY(intZ, curLat) - MapUtils.getTileNumberY(intZ, finalLat)) * tileSize);
-		// todo calculate right with rotated map!!!
 		while (Math.abs(mX) + Math.abs(mY) > 1200 && intZ > 4) {
 			intZ--;
 			mX = (float) ((MapUtils.getTileNumberX(intZ, curLon) - MapUtils.getTileNumberX(intZ, finalLon)) * tileSize);

@@ -1,4 +1,4 @@
-package com.osmand.activities;
+package com.osmand.views;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -32,8 +32,6 @@ import com.osmand.Algoritms;
 import com.osmand.LogUtil;
 import com.osmand.R;
 import com.osmand.osm.MapUtils;
-import com.osmand.views.OsmandMapLayer;
-import com.osmand.views.OsmandMapTileView;
 
 public class YandexTrafficLayer implements OsmandMapLayer {
 

@@ -3,6 +3,7 @@ package com.osmand.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,6 +11,8 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.osmand.OsmandSettings;
@@ -18,28 +21,29 @@ import com.osmand.ResourceManager;
 import com.osmand.TransportIndexRepository;
 import com.osmand.activities.search.SearchTransportActivity;
 import com.osmand.data.TransportStop;
+import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 
 public class TransportStopsLayer implements OsmandMapLayer {
 	private static final int startZoom = 12;
 	
-	
 	private Paint pointAltUI;
 	private OsmandMapTileView view;
 	private List<TransportStop> objects = new ArrayList<TransportStop>();
-
-	private ResourceManager resourceManager;
+	private DisplayMetrics dm;
 	
 	
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
+		dm = new DisplayMetrics();
+		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
+		wmgr.getDefaultDisplay().getMetrics(dm);
 
 		pointAltUI = new Paint();
 		pointAltUI.setColor(Color.rgb(0, 0, 255));
 		pointAltUI.setAlpha(150);
 		pointAltUI.setAntiAlias(true);
-		resourceManager = ResourceManager.getResourceManager();
 		pixRect.set(0, 0, view.getWidth(), view.getHeight());
 	}
 	
@@ -124,7 +128,7 @@ public class TransportStopsLayer implements OsmandMapLayer {
 			double rightLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.right);
 
 			objects.clear();
-			resourceManager.searchTransportAsync(topLatitude, leftLongitude, bottomLatitude, rightLongitude, view.getZoom(), objects);
+			ResourceManager.getResourceManager().searchTransportAsync(topLatitude, leftLongitude, bottomLatitude, rightLongitude, view.getZoom(), objects);
 			int r = 3 * getRadiusPoi(view.getZoom()) / 4;
 			for (TransportStop o : objects) {
 				int x = view.getMapXForPoint(o.getLocation().getLongitude());
@@ -147,7 +151,11 @@ public class TransportStopsLayer implements OsmandMapLayer {
 	@Override
 	public boolean onLongPressEvent(PointF point) {
 		if(getFromPoint(point) != null){
-			view.getContext().startActivity(new Intent(view.getContext(), SearchTransportActivity.class));
+			Intent intent = new Intent(view.getContext(), SearchTransportActivity.class);
+			LatLon latLon = view.getLatLonFromScreenPoint(point.x, point.y);
+			intent.putExtra(SearchTransportActivity.LAT_KEY, latLon.getLatitude());
+			intent.putExtra(SearchTransportActivity.LON_KEY, latLon.getLongitude());
+			view.getContext().startActivity(intent);
 			return true;
 		}
 		return false;

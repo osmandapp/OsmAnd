@@ -96,6 +96,7 @@ import com.osmand.views.RouteInfoLayer;
 import com.osmand.views.RouteLayer;
 import com.osmand.views.TransportInfoLayer;
 import com.osmand.views.TransportStopsLayer;
+import com.osmand.views.YandexTrafficLayer;
 
 public class MapActivity extends Activity implements IMapLocationListener, SensorEventListener {
 
@@ -889,7 +890,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			}
 			return true;
 		} else if (item.getItemId() == R.id.map_transport) {
-			startActivity(new Intent(this, SearchTransportActivity.class));
+			Intent intent = new Intent(this, SearchTransportActivity.class);
+			intent.putExtra(SearchTransportActivity.LAT_KEY, mapView.getLatitude());
+			intent.putExtra(SearchTransportActivity.LON_KEY, mapView.getLongitude());
+			startActivity(intent);
 			return true;
 		} else if (item.getItemId() == R.id.map_mark_point) {
 			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude(), true);

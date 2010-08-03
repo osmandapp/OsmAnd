@@ -13,6 +13,8 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.osmand.OsmandSettings;
@@ -35,6 +37,7 @@ public class POIMapLayer implements OsmandMapLayer {
 
 	private ResourceManager resourceManager;
 	private PoiFilter filter;
+	private DisplayMetrics dm;
 	
 	@Override
 	public boolean onLongPressEvent(PointF point) {
@@ -115,6 +118,9 @@ public class POIMapLayer implements OsmandMapLayer {
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
+		dm = new DisplayMetrics();
+		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
+		wmgr.getDefaultDisplay().getMetrics(dm);
 
 		pointAltUI = new Paint();
 		pointAltUI.setColor(Color.rgb(255, 128, 0));
@@ -125,17 +131,19 @@ public class POIMapLayer implements OsmandMapLayer {
 	}
 	
 	public int getRadiusPoi(int zoom){
+		int r = 0;
 		if(zoom < startZoom){
-			return 0;
+			r = 0;
 		} else if(zoom <= 15){
-			return 10;
+			r = 10;
 		} else if(zoom == 16){
-			return 14;
+			r = 14;
 		} else if(zoom == 17){
-			return 16;
+			r = 16;
 		} else {
-			return 18;
+			r = 18;
 		}
+		return (int) (r * dm.density);
 	}
 
 	Rect pixRect = new Rect();
