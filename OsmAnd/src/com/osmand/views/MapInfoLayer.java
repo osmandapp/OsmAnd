@@ -494,7 +494,9 @@ public class MapInfoLayer implements OsmandMapLayer {
 			pathForTurn.close();
 		}
 		pathForTurn.close();
-		pathForTurn.transform(transform);
+		if(transform != null){
+			pathForTurn.transform(transform);
+		}
 	}
 
 	@Override

@@ -168,8 +168,8 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 		if(isVisible()){
 			border.set(layout.getLeft() - 10 * dm.density, layout.getTop() - 4 * dm.density, 
 					layout.getRight() - 5 * dm.density, layout.getBottom() + 4 * dm.density);
-			canvas.drawRoundRect(border, 5, 5, paintBorder);
-			canvas.drawRoundRect(border, 5, 5, paintBlack);
+			canvas.drawRoundRect(border, 5 * dm.density, 5 * dm.density, paintBorder);
+			canvas.drawRoundRect(border, 5 * dm.density, 5 * dm.density, paintBlack);
 			List<RouteDirectionInfo> dir = routingHelper.getRouteDirections();
 			if(dir != null && directionInfo < dir.size() && directionInfo >= 0){
 				canvas.rotate(view.getRotate(), view.getCenterPointX(), view.getCenterPointY());
@@ -178,8 +178,8 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 				Location loc = routingHelper.getLocationFromRouteDirection(info);
 				int x = view.getRotatedMapXForPoint(loc.getLatitude(), loc.getLongitude());
 				int y = view.getRotatedMapYForPoint(loc.getLatitude(), loc.getLongitude());
-				canvas.drawCircle(x, y, 5, paintBorder);
-				canvas.drawCircle(x, y, 5, paintBlack);
+				canvas.drawCircle(x, y, 5 * dm.density, paintBorder);
+				canvas.drawCircle(x, y, 5 * dm.density, paintBlack);
 				
 				if (textView.getText().length() > 0) {
 					canvas.translate(x - textView.getWidth() / 2, y - textView.getHeight() - 12);
