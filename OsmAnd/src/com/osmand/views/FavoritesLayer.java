@@ -11,7 +11,9 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Paint.Style;
+import android.util.DisplayMetrics;
 import android.util.FloatMath;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.osmand.R;
@@ -36,20 +38,24 @@ public class FavoritesLayer implements OsmandMapLayer {
 	private Matrix matrix;
 	private Paint paintBlack;
 	private final MapActivity activity;
+	private DisplayMetrics dm;
 	
 	
 	public FavoritesLayer(MapActivity activity){
 		this.activity = activity;
 	}
 	
+	
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-
+		dm = new DisplayMetrics();
+		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
+		wmgr.getDefaultDisplay().getMetrics(dm);
 		path = new Path();
 		pathDst = new Path();
-		int coef1 = radius;
-		int coef2 = radius/2;
+		int coef1 = (int) (radius * dm.density);
+		int coef2 = (int) (radius * dm.density/2);
 		float a = (float) (Math.PI/ 5);
 		path.moveTo(FloatMath.sin(0)*coef1, -FloatMath.cos(0)*coef1);
 		for (int j = 1; j < 10; j++) {
@@ -130,7 +136,7 @@ public class FavoritesLayer implements OsmandMapLayer {
 	
 	public FavouritePoint getFavoriteFromPoint(PointF point){
 		FavouritePoint result = null;
-		int r = radius;
+		float r = radius * dm.density;
 		if (favouritePoints != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;

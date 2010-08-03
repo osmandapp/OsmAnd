@@ -18,9 +18,13 @@ public class ToDoConstants {
 	// TODO BUGS Android
 	// !! 3. different screens better support
 	///   3.1 after search_address_online.xml (+)
-	//    3.2 Fix all layers, route_info_list_item.xml, main.xml
-	//    3.3 Fix map zoom by default map (in 1.5 for high density)
-	//    4. Icon back to location
+	//    3.2 Fix all layers (MapInfoLayer, RouteInfoLayer!)
+	//			FavoritesLayer, OsmBugsLayer,  POIMapLayer, TransportInfoLayer, TransportStopsLayer (+)
+	// 			PointLocationLayer, PointNavigationLayer, YandexTrafficLayer 
+	//    3.3 route_info_list_item.xml - ShowRouteInfoActivity, main.xml
+	//    3.4 Fix map zoom by default map (in 1.5 for high density) OsmandMapTileView
+	//    3.5 Touch distance events : MultiTouchSupport, AnimateDraggingMapThread (? timeMove)
+	//    4. Icon back to location (+)
 	
 	// Improvements
 	// ! Download with wget

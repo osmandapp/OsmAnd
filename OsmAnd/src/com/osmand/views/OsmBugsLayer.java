@@ -28,8 +28,10 @@ import android.graphics.RectF;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -61,6 +63,7 @@ public class OsmBugsLayer implements OsmandMapLayer {
 	private double cRightLongitude;
 	private int czoom;
 	private final Activity activity;
+	private DisplayMetrics dm;
 	
 	public OsmBugsLayer(Activity activity){
 		this.activity = activity;
@@ -70,6 +73,9 @@ public class OsmBugsLayer implements OsmandMapLayer {
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
+		dm = new DisplayMetrics();
+		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
+		wmgr.getDefaultDisplay().getMetrics(dm);
 		synchronized (this) {
 			if (handlerToLoop == null) {
 				new Thread("Open street bugs layer") { //$NON-NLS-1$
@@ -137,20 +143,22 @@ public class OsmBugsLayer implements OsmandMapLayer {
 		}
 	}
 	
-	public int getRadiusBug(int zoom){
-		if(zoom < startZoom){
-			return 0;
-		} else if(zoom <= 12){
-			return 8;
-		} else if(zoom <= 15){
-			return 10;
-		} else if(zoom == 16){
-			return 13;
-		} else if(zoom == 17){
-			return 15;
+	public int getRadiusBug(int zoom) {
+		int z;
+		if (zoom < startZoom) {
+			z = 0;
+		} else if (zoom <= 12) {
+			z = 8;
+		} else if (zoom <= 15) {
+			z = 10;
+		} else if (zoom == 16) {
+			z = 13;
+		} else if (zoom == 17) {
+			z = 15;
 		} else {
-			return 18;
+			z = 16;
 		}
+		return (int) (z * dm.density);
 	}
 	
 	public void requestToLoad(double topLatitude, double leftLongitude, double bottomLatitude,double rightLongitude, final int zoom){

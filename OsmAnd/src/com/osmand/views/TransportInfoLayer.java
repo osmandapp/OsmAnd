@@ -2,12 +2,15 @@ package com.osmand.views;
 
 import java.util.List;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.osmand.OsmandSettings;
@@ -19,8 +22,6 @@ import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 
 public class TransportInfoLayer implements OsmandMapLayer {
-
-
 	
 	private final TransportRouteHelper routeHelper;
 	private Rect pixRect;
@@ -29,6 +30,7 @@ public class TransportInfoLayer implements OsmandMapLayer {
 	private Paint paintInt;
 	private Paint paintEnd;
 	private boolean visible = true;
+	private DisplayMetrics dm;
 	
 	public TransportInfoLayer(TransportRouteHelper routeHelper){
 		this.routeHelper = routeHelper;
@@ -38,6 +40,9 @@ public class TransportInfoLayer implements OsmandMapLayer {
 		this.view = view;
 		pixRect = new Rect();
 		tileRect = new RectF();
+		dm = new DisplayMetrics();
+		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
+		wmgr.getDefaultDisplay().getMetrics(dm);
 
 		paintInt = new Paint();
 		paintInt.setColor(Color.rgb(50, 200, 50));
@@ -54,6 +59,10 @@ public class TransportInfoLayer implements OsmandMapLayer {
 	}
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+	}
+	
+	public int getRadius(){
+		return (int) (dm.density * 8);
 	}
 
 	@Override
@@ -96,7 +105,7 @@ public class TransportInfoLayer implements OsmandMapLayer {
 								location.getLongitude() >= leftLongitude && location.getLongitude() <= rightLongitude){
 							int x = view.getRotatedMapXForPoint(location.getLatitude(), location.getLongitude());
 							int y = view.getRotatedMapYForPoint(location.getLatitude(), location.getLongitude());
-							canvas.drawRect(x - 8, y - 8, x + 8, y + 8, toShow);
+							canvas.drawRect(x - getRadius(), y - getRadius(), x + getRadius(), y + getRadius(), toShow);
 						}
 					}
 				}
@@ -144,7 +153,7 @@ public class TransportInfoLayer implements OsmandMapLayer {
 						LatLon location = st.getLocation();
 						int x = view.getRotatedMapXForPoint(location.getLatitude(), location.getLongitude());
 						int y = view.getRotatedMapYForPoint(location.getLatitude(), location.getLongitude());
-						if (Math.abs(x - ex) < 13 && Math.abs(y - ey) < 13) {
+						if (Math.abs(x - ex) < getRadius() * 3 /2 && Math.abs(y - ey) < getRadius() * 3 /2) {
 							Toast.makeText(view.getContext(), st.getName(OsmandSettings.usingEnglishNames(view.getContext())) + " : " + //$NON-NLS-1$
 									route.getType() + " " + route.getRef() //$NON-NLS-1$
 							, Toast.LENGTH_LONG).show();

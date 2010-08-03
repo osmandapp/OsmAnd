@@ -44,7 +44,8 @@ import com.osmand.osm.MapUtils;
  */
 public class SearchTransportActivity extends ListActivity {
 
-
+	public static final String LAT_KEY = "lat"; //$NON-NLS-1$
+	public static final String LON_KEY = "lon"; //$NON-NLS-1$
 
 	private Button searchTransportLevel;
 	
@@ -57,6 +58,7 @@ public class SearchTransportActivity extends ListActivity {
 	private int zoom = initialZoom;
 	private ProgressBar progress;
 	private Thread thread;
+	
 
 	// TODO test when these args null
 	private LatLon lastKnownMapLocation;
@@ -71,6 +73,12 @@ public class SearchTransportActivity extends ListActivity {
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
+		Bundle extras = getIntent().getExtras();
+		if(extras != null && extras.containsKey(LAT_KEY) && extras.containsKey(LON_KEY)){
+			lastKnownMapLocation = new LatLon(extras.getDouble(LAT_KEY), extras.getDouble(LON_KEY));
+		} else {
+			lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(this);
+		}
 		setContentView(R.layout.search_transport);
 		searchTransportLevel = (Button) findViewById(R.id.SearchPOILevelButton);
 		searchArea = (TextView) findViewById(R.id.SearchAreaText);
@@ -114,9 +122,7 @@ public class SearchTransportActivity extends ListActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if(!Algoritms.objectEquals(OsmandSettings.getLastKnownMapLocation(this), this.lastKnownMapLocation) ||
-				!Algoritms.objectEquals(OsmandSettings.getPointToNavigate(this), this.destinationLocation)){
-			lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(this);
+		if(!Algoritms.objectEquals(OsmandSettings.getPointToNavigate(this), this.destinationLocation)){
 			destinationLocation = OsmandSettings.getPointToNavigate(this);
 			searchTransport();			
 		}
