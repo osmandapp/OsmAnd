@@ -6,6 +6,8 @@
 
 <TextView android:id="@+id/TextView" android:textSize="16sp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:layout_marginTop="4dp" android:layout_marginBottom="4dp" android:text="@string/navigate_point_top_text"></TextView>
 
+<ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1">
+<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical">
 <TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:stretchColumns="1">
 <TableRow android:layout_width="fill_parent" >
 <TextView android:textSize="20sp"  android:id="@+id/TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5dp" android:text="@string/navigate_point_latitude"></TextView>
@@ -25,10 +27,12 @@
 
 
 <TextView android:id="@+id/ValidateTextView" android:textSize="16sp"  android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="" android:gravity="center" android:textColor="@color/color_red"></TextView>
+</LinearLayout>
+</ScrollView>
 
-<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:gravity="bottom|center">
+<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center">
     <Button android:layout_width="125dp" android:layout_height="wrap_content" android:id="@+id/ShowOnMap" android:text="@string/search_shown_on_map"></Button>
     <Button android:layout_width="125dp" android:layout_toRightOf="@id/ShowOnMap" 
     	android:layout_height="wrap_content" android:id="@+id/Cancel" android:text="@string/navigate_point_cancel" > </Button>
-</RelativeLayout>
+</LinearLayout>
 </LinearLayout>

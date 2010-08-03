@@ -4,8 +4,8 @@
 	android:orientation="horizontal">
 
 	<ImageView android:id="@+id/folder_icon" android:layout_width="25dip"
-		android:paddingLeft="2px" android:paddingRight="2px"
-		android:paddingTop="2px" android:layout_height="fill_parent" />
+		android:paddingLeft="2dp" android:paddingRight="2dp"
+		android:paddingTop="2dp" android:layout_height="fill_parent" />
 	<TextView android:id="@+id/folder_label" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:textSize="25sp" />
 </LinearLayout>

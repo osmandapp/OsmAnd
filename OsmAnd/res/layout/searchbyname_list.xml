@@ -3,5 +3,5 @@
 	android:layout_width="fill_parent" android:layout_height="wrap_content"
 	android:orientation="horizontal">
 	<TextView android:id="@+id/NameLabel" android:layout_width="fill_parent"
-		android:layout_height="fill_parent" android:textSize="22dp"/>
+		android:layout_height="fill_parent" android:textSize="22sp"/>
 </LinearLayout>

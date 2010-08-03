@@ -9,7 +9,7 @@
 	<string name="export_fav">Exportar</string>
 	<string name="error_occurred_loading_gpx">Ocurrió un error al cargar el gpx</string>
 	<string name="send_report">Enviar reporte</string>
-	<string name="none_region_found">No se encontrró región en la tarjeta SD.  Intente descargarla de Internet.</string>
+	<string name="none_region_found">No se encontró región en la tarjeta SD.  Intente descargarla de Internet.</string>
 	<string name="poi_namefinder_query_empty">Ingrese información para encontrar el POI</string>
 	<string name="any_poi">Cualquiera</string>
 	<string name="layer_transport_route">Ruta de transporte</string>
@@ -35,7 +35,7 @@
 	<string name="network_provider">Red</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">segundos</string>
-	<string name="int_min">mín.</string>
+	<string name="int_min">min.</string>
 	<string name="background_service_int_descr">Elegir intervalo para determinar la posición del servicio de localización en background</string>
 	<string name="background_service_int">Intervalo de posicionamiento</string>
 	<string name="background_service_provider_descr">Elija el proveedor de localización para el servicio en background</string>
@@ -71,7 +71,7 @@
 	<string name="route_head">Cabecera</string>
 	<string name="first_time_continue">Continuar</string>
 	<string name="first_time_download">Descargar índices</string>
-	<string name="first_time_msg">Gracias por descargar OsmAnd. \nPara poder  usar todas las características de la aplicación requiere los archivos índices, que puede descargar(Opciones/Datos) o preparalos usted mismo.  Después de eso puede usar: búsqueda por dirección, POI, transporte.</string>
+	<string name="first_time_msg">Gracias por descargar OsmAnd. \nPara poder  usar todas las características de la aplicación requiere los archivos índices, que puede descargar(Opciones/Datos) o prepararlos usted mismo.  Después de eso puede usar: búsqueda por dirección, POI, transporte.</string>
 	<string name="search_poi_location">Buscando señal...</string>
 	<string name="search_near_map">Buscar cerca a la última localización</string>
 	<string name="search_nearby">Sitios cercanos</string>
@@ -100,7 +100,7 @@
 	<string name="default_buttons_ok">Aceptar</string>
 	<string name="show_transport_over_map_description">Mostrar paradas de transporte público en el mapa</string>
 	<string name="show_transport_over_map">Mostrar paradas de transporte</string>
-	<string name="hello">Aplicación de navigación OsmAnd</string>
+	<string name="hello">Aplicación de navegación OsmAnd</string>
 	<string name="update_poi_success">Los POI se actualizaron exitosamente (se cargaron {0})</string>
 	<string name="update_poi_error_local">Error al actualizar índices locales</string>
 	<string name="update_poi_error_loading">Error durante la descarga de datos del servidor</string>
@@ -186,7 +186,7 @@ Ver osmand.googlecode.com.</string>
     <string name="reload_indexes_descr">Recargar los índices de la SD</string>
     <string name="reload_indexes">Recargar índices</string>
     <string name="download_indexes_descr">Descargar índices de internet</string>
-    <string name="download_indexes">Descargar indexes</string>
+    <string name="download_indexes">Descargar índices</string>
     <string name="use_online_routing_descr">Usar internet para calcular la ruta</string>
     <string name="use_online_routing">Usar rutas en línea</string>
     <string name="user_password_descr">Ingrese la clave osm</string>
@@ -213,7 +213,7 @@ Ver osmand.googlecode.com.</string>
     <string name="navigate_to">Navegar a</string>
     <string name="update_tile">Actualizar mapa</string>
     <string name="reload_tile">Recargar imagen</string>
-    <string name="user_name_descr">Ingrese usario de osm</string>
+    <string name="user_name_descr">Ingrese usuario de osm</string>
     <string name="user_name">Nombre de usuario</string>
     <string name="mark_point">Objetivo</string>
     <string name="show_osm_bugs_descr">Mostrar fallos de osm en  el mapa</string>
@@ -249,7 +249,7 @@ Ver osmand.googlecode.com.</string>
     <string name="map_preferences">Mapa</string>
     <string name="settings_activity">Preferencias</string>
     <string name="show_gps_coordinates_text">Mostrar coordenadas GPS en el mapa</string>
-    <string name="use_internet_to_download_tile">Usar internet para descargar las imágenes faaltantes</string>
+    <string name="use_internet_to_download_tile">Usar internet para descargar las imágenes faltantes</string>
     <string name="app_name">OsmAnd</string>
     <string name="app_description">Aplicación de navegación</string>
 
@@ -266,10 +266,10 @@ Ver osmand.googlecode.com.</string>
 <string name="search_POI_level_btn">Encontrar más</string>
 <string name="incremental_search_city">Buscar ciudad incrementalmente. Para encontrar villas/códigos postales ingrese por lo menos los 3 primeros símbolos.</string>
 <string name="incremental_search_street">Buscar calle incrementalmente</string>
-<string name="incremental_search_building">Search building incrementally</string>
+<string name="incremental_search_building">Buscar edificio incrementalmente</string>
 <string name="choose_available_region">Elegir región de lista</string>
-<string name="choose_intersected_street">Eleegir calle intersectada</string>
-<string name="Closest_Amenities">Locaciones cercanas</string>
+<string name="choose_intersected_street">Elegir calle intersecta</string>
+<string name="Closest_Amenities">Sitios cercanos</string>
 <string name="app_mode_default">Predeterminado</string>
 <string name="app_mode_car">Auto</string>
 <string name="app_mode_bicycle">Bicicleta</string>
@@ -297,7 +297,7 @@ Ver osmand.googlecode.com.</string>
 <string name="search_address_street">Calle</string>
 <string name="search_address_building">Edificio</string>
 <string name="search_address_building_option">Edificio</string>
-<string name="search_address_street_option">Calle intersectada</string>
+<string name="search_address_street_option">Calle intersecta</string>
 
 <string name="search_tabs_location">Lugar</string>
 
@@ -311,7 +311,7 @@ Ver osmand.googlecode.com.</string>
 <string name="default_buttons_cancel">Cancelar</string>
 <string name="default_buttons_apply">Aplicar</string><string name="default_buttons_add">Añadir</string><string name="default_buttons_no">No</string><string name="add_favorite_dialog_top_text">Ingresar nombre de punto favorito</string>
 <string name="add_favorite_dialog_default_favourite_name">Favorito</string>
-<string name="add_favorite_dialog_favourite_added_template">Punto favorito \'\'{0}\'\' adicionado exitósamente.</string>
+<string name="add_favorite_dialog_favourite_added_template">Punto favorito \'\'{0}\'\' adicionado exitosamente.</string>
 
 <string name="favourites_context_menu_title">Menú contextual</string>
 <string name="favourites_context_menu_navigate">Navegar a</string>
@@ -320,20 +320,20 @@ Ver osmand.googlecode.com.</string>
 <string name="favourites_edit_dialog_title">Ingrese nombre de punto favorito</string>
 
 <string name="favourites_remove_dialog_title">Confirma que desea borrar punto favorito?</string>
-<string name="favourites_remove_dialog_success">El punto favorito {0} se borró exitósamente.</string>
+<string name="favourites_remove_dialog_success">El punto favorito {0} se borró exitosamente.</string>
 
 <string name="osb_add_dialog_title">Ingrese un texto para el reporte de fallo</string>
-<string name="osb_add_dialog_success">El reporte de fallo fue creado exitósamente</string>
+<string name="osb_add_dialog_success">El reporte de fallo fue creado exitosamente</string>
 <string name="osb_add_dialog_error">Ocurrió una excepción : el reporte de fallo no se creo</string>
 <string name="osb_comment_dialog_title">Adicionar comentario al reporte</string>
 <string name="osb_comment_dialog_add_button">Adicionar comentario</string>
-<string name="osb_comment_dialog_success">Se añadió exitósamente el comentario</string>
-<string name="osb_comment_dialog_error">Ocurrió una excepción : No se añadó el comentario</string>
+<string name="osb_comment_dialog_success">Se añadió exitosamente el comentario</string>
+<string name="osb_comment_dialog_error">Ocurrió una excepción : No se añadió el comentario</string>
 <string name="osb_close_dialog_title">Cerrando reporte de fallo</string>
 <string name="osb_close_dialog_close_button">Cerrar fallo</string>
-<string name="osb_close_dialog_success">Se añadió exitósamente el reporte de fallo</string>
+<string name="osb_close_dialog_success">Se añadió exitosamente el reporte de fallo</string>
 <string name="osb_close_dialog_error">Ocurrió una excepción : El reporte de fallo no se cerró</string>
-<string name="osb_comment_menu_item">Adicionar coomentario</string>
+<string name="osb_comment_menu_item">Adicionar comentario</string>
 <string name="osb_close_menu_item">Cerrar reporte de fallo</string>
 <string name="osb_comment_dialog_message">Mensaje</string>
 <string name="osb_comment_dialog_author">Nombre de Autor</string>
@@ -343,12 +343,12 @@ Ver osmand.googlecode.com.</string>
 <string name="poi_remove_confirm_template">Confirma que desea borrar {0} (ingresar comentario) ?</string>
 <string name="poi_remove_title">Borrar POI</string>
 <string name="default_buttons_delete">Borrar</string>
-<string name="poi_remove_success">El POI se eliminó exitósamente</string>
+<string name="poi_remove_success">El POI se eliminó exitosamente</string>
 <string name="poi_action_add">añadir</string>
 <string name="poi_action_change">cambiar</string>
-<string name="poi_action_succeded_template">Se completó exitósamente la acción {0}.</string>
+<string name="poi_action_succeded_template">Se completó exitosamente la acción {0}.</string>
 <string name="poi_error_unexpected_template">Error inesperado al ejecutar la acción {0}.</string>
-<string name="poi_error_io_error_template">Error de lectura/escrittura en la acción {0}.</string>
+<string name="poi_error_io_error_template">Error de lectura/escritura en la acción {0}.</string>
 
 <string name="poi_error_info_not_loaded">No se cargó la información del nodo</string>
 
@@ -364,7 +364,7 @@ Ver osmand.googlecode.com.</string>
 <string name="filter_current_poiButton">Filtro</string>
 <string name="edit_filter_delete_menu_item">Borrar</string>
 <string name="edit_filter_save_as_menu_item">Guardar como</string>
-<string name="edit_filter_delete_dialog_title">¿Confirma borrado del filto seleccionado?</string>
+<string name="edit_filter_delete_dialog_title">¿Confirma borrado del filtro seleccionado?</string>
 <string name="edit_filter_delete_message">Se eliminó el filtro {0}</string>
 <string name="edit_filter_create_message">Se creó el filtro {0}</string>
 <string name="default_buttons_selectall">Seleccionar todo</string>
