@@ -2,6 +2,7 @@ package com.osmand.views;
 
 import java.util.List;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,8 +12,10 @@ import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.location.Location;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,7 +28,8 @@ import com.osmand.activities.RoutingHelper.RouteDirectionInfo;
 
 public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener {
 
-	private final int TEXT_SIZE = 150;
+	private static final int BASE_TEXT_SIZE = 150;
+	private int textSize = BASE_TEXT_SIZE;
 
 	private OsmandMapTileView view;
 	private final RoutingHelper routingHelper;
@@ -43,6 +47,8 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 	private TextView textView;
 
 	private Paint paintLightBorder;
+
+	private DisplayMetrics dm;
 	
 	public RouteInfoLayer(RoutingHelper routingHelper, LinearLayout layout){
 		this.routingHelper = routingHelper;
@@ -67,7 +73,7 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 						Location l = routingHelper.getLocationFromRouteDirection(info);
 						if(info.descriptionRoute != null){
 							textView.setText(info.descriptionRoute);
-							textView.layout(0, 0, TEXT_SIZE, (int) ((textView.getPaint().getTextSize()+4) * textView.getLineCount()));
+							textView.layout(0, 0, textSize, (int) ((textView.getPaint().getTextSize()+4) * textView.getLineCount()));
 						}
 						view.getAnimatedDraggingThread().startMoving(view.getLatitude(), view.getLongitude(),
 								l.getLatitude(), l.getLongitude(),
@@ -89,7 +95,7 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 					Location l = routingHelper.getLocationFromRouteDirection(info);
 					if(info.descriptionRoute != null){
 						textView.setText(info.descriptionRoute);
-						textView.layout(0, 0, TEXT_SIZE, (int) ((textView.getPaint().getTextSize() + 4) * textView.getLineCount()));
+						textView.layout(0, 0, textSize, (int) ((textView.getPaint().getTextSize() + 4) * textView.getLineCount()));
 					}
 					view.getAnimatedDraggingThread().startMoving(view.getLatitude(), view.getLongitude(),
 							l.getLatitude(), l.getLongitude(),
@@ -128,6 +134,11 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
+		dm = new DisplayMetrics();
+		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
+		wmgr.getDefaultDisplay().getMetrics(dm);
+		textSize = (int) (BASE_TEXT_SIZE * dm.density);
+		
 		uiHandler = new Handler();
 		border = new RectF();
 		paintBorder = new Paint();
@@ -142,20 +153,21 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 		paintBlack.setAntiAlias(true);
 		
 		textView = new TextView(view.getContext());
-		LayoutParams lp = new LayoutParams(TEXT_SIZE, LayoutParams.WRAP_CONTENT);
+		LayoutParams lp = new LayoutParams(textSize, LayoutParams.WRAP_CONTENT);
 		textView.setLayoutParams(lp);
 		textView.setTextSize(16);
 		textView.setTextColor(Color.argb(255, 0, 0, 0));
 		textView.setMinLines(1);
 		textView.setMaxLines(4);
 		textView.setGravity(Gravity.CENTER_HORIZONTAL);
-		textBorder = new RectF(-2, -1, TEXT_SIZE + 2, 0);
+		textBorder = new RectF(-2, -1, textSize + 2, 0);
 	}
 
 	@Override
 	public void onDraw(Canvas canvas) {
 		if(isVisible()){
-			border.set(layout.getLeft() - 10, layout.getTop() - 3, layout.getRight() - 8, layout.getBottom() + 3);
+			border.set(layout.getLeft() - 10 * dm.density, layout.getTop() - 4 * dm.density, 
+					layout.getRight() - 5 * dm.density, layout.getBottom() + 4 * dm.density);
 			canvas.drawRoundRect(border, 5, 5, paintBorder);
 			canvas.drawRoundRect(border, 5, 5, paintBlack);
 			List<RouteDirectionInfo> dir = routingHelper.getRouteDirections();
@@ -178,7 +190,7 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 					textView.draw(canvas);
 					if (c == 0) {
 						// special case relayout after on draw method
-						textView.layout(0, 0, TEXT_SIZE, (int) ((textView.getPaint().getTextSize() + 4) * textView.getLineCount()));
+						textView.layout(0, 0, textSize, (int) ((textView.getPaint().getTextSize() + 4) * textView.getLineCount()));
 						view.refreshMap();
 					}
 				}
