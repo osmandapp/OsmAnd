@@ -76,8 +76,8 @@ public class VoiceRouter {
 		}
 		RouteDirectionInfo next = router.getNextRouteDirectionInfo();
 		int dist = router.getDistanceToNextRouteDirection();
-		if((next == null || next.distance == 0) && currentDirection > 0) {
-			if(currentStatus == 0){
+		if(next == null || next.distance == 0) {
+			if(currentStatus == 0 && currentDirection > 0){
 				CommandBuilder play = getNewCommandPlayerToPlay();
 				if(play != null){
 					play.goAhead(router.getLeftDistance()).andArriveAtDestination().play();

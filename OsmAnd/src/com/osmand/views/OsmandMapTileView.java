@@ -210,12 +210,14 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	/////////////////////////// NON UI PART (could be extracted in common) /////////////////////////////
 	public float getTileSize() {
-		int tileSize = map == null ? 256 : map.getTileSize();
-		if(zoom == (int) zoom){
-			return tileSize; 
+		float res = map == null ? 256 : map.getTileSize();
+		if(zoom != (int) zoom){
+			res *= (float) Math.pow(2, zoom - (int) zoom);  
 		}
-		float m = (float) Math.pow(2, zoom - (int) zoom);
-		return m * tileSize;
+		if(dm != null && dm.density > 1f){
+			res *= dm.density;
+		}
+		return res;
 	}
 	
 	public int getSourceTileSize() {
@@ -491,13 +493,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 									canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
 								}
 							} else {
-								if(zoom - nzoom != 0){
-									bitmapToZoom.set(0, 0, map.getTileSize(), map.getTileSize());
-									bitmapToDraw.set(x1, y1, x1 + ftileSize, y1 + ftileSize);
-									canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
-								} else {
-									canvas.drawBitmap(bmp, x1, y1, paintBitmap);
-								}
+								bitmapToZoom.set(0, 0, map.getTileSize(), map.getTileSize());
+								bitmapToDraw.set(x1, y1, x1 + ftileSize, y1 + ftileSize);
+								canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
 							}
 						}
 					}

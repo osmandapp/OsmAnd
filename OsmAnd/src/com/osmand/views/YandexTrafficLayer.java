@@ -46,6 +46,9 @@ public class YandexTrafficLayer implements OsmandMapLayer {
 	private static final Log log = LogUtil.getLog(YandexTrafficLayer.class);
 	
 	private Map<String, Bitmap> tiles = new LinkedHashMap<String, Bitmap>();
+	
+	private Rect srcImageRect = new Rect(0, 0, 256, 256);
+	private RectF dstImageRect = new RectF();
 	 
 	protected int cMinX;
 	protected int cMaxX;
@@ -222,8 +225,11 @@ public class YandexTrafficLayer implements OsmandMapLayer {
 				for (int j = (int) tileRect.top; j <= bottom; j++) {
 					String tId = calculateTileId(i, j, view.getZoom());
 					if (tiles.get(tId) != null) {
-						canvas.drawBitmap(tiles.get(tId), x + (i - (int) tileRect.left) * view.getTileSize(), y + (j - (int) tileRect.top)
-								* view.getTileSize(), paint);
+						dstImageRect.top = y + (j - (int) tileRect.top) * view.getTileSize();
+						dstImageRect.left = x + (i - (int) tileRect.left) * view.getTileSize();
+						dstImageRect.bottom = dstImageRect.top + view.getTileSize();
+						dstImageRect.right = dstImageRect.left + view.getTileSize();
+						canvas.drawBitmap(tiles.get(tId), srcImageRect, dstImageRect, paint);
 					}
 				}
 			}
