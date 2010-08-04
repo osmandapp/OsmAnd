@@ -14,24 +14,17 @@ public class ToDoConstants {
  	// !! 10. Improve address indexing (use relations). (?) // SLOBODSKAYA 157, 95
     //	  use relation "a6" (to accumulate streets!),  "a3" to read all cities & define boundaries for city (& define that street in city). 
 	
-	// TODO max 85
+	// TODO max 86
 	//  ! 81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
 	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?),
 	//  railway( station, subway?) - issue 17
 	//    82. Rotate map according compass
+	//    85. Remove context menu on long press map ! Accumulate actions and show label. 
 
 	// TODO BUGS Android
 	// !! 3. different screens better support
-	///   3.1 after search_address_online.xml (+)
-	//    3.2 Fix all layers (RouteInfoLayer+!
-	//			FavoritesLayer, OsmBugsLayer,  POIMapLayer, TransportInfoLayer, TransportStopsLayer (+)
-	// 			PointLocationLayer, PointNavigationLayer, YandexTrafficLayer(+) 
-	//    3.3  route_info_list_item.xml, ShowRouteInfoActivity, main.xml (+)
-	//    3.4 MapInfoLayer (+)
-	//    3.5 Touch distance events : MultiTouchSupport, AnimateDraggingMapThread (? timeMove) (+)
-	
-	//    3.6 Fix map zoom by default map (in 1.5 for high density) OsmandMapTileView
-	//    4. Icon back to location (+)
+	//    	 Fix map zoom by default map (in 1.5 for high density) OsmandMapTileView (+)
+
 	
 	// Improvements
 	// ! Download with wget
