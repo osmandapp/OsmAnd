@@ -192,7 +192,7 @@ public class AmenityIndexRepository extends BaseLocationIndexRepository<Amenity>
 			final List<Entity> amen = new ArrayList<Entity>();
 			st.getFilters().add(new IOsmStorageFilter(){
 				@Override
-				public boolean acceptEntityToLoad(OsmBaseStorage storage, Entity entity) {
+				public boolean acceptEntityToLoad(OsmBaseStorage storage, Entity.EntityId id, Entity entity) {
 					if(Amenity.isAmenity(entity)){
 						amen.add(entity);
 						return true;

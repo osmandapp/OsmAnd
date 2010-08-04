@@ -11,8 +11,8 @@ public class ToDoConstants {
 	// TODO swing
 	// 9. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !
 	// Current result : for big file (1 - task  60-80% time, 90% memory) (?)
- 	// !! 10. Improve address indexing (use relations). (?) // SLOBODSKAYA 157, 95
-    //	  use relation "a6" (to accumulate streets!),  "a3" to read all cities & define boundaries for city (& define that street in city). 
+ 	// !! 10. Improve address indexing (use relations). (+)
+    //	  use relation "a6" (to accumulate streets!),  "a3" to read all cities & define boundaries for city (& define that street in city).  
 	
 	// TODO max 86
 	//  ! 81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
@@ -22,7 +22,7 @@ public class ToDoConstants {
 	//    85. Remove context menu on long press map ! Accumulate actions and show label. 
 
 	// TODO BUGS Android
-	// !! 3. different screens better support
+	// !! 3. different screens better support (+)
 	//    	 Fix map zoom by default map (in 1.5 for high density) OsmandMapTileView (+)
 
 	

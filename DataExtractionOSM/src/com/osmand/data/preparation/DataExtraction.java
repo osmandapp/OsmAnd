@@ -106,7 +106,16 @@ public class DataExtraction  {
 	private File workingDir = null;
 
 	
-
+	// TODO : type=address
+	//        address:a6=name_street
+	//        address:type=a6
+	// is_in..., label...
+	
+	// TODO     <member type="relation" ref="81833" role="is_in"/>
+//    <member type="way" ref="25426285" role="border"/>
+//    <tag k="address:house" v="13"/>
+//    <tag k="address:type" v="house"/>
+//    <tag k="type" v="address"/>
 	
 	
 	public DataExtraction(boolean indexAddress, boolean indexPOI, boolean indexTransport, boolean normalizeStreets, 
@@ -124,15 +133,18 @@ public class DataExtraction  {
 	
 	protected class DataExtractionOsmFilter implements IOsmStorageFilter {
 		ArrayList<Node> places = new ArrayList<Node>();
-		ArrayList<Entity> buildings = new ArrayList<Entity>();
 		ArrayList<Entity> amenities = new ArrayList<Entity>();
-		ArrayList<Way> ways = new ArrayList<Way>();
+		
+		Map<EntityId, Relation> addressRelations = new LinkedHashMap<EntityId, Relation>();
+		Map<EntityId, Way> ways = new LinkedHashMap<EntityId, Way>();
+		Map<EntityId, Entity> buildings = new LinkedHashMap<EntityId, Entity>();
+		
 		ArrayList<Relation> transport = new ArrayList<Relation>();
 		Map<EntityId, String> postalCodes = new LinkedHashMap<EntityId, String>();
 
 		
 		private Connection conn;
-		
+//		
 		private boolean preloadRelationAndWaysIntoDB = false; 
 		private boolean createWholeOsmDB = false;
 		
@@ -160,13 +172,18 @@ public class DataExtraction  {
 		public ArrayList<Node> getPlaces() {
 			return places;
 		}
-		public ArrayList<Entity> getBuildings() {
+		public Map<EntityId, Entity> getBuildings() {
 			return buildings;
 		}
 		public ArrayList<Entity> getAmenities() {
 			return amenities;
 		}
-		public ArrayList<Way> getWays() {
+		
+		public Map<EntityId, Relation> getAddressRelations() {
+			return addressRelations;
+		}
+		
+		public Map<EntityId, Way> getWays() {
 			return ways;
 		}
 		public ArrayList<Relation> getTransport() {
@@ -217,7 +234,7 @@ public class DataExtraction  {
 			prepWays = conn.prepareStatement("insert into ways values (?, ?);");
 			prepRelations = conn.prepareStatement("insert into relations values (?, ?, ?, ?);");
 			prepTags = conn.prepareStatement("insert into tags values (?, ?, ?, ?);");
-			preloadRelationAndWaysIntoDB = indexTransport;
+			preloadRelationAndWaysIntoDB = indexTransport || indexAddress;
 			conn.setAutoCommit(false);
 		}
 
@@ -316,16 +333,8 @@ public class DataExtraction  {
 		}
 
 		@Override
-		public boolean acceptEntityToLoad(OsmBaseStorage storage, Entity e) {
+		public boolean acceptEntityToLoad(OsmBaseStorage storage, EntityId entityId, Entity e) {
 			boolean processed = false;
-			if (indexAddress) {
-				if ("yes".equals(e.getTag(OSMTagKey.BUILDING))) {
-					if (e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER) != null && e.getTag(OSMTagKey.ADDR_STREET) != null) {
-						buildings.add(e);
-						processed = true;
-					}
-				}
-			}
 			if (indexPOI && Amenity.isAmenity(e)) {
 				amenities.add(e);
 				processed = true;
@@ -335,19 +344,31 @@ public class DataExtraction  {
 				processed = true;
 			}
 			if (indexAddress) {
+				if ("yes".equals(e.getTag(OSMTagKey.BUILDING))) {
+					if (e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER) != null/*&& e.getTag(OSMTagKey.ADDR_STREET) != null*/) {
+						buildings.put(entityId, e);
+						processed = true;
+					}
+				}
 				// suppose that streets are way for car
 				if (e instanceof Way && OSMSettings.wayForCar(e.getTag(OSMTagKey.HIGHWAY)) && e.getTag(OSMTagKey.NAME) != null) {
-					ways.add((Way) e);
+					ways.put(entityId, (Way) e);
 					processed = true;
 				}
 				if(e instanceof Relation){
+					// do not need to mark processed
 					if(e.getTag(OSMTagKey.POSTAL_CODE) != null){
 						String tag = e.getTag(OSMTagKey.POSTAL_CODE);
 						for(EntityId l : ((Relation)e).getMemberIds()){
 							postalCodes.put(l, tag);
 						}
 					}
-					// do not need to mark processed
+					
+					if("address".equals(e.getTag(OSMTagKey.TYPE))){
+						addressRelations.put(entityId, (Relation) e);
+						processed = true;
+					}
+
 				}
 			}
 			if(indexTransport){
@@ -398,7 +419,7 @@ public class DataExtraction  {
 							prepRelations.setLong(2, i.getKey().getId());
 							prepRelations.setLong(3, i.getKey().getType().ordinal());
 							prepRelations.setString(4, i.getValue());
-							prepWays.addBatch();
+							prepRelations.addBatch();
 						}
 						if (currentRelationsCount >= BATCH_SIZE) {
 							prepRelations.executeBatch();
@@ -457,11 +478,12 @@ public class DataExtraction  {
         DataExtractionOsmFilter filter = new DataExtractionOsmFilter(regionName);
 		// data to load & index
 		final ArrayList<Node> places = filter.getPlaces();
-		final ArrayList<Entity> buildings = filter.getBuildings();
+		final Map<EntityId, Entity> buildings = filter.getBuildings();
+		final Map<EntityId, Way> ways = filter.getWays();
 		final ArrayList<Entity> amenities = filter.getAmenities();
-		final ArrayList<Way> ways = filter.getWays();
 		final ArrayList<Relation> transport = filter.getTransport();
-		Map<EntityId, String> postalCodes = filter.getPostalCodes();
+		final Map<EntityId, Relation> addressRelations = filter.getAddressRelations();
+		final Map<EntityId, String> postalCodes = filter.getPostalCodes();
         storage.getFilters().add(filter);
         // 0. Loading osm file
 
@@ -503,11 +525,15 @@ public class DataExtraction  {
         // 3. Reading cities
 		progress.setGeneralProgress("[65 of 100]");
         progress.startTask("Indexing cities...", -1);
-        readingCities(places, country);
+        LinkedHashMap<EntityId, City> registeredCities = new LinkedHashMap<EntityId, City>();
+        readingCities(places, country, registeredCities);
 
         if (indexAddress) {
-			// 4. Reading streets
         	progress.setGeneralProgress("[80 of 100]");
+        	// 4.1 Reading address relations & remove read streets/buildings
+        	readingAddresses(progress, addressRelations, registeredCities, ways, buildings, postalCodes, country);
+        	
+			// 4. Reading streets
 			readingStreets(progress, ways, country);
 
 			// 5. reading buildings
@@ -570,10 +596,10 @@ public class DataExtraction  {
 	}
 
 
-	private void readingBuildings(IProgress progress, final ArrayList<Entity> buildings, Region country, Map<EntityId, String> postalCodes) {
+	private void readingBuildings(IProgress progress, final Map<EntityId, Entity> buildings, Region country, Map<EntityId, String> postalCodes) {
 		// found buildings (index addresses)
         progress.startTask("Indexing buildings...", buildings.size());
-        for(Entity b : buildings){
+        for(Entity b : buildings.values()){
         	LatLon center = b.getLatLon();
         	progress.progress(1);
         	// TODO first of all tag could be checked NodeUtil.getTag(e, "addr:city")
@@ -584,27 +610,140 @@ public class DataExtraction  {
 				if(city == null){
 					Node n = new Node(center.getLatitude(), center.getLongitude(), -1);
 					n.putTag(OSMTagKey.PLACE.getValue(), CityType.TOWN.name());
-					n.putTag(OSMTagKey.NAME.getValue(), "Uknown city");
+					n.putTag(OSMTagKey.NAME.getValue(), "Unknown city");
 					country.registerCity(n);
 					city = country.getClosestCity(center);
 				}
 				if (city != null) {
 					Building building = city.registerBuilding(b);
-					EntityId i = building.getEntityId();
-					if(postalCodes.containsKey(i) ){
-						building.setPostcode(postalCodes.get(i));
+					if (building != null) {
+						EntityId i = building.getEntityId();
+						if (postalCodes.containsKey(i)) {
+							building.setPostcode(postalCodes.get(i));
+						}
 					}
 				}
 			}
         }
         progress.finishTask();
 	}
+	
+	private void readingAddresses(IProgress progress, Map<EntityId, Relation> addressRelations, Map<EntityId, City> cities,
+			Map<EntityId, Way> ways,  Map<EntityId, Entity> buildings,
+			Map<EntityId, String> postalCodes, Region country) {
+		progress.startTask("Indexing addresses...", addressRelations.size());
+		for(Relation i : addressRelations.values()){
+			progress.progress(1);
+			String type = i.getTag(OSMTagKey.ADDRESS_TYPE);
+			
+			boolean house = "house".equals(type);
+			boolean street = "a6".equals(type);
+			if(house || street){
+				// try to find appropriate city/street
+				City c = null;
+				
+				Collection<Entity> members = i.getMembers("is_in");
+				Relation a3 = null;
+				Relation a6 = null;
+				if(!members.isEmpty()){
+					if(street){
+						a6 = i;
+					}
+					Entity in = members.iterator().next();
+					if(in instanceof Relation){
+						// go one level up for house
+						if(house){
+							a6 = (Relation) in;
+							members = ((Relation)in).getMembers("is_in");
+							if(!members.isEmpty()){
+								in = members.iterator().next();
+								if(in instanceof Relation){
+									a3 = (Relation) in;
+								}
+							}
+							
+						} else {
+							a3 = (Relation) in;
+						}
+					}
+				}
+				
+				if(a3 != null){
+					Collection<EntityId> memberIds = a3.getMemberIds("label");
+					if(!memberIds.isEmpty()){
+						c = cities.get(memberIds.iterator().next());
+					}
+				}
+				if(c != null && a6 != null){
+					String name = a6.getTag(OSMTagKey.NAME);
+					
+					if(name != null){
+						Street s = c.registerStreet(name);
+						if(street){
+						for (Map.Entry<Entity, String> r : i.getMemberEntities().entrySet()) {
+								if ("street".equals(r.getValue())) {
+									if (r.getKey() instanceof Way) {
+										s.getWayNodes().add((Way) r.getKey());
+										ways.remove(EntityId.valueOf(r.getKey()));
+									}
+								} else if ("house".equals(r.getValue())) {
+									// will be registered further in other case
+									if (!(r.getKey() instanceof Relation)) {
+										EntityId id = EntityId.valueOf(r.getKey());
+										Building b = s.registerBuilding(r.getKey());
+										buildings.remove(id);
+										if (b != null) {
+											if (postalCodes.containsKey(id)) {
+												b.setPostcode(postalCodes.get(id));
+											}
+										}
+									}
+								}
+							}
+						} else {
+							String hno = i.getTag(OSMTagKey.ADDRESS_HOUSE);
+							if(hno == null){
+								hno = i.getTag(OSMTagKey.ADDR_HOUSE_NUMBER);
+							}
+							if(hno == null){
+								hno = i.getTag(OSMTagKey.NAME);
+							}
+							members = i.getMembers("border");
+							if(!members.isEmpty()){
+								Entity border = members.iterator().next();
+								if (border != null) {
+									EntityId id = EntityId.valueOf(border);
+									// special check that address do not contain twice in a3 - border and separate a6
+									if (!a6.getMemberIds().contains(id)) {
+										Building b = s.registerBuilding(border, hno);
+										if (b != null && postalCodes.containsKey(id)) {
+											b.setPostcode(postalCodes.get(id));
+										}
+										buildings.remove(id);
+									}
+								}
+							} else {
+								log.info("For relation " + i.getId() + " border not found");
+							}
+								
+							
+						}
+						
+						
+					} 
+				}
+			}
+			
+		}
+        progress.finishTask();
+	}
 
 
-	private void readingStreets(IProgress progress, final ArrayList<Way> ways, Region country) {
+
+	private void readingStreets(IProgress progress, final Map<EntityId, Way> ways, Region country) {
 		progress.startTask("Indexing streets...", ways.size());
         DataTileManager<Way> waysManager = new DataTileManager<Way>();
-        for (Way w : ways) {
+        for (Way w : ways.values()) {
         	progress.progress(1);
         	if (w.getTag(OSMTagKey.NAME) != null) {
         		String street = w.getTag(OSMTagKey.NAME);
@@ -783,13 +922,16 @@ public class DataExtraction  {
 	}
 
 	
-	public void readingCities(ArrayList<Node> places, Region country) {
+	public void readingCities(ArrayList<Node> places, Region country, Map<EntityId, City> citiesMap) {
 		for (Node s : places) {
 			String place = s.getTag(OSMTagKey.PLACE);
 			if (place == null) {
 				continue;
 			}
-			country.registerCity(s);
+			City city = country.registerCity(s);
+			if(city != null){
+				citiesMap.put(city.getEntityId(), city);
+			}
 		}
 	}
 	
@@ -904,7 +1046,7 @@ public class DataExtraction  {
 		
 		storage.getFilters().add(new IOsmStorageFilter(){
 			@Override
-			public boolean acceptEntityToLoad(OsmBaseStorage storage, Entity entity) {
+			public boolean acceptEntityToLoad(OsmBaseStorage storage, EntityId entityId, Entity entity) {
 				return false;
 			}
 		});

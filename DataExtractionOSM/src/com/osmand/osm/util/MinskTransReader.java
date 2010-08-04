@@ -227,7 +227,7 @@ public class MinskTransReader {
 		storage.getFilters().add(new IOsmStorageFilter(){
 
 			@Override
-			public boolean acceptEntityToLoad(OsmBaseStorage storage, Entity entity) {
+			public boolean acceptEntityToLoad(OsmBaseStorage storage, EntityId entityId, Entity entity) {
 				if(entity.getTag("route") != null){
 					String route = entity.getTag("route");
 					if(route.equals("bus") || route.equals("tram") || route.equals("trolleybus") || route.equals("subway")){

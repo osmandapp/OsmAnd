@@ -167,7 +167,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		
 	}
 	
-	public static void saveToXMLFiles(File dir, Map<String, List<List<TrkPt>>> data, Context ctx){
+	public static String saveToXMLFiles(File dir, Map<String, List<List<TrkPt>>> data, Context ctx){
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); //$NON-NLS-1$
 		try {
 			for (String f : data.keySet()) {
@@ -216,15 +216,14 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				serializer.endTag(null, "gpx"); //$NON-NLS-1$
 				serializer.flush();
 				serializer.endDocument();
-				
-				
 			}
+			return null;
 		} catch (RuntimeException e) {
 			log.error("Error saving gpx", e); //$NON-NLS-1$
-			Toast.makeText(ctx, ctx.getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_LONG).show();
+			return ctx.getString(R.string.error_occurred_saving_gpx);
 		} catch (IOException e) {
 			log.error("Error saving gpx", e); //$NON-NLS-1$
-			Toast.makeText(ctx, ctx.getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_LONG).show();
+			return ctx.getString(R.string.error_occurred_saving_gpx);
 		}
 	}
 	
@@ -240,8 +239,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		return false;
 	}
 	
-	public void saveDataToGpx(){
+	public List<String> saveDataToGpx(){
 		SQLiteDatabase db = getReadableDatabase();
+		List<String> warnings = new ArrayList<String>();
 		File file = Environment.getExternalStorageDirectory();
 		if(db != null && file.canWrite()){
 			file = new File(file, "/osmand/"+TRACKS_PATH); //$NON-NLS-1$
@@ -293,7 +293,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					} while (query.moveToNext());
 				}
 				query.close();
-				saveToXMLFiles(file, data, ctx);
+				String w = saveToXMLFiles(file, data, ctx);
+				if(w != null){
+					warnings.add(w);
+				}
 			}
 		}
 		
@@ -308,6 +311,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			// remove all from db
 			db.execSQL("DELETE FROM " + TRACK_NAME+ " WHERE " + TRACK_COL_DATE + " <= ?", new Object[]{System.currentTimeMillis()}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
+		return warnings;
 	}
 	
 	public void insertData(double lat, double lon, double alt, double speed, long time){

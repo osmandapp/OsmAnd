@@ -27,10 +27,16 @@ public class Street extends MapObject {
 	public Street(City city) {
 		this.city = city;
 	}
-	
 	public Building registerBuilding(Entity e){
+		return registerBuilding(e, e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER));
+	}
+	
+	public Building registerBuilding(Entity e, String ref){
+		if(ref == null){
+			return null;
+		}
 		Building building = new Building(e);
-		building.setName(e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER));
+		building.setName(ref);
 		buildings.add(building);
 		return building;
 	}
@@ -114,9 +120,12 @@ public class Street extends MapObject {
 			}
 			location = MapUtils.getWeightCenter(nodes);
 		}
+		if(location == null || (wayNodes.isEmpty() && buildings.isEmpty())){
+			city.unregisterStreet(name);
+		}
 		if (wayNodes.size() > 0) {
 			this.id = wayNodes.get(0).getId();
-		} else {
+		} else if(buildings.size() > 0){
 			this.id = buildings.get(0).getId();
 		}
 		
