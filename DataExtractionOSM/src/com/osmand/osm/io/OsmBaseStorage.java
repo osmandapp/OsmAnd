@@ -241,8 +241,8 @@ public class OsmBaseStorage extends DefaultHandler {
 		}
 		if (type != null) {
 			if(currentParsedEntity != null){
-				if(acceptEntityToLoad(currentParsedEntity)){
-					EntityId entityId = new EntityId(type, currentParsedEntity.getId());
+				EntityId entityId = new EntityId(type, currentParsedEntity.getId());
+				if(acceptEntityToLoad(entityId, currentParsedEntity)){
 					Entity oldEntity = entities.put(entityId, currentParsedEntity);
 					if(parseEntityInfo && currentParsedEntityInfo != null){
 						entityInfo.put(entityId, currentParsedEntityInfo);
@@ -260,9 +260,9 @@ public class OsmBaseStorage extends DefaultHandler {
 	}
 	
 	
-	protected boolean acceptEntityToLoad(Entity entity) {
+	protected boolean acceptEntityToLoad(EntityId entityId, Entity entity) {
 		for(IOsmStorageFilter f : filters){
-			if(!f.acceptEntityToLoad(this, entity)){
+			if(!f.acceptEntityToLoad(this, entityId, entity)){
 				return false;
 			}
 		}

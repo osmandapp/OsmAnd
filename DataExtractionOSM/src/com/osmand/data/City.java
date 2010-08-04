@@ -1,6 +1,7 @@
 package com.osmand.data;
 
 import java.text.Collator;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
@@ -123,7 +124,7 @@ public class City extends MapObject {
 	}
 	
 	public void doDataPreparation(){
-		for(Street s : getStreets()){
+		for(Street s : new ArrayList<Street>(getStreets())){
 			s.doDataPreparation();
 		}
 	}

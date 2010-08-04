@@ -29,9 +29,14 @@ public abstract class Entity {
 		private final EntityType type;
 		private final Long id;
 		
+		
 		public EntityId(EntityType type, Long id){
 			this.type = type;
 			this.id = id;
+		}
+		
+		public static EntityId valueOf(Entity e){
+			return new EntityId(EntityType.valueOf(e), e.getId());
 		}
 
 		@Override
@@ -41,6 +46,11 @@ public abstract class Entity {
 			result = prime * result + ((id == null) ? 0 : id.hashCode());
 			result = prime * result + ((type == null) ? 0 : type.hashCode());
 			return result;
+		}
+		
+		@Override
+		public String toString() {
+			return type + " " + id;
 		}
 		
 		public EntityType getType() {

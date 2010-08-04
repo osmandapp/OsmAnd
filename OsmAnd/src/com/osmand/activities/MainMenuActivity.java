@@ -75,7 +75,7 @@ public class MainMenuActivity extends Activity {
 						SavingTrackHelper helper = new SavingTrackHelper(MainMenuActivity.this);
 						if (helper.hasDataToSave()) {
 							impl.startTask(getString(R.string.saving_gpx_tracks), -1);
-							helper.saveDataToGpx();
+							warnings.addAll(helper.saveDataToGpx());
 						}
 						helper.close();
 						showWarnings(warnings);

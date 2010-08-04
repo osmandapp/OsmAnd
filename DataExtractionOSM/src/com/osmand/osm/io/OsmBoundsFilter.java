@@ -22,7 +22,7 @@ public class OsmBoundsFilter implements IOsmStorageFilter {
 	}
 
 	@Override
-	public boolean acceptEntityToLoad(OsmBaseStorage storage, Entity entity) {
+	public boolean acceptEntityToLoad(OsmBaseStorage storage, EntityId entityId, Entity entity) {
 		if(entity instanceof Node){
 			double lon = ((Node) entity).getLongitude();
 			double lat = ((Node) entity).getLatitude();

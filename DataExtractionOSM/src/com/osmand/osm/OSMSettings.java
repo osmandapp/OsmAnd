@@ -5,6 +5,7 @@ public class OSMSettings {
 	public enum OSMTagKey {
 		NAME("name"), //$NON-NLS-1$
 		NAME_EN("name:en"), //$NON-NLS-1$
+		
 		// ways
 		HIGHWAY("highway"), //$NON-NLS-1$
 		BUILDING("building"), //$NON-NLS-1$
@@ -20,6 +21,9 @@ public class OSMSettings {
 		ADDR_HOUSE_NUMBER("addr:housenumber"), //$NON-NLS-1$
 		ADDR_STREET("addr:street"), //$NON-NLS-1$
 		ADDR_POSTCODE("addr:postcode"), //$NON-NLS-1$
+		ADDRESS_TYPE("address:type"), //$NON-NLS-1$
+		ADDRESS_HOUSE("address:house"), //$NON-NLS-1$
+		TYPE("type"), //$NON-NLS-1$
 		
 		// POI
 		AMENITY("amenity"), //$NON-NLS-1$

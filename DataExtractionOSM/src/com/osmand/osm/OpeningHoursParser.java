@@ -165,6 +165,9 @@ public class OpeningHoursParser {
 		try {
 			int i1 = stEnd[0].indexOf(':');
 			int i2 = stEnd[1].indexOf(':');
+			if(i1 == -1 || i2 == -1){
+				return null;
+			}
 			st = Integer.parseInt(stEnd[0].substring(0, i1).trim())* 60 + Integer.parseInt(stEnd[0].substring(i1 + 1).trim());
 			end = Integer.parseInt(stEnd[1].substring(0, i2).trim())* 60 + Integer.parseInt(stEnd[1].substring(i2 + 1).trim());
 		} catch (NumberFormatException e) {
