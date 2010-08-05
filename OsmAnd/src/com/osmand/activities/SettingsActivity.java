@@ -80,6 +80,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
 	private ListPreference applicationMode;
 	private ListPreference saveTrackInterval;
+	private ListPreference rotateMap;
 	private ListPreference tileSourcePreference;
 	private ListPreference positionOnMap;
 	private ListPreference routerPreference;
@@ -98,7 +99,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 //			new BooleanPreference(OsmandSettings.SHOW_POI_OVER_MAP, OsmandSettings.SHOW_POI_OVER_MAP_DEF ),
 //			new BooleanPreference(OsmandSettings.SHOW_OSM_BUGS, OsmandSettings.SHOW_OSM_BUGS_DEF),
 			new BooleanPreference(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES_DEF),
-			new BooleanPreference(OsmandSettings.ROTATE_MAP_TO_BEARING, OsmandSettings.ROTATE_MAP_TO_BEARING_DEF),
 			new BooleanPreference(OsmandSettings.SHOW_VIEW_ANGLE, OsmandSettings.SHOW_VIEW_ANGLE_DEF),
 			new BooleanPreference(OsmandSettings.USE_TRACKBALL_FOR_MOVEMENTS, OsmandSettings.USE_TRACKBALL_FOR_MOVEMENTS_DEF),
 			new BooleanPreference(OsmandSettings.USE_ENGLISH_NAMES, OsmandSettings.USE_ENGLISH_NAMES_DEF),
@@ -140,6 +140,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		userPassword.setOnPreferenceChangeListener(this);
 		
 		
+		rotateMap =(ListPreference) screen.findPreference(OsmandSettings.ROTATE_MAP);
+		rotateMap.setOnPreferenceChangeListener(this);
 		saveTrackInterval =(ListPreference) screen.findPreference(OsmandSettings.SAVE_TRACK_INTERVAL);
 		saveTrackInterval.setOnPreferenceChangeListener(this);
 		positionOnMap =(ListPreference) screen.findPreference(OsmandSettings.POSITION_ON_MAP);
@@ -232,6 +234,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		routeServiceWaitInterval.setEntryValues(ints);
 		routeServiceWaitInterval.setValue(OsmandSettings.getServiceOffWaitInterval(this)/1000+""); //$NON-NLS-1$
 		
+		rotateMap.setEntries(new String[]{getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt)});				
+		rotateMap.setEntryValues(new String[]{OsmandSettings.ROTATE_MAP_NONE+"", OsmandSettings.ROTATE_MAP_BEARING+"", OsmandSettings.ROTATE_MAP_COMPASS+""}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		rotateMap.setValue(OsmandSettings.getRotateMap(this)+""); //$NON-NLS-1$
 		
 		routeServiceProvider.setEntries(new String[]{getString(R.string.gps_provider), getString(R.string.network_provider)});				
 		routeServiceProvider.setEntryValues(new String[]{LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER});
@@ -397,6 +402,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		} else if (preference == routeServiceWaitInterval) {
 			edit.putInt(OsmandSettings.SERVICE_OFF_WAIT_INTERVAL, Integer.parseInt((String) newValue) * 1000);
 			edit.commit();
+		} else if (preference == rotateMap) {
+			edit.putInt(OsmandSettings.ROTATE_MAP, Integer.parseInt((String) newValue));
+			edit.commit();
 		} else if (preference == routeServiceProvider) {
 			edit.putString(OsmandSettings.SERVICE_OFF_PROVIDER, (String) newValue);
 			edit.commit();
@@ -501,7 +509,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, true);
 //			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, _);
 			edit.putBoolean(OsmandSettings.SHOW_TRANSPORT_OVER_MAP, false);
-			edit.putBoolean(OsmandSettings.ROTATE_MAP_TO_BEARING, true);
+			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_BEARING);
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, false);
 			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, true);
 			edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, false);
@@ -515,8 +523,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 //			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
 //			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_CALCULATE_ROUTE, _);
 			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
-			edit.putBoolean(OsmandSettings.ROTATE_MAP_TO_BEARING, true);
-			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, false);
+			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_BEARING);
+			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, true);
 			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
 //			edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, _);
 //			edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
@@ -528,7 +536,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		} else if(preset == ApplicationMode.PEDESTRIAN){
 //			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
 			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
-			edit.putBoolean(OsmandSettings.ROTATE_MAP_TO_BEARING, false);
+			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_COMPASS);
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, true);
 			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
 //			if(useInternetToDownloadTiles.isChecked()){
@@ -543,7 +551,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		} else if(preset == ApplicationMode.DEFAULT){
 //			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
 			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
-			edit.putBoolean(OsmandSettings.ROTATE_MAP_TO_BEARING, false);
+			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_NONE);
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, false);
 			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
 //			edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, _);

@@ -155,6 +155,10 @@ public class AnimateDraggingMapThread implements Runnable {
 		stopped = true;
 	}
 	
+	public boolean isAnimating(){
+		return currentThread != null;
+	}
+	
 	/**
 	 * Stop dragging sync
 	 */

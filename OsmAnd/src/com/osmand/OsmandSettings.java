@@ -270,12 +270,16 @@ public class OsmandSettings {
 	}
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public static final String ROTATE_MAP_TO_BEARING = "rotate_map_to_bearing"; //$NON-NLS-1$
-	public static final boolean ROTATE_MAP_TO_BEARING_DEF = false;
+	public static final String ROTATE_MAP = "rotate_map"; //$NON-NLS-1$
+	public static final int ROTATE_MAP_TO_BEARING_DEF = 0;
+	public static final int ROTATE_MAP_NONE = 0;
+	public static final int ROTATE_MAP_BEARING = 1;
+	public static final int ROTATE_MAP_COMPASS = 2;
 	
-	public static boolean isRotateMapToBearing(Context ctx) {
+	// return 0 - no rotate, 1 - to bearing, 2 - to compass
+	public static int getRotateMap(Context ctx) {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.getBoolean(ROTATE_MAP_TO_BEARING, ROTATE_MAP_TO_BEARING_DEF);
+		return prefs.getInt(ROTATE_MAP, ROTATE_MAP_TO_BEARING_DEF);
 	}
 
 	// this value string is synchronized with settings_pref.xml preference name

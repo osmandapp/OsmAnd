@@ -142,6 +142,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private Handler mapPositionHandler = null;
 	private int APP_NOTIFICATION_ID;
 	private int currentScreenOrientation;
+	private int currentMapRotation;
 	
 	private Dialog progressDlg = null;
 	
@@ -397,7 +398,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     
     
     private void registerUnregisterSensor(Location location){
-    	boolean show = OsmandSettings.isShowingViewAngle(this);
+    	boolean show = OsmandSettings.isShowingViewAngle(this) || OsmandSettings.getRotateMap(this) == OsmandSettings.ROTATE_MAP_COMPASS;
     	// show point view only if gps enabled
 		if (sensorRegistered && (location == null || !show)) {
 			Log.d(LogUtil.TAG, "Disable sensor"); //$NON-NLS-1$
@@ -463,11 +464,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			if (isMapLinkedToLocation()) {
 				if(OsmandSettings.isAutoZoomEnabled(this) && location.hasSpeed()){
 	    			int z = defineZoomFromSpeed(location.getSpeed(), mapView.getZoom());
-	    			if(mapView.getZoom() != z){
+	    			if(mapView.getZoom() != z && !mapView.mapIsAnimating()){
 	    				mapView.setZoom(z);
 	    			}
 	    		}
-				if (location.hasBearing() && OsmandSettings.isRotateMapToBearing(this)) {
+				if (location.hasBearing() && currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING && !mapView.mapIsAnimating()) {
 					mapView.setRotate(-location.getBearing());
 				}
 				mapView.setLatLon(location.getLatitude(), location.getLongitude());
@@ -644,7 +645,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	}
 	
 	private void updateApplicationModeSettings(){
-		if(!OsmandSettings.isRotateMapToBearing(this)){
+		currentMapRotation = OsmandSettings.getRotateMap(this);
+		if(currentMapRotation == OsmandSettings.ROTATE_MAP_NONE){
 			mapView.setRotate(0);
 		}
 		if(!OsmandSettings.isShowingViewAngle(this)){
@@ -836,7 +838,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		if(currentScreenOrientation == 1){
 			val += 90;
 		}
+		if (currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS && !mapView.mapIsAnimating()) {
+			mapView.setRotate(-val);
+		}
 		locationLayer.setHeading(val);
+		
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
