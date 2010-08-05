@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="rotate_map_compass_opt">To compass</string>
+	<string name="rotate_map_bearing_opt">To direction of movement</string>
+    <string name="rotate_map_none_opt">No rotate</string>
+	<string name="rotate_map_to_bearing_descr">Select way how to rotate map</string>
+    <string name="rotate_map_to_bearing">Rotate map</string>
 	<string name="show_route">Show route</string>
 	<string name="fav_imported_sucessfully">Favorite points were succesfully imported</string>
 	<string name="fav_file_to_load_not_found">GPX file to load favorite points is not found at {0}</string>
@@ -237,8 +242,7 @@ See osmand.googlecode.com.</string>
     <string name="navigate_to_point">Mark point</string>
     <string name="map_view_3d_descr">Enable 3D view of the map</string>
     <string name="map_view_3d">Map View 3D</string>
-    <string name="rotate_map_to_bearing_descr">Rotate map to bearing of your direction</string>
-    <string name="rotate_map_to_bearing">Rotate map</string>
+    
     <string name="show_poi_over_map_description">Show POI over map (use last chosen filter)</string>
     <string name="show_poi_over_map">Show POI</string>
     <string name="map_tile_source_descr">Choose the source of tiles : </string>

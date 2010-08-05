@@ -511,6 +511,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	public boolean mapIsRefreshing(){
 		return handler.hasMessages(1);
 	}
+	
+	public boolean mapIsAnimating(){
+		return animatedDraggingThread != null && animatedDraggingThread.isAnimating();
+	}
 	// this method could be called in non UI thread
 	public void refreshMap() {
 		if(!handler.hasMessages(1)){

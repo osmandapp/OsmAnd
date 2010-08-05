@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="rotate_map_compass_opt">По направлению компаса</string>
+	<string name="rotate_map_bearing_opt">По направлению движения</string>
+    <string name="rotate_map_none_opt">Не вращать</string>
+    <string name="rotate_map_to_bearing_descr">Выберите способ как вращать карту</string>
+    <string name="rotate_map_to_bearing">Вращать карту</string>
 	<string name="show_route">Показать маршрут</string>
 	<string name="fav_imported_sucessfully">Избранные точки успешно импортированы</string>
 	<string name="fav_file_to_load_not_found">GPX файл, содержащий точки, не был найден в {0}</string>
@@ -237,8 +242,6 @@
     <string name="navigate_to_point">Отметить точку</string>
     <string name="map_view_3d_descr">Вклюсить 3D вид для карты</string>
     <string name="map_view_3d">3D вид</string>
-    <string name="rotate_map_to_bearing_descr">Вращать карту при изменении направления движения</string>
-    <string name="rotate_map_to_bearing">Вращать карту</string>
     <string name="show_poi_over_map_description">Показывать слой POI</string>
     <string name="show_poi_over_map">POI</string>
     <string name="map_tile_source_descr">Загружать недостающие части карты из : </string>
