@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="transport_context_menu">Search transport at stop</string>
+	<string name="point_on_map">Point on map\n Lat {0,number,#.###} lon {1,number,#.###}</string>
+	<string name="osb_bug_name">Bug</string>
+	<string name="poi_context_menu_modify">Modify POI</string>
+	<string name="poi_context_menu_delete">Delete POI</string>
 	<string name="rotate_map_compass_opt">To compass</string>
 	<string name="rotate_map_bearing_opt">To direction of movement</string>
     <string name="rotate_map_none_opt">No rotate</string>
@@ -361,8 +366,6 @@ See osmand.googlecode.com.</string>
 <string name="poi_dialog_comment">Comment</string>
 <string name="poi_dialog_comment_default">POI changing</string>
 <string name="poi_dialog_other_tags_message">All other tags are preserved</string>
-<string name="poi_context_menu_modify">Modify</string>
-<string name="poi_context_menu_delete">Delete</string>
 <string name="default_buttons_commit">Commit</string>
 <string name="default_buttons_reset">Reset</string>
 <string name="filter_current_poiButton">Filter</string>

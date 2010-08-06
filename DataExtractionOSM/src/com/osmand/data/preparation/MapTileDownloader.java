@@ -207,7 +207,7 @@ public class MapTileDownloader {
 				} finally {
 					currentlyDownloaded.remove(request.fileToSave);
 				}
-				for(IMapDownloaderCallback c : callbacks){
+				for(IMapDownloaderCallback c : new ArrayList<IMapDownloaderCallback>(callbacks)){
 					c.tileDownloaded(request);
 				}
 			}

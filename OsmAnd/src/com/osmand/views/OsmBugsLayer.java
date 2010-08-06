@@ -18,7 +18,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Resources;
+import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -38,9 +38,10 @@ import android.widget.Toast;
 import com.osmand.LogUtil;
 import com.osmand.OsmandSettings;
 import com.osmand.R;
+import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 
-public class OsmBugsLayer implements OsmandMapLayer {
+public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMenuProvider {
 
 	private static final Log log = LogUtil.getLog(OsmBugsLayer.class); 
 	private final static int startZoom = 8;
@@ -195,26 +196,6 @@ public class OsmBugsLayer implements OsmandMapLayer {
 	
 	@Override
 	public boolean onLongPressEvent(PointF point) {
-		final OpenStreetBug bug = getBugFromPoint(point);
-		if(bug != null){
-			Builder builder = new AlertDialog.Builder(view.getContext());
-			Resources resources = view.getContext().getResources();
-	    	builder.setItems(new String[]{
-	    			resources.getString(R.string.osb_comment_menu_item),
-	    			resources.getString(R.string.osb_close_menu_item)
-	    		}, new DialogInterface.OnClickListener(){
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					if(which == 0){
-						commentBug(view.getContext(), activity.getLayoutInflater(), bug);
-					} else if(which == 1){
-						closeBug(view.getContext(), activity.getLayoutInflater(), bug);
-					}
-				}
-	    	});
-			builder.create().show();
-			return true;
-		}
 		return false;
 	}
 	
@@ -245,7 +226,7 @@ public class OsmBugsLayer implements OsmandMapLayer {
 	public boolean onTouchEvent(PointF point) {
 		OpenStreetBug bug = getBugFromPoint(point);
 		if(bug != null){
-			String format = "Bug : " + bug.getName(); //$NON-NLS-1$
+			String format = view.getContext().getString(R.string.osb_bug_name)+ " : " + bug.getName(); //$NON-NLS-1$
 			Toast.makeText(view.getContext(), format, Toast.LENGTH_LONG).show();
 			return true;
 		}
@@ -425,6 +406,46 @@ public class OsmBugsLayer implements OsmandMapLayer {
 			}
 		});
 		builder.show();
+	}
+	
+	
+	@Override
+	public OnClickListener getActionListener(List<String> actionsList, Object o) {
+		final OpenStreetBug bug = (OpenStreetBug) o;
+		actionsList.add(view.getContext().getString(R.string.osb_comment_menu_item));
+		actionsList.add(view.getContext().getString(R.string.osb_close_menu_item));
+		return new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				if (which == 0) {
+					commentBug(view.getContext(), activity.getLayoutInflater(), bug);
+				} else if (which == 1) {
+					closeBug(view.getContext(), activity.getLayoutInflater(), bug);
+				}
+			}
+		};
+	}
+
+
+	@Override
+	public String getObjectDescription(Object o) {
+		if(o instanceof OpenStreetBug){
+			return view.getContext().getString(R.string.osb_bug_name) + " : " + ((OpenStreetBug)o).getName(); //$NON-NLS-1$
+		}
+		return null;
+	}
+
+	@Override
+	public Object getPointObject(PointF point) {
+		return getBugFromPoint(point);
+	}
+
+	@Override
+	public LatLon getObjectLocation(Object o) {
+		if(o instanceof OpenStreetBug){
+			return new LatLon(((OpenStreetBug)o).getLatitude(), ((OpenStreetBug)o).getLongitude());
+		}
+		return null;
 	}
 
 

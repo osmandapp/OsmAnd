@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="osb_bug_name">Bug</string>
+	<string name="poi_context_menu_modify">Ändern POI</string>
+	<string name="poi_context_menu_delete">Löschen POI</string>
 	<string name="poi_namefinder_query_empty">Input search query to find POI</string>
 	<string name="any_poi">Any</string>
 	<string name="layer_transport_route">ÖPNV Linien</string>
@@ -347,8 +350,7 @@ See osmand.googlecode.com.</string>
 	<string name="poi_dialog_comment">Kommentar</string>
 	<string name="poi_dialog_comment_default">POI Änderung</string>
 	<string name="poi_dialog_other_tags_message">Alle anderen Tags werden beibehalten</string>
-	<string name="poi_context_menu_modify">Ändern</string>
-	<string name="poi_context_menu_delete">Löschen</string>
+	
 	<string name="default_buttons_commit">Ändern</string>
 	<string name="default_buttons_reset">Zurücksetzen</string>
 	<string name="filter_current_poiButton">Filtern</string>

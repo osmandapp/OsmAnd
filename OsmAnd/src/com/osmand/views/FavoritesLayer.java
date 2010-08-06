@@ -3,6 +3,7 @@ package com.osmand.views;
 import java.util.List;
 
 import android.content.Context;
+import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
@@ -18,12 +19,12 @@ import android.widget.Toast;
 
 import com.osmand.R;
 import com.osmand.activities.FavouritesActivity;
-import com.osmand.activities.MapActivity;
 import com.osmand.activities.FavouritesActivity.FavouritePoint;
 import com.osmand.activities.FavouritesActivity.FavouritesDbHelper;
+import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 
-public class FavoritesLayer implements OsmandMapLayer {
+public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContextMenuProvider {
 
 	private static final int startZoom = 6;
 	private static final int radius = 15;
@@ -37,12 +38,10 @@ public class FavoritesLayer implements OsmandMapLayer {
 	private Paint paint;
 	private Matrix matrix;
 	private Paint paintBlack;
-	private final MapActivity activity;
 	private DisplayMetrics dm;
 	
 	
-	public FavoritesLayer(MapActivity activity){
-		this.activity = activity;
+	public FavoritesLayer(){
 	}
 	
 	
@@ -126,11 +125,6 @@ public class FavoritesLayer implements OsmandMapLayer {
 	
 	@Override
 	public boolean onLongPressEvent(PointF point) {
-		FavouritePoint fav = getFavoriteFromPoint(point);
-		if(fav != null && activity != null){
-			activity.contextMenuPoint(fav.getLatitude(), fav.getLongitude(), false);
-			return true;
-		}
 		return false;
 	}
 	
@@ -163,7 +157,34 @@ public class FavoritesLayer implements OsmandMapLayer {
 		}
 		return false;
 	}
-	
+
+
+	@Override
+	public OnClickListener getActionListener(List<String> actionsList, Object o) {
+		return null;
+	}
+
+
+	@Override
+	public String getObjectDescription(Object o) {
+		if(o instanceof FavouritePoint){
+			return view.getContext().getString(R.string.favorite) + " : " + ((FavouritePoint)o).getName(); //$NON-NLS-1$
+		}
+		return null;
+	}
+
+	@Override
+	public Object getPointObject(PointF point) {
+		return getFavoriteFromPoint(point);
+	}
+
+	@Override
+	public LatLon getObjectLocation(Object o) {
+		if(o instanceof FavouritePoint){
+			return new LatLon(((FavouritePoint)o).getLatitude(), ((FavouritePoint)o).getLongitude());
+		}
+		return null;
+	}
 	
 
 }

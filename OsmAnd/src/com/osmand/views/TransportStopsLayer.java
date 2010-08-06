@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -24,7 +26,7 @@ import com.osmand.data.TransportStop;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 
-public class TransportStopsLayer implements OsmandMapLayer {
+public class TransportStopsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMenuProvider {
 	private static final int startZoom = 12;
 	
 	private Paint pointAltUI;
@@ -78,25 +80,31 @@ public class TransportStopsLayer implements OsmandMapLayer {
 	public boolean onTouchEvent(PointF point) {
 		TransportStop n = getFromPoint(point);
 		if(n != null){
-			StringBuilder text = new StringBuilder(250);
-			text.append(view.getContext().getString(R.string.transport_Stop)).append(" : ").append(n.getName(OsmandSettings.usingEnglishNames(view.getContext()))); //$NON-NLS-1$
-			text.append("\n").append(view.getContext().getString(R.string.transport_Routes)).append(" : ");  //$NON-NLS-1$ //$NON-NLS-2$
-			List<TransportIndexRepository> reps = ResourceManager.getResourceManager().searchTransportRepositories(n.getLocation().getLatitude(), n.getLocation().getLongitude());
-			if(!reps.isEmpty()){
-				List<String> l;
-				if(OsmandSettings.usingEnglishNames(view.getContext())){
-					 l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0} - {3}"); //$NON-NLS-1$
-				} else {
-					l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0} - {2}"); //$NON-NLS-1$
-				}
-				for(String s : l){
-					text.append("\n").append(s); //$NON-NLS-1$
-				}
-			}
-			Toast.makeText(view.getContext(), text.toString(), Toast.LENGTH_LONG).show();
+			Toast.makeText(view.getContext(), getStopDescription(n, true), Toast.LENGTH_LONG).show();
 			return true;
 		}
 		return false;
+	}
+
+	private String getStopDescription(TransportStop n, boolean useName) {
+		StringBuilder text = new StringBuilder(250);
+		text.append(view.getContext().getString(R.string.transport_Stop)).append(" : ").append(n.getName(OsmandSettings.usingEnglishNames(view.getContext()))); //$NON-NLS-1$
+		text.append("\n").append(view.getContext().getString(R.string.transport_Routes)).append(" : ");  //$NON-NLS-1$ //$NON-NLS-2$
+		List<TransportIndexRepository> reps = ResourceManager.getResourceManager().searchTransportRepositories(n.getLocation().getLatitude(), n.getLocation().getLongitude());
+		if(!reps.isEmpty()){
+			List<String> l;
+			if(!useName){
+				l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0}"); //$NON-NLS-1$
+			} else if(OsmandSettings.usingEnglishNames(view.getContext())){
+				 l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0} - {3}"); //$NON-NLS-1$
+			} else {
+				l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0} - {2}"); //$NON-NLS-1$
+			}
+			for(String s : l){
+				text.append("\n").append(s); //$NON-NLS-1$
+			}
+		}
+		return text.toString();
 	}
 	
 	public int getRadiusPoi(int zoom){
@@ -150,15 +158,48 @@ public class TransportStopsLayer implements OsmandMapLayer {
 
 	@Override
 	public boolean onLongPressEvent(PointF point) {
-		if(getFromPoint(point) != null){
-			Intent intent = new Intent(view.getContext(), SearchTransportActivity.class);
-			LatLon latLon = view.getLatLonFromScreenPoint(point.x, point.y);
-			intent.putExtra(SearchTransportActivity.LAT_KEY, latLon.getLatitude());
-			intent.putExtra(SearchTransportActivity.LON_KEY, latLon.getLongitude());
-			view.getContext().startActivity(intent);
-			return true;
-		}
 		return false;
 	}
+
+	@Override
+	public OnClickListener getActionListener(List<String> actionsList, Object o) {
+		final TransportStop stop = (TransportStop) o;
+		actionsList.add(view.getContext().getString(R.string.transport_context_menu));
+		return new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				if (which == 0) {
+					Intent intent = new Intent(view.getContext(), SearchTransportActivity.class);
+					intent.putExtra(SearchTransportActivity.LAT_KEY, stop.getLocation().getLatitude());
+					intent.putExtra(SearchTransportActivity.LON_KEY, stop.getLocation().getLongitude());
+					view.getContext().startActivity(intent);
+				}
+			}
+		};
+	}
+
+
+	@Override
+	public String getObjectDescription(Object o) {
+		if(o instanceof TransportStop){
+			return getStopDescription((TransportStop) o, false);
+		}
+		return null;
+	}
+
+	@Override
+	public Object getPointObject(PointF point) {
+		return getFromPoint(point);
+	}
+
+	@Override
+	public LatLon getObjectLocation(Object o) {
+		if(o instanceof TransportStop){
+			return ((TransportStop)o).getLocation();
+		}
+		return null;
+	}
+
+
 
 }
