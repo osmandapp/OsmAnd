@@ -245,6 +245,24 @@ public class TileSourceManager {
 	public static TileSourceTemplate getGoogleMapsTerrainSource(){
 		return new TileSourceTemplate("GoogleMaps Terrain", "http://mt3.google.com/vt/v=w2p.111&hl=en&x={1}&y={2}&z={0}", ".jpg", 15, 0, 256, 32, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
+
+	// not working
+	public static TileSourceTemplate getGoogleMapsHybridSource(){
+//		Google Map Earth + Overlay
+//		GoogleEarthMapsOverlay.url=http://mt{$servernum}.google.com/vt/lyrs=h@130&hl={$lang}&x={$x}&y={$y}&z={$z}
+		return new TileSourceTemplate("Google Hybrid", "http://khm1.google.com/kh/v=59&x={1}&y={2}&z={0}", ".jpg", 20, 0, 256, 32, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	}
+
+	
+	// wrong projection ???
+	public static TileSourceTemplate getYandexMapSource(){
+		return new TileSourceTemplate("Yandex map", "http://vec01.maps.yandex.ru/tiles?l=map&v=2.15.0&x={1}&y={2}&z={0}", ".jpg", 18, 0, 256, 16, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	}
+	
+	public static TileSourceTemplate getYandexSatSource(){
+		return new TileSourceTemplate("Yandex Satellite", "http://sat01.maps.yandex.ru/tiles?l=sat&v=1.19.0&x={1}&y={2}&z={0}", ".jpg", 18, 0, 256, 32, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	}
+	
 	
 	public static TileSourceTemplate getMicrosoftMapsSource(){
 		return new MicrosoftTileSourceTemplate("Microsoft Maps", 'r', "png", ".png", 19, 1, 256, 16, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
