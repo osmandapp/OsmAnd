@@ -9,6 +9,7 @@ public class ToDoConstants {
 	// TODO swing
 	// ! 9. Fix issues with big files (such as netherlands) - save memory (!)
 	// Current result : for big file (1 - task  60-80% time, 90% memory) (?)
+	//  11. Index buildings using interpolations (from nodes)
 	
 	// TODO max 86
 	//  ! 81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)

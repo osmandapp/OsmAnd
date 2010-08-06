@@ -149,24 +149,27 @@ public class TileSourceManager {
 	public static java.util.List<TileSourceTemplate> getUserDefinedTemplates(File tilesDir){
 		java.util.List<TileSourceTemplate> ts = new ArrayList<TileSourceTemplate>();
 		if (tilesDir != null) {
-			for (File f : tilesDir.listFiles()) {
-				File ch = new File(f, "url"); //$NON-NLS-1$
-				if (f.isDirectory() && ch.exists()) {
-					try {
-						BufferedReader read = new BufferedReader(new InputStreamReader(new FileInputStream(ch), "UTF-8")); //$NON-NLS-1$
-						String url = read.readLine();
-						read.close();
-						if (!Algoritms.isEmpty(url)) {
-							url = url.replaceAll(Pattern.quote("{$x}"), "{1}"); //$NON-NLS-1$ //$NON-NLS-2$
-							url = url.replaceAll(Pattern.quote("{$z}"), "{0}");  //$NON-NLS-1$//$NON-NLS-2$
-							url = url.replaceAll(Pattern.quote("{$y}"), "{2}"); //$NON-NLS-1$ //$NON-NLS-2$
-							TileSourceTemplate t = new TileSourceTemplate(f.getName(), url, ".jpg", 18, 1, 256, 16, 20000); //$NON-NLS-1$
-							ts.add(t);
+			File[] listFiles = tilesDir.listFiles();
+			if (listFiles != null) {
+				for (File f : listFiles) {
+					File ch = new File(f, "url"); //$NON-NLS-1$
+					if (f.isDirectory() && ch.exists()) {
+						try {
+							BufferedReader read = new BufferedReader(new InputStreamReader(new FileInputStream(ch), "UTF-8")); //$NON-NLS-1$
+							String url = read.readLine();
+							read.close();
+							if (!Algoritms.isEmpty(url)) {
+								url = url.replaceAll(Pattern.quote("{$x}"), "{1}"); //$NON-NLS-1$ //$NON-NLS-2$
+								url = url.replaceAll(Pattern.quote("{$z}"), "{0}"); //$NON-NLS-1$//$NON-NLS-2$
+								url = url.replaceAll(Pattern.quote("{$y}"), "{2}"); //$NON-NLS-1$ //$NON-NLS-2$
+								TileSourceTemplate t = new TileSourceTemplate(f.getName(), url, ".jpg", 18, 1, 256, 16, 20000); //$NON-NLS-1$
+								ts.add(t);
+							}
+						} catch (IOException e) {
+							log.info("Mailformed dir " + f.getName(), e); //$NON-NLS-1$
 						}
-					} catch (IOException e) {
-						log.info("Mailformed dir " + f.getName(), e); //$NON-NLS-1$
-					}
 
+					}
 				}
 			}
 		}

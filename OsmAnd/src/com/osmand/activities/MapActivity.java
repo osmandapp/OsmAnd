@@ -144,6 +144,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private int APP_NOTIFICATION_ID;
 	private int currentScreenOrientation;
 	private int currentMapRotation;
+	private boolean currentShowingAngle;
 	
 	private Dialog progressDlg = null;
 	
@@ -401,7 +402,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     
     
     private void registerUnregisterSensor(Location location){
-    	boolean show = OsmandSettings.isShowingViewAngle(this) || OsmandSettings.getRotateMap(this) == OsmandSettings.ROTATE_MAP_COMPASS;
+    	boolean show = currentShowingAngle || currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS;
     	// show point view only if gps enabled
 		if (sensorRegistered && (location == null || !show)) {
 			Log.d(LogUtil.TAG, "Disable sensor"); //$NON-NLS-1$
@@ -649,10 +650,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	
 	private void updateApplicationModeSettings(){
 		currentMapRotation = OsmandSettings.getRotateMap(this);
+		currentShowingAngle = OsmandSettings.isShowingViewAngle(this);
 		if(currentMapRotation == OsmandSettings.ROTATE_MAP_NONE){
 			mapView.setRotate(0);
 		}
-		if(!OsmandSettings.isShowingViewAngle(this)){
+		if(!currentShowingAngle){
 			locationLayer.setHeading(null);
 		}
 		locationLayer.setAppMode(OsmandSettings.getApplicationMode(this));
@@ -844,7 +846,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		if (currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS && !mapView.mapIsAnimating()) {
 			mapView.setRotate(-val);
 		}
-		locationLayer.setHeading(val);
+		if(currentShowingAngle){
+			locationLayer.setHeading(val);
+		}
 		
 	}
 	
