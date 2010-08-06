@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class CommandPlayer {
 	private MediaPlayer mediaPlayer;
 	// indicates that player is ready to play first file
 	private boolean playNext = true;
-	private List<String> filesToPlay = new ArrayList<String>();
+	private List<String> filesToPlay = Collections.synchronizedList(new ArrayList<String>());
 
 	/**
 	 * @param ctx
@@ -196,7 +197,7 @@ public class CommandPlayer {
 		return files;
 	}
 	
-	public synchronized void playCommands(CommandBuilder builder){
+	public void playCommands(CommandBuilder builder){
 		filesToPlay.addAll(builder.execute());
 		playQueue();
 	}

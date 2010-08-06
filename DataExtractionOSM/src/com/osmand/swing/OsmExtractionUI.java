@@ -544,6 +544,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 		
 		JMenu tileSource = MapPanel.getMenuToChooseSource(mapPanel);
 		final JMenuItem sqliteDB = new JMenuItem("Create sqlite database");
+		tileSource.addSeparator();
 		tileSource.add(sqliteDB);
 		bar.add(tileSource);
 		

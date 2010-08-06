@@ -104,7 +104,7 @@ public class MainMenuActivity extends Activity {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							Intent intent = new Intent(Intent.ACTION_SEND);
-							intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"vics001@gmail.com"}); //$NON-NLS-1$
+							intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"osmand.app@gmail.com"}); //$NON-NLS-1$
 							intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
 							intent.setType("vnd.android.cursor.dir/email");  //$NON-NLS-1$
 							intent.putExtra(Intent.EXTRA_SUBJECT, "OsmAnd bug"); //$NON-NLS-1$

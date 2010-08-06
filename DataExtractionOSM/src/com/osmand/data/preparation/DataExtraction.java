@@ -48,7 +48,6 @@ import com.osmand.osm.Entity;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 import com.osmand.osm.Node;
-import com.osmand.osm.OSMSettings;
 import com.osmand.osm.Relation;
 import com.osmand.osm.Way;
 import com.osmand.osm.Entity.EntityId;
@@ -105,18 +104,6 @@ public class DataExtraction  {
 	private final boolean indexTransport;
 	private File workingDir = null;
 
-	
-	// TODO : type=address
-	//        address:a6=name_street
-	//        address:type=a6
-	// is_in..., label...
-	
-	// TODO     <member type="relation" ref="81833" role="is_in"/>
-//    <member type="way" ref="25426285" role="border"/>
-//    <tag k="address:house" v="13"/>
-//    <tag k="address:type" v="house"/>
-//    <tag k="type" v="address"/>
-	
 	
 	public DataExtraction(boolean indexAddress, boolean indexPOI, boolean indexTransport, boolean normalizeStreets, 
 			boolean loadAllObjects, boolean parseEntityInfo, File workingDir){
@@ -264,9 +251,14 @@ public class DataExtraction  {
 			Map<EntityId, Entity> map = new LinkedHashMap<EntityId, Entity>();
 			progress.startTask("Correlating data...", storage.getRegisteredEntities().size());
 			ArrayList<Entity> values = new ArrayList<Entity>(storage.getRegisteredEntities().values());
+			int delayedProgress = 0;
 			for (int ind = 0; ind < values.size(); ind++) {
 				Entity e = values.get(ind);
-				progress.progress(1);
+				if(delayedProgress == 0){
+					progress.progress(1);
+				} else {
+					delayedProgress--;
+				}
 				if (e instanceof Node) {
 					continue;
 				}
@@ -294,6 +286,7 @@ public class DataExtraction  {
 								}
 								// add way to load referred nodes
 								values.add(way);
+								delayedProgress++;
 								rs.close();
 							}
 						} else if (i.getType() == EntityType.RELATION) {
@@ -344,14 +337,17 @@ public class DataExtraction  {
 				processed = true;
 			}
 			if (indexAddress) {
-				if ("yes".equals(e.getTag(OSMTagKey.BUILDING))) {
-					if (e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER) != null/*&& e.getTag(OSMTagKey.ADDR_STREET) != null*/) {
+				// index not only buildings but also addr:interpolation ways
+//				if ("yes".equals(e.getTag(OSMTagKey.BUILDING))) {
+					if (e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER) != null && e.getTag(OSMTagKey.ADDR_STREET) != null) {
 						buildings.put(entityId, e);
 						processed = true;
 					}
-				}
+//				}
 				// suppose that streets are way for car
-				if (e instanceof Way && OSMSettings.wayForCar(e.getTag(OSMTagKey.HIGHWAY)) && e.getTag(OSMTagKey.NAME) != null) {
+				if (e instanceof Way /*&& OSMSettings.wayForCar(e.getTag(OSMTagKey.HIGHWAY))*/
+						&& e.getTag(OSMTagKey.HIGHWAY) != null
+						&& e.getTag(OSMTagKey.NAME) != null) {
 					ways.put(entityId, (Way) e);
 					processed = true;
 				}
