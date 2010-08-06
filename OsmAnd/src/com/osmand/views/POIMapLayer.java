@@ -3,10 +3,9 @@ package com.osmand.views;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -23,9 +22,10 @@ import com.osmand.R;
 import com.osmand.ResourceManager;
 import com.osmand.activities.EditingPOIActivity;
 import com.osmand.data.Amenity;
+import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 
-public class POIMapLayer implements OsmandMapLayer {
+public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMenuProvider {
 	// it is very slow to use with 15 level
 	private static final int startZoom = 10;
 	public static final int LIMIT_POI = 200;
@@ -41,30 +41,6 @@ public class POIMapLayer implements OsmandMapLayer {
 	
 	@Override
 	public boolean onLongPressEvent(PointF point) {
-		final Amenity n = getAmenityFromPoint(point);
-		if(n != null){
-			Context ctx = view.getContext();
-			Builder builder = new AlertDialog.Builder(ctx);
-			final EditingPOIActivity edit = new EditingPOIActivity(ctx, view);
-			builder.setItems(new String[]{
-					this.view.getResources().getString(R.string.poi_context_menu_modify),
-					this.view.getResources().getString(R.string.poi_context_menu_delete)
-					}, new DialogInterface.OnClickListener(){
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					if(which == 0){
-						edit.showEditDialog(n);
-					} else {
-						edit.showDeleteDialog(n);
-					}
-					
-				}
-				
-			});
-			builder.show();
-			return true;
-		}
 		return false;
 	}
 	
@@ -179,6 +155,46 @@ public class POIMapLayer implements OsmandMapLayer {
 	@Override
 	public boolean drawInScreenPixels() {
 		return false;
+	}
+
+	@Override
+	public OnClickListener getActionListener(List<String> actionsList, Object o) {
+		final Amenity a = (Amenity) o;
+		actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_modify));
+		actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_delete));
+		final EditingPOIActivity edit = new EditingPOIActivity(view.getContext(), view);
+		return new DialogInterface.OnClickListener(){
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				if (which == 0) {
+					edit.showEditDialog(a);
+				} else {
+					edit.showDeleteDialog(a);
+				}
+			}
+		};
+	}
+
+	@Override
+	public String getObjectDescription(Object o) {
+		if(o instanceof Amenity){
+			return ((Amenity)o).getSimpleFormat(OsmandSettings.usingEnglishNames(view.getContext()));
+		}
+		return null;
+	}
+
+	@Override
+	public Object getPointObject(PointF point) {
+		return getAmenityFromPoint(point);
+	}
+
+	@Override
+	public LatLon getObjectLocation(Object o) {
+		if(o instanceof Amenity){
+			return ((Amenity)o).getLocation();
+		}
+		return null;
 	}
 
 }

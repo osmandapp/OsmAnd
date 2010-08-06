@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="transport_context_menu">Искать транспорт на остановке</string>
+	<string name="point_on_map">Точка на карте\n Ш {0,number,#.###} Д {1,number,#.###}</string>
+	<string name="osb_bug_name">Bug</string>
+	<string name="poi_context_menu_modify">Редактировать POI</string>
+	<string name="poi_context_menu_delete">Удалить POI</string>
 	<string name="rotate_map_compass_opt">По направлению компаса</string>
 	<string name="rotate_map_bearing_opt">По направлению движения</string>
     <string name="rotate_map_none_opt">Не вращать</string>
@@ -358,8 +363,6 @@
 <string name="poi_dialog_comment">Комментарий</string>
 <string name="poi_dialog_comment_default">Изменение POI</string>
 <string name="poi_dialog_other_tags_message">Значения остальных тэгов POI не могут быть изменены.</string>
-<string name="poi_context_menu_modify">Редактировать</string>
-<string name="poi_context_menu_delete">Удалить</string>
 <string name="default_buttons_commit">Сохранить</string>
 <string name="default_buttons_reset">Сброс</string>
 <string name="filter_current_poiButton">Фильтровать</string>

@@ -22,7 +22,6 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
-import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.hardware.Sensor;
@@ -85,6 +84,7 @@ import com.osmand.map.ITileSource;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
 import com.osmand.views.AnimateDraggingMapThread;
+import com.osmand.views.ContextMenuLayer;
 import com.osmand.views.FavoritesLayer;
 import com.osmand.views.MapInfoLayer;
 import com.osmand.views.OsmBugsLayer;
@@ -129,6 +129,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private PointLocationLayer locationLayer;
 	private PointNavigationLayer navigationLayer;
 	private MapInfoLayer mapInfoLayer;
+	private ContextMenuLayer contextMenuLayer;
 	private RouteInfoLayer routeInfoLayer;
 	
 	private SavingTrackHelper savingTrackHelper;
@@ -185,7 +186,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 
 			@Override
 			public boolean onTrackBallPressed() {
-				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude(), true);
+				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 	        	return true;
 			}
 		});
@@ -215,7 +216,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		// 3. poi layer
 		poiMapLayer = new POIMapLayer();
 		// 4. favorites layer
-		favoritesLayer = new FavoritesLayer(this);
+		favoritesLayer = new FavoritesLayer();
 		// 5. transport layer
 		transportStopsLayer = new TransportStopsLayer();
 		// 5.5 transport info layer 
@@ -230,9 +231,13 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		// 8. map info layer
 		mapInfoLayer = new MapInfoLayer(this, routeLayer);
 		mapView.addLayer(mapInfoLayer, 8);
-		// 9. route info layer
+		// 9. context menu layer 
+		contextMenuLayer = new ContextMenuLayer(this);
+		mapView.addLayer(contextMenuLayer, 9);
+		// 10. route info layer
 		routeInfoLayer = new RouteInfoLayer(routingHelper, (LinearLayout) findViewById(R.id.RouteLayout));
 		mapView.addLayer(routeInfoLayer, 9);
+		
 
 		
 		savingTrackHelper = new SavingTrackHelper(this);
@@ -335,16 +340,14 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			}
 		});
 		
-		mapView.setOnLongClickListener(new OsmandMapTileView.OnLongClickListener(){
-
+		// Possibly use that method instead of 
+		/*mapView.setOnLongClickListener(new OsmandMapTileView.OnLongClickListener(){
 			@Override
 			public boolean onLongPressEvent(PointF point) {
 				LatLon l = mapView.getLatLonFromScreenPoint(point.x, point.y);
-				contextMenuPoint(l.getLatitude(), l.getLongitude(), false);
 				return true;
 			}
-			
-		});
+		});*/
 		
 	}
     
@@ -901,9 +904,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			intent.putExtra(SearchTransportActivity.LON_KEY, mapView.getLongitude());
 			startActivity(intent);
 			return true;
-		} else if (item.getItemId() == R.id.map_mark_point) {
-			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude(), true);
-			return true;
+//		} else if (item.getItemId() == R.id.map_mark_point) {
+//			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
+//			return true;
 		} else if (item.getItemId() == R.id.map_get_directions) {
 			getDirections(mapView.getLatitude(), mapView.getLongitude(), true);
 			return true;
@@ -1270,22 +1273,35 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	}
 
     
-    public void contextMenuPoint(final double latitude, final double longitude, boolean menu){
+	public void contextMenuPoint(final double latitude, final double longitude){
+		contextMenuPoint(latitude, longitude, null, null);
+	}
+	
+    public void contextMenuPoint(final double latitude, final double longitude, List<String> additionalItems, 
+    		final DialogInterface.OnClickListener additionalActions){
     	Builder builder = new AlertDialog.Builder(this);
     	Resources resources = this.getResources();
-    	String[] res = new String[]{
-        			resources.getString(R.string.context_menu_item_navigate_point),
-        			resources.getString(R.string.context_menu_item_search_poi),
-        			resources.getString(R.string.context_menu_item_show_route),
-        			resources.getString(R.string.context_menu_item_add_favorite),
-        			resources.getString(R.string.context_menu_item_create_poi),
-        			resources.getString(R.string.context_menu_item_open_bug),
-        			resources.getString(R.string.context_menu_item_update_map)
-        	};
-    	builder.setItems(res, new DialogInterface.OnClickListener(){
+    	final int sizeAdditional = additionalActions == null || additionalItems == null ? 0 : additionalItems.size();
+    	List<String> actions = new ArrayList<String>();
+    	if(sizeAdditional > 0){
+    		actions.addAll(additionalItems);
+    	}
+    	actions.add(resources.getString(R.string.context_menu_item_navigate_point));
+    	actions.add(resources.getString(R.string.context_menu_item_search_poi));
+		actions.add(resources.getString(R.string.context_menu_item_show_route));
+		actions.add(resources.getString(R.string.context_menu_item_add_favorite));
+		actions.add(resources.getString(R.string.context_menu_item_create_poi));
+		actions.add(resources.getString(R.string.context_menu_item_open_bug));
+		actions.add(resources.getString(R.string.context_menu_item_update_map));
+    	builder.setItems(actions.toArray(new String[actions.size()]), new DialogInterface.OnClickListener(){
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				if(which < sizeAdditional){
+					additionalActions.onClick(dialog, which);
+					return;
+				}
+				which -= sizeAdditional;
 				if(which == 0){
 					navigateToPoint(new LatLon(latitude, longitude));
 				} else if(which == 1){
@@ -1343,6 +1359,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 						}
 						helper.close();
 						favoritesLayer.reloadFavorites(MapActivity.this);
+						mapView.refreshMap();
 					}
 				});
 				if(ar.length == 0){
@@ -1366,6 +1383,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				}
 				helper.close();
 				favoritesLayer.reloadFavorites(MapActivity.this);
+				mapView.refreshMap();
 			}
 		});
 		builder.create().show();

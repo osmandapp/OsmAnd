@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="osb_bug_name">Bug</string>
+	<string name="poi_context_menu_modify">Modificar POI</string>
+	<string name="poi_context_menu_delete">Borrar POI</string>
 	<string name="show_route">Mostrar ruta</string>
 	<string name="fav_imported_sucessfully">Se importaron los puntos favoritos satisfactoriamente</string>
 	<string name="fav_file_to_load_not_found">No se encontró el archivo GPX de puntos favoritos en {0}</string>
@@ -357,8 +360,6 @@ Ver osmand.googlecode.com.</string>
 <string name="poi_dialog_comment">Comentario</string>
 <string name="poi_dialog_comment_default">Cambiando POI</string>
 <string name="poi_dialog_other_tags_message">Se mantienen todas las otras etiquetas</string>
-<string name="poi_context_menu_modify">Modificar</string>
-<string name="poi_context_menu_delete">Borrar</string>
 <string name="default_buttons_commit">Consignar</string>
 <string name="default_buttons_reset">Restaurar</string>
 <string name="filter_current_poiButton">Filtro</string>

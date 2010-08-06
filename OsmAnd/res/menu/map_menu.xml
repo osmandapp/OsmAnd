@@ -2,11 +2,12 @@
 <menu
   xmlns:android="http://schemas.android.com/apk/res/android">
 <group android:id="@+id/map_context_menu" android:menuCategory="container">
-<item android:title="@string/mark_point" android:id="@+id/map_mark_point" android:icon="@android:drawable/ic_menu_edit"></item>
-<item android:id="@+id/map_navigate_to_point" android:title="@string/stop_navigation" android:visible="false" android:icon="@android:drawable/ic_menu_close_clear_cancel"></item>
-<item android:title="@string/where_am_i" android:id="@+id/map_where_am_i" android:icon="@android:drawable/ic_menu_mylocation"></item>
 
+<item android:title="@string/where_am_i" android:id="@+id/map_where_am_i" android:icon="@android:drawable/ic_menu_mylocation"></item>
+<!-- <item android:title="@string/mark_point" android:id="@+id/map_mark_point" android:icon="@android:drawable/ic_menu_edit"></item>  -->
+<item android:id="@+id/map_navigate_to_point" android:title="@string/stop_navigation" android:visible="false" android:icon="@android:drawable/ic_menu_close_clear_cancel"></item>
 <item android:id="@+id/map_mute" android:title="@string/menu_mute_off" android:visible="false"></item>
+
 <item android:id="@+id/map_get_directions" android:title="@string/get_directions" android:icon="@android:drawable/ic_menu_directions"></item>
 <item android:id="@+id/map_layers" android:title="@string/menu_layers" android:icon="@android:drawable/ic_menu_mapmode"></item>
 
