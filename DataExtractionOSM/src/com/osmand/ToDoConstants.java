@@ -3,28 +3,23 @@ package com.osmand;
 
 /**
  * This class is designed to put all to do's and link them with code.
- * The whole methods could be paste or just constants.
- * Do not worry to put ugly code here (just a little piece)
  */
 public class ToDoConstants {
 	
 	// TODO swing
-	// 9. Fix issues with big files (such as netherlands) - save memory (!) - very slow due to transport index !
+	// ! 9. Fix issues with big files (such as netherlands) - save memory (!)
 	// Current result : for big file (1 - task  60-80% time, 90% memory) (?)
- 	// !! 10. Improve address indexing (use relations). (+)
-    //	  use relation "a6" (to accumulate streets!),  "a3" to read all cities & define boundaries for city (& define that street in city).  
 	
 	// TODO max 86
 	//  ! 81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
 	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?),
 	//  railway( station, subway?) - issue 17
-	//    82. Rotate map according compass
-	//    85. Remove context menu on long press map ! Accumulate actions and show label. 
+ 
 
-	// TODO BUGS Android
-	// !! 3. different screens better support (+)
-	//    	 Fix map zoom by default map (in 1.5 for high density) OsmandMapTileView (+)
-
+	// Unscheduled (complex)
+	//   65. Intermediate points - for better control routing, to avoid traffic jams ...(?)
+	//   40. Support simple vector road rendering (require new index file) (?)
+	//   63. Support simple offline routing(require new index file) (?)
 	
 	// Improvements
 	// ! Download with wget
@@ -38,16 +33,13 @@ public class ToDoConstants {
 	//   85. Enable on/off screen for bike navigation (?)
 	//   83. Add monitoring service to send locations to internet (?)
 
-	// Unscheduled (complex)
-	//   65. Intermediate points - for better control routing, to avoid traffic jams ...(?)
-	//   40. Support simple vector road rendering (require new index file) (?)
-	//   63. Support simple offline routing(require new index file) (?)
-
-	
-	// BUGS Swing
 	
 	// DONE ANDROID :
+	// 82. Rotate map according compass
+	// 85. Remove context menu on long press map ! Accumulate actions and show label (+)
 	
 	// DONE SWING
+ 	// 10. Improve address indexing (use relations). (+)
+    //	  use relation "a6" (to accumulate streets!),  "a3" to read all cities & define boundaries for city (& define that street in city).
 
 }
