@@ -9,14 +9,22 @@ import com.osmand.voice.CommandPlayer;
 import com.osmand.voice.CommandPlayer.CommandBuilder;
 
 public class VoiceRouter {
+	// 0 - unknown, 1 - notify prepare, 2 - notify to turn after , 3 - notify to turn
+	private final int STATUS_UNKNOWN = 0;
+	private final int STATUS_3000_PREPARE = 1;
+	private final int STATUS_800_PREPARE = 2;
+	private final int STATUS_200_TURN = 3;
+	private final int STATUS_TURN = 4;
+	private final int STATUS_TOLD = 5;
 	
 	private final RoutingHelper router;
 	private boolean mute = false;
 	private CommandPlayer player;
 	
 	private int currentDirection = 0;
-	// 0 - unknown, 1 - notify prepare, 2 - notify to turn after , 3 - notify to turn 
-	private int currentStatus = 0;
+ 
+	private int currentStatus = STATUS_UNKNOWN;
+
 
 	public VoiceRouter(RoutingHelper router){
 		this.router = router;
@@ -42,6 +50,9 @@ public class VoiceRouter {
 		}
 		return player.newCommandBuilder();
 	}
+	
+	protected int PREPARE_LONG_DISTANCE_ST = 2500;
+	protected int PREPARE_LONG_DISTANCE_END = 3000;
 	
 	protected int PREPARE_DISTANCE = 0;
 	protected int TURN_IN_DISTANCE = 0;
@@ -72,17 +83,17 @@ public class VoiceRouter {
 		// < 50m turn
 		if(currentDirection != router.currentDirectionInfo){
 			currentDirection = router.currentDirectionInfo;
-			currentStatus = 0;
+			currentStatus = STATUS_UNKNOWN;
 		}
 		RouteDirectionInfo next = router.getNextRouteDirectionInfo();
 		int dist = router.getDistanceToNextRouteDirection();
 		if(next == null || next.distance == 0) {
-			if(currentStatus == 0 && currentDirection > 0){
+			if(currentStatus == STATUS_UNKNOWN && currentDirection > 0){
 				CommandBuilder play = getNewCommandPlayerToPlay();
 				if(play != null){
 					play.goAhead(router.getLeftDistance()).andArriveAtDestination().play();
 				}
-				currentStatus = 1;
+				currentStatus = STATUS_TOLD;
 			}
 			return;
 		}
@@ -94,21 +105,21 @@ public class VoiceRouter {
 		
 		RouteDirectionInfo nextNext = router.getNextNextRouteDirectionInfo();
 		
-		if(currentStatus == 0){
+		if(currentStatus == STATUS_UNKNOWN){
 			if(dist > PREPARE_DISTANCE){
 				CommandBuilder play = getNewCommandPlayerToPlay();
 				if(play != null){
 					play.goAhead(dist).play();
 				}
+				currentStatus = STATUS_3000_PREPARE;
 			} else if (dist < TURN_IN_DISTANCE){
 				// should already told it
-				currentStatus = 3;
+				currentStatus = STATUS_TOLD;
 			}
-			currentStatus = 1;
 		}
 		
 		
-		if(currentStatus <= 3 && dist <= TURN_DISTANCE){
+		if(currentStatus <= STATUS_TURN && dist <= TURN_DISTANCE){
 			CommandBuilder play = getNewCommandPlayerToPlay();
 			if(play != null){
 				String tParam = getTurnType(next.turnType);
@@ -144,8 +155,8 @@ public class VoiceRouter {
 					play.play();
 				}
 			}
-			currentStatus = 4;
-		} else if(currentStatus <= 2 && dist <= TURN_IN_DISTANCE){
+			currentStatus = STATUS_TOLD;
+		} else if(currentStatus <= STATUS_200_TURN && dist <= TURN_IN_DISTANCE){
 			CommandBuilder play = getNewCommandPlayerToPlay();
 			if (play != null) {
 				String tParam = getTurnType(next.turnType);
@@ -178,8 +189,8 @@ public class VoiceRouter {
 					play.play();
 				}
 			}
-			currentStatus = 3;
-		} else if(currentStatus <= 1 && dist <= PREPARE_DISTANCE){
+			currentStatus = STATUS_TURN;
+		} else if(currentStatus <= STATUS_800_PREPARE && dist <= PREPARE_DISTANCE){
 			CommandBuilder play = getNewCommandPlayerToPlay();
 			if(play != null){
 				String tParam = getTurnType(next.turnType);
@@ -191,7 +202,21 @@ public class VoiceRouter {
 					play.prepareMakeUT(dist).play();
 				} 
 			}
-			currentStatus = 2;
+			currentStatus = STATUS_200_TURN;
+		} else if((currentStatus <= STATUS_800_PREPARE && dist <= PREPARE_DISTANCE)
+				|| (currentStatus <= STATUS_3000_PREPARE && dist <= PREPARE_LONG_DISTANCE_END && dist >= PREPARE_LONG_DISTANCE_ST)){
+			CommandBuilder play = getNewCommandPlayerToPlay();
+			if(play != null){
+				String tParam = getTurnType(next.turnType);
+				if(tParam != null){
+					play.prepareTurn(tParam, dist).play();
+				} else if(next.turnType.isRoundAbout()){
+					play.prepareRoundAbout(dist).play();
+				} else if(next.turnType.getValue().equals(TurnType.TU)){
+					play.prepareMakeUT(dist).play();
+				} 
+			}
+			currentStatus = currentStatus <= STATUS_3000_PREPARE ? STATUS_800_PREPARE : STATUS_200_TURN;
 		}
 		
 		
