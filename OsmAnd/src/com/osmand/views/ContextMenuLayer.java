@@ -96,12 +96,16 @@ public class ContextMenuLayer implements OsmandMapLayer {
 	@Override
 	public void onDraw(Canvas canvas) {
 		if(latLon != null){
-			int x = view.getRotatedMapXForPoint(latLon.getLatitude(), latLon.getLongitude());
-			int y = view.getRotatedMapYForPoint(latLon.getLatitude(), latLon.getLongitude());
+			int x = view.getMapXForPoint(latLon.getLongitude());
+			int y = view.getMapYForPoint(latLon.getLatitude());
 			canvas.drawCircle(x, y, 5 * dm.density, paintBorder);
 			canvas.drawCircle(x, y, 5 * dm.density, paintBlack);
 			
+			
 			if (textView.getText().length() > 0) {
+				x = view.getRotatedMapXForPoint(latLon.getLatitude(), latLon.getLongitude());
+				y = view.getRotatedMapYForPoint(latLon.getLatitude(), latLon.getLongitude());
+				canvas.rotate(-view.getRotate(), view.getCenterPointX(), view.getCenterPointY());
 				canvas.translate(x - textView.getWidth() / 2, y - textView.getHeight() - 12);
 				int c = textView.getLineCount();
 				textBorder.bottom = textView.getHeight() + 2;
