@@ -385,6 +385,8 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			location = null;
 			amenityAdapter.notifyDataSetChanged();
 			searchPOILevel.setEnabled(false);
+		} else {
+			setLocation(location);
 		}
 		if(searchNearBy && location == null){
 			searchPOILevel.setText(R.string.search_poi_location);

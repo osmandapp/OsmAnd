@@ -25,7 +25,6 @@ public class ToDoConstants {
 	// Improvements
 	// ! Download with wget
 	// ! progress while map is loading
-	// ! Give voice alert before 3km to the turn & take into account speed (to say faster)
 	
 	// Not clear if it is really needed 
 	//   69. Add phone information to POI

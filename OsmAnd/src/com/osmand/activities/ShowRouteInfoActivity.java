@@ -67,7 +67,7 @@ public class ShowRouteInfoActivity extends ListActivity {
 		int minutes = (helper.getLeftTime() / 60) % 60;
 		header.setText(MessageFormat.format(getString(R.string.route_general_information), MapUtils.getFormattedDistance(dist),
 				hours, minutes));
-		float f = Math.min(dm.widthPixels/dm.densityDpi,dm.heightPixels/dm.densityDpi);
+		float f = Math.min(dm.widthPixels/(dm.density*160),dm.heightPixels/(dm.density*160));
 		if (f >= 3) {
 			// large screen
 			header.setTextSize(dm.scaledDensity * 23);

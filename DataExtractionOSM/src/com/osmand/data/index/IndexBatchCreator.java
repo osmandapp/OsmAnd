@@ -28,7 +28,7 @@ public class IndexBatchCreator {
 	private static final boolean indexPOI = true;
 	private static final boolean indexAddress = true;
 	private static final boolean indexTransport = true;
-	private static final boolean writeWayNodes = true;
+	private static final boolean writeWayNodes = false;
 	
 	protected static final Log log = LogUtil.getLog(IndexBatchCreator.class);
 	protected static final String SITE_TO_DOWNLOAD1 = "http://download.geofabrik.de/osm/europe/"; //$NON-NLS-1$
@@ -420,7 +420,7 @@ public class IndexBatchCreator {
 		uploader.setUserName(user);
 		uploader.setPassword(password);
 		uploader.setLabels("Type-Archive, Testdata");
-		uploader.setSummary(summary);
+		uploader.setSummary(summary.replace('_', ' '));
 		try {
 			uploader.upload();
 		} catch (IOException e) {

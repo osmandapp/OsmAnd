@@ -844,10 +844,14 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			val += 90;
 		}
 		if (currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS && !mapView.mapIsAnimating()) {
-			mapView.setRotate(-val);
+			if(Math.abs(mapView.getRotate() + val) > 10){
+				mapView.setRotate(-val);
+			}
 		}
 		if(currentShowingAngle){
-			locationLayer.setHeading(val);
+			if(locationLayer.getHeading() == null || Math.abs(locationLayer.getHeading() - val) > 10){
+				locationLayer.setHeading(val);
+			}
 		}
 		
 	}
