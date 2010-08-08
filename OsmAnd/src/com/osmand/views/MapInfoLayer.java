@@ -93,7 +93,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		dm = new DisplayMetrics();
 		mgr.getDefaultDisplay().getMetrics(dm);
 		scaleCoefficient = dm.density;
-		if(Math.min(dm.widthPixels/dm.densityDpi, dm.heightPixels/dm.densityDpi) > 2.5f){
+		if(Math.min(dm.widthPixels/(dm.density*160), dm.heightPixels/(dm.density*160)) > 2.5f){
 			// large screen
 			scaleCoefficient *= 1.5f;
 		}
