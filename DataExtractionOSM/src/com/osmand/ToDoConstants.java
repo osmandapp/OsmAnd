@@ -15,6 +15,11 @@ public class ToDoConstants {
 	//  ! 81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
 	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?),
 	//  railway( station, subway?) - issue 17
+	
+	// BUG custom filter : select all/deselect all
+	//     publish on market
+	//     rotate map gps without location
+	//     recalculating route
  
 
 	// Unscheduled (complex)

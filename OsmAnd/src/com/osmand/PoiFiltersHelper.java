@@ -110,7 +110,7 @@ public class PoiFiltersHelper {
 			////ctx.deleteDatabase(PoiFilterDbHelper.DATABASE_NAME);
 			
 			cacheUserDefinedFilters = new ArrayList<PoiFilter>();
-			PoiFilter filter = new PoiFilter(Messages.getMessage("poi_filter_custom_filter"), PoiFilter.CUSTOM_FILTER_ID, null); //$NON-NLS-1$
+			PoiFilter filter = new PoiFilter(Messages.getMessage("poi_filter_custom_filter"), PoiFilter.CUSTOM_FILTER_ID, new LinkedHashMap<AmenityType, List<String>>()); //$NON-NLS-1$
 			cacheUserDefinedFilters.add(filter);
 			PoiFilterDbHelper helper = new PoiFilterDbHelper(ctx);
 			cacheUserDefinedFilters.addAll(helper.getFilters());

@@ -2,8 +2,6 @@ package com.osmand.osm.io;
 
 import com.osmand.osm.Entity;
 import com.osmand.osm.Node;
-import com.osmand.osm.Relation;
-import com.osmand.osm.Way;
 import com.osmand.osm.Entity.EntityId;
 
 public class OsmBoundsFilter implements IOsmStorageFilter {
@@ -31,25 +29,8 @@ public class OsmBoundsFilter implements IOsmStorageFilter {
 			}
 			return false;
 		}
-		// filter if one of the instance exists
-		// IMPORTANT : The main assumption is that order is preserved in osm file (first are node, way, relation)!!!
-		if(entity instanceof Way){
-			for(EntityId l : ((Way) entity).getEntityIds()){
-				if(storage.getRegisteredEntities().containsKey(l)){
-					return true;
-				}
-			}
-			return false;
-		}
-		if(entity instanceof Relation){
-			for(EntityId l : ((Relation) entity).getMemberIds()){
-				if(storage.getRegisteredEntities().containsKey(l)){
-					return true;
-				}
-			}
-			return false;
-		}
-		return false;
+		// unknown for other locations
+		return true;
 	}
 
 }

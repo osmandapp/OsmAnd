@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry excluding="**/MapPanel*|com/osmand/LogUtil.java|com/osmand/osm/io/OSMStorageWriter.java|com/osmand/DataExtraction.java|com/osmand/swing/|com/osmand/data/preparation/DataExtraction.java|com/osmand/data/preparation/DataIndexBuilder.java|com/osmand/osm/io/OsmStorageWriter.java|test/|com/osmand/ExceptionHandler.java|com/osmand/osm/util/|com/osmand/data/index/IndexBatchCreator.java" kind="src" path="use"/>
+	<classpathentry excluding="**/MapPanel*|com/osmand/LogUtil.java|com/osmand/osm/io/OSMStorageWriter.java|com/osmand/DataExtraction.java|com/osmand/swing/|com/osmand/data/preparation/DataExtraction.java|com/osmand/data/preparation/DataIndexBuilder.java|com/osmand/osm/io/OsmStorageWriter.java|test/|com/osmand/ExceptionHandler.java|com/osmand/osm/util/|com/osmand/data/index/IndexBatchCreator.java|com/osmand/data/preparation/NewDataExtraction.java" kind="src" path="use"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="lib" path="lib/bzip2-20090327.jar"/>

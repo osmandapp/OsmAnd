@@ -61,12 +61,13 @@ public class DataIndexWriter {
 			log.warn("Remove existing index : " + f.getAbsolutePath()); //$NON-NLS-1$
 			f.delete();
 		}
-		return f;
+		return f;	
 	}
 	
 	public DataIndexWriter writePOI() throws IOException, SQLException {
 		return writePOI(IndexConstants.POI_INDEX_DIR+region.getName()+IndexConstants.POI_INDEX_EXT, null);
 	}
+	
 	
 	public DataIndexWriter writePOI(String fileName, Long date) throws IOException, SQLException { 
 		File file = checkFile(fileName);
@@ -79,32 +80,13 @@ public class DataIndexWriter {
 		}
         Connection conn = DriverManager.getConnection("jdbc:sqlite:"+file.getAbsolutePath()); //$NON-NLS-1$
 		try {
-			Statement stat = conn.createStatement();
-			assert IndexPoiTable.values().length == 8;
-	        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexPoiTable.values()));
-	        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexPoiTable.values()));
-	        stat.execute("PRAGMA user_version = " + IndexConstants.POI_TABLE_VERSION); //$NON-NLS-1$
-	        stat.close();
-	        
-	        PreparedStatement prep = conn.prepareStatement(
-	            IndexConstants.generatePrepareStatementToInsert(IndexPoiTable.getTable(), 8));
+			createPoiIndexStructure(conn);
+			PreparedStatement prep = createStatementAmenityInsert(conn);
 	        conn.setAutoCommit(false);
 	        int currentCount = 0;
 			for (Amenity a : region.getAmenityManager().getAllObjects()) {
-				prep.setLong(IndexPoiTable.ID.ordinal() + 1, a.getId());
-				prep.setDouble(IndexPoiTable.LATITUDE.ordinal() + 1, a.getLocation().getLatitude());
-				prep.setDouble(IndexPoiTable.LONGITUDE.ordinal() + 1, a.getLocation().getLongitude());
-				prep.setString(IndexPoiTable.NAME_EN.ordinal() + 1, a.getEnName());
-				prep.setString(IndexPoiTable.NAME.ordinal() + 1, a.getName());
-				prep.setString(IndexPoiTable.TYPE.ordinal() + 1, AmenityType.valueToString(a.getType()));
-				prep.setString(IndexPoiTable.SUBTYPE.ordinal() + 1, a.getSubType());
-				prep.setString(IndexPoiTable.OPENING_HOURS.ordinal() + 1 , a.getOpeningHours());
-				prep.addBatch();
-				currentCount++;
-				if(currentCount >= BATCH_SIZE){
-					prep.executeBatch();
-					currentCount = 0;
-				}
+				currentCount = insertAmenityIntoPoi(prep, a, currentCount, BATCH_SIZE);
+				
 			}
 			if(currentCount > 0){
 				prep.executeBatch();
@@ -119,6 +101,39 @@ public class DataIndexWriter {
 			file.setLastModified(date);
 		}
 		return this;
+	}
+
+	public static int insertAmenityIntoPoi(PreparedStatement prep, Amenity amenity, int currentInBatch, int batchSize) throws SQLException {
+		prep.setLong(IndexPoiTable.ID.ordinal() + 1, amenity.getId());
+		prep.setDouble(IndexPoiTable.LATITUDE.ordinal() + 1, amenity.getLocation().getLatitude());
+		prep.setDouble(IndexPoiTable.LONGITUDE.ordinal() + 1, amenity.getLocation().getLongitude());
+		prep.setString(IndexPoiTable.NAME_EN.ordinal() + 1, amenity.getEnName());
+		prep.setString(IndexPoiTable.NAME.ordinal() + 1, amenity.getName());
+		prep.setString(IndexPoiTable.TYPE.ordinal() + 1, AmenityType.valueToString(amenity.getType()));
+		prep.setString(IndexPoiTable.SUBTYPE.ordinal() + 1, amenity.getSubType());
+		prep.setString(IndexPoiTable.OPENING_HOURS.ordinal() + 1 , amenity.getOpeningHours());
+		prep.addBatch();
+		currentInBatch++;
+		if(currentInBatch >= batchSize){
+			prep.executeBatch();
+			currentInBatch = 0;
+		}
+		return currentInBatch;
+	}
+	
+	public static PreparedStatement createStatementAmenityInsert(Connection conn) throws SQLException{
+		assert IndexPoiTable.values().length == 8;
+        return conn.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexPoiTable.getTable(), 8));
+	}
+	
+	
+	public static void createPoiIndexStructure(Connection conn) throws SQLException{
+		Statement stat = conn.createStatement();
+        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexPoiTable.values()));
+        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexPoiTable.values()));
+        stat.execute("PRAGMA user_version = " + IndexConstants.POI_TABLE_VERSION); //$NON-NLS-1$
+        stat.close();
+        
 	}
 	
 	public DataIndexWriter writeAddress() throws IOException, SQLException{
