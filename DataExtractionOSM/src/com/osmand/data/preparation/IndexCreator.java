@@ -11,8 +11,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
@@ -23,8 +28,13 @@ import org.xml.sax.SAXException;
 import com.osmand.Algoritms;
 import com.osmand.IProgress;
 import com.osmand.data.Amenity;
+import com.osmand.data.TransportRoute;
+import com.osmand.data.TransportStop;
 import com.osmand.data.index.DataIndexWriter;
 import com.osmand.data.index.IndexConstants;
+import com.osmand.data.index.IndexConstants.IndexTransportRoute;
+import com.osmand.data.index.IndexConstants.IndexTransportRouteStop;
+import com.osmand.data.index.IndexConstants.IndexTransportStop;
 import com.osmand.impl.ConsoleProgressImplementation;
 import com.osmand.osm.Entity;
 import com.osmand.osm.Node;
@@ -32,6 +42,7 @@ import com.osmand.osm.Relation;
 import com.osmand.osm.Way;
 import com.osmand.osm.Entity.EntityId;
 import com.osmand.osm.Entity.EntityType;
+import com.osmand.osm.OSMSettings.OSMTagKey;
 import com.osmand.osm.io.IOsmStorageFilter;
 import com.osmand.osm.io.OsmBaseStorage;
 import com.osmand.swing.DataExtractionSettings;
@@ -43,20 +54,23 @@ import com.osmand.swing.DataExtractionSettings;
  *  
  *
  */
-public class NewDataExtraction {
+public class IndexCreator {
 	private static final Log log = LogFactory.getLog(DataExtraction.class);
 
 	public static final int BATCH_SIZE = 5000;
 	public static final String TEMP_NODES_DB = "nodes"+IndexConstants.MAP_INDEX_EXT;
 	
-	
-	private final boolean normalizeStreets;
-	private final boolean indexAddress;
-	private final boolean indexPOI;
-	private final boolean indexTransport;
-	private final boolean indexMap;
-	private final boolean saveAddressWays;
 	private File workingDir = null;
+	
+	private boolean indexMap;
+	private boolean indexPOI;
+	private boolean indexTransport;
+	
+	private boolean indexAddress;
+	private boolean normalizeStreets;
+	private boolean saveAddressWays;
+
+	private String regionName;
 	
 	private String transportFileName = null;
 	private String poiFileName = null;
@@ -73,28 +87,49 @@ public class NewDataExtraction {
 	private Connection dbConn;
 	private File dbFile;
 	
+	Map<PreparedStatement, Integer> pStatements = new LinkedHashMap<PreparedStatement, Integer>();
 	
 	private Connection poiConnection;
 	private File poiIndexFile;
 	private PreparedStatement poiPreparedStatement;
-	private int poiInBatch = 0;
-
-	private String regionName;
-
 	
-
 	
-	public NewDataExtraction(boolean indexAddress, boolean indexPOI, boolean indexTransport,
-			boolean indexMap, boolean saveAddressWays, boolean normalizeStreets, 
-			File workingDir){
-		this.indexAddress = indexAddress;
-		this.indexPOI = indexPOI;
-		this.indexTransport = indexTransport;
-		this.indexMap = indexMap;
-		this.saveAddressWays = saveAddressWays;
-		this.normalizeStreets = normalizeStreets;
+	Set<Long> visitedStops = new HashSet<Long>();
+	private File transportIndexFile;
+	private Connection transportConnection;
+	private PreparedStatement transRouteStat;
+	private PreparedStatement transRouteStopsStat;
+	private PreparedStatement transStopsStat;
+	
+	
+	
+	public IndexCreator(File workingDir){
 		this.workingDir = workingDir;
-		
+	}
+	
+	
+	public void setIndexAddress(boolean indexAddress) {
+		this.indexAddress = indexAddress;
+	}
+	
+	public void setIndexMap(boolean indexMap) {
+		this.indexMap = indexMap;
+	}
+	
+	public void setIndexPOI(boolean indexPOI) {
+		this.indexPOI = indexPOI;
+	}
+	
+	public void setIndexTransport(boolean indexTransport) {
+		this.indexTransport = indexTransport;
+	}
+	
+	public void setSaveAddressWays(boolean saveAddressWays) {
+		this.saveAddressWays = saveAddressWays;
+	}
+	
+	public void setNormalizeStreets(boolean normalizeStreets) {
+		this.normalizeStreets = normalizeStreets;
 	}
 
 	
@@ -248,146 +283,174 @@ public class NewDataExtraction {
 		this.regionName = regionName;
 	}
 	
-	public void generateIndexes(String path, IProgress progress, IOsmStorageFilter addFilter) throws IOException, SAXException, SQLException{
-			File f = new File(path);
-			InputStream stream = new FileInputStream(f);
-			int i = f.getName().indexOf('.');
-			if(regionName == null){
-				regionName = Algoritms.capitalizeFirstLetterAndLowercase(f.getName().substring(0, i));
-			}
-			
-			InputStream streamFile = stream;
-			long st = System.currentTimeMillis();
-			if (path.endsWith(".bz2")) {
-				if (stream.read() != 'B' || stream.read() != 'Z') {
-					throw new RuntimeException("The source stream must start with the characters BZ if it is to be read as a BZip2 stream.");
-				} else {
-					stream = new CBZip2InputStream(stream);
-				}
-			}
-			
-			if(progress != null){
-				progress.startTask("Loading file " + path, -1);
-			}
-	        OsmBaseStorage storage = new OsmBaseStorage();
-	        storage.setSupressWarnings(DataExtractionSettings.getSettings().isSupressWarningsForDuplicatedId());
-	        if (addFilter != null) {
-				storage.getFilters().add(addFilter);
-			}
+	public void generateIndexes(String path, IProgress progress, IOsmStorageFilter addFilter) throws IOException, SAXException,
+			SQLException {
+		File f = new File(path);
+		InputStream stream = new FileInputStream(f);
+		int i = f.getName().indexOf('.');
+		if (regionName == null) {
+			regionName = Algoritms.capitalizeFirstLetterAndLowercase(f.getName().substring(0, i));
+		}
 
-	        
-	        try {
-				Class.forName("org.sqlite.JDBC");
-			} catch (ClassNotFoundException e) {
-				log.error("Illegal configuration", e);
-				throw new IllegalStateException(e);
-			}
-			if(indexMap){
-				dbFile = new File(workingDir, getMapFileName()); 
+		InputStream streamFile = stream;
+		long st = System.currentTimeMillis();
+		if (path.endsWith(".bz2")) {
+			if (stream.read() != 'B' || stream.read() != 'Z') {
+				throw new RuntimeException("The source stream must start with the characters BZ if it is to be read as a BZip2 stream.");
 			} else {
-				dbFile = new File(workingDir, TEMP_NODES_DB);
+				stream = new CBZip2InputStream(stream);
 			}
+		}
+
+		if (progress != null) {
+			progress.startTask("Loading file " + path, -1);
+		}
+		OsmBaseStorage storage = new OsmBaseStorage();
+		storage.setSupressWarnings(DataExtractionSettings.getSettings().isSupressWarningsForDuplicatedId());
+		if (addFilter != null) {
+			storage.getFilters().add(addFilter);
+		}
+
+		try {
+			Class.forName("org.sqlite.JDBC");
+		} catch (ClassNotFoundException e) {
+			log.error("Illegal configuration", e);
+			throw new IllegalStateException(e);
+		}
+		if (indexMap) {
+			dbFile = new File(workingDir, getMapFileName());
+		} else {
+			dbFile = new File(workingDir, TEMP_NODES_DB);
+		}
+		// to save space
+		if (dbFile.exists()) {
+			dbFile.delete();
+		}
+		// creating nodes db to fast access for all nodes
+		dbConn = DriverManager.getConnection("jdbc:sqlite:" + dbFile.getAbsolutePath());
+
+		// 1. Loading osm file
+		NewDataExtractionOsmFilter filter = new NewDataExtractionOsmFilter();
+		try {
+			// 1 init database to store temporary data
+			progress.setGeneralProgress("[40 of 100]");
+
+			filter.initDatabase();
+			storage.getFilters().add(filter);
+			storage.parseOSM(stream, progress, streamFile, false);
+			filter.finishLoading();
+
+			if (log.isInfoEnabled()) {
+				log.info("File parsed : " + (System.currentTimeMillis() - st));
+			}
+			progress.finishTask();
+
+		} finally {
+			if (log.isInfoEnabled()) {
+				log.info("File indexed : " + (System.currentTimeMillis() - st));
+			}
+		}
+
+		// 2. Processing all entries
+		progress.setGeneralProgress("[90 of 100]");
+
+		pselectNode = dbConn.prepareStatement("select * from node where id = ?");
+		pselectWay = dbConn.prepareStatement("select * from ways where id = ?");
+		pselectRelation = dbConn.prepareStatement("select * from relations where id = ?");
+		pselectTags = dbConn.prepareStatement("select key, value from tags where id = ? and type = ?");
+
+		if (indexPOI) {
+			poiIndexFile = new File(workingDir, getPoiFileName());
 			// to save space
-			if(dbFile.exists()){
-				dbFile.delete();
+			if (poiIndexFile.exists()) {
+				poiIndexFile.delete();
 			}
+			poiIndexFile.getParentFile().mkdirs();
 			// creating nodes db to fast access for all nodes
-			dbConn = DriverManager.getConnection("jdbc:sqlite:" + dbFile.getAbsolutePath());
-	        
-	        // 1. Loading osm file
-			NewDataExtractionOsmFilter filter = new NewDataExtractionOsmFilter();
-			try {
-				// 1 init database to store temporary data
-				progress.setGeneralProgress("[40 of 100]");
-				
-				filter.initDatabase();
-				storage.getFilters().add(filter);
-				storage.parseOSM(stream, progress, streamFile, false);
-				filter.finishLoading();
-				
-				if (log.isInfoEnabled()) {
-					log.info("File parsed : " + (System.currentTimeMillis() - st));
-				}
-				progress.finishTask();
-				
-				
-			} finally {
-				if (log.isInfoEnabled()) {
-					log.info("File indexed : " + (System.currentTimeMillis() - st));
-				}
-			}
-			
-	
-	        // 2. Processing all entries
-			progress.setGeneralProgress("[90 of 100]");
+			poiConnection = DriverManager.getConnection("jdbc:sqlite:" + poiIndexFile.getAbsolutePath());
+			poiConnection.setAutoCommit(false);
+			DataIndexWriter.createPoiIndexStructure(poiConnection);
+			poiPreparedStatement = DataIndexWriter.createStatementAmenityInsert(poiConnection);
+			pStatements.put(poiPreparedStatement, 0);
+		}
 
-			pselectNode = dbConn.prepareStatement("select * from node where id = ?");
-			pselectWay = dbConn.prepareStatement("select * from ways where id = ?");
-			pselectRelation = dbConn.prepareStatement("select * from relations where id = ?");
-			pselectTags = dbConn.prepareStatement("select key, value from tags where id = ? and type = ?");
-			
-			if(indexPOI){
-				poiIndexFile = new File(workingDir, getPoiFileName());
-				// to save space
-				if(poiIndexFile.exists()){
-					poiIndexFile.delete();
-				}
-				poiIndexFile.getParentFile().mkdirs();
-				// creating nodes db to fast access for all nodes
-				poiConnection = DriverManager.getConnection("jdbc:sqlite:" + poiIndexFile.getAbsolutePath());
-				poiConnection.setAutoCommit(false);
-				DataIndexWriter.createPoiIndexStructure(poiConnection);
-				poiPreparedStatement = DataIndexWriter.createStatementAmenityInsert(poiConnection);
-				poiInBatch = 0;
+		if (indexTransport) {
+			transportIndexFile = new File(workingDir, getTransportFileName());
+			// to save space
+			if (transportIndexFile.exists()) {
+				transportIndexFile.delete();
 			}
-			
+			transportIndexFile.getParentFile().mkdirs();
+			// creating nodes db to fast access for all nodes
+			transportConnection = DriverManager.getConnection("jdbc:sqlite:" + transportIndexFile.getAbsolutePath());
 
-			iterateOverAllEntities(progress, filter);
-			
-			try {
-				if(pselectNode != null){
-					pselectNode.close();
-				}
-				if(pselectWay != null){
-					pselectWay.close();
-				}
-				if(pselectRelation != null){
-					pselectRelation.close();
-				}
-				if(pselectTags != null){
-					pselectTags.close();
-				}
-				if(poiConnection != null){
-					if(poiPreparedStatement != null){
-						if(poiInBatch > 0){
-							poiPreparedStatement.executeBatch();
-						}
-						poiPreparedStatement.close();
-					}
-					poiConnection.commit();
-					poiConnection.close();
-					if(lastModifiedDate != null){
-						poiIndexFile.setLastModified(lastModifiedDate);
-					}
-					
-				}
-				dbConn.close();
-			} catch (SQLException e) {
+			DataIndexWriter.createTransportIndexStructure(transportConnection);
+			transRouteStat = transportConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(
+					IndexTransportRoute.getTable(), IndexTransportRoute.values().length));
+			transRouteStopsStat = transportConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(
+					IndexTransportRouteStop.getTable(), IndexTransportRouteStop.values().length));
+			transStopsStat = transportConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexTransportStop
+					.getTable(), IndexTransportStop.values().length));
+			pStatements.put(transRouteStat, 0);
+			pStatements.put(transRouteStopsStat, 0);
+			pStatements.put(transStopsStat, 0);
+			transportConnection.setAutoCommit(false);
+
+		}
+
+		iterateOverAllEntities(progress, filter);
+
+		try {
+			if (pselectNode != null) {
+				pselectNode.close();
 			}
+			if (pselectWay != null) {
+				pselectWay.close();
+			}
+			if (pselectRelation != null) {
+				pselectRelation.close();
+			}
+			if (pselectTags != null) {
+				pselectTags.close();
+			}
+			for (PreparedStatement p : pStatements.keySet()) {
+				if (pStatements.get(p) > 0) {
+					p.executeBatch();
+					p.close();
+				}
+			}
+
+			if (poiConnection != null) {
+				poiConnection.commit();
+				poiConnection.close();
+				if (lastModifiedDate != null) {
+					poiIndexFile.setLastModified(lastModifiedDate);
+				}
+			}
+			if (transportConnection != null) {
+				transportConnection.commit();
+				transportConnection.close();
+				if (lastModifiedDate != null) {
+					transportIndexFile.setLastModified(lastModifiedDate);
+				}
+			}
+			
+			dbConn.close();
+		} catch (SQLException e) {
+		}
 	}
 	
-	public void loadEntityData(Entity e) throws SQLException {
+	public void loadEntityData(Entity e, boolean loadTags) throws SQLException {
 		if(e instanceof Node){
 			return;
 		}
 		Map<EntityId, Entity> map = new LinkedHashMap<EntityId, Entity>();
-		ArrayList<EntityId> ids = new ArrayList<EntityId>();
 		if(e instanceof Relation){
 			pselectRelation.setLong(1, e.getId());
 			if (pselectRelation.execute()) {
-				ResultSet rs = pselectNode.getResultSet();
+				ResultSet rs = pselectRelation.getResultSet();
 				while (rs.next()) {
-					((Relation) e).addMember(rs.getLong(1), EntityType.values()[rs.getByte(2)], rs.getString(3));
+					((Relation) e).addMember(rs.getLong(2), EntityType.values()[rs.getByte(3)], rs.getString(4));
 				}
 				rs.close();
 			}
@@ -401,6 +464,7 @@ public class NewDataExtraction {
 				rs.close();
 			}
 		}
+		Collection<EntityId> ids = e instanceof Relation? ((Relation)e).getMemberIds() : ((Way)e).getEntityIds();
 		for (EntityId i : ids) {
 			if (i.getType() == EntityType.NODE) {
 				pselectNode.setLong(1, i.getId());
@@ -421,6 +485,7 @@ public class NewDataExtraction {
 						way.addNode(rs.getLong(2));
 					}
 					rs.close();
+					loadEntityData(way, false);
 				}
 			} else if (i.getType() == EntityType.RELATION) {
 				pselectRelation.setLong(1, i.getId());
@@ -434,6 +499,11 @@ public class NewDataExtraction {
 					// do not load relation members recursively ? It is not needed for transport, address, poi before
 					rs.close();
 				}
+			}
+		}
+		if(loadTags){
+			for(Map.Entry<EntityId, Entity> es : map.entrySet()){
+				loadEntityTags(es.getKey().getType(), es.getValue());
 			}
 		}
 		e.initializeLinks(map);
@@ -455,7 +525,10 @@ public class NewDataExtraction {
 		this.mapFileName = mapFileName;
 	}
 	public String getMapFileName() {
-		return getRegionName() + IndexConstants.MAP_INDEX_EXT;
+		if(mapFileName == null){
+			return getRegionName() + IndexConstants.MAP_INDEX_EXT;
+		}
+		return mapFileName;
 	}
 	
 	public String getTransportFileName() {
@@ -536,14 +609,140 @@ public class NewDataExtraction {
 		rsTags.close();
 	}
 	
+	
+	private static Set<String> acceptedRoutes = new HashSet<String>();
+	static {
+		acceptedRoutes.add("bus");
+		acceptedRoutes.add("trolleybus");
+		acceptedRoutes.add("share_taxi");
+		
+		acceptedRoutes.add("subway");
+		acceptedRoutes.add("train");
+		
+		acceptedRoutes.add("tram");
+		
+		acceptedRoutes.add("ferry");
+	}
+	
+	private TransportRoute indexTransportRoute(Relation rel) {
+		String ref = rel.getTag(OSMTagKey.REF);
+		String route = rel.getTag(OSMTagKey.ROUTE);
+		String operator = rel.getTag(OSMTagKey.OPERATOR);
+		if (route == null || ref == null) {
+			return null;
+		}
+		if (!acceptedRoutes.contains(route)) {
+			return null;
+		}
+		TransportRoute r = new TransportRoute(rel, ref);
+		r.setOperator(operator);
+		r.setType(route);
+
+		if (operator != null) {
+			route = operator + " : " + route;
+		}
+
+		final Map<TransportStop, Integer> forwardStops = new LinkedHashMap<TransportStop, Integer>();
+		final Map<TransportStop, Integer> backwardStops = new LinkedHashMap<TransportStop, Integer>();
+		int currentStop = 0;
+		int forwardStop = 0;
+		int backwardStop = 0;
+		for (Entry<Entity, String> e : rel.getMemberEntities().entrySet()) {
+			if (e.getValue().contains("stop")) {
+				if (e.getKey() instanceof Node) {
+					TransportStop stop = new TransportStop(e.getKey());
+					boolean forward = e.getValue().contains("forward");
+					boolean backward = e.getValue().contains("backward");
+					currentStop++;
+					if (forward || !backward) {
+						forwardStop++;
+					}
+					if (backward) {
+						backwardStop++;
+					}
+					boolean common = !forward && !backward;
+					int index = -1;
+					int i = e.getValue().length() - 1;
+					int accum = 1;
+					while (i >= 0 && Character.isDigit(e.getValue().charAt(i))) {
+						if (index < 0) {
+							index = 0;
+						}
+						index = accum * Character.getNumericValue(e.getValue().charAt(i)) + index;
+						accum *= 10;
+						i--;
+					}
+					if (index < 0) {
+						index = forward ? forwardStop : (backward ? backwardStop : currentStop);
+					}
+					if (forward || common) {
+						forwardStops.put(stop, index);
+						r.getForwardStops().add(stop);
+					}
+					if (backward || common) {
+						if (common) {
+							// put with negative index
+							backwardStops.put(stop, -index);
+						} else {
+							backwardStops.put(stop, index);
+						}
+
+						r.getBackwardStops().add(stop);
+					}
+
+				}
+
+			} else if (e.getKey() instanceof Way) {
+				r.addWay((Way) e.getKey());
+			}
+		}
+		if (forwardStops.isEmpty() && backwardStops.isEmpty()) {
+			return null;
+		}
+		Collections.sort(r.getForwardStops(), new Comparator<TransportStop>() {
+			@Override
+			public int compare(TransportStop o1, TransportStop o2) {
+				return forwardStops.get(o1) - forwardStops.get(o2);
+			}
+		});
+		// all common stops are with negative index (reeval them)
+		for (TransportStop s : new ArrayList<TransportStop>(backwardStops.keySet())) {
+			if (backwardStops.get(s) < 0) {
+				backwardStops.put(s, backwardStops.size() + backwardStops.get(s) - 1);
+			}
+		}
+		Collections.sort(r.getBackwardStops(), new Comparator<TransportStop>() {
+			@Override
+			public int compare(TransportStop o1, TransportStop o2) {
+				return backwardStops.get(o1) - backwardStops.get(o2);
+			}
+		});
+		
+		return r;
+
+	}
 
 	private void iterateEntity(Entity e) throws SQLException {
 		if (indexPOI && Amenity.isAmenity(e)) {
-			loadEntityData(e);
+			loadEntityData(e, false);
 			if(poiPreparedStatement != null){
-				poiInBatch = DataIndexWriter.insertAmenityIntoPoi(poiPreparedStatement, new Amenity(e), poiInBatch, BATCH_SIZE);
+				Amenity a = new Amenity(e);
+				if(a.getLocation() != null){
+					DataIndexWriter.insertAmenityIntoPoi(poiPreparedStatement, pStatements, a, BATCH_SIZE);
+				}
 			}
 		}
+		if(indexTransport){
+			if(e instanceof Relation && e.getTag(OSMTagKey.ROUTE) != null){
+				loadEntityData(e, true);
+				TransportRoute route = indexTransportRoute((Relation) e);
+				if(route != null){
+					DataIndexWriter.insertTransportIntoIndex(transRouteStat, transRouteStopsStat, transStopsStat, visitedStops, route, pStatements,
+							BATCH_SIZE);
+				}
+			}
+		}
+		
 /*		if (e instanceof Node && e.getTag(OSMTagKey.PLACE) != null) {
 			places.add((Node) e);
 			processed = true;
@@ -578,31 +777,17 @@ public class NewDataExtraction {
 				}
 
 			}
-		}
-		if(indexTransport){
-			if(e instanceof Relation && e.getTag(OSMTagKey.ROUTE) != null){
-				transport.add((Relation) e);
-				processed = true;
-			}
-			if(e instanceof Node && "bus_stop".equals(e.getTag(OSMTagKey.HIGHWAY))){
-				// load all stops in order to get their names
-				processed = true;
-			}
-			
-			if (e instanceof Node && e.getTag(OSMTagKey.RAILWAY) != null) {
-				if ("tram_stop".equals(e.getTag(OSMTagKey.RAILWAY)) || "station".equals(e.getTag(OSMTagKey.RAILWAY))) {
-					// load all stops in order to get their names
-					processed = true;
-				}
-			}
-		}*/
+		} */
+		
 	}
 	
-	
+
+	// TODO transliteration !!!
 	public static void main(String[] args) throws IOException, SAXException, SQLException {
-		NewDataExtraction extr = new NewDataExtraction(false, true, false,false, false, false, new File("E:/temp"));
-		extr.setPoiFileName("1.odb");
-		extr.generateIndexes("e:\\Temp\\ams_poi.osm", new ConsoleProgressImplementation(4), null);
+		IndexCreator extr = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
+		extr.setIndexPOI(true);
+		extr.setIndexTransport(true);
+		extr.generateIndexes("e:/Information/OSM maps/belarus osm/minsk.osm", new ConsoleProgressImplementation(4), null);
 		
 	}
 }

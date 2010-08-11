@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -82,13 +83,13 @@ public class DataIndexWriter {
 		try {
 			createPoiIndexStructure(conn);
 			PreparedStatement prep = createStatementAmenityInsert(conn);
+			Map<PreparedStatement, Integer> map = new LinkedHashMap<PreparedStatement, Integer>();
+			map.put(prep, 0);
 	        conn.setAutoCommit(false);
-	        int currentCount = 0;
 			for (Amenity a : region.getAmenityManager().getAllObjects()) {
-				currentCount = insertAmenityIntoPoi(prep, a, currentCount, BATCH_SIZE);
-				
+				insertAmenityIntoPoi(prep, map, a, BATCH_SIZE);
 			}
-			if(currentCount > 0){
+			if(map.get(prep) > 0){
 				prep.executeBatch();
 			}
 			prep.close();
@@ -103,7 +104,7 @@ public class DataIndexWriter {
 		return this;
 	}
 
-	public static int insertAmenityIntoPoi(PreparedStatement prep, Amenity amenity, int currentInBatch, int batchSize) throws SQLException {
+	public static void insertAmenityIntoPoi(PreparedStatement prep, Map<PreparedStatement, Integer> map, Amenity amenity, int batchSize) throws SQLException {
 		prep.setLong(IndexPoiTable.ID.ordinal() + 1, amenity.getId());
 		prep.setDouble(IndexPoiTable.LATITUDE.ordinal() + 1, amenity.getLocation().getLatitude());
 		prep.setDouble(IndexPoiTable.LONGITUDE.ordinal() + 1, amenity.getLocation().getLongitude());
@@ -112,13 +113,7 @@ public class DataIndexWriter {
 		prep.setString(IndexPoiTable.TYPE.ordinal() + 1, AmenityType.valueToString(amenity.getType()));
 		prep.setString(IndexPoiTable.SUBTYPE.ordinal() + 1, amenity.getSubType());
 		prep.setString(IndexPoiTable.OPENING_HOURS.ordinal() + 1 , amenity.getOpeningHours());
-		prep.addBatch();
-		currentInBatch++;
-		if(currentInBatch >= batchSize){
-			prep.executeBatch();
-			currentInBatch = 0;
-		}
-		return currentInBatch;
+		addBatch(map, prep, batchSize);
 	}
 	
 	public static PreparedStatement createStatementAmenityInsert(Connection conn) throws SQLException{
@@ -278,18 +273,7 @@ public class DataIndexWriter {
 		}
         Connection conn = DriverManager.getConnection("jdbc:sqlite:"+file.getAbsolutePath()); //$NON-NLS-1$
 		try {
-			Statement stat = conn.createStatement();
-			
-
-			
-	        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexTransportRoute.values()));
-	        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexTransportRoute.values()));
-	        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexTransportRouteStop.values()));
-	        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexTransportRouteStop.values()));
-	        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexTransportStop.values()));
-	        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexTransportStop.values()));
-	        stat.execute("PRAGMA user_version = " + IndexConstants.TRANSPORT_TABLE_VERSION); //$NON-NLS-1$
-	        stat.close();
+			createTransportIndexStructure(conn);
 	        
 	        PreparedStatement prepRoute = conn.prepareStatement(
 	            IndexConstants.generatePrepareStatementToInsert(IndexTransportRoute.getTable(), IndexTransportRoute.values().length));
@@ -307,18 +291,7 @@ public class DataIndexWriter {
 	        Set<Long> writtenStops = new LinkedHashSet<Long>();
 	        for(String t : region.getTransportRoutes().keySet()){
 	        	for(TransportRoute r : region.getTransportRoutes().get(t)) {
-	        		assert IndexTransportRoute.values().length == 7;
-	        		prepRoute.setLong(IndexTransportRoute.ID.ordinal() + 1, r.getId());
-	        		prepRoute.setString(IndexTransportRoute.TYPE.ordinal() + 1, r.getType());
-					prepRoute.setString(IndexTransportRoute.OPERATOR.ordinal() + 1, r.getOperator());
-					prepRoute.setString(IndexTransportRoute.REF.ordinal() + 1, r.getRef());
-	        		prepRoute.setString(IndexTransportRoute.NAME.ordinal() + 1, r.getName());
-					prepRoute.setString(IndexTransportRoute.NAME_EN.ordinal() + 1, r.getEnName());
-					prepRoute.setInt(IndexTransportRoute.DIST.ordinal() + 1, r.getAvgBothDistance());
-					addBatch(count, prepRoute);
-					
-					writeRouteStops(prepRouteStops, prepStops, count, writtenStops, r, r.getForwardStops(), true);
-					writeRouteStops(prepRouteStops, prepStops, count, writtenStops, r, r.getBackwardStops(), false);
+	        		insertTransportIntoIndex(prepRoute, prepRouteStops, prepStops, writtenStops, r, count, BATCH_SIZE);
 	        	}
 	        }
 			
@@ -339,7 +312,7 @@ public class DataIndexWriter {
 		return this;
 	}
 
-	private void writeRouteStops(PreparedStatement prepRouteStops, PreparedStatement prepStops, Map<PreparedStatement, Integer> count,
+	private static void writeRouteStops(PreparedStatement prepRouteStops, PreparedStatement prepStops, Map<PreparedStatement, Integer> count,
 			Set<Long> writtenStops, TransportRoute r, List<TransportStop> stops, boolean direction) throws SQLException {
 		int i = 0;
 		for(TransportStop s : stops){
@@ -363,17 +336,52 @@ public class DataIndexWriter {
 	}
 	
 	
-
+	public static void insertTransportIntoIndex(PreparedStatement prepRoute, PreparedStatement prepRouteStops,
+			PreparedStatement prepStops, Set<Long> writtenStops, TransportRoute route, Map<PreparedStatement, Integer> statements,
+			int batchSize) throws SQLException {
+		assert IndexTransportRoute.values().length == 7;
+		prepRoute.setLong(IndexTransportRoute.ID.ordinal() + 1, route.getId());
+		prepRoute.setString(IndexTransportRoute.TYPE.ordinal() + 1, route.getType());
+		prepRoute.setString(IndexTransportRoute.OPERATOR.ordinal() + 1, route.getOperator());
+		prepRoute.setString(IndexTransportRoute.REF.ordinal() + 1, route.getRef());
+		prepRoute.setString(IndexTransportRoute.NAME.ordinal() + 1, route.getName());
+		prepRoute.setString(IndexTransportRoute.NAME_EN.ordinal() + 1, route.getEnName());
+		prepRoute.setInt(IndexTransportRoute.DIST.ordinal() + 1, route.getAvgBothDistance());
+		addBatch(statements, prepRoute);
+		
+		writeRouteStops(prepRouteStops, prepStops, statements, writtenStops, route, route.getForwardStops(), true);
+		writeRouteStops(prepRouteStops, prepStops, statements, writtenStops, route, route.getBackwardStops(), false);
+		
+	}
 	
-	private void addBatch(Map<PreparedStatement, Integer> count, PreparedStatement p) throws SQLException{
+	public static void createTransportIndexStructure(Connection conn) throws SQLException{
+		Statement stat = conn.createStatement();
+        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexTransportRoute.values()));
+        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexTransportRoute.values()));
+        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexTransportRouteStop.values()));
+        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexTransportRouteStop.values()));
+        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexTransportStop.values()));
+        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexTransportStop.values()));
+        stat.execute("PRAGMA user_version = " + IndexConstants.TRANSPORT_TABLE_VERSION); //$NON-NLS-1$
+        stat.close();
+	}
+	
+
+	private static void addBatch(Map<PreparedStatement, Integer> count, PreparedStatement p) throws SQLException{
+		addBatch(count, p, BATCH_SIZE);
+	}
+	
+	private static void addBatch(Map<PreparedStatement, Integer> count, PreparedStatement p, int batchSize) throws SQLException{
 		p.addBatch();
-		if(count.get(p) >= BATCH_SIZE){
+		if(count.get(p) >= batchSize){
 			p.executeBatch();
 			count.put(p, 0);
 		} else {
 			count.put(p, count.get(p) + 1);
 		}
 	}
+
+	
 	
 	
 }
