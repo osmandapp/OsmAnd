@@ -20,6 +20,7 @@ public class OSMSettings {
 		PLACE("place"), //$NON-NLS-1$
 		ADDR_HOUSE_NUMBER("addr:housenumber"), //$NON-NLS-1$
 		ADDR_STREET("addr:street"), //$NON-NLS-1$
+		ADDR_CITY("addr:city"), //$NON-NLS-1$
 		ADDR_POSTCODE("addr:postcode"), //$NON-NLS-1$
 		ADDRESS_TYPE("address:type"), //$NON-NLS-1$
 		ADDRESS_HOUSE("address:house"), //$NON-NLS-1$

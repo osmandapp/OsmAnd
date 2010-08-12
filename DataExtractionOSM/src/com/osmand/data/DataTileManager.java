@@ -19,7 +19,15 @@ public class DataTileManager<T> {
 	/**
 	 * map for objects stores as 'xTile_yTile' -> List<T>
 	 */
-	private Map<String, List<T>> objects = new HashMap<String, List<T>>(); 
+	private Map<String, List<T>> objects = new HashMap<String, List<T>>();
+	
+	public DataTileManager(){
+		zoom = 15;
+	}
+	
+	public DataTileManager(int z){
+		zoom = z;
+	}
 	
 	public int getZoom() {
 		return zoom;
@@ -164,7 +172,11 @@ public class DataTileManager<T> {
 		objects.get(tile).add(object);
 		return tile;
 	}
+
 	
+	public void clear(){
+		objects.clear();
+	}
 	
 
 }

@@ -16,9 +16,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
+
+import net.sf.junidecode.Junidecode;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,15 +31,25 @@ import org.xml.sax.SAXException;
 import com.osmand.Algoritms;
 import com.osmand.IProgress;
 import com.osmand.data.Amenity;
+import com.osmand.data.Building;
+import com.osmand.data.City;
+import com.osmand.data.DataTileManager;
+import com.osmand.data.MapObject;
 import com.osmand.data.TransportRoute;
 import com.osmand.data.TransportStop;
 import com.osmand.data.index.DataIndexWriter;
 import com.osmand.data.index.IndexConstants;
+import com.osmand.data.index.IndexConstants.IndexBuildingTable;
+import com.osmand.data.index.IndexConstants.IndexCityTable;
+import com.osmand.data.index.IndexConstants.IndexStreetNodeTable;
+import com.osmand.data.index.IndexConstants.IndexStreetTable;
 import com.osmand.data.index.IndexConstants.IndexTransportRoute;
 import com.osmand.data.index.IndexConstants.IndexTransportRouteStop;
 import com.osmand.data.index.IndexConstants.IndexTransportStop;
 import com.osmand.impl.ConsoleProgressImplementation;
 import com.osmand.osm.Entity;
+import com.osmand.osm.LatLon;
+import com.osmand.osm.MapUtils;
 import com.osmand.osm.Node;
 import com.osmand.osm.Relation;
 import com.osmand.osm.Way;
@@ -51,14 +64,14 @@ import com.osmand.swing.DataExtractionSettings;
  * That data extraction has aim, 
  * save runtime memory and generate indexes on the fly.
  * It will be longer than load in memory (needed part) and save into index.
- *  
- *
  */
 public class IndexCreator {
 	private static final Log log = LogFactory.getLog(DataExtraction.class);
 
 	public static final int BATCH_SIZE = 5000;
 	public static final String TEMP_NODES_DB = "nodes"+IndexConstants.MAP_INDEX_EXT;
+	public static final int STEP_MAIN = 1;
+	public static final int STEP_ADDRESS_RELATIONS = 2;
 	
 	private File workingDir = null;
 	
@@ -100,6 +113,30 @@ public class IndexCreator {
 	private PreparedStatement transRouteStat;
 	private PreparedStatement transRouteStopsStat;
 	private PreparedStatement transStopsStat;
+
+	private File addressIndexFile;
+	private Connection addressConnection;
+	private PreparedStatement addressCityStat;
+	private PreparedStatement addressStreetStat;
+	private PreparedStatement addressBuildingStat;
+	private PreparedStatement addressStreetNodeStat;
+
+	// choose what to use ?
+	private boolean loadStreetsInMemory = true;
+	private PreparedStatement addressSearchStreetStat;
+	private Map<String, Long> addressStreetLocalMap = new LinkedHashMap<String, Long>();
+	
+	private PreparedStatement addressSearchBuildingStat;
+	private PreparedStatement addressSearchStreetNodeStat;
+	
+	// address structure
+	// load it in memory
+	private Map<EntityId, City> cities = new LinkedHashMap<EntityId, City>();
+	private DataTileManager<City> cityManager = new DataTileManager<City>(10);
+	private List<Relation> postalCodeRelations = new ArrayList<Relation>(); 
+
+	private String[] normalizeDefaultSuffixes;
+	private String[] normalizeSuffixes;
 	
 	
 	
@@ -199,6 +236,15 @@ public class IndexCreator {
 
 		@Override
 		public boolean acceptEntityToLoad(OsmBaseStorage storage, EntityId entityId, Entity e) {
+			// Register all city labelbs
+			if (e instanceof Node && e.getTag(OSMTagKey.PLACE) != null) {
+				City city = new City((Node) e);
+				if(city.getType() != null && !Algoritms.isEmpty(city.getName())){
+					convertEnglishName(city);
+					cityManager.registerObject(((Node) e).getLatitude(), ((Node) e).getLongitude(), city);
+					cities.put(city.getEntityId(), city);
+				}
+			}
 			// put all nodes into temporary db to get only required nodes after loading all data 
 			try {
 				if (e instanceof Node) {
@@ -283,162 +329,7 @@ public class IndexCreator {
 		this.regionName = regionName;
 	}
 	
-	public void generateIndexes(String path, IProgress progress, IOsmStorageFilter addFilter) throws IOException, SAXException,
-			SQLException {
-		File f = new File(path);
-		InputStream stream = new FileInputStream(f);
-		int i = f.getName().indexOf('.');
-		if (regionName == null) {
-			regionName = Algoritms.capitalizeFirstLetterAndLowercase(f.getName().substring(0, i));
-		}
-
-		InputStream streamFile = stream;
-		long st = System.currentTimeMillis();
-		if (path.endsWith(".bz2")) {
-			if (stream.read() != 'B' || stream.read() != 'Z') {
-				throw new RuntimeException("The source stream must start with the characters BZ if it is to be read as a BZip2 stream.");
-			} else {
-				stream = new CBZip2InputStream(stream);
-			}
-		}
-
-		if (progress != null) {
-			progress.startTask("Loading file " + path, -1);
-		}
-		OsmBaseStorage storage = new OsmBaseStorage();
-		storage.setSupressWarnings(DataExtractionSettings.getSettings().isSupressWarningsForDuplicatedId());
-		if (addFilter != null) {
-			storage.getFilters().add(addFilter);
-		}
-
-		try {
-			Class.forName("org.sqlite.JDBC");
-		} catch (ClassNotFoundException e) {
-			log.error("Illegal configuration", e);
-			throw new IllegalStateException(e);
-		}
-		if (indexMap) {
-			dbFile = new File(workingDir, getMapFileName());
-		} else {
-			dbFile = new File(workingDir, TEMP_NODES_DB);
-		}
-		// to save space
-		if (dbFile.exists()) {
-			dbFile.delete();
-		}
-		// creating nodes db to fast access for all nodes
-		dbConn = DriverManager.getConnection("jdbc:sqlite:" + dbFile.getAbsolutePath());
-
-		// 1. Loading osm file
-		NewDataExtractionOsmFilter filter = new NewDataExtractionOsmFilter();
-		try {
-			// 1 init database to store temporary data
-			progress.setGeneralProgress("[40 of 100]");
-
-			filter.initDatabase();
-			storage.getFilters().add(filter);
-			storage.parseOSM(stream, progress, streamFile, false);
-			filter.finishLoading();
-
-			if (log.isInfoEnabled()) {
-				log.info("File parsed : " + (System.currentTimeMillis() - st));
-			}
-			progress.finishTask();
-
-		} finally {
-			if (log.isInfoEnabled()) {
-				log.info("File indexed : " + (System.currentTimeMillis() - st));
-			}
-		}
-
-		// 2. Processing all entries
-		progress.setGeneralProgress("[90 of 100]");
-
-		pselectNode = dbConn.prepareStatement("select * from node where id = ?");
-		pselectWay = dbConn.prepareStatement("select * from ways where id = ?");
-		pselectRelation = dbConn.prepareStatement("select * from relations where id = ?");
-		pselectTags = dbConn.prepareStatement("select key, value from tags where id = ? and type = ?");
-
-		if (indexPOI) {
-			poiIndexFile = new File(workingDir, getPoiFileName());
-			// to save space
-			if (poiIndexFile.exists()) {
-				poiIndexFile.delete();
-			}
-			poiIndexFile.getParentFile().mkdirs();
-			// creating nodes db to fast access for all nodes
-			poiConnection = DriverManager.getConnection("jdbc:sqlite:" + poiIndexFile.getAbsolutePath());
-			poiConnection.setAutoCommit(false);
-			DataIndexWriter.createPoiIndexStructure(poiConnection);
-			poiPreparedStatement = DataIndexWriter.createStatementAmenityInsert(poiConnection);
-			pStatements.put(poiPreparedStatement, 0);
-		}
-
-		if (indexTransport) {
-			transportIndexFile = new File(workingDir, getTransportFileName());
-			// to save space
-			if (transportIndexFile.exists()) {
-				transportIndexFile.delete();
-			}
-			transportIndexFile.getParentFile().mkdirs();
-			// creating nodes db to fast access for all nodes
-			transportConnection = DriverManager.getConnection("jdbc:sqlite:" + transportIndexFile.getAbsolutePath());
-
-			DataIndexWriter.createTransportIndexStructure(transportConnection);
-			transRouteStat = transportConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(
-					IndexTransportRoute.getTable(), IndexTransportRoute.values().length));
-			transRouteStopsStat = transportConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(
-					IndexTransportRouteStop.getTable(), IndexTransportRouteStop.values().length));
-			transStopsStat = transportConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexTransportStop
-					.getTable(), IndexTransportStop.values().length));
-			pStatements.put(transRouteStat, 0);
-			pStatements.put(transRouteStopsStat, 0);
-			pStatements.put(transStopsStat, 0);
-			transportConnection.setAutoCommit(false);
-
-		}
-
-		iterateOverAllEntities(progress, filter);
-
-		try {
-			if (pselectNode != null) {
-				pselectNode.close();
-			}
-			if (pselectWay != null) {
-				pselectWay.close();
-			}
-			if (pselectRelation != null) {
-				pselectRelation.close();
-			}
-			if (pselectTags != null) {
-				pselectTags.close();
-			}
-			for (PreparedStatement p : pStatements.keySet()) {
-				if (pStatements.get(p) > 0) {
-					p.executeBatch();
-					p.close();
-				}
-			}
-
-			if (poiConnection != null) {
-				poiConnection.commit();
-				poiConnection.close();
-				if (lastModifiedDate != null) {
-					poiIndexFile.setLastModified(lastModifiedDate);
-				}
-			}
-			if (transportConnection != null) {
-				transportConnection.commit();
-				transportConnection.close();
-				if (lastModifiedDate != null) {
-					transportIndexFile.setLastModified(lastModifiedDate);
-				}
-			}
-			
-			dbConn.close();
-		} catch (SQLException e) {
-		}
-	}
+	
 	
 	public void loadEntityData(Entity e, boolean loadTags) throws SQLException {
 		if(e instanceof Node){
@@ -485,7 +376,8 @@ public class IndexCreator {
 						way.addNode(rs.getLong(2));
 					}
 					rs.close();
-					loadEntityData(way, false);
+					// load way nodes
+					loadEntityData(way, loadTags);
 				}
 			} else if (i.getType() == EntityType.RELATION) {
 				pselectRelation.setLong(1, i.getId());
@@ -560,13 +452,13 @@ public class IndexCreator {
 		return addressFileName;
 	}
 	
-	public void iterateOverAllEntities(IProgress progress, NewDataExtractionOsmFilter f) throws SQLException{
-		iterateOverEntities(progress, EntityType.NODE, f.getAllNodes());
-		iterateOverEntities(progress, EntityType.WAY, f.getAllWays());
-		iterateOverEntities(progress, EntityType.RELATION, f.getAllRelations());
+	public void iterateOverAllEntities(IProgress progress, NewDataExtractionOsmFilter f, int step) throws SQLException{
+		iterateOverEntities(progress, EntityType.NODE, f.getAllNodes(), step);
+		iterateOverEntities(progress, EntityType.WAY, f.getAllWays(), step);
+		iterateOverEntities(progress, EntityType.RELATION, f.getAllRelations(), step);
 	}
 	
-	public void iterateOverEntities(IProgress progress, EntityType type, int allCount) throws SQLException{
+	public void iterateOverEntities(IProgress progress, EntityType type, int allCount, int step) throws SQLException{
 		Statement statement = dbConn.createStatement();
 		String select;
 		String info;
@@ -594,7 +486,7 @@ public class IndexCreator {
 				e = new Relation(rs.getLong(1));
 			}
 			loadEntityTags(type, e);
-			iterateEntity(e);
+			iterateEntity(e, step);
 		}
 		rs.close();
 	}
@@ -635,8 +527,10 @@ public class IndexCreator {
 			return null;
 		}
 		TransportRoute r = new TransportRoute(rel, ref);
+		convertEnglishName(r);
 		r.setOperator(operator);
 		r.setType(route);
+		
 
 		if (operator != null) {
 			route = operator + " : " + route;
@@ -651,6 +545,7 @@ public class IndexCreator {
 			if (e.getValue().contains("stop")) {
 				if (e.getKey() instanceof Node) {
 					TransportStop stop = new TransportStop(e.getKey());
+					convertEnglishName(stop);
 					boolean forward = e.getValue().contains("forward");
 					boolean backward = e.getValue().contains("backward");
 					currentStop++;
@@ -722,72 +617,630 @@ public class IndexCreator {
 
 	}
 
-	private void iterateEntity(Entity e) throws SQLException {
-		if (indexPOI && Amenity.isAmenity(e)) {
-			loadEntityData(e, false);
-			if(poiPreparedStatement != null){
-				Amenity a = new Amenity(e);
-				if(a.getLocation() != null){
-					DataIndexWriter.insertAmenityIntoPoi(poiPreparedStatement, pStatements, a, BATCH_SIZE);
+
+	public void indexAddressRelation(Relation i) throws SQLException {
+		String type = i.getTag(OSMTagKey.ADDRESS_TYPE);
+		boolean house = "house".equals(type);
+		boolean street = "a6".equals(type);
+		if (house || street) {
+			// try to find appropriate city/street
+			City c = null;
+			// load with member ways with their nodes and tags !
+			loadEntityData(i, true);
+
+
+			Collection<Entity> members = i.getMembers("is_in");
+			Relation a3 = null;
+			Relation a6 = null;
+			if (!members.isEmpty()) {
+				if (street) {
+					a6 = i;
 				}
-			}
-		}
-		if(indexTransport){
-			if(e instanceof Relation && e.getTag(OSMTagKey.ROUTE) != null){
-				loadEntityData(e, true);
-				TransportRoute route = indexTransportRoute((Relation) e);
-				if(route != null){
-					DataIndexWriter.insertTransportIntoIndex(transRouteStat, transRouteStopsStat, transStopsStat, visitedStops, route, pStatements,
-							BATCH_SIZE);
-				}
-			}
-		}
-		
-/*		if (e instanceof Node && e.getTag(OSMTagKey.PLACE) != null) {
-			places.add((Node) e);
-			processed = true;
-		}
-		if (indexAddress) {
-			// index not only buildings but also addr:interpolation ways
-//			if ("yes".equals(e.getTag(OSMTagKey.BUILDING))) {
-				if (e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER) != null && e.getTag(OSMTagKey.ADDR_STREET) != null) {
-					buildings.put(entityId, e);
-					processed = true;
-				}
-//			}
-			// suppose that streets are way for car
-			if (e instanceof Way && OSMSettings.wayForCar(e.getTag(OSMTagKey.HIGHWAY))
-					&& e.getTag(OSMTagKey.HIGHWAY) != null
-					&& e.getTag(OSMTagKey.NAME) != null) {
-				ways.put(entityId, (Way) e);
-				processed = true;
-			}
-			if(e instanceof Relation){
-				// do not need to mark processed
-				if(e.getTag(OSMTagKey.POSTAL_CODE) != null){
-					String tag = e.getTag(OSMTagKey.POSTAL_CODE);
-					for(EntityId l : ((Relation)e).getMemberIds()){
-						postalCodes.put(l, tag);
+				Entity in = members.iterator().next();
+				loadEntityData(in, true);
+				if (in instanceof Relation) {
+					// go one level up for house
+					if (house) {
+						a6 = (Relation) in;
+						members = ((Relation) in).getMembers("is_in");
+						if (!members.isEmpty()) {
+							in = members.iterator().next();
+							loadEntityData(in, true);
+							if (in instanceof Relation) {
+								a3 = (Relation) in;
+							}
+						}
+
+					} else {
+						a3 = (Relation) in;
 					}
 				}
-				
-				if("address".equals(e.getTag(OSMTagKey.TYPE))){
-					addressRelations.put(entityId, (Relation) e);
-					processed = true;
-				}
-
 			}
-		} */
+
+			if (a3 != null) {
+				Collection<EntityId> memberIds = a3.getMemberIds("label");
+				if (!memberIds.isEmpty()) {
+					c = cities.get(memberIds.iterator().next());
+				}
+			}
+			if (c != null && a6 != null) {
+				String name = a6.getTag(OSMTagKey.NAME);
+
+				if (name != null) {
+					LatLon location = c.getLocation();
+					for(Entity e : i.getMembers(null)){
+						if(e instanceof Way){
+							LatLon l= ((Way) e).getLatLon();
+							if(l != null ){
+								location = l;
+								break;
+							}
+						}
+					}
+					
+					Long streetId = getStreetInCity(c, name, location, a6.getId());
+					if(streetId == null){
+						return;
+					}
+					if (street) {
+						for (Map.Entry<Entity, String> r : i.getMemberEntities().entrySet()) {
+							if ("street".equals(r.getValue())) {
+								if (r.getKey() instanceof Way && saveAddressWays) {
+									DataIndexWriter.writeStreetWayNodes(addressStreetNodeStat, 
+											pStatements, streetId, (Way) r.getKey(), BATCH_SIZE);
+								}
+							} else if ("house".equals(r.getValue())) {
+								// will be registered further in other case
+								if (!(r.getKey() instanceof Relation)) {
+									String hno = r.getKey().getTag(OSMTagKey.ADDR_HOUSE_NUMBER);
+									if(hno != null){
+										Building building = new Building(r.getKey());
+										building.setName(hno);
+										convertEnglishName(building);
+										DataIndexWriter.writeBuilding(addressBuildingStat, pStatements, 
+												streetId, building, BATCH_SIZE);
+									}
+								}
+							}
+						}
+					} else {
+						String hno = i.getTag(OSMTagKey.ADDRESS_HOUSE);
+						if (hno == null) {
+							hno = i.getTag(OSMTagKey.ADDR_HOUSE_NUMBER);
+						}
+						if (hno == null) {
+							hno = i.getTag(OSMTagKey.NAME);
+						}
+						members = i.getMembers("border");
+						if (!members.isEmpty()) {
+							Entity border = members.iterator().next();
+							if (border != null) {
+								EntityId id = EntityId.valueOf(border);
+								// special check that address do not contain twice in a3 - border and separate a6
+								if (!a6.getMemberIds().contains(id)) {
+									Building building = new Building(border);
+									building.setName(hno);
+									convertEnglishName(building);
+									DataIndexWriter.writeBuilding(addressBuildingStat, pStatements, 
+											streetId, building, BATCH_SIZE);
+								}
+							}
+						} else {
+							log.info("For relation " + i.getId() + " border not found");
+						}
+
+					}
+				}
+			}
+		}
+	}
+	
+	public City getClosestCity(LatLon point) {
+		if(point == null){
+			return null;
+		}
+		City closest = null;
+		double relDist = Double.POSITIVE_INFINITY;
+		for (City c : cityManager.getClosestObjects(point.getLatitude(), point.getLongitude())) {
+			double rel = MapUtils.getDistance(c.getLocation(), point) / c.getType().getRadius();
+			if (rel < relDist) {
+				closest = c;
+				relDist = rel;
+				if(relDist < 0.2d){
+					break;
+				}
+			}
+		}
+		return closest;
+	}
+	
+	
+	public String normalizeStreetName(String name){
+		name = name.trim();
+		if (normalizeStreets) {
+			String newName = name;
+			boolean processed = newName.length() != name.length();
+			for (String ch : normalizeDefaultSuffixes) {
+				int ind = checkSuffix(newName, ch);
+				if (ind != -1) {
+					newName = cutSuffix(newName, ind, ch.length());
+					processed = true;
+					break;
+				}
+			}
+
+			if (!processed) {
+				for (String ch : normalizeSuffixes) {
+					int ind = checkSuffix(newName, ch);
+					if (ind != -1) {
+						newName = putSuffixToEnd(newName, ind, ch.length());
+						processed = true;
+						break;
+					}
+				}
+			}
+			if (processed) {
+				return newName;
+			}
+		}
+		return name;
+	}
+	
+	private int checkSuffix(String name, String suffix){
+		int i = -1;
+		boolean searchAgain = false;
+		do {
+			i = name.indexOf(suffix, i);
+			searchAgain = false;
+			if (i > 0) {
+				if (Character.isLetterOrDigit(name.charAt(i -1))) {
+					i ++;
+					searchAgain = true;
+				}
+			}
+		} while (searchAgain);
+		return i; 
+	}
+	
+	private String cutSuffix(String name, int ind, int suffixLength){
+		String newName = name.substring(0, ind);
+		if (name.length() > ind + suffixLength + 1) {
+			newName += name.substring(ind + suffixLength + 1);
+		}
+		return newName.trim();
+	}
+	
+	private String putSuffixToEnd(String name, int ind, int suffixLength) {
+		if (name.length() <= ind + suffixLength) {
+			return name;
+		
+		}
+		String newName;
+		if(ind > 0){
+			newName = name.substring(0, ind);
+			newName += name.substring(ind + suffixLength);
+			newName += name.substring(ind - 1, ind + suffixLength );
+		} else {
+			newName = name.substring(suffixLength + 1) + name.charAt(suffixLength) + name.substring(0, suffixLength);
+		}
+		
+		return newName.trim();
+	}
+	
+	
+	public Long getStreetInCity(City city, String name, LatLon location, long initId) throws SQLException{
+		if(name == null || city == null){
+			return null;
+		}
+		Long foundId = null;
+		
+		name = normalizeStreetName(name);
+		if(loadStreetsInMemory){
+			foundId = addressStreetLocalMap.get(name+"_"+city.getId());
+		} else {
+			addressSearchStreetStat.setLong(1, city.getId());
+			addressSearchStreetStat.setString(2, name);
+			ResultSet rs = addressSearchStreetStat.executeQuery();
+			if (rs.next()) {
+				foundId = rs.getLong(1);
+			}
+			rs.close();
+		}
+		
+		if (foundId == null) {
+			assert IndexStreetTable.values().length == 6;
+			addressStreetStat.setLong(IndexStreetTable.ID.ordinal() + 1, initId);
+			addressStreetStat.setString(IndexStreetTable.NAME_EN.ordinal() + 1, Junidecode.unidecode(name));
+			addressStreetStat.setString(IndexStreetTable.NAME.ordinal() + 1, name);
+			addressStreetStat.setDouble(IndexStreetTable.LATITUDE.ordinal() + 1, location.getLatitude());
+			addressStreetStat.setDouble(IndexStreetTable.LONGITUDE.ordinal() + 1, location.getLongitude());
+			addressStreetStat.setLong(IndexStreetTable.CITY.ordinal() + 1, city.getId());
+			if(loadStreetsInMemory){
+				DataIndexWriter.addBatch(pStatements, addressStreetStat, BATCH_SIZE);
+				addressStreetLocalMap.put(name+"_"+city.getId(), initId);
+			} else {
+				addressStreetStat.execute();
+				// commit immediately to search after
+				addressConnection.commit();
+			}
+			foundId = initId;
+		}
+		return foundId;
+	}
+	
+	private void iterateEntity(Entity e, int step) throws SQLException {
+		if (step == STEP_MAIN) {
+			if (indexPOI && Amenity.isAmenity(e)) {
+				loadEntityData(e, false);
+				if (poiPreparedStatement != null) {
+					Amenity a = new Amenity(e);
+					if (a.getLocation() != null) {
+						convertEnglishName(a);
+						DataIndexWriter.insertAmenityIntoPoi(poiPreparedStatement, pStatements, a, BATCH_SIZE);
+					}
+				}
+			}
+			if (indexTransport) {
+				if (e instanceof Relation && e.getTag(OSMTagKey.ROUTE) != null) {
+					loadEntityData(e, true);
+					TransportRoute route = indexTransportRoute((Relation) e);
+					if (route != null) {
+						DataIndexWriter.insertTransportIntoIndex(transRouteStat, transRouteStopsStat, transStopsStat, visitedStops, route,
+								pStatements, BATCH_SIZE);
+					}
+				}
+			}
+
+			if (indexAddress) {
+				// index not only buildings but also nodes that belongs to addr:interpolation ways
+				if (e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER) != null && e.getTag(OSMTagKey.ADDR_STREET) != null) {
+					// TODO e.getTag(OSMTagKey.ADDR_CITY) could be used to find city however many cities could have same name!
+					// check that building is not registered already 
+					addressSearchBuildingStat.setLong(1, e.getId());
+					ResultSet rs = addressSearchBuildingStat.executeQuery();
+					if (!rs.next()) {
+						loadEntityData(e, false);
+						LatLon l = e.getLatLon();
+						City city = getClosestCity(l);
+						Long idStreet = getStreetInCity(city, e.getTag(OSMTagKey.ADDR_STREET), l, e.getId());
+						if (idStreet != null) {
+							Building building = new Building(e);
+							building.setName(e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER));
+							convertEnglishName(building);
+							DataIndexWriter.writeBuilding(addressBuildingStat, pStatements, idStreet, building, BATCH_SIZE);
+						}
+					}
+					rs.close();
+				}
+				// suppose that streets with names are ways for car
+				if (e instanceof Way /* && OSMSettings.wayForCar(e.getTag(OSMTagKey.HIGHWAY)) */
+						&& e.getTag(OSMTagKey.HIGHWAY) != null && e.getTag(OSMTagKey.NAME) != null) {
+					// check that building is not registered already 
+					addressSearchStreetNodeStat.setLong(1, e.getId());
+					ResultSet rs = addressSearchStreetNodeStat.executeQuery();
+					if (!rs.next()) {
+						loadEntityData(e, false);
+						LatLon l = e.getLatLon();
+						City city = getClosestCity(l);
+						Long idStreet = getStreetInCity(city, e.getTag(OSMTagKey.NAME), l, e.getId());
+						if (idStreet != null && saveAddressWays) {
+							DataIndexWriter.writeStreetWayNodes(addressStreetNodeStat, pStatements, idStreet, (Way) e, BATCH_SIZE);
+						}
+					}
+					rs.close();
+				}
+				if (e instanceof Relation) {
+					if (e.getTag(OSMTagKey.POSTAL_CODE) != null) {
+						loadEntityData(e, false);
+						postalCodeRelations.add((Relation) e);
+					}
+				}
+			}
+		} else if (step == STEP_ADDRESS_RELATIONS) {
+			if (e instanceof Relation && "address".equals(e.getTag(OSMTagKey.TYPE))) {
+				indexAddressRelation((Relation) e);
+			}
+		}
 		
 	}
 	
+	
+	private void convertEnglishName(MapObject o){
+		String name = o.getName();
+		if(name != null && (o.getEnName() == null || o.getEnName().isEmpty())){
+			o.setEnName(Junidecode.unidecode(name));
+		}
+	}
+	
+	public void generateIndexes(String path, IProgress progress, IOsmStorageFilter addFilter) throws IOException, SAXException,
+	SQLException {
+		File f = new File(path);
+		InputStream stream = new FileInputStream(f);
+		int i = f.getName().indexOf('.');
+		if (regionName == null) {
+			regionName = Algoritms.capitalizeFirstLetterAndLowercase(f.getName().substring(0, i));
+		}
 
-	// TODO transliteration !!!
+		InputStream streamFile = stream;
+		long st = System.currentTimeMillis();
+		if (path.endsWith(".bz2")) {
+			if (stream.read() != 'B' || stream.read() != 'Z') {
+				throw new RuntimeException("The source stream must start with the characters BZ if it is to be read as a BZip2 stream.");
+			} else {
+				stream = new CBZip2InputStream(stream);
+			}
+		}
+
+		if (progress != null) {
+			progress.startTask("Loading file " + path, -1);
+		}
+		
+		// clear previous results
+		cities.clear();
+		cityManager.clear();
+		postalCodeRelations.clear();
+		
+		
+		
+		OsmBaseStorage storage = new OsmBaseStorage();
+		storage.setSupressWarnings(DataExtractionSettings.getSettings().isSupressWarningsForDuplicatedId());
+		if (addFilter != null) {
+			storage.getFilters().add(addFilter);
+		}
+
+		try {
+			Class.forName("org.sqlite.JDBC");
+		} catch (ClassNotFoundException e) {
+			log.error("Illegal configuration", e);
+			throw new IllegalStateException(e);
+		}
+		if (indexMap) {
+			dbFile = new File(workingDir, getMapFileName());
+		} else {
+			dbFile = new File(workingDir, TEMP_NODES_DB);
+		}
+		// to save space
+		if (dbFile.exists()) {
+			dbFile.delete();
+		}
+		// creating nodes db to fast access for all nodes
+		dbConn = DriverManager.getConnection("jdbc:sqlite:" + dbFile.getAbsolutePath());
+
+		// 1. Loading osm file
+		NewDataExtractionOsmFilter filter = new NewDataExtractionOsmFilter();
+		try {
+			// 1 init database to store temporary data
+			progress.setGeneralProgress("[50 of 100]");
+
+			filter.initDatabase();
+			storage.getFilters().add(filter);
+			storage.parseOSM(stream, progress, streamFile, false);
+			filter.finishLoading();
+
+			if (log.isInfoEnabled()) {
+				log.info("File parsed : " + (System.currentTimeMillis() - st));
+			}
+			progress.finishTask();
+
+		} finally {
+			if (log.isInfoEnabled()) {
+				log.info("File indexed : " + (System.currentTimeMillis() - st));
+			}
+		}
+
+		// 2. Processing all entries
+		progress.setGeneralProgress("[90 of 100]");
+
+		pselectNode = dbConn.prepareStatement("select * from node where id = ?");
+		pselectWay = dbConn.prepareStatement("select * from ways where id = ?");
+		pselectRelation = dbConn.prepareStatement("select * from relations where id = ?");
+		pselectTags = dbConn.prepareStatement("select key, value from tags where id = ? and type = ?");
+
+		if (indexPOI) {
+			poiIndexFile = new File(workingDir, getPoiFileName());
+			// to save space
+			if (poiIndexFile.exists()) {
+				poiIndexFile.delete();
+			}
+			poiIndexFile.getParentFile().mkdirs();
+			// creating nodes db to fast access for all nodes
+			poiConnection = DriverManager.getConnection("jdbc:sqlite:" + poiIndexFile.getAbsolutePath());
+			poiConnection.setAutoCommit(false);
+			DataIndexWriter.createPoiIndexStructure(poiConnection);
+			poiPreparedStatement = DataIndexWriter.createStatementAmenityInsert(poiConnection);
+			pStatements.put(poiPreparedStatement, 0);
+		}
+
+		if (indexTransport) {
+			transportIndexFile = new File(workingDir, getTransportFileName());
+			// to save space
+			if (transportIndexFile.exists()) {
+				transportIndexFile.delete();
+			}
+			transportIndexFile.getParentFile().mkdirs();
+			// creating nodes db to fast access for all nodes
+			transportConnection = DriverManager.getConnection("jdbc:sqlite:" + transportIndexFile.getAbsolutePath());
+
+			DataIndexWriter.createTransportIndexStructure(transportConnection);
+			transRouteStat = transportConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexTransportRoute
+					.getTable(), IndexTransportRoute.values().length));
+			transRouteStopsStat = transportConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(
+					IndexTransportRouteStop.getTable(), IndexTransportRouteStop.values().length));
+			transStopsStat = transportConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexTransportStop
+					.getTable(), IndexTransportStop.values().length));
+			pStatements.put(transRouteStat, 0);
+			pStatements.put(transRouteStopsStat, 0);
+			pStatements.put(transStopsStat, 0);
+			transportConnection.setAutoCommit(false);
+
+		}
+		
+		if (indexAddress) {
+			addressIndexFile = new File(workingDir, getAddressFileName());
+			// to save space
+			if (addressIndexFile.exists()) {
+				addressIndexFile.delete();
+			}
+			addressIndexFile.getParentFile().mkdirs();
+			// creating nodes db to fast access for all nodes
+			addressConnection = DriverManager.getConnection("jdbc:sqlite:" + addressIndexFile.getAbsolutePath());
+
+			DataIndexWriter.createAddressIndexStructure(addressConnection);
+			addressCityStat = addressConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexCityTable.getTable(),
+					IndexCityTable.values().length));
+			addressStreetStat = addressConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexStreetTable
+					.getTable(), IndexStreetTable.values().length));
+			addressSearchStreetStat = addressConnection.prepareStatement("SELECT " + IndexStreetTable.ID.name() + " FROM " + 
+					IndexStreetTable.getTable() + " WHERE ? = " + IndexStreetTable.CITY.name() + " AND ? =" + IndexStreetTable.NAME.name());
+			addressSearchBuildingStat = addressConnection.prepareStatement("SELECT " + IndexBuildingTable.ID.name() + " FROM " + 
+					IndexBuildingTable.getTable() + " WHERE ? = " + IndexBuildingTable.ID.name());
+			addressSearchStreetNodeStat = addressConnection.prepareStatement("SELECT " + IndexStreetNodeTable.WAY.name() + " FROM " + 
+					IndexStreetNodeTable.getTable() + " WHERE ? = " + IndexStreetNodeTable.WAY.name());
+			addressBuildingStat = addressConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexBuildingTable
+					.getTable(), IndexBuildingTable.values().length));
+			addressStreetNodeStat = addressConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(
+					IndexStreetNodeTable.getTable(), IndexStreetNodeTable.values().length));
+			pStatements.put(addressCityStat, 0);
+			pStatements.put(addressStreetStat, 0);
+			pStatements.put(addressStreetNodeStat, 0);
+			pStatements.put(addressBuildingStat, 0);
+			// put search statements to close them after all
+			pStatements.put(addressSearchBuildingStat, 0);
+			pStatements.put(addressSearchStreetNodeStat, 0);
+			pStatements.put(addressSearchStreetStat, 0);
+			
+			addressConnection.setAutoCommit(false);
+		}
+
+		if(normalizeStreets){
+			normalizeDefaultSuffixes = DataExtractionSettings.getSettings().getDefaultSuffixesToNormalizeStreets();
+			normalizeSuffixes = DataExtractionSettings.getSettings().getSuffixesToNormalizeStreets();
+		}
+		
+
+		// 1. write all cities
+		if(indexAddress){
+			for(City c : cities.values()){
+				DataIndexWriter.writeCity(addressCityStat, pStatements, c, BATCH_SIZE);
+			}
+			// commit to put all cities
+			if(pStatements.get(addressCityStat) > 0){
+				addressCityStat.executeBatch();
+				pStatements.put(addressCityStat, 0);
+				addressConnection.commit();
+			}
+			
+		}
+		
+		// 2. index address relations
+		if(indexAddress){
+			iterateOverEntities(progress, EntityType.RELATION, filter.getAllRelations(), STEP_ADDRESS_RELATIONS);
+			// commit to put all cities
+			if(pStatements.get(addressBuildingStat) > 0){
+				addressBuildingStat.executeBatch();
+				pStatements.put(addressBuildingStat, 0);
+			}
+			if(pStatements.get(addressStreetNodeStat) > 0){
+				addressStreetNodeStat.executeBatch();
+				pStatements.put(addressStreetNodeStat, 0);
+			}
+			addressConnection.commit();
+		}
+		
+
+		// 3. iterate over all entities
+		iterateOverAllEntities(progress, filter, STEP_MAIN);
+		
+		
+		// 4. update all postal codes from relations
+		if(indexAddress && !postalCodeRelations.isEmpty()){
+			if(pStatements.get(addressBuildingStat) > 0){
+				addressBuildingStat.executeBatch();
+				pStatements.put(addressBuildingStat, 0);
+				addressConnection.commit();
+			}
+			
+			
+			progress.startTask("Registering postcodes...", -1);
+			PreparedStatement pstat = addressConnection.prepareStatement("UPDATE " + IndexBuildingTable.getTable() + 
+					" SET " + IndexBuildingTable.POSTCODE.name() + " = ? WHERE " + IndexBuildingTable.ID.name() + " = ?");
+			pStatements.put(pstat, 0);
+			for(Relation r : postalCodeRelations){
+				String tag = r.getTag(OSMTagKey.POSTAL_CODE);
+				for(EntityId l : r.getMemberIds()){
+					pstat.setString(1, tag);
+					pstat.setLong(2, l.getId());
+					DataIndexWriter.addBatch(pStatements, pstat, BATCH_SIZE);
+				}
+			}
+			
+		}
+
+		try {
+			if (pselectNode != null) {
+				pselectNode.close();
+			}
+			if (pselectWay != null) {
+				pselectWay.close();
+			}
+			if (pselectRelation != null) {
+				pselectRelation.close();
+			}
+			if (pselectTags != null) {
+				pselectTags.close();
+			}
+			for (PreparedStatement p : pStatements.keySet()) {
+				if (pStatements.get(p) > 0) {
+					p.executeBatch();
+				}
+				p.close();
+			}
+
+			if (poiConnection != null) {
+				poiConnection.commit();
+				poiConnection.close();
+				if (lastModifiedDate != null) {
+					poiIndexFile.setLastModified(lastModifiedDate);
+				}
+			}
+			if (transportConnection != null) {
+				transportConnection.commit();
+				transportConnection.close();
+				if (lastModifiedDate != null) {
+					transportIndexFile.setLastModified(lastModifiedDate);
+				}
+			}
+			
+			if (addressConnection != null) {
+				addressConnection.commit();
+				addressConnection.close();
+				if (lastModifiedDate != null) {
+					addressIndexFile.setLastModified(lastModifiedDate);
+				}
+			}
+
+			dbConn.close();
+		} catch (SQLException e) {
+		}
+	}
+
+	
+	// TODO check
+	// 1. check that not added twice from relations
+	// 2. check postal_code if the building was registered by relation!
+
+	// TODO normalizing (!!!), lowercase, converting en street names after all!
+	// TODO find proper location for streets ! centralize them
 	public static void main(String[] args) throws IOException, SAXException, SQLException {
 		IndexCreator extr = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
 		extr.setIndexPOI(true);
 		extr.setIndexTransport(true);
-		extr.generateIndexes("e:/Information/OSM maps/belarus osm/minsk.osm", new ConsoleProgressImplementation(4), null);
+		extr.setIndexAddress(true);
+		extr.setNormalizeStreets(true);
+		extr.setSaveAddressWays(true);
+		
+		extr.generateIndexes("e:/Information/OSM maps/osm_map/netherlands.osm.bz2", new ConsoleProgressImplementation(2), null);
+//		extr.generateIndexes("e:/Information/OSM maps/belarus osm/minsk.osm", new ConsoleProgressImplementation(4), null);
 		
 	}
 }
