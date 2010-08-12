@@ -497,6 +497,17 @@ public class ResourceManager {
 		}
 	}
 	
+	////////////////////////////////////////////// Working with map ////////////////////////////////////////////////
+	public void updateRendererIfNeeded(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom){
+		if(!renderer.updateMap(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom)){
+			asyncLoadingTiles.requestToLoadMap(
+					new MapLoadRequest(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom));
+		}
+	}
+	
+	public RenderMapsRepositories getRenderer() {
+		return renderer;
+	}
 	
 	////////////////////////////////////////////// Closing methods ////////////////////////////////////////////////
 	
@@ -617,6 +628,8 @@ public class ResourceManager {
 		}
 	}
 	
+	
+	
 	private static class TransportLoadRequest {
 		public final TransportIndexRepository repository;
 		public final double topLatitude;
@@ -637,6 +650,24 @@ public class ResourceManager {
 		}
 	}
 	
+	private static class MapLoadRequest {
+		public final double topLatitude;
+		public final double bottomLatitude;
+		public final double leftLongitude;
+		public final double rightLongitude;
+		public final int zoom;
+		
+		public MapLoadRequest(double topLatitude, double leftLongitude, 
+				double bottomLatitude, double rightLongitude, int zoom) {
+			super();
+			this.bottomLatitude = bottomLatitude;
+			this.leftLongitude = leftLongitude;
+			this.rightLongitude = rightLongitude;
+			this.topLatitude = topLatitude;
+			this.zoom = zoom;
+		}
+	}
+	
 	public class AsyncLoadingThread extends Thread {
 		Stack<Object> requests = new Stack<Object>();
 		
@@ -651,6 +682,7 @@ public class ResourceManager {
 					boolean update = false;
 					boolean amenityLoaded = false;
 					boolean transportLoaded = false;
+					boolean mapLoaded = false;
 					while(!requests.isEmpty()){
 						Object req = requests.pop();
 						if (req instanceof TileLoadDownloadRequest) {
@@ -672,9 +704,14 @@ public class ResourceManager {
 										r.bottomLatitude, r.rightLongitude, r.zoom, LIMIT_TRANSPORT, null);
 								transportLoaded = true;
 							}
+						} else if(req instanceof MapLoadRequest){
+							if(!mapLoaded){
+								MapLoadRequest r = (MapLoadRequest) req;
+								renderer.loadMap(r.topLatitude, r.leftLongitude, r.bottomLatitude, r.rightLongitude, r.zoom);
+							}
 						}
 					}
-					if(update || amenityLoaded || transportLoaded){
+					if(update || amenityLoaded || transportLoaded || mapLoaded){
 						// use downloader callback
 						for(IMapDownloaderCallback c : downloader.getDownloaderCallbacks()){
 							c.tileDownloaded(null);
@@ -693,6 +730,10 @@ public class ResourceManager {
 			requests.push(req);
 		}
 		public void requestToLoadAmenities(AmenityLoadRequest req){
+			requests.push(req);
+		}
+		
+		public void requestToLoadMap(MapLoadRequest req){
 			requests.push(req);
 		}
 		
