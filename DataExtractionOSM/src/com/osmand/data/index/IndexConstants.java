@@ -189,7 +189,7 @@ public class IndexConstants {
 	}
 	
 	public enum IndexStreetTable implements IndexColumn {
-		ID("long"), LATITUDE("double", true), LONGITUDE("double", true), NAME, NAME_EN, CITY("long", true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		ID("long"), LATITUDE("double", true), LONGITUDE("double", true), NAME(null, true), NAME_EN, CITY("long", true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		boolean index = false;
 		String type = null;
 
@@ -261,7 +261,7 @@ public class IndexConstants {
 	}
 	
 	public enum IndexBuildingTable implements IndexColumn {
-		ID("long"), LATITUDE("double"), LONGITUDE("double"), NAME, NAME_EN, STREET("long", true), POSTCODE(null, true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		ID("long", true), LATITUDE("double"), LONGITUDE("double"), NAME, NAME_EN, STREET("long", true), POSTCODE(null, true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		boolean index = false;
 		String type = null;
 

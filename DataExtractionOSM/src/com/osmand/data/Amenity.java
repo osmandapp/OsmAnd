@@ -1,6 +1,7 @@
 package com.osmand.data;
 
 import com.osmand.osm.Entity;
+import com.osmand.osm.Relation;
 import com.osmand.osm.OSMSettings.OSMTagKey;
 
 public class Amenity extends MapObject {
@@ -96,6 +97,10 @@ public class Amenity extends MapObject {
 	}
 	
 	public static boolean isAmenity(Entity n){
+		if(n instanceof Relation){
+			// it could be collection of amenities
+			return false;
+		}
 		if(n.getTag(OSMTagKey.AMENITY) != null){
 			return true;
 		} else if(n.getTag(OSMTagKey.SHOP) != null){

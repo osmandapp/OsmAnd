@@ -146,20 +146,7 @@ public class DataIndexWriter {
 		}
         Connection conn = DriverManager.getConnection("jdbc:sqlite:"+file.getAbsolutePath()); //$NON-NLS-1$
 		try {
-			Statement stat = conn.createStatement();
-			
-
-			
-	        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexCityTable.values()));
-	        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexCityTable.values()));
-	        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexBuildingTable.values()));
-	        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexBuildingTable.values()));
-	        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexStreetNodeTable.values()));
-	        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexStreetNodeTable.values()));
-	        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexStreetTable.values()));
-	        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexStreetTable.values()));
-	        stat.execute("PRAGMA user_version = " + IndexConstants.ADDRESS_TABLE_VERSION); //$NON-NLS-1$
-	        stat.close();
+			createAddressIndexStructure(conn);
 	        
 	        PreparedStatement prepCity = conn.prepareStatement(
 	            IndexConstants.generatePrepareStatementToInsert(IndexCityTable.getTable(), IndexCityTable.values().length));
@@ -181,15 +168,7 @@ public class DataIndexWriter {
 	        		if(city.getId() == null || city.getLocation() == null){
 						continue;
 					}
-	        		assert IndexCityTable.values().length == 6;
-	        		prepCity.setLong(IndexCityTable.ID.ordinal() + 1, city.getId());
-					prepCity.setDouble(IndexCityTable.LATITUDE.ordinal() + 1, city.getLocation().getLatitude());
-					prepCity.setDouble(IndexCityTable.LONGITUDE.ordinal() + 1, city.getLocation().getLongitude());
-					prepCity.setString(IndexCityTable.NAME.ordinal() + 1, city.getName());
-					prepCity.setString(IndexCityTable.NAME_EN.ordinal() + 1, city.getEnName());
-					prepCity.setString(IndexCityTable.CITY_TYPE.ordinal() + 1, CityType.valueToString(city.getType()));
-					addBatch(count, prepCity);
-					
+	        		writeCity(prepCity, count, city, BATCH_SIZE);
 					
 					for(Street street : city.getStreets()){
 						if(street.getId() == null || street.getLocation() == null){
@@ -205,18 +184,7 @@ public class DataIndexWriter {
 						addBatch(count, prepStreet);
 						if (writeWayNodes) {
 							for (Way way : street.getWayNodes()) {
-								for (Node n : way.getNodes()) {
-									if (n == null) {
-										continue;
-									}
-									assert IndexStreetNodeTable.values().length == 5;
-									prepStreetNode.setLong(IndexStreetNodeTable.ID.ordinal() + 1, n.getId());
-									prepStreetNode.setDouble(IndexStreetNodeTable.LATITUDE.ordinal() + 1, n.getLatitude());
-									prepStreetNode.setDouble(IndexStreetNodeTable.LONGITUDE.ordinal() + 1, n.getLongitude());
-									prepStreetNode.setLong(IndexStreetNodeTable.WAY.ordinal() + 1, way.getId());
-									prepStreetNode.setLong(IndexStreetNodeTable.STREET.ordinal() + 1, street.getId());
-									addBatch(count, prepStreetNode);
-								}
+								writeStreetWayNodes(prepStreetNode, count, street.getId(), way, BATCH_SIZE);
 							}
 						}
 						
@@ -224,16 +192,7 @@ public class DataIndexWriter {
 							if(building.getId() == null || building.getLocation() == null){
 								continue;
 							}
-							assert IndexBuildingTable.values().length == 7;
-							prepBuilding.setLong(IndexBuildingTable.ID.ordinal() + 1, building.getId());
-							prepBuilding.setDouble(IndexBuildingTable.LATITUDE.ordinal() + 1, building.getLocation().getLatitude());
-							prepBuilding.setDouble(IndexBuildingTable.LONGITUDE.ordinal() + 1, building.getLocation().getLongitude());
-							prepBuilding.setString(IndexBuildingTable.NAME.ordinal() + 1, building.getName());
-							prepBuilding.setString(IndexBuildingTable.NAME_EN.ordinal() + 1, building.getEnName());
-							prepBuilding.setLong(IndexBuildingTable.STREET.ordinal() + 1, street.getId());
-							prepBuilding.setString(IndexBuildingTable.POSTCODE.ordinal()+1, building.getPostcode() == null ? null : building.getPostcode().toUpperCase());
-							
-							addBatch(count, prepBuilding);
+							writeBuilding(prepBuilding, count, street.getId(), building, BATCH_SIZE);
 						}
 					}
 	        		
@@ -255,6 +214,63 @@ public class DataIndexWriter {
 			file.setLastModified(date);
 		}
 		return this;
+	}
+
+	public static void writeStreetWayNodes(PreparedStatement prepStreetNode, Map<PreparedStatement, Integer> count, Long streetId, Way way, int batchSize)
+			throws SQLException {
+		for (Node n : way.getNodes()) {
+			if (n == null) {
+				continue;
+			}
+			assert IndexStreetNodeTable.values().length == 5;
+			prepStreetNode.setLong(IndexStreetNodeTable.ID.ordinal() + 1, n.getId());
+			prepStreetNode.setDouble(IndexStreetNodeTable.LATITUDE.ordinal() + 1, n.getLatitude());
+			prepStreetNode.setDouble(IndexStreetNodeTable.LONGITUDE.ordinal() + 1, n.getLongitude());
+			prepStreetNode.setLong(IndexStreetNodeTable.WAY.ordinal() + 1, way.getId());
+			prepStreetNode.setLong(IndexStreetNodeTable.STREET.ordinal() + 1, streetId);
+			addBatch(count, prepStreetNode, BATCH_SIZE);
+		}
+	}
+
+	public static void writeBuilding(PreparedStatement prepBuilding, Map<PreparedStatement, Integer> count, Long streetId, 
+			Building building, int batchSize)
+			throws SQLException {
+		assert IndexBuildingTable.values().length == 7;
+		prepBuilding.setLong(IndexBuildingTable.ID.ordinal() + 1, building.getId());
+		prepBuilding.setDouble(IndexBuildingTable.LATITUDE.ordinal() + 1, building.getLocation().getLatitude());
+		prepBuilding.setDouble(IndexBuildingTable.LONGITUDE.ordinal() + 1, building.getLocation().getLongitude());
+		prepBuilding.setString(IndexBuildingTable.NAME.ordinal() + 1, building.getName());
+		prepBuilding.setString(IndexBuildingTable.NAME_EN.ordinal() + 1, building.getEnName());
+		prepBuilding.setLong(IndexBuildingTable.STREET.ordinal() + 1, streetId);
+		prepBuilding.setString(IndexBuildingTable.POSTCODE.ordinal()+1, building.getPostcode() == null ? null : building.getPostcode().toUpperCase());
+		
+		addBatch(count, prepBuilding);
+	}
+
+	public static void writeCity(PreparedStatement prepCity, Map<PreparedStatement, Integer> count, City city, int batchSize) throws SQLException {
+		assert IndexCityTable.values().length == 6;
+		prepCity.setLong(IndexCityTable.ID.ordinal() + 1, city.getId());
+		prepCity.setDouble(IndexCityTable.LATITUDE.ordinal() + 1, city.getLocation().getLatitude());
+		prepCity.setDouble(IndexCityTable.LONGITUDE.ordinal() + 1, city.getLocation().getLongitude());
+		prepCity.setString(IndexCityTable.NAME.ordinal() + 1, city.getName());
+		prepCity.setString(IndexCityTable.NAME_EN.ordinal() + 1, city.getEnName());
+		prepCity.setString(IndexCityTable.CITY_TYPE.ordinal() + 1, CityType.valueToString(city.getType()));
+		addBatch(count, prepCity, batchSize);
+	}
+	
+	
+	public static void createAddressIndexStructure(Connection conn) throws SQLException{
+		Statement stat = conn.createStatement();
+        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexCityTable.values()));
+        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexCityTable.values()));
+        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexBuildingTable.values()));
+        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexBuildingTable.values()));
+        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexStreetNodeTable.values()));
+        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexStreetNodeTable.values()));
+        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexStreetTable.values()));
+        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexStreetTable.values()));
+        stat.execute("PRAGMA user_version = " + IndexConstants.ADDRESS_TABLE_VERSION); //$NON-NLS-1$
+        stat.close();
 	}
 	
 	
@@ -371,7 +387,7 @@ public class DataIndexWriter {
 		addBatch(count, p, BATCH_SIZE);
 	}
 	
-	private static void addBatch(Map<PreparedStatement, Integer> count, PreparedStatement p, int batchSize) throws SQLException{
+	public static void addBatch(Map<PreparedStatement, Integer> count, PreparedStatement p, int batchSize) throws SQLException{
 		p.addBatch();
 		if(count.get(p) >= batchSize){
 			p.executeBatch();

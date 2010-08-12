@@ -62,11 +62,11 @@ public class VoiceRouter {
 		if(router.getAppMode() == ApplicationMode.PEDESTRIAN){
 			PREPARE_DISTANCE = 400;
 			TURN_IN_DISTANCE = 150;
-			TURN_DISTANCE = 20;
+			TURN_DISTANCE = 30;
 		} else if(router.getAppMode() == ApplicationMode.BICYCLE){
 			PREPARE_DISTANCE = 550;
 			TURN_IN_DISTANCE = 200;
-			TURN_DISTANCE = 40;
+			TURN_DISTANCE = 55;
 		} else {
 			PREPARE_DISTANCE = 800;
 			TURN_IN_DISTANCE = 300;
@@ -114,7 +114,7 @@ public class VoiceRouter {
 				currentStatus = STATUS_3000_PREPARE;
 			} else if (dist < TURN_IN_DISTANCE){
 				// should already told it
-				currentStatus = STATUS_TOLD;
+				currentStatus = STATUS_TURN;
 			}
 		}
 		
