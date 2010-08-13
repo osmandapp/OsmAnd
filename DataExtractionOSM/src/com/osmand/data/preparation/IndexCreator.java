@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -72,6 +73,7 @@ public class IndexCreator {
 	public static final String TEMP_NODES_DB = "nodes"+IndexConstants.MAP_INDEX_EXT;
 	public static final int STEP_MAIN = 1;
 	public static final int STEP_ADDRESS_RELATIONS = 2;
+	public static final int STEP_CITY_NODES = 3;
 	
 	private File workingDir = null;
 	
@@ -122,12 +124,15 @@ public class IndexCreator {
 	private PreparedStatement addressStreetNodeStat;
 
 	// choose what to use ?
-	private boolean loadStreetsInMemory = true;
+	private boolean loadInMemory = true;
 	private PreparedStatement addressSearchStreetStat;
-	private Map<String, Long> addressStreetLocalMap = new LinkedHashMap<String, Long>();
-	
 	private PreparedStatement addressSearchBuildingStat;
 	private PreparedStatement addressSearchStreetNodeStat;
+	
+	private Map<String, Long> addressStreetLocalMap = new LinkedHashMap<String, Long>();
+	private Set<Long> addressBuildingLocalSet = new LinkedHashSet<Long>();
+	private Set<Long> addressStreetNodeLocalSet = new LinkedHashSet<Long>();
+	
 	
 	// address structure
 	// load it in memory
@@ -237,14 +242,7 @@ public class IndexCreator {
 		@Override
 		public boolean acceptEntityToLoad(OsmBaseStorage storage, EntityId entityId, Entity e) {
 			// Register all city labelbs
-			if (e instanceof Node && e.getTag(OSMTagKey.PLACE) != null) {
-				City city = new City((Node) e);
-				if(city.getType() != null && !Algoritms.isEmpty(city.getName())){
-					convertEnglishName(city);
-					cityManager.registerObject(((Node) e).getLatitude(), ((Node) e).getLongitude(), city);
-					cities.put(city.getEntityId(), city);
-				}
-			}
+			registerCityIfNeeded(e);
 			// put all nodes into temporary db to get only required nodes after loading all data 
 			try {
 				if (e instanceof Node) {
@@ -413,6 +411,10 @@ public class IndexCreator {
 		this.transportFileName = transportFileName;
 	}
 	
+	public void setNodesDBFile(File file){
+		dbFile = file;
+	}
+	
 	public void setMapFileName(String mapFileName) {
 		this.mapFileName = mapFileName;
 	}
@@ -452,16 +454,17 @@ public class IndexCreator {
 		return addressFileName;
 	}
 	
-	public void iterateOverAllEntities(IProgress progress, NewDataExtractionOsmFilter f, int step) throws SQLException{
-		iterateOverEntities(progress, EntityType.NODE, f.getAllNodes(), step);
-		iterateOverEntities(progress, EntityType.WAY, f.getAllWays(), step);
-		iterateOverEntities(progress, EntityType.RELATION, f.getAllRelations(), step);
+	public void iterateOverAllEntities(IProgress progress, int allNodes, int allWays, int allRelations, int step) throws SQLException{
+		iterateOverEntities(progress, EntityType.NODE, allNodes, step);
+		iterateOverEntities(progress, EntityType.WAY, allWays, step);
+		iterateOverEntities(progress, EntityType.RELATION, allRelations, step);
 	}
 	
-	public void iterateOverEntities(IProgress progress, EntityType type, int allCount, int step) throws SQLException{
+	public int iterateOverEntities(IProgress progress, EntityType type, int allCount, int step) throws SQLException{
 		Statement statement = dbConn.createStatement();
 		String select;
 		String info;
+		int count = 0;
 		
 		if(type == EntityType.NODE){
 			select = "select * from node";
@@ -476,6 +479,7 @@ public class IndexCreator {
 		progress.startTask("Indexing "+info +"...", allCount);
 		ResultSet rs = statement.executeQuery(select);
 		while(rs.next()){
+			count++;
 			progress.progress(1);
 			Entity e;
 			if(type == EntityType.NODE){
@@ -489,6 +493,7 @@ public class IndexCreator {
 			iterateEntity(e, step);
 		}
 		rs.close();
+		return count;
 	}
 
 	private void loadEntityTags(EntityType type, Entity e) throws SQLException {
@@ -688,6 +693,9 @@ public class IndexCreator {
 								if (r.getKey() instanceof Way && saveAddressWays) {
 									DataIndexWriter.writeStreetWayNodes(addressStreetNodeStat, 
 											pStatements, streetId, (Way) r.getKey(), BATCH_SIZE);
+									if(loadInMemory){
+										addressStreetNodeLocalSet.add(r.getKey().getId());
+									}
 								}
 							} else if ("house".equals(r.getValue())) {
 								// will be registered further in other case
@@ -699,6 +707,9 @@ public class IndexCreator {
 										convertEnglishName(building);
 										DataIndexWriter.writeBuilding(addressBuildingStat, pStatements, 
 												streetId, building, BATCH_SIZE);
+										if(loadInMemory){
+											addressBuildingLocalSet.add(r.getKey().getId());
+										}
 									}
 								}
 							}
@@ -723,6 +734,9 @@ public class IndexCreator {
 									convertEnglishName(building);
 									DataIndexWriter.writeBuilding(addressBuildingStat, pStatements, 
 											streetId, building, BATCH_SIZE);
+									if(loadInMemory){
+										addressBuildingLocalSet.add(id.getId());
+									}
 								}
 							}
 						} else {
@@ -835,7 +849,7 @@ public class IndexCreator {
 		Long foundId = null;
 		
 		name = normalizeStreetName(name);
-		if(loadStreetsInMemory){
+		if(loadInMemory){
 			foundId = addressStreetLocalMap.get(name+"_"+city.getId());
 		} else {
 			addressSearchStreetStat.setLong(1, city.getId());
@@ -855,7 +869,7 @@ public class IndexCreator {
 			addressStreetStat.setDouble(IndexStreetTable.LATITUDE.ordinal() + 1, location.getLatitude());
 			addressStreetStat.setDouble(IndexStreetTable.LONGITUDE.ordinal() + 1, location.getLongitude());
 			addressStreetStat.setLong(IndexStreetTable.CITY.ordinal() + 1, city.getId());
-			if(loadStreetsInMemory){
+			if(loadInMemory){
 				DataIndexWriter.addBatch(pStatements, addressStreetStat, BATCH_SIZE);
 				addressStreetLocalMap.put(name+"_"+city.getId(), initId);
 			} else {
@@ -895,10 +909,17 @@ public class IndexCreator {
 				// index not only buildings but also nodes that belongs to addr:interpolation ways
 				if (e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER) != null && e.getTag(OSMTagKey.ADDR_STREET) != null) {
 					// TODO e.getTag(OSMTagKey.ADDR_CITY) could be used to find city however many cities could have same name!
-					// check that building is not registered already 
-					addressSearchBuildingStat.setLong(1, e.getId());
-					ResultSet rs = addressSearchBuildingStat.executeQuery();
-					if (!rs.next()) {
+					// check that building is not registered already
+					boolean exist = false;
+					if(loadInMemory){
+						addressSearchBuildingStat.setLong(1, e.getId());
+						ResultSet rs = addressSearchBuildingStat.executeQuery();
+						exist = rs.next();
+						rs.close();
+					} else {
+						exist = addressBuildingLocalSet.contains(e.getId());
+					}
+					if (!exist) {
 						loadEntityData(e, false);
 						LatLon l = e.getLatLon();
 						City city = getClosestCity(l);
@@ -910,15 +931,21 @@ public class IndexCreator {
 							DataIndexWriter.writeBuilding(addressBuildingStat, pStatements, idStreet, building, BATCH_SIZE);
 						}
 					}
-					rs.close();
 				}
 				// suppose that streets with names are ways for car
 				if (e instanceof Way /* && OSMSettings.wayForCar(e.getTag(OSMTagKey.HIGHWAY)) */
 						&& e.getTag(OSMTagKey.HIGHWAY) != null && e.getTag(OSMTagKey.NAME) != null) {
+					boolean exist = false;
+					if(loadInMemory){
+						addressSearchStreetNodeStat.setLong(1, e.getId());
+						ResultSet rs = addressSearchStreetNodeStat.executeQuery();
+						exist = rs.next();
+						rs.close();
+					} else {
+						exist = addressStreetNodeLocalSet.contains(e.getId());
+					}
 					// check that building is not registered already 
-					addressSearchStreetNodeStat.setLong(1, e.getId());
-					ResultSet rs = addressSearchStreetNodeStat.executeQuery();
-					if (!rs.next()) {
+					if (!exist) {
 						loadEntityData(e, false);
 						LatLon l = e.getLatLon();
 						City city = getClosestCity(l);
@@ -927,7 +954,6 @@ public class IndexCreator {
 							DataIndexWriter.writeStreetWayNodes(addressStreetNodeStat, pStatements, idStreet, (Way) e, BATCH_SIZE);
 						}
 					}
-					rs.close();
 				}
 				if (e instanceof Relation) {
 					if (e.getTag(OSMTagKey.POSTAL_CODE) != null) {
@@ -940,9 +966,24 @@ public class IndexCreator {
 			if (e instanceof Relation && "address".equals(e.getTag(OSMTagKey.TYPE))) {
 				indexAddressRelation((Relation) e);
 			}
+		} else if (step == STEP_CITY_NODES) {
+			registerCityIfNeeded(e);
 		}
 		
 	}
+
+
+	private void registerCityIfNeeded(Entity e) {
+		if (e instanceof Node && e.getTag(OSMTagKey.PLACE) != null) {
+			City city = new City((Node) e);
+			if(city.getType() != null && !Algoritms.isEmpty(city.getName())){
+				convertEnglishName(city);
+				cityManager.registerObject(((Node) e).getLatitude(), ((Node) e).getLongitude(), city);
+				cities.put(city.getEntityId(), city);
+			}
+		}
+	}
+	
 	
 	
 	private void convertEnglishName(MapObject o){
@@ -952,81 +993,93 @@ public class IndexCreator {
 		}
 	}
 	
-	public void generateIndexes(String path, IProgress progress, IOsmStorageFilter addFilter) throws IOException, SAXException,
+	public void generateIndexes(File readFile, IProgress progress, IOsmStorageFilter addFilter) throws IOException, SAXException,
 	SQLException {
-		File f = new File(path);
-		InputStream stream = new FileInputStream(f);
-		int i = f.getName().indexOf('.');
-		if (regionName == null) {
-			regionName = Algoritms.capitalizeFirstLetterAndLowercase(f.getName().substring(0, i));
-		}
-
-		InputStream streamFile = stream;
-		long st = System.currentTimeMillis();
-		if (path.endsWith(".bz2")) {
-			if (stream.read() != 'B' || stream.read() != 'Z') {
-				throw new RuntimeException("The source stream must start with the characters BZ if it is to be read as a BZip2 stream.");
-			} else {
-				stream = new CBZip2InputStream(stream);
+		if (readFile != null && regionName == null) {
+			int i = readFile.getName().indexOf('.');
+			if(i > -1){
+				regionName = Algoritms.capitalizeFirstLetterAndLowercase(readFile.getName().substring(0, i));
 			}
 		}
-
-		if (progress != null) {
-			progress.startTask("Loading file " + path, -1);
-		}
 		
-		// clear previous results
-		cities.clear();
-		cityManager.clear();
-		postalCodeRelations.clear();
-		
-		
-		
-		OsmBaseStorage storage = new OsmBaseStorage();
-		storage.setSupressWarnings(DataExtractionSettings.getSettings().isSupressWarningsForDuplicatedId());
-		if (addFilter != null) {
-			storage.getFilters().add(addFilter);
-		}
-
 		try {
 			Class.forName("org.sqlite.JDBC");
 		} catch (ClassNotFoundException e) {
 			log.error("Illegal configuration", e);
 			throw new IllegalStateException(e);
 		}
-		if (indexMap) {
-			dbFile = new File(workingDir, getMapFileName());
-		} else {
-			dbFile = new File(workingDir, TEMP_NODES_DB);
-		}
-		// to save space
-		if (dbFile.exists()) {
-			dbFile.delete();
+		boolean loadFromPath = dbFile == null;
+		if (dbFile == null) {
+			if (indexMap) {
+				dbFile = new File(workingDir, getMapFileName());
+			} else {
+				dbFile = new File(workingDir, TEMP_NODES_DB);
+			}
+			// to save space
+			if (dbFile.exists()) {
+				dbFile.delete();
+			}
 		}
 		// creating nodes db to fast access for all nodes
 		dbConn = DriverManager.getConnection("jdbc:sqlite:" + dbFile.getAbsolutePath());
-
-		// 1. Loading osm file
-		NewDataExtractionOsmFilter filter = new NewDataExtractionOsmFilter();
-		try {
-			// 1 init database to store temporary data
-			progress.setGeneralProgress("[50 of 100]");
-
-			filter.initDatabase();
-			storage.getFilters().add(filter);
-			storage.parseOSM(stream, progress, streamFile, false);
-			filter.finishLoading();
-
-			if (log.isInfoEnabled()) {
-				log.info("File parsed : " + (System.currentTimeMillis() - st));
+		
+		// clear previous results
+		cities.clear();
+		cityManager.clear();
+		postalCodeRelations.clear();
+		
+		int allRelations = 100000;
+		int allWays = 1000000;
+		int allNodes = 10000000;
+		if (loadFromPath) {
+			InputStream stream = new FileInputStream(readFile);
+			InputStream streamFile = stream;
+			long st = System.currentTimeMillis();
+			if (readFile.getName().endsWith(".bz2")) {
+				if (stream.read() != 'B' || stream.read() != 'Z') {
+					throw new RuntimeException("The source stream must start with the characters BZ if it is to be read as a BZip2 stream.");
+				} else {
+					stream = new CBZip2InputStream(stream);
+				}
 			}
-			progress.finishTask();
 
-		} finally {
-			if (log.isInfoEnabled()) {
-				log.info("File indexed : " + (System.currentTimeMillis() - st));
+			if (progress != null) {
+				progress.startTask("Loading file " + readFile.getAbsolutePath(), -1);
+			}
+
+			OsmBaseStorage storage = new OsmBaseStorage();
+			storage.setSupressWarnings(DataExtractionSettings.getSettings().isSupressWarningsForDuplicatedId());
+			if (addFilter != null) {
+				storage.getFilters().add(addFilter);
+			}
+
+			// 1. Loading osm file
+			NewDataExtractionOsmFilter filter = new NewDataExtractionOsmFilter();
+			try {
+				// 1 init database to store temporary data
+				progress.setGeneralProgress("[50 of 100]");
+
+				filter.initDatabase();
+				storage.getFilters().add(filter);
+				storage.parseOSM(stream, progress, streamFile, false);
+				filter.finishLoading();
+				allNodes = filter.getAllNodes();
+				allWays = filter.getAllWays();
+				allRelations = filter.getAllRelations();
+
+				if (log.isInfoEnabled()) {
+					log.info("File parsed : " + (System.currentTimeMillis() - st));
+				}
+				progress.finishTask();
+
+			} finally {
+				if (log.isInfoEnabled()) {
+					log.info("File indexed : " + (System.currentTimeMillis() - st));
+				}
 			}
 		}
+		
+
 
 		// 2. Processing all entries
 		progress.setGeneralProgress("[90 of 100]");
@@ -1120,6 +1173,10 @@ public class IndexCreator {
 
 		// 1. write all cities
 		if(indexAddress){
+			if(!loadFromPath){
+				allNodes = iterateOverEntities(progress, EntityType.NODE, allNodes, STEP_CITY_NODES);
+			}
+			
 			for(City c : cities.values()){
 				DataIndexWriter.writeCity(addressCityStat, pStatements, c, BATCH_SIZE);
 			}
@@ -1134,7 +1191,7 @@ public class IndexCreator {
 		
 		// 2. index address relations
 		if(indexAddress){
-			iterateOverEntities(progress, EntityType.RELATION, filter.getAllRelations(), STEP_ADDRESS_RELATIONS);
+			allRelations = iterateOverEntities(progress, EntityType.RELATION, allRelations, STEP_ADDRESS_RELATIONS);
 			// commit to put all cities
 			if(pStatements.get(addressBuildingStat) > 0){
 				addressBuildingStat.executeBatch();
@@ -1149,7 +1206,7 @@ public class IndexCreator {
 		
 
 		// 3. iterate over all entities
-		iterateOverAllEntities(progress, filter, STEP_MAIN);
+		iterateOverAllEntities(progress, allNodes, allWays, allRelations, STEP_MAIN);
 		
 		
 		// 4. update all postal codes from relations
@@ -1232,15 +1289,28 @@ public class IndexCreator {
 	// TODO normalizing (!!!), lowercase, converting en street names after all!
 	// TODO find proper location for streets ! centralize them
 	public static void main(String[] args) throws IOException, SAXException, SQLException {
-		IndexCreator extr = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
+		File workDir = new File("e:/Information/OSM maps/osmand/");
+		IndexCreator extr = new IndexCreator(workDir);
 		extr.setIndexPOI(true);
 		extr.setIndexTransport(true);
 		extr.setIndexAddress(true);
 		extr.setNormalizeStreets(true);
 		extr.setSaveAddressWays(true);
+
+		File file = new File(workDir, "netherlands.odb");
+		extr.setNodesDBFile(file);
+		extr.generateIndexes(file, new ConsoleProgressImplementation(2), null);
 		
-		extr.generateIndexes("e:/Information/OSM maps/osm_map/netherlands.osm.bz2", new ConsoleProgressImplementation(2), null);
-//		extr.generateIndexes("e:/Information/OSM maps/belarus osm/minsk.osm", new ConsoleProgressImplementation(4), null);
+//		extr.generateIndexes(new File("e:/Information/OSM maps/osm_map/netherlands.osm.bz2"), new ConsoleProgressImplementation(2), null);
+		
+//		extr.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(4), null);
+		
+//		extr.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus_2010_06_02.osm.bz2"), new ConsoleProgressImplementation(4), null);
+		
+		
+//		File file = new File(workDir, "nodes.map.odb");
+//		extr.setNodesDBFile(file);
+//		extr.generateIndexes(file, new ConsoleProgressImplementation(2), null);
 		
 	}
 }
