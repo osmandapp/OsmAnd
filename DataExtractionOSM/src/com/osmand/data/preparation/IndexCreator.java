@@ -38,6 +38,7 @@ import com.osmand.data.DataTileManager;
 import com.osmand.data.MapObject;
 import com.osmand.data.TransportRoute;
 import com.osmand.data.TransportStop;
+import com.osmand.data.City.CityType;
 import com.osmand.data.index.DataIndexWriter;
 import com.osmand.data.index.IndexConstants;
 import com.osmand.data.index.IndexConstants.IndexBuildingTable;
@@ -137,6 +138,7 @@ public class IndexCreator {
 	// address structure
 	// load it in memory
 	private Map<EntityId, City> cities = new LinkedHashMap<EntityId, City>();
+	private DataTileManager<City> cityVillageManager = new DataTileManager<City>(13);
 	private DataTileManager<City> cityManager = new DataTileManager<City>(10);
 	private List<Relation> postalCodeRelations = new ArrayList<Relation>(); 
 
@@ -755,7 +757,20 @@ public class IndexCreator {
 		}
 		City closest = null;
 		double relDist = Double.POSITIVE_INFINITY;
-		for (City c : cityManager.getClosestObjects(point.getLatitude(), point.getLongitude())) {
+		for (City c : cityManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
+			double rel = MapUtils.getDistance(c.getLocation(), point) / c.getType().getRadius();
+			if (rel < relDist) {
+				closest = c;
+				relDist = rel;
+				if(relDist < 0.2d){
+					break;
+				}
+			}
+		}
+		if(relDist < 0.2d){
+			return closest;
+		}
+		for (City c : cityVillageManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
 			double rel = MapUtils.getDistance(c.getLocation(), point) / c.getType().getRadius();
 			if (rel < relDist) {
 				closest = c;
@@ -912,12 +927,13 @@ public class IndexCreator {
 					// check that building is not registered already
 					boolean exist = false;
 					if(loadInMemory){
+						exist = addressBuildingLocalSet.contains(e.getId());
+					} else {
 						addressSearchBuildingStat.setLong(1, e.getId());
 						ResultSet rs = addressSearchBuildingStat.executeQuery();
 						exist = rs.next();
 						rs.close();
-					} else {
-						exist = addressBuildingLocalSet.contains(e.getId());
+						
 					}
 					if (!exist) {
 						loadEntityData(e, false);
@@ -937,12 +953,13 @@ public class IndexCreator {
 						&& e.getTag(OSMTagKey.HIGHWAY) != null && e.getTag(OSMTagKey.NAME) != null) {
 					boolean exist = false;
 					if(loadInMemory){
+						exist = addressStreetNodeLocalSet.contains(e.getId());
+					} else {
 						addressSearchStreetNodeStat.setLong(1, e.getId());
 						ResultSet rs = addressSearchStreetNodeStat.executeQuery();
 						exist = rs.next();
 						rs.close();
-					} else {
-						exist = addressStreetNodeLocalSet.contains(e.getId());
+						
 					}
 					// check that building is not registered already 
 					if (!exist) {
@@ -978,7 +995,11 @@ public class IndexCreator {
 			City city = new City((Node) e);
 			if(city.getType() != null && !Algoritms.isEmpty(city.getName())){
 				convertEnglishName(city);
-				cityManager.registerObject(((Node) e).getLatitude(), ((Node) e).getLongitude(), city);
+				if(city.getType() == CityType.CITY || city.getType() == CityType.TOWN){
+					cityManager.registerObject(((Node) e).getLatitude(), ((Node) e).getLongitude(), city);
+				} else {
+					cityVillageManager.registerObject(((Node) e).getLatitude(), ((Node) e).getLongitude(), city);
+				}
 				cities.put(city.getEntityId(), city);
 			}
 		}
@@ -1291,8 +1312,8 @@ public class IndexCreator {
 	public static void main(String[] args) throws IOException, SAXException, SQLException {
 		File workDir = new File("e:/Information/OSM maps/osmand/");
 		IndexCreator extr = new IndexCreator(workDir);
-		extr.setIndexPOI(true);
-		extr.setIndexTransport(true);
+//		extr.setIndexPOI(true);
+//		extr.setIndexTransport(true);
 		extr.setIndexAddress(true);
 		extr.setNormalizeStreets(true);
 		extr.setSaveAddressWays(true);
