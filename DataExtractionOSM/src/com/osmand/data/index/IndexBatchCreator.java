@@ -18,9 +18,11 @@ import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.logging.Log;
 
+import com.osmand.Algoritms;
 import com.osmand.LogUtil;
 import com.osmand.data.Region;
 import com.osmand.data.preparation.DataExtraction;
+import com.osmand.data.preparation.IndexCreator;
 import com.osmand.impl.ConsoleProgressImplementation;
 
 public class IndexBatchCreator {
@@ -99,7 +101,8 @@ public class IndexBatchCreator {
 	// TODO only australia, new zealand created
 	// TODO australia out of memory address
 	protected static final String[] oceania = new String[] {
-//		"Australia","New_Zealand",
+//		"Australia",
+//		"New_Zealand",
 //		"American_Samoa","Baker_Island","Cocos_Keeling_Islands","Cook_Islands",
 //		"Federated_States_of_Micronesia","Fiji", "French_Polynesia","Guam","Howland_Island",
 //		"Independent_State_of_Samoa","Jarvis_Island","Johnston_Atoll","Kiribati",
@@ -301,7 +304,7 @@ public class IndexBatchCreator {
 		}
 		System.out.println("GENERATING INDEXES FINISHED ");
 	}
-	protected void generateIndex(File f, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
+	protected void generateIndexOld(File f, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
 		if (!generateIndexes) {
 			return;
 		}
@@ -326,6 +329,52 @@ public class IndexBatchCreator {
 					String fName = name + "_" + IndexConstants.TRANSPORT_TABLE_VERSION + IndexConstants.TRANSPORT_INDEX_EXT;
 					dataIndexWriter.writeTransport(fName, f.lastModified());
 					uploadIndex(new File(indexDirFiles, fName), alreadyUploadedFiles);
+				}
+			} catch (Exception e) {
+				log.error("Exception generating indexes for " + f.getName(), e); //$NON-NLS-1$ 
+			}
+		} catch (OutOfMemoryError e) {
+			System.gc();
+			log.error("OutOfMemory", e);
+
+		}
+		System.gc();
+	}
+	
+	protected void generateIndex(File f, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
+		if (!generateIndexes) {
+			return;
+		}
+		try {
+			IndexCreator indexCreator = new IndexCreator(indexDirFiles);
+			indexCreator.setIndexAddress(indexAddress);
+			indexCreator.setIndexAddress(indexPOI);
+			indexCreator.setIndexAddress(indexTransport);
+			indexCreator.setNormalizeStreets(true);
+			indexCreator.setSaveAddressWays(writeWayNodes);
+
+			String regionName = f.getName();
+			int i = f.getName().indexOf('.');
+			if (i > -1) {
+				regionName = Algoritms.capitalizeFirstLetterAndLowercase(f.getName().substring(0, i));
+			}
+			String addressFileName = regionName + "_" + IndexConstants.ADDRESS_TABLE_VERSION + IndexConstants.ADDRESS_INDEX_EXT;
+			indexCreator.setAddressFileName(addressFileName);
+			String transportFileName = regionName + "_" + IndexConstants.TRANSPORT_TABLE_VERSION + IndexConstants.TRANSPORT_INDEX_EXT;
+			indexCreator.setTransportFileName(transportFileName);
+			String poiFileName = regionName + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT;
+			indexCreator.setPoiFileName(poiFileName);
+			try {
+				alreadyGeneratedFiles.add(f.getName());
+				indexCreator.generateIndexes(f, new ConsoleProgressImplementation(3),  null);
+				if (indexAddress) {
+					uploadIndex(new File(indexDirFiles, addressFileName), alreadyUploadedFiles);
+				}
+				if (indexPOI) {
+					uploadIndex(new File(indexDirFiles, poiFileName), alreadyUploadedFiles);
+				}
+				if (indexTransport) {
+					uploadIndex(new File(indexDirFiles, transportFileName), alreadyUploadedFiles);
 				}
 			} catch (Exception e) {
 				log.error("Exception generating indexes for " + f.getName(), e); //$NON-NLS-1$ 
