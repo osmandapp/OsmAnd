@@ -9,7 +9,8 @@ public class ToDoConstants {
 	// TODO swing
 	// ! 9. Fix issues with big files (such as netherlands) - save memory (!)
 	// Current result : for big file (1 - task  60-80% time, 90% memory) (?)
-	//  11. Index buildings using interpolations (from nodes)
+	//   11. Index buildings using interpolations (from nodes)
+	// ! 12. Reinvent UI of swing app (remove Region object and clear other MapObject) use indexes to show results
 	
 	// TODO max 86
 	//  ! 81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
@@ -19,7 +20,8 @@ public class ToDoConstants {
 	// BUG custom filter : select all/deselect all
 	//     publish on market
 	//     rotate map gps without location
-	//     recalculating route
+	//     recalculating route when location is far from !
+	//     Netherlands indexing albert heijns
  
 
 	// Unscheduled (complex)
