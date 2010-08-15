@@ -50,7 +50,7 @@ public abstract class Entity {
 		
 		@Override
 		public String toString() {
-			return type + " " + id;
+			return type + " " + id; //$NON-NLS-1$
 		}
 		
 		public EntityType getType() {

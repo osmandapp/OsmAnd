@@ -99,7 +99,7 @@ public class OsmStorageWriter {
 			streamWriter.writeAttribute(ATTR_LAT, n.getLatitude()+"");
 			streamWriter.writeAttribute(ATTR_LON, n.getLongitude()+"");
 			streamWriter.writeAttribute(ATTR_ID, n.getId()+"");
-			writeEntityAttributes(streamWriter, n, entityInfo.get(n.getId()));
+			writeEntityAttributes(streamWriter, n, entityInfo.get(EntityId.valueOf(n)));
 			writeTags(streamWriter, n);
 			writeEndElement(streamWriter, INDENT);
 		}
@@ -107,7 +107,7 @@ public class OsmStorageWriter {
 		for(Way w : ways){
 			writeStartElement(streamWriter, ELEM_WAY, INDENT);
 			streamWriter.writeAttribute(ATTR_ID, w.getId()+"");
-			writeEntityAttributes(streamWriter, w, entityInfo.get(w.getId()));
+			writeEntityAttributes(streamWriter, w, entityInfo.get(EntityId.valueOf(w)));
 			for(Long r : w.getNodeIds()){
 				writeStartElement(streamWriter, ELEM_ND, INDENT2);
 				streamWriter.writeAttribute(ATTR_REF, r+"");
@@ -120,7 +120,7 @@ public class OsmStorageWriter {
 		for(Relation r : relations){
 			writeStartElement(streamWriter, ELEM_RELATION, INDENT);
 			streamWriter.writeAttribute(ATTR_ID, r.getId()+"");
-			writeEntityAttributes(streamWriter, r, entityInfo.get(r.getId()));
+			writeEntityAttributes(streamWriter, r, entityInfo.get(EntityId.valueOf(r)));
 			for(Entry<EntityId, String> e : r.getMembersMap().entrySet()){
 				writeStartElement(streamWriter, ELEM_MEMBER, INDENT2);
 				streamWriter.writeAttribute(ATTR_REF, e.getKey().getId()+"");

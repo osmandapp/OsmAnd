@@ -22,6 +22,7 @@ public class OSMSettings {
 		ADDR_STREET("addr:street"), //$NON-NLS-1$
 		ADDR_CITY("addr:city"), //$NON-NLS-1$
 		ADDR_POSTCODE("addr:postcode"), //$NON-NLS-1$
+		
 		ADDRESS_TYPE("address:type"), //$NON-NLS-1$
 		ADDRESS_HOUSE("address:house"), //$NON-NLS-1$
 		TYPE("type"), //$NON-NLS-1$
@@ -62,7 +63,7 @@ public class OSMSettings {
 		if(tagHighway != null){
 			String[] cars = new String[]{"trunk", "motorway", "primary", "secondary", "tertiary", "service", "residential", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 										"trunk_link", "motorway_link", "primary_link", "secondary_link", "residential_link",  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
-										"tertiary_link", "track", "unclassified" }; //$NON-NLS-1$ //$NON-NLS-2$
+										"tertiary_link", "track", "unclassified" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			for(String c : cars){
 				if(c.equals(tagHighway)){
 					return true;
