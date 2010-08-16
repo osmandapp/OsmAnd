@@ -3,8 +3,8 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-<com.osmand.views.OsmandMapTileView android:id="@+id/MapView" android:layout_width="fill_parent" android:layout_height="fill_parent"></com.osmand.views.OsmandMapTileView>
-<com.osmand.views.OsmZoomControls android:id="@+id/ZoomControls"
+<net.osmand.views.OsmandMapTileView android:id="@+id/MapView" android:layout_width="fill_parent" android:layout_height="fill_parent"/>
+<net.osmand.views.OsmZoomControls android:id="@+id/ZoomControls"
 		android:layout_marginRight="3dp" android:layout_marginBottom="2dp"
 		android:layout_width="100dp" android:layout_height="wrap_content" android:layout_gravity="bottom|right"/>
 
