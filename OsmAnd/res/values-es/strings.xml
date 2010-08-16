@@ -145,7 +145,7 @@
 	<string name="downloading_list_indexes">Descargando lista de índices disponibles</string>
 	<string name="list_index_files_was_not_loaded">Los archivos índices no son descargados de osmand.googlecode.com.</string>
     <string name="select_index_file_to_download">Si no puede encontrar su región, puede descargarla usted mismo.
-Ver osmand.googlecode.com.</string>
+Ver osmand.googlecode.net.</string>
 	<string name="show_poi_on_map">Ver en mapa</string>
 	<string name="fav_points_edited">Se editó el punto favorito</string>
 	<string name="fav_points_not_exist">No hay puntos favoritos</string>
