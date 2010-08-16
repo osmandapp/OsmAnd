@@ -79,12 +79,14 @@ public class IndexBatchCreator {
 	protected static final String[] usStates = new String[] {
 //		"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", 
 //		"Delaware",	"District_of_Columbia", "Florida", "Georgia", "Guantanamo_Bay",	"Hawaii",
-		"Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine",
-		"Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", 
-		"Montana", "Nebraska", "Nevada", "New_Hampshire", "New_Jersey", "New_Mexico",
-		"New_York",	"North_Carolina", "North_Dakota", "Ohio", "Oklahoma", "Oregon",
-		"Pennsylvania", "Rhode Island",	"South Carolina", "South Dakota", "Tennessee",
-		"Texas", "Utah", "Vermont", "Virginia", "Washington", "West_Virginia", "Wisconsin", "Wyoming",
+//		"Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine",
+//		"Maryland", "Massachusetts", "Michigan", 
+		// TODO
+//		"Minnesota", "Mississippi", "Missouri", 
+//		"Montana", "Nebraska", "Nevada", "New_Hampshire", "New_Jersey", "New_Mexico",
+//		"New_York",	"North_Carolina", "North_Dakota", "Ohio", "Oklahoma", "Oregon",
+//		"Pennsylvania", "Rhode Island",	"South Carolina", "South Dakota", "Tennessee",
+//		"Texas", "Utah", "Vermont", "Virginia", "Washington", "West_Virginia", "Wisconsin", "Wyoming",
 	};
 	
 	protected static final String[] canadaStates = new String[] {
@@ -100,10 +102,8 @@ public class IndexBatchCreator {
 	};
 	
 	// TODO only australia, new zealand created
-	// TODO australia out of memory address
 	protected static final String[] oceania = new String[] {
-		"Australia", 
-//		"New_Zealand",
+//		"Australia", "New_Zealand",
 //		"American_Samoa","Baker_Island","Cocos_Keeling_Islands","Cook_Islands",
 //		"Federated_States_of_Micronesia","Fiji", "French_Polynesia","Guam","Howland_Island",
 //		"Independent_State_of_Samoa","Jarvis_Island","Johnston_Atoll","Kiribati",

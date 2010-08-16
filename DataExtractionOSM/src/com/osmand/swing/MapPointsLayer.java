@@ -7,7 +7,9 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.osmand.data.DataTileManager;
 import com.osmand.osm.Entity;
@@ -18,10 +20,16 @@ import com.osmand.osm.Way;
 public class MapPointsLayer implements MapPanelLayer {
 
 	private MapPanel map;
+	
 	// special points to draw
 	private DataTileManager<? extends Entity> points;
 	
-	private List<Point> pointsToDraw = new ArrayList<Point>();
+	
+	private Color color = Color.black;
+	private int size = 3;
+	private String tagToShow = null;
+	
+	private Map<Point, String> pointsToDraw = new LinkedHashMap<Point, String>();
 	private List<Line2D> linesToDraw = new ArrayList<Line2D>();
 	
 	@Override
@@ -31,19 +39,35 @@ public class MapPointsLayer implements MapPanelLayer {
 	@Override
 	public void initLayer(MapPanel map) {
 		this.map = map;
-		
 	}
+	
+	public void setColor(Color color){
+		this.color = color;
+	}
+	
+	public void setPointSize(int size){
+		this.size  = size;
+	}
+	
+	public void setTagToShow(String tag) {
+		this.tagToShow = tag;
+	}
+	
+	
 
 	@Override
 	public void paintLayer(Graphics g) {
-		g.setColor(Color.black);
+		g.setColor(color);
 		// draw user points
-		for (Point p : pointsToDraw) {
-			g.drawOval(p.x, p.y, 3, 3);
-			g.fillOval(p.x, p.y, 3, 3);
+		for (Point p : pointsToDraw.keySet()) {
+			g.drawOval(p.x, p.y, size, size);
+			g.fillOval(p.x, p.y, size, size);
+			if(tagToShow != null && pointsToDraw.get(p) != null){
+				g.drawString(pointsToDraw.get(p), p.x, p.y);
+			}
 		}
 		
-		g.setColor(Color.black);
+		g.setColor(color);
 		// draw user points
 		int[] xPoints = new int[4];
 		int[] yPoints = new int[4];
@@ -104,7 +128,7 @@ public class MapPointsLayer implements MapPanelLayer {
 					int pixX = (int) (MapUtils.getPixelShiftX(map.getZoom(), n.getLongitude(), map.getLongitude(), map.getTileSize()) + map.getCenterPointX());
 					int pixY = (int) (MapUtils.getPixelShiftY(map.getZoom(), n.getLatitude(), map.getLatitude(), map.getTileSize()) + map.getCenterPointY());
 					if (pixX >= 0 && pixY >= 0) {
-						pointsToDraw.add(new Point(pixX, pixY));
+						pointsToDraw.put(new Point(pixX, pixY), n.getTag(tagToShow));
 					}
 				} else {
 				} 
