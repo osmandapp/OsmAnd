@@ -83,12 +83,12 @@ public class IndexBatchCreator {
 //		"Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine",
 //		"Maryland", "Massachusetts", "Michigan", 
 		// TODO
-//		"Minnesota", "Mississippi", "Missouri", 
+		"Minnesota", "Mississippi", "Missouri", 
 //		"Montana", 
-//		"Nebraska", "Nevada", "New_Hampshire", "New_Jersey", "New_Mexico",
-//		"New_York",	"North_Carolina", "North_Dakota", "Ohio", "Oklahoma", "Oregon",
-//		"Pennsylvania", "Rhode Island",	"South Carolina", "South Dakota", "Tennessee",
-//		"Texas", "Utah", "Vermont", "Virginia", "Washington", "West_Virginia", "Wisconsin", "Wyoming",
+		"Nebraska", "Nevada", "New_Hampshire", "New_Jersey", "New_Mexico",
+		"New_York",	"North_Carolina", "North_Dakota", "Ohio", "Oklahoma", "Oregon",
+		"Pennsylvania", "Rhode Island",	"South Carolina", "South Dakota", "Tennessee",
+		"Texas", "Utah", "Vermont", "Virginia", "Washington", "West_Virginia", "Wisconsin", "Wyoming",
 	};
 	
 	protected static final String[] canadaStates = new String[] {
