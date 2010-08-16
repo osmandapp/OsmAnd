@@ -69,6 +69,12 @@ import com.osmand.swing.DataExtractionSettings;
  */
 public class IndexCreator {
 	private static final Log log = LogFactory.getLog(DataExtraction.class);
+	// TODO check
+	// 1. check postal_code if the building was registered by relation!
+
+	// TODO normalizing (!!!), lowercase, converting en street names after all!
+	// TODO find proper location for streets ! centralize them
+
 
 	public static final int BATCH_SIZE = 5000;
 	public static final String TEMP_NODES_DB = "nodes"+IndexConstants.MAP_INDEX_EXT;
@@ -1303,35 +1309,24 @@ public class IndexCreator {
 	}
 
 	
-	// TODO check
-	// 1. check that not added twice from relations
-	// 2. check postal_code if the building was registered by relation!
-
-	// TODO normalizing (!!!), lowercase, converting en street names after all!
-	// TODO find proper location for streets ! centralize them
 	public static void main(String[] args) throws IOException, SAXException, SQLException {
-		File workDir = new File("e:/Information/OSM maps/osmand/");
+		File workDir = new File("C:/");
 		IndexCreator extr = new IndexCreator(workDir);
-//		extr.setIndexPOI(true);
+		extr.setIndexPOI(true);
 //		extr.setIndexTransport(true);
-		extr.setIndexAddress(true);
-		extr.setNormalizeStreets(true);
-		extr.setSaveAddressWays(true);
+//		extr.setIndexAddress(true);
+//		extr.setNormalizeStreets(true);
+//		extr.setSaveAddressWays(true);
 
-		File file = new File(workDir, "netherlands.odb");
-		extr.setNodesDBFile(file);
-		extr.generateIndexes(file, new ConsoleProgressImplementation(2), null);
-		
-//		extr.generateIndexes(new File("e:/Information/OSM maps/osm_map/netherlands.osm.bz2"), new ConsoleProgressImplementation(2), null);
-		
-//		extr.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(4), null);
-		
-//		extr.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus_2010_06_02.osm.bz2"), new ConsoleProgressImplementation(4), null);
-		
-		
+		// 1. generates using nodes db
 //		File file = new File(workDir, "nodes.map.odb");
 //		extr.setNodesDBFile(file);
 //		extr.generateIndexes(file, new ConsoleProgressImplementation(2), null);
+
+		// 2. generates using osm bz2		
+//		extr.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus_2010_06_02.osm.bz2"), new ConsoleProgressImplementation(4), null);
+		
+		
 		
 	}
 }

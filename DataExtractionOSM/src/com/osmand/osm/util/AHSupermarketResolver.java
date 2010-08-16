@@ -1,5 +1,10 @@
 package com.osmand.osm.util;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -14,6 +19,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.UIManager;
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.commons.logging.Log;
@@ -25,11 +33,13 @@ import org.json.JSONTokener;
 import org.xml.sax.SAXException;
 
 import com.osmand.Algoritms;
+import com.osmand.data.DataTileManager;
 import com.osmand.impl.ConsoleProgressImplementation;
 import com.osmand.osm.Entity;
 import com.osmand.osm.EntityInfo;
 import com.osmand.osm.LatLon;
 import com.osmand.osm.MapUtils;
+import com.osmand.osm.Node;
 import com.osmand.osm.OpeningHoursParser;
 import com.osmand.osm.Entity.EntityId;
 import com.osmand.osm.OpeningHoursParser.BasicDayOpeningHourRule;
@@ -37,6 +47,9 @@ import com.osmand.osm.OpeningHoursParser.OpeningHoursRule;
 import com.osmand.osm.io.IOsmStorageFilter;
 import com.osmand.osm.io.OsmBaseStorage;
 import com.osmand.osm.io.OsmStorageWriter;
+import com.osmand.swing.DataExtractionSettings;
+import com.osmand.swing.MapPanel;
+import com.osmand.swing.MapPointsLayer;
 
 /**
  * Downloads list of Albert Heijn supermarkets and converts them to a map.
@@ -119,8 +132,8 @@ public class AHSupermarketResolver {
 	
 	
 	// this file could be retrieved using xapi
-	// http://xapi.openstreetmap.org/api/0.6/node[shop=supermarket][bbox=2.5,50,7.8,53.5]
-	public void updateOSMFile(String pathToOsmFile, String pathToModifiedFile) throws IOException, SAXException, XMLStreamException, JSONException{
+	// http://xapi.openstreetmap.org/api/0.6/*[shop=supermarket][bbox=2.5,50,7.8,53.5]
+	public void updateOSMFile(String pathToOsmFile, String pathToModifiedFile, boolean show) throws IOException, SAXException, XMLStreamException, JSONException{
 		OsmBaseStorage storage = new OsmBaseStorage();
 		final Map<String, EntityId> winkelNumbers = new LinkedHashMap<String, EntityId>();
 		
@@ -128,17 +141,33 @@ public class AHSupermarketResolver {
 
 			@Override
 			public boolean acceptEntityToLoad(OsmBaseStorage storage, EntityId entityId, Entity entity) {
-				if(entity.getTag("winkelnummer") !=null){
+				if(entity.getTag("winkelnummer") !=null && entity.getTag("name").contains("eijn")){
 					winkelNumbers.put(entity.getTag("winkelnummer"), entityId);
 					return true;
 				}
-				
-				return false;
+				// register all nodes in order to operate with ways
+				return true;
 			}
 			
 		});
 		storage.parseOSM(new FileInputStream(pathToOsmFile), new ConsoleProgressImplementation(2), null, true);
 		Map<String, Map<String, Object>> supermarkets = getSupermarkets();
+		
+		DataTileManager<Entity> deleted = new DataTileManager<Entity>();
+		
+		for(String s : winkelNumbers.keySet()){
+			if(!supermarkets.containsKey(s)){
+				System.err.println("Shop " + s + " id=" +winkelNumbers.get(s) + " doesn't present on the site.");
+				EntityId e = winkelNumbers.get(s);
+				Entity en = storage.getRegisteredEntities().get(e);
+				deleted.registerObject(en.getLatLon().getLatitude(), en.getLatLon().getLongitude(), 
+						en);
+			}
+		}
+		
+		DataTileManager<Entity> notCorrelated = new DataTileManager<Entity>();
+		DataTileManager<Entity> notShown = new DataTileManager<Entity>();
+		
 		for(String s : supermarkets.keySet()){
 			Map<String, Object> props = supermarkets.get(s);
 			if(winkelNumbers.get(s) != null){
@@ -191,7 +220,10 @@ public class AHSupermarketResolver {
 				double dist = MapUtils.getDistance(e.getLatLon(), real);
 				if(dist > 150){
 					// TODO move shop ?
-					System.err.println("Winkel number = " + s + " is to far from site info - " + dist + " m !!! " + real);
+					System.err.println("Winkel number = " + s + " is too far from site info - " + dist + " m !!! " + real);
+					if(dist > 300){
+						notCorrelated.registerObject(real.getLatitude(), real.getLongitude(), e);
+					}
 				}
 				boolean changed = false;
 				for(String k : newTags.keySet()){
@@ -205,19 +237,73 @@ public class AHSupermarketResolver {
 					info.setAction("modify");
 				}
 			} else {
-				// TODO add new shop ????
+				// TODO?
 				LatLon real = new LatLon((Double)props.get("lat"), (Double) props.get("lng"));
 				System.err.println("Winkel number = " + s + " is not found in database !!! " + real);
+				Node n = new Node(real.getLatitude(), real.getLongitude(), -1);
+				n.putTag("winkelnummer", "REG : " + s);
+				notShown.registerObject(real.getLatitude(), real.getLongitude(), n);
 			}
 			
 		}
 		
 		OsmStorageWriter writer = new OsmStorageWriter();
 		writer.saveStorage(new FileOutputStream(pathToModifiedFile), storage, null, true);
+		if(show){
+			try {
+				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			final MapPanel panel = new MapPanel(DataExtractionSettings.getSettings().getTilesDirectory());
+			panel.setFocusable(true);
+			MapPointsLayer toAdd = panel.getLayer(MapPointsLayer.class);
+			toAdd.setPoints(notShown);
+			toAdd.setPointSize(5);
+			toAdd.setTagToShow("winkelnummer");
+			
+			
+			MapPointsLayer red = new MapPointsLayer();
+			red.setPoints(deleted);
+			red.setColor(Color.red);
+			red.setPointSize(5);
+			panel.addLayer(red);
+			
+			MapPointsLayer blue = new MapPointsLayer();
+			blue.setPoints(notCorrelated);
+			blue.setColor(Color.blue);
+			blue.setPointSize(4);
+			panel.addLayer(blue);
+			
+			
+			JFrame frame = new JFrame("Map view");
+		    
+			
+		    frame.addWindowListener(new WindowAdapter(){
+		    	@Override
+		    	public void windowClosing(WindowEvent e) {
+		    		DataExtractionSettings settings = DataExtractionSettings.getSettings();
+					settings.saveDefaultLocation(panel.getLatitude(), panel.getLongitude());
+					settings.saveDefaultZoom(panel.getZoom());
+		    		System.exit(0);
+		    	}
+		    });
+		    Container content = frame.getContentPane();
+		    content.add(panel, BorderLayout.CENTER);
+
+		    JMenuBar bar = new JMenuBar();
+		    bar.add(MapPanel.getMenuToChooseSource(panel));
+		    frame.setJMenuBar(bar);
+		    frame.setSize(512, 512);
+		    frame.setVisible(true);
+			
+		}
 	}
 	
 	public static void main(String[] args) throws IOException, SAXException, XMLStreamException, JSONException {
 		AHSupermarketResolver resolver = new AHSupermarketResolver();
-		resolver.updateOSMFile("C:/ams_poi.osm", "C:/ams_poi_mod.osm");
+		resolver.updateOSMFile("e:/Information/OSM maps/osm_map/holl_supermarket.osm", "e:/Information/OSM maps/osm_map/ams_poi_mod.osm",
+				true);
 	}
 }
