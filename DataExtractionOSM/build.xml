@@ -16,7 +16,7 @@
 		<delete file="MANIFEST.MF" />
 		<manifest file="MANIFEST.MF">
 			<attribute name="Built-By" value="${user.name}" />
-			<attribute name="Main-Class" value="com.osmand.swing.OsmExtractionUI" />
+			<attribute name="Main-Class" value="net.osmand.swing.OsmExtractionUI" />
 			<attribute name="Class-Path" value="${lib.list}"/>
 		</manifest>
 
