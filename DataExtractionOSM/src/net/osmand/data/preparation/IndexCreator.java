@@ -1306,6 +1306,20 @@ public class IndexCreator {
 		} catch (SQLException e) {
 		}
 	}
+	
+	public static void removeWayNodes(File sqlitedb) throws SQLException{
+		Connection dbConn = DriverManager.getConnection("jdbc:sqlite:" + sqlitedb.getAbsolutePath());
+		dbConn.setAutoCommit(false);
+		Statement st = dbConn.createStatement();
+		st.execute("DELETE FROM " + IndexStreetNodeTable.getTable() + " WHERE 1=1");
+		st.close();
+		dbConn.commit();
+		dbConn.setAutoCommit(true);
+		st = dbConn.createStatement();
+		st.execute("VACUUM");
+		st.close();
+		dbConn.close();
+	}
 
 	
 	public static void main(String[] args) throws IOException, SAXException, SQLException {

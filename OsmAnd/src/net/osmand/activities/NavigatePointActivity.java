@@ -93,6 +93,7 @@ public class NavigatePointActivity extends Activity {
 					((TextView)findViewById(R.id.LatitudeEdit)).setText(convert(lat, newFormat));
 					((TextView)findViewById(R.id.LongitudeEdit)).setText(convert(lon, newFormat));
 				} catch (RuntimeException e) {
+					((TextView) findViewById(R.id.ValidateTextView)).setVisibility(View.VISIBLE);
 					((TextView) findViewById(R.id.ValidateTextView)).setText(R.string.invalid_locations);
 					Log.w(LogUtil.TAG, "Convertion failed", e); //$NON-NLS-1$
 				}
@@ -137,6 +138,7 @@ public class NavigatePointActivity extends Activity {
 			}
 			close();
 		} catch (RuntimeException e) {
+			((TextView) findViewById(R.id.ValidateTextView)).setVisibility(View.VISIBLE);
 			((TextView) findViewById(R.id.ValidateTextView)).setText(R.string.invalid_locations);
 			Log.w(LogUtil.TAG, "Convertion failed", e); //$NON-NLS-1$
 		}
