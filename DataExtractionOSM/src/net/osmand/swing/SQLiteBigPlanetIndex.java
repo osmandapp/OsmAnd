@@ -53,6 +53,7 @@ public class SQLiteBigPlanetIndex {
 		conn.setAutoCommit(false);
 		pStatement = conn.prepareStatement("INSERT INTO tiles VALUES (?, ?, ?, ?, ?)");
 		int ch = 0;
+		// be attentive to create buf enough for image 
 		int bufSize = 32 * 1024;
 		byte[] buf = new byte[bufSize];
 		int maxZoom = 17;
@@ -81,7 +82,12 @@ public class SQLiteBigPlanetIndex {
 								}
 								
 								FileInputStream is = new FileInputStream(f);
-								int l = is.read(buf);
+								int l = 0;
+								try {
+									l = is.read(buf);
+								} finally {
+									is.close();
+								}
 								if (l > 0) {
 									pStatement.setInt(1, x);
 									pStatement.setInt(2, y);
