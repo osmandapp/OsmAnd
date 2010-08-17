@@ -184,11 +184,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				return MapActivity.this.onTrackballEvent(e);
 			}
 
-			@Override
-			public boolean onTrackBallPressed() {
-				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
-	        	return true;
-			}
 		});
 		MapTileDownloader.getInstance().addDownloaderCallback(new IMapDownloaderCallback(){
 			@Override
@@ -765,6 +760,15 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		OsmandSettings.setMapActivityEnabled(this, true);
 		checkExternalStorage();
 		showAndHideMapPosition();
+	}
+	
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
+			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
+	    	return true;
+		}
+		return false;
 	}
 	
 	public void checkExternalStorage(){
