@@ -353,6 +353,7 @@ public class IndexBatchCreator {
 			indexCreator.setIndexAddress(indexAddress);
 			indexCreator.setIndexPOI(indexPOI);
 			indexCreator.setIndexTransport(indexTransport);
+			indexCreator.setLastModifiedDate(f.lastModified());
 			indexCreator.setNormalizeStreets(true);
 			indexCreator.setSaveAddressWays(writeWayNodes);
 
