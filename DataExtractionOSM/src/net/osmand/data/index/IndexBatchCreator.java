@@ -36,7 +36,19 @@ public class IndexBatchCreator {
 	protected static final Log log = LogUtil.getLog(IndexBatchCreator.class);
 	protected static final String SITE_TO_DOWNLOAD1 = "http://download.geofabrik.de/osm/europe/"; //$NON-NLS-1$
 	
-	// TODO send address index for big : (!) GB
+	// google code couldn't accept files more than 100MB so we can skip some countries 
+	private static final Set<String> doNotWriteWayNodesInUploading = new LinkedHashSet<String>();
+	static {
+		doNotWriteWayNodesInUploading.addAll(Arrays.asList(new String[]{
+				"great_britain",
+				// US
+				"us_alabama", "us_california", "us_florida", "us_georgia", "us_illinois", "us_indiana", 
+				"us_kentucky", "us_maryland", "us_massachusetts", "us_missouri", "us_new_york",	
+		}));
+		// next could be : australia
+	}
+	
+	
 	protected static final String[] europeCountries = new String[] {
 //		"albania", "andorra", "austria", // 5.3, 0.4, 100 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 //		"belarus", "belgium", "bosnia-herzegovina", // 39, 43, 4.1 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -54,7 +66,7 @@ public class IndexBatchCreator {
 //		"ukraine", // 19 //$NON-NLS-1$
 		//TOTAL : 1129 MB 
 //		 "czech_republic", "netherlands", // 168, 375,
-//		 "great_britain" (!),  "italy", // 310, 246, 
+//		 "great_britain" ,  "italy", // 310, 246, 
 		// ADD TO TOTAL : 2449 MB
 
 	};
@@ -73,22 +85,19 @@ public class IndexBatchCreator {
 	};
 
  
-	// Great-britain !
-	
 	protected static final String SITE_TO_DOWNLOAD2 = "http://downloads.cloudmade.com/"; //$NON-NLS-1$
 	// us states
 	// TODO Address (out of memory) : west-virginia, virginia, vermont, utas, texas, tennesse, pensilvania, oregon,..
-	// "Alabama", "California", "Florida", "Georgia", "Illinois", "Indiana", "Kentucky", "Maryland", "Massachusetts",
-	// "Missouri", "New_York",
 	protected static final String[] usStates = new String[] {
 //		"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", 
 //		"Delaware",	"District_of_Columbia", "Florida", "Georgia", "Guantanamo_Bay",	"Hawaii",
 //		"Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine",
 //		"Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", 
 //		"Montana", "Nebraska", "Nevada", "New_Hampshire", "New_Jersey", "New_Mexico",
-		"New_York",	"North_Carolina", "North_Dakota", "Ohio", "Oklahoma", "Oregon",
-		"Pennsylvania", "Rhode Island",	"South Carolina", "South Dakota", "Tennessee",
-		"Texas", "Utah", "Vermont", "Virginia", "Washington", "West_Virginia", "Wisconsin", "Wyoming",
+		// TODO
+//		"New_York",	"North_Carolina", "North_Dakota", "Ohio", "Oklahoma", "Oregon",
+//		"Pennsylvania", "Rhode Island",	"South Carolina", "South Dakota", "Tennessee",
+//		"Texas", "Utah", "Vermont", "Virginia", "Washington", "West_Virginia", "Wisconsin", "Wyoming",
 	};
 	
 	protected static final String[] canadaStates = new String[] {
@@ -349,19 +358,22 @@ public class IndexBatchCreator {
 			return;
 		}
 		try {
+			String regionName = f.getName();
+			int i = f.getName().indexOf('.');
+			if (i > -1) {
+				regionName = Algoritms.capitalizeFirstLetterAndLowercase(f.getName().substring(0, i));
+			}
+			
+			boolean saveAddressWays = writeWayNodes && !doNotWriteWayNodesInUploading.contains(regionName.toLowerCase());
 			IndexCreator indexCreator = new IndexCreator(indexDirFiles);
 			indexCreator.setIndexAddress(indexAddress);
 			indexCreator.setIndexPOI(indexPOI);
 			indexCreator.setIndexTransport(indexTransport);
 			indexCreator.setLastModifiedDate(f.lastModified());
 			indexCreator.setNormalizeStreets(true);
-			indexCreator.setSaveAddressWays(writeWayNodes);
+			indexCreator.setSaveAddressWays(saveAddressWays);
 
-			String regionName = f.getName();
-			int i = f.getName().indexOf('.');
-			if (i > -1) {
-				regionName = Algoritms.capitalizeFirstLetterAndLowercase(f.getName().substring(0, i));
-			}
+			
 			String addressFileName = regionName + "_" + IndexConstants.ADDRESS_TABLE_VERSION + IndexConstants.ADDRESS_INDEX_EXT;
 			indexCreator.setAddressFileName(addressFileName);
 			String transportFileName = regionName + "_" + IndexConstants.TRANSPORT_TABLE_VERSION + IndexConstants.TRANSPORT_INDEX_EXT;
