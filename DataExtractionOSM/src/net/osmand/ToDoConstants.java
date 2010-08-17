@@ -8,8 +8,8 @@ public class ToDoConstants {
 	
 	// TODO swing
 	// ! 9. Fix issues with big files (such as netherlands) - save memory (!)
-	// Current result : for big file (1 - task  60-80% time, 90% memory) (?)
-	//   11. Index buildings using interpolations (from nodes)
+	// Current result : for big file (1 - task  60-80% time, 90% memory) (?) (+)
+	//   11. Index buildings using interpolations (from nodes) (+)
 	// ! 12. Reinvent UI of swing app (remove Region object and clear other MapObject) use indexes to show results
 	
 	// TODO max 86
@@ -17,11 +17,26 @@ public class ToDoConstants {
 	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?),
 	//  railway( station, subway?) - issue 17
 	
-	// BUGS :
-	//    ! VELCOM - competition
-	//    ! search poi without gps !
-	//      rotate map gps without location
-	//      recalculating route when location is far from !
+	// TODO BUGS:
+	//  	USA indexes
+	//  ! VELCOM - competition (ppt)
+	//  ! search poi without gps !
+	//    rotate map gps without location
+	//    recalculating route when location is far from !
+	// ----- from site ---
+	// - 5 (?)
+	// - menu order (41)
+	// - landscape view not reachable (39)
+	// - 81. (17)
+	// - scroll ball (42)
+	// -- house tagging (31)
+	// -- crash (40)
+	// --- go back to osmand (23)
+	// --- keyboard (43)
+	// --- add poi tags (44)
+
+	
+	//  PRESENTS : mediamarkt, parfum, coffee, (al?), (om?), olia?
 	
  
 
