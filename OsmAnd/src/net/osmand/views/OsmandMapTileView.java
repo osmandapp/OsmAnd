@@ -36,7 +36,6 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
 import android.view.GestureDetector;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -54,7 +53,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	public interface OnTrackBallListener{
 		public boolean onTrackBallEvent(MotionEvent e);
-		public boolean onTrackBallPressed();
 	}
 	
 	public interface OnLongClickListener {
@@ -329,12 +327,12 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	//////////////////////////////// DRAWING MAP PART /////////////////////////////////////////////
 	
-	protected void drawEmptyTile(Canvas cvs, float x, float y){
-		float tileDiv = (getTileSize() / emptyTileDivisor);
+	protected void drawEmptyTile(Canvas cvs, float x, float y, float ftileSize){
+		float tileDiv = (ftileSize / emptyTileDivisor);
 		for (int k1 = 0; k1 < emptyTileDivisor; k1++) {
 			for (int k2 = 0; k2 < emptyTileDivisor; k2++) {
-				float xk = x + tileDiv* k1 ;
-				float yk = y + tileDiv* k2;
+				float xk = x + tileDiv * k1;
+				float yk = y + tileDiv * k2;
 				if ((k1 + k2) % 2 == 0) {
 					cvs.drawRect(xk, yk, xk + tileDiv, yk + tileDiv, paintGrayFill);
 				} else {
@@ -484,7 +482,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 								}
 								
 								if(bmp == null){
-									drawEmptyTile(canvas, (int) x1, (int) y1);
+									drawEmptyTile(canvas, x1, y1, ftileSize);
 								} else {
 									int xZoom = ((left + i) % div) * tileSize / div;
 									int yZoom = ((top + j) % div) * tileSize / div;;
@@ -567,10 +565,13 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 					Bitmap bmp = mgr.getTileImageForMapSync(null, map, request.xTile, request.yTile, request.zoom, false);
 					float x = (request.xTile - tileX) * getTileSize()  + w;
 					float y = (request.yTile - tileY) * getTileSize() + h;
+					float tileSize = getTileSize();
 					if (bmp == null) {
-						drawEmptyTile(canvas, x, y);
+						drawEmptyTile(canvas, x, y, tileSize);
 					} else {
-						canvas.drawBitmap(bmp, x, y, paintBitmap);
+						bitmapToZoom.set(0, 0, getSourceTileSize(), getSourceTileSize());
+						bitmapToDraw.set(x, y, x + tileSize, y + tileSize);
+						canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
 					}
 					drawOverMap(canvas);
 				} finally {
@@ -689,13 +690,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return true;
 	}
 	
-	@Override
-	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		if(trackBallDelegate != null && keyCode == KeyEvent.KEYCODE_DPAD_CENTER){
-			return trackBallDelegate.onTrackBallPressed();
-		}
-		return super.onKeyUp(keyCode, event);
-	}
 	
 	@Override
 	public boolean onTrackballEvent(MotionEvent event) {
