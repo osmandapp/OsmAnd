@@ -376,8 +376,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     
     @Override
     protected void onStop() {
-    	mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-		mNotificationManager.notify(APP_NOTIFICATION_ID, getNotification());
+    	// TODO keep this check?
+    	if(routingHelper.isFollowingMode()){
+    		mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+    		mNotificationManager.notify(APP_NOTIFICATION_ID, getNotification());
+    	}
 		if(progressDlg != null){
 			progressDlg.dismiss();
 			progressDlg = null;
@@ -389,7 +392,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     protected void onDestroy() {
     	super.onDestroy();
     	savingTrackHelper.close();
-    	mNotificationManager.cancel(APP_NOTIFICATION_ID);
+    	if(mNotificationManager != null){
+    		mNotificationManager.cancel(APP_NOTIFICATION_ID);
+    	}
     	MapTileDownloader.getInstance().removeDownloaderCallback(mapView);
     }
     
