@@ -1,9 +1,5 @@
 package net.osmand;
 
-import java.io.File;
-import java.sql.SQLException;
-
-import net.osmand.data.preparation.IndexCreator;
 
 
 /**
@@ -16,7 +12,6 @@ public class ToDoConstants {
 	// Current result : for big file (1 - task  60-80% time, 90% memory) (?) (+)
 	//   11. Index buildings using interpolations (from nodes) (+)
 	// ! 12. Reinvent UI of swing app (remove Region object and clear other MapObject) use indexes to show results
-	//   13. Automative to index way nodes or not.
 	
 	// TODO max 86
 	//  ! 81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
@@ -24,19 +19,18 @@ public class ToDoConstants {
 	//  railway( station, subway?) - issue 17
 	
 	// TODO check network availability
-	// TODO in IndexCreator and other files!
+	// TODO's in IndexCreator and other files!
 	
 	
 	// TODO BUGS:
 	//  	USA indexes
 	//  ! VELCOM - competition (ppt)
-	//  ! search poi without gps !
+	
 	//    rotate map gps without location
 	//    recalculating route when location is far from !
 	// ----- from site ---
 	// - 5 (?)
 	// - menu order (41)
-	// - landscape view not reachable (39)
 	// - 81. (17)
 	// -- house tagging (31)
 	// --- go back to osmand (23)
@@ -44,10 +38,9 @@ public class ToDoConstants {
 	// --- add poi tags (44)
 
 	
-	//  PRESENTS : mediamarkt, parfum, coffee, (al?), (om?), olia?
+	//  PRESENTS : mediamarkt, parfum, coffee, (al-parfum), (om?), olia?
 	
  
-
 	// Unscheduled (complex)
 	//   65. Intermediate points - for better control routing, to avoid traffic jams ...(?)
 	//   40. Support simple vector road rendering (require new index file) (?)
@@ -64,7 +57,6 @@ public class ToDoConstants {
 	//   85. Enable on/off screen for bike navigation (?)
 	//   83. Add monitoring service to send locations to internet (?)
 
-	
 	// DONE ANDROID :
 	// 82. Rotate map according compass
 	// 85. Remove context menu on long press map ! Accumulate actions and show label (+)
@@ -73,14 +65,14 @@ public class ToDoConstants {
  	// 10. Improve address indexing (use relations). (+)
     //	  use relation "a6" (to accumulate streets!),  "a3" to read all cities & define boundaries for city (& define that street in city).
 	
-	public static void main(String[] args) throws SQLException, ClassNotFoundException {
-		File dir = new File("e:\\Information\\OSM maps\\osm_batch_ind\\");
-		Class.forName("org.sqlite.JDBC");
-		for(File f : dir.listFiles()){
-			if(f.getName().endsWith(".odb")){
-				IndexCreator.removeWayNodes(f);
-			}
-		}
-	}
+//	public static void main(String[] args) throws SQLException, ClassNotFoundException {
+//		File dir = new File("e:\\Information\\OSM maps\\osm_map\\!big!\\");
+//		Class.forName("org.sqlite.JDBC");
+//		for(File f : dir.listFiles()){
+//			if(f.getName().endsWith(".odb")){
+//				IndexCreator.removeWayNodes(f);
+//			}
+//		}
+//	}
 
 }
