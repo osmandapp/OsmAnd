@@ -7,11 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.NameFinderPoiFilter;
+import net.osmand.OsmandSettings;
 import net.osmand.PoiFilter;
 import net.osmand.PoiFiltersHelper;
 import net.osmand.R;
 import net.osmand.activities.EditPOIFilterActivity;
+import net.osmand.osm.LatLon;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -50,6 +54,10 @@ public class SearchPoiFilterActivity extends ListActivity {
 			searchNearBy = false;
 			latitude = extras.getDouble(SEARCH_LAT);
 			longitude = extras.getDouble(SEARCH_LON);
+		} else {
+			LatLon loc = OsmandSettings.getLastKnownMapLocation(this);
+			latitude = loc.getLatitude();
+			longitude = loc.getLongitude();
 		}
 		
 		typeFace = Typeface.create((String)null, Typeface.ITALIC);
@@ -94,20 +102,30 @@ public class SearchPoiFilterActivity extends ListActivity {
 			showEditActivity(filter);
 			return;
 		}
-//		AlertDialog.Builder b = new AlertDialog.Builder(this);
-//		b.setItems(new String[]{getString(R.string.search_nearby), getString(R.string.search_near_map)}, new DialogInterface.OnClickListener(){
-//			@Override
-//			public void onClick(DialogInterface dialog, int which) {
-//			}
-//		});
-//		b.show();
-		Intent newIntent = new Intent(SearchPoiFilterActivity.this, SearchPOIActivity.class);
+		final Intent newIntent = new Intent(SearchPoiFilterActivity.this, SearchPOIActivity.class);
 		newIntent.putExtra(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
-		if(!searchNearBy){
+		if (searchNearBy) {
+			AlertDialog.Builder b = new AlertDialog.Builder(this);
+			b.setItems(new String[] { getString(R.string.search_nearby), getString(R.string.search_near_map) },
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							if (which == 1) {
+								newIntent.putExtra(SearchPOIActivity.SEARCH_LAT, latitude);
+								newIntent.putExtra(SearchPOIActivity.SEARCH_LON, longitude);
+							}
+							startActivityForResult(newIntent, 0);
+						}
+					});
+			b.show();
+		} else {
 			newIntent.putExtra(SearchPOIActivity.SEARCH_LAT, latitude);
 			newIntent.putExtra(SearchPOIActivity.SEARCH_LON, longitude);
+			startActivityForResult(newIntent, 0);
 		}
-		startActivityForResult(newIntent, 0);
+		
+			
+		
 	}
 
 

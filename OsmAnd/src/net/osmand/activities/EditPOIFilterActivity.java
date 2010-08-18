@@ -8,12 +8,14 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 
+import net.osmand.OsmandSettings;
 import net.osmand.PoiFilter;
 import net.osmand.PoiFiltersHelper;
 import net.osmand.R;
 import net.osmand.PoiFiltersHelper.PoiFilterDbHelper;
 import net.osmand.activities.search.SearchPOIActivity;
 import net.osmand.data.AmenityType;
+import net.osmand.osm.LatLon;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.AlertDialog.Builder;
@@ -60,13 +62,38 @@ public class EditPOIFilterActivity extends ListActivity {
 			@Override
 			public void onClick(View v) {
 				Bundle extras = getIntent().getExtras();
-				Intent newIntent = new Intent(EditPOIFilterActivity.this, SearchPOIActivity.class);
-				newIntent.putExtra(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
+				boolean searchNearBy = true;
+				LatLon lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(EditPOIFilterActivity.this);
+				double latitude = lastKnownMapLocation != null ? lastKnownMapLocation.getLatitude() : 0;
+				double longitude = lastKnownMapLocation != null ? lastKnownMapLocation.getLongitude() : 0;
+				final Intent newIntent = new Intent(EditPOIFilterActivity.this, SearchPOIActivity.class);
 				if(extras != null && extras.containsKey(SEARCH_LAT) && extras.containsKey(SEARCH_LON)){
-					newIntent.putExtra(SearchPOIActivity.SEARCH_LAT, extras.getDouble(SEARCH_LAT));
-					newIntent.putExtra(SearchPOIActivity.SEARCH_LON, extras.getDouble(SEARCH_LON));
+					latitude = extras.getDouble(SEARCH_LAT);
+					longitude = extras.getDouble(SEARCH_LON);
+					searchNearBy = false;
 				}
-				startActivity(newIntent);
+				final double lat = latitude;
+				final double lon = longitude;
+				newIntent.putExtra(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
+				if (searchNearBy) {
+					AlertDialog.Builder b = new AlertDialog.Builder(EditPOIFilterActivity.this);
+					b.setItems(new String[] { getString(R.string.search_nearby), getString(R.string.search_near_map) },
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									if (which == 1) {
+										newIntent.putExtra(SearchPOIActivity.SEARCH_LAT, lat);
+										newIntent.putExtra(SearchPOIActivity.SEARCH_LON, lon);
+									}
+									startActivity(newIntent);
+								}
+							});
+					b.show();
+				} else {
+					newIntent.putExtra(SearchPOIActivity.SEARCH_LAT, lat);
+					newIntent.putExtra(SearchPOIActivity.SEARCH_LON, lon);
+					startActivity(newIntent);
+				}
 			}
 		});
 
