@@ -281,14 +281,15 @@ public class SearchAddressActivity extends Activity {
 		}
 		streetButton.setEnabled(city != null || postcode != null);
 		
+		buildingButton.setEnabled(street != null);
+		((RadioGroup)findViewById(R.id.RadioGroup)).setVisibility(street == null ? View.GONE : View.VISIBLE);
+		
 		if(radioBuilding){
 			((RadioButton)findViewById(R.id.RadioBuilding)).setChecked(true);
 		} else {
 			((RadioButton)findViewById(R.id.RadioIntersStreet)).setChecked(true);
 		}
 		updateBuildingSection();
-		
-		buildingButton.setEnabled(street != null);
 		
 		showOnMap.setEnabled(city != null || street != null);
 		navigateTo.setEnabled(city != null || street != null);
