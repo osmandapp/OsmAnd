@@ -406,4 +406,43 @@ public class IndexConstants {
 		}
 	}
 	
+	
+	public static String indexMapLocationsTable = "map_locations";
+	
+	public enum IndexMapWays implements IndexColumn {
+		ID("long", true), TAGS, NODES; 
+		boolean index = false;
+		String type = null;
+
+		private IndexMapWays() {
+		}
+
+		private IndexMapWays(String type) {
+			this.type = type;
+		}
+
+		private IndexMapWays(String type, boolean index) {
+			this(type);
+			this.index = index;
+		}
+
+		public static String getTable() {
+			return "ways"; //$NON-NLS-1$
+		}
+
+		public String getTableName() {
+			return getTable();
+		}
+
+		@Override
+		public String getType() {
+			return type;
+		}
+
+		@Override
+		public boolean isIndex() {
+			return index;
+		}
+	}
+	
 }

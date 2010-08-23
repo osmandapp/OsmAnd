@@ -26,6 +26,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.data.City.CityType;
 import net.osmand.data.index.IndexConstants.IndexBuildingTable;
 import net.osmand.data.index.IndexConstants.IndexCityTable;
+import net.osmand.data.index.IndexConstants.IndexMapWays;
 import net.osmand.data.index.IndexConstants.IndexPoiTable;
 import net.osmand.data.index.IndexConstants.IndexStreetNodeTable;
 import net.osmand.data.index.IndexConstants.IndexStreetTable;
@@ -36,6 +37,9 @@ import net.osmand.osm.Node;
 import net.osmand.osm.Way;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 
@@ -129,7 +133,6 @@ public class DataIndexWriter {
         stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexPoiTable.values()));
         stat.execute("PRAGMA user_version = " + IndexConstants.POI_TABLE_VERSION); //$NON-NLS-1$
         stat.close();
-        
 	}
 	
 	public DataIndexWriter writeAddress() throws IOException, SQLException{
@@ -382,7 +385,71 @@ public class DataIndexWriter {
         stat.execute("PRAGMA user_version = " + IndexConstants.TRANSPORT_TABLE_VERSION); //$NON-NLS-1$
         stat.close();
 	}
+
+	public static void createMapIndexStructure(Connection conn) throws SQLException{
+		Statement stat = conn.createStatement();
+        stat.execute(IndexConstants.generateCreateSQL(IndexMapWays.values()));
+        stat.execute(IndexConstants.generateCreateIndexSQL(IndexMapWays.values()));
+        stat.execute("CREATE VIRTUAL TABLE "+IndexConstants.indexMapLocationsTable+" USING rtree (id, minLon, maxLon, minLat, maxLat);");
+        stat.execute("PRAGMA user_version = " + IndexConstants.MAP_TABLE_VERSION); //$NON-NLS-1$
+        stat.close();
+	}
 	
+	public static PreparedStatement createStatementMapWaysInsert(Connection conn) throws SQLException{
+		assert IndexMapWays.values().length == 3;
+        return conn.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexMapWays.getTable(), 3));
+	}
+	public static PreparedStatement createStatementMapWaysLocationsInsert(Connection conn) throws SQLException{
+        return conn.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexConstants.indexMapLocationsTable, 5));
+	}
+	
+	public static void insertMapWayIndex(Map<PreparedStatement, Integer> statements, 
+			PreparedStatement mapWayStat, PreparedStatement mapWayLocationsStat, Way w, int batchSize) throws SQLException {
+		assert IndexMapWays.values().length == 3;
+		JSONObject tags = new JSONObject();
+		for (String tagKey : w.getTagKeySet()) {
+			try {
+				tags.put(tagKey, w.getTag(tagKey));
+			} catch (JSONException e) {
+			}
+		}
+		JSONArray nodes = new JSONArray();
+		boolean init = false;
+		double minLat = -180;
+		double maxLat = 180;
+		double minLon = -360;
+		double maxLon = 360;
+		for (Node n : w.getNodes()) {
+			if (n != null) {
+				try {
+					JSONArray ar = new JSONArray();
+					ar.put(n.getId());
+					ar.put(n.getLatitude());
+					ar.put(n.getLongitude());
+					minLat = Math.min(minLat, n.getLatitude());
+					maxLat = Math.max(maxLat, n.getLatitude());
+					minLon = Math.min(minLon, n.getLatitude());
+					maxLon = Math.max(maxLon, n.getLatitude());
+					init = true;
+					nodes.put(ar);
+				} catch (JSONException e) {
+				}
+			}
+		}
+		if (init) {
+			mapWayStat.setLong(IndexMapWays.ID.ordinal() + 1, w.getId());
+			mapWayStat.setString(IndexMapWays.TAGS.ordinal() + 1, tags.toString());
+			mapWayStat.setString(IndexMapWays.NODES.ordinal() + 1, nodes.toString());
+			addBatch(statements, mapWayStat);
+
+			mapWayLocationsStat.setLong(1, w.getId());
+			mapWayLocationsStat.setDouble(2, minLon);
+			mapWayLocationsStat.setDouble(3, maxLon);
+			mapWayLocationsStat.setDouble(4, minLat);
+			mapWayLocationsStat.setDouble(5, maxLat);
+			addBatch(statements, mapWayLocationsStat);
+		}
+	}
 
 	private static void addBatch(Map<PreparedStatement, Integer> count, PreparedStatement p) throws SQLException{
 		addBatch(count, p, BATCH_SIZE);

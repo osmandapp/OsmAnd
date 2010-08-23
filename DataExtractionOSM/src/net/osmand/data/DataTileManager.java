@@ -35,7 +35,7 @@ public class DataTileManager<T> {
 	}
 	
 	public void setZoom(int zoom) {
-		// TODO !!! it is required to reindex all stored objects
+		// it is required to reindex all stored objects
 		if(!isEmpty()){
 			throw new UnsupportedOperationException();
 		}
