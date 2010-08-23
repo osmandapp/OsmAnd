@@ -40,10 +40,15 @@ public class IndexBatchCreator {
 	private static final Set<String> doNotWriteWayNodesInUploading = new LinkedHashSet<String>();
 	static {
 		doNotWriteWayNodesInUploading.addAll(Arrays.asList(new String[]{
-				"great_britain",
+				"great_britain", "netherlands",
 				// US
 				"us_alabama", "us_california", "us_florida", "us_georgia", "us_illinois", "us_indiana", 
-				"us_kentucky", "us_maryland", "us_massachusetts", "us_missouri", "us_new_york",	
+				"us_kentucky", "us_maryland", "us_massachusetts", "us_missouri", "us_new_york",
+				"us_north_carolina", "us_north_dakota", "us_ohio", "us_oklahoma", "us_oregon", "us_pennsylvania", 
+				"us_south_carolina", "us_tennessee", "us_texas", "us_utah",	"us_vermont", "us_virginia", 
+				"us_washington", "us_west_virginia", "us_wisconsin", "us_wyoming",
+				// asia
+				"japan",
 		}));
 		// next could be : australia
 	}
@@ -67,6 +72,7 @@ public class IndexBatchCreator {
 		//TOTAL : 1129 MB 
 //		 "czech_republic", "netherlands", // 168, 375,
 //		 "great_britain" ,  "italy", // 310, 246, 
+		//// "germany", "france", // 1100, 959 // index by states !		
 		// ADD TO TOTAL : 2449 MB
 
 	};
@@ -87,16 +93,14 @@ public class IndexBatchCreator {
  
 	protected static final String SITE_TO_DOWNLOAD2 = "http://downloads.cloudmade.com/"; //$NON-NLS-1$
 	// us states
-	// TODO Address (out of memory) : west-virginia, virginia, vermont, utas, texas, tennesse, pensilvania, oregon,..
 	protected static final String[] usStates = new String[] {
 //		"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", 
 //		"Delaware",	"District_of_Columbia", "Florida", "Georgia", "Guantanamo_Bay",	"Hawaii",
 //		"Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine",
 //		"Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", 
 //		"Montana", "Nebraska", "Nevada", "New_Hampshire", "New_Jersey", "New_Mexico",
-		// TODO
 //		"New_York",	"North_Carolina", "North_Dakota", "Ohio", "Oklahoma", "Oregon",
-//		"Pennsylvania", "Rhode Island",	"South Carolina", "South Dakota", "Tennessee",
+//		"Pennsylvania", "Rhode_Island",	"South_Carolina", "South_Dakota", "Tennessee",
 //		"Texas", "Utah", "Vermont", "Virginia", "Washington", "West_Virginia", "Wisconsin", "Wyoming",
 	};
 	
@@ -106,15 +110,31 @@ public class IndexBatchCreator {
 //		"Quebec","Saskatchewan","Yukon",
 	};
 	
+	// NORTH AMERICA 
+	protected static final String[] northAmerica = new String[] {
+//		"Bahamas", "Costa_Rica", "Cuba", "Dominica", "Dominican_Republic",
+//		"Guatemala", "Haiti", "Honduras", "Jamaica", "Mexico", 
+		// TODO these
+//		"Anguilla", "Antigua_and_Barbuda", "Aruba",	"Barbados", "Belize", "Bermuda",	"British_Virgin_Islands",
+//		"El_Salvador", "Federation_of_Saint_Kitts_and_Nevis",
+//		"Greenland", "Grenada", "Guadeloupe", "Martinique",
+//		"Netherlands_Antilles", "Nicaragua", "Panama", "Puerto_Rico",	"St_Lucia",
+//		"St_Pierre_and_Miquelon", "St_Vincent_and_the_Grenadines", "Trinidad_and_Tobago", "Virgin_Islands",
+			
+	};
+	
+	
 	protected static final String[] southAmerica = new String[] {
 //		"Argentina","Bolivia","Brazil","Chile","Colombia",
 //		"Ecuador","Falkland_Islands", "French_Guiana","Guyana","Paraguay",
 //		"Peru","Suriname","Uruguay","Venezuela"
 	};
 	
-	// TODO only australia, new zealand created
+
+	// oceania
 	protected static final String[] oceania = new String[] {
 //		"Australia", "New_Zealand",
+		// TODO only australia, new zealand created
 //		"American_Samoa","Baker_Island","Cocos_Keeling_Islands","Cook_Islands",
 //		"Federated_States_of_Micronesia","Fiji", "French_Polynesia","Guam","Howland_Island",
 //		"Independent_State_of_Samoa","Jarvis_Island","Johnston_Atoll","Kiribati",
@@ -130,22 +150,47 @@ public class IndexBatchCreator {
 //		"bashkir", "belgorod","bryansk","buryat","chechen", "chel",
 //		"chukot", "chuvash", "dagestan","evrey", "ingush", "irkutsk",
 //	    "ivanov","kabardin","kalinin","kalmyk","kaluzh","kamch","karach","karel",
-//	    "kemerovo","khabar","khakas","khanty","kirov","komi","kostrom","krasnodar",
-//	    "krasnoyarsk","kurgan","kursk","leningrad","lipetsk","magadan","mariyel","mordov","moscow","mosobl","murmansk",
-//	    "nenec","nizhegorod","novgorod","novosib","omsk","orenburg","orlovsk","osetiya",
-//	    "penz","perm","prim","pskov","rostov","ryazan","sakhalin","samar","saratov","smol",
-//	    "stavrop","stpeter","sverdl","tambov","tatar","tomsk","tul","tumen","tver","tyva","udmurt",
-//	    "ulyan","vladimir","volgograd","vologda","voronezh","yakut","yamal","yarosl","zabaikal",
+//	    "kemerovo", "khabar", "khakas", "khanty", "kirov", "komi", "kostrom", "krasnodar",
+//	    "krasnoyarsk", "kurgan", "kursk", "leningrad", "lipetsk", "magadan", "mariyel", "mordov", "moscow", "mosobl", "murmansk",
+//	    "nenec", "nizhegorod", "novgorod", "novosib", "omsk", "orenburg", "orlovsk", "osetiya",
+//	    "penz", "perm", "prim", "pskov", "rostov", "ryazan", "sakhalin", "samar", "saratov", "smol",
+//	    "stavrop", "stpeter", "sverdl", "tambov", "tatar", "tomsk", "tul", "tumen", "tver", "tyva", "udmurt",
+//	    "ulyan", "vladimir", "volgograd", "vologda", "voronezh", "yakut", "yamal", "yarosl", "zabaikal",
 	};
 	
-	// TODO Japan
 	protected static final String[] asia = new String[] { 
-//			"Afghanistan", "Bahrain", "Bangladesh", "Bhutan", "British_Indian_Ocean_Territory", "Brunei", "Cambodia", 
-//			"China", "Christmas_Island", "Democratic_Republic_of_Timor-Leste", "Gaza_Strip", "India", "Indonesia", "Iran", 
-//			"Iraq", "Israel", "Jordan", "Kazakhstan", "Kuwait", "Kyrgyzstan", "Laos", "Lebanon", "Macau", "Malaysia", 
-//			"Maldives", "Mongolia", "Nepal", "North_Korea", "Oman", "Pakistan", "Paracel_Islands", "Philippines", "Qatar", 
-//			"Saudi_Arabia", "Singapore", "South_Korea", "Spratly_Islands", "Sri_Lanka", "Syria", "Taiwan", "Tajikistan", 
-//			"Thailand", "Turkmenistan", "Union_of_Myanmar", "United_Arab_Emirates", "Uzbekistan", "Vietnam", "Yemen", 
+//		"Afghanistan", "Bahrain", "Bangladesh", "Bhutan", "British_Indian_Ocean_Territory", "Brunei", "Cambodia", 
+//		"China", "Christmas_Island", "Democratic_Republic_of_Timor-Leste", "Gaza_Strip", "India", "Indonesia", "Iran", 
+//		"Iraq", "Israel", "Jordan", "Kazakhstan", "Kuwait", "Kyrgyzstan", "Laos", "Lebanon", "Macau", "Malaysia", 
+//		"Maldives", "Mongolia", "Nepal", "North_Korea", "Oman", "Pakistan", "Paracel_Islands", "Philippines", "Qatar", 
+//		"Saudi_Arabia", "Singapore", "South_Korea", "Spratly_Islands", "Sri_Lanka", "Syria", "Taiwan", "Tajikistan", 
+//		"Thailand", "Turkmenistan", "Union_of_Myanmar", "United_Arab_Emirates", "Uzbekistan", "Vietnam", "Yemen",
+//		"Japan", // 420 MB
+	};
+	
+	
+	//  africa 
+	protected static final String[] africa = new String[] {
+//		"Algeria", "Egypt", "Madagascar", "Morocco", "South_Africa",
+		// TODO generate these countries
+//		"Angola", "Benin", "Botswana", "Burkina_Faso", "Burundi", "Cameroon", "Cape_Verde", 
+//		"Central_African_Republic", "Chad", "Comoros", "Congo", "Democratic_Republic_of_the_Congo",
+//		"Djibouti",  "Equatorial_Guinea", "Eritrea", "Ethiopia", "Gabon", "Gambia", "Ghana",
+//		"Glorioso_Islands", "Guinea", "Guinea-Bissau", "Ivory_Coast", "Juan_De_Nova_Island", "Kenya",
+//		"Lesotho", "Liberia", "Libya", "Malawi", "Mali", "Mauritania", "Mauritius", "Mayotte",
+//		 "Mozambique", "Namibia", "Niger", "Nigeria", "Reunion", "Rwanda", "Sao_Tome_and_Principe",
+//		"Senegal", "Seychelles", "Sierra_Leone", "Somalia",  "St_Helena", "Sudan", "Swaziland",
+//		"Togo", "Tunisia", "Uganda", "United_Republic_of_Tanzania", "Western_Sahara", "Zambia", "Zimbabwe",
+	};
+	
+	
+	protected static final String[] continents = new String[] {
+//		"africa",  // 160M
+//		"australia-oceania", // 202M
+//		"central-america", // 115M
+//		"south-america", // 163M
+//		"asia", // 911 M
+		// + europe, north america
 	};
 	
 	
@@ -225,7 +270,15 @@ public class IndexBatchCreator {
 			downloadFile(url, "Germany_"+country, alreadyGeneratedFiles, alreadyUploadedFiles);
 		}
 
-		// TODO NORTH AMERICA partially //
+		
+		// north america //
+		for(String country : northAmerica){
+			country = country.toLowerCase();
+			String url = SITE_TO_DOWNLOAD2 + "north_america/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
+		}
+
+		
 		// usa
 		for(String country : usStates){
 			country = country.toLowerCase();
@@ -254,6 +307,13 @@ public class IndexBatchCreator {
 			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
 		}
 		
+		// africa //
+		for(String country : africa){
+			country = country.toLowerCase();
+			String url = SITE_TO_DOWNLOAD2 + "africa/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
+		}
+		
 		// russia
 		for(String country : russiaStates){
 			country = country.toLowerCase();
@@ -268,8 +328,6 @@ public class IndexBatchCreator {
 			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
 		}
 
-		// TODO AFRICA not done //
-		// TODO Antarctica not done //
 		
 		System.out.println("DOWNLOADING FILES FINISHED");
 	}
@@ -437,7 +495,7 @@ public class IndexBatchCreator {
 			summary = "POI index for " ;
 		} else if(f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT) || f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT_ZIP)){
 			regionName = f.getName().substring(0, f.getName().length() - IndexConstants.ADDRESS_INDEX_EXT.length() - 2);
-			summary = "Adress index for " ;
+			summary = "Address index for " ;
 		} else if(f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT) || f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT_ZIP)){
 			regionName = f.getName().substring(0, f.getName().length() - IndexConstants.TRANSPORT_INDEX_EXT.length() - 2);
 			summary = "Transport index for ";

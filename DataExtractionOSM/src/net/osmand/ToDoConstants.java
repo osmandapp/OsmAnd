@@ -8,47 +8,34 @@ package net.osmand;
 public class ToDoConstants {
 	
 	// TODO swing
-	// ! 9. Fix issues with big files (such as netherlands) - save memory (!)
-	// Current result : for big file (1 - task  60-80% time, 90% memory) (?) (+)
-	//   11. Index buildings using interpolations (from nodes) (+)
 	// ! 12. Reinvent UI of swing app (remove Region object and clear other MapObject) use indexes to show results
 	
-	// TODO max 86
+	// TODO max 87
 	//  ! 81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
 	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?),
 	//  railway( station, subway?) - issue 17
+	//   86. Allow to add/edit custom tags to POI objects.
+	//   87. Use network availability for defining loading tiles from internet.
 	
-	// TODO check network availability
 	// TODO's in IndexCreator and other files!
+	// TODO order in nodes.tmp.odb !!! fix for future 
 	
+	// TODO BUGS/Improvements:
+	//  1! VELCOM - competition (ppt)
+	//  2. rotate map gps without location
+	//  3! Transport redesign call UI (enable context menu call, switch go to goal/not) 
+	//  4. recalculating route when location is far from !
+	//  5. keyboard (issue 43 )?
 	
-	// TODO BUGS:
-	//  	USA indexes
-	//  ! VELCOM - competition (ppt)
-	
-	//    rotate map gps without location
-	//    recalculating route when location is far from !
-	// ----- from site ---
-	// - 5 (?)
-	// - menu order (41)
-	// - 81. (17)
-	// -- house tagging (31)
-	// --- go back to osmand (23)
-	// --- keyboard (43)
-	// --- add poi tags (44)
-
+	//  6. Download with wget
+	//  7. progress while map is loading
 	
 	//  PRESENTS : mediamarkt, parfum, coffee, (al-parfum), (om?), olia?
 	
- 
 	// Unscheduled (complex)
 	//   65. Intermediate points - for better control routing, to avoid traffic jams ...(?)
 	//   40. Support simple vector road rendering (require new index file) (?)
 	//   63. Support simple offline routing(require new index file) (?)
-	
-	// Improvements
-	// ! Download with wget
-	// ! progress while map is loading
 	
 	// Not clear if it is really needed 
 	//   69. Add phone information to POI
@@ -64,15 +51,9 @@ public class ToDoConstants {
 	// DONE SWING
  	// 10. Improve address indexing (use relations). (+)
     //	  use relation "a6" (to accumulate streets!),  "a3" to read all cities & define boundaries for city (& define that street in city).
-	
-//	public static void main(String[] args) throws SQLException, ClassNotFoundException {
-//		File dir = new File("e:\\Information\\OSM maps\\osm_map\\!big!\\");
-//		Class.forName("org.sqlite.JDBC");
-//		for(File f : dir.listFiles()){
-//			if(f.getName().endsWith(".odb")){
-//				IndexCreator.removeWayNodes(f);
-//			}
-//		}
-//	}
+	// ! 9. Fix issues with big files (such as netherlands) - save memory (!)
+	// Current result : for big file (1 - task  60-80% time, 90% memory) (?) (+)
+	//   11. Index buildings using interpolations (from nodes) (+)
 
+	
 }

@@ -249,6 +249,10 @@ public class YandexTrafficLayer implements OsmandMapLayer {
 			int start = str.indexOf("timestamp:"); //$NON-NLS-1$
 			start = str.indexOf("\"", start) + 1; //$NON-NLS-1$
 			int end = str.indexOf("\"", start); //$NON-NLS-1$
+			// exception case
+			if (start < 0 || end < 0) {
+				return;
+			}
 			mTimestamp = str.substring(start, end);
 			lastTimestampUpdated = System.currentTimeMillis();
 			Algoritms.closeStream(in);

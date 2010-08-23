@@ -31,6 +31,7 @@ import net.osmand.map.IMapLocationListener;
 import net.osmand.map.ITileSource;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.render.RendererLayer;
 import net.osmand.views.AnimateDraggingMapThread;
 import net.osmand.views.ContextMenuLayer;
 import net.osmand.views.FavoritesLayer;
@@ -203,9 +204,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		// 1. route layer
 		routeLayer = new RouteLayer(routingHelper);
 		mapView.addLayer(routeLayer, 1);
-		// 2. route layer
+		// 1.5. traffic layer
 		trafficLayer = new YandexTrafficLayer();
 		mapView.addLayer(trafficLayer, 1.5f);
+		// mapView.addLayer(new RendererLayer(), 1.6f);
+		
 		// 2. osm bugs layer
 		osmBugsLayer = new OsmBugsLayer(this);
 		// 3. poi layer

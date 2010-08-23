@@ -70,13 +70,11 @@ public class IndexCreator {
 	private static final Log log = LogFactory.getLog(DataExtraction.class);
 	// TODO check
 	// 1. check postal_code if the building was registered by relation!
-
-	// TODO normalizing (!!!), lowercase, converting en street names after all!
 	// TODO find proper location for streets ! centralize them
 
 
 	public static final int BATCH_SIZE = 5000;
-	public static final String TEMP_NODES_DB = "nodes"+IndexConstants.MAP_INDEX_EXT;
+	public static final String TEMP_NODES_DB = "nodes.tmp.odb";
 	public static final int STEP_MAIN = 1;
 	public static final int STEP_ADDRESS_RELATIONS = 2;
 	public static final int STEP_CITY_NODES = 3;
@@ -128,6 +126,11 @@ public class IndexCreator {
 	private PreparedStatement addressStreetStat;
 	private PreparedStatement addressBuildingStat;
 	private PreparedStatement addressStreetNodeStat;
+	
+	private File mapFile;
+	private Connection mapConnection;
+	private PreparedStatement mapWaysStat;
+	private PreparedStatement mapWayLocsStat;
 
 	// choose what to use ?
 	private boolean loadInMemory = true;
@@ -924,6 +927,12 @@ public class IndexCreator {
 					}
 				}
 			}
+			
+			if(indexMap && e instanceof Way){
+				// manipulate what kind of way to load
+				loadEntityData(e, true);
+				DataIndexWriter.insertMapWayIndex(pStatements, mapWaysStat, mapWayLocsStat, (Way) e, BATCH_SIZE);
+			}
 
 			if (indexAddress) {
 				// index not only buildings but also nodes that belongs to addr:interpolation ways
@@ -1036,11 +1045,7 @@ public class IndexCreator {
 		}
 		boolean loadFromPath = dbFile == null;
 		if (dbFile == null) {
-			if (indexMap) {
-				dbFile = new File(workingDir, getMapFileName());
-			} else {
-				dbFile = new File(workingDir, TEMP_NODES_DB);
-			}
+			dbFile = new File(workingDir, TEMP_NODES_DB);
 			// to save space
 			if (dbFile.exists()) {
 				dbFile.delete();
@@ -1114,6 +1119,23 @@ public class IndexCreator {
 		pselectWay = dbConn.prepareStatement("select * from ways where id = ?");
 		pselectRelation = dbConn.prepareStatement("select * from relations where id = ?");
 		pselectTags = dbConn.prepareStatement("select key, value from tags where id = ? and type = ?");
+		
+		if(indexMap){
+			mapFile = new File(workingDir, getMapFileName());
+			// to save space
+			if (mapFile.exists()) {
+				mapFile.delete();
+			}
+			mapFile.getParentFile().mkdirs();
+			mapConnection = DriverManager.getConnection("jdbc:sqlite:" + mapFile.getAbsolutePath());
+			
+			DataIndexWriter.createMapIndexStructure(mapConnection);
+			mapWaysStat = DataIndexWriter.createStatementMapWaysInsert(mapConnection);
+			mapWayLocsStat = DataIndexWriter.createStatementMapWaysLocationsInsert(mapConnection);
+			pStatements.put(mapWaysStat, 0);
+			pStatements.put(mapWayLocsStat, 0);
+			mapConnection.setAutoCommit(false);
+		}
 
 		if (indexPOI) {
 			poiIndexFile = new File(workingDir, getPoiFileName());
@@ -1124,10 +1146,10 @@ public class IndexCreator {
 			poiIndexFile.getParentFile().mkdirs();
 			// creating nodes db to fast access for all nodes
 			poiConnection = DriverManager.getConnection("jdbc:sqlite:" + poiIndexFile.getAbsolutePath());
-			poiConnection.setAutoCommit(false);
 			DataIndexWriter.createPoiIndexStructure(poiConnection);
 			poiPreparedStatement = DataIndexWriter.createStatementAmenityInsert(poiConnection);
 			pStatements.put(poiPreparedStatement, 0);
+			poiConnection.setAutoCommit(false);
 		}
 
 		if (indexTransport) {
@@ -1294,6 +1316,14 @@ public class IndexCreator {
 				}
 			}
 			
+			if (mapConnection != null) {
+				mapConnection.commit();
+				mapConnection.close();
+				if (lastModifiedDate != null) {
+					mapFile.setLastModified(lastModifiedDate);
+				}
+			}
+			
 			if (addressConnection != null) {
 				addressConnection.commit();
 				addressConnection.close();
@@ -1320,26 +1350,12 @@ public class IndexCreator {
 		st.close();
 		dbConn.close();
 	}
-
 	
-	public static void main(String[] args) throws IOException, SAXException, SQLException {
-		File workDir = new File("C:/");
-		IndexCreator extr = new IndexCreator(workDir);
-		extr.setIndexPOI(true);
-//		extr.setIndexTransport(true);
-//		extr.setIndexAddress(true);
-//		extr.setNormalizeStreets(true);
-//		extr.setSaveAddressWays(true);
+	// public static void main(String[] args) throws IOException, SAXException, SQLException {		
+//		IndexCreator creator = new IndexCreator(new File("e:\\Information\\OSM maps\\osmand\\"));
+//		creator.setIndexMap(true);
+//		
+//		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm.bz2"), new ConsoleProgressImplementation(3), null);
+//	}
 
-		// 1. generates using nodes db
-//		File file = new File(workDir, "nodes.map.odb");
-//		extr.setNodesDBFile(file);
-//		extr.generateIndexes(file, new ConsoleProgressImplementation(2), null);
-
-		// 2. generates using osm bz2		
-//		extr.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus_2010_06_02.osm.bz2"), new ConsoleProgressImplementation(4), null);
-		
-		
-		
-	}
 }
