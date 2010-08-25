@@ -45,6 +45,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	
 	public final static Log log = LogUtil.getLog(SavingTrackHelper.class);
 	
+	public final static String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z"; 
+	
 
 	private String updateScript;
 	private long lastTimeUpdated = 0;
@@ -168,7 +170,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 	
 	public static String saveToXMLFiles(File dir, Map<String, List<List<TrkPt>>> data, Context ctx){
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); //$NON-NLS-1$
+		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT); //$NON-NLS-1$
 		try {
 			for (String f : data.keySet()) {
 				File fout = new File(dir, f + ".gpx"); //$NON-NLS-1$
