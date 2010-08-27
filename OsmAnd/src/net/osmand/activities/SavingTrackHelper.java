@@ -45,7 +45,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	
 	public final static Log log = LogUtil.getLog(SavingTrackHelper.class);
 	
-	public final static String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z"; 
+	public final static String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"; 
 	
 
 	private String updateScript;

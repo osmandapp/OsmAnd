@@ -366,7 +366,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			canvas.drawCircle(w, h, 7 * dm.density, paintCenter);
 		}
 		canvas.restore();
-		for (OsmandMapLayer layer : layers) {
+		// create local copy
+		ArrayList<OsmandMapLayer> local = new ArrayList<OsmandMapLayer>(layers);
+		for (OsmandMapLayer layer : local) {
 			canvas.save();
 			if (!layer.drawInScreenPixels()) {
 				canvas.rotate(rotate, w, h);
