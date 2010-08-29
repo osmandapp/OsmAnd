@@ -415,10 +415,10 @@ public class DataIndexWriter {
 		}
 		JSONArray nodes = new JSONArray();
 		boolean init = false;
-		double minLat = -180;
-		double maxLat = 180;
-		double minLon = -360;
-		double maxLon = 360;
+		double minLat = 180;
+		double maxLat = -180;
+		double minLon = 360;
+		double maxLon = -360;
 		for (Node n : w.getNodes()) {
 			if (n != null) {
 				try {
@@ -428,8 +428,8 @@ public class DataIndexWriter {
 					ar.put(n.getLongitude());
 					minLat = Math.min(minLat, n.getLatitude());
 					maxLat = Math.max(maxLat, n.getLatitude());
-					minLon = Math.min(minLon, n.getLatitude());
-					maxLon = Math.max(maxLon, n.getLatitude());
+					minLon = Math.min(minLon, n.getLongitude());
+					maxLon = Math.max(maxLon, n.getLongitude());
 					init = true;
 					nodes.put(ar);
 				} catch (JSONException e) {

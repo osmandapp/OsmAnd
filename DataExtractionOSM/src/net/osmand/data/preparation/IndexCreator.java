@@ -41,6 +41,7 @@ import net.osmand.data.index.IndexConstants.IndexStreetTable;
 import net.osmand.data.index.IndexConstants.IndexTransportRoute;
 import net.osmand.data.index.IndexConstants.IndexTransportRouteStop;
 import net.osmand.data.index.IndexConstants.IndexTransportStop;
+import net.osmand.impl.ConsoleProgressImplementation;
 import net.osmand.osm.Entity;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -211,10 +212,10 @@ public class IndexCreator {
 			stat.executeUpdate("create table node (id long, latitude double, longitude double);");
 			stat.executeUpdate("create index IdIndex ON node (id, latitude, longitude);");
 			stat.executeUpdate("drop table if exists ways;");
-			stat.executeUpdate("create table ways (id long, node long);");
+			stat.executeUpdate("create table ways (id long, node long, ord smallint);");
 			stat.executeUpdate("create index IdWIndex ON ways (id, node);");
 			stat.executeUpdate("drop table if exists relations;");
-			stat.executeUpdate("create table relations (id long, member long, type byte, role text);");
+			stat.executeUpdate("create table relations (id long, member long, type byte, role text, ord smallint);");
 			stat.executeUpdate("create index IdRIndex ON relations (id, member, type);");
 			stat.executeUpdate("drop table if exists tags;");
 			stat.executeUpdate("create table tags (id long, type byte, key, value);");
@@ -223,8 +224,8 @@ public class IndexCreator {
 			stat.close();
 
 			prepNode = dbConn.prepareStatement("insert into node values (?, ?, ?);");
-			prepWays = dbConn.prepareStatement("insert into ways values (?, ?);");
-			prepRelations = dbConn.prepareStatement("insert into relations values (?, ?, ?, ?);");
+			prepWays = dbConn.prepareStatement("insert into ways values (?, ?, ?);");
+			prepRelations = dbConn.prepareStatement("insert into relations values (?, ?, ?, ?, ?);");
 			prepTags = dbConn.prepareStatement("insert into tags values (?, ?, ?, ?);");
 			dbConn.setAutoCommit(false);
 		}
@@ -268,10 +269,12 @@ public class IndexCreator {
 					}
 				} else if (e instanceof Way) {
 					allWays++;
+					short ord = 0;
 					for (Long i : ((Way) e).getNodeIds()) {
 						currentWaysCount++;
 						prepWays.setLong(1, e.getId());
 						prepWays.setLong(2, i);
+						prepWays.setLong(3, ord++);
 						prepWays.addBatch();
 					}
 					if (currentWaysCount >= BATCH_SIZE) {
@@ -280,12 +283,14 @@ public class IndexCreator {
 					}
 				} else {
 					allRelations++;
+					short ord = 0;
 					for (Entry<EntityId, String> i : ((Relation) e).getMembersMap().entrySet()) {
 						currentRelationsCount++;
 						prepRelations.setLong(1, e.getId());
 						prepRelations.setLong(2, i.getKey().getId());
 						prepRelations.setLong(3, i.getKey().getType().ordinal());
 						prepRelations.setString(4, i.getValue());
+						prepWays.setLong(5, ord++);
 						prepRelations.addBatch();
 					}
 					if (currentRelationsCount >= BATCH_SIZE) {
@@ -1116,8 +1121,8 @@ public class IndexCreator {
 		progress.setGeneralProgress("[90 of 100]");
 
 		pselectNode = dbConn.prepareStatement("select * from node where id = ?");
-		pselectWay = dbConn.prepareStatement("select * from ways where id = ?");
-		pselectRelation = dbConn.prepareStatement("select * from relations where id = ?");
+		pselectWay = dbConn.prepareStatement("select * from ways where id = ? order by ord");
+		pselectRelation = dbConn.prepareStatement("select * from relations where id = ? order by ord");
 		pselectTags = dbConn.prepareStatement("select key, value from tags where id = ? and type = ?");
 		
 		if(indexMap){
@@ -1351,11 +1356,12 @@ public class IndexCreator {
 		dbConn.close();
 	}
 	
-	// public static void main(String[] args) throws IOException, SAXException, SQLException {		
-//		IndexCreator creator = new IndexCreator(new File("e:\\Information\\OSM maps\\osmand\\"));
-//		creator.setIndexMap(true);
-//		
-//		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm.bz2"), new ConsoleProgressImplementation(3), null);
-//	}
+	 public static void main(String[] args) throws IOException, SAXException, SQLException {		
+		IndexCreator creator = new IndexCreator(new File("/home/victor/osm/"));
+		creator.setIndexMap(true);
+//		creator.setNodesDBFile(new File("/home/victor/osm/nodes.tmp.odb"));
+		
+		creator.generateIndexes(new File("/home/victor/osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+	}
 
 }
