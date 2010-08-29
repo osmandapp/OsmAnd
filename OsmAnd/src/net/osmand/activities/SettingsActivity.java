@@ -89,6 +89,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private ListPreference routeServiceInterval;
 	private ListPreference routeServiceWaitInterval;
 	private ListPreference routeServiceProvider;
+	
 	private CheckBoxPreference routeServiceEnabled;
 
 	private ProgressDialog progressDlg;
@@ -117,9 +118,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		addPreferencesFromResource(R.xml.settings_pref);
 		PreferenceScreen screen = getPreferenceScreen();
 		
-		applicationMode =(ListPreference) screen.findPreference(OsmandSettings.APPLICATION_MODE);
-		applicationMode.setOnPreferenceChangeListener(this);
-		
 		for(BooleanPreference b : booleanPreferences){
 			CheckBoxPreference p = (CheckBoxPreference) screen.findPreference(b.getId());
 			p.setOnPreferenceChangeListener(this);
@@ -138,7 +136,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		userPassword = (EditTextPreference) screen.findPreference(OsmandSettings.USER_PASSWORD);
 		userPassword.setOnPreferenceChangeListener(this);
 		
-		
+		applicationMode =(ListPreference) screen.findPreference(OsmandSettings.APPLICATION_MODE);
+		applicationMode.setOnPreferenceChangeListener(this);
 		rotateMap =(ListPreference) screen.findPreference(OsmandSettings.ROTATE_MAP);
 		rotateMap.setOnPreferenceChangeListener(this);
 		saveTrackInterval =(ListPreference) screen.findPreference(OsmandSettings.SAVE_TRACK_INTERVAL);
@@ -155,13 +154,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		routerPreference.setOnPreferenceChangeListener(this);
 		voicePreference =(ListPreference) screen.findPreference(OsmandSettings.VOICE_PROVIDER);
 		voicePreference.setOnPreferenceChangeListener(this);
-		
 		routeServiceInterval =(ListPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_INTERVAL);
 		routeServiceInterval.setOnPreferenceChangeListener(this);
 		routeServiceWaitInterval =(ListPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_WAIT_INTERVAL);
 		routeServiceWaitInterval.setOnPreferenceChangeListener(this);
 		routeServiceProvider =(ListPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_PROVIDER);
 		routeServiceProvider.setOnPreferenceChangeListener(this);
+		
 		routeServiceEnabled =(CheckBoxPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_ENABLED);
 		routeServiceEnabled.setOnPreferenceChangeListener(this);
 		
