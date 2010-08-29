@@ -10,7 +10,6 @@ import java.text.MessageFormat;
 import java.util.List;
 
 import net.osmand.LogUtil;
-import net.osmand.NativeLibrary;
 import net.osmand.ProgressDialogImplementation;
 import net.osmand.R;
 import net.osmand.ResourceManager;
@@ -56,7 +55,6 @@ public class MainMenuActivity extends Activity {
 
 	
 	public void startApplication(){
-		System.out.println("NATIVE : " + new NativeLibrary().stringFromJNI());
 		if(!applicationAlreadyStarted){
 			// Algoritms.removeAllFiles(new File(Environment.getExternalStorageDirectory(), "/osmand/tiles/Mapnik/18"));
 			progressDlg = ProgressDialog.show(this, getString(R.string.loading_data), getString(R.string.reading_indexes), true);

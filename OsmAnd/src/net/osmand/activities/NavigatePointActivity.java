@@ -9,6 +9,7 @@ import net.osmand.LogUtil;
 import net.osmand.OsmandSettings;
 import net.osmand.R;
 import net.osmand.osm.LatLon;
+import net.osmand.osm.MapUtils;
 import net.osmand.views.OsmandMapTileView;
 import android.app.Activity;
 import android.app.Dialog;
@@ -72,6 +73,8 @@ public class NavigatePointActivity extends Activity {
 	}
 	
 	public void initUI(double latitude, double longitude){
+		latitude = MapUtils.checkLatitude(latitude);
+		longitude = MapUtils.checkLongitude(longitude);
 		((TextView)findViewById(R.id.LatitudeEdit)).setText(convert(latitude, Location.FORMAT_DEGREES));
 		((TextView)findViewById(R.id.LongitudeEdit)).setText(convert(longitude, Location.FORMAT_DEGREES));
 		((RadioButton)findViewById(R.id.Format1)).setChecked(true);
