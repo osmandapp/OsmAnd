@@ -708,6 +708,7 @@ public class ResourceManager {
 							if(!mapLoaded){
 								MapLoadRequest r = (MapLoadRequest) req;
 								renderer.loadMap(r.topLatitude, r.leftLongitude, r.bottomLatitude, r.rightLongitude, r.zoom);
+								mapLoaded = true;
 							}
 						}
 					}

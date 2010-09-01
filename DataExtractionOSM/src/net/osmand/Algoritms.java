@@ -95,4 +95,54 @@ public class Algoritms {
 			return f.delete();
 		}
 	}
+	
+	
+	public static long parseLongFromBytes(byte[] bytes, int offset) {
+		long o= 0xff & bytes[offset + 7];
+		o = o << 8 | (0xff & bytes[offset + 6]);
+		o = o << 8 | (0xff & bytes[offset + 5]);
+		o = o << 8 | (0xff & bytes[offset + 4]);
+		o = o << 8 | (0xff & bytes[offset + 3]);
+		o = o << 8 | (0xff & bytes[offset + 2]);
+		o = o << 8 | (0xff & bytes[offset + 1]);
+		o = o << 8 | (0xff & bytes[offset + 0]);
+		return o;
+	}
+	
+	public static void putLongToBytes(byte[] bytes, int offset, long l){
+		bytes[offset] = (byte) (l & 0xff);
+		l >>= 8;
+		bytes[offset + 1] = (byte) (l & 0xff);
+		l >>= 8;
+		bytes[offset + 2] = (byte) (l & 0xff);
+		l >>= 8;
+		bytes[offset + 3] = (byte) (l & 0xff);
+		l >>= 8;
+		bytes[offset + 4] = (byte) (l & 0xff);
+		l >>= 8;
+		bytes[offset + 5] = (byte) (l & 0xff);
+		l >>= 8;
+		bytes[offset + 6] = (byte) (l & 0xff);
+		l >>= 8;
+		bytes[offset + 7] = (byte) (l & 0xff);
+	}
+	
+	
+	public static int parseIntFromBytes(byte[] bytes, int offset) {
+		int o = 0xff & bytes[offset + 3];
+		o = o << 8 | (0xff & bytes[offset + 2]);
+		o = o << 8 | (0xff & bytes[offset + 1]);
+		o = o << 8 | (0xff & bytes[offset + 0]);
+		return o;
+	}
+	
+	public static void putIntToBytes(byte[] bytes, int offset, int l){
+		bytes[offset] = (byte) (l & 0xff);
+		l >>= 8;
+		bytes[offset + 1] = (byte) (l & 0xff);
+		l >>= 8;
+		bytes[offset + 2] = (byte) (l & 0xff);
+		l >>= 8;
+		bytes[offset + 3] = (byte) (l & 0xff);
+	}
 }
