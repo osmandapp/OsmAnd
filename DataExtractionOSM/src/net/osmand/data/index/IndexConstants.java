@@ -153,7 +153,7 @@ public class IndexConstants {
 	// Address index		
 		
 	public enum IndexCityTable implements IndexColumn {
-		ID("long"), LATITUDE("double", true), LONGITUDE("double", true), NAME, NAME_EN, CITY_TYPE; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		ID("long", true), LATITUDE("double", true), LONGITUDE("double", true), NAME, NAME_EN, CITY_TYPE(null, true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		boolean index = false;
 		String type = null;
 
@@ -189,7 +189,7 @@ public class IndexConstants {
 	}
 	
 	public enum IndexStreetTable implements IndexColumn {
-		ID("long"), LATITUDE("double", true), LONGITUDE("double", true), NAME(null, true), NAME_EN, CITY("long", true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		ID("long", true), LATITUDE("double", true), LONGITUDE("double", true), NAME(null, true), NAME_EN, CITY("long", true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		boolean index = false;
 		String type = null;
 
@@ -407,10 +407,10 @@ public class IndexConstants {
 	}
 	
 	
-	public static String indexMapLocationsTable = "map_locations";
+	public static String indexMapLocationsTable = "map_locations"; //$NON-NLS-1$
 	
 	public enum IndexMapWays implements IndexColumn {
-		ID("long", true), TAGS, NODES; 
+		ID("long", true), TAGS, NODES("BLOB");  //$NON-NLS-1$ //$NON-NLS-2$
 		boolean index = false;
 		String type = null;
 

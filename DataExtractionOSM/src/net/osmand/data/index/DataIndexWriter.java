@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
@@ -37,7 +38,6 @@ import net.osmand.osm.Node;
 import net.osmand.osm.Way;
 
 import org.apache.commons.logging.Log;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -413,33 +413,31 @@ public class DataIndexWriter {
 			} catch (JSONException e) {
 			}
 		}
-		JSONArray nodes = new JSONArray();
 		boolean init = false;
 		double minLat = 180;
 		double maxLat = -180;
 		double minLon = 360;
 		double maxLon = -360;
+		byte[] bytes = new byte[w.getNodes().size() * 8];
+		int offset = 0;
 		for (Node n : w.getNodes()) {
 			if (n != null) {
-				try {
-					JSONArray ar = new JSONArray();
-					ar.put(n.getId());
-					ar.put(n.getLatitude());
-					ar.put(n.getLongitude());
-					minLat = Math.min(minLat, n.getLatitude());
-					maxLat = Math.max(maxLat, n.getLatitude());
-					minLon = Math.min(minLon, n.getLongitude());
-					maxLon = Math.max(maxLon, n.getLongitude());
-					init = true;
-					nodes.put(ar);
-				} catch (JSONException e) {
-				}
+				minLat = Math.min(minLat, n.getLatitude());
+				maxLat = Math.max(maxLat, n.getLatitude());
+				minLon = Math.min(minLon, n.getLongitude());
+				maxLon = Math.max(maxLon, n.getLongitude());
+				init = true;
+				Algoritms.putIntToBytes(bytes, offset, Float.floatToIntBits((float) n.getLatitude()));
+				offset += 4;
+				Algoritms.putIntToBytes(bytes, offset, Float.floatToIntBits((float) n.getLongitude()));
+				offset += 4;
 			}
 		}
 		if (init) {
 			mapWayStat.setLong(IndexMapWays.ID.ordinal() + 1, w.getId());
-			mapWayStat.setString(IndexMapWays.TAGS.ordinal() + 1, tags.toString());
-			mapWayStat.setString(IndexMapWays.NODES.ordinal() + 1, nodes.toString());
+//			mapWayStat.setString(IndexMapWays.TAGS.ordinal() + 1, tags.toString());
+			mapWayStat.setString(IndexMapWays.TAGS.ordinal() + 1, "");
+			mapWayStat.setBytes(IndexMapWays.NODES.ordinal() + 1, bytes);
 			addBatch(statements, mapWayStat);
 
 			mapWayLocationsStat.setLong(1, w.getId());

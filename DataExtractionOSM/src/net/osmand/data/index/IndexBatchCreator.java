@@ -40,7 +40,7 @@ public class IndexBatchCreator {
 	private static final Set<String> doNotWriteWayNodesInUploading = new LinkedHashSet<String>();
 	static {
 		doNotWriteWayNodesInUploading.addAll(Arrays.asList(new String[]{
-				"great_britain", "netherlands",
+				"great_britain", "netherlands", "germany", "france",
 				// US
 				"us_alabama", "us_california", "us_florida", "us_georgia", "us_illinois", "us_indiana", 
 				"us_kentucky", "us_maryland", "us_massachusetts", "us_missouri", "us_new_york",
@@ -49,8 +49,9 @@ public class IndexBatchCreator {
 				"us_washington", "us_west_virginia", "us_wisconsin", "us_wyoming",
 				// asia
 				"japan",
+				
+				"australia"
 		}));
-		// next could be : australia
 	}
 	
 	

@@ -5,9 +5,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
+import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
 import net.osmand.data.index.IndexConstants;
@@ -15,15 +17,12 @@ import net.osmand.osm.Node;
 import net.osmand.osm.Way;
 
 import org.apache.commons.logging.Log;
-import org.json.JSONArray;
-import org.json.JSONException;
 
-import android.database.SQLException;
+import android.graphics.RectF;
 
 public class RenderMapsRepositories {
 	
 	private final static Log log = LogUtil.getLog(RenderMapsRepositories.class);
-//	private SQLiteDatabase db;
 	private Connection conn;
 	private double cTopLatitude;
 	private double cBottomLatitude;
@@ -31,20 +30,13 @@ public class RenderMapsRepositories {
 	private double cLeftLongitude;
 	private double cRightLongitude;
 	private List<Way> cWays = new LinkedList<Way>();
+	private RectF cachedWaysLoc = new RectF();
 	private PreparedStatement pStatement;
 
 
 	public boolean initializeNewResource(final IProgress progress, File file) {
 		long start = System.currentTimeMillis();
 		try {
-			// db = SQLiteDatabase.openOrCreateDatabase(file, null);
-			//			
-			// if(db.getVersion() != IndexConstants.MAP_TABLE_VERSION){
-			// db.close();
-			// db = null;
-			// return false;
-			// }
-
 			// TODO should support multiple db
 			if (conn != null) {
 				// close previous db
@@ -53,19 +45,31 @@ public class RenderMapsRepositories {
 				pStatement = null;
 			}
 			try {
-				Class.forName("org.sqlite.JDBC");
+				Class.forName("org.sqlite.JDBC"); //$NON-NLS-1$
 			} catch (Exception e) {
-				log.error("Could not load driver", e);
+				log.error("Could not load driver", e); //$NON-NLS-1$
 				return false;
 			}
-			conn = DriverManager.getConnection("jdbc:sqlite:" + file.getAbsolutePath());
+			conn = DriverManager.getConnection("jdbc:sqlite:" + file.getAbsolutePath()); //$NON-NLS-1$
 			pStatement = conn.prepareStatement(loadMapQuery);
+			Statement stat = conn.createStatement();
+			ResultSet rs = stat.executeQuery("PRAGMA user_version"); //$NON-NLS-1$
+			int v = rs.getInt(1);
+			rs.close();
+			if(v != IndexConstants.MAP_TABLE_VERSION){
+				return false;
+			}
+			stat.close();
 
-		} catch (SQLException e) {
-			log.error("No connection", e);
-			return false;
-		} catch (java.sql.SQLException e) {
-			log.error("No connection", e);
+		} catch (Exception e) {
+			log.error("No connection", e); //$NON-NLS-1$
+			if(conn != null){
+				try {
+					conn.close();
+				} catch (java.sql.SQLException e1) {
+				}
+				conn = null;
+			}
 			return false;
 		}
 		if (log.isDebugEnabled()) {
@@ -78,6 +82,11 @@ public class RenderMapsRepositories {
 		return cWays;
 	}
 	
+	// if cache was changed different instance will be returned
+	public RectF getCachedWaysLoc() {
+		return cachedWaysLoc;
+	}
+	
 	
 	public void clearAllResources(){
 		if(conn != null){
@@ -88,11 +97,6 @@ public class RenderMapsRepositories {
 			conn = null;
 			pStatement = null;
 		}
-//		if(db != null){
-//			// close previous db
-//			db.close();
-//			db = null;
-//		}
 	}
 	
 	/**
@@ -108,20 +112,21 @@ public class RenderMapsRepositories {
 	}
 
 
-	private static String loadMapQuery = "SELECT "+IndexConstants.IndexMapWays.ID +", " + IndexConstants.IndexMapWays.NODES +", " + IndexConstants.IndexMapWays.TAGS +
-						" FROM " + IndexConstants.IndexMapWays.getTable() + " WHERE "+IndexConstants.IndexMapWays.ID+" IN (SELECT id FROM "+IndexConstants.indexMapLocationsTable +   //$NON-NLS-1$
+	private static String loadMapQuery = "SELECT "+IndexConstants.IndexMapWays.ID +", " + IndexConstants.IndexMapWays.NODES +", " + IndexConstants.IndexMapWays.TAGS + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						" FROM " + IndexConstants.IndexMapWays.getTable() + " WHERE "+IndexConstants.IndexMapWays.ID+" IN (SELECT id FROM "+IndexConstants.indexMapLocationsTable +   //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 											" WHERE ? <  maxLat AND ? > minLat AND maxLon > ? AND minLon  < ?)"; //$NON-NLS-1$
+	
 	
 	public void loadMap(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom) {
 		cBottomLatitude = bottomLatitude - (topLatitude - bottomLatitude) / 2;
 		cTopLatitude = topLatitude + (topLatitude - bottomLatitude) / 2; 
-		cLeftLongitude = leftLongitude - (rightLongitude - leftLongitude) / 2;
-		cRightLongitude = rightLongitude + (rightLongitude - leftLongitude) / 2;
+		cLeftLongitude = leftLongitude - (rightLongitude - leftLongitude);
+		cRightLongitude = rightLongitude + (rightLongitude - leftLongitude);
 		cZoom = zoom;
 		
 		
 		log.info(String.format(
-				"BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", cBottomLatitude, cTopLatitude, cLeftLongitude, cRightLongitude, zoom)); //$NON-NLS-1$
+				"BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", cBottomLatitude, cTopLatitude, cLeftLongitude, cRightLongitude, cZoom)); //$NON-NLS-1$
 		
 		long now = System.currentTimeMillis();
 		
@@ -141,28 +146,28 @@ public class RenderMapsRepositories {
 				while (result.next()) {
 					long id = result.getLong(1);
 					Way way = new Way(id);
-					JSONArray nodes;
-					try {
-						nodes = new JSONArray(result.getString(2));
-						for (int i = 0; i < nodes.length(); i++) {
-							JSONArray obj = nodes.getJSONArray(i);
-							Node node = new Node(obj.getDouble(1), obj.getDouble(2), obj.getLong(0));
-							way.addNode(node);
-						}
-
-					} catch (JSONException e) {
+					byte[] bytes= result.getBytes(2);
+					for (int i = 0; i < bytes.length; i += 8) {
+						int l2 = Algoritms.parseIntFromBytes(bytes, i);
+						int l3 = Algoritms.parseIntFromBytes(bytes, i + 4);
+						Node node = new Node(Float.intBitsToFloat(l2), Float.intBitsToFloat(l3), -1);
+						way.addNode(node);
 					}
+					
 					count++;
 					local.add(way);
 				}
 
 				cWays = local;
+				// create new instance to distinguish that cache was changed
+				cachedWaysLoc = new RectF();
+				cachedWaysLoc.set((float)cLeftLongitude, (float)cTopLatitude, (float)cRightLongitude, (float)cBottomLatitude);
 				log.info(String.format("Search has been done in %s ms. %s results were found.", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
 			} finally {
 				result.close();
 			}
 		} catch (java.sql.SQLException e) {
-			log.debug("Search failed", e);
+			log.debug("Search failed", e); //$NON-NLS-1$
 		}
 		
 	}

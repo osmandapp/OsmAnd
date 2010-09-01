@@ -430,8 +430,7 @@ public class RegionAddressRepository {
 				do {
 					Street street = new Street(city);
 					street.setId(query.getLong(IndexStreetTable.ID.ordinal()));
-					street.setLocation(query.getDouble(IndexStreetTable.LATITUDE.ordinal()), query.getDouble(IndexStreetTable.LONGITUDE
-							.ordinal()));
+					street.setLocation(query.getDouble(IndexStreetTable.LATITUDE.ordinal()), query.getDouble(IndexStreetTable.LONGITUDE.ordinal()));
 					street.setName(query.getString(IndexStreetTable.NAME.ordinal()));
 					street.setEnName(query.getString(IndexStreetTable.NAME_EN.ordinal()));
 					city.registerStreet(street, useEnglishNames);
@@ -483,8 +482,8 @@ public class RegionAddressRepository {
 		if (type != null) {
 			City city = new City(type);
 			city.setId(query.getLong(IndexCityTable.ID.ordinal()));
-			city.setLocation(query.getDouble(IndexCityTable.LATITUDE.ordinal()), query.getDouble(IndexCityTable.LONGITUDE
-					.ordinal()));
+			city.setLocation(query.getDouble(IndexCityTable.LATITUDE.ordinal()), 
+					query.getDouble(IndexCityTable.LONGITUDE.ordinal()));
 			city.setName(query.getString(IndexCityTable.NAME.ordinal()));
 			city.setEnName(query.getString(IndexCityTable.NAME_EN.ordinal()));
 			return city;

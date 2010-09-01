@@ -54,15 +54,47 @@ public class BaseLocationIndexRepository<T extends MapObject> {
 			db = null;
 			return false;
 		}
-		
-		Cursor query = db.query(tableLocation, new String[]{"MAX(latitude)", "MAX(longitude)", "MIN(latitude)", "MIN(longitude)"}, null, null,null, null, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		if(query.moveToFirst()){
-			dataTopLatitude = query.getDouble(0) + 1;
-			dataRightLongitude = query.getDouble(1) + 1.5;
-			dataBottomLatitude = query.getDouble(2) - 1;
-			dataLeftLongitude = query.getDouble(3) - 1.5;
+		String metaTable = "loc_meta_"+tableLocation; //$NON-NLS-1$
+		Cursor cursor = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='"+metaTable+"'", null); //$NON-NLS-1$ //$NON-NLS-2$
+		boolean dbExist = cursor.moveToFirst();
+		cursor.close();
+		boolean found = false;
+		boolean write = true;
+		if(dbExist){
+			cursor = db.rawQuery("SELECT MAX_LAT, MAX_LON, MIN_LAT, MIN_LON  FROM " +metaTable, null); //$NON-NLS-1$
+			if(cursor.moveToFirst()){
+				dataTopLatitude = cursor.getDouble(0);
+				dataRightLongitude = cursor.getDouble(1);
+				dataBottomLatitude = cursor.getDouble(2);
+				dataLeftLongitude = cursor.getDouble(3);
+				found = true;
+			} else {
+				found = false;
+			}
+			cursor.close();
+		} else {
+			try {
+				db.execSQL("CREATE TABLE " + metaTable + " (MAX_LAT DOUBLE, MAX_LON DOUBLE, MIN_LAT DOUBLE, MIN_LON DOUBLE)"); //$NON-NLS-1$ //$NON-NLS-2$
+			} catch (RuntimeException e) {
+				// case when database is in readonly mode
+				write = false;
+			}
 		}
-		query.close();
+		
+		if (!found) {
+			Cursor query = db.query(tableLocation,
+					new String[] { "MAX(latitude)", "MAX(longitude)", "MIN(latitude)", "MIN(longitude)" }, null, null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			if (query.moveToFirst()) {
+				dataTopLatitude = query.getDouble(0) + 1;
+				dataRightLongitude = query.getDouble(1) + 1.5;
+				dataBottomLatitude = query.getDouble(2) - 1;
+				dataLeftLongitude = query.getDouble(3) - 1.5;
+			}
+			query.close();
+			if (write) {
+				db.execSQL("INSERT INTO " + metaTable + " VALUES (?, ?, ? ,?)", new Double[]{dataTopLatitude, dataRightLongitude, dataBottomLatitude, dataLeftLongitude}); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+		}
 		if (log.isDebugEnabled()) {
 			log.debug("Initializing db " + file.getAbsolutePath() + " " + (System.currentTimeMillis() - start) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}

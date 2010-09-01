@@ -17,20 +17,21 @@ public class ToDoConstants {
 	//   86. Allow to add/edit custom tags to POI objects.
 	//   87. Use network availability for defining loading tiles from internet.
 	
+	
 	// TODO's in IndexCreator and other files!
 	// TODO order in nodes.tmp.odb !!! fix for future 
 	
 	// TODO BUGS/Improvements:
-	//  1! VELCOM - competition (ppt)
+	//  1! VELCOM
 	//  2. rotate map gps without location
 	//  3! Transport redesign call UI (enable context menu call, switch go to goal/not) 
 	//  4. recalculating route when location is far from !
 	//  5. keyboard (issue 43 )?
+	//  6. Do not upload empty files (transport, poi... ). Implement auto-delete from site.
+	//  7. In all places verify to use float lat/lon improve usage indexes !!!
 	
-	//  6. Download with wget
-	//  7. progress while map is loading
-	
-	//  PRESENTS : mediamarkt, parfum, coffee, (al-parfum), (om?), olia?
+	//  8. Download with wget
+	//  9. progress while map is loading
 	
 	// Unscheduled (complex)
 	//   65. Intermediate points - for better control routing, to avoid traffic jams ...(?)
