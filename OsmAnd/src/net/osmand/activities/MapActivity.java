@@ -120,6 +120,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	
 	// the order of layer should be preserved ! when you are inserting new layer
 	private RouteLayer routeLayer;
+	private RendererLayer rendererLayer;
 	private YandexTrafficLayer trafficLayer;
 	private OsmBugsLayer osmBugsLayer;
 	private POIMapLayer poiMapLayer;
@@ -147,6 +148,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private boolean currentShowingAngle;
 	
 	private Dialog progressDlg = null;
+	
 	
 
 	private boolean isMapLinkedToLocation(){
@@ -204,10 +206,14 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		// 1. route layer
 		routeLayer = new RouteLayer(routingHelper);
 		mapView.addLayer(routeLayer, 1);
+		rendererLayer = new RendererLayer();
+		mapView.addLayer(rendererLayer, 1.1f);
+		
+		
 		// 1.5. traffic layer
 		trafficLayer = new YandexTrafficLayer();
 		mapView.addLayer(trafficLayer, 1.5f);
-		// mapView.addLayer(new RendererLayer(), 1.6f);
+		
 		
 		// 2. osm bugs layer
 		osmBugsLayer = new OsmBugsLayer(this);
@@ -710,6 +716,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	@Override
 	protected void onResume() {
 		super.onResume();
+		// TODO not commit it 
+//		rendererLayer.setVisible(true);
 		
 		if(OsmandSettings.getMapOrientation(this) != getRequestedOrientation()){
 			setRequestedOrientation(OsmandSettings.getMapOrientation(this));

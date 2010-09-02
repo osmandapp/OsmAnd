@@ -44,6 +44,7 @@ import net.osmand.data.index.IndexConstants.IndexTransportStop;
 import net.osmand.impl.ConsoleProgressImplementation;
 import net.osmand.osm.Entity;
 import net.osmand.osm.LatLon;
+import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.Relation;
@@ -69,9 +70,6 @@ import org.xml.sax.SAXException;
  */
 public class IndexCreator {
 	private static final Log log = LogFactory.getLog(DataExtraction.class);
-	// TODO check
-	// 1. check postal_code if the building was registered by relation!
-	// TODO find proper location for streets ! centralize them
 
 
 	public static final int BATCH_SIZE = 5000;
@@ -933,10 +931,14 @@ public class IndexCreator {
 				}
 			}
 			
-			if(indexMap && e instanceof Way){
+			if(indexMap && (e instanceof Way) || (e instanceof Node)){
 				// manipulate what kind of way to load
 				loadEntityData(e, true);
-				DataIndexWriter.insertMapWayIndex(pStatements, mapWaysStat, mapWayLocsStat, (Way) e, BATCH_SIZE);
+				int type = MapRenderingTypes.encodeEntityWithType(e);
+				if(type > 0){
+					DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapWaysStat, mapWayLocsStat, e, 
+							MapRenderingTypes.getEntityName(e), type, BATCH_SIZE);
+				}
 			}
 
 			if (indexAddress) {
@@ -1356,12 +1358,12 @@ public class IndexCreator {
 		dbConn.close();
 	}
 	
-	 public static void main(String[] args) throws IOException, SAXException, SQLException {		
-		IndexCreator creator = new IndexCreator(new File("/home/victor/osm/"));
+	 public static void main(String[] args) throws IOException, SAXException, SQLException {
+		IndexCreator creator = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
 		creator.setIndexMap(true);
-//		creator.setNodesDBFile(new File("/home/victor/osm/nodes.tmp.odb"));
-		
-		creator.generateIndexes(new File("/home/victor/osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/nodes.tmp.odb"));
+
+		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 	}
 
 }

@@ -11,6 +11,9 @@ public class OSMSettings {
 		BUILDING("building"), //$NON-NLS-1$
 		POSTAL_CODE("postal_code"), //$NON-NLS-1$
 		RAILWAY("railway"), //$NON-NLS-1$
+		ONEWAY("oneway"),
+		
+		
 		// transport
 		ROUTE("route"), //$NON-NLS-1$
 		OPERATOR("operator"), //$NON-NLS-1$

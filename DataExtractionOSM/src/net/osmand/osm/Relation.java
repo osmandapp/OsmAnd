@@ -9,11 +9,9 @@ import java.util.Map;
 
 public class Relation extends Entity {
 	
-	// lazyLoading
+	// lazy loading
 	Map<EntityId, String> members = null;
 	Map<Entity, String> memberEntities = null;
-	
-	
 	
 	
 	public Relation(long id) {

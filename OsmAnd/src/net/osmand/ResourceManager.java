@@ -499,7 +499,7 @@ public class ResourceManager {
 	
 	////////////////////////////////////////////// Working with map ////////////////////////////////////////////////
 	public void updateRendererIfNeeded(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom){
-		if(!renderer.updateMap(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom)){
+		if(!renderer.updateMapIsNotNeeded(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom)){
 			asyncLoadingTiles.requestToLoadMap(
 					new MapLoadRequest(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom));
 		}
@@ -579,16 +579,13 @@ public class ResourceManager {
 		log.info("Cleaning tiles - size = " + cacheOfImages.size()); //$NON-NLS-1$
 		ArrayList<String> list = new ArrayList<String>(cacheOfImages.keySet());
 		// remove first images (as we think they are older)
-		for (int i = 0; i < list.size()/2; i ++) {
+		for (int i = 0; i < list.size() /2; i ++) {
 			Bitmap bmp = cacheOfImages.remove(list.get(i));
 			if(bmp != null){
 				bmp.recycle();
 			}
 		}
 	}
-	
-	
-	
 	
 
 	private static class TileLoadDownloadRequest extends DownloadRequest {

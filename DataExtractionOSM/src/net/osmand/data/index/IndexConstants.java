@@ -409,25 +409,25 @@ public class IndexConstants {
 	
 	public static String indexMapLocationsTable = "map_locations"; //$NON-NLS-1$
 	
-	public enum IndexMapWays implements IndexColumn {
-		ID("long", true), TAGS, NODES("BLOB");  //$NON-NLS-1$ //$NON-NLS-2$
+	public enum IndexMapRenderObject implements IndexColumn {
+		ID("long", true), TYPE("integer"), NAME, NODES("BLOB");  //$NON-NLS-1$ //$NON-NLS-2$
 		boolean index = false;
 		String type = null;
 
-		private IndexMapWays() {
+		private IndexMapRenderObject() {
 		}
 
-		private IndexMapWays(String type) {
+		private IndexMapRenderObject(String type) {
 			this.type = type;
 		}
 
-		private IndexMapWays(String type, boolean index) {
+		private IndexMapRenderObject(String type, boolean index) {
 			this(type);
 			this.index = index;
 		}
 
 		public static String getTable() {
-			return "ways"; //$NON-NLS-1$
+			return "map_objects"; //$NON-NLS-1$
 		}
 
 		public String getTableName() {
