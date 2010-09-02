@@ -363,10 +363,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private void drawOverMap(Canvas canvas){
 		int w = getCenterPointX();
 		int h = getCenterPointY();
-		if (showMapPosition) {
-			canvas.drawCircle(w, h, 3 * dm.density, paintCenter);
-			canvas.drawCircle(w, h, 7 * dm.density, paintCenter);
-		}
 		canvas.restore();
 		// create local copy
 		ArrayList<OsmandMapLayer> local = new ArrayList<OsmandMapLayer>(layers);
@@ -377,6 +373,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			}
 			layer.onDraw(canvas);
 			canvas.restore();
+		}
+		if (showMapPosition) {
+			canvas.drawCircle(w, h, 3 * dm.density, paintCenter);
+			canvas.drawCircle(w, h, 7 * dm.density, paintCenter);
 		}
 	}
 	

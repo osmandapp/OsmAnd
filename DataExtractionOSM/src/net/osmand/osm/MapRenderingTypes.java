@@ -5,17 +5,43 @@ import net.osmand.osm.OSMSettings.OSMTagKey;
 
 
 /**
+ * SOURCE : http://wiki.openstreetmap.org/wiki/Map_Features
+ * 
  * Describing types of polygons :
  * 1. Last 3 bits define type of element : polygon, polyline, point 
  */
 public class MapRenderingTypes {
-
+	// OSM keys :
+	// 1. highway (lines) 		+
+	// 2. highway (node)     	- [stop, roundabout, speed_camera]
+	// 3. traffic_calming		-
+	// 4. service 				- [parking_aisle]
+	// 5. barrier 				-
+	// 6. cycleway     			- [? different kinds of cycleways]
+	// 7. waterway				-
+	// 8. railway				-
+	// 9. aeroway/aerialway		-
+	// 10. power				-
+	// 11. man_made				-
+	// 12. building 			+
+	//	---------------------------------
+	// 13. leisure, amenity, shop, tourism, historic, sport -
+	// 14. emergency			-
+	// 15. landuse				-
+	// 16. natural				-
+	// 17. military				-
+	
+	// 18. route (?)
+	// 19. boundary (?)
+	// 20. RESTRICTIONS
+	
 	
 
 	public final static int TYPE_MASK = (1 << 3) - 1;
 	public final static int POLYGON_TYPE = 3;
 	public final static int POLYLINE_TYPE = 2;
 	public final static int POINT_TYPE = 1;
+	
 	
 	// 1. polygon
 	public final static int PG_AREA_MASK = (1 << 6) - 1;
@@ -26,6 +52,9 @@ public class MapRenderingTypes {
 	public final static int PL_TYPE_MASK = (1 << 4) - 1;
 	public final static int PL_HIGHWAY_TYPE = 1;
 	
+	// highway :    sss|aaa|f|ttttt|o|0001|011
+	// o - oneway, t - type of way, f - free or toll, a - acess, max speed - s = 20 bits
+	
 	// 2._ - 1bit
 	public final static int PL_HW_ONEWAY = 1;
 	
@@ -33,16 +62,27 @@ public class MapRenderingTypes {
 	// TODO max speed class (?)
 	// TODO free (?)
 	// 2._.1 highway types
+	public final static int PL_HW_TYPE_MASK = (1 << 5) -1;
+	
 	public final static int PL_HW_TRUNK = 1;
 	public final static int PL_HW_MOTORWAY = 2;
 	public final static int PL_HW_PRIMARY = 3;
 	public final static int PL_HW_SECONDARY = 4;
 	public final static int PL_HW_TERTIARY = 5;
 	public final static int PL_HW_RESIDENTIAL = 6;
-	public final static int PL_HW_TRACK = 7;
-	public final static int PL_HW_PATH = 8;
-	public final static int PL_HW_UNCLASSIFIED = 9;
-	public final static int PL_HW_SERVICE = 10;
+	public final static int PL_HW_SERVICE = 7;
+	public final static int PL_HW_UNCLASSIFIED = 8;
+	public final static int PL_HW_TRACK = 9;
+	public final static int PL_HW_PATH = 10;
+	public final static int PL_HW_LIVING_STREET = 11;
+
+	public final static int PL_HW_CYCLEWAY = 17;
+	public final static int PL_HW_FOOTWAY = 18;
+	public final static int PL_HW_STEPS = 19;
+	public final static int PL_HW_BRIDLEWAY = 20;
+	
+	public final static int PL_HW_CONSTRUCTION = 31;
+	
 	
 	
 	
@@ -87,7 +127,21 @@ public class MapRenderingTypes {
 			return PL_HW_TRACK;
 		} else if(hw.equals("PATH")){ //$NON-NLS-1$
 			return PL_HW_PATH;
-		} else if(hw.equals("UNCLASSIFIED")){ //$NON-NLS-1$
+		} else if(hw.equals("SERVICE") || hw.equals("SERVICES")){ //$NON-NLS-1$ //$NON-NLS-2$
+			return PL_HW_SERVICE;
+		} else if(hw.equals("LIVING_STREET")){ //$NON-NLS-1$
+			return PL_HW_LIVING_STREET;
+		} else if(hw.equals("CONSTRUCTION")){ //$NON-NLS-1$
+			return PL_HW_CONSTRUCTION;
+		} else if(hw.equals("STEPS")){ //$NON-NLS-1$
+			return PL_HW_STEPS;
+		} else if(hw.equals("BRIDLEWAY")){ //$NON-NLS-1$
+			return PL_HW_BRIDLEWAY;
+		} else if(hw.equals("CYCLEWAY")){ //$NON-NLS-1$
+			return PL_HW_CYCLEWAY;
+		} else if(hw.equals("PEDESTRIAN") | hw.equals("FOOTWAY")){ //$NON-NLS-1$ //$NON-NLS-2$
+			return PL_HW_FOOTWAY;
+		} else if(hw.equals("UNCLASSIFIED") || hw.equals("ROAD")){ //$NON-NLS-1$ //$NON-NLS-2$
 			return PL_HW_UNCLASSIFIED;
 		} 
 		return 0;

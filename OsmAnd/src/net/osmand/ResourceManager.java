@@ -63,7 +63,7 @@ public class ResourceManager {
 	
 	// it is not good investigated but no more than 64 (satellite images)
 	// Only 8 MB (from 16 Mb whole mem) available for images : image 64K * 128 = 8 MB (8 bit), 64 - 16 bit, 32 - 32 bit 
-	protected int maxImgCacheSize = 48;
+	protected int maxImgCacheSize = 32;
 	
 	protected Map<String, Bitmap> cacheOfImages = new LinkedHashMap<String, Bitmap>();
 	protected Map<String, Boolean> imagesOnFS = new LinkedHashMap<String, Boolean>() ;
@@ -567,9 +567,9 @@ public class ResourceManager {
 			}
 		}
 		if(source == null || source.getBitDensity() == 0){
-			maxImgCacheSize = 48;
+			maxImgCacheSize = 32;
 		} else {
-			maxImgCacheSize = 384 / source.getBitDensity();
+			maxImgCacheSize = Math.max(384 / source.getBitDensity() , 32);
 		}
 		
 	}
