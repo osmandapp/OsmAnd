@@ -9,15 +9,14 @@ import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
 import net.osmand.data.index.IndexConstants;
-import net.osmand.osm.Node;
-import net.osmand.osm.Way;
+import net.osmand.osm.MapRenderObject;
 
 import org.apache.commons.logging.Log;
 
+import android.graphics.Bitmap;
 import android.graphics.RectF;
 
 public class RenderMapsRepositories {
@@ -26,12 +25,15 @@ public class RenderMapsRepositories {
 	private Connection conn;
 	private double cTopLatitude;
 	private double cBottomLatitude;
-	private int cZoom;
 	private double cLeftLongitude;
 	private double cRightLongitude;
-	private List<Way> cWays = new LinkedList<Way>();
+	
+	private int cZoom;
+	private List<MapRenderObject> cObjects = new LinkedList<MapRenderObject>();
 	private RectF cachedWaysLoc = new RectF();
 	private PreparedStatement pStatement;
+	
+	private OsmandRenderer renderer = new OsmandRenderer();
 
 
 	public boolean initializeNewResource(final IProgress progress, File file) {
@@ -78,8 +80,8 @@ public class RenderMapsRepositories {
 		return true;
 	}
 	
-	public List<Way> getCache() {
-		return cWays;
+	public List<MapRenderObject> getCache() {
+		return cObjects;
 	}
 	
 	// if cache was changed different instance will be returned
@@ -89,6 +91,7 @@ public class RenderMapsRepositories {
 	
 	
 	public void clearAllResources(){
+		clearCache();
 		if(conn != null){
 			try {
 				conn.close();
@@ -102,7 +105,7 @@ public class RenderMapsRepositories {
 	/**
 	 * @return true if no need to reevaluate map
 	 */
-	public boolean updateMap(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom){
+	public boolean updateMapIsNotNeeded(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom){
 		if (conn == null) {
 			return true;
 		}
@@ -112,9 +115,11 @@ public class RenderMapsRepositories {
 	}
 
 
-	private static String loadMapQuery = "SELECT "+IndexConstants.IndexMapWays.ID +", " + IndexConstants.IndexMapWays.NODES +", " + IndexConstants.IndexMapWays.TAGS + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						" FROM " + IndexConstants.IndexMapWays.getTable() + " WHERE "+IndexConstants.IndexMapWays.ID+" IN (SELECT id FROM "+IndexConstants.indexMapLocationsTable +   //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-											" WHERE ? <  maxLat AND ? > minLat AND maxLon > ? AND minLon  < ?)"; //$NON-NLS-1$
+	private static String loadMapQuery = "SELECT "+IndexConstants.IndexMapRenderObject.ID +", " + IndexConstants.IndexMapRenderObject.NODES +", " +  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+										IndexConstants.IndexMapRenderObject.NAME + ", " + IndexConstants.IndexMapRenderObject.TYPE + //$NON-NLS-1$
+										" FROM " + IndexConstants.IndexMapRenderObject.getTable() +	" WHERE "+IndexConstants.IndexMapRenderObject.ID+  //$NON-NLS-1$//$NON-NLS-2$
+											" IN (SELECT id FROM "+IndexConstants.indexMapLocationsTable +   //$NON-NLS-1$
+												" WHERE ? <  maxLat AND ? > minLat AND maxLon > ? AND minLon  < ?)"; //$NON-NLS-1$
 	
 	
 	public void loadMap(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom) {
@@ -140,28 +145,22 @@ public class RenderMapsRepositories {
 			pStatement.setDouble(4, cRightLongitude);
 			ResultSet result = pStatement.executeQuery();
 			
-			List<Way> local = new LinkedList<Way>();
+			List<MapRenderObject> local = new LinkedList<MapRenderObject>();
 			try {
 				int count = 0;
 				while (result.next()) {
 					long id = result.getLong(1);
-					Way way = new Way(id);
-					byte[] bytes= result.getBytes(2);
-					for (int i = 0; i < bytes.length; i += 8) {
-						int l2 = Algoritms.parseIntFromBytes(bytes, i);
-						int l3 = Algoritms.parseIntFromBytes(bytes, i + 4);
-						Node node = new Node(Float.intBitsToFloat(l2), Float.intBitsToFloat(l3), -1);
-						way.addNode(node);
-					}
-					
+					MapRenderObject obj = new MapRenderObject(id);
+					obj.setData(result.getBytes(2));
+					obj.setName(result.getString(3));
+					obj.setType(result.getInt(4));
 					count++;
-					local.add(way);
+					local.add(obj);
 				}
 
-				cWays = local;
+				cObjects = local;
 				// create new instance to distinguish that cache was changed
-				cachedWaysLoc = new RectF();
-				cachedWaysLoc.set((float)cLeftLongitude, (float)cTopLatitude, (float)cRightLongitude, (float)cBottomLatitude);
+				cachedWaysLoc = new RectF((float)cLeftLongitude, (float)cTopLatitude, (float)cRightLongitude, (float)cBottomLatitude);
 				log.info(String.format("Search has been done in %s ms. %s results were found.", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
 			} finally {
 				result.close();
@@ -169,12 +168,17 @@ public class RenderMapsRepositories {
 		} catch (java.sql.SQLException e) {
 			log.debug("Search failed", e); //$NON-NLS-1$
 		}
-		
+		renderer.generateNewBitmap(cachedWaysLoc, cObjects, cZoom, 0);
+	}
+	
+	public Bitmap getBitmap() {
+		return renderer.getBitmap();
 	}
 	
 	
 	public void clearCache() {
-		cWays.clear();
+		cObjects.clear();
+		renderer.clearBitmap();
 	}
 
 }

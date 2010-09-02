@@ -17,18 +17,26 @@ public class ToDoConstants {
 	//   86. Allow to add/edit custom tags to POI objects.
 	//   87. Use network availability for defining loading tiles from internet.
 	
-	
-	// TODO's in IndexCreator and other files!
-	// TODO order in nodes.tmp.odb !!! fix for future 
-	
-	// TODO BUGS/Improvements:
+	// TODO Improvements:
 	//  1! VELCOM
 	//  2. rotate map gps without location
 	//  3! Transport redesign call UI (enable context menu call, switch go to goal/not) 
 	//  4. recalculating route when location is far from !
 	//  5. keyboard (issue 43 )?
-	//  6. Do not upload empty files (transport, poi... ). Implement auto-delete from site.
-	//  7. In all places verify to use float lat/lon improve usage indexes !!!
+	//  6. Do not upload empty files (transport, poi... ). 
+	//  7. Implement auto-delete from site (done should be ported)
+	
+	//  8. In all places verify to use float lat/lon improve usage indexes !!!
+	//  9. Render map on bitmap in another thread
+	//  10. Sort objects before render (according layering)
+	//  11!! Investigate ResourceManager close methods and clear cache when Map switches !!!
+	
+	//  11. Move JUnidecode on client save space for some indexes
+	//  12. Fix : find proper location for streets ! centralize them (when create index)?
+	
+	// TODO Check 
+	// 1. check postal_code if the building was registered by relation!
+
 	
 	//  8. Download with wget
 	//  9. progress while map is loading

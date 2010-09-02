@@ -198,11 +198,11 @@ public class MapUtils {
 		return x / getPowZoom(zoom) * 360.0 - 180.0;
 	}
 	
-	private static float getPowZoom(float zoom){
+	private static double getPowZoom(float zoom){
 		if(zoom - Math.ceil(zoom) < 0.05f){
 			return 1 << ((int)zoom); 
 		} else {
-			return (float) Math.pow(2, zoom);
+			return Math.pow(2, zoom);
 		}
 	}
 	

@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -27,19 +29,19 @@ import net.osmand.data.TransportStop;
 import net.osmand.data.City.CityType;
 import net.osmand.data.index.IndexConstants.IndexBuildingTable;
 import net.osmand.data.index.IndexConstants.IndexCityTable;
-import net.osmand.data.index.IndexConstants.IndexMapWays;
+import net.osmand.data.index.IndexConstants.IndexMapRenderObject;
 import net.osmand.data.index.IndexConstants.IndexPoiTable;
 import net.osmand.data.index.IndexConstants.IndexStreetNodeTable;
 import net.osmand.data.index.IndexConstants.IndexStreetTable;
 import net.osmand.data.index.IndexConstants.IndexTransportRoute;
 import net.osmand.data.index.IndexConstants.IndexTransportRouteStop;
 import net.osmand.data.index.IndexConstants.IndexTransportStop;
+import net.osmand.osm.Entity;
 import net.osmand.osm.Node;
+import net.osmand.osm.Relation;
 import net.osmand.osm.Way;
 
 import org.apache.commons.logging.Log;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 
 
@@ -388,39 +390,41 @@ public class DataIndexWriter {
 
 	public static void createMapIndexStructure(Connection conn) throws SQLException{
 		Statement stat = conn.createStatement();
-        stat.execute(IndexConstants.generateCreateSQL(IndexMapWays.values()));
-        stat.execute(IndexConstants.generateCreateIndexSQL(IndexMapWays.values()));
+        stat.execute(IndexConstants.generateCreateSQL(IndexMapRenderObject.values()));
+        stat.execute(IndexConstants.generateCreateIndexSQL(IndexMapRenderObject.values()));
         stat.execute("CREATE VIRTUAL TABLE "+IndexConstants.indexMapLocationsTable+" USING rtree (id, minLon, maxLon, minLat, maxLat);");
         stat.execute("PRAGMA user_version = " + IndexConstants.MAP_TABLE_VERSION); //$NON-NLS-1$
         stat.close();
 	}
 	
 	public static PreparedStatement createStatementMapWaysInsert(Connection conn) throws SQLException{
-		assert IndexMapWays.values().length == 3;
-        return conn.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexMapWays.getTable(), 3));
+		assert IndexMapRenderObject.values().length == 4;
+        return conn.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexMapRenderObject.getTable(), 4));
 	}
 	public static PreparedStatement createStatementMapWaysLocationsInsert(Connection conn) throws SQLException{
         return conn.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexConstants.indexMapLocationsTable, 5));
 	}
 	
-	public static void insertMapWayIndex(Map<PreparedStatement, Integer> statements, 
-			PreparedStatement mapWayStat, PreparedStatement mapWayLocationsStat, Way w, int batchSize) throws SQLException {
-		assert IndexMapWays.values().length == 3;
-		JSONObject tags = new JSONObject();
-		for (String tagKey : w.getTagKeySet()) {
-			try {
-				tags.put(tagKey, w.getTag(tagKey));
-			} catch (JSONException e) {
-			}
+	public static void insertMapRenderObjectIndex(Map<PreparedStatement, Integer> statements, 
+			PreparedStatement mapStat, PreparedStatement mapWayLocationsStat, Entity e, String name, int type,  int batchSize) throws SQLException {
+		assert IndexMapRenderObject.values().length == 4;
+		if(e instanceof Relation){
+			throw new IllegalArgumentException();
 		}
 		boolean init = false;
 		double minLat = 180;
 		double maxLat = -180;
 		double minLon = 360;
 		double maxLon = -360;
-		byte[] bytes = new byte[w.getNodes().size() * 8];
+		Collection<Node> nodes = e instanceof Way ? ((Way) e).getNodes() : Collections.singleton((Node) e);
+		byte[] bytes = new byte[nodes.size() * 8];
+		// generate unique id
+		long id = e.getId() << 1;
+		if(e instanceof Way){
+			id ++;
+		}
 		int offset = 0;
-		for (Node n : w.getNodes()) {
+		for (Node n : nodes) {
 			if (n != null) {
 				minLat = Math.min(minLat, n.getLatitude());
 				maxLat = Math.max(maxLat, n.getLatitude());
@@ -434,13 +438,13 @@ public class DataIndexWriter {
 			}
 		}
 		if (init) {
-			mapWayStat.setLong(IndexMapWays.ID.ordinal() + 1, w.getId());
-//			mapWayStat.setString(IndexMapWays.TAGS.ordinal() + 1, tags.toString());
-			mapWayStat.setString(IndexMapWays.TAGS.ordinal() + 1, "");
-			mapWayStat.setBytes(IndexMapWays.NODES.ordinal() + 1, bytes);
-			addBatch(statements, mapWayStat);
+			mapStat.setLong(IndexMapRenderObject.ID.ordinal() + 1, id);
+			mapStat.setInt(IndexMapRenderObject.TYPE.ordinal() + 1, type);
+			mapStat.setString(IndexMapRenderObject.NAME.ordinal() + 1, name);
+			mapStat.setBytes(IndexMapRenderObject.NODES.ordinal() + 1, bytes);
+			addBatch(statements, mapStat);
 
-			mapWayLocationsStat.setLong(1, w.getId());
+			mapWayLocationsStat.setLong(1, id);
 			mapWayLocationsStat.setDouble(2, minLon);
 			mapWayLocationsStat.setDouble(3, maxLon);
 			mapWayLocationsStat.setDouble(4, minLat);
@@ -463,7 +467,4 @@ public class DataIndexWriter {
 		}
 	}
 
-	
-	
-	
 }
