@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import net.osmand.activities.OsmandApplication;
 import net.osmand.activities.RouteProvider.RouteService;
 import net.osmand.activities.search.SearchHistoryHelper;
 import net.osmand.map.ITileSource;
@@ -585,14 +586,14 @@ public class OsmandSettings {
 		return prefs.edit().putString(SELECTED_POI_FILTER_FOR_MAP, filterId).commit();
 	}
 
-	public static PoiFilter getPoiFilterForMap(Context ctx) {
+	public static PoiFilter getPoiFilterForMap(Context ctx, OsmandApplication application) {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		String filterId = prefs.getString(SELECTED_POI_FILTER_FOR_MAP, null);
-		PoiFilter filter = PoiFiltersHelper.getFilterById(ctx, filterId);
+		PoiFilter filter = application.getPoiFilters().getFilterById(filterId);
 		if (filter != null) {
 			return filter;
 		}
-		return new PoiFilter(null);
+		return new PoiFilter(null, application);
 	}
 	
 

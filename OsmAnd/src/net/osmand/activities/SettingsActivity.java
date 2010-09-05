@@ -438,7 +438,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				edit.putString(OsmandSettings.VOICE_PROVIDER, (String) newValue);
 			}
 			edit.commit();
-			CommandPlayer.init(this);
+			((OsmandApplication)getApplication()).initCommandPlayer();
 		} else if (preference == tileSourcePreference) {
 			edit.putString(OsmandSettings.MAP_TILE_SOURCES, (String) newValue);
 			edit.commit();
@@ -460,7 +460,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			@Override
 			public void run() {
 				try {
-					showWarnings(ResourceManager.getResourceManager().reloadIndexes(impl));
+					showWarnings(((OsmandApplication)getApplication()).getResourceManager().reloadIndexes(impl));
 				} finally {
 					if(progressDlg !=null){
 						progressDlg.dismiss();

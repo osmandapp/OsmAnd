@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.OsmandSettings;
 import net.osmand.R;
@@ -39,7 +38,6 @@ public class CommandPlayer {
 	public static final int VOICE_VERSION = 0;
 	private static final Log log = LogUtil.getLog(CommandPlayer.class);
 	
-	private static CommandPlayer instance = null;
 
 	protected Context ctx;
 	// or zip file
@@ -55,36 +53,9 @@ public class CommandPlayer {
 	private boolean playNext = true;
 	private List<String> filesToPlay = Collections.synchronizedList(new ArrayList<String>());
 
-	/**
-	 * @param ctx
-	 * @return null could be returned it means there is no available voice config
-	 */
-	public static CommandPlayer getInstance(Context ctx) {
-		init(ctx);
-		return instance;
-	}
 	
-	
-	public static String init(Context ctx){
-		if(OsmandSettings.getVoiceProvider(ctx) == null && instance == null){
-			return null;
-		}
-		if(instance == null){
-			long time = System.currentTimeMillis();
-			instance = new CommandPlayer(ctx);
-			if (log.isInfoEnabled()) {
-				log.info("Initializing prolog system : " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
-			}
-		}
-		instance.ctx = ctx;
-		if(!Algoritms.objectEquals(OsmandSettings.getVoiceProvider(ctx), instance.getCurrentVoice())){
-			return instance.init();
-		}
-		
-		return null;
-	}
-	
-	protected CommandPlayer(Context ctx){
+	public CommandPlayer(Context ctx){
+		long time = System.currentTimeMillis();
 		try {
 			this.ctx = ctx;
 			prologSystem = new Prolog(new String[]{"alice.tuprolog.lib.BasicLibrary"}); //$NON-NLS-1$
@@ -93,7 +64,11 @@ public class CommandPlayer {
 			throw new RuntimeException(e);
 		}
 		mediaPlayer = new MediaPlayer();
+		if (log.isInfoEnabled()) {
+			log.info("Initializing prolog system : " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
+		}
 	}
+	
 	
 	public String getCurrentVoice(){
 		if(voiceDir == null){
@@ -102,7 +77,7 @@ public class CommandPlayer {
 		return voiceDir.getName(); 
 	}
 	
-	protected String init(){
+	public String init(){
 		String voiceProvider = OsmandSettings.getVoiceProvider(ctx);
 		prologSystem.clearTheory();
 		voiceDir = null;

@@ -12,6 +12,7 @@ import net.osmand.activities.RouteProvider.RouteCalculationResult;
 import net.osmand.activities.RouteProvider.RouteService;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.voice.CommandPlayer;
 import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
@@ -32,8 +33,10 @@ public class RoutingHelper {
 	
 	private List<IRouteInformationListener> listeners = new ArrayList<IRouteInformationListener>();
 
-	// activity to show messages & refresh map when route is calculated
 	private Context context;
+	
+	// activity to show messages & refresh map when route is calculated	
+	private Activity uiActivity;
 	
 	private boolean isFollowingMode = false;
 	
@@ -76,18 +79,11 @@ public class RoutingHelper {
 	// END TEST CODE
 	
 	
-	private RoutingHelper(){
-		voiceRouter = new VoiceRouter(this);
+	public RoutingHelper(ApplicationMode mode, Context context, CommandPlayer player){
+		this.mode = mode;
+		this.context = context;
+		voiceRouter = new VoiceRouter(this, player);
 	}
-	
-	private static RoutingHelper INSTANCE = new RoutingHelper(); 
-	public static RoutingHelper getInstance(Context ctx){
-		INSTANCE.context = ctx;
-		INSTANCE.voiceRouter.init(ctx);
-		return INSTANCE;
-	}
-	
-	
 	
 	public boolean isFollowingMode() {
 		return isFollowingMode;
@@ -157,6 +153,10 @@ public class RoutingHelper {
 			return true;
 		}
 		return false;
+	}
+	
+	public void setUiActivity(Activity uiActivity) {
+		this.uiActivity = uiActivity;
 	}
 	
 	public Location getCurrentLocation() {
@@ -450,9 +450,9 @@ public class RoutingHelper {
 									int[] dist = res.getListDistance();
 									int l = dist != null && dist.length > 0 ? dist[0] : 0;
 									showMessage(context.getString(R.string.new_route_calculated_dist) +" : "+ MapUtils.getFormattedDistance(l)); //$NON-NLS-1$
-									if (context instanceof MapActivity) {
+									if (uiActivity instanceof MapActivity) {
 										// be aware that is non ui thread
-										((MapActivity) context).getMapView().refreshMap();
+										((MapActivity) uiActivity).getMapView().refreshMap();
 									}
 								} else {
 									if (res.getErrorMessage() != null) {
@@ -473,11 +473,11 @@ public class RoutingHelper {
 	}
 	
 	private void showMessage(final String msg){
-		if (context instanceof Activity) {
-			((Activity)context).runOnUiThread(new Runnable() {
+		if (uiActivity != null) {
+			uiActivity.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-					Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+					Toast.makeText(uiActivity, msg, Toast.LENGTH_SHORT).show();
 				}
 			});
 		}

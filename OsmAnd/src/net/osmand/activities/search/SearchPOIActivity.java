@@ -12,9 +12,9 @@ import net.osmand.LogUtil;
 import net.osmand.NameFinderPoiFilter;
 import net.osmand.OsmandSettings;
 import net.osmand.PoiFilter;
-import net.osmand.PoiFiltersHelper;
 import net.osmand.R;
 import net.osmand.activities.MapActivity;
+import net.osmand.activities.OsmandApplication;
 import net.osmand.data.Amenity;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -101,7 +101,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		setContentView(R.layout.searchpoi);
 		Bundle bundle = this.getIntent().getExtras();
 		String filterId = bundle.getString(AMENITY_FILTER);
-		filter = PoiFiltersHelper.getFilterById(this, filterId);
+		filter = ((OsmandApplication)getApplication()).getPoiFilters().getFilterById(filterId);
 		
 		uiHandler = new Handler();
 		searchPOILevel = (Button) findViewById(R.id.SearchPOILevelButton);

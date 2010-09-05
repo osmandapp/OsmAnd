@@ -5,13 +5,16 @@ import java.util.Comparator;
 import java.util.List;
 
 import net.osmand.LogUtil;
+import net.osmand.R;
 import net.osmand.osm.MapRenderObject;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 
 import org.apache.commons.logging.Log;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
@@ -32,6 +35,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	private Paint paintFill;
 	private Paint paintFillWhite;
 	
+	private Resources resources = null;
 	
 	/// Colors
 	private int clFillScreen = Color.rgb(241, 238, 232);
@@ -164,10 +168,35 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		if (zoom > 15) {
 			float x = (float) ((MapUtils.getTileNumberX(zoom, obj.getPointLongitude(0)) - leftTileX) * 256f);
 			float y = (float) ((MapUtils.getTileNumberY(zoom, obj.getPointLatitude(0)) - topTileY) * 256f);
-			paintFill.setColor(clPoint);
-			canvas.drawCircle(x, y, 6, paintFill);
+			int subType = MapRenderingTypes.getPointSubType(obj.getType());
+			int type = MapRenderingTypes.getObjectType(obj.getType());
+			if(type == MapRenderingTypes.HIGHWAY && subType == 38){
+				if (zoom > 16) {
+					drawBitmap(canvas, x, y, R.drawable.h_traffic_light);
+				}
+			} else {
+				paintFill.setColor(clPoint);
+				canvas.drawCircle(x, y, 6, paintFill);
+			}
 		}
 
+	}
+	
+	public Resources getResources() {
+		
+		return resources;
+	}
+	public void setResources(Resources resources) {
+		this.resources = resources;
+	}
+	
+	private void drawBitmap(Canvas canvas, float x, float y, int resId){
+		if(resources != null){
+			Bitmap bmp = BitmapFactory.decodeResource(resources, resId);
+			if(bmp != null){
+				canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintText);
+			}
+		}
 	}
 	
 	public void drawHighway(MapRenderObject obj, Canvas canvas, double leftTileX, double topTileY, int zoom, float rotate) {

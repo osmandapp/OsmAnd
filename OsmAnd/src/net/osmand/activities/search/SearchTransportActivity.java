@@ -11,9 +11,9 @@ import net.osmand.Algoritms;
 import net.osmand.Messages;
 import net.osmand.OsmandSettings;
 import net.osmand.R;
-import net.osmand.ResourceManager;
 import net.osmand.TransportIndexRepository;
 import net.osmand.TransportIndexRepository.RouteInfoLocation;
+import net.osmand.activities.OsmandApplication;
 import net.osmand.activities.TransportRouteHelper;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
@@ -144,7 +144,7 @@ public class SearchTransportActivity extends ListActivity {
 		if (!routeCalculated && getLocationToStart() != null) {
 			final LatLon locationToStart = getLocationToStart();
 			final LatLon locationToGo = getLocationToGo();
-			List<TransportIndexRepository> rs = ResourceManager.getResourceManager().searchTransportRepositories(locationToStart.getLatitude(), 
+			List<TransportIndexRepository> rs = ((OsmandApplication)getApplication()).getResourceManager().searchTransportRepositories(locationToStart.getLatitude(), 
 					locationToStart.getLongitude());
 			if(!rs.isEmpty()){
 				repo = rs.get(0);

@@ -6,8 +6,8 @@ import java.text.MessageFormat;
 import net.osmand.OsmandSettings;
 import net.osmand.R;
 import net.osmand.RegionAddressRepository;
-import net.osmand.ResourceManager;
 import net.osmand.activities.MapActivity;
+import net.osmand.activities.OsmandApplication;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
@@ -352,7 +352,7 @@ public class SearchAddressActivity extends Activity {
 		
 		region = null;
 		String lastSearchedRegion = OsmandSettings.getLastSearchedRegion(SearchAddressActivity.this);
-		region = ResourceManager.getResourceManager().getRegionRepository(lastSearchedRegion);
+		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(lastSearchedRegion);
 		String progressMsg = null;
 		// try to determine whether progress dialog & new thread needed
 

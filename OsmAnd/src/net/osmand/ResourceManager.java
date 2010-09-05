@@ -54,12 +54,12 @@ public class ResourceManager {
 	
 	protected static ResourceManager manager = null;
 	
-	public static ResourceManager getResourceManager(){
-		if(manager == null){
-			manager = new ResourceManager();
-		}
-		return manager;
-	}
+//	public static ResourceManager getResourceManager(){
+//		if(manager == null){
+//			manager = new ResourceManager();
+//		}
+//		return manager;
+//	}
 	
 	// it is not good investigated but no more than 64 (satellite images)
 	// Only 8 MB (from 16 Mb whole mem) available for images : image 64K * 128 = 8 MB (8 bit), 64 - 16 bit, 32 - 32 bit 
@@ -71,7 +71,6 @@ public class ResourceManager {
 	protected File dirWithTiles ;
 	
 	private MapTileDownloader downloader = MapTileDownloader.getInstance();
-
 	// Indexes
 	private Map<String, RegionAddressRepository> addressMap = new TreeMap<String, RegionAddressRepository>(Collator.getInstance());
 	

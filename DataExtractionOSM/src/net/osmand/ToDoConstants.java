@@ -37,7 +37,7 @@ public class ToDoConstants {
 	
 	// TODO Check 
 	// 1. check postal_code if the building was registered by relation!
-
+	// 2. TEST after refactoring : poi custom filters
 	
 	//  8. Download with wget
 	//  9. progress while map is loading

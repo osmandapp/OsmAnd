@@ -233,12 +233,13 @@ public class DownloadIndexActivity extends ListActivity {
 					}
 						
 					ArrayList<String> warnings = new ArrayList<String>();
+					ResourceManager manager = ((OsmandApplication)getApplication()).getResourceManager();
 					if(toIndex.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)){
-						ResourceManager.getResourceManager().indexingAddress(impl, warnings, toIndex);
+						manager.indexingAddress(impl, warnings, toIndex);
 					} else if(toIndex.getName().endsWith(IndexConstants.POI_INDEX_EXT)){
-						ResourceManager.getResourceManager().indexingPoi(impl, warnings, toIndex);
+						manager.indexingPoi(impl, warnings, toIndex);
 					} else if(toIndex.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)){
-						ResourceManager.getResourceManager().indexingTransport(impl, warnings, toIndex);
+						manager.indexingTransport(impl, warnings, toIndex);
 					}
 					if(warnings.isEmpty()){
 						showWarning(getString(R.string.download_index_success));

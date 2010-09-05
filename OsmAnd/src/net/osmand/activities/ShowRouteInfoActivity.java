@@ -50,7 +50,7 @@ public class ShowRouteInfoActivity extends ListActivity {
 		ListView lv = new ListView(this);
 		lv.setId(android.R.id.list);
 		header = new TextView(this);
-		helper = RoutingHelper.getInstance(this);
+		helper = ((OsmandApplication)getApplication()).getRoutingHelper();
 		
 		lv.addHeaderView(header);
 		setContentView(lv);
@@ -71,7 +71,7 @@ public class ShowRouteInfoActivity extends ListActivity {
 			// large screen
 			header.setTextSize(dm.scaledDensity * 23);
 		}
-		setListAdapter(new RouteInfoAdapter(RoutingHelper.getInstance(this).getRouteDirections()));
+		setListAdapter(new RouteInfoAdapter(((OsmandApplication)getApplication()).getRoutingHelper().getRouteDirections()));
 	}
 
 	public void onListItemClick(ListView parent, View v, int position, long id) {

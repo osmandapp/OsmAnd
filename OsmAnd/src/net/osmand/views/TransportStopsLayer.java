@@ -5,7 +5,6 @@ import java.util.List;
 
 import net.osmand.OsmandSettings;
 import net.osmand.R;
-import net.osmand.ResourceManager;
 import net.osmand.TransportIndexRepository;
 import net.osmand.activities.search.SearchTransportActivity;
 import net.osmand.data.TransportStop;
@@ -89,7 +88,7 @@ public class TransportStopsLayer implements OsmandMapLayer, ContextMenuLayer.ICo
 		StringBuilder text = new StringBuilder(250);
 		text.append(view.getContext().getString(R.string.transport_Stop)).append(" : ").append(n.getName(OsmandSettings.usingEnglishNames(view.getContext()))); //$NON-NLS-1$
 		text.append("\n").append(view.getContext().getString(R.string.transport_Routes)).append(" : ");  //$NON-NLS-1$ //$NON-NLS-2$
-		List<TransportIndexRepository> reps = ResourceManager.getResourceManager().searchTransportRepositories(n.getLocation().getLatitude(), n.getLocation().getLongitude());
+		List<TransportIndexRepository> reps = view.getApplication().getResourceManager().searchTransportRepositories(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 		if(!reps.isEmpty()){
 			List<String> l;
 			if(!useName){
@@ -135,7 +134,7 @@ public class TransportStopsLayer implements OsmandMapLayer, ContextMenuLayer.ICo
 			double rightLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.right);
 
 			objects.clear();
-			ResourceManager.getResourceManager().searchTransportAsync(topLatitude, leftLongitude, bottomLatitude, rightLongitude, view.getZoom(), objects);
+			view.getApplication().getResourceManager().searchTransportAsync(topLatitude, leftLongitude, bottomLatitude, rightLongitude, view.getZoom(), objects);
 			int r = 3 * getRadiusPoi(view.getZoom()) / 4;
 			for (TransportStop o : objects) {
 				int x = view.getMapXForPoint(o.getLocation().getLongitude());

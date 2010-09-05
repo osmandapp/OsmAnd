@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.activities.OsmandApplication;
 import net.osmand.data.AmenityType;
 import android.content.Context;
 import android.database.Cursor;
@@ -14,23 +15,39 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
 public class PoiFiltersHelper {
-
-	public static PoiFilter getFilterById(Context ctx, String filterId){
+	private final OsmandApplication application;
+	
+	private NameFinderPoiFilter nameFinderPOIFilter;
+	private List<PoiFilter> cacheUserDefinedFilters;
+	private List<PoiFilter> cacheOsmDefinedFilters;
+	
+	public PoiFiltersHelper(OsmandApplication application){
+		this.application = application;
+	}
+	public NameFinderPoiFilter getNameFinderPOIFilter() {
+		if(nameFinderPOIFilter == null){
+			nameFinderPOIFilter = new NameFinderPoiFilter(application);
+		}
+		return nameFinderPOIFilter;
+	}
+	
+	
+	public PoiFilter getFilterById(String filterId){
 		if(filterId == null){
 			return null;
 		}
 		if(filterId.equals(NameFinderPoiFilter.FILTER_ID)){
-			return NameFinderPoiFilter.getInstance();
+			return getNameFinderPOIFilter();
 		}
 		if(filterId.startsWith(PoiFilter.USER_PREFIX)){
-			List<PoiFilter> filters = getUserDefinedPoiFilters(ctx);
+			List<PoiFilter> filters = getUserDefinedPoiFilters();
 			for(PoiFilter f : filters){
 				if(f.getFilterId().equals(filterId)){
 					return f;
 				}
 			}
 		} else if(filterId.startsWith(PoiFilter.STD_PREFIX)){
-			List<PoiFilter> filters = getOsmDefinedPoiFilters(ctx);
+			List<PoiFilter> filters = getOsmDefinedPoiFilters();
 			for(PoiFilter f : filters){
 				if(f.getFilterId().equals(filterId)){
 					return f;
@@ -40,7 +57,7 @@ public class PoiFiltersHelper {
 		return null;
 	}
 	
-	private static List<PoiFilter> getUserDefinedDefaultFilters(){
+	private List<PoiFilter> getUserDefinedDefaultFilters(){
 		List<PoiFilter> filters = new ArrayList<PoiFilter>();
 		Map<AmenityType, List<String>> types = new LinkedHashMap<AmenityType, List<String>>();
 
@@ -53,7 +70,7 @@ public class PoiFiltersHelper {
 		list.add("car"); //$NON-NLS-1$
 		list.add("car_repair"); //$NON-NLS-1$
 		types.put(AmenityType.SHOP, list);
-		filters.add(new PoiFilter(Messages.getMessage("poi_filter_car_aid"), null, types)); //$NON-NLS-1$
+		filters.add(new PoiFilter(Messages.getMessage("poi_filter_car_aid"), null, types, application)); //$NON-NLS-1$
 		types.clear();
 		
 		
@@ -73,13 +90,13 @@ public class PoiFiltersHelper {
 		list.add("waste_basket"); //$NON-NLS-1$
 		list.add("waste_disposal"); //$NON-NLS-1$
 		types.put(AmenityType.OTHER, list);
-		filters.add(new PoiFilter(Messages.getMessage("poi_filter_for_tourists"), null, types)); //$NON-NLS-1$
+		filters.add(new PoiFilter(Messages.getMessage("poi_filter_for_tourists"), null, types, application)); //$NON-NLS-1$
 		types.clear();
 		
 		list = new ArrayList<String>();
 		list.add("fuel"); //$NON-NLS-1$
 		types.put(AmenityType.TRANSPORTATION, list);
-		filters.add(new PoiFilter(Messages.getMessage("poi_filter_fuel"), null, types)); //$NON-NLS-1$
+		filters.add(new PoiFilter(Messages.getMessage("poi_filter_fuel"), null, types, application)); //$NON-NLS-1$
 		types.clear();
 		
 		list = new ArrayList<String>();
@@ -97,21 +114,20 @@ public class PoiFiltersHelper {
 		list.add("supermarket"); //$NON-NLS-1$
 		list.add("variety_store"); //$NON-NLS-1$
 		types.put(AmenityType.SHOP, list);
-		filters.add(new PoiFilter(Messages.getMessage("poi_filter_food_shop"), null, types)); //$NON-NLS-1$
+		filters.add(new PoiFilter(Messages.getMessage("poi_filter_food_shop"), null, types, application)); //$NON-NLS-1$
 		types.clear();
 		
 		return filters;
 	}
 	
-	private static List<PoiFilter> cacheUserDefinedFilters;
-	public static List<PoiFilter> getUserDefinedPoiFilters(Context ctx){
+	public List<PoiFilter> getUserDefinedPoiFilters(){
 		if(cacheUserDefinedFilters == null){
 			////ctx.deleteDatabase(PoiFilterDbHelper.DATABASE_NAME);
 			
 			cacheUserDefinedFilters = new ArrayList<PoiFilter>();
-			PoiFilter filter = new PoiFilter(Messages.getMessage("poi_filter_custom_filter"), PoiFilter.CUSTOM_FILTER_ID, new LinkedHashMap<AmenityType, List<String>>()); //$NON-NLS-1$
+			PoiFilter filter = new PoiFilter(Messages.getMessage("poi_filter_custom_filter"), PoiFilter.CUSTOM_FILTER_ID, new LinkedHashMap<AmenityType, List<String>>(), application); //$NON-NLS-1$
 			cacheUserDefinedFilters.add(filter);
-			PoiFilterDbHelper helper = new PoiFilterDbHelper(ctx);
+			PoiFilterDbHelper helper = openDbHelper();
 			cacheUserDefinedFilters.addAll(helper.getFilters());
 			helper.close();
 		}
@@ -122,52 +138,68 @@ public class PoiFiltersHelper {
 		return PoiFilter.STD_PREFIX + t;
 	}
 	
-	private static List<PoiFilter> cacheOsmDefinedFilters;
-	public static List<PoiFilter> getOsmDefinedPoiFilters(Context ctx){
+	
+	public List<PoiFilter> getOsmDefinedPoiFilters(){
 		if(cacheOsmDefinedFilters == null){
 			cacheOsmDefinedFilters = new ArrayList<PoiFilter>();
-			cacheOsmDefinedFilters.add(new PoiFilter(null));
+			cacheOsmDefinedFilters.add(new PoiFilter(null, application));
 			for(AmenityType t : AmenityType.values()){
-				cacheOsmDefinedFilters.add(new PoiFilter(t));
+				cacheOsmDefinedFilters.add(new PoiFilter(t, application));
 			}
 		}
 		return Collections.unmodifiableList(cacheOsmDefinedFilters);
 	}
 	
-	public static PoiFilterDbHelper getPoiDbHelper(Context ctx){
-		return new PoiFilterDbHelper(ctx);
+	private PoiFilterDbHelper openDbHelper(){
+		return new PoiFilterDbHelper(application.getApplicationContext()); 
 	}
 	
-	
-	public static boolean removePoiFilter(PoiFilterDbHelper helper, PoiFilter filter){
+	public boolean removePoiFilter(PoiFilter filter){
 		if(filter.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)){
+			return false;
+		}
+		PoiFilterDbHelper helper = openDbHelper();
+		if(helper == null){
 			return false;
 		}
 		boolean res = helper.deleteFilter(filter);
 		if(res){
 			cacheUserDefinedFilters.remove(filter);
 		}
+		helper.close();
 		return res;
 	}
 	
-	public static boolean createPoiFilter(PoiFilterDbHelper helper, PoiFilter filter){
+	public boolean createPoiFilter(PoiFilter filter){
+		PoiFilterDbHelper helper = openDbHelper();
+		if(helper == null){
+			return false;
+		}
 		boolean res = helper.addFilter(filter, helper.getWritableDatabase(), false);
 		if(res){
 			cacheUserDefinedFilters.add(filter);
 		}
+		helper.close();
 		return res;
 	}
 	
-	public static boolean editPoiFilter(PoiFilterDbHelper helper, PoiFilter filter){
-		if(filter.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)){
+	
+	
+	public boolean editPoiFilter(PoiFilter filter) {
+		if (filter.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)) {
 			return false;
 		}
-		boolean res = helper.editFilter(filter);
-		return res;
+		PoiFilterDbHelper helper = openDbHelper();
+		if (helper != null) {
+			boolean res = helper.editFilter(filter);
+			helper.close();
+			return res;
+		}
+		return false;
 	}
 	
 	
-	public static class PoiFilterDbHelper extends SQLiteOpenHelper {
+	public class PoiFilterDbHelper extends SQLiteOpenHelper {
 
 		public static final String DATABASE_NAME = "poi_filters"; //$NON-NLS-1$
 	    private static final int DATABASE_VERSION = 1;
@@ -266,7 +298,7 @@ public class PoiFiltersHelper {
 	    			do {
 	    				String filterId = query.getString(0);
 	    				if(map.containsKey(filterId)){
-	    					PoiFilter filter = new PoiFilter(query.getString(1), filterId, map.get(filterId));
+	    					PoiFilter filter = new PoiFilter(query.getString(1), filterId, map.get(filterId), application);
 	    					filter.setFilterByName(query.getString(2));
 	    					list.add(filter);
 	    				}

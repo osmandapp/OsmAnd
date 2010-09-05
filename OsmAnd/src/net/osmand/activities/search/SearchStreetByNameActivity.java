@@ -6,7 +6,7 @@ import java.util.List;
 import net.osmand.OsmandSettings;
 import net.osmand.R;
 import net.osmand.RegionAddressRepository;
-import net.osmand.ResourceManager;
+import net.osmand.activities.OsmandApplication;
 import net.osmand.data.City;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
@@ -19,7 +19,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	private PostCode postcode;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		region = ResourceManager.getResourceManager().getRegionRepository(OsmandSettings.getLastSearchedRegion(this));
+		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(OsmandSettings.getLastSearchedRegion(this));
 		if(region != null){
 			postcode = region.getPostcode(OsmandSettings.getLastSearchedPostcode(this));
 			if (postcode == null) {

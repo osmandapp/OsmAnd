@@ -23,7 +23,6 @@ import net.osmand.Base64;
 import net.osmand.LogUtil;
 import net.osmand.OsmandSettings;
 import net.osmand.R;
-import net.osmand.ResourceManager;
 import net.osmand.Version;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
@@ -85,6 +84,7 @@ public class EditingPOIActivity {
 	private Dialog dlg;
 	private final Context ctx;
 	private final OsmandMapTileView view;
+	private final OsmandApplication app;
 	private AutoCompleteTextView typeText;
 	private EditText nameText;
 	private Button typeButton;
@@ -95,9 +95,12 @@ public class EditingPOIActivity {
 
 	private final static Log log = LogUtil.getLog(EditingPOIActivity.class);
 
+	
 
-	public EditingPOIActivity(final Context ctx, OsmandMapTileView view){
-		this.ctx = ctx;
+
+	public EditingPOIActivity(Context uiContext, OsmandApplication app, OsmandMapTileView view){
+		this.app = app;
+		this.ctx = uiContext;
 		this.view = view;
 	}
 	
@@ -539,7 +542,7 @@ public class EditingPOIActivity {
 	}
 	
 	private void updateNodeInIndexes(String action, Node n){
-		List<AmenityIndexRepository> repos = ResourceManager.getResourceManager().searchAmenityRepositories(n.getLatitude(), n.getLongitude());
+		List<AmenityIndexRepository> repos = app.getResourceManager().searchAmenityRepositories(n.getLatitude(), n.getLongitude());
 		if(DELETE_ACTION.equals(action)){
 			for(AmenityIndexRepository r: repos){
 				r.deleteAmenity(n.getId());

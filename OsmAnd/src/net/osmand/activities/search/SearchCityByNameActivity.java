@@ -6,7 +6,7 @@ import java.util.List;
 import net.osmand.OsmandSettings;
 import net.osmand.R;
 import net.osmand.RegionAddressRepository;
-import net.osmand.ResourceManager;
+import net.osmand.activities.OsmandApplication;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.PostCode;
@@ -21,7 +21,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<MapOb
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		region = ResourceManager.getResourceManager().getRegionRepository(OsmandSettings.getLastSearchedRegion(this));
+		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(OsmandSettings.getLastSearchedRegion(this));
 		location = OsmandSettings.getLastKnownMapLocation(this);
 		super.onCreate(savedInstanceState);
 		((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_city);
