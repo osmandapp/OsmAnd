@@ -50,6 +50,26 @@ public class MapRenderObject {
 		return Float.intBitsToFloat(Algoritms.parseIntFromBytes(data, ind * 8 + 4));
 	}
 	
+	public int getMapOrder(){
+		int order = -1;
+		if((type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POLYGON_TYPE){
+			if(MapRenderingTypes.isPolygonBuilding(type)){
+				order = 34;
+			} else {
+				order = 1;
+			}
+		} else if((type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POLYLINE_TYPE){
+			if(MapRenderingTypes.isHighway(type)){
+				order = 32 - MapRenderingTypes.getHighwayType(type) + 1;
+			} else {
+				order = 2;
+			}
+		} else {
+			order = 64;
+		}
+		return order;
+	}
+	
 
 	public boolean isPolygon(){
 		return (type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POLYGON_TYPE;

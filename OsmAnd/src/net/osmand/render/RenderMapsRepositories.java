@@ -23,17 +23,23 @@ public class RenderMapsRepositories {
 	
 	private final static Log log = LogUtil.getLog(RenderMapsRepositories.class);
 	private Connection conn;
+	private PreparedStatement pStatement;
+	private OsmandRenderer renderer = new OsmandRenderer();
+	
 	private double cTopLatitude;
 	private double cBottomLatitude;
 	private double cLeftLongitude;
 	private double cRightLongitude;
-	
 	private int cZoom;
+	private float cRotate;
+	
+	// cached objects in order to rotate without 
 	private List<MapRenderObject> cObjects = new LinkedList<MapRenderObject>();
 	private RectF cachedWaysLoc = new RectF();
-	private PreparedStatement pStatement;
+	private Bitmap bmp;
 	
-	private OsmandRenderer renderer = new OsmandRenderer();
+	
+	
 
 
 	public boolean initializeNewResource(final IProgress progress, File file) {
@@ -80,9 +86,6 @@ public class RenderMapsRepositories {
 		return true;
 	}
 	
-	public List<MapRenderObject> getCache() {
-		return cObjects;
-	}
 	
 	// if cache was changed different instance will be returned
 	public RectF getCachedWaysLoc() {
@@ -122,7 +125,7 @@ public class RenderMapsRepositories {
 												" WHERE ? <  maxLat AND ? > minLat AND maxLon > ? AND minLon  < ?)"; //$NON-NLS-1$
 	
 	
-	public void loadMap(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom) {
+	public synchronized void loadMap(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom) {
 		cBottomLatitude = bottomLatitude - (topLatitude - bottomLatitude) / 2;
 		cTopLatitude = topLatitude + (topLatitude - bottomLatitude) / 2; 
 		cLeftLongitude = leftLongitude - (rightLongitude - leftLongitude);
@@ -159,8 +162,6 @@ public class RenderMapsRepositories {
 				}
 
 				cObjects = local;
-				// create new instance to distinguish that cache was changed
-				cachedWaysLoc = new RectF((float)cLeftLongitude, (float)cTopLatitude, (float)cRightLongitude, (float)cBottomLatitude);
 				log.info(String.format("Search has been done in %s ms. %s results were found.", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
 			} finally {
 				result.close();
@@ -168,17 +169,29 @@ public class RenderMapsRepositories {
 		} catch (java.sql.SQLException e) {
 			log.debug("Search failed", e); //$NON-NLS-1$
 		}
-		renderer.generateNewBitmap(cachedWaysLoc, cObjects, cZoom, 0);
+		// create new instance to distinguish that cache was changed
+		RectF newLoc = new RectF((float)cLeftLongitude, (float)cTopLatitude, (float)cRightLongitude, (float)cBottomLatitude);
+		Bitmap bmp = renderer.generateNewBitmap(newLoc, cObjects, cZoom, 0);
+		Bitmap oldBmp = this.bmp;
+		this.bmp = bmp;
+		cachedWaysLoc = newLoc;
+		if(oldBmp != null){
+			oldBmp.recycle();
+		}
+		
 	}
 	
 	public Bitmap getBitmap() {
-		return renderer.getBitmap();
+		return bmp;
 	}
 	
 	
-	public void clearCache() {
+	public synchronized void clearCache() {
 		cObjects.clear();
-		renderer.clearBitmap();
+		if(bmp != null){
+			bmp.recycle();
+			bmp = null;
+		}
 	}
 
 }

@@ -30,6 +30,7 @@ public class ToDoConstants {
 	//  9. Render map on bitmap in another thread
 	//  10. Sort objects before render (according layering)
 	//  11!! Investigate ResourceManager close methods and clear cache when Map switches !!!
+	//  12! When switch to map check that indexes were loaded !!
 	
 	//  11. Move JUnidecode on client save space for some indexes
 	//  12. Fix : find proper location for streets ! centralize them (when create index)?

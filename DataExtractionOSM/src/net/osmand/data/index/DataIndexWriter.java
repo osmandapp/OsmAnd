@@ -37,6 +37,8 @@ import net.osmand.data.index.IndexConstants.IndexTransportRoute;
 import net.osmand.data.index.IndexConstants.IndexTransportRouteStop;
 import net.osmand.data.index.IndexConstants.IndexTransportStop;
 import net.osmand.osm.Entity;
+import net.osmand.osm.LatLon;
+import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.Relation;
 import net.osmand.osm.Way;
@@ -406,7 +408,7 @@ public class DataIndexWriter {
 	}
 	
 	public static void insertMapRenderObjectIndex(Map<PreparedStatement, Integer> statements, 
-			PreparedStatement mapStat, PreparedStatement mapWayLocationsStat, Entity e, String name, int type,  int batchSize) throws SQLException {
+			PreparedStatement mapStat, PreparedStatement mapWayLocationsStat, Entity e, String name, int type, boolean writeAsPoint, int batchSize) throws SQLException {
 		assert IndexMapRenderObject.values().length == 4;
 		if(e instanceof Relation){
 			throw new IllegalArgumentException();
@@ -416,7 +418,17 @@ public class DataIndexWriter {
 		double maxLat = -180;
 		double minLon = 360;
 		double maxLon = -360;
-		Collection<Node> nodes = e instanceof Way ? ((Way) e).getNodes() : Collections.singleton((Node) e);
+		Collection<Node> nodes; 
+		if (e instanceof Way) {
+			if (writeAsPoint) {
+				LatLon center = MapUtils.getCenter(((Way) e));
+				nodes = Collections.singleton(new Node(center.getLatitude(), center.getLongitude(), -1));
+			} else {
+				nodes = ((Way) e).getNodes();
+			}
+		} else {
+			nodes = Collections.singleton((Node) e);
+		}
 		byte[] bytes = new byte[nodes.size() * 8];
 		// generate unique id
 		long id = e.getId() << 1;

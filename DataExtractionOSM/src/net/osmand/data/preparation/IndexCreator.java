@@ -936,8 +936,9 @@ public class IndexCreator {
 				loadEntityData(e, true);
 				int type = MapRenderingTypes.encodeEntityWithType(e);
 				if(type > 0){
+					boolean point = (type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POINT_TYPE;
 					DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapWaysStat, mapWayLocsStat, e, 
-							MapRenderingTypes.getEntityName(e), type, BATCH_SIZE);
+							MapRenderingTypes.getEntityName(e), type, point, BATCH_SIZE);
 				}
 			}
 
