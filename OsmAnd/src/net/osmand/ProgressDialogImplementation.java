@@ -19,31 +19,51 @@ public class ProgressDialogImplementation implements IProgress {
 	private Handler mViewUpdateHandler;
 	private Thread run;
 	private Context context;
+	private ProgressDialog dialog = null;
+	private final boolean cancelable;
+	
 
-	public ProgressDialogImplementation(final ProgressDialog dlg, boolean cancelable){
-		context = dlg.getContext();
-		if(cancelable){
-			dlg.setOnCancelListener(new OnCancelListener(){
-				@Override
-				public void onCancel(DialogInterface dialog) {
-					if(run != null){
-						run.stop();
-					}
-					
-				}
-			});
-		}
+	public ProgressDialogImplementation(Context ctx, ProgressDialog dlg, boolean cancelable){
+		this.cancelable = cancelable;
+		context = ctx;
+		setDialog(dlg);
+		
 		mViewUpdateHandler = new Handler(){
 			@Override
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
-				dlg.setMessage(message);
+				if(dialog != null){
+					dialog.setMessage(message);
+				}
 			}
 		};	
 	}
+		
+	public ProgressDialogImplementation(ProgressDialog dlg, boolean cancelable){
+		this(dlg.getContext(), dlg, cancelable);
+	}
+	
 	
 	public ProgressDialogImplementation(final ProgressDialog dlg){
 		this(dlg, false);
+	}
+	
+	public void setDialog(ProgressDialog dlg){
+		if(dlg != null){
+			if(cancelable){
+				dlg.setOnCancelListener(new OnCancelListener(){
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						if(run != null){
+							run.stop();
+						}
+						
+					}
+				});
+			}
+			this.dialog = dlg;
+		}
+		
 	}
 	
 	public void setRunnable(String threadName, Runnable run){

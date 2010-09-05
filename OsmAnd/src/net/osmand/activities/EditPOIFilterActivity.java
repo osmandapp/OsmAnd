@@ -12,7 +12,6 @@ import net.osmand.OsmandSettings;
 import net.osmand.PoiFilter;
 import net.osmand.PoiFiltersHelper;
 import net.osmand.R;
-import net.osmand.PoiFiltersHelper.PoiFilterDbHelper;
 import net.osmand.activities.search.SearchPOIActivity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
@@ -46,7 +45,7 @@ public class EditPOIFilterActivity extends ListActivity {
 	public static final String AMENITY_FILTER = "net.osmand.amenity_filter"; //$NON-NLS-1$
 	private Button filterLevel;
 	private PoiFilter filter;
-	private PoiFilterDbHelper helper;
+	private PoiFiltersHelper helper;
 	public static final String SEARCH_LAT = "SEARCH_LAT"; //$NON-NLS-1$
 	public static final String SEARCH_LON = "SEARCH_LON"; //$NON-NLS-1$
 	
@@ -99,22 +98,13 @@ public class EditPOIFilterActivity extends ListActivity {
 
 		Bundle bundle = this.getIntent().getExtras();
 		String filterId = bundle.getString(AMENITY_FILTER);
-		filter = PoiFiltersHelper.getFilterById(this, filterId);
+		
+		helper = ((OsmandApplication)getApplication()).getPoiFilters();
+		filter = helper.getFilterById(filterId);
 
 		setListAdapter(new AmenityAdapter(AmenityType.getCategories()));
 	}
-	
-	@Override
-	protected void onResume() {
-		super.onResume();
-		helper = PoiFiltersHelper.getPoiDbHelper(this);
-	}
 
-	@Override
-	protected void onPause() {
-		super.onPause();
-		helper.close();
-	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
@@ -132,7 +122,7 @@ public class EditPOIFilterActivity extends ListActivity {
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					if (PoiFiltersHelper.removePoiFilter(helper, filter)) {
+					if (helper.removePoiFilter(filter)) {
 						Toast.makeText(
 								EditPOIFilterActivity.this,
 								MessageFormat.format(EditPOIFilterActivity.this.getText(R.string.edit_filter_delete_message).toString(),
@@ -152,8 +142,8 @@ public class EditPOIFilterActivity extends ListActivity {
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					PoiFilter nFilter = new PoiFilter(editText.getText().toString(), null, filter.getAcceptedTypes());
-					if (PoiFiltersHelper.createPoiFilter(helper, nFilter)) {
+					PoiFilter nFilter = new PoiFilter(editText.getText().toString(), null, filter.getAcceptedTypes(), (OsmandApplication) getApplication());
+					if (helper.createPoiFilter(nFilter)) {
 						Toast.makeText(
 								EditPOIFilterActivity.this,
 								MessageFormat.format(EditPOIFilterActivity.this.getText(R.string.edit_filter_create_message).toString(),
@@ -214,7 +204,7 @@ public class EditPOIFilterActivity extends ListActivity {
 				} else {
 					filter.selectSubTypesToAccept(amenity, accepted);
 				}
-				PoiFiltersHelper.editPoiFilter(helper, filter);
+				helper.editPoiFilter(filter);
 				((AmenityAdapter) EditPOIFilterActivity.this.getListAdapter()).notifyDataSetInvalidated();
 			}
 		});
@@ -223,7 +213,7 @@ public class EditPOIFilterActivity extends ListActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				filter.selectSubTypesToAccept(amenity, null);
-				PoiFiltersHelper.editPoiFilter(helper, filter);
+				helper.editPoiFilter(filter);
 				((AmenityAdapter) EditPOIFilterActivity.this.getListAdapter()).notifyDataSetInvalidated();
 			}
 		});
@@ -288,7 +278,7 @@ public class EditPOIFilterActivity extends ListActivity {
 						showDialog(model);
 					} else {
 						filter.setTypeToAccept(model, false);
-						PoiFiltersHelper.editPoiFilter(helper, filter);
+						helper.editPoiFilter(filter);
 					}
 				}
 			});

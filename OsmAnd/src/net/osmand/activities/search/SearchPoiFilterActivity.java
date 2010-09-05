@@ -6,12 +6,12 @@ package net.osmand.activities.search;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.NameFinderPoiFilter;
 import net.osmand.OsmandSettings;
 import net.osmand.PoiFilter;
 import net.osmand.PoiFiltersHelper;
 import net.osmand.R;
 import net.osmand.activities.EditPOIFilterActivity;
+import net.osmand.activities.OsmandApplication;
 import net.osmand.osm.LatLon;
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -78,9 +78,10 @@ public class SearchPoiFilterActivity extends ListActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		List<PoiFilter> filters = new ArrayList<PoiFilter>(PoiFiltersHelper.getUserDefinedPoiFilters(this)) ;
-		filters.addAll(PoiFiltersHelper.getOsmDefinedPoiFilters(this));
-		filters.add(NameFinderPoiFilter.getInstance());
+		PoiFiltersHelper poiFilters = ((OsmandApplication)getApplication()).getPoiFilters();
+		List<PoiFilter> filters = new ArrayList<PoiFilter>(poiFilters.getUserDefinedPoiFilters()) ;
+		filters.addAll(poiFilters.getOsmDefinedPoiFilters());
+		filters.add(poiFilters.getNameFinderPOIFilter());
 		setListAdapter(new AmenityAdapter(filters));
 	}
 

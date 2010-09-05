@@ -1,6 +1,7 @@
 package net.osmand;
 
 
+import net.osmand.activities.OsmandApplication;
 import net.osmand.activities.RoutingHelper;
 import net.osmand.activities.SavingTrackHelper;
 import android.app.Notification;
@@ -75,7 +76,7 @@ public class NavigationService extends Service implements LocationListener {
 		serviceError = OsmandSettings.getServiceOffWaitInterval(this);
 		savingTrackHelper = new SavingTrackHelper(this);
 		delayedAction(true, 500);
-		routingHelper = RoutingHelper.getInstance(this);
+		routingHelper = ((OsmandApplication)getApplication()).getRoutingHelper();
 		OsmandSettings.setServiceOffEnabled(this, true);
 		
 		registerReceiver(new BroadcastReceiver(){

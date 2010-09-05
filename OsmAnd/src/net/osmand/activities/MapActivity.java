@@ -178,6 +178,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 //	                                WindowManager.LayoutParams.FLAG_FULLSCREEN); 
 		
 		setContentView(R.layout.main);
+		((OsmandApplication)getApplication()).checkApplicationIsBeingInitialized(this);
 		
 		mapView = (OsmandMapTileView) findViewById(R.id.MapView);
 		mapView.setTrackBallDelegate(new OsmandMapTileView.OnTrackBallListener(){
@@ -192,7 +193,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			@Override
 			public void tileDownloaded(DownloadRequest request) {
 				if(request != null && !request.error && request.fileToSave != null){
-					ResourceManager mgr = ResourceManager.getResourceManager();
+					ResourceManager mgr = ((OsmandApplication)getApplication()).getResourceManager();
 					mgr.tileDownloaded(request);
 				}
 				mapView.tileDownloaded(request);
@@ -201,7 +202,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		});
 		
 		mapView.setMapLocationListener(this);
-		routingHelper = RoutingHelper.getInstance(this);
+		routingHelper = ((OsmandApplication) getApplication()).getRoutingHelper();
 		
 		// 1. route layer
 		routeLayer = new RouteLayer(routingHelper);
@@ -646,6 +647,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		sensorMgr.unregisterListener(this);
 		sensorRegistered = false;
 		currentLocationProvider = null;
+		routingHelper.setUiActivity(null);
 		
 		OsmandSettings.setLastKnownMapLocation(this, (float) mapView.getLatitude(), (float) mapView.getLongitude());
 		OsmandSettings.setLastKnownMapZoom(this, mapView.getZoom());
@@ -709,7 +711,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		if(mapView.getMap() instanceof SQLiteTileSource){
 			((SQLiteTileSource)mapView.getMap()).closeDB();
 		}
-		ResourceManager.getResourceManager().setMapSource(newSource);
+		((OsmandApplication)getApplication()).getResourceManager().setMapSource(newSource);
 		mapView.setMap(newSource);
 	}
 	
@@ -717,15 +719,13 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	protected void onResume() {
 		super.onResume();
 		// TODO not commit it 
-		rendererLayer.setVisible(true);
+//		rendererLayer.setVisible(true);
 		
 		if(OsmandSettings.getMapOrientation(this) != getRequestedOrientation()){
 			setRequestedOrientation(OsmandSettings.getMapOrientation(this));
 		}
 		currentScreenOrientation = getWindow().getWindowManager().getDefaultDisplay().getOrientation();
 		
-		// routing helper with current activity
-		routingHelper = RoutingHelper.getInstance(this);
 		ITileSource source = OsmandSettings.getMapTileSource(this);
 		if(!Algoritms.objectEquals(mapView.getMap(), source)){
 			updateMapSource(source);
@@ -734,10 +734,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		updateApplicationModeSettings();
 
 		favoritesLayer.reloadFavorites(this);
-		poiMapLayer.setFilter(OsmandSettings.getPoiFilterForMap(this));
+		poiMapLayer.setFilter(OsmandSettings.getPoiFilterForMap(this, (OsmandApplication) getApplication()));
 		backToLocation.setVisibility(View.INVISIBLE);
 		
-		
+		routingHelper.setUiActivity(this);
 
 		
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -821,12 +821,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	}
 	
 	
-	@Override
-	public void onLowMemory() {
-		super.onLowMemory();
-		ResourceManager.getResourceManager().onLowMemory();
-	}
-
 
 	@Override
 	public void locationChanged(double newLatitude, double newLongitude, Object source) {
@@ -1105,7 +1099,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				int height = (int) (FloatMath.ceil(tilesRect.bottom) - top);
 				for (int i = 0; i <width; i++) {
 					for (int j = 0; j< height; j++) {
-						ResourceManager.getResourceManager().clearTileImageForMap(null, mapView.getMap(), i + left, j + top, zoom);	
+						((OsmandApplication)getApplication()).getResourceManager().
+								clearTileImageForMap(null, mapView.getMap(), i + left, j + top, zoom);	
 					}
 				}
 				
@@ -1137,7 +1132,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     		Toast.makeText(this, getString(R.string.update_poi_is_not_available_for_zoom), Toast.LENGTH_SHORT).show();
     		return;
     	}
-    	final List<AmenityIndexRepository> repos = ResourceManager.getResourceManager().searchAmenityRepositories(latitude, longitude);
+    	final List<AmenityIndexRepository> repos = ((OsmandApplication) getApplication()).
+    								getResourceManager().searchAmenityRepositories(latitude, longitude);
     	if(repos.isEmpty()){
     		Toast.makeText(this, getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_SHORT).show();
     		return;
@@ -1250,7 +1246,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		final List<PoiFilter> userDefined = new ArrayList<PoiFilter>();
 		List<String> list = new ArrayList<String>();
 		list.add(getString(R.string.any_poi));
-		for(PoiFilter f : PoiFiltersHelper.getUserDefinedPoiFilters(this)){
+		
+		final PoiFiltersHelper poiFilters = ((OsmandApplication)getApplication()).getPoiFilters();
+		for(PoiFilter f : poiFilters.getUserDefinedPoiFilters()){
 			if (!f.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)) {
 				userDefined.add(f);
 				list.add(f.getName());
@@ -1273,7 +1271,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					filterId = PoiFiltersHelper.getOsmDefinedFilterId(AmenityType.values()[which - userDefined.size() - 1]);
 				}
 				OsmandSettings.setPoiFilterForMap(MapActivity.this, filterId);
-				poiMapLayer.setFilter(PoiFiltersHelper.getFilterById(MapActivity.this, filterId));
+				poiMapLayer.setFilter(poiFilters.getFilterById(filterId));
 				mapView.refreshMap();
 			}
 			
@@ -1342,7 +1340,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				} else if(which == 3){
 					addFavouritePoint(latitude, longitude);
 				} else if(which == 4){
-					EditingPOIActivity activity = new EditingPOIActivity(MapActivity.this, mapView);
+					EditingPOIActivity activity = new EditingPOIActivity(MapActivity.this, (OsmandApplication) getApplication(), mapView);
 					activity.showCreateDialog(latitude, longitude);
 				} else if(which == 5){
 					osmBugsLayer.openBug(MapActivity.this, getLayoutInflater(), mapView, latitude, longitude);

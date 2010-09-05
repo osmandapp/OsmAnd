@@ -5,7 +5,6 @@ import net.osmand.activities.RoutingHelper.RouteDirectionInfo;
 import net.osmand.activities.RoutingHelper.TurnType;
 import net.osmand.voice.CommandPlayer;
 import net.osmand.voice.CommandPlayer.CommandBuilder;
-import android.content.Context;
 
 
 public class VoiceRouter {
@@ -26,13 +25,14 @@ public class VoiceRouter {
 	private int currentStatus = STATUS_UNKNOWN;
 
 
-	public VoiceRouter(RoutingHelper router){
+	public VoiceRouter(RoutingHelper router, CommandPlayer player){
 		this.router = router;
+		this.player = player;
 		updateAppMode();
 	}
 	
-	protected void init(Context ctx){
-		player = CommandPlayer.getInstance(ctx);
+	public void setPlayer(CommandPlayer player) {
+		this.player = player;
 	}
 	
 	public void setMute(boolean mute) {

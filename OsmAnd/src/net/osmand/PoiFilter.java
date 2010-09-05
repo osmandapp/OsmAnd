@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.activities.OsmandApplication;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.index.IndexConstants.IndexPoiTable;
@@ -28,10 +29,12 @@ public class PoiFilter {
 	private final static int initialZoom = 13;
 	private final static int maxInitialCount = 200;
 	private int zoom = initialZoom;
+	private final OsmandApplication application;
 	
 	
 	// constructor for standard filters
-	public PoiFilter(AmenityType type){
+	public PoiFilter(AmenityType type, OsmandApplication application){
+		this.application = application;
 		isStandardFilter = true;
 		filterId = STD_PREFIX + type;
 		name = type == null ? Messages.getMessage("poi_filter_closest_poi") : AmenityType.toPublicString(type); //$NON-NLS-1$
@@ -43,7 +46,8 @@ public class PoiFilter {
 	}
 	
 	// constructor for standard filters
-	public PoiFilter(String name, String filterId, Map<AmenityType, List<String>> acceptedTypes){
+	public PoiFilter(String name, String filterId, Map<AmenityType, List<String>> acceptedTypes, OsmandApplication app){
+		application = app;
 		isStandardFilter = false;
 		if(filterId == null){
 			filterId = USER_PREFIX + name.replace(' ', '_').toLowerCase();
@@ -70,7 +74,7 @@ public class PoiFilter {
 	
 	public List<Amenity> searchFurther(double latitude, double longitude){
 		zoom --;
-		List<Amenity> amenityList = ResourceManager.getResourceManager().searchAmenities(this, latitude, longitude, zoom, -1);
+		List<Amenity> amenityList = application.getResourceManager().searchAmenities(this, latitude, longitude, zoom, -1);
 		MapUtils.sortListOfMapObject(amenityList, latitude, longitude);
 		
 		return amenityList;
@@ -99,7 +103,7 @@ public class PoiFilter {
 	
 	public List<Amenity> initializeNewSearch(double lat, double lon, int firstTimeLimit){
 		zoom = getInitialZoom();
-		List<Amenity> amenityList = ResourceManager.getResourceManager().searchAmenities(this, lat, lon, zoom, maxInitialCount);
+		List<Amenity> amenityList = application.getResourceManager().searchAmenities(this, lat, lon, zoom, maxInitialCount);
 		MapUtils.sortListOfMapObject(amenityList, lat, lon);
 		while (amenityList.size() > firstTimeLimit) {
 			amenityList.remove(amenityList.size() - 1);
@@ -113,7 +117,7 @@ public class PoiFilter {
 		if(zoom == getInitialZoom()){
 			limit = maxInitialCount;
 		}
-		List<Amenity> amenityList = ResourceManager.getResourceManager().searchAmenities(this, lat, lon, zoom, limit);
+		List<Amenity> amenityList = application.getResourceManager().searchAmenities(this, lat, lon, zoom, limit);
 		MapUtils.sortListOfMapObject(amenityList, lat, lon);
 		return amenityList;
 	}

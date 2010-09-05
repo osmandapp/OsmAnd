@@ -7,6 +7,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.activities.OsmandApplication;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.MapUtils;
@@ -24,19 +25,11 @@ public class NameFinderPoiFilter extends PoiFilter {
 	
 	List<Amenity> searchedAmenities = new ArrayList<Amenity>();
 	
-	private static NameFinderPoiFilter INSTANCE;
 
 	private String query = ""; //$NON-NLS-1$
 	
-	public static NameFinderPoiFilter getInstance(){
-		if(INSTANCE == null){
-			INSTANCE = new NameFinderPoiFilter();
-		}
-		return INSTANCE;
-	}
-	
-	public NameFinderPoiFilter() {
-		super(null);
+	public NameFinderPoiFilter(OsmandApplication application) {
+		super(null, application);
 		this.name = Messages.getMessage("poi_filter_namefinder"); //$NON-NLS-1$
 		this.filterId = FILTER_ID;
 	}

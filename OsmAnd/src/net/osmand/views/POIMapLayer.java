@@ -101,7 +101,7 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 		pointAltUI.setColor(Color.rgb(255, 128, 0));
 		pointAltUI.setAlpha(200);
 		pointAltUI.setAntiAlias(true);
-		resourceManager = ResourceManager.getResourceManager();
+		resourceManager = view.getApplication().getResourceManager();
 		pixRect.set(0, 0, view.getWidth(), view.getHeight());
 	}
 	
@@ -161,7 +161,7 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 		final Amenity a = (Amenity) o;
 		actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_modify));
 		actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_delete));
-		final EditingPOIActivity edit = new EditingPOIActivity(view.getContext(), view);
+		final EditingPOIActivity edit = new EditingPOIActivity(view.getContext(), view.getApplication(), view);
 		return new DialogInterface.OnClickListener(){
 
 			@Override

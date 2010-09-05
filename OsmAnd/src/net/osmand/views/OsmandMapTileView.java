@@ -9,6 +9,7 @@ import java.util.Map;
 import net.osmand.LogUtil;
 import net.osmand.OsmandSettings;
 import net.osmand.ResourceManager;
+import net.osmand.activities.OsmandApplication;
 import net.osmand.data.preparation.MapTileDownloader;
 import net.osmand.data.preparation.MapTileDownloader.DownloadRequest;
 import net.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
@@ -115,16 +116,20 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	Paint paintBitmap;
 
 	private DisplayMetrics dm;
+
+	private final OsmandApplication application;
 	
 	
 	public OsmandMapTileView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		initView();
+		application = (OsmandApplication) context.getApplicationContext();
 	}
 	
 	public OsmandMapTileView(Context context) {
 		super(context);
 		initView();
+		application = (OsmandApplication) context.getApplicationContext();
 	}
 	
 	/////////////////////////////// INITIALIZING UI PART ///////////////////////////////////
@@ -205,6 +210,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	public List<OsmandMapLayer> getLayers() {
 		return layers;
+	}
+	
+	public OsmandApplication getApplication() {
+		return application;
 	}
 
 	
@@ -444,7 +453,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				canvas.rotate(rotate, w , h);
 				try {
 					if (showMapTiles) {
-						ResourceManager mgr = ResourceManager.getResourceManager();
+						ResourceManager mgr = getApplication().getResourceManager();
 						boolean useInternet = OsmandSettings.isUsingInternetToDownloadTiles(getContext())
 								&& map.couldBeDownloadedFromInternet();
 						int maxLevel = Math.min(OsmandSettings.getMaximumLevelToDownloadTile(getContext()), map.getMaximumZoomSupported());
@@ -578,7 +587,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				
 				try {
 					if (showMapTiles) {
-						ResourceManager mgr = ResourceManager.getResourceManager();
+						ResourceManager mgr = getApplication().getResourceManager();
 						Bitmap bmp = mgr.getTileImageForMapSync(null, map, request.xTile, request.yTile, request.zoom, false);
 						float x = (request.xTile - tileX) * getTileSize() + w;
 						float y = (request.yTile - tileY) * getTileSize() + h;

@@ -16,6 +16,7 @@ import net.osmand.osm.MapRenderObject;
 
 import org.apache.commons.logging.Log;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
 
@@ -179,6 +180,10 @@ public class RenderMapsRepositories {
 			oldBmp.recycle();
 		}
 		
+	}
+	
+	public void setResources(Resources resources){
+		renderer.setResources(resources);
 	}
 	
 	public Bitmap getBitmap() {
