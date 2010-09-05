@@ -1,6 +1,8 @@
 package net.osmand.osm;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -164,7 +166,7 @@ public class MapRenderingTypes {
 			return false;
 		}
 		type = type >> TYPE_MASK_LEN;
-		return  (type & OBJ_TYPE_MASK) != HIGHWAY;
+		return  (type & OBJ_TYPE_MASK) == HIGHWAY;
 	}
 	
 	public static int getHighwayType(int type){
@@ -274,12 +276,20 @@ public class MapRenderingTypes {
 		}
 		int pointType = 0;
 		int polylineType = 0;
+		Collection<String> tagKeySet = e.getTagKeySet();
+		if(tagKeySet.size() > 1 && tagKeySet.contains("building")){ //$NON-NLS-1$
+			// first of all process building tag (in order to distinguish area and buildings)
+			LinkedHashSet<String> set = new LinkedHashSet<String>();
+			set.add("building"); //$NON-NLS-1$
+			set.addAll(tagKeySet);
+			tagKeySet = set;
+		}
 		// 2 iterations first for exact tag=value match, second for any tag match
 		for (int i = 0; i < 2; i++) {
 			if (i == 1 && type != 0) {
 				break;
 			}
-			for (String tag : e.getTagKeySet()) {
+			for (String tag : tagKeySet) {
 				if (types.containsKey(tag)) {
 					MapRulType rType = types.get(tag);
 					String val = i == 1 ? null : e.getTag(tag);
@@ -299,11 +309,7 @@ public class MapRenderingTypes {
 						}
 					} else if (polygon && type == 0	&& (pr == POLYGON_WITH_CENTER_TYPE || pr == POLYGON_TYPE)) {
 						type |= POLYGON_TYPE;
-						if (pr == DEFAULT_POLYGON_BUILDING) {
-							type |= ((SUBTYPE_BUILDING << 5) | MAN_MADE) << 3;
-						} else {
-							type |= typeVal & MASK_13;
-						}
+						type |= typeVal & MASK_13;
 						if (pr == POLYGON_WITH_CENTER_TYPE) {
 							pointType = POINT_TYPE | typeVal;
 						}
@@ -359,7 +365,7 @@ public class MapRenderingTypes {
 		} else {
 			polygonRule = renderType;
 		}
-		registerRules(tag, val, renderType, subtype, pointRule, polylineRule, polygonRule);
+		registerRules(tag, val, type, subtype, pointRule, polylineRule, polygonRule);
 	}
 	
 	private static void register(String tag, String val, int type, int subtype, int renderType, int renderType2){
@@ -369,7 +375,7 @@ public class MapRenderingTypes {
 		if(renderType == POINT_TYPE || renderType2 == POINT_TYPE){
 			int second = renderType == POINT_TYPE ? renderType2 : renderType;
 			pointRule = POINT_TYPE;
-			if(second == POLYGON_TYPE){
+			if(second == POLYLINE_TYPE){
 				polygonRule = POINT_TYPE;
 				polylineRule = second;
 			} else {
@@ -377,7 +383,7 @@ public class MapRenderingTypes {
 				polylineRule = POINT_TYPE;
 			}
 		} else {
-			if(renderType == POLYGON_TYPE){
+			if(renderType == POLYLINE_TYPE){
 				polylineRule = renderType;
 				polygonRule = renderType2;
 			} else {
@@ -385,7 +391,7 @@ public class MapRenderingTypes {
 				polygonRule = renderType;
 			}
 		}
-		registerRules(tag, val, renderType, subtype, pointRule, polylineRule, polygonRule);
+		registerRules(tag, val, type, subtype, pointRule, polylineRule, polygonRule);
 	}
 	
 	private static void registerRules(String tag, String val, int type, int subtype, int pointRule, int polylineRule, int polygonRule){
@@ -498,10 +504,12 @@ public class MapRenderingTypes {
 	
 	// 8. man_made
 		register("building", "yes", MAN_MADE, SUBTYPE_BUILDING, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("building", null, MAN_MADE, SUBTYPE_BUILDING, POLYGON_TYPE); //$NON-NLS-1$ 
 		register("man_made", "wastewater_plant", MAN_MADE, 2, POINT_TYPE, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		registerAsBuilding("man_made", "water_works", MAN_MADE, 3); //$NON-NLS-1$ //$NON-NLS-2$
 		registerAsBuilding("man_made", "works", MAN_MADE, 4); //$NON-NLS-1$ //$NON-NLS-2$
 		register("building", "garages", MAN_MADE, SUBTYPE_GARAGES, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		
 		
 		register("man_made", "cutline", MAN_MADE, 7, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("man_made", "groyne", MAN_MADE, 8, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$

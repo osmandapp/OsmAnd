@@ -16,16 +16,17 @@ import net.osmand.osm.MapRenderObject;
 
 import org.apache.commons.logging.Log;
 
-import android.content.res.Resources;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
 
 public class RenderMapsRepositories {
 	
 	private final static Log log = LogUtil.getLog(RenderMapsRepositories.class);
+	private final Context context;
 	private Connection conn;
 	private PreparedStatement pStatement;
-	private OsmandRenderer renderer = new OsmandRenderer();
+	private OsmandRenderer renderer;
 	
 	private double cTopLatitude;
 	private double cBottomLatitude;
@@ -41,8 +42,15 @@ public class RenderMapsRepositories {
 	
 	
 	
-
-
+	public RenderMapsRepositories(Context context){
+		this.context = context;
+		this.renderer = new OsmandRenderer(context);
+	}
+	
+	public Context getContext() {
+		return context;
+	}
+	
 	public boolean initializeNewResource(final IProgress progress, File file) {
 		long start = System.currentTimeMillis();
 		try {
@@ -181,10 +189,7 @@ public class RenderMapsRepositories {
 		}
 		
 	}
-	
-	public void setResources(Resources resources){
-		renderer.setResources(resources);
-	}
+
 	
 	public Bitmap getBitmap() {
 		return bmp;
