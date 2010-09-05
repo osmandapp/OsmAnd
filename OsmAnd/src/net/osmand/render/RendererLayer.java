@@ -52,7 +52,6 @@ public class RendererLayer implements OsmandMapLayer {
 			double rightLongitude = MapUtils.getLongitudeFromTile(view.getFloatZoom(), tileRect.right);
 			resourceManager.updateRendererIfNeeded(topLatitude, leftLongitude, bottomLatitude, rightLongitude, view.getZoom());
 			RenderMapsRepositories renderer = resourceManager.getRenderer();
-			renderer.setResources(view.getResources());
 			if (renderer != null && renderer.getBitmap() != null) {
 				RectF newLoc = renderer.getCachedWaysLoc();
 				double leftX1 = MapUtils.getTileNumberX(view.getFloatZoom(), newLoc.left);

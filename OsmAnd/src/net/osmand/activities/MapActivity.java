@@ -719,7 +719,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	protected void onResume() {
 		super.onResume();
 		// TODO not commit it 
-//		rendererLayer.setVisible(true);
+		rendererLayer.setVisible(true);
 		
 		if(OsmandSettings.getMapOrientation(this) != getRequestedOrientation()){
 			setRequestedOrientation(OsmandSettings.getMapOrientation(this));

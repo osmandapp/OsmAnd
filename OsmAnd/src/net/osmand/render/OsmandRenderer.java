@@ -12,7 +12,7 @@ import net.osmand.osm.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import android.content.res.Resources;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -21,6 +21,7 @@ import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathEffect;
+import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Bitmap.Config;
 import android.graphics.Paint.Align;
@@ -35,7 +36,6 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	private Paint paintFill;
 	private Paint paintFillWhite;
 	
-	private Resources resources = null;
 	
 	/// Colors
 	private int clFillScreen = Color.rgb(241, 238, 232);
@@ -52,8 +52,11 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	
 	private PathEffect pedestrianPathEffect = new DashPathEffect(new float[]{2,2}, 1);
 	private PathEffect trackPathEffect = new DashPathEffect(new float[]{5,2}, 1);
+
+	private final Context context;
 	
-	public OsmandRenderer(){
+	public OsmandRenderer(Context context){
+		this.context = context;
 		paintStroke = new Paint();
 		paintStroke.setStyle(Style.STROKE);
 		paintStroke.setStrokeWidth(2);
@@ -81,6 +84,16 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	}
 	
 	
+	
+	@Override
+	public int compare(MapRenderObject object1, MapRenderObject object2) {
+		int o1 = object1.getMapOrder();
+		int o2 = object2.getMapOrder();
+		return o1 < o2 ? -1 : (o1 == o2 ? 0 : 1);
+	}
+	
+	
+	
 	public Bitmap generateNewBitmap(RectF objectLoc, List<MapRenderObject> objects, int zoom, float rotate) {
 		long now = System.currentTimeMillis();
 		Collections.sort(objects, this);
@@ -105,101 +118,244 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	protected void draw(MapRenderObject obj, Canvas canvas, double leftTileX, double topTileY, int zoom, float rotate) {
 		if(obj.isPoint()){
 			drawPoint(obj, canvas, leftTileX, topTileY, zoom, rotate);
-		} else if(obj.isPolyLine() && MapRenderingTypes.isHighway(obj.getType())){
-			drawHighway(obj, canvas, leftTileX, topTileY, zoom, rotate);
-		} else {
-			Paint paint;
-			float xText = 0;
-			float yText = 0;
-			Path path = null;
-			if(obj.isPolygon()){
-				paint = paintFill;
-				// for buildings !
-				if(MapRenderingTypes.isPolygonBuilding(obj.getType())){
-					paint.setColor(Color.rgb(188, 169, 169));
-				} else {
-					paint.setColor(Color.rgb(188, 169, 169));
-//					paint.setColor(Color.GRAY);
-				}
+		} else if(obj.isPolyLine()){
+			if(MapRenderingTypes.isHighway(obj.getType())){
+				drawHighway(obj, canvas, leftTileX, topTileY, zoom, rotate);
 			} else {
-				paint = paintStroke;
-				paint.setStrokeWidth(2);
-				paint.setColor(Color.DKGRAY);
+				
 			}
-			
-			for (int i = 0; i < obj.getPointsLength(); i++) {
-				float x = (float) ((MapUtils.getTileNumberX(zoom, obj.getPointLongitude(i)) - leftTileX) * 256f);
-				float y = (float) ((MapUtils.getTileNumberY(zoom, obj.getPointLatitude(i)) - topTileY) * 256f);
-				xText += x;
-				yText += y;
-				if (path == null) {
-					path = new Path();
-					path.moveTo(x, y);
-				} else {
-					path.lineTo(x, y);
-				}
-			}
-			
-			if (path != null) {
-				xText /= obj.getPointsLength();
-				yText /= obj.getPointsLength();
-				canvas.drawPath(path, paint);
-				String name = obj.getName();
-				if(name != null){
-					
-					boolean accept = true;
-					if(zoom <= 15){
-						accept = name.length() < 4; 
-					} else if(zoom < 17){
-						accept = name.length() < 6;
-					} else if(zoom < 18){
-						accept = name.length() < 8;
-					}
-					if(accept){
-						canvas.drawText(name, xText, yText, paintText);
-					}
+		} else {
+			PointF center = drawPolygon(obj, canvas, leftTileX, topTileY, zoom);
+			if(center != null){
+				int typeT = MapRenderingTypes.getPolygonPointType(obj.getType());
+				int subT = MapRenderingTypes.getPolygonPointSubType(obj.getType());
+				if(typeT > 0 && subT > 0){
+					drawPointBitmap(canvas, zoom, center.x, center.y, typeT, subT);
 				}
 			}
 		}
+	}
+
+
+
+	private PointF drawPolygon(MapRenderObject obj, Canvas canvas, double leftTileX, double topTileY, int zoom) {
+		Paint paint = paintFill;
+		float xText = 0;
+		float yText = 0;
+		Path path = null;
+		int type = MapRenderingTypes.getObjectType(obj.getType());
+		int subtype = MapRenderingTypes.getPolygonSubType(obj.getType());
+		int color = Color.LTGRAY;
+		if (type == MapRenderingTypes.MAN_MADE) {
+			if (subtype == MapRenderingTypes.SUBTYPE_BUILDING) {
+				color = Color.rgb(188, 169, 169);
+			} else if (subtype == MapRenderingTypes.SUBTYPE_GARAGES) {
+				color = Color.rgb(221, 221, 221);
+			}
+			
+		} else if (type == MapRenderingTypes.AMENITY_TRANSPORTATION) {
+			if (subtype == 1 || subtype == 2) {
+				color = Color.rgb(246, 238, 183);
+			}
+		} else if (type == MapRenderingTypes.AMENITY_EDUCATION) {
+			if(subtype == 2 || subtype == 3 || subtype == 5){
+				color = Color.rgb(240, 240, 216);
+			} else {
+				// draw as building education
+				color = Color.rgb(188, 169, 169);
+			}
+		} else if (type == MapRenderingTypes.LEISURE) {
+			switch (subtype) {
+			case 4:
+				color = Color.rgb(51, 204, 153);
+				break;
+			case 12:
+				color = Color.rgb(206, 246, 202);
+				break;
+			}
+
+		} else if (type == MapRenderingTypes.LANDUSE) {
+			switch (subtype) {
+			case 5:
+				color = Color.rgb(239, 200, 200);
+				break;
+			case 12:
+				color = Color.rgb(207, 236, 168);
+				break;
+			case 15:
+				color = Color.rgb(223, 209, 214);
+				break;
+
+			}
+		}
+			
+		paint.setColor(color);
 		
+		for (int i = 0; i < obj.getPointsLength(); i++) {
+			float x = (float) ((MapUtils.getTileNumberX(zoom, obj.getPointLongitude(i)) - leftTileX) * 256f);
+			float y = (float) ((MapUtils.getTileNumberY(zoom, obj.getPointLatitude(i)) - topTileY) * 256f);
+			xText += x;
+			yText += y;
+			if (path == null) {
+				path = new Path();
+				path.moveTo(x, y);
+			} else {
+				path.lineTo(x, y);
+			}
+		}
+		
+		if (path != null) {
+			xText /= obj.getPointsLength();
+			yText /= obj.getPointsLength();
+			canvas.drawPath(path, paint);
+			String name = obj.getName();
+			if(name != null){
+				
+				boolean accept = true;
+				if(zoom <= 15){
+					accept = name.length() < 4; 
+				} else if(zoom < 17){
+					accept = name.length() < 6;
+				} else if(zoom < 18){
+					accept = name.length() < 8;
+				}
+				if(accept){
+					canvas.drawText(name, xText, yText, paintText);
+				}
+			}
+			return new PointF(xText, yText);
+		}
+		return null;
 	}
 	
-	public void drawPoint(MapRenderObject obj, Canvas canvas, double leftTileX, double topTileY, int zoom, float rotate){
+	private void drawPoint(MapRenderObject obj, Canvas canvas, double leftTileX, double topTileY, int zoom, float rotate){
 		if (zoom > 15) {
 			float x = (float) ((MapUtils.getTileNumberX(zoom, obj.getPointLongitude(0)) - leftTileX) * 256f);
 			float y = (float) ((MapUtils.getTileNumberY(zoom, obj.getPointLatitude(0)) - topTileY) * 256f);
 			int subType = MapRenderingTypes.getPointSubType(obj.getType());
 			int type = MapRenderingTypes.getObjectType(obj.getType());
-			if(type == MapRenderingTypes.HIGHWAY && subType == 38){
-				if (zoom > 16) {
-					drawBitmap(canvas, x, y, R.drawable.h_traffic_light);
-				}
-			} else {
-				paintFill.setColor(clPoint);
-				canvas.drawCircle(x, y, 6, paintFill);
-			}
+			drawPointBitmap(canvas, zoom, x, y, type, subType);
 		}
+	}
 
-	}
-	
-	public Resources getResources() {
-		
-		return resources;
-	}
-	public void setResources(Resources resources) {
-		this.resources = resources;
-	}
-	
-	private void drawBitmap(Canvas canvas, float x, float y, int resId){
-		if(resources != null){
-			Bitmap bmp = BitmapFactory.decodeResource(resources, resId);
-			if(bmp != null){
-				canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintText);
+
+
+	private void drawPointBitmap(Canvas canvas, int zoom, float x, float y, int type, int subType) {
+		int resId = 0;
+		if(type == MapRenderingTypes.HIGHWAY){
+			if (zoom > 16) {
+				if(subType == 38){
+					resId = R.drawable.h_traffic_light;
+				}
 			}
+		} else if(type == MapRenderingTypes.AMENITY_OTHER){
+			if (zoom > 16) {
+				switch (subType) {
+				case 10:
+					resId = R.drawable.h_police;
+					break;
+				case 18:
+					resId = R.drawable.h_toilets;
+					break;
+				case 11:
+					resId = R.drawable.h_postbox;
+					break;
+				case 12:
+					resId = R.drawable.h_postoffice;
+					break;
+				}
+			}
+		} else if(type == MapRenderingTypes.SHOP){
+			if (zoom > 15) {
+				switch (subType) {
+				case 27:
+				case 65:
+				case 53:
+					resId = R.drawable.h_shop_supermarket;
+					break;
+				}
+			}
+			if (zoom > 16) {
+				switch (subType) {
+				case 31:
+					resId = R.drawable.h_shop_hairdresser;
+					break;
+				case 48:
+					resId = R.drawable.h_shop_butcher;
+					break;
+				case 42:
+					resId = R.drawable.h_shop_bakery;
+					break;
+				case 20:
+					resId = R.drawable.h_shop_diy;
+					break;
+				case 16:
+					resId = R.drawable.h_shop_convenience;
+					break;
+				case 13:
+					resId = R.drawable.h_shop_clothes;
+					break;
+				}
+			}
+		} else if(type == MapRenderingTypes.AMENITY_SUSTENANCE){
+			// done
+			if (zoom > 15) {
+				switch (subType) {
+				case 1:
+					resId = R.drawable.h_restaurant;
+					break;
+				case 2:
+					resId = R.drawable.h_cafe;
+					break;
+				case 4:
+					resId = R.drawable.h_fast_food;
+					break;
+				case 5:
+				case 6:
+				case 7:
+					resId = R.drawable.h_bar;
+					break;
+				case 8:
+					resId = R.drawable.h_food_drinkingtap;
+					break;
+				}
+			}
+		} else if(type == MapRenderingTypes.AMENITY_FINANCE){
+			if (zoom > 16){
+				if(subType == 1){
+					resId = R.drawable.h_atm;
+				} else if(subType == 2){
+					resId = R.drawable.h_bank;
+				}
+			}
+		} else if(type == MapRenderingTypes.AMENITY_TRANSPORTATION){
+			if (zoom >= 15){
+				if(subType == 1 || subType == 2){
+					resId = R.drawable.h_parking;
+				} else if(subType == 4){
+					resId = R.drawable.h_fuel;
+				} else if(subType == 18){
+					resId = R.drawable.h_bus_station; 
+				}
+			}
+		}
+		
+		if(resId == 0){
+//			paintFill.setColor(clPoint);
+//			canvas.drawCircle(x, y, 6, paintFill);
+		} else {
+			drawBitmap(canvas, x, y, resId);
 		}
 	}
 	
-	public void drawHighway(MapRenderObject obj, Canvas canvas, double leftTileX, double topTileY, int zoom, float rotate) {
+	private void drawBitmap(Canvas canvas, float x, float y, int resId) {
+		Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), resId);
+		if (bmp != null) {
+			canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintText);
+		}
+	}
+	
+	private void drawHighway(MapRenderObject obj, Canvas canvas, double leftTileX, double topTileY, int zoom, float rotate) {
 		if(obj.getPointsLength() == 0){
 			return;
 		}
@@ -334,27 +490,6 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			}
 		}
 	}
-	
-	
-	@Override
-	public int compare(MapRenderObject object1, MapRenderObject object2) {
-//		if(object1.isPolygon() != object2.isPolygon()){
-//			return object1.isPolygon()? -1 : 1;
-//		} else if(object1.isPoint() != object2.isPoint()){
-//			return object1.isPoint()? 1 : -1;
-//		}
-//		int t1 = object1.getType();
-//		int t2 = object2.getType();
-//		if(MapRenderingTypes.isHighway(t1) && MapRenderingTypes.isHighway(t2)){
-//			return new Integer(t1).compareTo(new Integer(t2));
-			// TODO change if type of highway changed
-//			return t1 > t2 ? -1 : (t1 == t2 ? 0 : 1);
-//		}
-//		return 0;
-		int o1 = object1.getMapOrder();
-		int o2 = object2.getMapOrder();
-		return o1 < o2 ? -1 : (o1 == o2 ? 0 : 1);
-	}
-	
+
 
 }

@@ -44,7 +44,7 @@ public class OsmandApplication extends Application {
 	
     public void	onCreate(){
     	super.onCreate();
-    	manager = new ResourceManager();
+    	manager = new ResourceManager(this);
     	uiHandler = new Handler();
     	startApplication();
 	}

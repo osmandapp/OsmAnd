@@ -24,11 +24,11 @@ public class ToDoConstants {
 	//  4. recalculating route when location is far from !
 	//  5. keyboard (issue 43 )?
 	//  6. Do not upload empty files (transport, poi... ). 
-	//  7. Implement auto-delete from site (done should be ported)
+	//  7. Implement auto-delete from site (done, should be ported from C#)
 	
 	//  8. In all places verify to use float lat/lon improve usage indexes !!!
-	//  9. Render map on bitmap in another thread
-	//  10. Sort objects before render (according layering)
+	//  + 9. Render map on bitmap in another thread
+	//  + 10. Sort objects before render (according layering)
 	//  11!! Investigate ResourceManager close methods and clear cache when Map switches !!!
 	//  12! When switch to map check that indexes were loaded !!
 	

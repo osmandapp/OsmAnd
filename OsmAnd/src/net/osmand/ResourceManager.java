@@ -26,6 +26,8 @@ import net.osmand.views.POIMapLayer;
 
 import org.apache.commons.logging.Log;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -70,22 +72,24 @@ public class ResourceManager {
 	
 	protected File dirWithTiles ;
 	
-	private MapTileDownloader downloader = MapTileDownloader.getInstance();
+	private final Context context;
+	
+	private final MapTileDownloader downloader = MapTileDownloader.getInstance();
 	// Indexes
-	private Map<String, RegionAddressRepository> addressMap = new TreeMap<String, RegionAddressRepository>(Collator.getInstance());
+	private final Map<String, RegionAddressRepository> addressMap = new TreeMap<String, RegionAddressRepository>(Collator.getInstance());
 	
-	protected Map<String, AmenityIndexRepository> amenityRepositories = new LinkedHashMap<String, AmenityIndexRepository>();
+	protected final Map<String, AmenityIndexRepository> amenityRepositories = new LinkedHashMap<String, AmenityIndexRepository>();
 	
-	protected Map<String, TransportIndexRepository> transportRepositories = new LinkedHashMap<String, TransportIndexRepository>();
+	protected final Map<String, TransportIndexRepository> transportRepositories = new LinkedHashMap<String, TransportIndexRepository>();
 	
-	protected RenderMapsRepositories renderer = new RenderMapsRepositories();
+	protected final RenderMapsRepositories renderer ;
 	
-	public AsyncLoadingThread asyncLoadingTiles = new AsyncLoadingThread();
-	
-	
+	public final  AsyncLoadingThread asyncLoadingTiles = new AsyncLoadingThread();
 	
 	
-	public ResourceManager() {
+	public ResourceManager(Context context) {
+		this.context = context;
+		this.renderer = new RenderMapsRepositories(context);
 		// TODO start/stop this thread when needed?
 		asyncLoadingTiles.start();
 		dirWithTiles = new File(Environment.getExternalStorageDirectory(), TILES_PATH);
@@ -93,6 +97,10 @@ public class ResourceManager {
 			dirWithTiles.mkdirs();
 		}
 		
+	}
+	
+	public Context getContext() {
+		return context;
 	}
 	
 	////////////////////////////////////////////// Working with tiles ////////////////////////////////////////////////
@@ -320,8 +328,14 @@ public class ResourceManager {
 			for (File f : file.listFiles()) {
 				if (f.getName().endsWith(IndexConstants.MAP_INDEX_EXT)) {
 					progress.startTask(Messages.getMessage("indexing_map") + f.getName(), -1); //$NON-NLS-1$
-					boolean initialized = renderer.initializeNewResource(progress, f);
-					if (!initialized) {
+					try {
+						boolean initialized = renderer.initializeNewResource(progress, f);
+
+						if (!initialized) {
+							warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+						}
+					} catch (SQLiteException e) {
+						log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
 						warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
 					}
 				}
@@ -348,10 +362,15 @@ public class ResourceManager {
 			AmenityIndexRepository repository = new AmenityIndexRepository();
 			
 			progress.startTask(Messages.getMessage("indexing_poi") + f.getName(), -1); //$NON-NLS-1$
-			boolean initialized = repository.initialize(progress, f);
-			if (initialized) {
-				amenityRepositories.put(repository.getName(), repository);
-			}else {
+			try {
+				boolean initialized = repository.initialize(progress, f);
+				if (initialized) {
+					amenityRepositories.put(repository.getName(), repository);
+				} else {
+					warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+				}
+			} catch (SQLiteException e) {
+				log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
 				warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
 			}
 		}
@@ -374,10 +393,15 @@ public class ResourceManager {
 		if (f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)) {
 			RegionAddressRepository repository = new RegionAddressRepository();
 			progress.startTask(Messages.getMessage("indexing_address") + f.getName(), -1); //$NON-NLS-1$
-			boolean initialized = repository.initialize(progress, f);
-			if (initialized) {
-				addressMap.put(repository.getName(), repository);
-			} else {
+			try {
+				boolean initialized = repository.initialize(progress, f);
+				if (initialized) {
+					addressMap.put(repository.getName(), repository);
+				} else {
+					warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+				}
+			} catch (SQLiteException e) {
+				log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
 				warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
 			}
 		}
@@ -400,10 +424,15 @@ public class ResourceManager {
 		if (f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)) {
 			TransportIndexRepository repository = new TransportIndexRepository();
 			progress.startTask(Messages.getMessage("indexing_transport") + f.getName(), -1); //$NON-NLS-1$
-			boolean initialized = repository.initialize(progress, f);
-			if (initialized) {
-				transportRepositories.put(repository.getName(), repository);
-			} else {
+			try {
+				boolean initialized = repository.initialize(progress, f);
+				if (initialized) {
+					transportRepositories.put(repository.getName(), repository);
+				} else {
+					warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+				}
+			} catch (SQLiteException e) {
+				log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
 				warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
 			}
 		}
