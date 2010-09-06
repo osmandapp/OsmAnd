@@ -1,6 +1,8 @@
 package net.osmand.activities;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -43,6 +45,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.widget.Toast;
 
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
+	private final static String VECTOR_MAP = "#VECTOR_MAP"; //$NON-NLS-1$
 	
 	private class BooleanPreference {
 		private final boolean defValue;
@@ -308,10 +311,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		maxLevelToDownload.setValue(OsmandSettings.getMaximumLevelToDownloadTile(this)+""); //$NON-NLS-1$
 		
 
-		Map<String, String> entriesMap = getTileSourceEntries();
-		entries = new String[entriesMap.size()];
-		valueEntries = new String[entriesMap.size()];
-		int ki = 0;
+		Map<String, String> entriesMap = getTileSourceEntries(this);
+		entries = new String[entriesMap.size() + 1];
+		valueEntries = new String[entriesMap.size() + 1];
+		valueEntries[0] = VECTOR_MAP;
+		entries[0] = getString(R.string.vector_data);
+		int ki = 1;
 		for(Map.Entry<String, String> es : entriesMap.entrySet()){
 			entries[ki] = es.getValue();
 			valueEntries[ki] = es.getKey();
@@ -320,8 +325,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
 		tileSourcePreference.setEntries(entries);
 		tileSourcePreference.setEntryValues(valueEntries);
-		tileSourcePreference.setValue(OsmandSettings.getMapTileSourceName(this));
-		String mapName = " " +OsmandSettings.getMapTileSourceName(this); //$NON-NLS-1$
+		String value = OsmandSettings.isUsingMapVectorData(this)? VECTOR_MAP : OsmandSettings.getMapTileSourceName(this);
+		String mapName = " " + (OsmandSettings.isUsingMapVectorData(this) ? getString(R.string.vector_data) : //$NON-NLS-1$
+				OsmandSettings.getMapTileSourceName(this));
+		tileSourcePreference.setValue(value);
 		String summary = tileSourcePreference.getSummary().toString();
 		if (summary.lastIndexOf(':') != -1) {
 			summary = summary.substring(0, summary.lastIndexOf(':') + 1);
@@ -329,17 +336,31 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		tileSourcePreference.setSummary(summary + mapName);
     }
     
-    public static Map<String, String> getTileSourceEntries(){
-    	
+    public static Map<String, String> getTileSourceEntries(Context ctx){
 		Map<String, String> map = new LinkedHashMap<String, String>();
 		File dir = new File(Environment.getExternalStorageDirectory(), ResourceManager.TILES_PATH);
 		if (dir != null && dir.canRead()) {
-			for (File f : dir.listFiles()) {
-				if (f.getName().endsWith(SQLiteTileSource.EXT)) {
-					String n = f.getName();
-					map.put(f.getName(), n.substring(0, n.lastIndexOf('.')));
-				} else if(f.isDirectory() && !f.getName().equals(ResourceManager.TEMP_SOURCE_TO_LOAD)){
-					map.put(f.getName(), f.getName());
+			File[] files = dir.listFiles();
+			Arrays.sort(files, new Comparator<File>(){
+				@Override
+				public int compare(File object1, File object2) {
+					if(object1.lastModified() > object2.lastModified()){
+						return -1;
+					} else if(object1.lastModified() == object2.lastModified()){
+						return 0;
+					}
+					return 1;
+				}
+				
+			});
+			if (files != null) {
+				for (File f : files) {
+					if (f.getName().endsWith(SQLiteTileSource.EXT)) {
+						String n = f.getName();
+						map.put(f.getName(), n.substring(0, n.lastIndexOf('.')));
+					} else if (f.isDirectory() && !f.getName().equals(ResourceManager.TEMP_SOURCE_TO_LOAD)) {
+						map.put(f.getName(), f.getName());
+					}
 				}
 			}
 		}
@@ -440,13 +461,19 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.commit();
 			((OsmandApplication)getApplication()).initCommandPlayer();
 		} else if (preference == tileSourcePreference) {
-			edit.putString(OsmandSettings.MAP_TILE_SOURCES, (String) newValue);
+			if(VECTOR_MAP.equals((String) newValue)){
+				edit.putBoolean(OsmandSettings.MAP_VECTOR_DATA, true);
+			} else {
+				edit.putString(OsmandSettings.MAP_TILE_SOURCES, (String) newValue);
+				edit.putBoolean(OsmandSettings.MAP_VECTOR_DATA, false);
+			}
 			edit.commit();
 			String summary = tileSourcePreference.getSummary().toString();
 			if (summary.lastIndexOf(':') != -1) {
 				summary = summary.substring(0, summary.lastIndexOf(':') + 1);
-			} 
-			summary += " " + OsmandSettings.getMapTileSourceName(this); //$NON-NLS-1$
+			}
+			summary += " " + (OsmandSettings.isUsingMapVectorData(this) ? getString(R.string.vector_data) : //$NON-NLS-1$
+				OsmandSettings.getMapTileSourceName(this));
 			tileSourcePreference.setSummary(summary);
 			
 		}

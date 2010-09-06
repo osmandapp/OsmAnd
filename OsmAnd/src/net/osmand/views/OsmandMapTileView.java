@@ -83,8 +83,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	// name of source map 
 	private ITileSource map = null;
 	
-	private boolean showMapTiles = true;
-	
 	private IMapLocationListener locationListener;
 	
 	private OnLongClickListener onLongClickListener;
@@ -244,7 +242,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	
 	public void setZoom(float zoom){
-		if (map == null || ((map.getMaximumZoomSupported() + OVERZOOM_IN) >= zoom && map.getMinimumZoomSupported() <= zoom)) {
+		if ((map == null && zoom < 22) ||
+				((map.getMaximumZoomSupported() + OVERZOOM_IN) >= zoom && map.getMinimumZoomSupported() <= zoom)) {
 			animatedDraggingThread.stopAnimating();
 			this.zoom = zoom;
 			refreshMap();
@@ -254,7 +253,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	// for internal usage
 	@Override
 	public void zoomTo(float zoom, boolean notify) {
-		if (map == null || ((map.getMaximumZoomSupported() + OVERZOOM_IN) >= zoom && map.getMinimumZoomSupported() <= zoom)) {
+		if ((map == null && zoom < 22) || 
+				((map.getMaximumZoomSupported() + OVERZOOM_IN) >= zoom && map.getMinimumZoomSupported() <= zoom)) {
 			this.zoom = zoom;
 			refreshMap();
 			if(notify && locationListener != null){
@@ -291,10 +291,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	public void setMap(ITileSource map) {
 		this.map = map;
-		if(map.getMaximumZoomSupported() + OVERZOOM_IN < this.zoom){
+		if(map !=null && map.getMaximumZoomSupported() + OVERZOOM_IN < this.zoom){
 			zoom = map.getMaximumZoomSupported() + OVERZOOM_IN;
 		}
-		if(map.getMinimumZoomSupported() > this.zoom){
+		if(map !=null && map.getMinimumZoomSupported() > this.zoom){
 			zoom = map.getMinimumZoomSupported();
 		}
 		refreshMap();
@@ -449,10 +449,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			if (canvas != null) {
 				canvas.save();
 				boundsRect.set(0, 0, getWidth(), getHeight());
-				canvas.drawRect(boundsRect, paintWhiteFill);
 				canvas.rotate(rotate, w , h);
 				try {
-					if (showMapTiles) {
+					if (map != null) {
 						ResourceManager mgr = getApplication().getResourceManager();
 						boolean useInternet = OsmandSettings.isUsingInternetToDownloadTiles(getContext())
 								&& map.couldBeDownloadedFromInternet();
@@ -507,7 +506,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 									} else {
 										int xZoom = ((left + i) % div) * tileSize / div;
 										int yZoom = ((top + j) % div) * tileSize / div;
-										;
 										bitmapToZoom.set(xZoom, yZoom, xZoom + tileSize / div, yZoom + tileSize / div);
 										bitmapToDraw.set(x1, y1, x1 + ftileSize, y1 + ftileSize);
 										canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
@@ -517,6 +515,19 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 									bitmapToDraw.set(x1, y1, x1 + ftileSize, y1 + ftileSize);
 									canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
 								}
+							}
+						}
+					} else {
+						calculateTileRectangle(boundsRect, w, h, tileX, tileY, tilesRect);
+						int left = (int) FloatMath.floor(tilesRect.left);
+						int top = (int) FloatMath.floor(tilesRect.top);
+						int width = (int) (FloatMath.ceil(tilesRect.right) - left);
+						int height = (int) (FloatMath.ceil(tilesRect.bottom) - top);
+						for (int i = 0; i < width; i++) {
+							for (int j = 0; j < height; j++) {
+								float x1 = (i + left - tileX) * ftileSize + w;
+								float y1 = (j + top - tileY) * ftileSize + h;
+								drawEmptyTile(canvas, x1, y1, ftileSize);
 							}
 						}
 					}
@@ -586,22 +597,21 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				canvas.rotate(rotate, w , h);
 				
 				try {
-					if (showMapTiles) {
+					Bitmap bmp = null;
+					if (map != null) {
 						ResourceManager mgr = getApplication().getResourceManager();
-						Bitmap bmp = mgr.getTileImageForMapSync(null, map, request.xTile, request.yTile, request.zoom, false);
-						float x = (request.xTile - tileX) * getTileSize() + w;
-						float y = (request.yTile - tileY) * getTileSize() + h;
-						float tileSize = getTileSize();
-						if (bmp == null) {
-							drawEmptyTile(canvas, x, y, tileSize);
-						} else {
-							bitmapToZoom.set(0, 0, getSourceTileSize(), getSourceTileSize());
-							bitmapToDraw.set(x, y, x + tileSize, y + tileSize);
-							canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
-						}
+						bmp = mgr.getTileImageForMapSync(null, map, request.xTile, request.yTile, request.zoom, false);
+					}
+
+					float x = (request.xTile - tileX) * getTileSize() + w;
+					float y = (request.yTile - tileY) * getTileSize() + h;
+					float tileSize = getTileSize();
+					if (bmp == null) {
+						drawEmptyTile(canvas, x, y, tileSize);
 					} else {
-						boundsRect.set(0, 0, getWidth(), getHeight());
-						canvas.drawRect(boundsRect, paintWhiteFill);
+						bitmapToZoom.set(0, 0, getSourceTileSize(), getSourceTileSize());
+						bitmapToDraw.set(x, y, x + tileSize, y + tileSize);
+						canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
 					}
 					drawOverMap(canvas);
 				} finally {
@@ -640,7 +650,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	 */
 	public int getMapXForPoint(double longitude){
 		double tileX = MapUtils.getTileNumberX(zoom, longitude);
-		return (int) ((tileX - getXTile()) * getTileSize()+ getCenterPointX());
+		return (int) ((tileX - getXTile()) * getTileSize() + getCenterPointX());
 	}
 	public int getMapYForPoint(double latitude){
 		double tileY = MapUtils.getTileNumberY(zoom, latitude);
@@ -758,13 +768,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		zoomPositionChanged(getFloatZoom());
 	}
 	
-	public void setShowMapTiles(boolean visible){
-		this.showMapTiles = visible;
-	}
-	
-	public boolean isShowMapTiles() {
-		return showMapTiles;
-	}
 	
 	 
 	@Override

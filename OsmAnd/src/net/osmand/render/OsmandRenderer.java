@@ -27,6 +27,7 @@ import android.graphics.Bitmap.Config;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
+import android.util.FloatMath;
 
 public class OsmandRenderer implements Comparator<MapRenderObject> {
 	private static final Log log = LogUtil.getLog(OsmandRenderer.class);
@@ -39,7 +40,6 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	
 	/// Colors
 	private int clFillScreen = Color.rgb(241, 238, 232);
-	private int clPoint = Color.rgb(200, 200, 200);
 	private int clTrunkRoad = Color.rgb(128,155,192); 
 	private int clMotorwayRoad = Color.rgb(168, 218, 168);
 	private int clPrimaryRoad = Color.rgb(235, 152, 154); 
@@ -106,6 +106,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			bmp = Bitmap.createBitmap((int) ((rightX - leftX) * 256), (int) ((bottomY - topY) * 256), Config.RGB_565);
 			Canvas cv = new Canvas(bmp);
 			cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillWhite);
+			cv.rotate(-rotate);
 			for (MapRenderObject w : objects) {
 				draw(w, cv, leftX, topY, zoom, rotate);
 			}
@@ -122,23 +123,43 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			if(MapRenderingTypes.isHighway(obj.getType())){
 				drawHighway(obj, canvas, leftTileX, topTileY, zoom, rotate);
 			} else {
-				
+				// TODO
 			}
 		} else {
-			PointF center = drawPolygon(obj, canvas, leftTileX, topTileY, zoom);
+			PointF center = drawPolygon(obj, canvas, leftTileX, topTileY, zoom, rotate);
 			if(center != null){
 				int typeT = MapRenderingTypes.getPolygonPointType(obj.getType());
 				int subT = MapRenderingTypes.getPolygonPointSubType(obj.getType());
 				if(typeT > 0 && subT > 0){
-					drawPointBitmap(canvas, zoom, center.x, center.y, typeT, subT);
+					drawPointBitmap(canvas, center.x, center.y, typeT, subT, zoom);
 				}
 			}
 		}
 	}
+	
+	public float calcDiffPixelY(float dTileX, float dTileY, float rotate){
+		float rad = (float) Math.toRadians(rotate);
+		return (FloatMath.sin(rad) * dTileX + FloatMath.cos(rad) * dTileY) * 256f ;
+	}
+	
+	public float calcDiffPixelX(float dTileX, float dTileY, float rotate){
+		float rad = (float) Math.toRadians(rotate);
+		return (FloatMath.cos(rad) * dTileX - FloatMath.sin(rad) * dTileY) * 256f ;
+	}
+	
 
+	// suppose that render works in one thread! Otherwise should be done anyway
+	private PointF TEMP_POINT = new PointF();
+	private PointF calcPoint(double leftTileX, double topTileY, float latitude, float longitude, int zoom, float rotate){
+		float dTileX = (float) (MapUtils.getTileNumberX(zoom, longitude) - leftTileX);
+		float dTileY = (float) (MapUtils.getTileNumberY(zoom, latitude) - topTileY);
+		TEMP_POINT.set(calcDiffPixelX(dTileX, dTileY, rotate), calcDiffPixelY(dTileX, dTileY, rotate));
+		return TEMP_POINT;
+	}
 
+	
 
-	private PointF drawPolygon(MapRenderObject obj, Canvas canvas, double leftTileX, double topTileY, int zoom) {
+	private PointF drawPolygon(MapRenderObject obj, Canvas canvas, double leftTileX, double topTileY, int zoom, float rotate) {
 		Paint paint = paintFill;
 		float xText = 0;
 		float yText = 0;
@@ -192,15 +213,16 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		paint.setColor(color);
 		
 		for (int i = 0; i < obj.getPointsLength(); i++) {
-			float x = (float) ((MapUtils.getTileNumberX(zoom, obj.getPointLongitude(i)) - leftTileX) * 256f);
-			float y = (float) ((MapUtils.getTileNumberY(zoom, obj.getPointLatitude(i)) - topTileY) * 256f);
-			xText += x;
-			yText += y;
+			float lon = obj.getPointLongitude(i);
+			float lat = obj.getPointLatitude(i);
+			PointF p = calcPoint(leftTileX, topTileY, lat, lon, zoom, rotate);
+			xText += p.x;
+			yText += p.y;
 			if (path == null) {
 				path = new Path();
-				path.moveTo(x, y);
+				path.moveTo(p.x, p.y);
 			} else {
-				path.lineTo(x, y);
+				path.lineTo(p.x, p.y);
 			}
 		}
 		
@@ -211,12 +233,10 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			String name = obj.getName();
 			if(name != null){
 				
-				boolean accept = true;
-				if(zoom <= 15){
+				boolean accept = zoom > 17;
+				if(zoom > 15){
 					accept = name.length() < 4; 
-				} else if(zoom < 17){
-					accept = name.length() < 6;
-				} else if(zoom < 18){
+				} else if(zoom > 16){
 					accept = name.length() < 8;
 				}
 				if(accept){
@@ -230,138 +250,35 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	
 	private void drawPoint(MapRenderObject obj, Canvas canvas, double leftTileX, double topTileY, int zoom, float rotate){
 		if (zoom > 15) {
-			float x = (float) ((MapUtils.getTileNumberX(zoom, obj.getPointLongitude(0)) - leftTileX) * 256f);
-			float y = (float) ((MapUtils.getTileNumberY(zoom, obj.getPointLatitude(0)) - topTileY) * 256f);
+			float lon = obj.getPointLongitude(0);
+			float lat = obj.getPointLatitude(0);
+			PointF p = calcPoint(leftTileX, topTileY, lat, lon, zoom, rotate);
 			int subType = MapRenderingTypes.getPointSubType(obj.getType());
 			int type = MapRenderingTypes.getObjectType(obj.getType());
-			drawPointBitmap(canvas, zoom, x, y, type, subType);
+			drawPointBitmap(canvas, p.x, p.y, type, subType, zoom);
 		}
 	}
 
-
-
-	private void drawPointBitmap(Canvas canvas, int zoom, float x, float y, int type, int subType) {
-		int resId = 0;
-		if(type == MapRenderingTypes.HIGHWAY){
-			if (zoom > 16) {
-				if(subType == 38){
-					resId = R.drawable.h_traffic_light;
-				}
-			}
-		} else if(type == MapRenderingTypes.AMENITY_OTHER){
-			if (zoom > 16) {
-				switch (subType) {
-				case 10:
-					resId = R.drawable.h_police;
-					break;
-				case 18:
-					resId = R.drawable.h_toilets;
-					break;
-				case 11:
-					resId = R.drawable.h_postbox;
-					break;
-				case 12:
-					resId = R.drawable.h_postoffice;
-					break;
-				}
-			}
-		} else if(type == MapRenderingTypes.SHOP){
-			if (zoom > 15) {
-				switch (subType) {
-				case 27:
-				case 65:
-				case 53:
-					resId = R.drawable.h_shop_supermarket;
-					break;
-				}
-			}
-			if (zoom > 16) {
-				switch (subType) {
-				case 31:
-					resId = R.drawable.h_shop_hairdresser;
-					break;
-				case 48:
-					resId = R.drawable.h_shop_butcher;
-					break;
-				case 42:
-					resId = R.drawable.h_shop_bakery;
-					break;
-				case 20:
-					resId = R.drawable.h_shop_diy;
-					break;
-				case 16:
-					resId = R.drawable.h_shop_convenience;
-					break;
-				case 13:
-					resId = R.drawable.h_shop_clothes;
-					break;
-				}
-			}
-		} else if(type == MapRenderingTypes.AMENITY_SUSTENANCE){
-			// done
-			if (zoom > 15) {
-				switch (subType) {
-				case 1:
-					resId = R.drawable.h_restaurant;
-					break;
-				case 2:
-					resId = R.drawable.h_cafe;
-					break;
-				case 4:
-					resId = R.drawable.h_fast_food;
-					break;
-				case 5:
-				case 6:
-				case 7:
-					resId = R.drawable.h_bar;
-					break;
-				case 8:
-					resId = R.drawable.h_food_drinkingtap;
-					break;
-				}
-			}
-		} else if(type == MapRenderingTypes.AMENITY_FINANCE){
-			if (zoom > 16){
-				if(subType == 1){
-					resId = R.drawable.h_atm;
-				} else if(subType == 2){
-					resId = R.drawable.h_bank;
-				}
-			}
-		} else if(type == MapRenderingTypes.AMENITY_TRANSPORTATION){
-			if (zoom >= 15){
-				if(subType == 1 || subType == 2){
-					resId = R.drawable.h_parking;
-				} else if(subType == 4){
-					resId = R.drawable.h_fuel;
-				} else if(subType == 18){
-					resId = R.drawable.h_bus_station; 
-				}
-			}
-		}
-		
+	
+	
+	private void drawPointBitmap(Canvas canvas, float x, float y, int type, int subType, int zoom) {
+		int resId = getPointBitmap(zoom, type, subType);
 		if(resId == 0){
 //			paintFill.setColor(clPoint);
 //			canvas.drawCircle(x, y, 6, paintFill);
 		} else {
-			drawBitmap(canvas, x, y, resId);
+			Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), resId);
+			if (bmp != null) {
+				canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintText);
+			}
 		}
-	}
-	
-	private void drawBitmap(Canvas canvas, float x, float y, int resId) {
-		Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), resId);
-		if (bmp != null) {
-			canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintText);
-		}
+		
 	}
 	
 	private void drawHighway(MapRenderObject obj, Canvas canvas, double leftTileX, double topTileY, int zoom, float rotate) {
 		if(obj.getPointsLength() == 0){
 			return;
 		}
-		
-		float xText = 0;
-		float yText = 0;
 		
 		Path path = null;
 		float pathRotate = 0;
@@ -422,74 +339,197 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		float yPrev = 0;
 		int middle = obj.getPointsLength() / 2;
 		for (int i = 0; i < obj.getPointsLength(); i++) {
-			float x = (float) ((MapUtils.getTileNumberX(zoom, obj.getPointLongitude(i)) - leftTileX) * 256f);
-			float y = (float) ((MapUtils.getTileNumberY(zoom, obj.getPointLatitude(i)) - topTileY) * 256f);
-//			xText += x;
-//			yText += y;
+			float lon = obj.getPointLongitude(i);
+			float lat = obj.getPointLatitude(i);
+			PointF p = calcPoint(leftTileX, topTileY, lat, lon, zoom, rotate);
 			if (path == null) {
 				path = new Path();
-				path.moveTo(x, y);
+				path.moveTo(p.x, p.y);
 			} else {
-				if (xPrev > 0) {
-					xLength += x - xPrev; // not abs
-					yLength += y - yPrev; // not abs
-				}
+				xLength += p.x - xPrev; // not abs
+				yLength += p.y - yPrev; // not abs
 				if(i == middle){
-					double rot = -Math.atan2(x - xPrev, y - yPrev) * 180 / Math.PI + 90;
+					double rot = - Math.atan2(p.x - xPrev, p.y - yPrev) * 180 / Math.PI;
 					if (rot < 0) {
 						rot += 360;
 					}
-					if (rot < 270 && rot > 90) {
+					if (rot < 180) {
 						rot += 180;
 						inverse = true;
 					}
 					pathRotate = (float) rot;
-					xText = (x + xPrev) / 2;
-					yText = (y + yPrev) / 2;
 				}
 				if (pathRotate == 0) {
 					
 				}
-				path.lineTo(x, y);
+				path.lineTo(p.x, p.y);
 			}
-			xPrev = x;
-			yPrev = y;
+			xPrev = p.x;
+			yPrev = p.y;
 		}
 		if (path != null) {
-//			xText /= obj.getPointsLength();
-//			yText /= obj.getPointsLength();
 			canvas.drawPath(path, paint);
 			if (obj.getName() != null && carRoad) {
 				
 				if (paintText.measureText(obj.getName()) < Math.max(Math.abs(xLength), Math.abs(yLength))) {
-					
-//					paintText.setTextSize(paintText.getTextSize() + 2);
-//					int sv = canvas.save();
-//					canvas.rotate(pathRotate, xText, yText);
-//					canvas.drawText(obj.getName(), xText, yText, paintText);
-//					canvas.restoreToCount(sv);
 					if (inverse) {
 						path.rewind();
 						boolean st = true;
 						for (int i = obj.getPointsLength() - 1; i >= 0; i--) {
-							float x = (float) ((MapUtils.getTileNumberX(zoom, obj.getPointLongitude(i)) - leftTileX) * 256f);
-							float y = (float) ((MapUtils.getTileNumberY(zoom, obj.getPointLatitude(i)) - topTileY) * 256f);
+							float lon = obj.getPointLongitude(i);
+							float lat = obj.getPointLatitude(i);
+							PointF p = calcPoint(leftTileX, topTileY, lat, lon, zoom, rotate);
 							if (st) {
 								st = false;
-								path.moveTo(x, y);
+								path.moveTo(p.x, p.y);
 							} else {
-								path.lineTo(x, y);
+								path.lineTo(p.x, p.y);
 							}
 						}
 					}
 					
 					canvas.drawTextOnPath(obj.getName(), path, 0, 0, paintText);
-//					paintText.setTextSize(paintText.getTextSize() - 2);
 				}
 				
 			}
 		}
 	}
-
+	
+	
+	public static int getPointBitmap(int zoom, int type, int subType) {
+		int resId = 0;
+		if(type == MapRenderingTypes.HIGHWAY){
+			if (zoom > 16) {
+				if(subType == 38){
+					resId = R.drawable.h_traffic_light;
+				} else if(subType == 40){
+					resId = R.drawable.h_bus_stop;
+				}
+			}
+			
+		} else if(type == MapRenderingTypes.SHOP){
+			if (zoom > 15) {
+				switch (subType) {
+				case 27:
+				case 65:
+				case 53:
+					resId = R.drawable.h_shop_supermarket;
+					break;
+				case 13:
+					resId = R.drawable.h_shop_clothes;
+					break;
+				case 31:
+					resId = R.drawable.h_shop_hairdresser;
+					break;
+				}
+			}
+			if (zoom > 16) {
+				switch (subType) {
+				case 48:
+					resId = R.drawable.h_shop_butcher;
+					break;
+				case 42:
+					resId = R.drawable.h_shop_bakery;
+					break;
+				case 20:
+					resId = R.drawable.h_shop_diy;
+					break;
+				case 16:
+					resId = R.drawable.h_shop_convenience;
+					break;
+				
+					
+				}
+			}
+		} else if(type == MapRenderingTypes.AMENITY_SUSTENANCE){
+			if (zoom > 15) {
+				switch (subType) {
+				case 1:
+					resId = R.drawable.h_restaurant;
+					break;
+				case 2:
+					resId = R.drawable.h_cafe;
+					break;
+				case 4:
+					resId = R.drawable.h_fast_food;
+					break;
+				case 5:
+					resId = R.drawable.h_pub;
+					break;
+				case 7:
+				case 6:
+					resId = R.drawable.h_bar;
+					break;
+				case 8:
+					resId = R.drawable.h_food_drinkingtap;
+					break;
+				}
+			}
+		} else if(type == MapRenderingTypes.AMENITY_EDUCATION){
+			if (zoom > 15){
+				if(subType == 2){
+					resId = R.drawable.h_school;
+				} else if(subType == 4){
+					resId = R.drawable.h_library;
+				}
+			}
+		} else if (type == MapRenderingTypes.AMENITY_TRANSPORTATION) {
+			if (subType == 1 || subType == 2) {
+				resId = R.drawable.h_parking;
+			} else if (subType == 4) {
+				resId = R.drawable.h_fuel;
+			} else if (subType == 18) {
+				resId = R.drawable.h_bus_station;
+			}
+		} else if (type == MapRenderingTypes.AMENITY_FINANCE) {
+			if (subType == 1) {
+				if (zoom > 16) {
+					resId = R.drawable.h_atm;
+				}
+			} else if (subType == 2) {
+				if (zoom > 15) {
+					resId = R.drawable.h_bank;
+				}
+			}
+		} else if (type == MapRenderingTypes.AMENITY_HEALTHCARE) {
+			if (subType == 1) {
+				if (zoom > 15) {
+					resId = R.drawable.h_pharmacy;
+				}
+			} else if (subType == 2) {
+				resId = R.drawable.h_hospital;
+			}
+		} else if(type == MapRenderingTypes.AMENITY_OTHER){
+			if (zoom > 16) {
+				switch (subType) {
+				case 10:
+					resId = R.drawable.h_police;
+					break;
+				case 18:
+					resId = R.drawable.h_toilets;
+					break;
+				case 15:
+					resId = R.drawable.h_recycling;
+					break;
+				case 7:
+					resId = R.drawable.h_embassy;
+					break;
+				case 8:
+					resId = R.drawable.h_grave_yard;
+					break;
+				case 17:
+					resId = R.drawable.h_telephone;
+					break;
+				case 11:
+					resId = R.drawable.h_postbox;
+					break;
+				case 12:
+					resId = R.drawable.h_postoffice;
+					break;
+				}
+			}
+		}
+		return resId;
+	}
 
 }

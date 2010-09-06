@@ -20,9 +20,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
 
-public class RenderMapsRepositories {
+public class MapRenderRepositories {
 	
-	private final static Log log = LogUtil.getLog(RenderMapsRepositories.class);
+	private final static Log log = LogUtil.getLog(MapRenderRepositories.class);
 	private final Context context;
 	private Connection conn;
 	private PreparedStatement pStatement;
@@ -42,7 +42,7 @@ public class RenderMapsRepositories {
 	
 	
 	
-	public RenderMapsRepositories(Context context){
+	public MapRenderRepositories(Context context){
 		this.context = context;
 		this.renderer = new OsmandRenderer(context);
 	}
@@ -54,7 +54,6 @@ public class RenderMapsRepositories {
 	public boolean initializeNewResource(final IProgress progress, File file) {
 		long start = System.currentTimeMillis();
 		try {
-			// TODO should support multiple db
 			if (conn != null) {
 				// close previous db
 				conn.close();
@@ -117,10 +116,20 @@ public class RenderMapsRepositories {
 	/**
 	 * @return true if no need to reevaluate map
 	 */
-	public boolean updateMapIsNotNeeded(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom){
+	public boolean updateMapIsNotNeeded(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, float rotate){
 		if (conn == null) {
 			return true;
 		}
+		boolean inside = insideBox(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom);
+		if(rotate < 0){
+			rotate += 360;
+		} 
+
+		return inside && Math.abs(rotate - cRotate) < 30;
+		
+	}
+
+	private boolean insideBox(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom) {
 		boolean inside = cTopLatitude >= topLatitude && cLeftLongitude <= leftLongitude && cRightLongitude >= rightLongitude
 				&& cBottomLatitude <= bottomLatitude && cZoom == zoom;
 		return inside;
@@ -134,53 +143,60 @@ public class RenderMapsRepositories {
 												" WHERE ? <  maxLat AND ? > minLat AND maxLon > ? AND minLon  < ?)"; //$NON-NLS-1$
 	
 	
-	public synchronized void loadMap(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom) {
-		cBottomLatitude = bottomLatitude - (topLatitude - bottomLatitude) / 2;
-		cTopLatitude = topLatitude + (topLatitude - bottomLatitude) / 2; 
-		cLeftLongitude = leftLongitude - (rightLongitude - leftLongitude);
-		cRightLongitude = rightLongitude + (rightLongitude - leftLongitude);
-		cZoom = zoom;
-		
-		
-		log.info(String.format(
-				"BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", cBottomLatitude, cTopLatitude, cLeftLongitude, cRightLongitude, cZoom)); //$NON-NLS-1$
-		
-		long now = System.currentTimeMillis();
-		
-		if(pStatement == null){
-			return;
-		}
-		try {
-			pStatement.setDouble(1, cBottomLatitude);
-			pStatement.setDouble(2, cTopLatitude);
-			pStatement.setDouble(3, cLeftLongitude);
-			pStatement.setDouble(4, cRightLongitude);
-			ResultSet result = pStatement.executeQuery();
-			
-			List<MapRenderObject> local = new LinkedList<MapRenderObject>();
-			try {
-				int count = 0;
-				while (result.next()) {
-					long id = result.getLong(1);
-					MapRenderObject obj = new MapRenderObject(id);
-					obj.setData(result.getBytes(2));
-					obj.setName(result.getString(3));
-					obj.setType(result.getInt(4));
-					count++;
-					local.add(obj);
-				}
+	public synchronized void loadMap(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, float rotate) {
+		boolean inside = insideBox(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom);
+		cRotate = rotate < 0 ? rotate + 360 : rotate;
+		if (!inside) {
+			cBottomLatitude = bottomLatitude - (topLatitude - bottomLatitude) / 2;
+			cTopLatitude = topLatitude + (topLatitude - bottomLatitude) / 2;
+			cLeftLongitude = leftLongitude - (rightLongitude - leftLongitude);
+			cRightLongitude = rightLongitude + (rightLongitude - leftLongitude);
+			cZoom = zoom;
 
-				cObjects = local;
-				log.info(String.format("Search has been done in %s ms. %s results were found.", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
-			} finally {
-				result.close();
+			log
+					.info(String
+							.format(
+									"BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", cBottomLatitude, cTopLatitude, cLeftLongitude, cRightLongitude, cZoom)); //$NON-NLS-1$
+
+			long now = System.currentTimeMillis();
+
+			if (pStatement == null) {
+				return;
 			}
-		} catch (java.sql.SQLException e) {
-			log.debug("Search failed", e); //$NON-NLS-1$
+			try {
+				pStatement.setDouble(1, cBottomLatitude);
+				pStatement.setDouble(2, cTopLatitude);
+				pStatement.setDouble(3, cLeftLongitude);
+				pStatement.setDouble(4, cRightLongitude);
+				ResultSet result = pStatement.executeQuery();
+
+				List<MapRenderObject> local = new LinkedList<MapRenderObject>();
+				try {
+					int count = 0;
+					while (result.next()) {
+						long id = result.getLong(1);
+						MapRenderObject obj = new MapRenderObject(id);
+						obj.setData(result.getBytes(2));
+						obj.setName(result.getString(3));
+						obj.setType(result.getInt(4));
+						count++;
+						local.add(obj);
+					}
+
+					cObjects = local;
+					log.info(String
+							.format("Search has been done in %s ms. %s results were found.", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
+				} finally {
+					result.close();
+				}
+			} catch (java.sql.SQLException e) {
+				log.debug("Search failed", e); //$NON-NLS-1$
+			}
 		}
+		
 		// create new instance to distinguish that cache was changed
 		RectF newLoc = new RectF((float)cLeftLongitude, (float)cTopLatitude, (float)cRightLongitude, (float)cBottomLatitude);
-		Bitmap bmp = renderer.generateNewBitmap(newLoc, cObjects, cZoom, 0);
+		Bitmap bmp = renderer.generateNewBitmap(newLoc, cObjects, cZoom, cRotate);
 		Bitmap oldBmp = this.bmp;
 		this.bmp = bmp;
 		cachedWaysLoc = newLoc;
@@ -198,10 +214,12 @@ public class RenderMapsRepositories {
 	
 	public synchronized void clearCache() {
 		cObjects.clear();
+		cBottomLatitude = cLeftLongitude = cRightLongitude = cTopLatitude = cRotate = cZoom = 0;
 		if(bmp != null){
 			bmp.recycle();
 			bmp = null;
 		}
+		cachedWaysLoc = new RectF();
 	}
 
 }

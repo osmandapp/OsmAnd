@@ -21,7 +21,7 @@ import net.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.ITileSource;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
-import net.osmand.render.RenderMapsRepositories;
+import net.osmand.render.MapRenderRepositories;
 import net.osmand.views.POIMapLayer;
 
 import org.apache.commons.logging.Log;
@@ -49,6 +49,7 @@ public class ResourceManager {
 	public static final String TRANSPORT_PATH = APP_DIR + IndexConstants.TRANSPORT_INDEX_DIR;
 	public static final String TILES_PATH = APP_DIR+"tiles/"; //$NON-NLS-1$
 	public static final String TEMP_SOURCE_TO_LOAD = "temp"; //$NON-NLS-1$
+	public static final String VECTOR_MAP = "#vector_map"; //$NON-NLS-1$
 	
 	public static final int LIMIT_TRANSPORT = 200;
 	
@@ -82,14 +83,14 @@ public class ResourceManager {
 	
 	protected final Map<String, TransportIndexRepository> transportRepositories = new LinkedHashMap<String, TransportIndexRepository>();
 	
-	protected final RenderMapsRepositories renderer ;
+	protected final MapRenderRepositories renderer ;
 	
 	public final  AsyncLoadingThread asyncLoadingTiles = new AsyncLoadingThread();
 	
 	
 	public ResourceManager(Context context) {
 		this.context = context;
-		this.renderer = new RenderMapsRepositories(context);
+		this.renderer = new MapRenderRepositories(context);
 		// TODO start/stop this thread when needed?
 		asyncLoadingTiles.start();
 		dirWithTiles = new File(Environment.getExternalStorageDirectory(), TILES_PATH);
@@ -526,14 +527,14 @@ public class ResourceManager {
 	}
 	
 	////////////////////////////////////////////// Working with map ////////////////////////////////////////////////
-	public void updateRendererIfNeeded(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom){
-		if(!renderer.updateMapIsNotNeeded(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom)){
+	public void updateRendererIfNeeded(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, float rotate){
+		if(!renderer.updateMapIsNotNeeded(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, rotate)){
 			asyncLoadingTiles.requestToLoadMap(
-					new MapLoadRequest(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom));
+					new MapLoadRequest(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, rotate));
 		}
 	}
 	
-	public RenderMapsRepositories getRenderer() {
+	public MapRenderRepositories getRenderer() {
 		return renderer;
 	}
 	
@@ -584,16 +585,16 @@ public class ResourceManager {
 	}	
 	
 	
-	public synchronized void setMapSource(ITileSource source){
+	public synchronized void updateMapSource(boolean useVectorMap, ITileSource source){
 		log.info("Clear cache with new source " + cacheOfImages.size()); //$NON-NLS-1$
 		ArrayList<String> list = new ArrayList<String>(cacheOfImages.keySet());
-		// remove first images (as we think they are older)
 		for (int i = 0; i < list.size(); i ++) {
 			Bitmap bmp = cacheOfImages.remove(list.get(i));
 			if(bmp != null){
 				bmp.recycle();
 			}
 		}
+		renderer.clearCache();
 		if(source == null || source.getBitDensity() == 0){
 			maxImgCacheSize = 32;
 		} else {
@@ -681,15 +682,17 @@ public class ResourceManager {
 		public final double leftLongitude;
 		public final double rightLongitude;
 		public final int zoom;
+		public final float rotate;
 		
 		public MapLoadRequest(double topLatitude, double leftLongitude, 
-				double bottomLatitude, double rightLongitude, int zoom) {
+				double bottomLatitude, double rightLongitude, int zoom, float rotate) {
 			super();
 			this.bottomLatitude = bottomLatitude;
 			this.leftLongitude = leftLongitude;
 			this.rightLongitude = rightLongitude;
 			this.topLatitude = topLatitude;
 			this.zoom = zoom;
+			this.rotate = rotate;
 		}
 	}
 	
@@ -732,7 +735,7 @@ public class ResourceManager {
 						} else if(req instanceof MapLoadRequest){
 							if(!mapLoaded){
 								MapLoadRequest r = (MapLoadRequest) req;
-								renderer.loadMap(r.topLatitude, r.leftLongitude, r.bottomLatitude, r.rightLongitude, r.zoom);
+								renderer.loadMap(r.topLatitude, r.leftLongitude, r.bottomLatitude, r.rightLongitude, r.zoom, r.rotate);
 								mapLoaded = true;
 							}
 						}

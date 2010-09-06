@@ -241,7 +241,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		mapView.addLayer(contextMenuLayer, 9);
 		// 10. route info layer
 		routeInfoLayer = new RouteInfoLayer(routingHelper, (LinearLayout) findViewById(R.id.RouteLayout));
-		mapView.addLayer(routeInfoLayer, 9);
+		mapView.addLayer(routeInfoLayer, 10);
 		
 
 		
@@ -707,28 +707,31 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		trafficLayer.setVisible(OsmandSettings.isShowingYandexTraffic(this));
 	}
 	
-	private void updateMapSource(ITileSource newSource){
+	private void updateMapSource(){
+		boolean vectorData = OsmandSettings.isUsingMapVectorData(this);
+		ITileSource newSource = OsmandSettings.getMapTileSource(this);
 		if(mapView.getMap() instanceof SQLiteTileSource){
 			((SQLiteTileSource)mapView.getMap()).closeDB();
 		}
-		((OsmandApplication)getApplication()).getResourceManager().setMapSource(newSource);
-		mapView.setMap(newSource);
+		((OsmandApplication)getApplication()).getResourceManager().updateMapSource(vectorData, newSource);
+		
+		mapView.setMap(vectorData ? null : newSource);
+		rendererLayer.setVisible(vectorData);
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-		// TODO not commit it 
-		rendererLayer.setVisible(true);
 		
 		if(OsmandSettings.getMapOrientation(this) != getRequestedOrientation()){
 			setRequestedOrientation(OsmandSettings.getMapOrientation(this));
 		}
 		currentScreenOrientation = getWindow().getWindowManager().getDefaultDisplay().getOrientation();
 		
-		ITileSource source = OsmandSettings.getMapTileSource(this);
-		if(!Algoritms.objectEquals(mapView.getMap(), source)){
-			updateMapSource(source);
+		boolean showTiles = !OsmandSettings.isUsingMapVectorData(this);
+		ITileSource source = showTiles ? OsmandSettings.getMapTileSource(this) : null;
+		if (showTiles != !rendererLayer.isVisible() || !Algoritms.objectEquals(mapView.getMap(), source)) {
+			updateMapSource();
 		}
 		
 		updateApplicationModeSettings();
@@ -1280,17 +1283,27 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	}
 	
 	private void selectMapLayer(){
-		Map<String, String> entriesMap = SettingsActivity.getTileSourceEntries();
+		Map<String, String> entriesMap = SettingsActivity.getTileSourceEntries(this);
 		Builder builder = new AlertDialog.Builder(this);
 		final ArrayList<String> keys = new ArrayList<String>(entriesMap.keySet());
-		builder.setItems(entriesMap.values().toArray(new String[entriesMap.size()]), new DialogInterface.OnClickListener(){
+		String[] items = new String[entriesMap.size() + 1];
+		items[0] = getString(R.string.vector_data);
+		int i = 1;
+		for(String it : entriesMap.values()){
+			items[i++] = it;
+		}
+		builder.setItems(items, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				Editor edit = OsmandSettings.getWriteableEditor(MapActivity.this);
-				edit.putString(OsmandSettings.MAP_TILE_SOURCES, keys.get(which));
+				if(which == 0){
+					edit.putBoolean(OsmandSettings.MAP_VECTOR_DATA, true);
+				} else {
+					edit.putBoolean(OsmandSettings.MAP_VECTOR_DATA, false);
+					edit.putString(OsmandSettings.MAP_TILE_SOURCES, keys.get(which - 1));
+				}
 				edit.commit();
-				updateMapSource(OsmandSettings.getMapTileSource(MapActivity.this));
-				mapView.refreshMap();
+				updateMapSource();
 			}
 			
 		});

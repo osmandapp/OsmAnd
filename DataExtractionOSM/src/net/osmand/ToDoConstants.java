@@ -16,23 +16,30 @@ public class ToDoConstants {
 	//  railway( station, subway?) - issue 17
 	//   86. Allow to add/edit custom tags to POI objects.
 	//   87. Use network availability for defining loading tiles from internet.
+	//   88. Implement show gpx track from folder and navigate using gpx track.
+	//   89. Transport redesign UI (enable run from context menu, switch go to goal/not) !
+	
+	// TODO small improvements for release :
+	// 1. If select vector map, notice if there are no loaded maps. 
 	
 	// TODO Improvements:
 	//  1! VELCOM
 	//  2. rotate map gps without location
-	//  3! Transport redesign call UI (enable context menu call, switch go to goal/not) 
-	//  4. recalculating route when location is far from !
+	//  4. recalculating route when location is far from ! (error)
 	//  5. keyboard (issue 43 )?
 	//  6. Do not upload empty files (transport, poi... ). 
 	//  7. Implement auto-delete from site (done, should be ported from C#)
+	//  8. In all places verify to use float lat/lon improve disk space for indexes !!!
+	//  13! Support multiple database for map rendering
 	
-	//  8. In all places verify to use float lat/lon improve usage indexes !!!
 	//  + 9. Render map on bitmap in another thread
 	//  + 10. Sort objects before render (according layering)
-	//  11!! Investigate ResourceManager close methods and clear cache when Map switches !!!
-	//  12! When switch to map check that indexes were loaded !!
-	
-	//  11. Move JUnidecode on client save space for some indexes
+	//  + 11!! Investigate ResourceManager close methods and clear cache when Map switches !!! (MAP SWITCH, update settings)
+	//  + 12! When switch to map check that indexes were loaded !!
+	//  + 14. Rotate vector map
+	//  15. Draw layers -> icons -> text. See intersects of double streets.
+
+	//  11. Move JUnidecode on client save space for some indexes adn 
 	//  12. Fix : find proper location for streets ! centralize them (when create index)?
 	
 	// TODO Check 
@@ -49,12 +56,13 @@ public class ToDoConstants {
 	
 	// Not clear if it is really needed 
 	//   69. Add phone information to POI
-	//   70. Show building numbers over map (require changing address index - index 2 more columns lat/lon for fast search)
 	//   66. Transport routing (show next stop, total distance, show stop get out, voice) (needed ?).
 	//   85. Enable on/off screen for bike navigation (?)
 	//   83. Add monitoring service to send locations to internet (?)
 
 	// DONE ANDROID :
+	// 70. Show building numbers over map (require changing address index - index 2 more columns lat/lon for fast search). 
+	//	  (Not needed, because of vector rendering)
 	// 82. Rotate map according compass
 	// 85. Remove context menu on long press map ! Accumulate actions and show label (+)
 	
