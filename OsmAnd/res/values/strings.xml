@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="vector_data">Vector osm maps</string>
 	<string name="transport_context_menu">Search transport at stop</string>
 	<string name="point_on_map">Point on map\n Lat {0,number,#.####} lon {1,number,#.####}</string>
 	<string name="osb_bug_name">Bug</string>

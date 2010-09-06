@@ -322,7 +322,13 @@ public class OsmandSettings {
 	}
 
 	// this value string is synchronized with settings_pref.xml preference name
+	public static final String MAP_VECTOR_DATA = "map_vector_data"; //$NON-NLS-1$
 	public static final String MAP_TILE_SOURCES = "map_tile_sources"; //$NON-NLS-1$
+	
+	public static boolean isUsingMapVectorData(Context ctx){
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(MAP_VECTOR_DATA, false);
+	}
 
 	public static ITileSource getMapTileSource(Context ctx) {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
@@ -358,7 +364,7 @@ public class OsmandSettings {
 					return new TileSourceManager.TileSourceTemplate(dir.getName(), url);
 				}
 			}
-			
+				
 		}
 		return TileSourceManager.getMapnikSource();
 	}

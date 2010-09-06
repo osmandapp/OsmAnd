@@ -50,8 +50,8 @@ public class RendererLayer implements OsmandMapLayer {
 			double leftLongitude = MapUtils.getLongitudeFromTile(view.getFloatZoom(), tileRect.left);
 			double bottomLatitude = MapUtils.getLatitudeFromTile(view.getFloatZoom(), tileRect.bottom);
 			double rightLongitude = MapUtils.getLongitudeFromTile(view.getFloatZoom(), tileRect.right);
-			resourceManager.updateRendererIfNeeded(topLatitude, leftLongitude, bottomLatitude, rightLongitude, view.getZoom());
-			RenderMapsRepositories renderer = resourceManager.getRenderer();
+			resourceManager.updateRendererIfNeeded(topLatitude, leftLongitude, bottomLatitude, rightLongitude, view.getZoom(), view.getRotate());
+			MapRenderRepositories renderer = resourceManager.getRenderer();
 			if (renderer != null && renderer.getBitmap() != null) {
 				RectF newLoc = renderer.getCachedWaysLoc();
 				double leftX1 = MapUtils.getTileNumberX(view.getFloatZoom(), newLoc.left);
@@ -73,7 +73,6 @@ public class RendererLayer implements OsmandMapLayer {
 	
 	public void setVisible(boolean visible) {
 		this.visible = visible;
-		view.setShowMapTiles(!visible);
 		view.refreshMap();
 	}
 	

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="vector_data">Векторные osm карты</string>
 	<string name="transport_context_menu">Искать транспорт на остановке</string>
 	<string name="point_on_map">Точка на карте\n Ш {0,number,#.####} Д {1,number,#.####}</string>
 	<string name="osb_bug_name">Bug</string>

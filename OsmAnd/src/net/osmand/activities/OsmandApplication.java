@@ -45,6 +45,7 @@ public class OsmandApplication extends Application {
     public void	onCreate(){
     	super.onCreate();
     	manager = new ResourceManager(this);
+    	routingHelper = new RoutingHelper(OsmandSettings.getApplicationMode(OsmandApplication.this), OsmandApplication.this, player);
     	uiHandler = new Handler();
     	startApplication();
 	}
@@ -88,6 +89,7 @@ public class OsmandApplication extends Application {
 	public String initCommandPlayer(){
 		if(player == null){
 			player = new CommandPlayer(OsmandApplication.this);
+			routingHelper.getVoiceRouter().setPlayer(player);
 		}
 		return player.init();
 	}
@@ -111,7 +113,7 @@ public class OsmandApplication extends Application {
 									warnings.add(w);
 								}
 							}
-							routingHelper = new RoutingHelper(OsmandSettings.getApplicationMode(OsmandApplication.this), OsmandApplication.this, player);
+							
 							SavingTrackHelper helper = new SavingTrackHelper(OsmandApplication.this);
 							if (helper.hasDataToSave()) {
 								startDialog.startTask(getString(R.string.saving_gpx_tracks), -1);
