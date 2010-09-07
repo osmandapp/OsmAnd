@@ -51,7 +51,9 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	private int clPedestrianRoad = Color.rgb(250, 128, 115);
 	
 	private PathEffect pedestrianPathEffect = new DashPathEffect(new float[]{2,2}, 1);
-	private PathEffect trackPathEffect = new DashPathEffect(new float[]{5,2}, 1);
+	private PathEffect trackPathEffect = new DashPathEffect(new float[]{6,2}, 1);
+	private PathEffect subwayPathEffect = new DashPathEffect(new float[]{6,3}, 1);
+	private PathEffect railwayPathEffect = new DashPathEffect(new float[]{7,7}, 1);
 
 	private final Context context;
 	
@@ -120,11 +122,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		if(obj.isPoint()){
 			drawPoint(obj, canvas, leftTileX, topTileY, zoom, rotate);
 		} else if(obj.isPolyLine()){
-			if(MapRenderingTypes.isHighway(obj.getType())){
-				drawHighway(obj, canvas, leftTileX, topTileY, zoom, rotate);
-			} else {
-				// TODO
-			}
+			drawPolyline(obj, canvas, leftTileX, topTileY, zoom, rotate);
 		} else {
 			PointF center = drawPolygon(obj, canvas, leftTileX, topTileY, zoom, rotate);
 			if(center != null){
@@ -174,9 +172,17 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				color = Color.rgb(221, 221, 221);
 			}
 			
+		} else if (type == MapRenderingTypes.WATERWAY) {
+			if(subtype == 3){
+				color = Color.rgb(181, 208, 208);
+			}
 		} else if (type == MapRenderingTypes.AMENITY_TRANSPORTATION) {
 			if (subtype == 1 || subtype == 2) {
 				color = Color.rgb(246, 238, 183);
+			}
+		} else if (type == MapRenderingTypes.AMENITY_ENTERTAINMENT) {
+			if (subtype == 3) {
+				color = Color.rgb(204, 153, 153);
 			}
 		} else if (type == MapRenderingTypes.AMENITY_EDUCATION) {
 			if(subtype == 2 || subtype == 3 || subtype == 5){
@@ -275,7 +281,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		
 	}
 	
-	private void drawHighway(MapRenderObject obj, Canvas canvas, double leftTileX, double topTileY, int zoom, float rotate) {
+	private void drawPolyline(MapRenderObject obj, Canvas canvas, double leftTileX, double topTileY, int zoom, float rotate) {
 		if(obj.getPointsLength() == 0){
 			return;
 		}
@@ -287,51 +293,101 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		
 		
 		Paint paint = paintStroke;
-		int hwType = MapRenderingTypes.getHighwayType(obj.getType());
-		boolean carRoad = true;
-		if (hwType == MapRenderingTypes.PL_HW_TRUNK) {
-			paint.setColor(clTrunkRoad);
-		} else if (hwType == MapRenderingTypes.PL_HW_MOTORWAY) {
-			paint.setColor(clMotorwayRoad);
-		} else if (hwType == MapRenderingTypes.PL_HW_PRIMARY) {
-			paint.setColor(clPrimaryRoad);
-		} else if (hwType == MapRenderingTypes.PL_HW_SECONDARY) {
-			paint.setColor(clSecondaryRoad);
-		} else if (hwType == MapRenderingTypes.PL_HW_TERTIARY) {
-			paint.setColor(clTertiaryRoad);
-		} else if (hwType == MapRenderingTypes.PL_HW_SERVICE || hwType == MapRenderingTypes.PL_HW_UNCLASSIFIED
-				||  hwType == MapRenderingTypes.PL_HW_RESIDENTIAL) {
-			paint.setColor(clRoadColor);
-		} else {
-			carRoad = false;
-			paint.setStrokeWidth(2);
-			paint.setPathEffect(pedestrianPathEffect);
-			if(hwType == MapRenderingTypes.PL_HW_TRACK || hwType == MapRenderingTypes.PL_HW_PATH){
-				paint.setColor(clTrackRoad);
-				paint.setPathEffect(trackPathEffect);
-			} else if(hwType == MapRenderingTypes.PL_HW_CYCLEWAY || hwType == MapRenderingTypes.PL_HW_BRIDLEWAY){
-				paint.setColor(clCycleWayRoad);
+		int type = MapRenderingTypes.getObjectType(obj.getType());
+		int subtype = MapRenderingTypes.getPolylineSubType(obj.getType());
+		
+		boolean showText = true;
+		boolean showLine = true;
+		paint.setPathEffect(null);
+		paint.setShadowLayer(0, 0, 0, 0);
+		if (type == MapRenderingTypes.HIGHWAY) {
+			int hwType = subtype;
+			boolean carRoad = true;
+			if (hwType == MapRenderingTypes.PL_HW_TRUNK) {
+				paint.setColor(clTrunkRoad);
+			} else if (hwType == MapRenderingTypes.PL_HW_MOTORWAY) {
+				paint.setColor(clMotorwayRoad);
+			} else if (hwType == MapRenderingTypes.PL_HW_PRIMARY) {
+				paint.setColor(clPrimaryRoad);
+			} else if (hwType == MapRenderingTypes.PL_HW_SECONDARY) {
+				paint.setColor(clSecondaryRoad);
+			} else if (hwType == MapRenderingTypes.PL_HW_TERTIARY) {
+				paint.setColor(clTertiaryRoad);
+				paint.setShadowLayer(2, 0, 0, Color.rgb(186, 186, 186));
+			} else if (hwType == MapRenderingTypes.PL_HW_SERVICE || hwType == MapRenderingTypes.PL_HW_UNCLASSIFIED
+					|| hwType == MapRenderingTypes.PL_HW_RESIDENTIAL) {
+				paint.setShadowLayer(1, 0, 0, Color.rgb(194, 194, 194));
+				paint.setColor(clRoadColor);
+			} else if (hwType == MapRenderingTypes.PL_HW_PEDESTRIAN) {
+				paint.setShadowLayer(1, 0, 0, Color.rgb(176, 176, 176));
+				paint.setColor(Color.rgb(236, 236, 236));
 			} else {
-				paint.setColor(clPedestrianRoad);
+				carRoad = false;
+				paint.setStrokeWidth(2);
+				paint.setPathEffect(pedestrianPathEffect);
+				if (hwType == MapRenderingTypes.PL_HW_TRACK || hwType == MapRenderingTypes.PL_HW_PATH) {
+					paint.setColor(clTrackRoad);
+					paint.setPathEffect(trackPathEffect);
+				} else if (hwType == MapRenderingTypes.PL_HW_CYCLEWAY || hwType == MapRenderingTypes.PL_HW_BRIDLEWAY) {
+					paint.setColor(clCycleWayRoad);
 				
+				} else {
+					
+					paint.setColor(clPedestrianRoad);
+
+				}
 			}
-			
-			
+			if (carRoad) {
+				if (zoom < 16) {
+					paint.setStrokeWidth(6);
+				} else if (zoom == 16) {
+					paint.setStrokeWidth(7);
+				} else if (zoom == 17) {
+					paint.setStrokeWidth(11);
+				} else if (zoom >= 18) {
+					paint.setStrokeWidth(16);
+				}
+				if (hwType == MapRenderingTypes.PL_HW_SERVICE) {
+					paint.setStrokeWidth(paint.getStrokeWidth() - 2);
+				}
+			}
+			showText = carRoad || zoom > 16;
+		} else if(type == MapRenderingTypes.BARRIER){
+			showLine = zoom > 16;	
+//			if(subtype == 2){
+			paint.setColor(Color.rgb(137, 136, 132));
+//			}
+			paint.setStrokeWidth(1);
+		} else if(type == MapRenderingTypes.RAILWAY){
+			paint.setStrokeWidth(2);
+			if(subtype == 6){
+				paint.setColor(Color.rgb(153, 153, 153));
+				if(zoom > 16){
+					paint.setStrokeWidth(3);
+				}
+				paint.setPathEffect(subwayPathEffect);
+			} else if(subtype == 2){
+				paint.setColor(Color.rgb(62, 62, 62));
+			} else if(subtype == 1){
+				paint.setColor(Color.rgb(153, 153, 153));
+				if(zoom >= 16){
+					paint.setStrokeWidth(3);
+				}
+				paint.setPathEffect(railwayPathEffect);
+			} else {
+				paint.setColor(Color.rgb(153, 153, 153));
+			}
+		} else if(type == MapRenderingTypes.WATERWAY){
+			if(subtype >= 1 && subtype <= 6){
+				paint.setColor(Color.rgb(181, 208, 208));
+			}
+		} else {
+			paint.setColor(Color.BLACK);
+			paint.setStrokeWidth(1);
 		}
-		if (carRoad) {
-			paint.setPathEffect(null);
-			if (zoom < 16) {
-				paint.setStrokeWidth(6);
-			} else if (zoom == 16) {
-				paint.setStrokeWidth(7);
-			} else if (zoom == 17) {
-				paint.setStrokeWidth(11);
-			} else if (zoom >= 18) {
-				paint.setStrokeWidth(16);
-			}
-			if(hwType == MapRenderingTypes.PL_HW_SERVICE){
-				paint.setStrokeWidth(paint.getStrokeWidth() - 2);
-			}
+		
+		if(!showLine){
+			return;
 		}
 
 		boolean inverse = false;
@@ -369,7 +425,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		}
 		if (path != null) {
 			canvas.drawPath(path, paint);
-			if (obj.getName() != null && carRoad) {
+			if (obj.getName() != null && showText) {
 				
 				if (paintText.measureText(obj.getName()) < Math.max(Math.abs(xLength), Math.abs(yLength))) {
 					if (inverse) {
@@ -441,6 +497,37 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					
 				}
 			}
+		} else if(type == MapRenderingTypes.TOURISM){
+			if (zoom > 15) {
+				switch (subType) {
+				case 4:
+					resId = R.drawable.h_camp_site;
+					break;
+				case 5:
+					resId = R.drawable.h_caravan_park;
+					break;
+				case 6:
+					resId = R.drawable.h_camp_site; // picnic
+					break;
+				case 9:
+					resId = R.drawable.h_alpinehut;
+					break;
+				case 10:
+				case 11:
+					resId = R.drawable.h_guest_house;
+					break;
+				case 12:
+				case 14:
+					resId = R.drawable.h_hostel;
+					break;
+				case 13:
+					resId = R.drawable.h_hotel;
+					break;
+				case 15:
+					resId = R.drawable.h_museum;
+					break;
+				}
+			}
 		} else if(type == MapRenderingTypes.AMENITY_SUSTENANCE){
 			if (zoom > 15) {
 				switch (subType) {
@@ -498,6 +585,14 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				}
 			} else if (subType == 2) {
 				resId = R.drawable.h_hospital;
+			}
+		} else if (type == MapRenderingTypes.AMENITY_ENTERTAINMENT) {
+			if (zoom >= 15) {
+				if (subType == 3) {
+					resId = R.drawable.h_cinema;
+				} else if(subType == 9) {
+					resId = R.drawable.h_theatre;
+				}
 			}
 		} else if(type == MapRenderingTypes.AMENITY_OTHER){
 			if (zoom > 16) {
