@@ -54,18 +54,22 @@ public class MapRenderObject {
 		int order = -1;
 		if((type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POLYGON_TYPE){
 			if(MapRenderingTypes.isPolygonBuilding(type)){
-				order = 34;
+				order = 64;
 			} else {
 				order = 1;
 			}
 		} else if((type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POLYLINE_TYPE){
-			if(MapRenderingTypes.isHighway(type)){
-				order = 32 - MapRenderingTypes.getHighwayType(type) + 1;
-			} else {
-				order = 2;
+			int oType = MapRenderingTypes.getObjectType(type);
+			int sType = MapRenderingTypes.getPolylineSubType(type);
+			if(oType == MapRenderingTypes.HIGHWAY){
+				order = 32 - sType + 24;
+			} else if(oType == MapRenderingTypes.RAILWAY){
+				order = 58;
+			} else if(oType == MapRenderingTypes.WATERWAY){
+				order = 18;
 			}
 		} else {
-			order = 64;
+			order = 128;
 		}
 		return order;
 	}

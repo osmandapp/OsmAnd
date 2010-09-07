@@ -38,6 +38,7 @@ public class ToDoConstants {
 	//  + 12! When switch to map check that indexes were loaded !!
 	//  + 14. Rotate vector map
 	//  15. Draw layers -> icons -> text. See intersects of double streets.
+	//  16. Internet access bits
 
 	//  11. Move JUnidecode on client save space for some indexes adn 
 	//  12. Fix : find proper location for streets ! centralize them (when create index)?
