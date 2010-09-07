@@ -52,20 +52,20 @@ public class MapRenderingTypes {
 	public final static int MASK_10 = (1 << 10) - 1;
 	
 	public final static int HIGHWAY = 1; 
-	public final static int BARRIER = 2; 
+	public final static int BARRIER = 2; //+R 
 	public final static int WATERWAY = 3; 
 	public final static int RAILWAY = 4;
 	public final static int AEROWAY = 5; 
 	public final static int AERIALWAY = 6; 
 	public final static int POWER = 7; 
 	public final static int MAN_MADE = 8; 
-	public final static int LEISURE = 9; 
-	public final static int OFFICE = 10; 
-	public final static int SHOP = 11; 
-	public final static int EMERGENCY = 12; 
-	public final static int TOURISM = 13; //+R TODO zoo, attractions
-	public final static int HISTORIC = 14; 
-	public final static int LANDUSE = 15;  
+	public final static int LEISURE = 9; //+R 
+	public final static int OFFICE = 10; //+R
+	public final static int SHOP = 11;  //+R
+	public final static int EMERGENCY = 12; //+R 
+	public final static int TOURISM = 13; //+R
+	public final static int HISTORIC = 14; //+R
+	public final static int LANDUSE = 15;  //+R
 	public final static int MILITARY = 16; 
 	public final static int NATURAL = 17;
 	public final static int AMENITY_SUSTENANCE = 18; //+R
@@ -415,11 +415,11 @@ public class MapRenderingTypes {
 		register("highway", "tertiary", HIGHWAY, PL_HW_TERTIARY, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("highway", "unclassified", HIGHWAY, PL_HW_UNCLASSIFIED, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("highway", "road", HIGHWAY, PL_HW_UNCLASSIFIED, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("highway", "residential", HIGHWAY, PL_HW_RESIDENTIAL, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("highway", "residential", HIGHWAY, PL_HW_RESIDENTIAL, POLYLINE_TYPE, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("highway", "living_street", HIGHWAY, PL_HW_LIVING_STREET, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("highway", "service", HIGHWAY, PL_HW_SERVICE, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("highway", "service", HIGHWAY, PL_HW_SERVICE, POLYLINE_TYPE, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("highway", "track", HIGHWAY, PL_HW_TRACK, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("highway", "pedestrian", HIGHWAY, PL_HW_PEDESTRIAN, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("highway", "pedestrian", HIGHWAY, PL_HW_PEDESTRIAN, POLYLINE_TYPE, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		
 //		register("highway", "raceway", HIGHWAY, PL_HW_RACEWAY, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("highway", "services", HIGHWAY, PL_HW_SERVICES, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -842,7 +842,7 @@ public class MapRenderingTypes {
 	
 	// 22. amenity healthcare
 		registerAsBuilding("amenity", "pharmacy", AMENITY_HEALTHCARE, 1); //$NON-NLS-1$ //$NON-NLS-2$
-		registerAsBuilding("amenity", "hospital", AMENITY_HEALTHCARE, 2); //$NON-NLS-1$ //$NON-NLS-2$
+		register("amenity", "hospital", AMENITY_HEALTHCARE, 2, POLYGON_WITH_CENTER_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("amenity", "baby_hatch", AMENITY_HEALTHCARE, 3, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("amenity", "dentist", AMENITY_HEALTHCARE, 4, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("amenity", "doctors", AMENITY_HEALTHCARE, 5, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$

@@ -2,7 +2,9 @@ package net.osmand.render;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.LogUtil;
 import net.osmand.R;
@@ -15,6 +17,7 @@ import org.apache.commons.logging.Log;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
@@ -23,10 +26,12 @@ import android.graphics.Path;
 import android.graphics.PathEffect;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.graphics.Bitmap.Config;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
+import android.graphics.Shader.TileMode;
 import android.util.FloatMath;
 
 public class OsmandRenderer implements Comparator<MapRenderObject> {
@@ -54,6 +59,8 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	private PathEffect trackPathEffect = new DashPathEffect(new float[]{6,2}, 1);
 	private PathEffect subwayPathEffect = new DashPathEffect(new float[]{6,3}, 1);
 	private PathEffect railwayPathEffect = new DashPathEffect(new float[]{7,7}, 1);
+	
+	private Map<Integer, Shader> shaders = new LinkedHashMap<Integer, Shader>();
 
 	private final Context context;
 	
@@ -85,7 +92,14 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		
 	}
 	
-	
+	public Shader getShader(int resId){
+		if(shaders.get(resId) == null){
+			Shader sh = new BitmapShader(
+					BitmapFactory.decodeResource(context.getResources(), resId), TileMode.REPEAT, TileMode.REPEAT);
+			shaders.put(resId, sh);
+		}	
+		return shaders.get(resId);
+	}
 	
 	@Override
 	public int compare(MapRenderObject object1, MapRenderObject object2) {
@@ -164,7 +178,9 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		Path path = null;
 		int type = MapRenderingTypes.getObjectType(obj.getType());
 		int subtype = MapRenderingTypes.getPolygonSubType(obj.getType());
-		int color = Color.LTGRAY;
+		int color = Color.WHITE;
+		int colorAround = 0;
+		Shader shader = null;
 		if (type == MapRenderingTypes.MAN_MADE) {
 			if (subtype == MapRenderingTypes.SUBTYPE_BUILDING) {
 				color = Color.rgb(188, 169, 169);
@@ -175,6 +191,106 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		} else if (type == MapRenderingTypes.WATERWAY) {
 			if(subtype == 3){
 				color = Color.rgb(181, 208, 208);
+			}
+		} else if (type == MapRenderingTypes.HIGHWAY) {
+			if (subtype == MapRenderingTypes.PL_HW_SERVICE || subtype == MapRenderingTypes.PL_HW_UNCLASSIFIED
+				|| subtype == MapRenderingTypes.PL_HW_RESIDENTIAL) {
+				colorAround = Color.rgb(194, 194, 194);
+				color = clRoadColor;
+			} else if(subtype == MapRenderingTypes.PL_HW_PEDESTRIAN || subtype == MapRenderingTypes.PL_HW_FOOTWAY){
+				color = Color.rgb(236, 236, 236);
+				colorAround = Color.rgb(176, 176, 176);
+			}
+		} else if (type == MapRenderingTypes.TOURISM) {
+			if (subtype == 2) {
+				color = Color.rgb(204, 153, 153);
+			} else if(subtype == 8){
+				shader = getShader(R.drawable.h_zoo);
+			}
+			
+		} else if (type == MapRenderingTypes.NATURAL) {
+			if(subtype == 23){
+				color = Color.rgb(114, 191, 129);
+			} else if(subtype == 2){
+				color = Color.rgb(238, 204, 85);
+			} else if(subtype == 21 || subtype == 5){
+				color = Color.rgb(181, 214, 241);
+			}
+			
+		} else if (type == MapRenderingTypes.LANDUSE) {
+			switch (subtype) {
+			case 1:
+				color = Color.rgb(189, 227, 203);
+				break;
+			case 2:
+			case 22:
+				color = Color.rgb(180, 213, 240);
+				break;
+			case 3:
+				color = Color.rgb(235, 215, 254);
+				break;
+			case 4:
+				shader = getShader(R.drawable.h_grave_yard);
+				break;
+			case 5:
+				color = Color.rgb(239, 200, 200);
+				break;
+			case 6:
+				color = Color.rgb(157, 157, 108);
+				break;
+			case 10:
+				shader = getShader(R.drawable.h_forest);
+				break;
+			case 12:
+				color = Color.rgb(207, 236, 168);
+				break;
+			case 15:
+				color = Color.rgb(223, 209, 214);
+				break;
+			case 23:
+				color = Color.rgb(221, 221, 221);
+				break;
+			case 24:
+				color = Color.rgb(254, 234, 234);
+				break;
+			case 27:
+				shader = getShader(R.drawable.h_vineyard);
+				break;
+
+			}
+		} else if (type == MapRenderingTypes.LEISURE) {
+			colorAround = Color.rgb(147, 207, 170);
+			switch (subtype) {
+			case 2:
+				color = Color.rgb(189, 227, 203);
+				break;
+			case 3:
+			case 14:
+			case 15:
+				color = Color.rgb(199, 241, 163);
+				break;
+			case 6:
+				color = Color.rgb(137, 210, 174);
+			case 4:
+				color = Color.rgb(51, 204, 153);
+				break;
+			case 5:
+				color = Color.rgb(189, 207, 203);
+				break;
+			case 12:
+				color = Color.rgb(206, 246, 202);
+				break;
+			case 13:
+				color = Color.rgb(204, 255, 241);
+				break;
+			case 11:
+				shader = getShader(R.drawable.h_nr);
+				break;
+			}
+		} else if (type == MapRenderingTypes.AMENITY_HEALTHCARE) {
+			if (subtype == 2) {
+				color = Color.rgb(240, 240, 216);
+				colorAround = Color.rgb(212, 168, 158);
 			}
 		} else if (type == MapRenderingTypes.AMENITY_TRANSPORTATION) {
 			if (subtype == 1 || subtype == 2) {
@@ -187,37 +303,14 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		} else if (type == MapRenderingTypes.AMENITY_EDUCATION) {
 			if(subtype == 2 || subtype == 3 || subtype == 5){
 				color = Color.rgb(240, 240, 216);
+				colorAround = Color.rgb(212, 168, 158);
 			} else {
 				// draw as building education
 				color = Color.rgb(188, 169, 169);
 			}
-		} else if (type == MapRenderingTypes.LEISURE) {
-			switch (subtype) {
-			case 4:
-				color = Color.rgb(51, 204, 153);
-				break;
-			case 12:
-				color = Color.rgb(206, 246, 202);
-				break;
-			}
-
-		} else if (type == MapRenderingTypes.LANDUSE) {
-			switch (subtype) {
-			case 5:
-				color = Color.rgb(239, 200, 200);
-				break;
-			case 12:
-				color = Color.rgb(207, 236, 168);
-				break;
-			case 15:
-				color = Color.rgb(223, 209, 214);
-				break;
-
-			}
 		}
 			
 		paint.setColor(color);
-		
 		for (int i = 0; i < obj.getPointsLength(); i++) {
 			float lon = obj.getPointLongitude(i);
 			float lat = obj.getPointLatitude(i);
@@ -235,7 +328,13 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		if (path != null) {
 			xText /= obj.getPointsLength();
 			yText /= obj.getPointsLength();
+			paint.setShader(shader);
 			canvas.drawPath(path, paint);
+			if(colorAround != 0){
+				paintStroke.setColor(colorAround);
+				paintStroke.setStrokeWidth(1);
+				canvas.drawPath(path, paintStroke);
+			}
 			String name = obj.getName();
 			if(name != null){
 				
@@ -300,6 +399,9 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		boolean showLine = true;
 		paint.setPathEffect(null);
 		paint.setShadowLayer(0, 0, 0, 0);
+		paint.setColor(Color.BLACK);
+		paint.setStrokeWidth(1);
+		
 		if (type == MapRenderingTypes.HIGHWAY) {
 			int hwType = subtype;
 			boolean carRoad = true;
@@ -332,7 +434,6 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					paint.setColor(clCycleWayRoad);
 				
 				} else {
-					
 					paint.setColor(clPedestrianRoad);
 
 				}
@@ -379,12 +480,10 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			}
 		} else if(type == MapRenderingTypes.WATERWAY){
 			if(subtype >= 1 && subtype <= 6){
+				paint.setStrokeWidth(2);
 				paint.setColor(Color.rgb(181, 208, 208));
 			}
-		} else {
-			paint.setColor(Color.BLACK);
-			paint.setStrokeWidth(1);
-		}
+		} 
 		
 		if(!showLine){
 			return;
@@ -444,7 +543,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 						}
 					}
 					
-					canvas.drawTextOnPath(obj.getName(), path, 0, 0, paintText);
+					canvas.drawTextOnPath(obj.getName(), path, 0, 2, paintText);
 				}
 				
 			}
@@ -468,8 +567,11 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				switch (subType) {
 				case 27:
 				case 65:
-				case 53:
 					resId = R.drawable.h_shop_supermarket;
+					break;
+				case 17:
+				case 53:
+					resId = R.drawable.h_department_store;
 					break;
 				case 13:
 					resId = R.drawable.h_shop_clothes;
@@ -526,6 +628,24 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				case 15:
 					resId = R.drawable.h_museum;
 					break;
+				}
+			}
+		} else if(type == MapRenderingTypes.HISTORIC){
+			if (zoom > 15) {
+				if (subType == 6) {
+					resId = R.drawable.h_memorial;
+				} else if(zoom > 16){
+					// something historic
+					resId = R.drawable.h_view_point;
+				}
+				
+			}
+		} else if(type == MapRenderingTypes.EMERGENCY){
+			if(zoom > 15){
+				if(subType == 10){
+					resId = R.drawable.h_firestation;
+				} else if(subType == 7){
+					resId = R.drawable.h_sosphone;
 				}
 			}
 		} else if(type == MapRenderingTypes.AMENITY_SUSTENANCE){
