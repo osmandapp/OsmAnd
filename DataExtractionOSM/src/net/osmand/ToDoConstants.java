@@ -37,7 +37,7 @@ public class ToDoConstants {
 	//  + 11!! Investigate ResourceManager close methods and clear cache when Map switches !!! (MAP SWITCH, update settings)
 	//  + 12! When switch to map check that indexes were loaded !!
 	//  + 14. Rotate vector map
-	//  15. Draw layers -> icons -> text. See intersects of double streets.
+	//  15. Draw layers -> icons -> text (+) See intersects of double streets.
 	//  16. Internet access bits
 
 	//  11. Move JUnidecode on client save space for some indexes adn 

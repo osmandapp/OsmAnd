@@ -51,31 +51,32 @@ public class MapRenderingTypes {
 	public final static int MASK_4 = (1 << 4) - 1;
 	public final static int MASK_10 = (1 << 10) - 1;
 	
-	public final static int HIGHWAY = 1; 
-	public final static int BARRIER = 2; //+R 
-	public final static int WATERWAY = 3; 
-	public final static int RAILWAY = 4;
-	public final static int AEROWAY = 5; 
-	public final static int AERIALWAY = 6; //+R 
-	public final static int POWER = 7; //+R
-	public final static int MAN_MADE = 8; 
-	public final static int LEISURE = 9; //+R 
-	public final static int OFFICE = 10; //+R
-	public final static int SHOP = 11;  //+R
-	public final static int EMERGENCY = 12; //+R 
-	public final static int TOURISM = 13; //+R
-	public final static int HISTORIC = 14; //+R
-	public final static int LANDUSE = 15;  //+R
-	public final static int MILITARY = 16; 
-	public final static int NATURAL = 17;
-	public final static int AMENITY_SUSTENANCE = 18; //+R
-	public final static int AMENITY_EDUCATION = 19; //+R
-	public final static int AMENITY_TRANSPORTATION = 20; //+R 
-	public final static int AMENITY_FINANCE = 21; //+R
-	public final static int AMENITY_HEALTHCARE = 22; //+R
-	public final static int AMENITY_ENTERTAINMENT = 23;//+R
-	public final static int AMENITY_OTHER = 24; //+R
-	public final static int ADMINISTRATIVE = 25; 
+	// TODO Find TextSymbolizer rules
+	public final static int HIGHWAY = 1; //TODO R
+	public final static int BARRIER = 2; 
+	public final static int WATERWAY = 3; //TODO R layer-water_features.xml.inc, layer-water.xml.inc
+	public final static int RAILWAY = 4;//TODO R
+	public final static int AEROWAY = 5; //TODO R
+	public final static int AERIALWAY = 6;  
+	public final static int POWER = 7; 
+	public final static int MAN_MADE = 8; //TODO R
+	public final static int LEISURE = 9;  
+	public final static int OFFICE = 10; 
+	public final static int SHOP = 11;  
+	public final static int EMERGENCY = 12;  
+	public final static int TOURISM = 13; 
+	public final static int HISTORIC = 14; 
+	public final static int LANDUSE = 15;  
+	public final static int MILITARY = 16;  //TODO R
+	public final static int NATURAL = 17;//TODO R
+	public final static int AMENITY_SUSTENANCE = 18; 
+	public final static int AMENITY_EDUCATION = 19; 
+	public final static int AMENITY_TRANSPORTATION = 20; 
+	public final static int AMENITY_FINANCE = 21; 
+	public final static int AMENITY_HEALTHCARE = 22; 
+	public final static int AMENITY_ENTERTAINMENT = 23;
+	public final static int AMENITY_OTHER = 24; 
+	public final static int ADMINISTRATIVE = 25;//TODO R 
 	public final static int ROUTE = 26; //NOT DONE YET
 	public final static int SPORT = 27; //+no icons
 	
@@ -430,7 +431,7 @@ public class MapRenderingTypes {
 		register("highway", "bridleway", HIGHWAY, PL_HW_BRIDLEWAY, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("highway", "byway", HIGHWAY, PL_HW_BYWAY, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("highway", "steps", HIGHWAY, PL_HW_STEPS, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("highway", "ford", HIGHWAY, PL_HW_FORD, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("highway", "ford", HIGHWAY, PL_HW_FORD, POLYLINE_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("highway", "construction", HIGHWAY, PL_HW_CONSTRUCTION, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("highway", "proposed", HIGHWAY, PL_HW_PROPOSED, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		
@@ -463,6 +464,7 @@ public class MapRenderingTypes {
 		register("barrier", "ditch", BARRIER, 1, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("barrier", "retaining_wall", BARRIER, 4, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("barrier", "city_wall", BARRIER, 5, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("historic", "city_walls", BARRIER, 5, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("barrier", "bollard", BARRIER, 6, POLYLINE_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("barrier", "cycle_barrier", BARRIER, 16, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("barrier", "block", BARRIER, 17, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -470,6 +472,7 @@ public class MapRenderingTypes {
 		register("barrier", "toll_booth", BARRIER, 19, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("barrier", "entrance", BARRIER, 20, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("barrier", "gate", BARRIER, 21, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("highway", "gate", BARRIER, 21, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("barrier", "lift_gate", BARRIER, 22, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("barrier", "stile", BARRIER, 23, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("barrier", "horse_stile", BARRIER, 24, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -524,6 +527,7 @@ public class MapRenderingTypes {
 		register("aeroway", "runway", AEROWAY, 7, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("aeroway", "taxiway", AEROWAY, 8, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("aeroway", "apron", AEROWAY, 9, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("aeroway", "airport", AEROWAY, 10, POLYGON_WITH_CENTER_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("aeroway", "gate", AEROWAY, 12, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("aeroway", "windsock", AEROWAY, 13, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 
@@ -533,7 +537,7 @@ public class MapRenderingTypes {
 		register("aerialway", "chair_lift", AERIALWAY, 3, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("aerialway", "mixed_lift", AERIALWAY, 4, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("aerialway", "drag_lift", AERIALWAY, 5, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("aerialway", "gondola", AERIALWAY, 6, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("aerialway", "goods", AERIALWAY, 6, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		registerAsBuilding("aerialway", "station", AERIALWAY, 7); //$NON-NLS-1$ //$NON-NLS-2$ 
 		register("aerialway", "pylon", AERIALWAY, 8, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("aerialway", "goods", AERIALWAY, 9, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -633,6 +637,7 @@ public class MapRenderingTypes {
 		register("shop", "charity", SHOP, 11, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("shop", "chemist", SHOP, 12, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("shop", "clothes", SHOP, 13, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("shop", "fashion", SHOP, 13, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("shop", "computer", SHOP, 14, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("shop", "confectionery", SHOP, 15, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("shop", "convenience", SHOP, 16, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -777,7 +782,7 @@ public class MapRenderingTypes {
 		
 		register("natural", "bay", NATURAL, 1, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("natural", "beach", NATURAL, 2, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("natural", "cave_entrance", NATURAL, 3, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("natural", "cave_entrance", NATURAL, 3, POLYGON_WITH_CENTER_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		registerRules("natural", "cliff", NATURAL, 4, POLYGON_TYPE, POINT_TYPE, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("natural", "fell", NATURAL, 6, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("natural", "glacier", NATURAL, 7, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -868,7 +873,7 @@ public class MapRenderingTypes {
 		
 		registerAsBuilding("amenity", "courthouse", AMENITY_OTHER, 5); //$NON-NLS-1$ //$NON-NLS-2$
 		registerAsBuilding("amenity", "crematorium", AMENITY_OTHER, 6); //$NON-NLS-1$ //$NON-NLS-2$
-		registerAsBuilding("amenity", "embassy", AMENITY_OTHER, 7); //$NON-NLS-1$ //$NON-NLS-2$
+		register("amenity", "embassy", AMENITY_OTHER, 7, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("amenity", "grave_yard", AMENITY_OTHER, 8, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("amenity", "hunting_stand", AMENITY_OTHER, 9, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("amenity", "police", AMENITY_OTHER, 10, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -887,6 +892,8 @@ public class MapRenderingTypes {
 		register("amenity", "fountain", AMENITY_OTHER, 23, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("amenity", "bench", AMENITY_OTHER, 24, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("amenity", "clock", AMENITY_OTHER, 25, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("amenity", "place_of_worship", AMENITY_OTHER, 26, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		// "amenity", "place_of_worship"
 
 	// 25. administrative 
 		register("place", "continent", ADMINISTRATIVE, 41, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
