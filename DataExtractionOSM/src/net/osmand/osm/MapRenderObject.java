@@ -7,6 +7,7 @@ public class MapRenderObject {
 	private int type;
 	private byte[] data = null;
 	private long id;
+	private int order = -1;
 	
 	public MapRenderObject(long id){
 		this.id = id;
@@ -21,6 +22,7 @@ public class MapRenderObject {
 	
 	public void setType(int type) {
 		this.type = type;
+		order = -1;
 	}
 	
 	public int getType() {
@@ -51,25 +53,37 @@ public class MapRenderObject {
 	}
 	
 	public int getMapOrder(){
-		int order = -1;
-		if((type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POLYGON_TYPE){
-			if(MapRenderingTypes.isPolygonBuilding(type)){
-				order = 64;
-			} else {
-				order = 1;
-			}
-		} else if((type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POLYLINE_TYPE){
+		if (order == -1) {
 			int oType = MapRenderingTypes.getObjectType(type);
 			int sType = MapRenderingTypes.getPolylineSubType(type);
-			if(oType == MapRenderingTypes.HIGHWAY){
-				order = 32 - sType + 24;
-			} else if(oType == MapRenderingTypes.RAILWAY){
-				order = 58;
-			} else if(oType == MapRenderingTypes.WATERWAY){
-				order = 18;
+			if ((type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POLYGON_TYPE) {
+				if (MapRenderingTypes.isPolygonBuilding(type)) {
+					order = 64;
+				} else if (oType == MapRenderingTypes.POWER) {
+					order = 60;
+				} else {
+					order = 1;
+				}
+			} else if ((type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POLYLINE_TYPE) {
+
+				if (oType == MapRenderingTypes.HIGHWAY) {
+					order = 32 - sType + 24;
+				} else if (oType == MapRenderingTypes.RAILWAY) {
+					order = 58;
+				} else if (oType == MapRenderingTypes.AERIALWAY) {
+					order = 68; // over buildings
+				} else if (oType == MapRenderingTypes.POWER) {
+					order = 68; // over buildings
+				} else if (oType == MapRenderingTypes.ADMINISTRATIVE) {
+					order = 62;
+				} else if (oType == MapRenderingTypes.WATERWAY) {
+					order = 18;
+				} else {
+					order = 10;
+				}
+			} else {
+				order = 128;
 			}
-		} else {
-			order = 128;
 		}
 		return order;
 	}

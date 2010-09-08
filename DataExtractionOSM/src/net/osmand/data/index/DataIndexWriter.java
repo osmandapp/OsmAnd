@@ -457,10 +457,10 @@ public class DataIndexWriter {
 			addBatch(statements, mapStat);
 
 			mapWayLocationsStat.setLong(1, id);
-			mapWayLocationsStat.setDouble(2, minLon);
-			mapWayLocationsStat.setDouble(3, maxLon);
-			mapWayLocationsStat.setDouble(4, minLat);
-			mapWayLocationsStat.setDouble(5, maxLat);
+			mapWayLocationsStat.setFloat(2, (float) minLon);
+			mapWayLocationsStat.setFloat(3, (float) maxLon);
+			mapWayLocationsStat.setFloat(4, (float) minLat);
+			mapWayLocationsStat.setFloat(5, (float) maxLat);
 			addBatch(statements, mapWayLocationsStat);
 		}
 	}
