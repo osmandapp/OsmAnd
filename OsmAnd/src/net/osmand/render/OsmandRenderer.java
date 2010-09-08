@@ -158,7 +158,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				if(icon.resId != 0){
 					Bitmap ico = BitmapFactory.decodeResource(context.getResources(), icon.resId);
 					if (ico  != null) {
-						cv.drawBitmap(ico, icon.x - bmp.getWidth() / 2, icon.y - bmp.getHeight() / 2, paintIcon);
+						cv.drawBitmap(ico, icon.x - ico.getWidth() / 2, icon.y - ico.getHeight() / 2, paintIcon);
 					}
 				}
 			}
