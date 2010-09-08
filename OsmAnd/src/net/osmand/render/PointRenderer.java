@@ -11,11 +11,66 @@ public class PointRenderer {
 	public static int getPointBitmap(int zoom, int type, int subType) {
 		int resId = 0;
 		if(type == MapRenderingTypes.HIGHWAY){
-			if (zoom > 16) {
+			if (zoom >= 16) {
 				if(subType == 38){
-					resId = R.drawable.h_traffic_light;
+					if(zoom > 16){
+						resId = R.drawable.h_traffic_light;
+					}
 				} else if(subType == 40){
-					resId = R.drawable.h_bus_stop;
+					resId = zoom == 16 ? R.drawable.h_bus_stop_small : R.drawable.h_bus_stop;
+				} else if(subType == 23){
+					resId = R.drawable.h_transport_ford;
+				}
+			} 
+			if(subType == 35){
+				if(zoom >= 15){
+					resId = R.drawable.h_mini_round;
+				}
+			}
+		} else if(type == MapRenderingTypes.RAILWAY){
+			if(subType == 13){
+				if(zoom == 12){
+					resId = R.drawable.h_halt;
+				} else if(zoom == 13 || zoom == 14){
+					resId = R.drawable.h_station_small;
+				} else if(zoom >= 15){
+					resId = R.drawable.h_station;
+				}
+			} else if(subType == 22 || subType == 23){
+				if(zoom == 13 || zoom == 14){
+					resId = R.drawable.h_halt;
+				} else if(zoom >= 15){
+					resId = R.drawable.h_station_small;
+				}
+			} else if(subType == 25){
+				if(zoom == 14 || zoom == 15){
+					resId = R.drawable.h_level_crossing;
+				} else if(zoom >= 16){
+					resId = R.drawable.h_level_crossing2;
+				}
+			}
+		} else if(type == MapRenderingTypes.AEROWAY){
+			if(subType == 1){
+				if(zoom >= 10 && zoom <= 14){
+					resId = R.drawable.h_aerodrome;
+				}
+			} else if(subType == 10){
+				if(zoom >= 9 && zoom <= 13){
+					resId = R.drawable.h_airport;
+				}
+			}
+		} else if(type == MapRenderingTypes.WATERWAY){
+			if(subType == 8){
+				if (zoom > 14) {
+					resId = R.drawable.h_lock_gate;
+				}
+			}
+		} else if(type == MapRenderingTypes.AERIALWAY){
+			if(subType == 7){
+				if(zoom == 13 || zoom == 14){
+					resId = R.drawable.h_halt;
+				} else if(zoom >= 15){
+					resId = R.drawable.h_station_small;
 				}
 			}
 		} else if(type == MapRenderingTypes.POWER){
@@ -26,7 +81,20 @@ public class PointRenderer {
 					resId = R.drawable.h_power_wind;
 				}
 			}
-			
+		} else if (type == MapRenderingTypes.MAN_MADE) {
+			if (subType == 25) {
+				if (zoom >= 16) {
+					resId = R.drawable.h_tower_water;
+				}
+			} else if (subType == 17) {
+				if (zoom >= 15) {
+					resId = R.drawable.h_lighthouse;
+				}
+			} else if (subType == 27) {
+				if (zoom >= 16) {
+					resId = R.drawable.h_windmill;
+				}
+			}
 		} else if(type == MapRenderingTypes.SHOP){
 			if (zoom > 15) {
 				switch (subType) {
@@ -93,21 +161,54 @@ public class PointRenderer {
 				case 15:
 					resId = R.drawable.h_museum;
 					break;
+				case 17:
+					resId = R.drawable.h_view_point;
+					break;
 				}
 			}
 		} else if(type == MapRenderingTypes.NATURAL){
-			if (zoom > 10) {
-				resId = R.drawable.h_peak;
+			if (subType == 13) {
+				if (zoom > 10) {
+					resId = R.drawable.h_peak;
+				}
+			} else if(subType == 3){
+				if (zoom > 14) {
+					resId = R.drawable.h_cave_entrance;
+				}
+			} else if(subType == 17){
+				if (zoom >= 14) {
+					resId = R.drawable.h_spring;
+				}
+			} else if(subType == 19){
+				if (zoom == 16) {
+					resId = R.drawable.h_tree;
+				} else if (zoom >= 17) {
+					resId = R.drawable.h_tree2;
+				}
 			}
 		} else if(type == MapRenderingTypes.HISTORIC){
 			if (zoom > 15) {
 				if (subType == 6) {
 					resId = R.drawable.h_memorial;
-				} else if(zoom > 16){
+				} else {
 					// something historic
 					resId = R.drawable.h_view_point;
 				}
 				
+			}
+		} else if(type == MapRenderingTypes.BARRIER){
+			if(subType == 21){
+				if(zoom >= 15){
+					resId = R.drawable.h_gate2;
+				} 
+			} else if(subType == 22){
+				if(zoom >= 16){
+					resId = R.drawable.h_liftgate;
+				} 
+			} else if(subType == 26){
+				if(zoom >= 16){
+					resId = R.drawable.h_bollard;
+				} 
 			}
 		} else if(type == MapRenderingTypes.EMERGENCY){
 			if(zoom > 15){
@@ -151,11 +252,25 @@ public class PointRenderer {
 			}
 		} else if (type == MapRenderingTypes.AMENITY_TRANSPORTATION) {
 			if (subType == 1 || subType == 2) {
-				resId = R.drawable.h_parking;
+				if (zoom > 14) {
+					resId = R.drawable.h_parking;
+				}
 			} else if (subType == 4) {
-				resId = R.drawable.h_fuel;
+				if(zoom > 13){
+					resId = R.drawable.h_fuel;
+				}
+			} else if (subType == 17) {
+				if(zoom >= 17){
+					resId = R.drawable.h_rental_bicycle;
+				}
+			} else if (subType == 20) {
+				if(zoom >= 16){
+					resId = R.drawable.h_car_share;
+				}
 			} else if (subType == 18) {
-				resId = R.drawable.h_bus_station;
+				if(zoom > 14){
+					resId = R.drawable.h_bus_station;
+				}
 			}
 		} else if (type == MapRenderingTypes.AMENITY_FINANCE) {
 			if (subType == 1) {
@@ -207,9 +322,19 @@ public class PointRenderer {
 				case 11:
 					resId = R.drawable.h_postbox;
 					break;
+				case 16:
+					resId = R.drawable.h_shelter;
+					break;
 				case 12:
 					resId = R.drawable.h_postoffice;
 					break;
+				}
+			}
+			if(zoom >= 16){
+				if(subType == 26){
+					resId = R.drawable.h_place_of_worship;
+				} else if(subType == 13){
+					resId = R.drawable.h_prison;
 				}
 			}
 		}
