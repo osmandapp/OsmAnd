@@ -147,16 +147,15 @@ public class MapRenderRepositories {
 		boolean inside = insideBox(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom);
 		cRotate = rotate < 0 ? rotate + 360 : rotate;
 		if (!inside) {
+			// that usable for portrait view
 			cBottomLatitude = bottomLatitude - (topLatitude - bottomLatitude) / 2;
 			cTopLatitude = topLatitude + (topLatitude - bottomLatitude) / 2;
 			cLeftLongitude = leftLongitude - (rightLongitude - leftLongitude);
 			cRightLongitude = rightLongitude + (rightLongitude - leftLongitude);
 			cZoom = zoom;
 
-			log
-					.info(String
-							.format(
-									"BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", cBottomLatitude, cTopLatitude, cLeftLongitude, cRightLongitude, cZoom)); //$NON-NLS-1$
+			log.info(String.format("BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", //$NON-NLS-1$
+					cBottomLatitude, cTopLatitude, cLeftLongitude, cRightLongitude, cZoom)); 
 
 			long now = System.currentTimeMillis();
 

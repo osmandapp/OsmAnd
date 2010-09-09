@@ -19,8 +19,8 @@ public class MapRenderingTypes {
 	
 	// TODO !!! think about layers of objects, include layer bits into standard schema (2 bits)?
 	// TODO !!! add others facilities to all types
-	// TODO add addr:housenumber point to point (?)
 	// TODO Internet access bits for point
+	// TODO Find TextSymbolizer rules and write text for points and others
 	
 	/** standard schema : 
 	 	polygon :   ssssssss ttttt aaaaa ttttt 011 : 26 bits + 6 bits for special info 
@@ -51,7 +51,7 @@ public class MapRenderingTypes {
 	public final static int MASK_4 = (1 << 4) - 1;
 	public final static int MASK_10 = (1 << 10) - 1;
 	
-	// TODO Find TextSymbolizer rules
+
 	public final static int HIGHWAY = 1; //TODO R
 	public final static int BARRIER = 2; 
 	public final static int WATERWAY = 3; //TODO R layer-water_features.xml.inc, layer-water.xml.inc

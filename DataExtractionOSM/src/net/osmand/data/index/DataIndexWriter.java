@@ -443,9 +443,9 @@ public class DataIndexWriter {
 				minLon = Math.min(minLon, n.getLongitude());
 				maxLon = Math.max(maxLon, n.getLongitude());
 				init = true;
-				Algoritms.putIntToBytes(bytes, offset, Float.floatToIntBits((float) n.getLatitude()));
+				Algoritms.putIntToBytes(bytes, offset, MapUtils.get31TileNumberY(n.getLatitude()));
 				offset += 4;
-				Algoritms.putIntToBytes(bytes, offset, Float.floatToIntBits((float) n.getLongitude()));
+				Algoritms.putIntToBytes(bytes, offset, MapUtils.get31TileNumberX(n.getLongitude()));
 				offset += 4;
 			}
 		}
@@ -478,5 +478,5 @@ public class DataIndexWriter {
 			count.put(p, count.get(p) + 1);
 		}
 	}
-
+	
 }

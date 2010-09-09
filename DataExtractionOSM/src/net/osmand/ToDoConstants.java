@@ -31,14 +31,9 @@ public class ToDoConstants {
 	//  7. Implement auto-delete from site (done, should be ported from C#)
 	//  8. In all places verify to use float lat/lon improve disk space for indexes !!!
 	//  13! Support multiple database for map rendering
-	
-	//  + 9. Render map on bitmap in another thread
-	//  + 10. Sort objects before render (according layering)
-	//  + 11!! Investigate ResourceManager close methods and clear cache when Map switches !!! (MAP SWITCH, update settings)
-	//  + 12! When switch to map check that indexes were loaded !!
-	//  + 14. Rotate vector map
 	//  15. Draw layers -> icons -> text (+) See intersects of double streets.
 	//  16. Internet access bits
+	//  17. Implement multipolygons to polygons
 
 	//  11. Move JUnidecode on client save space for some indexes adn 
 	//  12. Fix : find proper location for streets ! centralize them (when create index)?
