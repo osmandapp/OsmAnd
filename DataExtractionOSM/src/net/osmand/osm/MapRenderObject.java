@@ -44,12 +44,12 @@ public class MapRenderObject {
 		return name;
 	}
 	
-	public float getPointLatitude(int ind) {
-		return Float.intBitsToFloat(Algoritms.parseIntFromBytes(data, ind * 8));
+	public int getPoint31YTile(int ind){
+		return Algoritms.parseIntFromBytes(data, ind * 8);
 	}
-
-	public float getPointLongitude(int ind) {
-		return Float.intBitsToFloat(Algoritms.parseIntFromBytes(data, ind * 8 + 4));
+	
+	public float getPoint31XTile(int ind) {
+		return Algoritms.parseIntFromBytes(data, ind * 8 + 4);
 	}
 	
 	public int getMapOrder(){

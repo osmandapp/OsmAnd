@@ -221,6 +221,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		if(zoom != (int) zoom){
 			res *= (float) Math.pow(2, zoom - (int) zoom);  
 		}
+		// TODO introduce settings for these part
 		if(dm != null && dm.density > 1f){
 			res *= dm.density;
 		}

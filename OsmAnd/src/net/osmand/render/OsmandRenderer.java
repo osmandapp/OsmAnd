@@ -1,6 +1,7 @@
 package net.osmand.render;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -30,7 +31,6 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Bitmap.Config;
 import android.graphics.Paint.Align;
-import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.Shader.TileMode;
 import android.text.TextPaint;
@@ -69,7 +69,13 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	private PathEffect dashEffect6_3_2_3 = new DashPathEffect(new float[]{6,3,2,3,}, 1);
 	private PathEffect dashEffect6_3_2_3_2_3 = new DashPathEffect(new float[]{6,3,2,3,2,3}, 1);
 	
+	private PathEffect arrowDashEffect1 = new DashPathEffect(new float[]{0,12,10,152},0);
+	private PathEffect arrowDashEffect2 = new DashPathEffect(new float[]{0,12,9,153}, 1);
+	private PathEffect arrowDashEffect3 = new DashPathEffect(new float[]{0,18,2,154}, 1);
+	private PathEffect arrowDashEffect4 = new DashPathEffect(new float[]{0,18,1,155}, 1);
+
 	private Map<Integer, Shader> shaders = new LinkedHashMap<Integer, Shader>();
+	private Map<Integer, Bitmap> cachedIcons = new LinkedHashMap<Integer, Bitmap>();
 
 	private final Context context;
 
@@ -92,13 +98,32 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		int resId;
 	}
 	
+	private static class RenderingContext {
+		List<TextDrawInfo> textToDraw = new ArrayList<TextDrawInfo>();
+		List<IconDrawInfo> iconsToDraw = new ArrayList<IconDrawInfo>();
+		float leftX;
+		float rightX;
+		float bottomY;
+		float topY;
+		
+		int zoom;
+		float rotate;
+		float cosRotate;
+		float sinRotate;
+		float tileDivisor;
+		
+		int pointCount = 0;
+		int pointInsideCount = 0;
+		
+		PointF tempPoint = new PointF();
+	}
+	
 	public OsmandRenderer(Context context){
 		this.context = context;
 		paintStroke = new Paint();
 		paintStroke.setStyle(Style.STROKE);
 		paintStroke.setStrokeWidth(2);
 		paintStroke.setColor(Color.BLACK);
-		paintStroke.setStrokeJoin(Join.ROUND);
 		paintStroke.setAntiAlias(true);
 		
 		paintIcon = new Paint();
@@ -142,31 +167,42 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	
 	public Bitmap generateNewBitmap(RectF objectLoc, List<MapRenderObject> objects, int zoom, float rotate) {
 		long now = System.currentTimeMillis();
+		
 		Collections.sort(objects, this);
 		Bitmap bmp = null; 
 		if (objects != null && !objects.isEmpty() && objectLoc.width() != 0f && objectLoc.height() != 0f) {
-			List<TextDrawInfo> textToDraw = new ArrayList<TextDrawInfo>();
-			List<IconDrawInfo> iconsToDraw = new ArrayList<IconDrawInfo>();
-			double leftX = MapUtils.getTileNumberX(zoom, objectLoc.left);
-			double rightX = MapUtils.getTileNumberX(zoom, objectLoc.right);
-			double topY = MapUtils.getTileNumberY(zoom, objectLoc.top);
-			double bottomY = MapUtils.getTileNumberY(zoom, objectLoc.bottom);
-			bmp = Bitmap.createBitmap((int) ((rightX - leftX) * 256), (int) ((bottomY - topY) * 256), Config.RGB_565);
+			// init rendering context
+			RenderingContext rc = new RenderingContext();
+			rc.leftX = (float) MapUtils.getTileNumberX(zoom, objectLoc.left);
+			rc.rightX = (float) MapUtils.getTileNumberX(zoom, objectLoc.right);
+			rc.topY = (float) MapUtils.getTileNumberY(zoom, objectLoc.top);
+			rc.bottomY = (float) MapUtils.getTileNumberY(zoom, objectLoc.bottom);
+			rc.zoom = zoom;
+			rc.rotate = rotate;
+			rc.cosRotate = FloatMath.cos((float) Math.toRadians(rotate));
+			rc.sinRotate = FloatMath.sin((float) Math.toRadians(rotate));
+			rc.tileDivisor = (int) (1 << (31 - zoom));
+			
+			
+			bmp = Bitmap.createBitmap((int) ((rc.rightX - rc.leftX) * 256), (int) ((rc.bottomY - rc.topY) * 256), Config.RGB_565);
 			Canvas cv = new Canvas(bmp);
 			cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillEmpty);
 			cv.rotate(-rotate);
 			for (MapRenderObject w : objects) {
-				draw(w, cv, leftX, topY, zoom, rotate, textToDraw, iconsToDraw);
+				draw(w, cv, rc);
 			}
-			for(IconDrawInfo icon : iconsToDraw){
+			for(IconDrawInfo icon : rc.iconsToDraw){
 				if(icon.resId != 0){
-					Bitmap ico = BitmapFactory.decodeResource(context.getResources(), icon.resId);
+					if(cachedIcons.get(icon.resId) == null){
+						cachedIcons.put(icon.resId, BitmapFactory.decodeResource(context.getResources(), icon.resId));
+					}
+					Bitmap ico = cachedIcons.get(icon.resId);
 					if (ico  != null) {
 						cv.drawBitmap(ico, icon.x - ico.getWidth() / 2, icon.y - ico.getHeight() / 2, paintIcon);
 					}
 				}
 			}
-			for(TextDrawInfo text : textToDraw){
+			for(TextDrawInfo text : rc.textToDraw){
 				if(text.text != null){
 					paintText.setTextSize(text.textSize);
 					paintText.setColor(text.textColor);
@@ -177,64 +213,63 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					}
 				}
 			}
+			log.info(String.format("Rendering has been done in %s ms. (%s points, %s points inside)", System.currentTimeMillis() - now, //$NON-NLS-1$ 
+					rc.pointCount,rc.pointInsideCount)); 
 		}
-		log.info(String.format("Rendering has been done in %s ms. ", System.currentTimeMillis() - now)); //$NON-NLS-1$
+		
 		return bmp;
 	}
 
 	
-	protected void draw(MapRenderObject obj, Canvas canvas, double leftTileX, double topTileY, int zoom, float rotate, 
-			List<TextDrawInfo> textToDraw, List<IconDrawInfo> iconsToDraw) {
+	protected void draw(MapRenderObject obj, Canvas canvas, RenderingContext rc) {
 		if(obj.isPoint()){
-			drawPoint(obj, canvas, leftTileX, topTileY, zoom, rotate, textToDraw, iconsToDraw);
+			drawPoint(obj, canvas, rc);
 		} else if(obj.isPolyLine()){
-			drawPolyline(obj, canvas, leftTileX, topTileY, zoom, rotate, textToDraw, iconsToDraw);
+			drawPolyline(obj, canvas, rc);
 		} else {
-			PointF center = drawPolygon(obj, canvas, leftTileX, topTileY, zoom, rotate, textToDraw, iconsToDraw);
+			PointF center = drawPolygon(obj, canvas, rc);
 			if(center != null){
 				int typeT = MapRenderingTypes.getPolygonPointType(obj.getType());
 				int subT = MapRenderingTypes.getPolygonPointSubType(obj.getType());
 				if(typeT != 0 && subT != 0){
-					int resId = PointRenderer.getPointBitmap(zoom, typeT, subT);
+					int resId = PointRenderer.getPointBitmap(rc.zoom, typeT, subT);
 					if(resId != 0){
 						IconDrawInfo ico = new IconDrawInfo();
 						ico.x = center.x;
 						ico.y = center.y;
 						ico.resId = resId;
-						iconsToDraw.add(ico);
+						rc.iconsToDraw.add(ico);
 					}
 				}
 			}
 		}
 	}
 	
-	public float calcDiffPixelY(float dTileX, float dTileY, float rotate){
-		float rad = (float) Math.toRadians(rotate);
-		return (FloatMath.sin(rad) * dTileX + FloatMath.cos(rad) * dTileY) * 256f ;
-	}
 	
-	public float calcDiffPixelX(float dTileX, float dTileY, float rotate){
-		float rad = (float) Math.toRadians(rotate);
-		return (FloatMath.cos(rad) * dTileX - FloatMath.sin(rad) * dTileY) * 256f ;
-	}
 	
-
-	// suppose that render works in one thread! Otherwise should be done anyway
-	private PointF TEMP_POINT = new PointF();
-	private PointF calcPoint(double leftTileX, double topTileY, float latitude, float longitude, int zoom, float rotate){
-		float dTileX = (float) (MapUtils.getTileNumberX(zoom, longitude) - leftTileX);
-		float dTileY = (float) (MapUtils.getTileNumberY(zoom, latitude) - topTileY);
-		TEMP_POINT.set(calcDiffPixelX(dTileX, dTileY, rotate), calcDiffPixelY(dTileX, dTileY, rotate));
-		return TEMP_POINT;
+	private PointF calcPoint(MapRenderObject o, int ind, RenderingContext rc){
+		rc.pointCount ++;
+		float tx = o.getPoint31XTile(ind) / rc.tileDivisor;
+		float ty = o.getPoint31YTile(ind) / rc.tileDivisor;
+		if(tx >= rc.leftX && tx <= rc.rightX && ty >= rc.topY && ty <= rc.bottomY){
+			rc.pointInsideCount++;
+		}
+		float dTileX =  tx - rc.leftX;
+		float dTileY = ty - rc.topY;
+		float x = (rc.cosRotate * dTileX - rc.sinRotate * dTileY) * 256f ;
+		float y = (rc.sinRotate * dTileX + rc.cosRotate * dTileY) * 256f ;
+		rc.tempPoint.set(x, y);
+		
+		return rc.tempPoint;
 	}
 
 	
 
-	private PointF drawPolygon(MapRenderObject obj, Canvas canvas, double leftTileX, double topTileY, int zoom, float rotate, 
-			List<TextDrawInfo> textToDraw, List<IconDrawInfo> iconsToDraw) {
+	private PointF drawPolygon(MapRenderObject obj, Canvas canvas, RenderingContext rc) {
 		Paint paint = paintFill;
 		float xText = 0;
 		float yText = 0;
+		int zoom = rc.zoom;
 		Path path = null;
 		int type = MapRenderingTypes.getObjectType(obj.getType());
 		int subtype = MapRenderingTypes.getPolygonSubType(obj.getType());
@@ -388,9 +423,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			
 		paint.setColor(color);
 		for (int i = 0; i < obj.getPointsLength(); i++) {
-			float lon = obj.getPointLongitude(i);
-			float lat = obj.getPointLatitude(i);
-			PointF p = calcPoint(leftTileX, topTileY, lat, lon, zoom, rotate);
+			PointF p = calcPoint(obj, i, rc);
 			xText += p.x;
 			yText += p.y;
 			if (path == null) {
@@ -429,7 +462,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					text.centerX = xText;
 					text.centerY = yText;
 					text.text = name;
-					textToDraw.add(text);
+					rc.textToDraw.add(text);
 				}
 			}
 			return new PointF(xText, yText);
@@ -437,20 +470,29 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		return null;
 	}
 	
-	private void drawPoint(MapRenderObject obj, Canvas canvas, double leftTileX, double topTileY, int zoom, float rotate, 
-			List<TextDrawInfo> textToDraw, List<IconDrawInfo> iconsToDraw) {
-		float lon = obj.getPointLongitude(0);
-		float lat = obj.getPointLatitude(0);
-		PointF p = calcPoint(leftTileX, topTileY, lat, lon, zoom, rotate);
+	public void clearCachedResources(){
+		Collection<Bitmap> values = new ArrayList<Bitmap>(cachedIcons.values());
+		cachedIcons.clear();
+		for(Bitmap b : values){
+			if(b != null){
+				b.recycle();
+			}
+		}
+		shaders.clear();
+	}
+	
+	private void drawPoint(MapRenderObject obj, Canvas canvas, RenderingContext rc) {
+		PointF p = calcPoint(obj, 0, rc);
 		int subType = MapRenderingTypes.getPointSubType(obj.getType());
 		int type = MapRenderingTypes.getObjectType(obj.getType());
+		int zoom = rc.zoom;
 		int resId = PointRenderer.getPointBitmap(zoom, type, subType);
 		if(resId != 0){
 			IconDrawInfo ico = new IconDrawInfo();
 			ico.x = p.x;
 			ico.y = p.y;
 			ico.resId = resId;
-			iconsToDraw.add(ico);
+			rc.iconsToDraw.add(ico);
 		}
 		
 		int textSize = 0;
@@ -538,13 +580,13 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	}
 
 	
-	private void drawPolyline(MapRenderObject obj, Canvas canvas, double leftTileX, double topTileY, int zoom, float rotate, 
-			List<TextDrawInfo> textToDraw, List<IconDrawInfo> iconsToDraw) {
+	private void drawPolyline(MapRenderObject obj, Canvas canvas, RenderingContext rc) {
 		if(obj.getPointsLength() == 0){
 			return;
 		}
 		int type = MapRenderingTypes.getObjectType(obj.getType());
 		int subtype = MapRenderingTypes.getPolylineSubType(obj.getType());
+		int zoom = rc.zoom;
 		
 		boolean showText = true;
 		PathEffect pathEffect = null;
@@ -754,9 +796,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		float yMid = 0;
 		int middle = obj.getPointsLength() / 2;
 		for (int i = 0; i < obj.getPointsLength(); i++) {
-			float lon = obj.getPointLongitude(i);
-			float lat = obj.getPointLatitude(i);
-			PointF p = calcPoint(leftTileX, topTileY, lat, lon, zoom, rotate);
+			PointF p = calcPoint(obj, i, rc);
 			if (path == null) {
 				path = new Path();
 				path.moveTo(p.x, p.y);
@@ -793,6 +833,25 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			paintStroke.setColor(color);
 			paintStroke.setStrokeWidth(strokeWidth);
 			canvas.drawPath(path, paintStroke);
+//			if(type == MapRenderingTypes.HIGHWAY){
+//				paintStroke.setColor(0xff6c70d5);
+//				
+//				paintStroke.setStrokeWidth(1);
+//				paintStroke.setPathEffect(arrowDashEffect1);
+//				canvas.drawPath(path, paintStroke);
+//				
+//				paintStroke.setStrokeWidth(2);
+//				paintStroke.setPathEffect(arrowDashEffect2);
+//				canvas.drawPath(path, paintStroke);
+//				
+//				paintStroke.setStrokeWidth(3);
+//				paintStroke.setPathEffect(arrowDashEffect3);
+//				canvas.drawPath(path, paintStroke);
+//				
+//				paintStroke.setStrokeWidth(4);
+//				paintStroke.setPathEffect(arrowDashEffect4);
+//				canvas.drawPath(path, paintStroke);
+//			}
 			if (obj.getName() != null && showText) {
 				float w = strokeWidth + 3;
 				if(w < 10){
@@ -804,9 +863,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 						path.rewind();
 						boolean st = true;
 						for (int i = obj.getPointsLength() - 1; i >= 0; i--) {
-							float lon = obj.getPointLongitude(i);
-							float lat = obj.getPointLatitude(i);
-							PointF p = calcPoint(leftTileX, topTileY, lat, lon, zoom, rotate);
+							PointF p = calcPoint(obj, i, rc);
 							if (st) {
 								st = false;
 								path.moveTo(p.x, p.y);
@@ -824,7 +881,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					text.textColor = Color.BLACK;
 					text.textSize = w;
 					text.vOffset = strokeWidth / 2 - 1;
-					textToDraw.add(text);
+					rc.textToDraw.add(text);
 				}
 				
 			}

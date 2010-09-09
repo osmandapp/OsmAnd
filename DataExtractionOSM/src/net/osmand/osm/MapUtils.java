@@ -136,6 +136,22 @@ public class MapUtils {
 		return latitude;
 	}
 	
+	public static int get31TileNumberX(double longitude){
+		longitude = checkLongitude(longitude);
+		long l = 1l << 31;
+		return (int)((longitude + 180d)/360d * l);
+	}
+	public static int get31TileNumberY( double latitude){
+		latitude = checkLatitude(latitude);
+		double eval = Math.log( Math.tan(Math.toRadians(latitude)) + 1/Math.cos(Math.toRadians(latitude)) );
+		long l = 1l << 31;
+		if(eval > Math.PI){
+			eval = Math.PI;
+		}
+		return  (int) ((1 - eval / Math.PI) / 2 * l);
+	}
+	
+	
 	
 	/**
 	 * 
