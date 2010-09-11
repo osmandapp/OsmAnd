@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,6 +27,8 @@ public class MapRenderRepositories {
 	private final Context context;
 	private Connection conn;
 	private PreparedStatement pStatement;
+	private PreparedStatement pStatement2;
+	private PreparedStatement pStatement3;
 	private OsmandRenderer renderer;
 	
 	private double cTopLatitude;
@@ -59,6 +62,8 @@ public class MapRenderRepositories {
 				conn.close();
 				conn = null;
 				pStatement = null;
+				pStatement2 = null;
+				pStatement3 = null;
 			}
 			try {
 				Class.forName("org.sqlite.JDBC"); //$NON-NLS-1$
@@ -68,6 +73,8 @@ public class MapRenderRepositories {
 			}
 			conn = DriverManager.getConnection("jdbc:sqlite:" + file.getAbsolutePath()); //$NON-NLS-1$
 			pStatement = conn.prepareStatement(loadMapQuery);
+			pStatement2 = conn.prepareStatement(loadMapQuery2);
+			pStatement3 = conn.prepareStatement(loadMapQuery3);
 			Statement stat = conn.createStatement();
 			ResultSet rs = stat.executeQuery("PRAGMA user_version"); //$NON-NLS-1$
 			int v = rs.getInt(1);
@@ -110,8 +117,11 @@ public class MapRenderRepositories {
 			}
 			conn = null;
 			pStatement = null;
+			pStatement2 = null;
+			pStatement3 = null;
 		}
 	}
+	
 	
 	/**
 	 * @return true if no need to reevaluate map
@@ -142,6 +152,18 @@ public class MapRenderRepositories {
 											" IN (SELECT id FROM "+IndexConstants.indexMapLocationsTable +   //$NON-NLS-1$
 												" WHERE ? <  maxLat AND ? > minLat AND maxLon > ? AND minLon  < ?)"; //$NON-NLS-1$
 	
+	private static String loadMapQuery2 = "SELECT "+IndexConstants.IndexMapRenderObject.ID +", " + IndexConstants.IndexMapRenderObject.NODES +", " +  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+										  IndexConstants.IndexMapRenderObject.NAME + ", " + IndexConstants.IndexMapRenderObject.TYPE + //$NON-NLS-1$
+										  " FROM " + IndexConstants.IndexMapRenderObject.getTable() +	" WHERE "+IndexConstants.IndexMapRenderObject.ID+  //$NON-NLS-1$//$NON-NLS-2$
+										  " IN (SELECT id FROM "+IndexConstants.indexMapLocationsTable2 +   //$NON-NLS-1$
+										  " WHERE ? <  maxLat AND ? > minLat AND maxLon > ? AND minLon  < ?)"; //$NON-NLS-1$
+	
+	
+	private static String loadMapQuery3 = "SELECT "+IndexConstants.IndexMapRenderObject.ID +", " + IndexConstants.IndexMapRenderObject.NODES +", " +  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+										  IndexConstants.IndexMapRenderObject.NAME + ", " + IndexConstants.IndexMapRenderObject.TYPE + //$NON-NLS-1$
+										  " FROM " + IndexConstants.IndexMapRenderObject.getTable() +	" WHERE "+IndexConstants.IndexMapRenderObject.ID +  //$NON-NLS-1$//$NON-NLS-2$
+										  " IN (SELECT id FROM "+IndexConstants.indexMapLocationsTable3 +   //$NON-NLS-1$
+										  " WHERE ? <  maxLat AND ? > minLat AND maxLon > ? AND minLon  < ?)"; //$NON-NLS-1$
 	
 	public synchronized void loadMap(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, float rotate) {
 		boolean inside = insideBox(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom);
@@ -159,17 +181,28 @@ public class MapRenderRepositories {
 
 			long now = System.currentTimeMillis();
 
-			if (pStatement == null) {
+			PreparedStatement statement = null;
+			if(zoom >= 15){
+				statement = pStatement;
+			} else if(zoom >= 10){
+				statement = pStatement2;
+			} else if(zoom >= 6) {
+				statement = pStatement3;
+			}
+				
+			if (statement == null || conn == null) {
+				cObjects = new ArrayList<MapRenderObject>();
+				// keep old results
 				return;
 			}
 			try {
-				pStatement.setDouble(1, cBottomLatitude);
-				pStatement.setDouble(2, cTopLatitude);
-				pStatement.setDouble(3, cLeftLongitude);
-				pStatement.setDouble(4, cRightLongitude);
-				ResultSet result = pStatement.executeQuery();
+				statement.setDouble(1, cBottomLatitude);
+				statement.setDouble(2, cTopLatitude);
+				statement.setDouble(3, cLeftLongitude);
+				statement.setDouble(4, cRightLongitude);
+				ResultSet result = statement.executeQuery();
 
-				List<MapRenderObject> local = new LinkedList<MapRenderObject>();
+				List<MapRenderObject> local = new ArrayList<MapRenderObject>();
 				try {
 					int count = 0;
 					while (result.next()) {

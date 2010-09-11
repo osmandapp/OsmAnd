@@ -18,6 +18,7 @@ public class ToDoConstants {
 	//   87. Use network availability for defining loading tiles from internet.
 	//   88. Implement show gpx track from folder and navigate using gpx track.
 	//   89. Transport redesign UI (enable run from context menu, switch go to goal/not) !
+	//   90. Use Junidecode library on the client for fast english translation
 	
 	// TODO small improvements for release :
 	// 1. If select vector map, notice if there are no loaded maps. 
@@ -31,11 +32,10 @@ public class ToDoConstants {
 	//  7. Implement auto-delete from site (done, should be ported from C#)
 	//  8. In all places verify to use float lat/lon improve disk space for indexes !!!
 	//  13! Support multiple database for map rendering
-	//  15. Draw layers -> icons -> text (+) See intersects of double streets.
+	//+ 15. Draw layers -> icons -> text. See intersects of double streets.
 	//  16. Internet access bits
 	//  17. Implement multipolygons to polygons
 
-	//  11. Move JUnidecode on client save space for some indexes adn 
 	//  12. Fix : find proper location for streets ! centralize them (when create index)?
 	
 	// TODO Check 
