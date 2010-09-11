@@ -130,6 +130,8 @@ public class IndexCreator {
 	private Connection mapConnection;
 	private PreparedStatement mapWaysStat;
 	private PreparedStatement mapWayLocsStat;
+	private PreparedStatement mapWayLocsStatLevel2;
+	private PreparedStatement mapWayLocsStatLevel3;
 
 	// choose what to use ?
 	private boolean loadInMemory = true;
@@ -934,11 +936,72 @@ public class IndexCreator {
 			if(indexMap && (e instanceof Way) || (e instanceof Node)){
 				// manipulate what kind of way to load
 				loadEntityData(e, true);
-				int type = MapRenderingTypes.encodeEntityWithType(e);
-				if(type > 0){
-					boolean point = (type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POINT_TYPE;
-					DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapWaysStat, mapWayLocsStat, e, 
-							MapRenderingTypes.getEntityName(e), type, point, BATCH_SIZE);
+				int type = MapRenderingTypes.encodeEntityWithType(e, 0);
+				int type1 = MapRenderingTypes.encodeEntityWithType(e, 1);
+				int type2 = MapRenderingTypes.encodeEntityWithType(e, 2);
+				boolean inverse = "-1".equals(e.getTag(OSMTagKey.ONEWAY));
+				boolean point = (type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POINT_TYPE;
+				long id = e.getId() << 3;
+				if(type != 0){
+					if(e instanceof Way){
+						id |= 1;
+					}
+					DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapWaysStat, mapWayLocsStat, e,
+							MapRenderingTypes.getEntityName(e), id,type, inverse, point, BATCH_SIZE);
+				}
+				if(type1 != 0){
+					id |= 2;
+					boolean skip = false;
+					if(e instanceof Way){
+						id |= 1; 
+						List<Node> nodes = ((Way) e).getNodes();
+						Way way = new Way(id);
+						int prevX = 0;
+						int prevY = 0;
+						for (int i = 0; i < nodes.size() - 1; i++) {
+							int r = i < nodes.size() - 1 ? 4 : 1;
+							int x = (int) (MapUtils.getTileNumberX(14, nodes.get(i).getLongitude()) * 256d);
+							int y = (int) (MapUtils.getTileNumberY(14, nodes.get(i).getLatitude()) * 256d);
+							if (Math.abs(x - prevX) > r || Math.abs(y - prevY) > r) {
+								way.addNode(nodes.get(i));
+								prevX = x;
+								prevY = y;
+							}
+						}
+						e = way;
+						skip = way.getNodes().size() < 2;
+					}
+					if(!skip){
+						DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapWaysStat, mapWayLocsStatLevel2, e, 
+								MapRenderingTypes.getEntityName(e), id, type, inverse, point, BATCH_SIZE);
+					}
+				}
+				if(type2 != 0){
+					id |= 4;
+					boolean skip = false;
+					if(e instanceof Way){
+						id |= 1; 
+						List<Node> nodes = ((Way) e).getNodes();
+						Way way = new Way(id);
+						int prevX = 0;
+						int prevY = 0;
+						for (int i = 0; i < nodes.size() - 1; i++) {
+							int r = i < nodes.size() - 1 ? 4 : 1;
+							int x = (int) (MapUtils.getTileNumberX(9, nodes.get(i).getLongitude()) * 256d);
+							int y = (int) (MapUtils.getTileNumberY(9, nodes.get(i).getLatitude()) * 256d);
+							if (Math.abs(x - prevX) > r || Math.abs(y - prevY) > r) {
+								way.addNode(nodes.get(i));
+								prevX = x;
+								prevY = y;
+							}
+						}
+						e = way;
+						skip = way.getNodes().size() < 2;
+					}
+					if(!skip){
+						DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapWaysStat, mapWayLocsStatLevel3, e, 
+								MapRenderingTypes.getEntityName(e), id, type, inverse, point, BATCH_SIZE);
+					}
 				}
 			}
 
@@ -1051,7 +1114,7 @@ public class IndexCreator {
 			log.error("Illegal configuration", e);
 			throw new IllegalStateException(e);
 		}
-		boolean loadFromPath = dbFile == null;
+		boolean loadFromPath = dbFile == null || !dbFile.exists();
 		if (dbFile == null) {
 			dbFile = new File(workingDir, TEMP_NODES_DB);
 			// to save space
@@ -1140,8 +1203,12 @@ public class IndexCreator {
 			DataIndexWriter.createMapIndexStructure(mapConnection);
 			mapWaysStat = DataIndexWriter.createStatementMapWaysInsert(mapConnection);
 			mapWayLocsStat = DataIndexWriter.createStatementMapWaysLocationsInsert(mapConnection);
+			mapWayLocsStatLevel2 = DataIndexWriter.createStatementMapWaysLocationsInsertLevel2(mapConnection);
+			mapWayLocsStatLevel3 = DataIndexWriter.createStatementMapWaysLocationsInsertLevel3(mapConnection);
 			pStatements.put(mapWaysStat, 0);
 			pStatements.put(mapWayLocsStat, 0);
+			pStatements.put(mapWayLocsStatLevel2, 0);
+			pStatements.put(mapWayLocsStatLevel3, 0);
 			mapConnection.setAutoCommit(false);
 		}
 
@@ -1360,11 +1427,40 @@ public class IndexCreator {
 	}
 	
 	 public static void main(String[] args) throws IOException, SAXException, SQLException {
-		IndexCreator creator = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
-		creator.setIndexMap(true);
-		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/nodes.tmp.odb"));
+		
+		 IndexCreator creator = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
+		 creator.setIndexMap(true);
+		 
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+		  
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus_2010_09_03.osm.bz2"), new ConsoleProgressImplementation(3), null);
+		 
+		
+		 // download base 
+	/*	MapTileDownloader instance = MapTileDownloader.getInstance();
+		instance.addDownloaderCallback(new MapTileDownloader.IMapDownloaderCallback() {
+			@Override
+			public void tileDownloaded(DownloadRequest request) {
+				System.out.println(request.url);
+			}
 
-		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+		});
+		File baseDir = new File("e:/Information/OSM maps/planet_tiles");
+		baseDir.mkdirs();
+		TileSourceTemplate map = TileSourceManager.getMapnikSource();
+		for (int zoom = 5; zoom <= 5; zoom++) {
+			int length = 1 << zoom;
+			for (int x = 0; x < length; x++) {
+				for (int y = 0; y < length; y++) {
+					String file = zoom + "/" + (x) + "/" + y + map.getTileFormat() + ".tile";
+					DownloadRequest req = new DownloadRequest(map.getUrlToLoad(x, y, zoom), new File(baseDir, file), x, y, zoom);
+					instance.requestToDownload(req);
+				}
+			}
+		}*/
+
 	}
 
 }

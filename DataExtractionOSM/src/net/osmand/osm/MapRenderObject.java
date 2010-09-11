@@ -61,13 +61,24 @@ public class MapRenderObject {
 					order = 64;
 				} else if (oType == MapRenderingTypes.POWER) {
 					order = 60;
+				} else if (oType == MapRenderingTypes.WATERWAY || oType == MapRenderingTypes.NATURAL) {
+					order = 7;
 				} else {
 					order = 1;
 				}
 			} else if ((type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POLYLINE_TYPE) {
-
-				if (oType == MapRenderingTypes.HIGHWAY) {
+				int layer = MapRenderingTypes.getWayLayer(type);
+				if(layer == 1){
+					order = 10;
+				} else if(layer == 2) {
+					order = 67; // over buildings
+				} else if (oType == MapRenderingTypes.HIGHWAY) {
 					order = 32 - sType + 24;
+					if(sType == MapRenderingTypes.PL_HW_MOTORWAY){
+						// TODO ? that was done only to have good overlay
+						// but really it should be motorway_link have -= 10
+						order -= 2;
+					}
 				} else if (oType == MapRenderingTypes.RAILWAY) {
 					order = 58;
 				} else if (oType == MapRenderingTypes.AERIALWAY) {

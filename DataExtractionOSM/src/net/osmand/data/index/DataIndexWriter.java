@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -395,6 +396,8 @@ public class DataIndexWriter {
         stat.execute(IndexConstants.generateCreateSQL(IndexMapRenderObject.values()));
         stat.execute(IndexConstants.generateCreateIndexSQL(IndexMapRenderObject.values()));
         stat.execute("CREATE VIRTUAL TABLE "+IndexConstants.indexMapLocationsTable+" USING rtree (id, minLon, maxLon, minLat, maxLat);");
+        stat.execute("CREATE VIRTUAL TABLE "+IndexConstants.indexMapLocationsTable2+" USING rtree (id, minLon, maxLon, minLat, maxLat);");
+        stat.execute("CREATE VIRTUAL TABLE "+IndexConstants.indexMapLocationsTable3+" USING rtree (id, minLon, maxLon, minLat, maxLat);");
         stat.execute("PRAGMA user_version = " + IndexConstants.MAP_TABLE_VERSION); //$NON-NLS-1$
         stat.close();
 	}
@@ -406,14 +409,26 @@ public class DataIndexWriter {
 	public static PreparedStatement createStatementMapWaysLocationsInsert(Connection conn) throws SQLException{
         return conn.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexConstants.indexMapLocationsTable, 5));
 	}
+	public static PreparedStatement createStatementMapWaysLocationsInsertLevel2(Connection conn) throws SQLException{
+        return conn.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexConstants.indexMapLocationsTable2, 5));
+	}
+	
+	public static PreparedStatement createStatementMapWaysLocationsInsertLevel3(Connection conn) throws SQLException{
+        return conn.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexConstants.indexMapLocationsTable3, 5));
+	}
 	
 	public static void insertMapRenderObjectIndex(Map<PreparedStatement, Integer> statements, 
-			PreparedStatement mapStat, PreparedStatement mapWayLocationsStat, Entity e, String name, int type, boolean writeAsPoint, int batchSize) throws SQLException {
+			PreparedStatement mapStat, PreparedStatement mapWayLocationsStat, Entity e, String name,
+			long id, int type, boolean inversePath, boolean writeAsPoint, int batchSize) throws SQLException {
 		assert IndexMapRenderObject.values().length == 4;
 		if(e instanceof Relation){
 			throw new IllegalArgumentException();
 		}
 		boolean init = false;
+//		int minX = Integer.MAX_VALUE;
+//		int maxX = 0;
+//		int minY = Integer.MAX_VALUE;
+//		int maxY = 0;
 		double minLat = 180;
 		double maxLat = -180;
 		double minLon = 360;
@@ -429,23 +444,28 @@ public class DataIndexWriter {
 		} else {
 			nodes = Collections.singleton((Node) e);
 		}
-		byte[] bytes = new byte[nodes.size() * 8];
-		// generate unique id
-		long id = e.getId() << 1;
-		if(e instanceof Way){
-			id ++;
+		if(inversePath){
+			nodes = new ArrayList<Node>(nodes);
+			Collections.reverse((List<?>) nodes);
 		}
+		byte[] bytes = new byte[nodes.size() * 8];
 		int offset = 0;
 		for (Node n : nodes) {
 			if (n != null) {
+				int y = MapUtils.get31TileNumberY(n.getLatitude());
+				int x = MapUtils.get31TileNumberX(n.getLongitude());
 				minLat = Math.min(minLat, n.getLatitude());
 				maxLat = Math.max(maxLat, n.getLatitude());
 				minLon = Math.min(minLon, n.getLongitude());
 				maxLon = Math.max(maxLon, n.getLongitude());
+//				minX = Math.min(minX, x);
+//				maxX = Math.max(maxX, x);
+//				minY = Math.min(minY, y);
+//				maxY = Math.max(maxY, y);
 				init = true;
-				Algoritms.putIntToBytes(bytes, offset, MapUtils.get31TileNumberY(n.getLatitude()));
+				Algoritms.putIntToBytes(bytes, offset, y);
 				offset += 4;
-				Algoritms.putIntToBytes(bytes, offset, MapUtils.get31TileNumberX(n.getLongitude()));
+				Algoritms.putIntToBytes(bytes, offset, x);
 				offset += 4;
 			}
 		}
@@ -461,6 +481,10 @@ public class DataIndexWriter {
 			mapWayLocationsStat.setFloat(3, (float) maxLon);
 			mapWayLocationsStat.setFloat(4, (float) minLat);
 			mapWayLocationsStat.setFloat(5, (float) maxLat);
+//			mapWayLocationsStat.setInt(2, minX);
+//			mapWayLocationsStat.setInt(3, maxX);
+//			mapWayLocationsStat.setInt(4, minY);
+//			mapWayLocationsStat.setInt(5, maxY);
 			addBatch(statements, mapWayLocationsStat);
 		}
 	}

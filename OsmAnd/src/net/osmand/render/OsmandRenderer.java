@@ -48,15 +48,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	
 	/// Colors
 	private int clFillScreen = Color.rgb(241, 238, 232);
-	private int clTrunkRoad = Color.rgb(168, 218, 168); 
-	private int clMotorwayRoad = Color.rgb(128,155,192);
-	private int clPrimaryRoad = Color.rgb(235, 152, 154); 
-	private int clSecondaryRoad = Color.rgb(253, 214, 164);
-	private int clTertiaryRoad = Color.rgb(254, 254, 179);
-	private int clTrackRoad = Color.GRAY;
-	private int clRoadColor = Color.WHITE;
-	private int clCycleWayRoad = Color.rgb(20, 20, 250);
-	private int clPedestrianRoad = Color.rgb(250, 128, 115);
+	
 	
 	private PathEffect dashEffect2_2 = new DashPathEffect(new float[]{2,2}, 1);
 	private PathEffect dashEffect3_2 = new DashPathEffect(new float[]{3,2}, 1);
@@ -85,6 +77,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		Path drawOnPath = null;
 		float vOffset = 0;
 		float centerX = 0;
+		float pathRotate = 0;
 		float centerY = 0;
 		float textSize = 0;
 		int textColor = Color.BLACK;
@@ -112,10 +105,20 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		float sinRotate;
 		float tileDivisor;
 		
+		// debug purpose
 		int pointCount = 0;
 		int pointInsideCount = 0;
 		
+		// use to calculate points
 		PointF tempPoint = new PointF();
+		
+		// use to set rendering properties
+		int color = Color.BLACK;
+		boolean showText = true;
+		PathEffect pathEffect = null;
+		int shadowLayer = 0;
+		int shadowColor = 0;
+		float strokeWidth = 0;
 	}
 	
 	public OsmandRenderer(Context context){
@@ -183,7 +186,6 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			rc.sinRotate = FloatMath.sin((float) Math.toRadians(rotate));
 			rc.tileDivisor = (int) (1 << (31 - zoom));
 			
-			
 			bmp = Bitmap.createBitmap((int) ((rc.rightX - rc.leftX) * 256), (int) ((rc.bottomY - rc.topY) * 256), Config.RGB_565);
 			Canvas cv = new Canvas(bmp);
 			cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillEmpty);
@@ -202,22 +204,49 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					}
 				}
 			}
-			for(TextDrawInfo text : rc.textToDraw){
-				if(text.text != null){
-					paintText.setTextSize(text.textSize);
-					paintText.setColor(text.textColor);
-					if(text.drawOnPath != null){
-						cv.drawTextOnPath(text.text, text.drawOnPath, 0, text.vOffset, paintText);
-					} else {
-						cv.drawText(text.text, text.centerX, text.centerY, paintText);
-					}
-				}
-			}
+			drawTextOverCanvas(rc, cv);
 			log.info(String.format("Rendering has been done in %s ms. (%s points, %s points inside)", System.currentTimeMillis() - now, //$NON-NLS-1$ 
 					rc.pointCount,rc.pointInsideCount)); 
 		}
 		
 		return bmp;
+	}
+
+	public void drawTextOverCanvas(RenderingContext rc, Canvas cv) {
+		List<RectF> boundsIntersect = new ArrayList<RectF>();
+		int size = rc.textToDraw.size();
+		next: for (int i = 0; i < size; i++) {
+			TextDrawInfo text  = rc.textToDraw.get(i);
+			if(text.text != null){
+				paintText.setTextSize(text.textSize);
+				paintText.setColor(text.textColor);
+				RectF bounds = new RectF();
+				float mes = paintText.measureText(text.text);
+				if((text.pathRotate > 45 && text.pathRotate < 135) || (text.pathRotate > 225 && text.pathRotate < 315)){
+					bounds.set(text.centerX - mes / 2, text.centerY - 3 * text.textSize / 2,
+							text.centerX + mes / 2, text.centerY + 3 * text.textSize / 2);
+				} else {
+					bounds.set(text.centerX - 3 * text.textSize / 2, text.centerY - mes/2, 
+										text.centerX + 3 * text.textSize / 2, text.centerY + mes/2);
+				}
+				final int diff = 3;
+				final int diff2 = 15;
+				for(int j = 0; j < boundsIntersect.size() ; j++){
+					RectF b = boundsIntersect.get(j);
+					float x = Math.min(bounds.right, b.right) - Math.max(b.left, bounds.left);
+					float y = Math.min(bounds.bottom, b.bottom) - Math.max(b.top, bounds.top);
+					if((x > diff && y > diff2) || (x > diff2 && y > diff)){
+						continue next;
+					}
+				}
+				boundsIntersect.add(bounds);
+				if(text.drawOnPath != null){
+					cv.drawTextOnPath(text.text, text.drawOnPath, 0, text.vOffset, paintText);
+				} else {
+					cv.drawText(text.text, text.centerX, text.centerY, paintText);
+				}
+			}
+		}
 	}
 
 	
@@ -297,7 +326,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			if (subtype == MapRenderingTypes.PL_HW_SERVICE || subtype == MapRenderingTypes.PL_HW_UNCLASSIFIED
 				|| subtype == MapRenderingTypes.PL_HW_RESIDENTIAL) {
 				colorAround = Color.rgb(194, 194, 194);
-				color = clRoadColor;
+				color = Color.WHITE;
 			} else if(subtype == MapRenderingTypes.PL_HW_PEDESTRIAN || subtype == MapRenderingTypes.PL_HW_FOOTWAY){
 				color = Color.rgb(236, 236, 236);
 				colorAround = Color.rgb(176, 176, 176);
@@ -505,7 +534,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		int shadowColor = Color.WHITE;
 		if(type == MapRenderingTypes.ADMINISTRATIVE){
 			shadowRadius = 4;
-			if(subType == 9 || subType == 11){
+			if(subType == 11){
 				if(zoom >= 14 && zoom < 16){
 					textColor = 0xFF000000;
 					textSize = 8;
@@ -513,7 +542,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					textColor = 0xFF777777;
 					textSize = 11;
 				}
-			} else 	if(subType == 8){
+			} else 	if(subType == 8  || subType == 9){
 				if(zoom >= 12 && zoom < 15){
 					textColor = 0xFF000000;
 					textSize = 9;
@@ -581,40 +610,154 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 
 	
 	private void drawPolyline(MapRenderObject obj, Canvas canvas, RenderingContext rc) {
-		if(obj.getPointsLength() == 0){
+		int length = obj.getPointsLength();
+		if(length < 2){
 			return;
 		}
 		int type = MapRenderingTypes.getObjectType(obj.getType());
 		int subtype = MapRenderingTypes.getPolylineSubType(obj.getType());
+
+		renderPolyline(type, subtype, rc);
+		
+		if(rc.strokeWidth == 0){
+			return;
+		}
+		Path path = null;
+		float pathRotate = 0;
+		float xLength = 0;
+		float yLength = 0;
+		boolean inverse = false;
+		float xPrev = 0;
+		float yPrev = 0;
+		float xMid = 0;
+		float yMid = 0;
+		int middle = obj.getPointsLength() / 2;
+		
+		for (int i = 0; i < length ; i++) {
+			PointF p = calcPoint(obj, i, rc);
+			if(i == 0 || i == length -1){
+				xMid+= p.x;
+				yMid+= p.y;
+			}
+			if (path == null) {
+				path = new Path();
+				path.moveTo(p.x, p.y);
+			} else {
+				xLength += p.x - xPrev; // not abs
+				yLength += p.y - yPrev; // not abs
+				if(i == middle){
+					double rot = - Math.atan2(p.x - xPrev, p.y - yPrev) * 180 / Math.PI;
+					if (rot < 0) {
+						rot += 360;
+					}
+					if (rot < 180) {
+						rot += 180;
+						inverse = true;
+					}
+					pathRotate = (float) rot;
+				}
+				path.lineTo(p.x, p.y);
+			}
+			xPrev = p.x;
+			yPrev = p.y;
+		}
+		if (path != null) {
+			paintStroke.setPathEffect(rc.pathEffect);
+			if(paintStroke.getShader() != null){
+				paintStroke.setShader(null);
+			}
+			paintStroke.setShadowLayer(rc.shadowLayer, 0, 0, rc.shadowColor);
+			paintStroke.setColor(rc.color);
+			paintStroke.setStrokeWidth(rc.strokeWidth);
+			canvas.drawPath(path, paintStroke);
+			if(type == MapRenderingTypes.HIGHWAY && rc.zoom >= 16 && MapRenderingTypes.isOneWayWay(obj.getType())){
+				drawOneWayDirections(canvas, path);
+			}
+			if (obj.getName() != null && rc.showText) {
+				float w = rc.strokeWidth + 3;
+				if(w < 10){
+					 w = 10;
+				}
+				paintText.setTextSize(w);
+				if (paintText.measureText(obj.getName()) < Math.max(Math.abs(xLength), Math.abs(yLength))) {
+					if (inverse) {
+						path.rewind();
+						boolean st = true;
+						for (int i = obj.getPointsLength() - 1; i >= 0; i--) {
+							PointF p = calcPoint(obj, i, rc);
+							if (st) {
+								st = false;
+								path.moveTo(p.x, p.y);
+							} else {
+								path.lineTo(p.x, p.y);
+							}
+						}
+					}
+					
+					TextDrawInfo text = new TextDrawInfo();
+					text.text = obj.getName();
+					text.centerX = xMid /2;
+					text.centerY = yMid /2;
+					text.pathRotate = pathRotate;
+					text.drawOnPath = path;
+					text.textColor = Color.BLACK;
+					text.textSize = w;
+					text.vOffset = rc.strokeWidth / 2 - 1;
+					rc.textToDraw.add(text);
+				}
+			}
+		}
+	}
+
+	public void drawOneWayDirections(Canvas canvas, Path path){
+		paintStroke.setColor(0xff6c70d5);
+		
+		paintStroke.setStrokeWidth(1);
+		paintStroke.setPathEffect(arrowDashEffect1);
+		canvas.drawPath(path, paintStroke);
+		
+		paintStroke.setStrokeWidth(2);
+		paintStroke.setPathEffect(arrowDashEffect2);
+		canvas.drawPath(path, paintStroke);
+		
+		paintStroke.setStrokeWidth(3);
+		paintStroke.setPathEffect(arrowDashEffect3);
+		canvas.drawPath(path, paintStroke);
+		
+		paintStroke.setStrokeWidth(4);
+		paintStroke.setPathEffect(arrowDashEffect4);
+		canvas.drawPath(path, paintStroke);
+	}
+	
+	public void renderPolyline(int type, int subtype, RenderingContext rc){
 		int zoom = rc.zoom;
 		
+		int color = Color.BLACK;
 		boolean showText = true;
 		PathEffect pathEffect = null;
-		int color = Color.BLACK;
 		int shadowLayer = 0;
 		int shadowColor = 0;
 		float strokeWidth = zoom >= 15 ? 1 : 0;
-		
 		if (type == MapRenderingTypes.HIGHWAY) {
 			int hwType = subtype;
 			boolean carRoad = true;
 			if (hwType == MapRenderingTypes.PL_HW_TRUNK) {
-				color = clTrunkRoad;
+				color = Color.rgb(168, 218, 168);
 			} else if (hwType == MapRenderingTypes.PL_HW_MOTORWAY) {
-				color = clMotorwayRoad;
+				color = Color.rgb(128,155,192);
 			} else if (hwType == MapRenderingTypes.PL_HW_PRIMARY) {
-				color = clPrimaryRoad;
+				color = Color.rgb(235, 152, 154);
 			} else if (hwType == MapRenderingTypes.PL_HW_SECONDARY) {
-				color = clSecondaryRoad;
+				color = Color.rgb(253, 214, 164);
 			} else if (hwType == MapRenderingTypes.PL_HW_TERTIARY) {
-				color = clTertiaryRoad;
+				color = Color.rgb(254, 254, 179);
 				shadowLayer = 2;
 				shadowColor = Color.rgb(186, 186, 186);
 			} else if (hwType == MapRenderingTypes.PL_HW_SERVICE || hwType == MapRenderingTypes.PL_HW_UNCLASSIFIED
 					|| hwType == MapRenderingTypes.PL_HW_RESIDENTIAL) {
 				shadowLayer = 1;
 				shadowColor = Color.rgb(194, 194, 194);
-				color = clRoadColor;
+				color = Color.WHITE;
 			} else if (hwType == MapRenderingTypes.PL_HW_PEDESTRIAN) {
 				shadowLayer = 1;
 				shadowColor = Color.rgb(176, 176, 176);
@@ -624,16 +767,30 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				strokeWidth = 2;
 				pathEffect = dashEffect2_2;
 				if (hwType == MapRenderingTypes.PL_HW_TRACK || hwType == MapRenderingTypes.PL_HW_PATH) {
-					color = clTrackRoad;
+					color = Color.GRAY;
 					pathEffect = dashEffect6_2;
 				} else if (hwType == MapRenderingTypes.PL_HW_CYCLEWAY || hwType == MapRenderingTypes.PL_HW_BRIDLEWAY) {
-					color = clCycleWayRoad;
+					color = Color.rgb(20, 20, 250);
 				} else {
-					color = clPedestrianRoad;
+					color = Color.rgb(250, 128, 115);
 				}
 			}
 			if (carRoad) {
-				if (zoom < 16) {
+				if(zoom <= 12){
+					if (hwType <= MapRenderingTypes.PL_HW_SECONDARY) {
+						if (zoom < 10) {
+							strokeWidth = 1;
+						} else if (zoom < 12) {
+							strokeWidth = 2;
+						} else if (zoom == 12) {
+							strokeWidth = 3;
+						}
+					} else {
+						strokeWidth = 0;
+					}
+				} else if(zoom < 15){
+					strokeWidth = 4.5f;
+				} else if (zoom < 16) {
 					strokeWidth = 6;
 				} else if (zoom == 16) {
 					strokeWidth = 8;
@@ -648,7 +805,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					strokeWidth -= 2; 
 				}
 			}
-			showText = carRoad || zoom > 16;
+			showText = (carRoad && zoom > 12) || zoom > 16;
 		} else if(type == MapRenderingTypes.BARRIER){
 			if(subtype == 5){
 				color = Color.GRAY;
@@ -696,9 +853,9 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				// admin level 9, 10
 				if (zoom > 12) {
 					pathEffect = dashEffect3_2;
-					strokeWidth = 2;
+					strokeWidth = 1;
 					if (zoom > 16) {
-						strokeWidth = 3;
+						strokeWidth = 2;
 					}
 				} else {
 					strokeWidth = 0;
@@ -711,8 +868,6 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				} else {
 					strokeWidth = 0;
 				}
-				strokeWidth = 2;
-				pathEffect = dashEffect6_3;
 			} else if(subtype == 25 || subtype == 26){
 				// admin level 5, 6
 				if(zoom > 10){
@@ -721,15 +876,13 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				} else {
 					strokeWidth = 0;
 				}
-				
-				
 			} else if(subtype == 24){
 				// admin level 4
 				pathEffect = dashEffect4_3;
 				if(zoom >= 4 && zoom <= 6){
 					strokeWidth = 0.6f;
 				} else if(zoom >= 7 && zoom <= 10){
-					strokeWidth = 1;
+					strokeWidth = 2;
 				} else if(zoom > 10){
 					strokeWidth = 3;
 				} else {
@@ -738,9 +891,9 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			} else if(subtype == 23 || subtype == 22){
 				// admin level 2, 3
 				if(zoom >= 4 && zoom <= 6){
-					strokeWidth = 1;
-				} else if(zoom >= 7 && zoom <= 9){
 					strokeWidth = 2;
+				} else if(zoom >= 7 && zoom <= 9){
+					strokeWidth = 3;
 				} else if(zoom > 9){
 					if(subtype == 22){
 						strokeWidth = 6;
@@ -777,116 +930,14 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				strokeWidth = 2;
 				color = Color.rgb(181, 208, 208);
 			}
-		} 
-		
-		if(strokeWidth == 0){
-			return;
 		}
-		Path path = null;
-		float pathRotate = 0;
-		float xLength = 0;
-		float yLength = 0;
-		
 
-
-		boolean inverse = false;
-		float xPrev = 0;
-		float yPrev = 0;
-		float xMid = 0;
-		float yMid = 0;
-		int middle = obj.getPointsLength() / 2;
-		for (int i = 0; i < obj.getPointsLength(); i++) {
-			PointF p = calcPoint(obj, i, rc);
-			if (path == null) {
-				path = new Path();
-				path.moveTo(p.x, p.y);
-			} else {
-				xLength += p.x - xPrev; // not abs
-				yLength += p.y - yPrev; // not abs
-				if(i == middle){
-					xMid = p.x;
-					yMid = p.y;
-					double rot = - Math.atan2(p.x - xPrev, p.y - yPrev) * 180 / Math.PI;
-					if (rot < 0) {
-						rot += 360;
-					}
-					if (rot < 180) {
-						rot += 180;
-						inverse = true;
-					}
-					pathRotate = (float) rot;
-				}
-				if (pathRotate == 0) {
-					
-				}
-				path.lineTo(p.x, p.y);
-			}
-			xPrev = p.x;
-			yPrev = p.y;
-		}
-		if (path != null) {
-			paintStroke.setPathEffect(pathEffect);
-			if(paintStroke.getShader() != null){
-				paintStroke.setShader(null);
-			}
-			paintStroke.setShadowLayer(shadowLayer, 0, 0, shadowColor);
-			paintStroke.setColor(color);
-			paintStroke.setStrokeWidth(strokeWidth);
-			canvas.drawPath(path, paintStroke);
-//			if(type == MapRenderingTypes.HIGHWAY){
-//				paintStroke.setColor(0xff6c70d5);
-//				
-//				paintStroke.setStrokeWidth(1);
-//				paintStroke.setPathEffect(arrowDashEffect1);
-//				canvas.drawPath(path, paintStroke);
-//				
-//				paintStroke.setStrokeWidth(2);
-//				paintStroke.setPathEffect(arrowDashEffect2);
-//				canvas.drawPath(path, paintStroke);
-//				
-//				paintStroke.setStrokeWidth(3);
-//				paintStroke.setPathEffect(arrowDashEffect3);
-//				canvas.drawPath(path, paintStroke);
-//				
-//				paintStroke.setStrokeWidth(4);
-//				paintStroke.setPathEffect(arrowDashEffect4);
-//				canvas.drawPath(path, paintStroke);
-//			}
-			if (obj.getName() != null && showText) {
-				float w = strokeWidth + 3;
-				if(w < 10){
-					 w = 10;
-				}
-				paintText.setTextSize(w);
-				if (paintText.measureText(obj.getName()) < Math.max(Math.abs(xLength), Math.abs(yLength))) {
-					if (inverse) {
-						path.rewind();
-						boolean st = true;
-						for (int i = obj.getPointsLength() - 1; i >= 0; i--) {
-							PointF p = calcPoint(obj, i, rc);
-							if (st) {
-								st = false;
-								path.moveTo(p.x, p.y);
-							} else {
-								path.lineTo(p.x, p.y);
-							}
-						}
-					}
-					
-					TextDrawInfo text = new TextDrawInfo();
-					text.text = obj.getName();
-					text.centerX = xMid;
-					text.centerY = yMid;
-					text.drawOnPath = path;
-					text.textColor = Color.BLACK;
-					text.textSize = w;
-					text.vOffset = strokeWidth / 2 - 1;
-					rc.textToDraw.add(text);
-				}
-				
-			}
-		}
+		rc.color = color;
+		rc.pathEffect = pathEffect;
+		rc.shadowColor = shadowColor;
+		rc.shadowLayer = shadowLayer;
+		rc.showText = showText;
+		rc.strokeWidth = strokeWidth;
 	}
-	
 }
 

@@ -13,7 +13,7 @@ import android.graphics.RectF;
 public class RendererLayer implements OsmandMapLayer {
 
 	private OsmandMapTileView view;
-	private final static int startZoom = 15;
+	private final static int startZoom = 5;
 	private Rect pixRect = new Rect();
 	private RectF tileRect = new RectF();
 	private ResourceManager resourceManager;
