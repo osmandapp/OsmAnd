@@ -554,6 +554,7 @@ public class MapRenderingTypes {
 		
 	// 2. barrier	
 		register("barrier", "hedge", BARRIER, 1, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("natural", "hedge", BARRIER, 1, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("barrier", "fence", BARRIER, 2, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("barrier", "wall", BARRIER, 3, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("barrier", "ditch", BARRIER, 1, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -666,6 +667,7 @@ public class MapRenderingTypes {
 		register(1, "man_made", "pier", MAN_MADE, 9, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("man_made", "pipeline", MAN_MADE, 10, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("man_made", "reservoir_covered", MAN_MADE, 11, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("man_made", "embankment", MAN_MADE, 12, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		register("man_made", "beacon", MAN_MADE, 15, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("man_made", "crane", MAN_MADE, 16, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -887,7 +889,7 @@ public class MapRenderingTypes {
 		register("natural", "bay", NATURAL, 1, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(1, "natural", "beach", NATURAL, 2, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(1, "natural", "cave_entrance", NATURAL, 3, POLYGON_WITH_CENTER_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		registerRules(1, "natural", "cliff", NATURAL, 4, POLYGON_TYPE, POINT_TYPE, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("natural", "cliff", NATURAL, 4, POINT_TYPE, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("natural", "fell", NATURAL, 6, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(2, "natural", "glacier", NATURAL, 7, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(1, "natural", "heath", NATURAL, 8, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
