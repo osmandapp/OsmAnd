@@ -14,6 +14,7 @@ public class OSMSettings {
 		ONEWAY("oneway"), //$NON-NLS-1$
 		LAYER("layer"), //$NON-NLS-1$
 		BRIDGE("bridge"), //$NON-NLS-1$
+		TUNNEL("tunnel"), //$NON-NLS-1$
 		TOLL("toll"), //$NON-NLS-1$
 		JUNCTION("junction"), //$NON-NLS-1$
 		
@@ -44,7 +45,7 @@ public class OSMSettings {
 		NATURAL("natural"), //$NON-NLS-1$
 		INTERNET_ACCESS("internet_access"), //$NON-NLS-1$
 		
-		OPENING_HOURS("opening_hours"), //$NON-NLS-1$
+		OPENING_HOURS("opening_hours"),  //$NON-NLS-1$
 		;
 		
 		private final String value;

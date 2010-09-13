@@ -128,10 +128,12 @@ public class IndexCreator {
 	
 	private File mapFile;
 	private Connection mapConnection;
-	private PreparedStatement mapWaysStat;
-	private PreparedStatement mapWayLocsStat;
-	private PreparedStatement mapWayLocsStatLevel2;
-	private PreparedStatement mapWayLocsStatLevel3;
+	private PreparedStatement mapObjStat;
+	private PreparedStatement mapLocsStatLevel0;
+	private PreparedStatement mapLocsStatLevel1;
+	private PreparedStatement mapLocsStatLevel2;
+	private Map<Long, List<Way>> lowLevelWaysSt = new LinkedHashMap<Long, List<Way>>();
+	private Map<Long, List<Way>> lowLevelWaysEnd = new LinkedHashMap<Long, List<Way>>();
 
 	// choose what to use ?
 	private boolean loadInMemory = true;
@@ -936,73 +938,11 @@ public class IndexCreator {
 			if(indexMap && (e instanceof Way) || (e instanceof Node)){
 				// manipulate what kind of way to load
 				loadEntityData(e, true);
-				int type = MapRenderingTypes.encodeEntityWithType(e, 0);
-				int type1 = MapRenderingTypes.encodeEntityWithType(e, 1);
-				int type2 = MapRenderingTypes.encodeEntityWithType(e, 2);
 				boolean inverse = "-1".equals(e.getTag(OSMTagKey.ONEWAY));
-				boolean point = (type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POINT_TYPE;
-				long id = e.getId() << 3;
-				if(type != 0){
-					if(e instanceof Way){
-						id |= 1;
-					}
-					DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapWaysStat, mapWayLocsStat, e,
-							MapRenderingTypes.getEntityName(e), id,type, inverse, point, BATCH_SIZE);
-				}
-				if(type1 != 0){
-					id |= 2;
-					boolean skip = false;
-					if(e instanceof Way){
-						id |= 1; 
-						List<Node> nodes = ((Way) e).getNodes();
-						Way way = new Way(id);
-						int prevX = 0;
-						int prevY = 0;
-						for (int i = 0; i < nodes.size() - 1; i++) {
-							int r = i < nodes.size() - 1 ? 4 : 1;
-							int x = (int) (MapUtils.getTileNumberX(14, nodes.get(i).getLongitude()) * 256d);
-							int y = (int) (MapUtils.getTileNumberY(14, nodes.get(i).getLatitude()) * 256d);
-							if (Math.abs(x - prevX) > r || Math.abs(y - prevY) > r) {
-								way.addNode(nodes.get(i));
-								prevX = x;
-								prevY = y;
-							}
-						}
-						e = way;
-						skip = way.getNodes().size() < 2;
-					}
-					if(!skip){
-						DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapWaysStat, mapWayLocsStatLevel2, e, 
-								MapRenderingTypes.getEntityName(e), id, type, inverse, point, BATCH_SIZE);
-					}
-				}
-				if(type2 != 0){
-					id |= 4;
-					boolean skip = false;
-					if(e instanceof Way){
-						id |= 1; 
-						List<Node> nodes = ((Way) e).getNodes();
-						Way way = new Way(id);
-						int prevX = 0;
-						int prevY = 0;
-						for (int i = 0; i < nodes.size() - 1; i++) {
-							int r = i < nodes.size() - 1 ? 4 : 1;
-							int x = (int) (MapUtils.getTileNumberX(9, nodes.get(i).getLongitude()) * 256d);
-							int y = (int) (MapUtils.getTileNumberY(9, nodes.get(i).getLatitude()) * 256d);
-							if (Math.abs(x - prevX) > r || Math.abs(y - prevY) > r) {
-								way.addNode(nodes.get(i));
-								prevX = x;
-								prevY = y;
-							}
-						}
-						e = way;
-						skip = way.getNodes().size() < 2;
-					}
-					if(!skip){
-						DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapWaysStat, mapWayLocsStatLevel3, e, 
-								MapRenderingTypes.getEntityName(e), id, type, inverse, point, BATCH_SIZE);
-					}
-				}
+
+				writeEntityToMapDatabase(e, e.getId(), inverse, 0);
+				indexLowLevelMap(e, 1);
+				indexLowLevelMap(e, 2);
 			}
 
 			if (indexAddress) {
@@ -1089,6 +1029,174 @@ public class IndexCreator {
 			}
 		}
 	}
+	
+	
+	private <T, R> void putIntoMap(Map<T, List<R>> map, T key, R value){
+		if(!map.containsKey(key)){
+			map.put(key, new ArrayList<R>());
+		}
+		map.get(key).add(value);
+	}
+	
+	private <T, R> void removeValueMap(Map<T, List<R>> map, T key, R value){
+		boolean remove = map.get(key).remove(value);
+		if(!remove){
+			throw new IllegalStateException();
+		}
+		if(map.get(key).isEmpty()){
+			map.remove(key);
+		}
+	}
+	
+	private void indexLowLevelMap(Entity e, int level) throws SQLException{
+		int type = MapRenderingTypes.encodeEntityWithType(e, level);
+		if(type == 0){
+			return;
+		}
+		boolean writeIntoDB = true;
+		boolean ring = true;
+		if((type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POLYLINE_TYPE && e instanceof Way && level > 0){
+			List<Node> nodes = ((Way) e).getNodes();
+			Node n = nodes.get(0);
+			Node l = nodes.get(nodes.size() - 1);
+			// ring
+			ring = l.getId() == n.getId();
+			if (!ring) {
+				writeIntoDB = false;
+				Way start = null;
+				if (lowLevelWaysEnd.containsKey(n.getId())) {
+					for (Way w : lowLevelWaysEnd.get(n.getId())) {
+						int t = MapRenderingTypes.encodeEntityWithType(w, level);
+						if (t == type && Algoritms.objectEquals(MapRenderingTypes.getEntityName(w), 
+								MapRenderingTypes.getEntityName(e))) {
+							start = w;
+							break;
+						}
+					}
+				}
+				
+				if (start != null) {
+					ring = start.getNodeIds().get(0) == l.getId();
+					if(ring){
+						removeValueMap(lowLevelWaysEnd, n.getId(), start);
+						removeValueMap(lowLevelWaysSt, l.getId(), start);
+					} else {
+						// add nodes to start
+						for (int i = 1; i < nodes.size(); i++) {
+							start.addNode(nodes.get(i));
+						}
+						removeValueMap(lowLevelWaysEnd, n.getId(), start);
+						putIntoMap(lowLevelWaysEnd, l.getId(), start);
+					}
+				} else {
+					long tempId = (e.getId() << 2) | level;
+					start = new Way(tempId);
+					for(String t : e.getTagKeySet()){
+						start.putTag(t, e.getTag(t));
+					}
+					// add nodes to start
+					for (int i = 0; i < nodes.size(); i++) {
+						start.addNode(nodes.get(i));
+					}
+					
+					putIntoMap(lowLevelWaysSt, n.getId(), start);
+					putIntoMap(lowLevelWaysEnd, l.getId(), start);
+				}
+
+				if (!ring) {
+					Way end = null;
+					if (lowLevelWaysSt.containsKey(l.getId())) {
+						for (Way w : lowLevelWaysSt.get(l.getId())) {
+							int t = MapRenderingTypes.encodeEntityWithType(w, level);
+							if (t == type && Algoritms.objectEquals(MapRenderingTypes.getEntityName(w), 
+									MapRenderingTypes.getEntityName(e))) {
+								end = w;
+								break;
+							}
+						}
+					}
+					if (end != null) {
+						Long ll = end.getNodeIds().get(end.getNodeIds().size() - 1);
+						// remove end line
+						removeValueMap(lowLevelWaysSt, l.getId(), end);
+						removeValueMap(lowLevelWaysEnd, ll, end);
+						ring = ll == n.getId(); 
+							
+						if (!ring) {
+
+							// add nodes to start
+							for (int i = 1; i < end.getNodes().size(); i++) {
+								start.addNode(end.getNodes().get(i));
+							}
+
+							// remove end start
+							removeValueMap(lowLevelWaysEnd, l.getId(), start);
+							putIntoMap(lowLevelWaysEnd, ll, start);
+						}
+					}
+				}
+			}
+		} 
+		
+		if(writeIntoDB || ring){
+			writeEntityToMapDatabase(e, e.getId(), false, level);
+		}
+	}
+
+
+	private void writeEntityToMapDatabase(Entity e, long baseId, boolean inverse, int level) throws SQLException {
+		int type = MapRenderingTypes.encodeEntityWithType(e, level);
+		if(type == 0){
+			return;
+		}
+		boolean point = (type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POINT_TYPE;
+		PreparedStatement mapLocations;
+		int zoom;
+		long id = baseId << 3;
+		if (level == 1) {
+			id |= 2;
+			mapLocations = mapLocsStatLevel1;
+			zoom = 14;
+		} else if (level == 2) {
+			id |= 4;
+			zoom = 9;
+			mapLocations = mapLocsStatLevel2;
+		} else {
+			zoom = 18;
+			mapLocations = mapLocsStatLevel0;
+		}
+		boolean skip = false;
+		if (e instanceof Way) {
+			id |= 1;
+			// simplify route
+			if (level > 0) {
+				List<Node> nodes = ((Way) e).getNodes();
+				Way way = new Way(id);
+				int prevX = 0;
+				int prevY = 0;
+				for (int i = 0; i < nodes.size(); i++) {
+					int r = i < nodes.size() - 1 ? 4 : 0;
+					int x = (int) (MapUtils.getTileNumberX(zoom, nodes.get(i).getLongitude()) * 256d);
+					int y = (int) (MapUtils.getTileNumberY(zoom, nodes.get(i).getLatitude()) * 256d);
+					if (Math.abs(x - prevX) > r || Math.abs(y - prevY) > r) {
+						way.addNode(nodes.get(i));
+						prevX = x;
+						prevY = y;
+					}
+				}
+				e = way;
+				skip = way.getNodes().size() < 2;
+			}
+			
+		}
+
+		
+		if (!skip) {
+			DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapObjStat, mapLocations, e, 
+					MapRenderingTypes.getEntityName(e), id,	type, false, point, BATCH_SIZE);
+		}
+	}
+	
 	
 	
 	
@@ -1201,14 +1309,14 @@ public class IndexCreator {
 			mapConnection = DriverManager.getConnection("jdbc:sqlite:" + mapFile.getAbsolutePath());
 			
 			DataIndexWriter.createMapIndexStructure(mapConnection);
-			mapWaysStat = DataIndexWriter.createStatementMapWaysInsert(mapConnection);
-			mapWayLocsStat = DataIndexWriter.createStatementMapWaysLocationsInsert(mapConnection);
-			mapWayLocsStatLevel2 = DataIndexWriter.createStatementMapWaysLocationsInsertLevel2(mapConnection);
-			mapWayLocsStatLevel3 = DataIndexWriter.createStatementMapWaysLocationsInsertLevel3(mapConnection);
-			pStatements.put(mapWaysStat, 0);
-			pStatements.put(mapWayLocsStat, 0);
-			pStatements.put(mapWayLocsStatLevel2, 0);
-			pStatements.put(mapWayLocsStatLevel3, 0);
+			mapObjStat = DataIndexWriter.createStatementMapWaysInsert(mapConnection);
+			mapLocsStatLevel0 = DataIndexWriter.createStatementMapWaysLocationsInsert(mapConnection);
+			mapLocsStatLevel1 = DataIndexWriter.createStatementMapWaysLocationsInsertLevel2(mapConnection);
+			mapLocsStatLevel2 = DataIndexWriter.createStatementMapWaysLocationsInsertLevel3(mapConnection);
+			pStatements.put(mapObjStat, 0);
+			pStatements.put(mapLocsStatLevel0, 0);
+			pStatements.put(mapLocsStatLevel1, 0);
+			pStatements.put(mapLocsStatLevel2, 0);
 			mapConnection.setAutoCommit(false);
 		}
 
@@ -1334,14 +1442,13 @@ public class IndexCreator {
 		
 		// 4. update all postal codes from relations
 		if(indexAddress && !postalCodeRelations.isEmpty()){
+			progress.startTask("Registering postcodes...", -1);
 			if(pStatements.get(addressBuildingStat) > 0){
 				addressBuildingStat.executeBatch();
 				pStatements.put(addressBuildingStat, 0);
 				addressConnection.commit();
 			}
 			
-			
-			progress.startTask("Registering postcodes...", -1);
 			PreparedStatement pstat = addressConnection.prepareStatement("UPDATE " + IndexBuildingTable.getTable() + 
 					" SET " + IndexBuildingTable.POSTCODE.name() + " = ? WHERE " + IndexBuildingTable.ID.name() + " = ?");
 			pStatements.put(pstat, 0);
@@ -1351,6 +1458,17 @@ public class IndexCreator {
 					pstat.setString(1, tag);
 					pstat.setLong(2, l.getId());
 					DataIndexWriter.addBatch(pStatements, pstat, BATCH_SIZE);
+				}
+			}
+			
+		}
+		// 5. writing low level maps
+		if(indexMap){
+			// TODO level !!!
+			for(Long l : lowLevelWaysSt.keySet()){
+				for(Way w : lowLevelWaysSt.get(l)){
+					int level = (int) (w.getId() & 3);
+					writeEntityToMapDatabase(w, w.getId() >> 2, false, level);
 				}
 			}
 			
@@ -1431,8 +1549,8 @@ public class IndexCreator {
 		 IndexCreator creator = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
 		 creator.setIndexMap(true);
 		 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 		  
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus_2010_09_03.osm.bz2"), new ConsoleProgressImplementation(3), null);

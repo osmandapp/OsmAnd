@@ -35,6 +35,7 @@ public class ToDoConstants {
 	//+ 15. Draw layers -> icons -> text. See intersects of double streets.
 	//  16. Internet access bits
 	//  17. Implement multipolygons to polygons
+	// TODO colors for road trunk and motorway
 
 	//  12. Fix : find proper location for streets ! centralize them (when create index)?
 	

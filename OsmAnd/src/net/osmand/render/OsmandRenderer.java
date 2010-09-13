@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.LogUtil;
-import net.osmand.R;
 import net.osmand.osm.MapRenderObject;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
@@ -49,23 +48,12 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	/// Colors
 	private int clFillScreen = Color.rgb(241, 238, 232);
 	
-	
-	private PathEffect dashEffect2_2 = new DashPathEffect(new float[]{2,2}, 1);
-	private PathEffect dashEffect3_2 = new DashPathEffect(new float[]{3,2}, 1);
-	private PathEffect dashEffect4_2 = new DashPathEffect(new float[]{4,2}, 1);
-	private PathEffect dashEffect4_3 = new DashPathEffect(new float[]{4,3}, 1);
-	private PathEffect dashEffect6_2 = new DashPathEffect(new float[]{6,2}, 1);
-	private PathEffect dashEffect5_2 = new DashPathEffect(new float[]{5,2}, 1);
-	private PathEffect dashEffect6_3 = new DashPathEffect(new float[]{6,3}, 1);
-	private PathEffect dashEffect7_7 = new DashPathEffect(new float[]{7,7}, 1);
-	private PathEffect dashEffect6_3_2_3 = new DashPathEffect(new float[]{6,3,2,3,}, 1);
-	private PathEffect dashEffect6_3_2_3_2_3 = new DashPathEffect(new float[]{6,3,2,3,2,3}, 1);
-	
-	private PathEffect arrowDashEffect1 = new DashPathEffect(new float[]{0,12,10,152},0);
-	private PathEffect arrowDashEffect2 = new DashPathEffect(new float[]{0,12,9,153}, 1);
-	private PathEffect arrowDashEffect3 = new DashPathEffect(new float[]{0,18,2,154}, 1);
-	private PathEffect arrowDashEffect4 = new DashPathEffect(new float[]{0,18,1,155}, 1);
+	private PathEffect arrowDashEffect1 = new DashPathEffect(new float[] { 0, 12, 10, 152 }, 0);
+	private PathEffect arrowDashEffect2 = new DashPathEffect(new float[] { 0, 12, 9, 153 }, 1);
+	private PathEffect arrowDashEffect3 = new DashPathEffect(new float[] { 0, 18, 2, 154 }, 1);
+	private PathEffect arrowDashEffect4 = new DashPathEffect(new float[] { 0, 18, 1, 155 }, 1);
 
+	private Map<String, PathEffect> dashEffect = new LinkedHashMap<String, PathEffect>();
 	private Map<Integer, Shader> shaders = new LinkedHashMap<Integer, Shader>();
 	private Map<Integer, Bitmap> cachedIcons = new LinkedHashMap<Integer, Bitmap>();
 
@@ -91,7 +79,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		int resId;
 	}
 	
-	private static class RenderingContext {
+	/*package*/ static class RenderingContext {
 		List<TextDrawInfo> textToDraw = new ArrayList<TextDrawInfo>();
 		List<IconDrawInfo> iconsToDraw = new ArrayList<IconDrawInfo>();
 		float leftX;
@@ -114,11 +102,19 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		
 		// use to set rendering properties
 		int color = Color.BLACK;
+		// polyline props
 		boolean showText = true;
 		PathEffect pathEffect = null;
 		int shadowLayer = 0;
 		int shadowColor = 0;
 		float strokeWidth = 0;
+		
+		// polygon props
+		boolean showPolygon = true;
+		int colorAround = 0;
+		int widthAround = 1;
+		Shader shader = null;
+		
 	}
 	
 	public OsmandRenderer(Context context){
@@ -148,6 +144,18 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		paintFillEmpty.setStyle(Style.FILL);
 		paintFillEmpty.setColor(clFillScreen);
 		
+	}
+	
+	public PathEffect getDashEffect(String dashes){
+		if(!dashEffect.containsKey(dashes)){
+			String[] ds = dashes.split("_"); //$NON-NLS-1$
+			float[] f = new float[ds.length];
+			for(int i=0; i<ds.length; i++){
+				f[i] = Float.parseFloat(ds[i]);
+			}
+			dashEffect.put(dashes, new DashPathEffect(f, 0));
+		}
+		return dashEffect.get(dashes);
 	}
 	
 	public Shader getShader(int resId){
@@ -302,155 +310,16 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		Path path = null;
 		int type = MapRenderingTypes.getObjectType(obj.getType());
 		int subtype = MapRenderingTypes.getPolygonSubType(obj.getType());
-		int color = Color.rgb(245, 245, 245);
-		int colorAround = 0;
-		Shader shader = null;
-		boolean showPolygon = true;
-		if (type == MapRenderingTypes.MAN_MADE) {
-			showPolygon = zoom > 15;
-			if (subtype == MapRenderingTypes.SUBTYPE_BUILDING) {
-				color = Color.rgb(188, 169, 169);
-			} else if (subtype == MapRenderingTypes.SUBTYPE_GARAGES) {
-				color = Color.rgb(221, 221, 221);
-			}
-			
-		} else if (type == MapRenderingTypes.WATERWAY) {
-			if(subtype == 3){
-				color = Color.rgb(181, 208, 208);
-			}
-		} else if (type == MapRenderingTypes.POWER) {
-			if(subtype == 5 || subtype == 6){
-				color = Color.rgb(186, 186, 186);
-			}
-		} else if (type == MapRenderingTypes.HIGHWAY) {
-			if (subtype == MapRenderingTypes.PL_HW_SERVICE || subtype == MapRenderingTypes.PL_HW_UNCLASSIFIED
-				|| subtype == MapRenderingTypes.PL_HW_RESIDENTIAL) {
-				colorAround = Color.rgb(194, 194, 194);
-				color = Color.WHITE;
-			} else if(subtype == MapRenderingTypes.PL_HW_PEDESTRIAN || subtype == MapRenderingTypes.PL_HW_FOOTWAY){
-				color = Color.rgb(236, 236, 236);
-				colorAround = Color.rgb(176, 176, 176);
-			}
-		} else if (type == MapRenderingTypes.TOURISM) {
-			showPolygon = zoom > 15;
-			if (subtype == 2) {
-				color = Color.rgb(204, 153, 153);
-			} else if(subtype == 8){
-				shader = getShader(R.drawable.h_zoo);
-			}
-			
-		} else if (type == MapRenderingTypes.NATURAL) {
-			if(subtype == 23){
-				color = Color.rgb(174, 209, 160);
-			} else if(subtype == 2){
-				color = Color.rgb(238, 204, 85);
-			} else if(subtype == 21 || subtype == 5){
-				color = Color.rgb(181, 208, 208);
-			}
-			
-		} else if (type == MapRenderingTypes.LANDUSE) {
-			switch (subtype) {
-			case 1:
-				color = Color.rgb(189, 227, 203);
-				break;
-			case 2:
-			case 22:
-				color = Color.rgb(180, 213, 240);
-				break;
-			case 3:
-				color = Color.rgb(235, 215, 254);
-				break;
-			case 4:
-				shader = getShader(R.drawable.h_grave_yard);
-				break;
-			case 5:
-				color = Color.rgb(239, 200, 200);
-				break;
-			case 6:
-				color = Color.rgb(157, 157, 108);
-				break;
-			case 10:
-				shader = getShader(R.drawable.h_forest);
-				break;
-			case 11 :
-				color = Color.rgb(223, 209, 214);
-				break;
-			case 12:
-				color = Color.rgb(207, 236, 168);
-				break;
-			case 15:
-				color = Color.rgb(223, 209, 214);
-				break;
-			case 18:
-				color = Color.rgb(252, 216, 219);
-				break;
-			case 23:
-				color = Color.rgb(221, 221, 221);
-				break;
-			case 24:
-				color = Color.rgb(254, 234, 234);
-				colorAround = Color.rgb(245, 154, 152);
-				break;
-			case 27:
-				shader = getShader(R.drawable.h_vineyard);
-				break;
-			}
-		} else if (type == MapRenderingTypes.LEISURE) {
-			colorAround = Color.rgb(147, 207, 170);
-			switch (subtype) {
-			case 2:
-				color = Color.rgb(189, 227, 203);
-				break;
-			case 3:
-			case 14:
-			case 15:
-				color = Color.rgb(199, 241, 163);
-				break;
-			case 6:
-				color = Color.rgb(137, 210, 174);
-			case 4:
-				color = Color.rgb(51, 204, 153);
-				break;
-			case 5:
-				color = Color.rgb(189, 207, 203);
-				break;
-			case 12:
-				color = Color.rgb(206, 246, 202);
-				break;
-			case 13:
-				color = Color.rgb(204, 255, 241);
-				break;
-			case 11:
-				shader = getShader(R.drawable.h_nr);
-				break;
-			}
-		} else if (type == MapRenderingTypes.AMENITY_HEALTHCARE) {
-			if (subtype == 2) {
-				color = Color.rgb(240, 240, 216);
-				colorAround = Color.rgb(212, 168, 158);
-			}
-		} else if (type == MapRenderingTypes.AMENITY_TRANSPORTATION) {
-			if (subtype == 1 || subtype == 2) {
-				color = Color.rgb(246, 238, 183);
-			}
-		} else if (type == MapRenderingTypes.AMENITY_ENTERTAINMENT) {
-			if (subtype == 3) {
-				color = Color.rgb(204, 153, 153);
-			}
-		} else if (type == MapRenderingTypes.AMENITY_EDUCATION) {
-			if(subtype == 2 || subtype == 3 || subtype == 5){
-				color = Color.rgb(240, 240, 216);
-				colorAround = Color.rgb(212, 168, 158);
-			} else {
-				// draw as building education
-				color = Color.rgb(188, 169, 169);
-			}
-		}
-		if(!showPolygon){
+		rc.color = Color.rgb(245, 245, 245);
+		rc.shader = null;
+		rc.showPolygon = true;
+		
+		PolygonRenderer.renderPolygon(rc, zoom, type, subtype, this);
+		if(!rc.showPolygon){
 			return null;
 		}
 			
-		paint.setColor(color);
+		paint.setColor(rc.color);
 		for (int i = 0; i < obj.getPointsLength(); i++) {
 			PointF p = calcPoint(obj, i, rc);
 			xText += p.x;
@@ -466,10 +335,10 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		if (path != null) {
 			xText /= obj.getPointsLength();
 			yText /= obj.getPointsLength();
-			paint.setShader(shader);
+			paint.setShader(rc.shader);
 			canvas.drawPath(path, paint);
-			if(colorAround != 0){
-				paintStroke.setColor(colorAround);
+			if(rc.colorAround != 0){
+				paintStroke.setColor(rc.colorAround);
 				paintStroke.setStrokeWidth(1);
 				canvas.drawPath(path, paintStroke);
 			}
@@ -498,6 +367,8 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		}
 		return null;
 	}
+
+	
 	
 	public void clearCachedResources(){
 		Collection<Bitmap> values = new ArrayList<Bitmap>(cachedIcons.values());
@@ -610,16 +481,15 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 
 	
 	private void drawPolyline(MapRenderObject obj, Canvas canvas, RenderingContext rc) {
-		int length = obj.getPointsLength();
-		if(length < 2){
-			return;
-		}
 		int type = MapRenderingTypes.getObjectType(obj.getType());
 		int subtype = MapRenderingTypes.getPolylineSubType(obj.getType());
-
-		renderPolyline(type, subtype, rc);
+		PolylineRenderer.renderPolyline(type, subtype, obj.getType(), rc, this);
 		
 		if(rc.strokeWidth == 0){
+			return;
+		}
+		int length = obj.getPointsLength();
+		if(length < 2){
 			return;
 		}
 		Path path = null;
@@ -729,215 +599,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		canvas.drawPath(path, paintStroke);
 	}
 	
-	public void renderPolyline(int type, int subtype, RenderingContext rc){
-		int zoom = rc.zoom;
-		
-		int color = Color.BLACK;
-		boolean showText = true;
-		PathEffect pathEffect = null;
-		int shadowLayer = 0;
-		int shadowColor = 0;
-		float strokeWidth = zoom >= 15 ? 1 : 0;
-		if (type == MapRenderingTypes.HIGHWAY) {
-			int hwType = subtype;
-			boolean carRoad = true;
-			if (hwType == MapRenderingTypes.PL_HW_TRUNK) {
-				color = Color.rgb(168, 218, 168);
-			} else if (hwType == MapRenderingTypes.PL_HW_MOTORWAY) {
-				color = Color.rgb(128,155,192);
-			} else if (hwType == MapRenderingTypes.PL_HW_PRIMARY) {
-				color = Color.rgb(235, 152, 154);
-			} else if (hwType == MapRenderingTypes.PL_HW_SECONDARY) {
-				color = Color.rgb(253, 214, 164);
-			} else if (hwType == MapRenderingTypes.PL_HW_TERTIARY) {
-				color = Color.rgb(254, 254, 179);
-				shadowLayer = 2;
-				shadowColor = Color.rgb(186, 186, 186);
-			} else if (hwType == MapRenderingTypes.PL_HW_SERVICE || hwType == MapRenderingTypes.PL_HW_UNCLASSIFIED
-					|| hwType == MapRenderingTypes.PL_HW_RESIDENTIAL) {
-				shadowLayer = 1;
-				shadowColor = Color.rgb(194, 194, 194);
-				color = Color.WHITE;
-			} else if (hwType == MapRenderingTypes.PL_HW_PEDESTRIAN) {
-				shadowLayer = 1;
-				shadowColor = Color.rgb(176, 176, 176);
-				color = Color.rgb(236, 236, 236);
-			} else {
-				carRoad = false;
-				strokeWidth = 2;
-				pathEffect = dashEffect2_2;
-				if (hwType == MapRenderingTypes.PL_HW_TRACK || hwType == MapRenderingTypes.PL_HW_PATH) {
-					color = Color.GRAY;
-					pathEffect = dashEffect6_2;
-				} else if (hwType == MapRenderingTypes.PL_HW_CYCLEWAY || hwType == MapRenderingTypes.PL_HW_BRIDLEWAY) {
-					color = Color.rgb(20, 20, 250);
-				} else {
-					color = Color.rgb(250, 128, 115);
-				}
-			}
-			if (carRoad) {
-				if(zoom <= 12){
-					if (hwType <= MapRenderingTypes.PL_HW_SECONDARY) {
-						if (zoom < 10) {
-							strokeWidth = 1;
-						} else if (zoom < 12) {
-							strokeWidth = 2;
-						} else if (zoom == 12) {
-							strokeWidth = 3;
-						}
-					} else {
-						strokeWidth = 0;
-					}
-				} else if(zoom < 15){
-					strokeWidth = 4.5f;
-				} else if (zoom < 16) {
-					strokeWidth = 6;
-				} else if (zoom == 16) {
-					strokeWidth = 8;
-				} else if (zoom == 17) {
-					strokeWidth = 13;
-				} else if (zoom >= 18) {
-					strokeWidth = 16;
-				} else if (zoom >= 19) {
-					strokeWidth = 20;
-				}
-				if (hwType == MapRenderingTypes.PL_HW_SERVICE) {
-					strokeWidth -= 2; 
-				}
-			}
-			showText = (carRoad && zoom > 12) || zoom > 16;
-		} else if(type == MapRenderingTypes.BARRIER){
-			if(subtype == 5){
-				color = Color.GRAY;
-				if(zoom == 14){
-					strokeWidth = 4;
-				} else if(zoom == 15){
-					strokeWidth = 6;
-				} else if(zoom > 15){
-					strokeWidth = 9;
-				} else {
-					strokeWidth = 0;
-				}
-			} else {
-				strokeWidth = zoom >= 16 ? 1 : 0;
-				color = Color.BLACK;
-			}
-		} else if(type == MapRenderingTypes.POWER){
-			if (zoom >= 14) {
-				if (subtype == 3) {
-					color = Color.rgb(186, 186, 186);
-					strokeWidth = zoom == 14 ? 1 : 2;
-				} else if (subtype == 4) {
-					color = Color.rgb(186, 186, 186);
-					strokeWidth = 1;
-				}
-			} else {
-				strokeWidth = 0;
-			}
-		} else if(type == MapRenderingTypes.AERIALWAY){
-			// TODO shader on path doesn't work
-			if(zoom >= 12){
-				if(subtype == 1 || subtype == 2){
-					color = Color.rgb(186, 186, 186);
-					strokeWidth = 2;
-					//paint.setShader(getShader(R.drawable.h_cable_car));
-				}  else if(subtype == 3 || subtype == 4 || subtype == 5){
-					color = Color.rgb(186, 186, 186);
-					strokeWidth = 2;
-					//paint.setShader(getShader(R.drawable.h_chair_lift));
-				}
-			}
-		} else if(type == MapRenderingTypes.ADMINISTRATIVE){
-			color = 0xFF800080;
-			if(subtype == 29 || subtype == 30){
-				// admin level 9, 10
-				if (zoom > 12) {
-					pathEffect = dashEffect3_2;
-					strokeWidth = 1;
-					if (zoom > 16) {
-						strokeWidth = 2;
-					}
-				} else {
-					strokeWidth = 0;
-				}
-			} else if(subtype == 28 || subtype == 27){
-				// admin level 7, 8
-				if(zoom > 11){
-					pathEffect = dashEffect5_2;
-					strokeWidth = 2;
-				} else {
-					strokeWidth = 0;
-				}
-			} else if(subtype == 25 || subtype == 26){
-				// admin level 5, 6
-				if(zoom > 10){
-					pathEffect = subtype == 25 ? dashEffect6_3_2_3_2_3 : dashEffect6_3_2_3;
-					strokeWidth = 2;
-				} else {
-					strokeWidth = 0;
-				}
-			} else if(subtype == 24){
-				// admin level 4
-				pathEffect = dashEffect4_3;
-				if(zoom >= 4 && zoom <= 6){
-					strokeWidth = 0.6f;
-				} else if(zoom >= 7 && zoom <= 10){
-					strokeWidth = 2;
-				} else if(zoom > 10){
-					strokeWidth = 3;
-				} else {
-					strokeWidth = 0;
-				}
-			} else if(subtype == 23 || subtype == 22){
-				// admin level 2, 3
-				if(zoom >= 4 && zoom <= 6){
-					strokeWidth = 2;
-				} else if(zoom >= 7 && zoom <= 9){
-					strokeWidth = 3;
-				} else if(zoom > 9){
-					if(subtype == 22){
-						strokeWidth = 6;
-					} else {
-						strokeWidth = 5;
-						pathEffect = dashEffect4_2;
-					}
-				} else {
-					strokeWidth = 0;
-				}
-				
-			}
-		} else if(type == MapRenderingTypes.RAILWAY){
-			strokeWidth = 2;
-			if(subtype == 6){
-				color = Color.rgb(153, 153, 153);
-				if(zoom > 16){
-					strokeWidth = 3;
-				}
-				pathEffect = dashEffect6_3;
-			} else if(subtype == 2){
-				color = Color.rgb(62, 62, 62);
-			} else if(subtype == 1){
-				color = Color.rgb(153, 153, 153);
-				if(zoom >= 16){
-					strokeWidth = 3;
-				}
-				pathEffect = dashEffect7_7;
-			} else {
-				color = Color.rgb(153, 153, 153);
-			}
-		} else if(type == MapRenderingTypes.WATERWAY){
-			if(subtype >= 1 && subtype <= 6){
-				strokeWidth = 2;
-				color = Color.rgb(181, 208, 208);
-			}
-		}
-
-		rc.color = color;
-		rc.pathEffect = pathEffect;
-		rc.shadowColor = shadowColor;
-		rc.shadowLayer = shadowLayer;
-		rc.showText = showText;
-		rc.strokeWidth = strokeWidth;
-	}
+	
+	
 }
 
