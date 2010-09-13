@@ -288,7 +288,9 @@ public class PointRenderer {
 					resId = R.drawable.h_pharmacy;
 				}
 			} else if (subType == 2) {
-				resId = R.drawable.h_hospital;
+				if(zoom >= 15){
+					resId = R.drawable.h_hospital;
+				}
 			}
 		} else if (type == MapRenderingTypes.AMENITY_ENTERTAINMENT) {
 			if (zoom >= 15) {

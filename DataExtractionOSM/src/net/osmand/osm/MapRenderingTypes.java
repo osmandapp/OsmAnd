@@ -17,7 +17,6 @@ import net.osmand.osm.OSMSettings.OSMTagKey;
  */
 public class MapRenderingTypes {
 	
-	// TODO !!! think about layers of objects, include layer bits into standard schema (2 bits)?
 	// TODO !!! add others facilities to all types
 	// TODO Internet access bits for point
 	// TODO Find TextSymbolizer rules and write text for points and others
@@ -52,10 +51,10 @@ public class MapRenderingTypes {
 	public final static int MASK_10 = (1 << 10) - 1;
 	
 
-	public final static int HIGHWAY = 1; //TODO R
+	public final static int HIGHWAY = 1; //TODO REVIEW
 	public final static int BARRIER = 2; 
-	public final static int WATERWAY = 3; //TODO R layer-water_features.xml.inc, layer-water.xml.inc
-	public final static int RAILWAY = 4;//TODO R
+	public final static int WATERWAY = 3; 
+	public final static int RAILWAY = 4;//TODO REVIEW
 	public final static int AEROWAY = 5; //TODO R
 	public final static int AERIALWAY = 6;  
 	public final static int POWER = 7; 
@@ -67,7 +66,7 @@ public class MapRenderingTypes {
 	public final static int TOURISM = 13; 
 	public final static int HISTORIC = 14; 
 	public final static int LANDUSE = 15;  
-	public final static int MILITARY = 16;  //TODO R
+	public final static int MILITARY = 16; 
 	public final static int NATURAL = 17;//TODO R
 	public final static int AMENITY_SUSTENANCE = 18; 
 	public final static int AMENITY_EDUCATION = 19; 
@@ -76,7 +75,7 @@ public class MapRenderingTypes {
 	public final static int AMENITY_HEALTHCARE = 22; 
 	public final static int AMENITY_ENTERTAINMENT = 23;
 	public final static int AMENITY_OTHER = 24; 
-	public final static int ADMINISTRATIVE = 25;//TODO R 
+	public final static int ADMINISTRATIVE = 25;
 	public final static int ROUTE = 26; //NOT DONE YET
 	public final static int SPORT = 27; //+no icons
 	
@@ -331,6 +330,10 @@ public class MapRenderingTypes {
 			int attr = getHighwayAttributes(e);
 			attr <<= 13;
 			type |= attr;
+		} else if(!polygon && !point){
+			int attr = getLayerAttributes(e, 0);
+			attr <<= 13;
+			type |= attr;
 		}
 		return type;
 	}
@@ -388,7 +391,12 @@ public class MapRenderingTypes {
 		if(one != null){
 			attr |= 1;
 		}
-		
+		attr = getLayerAttributes(e, attr);
+			
+		return attr;
+	}
+	
+	private static int getLayerAttributes(Entity e, int attr){
 		// layer
 		attr <<= 2;
 		String l = e.getTag(OSMTagKey.LAYER);
@@ -401,9 +409,14 @@ public class MapRenderingTypes {
 			}
 		} else if(e.getTag(OSMTagKey.BRIDGE) != null){
 			attr |= 2;
+		} else if(e.getTag(OSMTagKey.TUNNEL) != null){
+			attr |= 1;
 		}
-			
 		return attr;
+	}
+	
+	public static boolean isLayerUnder(int attr){
+		return (attr & 3) == 1;
 	}
 	
 	public static String getEntityName(Entity e){
@@ -565,8 +578,9 @@ public class MapRenderingTypes {
 		
 	// 3. waterway	
 		register(1, "waterway", "stream", WATERWAY, 1, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$		
-		register(2, "waterway", "river", WATERWAY, 2, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(2, "waterway", "riverbank", WATERWAY, 3, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		// Questionable index river & canals for level=2 (depends on target)
+		register(2, "waterway", "river", WATERWAY, 2, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(1, "waterway", "canal", WATERWAY, 4, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("waterway", "ditch", WATERWAY, 5, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("waterway", "drain", WATERWAY, 6, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -575,10 +589,11 @@ public class MapRenderingTypes {
 		register("waterway", "turning_point", WATERWAY, 9, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("waterway", "boatyard", WATERWAY, 10, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("waterway", "weir", WATERWAY, 11, POLYLINE_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("waterway", "dam", WATERWAY, 12, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "waterway", "dam", WATERWAY, 12, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "waterway", "mill_pond", WATERWAY, 13, POLYGON_WITH_CENTER_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 
 	// 4. railway	
-		register(1, "railway", "rail", RAILWAY, 1, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(2, "railway", "rail", RAILWAY, 1, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(1, "railway", "tram", RAILWAY, 2, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("railway", "light_rail", RAILWAY, 3, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("railway", "abandoned", RAILWAY, 4, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -608,7 +623,7 @@ public class MapRenderingTypes {
 		register(1, "aeroway", "helipad", AEROWAY, 3, POLYGON_WITH_CENTER_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("aeroway", "runway", AEROWAY, 7, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("aeroway", "taxiway", AEROWAY, 8, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("aeroway", "apron", AEROWAY, 9, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "aeroway", "apron", AEROWAY, 9, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(1, "aeroway", "airport", AEROWAY, 10, POLYGON_WITH_CENTER_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("aeroway", "gate", AEROWAY, 12, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("aeroway", "windsock", AEROWAY, 13, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -630,8 +645,8 @@ public class MapRenderingTypes {
 		register("power", "pole", POWER, 2, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(1, "power", "line", POWER, 3, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("power", "minor_line", POWER, 4, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("power", "station", POWER, 5, POINT_TYPE, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("power", "sub_station", POWER, 6, POINT_TYPE, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "power", "station", POWER, 5, POINT_TYPE, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "power", "sub_station", POWER, 6, POINT_TYPE, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("power", "generator", POWER, 7, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("power", "cable_distribution_cabinet", POWER, 8, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 	
@@ -641,13 +656,14 @@ public class MapRenderingTypes {
 		register("building", null, MAN_MADE, SUBTYPE_BUILDING, POLYGON_TYPE); //$NON-NLS-1$ 
 		register("man_made", "wastewater_plant", MAN_MADE, 2, POINT_TYPE, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		registerAsBuilding("man_made", "water_works", MAN_MADE, 3); //$NON-NLS-1$ //$NON-NLS-2$
-		registerAsBuilding("man_made", "works", MAN_MADE, 4); //$NON-NLS-1$ //$NON-NLS-2$
+		register("man_made", "works", MAN_MADE, 4, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("building", "garages", MAN_MADE, SUBTYPE_GARAGES, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		
 		register("man_made", "cutline", MAN_MADE, 7, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("man_made", "groyne", MAN_MADE, 8, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("man_made", "pier", MAN_MADE, 9, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "man_made", "groyne", MAN_MADE, 8, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "man_made", "breakwater", MAN_MADE, 8, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "man_made", "pier", MAN_MADE, 9, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("man_made", "pipeline", MAN_MADE, 10, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("man_made", "reservoir_covered", MAN_MADE, 11, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		
@@ -670,17 +686,18 @@ public class MapRenderingTypes {
 		register("leisure", "sports_centre", LEISURE, 2, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("leisure", "golf_course", LEISURE, 3, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("leisure", "stadium", LEISURE, 4, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		registerRules(0, "leisure", "track", LEISURE, 5, POINT_TYPE, POLYLINE_TYPE, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		registerRules(1, "leisure", "track", LEISURE, 5, POINT_TYPE, POLYLINE_TYPE, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("leisure", "pitch", LEISURE, 6, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("leisure", "water_park", LEISURE, 7, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("leisure", "marina", LEISURE, 8, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "leisure", "marina", LEISURE, 8, POLYLINE_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("leisure", "slipway", LEISURE, 9, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("leisure", "fishing", LEISURE, 10, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(2, "leisure", "nature_reserve", LEISURE, 11, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("leisure", "park", LEISURE, 12, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "leisure", "park", LEISURE, 12, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "leisure", "recreation_ground", LEISURE, 12, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("leisure", "playground", LEISURE, 13, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("leisure", "garden", LEISURE, 14, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("leisure", "common", LEISURE, 15, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "leisure", "garden", LEISURE, 14, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "leisure", "common", LEISURE, 15, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("leisure", "ice_rink", LEISURE, 16, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("leisure", "miniature_golf", LEISURE, 17, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("leisure", "dance", LEISURE, 18, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -791,7 +808,7 @@ public class MapRenderingTypes {
 		register("tourism", "camp_site", TOURISM, 4, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("tourism", "caravan_site", TOURISM, 5, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("tourism", "picnic_site", TOURISM, 6, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("tourism", "theme_park", TOURISM, 7, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "tourism", "theme_park", TOURISM, 7, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("tourism", "zoo", TOURISM, 8, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		registerAsBuilding("tourism", "alpine_hut",  TOURISM, 9); //$NON-NLS-1$ //$NON-NLS-2$
@@ -822,68 +839,75 @@ public class MapRenderingTypes {
 		register("historic", null, HISTORIC, 12, POINT_TYPE); //$NON-NLS-1$ 
 	
 	// 15. landuse
-		register("landuse", "allotments", LANDUSE, 1, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("landuse", "basin", LANDUSE, 2, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("landuse", "brownfield", LANDUSE, 3, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("landuse", "cemetery", LANDUSE, 4, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "landuse", "allotments", LANDUSE, 1, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "landuse", "basin", LANDUSE, 2, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "landuse", "brownfield", LANDUSE, 3, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "landuse", "cemetery", LANDUSE, 4, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("landuse", "grave_yard", LANDUSE, 4, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(1, "landuse", "commercial", LANDUSE, 5, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(1, "landuse", "construction", LANDUSE, 6, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("landuse", "farm", LANDUSE, 7, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("landuse", "farmland", LANDUSE, 8, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("landuse", "farmyard", LANDUSE, 9, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "landuse", "farm", LANDUSE, 7, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "landuse", "farmland", LANDUSE, 7, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		
+		register(1, "landuse", "farmyard", LANDUSE, 9, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(2, "landuse", "forest", LANDUSE, 10, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("landuse", "garages", LANDUSE, 11, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("landuse", "grass", LANDUSE, 12, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("landuse", "greenfield", LANDUSE, 13, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("landuse", "greenhouse_horticulture", LANDUSE, 14, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "landuse", "grass", LANDUSE, 12, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "landuse", "greenfield", LANDUSE, 13, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "landuse", "greenhouse_horticulture", LANDUSE, 14, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(1, "landuse", "industrial", LANDUSE, 15, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("landuse", "landfill", LANDUSE, 16, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("landuse", "meadow", LANDUSE, 17, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("landuse", "military", LANDUSE, 18, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$ 
-		register("landuse", "orchard", LANDUSE, 19, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "landuse", "landfill", LANDUSE, 16, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "landuse", "meadow", LANDUSE, 17, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "landuse", "military", LANDUSE, 18, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$ 
+		register(1, "landuse", "orchard", LANDUSE, 19, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(1, "landuse", "railway", LANDUSE, 20, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$]
-		register("landuse", "recreation_ground", LANDUSE, 21, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("landuse", "reservoir", LANDUSE, 22, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("landuse", "residential", LANDUSE, 23, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("landuse", "retail", LANDUSE, 24, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("landuse", "salt_pond", LANDUSE, 25, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("landuse", "village_green", LANDUSE, 26, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("landuse", "vineyard", LANDUSE, 27, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "landuse", "recreation_ground", LANDUSE, 21, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "landuse", "conservation", LANDUSE, 21, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "landuse", "village_green", LANDUSE, 21, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(2, "landuse", "reservoir", LANDUSE, 22, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(2, "landuse", "water", LANDUSE, 22, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "landuse", "residential", LANDUSE, 23, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "landuse", "retail", LANDUSE, 24, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "landuse", "salt_pond", LANDUSE, 25, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "landuse", "quarry", LANDUSE, 26, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "landuse", "vineyard", LANDUSE, 27, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 	
 	// 16. military
 		register("military", "airfield", MILITARY, 1, POLYGON_WITH_CENTER_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("military", "bunker", MILITARY, 1, POLYGON_WITH_CENTER_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("military", "barracks", MILITARY, 1, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("military", "danger_area", MILITARY, 1, POLYGON_WITH_CENTER_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("military", "range", MILITARY, 1, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("military", "naval_base", MILITARY, 1, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("military", "bunker", MILITARY, 2, POLYGON_WITH_CENTER_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("military", "barracks", MILITARY, 3, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("military", "danger_area", MILITARY, 4, POLYGON_WITH_CENTER_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("military", "range", MILITARY, 5, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("military", "naval_base", MILITARY, 6, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		
 	// 17. natural	
 		register(3, "natural", "coastline", NATURAL, 5, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		
-		register(1, "natural", "bay", NATURAL, 1, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register(1,"natural", "beach", NATURAL, 2, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register(1,"natural", "cave_entrance", NATURAL, 3, POLYGON_WITH_CENTER_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("natural", "bay", NATURAL, 1, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "natural", "beach", NATURAL, 2, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "natural", "cave_entrance", NATURAL, 3, POLYGON_WITH_CENTER_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		registerRules(1, "natural", "cliff", NATURAL, 4, POLYGON_TYPE, POINT_TYPE, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("natural", "fell", NATURAL, 6, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("natural", "glacier", NATURAL, 7, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("natural", "heath", NATURAL, 8, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("natural", "land", NATURAL, 9, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(2, "natural", "glacier", NATURAL, 7, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "natural", "heath", NATURAL, 8, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1,"natural", "land", NATURAL, 9, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("natural", "heath", NATURAL, 10, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("natural", "marsh", NATURAL, 11, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("natural", "mud", NATURAL, 12, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "natural", "marsh", NATURAL, 11, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "natural", "mud", NATURAL, 12, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(1, "natural", "peak", NATURAL, 13, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("natural", "sand", NATURAL, 14, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("natural", "scree", NATURAL, 15, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("natural", "scrub", NATURAL, 16, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "natural", "scrub", NATURAL, 16, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("natural", "spring", NATURAL, 17, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("natural", "stone", NATURAL, 18, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("natural", "tree", NATURAL, 19, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(1, "natural", "volcano", NATURAL, 20, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(2, "natural", "water", NATURAL, 21, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("natural", "wetland", NATURAL, 22, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(2, "natural", "lake", NATURAL, 21, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(1, "natural", "wetland", NATURAL, 22, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(2, "natural", "wood", NATURAL, 23, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(2, "landuse", "wood", NATURAL, 23, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 
 	// 18. amenity sustenance
 		registerAsBuilding("amenity", "restaurant", AMENITY_SUSTENANCE, 1); //$NON-NLS-1$ //$NON-NLS-2$
@@ -897,10 +921,10 @@ public class MapRenderingTypes {
 		register("amenity", "bbq", AMENITY_SUSTENANCE, 9, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 	
 	// 19. amenity education
-		registerAsBuilding("amenity", "kindergarten", AMENITY_EDUCATION, 1); //$NON-NLS-1$ //$NON-NLS-2$
+		register("amenity", "kindergarten", AMENITY_EDUCATION, 1, POINT_TYPE, POLYGON_WITH_CENTER_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("amenity", "school", AMENITY_EDUCATION, 2, POINT_TYPE, POLYGON_WITH_CENTER_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("amenity", "college", AMENITY_EDUCATION, 3, POINT_TYPE, POLYGON_WITH_CENTER_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("amenity", "library", AMENITY_EDUCATION, 4, POINT_TYPE, POLYGON_WITH_CENTER_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("amenity", "library", AMENITY_EDUCATION, 4, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("amenity", "university", AMENITY_EDUCATION, 5, POINT_TYPE, POLYGON_WITH_CENTER_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 	
 	
@@ -961,8 +985,8 @@ public class MapRenderingTypes {
 		register("amenity", "police", AMENITY_OTHER, 10, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("amenity", "post_box", AMENITY_OTHER, 11, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		registerAsBuilding("amenity", "post_office", AMENITY_OTHER, 12); //$NON-NLS-1$ //$NON-NLS-2$
-		registerAsBuilding("amenity", "prison", AMENITY_OTHER, 13); //$NON-NLS-1$ //$NON-NLS-2$
-		registerAsBuilding("amenity", "public_building", AMENITY_OTHER, 14); //$NON-NLS-1$ //$NON-NLS-2$
+		register("amenity", "prison", AMENITY_OTHER, 13, POLYGON_WITH_CENTER_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("amenity", "public_building", AMENITY_OTHER, 14, POLYGON_WITH_CENTER_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("amenity", "recycling", AMENITY_OTHER, 15, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("amenity", "shelter", AMENITY_OTHER, 16, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("amenity", "telephone", AMENITY_OTHER, 17, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$

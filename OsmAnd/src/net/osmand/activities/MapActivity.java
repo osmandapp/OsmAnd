@@ -119,8 +119,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private ImageButton backToMenu;
 	
 	// the order of layer should be preserved ! when you are inserting new layer
-	private RouteLayer routeLayer;
 	private RendererLayer rendererLayer;
+	private RouteLayer routeLayer;
 	private YandexTrafficLayer trafficLayer;
 	private OsmBugsLayer osmBugsLayer;
 	private POIMapLayer poiMapLayer;
@@ -204,12 +204,13 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		mapView.setMapLocationListener(this);
 		routingHelper = ((OsmandApplication) getApplication()).getRoutingHelper();
 		
+		// 0.5 layer
+		rendererLayer = new RendererLayer();
+		mapView.addLayer(rendererLayer, 0.5f);
+		
 		// 1. route layer
 		routeLayer = new RouteLayer(routingHelper);
 		mapView.addLayer(routeLayer, 1);
-		rendererLayer = new RendererLayer();
-		mapView.addLayer(rendererLayer, 1.1f);
-		
 		
 		// 1.5. traffic layer
 		trafficLayer = new YandexTrafficLayer();
