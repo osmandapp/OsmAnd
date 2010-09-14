@@ -1543,7 +1543,7 @@ public class IndexCreator {
 		st.close();
 		dbConn.close();
 	}
-	
+	// TODO steps
 	 public static void main(String[] args) throws IOException, SAXException, SQLException {
 		
 		 IndexCreator creator = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
@@ -1554,6 +1554,9 @@ public class IndexCreator {
 		  
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus_2010_09_03.osm.bz2"), new ConsoleProgressImplementation(3), null);
+		 
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);
 		 
 		
 		 // download base 

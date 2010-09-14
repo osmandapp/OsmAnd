@@ -511,3 +511,90 @@
       </LineSymbolizer>
     </Rule>
 </Style>
+<Style name="cliffs">
+     <Rule>
+      &maxscale_zoom13;
+      &minscale_zoom14;
+      <Filter>[natural] = 'cliff'</Filter>       
+       <LinePatternSymbolizer file="&symbols;/cliff.png" />
+    </Rule>
+    <Rule>
+      &maxscale_zoom15;
+      <Filter>[natural] = 'cliff'</Filter>
+       <LinePatternSymbolizer file="&symbols;/cliff2.png" />
+    </Rule>
+    <Rule>
+      &maxscale_zoom15;
+      <Filter>[man_made] = 'embankment'</Filter>
+       <LinePatternSymbolizer file="&symbols;/cliff.png" />
+    </Rule>
+</Style>
+<Style name="barriers">
+    <Rule>
+      &maxscale_zoom16;
+      <Filter>[natural]='hedge' or [barrier] = 'hedge'</Filter>
+      <LineSymbolizer>
+        <CssParameter name="stroke">#aed1a0</CssParameter>
+        <CssParameter name="stroke-width">3</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      &maxscale_zoom16;
+      <Filter>[barrier] &lt;&gt; '' and not [barrier] = 'hedge'</Filter>
+      <LineSymbolizer>
+        <CssParameter name="stroke">black</CssParameter>
+        <CssParameter name="stroke-width">0.4</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+</Style>
+
+
+
+
+
+
+
+
+
+
+&layer-shapefiles;
+<Layer name="leisure" status="on" srs="&osm2pgsql_projection;">
+    <StyleName>leisure</StyleName>
+    <Datasource>
+      <Parameter name="table">
+      (select way,aeroway,amenity,landuse,leisure,man_made,military,"natural",power,shop,tourism,name,
+       case when religion in ('christian','jewish') then religion else 'INT-generic'::text end as religion
+       from &prefix;_polygon
+       where landuse is not null
+          or leisure is not null
+          or shop is not null
+          or aeroway in ('apron','aerodrome')
+          or amenity in ('parking','university','college','school','hospital','kindergarten','grave_yard')
+          or military in ('barracks','danger_area')
+          or "natural" in ('field','beach','heath','mud','wood')
+          or power in ('station','sub_station')
+          or tourism in ('attraction','camp_site','caravan_site','picnic_site','zoo')
+       order by z_order,way_area desc
+      ) as leisure
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+<Layer name="sports_grounds" status="on" srs="&osm2pgsql_projection;">
+    <StyleName>sports_grounds</StyleName>
+    <Datasource>
+      <Parameter name="table">
+      (select way,leisure,
+       case when leisure='pitch' then 2
+            when leisure='track' then 1
+            else 0 end as prio
+       from &prefix;_polygon
+       where leisure in ('sports_centre','stadium','pitch','track')
+       order by z_order,prio,way_area desc
+      ) as sports_grounds
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+&layer-water;
+&layer-water_features;

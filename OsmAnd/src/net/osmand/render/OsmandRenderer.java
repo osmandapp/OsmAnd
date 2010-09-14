@@ -109,6 +109,10 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		int shadowColor = 0;
 		float strokeWidth = 0;
 		
+		float secondStrokeWidth = 0;
+		int secondColor = 0;
+		PathEffect secondEffect = null;
+		
 		// polygon props
 		boolean showPolygon = true;
 		int colorAround = 0;
@@ -169,8 +173,8 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	
 	@Override
 	public int compare(MapRenderObject object1, MapRenderObject object2) {
-		int o1 = object1.getMapOrder();
-		int o2 = object2.getMapOrder();
+		float o1 = object1.getMapOrder();
+		float o2 = object2.getMapOrder();
 		return o1 < o2 ? -1 : (o1 == o2 ? 0 : 1);
 	}
 	
@@ -312,7 +316,9 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		int subtype = MapRenderingTypes.getPolygonSubType(obj.getType());
 		rc.color = Color.rgb(245, 245, 245);
 		rc.shader = null;
+		rc.colorAround = 0;
 		rc.showPolygon = true;
+		
 		
 		PolygonRenderer.renderPolygon(rc, zoom, type, subtype, this);
 		if(!rc.showPolygon){
@@ -338,6 +344,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			paint.setShader(rc.shader);
 			canvas.drawPath(path, paint);
 			if(rc.colorAround != 0){
+				paintStroke.setPathEffect(null);
 				paintStroke.setColor(rc.colorAround);
 				paintStroke.setStrokeWidth(1);
 				canvas.drawPath(path, paintStroke);
@@ -540,7 +547,20 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			paintStroke.setColor(rc.color);
 			paintStroke.setStrokeWidth(rc.strokeWidth);
 			canvas.drawPath(path, paintStroke);
+			if (rc.secondStrokeWidth > 0) {
+				paintStroke.setPathEffect(rc.secondEffect);
+				paintStroke.setShader(null);
+				if (rc.shadowLayer != 0) {
+					paintStroke.setShadowLayer(0, 0, 0, 0);
+				}
+				paintStroke.setColor(rc.secondColor);
+				paintStroke.setStrokeWidth(rc.secondStrokeWidth);
+				canvas.drawPath(path, paintStroke);
+			}
 			if(type == MapRenderingTypes.HIGHWAY && rc.zoom >= 16 && MapRenderingTypes.isOneWayWay(obj.getType())){
+				if (rc.shadowLayer != 0) {
+					paintStroke.setShadowLayer(0, 0, 0, 0);
+				}
 				drawOneWayDirections(canvas, path);
 			}
 			if (obj.getName() != null && rc.showText) {

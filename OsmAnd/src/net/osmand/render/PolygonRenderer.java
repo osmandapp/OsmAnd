@@ -17,6 +17,11 @@ public class PolygonRenderer {
 				rc.color = Color.rgb(236, 236, 236);
 				rc.colorAround = Color.rgb(176, 176, 176);
 			}
+		} else if (type == MapRenderingTypes.RAILWAY) {
+			if(subtype == 13){
+				rc.showPolygon = zoom >= 13;
+				rc.color = 0xffd4aaaa;
+			}
 		} else if (type == MapRenderingTypes.WATERWAY) {
 			if(subtype == 3){
 				rc.showPolygon = zoom >= 7;
@@ -26,9 +31,12 @@ public class PolygonRenderer {
 				rc.color = 0xffb5d0d0;
 			}
 		} else if (type == MapRenderingTypes.AEROWAY) {
-			if(subtype == 1){
+			if(subtype == 1 || subtype == 10){
 				rc.showPolygon = zoom >= 12;
 				rc.color = 0x80cccccc;
+			} else if(subtype == 2){
+				rc.showPolygon = zoom >= 15;
+				rc.color = 0xffcc99ff;
 			} else if(subtype == 9){
 				// apron
 				rc.showPolygon = zoom >= 13;

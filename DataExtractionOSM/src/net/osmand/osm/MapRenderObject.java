@@ -7,7 +7,7 @@ public class MapRenderObject {
 	private int type;
 	private byte[] data = null;
 	private long id;
-	private int order = -1;
+	private float order = -1;
 	
 	public MapRenderObject(long id){
 		this.id = id;
@@ -52,21 +52,48 @@ public class MapRenderObject {
 		return Algoritms.parseIntFromBytes(data, ind * 8 + 4);
 	}
 	
-	public int getMapOrder(){
+	public float getMapOrder(){
 		if (order == -1) {
 			int oType = MapRenderingTypes.getObjectType(type);
 			int sType = MapRenderingTypes.getPolylineSubType(type);
 			if ((type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POLYGON_TYPE) {
+				// 1 - 9
 				if (MapRenderingTypes.isPolygonBuilding(type)) {
+					// draw over lines
 					order = 64;
+				} else if (oType == MapRenderingTypes.LANDUSE) {
+					switch (sType) {
+					case 5: case 6: case 15: case 18: case 20: case 23:
+						order = 1;
+						break;
+					case 22:
+						order = 5;
+						break;
+					default:
+						order = 1.5f;
+						break;
+					}
+				} else if (oType == MapRenderingTypes.LEISURE) {
+					switch (sType) {
+					case 3:
+					case 10:
+					case 13:
+						order = 4;
+						break;
+					default:
+						order = 2;
+						break;
+					}
 				} else if (oType == MapRenderingTypes.POWER) {
-					order = 60;
+					order = 4;
 				} else if (oType == MapRenderingTypes.WATERWAY || oType == MapRenderingTypes.NATURAL) {
-					order = 7;
+					// water 5
+					order = 5;
 				} else {
 					order = 1;
 				}
 			} else if ((type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POLYLINE_TYPE) {
+				// 10 - 68
 				int layer = MapRenderingTypes.getWayLayer(type);
 				if(layer == 1){
 					order = 10;
