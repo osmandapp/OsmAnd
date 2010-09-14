@@ -16,26 +16,91 @@ public class PolylineRenderer {
 		int shadowLayer = 0;
 		int shadowColor = 0;
 		float strokeWidth = zoom >= 15 ? 1 : 0;
+		
+		float secondStrokeWidth = 0;
+		int secondColor = 0;
+		PathEffect secondEffect = null;
+		
 		switch (type) {
 		case MapRenderingTypes.HIGHWAY: {
 			int hwType = subtype;
 			boolean carRoad = true;
-			if (hwType == MapRenderingTypes.PL_HW_TRUNK) {
-				color = Color.rgb(168, 218, 168);
-			} else if (hwType == MapRenderingTypes.PL_HW_MOTORWAY) {
-				color = Color.rgb(128, 155, 192);
+			int layer = MapRenderingTypes.getWayLayer(objType);
+			boolean tunnel = layer == 1;
+			boolean bridge = layer == 2;
+			if (hwType == MapRenderingTypes.PL_HW_TRUNK || hwType == MapRenderingTypes.PL_HW_MOTORWAY) {
+				if (hwType == MapRenderingTypes.PL_HW_TRUNK) {
+					color = Color.rgb(168, 218, 168);
+				} else {
+					color = Color.rgb(128, 155, 192);
+				}
+				if(zoom < 10){
+					if (zoom >= 7) {
+						strokeWidth = 3.5f;
+					} else if (zoom == 6) {
+						strokeWidth = 2;
+					} else if (zoom == 5) {
+						strokeWidth = 1;
+					} else {
+						strokeWidth = 0;
+					}
+				} else if (zoom <= 12) {
+					strokeWidth = 3f;
+				} else if (zoom <= 14) {
+					strokeWidth = 7f;
+				}
 			} else if (hwType == MapRenderingTypes.PL_HW_PRIMARY) {
 				color = Color.rgb(235, 152, 154);
+				if (zoom < 7) {
+					strokeWidth = 0;
+				} else if (zoom == 7) {
+					strokeWidth = 1.5f;
+				} else if (zoom == 8 || zoom == 9) {
+					strokeWidth = 2f;
+				} else if (zoom <= 12) {
+					strokeWidth = 3f;
+				} else if (zoom <= 14) {
+					strokeWidth = 7f;
+				}
 			} else if (hwType == MapRenderingTypes.PL_HW_SECONDARY) {
 				color = Color.rgb(253, 214, 164);
+				if(zoom < 8){
+					strokeWidth = 0;
+				} else if(zoom <= 10){
+					strokeWidth = 1;
+				} else if(zoom <= 12){
+					strokeWidth = 2;
+				} else if(zoom <= 14){
+					strokeWidth = 6;
+				}
 			} else if (hwType == MapRenderingTypes.PL_HW_TERTIARY) {
 				color = Color.rgb(254, 254, 179);
 				shadowLayer = 2;
 				shadowColor = Color.rgb(186, 186, 186);
-			} else if (hwType == MapRenderingTypes.PL_HW_SERVICE || hwType == MapRenderingTypes.PL_HW_UNCLASSIFIED
-					|| hwType == MapRenderingTypes.PL_HW_RESIDENTIAL) {
+				if(zoom < 13){
+					strokeWidth = 0;
+				} else if(zoom < 14){
+					strokeWidth = 4;
+					shadowLayer = 1;
+				} else if(zoom < 15){
+					strokeWidth = 6;
+					shadowLayer = 1;
+				}
+			} else if (hwType == MapRenderingTypes.PL_HW_RESIDENTIAL || hwType == MapRenderingTypes.PL_HW_UNCLASSIFIED){
+				if(zoom < 14){
+					strokeWidth = 0;
+				} else if(zoom < 15){
+					strokeWidth = 4;
+				}
 				shadowLayer = 1;
 				shadowColor = Color.rgb(194, 194, 194);
+				color = Color.WHITE;
+			} else if (hwType == MapRenderingTypes.PL_HW_SERVICE || hwType == MapRenderingTypes.PL_HW_LIVING_STREET) {
+				shadowLayer = 1;
+				shadowColor = Color.rgb(194, 194, 194);
+				if(zoom < 15){
+					strokeWidth = 0;
+				}
 				color = Color.WHITE;
 			} else if (hwType == MapRenderingTypes.PL_HW_PEDESTRIAN) {
 				shadowLayer = 1;
@@ -43,65 +108,52 @@ public class PolylineRenderer {
 				color = Color.rgb(236, 236, 236);
 			} else {
 				carRoad = false;
-				strokeWidth = 2;
-				pathEffect = o.getDashEffect("2_2"); //$NON-NLS-1$
-				if (hwType == MapRenderingTypes.PL_HW_TRACK || hwType == MapRenderingTypes.PL_HW_PATH) {
-					color = Color.GRAY;
-					pathEffect = o.getDashEffect("6_2"); //$NON-NLS-1$
-				} else if (hwType == MapRenderingTypes.PL_HW_CYCLEWAY || hwType == MapRenderingTypes.PL_HW_BRIDLEWAY) {
-					color = Color.rgb(20, 20, 250);
+				 if (hwType == MapRenderingTypes.PL_HW_CONSTRUCTION || hwType == MapRenderingTypes.PL_HW_PROPOSED) {
+					strokeWidth = zoom >= 15 ? (zoom == 15 ? 6 : 8) : 0;
+					color = 0xff99cccc;
+					secondColor = Color.WHITE;
+					secondStrokeWidth = strokeWidth - 1;
+					secondEffect = o.getDashEffect("8_6"); //$NON-NLS-1$
 				} else {
-					color = Color.rgb(250, 128, 115);
+					if (hwType == MapRenderingTypes.PL_HW_TRACK) {
+						strokeWidth = zoom >= 14 ? 2f : 0;
+						color = 0xff996600;
+						pathEffect = o.getDashEffect("4_3"); //$NON-NLS-1$
+					} else if (hwType == MapRenderingTypes.PL_HW_PATH) {
+						strokeWidth = zoom >= 14 ? 1f : 0;
+						color = Color.BLACK;
+						pathEffect = o.getDashEffect("6_3"); //$NON-NLS-1$
+					} else if (hwType == MapRenderingTypes.PL_HW_CYCLEWAY) {
+						strokeWidth = zoom >= 14 ? 2f : 0;
+						pathEffect = o.getDashEffect("2_2"); //$NON-NLS-1$
+						color = Color.BLUE;
+					} else if (hwType == MapRenderingTypes.PL_HW_BRIDLEWAY) {
+						strokeWidth = zoom >= 14 ? 2f : 0;
+						pathEffect = o.getDashEffect("2_2"); //$NON-NLS-1$
+						color = Color.GREEN;
+					} else if (hwType == MapRenderingTypes.PL_HW_BYWAY) {
+						strokeWidth = zoom >= 14 ? 2f : 0;
+						pathEffect = o.getDashEffect("4_3"); //$NON-NLS-1$
+						color = 0xffffcc00;
+					} else if (hwType == MapRenderingTypes.PL_HW_STEPS) {
+						color = Color.rgb(250, 128, 115);
+						strokeWidth = zoom >= 15 ? 5 : 0;
+						pathEffect = o.getDashEffect("1_2"); //$NON-NLS-1$
+					} else if (hwType == MapRenderingTypes.PL_HW_FOOTWAY) {
+						color = Color.rgb(250, 128, 115);
+						strokeWidth = zoom >= 15 ? 2 : 0;
+						pathEffect = o.getDashEffect("2_2"); //$NON-NLS-1$
+					}
 				}
 			}
+			showText = (carRoad && zoom > 12) || zoom > 16;
+			
 			if (carRoad) {
-				if (zoom < 10) {
-					// done
-					strokeWidth = 0;
-					if (hwType <= MapRenderingTypes.PL_HW_SECONDARY) {
-						if (hwType == MapRenderingTypes.PL_HW_SECONDARY) {
-							strokeWidth = zoom >= 8 ? 1 : 0;
-						} else if (hwType == MapRenderingTypes.PL_HW_PRIMARY) {
-							if (zoom < 7) {
-								strokeWidth = 0;
-							} else if (zoom == 7) {
-								strokeWidth = 1.5f;
-							} else if (zoom == 8 || zoom == 9) {
-								strokeWidth = 2f;
-							}
-						} else if (hwType == MapRenderingTypes.PL_HW_TRUNK || hwType == MapRenderingTypes.PL_HW_MOTORWAY) {
-							if (zoom >= 7) {
-								strokeWidth = 3.5f;
-							} else if (zoom == 6) {
-								strokeWidth = 2;
-							} else if (zoom == 5) {
-								strokeWidth = 1;
-							} else {
-								strokeWidth = 0;
-							}
-						}
-					}
-				} else if (zoom <= 12) {
-					if (hwType <= MapRenderingTypes.PL_HW_SECONDARY) {
-						if (zoom < 12) {
-							strokeWidth = 2;
-						} else if (zoom == 12) {
-							strokeWidth = 3;
-						}
-					} else {
-						strokeWidth = 0;
-					}
-				} else {
-					int layer = MapRenderingTypes.getWayLayer(objType);
-					if (layer == 1) {
-						pathEffect = o.getDashEffect("4_2"); //$NON-NLS-1$
-					}
-					if (zoom < 15) {
-						strokeWidth = 4.5f;
-					} else if (zoom < 16) {
-						strokeWidth = 6;
+				if (zoom >= 15) {
+					if (zoom < 16) {
+						strokeWidth = 9;
 					} else if (zoom == 16) {
-						strokeWidth = 8;
+						strokeWidth = 11;
 					} else if (zoom == 17) {
 						strokeWidth = 13;
 					} else if (zoom >= 18) {
@@ -109,49 +161,149 @@ public class PolylineRenderer {
 					} else if (zoom >= 19) {
 						strokeWidth = 20;
 					}
-					if (hwType == MapRenderingTypes.PL_HW_SERVICE) {
-						strokeWidth -= 2;
+					if (hwType == MapRenderingTypes.PL_HW_SERVICE || hwType == MapRenderingTypes.PL_HW_LIVING_STREET) {
+						strokeWidth -= 3;
 					}
 				}
 			}
-			showText = (carRoad && zoom > 12) || zoom > 16;
+			if(bridge && zoom > 12){
+				if(secondStrokeWidth == 0){
+					shadowLayer = 2;
+					shadowColor = Color.BLACK;
+				}
+			}
+			if (tunnel && zoom > 12 && carRoad) {
+				pathEffect = o.getDashEffect("4_4"); //$NON-NLS-1$
+			}
 		}
 			break;
 		case MapRenderingTypes.RAILWAY: {
-			if (zoom < 10) {
-				if (subtype == 2) {
-					color = 0xffaaaaaa;
-					if (zoom < 7) {
-						strokeWidth = 0;
-					} else if (zoom == 7) {
-						strokeWidth = 1;
-					} else if (zoom == 8) {
-						strokeWidth = 1.5f;
-					} else if (zoom == 9) {
-						strokeWidth = 2;
-					}
-				} else {
+			int layer = MapRenderingTypes.getWayLayer(objType);
+			boolean tunnel = layer == 1;
+			boolean bridge = layer == 2;
+			if (subtype == 1) {
+				color = 0xffaaaaaa;
+				if (zoom < 7) {
 					strokeWidth = 0;
-				}
-			} else {
-				// TODO tunnel
-				strokeWidth = 2;
-				if (subtype == 6) {
-					color = Color.rgb(153, 153, 153);
-					if (zoom > 16) {
-						strokeWidth = 3;
+				} else if (zoom == 7) {
+					strokeWidth = 1;
+				} else if (zoom == 8) {
+					strokeWidth = 1.5f;
+				} else if (zoom <= 12) {
+					strokeWidth = 2;
+					if(tunnel){
+						pathEffect = o.getDashEffect("5_2"); //$NON-NLS-1$
 					}
-					pathEffect = o.getDashEffect("6_3"); //$NON-NLS-1$
-				} else if (subtype == 2) {
-					color = Color.rgb(62, 62, 62);
-				} else if (subtype == 1) {
-					color = Color.rgb(153, 153, 153);
-					if (zoom >= 16) {
-						strokeWidth = 3;
-					}
-					pathEffect = o.getDashEffect("7_7"); //$NON-NLS-1$
+				} else if(zoom == 13){
+					color = 0xff999999;
+					strokeWidth = 3;
+					secondColor = Color.WHITE;
+					secondStrokeWidth = 1;
+					secondEffect = o.getDashEffect("8_12"); //$NON-NLS-1$
 				} else {
-					color = Color.rgb(153, 153, 153);
+					color = 0xff999999;
+					strokeWidth = 3;
+					secondColor = Color.WHITE;
+					secondStrokeWidth = 1;
+					if(tunnel){
+						// TODO tunnel
+					} else if(bridge){
+						// TODO bridge 
+						secondStrokeWidth = 5;
+						strokeWidth = 7;
+					} else {
+						secondEffect = o.getDashEffect("0_11_8_1"); //$NON-NLS-1$
+					}
+					
+				}
+			} else if(subtype == 2 ) {
+				color = 0xff44444;
+				if(zoom < 13){
+					strokeWidth = 0;
+				} else if(zoom < 15){
+					strokeWidth = 1;
+					if(tunnel){
+						pathEffect = o.getDashEffect("5_3"); //$NON-NLS-1$
+					}
+				} else {
+					strokeWidth = 2;
+					if(tunnel){
+						pathEffect = o.getDashEffect("5_3"); //$NON-NLS-1$
+					}
+				}
+			} else if(subtype == 3){
+				color = 0xff666666;
+				if(zoom < 13){
+					strokeWidth = 0;
+				} else {
+					strokeWidth = 2;
+					if(tunnel){
+						pathEffect = o.getDashEffect("5_3"); //$NON-NLS-1$
+					}
+				}
+			} else if(subtype == 4 || subtype == 5 || subtype == 9){
+				if(zoom < 13){
+					strokeWidth = 0;
+				} else {
+					if(bridge){
+						strokeWidth = 4.5f;
+						color = Color.BLACK;
+						secondStrokeWidth = 2;
+						secondColor = Color.GRAY;
+						secondEffect =o.getDashEffect("4_2"); //$NON-NLS-1$
+					} else {
+						strokeWidth = 2;
+						color = Color.GRAY;
+						pathEffect = o.getDashEffect("4_2"); //$NON-NLS-1$
+					}
+				}
+			} else if (subtype == 6) {
+				color = 0xff999999;
+				if(zoom < 13){
+					strokeWidth = 0;
+				} else {
+					strokeWidth = 2;
+					if(tunnel){
+						pathEffect = o.getDashEffect("5_3"); //$NON-NLS-1$
+					}
+				}
+			} else if (subtype == 7) {
+				if(zoom < 13){
+					strokeWidth = 0;
+				} else {
+					color = 0xff999999;
+					strokeWidth = 3;
+					secondColor = Color.WHITE;
+					secondStrokeWidth = 1;
+					secondEffect = o.getDashEffect("0_1_8_1"); //$NON-NLS-1$
+				}
+			} else if (subtype == 8 || subtype == 11) {
+				if(zoom < 15){
+					strokeWidth = 0;
+				} else {
+					strokeWidth = 2;
+					color = 0xff666666;
+					if(tunnel){
+						strokeWidth = 5;
+						pathEffect = o.getDashEffect("5_3"); //$NON-NLS-1$
+						secondColor = 0xffcccccc;
+						secondStrokeWidth = 3;
+					}
+				}
+			} else if (subtype == 10) {
+				if(zoom < 15){
+					strokeWidth = 0;
+				} else {
+					strokeWidth = 3;
+					color = 0xff777777;
+					pathEffect = o.getDashEffect("2_3"); //$NON-NLS-1$
+				}
+			} else if (subtype == 12) {
+				if(zoom < 15){
+					strokeWidth = 0;
+				} else {
+					strokeWidth = 3;
+					color = Color.GRAY;
 				}
 			}
 		}
@@ -185,10 +337,6 @@ public class PolylineRenderer {
 					if (zoom < 13) {
 						strokeWidth = 2;
 					} else {
-						int layer = MapRenderingTypes.getWayLayer(objType);
-						if (layer == 1) {
-							pathEffect = o.getDashEffect("4_2"); //$NON-NLS-1$
-						}
 						if (zoom == 13) {
 							strokeWidth = 3;
 						} else if (zoom == 14) {
@@ -210,10 +358,6 @@ public class PolylineRenderer {
 					} else if (zoom < 15) {
 						strokeWidth = 1;
 					} else {
-						int layer = MapRenderingTypes.getWayLayer(objType);
-						if (layer == 1) {
-							pathEffect = o.getDashEffect("4_2"); //$NON-NLS-1$
-						}
 						strokeWidth = 2;
 					}
 					break;
@@ -236,6 +380,11 @@ public class PolylineRenderer {
 				default:
 					break;
 				}
+			}
+			if(zoom > 12 && MapRenderingTypes.getWayLayer(objType) == 1){
+				pathEffect = o.getDashEffect("4_2"); //$NON-NLS-1$
+				secondStrokeWidth = strokeWidth - 2;
+				secondColor = Color.WHITE;
 			}
 		}
 			break;
@@ -273,6 +422,42 @@ public class PolylineRenderer {
 				}
 			} else {
 				strokeWidth = 0;
+			}
+		}
+			break;
+		case MapRenderingTypes.AEROWAY: {
+			if(subtype == 7){
+				color = 0xffbbbbcc;
+				if(zoom < 11){
+					strokeWidth = 0;
+				} else if(zoom < 12){
+					strokeWidth = 2;
+				} else if(zoom < 13){
+					strokeWidth = 4;
+				} else if(zoom < 14){
+					strokeWidth = 7;
+				} else if(zoom < 15){
+					strokeWidth = 12;
+				} else {
+					strokeWidth = 18;
+				}
+			} else if(subtype == 8){
+				color = 0xffbbbbcc;
+				if(zoom < 12){
+					strokeWidth = 0;
+				} else if(zoom < 14){
+					strokeWidth = 1;
+				} else if(zoom < 15){
+					strokeWidth = 4;
+				} else {
+					strokeWidth = 6;
+				}
+			}
+			if(MapRenderingTypes.getWayLayer(objType) == 2 && zoom > 12){
+				if(secondStrokeWidth == 0){
+					shadowLayer = 2;
+					shadowColor = Color.BLACK;
+				}
 			}
 		}
 			break;
@@ -413,5 +598,8 @@ public class PolylineRenderer {
 		rc.shadowLayer = shadowLayer;
 		rc.showText = showText;
 		rc.strokeWidth = strokeWidth;
+		rc.secondColor = secondColor;
+		rc.secondEffect = secondEffect;
+		rc.secondStrokeWidth = secondStrokeWidth;
 	}
 }
