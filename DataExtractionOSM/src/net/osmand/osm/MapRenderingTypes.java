@@ -54,11 +54,10 @@ public class MapRenderingTypes {
 	
 	// TODO place text : (ref - shield)
 	// TODO coastline
-	// TODO render : bridge (common way), tunnel, hw, railway : construction, proposed
-	public final static int HIGHWAY = 1; //TODO REVIEW,traffic
+	public final static int HIGHWAY = 1; 
 	public final static int BARRIER = 2; 
 	public final static int WATERWAY = 3; 
-	public final static int RAILWAY = 4;//TODO RENDER
+	public final static int RAILWAY = 4;
 	public final static int AEROWAY = 5;
 	public final static int AERIALWAY = 6;  
 	public final static int POWER = 7; 

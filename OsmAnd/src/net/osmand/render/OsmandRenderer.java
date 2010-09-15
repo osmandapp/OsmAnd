@@ -30,6 +30,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Bitmap.Config;
 import android.graphics.Paint.Align;
+import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
 import android.graphics.Shader.TileMode;
 import android.text.TextPaint;
@@ -38,20 +39,14 @@ import android.util.FloatMath;
 public class OsmandRenderer implements Comparator<MapRenderObject> {
 	private static final Log log = LogUtil.getLog(OsmandRenderer.class);
 	
-	private Paint paintStroke;
 	private TextPaint paintText;
-	private Paint paintFill;
+	private Paint paint;
 	private Paint paintFillEmpty;
 	private Paint paintIcon;
 	
 	
 	/// Colors
 	private int clFillScreen = Color.rgb(241, 238, 232);
-	
-	private PathEffect arrowDashEffect1 = new DashPathEffect(new float[] { 0, 12, 10, 152 }, 0);
-	private PathEffect arrowDashEffect2 = new DashPathEffect(new float[] { 0, 12, 9, 153 }, 1);
-	private PathEffect arrowDashEffect3 = new DashPathEffect(new float[] { 0, 18, 2, 154 }, 1);
-	private PathEffect arrowDashEffect4 = new DashPathEffect(new float[] { 0, 18, 1, 155 }, 1);
 
 	private Map<String, PathEffect> dashEffect = new LinkedHashMap<String, PathEffect>();
 	private Map<Integer, Shader> shaders = new LinkedHashMap<Integer, Shader>();
@@ -99,35 +94,65 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		
 		// use to calculate points
 		PointF tempPoint = new PointF();
+
 		
-		// use to set rendering properties
-		int color = Color.BLACK;
 		// polyline props
 		boolean showText = true;
-		PathEffect pathEffect = null;
-		int shadowLayer = 0;
-		int shadowColor = 0;
-		float strokeWidth = 0;
 		
-		float secondStrokeWidth = 0;
-		int secondColor = 0;
-		PathEffect secondEffect = null;
+		RenderingPaintProperties main = new RenderingPaintProperties();
+		RenderingPaintProperties second = new RenderingPaintProperties();
+		RenderingPaintProperties third = new RenderingPaintProperties();
+		RenderingPaintProperties[] adds = null; 
 		
-		// polygon props
-		boolean showPolygon = true;
-		int colorAround = 0;
-		int widthAround = 1;
-		Shader shader = null;
+	}
+	
+	/* package*/ static class RenderingPaintProperties {
+		int color;
+		float strokeWidth;
+		int shadowLayer;
+		int shadowColor;
+		boolean fillArea;
+		PathEffect pathEffect; 
+		Shader shader;
+		Cap cap;
 		
+		public void emptyLine(){
+			color = 0;
+			strokeWidth = 0;
+			cap = Cap.BUTT;
+			pathEffect = null;
+			fillArea = false;
+			shader = null;
+			shadowColor = 0;
+			shadowLayer = 0;
+		}
+		
+		public void updatePaint(Paint p){
+			p.setStyle(fillArea ? Style.FILL_AND_STROKE : Style.STROKE);
+			p.setColor(color);
+			p.setShader(shader);
+			p.setShadowLayer(shadowLayer, 0, 0, shadowColor);
+			if (!fillArea) {
+				p.setStrokeCap(cap);
+				p.setPathEffect(pathEffect);
+				p.setStrokeWidth(strokeWidth);
+			}
+		}
+		
+		public void emptyArea(){
+			color = 0;
+			strokeWidth = 0;
+			cap = Cap.BUTT;
+			fillArea = false;
+			shader = null;
+			pathEffect = null;
+			shadowColor = 0;
+			shadowLayer = 0;
+		}
 	}
 	
 	public OsmandRenderer(Context context){
 		this.context = context;
-		paintStroke = new Paint();
-		paintStroke.setStyle(Style.STROKE);
-		paintStroke.setStrokeWidth(2);
-		paintStroke.setColor(Color.BLACK);
-		paintStroke.setAntiAlias(true);
 		
 		paintIcon = new Paint();
 		paintIcon.setStyle(Style.STROKE);
@@ -138,11 +163,8 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		paintText.setTextAlign(Align.CENTER);
 		paintText.setAntiAlias(true);
 		
-		paintFill = new Paint();
-		paintFill.setStyle(Style.FILL_AND_STROKE);
-		paintFill.setStrokeWidth(2);
-		paintFill.setColor(Color.LTGRAY);
-		paintFill.setAntiAlias(true);
+		paint = new Paint();
+		paint.setAntiAlias(true);
 		
 		paintFillEmpty = new Paint();
 		paintFillEmpty.setStyle(Style.FILL);
@@ -304,28 +326,23 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		return rc.tempPoint;
 	}
 
-	
-
 	private PointF drawPolygon(MapRenderObject obj, Canvas canvas, RenderingContext rc) {
-		Paint paint = paintFill;
 		float xText = 0;
 		float yText = 0;
 		int zoom = rc.zoom;
 		Path path = null;
 		int type = MapRenderingTypes.getObjectType(obj.getType());
 		int subtype = MapRenderingTypes.getPolygonSubType(obj.getType());
-		rc.color = Color.rgb(245, 245, 245);
-		rc.shader = null;
-		rc.colorAround = 0;
-		rc.showPolygon = true;
+		rc.main.emptyArea();
+		rc.second.emptyLine();
+		rc.main.color = Color.rgb(245, 245, 245);
 		
 		
 		PolygonRenderer.renderPolygon(rc, zoom, type, subtype, this);
-		if(!rc.showPolygon){
+		if(!rc.main.fillArea){
 			return null;
 		}
 			
-		paint.setColor(rc.color);
 		for (int i = 0; i < obj.getPointsLength(); i++) {
 			PointF p = calcPoint(obj, i, rc);
 			xText += p.x;
@@ -341,13 +358,11 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		if (path != null) {
 			xText /= obj.getPointsLength();
 			yText /= obj.getPointsLength();
-			paint.setShader(rc.shader);
+			rc.main.updatePaint(paint);
 			canvas.drawPath(path, paint);
-			if(rc.colorAround != 0){
-				paintStroke.setPathEffect(null);
-				paintStroke.setColor(rc.colorAround);
-				paintStroke.setStrokeWidth(1);
-				canvas.drawPath(path, paintStroke);
+			if(rc.second.strokeWidth != 0){
+				rc.second.updatePaint(paint);
+				canvas.drawPath(path, paint);
 			}
 			String name = obj.getName();
 			if(name != null){
@@ -490,9 +505,13 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	private void drawPolyline(MapRenderObject obj, Canvas canvas, RenderingContext rc) {
 		int type = MapRenderingTypes.getObjectType(obj.getType());
 		int subtype = MapRenderingTypes.getPolylineSubType(obj.getType());
+		rc.main.emptyLine();
+		rc.second.emptyLine();
+		rc.third.emptyLine();
+		rc.adds = null;
 		PolylineRenderer.renderPolyline(type, subtype, obj.getType(), rc, this);
 		
-		if(rc.strokeWidth == 0){
+		if(rc.main.strokeWidth == 0){
 			return;
 		}
 		int length = obj.getPointsLength();
@@ -539,32 +558,24 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			yPrev = p.y;
 		}
 		if (path != null) {
-			paintStroke.setPathEffect(rc.pathEffect);
-			if(paintStroke.getShader() != null){
-				paintStroke.setShader(null);
-			}
-			paintStroke.setShadowLayer(rc.shadowLayer, 0, 0, rc.shadowColor);
-			paintStroke.setColor(rc.color);
-			paintStroke.setStrokeWidth(rc.strokeWidth);
-			canvas.drawPath(path, paintStroke);
-			if (rc.secondStrokeWidth > 0) {
-				paintStroke.setPathEffect(rc.secondEffect);
-				paintStroke.setShader(null);
-				if (rc.shadowLayer != 0) {
-					paintStroke.setShadowLayer(0, 0, 0, 0);
+			rc.main.updatePaint(paint);
+			canvas.drawPath(path, paint);
+			if (rc.second.strokeWidth != 0) {
+				rc.second.updatePaint(paint);
+				canvas.drawPath(path, paint);
+				if (rc.third.strokeWidth != 0) {
+					rc.third.updatePaint(paint);
+					canvas.drawPath(path, paint);
 				}
-				paintStroke.setColor(rc.secondColor);
-				paintStroke.setStrokeWidth(rc.secondStrokeWidth);
-				canvas.drawPath(path, paintStroke);
 			}
-			if(type == MapRenderingTypes.HIGHWAY && rc.zoom >= 16 && MapRenderingTypes.isOneWayWay(obj.getType())){
-				if (rc.shadowLayer != 0) {
-					paintStroke.setShadowLayer(0, 0, 0, 0);
+			if (rc.adds != null) {
+				for (int i = 0; i < rc.adds.length; i++) {
+					rc.adds[i].updatePaint(paint);
+					canvas.drawPath(path, paint);
 				}
-				drawOneWayDirections(canvas, path);
 			}
 			if (obj.getName() != null && rc.showText) {
-				float w = rc.strokeWidth + 3;
+				float w = rc.main.strokeWidth + 3;
 				if(w < 10){
 					 w = 10;
 				}
@@ -592,33 +603,13 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					text.drawOnPath = path;
 					text.textColor = Color.BLACK;
 					text.textSize = w;
-					text.vOffset = rc.strokeWidth / 2 - 1;
+					text.vOffset = rc.main.strokeWidth / 2 - 1;
 					rc.textToDraw.add(text);
 				}
 			}
 		}
 	}
 
-	public void drawOneWayDirections(Canvas canvas, Path path){
-		paintStroke.setColor(0xff6c70d5);
-		
-		paintStroke.setStrokeWidth(1);
-		paintStroke.setPathEffect(arrowDashEffect1);
-		canvas.drawPath(path, paintStroke);
-		
-		paintStroke.setStrokeWidth(2);
-		paintStroke.setPathEffect(arrowDashEffect2);
-		canvas.drawPath(path, paintStroke);
-		
-		paintStroke.setStrokeWidth(3);
-		paintStroke.setPathEffect(arrowDashEffect3);
-		canvas.drawPath(path, paintStroke);
-		
-		paintStroke.setStrokeWidth(4);
-		paintStroke.setPathEffect(arrowDashEffect4);
-		canvas.drawPath(path, paintStroke);
-	}
-	
 	
 	
 }
