@@ -2,24 +2,24 @@ package net.osmand.render;
 
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.render.OsmandRenderer.RenderingContext;
+import net.osmand.render.OsmandRenderer.RenderingPaintProperties;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.PathEffect;
+import android.graphics.Paint.Cap;
 
 public class PolylineRenderer {
 	
 	public static void renderPolyline(int type, int subtype, int objType, RenderingContext rc, OsmandRenderer o){
 		int zoom = rc.zoom;
 		
-		int color = Color.BLACK;
 		boolean showText = true;
+		
+		int color = Color.BLACK;
 		PathEffect pathEffect = null;
+		float strokeWidth = zoom >= 15 ? 1 : 0;
 		int shadowLayer = 0;
 		int shadowColor = 0;
-		float strokeWidth = zoom >= 15 ? 1 : 0;
-		
-		float secondStrokeWidth = 0;
-		int secondColor = 0;
-		PathEffect secondEffect = null;
 		
 		switch (type) {
 		case MapRenderingTypes.HIGHWAY: {
@@ -111,9 +111,9 @@ public class PolylineRenderer {
 				 if (hwType == MapRenderingTypes.PL_HW_CONSTRUCTION || hwType == MapRenderingTypes.PL_HW_PROPOSED) {
 					strokeWidth = zoom >= 15 ? (zoom == 15 ? 6 : 8) : 0;
 					color = 0xff99cccc;
-					secondColor = Color.WHITE;
-					secondStrokeWidth = strokeWidth - 1;
-					secondEffect = o.getDashEffect("8_6"); //$NON-NLS-1$
+					rc.second.color = Color.WHITE;
+					rc.second.strokeWidth = strokeWidth - 1;
+					rc.second.pathEffect = o.getDashEffect("8_6"); //$NON-NLS-1$
 				} else {
 					if (hwType == MapRenderingTypes.PL_HW_TRACK) {
 						strokeWidth = zoom >= 14 ? 2f : 0;
@@ -166,12 +166,26 @@ public class PolylineRenderer {
 					}
 				}
 			}
-			if(bridge && zoom > 12){
-				if(secondStrokeWidth == 0){
-					shadowLayer = 2;
-					shadowColor = Color.BLACK;
+			if(bridge && zoom > 14){
+				if(rc.second.strokeWidth == 0){
+					rc.second.color = color;
+					rc.second.strokeWidth = strokeWidth;
+					rc.second.pathEffect = pathEffect;
+					strokeWidth += 2;
+					color = Color.BLACK;
+					pathEffect = null;
+					if(rc.second.pathEffect == null){
+						rc.second.cap = Cap.SQUARE;
+					} else {
+						color = 0x88ffffff;
+					}
 				}
 			}
+			if(type == MapRenderingTypes.HIGHWAY && rc.zoom >= 16 && MapRenderingTypes.isOneWayWay(objType)){
+				rc.adds = getOneWayProperties();
+				
+			}
+			
 			if (tunnel && zoom > 12 && carRoad) {
 				pathEffect = o.getDashEffect("4_4"); //$NON-NLS-1$
 			}
@@ -197,27 +211,32 @@ public class PolylineRenderer {
 				} else if(zoom == 13){
 					color = 0xff999999;
 					strokeWidth = 3;
-					secondColor = Color.WHITE;
-					secondStrokeWidth = 1;
-					secondEffect = o.getDashEffect("8_12"); //$NON-NLS-1$
+					rc.second.color = Color.WHITE;
+					rc.second.strokeWidth = 1;
+					rc.second.pathEffect = o.getDashEffect("8_12"); //$NON-NLS-1$
 				} else {
 					color = 0xff999999;
 					strokeWidth = 3;
-					secondColor = Color.WHITE;
-					secondStrokeWidth = 1;
+					rc.second.color = Color.WHITE;
+					rc.second.strokeWidth = 1;
 					if(tunnel){
-						// TODO tunnel
+						rc.second.strokeWidth = 3;
+						rc.second.pathEffect = o.getDashEffect("4_4"); //$NON-NLS-1$
 					} else if(bridge){
-						// TODO bridge 
-						secondStrokeWidth = 5;
-						strokeWidth = 7;
+						rc.third.color = color;
+						rc.third.strokeWidth = 1;
+						rc.third.pathEffect = o.getDashEffect("12_8_1_0"); //$NON-NLS-1$
+						rc.second.strokeWidth = 4;
+						strokeWidth = 5;
+						color = Color.BLACK ;
 					} else {
-						secondEffect = o.getDashEffect("0_11_8_1"); //$NON-NLS-1$
+						rc.second.strokeWidth = 1;
+						rc.second.pathEffect = o.getDashEffect("0_11_8_1"); //$NON-NLS-1$
 					}
 					
 				}
 			} else if(subtype == 2 ) {
-				color = 0xff44444;
+				color = 0xff444444;
 				if(zoom < 13){
 					strokeWidth = 0;
 				} else if(zoom < 15){
@@ -248,9 +267,9 @@ public class PolylineRenderer {
 					if(bridge){
 						strokeWidth = 4.5f;
 						color = Color.BLACK;
-						secondStrokeWidth = 2;
-						secondColor = Color.GRAY;
-						secondEffect =o.getDashEffect("4_2"); //$NON-NLS-1$
+						rc.second.strokeWidth = 2;
+						rc.second.color = Color.GRAY;
+						rc.second.pathEffect = o.getDashEffect("4_2"); //$NON-NLS-1$
 					} else {
 						strokeWidth = 2;
 						color = Color.GRAY;
@@ -273,9 +292,9 @@ public class PolylineRenderer {
 				} else {
 					color = 0xff999999;
 					strokeWidth = 3;
-					secondColor = Color.WHITE;
-					secondStrokeWidth = 1;
-					secondEffect = o.getDashEffect("0_1_8_1"); //$NON-NLS-1$
+					rc.second.color = Color.WHITE;
+					rc.second.strokeWidth = 1;
+					rc.second.pathEffect = o.getDashEffect("0_1_8_1"); //$NON-NLS-1$
 				}
 			} else if (subtype == 8 || subtype == 11) {
 				if(zoom < 15){
@@ -286,8 +305,8 @@ public class PolylineRenderer {
 					if(tunnel){
 						strokeWidth = 5;
 						pathEffect = o.getDashEffect("5_3"); //$NON-NLS-1$
-						secondColor = 0xffcccccc;
-						secondStrokeWidth = 3;
+						rc.second.color = 0xffcccccc;
+						rc.second.strokeWidth = 3;
 					}
 				}
 			} else if (subtype == 10) {
@@ -383,8 +402,8 @@ public class PolylineRenderer {
 			}
 			if(zoom > 12 && MapRenderingTypes.getWayLayer(objType) == 1){
 				pathEffect = o.getDashEffect("4_2"); //$NON-NLS-1$
-				secondStrokeWidth = strokeWidth - 2;
-				secondColor = Color.WHITE;
+				rc.second.strokeWidth = strokeWidth - 2;
+				rc.second.color = Color.WHITE;
 			}
 		}
 			break;
@@ -454,9 +473,19 @@ public class PolylineRenderer {
 				}
 			}
 			if(MapRenderingTypes.getWayLayer(objType) == 2 && zoom > 12){
-				if(secondStrokeWidth == 0){
-					shadowLayer = 2;
-					shadowColor = Color.BLACK;
+				if(rc.second.strokeWidth == 0){
+					rc.second.color = color;
+					rc.second.strokeWidth = strokeWidth;
+					rc.second.pathEffect = pathEffect;
+					strokeWidth += 2;
+					color = Color.BLACK;
+					pathEffect = null;
+					if(rc.second.pathEffect == null){
+						rc.second.cap = Cap.SQUARE;
+					} else {
+						color = Color.GRAY;
+					}
+					
 				}
 			}
 		}
@@ -592,14 +621,49 @@ public class PolylineRenderer {
 			break;
 		}
 		
-		rc.color = color;
-		rc.pathEffect = pathEffect;
-		rc.shadowColor = shadowColor;
-		rc.shadowLayer = shadowLayer;
+		rc.main.color = color;
+		rc.main.pathEffect = pathEffect;
+		rc.main.shadowColor = shadowColor;
+		rc.main.shadowLayer = shadowLayer;
+		rc.main.strokeWidth = strokeWidth;
 		rc.showText = showText;
-		rc.strokeWidth = strokeWidth;
-		rc.secondColor = secondColor;
-		rc.secondEffect = secondEffect;
-		rc.secondStrokeWidth = secondStrokeWidth;
+		
 	}
+	
+	private static RenderingPaintProperties[] oneWay = null;
+	public static RenderingPaintProperties[] getOneWayProperties(){
+		if(oneWay == null){
+			PathEffect arrowDashEffect1 = new DashPathEffect(new float[] { 0, 12, 10, 152 }, 0);
+			PathEffect arrowDashEffect2 = new DashPathEffect(new float[] { 0, 12, 9, 153 }, 1);
+			PathEffect arrowDashEffect3 = new DashPathEffect(new float[] { 0, 18, 2, 154 }, 1);
+			PathEffect arrowDashEffect4 = new DashPathEffect(new float[] { 0, 18, 1, 155 }, 1);
+			oneWay = new RenderingPaintProperties[4];
+			oneWay[0] = new RenderingPaintProperties();
+			oneWay[0].emptyLine();
+			oneWay[0].color = 0xff6c70d5;
+			oneWay[0].strokeWidth = 1;
+			oneWay[0].pathEffect = arrowDashEffect1;
+			
+			oneWay[1] = new RenderingPaintProperties();
+			oneWay[1].emptyLine();
+			oneWay[1].color = 0xff6c70d5;
+			oneWay[1].strokeWidth = 2;
+			oneWay[1].pathEffect = arrowDashEffect2;
+			
+			oneWay[2] = new RenderingPaintProperties();
+			oneWay[2].emptyLine();
+			oneWay[2].color = 0xff6c70d5;
+			oneWay[2].strokeWidth = 3;
+			oneWay[2].pathEffect = arrowDashEffect3;
+			
+			oneWay[3] = new RenderingPaintProperties();
+			oneWay[3].emptyLine();
+			oneWay[3].color = 0xff6c70d5;
+			oneWay[3].strokeWidth = 4;
+			oneWay[3].pathEffect = arrowDashEffect4;
+				
+		}
+		return oneWay;
+	}
+
 }

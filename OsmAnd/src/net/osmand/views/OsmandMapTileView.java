@@ -243,8 +243,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	
 	public void setZoom(float zoom){
-		if ((map == null && zoom < 22) ||
-				((map.getMaximumZoomSupported() + OVERZOOM_IN) >= zoom && map.getMinimumZoomSupported() <= zoom)) {
+		if ((map == null && zoom < 22 && zoom > 0) ||
+				(map != null && (map.getMaximumZoomSupported() + OVERZOOM_IN) >= zoom && map.getMinimumZoomSupported() <= zoom)) {
 			animatedDraggingThread.stopAnimating();
 			this.zoom = zoom;
 			refreshMap();
