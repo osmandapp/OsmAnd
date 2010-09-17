@@ -31,6 +31,7 @@ import alice.tuprolog.Var;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Environment;
+import android.view.WindowManager;
 
 public class CommandPlayer {
 	
@@ -200,6 +201,7 @@ public class CommandPlayer {
 						mediaPlayer.prepare();
 						mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 							public void onCompletion(MediaPlayer mp) {
+								mp.release();
 								mediaPlayer = new MediaPlayer();
 								int sleep = 60;
 								boolean delay = true;

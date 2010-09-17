@@ -418,17 +418,17 @@ public class DataIndexWriter {
 	}
 	
 	public static void insertMapRenderObjectIndex(Map<PreparedStatement, Integer> statements, 
-			PreparedStatement mapStat, PreparedStatement mapWayLocationsStat, Entity e, String name,
+			PreparedStatement mapStat, PreparedStatement mapWayLocationsStat, /*RTree mapTree, */Entity e, String name,
 			long id, int type, boolean inversePath, boolean writeAsPoint, int batchSize) throws SQLException {
 		assert IndexMapRenderObject.values().length == 4;
 		if(e instanceof Relation){
 			throw new IllegalArgumentException();
 		}
 		boolean init = false;
-//		int minX = Integer.MAX_VALUE;
-//		int maxX = 0;
-//		int minY = Integer.MAX_VALUE;
-//		int maxY = 0;
+		int minX = Integer.MAX_VALUE;
+		int maxX = 0;
+		int minY = Integer.MAX_VALUE;
+		int maxY = 0;
 		double minLat = 180;
 		double maxLat = -180;
 		double minLon = 360;
@@ -458,10 +458,10 @@ public class DataIndexWriter {
 				maxLat = Math.max(maxLat, n.getLatitude());
 				minLon = Math.min(minLon, n.getLongitude());
 				maxLon = Math.max(maxLon, n.getLongitude());
-//				minX = Math.min(minX, x);
-//				maxX = Math.max(maxX, x);
-//				minY = Math.min(minY, y);
-//				maxY = Math.max(maxY, y);
+				minX = Math.min(minX, x);
+				maxX = Math.max(maxX, x);
+				minY = Math.min(minY, y);
+				maxY = Math.max(maxY, y);
 				init = true;
 				Algoritms.putIntToBytes(bytes, offset, y);
 				offset += 4;
@@ -475,6 +475,17 @@ public class DataIndexWriter {
 			mapStat.setString(IndexMapRenderObject.NAME.ordinal() + 1, name);
 			mapStat.setBytes(IndexMapRenderObject.NODES.ordinal() + 1, bytes);
 			addBatch(statements, mapStat);
+			
+//			
+//			try {
+//				mapTree.insert(new LeafElement(new Rect(minX, minY, maxX, maxY), id));
+//			} catch (RTreeInsertException e1) {
+//				// TODO
+//				e1.printStackTrace();
+//			} catch (IllegalValueException e1) {
+//				// TODO
+//				e1.printStackTrace();
+//			}
 
 			mapWayLocationsStat.setLong(1, id);
 			mapWayLocationsStat.setFloat(2, (float) minLon);

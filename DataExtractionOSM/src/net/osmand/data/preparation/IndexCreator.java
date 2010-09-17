@@ -132,6 +132,8 @@ public class IndexCreator {
 	private PreparedStatement mapLocsStatLevel0;
 	private PreparedStatement mapLocsStatLevel1;
 	private PreparedStatement mapLocsStatLevel2;
+//	private RTree mapTree;
+	
 	private Map<Long, List<Way>> lowLevelWaysSt = new LinkedHashMap<Long, List<Way>>();
 	private Map<Long, List<Way>> lowLevelWaysEnd = new LinkedHashMap<Long, List<Way>>();
 
@@ -1192,7 +1194,7 @@ public class IndexCreator {
 
 		
 		if (!skip) {
-			DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapObjStat, mapLocations, e, 
+			DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapObjStat, mapLocations, /*mapTree, */e,  
 					MapRenderingTypes.getEntityName(e), id,	type, false, point, BATCH_SIZE);
 		}
 	}
@@ -1313,6 +1315,12 @@ public class IndexCreator {
 			mapLocsStatLevel0 = DataIndexWriter.createStatementMapWaysLocationsInsert(mapConnection);
 			mapLocsStatLevel1 = DataIndexWriter.createStatementMapWaysLocationsInsertLevel2(mapConnection);
 			mapLocsStatLevel2 = DataIndexWriter.createStatementMapWaysLocationsInsertLevel3(mapConnection);
+//			try {
+//				mapTree = new RTree(mapFile.getAbsolutePath()+"_ind");
+//			} catch (RTreeException e) {
+//				// TODO
+//				e.printStackTrace();
+//			}
 			pStatements.put(mapObjStat, 0);
 			pStatements.put(mapLocsStatLevel0, 0);
 			pStatements.put(mapLocsStatLevel1, 0);
@@ -1464,7 +1472,6 @@ public class IndexCreator {
 		}
 		// 5. writing low level maps
 		if(indexMap){
-			// TODO level !!!
 			for(Long l : lowLevelWaysSt.keySet()){
 				for(Way w : lowLevelWaysSt.get(l)){
 					int level = (int) (w.getId() & 3);
@@ -1512,6 +1519,13 @@ public class IndexCreator {
 			if (mapConnection != null) {
 				mapConnection.commit();
 				mapConnection.close();
+//				try {
+//					mapTree.flush();
+//				} catch (RTreeException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+				
 				if (lastModifiedDate != null) {
 					mapFile.setLastModified(lastModifiedDate);
 				}
@@ -1543,7 +1557,7 @@ public class IndexCreator {
 		st.close();
 		dbConn.close();
 	}
-	// TODO steps
+	
 	 public static void main(String[] args) throws IOException, SAXException, SQLException {
 		
 		 IndexCreator creator = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
@@ -1551,12 +1565,27 @@ public class IndexCreator {
 		 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
-		  
+
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus_2010_09_03.osm.bz2"), new ConsoleProgressImplementation(3), null);
-		 
+
 		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
 		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);
+		 
+		/*try {
+//			RTree rtree = new RTree("e:/Information/OSM maps/osmand/Belarus_2010_09_03.map.odb_ind");
+//			new Pack().packTree(rtree, "e:/Information/OSM maps/osmand/pack.ind");
+			RTree rtree = new RTree("e:/Information/OSM maps/osmand/pack.ind");
+			long rootIndex = rtree.getFileHdr().getRootIndex();
+			int s = calculateSize(rtree.getReadNode(rootIndex), rtree, "!-");
+			System.out.println(s);
+		} catch (RTreeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		 
+		 
+
 		 
 		
 		 // download base 
@@ -1583,5 +1612,27 @@ public class IndexCreator {
 		}*/
 
 	}
-
+	/* 
+	 public static int calculateSize(rtree.Node n, RTree r, String level){
+		 Element[] e = n.getAllElements();
+		 int exc = 0; //20 + (169 - n.getTotalElements()) * 24;
+		 for(int i=0; i< n.getTotalElements(); i++){
+			 if(e[i].getElementType() == rtree.Node.LEAF_NODE){
+				 exc += 1;
+			 } else {
+//				 exc += 1;
+				 
+				 long ptr = ((NonLeafElement) e[i]).getPtr();
+				 try {
+					 rtree.Node ns = r.getReadNode(ptr);
+					 System.out.println(level + "   " +  ns.getTotalElements());
+					exc += calculateSize(ns, r, level +"-");
+				} catch (RTreeException e1) {
+					e1.printStackTrace();
+				}
+			 }
+		 }
+		 return exc;
+	 }
+	 */
 }

@@ -382,7 +382,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     @Override
     protected void onStart() {
     	super.onStart();
-    	
     }
     
     @Override
@@ -412,14 +411,14 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     
     
     private void registerUnregisterSensor(Location location){
-    	boolean show = currentShowingAngle || currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS;
+    	boolean show = (currentShowingAngle && location != null) || currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS;
     	// show point view only if gps enabled
-		if (sensorRegistered && (location == null || !show)) {
+		if (sensorRegistered && !show) {
 			Log.d(LogUtil.TAG, "Disable sensor"); //$NON-NLS-1$
 			((SensorManager) getSystemService(SENSOR_SERVICE)).unregisterListener(this);
 			sensorRegistered = false;
 			locationLayer.setHeading(null);
-		} else if (!sensorRegistered && (location != null && show)) {
+		} else if (!sensorRegistered && show) {
 			Log.d(LogUtil.TAG, "Enable sensor"); //$NON-NLS-1$
 			SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
 			Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ORIENTATION);
@@ -671,6 +670,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		locationLayer.setAppMode(OsmandSettings.getApplicationMode(this));
 		routingHelper.setAppMode(OsmandSettings.getApplicationMode(this));
 		mapView.setMapPosition(OsmandSettings.getPositionOnMap(this));
+		registerUnregisterSensor(getLastKnownLocation());
 		updateLayers();
 	}
 	
@@ -736,6 +736,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}
 		
 		updateApplicationModeSettings();
+		
 
 		favoritesLayer.reloadFavorites(this);
 		poiMapLayer.setFilter(OsmandSettings.getPoiFilterForMap(this, (OsmandApplication) getApplication()));
