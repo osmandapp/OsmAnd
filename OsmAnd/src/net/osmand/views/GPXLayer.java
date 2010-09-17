@@ -73,7 +73,7 @@ public class GPXLayer implements OsmandMapLayer {
 		}
 		int w = view.getWidth();
 		int h = view.getHeight();
-		boundsRect = new Rect(0, 0, w, h);
+		boundsRect = new Rect(-w / 2, -h / 2, 3 * w / 2, 3 * h / 2);
 		view.calculateTileRectangle(boundsRect, view.getCenterPointX(), view.getCenterPointY(), view.getXTile(), view.getYTile(),
 				tileRect);
 		double topLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), tileRect.top);
@@ -129,7 +129,7 @@ public class GPXLayer implements OsmandMapLayer {
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if(tok == XmlPullParser.START_TAG){
 					// currently not distinguish different point represents all as a line
-					if(parser.getName().equals("wpt") || parser.getName().equals("trkpt") || parser.getName().equals("rtept")){ //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					if(parser.getName().equals("wpt") || parser.getName().equals("trkpt") /*|| parser.getName().equals("rtept")*/){ //$NON-NLS-1$ //$NON-NLS-2$
 						try {
 							current = new Location("gpx_file"); //$NON-NLS-1$
 							current.setLatitude(Double.parseDouble(parser.getAttributeValue("", "lat"))); //$NON-NLS-1$ //$NON-NLS-2$
@@ -141,7 +141,7 @@ public class GPXLayer implements OsmandMapLayer {
 					}
 				} else if(tok == XmlPullParser.END_TAG){
 					if(parser.getName().equals("wpt") ||  //$NON-NLS-1$
-							parser.getName().equals("trkpt") || parser.getName().equals("rtept")){ //$NON-NLS-1$ //$NON-NLS-2$
+							parser.getName().equals("trkpt") /*|| parser.getName().equals("rtept")*/){ //$NON-NLS-1$ 
 						if(current != null){
 							locations.add(current);
 						}
