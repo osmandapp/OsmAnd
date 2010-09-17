@@ -30,6 +30,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.RectF;
 import android.os.Environment;
 
 /**
@@ -527,11 +528,13 @@ public class ResourceManager {
 	}
 	
 	////////////////////////////////////////////// Working with map ////////////////////////////////////////////////
-	public void updateRendererIfNeeded(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, float rotate){
-		if(!renderer.updateMapIsNotNeeded(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, rotate)){
-			asyncLoadingTiles.requestToLoadMap(
-					new MapLoadRequest(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, rotate));
-		}
+	public boolean updateRenderedMapNeeded(RectF tilesRect, int zoom, float rotate){
+		return renderer.updateMapIsNeeded(tilesRect, zoom, rotate);
+	}
+	
+	public void updateRendererMap(RectF tileRect, RectF boundsTileRect, int zoom, float rotate){
+		asyncLoadingTiles.requestToLoadMap(
+				new MapLoadRequest(tileRect, boundsTileRect, zoom, rotate));
 	}
 	
 	public MapRenderRepositories getRenderer() {
@@ -677,20 +680,15 @@ public class ResourceManager {
 	}
 	
 	private static class MapLoadRequest {
-		public final double topLatitude;
-		public final double bottomLatitude;
-		public final double leftLongitude;
-		public final double rightLongitude;
+		public final RectF tileRect;
+		public final RectF boundsTileRect;
 		public final int zoom;
 		public final float rotate;
 		
-		public MapLoadRequest(double topLatitude, double leftLongitude, 
-				double bottomLatitude, double rightLongitude, int zoom, float rotate) {
+		public MapLoadRequest(RectF tileRect,  RectF boundsTileRect, int zoom, float rotate) {
 			super();
-			this.bottomLatitude = bottomLatitude;
-			this.leftLongitude = leftLongitude;
-			this.rightLongitude = rightLongitude;
-			this.topLatitude = topLatitude;
+			this.tileRect = tileRect;
+			this.boundsTileRect = boundsTileRect;
 			this.zoom = zoom;
 			this.rotate = rotate;
 		}
@@ -735,7 +733,7 @@ public class ResourceManager {
 						} else if(req instanceof MapLoadRequest){
 							if(!mapLoaded){
 								MapLoadRequest r = (MapLoadRequest) req;
-								renderer.loadMap(r.topLatitude, r.leftLongitude, r.bottomLatitude, r.rightLongitude, r.zoom, r.rotate);
+								renderer.loadMap(r.tileRect, r.boundsTileRect, r.zoom, r.rotate);
 								mapLoaded = true;
 							}
 						}

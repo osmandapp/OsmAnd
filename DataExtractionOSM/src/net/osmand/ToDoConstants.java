@@ -8,7 +8,7 @@ package net.osmand;
 public class ToDoConstants {
 	
 	// TODO swing
-	// ! 12. Reinvent UI of swing app (remove Region object and clear other MapObject) use indexes to show results
+	// !!! 12. Reinvent UI of swing app (remove Region object and clear other MapObject) use indexes to show results
 	
 	// TODO max 87
 	//  ! 81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
@@ -20,23 +20,31 @@ public class ToDoConstants {
 	//   89. Transport redesign UI (enable run from context menu, switch go to goal/not) !
 	//   90. Use Junidecode library on the client for fast english translation
 	
+	//   91. Invent binary format (minimize disk space, maximize speed) 
+	//   92. Replace poi index with standard map index and unify POI categories
+	//   93. Implement multytype vector objects (?) - building with fence, road & tram ... (binary format)
+	
 	// TODO small improvements for release :
 	// 1. If select vector map, notice if there are no loaded maps. 
 	
-	// TODO Improvements:
+	// TODO Improvements :
 	//  1! VELCOM
-	//  2. rotate map gps without location
+	//  +2. rotate map gps without location
 	//  4. recalculating route when location is far from ! (error)
 	//  5. keyboard (issue 43 )?
 	//  6. Do not upload empty files (transport, poi... ). 
 	//  7. Implement auto-delete from site (done, should be ported from C#)
 	//  8. In all places verify to use float lat/lon improve disk space for indexes !!!
-	//  13! Support multiple database for map rendering
-	//+ 15. Draw layers -> icons -> text. See intersects of double streets.
+	
+	//  +13! Support multiple database for map rendering
 	//  16. Internet access bits
-	//  17. Implement multipolygons to polygons
-	// TODO colors for road trunk and motorway
+	//  17. Implement multipolygons to polygons (!?) + coastline
+	//  18. Fix loading map data in rotated mode (check properly boundaries)   
+	//  20. Add text to rendering (area, point, polyline)
+	//  21. Shield, ref.
+	//  22. Verify all POI has a point_type (in order to search them)
 
+	//  19. colors for road trunk and motorway
 	//  12. Fix : find proper location for streets ! centralize them (when create index)?
 	
 	// TODO Check 

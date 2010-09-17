@@ -11,7 +11,6 @@ import java.util.Map;
 import net.osmand.LogUtil;
 import net.osmand.osm.MapRenderObject;
 import net.osmand.osm.MapRenderingTypes;
-import net.osmand.osm.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -41,9 +40,14 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	
 	private TextPaint paintText;
 	private Paint paint;
+	
+	private Paint paintShield;
+	
 	private Paint paintFillEmpty;
 	private Paint paintIcon;
+	private float[] hsv = new float[3];
 	
+	public static final int TILE_SIZE = 256; 
 	
 	/// Colors
 	private int clFillScreen = Color.rgb(241, 238, 232);
@@ -66,6 +70,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		int textColor = Color.BLACK;
 		int textShadow = 0;
 		int textWrap = 0;
+		boolean shield = false;
 	}
 	
 	private static class IconDrawInfo {
@@ -78,14 +83,12 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		List<TextDrawInfo> textToDraw = new ArrayList<TextDrawInfo>();
 		List<IconDrawInfo> iconsToDraw = new ArrayList<IconDrawInfo>();
 		float leftX;
-		float rightX;
-		float bottomY;
 		float topY;
+		int width;
+		int height;
 		
 		int zoom;
 		float rotate;
-		float cosRotate;
-		float sinRotate;
 		float tileDivisor;
 		
 		// debug purpose
@@ -94,6 +97,8 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		
 		// use to calculate points
 		PointF tempPoint = new PointF();
+		float cosRotate;
+		float sinRotate;
 
 		
 		// polyline props
@@ -166,6 +171,10 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		paint = new Paint();
 		paint.setAntiAlias(true);
 		
+		paintShield = new Paint();
+		paintShield.setAntiAlias(true);
+		
+		
 		paintFillEmpty = new Paint();
 		paintFillEmpty.setStyle(Style.FILL);
 		paintFillEmpty.setColor(clFillScreen);
@@ -202,30 +211,30 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	
 	
 	
-	public Bitmap generateNewBitmap(RectF objectLoc, List<MapRenderObject> objects, int zoom, float rotate) {
+	public Bitmap generateNewBitmap(int width, int height, float leftTileX, float topTileY, 
+			List<MapRenderObject> objects, int zoom, float rotate) {
 		long now = System.currentTimeMillis();
 		
 		Collections.sort(objects, this);
 		Bitmap bmp = null; 
-		if (objects != null && !objects.isEmpty() && objectLoc.width() != 0f && objectLoc.height() != 0f) {
+		if (objects != null && !objects.isEmpty() && width > 0 && height > 0) {
 			// init rendering context
 			RenderingContext rc = new RenderingContext();
-			rc.leftX = (float) MapUtils.getTileNumberX(zoom, objectLoc.left);
-			rc.rightX = (float) MapUtils.getTileNumberX(zoom, objectLoc.right);
-			rc.topY = (float) MapUtils.getTileNumberY(zoom, objectLoc.top);
-			rc.bottomY = (float) MapUtils.getTileNumberY(zoom, objectLoc.bottom);
+			rc.leftX = leftTileX;
+			rc.topY = topTileY;
 			rc.zoom = zoom;
 			rc.rotate = rotate;
+			rc.width = width;
+			rc.height = height;
+			rc.tileDivisor = (int) (1 << (31 - zoom));
 			rc.cosRotate = FloatMath.cos((float) Math.toRadians(rotate));
 			rc.sinRotate = FloatMath.sin((float) Math.toRadians(rotate));
-			rc.tileDivisor = (int) (1 << (31 - zoom));
+			bmp = Bitmap.createBitmap(width, height, Config.RGB_565);
 			
-			bmp = Bitmap.createBitmap((int) ((rc.rightX - rc.leftX) * 256), (int) ((rc.bottomY - rc.topY) * 256), Config.RGB_565);
 			Canvas cv = new Canvas(bmp);
 			cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillEmpty);
-			cv.rotate(-rotate);
-			for (MapRenderObject w : objects) {
-				draw(w, cv, rc);
+			for (MapRenderObject o : objects) {
+				draw(o, cv, rc);
 			}
 			for(IconDrawInfo icon : rc.iconsToDraw){
 				if(icon.resId != 0){
@@ -256,7 +265,8 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				paintText.setColor(text.textColor);
 				RectF bounds = new RectF();
 				float mes = paintText.measureText(text.text);
-				if((text.pathRotate > 45 && text.pathRotate < 135) || (text.pathRotate > 225 && text.pathRotate < 315)){
+				if(text.drawOnPath == null || 
+						(text.pathRotate > 45 && text.pathRotate < 135) || (text.pathRotate > 225 && text.pathRotate < 315)){
 					bounds.set(text.centerX - mes / 2, text.centerY - 3 * text.textSize / 2,
 							text.centerX + mes / 2, text.centerY + 3 * text.textSize / 2);
 				} else {
@@ -274,8 +284,25 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					}
 				}
 				boundsIntersect.add(bounds);
+				paintText.setFakeBoldText(false);
 				if(text.drawOnPath != null){
 					cv.drawTextOnPath(text.text, text.drawOnPath, 0, text.vOffset, paintText);
+				} else if(text.shield){
+					bounds.set(text.centerX - mes / 2 - 4, text.centerY - text.textSize,
+							text.centerX + mes / 2 + 4, text.centerY + text.textSize / 2);
+					paintShield.setStyle(Style.STROKE);
+					paintShield.setColor(Color.WHITE);
+					paintShield.setStrokeWidth(3);
+					cv.drawOval(bounds, paintShield);
+					
+					paintShield.setStyle(Style.FILL);
+					Color.colorToHSV(paintText.getColor(), hsv);
+					hsv[2] *= 0.85;
+					paintShield.setColor(Color.HSVToColor(hsv));
+					cv.drawOval(bounds, paintShield);
+					paintText.setFakeBoldText(true);
+					paintText.setColor(Color.WHITE);
+					cv.drawText(text.text, text.centerX, text.centerY + 3, paintText);
 				} else {
 					cv.drawText(text.text, text.centerX, text.centerY, paintText);
 				}
@@ -314,14 +341,18 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		rc.pointCount ++;
 		float tx = o.getPoint31XTile(ind) / rc.tileDivisor;
 		float ty = o.getPoint31YTile(ind) / rc.tileDivisor;
-		if(tx >= rc.leftX && tx <= rc.rightX && ty >= rc.topY && ty <= rc.bottomY){
-			rc.pointInsideCount++;
-		}
 		float dTileX =  tx - rc.leftX;
 		float dTileY = ty - rc.topY;
-		float x = (rc.cosRotate * dTileX - rc.sinRotate * dTileY) * 256f ;
-		float y = (rc.sinRotate * dTileX + rc.cosRotate * dTileY) * 256f ;
+		float x = (rc.cosRotate * dTileX - rc.sinRotate * dTileY) * TILE_SIZE ;
+		float y = (rc.sinRotate * dTileX + rc.cosRotate * dTileY) * TILE_SIZE ;
 		rc.tempPoint.set(x, y);
+//		rc.tempPoint.set(dTileX * TILE_SIZE, dTileY * TILE_SIZE);
+		if(rc.tempPoint.x >= 0 && rc.tempPoint.x < rc.width && 
+				rc.tempPoint.y >= 0 && rc.tempPoint.y < rc.height){
+			rc.pointInsideCount++;
+		}
+		
+		
 		
 		return rc.tempPoint;
 	}
@@ -605,6 +636,17 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					text.textSize = w;
 					text.vOffset = rc.main.strokeWidth / 2 - 1;
 					rc.textToDraw.add(text);
+					if(text.text.startsWith(MapRenderingTypes.REF_CHAR)){
+						if(text.text.length() > 5){
+							text.text = text.text.substring(1, 5);
+						} else {
+							text.text = text.text.substring(1);
+						}
+						text.textColor = rc.second.strokeWidth != 0 ? rc.second.color : rc.main.color;
+						text.shield = true;
+						text.drawOnPath = null;
+					}
+
 				}
 			}
 		}

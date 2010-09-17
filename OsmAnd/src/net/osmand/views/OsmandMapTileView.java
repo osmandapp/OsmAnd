@@ -646,6 +646,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return (FloatMath.cos(rad) * dTileX - FloatMath.sin(rad) * dTileY) * getTileSize() ;
 	}
 	
+	
 	/**
 	 * These methods do not consider rotating
 	 */

@@ -47,6 +47,8 @@ public class MapRenderingTypes {
 	public final static int MASK_4 = (1 << 4) - 1;
 	public final static int MASK_10 = (1 << 10) - 1;
 	
+	public final static String REF_CHAR = ((char)0x0019)+""; //$NON-NLS-1$
+	
 
 	// TODO !!! add others facilities to all types
 	// TODO Internet access bits for point
@@ -422,9 +424,16 @@ public class MapRenderingTypes {
 		return (attr & 3) == 1;
 	}
 	
-	public static String getEntityName(Entity e){
+	public static String getEntityName(Entity e) {
+		if (e.getTag(OSMTagKey.REF) != null) {
+			String ref = e.getTag(OSMTagKey.REF);
+			if (ref.length() > 5 && ref.indexOf('_') != -1) {
+				ref = ref.substring(0, ref.indexOf('_'));
+			}
+			return REF_CHAR + ref;
+		}
 		String name = e.getTag(OSMTagKey.NAME);
-		if(name == null){
+		if (name == null) {
 			name = e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER);
 		}
 		return name;
