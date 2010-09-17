@@ -30,7 +30,6 @@ public class RouteLayer implements OsmandMapLayer {
 	private Paint paint;
 
 	private Path path;
-	private float pathBearing;
 	
 	public RouteLayer(RoutingHelper helper){
 		this.helper = helper;
@@ -92,9 +91,9 @@ public class RouteLayer implements OsmandMapLayer {
 					Location o = points.get(i);
 					int x = view.getMapXForPoint(o.getLongitude());
 					int y = view.getMapYForPoint(o.getLatitude());
-					if (i == 1) {
-						pathBearing = (float) (Math.atan2(y - py, x - px) / Math.PI * 180);
-					}
+//					if (i == 1) {
+//						pathBearing = (float) (Math.atan2(y - py, x - px) / Math.PI * 180);
+//					}
 					path.lineTo(x, y);
 				}
 				canvas.drawPath(path, paint);
@@ -110,10 +109,6 @@ public class RouteLayer implements OsmandMapLayer {
 	// to show further direction
 	public Path getPath() {
 		return path;
-	}
-	
-	public float getPathBearing(){
-		return pathBearing;
 	}
 
 	

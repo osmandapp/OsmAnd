@@ -1,0 +1,198 @@
+<Text>
+
+<Style name="way_numbers">
+    <Rule>
+      &maxscale_zoom17;
+      <TextSymbolizer name="addr:housenumber" fontset_name="book-fonts" size="9" fill="#444" dy="0" wrap_width="0"/>
+    </Rule>
+</Style>
+<Style name="node_numbers">
+    <Rule>
+      &maxscale_zoom17;
+      <TextSymbolizer name="addr:housenumber" fontset_name="book-fonts" size="9" fill="#444" dy="0" wrap_width="0"/>
+    </Rule>
+</Style>
+
+<Style name="area-text">
+    <Rule>
+      <Filter>[way_area] &gt;= 150000</Filter>
+      &maxscale_zoom14;
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="10" fill="#000033" halo_radius="1" wrap_width="20"/>
+    </Rule>
+    <Rule>
+      <Filter>[way_area] &gt;= 80000 and [way_area] &lt; 150000</Filter>
+      &maxscale_zoom15;
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="10" fill="#000033" halo_radius="1" wrap_width="20"/>
+    </Rule>
+    <Rule>
+      <Filter>[way_area] &gt;= 20000 and [way_area] &lt; 80000</Filter>
+      &maxscale_zoom16;
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="10" fill="#000033" halo_radius="1" wrap_width="20"/>
+    </Rule>
+    <Rule>
+      <Filter>[way_area] &lt; 20000</Filter>
+      &maxscale_zoom17;
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="10" fill="#000033" halo_radius="1" wrap_width="20"/>
+    </Rule>
+</Style>
+
+<Style>
+    <Rule>
+      &maxscale_zoom14;
+      &minscale_zoom14;
+      <Filter>[railway]='halt' or [railway]='tram_stop' or [aerialway]='station'</Filter>
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="8" fill="#66f" dy="-8" halo_radius="1" wrap_width="0"/>
+    </Rule>
+    <Rule>
+      &maxscale_zoom15;
+      <Filter>[railway] ='halt' or [railway]='tram_stop' or [aerialway]='station'</Filter>
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="10" fill="#66f" dy="-10" halo_radius="1" wrap_width="0"/>
+    </Rule>
+    <Rule>
+      &maxscale_zoom14;
+      &minscale_zoom14;
+      <Filter>[railway]='station' and not [disused]='yes'</Filter>
+      <TextSymbolizer name="name" fontset_name="bold-fonts" size="9" fill="#66f" dy="-8" halo_radius="1" wrap_width="0"/>
+    </Rule>
+    <Rule>
+      &maxscale_zoom15;
+      <Filter>[railway]='station' and not [disused]='yes'</Filter>
+      <TextSymbolizer name="name" fontset_name="bold-fonts" size="11" fill="#66f" dy="-10" halo_radius="1" wrap_width="0"/>
+    </Rule>
+    <Rule>
+      &maxscale_zoom15;
+      <Filter>[railway]='station' and [disused]='yes'</Filter>
+      <TextSymbolizer name="name" fontset_name="bold-fonts" size="9" fill="grey" dy="-9" halo_radius="1" wrap_width="0"/>
+    </Rule>
+</Style>
+
+<Style name="symbols">
+    <Rule>
+      &maxscale_zoom9;
+      &minscale_zoom10;
+      <Filter>[aeroway]='airport'</Filter>
+      <PointSymbolizer file="&symbols;/airport.p.16.png" />
+      <TextSymbolizer name="name" fontset_name="bold-fonts" size="8" fill="#6692da" dy="-12" halo_radius="1" wrap_width="0"/>
+    </Rule>
+    <Rule>
+      &maxscale_zoom11;
+      &minscale_zoom12;
+      <Filter>[aeroway]='airport'</Filter>
+      <TextSymbolizer name="name" fontset_name="bold-fonts" size="9" fill="#6692da" halo_radius="1" wrap_width="0"/>
+    </Rule>
+    <Rule>
+      &maxscale_zoom10;
+      &minscale_zoom10;
+      <Filter>[aeroway]='aerodrome'</Filter>
+      <PointSymbolizer file="&symbols;/aerodrome.p.16.png" />
+      <TextSymbolizer name="name" fontset_name="oblique-fonts" size="8" fill="#6692da" dy="-12" halo_radius="1" wrap_width="0"/>
+    </Rule>
+    <Rule>
+      &maxscale_zoom11;
+      &minscale_zoom12;
+      <Filter>[aeroway]='aerodrome'</Filter>
+      <TextSymbolizer name="name" fontset_name="oblique-fonts" size="8" fill="#6692da" halo_radius="1" wrap_width="0"/>
+    </Rule>
+</Style>
+
+<Style name="dam">
+    <Rule>
+      &maxscale_zoom15;
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="8" fill="#222" halo_radius="1"/>
+    </Rule>
+</Style>
+
+
+<Style name="water_lines">
+
+    <Rule>
+      <Filter>[waterway]='canal' and not [disused]='yes'</Filter>
+      &maxscale_zoom13;
+      &minscale_zoom13;
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="8" fill="#6699cc" halo_radius="1" placement="line"/>
+    </Rule>
+    
+    <Rule>
+      <Filter>[waterway]='river' and [tunnel] = 'yes'</Filter>
+      &maxscale_zoom14;
+      &minscale_zoom14;
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="10" fill="#6699cc" halo_radius="1" placement="line" min_distance="200"/>
+    </Rule><Rule>
+      <Filter>[waterway]='river' and [tunnel] = 'yes'</Filter>
+      &maxscale_zoom15;
+      &minscale_zoom16;
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="10" fill="#6699cc" halo_radius="1" placement="line" min_distance="200"/>
+    </Rule>
+    <Rule>
+      <Filter>[waterway]='river' and [tunnel] = 'yes'</Filter>
+      &maxscale_zoom17;
+      &minscale_zoom17;
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="10" fill="#6699cc" halo_radius="1" placement="line" min_distance="200"/>
+    </Rule>
+    <Rule>
+      <Filter>[waterway]='river' and [tunnel] = 'yes'</Filter>
+      &maxscale_zoom18;
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="10" fill="#6699cc" halo_radius="1" placement="line" min_distance="200"/>
+    </Rule>
+    <Rule>
+      <Filter>[waterway]='canal' and [tunnel] = 'yes'</Filter>
+      &maxscale_zoom14;
+      &minscale_zoom16;
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="9" fill="#6699cc" halo_radius="1" placement="line"/>
+    </Rule>
+    <Rule>
+      <Filter>[waterway]='canal' and not ([tunnel] = 'yes' or [disused]='yes')</Filter>
+      &maxscale_zoom14;
+      &minscale_zoom16;
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="9" fill="#6699cc" halo_radius="1" placement="line"/>
+    </Rule>
+    <Rule>
+      <Filter>[waterway]='canal' and [tunnel] = 'yes'</Filter>
+      &maxscale_zoom17;
+      &minscale_zoom18;
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="9" fill="#6699cc" halo_radius="1" placement="line"/>
+    </Rule>
+    <Rule>
+      <Filter>[waterway]='canal' and not ([tunnel] = 'yes' or [disused]='yes' or [lock]='yes')</Filter>
+      &maxscale_zoom17;
+      &minscale_zoom18;
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="9" fill="#6699cc" halo_radius="1" placement="line"/>
+    </Rule>
+    <Rule>
+      <Filter>[waterway]='canal' and not ([tunnel] = 'yes' or [disused]='yes') and [lock]='yes'</Filter>
+      &maxscale_zoom17;
+      &minscale_zoom18;
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="9" fill="#6699cc" halo_radius="1" wrap_width="20"/>
+    </Rule>
+    
+    <Rule>
+      <Filter>[waterway]='derelict_canal' or ([waterway]='canal' and [disused]='yes')</Filter>
+      &maxscale_zoom13;
+      &minscale_zoom13;
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="9" fill="#80d1ae" halo_radius="1" spacing="600" placement="line"/>
+    </Rule>
+    <Rule>
+      <Filter>[waterway]='derelict_canal' or ([waterway]='canal' and [disused]='yes')</Filter>
+      &maxscale_zoom14;
+      &minscale_zoom18;
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="10" fill="#80d1ae" halo_radius="1" spacing="600" placement="line"/>
+    </Rule>
+    
+    <Rule>
+      <Filter>[waterway]='stream' and not [tunnel]='yes'</Filter>
+      &maxscale_zoom15;
+      &minscale_zoom18;
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="8" fill="#6699cc" halo_radius="1" spacing="600" placement="line"/>
+    </Rule>
+    
+    <Rule>
+      <Filter>([waterway]='drain' or [waterway]='ditch') and not [tunnel]='yes'</Filter>
+      &maxscale_zoom15;
+      &minscale_zoom18;
+      <TextSymbolizer name="name" fontset_name="book-fonts" size="8" fill="#6699cc" halo_radius="1" spacing="600" placement="line"/>
+    </Rule>
+
+</Style>
+
+ 
+</Text>
