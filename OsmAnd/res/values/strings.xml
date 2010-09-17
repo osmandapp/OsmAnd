@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="gpx_files_not_found">GPX files were not found in /osmand/tracks directory</string>
+	<string name="layer_gpx_layer">GPX tracks</string>
+	<string name="error_reading_gpx">Error reading gpx data</string>
+
 	<string name="vector_data">Vector osm maps</string>
 	<string name="transport_context_menu">Search transport at stop</string>
 	<string name="point_on_map">Point on map\n Lat {0,number,#.####} lon {1,number,#.####}</string>

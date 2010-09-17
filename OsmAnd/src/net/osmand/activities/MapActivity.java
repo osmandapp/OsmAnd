@@ -1,8 +1,10 @@
 package net.osmand.activities;
 
+import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +37,7 @@ import net.osmand.render.RendererLayer;
 import net.osmand.views.AnimateDraggingMapThread;
 import net.osmand.views.ContextMenuLayer;
 import net.osmand.views.FavoritesLayer;
+import net.osmand.views.GPXLayer;
 import net.osmand.views.MapInfoLayer;
 import net.osmand.views.OsmBugsLayer;
 import net.osmand.views.OsmandMapTileView;
@@ -120,6 +123,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	
 	// the order of layer should be preserved ! when you are inserting new layer
 	private RendererLayer rendererLayer;
+	private GPXLayer gpxLayer;
 	private RouteLayer routeLayer;
 	private YandexTrafficLayer trafficLayer;
 	private OsmBugsLayer osmBugsLayer;
@@ -207,6 +211,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		// 0.5 layer
 		rendererLayer = new RendererLayer();
 		mapView.addLayer(rendererLayer, 0.5f);
+		
+		// 0.6 gpx layer
+		gpxLayer = new GPXLayer();
+		mapView.addLayer(gpxLayer, 0.6f);
 		
 		// 1. route layer
 		routeLayer = new RouteLayer(routingHelper);
@@ -1189,6 +1197,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		layersList.add(getString(R.string.layer_transport));
 		layersList.add(getString(R.string.layer_osm_bugs));
 		layersList.add(getString(R.string.layer_favorites));
+		layersList.add(getString(R.string.layer_gpx_layer));
 		final int routeInfoInd = routeInfoLayer.couldBeVisible() ? layersList.size() : -1;
 		if(routeInfoLayer.couldBeVisible()){
 			layersList.add(getString(R.string.layer_route));
@@ -1206,6 +1215,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		selected[2] = OsmandSettings.isShowingTransportOverMap(this);
 		selected[3] = OsmandSettings.isShowingOsmBugs(this);
 		selected[4] = OsmandSettings.isShowingFavorites(this);
+		selected[5] = gpxLayer.isVisible();
 		selected[trafficInd] = trafficLayer.isVisible();
 		if(routeInfoInd != -1){
 			selected[routeInfoInd] = routeInfoLayer.isUserDefinedVisible(); 
@@ -1233,6 +1243,13 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					OsmandSettings.setShowingOsmBugs(MapActivity.this, isChecked);
 				} else if(item == 4){
 					OsmandSettings.setShowingFavorites(MapActivity.this, isChecked);
+				} else if(item == 5){
+					if(gpxLayer.isVisible()){
+						gpxLayer.clearCurrentGPX();
+					} else {
+						dialog.dismiss();
+						selectGPXFileLayer();
+					}
 				} else if(item == routeInfoInd){
 					routeInfoLayer.setVisible(isChecked);
 				} else if(item == transportRouteInfoInd){
@@ -1247,6 +1264,72 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		builder.show();
 	}
 	
+	private void selectGPXFileLayer() {
+		final List<String> list = new ArrayList<String>();
+		final File dir = new File(Environment.getExternalStorageDirectory(), ResourceManager.APP_DIR + SavingTrackHelper.TRACKS_PATH);
+		if (dir != null && dir.canRead()) {
+			File[] files = dir.listFiles();
+			if (files != null) {
+				Arrays.sort(files, new Comparator<File>() {
+					@Override
+					public int compare(File object1, File object2) {
+						if (object1.lastModified() > object2.lastModified()) {
+							return -1;
+						} else if (object1.lastModified() == object2.lastModified()) {
+							return 0;
+						}
+						return 1;
+					}
+
+				});
+
+				for (File f : files) {
+					if (f.getName().endsWith(".gpx")) { //$NON-NLS-1$
+						list.add(f.getName());
+					}
+				}
+			}
+		}
+		
+		if(list.isEmpty()){
+			Toast.makeText(this, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
+		} else {
+			Builder builder = new AlertDialog.Builder(this);
+			builder.setItems(list.toArray(new String[list.size()]), new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+					final ProgressDialog dlg = ProgressDialog.show(MapActivity.this, getString(R.string.loading),
+							getString(R.string.loading_data));
+					final File f = new File(dir, list.get(which));
+					new Thread(new Runnable() {
+						@Override
+						public void run() {
+							
+							final String error = gpxLayer.showGPXFile(f);
+							if (error != null) {
+								runOnUiThread(new Runnable() {
+									@Override
+									public void run() {
+										Toast.makeText(MapActivity.this, error, Toast.LENGTH_LONG).show();
+									}
+								});
+
+							}
+							dlg.dismiss();
+							mapView.refreshMap();
+
+						}
+					}, "Loading gpx").start(); //$NON-NLS-1$
+				}
+
+			});
+			builder.show();
+		}
+		
+	}	
+		
 	private void selectPOIFilterLayer(){
 		final List<PoiFilter> userDefined = new ArrayList<PoiFilter>();
 		List<String> list = new ArrayList<String>();

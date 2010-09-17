@@ -16,9 +16,10 @@ public class ToDoConstants {
 	//  railway( station, subway?) - issue 17
 	//   86. Allow to add/edit custom tags to POI objects.
 	//   87. Use network availability for defining loading tiles from internet.
-	//   88. Implement show gpx track from folder and navigate using gpx track.
+
 	//   89. Transport redesign UI (enable run from context menu, switch go to goal/not) !
 	//   90. Use Junidecode library on the client for fast english translation
+	//   94. Implement navigate using selected gpx track
 	
 	//   91. Invent binary format (minimize disk space, maximize speed) 
 	//   92. Replace poi index with standard map index and unify POI categories
@@ -40,7 +41,8 @@ public class ToDoConstants {
 	//  16. Internet access bits
 	//  17. Implement multipolygons to polygons (!?) + coastline
 	//  18. Fix loading map data in rotated mode (check properly boundaries)   
-	//  20. Add text to rendering (area, point, polyline)
+	//  20. Add text to rendering (area, point, polyline) 
+	//			features_text.xml, main_text.xml, layer-placenames.xml.inc
 	//  21. Shield, ref.
 	//  22. Verify all POI has a point_type (in order to search them)
 
@@ -70,6 +72,7 @@ public class ToDoConstants {
 	//	  (Not needed, because of vector rendering)
 	// 82. Rotate map according compass
 	// 85. Remove context menu on long press map ! Accumulate actions and show label (+)
+	// 88. Implement show gpx track from folder
 	
 	// DONE SWING
  	// 10. Improve address indexing (use relations). (+)
