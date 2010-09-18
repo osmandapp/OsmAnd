@@ -40,6 +40,7 @@ public class RoutingHelper {
 	
 	private boolean isFollowingMode = false;
 	
+	private List<Location> currentGPXRoute = null;
 	// instead of this properties RouteCalculationResult could be used
 	private List<Location> routeNodes = new ArrayList<Location>();
 	private List<RouteDirectionInfo> directionInfo = null;
@@ -93,18 +94,28 @@ public class RoutingHelper {
 		this.isFollowingMode = isFollowingMode;
 	}
 	
-	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, Location currentLocation){
+	
+	public void setFinalAndCurrentLocation(LatLon finalLocation, Location currentLocation){
+		setFinalAndCurrentLocation(finalLocation, currentLocation, null);
+	}
+	
+	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, Location currentLocation, List<Location> gpxRoute){
 		this.finalLocation = finalLocation;
 		this.routeNodes.clear();
 		listDistance = null;
 		directionInfo = null;
 		evalWaitInterval = 3000;
+		currentGPXRoute = gpxRoute;
 		for(IRouteInformationListener l : listeners){
 			l.routeWasCancelled();
 		}
 		// to update route
 		setCurrentLocation(currentLocation);
 		
+	}
+	
+	public List<Location> getCurrentGPXRoute() {
+		return currentGPXRoute;
 	}
 	
 	public void setFinalLocation(LatLon finalLocation){
@@ -326,7 +337,7 @@ public class RoutingHelper {
 
 		lastFixedLocation = currentLocation;
 		if(calculateRoute){
-			calculateRoute(lastFixedLocation, finalLocation);
+			calculateRoute(lastFixedLocation, finalLocation, currentGPXRoute);
 		}
 	}
 	
@@ -422,7 +433,7 @@ public class RoutingHelper {
 		return 0;
 	}
 	
-	public void calculateRoute(final Location start, final LatLon end){
+	public void calculateRoute(final Location start, final LatLon end, final List<Location> currentGPXRoute){
 		final RouteService service = OsmandSettings.getRouterService(context);
 		if(currentRunningJob == null){
 			// do not evaluate very often
@@ -431,7 +442,7 @@ public class RoutingHelper {
 					currentRunningJob = new Thread(new Runnable() {
 						@Override
 						public void run() {
-							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context);
+							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, currentGPXRoute);
 							synchronized (RoutingHelper.this) {
 								if (res.isCalculated()) {
 									setNewRoute(res);
@@ -439,30 +450,31 @@ public class RoutingHelper {
 									evalWaitInterval = 3000;
 								} else {
 									evalWaitInterval = evalWaitInterval * 4 / 3;
-									if(evalWaitInterval > 120000){
-										evalWaitInterval  = 120000;
+									if (evalWaitInterval > 120000) {
+										evalWaitInterval = 120000;
 									}
 								}
 								currentRunningJob = null;
 							}
-							
-								if (res.isCalculated()) {
-									int[] dist = res.getListDistance();
-									int l = dist != null && dist.length > 0 ? dist[0] : 0;
-									showMessage(context.getString(R.string.new_route_calculated_dist) +" : "+ MapUtils.getFormattedDistance(l)); //$NON-NLS-1$
-									if (uiActivity instanceof MapActivity) {
-										// be aware that is non ui thread
-										((MapActivity) uiActivity).getMapView().refreshMap();
-									}
-								} else {
-									if (res.getErrorMessage() != null) {
-										showMessage(context.getString(R.string.error_calculating_route)+" : " + res.getErrorMessage()); //$NON-NLS-1$
-									} else if (res.getLocations() == null) {
-										showMessage(context.getString(R.string.error_calculating_route_occured));
-									} else {
-										showMessage(context.getString(R.string.empty_route_calculated));
-									}
+
+							if (res.isCalculated()) {
+								int[] dist = res.getListDistance();
+								int l = dist != null && dist.length > 0 ? dist[0] : 0;
+								showMessage(context.getString(R.string.new_route_calculated_dist)
+										+ " : " + MapUtils.getFormattedDistance(l)); //$NON-NLS-1$
+								if (uiActivity instanceof MapActivity) {
+									// be aware that is non ui thread
+									((MapActivity) uiActivity).getMapView().refreshMap();
 								}
+							} else {
+								if (res.getErrorMessage() != null) {
+									showMessage(context.getString(R.string.error_calculating_route) + " : " + res.getErrorMessage()); //$NON-NLS-1$
+								} else if (res.getLocations() == null) {
+									showMessage(context.getString(R.string.error_calculating_route_occured));
+								} else {
+									showMessage(context.getString(R.string.empty_route_calculated));
+								}
+							}
 							lastTimeEvaluatedRoute = System.currentTimeMillis();
 						}
 					}, "Calculating route"); //$NON-NLS-1$

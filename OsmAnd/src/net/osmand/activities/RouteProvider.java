@@ -160,7 +160,8 @@ public class RouteProvider {
 		
 	}
 
-	public RouteCalculationResult calculateRouteImpl(Location start, LatLon end, ApplicationMode mode, RouteService type, Context ctx){
+	public RouteCalculationResult calculateRouteImpl(Location start, LatLon end, ApplicationMode mode, RouteService type, Context ctx,
+			List<Location> gpxRoute){
 		long time = System.currentTimeMillis();
 		if (start != null && end != null) {
 			if(log.isInfoEnabled()){
@@ -168,7 +169,36 @@ public class RouteProvider {
 			}
 			try {
 				RouteCalculationResult res;
-				if (type == RouteService.YOURS) {
+				if(gpxRoute != null && !gpxRoute.isEmpty()){
+					// get the closest point to start and to end
+					float minDist = Integer.MAX_VALUE;
+					int startI = 0;
+					int endI = gpxRoute.size(); 
+					if (start != null) {
+						for (int i = 0; i < gpxRoute.size(); i++) {
+							float d = gpxRoute.get(i).distanceTo(start);
+							if (d < minDist) {
+								startI = i;
+								minDist = d;
+							}
+						}
+					} else {
+						start = gpxRoute.get(0);
+					}
+					Location l = new Location("temp"); //$NON-NLS-1$
+					l.setLatitude(end.getLatitude());
+					l.setLongitude(end.getLongitude());
+					minDist = Integer.MAX_VALUE;
+					for (int i = 0; i < gpxRoute.size(); i++) {
+						float d = gpxRoute.get(i).distanceTo(l);
+						if (d < minDist) {
+							endI = i + 1;
+							minDist = d;
+						}
+					}
+					res = new RouteCalculationResult(gpxRoute.subList(startI, endI), null, start, end, null);
+					addMissingTurnsToRoute(res, start, end, mode, ctx);
+				} else if (type == RouteService.YOURS) {
 					res = findYOURSRoute(start, end, mode);
 					addMissingTurnsToRoute(res, start, end, mode, ctx);
 				} else {

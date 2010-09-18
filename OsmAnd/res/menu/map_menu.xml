@@ -7,7 +7,7 @@
 <item android:id="@+id/map_layers" android:title="@string/menu_layers" android:icon="@android:drawable/ic_menu_mapmode"></item>
 <item android:id="@+id/map_show_settings" android:title="@string/settings_Button" android:icon="@android:drawable/ic_menu_preferences"></item>
 
-<!--  not visible currently -->
+<!--  not visible by default -->
 <item android:id="@+id/map_navigate_to_point" android:title="@string/stop_navigation" android:visible="false" android:icon="@android:drawable/ic_menu_close_clear_cancel"></item>
 <item android:id="@+id/map_mute" android:title="@string/menu_mute_off" android:visible="false"></item>
 
@@ -16,6 +16,7 @@
 
 <item android:id="@+id/map_transport" android:title="@string/transport"></item>
 <item android:title="@string/show_gps_status" android:id="@+id/map_show_gps_status" android:icon="@android:drawable/ic_menu_compass"></item> 
+<item android:title="@string/map_route_by_gpx" android:id="@+id/map_gpx_routing"></item>
 </group>
 
 

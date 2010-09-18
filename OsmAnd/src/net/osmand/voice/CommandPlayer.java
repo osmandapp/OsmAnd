@@ -31,7 +31,6 @@ import alice.tuprolog.Var;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Environment;
-import android.view.WindowManager;
 
 public class CommandPlayer {
 	

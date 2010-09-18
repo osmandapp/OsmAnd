@@ -10,10 +10,12 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import net.osmand.GPXUtilities;
 import net.osmand.OsmandSettings;
 import net.osmand.R;
 import net.osmand.ResourceManager;
-import net.osmand.activities.SavingTrackHelper.WptPt;
+import net.osmand.GPXUtilities.GPXFileResult;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import android.app.AlertDialog;
@@ -179,7 +181,7 @@ public class FavouritesActivity extends ListActivity {
 					pt.name = p.name;
 					wpt.add(pt);
 				}
-				if(SavingTrackHelper.saveToXMLFiles(f, wpt, this)){
+				if(GPXUtilities.saveToXMLFiles(f, wpt, this)){
 					Toast.makeText(this, MessageFormat.format(getString(R.string.fav_saved_sucessfully), f.getAbsolutePath()), 
 							Toast.LENGTH_LONG).show();
 				}
@@ -196,9 +198,9 @@ public class FavouritesActivity extends ListActivity {
 						existedPoints.add(fp.name);
 					}
 				}
-				List<WptPt> points = new ArrayList<WptPt>();
-				if(SavingTrackHelper.readWptPtFromFile(f, points, this)){
-					for(WptPt p : points){
+				GPXFileResult res = GPXUtilities.loadGPXFile(this, f);
+				if (res.error == null) {
+					for(WptPt p : res.wayPoints){
 						if(!existedPoints.contains(p.name)){
 							FavouritePoint fp = new FavouritePoint();
 							fp.name = p.name;
