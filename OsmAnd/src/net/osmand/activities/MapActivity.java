@@ -4,12 +4,14 @@ import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
 import net.osmand.Algoritms;
 import net.osmand.AmenityIndexRepository;
+import net.osmand.GPXUtilities;
 import net.osmand.LogUtil;
 import net.osmand.OsmandSettings;
 import net.osmand.PoiFilter;
@@ -18,6 +20,8 @@ import net.osmand.R;
 import net.osmand.ResourceManager;
 import net.osmand.SQLiteTileSource;
 import net.osmand.Version;
+import net.osmand.GPXUtilities.GPXFileResult;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.OsmandSettings.ApplicationMode;
 import net.osmand.activities.FavouritesActivity.FavouritePoint;
 import net.osmand.activities.FavouritesActivity.FavouritesDbHelper;
@@ -80,6 +84,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -258,7 +263,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 		LatLon pointToNavigate = OsmandSettings.getPointToNavigate(this);
 		
-		
+		// TODO how this situation could be ?
 		if(!Algoritms.objectEquals(routingHelper.getFinalLocation(), pointToNavigate)){
 			// there is no way how to clear mode. Only user can do : clear point to navigate, exit from app & set up new point.
 			// that case help to not calculate route at all.
@@ -527,7 +532,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		} else {
 			OsmandSettings.clearPointToNavigate(this);
 		}
-		routingHelper.setFinalAndCurrentLocation(point, null);
+		routingHelper.setFinalAndCurrentLocation(point, null, routingHelper.getCurrentGPXRoute());
 		if(point == null){
 			routingHelper.setFollowingMode(false);
 			OsmandSettings.setFollowingByRoute(MapActivity.this, false);
@@ -966,6 +971,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     			navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
     		}
 			mapView.refreshMap();
+    	} else if (item.getItemId() == R.id.map_gpx_routing) {
+			useGPXFileLayer(true, navigationLayer.getPointToNavigate());
+			return true;
     	}
     	return super.onOptionsItemSelected(item);
     }
@@ -978,6 +986,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     	}
     	return OsmandSettings.getApplicationMode(this);
     }
+    
     
     protected void getDirections(final double lat, final double lon, boolean followEnabled){
     	if(navigationLayer.getPointToNavigate() == null){
@@ -1037,6 +1046,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				map.setLatitude(lat);
 				map.setLongitude(lon);
 				routingHelper.setAppMode(mode);
+				OsmandSettings.setFollowingByRoute(MapActivity.this, false);
 				routingHelper.setFollowingMode(false);
 				routingHelper.setFinalAndCurrentLocation(navigationLayer.getPointToNavigate(), map);
 			}
@@ -1063,9 +1073,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					location.setLongitude(lon);
 				} 
 				routingHelper.setAppMode(mode);
+				OsmandSettings.setFollowingByRoute(MapActivity.this, true);
 				routingHelper.setFollowingMode(true);
 				routingHelper.setFinalAndCurrentLocation(navigationLayer.getPointToNavigate(), location);
-				OsmandSettings.setFollowingByRoute(MapActivity.this, true);
+				
 			}
     	};
     	DialogInterface.OnClickListener showRoute = new DialogInterface.OnClickListener(){
@@ -1248,7 +1259,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 						gpxLayer.clearCurrentGPX();
 					} else {
 						dialog.dismiss();
-						selectGPXFileLayer();
+						useGPXFileLayer(false, null);
 					}
 				} else if(item == routeInfoInd){
 					routeInfoLayer.setVisible(isChecked);
@@ -1264,7 +1275,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		builder.show();
 	}
 	
-	private void selectGPXFileLayer() {
+	private void useGPXFileLayer(final boolean useRouting, final LatLon endForRouting) {
 		final List<String> list = new ArrayList<String>();
 		final File dir = new File(Environment.getExternalStorageDirectory(), ResourceManager.APP_DIR + SavingTrackHelper.TRACKS_PATH);
 		if (dir != null && dir.canRead()) {
@@ -1306,21 +1317,43 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					new Thread(new Runnable() {
 						@Override
 						public void run() {
-							
-							final String error = gpxLayer.showGPXFile(f);
-							if (error != null) {
+							Looper.prepare();
+							final GPXFileResult res = GPXUtilities.loadGPXFile(MapActivity.this, f);
+							if (res.error != null) {
 								runOnUiThread(new Runnable() {
 									@Override
 									public void run() {
-										Toast.makeText(MapActivity.this, error, Toast.LENGTH_LONG).show();
+										Toast.makeText(MapActivity.this, res.error, Toast.LENGTH_LONG).show();
 									}
 								});
 
 							}
 							dlg.dismiss();
+							if(useRouting){
+								runOnUiThread(new Runnable() {
+									@Override
+									public void run() {
+										useGPXRouting(endForRouting, res);
+									}
+								});
+							} else {
+								OsmandSettings.setShowingFavorites(MapActivity.this, true);
+								List<FavouritePoint> pts = new ArrayList<FavouritePoint>();
+								for(WptPt p : res.wayPoints){
+									FavouritePoint pt = new FavouritePoint();
+									pt.setLatitude(p.lat);
+									pt.setLongitude(p.lon);
+									pt.setName(p.name);
+									pts.add(pt);
+								}
+								favoritesLayer.setAdditionalPoints(pts);
+								gpxLayer.setTracks(res.locations);
+							}
 							mapView.refreshMap();
 
 						}
+
+						
 					}, "Loading gpx").start(); //$NON-NLS-1$
 				}
 
@@ -1329,6 +1362,45 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}
 		
 	}	
+	
+	private void useGPXRouting(final LatLon endForRouting, final GPXFileResult res) {
+		Builder builder = new AlertDialog.Builder(this);
+		builder.setItems(new String[]{getString(R.string.gpx_direct_route), getString(R.string.gpx_reverse_route)}, 
+				new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				boolean reverse = which == 1;
+				ArrayList<List<Location>> locations = res.locations;
+				List<Location> l = new ArrayList<Location>();
+				for(List<Location> s : locations){
+					l.addAll(s);
+				}
+				if(reverse){
+					Collections.reverse(l);
+				}
+				Location startForRouting = locationLayer.getLastKnownLocation();
+				if(startForRouting == null && !l.isEmpty()){
+					startForRouting = l.get(0);
+				}
+				LatLon endPoint = endForRouting;
+				if(/*endForRouting == null && */!l.isEmpty()){
+					LatLon point = new LatLon(l.get(l.size() - 1).getLatitude(), l.get(l.size() - 1).getLongitude());
+					OsmandSettings.setPointToNavigate(MapActivity.this, point.getLatitude(), point.getLongitude());
+					endPoint = point;
+					navigationLayer.setPointToNavigate(point);
+				}
+				if(endForRouting != null){
+					OsmandSettings.setFollowingByRoute(MapActivity.this, true);
+					routingHelper.setFollowingMode(true);
+					routingHelper.setFinalAndCurrentLocation(endPoint, startForRouting, l);
+				}
+				
+			}
+		
+		});
+		builder.show();
+	}
 		
 	private void selectPOIFilterLayer(){
 		final List<PoiFilter> userDefined = new ArrayList<PoiFilter>();

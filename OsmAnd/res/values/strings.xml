@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="gpx_reverse_route">Reverse route</string>
+	<string name="gpx_direct_route">Direct route</string>
+	<string name="map_route_by_gpx">Route using GPX</string>
 	<string name="gpx_files_not_found">GPX files were not found in /osmand/tracks directory</string>
 	<string name="layer_gpx_layer">GPX tracks</string>
 	<string name="error_reading_gpx">Error reading gpx data</string>

@@ -30,6 +30,7 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 	
 	private OsmandMapTileView view;
 	private List<FavouritePoint> favouritePoints;
+	private List<FavouritePoint> additionalPoints;
 	private Rect pixRect = new Rect();
 	private RectF tileRect = new RectF();
 	private Path path;
@@ -84,6 +85,10 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 		
 	}
 	
+	public void setAdditionalPoints(List<FavouritePoint> additionalPoints) {
+		this.additionalPoints = additionalPoints;
+	}
+	
 	public void reloadFavorites(Context ctx){
 		FavouritesDbHelper helper = new FavouritesActivity.FavouritesDbHelper(ctx);
 		favouritePoints = helper.getFavouritePoints();
@@ -118,6 +123,19 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 					canvas.drawPath(pathDst, paintBlack);
 				}
 			}
+			if(additionalPoints != null){
+				for (FavouritePoint o : additionalPoints) {
+					if (o.getLatitude() <= topLatitude && o.getLatitude() >= bottomLatitude && o.getLongitude() >= leftLongitude
+							&& o.getLongitude() <= rightLongitude) {
+						int x = view.getMapXForPoint(o.getLongitude());
+						int y = view.getMapYForPoint(o.getLatitude());
+						matrix.setTranslate(x, y);
+						path.transform(matrix, pathDst);
+						canvas.drawPath(pathDst, paint);
+						canvas.drawPath(pathDst, paintBlack);
+					}
+				}
+			}
 		}
 	}
 	
@@ -135,6 +153,19 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 			int ey = (int) point.y;
 			for (int i = 0; i < favouritePoints.size(); i++) {
 				FavouritePoint n = favouritePoints.get(i);
+				int x = view.getRotatedMapXForPoint(n.getLatitude(), n.getLongitude());
+				int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
+				if (Math.abs(x - ex) <= r && Math.abs(y - ey) <= r) {
+					r = Math.max(Math.abs(x - ex), Math.abs(y - ey));
+					result = n;
+				}
+			}
+		}
+		if (additionalPoints != null) {
+			int ex = (int) point.x;
+			int ey = (int) point.y;
+			for (int i = 0; i < additionalPoints.size(); i++) {
+				FavouritePoint n = additionalPoints.get(i);
 				int x = view.getRotatedMapXForPoint(n.getLatitude(), n.getLongitude());
 				int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
 				if (Math.abs(x - ex) <= r && Math.abs(y - ey) <= r) {
