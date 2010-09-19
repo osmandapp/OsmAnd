@@ -5,8 +5,6 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -16,70 +14,33 @@ import java.io.OutputStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EventObject;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
-import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.UIManager;
-import javax.swing.event.TreeModelEvent;
-import javax.swing.event.TreeModelListener;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellEditor;
-import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeCellEditor;
-import javax.swing.tree.TreePath;
 import javax.xml.stream.XMLStreamException;
 
-import net.osmand.Algoritms;
 import net.osmand.ExceptionHandler;
-import net.osmand.data.Amenity;
-import net.osmand.data.AmenityType;
-import net.osmand.data.Building;
-import net.osmand.data.City;
-import net.osmand.data.DataTileManager;
-import net.osmand.data.MapObject;
-import net.osmand.data.Region;
-import net.osmand.data.Street;
-import net.osmand.data.TransportRoute;
-import net.osmand.data.TransportStop;
-import net.osmand.data.City.CityType;
-import net.osmand.data.index.DataIndexWriter;
-import net.osmand.data.preparation.DataExtraction;
+import net.osmand.data.preparation.IndexCreator;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.ITileSource;
-import net.osmand.osm.Entity;
-import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
-import net.osmand.osm.Node;
-import net.osmand.osm.Way;
 import net.osmand.osm.io.IOsmStorageFilter;
+import net.osmand.osm.io.OsmBaseStorage;
 import net.osmand.osm.io.OsmBoundsFilter;
 import net.osmand.osm.io.OsmStorageWriter;
 import net.osmand.swing.MapPanel.MapSelectionArea;
@@ -110,98 +71,39 @@ public class OsmExtractionUI implements IMapLocationListener {
 			}
 		});
 		
-        MAIN_APP = new OsmExtractionUI(null);
+        MAIN_APP = new OsmExtractionUI();
         MAIN_APP.frame.setBounds(DataExtractionSettings.getSettings().getWindowBounds());
         MAIN_APP.frame.setVisible(true);
 	}
 	
-	protected City selectedCity;
-	private MapPanel mapPanel;
 	
-	private DataExtractionTreeNode amenitiesTree;
+	
+	
 	private JTree treePlaces;
-	private JList searchList;
-	private JTextField searchTextField;
+//	private DataExtractionTreeNode amenitiesTree;
+//	private TreeModelListener treeModelListener;
 	
+	
+	private MapPanel mapPanel;
 	private JFrame frame;
 	private JLabel statusBarLabel;
 	
-	private Region region;
-	private JButton generateDataButton;
+
 	private JCheckBox buildPoiIndex;
 	private JCheckBox buildAddressIndex;
+	private JCheckBox buildMapIndex;
 	private JCheckBox buildTransportIndex;
 	private JCheckBox normalizingStreets;
-	private TreeModelListener treeModelListener;
-	private JCheckBox loadingAllData;
-	
+
+	private String regionName;
 		
 	
 	
-	public OsmExtractionUI(final Region r){
-		this.region = r;
+	public OsmExtractionUI(){
 		createUI();
-		setRegion(r, "Region");
 	}
 
 	
-	public void setRegion(Region region, String name){
-		if (this.region == region) {
-			return;
-		}
-		this.region = region;
-		DefaultMutableTreeNode root = new DataExtractionTreeNode(name, region);
-		if (region != null) {
-			amenitiesTree = new DataExtractionTreeNode("Amenities", region);
-			amenitiesTree.add(new DataExtractionTreeNode("First 15", region));
-			for (AmenityType type : AmenityType.values()) {
-				amenitiesTree.add(new DataExtractionTreeNode(Algoritms.capitalizeFirstLetterAndLowercase(type.toString()), type));
-			}
-			root.add(amenitiesTree);
-			
-			DataExtractionTreeNode transport = new DataExtractionTreeNode("Transport", region);
-			root.add(transport);
-			for(String s : region.getTransportRoutes().keySet()){
-				DataExtractionTreeNode trRoute = new DataExtractionTreeNode(s, s);
-				transport.add(trRoute);
-				List<TransportRoute> list = region.getTransportRoutes().get(s);
-				for(TransportRoute r : list){
-					DataExtractionTreeNode route = new DataExtractionTreeNode(r.getRef(), r);
-					trRoute.add(route);
-				}
-				
-			}
-
-			for (CityType t : CityType.values()) {
-				DefaultMutableTreeNode cityTree = new DataExtractionTreeNode(Algoritms.capitalizeFirstLetterAndLowercase(t.toString()), t);
-				root.add(cityTree);
-				for (City ct : region.getCitiesByType(t)) {
-					DefaultMutableTreeNode cityNodeTree = new DataExtractionTreeNode(ct.getName(), ct);
-					cityTree.add(cityNodeTree);
-
-					for (Street str : ct.getStreets()) {
-						DefaultMutableTreeNode strTree = new DataExtractionTreeNode(str.getName(), str);
-						cityNodeTree.add(strTree);
-						for (Building b : str.getBuildings()) {
-							DefaultMutableTreeNode building = new DataExtractionTreeNode(b.getName(), b);
-							strTree.add(building);
-						}
-					}
-				}
-			}
-		}
-		
-	    if (searchList != null) {
-			updateListCities(region, searchTextField.getText(), searchList);
-		}
-		mapPanel.repaint();
-		DefaultTreeModel newModel = new DefaultTreeModel(root, false);
-		newModel.addTreeModelListener(treeModelListener);
-		treePlaces.setModel(newModel);
-		
-		updateButtonsBar();
-		locationChanged(mapPanel.getLatitude(), mapPanel.getLongitude(), this);
-	}
         
 	
 	
@@ -228,164 +130,31 @@ public class OsmExtractionUI implements IMapLocationListener {
 	    statusBarLabel.setText(workingDir == null ? "<working directory unspecified>" : "Working directory : " + workingDir.getAbsolutePath());
 	    
 	   
-	    	    
-	    JSplitPane panelForTreeAndMap = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JScrollPane(createTree(content)), mapPanel);
+	    treePlaces = new JTree();
+		treePlaces.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Region"), false)); 	    
+	    JSplitPane panelForTreeAndMap = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JScrollPane(treePlaces), mapPanel);
 	    panelForTreeAndMap.setResizeWeight(0.2);
-	    
-	    
-	    
+	    content.add(panelForTreeAndMap, BorderLayout.CENTER);
 	    
 	    createButtonsBar(content);
-//	    createCitySearchPanel(content);
-	    if(searchList != null){
-	    	JSplitPane pane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, new JScrollPane(searchList), panelForTreeAndMap);
-	    	pane.setResizeWeight(0.2);
-	    	content.add(pane, BorderLayout.CENTER);
-	    } else {
-	    	content.add(panelForTreeAndMap, BorderLayout.CENTER);
-	    }
 	   
 	    JMenuBar bar = new JMenuBar();
 	    fillMenuWithActions(bar);
-	    
-	    JPopupMenu popupMenu = new JPopupMenu();
-	    fillPopupMenuWithActions(popupMenu);
-	    treePlaces.add(popupMenu);
-	    treePlaces.addMouseListener(new PopupTrigger(popupMenu));
-	    
-	    
+
 	    frame.setJMenuBar(bar);
-	    
-	    
-	}
-	
-	public JTree createTree(Container content) {
-		treePlaces = new JTree();
-		treePlaces.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Region"), false));
-		treePlaces.setEditable(true);
-		treePlaces.setCellEditor(new RegionCellEditor(treePlaces, (DefaultTreeCellRenderer) treePlaces.getCellRenderer()));
-		treePlaces.addTreeSelectionListener(new TreeSelectionListener() {
-			@Override
-			public void valueChanged(TreeSelectionEvent e) {
-				if (e.getPath() != null) {
-					if (e.getPath().getLastPathComponent() instanceof DataExtractionTreeNode) {
-						Object o = ((DataExtractionTreeNode) e.getPath().getLastPathComponent()).getModelObject();
-
-						if (o instanceof MapObject) {
-							MapObject c = (MapObject) o;
-							LatLon location = c.getLocation();
-							if(location != null){
-								if(o instanceof Street){
-									DataTileManager<Way> ways = new DataTileManager<Way>();
-									for(Way w : ((Street)o).getWayNodes()){
-										LatLon l = w.getLatLon();
-										ways.registerObject(l.getLatitude(), l.getLongitude(), w);
-									}
-									mapPanel.setPoints(ways);
-									mapPanel.requestFocus();
-								} 
-								mapPanel.setLatLon(location.getLatitude(), location.getLongitude());
-								mapPanel.requestFocus();
-							}
-							if(o instanceof TransportRoute){
-								DataTileManager<Entity> ways = new DataTileManager<Entity>();
-								for(Way w : ((TransportRoute)o).getWays()){
-									LatLon l = w.getLatLon();
-									ways.registerObject(l.getLatitude(), l.getLongitude(), w);
-								}
-								for(TransportStop w : ((TransportRoute)o).getBackwardStops()){
-									LatLon l = w.getLocation();
-									ways.registerObject(l.getLatitude(), l.getLongitude(), 
-											new Node(l.getLatitude(), l.getLongitude(), w.getId()));
-								}
-								for(TransportStop w : ((TransportRoute)o).getForwardStops()){
-									LatLon l = w.getLocation();
-									ways.registerObject(l.getLatitude(), l.getLongitude(), 
-											new Node(l.getLatitude(), l.getLongitude(), w.getId()));
-								}
-								mapPanel.setPoints(ways);
-								mapPanel.requestFocus();
-							} 
-							
-						} else if (o instanceof Entity) {
-							Entity c = (Entity) o;
-							LatLon latLon = c.getLatLon();
-							if (latLon != null) {
-								mapPanel.setLatLon(latLon.getLatitude(), latLon.getLongitude());
-								mapPanel.requestFocus();
-							} 
-						}
-					}
-				}
-
-			}
-		});
-		
-		treeModelListener = new TreeModelListener() {
-		    public void treeNodesChanged(TreeModelEvent e) {
-				Object node = e.getTreePath().getLastPathComponent();
-				if(e.getChildren() != null && e.getChildren().length > 0){
-					node =e.getChildren()[0];
-				}
-				if (node instanceof DataExtractionTreeNode) {
-					DataExtractionTreeNode n = ((DataExtractionTreeNode) node);
-					if (n.getModelObject() instanceof MapObject) {
-						MapObject r = (MapObject) n.getModelObject();
-						String newName = n.getUserObject().toString();
-						if (!r.getName().equals(newName)) {
-							r.setName(n.getUserObject().toString());
-						}
-						if (r instanceof Street && !((Street) r).isRegisteredInCity()) {
-							DefaultMutableTreeNode parent = ((DefaultMutableTreeNode) n.getParent());
-							parent.remove(n);
-							((DefaultTreeModel) treePlaces.getModel()).nodeStructureChanged(parent);
-						}
-					}
-				}
-			}
-		    public void treeNodesInserted(TreeModelEvent e) {
-		    }
-		    public void treeNodesRemoved(TreeModelEvent e) {
-		    }
-		    public void treeStructureChanged(TreeModelEvent e) {
-		    }
-		};
-		treePlaces.getModel().addTreeModelListener(treeModelListener);
-		return treePlaces;
 	}
 	
 	
 	
-	protected void updateButtonsBar() {
-		generateDataButton.setEnabled(region != null);
-		normalizingStreets.setVisible(region == null);
-		loadingAllData.setVisible(region == null);
-		if(region == null && !buildAddressIndex.isEnabled()){
-			buildAddressIndex.setEnabled(true);
-		}
-		if(region == null && !buildPoiIndex.isEnabled()){
-			buildPoiIndex.setEnabled(true);
-		}
-		if(region == null && !buildTransportIndex.isEnabled()){
-			buildTransportIndex.setEnabled(true);
-		}
-	}
 	
 	public void createButtonsBar(Container content){
 		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		content.add(panel, BorderLayout.NORTH);
 		
-		generateDataButton = new JButton();
-		generateDataButton.setText("Generate data");
-		generateDataButton.setToolTipText("Data with selected preferences will be generated in working directory." +
-				" 	The index files will be named as region in tree. All existing data will be overwritten.");
-		panel.add(generateDataButton);
-		generateDataButton.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				generateData();
-			}
-		});
+		buildMapIndex = new JCheckBox();
+		buildMapIndex.setText("Build map index");
+		panel.add(buildMapIndex);
+		buildMapIndex.setSelected(true);
 		
 		buildPoiIndex = new JCheckBox();
 		buildPoiIndex.setText("Build POI index");
@@ -407,136 +176,17 @@ public class OsmExtractionUI implements IMapLocationListener {
 		panel.add(buildTransportIndex);
 		buildTransportIndex.setSelected(true);
 
-		loadingAllData = new JCheckBox();
-		loadingAllData.setText("Loading all osm data");
-		panel.add(loadingAllData);
-		loadingAllData.setSelected(false);
 		
-		updateButtonsBar();
-	}
-	
-	protected void generateData() {
-		try {
-    		final ProgressDialog dlg = new ProgressDialog(frame, "Generating data");
-    		dlg.setRunnable(new Runnable(){
-
-				@Override
-				public void run() {
-					dlg.startTask("Generating indices...", -1);
-					DataIndexWriter builder = new DataIndexWriter(DataExtractionSettings.getSettings().getDefaultWorkingDir(), region);
-					StringBuilder msg = new StringBuilder();
-					try {
-						msg.append("Indices for ").append(region.getName());
-						if(buildPoiIndex.isSelected()){
-							dlg.startTask("Generating POI index...", -1);
-							builder.writePOI();
-							msg.append(", POI index ").append("successfully created");
-						}
-						if(buildAddressIndex.isSelected()){
-							dlg.startTask("Generating address index...", -1);
-							builder.writeAddress();
-							msg.append(", address index ").append("successfully created");
-						}
-						if(buildTransportIndex.isSelected()){
-							dlg.startTask("Generating transport index...", -1);
-							builder.writeTransport();
-							msg.append(", transport index ").append("successfully created");
-						}
-						
-//						new DataIndexReader().testIndex(new File(
-//								DataExtractionSettings.getSettings().getDefaultWorkingDir(), 
-//								IndexConstants.ADDRESS_INDEX_DIR+region.getName()+IndexConstants.ADDRESS_INDEX_EXT));
-						msg.append(".");
-					    JOptionPane pane = new JOptionPane(msg);
-					    JDialog dialog = pane.createDialog(frame, "Generation data");
-					    dialog.setVisible(true);
-					} catch (SQLException e1) {
-						throw new IllegalArgumentException(e1);
-					} catch (IOException e1) {
-						throw new IllegalArgumentException(e1);
-					}
-				}
-    		});
-    		dlg.run();
-		} catch (InterruptedException e1) {
-			log.error("Interrupted", e1); 
-		} catch (InvocationTargetException e1) {
-			ExceptionHandler.handle((Exception) e1.getCause());
-		}
 		
-	}
-	
-	
-	public void fillPopupMenuWithActions(JPopupMenu menu) {
-		Action delete = new AbstractAction("Delete") {
-			private static final long serialVersionUID = 7476603434847164396L;
-
-			public void actionPerformed(ActionEvent e) {
-				TreePath[] p = treePlaces.getSelectionPaths();
-				if(p != null && 
-						JOptionPane.OK_OPTION == 
-							JOptionPane.showConfirmDialog(frame, "Are you sure about deleting " +p.length + " resources ? ")){
-				for(TreePath path : treePlaces.getSelectionPaths()){
-					Object node = path.getLastPathComponent();
-					if (node instanceof DataExtractionTreeNode) {
-						DataExtractionTreeNode n = ((DataExtractionTreeNode) node);
-						if(n.getParent() instanceof DataExtractionTreeNode){
-							DataExtractionTreeNode parent = ((DataExtractionTreeNode) n.getParent());
-							boolean remove = false;
-							if (n.getModelObject() instanceof Street) {
-								((City)parent.getModelObject()).unregisterStreet(((Street)n.getModelObject()).getName());
-								remove = true;
-							} else if (n.getModelObject() instanceof Building) {
-								((Street)parent.getModelObject()).getBuildings().remove(n.getModelObject());
-								remove = true;
-							} else if (n.getModelObject() instanceof City) {
-								Region r = (Region) ((DataExtractionTreeNode)parent.getParent()).getModelObject();
-								r.unregisterCity((City) n.getModelObject());
-								remove = true;
-							} else if (n.getModelObject() instanceof Amenity) {
-								Region r = (Region) ((DataExtractionTreeNode)parent.getParent().getParent()).getModelObject();
-								Amenity am = (Amenity) n.getModelObject();
-								r.getAmenityManager().unregisterObject(am.getLocation().getLatitude(), am.getLocation().getLongitude(), am);
-								remove = true;
-							}
-							if(remove){
-								parent.remove(n);
-								((DefaultTreeModel) treePlaces.getModel()).nodeStructureChanged(parent);
-							}
-						}
-					}
-				}
-				
-				}
-			}
-		};
-		menu.add(delete);
-		Action rename= new AbstractAction("Rename") {
-			private static final long serialVersionUID = -8257594433235073767L;
-
-			public void actionPerformed(ActionEvent e) {
-				TreePath path = treePlaces.getSelectionPath();
-				if(path != null){
-					treePlaces.startEditingAtPath(path);
-				}
-			}
-		};
-		menu.add(rename);
-
 	}
 	
 	public void fillMenuWithActions(final JMenuBar bar){
 		JMenu menu = new JMenu("File");
 		bar.add(menu);
-		JMenuItem loadFile = new JMenuItem("Load osm file...");
+		JMenuItem loadFile = new JMenuItem("Select osm file...");
 		menu.add(loadFile);
-		JMenuItem loadSpecifiedAreaFile = new JMenuItem("Load osm file for specifed area...");
+		JMenuItem loadSpecifiedAreaFile = new JMenuItem("Select osm file for specifed area...");
 		menu.add(loadSpecifiedAreaFile);
-		JMenuItem closeCurrentFile = new JMenuItem("Close current file");
-		menu.add(closeCurrentFile);
-		menu.addSeparator();
-		JMenuItem saveOsmFile = new JMenuItem("Save data to osm file...");
-		menu.add(saveOsmFile);
 		JMenuItem specifyWorkingDir = new JMenuItem("Specify working directory...");
 		menu.add(specifyWorkingDir);
 		menu.addSeparator();
@@ -582,7 +232,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 		sqliteDB.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				final String regionName = region == null ? "Region" : region.getName();
+				final String regionName = OsmExtractionUI.this.regionName == null ? "Region" : OsmExtractionUI.this.regionName;
 				final ITileSource map = mapPanel.getMap();
 				if(map != null){
 					try {
@@ -619,14 +269,6 @@ public class OsmExtractionUI implements IMapLocationListener {
 				frame.setVisible(false);
 			}
 		});
-		closeCurrentFile.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setRegion(null, "Region");
-				frame.setTitle("OsmAnd Map Creator");
-			}
-		});
 		settings.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -655,7 +297,6 @@ public class OsmExtractionUI implements IMapLocationListener {
 		    		tileSource.add(sqliteDB);
 		    		bar.remove(1);
 		    		bar.add(tileSource, 1);
-		        	updateButtonsBar();
 		        }
 			}
 			
@@ -714,21 +355,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 			}
 			
 		});
-		saveOsmFile.addActionListener(new ActionListener(){
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(region == null){
-					return;
-				}
-				JFileChooser fc = getOsmFileChooser();
-				int answer = fc.showSaveDialog(frame);
-		        if (answer == JFileChooser.APPROVE_OPTION && fc.getSelectedFile() != null){
-		        	saveCountry(fc.getSelectedFile());
-		        }
-			}
-			
-		});
 	}
 	
 	public JFileChooser getOsmFileChooser(){
@@ -763,22 +390,14 @@ public class OsmExtractionUI implements IMapLocationListener {
 
 				@Override
 				public void run() {
-					Region res;
+					IndexCreator creator = new IndexCreator(DataExtractionSettings.getSettings().getDefaultWorkingDir());
 					try {
-						DataExtraction dataExtraction = new DataExtraction(buildAddressIndex.isSelected(), buildPoiIndex.isSelected(),
-								buildTransportIndex.isSelected(), normalizingStreets.isSelected(), loadingAllData.isSelected(), 
-								DataExtractionSettings.getSettings().getLoadEntityInfo(), 
-								DataExtractionSettings.getSettings().getDefaultWorkingDir());
-						if(!buildAddressIndex.isSelected()){
-							buildAddressIndex.setEnabled(false);
-						}
-						if(!buildTransportIndex.isSelected()){
-							buildTransportIndex.setEnabled(false);
-						}
-						if(!buildPoiIndex.isSelected()){
-							buildPoiIndex.setEnabled(false);
-						}
-						res = dataExtraction.readCountry(f.getAbsolutePath(), dlg, filter);
+						creator.setIndexAddress(buildAddressIndex.isSelected());
+						creator.setIndexPOI(buildPoiIndex.isSelected());
+						creator.setNormalizeStreets(normalizingStreets.isSelected());
+						creator.setIndexTransport(buildTransportIndex.isSelected());
+						creator.setIndexMap(buildMapIndex.isSelected());
+						creator.generateIndexes(f, dlg, filter);
 					} catch (IOException e) {
 						throw new IllegalArgumentException(e);
 					} catch (SAXException e) {
@@ -786,25 +405,47 @@ public class OsmExtractionUI implements IMapLocationListener {
 					} catch (SQLException e) {
 						throw new IllegalStateException(e);
 					}
-					dlg.setResult(res);
+					regionName = creator.getRegionName();
+					StringBuilder msg = new StringBuilder();
+					msg.append("Indexes for ").append(regionName).append(" : ");
+					boolean comma = false;
+					if (buildMapIndex.isSelected()) {
+						if(comma) msg.append(", ");
+						comma = true;
+						msg.append("map");
+					}
+					if (buildPoiIndex.isSelected()) {
+						if(comma) msg.append(", ");
+						comma = true;
+						msg.append("POI");
+					}
+					if (buildAddressIndex.isSelected()) {
+						if(comma) msg.append(", ");
+						comma = true;
+						msg.append("address");
+					}
+					if (buildTransportIndex.isSelected()) {
+						if(comma) msg.append(", ");
+						comma = true;
+						msg.append("transport");
+					}
+					msg.append(" - successfully created in working directory.");
+					JOptionPane pane = new JOptionPane(msg);
+					JDialog dialog = pane.createDialog(frame, "Generation data");
+					dialog.setVisible(true);
 				}
     		});
-			Region region = (Region) dlg.run();
-			if(region != null){
-				setRegion(region, region.getName());
-				frame.setTitle("OsmAnd Map Creator - " + f.getName());
-			} else {
-				//frame.setTitle("OsmAnd Map Creator");
-			}
+    		
+			dlg.run();
+			frame.setTitle("OsmAnd Map Creator - " + f.getName());
 		} catch (InterruptedException e1) {
 			log.error("Interrupted", e1); 
-			updateButtonsBar();
 		} catch (InvocationTargetException e1) {
 			ExceptionHandler.handle("Exception during operation", e1.getCause());
 		}
 	}
 	
-	public void saveCountry(final File f){
+	public void saveCountry(final File f, final OsmBaseStorage storage){
 		final OsmStorageWriter writer = new OsmStorageWriter();
 		try {
     		final ProgressDialog dlg = new ProgressDialog(frame, "Saving osm file");
@@ -819,7 +460,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 								output.write('Z');
 								output = new CBZip2OutputStream(output);
 							}
-							writer.saveStorage(output, region.getStorage(), null, false);
+							writer.saveStorage(output, storage, null, false);
 						} finally {
 							output.close();
 						}
@@ -840,6 +481,258 @@ public class OsmExtractionUI implements IMapLocationListener {
 	
 	@Override
 	public void locationChanged(final double newLatitude, final double newLongitude, Object source){
+//		recalculateAmenities(newLatitude, newLongitude);
+	}
+
+
+
+	
+	public class ExitListener extends WindowAdapter {
+		public void windowClosing(WindowEvent event) {
+			// save preferences
+			DataExtractionSettings settings = DataExtractionSettings.getSettings();
+			settings.saveDefaultLocation(mapPanel.getLatitude(), mapPanel.getLongitude());
+			settings.saveDefaultZoom(mapPanel.getZoom());
+			settings.saveWindowBounds(frame.getBounds());
+			System.exit(0);
+		}
+	}
+	
+
+
+	
+	
+	// OLD CODE
+/*
+
+	public JTree createTree(Container content) {		
+		treePlaces.setEditable(true);
+		treePlaces.setCellEditor(new RegionCellEditor(treePlaces, (DefaultTreeCellRenderer) treePlaces.getCellRenderer()));
+		treePlaces.addTreeSelectionListener(new TreeSelectionListener() {
+			@Override
+			public void valueChanged(TreeSelectionEvent e) {
+				if (e.getPath() != null) {
+					if (e.getPath().getLastPathComponent() instanceof DataExtractionTreeNode) {
+						Object o = ((DataExtractionTreeNode) e.getPath().getLastPathComponent()).getModelObject();
+
+						if (o instanceof MapObject) {
+							MapObject c = (MapObject) o;
+							LatLon location = c.getLocation();
+							if (location != null) {
+								if (o instanceof Street) {
+									DataTileManager<Way> ways = new DataTileManager<Way>();
+									for (Way w : ((Street) o).getWayNodes()) {
+										LatLon l = w.getLatLon();
+										ways.registerObject(l.getLatitude(), l.getLongitude(), w);
+									}
+									mapPanel.setPoints(ways);
+									mapPanel.requestFocus();
+								}
+								mapPanel.setLatLon(location.getLatitude(), location.getLongitude());
+								mapPanel.requestFocus();
+							}
+							if (o instanceof TransportRoute) {
+								DataTileManager<Entity> ways = new DataTileManager<Entity>();
+								for (Way w : ((TransportRoute) o).getWays()) {
+									LatLon l = w.getLatLon();
+									ways.registerObject(l.getLatitude(), l.getLongitude(), w);
+								}
+								for (TransportStop w : ((TransportRoute) o).getBackwardStops()) {
+									LatLon l = w.getLocation();
+									ways.registerObject(l.getLatitude(), l.getLongitude(), new Node(l.getLatitude(), l.getLongitude(), w
+											.getId()));
+								}
+								for (TransportStop w : ((TransportRoute) o).getForwardStops()) {
+									LatLon l = w.getLocation();
+									ways.registerObject(l.getLatitude(), l.getLongitude(), new Node(l.getLatitude(), l.getLongitude(), w
+											.getId()));
+								}
+								mapPanel.setPoints(ways);
+								mapPanel.requestFocus();
+							}
+
+						} else if (o instanceof Entity) {
+							Entity c = (Entity) o;
+							LatLon latLon = c.getLatLon();
+							if (latLon != null) {
+								mapPanel.setLatLon(latLon.getLatitude(), latLon.getLongitude());
+								mapPanel.requestFocus();
+							}
+						}
+					}
+				}
+
+			}
+		});
+
+		treeModelListener = new TreeModelListener() {
+			public void treeNodesChanged(TreeModelEvent e) {
+				Object node = e.getTreePath().getLastPathComponent();
+				if (e.getChildren() != null && e.getChildren().length > 0) {
+					node = e.getChildren()[0];
+				}
+				if (node instanceof DataExtractionTreeNode) {
+					DataExtractionTreeNode n = ((DataExtractionTreeNode) node);
+					if (n.getModelObject() instanceof MapObject) {
+						MapObject r = (MapObject) n.getModelObject();
+						String newName = n.getUserObject().toString();
+						if (!r.getName().equals(newName)) {
+							r.setName(n.getUserObject().toString());
+						}
+						if (r instanceof Street && !((Street) r).isRegisteredInCity()) {
+							DefaultMutableTreeNode parent = ((DefaultMutableTreeNode) n.getParent());
+							parent.remove(n);
+							((DefaultTreeModel) treePlaces.getModel()).nodeStructureChanged(parent);
+						}
+					}
+				}
+			}
+
+			public void treeNodesInserted(TreeModelEvent e) {
+			}
+
+			public void treeNodesRemoved(TreeModelEvent e) {
+			}
+
+			public void treeStructureChanged(TreeModelEvent e) {
+			}
+		};
+		treePlaces.getModel().addTreeModelListener(treeModelListener);
+		return treePlaces;
+	}
+
+	public void fillPopupMenuWithActions(JPopupMenu menu) {
+		Action delete = new AbstractAction("Delete") {
+			private static final long serialVersionUID = 7476603434847164396L;
+
+			public void actionPerformed(ActionEvent e) {
+				TreePath[] p = treePlaces.getSelectionPaths();
+				if(p != null && 
+						JOptionPane.OK_OPTION == 
+							JOptionPane.showConfirmDialog(frame, "Are you sure about deleting " +p.length + " resources ? ")){
+				for(TreePath path : treePlaces.getSelectionPaths()){
+					Object node = path.getLastPathComponent();
+					if (node instanceof DataExtractionTreeNode) {
+						DataExtractionTreeNode n = ((DataExtractionTreeNode) node);
+						if(n.getParent() instanceof DataExtractionTreeNode){
+							DataExtractionTreeNode parent = ((DataExtractionTreeNode) n.getParent());
+							boolean remove = false;
+							if (n.getModelObject() instanceof Street) {
+								((City)parent.getModelObject()).unregisterStreet(((Street)n.getModelObject()).getName());
+								remove = true;
+							} else if (n.getModelObject() instanceof Building) {
+								((Street)parent.getModelObject()).getBuildings().remove(n.getModelObject());
+								remove = true;
+							} else if (n.getModelObject() instanceof City) {
+								Region r = (Region) ((DataExtractionTreeNode)parent.getParent()).getModelObject();
+								r.unregisterCity((City) n.getModelObject());
+								remove = true;
+							} else if (n.getModelObject() instanceof Amenity) {
+								Region r = (Region) ((DataExtractionTreeNode)parent.getParent().getParent()).getModelObject();
+								Amenity am = (Amenity) n.getModelObject();
+								r.getAmenityManager().unregisterObject(am.getLocation().getLatitude(), am.getLocation().getLongitude(), am);
+								remove = true;
+							}
+							if(remove){
+								parent.remove(n);
+								((DefaultTreeModel) treePlaces.getModel()).nodeStructureChanged(parent);
+							}
+						}
+					}
+				}
+				
+				}
+			}
+		};
+		menu.add(delete);
+		Action rename= new AbstractAction("Rename") {
+			private static final long serialVersionUID = -8257594433235073767L;
+
+			public void actionPerformed(ActionEvent e) {
+				TreePath path = treePlaces.getSelectionPath();
+				if(path != null){
+					treePlaces.startEditingAtPath(path);
+				}
+			}
+		};
+		menu.add(rename);
+	}
+	
+	
+	public void setRegion(Region region, String name){
+		if (this.region == region) {
+			return;
+		}
+		this.region = region;
+		DefaultMutableTreeNode root = new DataExtractionTreeNode(name, region);
+		if (region != null) {
+			amenitiesTree = new DataExtractionTreeNode("Amenities", region);
+			amenitiesTree.add(new DataExtractionTreeNode("First 15", region));
+			for (AmenityType type : AmenityType.values()) {
+				amenitiesTree.add(new DataExtractionTreeNode(Algoritms.capitalizeFirstLetterAndLowercase(type.toString()), type));
+			}
+			root.add(amenitiesTree);
+			
+			DataExtractionTreeNode transport = new DataExtractionTreeNode("Transport", region);
+			root.add(transport);
+			for(String s : region.getTransportRoutes().keySet()){
+				DataExtractionTreeNode trRoute = new DataExtractionTreeNode(s, s);
+				transport.add(trRoute);
+				List<TransportRoute> list = region.getTransportRoutes().get(s);
+				for(TransportRoute r : list){
+					DataExtractionTreeNode route = new DataExtractionTreeNode(r.getRef(), r);
+					trRoute.add(route);
+				}
+				
+			}
+
+			for (CityType t : CityType.values()) {
+				DefaultMutableTreeNode cityTree = new DataExtractionTreeNode(Algoritms.capitalizeFirstLetterAndLowercase(t.toString()), t);
+				root.add(cityTree);
+				for (City ct : region.getCitiesByType(t)) {
+					DefaultMutableTreeNode cityNodeTree = new DataExtractionTreeNode(ct.getName(), ct);
+					cityTree.add(cityNodeTree);
+
+					for (Street str : ct.getStreets()) {
+						DefaultMutableTreeNode strTree = new DataExtractionTreeNode(str.getName(), str);
+						cityNodeTree.add(strTree);
+						for (Building b : str.getBuildings()) {
+							DefaultMutableTreeNode building = new DataExtractionTreeNode(b.getName(), b);
+							strTree.add(building);
+						}
+					}
+				}
+			}
+		}
+		
+	    if (searchList != null) {
+			updateListCities(region, searchTextField.getText(), searchList);
+		}
+		mapPanel.repaint();
+		DefaultTreeModel newModel = new DefaultTreeModel(root, false);
+		newModel.addTreeModelListener(treeModelListener);
+		treePlaces.setModel(newModel);
+		
+		updateButtonsBar();
+		locationChanged(mapPanel.getLatitude(), mapPanel.getLongitude(), this);
+	}
+	
+	public static class DataExtractionTreeNode extends DefaultMutableTreeNode {
+		private static final long serialVersionUID = 1L;
+		private final Object modelObject;
+
+		public DataExtractionTreeNode(String name, Object modelObject){
+			super(name);
+			this.modelObject = modelObject;
+		}
+		
+		public Object getModelObject(){
+			return modelObject;
+		}
+		
+	}
+	
+	private void recalculateAmenities(final double newLatitude, final double newLongitude) {
 		if (amenitiesTree != null) {
 			Region reg = (Region) amenitiesTree.getModelObject();
 			List<Amenity> closestAmenities = reg.getAmenityManager().getClosestObjects(newLatitude, newLongitude, 0, 5);
@@ -878,8 +771,6 @@ public class OsmExtractionUI implements IMapLocationListener {
 				((DefaultMutableTreeNode) amenitiesTree.getChildAt(0)).add(new DataExtractionTreeNode(str, n));
 				((DefaultTreeModel)treePlaces.getModel()).nodeStructureChanged(amenitiesTree.getChildAt(0));
 			}
-
-			
 		}
 	}
 	
@@ -897,23 +788,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 		}
 		jList.setListData(names);
 	}
-	
-	
-	public static class DataExtractionTreeNode extends DefaultMutableTreeNode {
-		private static final long serialVersionUID = 1L;
-		private final Object modelObject;
 
-		public DataExtractionTreeNode(String name, Object modelObject){
-			super(name);
-			this.modelObject = modelObject;
-		}
-		
-		public Object getModelObject(){
-			return modelObject;
-		}
-		
-	}
-	
 	public static class RegionCellEditor extends DefaultTreeCellEditor {
 
 		public RegionCellEditor(JTree tree, DefaultTreeCellRenderer renderer) {
@@ -939,17 +814,6 @@ public class OsmExtractionUI implements IMapLocationListener {
 		}
 		
 	}
-	public class ExitListener extends WindowAdapter {
-		public void windowClosing(WindowEvent event) {
-			// save preferences
-			DataExtractionSettings settings = DataExtractionSettings.getSettings();
-			settings.saveDefaultLocation(mapPanel.getLatitude(), mapPanel.getLongitude());
-			settings.saveDefaultZoom(mapPanel.getZoom());
-			settings.saveWindowBounds(frame.getBounds());
-			System.exit(0);
-		}
-	}
-	
 	private class PopupTrigger extends MouseAdapter {
 		
 		private final JPopupMenu popupMenu;
@@ -973,6 +837,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 	      }
 	    }
 	  }
+*/
 
-	
+
 }
