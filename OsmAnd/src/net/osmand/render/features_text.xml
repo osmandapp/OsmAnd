@@ -1,21 +1,3 @@
-<Style name="highway-junctions">
-    <Rule>
-      &maxscale_zoom11;
-      &minscale_zoom11;
-      <TextSymbolizer name="ref" fontset_name="oblique-fonts" size="9" fill="#6666ff" halo_radius="1" wrap_width="12" min_distance="2" />
-    </Rule>
-    <Rule>
-      &maxscale_zoom12;
-      &minscale_zoom14;
-      <TextSymbolizer name="ref" fontset_name="oblique-fonts" size="9" fill="#6666ff" halo_radius="1" wrap_width="12" min_distance="2"/>
-      <TextSymbolizer name="name" fontset_name="oblique-fonts" size="8" fill="#6666ff" halo_radius="1" wrap_width="2" dy="-8" min_distance="2" wrap_character=";" />
-    </Rule>
-    <Rule>
-      &maxscale_zoom15;
-      <TextSymbolizer name="ref" fontset_name="oblique-fonts" size="12" fill="#6666ff" halo_radius="1" wrap_width="12" min_distance="2"/>
-      <TextSymbolizer name="name" fontset_name="oblique-fonts" size="11" fill="#6666ff" halo_radius="1" wrap_width="2" dy="-10" min_distance="2" wrap_character=";" />
-    </Rule>
-</Style>
 <Style name="text">
     <Rule>
       <Filter>[place] = 'island'</Filter>
@@ -269,6 +251,52 @@
       <TextSymbolizer name="name" fontset_name="book-fonts" size="9" fill="#6699cc" halo_radius="1" placement="line"/>
     </Rule>
 </Style>
+
+
+<Style name="boundary">
+    <Rule>
+      &maxscale_zoom8;
+      &minscale_zoom9;
+        <TextSymbolizer name="name" fontset_name="bold-fonts" size="8" dy="-8" fill="#9c9" halo_radius="1" wrap_width="14"/>
+    </Rule>
+    <Rule>
+      &maxscale_zoom10;
+      &minscale_zoom11;
+        <TextSymbolizer name="name" fontset_name="bold-fonts" size="11" fill="#9c9" halo_radius="1" wrap_width="14"/>
+    </Rule>
+</Style>
+
+<Layer name="misc_boundaries" status="on" srs="&osm2pgsql_projection;">
+    <StyleName>boundary</StyleName>
+    <Datasource>
+      <Parameter name="table">
+      (select way,name,boundary from &prefix;_polygon where boundary='national_park') as boundary
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+
+<!--  ROADS  -->
+<Style name="highway-junctions">
+    <Rule>
+      &maxscale_zoom11;
+      &minscale_zoom11;
+      <TextSymbolizer name="ref" fontset_name="oblique-fonts" size="9" fill="#6666ff" halo_radius="1" wrap_width="12" min_distance="2" />
+    </Rule>
+    <Rule>
+      &maxscale_zoom12;
+      &minscale_zoom14;
+      <TextSymbolizer name="ref" fontset_name="oblique-fonts" size="9" fill="#6666ff" halo_radius="1" wrap_width="12" min_distance="2"/>
+      <TextSymbolizer name="name" fontset_name="oblique-fonts" size="8" fill="#6666ff" halo_radius="1" wrap_width="2" dy="-8" min_distance="2" wrap_character=";" />
+    </Rule>
+    <Rule>
+      &maxscale_zoom15;
+      <TextSymbolizer name="ref" fontset_name="oblique-fonts" size="12" fill="#6666ff" halo_radius="1" wrap_width="12" min_distance="2"/>
+      <TextSymbolizer name="name" fontset_name="oblique-fonts" size="11" fill="#6666ff" halo_radius="1" wrap_width="2" dy="-10" min_distance="2" wrap_character=";" />
+    </Rule>
+</Style>
+
+
 <Style name="roads-text-low-zoom">
     <Rule>
       <Filter>[highway] = 'motorway' and [length] = 1</Filter>
@@ -415,6 +443,10 @@
       <ShieldSymbolizer name="ref" fontset_name="bold-fonts" size="10" fill="#fff" placement="line" file="&symbols;/pri_shield8.png" min_distance="30" spacing="750"/>
     </Rule>
 </Style>
+
+
+
+
 <Style name="roads-text">
     <Rule>
       <Filter>[highway] = 'motorway' and [length] = 1</Filter>
@@ -757,26 +789,3 @@
     </Rule>
 </Style>
 
-
-<Style name="boundary">
-    <Rule>
-      &maxscale_zoom8;
-      &minscale_zoom9;
-        <TextSymbolizer name="name" fontset_name="bold-fonts" size="8" dy="-8" fill="#9c9" halo_radius="1" wrap_width="14"/>
-    </Rule>
-    <Rule>
-      &maxscale_zoom10;
-      &minscale_zoom11;
-        <TextSymbolizer name="name" fontset_name="bold-fonts" size="11" fill="#9c9" halo_radius="1" wrap_width="14"/>
-    </Rule>
-</Style>
-
-<Layer name="misc_boundaries" status="on" srs="&osm2pgsql_projection;">
-    <StyleName>boundary</StyleName>
-    <Datasource>
-      <Parameter name="table">
-      (select way,name,boundary from &prefix;_polygon where boundary='national_park') as boundary
-      </Parameter>
-      &datasource-settings;
-    </Datasource>
-</Layer>
