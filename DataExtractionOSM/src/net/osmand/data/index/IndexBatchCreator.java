@@ -18,8 +18,6 @@ import java.util.zip.ZipOutputStream;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
-import net.osmand.data.Region;
-import net.osmand.data.preparation.DataExtraction;
 import net.osmand.data.preparation.IndexCreator;
 import net.osmand.impl.ConsoleProgressImplementation;
 
@@ -375,7 +373,9 @@ public class IndexBatchCreator {
 		}
 		System.out.println("GENERATING INDEXES FINISHED ");
 	}
-	protected void generateIndexOld(File f, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
+	
+	
+/*	protected void generateIndexOld(File f, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
 		if (!generateIndexes) {
 			return;
 		}
@@ -410,7 +410,7 @@ public class IndexBatchCreator {
 
 		}
 		System.gc();
-	}
+	}*/
 	
 	protected void generateIndex(File f, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
 		if (!generateIndexes) {

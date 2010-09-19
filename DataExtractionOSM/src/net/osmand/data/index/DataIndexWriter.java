@@ -1,30 +1,21 @@
 package net.osmand.data.index;
 
-import java.io.File;
-import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import net.osmand.Algoritms;
-import net.osmand.LogUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.Building;
 import net.osmand.data.City;
-import net.osmand.data.Region;
-import net.osmand.data.Street;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.data.City.CityType;
@@ -44,75 +35,13 @@ import net.osmand.osm.Node;
 import net.osmand.osm.Relation;
 import net.osmand.osm.Way;
 
-import org.apache.commons.logging.Log;
-
 
 
 public class DataIndexWriter {
 	
 	
-	private final File workingDir;
-	private final Region region;
-	private static final Log log = LogUtil.getLog(DataIndexWriter.class);
-	
-	
 	private static final int BATCH_SIZE = 1000;
 
-	public DataIndexWriter(File workingDir, Region region){
-		this.workingDir = workingDir;
-		this.region = region;
-	}
-	
-	protected File checkFile(String name) throws IOException {
-		String fileName = name;
-		File f = new File(workingDir, fileName);
-		f.getParentFile().mkdirs();
-		// remove existing file
-		if (f.exists()) {
-			log.warn("Remove existing index : " + f.getAbsolutePath()); //$NON-NLS-1$
-			f.delete();
-		}
-		return f;	
-	}
-	
-	public DataIndexWriter writePOI() throws IOException, SQLException {
-		return writePOI(IndexConstants.POI_INDEX_DIR+region.getName()+IndexConstants.POI_INDEX_EXT, null);
-	}
-	
-	
-	public DataIndexWriter writePOI(String fileName, Long date) throws IOException, SQLException { 
-		File file = checkFile(fileName);
-		long now = System.currentTimeMillis();
-		try {
-			Class.forName("org.sqlite.JDBC"); //$NON-NLS-1$
-		} catch (ClassNotFoundException e) {
-			log.error("Illegal configuration", e); //$NON-NLS-1$
-			throw new IllegalStateException(e);
-		}
-        Connection conn = DriverManager.getConnection("jdbc:sqlite:"+file.getAbsolutePath()); //$NON-NLS-1$
-		try {
-			createPoiIndexStructure(conn);
-			PreparedStatement prep = createStatementAmenityInsert(conn);
-			Map<PreparedStatement, Integer> map = new LinkedHashMap<PreparedStatement, Integer>();
-			map.put(prep, 0);
-	        conn.setAutoCommit(false);
-			for (Amenity a : region.getAmenityManager().getAllObjects()) {
-				insertAmenityIntoPoi(prep, map, a, BATCH_SIZE);
-			}
-			if(map.get(prep) > 0){
-				prep.executeBatch();
-			}
-			prep.close();
-			conn.setAutoCommit(true);
-		} finally {
-			conn.close();
-			log.info(String.format("Indexing poi done in %s ms.", System.currentTimeMillis() - now)); //$NON-NLS-1$
-		}
-		if(date != null){
-			file.setLastModified(date);
-		}
-		return this;
-	}
 
 	public static void insertAmenityIntoPoi(PreparedStatement prep, Map<PreparedStatement, Integer> map, Amenity amenity, int batchSize) throws SQLException {
 		prep.setLong(IndexPoiTable.ID.ordinal() + 1, amenity.getId());
@@ -140,91 +69,6 @@ public class DataIndexWriter {
         stat.close();
 	}
 	
-	public DataIndexWriter writeAddress() throws IOException, SQLException{
-		return writeAddress(IndexConstants.ADDRESS_INDEX_DIR+region.getName()+IndexConstants.ADDRESS_INDEX_EXT, null, true);
-	}
-	
-	public DataIndexWriter writeAddress(String fileName, Long date, boolean writeWayNodes) throws IOException, SQLException{
-		File file = checkFile(fileName);
-		long now = System.currentTimeMillis();
-		try {
-			Class.forName("org.sqlite.JDBC"); //$NON-NLS-1$
-		} catch (ClassNotFoundException e) {
-			log.error("Illegal configuration", e); //$NON-NLS-1$
-			throw new IllegalStateException(e);
-		}
-        Connection conn = DriverManager.getConnection("jdbc:sqlite:"+file.getAbsolutePath()); //$NON-NLS-1$
-		try {
-			createAddressIndexStructure(conn);
-	        
-	        PreparedStatement prepCity = conn.prepareStatement(
-	            IndexConstants.generatePrepareStatementToInsert(IndexCityTable.getTable(), IndexCityTable.values().length));
-	        PreparedStatement prepStreet = conn.prepareStatement(
-		            IndexConstants.generatePrepareStatementToInsert(IndexStreetTable.getTable(), IndexStreetTable.values().length));
-	        PreparedStatement prepBuilding = conn.prepareStatement(
-		            IndexConstants.generatePrepareStatementToInsert(IndexBuildingTable.getTable(), IndexBuildingTable.values().length));
-	        PreparedStatement prepStreetNode = conn.prepareStatement(
-		            IndexConstants.generatePrepareStatementToInsert(IndexStreetNodeTable.getTable(), IndexStreetNodeTable.values().length));
-	        Map<PreparedStatement, Integer> count = new HashMap<PreparedStatement, Integer>();
-	        count.put(prepStreet, 0);
-	        count.put(prepCity, 0);
-	        count.put(prepStreetNode, 0);
-	        count.put(prepBuilding, 0);
-	        conn.setAutoCommit(false);
-	        
-	        for(CityType t : CityType.values()){
-	        	for(City city : region.getCitiesByType(t)) {
-	        		if(city.getId() == null || city.getLocation() == null){
-						continue;
-					}
-	        		writeCity(prepCity, count, city, BATCH_SIZE);
-					
-					for(Street street : city.getStreets()){
-						if(street.getId() == null || street.getLocation() == null){
-							continue;
-						}
-						assert IndexStreetTable.values().length == 6;
-						prepStreet.setLong(IndexStreetTable.ID.ordinal() + 1, street.getId());
-						prepStreet.setString(IndexStreetTable.NAME_EN.ordinal() + 1, street.getEnName());
-						prepStreet.setDouble(IndexStreetTable.LATITUDE.ordinal() + 1, street.getLocation().getLatitude());
-						prepStreet.setDouble(IndexStreetTable.LONGITUDE.ordinal() + 1, street.getLocation().getLongitude());
-						prepStreet.setString(IndexStreetTable.NAME.ordinal() + 1, street.getName());
-						prepStreet.setLong(IndexStreetTable.CITY.ordinal() + 1, city.getId());
-						addBatch(count, prepStreet);
-						if (writeWayNodes) {
-							for (Way way : street.getWayNodes()) {
-								writeStreetWayNodes(prepStreetNode, count, street.getId(), way, BATCH_SIZE);
-							}
-						}
-						
-						for(Building building : street.getBuildings()){
-							if(building.getId() == null || building.getLocation() == null){
-								continue;
-							}
-							writeBuilding(prepBuilding, count, street.getId(), building, BATCH_SIZE);
-						}
-					}
-	        		
-	        	}
-	        }
-			
-			for(PreparedStatement p : count.keySet()){
-				if(count.get(p) > 0){
-					p.executeBatch();
-				}
-				p.close();
-			}
-			conn.setAutoCommit(true);
-		} finally {
-			conn.close();
-			log.info(String.format("Indexing address done in %s ms.", System.currentTimeMillis() - now)); //$NON-NLS-1$
-		}
-		if(date != null){
-			file.setLastModified(date);
-		}
-		return this;
-	}
-
 	public static void writeStreetWayNodes(PreparedStatement prepStreetNode, Map<PreparedStatement, Integer> count, Long streetId, Way way, int batchSize)
 			throws SQLException {
 		for (Node n : way.getNodes()) {
@@ -283,60 +127,6 @@ public class DataIndexWriter {
 	}
 	
 	
-	public DataIndexWriter writeTransport() throws IOException, SQLException{
-		return writeTransport(IndexConstants.TRANSPORT_INDEX_DIR+region.getName()+IndexConstants.TRANSPORT_INDEX_EXT, null);
-	}
-	
-	public DataIndexWriter writeTransport(String fileName, Long date) throws IOException, SQLException{
-		File file = checkFile(fileName);
-		long now = System.currentTimeMillis();
-		try {
-			Class.forName("org.sqlite.JDBC"); //$NON-NLS-1$
-		} catch (ClassNotFoundException e) {
-			log.error("Illegal configuration", e); //$NON-NLS-1$
-			throw new IllegalStateException(e);
-		}
-        Connection conn = DriverManager.getConnection("jdbc:sqlite:"+file.getAbsolutePath()); //$NON-NLS-1$
-		try {
-			createTransportIndexStructure(conn);
-	        
-	        PreparedStatement prepRoute = conn.prepareStatement(
-	            IndexConstants.generatePrepareStatementToInsert(IndexTransportRoute.getTable(), IndexTransportRoute.values().length));
-	        PreparedStatement prepRouteStops = conn.prepareStatement(
-		            IndexConstants.generatePrepareStatementToInsert(IndexTransportRouteStop.getTable(), IndexTransportRouteStop.values().length));
-	        PreparedStatement prepStops = conn.prepareStatement(
-		            IndexConstants.generatePrepareStatementToInsert(IndexTransportStop.getTable(), IndexTransportStop.values().length));
-	        Map<PreparedStatement, Integer> count = new HashMap<PreparedStatement, Integer>();
-	        count.put(prepRouteStops, 0);
-	        count.put(prepRoute, 0);
-	        count.put(prepStops, 0);
-	        conn.setAutoCommit(false);
-	        
-	        
-	        Set<Long> writtenStops = new LinkedHashSet<Long>();
-	        for(String t : region.getTransportRoutes().keySet()){
-	        	for(TransportRoute r : region.getTransportRoutes().get(t)) {
-	        		insertTransportIntoIndex(prepRoute, prepRouteStops, prepStops, writtenStops, r, count, BATCH_SIZE);
-	        	}
-	        }
-			
-			for(PreparedStatement p : count.keySet()){
-				if(count.get(p) > 0){
-					p.executeBatch();
-				}
-				p.close();
-			}
-			conn.setAutoCommit(true);
-		} finally {
-			conn.close();
-			log.info(String.format("Indexing transport done in %s ms.", System.currentTimeMillis() - now)); //$NON-NLS-1$
-		}
-		if(date != null){
-			file.setLastModified(date);
-		}
-		return this;
-	}
-
 	private static void writeRouteStops(PreparedStatement prepRouteStops, PreparedStatement prepStops, Map<PreparedStatement, Integer> count,
 			Set<Long> writtenStops, TransportRoute r, List<TransportStop> stops, boolean direction) throws SQLException {
 		int i = 0;
@@ -395,9 +185,9 @@ public class DataIndexWriter {
 		Statement stat = conn.createStatement();
         stat.execute(IndexConstants.generateCreateSQL(IndexMapRenderObject.values()));
         stat.execute(IndexConstants.generateCreateIndexSQL(IndexMapRenderObject.values()));
-        stat.execute("CREATE VIRTUAL TABLE "+IndexConstants.indexMapLocationsTable+" USING rtree (id, minLon, maxLon, minLat, maxLat);");
-        stat.execute("CREATE VIRTUAL TABLE "+IndexConstants.indexMapLocationsTable2+" USING rtree (id, minLon, maxLon, minLat, maxLat);");
-        stat.execute("CREATE VIRTUAL TABLE "+IndexConstants.indexMapLocationsTable3+" USING rtree (id, minLon, maxLon, minLat, maxLat);");
+        stat.execute("CREATE VIRTUAL TABLE "+IndexConstants.indexMapLocationsTable+" USING rtree (id, minLon, maxLon, minLat, maxLat);"); //$NON-NLS-1$ //$NON-NLS-2$
+        stat.execute("CREATE VIRTUAL TABLE "+IndexConstants.indexMapLocationsTable2+" USING rtree (id, minLon, maxLon, minLat, maxLat);"); //$NON-NLS-1$ //$NON-NLS-2$
+        stat.execute("CREATE VIRTUAL TABLE "+IndexConstants.indexMapLocationsTable3+" USING rtree (id, minLon, maxLon, minLat, maxLat);"); //$NON-NLS-1$ //$NON-NLS-2$
         stat.execute("PRAGMA user_version = " + IndexConstants.MAP_TABLE_VERSION); //$NON-NLS-1$
         stat.close();
 	}

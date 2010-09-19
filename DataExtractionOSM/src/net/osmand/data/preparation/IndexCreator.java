@@ -64,12 +64,16 @@ import org.xml.sax.SAXException;
 
 
 /**
+ * http://wiki.openstreetmap.org/wiki/OSM_tags_for_routing#Is_inside.2Foutside
+ * http://wiki.openstreetmap.org/wiki/Relations/Proposed/Postal_Addresses
+ * http://wiki.openstreetmap.org/wiki/Proposed_features/House_numbers/Karlsruhe_Schema#Tags (node, way)
+
  * That data extraction has aim, 
  * save runtime memory and generate indexes on the fly.
  * It will be longer than load in memory (needed part) and save into index.
  */
 public class IndexCreator {
-	private static final Log log = LogFactory.getLog(DataExtraction.class);
+	private static final Log log = LogFactory.getLog(IndexCreator.class);
 
 
 	public static final int BATCH_SIZE = 5000;
@@ -937,7 +941,7 @@ public class IndexCreator {
 				}
 			}
 			
-			if(indexMap && (e instanceof Way) || (e instanceof Node)){
+			if(indexMap && (e instanceof Way || e instanceof Node)){
 				// manipulate what kind of way to load
 				loadEntityData(e, true);
 				boolean inverse = "-1".equals(e.getTag(OSMTagKey.ONEWAY));

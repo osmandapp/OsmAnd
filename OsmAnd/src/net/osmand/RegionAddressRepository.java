@@ -17,9 +17,9 @@ import java.util.TreeSet;
 
 import net.osmand.data.Building;
 import net.osmand.data.City;
+import net.osmand.data.CityComparator;
 import net.osmand.data.MapObject;
 import net.osmand.data.PostCode;
-import net.osmand.data.Region;
 import net.osmand.data.Street;
 import net.osmand.data.City.CityType;
 import net.osmand.data.index.IndexConstants;
@@ -183,7 +183,7 @@ public class RegionAddressRepository {
 		}
 		// sort cities
 		ArrayList<City> list = new ArrayList<City>(cities.values());
-		Collections.sort(list,  new Region.CityComparator(useEnglishNames));
+		Collections.sort(list,  new CityComparator(useEnglishNames));
 		cities.clear();
 		cityTypes.clear();
 		for(City c : list){
