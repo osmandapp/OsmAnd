@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="net.osmand" android:versionName="0.3.4" android:versionCode="12"> 
+	package="net.osmand" android:versionName="0.4" android:versionCode="14"> 
 	<application android:icon="@drawable/icon" android:label="@string/app_name"
 		android:debuggable="true" android:name=".activities.OsmandApplication" android:description="@string/app_description">
 		<activity android:name=".activities.MainMenuActivity"

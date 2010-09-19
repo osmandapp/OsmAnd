@@ -7,8 +7,6 @@ package net.osmand;
  */
 public class ToDoConstants {
 	
-	// TODO swing
-	// !!! 12. Reinvent UI of swing app (remove Region object and clear other MapObject) use indexes to show results
 	
 	// TODO max 94
 	//  ! 81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
@@ -63,6 +61,6 @@ public class ToDoConstants {
 	// DONE ANDROID :
 	
 	// DONE SWING
- 	
+	//  12. Reinvent UI of swing app (remove Region object and clear other MapObject)  	
 	
 }
