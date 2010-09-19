@@ -1257,6 +1257,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				} else if(item == 5){
 					if(gpxLayer.isVisible()){
 						gpxLayer.clearCurrentGPX();
+						favoritesLayer.setAdditionalPoints(null);
 					} else {
 						dialog.dismiss();
 						useGPXFileLayer(false, null);

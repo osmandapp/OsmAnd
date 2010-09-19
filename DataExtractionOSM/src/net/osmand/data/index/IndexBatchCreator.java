@@ -503,7 +503,11 @@ public class IndexBatchCreator {
 		} else { 
 			return;
 		}
-		if(mbLengh > 5 && f.getName().endsWith(".odb")){
+		if(mbLengh < 0.03){
+			// do not upload small files
+			return;
+		}
+		if(mbLengh > 3 && f.getName().endsWith(".odb")){
 			String zipFileName = f.getName().subSequence(0, f.getName().length() - 4)+".zip";
 			File zFile = new File(f.getParentFile(), zipFileName);
 			log.info("Zipping file " + f.getName());

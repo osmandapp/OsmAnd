@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -35,7 +36,44 @@ public class DownloaderIndexFromGoogleCode {
 //								IndexConstants.TRANSPORT_TABLE_VERSION + "" , //$NON-NLS-1$
 //								IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "",  //$NON-NLS-1$//$NON-NLS-2$
 //								IndexConstants.TRANSPORT_TABLE_VERSION + "" }); //$NON-NLS-1$
-//		System.out.println(indexFiles);
+		Map<String, String> indexFiles = DownloaderIndexFromGoogleCode.getIndexFiles(
+				new String[] { IndexConstants.TRANSPORT_INDEX_EXT, IndexConstants.TRANSPORT_INDEX_EXT_ZIP,}, 
+				new String[] {	IndexConstants.TRANSPORT_TABLE_VERSION + "",  
+								IndexConstants.TRANSPORT_TABLE_VERSION + "" }); //$NON-NLS-1$
+		System.out.println(indexFiles);
+		
+		
+		// put your cookies and personal information for delete
+		Map<String, String> cookies = new HashMap<String, String>();
+		cookies.put("__utmb", "");
+		cookies.put("__utmz", "");
+		cookies.put("__utma", "");
+		cookies.put("__utmc", "");
+		cookies.put("PREF", "");
+		cookies.put("HSID", "");
+		cookies.put("SID", "");
+		cookies.put("NID", "");
+		cookies.put("__qca", "");
+		String pagegen = "";
+		String token = "";
+		
+		StringBuilder cookieString = new StringBuilder();
+		int size = cookies.size();
+		for (String c : cookies.keySet()) {
+			size--;
+			cookieString.append(c).append("=").append(cookies.get(c));
+			if (size > 0) {
+				cookieString.append("; ");
+			}
+		}
+		
+		for(String s : indexFiles.keySet()){
+			String description = indexFiles.get(s);
+			if(description.contains("0 MB")){
+				deleteFileFromGoogleDownloads(s, token, pagegen, 
+						cookieString.toString());
+			}
+		}
 		
 	}
 	
@@ -104,7 +142,7 @@ public class DownloaderIndexFromGoogleCode {
 	
 	
 	// that method doesn't work !!!
-	public static String deleteFileFromGoogleDownloads(String fileName, String token, String pagegen, String cookie) throws IOException {
+	public static String deleteFileFromGoogleDownloads(String fileName, String token, String pagegen, String cookies) throws IOException {
 		// prepare data
 		String urlText = "http://code.google.com/p/osmand/downloads/delete.do?name="+fileName; //$NON-NLS-1$
 		System.out.println(urlText);
@@ -120,6 +158,7 @@ public class DownloaderIndexFromGoogleCode {
 		URL url = new URL(urlText);
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		
+		connection.setRequestProperty("Cookie", cookies);
 		connection.setConnectTimeout(15000);
 		connection.setRequestMethod("POST"); //$NON-NLS-1$
 //		String token = userName + ":" + password; //$NON-NLS-1$

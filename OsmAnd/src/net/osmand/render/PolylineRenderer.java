@@ -13,7 +13,6 @@ public class PolylineRenderer {
 	public static void renderPolyline(int type, int subtype, int objType, RenderingContext rc, OsmandRenderer o){
 		int zoom = rc.zoom;
 		
-		boolean showText = true;
 		
 		int color = Color.BLACK;
 		PathEffect pathEffect = null;
@@ -146,7 +145,17 @@ public class PolylineRenderer {
 					}
 				}
 			}
-			showText = (carRoad && zoom > 12) || zoom > 16;
+			if((carRoad && zoom > 12) || zoom > 16){
+				rc.showText = true;
+				float w = rc.main.strokeWidth + 3;
+				if(w < 10){
+					 w = 10;
+				}
+				rc.textSize = w;
+				rc.textColor = Color.BLACK;
+				rc.showTextOnPath = true;
+			}
+			
 			
 			if (carRoad) {
 				if (zoom >= 15) {
@@ -340,11 +349,20 @@ public class PolylineRenderer {
 					}
 				}
 			} else {
+				int layer = MapRenderingTypes.getWayLayer(objType);
+				boolean tunnel = layer == 1;
 				switch (subtype) {
 				case 1:
 					if (zoom >= 15) {
 						color = 0xffb5d0d0;
 						strokeWidth = 2;
+						if(!tunnel){
+							rc.showText = true;
+							rc.showTextOnPath = true;
+							rc.textSize = 8;
+							rc.textHaloRadius = 1;
+							rc.textColor = 0xff6699cc;
+						}
 					} else {
 						strokeWidth = 0;
 					}
@@ -358,14 +376,24 @@ public class PolylineRenderer {
 					} else {
 						if (zoom == 13) {
 							strokeWidth = 3;
-						} else if (zoom == 14) {
-							strokeWidth = 5;
-						} else if (zoom == 15 || zoom == 16) {
-							strokeWidth = 6;
-						} else if (zoom == 17) {
-							strokeWidth = 10;
-						} else if (zoom == 18) {
-							strokeWidth = 12;
+						} else {
+							if(!tunnel){
+								rc.showText = true;
+								rc.textSize = 9;
+								rc.showTextOnPath = true;
+								rc.textHaloRadius = 1;
+								rc.textColor = 0xff6699cc;
+								rc.textMinDistance = 200;
+							}
+							if (zoom == 14) {
+								strokeWidth = 5;
+							} else if (zoom == 15 || zoom == 16) {
+								strokeWidth = 6;
+							} else if (zoom == 17) {
+								strokeWidth = 10;
+							} else if (zoom == 18) {
+								strokeWidth = 12;
+							}
 						}
 					}
 					break;
@@ -377,6 +405,13 @@ public class PolylineRenderer {
 					} else if (zoom < 15) {
 						strokeWidth = 1;
 					} else {
+						if(!tunnel){
+							rc.showText = true;
+							rc.textSize = 8;
+							rc.showTextOnPath = true;
+							rc.textHaloRadius = 1;
+							rc.textColor = 0xff6699cc;
+						}
 						strokeWidth = 2;
 					}
 					break;
@@ -392,6 +427,12 @@ public class PolylineRenderer {
 				case 12:
 					if (zoom >= 13) {
 						strokeWidth = 2;
+						if(zoom >= 15){
+							rc.showText = true;
+							rc.showTextOnPath = false;
+							rc.textSize = 8;
+							rc.textHaloRadius = 1;
+						}
 					} else {
 						strokeWidth = 0;
 					}
@@ -626,7 +667,6 @@ public class PolylineRenderer {
 		rc.main.shadowColor = shadowColor;
 		rc.main.shadowLayer = shadowLayer;
 		rc.main.strokeWidth = strokeWidth;
-		rc.showText = showText;
 		
 	}
 	

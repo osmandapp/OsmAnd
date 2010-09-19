@@ -31,16 +31,16 @@ public class ToDoConstants {
 	//  +2. rotate map gps without location
 	//  4. recalculating route when location is far from ! (error)
 	//  5. keyboard (issue 43 )?
-	//  6. Do not upload empty files (transport, poi... ). 
-	//  7. Implement auto-delete from site (done, should be ported from C#)
+	// +6. Do not upload empty files (transport, poi... ). 
+	// +7. Implement auto-delete from site 
 	//  8. In all places verify to use float lat/lon improve disk space for indexes !!!
 	
 	//  +13! Support multiple database for map rendering
 	//  16. Internet access bits
 	//  17. Implement multipolygons to polygons (!?) + coastline
 	//  18. Fix loading map data in rotated mode (check properly boundaries)   
-	//  20. Add text to rendering (area, point, polyline) 
-	//			features_text.xml, main_text.xml, layer-placenames.xml.inc
+	//  20. Add text to rendering (area, point, polyline) (BUILDINGS,  
+	//			features_text.xml (!), main_text.xml, layer-placenames.xml.inc
 	//  21. Shield, ref.
 	//  22. Verify all POI has a point_type (in order to search them)
 
