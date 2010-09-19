@@ -36,11 +36,6 @@ public class DownloaderIndexFromGoogleCode {
 //								IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "",  //$NON-NLS-1$//$NON-NLS-2$
 //								IndexConstants.TRANSPORT_TABLE_VERSION + "" }); //$NON-NLS-1$
 //		System.out.println(indexFiles);
-
-//		deleteFileFromGoogleDownloads("Bahrain_0.trans.odb", "vics001", "kfvth85");
-		deleteFileFromGoogleDownloads("Bahrain_0.trans.odb", "vics001", "cH5mK8aA5kd3");
-		
-		
 		
 	}
 	
@@ -109,17 +104,16 @@ public class DownloaderIndexFromGoogleCode {
 	
 	
 	// that method doesn't work !!!
-	public static String deleteFileFromGoogleDownloads(String fileName, String userName, String password) throws IOException {
+	public static String deleteFileFromGoogleDownloads(String fileName, String token, String pagegen, String cookie) throws IOException {
 		// prepare data
-		String urlText = "http://code.google.com/p/osmand/downloads/delete.do?name="+fileName;
+		String urlText = "http://code.google.com/p/osmand/downloads/delete.do?name="+fileName; //$NON-NLS-1$
 		System.out.println(urlText);
 		StringBuilder requestBody = new StringBuilder();
 		requestBody.
-				append("token=cc4e4cffba19a6107d2161f85c71631f").
-//				append("token=").append(Base64.encode(token.getBytes("UTF-8"))).
-				append("&pagegen=1283283182175778").
-				append("&filename=").append(fileName).
-				append("&delete=Delete+download");
+				append("token=").append(token). //$NON-NLS-1$
+				append("&pagegen=").append(pagegen). //$NON-NLS-1$
+				append("&filename=").append(fileName). //$NON-NLS-1$
+				append("&delete=Delete+download"); //$NON-NLS-1$
 		System.out.println(requestBody);
 		
 		// getting url
@@ -127,11 +121,11 @@ public class DownloaderIndexFromGoogleCode {
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		
 		connection.setConnectTimeout(15000);
-		connection.setRequestMethod("POST");
+		connection.setRequestMethod("POST"); //$NON-NLS-1$
 //		String token = userName + ":" + password; //$NON-NLS-1$
 //		connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-		connection.setRequestProperty("Content-Length", requestBody.length()+"");
+		connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");  //$NON-NLS-1$//$NON-NLS-2$
+		connection.setRequestProperty("Content-Length", requestBody.length()+""); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		connection.setDoInput(true);
 		connection.setDoOutput(true);
