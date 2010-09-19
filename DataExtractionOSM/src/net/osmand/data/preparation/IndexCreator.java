@@ -478,8 +478,11 @@ public class IndexCreator {
 	}
 	
 	public void iterateOverAllEntities(IProgress progress, int allNodes, int allWays, int allRelations, int step) throws SQLException{
+		progress.setGeneralProgress("[65 of 100]");
 		iterateOverEntities(progress, EntityType.NODE, allNodes, step);
+		progress.setGeneralProgress("[85 of 100]");
 		iterateOverEntities(progress, EntityType.WAY, allWays, step);
+		progress.setGeneralProgress("[90 of 100]");
 		iterateOverEntities(progress, EntityType.RELATION, allRelations, step);
 	}
 	
@@ -1298,7 +1301,6 @@ public class IndexCreator {
 
 
 		// 2. Processing all entries
-		progress.setGeneralProgress("[90 of 100]");
 
 		pselectNode = dbConn.prepareStatement("select * from node where id = ?");
 		pselectWay = dbConn.prepareStatement("select * from ways where id = ? order by ord");
@@ -1415,7 +1417,10 @@ public class IndexCreator {
 		
 
 		// 1. write all cities
+		
 		if(indexAddress){
+			progress.setGeneralProgress("[55 of 100]");
+			progress.startTask("Indexing cities...", -1);
 			if(!loadFromPath){
 				allNodes = iterateOverEntities(progress, EntityType.NODE, allNodes, STEP_CITY_NODES);
 			}
@@ -1434,6 +1439,8 @@ public class IndexCreator {
 		
 		// 2. index address relations
 		if(indexAddress){
+			progress.setGeneralProgress("[55 of 100]");
+			progress.startTask("Preindexing address...", -1);
 			allRelations = iterateOverEntities(progress, EntityType.RELATION, allRelations, STEP_ADDRESS_RELATIONS);
 			// commit to put all cities
 			if(pStatements.get(addressBuildingStat) > 0){
@@ -1454,6 +1461,7 @@ public class IndexCreator {
 		
 		// 4. update all postal codes from relations
 		if(indexAddress && !postalCodeRelations.isEmpty()){
+			progress.setGeneralProgress("[95 of 100]");
 			progress.startTask("Registering postcodes...", -1);
 			if(pStatements.get(addressBuildingStat) > 0){
 				addressBuildingStat.executeBatch();
@@ -1475,6 +1483,8 @@ public class IndexCreator {
 			
 		}
 		// 5. writing low level maps
+		progress.setGeneralProgress("[95 of 100]");
+		progress.startTask("Indexing low levels for map ...", -1);
 		if(indexMap){
 			for(Long l : lowLevelWaysSt.keySet()){
 				for(Way w : lowLevelWaysSt.get(l)){
