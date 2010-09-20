@@ -266,7 +266,8 @@ public class MapRenderRepositories {
 			}
 			try {
 				int count = 0;
-				List<MapRenderObject> local = new ArrayList<MapRenderObject>();
+				cObjects = new ArrayList<MapRenderObject>();
+				System.gc(); // to clear previous objects
 				Set<Long> ids = new LinkedHashSet<Long>();
 				for (Connection c : connections.keySet()) {
 					RectF r = connections.get(c);
@@ -294,24 +295,25 @@ public class MapRenderRepositories {
 					try {
 						while (result.next()) {
 							long id = result.getLong(1);
-							if(ids.contains(id)){
-								// do not add object twice
-								continue;
+							if (PerformanceFlags.checkForDuplicateObjectIds) {
+								if (ids.contains(id)) {
+									// do not add object twice
+									continue;
+								}
+								ids.add(id);
 							}
-							ids.add(id);
 							MapRenderObject obj = new MapRenderObject(id);
 							obj.setData(result.getBytes(2));
 							obj.setName(result.getString(3));
 							obj.setType(result.getInt(4));
 							count++;
-							local.add(obj);
+							cObjects.add(obj);
 						}
 
 					} finally {
 						result.close();
 					}
 				}
-				cObjects = local;
 				log.info(String
 						.format("Search has been done in %s ms. %s results were found.", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
 			} catch (java.sql.SQLException e) {
