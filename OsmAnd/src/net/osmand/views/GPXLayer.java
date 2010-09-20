@@ -25,7 +25,6 @@ public class GPXLayer implements OsmandMapLayer {
 	private RectF tileRect;
 	private List<List<Location>> points = new ArrayList<List<Location>>();
 	private Paint paint;
-	private Paint paintPoint;
 	
 
 	private Path path;
@@ -38,7 +37,7 @@ public class GPXLayer implements OsmandMapLayer {
 		boundsRect = new Rect(0, 0, view.getWidth(), view.getHeight());
 		tileRect = new RectF();
 		paint = new Paint();
-		paint.setColor(Color.argb(190, 160, 10, 215));
+		paint.setColor(Color.argb(180, 160, 10, 215));
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(14);
 		paint.setAntiAlias(true);
@@ -46,9 +45,6 @@ public class GPXLayer implements OsmandMapLayer {
 		paint.setStrokeJoin(Join.ROUND);
 		
 		
-		paintPoint = new Paint();
-		paintPoint.setColor(Color.argb(190, 160, 10, 215));
-		paintPoint.setStyle(Style.FILL_AND_STROKE);
 		path = new Path();
 	}
 	

@@ -100,8 +100,8 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		
 		// use to calculate points
 		PointF tempPoint = new PointF();
-		float cosRotate;
-		float sinRotate;
+		float cosRotateTileSize;
+		float sinRotateTileSize;
 
 		// These properties are used for rendering one object  
 		// polyline props
@@ -255,8 +255,8 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			rc.width = width;
 			rc.height = height;
 			rc.tileDivisor = (int) (1 << (31 - zoom));
-			rc.cosRotate = FloatMath.cos((float) Math.toRadians(rotate));
-			rc.sinRotate = FloatMath.sin((float) Math.toRadians(rotate));
+			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rotate)) * TILE_SIZE;
+			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rotate)) * TILE_SIZE;
 			bmp = Bitmap.createBitmap(width, height, Config.RGB_565);
 			
 			Canvas cv = new Canvas(bmp);
@@ -287,6 +287,13 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		List<RectF> boundsNotPathIntersect = new ArrayList<RectF>();
 		List<RectF> boundsPathIntersect = new ArrayList<RectF>();
 		int size = rc.textToDraw.size();
+		Comparator<RectF> c = new Comparator<RectF>(){
+			@Override
+			public int compare(RectF object1, RectF object2) {
+				return Float.compare(object1.left, object2.left);
+			}
+			
+		};
 		next: for (int i = 0; i < size; i++) {
 			TextDrawInfo text  = rc.textToDraw.get(i);
 			if(text.text != null){
@@ -303,18 +310,51 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					bounds.set(text.centerX - 3 * text.textSize / 2, text.centerY - mes/2, 
 										text.centerX + 3 * text.textSize / 2, text.centerY + mes/2);
 				}
-				List<RectF> boundsIntersect = text.drawOnPath == null ? boundsNotPathIntersect : boundsPathIntersect; 
-				final int diff = 3;
-				final int diff2 = 15;
-				for(int j = 0; j < boundsIntersect.size() ; j++){
-					RectF b = boundsIntersect.get(j);
-					float x = Math.min(bounds.right, b.right) - Math.max(b.left, bounds.left);
-					float y = Math.min(bounds.bottom, b.bottom) - Math.max(b.top, bounds.top);
-					if((x > diff && y > diff2) || (x > diff2 && y > diff)){
-						continue next;
+				List<RectF> boundsIntersect = text.drawOnPath == null ? boundsNotPathIntersect : boundsPathIntersect;
+				if(boundsIntersect.isEmpty()){
+					boundsIntersect.add(bounds);
+				} else {
+					final int diff = 3;
+					final int diff2 = 15;
+					// implement binary search 
+					int index = Collections.binarySearch(boundsIntersect, bounds, c);
+					if (index < 0) {
+						index = -(index + 1);
 					}
+					// find sublist that is appropriate
+					int e = index;
+					while (e < boundsIntersect.size()) {
+						if (boundsIntersect.get(e).left < bounds.right) {
+							e++;
+						} else {
+							break;
+						}
+					}
+					int st = index - 1;
+					while (st >= 0) {
+						// that's not exact algorithm that replace comparison rect with each other
+						// because of that comparison that is not obvious 
+						// (we store array sorted by left boundary, not by right) - that's euristic
+						if (boundsIntersect.get(st).right > bounds.left) {
+							st--;
+						} else {
+							break;
+						}
+					}
+					if (st < 0) {
+						st = 0;
+					}
+					for (int j = st; j < e; j++) {
+						RectF b = boundsIntersect.get(j);
+						float x = Math.min(bounds.right, b.right) - Math.max(b.left, bounds.left);
+						float y = Math.min(bounds.bottom, b.bottom) - Math.max(b.top, bounds.top);
+						if ((x > diff && y > diff2) || (x > diff2 && y > diff)) {
+							continue next;
+						}
+					}
+					// store in list sorted by left boundary
+					boundsIntersect.add(index, bounds);
 				}
-				boundsIntersect.add(bounds);
 				
 				
 				// paintText.setShadowLayer(text.textShadow, 0, 0, Color.WHITE);
@@ -446,12 +486,11 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		rc.pointCount ++;
 		float tx = o.getPoint31XTile(ind) / rc.tileDivisor;
 		float ty = o.getPoint31YTile(ind) / rc.tileDivisor;
-		float dTileX =  tx - rc.leftX;
+		float dTileX = tx - rc.leftX;
 		float dTileY = ty - rc.topY;
-		float x = (rc.cosRotate * dTileX - rc.sinRotate * dTileY) * TILE_SIZE ;
-		float y = (rc.sinRotate * dTileX + rc.cosRotate * dTileY) * TILE_SIZE ;
+		float x = rc.cosRotateTileSize * dTileX - rc.sinRotateTileSize * dTileY;
+		float y = rc.sinRotateTileSize * dTileX + rc.cosRotateTileSize * dTileY;
 		rc.tempPoint.set(x, y);
-//		rc.tempPoint.set(dTileX * TILE_SIZE, dTileY * TILE_SIZE);
 		if(rc.tempPoint.x >= 0 && rc.tempPoint.x < rc.width && 
 				rc.tempPoint.y >= 0 && rc.tempPoint.y < rc.height){
 			rc.pointInsideCount++;
