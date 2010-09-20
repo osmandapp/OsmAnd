@@ -424,8 +424,8 @@ public class MapRenderingTypes {
 		return (attr & 3) == 1;
 	}
 	
-	public static String getEntityName(Entity e) {
-		if (e.getTag(OSMTagKey.REF) != null) {
+	public static String getEntityName(Entity e, int wholeType) {
+		if (e.getTag(OSMTagKey.REF) != null && getObjectType(wholeType) == HIGHWAY) {
 			String ref = e.getTag(OSMTagKey.REF);
 			if (ref.length() > 5 && ref.indexOf('_') != -1) {
 				ref = ref.substring(0, ref.indexOf('_'));
@@ -435,6 +435,12 @@ public class MapRenderingTypes {
 		String name = e.getTag(OSMTagKey.NAME);
 		if (name == null) {
 			name = e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER);
+		}
+		if(name == null && getObjectType(wholeType) == NATURAL && getPointSubType(wholeType) == 13){
+			name = e.getTag("ele"); //$NON-NLS-1$
+		}
+		if(name == null && getObjectType(wholeType) == AEROWAY && getPointSubType(wholeType) == 17){
+			name = e.getTag(OSMTagKey.REF); 
 		}
 		return name;
 	}
@@ -599,6 +605,7 @@ public class MapRenderingTypes {
 		register("waterway", "drain", WATERWAY, 6, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(1, "waterway", "dock", WATERWAY, 7, POLYGON_WITH_CENTER_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("waterway", "lock_gate", WATERWAY, 8, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("waterway", "lock", WATERWAY, 8, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("waterway", "turning_point", WATERWAY, 9, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("waterway", "boatyard", WATERWAY, 10, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("waterway", "weir", WATERWAY, 11, POLYLINE_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
