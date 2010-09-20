@@ -1076,8 +1076,8 @@ public class IndexCreator {
 				if (lowLevelWaysEnd.containsKey(n.getId())) {
 					for (Way w : lowLevelWaysEnd.get(n.getId())) {
 						int t = MapRenderingTypes.encodeEntityWithType(w, level);
-						if (t == type && Algoritms.objectEquals(MapRenderingTypes.getEntityName(w), 
-								MapRenderingTypes.getEntityName(e))) {
+						if (t == type && Algoritms.objectEquals(MapRenderingTypes.getEntityName(w, t), 
+								MapRenderingTypes.getEntityName(e, t))) {
 							start = w;
 							break;
 						}
@@ -1117,8 +1117,8 @@ public class IndexCreator {
 					if (lowLevelWaysSt.containsKey(l.getId())) {
 						for (Way w : lowLevelWaysSt.get(l.getId())) {
 							int t = MapRenderingTypes.encodeEntityWithType(w, level);
-							if (t == type && Algoritms.objectEquals(MapRenderingTypes.getEntityName(w), 
-									MapRenderingTypes.getEntityName(e))) {
+							if (t == type && Algoritms.objectEquals(MapRenderingTypes.getEntityName(w, t), 
+									MapRenderingTypes.getEntityName(e, t))) {
 								end = w;
 								break;
 							}
@@ -1202,7 +1202,7 @@ public class IndexCreator {
 		
 		if (!skip) {
 			DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapObjStat, mapLocations, /*mapTree, */e,  
-					MapRenderingTypes.getEntityName(e), id,	type, false, point, BATCH_SIZE);
+					MapRenderingTypes.getEntityName(e, type), id,	type, false, point, BATCH_SIZE);
 		}
 	}
 	
@@ -1580,11 +1580,11 @@ public class IndexCreator {
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus_2010_09_03.osm.bz2"), new ConsoleProgressImplementation(3), null);
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus_2010_09_03.osm.bz2"), new ConsoleProgressImplementation(3), null);
 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);
 		 
 		/*try {
 //			RTree rtree = new RTree("e:/Information/OSM maps/osmand/Belarus_2010_09_03.map.odb_ind");

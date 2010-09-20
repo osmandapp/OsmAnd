@@ -349,7 +349,43 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					paintText.setColor(Color.WHITE);
 					cv.drawText(text.text, text.centerX, text.centerY + 3, paintText);
 				} else {
-					cv.drawText(text.text, text.centerX, text.centerY, paintText);
+					if(text.textWrap == 0){
+						// set maximum for all text
+						text.textWrap = 40;
+					}
+					if(text.text.length() > text.textWrap){
+						int start = 0;
+						int end = text.text.length();
+						int lastSpace = -1;
+						int line = 0;
+						int pos = 0;
+						int limit = 0;
+						while(pos < end){
+							lastSpace = -1;
+							limit += text.textWrap;
+							while(pos < limit && pos < end){
+								if(!Character.isLetterOrDigit(text.text.charAt(pos))){
+									lastSpace = pos;
+								}
+								pos++;
+							}
+							if(lastSpace == -1){
+								cv.drawText(text.text.substring(start, pos), 
+										text.centerX, text.centerY + line * (text.textSize + 2), paintText);
+								start = pos;
+							} else {
+								cv.drawText(text.text.substring(start, lastSpace), 
+										text.centerX, text.centerY + line * (text.textSize + 2), paintText); 
+								start = lastSpace + 1;
+								limit += (start - pos) - 1;
+							}
+							line++;
+							
+						}
+						
+					} else {
+						cv.drawText(text.text, text.centerX, text.centerY, paintText);
+					}
 				}
 			}
 		}
@@ -366,6 +402,30 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			if(center != null){
 				int typeT = MapRenderingTypes.getPolygonPointType(obj.getType());
 				int subT = MapRenderingTypes.getPolygonPointSubType(obj.getType());
+				String name = obj.getName();
+				if(name != null){
+					rc.clearText();
+					name = renderObjectText(name, subT, typeT, rc.zoom, true, rc);
+					
+					if(rc.textSize == 0){
+						int type = MapRenderingTypes.getObjectType(obj.getType());
+						int subtype = MapRenderingTypes.getPolygonSubType(obj.getType());
+						name = renderObjectText(name, subtype, type, rc.zoom, false, rc);
+					}
+					
+					if (rc.textSize > 0 && name != null) {
+						TextDrawInfo info = new TextDrawInfo();
+						info.centerX = center.x + rc.textDx;
+						info.centerY = center.y + rc.textDy;
+						info.textColor = rc.textColor;
+						info.textSize = rc.textSize;
+						info.text = name;
+						info.textShadow = (int) rc.textHaloRadius;
+						info.textWrap = rc.textWrapWidth;
+						info.bold = rc.textBold;
+						rc.textToDraw.add(info);
+					}
+				}
 				if(typeT != 0 && subT != 0){
 					int resId = PointRenderer.getPointBitmap(rc.zoom, typeT, subT);
 					if(resId != 0){
@@ -440,27 +500,6 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				rc.second.updatePaint(paint);
 				canvas.drawPath(path, paint);
 			}
-			String name = obj.getName();
-			if(name != null){
-				float textSize = 16;
-				boolean accept = zoom > 17;
-				if(zoom > 15 && zoom <= 16){
-					accept = name.length() < 4;
-					textSize = 10;
-				} else if(zoom <= 17){
-					accept = name.length() < 8;
-					textSize = 12;
-				}
-				if(accept){
-					TextDrawInfo text = new TextDrawInfo();
-					text.textSize = textSize;
-					text.textWrap = 20;
-					text.centerX = xText;
-					text.centerY = yText;
-					text.text = name;
-					rc.textToDraw.add(text);
-				}
-			}
 			return new PointF(xText, yText);
 		}
 		return null;
@@ -495,13 +534,11 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		String n = obj.getName();
 		if (n != null) {
 			rc.clearText();
-			n = renderPointText(n, subType, type, zoom, rc);
-			// for small screen ?
-			// rc.textSize += 4; 
+			n = renderObjectText(n, subType, type, zoom, true, rc);
 			if (rc.textSize > 0 && n != null) {
 				TextDrawInfo info = new TextDrawInfo();
-				info.centerX = p.x;
-				info.centerY = p.y - rc.textSize;
+				info.centerX = p.x + rc.textDx;
+				info.centerY = p.y + rc.textDy;
 				info.textColor = rc.textColor;
 				info.textSize = rc.textSize;
 				info.text = n;
@@ -645,49 +682,61 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	}
 
 
-	public static String renderPointText(String name, int subType, int type, int zoom, RenderingContext rc) {
+	public static String renderObjectText(String name, int subType, int type, int zoom, boolean point, RenderingContext rc) {
 		int textSize = 0;
 		int textColor = 0;
 		int wrapWidth = 0;
 		int shadowRadius = 0;
 		int dy = 0;
 		boolean bold = false;
-		if(type == MapRenderingTypes.AEROWAY){
+		switch (type) {
+		case MapRenderingTypes.AEROWAY: {
 			textColor = 0xff6692da;
 			shadowRadius = 1;
-			if(subType == 10){
-				//airport
-				if(zoom >= 10 && zoom <= 12){
+			if (subType == 10) {
+				// airport
+				if (zoom >= 10 && zoom <= 12) {
 					textSize = 9;
 					dy = -12;
 					bold = true;
-					
+
 				}
-			} else if(subType == 1){
-				//aerodrome
-				if(zoom >= 10 && zoom <= 12){
+			} else if (subType == 1) {
+				// aerodrome
+				if (zoom >= 10 && zoom <= 12) {
 					textSize = 8;
 					dy = -12;
 				}
+			} else if (subType == 12) {
+				if (zoom >= 17) {
+					textSize = 10;
+					textColor = 0xffaa66cc;
+					shadowRadius = 1;
+					wrapWidth = 10;
+				}
 			}
-		} else if(type == MapRenderingTypes.AERIALWAY){
-			if(subType == 7){
-				if(zoom >= 14){
+		}
+			break;
+		case MapRenderingTypes.AERIALWAY: {
+			if (subType == 7) {
+				if (zoom >= 14) {
 					textColor = 0xff6666ff;
 					shadowRadius = 1;
-					if(zoom == 14){
+					if (zoom == 14) {
 						dy = -7;
 						textSize = 8;
-						
+
 					} else {
 						dy = -10;
 						textSize = 10;
 					}
 				}
-				
+
 			}
-		} else if(type == MapRenderingTypes.RAILWAY){
-			if(zoom >= 14){
+		}
+			break;
+		case MapRenderingTypes.RAILWAY: {
+			if (zoom >= 14) {
 				textColor = 0xff6666ff;
 				shadowRadius = 1;
 				if (subType == 13) {
@@ -699,17 +748,375 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 						dy = -10;
 						textSize = 11;
 					}
-				} else if(subType == 22 || subType == 23){
+				} else if (subType == 22 || subType == 23) {
 					if (zoom == 14) {
 						dy = -7;
 						textSize = 8;
 					} else {
 						dy = -10;
 						textSize = 10;
-					}					
+					}
 				}
 			}
-		} else if(type == MapRenderingTypes.AMENITY_SUSTENANCE){
+		}
+			break;
+		case MapRenderingTypes.EMERGENCY: {
+			if (zoom >= 17) {
+				if (subType == 10) {
+					dy = 9;
+					textColor = 0xff734a08;
+					wrapWidth = 30;
+					textSize = 10;
+				}
+			}
+		}
+			break;
+		case MapRenderingTypes.NATURAL: {
+			if (subType == 23) {
+				if (zoom >= 15) {
+					shadowRadius = 2;
+					textColor = 0xff00000;
+					textSize = 10;
+					wrapWidth = 10;
+				}
+			} else if (subType == 13) {
+				if (zoom >= 14) {
+					shadowRadius = 1;
+					textColor = 0xff654321;
+					textSize = 9;
+					dy = 5;
+				}
+			} else if (subType == 3) {
+				if (zoom >= 15) {
+					shadowRadius = 1;
+					textColor = 0xff654321;
+					textSize = 10;
+					dy = 9;
+					wrapWidth = 20;
+				}
+			} else if (subType == 21) {
+				if (zoom >= 15) {
+					textSize = 10;
+					shadowRadius = 1;
+					wrapWidth = 20;
+					textColor = 0xff6699cc;
+				}
+			} else if (subType == 2) {
+				if (zoom >= 14) {
+					textSize = 10;
+					shadowRadius = 1;
+					wrapWidth = 20;
+					textColor = 0xff6699cc;
+				}
+			} else if (subType == 17) {
+				if (zoom >= 16) {
+					textSize = 8;
+					shadowRadius = 1;
+					dy = 10;
+					wrapWidth = 20;
+					textColor = 0xff6699cc;
+				}
+			}
+		}
+			break;
+		case MapRenderingTypes.LANDUSE: {
+			if (zoom >= 15) {
+				if (subType == 22) {
+					textSize = 10;
+					shadowRadius = 1;
+					wrapWidth = 20;
+					textColor = 0xff6699cc;
+				} else if (point) {
+					textColor = 0xff000000;
+					shadowRadius = 2;
+					wrapWidth = 10;
+					textSize = 9;
+				}
+			}
+		}
+			break;
+		case MapRenderingTypes.WATERWAY: {
+			if (subType == 8) {
+				if (zoom >= 15) {
+					shadowRadius = 1;
+					textSize = 9;
+					textColor = 0xff0066ff;
+					wrapWidth = 70;
+					dy = 10;
+				}
+			}
+		}
+			break;
+		case MapRenderingTypes.TOURISM: {
+			if (subType == 9) {
+				if (zoom >= 16) {
+					textColor = 0xff6699cc;
+					shadowRadius = 1;
+					dy = 15;
+					textSize = 9;
+				}
+			} else if (subType == 12 || subType == 13 || subType == 14) {
+				if (zoom >= 17) {
+					textColor = 0xff0066ff;
+					shadowRadius = 1;
+					dy = 11;
+					textSize = 10;
+				}
+			} else if (subType == 11) {
+				if (zoom >= 17) {
+					textColor = 0xff0066ff;
+					shadowRadius = 1;
+					dy = 13;
+					textSize = 8;
+				}
+			} else if (subType == 4) {
+				if (zoom >= 17) {
+					shadowRadius = 1;
+					textSize = 10;
+					textColor = 0xff0066ff;
+					wrapWidth = 70;
+					dy = 15;
+				}
+			} else if (subType == 5) {
+				if (zoom >= 17) {
+					shadowRadius = 1;
+					textSize = 10;
+					textColor = 0xff0066ff;
+					wrapWidth = 70;
+					dy = 19;
+				}
+			} else if (subType == 7) {
+				if (zoom >= 15) {
+					textColor = 0xff734a08;
+					textSize = 9;
+					wrapWidth = 30;
+					shadowRadius = 1;
+				}
+			} else if (subType == 15) {
+				if (zoom >= 17) {
+					textColor = 0xff734a08;
+					textSize = 10;
+					dy = 10;
+					shadowRadius = 1;
+				}
+			}
+		}
+			break;
+		case MapRenderingTypes.LEISURE: {
+			if (subType == 8) {
+				if (zoom >= 15) {
+					textColor = Color.BLUE;
+					textSize = 9;
+					wrapWidth = 30;
+					shadowRadius = 1;
+				}
+			} else if (zoom >= 15 && point) {
+				textColor = 0xff000000;
+				shadowRadius = 2;
+				wrapWidth = 10;
+				textSize = 9;
+			}
+		}
+			break;
+		case MapRenderingTypes.HISTORIC: {
+			if (zoom >= 17) {
+				if (subType == 6) {
+					shadowRadius = 1;
+					textColor = 0xff654321;
+					textSize = 9;
+					dy = 12;
+					wrapWidth = 20;
+				}
+			}
+		}
+			break;
+		case MapRenderingTypes.AMENITY_TRANSPORTATION: {
+			if (zoom >= 17) {
+				if (subType == 1) {
+					dy = 9;
+					textColor = 0xff0066ff;
+					textSize = 9;
+					wrapWidth = 34;
+				} else if (subType == 4 || subType == 18) {
+					textColor = 0xff0066ff;
+					shadowRadius = 1;
+					dy = 9;
+					textSize = 9;
+				}
+			}
+
+		}
+			break;
+		case MapRenderingTypes.AMENITY_EDUCATION: {
+			if (subType == 4) {
+				if (zoom >= 17) {
+					dy = 12;
+					textColor = 0xff734a08;
+					bold = true;
+					textSize = 10;
+				}
+			} else if (subType == 5) {
+				if (zoom >= 15) {
+					textColor = 0xff000033;
+					bold = true;
+					textSize = 9;
+					wrapWidth = 16;
+				}
+			} else if (subType == 1 || subType == 2 || subType == 3) {
+				if (zoom >= 16) {
+					textColor = 0xff000033;
+					textSize = 9;
+					wrapWidth = 16;
+				}
+			}
+		}
+			break;
+		case MapRenderingTypes.MAN_MADE: {
+			if (subType == 1 || subType == 5) {
+				if(zoom >= 16){
+					textColor = 0xff444444;
+					textSize = 9;
+					if(textSize >= 17){
+						textSize = 11;
+						if(textSize >= 18){
+							textSize = 15;
+						}
+					} 
+					wrapWidth = 16;
+				}
+			} else if (subType == 17) {
+				if (zoom >= 15) {
+					textColor = 0xff000033;
+					textSize = 9;
+					shadowRadius = 2;
+					dy = 16;
+					wrapWidth = 12;
+				}
+			} else if (subType == 27) {
+				if (zoom >= 17) {
+					textSize = 9;
+					textColor = 0xff734a08;
+					dy = 12;
+					shadowRadius = 1;
+					wrapWidth = 20;
+				}
+			}
+		}
+			break;
+		case MapRenderingTypes.AMENITY_FINANCE: {
+			if (subType == 2) {
+				if (zoom >= 17) {
+					shadowRadius = 1;
+					textSize = 9;
+					textColor = Color.BLACK;
+					dy = 9;
+				}
+			}
+		}
+			break;
+		case MapRenderingTypes.MILITARY: {
+			if (subType == 4) {
+				if (zoom >= 12) {
+					bold = true;
+					textSize = 9;
+					shadowRadius = 1;
+					wrapWidth = 10;
+					textColor = 0xffffc0cb;
+				}
+			}
+		}
+			break;
+		case MapRenderingTypes.SHOP: {
+			if (subType == 42 || subType == 13 || subType == 16 || subType == 19 || subType == 31 || subType == 48) {
+				if (zoom >= 17) {
+					textColor = 0xff993399;
+					textSize = 8;
+					dy = 11;
+					shadowRadius = 1;
+					wrapWidth = 14;
+				}
+			} else if (subType == 65 || subType == 17) {
+				if (zoom >= 16) {
+					textSize = 9;
+					textColor = 0xff993399;
+					dy = 12;
+					shadowRadius = 1;
+					wrapWidth = 20;
+				}
+			}
+
+		}
+			break;
+		case MapRenderingTypes.AMENITY_HEALTHCARE: {
+			if (subType == 2) {
+				if (zoom >= 16) {
+					textSize = 8;
+					textColor = 0xffda0092;
+					dy = 10;
+					shadowRadius = 2;
+					wrapWidth = 24;
+				}
+			} else if (subType == 1) {
+				if (zoom >= 17) {
+					textSize = 8;
+					textColor = 0xffda0092;
+					dy = 9;
+					shadowRadius = 1;
+					wrapWidth = 12;
+				}
+			}
+
+		}
+			break;
+		case MapRenderingTypes.AMENITY_OTHER: {
+			if (subType == 10) {
+				if (zoom >= 17) {
+					wrapWidth = 30;
+					textSize = 10;
+					textColor = 0xff734a08;
+					dy = 10;
+				}
+			} else if (subType == 26) {
+				if (zoom >= 17) {
+					wrapWidth = 30;
+					textSize = 11;
+					textColor = 0x000033;
+					dy = 10;
+				}
+			} else if (subType == 16) {
+				if (zoom >= 16) {
+					textColor = 0xff6699cc;
+					shadowRadius = 1;
+					dy = 15;
+					textSize = 9;
+				}
+			} else if (subType == 7) {
+				if (zoom >= 17) {
+					textColor = 0xff0066ff;
+					shadowRadius = 1;
+					wrapWidth = 20;
+					dy = 8;
+					textSize = 9;
+				}
+			} else if (subType == 13) {
+				if (zoom >= 17) {
+					textColor = 0xff734a08;
+					textSize = 10;
+					shadowRadius = 1;
+					wrapWidth = 20;
+					dy = 16;
+				}
+			} else if (subType == 2) {
+				if (zoom >= 16) {
+					textColor = 0xff660033;
+					textSize = 10;
+					shadowRadius = 2;
+					wrapWidth = 10;
+				}
+			}
+		}
+			break;
+		case MapRenderingTypes.AMENITY_SUSTENANCE: {
 			if (zoom >= 17) {
 				if (subType >= 1 && subType <= 4) {
 					shadowRadius = 1;
@@ -725,77 +1132,107 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					textSize = 10;
 				}
 			}
-		} else if(type == MapRenderingTypes.ADMINISTRATIVE){
+		}
+			break;
+		case MapRenderingTypes.ADMINISTRATIVE: {
 			shadowRadius = 1;
-			if(subType == 11){
-				if(zoom >= 14 && zoom < 16){
+			switch (subType) {
+			case 11: {
+				if (zoom >= 14 && zoom < 16) {
 					textColor = 0xFF000000;
 					textSize = 8;
-				} else if(zoom >= 16){
+				} else if (zoom >= 16) {
 					textColor = 0xFF777777;
 					textSize = 11;
 				}
-			} else 	if(subType == 8  || subType == 9){
-				if(zoom >= 12 && zoom < 15){
+			}
+				break;
+			case 8:
+			case 9: {
+				if (zoom >= 12 && zoom < 15) {
 					textColor = 0xFF000000;
 					textSize = 9;
-				} else if(zoom >= 15){
+				} else if (zoom >= 15) {
 					textColor = 0xFF777777;
 					textSize = 12;
 				}
-			} else 	if(subType == 10){
-				if(zoom >= 12 && zoom < 14){
+			}
+				break;
+			case 10: {
+				if (zoom >= 12 && zoom < 14) {
 					textColor = 0xFF000000;
 					textSize = 10;
-				} else if(zoom >= 14){
+				} else if (zoom >= 14) {
 					textColor = 0xFF777777;
 					textSize = 13;
 				}
-			} else 	if(subType == 7){
+			}
+				break;
+			case 7: {
 				wrapWidth = 20;
-				if(zoom >= 9 && zoom < 11){
+				if (zoom >= 9 && zoom < 11) {
 					textColor = 0xFF000000;
 					textSize = 8;
-				} else if(zoom >= 13 && zoom < 14){
+				} else if (zoom >= 13 && zoom < 14) {
 					textColor = 0xFF000000;
 					textSize = 10;
-				} else if(zoom >= 14){
+				} else if (zoom >= 14) {
 					textColor = 0xFF777777;
 					textSize = 13;
 				}
-			} else if(subType == 6){
+			}
+				break;
+			case 12: {
+				if (zoom >= 11) {
+					textColor = 0xFF000000;
+					textSize = 9;
+				}
+			}
+				break;
+			case 6: {
 				wrapWidth = 20;
 				textColor = 0xFF000000;
-				if(zoom >= 6 && zoom < 9){
+				if (zoom >= 6 && zoom < 9) {
 					textSize = 8;
-				} else if(zoom >= 9 && zoom < 11){
+				} else if (zoom >= 9 && zoom < 11) {
 					textSize = 11;
-				} else if(zoom >= 11 && zoom <= 14){
+				} else if (zoom >= 11 && zoom <= 14) {
 					textSize = 14;
 				}
-			} else if(subType == 42){
+			}
+				break;
+			case 42: {
 				wrapWidth = 20;
 				textColor = 0xff9d6c9d;
-				if(zoom >= 2 && zoom < 4){
+				if (zoom >= 2 && zoom < 4) {
 					textSize = 8;
-				} else if(zoom >= 4 && zoom < 7){
+				} else if (zoom >= 4 && zoom < 7) {
 					textSize = 10;
 				}
-			} else 	if(subType == 43 || subType == 44){
+			}
+				break;
+			case 43:
+			case 44: {
 				wrapWidth = 20;
 				textColor = 0xff9d6c9d;
-				if(zoom >= 4 && zoom < 8){
+				if (zoom >= 4 && zoom < 8) {
 					textSize = 9;
-				} else if(zoom >= 7 && zoom < 9){
+				} else if (zoom >= 7 && zoom < 9) {
 					textSize = 11;
 				}
-			} else if(subType == 33){
-				if(zoom >= 17){
+			}
+				break;
+			case 33: {
+				if (zoom >= 17) {
 					textSize = 9;
 					textColor = 0xff444444;
 				}
 			}
-		} 
+				break;
+			}
+		}
+			break;
+		}
 		rc.textColor = textColor;
 		rc.textSize = textSize;
 		rc.textWrapWidth = wrapWidth;
@@ -807,4 +1244,3 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 
 	
 }
-
