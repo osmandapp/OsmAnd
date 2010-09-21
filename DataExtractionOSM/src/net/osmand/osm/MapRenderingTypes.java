@@ -401,12 +401,20 @@ public class MapRenderingTypes {
 		attr <<= 2;
 		String l = e.getTag(OSMTagKey.LAYER);
 		if(l != null){
-			int la = Integer.parseInt(l);
+			if(l.startsWith("+")){
+				l = l.substring(1);
+			}
+			int la = 0;
+			try {
+				la = Integer.parseInt(l);
+			} catch (NumberFormatException es) {
+			}
 			if(la < 0){
 				attr |= 1;
 			} else if(la > 0){
 				attr |= 2;
 			}
+			
 		} else if(e.getTag(OSMTagKey.BRIDGE) != null){
 			attr |= 2;
 		} else if(e.getTag(OSMTagKey.TUNNEL) != null){

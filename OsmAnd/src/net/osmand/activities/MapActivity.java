@@ -37,6 +37,7 @@ import net.osmand.map.IMapLocationListener;
 import net.osmand.map.ITileSource;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.render.MapRenderRepositories;
 import net.osmand.render.RendererLayer;
 import net.osmand.views.AnimateDraggingMapThread;
 import net.osmand.views.ContextMenuLayer;
@@ -723,11 +724,18 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	
 	private void updateMapSource(){
 		boolean vectorData = OsmandSettings.isUsingMapVectorData(this);
+		ResourceManager rm = ((OsmandApplication)getApplication()).getResourceManager();
+		if(vectorData){
+			if(rm.getRenderer().isEmpty()){
+				Toast.makeText(MapActivity.this, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
+				vectorData = false;
+			}
+		}
 		ITileSource newSource = OsmandSettings.getMapTileSource(this);
 		if(mapView.getMap() instanceof SQLiteTileSource){
 			((SQLiteTileSource)mapView.getMap()).closeDB();
 		}
-		((OsmandApplication)getApplication()).getResourceManager().updateMapSource(vectorData, newSource);
+		rm.updateMapSource(vectorData, newSource);
 		
 		mapView.setMap(vectorData ? null : newSource);
 		rendererLayer.setVisible(vectorData);
@@ -1455,7 +1463,13 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			public void onClick(DialogInterface dialog, int which) {
 				Editor edit = OsmandSettings.getWriteableEditor(MapActivity.this);
 				if(which == 0){
-					edit.putBoolean(OsmandSettings.MAP_VECTOR_DATA, true);
+					MapRenderRepositories r = ((OsmandApplication)getApplication()).getResourceManager().getRenderer();
+					if(r.isEmpty()){
+						Toast.makeText(MapActivity.this, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
+						return;
+					} else {
+						edit.putBoolean(OsmandSettings.MAP_VECTOR_DATA, true);
+					}
 				} else {
 					edit.putBoolean(OsmandSettings.MAP_VECTOR_DATA, false);
 					edit.putString(OsmandSettings.MAP_TILE_SOURCES, keys.get(which - 1));

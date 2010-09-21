@@ -207,10 +207,15 @@ public class MapRenderRepositories {
 			rotate += 360;
 		} 
 
-		return !inside || Math.abs(rotate - cRotate) > 30;
+		return !inside || Math.abs(rotate - cRotate) > 15; // leave only 15 to find that UI box out of searched 
 		
 	}
 
+	public boolean isEmpty(){
+		return connections.isEmpty();
+	}
+
+//	MapUtils.getLatitudeFromTile(17, topY)
 	private boolean insideBox(double topY, double leftX, double bottomY, double rightX, int zoom) {
 		boolean inside = cZoom == zoom && cTopY <= topY && cLeftX <= leftX && cRightX >= rightX
 				&& cBottomY >= bottomY;

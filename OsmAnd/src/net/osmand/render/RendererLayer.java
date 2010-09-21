@@ -47,7 +47,6 @@ public class RendererLayer implements OsmandMapLayer {
 			pixRect.set(0, 0, view.getWidth(), view.getHeight());
 			view.calculateTileRectangle(pixRect, view.getCenterPointX(), 
 					view.getCenterPointY(), view.getXTile(), view.getYTile(), tileRect);
-			
 			if (view.getFloatZoom() == view.getZoom()
 					&& resourceManager.updateRenderedMapNeeded(tileRect, view.getZoom(), view.getRotate())) {
 				pixRect.set(-view.getWidth(), -view.getHeight()/2, 2*view.getWidth(), 3*view.getHeight()/2);

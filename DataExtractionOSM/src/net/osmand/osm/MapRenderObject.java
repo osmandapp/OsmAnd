@@ -95,7 +95,8 @@ public class MapRenderObject {
 			} else if ((type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POLYLINE_TYPE) {
 				// 10 - 68
 				int layer = MapRenderingTypes.getWayLayer(type);
-				if(layer == 1){
+				if(layer == 1 && oType != MapRenderingTypes.RAILWAY){
+					// not subway especially
 					order = 10;
 				} else if(layer == 2) {
 					order = 67; // over buildings
