@@ -469,7 +469,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					
 					if (rc.textSize > 0 && name != null) {
 						TextDrawInfo info = new TextDrawInfo(name);
-						
+						info.fillProperties(rc, center.x, center.y);
 						rc.textToDraw.add(info);
 					}
 				}
@@ -1163,9 +1163,9 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				if(zoom >= 16){
 					textColor = 0xff444444;
 					textSize = 9;
-					if(textSize >= 17){
+					if(zoom >= 17){
 						textSize = 11;
-						if(textSize >= 18){
+						if(zoom >= 18){
 							textSize = 15;
 						}
 					} 
@@ -1196,7 +1196,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					shadowRadius = 1;
 					textSize = 9;
 					textColor = Color.BLACK;
-					dy = 9;
+					dy = 14;
 				}
 			}
 		}
@@ -1218,7 +1218,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				if (zoom >= 17) {
 					textColor = 0xff993399;
 					textSize = 8;
-					dy = 11;
+					dy = 13;
 					shadowRadius = 1;
 					wrapWidth = 14;
 				}
@@ -1226,7 +1226,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				if (zoom >= 16) {
 					textSize = 9;
 					textColor = 0xff993399;
-					dy = 12;
+					dy = 13;
 					shadowRadius = 1;
 					wrapWidth = 20;
 				}
@@ -1239,7 +1239,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				if (zoom >= 16) {
 					textSize = 8;
 					textColor = 0xffda0092;
-					dy = 10;
+					dy = 12;
 					shadowRadius = 2;
 					wrapWidth = 24;
 				}
@@ -1247,7 +1247,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				if (zoom >= 17) {
 					textSize = 8;
 					textColor = 0xffda0092;
-					dy = 9;
+					dy = 11;
 					shadowRadius = 1;
 					wrapWidth = 12;
 				}
@@ -1309,13 +1309,13 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					shadowRadius = 1;
 					textColor = 0xff734a08;
 					wrapWidth = 34;
-					dy = 11;
+					dy = 13;
 					textSize = 10;
 				} else if (subType >= 4 && subType <= 6) {
 					shadowRadius = 1;
 					textColor = 0xff734a08;
 					wrapWidth = 34;
-					dy = 11;
+					dy = 13;
 					textSize = 10;
 				}
 			}

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="no_vector_map_loaded">Vector maps were not loaded</string>
 	<string name="gpx_reverse_route">Reverse route</string>
 	<string name="gpx_direct_route">Direct route</string>
 	<string name="map_route_by_gpx">Route using GPX</string>
