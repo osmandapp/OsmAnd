@@ -129,10 +129,10 @@ public class Algoritms {
 	
 	
 	public static int parseIntFromBytes(byte[] bytes, int offset) {
-		int o = 0xff & bytes[offset + 3];
-		o = o << 8 | (0xff & bytes[offset + 2]);
-		o = o << 8 | (0xff & bytes[offset + 1]);
-		o = o << 8 | (0xff & bytes[offset + 0]);
+		int o = (0xff & bytes[offset + 3]) << 24;
+		o |= (0xff & bytes[offset + 2]) << 16;
+		o |= (0xff & bytes[offset + 1]) << 8;
+		o |= (0xff & bytes[offset + 0]);
 		return o;
 	}
 	

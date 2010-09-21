@@ -48,7 +48,7 @@ public class MapRenderObject {
 		return Algoritms.parseIntFromBytes(data, ind * 8);
 	}
 	
-	public float getPoint31XTile(int ind) {
+	public int getPoint31XTile(int ind) {
 		return Algoritms.parseIntFromBytes(data, ind * 8 + 4);
 	}
 	

@@ -59,6 +59,22 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 
 	
 	private static class TextDrawInfo {
+		
+		public TextDrawInfo(String text){
+			this.text = text;
+		}
+		
+		public void fillProperties(RenderingContext rc, float centerX, float centerY){
+			this.centerX = centerX + rc.textDx;
+			this.centerY = centerY + rc.textDy;
+			textColor = rc.textColor;
+			textSize = rc.textSize;
+			textShadow = (int) rc.textHaloRadius;
+			textWrap = rc.textWrapWidth;
+			bold = rc.textBold;
+			minDistance = rc.textMinDistance;
+			shieldRes = rc.textShield;
+		}
 		String text = null;
 		Path drawOnPath = null;
 		float vOffset = 0;
@@ -66,6 +82,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		float pathRotate = 0;
 		float centerY = 0;
 		float textSize = 0;
+		float minDistance = 0;
 		int textColor = Color.BLACK;
 		int textShadow = 0;
 		int textWrap = 0;
@@ -304,12 +321,16 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					bounds.set(text.centerX - 3 * text.textSize / 2, text.centerY - mes/2, 
 										text.centerX + 3 * text.textSize / 2, text.centerY + mes/2);
 				}
+				if(text.minDistance > 0){
+					bounds.set(bounds.left - text.minDistance / 2, bounds.top - text.minDistance / 2
+							, bounds.right + text.minDistance / 2, bounds.bottom + text.minDistance / 2);
+				}
 				List<RectF> boundsIntersect = text.drawOnPath == null ? boundsNotPathIntersect : boundsPathIntersect;
 				if(boundsIntersect.isEmpty()){
 					boundsIntersect.add(bounds);
 				} else {
-					final int diff = 3;
-					final int diff2 = 15;
+					final int diff = (int) 3 ;
+					final int diff2 =  (int) 15;
 					// implement binary search 
 					int index = Collections.binarySearch(boundsIntersect, bounds, c);
 					if (index < 0) {
@@ -318,7 +339,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					// find sublist that is appropriate
 					int e = index;
 					while (e < boundsIntersect.size()) {
-						if (boundsIntersect.get(e).left < bounds.right) {
+						if (boundsIntersect.get(e).left < bounds.right ) {
 							e++;
 						} else {
 							break;
@@ -329,7 +350,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 						// that's not exact algorithm that replace comparison rect with each other
 						// because of that comparison that is not obvious 
 						// (we store array sorted by left boundary, not by right) - that's euristic
-						if (boundsIntersect.get(st).right > bounds.left) {
+						if (boundsIntersect.get(st).right > bounds.left ) {
 							st--;
 						} else {
 							break;
@@ -347,6 +368,10 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 						}
 					}
 					// store in list sorted by left boundary
+					if(text.minDistance > 0){
+						bounds.set(bounds.left + text.minDistance / 2, bounds.top + text.minDistance / 2,
+								bounds.right - text.minDistance / 2, bounds.bottom - text.minDistance / 2);
+					}
 					boundsIntersect.add(index, bounds);
 				}
 				
@@ -363,8 +388,9 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 //					}
 //					paintText.setTextSize(text.textSize);
 //				}
-				paintText.setColor(text.textColor);
 				
+				
+				paintText.setColor(text.textColor);
 				if(text.drawOnPath != null){
 					cv.drawTextOnPath(text.text, text.drawOnPath, 0, text.vOffset, paintText);
 				} else {
@@ -378,7 +404,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 						}
 						Bitmap ico = cachedIcons.get(text.shieldRes);
 						if (ico  != null) {
-							cv.drawBitmap(ico, text.centerX - ico.getWidth() / 2 - 1, text.centerY - text.textSize - 2, paintIcon);
+							cv.drawBitmap(ico, text.centerX - ico.getWidth() / 2 - 0.5f, text.centerY - text.textSize - 2, paintIcon);
 						}
 					}
 					if(text.text.length() > text.textWrap){
@@ -442,15 +468,8 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					}
 					
 					if (rc.textSize > 0 && name != null) {
-						TextDrawInfo info = new TextDrawInfo();
-						info.centerX = center.x + rc.textDx;
-						info.centerY = center.y + rc.textDy;
-						info.textColor = rc.textColor;
-						info.textSize = rc.textSize;
-						info.text = name;
-						info.textShadow = (int) rc.textHaloRadius;
-						info.textWrap = rc.textWrapWidth;
-						info.bold = rc.textBold;
+						TextDrawInfo info = new TextDrawInfo(name);
+						
 						rc.textToDraw.add(info);
 					}
 				}
@@ -570,15 +589,8 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			rc.clearText();
 			n = renderObjectText(n, subType, type, zoom, true, rc);
 			if (rc.textSize > 0 && n != null) {
-				TextDrawInfo info = new TextDrawInfo();
-				info.centerX = p.x + rc.textDx;
-				info.centerY = p.y + rc.textDy;
-				info.textColor = rc.textColor;
-				info.textSize = rc.textSize;
-				info.text = n;
-				info.textShadow = (int) rc.textHaloRadius;
-				info.textWrap = rc.textWrapWidth;
-				info.bold = rc.textBold;
+				TextDrawInfo info = new TextDrawInfo(n);
+				info.fillProperties(rc, p.x, p.y);
 				rc.textToDraw.add(info);
 			}
 		}
@@ -614,13 +626,14 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		float yPrev = 0;
 		float xMid = 0;
 		float yMid = 0;
+		PointF middlePoint = new PointF();
 		int middle = obj.getPointsLength() / 2;
 		
 		for (int i = 0; i < length ; i++) {
 			PointF p = calcPoint(obj, i, rc);
 			if(i == 0 || i == length -1){
-				xMid+= p.x;
-				yMid+= p.y;
+				xMid += p.x;
+				yMid += p.y;
 			}
 			if (path == null) {
 				path = new Path();
@@ -629,6 +642,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				xLength += p.x - xPrev; // not abs
 				yLength += p.y - yPrev; // not abs
 				if(i == middle){
+					middlePoint.set(p.x, p.y);
 					double rot = - Math.atan2(p.x - xPrev, p.y - yPrev) * 180 / Math.PI;
 					if (rot < 0) {
 						rot += 360;
@@ -667,18 +681,10 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				name = renderObjectText(name, subtype, type, rc.zoom, false, rc);
 				if (name != null && rc.textSize > 0) {
 					if (!rc.showTextOnPath) {
-						TextDrawInfo text = new TextDrawInfo();
-						text.text = name;
-						text.bold = rc.textBold;
-						text.centerX = xMid / 2;
-						text.centerY = yMid / 2;
-						text.shieldRes = rc.textShield;
-						text.textColor = rc.textColor;
-						text.textSize = rc.textSize;
-						text.vOffset = rc.textDy;
-						text.textShadow = (int) rc.textHaloRadius;
+						TextDrawInfo text = new TextDrawInfo(name);
+						text.fillProperties(rc, middlePoint.x, middlePoint.y);
 						rc.textToDraw.add(text);
-					} else /*if (paintText.measureText(obj.getName()) < Math.max(Math.abs(xLength), Math.abs(yLength)))*/ {
+					} else if (paintText.measureText(obj.getName()) < Math.max(Math.abs(xLength), Math.abs(yLength))) {
 						if (inverse) {
 							path.rewind();
 							boolean st = true;
@@ -693,17 +699,10 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 							}
 						}
 
-						TextDrawInfo text = new TextDrawInfo();
-						text.text = name;
-						text.shieldRes = rc.textShield;
-						text.centerX = xMid / 2;
-						text.centerY = yMid / 2;
+						TextDrawInfo text = new TextDrawInfo(name);
+						text.fillProperties(rc, xMid / 2, yMid / 2);
 						text.pathRotate = pathRotate;
-						text.bold = rc.textBold;
 						text.drawOnPath = path;
-						text.textColor = rc.textColor;
-						text.textShadow = (int) rc.textHaloRadius;
-						text.textSize = rc.textSize;
 						text.vOffset = rc.main.strokeWidth / 2 - 1;
 						rc.textToDraw.add(text);
 
@@ -753,7 +752,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					textSize = 10;
 					textColor = Color.WHITE;
 					bold = true;
-					textMinDistance = 50;
+					textMinDistance = 70;
 					// spacing = 750
 					if (subType == MapRenderingTypes.PL_HW_TRUNK) {
 						textShield = trunkShields[len - 1];
@@ -787,7 +786,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 							showTextOnPath = true;
 							textColor = Color.BLACK;
 							textSize = 10;
-							textMinDistance = 20;
+							textMinDistance = 40;
 							shadowRadius = 1;
 							// spacing = 750;
 						}
@@ -850,7 +849,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					showTextOnPath = true;
 					shadowRadius = 1;
 					textColor = 0xff6699cc;
-					textMinDistance = 200;
+					textMinDistance = 70;
 				}
 			} else if (subType == 5 || subType == 6) {
 				if (zoom >= 15 /* && !tunnel */) {
@@ -887,7 +886,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					showTextOnPath = true;
 					textSize = 10;
 					textColor = 0xff333333;
-					textMinDistance = 20;
+					textMinDistance = 50;
 					shadowRadius = 1;
 					// spacing = 750;
 				}
