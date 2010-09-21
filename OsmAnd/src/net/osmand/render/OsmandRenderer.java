@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.LogUtil;
+import net.osmand.R;
 import net.osmand.osm.MapRenderObject;
 import net.osmand.osm.MapRenderingTypes;
 
@@ -42,11 +43,8 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	private TextPaint paintText;
 	private Paint paint;
 	
-	private Paint paintShield;
-	
 	private Paint paintFillEmpty;
 	private Paint paintIcon;
-	private float[] hsv = new float[3];
 	
 	public static final int TILE_SIZE = 256; 
 	
@@ -72,7 +70,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		int textShadow = 0;
 		int textWrap = 0;
 		boolean bold = false;
-		boolean shield = false;
+		int shieldRes = 0;
 	}
 	
 	private static class IconDrawInfo {
@@ -105,7 +103,6 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 
 		// These properties are used for rendering one object  
 		// polyline props
-		boolean showText = true;
 		boolean showTextOnPath = false;
 		float textSize = 0;
 		int textColor = 0;
@@ -115,6 +112,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		float textDy = 0;
 		float textHaloRadius = 0;
 		boolean textBold;
+		int textShield = 0;
 		
 		
 		RenderingPaintProperties main = new RenderingPaintProperties();
@@ -123,7 +121,6 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		RenderingPaintProperties[] adds = null;
 		
 		public void clearText() {
-			showText = true;
 			showTextOnPath = false;
 			textSize = 0;
 			textColor = 0;
@@ -133,6 +130,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			textDy = 0;
 			textHaloRadius = 0;
 			textBold = false;
+			textShield = 0;
 		}
 		 
 		
@@ -198,10 +196,6 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		
 		paint = new Paint();
 		paint.setAntiAlias(true);
-		
-		paintShield = new Paint();
-		paintShield.setAntiAlias(true);
-		
 		
 		paintFillEmpty = new Paint();
 		paintFillEmpty.setStyle(Style.FILL);
@@ -357,41 +351,35 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				}
 				
 				
+				// Shadow layer
 				// paintText.setShadowLayer(text.textShadow, 0, 0, Color.WHITE);
-				if(text.textShadow > 0 && text.shield){
-					paintText.setColor(Color.WHITE);
-					paintText.setTextSize(text.textSize + text.textShadow * 2);
-					if(text.drawOnPath != null){
-						cv.drawTextOnPath(text.text, text.drawOnPath, 0, text.vOffset, paintText);
-					} else {
-						cv.drawText(text.text, text.centerX, text.centerY, paintText);
-					}
-					paintText.setTextSize(text.textSize);
-				}
+//				if(text.textShadow > 0){
+//					paintText.setColor(Color.WHITE);
+//					paintText.setTextSize(text.textSize + text.textShadow * 2);
+//					if(text.drawOnPath != null){
+//						cv.drawTextOnPath(text.text, text.drawOnPath, 0, text.vOffset, paintText);
+//					} else {
+//						cv.drawText(text.text, text.centerX, text.centerY, paintText);
+//					}
+//					paintText.setTextSize(text.textSize);
+//				}
 				paintText.setColor(text.textColor);
 				
 				if(text.drawOnPath != null){
 					cv.drawTextOnPath(text.text, text.drawOnPath, 0, text.vOffset, paintText);
-				} else if(text.shield){
-					bounds.set(text.centerX - mes / 2 - 4, text.centerY - text.textSize,
-							text.centerX + mes / 2 + 4, text.centerY + text.textSize / 2);
-					paintShield.setStyle(Style.STROKE);
-					paintShield.setColor(Color.WHITE);
-					paintShield.setStrokeWidth(3);
-					cv.drawOval(bounds, paintShield);
-					
-					paintShield.setStyle(Style.FILL);
-					Color.colorToHSV(paintText.getColor(), hsv);
-					hsv[2] *= 0.85;
-					paintShield.setColor(Color.HSVToColor(hsv));
-					cv.drawOval(bounds, paintShield);
-					paintText.setFakeBoldText(true);
-					paintText.setColor(Color.WHITE);
-					cv.drawText(text.text, text.centerX, text.centerY + 3, paintText);
 				} else {
 					if(text.textWrap == 0){
 						// set maximum for all text
 						text.textWrap = 40;
+					}
+					if(text.shieldRes != 0){
+						if(cachedIcons.get(text.shieldRes) == null){
+							cachedIcons.put(text.shieldRes, BitmapFactory.decodeResource(context.getResources(), text.shieldRes));
+						}
+						Bitmap ico = cachedIcons.get(text.shieldRes);
+						if (ico  != null) {
+							cv.drawBitmap(ico, text.centerX - ico.getWidth() / 2 - 1, text.centerY - text.textSize - 2, paintIcon);
+						}
 					}
 					if(text.text.length() > text.textWrap){
 						int start = 0;
@@ -529,10 +517,17 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				path.lineTo(p.x, p.y);
 			}
 		}
-		
+
 		if (path != null) {
 			xText /= obj.getPointsLength();
 			yText /= obj.getPointsLength();
+			// test hole
+//			path.moveTo(xText - 2, yText - 2);
+//			path.lineTo(xText + 2, yText + 2);
+//			path.lineTo(xText + 2, yText - 2);
+//			path.lineTo(xText - 2, yText + 2);
+//			path.lineTo(xText - 2, yText - 2);
+			
 			rc.main.updatePaint(paint);
 			canvas.drawPath(path, paint);
 			if(rc.second.strokeWidth != 0){
@@ -599,8 +594,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		rc.second.emptyLine();
 		rc.third.emptyLine();
 		rc.adds = null;
-		rc.showText = false;
-		rc.clearText();
+		
 		PolylineRenderer.renderPolyline(type, subtype, obj.getType(), rc, this);
 		
 		
@@ -667,72 +661,237 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					canvas.drawPath(path, paint);
 				}
 			}
-			if (obj.getName() != null && rc.showText) {
-				if(!rc.showTextOnPath){
-					TextDrawInfo text = new TextDrawInfo();
-					text.text = obj.getName();
-					text.centerX = xMid /2;
-					text.centerY = yMid /2;
-					text.textColor = rc.textColor;
-					text.textSize = rc.textSize;
-					text.vOffset = rc.textDy;
-					text.textShadow = (int) rc.textHaloRadius;
-					rc.textToDraw.add(text);
-				} else if (paintText.measureText(obj.getName()) < Math.max(Math.abs(xLength), Math.abs(yLength))) {
-					if (inverse) {
-						path.rewind();
-						boolean st = true;
-						for (int i = obj.getPointsLength() - 1; i >= 0; i--) {
-							PointF p = calcPoint(obj, i, rc);
-							if (st) {
-								st = false;
-								path.moveTo(p.x, p.y);
-							} else {
-								path.lineTo(p.x, p.y);
+			if (obj.getName() != null) {
+				String name = obj.getName();
+				rc.clearText();
+				name = renderObjectText(name, subtype, type, rc.zoom, false, rc);
+				if (name != null && rc.textSize > 0) {
+					if (!rc.showTextOnPath) {
+						TextDrawInfo text = new TextDrawInfo();
+						text.text = name;
+						text.bold = rc.textBold;
+						text.centerX = xMid / 2;
+						text.centerY = yMid / 2;
+						text.shieldRes = rc.textShield;
+						text.textColor = rc.textColor;
+						text.textSize = rc.textSize;
+						text.vOffset = rc.textDy;
+						text.textShadow = (int) rc.textHaloRadius;
+						rc.textToDraw.add(text);
+					} else /*if (paintText.measureText(obj.getName()) < Math.max(Math.abs(xLength), Math.abs(yLength)))*/ {
+						if (inverse) {
+							path.rewind();
+							boolean st = true;
+							for (int i = obj.getPointsLength() - 1; i >= 0; i--) {
+								PointF p = calcPoint(obj, i, rc);
+								if (st) {
+									st = false;
+									path.moveTo(p.x, p.y);
+								} else {
+									path.lineTo(p.x, p.y);
+								}
 							}
 						}
-					}
-					
-					TextDrawInfo text = new TextDrawInfo();
-					text.text = obj.getName();
-					text.centerX = xMid /2;
-					text.centerY = yMid /2;
-					text.pathRotate = pathRotate;
-					text.drawOnPath = path;
-					text.textColor = rc.textColor;
-					text.textShadow = (int) rc.textHaloRadius;
-					text.textSize = rc.textSize;
-					text.vOffset = rc.main.strokeWidth / 2 - 1;
-					rc.textToDraw.add(text);
-					if(text.text.startsWith(MapRenderingTypes.REF_CHAR)){
-						if(text.text.length() > 5){
-							text.text = text.text.substring(1, 5);
-						} else {
-							text.text = text.text.substring(1);
-						}
-						text.textColor = rc.second.strokeWidth != 0 ? rc.second.color : rc.main.color;
-						text.shield = true;
-						text.drawOnPath = null;
-					}
 
+						TextDrawInfo text = new TextDrawInfo();
+						text.text = name;
+						text.shieldRes = rc.textShield;
+						text.centerX = xMid / 2;
+						text.centerY = yMid / 2;
+						text.pathRotate = pathRotate;
+						text.bold = rc.textBold;
+						text.drawOnPath = path;
+						text.textColor = rc.textColor;
+						text.textShadow = (int) rc.textHaloRadius;
+						text.textSize = rc.textSize;
+						text.vOffset = rc.main.strokeWidth / 2 - 1;
+						rc.textToDraw.add(text);
+
+					}
 				}
 			}
 		}
 	}
 
+	private static int[] trunkShields = new int[]{R.drawable.tru_shield1, R.drawable.tru_shield2, R.drawable.tru_shield3,
+		R.drawable.tru_shield4, R.drawable.tru_shield5, R.drawable.tru_shield6, R.drawable.tru_shield7,};
+	private static int[] motorShields = new int[]{R.drawable.mot_shield1, R.drawable.mot_shield2, R.drawable.mot_shield3,
+		R.drawable.mot_shield4, R.drawable.mot_shield5, R.drawable.mot_shield6, R.drawable.mot_shield7,};
+	private static int[] primaryShields = new int[]{R.drawable.pri_shield1, R.drawable.pri_shield2, R.drawable.pri_shield3,
+		R.drawable.pri_shield4, R.drawable.pri_shield5, R.drawable.pri_shield6, R.drawable.pri_shield7,};
+	private static int[] secondaryShields = new int[]{R.drawable.sec_shield1, R.drawable.sec_shield2, R.drawable.sec_shield3,
+		R.drawable.sec_shield4, R.drawable.sec_shield5, R.drawable.sec_shield6, R.drawable.sec_shield7,};
+	private static int[] tertiaryShields = new int[]{R.drawable.ter_shield1, R.drawable.ter_shield2, R.drawable.ter_shield3,
+		R.drawable.ter_shield4, R.drawable.ter_shield5, R.drawable.ter_shield6, R.drawable.ter_shield7,};
 
 	public static String renderObjectText(String name, int subType, int type, int zoom, boolean point, RenderingContext rc) {
+		if(name == null || name.length() == 0){
+			return null;
+		}
 		int textSize = 0;
 		int textColor = 0;
 		int wrapWidth = 0;
 		int shadowRadius = 0;
+		int textMinDistance = 0;
+		int textShield = 0;
 		int dy = 0;
 		boolean bold = false;
+		boolean showTextOnPath = false;
+		
 		switch (type) {
+		case MapRenderingTypes.HIGHWAY : {
+			
+			if(name.charAt(0) == MapRenderingTypes.REF_CHAR){
+				name = name.substring(1);
+				if(name.length() > 6){
+					name = name.substring(0, 6);
+				}
+				int len = name.length();
+				if(len == 0){
+					// skip it
+				} else {
+					textSize = 10;
+					textColor = Color.WHITE;
+					bold = true;
+					textMinDistance = 50;
+					// spacing = 750
+					if (subType == MapRenderingTypes.PL_HW_TRUNK) {
+						textShield = trunkShields[len - 1];
+						if(zoom < 10){
+							textSize = 0;
+						}
+					} else if (subType == MapRenderingTypes.PL_HW_MOTORWAY) {
+						textShield = motorShields[len - 1];
+						if(zoom < 10){
+							textSize = 0;
+						}
+					} else if (subType == MapRenderingTypes.PL_HW_PRIMARY) {
+						textShield = primaryShields[len - 1];
+						if(zoom < 11){
+							textSize = 0;
+						}
+					} else if (subType == MapRenderingTypes.PL_HW_SECONDARY) {
+						if(zoom < 14){
+							textSize = 0;
+						}
+						textShield = secondaryShields[len - 1];
+					} else if (subType == MapRenderingTypes.PL_HW_TERTIARY) {
+						if(zoom < 15){
+							textSize = 0;
+						}
+						textShield = tertiaryShields[len - 1];
+					} else {
+						if(zoom < 16){
+							textSize = 0;
+						} else {
+							showTextOnPath = true;
+							textColor = Color.BLACK;
+							textSize = 10;
+							textMinDistance = 20;
+							shadowRadius = 1;
+							// spacing = 750;
+						}
+					}
+				}
+			} else {
+				if(subType == MapRenderingTypes.PL_HW_TRUNK || subType == MapRenderingTypes.PL_HW_PRIMARY 
+						|| subType == MapRenderingTypes.PL_HW_SECONDARY){
+					textColor = Color.BLACK;
+					showTextOnPath = true;
+					if(zoom == 13 && type != MapRenderingTypes.PL_HW_SECONDARY){
+						textSize = 8;
+					} else if(zoom == 14){
+						textSize = 9;
+					} else if(zoom > 14 && zoom < 17){
+						textSize = 10;
+					} else if(zoom > 16){
+						textSize = 12;
+					}
+				} else if(subType == MapRenderingTypes.PL_HW_TERTIARY || subType == MapRenderingTypes.PL_HW_RESIDENTIAL
+						|| subType == MapRenderingTypes.PL_HW_UNCLASSIFIED || subType == MapRenderingTypes.PL_HW_SERVICE){
+					textColor = Color.BLACK;
+					showTextOnPath = true;
+					if(zoom < 15){
+						textSize = 0;
+					} else if(zoom < 17){
+						textSize = 9;
+					} else {
+						textSize = 11;
+					}
+				} else if(subType < 32){
+					// highway subtype
+					if(zoom >= 16){
+						textColor = Color.BLACK;
+						showTextOnPath = true;
+						textSize = 9;
+					}
+				} else if(subType == 40){
+					// bus stop
+					if(zoom >= 17){
+						textColor = Color.BLACK;
+						textSize = 9;
+						wrapWidth = 25;
+						dy = 11;
+					}
+				}
+			}
+		} break;
+		case MapRenderingTypes.WATERWAY : {
+			if (subType == 1) {
+				if (zoom >= 15 /* && !tunnel */) {
+					showTextOnPath = true;
+					textSize = 8;
+					shadowRadius = 1;
+					textColor = 0xff6699cc;
+				}
+			} else if (subType == 2 || subType == 4) {
+				if (zoom > 13 /* && !tunnel */) {
+					textSize = 9;
+					showTextOnPath = true;
+					shadowRadius = 1;
+					textColor = 0xff6699cc;
+					textMinDistance = 200;
+				}
+			} else if (subType == 5 || subType == 6) {
+				if (zoom >= 15 /* && !tunnel */) {
+					textSize = 8;
+					showTextOnPath = true;
+					shadowRadius = 1;
+					textColor = 0xff6699cc;
+				}
+			} else if (subType == 12) {
+				if(zoom >= 15){
+					textColor = Color.BLACK;
+					textSize = 8;
+					shadowRadius = 1;
+				}
+			} else if (subType == 8) {
+				if (zoom >= 15) {
+					shadowRadius = 1;
+					textSize = 9;
+					textColor = 0xff0066ff;
+					wrapWidth = 70;
+					dy = 10;
+				}
+			}
+		}
+			break;
 		case MapRenderingTypes.AEROWAY: {
 			textColor = 0xff6692da;
 			shadowRadius = 1;
-			if (subType == 10) {
+			if(name.charAt(0) == MapRenderingTypes.REF_CHAR){
+				name = name.substring(1);
+			}
+			if (subType == 7 || subType == 8) {
+				if (zoom >= 15) {
+					showTextOnPath = true;
+					textSize = 10;
+					textColor = 0xff333333;
+					textMinDistance = 20;
+					shadowRadius = 1;
+					// spacing = 750;
+				}
+			} else if (subType == 10) {
 				// airport
 				if (zoom >= 10 && zoom <= 12) {
 					textSize = 9;
@@ -874,18 +1033,6 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			}
 		}
 			break;
-		case MapRenderingTypes.WATERWAY: {
-			if (subType == 8) {
-				if (zoom >= 15) {
-					shadowRadius = 1;
-					textSize = 9;
-					textColor = 0xff0066ff;
-					wrapWidth = 70;
-					dy = 10;
-				}
-			}
-		}
-			break;
 		case MapRenderingTypes.TOURISM: {
 			if (subType == 9) {
 				if (zoom >= 16) {
@@ -979,11 +1126,10 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				} else if (subType == 4 || subType == 18) {
 					textColor = 0xff0066ff;
 					shadowRadius = 1;
-					dy = 9;
+					dy = 13;
 					textSize = 9;
 				}
 			}
-
 		}
 			break;
 		case MapRenderingTypes.AMENITY_EDUCATION: {
@@ -1004,6 +1150,9 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			} else if (subType == 1 || subType == 2 || subType == 3) {
 				if (zoom >= 16) {
 					textColor = 0xff000033;
+					if(subType != 1){
+						dy = 11;
+					}
 					textSize = 9;
 					wrapWidth = 16;
 				}
@@ -1161,7 +1310,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					shadowRadius = 1;
 					textColor = 0xff734a08;
 					wrapWidth = 34;
-					dy = 9;
+					dy = 11;
 					textSize = 10;
 				} else if (subType >= 4 && subType <= 6) {
 					shadowRadius = 1;
@@ -1274,6 +1423,9 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		}
 		rc.textColor = textColor;
 		rc.textSize = textSize;
+		rc.textMinDistance = textMinDistance;
+		rc.showTextOnPath = showTextOnPath;
+		rc.textShield = textShield;
 		rc.textWrapWidth = wrapWidth;
 		rc.textHaloRadius = shadowRadius;
 		rc.textBold = bold;

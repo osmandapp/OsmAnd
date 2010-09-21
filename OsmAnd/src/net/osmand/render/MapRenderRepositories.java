@@ -269,6 +269,7 @@ public class MapRenderRepositories {
 				cObjects = new ArrayList<MapRenderObject>();
 				System.gc(); // to clear previous objects
 				Set<Long> ids = new LinkedHashSet<Long>();
+				Map<Integer, List<MapRenderObject>> multiPolygons = new LinkedHashMap<Integer, List<MapRenderObject>>();
 				for (Connection c : connections.keySet()) {
 					RectF r = connections.get(c);
 					boolean intersects = r.top >= cBottomLatitude  && r.left <= cRightLongitude && r.right >= cLeftLongitude &&
@@ -302,18 +303,32 @@ public class MapRenderRepositories {
 								}
 								ids.add(id);
 							}
+							int type = result.getInt(4);
 							MapRenderObject obj = new MapRenderObject(id);
 							obj.setData(result.getBytes(2));
 							obj.setName(result.getString(3));
-							obj.setType(result.getInt(4));
+							obj.setType(type);
 							count++;
-							cObjects.add(obj);
+							if((type & 0x3) == 0){
+								// multy polygon
+								if(!multiPolygons.containsKey(type)){
+									multiPolygons.put(type, new ArrayList<MapRenderObject>());
+								}
+								multiPolygons.get(type).add(obj);
+							} else {
+								cObjects.add(obj);
+							}
 						}
 
 					} finally {
 						result.close();
 					}
 				}
+				int leftX = MapUtils.get31TileNumberX(cLeftLongitude);
+				int rightX = MapUtils.get31TileNumberX(cRightLongitude);
+				int bottomY = MapUtils.get31TileNumberY(cBottomLatitude);
+				int topY = MapUtils.get31TileNumberY(cTopLatitude);
+				proccessMultiPolygons(multiPolygons, leftX, rightX, bottomY, topY);
 				log.info(String
 						.format("Search has been done in %s ms. %s results were found.", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
 			} catch (java.sql.SQLException e) {
@@ -336,6 +351,132 @@ public class MapRenderRepositories {
 			oldBmp.recycle();
 		}
 		
+	}
+	
+	public void proccessMultiPolygons(Map<Integer, List<MapRenderObject>> multyPolygons, int leftX, int rightX, int bottomY, int topY){
+		for (Integer type : multyPolygons.keySet()) {
+			List<MapRenderObject> list = multyPolygons.get(type);
+			
+			List<List<Long>> completedRings = new ArrayList<List<Long>>();
+			List<List<Long>> incompletedRings = new ArrayList<List<Long>>();
+			for (MapRenderObject o : list) {
+				int len = o.getPointsLength();
+				if(len < 2){
+					continue;
+				}
+				List<Long> coordinates = new ArrayList<Long>(len/2);
+				
+				int px = o.getPoint31XTile(0);
+				int py = o.getPoint31YTile(0);
+				int x = px;
+				int y = py;
+				boolean inside = leftX <= x && x <= rightX && y >= topY && y <= bottomY;
+				if(inside){
+					coordinates.add((((long) x) << 32) | ((long) y));
+				}
+				for (int i = 1; i < len; i++) {
+					x = o.getPoint31XTile(i);
+					y = o.getPoint31YTile(i);
+					boolean tinside = leftX <= x && x <= rightX && y >= topY && y <= bottomY;
+					if(inside){
+						if(tinside){
+							coordinates.add((((long) x) << 32) | ((long) y));
+						} else {
+							int by = -1;
+							int bx = -1;
+							if(by == -1 && y < topY && py >= topY){
+								int tx = (int) (px + ((double) (x - px) * (topY - py)) / (y - py)); 
+								if(leftX <= tx && tx <= rightX){
+									bx = tx;
+									by = topY;
+								}
+							}
+							if(by == -1 && y > bottomY && py <= bottomY){
+								int tx = (int) (px + ((double) (x - px) * (py - bottomY)) / (py - y)); 
+								if(leftX <= tx && tx <= rightX){
+									bx = tx;
+									by = bottomY;
+								}
+							}
+							if(by == -1 && x < leftX && px >= leftX){
+								by = (int) (py + ((double) (y - py) * (leftX - px)) / (x - px));
+								bx = leftX;
+							}
+							if(by == -1 && x > rightX && px <= rightX){
+								by = (int) (py + ((double) (y - py) * (px - rightX)) / (px - x));
+								bx = rightX;
+							}
+							coordinates.add((((long) bx) << 32) | ((long) by));
+						}
+					} else if(tinside){
+						int by = -1;
+						int bx = -1;
+						if(by == -1 && py < topY && y >= topY){
+							int tx = (int) (px + ((double)(x-px)*(topY - py))/(y-py)); 
+							if(leftX <= tx && tx <= rightX){
+								bx = tx;
+								by = topY;
+							}
+						}
+						if(by == -1 && py > bottomY && y <= bottomY){
+							int tx = (int) (px + ((double) (x - px) * (py - bottomY)) / (py - y)); 
+							if(leftX <= tx && tx <= rightX){
+								bx = tx;
+								by = bottomY;
+							}
+						}
+						if(by == -1 && px < leftX && x >= leftX){
+							by = (int) (py + ((double)(y-py)*(leftX - px))/(x-px));
+							bx = leftX;
+						}
+						if(by == -1 && px > rightX && x <= rightX){
+							by = (int) (py + ((double)(y-py)*(px - rightX))/(px - x));
+							bx = rightX;
+						}
+						coordinates.add((((long) bx) << 32) | ((long) by));
+					}
+					px = x;
+					py = y;
+					inside = tinside;
+				}
+				if(coordinates.size() > 0){
+					if(coordinates.get(0) == coordinates.get(coordinates.size() - 1)){
+						completedRings.add(coordinates);
+					} else {
+						boolean add = true;
+						for (int k = 0; k < incompletedRings.size(); ) {
+							boolean remove = false;
+							List<Long> i = incompletedRings.get(k);
+							if(coordinates.get(0) == i.get(i.size() - 1)){
+								i.addAll(coordinates.subList(1, coordinates.size()));
+								remove = true;
+								coordinates = i;
+							} else if(coordinates.get(coordinates.size() - 1) == i.get(0)){
+								coordinates.addAll(i.subList(1, i.size()));
+								remove = true;
+							}
+							if(remove){
+								incompletedRings.remove(k);
+							} else {
+								k++;
+							}
+							if(coordinates.get(0) == coordinates.get(coordinates.size() - 1)){
+								completedRings.add(coordinates);
+								add = false;
+								break;
+							}
+						}
+						if(add){
+							incompletedRings.add(coordinates);
+						}
+					}
+				}
+			}
+			if(incompletedRings.size() > 0){
+				// something wrong or start to unify by borders 
+				// TODO
+			}
+		}
 	}
 
 	public Bitmap getBitmap() {

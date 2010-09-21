@@ -18,9 +18,10 @@ import net.osmand.osm.OSMSettings.OSMTagKey;
 public class MapRenderingTypes {
 	
 	
-	/** standard schema : 
+	/** standard schema :
 	 	polygon :   ssssssss ttttt aaaaa ttttt 011 : 26 bits + 6 bits for special info 
 				    t - object type, a - area subtype, p - point object type, s - point object subtype
+		multi :
 		polyline :   ppppp ttttt 010 : 13 bits + 19 bits for special info 
 				    t - object type, p - polyline object type, 
 		point :   ssssssss ttttt 010 : 16 bits + 16 bits for special info 
@@ -29,9 +30,11 @@ public class MapRenderingTypes {
 
 	public final static int TYPE_MASK_LEN = 3;
 	public final static int TYPE_MASK = (1 << TYPE_MASK_LEN) - 1;
+	public final static int MULTY_POLYGON_TYPE = 0;
 	public final static int POLYGON_TYPE = 3;
 	public final static int POLYLINE_TYPE = 2;
 	public final static int POINT_TYPE = 1;
+	
 	
 	public final static int PG_SUBTYPE_MASK_LEN = 5;
 	public final static int PG_SUBTYPE_MASK = (1 << PG_SUBTYPE_MASK_LEN) -1;
@@ -47,13 +50,10 @@ public class MapRenderingTypes {
 	public final static int MASK_4 = (1 << 4) - 1;
 	public final static int MASK_10 = (1 << 10) - 1;
 	
-	public final static String REF_CHAR = ((char)0x0019)+""; //$NON-NLS-1$
+	public final static char REF_CHAR = ((char)0x0019);
 	
 
-	// TODO !!! add others facilities to all types
 	// TODO Internet access bits for point
-	// TODO Find TextSymbolizer rules and write text for points and others
-	
 	// TODO place text : (ref - shield)
 	// TODO coastline
 	public final static int HIGHWAY = 1; 
@@ -246,11 +246,6 @@ public class MapRenderingTypes {
 			init();
 		}
 		int type = 0;
-		if (e instanceof Relation) {
-			// TODO change in future (?)
-			// multypoligon, forest ...
-			return type;
-		}
 
 		boolean point = e instanceof Node;
 		boolean polygon = false;
