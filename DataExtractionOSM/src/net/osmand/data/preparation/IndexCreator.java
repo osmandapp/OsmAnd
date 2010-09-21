@@ -78,9 +78,10 @@ public class IndexCreator {
 
 	public static final int BATCH_SIZE = 5000;
 	public static final String TEMP_NODES_DB = "nodes.tmp.odb";
-	public static final int STEP_MAIN = 1;
-	public static final int STEP_ADDRESS_RELATIONS = 2;
-	public static final int STEP_CITY_NODES = 3;
+	
+	public static final int STEP_CITY_NODES = 1;
+	public static final int STEP_ADDRESS_RELATIONS_AND_MULTYPOLYGONS = 2;
+	public static final int STEP_MAIN = 3;
 	
 	private File workingDir = null;
 	
@@ -138,6 +139,8 @@ public class IndexCreator {
 	private PreparedStatement mapLocsStatLevel2;
 //	private RTree mapTree;
 	
+	// save it in memory while that is allowed
+	private Set<Long> multiPolygonsWays = new LinkedHashSet<Long>(); 
 	private Map<Long, List<Way>> lowLevelWaysSt = new LinkedHashMap<Long, List<Way>>();
 	private Map<Long, List<Way>> lowLevelWaysEnd = new LinkedHashMap<Long, List<Way>>();
 
@@ -945,13 +948,16 @@ public class IndexCreator {
 			}
 			
 			if(indexMap && (e instanceof Way || e instanceof Node)){
-				// manipulate what kind of way to load
-				loadEntityData(e, true);
-				boolean inverse = "-1".equals(e.getTag(OSMTagKey.ONEWAY));
+				// check that's not multipolygon
+				if (e instanceof Node || !multiPolygonsWays.contains(e.getId())) {
+					// manipulate what kind of way to load
+					loadEntityData(e, true);
+					boolean inverse = "-1".equals(e.getTag(OSMTagKey.ONEWAY));
 
-				writeEntityToMapDatabase(e, e.getId(), inverse, 0);
-				indexLowLevelMap(e, 1);
-				indexLowLevelMap(e, 2);
+					writeEntityToMapDatabase(e, e.getId(), inverse, 0);
+					indexLowLevelMap(e, 1);
+					indexLowLevelMap(e, 2);
+				}
 			}
 
 			if (indexAddress) {
@@ -1013,15 +1019,34 @@ public class IndexCreator {
 					}
 				}
 			}
-		} else if (step == STEP_ADDRESS_RELATIONS) {
+		} else if (step == STEP_ADDRESS_RELATIONS_AND_MULTYPOLYGONS) {
 			if (e instanceof Relation && "address".equals(e.getTag(OSMTagKey.TYPE))) {
 				indexAddressRelation((Relation) e);
+			}
+			if(e instanceof Relation && "multipolygon".equals(e.getTag(OSMTagKey.TYPE))){
+				loadEntityData(e, true);
+				Map<Entity, String> entities = ((Relation) e).getMemberEntities();
+				for(Entity es : entities.keySet()){
+					if(es instanceof Way){
+						boolean inner = "inner".equals(entities.get(es));
+						// TODO determine clockwise
+						boolean clockwise = true;
+						// TODO add tags from relation to outer ways!
+						
+						boolean inverse = !clockwise == inner;
+						writeEntityToMapDatabase(es, es.getId(), inverse, 0);
+						indexLowLevelMap(es, 1);
+						indexLowLevelMap(es, 2);
+						
+						multiPolygonsWays.add(es.getId());
+					}
+				}
 			}
 		} else if (step == STEP_CITY_NODES) {
 			registerCityIfNeeded(e);
 		}
-		
 	}
+
 
 
 	private void registerCityIfNeeded(Entity e) {
@@ -1438,10 +1463,10 @@ public class IndexCreator {
 		}
 		
 		// 2. index address relations
-		if(indexAddress){
+		if(indexAddress || indexMap){
 			progress.setGeneralProgress("[55 of 100]");
 			progress.startTask("Preindexing address...", -1);
-			allRelations = iterateOverEntities(progress, EntityType.RELATION, allRelations, STEP_ADDRESS_RELATIONS);
+			allRelations = iterateOverEntities(progress, EntityType.RELATION, allRelations, STEP_ADDRESS_RELATIONS_AND_MULTYPOLYGONS);
 			// commit to put all cities
 			if(pStatements.get(addressBuildingStat) > 0){
 				addressBuildingStat.executeBatch();
@@ -1580,11 +1605,14 @@ public class IndexCreator {
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus_2010_09_03.osm.bz2"), new ConsoleProgressImplementation(3), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus_2010_09_03.osm.bz2"), new ConsoleProgressImplementation(3), null);
 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);
+		 
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/netherlands.osm.bz2"), new ConsoleProgressImplementation(1), null);
 		 
 		/*try {
 //			RTree rtree = new RTree("e:/Information/OSM maps/osmand/Belarus_2010_09_03.map.odb_ind");

@@ -161,9 +161,8 @@ public class PolygonRenderer {
 				rc.main.color = 0xffddbf92;
 				break;
 			case 10:
-				if(zoom < 8){
-					rc.main.fillArea = false;
-				} else if(zoom <= 13){
+				rc.main.fillArea = zoom >= 8;
+				if(zoom <= 13){
 					rc.main.color = 0xff8dc56c;
 				} else {
 					rc.main.shader = o.getShader(R.drawable.h_forest);

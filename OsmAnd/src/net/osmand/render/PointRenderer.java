@@ -272,7 +272,7 @@ public class PointRenderer {
 			break;
 		case MapRenderingTypes.AMENITY_EDUCATION: {
 			if (zoom > 15) {
-				if (subType == 2) {
+				if (subType == 2 || subType == 3) {
 					resId = R.drawable.h_school;
 				} else if (subType == 4) {
 					resId = R.drawable.h_library;
