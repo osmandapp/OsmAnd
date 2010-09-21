@@ -953,7 +953,6 @@ public class IndexCreator {
 					// manipulate what kind of way to load
 					loadEntityData(e, true);
 					boolean inverse = "-1".equals(e.getTag(OSMTagKey.ONEWAY));
-
 					writeEntityToMapDatabase(e, e.getId(), inverse, 0);
 					indexLowLevelMap(e, 1);
 					indexLowLevelMap(e, 2);
@@ -1020,28 +1019,31 @@ public class IndexCreator {
 				}
 			}
 		} else if (step == STEP_ADDRESS_RELATIONS_AND_MULTYPOLYGONS) {
-			if (e instanceof Relation && "address".equals(e.getTag(OSMTagKey.TYPE))) {
-				indexAddressRelation((Relation) e);
-			}
-			if(e instanceof Relation && "multipolygon".equals(e.getTag(OSMTagKey.TYPE))){
-				loadEntityData(e, true);
-				Map<Entity, String> entities = ((Relation) e).getMemberEntities();
-				for(Entity es : entities.keySet()){
-					if(es instanceof Way){
-						boolean inner = "inner".equals(entities.get(es));
-						// TODO determine clockwise
-						boolean clockwise = true;
-						// TODO add tags from relation to outer ways!
-						
-						boolean inverse = !clockwise == inner;
-						writeEntityToMapDatabase(es, es.getId(), inverse, 0);
-						indexLowLevelMap(es, 1);
-						indexLowLevelMap(es, 2);
-						
-						multiPolygonsWays.add(es.getId());
-					}
+			if (indexAddress) {
+				if (e instanceof Relation && "address".equals(e.getTag(OSMTagKey.TYPE))) {
+					indexAddressRelation((Relation) e);
 				}
 			}
+//			if(indexMap && e instanceof Relation && "multipolygon".equals(e.getTag(OSMTagKey.TYPE))){
+//				loadEntityData(e, true);
+//				Map<Entity, String> entities = ((Relation) e).getMemberEntities();
+//				for(Entity es : entities.keySet()){
+//					if(es instanceof Way){
+//						
+//						boolean inner = "inner".equals(entities.get(es));
+//						// TODO determine clockwise
+//						boolean clockwise = true;
+//						// TODO add tags from relation to outer ways!
+//						
+//						boolean inverse = !clockwise == inner;
+//						writeEntityToMapDatabase(es, es.getId(), inverse, 0);
+//						indexLowLevelMap(es, 1);
+//						indexLowLevelMap(es, 2);
+//						
+//						multiPolygonsWays.add(es.getId());
+//					}
+//				}
+//			}
 		} else if (step == STEP_CITY_NODES) {
 			registerCityIfNeeded(e);
 		}
@@ -1206,6 +1208,9 @@ public class IndexCreator {
 			if (level > 0) {
 				List<Node> nodes = ((Way) e).getNodes();
 				Way way = new Way(id);
+				for(String t : e.getTagKeySet()){
+					way.putTag(t, e.getTag(t));
+				}
 				int prevX = 0;
 				int prevY = 0;
 				for (int i = 0; i < nodes.size(); i++) {
@@ -1468,15 +1473,17 @@ public class IndexCreator {
 			progress.startTask("Preindexing address...", -1);
 			allRelations = iterateOverEntities(progress, EntityType.RELATION, allRelations, STEP_ADDRESS_RELATIONS_AND_MULTYPOLYGONS);
 			// commit to put all cities
-			if(pStatements.get(addressBuildingStat) > 0){
-				addressBuildingStat.executeBatch();
-				pStatements.put(addressBuildingStat, 0);
+			if (indexAddress) {
+				if (pStatements.get(addressBuildingStat) > 0) {
+					addressBuildingStat.executeBatch();
+					pStatements.put(addressBuildingStat, 0);
+				}
+				if (pStatements.get(addressStreetNodeStat) > 0) {
+					addressStreetNodeStat.executeBatch();
+					pStatements.put(addressStreetNodeStat, 0);
+				}
+				addressConnection.commit();
 			}
-			if(pStatements.get(addressStreetNodeStat) > 0){
-				addressStreetNodeStat.executeBatch();
-				pStatements.put(addressStreetNodeStat, 0);
-			}
-			addressConnection.commit();
 		}
 		
 
@@ -1611,8 +1618,8 @@ public class IndexCreator {
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);
 		 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/netherlands.osm.bz2"), new ConsoleProgressImplementation(1), null);
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/netherlands.osm.bz2"), new ConsoleProgressImplementation(1), null);
 		 
 		/*try {
 //			RTree rtree = new RTree("e:/Information/OSM maps/osmand/Belarus_2010_09_03.map.odb_ind");
