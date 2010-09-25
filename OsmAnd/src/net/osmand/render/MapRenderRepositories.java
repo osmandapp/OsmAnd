@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -19,7 +20,9 @@ import net.osmand.IProgress;
 import net.osmand.LogUtil;
 import net.osmand.data.index.IndexConstants;
 import net.osmand.osm.MapRenderObject;
+import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
+import net.osmand.osm.MultyPolygon;
 
 import org.apache.commons.logging.Log;
 
@@ -310,19 +313,23 @@ public class MapRenderRepositories {
 							}
 							int type = result.getInt(4);
 							MapRenderObject obj = new MapRenderObject(id);
+							obj.setType(type);
 							obj.setData(result.getBytes(2));
 							obj.setName(result.getString(3));
-							obj.setType(type);
+							
 							count++;
-							if((type & 0x3) == 0){
-								// multy polygon
-								if(!multiPolygons.containsKey(type)){
-									multiPolygons.put(type, new ArrayList<MapRenderObject>());
-								}
-								multiPolygons.get(type).add(obj);
-							} else {
-								cObjects.add(obj);
+							int mainType = obj.getMainType();
+							// be attentive we need 16 bits from main type (not 15 bits!) 
+							// the last bit shows direction of multipolygon way 
+							registerMultipolygon(multiPolygons, mainType, obj);
+							int sec = obj.getSecondType();
+							if(sec != 0){
+								registerMultipolygon(multiPolygons, sec, obj);
 							}
+							for (int k = 0; k < obj.getMultiTypes(); k++) {
+								registerMultipolygon(multiPolygons, obj.getAdditionalType(k), obj);
+							}
+							cObjects.add(obj);
 						}
 
 					} finally {
@@ -333,7 +340,8 @@ public class MapRenderRepositories {
 				int rightX = MapUtils.get31TileNumberX(cRightLongitude);
 				int bottomY = MapUtils.get31TileNumberY(cBottomLatitude);
 				int topY = MapUtils.get31TileNumberY(cTopLatitude);
-				proccessMultiPolygons(multiPolygons, leftX, rightX, bottomY, topY);
+				List<MultyPolygon> pMulti = proccessMultiPolygons(multiPolygons, leftX, rightX, bottomY, topY);
+				cObjects.addAll(pMulti);
 				log.info(String
 						.format("Search has been done in %s ms. %s results were found.", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
 			} catch (java.sql.SQLException e) {
@@ -358,132 +366,6 @@ public class MapRenderRepositories {
 		
 	}
 	
-	public void proccessMultiPolygons(Map<Integer, List<MapRenderObject>> multyPolygons, int leftX, int rightX, int bottomY, int topY){
-		for (Integer type : multyPolygons.keySet()) {
-			List<MapRenderObject> list = multyPolygons.get(type);
-			
-			List<List<Long>> completedRings = new ArrayList<List<Long>>();
-			List<List<Long>> incompletedRings = new ArrayList<List<Long>>();
-			for (MapRenderObject o : list) {
-				int len = o.getPointsLength();
-				if(len < 2){
-					continue;
-				}
-				List<Long> coordinates = new ArrayList<Long>(len/2);
-				
-				int px = o.getPoint31XTile(0);
-				int py = o.getPoint31YTile(0);
-				int x = px;
-				int y = py;
-				boolean inside = leftX <= x && x <= rightX && y >= topY && y <= bottomY;
-				if(inside){
-					coordinates.add((((long) x) << 32) | ((long) y));
-				}
-				for (int i = 1; i < len; i++) {
-					x = o.getPoint31XTile(i);
-					y = o.getPoint31YTile(i);
-					boolean tinside = leftX <= x && x <= rightX && y >= topY && y <= bottomY;
-					if(inside){
-						if(tinside){
-							coordinates.add((((long) x) << 32) | ((long) y));
-						} else {
-							int by = -1;
-							int bx = -1;
-							if(by == -1 && y < topY && py >= topY){
-								int tx = (int) (px + ((double) (x - px) * (topY - py)) / (y - py)); 
-								if(leftX <= tx && tx <= rightX){
-									bx = tx;
-									by = topY;
-								}
-							}
-							if(by == -1 && y > bottomY && py <= bottomY){
-								int tx = (int) (px + ((double) (x - px) * (py - bottomY)) / (py - y)); 
-								if(leftX <= tx && tx <= rightX){
-									bx = tx;
-									by = bottomY;
-								}
-							}
-							if(by == -1 && x < leftX && px >= leftX){
-								by = (int) (py + ((double) (y - py) * (leftX - px)) / (x - px));
-								bx = leftX;
-							}
-							if(by == -1 && x > rightX && px <= rightX){
-								by = (int) (py + ((double) (y - py) * (px - rightX)) / (px - x));
-								bx = rightX;
-							}
-							coordinates.add((((long) bx) << 32) | ((long) by));
-						}
-					} else if(tinside){
-						int by = -1;
-						int bx = -1;
-						if(by == -1 && py < topY && y >= topY){
-							int tx = (int) (px + ((double)(x-px)*(topY - py))/(y-py)); 
-							if(leftX <= tx && tx <= rightX){
-								bx = tx;
-								by = topY;
-							}
-						}
-						if(by == -1 && py > bottomY && y <= bottomY){
-							int tx = (int) (px + ((double) (x - px) * (py - bottomY)) / (py - y)); 
-							if(leftX <= tx && tx <= rightX){
-								bx = tx;
-								by = bottomY;
-							}
-						}
-						if(by == -1 && px < leftX && x >= leftX){
-							by = (int) (py + ((double)(y-py)*(leftX - px))/(x-px));
-							bx = leftX;
-						}
-						if(by == -1 && px > rightX && x <= rightX){
-							by = (int) (py + ((double)(y-py)*(px - rightX))/(px - x));
-							bx = rightX;
-						}
-						coordinates.add((((long) bx) << 32) | ((long) by));
-					}
-					px = x;
-					py = y;
-					inside = tinside;
-				}
-				if(coordinates.size() > 0){
-					if(coordinates.get(0) == coordinates.get(coordinates.size() - 1)){
-						completedRings.add(coordinates);
-					} else {
-						boolean add = true;
-						for (int k = 0; k < incompletedRings.size(); ) {
-							boolean remove = false;
-							List<Long> i = incompletedRings.get(k);
-							if(coordinates.get(0) == i.get(i.size() - 1)){
-								i.addAll(coordinates.subList(1, coordinates.size()));
-								remove = true;
-								coordinates = i;
-							} else if(coordinates.get(coordinates.size() - 1) == i.get(0)){
-								coordinates.addAll(i.subList(1, i.size()));
-								remove = true;
-							}
-							if(remove){
-								incompletedRings.remove(k);
-							} else {
-								k++;
-							}
-							if(coordinates.get(0) == coordinates.get(coordinates.size() - 1)){
-								completedRings.add(coordinates);
-								add = false;
-								break;
-							}
-						}
-						if(add){
-							incompletedRings.add(coordinates);
-						}
-					}
-				}
-			}
-			if(incompletedRings.size() > 0){
-				// something wrong or start to unify by borders 
-				// TODO
-			}
-		}
-	}
-
 	public Bitmap getBitmap() {
 		return bmp;
 	}
@@ -507,5 +389,288 @@ public class MapRenderRepositories {
 		}
 		cachedWaysLoc = new RectF();
 	}
+
+	
+	/// Manipulating with multipolygons
+	private void registerMultipolygon(Map<Integer, List<MapRenderObject>> multyPolygons, int type, MapRenderObject obj) {
+		if ((type & 0x3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
+			type &= 0xffff; // reject attrs
+			// multy polygon
+			if (type != 0) {
+				if (!multyPolygons.containsKey(type)) {
+					multyPolygons.put(type, new ArrayList<MapRenderObject>());
+				}
+				multyPolygons.get(type).add(obj);
+			}
+
+		}
+	}
+	
+	public List<MultyPolygon> proccessMultiPolygons(Map<Integer, List<MapRenderObject>> multyPolygons, int leftX, int rightX, int bottomY, int topY){
+		List<MultyPolygon> listPolygons = new ArrayList<MultyPolygon>(multyPolygons.size());
+		List<List<Long>> completedRings = new ArrayList<List<Long>>();
+		List<List<Long>> incompletedRings = new ArrayList<List<Long>>();
+		for (Integer type : multyPolygons.keySet()) {
+			// TODO check another situation that there is only inverseList!!!
+			if(((type >> 15) & 1) == 1){
+				// continue on inner boundaries
+				continue;
+			} 
+			int inverseType = (type | (1<< 15));
+			List<MapRenderObject> directList = multyPolygons.get(type);
+			List<MapRenderObject> inverselist = Collections.emptyList();
+			if(multyPolygons.containsKey(inverseType)){
+				inverselist = multyPolygons.get(inverseType);
+			}
+			// TODO remove log
+//			System.out.println("Multipolygon t="+MapRenderingTypes.getMainObjectType(type)+
+//					" subtype=" + MapRenderingTypes.getObjectSubType(type));
+			
+			completedRings.clear();
+			incompletedRings.clear();
+			
+			MultyPolygon pl = processMultiPolygon(leftX, rightX, bottomY, topY, listPolygons, completedRings, incompletedRings, type,
+					directList, inverselist);
+			listPolygons.add(pl);
+		}
+		return listPolygons;
+	}
+
+	private MultyPolygon processMultiPolygon(int leftX, int rightX, int bottomY, int topY, List<MultyPolygon> listPolygons,
+			List<List<Long>> completedRings, List<List<Long>> incompletedRings, Integer type, List<MapRenderObject> directList,
+			List<MapRenderObject> inverselist) {
+		MultyPolygon pl = new MultyPolygon();
+		pl.setType(type << 1);
+		for (int km = 0; km < 2; km++) {
+			List<MapRenderObject> list = km == 0 ? directList : inverselist;
+			for (MapRenderObject o : list) {
+				int len = o.getPointsLength();
+				if (len < 2) {
+					continue;
+				}
+				List<Long> coordinates = new ArrayList<Long>(len / 2);
+				if (o.getName() != null) {
+					pl.setName(o.getName());
+				}
+				int px = o.getPoint31XTile(km == 0 ? 0 : len - 1);
+				int py = o.getPoint31YTile(km == 0 ? 0 : len - 1);
+				int x = px;
+				int y = py;
+				boolean pinside = leftX <= x && x <= rightX && y >= topY && y <= bottomY;
+				if (pinside) {
+					coordinates.add((((long) x) << 32) | ((long) y));
+				}
+				for (int i = 1; i < len; i++) {
+					x = o.getPoint31XTile(km == 0 ? i : len - i - 1);
+					y = o.getPoint31YTile(km == 0 ? i : len - i - 1);
+					boolean inside = leftX <= x && x <= rightX && y >= topY && y <= bottomY;
+					calculateLineCoordinates(inside, x, y, pinside, px, py, leftX, rightX, bottomY, topY, coordinates);
+					px = x;
+					py = y;
+					pinside = inside;
+				}
+				if (coordinates.size() > 0) {
+					if (coordinates.get(0).longValue() == coordinates.get(coordinates.size() - 1).longValue()) {
+						completedRings.add(coordinates);
+					} else {
+						boolean add = true;
+						for (int k = 0; k < incompletedRings.size();) {
+							boolean remove = false;
+							List<Long> i = incompletedRings.get(k);
+							if (coordinates.get(0).longValue() == i.get(i.size() - 1).longValue()) {
+								i.addAll(coordinates.subList(1, coordinates.size()));
+								remove = true;
+								coordinates = i;
+							} else if (coordinates.get(coordinates.size() - 1).longValue() == i.get(0).longValue()) {
+								coordinates.addAll(i.subList(1, i.size()));
+								remove = true;
+							}
+							if (remove) {
+								incompletedRings.remove(k);
+							} else {
+								k++;
+							}
+							if (coordinates.get(0).longValue() == coordinates.get(coordinates.size() - 1).longValue()) {
+								completedRings.add(coordinates);
+								add = false;
+								break;
+							}
+						}
+						if (add) {
+							incompletedRings.add(coordinates);
+						}
+					}
+				}
+			}
+		}
+		// TODO check if there is only inner bounds (add path bound)
+		if (incompletedRings.size() > 0) {
+			unifyIncompletedRings(incompletedRings, completedRings, leftX, rightX, bottomY, topY);
+		}
+		
+		long[][] lns = new long[completedRings.size()][];
+		for (int i = 0; i < completedRings.size(); i++) {
+			List<Long> ring = completedRings.get(i);
+			lns[i] = new long[ring.size()];
+			for (int j = 0; j < lns[i].length; j++) {
+				lns[i][j] = ring.get(j);
+			}
+		}
+		pl.setLines(lns);
+		return pl;
+	}
+
+	private void unifyIncompletedRings(List<List<Long>> incompletedRings, List<List<Long>> completedRings, int leftX, int rightX,
+			int bottomY, int topY) {
+		int mask = 0xffffffff;
+		for (List<Long> i : incompletedRings) {
+			int x = (int) (i.get(i.size() - 1) >> 32);
+			int y = (int) (i.get(i.size() - 1) & mask);
+			int sx = (int) (i.get(0) >> 32);
+			int sy = (int) (i.get(0) & mask);
+			long start = (((long) sx) << 32) | ((long) sy);
+			boolean st = false;
+			for (int h = 0; h < 8; h++) {
+				if (h % 4 == 0) {
+					// top
+					if (!st) {
+						if (y == topY) {
+							if (sy == topY && sx >= x) {
+								i.add(start);
+								break;
+							} else {
+								i.add((((long) rightX) << 32) | ((long) topY));
+								st = true;
+							}
+						}
+					} else if (sy == topY) {
+						i.add(start);
+						break;
+					}
+				} else if (h % 4 == 1) {
+					// right
+					if (!st) {
+						if (x == rightX) {
+							if (sx == rightX && sy >= y) {
+								i.add(start);
+								break;
+							} else {
+								i.add((((long) rightX) << 32) | ((long) bottomY));
+								st = true;
+							}
+						}
+					} else if (sx == rightX) {
+						i.add(start);
+						break;
+					}
+				} else if (h % 4 == 2) {
+					// bottom
+					if (!st) {
+						if (y == bottomY) {
+							if (sy == bottomY && sx <= x) {
+								i.add(start);
+								break;
+							} else {
+								i.add((((long) leftX) << 32) | ((long) bottomY));
+								st = true;
+							}
+						}
+					} else if (sy == bottomY) {
+						i.add(start);
+						break;
+					}
+				} else if (h % 4 == 3) {
+					// left
+					if (!st) {
+						if (x == leftX) {
+							if (sx == leftX && sy <= y) {
+								i.add(start);
+								break;
+							} else {
+								i.add((((long) leftX) << 32) | ((long) topY));
+								st = true;
+							}
+						}
+					} else if (sx == leftX) {
+						i.add(start);
+						break;
+					}
+				}
+				// something wrong here
+				// These excecptions could be commented and do not add line to completed
+				if (h == 3 && !st) {
+					throw new IllegalArgumentException();
+				}
+				if (h == 7) {
+					throw new IllegalArgumentException();
+				}
+			}
+			completedRings.add(i);
+		}
+		
+		
+	}
+
+	private void calculateLineCoordinates(boolean inside, int x, int y, boolean pinside, int px, int py, int leftX, int rightX,
+			int bottomY, int topY, List<Long> coordinates) {
+		if (pinside) {
+			if (inside) {
+				coordinates.add((((long) x) << 32) | ((long) y));
+			} else {
+				int by = -1;
+				int bx = -1;
+				if (by == -1 && y < topY && py >= topY) {
+					int tx = (int) (px + ((double) (x - px) * (topY - py)) / (y - py));
+					if (leftX <= tx && tx <= rightX) {
+						bx = tx;
+						by = topY;
+					}
+				}
+				if (by == -1 && y > bottomY && py <= bottomY) {
+					int tx = (int) (px + ((double) (x - px) * (py - bottomY)) / (py - y));
+					if (leftX <= tx && tx <= rightX) {
+						bx = tx;
+						by = bottomY;
+					}
+				}
+				if (by == -1 && x < leftX && px >= leftX) {
+					by = (int) (py + ((double) (y - py) * (leftX - px)) / (x - px));
+					bx = leftX;
+				}
+				if (by == -1 && x > rightX && px <= rightX) {
+					by = (int) (py + ((double) (y - py) * (px - rightX)) / (px - x));
+					bx = rightX;
+				}
+				coordinates.add((((long) bx) << 32) | ((long) by));
+			}
+		} else if (inside) {
+			int by = -1;
+			int bx = -1;
+			if (by == -1 && py < topY && y >= topY) {
+				int tx = (int) (px + ((double) (x - px) * (topY - py)) / (y - py));
+				if (leftX <= tx && tx <= rightX) {
+					bx = tx;
+					by = topY;
+				}
+			}
+			if (by == -1 && py > bottomY && y <= bottomY) {
+				int tx = (int) (px + ((double) (x - px) * (py - bottomY)) / (py - y));
+				if (leftX <= tx && tx <= rightX) {
+					bx = tx;
+					by = bottomY;
+				}
+			}
+			if (by == -1 && px < leftX && x >= leftX) {
+				by = (int) (py + ((double) (y - py) * (leftX - px)) / (x - px));
+				bx = leftX;
+			}
+			if (by == -1 && px > rightX && x <= rightX) {
+				by = (int) (py + ((double) (y - py) * (px - rightX)) / (px - x));
+				bx = rightX;
+			}
+			coordinates.add((((long) bx) << 32) | ((long) by));
+		}
+	}
+
 
 }

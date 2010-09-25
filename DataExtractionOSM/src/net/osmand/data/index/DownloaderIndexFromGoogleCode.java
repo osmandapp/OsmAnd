@@ -38,38 +38,38 @@ public class DownloaderIndexFromGoogleCode {
 //								IndexConstants.TRANSPORT_TABLE_VERSION + "" }); //$NON-NLS-1$
 		Map<String, String> indexFiles = DownloaderIndexFromGoogleCode.getIndexFiles(
 				new String[] { IndexConstants.TRANSPORT_INDEX_EXT, IndexConstants.TRANSPORT_INDEX_EXT_ZIP,}, 
-				new String[] {	IndexConstants.TRANSPORT_TABLE_VERSION + "",  
+				new String[] {	IndexConstants.TRANSPORT_TABLE_VERSION + "",   //$NON-NLS-1$
 								IndexConstants.TRANSPORT_TABLE_VERSION + "" }); //$NON-NLS-1$
 		System.out.println(indexFiles);
 		
 		
 		// put your cookies and personal information for delete
 		Map<String, String> cookies = new HashMap<String, String>();
-		cookies.put("__utmb", "");
-		cookies.put("__utmz", "");
-		cookies.put("__utma", "");
-		cookies.put("__utmc", "");
-		cookies.put("PREF", "");
-		cookies.put("HSID", "");
-		cookies.put("SID", "");
-		cookies.put("NID", "");
-		cookies.put("__qca", "");
-		String pagegen = "";
-		String token = "";
+		cookies.put("__utmb", "");  //$NON-NLS-1$//$NON-NLS-2$
+		cookies.put("__utmz", ""); //$NON-NLS-1$ //$NON-NLS-2$
+		cookies.put("__utma", ""); //$NON-NLS-1$ //$NON-NLS-2$
+		cookies.put("__utmc", "");  //$NON-NLS-1$//$NON-NLS-2$
+		cookies.put("PREF", ""); //$NON-NLS-1$ //$NON-NLS-2$
+		cookies.put("HSID", "");  //$NON-NLS-1$//$NON-NLS-2$
+		cookies.put("SID", ""); //$NON-NLS-1$ //$NON-NLS-2$
+		cookies.put("NID", ""); //$NON-NLS-1$ //$NON-NLS-2$
+		cookies.put("__qca", ""); //$NON-NLS-1$ //$NON-NLS-2$
+		String pagegen = ""; //$NON-NLS-1$
+		String token = ""; //$NON-NLS-1$
 		
 		StringBuilder cookieString = new StringBuilder();
 		int size = cookies.size();
 		for (String c : cookies.keySet()) {
 			size--;
-			cookieString.append(c).append("=").append(cookies.get(c));
+			cookieString.append(c).append("=").append(cookies.get(c)); //$NON-NLS-1$
 			if (size > 0) {
-				cookieString.append("; ");
+				cookieString.append("; "); //$NON-NLS-1$
 			}
 		}
 		
 		for(String s : indexFiles.keySet()){
 			String description = indexFiles.get(s);
-			if(description.contains("0 MB")){
+			if(description.contains("0 MB")){ //$NON-NLS-1$
 				deleteFileFromGoogleDownloads(s, token, pagegen, 
 						cookieString.toString());
 			}
@@ -158,7 +158,7 @@ public class DownloaderIndexFromGoogleCode {
 		URL url = new URL(urlText);
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		
-		connection.setRequestProperty("Cookie", cookies);
+		connection.setRequestProperty("Cookie", cookies); //$NON-NLS-1$
 		connection.setConnectTimeout(15000);
 		connection.setRequestMethod("POST"); //$NON-NLS-1$
 //		String token = userName + ":" + password; //$NON-NLS-1$

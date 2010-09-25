@@ -8,6 +8,7 @@ public class MapRenderObject {
 	private byte[] data = null;
 	private long id;
 	private float order = -1;
+	private boolean multitype = false;
 	
 	public MapRenderObject(long id){
 		this.id = id;
@@ -22,10 +23,11 @@ public class MapRenderObject {
 	
 	public void setType(int type) {
 		this.type = type;
+		multitype = (type & 1) > 0; 
 		order = -1;
 	}
 	
-	public int getType() {
+	public int getWholeType() {
 		return type;
 	}
 	
@@ -33,11 +35,40 @@ public class MapRenderObject {
 		return id;
 	}
 	
-	public int getPointsLength(){
-		if(data == null){
+	public boolean isMultitype() {
+		return multitype;
+	}
+	
+	public byte getMultiTypes(){
+		return multitype ? data[0] : 0;
+	}
+	
+	public int getAdditionalType(int k){
+		return Algoritms.parseSmallIntFromBytes(data, k * 2 + 1);
+	}
+	
+	public int getMainType(){
+		return (type >> 1);
+	}
+	
+	public int getSecondType(){
+		int pr = type >> 1;
+		if((pr & 3) == MapRenderingTypes.POLYLINE_TYPE && MapRenderingTypes.getMainObjectType(pr) == MapRenderingTypes.HIGHWAY){
 			return 0;
 		}
-		return data.length / 8;
+		return type >> 16;
+				
+	}
+	
+	public int getPointsLength(){
+		if(data == null || data.length == 0){
+			return 0;
+		}
+		if(multitype){
+			return (data.length - data[0] * 2 - 1) / 8;
+		} else {
+			return data.length / 8;
+		}
 	}
 	
 	public String getName() {
@@ -45,20 +76,28 @@ public class MapRenderObject {
 	}
 	
 	public int getPoint31YTile(int ind){
-		return Algoritms.parseIntFromBytes(data, ind * 8);
+		if(multitype){
+			return Algoritms.parseIntFromBytes(data, ind * 8 + data[0] * 2 + 1);
+		} else {
+			return Algoritms.parseIntFromBytes(data, ind * 8);
+		}
 	}
 	
 	public int getPoint31XTile(int ind) {
-		return Algoritms.parseIntFromBytes(data, ind * 8 + 4);
+		if(multitype){
+			return Algoritms.parseIntFromBytes(data, ind * 8 + 4 + data[0] * 2 + 1);
+		} else {
+			return Algoritms.parseIntFromBytes(data, ind * 8 + 4);
+		}
 	}
 	
 	public float getMapOrder(){
 		if (order == -1) {
-			int oType = MapRenderingTypes.getObjectType(type);
-			int sType = MapRenderingTypes.getPolylineSubType(type);
-			if ((type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POLYGON_TYPE) {
+			int oType = MapRenderingTypes.getMainObjectType(type >> 1);
+			int sType = MapRenderingTypes.getObjectSubType(type >> 1);
+			if (isMultiPolygon() || isPolygon()) {
 				// 1 - 9
-				if (MapRenderingTypes.isPolygonBuilding(type)) {
+				if (oType == MapRenderingTypes.MAN_MADE && sType == MapRenderingTypes.SUBTYPE_BUILDING) {
 					// draw over lines
 					order = 64;
 				} else if (oType == MapRenderingTypes.LANDUSE) {
@@ -81,7 +120,7 @@ public class MapRenderObject {
 						order = 4;
 						break;
 					default:
-						order = 2;
+						order = 1;
 						break;
 					}
 				} else if (oType == MapRenderingTypes.POWER) {
@@ -92,9 +131,9 @@ public class MapRenderObject {
 				} else {
 					order = 1;
 				}
-			} else if ((type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POLYLINE_TYPE) {
+			} else if (isPolyLine()) {
 				// 10 - 68
-				int layer = MapRenderingTypes.getWayLayer(type);
+				int layer = MapRenderingTypes.getWayLayer(type >> 1);
 				if(layer == 1 && oType != MapRenderingTypes.RAILWAY){
 					// not subway especially
 					order = 10;
@@ -128,16 +167,16 @@ public class MapRenderObject {
 	}
 	
 
-	public boolean isPolygon(){
-		return (type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POLYGON_TYPE;
+	private boolean isMultiPolygon(){
+		return ((type >> 1) & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE;
 	}
 	
-	public boolean isPolyLine(){
-		return (type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POLYLINE_TYPE;
-	}
-	public boolean isPoint(){
-		return (type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POINT_TYPE;
+	private boolean isPolygon(){
+		return ((type >> 1) & 3) == MapRenderingTypes.POLYGON_TYPE;
 	}
 	
+	private boolean isPolyLine(){
+		return ((type >> 1) & 3) == MapRenderingTypes.POLYLINE_TYPE;
+	}
 
 }

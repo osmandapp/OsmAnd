@@ -145,4 +145,17 @@ public class Algoritms {
 		l >>= 8;
 		bytes[offset + 3] = (byte) (l & 0xff);
 	}
+	
+	public static int parseSmallIntFromBytes(byte[] bytes, int offset) {
+		int s = (0xff & bytes[offset + 1]) << 8;
+		s |= (0xff & bytes[offset + 0]);
+		return s;
+	}
+	
+	public static void putSmallIntBytes(byte[] bytes, int offset, int s){
+		bytes[offset] = (byte) (s & 0xff);
+		s >>= 8;
+		bytes[offset + 1] = (byte) (s & 0xff);
+		s >>= 8;
+	}
 }

@@ -83,7 +83,8 @@ public class PolygonRenderer {
 				rc.main.fillArea = zoom >= 13;
 				rc.main.shader = o.getShader(R.drawable.h_beach);
 			case 5:
-				// TODO coastline 
+				rc.main.fillArea = zoom >= 6;
+				rc.main.color = 0xffb5d0d0;
 				break;
 			case 7:
 				rc.main.fillArea = zoom >= 8;
