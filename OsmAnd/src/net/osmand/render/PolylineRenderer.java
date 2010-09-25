@@ -10,7 +10,7 @@ import android.graphics.Paint.Cap;
 
 public class PolylineRenderer {
 	
-	public static void renderPolyline(int type, int subtype, int objType, RenderingContext rc, OsmandRenderer o){
+	public static void renderPolyline(int type, int subtype, int wholeType, RenderingContext rc, OsmandRenderer o){
 		int zoom = rc.zoom;
 		int color = Color.BLACK;
 		PathEffect pathEffect = null;
@@ -22,7 +22,7 @@ public class PolylineRenderer {
 		case MapRenderingTypes.HIGHWAY: {
 			int hwType = subtype;
 			boolean carRoad = true;
-			int layer = MapRenderingTypes.getWayLayer(objType);
+			int layer = MapRenderingTypes.getWayLayer(wholeType);
 			boolean tunnel = layer == 1;
 			boolean bridge = layer == 2;
 			if (hwType == MapRenderingTypes.PL_HW_TRUNK || hwType == MapRenderingTypes.PL_HW_MOTORWAY) {
@@ -177,7 +177,7 @@ public class PolylineRenderer {
 					}
 				}
 			}
-			if(type == MapRenderingTypes.HIGHWAY && rc.zoom >= 16 && MapRenderingTypes.isOneWayWay(objType)){
+			if(type == MapRenderingTypes.HIGHWAY && rc.zoom >= 16 && MapRenderingTypes.isOneWayWay(wholeType)){
 				rc.adds = getOneWayProperties();
 				
 			}
@@ -188,7 +188,7 @@ public class PolylineRenderer {
 		}
 			break;
 		case MapRenderingTypes.RAILWAY: {
-			int layer = MapRenderingTypes.getWayLayer(objType);
+			int layer = MapRenderingTypes.getWayLayer(wholeType);
 			boolean tunnel = layer == 1;
 			boolean bridge = layer == 2;
 			if (subtype == 1) {
@@ -398,7 +398,7 @@ public class PolylineRenderer {
 					break;
 				}
 			}
-			if(zoom > 12 && MapRenderingTypes.getWayLayer(objType) == 1){
+			if(zoom > 12 && MapRenderingTypes.getWayLayer(wholeType) == 1){
 				pathEffect = o.getDashEffect("4_2"); //$NON-NLS-1$
 				rc.second.strokeWidth = strokeWidth - 2;
 				rc.second.color = Color.WHITE;
@@ -470,7 +470,7 @@ public class PolylineRenderer {
 					strokeWidth = 6;
 				}
 			}
-			if(MapRenderingTypes.getWayLayer(objType) == 2 && zoom > 12){
+			if(MapRenderingTypes.getWayLayer(wholeType) == 2 && zoom > 12){
 				if(rc.second.strokeWidth == 0){
 					rc.second.color = color;
 					rc.second.strokeWidth = strokeWidth;

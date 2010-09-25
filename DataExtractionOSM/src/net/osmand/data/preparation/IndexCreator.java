@@ -76,7 +76,7 @@ public class IndexCreator {
 	private static final Log log = LogFactory.getLog(IndexCreator.class);
 
 
-	public static final int BATCH_SIZE = 5000;
+	public static final int BATCH_SIZE = 10;
 	public static final String TEMP_NODES_DB = "nodes.tmp.odb";
 	
 	public static final int STEP_CITY_NODES = 1;
@@ -140,7 +140,7 @@ public class IndexCreator {
 //	private RTree mapTree;
 	
 	// save it in memory while that is allowed
-	private Set<Long> multiPolygonsWays = new LinkedHashSet<Long>(); 
+	private Map<Long, Set<Integer>> multiPolygonsWays = new LinkedHashMap<Long, Set<Integer>>(); 
 	private Map<Long, List<Way>> lowLevelWaysSt = new LinkedHashMap<Long, List<Way>>();
 	private Map<Long, List<Way>> lowLevelWaysEnd = new LinkedHashMap<Long, List<Way>>();
 
@@ -165,7 +165,8 @@ public class IndexCreator {
 	private String[] normalizeDefaultSuffixes;
 	private String[] normalizeSuffixes;
 	
-	
+	// local purpose
+	List<Integer> typeUse= new ArrayList<Integer>();
 	
 	public IndexCreator(File workingDir){
 		this.workingDir = workingDir;
@@ -947,16 +948,14 @@ public class IndexCreator {
 				}
 			}
 			
-			if(indexMap && (e instanceof Way || e instanceof Node)){
+			if (indexMap && (e instanceof Way || e instanceof Node)) {
 				// check that's not multipolygon
-				if (e instanceof Node || !multiPolygonsWays.contains(e.getId())) {
-					// manipulate what kind of way to load
-					loadEntityData(e, true);
-					boolean inverse = "-1".equals(e.getTag(OSMTagKey.ONEWAY));
-					writeEntityToMapDatabase(e, e.getId(), inverse, 0);
-					indexLowLevelMap(e, 1);
-					indexLowLevelMap(e, 2);
-				}
+				// manipulate what kind of way to load
+				loadEntityData(e, true);
+				boolean inverse = "-1".equals(e.getTag(OSMTagKey.ONEWAY));
+				writeEntityToMapDatabase(e, e.getId(), inverse, 0);
+				indexLowLevelMap(e, 1);
+				indexLowLevelMap(e, 2);
 			}
 
 			if (indexAddress) {
@@ -1024,31 +1023,87 @@ public class IndexCreator {
 					indexAddressRelation((Relation) e);
 				}
 			}
-//			if(indexMap && e instanceof Relation && "multipolygon".equals(e.getTag(OSMTagKey.TYPE))){
-//				loadEntityData(e, true);
-//				Map<Entity, String> entities = ((Relation) e).getMemberEntities();
-//				for(Entity es : entities.keySet()){
-//					if(es instanceof Way){
-//						
-//						boolean inner = "inner".equals(entities.get(es));
-//						// TODO determine clockwise
-//						boolean clockwise = true;
-//						// TODO add tags from relation to outer ways!
-//						
-//						boolean inverse = !clockwise == inner;
-//						writeEntityToMapDatabase(es, es.getId(), inverse, 0);
-//						indexLowLevelMap(es, 1);
-//						indexLowLevelMap(es, 2);
-//						
-//						multiPolygonsWays.add(es.getId());
-//					}
-//				}
-//			}
+			if (indexMap && e instanceof Relation && "multipolygon".equals(e.getTag(OSMTagKey.TYPE))) {
+				loadEntityData(e, true);
+				// TODO check for admin_level !!! that's not needed
+				Map<Entity, String> entities = ((Relation) e).getMemberEntities();
+				int mtType = 0;
+				for (Entity es : entities.keySet()) {
+					if (es instanceof Way) {
+						boolean inner = "inner".equals(entities.get(es));
+						if (!inner) {
+							for (String t : es.getTagKeySet()) {
+								e.putTag(t, es.getTag(t));
+							}
+							break;
+						}
+					}
+				}
+				int t = MapRenderingTypes.encodeEntityWithType(e, 0, true, typeUse); 
+				if (t != 0) {
+					if (((t >> 1) & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
+						mtType = (t >> 1) & 0xffff;
+					} else if (((t >> 16) & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE && (t >> 16) != 0) {
+						mtType = t >> 16;
+					} else {
+						for (Integer i : typeUse) {
+							if ((i & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
+								mtType = i;
+								break;
+							}
+						}
+					}
+				}
+				if (mtType != 0) {
+					for (Entity es : entities.keySet()) {
+						if (es instanceof Way) {
+							boolean inner = "inner".equals(entities.get(es));
+							// TODO determine clockwise using conjuctions of way (one way could be opened)
+							boolean clockwise = isClockwiseWay((Way) es);
+							// clockwise - outer (like coastline), anticlockwise - inner
+							boolean inverse = clockwise != !inner;
+							if(!multiPolygonsWays.containsKey(es.getId())){
+								multiPolygonsWays.put(es.getId(), new LinkedHashSet<Integer>());
+							}
+							if(inverse){
+								multiPolygonsWays.get(es.getId()).add(mtType | (1 << 15));
+							} else {
+								multiPolygonsWays.get(es.getId()).add(mtType );
+							}
+						}
+					}
+
+				}
+			}
 		} else if (step == STEP_CITY_NODES) {
 			registerCityIfNeeded(e);
 		}
 	}
+	
 
+	private boolean isClockwiseWay(Way w){
+		List<Node> nodes = w.getNodes();
+		double angle = 0;
+		double prevAng = 0;
+		for (int i = 1; i < nodes.size(); i++) {
+			double ang = Math.atan2(nodes.get(i).getLatitude() - nodes.get(i - 1).getLatitude(), 
+					nodes.get(i).getLongitude() - nodes.get(i - 1).getLongitude());
+			if(i > 1){
+				double delta = (ang - prevAng);
+				if(delta < -Math.PI){
+					delta += 2*Math.PI;
+				} else if(delta > Math.PI){
+					delta -= 2*Math.PI;
+				}
+				angle += delta;
+				prevAng = ang;
+			} else {
+				prevAng = ang;
+			}
+			
+		}
+		return angle < 0;
+	}
 
 
 	private void registerCityIfNeeded(Entity e) {
@@ -1085,13 +1140,14 @@ public class IndexCreator {
 	}
 	
 	private void indexLowLevelMap(Entity e, int level) throws SQLException{
-		int type = MapRenderingTypes.encodeEntityWithType(e, level);
+		int type = MapRenderingTypes.encodeEntityWithType(e, level, false, typeUse);
 		if(type == 0){
 			return;
 		}
 		boolean writeIntoDB = true;
 		boolean ring = true;
-		if((type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POLYLINE_TYPE && e instanceof Way && level > 0){
+		// TODO check this simplification for multipolygons and other
+		if(e instanceof Way && level > 0){
 			List<Node> nodes = ((Way) e).getNodes();
 			Node n = nodes.get(0);
 			Node l = nodes.get(nodes.size() - 1);
@@ -1102,7 +1158,7 @@ public class IndexCreator {
 				Way start = null;
 				if (lowLevelWaysEnd.containsKey(n.getId())) {
 					for (Way w : lowLevelWaysEnd.get(n.getId())) {
-						int t = MapRenderingTypes.encodeEntityWithType(w, level);
+						int t = MapRenderingTypes.encodeEntityWithType(w, level, false, typeUse);
 						if (t == type && Algoritms.objectEquals(MapRenderingTypes.getEntityName(w, t), 
 								MapRenderingTypes.getEntityName(e, t))) {
 							start = w;
@@ -1143,7 +1199,7 @@ public class IndexCreator {
 					Way end = null;
 					if (lowLevelWaysSt.containsKey(l.getId())) {
 						for (Way w : lowLevelWaysSt.get(l.getId())) {
-							int t = MapRenderingTypes.encodeEntityWithType(w, level);
+							int t = MapRenderingTypes.encodeEntityWithType(w, level, false, typeUse);
 							if (t == type && Algoritms.objectEquals(MapRenderingTypes.getEntityName(w, t), 
 									MapRenderingTypes.getEntityName(e, t))) {
 								end = w;
@@ -1180,12 +1236,53 @@ public class IndexCreator {
 	}
 
 
+
 	private void writeEntityToMapDatabase(Entity e, long baseId, boolean inverse, int level) throws SQLException {
-		int type = MapRenderingTypes.encodeEntityWithType(e, level);
+		int type = MapRenderingTypes.encodeEntityWithType(e, level, false, typeUse);
+		boolean hasMulti = e instanceof Way && multiPolygonsWays.containsKey(e.getId());
 		if(type == 0){
-			return;
+			if(hasMulti){
+				Set<Integer> set = multiPolygonsWays.get(e.getId());
+				boolean first = true;
+				for(Integer i : set){
+					if(first){
+						type = i << 1;
+					} else {
+						typeUse.add(i);
+					}
+				}
+			} else {
+				return;
+			}
+		} else if(hasMulti){
+			Set<Integer> set = multiPolygonsWays.get(e.getId());
+			for(Integer i : set){
+				// do not compare direction
+				int k = i & 0x7fff; 
+				int ks = k | MapRenderingTypes.POLYGON_TYPE;
+				// turn of polygon type 3 ^ (suppose polygon = multipolygon)
+				if(ks == ((type >> 1) & 0xffff)){
+					type = ((type >> 16) << 16) | (i << 1); 
+				} else if(ks == type >> 16){
+					type = (type & 0xffff) | (i << 16);
+				} else  {
+					int ind = typeUse.indexOf(ks);
+					if (ind == -1) {
+						typeUse.add(i);
+					} else {
+						typeUse.set(ind, i);
+					}
+				}
+				
+			}
 		}
-		boolean point = (type & MapRenderingTypes.TYPE_MASK) == MapRenderingTypes.POINT_TYPE;
+		
+		// be sure about last segments
+		if(!typeUse.isEmpty()){
+			type |= 1;
+		}
+		
+		boolean point = ((type >> 1)& 3) == MapRenderingTypes.POINT_TYPE;
 		PreparedStatement mapLocations;
 		int zoom;
 		long id = baseId << 3;
@@ -1214,6 +1311,7 @@ public class IndexCreator {
 				int prevX = 0;
 				int prevY = 0;
 				for (int i = 0; i < nodes.size(); i++) {
+					// do not simplify last node it could be important node for multipolygon
 					int r = i < nodes.size() - 1 ? 4 : 0;
 					int x = (int) (MapUtils.getTileNumberX(zoom, nodes.get(i).getLongitude()) * 256d);
 					int y = (int) (MapUtils.getTileNumberY(zoom, nodes.get(i).getLatitude()) * 256d);
@@ -1232,7 +1330,7 @@ public class IndexCreator {
 		
 		if (!skip) {
 			DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapObjStat, mapLocations, /*mapTree, */e,  
-					MapRenderingTypes.getEntityName(e, type), id,	type, false, point, BATCH_SIZE);
+					MapRenderingTypes.getEntityName(e, type), id, type, typeUse, inverse, point, BATCH_SIZE);
 		}
 	}
 	
@@ -1354,7 +1452,6 @@ public class IndexCreator {
 //			try {
 //				mapTree = new RTree(mapFile.getAbsolutePath()+"_ind");
 //			} catch (RTreeException e) {
-//				// TODO
 //				e.printStackTrace();
 //			}
 			pStatements.put(mapObjStat, 0);
@@ -1618,8 +1715,14 @@ public class IndexCreator {
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);
 		 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/netherlands.osm.bz2"), new ConsoleProgressImplementation(1), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/den_haag.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/den_haag.osm"), new ConsoleProgressImplementation(3), null);
+		 
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/one.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/one_multipolygon.osm"), new ConsoleProgressImplementation(3), null);
+		 
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/netherlands.osm.bz2"), new ConsoleProgressImplementation(1), null);
 		 
 		/*try {
 //			RTree rtree = new RTree("e:/Information/OSM maps/osmand/Belarus_2010_09_03.map.odb_ind");
@@ -1629,7 +1732,6 @@ public class IndexCreator {
 			int s = calculateSize(rtree.getReadNode(rootIndex), rtree, "!-");
 			System.out.println(s);
 		} catch (RTreeException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
 		 

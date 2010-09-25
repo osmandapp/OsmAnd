@@ -18,18 +18,17 @@ import net.osmand.osm.OSMSettings.OSMTagKey;
 public class MapRenderingTypes {
 	
 	
-	/** standard schema :
-	 	polygon :   ssssssss ttttt aaaaa ttttt 011 : 26 bits + 6 bits for special info 
+	/** standard schema :	 
+	  	Last bit describe whether types additional exist 
+	 	polygon :   aaaaa ttttt 11 : 26 bits + 6 bits for special info 
 				    t - object type, a - area subtype, p - point object type, s - point object subtype
 		multi :
-		polyline :   ppppp ttttt 010 : 13 bits + 19 bits for special info 
+		polyline :   ppppp ttttt 10 : 13 bits + 19 bits for special info 
 				    t - object type, p - polyline object type, 
-		point :   ssssssss ttttt 010 : 16 bits + 16 bits for special info 
+		point :   ssssssss ttttt 10 : 16 bits + 16 bits for special info 
 				    t - object type, a - subtype
 	 */
 
-	public final static int TYPE_MASK_LEN = 3;
-	public final static int TYPE_MASK = (1 << TYPE_MASK_LEN) - 1;
 	public final static int MULTY_POLYGON_TYPE = 0;
 	public final static int POLYGON_TYPE = 3;
 	public final static int POLYLINE_TYPE = 2;
@@ -47,6 +46,7 @@ public class MapRenderingTypes {
 	public final static int OBJ_TYPE_MASK_LEN = 5;
 	public final static int OBJ_TYPE_MASK = (1 << OBJ_TYPE_MASK_LEN) -1;
 	public final static int MASK_13 = (1 << 13) - 1;
+	public final static int MASK_12 = (1 << 12) - 1;
 	public final static int MASK_4 = (1 << 4) - 1;
 	public final static int MASK_10 = (1 << 10) - 1;
 	
@@ -54,8 +54,6 @@ public class MapRenderingTypes {
 	
 
 	// TODO Internet access bits for point
-	// TODO place text : (ref - shield)
-	// TODO coastline
 	public final static int HIGHWAY = 1; 
 	public final static int BARRIER = 2; 
 	public final static int WATERWAY = 3; 
@@ -116,12 +114,22 @@ public class MapRenderingTypes {
 	
 	
 	
-	public static int getObjectType(int type){
-		return (type >> TYPE_MASK_LEN) & OBJ_TYPE_MASK;
+	// two bytes pass!	
+	public static int getMainObjectType(int type){
+		return (type >> 2) & OBJ_TYPE_MASK;
 	}
 	
-	public static int getPolygonSubType(int type) {
-		return (type >> (TYPE_MASK_LEN + OBJ_TYPE_MASK_LEN)) & PG_SUBTYPE_MASK;
+	// two bytes pass!
+	public static int getObjectSubType(int type){
+		if((type & 3) == 1){
+			return (type >> 7) & PO_SUBTYPE_MASK;
+		} else {
+			return (type >> 7) & PG_SUBTYPE_MASK;
+		}
+	}
+	
+	/*public static int getPolygonSubType(int type) {
+		
 	}
 	
 	public static int getPolygonPointType(int type) {
@@ -139,18 +147,7 @@ public class MapRenderingTypes {
 	public static int getPointSubType(int type) {
 		return (type >> (TYPE_MASK_LEN + OBJ_TYPE_MASK_LEN)) & PO_SUBTYPE_MASK;
 	}
-	
-	public static boolean isPolygonBuilding(int type){
-		if((type & TYPE_MASK) != POLYGON_TYPE){
-			return false;
-		}
-		type = type >> TYPE_MASK_LEN;
-		if((type & OBJ_TYPE_MASK) != MAN_MADE){
-			return false;
-		}
-		type = type >> OBJ_TYPE_MASK_LEN;
-		return (type & PG_SUBTYPE_MASK) == SUBTYPE_BUILDING;
-	}
+	*/
 
 	// stored information to convert from osm tags to int type
 	private static Map<String, MapRulType> types = null;
@@ -240,25 +237,28 @@ public class MapRenderingTypes {
 	}
 	
 	// if type equals 0 no need to save that point
-	public static int encodeEntityWithType(Entity e, int level) {
+	public static int encodeEntityWithType(Entity e, int level, boolean multipolygon, List<Integer> addTypes) {
 		if (types == null) {
 			types = new LinkedHashMap<String, MapRulType>();
 			init();
 		}
-		int type = 0;
+		addTypes.clear();
+		if("coastline".equals(e.getTag(OSMTagKey.NATURAL))){
+			multipolygon = true;
+		}
 
 		boolean point = e instanceof Node;
-		boolean polygon = false;
-		if (!point) {
+		boolean polygon = multipolygon;
+		if (!point && !polygon) {
 			// determining area or path
 			List<Long> ids = ((Way) e).getNodeIds();
 			if (ids.size() > 1) {
 				polygon = ((long) ids.get(0) == (long)ids.get(ids.size() - 1));
 			}
 		}
-		int pointType = 0;
-		int polylineType = 0;
+		
 		Collection<String> tagKeySet = e.getTagKeySet();
+		// 1. sort tags : important tags (type) will be rendered first
 		if(tagKeySet.size() > 1 && tagKeySet.contains("building")){ //$NON-NLS-1$
 			// first of all process building tag (in order to distinguish area and buildings)
 			LinkedHashSet<String> set = new LinkedHashSet<String>();
@@ -266,9 +266,15 @@ public class MapRenderingTypes {
 			set.addAll(tagKeySet);
 			tagKeySet = set;
 		}
-		// 2 iterations first for exact tag=value match, second for any tag match
+		
+		
+		int pointType = 0;
+		int polylineType = 0;
+		int polygonType = 0;
+		
+		// 2. 2 iterations first for exact tag=value match, second for any tag match
 		for (int i = 0; i < 2; i++) {
-			if (i == 1 && type != 0) {
+			if (i == 1 && !addTypes.isEmpty()) {
 				break;
 			}
 			for (String tag : tagKeySet) {
@@ -279,72 +285,78 @@ public class MapRenderingTypes {
 						continue;
 					}
 					int pr = point ? rType.getPointRule(val) : (polygon ? rType.getPolygonRule(val) : rType.getPolylineRule(val));
-					int typeVal = rType.getType(val, MASK_13) << 3;
+					int typeVal = rType.getType(val, MASK_13) << 2;
 					if (pr == POINT_TYPE && pointType == 0) {
 						pointType = POINT_TYPE | typeVal;
-						if (point) {
-							type = pointType;
-							break;
+						addTypes.add(pointType);
+					} else if (!point && pr == POLYLINE_TYPE) {
+						int attr = getLayerAttributes(e) << 12;
+						boolean prevPoint = (polylineType == 0 && polygonType == 0);
+						polylineType = POLYLINE_TYPE | (typeVal & MASK_12) | attr;
+						if (((polylineType >> 2) & MASK_4) == HIGHWAY || prevPoint){
+							addTypes.add(0, polylineType);
+						} else { 
+							addTypes.add(polylineType);
 						}
-					} else if (!point && pr == POLYLINE_TYPE && polylineType == 0) {
-						polylineType = POLYLINE_TYPE | (typeVal & MASK_13);
-						if (!polygon) {
-							type = polylineType;
-							break;
+					} else if (polygon && (pr == POLYGON_WITH_CENTER_TYPE || pr == POLYGON_TYPE)) {
+						boolean prevPoint = (polylineType == 0 && polygonType == 0);
+						polygonType = (multipolygon ? MULTY_POLYGON_TYPE : POLYGON_TYPE) | (typeVal & MASK_12);
+						if (prevPoint){
+							addTypes.add(0, polygonType);
+						} else { 
+							addTypes.add(polygonType);
 						}
-					} else if (polygon && type == 0	&& (pr == POLYGON_WITH_CENTER_TYPE || pr == POLYGON_TYPE)) {
-						type |= POLYGON_TYPE;
-						type |= typeVal & MASK_13;
 						if (pr == POLYGON_WITH_CENTER_TYPE) {
 							pointType = POINT_TYPE | typeVal;
+							addTypes.add(pointType);
 						}
-						// do not break immediately let fill point type
 					} else if (polygon && (pr == DEFAULT_POLYGON_BUILDING)) {
-						if(type == 0){
-							type |= POLYGON_TYPE;
-							type |= ((SUBTYPE_BUILDING << 5) | MAN_MADE) << 3;	
+						if(polygonType == 0 && polylineType == 0){
+							polygonType = (multipolygon ? MULTY_POLYGON_TYPE : POLYGON_TYPE) | (((SUBTYPE_BUILDING << 5) | MAN_MADE) << 3);
+							addTypes.add(0, polygonType);
 						}
-						if(pointType == 0){
-							pointType = POINT_TYPE | typeVal;
-						}
-						// do not break immediately let fill point type
+						pointType = POINT_TYPE | typeVal;
+						addTypes.add(pointType);
 					}
 				}
 			}
 		}
 
-		if (type == 0) {
-			if (polygon && polylineType != 0) {
-				type = polylineType;
-			} else {
-				type = pointType;
+		int type = 0;
+		if(addTypes.isEmpty()){
+			return type;
+		}
+		boolean twoBytes = true;
+		int first = addTypes.get(0);
+		addTypes.remove(0);
+		if((first & 3) == POLYLINE_TYPE){
+			int attr = 0;
+			if (((first >> 2) & MASK_4) == HIGHWAY) {
+				twoBytes = false;
+				attr = getHighwayAttributes(e) << 16;
 			}
-		} else if (polygon && pointType != 0) {
-			// combine area type with point type
-			// ? possibly we should combine also polyline type (fence?) 
-			type |= ((pointType >> 3) << 13) | type; 		
+			type = attr | (first << 1);
+		} else {
+			type = first << 1;
+		}
+		if(twoBytes && addTypes.size() > 0){
+			type |= (addTypes.get(0) << 16);
+			addTypes.remove(0);
+		}
+		if(!addTypes.isEmpty()){
+			type |= 1;
 		}
 		
-		// register additional attributes for highway
-		if(((type >> 3) & MASK_4) == HIGHWAY && !polygon && !point){
-			int attr = getHighwayAttributes(e);
-			attr <<= 13;
-			type |= attr;
-		} else if(!polygon && !point){
-			int attr = getLayerAttributes(e, 0);
-			attr <<= 13;
-			type |= attr;
-		}
 		return type;
 	}
 	
 	public static boolean isOneWayWay(int type){
-		return ((1 << 15) & type) > 0;
+		return ((1 << 14) & type) > 0;
 	}
 	
 	// 0 - normal, 1 - under, 2 - bridge,over
 	public static int getWayLayer(int type){
-		return (3 & (type >> 13));
+		return (3 & (type >> 12));
 	}
 	
 	// HIGHWAY special attributes :
@@ -362,7 +374,7 @@ public class MapRenderingTypes {
 	
 	public static int getHighwayAttributes(Entity e){
 		int attr = 0;
-		
+		// TODO speed, vehicle access, parking, cycle_oneway
 		// roundabout
 		attr <<= 2;
 		String jun = e.getTag(OSMTagKey.JUNCTION);
@@ -391,17 +403,14 @@ public class MapRenderingTypes {
 		if(one != null){
 			attr |= 1;
 		}
-		attr = getLayerAttributes(e, attr);
-			
 		return attr;
 	}
 	
-	private static int getLayerAttributes(Entity e, int attr){
+	private static int getLayerAttributes(Entity e){
 		// layer
-		attr <<= 2;
 		String l = e.getTag(OSMTagKey.LAYER);
 		if(l != null){
-			if(l.startsWith("+")){
+			if(l.startsWith("+")){ //$NON-NLS-1$
 				l = l.substring(1);
 			}
 			int la = 0;
@@ -410,39 +419,44 @@ public class MapRenderingTypes {
 			} catch (NumberFormatException es) {
 			}
 			if(la < 0){
-				attr |= 1;
+				return 1;
 			} else if(la > 0){
-				attr |= 2;
+				return 2;
 			}
-			
 		} else if(e.getTag(OSMTagKey.BRIDGE) != null){
-			attr |= 2;
+			return 2;
 		} else if(e.getTag(OSMTagKey.TUNNEL) != null){
-			attr |= 1;
+			return 1;
 		}
-		return attr;
+		return 0;
 	}
 	
 	public static boolean isLayerUnder(int attr){
 		return (attr & 3) == 1;
 	}
 	
-	public static String getEntityName(Entity e, int wholeType) {
-		if (e.getTag(OSMTagKey.REF) != null && getObjectType(wholeType) == HIGHWAY) {
+	public static String getEntityName(Entity e, int mainType) {
+		mainType >>= 1;
+		if (e.getTag(OSMTagKey.REF) != null && getMainObjectType(mainType) == HIGHWAY) {
 			String ref = e.getTag(OSMTagKey.REF);
 			if (ref.length() > 5 && ref.indexOf('_') != -1) {
 				ref = ref.substring(0, ref.indexOf('_'));
 			}
-			return REF_CHAR + ref;
+			String name = e.getTag(OSMTagKey.NAME);
+			if(name != null && !name.equals(ref)){
+				return REF_CHAR + ref + REF_CHAR + name;
+			} else {
+				return REF_CHAR + ref;
+			}
 		}
 		String name = e.getTag(OSMTagKey.NAME);
 		if (name == null) {
 			name = e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER);
 		}
-		if(name == null && getObjectType(wholeType) == NATURAL && getPointSubType(wholeType) == 13){
+		if(name == null && getMainObjectType(mainType) == NATURAL && getObjectSubType(mainType) == 13){
 			name = e.getTag("ele"); //$NON-NLS-1$
 		}
-		if(name == null && getObjectType(wholeType) == AEROWAY && getPointSubType(wholeType) == 17){
+		if(name == null && getMainObjectType(mainType) == AEROWAY && getObjectSubType(mainType) == 17){
 			name = e.getTag(OSMTagKey.REF); 
 		}
 		return name;
@@ -906,7 +920,7 @@ public class MapRenderingTypes {
 		
 		
 	// 17. natural	
-		register(3, "natural", "coastline", NATURAL, 5, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(3, "natural", "coastline", NATURAL, 5, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		register("natural", "bay", NATURAL, 1, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(1, "natural", "beach", NATURAL, 2, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -1009,8 +1023,9 @@ public class MapRenderingTypes {
 		register("amenity", "police", AMENITY_OTHER, 10, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("amenity", "post_box", AMENITY_OTHER, 11, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		registerAsBuilding("amenity", "post_office", AMENITY_OTHER, 12); //$NON-NLS-1$ //$NON-NLS-2$
-		register("amenity", "prison", AMENITY_OTHER, 13, POLYGON_WITH_CENTER_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("amenity", "public_building", AMENITY_OTHER, 14, POLYGON_WITH_CENTER_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		// do not mark as polygon when it is unknown how to render area
+		register("amenity", "prison", AMENITY_OTHER, 13, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("amenity", "public_building", AMENITY_OTHER, 14, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("amenity", "recycling", AMENITY_OTHER, 15, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("amenity", "shelter", AMENITY_OTHER, 16, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("amenity", "telephone", AMENITY_OTHER, 17, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$

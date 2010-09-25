@@ -12,6 +12,7 @@ import net.osmand.LogUtil;
 import net.osmand.R;
 import net.osmand.osm.MapRenderObject;
 import net.osmand.osm.MapRenderingTypes;
+import net.osmand.osm.MultyPolygon;
 
 import org.apache.commons.logging.Log;
 
@@ -121,6 +122,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		// These properties are used for rendering one object  
 		// polyline props
 		boolean showTextOnPath = false;
+		String showAnotherText = null;
 		float textSize = 0;
 		int textColor = 0;
 		int textMinDistance = 0;
@@ -138,6 +140,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		RenderingPaintProperties[] adds = null;
 		
 		public void clearText() {
+			showAnotherText = null;
 			showTextOnPath = false;
 			textSize = 0;
 			textColor = 0;
@@ -293,6 +296,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		
 		return bmp;
 	}
+	private final static boolean findAllTextIntersections = true;
 
 	public void drawTextOverCanvas(RenderingContext rc, Canvas cv) {
 		List<RectF> boundsNotPathIntersect = new ArrayList<RectF>();
@@ -325,7 +329,8 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					bounds.set(bounds.left - text.minDistance / 2, bounds.top - text.minDistance / 2
 							, bounds.right + text.minDistance / 2, bounds.bottom + text.minDistance / 2);
 				}
-				List<RectF> boundsIntersect = text.drawOnPath == null ? boundsNotPathIntersect : boundsPathIntersect;
+				List<RectF> boundsIntersect = text.drawOnPath == null || findAllTextIntersections? 
+						boundsNotPathIntersect : boundsPathIntersect;
 				if(boundsIntersect.isEmpty()){
 					boundsIntersect.add(bounds);
 				} else {
@@ -446,42 +451,53 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	}
 
 	
-	protected void draw(MapRenderObject obj, Canvas canvas, RenderingContext rc) {
-		if(obj.isPoint()){
-			drawPoint(obj, canvas, rc);
-		} else if(obj.isPolyLine()){
-			drawPolyline(obj, canvas, rc);
+	protected PointF drawObj(MapRenderObject obj, Canvas canvas, RenderingContext rc, int mainType, boolean renderText, PointF center) {
+		if(mainType == 0){
+			return center;
+		}
+		int t = mainType & 3;					
+		int type = MapRenderingTypes.getMainObjectType(mainType);
+		int subtype = MapRenderingTypes.getObjectSubType(mainType);
+		if(t == MapRenderingTypes.POINT_TYPE){
+			drawPoint(obj, canvas, rc, null, type, subtype, renderText);
+		} else if(t == MapRenderingTypes.POLYLINE_TYPE){
+			drawPolyline(obj, canvas, rc, type, subtype, mainType);
 		} else {
-			PointF center = drawPolygon(obj, canvas, rc);
-			if(center != null){
-				int typeT = MapRenderingTypes.getPolygonPointType(obj.getType());
-				int subT = MapRenderingTypes.getPolygonPointSubType(obj.getType());
-				String name = obj.getName();
-				if(name != null){
-					rc.clearText();
-					name = renderObjectText(name, subT, typeT, rc.zoom, true, rc);
-					
-					if(rc.textSize == 0){
-						int type = MapRenderingTypes.getObjectType(obj.getType());
-						int subtype = MapRenderingTypes.getPolygonSubType(obj.getType());
-						name = renderObjectText(name, subtype, type, rc.zoom, false, rc);
-					}
-					
-					if (rc.textSize > 0 && name != null) {
-						TextDrawInfo info = new TextDrawInfo(name);
-						info.fillProperties(rc, center.x, center.y);
-						rc.textToDraw.add(info);
-					}
+			if(t == MapRenderingTypes.MULTY_POLYGON_TYPE &&  !(obj instanceof MultyPolygon)){
+				return center;
+			}
+			center = drawPolygon(obj, canvas, rc, type, subtype, t == MapRenderingTypes.MULTY_POLYGON_TYPE);
+			String name = obj.getName();
+			if(name != null && center != null){
+				rc.clearText();
+				name = renderObjectText(name, subtype, type, rc.zoom, true, rc);
+				if (rc.textSize > 0 && name != null) {
+					TextDrawInfo info = new TextDrawInfo(name);
+					info.fillProperties(rc, center.x, center.y);
+					rc.textToDraw.add(info);
 				}
-				if(typeT != 0 && subT != 0){
-					int resId = PointRenderer.getPointBitmap(rc.zoom, typeT, subT);
-					if(resId != 0){
-						IconDrawInfo ico = new IconDrawInfo();
-						ico.x = center.x;
-						ico.y = center.y;
-						ico.resId = resId;
-						rc.iconsToDraw.add(ico);
-					}
+			}
+		}
+		
+		return center;
+		
+	}
+	
+	protected void draw(MapRenderObject obj, Canvas canvas, RenderingContext rc) {
+		int mainType = obj.getMainType();
+		int t = mainType & 3;					
+		int sz = rc.textToDraw.size();
+		PointF center = null;
+		center = drawObj(obj, canvas, rc, mainType, sz == rc.textToDraw.size(), center);
+		if (t != MapRenderingTypes.POINT_TYPE) {
+			int second = obj.getSecondType();
+			if (second != 0) {
+				center = drawObj(obj, canvas, rc, second, sz == rc.textToDraw.size(), center);
+			}
+			if (obj.isMultitype()) {
+				byte ts = obj.getMultiTypes();
+				for (int k = 0; k < ts; k++) {
+					center = drawObj(obj, canvas, rc, obj.getAdditionalType(k), sz == rc.textToDraw.size(), center);
 				}
 			}
 		}
@@ -502,19 +518,30 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				rc.tempPoint.y >= 0 && rc.tempPoint.y < rc.height){
 			rc.pointInsideCount++;
 		}
-		
-		
-		
+		return rc.tempPoint;
+	}
+	
+	private PointF calcMultiPolygonPoint(MultyPolygon o, int i, int b, RenderingContext rc){
+		rc.pointCount ++;
+		float tx = o.getPoint31XTile(i, b)/ rc.tileDivisor;
+		float ty = o.getPoint31YTile(i, b) / rc.tileDivisor;
+		float dTileX = tx - rc.leftX;
+		float dTileY = ty - rc.topY;
+		float x = rc.cosRotateTileSize * dTileX - rc.sinRotateTileSize * dTileY;
+		float y = rc.sinRotateTileSize * dTileX + rc.cosRotateTileSize * dTileY;
+		rc.tempPoint.set(x, y);
+		if(rc.tempPoint.x >= 0 && rc.tempPoint.x < rc.width && 
+				rc.tempPoint.y >= 0 && rc.tempPoint.y < rc.height){
+			rc.pointInsideCount++;
+		}
 		return rc.tempPoint;
 	}
 
-	private PointF drawPolygon(MapRenderObject obj, Canvas canvas, RenderingContext rc) {
+	private PointF drawPolygon(MapRenderObject obj, Canvas canvas, RenderingContext rc, int type, int subtype, boolean multipolygon) {
 		float xText = 0;
 		float yText = 0;
 		int zoom = rc.zoom;
 		Path path = null;
-		int type = MapRenderingTypes.getObjectType(obj.getType());
-		int subtype = MapRenderingTypes.getPolygonSubType(obj.getType());
 		rc.main.emptyArea();
 		rc.second.emptyLine();
 		rc.main.color = Color.rgb(245, 245, 245);
@@ -524,32 +551,47 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		if(!rc.main.fillArea){
 			return null;
 		}
-			
-		for (int i = 0; i < obj.getPointsLength(); i++) {
-			PointF p = calcPoint(obj, i, rc);
-			xText += p.x;
-			yText += p.y;
-			if (path == null) {
-				path = new Path();
-				path.moveTo(p.x, p.y);
-			} else {
-				path.lineTo(p.x, p.y);
+		int len = 0;
+		if (!multipolygon) {
+			len = obj.getPointsLength();
+			for (int i = 0; i < obj.getPointsLength(); i++) {
+
+				PointF p = calcPoint(obj, i, rc);
+				xText += p.x;
+				yText += p.y;
+				if (path == null) {
+					path = new Path();
+					path.moveTo(p.x, p.y);
+				} else {
+					path.lineTo(p.x, p.y);
+				}
+			}
+		} else	{
+			len = 0;
+			path = new Path();
+			for (int i = 0; i < ((MultyPolygon)obj).getBoundsCount(); i++) {
+				int cnt = ((MultyPolygon)obj).getBoundPointsCount(i);
+				len += cnt;
+				for (int j = 0; j < cnt; j++) {
+					PointF p = calcMultiPolygonPoint((MultyPolygon) obj, j, i, rc);
+					xText += p.x;
+					yText += p.y;
+					if (j == 0) {
+						path.moveTo(p.x, p.y);
+					} else {
+						path.lineTo(p.x, p.y);
+					}
+				}
 			}
 		}
 
-		if (path != null) {
-			xText /= obj.getPointsLength();
-			yText /= obj.getPointsLength();
-			// test hole
-//			path.moveTo(xText - 2, yText - 2);
-//			path.lineTo(xText + 2, yText + 2);
-//			path.lineTo(xText + 2, yText - 2);
-//			path.lineTo(xText - 2, yText + 2);
-//			path.lineTo(xText - 2, yText - 2);
-			
+		if (path != null && len > 0) {
+			xText /= len;
+			yText /= len;
+
 			rc.main.updatePaint(paint);
 			canvas.drawPath(path, paint);
-			if(rc.second.strokeWidth != 0){
+			if (rc.second.strokeWidth != 0) {
 				rc.second.updatePaint(paint);
 				canvas.drawPath(path, paint);
 			}
@@ -571,12 +613,12 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		shaders.clear();
 	}
 	
-	private void drawPoint(MapRenderObject obj, Canvas canvas, RenderingContext rc) {
-		PointF p = calcPoint(obj, 0, rc);
-		int subType = MapRenderingTypes.getPointSubType(obj.getType());
-		int type = MapRenderingTypes.getObjectType(obj.getType());
+	private void drawPoint(MapRenderObject obj, Canvas canvas, RenderingContext rc, PointF p, int type, int subtype, boolean renderText) {
+		if (p == null) {
+			p = calcPoint(obj, 0, rc);
+		}
 		int zoom = rc.zoom;
-		int resId = PointRenderer.getPointBitmap(zoom, type, subType);
+		int resId = PointRenderer.getPointBitmap(zoom, type, subtype);
 		if(resId != 0){
 			IconDrawInfo ico = new IconDrawInfo();
 			ico.x = p.x;
@@ -584,14 +626,16 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			ico.resId = resId;
 			rc.iconsToDraw.add(ico);
 		}
-		String n = obj.getName();
-		if (n != null) {
-			rc.clearText();
-			n = renderObjectText(n, subType, type, zoom, true, rc);
-			if (rc.textSize > 0 && n != null) {
-				TextDrawInfo info = new TextDrawInfo(n);
-				info.fillProperties(rc, p.x, p.y);
-				rc.textToDraw.add(info);
+		if (renderText) {
+			String n = obj.getName();
+			if (n != null) {
+				rc.clearText();
+				n = renderObjectText(n, subtype, type, zoom, true, rc);
+				if (rc.textSize > 0 && n != null) {
+					TextDrawInfo info = new TextDrawInfo(n);
+					info.fillProperties(rc, p.x, p.y);
+					rc.textToDraw.add(info);
+				}
 			}
 		}
 			
@@ -599,15 +643,13 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 
 
 	
-	private void drawPolyline(MapRenderObject obj, Canvas canvas, RenderingContext rc) {
-		int type = MapRenderingTypes.getObjectType(obj.getType());
-		int subtype = MapRenderingTypes.getPolylineSubType(obj.getType());
+	private void drawPolyline(MapRenderObject obj, Canvas canvas, RenderingContext rc, int type, int subtype, int wholeType) {
 		rc.main.emptyLine();
 		rc.second.emptyLine();
 		rc.third.emptyLine();
 		rc.adds = null;
 		
-		PolylineRenderer.renderPolyline(type, subtype, obj.getType(), rc, this);
+		PolylineRenderer.renderPolyline(type, subtype, wholeType, rc, this);
 		
 		
 		if(rc.main.strokeWidth == 0){
@@ -679,12 +721,20 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				String name = obj.getName();
 				rc.clearText();
 				name = renderObjectText(name, subtype, type, rc.zoom, false, rc);
+				if(rc.textSize == 0 && rc.showAnotherText != null){
+					name = renderObjectText(rc.showAnotherText, subtype, type, rc.zoom, false, rc);
+				}
 				if (name != null && rc.textSize > 0) {
 					if (!rc.showTextOnPath) {
 						TextDrawInfo text = new TextDrawInfo(name);
 						text.fillProperties(rc, middlePoint.x, middlePoint.y);
 						rc.textToDraw.add(text);
-					} else if (paintText.measureText(obj.getName()) < Math.max(Math.abs(xLength), Math.abs(yLength))) {
+					} 
+					if(rc.showAnotherText != null){
+						name = renderObjectText(rc.showAnotherText, subtype, type, rc.zoom, false, rc);
+					}
+					
+					if (rc.showTextOnPath && paintText.measureText(obj.getName()) < Math.max(Math.abs(xLength), Math.abs(yLength))) {
 						if (inverse) {
 							path.rewind();
 							boolean st = true;
@@ -739,9 +789,20 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		
 		switch (type) {
 		case MapRenderingTypes.HIGHWAY : {
-			
 			if(name.charAt(0) == MapRenderingTypes.REF_CHAR){
 				name = name.substring(1);
+				for(int k = 0; k < name.length(); k++){
+					if(name.charAt(k) == MapRenderingTypes.REF_CHAR){
+						if(k < name.length() - 1 && zoom > 14){
+							rc.showAnotherText = name.substring(k + 1);
+						}
+						name = name.substring(0, k);
+						break;
+					}
+				}
+				if(rc.showAnotherText != null && zoom >= 16){
+					break;
+				}
 				if(name.length() > 6){
 					name = name.substring(0, 6);
 				}
@@ -827,6 +888,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				} else if(subType == 40){
 					// bus stop
 					if(zoom >= 17){
+						textMinDistance = 20;
 						textColor = Color.BLACK;
 						textSize = 9;
 						wrapWidth = 25;
@@ -1044,7 +1106,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				if (zoom >= 17) {
 					textColor = 0xff0066ff;
 					shadowRadius = 1;
-					dy = 11;
+					dy = 14;
 					textSize = 10;
 				}
 			} else if (subType == 11) {
@@ -1081,7 +1143,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				if (zoom >= 17) {
 					textColor = 0xff734a08;
 					textSize = 10;
-					dy = 10;
+					dy = 12;
 					shadowRadius = 1;
 				}
 			}
@@ -1095,10 +1157,10 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 					wrapWidth = 30;
 					shadowRadius = 1;
 				}
-			} else if (zoom >= 15 && point) {
+			} else if ((zoom >= 15 && point) || zoom >= 17) {
 				textColor = 0xff000000;
 				shadowRadius = 2;
-				wrapWidth = 10;
+				wrapWidth = 15;
 				textSize = 9;
 			}
 		}
@@ -1190,6 +1252,15 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			}
 		}
 			break;
+		case MapRenderingTypes.AMENITY_ENTERTAINMENT: {
+			if (zoom >= 17) {
+				textSize = 9;
+				textColor = 0xff734a08;
+				dy = 12;
+				shadowRadius = 1;
+				wrapWidth = 15;
+			}
+		} break;
 		case MapRenderingTypes.AMENITY_FINANCE: {
 			if (subType == 2) {
 				if (zoom >= 17) {

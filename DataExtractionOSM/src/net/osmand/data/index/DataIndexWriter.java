@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -209,8 +210,14 @@ public class DataIndexWriter {
 	
 	public static void insertMapRenderObjectIndex(Map<PreparedStatement, Integer> statements, 
 			PreparedStatement mapStat, PreparedStatement mapWayLocationsStat, /*RTree mapTree, */Entity e, String name,
-			long id, int type, boolean inversePath, boolean writeAsPoint, int batchSize) throws SQLException {
+			long id, int type, List<Integer> typeUse, boolean inversePath, boolean writeAsPoint, int batchSize) throws SQLException {
 		assert IndexMapRenderObject.values().length == 4;
+		// TODO DELETE
+		if(TEMP_IDS.contains(id)){
+			System.err.println(id>>3);
+			throw new UnsupportedOperationException();
+		}
+		TEMP_IDS.add(id);
 		if(e instanceof Relation){
 			throw new IllegalArgumentException();
 		}
@@ -238,8 +245,21 @@ public class DataIndexWriter {
 			nodes = new ArrayList<Node>(nodes);
 			Collections.reverse((List<?>) nodes);
 		}
-		byte[] bytes = new byte[nodes.size() * 8];
+		
+		byte[] bytes;
 		int offset = 0;
+		if((type & 1) == 1){
+			bytes = new byte[nodes.size() * 8 + typeUse.size() * 2 + 1];
+			bytes[offset++] = (byte) typeUse.size();
+			for(Integer i : typeUse){
+				Algoritms.putIntToBytes(bytes, offset, i);
+				offset += 2;
+			}
+		} else {
+			bytes = new byte[nodes.size() * 8];
+		}
+			
+		
 		for (Node n : nodes) {
 			if (n != null) {
 				int y = MapUtils.get31TileNumberY(n.getLatitude());
@@ -289,6 +309,7 @@ public class DataIndexWriter {
 			addBatch(statements, mapWayLocationsStat);
 		}
 	}
+	static Set<Long> TEMP_IDS = new LinkedHashSet<Long>(); 
 
 	private static void addBatch(Map<PreparedStatement, Integer> count, PreparedStatement p) throws SQLException{
 		addBatch(count, p, BATCH_SIZE);
