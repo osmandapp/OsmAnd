@@ -1441,7 +1441,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			}
 				break;
 			case 12: {
-				if (zoom >= 11) {
+				if (zoom >= 10) {
 					textColor = 0xFF000000;
 					textSize = 9;
 				}

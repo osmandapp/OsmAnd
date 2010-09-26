@@ -30,14 +30,15 @@ public class ToDoConstants {
 	// TODO small improvements for release :
 	//  19. colors for road trunk and motorway
 	//  12. Fix : find proper location for streets ! centralize them (when create index)?
-	//  24. TODO! define clockwise/anticlockwise on android for closed path to understand area outised or inside
+	//  24. +! define clockwise/anticlockwise on android for closed path to understand area outised or inside
 	//      fix Rendering for incompleted rings, 
 	//      fix Index Creator : 1) determine clockwise area (inverse if needed)+ 2) index low level multipolygon pass param +
 	// 							3) pass inverse to low level indexes+ 4) coastline / add area + 
-	//							5) identify case when there is only inner boundary (!!!!)
+	//							5) identify case when there is only inner boundary (!!!!) +
 	//  26. Move leisure below forest and grass layer (footway/cycleway below unspecified)
 	//  25. Add all attributes needed for routing (highway attributes, turn_restrictions)
 	//  27. Fix bug with some buildings in AMS (WTC) that have fence(?)
+	//  28. Fix freeze while map downloading
 	
 	// TODO Improvements :
 	//  1! VELCOM

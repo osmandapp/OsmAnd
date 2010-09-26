@@ -4,6 +4,7 @@ import net.osmand.ResourceManager;
 import net.osmand.osm.MapUtils;
 import net.osmand.views.OsmandMapLayer;
 import net.osmand.views.OsmandMapTileView;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
@@ -61,7 +62,8 @@ public class RendererLayer implements OsmandMapLayer {
 			}
 			
 			MapRenderRepositories renderer = resourceManager.getRenderer();
-			if (renderer != null && renderer.getBitmap() != null) {
+			Bitmap bmp = renderer.getBitmap();
+			if (renderer != null &&  bmp != null) {
 				RectF newLoc = renderer.getCachedWaysLoc();
 				float rot = renderer.getCachedRotate();
 				float leftX1 = (float) MapUtils.getTileNumberX(view.getFloatZoom(), newLoc.left);
@@ -75,7 +77,9 @@ public class RendererLayer implements OsmandMapLayer {
 				float y2 = calcDiffPixelY(rot, rightX1 - view.getXTile(), bottomY1 - view.getYTile()) + view.getCenterPointY();
 				canvas.rotate(-rot, view.getCenterPointX(), view.getCenterPointY());
 				destImage.set(x1, y1, x2, y2);
-				canvas.drawBitmap(renderer.getBitmap(), null, destImage, paintImg);
+				if(!bmp.isRecycled()){
+					canvas.drawBitmap(bmp, null, destImage, paintImg);
+				}
 			}
 		}
 	}
