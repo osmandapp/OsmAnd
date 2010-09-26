@@ -17,16 +17,16 @@ import net.osmand.osm.OSMSettings.OSMTagKey;
  */
 public class MapRenderingTypes {
 	
-	
+	// TODO Internet access bits for point, polygon
 	/** standard schema :	 
-	  	Last bit describe whether types additional exist 
-	 	polygon :   aaaaa ttttt 11 : 26 bits + 6 bits for special info 
-				    t - object type, a - area subtype, p - point object type, s - point object subtype
-		multi :
-		polyline :   ppppp ttttt 10 : 13 bits + 19 bits for special info 
-				    t - object type, p - polyline object type, 
-		point :   ssssssss ttttt 10 : 16 bits + 16 bits for special info 
-				    t - object type, a - subtype
+	  	Last bit describe whether types additional exist (it is needed only for main type, other consists only from 15 bits)
+	 	polygon :   aaaaa ttttt 11 _ : 15 bits
+	 	multi   :   aaaaa ttttt 00 _ : 15 bits  
+				    t - object type, a - area subtype,l - layer
+		polyline :   ll ppppp ttttt 10 _ : 15 bits + 2 bits for special info (+16) 
+				   t - object type, p - polyline object type, l - layer 
+		point :   ssssssss ttttt 10 _ : 16 bits  
+				   t - object type, a - subtype
 	 */
 
 	public final static int MULTY_POLYGON_TYPE = 0;
@@ -53,7 +53,6 @@ public class MapRenderingTypes {
 	public final static char REF_CHAR = ((char)0x0019);
 	
 
-	// TODO Internet access bits for point
 	public final static int HIGHWAY = 1; 
 	public final static int BARRIER = 2; 
 	public final static int WATERWAY = 3; 
@@ -128,26 +127,6 @@ public class MapRenderingTypes {
 		}
 	}
 	
-	/*public static int getPolygonSubType(int type) {
-		
-	}
-	
-	public static int getPolygonPointType(int type) {
-		return (type >> (TYPE_MASK_LEN + OBJ_TYPE_MASK_LEN + PG_SUBTYPE_MASK_LEN)) & OBJ_TYPE_MASK;
-	}
-	
-	public static int getPolygonPointSubType(int type) {
-		return (type >> (TYPE_MASK_LEN + OBJ_TYPE_MASK_LEN + PG_SUBTYPE_MASK_LEN + OBJ_TYPE_MASK_LEN)) & PO_SUBTYPE_MASK;
-	}
-	
-	public static int getPolylineSubType(int type) {
-		return (type >> (TYPE_MASK_LEN + OBJ_TYPE_MASK_LEN)) & PL_SUBTYPE_MASK;
-	}
-	
-	public static int getPointSubType(int type) {
-		return (type >> (TYPE_MASK_LEN + OBJ_TYPE_MASK_LEN)) & PO_SUBTYPE_MASK;
-	}
-	*/
 
 	// stored information to convert from osm tags to int type
 	private static Map<String, MapRulType> types = null;
@@ -300,7 +279,8 @@ public class MapRenderingTypes {
 						}
 					} else if (polygon && (pr == POLYGON_WITH_CENTER_TYPE || pr == POLYGON_TYPE)) {
 						boolean prevPoint = (polylineType == 0 && polygonType == 0);
-						polygonType = (multipolygon ? MULTY_POLYGON_TYPE : POLYGON_TYPE) | (typeVal & MASK_12);
+						int attr = getLayerAttributes(e) << 12;
+						polygonType = (multipolygon ? MULTY_POLYGON_TYPE : POLYGON_TYPE) | (typeVal & MASK_12) | attr;
 						if (prevPoint){
 							addTypes.add(0, polygonType);
 						} else { 
@@ -351,7 +331,7 @@ public class MapRenderingTypes {
 	}
 	
 	public static boolean isOneWayWay(int type){
-		return ((1 << 14) & type) > 0;
+		return ((1 << 15) & type) > 0;
 	}
 	
 	// 0 - normal, 1 - under, 2 - bridge,over
@@ -591,6 +571,7 @@ public class MapRenderingTypes {
 		register("barrier", "hedge", BARRIER, 1, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("natural", "hedge", BARRIER, 1, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("barrier", "fence", BARRIER, 2, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register("fenced", "yes", BARRIER, 2, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("barrier", "wall", BARRIER, 3, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("barrier", "ditch", BARRIER, 1, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register("barrier", "retaining_wall", BARRIER, 4, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$

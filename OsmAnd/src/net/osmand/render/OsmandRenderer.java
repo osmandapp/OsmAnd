@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import net.osmand.LogUtil;
 import net.osmand.R;
@@ -38,7 +39,7 @@ import android.graphics.Shader.TileMode;
 import android.text.TextPaint;
 import android.util.FloatMath;
 
-public class OsmandRenderer implements Comparator<MapRenderObject> {
+public class OsmandRenderer {
 	private static final Log log = LogUtil.getLog(OsmandRenderer.class);
 	
 	private TextPaint paintText;
@@ -244,20 +245,36 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		return shaders.get(resId);
 	}
 	
-	@Override
-	public int compare(MapRenderObject object1, MapRenderObject object2) {
-		float o1 = object1.getMapOrder();
-		float o2 = object2.getMapOrder();
-		return o1 < o2 ? -1 : (o1 == o2 ? 0 : 1);
+	private <K,T>void put(Map<K, List<T>> map, K k, T v, int init){
+		if(!map.containsKey(k)){
+			map.put(k, new ArrayList<T>(init));
+		}
+		map.get(k).add(v);
 	}
-	
 	
 	
 	public Bitmap generateNewBitmap(int width, int height, float leftTileX, float topTileY, 
 			List<MapRenderObject> objects, int zoom, float rotate) {
 		long now = System.currentTimeMillis();
+		// put in order map
+		int sz = objects.size();
+		int init = sz / 4;
+		TreeMap<Float, List<Integer>> orderMap = new TreeMap<Float, List<Integer>>();
+		for (int i = 0; i < sz; i++) {
+			MapRenderObject o = objects.get(i);
+			int mt = o.getMainType();
+			int sh = i << 8;
+			put(orderMap, MapRenderObject.getOrder(mt), sh + 1, init);
+			int s = o.getSecondType();
+			if (s != 0) {
+				put(orderMap, MapRenderObject.getOrder(s), sh + 2, init);
+			}
+			byte multiTypes = o.getMultiTypes();
+			for (int j = 0; j < multiTypes; j++) {
+				put(orderMap, MapRenderObject.getOrder(o.getAdditionalType(j)), sh + (j + 3), init);
+			}
+		}
 		
-		Collections.sort(objects, this);
 		Bitmap bmp = null; 
 		if (objects != null && !objects.isEmpty() && width > 0 && height > 0) {
 			// init rendering context
@@ -275,8 +292,20 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			
 			Canvas cv = new Canvas(bmp);
 			cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillEmpty);
-			for (MapRenderObject o : objects) {
-				draw(o, cv, rc);
+			for (List<Integer> list : orderMap.values()) {
+				for (Integer i : list) {
+					int ind = i >> 8;
+					int l = i & 0xff;
+					MapRenderObject obj = objects.get(ind);
+					if (l == 1) {
+						// show text only for main type
+						drawObj(obj, cv, rc, obj.getMainType(), true);
+					} else if (l == 2) {
+						drawObj(obj, cv, rc, obj.getSecondType(), false);
+					} else {
+						drawObj(obj, cv, rc, obj.getAdditionalType(l - 3), false);
+					}
+				}
 			}
 			for(IconDrawInfo icon : rc.iconsToDraw){
 				if(icon.resId != 0){
@@ -451,22 +480,19 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 	}
 
 	
-	protected PointF drawObj(MapRenderObject obj, Canvas canvas, RenderingContext rc, int mainType, boolean renderText, PointF center) {
-		if(mainType == 0){
-			return center;
-		}
+	protected void drawObj(MapRenderObject obj, Canvas canvas, RenderingContext rc, int mainType, boolean renderText) {
 		int t = mainType & 3;					
 		int type = MapRenderingTypes.getMainObjectType(mainType);
 		int subtype = MapRenderingTypes.getObjectSubType(mainType);
 		if(t == MapRenderingTypes.POINT_TYPE){
-			drawPoint(obj, canvas, rc, null, type, subtype, renderText);
+			drawPoint(obj, canvas, rc, type, subtype, renderText);
 		} else if(t == MapRenderingTypes.POLYLINE_TYPE){
 			drawPolyline(obj, canvas, rc, type, subtype, mainType);
 		} else {
 			if(t == MapRenderingTypes.MULTY_POLYGON_TYPE &&  !(obj instanceof MultyPolygon)){
-				return center;
+				return;
 			}
-			center = drawPolygon(obj, canvas, rc, type, subtype, t == MapRenderingTypes.MULTY_POLYGON_TYPE);
+			PointF center = drawPolygon(obj, canvas, rc, type, subtype, t == MapRenderingTypes.MULTY_POLYGON_TYPE);
 			String name = obj.getName();
 			if(name != null && center != null){
 				rc.clearText();
@@ -479,30 +505,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 			}
 		}
 		
-		return center;
-		
 	}
-	
-	protected void draw(MapRenderObject obj, Canvas canvas, RenderingContext rc) {
-		int mainType = obj.getMainType();
-		int t = mainType & 3;					
-		int sz = rc.textToDraw.size();
-		PointF center = null;
-		center = drawObj(obj, canvas, rc, mainType, sz == rc.textToDraw.size(), center);
-		if (t != MapRenderingTypes.POINT_TYPE) {
-			int second = obj.getSecondType();
-			if (second != 0) {
-				center = drawObj(obj, canvas, rc, second, sz == rc.textToDraw.size(), center);
-			}
-			if (obj.isMultitype()) {
-				byte ts = obj.getMultiTypes();
-				for (int k = 0; k < ts; k++) {
-					center = drawObj(obj, canvas, rc, obj.getAdditionalType(k), sz == rc.textToDraw.size(), center);
-				}
-			}
-		}
-	}
-	
 	
 	
 	private PointF calcPoint(MapRenderObject o, int ind, RenderingContext rc){
@@ -613,16 +616,24 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 		shaders.clear();
 	}
 	
-	private void drawPoint(MapRenderObject obj, Canvas canvas, RenderingContext rc, PointF p, int type, int subtype, boolean renderText) {
-		if (p == null) {
-			p = calcPoint(obj, 0, rc);
+	private void drawPoint(MapRenderObject obj, Canvas canvas, RenderingContext rc, int type, int subtype, boolean renderText) {
+		int len = obj.getPointsLength();
+		PointF ps = new PointF(0, 0);
+		for (int i = 0; i < len; i++) {
+			PointF p = calcPoint(obj, i, rc);
+			ps.x += p.x;
+			ps.y += p.y;
+		}
+		if(len > 1){
+			ps.x /= len;
+			ps.y /= len;
 		}
 		int zoom = rc.zoom;
 		int resId = PointRenderer.getPointBitmap(zoom, type, subtype);
 		if(resId != 0){
 			IconDrawInfo ico = new IconDrawInfo();
-			ico.x = p.x;
-			ico.y = p.y;
+			ico.x = ps.x;
+			ico.y = ps.y;
 			ico.resId = resId;
 			rc.iconsToDraw.add(ico);
 		}
@@ -633,7 +644,7 @@ public class OsmandRenderer implements Comparator<MapRenderObject> {
 				n = renderObjectText(n, subtype, type, zoom, true, rc);
 				if (rc.textSize > 0 && n != null) {
 					TextDrawInfo info = new TextDrawInfo(n);
-					info.fillProperties(rc, p.x, p.y);
+					info.fillProperties(rc, ps.x, ps.y);
 					rc.textToDraw.add(info);
 				}
 			}
