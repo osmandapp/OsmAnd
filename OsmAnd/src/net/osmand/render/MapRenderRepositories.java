@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -411,21 +412,25 @@ public class MapRenderRepositories {
 		List<List<Long>> completedRings = new ArrayList<List<Long>>();
 		List<List<Long>> incompletedRings = new ArrayList<List<Long>>();
 		for (Integer type : multyPolygons.keySet()) {
-			// TODO check another situation that there is only inverseList!!!
+			List<MapRenderObject> directList;
+			List<MapRenderObject> inverselist;
 			if(((type >> 15) & 1) == 1){
-				// continue on inner boundaries
-				continue;
-			} 
-			int inverseType = (type | (1<< 15));
-			List<MapRenderObject> directList = multyPolygons.get(type);
-			List<MapRenderObject> inverselist = Collections.emptyList();
-			if(multyPolygons.containsKey(inverseType)){
-				inverselist = multyPolygons.get(inverseType);
+				int directType = (type & ((1 << 15) - 1));
+				if (!multyPolygons.containsKey(directType)) {
+					inverselist = multyPolygons.get(type);
+					directList = Collections.emptyList();
+				} else {
+					// continue on inner boundaries
+					continue;
+				}
+			} else {
+				int inverseType = (type | (1 << 15));
+				directList = multyPolygons.get(type);
+				inverselist = Collections.emptyList();
+				if (multyPolygons.containsKey(inverseType)) {
+					inverselist = multyPolygons.get(inverseType);
+				}
 			}
-			// TODO remove log
-//			System.out.println("Multipolygon t="+MapRenderingTypes.getMainObjectType(type)+
-//					" subtype=" + MapRenderingTypes.getObjectSubType(type));
-			
 			completedRings.clear();
 			incompletedRings.clear();
 			
@@ -448,7 +453,7 @@ public class MapRenderRepositories {
 				if (len < 2) {
 					continue;
 				}
-				List<Long> coordinates = new ArrayList<Long>(len / 2);
+				List<Long> coordinates = new ArrayList<Long>();
 				if (o.getName() != null) {
 					pl.setName(o.getName());
 				}
@@ -465,45 +470,18 @@ public class MapRenderRepositories {
 					y = o.getPoint31YTile(km == 0 ? i : len - i - 1);
 					boolean inside = leftX <= x && x <= rightX && y >= topY && y <= bottomY;
 					calculateLineCoordinates(inside, x, y, pinside, px, py, leftX, rightX, bottomY, topY, coordinates);
+					if(pinside && !inside){
+						processMultipolygonLine(completedRings, incompletedRings, coordinates);
+						// create new line if it goes outside
+						coordinates = new ArrayList<Long>();
+					}
 					px = x;
 					py = y;
 					pinside = inside;
 				}
-				if (coordinates.size() > 0) {
-					if (coordinates.get(0).longValue() == coordinates.get(coordinates.size() - 1).longValue()) {
-						completedRings.add(coordinates);
-					} else {
-						boolean add = true;
-						for (int k = 0; k < incompletedRings.size();) {
-							boolean remove = false;
-							List<Long> i = incompletedRings.get(k);
-							if (coordinates.get(0).longValue() == i.get(i.size() - 1).longValue()) {
-								i.addAll(coordinates.subList(1, coordinates.size()));
-								remove = true;
-								coordinates = i;
-							} else if (coordinates.get(coordinates.size() - 1).longValue() == i.get(0).longValue()) {
-								coordinates.addAll(i.subList(1, i.size()));
-								remove = true;
-							}
-							if (remove) {
-								incompletedRings.remove(k);
-							} else {
-								k++;
-							}
-							if (coordinates.get(0).longValue() == coordinates.get(coordinates.size() - 1).longValue()) {
-								completedRings.add(coordinates);
-								add = false;
-								break;
-							}
-						}
-						if (add) {
-							incompletedRings.add(coordinates);
-						}
-					}
-				}
+				processMultipolygonLine(completedRings, incompletedRings, coordinates);
 			}
 		}
-		// TODO check if there is only inner bounds (add path bound)
 		if (incompletedRings.size() > 0) {
 			unifyIncompletedRings(incompletedRings, completedRings, leftX, rightX, bottomY, topY);
 		}
@@ -520,91 +498,177 @@ public class MapRenderRepositories {
 		return pl;
 	}
 
+	private void processMultipolygonLine(List<List<Long>> completedRings, List<List<Long>> incompletedRings, List<Long> coordinates) {
+		if (coordinates.size() > 0) {
+			if (coordinates.get(0).longValue() == coordinates.get(coordinates.size() - 1).longValue()) {
+				completedRings.add(coordinates);
+			} else {
+				boolean add = true;
+				for (int k = 0; k < incompletedRings.size();) {
+					boolean remove = false;
+					List<Long> i = incompletedRings.get(k);
+					if (coordinates.get(0).longValue() == i.get(i.size() - 1).longValue()) {
+						i.addAll(coordinates.subList(1, coordinates.size()));
+						remove = true;
+						coordinates = i;
+					} else if (coordinates.get(coordinates.size() - 1).longValue() == i.get(0).longValue()) {
+						coordinates.addAll(i.subList(1, i.size()));
+						remove = true;
+					}
+					if (remove) {
+						incompletedRings.remove(k);
+					} else {
+						k++;
+					}
+					if (coordinates.get(0).longValue() == coordinates.get(coordinates.size() - 1).longValue()) {
+						completedRings.add(coordinates);
+						add = false;
+						break;
+					}
+				}
+				if (add) {
+					incompletedRings.add(coordinates);
+				}
+			}
+		}
+	}
+
 	private void unifyIncompletedRings(List<List<Long>> incompletedRings, List<List<Long>> completedRings, int leftX, int rightX,
 			int bottomY, int topY) {
 		int mask = 0xffffffff;
-		for (List<Long> i : incompletedRings) {
+		Set<Integer> nonvisitedRings = new LinkedHashSet<Integer>();
+		for(int j = 0; j< incompletedRings.size(); j++){
+			List<Long> i = incompletedRings.get(j);
 			int x = (int) (i.get(i.size() - 1) >> 32);
 			int y = (int) (i.get(i.size() - 1) & mask);
 			int sx = (int) (i.get(0) >> 32);
 			int sy = (int) (i.get(0) & mask);
-			long start = (((long) sx) << 32) | ((long) sy);
-			boolean st = false;
-			for (int h = 0; h < 8; h++) {
-				if (h % 4 == 0) {
-					// top
-					if (!st) {
-						if (y == topY) {
-							if (sy == topY && sx >= x) {
-								i.add(start);
-								break;
-							} else {
-								i.add((((long) rightX) << 32) | ((long) topY));
-								st = true;
-							}
-						}
-					} else if (sy == topY) {
-						i.add(start);
-						break;
-					}
-				} else if (h % 4 == 1) {
-					// right
-					if (!st) {
-						if (x == rightX) {
-							if (sx == rightX && sy >= y) {
-								i.add(start);
-								break;
-							} else {
-								i.add((((long) rightX) << 32) | ((long) bottomY));
-								st = true;
-							}
-						}
-					} else if (sx == rightX) {
-						i.add(start);
-						break;
-					}
-				} else if (h % 4 == 2) {
-					// bottom
-					if (!st) {
-						if (y == bottomY) {
-							if (sy == bottomY && sx <= x) {
-								i.add(start);
-								break;
-							} else {
-								i.add((((long) leftX) << 32) | ((long) bottomY));
-								st = true;
-							}
-						}
-					} else if (sy == bottomY) {
-						i.add(start);
-						break;
-					}
-				} else if (h % 4 == 3) {
-					// left
-					if (!st) {
-						if (x == leftX) {
-							if (sx == leftX && sy <= y) {
-								i.add(start);
-								break;
-							} else {
-								i.add((((long) leftX) << 32) | ((long) topY));
-								st = true;
-							}
-						}
-					} else if (sx == leftX) {
-						i.add(start);
-						break;
-					}
+			boolean st = y == topY || x == rightX || y == bottomY || x == leftX;
+			boolean end = sy == topY || sx == rightX || sy == bottomY || sx == leftX;
+			// something wrong here
+			// These exceptions are used to check logic about processing multipolygons
+			// However in map data this situation could happen with broken multipolygons (so it would data causes app error)
+			// that's why these exceptions could be replaced with return; statement.
+			if (!end) {
+				System.err.println(
+						MessageFormat.format("Start point (to close) not found : end_x = {0}, end_y = {1}, start_x = {2}, start_y = {3} : bounds {4} {5} - {6} {7}",  //$NON-NLS-1$
+								x+"", y+"", sx+"", sy+"", leftX+"", topY+"", rightX+"", bottomY+""));        //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$//$NON-NLS-5$//$NON-NLS-6$//$NON-NLS-7$//$NON-NLS-8$
+			}
+			if (!st) {
+				System.err.println(
+						MessageFormat.format("End not found : end_x = {0}, end_y = {1}, start_x = {2}, start_y = {3} : bounds {4} {5} - {6} {7}",  //$NON-NLS-1$
+								x+"", y+"", sx+"", sy+"", leftX+"", topY+"", rightX+"", bottomY+""));        //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$//$NON-NLS-5$//$NON-NLS-6$//$NON-NLS-7$//$NON-NLS-8$
+				continue;
+			} 
+			if(st && end){
+				nonvisitedRings.add(j);
+			}
+		}
+		for(int j = 0; j< incompletedRings.size(); j++){
+			List<Long> i = incompletedRings.get(j);
+			if(!nonvisitedRings.contains(j)){
+				continue;
+			}
+			
+			int x = (int) (i.get(i.size() - 1) >> 32);
+			int y = (int) (i.get(i.size() - 1) & mask);
+			
+			while (true) {
+				int st = 0; // st already checked to be one of the four
+				if (y == topY) {
+					st = 0;
+				} else if (x == rightX) {
+					st = 1;
+				} else if (y == bottomY) {
+					st = 2;
+				} else if (x == leftX) {
+					st = 3;
 				}
-				// something wrong here
-				// These excecptions could be commented and do not add line to completed
-				if (h == 3 && !st) {
-					throw new IllegalArgumentException();
-				}
-				if (h == 7) {
-					throw new IllegalArgumentException();
+				int nextRingIndex = -1;
+				// BEGIN go clockwise around rectangle
+				for (int h = st; h < st + 4; h++) {
+
+					// BEGIN find closest nonvisited start (including current)
+					int mindiff = -1;
+					for (Integer ni : nonvisitedRings) {
+						List<Long> cni = incompletedRings.get(ni);
+						int csx = (int) (cni.get(0) >> 32);
+						int csy = (int) (cni.get(0) & mask);
+						if (h % 4 == 0) {
+							// top
+							if (csy == topY && csx >= x) {
+								if (mindiff == -1 || (csx - x) <= mindiff) {
+									mindiff = (csx - x);
+									nextRingIndex = ni;
+								}
+							}
+						} else if (h % 4 == 1) {
+							// right
+							if (csx == rightX && csy >= y) {
+								if (mindiff == -1 || (csy - y) <= mindiff) {
+									mindiff = (csy - y);
+									nextRingIndex = ni;
+								}
+							}
+						} else if (h % 4 == 2) {
+							// bottom
+							if (csy == bottomY && csx <= x) {
+								if (mindiff == -1 || (x - csx) <= mindiff) {
+									mindiff = (x - csx);
+									nextRingIndex = ni;
+								}
+							}
+						} else if (h % 4 == 3) {
+							// left
+							if (csx == leftX && csy <= y) {
+								if (mindiff == -1 || (y - csy) <= mindiff) {
+									mindiff = (y - csy);
+									nextRingIndex = ni;
+								}
+							}
+						}
+					} // END find closest start (including current)
+
+					// we found start point
+					if (mindiff != -1) {
+						break;
+					} else {
+						if (h % 4 == 0) {
+							// top
+							y = topY;
+							x = rightX;
+						} else if (h % 4 == 1) {
+							// right
+							y = bottomY;
+							x = rightX;
+						} else if (h % 4 == 2) {
+							// bottom
+							y = bottomY;
+							x = leftX;
+						} else if (h % 4 == 3) {
+							y = topY;
+							x = leftX;
+						}
+						i.add((((long) x) << 32) | ((long) y));
+					}
+
+				} // END go clockwise around rectangle
+				if (nextRingIndex == -1) {
+					// it is impossible (current start should always be found)
+				} else if (nextRingIndex == j) {
+					i.add(i.get(0));
+					nonvisitedRings.remove(j);
+					break;
+				} else {
+					i.addAll(incompletedRings.get(nextRingIndex));
+					nonvisitedRings.remove(nextRingIndex);
+					// get last point and start again going clockwise
+					x = (int) (i.get(i.size() - 1) >> 32);
+					y = (int) (i.get(i.size() - 1) & mask);
 				}
 			}
+			
+			
 			completedRings.add(i);
 		}
 		
@@ -614,9 +678,7 @@ public class MapRenderRepositories {
 	private void calculateLineCoordinates(boolean inside, int x, int y, boolean pinside, int px, int py, int leftX, int rightX,
 			int bottomY, int topY, List<Long> coordinates) {
 		if (pinside) {
-			if (inside) {
-				coordinates.add((((long) x) << 32) | ((long) y));
-			} else {
+			 if(!inside) {
 				int by = -1;
 				int bx = -1;
 				if (by == -1 && y < topY && py >= topY) {
@@ -669,6 +731,10 @@ public class MapRenderRepositories {
 				bx = rightX;
 			}
 			coordinates.add((((long) bx) << 32) | ((long) by));
+		}
+		
+		if (inside) {
+			coordinates.add((((long) x) << 32) | ((long) y));
 		}
 	}
 
