@@ -949,7 +949,6 @@ public class IndexCreator {
 			}
 			
 			if (indexMap && (e instanceof Way || e instanceof Node)) {
-				// check that's not multipolygon
 				// manipulate what kind of way to load
 				loadEntityData(e, true);
 				boolean inverse = "-1".equals(e.getTag(OSMTagKey.ONEWAY));
@@ -1025,7 +1024,6 @@ public class IndexCreator {
 			}
 			if (indexMap && e instanceof Relation && "multipolygon".equals(e.getTag(OSMTagKey.TYPE))) {
 				loadEntityData(e, true);
-				// TODO check for admin_level !!! that's not needed
 				Map<Entity, String> entities = ((Relation) e).getMemberEntities();
 				int mtType = 0;
 				for (Entity es : entities.keySet()) {
@@ -1086,21 +1084,21 @@ public class IndexCreator {
 		double angle = 0;
 		double prevAng = 0;
 		for (int i = 1; i < nodes.size(); i++) {
-			double ang = Math.atan2(nodes.get(i).getLatitude() - nodes.get(i - 1).getLatitude(), 
-					nodes.get(i).getLongitude() - nodes.get(i - 1).getLongitude());
-			if(i > 1){
+			double ang = Math.atan2(nodes.get(i).getLatitude() - nodes.get(i - 1).getLatitude(), nodes.get(i).getLongitude()
+					- nodes.get(i - 1).getLongitude());
+			if (i > 1) {
 				double delta = (ang - prevAng);
-				if(delta < -Math.PI){
-					delta += 2*Math.PI;
-				} else if(delta > Math.PI){
-					delta -= 2*Math.PI;
+				if (delta < -Math.PI) {
+					delta += 2 * Math.PI;
+				} else if (delta > Math.PI) {
+					delta -= 2 * Math.PI;
 				}
 				angle += delta;
 				prevAng = ang;
 			} else {
 				prevAng = ang;
 			}
-			
+
 		}
 		return angle < 0;
 	}
@@ -1715,7 +1713,7 @@ public class IndexCreator {
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);
 		 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/den_haag.tmp.odb"));
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/den_haag.tmp.odb"));
 		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/den_haag.osm"), new ConsoleProgressImplementation(3), null);
 		 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/one.tmp.odb"));

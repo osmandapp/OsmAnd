@@ -9,6 +9,7 @@ public class PolygonRenderer {
 
 	public static void renderPolygon(RenderingContext rc, int zoom, int type, int subtype, OsmandRenderer o) {
 		if (type == MapRenderingTypes.HIGHWAY) {
+			rc.main.fillArea = zoom >= 15;
 			if (subtype == MapRenderingTypes.PL_HW_SERVICE || subtype == MapRenderingTypes.PL_HW_UNCLASSIFIED
 				|| subtype == MapRenderingTypes.PL_HW_RESIDENTIAL) {
 				rc.second.color = Color.rgb(194, 194, 194);
@@ -171,6 +172,7 @@ public class PolygonRenderer {
 				break;
 			case 11 :
 				rc.main.color = Color.rgb(223, 209, 214);
+				rc.main.fillArea = zoom >= 16;
 				break;
 			case 12:
 			case 17:
@@ -289,10 +291,12 @@ public class PolygonRenderer {
 		} else if (type == MapRenderingTypes.AMENITY_TRANSPORTATION) {
 			if (subtype == 1 || subtype == 2) {
 				rc.main.color = Color.rgb(246, 238, 183);
+				rc.main.fillArea = zoom >= 15;
 			}
 		} else if (type == MapRenderingTypes.AMENITY_ENTERTAINMENT) {
 			if (subtype == 3) {
 				rc.main.color = Color.rgb(204, 153, 153);
+				rc.main.fillArea = zoom >= 15;
 			}
 		} else if (type == MapRenderingTypes.AMENITY_EDUCATION) {
 			if(subtype == 1 || subtype == 2 || subtype == 3 || subtype == 5){
@@ -303,6 +307,7 @@ public class PolygonRenderer {
 			} else {
 				// draw as building education
 				rc.main.color = Color.rgb(188, 169, 169);
+				rc.main.fillArea = zoom >= 16;
 			}
 		}
 	}

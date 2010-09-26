@@ -243,7 +243,7 @@ public class MapRenderingTypes {
 			init();
 		}
 		addTypes.clear();
-		if("coastline".equals(e.getTag(OSMTagKey.NATURAL))){
+		if("coastline".equals(e.getTag(OSMTagKey.NATURAL))){ //$NON-NLS-1$
 			multipolygon = true;
 		}
 
@@ -321,7 +321,7 @@ public class MapRenderingTypes {
 				}
 			}
 		}
-
+		
 		int type = 0;
 		if(addTypes.isEmpty()){
 			return type;
@@ -930,7 +930,6 @@ public class MapRenderingTypes {
 		register(2, "natural", "glacier", NATURAL, 7, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(1, "natural", "heath", NATURAL, 8, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(1,"natural", "land", NATURAL, 9, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
-		register("natural", "heath", NATURAL, 10, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(1, "natural", "marsh", NATURAL, 11, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(1, "natural", "mud", NATURAL, 12, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(1, "natural", "peak", NATURAL, 13, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$

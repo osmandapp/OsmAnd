@@ -294,6 +294,9 @@ public class MapRenderRepositories {
 						statement = pZoom1.get(c);
 					} else if (zoom >= 6) {
 						statement = pZoom2.get(c);
+					} else {
+						// TODO show tiles ?
+						continue;
 					}
 					statement.setDouble(1, cBottomLatitude);
 					statement.setDouble(2, cTopLatitude);
@@ -436,7 +439,9 @@ public class MapRenderRepositories {
 			
 			MultyPolygon pl = processMultiPolygon(leftX, rightX, bottomY, topY, listPolygons, completedRings, incompletedRings, type,
 					directList, inverselist);
-			listPolygons.add(pl);
+			if(pl != null){
+				listPolygons.add(pl);
+			}
 		}
 		return listPolygons;
 	}
@@ -482,8 +487,29 @@ public class MapRenderRepositories {
 				processMultipolygonLine(completedRings, incompletedRings, coordinates);
 			}
 		}
+		if(completedRings.size() == 0 && incompletedRings.size() == 0){
+			return null;
+		}
 		if (incompletedRings.size() > 0) {
 			unifyIncompletedRings(incompletedRings, completedRings, leftX, rightX, bottomY, topY);
+		} else {
+			// check for isolated island (android do not fill area outside path)
+			boolean clockwiseFound = false;
+			for(List<Long> c : completedRings){
+				if(isClockwiseWay(c)){
+					clockwiseFound = true;
+					break;
+				}
+			}
+			if(!clockwiseFound){
+				// add whole bound
+				List<Long> whole = new ArrayList<Long>(4);
+				whole.add((((long) leftX) << 32) | ((long) topY));
+				whole.add((((long) rightX) << 32) | ((long) topY));
+				whole.add((((long) rightX) << 32) | ((long) bottomY));
+				whole.add((((long) leftX) << 32) | ((long) bottomY));
+				completedRings.add(whole);
+			}
 		}
 		
 		long[][] lns = new long[completedRings.size()][];
@@ -497,6 +523,38 @@ public class MapRenderRepositories {
 		pl.setLines(lns);
 		return pl;
 	}
+	
+	private boolean isClockwiseWay(List<Long> c){
+		double angle = 0;
+		double prevAng = 0;
+		int px = 0;
+		int py = 0;
+		int mask = 0xffffffff;
+		for (int i = 0; i < c.size(); i++) {
+			int x = (int) (c.get(i) >> 32);
+			int y = (int) (c.get(i) & mask);
+			if (i >= 1) {
+				double ang = Math.atan2(py - y, x - px);
+				if (i > 1) {
+					double delta = (ang - prevAng);
+					if (delta < -Math.PI) {
+						delta += 2 * Math.PI;
+					} else if (delta > Math.PI) {
+						delta -= 2 * Math.PI;
+					}
+					angle += delta;
+					prevAng = ang;
+				} else {
+					prevAng = ang;
+				}
+			}
+			px = x;
+			py = y;
+
+		}
+		return angle < 0;
+	}
+
 
 	private void processMultipolygonLine(List<List<Long>> completedRings, List<List<Long>> incompletedRings, List<Long> coordinates) {
 		if (coordinates.size() > 0) {
