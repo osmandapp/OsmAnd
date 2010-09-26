@@ -93,23 +93,47 @@ public class MapRenderObject {
 	
 	public float getMapOrder(){
 		if (order == -1) {
-			int oType = MapRenderingTypes.getMainObjectType(type >> 1);
-			int sType = MapRenderingTypes.getObjectSubType(type >> 1);
-			if (isMultiPolygon() || isPolygon()) {
-				// 1 - 9
-				if (oType == MapRenderingTypes.MAN_MADE && sType == MapRenderingTypes.SUBTYPE_BUILDING) {
-					// draw over lines
+			order = getOrder(getMainType());
+		}
+		return order;
+	}
+
+	public static float getOrder(int wholeType) {
+		float order = 0;
+		int t = wholeType & 3;					
+		int oType = MapRenderingTypes.getMainObjectType(wholeType);
+		int sType = MapRenderingTypes.getObjectSubType(wholeType);
+		int layer = MapRenderingTypes.getWayLayer(wholeType);
+		if (t == MapRenderingTypes.MULTY_POLYGON_TYPE || t == MapRenderingTypes.POLYGON_TYPE) {
+			// 1 - 9
+			if (oType == MapRenderingTypes.MAN_MADE && sType == MapRenderingTypes.SUBTYPE_BUILDING) {
+				// draw over lines
+				if(layer != 1){
+					order = 64;
+				} else {
+					order = 2;
+				}
+			} else {
+				if(layer == 1){
+					order = 0.5f;
+				} else if(layer == 2){
+					// over lines
 					order = 64;
 				} else if (oType == MapRenderingTypes.LANDUSE) {
 					switch (sType) {
-					case 5: case 6: case 15: case 18: case 20: case 23:
+					case 5:
+					case 6:
+					case 15:
+					case 18:
+					case 20:
+					case 23:
 						order = 1;
 						break;
 					case 22:
 						order = 5;
 						break;
 					default:
-						order = 1.5f;
+						order = 1f;
 						break;
 					}
 				} else if (oType == MapRenderingTypes.LEISURE) {
@@ -117,66 +141,66 @@ public class MapRenderObject {
 					case 3:
 					case 10:
 					case 13:
-						order = 4;
+						order = 2;
 						break;
+					case 6:
+						order = 4;
 					default:
-						order = 1;
+						order = 2;
 						break;
 					}
 				} else if (oType == MapRenderingTypes.POWER) {
 					order = 4;
-				} else if (oType == MapRenderingTypes.WATERWAY || oType == MapRenderingTypes.NATURAL) {
+				} else if (oType == MapRenderingTypes.NATURAL) {
+					if (order == 5) {
+						// coastline
+						order = 0.5f;
+					} else if (order == 21) {
+						// water
+						order = 5;
+					} else {
+						order = 1;
+					}
+				} else if (oType == MapRenderingTypes.WATERWAY) {
 					// water 5
 					order = 5;
 				} else {
 					order = 1;
 				}
-			} else if (isPolyLine()) {
-				// 10 - 68
-				int layer = MapRenderingTypes.getWayLayer(type >> 1);
-				if(layer == 1 && oType != MapRenderingTypes.RAILWAY){
-					// not subway especially
-					order = 10;
-				} else if(layer == 2) {
-					order = 67; // over buildings
-				} else if (oType == MapRenderingTypes.HIGHWAY) {
-					order = 32 - sType + 24;
-					if(sType == MapRenderingTypes.PL_HW_MOTORWAY){
-						// TODO ? that was done only to have good overlay
-						// but really it should be motorway_link have -= 10
-						order -= 2;
-					}
-				} else if (oType == MapRenderingTypes.RAILWAY) {
-					order = 58;
-				} else if (oType == MapRenderingTypes.AERIALWAY) {
-					order = 68; // over buildings
-				} else if (oType == MapRenderingTypes.POWER) {
-					order = 68; // over buildings
-				} else if (oType == MapRenderingTypes.ADMINISTRATIVE) {
-					order = 62;
-				} else if (oType == MapRenderingTypes.WATERWAY) {
-					order = 18;
-				} else {
-					order = 10;
-				}
-			} else {
-				order = 128;
 			}
+		} else if (t == MapRenderingTypes.POLYLINE_TYPE) {
+			// 10 - 68
+			if(layer == 1 && oType != MapRenderingTypes.RAILWAY){
+				// not subway especially
+				order = 10;
+			} else if(layer == 2) {
+				order = 67; // over buildings
+			} else if (oType == MapRenderingTypes.HIGHWAY) {
+				order = 32 - sType + 24;
+				if(sType == MapRenderingTypes.PL_HW_MOTORWAY){
+					// TODO ? that was done only to have good overlay
+					// but really it should be motorway_link have -= 10
+					order -= 2;
+				}
+			} else if (oType == MapRenderingTypes.RAILWAY) {
+				order = 58;
+			} else if (oType == MapRenderingTypes.AERIALWAY) {
+				order = 68; // over buildings
+			} else if (oType == MapRenderingTypes.POWER) {
+				order = 68; // over buildings
+			} else if (oType == MapRenderingTypes.ADMINISTRATIVE) {
+				order = 62;
+			} else if (oType == MapRenderingTypes.WATERWAY) {
+				order = 18;
+			} else {
+				order = 10;
+			}
+		} else {
+			order = 128;
 		}
 		return order;
 	}
 	
 
-	private boolean isMultiPolygon(){
-		return ((type >> 1) & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE;
-	}
-	
-	private boolean isPolygon(){
-		return ((type >> 1) & 3) == MapRenderingTypes.POLYGON_TYPE;
-	}
-	
-	private boolean isPolyLine(){
-		return ((type >> 1) & 3) == MapRenderingTypes.POLYLINE_TYPE;
-	}
 
 }
