@@ -211,9 +211,9 @@ See osmand.net</string>
     <string name="user_password_descr">Input osm password</string>
     <string name="user_password">User password</string>
     <string name="osm_settings_descr">Specify osm settings : osm login</string>
-    <string name="monitor_preferences_descr">Specify monitor settings : save track</string>
+    <string name="monitor_preferences_descr">Specify monitoring settings : save track</string>
     <string name="data_settings_descr">Specify data settings : language, update data</string>
-    <string name="map_preferences_descr">Specify map settings : rotation, poi filter</string>
+    <string name="map_preferences_descr">Specify map settings : map source, rotation, center position, screen orientation</string>
     <string name="data_settings">Data</string>
     <string name="osm_settings">Osm</string>
     <string name="auto_zoom_map_descr">Auto zoom map according to the speed</string>
