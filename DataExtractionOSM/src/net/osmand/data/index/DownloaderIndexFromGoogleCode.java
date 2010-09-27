@@ -11,7 +11,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -29,51 +28,36 @@ public class DownloaderIndexFromGoogleCode {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws URISyntaxException, IOException {
-//		Map<String, String> indexFiles = DownloaderIndexFromGoogleCode.getIndexFiles(
-//				new String[] { IndexConstants.ADDRESS_INDEX_EXT,	IndexConstants.POI_INDEX_EXT, IndexConstants.TRANSPORT_INDEX_EXT,
-//						IndexConstants.ADDRESS_INDEX_EXT_ZIP,	IndexConstants.POI_INDEX_EXT_ZIP, IndexConstants.TRANSPORT_INDEX_EXT_ZIP,}, 
-//				new String[] {	IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "",  //$NON-NLS-1$//$NON-NLS-2$
-//								IndexConstants.TRANSPORT_TABLE_VERSION + "" , //$NON-NLS-1$
-//								IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "",  //$NON-NLS-1$//$NON-NLS-2$
-//								IndexConstants.TRANSPORT_TABLE_VERSION + "" }); //$NON-NLS-1$
 		Map<String, String> indexFiles = DownloaderIndexFromGoogleCode.getIndexFiles(
-				new String[] { IndexConstants.TRANSPORT_INDEX_EXT, IndexConstants.TRANSPORT_INDEX_EXT_ZIP,}, 
-				new String[] {	IndexConstants.TRANSPORT_TABLE_VERSION + "",   //$NON-NLS-1$
+				new String[] { IndexConstants.ADDRESS_INDEX_EXT,	IndexConstants.POI_INDEX_EXT, IndexConstants.TRANSPORT_INDEX_EXT,
+						IndexConstants.ADDRESS_INDEX_EXT_ZIP,	IndexConstants.POI_INDEX_EXT_ZIP, IndexConstants.TRANSPORT_INDEX_EXT_ZIP,}, 
+				new String[] {	IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "",  //$NON-NLS-1$//$NON-NLS-2$
+								IndexConstants.TRANSPORT_TABLE_VERSION + "" , //$NON-NLS-1$
+								IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "",  //$NON-NLS-1$//$NON-NLS-2$
 								IndexConstants.TRANSPORT_TABLE_VERSION + "" }); //$NON-NLS-1$
 		System.out.println(indexFiles);
 		
-		
 		// put your cookies and personal information for delete
-		Map<String, String> cookies = new HashMap<String, String>();
-		cookies.put("__utmb", "");  //$NON-NLS-1$//$NON-NLS-2$
-		cookies.put("__utmz", ""); //$NON-NLS-1$ //$NON-NLS-2$
-		cookies.put("__utma", ""); //$NON-NLS-1$ //$NON-NLS-2$
-		cookies.put("__utmc", "");  //$NON-NLS-1$//$NON-NLS-2$
-		cookies.put("PREF", ""); //$NON-NLS-1$ //$NON-NLS-2$
-		cookies.put("HSID", "");  //$NON-NLS-1$//$NON-NLS-2$
-		cookies.put("SID", ""); //$NON-NLS-1$ //$NON-NLS-2$
-		cookies.put("NID", ""); //$NON-NLS-1$ //$NON-NLS-2$
-		cookies.put("__qca", ""); //$NON-NLS-1$ //$NON-NLS-2$
-		String pagegen = ""; //$NON-NLS-1$
-		String token = ""; //$NON-NLS-1$
-		
-		StringBuilder cookieString = new StringBuilder();
-		int size = cookies.size();
-		for (String c : cookies.keySet()) {
-			size--;
-			cookieString.append(c).append("=").append(cookies.get(c)); //$NON-NLS-1$
-			if (size > 0) {
-				cookieString.append("; "); //$NON-NLS-1$
-			}
-		}
-		
-		for(String s : indexFiles.keySet()){
-			String description = indexFiles.get(s);
-			if(description.contains("0 MB")){ //$NON-NLS-1$
-				deleteFileFromGoogleDownloads(s, token, pagegen, 
-						cookieString.toString());
-			}
-		}
+//		Map<String, String> cookies = new HashMap<String, String>();
+//		cookies.put("__utmz", ""); //$NON-NLS-1$ //$NON-NLS-2$ // ?
+//		cookies.put("__utma", ""); //$NON-NLS-1$ //$NON-NLS-2$ // ?
+//		cookies.put("HSID", "");  //$NON-NLS-1$//$NON-NLS-2$
+//		cookies.put("SID", ""); //$NON-NLS-1$ //$NON-NLS-2$
+//		cookies.put("NID", ""); //$NON-NLS-1$ //$NON-NLS-2$
+//		String pagegen = ""; //$NON-NLS-1$
+//		String token = ""; //$NON-NLS-1$
+//		
+//		StringBuilder cookieString = new StringBuilder();
+//		int size = cookies.size();
+//		for (String c : cookies.keySet()) {
+//			size--;
+//			cookieString.append(c).append("=").append(cookies.get(c)); //$NON-NLS-1$
+//			if (size > 0) {
+//				cookieString.append("; "); //$NON-NLS-1$
+//			}
+//		}
+//		deleteFileFromGoogleDownloads(odb, token, pagegen, 
+//				cookieString.toString());
 		
 	}
 	

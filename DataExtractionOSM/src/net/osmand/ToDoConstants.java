@@ -13,12 +13,14 @@ public class ToDoConstants {
 	// FOR 0.4 beta RELEASE
 	//  ! 89. Transport redesign UI (enable run from context menu, switch go to goal/not) !
 	//  ! 95. Show progress while map rendered and loaded
-	//    90. Use Junidecode library on the client for english translation (for map rendering and other save disk space)
+	//  ! 90. Use Junidecode library on the client for english translation (for map rendering and other save disk space)
 	// 
 	//  !_25. Add all attributes needed for routing (highway attributes, turn_restrictions)
 	//  !_22. Verify all POI has a point_type (in order to search them)
 	//  !_1 . VELCOM
+	//  !_26. Download voice data (Issue)
 	//  !_18. Fix loading map data in rotated mode (check properly boundaries) +/-
+	//  !_28. Rotate crash (progress dialog)
 	
 	// not required
 	//  ! 81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
