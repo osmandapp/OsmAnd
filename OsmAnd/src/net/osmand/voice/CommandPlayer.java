@@ -15,6 +15,7 @@ import net.osmand.LogUtil;
 import net.osmand.OsmandSettings;
 import net.osmand.R;
 import net.osmand.ResourceManager;
+import net.osmand.data.index.IndexConstants;
 
 import org.apache.commons.logging.Log;
 
@@ -34,8 +35,6 @@ import android.os.Environment;
 
 public class CommandPlayer {
 	
-	public static final String VOICE_DIR = ResourceManager.APP_DIR + "/voice"; //$NON-NLS-1$
-	public static final int VOICE_VERSION = 0;
 	private static final Log log = LogUtil.getLog(CommandPlayer.class);
 	
 
@@ -82,7 +81,7 @@ public class CommandPlayer {
 		prologSystem.clearTheory();
 		voiceDir = null;
 		if(voiceProvider != null){
-			File parent = new File(Environment.getExternalStorageDirectory(), VOICE_DIR);
+			File parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.VOICE_PATH);
 			voiceDir = new File(parent, voiceProvider);
 			if(!voiceDir.exists()){
 				voiceDir = null;
@@ -124,7 +123,7 @@ public class CommandPlayer {
 					try {
 						Term val = s.getVarValue(v.getName());
 						if(val instanceof Number){
-							versionSupported = ((Number) val).intValue() == VOICE_VERSION;
+							versionSupported = ((Number) val).intValue() == IndexConstants.VOICE_VERSION;
 						}
 					} catch (NoSolutionException e) {
 					}

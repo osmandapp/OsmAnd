@@ -17,9 +17,9 @@ public class ToDoConstants {
 	//  !_25. Add all attributes needed for routing (highway attributes, turn_restrictions)
 	//  !_22. Verify all POI has a point_type (in order to search them)
 	//  !_1 . VELCOM
-	//  !_26. Download voice data (Issue)
+
 	//  !_28. Rotate crash (progress dialog)
-	//   _29. Fix memory for netherlands map creator
+	//  !_29. Fix memory for netherlands map creator 
 	//   _18. Fix loading map data in rotated mode (check properly boundaries) +/-
 	//   _30. About screen
 	
@@ -55,6 +55,7 @@ public class ToDoConstants {
 	// DONE ANDROID :
 	//  93. Implement multitype vector objects - building with fence, road & tram ...
 	//  90. Use Junidecode library on the client for english translation for map rendering
+	//  96. Download voice data through UI interface (Issue)
 	
 	// DONE SWING
 	//  12. Reinvent UI of swing app (remove Region object and clear other MapObject)  	

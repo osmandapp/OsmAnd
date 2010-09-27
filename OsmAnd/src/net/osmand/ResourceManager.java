@@ -45,6 +45,7 @@ public class ResourceManager {
 
 	public static final String APP_DIR = "osmand/"; //$NON-NLS-1$
 	public static final String POI_PATH = APP_DIR + IndexConstants.POI_INDEX_DIR; 
+	public static final String VOICE_PATH = APP_DIR + IndexConstants.VOICE_INDEX_DIR;
 	public static final String MAPS_PATH = APP_DIR;
 	public static final String ADDRESS_PATH = APP_DIR + IndexConstants.ADDRESS_INDEX_DIR;
 	public static final String TRANSPORT_PATH = APP_DIR + IndexConstants.TRANSPORT_INDEX_DIR;

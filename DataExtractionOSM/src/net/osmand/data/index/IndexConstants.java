@@ -8,9 +8,12 @@ public class IndexConstants {
 	public final static int POI_TABLE_VERSION = 0;
 	public final static int ADDRESS_TABLE_VERSION = 1;
 	public final static int MAP_TABLE_VERSION = 0;
+	public final static int VOICE_VERSION = 0;
+	
 	
 	public static final String POI_INDEX_DIR = "POI/"; //$NON-NLS-1$
 	public static final String ADDRESS_INDEX_DIR = "Address/"; //$NON-NLS-1$
+	public static final String VOICE_INDEX_DIR = "voice/"; //$NON-NLS-1$
 	public static final String TRANSPORT_INDEX_DIR = "Transport/"; //$NON-NLS-1$
 	
 	public static final String POI_INDEX_EXT = ".poi.odb"; //$NON-NLS-1$
@@ -21,6 +24,7 @@ public class IndexConstants {
 	public static final String POI_INDEX_EXT_ZIP = ".poi.zip"; //$NON-NLS-1$
 	public static final String ADDRESS_INDEX_EXT_ZIP = ".addr.zip"; //$NON-NLS-1$
 	public static final String TRANSPORT_INDEX_EXT_ZIP = ".trans.zip"; //$NON-NLS-1$
+	public static final String VOICE_INDEX_EXT_ZIP = ".voice.zip"; //$NON-NLS-1$
 	public static final String MAP_INDEX_EXT_ZIP = ".map.zip"; //$NON-NLS-1$
 	
 	

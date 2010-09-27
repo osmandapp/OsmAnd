@@ -28,13 +28,17 @@ public class DownloaderIndexFromGoogleCode {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws URISyntaxException, IOException {
+//		Map<String, String> indexFiles = DownloaderIndexFromGoogleCode.getIndexFiles(
+//				new String[] { IndexConstants.ADDRESS_INDEX_EXT,	IndexConstants.POI_INDEX_EXT, IndexConstants.TRANSPORT_INDEX_EXT,
+//						IndexConstants.ADDRESS_INDEX_EXT_ZIP,	IndexConstants.POI_INDEX_EXT_ZIP, IndexConstants.TRANSPORT_INDEX_EXT_ZIP,}, 
+//				new String[] {	IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "",  //$NON-NLS-1$//$NON-NLS-2$
+//								IndexConstants.TRANSPORT_TABLE_VERSION + "" , //$NON-NLS-1$
+//								IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "",  //$NON-NLS-1$//$NON-NLS-2$
+//								IndexConstants.TRANSPORT_TABLE_VERSION + "" }); //$NON-NLS-1$
 		Map<String, String> indexFiles = DownloaderIndexFromGoogleCode.getIndexFiles(
-				new String[] { IndexConstants.ADDRESS_INDEX_EXT,	IndexConstants.POI_INDEX_EXT, IndexConstants.TRANSPORT_INDEX_EXT,
-						IndexConstants.ADDRESS_INDEX_EXT_ZIP,	IndexConstants.POI_INDEX_EXT_ZIP, IndexConstants.TRANSPORT_INDEX_EXT_ZIP,}, 
-				new String[] {	IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "",  //$NON-NLS-1$//$NON-NLS-2$
-								IndexConstants.TRANSPORT_TABLE_VERSION + "" , //$NON-NLS-1$
-								IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "",  //$NON-NLS-1$//$NON-NLS-2$
-								IndexConstants.TRANSPORT_TABLE_VERSION + "" }); //$NON-NLS-1$
+				new String[] { IndexConstants.VOICE_INDEX_EXT_ZIP}, 
+				new String[] {	IndexConstants.VOICE_VERSION + "", }, //$NON-NLS-1$
+				new TreeMap<String, String>());   
 		System.out.println(indexFiles);
 		
 		// put your cookies and personal information for delete
@@ -61,8 +65,7 @@ public class DownloaderIndexFromGoogleCode {
 		
 	}
 	
-	private static Map<String, String> getContent(String[] ext, String[] version) {
-		Map<String, String> files = new TreeMap<String, String>();
+	private static Map<String, String> getContent(String[] ext, String[] version, Map<String, String> files) {
 		try {
 			URL url = new URL("http://code.google.com/p/osmand/downloads/list?num=1500&start=0"); //$NON-NLS-1$
 
@@ -111,12 +114,12 @@ public class DownloaderIndexFromGoogleCode {
 		return prevFile;
 	}
 	
-	public static Map<String, String> getIndexFiles(String[] ext, String[] version){
-		return getContent(ext, version);
+	public static Map<String, String> getIndexFiles(String[] ext, String[] version, Map<String, String> files){
+		return getContent(ext, version, files);
 	}
 	
-	public static Map<String, String> getIndexFiles(String ext, String version){
-		return getContent(new String[]{ext}, new String[]{version});
+	public static Map<String, String> getIndexFiles(String ext, String version, Map<String, String> files){
+		return getContent(new String[]{ext}, new String[]{version}, files);
 	}
 	
 	public static URL getInputStreamToLoadIndex(String indexName) throws IOException{

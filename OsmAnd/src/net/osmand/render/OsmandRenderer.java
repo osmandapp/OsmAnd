@@ -342,6 +342,12 @@ public class OsmandRenderer {
 		next: for (int i = 0; i < size; i++) {
 			TextDrawInfo text  = rc.textToDraw.get(i);
 			if(text.text != null){
+				int d = text.text.indexOf(MapRenderingTypes.DELIM_CHAR);
+				// not used now functionality 
+				// possibly it will be used specifying english names after that character
+				if(d > 0){
+					text.text = text.text.substring(0, d);
+				}
 				if(useEnglishNames){
 					text.text = Junidecode.unidecode(text.text);
 				}
