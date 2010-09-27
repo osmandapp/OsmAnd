@@ -14,6 +14,7 @@ import net.osmand.R;
 import net.osmand.osm.MapRenderObject;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MultyPolygon;
+import net.sf.junidecode.Junidecode;
 
 import org.apache.commons.logging.Log;
 
@@ -254,7 +255,7 @@ public class OsmandRenderer {
 	
 	
 	public Bitmap generateNewBitmap(int width, int height, float leftTileX, float topTileY, 
-			List<MapRenderObject> objects, int zoom, float rotate) {
+			List<MapRenderObject> objects, int zoom, float rotate, boolean useEnglishNames) {
 		long now = System.currentTimeMillis();
 		// put in order map
 		int sz = objects.size();
@@ -318,7 +319,7 @@ public class OsmandRenderer {
 					}
 				}
 			}
-			drawTextOverCanvas(rc, cv);
+			drawTextOverCanvas(rc, cv, useEnglishNames);
 			log.info(String.format("Rendering has been done in %s ms. (%s points, %s points inside)", System.currentTimeMillis() - now, //$NON-NLS-1$ 
 					rc.pointCount,rc.pointInsideCount)); 
 		}
@@ -327,7 +328,7 @@ public class OsmandRenderer {
 	}
 	private final static boolean findAllTextIntersections = true;
 
-	public void drawTextOverCanvas(RenderingContext rc, Canvas cv) {
+	public void drawTextOverCanvas(RenderingContext rc, Canvas cv, boolean useEnglishNames) {
 		List<RectF> boundsNotPathIntersect = new ArrayList<RectF>();
 		List<RectF> boundsPathIntersect = new ArrayList<RectF>();
 		int size = rc.textToDraw.size();
@@ -341,7 +342,9 @@ public class OsmandRenderer {
 		next: for (int i = 0; i < size; i++) {
 			TextDrawInfo text  = rc.textToDraw.get(i);
 			if(text.text != null){
-				
+				if(useEnglishNames){
+					text.text = Junidecode.unidecode(text.text);
+				}
 				RectF bounds = new RectF();
 				paintText.setTextSize(text.textSize);
 				paintText.setFakeBoldText(text.bold);

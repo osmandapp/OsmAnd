@@ -19,6 +19,7 @@ import java.util.Set;
 
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
+import net.osmand.OsmandSettings;
 import net.osmand.data.index.IndexConstants;
 import net.osmand.osm.MapRenderObject;
 import net.osmand.osm.MapRenderingTypes;
@@ -359,7 +360,7 @@ public class MapRenderRepositories {
 		
 		int width = (int) calcDiffPixelX(cRotate, tileRect.right - tileRect.left, tileRect.bottom - tileRect.top);
 		int height = (int) calcDiffPixelY(cRotate, tileRect.right - tileRect.left, tileRect.bottom - tileRect.top);
-		Bitmap bmp = renderer.generateNewBitmap(width, height, tileRect.left, tileRect.top, cObjects, cZoom, cRotate);
+		Bitmap bmp = renderer.generateNewBitmap(width, height, tileRect.left, tileRect.top, cObjects, cZoom, cRotate, OsmandSettings.usingEnglishNames(context));
 		Bitmap oldBmp = this.bmp;
 		this.bmp = bmp;
 		cachedWaysLoc = newLoc;
@@ -450,7 +451,8 @@ public class MapRenderRepositories {
 			List<List<Long>> completedRings, List<List<Long>> incompletedRings, Integer type, List<MapRenderObject> directList,
 			List<MapRenderObject> inverselist) {
 		MultyPolygon pl = new MultyPolygon();
-		pl.setType(type << 1);
+		// delete direction last bit (to not show point)
+		pl.setType((type & 0x7fff) << 1);
 		for (int km = 0; km < 2; km++) {
 			List<MapRenderObject> list = km == 0 ? directList : inverselist;
 			for (MapRenderObject o : list) {

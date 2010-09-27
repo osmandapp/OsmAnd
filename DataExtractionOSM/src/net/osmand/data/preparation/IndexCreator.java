@@ -139,12 +139,13 @@ public class IndexCreator {
 	private PreparedStatement mapLocsStatLevel2;
 //	private RTree mapTree;
 	
-	// save it in memory while that is allowed
+	// MEMORY map :  save it in memory while that is allowed
 	private Map<Long, Set<Integer>> multiPolygonsWays = new LinkedHashMap<Long, Set<Integer>>(); 
 	private Map<Long, List<Way>> lowLevelWaysSt = new LinkedHashMap<Long, List<Way>>();
 	private Map<Long, List<Way>> lowLevelWaysEnd = new LinkedHashMap<Long, List<Way>>();
-
-	// choose what to use ?
+	
+	
+	// MEMORY address : choose what to use ?
 	private boolean loadInMemory = true;
 	private PreparedStatement addressSearchStreetStat;
 	private PreparedStatement addressSearchBuildingStat;
@@ -155,7 +156,7 @@ public class IndexCreator {
 	private Set<Long> addressStreetNodeLocalSet = new LinkedHashSet<Long>();
 	
 	
-	// address structure
+	// MEMORY address : address structure
 	// load it in memory
 	private Map<EntityId, City> cities = new LinkedHashMap<EntityId, City>();
 	private DataTileManager<City> cityVillageManager = new DataTileManager<City>(13);
@@ -1144,7 +1145,6 @@ public class IndexCreator {
 		}
 		boolean writeIntoDB = true;
 		boolean ring = true;
-		// TODO check this simplification for multipolygons and other
 		if(e instanceof Way && level > 0){
 			List<Node> nodes = ((Way) e).getNodes();
 			Node n = nodes.get(0);
@@ -1710,17 +1710,14 @@ public class IndexCreator {
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus_2010_09_03.osm.bz2"), new ConsoleProgressImplementation(3), null);
 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);
 		 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/den_haag.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/den_haag.osm"), new ConsoleProgressImplementation(3), null);
 		 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/one.tmp.odb"));
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/one_multipolygon.osm"), new ConsoleProgressImplementation(3), null);
-		 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/netherlands.osm.bz2"), new ConsoleProgressImplementation(1), null);
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/netherlands.osm.bz2"), new ConsoleProgressImplementation(1), null);
 		 
 		/*try {
 //			RTree rtree = new RTree("e:/Information/OSM maps/osmand/Belarus_2010_09_03.map.odb_ind");

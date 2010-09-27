@@ -6,5 +6,6 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="lib" path="lib/bzip2-20090327.jar"/>
 	<classpathentry kind="lib" path="lib/tuprolog.jar"/>
+	<classpathentry kind="lib" path="lib/junidecode-0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
