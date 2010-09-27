@@ -20,7 +20,6 @@ import net.osmand.OsmandSettings.ApplicationMode;
 import net.osmand.activities.RouteProvider.RouteService;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.voice.CommandPlayer;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -276,7 +275,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		routerPreference.setValue(entry);
 
 		// read available voice data
-		File extStorage = new File(Environment.getExternalStorageDirectory(), CommandPlayer.VOICE_DIR);
+		File extStorage = new File(Environment.getExternalStorageDirectory(), ResourceManager.VOICE_PATH);
 		Set<String> setFiles = new LinkedHashSet<String>();
 		if (extStorage.exists()) {
 			for (File f : extStorage.listFiles()) {
