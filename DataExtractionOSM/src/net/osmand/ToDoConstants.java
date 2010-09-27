@@ -12,15 +12,16 @@ public class ToDoConstants {
 	
 	// FOR 0.4 beta RELEASE
 	//  ! 89. Transport redesign UI (enable run from context menu, switch go to goal/not) !
-	//  ! 95. Show progress while map rendered and loaded
-	//  ! 90. Use Junidecode library on the client for english translation (for map rendering and other save disk space)
-	// 
+	//  ! 95. Show progress while map rendered and loaded (Issue)
+
 	//  !_25. Add all attributes needed for routing (highway attributes, turn_restrictions)
 	//  !_22. Verify all POI has a point_type (in order to search them)
 	//  !_1 . VELCOM
 	//  !_26. Download voice data (Issue)
-	//  !_18. Fix loading map data in rotated mode (check properly boundaries) +/-
 	//  !_28. Rotate crash (progress dialog)
+	//   _29. Fix memory for netherlands map creator
+	//   _18. Fix loading map data in rotated mode (check properly boundaries) +/-
+	//   _30. About screen
 	
 	// not required
 	//  ! 81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
@@ -37,7 +38,7 @@ public class ToDoConstants {
 	//   91. Invent binary format (minimize disk space, maximize speed) 
 	//   92. Replace poi index with standard map index and unify POI categories
 	//   94. Revise index to decrease their size (especially address) - replace to float lat/lon and remove for POI 
-	//		 eng_name, possibly remove en part for adress
+	//		 remove en_names from POI (possibly from address)
 
 
 	/////////////////////////////  UNKNOWN STATE  ////////////////////
@@ -53,6 +54,7 @@ public class ToDoConstants {
 
 	// DONE ANDROID :
 	//  93. Implement multitype vector objects - building with fence, road & tram ...
+	//  90. Use Junidecode library on the client for english translation for map rendering
 	
 	// DONE SWING
 	//  12. Reinvent UI of swing app (remove Region object and clear other MapObject)  	
