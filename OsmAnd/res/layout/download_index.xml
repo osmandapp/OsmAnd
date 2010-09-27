@@ -7,5 +7,5 @@
 <TextView android:id="@+id/Label" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:text="@string/select_index_file_to_download"></TextView>
 
 <ListView android:id="@android:id/list" android:layout_width="fill_parent" android:layout_height="fill_parent" 
-		android:layout_marginLeft="3dp" android:layout_marginTop="3dp" android:layout_marginRight="3dp"></ListView>
+		android:layout_marginLeft="3dp" android:layout_marginTop="3dp" android:layout_marginRight="3dp" android:fastScrollEnabled="true"></ListView>
 </LinearLayout>
