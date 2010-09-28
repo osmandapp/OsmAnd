@@ -51,7 +51,7 @@ public class MapRenderingTypes {
 	public final static int MASK_10 = (1 << 10) - 1;
 	
 	public final static char REF_CHAR = ((char)0x0019);
-	public final static char DELIM_CHAR = ((char)0x0020);
+	public final static char DELIM_CHAR = ((char)0x0018);
 	
 
 	public final static int HIGHWAY = 1; 

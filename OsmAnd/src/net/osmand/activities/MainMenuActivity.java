@@ -14,6 +14,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Camera;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,7 +24,11 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainMenuActivity extends Activity {
 
@@ -89,7 +95,70 @@ public class MainMenuActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.menu);
+		setContentView(Version.VELCOM_EDITION ? R.layout.menu_velcom : R.layout.menu);
+		if(Version.VELCOM_EDITION){
+			final ImageView imgView = (ImageView) findViewById(R.id.VelcomMini);
+			final Camera camera = new Camera();
+			final float firstRotate = 0.3f;
+			final float invisibleText = 0.7f;
+			final int animationTime = 3600;
+			Animation ra = new Animation(){
+				@Override
+				protected void applyTransformation(float interpolatedTime, Transformation t) {
+					final Matrix matrix = t.getMatrix();
+					int centerY = imgView.getHeight() / 2;
+					int centerX = imgView.getWidth() / 2;
+					camera.save();
+					if (interpolatedTime < firstRotate) {
+						camera.rotateY(360 * (firstRotate - interpolatedTime) / firstRotate);
+					} else if (interpolatedTime < 2 * firstRotate) {
+						camera.rotateY(360 * (2 * firstRotate - interpolatedTime) / firstRotate);
+					} else {
+						camera.rotateY(360 * (interpolatedTime - 2 * firstRotate) / (1 - 2 * firstRotate));
+					}
+					
+					camera.getMatrix(matrix);
+					matrix.preTranslate(-centerX, -centerY);
+					matrix.postTranslate(centerX, centerY);
+					camera.restore();
+				}
+			};
+			ra.setDuration(animationTime);
+			imgView.startAnimation(ra);
+			  
+			final TextView textView = (TextView) findViewById(R.id.TextVelcom);
+			Animation alphaAnimation = new Animation(){
+				@Override
+				protected void applyTransformation(float interpolatedTime, Transformation t) {
+					if(interpolatedTime < invisibleText){
+						t.setAlpha(0);
+					} else {
+						t.setAlpha((interpolatedTime - invisibleText) / (1 - invisibleText));
+					}
+				}
+				
+			};
+			alphaAnimation.setAnimationListener(new Animation.AnimationListener(){
+
+				@Override
+				public void onAnimationEnd(Animation animation) {
+					textView.setVisibility(View.VISIBLE);
+				}
+
+				@Override
+				public void onAnimationRepeat(Animation animation) {
+				}
+
+				@Override
+				public void onAnimationStart(Animation animation) {
+					textView.setVisibility(View.VISIBLE);
+				}
+				
+			});
+			alphaAnimation.setDuration(animationTime);
+			textView.startAnimation(alphaAnimation);
+			textView.setVisibility(View.INVISIBLE);
+		}
 
 		showMap = (Button) findViewById(R.id.MapButton);
 		showMap.setOnClickListener(new OnClickListener() {
