@@ -184,10 +184,10 @@ public class OsmandRenderer {
 			p.setColor(color);
 			p.setShader(shader);
 			p.setShadowLayer(shadowLayer, 0, 0, shadowColor);
+			p.setStrokeWidth(strokeWidth);
+			p.setStrokeCap(cap);
 			if (!fillArea) {
-				p.setStrokeCap(cap);
 				p.setPathEffect(pathEffect);
-				p.setStrokeWidth(strokeWidth);
 			}
 		}
 		
@@ -557,7 +557,6 @@ public class OsmandRenderer {
 		rc.main.emptyArea();
 		rc.second.emptyLine();
 		rc.main.color = Color.rgb(245, 245, 245);
-		
 		
 		PolygonRenderer.renderPolygon(rc, zoom, type, subtype, this);
 		if(!rc.main.fillArea){
@@ -1446,24 +1445,24 @@ public class OsmandRenderer {
 				}
 			}
 				break;
+			case 12: {
+				if (zoom >= 10) {
+					textColor = 0xFF000000;
+					textSize = 9;
+				}
+			}
+				break;
 			case 7: {
 				wrapWidth = 20;
 				if (zoom >= 9 && zoom < 11) {
 					textColor = 0xFF000000;
 					textSize = 8;
-				} else if (zoom >= 13 && zoom < 14) {
+				} else if (zoom >= 11 && zoom < 14) {
 					textColor = 0xFF000000;
-					textSize = 10;
+					textSize = 11;
 				} else if (zoom >= 14) {
 					textColor = 0xFF777777;
 					textSize = 13;
-				}
-			}
-				break;
-			case 12: {
-				if (zoom >= 10) {
-					textColor = 0xFF000000;
-					textSize = 9;
 				}
 			}
 				break;
