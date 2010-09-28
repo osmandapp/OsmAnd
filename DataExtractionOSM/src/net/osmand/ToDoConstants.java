@@ -14,14 +14,14 @@ public class ToDoConstants {
 	//  ! 89. Transport redesign UI (enable run from context menu, switch go to goal/not) !
 	//  ! 95. Show progress while map rendered and loaded (Issue)
 
+	// +!_1 . VELCOM animation
 	//  !_25. Add all attributes needed for routing (highway attributes, turn_restrictions)
 	//  !_22. Verify all POI has a point_type (in order to search them)
-	//  !_1 . VELCOM
 
 	//  !_28. Rotate crash (progress dialog)
-	//  !_29. Fix memory for netherlands map creator 
+	//  !_29. Fix memory for netherlands map creator
+	//   _30. About screen (Issue)
 	//   _18. Fix loading map data in rotated mode (check properly boundaries) +/-
-	//   _30. About screen
 	
 	///  PROFILE AND REVIEW Rendering !!!
 	//   - Review Ref on the road on low zooms
@@ -31,10 +31,12 @@ public class ToDoConstants {
 	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?),
 	//  railway( station, subway?) - issue 17
 	//  ! 87. Use network availability for defining loading tiles from internet.
+	//    96. Introduce settings for MPH, imperial units 
 	
 	// 	_19. colors for road trunk and motorway
 	// 	_12. Fix : find proper location for streets ! centralize them (when create index)?
 	// 	_28. Fix freeze while map downloading (?)
+
 	
 	// 	Outside base 0.4 release
 	//   86. Allow to add/edit custom tags to POI objects.
