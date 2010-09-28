@@ -23,6 +23,9 @@ public class ToDoConstants {
 	//   _18. Fix loading map data in rotated mode (check properly boundaries) +/-
 	//   _30. About screen
 	
+	///  PROFILE AND REVIEW Rendering !!!
+	//   - Review Ref on the road on low zooms
+	    
 	// not required
 	//  ! 81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
 	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?),
