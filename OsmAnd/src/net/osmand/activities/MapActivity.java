@@ -744,9 +744,14 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
 		if(OsmandSettings.getMapOrientation(this) != getRequestedOrientation()){
 			setRequestedOrientation(OsmandSettings.getMapOrientation(this));
+			// do nothing now (let recreate activity)
+			// only save map position
+			LatLon l = OsmandSettings.getLastKnownMapLocation(this);
+			mapView.setLatLon(l.getLatitude(), l.getLongitude());
+			mapView.setZoom(OsmandSettings.getLastKnownMapZoom(this));
+			return;
 		}
 		currentScreenOrientation = getWindow().getWindowManager().getDefaultDisplay().getOrientation();
 		
