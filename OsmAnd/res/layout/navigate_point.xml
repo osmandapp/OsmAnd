@@ -11,11 +11,11 @@
 <TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:stretchColumns="1">
 <TableRow android:layout_width="fill_parent" >
 <TextView android:textSize="20sp"  android:id="@+id/TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5dp" android:text="@string/navigate_point_latitude"></TextView>
-<EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/LatitudeEdit" android:layout_marginLeft="5dp"  android:layout_marginRight="5dp" android:inputType="number|time"></EditText>
+<EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/LatitudeEdit" android:layout_marginLeft="5dp"  android:layout_marginRight="5dp" android:inputType="phone"></EditText>
 </TableRow>
 <TableRow android:layout_width="fill_parent" >
 <TextView android:textSize="20sp"  android:id="@+id/TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5dp" android:text="@string/navigate_point_longitude"></TextView>
-<EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/LongitudeEdit" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:inputType="number|time"></EditText>
+<EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/LongitudeEdit" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:inputType="phone"></EditText>
 </TableRow>
 <RadioGroup android:id="@+id/RadioGroup" android:layout_marginLeft="70dp" android:layout_marginTop="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="vertical">
 <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Format1" android:text="@string/navigate_point_format_D"></RadioButton>

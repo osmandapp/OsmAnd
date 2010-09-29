@@ -15,11 +15,13 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Camera;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.util.Linkify;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -158,6 +160,11 @@ public class MainMenuActivity extends Activity {
 			alphaAnimation.setDuration(animationTime);
 			textView.startAnimation(alphaAnimation);
 			textView.setVisibility(View.INVISIBLE);
+		} else {
+			final TextView textView = (TextView) findViewById(R.id.TextVersion);
+			textView.setText(Version.APP_FULL_NAME);
+			Linkify.addLinks((TextView) findViewById(R.id.TextSite), Linkify.WEB_URLS);
+			((TextView) findViewById(R.id.TextSite)).setTextColor(Color.WHITE);
 		}
 
 		showMap = (Button) findViewById(R.id.MapButton);
