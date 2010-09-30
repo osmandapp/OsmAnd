@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.TreeMap;
 
+import net.osmand.activities.OsmandApplication;
 import net.osmand.data.Amenity;
 import net.osmand.data.TransportStop;
 import net.osmand.data.index.IndexConstants;
@@ -26,7 +27,6 @@ import net.osmand.views.POIMapLayer;
 
 import org.apache.commons.logging.Log;
 
-import android.content.Context;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -75,7 +75,9 @@ public class ResourceManager {
 	
 	protected File dirWithTiles ;
 	
-	private final Context context;
+	private final OsmandApplication context;
+	
+	private BusyIndicator busyIndicator;
 	
 	private final MapTileDownloader downloader = MapTileDownloader.getInstance();
 	// Indexes
@@ -85,12 +87,12 @@ public class ResourceManager {
 	
 	protected final Map<String, TransportIndexRepository> transportRepositories = new LinkedHashMap<String, TransportIndexRepository>();
 	
-	protected final MapRenderRepositories renderer ;
+	protected final MapRenderRepositories renderer;
 	
 	public final  AsyncLoadingThread asyncLoadingTiles = new AsyncLoadingThread();
 	
 	
-	public ResourceManager(Context context) {
+	public ResourceManager(OsmandApplication context) {
 		this.context = context;
 		this.renderer = new MapRenderRepositories(context);
 		// TODO start/stop this thread when needed?
@@ -102,7 +104,7 @@ public class ResourceManager {
 		
 	}
 	
-	public Context getContext() {
+	public OsmandApplication getContext() {
 		return context;
 	}
 	
@@ -564,6 +566,14 @@ public class ResourceManager {
 		}
 		transportRepositories.clear();
 	}
+	
+	public BusyIndicator getBusyIndicator() {
+		return busyIndicator;
+	}
+	
+	public synchronized void setBusyIndicator(BusyIndicator busyIndicator) {
+		this.busyIndicator = busyIndicator;
+	}
 
 	public synchronized void close(){
 		imagesOnFS.clear();
@@ -710,6 +720,20 @@ public class ResourceManager {
 					boolean amenityLoaded = false;
 					boolean transportLoaded = false;
 					boolean mapLoaded = false;
+					int progress = 0;
+					if(downloader.isSomethingBeingDownloaded()){
+						progress = BusyIndicator.STATUS_GREEN;
+					}
+					synchronized(ResourceManager.this){
+						if(busyIndicator != null){
+							if(context.getRoutingHelper().isRouteBeingCalculated()){
+								progress = BusyIndicator.STATUS_BLUE;
+							} else if(!requests.isEmpty()){
+								progress = BusyIndicator.STATUS_BLACK;;
+							}
+							busyIndicator.updateStatus(progress);
+						}
+					}
 					while(!requests.isEmpty()){
 						Object req = requests.pop();
 						if (req instanceof TileLoadDownloadRequest) {
@@ -743,6 +767,21 @@ public class ResourceManager {
 						// use downloader callback
 						for(IMapDownloaderCallback c : downloader.getDownloaderCallbacks()){
 							c.tileDownloaded(null);
+						}
+					}
+					boolean routeBeingCalculated = context.getRoutingHelper().isRouteBeingCalculated();
+					if (progress != 0 || routeBeingCalculated || downloader.isSomethingBeingDownloaded()) {
+						synchronized (ResourceManager.this) {
+							if (busyIndicator != null) {
+								if(routeBeingCalculated){
+									progress = BusyIndicator.STATUS_BLUE;
+								} else if(downloader.isSomethingBeingDownloaded()){
+									progress = BusyIndicator.STATUS_GREEN;
+								} else {
+									progress = 0;
+								}
+								busyIndicator.updateStatus(progress);
+							}
 						}
 					}
 					sleep(750);

@@ -484,6 +484,10 @@ public class RoutingHelper {
 		}
 	}
 	
+	public boolean isRouteBeingCalculated(){
+		return currentRunningJob != null;
+	}
+	
 	private void showMessage(final String msg){
 		if (uiActivity != null) {
 			uiActivity.runOnUiThread(new Runnable() {

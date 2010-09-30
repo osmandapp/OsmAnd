@@ -11,6 +11,7 @@ import java.util.Map;
 
 import net.osmand.Algoritms;
 import net.osmand.AmenityIndexRepository;
+import net.osmand.BusyIndicator;
 import net.osmand.GPXUtilities;
 import net.osmand.LogUtil;
 import net.osmand.OsmandSettings;
@@ -670,6 +671,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			wakeLock = null;
 		}
 		OsmandSettings.setMapActivityEnabled(this, false);
+		((OsmandApplication)getApplication()).getResourceManager().setBusyIndicator(null);
 	}
 	
 	private void updateApplicationModeSettings(){
@@ -807,6 +809,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		OsmandSettings.setMapActivityEnabled(this, true);
 		checkExternalStorage();
 		showAndHideMapPosition();
+		
+		((OsmandApplication)getApplication()).getResourceManager().setBusyIndicator(
+				new BusyIndicator(this, findViewById(R.id.ProgressBar)));
 	}
 	
 	@Override
