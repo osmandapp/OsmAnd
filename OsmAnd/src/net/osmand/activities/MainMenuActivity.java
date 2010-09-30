@@ -101,7 +101,7 @@ public class MainMenuActivity extends Activity {
 		if(Version.VELCOM_EDITION){
 			final ImageView imgView = (ImageView) findViewById(R.id.VelcomMini);
 			final Camera camera = new Camera();
-			final float firstRotate = 0.3f;
+			final float firstRotate = 0.25f;
 			final float invisibleText = 0.7f;
 			final int animationTime = 3600;
 			Animation ra = new Animation(){
@@ -112,9 +112,9 @@ public class MainMenuActivity extends Activity {
 					int centerX = imgView.getWidth() / 2;
 					camera.save();
 					if (interpolatedTime < firstRotate) {
-						camera.rotateY(360 * (firstRotate - interpolatedTime) / firstRotate);
+						camera.rotateY(360 * interpolatedTime / firstRotate);
 					} else if (interpolatedTime < 2 * firstRotate) {
-						camera.rotateY(360 * (2 * firstRotate - interpolatedTime) / firstRotate);
+						camera.rotateY(360 * (interpolatedTime - firstRotate) / firstRotate);
 					} else {
 						camera.rotateY(360 * (interpolatedTime - 2 * firstRotate) / (1 - 2 * firstRotate));
 					}
@@ -125,6 +125,8 @@ public class MainMenuActivity extends Activity {
 					camera.restore();
 				}
 			};
+			// let accelerate animation
+//			ra.setInterpolator(new LinearInterpolator());
 			ra.setDuration(animationTime);
 			imgView.startAnimation(ra);
 			  

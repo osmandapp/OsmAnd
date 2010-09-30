@@ -8,24 +8,26 @@ package net.osmand;
 public class ToDoConstants {
 	
 	
-	// TODO max 96
-	
+	// TODO max 97
 	// FOR 0.4 beta RELEASE
 	//  ! 89. Transport redesign UI (enable run from context menu, switch go to goal/not) !
-	//  ! 95. Show progress while map rendered and loaded (Issue)
 
-	// +!_1 . VELCOM animation
 	//  !_25. Add all attributes needed for routing (highway attributes, turn_restrictions)
-	//  !_22. Verify all POI has a point_type (in order to search them)
+	//  !_22. Verify all POI has a point_type (in order to search them) and fix POI issues (!)
 
-	//  !_28. Rotate crash (progress dialog)
 	//  !_29. Fix memory for netherlands map creator
-	//   _30. About screen (Issue)
-	//   _18. Fix loading map data in rotated mode (check properly boundaries) +/-
+
 	
 	///  PROFILE AND REVIEW Rendering !!!
 	//   - Review Ref on the road on low zooms
-	    
+	//   - Fix broken multipolygon
+	
+	//+-!_28. Rotate crash (progress dialog) [not reproducible]
+	//+- _18. Fix loading map data in rotated mode (check properly boundaries) 
+	//+ !_1 . VELCOM animation
+	//+  _30. About screen (Issue)
+	//+  _30. Bug with landscape (?)
+	
 	// not required
 	//  ! 81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
 	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?),
@@ -61,8 +63,10 @@ public class ToDoConstants {
 	//  93. Implement multitype vector objects - building with fence, road & tram ...
 	//  90. Use Junidecode library on the client for english translation for map rendering
 	//  96. Download voice data through UI interface (Issue)
+	//  95. Show progress while map rendered and loaded (Issue)
 	
 	// DONE SWING
-	//  12. Reinvent UI of swing app (remove Region object and clear other MapObject)  	
+	//  12. Reinvent UI of swing app (remove Region object and clear other MapObject)
+	
 	
 }
