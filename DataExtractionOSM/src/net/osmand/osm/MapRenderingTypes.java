@@ -368,25 +368,25 @@ public class MapRenderingTypes {
 		int attr = 0;
 		// cycle oneway
 		attr <<= 1;
-		String c = e.getTag("cycleway");
-		if(c != null && ("opposite_lane".equals(c) || "opposite_track".equals(c) || "opposite".equals(c))){
+		String c = e.getTag("cycleway"); //$NON-NLS-1$
+		if(c != null && ("opposite_lane".equals(c) || "opposite_track".equals(c) || "opposite".equals(c))){ //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			attr |= 1;
 		}
 		// parking
 		attr <<= 1;
-		String park = e.getTag("service");
-		if("parking_aisle".equals(park)){
+		String park = e.getTag("service"); //$NON-NLS-1$
+		if("parking_aisle".equals(park)){ //$NON-NLS-1$
 			attr |= 1;
 		}
 
 		// ACCESS not complete (should be redesigned)
 		// vehicle access (not implement yet) 
 		attr <<= 3;
-		boolean hgv = "yes".equals(e.getTag("hgv"));
+		boolean hgv = "yes".equals(e.getTag("hgv")); //$NON-NLS-1$ //$NON-NLS-2$
 		if(hgv){
 			attr |= 3;
 		} else {
-			boolean goods = "yes".equals(e.getTag("goods"));
+			boolean goods = "yes".equals(e.getTag("goods")); //$NON-NLS-1$ //$NON-NLS-2$
 			if(goods){
 				attr |= 2;
 			} else {
@@ -400,7 +400,7 @@ public class MapRenderingTypes {
 		// speed
 		// very simple algorithm doesn't consider city rules (country rules) and miles per hour
 		attr <<= 3;
-		String maxspeed = e.getTag("maxspeed");
+		String maxspeed = e.getTag("maxspeed"); //$NON-NLS-1$
 		if(maxspeed != null){
 			int kmh = 0;
 			try {

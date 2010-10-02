@@ -36,7 +36,6 @@ import android.graphics.Bitmap.Config;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
-import android.graphics.Path.FillType;
 import android.graphics.Shader.TileMode;
 import android.text.TextPaint;
 import android.util.FloatMath;
@@ -1446,6 +1445,20 @@ public class OsmandRenderer {
 				} else if (zoom >= 14) {
 					textColor = 0xFF777777;
 					textSize = 13;
+				}
+			}
+				break;
+			case 19: {
+				if (zoom >= 8) {
+					textColor = 0xFF99cc99;
+					wrapWidth = 14;
+					if (zoom < 10) {
+						bold = true;
+						textSize = 8;
+					} else if (zoom < 12) {
+						bold = true;
+						textSize = 11;
+					}
 				}
 			}
 				break;

@@ -19,33 +19,30 @@ public class ToDoConstants {
 	//  !_30. Add poi issues
 
 	//  !_29. Fix memory for netherlands map creator
-	//  ! 87. Use network availability for defining loading tiles from internet.
 	//  ! 89. Transport redesign UI (enable run from context menu, switch go to goal/not) !
-	//  !_32. Implement download map
 	
+	// + _33. English translate (strings.xml)
+	// +!_32. Implement download map
 	// +!_25. Add all attributes needed for routing (highway attributes, turn_restrictions)
 	// +!_31. Implement stop rendering !!
 	
 	
-	///  PROFILE AND REVIEW Rendering and map creator!!!
-	//   - Fix broken multipolygon
-	//   - Review Ref on the road on low zooms
+	///!!!PROFILE AND REVIEW Rendering and map creator!!!
+	// + - Fix broken multipolygon
+	// + - Review Ref on the road on low zooms
 
-	// not required
-	//   96. Introduce settings for MPH, imperial units 
-	
-	// 	_19. colors for road trunk and motorway
-	// 	_12. Fix : find proper location for streets ! centralize them (when create index)?
-	// 	_28. Fix freeze while map downloading (?)
 
-	
 	// 	Outside base 0.4 release
-	//   86. Allow to add/edit custom tags to POI objects.
+	//   86. Allow to add/edit custom tags to POI objects (Issue)
 	//   91. Invent binary format (minimize disk space, maximize speed) 
 	//   92. Replace poi index with standard map index and unify POI categories
 	//   94. Revise index to decrease their size (especially address) - replace to float lat/lon and remove for POI 
 	//		 remove en_names from POI (possibly from address)
+	//   96. Introduce settings for MPH, imperial units
 
+	// 	_19. colors for road trunk and motorway
+	// 	_12. Fix : find proper location for streets ! centralize them (when create index)?
+	// 	_28. Fix freeze while map downloading (?)
 	
 	/////////////////////////////  UNKNOWN STATE  ////////////////////
 	// Unscheduled (complex)
@@ -64,6 +61,7 @@ public class ToDoConstants {
 	//  90. Use Junidecode library on the client for english translation for map rendering
 	//  96. Download voice data through UI interface (Issue)
 	//  95. Show progress while map rendered and loaded (Issue)
+	//  87. Use network availability for defining loading tiles from internet.
 	
 	// DONE SWING
 	//  12. Reinvent UI of swing app (remove Region object and clear other MapObject)

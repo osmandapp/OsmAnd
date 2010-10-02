@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.regex.Pattern;
 
+
 import net.osmand.activities.OsmandApplication;
 import net.osmand.activities.RouteProvider.RouteService;
 import net.osmand.activities.search.SearchHistoryHelper;
@@ -20,6 +21,8 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Environment;
 import android.util.Log;
 
@@ -60,11 +63,38 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String USE_INTERNET_TO_DOWNLOAD_TILES = "use_internet_to_download_tiles"; //$NON-NLS-1$
 	public static final boolean USE_INTERNET_TO_DOWNLOAD_TILES_DEF = true;
+	private static Boolean CACHE_USE_INTERNET_TO_DOWNLOAD_TILES = null;
+	private static long lastTimeInternetConnectionChecked = 0;
+	private static boolean internetConnectionAvailable = true;
 
 	public static boolean isUsingInternetToDownloadTiles(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.getBoolean(USE_INTERNET_TO_DOWNLOAD_TILES, USE_INTERNET_TO_DOWNLOAD_TILES_DEF);
+		if(CACHE_USE_INTERNET_TO_DOWNLOAD_TILES == null){
+			SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+			CACHE_USE_INTERNET_TO_DOWNLOAD_TILES = prefs.getBoolean(USE_INTERNET_TO_DOWNLOAD_TILES, USE_INTERNET_TO_DOWNLOAD_TILES_DEF);
+		}
+		return CACHE_USE_INTERNET_TO_DOWNLOAD_TILES;
 	}
+	
+	public static void setUseInternetToDownloadTiles(boolean use, Editor edit) {
+		edit.putBoolean(USE_INTERNET_TO_DOWNLOAD_TILES, use);
+		CACHE_USE_INTERNET_TO_DOWNLOAD_TILES = use;
+	}
+	
+	public static boolean isInternetConnectionAvailable(Context ctx){
+		long delta = System.currentTimeMillis() - lastTimeInternetConnectionChecked;
+		if(delta < 0 || delta > 15000){
+			ConnectivityManager mgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo active = mgr.getActiveNetworkInfo();
+			if(active == null){
+				internetConnectionAvailable = false;
+			} else {
+				NetworkInfo.State state = active.getState();
+				internetConnectionAvailable = state != NetworkInfo.State.DISCONNECTED && state != NetworkInfo.State.DISCONNECTING;
+			}
+		}
+		return internetConnectionAvailable;
+	}
+	
 
 	
 	// this value string is synchronized with settings_pref.xml preference name

@@ -437,7 +437,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			return;
 		}
 		
-		if (OsmandSettings.isUsingInternetToDownloadTiles(getContext())) {
+		boolean useInternet = OsmandSettings.isUsingInternetToDownloadTiles(getContext());
+		if (useInternet) {
 			 MapTileDownloader.getInstance().refuseAllPreviousRequests();
 		}
 		float ftileSize = getTileSize();
@@ -458,7 +459,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				try {
 					if (map != null) {
 						ResourceManager mgr = getApplication().getResourceManager();
-						boolean useInternet = OsmandSettings.isUsingInternetToDownloadTiles(getContext())
+						useInternet = useInternet && OsmandSettings.isInternetConnectionAvailable(getContext())
 								&& map.couldBeDownloadedFromInternet();
 						int maxLevel = Math.min(OsmandSettings.getMaximumLevelToDownloadTile(getContext()), map.getMaximumZoomSupported());
 						

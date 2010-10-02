@@ -200,7 +200,7 @@ public class MapRenderRepositories {
 	
 	public void clearAllResources(){
 		clearCache();
-		for(String f : files.keySet()){
+		for(String f : new ArrayList<String>(files.keySet())){
 			closeConnection(files.get(f), f);
 		}
 	}

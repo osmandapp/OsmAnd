@@ -93,24 +93,18 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private ListPreference routeServiceProvider;
 	
 	private CheckBoxPreference routeServiceEnabled;
-
+	private CheckBoxPreference useInternetToDownload;
+	
 	private ProgressDialog progressDlg;
 	
 	private BooleanPreference[] booleanPreferences = new BooleanPreference[]{
-//			new BooleanPreference(OsmandSettings.SHOW_TRANSPORT_OVER_MAP, OsmandSettings.SHOW_TRANSPORT_OVER_MAP_DEF),
-//			new BooleanPreference(OsmandSettings.SHOW_POI_OVER_MAP, OsmandSettings.SHOW_POI_OVER_MAP_DEF ),
-//			new BooleanPreference(OsmandSettings.SHOW_OSM_BUGS, OsmandSettings.SHOW_OSM_BUGS_DEF),
-			new BooleanPreference(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES_DEF),
 			new BooleanPreference(OsmandSettings.SHOW_VIEW_ANGLE, OsmandSettings.SHOW_VIEW_ANGLE_DEF),
 			new BooleanPreference(OsmandSettings.USE_TRACKBALL_FOR_MOVEMENTS, OsmandSettings.USE_TRACKBALL_FOR_MOVEMENTS_DEF),
 			new BooleanPreference(OsmandSettings.USE_ENGLISH_NAMES, OsmandSettings.USE_ENGLISH_NAMES_DEF),
-			
 			new BooleanPreference(OsmandSettings.AUTO_ZOOM_MAP, OsmandSettings.AUTO_ZOOM_MAP_DEF),
-
 			new BooleanPreference(OsmandSettings.SAVE_TRACK_TO_GPX, OsmandSettings.SAVE_TRACK_TO_GPX_DEF),
 	};
 	private BroadcastReceiver broadcastReceiver;
-
 	
 	
 	
@@ -125,6 +119,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			p.setOnPreferenceChangeListener(this);
 			b.setPref(p);
 		}
+		
+		useInternetToDownload =(CheckBoxPreference) screen.findPreference(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES);
+		useInternetToDownload.setOnPreferenceClickListener(this);
 		
 		reloadIndexes =(Preference) screen.findPreference(OsmandSettings.RELOAD_INDEXES);
 		reloadIndexes.setOnPreferenceClickListener(this);
@@ -196,6 +193,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     	}
 		userName.setText(OsmandSettings.getUserName(this));
 		userPassword.setText(OsmandSettings.getUserPassword(this));
+		useInternetToDownload.setChecked(OsmandSettings.isUsingInternetToDownloadTiles(this));
 		
 		Resources resources = this.getResources();
 		String[] e = new String[] {resources.getString(R.string.position_on_map_center), 
@@ -405,6 +403,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		} else if(preference == userPassword){
 			edit.putString(OsmandSettings.USER_PASSWORD, (String) newValue);
 			edit.commit();
+		} else if(preference == useInternetToDownload){
+			OsmandSettings.setUseInternetToDownloadTiles((Boolean) newValue, edit);
+			edit.commit();
 		} else if(preference == userName){
 			edit.putString(OsmandSettings.USER_NAME, (String) newValue);
 			edit.commit();
@@ -530,7 +531,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		
 	public static void setAppMode(ApplicationMode preset, Editor edit){
 		if(preset == ApplicationMode.CAR){
-			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, true);
+			OsmandSettings.setUseInternetToDownloadTiles(true, edit);
 //			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, _);
 			edit.putBoolean(OsmandSettings.SHOW_TRANSPORT_OVER_MAP, false);
 			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_BEARING);

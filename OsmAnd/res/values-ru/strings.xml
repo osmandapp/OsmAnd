@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="map_index">Карта</string>
 	<string name="voice">Голосовые данные</string>
 	<string name="no_vector_map_loaded">Векторные карты не загружены в приложение</string>
 	<string name="gpx_reverse_route">Обратный путь</string>
