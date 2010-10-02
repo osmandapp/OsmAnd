@@ -131,7 +131,6 @@ public class MapTileDownloader {
 		return (int) (threadPoolExecutor.getTaskCount());
 	}
 	
-	
 	public void refuseAllPreviousRequests(){
 		//FIXME it could cause NPE in android implementation think about different style
 		// That's very strange because exception in impl of queue (possibly wrong impl)
@@ -181,6 +180,7 @@ public class MapTileDownloader {
 					URL url = new URL(request.url);
 					URLConnection connection = url.openConnection();
 					connection.setRequestProperty("User-Agent", Version.APP_NAME_VERSION); //$NON-NLS-1$
+					connection.setConnectTimeout(35000);
 					BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
 					FileOutputStream stream = null;
 					try {
