@@ -26,10 +26,11 @@ import org.apache.commons.logging.Log;
 
 public class IndexBatchCreator {
 	// config params
-	private static final boolean indexPOI = true;
-	private static final boolean indexAddress = true;
-	private static final boolean indexTransport = true;
-	private static final boolean writeWayNodes = true;
+	private static final boolean indexPOI = false;
+	private static final boolean indexAddress = false;
+	private static final boolean indexTransport = false;
+	private static final boolean writeWayNodes = false; 
+	private static final boolean indexMap = true;
 	
 	protected static final Log log = LogUtil.getLog(IndexBatchCreator.class);
 	protected static final String SITE_TO_DOWNLOAD1 = "http://download.geofabrik.de/osm/europe/"; //$NON-NLS-1$
@@ -375,42 +376,6 @@ public class IndexBatchCreator {
 	}
 	
 	
-/*	protected void generateIndexOld(File f, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
-		if (!generateIndexes) {
-			return;
-		}
-		try {
-			DataExtraction extr = new DataExtraction(indexAddress, indexPOI, indexTransport, indexAddress, false, false, indexDirFiles);
-			try {
-				alreadyGeneratedFiles.add(f.getName());
-				Region country = extr.readCountry(f.getAbsolutePath(), new ConsoleProgressImplementation(9), null);
-				DataIndexWriter dataIndexWriter = new DataIndexWriter(indexDirFiles, country);
-				String name = country.getName();
-				if (indexAddress) {
-					String fName = name + "_" + IndexConstants.ADDRESS_TABLE_VERSION + IndexConstants.ADDRESS_INDEX_EXT;
-					dataIndexWriter.writeAddress(fName, f.lastModified(), writeWayNodes);
-					uploadIndex(new File(indexDirFiles, fName), alreadyUploadedFiles);
-				}
-				if (indexPOI) {
-					String fName = name + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT;
-					dataIndexWriter.writePOI(fName, f.lastModified());
-					uploadIndex(new File(indexDirFiles, fName), alreadyUploadedFiles);
-				}
-				if (indexTransport) {
-					String fName = name + "_" + IndexConstants.TRANSPORT_TABLE_VERSION + IndexConstants.TRANSPORT_INDEX_EXT;
-					dataIndexWriter.writeTransport(fName, f.lastModified());
-					uploadIndex(new File(indexDirFiles, fName), alreadyUploadedFiles);
-				}
-			} catch (Exception e) {
-				log.error("Exception generating indexes for " + f.getName(), e); //$NON-NLS-1$ 
-			}
-		} catch (OutOfMemoryError e) {
-			System.gc();
-			log.error("OutOfMemory", e);
-
-		}
-		System.gc();
-	}*/
 	
 	protected void generateIndex(File f, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
 		if (!generateIndexes) {
@@ -428,6 +393,7 @@ public class IndexBatchCreator {
 			indexCreator.setIndexAddress(indexAddress);
 			indexCreator.setIndexPOI(indexPOI);
 			indexCreator.setIndexTransport(indexTransport);
+			indexCreator.setIndexMap(indexMap);
 			indexCreator.setLastModifiedDate(f.lastModified());
 			indexCreator.setNormalizeStreets(true);
 			indexCreator.setSaveAddressWays(saveAddressWays);
@@ -439,6 +405,8 @@ public class IndexBatchCreator {
 			indexCreator.setTransportFileName(transportFileName);
 			String poiFileName = regionName + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT;
 			indexCreator.setPoiFileName(poiFileName);
+			String mapFileName = regionName + "_" + IndexConstants.MAP_TABLE_VERSION + IndexConstants.MAP_INDEX_EXT;
+			indexCreator.setMapFileName(mapFileName);
 			try {
 				alreadyGeneratedFiles.add(f.getName());
 				indexCreator.generateIndexes(f, new ConsoleProgressImplementation(3),  null);
@@ -450,6 +418,9 @@ public class IndexBatchCreator {
 				}
 				if (indexTransport) {
 					uploadIndex(new File(indexDirFiles, transportFileName), alreadyUploadedFiles);
+				}
+				if (indexMap) {
+					uploadIndex(new File(indexDirFiles, mapFileName), alreadyUploadedFiles);
 				}
 			} catch (Exception e) {
 				log.error("Exception generating indexes for " + f.getName(), e); //$NON-NLS-1$ 
@@ -500,6 +471,9 @@ public class IndexBatchCreator {
 		} else if(f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT) || f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT_ZIP)){
 			regionName = f.getName().substring(0, f.getName().length() - IndexConstants.TRANSPORT_INDEX_EXT.length() - 2);
 			summary = "Transport index for ";
+		} else if(f.getName().endsWith(IndexConstants.MAP_INDEX_EXT) || f.getName().endsWith(IndexConstants.MAP_INDEX_EXT_ZIP)){
+			regionName = f.getName().substring(0, f.getName().length() - IndexConstants.MAP_INDEX_EXT.length() - 2);
+			summary = "Map index for ";
 		} else { 
 			return;
 		}

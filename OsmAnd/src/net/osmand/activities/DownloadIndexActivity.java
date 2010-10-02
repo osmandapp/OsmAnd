@@ -112,12 +112,13 @@ public class DownloadIndexActivity extends ListActivity {
 			DownloaderIndexFromGoogleCode.getIndexFiles(new String[] { 
 					IndexConstants.ADDRESS_INDEX_EXT, IndexConstants.POI_INDEX_EXT, IndexConstants.TRANSPORT_INDEX_EXT, 
 					IndexConstants.ADDRESS_INDEX_EXT_ZIP, IndexConstants.POI_INDEX_EXT_ZIP, IndexConstants.TRANSPORT_INDEX_EXT_ZIP, 
-					IndexConstants.VOICE_INDEX_EXT_ZIP, }, 
+					IndexConstants.MAP_INDEX_EXT, IndexConstants.MAP_INDEX_EXT_ZIP, IndexConstants.VOICE_INDEX_EXT_ZIP, }, 
 					new String[] {
 					IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "",//$NON-NLS-1$//$NON-NLS-2$
-					IndexConstants.TRANSPORT_TABLE_VERSION + "", //$NON-NLS-1$
-					IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "",//$NON-NLS-1$//$NON-NLS-2$
-					IndexConstants.TRANSPORT_TABLE_VERSION + "", IndexConstants.VOICE_VERSION + "", }, //$NON-NLS-1$ //$NON-NLS-2$
+					IndexConstants.TRANSPORT_TABLE_VERSION + "", IndexConstants.ADDRESS_TABLE_VERSION + "", //$NON-NLS-1$ //$NON-NLS-2$
+					IndexConstants.POI_TABLE_VERSION + "", IndexConstants.TRANSPORT_TABLE_VERSION + "", //$NON-NLS-1$//$NON-NLS-2$
+					IndexConstants.MAP_TABLE_VERSION + "", IndexConstants.MAP_TABLE_VERSION + "", //$NON-NLS-1$//$NON-NLS-2$
+					IndexConstants.VOICE_VERSION + "", }, //$NON-NLS-1$ 
 					indexFiles);
 			
 			if (indexFiles != null && !indexFiles.isEmpty()) {
@@ -170,6 +171,14 @@ public class DownloadIndexActivity extends ListActivity {
 			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.TRANSPORT_PATH);
 			toSavePostfix = IndexConstants.TRANSPORT_INDEX_EXT_ZIP;
 			toCheckPostfix = IndexConstants.TRANSPORT_INDEX_EXT;
+		} else if(key.endsWith(IndexConstants.MAP_INDEX_EXT)){
+			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.APP_DIR);
+			toSavePostfix = IndexConstants.MAP_INDEX_EXT;
+			toCheckPostfix = IndexConstants.MAP_INDEX_EXT;
+		} else if(key.endsWith(IndexConstants.MAP_INDEX_EXT_ZIP)){
+			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.APP_DIR);
+			toSavePostfix = IndexConstants.MAP_INDEX_EXT_ZIP;
+			toCheckPostfix = IndexConstants.MAP_INDEX_EXT;
 		} else if(key.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)){
 			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.VOICE_PATH);
 			toSavePostfix = IndexConstants.VOICE_INDEX_EXT_ZIP;
@@ -287,6 +296,8 @@ public class DownloadIndexActivity extends ListActivity {
 						manager.indexingPoi(impl, warnings, toIndex);
 					} else if(toIndex.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)){
 						manager.indexingTransport(impl, warnings, toIndex);
+					} else if(toIndex.getName().endsWith(IndexConstants.MAP_INDEX_EXT)){
+						manager.indexingMaps(impl);
 					} else if(toIndex.getName().endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)){
 					}
 					if(warnings.isEmpty()){
@@ -345,6 +356,8 @@ public class DownloadIndexActivity extends ListActivity {
 				s = getString(R.string.address);
 			} else if(e.getKey().endsWith(IndexConstants.TRANSPORT_INDEX_EXT) || e.getKey().endsWith(IndexConstants.TRANSPORT_INDEX_EXT_ZIP)){
 				s = getString(R.string.transport);
+			} else if(e.getKey().endsWith(IndexConstants.MAP_INDEX_EXT) || e.getKey().endsWith(IndexConstants.MAP_INDEX_EXT_ZIP)){
+				s = getString(R.string.map_index);
 			} else if(e.getKey().endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)){
 				s = getString(R.string.voice);
 			}

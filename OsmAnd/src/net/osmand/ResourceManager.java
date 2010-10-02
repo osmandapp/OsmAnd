@@ -89,7 +89,9 @@ public class ResourceManager {
 	
 	protected final MapRenderRepositories renderer;
 	
-	public final  AsyncLoadingThread asyncLoadingTiles = new AsyncLoadingThread();
+	public final AsyncLoadingThread asyncLoadingTiles = new AsyncLoadingThread();
+	
+	protected boolean internetIsNotAccessible = false;
 	
 	
 	public ResourceManager(OsmandApplication context) {

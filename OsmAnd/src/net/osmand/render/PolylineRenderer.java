@@ -611,7 +611,17 @@ public class PolylineRenderer {
 				} else {
 					strokeWidth = 0;
 				}
-
+			} else if(subtype == 19){
+				color = 0xa009dd09;
+				if(zoom < 7){
+					strokeWidth = 0;
+				} else if(zoom < 10){
+					strokeWidth =1.5f;
+					pathEffect = o.getDashEffect("4_2"); //$NON-NLS-1$
+				} else {
+					strokeWidth =3f;
+					pathEffect = o.getDashEffect("6_2"); //$NON-NLS-1$
+				} 
 			}
 		}
 			break;
