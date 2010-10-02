@@ -60,7 +60,7 @@ public class BusyIndicator {
 				animation = new RotateAnimation(0, 360, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
 				animation.setRepeatCount(Animation.INFINITE);
 				animation.setInterpolator(new LinearInterpolator());
-				animation.setDuration(850);
+				animation.setDuration(1200);
 				animation.setStartTime(RotateAnimation.START_ON_FIRST_FRAME);
 				animation.setStartOffset(0);
 			} else {

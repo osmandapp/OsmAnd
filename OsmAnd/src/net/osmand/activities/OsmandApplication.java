@@ -44,8 +44,8 @@ public class OsmandApplication extends Application {
 	
     public void	onCreate(){
     	super.onCreate();
-    	manager = new ResourceManager(this);
     	routingHelper = new RoutingHelper(OsmandSettings.getApplicationMode(OsmandApplication.this), OsmandApplication.this, player);
+    	manager = new ResourceManager(this);
     	uiHandler = new Handler();
     	startApplication();
 	}
