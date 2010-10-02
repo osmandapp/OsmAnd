@@ -18,15 +18,14 @@ public class ToDoConstants {
 	//  !_22. Verify all POI has a point_type (in order to search them) and fix POI issues (!)
 	//  !_30. Add poi issues
 
-	//  !_31. Implement stop rendering !!
-	//  !_25. Add all attributes needed for routing (highway attributes, turn_restrictions)
-
-	
+	//  !_29. Fix memory for netherlands map creator
 	//  ! 87. Use network availability for defining loading tiles from internet.
 	//  ! 89. Transport redesign UI (enable run from context menu, switch go to goal/not) !
-
+	//  !_32. Implement download map
 	
-	//  !_29. Fix memory for netherlands map creator
+	// +!_25. Add all attributes needed for routing (highway attributes, turn_restrictions)
+	// +!_31. Implement stop rendering !!
+	
 	
 	///  PROFILE AND REVIEW Rendering and map creator!!!
 	//   - Fix broken multipolygon

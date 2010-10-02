@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
+import android.view.animation.Interpolator;
 import android.view.animation.RotateAnimation;
 
 public class BusyIndicator {
@@ -59,7 +59,13 @@ public class BusyIndicator {
 			if(drawable != null){
 				animation = new RotateAnimation(0, 360, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
 				animation.setRepeatCount(Animation.INFINITE);
-				animation.setInterpolator(new LinearInterpolator());
+				final int cycles = 12;
+				animation.setInterpolator(new Interpolator(){
+					@Override
+					public float getInterpolation(float input) {
+						return ((int)(input * cycles)) / (float) cycles;
+					}
+				});
 				animation.setDuration(1200);
 				animation.setStartTime(RotateAnimation.START_ON_FIRST_FRAME);
 				animation.setStartOffset(0);

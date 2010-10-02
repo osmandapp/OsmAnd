@@ -210,14 +210,9 @@ public class DataIndexWriter {
 	
 	public static void insertMapRenderObjectIndex(Map<PreparedStatement, Integer> statements, 
 			PreparedStatement mapStat, PreparedStatement mapWayLocationsStat, /*RTree mapTree, */Entity e, String name,
-			long id, int type, List<Integer> typeUse, boolean inversePath, boolean writeAsPoint, int batchSize) throws SQLException {
+			long id, int type, List<Integer> typeUse, List<Long> restrictions, boolean writeRestrictions,
+			boolean inversePath, boolean writeAsPoint, int batchSize) throws SQLException {
 		assert IndexMapRenderObject.values().length == 4;
-		// TODO DELETE
-		if(TEMP_IDS.contains(id)){
-			System.err.println(id>>3);
-			throw new UnsupportedOperationException();
-		}
-		TEMP_IDS.add(id);
 		if(e instanceof Relation){
 			throw new IllegalArgumentException();
 		}
@@ -248,15 +243,32 @@ public class DataIndexWriter {
 		
 		byte[] bytes;
 		int offset = 0;
-		if((type & 1) == 1){
-			bytes = new byte[nodes.size() * 8 + typeUse.size() * 2 + 1];
+		boolean multiType = (type & 1) == 1;
+		int len = nodes.size() * 8;
+		if(multiType){
+			len += typeUse.size() * 2 + 1;
+		}
+		if(writeRestrictions){
+			len += restrictions.size() * 8 + 1;
+		}
+		bytes = new byte[len];
+		if(multiType){
 			bytes[offset++] = (byte) typeUse.size();
+		}
+		if(writeRestrictions){
+			bytes[offset++] = (byte) restrictions.size();
+		}
+		if(multiType){
 			for(Integer i : typeUse){
-				Algoritms.putIntToBytes(bytes, offset, i);
+				Algoritms.putSmallIntBytes(bytes, offset, i);
 				offset += 2;
 			}
-		} else {
-			bytes = new byte[nodes.size() * 8];
+		}
+		if(writeRestrictions){
+			for(Long i : restrictions){
+				Algoritms.putLongToBytes(bytes, offset, i);
+				offset += 8;
+			}
 		}
 			
 		
@@ -309,8 +321,6 @@ public class DataIndexWriter {
 			addBatch(statements, mapWayLocationsStat);
 		}
 	}
-	static Set<Long> TEMP_IDS = new LinkedHashSet<Long>(); 
-
 	private static void addBatch(Map<PreparedStatement, Integer> count, PreparedStatement p) throws SQLException{
 		addBatch(count, p, BATCH_SIZE);
 	}

@@ -141,6 +141,7 @@ public class IndexCreator {
 	
 	// MEMORY map :  save it in memory while that is allowed
 	private Map<Long, Set<Integer>> multiPolygonsWays = new LinkedHashMap<Long, Set<Integer>>(); 
+	private Map<Long, List<Long>> highwayRestrictions = new LinkedHashMap<Long, List<Long>>();
 	private Map<Long, List<Way>> lowLevelWaysSt = new LinkedHashMap<Long, List<Way>>();
 	private Map<Long, List<Way>> lowLevelWaysEnd = new LinkedHashMap<Long, List<Way>>();
 	
@@ -167,7 +168,8 @@ public class IndexCreator {
 	private String[] normalizeSuffixes;
 	
 	// local purpose
-	List<Integer> typeUse= new ArrayList<Integer>();
+	List<Integer> typeUse= new ArrayList<Integer>(8);
+	List<Long> restrictionsUse= new ArrayList<Long>(8);
 	
 	public IndexCreator(File workingDir){
 		this.workingDir = workingDir;
@@ -1023,6 +1025,41 @@ public class IndexCreator {
 					indexAddressRelation((Relation) e);
 				}
 			}
+			if(indexMap && e instanceof Relation && "restriction".equals(e.getTag(OSMTagKey.TYPE))){
+				String val = e.getTag("restriction");
+				if(val != null){
+					byte type = -1;
+					if("no_right_turn".equalsIgnoreCase(val)){
+						type = MapRenderingTypes.RESTRICTION_NO_RIGHT_TURN;
+					} else if("no_left_turn".equalsIgnoreCase(val)){
+						type = MapRenderingTypes.RESTRICTION_NO_LEFT_TURN;
+					} else if("no_u_turn".equalsIgnoreCase(val)){
+						type = MapRenderingTypes.RESTRICTION_NO_U_TURN;
+					} else if("no_straight_on".equalsIgnoreCase(val)){
+						type = MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON;
+					} else if("only_right_turn".equalsIgnoreCase(val)){
+						type = MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN;
+					} else if("only_left_turn".equalsIgnoreCase(val)){
+						type = MapRenderingTypes.RESTRICTION_ONLY_LEFT_TURN;
+					} else if("only_straight_on".equalsIgnoreCase(val)){
+						type = MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON;
+					}
+					if(type != -1){
+						Collection<EntityId> fromL = ((Relation) e).getMemberIds("from");
+						Collection<EntityId> toL = ((Relation) e).getMemberIds("to");
+						if(!fromL.isEmpty() && !toL.isEmpty()) {
+							EntityId from = fromL.iterator().next();
+							EntityId to = toL.iterator().next();
+							if(from.getType() == EntityType.WAY){
+								if(!highwayRestrictions.containsKey(from.getId())){
+									highwayRestrictions.put(from.getId(), new ArrayList<Long>(4));
+								}
+								highwayRestrictions.get(from.getId()).add((to.getId() << 3) | (long) type);
+							}
+						}
+					}
+				}
+			}
 			if (indexMap && e instanceof Relation && "multipolygon".equals(e.getTag(OSMTagKey.TYPE))) {
 				loadEntityData(e, true);
 				Map<Entity, String> entities = ((Relation) e).getMemberEntities();
@@ -1041,7 +1078,8 @@ public class IndexCreator {
 				int t = MapRenderingTypes.encodeEntityWithType(e, 0, true, typeUse); 
 				if (t != 0) {
 					if (((t >> 1) & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
-						mtType = (t >> 1) & 0xffff;
+						// last bit is used for direction
+						mtType = (t >> 1) & 0x7fff;
 					} else if (((t >> 16) & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE && (t >> 16) != 0) {
 						mtType = t >> 16;
 					} else {
@@ -1245,6 +1283,7 @@ public class IndexCreator {
 				for(Integer i : set){
 					if(first){
 						type = i << 1;
+						first = false;
 					} else {
 						typeUse.add(i);
 					}
@@ -1280,7 +1319,18 @@ public class IndexCreator {
 			type |= 1;
 		}
 		
-		boolean point = ((type >> 1)& 3) == MapRenderingTypes.POINT_TYPE;
+		boolean useRestrictions = false;
+		restrictionsUse.clear();
+		if(MapRenderingTypes.isHighwayType(type >> 1)){
+			useRestrictions = true;
+			// try to find restrictions only for max zoom level
+			if(level == 0 && highwayRestrictions.containsKey(baseId)){
+				restrictionsUse.addAll(highwayRestrictions.get(baseId));
+			}
+			
+		}
+		
+		boolean point = ((type >> 1) & 3) == MapRenderingTypes.POINT_TYPE;
 		PreparedStatement mapLocations;
 		int zoom;
 		long id = baseId << 3;
@@ -1328,7 +1378,8 @@ public class IndexCreator {
 		
 		if (!skip) {
 			DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapObjStat, mapLocations, /*mapTree, */e,  
-					MapRenderingTypes.getEntityName(e, type), id, type, typeUse, inverse, point, BATCH_SIZE);
+					MapRenderingTypes.getEntityName(e, type), id, type, typeUse, restrictionsUse, useRestrictions,
+					inverse, point, BATCH_SIZE);
 		}
 	}
 	
@@ -1704,8 +1755,8 @@ public class IndexCreator {
 		 IndexCreator creator = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
 		 creator.setIndexMap(true);
 		 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus_2010_09_03.osm.bz2"), new ConsoleProgressImplementation(3), null);
@@ -1716,8 +1767,8 @@ public class IndexCreator {
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/den_haag.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/den_haag.osm"), new ConsoleProgressImplementation(3), null);
 		 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/netherlands.osm.bz2"), new ConsoleProgressImplementation(1), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/netherlands.osm.bz2"), new ConsoleProgressImplementation(1), null);
 		 
 		/*try {
 //			RTree rtree = new RTree("e:/Information/OSM maps/osmand/Belarus_2010_09_03.map.odb_ind");

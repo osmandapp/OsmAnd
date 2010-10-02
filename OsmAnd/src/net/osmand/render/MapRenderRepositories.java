@@ -345,7 +345,7 @@ public class MapRenderRepositories {
 							count++;
 							int mainType = obj.getMainType();
 							// be attentive we need 16 bits from main type (not 15 bits!) 
-							// the last bit shows direction of multipolygon way 
+							// the last bit shows direction of multipolygon way
 							registerMultipolygon(multiPolygons, mainType, obj);
 							int sec = obj.getSecondType();
 							if(sec != 0){

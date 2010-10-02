@@ -36,6 +36,7 @@ import android.graphics.Bitmap.Config;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
+import android.graphics.Path.FillType;
 import android.graphics.Shader.TileMode;
 import android.text.TextPaint;
 import android.util.FloatMath;

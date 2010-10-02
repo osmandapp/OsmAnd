@@ -48,6 +48,7 @@ public class MapRenderingTypes {
 	public final static int MASK_13 = (1 << 13) - 1;
 	public final static int MASK_12 = (1 << 12) - 1;
 	public final static int MASK_4 = (1 << 4) - 1;
+	public final static int MASK_5 = (1 << 5) - 1;
 	public final static int MASK_10 = (1 << 10) - 1;
 	
 	public final static char REF_CHAR = ((char)0x0019);
@@ -112,6 +113,14 @@ public class MapRenderingTypes {
 	public final static int PL_HW_CONSTRUCTION = 25;
 	public final static int PL_HW_PROPOSED = 26;
 	
+	
+	public final static byte RESTRICTION_NO_RIGHT_TURN = 1;
+	public final static byte RESTRICTION_NO_LEFT_TURN = 2;
+	public final static byte RESTRICTION_NO_U_TURN = 3;
+	public final static byte RESTRICTION_NO_STRAIGHT_ON = 4;
+	public final static byte RESTRICTION_ONLY_RIGHT_TURN = 5;
+	public final static byte RESTRICTION_ONLY_LEFT_TURN = 6;
+	public final static byte RESTRICTION_ONLY_STRAIGHT_ON = 7;
 	
 	
 	// two bytes pass!	
@@ -310,12 +319,9 @@ public class MapRenderingTypes {
 		boolean twoBytes = true;
 		int first = addTypes.get(0);
 		addTypes.remove(0);
-		if((first & 3) == POLYLINE_TYPE){
-			int attr = 0;
-			if (((first >> 2) & MASK_4) == HIGHWAY) {
-				twoBytes = false;
-				attr = getHighwayAttributes(e) << 16;
-			}
+		if(isHighwayType(first)){
+			twoBytes = false;
+			int	attr = getHighwayAttributes(e) << 16;
 			type = attr | (first << 1);
 		} else {
 			type = first << 1;
@@ -329,6 +335,11 @@ public class MapRenderingTypes {
 		}
 		
 		return type;
+	}
+	
+	// 
+	public static boolean isHighwayType(int t){
+		return (t & 3) == POLYLINE_TYPE && ((t >> 2) & MASK_5) == HIGHWAY;
 	}
 	
 	public static boolean isOneWayWay(int type){
@@ -346,16 +357,78 @@ public class MapRenderingTypes {
 	// o/oneway			1 bit
 	// f/free toll 		1 bit
 	// r/roundabout  	1 bit (+ 1 bit direction)
-	// s/max speed   	2-3 bit
-	// a/vehicle access 4-5 bit   (height, weight?)
+	// s/max speed   	3 bit [0 - 30km/h, 1 - 50km/h, 2 - 70km/h, 3 - 90km/h, 4 - 110km/h, 5 - 130 km/h, 6 >]
+	// a/vehicle access 4 bit   (height, weight?) - one bit bicycle
 	// p/parking      	1 bit
 	// c/cycle oneway 	1 bit
 	
-	// ENCODING :  c|p|aaaa|sss|rr|f|o|ll|TTTTT|00001|011 - 28 bit
+	// ENCODING :  c|p|aaaa|sss|rr|f|o|ll|TTTTT|00001|01_ - 28 bit
 	
 	public static int getHighwayAttributes(Entity e){
 		int attr = 0;
-		// TODO speed, vehicle access, parking, cycle_oneway
+		// cycle oneway
+		attr <<= 1;
+		String c = e.getTag("cycleway");
+		if(c != null && ("opposite_lane".equals(c) || "opposite_track".equals(c) || "opposite".equals(c))){
+			attr |= 1;
+		}
+		// parking
+		attr <<= 1;
+		String park = e.getTag("service");
+		if("parking_aisle".equals(park)){
+			attr |= 1;
+		}
+
+		// ACCESS not complete (should be redesigned)
+		// vehicle access (not implement yet) 
+		attr <<= 3;
+		boolean hgv = "yes".equals(e.getTag("hgv"));
+		if(hgv){
+			attr |= 3;
+		} else {
+			boolean goods = "yes".equals(e.getTag("goods"));
+			if(goods){
+				attr |= 2;
+			} else {
+				attr |= 1;
+			}
+		}
+		// bicycle access
+		attr <<= 1;
+		
+		
+		// speed
+		// very simple algorithm doesn't consider city rules (country rules) and miles per hour
+		attr <<= 3;
+		String maxspeed = e.getTag("maxspeed");
+		if(maxspeed != null){
+			int kmh = 0;
+			try {
+				kmh = Integer.parseInt(maxspeed);
+			} catch (NumberFormatException es) {
+			}
+			if(kmh <= 0){
+				attr |= 2;
+			} else if(kmh <= 30){
+				attr |= 0;
+			} else if(kmh <= 50){
+				attr |= 1;
+			} else if(kmh <= 70){
+				attr |= 2;
+			} else if(kmh <= 90){
+				attr |= 3;
+			} else if(kmh <= 110){
+				attr |= 4;
+			} else if(kmh <= 130){
+				attr |= 5;
+			} else {
+				attr |= 6;
+			}
+		} else {
+			attr |= 2;
+		}
+		
+		
 		// roundabout
 		attr <<= 2;
 		String jun = e.getTag(OSMTagKey.JUNCTION);
