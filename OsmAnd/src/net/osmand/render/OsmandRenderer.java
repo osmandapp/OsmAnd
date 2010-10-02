@@ -100,6 +100,8 @@ public class OsmandRenderer {
 	}
 	
 	/*package*/ static class RenderingContext {
+		public boolean interrupted = false;
+		
 		List<TextDrawInfo> textToDraw = new ArrayList<TextDrawInfo>();
 		List<IconDrawInfo> iconsToDraw = new ArrayList<IconDrawInfo>();
 		
@@ -254,8 +256,7 @@ public class OsmandRenderer {
 	}
 	
 	
-	public Bitmap generateNewBitmap(int width, int height, float leftTileX, float topTileY, 
-			List<MapRenderObject> objects, int zoom, float rotate, boolean useEnglishNames) {
+	public Bitmap generateNewBitmap(RenderingContext rc, List<MapRenderObject> objects, boolean useEnglishNames) {
 		long now = System.currentTimeMillis();
 		// put in order map
 		int sz = objects.size();
@@ -274,22 +275,18 @@ public class OsmandRenderer {
 			for (int j = 0; j < multiTypes; j++) {
 				put(orderMap, MapRenderObject.getOrder(o.getAdditionalType(j)), sh + (j + 3), init);
 			}
+			if(rc.interrupted){
+				return null;
+			}
 		}
 		
 		Bitmap bmp = null; 
-		if (objects != null && !objects.isEmpty() && width > 0 && height > 0) {
+		if (objects != null && !objects.isEmpty() && rc.width > 0 && rc.height > 0) {
 			// init rendering context
-			RenderingContext rc = new RenderingContext();
-			rc.leftX = leftTileX;
-			rc.topY = topTileY;
-			rc.zoom = zoom;
-			rc.rotate = rotate;
-			rc.width = width;
-			rc.height = height;
-			rc.tileDivisor = (int) (1 << (31 - zoom));
-			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rotate)) * TILE_SIZE;
-			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rotate)) * TILE_SIZE;
-			bmp = Bitmap.createBitmap(width, height, Config.RGB_565);
+			rc.tileDivisor = (int) (1 << (31 - rc.zoom));
+			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
+			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
+			bmp = Bitmap.createBitmap(rc.width, rc.height, Config.RGB_565);
 			
 			Canvas cv = new Canvas(bmp);
 			cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillEmpty);
@@ -307,6 +304,9 @@ public class OsmandRenderer {
 						drawObj(obj, cv, rc, obj.getAdditionalType(l - 3), false);
 					}
 				}
+				if(rc.interrupted){
+					return null;
+				}
 			}
 			for(IconDrawInfo icon : rc.iconsToDraw){
 				if(icon.resId != 0){
@@ -317,6 +317,9 @@ public class OsmandRenderer {
 					if (ico  != null) {
 						cv.drawBitmap(ico, icon.x - ico.getWidth() / 2, icon.y - ico.getHeight() / 2, paintIcon);
 					}
+				}
+				if(rc.interrupted){
+					return null;
 				}
 			}
 			drawTextOverCanvas(rc, cv, useEnglishNames);

@@ -25,6 +25,7 @@ import net.osmand.osm.MapRenderObject;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.MultyPolygon;
+import net.osmand.render.OsmandRenderer.RenderingContext;
 
 import org.apache.commons.logging.Log;
 
@@ -57,6 +58,8 @@ public class MapRenderRepositories {
 	private float cachedRotate = 0;
 	private Bitmap bmp;
 	
+	private boolean interrupted = false;
+	private RenderingContext currentRenderingContext;
 	
 	
 	public MapRenderRepositories(Context context){
@@ -157,9 +160,9 @@ public class MapRenderRepositories {
 		}
 		
 		if (!found) {
-			bounds = getBoundsForIndex(stat, IndexConstants.indexMapLocationsTable);
+			bounds = getBoundsForIndex(stat, IndexConstants.indexMapLocationsTable2);
 			if(bounds.left == bounds.right || bounds.bottom == bounds.top){
-				bounds = getBoundsForIndex(stat, IndexConstants.indexMapLocationsTable2);
+				bounds = getBoundsForIndex(stat, IndexConstants.indexMapLocationsTable);
 				if(bounds.left == bounds.right || bounds.bottom == bounds.top){
 					bounds = getBoundsForIndex(stat, IndexConstants.indexMapLocationsTable3);
 				}
@@ -247,7 +250,24 @@ public class MapRenderRepositories {
 										  " IN (SELECT id FROM "+IndexConstants.indexMapLocationsTable3 +   //$NON-NLS-1$
 										  " WHERE ? <  maxLat AND ? > minLat AND maxLon > ? AND minLon  < ?)"; //$NON-NLS-1$
 	
+	public void interruptLoadingMap(){
+		interrupted = true;
+		if(currentRenderingContext != null){
+			currentRenderingContext.interrupted = true;
+		}
+	}
+	
+	private boolean checkWhetherInterrupted(){
+		if(interrupted){
+			// clear zoom to enable refreshing next time 
+			cZoom = 1;
+			return true;
+		}
+		return false;
+	}
+	
 	public synchronized void loadMap(RectF tileRect, RectF boundsTileRect, int zoom, float rotate) {
+		interrupted = false;
 		// currently doesn't work properly (every rotate bounds will be outside)
 		boolean inside = insideBox(boundsTileRect.top, boundsTileRect.left, boundsTileRect.bottom, boundsTileRect.right, zoom);
 		cRotate = rotate < 0 ? rotate + 360 : rotate;
@@ -334,6 +354,9 @@ public class MapRenderRepositories {
 							for (int k = 0; k < obj.getMultiTypes(); k++) {
 								registerMultipolygon(multiPolygons, obj.getAdditionalType(k), obj);
 							}
+							if(checkWhetherInterrupted()){
+								return;
+							}
 							cObjects.add(obj);
 						}
 
@@ -346,6 +369,9 @@ public class MapRenderRepositories {
 				int bottomY = MapUtils.get31TileNumberY(cBottomLatitude);
 				int topY = MapUtils.get31TileNumberY(cTopLatitude);
 				List<MultyPolygon> pMulti = proccessMultiPolygons(multiPolygons, leftX, rightX, bottomY, topY);
+				if(checkWhetherInterrupted()){
+					return;
+				}
 				cObjects.addAll(pMulti);
 				log.info(String
 						.format("Search has been done in %s ms. %s results were found.", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
@@ -360,7 +386,18 @@ public class MapRenderRepositories {
 		
 		int width = (int) calcDiffPixelX(cRotate, tileRect.right - tileRect.left, tileRect.bottom - tileRect.top);
 		int height = (int) calcDiffPixelY(cRotate, tileRect.right - tileRect.left, tileRect.bottom - tileRect.top);
-		Bitmap bmp = renderer.generateNewBitmap(width, height, tileRect.left, tileRect.top, cObjects, cZoom, cRotate, OsmandSettings.usingEnglishNames(context));
+		currentRenderingContext = new OsmandRenderer.RenderingContext();
+		currentRenderingContext.leftX = tileRect.left;
+		currentRenderingContext.topY = tileRect.top;
+		currentRenderingContext.zoom = cZoom;
+		currentRenderingContext.rotate = cRotate;
+		currentRenderingContext.width = width;
+		currentRenderingContext.height = height;
+		Bitmap bmp = renderer.generateNewBitmap(currentRenderingContext, cObjects, OsmandSettings.usingEnglishNames(context));
+		if(currentRenderingContext.interrupted){
+			cZoom = 1;
+			return;
+		}
 		Bitmap oldBmp = this.bmp;
 		this.bmp = bmp;
 		cachedWaysLoc = newLoc;

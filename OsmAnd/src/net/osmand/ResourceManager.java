@@ -202,24 +202,51 @@ public class ResourceManager {
 	}
 
 	// introduce cache in order save memory
+	private int insertString(char[] ar, int offset, String s) {
+		for (int j = 0; j < s.length(); j++) {
+			ar[offset++] = s.charAt(j);
+		}
+		return offset;
+	}
 	protected StringBuilder builder = new StringBuilder(40);
+	protected char[] tileId = new char[120];
 	public synchronized String calculateTileId(ITileSource map, int x, int y, int zoom){
-		builder.setLength(0);
-		if(map == null){
-			builder.append(TEMP_SOURCE_TO_LOAD); 
+		if(false){
+			// performance improve ?
+			int ind = 0;
+			String mapName = map == null ? TEMP_SOURCE_TO_LOAD : map.getName();
+			ind = insertString(tileId, ind, mapName);
+			if (map instanceof SQLiteTileSource) {
+				tileId[ind++] = '@';
+			} else {
+				tileId[ind++] = '/';
+			}
+			ind = insertString(tileId, ind, Integer.toString(zoom));
+			tileId[ind++] = '/';
+			ind = insertString(tileId, ind, Integer.toString(x));
+			tileId[ind++] = '/';
+			ind = insertString(tileId, ind, Integer.toString(y));
+			ind = insertString(tileId, ind, map == null ? ".jpg" : map.getTileFormat()); //$NON-NLS-1$
+			ind = insertString(tileId, ind, ".tile"); //$NON-NLS-1$
+			return new String(tileId, 0, ind);
 		} else {
-			builder.append(map.getName());
+
+			builder.setLength(0);
+			if (map == null) {
+				builder.append(TEMP_SOURCE_TO_LOAD);
+			} else {
+				builder.append(map.getName());
+			}
+
+			if (map instanceof SQLiteTileSource) {
+				builder.append('@');
+			} else {
+				builder.append('/');
+			}
+			builder.append(zoom).append('/').append(x).append('/').append(y)
+					.append(map == null ? ".jpg" : map.getTileFormat()).append(".tile"); //$NON-NLS-1$ //$NON-NLS-2$
+			return builder.toString();
 		}
-			
-		if(map instanceof SQLiteTileSource){
-			builder.append('@');
-		} else {
-			builder.append('/');
-		}
-		builder.append(zoom).append('/').append(x).
-				append('/').append(y).append(map == null ?  ".jpg" : map.getTileFormat()).append(".tile"); //$NON-NLS-1$ //$NON-NLS-2$
-		String file = builder.toString();
-		return file;
 	}
 	
 
@@ -536,6 +563,7 @@ public class ResourceManager {
 	}
 	
 	public void updateRendererMap(RectF tileRect, RectF boundsTileRect, int zoom, float rotate){
+		renderer.interruptLoadingMap();
 		asyncLoadingTiles.requestToLoadMap(
 				new MapLoadRequest(tileRect, boundsTileRect, zoom, rotate));
 	}
