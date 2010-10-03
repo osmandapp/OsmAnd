@@ -18,7 +18,7 @@
 	<string name="poi_context_menu_delete">Delete POI</string>
 	<string name="rotate_map_compass_opt">To compass</string>
 	<string name="rotate_map_bearing_opt">To direction of movement</string>
-    <string name="rotate_map_none_opt">Don't rotate</string>
+    <string name="rotate_map_none_opt">Don\'t rotate</string>
 	<string name="rotate_map_to_bearing_descr">Select how to rotate map</string>
     <string name="rotate_map_to_bearing">Rotate map</string>
 	<string name="show_route">Show route</string>

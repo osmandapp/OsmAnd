@@ -500,21 +500,13 @@ public class OsmandRenderer {
 			drawPoint(obj, canvas, rc, type, subtype, renderText);
 		} else if(t == MapRenderingTypes.POLYLINE_TYPE){
 			drawPolyline(obj, canvas, rc, type, subtype, mainType);
+		} else if(t == MapRenderingTypes.POLYGON_TYPE){
+			drawPolygon(obj, canvas, rc, type, subtype);
 		} else {
 			if(t == MapRenderingTypes.MULTY_POLYGON_TYPE &&  !(obj instanceof MultyPolygon)){
 				return;
 			}
-			PointF center = drawPolygon(obj, canvas, rc, type, subtype, t == MapRenderingTypes.MULTY_POLYGON_TYPE);
-			String name = obj.getName();
-			if(name != null && center != null){
-				rc.clearText();
-				name = renderObjectText(name, subtype, type, rc.zoom, true, rc);
-				if (rc.textSize > 0 && name != null) {
-					TextDrawInfo info = new TextDrawInfo(name);
-					info.fillProperties(rc, center.x, center.y);
-					rc.textToDraw.add(info);
-				}
-			}
+			drawMultiPolygon(obj, canvas, rc, type, subtype);
 		}
 		
 	}
@@ -552,7 +544,52 @@ public class OsmandRenderer {
 		return rc.tempPoint;
 	}
 
-	private PointF drawPolygon(MapRenderObject obj, Canvas canvas, RenderingContext rc, int type, int subtype, boolean multipolygon) {
+	private void drawMultiPolygon(MapRenderObject obj, Canvas canvas, RenderingContext rc, int type, int subtype) {
+		Path path = null;
+		rc.main.emptyArea();
+		rc.second.emptyLine();
+		rc.main.color = Color.rgb(245, 245, 245);
+		PolygonRenderer.renderPolygon(rc, rc.zoom, type, subtype, this);
+		if (!rc.main.fillArea) {
+			return;
+		}
+		path = new Path();
+		for (int i = 0; i < ((MultyPolygon) obj).getBoundsCount(); i++) {
+			int cnt = ((MultyPolygon) obj).getBoundPointsCount(i);
+			float xText = 0;
+			float yText = 0;
+			for (int j = 0; j < cnt; j++) {
+				PointF p = calcMultiPolygonPoint((MultyPolygon) obj, j, i, rc);
+				xText += p.x;
+				yText += p.y;
+				if (j == 0) {
+					path.moveTo(p.x, p.y);
+				} else {
+					path.lineTo(p.x, p.y);
+				}
+			}
+			if (cnt > 0) {
+				String name = ((MultyPolygon) obj).getName(i);
+				if (name != null) {
+					rc.clearText();
+					name = renderObjectText(name, subtype, type, rc.zoom, true, rc);
+					if (rc.textSize > 0 && name != null) {
+						TextDrawInfo info = new TextDrawInfo(name);
+						info.fillProperties(rc, xText / cnt, yText / cnt);
+						rc.textToDraw.add(info);
+					}
+				}
+			}
+		}
+		rc.main.updatePaint(paint);
+		canvas.drawPath(path, paint);
+		if (rc.second.strokeWidth != 0) {
+			rc.second.updatePaint(paint);
+			canvas.drawPath(path, paint);
+		}
+	}
+	
+	private void drawPolygon(MapRenderObject obj, Canvas canvas, RenderingContext rc, int type, int subtype) {
 		float xText = 0;
 		float yText = 0;
 		int zoom = rc.zoom;
@@ -563,39 +600,19 @@ public class OsmandRenderer {
 		
 		PolygonRenderer.renderPolygon(rc, zoom, type, subtype, this);
 		if(!rc.main.fillArea){
-			return null;
+			return;
 		}
-		int len = 0;
-		if (!multipolygon) {
-			len = obj.getPointsLength();
-			for (int i = 0; i < obj.getPointsLength(); i++) {
+		int len = obj.getPointsLength();
+		for (int i = 0; i < obj.getPointsLength(); i++) {
 
-				PointF p = calcPoint(obj, i, rc);
-				xText += p.x;
-				yText += p.y;
-				if (path == null) {
-					path = new Path();
-					path.moveTo(p.x, p.y);
-				} else {
-					path.lineTo(p.x, p.y);
-				}
-			}
-		} else	{
-			len = 0;
-			path = new Path();
-			for (int i = 0; i < ((MultyPolygon)obj).getBoundsCount(); i++) {
-				int cnt = ((MultyPolygon)obj).getBoundPointsCount(i);
-				len += cnt;
-				for (int j = 0; j < cnt; j++) {
-					PointF p = calcMultiPolygonPoint((MultyPolygon) obj, j, i, rc);
-					xText += p.x;
-					yText += p.y;
-					if (j == 0) {
-						path.moveTo(p.x, p.y);
-					} else {
-						path.lineTo(p.x, p.y);
-					}
-				}
+			PointF p = calcPoint(obj, i, rc);
+			xText += p.x;
+			yText += p.y;
+			if (path == null) {
+				path = new Path();
+				path.moveTo(p.x, p.y);
+			} else {
+				path.lineTo(p.x, p.y);
 			}
 		}
 
@@ -609,9 +626,18 @@ public class OsmandRenderer {
 				rc.second.updatePaint(paint);
 				canvas.drawPath(path, paint);
 			}
-			return new PointF(xText, yText);
+			String name = obj.getName();
+			if(name != null){
+				rc.clearText();
+				name = renderObjectText(name, subtype, type, rc.zoom, true, rc);
+				if (rc.textSize > 0 && name != null) {
+					TextDrawInfo info = new TextDrawInfo(name);
+					info.fillProperties(rc, xText, yText);
+					rc.textToDraw.add(info);
+				}
+			}
 		}
-		return null;
+		return;
 	}
 
 	
@@ -928,7 +954,7 @@ public class OsmandRenderer {
 					textColor = 0xff6699cc;
 				}
 			} else if (subType == 2 || subType == 4) {
-				if (zoom > 13 /* && !tunnel */) {
+				if (zoom >= 12 /* && !tunnel */) {
 					textSize = 9;
 					showTextOnPath = true;
 					shadowRadius = 1;
@@ -1054,7 +1080,7 @@ public class OsmandRenderer {
 			break;
 		case MapRenderingTypes.NATURAL: {
 			if (subType == 23) {
-				if (zoom >= 15) {
+				if (zoom >= 12) {
 					shadowRadius = 2;
 					textColor = 0xff00000;
 					textSize = 10;
@@ -1076,7 +1102,7 @@ public class OsmandRenderer {
 					wrapWidth = 20;
 				}
 			} else if (subType == 21) {
-				if (zoom >= 15) {
+				if (zoom >= 12) {
 					textSize = 10;
 					shadowRadius = 1;
 					wrapWidth = 20;
