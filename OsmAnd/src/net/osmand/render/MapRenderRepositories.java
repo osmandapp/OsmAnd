@@ -1,5 +1,8 @@
 package net.osmand.render;
 
+import gnu.trove.set.TLongSet;
+import gnu.trove.set.hash.TLongHashSet;
+
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,6 +13,7 @@ import java.sql.Statement;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -298,7 +302,8 @@ public class MapRenderRepositories {
 				int count = 0;
 				cObjects = new ArrayList<MapRenderObject>();
 				System.gc(); // to clear previous objects
-				Set<Long> ids = new LinkedHashSet<Long>();
+//				Set<Long> ids = new HashSet<Long>(1000);
+				TLongSet ids = new TLongHashSet();
 				Map<Integer, List<MapRenderObject>> multiPolygons = new LinkedHashMap<Integer, List<MapRenderObject>>();
 				for (Connection c : connections.keySet()) {
 					RectF r = connections.get(c);
@@ -610,6 +615,7 @@ public class MapRenderRepositories {
 				for (int k = 0; k < incompletedRings.size();) {
 					boolean remove = false;
 					List<Long> i = incompletedRings.get(k);
+					String oldName = incompletedRingsNames.get(k);
 					if (coordinates.get(0).longValue() == i.get(i.size() - 1).longValue()) {
 						i.addAll(coordinates.subList(1, coordinates.size()));
 						remove = true;
@@ -626,7 +632,6 @@ public class MapRenderRepositories {
 					}
 					if (coordinates.get(0).longValue() == coordinates.get(coordinates.size() - 1).longValue()) {
 						completedRings.add(coordinates);
-						String oldName = incompletedRingsNames.get(k);
 						if(oldName != null){
 							completedRingsNames.add(oldName);
 						} else {

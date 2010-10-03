@@ -1382,10 +1382,10 @@ public class IndexCreator {
 		if (level == 1) {
 			id |= 2;
 			mapLocations = mapLocsStatLevel1;
-			zoom = 14;
+			zoom = 12;
 		} else if (level == 2) {
 			id |= 4;
-			zoom = 9;
+			zoom = 6;
 			mapLocations = mapLocsStatLevel2;
 		} else {
 			zoom = 18;
@@ -1804,11 +1804,11 @@ public class IndexCreator {
 		 IndexCreator creator = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
 		 creator.setIndexMap(true);
 		 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus_2010_09_03.osm.bz2"), new ConsoleProgressImplementation(3), null);
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus_2010_09_03.osm.bz2"), new ConsoleProgressImplementation(3), null);
 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);

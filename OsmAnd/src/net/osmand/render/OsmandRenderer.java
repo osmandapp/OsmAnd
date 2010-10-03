@@ -1,6 +1,10 @@
 package net.osmand.render;
 
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TFloatObjectHashMap;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -117,6 +121,8 @@ public class OsmandRenderer {
 		// debug purpose
 		int pointCount = 0;
 		int pointInsideCount = 0;
+		int visible = 0;
+		int allObjects = 0;
 		
 		// use to calculate points
 		PointF tempPoint = new PointF();
@@ -248,9 +254,9 @@ public class OsmandRenderer {
 		return shaders.get(resId);
 	}
 	
-	private <K,T>void put(Map<K, List<T>> map, K k, T v, int init){
+	private void put(TFloatObjectHashMap<TIntArrayList> map, Float k, int v, int init){
 		if(!map.containsKey(k)){
-			map.put(k, new ArrayList<T>(init));
+			map.put(k, new TIntArrayList());
 		}
 		map.get(k).add(v);
 	}
@@ -261,7 +267,8 @@ public class OsmandRenderer {
 		// put in order map
 		int sz = objects.size();
 		int init = sz / 4;
-		TreeMap<Float, List<Integer>> orderMap = new TreeMap<Float, List<Integer>>();
+		TFloatObjectHashMap<TIntArrayList> orderMap = new TFloatObjectHashMap<TIntArrayList>();
+//		TreeMap<Float, TIntArrayList> orderMap = new TreeMap<Float, TIntArrayList>();
 		for (int i = 0; i < sz; i++) {
 			MapRenderObject o = objects.get(i);
 			int mt = o.getMainType();
@@ -290,8 +297,12 @@ public class OsmandRenderer {
 			
 			Canvas cv = new Canvas(bmp);
 			cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillEmpty);
-			for (List<Integer> list : orderMap.values()) {
-				for (Integer i : list) {
+			float[] keys = orderMap.keys();
+			Arrays.sort(keys);
+			for (int k = 0; k < keys.length; k++) {
+				TIntArrayList list = orderMap.get(keys[k]);
+				for(int j=0; j<list.size(); j++) {
+					int i = list.get(j);
 					int ind = i >> 8;
 					int l = i & 0xff;
 					MapRenderObject obj = objects.get(ind);
@@ -323,8 +334,8 @@ public class OsmandRenderer {
 				}
 			}
 			drawTextOverCanvas(rc, cv, useEnglishNames);
-			log.info(String.format("Rendering has been done in %s ms. (%s points, %s points inside)", System.currentTimeMillis() - now, //$NON-NLS-1$ 
-					rc.pointCount,rc.pointInsideCount)); 
+			log.info(String.format("Rendering has been done in %s ms. (%s points, %s points inside, %s visile from %s)",//$NON-NLS-1$
+					System.currentTimeMillis() - now, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects)); 
 		}
 		
 		return bmp;
@@ -496,6 +507,7 @@ public class OsmandRenderer {
 		int t = mainType & 3;					
 		int type = MapRenderingTypes.getMainObjectType(mainType);
 		int subtype = MapRenderingTypes.getObjectSubType(mainType);
+		rc.allObjects ++;
 		if(t == MapRenderingTypes.POINT_TYPE){
 			drawPoint(obj, canvas, rc, type, subtype, renderText);
 		} else if(t == MapRenderingTypes.POLYLINE_TYPE){
@@ -553,6 +565,7 @@ public class OsmandRenderer {
 		if (!rc.main.fillArea) {
 			return;
 		}
+		rc.visible++;
 		path = new Path();
 		for (int i = 0; i < ((MultyPolygon) obj).getBoundsCount(); i++) {
 			int cnt = ((MultyPolygon) obj).getBoundPointsCount(i);
@@ -602,6 +615,7 @@ public class OsmandRenderer {
 		if(!rc.main.fillArea){
 			return;
 		}
+		rc.visible++;
 		int len = obj.getPointsLength();
 		for (int i = 0; i < obj.getPointsLength(); i++) {
 
@@ -654,7 +668,20 @@ public class OsmandRenderer {
 	}
 	
 	private void drawPoint(MapRenderObject obj, Canvas canvas, RenderingContext rc, int type, int subtype, boolean renderText) {
+		int resId = PointRenderer.getPointBitmap(rc.zoom, type, subtype);
+		String name = null;
+		if (renderText) {
+			name = obj.getName();
+			if (name != null) {
+				rc.clearText();
+				name = renderObjectText(name, subtype, type, rc.zoom, true, rc);
+			}
+		}
+		if(resId == 0 && name == null){
+			return;
+		}
 		int len = obj.getPointsLength();
+		rc.visible++;
 		PointF ps = new PointF(0, 0);
 		for (int i = 0; i < len; i++) {
 			PointF p = calcPoint(obj, i, rc);
@@ -665,8 +692,7 @@ public class OsmandRenderer {
 			ps.x /= len;
 			ps.y /= len;
 		}
-		int zoom = rc.zoom;
-		int resId = PointRenderer.getPointBitmap(zoom, type, subtype);
+		
 		if(resId != 0){
 			IconDrawInfo ico = new IconDrawInfo();
 			ico.x = ps.x;
@@ -674,17 +700,10 @@ public class OsmandRenderer {
 			ico.resId = resId;
 			rc.iconsToDraw.add(ico);
 		}
-		if (renderText) {
-			String n = obj.getName();
-			if (n != null) {
-				rc.clearText();
-				n = renderObjectText(n, subtype, type, zoom, true, rc);
-				if (rc.textSize > 0 && n != null) {
-					TextDrawInfo info = new TextDrawInfo(n);
-					info.fillProperties(rc, ps.x, ps.y);
-					rc.textToDraw.add(info);
-				}
-			}
+		if (name != null && rc.textSize > 0) {
+			TextDrawInfo info = new TextDrawInfo(name);
+			info.fillProperties(rc, ps.x, ps.y);
+			rc.textToDraw.add(info);
 		}
 			
 	}
@@ -707,6 +726,8 @@ public class OsmandRenderer {
 		if(length < 2){
 			return;
 		}
+		rc.visible++;
+		
 		Path path = null;
 		float pathRotate = 0;
 		float xLength = 0;
