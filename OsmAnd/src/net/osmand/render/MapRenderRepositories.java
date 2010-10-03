@@ -452,6 +452,8 @@ public class MapRenderRepositories {
 		List<MultyPolygon> listPolygons = new ArrayList<MultyPolygon>(multyPolygons.size());
 		List<List<Long>> completedRings = new ArrayList<List<Long>>();
 		List<List<Long>> incompletedRings = new ArrayList<List<Long>>();
+		List<String> completedRingNames = new ArrayList<String>();
+		List<String> incompletedRingNames = new ArrayList<String>();
 		for (Integer type : multyPolygons.keySet()) {
 			List<MapRenderObject> directList;
 			List<MapRenderObject> inverselist;
@@ -474,9 +476,11 @@ public class MapRenderRepositories {
 			}
 			completedRings.clear();
 			incompletedRings.clear();
+			completedRingNames.clear();
+			incompletedRingNames.clear();
 			
-			MultyPolygon pl = processMultiPolygon(leftX, rightX, bottomY, topY, listPolygons, completedRings, incompletedRings, type,
-					directList, inverselist);
+			MultyPolygon pl = processMultiPolygon(leftX, rightX, bottomY, topY, listPolygons, completedRings, incompletedRings, 
+					completedRingNames, incompletedRingNames, type,	directList, inverselist);
 			if(pl != null){
 				listPolygons.add(pl);
 			}
@@ -485,8 +489,8 @@ public class MapRenderRepositories {
 	}
 
 	private MultyPolygon processMultiPolygon(int leftX, int rightX, int bottomY, int topY, List<MultyPolygon> listPolygons,
-			List<List<Long>> completedRings, List<List<Long>> incompletedRings, Integer type, List<MapRenderObject> directList,
-			List<MapRenderObject> inverselist) {
+			List<List<Long>> completedRings, List<List<Long>> incompletedRings, List<String> completedRingNames, List<String> incompletedRingNames, 
+			Integer type, List<MapRenderObject> directList, List<MapRenderObject> inverselist) {
 		MultyPolygon pl = new MultyPolygon();
 		// delete direction last bit (to not show point)
 		pl.setType((type & 0x7fff) << 1);
@@ -498,9 +502,6 @@ public class MapRenderRepositories {
 					continue;
 				}
 				List<Long> coordinates = new ArrayList<Long>();
-				if (o.getName() != null) {
-					pl.setName(o.getName());
-				}
 				int px = o.getPoint31XTile(km == 0 ? 0 : len - 1);
 				int py = o.getPoint31YTile(km == 0 ? 0 : len - 1);
 				int x = px;
@@ -515,7 +516,8 @@ public class MapRenderRepositories {
 					boolean inside = leftX <= x && x <= rightX && y >= topY && y <= bottomY;
 					calculateLineCoordinates(inside, x, y, pinside, px, py, leftX, rightX, bottomY, topY, coordinates);
 					if(pinside && !inside){
-						processMultipolygonLine(completedRings, incompletedRings, coordinates);
+						processMultipolygonLine(completedRings, incompletedRings, completedRingNames, incompletedRingNames, 
+								coordinates, o.getName());
 						// create new line if it goes outside
 						coordinates = new ArrayList<Long>();
 					}
@@ -523,14 +525,15 @@ public class MapRenderRepositories {
 					py = y;
 					pinside = inside;
 				}
-				processMultipolygonLine(completedRings, incompletedRings, coordinates);
+				processMultipolygonLine(completedRings, incompletedRings, completedRingNames, incompletedRingNames, 
+						coordinates, o.getName());
 			}
 		}
 		if(completedRings.size() == 0 && incompletedRings.size() == 0){
 			return null;
 		}
 		if (incompletedRings.size() > 0) {
-			unifyIncompletedRings(incompletedRings, completedRings, leftX, rightX, bottomY, topY);
+			unifyIncompletedRings(incompletedRings, completedRings, completedRingNames, incompletedRingNames, leftX, rightX, bottomY, topY);
 		} else {
 			// check for isolated island (android do not fill area outside path)
 			boolean clockwiseFound = false;
@@ -559,6 +562,7 @@ public class MapRenderRepositories {
 				lns[i][j] = ring.get(j);
 			}
 		}
+		pl.setNames(completedRingNames.toArray(new String[completedRings.size()]));
 		pl.setLines(lns);
 		return pl;
 	}
@@ -595,10 +599,12 @@ public class MapRenderRepositories {
 	}
 
 
-	private void processMultipolygonLine(List<List<Long>> completedRings, List<List<Long>> incompletedRings, List<Long> coordinates) {
+	private void processMultipolygonLine(List<List<Long>> completedRings, List<List<Long>> incompletedRings, 
+			List<String> completedRingsNames, List<String> incompletedRingsNames, List<Long> coordinates, String name) {
 		if (coordinates.size() > 0) {
 			if (coordinates.get(0).longValue() == coordinates.get(coordinates.size() - 1).longValue()) {
 				completedRings.add(coordinates);
+				completedRingsNames.add(name);
 			} else {
 				boolean add = true;
 				for (int k = 0; k < incompletedRings.size();) {
@@ -614,24 +620,33 @@ public class MapRenderRepositories {
 					}
 					if (remove) {
 						incompletedRings.remove(k);
+						incompletedRingsNames.remove(k);
 					} else {
 						k++;
 					}
 					if (coordinates.get(0).longValue() == coordinates.get(coordinates.size() - 1).longValue()) {
 						completedRings.add(coordinates);
+						String oldName = incompletedRingsNames.get(k);
+						if(oldName != null){
+							completedRingsNames.add(oldName);
+						} else {
+							completedRingsNames.add(name);
+						}
 						add = false;
 						break;
 					}
 				}
 				if (add) {
 					incompletedRings.add(coordinates);
+					incompletedRingsNames.add(name);
 				}
 			}
 		}
 	}
 
-	private void unifyIncompletedRings(List<List<Long>> incompletedRings, List<List<Long>> completedRings, int leftX, int rightX,
-			int bottomY, int topY) {
+	private void unifyIncompletedRings(List<List<Long>> incompletedRings, List<List<Long>> completedRings, 
+			List<String> completedRingNames, List<String> incompletedRingNames, 
+			int leftX, int rightX,	int bottomY, int topY) {
 		int mask = 0xffffffff;
 		Set<Integer> nonvisitedRings = new LinkedHashSet<Integer>();
 		for(int j = 0; j< incompletedRings.size(); j++){
@@ -663,6 +678,7 @@ public class MapRenderRepositories {
 		}
 		for(int j = 0; j< incompletedRings.size(); j++){
 			List<Long> i = incompletedRings.get(j);
+			String name = incompletedRingNames.get(j);
 			if(!nonvisitedRings.contains(j)){
 				continue;
 			}
@@ -767,6 +783,7 @@ public class MapRenderRepositories {
 			
 			
 			completedRings.add(i);
+			completedRingNames.add(name);
 		}
 		
 		

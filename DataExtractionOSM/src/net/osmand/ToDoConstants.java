@@ -15,21 +15,13 @@ public class ToDoConstants {
 	//  ! 81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
 	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?),
 	//  railway( station, subway?) - issue 17
-	//  !_22. Verify all POI has a point_type (in order to search them) and fix POI issues (!)
-	//  !_30. Add poi issues
+	//  !_22. Verify all POI has a point_type (in order to search them)
 
 	//  !_29. Fix memory for netherlands map creator
 	//  ! 89. Transport redesign UI (enable run from context menu, switch go to goal/not) !
 	
-	// + _33. English translate (strings.xml)
-	// +!_32. Implement download map
-	// +!_25. Add all attributes needed for routing (highway attributes, turn_restrictions)
-	// +!_31. Implement stop rendering !!
-	
-	
-	///!!!PROFILE AND REVIEW Rendering and map creator!!!
-	// + - Fix broken multipolygon
-	// + - Review Ref on the road on low zooms
+	/// !!PROFILE AND REVIEW Rendering and map creator!!!
+
 
 
 	// 	Outside base 0.4 release

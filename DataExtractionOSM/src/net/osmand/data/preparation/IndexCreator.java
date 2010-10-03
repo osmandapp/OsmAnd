@@ -140,7 +140,10 @@ public class IndexCreator {
 //	private RTree mapTree;
 	
 	// MEMORY map :  save it in memory while that is allowed
-	private Map<Long, Set<Integer>> multiPolygonsWays = new LinkedHashMap<Long, Set<Integer>>(); 
+	private Map<Long, Set<Integer>> multiPolygonsWays0 = new LinkedHashMap<Long, Set<Integer>>();
+	private Map<Long, Set<Integer>> multiPolygonsWays1 = new LinkedHashMap<Long, Set<Integer>>();
+	private Map<Long, Set<Integer>> multiPolygonsWays2 = new LinkedHashMap<Long, Set<Integer>>();
+	private Map<Long, String> multiPolygonsNames = new LinkedHashMap<Long, String>();
 	private Map<Long, List<Long>> highwayRestrictions = new LinkedHashMap<Long, List<Long>>();
 	private Map<Long, List<Way>> lowLevelWaysSt = new LinkedHashMap<Long, List<Way>>();
 	private Map<Long, List<Way>> lowLevelWaysEnd = new LinkedHashMap<Long, List<Way>>();
@@ -956,8 +959,10 @@ public class IndexCreator {
 				loadEntityData(e, true);
 				boolean inverse = "-1".equals(e.getTag(OSMTagKey.ONEWAY));
 				writeEntityToMapDatabase(e, e.getId(), inverse, 0);
-				indexLowLevelMap(e, 1);
-				indexLowLevelMap(e, 2);
+				writeEntityToMapDatabase(e, e.getId(), false, 1);
+				writeEntityToMapDatabase(e, e.getId(), false, 2);
+//				indexLowLevelMap(e, 1);
+//				indexLowLevelMap(e, 2);
 			}
 
 			if (indexAddress) {
@@ -1063,7 +1068,7 @@ public class IndexCreator {
 			if (indexMap && e instanceof Relation && "multipolygon".equals(e.getTag(OSMTagKey.TYPE))) {
 				loadEntityData(e, true);
 				Map<Entity, String> entities = ((Relation) e).getMemberEntities();
-				int mtType = 0;
+				
 				for (Entity es : entities.keySet()) {
 					if (es instanceof Way) {
 						boolean inner = "inner".equals(entities.get(es));
@@ -1075,23 +1080,12 @@ public class IndexCreator {
 						}
 					}
 				}
-				int t = MapRenderingTypes.encodeEntityWithType(e, 0, true, typeUse); 
-				if (t != 0) {
-					if (((t >> 1) & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
-						// last bit is used for direction
-						mtType = (t >> 1) & 0x7fff;
-					} else if (((t >> 16) & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE && (t >> 16) != 0) {
-						mtType = t >> 16;
-					} else {
-						for (Integer i : typeUse) {
-							if ((i & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
-								mtType = i;
-								break;
-							}
-						}
-					}
-				}
+				
+				int mtType = findMultiPolygonType(e, 0);
 				if (mtType != 0) {
+					int mtType1 = findMultiPolygonType(e, 1);
+					int mtType2 = findMultiPolygonType(e, 2);
+					String name = MapRenderingTypes.getEntityName(e, mtType);
 					for (Entity es : entities.keySet()) {
 						if (es instanceof Way) {
 							boolean inner = "inner".equals(entities.get(es));
@@ -1099,14 +1093,13 @@ public class IndexCreator {
 							boolean clockwise = isClockwiseWay((Way) es);
 							// clockwise - outer (like coastline), anticlockwise - inner
 							boolean inverse = clockwise != !inner;
-							if(!multiPolygonsWays.containsKey(es.getId())){
-								multiPolygonsWays.put(es.getId(), new LinkedHashSet<Integer>());
+							
+							if(!inner && name != null){
+								multiPolygonsNames.put(es.getId(), name);
 							}
-							if(inverse){
-								multiPolygonsWays.get(es.getId()).add(mtType | (1 << 15));
-							} else {
-								multiPolygonsWays.get(es.getId()).add(mtType );
-							}
+							putMultipolygonType(multiPolygonsWays0, es.getId(), mtType, inverse);
+							putMultipolygonType(multiPolygonsWays1, es.getId(), mtType1, inverse);
+							putMultipolygonType(multiPolygonsWays2, es.getId(), mtType2, inverse);
 						}
 					}
 
@@ -1115,6 +1108,41 @@ public class IndexCreator {
 		} else if (step == STEP_CITY_NODES) {
 			registerCityIfNeeded(e);
 		}
+	}
+	
+	private void putMultipolygonType(Map<Long, Set<Integer>> multiPolygonsWays, long baseId, int mtType, boolean inverse){
+		if(mtType == 0){
+			return;
+		}
+		if(!multiPolygonsWays.containsKey(baseId)){
+			multiPolygonsWays.put(baseId, new LinkedHashSet<Integer>());
+		}
+		if(inverse){
+			multiPolygonsWays.get(baseId).add(mtType | (1 << 15));
+		} else {
+			multiPolygonsWays.get(baseId).add(mtType );
+		}
+	}
+	
+	private int findMultiPolygonType(Entity e, int level){
+		int t = MapRenderingTypes.encodeEntityWithType(e, level, true, typeUse);
+		int mtType = 0;
+		if (t != 0) {
+			if (((t >> 1) & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
+				// last bit is used for direction
+				mtType = (t >> 1) & 0x7fff;
+			} else if (((t >> 16) & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE && (t >> 16) != 0) {
+				mtType = t >> 16;
+			} else {
+				for (Integer i : typeUse) {
+					if ((i & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
+						mtType = i;
+						break;
+					}
+				}
+			}
+		}
+		return mtType;
 	}
 	
 
@@ -1176,8 +1204,15 @@ public class IndexCreator {
 		}
 	}
 	
+	// TODO do not use that method
+	@SuppressWarnings("unused")
 	private void indexLowLevelMap(Entity e, int level) throws SQLException{
 		int type = MapRenderingTypes.encodeEntityWithType(e, level, false, typeUse);
+		// TODO that is not correct because multiPolygonsWays contains types for level 0
+		// TODO that method should be redesigned (!!!) to support multipolygon types and multipolygon names 
+//		if(type == 0 && multiPolygonsWays.containsKey(e.getId())){
+//			type = multiPolygonsWays.get(e.getId()).iterator().next();
+//		}
 		if(type == 0){
 			return;
 		}
@@ -1275,6 +1310,16 @@ public class IndexCreator {
 
 	private void writeEntityToMapDatabase(Entity e, long baseId, boolean inverse, int level) throws SQLException {
 		int type = MapRenderingTypes.encodeEntityWithType(e, level, false, typeUse);
+		Map<Long, Set<Integer>> multiPolygonsWays;
+		if(level == 0){
+			multiPolygonsWays = multiPolygonsWays0;
+		} else if(level == 1){
+			multiPolygonsWays = multiPolygonsWays1;
+		} else if(level == 2){
+			multiPolygonsWays = multiPolygonsWays2;
+		} else {
+			multiPolygonsWays = Collections.emptyMap();
+		}
 		boolean hasMulti = e instanceof Way && multiPolygonsWays.containsKey(e.getId());
 		if(type == 0){
 			if(hasMulti){
@@ -1377,8 +1422,12 @@ public class IndexCreator {
 
 		
 		if (!skip) {
+			String eName = MapRenderingTypes.getEntityName(e, type);
+			if(eName == null ){
+				eName = multiPolygonsNames.get(baseId);
+			}
 			DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapObjStat, mapLocations, /*mapTree, */e,  
-					MapRenderingTypes.getEntityName(e, type), id, type, typeUse, restrictionsUse, useRestrictions,
+					eName, id, type, typeUse, restrictionsUse, useRestrictions,
 					inverse, point, BATCH_SIZE);
 		}
 	}
