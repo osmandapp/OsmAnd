@@ -1,5 +1,7 @@
 package net.osmand.data.preparation;
 
+import java.awt.geom.Line2D;
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -367,7 +369,7 @@ public class IndexCreator {
 			return;
 		}
 		Map<EntityId, Entity> map = new LinkedHashMap<EntityId, Entity>();
-		if(e instanceof Relation){
+		if(e instanceof Relation && ((Relation) e).getMemberIds().isEmpty()){
 			pselectRelation.setLong(1, e.getId());
 			if (pselectRelation.execute()) {
 				ResultSet rs = pselectRelation.getResultSet();
@@ -376,7 +378,7 @@ public class IndexCreator {
 				}
 				rs.close();
 			}
-		} else if(e instanceof Way) {
+		} else if(e instanceof Way && ((Way) e).getEntityIds().isEmpty()) {
 			pselectWay.setLong(1, e.getId());
 			if (pselectWay.execute()) {
 				ResultSet rs = pselectWay.getResultSet();
@@ -424,7 +426,7 @@ public class IndexCreator {
 				}
 			}
 		}
-		if(loadTags){
+		if(loadTags && e.getTagKeySet().isEmpty()){
 			for(Map.Entry<EntityId, Entity> es : map.entrySet()){
 				loadEntityTags(es.getKey().getType(), es.getValue());
 			}
@@ -1086,14 +1088,30 @@ public class IndexCreator {
 					int mtType1 = findMultiPolygonType(e, 1);
 					int mtType2 = findMultiPolygonType(e, 2);
 					String name = MapRenderingTypes.getEntityName(e, mtType);
+					List<List<Way>> completedRings = new ArrayList<List<Way>>();
+					List<List<Way>> incompletedRings = new ArrayList<List<Way>>();
 					for (Entity es : entities.keySet()) {
 						if (es instanceof Way) {
+							if(!((Way) es).getNodeIds().isEmpty()){
+								combineMultiPolygons((Way) es, completedRings, incompletedRings);
+							}
+						}
+					}
+					// skip incompleted rings and do not add whole relation ?
+					if(!incompletedRings.isEmpty()){
+						return;
+//						completedRings.addAll(incompletedRings);
+					}
+					for(List<Way> l : completedRings){
+						boolean innerType = "inner".equals(entities.get(l.get(0)));
+						boolean clockwise = isClockwiseWay(l);
+						// clockwise - outer (like coastline), anticlockwise - inner
+						boolean inverse = clockwise != !innerType;
+						for(Way es : l){
 							boolean inner = "inner".equals(entities.get(es));
-							// TODO determine clockwise using conjuctions of way (one way could be opened)
-							boolean clockwise = isClockwiseWay((Way) es);
-							// clockwise - outer (like coastline), anticlockwise - inner
-							boolean inverse = clockwise != !inner;
-							
+							if(innerType != inner){
+								throw new IllegalStateException();
+							}
 							if(!inner && name != null){
 								multiPolygonsNames.put(es.getId(), name);
 							}
@@ -1109,6 +1127,51 @@ public class IndexCreator {
 			registerCityIfNeeded(e);
 		}
 	}
+	
+	
+	public void combineMultiPolygons(Way w, List<List<Way>> completedRings, List<List<Way>> incompletedRings){
+		long lId = w.getEntityIds().get(w.getEntityIds().size() - 1).getId().longValue();
+		long fId = w.getEntityIds().get(0).getId().longValue();
+		if (fId == lId) {
+			completedRings.add(Collections.singletonList(w));
+		} else {
+			List<Way> l = new ArrayList<Way>();
+			l.add(w);
+			boolean add = true;
+			for (int k = 0; k < incompletedRings.size();) {
+				boolean remove = false;
+				List<Way> i = incompletedRings.get(k);
+				Way last = i.get(i.size() - 1);
+				Way first = i.get(0);
+				long lastId = last.getEntityIds().get(last.getEntityIds().size() - 1).getId().longValue();
+				long firstId = first.getEntityIds().get(0).getId().longValue();
+				if (fId == lastId) {
+					i.addAll(l);
+					remove = true;
+					l = i;
+					fId = firstId;
+				} else if (lId == firstId) {
+					l.addAll(i);
+					remove = true;
+					lId = lastId;
+				}
+				if (remove) {
+					incompletedRings.remove(k);
+				} else {
+					k++;
+				}
+				if (fId == lId) {
+					completedRings.add(l);
+					add = false;
+					break;
+				}
+			}
+			if (add) {
+				incompletedRings.add(l);
+			}
+		}
+	}
+	
 	
 	private void putMultipolygonType(Map<Long, Set<Integer>> multiPolygonsWays, long baseId, int mtType, boolean inverse){
 		if(mtType == 0){
@@ -1145,29 +1208,100 @@ public class IndexCreator {
 		return mtType;
 	}
 	
+	public Point2D.Float getIntersectionPoint(Line2D.Float line1, Line2D.Float line2) {
+		if (!line1.intersectsLine(line2))
+			return null;
+		double px = line1.getX1(), py = line1.getY1(), rx = line1.getX2() - px, ry = line1.getY2() - py;
+		double qx = line2.getX1(), qy = line2.getY1(), sx = line2.getX2() - qx, sy = line2.getY2() - qy;
 
-	private boolean isClockwiseWay(Way w){
-		List<Node> nodes = w.getNodes();
+		double det = sx * ry - sy * rx;
+		if (det == 0) {
+			return null;
+		} else {
+			double z = (sx * (qy - py) + sy * (px - qx)) / det;
+			if (z <= 0 || z >= 1)
+				return null; // intersection at end point!
+			return new Point2D.Float((float) (px + z * rx), (float) (py + z * ry));
+		}
+	} // end intersection line-line
+	
+
+	private boolean isClockwiseWay(List<Way> ways){
+		if(ways.isEmpty()){
+			return false;
+		}
+		List<Node> nodes;
+		if(ways.size() == 1){
+			nodes = ways.get(0).getNodes();
+		} else {
+			nodes = new ArrayList<Node>();
+			boolean first = true;
+			for(Way e : ways){
+				if(first) {
+					first = false;
+					nodes.addAll(e.getNodes());
+				} else {
+					nodes.addAll(e.getNodes().subList(1, e.getNodes().size()));
+				}
+			}
+		}
+		if(nodes.isEmpty()){
+			return false;
+		}
 		double angle = 0;
 		double prevAng = 0;
-		for (int i = 1; i < nodes.size(); i++) {
-			double ang = Math.atan2(nodes.get(i).getLatitude() - nodes.get(i - 1).getLatitude(), nodes.get(i).getLongitude()
-					- nodes.get(i - 1).getLongitude());
-			if (i > 1) {
-				double delta = (ang - prevAng);
-				if (delta < -Math.PI) {
-					delta += 2 * Math.PI;
-				} else if (delta > Math.PI) {
-					delta -= 2 * Math.PI;
+		double firstAng = 0;
+		double selfIntersection = 0;
+		boolean open = nodes.get(nodes.size() - 1).getId() != nodes.get(0).getId();
+		
+		for (int i = 1; open ? i < nodes.size() : i <= nodes.size(); i++) {//nodes.get(i).getId()
+			double ang;
+			if(i < nodes.size()){
+				ang = Math.atan2(nodes.get(i).getLatitude() - nodes.get(i - 1).getLatitude(), 
+						nodes.get(i).getLongitude() - nodes.get(i - 1).getLongitude());
+				// find self intersection
+				Line2D.Float l = new Line2D.Float((float) nodes.get(i).getLongitude(), (float) nodes.get(i).getLatitude(), 
+						(float) nodes.get(i - 1).getLongitude(), (float) nodes.get(i -1).getLatitude());
+				for(int j = i - 2; j > i - 7; j--){
+					if(j < 1){
+						break;
+					}
+					Line2D.Float l2 = new Line2D.Float((float) nodes.get(j).getLongitude(), (float) nodes.get(j).getLatitude(), 
+							(float) nodes.get(j - 1).getLongitude(), (float) nodes.get(j -1).getLatitude());
+					java.awt.geom.Point2D.Float point = getIntersectionPoint(l, l2);
+					if(point != null){
+						double dang = Math.atan2(nodes.get(j).getLatitude() - nodes.get(j - 1).getLatitude(), 
+								nodes.get(j).getLongitude() - nodes.get(j - 1).getLongitude());
+						if (adjustDirection(ang - dang) < 0) {
+							selfIntersection += 2 * Math.PI;
+						} else {
+							selfIntersection -= 2 * Math.PI;
+						}
+					}
+					
 				}
-				angle += delta;
+			} else {
+				ang = firstAng;
+			}
+			if (i > 1) {
+				angle += adjustDirection(ang - prevAng);
 				prevAng = ang;
 			} else {
 				prevAng = ang;
+				firstAng = ang;
 			}
 
 		}
-		return angle < 0;
+		return (angle - selfIntersection) < 0;
+	}
+	
+	private double adjustDirection(double ang){
+		if (ang < -Math.PI) {
+			ang += 2 * Math.PI;
+		} else if (ang > Math.PI) {
+			ang -= 2 * Math.PI;
+		}
+		return ang;
 	}
 
 
@@ -1385,7 +1519,7 @@ public class IndexCreator {
 			zoom = 12;
 		} else if (level == 2) {
 			id |= 4;
-			zoom = 6;
+			zoom = 7;
 			mapLocations = mapLocsStatLevel2;
 		} else {
 			zoom = 18;
@@ -1403,19 +1537,26 @@ public class IndexCreator {
 				}
 				int prevX = 0;
 				int prevY = 0;
+				int len = 0;
 				for (int i = 0; i < nodes.size(); i++) {
-					// do not simplify last node it could be important node for multipolygon
+					// d	o not simplify last node it could be important node for multipolygon
 					int r = i < nodes.size() - 1 ? 4 : 0;
 					int x = (int) (MapUtils.getTileNumberX(zoom, nodes.get(i).getLongitude()) * 256d);
 					int y = (int) (MapUtils.getTileNumberY(zoom, nodes.get(i).getLatitude()) * 256d);
-					if (Math.abs(x - prevX) > r || Math.abs(y - prevY) > r) {
+					int dy = Math.abs(y - prevY);
+					int dx = Math.abs(x - prevX);
+					if (dx > r || dy > r) {
 						way.addNode(nodes.get(i));
+						len += (dx + dy);
 						prevX = x;
 						prevY = y;
 					}
 				}
 				e = way;
 				skip = way.getNodes().size() < 2;
+				if(!hasMulti && len < 8){
+					skip = true;
+				}
 			}
 			
 		}
@@ -1819,6 +1960,7 @@ public class IndexCreator {
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/netherlands.osm.bz2"), new ConsoleProgressImplementation(1), null);
 		 
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/forest_complex.osm"), new ConsoleProgressImplementation(25), null);
 		/*try {
 //			RTree rtree = new RTree("e:/Information/OSM maps/osmand/Belarus_2010_09_03.map.odb_ind");
 //			new Pack().packTree(rtree, "e:/Information/OSM maps/osmand/pack.ind");
