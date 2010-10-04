@@ -6,6 +6,7 @@ public class MultyPolygon extends MapRenderObject {
 	// just not fill intersecting areas
 	// first 32 bits - x, second 32 bits - y  
 	private long[][] lines = null;
+	private String[] names = null;
 	public MultyPolygon(){
 		super(-1);
 	}
@@ -14,7 +15,7 @@ public class MultyPolygon extends MapRenderObject {
 	public int getPointsLength() {
 		throw new UnsupportedOperationException();
 	}
-
+	
 	@Override
 	public int getPoint31XTile(int ind) {
 		throw new UnsupportedOperationException();
@@ -25,7 +26,13 @@ public class MultyPolygon extends MapRenderObject {
 		throw new UnsupportedOperationException();
 	}
 	
+	public void setNames(String[] names) {
+		this.names = names;
+	}
 	
+	public String getName(int bound){
+		return names[bound];
+	}
 	
 	@Override
 	public int getPoint31YTile(int ind) {
