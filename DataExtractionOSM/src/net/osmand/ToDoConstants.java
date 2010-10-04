@@ -17,10 +17,11 @@ public class ToDoConstants {
 	//  railway( station, subway?) - issue 17
 	//  !_22. Verify all POI has a point_type (in order to search them)
 
-	//  !_29. Fix memory for netherlands map creator
+	// +!_29. Fix memory for netherlands map creator
 	//  ! 89. Transport redesign UI (enable run from context menu, switch go to goal/not) !
+	//  !_30. Fix rotate
 	
-	/// !!PROFILE AND REVIEW Rendering and map creator!!!
+	///+-!!PROFILE AND REVIEW Rendering and map creator!!!
 
 
 
