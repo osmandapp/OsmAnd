@@ -6,13 +6,10 @@ import java.util.List;
 import net.osmand.OsmandSettings;
 import net.osmand.R;
 import net.osmand.TransportIndexRepository;
-import net.osmand.activities.search.SearchTransportActivity;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -161,19 +158,7 @@ public class TransportStopsLayer implements OsmandMapLayer, ContextMenuLayer.ICo
 
 	@Override
 	public OnClickListener getActionListener(List<String> actionsList, Object o) {
-		final TransportStop stop = (TransportStop) o;
-		actionsList.add(view.getContext().getString(R.string.transport_context_menu));
-		return new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				if (which == 0) {
-					Intent intent = new Intent(view.getContext(), SearchTransportActivity.class);
-					intent.putExtra(SearchTransportActivity.LAT_KEY, stop.getLocation().getLatitude());
-					intent.putExtra(SearchTransportActivity.LON_KEY, stop.getLocation().getLongitude());
-					view.getContext().startActivity(intent);
-				}
-			}
-		};
+		return null;
 	}
 
 

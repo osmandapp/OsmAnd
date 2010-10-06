@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="context_menu_item_search_transport">Искать транспорт</string>
+	<string name="transport_context_menu">Искать транспорт на остановке</string>
+	<string name="transport_searching_transport">Искать транспорт (нет цели)</string>
+	<string name="transport_searching_route">Искать транспорт (до цели {0})</string>
+	<string name="transport_search_again">Искать транспорт заново</string>
+
 	<string name="map_index">Карта</string>
 	<string name="voice">Голосовые данные</string>
 	<string name="no_vector_map_loaded">Векторные карты не загружены в приложение</string>
@@ -10,7 +16,7 @@
 	<string name="layer_gpx_layer">GPX треки</string>
 	<string name="error_reading_gpx">Ошибка при чтении gpx файла</string>
 	<string name="vector_data">Векторные osm карты</string>
-	<string name="transport_context_menu">Искать транспорт на остановке</string>
+	
 	<string name="point_on_map">Точка на карте\n Ш {0,number,#.####} Д {1,number,#.####}</string>
 	<string name="osb_bug_name">Bug</string>
 	<string name="poi_context_menu_modify">Редактировать POI</string>
@@ -105,8 +111,7 @@
 	<string name="transport_Routes">Маршруты</string>
 	<string name="transport_Stop">Остановка</string>
 	<string name="transport_stops">остановок</string>
-	<string name="transport_searching_transport">Искать транспорт (нет цели)</string>
-	<string name="transport_searching_route">Искать {0} маршрут </string>
+	
 	<string name="transport_search_none">нету</string>
 	<string name="transport_search_after">Маршрут после</string>	
 	<string name="transport_search_before">Маршрут до</string>

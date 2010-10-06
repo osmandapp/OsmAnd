@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -31,6 +32,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
 		setContentView(R.layout.search_by_name);
 		NamesAdapter namesAdapter = new NamesAdapter(getObjects("")); //$NON-NLS-1$
 		setListAdapter(namesAdapter);
@@ -50,6 +52,8 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 			}
 			
 		});
+		searchText.requestFocus();
+		
 		progress.setVisibility(View.INVISIBLE);
 		findViewById(R.id.ResetButton).setOnClickListener(new View.OnClickListener(){
 
@@ -59,6 +63,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 			}
 			
 		});
+		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 	}
 	
 	public boolean isFilterableByDefault(){

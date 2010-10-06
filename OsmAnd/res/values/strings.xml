@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="context_menu_item_search_transport">Search transport</string>
+	<string name="transport_searching_transport">Searching transport (no target)</string>
+	<string name="transport_searching_route">Searching transport ({0} for target)</string>
+	<string name="transport_search_none">none</string>
+	<string name="transport_search_again">Transport search again</string>
+
 	<string name="map_index">Map</string>
 	<string name="voice">Voice</string>
 	<string name="no_vector_map_loaded">Vector maps were not loaded</string>
@@ -107,9 +113,7 @@
 	<string name="transport_Routes">Routes</string>
 	<string name="transport_Stop">Stop</string>
 	<string name="transport_stops">stops</string>
-	<string name="transport_searching_transport">Searching transport (no target)</string>
-	<string name="transport_searching_route">Searching for {0} route</string>
-	<string name="transport_search_none">none</string>
+	
 	<string name="transport_search_after">Search route after</string>	
 	<string name="transport_search_before">Search route before</string>
 	<string name="transport_finish_search">Finish search</string>
