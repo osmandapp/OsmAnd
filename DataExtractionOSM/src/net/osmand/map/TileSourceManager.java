@@ -244,7 +244,7 @@ public class TileSourceManager {
 	}
 	
 	public static TileSourceTemplate getGoogleMapsSatelliteSource(){
-		return new TileSourceTemplate("GoogleMaps Satellite", "http://khm1.google.com/kh/v=59&x={1}&y={2}&z={0}", ".jpg", 20, 0, 256, 32, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		return new TileSourceTemplate("GoogleMaps Satellite", "http://khm1.google.com/kh/v=65&x={1}&y={2}&z={0}", ".jpg", 20, 0, 256, 32, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	public static TileSourceTemplate getGoogleMapsTerrainSource(){

@@ -133,6 +133,10 @@ public class TransportInfoLayer implements OsmandMapLayer {
 		int ey = (int) point.y;
 		if (visible && !routeHelper.getRoute().isEmpty()) {
 			for (RouteInfoLocation l : routeHelper.getRoute()) {
+				if(l == null){
+					// once l is null in list
+					continue;
+				}
 				TransportRoute route = l.getRoute();
 				boolean start = false;
 				boolean end = false;

@@ -461,6 +461,7 @@ public class IndexBatchCreator {
 		MessageFormat format = new MessageFormat("{0,date,dd.MM.yyyy} : {1, number,##.#} MB", Locale.US);
 		String summary;
 		double mbLengh = (double)f.length() / MB;
+		boolean zip = true;
 		String regionName;
 		if(f.getName().endsWith(IndexConstants.POI_INDEX_EXT) || f.getName().endsWith(IndexConstants.POI_INDEX_EXT_ZIP)){
 			regionName = f.getName().substring(0, f.getName().length() - IndexConstants.POI_INDEX_EXT.length() - 2);
@@ -481,7 +482,7 @@ public class IndexBatchCreator {
 			// do not upload small files
 			return;
 		}
-		if(mbLengh > 3 && f.getName().endsWith(".odb")){
+		if(mbLengh > 3 && f.getName().endsWith(".odb") && zip){
 			String zipFileName = f.getName().subSequence(0, f.getName().length() - 4)+".zip";
 			File zFile = new File(f.getParentFile(), zipFileName);
 			log.info("Zipping file " + f.getName());

@@ -14,7 +14,6 @@
 <item android:id="@+id/map_get_directions" android:title="@string/get_directions" android:icon="@android:drawable/ic_menu_directions"></item>
 <item android:title="@string/map_specify_point" android:id="@+id/map_specify_point" android:icon="@android:drawable/ic_menu_search"></item>
 
-<item android:id="@+id/map_transport" android:title="@string/transport"></item>
 <item android:title="@string/show_gps_status" android:id="@+id/map_show_gps_status" android:icon="@android:drawable/ic_menu_compass"></item> 
 <item android:title="@string/map_route_by_gpx" android:id="@+id/map_gpx_routing"></item>
 </group>

@@ -59,9 +59,9 @@ public class SearchTransportActivity extends ListActivity {
 	private Thread thread;
 	
 
-	// TODO test when these args null
 	private LatLon lastKnownMapLocation;
 	private LatLon destinationLocation;
+	private LatLon selectedDestinationLocation;
 	
 	private TransportStopAdapter stopsAdapter;
 	private TransportRouteAdapter intermediateListAdapater;
@@ -79,17 +79,25 @@ public class SearchTransportActivity extends ListActivity {
 			lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(this);
 		}
 		setContentView(R.layout.search_transport);
-		searchTransportLevel = (Button) findViewById(R.id.SearchPOILevelButton);
-		searchArea = (TextView) findViewById(R.id.SearchAreaText);
+		searchTransportLevel = (Button) findViewById(R.id.SearchTransportLevelButton);
+		searchTransportLevel.setText(R.string.search_POI_level_btn);
+		
 		searchTransportLevel.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(isSearchFurtherAvailable()){
-					zoom --;
+				if (!isRouteCalculated()) {
+					if (isSearchFurtherAvailable()) {
+						zoom--;
+						searchTransport();
+					}
+				} else {
+					intermediateListAdapater.clear();
+					intermediateListAdapater.add(null);
 					searchTransport();
 				}
 			}
 		});
+		searchArea = (TextView) findViewById(R.id.SearchAreaText);
 		progress = (ProgressBar) findViewById(R.id.ProgressBar);
 		progress.setVisibility(View.INVISIBLE);
 		stopsAdapter = new TransportStopAdapter(new ArrayList<RouteInfoLocation>());
@@ -123,6 +131,7 @@ public class SearchTransportActivity extends ListActivity {
 		super.onResume();
 		if(!Algoritms.objectEquals(OsmandSettings.getPointToNavigate(this), this.destinationLocation)){
 			destinationLocation = OsmandSettings.getPointToNavigate(this);
+			selectedDestinationLocation = destinationLocation;
 			searchTransport();			
 		}
 		
@@ -138,9 +147,9 @@ public class SearchTransportActivity extends ListActivity {
 	public void searchTransport(){
 		// use progress
 		stopsAdapter.clear();
-		searchTransportLevel.setEnabled(false);
 		searchArea.setText(getSearchArea());
 		boolean routeCalculated = isRouteCalculated();
+		searchTransportLevel.setEnabled(false);
 		if (!routeCalculated && getLocationToStart() != null) {
 			final LatLon locationToStart = getLocationToStart();
 			final LatLon locationToGo = getLocationToGo();
@@ -171,6 +180,8 @@ public class SearchTransportActivity extends ListActivity {
 			} else {
 				repo = null;
 			}
+		} else {
+			updateSearchMoreButton();
 		}
 	}
 	
@@ -179,11 +190,20 @@ public class SearchTransportActivity extends ListActivity {
 			@Override
 			public void run() {
 				stopsAdapter.setNewModel(stopsList);
-				searchTransportLevel.setEnabled(isSearchFurtherAvailable());
+				updateSearchMoreButton();
 				searchArea.setText(getSearchArea());
 				progress.setVisibility(View.INVISIBLE);
-			}
-		});
+			}});
+	}
+	private void updateSearchMoreButton() {
+		if (!isRouteCalculated()) {
+			searchTransportLevel.setEnabled(isSearchFurtherAvailable());
+			searchTransportLevel.setText(R.string.search_POI_level_btn);
+		} else {
+			searchTransportLevel.setEnabled(true);
+			searchTransportLevel.setText(R.string.transport_search_again);
+		}
+		
 	}
 	
 	public String getInformation(RouteInfoLocation route, List<TransportStop> stops, int position, boolean part){
@@ -368,7 +388,7 @@ public class SearchTransportActivity extends ListActivity {
 	
 	public LatLon getStartStop(int position){
 		if(position == intermediateListAdapater.getCount()){
-			return destinationLocation;
+			return selectedDestinationLocation;
 		}
 		RouteInfoLocation item = intermediateListAdapater.getItem(position);
 		if(item == null){
@@ -479,6 +499,13 @@ public class SearchTransportActivity extends ListActivity {
 					public void onClick(View v) {
 						if(intermediateListAdapater.getCount() > 1){
 							intermediateListAdapater.remove(null);
+							searchTransport();
+						} else {
+							if(selectedDestinationLocation == null){
+								selectedDestinationLocation = destinationLocation;
+							} else {
+								selectedDestinationLocation = null;
+							}
 							searchTransport();
 						}
 						

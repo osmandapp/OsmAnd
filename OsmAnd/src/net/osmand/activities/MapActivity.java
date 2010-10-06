@@ -379,6 +379,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
 			startActivity(newIntent);
             return true;
+        } else if (keyCode == KeyEvent.KEYCODE_R) {
+        	// Is it needed
+        	mapView.setRotate(mapView.getRotate() + 45);
+            return true;
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -955,12 +959,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				Toast.makeText(this, getString(R.string.gps_status_app_not_found), Toast.LENGTH_LONG).show();
 			}
 			return true;
-		} else if (item.getItemId() == R.id.map_transport) {
-			Intent intent = new Intent(this, SearchTransportActivity.class);
-			intent.putExtra(SearchTransportActivity.LAT_KEY, mapView.getLatitude());
-			intent.putExtra(SearchTransportActivity.LON_KEY, mapView.getLongitude());
-			startActivity(intent);
-			return true;
 //		} else if (item.getItemId() == R.id.map_mark_point) {
 //			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 //			return true;
@@ -1509,6 +1507,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     	actions.add(resources.getString(R.string.context_menu_item_navigate_point));
     	actions.add(resources.getString(R.string.context_menu_item_search_poi));
 		actions.add(resources.getString(R.string.context_menu_item_show_route));
+		actions.add(resources.getString(R.string.context_menu_item_search_transport));
 		actions.add(resources.getString(R.string.context_menu_item_add_favorite));
 		actions.add(resources.getString(R.string.context_menu_item_create_poi));
 		actions.add(resources.getString(R.string.context_menu_item_open_bug));
@@ -1533,13 +1532,18 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				} else if(which == 2){
 					getDirections(latitude, longitude, false);
 				} else if(which == 3){
-					addFavouritePoint(latitude, longitude);
+					Intent intent = new Intent(MapActivity.this, SearchTransportActivity.class);
+					intent.putExtra(SearchTransportActivity.LAT_KEY, latitude);
+					intent.putExtra(SearchTransportActivity.LON_KEY, longitude);
+					startActivity(intent);
 				} else if(which == 4){
+					addFavouritePoint(latitude, longitude);
+				} else if(which == 5){
 					EditingPOIActivity activity = new EditingPOIActivity(MapActivity.this, (OsmandApplication) getApplication(), mapView);
 					activity.showCreateDialog(latitude, longitude);
-				} else if(which == 5){
-					osmBugsLayer.openBug(MapActivity.this, getLayoutInflater(), mapView, latitude, longitude);
 				} else if(which == 6){
+					osmBugsLayer.openBug(MapActivity.this, getLayoutInflater(), mapView, latitude, longitude);
+				} else if(which == 7){
 					reloadTile(mapView.getZoom(), latitude, longitude);
 				}
 			}

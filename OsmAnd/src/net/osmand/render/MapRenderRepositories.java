@@ -218,7 +218,7 @@ public class MapRenderRepositories {
 			rotate += 360;
 		} 
 
-		return !inside || Math.abs(rotate - cRotate) > 15; // leave only 15 to find that UI box out of searched 
+		return !inside || Math.abs(rotate - cRotate) > 45; // leave only 15 to find that UI box out of searched 
 		
 	}
 
