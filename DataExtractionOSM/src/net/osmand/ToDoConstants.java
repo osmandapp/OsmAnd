@@ -15,10 +15,8 @@ public class ToDoConstants {
 	//  ! 81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
 	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?),
 	//  railway( station, subway?) - issue 17
-	//  !_22. Verify all POI has a point_type (in order to search them)
+	//  !_22. Verify all POI has a point_type (in order to search them) - !
 
-	//  !_30. Fix rotate (_)
- 
 	// 	Outside base 0.4 release
 	//   97. For voice navigation consider current speed of vehicle. Especially when speed > 50 pronounce more than 200 m
 	//   98. Implement rendering of different app mode. For Car render streets name with large font.

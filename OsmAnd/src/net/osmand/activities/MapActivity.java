@@ -379,10 +379,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
 			startActivity(newIntent);
             return true;
-        } else if (keyCode == KeyEvent.KEYCODE_R) {
-        	// Is it needed
-        	mapView.setRotate(mapView.getRotate() + 45);
-            return true;
         }
         return super.onKeyDown(keyCode, event);
     }

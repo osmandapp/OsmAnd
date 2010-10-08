@@ -58,7 +58,7 @@ public class RouteLayer implements OsmandMapLayer {
 	
 	
 	@Override
-	public void onDraw(Canvas canvas) {
+	public void onDraw(Canvas canvas, RectF latLonBounds) {
 		path.reset();
 		if (helper.hasPointsToShow()) {
 			long time = System.currentTimeMillis();
@@ -78,7 +78,7 @@ public class RouteLayer implements OsmandMapLayer {
 			double rightLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.right);
 			double lat = topLatitude - bottomLatitude + 0.1;
 			double lon = rightLongitude - leftLongitude + 0.1;
-			helper.fillLocationsToShow(topLatitude +lat, leftLongitude - lon, bottomLatitude - lat, rightLongitude + lon, points);
+			helper.fillLocationsToShow(topLatitude + lat, leftLongitude - lon, bottomLatitude - lat, rightLongitude + lon, points);
 			if((System.currentTimeMillis() - time) > 80){
 				Log.e(LogUtil.TAG, "Calculate route layer " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
 			}

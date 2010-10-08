@@ -7,7 +7,6 @@ import net.osmand.activities.FavouritesActivity;
 import net.osmand.activities.FavouritesActivity.FavouritePoint;
 import net.osmand.activities.FavouritesActivity.FavouritesDbHelper;
 import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
@@ -15,7 +14,6 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.util.DisplayMetrics;
@@ -31,8 +29,6 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 	private OsmandMapTileView view;
 	private List<FavouritePoint> favouritePoints;
 	private List<FavouritePoint> additionalPoints;
-	private Rect pixRect = new Rect();
-	private RectF tileRect = new RectF();
 	private Path path;
 	private Path pathDst;
 	private Paint paint;
@@ -76,7 +72,6 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 		paintBlack.setAntiAlias(true);
 		paintBlack.setStrokeWidth(2);
 		
-		pixRect.set(0, 0, view.getWidth(), view.getHeight());
 		reloadFavorites(view.getContext());
 	}
 
@@ -99,22 +94,17 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 	public boolean drawInScreenPixels() {
 		return false;
 	}
-
+	
+	
 	@Override
-	public void onDraw(Canvas canvas) {
+	public void onDraw(Canvas canvas, RectF latLonBounds) {
 		if (view.getZoom() >= startZoom) {
-			pixRect.set(0, 0, view.getWidth(), view.getHeight());
-			view.calculateTileRectangle(pixRect, view.getCenterPointX(), view.getCenterPointY(), view.getXTile(), view.getYTile(),
-							tileRect);
-			double topLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), tileRect.top);
-			double leftLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.left);
-			double bottomLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), tileRect.bottom);
-			double rightLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.right);
+			
 
 			// request to load
 			for (FavouritePoint o : favouritePoints) {
-				if (o.getLatitude() <= topLatitude && o.getLatitude() >= bottomLatitude && o.getLongitude() >= leftLongitude
-						&& o.getLongitude() <= rightLongitude) {
+				if (o.getLatitude() >= latLonBounds.bottom && o.getLatitude() <= latLonBounds.top  && o.getLongitude() >= latLonBounds.left 
+						&& o.getLongitude() <= latLonBounds.right ) {
 					int x = view.getMapXForPoint(o.getLongitude());
 					int y = view.getMapYForPoint(o.getLatitude());
 					matrix.setTranslate(x, y);
@@ -125,8 +115,8 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 			}
 			if(additionalPoints != null){
 				for (FavouritePoint o : additionalPoints) {
-					if (o.getLatitude() <= topLatitude && o.getLatitude() >= bottomLatitude && o.getLongitude() >= leftLongitude
-							&& o.getLongitude() <= rightLongitude) {
+					if (o.getLatitude() >= latLonBounds.bottom && o.getLatitude() <= latLonBounds.top  && o.getLongitude() >= latLonBounds.left 
+							&& o.getLongitude() <= latLonBounds.right ) {
 						int x = view.getMapXForPoint(o.getLongitude());
 						int y = view.getMapYForPoint(o.getLatitude());
 						matrix.setTranslate(x, y);

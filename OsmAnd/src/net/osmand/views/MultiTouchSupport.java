@@ -91,7 +91,7 @@ public class MultiTouchSupport {
 			Float x2 = (Float) getX.invoke(event, 1);
 			Float y1 = (Float) getY.invoke(event, 0);
 			Float y2 = (Float) getY.invoke(event, 1);
-			float distance = FloatMath.sqrt((x2 - x1)*(x2 -x1) + (y2-y1)*(y2-y1));
+			float distance = FloatMath.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 			previousZoom = distance / zoomStartedDistance;
 			if (actionCode == ACTION_POINTER_DOWN) {
 				centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);

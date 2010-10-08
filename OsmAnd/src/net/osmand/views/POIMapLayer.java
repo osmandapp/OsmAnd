@@ -10,7 +10,6 @@ import net.osmand.ResourceManager;
 import net.osmand.activities.EditingPOIActivity;
 import net.osmand.data.Amenity;
 import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -18,14 +17,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMenuProvider {
-	// it is very slow to use with 15 level
 	private static final int startZoom = 10;
 	public static final int LIMIT_POI = 200;
 	
@@ -102,7 +99,6 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 		pointAltUI.setAlpha(200);
 		pointAltUI.setAntiAlias(true);
 		resourceManager = view.getApplication().getResourceManager();
-		pixRect.set(0, 0, view.getWidth(), view.getHeight());
 	}
 	
 	public int getRadiusPoi(int zoom){
@@ -121,22 +117,12 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 		return (int) (r * dm.density);
 	}
 
-	Rect pixRect = new Rect();
-	RectF tileRect = new RectF();
-	
 	@Override
-	public void onDraw(Canvas canvas) {
+	public void onDraw(Canvas canvas, RectF latLonBounds) {
 		if (view.getZoom() >= startZoom) {
-			pixRect.set(0, 0, view.getWidth(), view.getHeight());
-			view.calculateTileRectangle(pixRect, view.getCenterPointX(), 
-					view.getCenterPointY(), view.getXTile(), view.getYTile(), tileRect);
-			double topLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), tileRect.top);
-			double leftLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.left);
-			double bottomLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), tileRect.bottom);
-			double rightLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.right);
 
 			objects.clear();
-			resourceManager.searchAmenitiesAsync(topLatitude, leftLongitude, bottomLatitude, rightLongitude, view.getZoom(), filter, objects);
+			resourceManager.searchAmenitiesAsync(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, view.getZoom(), filter, objects);
 			for (Amenity o : objects) {
 				int x = view.getMapXForPoint(o.getLocation().getLongitude());
 				int y = view.getMapYForPoint(o.getLocation().getLatitude());

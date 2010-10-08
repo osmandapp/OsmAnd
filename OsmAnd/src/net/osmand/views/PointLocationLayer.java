@@ -82,11 +82,11 @@ public class PointLocationLayer implements OsmandMapLayer {
 	}
 	
 	@Override
-	public void onDraw(Canvas canvas) {
+	public void onDraw(Canvas canvas, RectF latLonBounds) {
 		if (isLocationVisible(lastKnownLocation)) {
 			int locationX = view.getMapXForPoint(lastKnownLocation.getLongitude());
 			int locationY = view.getMapYForPoint(lastKnownLocation.getLatitude());
-			int radius = MapUtils.getLengthXFromMeters(view.getFloatZoom(), view.getLatitude(), view.getLongitude(), 
+			int radius = MapUtils.getLengthXFromMeters(view.getZoom(), view.getLatitude(), view.getLongitude(), 
 					lastKnownLocation.getAccuracy(), view.getTileSize(), view.getWidth());
 
 			if(appMode == ApplicationMode.CAR){
@@ -111,7 +111,7 @@ public class PointLocationLayer implements OsmandMapLayer {
 				int radiusBearing = (int) (30 * dm.density);
 				if(lastKnownLocation.hasSpeed() && appMode != ApplicationMode.CAR){
 					radiusBearing = 
-						Math.max(MapUtils.getLengthXFromMeters(view.getFloatZoom(), view.getLatitude(), view.getLongitude(), 
+						Math.max(MapUtils.getLengthXFromMeters(view.getZoom(), view.getLatitude(), view.getLongitude(), 
 							lastKnownLocation.getSpeed(), view.getTileSize(), view.getWidth()) * 2, radiusBearing);
 					radiusBearing = Math.min(radiusBearing, view.getHeight() / 4);
 				}
