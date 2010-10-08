@@ -214,12 +214,22 @@ public class MapUtils {
 		return x / getPowZoom(zoom) * 360.0 - 180.0;
 	}
 	
-	private static double getPowZoom(float zoom){
-		if(zoom - Math.ceil(zoom) < 0.05f){
+	public static double getPowZoom(float zoom){
+		if(zoom >= 0 && zoom - Math.floor(zoom) < 0.05f){
 			return 1 << ((int)zoom); 
 		} else {
 			return Math.pow(2, zoom);
 		}
+	}
+	
+
+	
+	public static float calcDiffPixelX(float rotateSin, float rotateCos, float dTileX, float dTileY, float tileSize){
+		return (rotateCos * dTileX - rotateSin * dTileY) * tileSize ;
+	}
+	
+	public static float calcDiffPixelY(float rotateSin, float rotateCos, float dTileX, float dTileY, float tileSize){
+		return (rotateSin * dTileX + rotateCos * dTileY) * tileSize ;
 	}
 	
 	public static double getLatitudeFromTile(float zoom, double y){
