@@ -30,7 +30,6 @@ import org.apache.commons.logging.Log;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.RectF;
 import android.os.Environment;
 
 /**
@@ -560,14 +559,14 @@ public class ResourceManager {
 	}
 	
 	////////////////////////////////////////////// Working with map ////////////////////////////////////////////////
-	public boolean updateRenderedMapNeeded(RectF tilesRect, int zoom, float rotate){
-		return renderer.updateMapIsNeeded(tilesRect, zoom, rotate);
+	public boolean updateRenderedMapNeeded(RotatedTileBox rotatedTileBox){
+		return renderer.updateMapIsNeeded(rotatedTileBox);
 	}
 	
-	public void updateRendererMap(RectF tileRect, RectF boundsTileRect, int zoom, float rotate){
+	public void updateRendererMap(RotatedTileBox rotatedTileBox){
 		renderer.interruptLoadingMap();
 		asyncLoadingTiles.requestToLoadMap(
-				new MapLoadRequest(tileRect, boundsTileRect, zoom, rotate));
+				new MapLoadRequest(new RotatedTileBox(rotatedTileBox)));
 	}
 	
 	public MapRenderRepositories getRenderer() {
@@ -721,17 +720,11 @@ public class ResourceManager {
 	}
 	
 	private static class MapLoadRequest {
-		public final RectF tileRect;
-		public final RectF boundsTileRect;
-		public final int zoom;
-		public final float rotate;
+		public final RotatedTileBox tileBox;
 		
-		public MapLoadRequest(RectF tileRect,  RectF boundsTileRect, int zoom, float rotate) {
+		public MapLoadRequest(RotatedTileBox tileBox) {
 			super();
-			this.tileRect = tileRect;
-			this.boundsTileRect = boundsTileRect;
-			this.zoom = zoom;
-			this.rotate = rotate;
+			this.tileBox = tileBox;
 		}
 	}
 	
@@ -788,7 +781,7 @@ public class ResourceManager {
 						} else if(req instanceof MapLoadRequest){
 							if(!mapLoaded){
 								MapLoadRequest r = (MapLoadRequest) req;
-								renderer.loadMap(r.tileRect, r.boundsTileRect, r.zoom, r.rotate);
+								renderer.loadMap(r.tileBox);
 								mapLoaded = true;
 							}
 						}

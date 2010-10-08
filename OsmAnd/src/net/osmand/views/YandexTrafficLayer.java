@@ -208,16 +208,15 @@ public class YandexTrafficLayer implements OsmandMapLayer {
 	}
 
 	@Override
-	public void onDraw(Canvas canvas) {
+	public void onDraw(Canvas canvas, RectF latLonBounds) {
 		if (visible) {
 			pixRect.set(0, 0, view.getWidth(), view.getHeight());
-			double lat = MapUtils.getLatitudeFromTile(view.getFloatZoom(), view.getYTile());
-			float tileY = (float) MapUtils.getTileEllipsoidNumberY(view.getFloatZoom(), lat);
+			float tileY = (float) MapUtils.getTileEllipsoidNumberY(view.getZoom(), view.getLatitude());
 			view.calculateTileRectangle(pixRect, view.getCenterPointX(), view.getCenterPointY(), view.getXTile(), tileY, tileRect);
-			double topLat = MapUtils.getLatitudeFromEllipsoidTileY(view.getFloatZoom(), (int) tileRect.top);
-			double leftLon = MapUtils.getLongitudeFromTile(view.getFloatZoom(), (int) tileRect.left);
-			int x = view.getRotatedMapXForPoint(topLat, leftLon);
-			int y = view.getRotatedMapYForPoint(topLat, leftLon);
+			double topLat = MapUtils.getLatitudeFromEllipsoidTileY(view.getZoom(), (int) tileRect.top);
+			double leftLon = MapUtils.getLongitudeFromTile(view.getZoom(), (int) tileRect.left);
+			int x = view.getMapXForPoint(leftLon);
+			int y = view.getMapYForPoint(topLat);
 			checkedCachedImages(view.getZoom());
 			float right = FloatMath.ceil(tileRect.right);
 			float bottom = FloatMath.ceil(tileRect.bottom);

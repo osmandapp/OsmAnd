@@ -8,13 +8,11 @@ import net.osmand.activities.TransportRouteHelper;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
@@ -23,9 +21,7 @@ import android.widget.Toast;
 public class TransportInfoLayer implements OsmandMapLayer {
 	
 	private final TransportRouteHelper routeHelper;
-	private Rect pixRect;
 	private OsmandMapTileView view;
-	private RectF tileRect;
 	private Paint paintInt;
 	private Paint paintEnd;
 	private boolean visible = true;
@@ -37,8 +33,6 @@ public class TransportInfoLayer implements OsmandMapLayer {
 	
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		pixRect = new Rect();
-		tileRect = new RectF();
 		dm = new DisplayMetrics();
 		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
@@ -65,16 +59,9 @@ public class TransportInfoLayer implements OsmandMapLayer {
 	}
 
 	@Override
-	public void onDraw(Canvas canvas) {
+	public void onDraw(Canvas canvas, RectF latLonBounds) {
 		if(routeHelper.routeIsCalculated() && visible){
 			List<RouteInfoLocation> list = routeHelper.getRoute();
-			pixRect.set(0, 0, view.getWidth(), view.getHeight());
-			view.calculateTileRectangle(pixRect, view.getCenterPointX(), 
-					view.getCenterPointY(), view.getXTile(), view.getYTile(), tileRect);
-			double topLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), tileRect.top);
-			double leftLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.left);
-			double bottomLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), tileRect.bottom);
-			double rightLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.right);
 			for(RouteInfoLocation l : list){
 				if(l == null){
 					// once l is null in list
@@ -100,8 +87,8 @@ public class TransportInfoLayer implements OsmandMapLayer {
 					}
 					if(start){
 						LatLon location = st.getLocation();
-						if(location.getLatitude() <= topLatitude && location.getLatitude() >= bottomLatitude &&
-								location.getLongitude() >= leftLongitude && location.getLongitude() <= rightLongitude){
+						if (location.getLatitude() >= latLonBounds.bottom && location.getLatitude() <= latLonBounds.top  && location.getLongitude() >= latLonBounds.left 
+								&& location.getLongitude() <= latLonBounds.right ) {
 							int x = view.getRotatedMapXForPoint(location.getLatitude(), location.getLongitude());
 							int y = view.getRotatedMapYForPoint(location.getLatitude(), location.getLongitude());
 							canvas.drawRect(x - getRadius(), y - getRadius(), x + getRadius(), y + getRadius(), toShow);

@@ -3,13 +3,11 @@ package net.osmand.views;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.osm.MapUtils;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
@@ -21,8 +19,6 @@ public class GPXLayer implements OsmandMapLayer {
 	
 	private OsmandMapTileView view;
 	
-	private Rect boundsRect;
-	private RectF tileRect;
 	private List<List<Location>> points = new ArrayList<List<Location>>();
 	private Paint paint;
 	
@@ -34,8 +30,6 @@ public class GPXLayer implements OsmandMapLayer {
 	
 
 	private void initUI() {
-		boundsRect = new Rect(0, 0, view.getWidth(), view.getHeight());
-		tileRect = new RectF();
 		paint = new Paint();
 		paint.setColor(Color.argb(180, 160, 10, 215));
 		paint.setStyle(Style.STROKE);
@@ -56,20 +50,10 @@ public class GPXLayer implements OsmandMapLayer {
 	
 	
 	@Override
-	public void onDraw(Canvas canvas) {
-		
+	public void onDraw(Canvas canvas, RectF latLonBounds) {
 		if(points.isEmpty()){
 			return;
 		}
-		int w = view.getWidth();
-		int h = view.getHeight();
-		boundsRect = new Rect(0, 0, w, h);
-		view.calculateTileRectangle(boundsRect, view.getCenterPointX(), view.getCenterPointY(), view.getXTile(), view.getYTile(),
-				tileRect);
-		double topLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), tileRect.top);
-		double leftLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.left);
-		double bottomLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), tileRect.bottom);
-		double rightLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.right);
 		
 		for (List<Location> l : points) {
 			path.rewind();
@@ -79,12 +63,12 @@ public class GPXLayer implements OsmandMapLayer {
 			for (int i = 0; i < l.size(); i++) {
 				Location ls = l.get(i);
 				if (startIndex == -1) {
-					if (leftLongitude <= ls.getLongitude() && ls.getLongitude() <= rightLongitude && bottomLatitude <= ls.getLatitude()
-							&& ls.getLatitude() <= topLatitude) {
+					if (ls.getLatitude() >= latLonBounds.bottom && ls.getLatitude() <= latLonBounds.top  && ls.getLongitude() >= latLonBounds.left 
+							&& ls.getLongitude() <= latLonBounds.right ) {
 						startIndex = i > 0 ? i - 1 : i;
 					}
-				} else if (!(leftLongitude <= ls.getLongitude() + 0.01 && ls.getLongitude() - 0.01 <= rightLongitude
-						&& bottomLatitude <= ls.getLatitude() + 0.01 && ls.getLatitude() - 0.01 <= topLatitude)) {
+				} else if (!(latLonBounds.left <= ls.getLongitude() + 0.01 && ls.getLongitude() - 0.01 <= latLonBounds.right
+						&& latLonBounds.bottom <= ls.getLatitude() + 0.01 && ls.getLatitude() - 0.01 <= latLonBounds.top)) {
 					endIndex = i;
 					// do not continue make method more efficient (because it calls in UI thread)
 					// this break also has logical sense !

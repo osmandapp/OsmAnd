@@ -8,6 +8,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
+import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.location.Location;
 import android.util.DisplayMetrics;
@@ -46,7 +47,7 @@ public class PointNavigationLayer implements OsmandMapLayer {
 
 	
 	@Override
-	public void onDraw(Canvas canvas) {
+	public void onDraw(Canvas canvas, RectF latLonBounds) {
 		if(pointToNavigate == null){
 			return;
 		}

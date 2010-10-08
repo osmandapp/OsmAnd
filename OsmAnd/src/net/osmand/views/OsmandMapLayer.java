@@ -2,13 +2,14 @@ package net.osmand.views;
 
 import android.graphics.Canvas;
 import android.graphics.PointF;
+import android.graphics.RectF;
 
 public interface OsmandMapLayer {
 	
 	
 	public void initLayer(OsmandMapTileView view);
 	
-	public void onDraw(Canvas canvas);
+	public void onDraw(Canvas canvas, RectF latlonRect);
 	
 	public void destroyLayer();
 	

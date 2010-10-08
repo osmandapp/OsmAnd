@@ -23,6 +23,7 @@ import java.util.Set;
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
 import net.osmand.OsmandSettings;
+import net.osmand.RotatedTileBox;
 import net.osmand.data.index.IndexConstants;
 import net.osmand.osm.MapRenderObject;
 import net.osmand.osm.MapRenderingTypes;
@@ -35,7 +36,6 @@ import org.apache.commons.logging.Log;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
-import android.util.FloatMath;
 
 public class MapRenderRepositories {
 	
@@ -47,18 +47,20 @@ public class MapRenderRepositories {
 	private Map<Connection, PreparedStatement> pZoom1 = new LinkedHashMap<Connection, PreparedStatement>();
 	private Map<Connection, PreparedStatement> pZoom2 = new LinkedHashMap<Connection, PreparedStatement>();
 	private OsmandRenderer renderer;
+
 	
-	private double cTopY;
-	private double cBottomY;
-	private double cLeftX;
-	private double cRightX;
-	private int cZoom;
-	private float cRotate;
-	
-	// cached objects in order to rotate without 
+	// lat/lon box of requested vector data 
+	private RectF cObjectsBox = new RectF();
+	// cached objects in order to render rotation without reloading data from db
 	private List<MapRenderObject> cObjects = new LinkedList<MapRenderObject>();
-	private RectF cachedWaysLoc = new RectF();
-	private float cachedRotate = 0;
+	
+	// currently rendered box (not the same as already rendered)
+	//	this box is checked for interrupted process or 
+	private RotatedTileBox requestedBox = null;
+
+	// location of rendered bitmap
+	private RotatedTileBox bmpLocation = null;
+	// already rendered  bitmap
 	private Bitmap bmp;
 	
 	private boolean interrupted = false;
@@ -179,14 +181,8 @@ public class MapRenderRepositories {
 		return bounds;
 	}
 	
-	
-	// if cache was changed different instance will be returned
-	public RectF getCachedWaysLoc() {
-		return cachedWaysLoc;
-	}
-	
-	public float getCachedRotate() {
-		return cachedRotate;
+	public RotatedTileBox getBitmapLocation() {
+		return bmpLocation;
 	}
 	
 	protected void closeConnection(Connection c, String file){
@@ -208,32 +204,34 @@ public class MapRenderRepositories {
 		}
 	}
 	
-	
-	public boolean updateMapIsNeeded(RectF tileRect, int zoom, float rotate){
-		if (connections.isEmpty()) {
+
+	public boolean updateMapIsNeeded(RotatedTileBox box){
+		if (connections.isEmpty() || box == null) {
 			return false;
 		}
-		boolean inside = insideBox(tileRect.top, tileRect.left, tileRect.bottom,  tileRect.right, zoom);
-		if(rotate < 0){
-			rotate += 360;
-		} 
-
-		return !inside || Math.abs(rotate - cRotate) > 45; // leave only 15 to find that UI box out of searched 
+		if(requestedBox == null){
+			return true;
+		}
+		if(requestedBox.getZoom() != box.getZoom()){
+			return true;
+		}
 		
+		float deltaRotate = requestedBox.getRotate() - box.getRotate();
+		if(deltaRotate > 180){
+			deltaRotate -= 360;
+		} else if(deltaRotate < -180){
+			deltaRotate += 360;
+		}
+		if(Math.abs(deltaRotate) > 25){
+			return true;
+		}
+		return !requestedBox.containsTileBox(box);
 	}
 
 	public boolean isEmpty(){
 		return connections.isEmpty();
 	}
-
-//	MapUtils.getLatitudeFromTile(17, topY)
-	private boolean insideBox(double topY, double leftX, double bottomY, double rightX, int zoom) {
-		boolean inside = cZoom == zoom && cTopY <= topY && cLeftX <= leftX && cRightX >= rightX
-				&& cBottomY >= bottomY;
-		return inside;
-	}
-
-
+	
 	private static String loadMapQuery = "SELECT "+IndexConstants.IndexMapRenderObject.ID +", " + IndexConstants.IndexMapRenderObject.NODES +", " +  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 										IndexConstants.IndexMapRenderObject.NAME + ", " + IndexConstants.IndexMapRenderObject.TYPE + //$NON-NLS-1$
 										" FROM " + IndexConstants.IndexMapRenderObject.getTable() +	" WHERE "+IndexConstants.IndexMapRenderObject.ID+  //$NON-NLS-1$//$NON-NLS-2$
@@ -261,151 +259,167 @@ public class MapRenderRepositories {
 	}
 	
 	private boolean checkWhetherInterrupted(){
-		if(interrupted){
-			// clear zoom to enable refreshing next time 
-			cZoom = 1;
+		if(interrupted || (currentRenderingContext != null && currentRenderingContext.interrupted)){
+			requestedBox = bmpLocation;
 			return true;
 		}
 		return false;
 	}
 	
-	public synchronized void loadMap(RectF tileRect, RectF boundsTileRect, int zoom, float rotate) {
-		interrupted = false;
-		// currently doesn't work properly (every rotate bounds will be outside)
-		boolean inside = insideBox(boundsTileRect.top, boundsTileRect.left, boundsTileRect.bottom, boundsTileRect.right, zoom);
-		cRotate = rotate < 0 ? rotate + 360 : rotate;
-		if (!inside) {
-			cTopY = boundsTileRect.top;
-			cLeftX = boundsTileRect.left;
-			cRightX = boundsTileRect.right;
-			cBottomY = boundsTileRect.bottom;
-			double cBottomLatitude = MapUtils.getLatitudeFromTile(zoom, cBottomY);
-			double cTopLatitude = MapUtils.getLatitudeFromTile(zoom, cTopY);
-			double cLeftLongitude = MapUtils.getLongitudeFromTile(zoom, cLeftX);
-			double cRightLongitude = MapUtils.getLongitudeFromTile(zoom, cRightX);
-			cZoom = zoom;
+	private boolean loadVectorData(RectF dataBox, int zoom){
+		double cBottomLatitude = dataBox.bottom;
+		double cTopLatitude = dataBox.top;
+		double cLeftLongitude = dataBox.left;
+		double cRightLongitude = dataBox.right;
 
-			log.info(String.format("BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", //$NON-NLS-1$
-					cBottomLatitude, cTopLatitude, cLeftLongitude, cRightLongitude, cZoom)); 
+		log.info(String.format("BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", //$NON-NLS-1$
+				cBottomLatitude, cTopLatitude, cLeftLongitude, cRightLongitude, zoom)); 
 
-			long now = System.currentTimeMillis();
+		long now = System.currentTimeMillis();
 
-
+		if (connections.isEmpty()) {
+			cObjectsBox = dataBox;
+			cObjects = new ArrayList<MapRenderObject>();
+			return true;
+		}
+		try {
+			int count = 0;
+			ArrayList<MapRenderObject> tempList = new ArrayList<MapRenderObject>();
+			System.gc(); // to clear previous objects
+//			Set<Long> ids = new HashSet<Long>(1000);
+			TLongSet ids = new TLongHashSet();
+			Map<Integer, List<MapRenderObject>> multiPolygons = new LinkedHashMap<Integer, List<MapRenderObject>>();
+			for (Connection c : connections.keySet()) {
+				RectF r = connections.get(c);
+				boolean intersects = r.top >= cBottomLatitude  && r.left <= cRightLongitude && r.right >= cLeftLongitude &&
+										r.bottom <= cTopLatitude;
+				if(!intersects){
+					continue;
+				}
 				
-			if (connections.isEmpty()) {
-				cObjects = new ArrayList<MapRenderObject>();
-				// keep old results
+				PreparedStatement statement = null;
+				if (zoom >= 15) {
+					statement = pZoom0.get(c);
+				} else if (zoom >= 10) {
+					statement = pZoom1.get(c);
+				} else if (zoom >= 6) {
+					statement = pZoom2.get(c);
+				} else {
+					// TODO show raster tiles ?
+					continue;
+				}
+				statement.setDouble(1, cBottomLatitude);
+				statement.setDouble(2, cTopLatitude);
+				statement.setDouble(3, cLeftLongitude);
+				statement.setDouble(4, cRightLongitude);
+				ResultSet result = statement.executeQuery();
+
+
+				try {
+					while (result.next()) {
+						long id = result.getLong(1);
+						if (PerformanceFlags.checkForDuplicateObjectIds) {
+							if (ids.contains(id)) {
+								// do not add object twice
+								continue;
+							}
+							ids.add(id);
+						}
+						int type = result.getInt(4);
+						MapRenderObject obj = new MapRenderObject(id);
+						obj.setType(type);
+						obj.setData(result.getBytes(2));
+						obj.setName(result.getString(3));
+						
+						count++;
+						int mainType = obj.getMainType();
+						// be attentive we need 16 bits from main type (not 15 bits!) 
+						// the last bit shows direction of multipolygon way
+						registerMultipolygon(multiPolygons, mainType, obj);
+						int sec = obj.getSecondType();
+						if(sec != 0){
+							registerMultipolygon(multiPolygons, sec, obj);
+						}
+						for (int k = 0; k < obj.getMultiTypes(); k++) {
+							registerMultipolygon(multiPolygons, obj.getAdditionalType(k), obj);
+						}
+						if(checkWhetherInterrupted()){
+							return false;
+						}
+						tempList.add(obj);
+					}
+
+				} finally {
+					result.close();
+				}
+			}
+			int leftX = MapUtils.get31TileNumberX(cLeftLongitude);
+			int rightX = MapUtils.get31TileNumberX(cRightLongitude);
+			int bottomY = MapUtils.get31TileNumberY(cBottomLatitude);
+			int topY = MapUtils.get31TileNumberY(cTopLatitude);
+			List<MultyPolygon> pMulti = proccessMultiPolygons(multiPolygons, leftX, rightX, bottomY, topY);
+			tempList.addAll(pMulti);
+			log.info(String.format("Search has been done in %s ms. %s results were found.", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
+			
+			cObjects = tempList;
+			cObjectsBox = dataBox;
+		} catch (java.sql.SQLException e) {
+			log.debug("Search failed", e); //$NON-NLS-1$
+			return false;
+		}
+		
+		return true;
+	}
+		
+	
+	public synchronized void loadMap(RotatedTileBox tileRect) {
+		interrupted = false;
+		if(currentRenderingContext != null){
+			currentRenderingContext = null;
+		}
+		// prevent editing
+		requestedBox = new RotatedTileBox(tileRect);
+
+		// calculate data box
+		RectF dataBox = requestedBox.calculateLatLonBox(new RectF());
+		if (cObjectsBox.left > dataBox.left || cObjectsBox.top > dataBox.top || 
+				cObjectsBox.right < dataBox.right || cObjectsBox.bottom < dataBox.bottom) {
+			// increase data box in order for rotate
+			if ((dataBox.right - dataBox.left) > (dataBox.top - dataBox.bottom)) {
+				double wi = (dataBox.right - dataBox.left) * .2;
+				dataBox.left -= wi;
+				dataBox.right += wi;
+			} else {
+				double hi = (dataBox.bottom - dataBox.top) * .2;
+				dataBox.top -= hi;
+				dataBox.bottom += hi;
+			}
+			boolean loaded = loadVectorData(dataBox, requestedBox.getZoom());
+			if(!loaded || checkWhetherInterrupted()){
 				return;
 			}
-			try {
-				int count = 0;
-				cObjects = new ArrayList<MapRenderObject>();
-				System.gc(); // to clear previous objects
-//				Set<Long> ids = new HashSet<Long>(1000);
-				TLongSet ids = new TLongHashSet();
-				Map<Integer, List<MapRenderObject>> multiPolygons = new LinkedHashMap<Integer, List<MapRenderObject>>();
-				for (Connection c : connections.keySet()) {
-					RectF r = connections.get(c);
-					boolean intersects = r.top >= cBottomLatitude  && r.left <= cRightLongitude && r.right >= cLeftLongitude &&
-											r.bottom <= cTopLatitude;
-					if(!intersects){
-						continue;
-					}
-					
-					PreparedStatement statement = null;
-					if (zoom >= 15) {
-						statement = pZoom0.get(c);
-					} else if (zoom >= 10) {
-						statement = pZoom1.get(c);
-					} else if (zoom >= 6) {
-						statement = pZoom2.get(c);
-					} else {
-						// TODO show tiles ?
-						continue;
-					}
-					statement.setDouble(1, cBottomLatitude);
-					statement.setDouble(2, cTopLatitude);
-					statement.setDouble(3, cLeftLongitude);
-					statement.setDouble(4, cRightLongitude);
-					ResultSet result = statement.executeQuery();
-
-
-					try {
-						while (result.next()) {
-							long id = result.getLong(1);
-							if (PerformanceFlags.checkForDuplicateObjectIds) {
-								if (ids.contains(id)) {
-									// do not add object twice
-									continue;
-								}
-								ids.add(id);
-							}
-							int type = result.getInt(4);
-							MapRenderObject obj = new MapRenderObject(id);
-							obj.setType(type);
-							obj.setData(result.getBytes(2));
-							obj.setName(result.getString(3));
-							
-							count++;
-							int mainType = obj.getMainType();
-							// be attentive we need 16 bits from main type (not 15 bits!) 
-							// the last bit shows direction of multipolygon way
-							registerMultipolygon(multiPolygons, mainType, obj);
-							int sec = obj.getSecondType();
-							if(sec != 0){
-								registerMultipolygon(multiPolygons, sec, obj);
-							}
-							for (int k = 0; k < obj.getMultiTypes(); k++) {
-								registerMultipolygon(multiPolygons, obj.getAdditionalType(k), obj);
-							}
-							if(checkWhetherInterrupted()){
-								return;
-							}
-							cObjects.add(obj);
-						}
-
-					} finally {
-						result.close();
-					}
-				}
-				int leftX = MapUtils.get31TileNumberX(cLeftLongitude);
-				int rightX = MapUtils.get31TileNumberX(cRightLongitude);
-				int bottomY = MapUtils.get31TileNumberY(cBottomLatitude);
-				int topY = MapUtils.get31TileNumberY(cTopLatitude);
-				List<MultyPolygon> pMulti = proccessMultiPolygons(multiPolygons, leftX, rightX, bottomY, topY);
-				if(checkWhetherInterrupted()){
-					return;
-				}
-				cObjects.addAll(pMulti);
-				log.info(String
-						.format("Search has been done in %s ms. %s results were found.", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
-			} catch (java.sql.SQLException e) {
-				log.debug("Search failed", e); //$NON-NLS-1$
-			}
 		}
 		
-		// create new instance to distinguish that cache was changed
-		RectF newLoc = new RectF((float)MapUtils.getLongitudeFromTile(zoom, tileRect.left), (float)MapUtils.getLatitudeFromTile(zoom, tileRect.top),
-				(float)MapUtils.getLongitudeFromTile(zoom, tileRect.right), (float)MapUtils.getLatitudeFromTile(zoom, tileRect.bottom));
-		
-		int width = (int) calcDiffPixelX(cRotate, tileRect.right - tileRect.left, tileRect.bottom - tileRect.top);
-		int height = (int) calcDiffPixelY(cRotate, tileRect.right - tileRect.left, tileRect.bottom - tileRect.top);
 		currentRenderingContext = new OsmandRenderer.RenderingContext();
-		currentRenderingContext.leftX = tileRect.left;
-		currentRenderingContext.topY = tileRect.top;
-		currentRenderingContext.zoom = cZoom;
-		currentRenderingContext.rotate = cRotate;
-		currentRenderingContext.width = width;
-		currentRenderingContext.height = height;
-		Bitmap bmp = renderer.generateNewBitmap(currentRenderingContext, cObjects, OsmandSettings.usingEnglishNames(context));
-		if(currentRenderingContext.interrupted){
-			cZoom = 1;
+		currentRenderingContext.leftX = (float) requestedBox.getLeftTileX();
+		currentRenderingContext.topY = (float) requestedBox.getTopTileY();
+		currentRenderingContext.zoom = requestedBox.getZoom();
+		currentRenderingContext.rotate = requestedBox.getRotate();
+		currentRenderingContext.width = (int) (requestedBox.getTileWidth() * OsmandRenderer.TILE_SIZE);
+		currentRenderingContext.height = (int) (requestedBox.getTileHeight() * OsmandRenderer.TILE_SIZE);
+		if(checkWhetherInterrupted()){
 			return;
 		}
+		
+		Bitmap bmp = renderer.generateNewBitmap(currentRenderingContext, cObjects, OsmandSettings.usingEnglishNames(context));
+		if(checkWhetherInterrupted()){
+			currentRenderingContext = null;
+			return;
+		}
+		currentRenderingContext = null;
 		Bitmap oldBmp = this.bmp;
 		this.bmp = bmp;
-		cachedWaysLoc = newLoc;
-		cachedRotate = cRotate;
+		this.bmpLocation = tileRect;
 		if(oldBmp != null){
 			oldBmp.recycle();
 		}
@@ -416,24 +430,15 @@ public class MapRenderRepositories {
 		return bmp;
 	}
 	
-	public float calcDiffPixelX(float rotate, float dTileX, float dTileY){
-		float rad = (float) Math.toRadians(rotate);
-		return (FloatMath.cos(rad) * dTileX - FloatMath.sin(rad) * dTileY) * OsmandRenderer.TILE_SIZE;
-	}
-	
-	public float calcDiffPixelY(float rotate, float dTileX, float dTileY){
-		float rad = (float) Math.toRadians(rotate);
-		return (FloatMath.sin(rad) * dTileX + FloatMath.cos(rad) * dTileY) * OsmandRenderer.TILE_SIZE;
-	}
 	
 	public synchronized void clearCache() {
 		cObjects.clear();
-		cBottomY = cLeftX = cRightX = cTopY = cRotate = cZoom = 0;
+		cObjectsBox = new RectF();
 		if(bmp != null){
 			bmp.recycle();
 			bmp = null;
 		}
-		cachedWaysLoc = new RectF();
+		requestedBox = bmpLocation = null;
 	}
 
 	

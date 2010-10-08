@@ -165,7 +165,7 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 	}
 
 	@Override
-	public void onDraw(Canvas canvas) {
+	public void onDraw(Canvas canvas, RectF latLonBounds) {
 		if(isVisible()){
 			border.set(layout.getLeft() - 10 * dm.density, layout.getTop() - 4 * dm.density, 
 					layout.getRight() - 5 * dm.density, layout.getBottom() + 4 * dm.density);

@@ -15,7 +15,6 @@ import net.osmand.LogUtil;
 import net.osmand.OsmandSettings;
 import net.osmand.R;
 import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -29,7 +28,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Handler;
 import android.os.Looper;
@@ -49,8 +47,6 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 	
 	private OsmandMapTileView view;
 	private Handler handlerToLoop;
-	private Rect pixRect = new Rect();
-	private RectF tileRect = new RectF();
 	
 	private List<OpenStreetBug> objects = new ArrayList<OpenStreetBug>();
 	private Paint pointClosedUI;
@@ -98,7 +94,6 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 		pointClosedUI.setColor(Color.GREEN);
 		pointClosedUI.setAlpha(200);
 		pointClosedUI.setAntiAlias(true);
-		pixRect.set(0, 0, view.getWidth(), view.getHeight());
 	}
 
 	@Override
@@ -122,19 +117,10 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 	}
 
 	@Override
-	public void onDraw(Canvas canvas) {
+	public void onDraw(Canvas canvas, RectF latLonBounds) {
 		if (view.getZoom() >= startZoom) {
-			pixRect.set(0, 0, view.getWidth(), view.getHeight());
-			view.calculateTileRectangle(pixRect, view.getCenterPointX(), 
-					view.getCenterPointY(), view.getXTile(), view.getYTile(), tileRect);
-			double topLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), tileRect.top);
-			double leftLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.left);
-			double bottomLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), tileRect.bottom);
-			double rightLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.right);
-
-			
 			// request to load
-			requestToLoad(topLatitude, leftLongitude, bottomLatitude, rightLongitude, view.getZoom());
+			requestToLoad(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, view.getZoom());
 			for (OpenStreetBug o : objects) {
 				int x = view.getMapXForPoint(o.getLongitude());
 				int y = view.getMapYForPoint(o.getLatitude());

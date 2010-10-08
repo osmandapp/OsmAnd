@@ -190,7 +190,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 	}
 	
 	@Override
-	public void onDraw(Canvas canvas) {
+	public void onDraw(Canvas canvas, RectF latlonBounds) {
 		// prepare data (left distance, speed)
 		if(map.getPointToNavigate() != null){
 			int d = 0;
@@ -287,18 +287,18 @@ public class MapInfoLayer implements OsmandMapLayer {
 		
 				
 		// update cache
-		if (view.getFloatZoom() != (int) view.getFloatZoom()) {
+		if (view.isZooming()) {
 			rulerDistName = null;
-		} else if(view.getFloatZoom() != rulerCZoom || 
+		} else if(view.getZoom() != rulerCZoom || 
 				Math.abs(view.getXTile() - rulerCTileX) +  Math.abs(view.getYTile() - rulerCTileY) > 1){
-			rulerCZoom = (int) view.getFloatZoom();
+			rulerCZoom = view.getZoom();
 			rulerCTileX = view.getXTile();
 			rulerCTileY = view.getYTile();
 			double latitude = view.getLatitude();
 			double tileNumberLeft = rulerCTileX - ((double) view.getWidth()) / (2d * view.getTileSize());
 			double tileNumberRight = rulerCTileX + ((double) view.getWidth()) / (2d * view.getTileSize());
-			double dist = MapUtils.getDistance(latitude, MapUtils.getLongitudeFromTile(view.getFloatZoom(), tileNumberLeft), latitude,
-					MapUtils.getLongitudeFromTile(view.getFloatZoom(), tileNumberRight));
+			double dist = MapUtils.getDistance(latitude, MapUtils.getLongitudeFromTile(view.getZoom(), tileNumberLeft), latitude,
+					MapUtils.getLongitudeFromTile(view.getZoom(), tileNumberRight));
 
 			dist *= screenPercent;
 			int baseDist = 5;

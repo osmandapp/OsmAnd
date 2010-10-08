@@ -8,14 +8,12 @@ import net.osmand.R;
 import net.osmand.TransportIndexRepository;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
@@ -41,7 +39,6 @@ public class TransportStopsLayer implements OsmandMapLayer, ContextMenuLayer.ICo
 		pointAltUI.setColor(Color.rgb(0, 0, 255));
 		pointAltUI.setAlpha(150);
 		pointAltUI.setAntiAlias(true);
-		pixRect.set(0, 0, view.getWidth(), view.getHeight());
 	}
 	
 	public TransportStop getFromPoint(PointF point){
@@ -116,22 +113,12 @@ public class TransportStopsLayer implements OsmandMapLayer, ContextMenuLayer.ICo
 		}
 	}
 
-	Rect pixRect = new Rect();
-	RectF tileRect = new RectF();
 	
 	@Override
-	public void onDraw(Canvas canvas) {
+	public void onDraw(Canvas canvas, RectF latLonBounds) {
 		if (view.getZoom() >= startZoom) {
-			pixRect.set(0, 0, view.getWidth(), view.getHeight());
-			view.calculateTileRectangle(pixRect, view.getCenterPointX(), 
-					view.getCenterPointY(), view.getXTile(), view.getYTile(), tileRect);
-			double topLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), tileRect.top);
-			double leftLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.left);
-			double bottomLatitude = MapUtils.getLatitudeFromTile(view.getZoom(), tileRect.bottom);
-			double rightLongitude = MapUtils.getLongitudeFromTile(view.getZoom(), tileRect.right);
-
 			objects.clear();
-			view.getApplication().getResourceManager().searchTransportAsync(topLatitude, leftLongitude, bottomLatitude, rightLongitude, view.getZoom(), objects);
+			view.getApplication().getResourceManager().searchTransportAsync(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, view.getZoom(), objects);
 			int r = 3 * getRadiusPoi(view.getZoom()) / 4;
 			for (TransportStop o : objects) {
 				int x = view.getMapXForPoint(o.getLocation().getLongitude());
