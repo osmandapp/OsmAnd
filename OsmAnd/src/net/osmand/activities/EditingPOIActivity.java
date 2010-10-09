@@ -16,6 +16,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import net.osmand.AmenityIndexRepository;
@@ -28,6 +29,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.Entity;
 import net.osmand.osm.EntityInfo;
+import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.OpeningHoursParser;
@@ -184,7 +186,7 @@ public class EditingPOIActivity {
 			@Override
 			public void afterTextChanged(Editable s) {
 				String str = s.toString();
-				AmenityType t = AmenityType.getAmenityMap().get(str);
+				AmenityType t = MapRenderingTypes.getAmenityNameToType().get(str);
 				if(t != null && a.getType() != t){
 					a.setType(t);
 					typeButton.setText(AmenityType.toPublicString(t));
@@ -240,7 +242,27 @@ public class EditingPOIActivity {
 				final String msg = n.getId() == -1 ? resources.getString(R.string.poi_action_add) : resources
 						.getString(R.string.poi_action_change);
 				String action = n.getId() == -1 ? CREATE_ACTION : MODIFY_ACTION;
-				n.putTag(a.convertToAmenityTag(), typeText.getText().toString());
+				Map<AmenityType, Map<String, String>> typeNameToTagVal = MapRenderingTypes.getAmenityTypeNameToTagVal();
+				AmenityType type = a.getType();
+				String tag = type.getDefaultTag();
+				String subType = typeText.getText().toString();
+				String val = subType;
+				if (typeNameToTagVal.containsKey(type)) {
+					Map<String, String> map = typeNameToTagVal.get(type);
+					if (map.containsKey(subType)) {
+						String res = map.get(subType);
+						if (res != null) {
+							int i = res.indexOf(' ');
+							if (i != -1) {
+								tag = res.substring(0, i);
+								val = res.substring(i + 1);
+							} else {
+								tag = res;
+							}
+						}
+					}
+				}
+				n.putTag(tag, val);
 				n.putTag(OSMTagKey.NAME.getValue(), nameText.getText().toString());
 				if (openingHours.getText().toString().length() == 0) {
 					n.removeTag(OSMTagKey.OPENING_HOURS.getValue());
@@ -267,8 +289,9 @@ public class EditingPOIActivity {
 	}
 	
 	private void updateSubTypesAdapter(AmenityType t){
+		
 		Set<String> subCategories = new LinkedHashSet<String>(AmenityType.getSubCategories(t));
-		for(String s : AmenityType.getAmenityMap().keySet()){
+		for(String s : MapRenderingTypes.getAmenityNameToType().keySet()){
 			if(!subCategories.contains(s)){
 				subCategories.add(s);
 			}

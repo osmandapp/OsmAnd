@@ -1943,13 +1943,14 @@ public class IndexCreator {
 	 public static void main(String[] args) throws IOException, SAXException, SQLException {
 		
 		 IndexCreator creator = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
-		 creator.setIndexMap(true);
+//		 creator.setIndexMap(true);
+		 creator.setIndexPOI(true);
 		 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus_2010_09_03.osm.bz2"), new ConsoleProgressImplementation(3), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus_2010_09_03.osm.bz2"), new ConsoleProgressImplementation(3), null);
 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);

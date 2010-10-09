@@ -11,15 +11,15 @@ public class ToDoConstants {
 	// FOR 0.4 beta RELEASE
 	
 	// POI
-	//  ! 69. Add phone and site information to POI (enable call to POI and open site)
 	//  ! 81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
 	//  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?),
 	//  railway( station, subway?) - issue 17
-	//  !_22. Verify all POI has a point_type (in order to search them) - !
+	//  !_22. Verify all POI has a point_type (in order to search them) - !  + 
 
 	// 	Outside base 0.4 release
 	//   97. For voice navigation consider current speed of vehicle. Especially when speed > 50 pronounce more than 200 m
 	//   98. Implement rendering of different app mode. For Car render streets name with large font.
+	//   69. Add phone and site information to POI (enable call to POI and open site)
 	//   86. Allow to add/edit custom tags to POI objects (Issue)
 	//   91. Invent binary format (minimize disk space, maximize speed) 
 	//   92. Replace poi index with standard map index and unify POI categories

@@ -1,6 +1,9 @@
 package net.osmand.data;
 
+import java.util.Collection;
+
 import net.osmand.osm.Entity;
+import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.Relation;
 import net.osmand.osm.OSMSettings.OSMTagKey;
 
@@ -13,73 +16,39 @@ public class Amenity extends MapObject {
 
 	public Amenity(Entity entity){
 		super(entity);
-		this.type = getType(entity);
-		this.subType = getSubType(entity);
+		initTypeSubtype(entity, this);
 		this.openingHours = entity.getTag(OSMTagKey.OPENING_HOURS);
 	}
 	
 	public Amenity(){
 	}
 	
-	public String convertToAmenityTag(){
-		switch (getType()) {
-		case SHOP:
-			return OSMTagKey.SHOP.getValue();
-		case LEISURE:
-			return OSMTagKey.LEISURE.getValue();
-		case HISTORIC:
-			return OSMTagKey.HISTORIC.getValue();
-		case NATURAL:
-			return OSMTagKey.NATURAL.getValue();
-		case TOURISM:
-			return OSMTagKey.TOURISM.getValue();
-		case SPORT:
-			return OSMTagKey.SPORT.getValue();
-		default:
-			return OSMTagKey.AMENITY.getValue();
+	private static AmenityType initTypeSubtype(Entity entity, Amenity init) {
+		Collection<String> keySet = entity.getTagKeySet();
+		if (!keySet.isEmpty()) {
+			for (String t : keySet) {
+				AmenityType type = MapRenderingTypes.getAmenityType(t, entity.getTag(t));
+				if (type != null) {
+					if (init != null) {
+						init.type = type;
+						init.subType = MapRenderingTypes.getAmenitySubtype(t, entity.getTag(t));
+					}
+					return type;
+				}
+			}
+			for (String t : keySet) {
+				AmenityType type = MapRenderingTypes.getAmenityType(t, null);
+				if (type != null) {
+					if (init != null) {
+						init.type = type;
+						init.subType = MapRenderingTypes.getAmenitySubtype(t, entity.getTag(t));
+					}
+					return type;
+				}
+			}
 		}
+		return null;
 	}
-	
-	protected String getSubType(Entity node) {
-		if (node.getTag(OSMTagKey.SHOP) != null) {
-			return node.getTag(OSMTagKey.SHOP);
-		} else if (node.getTag(OSMTagKey.NATURAL) != null) {
-			return node.getTag(OSMTagKey.NATURAL);
-		} else if (node.getTag(OSMTagKey.TOURISM) != null) {
-			return node.getTag(OSMTagKey.TOURISM);
-		} else if (node.getTag(OSMTagKey.SPORT) != null) {
-			return node.getTag(OSMTagKey.SPORT);
-		} else if (node.getTag(OSMTagKey.LEISURE) != null) {
-			return node.getTag(OSMTagKey.LEISURE);
-		} else if (node.getTag(OSMTagKey.HISTORIC) != null) {
-			return node.getTag(OSMTagKey.HISTORIC);
-		} else if (node.getTag(OSMTagKey.INTERNET_ACCESS) != null) {
-			return "internet_access"; //$NON-NLS-1$
-		} else if (node.getTag(OSMTagKey.AMENITY) != null) {
-			return node.getTag(OSMTagKey.AMENITY);
-		}
-		return ""; //$NON-NLS-1$
-	}
-	
-	protected AmenityType getType(Entity node){
-		if(node.getTag(OSMTagKey.SHOP) != null){
-			return AmenityType.SHOP;
-		} else if(node.getTag(OSMTagKey.NATURAL) != null){
-			return AmenityType.NATURAL;
-		} else if(node.getTag(OSMTagKey.TOURISM) != null){
-			return AmenityType.TOURISM;
-		} else if(node.getTag(OSMTagKey.LEISURE) != null){
-			return AmenityType.LEISURE;
-		} else if(node.getTag(OSMTagKey.SPORT) != null){
-			return AmenityType.SPORT;
-		} else if(node.getTag(OSMTagKey.HISTORIC) != null){
-			return AmenityType.HISTORIC;
-		} else if(AmenityType.amenityMap.containsKey(node.getTag(OSMTagKey.AMENITY))){
-			return AmenityType.amenityMap.get(node.getTag(OSMTagKey.AMENITY));
-		}
-		return AmenityType.OTHER;
-	}
-	
 	public AmenityType getType(){
 		return type;
 	}
@@ -101,24 +70,7 @@ public class Amenity extends MapObject {
 			// it could be collection of amenities
 			return false;
 		}
-		if(n.getTag(OSMTagKey.AMENITY) != null){
-			return true;
-		} else if(n.getTag(OSMTagKey.SHOP) != null){
-			return true;
-		} else if(n.getTag(OSMTagKey.NATURAL) != null){
-			return true;
-		} else if(n.getTag(OSMTagKey.LEISURE) != null){
-			return true;
-		} else if(n.getTag(OSMTagKey.SPORT) != null){
-			return true;
-		} else if(n.getTag(OSMTagKey.TOURISM) != null){
-			return true;
-		} else if(n.getTag(OSMTagKey.HISTORIC) != null){
-			return true;
-		} else if(n.getTag(OSMTagKey.INTERNET_ACCESS) != null){
-			return true;
-		}
-		return false;
+		return initTypeSubtype(n, null) != null;
 	}
 	
 	public String getOpeningHours() {
