@@ -247,10 +247,25 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	public float getYTile() {
 		return (float) MapUtils.getTileNumberY(getZoom(), latitude);
 	}
+	
+	public int getMaximumShownMapZoom(){
+		if(map == null){
+			return 21;
+		} else {
+			return map.getMaximumZoomSupported() + OVERZOOM_IN;
+		}
+	}
+	
+	public int getMinimumShownMapZoom(){
+		if(map == null){
+			return 1;
+		} else {
+			return map.getMinimumZoomSupported();
+		}
+	}
 
 	public void setZoom(float zoom) {
-		if ((map == null && zoom < 22 && zoom > 0)
-				|| (map != null && (map.getMaximumZoomSupported() + OVERZOOM_IN) >= zoom && map.getMinimumZoomSupported() <= zoom)) {
+		if (zoom <= getMaximumShownMapZoom() && zoom >= getMinimumShownMapZoom()) {
 			animatedDraggingThread.stopAnimating();
 			this.zoom = zoom;
 			refreshMap();
