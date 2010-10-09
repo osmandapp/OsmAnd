@@ -315,10 +315,12 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 		
 		
-		ZoomControls zoomControls = (ZoomControls) findViewById(R.id.ZoomControls);
+		final ZoomControls zoomControls = (ZoomControls) findViewById(R.id.ZoomControls);
 		zoomControls.setOnZoomInClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				zoomControls.setIsZoomInEnabled(mapView.getZoom() + 1 < mapView.getMaximumShownMapZoom());
+				zoomControls.setIsZoomOutEnabled(mapView.getZoom() + 1 > mapView.getMinimumShownMapZoom());
 				mapView.getAnimatedDraggingThread().stopAnimatingSync();
 				mapView.getAnimatedDraggingThread().startZooming(mapView.getZoom(), mapView.getZoom() + 1);
 				showAndHideMapPosition();
@@ -331,6 +333,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		zoomControls.setOnZoomOutClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				zoomControls.setIsZoomInEnabled(mapView.getZoom() - 1 < mapView.getMaximumShownMapZoom());
+				zoomControls.setIsZoomOutEnabled(mapView.getZoom() - 1 > mapView.getMinimumShownMapZoom());
 				mapView.getAnimatedDraggingThread().stopAnimatingSync();
 				mapView.getAnimatedDraggingThread().startZooming(mapView.getZoom(), mapView.getZoom() - 1);
 				showAndHideMapPosition();
