@@ -368,12 +368,12 @@ public class OsmExtractionUI implements IMapLocationListener {
 
 			@Override
 			public boolean accept(File f) {
-				return f.isDirectory() || f.getName().endsWith(".bz2") || f.getName().endsWith(".osm");
+				return f.isDirectory() || f.getName().endsWith(".bz2") || f.getName().endsWith(".osm") || f.getName().endsWith(".pbf");
 			}
 
 			@Override
 			public String getDescription() {
-				return "Osm Files (*.bz2, *.osm)";
+				return "Osm Files (*.bz2, *.osm, *.pbf)";
 			}
         });
         return fc;

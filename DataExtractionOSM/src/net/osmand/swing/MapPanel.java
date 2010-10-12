@@ -206,6 +206,14 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		latitude = defaultLocation.getLatitude();
 		longitude = defaultLocation.getLongitude();
 		zoom = DataExtractionSettings.getSettings().getDefaultZoom();
+		if(map != null){
+			if(zoom > map.getMaximumZoomSupported()){
+				zoom = map.getMaximumZoomSupported();
+			}
+			if(zoom < map.getMinimumZoomSupported()){
+				zoom = map.getMinimumZoomSupported();
+			}
+		}
 		
 		popupMenu = new JPopupMenu();
 		downloader.addDownloaderCallback(this);

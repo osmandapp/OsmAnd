@@ -26,9 +26,9 @@ import org.apache.commons.logging.Log;
 
 public class IndexBatchCreator {
 	// config params
-	private static final boolean indexPOI = false;
-	private static final boolean indexAddress = false;
-	private static final boolean indexTransport = false;
+	private static final boolean indexPOI = true;
+	private static final boolean indexAddress = true;
+	private static final boolean indexTransport = true;
 	private static final boolean writeWayNodes = false; 
 	private static final boolean indexMap = true;
 	

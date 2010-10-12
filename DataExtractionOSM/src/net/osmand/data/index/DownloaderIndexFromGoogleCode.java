@@ -128,7 +128,6 @@ public class DownloaderIndexFromGoogleCode {
 	}
 	
 	
-	// that method doesn't work !!!
 	public static String deleteFileFromGoogleDownloads(String fileName, String token, String pagegen, String cookies) throws IOException {
 		// prepare data
 		String urlText = "http://code.google.com/p/osmand/downloads/delete.do?name="+fileName; //$NON-NLS-1$
