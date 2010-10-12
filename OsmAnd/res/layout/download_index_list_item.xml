@@ -4,10 +4,12 @@
   android:layout_width="fill_parent"
   android:layout_height="wrap_content">
   
-	<TextView android:id="@+id/download_item" 
+  	<CheckBox android:id="@+id/check_download_item" 
+		android:layout_width="wrap_content" android:layout_height="wrap_content" android:focusable="false"/>
+	<TextView android:id="@+id/download_item"  android:gravity="top"
 		android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1" ></TextView>
 		
-	<TextView android:id="@+id/download_descr" android:layout_marginLeft = "5dp"
-		android:layout_width="150dp" android:layout_height="wrap_content"></TextView>
+	<TextView android:id="@+id/download_descr" android:layout_marginLeft = "5dp" android:gravity="top"
+		android:layout_width="120dp" android:layout_height="wrap_content"></TextView>
 
 </LinearLayout>

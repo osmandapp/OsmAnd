@@ -11,6 +11,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -34,12 +35,14 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,13 +50,22 @@ import android.widget.Toast;
 public class DownloadIndexActivity extends ListActivity {
 	
 	private final static Log log = LogUtil.getLog(DownloadIndexActivity.class);
-	private ProgressDialog progressDlg = null; 
+	private ProgressDialog progressDlg = null;
+	private LinkedHashMap<String, DownloadEntry> entriesToDownload = new LinkedHashMap<String, DownloadEntry>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.download_index);
-		
+		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				downloadFiles();
+			}
+			
+		});
 		progressDlg = ProgressDialog.show(this, getString(R.string.downloading), getString(R.string.downloading_list_indexes));
 		progressDlg.setCancelable(true);
 		
@@ -80,15 +92,7 @@ public class DownloadIndexActivity extends ListActivity {
 		
 	}
 	
-	@Override
-	protected void onStop() {
-		if(progressDlg != null){
-			progressDlg.dismiss();
-			progressDlg = null;
-		}
-		super.onStop();
-	}
-	
+
 	protected Map<String, String> downloadIndex(){
 		try {
 			log.debug("Start loading list of index files"); //$NON-NLS-1$
@@ -139,10 +143,24 @@ public class DownloadIndexActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		final Entry<String, String> e = ((DownloadIndexAdapter)getListAdapter()).getItem(position);
+		String key = e.getKey();
+		final CheckBox ch = (CheckBox) v.findViewById(R.id.check_download_item);
+		
+		if(ch.isChecked()){
+			ch.setChecked(!ch.isChecked());
+			entriesToDownload.remove(key);
+			if(entriesToDownload.isEmpty()){
+				int x = getListView().getScrollX();
+				int y = getListView().getScrollY();
+				findViewById(R.id.DownloadButton).setVisibility(View.GONE);
+				getListView().scrollTo(x, y);
+			}
+			return;
+		}
+		
 		
 		int ls = e.getKey().lastIndexOf('_');
 		final String baseName = e.getKey().substring(0, ls);
-		String key = e.getKey();
 		
 		File parent = null;
 		String toSavePostfix = null;
@@ -192,140 +210,276 @@ public class DownloadIndexActivity extends ListActivity {
 		if(parent == null || !parent.exists()){
 			Toast.makeText(DownloadIndexActivity.this, getString(R.string.sd_dir_not_accessible), Toast.LENGTH_LONG).show();
 		} else {
-			final File fileToSave = new File(parent, baseName + toSavePostfix);
-			final File fileToUnzip = new File(parent, baseName + toCheckPostfix);
+			final DownloadEntry entry = new DownloadEntry();
+			entry.fileToSave = new File(parent, baseName + toSavePostfix);
+			entry.unzip = unzipDir;
+			entry.fileToUnzip = new File(parent, baseName + toCheckPostfix);
+			// if(!fileToUnzip.exists()){
+			// builder.setMessage(MessageFormat.format(getString(R.string.download_question), baseName, e.getValue()));
+			if (entry.fileToUnzip.exists()) {
 				Builder builder = new AlertDialog.Builder(this);
-				if(!fileToUnzip.exists()){
-					builder.setMessage(MessageFormat.format(getString(R.string.download_question), baseName, e.getValue()));
+				MessageFormat format;
+				if (entry.fileToUnzip.isDirectory()) {
+					format = new MessageFormat("{0,date,dd.MM.yyyy}", Locale.US); //$NON-NLS-1$
 				} else {
-					MessageFormat format;
-					if(fileToUnzip.isDirectory()){
-						format = new MessageFormat("{0,date,dd.MM.yyyy}", Locale.US); //$NON-NLS-1$
-					} else {
-						format = new MessageFormat("{0,date,dd.MM.yyyy} : {1, number,##.#} MB", Locale.US); //$NON-NLS-1$
-					}
-					String description = format.format(new Object[]{new Date(fileToUnzip.lastModified()), ((float)fileToUnzip.length() / MB)});
-					builder.setMessage(MessageFormat.format(getString(R.string.download_question_exist), baseName, description, e.getValue()));
-					
+					format = new MessageFormat("{0,date,dd.MM.yyyy} : {1, number,##.#} MB", Locale.US); //$NON-NLS-1$
 				}
-				final boolean toUnzip = unzipDir;
+				String description = format
+						.format(new Object[] { new Date(entry.fileToUnzip.lastModified()), ((float) entry.fileToUnzip.length() / MB) });
+				builder.setMessage(MessageFormat.format(getString(R.string.download_question_exist), baseName, description, e.getValue()));
+				
 				builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						downloadFile(e.getKey(), fileToSave, fileToUnzip, toUnzip);
+						entriesToDownload.put(e.getKey(), entry);
+						int x = getListView().getScrollX();
+						int y = getListView().getScrollY();
+						findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+						getListView().scrollTo(x, y);
+						ch.setChecked(!ch.isChecked());
 					}
 				});
 				builder.setNegativeButton(R.string.default_buttons_no, null);
 				builder.show();
+			} else {
+				entriesToDownload.put(e.getKey(), entry);
+				int x = getListView().getScrollX();
+				int y = getListView().getScrollY();
+				findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+				getListView().scrollTo(x, y);
+				ch.setChecked(!ch.isChecked());
+			}
+				
 		}
 		
+	}
+	
+	protected void downloadFiles() {
+		Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(MessageFormat.format(getString(R.string.download_files_question), entriesToDownload.size()));
+		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				progressDlg = ProgressDialog.show(DownloadIndexActivity.this, getString(R.string.downloading), getString(R.string.downloading_file), true, true);
+				interruptDownloading = false;
+				progressDlg.show();
+				final ProgressDialogImplementation impl = new ProgressDialogImplementation(progressDlg, true);
+				progressDlg.setOnCancelListener(new DialogInterface.OnCancelListener(){
+
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						interruptDownloading = true;
+					}
+				});
+				
+				impl.setRunnable("DownloadIndex", new Runnable(){ //$NON-NLS-1$
+
+					@Override
+					public void run() {
+						try {
+							for(String s : new ArrayList<String>(entriesToDownload.keySet())){
+								DownloadEntry entry = entriesToDownload.get(s);
+								if(downloadFile(s, entry.fileToSave, entry.fileToUnzip, entry.unzip, impl)){
+									entriesToDownload.remove(s);
+									runOnUiThread(new Runnable(){
+										@Override
+										public void run() {
+											((DownloadIndexAdapter)getListAdapter()).notifyDataSetChanged();
+										}
+									});
+								}
+							}
+							
+						} catch (InterruptedException e) {
+							progressDlg = null;
+						} finally {
+							if(progressDlg != null){
+								progressDlg.dismiss();
+								progressDlg = null;
+							}
+						}
+					}
+				});
+				impl.run();
+			}
+		});
+		builder.setNegativeButton(R.string.default_buttons_no, null);
+		builder.show();
 	}
 	
 	private static final int BUFFER_SIZE = 32256; 
 	
-	protected void downloadFile(FileOutputStream out, URL url, IProgress progress) throws IOException{
-		URLConnection conn = url.openConnection();
-		conn.setReadTimeout(30000);
-		conn.setConnectTimeout(30000);
-		InputStream is = conn.getInputStream();
-		int length = conn.getContentLength();
-		progress.startTask(getString(R.string.downloading_file), length);
-		byte[] buffer = new byte[BUFFER_SIZE];
-		int read = 0;
-		while((read = is.read(buffer)) != -1){
-			out.write(buffer, 0, read);
-			progress.progress(read);
-			length -= read;
-		}
-		if(length > 0){
-			throw new IOException("File was not fully read"); //$NON-NLS-1$
-		}
-		out.close();
+	private static class DownloadEntry {
+		public File fileToSave;
+		public File fileToUnzip;
+		public boolean unzip;
 		
 	}
 	
-	protected void downloadFile(final String key, final File fileToDownload, final File fileToUnZip, final boolean unzipToDir) {
+	protected final int TRIES_TO_DOWNLOAD = 20;
+	protected final long TIMEOUT_BETWEEN_DOWNLOADS = 8000;
+	private boolean interruptDownloading = false;
+	
+	protected void downloadFile(String fileName, FileOutputStream out, URL url, IProgress progress) throws IOException, InterruptedException {
+		InputStream is = null;
 		
-		progressDlg = ProgressDialog.show(this, getString(R.string.downloading), getString(R.string.downloading_file), true, true);
-		progressDlg.show();
-		final ProgressDialogImplementation impl = new ProgressDialogImplementation(progressDlg, true);
-		impl.setRunnable("DownloadIndex", new Runnable(){ //$NON-NLS-1$
-
-			@Override
-			public void run() {
+		byte[] buffer = new byte[BUFFER_SIZE];
+		int read = 0;
+		int length = 0;
+		int fileread = 0;
+		int triesDownload = TRIES_TO_DOWNLOAD;
+		boolean first = true;
+		try {
+			while (triesDownload > 0) {
 				try {
-					FileOutputStream out = new FileOutputStream(fileToDownload);
-					URL url = DownloaderIndexFromGoogleCode.getInputStreamToLoadIndex(key);
-					downloadFile(out, url, impl);
-						
-					File toIndex = fileToDownload;
-					if(fileToDownload.getName().endsWith(".zip")){ //$NON-NLS-1$
-						impl.startTask(getString(R.string.unzipping_file), -1);
-						if(!unzipToDir){
-							toIndex = fileToUnZip;
-						} else {
-							fileToUnZip.mkdirs();
+					if (!first) {
+						log.info("Reconnecting"); //$NON-NLS-1$
+						try {
+							Thread.sleep(TIMEOUT_BETWEEN_DOWNLOADS);
+						} catch (InterruptedException e) {
 						}
-						ZipInputStream zipIn = new ZipInputStream(new FileInputStream(fileToDownload));
-						ZipEntry entry = null;
-						while((entry = zipIn.getNextEntry()) != null) {
-							if(!unzipToDir){
-								String name = entry.getName();
-								// small simplification
-								int ind = name.lastIndexOf('_');
-								if(ind > 0){
-									// cut version
-									int i = name.indexOf('.', ind);
-									if(i > 0){
-										name = name.substring(0, ind) + name.substring(i, name.length());
-									}
-								}
-								out = new FileOutputStream(new File(fileToUnZip.getParent(), name));
-							} else {
-								out = new FileOutputStream(new File(fileToUnZip, entry.getName()));
-							}
-							int read;
-							byte[] buffer = new byte[BUFFER_SIZE];
-							while((read = zipIn.read(buffer)) != -1){
-								out.write(buffer, 0, read);
-							}
-							out.close();
-						} 
-						zipIn.close();
-						fileToDownload.delete(); // zip is no needed more
 					}
-						
-					ArrayList<String> warnings = new ArrayList<String>();
-					ResourceManager manager = ((OsmandApplication)getApplication()).getResourceManager();
-					if(toIndex.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)){
-						manager.indexingAddress(impl, warnings, toIndex);
-					} else if(toIndex.getName().endsWith(IndexConstants.POI_INDEX_EXT)){
-						manager.indexingPoi(impl, warnings, toIndex);
-					} else if(toIndex.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)){
-						manager.indexingTransport(impl, warnings, toIndex);
-					} else if(toIndex.getName().endsWith(IndexConstants.MAP_INDEX_EXT)){
-						manager.indexingMaps(impl);
-					} else if(toIndex.getName().endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)){
+					URLConnection conn = url.openConnection();
+					conn.setReadTimeout(30000);
+					conn.setConnectTimeout(30000);
+					is = conn.getInputStream();
+					long skipped = 0;
+					while (skipped < fileread) {
+						skipped += is.skip(fileread - skipped);
 					}
-					if(warnings.isEmpty()){
-						showWarning(getString(R.string.download_index_success));
-					} else {
-						showWarning(warnings.get(0));
+					if (first) {
+						length = conn.getContentLength();
+						progress.startTask(getString(R.string.downloading_file) + " " + fileName, length); //$NON-NLS-1$
 					}
+
+					first = false;
+					while ((read = is.read(buffer)) != -1) {
+						 if(interruptDownloading){
+						 	throw new InterruptedException();
+						 }
+						out.write(buffer, 0, read);
+						progress.progress(read);
+						fileread += read;
+					}
+					triesDownload = 0;
 				} catch (IOException e) {
-					log.error("Exception ocurred", e); //$NON-NLS-1$
-					showWarning(getString(R.string.error_io_error));
-					// Possibly file is corrupted
-					fileToDownload.delete();
-				} finally {
-					if(progressDlg != null){
-						progressDlg.dismiss();
-						progressDlg = null;
+					log.error("IOException", e); //$NON-NLS-1$
+					triesDownload--;
+				}
+
+			}
+		} finally {
+			if (is != null) {
+				is.close();
+			}
+		}
+		if(length != fileread){
+			throw new IOException("File was not fully read"); //$NON-NLS-1$
+		}
+		
+	}
+
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if(isFinishing()){
+			interruptDownloading = true;
+		}
+		// not needed now because rotate screen not allowed
+		// posssibly it should be onDestroy method
+//		if(progressDlg != null){
+//			progressDlg.dismiss();
+//			progressDlg = null;
+//		}
+	}
+	
+	protected boolean downloadFile(final String key, final File fileToDownload, final File fileToUnZip, final boolean unzipToDir,
+			IProgress progress) throws InterruptedException {
+		FileOutputStream out = null;
+		try {
+
+			out = new FileOutputStream(fileToDownload);
+			URL url = DownloaderIndexFromGoogleCode.getInputStreamToLoadIndex(key);
+			try {
+				downloadFile(key, out, url, progress);
+			} finally {
+				out.close();
+				out = null;
+			}
+
+			File toIndex = fileToDownload;
+			if (fileToDownload.getName().endsWith(".zip")) { //$NON-NLS-1$
+				progress.startTask(getString(R.string.unzipping_file), -1);
+				if (!unzipToDir) {
+					toIndex = fileToUnZip;
+				} else {
+					fileToUnZip.mkdirs();
+				}
+				ZipInputStream zipIn = new ZipInputStream(new FileInputStream(fileToDownload));
+				ZipEntry entry = null;
+				while ((entry = zipIn.getNextEntry()) != null) {
+					if (!unzipToDir) {
+						String name = entry.getName();
+						// small simplification
+						int ind = name.lastIndexOf('_');
+						if (ind > 0) {
+							// cut version
+							int i = name.indexOf('.', ind);
+							if (i > 0) {
+								name = name.substring(0, ind) + name.substring(i, name.length());
+							}
+						}
+						out = new FileOutputStream(new File(fileToUnZip.getParent(), name));
+					} else {
+						out = new FileOutputStream(new File(fileToUnZip, entry.getName()));
 					}
+					int read;
+					byte[] buffer = new byte[BUFFER_SIZE];
+					while ((read = zipIn.read(buffer)) != -1) {
+						out.write(buffer, 0, read);
+					}
+					out.close();
+				}
+				zipIn.close();
+				fileToDownload.delete(); // zip is no needed more
+			}
+
+			ArrayList<String> warnings = new ArrayList<String>();
+			ResourceManager manager = ((OsmandApplication) getApplication()).getResourceManager();
+			if (toIndex.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)) {
+				manager.indexingAddress(progress, warnings, toIndex);
+			} else if (toIndex.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
+				manager.indexingPoi(progress, warnings, toIndex);
+			} else if (toIndex.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)) {
+				manager.indexingTransport(progress, warnings, toIndex);
+			} else if (toIndex.getName().endsWith(IndexConstants.MAP_INDEX_EXT)) {
+				manager.indexingMaps(progress);
+			} else if (toIndex.getName().endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
+			}
+			if (warnings.isEmpty()) {
+				showWarning(getString(R.string.download_index_success));
+			} else {
+				showWarning(warnings.get(0));
+			}
+			return true;
+		} catch (IOException e) {
+			log.error("Exception ocurred", e); //$NON-NLS-1$
+			showWarning(getString(R.string.error_io_error));
+			if(out != null){
+				try {
+					out.close();
+				} catch (IOException e1) {
 				}
 			}
-		});
-		impl.run();
+			// Possibly file is corrupted
+			fileToDownload.delete();
+			return false;
+		} catch (InterruptedException e) {
+			// Possibly file is corrupted
+			fileToDownload.delete();
+			throw e;
+		}
 	}
 	
 	public void showWarning(final String messages){
@@ -372,8 +526,10 @@ public class DownloadIndexActivity extends ListActivity {
 			if(e.getKey().endsWith(".zip")){ //$NON-NLS-1$
 				name += " (zip)"; //$NON-NLS-1$
 			}
-			item.setText(s + "\n " + name); //$NON-NLS-1$
-			description.setText(e.getValue().replace(':', '\n'));
+			CheckBox ch = (CheckBox) row.findViewById(R.id.check_download_item);
+			ch.setChecked(entriesToDownload.containsKey(e.getKey()));
+			item.setText(s.trim() + "\n " + name); //$NON-NLS-1$
+			description.setText(e.getValue().replace(':', '\n').trim());
 			return row;
 		}
 	}

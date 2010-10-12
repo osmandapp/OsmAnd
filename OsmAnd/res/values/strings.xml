@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="download_files_question">Download {0} files?</string>
+	<string name="download_files">Download</string>
 	<string name="context_menu_item_search_transport">Search transport</string>
 	<string name="transport_searching_transport">Searching transport (no target)</string>
 	<string name="transport_searching_route">Searching transport ({0} for target)</string>

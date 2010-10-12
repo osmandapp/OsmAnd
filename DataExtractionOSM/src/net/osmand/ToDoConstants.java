@@ -9,9 +9,10 @@ public class ToDoConstants {
 	
 	// TODO max 100
 	// FOR 0.4 beta RELEASE
-	// Profile 
-	// Try/catch for all databases operation (disk I/O exceptions, do not have crash)
-	//   99. Implement better file downloader for big files 
+	// Profile
+	// fix issue with loading app (and not visible map)
+
+
 
 	// 	Outside base 0.4 release
 	//   69. Add phone and site information to POI (enable call to POI and open site)
@@ -41,7 +42,7 @@ public class ToDoConstants {
 	
 	///////////////////////////   DONE //////////////////////////////
 	// DONE ANDROID :
-
+	//   99. Implement better file downloader for big files
 	
 	// DONE SWING
 
