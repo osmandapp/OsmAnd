@@ -273,7 +273,7 @@ public class ResourceManager {
 			imagesOnFS.put(tileId, null);
 		}
 		
-		if (loadFromFs && cacheOfImages.get(tileId) == null) {
+		if (loadFromFs && cacheOfImages.get(tileId) == null && map != null) {
 			if(!loadFromInternetIfNeeded && !tileExistOnFileSystem(tileId, map, x, y, zoom)){
 				return null;
 			}
