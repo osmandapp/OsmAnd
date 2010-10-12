@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="download_files_question">Загрузить {0} файл(ов)?</string>
+	<string name="download_files">Загрузить</string>
 	<string name="context_menu_item_search_transport">Искать транспорт</string>
 	<string name="transport_context_menu">Искать транспорт на остановке</string>
 	<string name="transport_searching_transport">Искать транспорт (нет цели)</string>
