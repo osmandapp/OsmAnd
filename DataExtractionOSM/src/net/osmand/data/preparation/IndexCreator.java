@@ -1617,312 +1617,321 @@ public class IndexCreator {
 		int allRelations = 100000;
 		int allWays = 1000000;
 		int allNodes = 10000000;
-		if (loadFromPath) {
-			InputStream stream = new FileInputStream(readFile);
-			InputStream streamFile = stream;
-			long st = System.currentTimeMillis();
-			if (readFile.getName().endsWith(".bz2")) {
-				if (stream.read() != 'B' || stream.read() != 'Z') {
-					throw new RuntimeException("The source stream must start with the characters BZ if it is to be read as a BZip2 stream.");
-				} else {
-					stream = new CBZip2InputStream(stream);
+		try {
+			if (loadFromPath) {
+				boolean pbfFile = false;
+				InputStream stream = new FileInputStream(readFile);
+				InputStream streamFile = stream;
+				long st = System.currentTimeMillis();
+				if (readFile.getName().endsWith(".bz2")) {
+					if (stream.read() != 'B' || stream.read() != 'Z') {
+						throw new RuntimeException(
+								"The source stream must start with the characters BZ if it is to be read as a BZip2 stream.");
+					} else {
+						stream = new CBZip2InputStream(stream);
+					}
+				} else if (readFile.getName().endsWith(".pbf")) {
+					pbfFile = true;
+				}
+
+				if (progress != null) {
+					progress.startTask("Loading file " + readFile.getAbsolutePath(), -1);
+				}
+
+				OsmBaseStorage storage = new OsmBaseStorage();
+				storage.setSupressWarnings(DataExtractionSettings.getSettings().isSupressWarningsForDuplicatedId());
+				if (addFilter != null) {
+					storage.getFilters().add(addFilter);
+				}
+
+				// 1. Loading osm file
+				NewDataExtractionOsmFilter filter = new NewDataExtractionOsmFilter();
+				try {
+					// 1 init database to store temporary data
+					progress.setGeneralProgress("[50 of 100]");
+
+					filter.initDatabase();
+					storage.getFilters().add(filter);
+					if (pbfFile) {
+						storage.parseOSMPbf(stream, progress, false);
+					} else {
+						storage.parseOSM(stream, progress, streamFile, false);
+					}
+					filter.finishLoading();
+					allNodes = filter.getAllNodes();
+					allWays = filter.getAllWays();
+					allRelations = filter.getAllRelations();
+
+					if (log.isInfoEnabled()) {
+						log.info("File parsed : " + (System.currentTimeMillis() - st));
+					}
+					progress.finishTask();
+				} finally {
+					if (log.isInfoEnabled()) {
+						log.info("File indexed : " + (System.currentTimeMillis() - st));
+					}
 				}
 			}
 
-			if (progress != null) {
-				progress.startTask("Loading file " + readFile.getAbsolutePath(), -1);
-			}
+			// 2. Processing all entries
 
-			OsmBaseStorage storage = new OsmBaseStorage();
-			storage.setSupressWarnings(DataExtractionSettings.getSettings().isSupressWarningsForDuplicatedId());
-			if (addFilter != null) {
-				storage.getFilters().add(addFilter);
-			}
+			pselectNode = dbConn.prepareStatement("select * from node where id = ?");
+			pselectWay = dbConn.prepareStatement("select * from ways where id = ? order by ord");
+			pselectRelation = dbConn.prepareStatement("select * from relations where id = ? order by ord");
+			pselectTags = dbConn.prepareStatement("select key, value from tags where id = ? and type = ?");
 
-			// 1. Loading osm file
-			NewDataExtractionOsmFilter filter = new NewDataExtractionOsmFilter();
-			try {
-				// 1 init database to store temporary data
-				progress.setGeneralProgress("[50 of 100]");
-
-				filter.initDatabase();
-				storage.getFilters().add(filter);
-				storage.parseOSM(stream, progress, streamFile, false);
-				filter.finishLoading();
-				allNodes = filter.getAllNodes();
-				allWays = filter.getAllWays();
-				allRelations = filter.getAllRelations();
-
-				if (log.isInfoEnabled()) {
-					log.info("File parsed : " + (System.currentTimeMillis() - st));
+			if (indexMap) {
+				mapFile = new File(workingDir, getMapFileName());
+				// to save space
+				if (mapFile.exists()) {
+					mapFile.delete();
 				}
-				progress.finishTask();
+				mapFile.getParentFile().mkdirs();
+				mapConnection = DriverManager.getConnection("jdbc:sqlite:" + mapFile.getAbsolutePath());
 
-			} finally {
-				if (log.isInfoEnabled()) {
-					log.info("File indexed : " + (System.currentTimeMillis() - st));
+				DataIndexWriter.createMapIndexStructure(mapConnection);
+				mapObjStat = DataIndexWriter.createStatementMapWaysInsert(mapConnection);
+				mapLocsStatLevel0 = DataIndexWriter.createStatementMapWaysLocationsInsert(mapConnection);
+				mapLocsStatLevel1 = DataIndexWriter.createStatementMapWaysLocationsInsertLevel2(mapConnection);
+				mapLocsStatLevel2 = DataIndexWriter.createStatementMapWaysLocationsInsertLevel3(mapConnection);
+				// try {
+				// mapTree = new RTree(mapFile.getAbsolutePath()+"_ind");
+				// } catch (RTreeException e) {
+				// e.printStackTrace();
+				// }
+				pStatements.put(mapObjStat, 0);
+				pStatements.put(mapLocsStatLevel0, 0);
+				pStatements.put(mapLocsStatLevel1, 0);
+				pStatements.put(mapLocsStatLevel2, 0);
+				mapConnection.setAutoCommit(false);
+			}
+
+			if (indexPOI) {
+				poiIndexFile = new File(workingDir, getPoiFileName());
+				// to save space
+				if (poiIndexFile.exists()) {
+					poiIndexFile.delete();
 				}
+				poiIndexFile.getParentFile().mkdirs();
+				// creating nodes db to fast access for all nodes
+				poiConnection = DriverManager.getConnection("jdbc:sqlite:" + poiIndexFile.getAbsolutePath());
+				DataIndexWriter.createPoiIndexStructure(poiConnection);
+				poiPreparedStatement = DataIndexWriter.createStatementAmenityInsert(poiConnection);
+				pStatements.put(poiPreparedStatement, 0);
+				poiConnection.setAutoCommit(false);
 			}
-		}
-		
 
+			if (indexTransport) {
+				transportIndexFile = new File(workingDir, getTransportFileName());
+				// to save space
+				if (transportIndexFile.exists()) {
+					transportIndexFile.delete();
+				}
+				transportIndexFile.getParentFile().mkdirs();
+				// creating nodes db to fast access for all nodes
+				transportConnection = DriverManager.getConnection("jdbc:sqlite:" + transportIndexFile.getAbsolutePath());
 
-		// 2. Processing all entries
+				DataIndexWriter.createTransportIndexStructure(transportConnection);
+				transRouteStat = transportConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexTransportRoute
+						.getTable(), IndexTransportRoute.values().length));
+				transRouteStopsStat = transportConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(
+						IndexTransportRouteStop.getTable(), IndexTransportRouteStop.values().length));
+				transStopsStat = transportConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexTransportStop
+						.getTable(), IndexTransportStop.values().length));
+				pStatements.put(transRouteStat, 0);
+				pStatements.put(transRouteStopsStat, 0);
+				pStatements.put(transStopsStat, 0);
+				transportConnection.setAutoCommit(false);
 
-		pselectNode = dbConn.prepareStatement("select * from node where id = ?");
-		pselectWay = dbConn.prepareStatement("select * from ways where id = ? order by ord");
-		pselectRelation = dbConn.prepareStatement("select * from relations where id = ? order by ord");
-		pselectTags = dbConn.prepareStatement("select key, value from tags where id = ? and type = ?");
-		
-		if(indexMap){
-			mapFile = new File(workingDir, getMapFileName());
-			// to save space
-			if (mapFile.exists()) {
-				mapFile.delete();
 			}
-			mapFile.getParentFile().mkdirs();
-			mapConnection = DriverManager.getConnection("jdbc:sqlite:" + mapFile.getAbsolutePath());
-			
-			DataIndexWriter.createMapIndexStructure(mapConnection);
-			mapObjStat = DataIndexWriter.createStatementMapWaysInsert(mapConnection);
-			mapLocsStatLevel0 = DataIndexWriter.createStatementMapWaysLocationsInsert(mapConnection);
-			mapLocsStatLevel1 = DataIndexWriter.createStatementMapWaysLocationsInsertLevel2(mapConnection);
-			mapLocsStatLevel2 = DataIndexWriter.createStatementMapWaysLocationsInsertLevel3(mapConnection);
-//			try {
-//				mapTree = new RTree(mapFile.getAbsolutePath()+"_ind");
-//			} catch (RTreeException e) {
-//				e.printStackTrace();
-//			}
-			pStatements.put(mapObjStat, 0);
-			pStatements.put(mapLocsStatLevel0, 0);
-			pStatements.put(mapLocsStatLevel1, 0);
-			pStatements.put(mapLocsStatLevel2, 0);
-			mapConnection.setAutoCommit(false);
-		}
 
-		if (indexPOI) {
-			poiIndexFile = new File(workingDir, getPoiFileName());
-			// to save space
-			if (poiIndexFile.exists()) {
-				poiIndexFile.delete();
-			}
-			poiIndexFile.getParentFile().mkdirs();
-			// creating nodes db to fast access for all nodes
-			poiConnection = DriverManager.getConnection("jdbc:sqlite:" + poiIndexFile.getAbsolutePath());
-			DataIndexWriter.createPoiIndexStructure(poiConnection);
-			poiPreparedStatement = DataIndexWriter.createStatementAmenityInsert(poiConnection);
-			pStatements.put(poiPreparedStatement, 0);
-			poiConnection.setAutoCommit(false);
-		}
-
-		if (indexTransport) {
-			transportIndexFile = new File(workingDir, getTransportFileName());
-			// to save space
-			if (transportIndexFile.exists()) {
-				transportIndexFile.delete();
-			}
-			transportIndexFile.getParentFile().mkdirs();
-			// creating nodes db to fast access for all nodes
-			transportConnection = DriverManager.getConnection("jdbc:sqlite:" + transportIndexFile.getAbsolutePath());
-
-			DataIndexWriter.createTransportIndexStructure(transportConnection);
-			transRouteStat = transportConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexTransportRoute
-					.getTable(), IndexTransportRoute.values().length));
-			transRouteStopsStat = transportConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(
-					IndexTransportRouteStop.getTable(), IndexTransportRouteStop.values().length));
-			transStopsStat = transportConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexTransportStop
-					.getTable(), IndexTransportStop.values().length));
-			pStatements.put(transRouteStat, 0);
-			pStatements.put(transRouteStopsStat, 0);
-			pStatements.put(transStopsStat, 0);
-			transportConnection.setAutoCommit(false);
-
-		}
-		
-		if (indexAddress) {
-			addressIndexFile = new File(workingDir, getAddressFileName());
-			// to save space
-			if (addressIndexFile.exists()) {
-				addressIndexFile.delete();
-			}
-			addressIndexFile.getParentFile().mkdirs();
-			// creating nodes db to fast access for all nodes
-			addressConnection = DriverManager.getConnection("jdbc:sqlite:" + addressIndexFile.getAbsolutePath());
-
-			DataIndexWriter.createAddressIndexStructure(addressConnection);
-			addressCityStat = addressConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexCityTable.getTable(),
-					IndexCityTable.values().length));
-			addressStreetStat = addressConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexStreetTable
-					.getTable(), IndexStreetTable.values().length));
-			addressSearchStreetStat = addressConnection.prepareStatement("SELECT " + IndexStreetTable.ID.name() + " FROM " + 
-					IndexStreetTable.getTable() + " WHERE ? = " + IndexStreetTable.CITY.name() + " AND ? =" + IndexStreetTable.NAME.name());
-			addressSearchBuildingStat = addressConnection.prepareStatement("SELECT " + IndexBuildingTable.ID.name() + " FROM " + 
-					IndexBuildingTable.getTable() + " WHERE ? = " + IndexBuildingTable.ID.name());
-			addressSearchStreetNodeStat = addressConnection.prepareStatement("SELECT " + IndexStreetNodeTable.WAY.name() + " FROM " + 
-					IndexStreetNodeTable.getTable() + " WHERE ? = " + IndexStreetNodeTable.WAY.name());
-			addressBuildingStat = addressConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexBuildingTable
-					.getTable(), IndexBuildingTable.values().length));
-			addressStreetNodeStat = addressConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(
-					IndexStreetNodeTable.getTable(), IndexStreetNodeTable.values().length));
-			pStatements.put(addressCityStat, 0);
-			pStatements.put(addressStreetStat, 0);
-			pStatements.put(addressStreetNodeStat, 0);
-			pStatements.put(addressBuildingStat, 0);
-			// put search statements to close them after all
-			pStatements.put(addressSearchBuildingStat, 0);
-			pStatements.put(addressSearchStreetNodeStat, 0);
-			pStatements.put(addressSearchStreetStat, 0);
-			
-			addressConnection.setAutoCommit(false);
-		}
-
-		if(normalizeStreets){
-			normalizeDefaultSuffixes = DataExtractionSettings.getSettings().getDefaultSuffixesToNormalizeStreets();
-			normalizeSuffixes = DataExtractionSettings.getSettings().getSuffixesToNormalizeStreets();
-		}
-		
-
-		// 1. write all cities
-		
-		if(indexAddress){
-			progress.setGeneralProgress("[55 of 100]");
-			progress.startTask("Indexing cities...", -1);
-			if(!loadFromPath){
-				allNodes = iterateOverEntities(progress, EntityType.NODE, allNodes, STEP_CITY_NODES);
-			}
-			
-			for(City c : cities.values()){
-				DataIndexWriter.writeCity(addressCityStat, pStatements, c, BATCH_SIZE);
-			}
-			// commit to put all cities
-			if(pStatements.get(addressCityStat) > 0){
-				addressCityStat.executeBatch();
-				pStatements.put(addressCityStat, 0);
-				addressConnection.commit();
-			}
-			
-		}
-		
-		// 2. index address relations
-		if(indexAddress || indexMap){
-			progress.setGeneralProgress("[55 of 100]");
-			progress.startTask("Preindexing address...", -1);
-			allRelations = iterateOverEntities(progress, EntityType.RELATION, allRelations, STEP_ADDRESS_RELATIONS_AND_MULTYPOLYGONS);
-			// commit to put all cities
 			if (indexAddress) {
+				addressIndexFile = new File(workingDir, getAddressFileName());
+				// to save space
+				if (addressIndexFile.exists()) {
+					addressIndexFile.delete();
+				}
+				addressIndexFile.getParentFile().mkdirs();
+				// creating nodes db to fast access for all nodes
+				addressConnection = DriverManager.getConnection("jdbc:sqlite:" + addressIndexFile.getAbsolutePath());
+
+				DataIndexWriter.createAddressIndexStructure(addressConnection);
+				addressCityStat = addressConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexCityTable
+						.getTable(), IndexCityTable.values().length));
+				addressStreetStat = addressConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexStreetTable
+						.getTable(), IndexStreetTable.values().length));
+				addressSearchStreetStat = addressConnection.prepareStatement("SELECT " + IndexStreetTable.ID.name() + " FROM "
+						+ IndexStreetTable.getTable() + " WHERE ? = " + IndexStreetTable.CITY.name() + " AND ? ="
+						+ IndexStreetTable.NAME.name());
+				addressSearchBuildingStat = addressConnection.prepareStatement("SELECT " + IndexBuildingTable.ID.name() + " FROM "
+						+ IndexBuildingTable.getTable() + " WHERE ? = " + IndexBuildingTable.ID.name());
+				addressSearchStreetNodeStat = addressConnection.prepareStatement("SELECT " + IndexStreetNodeTable.WAY.name() + " FROM "
+						+ IndexStreetNodeTable.getTable() + " WHERE ? = " + IndexStreetNodeTable.WAY.name());
+				addressBuildingStat = addressConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexBuildingTable
+						.getTable(), IndexBuildingTable.values().length));
+				addressStreetNodeStat = addressConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(
+						IndexStreetNodeTable.getTable(), IndexStreetNodeTable.values().length));
+				pStatements.put(addressCityStat, 0);
+				pStatements.put(addressStreetStat, 0);
+				pStatements.put(addressStreetNodeStat, 0);
+				pStatements.put(addressBuildingStat, 0);
+				// put search statements to close them after all
+				pStatements.put(addressSearchBuildingStat, 0);
+				pStatements.put(addressSearchStreetNodeStat, 0);
+				pStatements.put(addressSearchStreetStat, 0);
+
+				addressConnection.setAutoCommit(false);
+			}
+
+			if (normalizeStreets) {
+				normalizeDefaultSuffixes = DataExtractionSettings.getSettings().getDefaultSuffixesToNormalizeStreets();
+				normalizeSuffixes = DataExtractionSettings.getSettings().getSuffixesToNormalizeStreets();
+			}
+
+			// 1. write all cities
+
+			if (indexAddress) {
+				progress.setGeneralProgress("[55 of 100]");
+				progress.startTask("Indexing cities...", -1);
+				if (!loadFromPath) {
+					allNodes = iterateOverEntities(progress, EntityType.NODE, allNodes, STEP_CITY_NODES);
+				}
+
+				for (City c : cities.values()) {
+					DataIndexWriter.writeCity(addressCityStat, pStatements, c, BATCH_SIZE);
+				}
+				// commit to put all cities
+				if (pStatements.get(addressCityStat) > 0) {
+					addressCityStat.executeBatch();
+					pStatements.put(addressCityStat, 0);
+					addressConnection.commit();
+				}
+
+			}
+
+			// 2. index address relations
+			if (indexAddress || indexMap) {
+				progress.setGeneralProgress("[55 of 100]");
+				progress.startTask("Preindexing address...", -1);
+				allRelations = iterateOverEntities(progress, EntityType.RELATION, allRelations, STEP_ADDRESS_RELATIONS_AND_MULTYPOLYGONS);
+				// commit to put all cities
+				if (indexAddress) {
+					if (pStatements.get(addressBuildingStat) > 0) {
+						addressBuildingStat.executeBatch();
+						pStatements.put(addressBuildingStat, 0);
+					}
+					if (pStatements.get(addressStreetNodeStat) > 0) {
+						addressStreetNodeStat.executeBatch();
+						pStatements.put(addressStreetNodeStat, 0);
+					}
+					addressConnection.commit();
+				}
+			}
+
+			// 3. iterate over all entities
+			iterateOverAllEntities(progress, allNodes, allWays, allRelations, STEP_MAIN);
+
+			// 4. update all postal codes from relations
+			if (indexAddress && !postalCodeRelations.isEmpty()) {
+				progress.setGeneralProgress("[95 of 100]");
+				progress.startTask("Registering postcodes...", -1);
 				if (pStatements.get(addressBuildingStat) > 0) {
 					addressBuildingStat.executeBatch();
 					pStatements.put(addressBuildingStat, 0);
+					addressConnection.commit();
 				}
-				if (pStatements.get(addressStreetNodeStat) > 0) {
-					addressStreetNodeStat.executeBatch();
-					pStatements.put(addressStreetNodeStat, 0);
-				}
-				addressConnection.commit();
-			}
-		}
-		
 
-		// 3. iterate over all entities
-		iterateOverAllEntities(progress, allNodes, allWays, allRelations, STEP_MAIN);
-		
-		
-		// 4. update all postal codes from relations
-		if(indexAddress && !postalCodeRelations.isEmpty()){
+				PreparedStatement pstat = addressConnection.prepareStatement("UPDATE " + IndexBuildingTable.getTable() + " SET "
+						+ IndexBuildingTable.POSTCODE.name() + " = ? WHERE " + IndexBuildingTable.ID.name() + " = ?");
+				pStatements.put(pstat, 0);
+				for (Relation r : postalCodeRelations) {
+					String tag = r.getTag(OSMTagKey.POSTAL_CODE);
+					for (EntityId l : r.getMemberIds()) {
+						pstat.setString(1, tag);
+						pstat.setLong(2, l.getId());
+						DataIndexWriter.addBatch(pStatements, pstat, BATCH_SIZE);
+					}
+				}
+
+			}
+			// 5. writing low level maps
 			progress.setGeneralProgress("[95 of 100]");
-			progress.startTask("Registering postcodes...", -1);
-			if(pStatements.get(addressBuildingStat) > 0){
-				addressBuildingStat.executeBatch();
-				pStatements.put(addressBuildingStat, 0);
-				addressConnection.commit();
-			}
-			
-			PreparedStatement pstat = addressConnection.prepareStatement("UPDATE " + IndexBuildingTable.getTable() + 
-					" SET " + IndexBuildingTable.POSTCODE.name() + " = ? WHERE " + IndexBuildingTable.ID.name() + " = ?");
-			pStatements.put(pstat, 0);
-			for(Relation r : postalCodeRelations){
-				String tag = r.getTag(OSMTagKey.POSTAL_CODE);
-				for(EntityId l : r.getMemberIds()){
-					pstat.setString(1, tag);
-					pstat.setLong(2, l.getId());
-					DataIndexWriter.addBatch(pStatements, pstat, BATCH_SIZE);
+			progress.startTask("Indexing low levels for map ...", -1);
+			if (indexMap) {
+				for (Long l : lowLevelWaysSt.keySet()) {
+					for (Way w : lowLevelWaysSt.get(l)) {
+						int level = (int) (w.getId() & 3);
+						writeEntityToMapDatabase(w, w.getId() >> 2, false, level);
+					}
 				}
-			}
-			
-		}
-		// 5. writing low level maps
-		progress.setGeneralProgress("[95 of 100]");
-		progress.startTask("Indexing low levels for map ...", -1);
-		if(indexMap){
-			for(Long l : lowLevelWaysSt.keySet()){
-				for(Way w : lowLevelWaysSt.get(l)){
-					int level = (int) (w.getId() & 3);
-					writeEntityToMapDatabase(w, w.getId() >> 2, false, level);
-				}
-			}
-			
-		}
 
-		try {
-			if (pselectNode != null) {
-				pselectNode.close();
-			}
-			if (pselectWay != null) {
-				pselectWay.close();
-			}
-			if (pselectRelation != null) {
-				pselectRelation.close();
-			}
-			if (pselectTags != null) {
-				pselectTags.close();
-			}
-			for (PreparedStatement p : pStatements.keySet()) {
-				if (pStatements.get(p) > 0) {
-					p.executeBatch();
-				}
-				p.close();
 			}
 
-			if (poiConnection != null) {
-				poiConnection.commit();
-				poiConnection.close();
-				if (lastModifiedDate != null) {
-					poiIndexFile.setLastModified(lastModifiedDate);
+		} finally {
+			try {
+				if (pselectNode != null) {
+					pselectNode.close();
 				}
-			}
-			if (transportConnection != null) {
-				transportConnection.commit();
-				transportConnection.close();
-				if (lastModifiedDate != null) {
-					transportIndexFile.setLastModified(lastModifiedDate);
+				if (pselectWay != null) {
+					pselectWay.close();
 				}
-			}
-			
-			if (mapConnection != null) {
-				mapConnection.commit();
-				mapConnection.close();
-//				try {
-//					mapTree.flush();
-//				} catch (RTreeException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-				
-				if (lastModifiedDate != null) {
-					mapFile.setLastModified(lastModifiedDate);
+				if (pselectRelation != null) {
+					pselectRelation.close();
 				}
-			}
-			
-			if (addressConnection != null) {
-				addressConnection.commit();
-				addressConnection.close();
-				if (lastModifiedDate != null) {
-					addressIndexFile.setLastModified(lastModifiedDate);
+				if (pselectTags != null) {
+					pselectTags.close();
 				}
-			}
+				for (PreparedStatement p : pStatements.keySet()) {
+					if (pStatements.get(p) > 0) {
+						p.executeBatch();
+					}
+					p.close();
+				}
 
-			dbConn.close();
-		} catch (SQLException e) {
+				if (poiConnection != null) {
+					poiConnection.commit();
+					poiConnection.close();
+					poiConnection = null;
+					if (lastModifiedDate != null) {
+						poiIndexFile.setLastModified(lastModifiedDate);
+					}
+				}
+				if (transportConnection != null) {
+					transportConnection.commit();
+					transportConnection.close();
+					transportConnection = null;
+					if (lastModifiedDate != null) {
+						transportIndexFile.setLastModified(lastModifiedDate);
+					}
+				}
+
+				if (mapConnection != null) {
+					mapConnection.commit();
+					mapConnection.close();
+					mapConnection = null;
+					// try {
+					// mapTree.flush();
+					// } catch (RTreeException e) {
+					// // TODO Auto-generated catch block
+					// e.printStackTrace();
+					// }
+
+					if (lastModifiedDate != null) {
+						mapFile.setLastModified(lastModifiedDate);
+					}
+				}
+
+				if (addressConnection != null) {
+					addressConnection.commit();
+					addressConnection.close();
+					addressConnection = null;
+					if (lastModifiedDate != null) {
+						addressIndexFile.setLastModified(lastModifiedDate);
+					}
+				}
+				dbConn.close();
+			} catch (SQLException e) {
+			}
 		}
 	}
 	
@@ -1944,13 +1953,14 @@ public class IndexCreator {
 		
 		 IndexCreator creator = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
 //		 creator.setIndexMap(true);
-		 creator.setIndexPOI(true);
+//		 creator.setIndexPOI(true);
+		 creator.setIndexTransport(true);
 		 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus_2010_09_03.osm.bz2"), new ConsoleProgressImplementation(3), null);
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);

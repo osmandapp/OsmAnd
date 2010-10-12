@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/junidecode-0.1.jar"/>
 	<classpathentry kind="lib" path="lib/json-20090211.jar"/>
+	<classpathentry kind="lib" path="lib/osm-pbf.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
