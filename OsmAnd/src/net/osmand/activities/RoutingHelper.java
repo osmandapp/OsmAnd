@@ -341,7 +341,7 @@ public class RoutingHelper {
 		}
 	}
 	
-	private void setNewRoute(RouteCalculationResult res){
+	private synchronized void setNewRoute(RouteCalculationResult res){
 		routeNodes = res.getLocations();
 		directionInfo = res.getDirections();
 		listDistance = res.getListDistance();

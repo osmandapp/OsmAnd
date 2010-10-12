@@ -129,7 +129,7 @@ public class YandexTrafficLayer implements OsmandMapLayer {
 					Message msg = Message.obtain(handler, new Runnable() {
 						@Override
 						public void run() {
-							updateCachedImages(cMinX, cMaxX, cMinY, cMaxY, cZoom);
+							updateCachedImages(cMinX, cMaxX, cMinY, cMaxY, cZoom, 0);
 						}
 					});
 					msg.what = 1;
@@ -139,7 +139,7 @@ public class YandexTrafficLayer implements OsmandMapLayer {
 		}
 	}
 	
-	protected void updateCachedImages(int tMinX, int tMaxX, int tMinY, int tMaxY, int tZoom){
+	protected void updateCachedImages(int tMinX, int tMaxX, int tMinY, int tMaxY, int tZoom, int callInd){
 		try {
 			updateTimeStamp();
 			if (mTimestamp != null) {
@@ -170,9 +170,19 @@ public class YandexTrafficLayer implements OsmandMapLayer {
 					}
 				}
 			}
-			
 		} catch (IOException e) {
 			log.error("IOException", e); //$NON-NLS-1$
+		} catch (OutOfMemoryError e) {
+			for(String s : new ArrayList<String>(tiles.keySet())){
+				Bitmap bmp = tiles.remove(s);
+				if(bmp != null){
+					bmp.recycle();
+				}
+			}
+			System.gc();
+			if(callInd == 0){
+				updateCachedImages(tMinX, tMaxX, tMinY, tMaxY, tZoom, 1);
+			}
 		}
 	}
 	
@@ -183,11 +193,11 @@ public class YandexTrafficLayer implements OsmandMapLayer {
 		return builder.toString();
 	}
 	
-	protected void downloadTile(String tileId, int tileX, int tileY, int zoom, String timeStamp) throws IOException{
-		if(zoom > 17){
+	protected void downloadTile(String tileId, int tileX, int tileY, int zoom, String timeStamp) {
+		if (zoom > 17) {
 			return;
 		}
-		String u = "http://jgo.maps.yandex.net/tiles?l=trf&x="+tileX +"&y="+tileY+"&z="+zoom+"&tm="+timeStamp;  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$//$NON-NLS-4$
+		String u = "http://jgo.maps.yandex.net/tiles?l=trf&x=" + tileX + "&y=" + tileY + "&z=" + zoom + "&tm=" + timeStamp; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$//$NON-NLS-4$
 		long time = System.currentTimeMillis();
 		try {
 			if (log.isDebugEnabled()) {
@@ -195,13 +205,13 @@ public class YandexTrafficLayer implements OsmandMapLayer {
 			}
 			InputStream is = new URL(u).openStream();
 			Options opt = new BitmapFactory.Options();
-			Bitmap bmp = BitmapFactory.decodeStream(is,null, opt);
+			Bitmap bmp = BitmapFactory.decodeStream(is, null, opt);
 			is.close();
 			tiles.put(tileId, bmp);
 			if (log.isDebugEnabled()) {
-				log.debug("Loaded traffic : " + tileId+ " " + (System.currentTimeMillis() - time) +"ms " + tiles.size()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				log.debug("Loaded traffic : " + tileId + " " + (System.currentTimeMillis() - time) + "ms " + tiles.size()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
-		} catch(IOException e){
+		} catch (IOException e) {
 			// File not found very often exception
 			log.error("Traffic loading failed " + e.getMessage()); //$NON-NLS-1$
 		}

@@ -19,6 +19,7 @@ import java.util.Map.Entry;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import net.osmand.IProgress;
 import net.osmand.LogUtil;
 import net.osmand.ProgressDialogImplementation;
 import net.osmand.R;
@@ -222,6 +223,27 @@ public class DownloadIndexActivity extends ListActivity {
 	
 	private static final int BUFFER_SIZE = 32256; 
 	
+	protected void downloadFile(FileOutputStream out, URL url, IProgress progress) throws IOException{
+		URLConnection conn = url.openConnection();
+		conn.setReadTimeout(30000);
+		conn.setConnectTimeout(30000);
+		InputStream is = conn.getInputStream();
+		int length = conn.getContentLength();
+		progress.startTask(getString(R.string.downloading_file), length);
+		byte[] buffer = new byte[BUFFER_SIZE];
+		int read = 0;
+		while((read = is.read(buffer)) != -1){
+			out.write(buffer, 0, read);
+			progress.progress(read);
+			length -= read;
+		}
+		if(length > 0){
+			throw new IOException("File was not fully read"); //$NON-NLS-1$
+		}
+		out.close();
+		
+	}
+	
 	protected void downloadFile(final String key, final File fileToDownload, final File fileToUnZip, final boolean unzipToDir) {
 		
 		progressDlg = ProgressDialog.show(this, getString(R.string.downloading), getString(R.string.downloading_file), true, true);
@@ -234,24 +256,7 @@ public class DownloadIndexActivity extends ListActivity {
 				try {
 					FileOutputStream out = new FileOutputStream(fileToDownload);
 					URL url = DownloaderIndexFromGoogleCode.getInputStreamToLoadIndex(key);
-					
-					URLConnection conn = url.openConnection();
-					conn.setReadTimeout(30000);
-					conn.setConnectTimeout(30000);
-					InputStream is = conn.getInputStream();
-					int length = conn.getContentLength();
-					impl.startTask(getString(R.string.downloading_file), length);
-					byte[] buffer = new byte[BUFFER_SIZE];
-					int read = 0;
-					while((read = is.read(buffer)) != -1){
-						out.write(buffer, 0, read);
-						impl.progress(read);
-						length -= read;
-					}
-					if(length > 0){
-						throw new IOException("File was not fully read"); //$NON-NLS-1$
-					}
-					out.close();
+					downloadFile(out, url, impl);
 						
 					File toIndex = fileToDownload;
 					if(fileToDownload.getName().endsWith(".zip")){ //$NON-NLS-1$
@@ -279,6 +284,8 @@ public class DownloadIndexActivity extends ListActivity {
 							} else {
 								out = new FileOutputStream(new File(fileToUnZip, entry.getName()));
 							}
+							int read;
+							byte[] buffer = new byte[BUFFER_SIZE];
 							while((read = zipIn.read(buffer)) != -1){
 								out.write(buffer, 0, read);
 							}

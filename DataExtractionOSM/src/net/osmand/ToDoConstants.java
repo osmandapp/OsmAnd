@@ -7,12 +7,11 @@ package net.osmand;
  */
 public class ToDoConstants {
 	
-	// TODO max 99
+	// TODO max 100
 	// FOR 0.4 beta RELEASE
 	// Profile 
 	// Try/catch for all databases operation (disk I/O exceptions, do not have crash)
-	// Fix downloader for broken connection !
-
+	//   99. Implement better file downloader for big files 
 
 	// 	Outside base 0.4 release
 	//   69. Add phone and site information to POI (enable call to POI and open site)
@@ -42,19 +41,10 @@ public class ToDoConstants {
 	
 	///////////////////////////   DONE //////////////////////////////
 	// DONE ANDROID :
-	//  93. Implement multitype vector objects - building with fence, road & tram ...
-	//  90. Use Junidecode library on the client for english translation for map rendering
-	//  96. Download voice data through UI interface (Issue)
-	//  95. Show progress while map rendered and loaded (Issue)
-	//  87. Use network availability for defining loading tiles from internet.
-	//  89. Transport redesign UI (enable run from context menu, switch go to goal/not) !
-	//  81. Add some objects to POI category (1) to add them into OSM 2) to help navigation)
-	//  	highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?),
-	//  	railway( station, subway?) - issue 17
+
 	
 	// DONE SWING
-	//  12. Reinvent UI of swing app (remove Region object and clear other MapObject)
-	//  13. Accept pdf files for map creation
+
 	
 	
 }

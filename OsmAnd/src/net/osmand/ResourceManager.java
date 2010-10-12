@@ -314,7 +314,12 @@ public class ResourceManager {
 			} else {
 				File en = new File(req.dirWithTiles, req.tileId);
 				if (en.exists()) {
-					bmp = BitmapFactory.decodeFile(en.getAbsolutePath());
+					try {
+						bmp = BitmapFactory.decodeFile(en.getAbsolutePath());
+					} catch (OutOfMemoryError e) {
+						log.error("Out of memory error", e); //$NON-NLS-1$
+						clearTiles();
+					}
 				}
 			}
 
