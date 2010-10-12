@@ -814,8 +814,15 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		checkExternalStorage();
 		showAndHideMapPosition();
 		
-		((OsmandApplication)getApplication()).getResourceManager().setBusyIndicator(
-				new BusyIndicator(this, findViewById(R.id.ProgressBar)));
+		View progress = findViewById(R.id.ProgressBar);
+		if (progress == null) {
+			// strange solution (not reproducible) - that is workaround
+			setContentView(R.layout.main);
+			progress = findViewById(R.id.ProgressBar);
+		}
+		if(progress != null){
+			((OsmandApplication) getApplication()).getResourceManager().setBusyIndicator(new BusyIndicator(this, progress));
+		}
 	}
 	
 	@Override
