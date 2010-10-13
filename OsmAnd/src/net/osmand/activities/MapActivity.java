@@ -1432,11 +1432,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		list.add(getString(R.string.any_poi));
 		
 		final PoiFiltersHelper poiFilters = ((OsmandApplication)getApplication()).getPoiFilters();
-		for(PoiFilter f : poiFilters.getUserDefinedPoiFilters()){
-			if (!f.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)) {
-				userDefined.add(f);
-				list.add(f.getName());
-			}
+		for (PoiFilter f : poiFilters.getUserDefinedPoiFilters()) {
+			userDefined.add(f);
+			list.add(f.getName());
 		}
 		for(AmenityType t : AmenityType.values()){
 			list.add(AmenityType.toPublicString(t));
@@ -1454,9 +1452,17 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				} else {
 					filterId = PoiFiltersHelper.getOsmDefinedFilterId(AmenityType.values()[which - userDefined.size() - 1]);
 				}
-				OsmandSettings.setPoiFilterForMap(MapActivity.this, filterId);
-				poiMapLayer.setFilter(poiFilters.getFilterById(filterId));
-				mapView.refreshMap();
+				if(filterId.equals(PoiFilter.CUSTOM_FILTER_ID)){
+					Intent newIntent = new Intent(MapActivity.this, EditPOIFilterActivity.class);
+					newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, filterId);
+					newIntent.putExtra(EditPOIFilterActivity.SEARCH_LAT, mapView.getLatitude());
+					newIntent.putExtra(EditPOIFilterActivity.SEARCH_LON, mapView.getLongitude());
+					startActivity(newIntent);
+				} else {
+					OsmandSettings.setPoiFilterForMap(MapActivity.this, filterId);
+					poiMapLayer.setFilter(poiFilters.getFilterById(filterId));
+					mapView.refreshMap();
+				}
 			}
 			
 		});

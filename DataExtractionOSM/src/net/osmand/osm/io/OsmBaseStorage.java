@@ -1,7 +1,5 @@
 package net.osmand.osm.io;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
@@ -19,7 +17,6 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import net.osmand.IProgress;
-import net.osmand.impl.ConsoleProgressImplementation;
 import net.osmand.osm.Entity;
 import net.osmand.osm.EntityInfo;
 import net.osmand.osm.Node;
@@ -27,7 +24,6 @@ import net.osmand.osm.Relation;
 import net.osmand.osm.Way;
 import net.osmand.osm.Entity.EntityId;
 import net.osmand.osm.Entity.EntityType;
-import net.osmand.osm.OSMSettings.OSMTagKey;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
