@@ -168,7 +168,7 @@
 	<string name="downloading_file">Downloading file...</string>
 	<string name="downloading">Downloading...</string>
 	<string name="downloading_list_indexes">Downloading list of available indexes</string>
-	<string name="list_index_files_was_not_loaded">The index files are not loaded from osmand.googlecode.com.</string>
+	<string name="list_index_files_was_not_loaded">The list of index files was not retrieved from osmand.googlecode.com.</string>
     <string name="select_index_file_to_download">If you can\'t find your region, you can make it yourself. See osmand.net</string>
 	<string name="show_poi_on_map">Show on map</string>
 	<string name="fav_points_edited">Favorite point was edited</string>
