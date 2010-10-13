@@ -164,11 +164,12 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 		textBorder = new RectF(-2, -1, textSize + 2, 0);
 	}
 
+	public final int shiftCenter = 55;
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds) {
 		if(isVisible()){
 			border.set(layout.getLeft() - 10 * dm.density, layout.getTop() - 4 * dm.density, 
-					layout.getRight() - 5 * dm.density, layout.getBottom() + 4 * dm.density);
+					layout.getRight() - (shiftCenter - 5) * dm.density, layout.getBottom() + 4 * dm.density);
 			canvas.drawRoundRect(border, 5 * dm.density, 5 * dm.density, paintBorder);
 			canvas.drawRoundRect(border, 5 * dm.density, 5 * dm.density, paintBlack);
 			List<RouteDirectionInfo> dir = routingHelper.getRouteDirections();
