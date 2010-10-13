@@ -1642,6 +1642,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 						mapView.getSourceTileSize(), mapView.getRotate(), false);
 			}
 		}
+		if(locationLayer.getLastKnownLocation() == null){
+			Toast.makeText(this, R.string.unknown_location, Toast.LENGTH_LONG).show();
+		}
 	}
 
 }
