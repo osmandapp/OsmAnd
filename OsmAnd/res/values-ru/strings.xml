@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="unknown_location">В данный момент местоположение не определено</string>
 	<string name="download_files_question">Загрузить {0} файл(ов)?</string>
 	<string name="download_files">Загрузить</string>
 	<string name="context_menu_item_search_transport">Искать транспорт</string>
