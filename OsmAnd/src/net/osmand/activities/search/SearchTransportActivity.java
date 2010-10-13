@@ -23,6 +23,7 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -65,6 +66,7 @@ public class SearchTransportActivity extends ListActivity {
 	
 	private TransportStopAdapter stopsAdapter;
 	private TransportRouteAdapter intermediateListAdapater;
+	private SharedPreferences settings;
 	
 
 	
@@ -72,11 +74,12 @@ public class SearchTransportActivity extends ListActivity {
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
+		settings = OsmandSettings.getPrefs(this);
 		Bundle extras = getIntent().getExtras();
 		if(extras != null && extras.containsKey(LAT_KEY) && extras.containsKey(LON_KEY)){
 			lastKnownMapLocation = new LatLon(extras.getDouble(LAT_KEY), extras.getDouble(LON_KEY));
 		} else {
-			lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(this);
+			lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(settings);
 		}
 		setContentView(R.layout.search_transport);
 		searchTransportLevel = (Button) findViewById(R.id.SearchTransportLevelButton);
@@ -129,8 +132,9 @@ public class SearchTransportActivity extends ListActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if(!Algoritms.objectEquals(OsmandSettings.getPointToNavigate(this), this.destinationLocation)){
-			destinationLocation = OsmandSettings.getPointToNavigate(this);
+		LatLon pointToNavigate = OsmandSettings.getPointToNavigate(OsmandSettings.getPrefs(this));
+		if(!Algoritms.objectEquals(pointToNavigate, this.destinationLocation)){
+			destinationLocation = pointToNavigate;
 			selectedDestinationLocation = destinationLocation;
 			searchTransport();			
 		}
@@ -261,7 +265,7 @@ public class SearchTransportActivity extends ListActivity {
 			} else {
 				n.append(". "); //$NON-NLS-1$
 			}
-			String name = st.getName(OsmandSettings.usingEnglishNames(this));
+			String name = st.getName(OsmandSettings.usingEnglishNames(settings));
 			if(locationToGo != null){
 				n.append(name).append(" - ["); //$NON-NLS-1$
 				n.append(MapUtils.getFormattedDistance((int) MapUtils.getDistance(locationToGo, st.getLocation()))).append("]"); //$NON-NLS-1$ 
@@ -319,7 +323,7 @@ public class SearchTransportActivity extends ListActivity {
 	public void showContextMenuOnRoute(final RouteInfoLocation route, final int routeInd) {
 		Builder b = new AlertDialog.Builder(this);
 		List<TransportStop> stops = route.getDirection() ? route.getRoute().getForwardStops() : route.getRoute().getBackwardStops();
-		boolean en = OsmandSettings.usingEnglishNames(this);
+		boolean en = OsmandSettings.usingEnglishNames(settings);
 		
 		String info = getInformation(route, stops, routeInd, false);
 		StringBuilder txt = new StringBuilder(300);
@@ -455,7 +459,7 @@ public class SearchTransportActivity extends ListActivity {
 			} else {
 				labelW.append(getString(R.string.transport_search_none));
 			}
-			labelW.append("]\n").append(route.getName(OsmandSettings.usingEnglishNames(SearchTransportActivity.this))); //$NON-NLS-1$
+			labelW.append("]\n").append(route.getName(OsmandSettings.usingEnglishNames(settings))); //$NON-NLS-1$
 			label.setText(labelW.toString());
 			// TODO icons
 			if (locationToGo != null && stop.getDistToLocation() < 400) {
@@ -527,7 +531,7 @@ public class SearchTransportActivity extends ListActivity {
 			icon.setVisibility(View.VISIBLE);
 			StringBuilder labelW = new StringBuilder(150);
 			labelW.append(route.getType()).append(" ").append(route.getRef()); //$NON-NLS-1$
-			boolean en = OsmandSettings.usingEnglishNames(SearchTransportActivity.this);
+			boolean en = OsmandSettings.usingEnglishNames(settings);
 			labelW.append(" : ").append(info.getStart().getName(en)).append(" - ").append(info.getStop().getName(en)); //$NON-NLS-1$ //$NON-NLS-2$
 			// additional information  if route is calculated
 			if (currentRouteLocation == -1) {

@@ -319,7 +319,7 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 		builder.setTitle(R.string.osb_add_dialog_title);
 		final View view = layoutInflater.inflate(R.layout.open_bug, null);
 		builder.setView(view);
-		((EditText)view.findViewById(R.id.AuthorName)).setText(OsmandSettings.getUserNameForOsmBug(ctx));
+		((EditText)view.findViewById(R.id.AuthorName)).setText(OsmandSettings.getUserNameForOsmBug(OsmandSettings.getPrefs(ctx)));
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
 			@Override
@@ -349,7 +349,7 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 		builder.setTitle(R.string.osb_comment_dialog_title);
 		final View view = layoutInflater.inflate(R.layout.open_bug, null);
 		builder.setView(view);
-		((EditText)view.findViewById(R.id.AuthorName)).setText(OsmandSettings.getUserNameForOsmBug(ctx));
+		((EditText)view.findViewById(R.id.AuthorName)).setText(OsmandSettings.getUserNameForOsmBug(OsmandSettings.getPrefs(ctx)));
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.osb_comment_dialog_add_button, new DialogInterface.OnClickListener() {
 			@Override

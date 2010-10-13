@@ -77,7 +77,7 @@ public class CommandPlayer {
 	}
 	
 	public String init(){
-		String voiceProvider = OsmandSettings.getVoiceProvider(ctx);
+		String voiceProvider = OsmandSettings.getVoiceProvider(OsmandSettings.getPrefs(ctx));
 		prologSystem.clearTheory();
 		voiceDir = null;
 		if(voiceProvider != null){

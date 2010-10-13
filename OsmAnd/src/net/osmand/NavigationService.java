@@ -12,6 +12,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -36,6 +37,7 @@ public class NavigationService extends Service implements LocationListener {
 	private int serviceError;
 	private RoutingHelper routingHelper;
 	private Notification notification;
+	private SharedPreferences settings;
 	
 	
 	@Override
@@ -70,10 +72,10 @@ public class NavigationService extends Service implements LocationListener {
 		super.onCreate();
 		setForeground(true);
 		handler = new Handler();
-		
-		serviceOffInterval = OsmandSettings.getServiceOffInterval(this);
-		serviceOffProvider = OsmandSettings.getServiceOffProvider(this);
-		serviceError = OsmandSettings.getServiceOffWaitInterval(this);
+		settings = OsmandSettings.getSharedPreferences(this);
+		serviceOffInterval = OsmandSettings.getServiceOffInterval(settings);
+		serviceOffProvider = OsmandSettings.getServiceOffProvider(settings);
+		serviceError = OsmandSettings.getServiceOffWaitInterval(settings);
 		savingTrackHelper = new SavingTrackHelper(this);
 		delayedAction(true, 500);
 		routingHelper = ((OsmandApplication)getApplication()).getRoutingHelper();
@@ -114,9 +116,9 @@ public class NavigationService extends Service implements LocationListener {
 
 	@Override
 	public void onLocationChanged(Location location) {
-		if(location != null && !OsmandSettings.getMapActivityEnabled(this)){
+		if(location != null && !OsmandSettings.getMapActivityEnabled(settings)){
 			savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(), 
-					location.getSpeed(), location.getTime());
+					location.getSpeed(), location.getTime(), settings);
 			if(routingHelper.isFollowingMode()){
 				routingHelper.setCurrentLocation(location);
 			}

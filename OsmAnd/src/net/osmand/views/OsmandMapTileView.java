@@ -22,6 +22,7 @@ import net.osmand.views.MultiTouchSupport.MultiTouchZoomListener;
 import org.apache.commons.logging.Log;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -452,13 +453,21 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	protected Rect boundsRect = new Rect();
 	protected RectF bitmapToDraw = new RectF();
 	protected Rect bitmapToZoom = new Rect();
+	protected SharedPreferences settings = null;
+	
+	public SharedPreferences getSettings(){
+		if(settings == null){
+			settings = OsmandSettings.getPrefs(getContext());
+		}
+		return settings;
+	}
 
 	private void refreshMapInternal() {
 		if (handler.hasMessages(1)) {
 			return;
 		}
 
-		boolean useInternet = OsmandSettings.isUsingInternetToDownloadTiles(getContext());
+		boolean useInternet = OsmandSettings.isUsingInternetToDownloadTiles(getSettings());
 		if (useInternet) {
 			MapTileDownloader.getInstance().refuseAllPreviousRequests();
 		}
@@ -492,7 +501,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 						ResourceManager mgr = getApplication().getResourceManager();
 						useInternet = useInternet && OsmandSettings.isInternetConnectionAvailable(getContext())
 								&& map.couldBeDownloadedFromInternet();
-						int maxLevel = Math.min(OsmandSettings.getMaximumLevelToDownloadTile(getContext()), map.getMaximumZoomSupported());
+						int maxLevel = Math.min(OsmandSettings.getMaximumLevelToDownloadTile(getSettings()), map.getMaximumZoomSupported());
 
 						
 						for (int i = 0; i < width; i++) {

@@ -14,6 +14,7 @@ import net.osmand.GPXUtilities.TrkPt;
 import org.apache.commons.logging.Log;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -149,8 +150,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		return warnings;
 	}
 	
-	public void insertData(double lat, double lon, double alt, double speed, long time){
-		if (time - lastTimeUpdated > OsmandSettings.getSavingTrackInterval(ctx)) {
+	public void insertData(double lat, double lon, double alt, double speed, long time, SharedPreferences settings){
+		if (time - lastTimeUpdated > OsmandSettings.getSavingTrackInterval(settings)) {
 			SQLiteDatabase db = getWritableDatabase();
 			if (db != null) {
 				db.execSQL(updateScript, new Object[] { lat, lon, alt, speed, time });

@@ -134,7 +134,7 @@ public class EditingPOIActivity {
 		}
 		
 		Builder builder = new AlertDialog.Builder(ctx);
-		builder.setTitle(MessageFormat.format(this.view.getResources().getString(R.string.poi_remove_confirm_template), a.getStringWithoutType(OsmandSettings.usingEnglishNames(ctx))));
+		builder.setTitle(MessageFormat.format(this.view.getResources().getString(R.string.poi_remove_confirm_template), a.getStringWithoutType(OsmandSettings.usingEnglishNames(OsmandSettings.getPrefs(ctx)))));
 		final EditText comment = new EditText(ctx);
 		comment.setText(R.string.poi_remove_title);
 		builder.setView(comment);
@@ -365,8 +365,8 @@ public class EditingPOIActivity {
 			DefaultHttpClient httpclient = new DefaultHttpClient(params);
 
 			if (doAuthenticate) {
-				UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(OsmandSettings.getUserName(ctx) + ":" //$NON-NLS-1$
-						+ OsmandSettings.getUserPassword(ctx));
+				UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(OsmandSettings.getUserName(OsmandSettings.getPrefs(ctx)) + ":" //$NON-NLS-1$
+						+ OsmandSettings.getUserPassword(OsmandSettings.getPrefs(ctx)));
 				httpclient.getCredentialsProvider().setCredentials(new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT), credentials);
 			}
 			HttpRequestBase method = null;
@@ -445,7 +445,7 @@ public class EditingPOIActivity {
 			connection.setRequestMethod(requestMethod);
 			StringBuilder responseBody = new StringBuilder();
 			if (doAuthenticate) {
-				String token = OsmandSettings.getUserName(ctx) + ":" + OsmandSettings.getUserPassword(ctx); //$NON-NLS-1$
+				String token = OsmandSettings.getUserName(OsmandSettings.getPrefs(ctx)) + ":" + OsmandSettings.getUserPassword(OsmandSettings.getPrefs(ctx)); //$NON-NLS-1$
 				connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 			connection.setDoInput(true);
@@ -626,7 +626,7 @@ public class EditingPOIActivity {
 				ser.startTag(null, action);
 				ser.attribute(null, "version", "0.6"); //$NON-NLS-1$ //$NON-NLS-2$
 				ser.attribute(null, "generator", Version.APP_NAME); //$NON-NLS-1$
-				writeNode(n, info, ser, changeSetId, OsmandSettings.getUserName(ctx));
+				writeNode(n, info, ser, changeSetId, OsmandSettings.getUserName(OsmandSettings.getPrefs(ctx)));
 				ser.endTag(null, action);
 				ser.endTag(null, "osmChange"); //$NON-NLS-1$
 				ser.endDocument();

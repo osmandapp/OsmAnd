@@ -11,6 +11,7 @@ import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -22,14 +23,15 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(OsmandSettings.getLastSearchedRegion(this));
+		SharedPreferences prefs = OsmandSettings.getPrefs(this);
+		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(OsmandSettings.getLastSearchedRegion(prefs));
 		if(region != null){
-			postcode = region.getPostcode(OsmandSettings.getLastSearchedPostcode(this));
-			city = region.getCityById(OsmandSettings.getLastSearchedCity(this));
+			postcode = region.getPostcode(OsmandSettings.getLastSearchedPostcode(prefs));
+			city = region.getCityById(OsmandSettings.getLastSearchedCity(prefs));
 			if(postcode != null){
-				street = region.getStreetByName(postcode, OsmandSettings.getLastSearchedStreet(this));
+				street = region.getStreetByName(postcode, OsmandSettings.getLastSearchedStreet(prefs));
 			} else if(city != null){
-				street = region.getStreetByName(city, OsmandSettings.getLastSearchedStreet(this));
+				street = region.getStreetByName(city, OsmandSettings.getLastSearchedStreet(prefs));
 			}
 		}
 		super.onCreate(savedInstanceState);

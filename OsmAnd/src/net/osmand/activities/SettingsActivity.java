@@ -191,16 +191,16 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     	for(BooleanPreference b : booleanPreferences){
     		b.getPref().setChecked(prefs.getBoolean(b.getId(), b.getDefValue()));
     	}
-		userName.setText(OsmandSettings.getUserName(this));
-		userPassword.setText(OsmandSettings.getUserPassword(this));
-		useInternetToDownload.setChecked(OsmandSettings.isUsingInternetToDownloadTiles(this));
+		userName.setText(OsmandSettings.getUserName(prefs));
+		userPassword.setText(OsmandSettings.getUserPassword(prefs));
+		useInternetToDownload.setChecked(OsmandSettings.isUsingInternetToDownloadTiles(prefs));
 		
 		Resources resources = this.getResources();
 		String[] e = new String[] {resources.getString(R.string.position_on_map_center), 
 				resources.getString(R.string.position_on_map_bottom)};
 		positionOnMap.setEntryValues(e);
 		positionOnMap.setEntries(e);
-		positionOnMap.setValueIndex(OsmandSettings.getPositionOnMap(this));
+		positionOnMap.setValueIndex(OsmandSettings.getPositionOnMap(prefs));
 		
 		
 		saveTrackInterval.setEntries(new String[]{
@@ -212,7 +212,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				resources.getString(R.string.interval_1_minute),
 				resources.getString(R.string.interval_5_minutes)});				
 		saveTrackInterval.setEntryValues(new String[]{"1", "2", "5", "15", "30", "60", "300"}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
-		saveTrackInterval.setValue(OsmandSettings.getSavingTrackInterval(this)+""); //$NON-NLS-1$
+		saveTrackInterval.setValue(OsmandSettings.getSavingTrackInterval(prefs)+""); //$NON-NLS-1$
 		
 		String[] ints = new String[]{"1", "2", "5", "8", "10", "15", "20", "25", "30", "40", "45", "60", "90" };  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$ //$NON-NLS-11$ //$NON-NLS-12$ //$NON-NLS-13$
 		String[] intDescriptions = new String[ints.length];
@@ -221,7 +221,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		routeServiceInterval.setEntries(intDescriptions);				
 		routeServiceInterval.setEntryValues(ints);
-		routeServiceInterval.setValue(OsmandSettings.getServiceOffInterval(this)/60000+""); //$NON-NLS-1$
+		routeServiceInterval.setValue(OsmandSettings.getServiceOffInterval(prefs)/60000+""); //$NON-NLS-1$
 		
 		ints = new String[]{"15", "30", "45", "60", "90", "120", "180", "300", "600"};  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$
 		intDescriptions = new String[ints.length];
@@ -230,17 +230,17 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		routeServiceWaitInterval.setEntries(intDescriptions);				
 		routeServiceWaitInterval.setEntryValues(ints);
-		routeServiceWaitInterval.setValue(OsmandSettings.getServiceOffWaitInterval(this)/1000+""); //$NON-NLS-1$
+		routeServiceWaitInterval.setValue(OsmandSettings.getServiceOffWaitInterval(prefs)/1000+""); //$NON-NLS-1$
 		
 		rotateMap.setEntries(new String[]{getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt)});				
 		rotateMap.setEntryValues(new String[]{OsmandSettings.ROTATE_MAP_NONE+"", OsmandSettings.ROTATE_MAP_BEARING+"", OsmandSettings.ROTATE_MAP_COMPASS+""}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		rotateMap.setValue(OsmandSettings.getRotateMap(this)+""); //$NON-NLS-1$
+		rotateMap.setValue(OsmandSettings.getRotateMap(prefs)+""); //$NON-NLS-1$
 		
 		routeServiceProvider.setEntries(new String[]{getString(R.string.gps_provider), getString(R.string.network_provider)});				
 		routeServiceProvider.setEntryValues(new String[]{LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER});
-		routeServiceProvider.setValue(OsmandSettings.getServiceOffProvider(this)); 
+		routeServiceProvider.setValue(OsmandSettings.getServiceOffProvider(prefs)); 
 		
-		routeServiceEnabled.setChecked(OsmandSettings.getServiceOffEnabled(this));
+		routeServiceEnabled.setChecked(OsmandSettings.getServiceOffEnabled(prefs));
 
 		mapScreenOrientation.setEntries(new String[]{
 				resources.getString(R.string.map_orientation_portrait),
@@ -249,7 +249,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				});				
 		mapScreenOrientation.setEntryValues(new String[]{ActivityInfo.SCREEN_ORIENTATION_PORTRAIT+"", //$NON-NLS-1$
 				ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE+"", ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED+""}); //$NON-NLS-1$ //$NON-NLS-2$
-		mapScreenOrientation.setValue(OsmandSettings.getMapOrientation(this)+""); //$NON-NLS-1$
+		mapScreenOrientation.setValue(OsmandSettings.getMapOrientation(prefs)+""); //$NON-NLS-1$
 		
 		ApplicationMode[] presets = ApplicationMode.values(); 
 		String[] values = new String[presets.length];
@@ -260,11 +260,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		applicationMode.setEntries(values);
 		applicationMode.setEntryValues(valueEntries);
-		applicationMode.setValue(OsmandSettings.getApplicationMode(this).name());
+		applicationMode.setValue(OsmandSettings.getApplicationMode(prefs).name());
 
 		
 		String[] entries = new String[RouteService.values().length];
-		String entry = OsmandSettings.getRouterService(this).getName();
+		String entry = OsmandSettings.getRouterService(prefs).getName();
 		for(int i=0; i<entries.length; i++){
 			entries[i] = RouteService.values()[i].getName();
 		}
@@ -282,7 +282,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				}
 			}
 		}
-		String provider = OsmandSettings.getVoiceProvider(this);
+		String provider = OsmandSettings.getVoiceProvider(prefs);
 		entries = new String[setFiles.size() + 1];
 		int k = 0; 
 		entries[k++] = getString(R.string.voice_not_use);
@@ -305,7 +305,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		maxLevelToDownload.setEntries(entries);
 		maxLevelToDownload.setEntryValues(entries);
-		maxLevelToDownload.setValue(OsmandSettings.getMaximumLevelToDownloadTile(this)+""); //$NON-NLS-1$
+		maxLevelToDownload.setValue(OsmandSettings.getMaximumLevelToDownloadTile(prefs)+""); //$NON-NLS-1$
 		
 
 		Map<String, String> entriesMap = getTileSourceEntries(this);
@@ -322,9 +322,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
 		tileSourcePreference.setEntries(entries);
 		tileSourcePreference.setEntryValues(valueEntries);
-		String value = OsmandSettings.isUsingMapVectorData(this)? VECTOR_MAP : OsmandSettings.getMapTileSourceName(this);
-		String mapName = " " + (OsmandSettings.isUsingMapVectorData(this) ? getString(R.string.vector_data) : //$NON-NLS-1$
-				OsmandSettings.getMapTileSourceName(this));
+		String value = OsmandSettings.isUsingMapVectorData(prefs)? VECTOR_MAP : OsmandSettings.getMapTileSourceName(prefs);
+		String mapName = " " + (OsmandSettings.isUsingMapVectorData(prefs) ? getString(R.string.vector_data) : //$NON-NLS-1$
+				OsmandSettings.getMapTileSourceName(prefs));
 		tileSourcePreference.setValue(value);
 		String summary = tileSourcePreference.getSummary().toString();
 		if (summary.lastIndexOf(':') != -1) {
@@ -432,11 +432,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			if ((Boolean) newValue) {
 				ComponentName name = startService(serviceIntent);
 				if (name == null) {
-					routeServiceEnabled.setChecked(OsmandSettings.getServiceOffEnabled(this));
+					routeServiceEnabled.setChecked(OsmandSettings.getServiceOffEnabled(prefs));
 				}
 			} else {
 				if(!stopService(serviceIntent)){
-					routeServiceEnabled.setChecked(OsmandSettings.getServiceOffEnabled(this));
+					routeServiceEnabled.setChecked(OsmandSettings.getServiceOffEnabled(prefs));
 				}
 			}
 		} else if (preference == routerPreference) {
@@ -472,8 +472,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			if (summary.lastIndexOf(':') != -1) {
 				summary = summary.substring(0, summary.lastIndexOf(':') + 1);
 			}
-			summary += " " + (OsmandSettings.isUsingMapVectorData(this) ? getString(R.string.vector_data) : //$NON-NLS-1$
-				OsmandSettings.getMapTileSourceName(this));
+			summary += " " + (OsmandSettings.isUsingMapVectorData(prefs) ? getString(R.string.vector_data) : //$NON-NLS-1$
+				OsmandSettings.getMapTileSourceName(prefs));
 			tileSourcePreference.setSummary(summary);
 			
 		}

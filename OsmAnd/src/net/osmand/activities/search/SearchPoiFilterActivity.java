@@ -55,7 +55,7 @@ public class SearchPoiFilterActivity extends ListActivity {
 			latitude = extras.getDouble(SEARCH_LAT);
 			longitude = extras.getDouble(SEARCH_LON);
 		} else {
-			LatLon loc = OsmandSettings.getLastKnownMapLocation(this);
+			LatLon loc = OsmandSettings.getLastKnownMapLocation(OsmandSettings.getPrefs(this));
 			latitude = loc.getLatitude();
 			longitude = loc.getLongitude();
 		}

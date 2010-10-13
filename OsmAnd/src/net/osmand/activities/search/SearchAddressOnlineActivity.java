@@ -64,7 +64,7 @@ public class SearchAddressOnlineActivity extends ListActivity {
 				searchPlaces(((EditText) findViewById(R.id.SearchText)).getText().toString());
 			}
 		});
-		location = OsmandSettings.getLastKnownMapLocation(this);
+		location = OsmandSettings.getLastKnownMapLocation(OsmandSettings.getPrefs(this));
 	}
 
 	protected void searchPlaces(final String search) {

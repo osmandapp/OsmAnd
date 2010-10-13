@@ -411,7 +411,7 @@ public class MapRenderRepositories {
 			return;
 		}
 		
-		Bitmap bmp = renderer.generateNewBitmap(currentRenderingContext, cObjects, OsmandSettings.usingEnglishNames(context));
+		Bitmap bmp = renderer.generateNewBitmap(currentRenderingContext, cObjects, OsmandSettings.usingEnglishNames(OsmandSettings.getPrefs(context)));
 		if(checkWhetherInterrupted()){
 			currentRenderingContext = null;
 			return;

@@ -22,6 +22,7 @@ import net.osmand.osm.OpeningHoursParser;
 import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -91,6 +92,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 	private String currentLocationProvider = null;
 	private boolean sensorRegistered = false;
 	private Handler uiHandler;
+	private SharedPreferences settings;
 	
 
 	
@@ -109,6 +111,8 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		searchFilter = (EditText) findViewById(R.id.SearchFilter);
 		searchFilterLayout = findViewById(R.id.SearchFilterLayout);
 		showOnMap = (Button) findViewById(R.id.ShowOnMap);
+		
+		settings = OsmandSettings.getPrefs(this);
 		
 		searchPOILevel.setOnClickListener(new OnClickListener() {
 			@Override
@@ -209,7 +213,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			@Override
 			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
 				Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(pos);
-				String format = amenity.getSimpleFormat(OsmandSettings.usingEnglishNames(v.getContext()));
+				String format = amenity.getSimpleFormat(OsmandSettings.usingEnglishNames(settings));
 				if (amenity.getOpeningHours() != null) {
 					format += "\n"+getString(R.string.opening_hours) + " : " + amenity.getOpeningHours(); //$NON-NLS-1$ //$NON-NLS-2$
 				}
@@ -448,10 +452,10 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			OsmandSettings.setPoiFilterForMap(SearchPOIActivity.this, filter.getFilterId());
 			OsmandSettings.setShowPoiOverMap(SearchPOIActivity.this, true);
 		}
-		int z = OsmandSettings.getLastKnownMapZoom(this);
+		int z = OsmandSettings.getLastKnownMapZoom(settings);
 		Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
 		OsmandSettings.setMapLocationToShow(this, amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 
-				Math.max(16, z), getString(R.string.poi)+" : " + amenity.getSimpleFormat(OsmandSettings.usingEnglishNames(this))); //$NON-NLS-1$
+				Math.max(16, z), getString(R.string.poi)+" : " + amenity.getSimpleFormat(OsmandSettings.usingEnglishNames(settings))); //$NON-NLS-1$
 		Intent newIntent = new Intent(SearchPOIActivity.this, MapActivity.class);
 		startActivity(newIntent);
 	}
@@ -559,7 +563,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 				Location.distanceBetween(l.getLatitude(), l.getLongitude(), location.getLatitude(), location.getLongitude(), mes);
 			}
 			
-			String str = amenity.getStringWithoutType(OsmandSettings.usingEnglishNames(SearchPOIActivity.this));
+			String str = amenity.getStringWithoutType(OsmandSettings.usingEnglishNames(settings));
 			label.setText(str);
 			int opened = -1;
 			if (amenity.getOpeningHours() != null) {
