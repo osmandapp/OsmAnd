@@ -121,7 +121,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		
 		useInternetToDownload =(CheckBoxPreference) screen.findPreference(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES);
-		useInternetToDownload.setOnPreferenceClickListener(this);
+		useInternetToDownload.setOnPreferenceChangeListener(this);
 		
 		reloadIndexes =(Preference) screen.findPreference(OsmandSettings.RELOAD_INDEXES);
 		reloadIndexes.setOnPreferenceClickListener(this);
