@@ -159,11 +159,12 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private boolean currentShowingAngle;
 	
 	private Dialog progressDlg = null;
+	private SharedPreferences settings;
 	
 	
 
 	private boolean isMapLinkedToLocation(){
-		return OsmandSettings.isMapSyncToGpsLocation(this);
+		return OsmandSettings.isMapSyncToGpsLocation(settings);
 	}
 	
 	private Notification getNotification(){
@@ -181,7 +182,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     @Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-				
+		settings = OsmandSettings.getPrefs(this);		
 		// for voice navigation
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);  
@@ -263,7 +264,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 		savingTrackHelper = new SavingTrackHelper(this);
 		
-		LatLon pointToNavigate = OsmandSettings.getPointToNavigate(this);
+		LatLon pointToNavigate = OsmandSettings.getPointToNavigate(settings);
 		
 		// TODO how this situation could be ?
 		if(!Algoritms.objectEquals(routingHelper.getFinalLocation(), pointToNavigate)){
@@ -273,7 +274,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			routingHelper.setFinalAndCurrentLocation(pointToNavigate, null);
 
 		}
-		if(OsmandSettings.isFollowingByRoute(this)){
+		if(OsmandSettings.isFollowingByRoute(settings)){
 			if(pointToNavigate == null){
 				OsmandSettings.setFollowingByRoute(this, false);
 			} else if(!routingHelper.isRouteCalculated()){
@@ -325,7 +326,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				mapView.getAnimatedDraggingThread().startZooming(mapView.getZoom(), mapView.getZoom() + 1);
 				showAndHideMapPosition();
 				// user can preview map manually switch off auto zoom while user don't press back to location
-				if(OsmandSettings.isAutoZoomEnabled(MapActivity.this)){
+				if(OsmandSettings.isAutoZoomEnabled(settings)){
 					locationChanged(mapView.getLatitude(), mapView.getLongitude(), null);
 				}
 			}
@@ -339,7 +340,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				mapView.getAnimatedDraggingThread().startZooming(mapView.getZoom(), mapView.getZoom() - 1);
 				showAndHideMapPosition();
 				// user can preview map manually switch off auto zoom while user don't press back to location
-				if(OsmandSettings.isAutoZoomEnabled(MapActivity.this)){
+				if(OsmandSettings.isAutoZoomEnabled(settings)){
 					locationChanged(mapView.getLatitude(), mapView.getLongitude(), null);
 				}
 			}
@@ -388,7 +389,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     }
     @Override
     public boolean onTrackballEvent(MotionEvent event) {
-    	if(event.getAction() == MotionEvent.ACTION_MOVE && OsmandSettings.isUsingTrackBall(this)){
+    	if(event.getAction() == MotionEvent.ACTION_MOVE && OsmandSettings.isUsingTrackBall(settings)){
     		float x = event.getX();
     		float y = event.getY();
     		LatLon l = mapView.getLatLonFromScreenPoint(mapView.getCenterPointX() + x * 15, mapView.getCenterPointY() + y * 15);
@@ -483,7 +484,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     	}
     	if(location != null && OsmandSettings.isSavingTrackToGpx(this)){
 			savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), 
-					location.getAltitude(), location.getSpeed(), location.getTime());
+					location.getAltitude(), location.getSpeed(), location.getTime(), settings);
 		}
     	registerUnregisterSensor(location);
     	updateSpeedBearing(location);
@@ -494,7 +495,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     	}
     	if (location != null) {
 			if (isMapLinkedToLocation()) {
-				if(OsmandSettings.isAutoZoomEnabled(this) && location.hasSpeed()){
+				if(OsmandSettings.isAutoZoomEnabled(settings) && location.hasSpeed()){
 	    			int z = defineZoomFromSpeed(location.getSpeed(), mapView.getZoom());
 	    			if(mapView.getZoom() != z && !mapView.mapIsAnimating()){
 	    				mapView.setZoom(z);
@@ -536,7 +537,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		if(point != null){
 			OsmandSettings.setPointToNavigate(this, point.getLatitude(), point.getLongitude());
 		} else {
-			OsmandSettings.clearPointToNavigate(this);
+			OsmandSettings.clearPointToNavigate(settings);
 		}
 		routingHelper.setFinalAndCurrentLocation(point, null, routingHelper.getCurrentGPXRoute());
 		if(point == null){
@@ -679,57 +680,57 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	}
 	
 	private void updateApplicationModeSettings(){
-		currentMapRotation = OsmandSettings.getRotateMap(this);
-		currentShowingAngle = OsmandSettings.isShowingViewAngle(this);
+		currentMapRotation = OsmandSettings.getRotateMap(settings);
+		currentShowingAngle = OsmandSettings.isShowingViewAngle(settings);
 		if(currentMapRotation == OsmandSettings.ROTATE_MAP_NONE){
 			mapView.setRotate(0);
 		}
 		if(!currentShowingAngle){
 			locationLayer.setHeading(null);
 		}
-		locationLayer.setAppMode(OsmandSettings.getApplicationMode(this));
-		routingHelper.setAppMode(OsmandSettings.getApplicationMode(this));
-		mapView.setMapPosition(OsmandSettings.getPositionOnMap(this));
+		locationLayer.setAppMode(OsmandSettings.getApplicationMode(settings));
+		routingHelper.setAppMode(OsmandSettings.getApplicationMode(settings));
+		mapView.setMapPosition(OsmandSettings.getPositionOnMap(settings));
 		registerUnregisterSensor(getLastKnownLocation());
 		updateLayers();
 	}
 	
 	private void updateLayers(){
-		if(mapView.getLayers().contains(transportStopsLayer) != OsmandSettings.isShowingTransportOverMap(this)){
-			if(OsmandSettings.isShowingTransportOverMap(this)){
+		if(mapView.getLayers().contains(transportStopsLayer) != OsmandSettings.isShowingTransportOverMap(settings)){
+			if(OsmandSettings.isShowingTransportOverMap(settings)){
 				mapView.addLayer(transportStopsLayer, 5);
 			} else {
 				mapView.removeLayer(transportStopsLayer);
 			}
 		}
-		if(mapView.getLayers().contains(osmBugsLayer) != OsmandSettings.isShowingOsmBugs(this)){
-			if(OsmandSettings.isShowingOsmBugs(this)){
+		if(mapView.getLayers().contains(osmBugsLayer) != OsmandSettings.isShowingOsmBugs(settings)){
+			if(OsmandSettings.isShowingOsmBugs(settings)){
 				mapView.addLayer(osmBugsLayer, 2);
 			} else {
 				mapView.removeLayer(osmBugsLayer);
 			}
 		}
 
-		if(mapView.getLayers().contains(poiMapLayer) != OsmandSettings.isShowingPoiOverMap(this)){
-			if(OsmandSettings.isShowingPoiOverMap(this)){
+		if(mapView.getLayers().contains(poiMapLayer) != OsmandSettings.isShowingPoiOverMap(settings)){
+			if(OsmandSettings.isShowingPoiOverMap(settings)){
 				mapView.addLayer(poiMapLayer, 3);
 			} else {
 				mapView.removeLayer(poiMapLayer);
 			}
 		}
 		
-		if(mapView.getLayers().contains(favoritesLayer) != OsmandSettings.isShowingFavorites(this)){
-			if(OsmandSettings.isShowingFavorites(this)){
+		if(mapView.getLayers().contains(favoritesLayer) != OsmandSettings.isShowingFavorites(settings)){
+			if(OsmandSettings.isShowingFavorites(settings)){
 				mapView.addLayer(favoritesLayer, 4);
 			} else {
 				mapView.removeLayer(favoritesLayer);
 			}
 		}
-		trafficLayer.setVisible(OsmandSettings.isShowingYandexTraffic(this));
+		trafficLayer.setVisible(OsmandSettings.isShowingYandexTraffic(settings));
 	}
 	
 	private void updateMapSource(){
-		boolean vectorData = OsmandSettings.isUsingMapVectorData(this);
+		boolean vectorData = OsmandSettings.isUsingMapVectorData(settings);
 		ResourceManager rm = ((OsmandApplication)getApplication()).getResourceManager();
 		if(vectorData){
 			if(rm.getRenderer().isEmpty()){
@@ -737,7 +738,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				vectorData = false;
 			}
 		}
-		ITileSource newSource = OsmandSettings.getMapTileSource(this);
+		ITileSource newSource = OsmandSettings.getMapTileSource(settings);
 		if(mapView.getMap() instanceof SQLiteTileSource){
 			((SQLiteTileSource)mapView.getMap()).closeDB();
 		}
@@ -750,19 +751,19 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if(OsmandSettings.getMapOrientation(this) != getRequestedOrientation()){
-			setRequestedOrientation(OsmandSettings.getMapOrientation(this));
+		if(OsmandSettings.getMapOrientation(settings) != getRequestedOrientation()){
+			setRequestedOrientation(OsmandSettings.getMapOrientation(settings));
 			// do nothing now (let recreate activity)
 			// only save map position
-			LatLon l = OsmandSettings.getLastKnownMapLocation(this);
+			LatLon l = OsmandSettings.getLastKnownMapLocation(settings);
 			mapView.setLatLon(l.getLatitude(), l.getLongitude());
-			mapView.setZoom(OsmandSettings.getLastKnownMapZoom(this));
+			mapView.setZoom(OsmandSettings.getLastKnownMapZoom(settings));
 			return;
 		}
 		currentScreenOrientation = getWindow().getWindowManager().getDefaultDisplay().getOrientation();
 		
-		boolean showTiles = !OsmandSettings.isUsingMapVectorData(this);
-		ITileSource source = showTiles ? OsmandSettings.getMapTileSource(this) : null;
+		boolean showTiles = !OsmandSettings.isUsingMapVectorData(settings);
+		ITileSource source = showTiles ? OsmandSettings.getMapTileSource(settings) : null;
 		if (showTiles != !rendererLayer.isVisible() || !Algoritms.objectEquals(mapView.getMap(), source)) {
 			updateMapSource();
 		}
@@ -798,15 +799,15 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}
 		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
 		if(prefs != null && prefs.contains(OsmandSettings.LAST_KNOWN_MAP_LAT)){
-			LatLon l = OsmandSettings.getLastKnownMapLocation(this);
+			LatLon l = OsmandSettings.getLastKnownMapLocation(settings);
 			mapView.setLatLon(l.getLatitude(), l.getLongitude());
-			mapView.setZoom(OsmandSettings.getLastKnownMapZoom(this));
-			LatLon latLon = OsmandSettings.getAndClearMapLocationToShow(this);
+			mapView.setZoom(OsmandSettings.getLastKnownMapZoom(settings));
+			LatLon latLon = OsmandSettings.getAndClearMapLocationToShow(settings);
 			LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
 			if(latLon != null && !latLon.equals(cur)){
 				mapView.getAnimatedDraggingThread().startMoving(cur.getLatitude(), cur.getLongitude(), 
 						latLon.getLatitude(), latLon.getLongitude(), 
-						mapView.getZoom(), OsmandSettings.getMapZoomToShow(this), 
+						mapView.getZoom(), OsmandSettings.getMapZoomToShow(settings), 
 						mapView.getSourceTileSize(), mapView.getRotate(), true);
 			}
 		}
@@ -928,7 +929,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		MenuItem navigateToPointMenu = menu.findItem(R.id.map_navigate_to_point);
 		if (navigateToPointMenu != null) {
 			navigateToPointMenu.setTitle(routingHelper.isRouteCalculated() ? R.string.stop_routing : R.string.stop_navigation);
-			if (OsmandSettings.getPointToNavigate(this) != null) {
+			if (OsmandSettings.getPointToNavigate(settings) != null) {
 				navigateToPointMenu.setVisible(true);
 			} else {
 				navigateToPointMenu.setVisible(false);
@@ -1007,7 +1008,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     			return ApplicationMode.values()[i];
     		}
     	}
-    	return OsmandSettings.getApplicationMode(this);
+    	return OsmandSettings.getApplicationMode(settings);
     }
     
     
@@ -1023,7 +1024,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     	buttons[ApplicationMode.CAR.ordinal()] = (ToggleButton) view.findViewById(R.id.CarButton);
     	buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
     	buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
-    	ApplicationMode appMode = OsmandSettings.getApplicationMode(this);
+    	ApplicationMode appMode = OsmandSettings.getApplicationMode(settings);
     	for(int i=0; i< buttons.length; i++){
     		if(buttons[i] != null){
     			final int ind = i;
@@ -1080,7 +1081,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			public void onClick(DialogInterface dialog, int which) {
 				ApplicationMode mode = getAppMode(buttons);
 				// change global settings
-				if (OsmandSettings.getApplicationMode(MapActivity.this) != mode) {
+				if (OsmandSettings.getApplicationMode(settings) != mode) {
 					Editor edit = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_WRITEABLE).edit();
 					edit.putString(OsmandSettings.APPLICATION_MODE, mode.name());
 					SettingsActivity.setAppMode(mode, edit);
@@ -1245,10 +1246,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 		final boolean[] selected = new boolean[layersList.size()];
 		Arrays.fill(selected, true);
-		selected[1] = OsmandSettings.isShowingPoiOverMap(this);
-		selected[2] = OsmandSettings.isShowingTransportOverMap(this);
-		selected[3] = OsmandSettings.isShowingOsmBugs(this);
-		selected[4] = OsmandSettings.isShowingFavorites(this);
+		selected[1] = OsmandSettings.isShowingPoiOverMap(settings);
+		selected[2] = OsmandSettings.isShowingTransportOverMap(settings);
+		selected[3] = OsmandSettings.isShowingOsmBugs(settings);
+		selected[4] = OsmandSettings.isShowingFavorites(settings);
 		selected[5] = gpxLayer.isVisible();
 		selected[trafficInd] = trafficLayer.isVisible();
 		if(routeInfoInd != -1){

@@ -76,7 +76,7 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 	public boolean onTouchEvent(PointF point) {
 		Amenity n = getAmenityFromPoint(point);
 		if(n != null){
-			String format = n.getSimpleFormat(OsmandSettings.usingEnglishNames(view.getContext()));
+			String format = n.getSimpleFormat(OsmandSettings.usingEnglishNames(view.getSettings()));
 			if(n.getOpeningHours() != null){
 				format += "\n" + view.getContext().getString(R.string.opening_hours) +" : "+ n.getOpeningHours(); //$NON-NLS-1$ //$NON-NLS-2$
 			}
@@ -164,7 +164,7 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 	@Override
 	public String getObjectDescription(Object o) {
 		if(o instanceof Amenity){
-			return ((Amenity)o).getSimpleFormat(OsmandSettings.usingEnglishNames(view.getContext()));
+			return ((Amenity)o).getSimpleFormat(OsmandSettings.usingEnglishNames(view.getSettings()));
 		}
 		return null;
 	}

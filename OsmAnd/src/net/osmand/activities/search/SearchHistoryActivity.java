@@ -32,7 +32,7 @@ public class SearchHistoryActivity extends ListActivity {
 		lv.setId(android.R.id.list);
 		
 		setContentView(lv);
-		location = OsmandSettings.getLastKnownMapLocation(this);
+		location = OsmandSettings.getLastKnownMapLocation(OsmandSettings.getPrefs(this));
 		helper = SearchHistoryHelper.getInstance();
 		
 		

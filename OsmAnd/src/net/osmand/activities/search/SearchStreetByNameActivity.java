@@ -10,6 +10,7 @@ import net.osmand.activities.OsmandApplication;
 import net.osmand.data.City;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -19,11 +20,12 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	private PostCode postcode;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(OsmandSettings.getLastSearchedRegion(this));
+		SharedPreferences prefs = OsmandSettings.getPrefs(this);
+		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(OsmandSettings.getLastSearchedRegion(prefs));
 		if(region != null){
-			postcode = region.getPostcode(OsmandSettings.getLastSearchedPostcode(this));
+			postcode = region.getPostcode(OsmandSettings.getLastSearchedPostcode(prefs));
 			if (postcode == null) {
-				city = region.getCityById(OsmandSettings.getLastSearchedCity(this));
+				city = region.getCityById(OsmandSettings.getLastSearchedCity(prefs));
 			}
 		}
 		super.onCreate(savedInstanceState);

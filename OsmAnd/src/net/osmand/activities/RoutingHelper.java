@@ -434,7 +434,7 @@ public class RoutingHelper {
 	}
 	
 	public void calculateRoute(final Location start, final LatLon end, final List<Location> currentGPXRoute){
-		final RouteService service = OsmandSettings.getRouterService(context);
+		final RouteService service = OsmandSettings.getRouterService(OsmandSettings.getPrefs(context));
 		if(currentRunningJob == null){
 			// do not evaluate very often
 			if (System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval) {

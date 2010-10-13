@@ -44,7 +44,7 @@ public class OsmandApplication extends Application {
 	
     public void	onCreate(){
     	super.onCreate();
-    	routingHelper = new RoutingHelper(OsmandSettings.getApplicationMode(OsmandApplication.this), OsmandApplication.this, player);
+    	routingHelper = new RoutingHelper(OsmandSettings.getApplicationMode(OsmandSettings.getPrefs(OsmandApplication.this)), OsmandApplication.this, player);
     	manager = new ResourceManager(this);
     	uiHandler = new Handler();
     	startApplication();
@@ -104,7 +104,7 @@ public class OsmandApplication extends Application {
 						List<String> warnings = null;
 						try {
 							warnings = manager.reloadIndexes(startDialog);
-							String voice = OsmandSettings.getVoiceProvider(OsmandApplication.this);
+							String voice = OsmandSettings.getVoiceProvider(OsmandSettings.getPrefs(OsmandApplication.this));
 							player = null;
 							if(voice != null){
 								startDialog.startTask(getString(R.string.voice_data_initializing), -1);

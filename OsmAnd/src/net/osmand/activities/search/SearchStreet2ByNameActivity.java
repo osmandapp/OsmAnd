@@ -11,6 +11,7 @@ import net.osmand.data.City;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -24,17 +25,18 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 	private ProgressDialog progressDlg;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(OsmandSettings.getLastSearchedRegion(this));
+		SharedPreferences prefs = OsmandSettings.getPrefs(this);
+		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(OsmandSettings.getLastSearchedRegion(prefs));
 		if(region != null){
-			postcode = region.getPostcode(OsmandSettings.getLastSearchedPostcode(this));
-			city = region.getCityById(OsmandSettings.getLastSearchedCity(this));
+			postcode = region.getPostcode(OsmandSettings.getLastSearchedPostcode(prefs));
+			city = region.getCityById(OsmandSettings.getLastSearchedCity(prefs));
 			if(postcode != null){
-				street1 = region.getStreetByName(postcode, (OsmandSettings.getLastSearchedStreet(this)));
+				street1 = region.getStreetByName(postcode, (OsmandSettings.getLastSearchedStreet(prefs)));
 				if(street1 != null){
 					city = street1.getCity();
 				}
 			} else if(city != null){
-				street1 = region.getStreetByName(city, (OsmandSettings.getLastSearchedStreet(this)));
+				street1 = region.getStreetByName(city, (OsmandSettings.getLastSearchedStreet(prefs)));
 			}
 			if(city != null){
 				startLoadDataInThread(getString(R.string.loading_streets));

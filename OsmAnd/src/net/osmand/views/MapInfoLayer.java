@@ -172,7 +172,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		pathTransform.postTranslate(boundsForMiniRoute.left, boundsForMiniRoute.top);
 		
 		
-		showArrivalTime = OsmandSettings.isShowingArrivalTime(view.getContext());
+		showArrivalTime = OsmandSettings.isShowingArrivalTime(view.getSettings());
 	}
 	
 	private void scaleRect(RectF r){
@@ -574,7 +574,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		}
 		if(cachedDistString != null && boundsForDist.contains(point.x, point.y)){
 			AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
-			LatLon pointToNavigate = OsmandSettings.getPointToNavigate(view.getContext());
+			LatLon pointToNavigate = OsmandSettings.getPointToNavigate(view.getSettings());
 			if(pointToNavigate != null){
 				int fZoom = view.getZoom() < 15 ? 15 : view.getZoom(); 
 				thread.startMoving(view.getLatitude(), view.getLongitude(), pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), 

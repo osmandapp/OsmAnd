@@ -21,8 +21,8 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<MapOb
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(OsmandSettings.getLastSearchedRegion(this));
-		location = OsmandSettings.getLastKnownMapLocation(this);
+		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(OsmandSettings.getLastSearchedRegion(OsmandSettings.getPrefs(this)));
+		location = OsmandSettings.getLastKnownMapLocation(OsmandSettings.getPrefs(this));
 		super.onCreate(savedInstanceState);
 		((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_city);
 	}

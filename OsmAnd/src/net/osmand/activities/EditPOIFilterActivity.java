@@ -62,7 +62,7 @@ public class EditPOIFilterActivity extends ListActivity {
 			public void onClick(View v) {
 				Bundle extras = getIntent().getExtras();
 				boolean searchNearBy = true;
-				LatLon lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(EditPOIFilterActivity.this);
+				LatLon lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(OsmandSettings.getPrefs(EditPOIFilterActivity.this));
 				double latitude = lastKnownMapLocation != null ? lastKnownMapLocation.getLatitude() : 0;
 				double longitude = lastKnownMapLocation != null ? lastKnownMapLocation.getLongitude() : 0;
 				final Intent newIntent = new Intent(EditPOIFilterActivity.this, SearchPOIActivity.class);

@@ -59,6 +59,14 @@ public class OsmandSettings {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		return prefs.edit();
 	}
+	
+	public static final SharedPreferences getSharedPreferences(Context ctx){
+		return ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	}
+	
+	public static final SharedPreferences getPrefs(Context ctx){
+		return ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String USE_INTERNET_TO_DOWNLOAD_TILES = "use_internet_to_download_tiles"; //$NON-NLS-1$
@@ -67,9 +75,8 @@ public class OsmandSettings {
 	private static long lastTimeInternetConnectionChecked = 0;
 	private static boolean internetConnectionAvailable = true;
 
-	public static boolean isUsingInternetToDownloadTiles(Context ctx) {
+	public static boolean isUsingInternetToDownloadTiles(SharedPreferences prefs) {
 		if(CACHE_USE_INTERNET_TO_DOWNLOAD_TILES == null){
-			SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 			CACHE_USE_INTERNET_TO_DOWNLOAD_TILES = prefs.getBoolean(USE_INTERNET_TO_DOWNLOAD_TILES, USE_INTERNET_TO_DOWNLOAD_TILES_DEF);
 		}
 		return CACHE_USE_INTERNET_TO_DOWNLOAD_TILES;
@@ -101,8 +108,7 @@ public class OsmandSettings {
 	public static final String USE_TRACKBALL_FOR_MOVEMENTS = "use_trackball_for_movements"; //$NON-NLS-1$
 	public static final boolean USE_TRACKBALL_FOR_MOVEMENTS_DEF = true;
 
-	public static boolean isUsingTrackBall(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static boolean isUsingTrackBall(SharedPreferences prefs) {
 		return prefs.getBoolean(USE_TRACKBALL_FOR_MOVEMENTS, USE_TRACKBALL_FOR_MOVEMENTS_DEF);
 	}
 	
@@ -111,8 +117,7 @@ public class OsmandSettings {
 	public static final String SHOW_POI_OVER_MAP = "show_poi_over_map"; //$NON-NLS-1$
 	public static final Boolean SHOW_POI_OVER_MAP_DEF = false;
 
-	public static boolean isShowingPoiOverMap(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static boolean isShowingPoiOverMap(SharedPreferences prefs) {
 		return prefs.getBoolean(SHOW_POI_OVER_MAP, SHOW_POI_OVER_MAP_DEF);
 	}
 	
@@ -125,8 +130,7 @@ public class OsmandSettings {
 	public static final String SHOW_TRANSPORT_OVER_MAP = "show_transport_over_map"; //$NON-NLS-1$
 	public static final boolean SHOW_TRANSPORT_OVER_MAP_DEF = false;
 
-	public static boolean isShowingTransportOverMap(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static boolean isShowingTransportOverMap(SharedPreferences prefs) {
 		return prefs.getBoolean(SHOW_TRANSPORT_OVER_MAP, SHOW_TRANSPORT_OVER_MAP_DEF);
 	}
 	
@@ -138,8 +142,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String USER_NAME = "user_name"; //$NON-NLS-1$
 
-	public static String getUserName(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static String getUserName(SharedPreferences prefs) {
 		return prefs.getString(USER_NAME, "NoName"); //$NON-NLS-1$
 	}
 
@@ -152,8 +155,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String USER_OSM_BUG_NAME = "user_osm_bug_name"; //$NON-NLS-1$
 
-	public static String getUserNameForOsmBug(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static String getUserNameForOsmBug(SharedPreferences prefs) {
 		return prefs.getString(USER_OSM_BUG_NAME, "NoName/Osmand"); //$NON-NLS-1$
 	}
 
@@ -163,8 +165,7 @@ public class OsmandSettings {
 	}
 	
 	public static final String USER_PASSWORD = "user_password"; //$NON-NLS-1$
-	public static String getUserPassword(Context ctx){
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static String getUserPassword(SharedPreferences prefs){
 		return prefs.getString(USER_PASSWORD, ""); //$NON-NLS-1$
 	}
 	
@@ -176,8 +177,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String APPLICATION_MODE = "application_mode"; //$NON-NLS-1$
 
-	public static ApplicationMode getApplicationMode(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static ApplicationMode getApplicationMode(SharedPreferences prefs) {
 		String s = prefs.getString(APPLICATION_MODE, ApplicationMode.DEFAULT.name());
 		try {
 			return ApplicationMode.valueOf(s);
@@ -194,8 +194,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String ROUTER_SERVICE = "router_service"; //$NON-NLS-1$
 
-	public static RouteService getRouterService(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static RouteService getRouterService(SharedPreferences prefs) {
 		int ord = prefs.getInt(ROUTER_SERVICE, RouteService.CLOUDMADE.ordinal());
 		if(ord < RouteService.values().length){
 			return RouteService.values()[ord];
@@ -226,8 +225,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SAVE_TRACK_INTERVAL = "save_track_interval"; //$NON-NLS-1$
 
-	public static int getSavingTrackInterval(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static int getSavingTrackInterval(SharedPreferences prefs) {
 		return prefs.getInt(SAVE_TRACK_INTERVAL, 5);
 	}
 
@@ -235,8 +233,7 @@ public class OsmandSettings {
 	public static final String SHOW_OSM_BUGS = "show_osm_bugs"; //$NON-NLS-1$
 	public static final boolean SHOW_OSM_BUGS_DEF = false;
 
-	public static boolean isShowingOsmBugs(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static boolean isShowingOsmBugs(SharedPreferences prefs) {
 		return prefs.getBoolean(SHOW_OSM_BUGS, SHOW_OSM_BUGS_DEF);
 	}
 	
@@ -249,8 +246,7 @@ public class OsmandSettings {
 	public static final String SHOW_YANDEX_TRAFFIC = "show_yandex_traffic"; //$NON-NLS-1$
 	public static final boolean SHOW_YANDEX_TRAFFIC_DEF = false;
 
-	public static boolean isShowingYandexTraffic(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static boolean isShowingYandexTraffic(SharedPreferences prefs) {
 		return prefs.getBoolean(SHOW_YANDEX_TRAFFIC, SHOW_YANDEX_TRAFFIC_DEF);
 	}
 	
@@ -263,8 +259,7 @@ public class OsmandSettings {
 	public static final String SHOW_FAVORITES = "show_favorites"; //$NON-NLS-1$
 	public static final boolean SHOW_FAVORITES_DEF = false;
 
-	public static boolean isShowingFavorites(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static boolean isShowingFavorites(SharedPreferences prefs) {
 		return prefs.getBoolean(SHOW_FAVORITES, SHOW_FAVORITES_DEF);
 	}
 	
@@ -276,8 +271,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String MAP_SCREEN_ORIENTATION = "map_screen_orientation"; //$NON-NLS-1$
 	
-	public static int getMapOrientation(Context ctx){
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static int getMapOrientation(SharedPreferences prefs){
 		return prefs.getInt(MAP_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	}
 	
@@ -285,8 +279,7 @@ public class OsmandSettings {
 	public static final String SHOW_VIEW_ANGLE = "show_view_angle"; //$NON-NLS-1$
 	public static final boolean SHOW_VIEW_ANGLE_DEF = false;
 
-	public static boolean isShowingViewAngle(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static boolean isShowingViewAngle(SharedPreferences prefs) {
 		return prefs.getBoolean(SHOW_VIEW_ANGLE, SHOW_VIEW_ANGLE_DEF);
 	}
 
@@ -294,8 +287,7 @@ public class OsmandSettings {
 	public static final String AUTO_ZOOM_MAP = "auto_zoom_map"; //$NON-NLS-1$
 	public static final boolean AUTO_ZOOM_MAP_DEF = false;
 
-	public static boolean isAutoZoomEnabled(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static boolean isAutoZoomEnabled(SharedPreferences prefs) {
 		return prefs.getBoolean(AUTO_ZOOM_MAP, AUTO_ZOOM_MAP_DEF);
 	}
 
@@ -307,24 +299,21 @@ public class OsmandSettings {
 	public static final int ROTATE_MAP_COMPASS = 2;
 	
 	// return 0 - no rotate, 1 - to bearing, 2 - to compass
-	public static int getRotateMap(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static int getRotateMap(SharedPreferences prefs) {
 		return prefs.getInt(ROTATE_MAP, ROTATE_MAP_TO_BEARING_DEF);
 	}
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String POSITION_ON_MAP = "position_on_map"; //$NON-NLS-1$
 
-	public static int getPositionOnMap(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static int getPositionOnMap(SharedPreferences prefs) {
 		return prefs.getInt(POSITION_ON_MAP, CENTER_CONSTANT);
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String MAX_LEVEL_TO_DOWNLOAD_TILE = "max_level_download_tile"; //$NON-NLS-1$
 
-	public static int getMaximumLevelToDownloadTile(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static int getMaximumLevelToDownloadTile(SharedPreferences prefs) {
 		return prefs.getInt(MAX_LEVEL_TO_DOWNLOAD_TILE, 18);
 	}
 
@@ -332,8 +321,7 @@ public class OsmandSettings {
 	public static final String MAP_VIEW_3D = "map_view_3d"; //$NON-NLS-1$
 	public static final boolean MAP_VIEW_3D_DEF = false;
 
-	public static boolean isMapView3D(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static boolean isMapView3D(SharedPreferences prefs) {
 		return prefs.getBoolean(MAP_VIEW_3D, MAP_VIEW_3D_DEF);
 	}
 
@@ -341,8 +329,7 @@ public class OsmandSettings {
 	public static final String USE_ENGLISH_NAMES = "use_english_names"; //$NON-NLS-1$
 	public static final boolean USE_ENGLISH_NAMES_DEF = false;
 
-	public static boolean usingEnglishNames(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static boolean usingEnglishNames(SharedPreferences prefs) {
 		return prefs.getBoolean(USE_ENGLISH_NAMES, USE_ENGLISH_NAMES_DEF);
 	}
 
@@ -355,13 +342,11 @@ public class OsmandSettings {
 	public static final String MAP_VECTOR_DATA = "map_vector_data"; //$NON-NLS-1$
 	public static final String MAP_TILE_SOURCES = "map_tile_sources"; //$NON-NLS-1$
 	
-	public static boolean isUsingMapVectorData(Context ctx){
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static boolean isUsingMapVectorData(SharedPreferences prefs){
 		return prefs.getBoolean(MAP_VECTOR_DATA, false);
 	}
 
-	public static ITileSource getMapTileSource(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static ITileSource getMapTileSource(SharedPreferences prefs) {
 		String tileName = prefs.getString(MAP_TILE_SOURCES, null);
 		if (tileName != null) {
 			
@@ -399,8 +384,7 @@ public class OsmandSettings {
 		return TileSourceManager.getMapnikSource();
 	}
 
-	public static String getMapTileSourceName(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static String getMapTileSourceName(SharedPreferences prefs) {
 		String tileName = prefs.getString(MAP_TILE_SOURCES, null);
 		if (tileName != null) {
 			return tileName;
@@ -418,23 +402,21 @@ public class OsmandSettings {
 	public static final String MAP_LON_TO_SHOW = "map_lon_to_show"; //$NON-NLS-1$
 	public static final String MAP_ZOOM_TO_SHOW = "map_zoom_to_show"; //$NON-NLS-1$
 
-	public static LatLon getLastKnownMapLocation(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static LatLon getLastKnownMapLocation(SharedPreferences prefs) {
 		float lat = prefs.getFloat(LAST_KNOWN_MAP_LAT, 0);
 		float lon = prefs.getFloat(LAST_KNOWN_MAP_LON, 0);
 		return new LatLon(lat, lon);
 	}
 
 	public static void setMapLocationToShow(Context ctx, double latitude, double longitude) {
-		setMapLocationToShow(ctx, latitude, longitude, getLastKnownMapZoom(ctx), null);
+		setMapLocationToShow(ctx, latitude, longitude, getLastKnownMapZoom(getSharedPreferences(ctx)), null);
 	}
 	
 	public static void setMapLocationToShow(Context ctx, double latitude, double longitude, int zoom) {
 		setMapLocationToShow(ctx, latitude, longitude, null);
 	}
 	
-	public static LatLon getAndClearMapLocationToShow(Context ctx){
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static LatLon getAndClearMapLocationToShow(SharedPreferences prefs){
 		if(!prefs.contains(MAP_LAT_TO_SHOW)){
 			return null;
 		}
@@ -444,8 +426,7 @@ public class OsmandSettings {
 		return new LatLon(lat, lon);
 	}
 	
-	public static int getMapZoomToShow(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static int getMapZoomToShow(SharedPreferences prefs) {
 		return prefs.getInt(MAP_ZOOM_TO_SHOW, 5);
 	}
 	
@@ -463,7 +444,7 @@ public class OsmandSettings {
 	}
 	
 	public static void setMapLocationToShow(Context ctx, double latitude, double longitude, String historyDescription) {
-		setMapLocationToShow(ctx, latitude, longitude, getLastKnownMapZoom(ctx), historyDescription);
+		setMapLocationToShow(ctx, latitude, longitude, getLastKnownMapZoom(getSharedPreferences(ctx)), historyDescription);
 	}
 
 	// Do not use that method if you want to show point on map. Use setMapLocationToShow
@@ -480,13 +461,11 @@ public class OsmandSettings {
 		return prefs.edit().putBoolean(IS_MAP_SYNC_TO_GPS_LOCATION, value).commit();
 	}
 
-	public static boolean isMapSyncToGpsLocation(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static boolean isMapSyncToGpsLocation(SharedPreferences prefs) {
 		return prefs.getBoolean(IS_MAP_SYNC_TO_GPS_LOCATION, true);
 	}
 
-	public static int getLastKnownMapZoom(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static int getLastKnownMapZoom(SharedPreferences prefs) {
 		return prefs.getInt(LAST_KNOWN_MAP_ZOOM, 5);
 	}
 
@@ -500,8 +479,7 @@ public class OsmandSettings {
 	public final static String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
 	public final static String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
 
-	public static LatLon getPointToNavigate(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static LatLon getPointToNavigate(SharedPreferences prefs) {
 		float lat = prefs.getFloat(POINT_NAVIGATE_LAT, 0);
 		float lon = prefs.getFloat(POINT_NAVIGATE_LON, 0);
 		if (lat == 0 && lon == 0) {
@@ -510,8 +488,7 @@ public class OsmandSettings {
 		return new LatLon(lat, lon);
 	}
 
-	public static boolean clearPointToNavigate(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static boolean clearPointToNavigate(SharedPreferences prefs) {
 		return prefs.edit().remove(POINT_NAVIGATE_LAT).remove(POINT_NAVIGATE_LON).commit();
 	}
 
@@ -527,8 +504,7 @@ public class OsmandSettings {
 	public static final String LAST_SEARCHED_BUILDING = "last_searched_building"; //$NON-NLS-1$
 	public static final String LAST_SEARCHED_INTERSECTED_STREET = "last_searched_intersected_street"; //$NON-NLS-1$
 
-	public static String getLastSearchedRegion(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static String getLastSearchedRegion(SharedPreferences prefs) {
 		return prefs.getString(LAST_SEARCHED_REGION, ""); //$NON-NLS-1$
 	}
 
@@ -542,8 +518,7 @@ public class OsmandSettings {
 		return edit.commit();
 	}
 	
-	public static String getLastSearchedPostcode(Context ctx){
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static String getLastSearchedPostcode(SharedPreferences prefs){
 		return prefs.getString(lAST_SEARCHED_POSTCODE, null);	
 	}
 	
@@ -557,8 +532,7 @@ public class OsmandSettings {
 		return edit.commit();
 	}
 
-	public static Long getLastSearchedCity(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static Long getLastSearchedCity(SharedPreferences prefs) {
 		return prefs.getLong(LAST_SEARCHED_CITY, -1);
 	}
 
@@ -573,8 +547,7 @@ public class OsmandSettings {
 		return edit.commit();
 	}
 
-	public static String getLastSearchedStreet(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static String getLastSearchedStreet(SharedPreferences prefs) {
 		return prefs.getString(LAST_SEARCHED_STREET, ""); //$NON-NLS-1$
 	}
 
@@ -587,8 +560,7 @@ public class OsmandSettings {
 		return edit.commit();
 	}
 
-	public static String getLastSearchedBuilding(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static String getLastSearchedBuilding(SharedPreferences prefs) {
 		return prefs.getString(LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$
 	}
 
@@ -597,8 +569,7 @@ public class OsmandSettings {
 		return prefs.edit().putString(LAST_SEARCHED_BUILDING, building).remove(LAST_SEARCHED_INTERSECTED_STREET).commit();
 	}
 
-	public static String getLastSearchedIntersectedStreet(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static String getLastSearchedIntersectedStreet(SharedPreferences prefs) {
 		if (!prefs.contains(LAST_SEARCHED_INTERSECTED_STREET)) {
 			return null;
 		}
@@ -611,7 +582,7 @@ public class OsmandSettings {
 	}
 
 	public static boolean removeLastSearchedIntersectedStreet(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		SharedPreferences prefs = getPrefs(ctx);
 		return prefs.edit().remove(LAST_SEARCHED_INTERSECTED_STREET).commit();
 	}
 
@@ -636,16 +607,14 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String VOICE_PROVIDER = "voice_provider"; //$NON-NLS-1$
 	
-	public static String getVoiceProvider(Context ctx){
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static String getVoiceProvider(SharedPreferences prefs){
 		return prefs.getString(VOICE_PROVIDER, null);
 	}
 	
 	public static final String VOICE_MUTE = "voice_mute"; //$NON-NLS-1$
 	public static final boolean VOICE_MUTE_DEF = false;
 	
-	public static boolean isVoiceMute(Context ctx){
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static boolean isVoiceMute(SharedPreferences prefs){
 		return prefs.getBoolean(VOICE_MUTE, VOICE_MUTE_DEF);
 	}
 	
@@ -657,8 +626,7 @@ public class OsmandSettings {
 	// for background service
 	public static final String MAP_ACTIVITY_ENABLED = "map_activity_enabled"; //$NON-NLS-1$
 	public static final boolean MAP_ACTIVITY_ENABLED_DEF = false; 
-	public static boolean getMapActivityEnabled(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static boolean getMapActivityEnabled(SharedPreferences prefs) {
 		return prefs.getBoolean(MAP_ACTIVITY_ENABLED, MAP_ACTIVITY_ENABLED_DEF);
 	}
 	
@@ -670,8 +638,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SERVICE_OFF_ENABLED = "service_off_enabled"; //$NON-NLS-1$
 	public static final boolean SERVICE_OFF_ENABLED_DEF = false; 
-	public static boolean getServiceOffEnabled(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static boolean getServiceOffEnabled(SharedPreferences prefs) {
 		return prefs.getBoolean(SERVICE_OFF_ENABLED, SERVICE_OFF_ENABLED_DEF);
 	}
 	
@@ -683,8 +650,7 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SERVICE_OFF_PROVIDER = "service_off_provider"; //$NON-NLS-1$
-	public static String getServiceOffProvider(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static String getServiceOffProvider(SharedPreferences prefs) {
 		return prefs.getString(SERVICE_OFF_PROVIDER, LocationManager.GPS_PROVIDER);
 	}
 	
@@ -692,8 +658,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SERVICE_OFF_INTERVAL = "service_off_interval"; //$NON-NLS-1$
 	public static final int SERVICE_OFF_INTERVAL_DEF = 5 * 60 * 1000;
-	public static int getServiceOffInterval(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static int getServiceOffInterval(SharedPreferences prefs) {
 		return prefs.getInt(SERVICE_OFF_INTERVAL, SERVICE_OFF_INTERVAL_DEF);
 	}
 	
@@ -701,16 +666,14 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SERVICE_OFF_WAIT_INTERVAL = "service_off_wait_interval"; //$NON-NLS-1$
 	public static final int SERVICE_OFF_WAIT_INTERVAL_DEF = 90 * 1000;
-	public static int getServiceOffWaitInterval(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static int getServiceOffWaitInterval(SharedPreferences prefs) {
 		return prefs.getInt(SERVICE_OFF_WAIT_INTERVAL, SERVICE_OFF_WAIT_INTERVAL_DEF);
 	}
 	
 	
 	public static final String FOLLOW_TO_THE_ROUTE = "follow_to_route"; //$NON-NLS-1$
 	
-	public static boolean isFollowingByRoute(Context ctx){
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static boolean isFollowingByRoute(SharedPreferences prefs){
 		return prefs.getBoolean(FOLLOW_TO_THE_ROUTE, false);
 	}
 	
@@ -721,8 +684,7 @@ public class OsmandSettings {
 	
 	public static final String SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME = "show_arrival_time"; //$NON-NLS-1$
 	
-	public static boolean isShowingArrivalTime(Context ctx){
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+	public static boolean isShowingArrivalTime(SharedPreferences prefs){
 		return prefs.getBoolean(SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME, true);
 	}
 	
