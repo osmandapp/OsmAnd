@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="use_high_res_maps">High resolution map</string>
+	<string name="use_high_res_maps_descr">Use high resolution map for high density devices</string>
 	<string name="unknown_location">Сurrently location is unknown</string>
 	<string name="download_files_question">Download {0} files?</string>
 	<string name="download_files">Download</string>
