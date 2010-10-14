@@ -1539,17 +1539,19 @@ public class IndexCreator {
 				int prevY = 0;
 				int len = 0;
 				for (int i = 0; i < nodes.size(); i++) {
-					// d	o not simplify last node it could be important node for multipolygon
-					int r = i < nodes.size() - 1 ? 4 : 0;
-					int x = (int) (MapUtils.getTileNumberX(zoom, nodes.get(i).getLongitude()) * 256d);
-					int y = (int) (MapUtils.getTileNumberY(zoom, nodes.get(i).getLatitude()) * 256d);
-					int dy = Math.abs(y - prevY);
-					int dx = Math.abs(x - prevX);
-					if (dx > r || dy > r) {
-						way.addNode(nodes.get(i));
-						len += (dx + dy);
-						prevX = x;
-						prevY = y;
+					// do not simplify last node it could be important node for multipolygon
+					if (nodes.get(i) != null) {
+						int r = i < nodes.size() - 1 ? 4 : 0;
+						int x = (int) (MapUtils.getTileNumberX(zoom, nodes.get(i).getLongitude()) * 256d);
+						int y = (int) (MapUtils.getTileNumberY(zoom, nodes.get(i).getLatitude()) * 256d);
+						int dy = Math.abs(y - prevY);
+						int dx = Math.abs(x - prevX);
+						if (dx > r || dy > r) {
+							way.addNode(nodes.get(i));
+							len += (dx + dy);
+							prevX = x;
+							prevY = y;
+						}
 					}
 				}
 				e = way;
