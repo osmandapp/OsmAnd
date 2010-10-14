@@ -190,7 +190,18 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 //	                                WindowManager.LayoutParams.FLAG_FULLSCREEN); 
 		
 		setContentView(R.layout.main);
-		((OsmandApplication)getApplication()).checkApplicationIsBeingInitialized(this);
+		ProgressDialog dlg = ((OsmandApplication)getApplication()).checkApplicationIsBeingInitialized(this);
+		if(dlg != null){
+			dlg.setOnDismissListener(new DialogInterface.OnDismissListener(){
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					OsmandApplication app = ((OsmandApplication)getApplication());
+					if(OsmandSettings.isUsingMapVectorData(settings) && app.getResourceManager().getRenderer().isEmpty()){
+						Toast.makeText(MapActivity.this, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
+					}
+				}
+			});
+		}
 		
 		mapView = (OsmandMapTileView) findViewById(R.id.MapView);
 		mapView.setTrackBallDelegate(new OsmandMapTileView.OnTrackBallListener(){
@@ -731,8 +742,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	
 	private void updateMapSource(){
 		boolean vectorData = OsmandSettings.isUsingMapVectorData(settings);
-		ResourceManager rm = ((OsmandApplication)getApplication()).getResourceManager();
-		if(vectorData){
+		OsmandApplication app = ((OsmandApplication)getApplication());
+		ResourceManager rm = app.getResourceManager();
+		if(vectorData && !app.isApplicationInitializing()){
 			if(rm.getRenderer().isEmpty()){
 				Toast.makeText(MapActivity.this, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
 				vectorData = false;

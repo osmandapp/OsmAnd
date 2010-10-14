@@ -67,15 +67,21 @@ public class OsmandApplication extends Application {
 		manager.onLowMemory();
 	}
 	
-	public void checkApplicationIsBeingInitialized(Context uiContext){
+	public ProgressDialog checkApplicationIsBeingInitialized(Context uiContext){
 		synchronized (OsmandApplication.this) {
 			if(startDialog != null){
 				progressDlg = ProgressDialog.show(uiContext, getString(R.string.loading_data), getString(R.string.reading_indexes), true);
 				startDialog.setDialog(progressDlg);
+				return progressDlg;
 			}  else if(startingWarnings != null){
 				showWarnings(startingWarnings, uiContext);
 			}
 		}
+		return null;
+	}
+	
+	public boolean isApplicationInitializing(){
+		return startDialog != null;
 	}
 	
 	public RoutingHelper getRoutingHelper() {
@@ -157,7 +163,6 @@ public class OsmandApplication extends Application {
 				@Override
 				public void run() {
 					Toast.makeText(uiContext, b.toString(), Toast.LENGTH_LONG).show();
-
 				}
 			});
 		}
