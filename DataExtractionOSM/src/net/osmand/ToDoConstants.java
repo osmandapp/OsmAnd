@@ -9,7 +9,7 @@ public class ToDoConstants {
 	
 	// TODO max 100
 	// FOR 0.4 beta RELEASE
-	// Profile
+	// Profile vector rendering
 	// fix issue with loading app (and not visible map)
 
 

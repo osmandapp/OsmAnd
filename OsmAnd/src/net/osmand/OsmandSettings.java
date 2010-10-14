@@ -112,6 +112,14 @@ public class OsmandSettings {
 		return prefs.getBoolean(USE_TRACKBALL_FOR_MOVEMENTS, USE_TRACKBALL_FOR_MOVEMENTS_DEF);
 	}
 	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String USE_HIGH_RES_MAPS = "use_high_res_maps"; //$NON-NLS-1$
+	public static final boolean USE_HIGH_RES_MAPS_DEF = false;
+
+	public static boolean isUsingHighResMaps(SharedPreferences prefs) {
+		return prefs.getBoolean(USE_HIGH_RES_MAPS, USE_HIGH_RES_MAPS_DEF);
+	}
+	
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SHOW_POI_OVER_MAP = "show_poi_over_map"; //$NON-NLS-1$

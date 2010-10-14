@@ -225,9 +225,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		// that trigger allows to scale tiles for certain devices
 		// for example for device with density > 1 draw tiles the same size as with density = 1
 		// It makes text bigger but blurry, the settings could be introduced for that
-//		if (dm != null && dm.density > 1f) {
-//			res *= dm.density;
-//		}
+		if (dm != null && dm.density > 1f && !OsmandSettings.isUsingHighResMaps(getSettings()) ) {
+			res *= dm.density;
+		}
 		return res;
 	}
 
