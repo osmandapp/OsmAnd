@@ -50,12 +50,16 @@ import android.widget.Toast;
 public class DownloadIndexActivity extends ListActivity {
 	
 	private final static Log log = LogUtil.getLog(DownloadIndexActivity.class);
-	private ProgressDialog progressDlg = null;
+	private static DownloadIndexListThread downloadListIndexThread = new DownloadIndexListThread();
+
+	private ProgressDialog progressFileDlg = null;
+	private ProgressDialog progressListDlg = null;
 	private LinkedHashMap<String, DownloadEntry> entriesToDownload = new LinkedHashMap<String, DownloadEntry>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// that is needed to prevent rotation while files are downloaded
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.download_index);
 		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener(){
@@ -66,34 +70,62 @@ public class DownloadIndexActivity extends ListActivity {
 			}
 			
 		});
-		progressDlg = ProgressDialog.show(this, getString(R.string.downloading), getString(R.string.downloading_list_indexes));
-		progressDlg.setCancelable(true);
-		
-		new Thread(new Runnable(){
-			@Override
-			public void run() {
-				final Map<String, String> indexFiles = downloadIndex();
-				if(progressDlg != null){
-					progressDlg.dismiss();
-					progressDlg = null;
-					runOnUiThread(new Runnable() {
-						@Override
-						public void run() {
-							if (indexFiles != null) {
-								setListAdapter(new DownloadIndexAdapter(new ArrayList<Entry<String,String>>(indexFiles.entrySet())));
-							} else {
-								Toast.makeText(DownloadIndexActivity.this, R.string.list_index_files_was_not_loaded, Toast.LENGTH_LONG).show();
-							}
-						}
-					});
-				}
+		if(downloadListIndexThread.getCachedIndexFiles() != null){
+			setListAdapter(new DownloadIndexAdapter(new ArrayList<Entry<String,String>>(downloadListIndexThread.getCachedIndexFiles().entrySet())));
+		} else {
+			progressListDlg = ProgressDialog.show(this, getString(R.string.downloading), getString(R.string.downloading_list_indexes));
+			progressListDlg.setCancelable(true);
+			downloadListIndexThread.uiActivity = this;
+			if(downloadListIndexThread.getState() == Thread.State.NEW){
+				downloadListIndexThread.start();
+			} else if(downloadListIndexThread.getState() == Thread.State.TERMINATED){
+				// possibly exception occurred we don't have cache of files
+				downloadListIndexThread = new DownloadIndexListThread();
+				downloadListIndexThread.uiActivity = this;
 			}
-		}, "DownloadIndexes").start(); //$NON-NLS-1$
+		}
 		
 	}
 	
+	private static class DownloadIndexListThread extends Thread {
+		private DownloadIndexActivity uiActivity = null;
+		private Map<String, String> indexFiles = null; 
+		
+		public DownloadIndexListThread(){
+			super("DownloadIndexes"); //$NON-NLS-1$
+		}
+		public void setUiActivity(DownloadIndexActivity uiActivity) {
+			this.uiActivity = uiActivity;
+		}
+		
+		public Map<String, String> getCachedIndexFiles() {
+			return indexFiles;
+		}
+		
+		@Override
+		public void run() {
+			indexFiles = downloadIndex();
+			if(uiActivity != null &&  uiActivity.progressListDlg != null){
+				uiActivity.progressListDlg.dismiss();
+				uiActivity.progressListDlg = null;
+				uiActivity.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						if (indexFiles != null) {
+							uiActivity.setListAdapter(uiActivity.new DownloadIndexAdapter(new ArrayList<Entry<String,String>>(indexFiles.entrySet())));
+						} else {
+							Toast.makeText(uiActivity, R.string.list_index_files_was_not_loaded, Toast.LENGTH_LONG).show();
+						}
+					}
+				});
+			}
+		}
+	}
+	
+	
+	
 
-	protected Map<String, String> downloadIndex(){
+	protected static Map<String, String> downloadIndex(){
 		try {
 			log.debug("Start loading list of index files"); //$NON-NLS-1$
 			TreeMap<String, String> indexFiles = new TreeMap<String, String>(new Comparator<String>(){
@@ -260,11 +292,11 @@ public class DownloadIndexActivity extends ListActivity {
 		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				progressDlg = ProgressDialog.show(DownloadIndexActivity.this, getString(R.string.downloading), getString(R.string.downloading_file), true, true);
+				progressFileDlg = ProgressDialog.show(DownloadIndexActivity.this, getString(R.string.downloading), getString(R.string.downloading_file), true, true);
 				interruptDownloading = false;
-				progressDlg.show();
-				final ProgressDialogImplementation impl = new ProgressDialogImplementation(progressDlg, true);
-				progressDlg.setOnCancelListener(new DialogInterface.OnCancelListener(){
+				progressFileDlg.show();
+				final ProgressDialogImplementation impl = new ProgressDialogImplementation(progressFileDlg, true);
+				progressFileDlg.setOnCancelListener(new DialogInterface.OnCancelListener(){
 
 					@Override
 					public void onCancel(DialogInterface dialog) {
@@ -291,11 +323,12 @@ public class DownloadIndexActivity extends ListActivity {
 							}
 							
 						} catch (InterruptedException e) {
-							progressDlg = null;
+							// do not dismiss dialog
+							progressFileDlg = null;
 						} finally {
-							if(progressDlg != null){
-								progressDlg.dismiss();
-								progressDlg = null;
+							if(progressFileDlg != null){
+								progressFileDlg.dismiss();
+								progressFileDlg = null;
 							}
 						}
 					}
@@ -386,12 +419,8 @@ public class DownloadIndexActivity extends ListActivity {
 		if(isFinishing()){
 			interruptDownloading = true;
 		}
-		// not needed now because rotate screen not allowed
-		// posssibly it should be onDestroy method
-//		if(progressDlg != null){
-//			progressDlg.dismiss();
-//			progressDlg = null;
-//		}
+		downloadListIndexThread.uiActivity = null;
+		progressFileDlg = null;
 	}
 	
 	protected boolean downloadFile(final String key, final File fileToDownload, final File fileToUnZip, final boolean unzipToDir,
@@ -493,7 +522,7 @@ public class DownloadIndexActivity extends ListActivity {
 	}
 
 
-	private class DownloadIndexAdapter extends ArrayAdapter<Entry<String, String>> {
+	protected class DownloadIndexAdapter extends ArrayAdapter<Entry<String, String>> {
 
 		public DownloadIndexAdapter(List<Entry<String, String>> array) {
 			super(DownloadIndexActivity.this, net.osmand.R.layout.download_index_list_item, array);
