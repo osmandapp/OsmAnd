@@ -765,12 +765,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		super.onResume();
 		if(OsmandSettings.getMapOrientation(settings) != getRequestedOrientation()){
 			setRequestedOrientation(OsmandSettings.getMapOrientation(settings));
-			// do nothing now (let recreate activity)
-			// only save map position
-			LatLon l = OsmandSettings.getLastKnownMapLocation(settings);
-			mapView.setLatLon(l.getLatitude(), l.getLongitude());
-			mapView.setZoom(OsmandSettings.getLastKnownMapZoom(settings));
-			return;
+			// can't return from this method we are not sure if activity will be recreated or not
 		}
 		currentScreenOrientation = getWindow().getWindowManager().getDefaultDisplay().getOrientation();
 		
@@ -803,29 +798,23 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		providerSupportsBearing = prov == null ? false : prov.supportsBearing() && !isRunningOnEmulator();
 		providerSupportsSpeed = prov == null ? false : prov.supportsSpeed() && !isRunningOnEmulator();
 		
+		if(settings != null && settings.contains(OsmandSettings.LAST_KNOWN_MAP_LAT)){
+			LatLon l = OsmandSettings.getLastKnownMapLocation(settings);
+			mapView.setLatLon(l.getLatitude(), l.getLongitude());
+			mapView.setZoom(OsmandSettings.getLastKnownMapZoom(settings));
+		}
+		
 		
 		if (wakeLock == null) {
 			PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
 			wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "net.osmand.map"); //$NON-NLS-1$
 			wakeLock.acquire();
 		}
-		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
-		if(prefs != null && prefs.contains(OsmandSettings.LAST_KNOWN_MAP_LAT)){
-			LatLon l = OsmandSettings.getLastKnownMapLocation(settings);
-			mapView.setLatLon(l.getLatitude(), l.getLongitude());
-			mapView.setZoom(OsmandSettings.getLastKnownMapZoom(settings));
-			LatLon latLon = OsmandSettings.getAndClearMapLocationToShow(settings);
-			LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
-			if(latLon != null && !latLon.equals(cur)){
-				mapView.getAnimatedDraggingThread().startMoving(cur.getLatitude(), cur.getLongitude(), 
-						latLon.getLatitude(), latLon.getLongitude(), 
-						mapView.getZoom(), OsmandSettings.getMapZoomToShow(settings), 
-						mapView.getSourceTileSize(), mapView.getRotate(), true);
-			}
-		}
+		
 		OsmandSettings.setMapActivityEnabled(this, true);
 		checkExternalStorage();
 		showAndHideMapPosition();
+		
 		
 		View progress = findViewById(R.id.ProgressBar);
 		if (progress == null) {
@@ -835,6 +824,19 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}
 		if(progress != null){
 			((OsmandApplication) getApplication()).getResourceManager().setBusyIndicator(new BusyIndicator(this, progress));
+		}
+	}
+	
+	@Override
+	public void onAttachedToWindow() {
+		super.onAttachedToWindow();
+		// start animate transition only ui appears (take into account that on resume orientation can change)
+		LatLon latLon = OsmandSettings.getAndClearMapLocationToShow(settings);
+		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
+		if (latLon != null && !latLon.equals(cur)) {
+			mapView.getAnimatedDraggingThread().startMoving(cur.getLatitude(), cur.getLongitude(), latLon.getLatitude(),
+					latLon.getLongitude(), mapView.getZoom(), OsmandSettings.getMapZoomToShow(settings), mapView.getSourceTileSize(),
+					mapView.getRotate(), true);
 		}
 	}
 	
