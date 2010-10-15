@@ -475,7 +475,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				} else {
 					speed = ((float) d * 1000) / time ;
 				}
-
+				// incorrect in case of airplane
 				if (speed > 100) {
 					speed = 100;
 				}
