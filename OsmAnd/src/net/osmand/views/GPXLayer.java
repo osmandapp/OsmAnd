@@ -76,7 +76,7 @@ public class GPXLayer implements OsmandMapLayer {
 				}
 			}
 			if (startIndex == -1) {
-				return;
+				continue;
 			}
 			if (endIndex == -1) {
 				endIndex = l.size() - 1;
