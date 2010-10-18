@@ -84,6 +84,10 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 		this.additionalPoints = additionalPoints;
 	}
 	
+	public List<FavouritePoint> getAdditionalPoints() {
+		return additionalPoints;
+	}
+	
 	public void reloadFavorites(Context ctx){
 		FavouritesDbHelper helper = new FavouritesActivity.FavouritesDbHelper(ctx);
 		favouritePoints = helper.getFavouritePoints();
