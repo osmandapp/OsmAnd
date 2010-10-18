@@ -212,6 +212,8 @@ public class FavouritesActivity extends ListActivity {
 					}
 					Toast.makeText(this, R.string.fav_imported_sucessfully, Toast.LENGTH_SHORT).show();
 					favouritesAdapter.notifyDataSetChanged();
+				} else {
+					Toast.makeText(this, res.error, Toast.LENGTH_LONG).show();
 				}
 			}
 		} else {

@@ -325,6 +325,11 @@ public class RegionAddressRepository {
 			log.debug("Start loading cities for " +getName() + " filter " + name); //$NON-NLS-1$ //$NON-NLS-2$
 			// lower function in SQLite requires ICU extension
 			name = Algoritms.capitalizeFirstLetterAndLowercase(name);
+			int i = name.indexOf('\'');
+			if(i != -1){
+				// SQL quotation 
+				name = name.replace("'", "''"); //$NON-NLS-1$ //$NON-NLS-2$
+			}
 			StringBuilder where = new StringBuilder(80);
 			where.
 				  append(IndexCityTable.CITY_TYPE.toString()).append(" not in ("). //$NON-NLS-1$

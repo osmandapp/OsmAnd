@@ -10,6 +10,7 @@ public class ToDoConstants {
 	// TODO max 100
 	// FOR 0.4 beta RELEASE
 	// Profile vector rendering
+	//  100. Show impoted gpx points (as favorites), sort the by distance
 
 
 	// 	Outside base 0.4 release
