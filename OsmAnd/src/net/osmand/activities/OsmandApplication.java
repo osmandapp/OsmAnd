@@ -8,6 +8,7 @@ import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.List;
 
+import net.osmand.FavouritesDbHelper;
 import net.osmand.LogUtil;
 import net.osmand.OsmandSettings;
 import net.osmand.PoiFiltersHelper;
@@ -30,6 +31,7 @@ public class OsmandApplication extends Application {
 	ResourceManager manager = null; 
 	PoiFiltersHelper poiFilters = null;
 	RoutingHelper routingHelper = null;
+	FavouritesDbHelper favorites = null;
 	CommandPlayer player;
 	
 	
@@ -55,6 +57,13 @@ public class OsmandApplication extends Application {
     		poiFilters = new PoiFiltersHelper(this);
     	}
 		return poiFilters;
+	}
+    
+    public FavouritesDbHelper getFavorites() {
+    	if(favorites == null) {
+    		favorites = new FavouritesDbHelper(this);
+    	}
+		return favorites;
 	}
     
     public ResourceManager getResourceManager() {
