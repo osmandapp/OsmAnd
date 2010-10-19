@@ -20,7 +20,9 @@ import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.OpeningHoursParser;
 import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -212,12 +214,39 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
-				Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(pos);
+				final Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(pos);
 				String format = amenity.getSimpleFormat(OsmandSettings.usingEnglishNames(settings));
 				if (amenity.getOpeningHours() != null) {
-					format += "\n"+getString(R.string.opening_hours) + " : " + amenity.getOpeningHours(); //$NON-NLS-1$ //$NON-NLS-2$
+					format += "  "+getString(R.string.opening_hours) + " : " + amenity.getOpeningHours(); //$NON-NLS-1$ //$NON-NLS-2$
 				}
-				Toast.makeText(v.getContext(), format, Toast.LENGTH_LONG).show();
+//				Toast.makeText(v.getContext(), format, Toast.LENGTH_LONG).show();
+				AlertDialog.Builder builder = new AlertDialog.Builder(SearchPOIActivity.this);
+				builder.setTitle(format);
+				builder.setItems(new String[]{getString(R.string.show_poi_on_map), getString(R.string.navigate_to)}, new DialogInterface.OnClickListener(){
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						if(which == 0){
+							int z = OsmandSettings.getLastKnownMapZoom(settings);
+							OsmandSettings.setMapLocationToShow(SearchPOIActivity.this, 
+									amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 
+									Math.max(16, z), getString(R.string.poi)+" : " + amenity.getSimpleFormat(OsmandSettings.usingEnglishNames(settings))); //$NON-NLS-1$
+						} else if(which == 1){
+							LatLon l = amenity.getLocation();
+							OsmandSettings.setPointToNavigate(SearchPOIActivity.this, l.getLatitude(), l.getLongitude());
+						}
+						if(filter != null){
+							OsmandSettings.setPoiFilterForMap(SearchPOIActivity.this, filter.getFilterId());
+							OsmandSettings.setShowPoiOverMap(SearchPOIActivity.this, true);
+						}
+						
+						Intent newIntent = new Intent(SearchPOIActivity.this, MapActivity.class);
+						startActivity(newIntent);
+						
+					}
+					
+				});
+				builder.show();
 				return true;
 			}
 		});

@@ -4,14 +4,18 @@ import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import net.osmand.Algoritms;
 import net.osmand.AmenityIndexRepository;
 import net.osmand.BusyIndicator;
+import net.osmand.FavouritePoint;
+import net.osmand.FavouritesDbHelper;
 import net.osmand.GPXUtilities;
 import net.osmand.LogUtil;
 import net.osmand.OsmandSettings;
@@ -24,8 +28,6 @@ import net.osmand.Version;
 import net.osmand.GPXUtilities.GPXFileResult;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.OsmandSettings.ApplicationMode;
-import net.osmand.activities.FavouritesActivity.FavouritePoint;
-import net.osmand.activities.FavouritesActivity.FavouritesDbHelper;
 import net.osmand.activities.search.SearchActivity;
 import net.osmand.activities.search.SearchPoiFilterActivity;
 import net.osmand.activities.search.SearchTransportActivity;
@@ -778,7 +780,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		updateApplicationModeSettings();
 		
 
-		favoritesLayer.reloadFavorites(this);
 		poiMapLayer.setFilter(OsmandSettings.getPoiFilterForMap(this, (OsmandApplication) getApplication()));
 		backToLocation.setVisibility(View.INVISIBLE);
 		
@@ -1295,7 +1296,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				} else if(item == 5){
 					if(gpxLayer.isVisible()){
 						gpxLayer.clearCurrentGPX();
-						favoritesLayer.setAdditionalPoints(null);
+						favoritesLayer.getFavorites().setFavoritePointsFromGPXFile(null);
 					} else {
 						dialog.dismiss();
 						useGPXFileLayer(false, null);
@@ -1377,7 +1378,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 								});
 							} else {
 								OsmandSettings.setShowingFavorites(MapActivity.this, true);
-								List<FavouritePoint> pts = new ArrayList<FavouritePoint>();
+								List<net.osmand.FavouritePoint> pts = new ArrayList<FavouritePoint>();
 								for(WptPt p : res.wayPoints){
 									FavouritePoint pt = new FavouritePoint();
 									pt.setLatitude(p.lat);
@@ -1385,7 +1386,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 									pt.setName(p.name);
 									pts.add(pt);
 								}
-								favoritesLayer.setAdditionalPoints(pts);
+								favoritesLayer.getFavorites().setFavoritePointsFromGPXFile(pts);
 								gpxLayer.setTracks(res.locations);
 							}
 							mapView.refreshMap();
@@ -1582,10 +1583,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     
     protected void addFavouritePoint(final double latitude, final double longitude){
     	final Resources resources = this.getResources();
-    	final FavouritePoint p = new FavouritesActivity.FavouritePoint();
-    	p.setLatitude(latitude);
-    	p.setLongitude(longitude);
-    	p.setName(resources.getString(R.string.add_favorite_dialog_default_favourite_name));
+    	final FavouritePoint p = new FavouritePoint(latitude, longitude, resources.getString(R.string.add_favorite_dialog_default_favourite_name));
     	
     	Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.add_favorite_dialog_top_text);
@@ -1597,20 +1595,21 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				Builder b = new AlertDialog.Builder(MapActivity.this);
-				final FavouritesDbHelper helper = new FavouritesActivity.FavouritesDbHelper(MapActivity.this);
-				final List<FavouritePoint> points = helper.getFavouritePoints();
+				final FavouritesDbHelper helper = ((OsmandApplication)getApplication()).getFavorites();
+				final Collection<FavouritePoint> points = helper.getFavouritePoints();
 				final String[] ar = new String[points.size()];
-				for (int i = 0; i < ar.length; i++) {
-					ar[i] = points.get(i).getName();
+				Iterator<FavouritePoint> it = points.iterator();
+				int i=0;
+				while(it.hasNext()){
+					ar[i++] = it.next().getName();
 				}
 				b.setItems(ar, new DialogInterface.OnClickListener(){
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						if(helper.editFavourite(points.get(which), latitude, longitude)){
+						FavouritePoint fv = helper.getFavoritePointByName(ar[which]);
+						if(helper.editFavourite(fv, latitude, longitude)){
 							Toast.makeText(MapActivity.this, getString(R.string.fav_points_edited), Toast.LENGTH_SHORT).show();
 						}
-						helper.close();
-						favoritesLayer.reloadFavorites(MapActivity.this);
 						mapView.refreshMap();
 					}
 				});
@@ -1626,15 +1625,13 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				FavouritesDbHelper helper = new FavouritesActivity.FavouritesDbHelper(MapActivity.this);
+				final FavouritesDbHelper helper = ((OsmandApplication)getApplication()).getFavorites();
 				p.setName(editText.getText().toString());
 				boolean added = helper.addFavourite(p);
 				if (added) {
 					Toast.makeText(MapActivity.this, MessageFormat.format(getString(R.string.add_favorite_dialog_favourite_added_template), p.getName()), Toast.LENGTH_SHORT)
 							.show();
 				}
-				helper.close();
-				favoritesLayer.reloadFavorites(MapActivity.this);
 				mapView.refreshMap();
 			}
 		});

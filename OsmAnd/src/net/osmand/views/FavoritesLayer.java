@@ -2,10 +2,9 @@ package net.osmand.views;
 
 import java.util.List;
 
+import net.osmand.FavouritePoint;
+import net.osmand.FavouritesDbHelper;
 import net.osmand.R;
-import net.osmand.activities.FavouritesActivity;
-import net.osmand.activities.FavouritesActivity.FavouritePoint;
-import net.osmand.activities.FavouritesActivity.FavouritesDbHelper;
 import net.osmand.osm.LatLon;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
@@ -27,14 +26,13 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 	private static final int radius = 15;
 	
 	private OsmandMapTileView view;
-	private List<FavouritePoint> favouritePoints;
-	private List<FavouritePoint> additionalPoints;
 	private Path path;
 	private Path pathDst;
 	private Paint paint;
 	private Matrix matrix;
 	private Paint paintBlack;
 	private DisplayMetrics dm;
+	private FavouritesDbHelper favorites;
 	
 	
 	public FavoritesLayer(){
@@ -72,7 +70,8 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 		paintBlack.setAntiAlias(true);
 		paintBlack.setStrokeWidth(2);
 		
-		reloadFavorites(view.getContext());
+		favorites = view.getApplication().getFavorites();
+		
 	}
 
 	@Override
@@ -80,19 +79,6 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 		
 	}
 	
-	public void setAdditionalPoints(List<FavouritePoint> additionalPoints) {
-		this.additionalPoints = additionalPoints;
-	}
-	
-	public List<FavouritePoint> getAdditionalPoints() {
-		return additionalPoints;
-	}
-	
-	public void reloadFavorites(Context ctx){
-		FavouritesDbHelper helper = new FavouritesActivity.FavouritesDbHelper(ctx);
-		favouritePoints = helper.getFavouritePoints();
-		helper.close();
-	}
 
 	@Override
 	public boolean drawInScreenPixels() {
@@ -106,7 +92,7 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 			
 
 			// request to load
-			for (FavouritePoint o : favouritePoints) {
+			for (FavouritePoint o : favorites.getFavouritePoints()) {
 				if (o.getLatitude() >= latLonBounds.bottom && o.getLatitude() <= latLonBounds.top  && o.getLongitude() >= latLonBounds.left 
 						&& o.getLongitude() <= latLonBounds.right ) {
 					int x = view.getMapXForPoint(o.getLongitude());
@@ -117,8 +103,8 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 					canvas.drawPath(pathDst, paintBlack);
 				}
 			}
-			if(additionalPoints != null){
-				for (FavouritePoint o : additionalPoints) {
+			if(favorites.getFavoritePointsFromGPXFile() != null){
+				for (FavouritePoint o : favorites.getFavoritePointsFromGPXFile()) {
 					if (o.getLatitude() >= latLonBounds.bottom && o.getLatitude() <= latLonBounds.top  && o.getLongitude() >= latLonBounds.left 
 							&& o.getLongitude() <= latLonBounds.right ) {
 						int x = view.getMapXForPoint(o.getLongitude());
@@ -139,27 +125,22 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 		return false;
 	}
 	
-	public FavouritePoint getFavoriteFromPoint(PointF point){
+	public FavouritePoint getFavoriteFromPoint(PointF point) {
 		FavouritePoint result = null;
 		float r = radius * dm.density;
-		if (favouritePoints != null) {
-			int ex = (int) point.x;
-			int ey = (int) point.y;
-			for (int i = 0; i < favouritePoints.size(); i++) {
-				FavouritePoint n = favouritePoints.get(i);
-				int x = view.getRotatedMapXForPoint(n.getLatitude(), n.getLongitude());
-				int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
-				if (Math.abs(x - ex) <= r && Math.abs(y - ey) <= r) {
-					r = Math.max(Math.abs(x - ex), Math.abs(y - ey));
-					result = n;
-				}
+		int ex = (int) point.x;
+		int ey = (int) point.y;
+		for (FavouritePoint n : favorites.getFavouritePoints()) {
+			int x = view.getRotatedMapXForPoint(n.getLatitude(), n.getLongitude());
+			int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
+			if (Math.abs(x - ex) <= r && Math.abs(y - ey) <= r) {
+				r = Math.max(Math.abs(x - ex), Math.abs(y - ey));
+				result = n;
 			}
 		}
-		if (additionalPoints != null) {
-			int ex = (int) point.x;
-			int ey = (int) point.y;
-			for (int i = 0; i < additionalPoints.size(); i++) {
-				FavouritePoint n = additionalPoints.get(i);
+		if (favorites.getFavoritePointsFromGPXFile() != null) {
+			for (int i = 0; i < favorites.getFavoritePointsFromGPXFile().size(); i++) {
+				FavouritePoint n = favorites.getFavoritePointsFromGPXFile().get(i);
 				int x = view.getRotatedMapXForPoint(n.getLatitude(), n.getLongitude());
 				int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
 				if (Math.abs(x - ex) <= r && Math.abs(y - ey) <= r) {
@@ -186,6 +167,10 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 	@Override
 	public OnClickListener getActionListener(List<String> actionsList, Object o) {
 		return null;
+	}
+	
+	public FavouritesDbHelper getFavorites() {
+		return favorites;
 	}
 
 

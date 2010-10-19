@@ -548,7 +548,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		} else if(preset == ApplicationMode.BICYCLE){
 //			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
 //			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_CALCULATE_ROUTE, _);
-			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
+//			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
 			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_BEARING);
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, true);
 			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
@@ -561,7 +561,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			
 		} else if(preset == ApplicationMode.PEDESTRIAN){
 //			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
-			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
+//			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
 			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_COMPASS);
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, true);
 			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
@@ -576,13 +576,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			
 		} else if(preset == ApplicationMode.DEFAULT){
 //			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
-			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
+//			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
 			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_NONE);
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, false);
 			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
 //			edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, _);
 //			edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
-//			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, _);
+			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, false);
 //			edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, _);
 			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.CENTER_CONSTANT);
 //			edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);

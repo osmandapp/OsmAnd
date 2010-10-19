@@ -10,8 +10,7 @@ public class ToDoConstants {
 	// TODO max 100
 	// FOR 0.4 beta RELEASE
 	// Profile vector rendering
-	//  100. Show impoted gpx points (as favorites), sort the by distance
-
+	
 
 	// 	Outside base 0.4 release
 	//   69. Add phone and site information to POI (enable call to POI and open site)
@@ -42,6 +41,7 @@ public class ToDoConstants {
 	///////////////////////////   DONE //////////////////////////////
 	// DONE ANDROID :
 	//   99. Implement better file downloader for big files
+	//  100. Show impoted gpx points (as favorites), sort the by distance
 	
 	// DONE SWING
 

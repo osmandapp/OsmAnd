@@ -6,10 +6,13 @@ package net.osmand.activities;
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import net.osmand.FavouritePoint;
+import net.osmand.FavouritesDbHelper;
 import net.osmand.GPXUtilities;
 import net.osmand.OsmandSettings;
 import net.osmand.R;
@@ -21,13 +24,9 @@ import net.osmand.osm.MapUtils;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.AlertDialog.Builder;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.ContextMenu;
@@ -60,9 +59,8 @@ public class FavouritesActivity extends ListActivity {
 	public static final String FILE_TO_SAVE = "favourites.gpx"; //$NON-NLS-1$
 	
 
-	private List<FavouritePoint> favouritesList;
-	private FavouritesDbHelper helper;
 	private FavouritesAdapter favouritesAdapter;
+	private FavouritesDbHelper helper;
 	
 
 	@Override
@@ -72,11 +70,8 @@ public class FavouritesActivity extends ListActivity {
 		lv.setId(android.R.id.list);
 		setContentView(lv);
 
-		helper = new FavouritesDbHelper(this);
-		favouritesList = helper.getFavouritePoints();
 		
-		favouritesAdapter = new FavouritesAdapter(favouritesList);
-		lv.setAdapter(favouritesAdapter);
+		
 		/* Add Context-Menu listener to the ListView. */
         lv.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener(){
 
@@ -84,15 +79,48 @@ public class FavouritesActivity extends ListActivity {
 			public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 				menu.setHeaderTitle(R.string.favourites_context_menu_title);
 				menu.add(0, NAVIGATE_TO, 0, R.string.favourites_context_menu_navigate);
-				menu.add(0, EDIT_ITEM, 1, R.string.favourites_context_menu_edit);
-				menu.add(0, DELETE_ITEM, 2, R.string.favourites_context_menu_delete);
+				final FavouritePoint point = (FavouritePoint) favouritesAdapter.getItem(((AdapterContextMenuInfo)menuInfo).position);
+				if(point.isStored()){
+					menu.add(0, EDIT_ITEM, 1, R.string.favourites_context_menu_edit);
+					menu.add(0, DELETE_ITEM, 2, R.string.favourites_context_menu_delete);
+				}
 			}
         	
         });
 	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		helper = ((OsmandApplication)getApplication()).getFavorites();
+		ArrayList<FavouritePoint> list = new ArrayList<FavouritePoint>(helper.getFavouritePoints());
+		if(helper.getFavoritePointsFromGPXFile() != null){
+			list.addAll(helper.getFavoritePointsFromGPXFile());
+		}
+		favouritesAdapter = new FavouritesAdapter(list);
+		final LatLon mapLocation = OsmandSettings.getLastKnownMapLocation(OsmandSettings.getPrefs(this));
+		if(mapLocation != null){
+			favouritesAdapter.sort(new Comparator<FavouritePoint>(){
+
+				@Override
+				public int compare(FavouritePoint object1, FavouritePoint object2) {
+					double d1 = MapUtils.getDistance(mapLocation, object1.getLatitude(), object1.getLongitude());
+					double d2 = MapUtils.getDistance(mapLocation, object2.getLatitude(), object2.getLongitude());
+					if(d1 == d2){
+						return 0;
+					} else if(d1 > d2){
+						return 1;
+					}
+					return -1;
+				}
+				
+			});
+		}
+		getListView().setAdapter(favouritesAdapter);
+	}
 
 	public void onListItemClick(ListView parent, View v, int position, long id) {
-		FavouritePoint point = favouritesList.get(position);
+		FavouritePoint point = favouritesAdapter.getItem(position);
 		OsmandSettings.setShowingFavorites(this, true);
 		OsmandSettings.setMapLocationToShow(this, point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName()); //$NON-NLS-1$
 		Intent newIntent = new Intent(FavouritesActivity.this, MapActivity.class);
@@ -102,7 +130,7 @@ public class FavouritesActivity extends ListActivity {
 	@Override
 	public boolean onContextItemSelected(MenuItem aItem) {
 		AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) aItem.getMenuInfo();
-		final FavouritePoint point = (FavouritePoint) favouritesList.get(menuInfo.position);
+		final FavouritePoint point = (FavouritePoint) favouritesAdapter.getItem(menuInfo.position);
 		if (aItem.getItemId() == NAVIGATE_TO) {
 			//OsmandSettings.setMapLocationToShow(this, point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName()); //$NON-NLS-1$
 			OsmandSettings.setPointToNavigate(this, point.getLatitude(), point.getLongitude());
@@ -141,8 +169,7 @@ public class FavouritesActivity extends ListActivity {
 						Toast.makeText(FavouritesActivity.this,
 								MessageFormat.format(resources.getString(R.string.favourites_remove_dialog_success), point.getName()),
 								Toast.LENGTH_SHORT).show();
-						favouritesList.remove(point);
-						favouritesAdapter.notifyDataSetChanged();
+						favouritesAdapter.remove(point);
 					}
 
 				}
@@ -167,18 +194,19 @@ public class FavouritesActivity extends ListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if(item.getItemId() == EXPORT_ID){
 			File appDir = new File(Environment.getExternalStorageDirectory(), ResourceManager.APP_DIR);
-			if(favouritesList == null || favouritesList.isEmpty()){
+			if(favouritesAdapter.isEmpty()){
 				Toast.makeText(this, R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
 			} else if(!appDir.exists()){
 				Toast.makeText(this, R.string.sd_dir_not_accessible, Toast.LENGTH_LONG).show();
 			} else {
 				File f = new File(appDir, FILE_TO_SAVE);
 				List<WptPt> wpt = new ArrayList<WptPt>();
-				for(FavouritePoint p : favouritesList){
+				for (int i = 0; i < favouritesAdapter.getCount(); i++) {
+					FavouritePoint p = favouritesAdapter.getItem(i);
 					WptPt pt = new WptPt();
-					pt.lat = p.latitude;
-					pt.lon = p.longitude;
-					pt.name = p.name;
+					pt.lat = p.getLatitude();
+					pt.lon = p.getLongitude();
+					pt.name = p.getName();
 					wpt.add(pt);
 				}
 				if(GPXUtilities.saveToXMLFiles(f, wpt, this)){
@@ -193,25 +221,23 @@ public class FavouritesActivity extends ListActivity {
 				Toast.makeText(this, MessageFormat.format(getString(R.string.fav_file_to_load_not_found), f.getAbsolutePath()), Toast.LENGTH_LONG).show();
 			} else {
 				Set<String> existedPoints = new LinkedHashSet<String>();
-				if(favouritesList != null){
-					for(FavouritePoint fp : favouritesList){
-						existedPoints.add(fp.name);
+				if(!favouritesAdapter.isEmpty()){
+					for (int i = 0; i < favouritesAdapter.getCount(); i++) {
+						FavouritePoint fp = favouritesAdapter.getItem(i);
+						existedPoints.add(fp.getName());
 					}
 				}
 				GPXFileResult res = GPXUtilities.loadGPXFile(this, f);
 				if (res.error == null) {
 					for(WptPt p : res.wayPoints){
 						if(!existedPoints.contains(p.name)){
-							FavouritePoint fp = new FavouritePoint();
-							fp.name = p.name;
-							fp.latitude = p.lat;
-							fp.longitude = p.lon;
-							helper.addFavourite(fp);
-							favouritesList.add(fp);
+							FavouritePoint fp = new FavouritePoint(p.lat, p.lon, p.name);
+							if(helper.addFavourite(fp)){
+								favouritesAdapter.add(fp);
+							}
 						}
 					}
 					Toast.makeText(this, R.string.fav_imported_sucessfully, Toast.LENGTH_SHORT).show();
-					favouritesAdapter.notifyDataSetChanged();
 				} else {
 					Toast.makeText(this, res.error, Toast.LENGTH_LONG).show();
 				}
@@ -222,140 +248,13 @@ public class FavouritesActivity extends ListActivity {
 		return true;
 	}
 	
-	public static class FavouritesDbHelper extends SQLiteOpenHelper {
-
-	    private static final int DATABASE_VERSION = 1;
-	    private static final String FAVOURITE_TABLE_NAME = "favourite"; //$NON-NLS-1$
-	    private static final String FAVOURITE_COL_NAME = "name"; //$NON-NLS-1$
-	    private static final String FAVOURITE_COL_LAT = "latitude"; //$NON-NLS-1$
-	    private static final String FAVOURITE_COL_LON = "longitude"; //$NON-NLS-1$
-	    private static final String FAVOURITE_TABLE_CREATE =   "CREATE TABLE " + FAVOURITE_TABLE_NAME + " (" + //$NON-NLS-1$ //$NON-NLS-2$
-	                FAVOURITE_COL_NAME + " TEXT, " + FAVOURITE_COL_LAT + " double, " + //$NON-NLS-1$ //$NON-NLS-2$
-	                FAVOURITE_COL_LON + " double);"; //$NON-NLS-1$
-
-	    public FavouritesDbHelper(Context context) {
-	        super(context, FAVOURITE_TABLE_NAME, null, DATABASE_VERSION);
-	    }
-	    
-	    public boolean addFavourite(FavouritePoint p){
-	    	SQLiteDatabase db = getWritableDatabase();
-	    	if(db != null){
-	    		// delete with same name before
-	    		deleteFavourite(p);
-	    		db.execSQL("INSERT INTO " + FAVOURITE_TABLE_NAME + " VALUES (?, ?, ?)",new Object[]{p.getName(), p.getLatitude(), p.getLongitude()}); //$NON-NLS-1$ //$NON-NLS-2$
-	    		return true;
-	    	}
-	    	return false;
-	    }
-	    
-	    public List<FavouritePoint> getFavouritePoints(){
-	    	SQLiteDatabase db = getReadableDatabase();
-	    	ArrayList<FavouritePoint> list = new ArrayList<FavouritePoint>();
-	    	if(db != null){
-	    		Cursor query = db.rawQuery("SELECT " + FAVOURITE_COL_NAME +", " + FAVOURITE_COL_LAT +"," + FAVOURITE_COL_LON +" FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ 
-	    				FAVOURITE_TABLE_NAME, null);
-	    		if(query.moveToFirst()){
-	    			do {
-	    				FavouritePoint p = new FavouritePoint();
-	    				p.setName(query.getString(0));
-	    				p.setLatitude(query.getDouble(1));
-	    				p.setLongitude(query.getDouble(2));
-	    				list.add(p);
-	    			} while(query.moveToNext());
-	    		}
-	    		query.close();
-	    	}
-	    	return list;
-	    }
-	    
-	    public boolean editFavouriteName(FavouritePoint p, String newName){
-	    	SQLiteDatabase db = getWritableDatabase();
-	    	if(db != null){
-	    		db.execSQL("UPDATE " + FAVOURITE_TABLE_NAME + " SET name = ? WHERE name = ?",new Object[]{newName, p.getName()}); //$NON-NLS-1$ //$NON-NLS-2$
-	    		p.setName(newName);
-	    		return true;
-	    	}
-	    	return false;
-	    }
-	    
-	    public boolean editFavourite(FavouritePoint p, double lat, double lon){
-	    	SQLiteDatabase db = getWritableDatabase();
-	    	if(db != null){
-	    		db.execSQL("UPDATE " + FAVOURITE_TABLE_NAME + " SET latitude = ?, longitude = ? WHERE name = ?",new Object[]{lat, lon, p.getName()}); //$NON-NLS-1$ //$NON-NLS-2$ 
-	    		p.setLatitude(lat);
-	    		p.setLongitude(lon);
-	    		return true;
-	    	}
-	    	return false;
-	    }
-	    
-	    public boolean deleteFavourite(FavouritePoint p){
-	    	SQLiteDatabase db = getWritableDatabase();
-	    	if(db != null){
-	    		db.execSQL("DELETE FROM " + FAVOURITE_TABLE_NAME + " WHERE name = ?",new Object[]{p.getName()}); //$NON-NLS-1$ //$NON-NLS-2$
-	    		return true;
-	    	}
-	    	return false;
-	    }
-	    
-
-	    @Override
-	    public void onCreate(SQLiteDatabase db) {
-	        db.execSQL(FAVOURITE_TABLE_CREATE);
-	    }
-
-		@Override
-		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		}
-	}
+	
 
 	
-	public static class FavouritePoint {
-		private String name;
-		private double latitude;
-		private double longitude;
-
-		public double getLatitude() {
-			return latitude;
-		}
-
-		public void setLatitude(double latitude) {
-			this.latitude = latitude;
-		}
-
-		public double getLongitude() {
-			return longitude;
-		}
-
-		public void setLongitude(double longitude) {
-			this.longitude = longitude;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-		
-		@Override
-		public String toString() {
-			return "Favourite " + getName(); //$NON-NLS-1$
-		}
-	}
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		if(helper != null){
-			helper.close();
-		}
-	}
 
 	class FavouritesAdapter extends ArrayAdapter<FavouritePoint> {
 		FavouritesAdapter(List<FavouritePoint> list) {
 			super(FavouritesActivity.this, R.layout.favourites_list_item, list);
-			this.setNotifyOnChange(false);
 		}
 
 
@@ -365,11 +264,17 @@ public class FavouritesActivity extends ListActivity {
 				LayoutInflater inflater = getLayoutInflater();
 				row = inflater.inflate(R.layout.favourites_list_item, parent, false);
 			}
+			
 			TextView label = (TextView) row.findViewById(R.id.favourite_label);
 			TextView distanceLabel = (TextView) row.findViewById(R.id.favouritedistance_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 			FavouritePoint model = (FavouritePoint) getItem(position);
-			icon.setImageResource(R.drawable.opened_poi);
+			row.setTag(model);
+			if(model.isStored()){
+				icon.setImageResource(R.drawable.favorites);
+			} else {
+				icon.setImageResource(R.drawable.opened_poi);
+			}
 			LatLon lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(OsmandSettings.getPrefs(FavouritesActivity.this));
 			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(), 
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
