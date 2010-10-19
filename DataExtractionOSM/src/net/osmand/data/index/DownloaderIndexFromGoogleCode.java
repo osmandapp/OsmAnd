@@ -11,8 +11,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 import net.osmand.LogUtil;
 
@@ -35,35 +35,24 @@ public class DownloaderIndexFromGoogleCode {
 //								IndexConstants.TRANSPORT_TABLE_VERSION + "" , //$NON-NLS-1$
 //								IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "",  //$NON-NLS-1$//$NON-NLS-2$
 //								IndexConstants.TRANSPORT_TABLE_VERSION + "" }); //$NON-NLS-1$
-		Map<String, String> indexFiles = DownloaderIndexFromGoogleCode.getIndexFiles(
-				new String[] { IndexConstants.VOICE_INDEX_EXT_ZIP}, 
-				new String[] {	IndexConstants.VOICE_VERSION + "", }, //$NON-NLS-1$
-				new TreeMap<String, String>());   
-		System.out.println(indexFiles);
+//		Map<String, String> indexFiles = DownloaderIndexFromGoogleCode.getIndexFiles(
+//				new String[] { IndexConstants.VOICE_INDEX_EXT_ZIP}, 
+//				new String[] {	IndexConstants.VOICE_VERSION + "", }, //$NON-NLS-1$
+//				new TreeMap<String, String>());   
+//		System.out.println(indexFiles);
 		
+		String odb = ""; //$NON-NLS-1$
 		// put your cookies and personal information for delete
-//		Map<String, String> cookies = new HashMap<String, String>();
-//		cookies.put("__utmz", ""); //$NON-NLS-1$ //$NON-NLS-2$ // ?
-//		cookies.put("__utma", ""); //$NON-NLS-1$ //$NON-NLS-2$ // ?
-//		cookies.put("HSID", "");  //$NON-NLS-1$//$NON-NLS-2$
-//		cookies.put("SID", ""); //$NON-NLS-1$ //$NON-NLS-2$
-//		cookies.put("NID", ""); //$NON-NLS-1$ //$NON-NLS-2$
-//		String pagegen = ""; //$NON-NLS-1$
-//		String token = ""; //$NON-NLS-1$
-//		
-//		StringBuilder cookieString = new StringBuilder();
-//		int size = cookies.size();
-//		for (String c : cookies.keySet()) {
-//			size--;
-//			cookieString.append(c).append("=").append(cookies.get(c)); //$NON-NLS-1$
-//			if (size > 0) {
-//				cookieString.append("; "); //$NON-NLS-1$
-//			}
-//		}
-//		deleteFileFromGoogleDownloads(odb, token, pagegen, 
-//				cookieString.toString());
 		
+		String cookieHSID = ""; //$NON-NLS-1$
+		String cookieSID = ""; //$NON-NLS-1$
+		String pagegen = ""; //$NON-NLS-1$
+		String token = ""; //$NON-NLS-1$
+		
+		
+		deleteFileFromGoogleDownloads(odb, token, pagegen, cookieHSID,cookieSID);
 	}
+	
 	
 	private static Map<String, String> getContent(String[] ext, String[] version, Map<String, String> files) {
 		try {
@@ -128,8 +117,21 @@ public class DownloaderIndexFromGoogleCode {
 	}
 	
 	
-	public static String deleteFileFromGoogleDownloads(String fileName, String token, String pagegen, String cookies) throws IOException {
+	public static String deleteFileFromGoogleDownloads(String fileName, String token, String pagegen, String cookieHSID, String cookieSID) throws IOException {
 		// prepare data
+		Map<String, String> cookies = new HashMap<String, String>();
+		cookies.put("HSID", cookieHSID);  //$NON-NLS-1$//$NON-NLS-2$
+		cookies.put("SID", cookieSID); //$NON-NLS-1$ //$NON-NLS-2$
+		StringBuilder cookieString = new StringBuilder();
+		int size = cookies.size();
+		for (String c : cookies.keySet()) {
+			size--;
+			cookieString.append(c).append("=").append(cookies.get(c)); //$NON-NLS-1$
+			if (size > 0) {
+				cookieString.append("; "); //$NON-NLS-1$
+			}
+		}
+		
 		String urlText = "http://code.google.com/p/osmand/downloads/delete.do?name="+fileName; //$NON-NLS-1$
 		System.out.println(urlText);
 		StringBuilder requestBody = new StringBuilder();
@@ -144,11 +146,9 @@ public class DownloaderIndexFromGoogleCode {
 		URL url = new URL(urlText);
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		
-		connection.setRequestProperty("Cookie", cookies); //$NON-NLS-1$
+		connection.setRequestProperty("Cookie", cookieString.toString()); //$NON-NLS-1$
 		connection.setConnectTimeout(15000);
 		connection.setRequestMethod("POST"); //$NON-NLS-1$
-//		String token = userName + ":" + password; //$NON-NLS-1$
-//		connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes("UTF-8"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");  //$NON-NLS-1$//$NON-NLS-2$
 		connection.setRequestProperty("Content-Length", requestBody.length()+""); //$NON-NLS-1$ //$NON-NLS-2$
 		
