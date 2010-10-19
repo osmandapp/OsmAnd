@@ -18,7 +18,7 @@
 	<string name="gpx_direct_route">Direct route</string>
 	<string name="map_route_by_gpx">Route using GPX</string>
 	<string name="gpx_files_not_found">GPX files were not found in /osmand/tracks directory</string>
-	<string name="layer_gpx_layer">GPX tracks</string>
+	<string name="layer_gpx_layer">GPX tracks...</string>
 	<string name="error_reading_gpx">Error reading GPX data</string>
 
 	<string name="vector_data">Vector OSM maps</string>
@@ -52,8 +52,8 @@
 	<string name="layer_favorites">Favorites</string>
 	<string name="layer_osm_bugs">OSM bugs</string>
 	<string name="layer_transport">Transport stops</string>
-	<string name="layer_poi">POI</string>
-	<string name="layer_map">Map source</string>
+	<string name="layer_poi">POI...</string>
+	<string name="layer_map">Map source...</string>
 	<string name="menu_layers">Layers</string>
 	<string name="continue_follow_previous_route">Previous route was unfinished. Continue following it?</string>
 	<string name="context_menu_item_search_poi">Search POI</string>

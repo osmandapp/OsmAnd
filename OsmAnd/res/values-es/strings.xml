@@ -22,8 +22,8 @@
 	<string name="layer_favorites">Favoritos</string>
 	<string name="layer_osm_bugs">Fallos en Osm</string>
 	<string name="layer_transport">Paradas de transporte</string>
-	<string name="layer_poi">POI</string>
-	<string name="layer_map">Fuente de mapas</string>
+	<string name="layer_poi">POI...</string>
+	<string name="layer_map">Fuente de mapas...</string>
 	<string name="menu_layers">Capas</string>
 	<string name="continue_follow_previous_route">La ruta anterior no terminó.  ¿Desea continuar siguiéndola? </string>
 	<string name="context_menu_item_search_poi">Buscar POI</string>

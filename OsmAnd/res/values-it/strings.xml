@@ -29,8 +29,8 @@
 	<string name="layer_favorites">Favoriti</string>
 	<string name="layer_osm_bugs">Bug Osm</string>
 	<string name="layer_transport">Fermata trasporto pubblico</string>
-	<string name="layer_poi">POI</string>
-	<string name="layer_map">Tipo Mappa</string>
+	<string name="layer_poi">POI...</string>
+	<string name="layer_map">Tipo Mappa...</string>
 	<string name="menu_layers">Strati</string>
 	<string name="continue_follow_previous_route">Percorso incompleto. Continuare a seguirlo? </string>
 	<string name="context_menu_item_search_poi">Cercare POI</string>

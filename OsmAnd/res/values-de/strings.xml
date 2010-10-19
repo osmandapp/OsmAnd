@@ -12,8 +12,8 @@
 	<string name="layer_favorites">Favoriten</string>
 	<string name="layer_osm_bugs">OSM-Fehlerbericht</string>
 	<string name="layer_transport">ÖPNV Haltestellen</string>
-	<string name="layer_poi">POI</string>
-	<string name="layer_map">Ebene</string>
+	<string name="layer_poi">POI...</string>
+	<string name="layer_map">Ebene...</string>
 	<string name="menu_layers">Ansicht</string>
 	<string name="continue_follow_previous_route">Die vorherige Navigation wurde nicht beendet. Wollen Sie mit ihr fortfahren?</string>
 	<string name="context_menu_item_search_poi">Suche POI</string>
