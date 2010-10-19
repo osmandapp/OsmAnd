@@ -18,7 +18,7 @@
 	<string name="gpx_direct_route">Прямой путь</string>
 	<string name="map_route_by_gpx">Навигация по GPX</string>
 	<string name="gpx_files_not_found">GPX файлы были не найдены в /osmand/tracks директории</string>
-	<string name="layer_gpx_layer">GPX треки</string>
+	<string name="layer_gpx_layer">GPX треки...</string>
 	<string name="error_reading_gpx">Ошибка при чтении gpx файла</string>
 	<string name="vector_data">Векторные osm карты</string>
 	
@@ -50,8 +50,8 @@
 	<string name="layer_favorites">Избранные</string>
 	<string name="layer_osm_bugs">Osm bugs</string>
 	<string name="layer_transport">Остановки транспорта</string>
-	<string name="layer_poi">POI</string>
-	<string name="layer_map">Карта источник</string>
+	<string name="layer_poi">POI...</string>
+	<string name="layer_map">Карта источник...</string>
 	<string name="menu_layers">Слои</string>
 	<string name="continue_follow_previous_route">Предыдущий маршрут был не закончен. Продолжить следовать по нему?</string>
 	<string name="context_menu_item_search_poi">Искать POI</string>

@@ -29,8 +29,8 @@
   <string name="layer_favorites">Favoris</string> 
   <string name="layer_osm_bugs">Bogues Osm</string> 
   <string name="layer_transport">Arrêts Transport</string> 
-  <string name="layer_poi">PI</string> 
-  <string name="layer_map">Source Carte</string> 
+  <string name="layer_poi">PI...</string> 
+  <string name="layer_map">Source Carte...</string> 
   <string name="menu_layers">Couches</string> 
   <string name="continue_follow_previous_route">Trajet précédent incomplèt. Voulez-vous continer à le suivre?</string> 
   <string name="context_menu_item_search_poi">Cherche PI</string> 

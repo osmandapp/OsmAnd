@@ -52,8 +52,8 @@
 <string name="layer_favorites">Obľúbené</string>
 <string name="layer_osm_bugs">Chyby OSM</string>
 <string name="layer_transport">Dopravné zastávky</string>
-<string name="layer_poi">POI</string>
-<string name="layer_map">Zdroj mapy</string>
+<string name="layer_poi">POI...</string>
+<string name="layer_map">Zdroj mapy...</string>
 <string name="menu_layers">Vrstvy</string>
 <string name="continue_follow_previous_route">Predošlá cesta nebolo ukončená. Pokračovať v jej nasledovaní?</string>
 <string name="context_menu_item_search_poi">Hľadať POI</string>
