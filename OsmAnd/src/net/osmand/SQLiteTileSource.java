@@ -14,6 +14,7 @@ import org.apache.commons.logging.Log;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDiskIOException;
 import android.database.sqlite.SQLiteStatement;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -139,12 +140,16 @@ public class SQLiteTileSource implements ITileSource {
 		}
 		long time = System.currentTimeMillis();
 		Cursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-		boolean e =  cursor.moveToFirst();
-		cursor.close();
-		if (log.isDebugEnabled()) {
-			log.debug("Checking tile existance x = " + x + " y = " + y + " z = " + zoom + " for " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		try {
+			boolean e = cursor.moveToFirst();
+			cursor.close();
+			if (log.isDebugEnabled()) {
+				log.debug("Checking tile existance x = " + x + " y = " + y + " z = " + zoom + " for " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			}
+			return e;
+		} catch (SQLiteDiskIOException e) {
+			return false;
 		}
-		return e;
 	}
 
 	public Bitmap getImage(int x, int y, int zoom) {
