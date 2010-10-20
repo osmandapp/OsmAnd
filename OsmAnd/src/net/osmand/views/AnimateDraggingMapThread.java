@@ -52,6 +52,9 @@ public class AnimateDraggingMapThread implements Runnable {
 	private AnimateDraggingCallback callback = null;
 	private boolean notifyListener;
 
+	private double targetLatitude = 0;
+	private double targetLongitude = 0;
+	private int targetZoom = 0;
 	
 	@Override
 	public void run() {
@@ -174,6 +177,7 @@ public class AnimateDraggingMapThread implements Runnable {
 	
 	public void startZooming(int zoomStart, int zoomEnd){
 		stopAnimatingSync();
+		targetZoom = 0;
 		this.notifyListener = false;
 		if(zoomStart < zoomEnd){
 			dirZ = 1;
@@ -193,6 +197,9 @@ public class AnimateDraggingMapThread implements Runnable {
 	
 	public void startMoving(double curLat, double curLon, double finalLat, double finalLon, int curZoom, int endZoom, int tileSize, float rotate, boolean notifyListener){
 		stopAnimatingSync();
+		targetLatitude = finalLat;
+		targetLongitude = finalLon;
+		targetZoom = endZoom;
 		
 		this.notifyListener = notifyListener;
 		curZ = curZoom;
@@ -247,6 +254,7 @@ public class AnimateDraggingMapThread implements Runnable {
 	
 	public void startDragging(float velocityX, float velocityY, float  startX, float  startY, float  endX, float  endY){
 		stopAnimatingSync();
+		targetZoom = 0;
 		this.notifyListener = true;
 		vx = velocityX;
 		vy = velocityY;
@@ -259,6 +267,18 @@ public class AnimateDraggingMapThread implements Runnable {
 		stopped = false;
 		Thread thread = new Thread(this,"Animatable dragging"); //$NON-NLS-1$
 		thread.start();
+	}
+	
+	public int getTargetZoom() {
+		return targetZoom;
+	}
+	
+	public double getTargetLatitude() {
+		return targetLatitude;
+	}
+	
+	public double getTargetLongitude() {
+		return targetLongitude;
 	}
 	
 	public AnimateDraggingCallback getCallback() {

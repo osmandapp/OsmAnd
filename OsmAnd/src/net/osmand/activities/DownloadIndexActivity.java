@@ -292,47 +292,48 @@ public class DownloadIndexActivity extends ListActivity {
 		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				progressFileDlg = ProgressDialog.show(DownloadIndexActivity.this, getString(R.string.downloading), getString(R.string.downloading_file), true, true);
+				progressFileDlg = ProgressDialog.show(DownloadIndexActivity.this, getString(R.string.downloading),
+						getString(R.string.downloading_file), true, true);
 				interruptDownloading = false;
 				progressFileDlg.show();
 				final ProgressDialogImplementation impl = new ProgressDialogImplementation(progressFileDlg, true);
-				progressFileDlg.setOnCancelListener(new DialogInterface.OnCancelListener(){
+				progressFileDlg.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
 					@Override
 					public void onCancel(DialogInterface dialog) {
 						interruptDownloading = true;
 					}
 				});
-				
-				impl.setRunnable("DownloadIndex", new Runnable(){ //$NON-NLS-1$
 
-					@Override
-					public void run() {
-						try {
-							for(String s : new ArrayList<String>(entriesToDownload.keySet())){
-								DownloadEntry entry = entriesToDownload.get(s);
-								if(downloadFile(s, entry.fileToSave, entry.fileToUnzip, entry.unzip, impl)){
-									entriesToDownload.remove(s);
-									runOnUiThread(new Runnable(){
-										@Override
-										public void run() {
-											((DownloadIndexAdapter)getListAdapter()).notifyDataSetChanged();
+				impl.setRunnable("DownloadIndex", new Runnable() { //$NON-NLS-1$
+							@Override
+							public void run() {
+								try {
+									for (String s : new ArrayList<String>(entriesToDownload.keySet())) {
+										DownloadEntry entry = entriesToDownload.get(s);
+										if (entry != null) {
+											if (downloadFile(s, entry.fileToSave, entry.fileToUnzip, entry.unzip, impl)) {
+												entriesToDownload.remove(s);
+												runOnUiThread(new Runnable() {
+													@Override
+													public void run() {
+														((DownloadIndexAdapter) getListAdapter()).notifyDataSetChanged();
+													}
+												});
+											}
 										}
-									});
+									}
+								} catch (InterruptedException e) {
+									// do not dismiss dialog
+									progressFileDlg = null;
+								} finally {
+									if (progressFileDlg != null) {
+										progressFileDlg.dismiss();
+										progressFileDlg = null;
+									}
 								}
 							}
-							
-						} catch (InterruptedException e) {
-							// do not dismiss dialog
-							progressFileDlg = null;
-						} finally {
-							if(progressFileDlg != null){
-								progressFileDlg.dismiss();
-								progressFileDlg = null;
-							}
-						}
-					}
-				});
+						});
 				impl.run();
 			}
 		});

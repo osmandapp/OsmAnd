@@ -683,6 +683,12 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		routingHelper.setUiActivity(null);
 		
 		OsmandSettings.setLastKnownMapLocation(this, (float) mapView.getLatitude(), (float) mapView.getLongitude());
+		AnimateDraggingMapThread animatedThread = mapView.getAnimatedDraggingThread();
+		if(animatedThread.isAnimating() && animatedThread.getTargetZoom() != 0){
+			OsmandSettings.setMapLocationToShow(this, animatedThread.getTargetLatitude(), animatedThread.getTargetLongitude(), 
+					animatedThread.getTargetZoom());
+		}
+		
 		OsmandSettings.setLastKnownMapZoom(this, mapView.getZoom());
 		if (wakeLock != null) {
 			wakeLock.release();
@@ -816,6 +822,14 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		checkExternalStorage();
 		showAndHideMapPosition();
 		
+		LatLon latLon = OsmandSettings.getAndClearMapLocationToShow(settings);
+		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
+		if (latLon != null && !latLon.equals(cur)) {
+			mapView.getAnimatedDraggingThread().startMoving(cur.getLatitude(), cur.getLongitude(), latLon.getLatitude(),
+					latLon.getLongitude(), mapView.getZoom(), OsmandSettings.getMapZoomToShow(settings), mapView.getSourceTileSize(),
+					mapView.getRotate(), true);
+		}
+		
 		
 		View progress = findViewById(R.id.ProgressBar);
 		if (progress == null) {
@@ -828,18 +842,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}
 	}
 	
-	@Override
-	public void onAttachedToWindow() {
-		super.onAttachedToWindow();
-		// start animate transition only ui appears (take into account that on resume orientation can change)
-		LatLon latLon = OsmandSettings.getAndClearMapLocationToShow(settings);
-		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
-		if (latLon != null && !latLon.equals(cur)) {
-			mapView.getAnimatedDraggingThread().startMoving(cur.getLatitude(), cur.getLongitude(), latLon.getLatitude(),
-					latLon.getLongitude(), mapView.getZoom(), OsmandSettings.getMapZoomToShow(settings), mapView.getSourceTileSize(),
-					mapView.getRotate(), true);
-		}
-	}
 	
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
