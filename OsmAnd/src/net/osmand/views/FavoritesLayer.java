@@ -169,10 +169,6 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 		return null;
 	}
 	
-	public FavouritesDbHelper getFavorites() {
-		return favorites;
-	}
-
 
 	@Override
 	public String getObjectDescription(Object o) {
