@@ -1298,7 +1298,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				} else if(item == 5){
 					if(gpxLayer.isVisible()){
 						gpxLayer.clearCurrentGPX();
-						favoritesLayer.getFavorites().setFavoritePointsFromGPXFile(null);
+						getFavoritesHelper().setFavoritePointsFromGPXFile(null);
 					} else {
 						dialog.dismiss();
 						useGPXFileLayer(false, null);
@@ -1388,7 +1388,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 									pt.setName(p.name);
 									pts.add(pt);
 								}
-								favoritesLayer.getFavorites().setFavoritePointsFromGPXFile(pts);
+								getFavoritesHelper().setFavoritePointsFromGPXFile(pts);
 								gpxLayer.setTracks(res.locations);
 							}
 							mapView.refreshMap();
@@ -1403,7 +1403,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			builder.show();
 		}
 		
-	}	
+	}
+	
+	public FavouritesDbHelper getFavoritesHelper() {
+		return ((OsmandApplication)getApplication()).getFavorites();
+	}
 	
 	private void useGPXRouting(final LatLon endForRouting, final GPXFileResult res) {
 		Builder builder = new AlertDialog.Builder(this);
