@@ -269,66 +269,66 @@ public class IndexBatchCreator {
 //		}
 		// EUROPE //
 		// europe
-//		for(String country : europeCountries){
-//			String url = SITE_TO_DOWNLOAD1 + country +".osm.bz2"; //$NON-NLS-1$
-//			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles);
-//		}
-//		
-//		// france
-//		for(String country : franceProvinces){
-//			String url = SITE_TO_DOWNLOAD1 +"france/" + country +".osm.bz2"; //$NON-NLS-1$
-//			downloadFile(url, "France_"+country, alreadyGeneratedFiles, alreadyUploadedFiles);
-//		}
-//		
-//		// germany
-//		for(String country : germanyLands){
-//			String url = SITE_TO_DOWNLOAD1 +"germany/" + country +".osm.bz2"; //$NON-NLS-1$
-//			downloadFile(url, "Germany_"+country, alreadyGeneratedFiles, alreadyUploadedFiles);
-//		}
-//
-//		
-//		// north america //
-//		for(String country : northAmerica){
-//			country = country.toLowerCase();
-//			String url = SITE_TO_DOWNLOAD2 + "north_america/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
-//			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
-//		}
-//
-//		
-//		// usa
-//		for(String country : usStates){
-//			country = country.toLowerCase();
-//			String url = SITE_TO_DOWNLOAD2 + "north_america/united_states/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
-//			downloadFile(url, "US_"+country, alreadyGeneratedFiles, alreadyUploadedFiles);
-//		}
-//
-//		// canada
-//		for(String country : canadaStates){
-//			country = country.toLowerCase();
-//			String url = SITE_TO_DOWNLOAD2 + "north_america/canada/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
-//			downloadFile(url, "Canada_"+country, alreadyGeneratedFiles, alreadyUploadedFiles); 
-//		}
-//		
-//		// SOUTH AMERICA//
-//		for(String country : southAmerica){
-//			country = country.toLowerCase();
-//			String url = SITE_TO_DOWNLOAD2 + "south_america/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
-//			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
-//		}
-//		
-//		// ASIA //
-//		for(String country : asia){
-//			country = country.toLowerCase();
-//			String url = SITE_TO_DOWNLOAD2 + "asia/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
-//			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
-//		}
-//		
-//		// africa //
-//		for(String country : africa){
-//			country = country.toLowerCase();
-//			String url = SITE_TO_DOWNLOAD2 + "africa/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
-//			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
-//		}
+		for(String country : europeCountries){
+			String url = SITE_TO_DOWNLOAD1 + country +".osm.bz2"; //$NON-NLS-1$
+			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles);
+		}
+		
+		// france
+		for(String country : franceProvinces){
+			String url = SITE_TO_DOWNLOAD1 +"france/" + country +".osm.bz2"; //$NON-NLS-1$
+			downloadFile(url, "France_"+country, alreadyGeneratedFiles, alreadyUploadedFiles);
+		}
+		
+		// germany
+		for(String country : germanyLands){
+			String url = SITE_TO_DOWNLOAD1 +"germany/" + country +".osm.bz2"; //$NON-NLS-1$
+			downloadFile(url, "Germany_"+country, alreadyGeneratedFiles, alreadyUploadedFiles);
+		}
+
+		
+		// north america //
+		for(String country : northAmerica){
+			country = country.toLowerCase();
+			String url = SITE_TO_DOWNLOAD2 + "north_america/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
+		}
+
+		
+		// usa
+		for(String country : usStates){
+			country = country.toLowerCase();
+			String url = SITE_TO_DOWNLOAD2 + "north_america/united_states/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+			downloadFile(url, "US_"+country, alreadyGeneratedFiles, alreadyUploadedFiles);
+		}
+
+		// canada
+		for(String country : canadaStates){
+			country = country.toLowerCase();
+			String url = SITE_TO_DOWNLOAD2 + "north_america/canada/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+			downloadFile(url, "Canada_"+country, alreadyGeneratedFiles, alreadyUploadedFiles); 
+		}
+		
+		// SOUTH AMERICA//
+		for(String country : southAmerica){
+			country = country.toLowerCase();
+			String url = SITE_TO_DOWNLOAD2 + "south_america/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
+		}
+		
+		// ASIA //
+		for(String country : asia){
+			country = country.toLowerCase();
+			String url = SITE_TO_DOWNLOAD2 + "asia/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
+		}
+		
+		// africa //
+		for(String country : africa){
+			country = country.toLowerCase();
+			String url = SITE_TO_DOWNLOAD2 + "africa/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
+		}
 		
 		// russia
 		for(String country : russiaStates){
@@ -338,11 +338,11 @@ public class IndexBatchCreator {
 		}
 
 		// OCEANIA //
-//		for(String country : oceania){
-//			country = country.toLowerCase();
-//			String url = SITE_TO_DOWNLOAD2 + "oceania/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
-//			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
-//		}
+		for(String country : oceania){
+			country = country.toLowerCase();
+			String url = SITE_TO_DOWNLOAD2 + "oceania/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
+		}
 
 		
 		System.out.println("DOWNLOADING FILES FINISHED");
