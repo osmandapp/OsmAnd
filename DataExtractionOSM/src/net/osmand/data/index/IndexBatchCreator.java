@@ -60,13 +60,14 @@ public class IndexBatchCreator {
 		}));
 	}
 	
-	
+	// andorra, bosnia, cyprus,
 	protected static final String[] europeCountries = new String[] {
-		"albania", "andorra", "austria", // 5.3, 0.4, 100 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		//"belarus", 
-		"belgium", "bosnia-herzegovina", // 39, 43, 4.1 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		"bulgaria", "croatia", "cyprus",  // 13, 12, 5 //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
-		"denmark", "estonia", "faroe_islands", // 75, 38, 1.5 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"albania", "andorra", "austria", // 5.3, 0.4, 100 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"belarus", "belgium", "bosnia-herzegovina", // 39, 43, 4.1 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//		"bulgaria", "croatia", "cyprus",  // 13, 12, 5 //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+//		"denmark",
+		// TODO map.odb
+		"estonia", "faroe_islands", // 75, 38, 1.5 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		"finland", "greece", "hungary", //80, 25, 14 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		"iceland", "ireland", "isle_of_man", // 5.9, 27, 1.1 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		"kosovo", "latvia", "liechtenstein", // 8.2, 6.5, 0.2 //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -85,7 +86,8 @@ public class IndexBatchCreator {
 		// ADD TO TOTAL : 2449 MB
 
 	};
-
+	
+	// TODO map.odb
 	protected static final String[] franceProvinces = new String[] {
 		"alsace","aquitaine", "auvergne", "basse-normandie", "bourgogne", "bretagne", "centre",
 		"champagne-ardenne", "corse", "franche-comte", "haute-normandie", "ile-de-france",
@@ -93,6 +95,7 @@ public class IndexBatchCreator {
 		"pays-de-la-loire", "picardie","poitou-charentes", "provence-alpes-cote-d-azur", "rhone-alpes"
 	};
 	
+	// TODO map.odb
 	protected static final String[] germanyLands = new String[] {
 		"baden-wuerttemberg","bayern", "berlin", "brandenburg", "bremen", "hamburg", "hessen",
 		"mecklenburg-vorpommern", "niedersachsen", "nordrhein-westfalen", "rheinland-pfalz", "saarland",
@@ -144,7 +147,7 @@ public class IndexBatchCreator {
 
 	// oceania
 	protected static final String[] oceania = new String[] {
-//		"Australia", "New_Zealand", // TODO map.odb
+//		"Australia", "New_Zealand",
 		// TODO only australia, new zealand created
 //		"American_Samoa","Baker_Island","Cocos_Keeling_Islands","Cook_Islands",
 //		"Federated_States_of_Micronesia","Fiji", "French_Polynesia","Guam","Howland_Island",
@@ -157,16 +160,18 @@ public class IndexBatchCreator {
 	
 	protected static final String SITE_TO_DOWNLOAD3 = "http://gis-lab.info/data/osm/"; //$NON-NLS-1$
 	protected static final String[] russiaStates = new String[] {
-		"adygeya", "altay", "altayskiy","amur","arkhan","astrakhan",
-		"bashkir", "belgorod","bryansk","buryat","chechen", "chel",
-		"chukot", "chuvash", "dagestan","evrey", "ingush", "irkutsk",
-	    "ivanov","kabardin","kalinin","kalmyk","kaluzh","kamch","karach","karel",
-	    "kemerovo", "khabar", "khakas", "khanty", "kirov", "komi", "kostrom", "krasnodar",
-	    "krasnoyarsk", "kurgan", "kursk", "leningrad", "lipetsk", "magadan", "mariyel", "mordov", "moscow", "mosobl", "murmansk",
-	    "nenec", "nizhegorod", "novgorod", "novosib", "omsk", "orenburg", "orlovsk", "osetiya",
-	    "penz", "perm", "prim", "pskov", "rostov", "ryazan", "sakhalin", "samar", "saratov", "smol",
-	    "stavrop", "stpeter", "sverdl", "tambov", "tatar", "tomsk", "tul", "tumen", "tver", "tyva", "udmurt",
-	    "ulyan", "vladimir", "volgograd", "vologda", "voronezh", "yakut", "yamal", "yarosl", "zabaikal",
+//		"adygeya", "altay", "altayskiy","amur","arkhan","astrakhan",
+//		"bashkir", "belgorod","bryansk","buryat","chechen", "chel",
+//		"chukot", "chuvash", "dagestan","evrey", "ingush", "irkutsk",
+//	    "ivanov","kabardin","kalinin","kalmyk","kaluzh","kamch","karach","karel",
+//	    "kemerovo", "khabar", "khakas", "khanty", "kirov", "komi", "kostrom", "krasnodar",
+//	    "krasnoyarsk", "kurgan", "kursk", "leningrad", "lipetsk", "magadan", "mariyel", "mordov", "moscow", "mosobl", "murmansk",
+//	    "nenec", "nizhegorod", "novgorod", "novosib", "omsk", "orenburg", "orlovsk", "osetiya",
+//	    "penz", "perm", 
+		// TODO map.odb
+//	    "prim", "pskov", "rostov", "ryazan", "sakhalin", "samar", "saratov", "smol",
+//	    "stavrop", "stpeter", "sverdl", "tambov", "tatar", "tomsk", "tul", "tumen", "tver", "tyva", "udmurt",
+//	    "ulyan", "vladimir", "volgograd", "vologda", "voronezh", "yakut", "yamal", "yarosl", "zabaikal",
 	};
 	
 	protected static final String[] asia = new String[] { 
@@ -264,66 +269,66 @@ public class IndexBatchCreator {
 //		}
 		// EUROPE //
 		// europe
-		for(String country : europeCountries){
-			String url = SITE_TO_DOWNLOAD1 + country +".osm.bz2"; //$NON-NLS-1$
-			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles);
-		}
-		
-		// france
-		for(String country : franceProvinces){
-			String url = SITE_TO_DOWNLOAD1 +"france/" + country +".osm.bz2"; //$NON-NLS-1$
-			downloadFile(url, "France_"+country, alreadyGeneratedFiles, alreadyUploadedFiles);
-		}
-		
-		// germany
-		for(String country : germanyLands){
-			String url = SITE_TO_DOWNLOAD1 +"germany/" + country +".osm.bz2"; //$NON-NLS-1$
-			downloadFile(url, "Germany_"+country, alreadyGeneratedFiles, alreadyUploadedFiles);
-		}
-
-		
-		// north america //
-		for(String country : northAmerica){
-			country = country.toLowerCase();
-			String url = SITE_TO_DOWNLOAD2 + "north_america/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
-			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
-		}
-
-		
-		// usa
-		for(String country : usStates){
-			country = country.toLowerCase();
-			String url = SITE_TO_DOWNLOAD2 + "north_america/united_states/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
-			downloadFile(url, "US_"+country, alreadyGeneratedFiles, alreadyUploadedFiles);
-		}
-
-		// canada
-		for(String country : canadaStates){
-			country = country.toLowerCase();
-			String url = SITE_TO_DOWNLOAD2 + "north_america/canada/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
-			downloadFile(url, "Canada_"+country, alreadyGeneratedFiles, alreadyUploadedFiles); 
-		}
-		
-		// SOUTH AMERICA//
-		for(String country : southAmerica){
-			country = country.toLowerCase();
-			String url = SITE_TO_DOWNLOAD2 + "south_america/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
-			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
-		}
-		
-		// ASIA //
-		for(String country : asia){
-			country = country.toLowerCase();
-			String url = SITE_TO_DOWNLOAD2 + "asia/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
-			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
-		}
-		
-		// africa //
-		for(String country : africa){
-			country = country.toLowerCase();
-			String url = SITE_TO_DOWNLOAD2 + "africa/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
-			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
-		}
+//		for(String country : europeCountries){
+//			String url = SITE_TO_DOWNLOAD1 + country +".osm.bz2"; //$NON-NLS-1$
+//			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles);
+//		}
+//		
+//		// france
+//		for(String country : franceProvinces){
+//			String url = SITE_TO_DOWNLOAD1 +"france/" + country +".osm.bz2"; //$NON-NLS-1$
+//			downloadFile(url, "France_"+country, alreadyGeneratedFiles, alreadyUploadedFiles);
+//		}
+//		
+//		// germany
+//		for(String country : germanyLands){
+//			String url = SITE_TO_DOWNLOAD1 +"germany/" + country +".osm.bz2"; //$NON-NLS-1$
+//			downloadFile(url, "Germany_"+country, alreadyGeneratedFiles, alreadyUploadedFiles);
+//		}
+//
+//		
+//		// north america //
+//		for(String country : northAmerica){
+//			country = country.toLowerCase();
+//			String url = SITE_TO_DOWNLOAD2 + "north_america/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+//			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
+//		}
+//
+//		
+//		// usa
+//		for(String country : usStates){
+//			country = country.toLowerCase();
+//			String url = SITE_TO_DOWNLOAD2 + "north_america/united_states/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+//			downloadFile(url, "US_"+country, alreadyGeneratedFiles, alreadyUploadedFiles);
+//		}
+//
+//		// canada
+//		for(String country : canadaStates){
+//			country = country.toLowerCase();
+//			String url = SITE_TO_DOWNLOAD2 + "north_america/canada/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+//			downloadFile(url, "Canada_"+country, alreadyGeneratedFiles, alreadyUploadedFiles); 
+//		}
+//		
+//		// SOUTH AMERICA//
+//		for(String country : southAmerica){
+//			country = country.toLowerCase();
+//			String url = SITE_TO_DOWNLOAD2 + "south_america/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+//			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
+//		}
+//		
+//		// ASIA //
+//		for(String country : asia){
+//			country = country.toLowerCase();
+//			String url = SITE_TO_DOWNLOAD2 + "asia/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+//			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
+//		}
+//		
+//		// africa //
+//		for(String country : africa){
+//			country = country.toLowerCase();
+//			String url = SITE_TO_DOWNLOAD2 + "africa/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+//			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
+//		}
 		
 		// russia
 		for(String country : russiaStates){
@@ -333,11 +338,11 @@ public class IndexBatchCreator {
 		}
 
 		// OCEANIA //
-		for(String country : oceania){
-			country = country.toLowerCase();
-			String url = SITE_TO_DOWNLOAD2 + "oceania/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
-			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
-		}
+//		for(String country : oceania){
+//			country = country.toLowerCase();
+//			String url = SITE_TO_DOWNLOAD2 + "oceania/"+country+"/"+country +".osm.bz2"; //$NON-NLS-1$
+//			downloadFile(url, country, alreadyGeneratedFiles, alreadyUploadedFiles); 
+//		}
 
 		
 		System.out.println("DOWNLOADING FILES FINISHED");
@@ -459,6 +464,9 @@ public class IndexBatchCreator {
 		for(File f : getSortedFiles(indexDirFiles)){
 			if(!alreadyUploadedFiles.contains(f.getName())){
 				uploadIndex(f, alreadyUploadedFiles);
+				if(!alreadyUploadedFiles.contains(f.getName())){
+					System.out.println("! NOT UPLOADED "  + f.getName());
+				}
 			}
 		}
 		System.out.println("UPLOADING INDEXES FINISHED ");
@@ -520,8 +528,13 @@ public class IndexBatchCreator {
 		}
 		try {
 			DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName(), token, pagegen, cookieHSID, cookieSID);
+			try {
+				Thread.sleep(4000);
+			} catch (InterruptedException e) {
+				// wait 5 seconds
+			}
 		} catch (IOException e) {
-			log.warn("Deleting file from downloads" + f.getName(), e);
+			log.warn("Deleting file from downloads" + f.getName() +  " " + e.getMessage());
 		}
 		
 		mbLengh = (double)f.length() / MB;
@@ -532,7 +545,7 @@ public class IndexBatchCreator {
 		String descriptionFile = "{"+format.format(new Object[]{new Date(f.lastModified()), mbLengh})+"}";
 		summary +=  regionName + " " + descriptionFile;
 		
-		alreadyUploadedFiles.add(f.getName());
+		
 		GoogleCodeUploadIndex uploader = new GoogleCodeUploadIndex();
 		uploader.setFileName(f.getAbsolutePath());
 		uploader.setTargetFileName(f.getName());
@@ -543,6 +556,7 @@ public class IndexBatchCreator {
 		uploader.setSummary(summary.replace('_', ' '));
 		try {
 			uploader.upload();
+			alreadyUploadedFiles.add(f.getName());
 		} catch (IOException e) {
 			log.error("Input/output exception uploading " + f.getName(), e);
 		}
