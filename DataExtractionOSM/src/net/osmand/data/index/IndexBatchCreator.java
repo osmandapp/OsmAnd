@@ -39,6 +39,9 @@ public class IndexBatchCreator {
 	private static final String pagegen = "";
 	private static final String token = "";
 	
+	
+	protected static final boolean deleteFilesAfterUploading = true;
+	
 	protected static final Log log = LogUtil.getLog(IndexBatchCreator.class);
 	protected static final String SITE_TO_DOWNLOAD1 = "http://download.geofabrik.de/osm/europe/"; //$NON-NLS-1$
 	
@@ -124,7 +127,8 @@ public class IndexBatchCreator {
 //		"Quebec","Saskatchewan","Yukon",
 	};
 	
-	// NORTH AMERICA 
+	// NORTH AMERICA
+	// TODO map.odb
 	protected static final String[] northAmerica = new String[] {
 		"Bahamas", "Costa_Rica", "Cuba", "Dominica", "Dominican_Republic",
 		"Guatemala", "Haiti", "Honduras", "Jamaica", "Mexico", 
@@ -137,7 +141,7 @@ public class IndexBatchCreator {
 			
 	};
 	
-	
+	// TODO map.odb
 	protected static final String[] southAmerica = new String[] {
 		"Argentina","Bolivia","Brazil","Chile","Colombia",
 		"Ecuador","Falkland_Islands", "French_Guiana","Guyana","Paraguay",
@@ -167,13 +171,12 @@ public class IndexBatchCreator {
 //	    "kemerovo", "khabar", "khakas", "khanty", "kirov", "komi", "kostrom", "krasnodar",
 //	    "krasnoyarsk", "kurgan", "kursk", "leningrad", "lipetsk", "magadan", "mariyel", "mordov", "moscow", "mosobl", "murmansk",
 //	    "nenec", "nizhegorod", "novgorod", "novosib", "omsk", "orenburg", "orlovsk", "osetiya",
-//	    "penz", "perm", 
-		// TODO map.odb
-//	    "prim", "pskov", "rostov", "ryazan", "sakhalin", "samar", "saratov", "smol",
+//	    "penz", "perm", "prim", "pskov", "rostov", "ryazan", "sakhalin", "samar", "saratov", "smol",
 //	    "stavrop", "stpeter", "sverdl", "tambov", "tatar", "tomsk", "tul", "tumen", "tver", "tyva", "udmurt",
 //	    "ulyan", "vladimir", "volgograd", "vologda", "voronezh", "yakut", "yamal", "yarosl", "zabaikal",
 	};
 	
+	// TODO map.odb
 	protected static final String[] asia = new String[] { 
 		"Afghanistan", "Bahrain", "Bangladesh", "Bhutan", "British_Indian_Ocean_Territory", "Brunei", "Cambodia", 
 		"China", "Christmas_Island", "Democratic_Republic_of_Timor-Leste", "Gaza_Strip", "India", "Indonesia", "Iran", 
@@ -497,7 +500,7 @@ public class IndexBatchCreator {
 		} else { 
 			return;
 		}
-		if(mbLengh < 0.03){
+		if(mbLengh < 0.015){
 			// do not upload small files
 			return;
 		}
@@ -556,6 +559,9 @@ public class IndexBatchCreator {
 		uploader.setSummary(summary.replace('_', ' '));
 		try {
 			uploader.upload();
+			if(deleteFilesAfterUploading){
+				f.delete();
+			}
 			alreadyUploadedFiles.add(f.getName());
 		} catch (IOException e) {
 			log.error("Input/output exception uploading " + f.getName(), e);
