@@ -23,7 +23,7 @@
 
 <string name="vector_data">Vektorové OSM mapy</string>
 <string name="transport_context_menu">Hľadať prepravu po zastavení</string>
-<string name="point_on_map">Bod na mape\n Lat {0,number,#.####} Lon {1,number,#.####}</string>
+<string name="point_on_map">Bod na mape\n šírka {0,number,#.####} dĺžka {1,number,#.####}</string>
 <string name="osb_bug_name">Chyba</string>
 <string name="poi_context_menu_modify">Upraviť POI</string>
 <string name="poi_context_menu_delete">Vymazať POI</string>
@@ -143,7 +143,7 @@
 <string name="search_history_street">Ulica: {0}, {1}</string>
 <string name="search_history_int_streets">Pretínajúce ulice: {0} x {1} v {2}</string>
 <string name="search_history_building">Budova: {0}, {1}, {2}</string>
-<string name="search_history_navigate_to">Navigovať do lat = {0}, lon = {1}</string>
+<string name="search_history_navigate_to">Navigovať do: šírka = {0}, dĺžka = {1}</string>
 <string name="favorite">Obľúbené</string>
 <string name="clear_all">Zmazať všetko</string>
 <string name="history">História</string>
@@ -157,7 +157,7 @@
 <string name="search_offline_address">Offline</string>
 <string name="search_online_address">Internet</string>
 <string name="max_level_download_tile">Max. úroveň priblíženia</string>
-<string name="max_level_download_tile_descr">Vybrať max. úroveň priblíženia na stiahnutie</string>
+<string name="max_level_download_tile_descr">Vybrať maximálnu úroveň priblíženia na stiahnutie</string>
 <string name="route_about">O ceste</string>
 <string name="route_general_information">Celková vzdialenosť {0}, čas cestovania {1} h {2} m.</string>
 <string name="router_service_descr">Vybrať rutovaciu službu</string>
@@ -240,7 +240,7 @@
 <string name="monitor_preferences">Monitorovanie</string>
 <string name="save_track_to_gpx_descrp">Stopy budú uložené do adresára stôp, zoskupené podľa dní</string>
 <string name="save_track_to_gpx">Uložiť stopu do GPX</string>
-<string name="navigate_to">Navigovať do</string>
+<string name="navigate_to">Navigovať sem</string>
 <string name="update_tile">Aktualizovať mapu</string>
 <string name="reload_tile">Znovu načítať dlaždicu</string>
 <string name="user_name_descr">Vaše OSM užívateľské meno</string>
@@ -256,7 +256,7 @@
 <string name="search_address">Hľadať adresu</string>
 <string name="choose_building">Vybrať budovu</string>
 <string name="choose_street">Vybrať ulicu</string>
-<string name="choose_city">Vybrať mestoChoose city</string>
+<string name="choose_city">Vybrať mesto</string>
 <string name="ChooseCountry">Vybrať krajinu</string>
 <string name="position_on_map_descr">Vybrať pozíciu na mape</string>
 <string name="position_on_map">Pozícia na mape</string>
@@ -307,14 +307,14 @@
 <string name="position_on_map_bottom">Spodok</string>
 <string name="interval_1_second">1 sekunda</string>
 <string name="interval_2_seconds">2 sekundy</string>
-<string name="interval_5_seconds">5 seconds</string>
+<string name="interval_5_seconds">5 sekúnd</string>
 <string name="interval_15_seconds">15 sekúnd</string>
 <string name="interval_30_seconds">30 sekúnd</string>
 <string name="interval_1_minute">1 minúta</string>
 <string name="interval_5_minutes">5 minút</string>
 <string name="navigate_point_top_text">Zadajte zemepisnú šírku a dĺžku vo vybranom formáte (D - stupne, M - minúty, S - sekundy)</string>
 <string name="navigate_point_latitude">Zem. šírka</string>
-<string name="navigate_point_longitude">Zem. výška</string>
+<string name="navigate_point_longitude">Zem. dĺžka</string>
 <string name="navigate_point_format_D">DDD.DDDDD</string>
 <string name="navigate_point_format_DM">DDD:MM.MMMMM</string>
 <string name="navigate_point_format_DMS">DDD:MM:SS.SSSSS</string>
@@ -346,7 +346,7 @@
 <string name="add_favorite_dialog_favourite_added_template">Obľúbený bod \'\'{0}\'\' bol úspešne pridaný.</string>
 
 <string name="favourites_context_menu_title">Kontextové menu</string>
-<string name="favourites_context_menu_navigate">Navigovať do</string>
+<string name="favourites_context_menu_navigate">Navigovať sem</string>
 <string name="favourites_context_menu_edit">Upravit obľúbené</string>
 <string name="favourites_context_menu_delete">Vymazať obľúbené</string>
 <string name="favourites_edit_dialog_title">Premenovať obľúbené</string>
@@ -391,7 +391,7 @@
 <string name="poi_dialog_opening_hours">Otvorené</string>
 <string name="poi_dialog_comment">Komentár</string>
 <string name="poi_dialog_comment_default">Zmena POI</string>
-<string name="poi_dialog_other_tags_message">Všetky ostatné tagy ponechanné</string>
+<string name="poi_dialog_other_tags_message">Všetky ostatné tagy ponechané</string>
 <string name="default_buttons_commit">Uložiť</string>
 <string name="default_buttons_reset">Reset</string>
 <string name="filter_current_poiButton">Filter</string>
