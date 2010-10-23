@@ -94,14 +94,14 @@
 <string name="sd_unmounted">SD karta nie je prístupná.\nNebudete schopný vidieť mapu alebo niečo nájsť.</string>
 <string name="sd_mounted_ro">SD karta je iba na čítanie.\nMôžete iba vidieť prednačítanú mapu a nemôžete sťahovať z internetu.</string>
 <string name="unzipping_file">Rozbaľuje sa súbor...</string>
-<string name="route_tr">Odbočte vpravo a pokračujte</string>
+<string name="route_tr">Odbočte doprava a pokračujte</string>
 <string name="route_tshr">Odbočte ostro doprava a pokračujte</string>
-<string name="route_tslr">Odbočte ľahko doprava a pokračujte</string>
-<string name="route_tl">Odbočte vľavo a pokračujte</string>
-<string name="route_tshl">Odbočte ostro vľavo a pokračujte</string>
-<string name="route_tsll">Odbočte ľahko vľavo a pokračujte</string>
-<string name="route_tu">Urobte otočku a pokračujte</string>
-<string name="route_head">Pokračujte</string>
+<string name="route_tslr">Odbočte mierne doprava a pokračujte</string>
+<string name="route_tl">Odbočte doľava a pokračujte</string>
+<string name="route_tshl">Odbočte ostro doľava a pokračujte</string>
+<string name="route_tsll">Odbočte mierne doľava a pokračujte</string>
+<string name="route_tu">Otočte sa a pokračujte</string>
+<string name="route_head">Pokračujte rovno</string>
 <string name="first_time_continue">Pokračovať</string>
 <string name="first_time_download">Stiahnuť indexy</string>
 <string name="first_time_msg">Ďakujeme, že ste sa rozhodli pre OsmAnd. \nNa použitie všetkých funkcií aplikácie potrebujete indexové súbory, ktoré môžete stiahnuť (Nastavenia -&gt; Údaje) alebo si ich pripraviť sami. Potom budete môcť: vyhľadávať adresy, body zájmov(POI) a verejnú dopravu.</string>
@@ -357,6 +357,7 @@
 <string name="osb_add_dialog_title">Zadajte opis chyby</string>
 <string name="osb_add_dialog_success">Chyba úspešne pridaná</string>
 <string name="osb_add_dialog_error">Vyskytla sa výnimka: chyba nebola pridaná</string>
+
 
 <string name="osb_comment_menu_item">Pridať komentár</string>
 <string name="osb_comment_dialog_message">Správa</string>
