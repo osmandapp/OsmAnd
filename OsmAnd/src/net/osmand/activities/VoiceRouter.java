@@ -242,10 +242,14 @@ public class VoiceRouter {
 		return null;
 	}
 
-	public void newRouteIsCalculated() {
+	public void newRouteIsCalculated(boolean updateRoute) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
-		if(play != null){
-			play.newRouteCalculated(router.getLeftDistance()).play();
+		if (play != null) {
+			if (updateRoute) {
+				play.routeRecalculated(router.getLeftDistance()).play();
+			} else {
+				play.newRouteCalculated(router.getLeftDistance()).play();
+			}
 		}
 		currentDirection = router.currentDirectionInfo;
 		currentStatus = 0;

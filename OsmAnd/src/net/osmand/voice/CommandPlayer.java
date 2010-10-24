@@ -261,6 +261,7 @@ public class CommandPlayer {
 	protected static final String С_BEAR_LEFT = "bear_left";  //$NON-NLS-1$
 	protected static final String С_BEAR_RIGHT = "bear_right";  //$NON-NLS-1$
 	protected static final String С_ROUTE_RECALC = "route_recalc";  //$NON-NLS-1$
+	protected static final String С_ROUTE_NEW_CALC = "route_new_calc";  //$NON-NLS-1$
 	
 	
 	protected static final String DELAY_CONST = "delay_"; //$NON-NLS-1$
@@ -390,6 +391,10 @@ public class CommandPlayer {
 		}
 		
 		public CommandBuilder newRouteCalculated(double dist){
+			return addCommand(С_ROUTE_NEW_CALC, dist);
+		}
+		
+		public CommandBuilder routeRecalculated(double dist){
 			return addCommand(С_ROUTE_RECALC, dist);
 		}
 	

@@ -9,7 +9,7 @@ preamble - [].
 %% TURNS 
 turn('left', ['turn_left-e.ogg']).
 turn('left_sh', ['turn_sharp_left-e.ogg']).
-turn('left_sl', ['turn_slightly_left.ogg']).
+turn('left_sl', ['turn_slightly_left-e.ogg']).
 turn('right', ['turn_right-e.ogg']).
 turn('right_sh', ['turn_sharp_right-e.ogg']).
 turn('right_sl', ['turn_slightly_right-e.ogg']).
@@ -40,7 +40,8 @@ then == ['then.ogg', delay_350].
 reached_destination == ['you_have_reached_your_destination.ogg'].
 bear_right == ['keep_right-e.ogg'].
 bear_left == ['keep_left-e.ogg'].
-route_recalc(_Dist) == []. % nothing to said possibly beep?	
+route_recalc(_Dist) == []. % ['recalc.ogg'].  %nothing to said possibly beep?	
+route_new_calc(Dist) == ['the_trip_is_more_than.ogg', delay_150, D] :- distance(Dist) == D. % nothing to said possibly beep?
 
 go_ahead(Dist) == ['Drive-n.ogg', delay_250,  D]:- distance(Dist) == D.
 go_ahead == ['continue_straight-e.ogg'].
