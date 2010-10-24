@@ -25,7 +25,7 @@ public class RoutingHelper {
 	
 	public static interface IRouteInformationListener {
 		
-		public void newRouteIsCalculated();
+		public void newRouteIsCalculated(boolean updateRoute);
 		
 		public void routeWasCancelled();
 	}
@@ -342,16 +342,17 @@ public class RoutingHelper {
 	}
 	
 	private synchronized void setNewRoute(RouteCalculationResult res){
+		boolean updateRoute = !routeNodes.isEmpty();
 		routeNodes = res.getLocations();
 		directionInfo = res.getDirections();
 		listDistance = res.getListDistance();
 		currentDirectionInfo = 0;
 		currentRoute = 0;
 		if(isFollowingMode){
-			voiceRouter.newRouteIsCalculated();
+			voiceRouter.newRouteIsCalculated(updateRoute);
 		} 
 		for(IRouteInformationListener l : listeners){
-			l.newRouteIsCalculated();
+			l.newRouteIsCalculated(updateRoute);
 		}
 	}
 	

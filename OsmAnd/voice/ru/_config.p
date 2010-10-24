@@ -40,7 +40,8 @@ then == ['then.ogg', delay_350].
 reached_destination == ['you_reached.ogg',delay_250, 'TO_DESTINATION.ogg'].
 bear_right == ['bear_right.ogg'].
 bear_left == ['bear_left.ogg'].
-route_recalc(_Dist) == ['recalc.ogg'].
+route_recalc(_Dist) == []. % 'recalc.ogg'
+route_new_calc(_Dist) == ['have_a_nice_trip_drive_carefully.ogg']. 
 
 go_ahead(Dist) == ['Drive.ogg', delay_250,  D]:- distance(Dist) == D.
 go_ahead == ['continue.ogg', 'stright.ogg'].

@@ -40,7 +40,8 @@ then == ['entonces.ogg', delay_350].
 reached_destination == ['llegado.ogg'].
 bear_right == ['mantener_derecha.ogg'].
 bear_left == ['mantener_izquierda.ogg'].
-route_recalc(_Dist) == []. % nothing to said possibly beep?	
+route_recalc(_Dist) == []. % nothing to said possibly beep?
+route_new_calc(_Dist) == []. % nothing to said possibly beep?	
 
 go_ahead(Dist) == ['siga_por.ogg', delay_250,  D]:- distance(Dist) == D.
 go_ahead == ['siga.ogg'].

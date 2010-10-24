@@ -220,7 +220,7 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 	}
 
 	@Override
-	public void newRouteIsCalculated() {
+	public void newRouteIsCalculated(boolean updateRoute) {
 		uiHandler.post(new Runnable(){
 			@Override
 			public void run() {
