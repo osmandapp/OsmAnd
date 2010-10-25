@@ -38,8 +38,9 @@
 			<fileset dir=".">
 				<include name="OsmAndMapCreator.jar"/>
 				<include name="lib/**"/>
-				<include name="run.bat"/>
-				<include name="run.sh"/>
+				<include name="logging.properties"/>
+				<include name="OsmAndMapCreator.bat"/>
+				<include name="OsmAndMapCreator.sh"/>
 			</fileset>
 		</copy>
 		<zip destfile="build.zip">

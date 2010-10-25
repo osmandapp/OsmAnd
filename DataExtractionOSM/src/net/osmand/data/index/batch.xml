@@ -20,13 +20,14 @@
 		 or you can upload any file you have to googlecode (just put into 'directory_for_index_files')
 	 -->
 	<process directory_for_osm_files="E:/Information/OSM maps/osm_batch" directory_for_index_files="E:/Information/OSM maps/osm_batch_ind"
-		downloadOsmFiles="true" generateIndexes="true" uploadIndexes="true" deleteFilesAfterUploading="true" indexPOI="true" indexMap="true"
+		downloadOsmFiles="true" generateIndexes="true" uploadIndexes="true"
+		deleteFilesAfterUploading="true" indexPOI="true" indexMap="true"
 		indexTransport="true" indexAddress="true">
 
-
+        <!-- Countries to download from osm server -->
 
 		<!-- EUROPE -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/europe/{0}.osm.bz2" region_prefix="">
+		<regions siteToDownload="http://download.geofabrik.de/osm/europe/{0}.osm.bz2" region_prefix="" skip="true">
 			<region name="albania" esize="6" />
 			<region name="andorra" esize="1" />
 			<region name="austria" esize="110" />
@@ -234,7 +235,7 @@
 		</regions>
 		
 		<!-- USA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/north_america/united_states/{0}/{0}.osm.bz2" region_prefix="Canada_">
+		<regions siteToDownload="http://downloads.cloudmade.com/north_america/united_states/{0}/{0}.osm.bz2" region_prefix="US_">
 			<region name="alabama" esize=""/>
 			<region name="alaska" esize=""/>
 			<region name="arizona" esize=""/>
