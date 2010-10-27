@@ -2,7 +2,7 @@ package net.osmand.osm;
 
 import net.osmand.Algoritms;
 
-public class MapRenderObject {
+public class BinaryMapRenderObject {
 	private String name = null;
 	private int type;
 	private byte[] data = null;
@@ -11,7 +11,7 @@ public class MapRenderObject {
 	private boolean multitype = false;
 	private boolean highwayType = false;
 	
-	public MapRenderObject(long id){
+	public BinaryMapRenderObject(long id){
 		this.id = id;
 	}
 	
@@ -27,6 +27,10 @@ public class MapRenderObject {
 		multitype = (type & 1) > 0;
 		highwayType = isHighwayType();
 		order = -1;
+	}
+	
+	public int getWholeType() {
+		return type;
 	}
 	
 	public long getId() {

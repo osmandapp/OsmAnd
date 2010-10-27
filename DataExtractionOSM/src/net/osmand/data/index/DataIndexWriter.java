@@ -1,6 +1,7 @@
 package net.osmand.data.index;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -190,44 +191,23 @@ public class DataIndexWriter {
 
 	public static void createMapIndexStructure(Connection conn) throws SQLException{
 		Statement stat = conn.createStatement();
-        stat.execute(IndexConstants.generateCreateSQL(IndexMapRenderObject.values()));
-        stat.execute(IndexConstants.generateCreateIndexSQL(IndexMapRenderObject.values()));
         stat.execute(IndexConstants.generateCreateSQL(IndexBinaryMapRenderObject.values()));
         stat.execute(IndexConstants.generateCreateIndexSQL(IndexBinaryMapRenderObject.values()));
-        stat.execute("CREATE VIRTUAL TABLE "+IndexConstants.indexMapLocationsTable+" USING rtree (id, minLon, maxLon, minLat, maxLat);"); //$NON-NLS-1$ //$NON-NLS-2$
-        stat.execute("CREATE VIRTUAL TABLE "+IndexConstants.indexMapLocationsTable2+" USING rtree (id, minLon, maxLon, minLat, maxLat);"); //$NON-NLS-1$ //$NON-NLS-2$
-        stat.execute("CREATE VIRTUAL TABLE "+IndexConstants.indexMapLocationsTable3+" USING rtree (id, minLon, maxLon, minLat, maxLat);"); //$NON-NLS-1$ //$NON-NLS-2$
-        stat.execute("PRAGMA user_version = " + IndexConstants.MAP_TABLE_VERSION); //$NON-NLS-1$
         stat.close();
 	}
-	
-	public static PreparedStatement createStatementMapWaysInsert(Connection conn) throws SQLException{
-		assert IndexMapRenderObject.values().length == 4;
-        return conn.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexMapRenderObject.getTable(), 4));
-	}
-	
+
 	public static PreparedStatement createStatementMapBinaryInsert(Connection conn) throws SQLException{
-		assert IndexBinaryMapRenderObject.values().length == 5;
-        return conn.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexBinaryMapRenderObject.getTable(), 5));
+		assert IndexBinaryMapRenderObject.values().length == 6;
+        return conn.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexBinaryMapRenderObject.getTable(), 6));
 	}
-	public static PreparedStatement createStatementMapWaysLocationsInsert(Connection conn) throws SQLException{
-        return conn.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexConstants.indexMapLocationsTable, 5));
-	}
-	public static PreparedStatement createStatementMapWaysLocationsInsertLevel2(Connection conn) throws SQLException{
-        return conn.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexConstants.indexMapLocationsTable2, 5));
-	}
-	
-	public static PreparedStatement createStatementMapWaysLocationsInsertLevel3(Connection conn) throws SQLException{
-        return conn.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexConstants.indexMapLocationsTable3, 5));
-	}
+
 	
 	
-	public static void insertMapRenderObjectIndex(Map<PreparedStatement, Integer> statements, 
-			PreparedStatement mapStat, PreparedStatement mapWayLocationsStat, 
-			RTree mapTree, Entity e, String name,
-			long id, int type, List<Integer> typeUse, List<Long> restrictions, boolean writeRestrictions,
+	public static void insertBinaryMapRenderObjectIndex(Map<PreparedStatement, Integer> statements, 
+			PreparedStatement mapBinaryStat, RTree mapTree, Entity e, String name,
+			long id, int type, List<Integer> typeUse, int highwayAttributes, List<Long> restrictions, 	
 			boolean inversePath, boolean writeAsPoint, int batchSize) throws SQLException {
-		assert IndexMapRenderObject.values().length == 4;
+		assert IndexBinaryMapRenderObject.values().length == 6;
 		if(e instanceof Relation){
 			throw new IllegalArgumentException();
 		}
@@ -236,10 +216,6 @@ public class DataIndexWriter {
 		int maxX = 0;
 		int minY = Integer.MAX_VALUE;
 		int maxY = 0;
-		double minLat = 180;
-		double maxLat = -180;
-		double minLon = 360;
-		double maxLon = -360;
 		Collection<Node> nodes; 
 		if (e instanceof Way) {
 			if (writeAsPoint) {
@@ -256,68 +232,43 @@ public class DataIndexWriter {
 			Collections.reverse((List<?>) nodes);
 		}
 		
-		byte[] bytes;
-		int offset = 0;
-		boolean multiType = (type & 1) == 1;
-		int len = nodes.size() * 8;
-		if(multiType){
-			len += typeUse.size() * 2 + 1;
-		}
-		if(writeRestrictions){
-			len += restrictions.size() * 8 + 1;
-		}
-		bytes = new byte[len];
-		if(multiType){
-			bytes[offset++] = (byte) typeUse.size();
-		}
-		if(writeRestrictions){
-			bytes[offset++] = (byte) restrictions.size();
-		}
-		if(multiType){
-			for(Integer i : typeUse){
-				Algoritms.putSmallIntBytes(bytes, offset, i);
-				offset += 2;
-			}
-		}
-		if(writeRestrictions){
-			for(Long i : restrictions){
-				Algoritms.putLongToBytes(bytes, offset, i);
-				offset += 8;
-			}
-		}
-			
 		ByteArrayOutputStream bnodes = new ByteArrayOutputStream();
 		ByteArrayOutputStream btypes = new ByteArrayOutputStream();
 		ByteArrayOutputStream brestrictions = new ByteArrayOutputStream();
-		for (Node n : nodes) {
-			if (n != null) {
-				int y = MapUtils.get31TileNumberY(n.getLatitude());
-				int x = MapUtils.get31TileNumberX(n.getLongitude());
-				minLat = Math.min(minLat, n.getLatitude());
-				maxLat = Math.max(maxLat, n.getLatitude());
-				minLon = Math.min(minLon, n.getLongitude());
-				maxLon = Math.max(maxLon, n.getLongitude());
-				minX = Math.min(minX, x);
-				maxX = Math.max(maxX, x);
-				minY = Math.min(minY, y);
-				maxY = Math.max(maxY, y);
-				init = true;
-				Algoritms.putIntToBytes(bytes, offset, y);
-				offset += 4;
-				Algoritms.putIntToBytes(bytes, offset, x);
-				offset += 4;
-				
-				
+		
+		try {
+			Algoritms.writeSmallInt(btypes, type);
+			for (Integer i : typeUse) {
+				Algoritms.writeSmallInt(btypes, i);
 			}
+			for (Long i : restrictions) {
+				Algoritms.writeLongInt(brestrictions, i);
+			}
+
+			for (Node n : nodes) {
+				if (n != null) {
+					int y = MapUtils.get31TileNumberY(n.getLatitude());
+					int x = MapUtils.get31TileNumberX(n.getLongitude());
+					minX = Math.min(minX, x);
+					maxX = Math.max(maxX, x);
+					minY = Math.min(minY, y);
+					maxY = Math.max(maxY, y);
+					init = true;
+					Algoritms.writeInt(bnodes, x);
+					Algoritms.writeInt(bnodes, y);
+				}
+			}
+		} catch (IOException es) {
+			throw new IllegalStateException(es);
 		}
 		if (init) {
-			
-			
-			mapStat.setLong(IndexMapRenderObject.ID.ordinal() + 1, id);
-			mapStat.setInt(IndexMapRenderObject.TYPE.ordinal() + 1, type);
-			mapStat.setString(IndexMapRenderObject.NAME.ordinal() + 1, name);
-			mapStat.setBytes(IndexMapRenderObject.NODES.ordinal() + 1, bytes);
-			addBatch(statements, mapStat);
+			mapBinaryStat.setLong(IndexBinaryMapRenderObject.ID.ordinal() + 1, id);
+			mapBinaryStat.setBytes(IndexBinaryMapRenderObject.TYPES.ordinal() + 1, btypes.toByteArray());
+			mapBinaryStat.setBytes(IndexBinaryMapRenderObject.RESTRICTIONS.ordinal() + 1, brestrictions.toByteArray());
+			mapBinaryStat.setBytes(IndexBinaryMapRenderObject.NODES.ordinal() + 1, bnodes.toByteArray());
+			mapBinaryStat.setInt(IndexBinaryMapRenderObject.HIGHWAY.ordinal() + 1, highwayAttributes);
+			mapBinaryStat.setString(IndexBinaryMapRenderObject.NAME.ordinal() + 1, name);
+			addBatch(statements, mapBinaryStat);
 		
 			
 			try {
@@ -327,17 +278,6 @@ public class DataIndexWriter {
 			} catch (IllegalValueException e1) {
 				throw new IllegalArgumentException(e1);
 			}
-
-			mapWayLocationsStat.setLong(1, id);
-			mapWayLocationsStat.setFloat(2, (float) minLon);
-			mapWayLocationsStat.setFloat(3, (float) maxLon);
-			mapWayLocationsStat.setFloat(4, (float) minLat);
-			mapWayLocationsStat.setFloat(5, (float) maxLat);
-//			mapWayLocationsStat.setInt(2, minX);
-//			mapWayLocationsStat.setInt(3, maxX);
-//			mapWayLocationsStat.setInt(4, minY);
-//			mapWayLocationsStat.setInt(5, maxY);
-			addBatch(statements, mapWayLocationsStat);
 		}
 	}
 	private static void addBatch(Map<PreparedStatement, Integer> count, PreparedStatement p) throws SQLException{
