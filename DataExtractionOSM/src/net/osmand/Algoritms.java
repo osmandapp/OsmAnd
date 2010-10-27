@@ -146,6 +146,43 @@ public class Algoritms {
 		bytes[offset + 3] = (byte) (l & 0xff);
 	}
 	
+	
+	public static void writeLongInt(OutputStream stream, long l) throws IOException {
+		stream.write((int) (l & 0xff));
+		l >>= 8;
+		stream.write((int) (l & 0xff));
+		l >>= 8;
+		stream.write((int) (l & 0xff));
+		l >>= 8;
+		stream.write((int) (l & 0xff));
+		l >>= 8;
+		stream.write((int) (l & 0xff));
+		l >>= 8;
+		stream.write((int) (l & 0xff));
+		l >>= 8;
+		stream.write((int) (l & 0xff));
+		l >>= 8;
+		stream.write((int) (l & 0xff));
+	}
+	
+	public static void writeInt(OutputStream stream, int l) throws IOException {
+		stream.write(l & 0xff);
+		l >>= 8;
+		stream.write(l & 0xff);
+		l >>= 8;
+		stream.write(l & 0xff);
+		l >>= 8;
+		stream.write(l & 0xff);
+	}
+	
+
+	public static void writeSmallInt(OutputStream stream, int l) throws IOException {
+		stream.write(l & 0xff);
+		l >>= 8;
+		stream.write(l & 0xff);
+		l >>= 8;
+	}
+	
 	public static int parseSmallIntFromBytes(byte[] bytes, int offset) {
 		int s = (0xff & bytes[offset + 1]) << 8;
 		s |= (0xff & bytes[offset + 0]);
