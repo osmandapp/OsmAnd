@@ -2310,17 +2310,12 @@ public final class OsmandOdb {
     public boolean hasCoordinates() { return hasCoordinates; }
     public com.google.protobuf.ByteString getCoordinates() { return coordinates_; }
     
-    // repeated sint32 types = 2;
+    // required bytes types = 2;
     public static final int TYPES_FIELD_NUMBER = 2;
-    private java.util.List<java.lang.Integer> types_ =
-      java.util.Collections.emptyList();
-    public java.util.List<java.lang.Integer> getTypesList() {
-      return types_;
-    }
-    public int getTypesCount() { return types_.size(); }
-    public int getTypes(int index) {
-      return types_.get(index);
-    }
+    private boolean hasTypes;
+    private com.google.protobuf.ByteString types_ = com.google.protobuf.ByteString.EMPTY;
+    public boolean hasTypes() { return hasTypes; }
+    public com.google.protobuf.ByteString getTypes() { return types_; }
     
     // required sint64 id = 3;
     public static final int ID_FIELD_NUMBER = 3;
@@ -2348,10 +2343,18 @@ public final class OsmandOdb {
       return restrictions_.get(index);
     }
     
+    // optional int32 highwayMeta = 6;
+    public static final int HIGHWAYMETA_FIELD_NUMBER = 6;
+    private boolean hasHighwayMeta;
+    private int highwayMeta_ = 0;
+    public boolean hasHighwayMeta() { return hasHighwayMeta; }
+    public int getHighwayMeta() { return highwayMeta_; }
+    
     private void initFields() {
     }
     public final boolean isInitialized() {
       if (!hasCoordinates) return false;
+      if (!hasTypes) return false;
       if (!hasId) return false;
       return true;
     }
@@ -2362,8 +2365,8 @@ public final class OsmandOdb {
       if (hasCoordinates()) {
         output.writeBytes(1, getCoordinates());
       }
-      for (int element : getTypesList()) {
-        output.writeSInt32(2, element);
+      if (hasTypes()) {
+        output.writeBytes(2, getTypes());
       }
       if (hasId()) {
         output.writeSInt64(3, getId());
@@ -2373,6 +2376,9 @@ public final class OsmandOdb {
       }
       for (long element : getRestrictionsList()) {
         output.writeSInt64(5, element);
+      }
+      if (hasHighwayMeta()) {
+        output.writeInt32(6, getHighwayMeta());
       }
       getUnknownFields().writeTo(output);
     }
@@ -2387,14 +2393,9 @@ public final class OsmandOdb {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(1, getCoordinates());
       }
-      {
-        int dataSize = 0;
-        for (int element : getTypesList()) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeSInt32SizeNoTag(element);
-        }
-        size += dataSize;
-        size += 1 * getTypesList().size();
+      if (hasTypes()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getTypes());
       }
       if (hasId()) {
         size += com.google.protobuf.CodedOutputStream
@@ -2412,6 +2413,10 @@ public final class OsmandOdb {
         }
         size += dataSize;
         size += 1 * getRestrictionsList().size();
+      }
+      if (hasHighwayMeta()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, getHighwayMeta());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2555,10 +2560,6 @@ public final class OsmandOdb {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
         }
-        if (result.types_ != java.util.Collections.EMPTY_LIST) {
-          result.types_ =
-            java.util.Collections.unmodifiableList(result.types_);
-        }
         if (result.restrictions_ != java.util.Collections.EMPTY_LIST) {
           result.restrictions_ =
             java.util.Collections.unmodifiableList(result.restrictions_);
@@ -2582,11 +2583,8 @@ public final class OsmandOdb {
         if (other.hasCoordinates()) {
           setCoordinates(other.getCoordinates());
         }
-        if (!other.types_.isEmpty()) {
-          if (result.types_.isEmpty()) {
-            result.types_ = new java.util.ArrayList<java.lang.Integer>();
-          }
-          result.types_.addAll(other.types_);
+        if (other.hasTypes()) {
+          setTypes(other.getTypes());
         }
         if (other.hasId()) {
           setId(other.getId());
@@ -2599,6 +2597,9 @@ public final class OsmandOdb {
             result.restrictions_ = new java.util.ArrayList<java.lang.Long>();
           }
           result.restrictions_.addAll(other.restrictions_);
+        }
+        if (other.hasHighwayMeta()) {
+          setHighwayMeta(other.getHighwayMeta());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2629,17 +2630,8 @@ public final class OsmandOdb {
               setCoordinates(input.readBytes());
               break;
             }
-            case 16: {
-              addTypes(input.readSInt32());
-              break;
-            }
             case 18: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              while (input.getBytesUntilLimit() > 0) {
-                addTypes(input.readSInt32());
-              }
-              input.popLimit(limit);
+              setTypes(input.readBytes());
               break;
             }
             case 24: {
@@ -2661,6 +2653,10 @@ public final class OsmandOdb {
                 addRestrictions(input.readSInt64());
               }
               input.popLimit(limit);
+              break;
+            }
+            case 48: {
+              setHighwayMeta(input.readInt32());
               break;
             }
           }
@@ -2689,37 +2685,24 @@ public final class OsmandOdb {
         return this;
       }
       
-      // repeated sint32 types = 2;
-      public java.util.List<java.lang.Integer> getTypesList() {
-        return java.util.Collections.unmodifiableList(result.types_);
+      // required bytes types = 2;
+      public boolean hasTypes() {
+        return result.hasTypes();
       }
-      public int getTypesCount() {
-        return result.getTypesCount();
+      public com.google.protobuf.ByteString getTypes() {
+        return result.getTypes();
       }
-      public int getTypes(int index) {
-        return result.getTypes(index);
-      }
-      public Builder setTypes(int index, int value) {
-        result.types_.set(index, value);
-        return this;
-      }
-      public Builder addTypes(int value) {
-        if (result.types_.isEmpty()) {
-          result.types_ = new java.util.ArrayList<java.lang.Integer>();
-        }
-        result.types_.add(value);
-        return this;
-      }
-      public Builder addAllTypes(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        if (result.types_.isEmpty()) {
-          result.types_ = new java.util.ArrayList<java.lang.Integer>();
-        }
-        super.addAll(values, result.types_);
+      public Builder setTypes(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasTypes = true;
+        result.types_ = value;
         return this;
       }
       public Builder clearTypes() {
-        result.types_ = java.util.Collections.emptyList();
+        result.hasTypes = false;
+        result.types_ = getDefaultInstance().getTypes();
         return this;
       }
       
@@ -2793,6 +2776,24 @@ public final class OsmandOdb {
         return this;
       }
       
+      // optional int32 highwayMeta = 6;
+      public boolean hasHighwayMeta() {
+        return result.hasHighwayMeta();
+      }
+      public int getHighwayMeta() {
+        return result.getHighwayMeta();
+      }
+      public Builder setHighwayMeta(int value) {
+        result.hasHighwayMeta = true;
+        result.highwayMeta_ = value;
+        return this;
+      }
+      public Builder clearHighwayMeta() {
+        result.hasHighwayMeta = false;
+        result.highwayMeta_ = 0;
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:MapData)
     }
     
@@ -2855,10 +2856,11 @@ public final class OsmandOdb {
       "top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022!\n\013stringTable" +
       "\030\005 \001(\0132\014.StringTable\022\016\n\006baseId\030\006 \001(\004\022\032\n\010",
       "subtrees\030\007 \003(\0132\010.MapTree\022\027\n\005leafs\030\010 \003(\0132" +
-      "\010.MapData\"\030\n\013StringTable\022\t\n\001s\030\001 \003(\t\"a\n\007M" +
-      "apData\022\023\n\013coordinates\030\001 \002(\014\022\r\n\005types\030\002 \003" +
-      "(\021\022\n\n\002id\030\003 \002(\022\022\020\n\010stringId\030\004 \001(\r\022\024\n\014rest" +
-      "rictions\030\005 \003(\022B\023\n\021net.osmand.binary"
+      "\010.MapData\"\030\n\013StringTable\022\t\n\001s\030\001 \003(\t\"v\n\007M" +
+      "apData\022\023\n\013coordinates\030\001 \002(\014\022\r\n\005types\030\002 \002" +
+      "(\014\022\n\n\002id\030\003 \002(\022\022\020\n\010stringId\030\004 \001(\r\022\024\n\014rest" +
+      "rictions\030\005 \003(\022\022\023\n\013highwayMeta\030\006 \001(\005B\023\n\021n" +
+      "et.osmand.binary"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2910,7 +2912,7 @@ public final class OsmandOdb {
           internal_static_MapData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_MapData_descriptor,
-              new java.lang.String[] { "Coordinates", "Types", "Id", "StringId", "Restrictions", },
+              new java.lang.String[] { "Coordinates", "Types", "Id", "StringId", "Restrictions", "HighwayMeta", },
               net.osmand.binary.OsmandOdb.MapData.class,
               net.osmand.binary.OsmandOdb.MapData.Builder.class);
           return null;

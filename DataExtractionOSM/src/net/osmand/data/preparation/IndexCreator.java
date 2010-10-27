@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.RandomAccessFile;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -38,6 +39,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.data.City.CityType;
 import net.osmand.data.index.DataIndexWriter;
 import net.osmand.data.index.IndexConstants;
+import net.osmand.data.index.IndexConstants.IndexBinaryMapRenderObject;
 import net.osmand.data.index.IndexConstants.IndexBuildingTable;
 import net.osmand.data.index.IndexConstants.IndexCityTable;
 import net.osmand.data.index.IndexConstants.IndexStreetNodeTable;
@@ -147,11 +149,9 @@ public class IndexCreator {
 	
 	private File mapFile;
 	private Connection mapConnection;
-	private PreparedStatement mapObjStat;
-	private PreparedStatement mapLocsStatLevel0;
-	private PreparedStatement mapLocsStatLevel1;
-	private PreparedStatement mapLocsStatLevel2;
-	private RTree mapTree;
+	private PreparedStatement mapBinaryStat;
+	private static final int[] MAP_ZOOMS = new int[]{6, 9, 14, 22};
+	private RTree[] mapTree = null;
 	
 	private File binaryMapFile;
 	
@@ -982,9 +982,10 @@ public class IndexCreator {
 				// manipulate what kind of way to load
 				loadEntityData(e, true);
 				boolean inverse = "-1".equals(e.getTag(OSMTagKey.ONEWAY));
-				writeBinaryEntityToMapDatabase(e, e.getId(), inverse, 0);
-				writeBinaryEntityToMapDatabase(e, e.getId(), false, 1);
-				writeBinaryEntityToMapDatabase(e, e.getId(), false, 2);
+				for (int i = 0; i < MAP_ZOOMS.length - 1; i++) {
+					writeBinaryEntityToMapDatabase(e, e.getId(), i == 0 ? inverse : false, i);
+				}
+				
 			}
 
 			if (indexAddress) {
@@ -1382,10 +1383,8 @@ public class IndexCreator {
 			return;
 		}
 
-		boolean useRestrictions = false;
 		restrictionsUse.clear();
-		if (MapRenderingTypes.isHighwayType(type >> 1)) {
-			useRestrictions = true;
+		if (MapRenderingTypes.isHighwayType(type)) {
 			// try to find restrictions only for max zoom level
 			if (level == 0 && highwayRestrictions.containsKey(baseId)) {
 				restrictionsUse.addAll(highwayRestrictions.get(baseId));
@@ -1393,22 +1392,12 @@ public class IndexCreator {
 
 		}
 
-		boolean point = ((type >> 1) & 3) == MapRenderingTypes.POINT_TYPE;
-		PreparedStatement mapLocations;
+		boolean point = (type & 3) == MapRenderingTypes.POINT_TYPE;
+		RTree rtree = null;
 		int zoom;
-		long id = baseId << 3;
-		if (level == 1) {
-			id |= 2;
-			mapLocations = mapLocsStatLevel1;
-			zoom = 12;
-		} else if (level == 2) {
-			id |= 4;
-			zoom = 7;
-			mapLocations = mapLocsStatLevel2;
-		} else {
-			zoom = 18;
-			mapLocations = mapLocsStatLevel0;
-		}
+		long id = (baseId << 3) | ((level & 3) << 1);
+		rtree = mapTree[level];
+		zoom = MAP_ZOOMS[MAP_ZOOMS.length - level - 1] - 2;
 		boolean skip = false;
 		if (e instanceof Way) {
 			id |= 1;
@@ -1448,166 +1437,45 @@ public class IndexCreator {
 		}
 
 		if (!skip) {
+			int highwayAttributes = 0;
+			if(MapRenderingTypes.isHighwayType(type)){
+				highwayAttributes = MapRenderingTypes.getHighwayAttributes(e);
+			}
 			String eName = MapRenderingTypes.getEntityName(e, type);
 			if (eName == null) {
 				eName = multiPolygonsNames.get(baseId);
 			}
-			DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapObjStat, mapLocations, mapTree, e, eName, id, type, typeUse,
-					restrictionsUse, useRestrictions, inverse, point, BATCH_SIZE);
+			DataIndexWriter.insertBinaryMapRenderObjectIndex(pStatements, mapBinaryStat, rtree, e, eName, id, 
+					type, typeUse, highwayAttributes, restrictionsUse, inverse, point, BATCH_SIZE);
 		}
 	}
 	
-
-
-
-	/*private void writeEntityToMapDatabase(Entity e, long baseId, boolean inverse, int level) throws SQLException {
-		int type = MapRenderingTypes.encodeEntityWithType(e, level, false, typeUse);
-		Map<Long, Set<Integer>> multiPolygonsWays;
-		if(level == 0){
-			multiPolygonsWays = multiPolygonsWays0;
-		} else if(level == 1){
-			multiPolygonsWays = multiPolygonsWays1;
-		} else if(level == 2){
-			multiPolygonsWays = multiPolygonsWays2;
-		} else {
-			multiPolygonsWays = Collections.emptyMap();
-		}
-		boolean hasMulti = e instanceof Way && multiPolygonsWays.containsKey(e.getId());
-		if(type == 0){
-			if(hasMulti){
-				Set<Integer> set = multiPolygonsWays.get(e.getId());
-				boolean first = true;
-				for(Integer i : set){
-					if(first){
-						type = i << 1;
-						first = false;
-					} else {
-						typeUse.add(i);
-					}
-				}
-			} else {
-				return;
-			}
-		} else if(hasMulti){
-			Set<Integer> set = multiPolygonsWays.get(e.getId());
-			for(Integer i : set){
-				// do not compare direction
-				int k = i & 0x7fff; 
-				int ks = k | MapRenderingTypes.POLYGON_TYPE;
-				// turn of polygon type 3 ^ (suppose polygon = multipolygon)
-				if(ks == ((type >> 1) & 0xffff)){
-					type = ((type >> 16) << 16) | (i << 1); 
-				} else if(ks == type >> 16){
-					type = (type & 0xffff) | (i << 16);
-				} else  {
-					int ind = typeUse.indexOf(ks);
-					if (ind == -1) {
-						typeUse.add(i);
-					} else {
-						typeUse.set(ind, i);
-					}
-				}
-				
-			}
-		}
-		
-		// be sure about last segments
-		if(!typeUse.isEmpty()){
-			type |= 1;
-		}
-		
-		boolean useRestrictions = false;
-		restrictionsUse.clear();
-		if(MapRenderingTypes.isHighwayType(type >> 1)){
-			useRestrictions = true;
-			// try to find restrictions only for max zoom level
-			if(level == 0 && highwayRestrictions.containsKey(baseId)){
-				restrictionsUse.addAll(highwayRestrictions.get(baseId));
-			}
-			
-		}
-		
-		boolean point = ((type >> 1) & 3) == MapRenderingTypes.POINT_TYPE;
-		PreparedStatement mapLocations;
-		int zoom;
-		long id = baseId << 3;
-		if (level == 1) {
-			id |= 2;
-			mapLocations = mapLocsStatLevel1;
-			zoom = 12;
-		} else if (level == 2) {
-			id |= 4;
-			zoom = 7;
-			mapLocations = mapLocsStatLevel2;
-		} else {
-			zoom = 18;
-			mapLocations = mapLocsStatLevel0;
-		}
-		boolean skip = false;
-		if (e instanceof Way) {
-			id |= 1;
-			// simplify route
-			if (level > 0) {
-				List<Node> nodes = ((Way) e).getNodes();
-				Way way = new Way(id);
-				for(String t : e.getTagKeySet()){
-					way.putTag(t, e.getTag(t));
-				}
-				int prevX = 0;
-				int prevY = 0;
-				int len = 0;
-				for (int i = 0; i < nodes.size(); i++) {
-					// do not simplify last node it could be important node for multipolygon
-					if (nodes.get(i) != null) {
-						int r = i < nodes.size() - 1 ? 4 : 0;
-						int x = (int) (MapUtils.getTileNumberX(zoom, nodes.get(i).getLongitude()) * 256d);
-						int y = (int) (MapUtils.getTileNumberY(zoom, nodes.get(i).getLatitude()) * 256d);
-						int dy = Math.abs(y - prevY);
-						int dx = Math.abs(x - prevX);
-						if (dx > r || dy > r) {
-							way.addNode(nodes.get(i));
-							len += (dx + dy);
-							prevX = x;
-							prevY = y;
-						}
-					}
-				}
-				e = way;
-				skip = way.getNodes().size() < 2;
-				if(!hasMulti && len < 8){
-					skip = true;
-				}
-			}
-			
-		}
-
-		
-		if (!skip) {
-			String eName = MapRenderingTypes.getEntityName(e, type);
-			if(eName == null ){
-				eName = multiPolygonsNames.get(baseId);
-			}
-			DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapObjStat, mapLocations, mapTree, e,  
-					eName, id, type, typeUse, restrictionsUse, useRestrictions,
-					inverse, point, BATCH_SIZE);
-		}
-	}
-	*/
 	
-	public void writeBinaryData(RTree rtree) throws IOException {
+	public void writeBinaryData() throws IOException, SQLException {
+		
 		try {
-			long rootIndex = rtree.getFileHdr().getRootIndex();
+			assert IndexConstants.IndexBinaryMapRenderObject.values().length == 6;
+			PreparedStatement selectData = mapConnection.prepareStatement("SELECT * FROM " + IndexBinaryMapRenderObject.getTable() + " WHERE id = ?");
+			
 			binaryMapFile = new File(workingDir, getBinaryMapFileName());
 			FileOutputStream fout = new FileOutputStream(binaryMapFile);
 			BinaryIndexWriter writer = new BinaryIndexWriter(fout);
 			writer.startWriteMapIndex();
-			rtree.Node root = rtree.getReadNode(rootIndex);
-			Rect rootBounds = calcBounds(root);
-			writer.startWriteMapLevelIndex(6, 17, rootBounds.getMinX(), rootBounds.getMaxX(), rootBounds.getMinY(), rootBounds.getMaxY());
 			
-			writeBinaryMapTree(root, rtree, writer);
+			for (int i = 0; i < MAP_ZOOMS.length - 1; i++) {
+				RTree rtree = mapTree[i];
+				long rootIndex = rtree.getFileHdr().getRootIndex();
+				rtree.Node root = rtree.getReadNode(rootIndex);
+				Rect rootBounds = calcBounds(root);
+				writer.startWriteMapLevelIndex(MAP_ZOOMS[MAP_ZOOMS.length - i - 2] + 1, 
+						MAP_ZOOMS[MAP_ZOOMS.length - i - 1], rootBounds.getMinX(),
+						rootBounds.getMaxX(), rootBounds.getMinY(), rootBounds.getMaxY());
+				writeBinaryMapTree(root, rtree, writer, selectData);
+
+				writer.endWriteMapLevelIndex();
+			}
 			
-			writer.endWriteMapLevelIndex();
+			
 			writer.endWriteMapIndex();
 			writer.close();
 		} catch (RTreeException e) {
@@ -1615,19 +1483,26 @@ public class IndexCreator {
 		}
 	}
 	
-	public void writeBinaryMapTree(rtree.Node parent, RTree r, BinaryIndexWriter writer) throws IOException, RTreeException {
+	public void writeBinaryMapTree(rtree.Node parent, RTree r, BinaryIndexWriter writer, PreparedStatement selectData) throws IOException, RTreeException, SQLException {
 		Element[] e = parent.getAllElements();
 		for (int i = 0; i < parent.getTotalElements(); i++) {
 			Rect re = e[i].getRect();
 			 if(e[i].getElementType() == rtree.Node.LEAF_NODE){
-				 // TODO
-				 long ptr = ((LeafElement) e[i]).getPtr();
-				 writer.writeMapData(ptr);
+				 long id = ((LeafElement) e[i]).getPtr();
+				 selectData.setLong(1, id);
+				 ResultSet rs = selectData.executeQuery();
+				 if(rs.next()){
+					 writer.writeMapData(id, rs.getBytes(IndexBinaryMapRenderObject.NODES.ordinal()+ 1), 
+							 rs.getBytes(IndexBinaryMapRenderObject.TYPES.ordinal()+ 1), rs.getString(IndexBinaryMapRenderObject.NAME.ordinal()+ 1),  
+							 rs.getInt(IndexBinaryMapRenderObject.HIGHWAY.ordinal()+ 1),  rs.getBytes(IndexBinaryMapRenderObject.RESTRICTIONS.ordinal()+ 1));
+				 } else {
+					 log.error("Something goes wrong with id = " + id);
+				 }
 			 } else {
 				 long ptr = ((NonLeafElement) e[i]).getPtr();
 				 writer.startMapTreeElement(re.getMinX(), re.getMaxX(), re.getMinY(), re.getMaxY());
 				 rtree.Node ns = r.getReadNode(ptr);
-				 writeBinaryMapTree(ns, r, writer);
+				 writeBinaryMapTree(ns, r, writer, selectData);
 				 writer.endWriteMapTreeElement();
 			 }
 		}
@@ -1776,23 +1651,22 @@ public class IndexCreator {
 				mapConnection = DriverManager.getConnection("jdbc:sqlite:" + mapFile.getAbsolutePath());
 
 				DataIndexWriter.createMapIndexStructure(mapConnection);
-				mapObjStat = DataIndexWriter.createStatementMapWaysInsert(mapConnection);
-				mapLocsStatLevel0 = DataIndexWriter.createStatementMapWaysLocationsInsert(mapConnection);
-				mapLocsStatLevel1 = DataIndexWriter.createStatementMapWaysLocationsInsertLevel2(mapConnection);
-				mapLocsStatLevel2 = DataIndexWriter.createStatementMapWaysLocationsInsertLevel3(mapConnection);
+				mapBinaryStat = DataIndexWriter.createStatementMapBinaryInsert(mapConnection);
 				try {
-				   File file = new File(getRTreeMapIndexNonPackFileName());
-				   if(file.exists()){
-					   file.delete();
-				   }
-				   mapTree = new RTree(getRTreeMapIndexNonPackFileName());
+					mapTree = new RTree[MAP_ZOOMS.length - 1];
+					for (int i = 0; i < MAP_ZOOMS.length - 1; i++) {
+						File file = new File(getRTreeMapIndexNonPackFileName() + i);
+						if (file.exists()) {
+							file.delete();
+						}
+						mapTree[i] = new RTree(getRTreeMapIndexNonPackFileName() + i);
+						// very slow
+						//mapTree[i].getFileHdr().setBufferPolicy(true);
+					}
 				} catch (RTreeException e) {
 				   throw new IOException(e);
 				}
-				pStatements.put(mapObjStat, 0);
-				pStatements.put(mapLocsStatLevel0, 0);
-				pStatements.put(mapLocsStatLevel1, 0);
-				pStatements.put(mapLocsStatLevel2, 0);
+				pStatements.put(mapBinaryStat, 0);
 				mapConnection.setAutoCommit(false);
 			}
 
@@ -1950,23 +1824,33 @@ public class IndexCreator {
 				progress.setGeneralProgress("[95 of 100]");
 				progress.startTask("Serializing map data...", -1);
 				try {
-					mapTree.flush();
+					for (int i = 0; i < MAP_ZOOMS.length-1; i++) {
+						mapTree[i].flush();
+						File file = new File(getRTreeMapIndexPackFileName() + i);
+						if (file.exists()) {
+							file.delete();
+						}
+						
+						new Pack().packTree(mapTree[i], getRTreeMapIndexPackFileName() + i);
+						mapTree[i].getFileHdr().getFile().close();
+						file = new File(getRTreeMapIndexNonPackFileName() + i);
+						file.delete();
+						
+						mapTree[i] = new RTree(getRTreeMapIndexPackFileName() + i);
+					}
 				} catch (RTreeException e) {
 					log.error("Error flushing", e);
+					throw new IOException(e);
 				}
-				File file = new File(getRTreeMapIndexPackFileName());
-				if (file.exists()) {
-					file.delete();
-				}
-				new Pack().packTree(mapTree, getRTreeMapIndexPackFileName());
-				mapTree = null;
+				// update map connection
+				mapBinaryStat.executeBatch();
+				pStatements.remove(mapBinaryStat);
+				mapConnection.commit();
+				
 				// TODO !!! create binary output stream in order to close it properly (finally)
-				writeBinaryData(new RTree(getRTreeMapIndexPackFileName()));
-
+				writeBinaryData();
 			}
 
-		} catch (RTreeException e) {
-			throw new IOException(e);
 		} finally {
 			try {
 				if (pselectNode != null) {
@@ -2013,20 +1897,32 @@ public class IndexCreator {
 						mapFile.setLastModified(lastModifiedDate);
 					}
 				}
-				if(mapTree != null){
-					try {
-						 mapTree.flush();
-					 } catch (RTreeException e) {
-						 log.error("Error flushing", e);
-					 }
-				}
-
+				
 				if (addressConnection != null) {
 					addressConnection.commit();
 					addressConnection.close();
 					addressConnection = null;
 					if (lastModifiedDate != null) {
 						addressIndexFile.setLastModified(lastModifiedDate);
+					}
+				}
+
+				
+				for (int i = 0; i < mapTree.length; i++) {
+					if (mapTree[i] != null) {
+						RandomAccessFile file = mapTree[i].getFileHdr().getFile();
+						file.close();
+					}
+
+				}
+				for (int i = 0; i < mapTree.length; i++) {
+					File f = new File(getRTreeMapIndexNonPackFileName() + i);
+					if (f.exists()) {
+						f.delete();
+					}
+					f = new File(getRTreeMapIndexPackFileName() + i);
+					if (f.exists()) {
+						f.delete();
 					}
 				}
 				dbConn.close();

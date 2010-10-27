@@ -382,9 +382,10 @@ public class CachedNodes
   
   int calKey(String fileName,int idx)
   {
-    if(fileName != null)
-      return (idx + fileName.toLowerCase().hashCode());
-    else{
+    if(fileName != null) {
+//      System.out.println(idx + " " + fileName + " " + ((idx << 5)+ fileName.toLowerCase().hashCode() % 32));
+      return ((idx << 5)+ fileName.toLowerCase().hashCode() % 32);
+    } else{
       System.out.println("CachedNodes.calKey: fileName null");
       return 0;
     }

@@ -454,7 +454,7 @@ public class IndexConstants {
 	}
 	
 	public enum IndexBinaryMapRenderObject implements IndexColumn {
-		ID("long", true), NAME, TYPES("BLOB"), RESTRICTIONS("BLOB"), NODES("BLOB");  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		ID("long", true), NAME, TYPES("BLOB"), RESTRICTIONS("BLOB"), NODES("BLOB"), HIGHWAY("INT");  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		boolean index = false;
 		String type = null;
 
