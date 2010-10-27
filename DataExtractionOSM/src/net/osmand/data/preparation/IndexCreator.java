@@ -4,9 +4,9 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,7 +28,8 @@ import java.util.Map.Entry;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
-import net.osmand.binary.BinaryIndexWriter;
+import net.osmand.binary.BinaryMapIndexWriter;
+import net.osmand.binary.OsmandOdb;
 import net.osmand.data.Amenity;
 import net.osmand.data.Building;
 import net.osmand.data.City;
@@ -76,6 +77,8 @@ import rtree.Pack;
 import rtree.RTree;
 import rtree.RTreeException;
 import rtree.Rect;
+
+import com.google.protobuf.CodedOutputStream;
 
 
 /**
@@ -148,12 +151,11 @@ public class IndexCreator {
 	private PreparedStatement addressStreetNodeStat;
 	
 	private File mapFile;
+	private RandomAccessFile mapRAFile;
 	private Connection mapConnection;
 	private PreparedStatement mapBinaryStat;
 	private static final int[] MAP_ZOOMS = new int[]{6, 9, 14, 22};
 	private RTree[] mapTree = null;
-	
-	private File binaryMapFile;
 	
 	// MEMORY map :  save it in memory while that is allowed
 	private Map<Long, Set<Integer>> multiPolygonsWays0 = new LinkedHashMap<Long, Set<Integer>>();
@@ -467,19 +469,13 @@ public class IndexCreator {
 	}
 	public String getMapFileName() {
 		if(mapFileName == null){
-			return getRegionName() + IndexConstants.MAP_INDEX_EXT;
+			return getRegionName() + IndexConstants.BINARY_MAP_INDEX_EXT;
 		}
 		return mapFileName;
 	}
 	
-	public void setBinaryMapFileName(String mapFileName) {
-		this.binaryMapFileName = mapFileName;
-	}
-	public String getBinaryMapFileName(){
-		if(binaryMapFileName == null){
-			return getRegionName() + IndexConstants.BINARY_MAP_INDEX_EXT;
-		}
-		return binaryMapFileName;
+	public String getTempMapDBFileName(){
+		return getMapFileName() + ".tmp";
 	}
 	
 	public String getTransportFileName() {
@@ -1073,6 +1069,7 @@ public class IndexCreator {
 						type = MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON;
 					}
 					if(type != -1){
+						loadEntityData(e, true);
 						Collection<EntityId> fromL = ((Relation) e).getMemberIds("from");
 						Collection<EntityId> toL = ((Relation) e).getMemberIds("to");
 						if(!fromL.isEmpty() && !toL.isEmpty()) {
@@ -1451,15 +1448,21 @@ public class IndexCreator {
 	}
 	
 	
-	public void writeBinaryData() throws IOException, SQLException {
-		
+	public void writeBinaryMapIndex() throws IOException, SQLException {
 		try {
 			assert IndexConstants.IndexBinaryMapRenderObject.values().length == 6;
 			PreparedStatement selectData = mapConnection.prepareStatement("SELECT * FROM " + IndexBinaryMapRenderObject.getTable() + " WHERE id = ?");
 			
-			binaryMapFile = new File(workingDir, getBinaryMapFileName());
-			FileOutputStream fout = new FileOutputStream(binaryMapFile);
-			BinaryIndexWriter writer = new BinaryIndexWriter(fout);
+			CodedOutputStream codedOutStream = CodedOutputStream.newInstance(new OutputStream() {
+				@Override
+				public void write(int b) throws IOException {
+					mapRAFile.write(b);
+				}
+			});
+			codedOutStream.writeInt32(OsmandOdb.OsmAndStructure.VERSION_FIELD_NUMBER, IndexConstants.BINARY_MAP_VERSION);
+			
+			
+			BinaryMapIndexWriter writer = new BinaryMapIndexWriter(mapRAFile, codedOutStream);
 			writer.startWriteMapIndex();
 			
 			for (int i = 0; i < MAP_ZOOMS.length - 1; i++) {
@@ -1483,7 +1486,7 @@ public class IndexCreator {
 		}
 	}
 	
-	public void writeBinaryMapTree(rtree.Node parent, RTree r, BinaryIndexWriter writer, PreparedStatement selectData) throws IOException, RTreeException, SQLException {
+	public void writeBinaryMapTree(rtree.Node parent, RTree r, BinaryMapIndexWriter writer, PreparedStatement selectData) throws IOException, RTreeException, SQLException {
 		Element[] e = parent.getAllElements();
 		for (int i = 0; i < parent.getTotalElements(); i++) {
 			Rect re = e[i].getRect();
@@ -1644,11 +1647,12 @@ public class IndexCreator {
 			if (indexMap) {
 				mapFile = new File(workingDir, getMapFileName());
 				// to save space
-				if (mapFile.exists()) {
-					mapFile.delete();
-				}
 				mapFile.getParentFile().mkdirs();
-				mapConnection = DriverManager.getConnection("jdbc:sqlite:" + mapFile.getAbsolutePath());
+				File tempDBMapFile = new File(workingDir, getTempMapDBFileName());
+				if(tempDBMapFile.exists()){
+					tempDBMapFile.delete();
+				}
+				mapConnection = DriverManager.getConnection("jdbc:sqlite:" + tempDBMapFile.getAbsolutePath());
 
 				DataIndexWriter.createMapIndexStructure(mapConnection);
 				mapBinaryStat = DataIndexWriter.createStatementMapBinaryInsert(mapConnection);
@@ -1847,8 +1851,11 @@ public class IndexCreator {
 				pStatements.remove(mapBinaryStat);
 				mapConnection.commit();
 				
-				// TODO !!! create binary output stream in order to close it properly (finally)
-				writeBinaryData();
+				if(mapFile.exists()){
+					mapFile.delete();
+				}
+				mapRAFile = new RandomAccessFile(mapFile, "rw");
+				writeBinaryMapIndex();
 			}
 
 		} finally {
@@ -1888,13 +1895,20 @@ public class IndexCreator {
 						transportIndexFile.setLastModified(lastModifiedDate);
 					}
 				}
+				if(mapRAFile != null){
+					mapRAFile.close();
+				}
 
 				if (mapConnection != null) {
 					mapConnection.commit();
 					mapConnection.close();
 					mapConnection = null;
-					if (lastModifiedDate != null) {
+					if (lastModifiedDate != null && mapFile.exists()) {
 						mapFile.setLastModified(lastModifiedDate);
+					}
+					File tempDBFile = new File(getTempMapDBFileName());
+					if(tempDBFile.exists()){
+						tempDBFile.delete();
 					}
 				}
 				
