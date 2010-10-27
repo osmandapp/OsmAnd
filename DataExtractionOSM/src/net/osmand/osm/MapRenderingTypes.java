@@ -14,20 +14,19 @@ import net.osmand.osm.OSMSettings.OSMTagKey;
  * SOURCE : http://wiki.openstreetmap.org/wiki/Map_Features
  * 
  * Describing types of polygons :
- * 1. Last 3 bits define type of element : polygon, polyline, point 
+ * 1. Last 2 bits define type of element : polygon, polyline, point 
  */
 public class MapRenderingTypes {
 	
 	// TODO Internet access bits for point, polygon
 	/** standard schema :	 
-	  	Last bit describe whether types additional exist (it is needed only for main type, other consists only from 15 bits)
-	 	polygon :   aaaaa ttttt 11 _ : 15 bits
-	 	multi   :   aaaaa ttttt 00 _ : 15 bits  
+	 	polygon : ll aaaaa ttttt 11 : 14 bits
+	 	multi   : ll aaaaa ttttt 00 : 14 bits  
 				    t - object type, a - area subtype,l - layer
-		polyline :   ll ppppp ttttt 10 _ : 15 bits + 2 bits for special info (+16) 
+		polyline :   ll ppppp ttttt 10 : 14 bits  
 				   t - object type, p - polyline object type, l - layer 
-		point :   ssssssss ttttt 10 _ : 16 bits  
-				   t - object type, a - subtype
+		point :   ssss ssss ttttt 10 : 15 bits  
+				   t - object type, s - subtype
 	 */
 
 	public final static int MULTY_POLYGON_TYPE = 0;
@@ -233,12 +232,12 @@ public class MapRenderingTypes {
 	}
 	
 	// if type equals 0 no need to save that point
-	public static int encodeEntityWithType(Entity e, int level, boolean multipolygon, List<Integer> addTypes) {
+	public static int encodeEntityWithType(Entity e, int level, boolean multipolygon, List<Integer> additionalTypes) {
 		if (types == null) {
 			types = new LinkedHashMap<String, MapRulType>();
 			init(INIT_RULE_TYPES);
 		}
-		addTypes.clear();
+		additionalTypes.clear();
 		if("coastline".equals(e.getTag(OSMTagKey.NATURAL))){ //$NON-NLS-1$
 			multipolygon = true;
 		}
@@ -270,7 +269,7 @@ public class MapRenderingTypes {
 		
 		// 2. 2 iterations first for exact tag=value match, second for any tag match
 		for (int i = 0; i < 2; i++) {
-			if (i == 1 && !addTypes.isEmpty()) {
+			if (i == 1 && !additionalTypes.isEmpty()) {
 				break;
 			}
 			for (String tag : tagKeySet) {
@@ -284,63 +283,47 @@ public class MapRenderingTypes {
 					int typeVal = rType.getType(val, MASK_13) << 2;
 					if (pr == POINT_TYPE && pointType == 0) {
 						pointType = POINT_TYPE | typeVal;
-						addTypes.add(pointType);
+						additionalTypes.add(pointType);
 					} else if (!point && pr == POLYLINE_TYPE) {
 						int attr = getLayerAttributes(e) << 12;
 						boolean prevPoint = (polylineType == 0 && polygonType == 0);
 						polylineType = POLYLINE_TYPE | (typeVal & MASK_12) | attr;
 						if (((polylineType >> 2) & MASK_4) == HIGHWAY || prevPoint){
-							addTypes.add(0, polylineType);
+							additionalTypes.add(0, polylineType);
 						} else { 
-							addTypes.add(polylineType);
+							additionalTypes.add(polylineType);
 						}
 					} else if (polygon && (pr == POLYGON_WITH_CENTER_TYPE || pr == POLYGON_TYPE)) {
 						boolean prevPoint = (polylineType == 0 && polygonType == 0);
 						int attr = getLayerAttributes(e) << 12;
 						polygonType = (multipolygon ? MULTY_POLYGON_TYPE : POLYGON_TYPE) | (typeVal & MASK_12) | attr;
 						if (prevPoint){
-							addTypes.add(0, polygonType);
+							additionalTypes.add(0, polygonType);
 						} else { 
-							addTypes.add(polygonType);
+							additionalTypes.add(polygonType);
 						}
 						if (pr == POLYGON_WITH_CENTER_TYPE) {
 							pointType = POINT_TYPE | typeVal;
-							addTypes.add(pointType);
+							additionalTypes.add(pointType);
 						}
 					} else if (polygon && (pr == DEFAULT_POLYGON_BUILDING)) {
 						if(polygonType == 0 && polylineType == 0){
-							polygonType = (multipolygon ? MULTY_POLYGON_TYPE : POLYGON_TYPE) | (((SUBTYPE_BUILDING << 5) | MAN_MADE) << 3);
-							addTypes.add(0, polygonType);
+							int attr = getLayerAttributes(e) << 12;
+							polygonType = (multipolygon ? MULTY_POLYGON_TYPE : POLYGON_TYPE) | (((SUBTYPE_BUILDING << 5) | MAN_MADE) << 2) | attr;
+							additionalTypes.add(0, polygonType);
 						}
 						pointType = POINT_TYPE | typeVal;
-						addTypes.add(pointType);
+						additionalTypes.add(pointType);
 					}
 				}
 			}
 		}
 		
 		int type = 0;
-		if(addTypes.isEmpty()){
-			return type;
+		if(!additionalTypes.isEmpty()){
+			type = additionalTypes.get(0);
+			additionalTypes.remove(0);
 		}
-		boolean twoBytes = true;
-		int first = addTypes.get(0);
-		addTypes.remove(0);
-		if(isHighwayType(first)){
-			twoBytes = false;
-			int	attr = getHighwayAttributes(e) << 16;
-			type = attr | (first << 1);
-		} else {
-			type = first << 1;
-		}
-		if(twoBytes && addTypes.size() > 0){
-			type |= (addTypes.get(0) << 16);
-			addTypes.remove(0);
-		}
-		if(!addTypes.isEmpty()){
-			type |= 1;
-		}
-		
 		return type;
 	}
 	
@@ -359,17 +342,15 @@ public class MapRenderingTypes {
 	}
 	
 	// HIGHWAY special attributes :
-	// T/Type			5 bit
-	// l/layer 			2 bit
 	// o/oneway			1 bit
 	// f/free toll 		1 bit
-	// r/roundabout  	1 bit (+ 1 bit direction)
+	// r/roundabout  	2 bit (+ 1 bit direction)
 	// s/max speed   	3 bit [0 - 30km/h, 1 - 50km/h, 2 - 70km/h, 3 - 90km/h, 4 - 110km/h, 5 - 130 km/h, 6 >]
 	// a/vehicle access 4 bit   (height, weight?) - one bit bicycle
 	// p/parking      	1 bit
 	// c/cycle oneway 	1 bit
 	
-	// ENCODING :  c|p|aaaa|sss|rr|f|o|ll|TTTTT|00001|01_ - 28 bit
+	// ENCODING :  c|p|aaaa|sss|rr|f|o - 13 bit
 	
 	public static int getHighwayAttributes(Entity e){
 		int attr = 0;
@@ -497,7 +478,6 @@ public class MapRenderingTypes {
 	}
 	
 	public static String getEntityName(Entity e, int mainType) {
-		mainType >>= 1;
 		if (e.getTag(OSMTagKey.REF) != null && getMainObjectType(mainType) == HIGHWAY) {
 			String ref = e.getTag(OSMTagKey.REF);
 			if (ref.length() > 5 && ref.indexOf('_') != -1) {

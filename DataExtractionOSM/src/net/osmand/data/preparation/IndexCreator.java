@@ -4,6 +4,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -26,6 +27,7 @@ import java.util.Map.Entry;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
+import net.osmand.binary.BinaryIndexWriter;
 import net.osmand.data.Amenity;
 import net.osmand.data.Building;
 import net.osmand.data.City;
@@ -64,6 +66,15 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.tools.bzip2.CBZip2InputStream;
 import org.xml.sax.SAXException;
 
+import rtree.Element;
+import rtree.IllegalValueException;
+import rtree.LeafElement;
+import rtree.NonLeafElement;
+import rtree.Pack;
+import rtree.RTree;
+import rtree.RTreeException;
+import rtree.Rect;
+
 
 /**
  * http://wiki.openstreetmap.org/wiki/OSM_tags_for_routing#Is_inside.2Foutside
@@ -101,6 +112,7 @@ public class IndexCreator {
 	private String poiFileName = null;
 	private String addressFileName = null;
 	private String mapFileName = null;
+	private String binaryMapFileName = null;
 	private Long lastModifiedDate = null;
 	
 	
@@ -139,7 +151,9 @@ public class IndexCreator {
 	private PreparedStatement mapLocsStatLevel0;
 	private PreparedStatement mapLocsStatLevel1;
 	private PreparedStatement mapLocsStatLevel2;
-//	private RTree mapTree;
+	private RTree mapTree;
+	
+	private File binaryMapFile;
 	
 	// MEMORY map :  save it in memory while that is allowed
 	private Map<Long, Set<Integer>> multiPolygonsWays0 = new LinkedHashMap<Long, Set<Integer>>();
@@ -147,8 +161,6 @@ public class IndexCreator {
 	private Map<Long, Set<Integer>> multiPolygonsWays2 = new LinkedHashMap<Long, Set<Integer>>();
 	private Map<Long, String> multiPolygonsNames = new LinkedHashMap<Long, String>();
 	private Map<Long, List<Long>> highwayRestrictions = new LinkedHashMap<Long, List<Long>>();
-	private Map<Long, List<Way>> lowLevelWaysSt = new LinkedHashMap<Long, List<Way>>();
-	private Map<Long, List<Way>> lowLevelWaysEnd = new LinkedHashMap<Long, List<Way>>();
 	
 	
 	// MEMORY address : choose what to use ?
@@ -458,6 +470,16 @@ public class IndexCreator {
 			return getRegionName() + IndexConstants.MAP_INDEX_EXT;
 		}
 		return mapFileName;
+	}
+	
+	public void setBinaryMapFileName(String mapFileName) {
+		this.binaryMapFileName = mapFileName;
+	}
+	public String getBinaryMapFileName(){
+		if(binaryMapFileName == null){
+			return getRegionName() + IndexConstants.BINARY_MAP_INDEX_EXT;
+		}
+		return binaryMapFileName;
 	}
 	
 	public String getTransportFileName() {
@@ -960,11 +982,9 @@ public class IndexCreator {
 				// manipulate what kind of way to load
 				loadEntityData(e, true);
 				boolean inverse = "-1".equals(e.getTag(OSMTagKey.ONEWAY));
-				writeEntityToMapDatabase(e, e.getId(), inverse, 0);
-				writeEntityToMapDatabase(e, e.getId(), false, 1);
-				writeEntityToMapDatabase(e, e.getId(), false, 2);
-//				indexLowLevelMap(e, 1);
-//				indexLowLevelMap(e, 2);
+				writeBinaryEntityToMapDatabase(e, e.getId(), inverse, 0);
+				writeBinaryEntityToMapDatabase(e, e.getId(), false, 1);
+				writeBinaryEntityToMapDatabase(e, e.getId(), false, 2);
 			}
 
 			if (indexAddress) {
@@ -1191,11 +1211,8 @@ public class IndexCreator {
 		int t = MapRenderingTypes.encodeEntityWithType(e, level, true, typeUse);
 		int mtType = 0;
 		if (t != 0) {
-			if (((t >> 1) & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
-				// last bit is used for direction
-				mtType = (t >> 1) & 0x7fff;
-			} else if (((t >> 16) & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE && (t >> 16) != 0) {
-				mtType = t >> 16;
+			if ((t & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
+				mtType = t;
 			} else {
 				for (Integer i : typeUse) {
 					if ((i & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
@@ -1321,128 +1338,129 @@ public class IndexCreator {
 	}
 	
 	
-	private <T, R> void putIntoMap(Map<T, List<R>> map, T key, R value){
-		if(!map.containsKey(key)){
-			map.put(key, new ArrayList<R>());
-		}
-		map.get(key).add(value);
-	}
-	
-	private <T, R> void removeValueMap(Map<T, List<R>> map, T key, R value){
-		boolean remove = map.get(key).remove(value);
-		if(!remove){
-			throw new IllegalStateException();
-		}
-		if(map.get(key).isEmpty()){
-			map.remove(key);
-		}
-	}
-	
-	// TODO do not use that method
-	@SuppressWarnings("unused")
-	private void indexLowLevelMap(Entity e, int level) throws SQLException{
+
+	private void writeBinaryEntityToMapDatabase(Entity e, long baseId, boolean inverse, int level) throws SQLException {
 		int type = MapRenderingTypes.encodeEntityWithType(e, level, false, typeUse);
-		// TODO that is not correct because multiPolygonsWays contains types for level 0
-		// TODO that method should be redesigned (!!!) to support multipolygon types and multipolygon names 
-//		if(type == 0 && multiPolygonsWays.containsKey(e.getId())){
-//			type = multiPolygonsWays.get(e.getId()).iterator().next();
-//		}
-		if(type == 0){
-			return;
+		Map<Long, Set<Integer>> multiPolygonsWays;
+		if (level == 0) {
+			multiPolygonsWays = multiPolygonsWays0;
+		} else if (level == 1) {
+			multiPolygonsWays = multiPolygonsWays1;
+		} else if (level == 2) {
+			multiPolygonsWays = multiPolygonsWays2;
+		} else {
+			multiPolygonsWays = Collections.emptyMap();
 		}
-		boolean writeIntoDB = true;
-		boolean ring = true;
-		if(e instanceof Way && level > 0){
-			List<Node> nodes = ((Way) e).getNodes();
-			Node n = nodes.get(0);
-			Node l = nodes.get(nodes.size() - 1);
-			// ring
-			ring = l.getId() == n.getId();
-			if (!ring) {
-				writeIntoDB = false;
-				Way start = null;
-				if (lowLevelWaysEnd.containsKey(n.getId())) {
-					for (Way w : lowLevelWaysEnd.get(n.getId())) {
-						int t = MapRenderingTypes.encodeEntityWithType(w, level, false, typeUse);
-						if (t == type && Algoritms.objectEquals(MapRenderingTypes.getEntityName(w, t), 
-								MapRenderingTypes.getEntityName(e, t))) {
-							start = w;
-							break;
-						}
-					}
-				}
-				
-				if (start != null) {
-					ring = start.getNodeIds().get(0) == l.getId();
-					if(ring){
-						removeValueMap(lowLevelWaysEnd, n.getId(), start);
-						removeValueMap(lowLevelWaysSt, l.getId(), start);
-					} else {
-						// add nodes to start
-						for (int i = 1; i < nodes.size(); i++) {
-							start.addNode(nodes.get(i));
-						}
-						removeValueMap(lowLevelWaysEnd, n.getId(), start);
-						putIntoMap(lowLevelWaysEnd, l.getId(), start);
-					}
+		boolean hasMulti = e instanceof Way && multiPolygonsWays.containsKey(e.getId());
+		if (hasMulti) {
+			Set<Integer> set = multiPolygonsWays.get(e.getId());
+			boolean first = true;
+			for (Integer i : set) {
+				if (first && type == 0) {
+					type = i;
+					first = false;
 				} else {
-					long tempId = (e.getId() << 2) | level;
-					start = new Way(tempId);
-					for(String t : e.getTagKeySet()){
-						start.putTag(t, e.getTag(t));
-					}
-					// add nodes to start
-					for (int i = 0; i < nodes.size(); i++) {
-						start.addNode(nodes.get(i));
-					}
-					
-					putIntoMap(lowLevelWaysSt, n.getId(), start);
-					putIntoMap(lowLevelWaysEnd, l.getId(), start);
-				}
-
-				if (!ring) {
-					Way end = null;
-					if (lowLevelWaysSt.containsKey(l.getId())) {
-						for (Way w : lowLevelWaysSt.get(l.getId())) {
-							int t = MapRenderingTypes.encodeEntityWithType(w, level, false, typeUse);
-							if (t == type && Algoritms.objectEquals(MapRenderingTypes.getEntityName(w, t), 
-									MapRenderingTypes.getEntityName(e, t))) {
-								end = w;
-								break;
-							}
-						}
-					}
-					if (end != null) {
-						Long ll = end.getNodeIds().get(end.getNodeIds().size() - 1);
-						// remove end line
-						removeValueMap(lowLevelWaysSt, l.getId(), end);
-						removeValueMap(lowLevelWaysEnd, ll, end);
-						ring = ll == n.getId(); 
-							
-						if (!ring) {
-
-							// add nodes to start
-							for (int i = 1; i < end.getNodes().size(); i++) {
-								start.addNode(end.getNodes().get(i));
-							}
-
-							// remove end start
-							removeValueMap(lowLevelWaysEnd, l.getId(), start);
-							putIntoMap(lowLevelWaysEnd, ll, start);
+					// do not compare direction
+					int k = i & 0x7fff;
+					int ks = k | MapRenderingTypes.POLYGON_TYPE;
+					// turn of polygon type 3 ^ (suppose polygon = multipolygon)
+					if (ks == type) {
+						type = i;
+					} else {
+						int ind = typeUse.indexOf(ks);
+						if (ind == -1) {
+							typeUse.add(i);
+						} else {
+							typeUse.set(ind, i);
 						}
 					}
 				}
 			}
-		} 
-		
-		if(writeIntoDB || ring){
-			writeEntityToMapDatabase(e, e.getId(), false, level);
+		}
+
+		if (type == 0) {
+			return;
+		}
+
+		boolean useRestrictions = false;
+		restrictionsUse.clear();
+		if (MapRenderingTypes.isHighwayType(type >> 1)) {
+			useRestrictions = true;
+			// try to find restrictions only for max zoom level
+			if (level == 0 && highwayRestrictions.containsKey(baseId)) {
+				restrictionsUse.addAll(highwayRestrictions.get(baseId));
+			}
+
+		}
+
+		boolean point = ((type >> 1) & 3) == MapRenderingTypes.POINT_TYPE;
+		PreparedStatement mapLocations;
+		int zoom;
+		long id = baseId << 3;
+		if (level == 1) {
+			id |= 2;
+			mapLocations = mapLocsStatLevel1;
+			zoom = 12;
+		} else if (level == 2) {
+			id |= 4;
+			zoom = 7;
+			mapLocations = mapLocsStatLevel2;
+		} else {
+			zoom = 18;
+			mapLocations = mapLocsStatLevel0;
+		}
+		boolean skip = false;
+		if (e instanceof Way) {
+			id |= 1;
+			// simplify route
+			if (level > 0) {
+				List<Node> nodes = ((Way) e).getNodes();
+				Way way = new Way(id);
+				for (String t : e.getTagKeySet()) {
+					way.putTag(t, e.getTag(t));
+				}
+				int prevX = 0;
+				int prevY = 0;
+				int len = 0;
+				for (int i = 0; i < nodes.size(); i++) {
+					// do not simplify last node it could be important node for multipolygon
+					if (nodes.get(i) != null) {
+						int r = i < nodes.size() - 1 ? 4 : 0;
+						int x = (int) (MapUtils.getTileNumberX(zoom, nodes.get(i).getLongitude()) * 256d);
+						int y = (int) (MapUtils.getTileNumberY(zoom, nodes.get(i).getLatitude()) * 256d);
+						int dy = Math.abs(y - prevY);
+						int dx = Math.abs(x - prevX);
+						if (dx > r || dy > r) {
+							way.addNode(nodes.get(i));
+							len += (dx + dy);
+							prevX = x;
+							prevY = y;
+						}
+					}
+				}
+				e = way;
+				skip = way.getNodes().size() < 2;
+				if (!hasMulti && len < 8) {
+					skip = true;
+				}
+			}
+
+		}
+
+		if (!skip) {
+			String eName = MapRenderingTypes.getEntityName(e, type);
+			if (eName == null) {
+				eName = multiPolygonsNames.get(baseId);
+			}
+			DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapObjStat, mapLocations, mapTree, e, eName, id, type, typeUse,
+					restrictionsUse, useRestrictions, inverse, point, BATCH_SIZE);
 		}
 	}
+	
 
 
 
-	private void writeEntityToMapDatabase(Entity e, long baseId, boolean inverse, int level) throws SQLException {
+	/*private void writeEntityToMapDatabase(Entity e, long baseId, boolean inverse, int level) throws SQLException {
 		int type = MapRenderingTypes.encodeEntityWithType(e, level, false, typeUse);
 		Map<Long, Set<Integer>> multiPolygonsWays;
 		if(level == 0){
@@ -1569,12 +1587,69 @@ public class IndexCreator {
 			if(eName == null ){
 				eName = multiPolygonsNames.get(baseId);
 			}
-			DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapObjStat, mapLocations, /*mapTree, */e,  
+			DataIndexWriter.insertMapRenderObjectIndex(pStatements, mapObjStat, mapLocations, mapTree, e,  
 					eName, id, type, typeUse, restrictionsUse, useRestrictions,
 					inverse, point, BATCH_SIZE);
 		}
 	}
+	*/
 	
+	public void writeBinaryData(RTree rtree) throws IOException {
+		try {
+			long rootIndex = rtree.getFileHdr().getRootIndex();
+			binaryMapFile = new File(workingDir, getBinaryMapFileName());
+			FileOutputStream fout = new FileOutputStream(binaryMapFile);
+			BinaryIndexWriter writer = new BinaryIndexWriter(fout);
+			writer.startWriteMapIndex();
+			rtree.Node root = rtree.getReadNode(rootIndex);
+			Rect rootBounds = calcBounds(root);
+			writer.startWriteMapLevelIndex(6, 17, rootBounds.getMinX(), rootBounds.getMaxX(), rootBounds.getMinY(), rootBounds.getMaxY());
+			
+			writeBinaryMapTree(root, rtree, writer);
+			
+			writer.endWriteMapLevelIndex();
+			writer.endWriteMapIndex();
+			writer.close();
+		} catch (RTreeException e) {
+			throw new IllegalStateException(e);
+		}
+	}
+	
+	public void writeBinaryMapTree(rtree.Node parent, RTree r, BinaryIndexWriter writer) throws IOException, RTreeException {
+		Element[] e = parent.getAllElements();
+		for (int i = 0; i < parent.getTotalElements(); i++) {
+			Rect re = e[i].getRect();
+			 if(e[i].getElementType() == rtree.Node.LEAF_NODE){
+				 // TODO
+				 long ptr = ((LeafElement) e[i]).getPtr();
+				 writer.writeMapData(ptr);
+			 } else {
+				 long ptr = ((NonLeafElement) e[i]).getPtr();
+				 writer.startMapTreeElement(re.getMinX(), re.getMaxX(), re.getMinY(), re.getMaxY());
+				 rtree.Node ns = r.getReadNode(ptr);
+				 writeBinaryMapTree(ns, r, writer);
+				 writer.endWriteMapTreeElement();
+			 }
+		}
+	}
+	
+	
+	public Rect calcBounds(rtree.Node n) {
+		Rect r = null;
+		Element[] e = n.getAllElements();
+		for (int i = 0; i < n.getTotalElements(); i++) {
+			Rect re = e[i].getRect();
+			if (r == null) {
+				try {
+					r = new Rect(re.getMinX(), re.getMinY(), re.getMaxX(), re.getMaxY());
+				} catch (IllegalValueException ex) {
+				}
+			} else {
+				r.expandToInclude(re);
+			}
+		}
+		return r;
+	}
 	
 	
 	
@@ -1584,6 +1659,15 @@ public class IndexCreator {
 			o.setEnName(Junidecode.unidecode(name));
 		}
 	}
+	
+	public String getRTreeMapIndexNonPackFileName(){
+		return mapFile.getAbsolutePath()+".rtree";
+	}
+	
+	public String getRTreeMapIndexPackFileName(){
+		return mapFile.getAbsolutePath()+".prtree";
+	}
+	
 	
 	public void generateIndexes(File readFile, IProgress progress, IOsmStorageFilter addFilter) throws IOException, SAXException,
 	SQLException {
@@ -1696,11 +1780,15 @@ public class IndexCreator {
 				mapLocsStatLevel0 = DataIndexWriter.createStatementMapWaysLocationsInsert(mapConnection);
 				mapLocsStatLevel1 = DataIndexWriter.createStatementMapWaysLocationsInsertLevel2(mapConnection);
 				mapLocsStatLevel2 = DataIndexWriter.createStatementMapWaysLocationsInsertLevel3(mapConnection);
-				// try {
-				// mapTree = new RTree(mapFile.getAbsolutePath()+"_ind");
-				// } catch (RTreeException e) {
-				// e.printStackTrace();
-				// }
+				try {
+				   File file = new File(getRTreeMapIndexNonPackFileName());
+				   if(file.exists()){
+					   file.delete();
+				   }
+				   mapTree = new RTree(getRTreeMapIndexNonPackFileName());
+				} catch (RTreeException e) {
+				   throw new IOException(e);
+				}
 				pStatements.put(mapObjStat, 0);
 				pStatements.put(mapLocsStatLevel0, 0);
 				pStatements.put(mapLocsStatLevel1, 0);
@@ -1856,19 +1944,29 @@ public class IndexCreator {
 				}
 
 			}
-			// 5. writing low level maps
-			progress.setGeneralProgress("[95 of 100]");
-			progress.startTask("Indexing low levels for map ...", -1);
+			
+			// 5. writing map index
 			if (indexMap) {
-				for (Long l : lowLevelWaysSt.keySet()) {
-					for (Way w : lowLevelWaysSt.get(l)) {
-						int level = (int) (w.getId() & 3);
-						writeEntityToMapDatabase(w, w.getId() >> 2, false, level);
-					}
+				progress.setGeneralProgress("[95 of 100]");
+				progress.startTask("Serializing map data...", -1);
+				try {
+					mapTree.flush();
+				} catch (RTreeException e) {
+					log.error("Error flushing", e);
 				}
+				File file = new File(getRTreeMapIndexPackFileName());
+				if (file.exists()) {
+					file.delete();
+				}
+				new Pack().packTree(mapTree, getRTreeMapIndexPackFileName());
+				mapTree = null;
+				// TODO !!! create binary output stream in order to close it properly (finally)
+				writeBinaryData(new RTree(getRTreeMapIndexPackFileName()));
 
 			}
 
+		} catch (RTreeException e) {
+			throw new IOException(e);
 		} finally {
 			try {
 				if (pselectNode != null) {
@@ -1911,16 +2009,16 @@ public class IndexCreator {
 					mapConnection.commit();
 					mapConnection.close();
 					mapConnection = null;
-					// try {
-					// mapTree.flush();
-					// } catch (RTreeException e) {
-					// // TODO Auto-generated catch block
-					// e.printStackTrace();
-					// }
-
 					if (lastModifiedDate != null) {
 						mapFile.setLastModified(lastModifiedDate);
 					}
+				}
+				if(mapTree != null){
+					try {
+						 mapTree.flush();
+					 } catch (RTreeException e) {
+						 log.error("Error flushing", e);
+					 }
 				}
 
 				if (addressConnection != null) {
@@ -1954,15 +2052,15 @@ public class IndexCreator {
 	 public static void main(String[] args) throws IOException, SAXException, SQLException {
 		
 		 IndexCreator creator = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
-//		 creator.setIndexMap(true);
+		 creator.setIndexMap(true);
 //		 creator.setIndexPOI(true);
-		 creator.setIndexTransport(true);
+//		 creator.setIndexTransport(true);
 		 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);
@@ -1970,70 +2068,13 @@ public class IndexCreator {
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/den_haag.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/den_haag.osm"), new ConsoleProgressImplementation(3), null);
 		 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
+//		 creator.setNodesk(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/netherlands.osm.bz2"), new ConsoleProgressImplementation(1), null);
 		 
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/forest_complex.osm"), new ConsoleProgressImplementation(25), null);
-		/*try {
-//			RTree rtree = new RTree("e:/Information/OSM maps/osmand/Belarus_2010_09_03.map.odb_ind");
-//			new Pack().packTree(rtree, "e:/Information/OSM maps/osmand/pack.ind");
-			RTree rtree = new RTree("e:/Information/OSM maps/osmand/pack.ind");
-			long rootIndex = rtree.getFileHdr().getRootIndex();
-			int s = calculateSize(rtree.getReadNode(rootIndex), rtree, "!-");
-			System.out.println(s);
-		} catch (RTreeException e) {
-			e.printStackTrace();
-		}*/
-		 
+
 		 
 
 		 
-		
-		 // download base 
-	/*	MapTileDownloader instance = MapTileDownloader.getInstance();
-		instance.addDownloaderCallback(new MapTileDownloader.IMapDownloaderCallback() {
-			@Override
-			public void tileDownloaded(DownloadRequest request) {
-				System.out.println(request.url);
-			}
-
-		});
-		File baseDir = new File("e:/Information/OSM maps/planet_tiles");
-		baseDir.mkdirs();
-		TileSourceTemplate map = TileSourceManager.getMapnikSource();
-		for (int zoom = 5; zoom <= 5; zoom++) {
-			int length = 1 << zoom;
-			for (int x = 0; x < length; x++) {
-				for (int y = 0; y < length; y++) {
-					String file = zoom + "/" + (x) + "/" + y + map.getTileFormat() + ".tile";
-					DownloadRequest req = new DownloadRequest(map.getUrlToLoad(x, y, zoom), new File(baseDir, file), x, y, zoom);
-					instance.requestToDownload(req);
-				}
-			}
-		}*/
-
 	}
-	/* 
-	 public static int calculateSize(rtree.Node n, RTree r, String level){
-		 Element[] e = n.getAllElements();
-		 int exc = 0; //20 + (169 - n.getTotalElements()) * 24;
-		 for(int i=0; i< n.getTotalElements(); i++){
-			 if(e[i].getElementType() == rtree.Node.LEAF_NODE){
-				 exc += 1;
-			 } else {
-//				 exc += 1;
-				 
-				 long ptr = ((NonLeafElement) e[i]).getPtr();
-				 try {
-					 rtree.Node ns = r.getReadNode(ptr);
-					 System.out.println(level + "   " +  ns.getTotalElements());
-					exc += calculateSize(ns, r, level +"-");
-				} catch (RTreeException e1) {
-					e1.printStackTrace();
-				}
-			 }
-		 }
-		 return exc;
-	 }
-	 */
 }
