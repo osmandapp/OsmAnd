@@ -183,7 +183,7 @@ public class BinaryMapIndexReader {
 					}
 					codedIS.seek(tree.filePointer);
 					int oldLimit = codedIS.pushLimit(tree.length);
-					searchMapTreeBounds(tree, index.left, index.right, index.top, index.bottom, req);
+					searchMapTreeBounds(index.left, index.right, index.top, index.bottom, req);
 					codedIS.popLimit(oldLimit);
 				}
 			}
@@ -191,17 +191,22 @@ public class BinaryMapIndexReader {
 		return req.getSearchResults();
 	}
 	
-	private void searchMapTreeBounds(MapTree tree, int pleft, int pright, int ptop, int pbottom,
+	private void searchMapTreeBounds(int pleft, int pright, int ptop, int pbottom,
 			SearchRequest req) throws IOException {
 		int init = 0;
-		int lastIndexResult = -1;;
+		int lastIndexResult = -1;
+		int cright = 0;
+		int cleft = 0;
+		int ctop = 0;
+		int cbottom = 0;
+		
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			if(init == 0xf){
 				init = 0;
 				// coordinates are init
-				if(tree.right < req.left || tree.left > req.right || tree.top > req.bottom || tree.bottom < req.top){
+				if(cright < req.left || cleft > req.right || ctop > req.bottom || cbottom < req.top){
 					return;
 				}
 			}
@@ -209,19 +214,19 @@ public class BinaryMapIndexReader {
 			case 0:
 				return;
 			case OsmandOdb.MapTree.BOTTOM_FIELD_NUMBER :
-				tree.bottom = codedIS.readSInt32() + pbottom;
+				cbottom = codedIS.readSInt32() + pbottom;
 				init |= 1;
 				break;
 			case OsmandOdb.MapTree.LEFT_FIELD_NUMBER :
-				tree.left = codedIS.readSInt32() + pleft;
+				cleft = codedIS.readSInt32() + pleft;
 				init |= 2;
 				break;
 			case OsmandOdb.MapTree.RIGHT_FIELD_NUMBER :
-				tree.right = codedIS.readSInt32() + pright;
+				cright = codedIS.readSInt32() + pright;
 				init |= 4;
 				break;
 			case OsmandOdb.MapTree.TOP_FIELD_NUMBER :
-				tree.top = codedIS.readSInt32() + ptop;
+				ctop = codedIS.readSInt32() + ptop;
 				init |= 8;
 				break;
 			case OsmandOdb.MapTree.LEAFS_FIELD_NUMBER :
@@ -230,7 +235,7 @@ public class BinaryMapIndexReader {
 				if(lastIndexResult == -1){
 					lastIndexResult = req.searchResults.size();
 				}
-				BinaryMapDataObject mapObject = readMapDataObject(tree.left, tree.right, tree.top, tree.bottom, req);
+				BinaryMapDataObject mapObject = readMapDataObject(cleft, cright, ctop, cbottom, req);
 				if(mapObject != null){
 					req.searchResults.add(mapObject);
 					
@@ -238,28 +243,27 @@ public class BinaryMapIndexReader {
 				codedIS.popLimit(oldLimit);
 				break;
 			case OsmandOdb.MapTree.SUBTREES_FIELD_NUMBER :
-				MapTree r = new MapTree();
 				// left, ... already initialized 
-				r.length = readInt();
-				r.filePointer = codedIS.getTotalBytesRead();
-				oldLimit = codedIS.pushLimit(r.length);
-				searchMapTreeBounds(r, tree.left, tree.right, tree.top, tree.bottom, req);
+				length = readInt();
+				int filePointer = codedIS.getTotalBytesRead();
+				oldLimit = codedIS.pushLimit(length);
+				searchMapTreeBounds(cleft, cright, ctop, cbottom, req);
 				codedIS.popLimit(oldLimit);
-				codedIS.seek(r.filePointer + r.length);
+				codedIS.seek(filePointer + length);
 				if(lastIndexResult >= 0){
 					throw new IllegalStateException();
 				}
 				break;
 			case OsmandOdb.MapTree.BASEID_FIELD_NUMBER :
-				tree.baseId = codedIS.readUInt64();
+				long baseId = codedIS.readUInt64();
 
 				if (lastIndexResult != -1) {
 					for (int i = lastIndexResult; i < req.searchResults.size(); i++) {
 						BinaryMapDataObject rs = req.searchResults.get(i);
-						rs.id += tree.baseId;
+						rs.id += baseId;
 						if (rs.restrictions != null) {
 							for (int j = 0; j < rs.restrictions.length; j++) {
-								rs.restrictions[j] += tree.baseId;
+								rs.restrictions[j] += baseId;
 							}
 						}
 					}
@@ -268,14 +272,14 @@ public class BinaryMapIndexReader {
 			case OsmandOdb.MapTree.STRINGTABLE_FIELD_NUMBER :
 				length = codedIS.readRawVarint32();
 				oldLimit = codedIS.pushLimit(length);
-				tree.stringTable = readStringTable();
+				List<String> stringTable = readStringTable();
 				codedIS.popLimit(oldLimit);
 
 				if (lastIndexResult != -1) {
 					for (int i = lastIndexResult; i < req.searchResults.size(); i++) {
 						BinaryMapDataObject rs = req.searchResults.get(i);
 						if (rs.stringId != -1) {
-							rs.name = tree.stringTable.get(rs.stringId);
+							rs.name = stringTable.get(rs.stringId);
 						}
 					}
 				}
@@ -297,6 +301,10 @@ public class BinaryMapIndexReader {
 		int px = left;
 		int py = top;
 		boolean contains = false;
+		int minX = Integer.MAX_VALUE;
+		int maxX = 0;
+		int minY = Integer.MAX_VALUE;
+		int maxY = 0;
 		while(codedIS.getBytesUntilLimit() > 0){
 			int x = codedIS.readSInt32() + px;
 			int y = codedIS.readSInt32() + py;
@@ -307,6 +315,18 @@ public class BinaryMapIndexReader {
 			if(!contains && req.left <= x && req.right >= x && req.top <= y && req.bottom >= y){
 				contains = true;
 			}
+			if(!contains){
+				minX = Math.min(minX, x);
+				maxX = Math.max(maxX, x);
+				minY = Math.min(minY, y);
+				maxY = Math.max(maxY, y);
+			}
+		}
+		if(!contains){
+			if(maxX >= req.left && minX <= req.right && minY <= req.bottom && maxY >= req.top){
+				contains = true;
+			}
+			
 		}
 		codedIS.popLimit(old);
 		if(!contains){
