@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -29,7 +28,6 @@ import java.util.Map.Entry;
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.binary.BinaryMapIndexWriter;
-import net.osmand.binary.OsmandOdb;
 import net.osmand.data.Amenity;
 import net.osmand.data.Building;
 import net.osmand.data.City;
@@ -78,8 +76,6 @@ import rtree.RTree;
 import rtree.RTreeException;
 import rtree.Rect;
 
-import com.google.protobuf.CodedOutputStream;
-
 
 /**
  * http://wiki.openstreetmap.org/wiki/OSM_tags_for_routing#Is_inside.2Foutside
@@ -117,7 +113,6 @@ public class IndexCreator {
 	private String poiFileName = null;
 	private String addressFileName = null;
 	private String mapFileName = null;
-	private String binaryMapFileName = null;
 	private Long lastModifiedDate = null;
 	
 	
@@ -154,7 +149,7 @@ public class IndexCreator {
 	private RandomAccessFile mapRAFile;
 	private Connection mapConnection;
 	private PreparedStatement mapBinaryStat;
-	private static final int[] MAP_ZOOMS = new int[]{6, 9, 14, 22};
+	private static final int[] MAP_ZOOMS = new int[]{5, 9, 14, 22};
 	private RTree[] mapTree = null;
 	
 	// MEMORY map :  save it in memory while that is allowed
@@ -1453,16 +1448,9 @@ public class IndexCreator {
 			assert IndexConstants.IndexBinaryMapRenderObject.values().length == 6;
 			PreparedStatement selectData = mapConnection.prepareStatement("SELECT * FROM " + IndexBinaryMapRenderObject.getTable() + " WHERE id = ?");
 			
-			CodedOutputStream codedOutStream = CodedOutputStream.newInstance(new OutputStream() {
-				@Override
-				public void write(int b) throws IOException {
-					mapRAFile.write(b);
-				}
-			});
-			codedOutStream.writeInt32(OsmandOdb.OsmAndStructure.VERSION_FIELD_NUMBER, IndexConstants.BINARY_MAP_VERSION);
 			
 			
-			BinaryMapIndexWriter writer = new BinaryMapIndexWriter(mapRAFile, codedOutStream);
+			BinaryMapIndexWriter writer = new BinaryMapIndexWriter(mapRAFile);
 			writer.startWriteMapIndex();
 			
 			for (int i = 0; i < MAP_ZOOMS.length - 1; i++) {
@@ -1488,6 +1476,8 @@ public class IndexCreator {
 	
 	public void writeBinaryMapTree(rtree.Node parent, RTree r, BinaryMapIndexWriter writer, PreparedStatement selectData) throws IOException, RTreeException, SQLException {
 		Element[] e = parent.getAllElements();
+		
+		
 		for (int i = 0; i < parent.getTotalElements(); i++) {
 			Rect re = e[i].getRect();
 			 if(e[i].getElementType() == rtree.Node.LEAF_NODE){
@@ -1502,12 +1492,14 @@ public class IndexCreator {
 					 log.error("Something goes wrong with id = " + id);
 				 }
 			 } else {
-				 long ptr = ((NonLeafElement) e[i]).getPtr();
-				 writer.startMapTreeElement(re.getMinX(), re.getMaxX(), re.getMinY(), re.getMaxY());
-				 rtree.Node ns = r.getReadNode(ptr);
-				 writeBinaryMapTree(ns, r, writer, selectData);
-				 writer.endWriteMapTreeElement();
-			 }
+				long ptr = ((NonLeafElement) e[i]).getPtr();
+				rtree.Node ns = r.getReadNode(ptr);
+				
+				writer.startMapTreeElement(re.getMinX(), re.getMaxX(), re.getMinY(), re.getMaxY());
+
+				writeBinaryMapTree(ns, r, writer, selectData);
+				writer.endWriteMapTreeElement();
+			}
 		}
 	}
 	
@@ -1906,7 +1898,7 @@ public class IndexCreator {
 					if (lastModifiedDate != null && mapFile.exists()) {
 						mapFile.setLastModified(lastModifiedDate);
 					}
-					File tempDBFile = new File(getTempMapDBFileName());
+					File tempDBFile = new File(workingDir, getTempMapDBFileName());
 					if(tempDBFile.exists()){
 						tempDBFile.delete();
 					}
@@ -1968,6 +1960,10 @@ public class IndexCreator {
 		 
 		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
 		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+		 System.out.println("COORDINATES_SIZE " + BinaryMapIndexWriter.COORDINATES_SIZE);
+		 System.out.println("TYPES_SIZE " + BinaryMapIndexWriter.TYPES_SIZE);
+		 System.out.println("ID_SIZE " + BinaryMapIndexWriter.ID_SIZE);
+		 System.out.println("MAP_DATA_SIZE " + BinaryMapIndexWriter.MAP_DATA_SIZE);
 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
