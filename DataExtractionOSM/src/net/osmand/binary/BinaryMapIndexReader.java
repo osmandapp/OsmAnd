@@ -1,5 +1,7 @@
 package net.osmand.binary;
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -18,32 +20,7 @@ public class BinaryMapIndexReader {
 	private List<MapRoot> mapIndexes = new ArrayList<MapRoot>();
 	private CodedInputStreamRAF codedIS;
 	
-	public class MapRoot {
-		int minZoom = 0;
-		int maxZoom = 0;
-		int left = 0;
-		int right = 0;
-		int top = 0;
-		int bottom = 0;
-		
-		List<MapTree> trees = new ArrayList<MapTree>();
-	}
-	
-	public class MapTree {
-		int filePointer = 0;
-		int length = 0;
-		
-		int left = 0;
-		int right = 0;
-		int top = 0;
-		int bottom = 0;
-		
-		long baseId = 0;
-		
-		List<String> stringTable = null;
-		List<MapTree> subTrees = null;
-		
-	}
+
 	
 	
 	public BinaryMapIndexReader(final RandomAccessFile raf) throws IOException {
@@ -54,7 +31,8 @@ public class BinaryMapIndexReader {
 
 	private void init() throws IOException {
 		while(true){
-			int tag = WireFormat.getTagFieldNumber(codedIS.readTag());
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
 				return;
@@ -70,15 +48,26 @@ public class BinaryMapIndexReader {
 				codedIS.seek(filePointer + length);
 				break;
 			default:
-				// TODO skip unknown fields
-				return;
+				skipUnknownField(t);
+				break;
 			}
+		}
+	}
+	
+	private void skipUnknownField(int tag) throws IOException{
+		int wireType = WireFormat.getTagWireType(tag);
+		if(wireType == WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED){
+			int length = readInt();
+			codedIS.skipRawBytes(length);
+		} else {
+			codedIS.skipField(tag);
 		}
 	}
 	
 	private void readMapIndex() throws IOException {
 		while(true){
-			int tag = WireFormat.getTagFieldNumber(codedIS.readTag());
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
 				return;
@@ -92,8 +81,8 @@ public class BinaryMapIndexReader {
 				codedIS.seek(filePointer + length);
 				break;
 			default:
-				// TODO skip unknown fields
-				return;
+				skipUnknownField(t);
+				break;
 			}
 		}
 	}
@@ -101,7 +90,8 @@ public class BinaryMapIndexReader {
 	private MapRoot readMapLevel() throws IOException {
 		MapRoot root = new MapRoot();
 		while(true){
-			int tag = WireFormat.getTagFieldNumber(codedIS.readTag());
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
 				return root;
@@ -135,61 +125,78 @@ public class BinaryMapIndexReader {
 				codedIS.seek(r.filePointer + r.length);
 				break;
 			default:
-				// TODO skip unknown fields
-				return root;
+				skipUnknownField(t);
+				break;
 			}
 		}
 		
 	}
 	
 	private void readMapTreeBounds(MapTree tree, int aleft, int aright, int atop, int abottom) throws IOException {
+		int init = 0;
 		while(true){
-			int tag = WireFormat.getTagFieldNumber(codedIS.readTag());
+			if(init == 0xf){
+				return;
+			}
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
 				return;
 			case OsmandOdb.MapTree.BOTTOM_FIELD_NUMBER :
 				tree.bottom = codedIS.readSInt32() + abottom;
+				init |= 1;
 				break;
 			case OsmandOdb.MapTree.LEFT_FIELD_NUMBER :
 				tree.left = codedIS.readSInt32() + aleft;
+				init |= 2;
 				break;
 			case OsmandOdb.MapTree.RIGHT_FIELD_NUMBER :
 				tree.right = codedIS.readSInt32() + aright;
+				init |= 4;
 				break;
 			case OsmandOdb.MapTree.TOP_FIELD_NUMBER :
 				tree.top = codedIS.readSInt32() + atop;
+				init |= 8;
 				break;
+		
 			default:
-				// TODO skip unknown fields
-				return;
+				skipUnknownField(t);
+				break;
 			}
 		}
 	}
 	
-	public List<BinaryMapDataObject> searchMapIndex(MapRoot index, int sleft, int sright, int stop, int sbottom,
-			List<BinaryMapDataObject> searchResults) throws IOException {
-		for(MapTree tree : index.trees){
-			codedIS.seek(tree.filePointer);
-			int oldLimit = codedIS.pushLimit(tree.length);
-			searchMapTreeBounds(tree, index.left, index.right, index.top, index.bottom, 
-					sleft, sright, stop, sbottom, searchResults, " ");
-			codedIS.popLimit(oldLimit);
+	
+	
+	public List<BinaryMapDataObject> searchMapIndex(SearchRequest req) throws IOException {
+		for (MapRoot index : mapIndexes) {
+			if (index.minZoom <= req.zoom && index.maxZoom >= req.zoom) {
+				if(index.right < req.left || index.left > req.right || index.top > req.bottom || index.bottom < req.top){
+					continue;
+				}
+				for (MapTree tree : index.trees) {
+					codedIS.seek(tree.filePointer);
+					int oldLimit = codedIS.pushLimit(tree.length);
+					searchMapTreeBounds(tree, index.left, index.right, index.top, index.bottom, req);
+					codedIS.popLimit(oldLimit);
+				}
+			}
 		}
-		return searchResults;
+		return req.getSearchResults();
 	}
 	
 	private void searchMapTreeBounds(MapTree tree, int pleft, int pright, int ptop, int pbottom,
-			int sleft, int sright, int stop, int sbottom,
-			List<BinaryMapDataObject> searchResults, String indent) throws IOException {
+			SearchRequest req) throws IOException {
 		int init = 0;
-		List<BinaryMapDataObject> results = null;
+		int lastIndexResult = -1;;
 		while(true){
-			int tag = WireFormat.getTagFieldNumber(codedIS.readTag());
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
 			if(init == 0xf){
 				init = 0;
 				// coordinates are init
-				if(tree.right < sleft || tree.left > sright || tree.top > sbottom || tree.bottom < stop){
+				if(tree.right < req.left || tree.left > req.right || tree.top > req.bottom || tree.bottom < req.top){
 					return;
 				}
 			}
@@ -215,13 +222,12 @@ public class BinaryMapIndexReader {
 			case OsmandOdb.MapTree.LEAFS_FIELD_NUMBER :
 				int length = codedIS.readRawVarint32();
 				int oldLimit = codedIS.pushLimit(length);
-				BinaryMapDataObject mapObject = readMapDataObject(tree.left, tree.right, tree.top, tree.bottom, sleft, sright, stop, sbottom);
+				if(lastIndexResult == -1){
+					lastIndexResult = req.searchResults.size();
+				}
+				BinaryMapDataObject mapObject = readMapDataObject(tree.left, tree.right, tree.top, tree.bottom, req);
 				if(mapObject != null){
-					if(results == null){
-						results = new ArrayList<BinaryMapDataObject>();
-					}
-					results.add(mapObject);
-					searchResults.add(mapObject);
+					req.searchResults.add(mapObject);
 					
 				}
 				codedIS.popLimit(oldLimit);
@@ -232,18 +238,23 @@ public class BinaryMapIndexReader {
 				r.length = readInt();
 				r.filePointer = codedIS.getTotalBytesRead();
 				oldLimit = codedIS.pushLimit(r.length);
-				searchMapTreeBounds(r, tree.left, tree.right, tree.top, tree.bottom, sleft, sright, stop, sbottom, searchResults, indent+"  ");
+				searchMapTreeBounds(r, tree.left, tree.right, tree.top, tree.bottom, req);
 				codedIS.popLimit(oldLimit);
 				codedIS.seek(r.filePointer + r.length);
+				if(lastIndexResult >= 0){
+					throw new IllegalStateException();
+				}
 				break;
 			case OsmandOdb.MapTree.BASEID_FIELD_NUMBER :
 				tree.baseId = codedIS.readUInt64();
-				if (results != null) {
-					for (BinaryMapDataObject rs : results) {
+
+				if (lastIndexResult != -1) {
+					for (int i = lastIndexResult; i < req.searchResults.size(); i++) {
+						BinaryMapDataObject rs = req.searchResults.get(i);
 						rs.id += tree.baseId;
 						if (rs.restrictions != null) {
-							for (int i = 0; i < rs.restrictions.length; i++) {
-								rs.restrictions[i] += tree.baseId;
+							for (int j = 0; j < rs.restrictions.length; j++) {
+								rs.restrictions[j] += tree.baseId;
 							}
 						}
 					}
@@ -254,9 +265,10 @@ public class BinaryMapIndexReader {
 				oldLimit = codedIS.pushLimit(length);
 				tree.stringTable = readStringTable();
 				codedIS.popLimit(oldLimit);
-				
-				if (results != null) {
-					for (BinaryMapDataObject rs : results) {
+
+				if (lastIndexResult != -1) {
+					for (int i = lastIndexResult; i < req.searchResults.size(); i++) {
+						BinaryMapDataObject rs = req.searchResults.get(i);
 						if (rs.stringId != -1) {
 							rs.name = tree.stringTable.get(rs.stringId);
 						}
@@ -264,18 +276,17 @@ public class BinaryMapIndexReader {
 				}
 				break;
 			default:
-				// TODO skip unknown fields
-				return;
+				skipUnknownField(t);
+				break;
 			}
 		}
 	}
-	List<Integer> CACHE = new ArrayList<Integer>();
-	private BinaryMapDataObject readMapDataObject(int left, int right, int top, int bottom, int sleft, int sright, int stop, int sbottom) throws IOException {
+	private BinaryMapDataObject readMapDataObject(int left, int right, int top, int bottom, SearchRequest req) throws IOException {
 		int tag = WireFormat.getTagFieldNumber(codedIS.readTag());
 		if(OsmandOdb.MapData.COORDINATES_FIELD_NUMBER != tag) {
 			throw new IllegalArgumentException();
 		}
-		CACHE.clear();
+		req.cacheCoordinates.clear();
 		int size = codedIS.readRawVarint32();
 		int old = codedIS.pushLimit(size);
 		int px = left;
@@ -284,11 +295,11 @@ public class BinaryMapIndexReader {
 		while(codedIS.getBytesUntilLimit() > 0){
 			int x = codedIS.readSInt32() + px;
 			int y = codedIS.readSInt32() + py;
-			CACHE.add(x);
-			CACHE.add(y);
+			req.cacheCoordinates.add(x);
+			req.cacheCoordinates.add(y);
 			px = x;
 			py = y;
-			if(!contains && sleft <= x && sright >= x && stop <= y && sbottom >= y){
+			if(!contains && req.left <= x && req.right >= x && req.top <= y && req.bottom >= y){
 				contains = true;
 			}
 		}
@@ -298,13 +309,12 @@ public class BinaryMapIndexReader {
 			return null;
 		}
 		
-		BinaryMapDataObject dataObject = new BinaryMapDataObject();
-		dataObject.coordinates = new int[CACHE.size()];
-		for(int i=0; i<CACHE.size(); i++){
-			dataObject.coordinates[i] = CACHE.get(i);
-		}
+		BinaryMapDataObject dataObject = new BinaryMapDataObject();		
+		dataObject.coordinates = req.cacheCoordinates.toArray();
+		
 		while(true){
-			tag = WireFormat.getTagFieldNumber(codedIS.readTag());
+			int t = codedIS.readTag();
+			tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
 				return dataObject;
@@ -328,8 +338,8 @@ public class BinaryMapIndexReader {
 				dataObject.stringId = codedIS.readUInt32();
 				break;
 			default:
-				// TODO skip unknown fields
-				return dataObject;
+				skipUnknownField(t);
+				break;
 			}
 		}
 		
@@ -338,7 +348,8 @@ public class BinaryMapIndexReader {
 	private List<String> readStringTable() throws IOException{
 		List<String> list = new ArrayList<String>();
 		while(true){
-			int tag = WireFormat.getTagFieldNumber(codedIS.readTag());
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
 				return list;
@@ -346,8 +357,8 @@ public class BinaryMapIndexReader {
 				list.add(codedIS.readString());
 				break;
 			default:
-				// TODO skip unknown fields
-				return list;
+				skipUnknownField(t);
+				break;
 			}
 		}
 	}
@@ -374,30 +385,79 @@ public class BinaryMapIndexReader {
 		return ((ch1 << 24) + (ch2 << 16) + (ch3 << 8) + (ch4 << 0));
 	}
 	
-	public List<MapRoot> getMapIndexes() {
-		return mapIndexes;
-	}
 	
 	public int getVersion() {
 		return version;
 	}
 	
+	private static class MapRoot {
+		int minZoom = 0;
+		int maxZoom = 0;
+		int left = 0;
+		int right = 0;
+		int top = 0;
+		int bottom = 0;
+		
+		List<MapTree> trees = new ArrayList<MapTree>();
+	}
+	
+	private static class MapTree {
+		int filePointer = 0;
+		int length = 0;
+		
+		int left = 0;
+		int right = 0;
+		int top = 0;
+		int bottom = 0;
+		
+		long baseId = 0;
+		
+		List<String> stringTable = null;
+		List<MapTree> subTrees = null;
+		
+	}
+	
+	public static SearchRequest buildSearchRequest(int sleft, int sright, int stop, int sbottom, int zoom){
+		SearchRequest request = new SearchRequest();
+		request.left = sleft;
+		request.right = sright;
+		request.top = stop;
+		request.bottom = sbottom;
+		request.zoom = zoom;
+		return request;
+	}
+	
+	public static class SearchRequest {
+		int left = 0;
+		int right = 0;
+		int top = 0;
+		int bottom = 0;
+		int zoom = 15;
+		List<BinaryMapDataObject> searchResults = new ArrayList<BinaryMapDataObject>();
+		TIntArrayList cacheCoordinates = new TIntArrayList();
+		
+		protected SearchRequest(){
+		}
+		
+		
+		public List<BinaryMapDataObject> getSearchResults() {
+			return searchResults;
+		}
+	}
+	
 	public static void main(String[] args) throws IOException {
 		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Minsk.map.pbf"), "r");
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
-		System.out.println(reader.getVersion());
+		System.out.println("VERSION " + reader.getVersion());
 		int sleft = MapUtils.get31TileNumberX(27.578);
 		int sright = MapUtils.get31TileNumberX(27.583);
 		int stop = MapUtils.get31TileNumberY(53.916);
 		int sbottom = MapUtils.get31TileNumberY(53.9138);
 		System.out.println("SEARCH " + sleft + " " + sright + " " + stop + " " + sbottom);
-		for(MapRoot b : reader.getMapIndexes()) {
-			System.out.println(b.minZoom + " " + b.maxZoom + " " +b.trees.size() + " " 
-					+ b.left + " " + b.right + " " + b.top + " " + b.bottom);
-			for(BinaryMapDataObject obj : reader.searchMapIndex(b, sleft, sright, stop, sbottom, new ArrayList<BinaryMapDataObject>())){
-				if(obj.getName() != null){
-					System.out.println(" " + obj.getName());
-				}
+
+		for (BinaryMapDataObject obj : reader.searchMapIndex(buildSearchRequest(sleft, sright, stop, sbottom, 18))) {
+			if (obj.getName() != null) {
+				System.out.println(" " + obj.getName());
 			}
 		}
 	}

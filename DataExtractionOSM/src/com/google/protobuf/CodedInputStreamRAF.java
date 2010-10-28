@@ -455,7 +455,7 @@ public final class CodedInputStreamRAF {
   private CodedInputStreamRAF(final RandomAccessFile raf, int bufferSize) {
 	BUFFER_SIZE = bufferSize;
     buffer = new byte[BUFFER_SIZE];
-    bufferSize = 0;
+    this.bufferSize = 0;
     bufferPos = 0;
     totalBytesRetired = 0;
     this.raf = raf;
@@ -806,6 +806,7 @@ public final class CodedInputStreamRAF {
 		  skipRawBytes((int) (pointer - getTotalBytesRead()));
 	  } else {
 		  totalBytesRetired = (int) pointer;
+		  bufferSizeAfterLimit = 0;
 		  raf.seek(pointer);
 		  bufferPos = 0;
 		  bufferSize = 0;
