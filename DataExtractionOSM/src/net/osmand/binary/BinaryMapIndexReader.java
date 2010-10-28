@@ -1,6 +1,7 @@
 package net.osmand.binary;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.Algoritms;
 import net.osmand.osm.MapUtils;
 
 import com.google.protobuf.CodedInputStreamRAF;
@@ -176,6 +178,9 @@ public class BinaryMapIndexReader {
 					continue;
 				}
 				for (MapTree tree : index.trees) {
+					if(tree.right < req.left || tree.left > req.right || tree.top > req.bottom || tree.bottom < req.top){
+						continue;
+					}
 					codedIS.seek(tree.filePointer);
 					int oldLimit = codedIS.pushLimit(tree.length);
 					searchMapTreeBounds(tree, index.left, index.right, index.top, index.bottom, req);
@@ -320,13 +325,22 @@ public class BinaryMapIndexReader {
 				return dataObject;
 			case OsmandOdb.MapData.TYPES_FIELD_NUMBER :
 				int sizeL = codedIS.readRawVarint32();
-				codedIS.skipRawBytes(sizeL);
-				// TODO read types
+				byte[] types = codedIS.readRawBytes(sizeL);
+				int[] newTypes = new int[types.length/2]; 
+				for(int i=0; i<newTypes.length; i++){
+					newTypes[i] = Algoritms.parseSmallIntFromBytes(types, i*2);
+				}
+				dataObject.types = newTypes;
 				break;
 			case OsmandOdb.MapData.RESTRICTIONS_FIELD_NUMBER :
-				// TODO read restrictions 
 				sizeL = codedIS.readRawVarint32();
-				codedIS.skipRawBytes(sizeL);
+				TLongArrayList list = new TLongArrayList();
+				old = codedIS.pushLimit(sizeL);
+				while(codedIS.getBytesUntilLimit() > 0){
+					list.add(codedIS.readSInt64());
+				}
+				codedIS.popLimit(old);
+				dataObject.restrictions = list.toArray();
 				break;
 			case OsmandOdb.MapData.HIGHWAYMETA_FIELD_NUMBER :
 				dataObject.highwayAttributes = codedIS.readInt32();
@@ -425,6 +439,14 @@ public class BinaryMapIndexReader {
 		request.bottom = sbottom;
 		request.zoom = zoom;
 		return request;
+	}
+	
+	public void close() throws IOException{
+		if(codedIS != null){
+			raf.close();
+			codedIS = null;
+			mapIndexes.clear();
+		}
 	}
 	
 	public static class SearchRequest {

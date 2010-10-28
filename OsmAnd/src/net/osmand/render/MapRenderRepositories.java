@@ -4,12 +4,8 @@ import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TLongHashSet;
 
 import java.io.File;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,8 +20,10 @@ import net.osmand.IProgress;
 import net.osmand.LogUtil;
 import net.osmand.OsmandSettings;
 import net.osmand.RotatedTileBox;
+import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.index.IndexConstants;
-import net.osmand.osm.MapRenderObject;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.MultyPolygon;
@@ -41,18 +39,14 @@ public class MapRenderRepositories {
 	
 	private final static Log log = LogUtil.getLog(MapRenderRepositories.class);
 	private final Context context;
-	private Map<String, Connection> files = new LinkedHashMap<String, Connection>();
-	private Map<Connection, RectF> connections = new LinkedHashMap<Connection, RectF>();
-	private Map<Connection, PreparedStatement> pZoom0 = new LinkedHashMap<Connection, PreparedStatement>();
-	private Map<Connection, PreparedStatement> pZoom1 = new LinkedHashMap<Connection, PreparedStatement>();
-	private Map<Connection, PreparedStatement> pZoom2 = new LinkedHashMap<Connection, PreparedStatement>();
+	private Map<String, BinaryMapIndexReader> files = new LinkedHashMap<String, BinaryMapIndexReader>();
 	private OsmandRenderer renderer;
 
 	
 	// lat/lon box of requested vector data 
 	private RectF cObjectsBox = new RectF();
 	// cached objects in order to render rotation without reloading data from db
-	private List<MapRenderObject> cObjects = new LinkedList<MapRenderObject>();
+	private List<BinaryMapDataObject> cObjects = new LinkedList<BinaryMapDataObject>();
 	
 	// currently rendered box (not the same as already rendered)
 	//	this box is checked for interrupted process or 
@@ -76,59 +70,28 @@ public class MapRenderRepositories {
 		return context;
 	}
 	
-	private RectF getBoundsForIndex(Statement stat, String tableName) throws SQLException{
-		ResultSet rs = stat.executeQuery("SELECT MIN(minLon), MAX(maxLat), MAX(maxLon), MIN(minLat) FROM " + IndexConstants.indexMapLocationsTable); //$NON-NLS-1$
-		RectF bounds = new RectF();
-		if(rs.next()){
-			bounds.set(rs.getFloat(1), rs.getFloat(2), rs.getFloat(3), rs.getFloat(4));
-		}
-		rs.close();
-		return bounds;
-	}
-	
 	
 	public boolean initializeNewResource(final IProgress progress, File file) {
 		long start = System.currentTimeMillis();
-		Connection conn = null;
 		if(files.containsKey(file.getAbsolutePath())){
 			closeConnection(files.get(file.getAbsolutePath()), file.getAbsolutePath());
 		}
+		RandomAccessFile raf = null;
 		try {
-			try {
-				Class.forName("org.sqlite.JDBC"); //$NON-NLS-1$
-			} catch (Exception e) {
-				log.error("Could not load driver", e); //$NON-NLS-1$
+			raf = new RandomAccessFile(file, "r"); //$NON-NLS-1$
+			BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
+			if(reader.getVersion() != IndexConstants.BINARY_MAP_VERSION){
 				return false;
 			}
-			conn = DriverManager.getConnection("jdbc:sqlite:" + file.getAbsolutePath()); //$NON-NLS-1$
-			PreparedStatement pStatement = conn.prepareStatement(loadMapQuery);
-			PreparedStatement pStatement2 = conn.prepareStatement(loadMapQuery2);
-			PreparedStatement pStatement3 = conn.prepareStatement(loadMapQuery3);
-			Statement stat = conn.createStatement();
-			ResultSet rs = stat.executeQuery("PRAGMA user_version"); //$NON-NLS-1$
-			int v = rs.getInt(1);
-			rs.close();
-			if(v != IndexConstants.MAP_TABLE_VERSION){
-				return false;
-			}
-			RectF bounds = foundBounds(stat);
+			files.put(file.getAbsolutePath(), reader);
 			
-			
-			stat.close();
-			connections.put(conn, bounds);
-			files.put(file.getAbsolutePath(), conn);
-			pZoom0.put(conn, pStatement);
-			pZoom1.put(conn, pStatement2);
-			pZoom2.put(conn, pStatement3);
-			
-		} catch (Exception e) {
+		} catch (IOException e) {
 			log.error("No connection", e); //$NON-NLS-1$
-			if(conn != null){
+			if(raf != null){
 				try {
-					conn.close();
-				} catch (java.sql.SQLException e1) {
+					raf.close();
+				} catch (IOException e1) {
 				}
-				conn = null;
 			}
 			return false;
 		}
@@ -138,62 +101,16 @@ public class MapRenderRepositories {
 		return true;
 	}
 
-	private RectF foundBounds(Statement stat) throws SQLException {
-		String metaTable = "loc_meta_locations"; //$NON-NLS-1$
-		ResultSet rs = stat.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='"+metaTable+"'");  //$NON-NLS-1$//$NON-NLS-2$
-		boolean dbExist = rs.next();
-		rs.close();
-		boolean found = false;
-		boolean write = true;
-		RectF bounds = new RectF();
-		if(dbExist){
-			rs = stat.executeQuery("SELECT MAX_LAT, MIN_LON, MIN_LAT, MAX_LON  FROM " +metaTable); //$NON-NLS-1$
-			if(rs.next()){
-				bounds.set(rs.getFloat(2), rs.getFloat(1), rs.getFloat(4), rs.getFloat(3));
-				found = true;
-			} else {
-				found = false;
-			}
-			rs.close();
-		} else {
-			try {
-				stat.execute("CREATE TABLE " + metaTable + " (MAX_LAT DOUBLE, MIN_LON DOUBLE, MIN_LAT DOUBLE, MAX_LON DOUBLE)"); //$NON-NLS-1$ //$NON-NLS-2$
-			} catch (RuntimeException e) {
-				// case when database is in readonly mode
-				write = false;
-			}
-		}
-		
-		if (!found) {
-			bounds = getBoundsForIndex(stat, IndexConstants.indexMapLocationsTable2);
-			if(bounds.left == bounds.right || bounds.bottom == bounds.top){
-				bounds = getBoundsForIndex(stat, IndexConstants.indexMapLocationsTable);
-				if(bounds.left == bounds.right || bounds.bottom == bounds.top){
-					bounds = getBoundsForIndex(stat, IndexConstants.indexMapLocationsTable3);
-				}
-			}
-			if (write) {
-				stat.execute("INSERT INTO " + metaTable + " VALUES ("+Double.toString(bounds.top)+ ", "+Double.toString(bounds.left)+ ", " +  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-						Double.toString(bounds.bottom)+ ", "+Double.toString(bounds.right)+ ")");  //$NON-NLS-1$//$NON-NLS-2$
-			}
-		}
-		
-		return bounds;
-	}
 	
 	public RotatedTileBox getBitmapLocation() {
 		return bmpLocation;
 	}
 	
-	protected void closeConnection(Connection c, String file){
-		files.remove(c);
-		connections.remove(c);
-		pZoom0.remove(c);
-		pZoom1.remove(c);
-		pZoom2.remove(c);
+	protected void closeConnection(BinaryMapIndexReader c, String file){
+		files.remove(file);
 		try {
 			c.close();
-		} catch (java.sql.SQLException e) {
+		} catch (IOException e) {
 		}
 	}
 	
@@ -206,7 +123,7 @@ public class MapRenderRepositories {
 	
 
 	public boolean updateMapIsNeeded(RotatedTileBox box){
-		if (connections.isEmpty() || box == null) {
+		if (files.isEmpty() || box == null) {
 			return false;
 		}
 		if(requestedBox == null){
@@ -229,27 +146,8 @@ public class MapRenderRepositories {
 	}
 
 	public boolean isEmpty(){
-		return connections.isEmpty();
+		return files.isEmpty();
 	}
-	
-	private static String loadMapQuery = "SELECT "+IndexConstants.IndexMapRenderObject.ID +", " + IndexConstants.IndexMapRenderObject.NODES +", " +  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-										IndexConstants.IndexMapRenderObject.NAME + ", " + IndexConstants.IndexMapRenderObject.TYPE + //$NON-NLS-1$
-										" FROM " + IndexConstants.IndexMapRenderObject.getTable() +	" WHERE "+IndexConstants.IndexMapRenderObject.ID+  //$NON-NLS-1$//$NON-NLS-2$
-											" IN (SELECT id FROM "+IndexConstants.indexMapLocationsTable +   //$NON-NLS-1$
-												" WHERE ? <  maxLat AND ? > minLat AND maxLon > ? AND minLon  < ?)"; //$NON-NLS-1$
-	
-	private static String loadMapQuery2 = "SELECT "+IndexConstants.IndexMapRenderObject.ID +", " + IndexConstants.IndexMapRenderObject.NODES +", " +  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-										  IndexConstants.IndexMapRenderObject.NAME + ", " + IndexConstants.IndexMapRenderObject.TYPE + //$NON-NLS-1$
-										  " FROM " + IndexConstants.IndexMapRenderObject.getTable() +	" WHERE "+IndexConstants.IndexMapRenderObject.ID+  //$NON-NLS-1$//$NON-NLS-2$
-										  " IN (SELECT id FROM "+IndexConstants.indexMapLocationsTable2 +   //$NON-NLS-1$
-										  " WHERE ? <  maxLat AND ? > minLat AND maxLon > ? AND minLon  < ?)"; //$NON-NLS-1$
-	
-	
-	private static String loadMapQuery3 = "SELECT "+IndexConstants.IndexMapRenderObject.ID +", " + IndexConstants.IndexMapRenderObject.NODES +", " +  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-										  IndexConstants.IndexMapRenderObject.NAME + ", " + IndexConstants.IndexMapRenderObject.TYPE + //$NON-NLS-1$
-										  " FROM " + IndexConstants.IndexMapRenderObject.getTable() +	" WHERE "+IndexConstants.IndexMapRenderObject.ID +  //$NON-NLS-1$//$NON-NLS-2$
-										  " IN (SELECT id FROM "+IndexConstants.indexMapLocationsTable3 +   //$NON-NLS-1$
-										  " WHERE ? <  maxLat AND ? > minLat AND maxLon > ? AND minLon  < ?)"; //$NON-NLS-1$
 	
 	public void interruptLoadingMap(){
 		interrupted = true;
@@ -277,93 +175,54 @@ public class MapRenderRepositories {
 
 		long now = System.currentTimeMillis();
 
-		if (connections.isEmpty()) {
+		if (files.isEmpty()) {
 			cObjectsBox = dataBox;
-			cObjects = new ArrayList<MapRenderObject>();
+			cObjects = new ArrayList<BinaryMapDataObject>();
 			return true;
 		}
 		try {
 			int count = 0;
-			ArrayList<MapRenderObject> tempList = new ArrayList<MapRenderObject>();
+			ArrayList<BinaryMapDataObject> tempList = new ArrayList<BinaryMapDataObject>();
 			System.gc(); // to clear previous objects
-//			Set<Long> ids = new HashSet<Long>(1000);
 			TLongSet ids = new TLongHashSet();
-			Map<Integer, List<MapRenderObject>> multiPolygons = new LinkedHashMap<Integer, List<MapRenderObject>>();
-			for (Connection c : connections.keySet()) {
-				RectF r = connections.get(c);
-				boolean intersects = r.top >= cBottomLatitude  && r.left <= cRightLongitude && r.right >= cLeftLongitude &&
-										r.bottom <= cTopLatitude;
-				if(!intersects){
-					continue;
-				}
-				
-				PreparedStatement statement = null;
-				if (zoom >= 15) {
-					statement = pZoom0.get(c);
-				} else if (zoom >= 10) {
-					statement = pZoom1.get(c);
-				} else if (zoom >= 6) {
-					statement = pZoom2.get(c);
-				} else {
-					// TODO show raster tiles ?
-					continue;
-				}
-				statement.setDouble(1, cBottomLatitude);
-				statement.setDouble(2, cTopLatitude);
-				statement.setDouble(3, cLeftLongitude);
-				statement.setDouble(4, cRightLongitude);
-				ResultSet result = statement.executeQuery();
-
-
-				try {
-					while (result.next()) {
-						long id = result.getLong(1);
-						if (PerformanceFlags.checkForDuplicateObjectIds) {
-							if (ids.contains(id)) {
-								// do not add object twice
-								continue;
-							}
-							ids.add(id);
-						}
-						int type = result.getInt(4);
-						MapRenderObject obj = new MapRenderObject(id);
-						obj.setType(type);
-						obj.setData(result.getBytes(2));
-						obj.setName(result.getString(3));
-						
-						count++;
-						int mainType = obj.getMainType();
-						// be attentive we need 16 bits from main type (not 15 bits!) 
-						// the last bit shows direction of multipolygon way
-						registerMultipolygon(multiPolygons, mainType, obj);
-						int sec = obj.getSecondType();
-						if(sec != 0){
-							registerMultipolygon(multiPolygons, sec, obj);
-						}
-						for (int k = 0; k < obj.getMultiTypes(); k++) {
-							registerMultipolygon(multiPolygons, obj.getAdditionalType(k), obj);
-						}
-						if(checkWhetherInterrupted()){
-							return false;
-						}
-						tempList.add(obj);
-					}
-
-				} finally {
-					result.close();
-				}
-			}
+			Map<Integer, List<BinaryMapDataObject>> multiPolygons = new LinkedHashMap<Integer, List<BinaryMapDataObject>>();
 			int leftX = MapUtils.get31TileNumberX(cLeftLongitude);
 			int rightX = MapUtils.get31TileNumberX(cRightLongitude);
 			int bottomY = MapUtils.get31TileNumberY(cBottomLatitude);
 			int topY = MapUtils.get31TileNumberY(cTopLatitude);
+			SearchRequest searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom);
+			
+			for (BinaryMapIndexReader c : files.values()) {
+				List<BinaryMapDataObject> res = c.searchMapIndex(searchRequest);
+				for (BinaryMapDataObject r : res) {
+					if (PerformanceFlags.checkForDuplicateObjectIds) {
+						if (ids.contains(r.getId())) {
+							// do not add object twice
+							continue;
+						}
+						ids.add(r.getId());
+					}
+					count++;
+					
+					for(int i=0; i < r.getTypes().length; i++){
+						registerMultipolygon(multiPolygons, r.getTypes()[i], r);
+					}
+					
+					
+					if (checkWhetherInterrupted()) {
+						return false;
+					}
+					tempList.add(r);
+				}
+			}
+			
 			List<MultyPolygon> pMulti = proccessMultiPolygons(multiPolygons, leftX, rightX, bottomY, topY);
 			tempList.addAll(pMulti);
 			log.info(String.format("Search has been done in %s ms. %s results were found.", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
 			
 			cObjects = tempList;
 			cObjectsBox = dataBox;
-		} catch (java.sql.SQLException e) {
+		} catch (IOException e) {
 			log.debug("Search failed", e); //$NON-NLS-1$
 			return false;
 		}
@@ -443,13 +302,13 @@ public class MapRenderRepositories {
 
 	
 	/// Manipulating with multipolygons
-	private void registerMultipolygon(Map<Integer, List<MapRenderObject>> multyPolygons, int type, MapRenderObject obj) {
+	private void registerMultipolygon(Map<Integer, List<BinaryMapDataObject>> multyPolygons, int type, BinaryMapDataObject obj) {
 		if ((type & 0x3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
 			type &= 0xffff; // reject attrs
 			// multy polygon
 			if (type != 0) {
 				if (!multyPolygons.containsKey(type)) {
-					multyPolygons.put(type, new ArrayList<MapRenderObject>());
+					multyPolygons.put(type, new ArrayList<BinaryMapDataObject>());
 				}
 				multyPolygons.get(type).add(obj);
 			}
@@ -457,15 +316,15 @@ public class MapRenderRepositories {
 		}
 	}
 	
-	public List<MultyPolygon> proccessMultiPolygons(Map<Integer, List<MapRenderObject>> multyPolygons, int leftX, int rightX, int bottomY, int topY){
+	public List<MultyPolygon> proccessMultiPolygons(Map<Integer, List<BinaryMapDataObject>> multyPolygons, int leftX, int rightX, int bottomY, int topY){
 		List<MultyPolygon> listPolygons = new ArrayList<MultyPolygon>(multyPolygons.size());
 		List<List<Long>> completedRings = new ArrayList<List<Long>>();
 		List<List<Long>> incompletedRings = new ArrayList<List<Long>>();
 		List<String> completedRingNames = new ArrayList<String>();
 		List<String> incompletedRingNames = new ArrayList<String>();
 		for (Integer type : multyPolygons.keySet()) {
-			List<MapRenderObject> directList;
-			List<MapRenderObject> inverselist;
+			List<BinaryMapDataObject> directList;
+			List<BinaryMapDataObject> inverselist;
 			if(((type >> 15) & 1) == 1){
 				int directType = (type & ((1 << 15) - 1));
 				if (!multyPolygons.containsKey(directType)) {
@@ -499,13 +358,13 @@ public class MapRenderRepositories {
 
 	private MultyPolygon processMultiPolygon(int leftX, int rightX, int bottomY, int topY, List<MultyPolygon> listPolygons,
 			List<List<Long>> completedRings, List<List<Long>> incompletedRings, List<String> completedRingNames, List<String> incompletedRingNames, 
-			Integer type, List<MapRenderObject> directList, List<MapRenderObject> inverselist) {
+			Integer type, List<BinaryMapDataObject> directList, List<BinaryMapDataObject> inverselist) {
 		MultyPolygon pl = new MultyPolygon();
 		// delete direction last bit (to not show point)
 		pl.setType((type & 0x7fff) << 1);
 		for (int km = 0; km < 2; km++) {
-			List<MapRenderObject> list = km == 0 ? directList : inverselist;
-			for (MapRenderObject o : list) {
+			List<BinaryMapDataObject> list = km == 0 ? directList : inverselist;
+			for (BinaryMapDataObject o : list) {
 				int len = o.getPointsLength();
 				if (len < 2) {
 					continue;
