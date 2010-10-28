@@ -10,11 +10,13 @@ option java_package = "net.osmand.binary";
  // The main difference that size of that messages is not var int and is always fixed int size
 message OsmAndStructure {
    required uint32 version = 1;
+   // encoded as fixed32 length delimited
    repeated OsmAndMapIndex mapIndex = 2;  
 } 
 
 message OsmAndMapIndex {
-   repeated MapRootLevel levels = 1;
+   // encoded as fixed32 length delimited 
+   repeated MapRootLevel levels = 1;  
 }
 
 message MapRootLevel {
@@ -25,6 +27,7 @@ message MapRootLevel {
    required int32 top = 5; 
    required int32 bottom = 6;
    
+   // encoded as fixed32 length delimited
    repeated MapTree root = 7;
    
 }
@@ -38,7 +41,9 @@ message MapTree {
    optional StringTable stringTable = 5;
    optional uint64 baseId = 6;
    
+   // encoded as fixed32 length delimited
    repeated MapTree subtrees = 7;
+   
    repeated MapData leafs = 8;
    
 }

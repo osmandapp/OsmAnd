@@ -89,7 +89,7 @@ public class BinaryMapIndexWriter {
 	public void startWriteMapIndex() throws IOException{
 		assert state.peek() == OSMAND_STRUCTURE_INIT;
 		state.push(MAP_INDEX_INIT);
-		codedOutStream.writeTag(OsmandOdb.OsmAndStructure.MAPINDEX_FIELD_NUMBER, WireFormat.FieldType.MESSAGE.getWireType());
+		codedOutStream.writeTag(OsmandOdb.OsmAndStructure.MAPINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		preserveInt32Size();
 	}
 	
@@ -104,7 +104,7 @@ public class BinaryMapIndexWriter {
 		assert state.peek() == MAP_INDEX_INIT;
 		state.push(MAP_ROOT_LEVEL_INIT);
 		
-		codedOutStream.writeTag(OsmandOdb.OsmAndMapIndex.LEVELS_FIELD_NUMBER, WireFormat.FieldType.MESSAGE.getWireType());
+		codedOutStream.writeTag(OsmandOdb.OsmAndMapIndex.LEVELS_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		preserveInt32Size();
 		
 		codedOutStream.writeInt32(OsmandOdb.MapRootLevel.MAXZOOM_FIELD_NUMBER, maxZoom);
@@ -131,9 +131,9 @@ public class BinaryMapIndexWriter {
 	public void startMapTreeElement(long baseId, int leftX, int rightX, int topY, int bottomY) throws IOException{
 		assert state.peek() == MAP_ROOT_LEVEL_INIT || state.peek() == MAP_TREE;
 		if(state.peek() == MAP_ROOT_LEVEL_INIT){
-			codedOutStream.writeTag(OsmandOdb.MapRootLevel.ROOT_FIELD_NUMBER, WireFormat.FieldType.MESSAGE.getWireType());
+			codedOutStream.writeTag(OsmandOdb.MapRootLevel.ROOT_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		} else {
-			codedOutStream.writeTag(OsmandOdb.MapTree.SUBTREES_FIELD_NUMBER, WireFormat.FieldType.MESSAGE.getWireType());
+			codedOutStream.writeTag(OsmandOdb.MapTree.SUBTREES_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		}
 		preserveInt32Size();
 		state.push(MAP_TREE);
