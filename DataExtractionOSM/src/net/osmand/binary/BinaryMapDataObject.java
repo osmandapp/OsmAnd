@@ -1,134 +1,107 @@
-package net.osmand.osm;
+package net.osmand.binary;
 
-import net.osmand.Algoritms;
+import net.osmand.osm.MapRenderingTypes;
 
-public class BinaryMapRenderObject {
-	private String name = null;
-	private int type;
-	private byte[] data = null;
-	private long id;
-	private float order = -1;
-	private boolean multitype = false;
-	private boolean highwayType = false;
+public class BinaryMapDataObject {
+	int[] coordinates = null;
+	int[] types = null;
 	
-	public BinaryMapRenderObject(long id){
-		this.id = id;
+	int stringId = -1;
+	long id = 0;
+	
+	long[] restrictions = null;
+	int highwayAttributes = 0;
+	
+	String name;
+	
+	
+	public BinaryMapDataObject(){
 	}
 	
-	public void setData(byte[] data) {
-		this.data = data;
+	protected void setStringId(int stringId) {
+		this.stringId = stringId;
 	}
+	
+	protected void setCoordinates(int[] coordinates) {
+		this.coordinates = coordinates;
+	}
+	
+	protected int getStringId() {
+		return stringId;
+	}
+	
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	public void setType(int type) {
-		this.type = type;
-		multitype = (type & 1) > 0;
-		highwayType = isHighwayType();
-		order = -1;
-	}
-	
-	public int getWholeType() {
-		return type;
-	}
-	
-	public long getId() {
-		return id;
-	}
-	
-	public boolean isMultitype() {
-		return multitype;
-	}
-	
-	public byte getMultiTypes(){
-		return multitype ? data[0] : 0;
-	}
-
-	public byte getRestrictions(){
-		if(!highwayType){
-			return 0;
-		}
-		if(multitype){
-			return data[1];
-		}
-		return data[0];
-	}
-	
-	
-	
-	public int getAdditionalType(int k){
-		return Algoritms.parseSmallIntFromBytes(data, highwayType ? k * 2 + 2 : k * 2 + 1);
-	}
-	
-	// do not cut type to 15 bits (16 bits needed for multipolygon)
-	public int getMainType(){
-		return (type >> 1);
-	}
-	
-	private boolean isHighwayType(){
-		int pr = type >> 1;
-		return (pr & 3) == MapRenderingTypes.POLYLINE_TYPE && MapRenderingTypes.getMainObjectType(pr) == MapRenderingTypes.HIGHWAY;
-	}
-	
-	public int getSecondType(){
-		if(isHighwayType()){
-			return 0;
-		}
-		return type >> 16;
-	}
-	
-	public byte getRestrictionType(int k){
-		int offset = multitype ? data[0] * 2 + 2 : 1;
-		long l = Algoritms.parseLongFromBytes(data, offset);
-		return (byte) (l & 7);
-	}
-	
-	public long getRestriction(int k){
-		int offset = multitype ? data[0] * 2 + 2 : 1;
-		long l = Algoritms.parseLongFromBytes(data, offset);
-		return (l & ~7l) | (id & 7l);
-	} 
-	
-	
-	public int getPointsLength() {
-		if (data == null || data.length == 0) {
-			return 0;
-		}
-		return (data.length - getShiftCoordinates()) / 8;
 	}
 	
 	public String getName() {
 		return name;
 	}
 	
-	private int getShiftCoordinates(){
-		int shift = 0;
-		if(multitype){
-			shift = data[0] * 2 + 1;
-			if(highwayType){
-				shift += data[1] * 8 + 1;
-			}
-		} else if(highwayType){
-			shift = data[0] * 8 + 1;
-		}
-		return shift;
+	public int[] getTypes(){
+		return types;
 	}
 	
+	public long getId() {
+		return id;
+	}
+	
+	protected void setId(long id) {
+		this.id = id;
+	}
+	
+	protected void setTypes(int[] types) {
+		this.types = types;
+	}
+	
+	
+	public int getHighwayAttributes() {
+		return highwayAttributes;
+	}
+	
+	protected void setHighwayAttributes(int highwayAttributes) {
+		this.highwayAttributes = highwayAttributes;
+	}
+
+	public int getPointsLength(){
+		if(coordinates == null){
+			return 0;
+		}
+		return coordinates.length / 2;
+	}
 	public int getPoint31YTile(int ind) {
-		return Algoritms.parseIntFromBytes(data, ind * 8 + getShiftCoordinates());
+		return coordinates[2 * ind + 1];
 	}
 
 	public int getPoint31XTile(int ind) {
-		return Algoritms.parseIntFromBytes(data, ind * 8 + 4 + getShiftCoordinates());
+		return coordinates[2 * ind];
 	}
 	
-	public float getMapOrder(){
-		if (order == -1) {
-			order = getOrder(getMainType());
+	public int getRestrictionCount(){
+		if(restrictions == null){
+			return 0;
 		}
-		return order;
+		return restrictions.length;
 	}
+	
+	
+	protected void setRestrictions(long[] restrictions) {
+		this.restrictions = restrictions;
+	}
+	
+	protected long[] getRestrictions() {
+		return restrictions;
+	}
+	
+	public byte getRestrictionType(int k){
+		return (byte) (restrictions[k] & 7);
+	}
+	
+	public long getRestriction(int k){
+		long l = restrictions[k];
+		return (l & ~7l) | (id & 7l);
+	} 
+	
 
 	public static float getOrder(int wholeType) {
 		float order = 0;
@@ -233,6 +206,6 @@ public class BinaryMapRenderObject {
 		return order;
 	}
 	
-
-
+	
+	
 }

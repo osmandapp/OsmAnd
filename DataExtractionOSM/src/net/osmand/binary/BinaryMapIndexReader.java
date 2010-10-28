@@ -45,22 +45,6 @@ public class BinaryMapIndexReader {
 		
 	}
 	
-	public class MapDataObject {
-		
-		
-		int[] coordinates = null;
-		int[] types = null;
-		
-		int stringId = -1;
-		long id = 0;
-		
-		long[] restrictions = null;
-		int highwayAttributes = 0;
-		
-		String name;
-	}
-
-	
 	
 	public BinaryMapIndexReader(final RandomAccessFile raf) throws IOException {
 		this.raf = raf;
@@ -183,8 +167,8 @@ public class BinaryMapIndexReader {
 		}
 	}
 	
-	public List<MapDataObject> searchMapIndex(MapRoot index, int sleft, int sright, int stop, int sbottom,
-			List<MapDataObject> searchResults) throws IOException {
+	public List<BinaryMapDataObject> searchMapIndex(MapRoot index, int sleft, int sright, int stop, int sbottom,
+			List<BinaryMapDataObject> searchResults) throws IOException {
 		for(MapTree tree : index.trees){
 			codedIS.seek(tree.filePointer);
 			int oldLimit = codedIS.pushLimit(tree.length);
@@ -197,9 +181,9 @@ public class BinaryMapIndexReader {
 	
 	private void searchMapTreeBounds(MapTree tree, int pleft, int pright, int ptop, int pbottom,
 			int sleft, int sright, int stop, int sbottom,
-			List<MapDataObject> searchResults, String indent) throws IOException {
+			List<BinaryMapDataObject> searchResults, String indent) throws IOException {
 		int init = 0;
-		List<MapDataObject> results = null;
+		List<BinaryMapDataObject> results = null;
 		while(true){
 			int tag = WireFormat.getTagFieldNumber(codedIS.readTag());
 			if(init == 0xf){
@@ -231,10 +215,10 @@ public class BinaryMapIndexReader {
 			case OsmandOdb.MapTree.LEAFS_FIELD_NUMBER :
 				int length = codedIS.readRawVarint32();
 				int oldLimit = codedIS.pushLimit(length);
-				MapDataObject mapObject = readMapDataObject(tree.left, tree.right, tree.top, tree.bottom, sleft, sright, stop, sbottom);
+				BinaryMapDataObject mapObject = readMapDataObject(tree.left, tree.right, tree.top, tree.bottom, sleft, sright, stop, sbottom);
 				if(mapObject != null){
 					if(results == null){
-						results = new ArrayList<MapDataObject>();
+						results = new ArrayList<BinaryMapDataObject>();
 					}
 					results.add(mapObject);
 					searchResults.add(mapObject);
@@ -255,7 +239,7 @@ public class BinaryMapIndexReader {
 			case OsmandOdb.MapTree.BASEID_FIELD_NUMBER :
 				tree.baseId = codedIS.readUInt64();
 				if (results != null) {
-					for (MapDataObject rs : results) {
+					for (BinaryMapDataObject rs : results) {
 						rs.id += tree.baseId;
 						if (rs.restrictions != null) {
 							for (int i = 0; i < rs.restrictions.length; i++) {
@@ -272,7 +256,7 @@ public class BinaryMapIndexReader {
 				codedIS.popLimit(oldLimit);
 				
 				if (results != null) {
-					for (MapDataObject rs : results) {
+					for (BinaryMapDataObject rs : results) {
 						if (rs.stringId != -1) {
 							rs.name = tree.stringTable.get(rs.stringId);
 						}
@@ -286,7 +270,7 @@ public class BinaryMapIndexReader {
 		}
 	}
 	List<Integer> CACHE = new ArrayList<Integer>();
-	private MapDataObject readMapDataObject(int left, int right, int top, int bottom, int sleft, int sright, int stop, int sbottom) throws IOException {
+	private BinaryMapDataObject readMapDataObject(int left, int right, int top, int bottom, int sleft, int sright, int stop, int sbottom) throws IOException {
 		int tag = WireFormat.getTagFieldNumber(codedIS.readTag());
 		if(OsmandOdb.MapData.COORDINATES_FIELD_NUMBER != tag) {
 			throw new IllegalArgumentException();
@@ -314,7 +298,7 @@ public class BinaryMapIndexReader {
 			return null;
 		}
 		
-		MapDataObject dataObject = new MapDataObject();
+		BinaryMapDataObject dataObject = new BinaryMapDataObject();
 		dataObject.coordinates = new int[CACHE.size()];
 		for(int i=0; i<CACHE.size(); i++){
 			dataObject.coordinates[i] = CACHE.get(i);
@@ -410,9 +394,9 @@ public class BinaryMapIndexReader {
 		for(MapRoot b : reader.getMapIndexes()) {
 			System.out.println(b.minZoom + " " + b.maxZoom + " " +b.trees.size() + " " 
 					+ b.left + " " + b.right + " " + b.top + " " + b.bottom);
-			for(MapDataObject obj : reader.searchMapIndex(b, sleft, sright, stop, sbottom, new ArrayList<MapDataObject>())){
-				if(obj.name != null){
-					System.out.println(" " + obj.name);
+			for(BinaryMapDataObject obj : reader.searchMapIndex(b, sleft, sright, stop, sbottom, new ArrayList<BinaryMapDataObject>())){
+				if(obj.getName() != null){
+					System.out.println(" " + obj.getName());
 				}
 			}
 		}

@@ -1,0 +1,28 @@
+option java_package = "crosby.binary";
+//protoc --java_out=../.. fileformat.proto
+
+
+//
+//  STORAGE LAYER: Storing primitives.
+//
+
+message Blob {
+  optional bytes raw = 1; // No compression
+  optional int32 raw_size = 2; // When compressed, the uncompressed size
+  // Possible compressed versions of the data.
+  optional bytes zlib_data = 3;
+  optional bytes lzma_data = 4;
+  optional bytes bzip2_data = 5;
+}
+
+/* A file contains an sequence of fileblock headers, each prefixed by
+their length, followed by a data block containing the actual data. 
+types staring with a "_" are reserved.
+
+*/
+
+message BlockHeader {
+  required string type = 1;
+  optional bytes indexdata = 2;
+  required int32 datasize = 3;
+}
