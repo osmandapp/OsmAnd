@@ -24,7 +24,6 @@ import net.osmand.data.City.CityType;
 import net.osmand.data.index.IndexConstants.IndexBinaryMapRenderObject;
 import net.osmand.data.index.IndexConstants.IndexBuildingTable;
 import net.osmand.data.index.IndexConstants.IndexCityTable;
-import net.osmand.data.index.IndexConstants.IndexMapRenderObject;
 import net.osmand.data.index.IndexConstants.IndexPoiTable;
 import net.osmand.data.index.IndexConstants.IndexStreetNodeTable;
 import net.osmand.data.index.IndexConstants.IndexStreetTable;

@@ -11,7 +11,7 @@
 	<authorization_info cookieHSID=""
 		cookieSID=""
 		pagegen="" token=""
-		google_code_user="vics001" google_code_password="" />
+		google_code_user="" google_code_password="" />
 	<!-- There are 3 subprocess : 
 		 1. Download fresh osm files from servers to 'directory_for_osm_files' (override existings).
 		 2. Generate index files from all files in 'directory_for_osm_files' and put all indexes into 'directory_for_index_files'
