@@ -25,7 +25,7 @@ message MapRootLevel {
    required int32 top = 5; 
    required int32 bottom = 6;
    
-   required MapTree root = 7;
+   repeated MapTree root = 7;
    
 }
 
@@ -54,13 +54,14 @@ message StringTable {
 
 /// Simple messages
 message MapData {
-  required bytes coordinates = 1; // array of delta x,y uin32 could be read by codedinputstream
+  required bytes coordinates = 1; // array of delta x,y sint32 could be read by codedinputstream
+  								 // first x delta to Tree.left, y to delta Tree.top (next delta to previous)
   required bytes types = 2; // array of fixed int16
   
   required sint64 id = 3; // delta encoded
   optional uint32 stringId = 4;
   
-  repeated sint64 restrictions = 5; // delta encoded 3 bytes for type and other for id
+  optional bytes restrictions = 5; // array of SInt64 delta encoded (to baseId !)
   optional int32 highwayMeta = 6; 
 }
 
