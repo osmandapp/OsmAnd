@@ -785,7 +785,7 @@ public final class CodedInputStreamRAF {
     } else {
       // Skipping more bytes than are in the buffer.  First skip what we have.
       int pos = bufferSize - bufferPos;
-      totalBytesRetired += pos;
+      totalBytesRetired += bufferSize;
       bufferPos = 0;
       bufferSize = 0;
 
@@ -802,8 +802,8 @@ public final class CodedInputStreamRAF {
   }
   
   public void seek(long pointer) throws IOException{
-	  if(pointer - totalBytesRetired > 0  && pointer - totalBytesRetired < bufferSize){
-		  skipRawBytes((int) (pointer - totalBytesRetired));
+	  if(pointer - totalBytesRetired >= 0  && pointer - totalBytesRetired < bufferSize){
+		  skipRawBytes((int) (pointer - getTotalBytesRead()));
 	  } else {
 		  totalBytesRetired = (int) pointer;
 		  raf.seek(pointer);

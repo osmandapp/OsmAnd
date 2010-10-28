@@ -196,10 +196,10 @@ public class BinaryMapIndexWriter {
 			stackBaseIds.push(id);
 		}
 		// calculate size
-		int allSize = CodedOutputStream.computeTagSize(OsmandOdb.MapData.COORDINATES_FIELD_NUMBER);
 		int sizeCoordinates = 0;
-		int px = bounds.leftX / 2;
-		int py = bounds.topY / 2;
+		int allSize = 0;
+		int px = bounds.leftX;
+		int py = bounds.topY;
 		for(int i=0; i< nodes.length / 8; i++){
 			int x = Algoritms.parseIntFromBytes(nodes, i*8);
 			int y = Algoritms.parseIntFromBytes(nodes, i*8 + 4);
@@ -208,20 +208,24 @@ public class BinaryMapIndexWriter {
 			px = x;
 			py = y;
 		}
-		allSize += sizeCoordinates;
+		allSize += CodedOutputStream.computeRawVarint32Size(sizeCoordinates) + 
+				CodedOutputStream.computeTagSize(OsmandOdb.MapData.COORDINATES_FIELD_NUMBER) + sizeCoordinates;
 		// DEBUG
-		COORDINATES_SIZE += sizeCoordinates + CodedOutputStream.computeTagSize(OsmandOdb.MapData.COORDINATES_FIELD_NUMBER);
+		COORDINATES_SIZE += allSize;
 
+		
 		allSize += CodedOutputStream.computeTagSize(OsmandOdb.MapData.TYPES_FIELD_NUMBER);
 		allSize += CodedOutputStream.computeRawVarint32Size(types.length);
 		allSize += types.length;
 		// DEBUG
 		TYPES_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapData.TYPES_FIELD_NUMBER) + 
 				CodedOutputStream.computeRawVarint32Size(types.length) + types.length; 
-		System.out.println(id + " " + CodedOutputStream.computeSInt64Size(OsmandOdb.MapData.ID_FIELD_NUMBER, id - stackBaseIds.peek()));
+		
+		
 		allSize += CodedOutputStream.computeSInt64Size(OsmandOdb.MapData.ID_FIELD_NUMBER, id - stackBaseIds.peek());
 		// DEBUG 
 		ID_SIZE += CodedOutputStream.computeSInt64Size(OsmandOdb.MapData.ID_FIELD_NUMBER, id - stackBaseIds.peek());
+		
 		
 		int nameId = 0;
 		if(name != null){
@@ -260,11 +264,12 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeTag(OsmandOdb.MapTree.LEAFS_FIELD_NUMBER, WireFormat.FieldType.MESSAGE.getWireType());
 		codedOutStream.writeRawVarint32(allSize);
 		
+		
 		codedOutStream.writeTag(OsmandOdb.MapData.COORDINATES_FIELD_NUMBER, WireFormat.FieldType.BYTES.getWireType());
 		codedOutStream.writeRawVarint32(sizeCoordinates);
 		
-		px =  bounds.leftX / 2;
-		py = bounds.topY / 2;
+		px =  bounds.leftX;
+		py = bounds.topY;
 		for (int i = 0; i < nodes.length / 8; i++) {
 			int x = Algoritms.parseIntFromBytes(nodes, i*8);
 			int y = Algoritms.parseIntFromBytes(nodes, i*8 + 4);
@@ -274,16 +279,17 @@ public class BinaryMapIndexWriter {
 			py = y;
 		}
 		
+		
 		codedOutStream.writeTag(OsmandOdb.MapData.TYPES_FIELD_NUMBER, WireFormat.FieldType.BYTES.getWireType());
 		codedOutStream.writeRawVarint32(types.length);
 		codedOutStream.writeRawBytes(types);
 		
-		
 		codedOutStream.writeSInt64(OsmandOdb.MapData.ID_FIELD_NUMBER, id - stackBaseIds.peek());
+		
 		
 		if(name != null){
 			codedOutStream.writeUInt32(OsmandOdb.MapData.STRINGID_FIELD_NUMBER, nameId);
-		}
+		} 
 		
 		if(restrictions.length > 0){
 			codedOutStream.writeTag(OsmandOdb.MapData.RESTRICTIONS_FIELD_NUMBER, WireFormat.FieldType.BYTES.getWireType());
