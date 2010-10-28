@@ -364,11 +364,10 @@ public class ResourceManager {
 		renderer.clearAllResources();
 		if (file.exists() && file.canRead()) {
 			for (File f : file.listFiles()) {
-				if (f.getName().endsWith(IndexConstants.MAP_INDEX_EXT)) {
+				if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 					progress.startTask(Messages.getMessage("indexing_map") + f.getName(), -1); //$NON-NLS-1$
 					try {
 						boolean initialized = renderer.initializeNewResource(progress, f);
-
 						if (!initialized) {
 							warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
 						}
@@ -376,6 +375,9 @@ public class ResourceManager {
 						log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
 						warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
 					}
+				} else if(f.getName().endsWith(IndexConstants.MAP_INDEX_EXT)){
+					// TODO change description
+					warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
 				}
 			}
 		}

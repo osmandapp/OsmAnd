@@ -1,6 +1,8 @@
 package net.osmand.osm;
 
-public class MultyPolygon extends MapRenderObject {
+import net.osmand.binary.BinaryMapDataObject;
+
+public class MultyPolygon extends BinaryMapDataObject {
 
 	// currently do not distinguish inner/outer area
 	// just not fill intersecting areas
@@ -8,7 +10,8 @@ public class MultyPolygon extends MapRenderObject {
 	private long[][] lines = null;
 	private String[] names = null;
 	public MultyPolygon(){
-		super(-1);
+		super();
+		id = -1;
 	}
 	
 	@Override
@@ -21,10 +24,6 @@ public class MultyPolygon extends MapRenderObject {
 		throw new UnsupportedOperationException();
 	}
 	
-	@Override
-	public void setData(byte[] data) {
-		throw new UnsupportedOperationException();
-	}
 	
 	public void setNames(String[] names) {
 		this.names = names;
@@ -32,6 +31,10 @@ public class MultyPolygon extends MapRenderObject {
 	
 	public String getName(int bound){
 		return names[bound];
+	}
+	
+	public void setType(int type){
+		types = new int[]{type};
 	}
 	
 	@Override

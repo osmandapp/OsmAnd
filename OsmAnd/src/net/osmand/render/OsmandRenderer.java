@@ -14,7 +14,7 @@ import java.util.Map;
 
 import net.osmand.LogUtil;
 import net.osmand.R;
-import net.osmand.osm.MapRenderObject;
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MultyPolygon;
 import net.sf.junidecode.Junidecode;
@@ -261,7 +261,7 @@ public class OsmandRenderer {
 	}
 	
 	
-	public Bitmap generateNewBitmap(RenderingContext rc, List<MapRenderObject> objects, boolean useEnglishNames) {
+	public Bitmap generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, boolean useEnglishNames) {
 		long now = System.currentTimeMillis();
 		// put in order map
 		int sz = objects.size();
@@ -269,18 +269,13 @@ public class OsmandRenderer {
 		TFloatObjectHashMap<TIntArrayList> orderMap = new TFloatObjectHashMap<TIntArrayList>();
 //		TreeMap<Float, TIntArrayList> orderMap = new TreeMap<Float, TIntArrayList>();
 		for (int i = 0; i < sz; i++) {
-			MapRenderObject o = objects.get(i);
-			int mt = o.getMainType();
+			BinaryMapDataObject o = objects.get(i);
 			int sh = i << 8;
-			put(orderMap, MapRenderObject.getOrder(mt), sh + 1, init);
-			int s = o.getSecondType();
-			if (s != 0) {
-				put(orderMap, MapRenderObject.getOrder(s), sh + 2, init);
+			
+			for (int j = 0; j < o.getTypes().length; j++) {
+				put(orderMap, BinaryMapDataObject.getOrder(o.getTypes()[j]), sh + j, init);
 			}
-			byte multiTypes = o.getMultiTypes();
-			for (int j = 0; j < multiTypes; j++) {
-				put(orderMap, MapRenderObject.getOrder(o.getAdditionalType(j)), sh + (j + 3), init);
-			}
+			
 			if(rc.interrupted){
 				return null;
 			}
@@ -300,19 +295,14 @@ public class OsmandRenderer {
 			Arrays.sort(keys);
 			for (int k = 0; k < keys.length; k++) {
 				TIntArrayList list = orderMap.get(keys[k]);
-				for(int j=0; j<list.size(); j++) {
+				for (int j = 0; j < list.size(); j++) {
 					int i = list.get(j);
 					int ind = i >> 8;
 					int l = i & 0xff;
-					MapRenderObject obj = objects.get(ind);
-					if (l == 1) {
-						// show text only for main type
-						drawObj(obj, cv, rc, obj.getMainType(), true);
-					} else if (l == 2) {
-						drawObj(obj, cv, rc, obj.getSecondType(), false);
-					} else {
-						drawObj(obj, cv, rc, obj.getAdditionalType(l - 3), false);
-					}
+					BinaryMapDataObject obj = objects.get(ind);
+
+					// show text only for main type
+					drawObj(obj, cv, rc, obj.getTypes()[l], l == 0);
 				}
 				if(rc.interrupted){
 					return null;
@@ -502,7 +492,7 @@ public class OsmandRenderer {
 	}
 
 	
-	protected void drawObj(MapRenderObject obj, Canvas canvas, RenderingContext rc, int mainType, boolean renderText) {
+	protected void drawObj(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int mainType, boolean renderText) {
 		int t = mainType & 3;					
 		int type = MapRenderingTypes.getMainObjectType(mainType);
 		int subtype = MapRenderingTypes.getObjectSubType(mainType);
@@ -523,7 +513,7 @@ public class OsmandRenderer {
 	}
 	
 	
-	private PointF calcPoint(MapRenderObject o, int ind, RenderingContext rc){
+	private PointF calcPoint(BinaryMapDataObject o, int ind, RenderingContext rc){
 		rc.pointCount ++;
 		float tx = o.getPoint31XTile(ind) / rc.tileDivisor;
 		float ty = o.getPoint31YTile(ind) / rc.tileDivisor;
@@ -555,7 +545,7 @@ public class OsmandRenderer {
 		return rc.tempPoint;
 	}
 
-	private void drawMultiPolygon(MapRenderObject obj, Canvas canvas, RenderingContext rc, int type, int subtype) {
+	private void drawMultiPolygon(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype) {
 		Path path = null;
 		rc.main.emptyArea();
 		rc.second.emptyLine();
@@ -601,7 +591,7 @@ public class OsmandRenderer {
 		}
 	}
 	
-	private void drawPolygon(MapRenderObject obj, Canvas canvas, RenderingContext rc, int type, int subtype) {
+	private void drawPolygon(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype) {
 		float xText = 0;
 		float yText = 0;
 		int zoom = rc.zoom;
@@ -666,7 +656,7 @@ public class OsmandRenderer {
 		shaders.clear();
 	}
 	
-	private void drawPoint(MapRenderObject obj, Canvas canvas, RenderingContext rc, int type, int subtype, boolean renderText) {
+	private void drawPoint(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype, boolean renderText) {
 		int resId = PointRenderer.getPointBitmap(rc.zoom, type, subtype);
 		String name = null;
 		if (renderText) {
@@ -709,7 +699,7 @@ public class OsmandRenderer {
 
 
 	
-	private void drawPolyline(MapRenderObject obj, Canvas canvas, RenderingContext rc, int type, int subtype, int wholeType) {
+	private void drawPolyline(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype, int wholeType) {
 		rc.main.emptyLine();
 		rc.second.emptyLine();
 		rc.third.emptyLine();

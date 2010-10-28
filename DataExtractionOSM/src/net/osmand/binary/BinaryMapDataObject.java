@@ -3,16 +3,16 @@ package net.osmand.binary;
 import net.osmand.osm.MapRenderingTypes;
 
 public class BinaryMapDataObject {
-	int[] coordinates = null;
-	int[] types = null;
+	protected int[] coordinates = null;
+	protected int[] types = null;
 	
-	int stringId = -1;
-	long id = 0;
+	protected int stringId = -1;
+	protected long id = 0;
 	
-	long[] restrictions = null;
-	int highwayAttributes = 0;
+	protected long[] restrictions = null;
+	protected int highwayAttributes = 0;
 	
-	String name;
+	protected String name;
 	
 	
 	public BinaryMapDataObject(){
