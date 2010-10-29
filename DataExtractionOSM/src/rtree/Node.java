@@ -33,9 +33,11 @@ import java.util.Arrays;
 public class Node implements Cloneable //can be made abstract if leaf and non leaf required
 {
   /**max no. of entries in a node*/
-  public final static int MAX = 169;//84;//101; //50;//testing 3
+//  public final static int MAX = 169;//84;//101; //50;//testing 3
+  public final static int MAX = 40;//84;//101; //50;//testing 3
   /**min. no. of entries in a node*/
-  public final static int MIN= 84;//51; //25;//testing 2
+//  public final static int MIN= 84;//51; //25;//testing 2
+  public final static int MIN= 20;//51; //25;//testing 2
   /**The size of the cache.<br>
      Minimum cache size is 50% of total no. of elements (1lakh records has 597 nodes).
      <br>Maximum cache size should be 70%, beyound that there may not be major improvements but the
