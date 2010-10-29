@@ -173,6 +173,8 @@ public class BinaryMapIndexWriter {
 				size += CodedOutputStream.computeStringSize(OsmandOdb.StringTable.S_FIELD_NUMBER, s);
 			}
 			codedOutStream.writeTag(OsmandOdb.MapTree.STRINGTABLE_FIELD_NUMBER, WireFormat.FieldType.MESSAGE.getWireType());
+			STRING_TABLE_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapTree.STRINGTABLE_FIELD_NUMBER) + 
+						CodedOutputStream.computeRawVarint32Size(size) + size;
 			codedOutStream.writeRawVarint32(size);
 			for(String s : map.keySet()){
 				codedOutStream.writeString(OsmandOdb.StringTable.S_FIELD_NUMBER, s);
@@ -185,6 +187,7 @@ public class BinaryMapIndexWriter {
 	public static int ID_SIZE = 0;
 	public static int TYPES_SIZE = 0;
 	public static int MAP_DATA_SIZE = 0;
+	public static int STRING_TABLE_SIZE = 0;
 	
 	public void writeMapData(long id, byte[] nodes, byte[] types, String name, int highwayAttributes, byte[] restrictions) throws IOException{
 		assert state.peek() == MAP_TREE;

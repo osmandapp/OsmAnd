@@ -361,7 +361,7 @@ public class MapRenderRepositories {
 			Integer type, List<BinaryMapDataObject> directList, List<BinaryMapDataObject> inverselist) {
 		MultyPolygon pl = new MultyPolygon();
 		// delete direction last bit (to not show point)
-		pl.setType((type & 0x7fff) << 1);
+		pl.setType(type & 0x7fff);
 		for (int km = 0; km < 2; km++) {
 			List<BinaryMapDataObject> list = km == 0 ? directList : inverselist;
 			for (BinaryMapDataObject o : list) {
