@@ -9,7 +9,10 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+
 import net.osmand.Algoritms;
+import net.osmand.LogUtil;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 
@@ -22,6 +25,8 @@ public class BinaryMapIndexReader {
 	private int version;
 	private List<MapRoot> mapIndexes = new ArrayList<MapRoot>();
 	private CodedInputStreamRAF codedIS;
+	
+	private final static Log log = LogUtil.getLog(BinaryMapIndexReader.class);
 	
 
 	
@@ -189,6 +194,8 @@ public class BinaryMapIndexReader {
 				}
 			}
 		}
+		log.info("Search is done. Visit " + req.numberOfVisitedObjects + " objects. Read " + req.numberOfAcceptedObjects + " objects.");
+		log.info("Read " + req.numberOfReadSubtrees + " subtrees. Go through " + req.numberOfAcceptedSubtrees + " subtrees.");
 		return req.getSearchResults();
 	}
 	
@@ -200,7 +207,7 @@ public class BinaryMapIndexReader {
 		int cleft = 0;
 		int ctop = 0;
 		int cbottom = 0;
-		
+		req.numberOfReadSubtrees++;
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -209,6 +216,8 @@ public class BinaryMapIndexReader {
 				// coordinates are init
 				if(cright < req.left || cleft > req.right || ctop > req.bottom || cbottom < req.top){
 					return;
+				} else {
+					req.numberOfAcceptedSubtrees++;
 				}
 			}
 			switch (tag) {
@@ -306,6 +315,7 @@ public class BinaryMapIndexReader {
 		int maxX = 0;
 		int minY = Integer.MAX_VALUE;
 		int maxY = 0;
+		req.numberOfVisitedObjects++;
 		while(codedIS.getBytesUntilLimit() > 0){
 			int x = codedIS.readSInt32() + px;
 			int y = codedIS.readSInt32() + py;
@@ -334,6 +344,7 @@ public class BinaryMapIndexReader {
 			codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 			return null;
 		}
+		req.numberOfAcceptedObjects++;
 		
 		BinaryMapDataObject dataObject = new BinaryMapDataObject();		
 		dataObject.coordinates = req.cacheCoordinates.toArray();
@@ -478,6 +489,12 @@ public class BinaryMapIndexReader {
 		int zoom = 15;
 		List<BinaryMapDataObject> searchResults = new ArrayList<BinaryMapDataObject>();
 		TIntArrayList cacheCoordinates = new TIntArrayList();
+		
+		// TRACE INFO
+		int numberOfVisitedObjects = 0;
+		int numberOfAcceptedObjects = 0;
+		int numberOfReadSubtrees = 0;
+		int numberOfAcceptedSubtrees = 0;
 		
 		protected SearchRequest(){
 		}
