@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.Algoritms;
+import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 
 import com.google.protobuf.CodedInputStreamRAF;
@@ -27,7 +28,7 @@ public class BinaryMapIndexReader {
 	
 	public BinaryMapIndexReader(final RandomAccessFile raf) throws IOException {
 		this.raf = raf;
-		codedIS = CodedInputStreamRAF.newInstance(raf, 256);
+		codedIS = CodedInputStreamRAF.newInstance(raf, 1024);
 		init();
 	}
 
@@ -491,14 +492,24 @@ public class BinaryMapIndexReader {
 		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Minsk.map.pbf"), "r");
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
 		System.out.println("VERSION " + reader.getVersion());
-		int sleft = MapUtils.get31TileNumberX(27.578);
-		int sright = MapUtils.get31TileNumberX(27.583);
-		int stop = MapUtils.get31TileNumberY(53.916);
-		int sbottom = MapUtils.get31TileNumberY(53.9138);
+		int sleft = MapUtils.get31TileNumberX(27.596);
+		int sright = MapUtils.get31TileNumberX(27.599);
+		int stop = MapUtils.get31TileNumberY(53.921);
+		int sbottom = MapUtils.get31TileNumberY(53.919);
 		System.out.println("SEARCH " + sleft + " " + sright + " " + stop + " " + sbottom);
 
 		for (BinaryMapDataObject obj : reader.searchMapIndex(buildSearchRequest(sleft, sright, stop, sbottom, 18))) {
+			if(obj.getId() >> 3 == 25323337l){
+				System.out.println("!");
+			}
+			for(int i=0; i<obj.getTypes().length; i++){
+				int t = obj.getTypes()[i];
+				if((t & 3) == MapRenderingTypes.POLYGON_TYPE){
+					System.out.println((obj.getId() >> 3) + " " + t);
+				}
+			}
 			if (obj.getName() != null) {
+				
 				System.out.println(" " + obj.getName());
 			}
 		}

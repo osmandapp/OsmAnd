@@ -86,6 +86,7 @@ import rtree.Rect;
  * save runtime memory and generate indexes on the fly.
  * It will be longer than load in memory (needed part) and save into index.
  */
+@SuppressWarnings("unchecked")
 public class IndexCreator {
 	private static final Log log = LogFactory.getLog(IndexCreator.class);
 
@@ -153,9 +154,12 @@ public class IndexCreator {
 	private RTree[] mapTree = null;
 	
 	// MEMORY map :  save it in memory while that is allowed
-	private Map<Long, Set<Integer>> multiPolygonsWays0 = new LinkedHashMap<Long, Set<Integer>>();
-	private Map<Long, Set<Integer>> multiPolygonsWays1 = new LinkedHashMap<Long, Set<Integer>>();
-	private Map<Long, Set<Integer>> multiPolygonsWays2 = new LinkedHashMap<Long, Set<Integer>>();
+	private Map<Long, Set<Integer>>[] multiPolygonsWays = new Map[MAP_ZOOMS.length - 1];
+	{
+		for (int i = 0; i < multiPolygonsWays.length; i++) {
+			multiPolygonsWays[i] = new LinkedHashMap<Long, Set<Integer>>();
+		}
+	}
 	private Map<Long, String> multiPolygonsNames = new LinkedHashMap<Long, String>();
 	private Map<Long, List<Long>> highwayRestrictions = new LinkedHashMap<Long, List<Long>>();
 	
@@ -435,9 +439,11 @@ public class IndexCreator {
 				}
 			}
 		}
-		if(loadTags && e.getTagKeySet().isEmpty()){
+		if(loadTags){
 			for(Map.Entry<EntityId, Entity> es : map.entrySet()){
-				loadEntityTags(es.getKey().getType(), es.getValue());
+				if( es.getValue().getTagKeySet().isEmpty()){
+					loadEntityTags(es.getKey().getType(), es.getValue());
+				}
 			}
 		}
 		e.initializeLinks(map);
@@ -1098,8 +1104,7 @@ public class IndexCreator {
 				
 				int mtType = findMultiPolygonType(e, 0);
 				if (mtType != 0) {
-					int mtType1 = findMultiPolygonType(e, 1);
-					int mtType2 = findMultiPolygonType(e, 2);
+					
 					String name = MapRenderingTypes.getEntityName(e, mtType);
 					List<List<Way>> completedRings = new ArrayList<List<Way>>();
 					List<List<Way>> incompletedRings = new ArrayList<List<Way>>();
@@ -1128,9 +1133,13 @@ public class IndexCreator {
 							if(!inner && name != null){
 								multiPolygonsNames.put(es.getId(), name);
 							}
-							putMultipolygonType(multiPolygonsWays0, es.getId(), mtType, inverse);
-							putMultipolygonType(multiPolygonsWays1, es.getId(), mtType1, inverse);
-							putMultipolygonType(multiPolygonsWays2, es.getId(), mtType2, inverse);
+							putMultipolygonType(multiPolygonsWays[0], es.getId(), mtType, inverse);
+							for(int i=1; i<multiPolygonsWays.length; i++){
+								int type = findMultiPolygonType(e, i);
+								if (type != 0) {
+									putMultipolygonType(multiPolygonsWays[i], es.getId(), type, inverse);
+								}
+							}
 						}
 					}
 
@@ -1334,16 +1343,7 @@ public class IndexCreator {
 
 	private void writeBinaryEntityToMapDatabase(Entity e, long baseId, boolean inverse, int level) throws SQLException {
 		int type = MapRenderingTypes.encodeEntityWithType(e, level, false, typeUse);
-		Map<Long, Set<Integer>> multiPolygonsWays;
-		if (level == 0) {
-			multiPolygonsWays = multiPolygonsWays0;
-		} else if (level == 1) {
-			multiPolygonsWays = multiPolygonsWays1;
-		} else if (level == 2) {
-			multiPolygonsWays = multiPolygonsWays2;
-		} else {
-			multiPolygonsWays = Collections.emptyMap();
-		}
+		Map<Long, Set<Integer>> multiPolygonsWays = this.multiPolygonsWays[level];
 		boolean hasMulti = e instanceof Way && multiPolygonsWays.containsKey(e.getId());
 		if (hasMulti) {
 			Set<Integer> set = multiPolygonsWays.get(e.getId());
@@ -1960,11 +1960,7 @@ public class IndexCreator {
 		 
 		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
 		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
-		 System.out.println("COORDINATES_SIZE " + BinaryMapIndexWriter.COORDINATES_SIZE);
-		 System.out.println("TYPES_SIZE " + BinaryMapIndexWriter.TYPES_SIZE);
-		 System.out.println("ID_SIZE " + BinaryMapIndexWriter.ID_SIZE);
-		 System.out.println("MAP_DATA_SIZE " + BinaryMapIndexWriter.MAP_DATA_SIZE);
-
+		 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
 
@@ -1980,7 +1976,11 @@ public class IndexCreator {
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/forest_complex.osm"), new ConsoleProgressImplementation(25), null);
 
 		 
-
+		 System.out.println("COORDINATES_SIZE " + BinaryMapIndexWriter.COORDINATES_SIZE);
+		 System.out.println("TYPES_SIZE " + BinaryMapIndexWriter.TYPES_SIZE);
+		 System.out.println("ID_SIZE " + BinaryMapIndexWriter.ID_SIZE);
+		 System.out.println("MAP_DATA_SIZE " + BinaryMapIndexWriter.MAP_DATA_SIZE);
+		 System.out.println("STRING_TABLE_SIZE " + BinaryMapIndexWriter.STRING_TABLE_SIZE);
 		 
 	}
 }
