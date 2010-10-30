@@ -375,9 +375,8 @@ public class ResourceManager {
 						log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
 						warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
 					}
-				} else if(f.getName().endsWith(IndexConstants.MAP_INDEX_EXT)){
-					// TODO change description
-					warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+				} else if(f.getName().endsWith(".map.odb")){ //$NON-NLS-1$
+					warnings.add(MessageFormat.format(Messages.getMessage("old_map_index_is_not_supported"), f.getName())); //$NON-NLS-1$
 				}
 			}
 		}
