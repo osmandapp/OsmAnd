@@ -9,12 +9,11 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
-import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
+
+import org.apache.commons.logging.Log;
 
 import com.google.protobuf.CodedInputStreamRAF;
 import com.google.protobuf.WireFormat;
@@ -209,6 +208,9 @@ public class BinaryMapIndexReader {
 		int cbottom = 0;
 		req.numberOfReadSubtrees++;
 		while(true){
+			if(req.isInterrupted()){
+				return;
+			}
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			if(init == 0xf){
@@ -317,8 +319,8 @@ public class BinaryMapIndexReader {
 		int maxY = 0;
 		req.numberOfVisitedObjects++;
 		while(codedIS.getBytesUntilLimit() > 0){
-			int x = codedIS.readSInt32() + px;
-			int y = codedIS.readSInt32() + py;
+			int x = (codedIS.readSInt32() << BinaryMapIndexWriter.SHIFT_COORDINATES) + px;
+			int y = (codedIS.readSInt32() << BinaryMapIndexWriter.SHIFT_COORDINATES) + py;
 			req.cacheCoordinates.add(x);
 			req.cacheCoordinates.add(y);
 			px = x;
@@ -495,6 +497,7 @@ public class BinaryMapIndexReader {
 		int numberOfAcceptedObjects = 0;
 		int numberOfReadSubtrees = 0;
 		int numberOfAcceptedSubtrees = 0;
+		boolean interrupted = false;
 		
 		protected SearchRequest(){
 		}
@@ -502,6 +505,14 @@ public class BinaryMapIndexReader {
 		
 		public List<BinaryMapDataObject> getSearchResults() {
 			return searchResults;
+		}
+		
+		public void setInterrupted(boolean interrupted) {
+			this.interrupted = interrupted;
+		}
+		
+		public boolean isInterrupted() {
+			return interrupted;
 		}
 	}
 	
@@ -516,17 +527,13 @@ public class BinaryMapIndexReader {
 		System.out.println("SEARCH " + sleft + " " + sright + " " + stop + " " + sbottom);
 
 		for (BinaryMapDataObject obj : reader.searchMapIndex(buildSearchRequest(sleft, sright, stop, sbottom, 18))) {
-			if(obj.getId() >> 3 == 25323337l){
-				System.out.println("!");
-			}
-			for(int i=0; i<obj.getTypes().length; i++){
-				int t = obj.getTypes()[i];
-				if((t & 3) == MapRenderingTypes.POLYGON_TYPE){
-					System.out.println((obj.getId() >> 3) + " " + t);
-				}
-			}
+//			for(int i=0; i<obj.getTypes().length; i++){
+//				int t = obj.getTypes()[i];
+//				if((t & 3) == MapRenderingTypes.POLYGON_TYPE){
+//					System.out.println((obj.getId() >> 3) + " " + t);
+//				}
+//			}
 			if (obj.getName() != null) {
-				
 				System.out.println(" " + obj.getName());
 			}
 		}

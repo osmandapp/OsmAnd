@@ -59,6 +59,7 @@ public class MapRenderRepositories {
 	
 	private boolean interrupted = false;
 	private RenderingContext currentRenderingContext;
+	private SearchRequest searchRequest;
 	
 	
 	public MapRenderRepositories(Context context){
@@ -154,6 +155,9 @@ public class MapRenderRepositories {
 		if(currentRenderingContext != null){
 			currentRenderingContext.interrupted = true;
 		}
+		if(searchRequest != null){
+			searchRequest.setInterrupted(true);
+		}
 	}
 	
 	private boolean checkWhetherInterrupted(){
@@ -190,10 +194,13 @@ public class MapRenderRepositories {
 			int rightX = MapUtils.get31TileNumberX(cRightLongitude);
 			int bottomY = MapUtils.get31TileNumberY(cBottomLatitude);
 			int topY = MapUtils.get31TileNumberY(cTopLatitude);
-			SearchRequest searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom);
+			searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom);
 			
 			for (BinaryMapIndexReader c : files.values()) {
 				List<BinaryMapDataObject> res = c.searchMapIndex(searchRequest);
+				if (checkWhetherInterrupted()) {
+					return false;
+				}
 				for (BinaryMapDataObject r : res) {
 					if (PerformanceFlags.checkForDuplicateObjectIds) {
 						if (ids.contains(r.getId())) {
@@ -304,7 +311,6 @@ public class MapRenderRepositories {
 	/// Manipulating with multipolygons
 	private void registerMultipolygon(Map<Integer, List<BinaryMapDataObject>> multyPolygons, int type, BinaryMapDataObject obj) {
 		if ((type & 0x3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
-			type &= 0xffff; // reject attrs
 			// multy polygon
 			if (type != 0) {
 				if (!multyPolygons.containsKey(type)) {
@@ -362,6 +368,7 @@ public class MapRenderRepositories {
 		MultyPolygon pl = new MultyPolygon();
 		// delete direction last bit (to not show point)
 		pl.setType(type & 0x7fff);
+		long dbId = 0;
 		for (int km = 0; km < 2; km++) {
 			List<BinaryMapDataObject> list = km == 0 ? directList : inverselist;
 			for (BinaryMapDataObject o : list) {
@@ -369,6 +376,7 @@ public class MapRenderRepositories {
 				if (len < 2) {
 					continue;
 				}
+				dbId = o.getId() >> 3;
 				List<Long> coordinates = new ArrayList<Long>();
 				int px = o.getPoint31XTile(km == 0 ? 0 : len - 1);
 				int py = o.getPoint31YTile(km == 0 ? 0 : len - 1);
@@ -401,7 +409,7 @@ public class MapRenderRepositories {
 			return null;
 		}
 		if (incompletedRings.size() > 0) {
-			unifyIncompletedRings(incompletedRings, completedRings, completedRingNames, incompletedRingNames, leftX, rightX, bottomY, topY);
+			unifyIncompletedRings(incompletedRings, completedRings, completedRingNames, incompletedRingNames, leftX, rightX, bottomY, topY, dbId);
 		} else {
 			// check for isolated island (android do not fill area outside path)
 			boolean clockwiseFound = false;
@@ -514,7 +522,7 @@ public class MapRenderRepositories {
 
 	private void unifyIncompletedRings(List<List<Long>> incompletedRings, List<List<Long>> completedRings, 
 			List<String> completedRingNames, List<String> incompletedRingNames, 
-			int leftX, int rightX,	int bottomY, int topY) {
+			int leftX, int rightX,	int bottomY, int topY, long dbId) {
 		int mask = 0xffffffff;
 		Set<Integer> nonvisitedRings = new LinkedHashSet<Integer>();
 		for(int j = 0; j< incompletedRings.size(); j++){
@@ -531,12 +539,12 @@ public class MapRenderRepositories {
 			// that's why these exceptions could be replaced with return; statement.
 			if (!end) {
 				System.err.println(
-						MessageFormat.format("Start point (to close) not found : end_x = {0}, end_y = {1}, start_x = {2}, start_y = {3} : bounds {4} {5} - {6} {7}",  //$NON-NLS-1$
+						MessageFormat.format(dbId + " Start point (to close) not found : end_x = {0}, end_y = {1}, start_x = {2}, start_y = {3} : bounds {4} {5} - {6} {7}",  //$NON-NLS-1$
 								x+"", y+"", sx+"", sy+"", leftX+"", topY+"", rightX+"", bottomY+""));        //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$//$NON-NLS-5$//$NON-NLS-6$//$NON-NLS-7$//$NON-NLS-8$
 			}
 			if (!st) {
 				System.err.println(
-						MessageFormat.format("End not found : end_x = {0}, end_y = {1}, start_x = {2}, start_y = {3} : bounds {4} {5} - {6} {7}",  //$NON-NLS-1$
+						MessageFormat.format(dbId + " End not found : end_x = {0}, end_y = {1}, start_x = {2}, start_y = {3} : bounds {4} {5} - {6} {7}",  //$NON-NLS-1$
 								x+"", y+"", sx+"", sy+"", leftX+"", topY+"", rightX+"", bottomY+""));        //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$//$NON-NLS-5$//$NON-NLS-6$//$NON-NLS-7$//$NON-NLS-8$
 				continue;
 			} 
