@@ -1456,14 +1456,15 @@ public class IndexCreator {
 			for (int i = 0; i < MAP_ZOOMS.length - 1; i++) {
 				RTree rtree = mapTree[i];
 				long rootIndex = rtree.getFileHdr().getRootIndex();
-				rtree.Node root = rtree.getReadNode(rootIndex);
-				Rect rootBounds = calcBounds(root);
-				writer.startWriteMapLevelIndex(MAP_ZOOMS[MAP_ZOOMS.length - i - 2] + 1, 
-						MAP_ZOOMS[MAP_ZOOMS.length - i - 1], rootBounds.getMinX(),
-						rootBounds.getMaxX(), rootBounds.getMinY(), rootBounds.getMaxY());
-				writeBinaryMapTree(root, rtree, writer, selectData);
+				if (-999 != rootIndex) {
+					rtree.Node root = rtree.getReadNode(rootIndex);
+					Rect rootBounds = calcBounds(root);
+					writer.startWriteMapLevelIndex(MAP_ZOOMS[MAP_ZOOMS.length - i - 2] + 1, MAP_ZOOMS[MAP_ZOOMS.length - i - 1], rootBounds
+							.getMinX(), rootBounds.getMaxX(), rootBounds.getMinY(), rootBounds.getMaxY());
+					writeBinaryMapTree(root, rtree, writer, selectData);
 
-				writer.endWriteMapLevelIndex();
+					writer.endWriteMapLevelIndex();
+				}
 			}
 			
 			
