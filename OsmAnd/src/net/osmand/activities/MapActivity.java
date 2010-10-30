@@ -682,6 +682,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		currentLocationProvider = null;
 		routingHelper.setUiActivity(null);
 		
+		
 		OsmandSettings.setLastKnownMapLocation(this, (float) mapView.getLatitude(), (float) mapView.getLongitude());
 		AnimateDraggingMapThread animatedThread = mapView.getAnimatedDraggingThread();
 		if(animatedThread.isAnimating() && animatedThread.getTargetZoom() != 0){
@@ -695,6 +696,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			wakeLock = null;
 		}
 		OsmandSettings.setMapActivityEnabled(this, false);
+		((OsmandApplication)getApplication()).getResourceManager().interruptRendering();
 		((OsmandApplication)getApplication()).getResourceManager().setBusyIndicator(null);
 	}
 	

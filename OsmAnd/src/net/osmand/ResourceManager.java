@@ -575,6 +575,10 @@ public class ResourceManager {
 				new MapLoadRequest(new RotatedTileBox(rotatedTileBox)));
 	}
 	
+	public void interruptRendering(){
+		renderer.interruptLoadingMap();
+	}
+	
 	public MapRenderRepositories getRenderer() {
 		return renderer;
 	}

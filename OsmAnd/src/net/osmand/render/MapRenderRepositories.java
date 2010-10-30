@@ -378,7 +378,7 @@ public class MapRenderRepositories {
 				}
 				dbId = o.getId() >> 3;
 				List<Long> coordinates = new ArrayList<Long>();
-				int px = o.getPoint31XTile(km == 0 ? 0 : len - 1);
+				int px = o.getPoint31XTile(km == 0 ? 0 : len - 1); 
 				int py = o.getPoint31YTile(km == 0 ? 0 : len - 1);
 				int x = px;
 				int y = py;
@@ -537,18 +537,25 @@ public class MapRenderRepositories {
 			// These exceptions are used to check logic about processing multipolygons
 			// However in map data this situation could happen with broken multipolygons (so it would data causes app error)
 			// that's why these exceptions could be replaced with return; statement.
-			if (!end) {
-				System.err.println(
-						MessageFormat.format(dbId + " Start point (to close) not found : end_x = {0}, end_y = {1}, start_x = {2}, start_y = {3} : bounds {4} {5} - {6} {7}",  //$NON-NLS-1$
-								x+"", y+"", sx+"", sy+"", leftX+"", topY+"", rightX+"", bottomY+""));        //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$//$NON-NLS-5$//$NON-NLS-6$//$NON-NLS-7$//$NON-NLS-8$
-			}
-			if (!st) {
-				System.err.println(
-						MessageFormat.format(dbId + " End not found : end_x = {0}, end_y = {1}, start_x = {2}, start_y = {3} : bounds {4} {5} - {6} {7}",  //$NON-NLS-1$
-								x+"", y+"", sx+"", sy+"", leftX+"", topY+"", rightX+"", bottomY+""));        //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$//$NON-NLS-5$//$NON-NLS-6$//$NON-NLS-7$//$NON-NLS-8$
-				continue;
-			} 
-			if(st && end){
+			if (!end || !st) {
+				float dx = (float) MapUtils.get31LongitudeX(x);
+				float dsx = (float) MapUtils.get31LongitudeX(sx);
+				float dy = (float) MapUtils.get31LatitudeY(y);
+				float dsy = (float) MapUtils.get31LatitudeY(sy);
+				String str;
+				if(!end){
+					str = " Start point (to close) not found : end_x = {0}, end_y = {1}, start_x = {2}, start_y = {3} : bounds {4} {5} - {6} {7}"; //$NON-NLS-1$
+					System.err.println(
+						MessageFormat.format(dbId + str,  
+								dx, dy, dsx, dsy, leftX+"", topY+"", rightX+"", bottomY+""));        //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+				}
+				if(!st){
+					str = " End not found : end_x = {0}, end_y = {1}, start_x = {2}, start_y = {3} : bounds {4} {5} - {6} {7}"; //$NON-NLS-1$
+					System.err.println(
+						MessageFormat.format(dbId + str,  
+								dx, dy, dsx, dsy, leftX+"", topY+"", rightX+"", bottomY+""));        //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+				}
+			} else {
 				nonvisitedRings.add(j);
 			}
 		}
