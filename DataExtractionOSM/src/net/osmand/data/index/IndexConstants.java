@@ -7,8 +7,7 @@ public class IndexConstants {
 	public final static int TRANSPORT_TABLE_VERSION = 0;
 	public final static int POI_TABLE_VERSION = 0;
 	public final static int ADDRESS_TABLE_VERSION = 1;
-	public final static int MAP_TABLE_VERSION = 0;
-	public final static int BINARY_MAP_VERSION = 0;
+	public final static int BINARY_MAP_VERSION = 1; // starts with 1
 	public final static int VOICE_VERSION = 0;
 	
 	
@@ -20,14 +19,13 @@ public class IndexConstants {
 	public static final String POI_INDEX_EXT = ".poi.odb"; //$NON-NLS-1$
 	public static final String ADDRESS_INDEX_EXT = ".addr.odb"; //$NON-NLS-1$
 	public static final String TRANSPORT_INDEX_EXT = ".trans.odb"; //$NON-NLS-1$
-	public static final String MAP_INDEX_EXT = ".map.odb"; //$NON-NLS-1$
 	public static final String BINARY_MAP_INDEX_EXT = ".map.pbf"; //$NON-NLS-1$
 	
 	public static final String POI_INDEX_EXT_ZIP = ".poi.zip"; //$NON-NLS-1$
 	public static final String ADDRESS_INDEX_EXT_ZIP = ".addr.zip"; //$NON-NLS-1$
 	public static final String TRANSPORT_INDEX_EXT_ZIP = ".trans.zip"; //$NON-NLS-1$
 	public static final String VOICE_INDEX_EXT_ZIP = ".voice.zip"; //$NON-NLS-1$
-	public static final String MAP_INDEX_EXT_ZIP = ".map.zip"; //$NON-NLS-1$
+	public static final String BINARY_MAP_INDEX_EXT_ZIP = ".map.zip"; //$NON-NLS-1$
 	
 	
 	public interface IndexColumn {
@@ -454,7 +452,7 @@ public class IndexConstants {
 	}
 	
 	public enum IndexBinaryMapRenderObject implements IndexColumn {
-		ID("long", true), NAME, TYPES("BLOB"), RESTRICTIONS("BLOB"), NODES("BLOB"), HIGHWAY("INT");  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		ID("long", true), NAME, TYPES("BLOB"), RESTRICTIONS("BLOB"), NODES("BLOB"), HIGHWAY("INT");  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 		boolean index = false;
 		String type = null;
 

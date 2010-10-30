@@ -289,7 +289,7 @@ public class IndexBatchCreator {
 			indexCreator.setTransportFileName(transportFileName);
 			String poiFileName = regionName + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT;
 			indexCreator.setPoiFileName(poiFileName);
-			String mapFileName = regionName + "_" + IndexConstants.MAP_TABLE_VERSION + IndexConstants.MAP_INDEX_EXT;
+			String mapFileName = regionName + "_" + IndexConstants.BINARY_MAP_VERSION + IndexConstants.BINARY_MAP_INDEX_EXT;
 			indexCreator.setMapFileName(mapFileName);
 			try {
 				alreadyGeneratedFiles.add(f.getName());
@@ -359,8 +359,8 @@ public class IndexBatchCreator {
 		} else if(f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT) || f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT_ZIP)){
 			regionName = f.getName().substring(0, f.getName().length() - IndexConstants.TRANSPORT_INDEX_EXT.length() - 2);
 			summary = "Transport index for ";
-		} else if(f.getName().endsWith(IndexConstants.MAP_INDEX_EXT) || f.getName().endsWith(IndexConstants.MAP_INDEX_EXT_ZIP)){
-			regionName = f.getName().substring(0, f.getName().length() - IndexConstants.MAP_INDEX_EXT.length() - 2);
+		} else if(f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)){
+			regionName = f.getName().substring(0, f.getName().length() - IndexConstants.BINARY_MAP_INDEX_EXT.length() - 2);
 			summary = "Map index for ";
 		} else { 
 			return;

@@ -253,7 +253,6 @@ public class IndexCreator {
 			stat.executeUpdate("drop table if exists tags;");
 			stat.executeUpdate("create table tags (id long, type byte, key, value);");
 			stat.executeUpdate("create index IdTIndex ON tags (id, type);");
-			stat.execute("PRAGMA user_version = " + IndexConstants.MAP_TABLE_VERSION); //$NON-NLS-1$
 			stat.close();
 
 			prepNode = dbConn.prepareStatement("insert into node values (?, ?, ?);");
@@ -1403,15 +1402,16 @@ public class IndexCreator {
 				int prevX = 0;
 				int prevY = 0;
 				int len = 0;
+				boolean addLast = nodes.get(0).getId() == nodes.get(nodes.size() - 1).getId();  
+				int r = 4;
 				for (int i = 0; i < nodes.size(); i++) {
 					// do not simplify last node it could be important node for multipolygon
 					if (nodes.get(i) != null) {
-						int r = i < nodes.size() - 1 ? 4 : 0;
 						int x = (int) (MapUtils.getTileNumberX(zoom, nodes.get(i).getLongitude()) * 256d);
 						int y = (int) (MapUtils.getTileNumberY(zoom, nodes.get(i).getLatitude()) * 256d);
 						int dy = Math.abs(y - prevY);
 						int dx = Math.abs(x - prevX);
-						if (dx > r || dy > r) {
+						if (dx > r || dy > r || (addLast && i == nodes.size() - 1)) {
 							way.addNode(nodes.get(i));
 							len += (dx + dy);
 							prevX = x;
@@ -1961,11 +1961,11 @@ public class IndexCreator {
 //		 creator.setIndexPOI(true);
 //		 creator.setIndexTransport(true);
 		 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 		 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
 		 
 //		 double dist = MapUtils.getDistance(50, MapUtils.getLongitudeFromTile(25, 0), 50, MapUtils.getLongitudeFromTile(25, 1));
 //		 System.out.println(dist);

@@ -149,12 +149,12 @@ public class DownloadIndexActivity extends ListActivity {
 			DownloaderIndexFromGoogleCode.getIndexFiles(new String[] { 
 					IndexConstants.ADDRESS_INDEX_EXT, IndexConstants.POI_INDEX_EXT, IndexConstants.TRANSPORT_INDEX_EXT, 
 					IndexConstants.ADDRESS_INDEX_EXT_ZIP, IndexConstants.POI_INDEX_EXT_ZIP, IndexConstants.TRANSPORT_INDEX_EXT_ZIP, 
-					IndexConstants.MAP_INDEX_EXT, IndexConstants.MAP_INDEX_EXT_ZIP, IndexConstants.VOICE_INDEX_EXT_ZIP, }, 
+					IndexConstants.BINARY_MAP_INDEX_EXT, IndexConstants.BINARY_MAP_INDEX_EXT_ZIP, IndexConstants.VOICE_INDEX_EXT_ZIP, }, 
 					new String[] {
 					IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "",//$NON-NLS-1$//$NON-NLS-2$
 					IndexConstants.TRANSPORT_TABLE_VERSION + "", IndexConstants.ADDRESS_TABLE_VERSION + "", //$NON-NLS-1$ //$NON-NLS-2$
 					IndexConstants.POI_TABLE_VERSION + "", IndexConstants.TRANSPORT_TABLE_VERSION + "", //$NON-NLS-1$//$NON-NLS-2$
-					IndexConstants.MAP_TABLE_VERSION + "", IndexConstants.MAP_TABLE_VERSION + "", //$NON-NLS-1$//$NON-NLS-2$
+					IndexConstants.BINARY_MAP_VERSION + "", IndexConstants.BINARY_MAP_VERSION + "", //$NON-NLS-1$//$NON-NLS-2$
 					IndexConstants.VOICE_VERSION + "", }, //$NON-NLS-1$ 
 					indexFiles);
 			
@@ -222,14 +222,14 @@ public class DownloadIndexActivity extends ListActivity {
 			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.TRANSPORT_PATH);
 			toSavePostfix = IndexConstants.TRANSPORT_INDEX_EXT_ZIP;
 			toCheckPostfix = IndexConstants.TRANSPORT_INDEX_EXT;
-		} else if(key.endsWith(IndexConstants.MAP_INDEX_EXT)){
+		} else if(key.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)){
 			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.APP_DIR);
-			toSavePostfix = IndexConstants.MAP_INDEX_EXT;
-			toCheckPostfix = IndexConstants.MAP_INDEX_EXT;
-		} else if(key.endsWith(IndexConstants.MAP_INDEX_EXT_ZIP)){
+			toSavePostfix = IndexConstants.BINARY_MAP_INDEX_EXT;
+			toCheckPostfix = IndexConstants.BINARY_MAP_INDEX_EXT;
+		} else if(key.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)){
 			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.APP_DIR);
-			toSavePostfix = IndexConstants.MAP_INDEX_EXT_ZIP;
-			toCheckPostfix = IndexConstants.MAP_INDEX_EXT;
+			toSavePostfix = IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
+			toCheckPostfix = IndexConstants.BINARY_MAP_INDEX_EXT;
 		} else if(key.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)){
 			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.VOICE_PATH);
 			toSavePostfix = IndexConstants.VOICE_INDEX_EXT_ZIP;
@@ -483,7 +483,7 @@ public class DownloadIndexActivity extends ListActivity {
 				manager.indexingPoi(progress, warnings, toIndex);
 			} else if (toIndex.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)) {
 				manager.indexingTransport(progress, warnings, toIndex);
-			} else if (toIndex.getName().endsWith(IndexConstants.MAP_INDEX_EXT)) {
+			} else if (toIndex.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 				manager.indexingMaps(progress);
 			} else if (toIndex.getName().endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
 			}
@@ -547,7 +547,7 @@ public class DownloadIndexActivity extends ListActivity {
 				s = getString(R.string.address);
 			} else if(e.getKey().endsWith(IndexConstants.TRANSPORT_INDEX_EXT) || e.getKey().endsWith(IndexConstants.TRANSPORT_INDEX_EXT_ZIP)){
 				s = getString(R.string.transport);
-			} else if(e.getKey().endsWith(IndexConstants.MAP_INDEX_EXT) || e.getKey().endsWith(IndexConstants.MAP_INDEX_EXT_ZIP)){
+			} else if(e.getKey().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || e.getKey().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)){
 				s = getString(R.string.map_index);
 			} else if(e.getKey().endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)){
 				s = getString(R.string.voice);
