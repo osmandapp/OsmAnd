@@ -302,6 +302,8 @@ public class BinaryMapIndexReader {
 			}
 		}
 	}
+	
+	private int MASK_TO_READ = ~((1 << BinaryMapIndexWriter.SHIFT_COORDINATES) - 1);
 	private BinaryMapDataObject readMapDataObject(int left, int right, int top, int bottom, SearchRequest req) throws IOException {
 		int tag = WireFormat.getTagFieldNumber(codedIS.readTag());
 		if(OsmandOdb.MapData.COORDINATES_FIELD_NUMBER != tag) {
@@ -310,8 +312,8 @@ public class BinaryMapIndexReader {
 		req.cacheCoordinates.clear();
 		int size = codedIS.readRawVarint32();
 		int old = codedIS.pushLimit(size);
-		int px = left;
-		int py = top;
+		int px = left & MASK_TO_READ;
+		int py = top & MASK_TO_READ;
 		boolean contains = false;
 		int minX = Integer.MAX_VALUE;
 		int maxX = 0;

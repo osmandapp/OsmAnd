@@ -150,8 +150,10 @@ public class IndexCreator {
 	private RandomAccessFile mapRAFile;
 	private Connection mapConnection;
 	private PreparedStatement mapBinaryStat;
-	private static final int[] MAP_ZOOMS = new int[]{5, 9, 14, 22};
+
+	
 	private RTree[] mapTree = null;
+	private final int[] MAP_ZOOMS = MapRenderingTypes.MAP_ZOOMS;
 	
 	// MEMORY map :  save it in memory while that is allowed
 	private Map<Long, Set<Integer>>[] multiPolygonsWays = new Map[MAP_ZOOMS.length - 1];
@@ -1402,9 +1404,10 @@ public class IndexCreator {
 				int prevX = 0;
 				int prevY = 0;
 				int len = 0;
-				boolean addLast = nodes.get(0).getId() == nodes.get(nodes.size() - 1).getId();  
-				int r = 4;
+				boolean addLast = hasMulti || nodes.get(0).getId() == nodes.get(nodes.size() - 1).getId();  
+				
 				for (int i = 0; i < nodes.size(); i++) {
+					int r = i == nodes.size() - 1 ? 0 : 4;
 					// do not simplify last node it could be important node for multipolygon
 					if (nodes.get(i) != null) {
 						int x = (int) (MapUtils.getTileNumberX(zoom, nodes.get(i).getLongitude()) * 256d);
@@ -1421,7 +1424,7 @@ public class IndexCreator {
 				}
 				e = way;
 				skip = way.getNodes().size() < 2;
-				if (!hasMulti && len < 8) {
+				if (/*!hasMulti &&*/ len < 8) {
 					skip = true;
 				}
 			}
@@ -1443,6 +1446,18 @@ public class IndexCreator {
 	}
 	
 	
+	public boolean nodeIsLastSubTree(RTree tree, long ptr) throws RTreeException{
+		rtree.Node parent = tree.getReadNode(ptr);
+		Element[] e = parent.getAllElements();
+		for (int i = 0; i < parent.getTotalElements(); i++) {
+			if (e[i].getElementType() != rtree.Node.LEAF_NODE) {
+				return false;
+			}
+		}
+		return true;
+		
+	}
+	
 	public void writeBinaryMapIndex() throws IOException, SQLException {
 		try {
 			assert IndexConstants.IndexBinaryMapRenderObject.values().length == 6;
@@ -1456,12 +1471,20 @@ public class IndexCreator {
 			for (int i = 0; i < MAP_ZOOMS.length - 1; i++) {
 				RTree rtree = mapTree[i];
 				long rootIndex = rtree.getFileHdr().getRootIndex();
-				if (-999 != rootIndex) {
-					rtree.Node root = rtree.getReadNode(rootIndex);
-					Rect rootBounds = calcBounds(root);
+				rtree.Node root = rtree.getReadNode(rootIndex);
+				Rect rootBounds = calcBounds(root);
+				if (rootBounds != null) {
+					boolean last = nodeIsLastSubTree(rtree, rootIndex);
 					writer.startWriteMapLevelIndex(MAP_ZOOMS[MAP_ZOOMS.length - i - 2] + 1, MAP_ZOOMS[MAP_ZOOMS.length - i - 1], rootBounds
 							.getMinX(), rootBounds.getMaxX(), rootBounds.getMinY(), rootBounds.getMaxY());
+					if (last) {
+						writer.startMapTreeElement(rootBounds.getMinX(), rootBounds.getMaxX(), rootBounds.getMinY(), rootBounds.getMaxY());
+					
+					}
 					writeBinaryMapTree(root, rtree, writer, selectData);
+					if (last) {
+						writer.endWriteMapTreeElement();
+					}
 
 					writer.endWriteMapLevelIndex();
 				}
@@ -1828,13 +1851,16 @@ public class IndexCreator {
 						if (file.exists()) {
 							file.delete();
 						}
-						
-						new Pack().packTree(mapTree[i], getRTreeMapIndexPackFileName() + i);
-						mapTree[i].getFileHdr().getFile().close();
-						file = new File(getRTreeMapIndexNonPackFileName() + i);
-						file.delete();
-						
-						mapTree[i] = new RTree(getRTreeMapIndexPackFileName() + i);
+						long rootIndex = mapTree[i].getFileHdr().getRootIndex();
+						if (!nodeIsLastSubTree(mapTree[i], rootIndex)) {
+							// there is a bug for small files in packing method
+							new Pack().packTree(mapTree[i], getRTreeMapIndexPackFileName() + i);
+							mapTree[i].getFileHdr().getFile().close();
+							file = new File(getRTreeMapIndexNonPackFileName() + i);
+							file.delete();
+
+							mapTree[i] = new RTree(getRTreeMapIndexPackFileName() + i);
+						}
 					}
 				} catch (RTreeException e) {
 					log.error("Error flushing", e);
@@ -1967,6 +1993,8 @@ public class IndexCreator {
 		 
 		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
 		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
+		 
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/forest.osm"), new ConsoleProgressImplementation(3), null);
 		 
 //		 double dist = MapUtils.getDistance(50, MapUtils.getLongitudeFromTile(25, 0), 50, MapUtils.getLongitudeFromTile(25, 1));
 //		 System.out.println(dist);

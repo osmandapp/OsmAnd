@@ -193,6 +193,7 @@ public class BinaryMapIndexWriter {
 	
 	
 	protected static int codeCoordinateDifference(int x, int px){
+		// shift absolute coordinates first and get truncated
 		return (x >> SHIFT_COORDINATES) - (px >> SHIFT_COORDINATES);
 	}
 	
@@ -282,7 +283,7 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeTag(OsmandOdb.MapData.COORDINATES_FIELD_NUMBER, WireFormat.FieldType.BYTES.getWireType());
 		codedOutStream.writeRawVarint32(sizeCoordinates);
 		
-		px =  bounds.leftX;
+		px = bounds.leftX;
 		py = bounds.topY;
 		for (int i = 0; i < nodes.length / 8; i++) {
 			int x = Algoritms.parseIntFromBytes(nodes, i * 8);

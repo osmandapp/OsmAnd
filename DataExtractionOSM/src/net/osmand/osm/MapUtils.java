@@ -151,6 +151,14 @@ public class MapUtils {
 		return  (int) ((1 - eval / Math.PI) / 2 * l);
 	}
 	
+	public static double get31LongitudeX(int tileX){
+		return MapUtils.getLongitudeFromTile(21, tileX /1024f);
+	}
+	
+	public static double get31LatitudeY(int tileY){
+		return MapUtils.getLatitudeFromTile(21, tileY /1024f);
+	}
+	
 	
 	
 	/**
