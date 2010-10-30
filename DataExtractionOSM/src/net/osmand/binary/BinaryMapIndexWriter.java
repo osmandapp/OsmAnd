@@ -192,8 +192,8 @@ public class BinaryMapIndexWriter {
 	public static int STRING_TABLE_SIZE = 0;
 	
 	
-	protected static int codeCoordinateDifference(int diff){
-		return diff >> SHIFT_COORDINATES;
+	protected static int codeCoordinateDifference(int x, int px){
+		return (x >> SHIFT_COORDINATES) - (px >> SHIFT_COORDINATES);
 	}
 	
 
@@ -215,8 +215,8 @@ public class BinaryMapIndexWriter {
 		for(int i=0; i< nodes.length / 8; i++){
 			int x = Algoritms.parseIntFromBytes(nodes, i * 8);
 			int y = Algoritms.parseIntFromBytes(nodes, i * 8 + 4);
-			sizeCoordinates += CodedOutputStream.computeSInt32SizeNoTag(codeCoordinateDifference(x - px));
-			sizeCoordinates += CodedOutputStream.computeSInt32SizeNoTag(codeCoordinateDifference(y - py));
+			sizeCoordinates += CodedOutputStream.computeSInt32SizeNoTag(codeCoordinateDifference(x, px));
+			sizeCoordinates += CodedOutputStream.computeSInt32SizeNoTag(codeCoordinateDifference(y, py));
 			px = x;
 			py = y;
 			COORDINATES_COUNT += 2;
@@ -287,8 +287,8 @@ public class BinaryMapIndexWriter {
 		for (int i = 0; i < nodes.length / 8; i++) {
 			int x = Algoritms.parseIntFromBytes(nodes, i * 8);
 			int y = Algoritms.parseIntFromBytes(nodes, i * 8 + 4);
-			codedOutStream.writeSInt32NoTag(codeCoordinateDifference(x - px));
-			codedOutStream.writeSInt32NoTag(codeCoordinateDifference(y - py));
+			codedOutStream.writeSInt32NoTag(codeCoordinateDifference(x, px));
+			codedOutStream.writeSInt32NoTag(codeCoordinateDifference(y, py));
 			px = x;
 			py = y;
 		}
