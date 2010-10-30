@@ -59,7 +59,7 @@ message StringTable {
 
 /// Simple messages
 message MapData {
-  required bytes coordinates = 1; // array of delta x,y sint32 could be read by codedinputstream
+  required bytes coordinates = 1; // array of delta x,y sint32 (CodedIinputStream) >> 5
   								 // first x delta to Tree.left, y to delta Tree.top (next delta to previous)
   required bytes types = 2; // array of fixed int16
   
