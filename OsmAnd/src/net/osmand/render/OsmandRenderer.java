@@ -705,7 +705,7 @@ public class OsmandRenderer {
 		rc.third.emptyLine();
 		rc.adds = null;
 		
-		PolylineRenderer.renderPolyline(type, subtype, wholeType, rc, this);
+		PolylineRenderer.renderPolyline(type, subtype, wholeType, obj.getHighwayAttributes(), rc, this);
 		
 		
 		if(rc.main.strokeWidth == 0){

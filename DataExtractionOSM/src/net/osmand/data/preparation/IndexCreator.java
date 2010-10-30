@@ -1819,7 +1819,7 @@ public class IndexCreator {
 			if (indexMap) {
 				progress.setGeneralProgress("[95 of 100]");
 				progress.startTask("Serializing map data...", -1);
-				assert rtree.Node.MAX < 50 : "It is better for performance"; 
+				assert rtree.Node.MAX < 50 : "It is better for search performance"; 
 				try {
 					for (int i = 0; i < MAP_ZOOMS.length-1; i++) {
 						mapTree[i].flush();
@@ -1848,7 +1848,9 @@ public class IndexCreator {
 					mapFile.delete();
 				}
 				mapRAFile = new RandomAccessFile(mapFile, "rw");
+				log.info("Finish packing RTree files");
 				writeBinaryMapIndex();
+				log.info("Finish writing binary file");
 			}
 
 		} finally {
@@ -1959,11 +1961,16 @@ public class IndexCreator {
 //		 creator.setIndexPOI(true);
 //		 creator.setIndexTransport(true);
 		 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 		 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
+		 
+//		 double dist = MapUtils.getDistance(50, MapUtils.getLongitudeFromTile(25, 0), 50, MapUtils.getLongitudeFromTile(25, 1));
+//		 System.out.println(dist);
+//		 System.out.println(-5 << 2);
+		 
 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);
@@ -1977,11 +1984,13 @@ public class IndexCreator {
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/forest_complex.osm"), new ConsoleProgressImplementation(25), null);
 
 		 
-		 System.out.println("COORDINATES_SIZE " + BinaryMapIndexWriter.COORDINATES_SIZE);
+		 System.out.println("COORDINATES_SIZE " + BinaryMapIndexWriter.COORDINATES_SIZE + " count " + BinaryMapIndexWriter.COORDINATES_COUNT);
 		 System.out.println("TYPES_SIZE " + BinaryMapIndexWriter.TYPES_SIZE);
 		 System.out.println("ID_SIZE " + BinaryMapIndexWriter.ID_SIZE);
-		 System.out.println("MAP_DATA_SIZE " + BinaryMapIndexWriter.MAP_DATA_SIZE);
-		 System.out.println("STRING_TABLE_SIZE " + BinaryMapIndexWriter.STRING_TABLE_SIZE);
+		 System.out.println("- COORD_TYPES_ID SIZE " + (BinaryMapIndexWriter.COORDINATES_SIZE + BinaryMapIndexWriter.TYPES_SIZE + BinaryMapIndexWriter.ID_SIZE));
+		 System.out.println("- MAP_DATA_SIZE " + BinaryMapIndexWriter.MAP_DATA_SIZE);
+		 System.out.println("- STRING_TABLE_SIZE " + BinaryMapIndexWriter.STRING_TABLE_SIZE);
+		 System.out.println("-- MAP_DATA_AND_STRINGS SIZE " + (BinaryMapIndexWriter.MAP_DATA_SIZE + BinaryMapIndexWriter.STRING_TABLE_SIZE));
 		 
 	}
 }

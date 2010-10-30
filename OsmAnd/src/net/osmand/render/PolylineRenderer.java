@@ -10,7 +10,7 @@ import android.graphics.Paint.Cap;
 
 public class PolylineRenderer {
 	
-	public static void renderPolyline(int type, int subtype, int wholeType, RenderingContext rc, OsmandRenderer o){
+	public static void renderPolyline(int type, int subtype, int wholeType, int highwayAttributes,RenderingContext rc,  OsmandRenderer o){
 		int zoom = rc.zoom;
 		int color = Color.BLACK;
 		PathEffect pathEffect = null;
@@ -177,7 +177,7 @@ public class PolylineRenderer {
 					}
 				}
 			}
-			if(type == MapRenderingTypes.HIGHWAY && rc.zoom >= 16 && MapRenderingTypes.isOneWayWay(wholeType)){
+			if(type == MapRenderingTypes.HIGHWAY && rc.zoom >= 16 && MapRenderingTypes.isOneWayWay(highwayAttributes)){
 				rc.adds = getOneWayProperties();
 				
 			}

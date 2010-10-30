@@ -332,8 +332,8 @@ public class MapRenderingTypes {
 		return (t & 3) == POLYLINE_TYPE && ((t >> 2) & MASK_5) == HIGHWAY;
 	}
 	
-	public static boolean isOneWayWay(int type){
-		return ((1 << 15) & type) > 0;
+	public static boolean isOneWayWay(int highwayAttributes){
+		return (highwayAttributes & 1) > 0;
 	}
 	
 	// 0 - normal, 1 - under, 2 - bridge,over

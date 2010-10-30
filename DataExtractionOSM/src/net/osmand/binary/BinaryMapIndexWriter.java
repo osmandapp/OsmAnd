@@ -17,6 +17,7 @@ public class BinaryMapIndexWriter {
 
 	private RandomAccessFile raf;
 	private CodedOutputStream codedOutStream;
+	protected static final int SHIFT_COORDINATES = 5;
 	
 	private static class Bounds {
 		public Bounds(int leftX, int rightX, int topY, int bottomY) {
@@ -184,10 +185,18 @@ public class BinaryMapIndexWriter {
 	}
 	
 	public static int COORDINATES_SIZE = 0;
+	public static int COORDINATES_COUNT= 0;
 	public static int ID_SIZE = 0;
 	public static int TYPES_SIZE = 0;
 	public static int MAP_DATA_SIZE = 0;
 	public static int STRING_TABLE_SIZE = 0;
+	
+	
+	protected static int codeCoordinateDifference(int diff){
+		return diff >> SHIFT_COORDINATES;
+	}
+	
+
 	
 	public void writeMapData(long id, byte[] nodes, byte[] types, String name, int highwayAttributes, byte[] restrictions) throws IOException{
 		assert state.peek() == MAP_TREE;
@@ -204,17 +213,19 @@ public class BinaryMapIndexWriter {
 		int px = bounds.leftX;
 		int py = bounds.topY;
 		for(int i=0; i< nodes.length / 8; i++){
-			int x = Algoritms.parseIntFromBytes(nodes, i*8);
-			int y = Algoritms.parseIntFromBytes(nodes, i*8 + 4);
-			sizeCoordinates += CodedOutputStream.computeSInt32SizeNoTag(x - px);
-			sizeCoordinates += CodedOutputStream.computeSInt32SizeNoTag(y - py);
+			int x = Algoritms.parseIntFromBytes(nodes, i * 8);
+			int y = Algoritms.parseIntFromBytes(nodes, i * 8 + 4);
+			sizeCoordinates += CodedOutputStream.computeSInt32SizeNoTag(codeCoordinateDifference(x - px));
+			sizeCoordinates += CodedOutputStream.computeSInt32SizeNoTag(codeCoordinateDifference(y - py));
 			px = x;
 			py = y;
+			COORDINATES_COUNT += 2;
 		}
 		allSize += CodedOutputStream.computeRawVarint32Size(sizeCoordinates) + 
 				CodedOutputStream.computeTagSize(OsmandOdb.MapData.COORDINATES_FIELD_NUMBER) + sizeCoordinates;
 		// DEBUG
 		COORDINATES_SIZE += allSize;
+		
 
 		
 		allSize += CodedOutputStream.computeTagSize(OsmandOdb.MapData.TYPES_FIELD_NUMBER);
@@ -274,10 +285,10 @@ public class BinaryMapIndexWriter {
 		px =  bounds.leftX;
 		py = bounds.topY;
 		for (int i = 0; i < nodes.length / 8; i++) {
-			int x = Algoritms.parseIntFromBytes(nodes, i*8);
-			int y = Algoritms.parseIntFromBytes(nodes, i*8 + 4);
-			codedOutStream.writeSInt32NoTag(x - px);
-			codedOutStream.writeSInt32NoTag(y - py);
+			int x = Algoritms.parseIntFromBytes(nodes, i * 8);
+			int y = Algoritms.parseIntFromBytes(nodes, i * 8 + 4);
+			codedOutStream.writeSInt32NoTag(codeCoordinateDifference(x - px));
+			codedOutStream.writeSInt32NoTag(codeCoordinateDifference(y - py));
 			px = x;
 			py = y;
 		}
