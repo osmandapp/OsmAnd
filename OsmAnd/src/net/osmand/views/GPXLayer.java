@@ -58,7 +58,6 @@ public class GPXLayer implements OsmandMapLayer {
 		for (List<Location> l : points) {
 			path.rewind();
 			int startIndex = -1;
-			int endIndex = -1;
 
 			for (int i = 0; i < l.size(); i++) {
 				Location ls = l.get(i);
@@ -67,33 +66,35 @@ public class GPXLayer implements OsmandMapLayer {
 							&& ls.getLongitude() <= latLonBounds.right ) {
 						startIndex = i > 0 ? i - 1 : i;
 					}
-				} else if (!(latLonBounds.left <= ls.getLongitude() + 0.01 && ls.getLongitude() - 0.01 <= latLonBounds.right
-						&& latLonBounds.bottom <= ls.getLatitude() + 0.01 && ls.getLatitude() - 0.01 <= latLonBounds.top)) {
-					endIndex = i;
+				} else if (!(latLonBounds.left <= ls.getLongitude() + 0.03 && ls.getLongitude() - 0.03 <= latLonBounds.right
+						&& latLonBounds.bottom <= ls.getLatitude() + 0.03 && ls.getLatitude() - 0.03 <= latLonBounds.top)) {
+					drawSegment(canvas, l, startIndex, i);
 					// do not continue make method more efficient (because it calls in UI thread)
 					// this break also has logical sense !
-					break;
+					// break;
+					startIndex = -1;
 				}
 			}
-			if (startIndex == -1) {
+			if (startIndex != -1) {
+				drawSegment(canvas, l, startIndex, l.size() - 1);
 				continue;
 			}
-			if (endIndex == -1) {
-				endIndex = l.size() - 1;
-			}
-
-			int px = view.getMapXForPoint(l.get(startIndex).getLongitude());
-			int py = view.getMapYForPoint(l.get(startIndex).getLatitude());
-			path.moveTo(px, py);
-			for (int i = startIndex + 1; i <= endIndex; i++) {
-				Location p = l.get(i);
-				int x = view.getMapXForPoint(p.getLongitude());
-				int y = view.getMapYForPoint(p.getLatitude());
-				path.lineTo(x, y);
-			}
-			canvas.drawPath(path, paint);
 		}
 		
+	}
+
+
+	private void drawSegment(Canvas canvas, List<Location> l, int startIndex, int endIndex) {
+		int px = view.getMapXForPoint(l.get(startIndex).getLongitude());
+		int py = view.getMapYForPoint(l.get(startIndex).getLatitude());
+		path.moveTo(px, py);
+		for (int i = startIndex + 1; i <= endIndex; i++) {
+			Location p = l.get(i);
+			int x = view.getMapXForPoint(p.getLongitude());
+			int y = view.getMapYForPoint(p.getLatitude());
+			path.lineTo(x, y);
+		}
+		canvas.drawPath(path, paint);
 	}
 	
 
