@@ -1135,12 +1135,16 @@ public class IndexCreator {
 								multiPolygonsNames.put(es.getId(), name);
 							}
 							putMultipolygonType(multiPolygonsWays[0], es.getId(), mtType, inverse);
-							for(int i=1; i<multiPolygonsWays.length; i++){
-								int type = findMultiPolygonType(e, i);
-								if (type != 0) {
-									putMultipolygonType(multiPolygonsWays[i], es.getId(), type, inverse);
+							// TODO that's not a solution !!! All wholes will not be visible at lower levels
+							// That doesn't solve initial problem (try minsk small area)
+//							if (!inner) {
+								for (int i = 1; i < multiPolygonsWays.length; i++) {
+									int type = findMultiPolygonType(e, i);
+									if (type != 0) {
+										putMultipolygonType(multiPolygonsWays[i], es.getId(), type, inverse);
+									}
 								}
-							}
+//							}
 						}
 					}
 
@@ -1403,11 +1407,15 @@ public class IndexCreator {
 				}
 				int prevX = 0;
 				int prevY = 0;
-				int len = 0;
-				boolean addLast = hasMulti || nodes.get(0).getId() == nodes.get(nodes.size() - 1).getId();  
+				boolean cycle = nodes.get(0).getId() == nodes.get(nodes.size() - 1).getId();
+				boolean addLast = hasMulti || cycle;  
 				
+				int minX = Integer.MAX_VALUE;
+				int maxX = Integer.MIN_VALUE;
+				int minY = Integer.MAX_VALUE;
+				int maxY = Integer.MIN_VALUE;
 				for (int i = 0; i < nodes.size(); i++) {
-					int r = i == nodes.size() - 1 ? 0 : 4;
+					int r = 1; //i == nodes.size() - 1 ? 1 : 2;
 					// do not simplify last node it could be important node for multipolygon
 					if (nodes.get(i) != null) {
 						int x = (int) (MapUtils.getTileNumberX(zoom, nodes.get(i).getLongitude()) * 256d);
@@ -1416,16 +1424,22 @@ public class IndexCreator {
 						int dx = Math.abs(x - prevX);
 						if (dx > r || dy > r || (addLast && i == nodes.size() - 1)) {
 							way.addNode(nodes.get(i));
-							len += (dx + dy);
 							prevX = x;
 							prevY = y;
 						}
+						minX = Math.min(minX, x);
+						maxX = Math.max(maxX, x);
+						minY = Math.min(minY, y);
+						maxY = Math.max(maxY, y);
 					}
 				}
 				e = way;
 				skip = way.getNodes().size() < 2;
-				if (/*!hasMulti &&*/ len < 8) {
+				if (/* !hasMulti && */(maxX - minX) <= 4 && (maxY - minY) <= 4) {
 					skip = true;
+				}
+				if(!cycle && hasMulti){
+					skip = false;
 				}
 			}
 

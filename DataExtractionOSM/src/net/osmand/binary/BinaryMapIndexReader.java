@@ -193,8 +193,8 @@ public class BinaryMapIndexReader {
 				}
 			}
 		}
-		log.info("Search is done. Visit " + req.numberOfVisitedObjects + " objects. Read " + req.numberOfAcceptedObjects + " objects.");
-		log.info("Read " + req.numberOfReadSubtrees + " subtrees. Go through " + req.numberOfAcceptedSubtrees + " subtrees.");
+		log.info("Search is done. Visit " + req.numberOfVisitedObjects + " objects. Read " + req.numberOfAcceptedObjects + " objects."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		log.info("Read " + req.numberOfReadSubtrees + " subtrees. Go through " + req.numberOfAcceptedSubtrees + " subtrees.");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 		return req.getSearchResults();
 	}
 	
@@ -348,10 +348,35 @@ public class BinaryMapIndexReader {
 			codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 			return null;
 		}
+		
+		// READ types
+		tag = WireFormat.getTagFieldNumber(codedIS.readTag());
+		if(OsmandOdb.MapData.TYPES_FIELD_NUMBER != tag) {
+			throw new IllegalArgumentException();
+		}
+		req.cacheTypes.clear();
+		int sizeL = codedIS.readRawVarint32();
+		byte[] types = codedIS.readRawBytes(sizeL);
+		for(int i=0; i<sizeL/2; i++){
+			req.cacheTypes.add(Algoritms.parseSmallIntFromBytes(types, i*2));
+		}
+		
+		boolean accept = true;
+		if (req.searchFilter != null) {
+			accept = req.searchFilter.accept(req.cacheTypes);
+		}
+		
+		
+		if(!accept){
+			codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+			return null;
+		}
+		
 		req.numberOfAcceptedObjects++;
 		
 		BinaryMapDataObject dataObject = new BinaryMapDataObject();		
 		dataObject.coordinates = req.cacheCoordinates.toArray();
+		dataObject.types = req.cacheTypes.toArray();
 		
 		while(true){
 			int t = codedIS.readTag();
@@ -359,15 +384,6 @@ public class BinaryMapIndexReader {
 			switch (tag) {
 			case 0:
 				return dataObject;
-			case OsmandOdb.MapData.TYPES_FIELD_NUMBER :
-				int sizeL = codedIS.readRawVarint32();
-				byte[] types = codedIS.readRawBytes(sizeL);
-				int[] newTypes = new int[types.length/2]; 
-				for(int i=0; i<newTypes.length; i++){
-					newTypes[i] = Algoritms.parseSmallIntFromBytes(types, i*2);
-				}
-				dataObject.types = newTypes;
-				break;
 			case OsmandOdb.MapData.RESTRICTIONS_FIELD_NUMBER :
 				sizeL = codedIS.readRawVarint32();
 				TLongArrayList list = new TLongArrayList();
@@ -485,6 +501,11 @@ public class BinaryMapIndexReader {
 		}
 	}
 	
+	public static interface SearchFilter {
+		
+		public boolean accept(TIntArrayList types);
+	}
+	
 	public static class SearchRequest {
 		int left = 0;
 		int right = 0;
@@ -493,6 +514,8 @@ public class BinaryMapIndexReader {
 		int zoom = 15;
 		List<BinaryMapDataObject> searchResults = new ArrayList<BinaryMapDataObject>();
 		TIntArrayList cacheCoordinates = new TIntArrayList();
+		TIntArrayList cacheTypes = new TIntArrayList();
+		SearchFilter searchFilter = null;
 		
 		// TRACE INFO
 		int numberOfVisitedObjects = 0;
@@ -504,6 +527,12 @@ public class BinaryMapIndexReader {
 		protected SearchRequest(){
 		}
 		
+		public SearchFilter getSearchFilter() {
+			return searchFilter;
+		}
+		public void setSearchFilter(SearchFilter searchFilter) {
+			this.searchFilter = searchFilter;
+		}
 		
 		public List<BinaryMapDataObject> getSearchResults() {
 			return searchResults;
@@ -528,7 +557,7 @@ public class BinaryMapIndexReader {
 		int sbottom = MapUtils.get31TileNumberY(53.919);
 		System.out.println("SEARCH " + sleft + " " + sright + " " + stop + " " + sbottom);
 
-		for (BinaryMapDataObject obj : reader.searchMapIndex(buildSearchRequest(sleft, sright, stop, sbottom, 18))) {
+		for (BinaryMapDataObject obj : reader.searchMapIndex(buildSearchRequest(sleft, sright, stop, sbottom, 8))) {
 //			for(int i=0; i<obj.getTypes().length; i++){
 //				int t = obj.getTypes()[i];
 //				if((t & 3) == MapRenderingTypes.POLYGON_TYPE){
