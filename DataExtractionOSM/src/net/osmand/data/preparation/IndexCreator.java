@@ -153,7 +153,10 @@ public class IndexCreator {
 
 	
 	private RTree[] mapTree = null;
-	private final int[] MAP_ZOOMS = MapRenderingTypes.MAP_ZOOMS;
+	// maximum 5 limitation => 4 levels allowed
+	public static final int[] MAP_ZOOMS = new int[]{5, 8, 11, 14, 22};
+//	public static final int[] MAP_ZOOMS = new int[]{5, 9, 14, 22};
+	
 	
 	// MEMORY map :  save it in memory while that is allowed
 	private Map<Long, Set<Integer>>[] multiPolygonsWays = new Map[MAP_ZOOMS.length - 1];
@@ -220,6 +223,19 @@ public class IndexCreator {
 		this.normalizeStreets = normalizeStreets;
 	}
 
+	
+	protected static int defineLevel(int minZoom) {
+		int level = 0;
+		if (minZoom < 15) {
+			for (int i = 1; i < MAP_ZOOMS.length; i++) {
+				if (minZoom <= MAP_ZOOMS[i]) {
+					level = MAP_ZOOMS.length - 1 - i;
+					break;
+				}
+			}
+		}
+		return level;
+	}
 	
 	protected class NewDataExtractionOsmFilter implements IOsmStorageFilter {
 
@@ -1126,25 +1142,21 @@ public class IndexCreator {
 						boolean clockwise = isClockwiseWay(l);
 						// clockwise - outer (like coastline), anticlockwise - inner
 						boolean inverse = clockwise != !innerType;
-						for(Way es : l){
+						for (Way es : l) {
 							boolean inner = "inner".equals(entities.get(es));
-							if(innerType != inner){
+							if (innerType != inner) {
 								throw new IllegalStateException();
 							}
-							if(!inner && name != null){
+							if (!inner && name != null) {
 								multiPolygonsNames.put(es.getId(), name);
 							}
 							putMultipolygonType(multiPolygonsWays[0], es.getId(), mtType, inverse);
-							// TODO that's not a solution !!! All wholes will not be visible at lower levels
-							// That doesn't solve initial problem (try minsk small area)
-//							if (!inner) {
-								for (int i = 1; i < multiPolygonsWays.length; i++) {
-									int type = findMultiPolygonType(e, i);
-									if (type != 0) {
-										putMultipolygonType(multiPolygonsWays[i], es.getId(), type, inverse);
-									}
+							for (int i = 1; i < multiPolygonsWays.length; i++) {
+								int type = findMultiPolygonType(e, i);
+								if (type != 0) {
+									putMultipolygonType(multiPolygonsWays[i], es.getId(), type, inverse);
 								}
-//							}
+							}
 						}
 					}
 
@@ -1215,7 +1227,7 @@ public class IndexCreator {
 	}
 	
 	private int findMultiPolygonType(Entity e, int level){
-		int t = MapRenderingTypes.encodeEntityWithType(e, level, true, typeUse);
+		int t = MapRenderingTypes.encodeEntityWithType(e, MAP_ZOOMS[MAP_ZOOMS.length - level - 1], true, typeUse);
 		int mtType = 0;
 		if (t != 0) {
 			if ((t & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
@@ -1347,7 +1359,7 @@ public class IndexCreator {
 	
 
 	private void writeBinaryEntityToMapDatabase(Entity e, long baseId, boolean inverse, int level) throws SQLException {
-		int type = MapRenderingTypes.encodeEntityWithType(e, level, false, typeUse);
+		int type = MapRenderingTypes.encodeEntityWithType(e, MAP_ZOOMS[MAP_ZOOMS.length - level - 1], false, typeUse);
 		Map<Long, Set<Integer>> multiPolygonsWays = this.multiPolygonsWays[level];
 		boolean hasMulti = e instanceof Way && multiPolygonsWays.containsKey(e.getId());
 		if (hasMulti) {
@@ -1415,7 +1427,7 @@ public class IndexCreator {
 				int minY = Integer.MAX_VALUE;
 				int maxY = Integer.MIN_VALUE;
 				for (int i = 0; i < nodes.size(); i++) {
-					int r = 1; //i == nodes.size() - 1 ? 1 : 2;
+					int r = i == nodes.size() - 1 ? 1 : 3;
 					// do not simplify last node it could be important node for multipolygon
 					if (nodes.get(i) != null) {
 						int x = (int) (MapUtils.getTileNumberX(zoom, nodes.get(i).getLongitude()) * 256d);
@@ -2007,6 +2019,7 @@ public class IndexCreator {
 		 
 		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
 		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
+		 
 		 
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/forest.osm"), new ConsoleProgressImplementation(3), null);
 		 

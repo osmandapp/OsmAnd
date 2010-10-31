@@ -2,8 +2,8 @@
 <resources>
 	<string name="use_high_res_maps">Mapa s veľkým rozlíšením</string>
 <string name="use_high_res_maps_descr">Použiť mapu s veľkým rozlíšením pre zariadenia s vysokou hustotou bodov</string>
-<string name="unknown_location">Aktuálna pozícia nie je známa</string>
-<string name="download_files_question">Stiahnuť {0} súborov?</string>
+<string name="unknown_location">Pozícia nie je zatiaľ známa</string>
+<string name="download_files_question">Stiahnuť {0} súbor/y?</string>
 <string name="download_files">Stiahnuť</string>
 <string name="context_menu_item_search_transport">Hľadať prepravu</string>
 <string name="transport_searching_transport">Hľadá sa preprava (bez cieľa)</string>
@@ -138,7 +138,7 @@
 <string name="update_poi_no_offline_poi_index">Nie sú dostupné žiadne indexy offlinových POI pre túto oblasť</string>
 <string name="update_poi_is_not_available_for_zoom">Aktualizácia POI nie je dostupná pre nízke úrovne priblíženia</string>
 <string name="context_menu_item_update_poi">Aktualizovať POI</string>
-<string name="context_menu_item_update_map_confirm">Ste si istý, že chcete aktualizovat lokálne údaje z internetu?</string>
+<string name="context_menu_item_update_map_confirm">Naozaj chcete aktualizovať lokálne údaje z internetu?</string>
 <string name="search_history_city">Mesto: {0}</string>
 <string name="search_history_street">Ulica: {0}, {1}</string>
 <string name="search_history_int_streets">Pretínajúce ulice: {0} x {1} v {2}</string>
@@ -148,11 +148,11 @@
 <string name="clear_all">Zmazať všetko</string>
 <string name="history">História</string>
 <string name="uploading_data">Nahrávajú sa údaje...</string>
-<string name="uploading">Nahrávania</string>
+<string name="uploading">Nahrávanie</string>
 <string name="search_nothing_found">Nič sa nenašlo</string>
 <string name="searching">Vyhľadáva sa</string>
 <string name="searching_address">Hľadá sa adresa...</string>
-<string name="search_osm_nominatim">Hľadať adresu použiťím OSM Nominatim</string>
+<string name="search_osm_nominatim">Nájdite adresu použiťím OSM Nominatim</string>
 <string name="hint_search_online">Číslo domu, ulica, mesto</string>
 <string name="search_offline_address">Offline</string>
 <string name="search_online_address">Internet</string>
@@ -239,7 +239,7 @@
 <string name="save_track_interval">Interval ukladania stopy</string>
 <string name="monitor_preferences">Monitorovanie</string>
 <string name="save_track_to_gpx_descrp">Stopy budú uložené do adresára stôp, zoskupené podľa dní</string>
-<string name="save_track_to_gpx">Uložiť stopu do GPX</string>
+<string name="save_track_to_gpx">Ukladať stopu do GPX</string>
 <string name="navigate_to">Navigovať sem</string>
 <string name="update_tile">Aktualizovať mapu</string>
 <string name="reload_tile">Znovu načítať dlaždicu</string>
@@ -263,7 +263,7 @@
 <string name="map_specify_point">Určiť bod</string>
 <string name="show_view_angle_descr">Uhol pohľadu zobrazenia podľa kompasu</string>
 <string name="show_view_angle">Zobraziť uhol pohľadu</string>
-<string name="stop_navigation">Zmazať bod</string>
+<string name="stop_navigation">Zmazať cieľ</string>
 <string name="navigate_to_point">Označiť bod</string>
 <string name="map_view_3d_descr">Zapnúť 3D zobrazenie mapy</string>
 <string name="map_view_3d">3D zobrazenie mapy</string>
@@ -274,7 +274,7 @@
 <string name="map_tile_source">Zdroj dlaždíc mapy</string>
 <string name="map_source">Zdroj mapy</string>
 <string name="use_internet">Použiť internet</string>
-<string name="show_location">Zobraziť umiestnenie</string>
+<string name="show_location">Zobraziť pozíciu</string>
 <string name="map_preferences">Mapa</string>
 <string name="settings_activity">Nastavenia</string>
 <string name="show_gps_coordinates_text">Zobraziť GPS súradnice na mape</string>
@@ -320,7 +320,7 @@
 <string name="navigate_point_format_DMS">DDD:MM:SS.SSSSS</string>
 <string name="search_shown_on_map">Zobraziť na mape</string>
 <string name="navigate_point_cancel">Zrušiť</string>
-<string name="search_address_top_text">Vybrať adresu</string>
+<string name="search_address_top_text">Zvoľte adresu</string>
 <string name="search_address_region">Oblasť</string>
 <string name="search_address_city">Mesto</string>
 <string name="search_address_street">Ulica</string>
@@ -328,7 +328,7 @@
 <string name="search_address_building_option">Budova</string>
 <string name="search_address_street_option">Pretínajúca ulica</string>
 
-<string name="search_tabs_location">Umiestnenie</string>
+<string name="search_tabs_location">Pozícia</string>
 
 <string name="context_menu_item_navigate_point">Navigovať do bodu</string>
 <string name="context_menu_item_add_favorite">Pridať do Obľúbených</string>

@@ -1,6 +1,7 @@
 package net.osmand.osm;
 
 import gnu.trove.map.TIntByteMap;
+import gnu.trove.map.hash.TIntByteHashMap;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -19,9 +20,8 @@ import net.osmand.osm.OSMSettings.OSMTagKey;
  * 1. Last 2 bits define type of element : polygon, polyline, point 
  */
 public class MapRenderingTypes {
-	// maximum 5 limitation => 4 levels allowed
-//	public static final int[] MAP_ZOOMS = new int[]{5, 8, 11, 14, 22};
-	public static final int[] MAP_ZOOMS = new int[]{5, 9, 14, 22};
+	
+	public static final int[] MAP_ZOOMS = null;
 	
 	// TODO Internet access bits for point, polygon
 	/** standard schema :	 
@@ -173,8 +173,8 @@ public class MapRenderingTypes {
 			return tag;
 		}
 		
-		public void registerType(int level, String val, int pointRule, int polylineRule, int polygonRule, int type, int subtype){
-			int r = encodeRule(level, pointRule, polylineRule, polygonRule, type, subtype);
+		public void registerType(int minZoom, String val, int pointRule, int polylineRule, int polygonRule, int type, int subtype){
+			int r = encodeRule(minZoom, pointRule, polylineRule, polygonRule, type, subtype);
 			if(val != null){
 				rules.put(val, r);
 			} else {
@@ -190,8 +190,8 @@ public class MapRenderingTypes {
 			return nullRule != null && nullRule > 0;
 		}
 		
-		private int encodeRule(int level, int pointRule, int polylineRule, int polygonRule, int type, int subtype){
-			int rule = (((((level << 4) | polygonRule) << 4) | polylineRule) << 4) | pointRule; // 14 bit
+		private int encodeRule(int minZoom, int pointRule, int polylineRule, int polygonRule, int type, int subtype){
+			int rule = (((((minZoom << 4) | polygonRule) << 4) | polylineRule) << 4) | pointRule; // 17 bit
 			rule = (((rule << 8) | subtype) << 5) | type; // + 13 bits
 			return rule;
 		}
@@ -220,12 +220,12 @@ public class MapRenderingTypes {
 			return (i >> 21) & MASK_4;
 		}
 		
-		public int getLevel(String val){
+		public int getMinZoom(String val){
 			Integer i = val == null ? nullRule : rules.get(val);
 			if(i == null){
 				return 0;
 			}
-			return (i >> 25) & MASK_4;
+			return (i >> 25);
 		}
 		
 		
@@ -239,7 +239,7 @@ public class MapRenderingTypes {
 	}
 	
 	// if type equals 0 no need to save that point
-	public static int encodeEntityWithType(Entity e, int level, boolean multipolygon, List<Integer> additionalTypes) {
+	public static int encodeEntityWithType(Entity e, int zoom, boolean multipolygon, List<Integer> additionalTypes) {
 		if (types == null) {
 			types = new LinkedHashMap<String, MapRulType>();
 			init(INIT_RULE_TYPES);
@@ -283,7 +283,7 @@ public class MapRenderingTypes {
 				if (types.containsKey(tag)) {
 					MapRulType rType = types.get(tag);
 					String val = i == 1 ? null : e.getTag(tag);
-					if(rType.getLevel(val) < level){
+					if(rType.getMinZoom(val) > zoom){
 						continue;
 					}
 					int pr = point ? rType.getPointRule(val) : (polygon ? rType.getPolygonRule(val) : rType.getPolylineRule(val));
@@ -510,14 +510,14 @@ public class MapRenderingTypes {
 		return name;
 	}
 	
-	private static void registerRules(int level, 
+	private static void registerRules(int minZoom, 
 			String tag, String val, int type, int subtype, int pointRule, int polylineRule, int polygonRule){
 		MapRulType rtype = types.get(tag);
 		if(rtype == null){
 			rtype = new MapRulType(tag);
 			types.put(tag, rtype);
 		}
-		rtype.registerType(level, val, pointRule, polylineRule, polygonRule, type, subtype);
+		rtype.registerType(minZoom, val, pointRule, polylineRule, polygonRule, type, subtype);
 	}
 	
 	private static void initAmenityMap(){
@@ -536,6 +536,7 @@ public class MapRenderingTypes {
 	 */
 	public static TIntByteMap getObjectTypeMinZoom(){
 		if(objectsToMinZoom == null){
+			objectsToMinZoom = new TIntByteHashMap();
 			init(INIT_TYPE_ZOOM);
 		}
 		return objectsToMinZoom;
@@ -646,7 +647,6 @@ public class MapRenderingTypes {
 	}
 	private static void register(int st, int minZoom, String tag, String val, int type, int subtype, int renderType){
 		if(st == INIT_RULE_TYPES){
-			int level = defineLevel(minZoom);
 			int polygonRule = 0;
 			int polylineRule = 0;
 			int pointRule = 0;
@@ -658,30 +658,18 @@ public class MapRenderingTypes {
 			} else {
 				polygonRule = renderType;
 			}
-			registerRules(level, tag, val, type, subtype, pointRule, polylineRule, polygonRule);
+			registerRules(minZoom, tag, val, type, subtype, pointRule, polylineRule, polygonRule);
 		} else if(st == INIT_AMENITY_MAP) {
 			if(renderType == POINT_TYPE || renderType == POLYGON_TYPE){
 				registerAmenity(tag, val, type, subtype);
 			}
 		} else if(st == INIT_TYPE_ZOOM){
 			if(minZoom < 15){
-				objectsToMinZoom.put((((subtype) << 5) << type) << 2, (byte) minZoom);
+				objectsToMinZoom.put(((subtype << 5) | type) << 2, (byte) minZoom);
 			}
 		}
 	}
 
-	private static int defineLevel(int minZoom) {
-		int level = 0;
-		if (minZoom < 15) {
-			for (int i = 1; i < MAP_ZOOMS.length; i++) {
-				if (minZoom <= MAP_ZOOMS[i]) {
-					level = MAP_ZOOMS.length - 1 - i;
-					break;
-				}
-			}
-		}
-		return level;
-	}
 	
 	private static void register(int st, String tag, String val, int type, int subtype, int renderType, int renderType2){
 		register(st, 15, tag, val, type, subtype, renderType, renderType2);
@@ -711,14 +699,14 @@ public class MapRenderingTypes {
 			}
 		}
 		if(st == INIT_RULE_TYPES){
-			registerRules(defineLevel(minZoom), tag, val, type, subtype, pointRule, polylineRule, polygonRule);
+			registerRules(minZoom, tag, val, type, subtype, pointRule, polylineRule, polygonRule);
 		} else if(st == INIT_AMENITY_MAP){
 			if(pointRule == POINT_TYPE){
 				registerAmenity(tag, val, type, subtype);
 			}
 		} else if(st == INIT_TYPE_ZOOM){
 			if(minZoom < 15){
-				objectsToMinZoom.put((((subtype) << 5) << type) << 2, (byte) minZoom);
+				objectsToMinZoom.put((((subtype) << 5) | type) << 2, (byte) minZoom);
 			}
 		}
 	}
@@ -732,7 +720,7 @@ public class MapRenderingTypes {
 				rtype = new MapRulType(tag);
 				types.put(tag, rtype);
 			}
-			rtype.registerType(0, val, POINT_TYPE, 0, DEFAULT_POLYGON_BUILDING, type, subtype);
+			rtype.registerType(15, val, POINT_TYPE, 0, DEFAULT_POLYGON_BUILDING, type, subtype);
 		} else if (st == INIT_AMENITY_MAP) {
 			registerAmenity(tag, val, type, subtype);
 		} else if(st == INIT_TYPE_ZOOM){
