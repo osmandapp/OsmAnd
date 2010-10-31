@@ -1,5 +1,7 @@
 package net.osmand.render;
 
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.TIntByteMap;
 import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TLongHashSet;
 
@@ -168,7 +170,7 @@ public class MapRenderRepositories {
 		return false;
 	}
 	
-	private boolean loadVectorData(RectF dataBox, int zoom){
+	private boolean loadVectorData(RectF dataBox, final int zoom){
 		double cBottomLatitude = dataBox.bottom;
 		double cTopLatitude = dataBox.top;
 		double cLeftLongitude = dataBox.left;
@@ -195,6 +197,32 @@ public class MapRenderRepositories {
 			int bottomY = MapUtils.get31TileNumberY(cBottomLatitude);
 			int topY = MapUtils.get31TileNumberY(cTopLatitude);
 			searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom);
+			if (zoom < 15) {
+				searchRequest.setSearchFilter(new BinaryMapIndexReader.SearchFilter() {
+					TIntByteMap map = MapRenderingTypes.getObjectTypeMinZoom();
+
+					@Override
+					public boolean accept(TIntArrayList types) {
+						for (int j = 0; j < types.size(); j++) {
+							int type = types.get(j);
+							if ((type & 3) == MapRenderingTypes.POINT_TYPE) {
+								// keep 13 bit after last 2 bits and
+								// 0111 1111 1111 1100
+								type &= 0x7ffc;
+							} else {
+								// 0000 1111 1111 1100
+								type &= 0xffc;
+							}
+							byte b = map.get(type);
+							if (b != 0 && b <= zoom) {
+								return true;
+							}
+						}
+						return false;
+					}
+
+				});
+			}
 			
 			for (BinaryMapIndexReader c : files.values()) {
 				List<BinaryMapDataObject> res = c.searchMapIndex(searchRequest);
@@ -223,7 +251,7 @@ public class MapRenderRepositories {
 				}
 			}
 			
-			List<MultyPolygon> pMulti = proccessMultiPolygons(multiPolygons, leftX, rightX, bottomY, topY);
+			List<MultyPolygon> pMulti = proccessMultiPolygons(multiPolygons, leftX, rightX, bottomY, topY, zoom);
 			tempList.addAll(pMulti);
 			log.info(String.format("Search has been done in %s ms. %s results were found.", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
 			
@@ -322,7 +350,7 @@ public class MapRenderRepositories {
 		}
 	}
 	
-	public List<MultyPolygon> proccessMultiPolygons(Map<Integer, List<BinaryMapDataObject>> multyPolygons, int leftX, int rightX, int bottomY, int topY){
+	public List<MultyPolygon> proccessMultiPolygons(Map<Integer, List<BinaryMapDataObject>> multyPolygons, int leftX, int rightX, int bottomY, int topY, int zoom){
 		List<MultyPolygon> listPolygons = new ArrayList<MultyPolygon>(multyPolygons.size());
 		List<List<Long>> completedRings = new ArrayList<List<Long>>();
 		List<List<Long>> incompletedRings = new ArrayList<List<Long>>();
@@ -354,7 +382,7 @@ public class MapRenderRepositories {
 			incompletedRingNames.clear();
 			
 			MultyPolygon pl = processMultiPolygon(leftX, rightX, bottomY, topY, listPolygons, completedRings, incompletedRings, 
-					completedRingNames, incompletedRingNames, type,	directList, inverselist);
+					completedRingNames, incompletedRingNames, type,	directList, inverselist, zoom);
 			if(pl != null){
 				listPolygons.add(pl);
 			}
@@ -364,7 +392,7 @@ public class MapRenderRepositories {
 
 	private MultyPolygon processMultiPolygon(int leftX, int rightX, int bottomY, int topY, List<MultyPolygon> listPolygons,
 			List<List<Long>> completedRings, List<List<Long>> incompletedRings, List<String> completedRingNames, List<String> incompletedRingNames, 
-			Integer type, List<BinaryMapDataObject> directList, List<BinaryMapDataObject> inverselist) {
+			Integer type, List<BinaryMapDataObject> directList, List<BinaryMapDataObject> inverselist, int zoom) {
 		MultyPolygon pl = new MultyPolygon();
 		// delete direction last bit (to not show point)
 		pl.setType(type & 0x7fff);
@@ -377,7 +405,7 @@ public class MapRenderRepositories {
 					continue;
 				}
 				dbId = o.getId() >> 3;
-				List<Long> coordinates = new ArrayList<Long>();
+				List<Long> coordinates = new ArrayList<Long>(o.getPointsLength() / 2);
 				int px = o.getPoint31XTile(km == 0 ? 0 : len - 1); 
 				int py = o.getPoint31YTile(km == 0 ? 0 : len - 1);
 				int x = px;
@@ -409,24 +437,30 @@ public class MapRenderRepositories {
 			return null;
 		}
 		if (incompletedRings.size() > 0) {
-			unifyIncompletedRings(incompletedRings, completedRings, completedRingNames, incompletedRingNames, leftX, rightX, bottomY, topY, dbId);
+			unifyIncompletedRings(incompletedRings, completedRings, completedRingNames, incompletedRingNames, leftX, rightX, bottomY, topY, dbId, zoom);
 		} else {
-			// check for isolated island (android do not fill area outside path)
-			boolean clockwiseFound = false;
-			for(List<Long> c : completedRings){
-				if(isClockwiseWay(c)){
-					clockwiseFound = true;
-					break;
+			// due to self intersection small objects (for low zooms check only coastline)
+			if (zoom >= 13
+					|| (MapRenderingTypes.getMainObjectType(pl.getTypes()[0]) == MapRenderingTypes.NATURAL && MapRenderingTypes
+							.getObjectSubType(pl.getTypes()[0]) == 5)) {
+				boolean clockwiseFound = false;
+				for (List<Long> c : completedRings) {
+					if (isClockwiseWay(c)) {
+						clockwiseFound = true;
+						break;
+					}
 				}
-			}
-			if(!clockwiseFound){
-				// add whole bound
-				List<Long> whole = new ArrayList<Long>(4);
-				whole.add((((long) leftX) << 32) | ((long) topY));
-				whole.add((((long) rightX) << 32) | ((long) topY));
-				whole.add((((long) rightX) << 32) | ((long) bottomY));
-				whole.add((((long) leftX) << 32) | ((long) bottomY));
-				completedRings.add(whole);
+				if (!clockwiseFound) {
+					// add whole bound
+					List<Long> whole = new ArrayList<Long>(4);
+					whole.add((((long) leftX) << 32) | ((long) topY));
+					whole.add((((long) rightX) << 32) | ((long) topY));
+					whole.add((((long) rightX) << 32) | ((long) bottomY));
+					whole.add((((long) leftX) << 32) | ((long) bottomY));
+					completedRings.add(whole);
+					log.info("!!! Isolated island !!!"); //$NON-NLS-1$
+				}
+
 			}
 		}
 		
@@ -522,7 +556,7 @@ public class MapRenderRepositories {
 
 	private void unifyIncompletedRings(List<List<Long>> incompletedRings, List<List<Long>> completedRings, 
 			List<String> completedRingNames, List<String> incompletedRingNames, 
-			int leftX, int rightX,	int bottomY, int topY, long dbId) {
+			int leftX, int rightX,	int bottomY, int topY, long dbId, int zoom) {
 		int mask = 0xffffffff;
 		Set<Integer> nonvisitedRings = new LinkedHashSet<Integer>();
 		for(int j = 0; j< incompletedRings.size(); j++){
@@ -568,7 +602,9 @@ public class MapRenderRepositories {
 			
 			int x = (int) (i.get(i.size() - 1) >> 32);
 			int y = (int) (i.get(i.size() - 1) & mask);
-			
+			// 31 - (zoom + 8)
+			int EVAL_DELTA = 6 << (23 - zoom); 
+			int UNDEFINED_MIN_DIFF = -1 - EVAL_DELTA;			
 			while (true) {
 				int st = 0; // st already checked to be one of the four
 				if (y == topY) {
@@ -585,39 +621,39 @@ public class MapRenderRepositories {
 				for (int h = st; h < st + 4; h++) {
 
 					// BEGIN find closest nonvisited start (including current)
-					int mindiff = -1;
+					int mindiff = UNDEFINED_MIN_DIFF;
 					for (Integer ni : nonvisitedRings) {
 						List<Long> cni = incompletedRings.get(ni);
 						int csx = (int) (cni.get(0) >> 32);
 						int csy = (int) (cni.get(0) & mask);
 						if (h % 4 == 0) {
 							// top
-							if (csy == topY && csx >= x) {
-								if (mindiff == -1 || (csx - x) <= mindiff) {
+							if (csy == topY && csx >= x - EVAL_DELTA) {
+								if (mindiff == UNDEFINED_MIN_DIFF || (csx - x) <= mindiff) {
 									mindiff = (csx - x);
 									nextRingIndex = ni;
 								}
 							}
 						} else if (h % 4 == 1) {
 							// right
-							if (csx == rightX && csy >= y) {
-								if (mindiff == -1 || (csy - y) <= mindiff) {
+							if (csx == rightX && csy >= y - EVAL_DELTA) {
+								if (mindiff == UNDEFINED_MIN_DIFF || (csy - y) <= mindiff) {
 									mindiff = (csy - y);
 									nextRingIndex = ni;
 								}
 							}
 						} else if (h % 4 == 2) {
 							// bottom
-							if (csy == bottomY && csx <= x) {
-								if (mindiff == -1 || (x - csx) <= mindiff) {
+							if (csy == bottomY && csx <= x + EVAL_DELTA) {
+								if (mindiff == UNDEFINED_MIN_DIFF || (x - csx) <= mindiff) {
 									mindiff = (x - csx);
 									nextRingIndex = ni;
 								}
 							}
 						} else if (h % 4 == 3) {
 							// left
-							if (csx == leftX && csy <= y) {
-								if (mindiff == -1 || (y - csy) <= mindiff) {
+							if (csx == leftX && csy <= y + EVAL_DELTA) {
+								if (mindiff == UNDEFINED_MIN_DIFF || (y - csy) <= mindiff) {
 									mindiff = (y - csy);
 									nextRingIndex = ni;
 								}
@@ -626,7 +662,7 @@ public class MapRenderRepositories {
 					} // END find closest start (including current)
 
 					// we found start point
-					if (mindiff != -1) {
+					if (mindiff != UNDEFINED_MIN_DIFF) {
 						break;
 					} else {
 						if (h % 4 == 0) {
