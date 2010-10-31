@@ -1,5 +1,7 @@
 package net.osmand.osm;
 
+import gnu.trove.map.TIntByteMap;
+
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -18,8 +20,8 @@ import net.osmand.osm.OSMSettings.OSMTagKey;
  */
 public class MapRenderingTypes {
 	// maximum 5 limitation => 4 levels allowed
-	public static final int[] MAP_ZOOMS = new int[]{5, 8, 11, 14, 22};
-//	public static final int[] MAP_ZOOMS = new int[]{5, 9, 14, 22};
+//	public static final int[] MAP_ZOOMS = new int[]{5, 8, 11, 14, 22};
+	public static final int[] MAP_ZOOMS = new int[]{5, 9, 14, 22};
 	
 	// TODO Internet access bits for point, polygon
 	/** standard schema :	 
@@ -143,6 +145,8 @@ public class MapRenderingTypes {
 
 	// stored information to convert from osm tags to int type
 	private static Map<String, MapRulType> types = null;
+	
+	private static TIntByteMap objectsToMinZoom = null;
 	
 	private static Map<String, Map<String, AmenityType>> amenityTagValToType = null;
 	private static Map<String, Map<String, String>> amenityTagValToPrefix = null;
@@ -524,6 +528,19 @@ public class MapRenderingTypes {
 			init(INIT_AMENITY_MAP);
 		}
 	}
+	
+	/**
+	 * 
+	 * @return <type, minzoom> map
+	 * only when minzoom < 15
+	 */
+	public static TIntByteMap getObjectTypeMinZoom(){
+		if(objectsToMinZoom == null){
+			init(INIT_TYPE_ZOOM);
+		}
+		return objectsToMinZoom;
+	}
+	
 	public static Map<String, Map<String, AmenityType>> getAmenityTagValToTypeMap() {
 		initAmenityMap();
 		return amenityTagValToType;
@@ -629,15 +646,7 @@ public class MapRenderingTypes {
 	}
 	private static void register(int st, int minZoom, String tag, String val, int type, int subtype, int renderType){
 		if(st == INIT_RULE_TYPES){
-			int level = 0;
-			if (minZoom < 15) {
-				for (int i = 1; i < MAP_ZOOMS.length; i++) {
-					if (minZoom <= MAP_ZOOMS[i]) {
-						level = MAP_ZOOMS.length - 1 - i;
-						break;
-					}
-				}
-			}
+			int level = defineLevel(minZoom);
 			int polygonRule = 0;
 			int polylineRule = 0;
 			int pointRule = 0;
@@ -654,14 +663,31 @@ public class MapRenderingTypes {
 			if(renderType == POINT_TYPE || renderType == POLYGON_TYPE){
 				registerAmenity(tag, val, type, subtype);
 			}
+		} else if(st == INIT_TYPE_ZOOM){
+			if(minZoom < 15){
+				objectsToMinZoom.put((((subtype) << 5) << type) << 2, (byte) minZoom);
+			}
 		}
+	}
+
+	private static int defineLevel(int minZoom) {
+		int level = 0;
+		if (minZoom < 15) {
+			for (int i = 1; i < MAP_ZOOMS.length; i++) {
+				if (minZoom <= MAP_ZOOMS[i]) {
+					level = MAP_ZOOMS.length - 1 - i;
+					break;
+				}
+			}
+		}
+		return level;
 	}
 	
 	private static void register(int st, String tag, String val, int type, int subtype, int renderType, int renderType2){
-		register(st, 0, tag, val, type, subtype, renderType, renderType2);
+		register(st, 15, tag, val, type, subtype, renderType, renderType2);
 	}
 	
-	private static void register(int st, int level, String tag, String val, int type, int subtype, int renderType, int renderType2){
+	private static void register(int st, int minZoom, String tag, String val, int type, int subtype, int renderType, int renderType2){
 		int polygonRule = 0;
 		int polylineRule = 0;
 		int pointRule = 0;
@@ -685,10 +711,14 @@ public class MapRenderingTypes {
 			}
 		}
 		if(st == INIT_RULE_TYPES){
-			registerRules(level, tag, val, type, subtype, pointRule, polylineRule, polygonRule);
+			registerRules(defineLevel(minZoom), tag, val, type, subtype, pointRule, polylineRule, polygonRule);
 		} else if(st == INIT_AMENITY_MAP){
 			if(pointRule == POINT_TYPE){
 				registerAmenity(tag, val, type, subtype);
+			}
+		} else if(st == INIT_TYPE_ZOOM){
+			if(minZoom < 15){
+				objectsToMinZoom.put((((subtype) << 5) << type) << 2, (byte) minZoom);
 			}
 		}
 	}
@@ -705,6 +735,8 @@ public class MapRenderingTypes {
 			rtype.registerType(0, val, POINT_TYPE, 0, DEFAULT_POLYGON_BUILDING, type, subtype);
 		} else if (st == INIT_AMENITY_MAP) {
 			registerAmenity(tag, val, type, subtype);
+		} else if(st == INIT_TYPE_ZOOM){
+			// skip it because building are too small
 		}
 	}
 	
@@ -847,6 +879,7 @@ public class MapRenderingTypes {
 	
 	private final static int INIT_RULE_TYPES = 0;
 	private final static int INIT_AMENITY_MAP = 1;
+	private final static int INIT_TYPE_ZOOM = 2;
 	
 	private static void init(int st){
 		
