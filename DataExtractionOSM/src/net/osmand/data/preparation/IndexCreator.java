@@ -1504,33 +1504,33 @@ public class IndexCreator {
 			@Override
 			public int compare(City o1, City o2) {
 				if (o1.getType() != o2.getType()) {
-					return -(o1.getType().ordinal() - o2.getType().ordinal());
+					return (o1.getType().ordinal() - o2.getType().ordinal());
 				}
 				return Collator.getInstance().compare(o1.getName(), o2.getName());
 			}
 		});
 		PreparedStatement streetstat = reader.getStreetsBuildingPreparedStatement(addressConnection);
 		
-		Map<String, List<Street>> postcodes = new TreeMap<String, List<Street>>();
+		Map<String, Set<Street>> postcodes = new TreeMap<String, Set<Street>>();
 		boolean writeCities = true;
 		// write cities and after villages
 		writer.startCityIndexes(false);
-		for(int i =0; i< cities.size(); i++ ) {
+		for (int i = 0; i < cities.size(); i++) {
 			City c = cities.get(i);
-			if(writeCities && c.getType() != CityType.CITY && c.getType() != CityType.TOWN){
+			if (writeCities && c.getType() != CityType.CITY && c.getType() != CityType.TOWN) {
 				writer.endCityIndexes(false);
 				writer.startCityIndexes(true);
 				writeCities = false;
 			}
-			
+
 			streets.clear();
 			reader.readStreetsBuildings(streetstat, c, streets);
 			writer.writeCityIndex(c, streets);
-			for(Street s : streets){
-				for(Building b : s.getBuildings()){
-					if(b.getPostcode() != null){
-						if(!postcodes.containsKey(b.getPostcode())){
-							postcodes.put(b.getPostcode(), new ArrayList<Street>(3));
+			for (Street s : streets) {
+				for (Building b : s.getBuildings()) {
+					if (b.getPostcode() != null) {
+						if (!postcodes.containsKey(b.getPostcode())) {
+							postcodes.put(b.getPostcode(), new LinkedHashSet<Street>(3));
 						}
 						postcodes.get(b.getPostcode()).add(s);
 					}
@@ -2136,7 +2136,6 @@ public class IndexCreator {
 		 
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/forest_complex.osm"), new ConsoleProgressImplementation(25), null);
 
-		 new DataIndexReader().testIndex(new File("e:\\Information\\OSM maps\\osmand\\Address\\Belarus.addr.odb"));
 		 System.out.println(System.currentTimeMillis() - time);
 		 System.out.println("COORDINATES_SIZE " + BinaryMapIndexWriter.COORDINATES_SIZE + " count " + BinaryMapIndexWriter.COORDINATES_COUNT);
 		 System.out.println("TYPES_SIZE " + BinaryMapIndexWriter.TYPES_SIZE);
