@@ -82,11 +82,23 @@ message OsmAndAddressIndex {
 	optional string name_en = 2;
 	
 	// encoded as fixed32 length delimited
-	repeated CityIndex cityIndex= 5; // cities and towns 
+	optional CitiesIndex cities = 5; // cities and towns 
 
-	repeated PostcodeIndex postcodes= 6;
+	// encoded as fixed32 length delimited
+	optional PostcodesIndex postcodes = 6;
 	
-	repeated CityIndex villages = 7; // suburbs and villages
+	// encoded as fixed32 length delimited
+	optional CitiesIndex villages = 7; // suburbs and villages
+}
+
+message CitiesIndex {
+	// encoded as fixed32 length delimited
+    repeated CityIndex cities = 1;
+}
+
+message PostcodesIndex {
+	// encoded as fixed32 length delimited
+    repeated PostcodeIndex postcodes = 1;
 }
 
 message CityIndex {
@@ -100,6 +112,8 @@ message CityIndex {
 	
 	repeated StreetIndex streets = 7; 
 }
+
+
 
 message PostcodeIndex {
     required string postcode = 1;
@@ -122,6 +136,7 @@ message BuildingIndex {
 	required string name = 1;
 	optional string name_en = 2;
 	optional uint64 id = 5;
+	optional string postcode = 6;
 	
 	required sint32 x = 3; // delta encoded to street 24 zoom
 	required sint32 y = 4; // delta encoded to street 24 zoom

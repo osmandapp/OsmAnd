@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -23,6 +24,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.Map.Entry;
 
 import net.osmand.Algoritms;
@@ -33,9 +35,11 @@ import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.MapObject;
+import net.osmand.data.Street;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.data.City.CityType;
+import net.osmand.data.index.DataIndexReader;
 import net.osmand.data.index.DataIndexWriter;
 import net.osmand.data.index.IndexConstants;
 import net.osmand.data.index.IndexConstants.IndexBinaryMapRenderObject;
@@ -105,6 +109,7 @@ public class IndexCreator {
 	private boolean indexTransport;
 	
 	private boolean indexAddress;
+	private boolean supportOdbAddressFile;
 	private boolean normalizeStreets;
 	private boolean saveAddressWays;
 
@@ -201,6 +206,10 @@ public class IndexCreator {
 	
 	public void setIndexAddress(boolean indexAddress) {
 		this.indexAddress = indexAddress;
+	}
+	
+	public void setSupportOdbAddressFile(boolean supportOdbAddressFile) {
+		this.supportOdbAddressFile = supportOdbAddressFile;
 	}
 	
 	public void setIndexMap(boolean indexMap) {
@@ -1484,10 +1493,68 @@ public class IndexCreator {
 		
 	}
 	
+	
 	public void writeBinaryAddressIndex(BinaryMapIndexWriter writer) throws IOException, SQLException {
+		writer.startWriteAddressIndex(getRegionName());
+		DataIndexReader reader = new DataIndexReader();
+		List<City> cities = reader.readCities(addressConnection);
+		List<Street> streets = new ArrayList<Street>();
+		Collections.sort(cities, new Comparator<City>(){
+
+			@Override
+			public int compare(City o1, City o2) {
+				if (o1.getType() != o2.getType()) {
+					return -(o1.getType().ordinal() - o2.getType().ordinal());
+				}
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}
+		});
+		PreparedStatement streetstat = reader.getStreetsBuildingPreparedStatement(addressConnection);
+		
+		Map<String, List<Street>> postcodes = new TreeMap<String, List<Street>>();
+		boolean writeCities = true;
+		// write cities and after villages
+		writer.startCityIndexes(false);
+		for(int i =0; i< cities.size(); i++ ) {
+			City c = cities.get(i);
+			if(writeCities && c.getType() != CityType.CITY && c.getType() != CityType.TOWN){
+				writer.endCityIndexes(false);
+				writer.startCityIndexes(true);
+				writeCities = false;
+			}
+			
+			streets.clear();
+			reader.readStreetsBuildings(streetstat, c, streets);
+			writer.writeCityIndex(c, streets);
+			for(Street s : streets){
+				for(Building b : s.getBuildings()){
+					if(b.getPostcode() != null){
+						if(!postcodes.containsKey(b.getPostcode())){
+							postcodes.put(b.getPostcode(), new ArrayList<Street>(3));
+						}
+						postcodes.get(b.getPostcode()).add(s);
+					}
+				}
+			}
+		}
+		writer.endCityIndexes(!writeCities);
+		
+		
+		// write postcodes
+		writer.startPostcodes();
+		for(String s : postcodes.keySet()){
+			writer.writePostcode(s, postcodes.get(s));
+		}
+		writer.endPostcodes();
+		
+	
+		
+		
+		writer.endWriteAddressIndex();
 		
 	}
-	
+
+
 	public void writeBinaryMapIndex(BinaryMapIndexWriter writer) throws IOException, SQLException {
 		try {
 			assert IndexConstants.IndexBinaryMapRenderObject.values().length == 6;
@@ -1863,6 +1930,11 @@ public class IndexCreator {
 						DataIndexWriter.addBatch(pStatements, pstat, BATCH_SIZE);
 					}
 				}
+				if(pStatements.get(pstat) > 0){
+					pstat.executeBatch();
+				}
+				pStatements.remove(pstat);
+				
 
 			}
 			
@@ -1901,17 +1973,24 @@ public class IndexCreator {
 				log.info("Finish packing RTree files");
 			}
 			
-			if(indexMap || indexAddress){
+			if(indexMap || (indexAddress && !supportOdbAddressFile)){
 				if(mapFile.exists()){
 					mapFile.delete();
 				}
 				mapRAFile = new RandomAccessFile(mapFile, "rw");
 				BinaryMapIndexWriter writer = new BinaryMapIndexWriter(mapRAFile);
 				if(indexMap){
+					log.info("Writing binary map data...");
 					writeBinaryMapIndex(writer);
 				}
-				if(indexAddress){
+				
+				if(indexAddress && !supportOdbAddressFile){
+					log.info("Writing binary address data...");
+					closePreparedStatements(addressCityStat, addressStreetStat, addressStreetNodeStat, addressBuildingStat);
+					addressConnection.commit();
 					writeBinaryAddressIndex(writer);
+					addressConnection.close();
+					addressConnection = null;
 				}
 				log.info("Finish writing binary file");
 			}
@@ -1999,9 +2078,19 @@ public class IndexCreator {
 				}
 				dbConn.close();
 			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
 	}
+	
+	protected void closePreparedStatements(PreparedStatement... preparedStatements) throws SQLException{
+		for(PreparedStatement p : preparedStatements){
+			p.executeBatch();
+			p.close();
+			pStatements.remove(p);
+		}
+	}
+	
 	
 	public static void removeWayNodes(File sqlitedb) throws SQLException{
 		Connection dbConn = DriverManager.getConnection("jdbc:sqlite:" + sqlitedb.getAbsolutePath());
@@ -2018,25 +2107,22 @@ public class IndexCreator {
 	}
 	
 	 public static void main(String[] args) throws IOException, SAXException, SQLException {
-		
+		 long time = System.currentTimeMillis();
 		 IndexCreator creator = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
 		 creator.setIndexMap(true);
+		 creator.setIndexAddress(true);
 //		 creator.setIndexPOI(true);
 //		 creator.setIndexTransport(true);
 		 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 		 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
-		 
-		 
+//		 
 		 
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/forest.osm"), new ConsoleProgressImplementation(3), null);
 		 
-//		 double dist = MapUtils.getDistance(50, MapUtils.getLongitudeFromTile(25, 0), 50, MapUtils.getLongitudeFromTile(25, 1));
-//		 System.out.println(dist);
-//		 System.out.println(-5 << 2);
 		 
 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
@@ -2050,7 +2136,8 @@ public class IndexCreator {
 		 
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/forest_complex.osm"), new ConsoleProgressImplementation(25), null);
 
-		 
+		 new DataIndexReader().testIndex(new File("e:\\Information\\OSM maps\\osmand\\Address\\Belarus.addr.odb"));
+		 System.out.println(System.currentTimeMillis() - time);
 		 System.out.println("COORDINATES_SIZE " + BinaryMapIndexWriter.COORDINATES_SIZE + " count " + BinaryMapIndexWriter.COORDINATES_COUNT);
 		 System.out.println("TYPES_SIZE " + BinaryMapIndexWriter.TYPES_SIZE);
 		 System.out.println("ID_SIZE " + BinaryMapIndexWriter.ID_SIZE);

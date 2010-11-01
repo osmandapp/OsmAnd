@@ -4,11 +4,15 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
 import net.osmand.Algoritms;
+import net.osmand.binary.OsmandOdb.CityIndex;
+import net.osmand.binary.OsmandOdb.PostcodeIndex;
 import net.osmand.binary.OsmandOdb.StreetIndex;
+import net.osmand.binary.OsmandOdb.CityIndex.Builder;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
@@ -16,6 +20,7 @@ import net.osmand.data.Street;
 import net.osmand.data.index.IndexConstants;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.sf.junidecode.Junidecode;
 
 import com.google.protobuf.CodedOutputStream;
 import com.google.protobuf.WireFormat;
@@ -46,8 +51,6 @@ public class BinaryMapIndexWriter {
 	private Stack<Long> stackBaseIds = new Stack<Long>();
 	private Stack<Map<String, Integer>> stackStringTable = new Stack<Map<String, Integer>>();
 	
-	// needed for address index
-	private MapObject cityOrPostcode = null;
 	
 	// internal constants to track state of index writing
 	private Stack<Integer> state = new Stack<Integer>();
@@ -61,6 +64,7 @@ public class BinaryMapIndexWriter {
 	private final static int ADDRESS_INDEX_INIT = 5;
 	private final static int CITY_INDEX_INIT = 6;
 	private final static int POSTCODES_INDEX_INIT = 7;
+	private final static int VILLAGES_INDEX_INIT = 8;
 
 	public BinaryMapIndexWriter(final RandomAccessFile raf) throws IOException{
 		this.raf = raf;
@@ -91,7 +95,7 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeFixed32NoTag(0);
 	}
 	
-	private void writeInt32Size() throws IOException{
+	private int writeInt32Size() throws IOException{
 		codedOutStream.flush();
 		long filePointer = raf.getFilePointer();
 		Long old = stackSizes.pop();
@@ -99,6 +103,7 @@ public class BinaryMapIndexWriter {
 		raf.seek(old);
 		raf.writeInt(length);
 		raf.seek(filePointer);
+		return length;
 	}
 	
 	public void startWriteMapIndex() throws IOException{
@@ -110,7 +115,8 @@ public class BinaryMapIndexWriter {
 	
 	public void endWriteMapIndex() throws IOException{
 		popState(MAP_INDEX_INIT);
-		writeInt32Size();
+		int len = writeInt32Size();
+		System.out.println("MAP INDEX SIZE : " + len);
 	}
 		
 	public void startWriteMapLevelIndex(int minZoom, int maxZoom, int leftX, int rightX, int topY, int bottomY) throws IOException{
@@ -330,7 +336,7 @@ public class BinaryMapIndexWriter {
 	}
 	
 	public void startWriteAddressIndex(String name) throws IOException {
-		pushState(OSMAND_STRUCTURE_INIT, ADDRESS_INDEX_INIT);
+		pushState(ADDRESS_INDEX_INIT, OSMAND_STRUCTURE_INIT);
 		codedOutStream.writeTag(OsmandOdb.OsmAndStructure.ADDRESSINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		preserveInt32Size();
 		
@@ -340,45 +346,104 @@ public class BinaryMapIndexWriter {
 	
 	public void endWriteAddressIndex() throws IOException {
 		popState(ADDRESS_INDEX_INIT);
+		int len = writeInt32Size();
+		System.out.println("ADDRESS INDEX SIZE : " + len);
+	}
+	
+	private boolean checkEnNameToWrite(MapObject obj){
+		if(obj.getEnName() == null){
+			return false;
+		}
+		return !obj.getEnName().equals(Junidecode.unidecode(obj.getName()));
+	}
+	
+	public void writeCityIndex(City city, List<Street> streets) throws IOException {
+		if(city.getType() == City.CityType.CITY || city.getType() == City.CityType.TOWN){
+			checkPeekState(CITY_INDEX_INIT);
+		} else {
+			checkPeekState(VILLAGES_INDEX_INIT);
+		}
+		CityIndex.Builder cityInd = OsmandOdb.CityIndex.newBuilder();
+		cityInd.setCityType(city.getType().ordinal());
+		cityInd.setId(city.getId());
+		
+		cityInd.setName(city.getName());
+		if(checkEnNameToWrite(city)){
+			cityInd.setNameEn(city.getEnName());
+		}
+		cityInd.setX(MapUtils.get31TileNumberX(city.getLocation().getLongitude()));
+		cityInd.setY(MapUtils.get31TileNumberY(city.getLocation().getLatitude()));
+		
+		for(Street s : streets){
+			StreetIndex streetInd = createStreetAndBuildings(s, city.getLocation(), null);
+			cityInd.addStreets(streetInd);
+		}
+		codedOutStream.writeMessage(OsmandOdb.CitiesIndex.CITIES_FIELD_NUMBER, cityInd.build());
+	}
+	
+	public void startCityIndexes(boolean villages) throws IOException {
+		pushState(villages ? VILLAGES_INDEX_INIT : CITY_INDEX_INIT, ADDRESS_INDEX_INIT);
+		codedOutStream.writeTag(villages ? OsmandOdb.OsmAndAddressIndex.VILLAGES_FIELD_NUMBER
+				: OsmandOdb.OsmAndAddressIndex.CITIES_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+		preserveInt32Size();
+	}
+	
+	public void endCityIndexes(boolean villages) throws IOException {
+		popState(villages ? VILLAGES_INDEX_INIT : CITY_INDEX_INIT);
 		writeInt32Size();
 	}
 	
 	
-	public void startWriteCityIndex(City city) throws IOException {
-		pushState(CITY_INDEX_INIT, ADDRESS_INDEX_INIT);
-		codedOutStream.writeTag(OsmandOdb.OsmAndStructure.ADDRESSINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+	public void startPostcodes() throws IOException {
+		pushState(POSTCODES_INDEX_INIT, ADDRESS_INDEX_INIT);
+		codedOutStream.writeTag(OsmandOdb.OsmAndAddressIndex.POSTCODES_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		preserveInt32Size();
-		
-		codedOutStream.writeUInt32(OsmandOdb.CityIndex.CITY_TYPE_FIELD_NUMBER, city.getType().ordinal());
-		codedOutStream.writeUInt64(OsmandOdb.CityIndex.ID_FIELD_NUMBER, city.getId());
-		codedOutStream.writeString(OsmandOdb.CityIndex.NAME_FIELD_NUMBER, city.getName());
-		if(city.getEnName() != null){
-			codedOutStream.writeString(OsmandOdb.CityIndex.NAME_EN_FIELD_NUMBER, city.getEnName());
-		}
-		codedOutStream.writeFixed32(OsmandOdb.CityIndex.X_FIELD_NUMBER, MapUtils.get31TileNumberX(city.getLocation().getLongitude()));
-		codedOutStream.writeFixed32(OsmandOdb.CityIndex.Y_FIELD_NUMBER, MapUtils.get31TileNumberY(city.getLocation().getLatitude()));
-		cityOrPostcode = city;
 	}
 	
-	public void writeStreetAndBuildings(Street street) throws IOException {
+	public void endPostcodes() throws IOException {
+		popState(POSTCODES_INDEX_INIT);
+		writeInt32Size();
+	}
+	
+
+	
+	public void writePostcode(String postcode, List<Street> streets) throws IOException {
+		checkPeekState(POSTCODES_INDEX_INIT);
+		LatLon loc = streets.get(0).getLocation();
+		PostcodeIndex.Builder post = OsmandOdb.PostcodeIndex.newBuilder();
+		post.setPostcode(postcode);
+		
+
+		for(Street s : streets){
+			StreetIndex streetInd = createStreetAndBuildings(s, loc, postcode);
+			post.addStreets(streetInd);
+		}
+		codedOutStream.writeMessage(OsmandOdb.PostcodesIndex.POSTCODES_FIELD_NUMBER, post.build());
+	}
+	
+
+	protected StreetIndex createStreetAndBuildings(Street street, LatLon l, String postcodeFilter) throws IOException {
 		checkPeekState(CITY_INDEX_INIT, POSTCODES_INDEX_INIT);
+		boolean inCity = state.peek() == CITY_INDEX_INIT;
 		StreetIndex.Builder streetBuilder = OsmandOdb.StreetIndex.newBuilder();
 		streetBuilder.setName(street.getName());
-		if(street.getEnName() != null){
+		if(checkEnNameToWrite(street)){
 			streetBuilder.setNameEn(street.getEnName());
 		}
 		streetBuilder.setId(street.getId());
 		
 		
-		LatLon location = cityOrPostcode.getLocation();
-		int cx = MapUtils.get31TileNumberX(location.getLongitude());
-		int cy = MapUtils.get31TileNumberY(location.getLatitude());
+		int cx = MapUtils.get31TileNumberX(l.getLongitude());
+		int cy = MapUtils.get31TileNumberY(l.getLatitude());
 		int sx = MapUtils.get31TileNumberX(street.getLocation().getLongitude());
 		int sy = MapUtils.get31TileNumberY(street.getLocation().getLatitude());
 		streetBuilder.setX((sx - cx) >> 7);
 		streetBuilder.setY((sy - cy) >> 7);
 		
 		for(Building b : street.getBuildings()){
+			if(postcodeFilter != null && !postcodeFilter.equalsIgnoreCase(b.getPostcode())){
+				continue;
+			}
 			OsmandOdb.BuildingIndex.Builder bbuilder= OsmandOdb.BuildingIndex.newBuilder();
 			int bx = MapUtils.get31TileNumberX(b.getLocation().getLongitude());
 			int by = MapUtils.get31TileNumberY(b.getLocation().getLatitude());
@@ -386,28 +451,18 @@ public class BinaryMapIndexWriter {
 			bbuilder.setY((by - sy) >> 7);
 			bbuilder.setId(b.getId());
 			bbuilder.setName(b.getName());
-			if(b.getEnName() != null){
+			if(checkEnNameToWrite(b)){
 				bbuilder.setNameEn(b.getEnName());
+			}
+			if(inCity && b.getPostcode() != null){
+				bbuilder.setPostcode(b.getPostcode());
 			}
 			streetBuilder.addBuildings(bbuilder.build());
 		}
 		
-		
-		if(state.peek() == CITY_INDEX_INIT){
-			codedOutStream.writeMessage(OsmandOdb.CityIndex.STREETS_FIELD_NUMBER, streetBuilder.build());
-		} else {
-			throw new UnsupportedOperationException();
-		}
-		
-		
-		
+		return streetBuilder.build();
 	}
 	
-	public void endWriteCityIndex() throws IOException {
-		popState(CITY_INDEX_INIT);
-		writeInt32Size();
-		cityOrPostcode = null;
-	}
 	 
 	private void pushState(int push, int peek){
 		if(state.peek() != peek){

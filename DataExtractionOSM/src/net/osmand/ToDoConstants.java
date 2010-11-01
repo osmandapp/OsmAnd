@@ -9,6 +9,7 @@ public class ToDoConstants {
 	
 	// TODO max 101
 	
+	// !!! Fix progress in DataExtractionOsm
 
 	// 	Outside base 0.4 release
 	//   69. Add phone and site information to POI (enable call to POI and open site)
