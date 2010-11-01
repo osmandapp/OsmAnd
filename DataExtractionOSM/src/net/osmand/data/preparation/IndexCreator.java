@@ -1484,14 +1484,15 @@ public class IndexCreator {
 		
 	}
 	
-	public void writeBinaryMapIndex() throws IOException, SQLException {
+	public void writeBinaryAddressIndex(BinaryMapIndexWriter writer) throws IOException, SQLException {
+		
+	}
+	
+	public void writeBinaryMapIndex(BinaryMapIndexWriter writer) throws IOException, SQLException {
 		try {
 			assert IndexConstants.IndexBinaryMapRenderObject.values().length == 6;
 			PreparedStatement selectData = mapConnection.prepareStatement("SELECT * FROM " + IndexBinaryMapRenderObject.getTable() + " WHERE id = ?");
 			
-			
-			
-			BinaryMapIndexWriter writer = new BinaryMapIndexWriter(mapRAFile);
 			writer.startWriteMapIndex();
 			
 			for (int i = 0; i < MAP_ZOOMS.length - 1; i++) {
@@ -1897,12 +1898,21 @@ public class IndexCreator {
 				pStatements.remove(mapBinaryStat);
 				mapConnection.commit();
 				
+				log.info("Finish packing RTree files");
+			}
+			
+			if(indexMap || indexAddress){
 				if(mapFile.exists()){
 					mapFile.delete();
 				}
 				mapRAFile = new RandomAccessFile(mapFile, "rw");
-				log.info("Finish packing RTree files");
-				writeBinaryMapIndex();
+				BinaryMapIndexWriter writer = new BinaryMapIndexWriter(mapRAFile);
+				if(indexMap){
+					writeBinaryMapIndex(writer);
+				}
+				if(indexAddress){
+					writeBinaryAddressIndex(writer);
+				}
 				log.info("Finish writing binary file");
 			}
 
@@ -2020,7 +2030,6 @@ public class IndexCreator {
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
 		 
-		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/zimbabwe.osm.bz2"), new ConsoleProgressImplementation(3), null);
 		 
 		 
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/forest.osm"), new ConsoleProgressImplementation(3), null);

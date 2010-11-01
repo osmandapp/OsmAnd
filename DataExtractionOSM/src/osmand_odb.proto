@@ -11,8 +11,11 @@ option java_package = "net.osmand.binary";
 message OsmAndStructure {
    required uint32 version = 1;
    // encoded as fixed32 length delimited
-   repeated OsmAndMapIndex mapIndex = 2;  
+   repeated OsmAndMapIndex mapIndex = 2;
+   // encoded as fixed32 length delimited  
+   repeated OsmAndAddressIndex addressIndex = 3;
 } 
+
 
 message OsmAndMapIndex {
    // encoded as fixed32 length delimited 
@@ -70,3 +73,57 @@ message MapData {
   optional int32 highwayMeta = 6; 
 }
 
+
+/// ADDRESS INFORMATION TEST -----
+
+message OsmAndAddressIndex {
+	
+	required string name = 1;
+	optional string name_en = 2;
+	
+	// encoded as fixed32 length delimited
+	repeated CityIndex cityIndex= 5; // cities and towns 
+
+	repeated PostcodeIndex postcodes= 6;
+	
+	repeated CityIndex villages = 7; // suburbs and villages
+}
+
+message CityIndex {
+    required uint32 city_type = 1; // 0-5 enum CityType
+	required string name = 2;
+	optional string name_en = 3;
+	optional uint64 id = 4;
+	
+	required fixed32 x = 5; // x tile of 31 zoom
+	required fixed32 y = 6; // y tile of 31 zoom
+	
+	repeated StreetIndex streets = 7; 
+}
+
+message PostcodeIndex {
+    required string postcode = 1;
+    repeated StreetIndex streets = 5;
+}
+
+message StreetIndex {
+	required string name = 1;
+	optional string name_en = 2;
+	
+	optional uint64 id = 6;
+	
+	required sint32 x = 3; // delta encoded to parent 24 zoom
+	required sint32 y = 4; // delta encoded to parent 24 zoom
+	
+	repeated BuildingIndex buildings = 5;
+} 
+
+message BuildingIndex {
+	required string name = 1;
+	optional string name_en = 2;
+	optional uint64 id = 5;
+	
+	required sint32 x = 3; // delta encoded to street 24 zoom
+	required sint32 y = 4; // delta encoded to street 24 zoom
+	
+}

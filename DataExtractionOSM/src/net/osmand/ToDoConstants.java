@@ -7,15 +7,12 @@ package net.osmand;
  */
 public class ToDoConstants {
 	
-	// TODO max 100
-	// FOR 0.4 beta RELEASE
-	// Profile vector rendering
+	// TODO max 101
 	
 
 	// 	Outside base 0.4 release
 	//   69. Add phone and site information to POI (enable call to POI and open site)
 	//   86. Allow to add/edit custom tags to POI objects (Issue)
-	//   91. Invent binary format (minimize disk space, maximize speed) 
 	//   92. Replace poi index with standard map index and unify POI categories
 	//   94. Revise index to decrease their size (especially address) - replace to float lat/lon and remove for POI 
 	//		 remove en_names from POI (possibly from address)
@@ -42,6 +39,7 @@ public class ToDoConstants {
 	// DONE ANDROID :
 	//   99. Implement better file downloader for big files
 	//  100. Show impoted gpx points (as favorites), sort the by distance
+	//   91. Invent binary format (minimize disk space, maximize speed)
 	
 	// DONE SWING
 
