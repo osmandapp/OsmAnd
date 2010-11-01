@@ -54,11 +54,26 @@ public final class OsmandOdb {
       return mapIndex_.get(index);
     }
     
+    // repeated .OsmAndAddressIndex addressIndex = 3;
+    public static final int ADDRESSINDEX_FIELD_NUMBER = 3;
+    private java.util.List<net.osmand.binary.OsmandOdb.OsmAndAddressIndex> addressIndex_ =
+      java.util.Collections.emptyList();
+    public java.util.List<net.osmand.binary.OsmandOdb.OsmAndAddressIndex> getAddressIndexList() {
+      return addressIndex_;
+    }
+    public int getAddressIndexCount() { return addressIndex_.size(); }
+    public net.osmand.binary.OsmandOdb.OsmAndAddressIndex getAddressIndex(int index) {
+      return addressIndex_.get(index);
+    }
+    
     private void initFields() {
     }
     public final boolean isInitialized() {
       if (!hasVersion) return false;
       for (net.osmand.binary.OsmandOdb.OsmAndMapIndex element : getMapIndexList()) {
+        if (!element.isInitialized()) return false;
+      }
+      for (net.osmand.binary.OsmandOdb.OsmAndAddressIndex element : getAddressIndexList()) {
         if (!element.isInitialized()) return false;
       }
       return true;
@@ -72,6 +87,9 @@ public final class OsmandOdb {
       }
       for (net.osmand.binary.OsmandOdb.OsmAndMapIndex element : getMapIndexList()) {
         output.writeMessage(2, element);
+      }
+      for (net.osmand.binary.OsmandOdb.OsmAndAddressIndex element : getAddressIndexList()) {
+        output.writeMessage(3, element);
       }
       getUnknownFields().writeTo(output);
     }
@@ -89,6 +107,10 @@ public final class OsmandOdb {
       for (net.osmand.binary.OsmandOdb.OsmAndMapIndex element : getMapIndexList()) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, element);
+      }
+      for (net.osmand.binary.OsmandOdb.OsmAndAddressIndex element : getAddressIndexList()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, element);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -236,6 +258,10 @@ public final class OsmandOdb {
           result.mapIndex_ =
             java.util.Collections.unmodifiableList(result.mapIndex_);
         }
+        if (result.addressIndex_ != java.util.Collections.EMPTY_LIST) {
+          result.addressIndex_ =
+            java.util.Collections.unmodifiableList(result.addressIndex_);
+        }
         net.osmand.binary.OsmandOdb.OsmAndStructure returnMe = result;
         result = null;
         return returnMe;
@@ -260,6 +286,12 @@ public final class OsmandOdb {
             result.mapIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndMapIndex>();
           }
           result.mapIndex_.addAll(other.mapIndex_);
+        }
+        if (!other.addressIndex_.isEmpty()) {
+          if (result.addressIndex_.isEmpty()) {
+            result.addressIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndAddressIndex>();
+          }
+          result.addressIndex_.addAll(other.addressIndex_);
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -294,6 +326,12 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.OsmAndMapIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndMapIndex.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addMapIndex(subBuilder.buildPartial());
+              break;
+            }
+            case 26: {
+              net.osmand.binary.OsmandOdb.OsmAndAddressIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndAddressIndex.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addAddressIndex(subBuilder.buildPartial());
               break;
             }
           }
@@ -367,6 +405,57 @@ public final class OsmandOdb {
       }
       public Builder clearMapIndex() {
         result.mapIndex_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // repeated .OsmAndAddressIndex addressIndex = 3;
+      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndAddressIndex> getAddressIndexList() {
+        return java.util.Collections.unmodifiableList(result.addressIndex_);
+      }
+      public int getAddressIndexCount() {
+        return result.getAddressIndexCount();
+      }
+      public net.osmand.binary.OsmandOdb.OsmAndAddressIndex getAddressIndex(int index) {
+        return result.getAddressIndex(index);
+      }
+      public Builder setAddressIndex(int index, net.osmand.binary.OsmandOdb.OsmAndAddressIndex value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.addressIndex_.set(index, value);
+        return this;
+      }
+      public Builder setAddressIndex(int index, net.osmand.binary.OsmandOdb.OsmAndAddressIndex.Builder builderForValue) {
+        result.addressIndex_.set(index, builderForValue.build());
+        return this;
+      }
+      public Builder addAddressIndex(net.osmand.binary.OsmandOdb.OsmAndAddressIndex value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        if (result.addressIndex_.isEmpty()) {
+          result.addressIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndAddressIndex>();
+        }
+        result.addressIndex_.add(value);
+        return this;
+      }
+      public Builder addAddressIndex(net.osmand.binary.OsmandOdb.OsmAndAddressIndex.Builder builderForValue) {
+        if (result.addressIndex_.isEmpty()) {
+          result.addressIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndAddressIndex>();
+        }
+        result.addressIndex_.add(builderForValue.build());
+        return this;
+      }
+      public Builder addAllAddressIndex(
+          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.OsmAndAddressIndex> values) {
+        if (result.addressIndex_.isEmpty()) {
+          result.addressIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndAddressIndex>();
+        }
+        super.addAll(values, result.addressIndex_);
+        return this;
+      }
+      public Builder clearAddressIndex() {
+        result.addressIndex_ = java.util.Collections.emptyList();
         return this;
       }
       
@@ -785,15 +874,19 @@ public final class OsmandOdb {
     public boolean hasBottom() { return hasBottom; }
     public int getBottom() { return bottom_; }
     
-    // required .MapTree root = 7;
+    // repeated .MapTree root = 7;
     public static final int ROOT_FIELD_NUMBER = 7;
-    private boolean hasRoot;
-    private net.osmand.binary.OsmandOdb.MapTree root_;
-    public boolean hasRoot() { return hasRoot; }
-    public net.osmand.binary.OsmandOdb.MapTree getRoot() { return root_; }
+    private java.util.List<net.osmand.binary.OsmandOdb.MapTree> root_ =
+      java.util.Collections.emptyList();
+    public java.util.List<net.osmand.binary.OsmandOdb.MapTree> getRootList() {
+      return root_;
+    }
+    public int getRootCount() { return root_.size(); }
+    public net.osmand.binary.OsmandOdb.MapTree getRoot(int index) {
+      return root_.get(index);
+    }
     
     private void initFields() {
-      root_ = net.osmand.binary.OsmandOdb.MapTree.getDefaultInstance();
     }
     public final boolean isInitialized() {
       if (!hasMaxZoom) return false;
@@ -802,8 +895,9 @@ public final class OsmandOdb {
       if (!hasRight) return false;
       if (!hasTop) return false;
       if (!hasBottom) return false;
-      if (!hasRoot) return false;
-      if (!getRoot().isInitialized()) return false;
+      for (net.osmand.binary.OsmandOdb.MapTree element : getRootList()) {
+        if (!element.isInitialized()) return false;
+      }
       return true;
     }
     
@@ -828,8 +922,8 @@ public final class OsmandOdb {
       if (hasBottom()) {
         output.writeInt32(6, getBottom());
       }
-      if (hasRoot()) {
-        output.writeMessage(7, getRoot());
+      for (net.osmand.binary.OsmandOdb.MapTree element : getRootList()) {
+        output.writeMessage(7, element);
       }
       getUnknownFields().writeTo(output);
     }
@@ -864,9 +958,9 @@ public final class OsmandOdb {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(6, getBottom());
       }
-      if (hasRoot()) {
+      for (net.osmand.binary.OsmandOdb.MapTree element : getRootList()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, getRoot());
+          .computeMessageSize(7, element);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1010,6 +1104,10 @@ public final class OsmandOdb {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
         }
+        if (result.root_ != java.util.Collections.EMPTY_LIST) {
+          result.root_ =
+            java.util.Collections.unmodifiableList(result.root_);
+        }
         net.osmand.binary.OsmandOdb.MapRootLevel returnMe = result;
         result = null;
         return returnMe;
@@ -1044,8 +1142,11 @@ public final class OsmandOdb {
         if (other.hasBottom()) {
           setBottom(other.getBottom());
         }
-        if (other.hasRoot()) {
-          mergeRoot(other.getRoot());
+        if (!other.root_.isEmpty()) {
+          if (result.root_.isEmpty()) {
+            result.root_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.MapTree>();
+          }
+          result.root_.addAll(other.root_);
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1098,11 +1199,8 @@ public final class OsmandOdb {
             }
             case 58: {
               net.osmand.binary.OsmandOdb.MapTree.Builder subBuilder = net.osmand.binary.OsmandOdb.MapTree.newBuilder();
-              if (hasRoot()) {
-                subBuilder.mergeFrom(getRoot());
-              }
               input.readMessage(subBuilder, extensionRegistry);
-              setRoot(subBuilder.buildPartial());
+              addRoot(subBuilder.buildPartial());
               break;
             }
           }
@@ -1218,40 +1316,54 @@ public final class OsmandOdb {
         return this;
       }
       
-      // required .MapTree root = 7;
-      public boolean hasRoot() {
-        return result.hasRoot();
+      // repeated .MapTree root = 7;
+      public java.util.List<net.osmand.binary.OsmandOdb.MapTree> getRootList() {
+        return java.util.Collections.unmodifiableList(result.root_);
       }
-      public net.osmand.binary.OsmandOdb.MapTree getRoot() {
-        return result.getRoot();
+      public int getRootCount() {
+        return result.getRootCount();
       }
-      public Builder setRoot(net.osmand.binary.OsmandOdb.MapTree value) {
+      public net.osmand.binary.OsmandOdb.MapTree getRoot(int index) {
+        return result.getRoot(index);
+      }
+      public Builder setRoot(int index, net.osmand.binary.OsmandOdb.MapTree value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        result.hasRoot = true;
-        result.root_ = value;
+        result.root_.set(index, value);
         return this;
       }
-      public Builder setRoot(net.osmand.binary.OsmandOdb.MapTree.Builder builderForValue) {
-        result.hasRoot = true;
-        result.root_ = builderForValue.build();
+      public Builder setRoot(int index, net.osmand.binary.OsmandOdb.MapTree.Builder builderForValue) {
+        result.root_.set(index, builderForValue.build());
         return this;
       }
-      public Builder mergeRoot(net.osmand.binary.OsmandOdb.MapTree value) {
-        if (result.hasRoot() &&
-            result.root_ != net.osmand.binary.OsmandOdb.MapTree.getDefaultInstance()) {
-          result.root_ =
-            net.osmand.binary.OsmandOdb.MapTree.newBuilder(result.root_).mergeFrom(value).buildPartial();
-        } else {
-          result.root_ = value;
+      public Builder addRoot(net.osmand.binary.OsmandOdb.MapTree value) {
+        if (value == null) {
+          throw new NullPointerException();
         }
-        result.hasRoot = true;
+        if (result.root_.isEmpty()) {
+          result.root_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.MapTree>();
+        }
+        result.root_.add(value);
+        return this;
+      }
+      public Builder addRoot(net.osmand.binary.OsmandOdb.MapTree.Builder builderForValue) {
+        if (result.root_.isEmpty()) {
+          result.root_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.MapTree>();
+        }
+        result.root_.add(builderForValue.build());
+        return this;
+      }
+      public Builder addAllRoot(
+          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.MapTree> values) {
+        if (result.root_.isEmpty()) {
+          result.root_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.MapTree>();
+        }
+        super.addAll(values, result.root_);
         return this;
       }
       public Builder clearRoot() {
-        result.hasRoot = false;
-        result.root_ = net.osmand.binary.OsmandOdb.MapTree.getDefaultInstance();
+        result.root_ = java.util.Collections.emptyList();
         return this;
       }
       
@@ -2331,17 +2443,12 @@ public final class OsmandOdb {
     public boolean hasStringId() { return hasStringId; }
     public int getStringId() { return stringId_; }
     
-    // repeated sint64 restrictions = 5;
+    // optional bytes restrictions = 5;
     public static final int RESTRICTIONS_FIELD_NUMBER = 5;
-    private java.util.List<java.lang.Long> restrictions_ =
-      java.util.Collections.emptyList();
-    public java.util.List<java.lang.Long> getRestrictionsList() {
-      return restrictions_;
-    }
-    public int getRestrictionsCount() { return restrictions_.size(); }
-    public long getRestrictions(int index) {
-      return restrictions_.get(index);
-    }
+    private boolean hasRestrictions;
+    private com.google.protobuf.ByteString restrictions_ = com.google.protobuf.ByteString.EMPTY;
+    public boolean hasRestrictions() { return hasRestrictions; }
+    public com.google.protobuf.ByteString getRestrictions() { return restrictions_; }
     
     // optional int32 highwayMeta = 6;
     public static final int HIGHWAYMETA_FIELD_NUMBER = 6;
@@ -2374,8 +2481,8 @@ public final class OsmandOdb {
       if (hasStringId()) {
         output.writeUInt32(4, getStringId());
       }
-      for (long element : getRestrictionsList()) {
-        output.writeSInt64(5, element);
+      if (hasRestrictions()) {
+        output.writeBytes(5, getRestrictions());
       }
       if (hasHighwayMeta()) {
         output.writeInt32(6, getHighwayMeta());
@@ -2405,14 +2512,9 @@ public final class OsmandOdb {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(4, getStringId());
       }
-      {
-        int dataSize = 0;
-        for (long element : getRestrictionsList()) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeSInt64SizeNoTag(element);
-        }
-        size += dataSize;
-        size += 1 * getRestrictionsList().size();
+      if (hasRestrictions()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getRestrictions());
       }
       if (hasHighwayMeta()) {
         size += com.google.protobuf.CodedOutputStream
@@ -2560,10 +2662,6 @@ public final class OsmandOdb {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
         }
-        if (result.restrictions_ != java.util.Collections.EMPTY_LIST) {
-          result.restrictions_ =
-            java.util.Collections.unmodifiableList(result.restrictions_);
-        }
         net.osmand.binary.OsmandOdb.MapData returnMe = result;
         result = null;
         return returnMe;
@@ -2592,11 +2690,8 @@ public final class OsmandOdb {
         if (other.hasStringId()) {
           setStringId(other.getStringId());
         }
-        if (!other.restrictions_.isEmpty()) {
-          if (result.restrictions_.isEmpty()) {
-            result.restrictions_ = new java.util.ArrayList<java.lang.Long>();
-          }
-          result.restrictions_.addAll(other.restrictions_);
+        if (other.hasRestrictions()) {
+          setRestrictions(other.getRestrictions());
         }
         if (other.hasHighwayMeta()) {
           setHighwayMeta(other.getHighwayMeta());
@@ -2642,17 +2737,8 @@ public final class OsmandOdb {
               setStringId(input.readUInt32());
               break;
             }
-            case 40: {
-              addRestrictions(input.readSInt64());
-              break;
-            }
             case 42: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              while (input.getBytesUntilLimit() > 0) {
-                addRestrictions(input.readSInt64());
-              }
-              input.popLimit(limit);
+              setRestrictions(input.readBytes());
               break;
             }
             case 48: {
@@ -2742,37 +2828,24 @@ public final class OsmandOdb {
         return this;
       }
       
-      // repeated sint64 restrictions = 5;
-      public java.util.List<java.lang.Long> getRestrictionsList() {
-        return java.util.Collections.unmodifiableList(result.restrictions_);
+      // optional bytes restrictions = 5;
+      public boolean hasRestrictions() {
+        return result.hasRestrictions();
       }
-      public int getRestrictionsCount() {
-        return result.getRestrictionsCount();
+      public com.google.protobuf.ByteString getRestrictions() {
+        return result.getRestrictions();
       }
-      public long getRestrictions(int index) {
-        return result.getRestrictions(index);
-      }
-      public Builder setRestrictions(int index, long value) {
-        result.restrictions_.set(index, value);
-        return this;
-      }
-      public Builder addRestrictions(long value) {
-        if (result.restrictions_.isEmpty()) {
-          result.restrictions_ = new java.util.ArrayList<java.lang.Long>();
-        }
-        result.restrictions_.add(value);
-        return this;
-      }
-      public Builder addAllRestrictions(
-          java.lang.Iterable<? extends java.lang.Long> values) {
-        if (result.restrictions_.isEmpty()) {
-          result.restrictions_ = new java.util.ArrayList<java.lang.Long>();
-        }
-        super.addAll(values, result.restrictions_);
+      public Builder setRestrictions(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasRestrictions = true;
+        result.restrictions_ = value;
         return this;
       }
       public Builder clearRestrictions() {
-        result.restrictions_ = java.util.Collections.emptyList();
+        result.hasRestrictions = false;
+        result.restrictions_ = getDefaultInstance().getRestrictions();
         return this;
       }
       
@@ -2806,6 +2879,2545 @@ public final class OsmandOdb {
     // @@protoc_insertion_point(class_scope:MapData)
   }
   
+  public static final class OsmAndAddressIndex extends
+      com.google.protobuf.GeneratedMessage {
+    // Use OsmAndAddressIndex.newBuilder() to construct.
+    private OsmAndAddressIndex() {
+      initFields();
+    }
+    private OsmAndAddressIndex(boolean noInit) {}
+    
+    private static final OsmAndAddressIndex defaultInstance;
+    public static OsmAndAddressIndex getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public OsmAndAddressIndex getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return net.osmand.binary.OsmandOdb.internal_static_OsmAndAddressIndex_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return net.osmand.binary.OsmandOdb.internal_static_OsmAndAddressIndex_fieldAccessorTable;
+    }
+    
+    // required string name = 1;
+    public static final int NAME_FIELD_NUMBER = 1;
+    private boolean hasName;
+    private java.lang.String name_ = "";
+    public boolean hasName() { return hasName; }
+    public java.lang.String getName() { return name_; }
+    
+    // optional string name_en = 2;
+    public static final int NAME_EN_FIELD_NUMBER = 2;
+    private boolean hasNameEn;
+    private java.lang.String nameEn_ = "";
+    public boolean hasNameEn() { return hasNameEn; }
+    public java.lang.String getNameEn() { return nameEn_; }
+    
+    // repeated .CityIndex cityIndex = 5;
+    public static final int CITYINDEX_FIELD_NUMBER = 5;
+    private java.util.List<net.osmand.binary.OsmandOdb.CityIndex> cityIndex_ =
+      java.util.Collections.emptyList();
+    public java.util.List<net.osmand.binary.OsmandOdb.CityIndex> getCityIndexList() {
+      return cityIndex_;
+    }
+    public int getCityIndexCount() { return cityIndex_.size(); }
+    public net.osmand.binary.OsmandOdb.CityIndex getCityIndex(int index) {
+      return cityIndex_.get(index);
+    }
+    
+    // repeated .PostcodeIndex postcodes = 6;
+    public static final int POSTCODES_FIELD_NUMBER = 6;
+    private java.util.List<net.osmand.binary.OsmandOdb.PostcodeIndex> postcodes_ =
+      java.util.Collections.emptyList();
+    public java.util.List<net.osmand.binary.OsmandOdb.PostcodeIndex> getPostcodesList() {
+      return postcodes_;
+    }
+    public int getPostcodesCount() { return postcodes_.size(); }
+    public net.osmand.binary.OsmandOdb.PostcodeIndex getPostcodes(int index) {
+      return postcodes_.get(index);
+    }
+    
+    // repeated .CityIndex villages = 7;
+    public static final int VILLAGES_FIELD_NUMBER = 7;
+    private java.util.List<net.osmand.binary.OsmandOdb.CityIndex> villages_ =
+      java.util.Collections.emptyList();
+    public java.util.List<net.osmand.binary.OsmandOdb.CityIndex> getVillagesList() {
+      return villages_;
+    }
+    public int getVillagesCount() { return villages_.size(); }
+    public net.osmand.binary.OsmandOdb.CityIndex getVillages(int index) {
+      return villages_.get(index);
+    }
+    
+    private void initFields() {
+    }
+    public final boolean isInitialized() {
+      if (!hasName) return false;
+      for (net.osmand.binary.OsmandOdb.CityIndex element : getCityIndexList()) {
+        if (!element.isInitialized()) return false;
+      }
+      for (net.osmand.binary.OsmandOdb.PostcodeIndex element : getPostcodesList()) {
+        if (!element.isInitialized()) return false;
+      }
+      for (net.osmand.binary.OsmandOdb.CityIndex element : getVillagesList()) {
+        if (!element.isInitialized()) return false;
+      }
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (hasName()) {
+        output.writeString(1, getName());
+      }
+      if (hasNameEn()) {
+        output.writeString(2, getNameEn());
+      }
+      for (net.osmand.binary.OsmandOdb.CityIndex element : getCityIndexList()) {
+        output.writeMessage(5, element);
+      }
+      for (net.osmand.binary.OsmandOdb.PostcodeIndex element : getPostcodesList()) {
+        output.writeMessage(6, element);
+      }
+      for (net.osmand.binary.OsmandOdb.CityIndex element : getVillagesList()) {
+        output.writeMessage(7, element);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasName()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(1, getName());
+      }
+      if (hasNameEn()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(2, getNameEn());
+      }
+      for (net.osmand.binary.OsmandOdb.CityIndex element : getCityIndexList()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, element);
+      }
+      for (net.osmand.binary.OsmandOdb.PostcodeIndex element : getPostcodesList()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, element);
+      }
+      for (net.osmand.binary.OsmandOdb.CityIndex element : getVillagesList()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, element);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static net.osmand.binary.OsmandOdb.OsmAndAddressIndex parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndAddressIndex parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndAddressIndex parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndAddressIndex parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndAddressIndex parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndAddressIndex parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndAddressIndex parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndAddressIndex parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndAddressIndex parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndAddressIndex parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndAddressIndex prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private net.osmand.binary.OsmandOdb.OsmAndAddressIndex result;
+      
+      // Construct using net.osmand.binary.OsmandOdb.OsmAndAddressIndex.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new net.osmand.binary.OsmandOdb.OsmAndAddressIndex();
+        return builder;
+      }
+      
+      protected net.osmand.binary.OsmandOdb.OsmAndAddressIndex internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new net.osmand.binary.OsmandOdb.OsmAndAddressIndex();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return net.osmand.binary.OsmandOdb.OsmAndAddressIndex.getDescriptor();
+      }
+      
+      public net.osmand.binary.OsmandOdb.OsmAndAddressIndex getDefaultInstanceForType() {
+        return net.osmand.binary.OsmandOdb.OsmAndAddressIndex.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public net.osmand.binary.OsmandOdb.OsmAndAddressIndex build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private net.osmand.binary.OsmandOdb.OsmAndAddressIndex buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public net.osmand.binary.OsmandOdb.OsmAndAddressIndex buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        if (result.cityIndex_ != java.util.Collections.EMPTY_LIST) {
+          result.cityIndex_ =
+            java.util.Collections.unmodifiableList(result.cityIndex_);
+        }
+        if (result.postcodes_ != java.util.Collections.EMPTY_LIST) {
+          result.postcodes_ =
+            java.util.Collections.unmodifiableList(result.postcodes_);
+        }
+        if (result.villages_ != java.util.Collections.EMPTY_LIST) {
+          result.villages_ =
+            java.util.Collections.unmodifiableList(result.villages_);
+        }
+        net.osmand.binary.OsmandOdb.OsmAndAddressIndex returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof net.osmand.binary.OsmandOdb.OsmAndAddressIndex) {
+          return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndAddressIndex)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndAddressIndex other) {
+        if (other == net.osmand.binary.OsmandOdb.OsmAndAddressIndex.getDefaultInstance()) return this;
+        if (other.hasName()) {
+          setName(other.getName());
+        }
+        if (other.hasNameEn()) {
+          setNameEn(other.getNameEn());
+        }
+        if (!other.cityIndex_.isEmpty()) {
+          if (result.cityIndex_.isEmpty()) {
+            result.cityIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.CityIndex>();
+          }
+          result.cityIndex_.addAll(other.cityIndex_);
+        }
+        if (!other.postcodes_.isEmpty()) {
+          if (result.postcodes_.isEmpty()) {
+            result.postcodes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.PostcodeIndex>();
+          }
+          result.postcodes_.addAll(other.postcodes_);
+        }
+        if (!other.villages_.isEmpty()) {
+          if (result.villages_.isEmpty()) {
+            result.villages_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.CityIndex>();
+          }
+          result.villages_.addAll(other.villages_);
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              setName(input.readString());
+              break;
+            }
+            case 18: {
+              setNameEn(input.readString());
+              break;
+            }
+            case 42: {
+              net.osmand.binary.OsmandOdb.CityIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.CityIndex.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addCityIndex(subBuilder.buildPartial());
+              break;
+            }
+            case 50: {
+              net.osmand.binary.OsmandOdb.PostcodeIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.PostcodeIndex.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addPostcodes(subBuilder.buildPartial());
+              break;
+            }
+            case 58: {
+              net.osmand.binary.OsmandOdb.CityIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.CityIndex.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addVillages(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // required string name = 1;
+      public boolean hasName() {
+        return result.hasName();
+      }
+      public java.lang.String getName() {
+        return result.getName();
+      }
+      public Builder setName(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasName = true;
+        result.name_ = value;
+        return this;
+      }
+      public Builder clearName() {
+        result.hasName = false;
+        result.name_ = getDefaultInstance().getName();
+        return this;
+      }
+      
+      // optional string name_en = 2;
+      public boolean hasNameEn() {
+        return result.hasNameEn();
+      }
+      public java.lang.String getNameEn() {
+        return result.getNameEn();
+      }
+      public Builder setNameEn(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasNameEn = true;
+        result.nameEn_ = value;
+        return this;
+      }
+      public Builder clearNameEn() {
+        result.hasNameEn = false;
+        result.nameEn_ = getDefaultInstance().getNameEn();
+        return this;
+      }
+      
+      // repeated .CityIndex cityIndex = 5;
+      public java.util.List<net.osmand.binary.OsmandOdb.CityIndex> getCityIndexList() {
+        return java.util.Collections.unmodifiableList(result.cityIndex_);
+      }
+      public int getCityIndexCount() {
+        return result.getCityIndexCount();
+      }
+      public net.osmand.binary.OsmandOdb.CityIndex getCityIndex(int index) {
+        return result.getCityIndex(index);
+      }
+      public Builder setCityIndex(int index, net.osmand.binary.OsmandOdb.CityIndex value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.cityIndex_.set(index, value);
+        return this;
+      }
+      public Builder setCityIndex(int index, net.osmand.binary.OsmandOdb.CityIndex.Builder builderForValue) {
+        result.cityIndex_.set(index, builderForValue.build());
+        return this;
+      }
+      public Builder addCityIndex(net.osmand.binary.OsmandOdb.CityIndex value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        if (result.cityIndex_.isEmpty()) {
+          result.cityIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.CityIndex>();
+        }
+        result.cityIndex_.add(value);
+        return this;
+      }
+      public Builder addCityIndex(net.osmand.binary.OsmandOdb.CityIndex.Builder builderForValue) {
+        if (result.cityIndex_.isEmpty()) {
+          result.cityIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.CityIndex>();
+        }
+        result.cityIndex_.add(builderForValue.build());
+        return this;
+      }
+      public Builder addAllCityIndex(
+          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.CityIndex> values) {
+        if (result.cityIndex_.isEmpty()) {
+          result.cityIndex_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.CityIndex>();
+        }
+        super.addAll(values, result.cityIndex_);
+        return this;
+      }
+      public Builder clearCityIndex() {
+        result.cityIndex_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // repeated .PostcodeIndex postcodes = 6;
+      public java.util.List<net.osmand.binary.OsmandOdb.PostcodeIndex> getPostcodesList() {
+        return java.util.Collections.unmodifiableList(result.postcodes_);
+      }
+      public int getPostcodesCount() {
+        return result.getPostcodesCount();
+      }
+      public net.osmand.binary.OsmandOdb.PostcodeIndex getPostcodes(int index) {
+        return result.getPostcodes(index);
+      }
+      public Builder setPostcodes(int index, net.osmand.binary.OsmandOdb.PostcodeIndex value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.postcodes_.set(index, value);
+        return this;
+      }
+      public Builder setPostcodes(int index, net.osmand.binary.OsmandOdb.PostcodeIndex.Builder builderForValue) {
+        result.postcodes_.set(index, builderForValue.build());
+        return this;
+      }
+      public Builder addPostcodes(net.osmand.binary.OsmandOdb.PostcodeIndex value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        if (result.postcodes_.isEmpty()) {
+          result.postcodes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.PostcodeIndex>();
+        }
+        result.postcodes_.add(value);
+        return this;
+      }
+      public Builder addPostcodes(net.osmand.binary.OsmandOdb.PostcodeIndex.Builder builderForValue) {
+        if (result.postcodes_.isEmpty()) {
+          result.postcodes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.PostcodeIndex>();
+        }
+        result.postcodes_.add(builderForValue.build());
+        return this;
+      }
+      public Builder addAllPostcodes(
+          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.PostcodeIndex> values) {
+        if (result.postcodes_.isEmpty()) {
+          result.postcodes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.PostcodeIndex>();
+        }
+        super.addAll(values, result.postcodes_);
+        return this;
+      }
+      public Builder clearPostcodes() {
+        result.postcodes_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // repeated .CityIndex villages = 7;
+      public java.util.List<net.osmand.binary.OsmandOdb.CityIndex> getVillagesList() {
+        return java.util.Collections.unmodifiableList(result.villages_);
+      }
+      public int getVillagesCount() {
+        return result.getVillagesCount();
+      }
+      public net.osmand.binary.OsmandOdb.CityIndex getVillages(int index) {
+        return result.getVillages(index);
+      }
+      public Builder setVillages(int index, net.osmand.binary.OsmandOdb.CityIndex value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.villages_.set(index, value);
+        return this;
+      }
+      public Builder setVillages(int index, net.osmand.binary.OsmandOdb.CityIndex.Builder builderForValue) {
+        result.villages_.set(index, builderForValue.build());
+        return this;
+      }
+      public Builder addVillages(net.osmand.binary.OsmandOdb.CityIndex value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        if (result.villages_.isEmpty()) {
+          result.villages_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.CityIndex>();
+        }
+        result.villages_.add(value);
+        return this;
+      }
+      public Builder addVillages(net.osmand.binary.OsmandOdb.CityIndex.Builder builderForValue) {
+        if (result.villages_.isEmpty()) {
+          result.villages_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.CityIndex>();
+        }
+        result.villages_.add(builderForValue.build());
+        return this;
+      }
+      public Builder addAllVillages(
+          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.CityIndex> values) {
+        if (result.villages_.isEmpty()) {
+          result.villages_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.CityIndex>();
+        }
+        super.addAll(values, result.villages_);
+        return this;
+      }
+      public Builder clearVillages() {
+        result.villages_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:OsmAndAddressIndex)
+    }
+    
+    static {
+      defaultInstance = new OsmAndAddressIndex(true);
+      net.osmand.binary.OsmandOdb.internalForceInit();
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:OsmAndAddressIndex)
+  }
+  
+  public static final class CityIndex extends
+      com.google.protobuf.GeneratedMessage {
+    // Use CityIndex.newBuilder() to construct.
+    private CityIndex() {
+      initFields();
+    }
+    private CityIndex(boolean noInit) {}
+    
+    private static final CityIndex defaultInstance;
+    public static CityIndex getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public CityIndex getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return net.osmand.binary.OsmandOdb.internal_static_CityIndex_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return net.osmand.binary.OsmandOdb.internal_static_CityIndex_fieldAccessorTable;
+    }
+    
+    // required uint32 city_type = 1;
+    public static final int CITY_TYPE_FIELD_NUMBER = 1;
+    private boolean hasCityType;
+    private int cityType_ = 0;
+    public boolean hasCityType() { return hasCityType; }
+    public int getCityType() { return cityType_; }
+    
+    // required string name = 2;
+    public static final int NAME_FIELD_NUMBER = 2;
+    private boolean hasName;
+    private java.lang.String name_ = "";
+    public boolean hasName() { return hasName; }
+    public java.lang.String getName() { return name_; }
+    
+    // optional string name_en = 3;
+    public static final int NAME_EN_FIELD_NUMBER = 3;
+    private boolean hasNameEn;
+    private java.lang.String nameEn_ = "";
+    public boolean hasNameEn() { return hasNameEn; }
+    public java.lang.String getNameEn() { return nameEn_; }
+    
+    // optional uint64 id = 4;
+    public static final int ID_FIELD_NUMBER = 4;
+    private boolean hasId;
+    private long id_ = 0L;
+    public boolean hasId() { return hasId; }
+    public long getId() { return id_; }
+    
+    // required fixed32 x = 5;
+    public static final int X_FIELD_NUMBER = 5;
+    private boolean hasX;
+    private int x_ = 0;
+    public boolean hasX() { return hasX; }
+    public int getX() { return x_; }
+    
+    // required fixed32 y = 6;
+    public static final int Y_FIELD_NUMBER = 6;
+    private boolean hasY;
+    private int y_ = 0;
+    public boolean hasY() { return hasY; }
+    public int getY() { return y_; }
+    
+    // repeated .StreetIndex streets = 7;
+    public static final int STREETS_FIELD_NUMBER = 7;
+    private java.util.List<net.osmand.binary.OsmandOdb.StreetIndex> streets_ =
+      java.util.Collections.emptyList();
+    public java.util.List<net.osmand.binary.OsmandOdb.StreetIndex> getStreetsList() {
+      return streets_;
+    }
+    public int getStreetsCount() { return streets_.size(); }
+    public net.osmand.binary.OsmandOdb.StreetIndex getStreets(int index) {
+      return streets_.get(index);
+    }
+    
+    private void initFields() {
+    }
+    public final boolean isInitialized() {
+      if (!hasCityType) return false;
+      if (!hasName) return false;
+      if (!hasX) return false;
+      if (!hasY) return false;
+      for (net.osmand.binary.OsmandOdb.StreetIndex element : getStreetsList()) {
+        if (!element.isInitialized()) return false;
+      }
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (hasCityType()) {
+        output.writeUInt32(1, getCityType());
+      }
+      if (hasName()) {
+        output.writeString(2, getName());
+      }
+      if (hasNameEn()) {
+        output.writeString(3, getNameEn());
+      }
+      if (hasId()) {
+        output.writeUInt64(4, getId());
+      }
+      if (hasX()) {
+        output.writeFixed32(5, getX());
+      }
+      if (hasY()) {
+        output.writeFixed32(6, getY());
+      }
+      for (net.osmand.binary.OsmandOdb.StreetIndex element : getStreetsList()) {
+        output.writeMessage(7, element);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasCityType()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, getCityType());
+      }
+      if (hasName()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(2, getName());
+      }
+      if (hasNameEn()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(3, getNameEn());
+      }
+      if (hasId()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(4, getId());
+      }
+      if (hasX()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(5, getX());
+      }
+      if (hasY()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(6, getY());
+      }
+      for (net.osmand.binary.OsmandOdb.StreetIndex element : getStreetsList()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, element);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static net.osmand.binary.OsmandOdb.CityIndex parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.CityIndex parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.CityIndex parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.CityIndex parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.CityIndex parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.CityIndex parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.CityIndex parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static net.osmand.binary.OsmandOdb.CityIndex parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static net.osmand.binary.OsmandOdb.CityIndex parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.CityIndex parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(net.osmand.binary.OsmandOdb.CityIndex prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private net.osmand.binary.OsmandOdb.CityIndex result;
+      
+      // Construct using net.osmand.binary.OsmandOdb.CityIndex.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new net.osmand.binary.OsmandOdb.CityIndex();
+        return builder;
+      }
+      
+      protected net.osmand.binary.OsmandOdb.CityIndex internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new net.osmand.binary.OsmandOdb.CityIndex();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return net.osmand.binary.OsmandOdb.CityIndex.getDescriptor();
+      }
+      
+      public net.osmand.binary.OsmandOdb.CityIndex getDefaultInstanceForType() {
+        return net.osmand.binary.OsmandOdb.CityIndex.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public net.osmand.binary.OsmandOdb.CityIndex build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private net.osmand.binary.OsmandOdb.CityIndex buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public net.osmand.binary.OsmandOdb.CityIndex buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        if (result.streets_ != java.util.Collections.EMPTY_LIST) {
+          result.streets_ =
+            java.util.Collections.unmodifiableList(result.streets_);
+        }
+        net.osmand.binary.OsmandOdb.CityIndex returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof net.osmand.binary.OsmandOdb.CityIndex) {
+          return mergeFrom((net.osmand.binary.OsmandOdb.CityIndex)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(net.osmand.binary.OsmandOdb.CityIndex other) {
+        if (other == net.osmand.binary.OsmandOdb.CityIndex.getDefaultInstance()) return this;
+        if (other.hasCityType()) {
+          setCityType(other.getCityType());
+        }
+        if (other.hasName()) {
+          setName(other.getName());
+        }
+        if (other.hasNameEn()) {
+          setNameEn(other.getNameEn());
+        }
+        if (other.hasId()) {
+          setId(other.getId());
+        }
+        if (other.hasX()) {
+          setX(other.getX());
+        }
+        if (other.hasY()) {
+          setY(other.getY());
+        }
+        if (!other.streets_.isEmpty()) {
+          if (result.streets_.isEmpty()) {
+            result.streets_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.StreetIndex>();
+          }
+          result.streets_.addAll(other.streets_);
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              setCityType(input.readUInt32());
+              break;
+            }
+            case 18: {
+              setName(input.readString());
+              break;
+            }
+            case 26: {
+              setNameEn(input.readString());
+              break;
+            }
+            case 32: {
+              setId(input.readUInt64());
+              break;
+            }
+            case 45: {
+              setX(input.readFixed32());
+              break;
+            }
+            case 53: {
+              setY(input.readFixed32());
+              break;
+            }
+            case 58: {
+              net.osmand.binary.OsmandOdb.StreetIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.StreetIndex.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addStreets(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // required uint32 city_type = 1;
+      public boolean hasCityType() {
+        return result.hasCityType();
+      }
+      public int getCityType() {
+        return result.getCityType();
+      }
+      public Builder setCityType(int value) {
+        result.hasCityType = true;
+        result.cityType_ = value;
+        return this;
+      }
+      public Builder clearCityType() {
+        result.hasCityType = false;
+        result.cityType_ = 0;
+        return this;
+      }
+      
+      // required string name = 2;
+      public boolean hasName() {
+        return result.hasName();
+      }
+      public java.lang.String getName() {
+        return result.getName();
+      }
+      public Builder setName(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasName = true;
+        result.name_ = value;
+        return this;
+      }
+      public Builder clearName() {
+        result.hasName = false;
+        result.name_ = getDefaultInstance().getName();
+        return this;
+      }
+      
+      // optional string name_en = 3;
+      public boolean hasNameEn() {
+        return result.hasNameEn();
+      }
+      public java.lang.String getNameEn() {
+        return result.getNameEn();
+      }
+      public Builder setNameEn(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasNameEn = true;
+        result.nameEn_ = value;
+        return this;
+      }
+      public Builder clearNameEn() {
+        result.hasNameEn = false;
+        result.nameEn_ = getDefaultInstance().getNameEn();
+        return this;
+      }
+      
+      // optional uint64 id = 4;
+      public boolean hasId() {
+        return result.hasId();
+      }
+      public long getId() {
+        return result.getId();
+      }
+      public Builder setId(long value) {
+        result.hasId = true;
+        result.id_ = value;
+        return this;
+      }
+      public Builder clearId() {
+        result.hasId = false;
+        result.id_ = 0L;
+        return this;
+      }
+      
+      // required fixed32 x = 5;
+      public boolean hasX() {
+        return result.hasX();
+      }
+      public int getX() {
+        return result.getX();
+      }
+      public Builder setX(int value) {
+        result.hasX = true;
+        result.x_ = value;
+        return this;
+      }
+      public Builder clearX() {
+        result.hasX = false;
+        result.x_ = 0;
+        return this;
+      }
+      
+      // required fixed32 y = 6;
+      public boolean hasY() {
+        return result.hasY();
+      }
+      public int getY() {
+        return result.getY();
+      }
+      public Builder setY(int value) {
+        result.hasY = true;
+        result.y_ = value;
+        return this;
+      }
+      public Builder clearY() {
+        result.hasY = false;
+        result.y_ = 0;
+        return this;
+      }
+      
+      // repeated .StreetIndex streets = 7;
+      public java.util.List<net.osmand.binary.OsmandOdb.StreetIndex> getStreetsList() {
+        return java.util.Collections.unmodifiableList(result.streets_);
+      }
+      public int getStreetsCount() {
+        return result.getStreetsCount();
+      }
+      public net.osmand.binary.OsmandOdb.StreetIndex getStreets(int index) {
+        return result.getStreets(index);
+      }
+      public Builder setStreets(int index, net.osmand.binary.OsmandOdb.StreetIndex value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.streets_.set(index, value);
+        return this;
+      }
+      public Builder setStreets(int index, net.osmand.binary.OsmandOdb.StreetIndex.Builder builderForValue) {
+        result.streets_.set(index, builderForValue.build());
+        return this;
+      }
+      public Builder addStreets(net.osmand.binary.OsmandOdb.StreetIndex value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        if (result.streets_.isEmpty()) {
+          result.streets_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.StreetIndex>();
+        }
+        result.streets_.add(value);
+        return this;
+      }
+      public Builder addStreets(net.osmand.binary.OsmandOdb.StreetIndex.Builder builderForValue) {
+        if (result.streets_.isEmpty()) {
+          result.streets_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.StreetIndex>();
+        }
+        result.streets_.add(builderForValue.build());
+        return this;
+      }
+      public Builder addAllStreets(
+          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.StreetIndex> values) {
+        if (result.streets_.isEmpty()) {
+          result.streets_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.StreetIndex>();
+        }
+        super.addAll(values, result.streets_);
+        return this;
+      }
+      public Builder clearStreets() {
+        result.streets_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:CityIndex)
+    }
+    
+    static {
+      defaultInstance = new CityIndex(true);
+      net.osmand.binary.OsmandOdb.internalForceInit();
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:CityIndex)
+  }
+  
+  public static final class PostcodeIndex extends
+      com.google.protobuf.GeneratedMessage {
+    // Use PostcodeIndex.newBuilder() to construct.
+    private PostcodeIndex() {
+      initFields();
+    }
+    private PostcodeIndex(boolean noInit) {}
+    
+    private static final PostcodeIndex defaultInstance;
+    public static PostcodeIndex getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public PostcodeIndex getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return net.osmand.binary.OsmandOdb.internal_static_PostcodeIndex_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return net.osmand.binary.OsmandOdb.internal_static_PostcodeIndex_fieldAccessorTable;
+    }
+    
+    // required string postcode = 1;
+    public static final int POSTCODE_FIELD_NUMBER = 1;
+    private boolean hasPostcode;
+    private java.lang.String postcode_ = "";
+    public boolean hasPostcode() { return hasPostcode; }
+    public java.lang.String getPostcode() { return postcode_; }
+    
+    // repeated .StreetIndex streets = 5;
+    public static final int STREETS_FIELD_NUMBER = 5;
+    private java.util.List<net.osmand.binary.OsmandOdb.StreetIndex> streets_ =
+      java.util.Collections.emptyList();
+    public java.util.List<net.osmand.binary.OsmandOdb.StreetIndex> getStreetsList() {
+      return streets_;
+    }
+    public int getStreetsCount() { return streets_.size(); }
+    public net.osmand.binary.OsmandOdb.StreetIndex getStreets(int index) {
+      return streets_.get(index);
+    }
+    
+    private void initFields() {
+    }
+    public final boolean isInitialized() {
+      if (!hasPostcode) return false;
+      for (net.osmand.binary.OsmandOdb.StreetIndex element : getStreetsList()) {
+        if (!element.isInitialized()) return false;
+      }
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (hasPostcode()) {
+        output.writeString(1, getPostcode());
+      }
+      for (net.osmand.binary.OsmandOdb.StreetIndex element : getStreetsList()) {
+        output.writeMessage(5, element);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasPostcode()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(1, getPostcode());
+      }
+      for (net.osmand.binary.OsmandOdb.StreetIndex element : getStreetsList()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, element);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static net.osmand.binary.OsmandOdb.PostcodeIndex parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.PostcodeIndex parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.PostcodeIndex parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.PostcodeIndex parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.PostcodeIndex parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.PostcodeIndex parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.PostcodeIndex parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static net.osmand.binary.OsmandOdb.PostcodeIndex parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static net.osmand.binary.OsmandOdb.PostcodeIndex parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.PostcodeIndex parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(net.osmand.binary.OsmandOdb.PostcodeIndex prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private net.osmand.binary.OsmandOdb.PostcodeIndex result;
+      
+      // Construct using net.osmand.binary.OsmandOdb.PostcodeIndex.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new net.osmand.binary.OsmandOdb.PostcodeIndex();
+        return builder;
+      }
+      
+      protected net.osmand.binary.OsmandOdb.PostcodeIndex internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new net.osmand.binary.OsmandOdb.PostcodeIndex();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return net.osmand.binary.OsmandOdb.PostcodeIndex.getDescriptor();
+      }
+      
+      public net.osmand.binary.OsmandOdb.PostcodeIndex getDefaultInstanceForType() {
+        return net.osmand.binary.OsmandOdb.PostcodeIndex.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public net.osmand.binary.OsmandOdb.PostcodeIndex build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private net.osmand.binary.OsmandOdb.PostcodeIndex buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public net.osmand.binary.OsmandOdb.PostcodeIndex buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        if (result.streets_ != java.util.Collections.EMPTY_LIST) {
+          result.streets_ =
+            java.util.Collections.unmodifiableList(result.streets_);
+        }
+        net.osmand.binary.OsmandOdb.PostcodeIndex returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof net.osmand.binary.OsmandOdb.PostcodeIndex) {
+          return mergeFrom((net.osmand.binary.OsmandOdb.PostcodeIndex)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(net.osmand.binary.OsmandOdb.PostcodeIndex other) {
+        if (other == net.osmand.binary.OsmandOdb.PostcodeIndex.getDefaultInstance()) return this;
+        if (other.hasPostcode()) {
+          setPostcode(other.getPostcode());
+        }
+        if (!other.streets_.isEmpty()) {
+          if (result.streets_.isEmpty()) {
+            result.streets_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.StreetIndex>();
+          }
+          result.streets_.addAll(other.streets_);
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              setPostcode(input.readString());
+              break;
+            }
+            case 42: {
+              net.osmand.binary.OsmandOdb.StreetIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.StreetIndex.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addStreets(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // required string postcode = 1;
+      public boolean hasPostcode() {
+        return result.hasPostcode();
+      }
+      public java.lang.String getPostcode() {
+        return result.getPostcode();
+      }
+      public Builder setPostcode(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasPostcode = true;
+        result.postcode_ = value;
+        return this;
+      }
+      public Builder clearPostcode() {
+        result.hasPostcode = false;
+        result.postcode_ = getDefaultInstance().getPostcode();
+        return this;
+      }
+      
+      // repeated .StreetIndex streets = 5;
+      public java.util.List<net.osmand.binary.OsmandOdb.StreetIndex> getStreetsList() {
+        return java.util.Collections.unmodifiableList(result.streets_);
+      }
+      public int getStreetsCount() {
+        return result.getStreetsCount();
+      }
+      public net.osmand.binary.OsmandOdb.StreetIndex getStreets(int index) {
+        return result.getStreets(index);
+      }
+      public Builder setStreets(int index, net.osmand.binary.OsmandOdb.StreetIndex value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.streets_.set(index, value);
+        return this;
+      }
+      public Builder setStreets(int index, net.osmand.binary.OsmandOdb.StreetIndex.Builder builderForValue) {
+        result.streets_.set(index, builderForValue.build());
+        return this;
+      }
+      public Builder addStreets(net.osmand.binary.OsmandOdb.StreetIndex value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        if (result.streets_.isEmpty()) {
+          result.streets_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.StreetIndex>();
+        }
+        result.streets_.add(value);
+        return this;
+      }
+      public Builder addStreets(net.osmand.binary.OsmandOdb.StreetIndex.Builder builderForValue) {
+        if (result.streets_.isEmpty()) {
+          result.streets_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.StreetIndex>();
+        }
+        result.streets_.add(builderForValue.build());
+        return this;
+      }
+      public Builder addAllStreets(
+          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.StreetIndex> values) {
+        if (result.streets_.isEmpty()) {
+          result.streets_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.StreetIndex>();
+        }
+        super.addAll(values, result.streets_);
+        return this;
+      }
+      public Builder clearStreets() {
+        result.streets_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:PostcodeIndex)
+    }
+    
+    static {
+      defaultInstance = new PostcodeIndex(true);
+      net.osmand.binary.OsmandOdb.internalForceInit();
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:PostcodeIndex)
+  }
+  
+  public static final class StreetIndex extends
+      com.google.protobuf.GeneratedMessage {
+    // Use StreetIndex.newBuilder() to construct.
+    private StreetIndex() {
+      initFields();
+    }
+    private StreetIndex(boolean noInit) {}
+    
+    private static final StreetIndex defaultInstance;
+    public static StreetIndex getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public StreetIndex getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return net.osmand.binary.OsmandOdb.internal_static_StreetIndex_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return net.osmand.binary.OsmandOdb.internal_static_StreetIndex_fieldAccessorTable;
+    }
+    
+    // required string name = 1;
+    public static final int NAME_FIELD_NUMBER = 1;
+    private boolean hasName;
+    private java.lang.String name_ = "";
+    public boolean hasName() { return hasName; }
+    public java.lang.String getName() { return name_; }
+    
+    // optional string name_en = 2;
+    public static final int NAME_EN_FIELD_NUMBER = 2;
+    private boolean hasNameEn;
+    private java.lang.String nameEn_ = "";
+    public boolean hasNameEn() { return hasNameEn; }
+    public java.lang.String getNameEn() { return nameEn_; }
+    
+    // optional uint64 id = 6;
+    public static final int ID_FIELD_NUMBER = 6;
+    private boolean hasId;
+    private long id_ = 0L;
+    public boolean hasId() { return hasId; }
+    public long getId() { return id_; }
+    
+    // required sint32 x = 3;
+    public static final int X_FIELD_NUMBER = 3;
+    private boolean hasX;
+    private int x_ = 0;
+    public boolean hasX() { return hasX; }
+    public int getX() { return x_; }
+    
+    // required sint32 y = 4;
+    public static final int Y_FIELD_NUMBER = 4;
+    private boolean hasY;
+    private int y_ = 0;
+    public boolean hasY() { return hasY; }
+    public int getY() { return y_; }
+    
+    // repeated .BuildingIndex buildings = 5;
+    public static final int BUILDINGS_FIELD_NUMBER = 5;
+    private java.util.List<net.osmand.binary.OsmandOdb.BuildingIndex> buildings_ =
+      java.util.Collections.emptyList();
+    public java.util.List<net.osmand.binary.OsmandOdb.BuildingIndex> getBuildingsList() {
+      return buildings_;
+    }
+    public int getBuildingsCount() { return buildings_.size(); }
+    public net.osmand.binary.OsmandOdb.BuildingIndex getBuildings(int index) {
+      return buildings_.get(index);
+    }
+    
+    private void initFields() {
+    }
+    public final boolean isInitialized() {
+      if (!hasName) return false;
+      if (!hasX) return false;
+      if (!hasY) return false;
+      for (net.osmand.binary.OsmandOdb.BuildingIndex element : getBuildingsList()) {
+        if (!element.isInitialized()) return false;
+      }
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (hasName()) {
+        output.writeString(1, getName());
+      }
+      if (hasNameEn()) {
+        output.writeString(2, getNameEn());
+      }
+      if (hasX()) {
+        output.writeSInt32(3, getX());
+      }
+      if (hasY()) {
+        output.writeSInt32(4, getY());
+      }
+      for (net.osmand.binary.OsmandOdb.BuildingIndex element : getBuildingsList()) {
+        output.writeMessage(5, element);
+      }
+      if (hasId()) {
+        output.writeUInt64(6, getId());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasName()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(1, getName());
+      }
+      if (hasNameEn()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(2, getNameEn());
+      }
+      if (hasX()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt32Size(3, getX());
+      }
+      if (hasY()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt32Size(4, getY());
+      }
+      for (net.osmand.binary.OsmandOdb.BuildingIndex element : getBuildingsList()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, element);
+      }
+      if (hasId()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(6, getId());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static net.osmand.binary.OsmandOdb.StreetIndex parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.StreetIndex parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.StreetIndex parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.StreetIndex parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.StreetIndex parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.StreetIndex parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.StreetIndex parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static net.osmand.binary.OsmandOdb.StreetIndex parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static net.osmand.binary.OsmandOdb.StreetIndex parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.StreetIndex parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(net.osmand.binary.OsmandOdb.StreetIndex prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private net.osmand.binary.OsmandOdb.StreetIndex result;
+      
+      // Construct using net.osmand.binary.OsmandOdb.StreetIndex.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new net.osmand.binary.OsmandOdb.StreetIndex();
+        return builder;
+      }
+      
+      protected net.osmand.binary.OsmandOdb.StreetIndex internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new net.osmand.binary.OsmandOdb.StreetIndex();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return net.osmand.binary.OsmandOdb.StreetIndex.getDescriptor();
+      }
+      
+      public net.osmand.binary.OsmandOdb.StreetIndex getDefaultInstanceForType() {
+        return net.osmand.binary.OsmandOdb.StreetIndex.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public net.osmand.binary.OsmandOdb.StreetIndex build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private net.osmand.binary.OsmandOdb.StreetIndex buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public net.osmand.binary.OsmandOdb.StreetIndex buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        if (result.buildings_ != java.util.Collections.EMPTY_LIST) {
+          result.buildings_ =
+            java.util.Collections.unmodifiableList(result.buildings_);
+        }
+        net.osmand.binary.OsmandOdb.StreetIndex returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof net.osmand.binary.OsmandOdb.StreetIndex) {
+          return mergeFrom((net.osmand.binary.OsmandOdb.StreetIndex)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(net.osmand.binary.OsmandOdb.StreetIndex other) {
+        if (other == net.osmand.binary.OsmandOdb.StreetIndex.getDefaultInstance()) return this;
+        if (other.hasName()) {
+          setName(other.getName());
+        }
+        if (other.hasNameEn()) {
+          setNameEn(other.getNameEn());
+        }
+        if (other.hasId()) {
+          setId(other.getId());
+        }
+        if (other.hasX()) {
+          setX(other.getX());
+        }
+        if (other.hasY()) {
+          setY(other.getY());
+        }
+        if (!other.buildings_.isEmpty()) {
+          if (result.buildings_.isEmpty()) {
+            result.buildings_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.BuildingIndex>();
+          }
+          result.buildings_.addAll(other.buildings_);
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              setName(input.readString());
+              break;
+            }
+            case 18: {
+              setNameEn(input.readString());
+              break;
+            }
+            case 24: {
+              setX(input.readSInt32());
+              break;
+            }
+            case 32: {
+              setY(input.readSInt32());
+              break;
+            }
+            case 42: {
+              net.osmand.binary.OsmandOdb.BuildingIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.BuildingIndex.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addBuildings(subBuilder.buildPartial());
+              break;
+            }
+            case 48: {
+              setId(input.readUInt64());
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // required string name = 1;
+      public boolean hasName() {
+        return result.hasName();
+      }
+      public java.lang.String getName() {
+        return result.getName();
+      }
+      public Builder setName(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasName = true;
+        result.name_ = value;
+        return this;
+      }
+      public Builder clearName() {
+        result.hasName = false;
+        result.name_ = getDefaultInstance().getName();
+        return this;
+      }
+      
+      // optional string name_en = 2;
+      public boolean hasNameEn() {
+        return result.hasNameEn();
+      }
+      public java.lang.String getNameEn() {
+        return result.getNameEn();
+      }
+      public Builder setNameEn(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasNameEn = true;
+        result.nameEn_ = value;
+        return this;
+      }
+      public Builder clearNameEn() {
+        result.hasNameEn = false;
+        result.nameEn_ = getDefaultInstance().getNameEn();
+        return this;
+      }
+      
+      // optional uint64 id = 6;
+      public boolean hasId() {
+        return result.hasId();
+      }
+      public long getId() {
+        return result.getId();
+      }
+      public Builder setId(long value) {
+        result.hasId = true;
+        result.id_ = value;
+        return this;
+      }
+      public Builder clearId() {
+        result.hasId = false;
+        result.id_ = 0L;
+        return this;
+      }
+      
+      // required sint32 x = 3;
+      public boolean hasX() {
+        return result.hasX();
+      }
+      public int getX() {
+        return result.getX();
+      }
+      public Builder setX(int value) {
+        result.hasX = true;
+        result.x_ = value;
+        return this;
+      }
+      public Builder clearX() {
+        result.hasX = false;
+        result.x_ = 0;
+        return this;
+      }
+      
+      // required sint32 y = 4;
+      public boolean hasY() {
+        return result.hasY();
+      }
+      public int getY() {
+        return result.getY();
+      }
+      public Builder setY(int value) {
+        result.hasY = true;
+        result.y_ = value;
+        return this;
+      }
+      public Builder clearY() {
+        result.hasY = false;
+        result.y_ = 0;
+        return this;
+      }
+      
+      // repeated .BuildingIndex buildings = 5;
+      public java.util.List<net.osmand.binary.OsmandOdb.BuildingIndex> getBuildingsList() {
+        return java.util.Collections.unmodifiableList(result.buildings_);
+      }
+      public int getBuildingsCount() {
+        return result.getBuildingsCount();
+      }
+      public net.osmand.binary.OsmandOdb.BuildingIndex getBuildings(int index) {
+        return result.getBuildings(index);
+      }
+      public Builder setBuildings(int index, net.osmand.binary.OsmandOdb.BuildingIndex value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.buildings_.set(index, value);
+        return this;
+      }
+      public Builder setBuildings(int index, net.osmand.binary.OsmandOdb.BuildingIndex.Builder builderForValue) {
+        result.buildings_.set(index, builderForValue.build());
+        return this;
+      }
+      public Builder addBuildings(net.osmand.binary.OsmandOdb.BuildingIndex value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        if (result.buildings_.isEmpty()) {
+          result.buildings_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.BuildingIndex>();
+        }
+        result.buildings_.add(value);
+        return this;
+      }
+      public Builder addBuildings(net.osmand.binary.OsmandOdb.BuildingIndex.Builder builderForValue) {
+        if (result.buildings_.isEmpty()) {
+          result.buildings_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.BuildingIndex>();
+        }
+        result.buildings_.add(builderForValue.build());
+        return this;
+      }
+      public Builder addAllBuildings(
+          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.BuildingIndex> values) {
+        if (result.buildings_.isEmpty()) {
+          result.buildings_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.BuildingIndex>();
+        }
+        super.addAll(values, result.buildings_);
+        return this;
+      }
+      public Builder clearBuildings() {
+        result.buildings_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:StreetIndex)
+    }
+    
+    static {
+      defaultInstance = new StreetIndex(true);
+      net.osmand.binary.OsmandOdb.internalForceInit();
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:StreetIndex)
+  }
+  
+  public static final class BuildingIndex extends
+      com.google.protobuf.GeneratedMessage {
+    // Use BuildingIndex.newBuilder() to construct.
+    private BuildingIndex() {
+      initFields();
+    }
+    private BuildingIndex(boolean noInit) {}
+    
+    private static final BuildingIndex defaultInstance;
+    public static BuildingIndex getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public BuildingIndex getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return net.osmand.binary.OsmandOdb.internal_static_BuildingIndex_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return net.osmand.binary.OsmandOdb.internal_static_BuildingIndex_fieldAccessorTable;
+    }
+    
+    // required string name = 1;
+    public static final int NAME_FIELD_NUMBER = 1;
+    private boolean hasName;
+    private java.lang.String name_ = "";
+    public boolean hasName() { return hasName; }
+    public java.lang.String getName() { return name_; }
+    
+    // optional string name_en = 2;
+    public static final int NAME_EN_FIELD_NUMBER = 2;
+    private boolean hasNameEn;
+    private java.lang.String nameEn_ = "";
+    public boolean hasNameEn() { return hasNameEn; }
+    public java.lang.String getNameEn() { return nameEn_; }
+    
+    // optional uint64 id = 5;
+    public static final int ID_FIELD_NUMBER = 5;
+    private boolean hasId;
+    private long id_ = 0L;
+    public boolean hasId() { return hasId; }
+    public long getId() { return id_; }
+    
+    // required sint32 x = 3;
+    public static final int X_FIELD_NUMBER = 3;
+    private boolean hasX;
+    private int x_ = 0;
+    public boolean hasX() { return hasX; }
+    public int getX() { return x_; }
+    
+    // required sint32 y = 4;
+    public static final int Y_FIELD_NUMBER = 4;
+    private boolean hasY;
+    private int y_ = 0;
+    public boolean hasY() { return hasY; }
+    public int getY() { return y_; }
+    
+    private void initFields() {
+    }
+    public final boolean isInitialized() {
+      if (!hasName) return false;
+      if (!hasX) return false;
+      if (!hasY) return false;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (hasName()) {
+        output.writeString(1, getName());
+      }
+      if (hasNameEn()) {
+        output.writeString(2, getNameEn());
+      }
+      if (hasX()) {
+        output.writeSInt32(3, getX());
+      }
+      if (hasY()) {
+        output.writeSInt32(4, getY());
+      }
+      if (hasId()) {
+        output.writeUInt64(5, getId());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasName()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(1, getName());
+      }
+      if (hasNameEn()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(2, getNameEn());
+      }
+      if (hasX()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt32Size(3, getX());
+      }
+      if (hasY()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt32Size(4, getY());
+      }
+      if (hasId()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(5, getId());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static net.osmand.binary.OsmandOdb.BuildingIndex parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.BuildingIndex parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.BuildingIndex parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.BuildingIndex parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.BuildingIndex parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.BuildingIndex parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.BuildingIndex parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static net.osmand.binary.OsmandOdb.BuildingIndex parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static net.osmand.binary.OsmandOdb.BuildingIndex parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.BuildingIndex parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(net.osmand.binary.OsmandOdb.BuildingIndex prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private net.osmand.binary.OsmandOdb.BuildingIndex result;
+      
+      // Construct using net.osmand.binary.OsmandOdb.BuildingIndex.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new net.osmand.binary.OsmandOdb.BuildingIndex();
+        return builder;
+      }
+      
+      protected net.osmand.binary.OsmandOdb.BuildingIndex internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new net.osmand.binary.OsmandOdb.BuildingIndex();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return net.osmand.binary.OsmandOdb.BuildingIndex.getDescriptor();
+      }
+      
+      public net.osmand.binary.OsmandOdb.BuildingIndex getDefaultInstanceForType() {
+        return net.osmand.binary.OsmandOdb.BuildingIndex.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public net.osmand.binary.OsmandOdb.BuildingIndex build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private net.osmand.binary.OsmandOdb.BuildingIndex buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public net.osmand.binary.OsmandOdb.BuildingIndex buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        net.osmand.binary.OsmandOdb.BuildingIndex returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof net.osmand.binary.OsmandOdb.BuildingIndex) {
+          return mergeFrom((net.osmand.binary.OsmandOdb.BuildingIndex)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(net.osmand.binary.OsmandOdb.BuildingIndex other) {
+        if (other == net.osmand.binary.OsmandOdb.BuildingIndex.getDefaultInstance()) return this;
+        if (other.hasName()) {
+          setName(other.getName());
+        }
+        if (other.hasNameEn()) {
+          setNameEn(other.getNameEn());
+        }
+        if (other.hasId()) {
+          setId(other.getId());
+        }
+        if (other.hasX()) {
+          setX(other.getX());
+        }
+        if (other.hasY()) {
+          setY(other.getY());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              setName(input.readString());
+              break;
+            }
+            case 18: {
+              setNameEn(input.readString());
+              break;
+            }
+            case 24: {
+              setX(input.readSInt32());
+              break;
+            }
+            case 32: {
+              setY(input.readSInt32());
+              break;
+            }
+            case 40: {
+              setId(input.readUInt64());
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // required string name = 1;
+      public boolean hasName() {
+        return result.hasName();
+      }
+      public java.lang.String getName() {
+        return result.getName();
+      }
+      public Builder setName(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasName = true;
+        result.name_ = value;
+        return this;
+      }
+      public Builder clearName() {
+        result.hasName = false;
+        result.name_ = getDefaultInstance().getName();
+        return this;
+      }
+      
+      // optional string name_en = 2;
+      public boolean hasNameEn() {
+        return result.hasNameEn();
+      }
+      public java.lang.String getNameEn() {
+        return result.getNameEn();
+      }
+      public Builder setNameEn(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasNameEn = true;
+        result.nameEn_ = value;
+        return this;
+      }
+      public Builder clearNameEn() {
+        result.hasNameEn = false;
+        result.nameEn_ = getDefaultInstance().getNameEn();
+        return this;
+      }
+      
+      // optional uint64 id = 5;
+      public boolean hasId() {
+        return result.hasId();
+      }
+      public long getId() {
+        return result.getId();
+      }
+      public Builder setId(long value) {
+        result.hasId = true;
+        result.id_ = value;
+        return this;
+      }
+      public Builder clearId() {
+        result.hasId = false;
+        result.id_ = 0L;
+        return this;
+      }
+      
+      // required sint32 x = 3;
+      public boolean hasX() {
+        return result.hasX();
+      }
+      public int getX() {
+        return result.getX();
+      }
+      public Builder setX(int value) {
+        result.hasX = true;
+        result.x_ = value;
+        return this;
+      }
+      public Builder clearX() {
+        result.hasX = false;
+        result.x_ = 0;
+        return this;
+      }
+      
+      // required sint32 y = 4;
+      public boolean hasY() {
+        return result.hasY();
+      }
+      public int getY() {
+        return result.getY();
+      }
+      public Builder setY(int value) {
+        result.hasY = true;
+        result.y_ = value;
+        return this;
+      }
+      public Builder clearY() {
+        result.hasY = false;
+        result.y_ = 0;
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:BuildingIndex)
+    }
+    
+    static {
+      defaultInstance = new BuildingIndex(true);
+      net.osmand.binary.OsmandOdb.internalForceInit();
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:BuildingIndex)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_OsmAndStructure_descriptor;
   private static
@@ -2836,6 +5448,31 @@ public final class OsmandOdb {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_MapData_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_OsmAndAddressIndex_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_OsmAndAddressIndex_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_CityIndex_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_CityIndex_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_PostcodeIndex_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_PostcodeIndex_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_StreetIndex_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_StreetIndex_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_BuildingIndex_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_BuildingIndex_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2845,22 +5482,36 @@ public final class OsmandOdb {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\024src/osmand_odb.proto\"E\n\017OsmAndStructur" +
+      "\n\024src/osmand_odb.proto\"p\n\017OsmAndStructur" +
       "e\022\017\n\007version\030\001 \002(\r\022!\n\010mapIndex\030\002 \003(\0132\017.O" +
-      "smAndMapIndex\"/\n\016OsmAndMapIndex\022\035\n\006level" +
-      "s\030\001 \003(\0132\r.MapRootLevel\"\202\001\n\014MapRootLevel\022" +
-      "\017\n\007maxZoom\030\001 \002(\005\022\017\n\007minZoom\030\002 \002(\005\022\014\n\004lef" +
-      "t\030\003 \002(\005\022\r\n\005right\030\004 \002(\005\022\013\n\003top\030\005 \002(\005\022\016\n\006b" +
-      "ottom\030\006 \002(\005\022\026\n\004root\030\007 \002(\0132\010.MapTree\"\253\001\n\007" +
-      "MapTree\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003" +
-      "top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022!\n\013stringTable" +
-      "\030\005 \001(\0132\014.StringTable\022\016\n\006baseId\030\006 \001(\004\022\032\n\010",
-      "subtrees\030\007 \003(\0132\010.MapTree\022\027\n\005leafs\030\010 \003(\0132" +
-      "\010.MapData\"\030\n\013StringTable\022\t\n\001s\030\001 \003(\t\"v\n\007M" +
-      "apData\022\023\n\013coordinates\030\001 \002(\014\022\r\n\005types\030\002 \002" +
-      "(\014\022\n\n\002id\030\003 \002(\022\022\020\n\010stringId\030\004 \001(\r\022\024\n\014rest" +
-      "rictions\030\005 \003(\022\022\023\n\013highwayMeta\030\006 \001(\005B\023\n\021n" +
-      "et.osmand.binary"
+      "smAndMapIndex\022)\n\014addressIndex\030\003 \003(\0132\023.Os" +
+      "mAndAddressIndex\"/\n\016OsmAndMapIndex\022\035\n\006le" +
+      "vels\030\001 \003(\0132\r.MapRootLevel\"\202\001\n\014MapRootLev" +
+      "el\022\017\n\007maxZoom\030\001 \002(\005\022\017\n\007minZoom\030\002 \002(\005\022\014\n\004" +
+      "left\030\003 \002(\005\022\r\n\005right\030\004 \002(\005\022\013\n\003top\030\005 \002(\005\022\016" +
+      "\n\006bottom\030\006 \002(\005\022\026\n\004root\030\007 \003(\0132\010.MapTree\"\253" +
+      "\001\n\007MapTree\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022" +
+      "\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022!\n\013stringTa",
+      "ble\030\005 \001(\0132\014.StringTable\022\016\n\006baseId\030\006 \001(\004\022" +
+      "\032\n\010subtrees\030\007 \003(\0132\010.MapTree\022\027\n\005leafs\030\010 \003" +
+      "(\0132\010.MapData\"\030\n\013StringTable\022\t\n\001s\030\001 \003(\t\"v" +
+      "\n\007MapData\022\023\n\013coordinates\030\001 \002(\014\022\r\n\005types\030" +
+      "\002 \002(\014\022\n\n\002id\030\003 \002(\022\022\020\n\010stringId\030\004 \001(\r\022\024\n\014r" +
+      "estrictions\030\005 \001(\014\022\023\n\013highwayMeta\030\006 \001(\005\"\223" +
+      "\001\n\022OsmAndAddressIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007n" +
+      "ame_en\030\002 \001(\t\022\035\n\tcityIndex\030\005 \003(\0132\n.CityIn" +
+      "dex\022!\n\tpostcodes\030\006 \003(\0132\016.PostcodeIndex\022\034" +
+      "\n\010villages\030\007 \003(\0132\n.CityIndex\"~\n\tCityInde",
+      "x\022\021\n\tcity_type\030\001 \002(\r\022\014\n\004name\030\002 \002(\t\022\017\n\007na" +
+      "me_en\030\003 \001(\t\022\n\n\002id\030\004 \001(\004\022\t\n\001x\030\005 \002(\007\022\t\n\001y\030" +
+      "\006 \002(\007\022\035\n\007streets\030\007 \003(\0132\014.StreetIndex\"@\n\r" +
+      "PostcodeIndex\022\020\n\010postcode\030\001 \002(\t\022\035\n\007stree" +
+      "ts\030\005 \003(\0132\014.StreetIndex\"q\n\013StreetIndex\022\014\n" +
+      "\004name\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022\n\n\002id\030\006 \001(\004" +
+      "\022\t\n\001x\030\003 \002(\021\022\t\n\001y\030\004 \002(\021\022!\n\tbuildings\030\005 \003(" +
+      "\0132\016.BuildingIndex\"P\n\rBuildingIndex\022\014\n\004na" +
+      "me\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022\n\n\002id\030\005 \001(\004\022\t\n" +
+      "\001x\030\003 \002(\021\022\t\n\001y\030\004 \002(\021B\023\n\021net.osmand.binary"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2872,7 +5523,7 @@ public final class OsmandOdb {
           internal_static_OsmAndStructure_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndStructure_descriptor,
-              new java.lang.String[] { "Version", "MapIndex", },
+              new java.lang.String[] { "Version", "MapIndex", "AddressIndex", },
               net.osmand.binary.OsmandOdb.OsmAndStructure.class,
               net.osmand.binary.OsmandOdb.OsmAndStructure.Builder.class);
           internal_static_OsmAndMapIndex_descriptor =
@@ -2915,6 +5566,46 @@ public final class OsmandOdb {
               new java.lang.String[] { "Coordinates", "Types", "Id", "StringId", "Restrictions", "HighwayMeta", },
               net.osmand.binary.OsmandOdb.MapData.class,
               net.osmand.binary.OsmandOdb.MapData.Builder.class);
+          internal_static_OsmAndAddressIndex_descriptor =
+            getDescriptor().getMessageTypes().get(6);
+          internal_static_OsmAndAddressIndex_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_OsmAndAddressIndex_descriptor,
+              new java.lang.String[] { "Name", "NameEn", "CityIndex", "Postcodes", "Villages", },
+              net.osmand.binary.OsmandOdb.OsmAndAddressIndex.class,
+              net.osmand.binary.OsmandOdb.OsmAndAddressIndex.Builder.class);
+          internal_static_CityIndex_descriptor =
+            getDescriptor().getMessageTypes().get(7);
+          internal_static_CityIndex_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_CityIndex_descriptor,
+              new java.lang.String[] { "CityType", "Name", "NameEn", "Id", "X", "Y", "Streets", },
+              net.osmand.binary.OsmandOdb.CityIndex.class,
+              net.osmand.binary.OsmandOdb.CityIndex.Builder.class);
+          internal_static_PostcodeIndex_descriptor =
+            getDescriptor().getMessageTypes().get(8);
+          internal_static_PostcodeIndex_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_PostcodeIndex_descriptor,
+              new java.lang.String[] { "Postcode", "Streets", },
+              net.osmand.binary.OsmandOdb.PostcodeIndex.class,
+              net.osmand.binary.OsmandOdb.PostcodeIndex.Builder.class);
+          internal_static_StreetIndex_descriptor =
+            getDescriptor().getMessageTypes().get(9);
+          internal_static_StreetIndex_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_StreetIndex_descriptor,
+              new java.lang.String[] { "Name", "NameEn", "Id", "X", "Y", "Buildings", },
+              net.osmand.binary.OsmandOdb.StreetIndex.class,
+              net.osmand.binary.OsmandOdb.StreetIndex.Builder.class);
+          internal_static_BuildingIndex_descriptor =
+            getDescriptor().getMessageTypes().get(10);
+          internal_static_BuildingIndex_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_BuildingIndex_descriptor,
+              new java.lang.String[] { "Name", "NameEn", "Id", "X", "Y", },
+              net.osmand.binary.OsmandOdb.BuildingIndex.class,
+              net.osmand.binary.OsmandOdb.BuildingIndex.Builder.class);
           return null;
         }
       };
