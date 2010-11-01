@@ -3,6 +3,7 @@ package net.osmand.binary;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,6 @@ import net.osmand.Algoritms;
 import net.osmand.binary.OsmandOdb.CityIndex;
 import net.osmand.binary.OsmandOdb.PostcodeIndex;
 import net.osmand.binary.OsmandOdb.StreetIndex;
-import net.osmand.binary.OsmandOdb.CityIndex.Builder;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
@@ -390,7 +390,8 @@ public class BinaryMapIndexWriter {
 	
 	public void endCityIndexes(boolean villages) throws IOException {
 		popState(villages ? VILLAGES_INDEX_INIT : CITY_INDEX_INIT);
-		writeInt32Size();
+		int length = writeInt32Size();
+		System.out.println("CITIES size " + length + " " + villages);
 	}
 	
 	
@@ -402,19 +403,23 @@ public class BinaryMapIndexWriter {
 	
 	public void endPostcodes() throws IOException {
 		popState(POSTCODES_INDEX_INIT);
-		writeInt32Size();
+		int postcodes = writeInt32Size();
+		System.out.println("POSTCODES size " + postcodes);
 	}
 	
 
 	
-	public void writePostcode(String postcode, List<Street> streets) throws IOException {
+	public void writePostcode(String postcode, Collection<Street> streets) throws IOException {
 		checkPeekState(POSTCODES_INDEX_INIT);
-		LatLon loc = streets.get(0).getLocation();
+		LatLon loc = null;
 		PostcodeIndex.Builder post = OsmandOdb.PostcodeIndex.newBuilder();
 		post.setPostcode(postcode);
 		
 
 		for(Street s : streets){
+			if(loc == null){
+				loc = s.getLocation();
+			}
 			StreetIndex streetInd = createStreetAndBuildings(s, loc, postcode);
 			post.addStreets(streetInd);
 		}
