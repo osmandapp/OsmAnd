@@ -1419,7 +1419,7 @@ public class IndexCreator {
 				}
 				int prevX = 0;
 				int prevY = 0;
-				boolean cycle = nodes.get(0).getId() == nodes.get(nodes.size() - 1).getId();
+				boolean cycle = ((Way) e).getNodeIds().get(0).longValue() == ((Way) e).getNodeIds().get(nodes.size() - 1).longValue();
 				boolean addLast = hasMulti || cycle;  
 				
 				int minX = Integer.MAX_VALUE;
@@ -2017,8 +2017,10 @@ public class IndexCreator {
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 		 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
+		 
+		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/zimbabwe.osm.bz2"), new ConsoleProgressImplementation(3), null);
 		 
 		 
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/forest.osm"), new ConsoleProgressImplementation(3), null);
