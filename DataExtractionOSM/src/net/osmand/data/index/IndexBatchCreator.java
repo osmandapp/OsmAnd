@@ -285,6 +285,7 @@ public class IndexBatchCreator {
 			
 			String addressFileName = regionName + "_" + IndexConstants.ADDRESS_TABLE_VERSION + IndexConstants.ADDRESS_INDEX_EXT;
 			indexCreator.setAddressFileName(addressFileName);
+			indexCreator.setSupportOdbAddressFile(true);
 			String transportFileName = regionName + "_" + IndexConstants.TRANSPORT_TABLE_VERSION + IndexConstants.TRANSPORT_INDEX_EXT;
 			indexCreator.setTransportFileName(transportFileName);
 			String poiFileName = regionName + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT;
