@@ -13,6 +13,7 @@ import java.util.Stack;
 import java.util.TreeMap;
 
 import net.osmand.activities.OsmandApplication;
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.TransportStop;
 import net.osmand.data.index.IndexConstants;
@@ -367,9 +368,15 @@ public class ResourceManager {
 				if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 					progress.startTask(Messages.getMessage("indexing_map") + f.getName(), -1); //$NON-NLS-1$
 					try {
-						boolean initialized = renderer.initializeNewResource(progress, f);
-						if (!initialized) {
+						BinaryMapIndexReader index = renderer.initializeNewResource(progress, f);
+						if (index == null) {
 							warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+						} else {
+							for(String rName : index.getRegionNames()) {
+								// skip duplicate names (don't make collision between getName() and name in the map)
+								RegionAddressRepositoryBinary rarb = new RegionAddressRepositoryBinary(index, rName);
+								addressMap.put(rName, rarb);
+							}
 						}
 					} catch (SQLiteException e) {
 						log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
@@ -430,7 +437,7 @@ public class ResourceManager {
 
 	public void indexingAddress(final IProgress progress, List<String> warnings, File f) {
 		if (f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)) {
-			RegionAddressRepository repository = new RegionAddressRepository();
+			RegionAddressRepositoryOdb repository = new RegionAddressRepositoryOdb();
 			progress.startTask(Messages.getMessage("indexing_address") + f.getName(), -1); //$NON-NLS-1$
 			try {
 				boolean initialized = repository.initialize(progress, f);
@@ -630,7 +637,7 @@ public class ResourceManager {
 			r.clearCache();
 		}
 		for(RegionAddressRepository r : addressMap.values()){
-			r.clearCities();
+			r.clearCache();
 		}
 		renderer.clearCache();
 		

@@ -66,10 +66,18 @@ public final class OsmandOdb {
       return addressIndex_.get(index);
     }
     
+    // required uint32 versionConfirm = 32;
+    public static final int VERSIONCONFIRM_FIELD_NUMBER = 32;
+    private boolean hasVersionConfirm;
+    private int versionConfirm_ = 0;
+    public boolean hasVersionConfirm() { return hasVersionConfirm; }
+    public int getVersionConfirm() { return versionConfirm_; }
+    
     private void initFields() {
     }
     public final boolean isInitialized() {
       if (!hasVersion) return false;
+      if (!hasVersionConfirm) return false;
       for (net.osmand.binary.OsmandOdb.OsmAndMapIndex element : getMapIndexList()) {
         if (!element.isInitialized()) return false;
       }
@@ -91,6 +99,9 @@ public final class OsmandOdb {
       for (net.osmand.binary.OsmandOdb.OsmAndAddressIndex element : getAddressIndexList()) {
         output.writeMessage(3, element);
       }
+      if (hasVersionConfirm()) {
+        output.writeUInt32(32, getVersionConfirm());
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -111,6 +122,10 @@ public final class OsmandOdb {
       for (net.osmand.binary.OsmandOdb.OsmAndAddressIndex element : getAddressIndexList()) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, element);
+      }
+      if (hasVersionConfirm()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(32, getVersionConfirm());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -293,6 +308,9 @@ public final class OsmandOdb {
           }
           result.addressIndex_.addAll(other.addressIndex_);
         }
+        if (other.hasVersionConfirm()) {
+          setVersionConfirm(other.getVersionConfirm());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -332,6 +350,10 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.OsmAndAddressIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndAddressIndex.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addAddressIndex(subBuilder.buildPartial());
+              break;
+            }
+            case 256: {
+              setVersionConfirm(input.readUInt32());
               break;
             }
           }
@@ -456,6 +478,24 @@ public final class OsmandOdb {
       }
       public Builder clearAddressIndex() {
         result.addressIndex_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // required uint32 versionConfirm = 32;
+      public boolean hasVersionConfirm() {
+        return result.hasVersionConfirm();
+      }
+      public int getVersionConfirm() {
+        return result.getVersionConfirm();
+      }
+      public Builder setVersionConfirm(int value) {
+        result.hasVersionConfirm = true;
+        result.versionConfirm_ = value;
+        return this;
+      }
+      public Builder clearVersionConfirm() {
+        result.hasVersionConfirm = false;
+        result.versionConfirm_ = 0;
         return this;
       }
       
@@ -4147,8 +4187,8 @@ public final class OsmandOdb {
     public boolean hasY() { return hasY; }
     public int getY() { return y_; }
     
-    // repeated .StreetIndex streets = 7;
-    public static final int STREETS_FIELD_NUMBER = 7;
+    // repeated .StreetIndex streets = 10;
+    public static final int STREETS_FIELD_NUMBER = 10;
     private java.util.List<net.osmand.binary.OsmandOdb.StreetIndex> streets_ =
       java.util.Collections.emptyList();
     public java.util.List<net.osmand.binary.OsmandOdb.StreetIndex> getStreetsList() {
@@ -4194,7 +4234,7 @@ public final class OsmandOdb {
         output.writeFixed32(6, getY());
       }
       for (net.osmand.binary.OsmandOdb.StreetIndex element : getStreetsList()) {
-        output.writeMessage(7, element);
+        output.writeMessage(10, element);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4231,7 +4271,7 @@ public final class OsmandOdb {
       }
       for (net.osmand.binary.OsmandOdb.StreetIndex element : getStreetsList()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, element);
+          .computeMessageSize(10, element);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4468,7 +4508,7 @@ public final class OsmandOdb {
               setY(input.readFixed32());
               break;
             }
-            case 58: {
+            case 82: {
               net.osmand.binary.OsmandOdb.StreetIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.StreetIndex.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addStreets(subBuilder.buildPartial());
@@ -4593,7 +4633,7 @@ public final class OsmandOdb {
         return this;
       }
       
-      // repeated .StreetIndex streets = 7;
+      // repeated .StreetIndex streets = 10;
       public java.util.List<net.osmand.binary.OsmandOdb.StreetIndex> getStreetsList() {
         return java.util.Collections.unmodifiableList(result.streets_);
       }
@@ -4690,6 +4730,20 @@ public final class OsmandOdb {
     public boolean hasPostcode() { return hasPostcode; }
     public java.lang.String getPostcode() { return postcode_; }
     
+    // required fixed32 x = 2;
+    public static final int X_FIELD_NUMBER = 2;
+    private boolean hasX;
+    private int x_ = 0;
+    public boolean hasX() { return hasX; }
+    public int getX() { return x_; }
+    
+    // required fixed32 y = 3;
+    public static final int Y_FIELD_NUMBER = 3;
+    private boolean hasY;
+    private int y_ = 0;
+    public boolean hasY() { return hasY; }
+    public int getY() { return y_; }
+    
     // repeated .StreetIndex streets = 5;
     public static final int STREETS_FIELD_NUMBER = 5;
     private java.util.List<net.osmand.binary.OsmandOdb.StreetIndex> streets_ =
@@ -4706,6 +4760,8 @@ public final class OsmandOdb {
     }
     public final boolean isInitialized() {
       if (!hasPostcode) return false;
+      if (!hasX) return false;
+      if (!hasY) return false;
       for (net.osmand.binary.OsmandOdb.StreetIndex element : getStreetsList()) {
         if (!element.isInitialized()) return false;
       }
@@ -4717,6 +4773,12 @@ public final class OsmandOdb {
       getSerializedSize();
       if (hasPostcode()) {
         output.writeString(1, getPostcode());
+      }
+      if (hasX()) {
+        output.writeFixed32(2, getX());
+      }
+      if (hasY()) {
+        output.writeFixed32(3, getY());
       }
       for (net.osmand.binary.OsmandOdb.StreetIndex element : getStreetsList()) {
         output.writeMessage(5, element);
@@ -4733,6 +4795,14 @@ public final class OsmandOdb {
       if (hasPostcode()) {
         size += com.google.protobuf.CodedOutputStream
           .computeStringSize(1, getPostcode());
+      }
+      if (hasX()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(2, getX());
+      }
+      if (hasY()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFixed32Size(3, getY());
       }
       for (net.osmand.binary.OsmandOdb.StreetIndex element : getStreetsList()) {
         size += com.google.protobuf.CodedOutputStream
@@ -4903,6 +4973,12 @@ public final class OsmandOdb {
         if (other.hasPostcode()) {
           setPostcode(other.getPostcode());
         }
+        if (other.hasX()) {
+          setX(other.getX());
+        }
+        if (other.hasY()) {
+          setY(other.getY());
+        }
         if (!other.streets_.isEmpty()) {
           if (result.streets_.isEmpty()) {
             result.streets_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.StreetIndex>();
@@ -4938,6 +5014,14 @@ public final class OsmandOdb {
               setPostcode(input.readString());
               break;
             }
+            case 21: {
+              setX(input.readFixed32());
+              break;
+            }
+            case 29: {
+              setY(input.readFixed32());
+              break;
+            }
             case 42: {
               net.osmand.binary.OsmandOdb.StreetIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.StreetIndex.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
@@ -4967,6 +5051,42 @@ public final class OsmandOdb {
       public Builder clearPostcode() {
         result.hasPostcode = false;
         result.postcode_ = getDefaultInstance().getPostcode();
+        return this;
+      }
+      
+      // required fixed32 x = 2;
+      public boolean hasX() {
+        return result.hasX();
+      }
+      public int getX() {
+        return result.getX();
+      }
+      public Builder setX(int value) {
+        result.hasX = true;
+        result.x_ = value;
+        return this;
+      }
+      public Builder clearX() {
+        result.hasX = false;
+        result.x_ = 0;
+        return this;
+      }
+      
+      // required fixed32 y = 3;
+      public boolean hasY() {
+        return result.hasY();
+      }
+      public int getY() {
+        return result.getY();
+      }
+      public Builder setY(int value) {
+        result.hasY = true;
+        result.y_ = value;
+        return this;
+      }
+      public Builder clearY() {
+        result.hasY = false;
+        result.y_ = 0;
         return this;
       }
       
@@ -5095,8 +5215,8 @@ public final class OsmandOdb {
     public boolean hasY() { return hasY; }
     public int getY() { return y_; }
     
-    // repeated .BuildingIndex buildings = 5;
-    public static final int BUILDINGS_FIELD_NUMBER = 5;
+    // repeated .BuildingIndex buildings = 10;
+    public static final int BUILDINGS_FIELD_NUMBER = 10;
     private java.util.List<net.osmand.binary.OsmandOdb.BuildingIndex> buildings_ =
       java.util.Collections.emptyList();
     public java.util.List<net.osmand.binary.OsmandOdb.BuildingIndex> getBuildingsList() {
@@ -5134,11 +5254,11 @@ public final class OsmandOdb {
       if (hasY()) {
         output.writeSInt32(4, getY());
       }
-      for (net.osmand.binary.OsmandOdb.BuildingIndex element : getBuildingsList()) {
-        output.writeMessage(5, element);
-      }
       if (hasId()) {
         output.writeUInt64(6, getId());
+      }
+      for (net.osmand.binary.OsmandOdb.BuildingIndex element : getBuildingsList()) {
+        output.writeMessage(10, element);
       }
       getUnknownFields().writeTo(output);
     }
@@ -5165,13 +5285,13 @@ public final class OsmandOdb {
         size += com.google.protobuf.CodedOutputStream
           .computeSInt32Size(4, getY());
       }
-      for (net.osmand.binary.OsmandOdb.BuildingIndex element : getBuildingsList()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, element);
-      }
       if (hasId()) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt64Size(6, getId());
+      }
+      for (net.osmand.binary.OsmandOdb.BuildingIndex element : getBuildingsList()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, element);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5397,14 +5517,14 @@ public final class OsmandOdb {
               setY(input.readSInt32());
               break;
             }
-            case 42: {
+            case 48: {
+              setId(input.readUInt64());
+              break;
+            }
+            case 82: {
               net.osmand.binary.OsmandOdb.BuildingIndex.Builder subBuilder = net.osmand.binary.OsmandOdb.BuildingIndex.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addBuildings(subBuilder.buildPartial());
-              break;
-            }
-            case 48: {
-              setId(input.readUInt64());
               break;
             }
           }
@@ -5508,7 +5628,7 @@ public final class OsmandOdb {
         return this;
       }
       
-      // repeated .BuildingIndex buildings = 5;
+      // repeated .BuildingIndex buildings = 10;
       public java.util.List<net.osmand.binary.OsmandOdb.BuildingIndex> getBuildingsList() {
         return java.util.Collections.unmodifiableList(result.buildings_);
       }
@@ -6136,39 +6256,41 @@ public final class OsmandOdb {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\024src/osmand_odb.proto\"p\n\017OsmAndStructur" +
-      "e\022\017\n\007version\030\001 \002(\r\022!\n\010mapIndex\030\002 \003(\0132\017.O" +
-      "smAndMapIndex\022)\n\014addressIndex\030\003 \003(\0132\023.Os" +
-      "mAndAddressIndex\"/\n\016OsmAndMapIndex\022\035\n\006le" +
-      "vels\030\001 \003(\0132\r.MapRootLevel\"\202\001\n\014MapRootLev" +
-      "el\022\017\n\007maxZoom\030\001 \002(\005\022\017\n\007minZoom\030\002 \002(\005\022\014\n\004" +
-      "left\030\003 \002(\005\022\r\n\005right\030\004 \002(\005\022\013\n\003top\030\005 \002(\005\022\016" +
-      "\n\006bottom\030\006 \002(\005\022\026\n\004root\030\007 \003(\0132\010.MapTree\"\253" +
-      "\001\n\007MapTree\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022" +
-      "\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022!\n\013stringTa",
-      "ble\030\005 \001(\0132\014.StringTable\022\016\n\006baseId\030\006 \001(\004\022" +
-      "\032\n\010subtrees\030\007 \003(\0132\010.MapTree\022\027\n\005leafs\030\010 \003" +
-      "(\0132\010.MapData\"\030\n\013StringTable\022\t\n\001s\030\001 \003(\t\"v" +
-      "\n\007MapData\022\023\n\013coordinates\030\001 \002(\014\022\r\n\005types\030" +
-      "\002 \002(\014\022\n\n\002id\030\003 \002(\022\022\020\n\010stringId\030\004 \001(\r\022\024\n\014r" +
-      "estrictions\030\005 \001(\014\022\023\n\013highwayMeta\030\006 \001(\005\"\225" +
-      "\001\n\022OsmAndAddressIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007n" +
-      "ame_en\030\002 \001(\t\022\034\n\006cities\030\005 \001(\0132\014.CitiesInd" +
-      "ex\022\"\n\tpostcodes\030\006 \001(\0132\017.PostcodesIndex\022\036" +
-      "\n\010villages\030\007 \001(\0132\014.CitiesIndex\")\n\013Cities",
-      "Index\022\032\n\006cities\030\001 \003(\0132\n.CityIndex\"3\n\016Pos" +
-      "tcodesIndex\022!\n\tpostcodes\030\001 \003(\0132\016.Postcod" +
-      "eIndex\"~\n\tCityIndex\022\021\n\tcity_type\030\001 \002(\r\022\014" +
-      "\n\004name\030\002 \002(\t\022\017\n\007name_en\030\003 \001(\t\022\n\n\002id\030\004 \001(" +
-      "\004\022\t\n\001x\030\005 \002(\007\022\t\n\001y\030\006 \002(\007\022\035\n\007streets\030\007 \003(\013" +
-      "2\014.StreetIndex\"@\n\rPostcodeIndex\022\020\n\010postc" +
-      "ode\030\001 \002(\t\022\035\n\007streets\030\005 \003(\0132\014.StreetIndex" +
-      "\"q\n\013StreetIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en" +
-      "\030\002 \001(\t\022\n\n\002id\030\006 \001(\004\022\t\n\001x\030\003 \002(\021\022\t\n\001y\030\004 \002(\021" +
-      "\022!\n\tbuildings\030\005 \003(\0132\016.BuildingIndex\"b\n\rB",
-      "uildingIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en\030\002 " +
-      "\001(\t\022\n\n\002id\030\005 \001(\004\022\020\n\010postcode\030\006 \001(\t\022\t\n\001x\030\003" +
-      " \002(\021\022\t\n\001y\030\004 \002(\021B\023\n\021net.osmand.binary"
+      "\n\024src/osmand_odb.proto\"\210\001\n\017OsmAndStructu" +
+      "re\022\017\n\007version\030\001 \002(\r\022!\n\010mapIndex\030\002 \003(\0132\017." +
+      "OsmAndMapIndex\022)\n\014addressIndex\030\003 \003(\0132\023.O" +
+      "smAndAddressIndex\022\026\n\016versionConfirm\030  \002(" +
+      "\r\"/\n\016OsmAndMapIndex\022\035\n\006levels\030\001 \003(\0132\r.Ma" +
+      "pRootLevel\"\202\001\n\014MapRootLevel\022\017\n\007maxZoom\030\001" +
+      " \002(\005\022\017\n\007minZoom\030\002 \002(\005\022\014\n\004left\030\003 \002(\005\022\r\n\005r" +
+      "ight\030\004 \002(\005\022\013\n\003top\030\005 \002(\005\022\016\n\006bottom\030\006 \002(\005\022" +
+      "\026\n\004root\030\007 \003(\0132\010.MapTree\"\253\001\n\007MapTree\022\014\n\004l" +
+      "eft\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n",
+      "\006bottom\030\004 \002(\021\022!\n\013stringTable\030\005 \001(\0132\014.Str" +
+      "ingTable\022\016\n\006baseId\030\006 \001(\004\022\032\n\010subtrees\030\007 \003" +
+      "(\0132\010.MapTree\022\027\n\005leafs\030\010 \003(\0132\010.MapData\"\030\n" +
+      "\013StringTable\022\t\n\001s\030\001 \003(\t\"v\n\007MapData\022\023\n\013co" +
+      "ordinates\030\001 \002(\014\022\r\n\005types\030\002 \002(\014\022\n\n\002id\030\003 \002" +
+      "(\022\022\020\n\010stringId\030\004 \001(\r\022\024\n\014restrictions\030\005 \001" +
+      "(\014\022\023\n\013highwayMeta\030\006 \001(\005\"\225\001\n\022OsmAndAddres" +
+      "sIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022\034\n" +
+      "\006cities\030\005 \001(\0132\014.CitiesIndex\022\"\n\tpostcodes" +
+      "\030\006 \001(\0132\017.PostcodesIndex\022\036\n\010villages\030\007 \001(",
+      "\0132\014.CitiesIndex\")\n\013CitiesIndex\022\032\n\006cities" +
+      "\030\001 \003(\0132\n.CityIndex\"3\n\016PostcodesIndex\022!\n\t" +
+      "postcodes\030\001 \003(\0132\016.PostcodeIndex\"~\n\tCityI" +
+      "ndex\022\021\n\tcity_type\030\001 \002(\r\022\014\n\004name\030\002 \002(\t\022\017\n" +
+      "\007name_en\030\003 \001(\t\022\n\n\002id\030\004 \001(\004\022\t\n\001x\030\005 \002(\007\022\t\n" +
+      "\001y\030\006 \002(\007\022\035\n\007streets\030\n \003(\0132\014.StreetIndex\"" +
+      "V\n\rPostcodeIndex\022\020\n\010postcode\030\001 \002(\t\022\t\n\001x\030" +
+      "\002 \002(\007\022\t\n\001y\030\003 \002(\007\022\035\n\007streets\030\005 \003(\0132\014.Stre" +
+      "etIndex\"q\n\013StreetIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007" +
+      "name_en\030\002 \001(\t\022\n\n\002id\030\006 \001(\004\022\t\n\001x\030\003 \002(\021\022\t\n\001",
+      "y\030\004 \002(\021\022!\n\tbuildings\030\n \003(\0132\016.BuildingInd" +
+      "ex\"b\n\rBuildingIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007nam" +
+      "e_en\030\002 \001(\t\022\n\n\002id\030\005 \001(\004\022\020\n\010postcode\030\006 \001(\t" +
+      "\022\t\n\001x\030\003 \002(\021\022\t\n\001y\030\004 \002(\021B\023\n\021net.osmand.bin" +
+      "ary"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6180,7 +6302,7 @@ public final class OsmandOdb {
           internal_static_OsmAndStructure_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndStructure_descriptor,
-              new java.lang.String[] { "Version", "MapIndex", "AddressIndex", },
+              new java.lang.String[] { "Version", "MapIndex", "AddressIndex", "VersionConfirm", },
               net.osmand.binary.OsmandOdb.OsmAndStructure.class,
               net.osmand.binary.OsmandOdb.OsmAndStructure.Builder.class);
           internal_static_OsmAndMapIndex_descriptor =
@@ -6260,7 +6382,7 @@ public final class OsmandOdb {
           internal_static_PostcodeIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PostcodeIndex_descriptor,
-              new java.lang.String[] { "Postcode", "Streets", },
+              new java.lang.String[] { "Postcode", "X", "Y", "Streets", },
               net.osmand.binary.OsmandOdb.PostcodeIndex.class,
               net.osmand.binary.OsmandOdb.PostcodeIndex.Builder.class);
           internal_static_StreetIndex_descriptor =

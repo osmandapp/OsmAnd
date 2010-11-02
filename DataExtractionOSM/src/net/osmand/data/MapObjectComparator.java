@@ -3,17 +3,15 @@ package net.osmand.data;
 import java.text.Collator;
 import java.util.Comparator;
 
-public class CityComparator implements Comparator<City>{
+public class MapObjectComparator implements Comparator<MapObject>{
 	private final boolean en;
 	Collator collator = Collator.getInstance();
-	public CityComparator(boolean en){
+	public MapObjectComparator(boolean en){
 		this.en = en;
 	}
 	
-	
-	
 	@Override
-	public int compare(City o1, City o2) {
+	public int compare(MapObject o1, MapObject o2) {
 		if(en){
 			return collator.compare(o1.getEnName(), o2.getEnName());
 		} else {

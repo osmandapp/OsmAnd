@@ -14,6 +14,9 @@ message OsmAndStructure {
    repeated OsmAndMapIndex mapIndex = 2;
    // encoded as fixed32 length delimited  
    repeated OsmAndAddressIndex addressIndex = 3;
+   
+   // last field should version again (to check consistency)
+   required uint32 versionConfirm = 32;
 } 
 
 
@@ -74,7 +77,6 @@ message MapData {
 }
 
 
-/// ADDRESS INFORMATION TEST -----
 
 message OsmAndAddressIndex {
 	
@@ -119,6 +121,8 @@ message CityIndex {
 
 message PostcodeIndex {
     required string postcode = 1;
+    required fixed32 x = 2; // x tile of 31 zoom
+	required fixed32 y = 3; // y tile of 31 zoom
     repeated StreetIndex streets = 5;
 }
 

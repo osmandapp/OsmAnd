@@ -1518,7 +1518,7 @@ public class IndexCreator {
 				break;
 			}
 		}
-		progress.startTask("Searilizing city addresses...", j + (cities.size() - j) / 100);
+		progress.startTask("Searilizing city addresses...", j + ((cities.size() - j) / 100 + 1));
 		
 		Map<String, Set<Street>> postcodes = new TreeMap<String, Set<Street>>();
 		boolean writeCities = true;
@@ -1600,7 +1600,6 @@ public class IndexCreator {
 			
 			
 			writer.endWriteMapIndex();
-			writer.close();
 		} catch (RTreeException e) {
 			throw new IllegalStateException(e);
 		}
@@ -2006,6 +2005,8 @@ public class IndexCreator {
 					addressConnection.close();
 					addressConnection = null;
 				}
+				
+				writer.close();
 				log.info("Finish writing binary file");
 			}
 
@@ -2048,15 +2049,15 @@ public class IndexCreator {
 				}
 				if(mapRAFile != null){
 					mapRAFile.close();
+					if (lastModifiedDate != null && mapFile.exists()) {
+						mapFile.setLastModified(lastModifiedDate);
+					}
 				}
 
 				if (mapConnection != null) {
 					mapConnection.commit();
 					mapConnection.close();
 					mapConnection = null;
-					if (lastModifiedDate != null && mapFile.exists()) {
-						mapFile.setLastModified(lastModifiedDate);
-					}
 					File tempDBFile = new File(workingDir, getTempMapDBFileName());
 					if(tempDBFile.exists()){
 						tempDBFile.delete();
@@ -2133,7 +2134,7 @@ public class IndexCreator {
 		 
 		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
 		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
-//		 
+		 
 		 
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/forest.osm"), new ConsoleProgressImplementation(3), null);
 		 

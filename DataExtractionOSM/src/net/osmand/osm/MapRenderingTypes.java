@@ -21,7 +21,6 @@ import net.osmand.osm.OSMSettings.OSMTagKey;
  */
 public class MapRenderingTypes {
 	
-	public static final int[] MAP_ZOOMS = null;
 	
 	// TODO Internet access bits for point, polygon
 	/** standard schema :	 
