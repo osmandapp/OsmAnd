@@ -17,7 +17,7 @@ import net.osmand.osm.OSMSettings.OSMTagKey;
 public class Street extends MapObject {
 	
 	private List<Building> buildings = new ArrayList<Building>(); 
-	private List<Way> wayNodes = new ArrayList<Way>();
+	private List<Way> wayNodes = null;
 	private final City city;
 
 	public Street(City city, String name){
@@ -52,8 +52,10 @@ public class Street extends MapObject {
 	
 	protected void calculateCenter(){
 		List<Node> nodes = new ArrayList<Node>();
-		for(Way w : wayNodes){
-			nodes.addAll(w.getNodes());
+		if (wayNodes != null) {
+			for (Way w : wayNodes) {
+				nodes.addAll(w.getNodes());
+			}
 		}
 		
 		LatLon c = MapUtils.getWeightCenterForNodes(nodes);
@@ -121,10 +123,10 @@ public class Street extends MapObject {
 			}
 			location = MapUtils.getWeightCenter(nodes);
 		}
-		if(location == null || (wayNodes.isEmpty() && buildings.isEmpty())){
+		if(location == null || ((wayNodes == null || wayNodes.isEmpty()) && buildings.isEmpty())){
 			city.unregisterStreet(name);
 		}
-		if (wayNodes.size() > 0) {
+		if (wayNodes != null && wayNodes.size() > 0) {
 			this.id = wayNodes.get(0).getId();
 		} else if(buildings.size() > 0){
 			this.id = buildings.get(0).getId();
