@@ -11,6 +11,10 @@ import java.util.List;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
+import net.osmand.data.Building;
+import net.osmand.data.City;
+import net.osmand.data.Street;
+import net.osmand.data.City.CityType;
 import net.osmand.osm.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -23,6 +27,7 @@ public class BinaryMapIndexReader {
 	private final RandomAccessFile raf;
 	private int version;
 	private List<MapRoot> mapIndexes = new ArrayList<MapRoot>();
+	private List<AddressRegion> addressIndexes = new ArrayList<AddressRegion>();
 	private CodedInputStreamRAF codedIS;
 	
 	private final static Log log = LogUtil.getLog(BinaryMapIndexReader.class);
@@ -54,6 +59,14 @@ public class BinaryMapIndexReader {
 				codedIS.popLimit(oldLimit);
 				codedIS.seek(filePointer + length);
 				break;
+			case OsmandOdb.OsmAndStructure.ADDRESSINDEX_FIELD_NUMBER:
+				length = readInt();
+				filePointer = codedIS.getTotalBytesRead();
+				oldLimit = codedIS.pushLimit(length);
+				readAddressIndex();
+				codedIS.popLimit(oldLimit);
+				codedIS.seek(filePointer + length);
+				break;
 			default:
 				skipUnknownField(t);
 				break;
@@ -68,6 +81,45 @@ public class BinaryMapIndexReader {
 			codedIS.skipRawBytes(length);
 		} else {
 			codedIS.skipField(tag);
+		}
+	}
+	
+	private void readAddressIndex() throws IOException {
+		AddressRegion region = new AddressRegion();
+		while(true){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				if(region.name != null){
+					addressIndexes.add(region);
+				}
+				return;
+			case OsmandOdb.OsmAndAddressIndex.NAME_FIELD_NUMBER :
+				region.name = codedIS.readString();
+				break;
+			case OsmandOdb.OsmAndAddressIndex.NAME_EN_FIELD_NUMBER :
+				region.enName = codedIS.readString();
+				break;
+			case OsmandOdb.OsmAndAddressIndex.CITIES_FIELD_NUMBER :
+				region.citiesOffset = codedIS.getTotalBytesRead();
+				int length = readInt();
+				codedIS.seek(region.citiesOffset + length + 4);
+				break;
+			case OsmandOdb.OsmAndAddressIndex.VILLAGES_FIELD_NUMBER :
+				region.villagesOffset = codedIS.getTotalBytesRead();
+				length = readInt();
+				codedIS.seek(region.villagesOffset + length + 4);
+				break;
+			case OsmandOdb.OsmAndAddressIndex.POSTCODES_FIELD_NUMBER :
+				region.postcodesOffset = codedIS.getTotalBytesRead();
+				length = readInt();
+				codedIS.seek(region.postcodesOffset + length + 4);
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
 		}
 	}
 	
@@ -196,6 +248,239 @@ public class BinaryMapIndexReader {
 		log.info("Search is done. Visit " + req.numberOfVisitedObjects + " objects. Read " + req.numberOfAcceptedObjects + " objects."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		log.info("Read " + req.numberOfReadSubtrees + " subtrees. Go through " + req.numberOfAcceptedSubtrees + " subtrees.");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 		return req.getSearchResults();
+	}
+	
+	
+	public List<String> getRegionNames(){
+		List<String> names = new ArrayList<String>();
+		for(AddressRegion r : addressIndexes){
+			names.add(r.name);
+		}
+		return names;
+	}
+	
+	private AddressRegion getRegionByName(String name){
+		for(AddressRegion r : addressIndexes){
+			if(r.name.equals(name)){
+				return r;
+			}
+		}
+		throw new IllegalArgumentException(name);
+	}
+	
+	public List<City> getCities(String region) throws IOException {
+		List<City> cities = new ArrayList<City>();
+		AddressRegion r = getRegionByName(region);
+		if(r.citiesOffset != -1){
+			codedIS.seek(r.citiesOffset);
+			int len = readInt();
+			int old = codedIS.pushLimit(len);
+			readCities(cities);
+			codedIS.popLimit(old);
+		}
+		return cities;
+	}
+	
+	public List<City> getVillages(String region) throws IOException {
+		List<City> cities = new ArrayList<City>();
+		AddressRegion r = getRegionByName(region);
+		if(r.villagesOffset != -1){
+			codedIS.seek(r.villagesOffset);
+			int len = readInt();
+			int old = codedIS.pushLimit(len);
+			readCities(cities);
+			codedIS.popLimit(old);
+		}
+		return cities;
+	}
+	
+	private void readCities(List<City> cities) throws IOException{
+		while(true){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return;
+			case OsmandOdb.CitiesIndex.CITIES_FIELD_NUMBER :
+				int offset = codedIS.getTotalBytesRead();
+				int length = codedIS.readRawVarint32();
+				
+				int oldLimit = codedIS.pushLimit(length);
+				cities.add(readCity(null, offset, false));
+				codedIS.popLimit(oldLimit);
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+	
+	public void preloadStreets(City c) throws IOException {
+	    // TODO check city belongs to that address repository
+		codedIS.seek(c.getFileOffset());
+		int size = codedIS.readRawVarint32();
+		int old = codedIS.pushLimit(size);
+		readCity(c, c.getFileOffset(), true);
+		codedIS.popLimit(old);
+	}
+	
+	public void preloadBuildings(Street s) throws IOException {
+	    // TODO check street belongs to that address repository
+		codedIS.seek(s.getFileOffset());
+		int size = codedIS.readRawVarint32();
+		int old = codedIS.pushLimit(size);
+		readStreet(s, true, 0, 0);
+		codedIS.popLimit(old);
+	}
+	
+	
+	
+	private City readCity(City c, int fileOffset, boolean loadStreets) throws IOException{
+		int x = 0;
+		int y = 0;
+		while(true){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				c.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
+				return c;
+			case OsmandOdb.CityIndex.CITY_TYPE_FIELD_NUMBER :
+				int type = codedIS.readUInt32();
+				if(c == null){
+					c = new City(CityType.values()[type]);
+					c.setFileOffset(fileOffset);
+				}
+				break;
+			case OsmandOdb.CityIndex.ID_FIELD_NUMBER :
+				c.setId(codedIS.readUInt64());
+				break;
+			case OsmandOdb.CityIndex.NAME_EN_FIELD_NUMBER :
+				c.setEnName(codedIS.readString());
+				break;
+			case OsmandOdb.CityIndex.NAME_FIELD_NUMBER :
+				c.setName(codedIS.readString());
+				break;
+			case OsmandOdb.CityIndex.X_FIELD_NUMBER :
+				x = codedIS.readFixed32();
+				break;
+			case OsmandOdb.CityIndex.Y_FIELD_NUMBER :
+				y = codedIS.readFixed32();
+				break;
+			case OsmandOdb.CityIndex.STREETS_FIELD_NUMBER :
+				int offset = codedIS.getTotalBytesRead();
+				int length = codedIS.readRawVarint32();
+				if(loadStreets){
+					Street s = new Street(c);
+					int oldLimit = codedIS.pushLimit(length);
+					s.setFileOffset(offset);
+					readStreet(s, false, x >> 7, y >> 7);
+					c.registerStreet(s);
+					codedIS.popLimit(oldLimit);
+				} else {
+					codedIS.skipRawBytes(length);
+				}
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+	
+	private Street readStreet(Street s, boolean loadBuildings, int city24X, int city24Y) throws IOException{
+		int x = 0;
+		int y = 0;
+		boolean loadLocation = city24X != 0 || city24Y != 0;
+		while(true){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				if(loadLocation){
+					s.setLocation(MapUtils.getLatitudeFromTile(24, y), MapUtils.getLongitudeFromTile(24, x));
+				}
+				return s;
+			case OsmandOdb.StreetIndex.ID_FIELD_NUMBER :
+				s.setId(codedIS.readUInt64());
+				break;
+			case OsmandOdb.StreetIndex.NAME_EN_FIELD_NUMBER :
+				s.setEnName(codedIS.readString());
+				break;
+			case OsmandOdb.StreetIndex.NAME_FIELD_NUMBER :
+				s.setName(codedIS.readString());
+				break;
+			case OsmandOdb.StreetIndex.X_FIELD_NUMBER :
+				int sx = codedIS.readSInt32();
+				if(loadLocation){
+					x =  sx + city24X;
+				} else {
+					x = (int) MapUtils.getTileNumberX(24, s.getLocation().getLongitude());
+				}
+				break;
+			case OsmandOdb.StreetIndex.Y_FIELD_NUMBER :
+				int sy = codedIS.readSInt32();
+				if(loadLocation){
+					y =  sy + city24Y;
+				} else {
+					y = (int) MapUtils.getTileNumberY(24, s.getLocation().getLatitude());
+				}
+				break;
+			case OsmandOdb.StreetIndex.BUILDINGS_FIELD_NUMBER :
+				int offset = codedIS.getTotalBytesRead();
+				int length = codedIS.readRawVarint32();
+				if(loadBuildings){
+					int oldLimit = codedIS.pushLimit(length);
+					Building b = readBuilding(offset, x, y);
+					s.registerBuilding(b);
+					codedIS.popLimit(oldLimit);
+				} else {
+					codedIS.skipRawBytes(length);
+				}
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+	
+	private Building readBuilding(int fileOffset, int street24X, int street24Y) throws IOException{
+		int x = 0;
+		int y = 0;
+		Building b = new Building();
+		b.setFileOffset(fileOffset);
+		while(true){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				b.setLocation(MapUtils.getLatitudeFromTile(24, y), MapUtils.getLongitudeFromTile(24, x));
+				return b;
+			case OsmandOdb.BuildingIndex.ID_FIELD_NUMBER :
+				b.setId(codedIS.readUInt64());
+				break;
+			case OsmandOdb.BuildingIndex.NAME_EN_FIELD_NUMBER :
+				b.setEnName(codedIS.readString());
+				break;
+			case OsmandOdb.BuildingIndex.NAME_FIELD_NUMBER :
+				b.setName(codedIS.readString());
+				break;
+			case OsmandOdb.BuildingIndex.X_FIELD_NUMBER :
+				x =  codedIS.readSInt32() + street24X;
+				break;
+			case OsmandOdb.BuildingIndex.Y_FIELD_NUMBER :
+				y =  codedIS.readSInt32() + street24Y;
+				break;
+			case OsmandOdb.BuildingIndex.POSTCODE_FIELD_NUMBER :
+				b.setPostcode(codedIS.readString());
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
 	}
 	
 	private void searchMapTreeBounds(int pleft, int pright, int ptop, int pbottom,
@@ -456,32 +741,11 @@ public class BinaryMapIndexReader {
 		return version;
 	}
 	
-	private static class MapRoot {
-		int minZoom = 0;
-		int maxZoom = 0;
-		int left = 0;
-		int right = 0;
-		int top = 0;
-		int bottom = 0;
-		
-		List<MapTree> trees = new ArrayList<MapTree>();
+
+	protected List<AddressRegion> getAddressIndexes() {
+		return addressIndexes;
 	}
-	
-	private static class MapTree {
-		int filePointer = 0;
-		int length = 0;
-		
-		int left = 0;
-		int right = 0;
-		int top = 0;
-		int bottom = 0;
-		
-		long baseId = 0;
-		
-		List<String> stringTable = null;
-		List<MapTree> subTrees = null;
-		
-	}
+
 	
 	public static SearchRequest buildSearchRequest(int sleft, int sright, int stop, int sbottom, int zoom){
 		SearchRequest request = new SearchRequest();
@@ -547,27 +811,74 @@ public class BinaryMapIndexReader {
 		}
 	}
 	
+	private static class MapRoot {
+		int minZoom = 0;
+		int maxZoom = 0;
+		int left = 0;
+		int right = 0;
+		int top = 0;
+		int bottom = 0;
+		
+		List<MapTree> trees = new ArrayList<MapTree>();
+	}
+	
+	private static class MapTree {
+		int filePointer = 0;
+		int length = 0;
+		
+		int left = 0;
+		int right = 0;
+		int top = 0;
+		int bottom = 0;
+		
+		long baseId = 0;
+		
+		List<String> stringTable = null;
+		List<MapTree> subTrees = null;
+		
+	}
+	
+	
+	private static class AddressRegion {
+		String name;
+		String enName;
+		
+		int postcodesOffset = -1;
+		int villagesOffset = -1;
+		int citiesOffset = -1;
+	}
+	
 	public static void main(String[] args) throws IOException {
-		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Minsk.map.pbf"), "r");
+//		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Minsk.map.pbf"), "r");
+		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Belarus.map.pbf"), "r");
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
 		System.out.println("VERSION " + reader.getVersion());
-		int sleft = MapUtils.get31TileNumberX(27.596);
-		int sright = MapUtils.get31TileNumberX(27.599);
-		int stop = MapUtils.get31TileNumberY(53.921);
-		int sbottom = MapUtils.get31TileNumberY(53.919);
-		System.out.println("SEARCH " + sleft + " " + sright + " " + stop + " " + sbottom);
-
-		for (BinaryMapDataObject obj : reader.searchMapIndex(buildSearchRequest(sleft, sright, stop, sbottom, 8))) {
-//			for(int i=0; i<obj.getTypes().length; i++){
-//				int t = obj.getTypes()[i];
-//				if((t & 3) == MapRenderingTypes.POLYGON_TYPE){
-//					System.out.println((obj.getId() >> 3) + " " + t);
-//				}
+//		int sleft = MapUtils.get31TileNumberX(27.596);
+//		int sright = MapUtils.get31TileNumberX(27.599);
+//		int stop = MapUtils.get31TileNumberY(53.921);
+//		int sbottom = MapUtils.get31TileNumberY(53.919);
+//		System.out.println("SEARCH " + sleft + " " + sright + " " + stop + " " + sbottom);
+//
+//		for (BinaryMapDataObject obj : reader.searchMapIndex(buildSearchRequest(sleft, sright, stop, sbottom, 8))) {
+//			if (obj.getName() != null) {
+//				System.out.println(" " + obj.getName());
 //			}
-			if (obj.getName() != null) {
-				System.out.println(" " + obj.getName());
+//		}
+		String reg = reader.getRegionNames().get(0);
+		long time = System.currentTimeMillis();
+		List<City> cs = reader.getCities(reg);
+		for(City c : cs){
+			reader.preloadStreets(c);
+			int buildings = 0;
+			for(Street s : c.getStreets()){
+				reader.preloadBuildings(s);
+				buildings += s.getBuildings().size();
 			}
+			System.out.println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings);
 		}
+		List<City> villages = reader.getVillages(reg);
+		System.out.println(villages.size());
+		System.out.println(System.currentTimeMillis() - time);
 	}
 	
 }

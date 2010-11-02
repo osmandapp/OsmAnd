@@ -17,6 +17,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 	protected LatLon location = null;
 	protected Long id = null;
 	protected EntityType type = null;
+	protected int fileOffset = 0;
 
 	public MapObject(){}
 	
@@ -103,6 +104,14 @@ public abstract class MapObject implements Comparable<MapObject> {
 	
 	public void doDataPreparation() {
 		
+	}
+	
+	public int getFileOffset() {
+		return fileOffset;
+	}
+	
+	public void setFileOffset(int fileOffset) {
+		this.fileOffset = fileOffset;
 	}
 	
 	@Override

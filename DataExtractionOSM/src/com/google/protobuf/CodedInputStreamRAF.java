@@ -803,7 +803,11 @@ public final class CodedInputStreamRAF {
   
   public void seek(long pointer) throws IOException{
 	  if(pointer - totalBytesRetired >= 0  && pointer - totalBytesRetired < bufferSize){
-		  skipRawBytes((int) (pointer - getTotalBytesRead()));
+		  if (pointer > currentLimit) {
+		      // Then fail.
+		      throw InvalidProtocolBufferException.truncatedMessage();
+		    }
+		  bufferPos = (int) (pointer - totalBytesRetired); 
 	  } else {
 		  totalBytesRetired = (int) pointer;
 		  bufferSizeAfterLimit = 0;

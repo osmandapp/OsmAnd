@@ -1494,7 +1494,7 @@ public class IndexCreator {
 	}
 	
 	
-	public void writeBinaryAddressIndex(BinaryMapIndexWriter writer) throws IOException, SQLException {
+	public void writeBinaryAddressIndex(BinaryMapIndexWriter writer, IProgress progress) throws IOException, SQLException {
 		writer.startWriteAddressIndex(getRegionName());
 		DataIndexReader reader = new DataIndexReader();
 		List<City> cities = reader.readCities(addressConnection);
@@ -1511,12 +1511,26 @@ public class IndexCreator {
 		});
 		PreparedStatement streetstat = reader.getStreetsBuildingPreparedStatement(addressConnection);
 		
+		int j=0;
+		for (; j < cities.size(); j++) {
+			City c = cities.get(j);
+			if (c.getType() != CityType.CITY && c.getType() != CityType.TOWN) {
+				break;
+			}
+		}
+		progress.startTask("Searilizing city addresses...", j + (cities.size() - j) / 100);
+		
 		Map<String, Set<Street>> postcodes = new TreeMap<String, Set<Street>>();
 		boolean writeCities = true;
 		// write cities and after villages
 		writer.startCityIndexes(false);
 		for (int i = 0; i < cities.size(); i++) {
 			City c = cities.get(i);
+			if(writeCities){
+				progress.progress(1);
+			} else if((cities.size() - i) % 100 == 0){
+				progress.progress(1);
+			}
 			if (writeCities && c.getType() != CityType.CITY && c.getType() != CityType.TOWN) {
 				writer.endCityIndexes(false);
 				writer.startCityIndexes(true);
@@ -1548,7 +1562,7 @@ public class IndexCreator {
 		writer.endPostcodes();
 		
 	
-		
+		progress.finishTask();
 		
 		writer.endWriteAddressIndex();
 		
@@ -1988,7 +2002,7 @@ public class IndexCreator {
 					log.info("Writing binary address data...");
 					closePreparedStatements(addressCityStat, addressStreetStat, addressStreetNodeStat, addressBuildingStat);
 					addressConnection.commit();
-					writeBinaryAddressIndex(writer);
+					writeBinaryAddressIndex(writer, progress);
 					addressConnection.close();
 					addressConnection = null;
 				}
@@ -2114,11 +2128,11 @@ public class IndexCreator {
 //		 creator.setIndexPOI(true);
 //		 creator.setIndexTransport(true);
 		 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 		 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
 //		 
 		 
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/forest.osm"), new ConsoleProgressImplementation(3), null);
