@@ -95,6 +95,9 @@ public class Street extends MapObject {
 	
 	
 	public List<Way> getWayNodes() {
+		if(wayNodes == null){
+			wayNodes = new ArrayList<Way>();
+		}
 		return wayNodes;
 	}
 	
