@@ -428,8 +428,8 @@ public class BinaryMapIndexWriter {
 	
 
 	protected StreetIndex createStreetAndBuildings(Street street, LatLon l, String postcodeFilter) throws IOException {
-		checkPeekState(CITY_INDEX_INIT, POSTCODES_INDEX_INIT);
-		boolean inCity = state.peek() == CITY_INDEX_INIT;
+		checkPeekState(CITY_INDEX_INIT, VILLAGES_INDEX_INIT, POSTCODES_INDEX_INIT);
+		boolean inCity = state.peek() == CITY_INDEX_INIT || state.peek() == VILLAGES_INDEX_INIT;
 		StreetIndex.Builder streetBuilder = OsmandOdb.StreetIndex.newBuilder();
 		streetBuilder.setName(street.getName());
 		if(checkEnNameToWrite(street)){
