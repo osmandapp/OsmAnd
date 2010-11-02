@@ -52,7 +52,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<MapOb
 		if (obj instanceof City) {
 			OsmandSettings.setLastSearchedCity(this, obj.getId());
 			if (region.getCityById(obj.getId()) == null) {
-				region.registerCity((City) obj);
+				region.addCityToPreloadedList((City) obj);
 			}
 		} else if(obj instanceof PostCode){
 			OsmandSettings.setLastSearchedPostcode(this, obj.getName());

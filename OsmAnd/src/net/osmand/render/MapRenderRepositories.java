@@ -74,34 +74,35 @@ public class MapRenderRepositories {
 	}
 	
 	
-	public boolean initializeNewResource(final IProgress progress, File file) {
+	public BinaryMapIndexReader initializeNewResource(final IProgress progress, File file) {
 		long start = System.currentTimeMillis();
 		if(files.containsKey(file.getAbsolutePath())){
 			closeConnection(files.get(file.getAbsolutePath()), file.getAbsolutePath());
 		}
 		RandomAccessFile raf = null;
+		BinaryMapIndexReader reader = null;
 		try {
 			raf = new RandomAccessFile(file, "r"); //$NON-NLS-1$
-			BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
+			reader = new BinaryMapIndexReader(raf);
 			if(reader.getVersion() != IndexConstants.BINARY_MAP_VERSION){
-				return false;
+				return null;
 			}
 			files.put(file.getAbsolutePath(), reader);
 			
 		} catch (IOException e) {
-			log.error("No connection", e); //$NON-NLS-1$
+			log.error("No connection or unsupported version", e); //$NON-NLS-1$
 			if(raf != null){
 				try {
 					raf.close();
 				} catch (IOException e1) {
 				}
 			}
-			return false;
+			return null;
 		}
 		if (log.isDebugEnabled()) {
 			log.debug("Initializing db " + file.getAbsolutePath() + " " + (System.currentTimeMillis() - start) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
-		return true;
+		return reader;
 	}
 
 	

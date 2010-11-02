@@ -14,8 +14,6 @@ import net.osmand.data.MapObject;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.osm.LatLon;
-import net.osmand.osm.Node;
-import net.osmand.osm.Way;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -179,23 +177,8 @@ public class SearchAddressActivity extends Activity {
 		int zoom = 12;
 		boolean en = OsmandSettings.usingEnglishNames(OsmandSettings.getPrefs(this));
 		if (street2 != null && street != null) {
-			region.preloadWayNodes(street2);
-			region.preloadWayNodes(street);
-			Node inters = null;
-			for(Way w : street2.getWayNodes()){
-				for(Way w2 : street.getWayNodes()){
-					for(Node n : w.getNodes()){
-						for(Node n2 : w2.getNodes()){
-							if(n.getId() == n2.getId()){
-								inters = n;
-								break;
-							}
-						}
-					}
-				}
-			}
-			if(inters != null){
-				l = inters.getLatLon();
+			l = region.findStreetIntersection(street, street2);
+			if(l != null) {
 				String cityName = postcode != null? postcode.getName() :  city.getName(en);
 				historyName = MessageFormat.format(getString(R.string.search_history_int_streets), 
 						street.getName(en), street2.getName(en), cityName); 
@@ -386,21 +369,5 @@ public class SearchAddressActivity extends Activity {
 		}
 		
 	}
-	
-	@Override
-	protected void onPause() {
-		// Do not reset settings (cause it is not so necessary)
-//		if(building == null && OsmandSettings.getLastSearchedBuilding(this).length() > 0){
-//			OsmandSettings.setLastSearchedBuilding(this, "");
-//		}
-//		if(street == null && OsmandSettings.getLastSearchedStreet(this).length() > 0){
-//			OsmandSettings.setLastSearchedStreet(this, "");
-//		}
-//		if(city == null && OsmandSettings.getLastSearchedCity(this) != -1){
-//			OsmandSettings.setLastSearchedCity(this, -1l);
-//		}
-		super.onPause();
-	}
-	
 
 }

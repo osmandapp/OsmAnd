@@ -88,6 +88,11 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeInt32(OsmandOdb.OsmAndStructure.VERSION_FIELD_NUMBER, IndexConstants.BINARY_MAP_VERSION);
 		state.push(OSMAND_STRUCTURE_INIT);
 	}
+	
+	public void finishWriting(){
+		
+	}
+	
 
 	private void preserveInt32Size() throws IOException {
 		codedOutStream.flush();
@@ -411,15 +416,18 @@ public class BinaryMapIndexWriter {
 	
 	public void writePostcode(String postcode, Collection<Street> streets) throws IOException {
 		checkPeekState(POSTCODES_INDEX_INIT);
-		LatLon loc = null;
+		
+		if(streets.isEmpty()){
+			return;
+		}
+		postcode = postcode.toUpperCase();
+		LatLon loc = streets.iterator().next().getLocation();
 		PostcodeIndex.Builder post = OsmandOdb.PostcodeIndex.newBuilder();
 		post.setPostcode(postcode);
-		
+		post.setX(MapUtils.get31TileNumberX(loc.getLongitude()));
+		post.setY(MapUtils.get31TileNumberY(loc.getLatitude()));
 
 		for(Street s : streets){
-			if(loc == null){
-				loc = s.getLocation();
-			}
 			StreetIndex streetInd = createStreetAndBuildings(s, loc, postcode);
 			post.addStreets(streetInd);
 		}
@@ -477,8 +485,8 @@ public class BinaryMapIndexWriter {
 	}
 	
 	private void checkPeekState(int... states) {
-		for(int i=0;i<states.length; i++){
-			if(states[i] == state.peek()){
+		for (int i = 0; i < states.length; i++) {
+			if (states[i] == state.peek()) {
 				return;
 			}
 		}
@@ -493,7 +501,8 @@ public class BinaryMapIndexWriter {
 	}
 	
 	public void close() throws IOException{
-		assert state.peek() == OSMAND_STRUCTURE_INIT;
+		checkPeekState(OSMAND_STRUCTURE_INIT);
+		codedOutStream.writeInt32(OsmandOdb.OsmAndStructure.VERSIONCONFIRM_FIELD_NUMBER, IndexConstants.BINARY_MAP_VERSION);
 		codedOutStream.flush();
 	}
 }

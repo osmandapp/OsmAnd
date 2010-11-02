@@ -13,6 +13,7 @@ import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.data.Building;
 import net.osmand.data.City;
+import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.data.City.CityType;
 import net.osmand.osm.MapUtils;
@@ -42,11 +43,15 @@ public class BinaryMapIndexReader {
 	}
 
 	private void init() throws IOException {
+		boolean initCorrectly = false;
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
+				if(!initCorrectly){
+					throw new IOException("Corrupted file. It should be ended as it starts with version"); //$NON-NLS-1$
+				}
 				return;
 			case OsmandOdb.OsmAndStructure.VERSION_FIELD_NUMBER :
 				version = codedIS.readUInt32();
@@ -60,12 +65,17 @@ public class BinaryMapIndexReader {
 				codedIS.seek(filePointer + length);
 				break;
 			case OsmandOdb.OsmAndStructure.ADDRESSINDEX_FIELD_NUMBER:
-				length = readInt();
-				filePointer = codedIS.getTotalBytesRead();
-				oldLimit = codedIS.pushLimit(length);
-				readAddressIndex();
+				AddressRegion region = new AddressRegion();
+				region.length = readInt();
+				region.fileOffset = codedIS.getTotalBytesRead();
+				oldLimit = codedIS.pushLimit(region.length);
+				readAddressIndex(region);
 				codedIS.popLimit(oldLimit);
-				codedIS.seek(filePointer + length);
+				codedIS.seek(region.fileOffset + region.length);
+				break;
+			case OsmandOdb.OsmAndStructure.VERSIONCONFIRM_FIELD_NUMBER :
+				int cversion = codedIS.readUInt32();
+				initCorrectly = cversion == version;
 				break;
 			default:
 				skipUnknownField(t);
@@ -84,8 +94,7 @@ public class BinaryMapIndexReader {
 		}
 	}
 	
-	private void readAddressIndex() throws IOException {
-		AddressRegion region = new AddressRegion();
+	private void readAddressIndex(AddressRegion region) throws IOException {
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -268,6 +277,34 @@ public class BinaryMapIndexReader {
 		throw new IllegalArgumentException(name);
 	}
 	
+	public List<PostCode> getPostcodes(String region) throws IOException {
+		List<PostCode> postcodes = new ArrayList<PostCode>();
+		AddressRegion r = getRegionByName(region);
+		if(r.postcodesOffset != -1){
+			codedIS.seek(r.postcodesOffset);
+			int len = readInt();
+			int old = codedIS.pushLimit(len);
+			readPostcodes(postcodes);
+			codedIS.popLimit(old);
+		}
+		return postcodes;
+	}
+	
+	public PostCode getPostcodeByName(String region, String name) throws IOException {
+		AddressRegion r = getRegionByName(region);
+		if (r.postcodesOffset != -1) {
+			codedIS.seek(r.postcodesOffset);
+			int len = readInt();
+			int old = codedIS.pushLimit(len);
+			PostCode p = findPostcode(name);
+			if (p != null) {
+				return p;
+			}
+			codedIS.popLimit(old);
+		}
+		return null;
+	}
+	
 	public List<City> getCities(String region) throws IOException {
 		List<City> cities = new ArrayList<City>();
 		AddressRegion r = getRegionByName(region);
@@ -294,6 +331,51 @@ public class BinaryMapIndexReader {
 		return cities;
 	}
 	
+	private void readPostcodes(List<PostCode> postcodes) throws IOException{
+		while(true){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return;
+			case OsmandOdb.PostcodesIndex.POSTCODES_FIELD_NUMBER :
+				int offset = codedIS.getTotalBytesRead();
+				int length = codedIS.readRawVarint32();
+				int oldLimit = codedIS.pushLimit(length);
+				postcodes.add(readPostcode(null, offset, false, null));
+				codedIS.popLimit(oldLimit);
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+	
+	private PostCode findPostcode(String name) throws IOException{
+		while(true){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return null;
+			case OsmandOdb.PostcodesIndex.POSTCODES_FIELD_NUMBER :
+				int offset = codedIS.getTotalBytesRead();
+				int length = codedIS.readRawVarint32();
+				int oldLimit = codedIS.pushLimit(length);
+				PostCode p = readPostcode(null, offset, true, name);
+				codedIS.popLimit(oldLimit);
+				if(p != null){
+					return p;
+				}
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+	
 	private void readCities(List<City> cities) throws IOException{
 		while(true){
 			int t = codedIS.readTag();
@@ -317,7 +399,7 @@ public class BinaryMapIndexReader {
 	}
 	
 	public void preloadStreets(City c) throws IOException {
-	    // TODO check city belongs to that address repository
+		checkAddressIndex(c.getFileOffset());
 		codedIS.seek(c.getFileOffset());
 		int size = codedIS.readRawVarint32();
 		int old = codedIS.pushLimit(size);
@@ -325,15 +407,87 @@ public class BinaryMapIndexReader {
 		codedIS.popLimit(old);
 	}
 	
-	public void preloadBuildings(Street s) throws IOException {
-	    // TODO check street belongs to that address repository
-		codedIS.seek(s.getFileOffset());
+	public void preloadStreets(PostCode p) throws IOException {
+		checkAddressIndex(p.getFileOffset());
+		
+		codedIS.seek(p.getFileOffset());
 		int size = codedIS.readRawVarint32();
 		int old = codedIS.pushLimit(size);
-		readStreet(s, true, 0, 0);
+		readPostcode(p, p.getFileOffset(), true, null);
 		codedIS.popLimit(old);
 	}
 	
+	private void checkAddressIndex(int offset){
+		boolean ok = false;
+		for(AddressRegion r : addressIndexes){
+			if(offset >= r.fileOffset  && offset <= (r.length + r.fileOffset)){
+				ok = true;
+				break;
+			}
+		}
+		if(!ok){
+			throw new IllegalArgumentException("Illegal offset " + offset); //$NON-NLS-1$
+		}
+	}
+	
+	public void preloadBuildings(Street s) throws IOException {
+		checkAddressIndex(s.getFileOffset());
+		codedIS.seek(s.getFileOffset());
+		int size = codedIS.readRawVarint32();
+		int old = codedIS.pushLimit(size);
+		readStreet(s, true, 0, 0, null);
+		codedIS.popLimit(old);
+	}
+	
+	
+	private PostCode readPostcode(PostCode p, int fileOffset, boolean loadStreets, String postcodeFilter) throws IOException{
+		int x = 0;
+		int y = 0;
+		while(true){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				p.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
+				p.setFileOffset(fileOffset);
+				return p;
+			case OsmandOdb.PostcodeIndex.POSTCODE_FIELD_NUMBER :
+				String name = codedIS.readString();
+				if(postcodeFilter != null && postcodeFilter.equalsIgnoreCase(name)){
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+					return null;
+				}
+				if(p == null){
+					p = new PostCode(name);
+				}
+				p.setName(name);
+				break;
+			case OsmandOdb.PostcodeIndex.X_FIELD_NUMBER :
+				x = codedIS.readFixed32();
+				break;
+			case OsmandOdb.PostcodeIndex.Y_FIELD_NUMBER :
+				y = codedIS.readFixed32();
+				break;
+			case OsmandOdb.PostcodeIndex.STREETS_FIELD_NUMBER :
+				int offset = codedIS.getTotalBytesRead();
+				int length = codedIS.readRawVarint32();
+				if(loadStreets){
+					Street s = new Street(null);
+					int oldLimit = codedIS.pushLimit(length);
+					s.setFileOffset(offset);
+					readStreet(s, true, x >> 7, y >> 7, p.getName());
+					p.registerStreet(s, false);
+					codedIS.popLimit(oldLimit);
+				} else {
+					codedIS.skipRawBytes(length);
+				}
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
 	
 	
 	private City readCity(City c, int fileOffset, boolean loadStreets) throws IOException{
@@ -375,7 +529,7 @@ public class BinaryMapIndexReader {
 					Street s = new Street(c);
 					int oldLimit = codedIS.pushLimit(length);
 					s.setFileOffset(offset);
-					readStreet(s, false, x >> 7, y >> 7);
+					readStreet(s, false, x >> 7, y >> 7, null);
 					c.registerStreet(s);
 					codedIS.popLimit(oldLimit);
 				} else {
@@ -389,7 +543,7 @@ public class BinaryMapIndexReader {
 		}
 	}
 	
-	private Street readStreet(Street s, boolean loadBuildings, int city24X, int city24Y) throws IOException{
+	private Street readStreet(Street s, boolean loadBuildings, int city24X, int city24Y, String postcodeFilter) throws IOException{
 		int x = 0;
 		int y = 0;
 		boolean loadLocation = city24X != 0 || city24Y != 0;
@@ -433,7 +587,9 @@ public class BinaryMapIndexReader {
 				if(loadBuildings){
 					int oldLimit = codedIS.pushLimit(length);
 					Building b = readBuilding(offset, x, y);
-					s.registerBuilding(b);
+					if (postcodeFilter == null || postcodeFilter.equalsIgnoreCase(b.getPostcode())) {
+						s.registerBuilding(b);
+					}
 					codedIS.popLimit(oldLimit);
 				} else {
 					codedIS.skipRawBytes(length);
@@ -843,16 +999,21 @@ public class BinaryMapIndexReader {
 		String name;
 		String enName;
 		
+		int fileOffset = 0;
+		int length = 0;
+		
 		int postcodesOffset = -1;
 		int villagesOffset = -1;
 		int citiesOffset = -1;
 	}
 	
 	public static void main(String[] args) throws IOException {
-//		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Minsk.map.pbf"), "r");
-		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Belarus.map.pbf"), "r");
+		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Minsk.map.pbf"), "r");
+//		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Belarus.map.pbf"), "r");
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
 		System.out.println("VERSION " + reader.getVersion());
+		
+		// test search
 //		int sleft = MapUtils.get31TileNumberX(27.596);
 //		int sright = MapUtils.get31TileNumberX(27.599);
 //		int stop = MapUtils.get31TileNumberY(53.921);
@@ -864,6 +1025,8 @@ public class BinaryMapIndexReader {
 //				System.out.println(" " + obj.getName());
 //			}
 //		}
+		
+		// test address index search
 		String reg = reader.getRegionNames().get(0);
 		long time = System.currentTimeMillis();
 		List<City> cs = reader.getCities(reg);
@@ -877,8 +1040,13 @@ public class BinaryMapIndexReader {
 			System.out.println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings);
 		}
 		List<City> villages = reader.getVillages(reg);
-		System.out.println(villages.size());
-		System.out.println(System.currentTimeMillis() - time);
+		List<PostCode> postcodes = reader.getPostcodes(reg);
+		for(PostCode c : postcodes){
+			reader.preloadStreets(c);
+//			System.out.println(c.getName());
+		}
+		System.out.println("Villages " + villages.size());
+		System.out.println("Time " + (System.currentTimeMillis() - time));
 	}
 	
 }
