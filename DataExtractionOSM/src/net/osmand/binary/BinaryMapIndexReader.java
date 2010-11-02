@@ -17,6 +17,7 @@ import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.data.City.CityType;
 import net.osmand.osm.MapUtils;
+import net.sf.junidecode.Junidecode;
 
 import org.apache.commons.logging.Log;
 
@@ -106,6 +107,9 @@ public class BinaryMapIndexReader {
 				return;
 			case OsmandOdb.OsmAndAddressIndex.NAME_FIELD_NUMBER :
 				region.name = codedIS.readString();
+				if(region.enName == null){
+					region.enName = Junidecode.unidecode(region.name);
+				}
 				break;
 			case OsmandOdb.OsmAndAddressIndex.NAME_EN_FIELD_NUMBER :
 				region.enName = codedIS.readString();
@@ -312,20 +316,23 @@ public class BinaryMapIndexReader {
 			codedIS.seek(r.citiesOffset);
 			int len = readInt();
 			int old = codedIS.pushLimit(len);
-			readCities(cities);
+			readCities(cities, null, false);
 			codedIS.popLimit(old);
 		}
 		return cities;
 	}
 	
 	public List<City> getVillages(String region) throws IOException {
+		return getVillages(region, null, false);
+	}
+	public List<City> getVillages(String region, String nameContains, boolean useEn) throws IOException {
 		List<City> cities = new ArrayList<City>();
 		AddressRegion r = getRegionByName(region);
 		if(r.villagesOffset != -1){
 			codedIS.seek(r.villagesOffset);
 			int len = readInt();
 			int old = codedIS.pushLimit(len);
-			readCities(cities);
+			readCities(cities, nameContains, useEn);
 			codedIS.popLimit(old);
 		}
 		return cities;
@@ -376,7 +383,7 @@ public class BinaryMapIndexReader {
 		}
 	}
 	
-	private void readCities(List<City> cities) throws IOException{
+	private void readCities(List<City> cities, String nameContains, boolean useEn) throws IOException {
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -388,7 +395,41 @@ public class BinaryMapIndexReader {
 				int length = codedIS.readRawVarint32();
 				
 				int oldLimit = codedIS.pushLimit(length);
-				cities.add(readCity(null, offset, false));
+				if(nameContains != null){
+					String name = null;
+					int read = 0;
+					int toRead = useEn ? 3 : 2;
+					int seek = codedIS.getTotalBytesRead();
+					while(read++ < toRead){
+						int ts = codedIS.readTag();
+						int tags = WireFormat.getTagFieldNumber(ts);
+						switch (tags) {
+						case OsmandOdb.CityIndex.NAME_EN_FIELD_NUMBER :
+							name = codedIS.readString();
+							break;
+						case OsmandOdb.CityIndex.NAME_FIELD_NUMBER :
+							name = codedIS.readString();
+							if(useEn){
+								name = Junidecode.unidecode(name);
+							}
+							break;
+						case OsmandOdb.CityIndex.CITY_TYPE_FIELD_NUMBER :
+							codedIS.readUInt32();
+							break;
+						}
+					}
+					if(name == null || !name.toLowerCase().contains(nameContains)){
+						codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+						codedIS.popLimit(oldLimit);
+						break;
+					}
+					codedIS.seek(seek);
+				}
+				
+				City c = readCity(null, offset, false);
+				if(c != null){
+					cities.add(c);
+				}
 				codedIS.popLimit(oldLimit);
 				break;
 			default:
@@ -453,7 +494,7 @@ public class BinaryMapIndexReader {
 				return p;
 			case OsmandOdb.PostcodeIndex.POSTCODE_FIELD_NUMBER :
 				String name = codedIS.readString();
-				if(postcodeFilter != null && postcodeFilter.equalsIgnoreCase(name)){
+				if(postcodeFilter != null && !postcodeFilter.equalsIgnoreCase(name)){
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 					return null;
 				}
@@ -515,6 +556,9 @@ public class BinaryMapIndexReader {
 				break;
 			case OsmandOdb.CityIndex.NAME_FIELD_NUMBER :
 				c.setName(codedIS.readString());
+				if(c.getEnName() == null){
+					c.setEnName(Junidecode.unidecode(c.getName()));
+				}
 				break;
 			case OsmandOdb.CityIndex.X_FIELD_NUMBER :
 				x = codedIS.readFixed32();
@@ -564,6 +608,9 @@ public class BinaryMapIndexReader {
 				break;
 			case OsmandOdb.StreetIndex.NAME_FIELD_NUMBER :
 				s.setName(codedIS.readString());
+				if(s.getEnName() == null){
+					s.setEnName(Junidecode.unidecode(s.getName()));
+				}
 				break;
 			case OsmandOdb.StreetIndex.X_FIELD_NUMBER :
 				int sx = codedIS.readSInt32();
@@ -622,6 +669,9 @@ public class BinaryMapIndexReader {
 				break;
 			case OsmandOdb.BuildingIndex.NAME_FIELD_NUMBER :
 				b.setName(codedIS.readString());
+				if(b.getEnName() == null){
+					b.setEnName(Junidecode.unidecode(b.getName()));
+				}
 				break;
 			case OsmandOdb.BuildingIndex.X_FIELD_NUMBER :
 				x =  codedIS.readSInt32() + street24X;
@@ -1008,8 +1058,8 @@ public class BinaryMapIndexReader {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Minsk.map.pbf"), "r");
-//		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Belarus.map.pbf"), "r");
+//		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Minsk.map.pbf"), "r");
+		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Belarus.map.pbf"), "r");
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
 		System.out.println("VERSION " + reader.getVersion());
 		
@@ -1030,22 +1080,25 @@ public class BinaryMapIndexReader {
 		String reg = reader.getRegionNames().get(0);
 		long time = System.currentTimeMillis();
 		List<City> cs = reader.getCities(reg);
-		for(City c : cs){
-			reader.preloadStreets(c);
-			int buildings = 0;
-			for(Street s : c.getStreets()){
-				reader.preloadBuildings(s);
-				buildings += s.getBuildings().size();
-			}
-			System.out.println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings);
-		}
-		List<City> villages = reader.getVillages(reg);
-		List<PostCode> postcodes = reader.getPostcodes(reg);
-		for(PostCode c : postcodes){
-			reader.preloadStreets(c);
-//			System.out.println(c.getName());
-		}
+//		for(City c : cs){
+//			reader.preloadStreets(c);
+//			int buildings = 0;
+//			for(Street s : c.getStreets()){
+//				reader.preloadBuildings(s);
+//				buildings += s.getBuildings().size();
+//			}
+//			System.out.println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings);
+//		}
+//		List<PostCode> postcodes = reader.getPostcodes(reg);
+//		for(PostCode c : postcodes){
+//			reader.preloadStreets(c);
+////			System.out.println(c.getName());
+//		}
+		System.out.println(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
+		List<City> villages = reader.getVillages(reg, "кост", false);
+
 		System.out.println("Villages " + villages.size());
+		System.out.println(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
 		System.out.println("Time " + (System.currentTimeMillis() - time));
 	}
 	

@@ -3,7 +3,6 @@ package net.osmand;
 import java.io.IOException;
 import java.text.Collator;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -31,9 +30,6 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	private LinkedHashMap<Long, City> cities = new LinkedHashMap<Long, City>();
 	private Map<String, PostCode> postCodes = new TreeMap<String, PostCode>(Collator.getInstance());
 	private boolean useEnglishNames = false;
-	
-	private Comparator<MapObject> comparator = new MapObjectComparator(useEnglishNames); 
-	
 	
 	public RegionAddressRepositoryBinary(BinaryMapIndexReader file, String name) {
 		this.file = file;
@@ -68,13 +64,13 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 				buildingsToFill.add(building);
 			}
 		}
-		Collections.sort(buildingsToFill, comparator);
 	}
 		
 	private void preloadBuildings(Street street) {
 		if(street.getBuildings().isEmpty()){
 			try {
 				file.preloadBuildings(street);
+				street.sortBuildings();
 			} catch (IOException e) {
 				log.error("Disk operation failed" , e); //$NON-NLS-1$
 			}
@@ -87,10 +83,13 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		assert o instanceof PostCode || o instanceof City;
 		City city = (City) (o instanceof City ? o : null); 
 		PostCode post = (PostCode) (o instanceof PostCode ? o : null);
-		preloadStreets(o);
 		name = name.toLowerCase();
 		
-		Collection<Street> streets = post == null ? city.getStreets() : post.getStreets() ; 
+		Collection<Street> streets = post == null ? city.getStreets() : post.getStreets() ;
+		if(streets.isEmpty()){
+			preloadStreets(o);
+			streets = post == null ? city.getStreets() : post.getStreets();
+		}
 		
 		if(name.length() == 0){
 			streetsToFill.addAll(streets);
@@ -107,7 +106,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 				}
 			}
 		}
-		Collections.sort(streetsToFill, comparator);
+		
 	
 		
 	}
@@ -175,13 +174,12 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 				}
 				int initialsize = citiesToFill.size();
 				
-				for(City c : file.getVillages(name)){
-					String cName = useEnglishNames ? c.getEnName() : c.getName();
-					String lowerCase = cName.toLowerCase();
-					if (lowerCase.startsWith(name)) {
+				for(City c : file.getVillages(region, name, useEnglishNames )){
+					String cName = c.getName(useEnglishNames).toLowerCase();
+					if (cName.startsWith(name)) {
 						citiesToFill.add(ind, c);
 						ind++;
-					} else if (lowerCase.contains(name)) {
+					} else if (cName.contains(name)) {
 						citiesToFill.add(c);
 					}
 				}
@@ -275,9 +273,12 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		assert o instanceof PostCode || o instanceof City;
 		City city = (City) (o instanceof City ? o : null);
 		PostCode post = (PostCode) (o instanceof PostCode ? o : null);
-		preloadStreets(o);
 		name = name.toLowerCase();
 		Collection<Street> streets = post == null ? city.getStreets() : post.getStreets();
+		if(streets.isEmpty()){
+			preloadStreets(o);
+			streets = post == null ? city.getStreets() : post.getStreets();
+		}
 		for (Street s : streets) {
 			String sName = useEnglishNames ? s.getEnName() : s.getName();
 			String lowerCase = sName.toLowerCase();
@@ -293,7 +294,6 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	@Override
 	public void setUseEnglishNames(boolean useEnglishNames) {
 		this.useEnglishNames = useEnglishNames;
-		this.comparator = new MapObjectComparator(useEnglishNames);
 	}
 
 	@Override
