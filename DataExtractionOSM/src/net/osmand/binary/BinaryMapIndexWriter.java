@@ -11,8 +11,10 @@ import java.util.Stack;
 
 import net.osmand.Algoritms;
 import net.osmand.binary.OsmandOdb.CityIndex;
+import net.osmand.binary.OsmandOdb.InteresectedStreets;
 import net.osmand.binary.OsmandOdb.PostcodeIndex;
 import net.osmand.binary.OsmandOdb.StreetIndex;
+import net.osmand.binary.OsmandOdb.StreetIntersection;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
@@ -20,6 +22,7 @@ import net.osmand.data.Street;
 import net.osmand.data.index.IndexConstants;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.osm.Node;
 import net.sf.junidecode.Junidecode;
 
 import com.google.protobuf.CodedOutputStream;
@@ -362,7 +365,7 @@ public class BinaryMapIndexWriter {
 		return !obj.getEnName().equals(Junidecode.unidecode(obj.getName()));
 	}
 	
-	public void writeCityIndex(City city, List<Street> streets) throws IOException {
+	public void writeCityIndex(City city, List<Street> streets, Map<Street, List<Node>> wayNodes) throws IOException {
 		if(city.getType() == City.CityType.CITY || city.getType() == City.CityType.TOWN){
 			checkPeekState(CITY_INDEX_INIT);
 		} else {
@@ -376,11 +379,47 @@ public class BinaryMapIndexWriter {
 		if(checkEnNameToWrite(city)){
 			cityInd.setNameEn(city.getEnName());
 		}
-		cityInd.setX(MapUtils.get31TileNumberX(city.getLocation().getLongitude()));
-		cityInd.setY(MapUtils.get31TileNumberY(city.getLocation().getLatitude()));
+		int cx = MapUtils.get31TileNumberX(city.getLocation().getLongitude());
+		int cy = MapUtils.get31TileNumberY(city.getLocation().getLatitude());
+		cityInd.setX(cx);
+		cityInd.setY(cy);
+		
+		if(wayNodes != null){
+			InteresectedStreets.Builder sbuilders = OsmandOdb.InteresectedStreets.newBuilder();
+			
+			for (int i = 0; i < streets.size(); i++) {
+				for (int j = i + 1; j < streets.size(); j++) {
+					Node intersection = null;
+					List<Node> l1 = wayNodes.get(streets.get(i));
+					List<Node> l2 = wayNodes.get(streets.get(j));
+					if (l1 != null && l2 != null) {
+						loop: for (Node n : l1) {
+							for (Node n2 : l2) {
+								if (n.getId() == n2.getId()) {
+									intersection = n;
+									break loop;
+								}
+							}
+						}
+					}
+					
+					if(intersection != null){
+						StreetIntersection.Builder builder = OsmandOdb.StreetIntersection.newBuilder();
+						builder.setIntersectedStreet1(i);
+						builder.setIntersectedStreet2(j);
+						int sx = MapUtils.get31TileNumberX(intersection.getLongitude());
+						int sy = MapUtils.get31TileNumberY(intersection.getLatitude());
+						builder.setIntersectedX((sx - cx) >> 7);
+						builder.setIntersectedY((sy - cy) >> 7);
+						sbuilders.addIntersections(builder.build());
+					}
+				}
+			}
+			cityInd.setIntersections(sbuilders.build());
+		}
 		
 		for(Street s : streets){
-			StreetIndex streetInd = createStreetAndBuildings(s, city.getLocation(), null);
+			StreetIndex streetInd = createStreetAndBuildings(s, cx, cy, null);
 			cityInd.addStreets(streetInd);
 		}
 		codedOutStream.writeMessage(OsmandOdb.CitiesIndex.CITIES_FIELD_NUMBER, cityInd.build());
@@ -424,18 +463,20 @@ public class BinaryMapIndexWriter {
 		LatLon loc = streets.iterator().next().getLocation();
 		PostcodeIndex.Builder post = OsmandOdb.PostcodeIndex.newBuilder();
 		post.setPostcode(postcode);
-		post.setX(MapUtils.get31TileNumberX(loc.getLongitude()));
-		post.setY(MapUtils.get31TileNumberY(loc.getLatitude()));
+		int cx = MapUtils.get31TileNumberX(loc.getLongitude());
+		int cy = MapUtils.get31TileNumberY(loc.getLatitude());
+		post.setX(cx);
+		post.setY(cy);
 
 		for(Street s : streets){
-			StreetIndex streetInd = createStreetAndBuildings(s, loc, postcode);
+			StreetIndex streetInd = createStreetAndBuildings(s, cx, cy, postcode);
 			post.addStreets(streetInd);
 		}
 		codedOutStream.writeMessage(OsmandOdb.PostcodesIndex.POSTCODES_FIELD_NUMBER, post.build());
 	}
 	
 
-	protected StreetIndex createStreetAndBuildings(Street street, LatLon l, String postcodeFilter) throws IOException {
+	protected StreetIndex createStreetAndBuildings(Street street, int cx, int cy, String postcodeFilter) throws IOException {
 		checkPeekState(CITY_INDEX_INIT, VILLAGES_INDEX_INIT, POSTCODES_INDEX_INIT);
 		boolean inCity = state.peek() == CITY_INDEX_INIT || state.peek() == VILLAGES_INDEX_INIT;
 		StreetIndex.Builder streetBuilder = OsmandOdb.StreetIndex.newBuilder();
@@ -446,8 +487,6 @@ public class BinaryMapIndexWriter {
 		streetBuilder.setId(street.getId());
 		
 		
-		int cx = MapUtils.get31TileNumberX(l.getLongitude());
-		int cy = MapUtils.get31TileNumberY(l.getLatitude());
 		int sx = MapUtils.get31TileNumberX(street.getLocation().getLongitude());
 		int sy = MapUtils.get31TileNumberY(street.getLocation().getLatitude());
 		streetBuilder.setX((sx - cx) >> 7);

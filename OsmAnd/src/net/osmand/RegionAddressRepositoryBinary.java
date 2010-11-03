@@ -3,7 +3,6 @@ package net.osmand;
 import java.io.IOException;
 import java.text.Collator;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +12,6 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
-import net.osmand.data.MapObjectComparator;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.osm.LatLon;
@@ -84,12 +82,8 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		City city = (City) (o instanceof City ? o : null); 
 		PostCode post = (PostCode) (o instanceof PostCode ? o : null);
 		name = name.toLowerCase();
-		
+		preloadStreets(o);
 		Collection<Street> streets = post == null ? city.getStreets() : post.getStreets() ;
-		if(streets.isEmpty()){
-			preloadStreets(o);
-			streets = post == null ? city.getStreets() : post.getStreets();
-		}
 		
 		if(name.length() == 0){
 			streetsToFill.addAll(streets);
@@ -113,6 +107,10 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 	private void preloadStreets(MapObject o) {
 		assert o instanceof PostCode || o instanceof City;
+		Collection<Street> streets = o instanceof PostCode ? ((PostCode) o).getStreets() : ((City) o).getStreets();
+		if(!streets.isEmpty()){
+			return;
+		}
 		try {
 			if(o instanceof PostCode){
 				file.preloadStreets((PostCode) o);
@@ -193,12 +191,27 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 	@Override
 	public void fillWithSuggestedStreetsIntersectStreets(City city, Street st, List<Street> streetsToFill) {
-		// TODO Auto-generated method stub
+		if(city != null){
+			preloadStreets(city);
+			try {
+				file.findIntersectedStreets(city, st, streetsToFill);
+			} catch (IOException e) {
+				log.error("Disk operation failed" , e); //$NON-NLS-1$
+			}
+		}
 	}
 	
 	@Override
 	public LatLon findStreetIntersection(Street street, Street street2) {
-		// TODO Auto-generated method stub
+		City city = street.getCity();
+		if(city != null){
+			preloadStreets(city);
+			try {
+				return file.findStreetIntersection(city, street, street2);
+			} catch (IOException e) {
+				log.error("Disk operation failed" , e); //$NON-NLS-1$
+			}
+		}
 		return null;
 	}
 	
@@ -274,11 +287,8 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		City city = (City) (o instanceof City ? o : null);
 		PostCode post = (PostCode) (o instanceof PostCode ? o : null);
 		name = name.toLowerCase();
+		preloadStreets(o);
 		Collection<Street> streets = post == null ? city.getStreets() : post.getStreets();
-		if(streets.isEmpty()){
-			preloadStreets(o);
-			streets = post == null ? city.getStreets() : post.getStreets();
-		}
 		for (Street s : streets) {
 			String sName = useEnglishNames ? s.getEnName() : s.getName();
 			String lowerCase = sName.toLowerCase();

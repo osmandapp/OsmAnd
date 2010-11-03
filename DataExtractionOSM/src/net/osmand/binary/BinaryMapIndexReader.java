@@ -16,6 +16,7 @@ import net.osmand.data.City;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.data.City.CityType;
+import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.sf.junidecode.Junidecode;
 
@@ -448,6 +449,118 @@ public class BinaryMapIndexReader {
 		codedIS.popLimit(old);
 	}
 	
+	public List<Street> findIntersectedStreets(City c, Street s, List<Street> streets) throws IOException {
+		findIntersectedStreets(c, s, null, streets);
+		return streets;
+	}
+	
+	public LatLon findStreetIntersection(City c, Street s, Street s2) throws IOException {
+		return findIntersectedStreets(c, s, s2, null);
+	}
+	
+	// do not preload streets in city
+	protected  LatLon findIntersectedStreets(City c, Street s, Street s2, List<Street> streets) throws IOException {
+		checkAddressIndex(c.getFileOffset());
+		if(s.getIndexInCity() == -1){
+			return null;
+		}
+		codedIS.seek(c.getFileOffset());
+		int size = codedIS.readRawVarint32();
+		int old = codedIS.pushLimit(size);
+		while(true){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				codedIS.popLimit(old);
+				return null;
+			case OsmandOdb.CityIndex.INTERSECTIONS_FIELD_NUMBER :
+				Street[] cityStreets = new Street[c.getStreets().size()];
+				for(Street st : c.getStreets()){
+					if(st.getIndexInCity() >= 0 && st.getIndexInCity() < cityStreets.length){
+						cityStreets[st.getIndexInCity()] = st;
+					}
+				}
+				LatLon ret = readIntersectedStreets(cityStreets, s, s2, c.getLocation(), streets);
+				codedIS.popLimit(old);
+				return ret;
+			default:
+				skipUnknownField(t);
+			}
+		}
+		
+	}
+	
+	// 2 different quires : s2 == null -> fill possible streets, s2 != null return LatLon intersection 
+	private LatLon readIntersectedStreets(Street[] cityStreets, Street s, Street s2, LatLon parent, List<Street> streets) throws IOException {
+		int size = codedIS.readRawVarint32();
+		int old = codedIS.pushLimit(size);
+		boolean e = false;
+		while(!e){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				e = true;
+				break;
+			case OsmandOdb.InteresectedStreets.INTERSECTIONS_FIELD_NUMBER:
+				int nsize = codedIS.readRawVarint32();
+				int nold = codedIS.pushLimit(nsize);
+				int st1 = -1;
+				int st2 = -1;
+				int cx = 0;
+				int cy = 0;
+				boolean end = false;
+				while (!end) {
+					int nt = codedIS.readTag();
+					int ntag = WireFormat.getTagFieldNumber(nt);
+					switch (ntag) {
+					case 0:
+						end = true;
+						break;
+					case OsmandOdb.StreetIntersection.INTERSECTEDSTREET1_FIELD_NUMBER:
+						st1 = codedIS.readUInt32();
+						break;
+					case OsmandOdb.StreetIntersection.INTERSECTEDSTREET2_FIELD_NUMBER:
+						st2 = codedIS.readUInt32();
+						break;
+					case OsmandOdb.StreetIntersection.INTERSECTEDX_FIELD_NUMBER:
+						cx = codedIS.readSInt32();
+						break;
+					case OsmandOdb.StreetIntersection.INTERSECTEDY_FIELD_NUMBER:
+						cy = codedIS.readSInt32();
+						break;
+					default:
+						skipUnknownField(nt);
+					}
+				}
+				codedIS.popLimit(nold);
+				if (s2 == null) {
+					// find all intersections
+					if (st1 == s.getIndexInCity() && st2 != -1 && st2 < cityStreets.length && cityStreets[st2] != null) {
+						streets.add(cityStreets[st2]);
+					} else if (st2 == s.getIndexInCity() && st1 != -1 && st1 < cityStreets.length && cityStreets[st1] != null) {
+						streets.add(cityStreets[st1]);
+					}
+				} else {
+					if((st1 == s.getIndexInCity() && st2 == s2.getIndexInCity() ) || 
+							(st2 == s.getIndexInCity() && st1 == s2.getIndexInCity())) {
+						int x = (int) (MapUtils.getTileNumberX(24, parent.getLongitude()) + cx);
+						int y = (int) (MapUtils.getTileNumberY(24, parent.getLatitude()) + cy);
+						codedIS.popLimit(old);
+						return new LatLon(MapUtils.getLatitudeFromTile(24, y), MapUtils.getLongitudeFromTile(24, x));
+					}
+				}
+				
+				break;
+			default:
+				skipUnknownField(t);
+			}
+		}
+		codedIS.popLimit(old);
+		return null;
+	}
+
 	public void preloadStreets(PostCode p) throws IOException {
 		checkAddressIndex(p.getFileOffset());
 		
@@ -534,6 +647,7 @@ public class BinaryMapIndexReader {
 	private City readCity(City c, int fileOffset, boolean loadStreets) throws IOException{
 		int x = 0;
 		int y = 0;
+		int streetInd = 0;
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -566,6 +680,9 @@ public class BinaryMapIndexReader {
 			case OsmandOdb.CityIndex.Y_FIELD_NUMBER :
 				y = codedIS.readFixed32();
 				break;
+			case OsmandOdb.CityIndex.INTERSECTIONS_FIELD_NUMBER :
+				codedIS.skipRawBytes(codedIS.readRawVarint32());
+				break;
 			case OsmandOdb.CityIndex.STREETS_FIELD_NUMBER :
 				int offset = codedIS.getTotalBytesRead();
 				int length = codedIS.readRawVarint32();
@@ -573,6 +690,7 @@ public class BinaryMapIndexReader {
 					Street s = new Street(c);
 					int oldLimit = codedIS.pushLimit(length);
 					s.setFileOffset(offset);
+					s.setIndexInCity(streetInd++);
 					readStreet(s, false, x >> 7, y >> 7, null);
 					c.registerStreet(s);
 					codedIS.popLimit(oldLimit);

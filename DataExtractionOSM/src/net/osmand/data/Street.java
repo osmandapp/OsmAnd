@@ -19,6 +19,7 @@ public class Street extends MapObject {
 	private List<Building> buildings = new ArrayList<Building>(); 
 	private List<Way> wayNodes = null;
 	private final City city;
+	private int indexInCity = -1;
 
 	public Street(City city, String name){
 		this.city = city;
@@ -135,6 +136,14 @@ public class Street extends MapObject {
 			this.id = buildings.get(0).getId();
 		}
 		
+	}
+	
+	public int getIndexInCity() {
+		return indexInCity;
+	}
+	
+	public void setIndexInCity(int indexInCity) {
+		this.indexInCity = indexInCity;
 	}
 
 }
