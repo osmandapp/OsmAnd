@@ -20,6 +20,7 @@ import net.osmand.data.City.CityType;
 import net.osmand.data.index.IndexConstants.IndexBuildingTable;
 import net.osmand.data.index.IndexConstants.IndexCityTable;
 import net.osmand.data.index.IndexConstants.IndexStreetTable;
+import net.osmand.osm.Node;
 
 import org.apache.commons.logging.Log;
 
@@ -68,31 +69,50 @@ public class DataIndexReader {
 				"FROM street A INNER JOIN building B ON B.street = A.id WHERE A.city = ? "); //$NON-NLS-1$
 	}
 	
-	public List<Street> readStreetsBuildings(PreparedStatement streetBuildingsStat, City city, List<Street> streets) throws SQLException{
+	public PreparedStatement getStreetsWayNodesPreparedStatement(Connection c) throws SQLException{
+		return c.prepareStatement("SELECT A.id, A.latitude, A.longitude FROM street_node A WHERE A.street = ? "); //$NON-NLS-1$
+	}
+	
+	public List<Street> readStreetsBuildings(PreparedStatement streetBuildingsStat, City city, List<Street> streets) throws SQLException {
+		return readStreetsBuildings(streetBuildingsStat, city, streets, null, null);
+	}
+
+	public List<Street> readStreetsBuildings(PreparedStatement streetBuildingsStat, City city, List<Street> streets,
+			PreparedStatement waynodesStat, Map<Street, List<Node>> streetNodes) throws SQLException {
 		Map<Long, Street> visitedStreets = new LinkedHashMap<Long, Street>();
 		streetBuildingsStat.setLong(1, city.getId());
 		ResultSet set = streetBuildingsStat.executeQuery();
-		while(set.next()){
+		while (set.next()) {
 			long streetId = set.getLong(1);
-			if(!visitedStreets.containsKey(streetId)){
+			if (!visitedStreets.containsKey(streetId)) {
 				Street street = new Street(null);
 				street.setName(set.getString(2));
 				street.setEnName(set.getString(3));
-				street.setLocation(set.getDouble(4),set.getDouble(5));
+				street.setLocation(set.getDouble(4), set.getDouble(5));
 				street.setId(streetId);
 				streets.add(street);
 				visitedStreets.put(streetId, street);
+				if (waynodesStat != null && streetNodes != null) {
+					ArrayList<Node> list = new ArrayList<Node>();
+					streetNodes.put(street, list);
+					waynodesStat.setLong(1, street.getId());
+					ResultSet rs = waynodesStat.executeQuery();
+					while (rs.next()) {
+						list.add(new Node(rs.getDouble(2), rs.getDouble(3), rs.getLong(1)));
+					}
+					rs.close();
+				}
 			}
 			Street s = visitedStreets.get(streetId);
 			Building b = new Building();
 			b.setId(set.getLong(6));
 			b.setName(set.getString(7));
 			b.setEnName(set.getString(8));
-			b.setLocation(set.getDouble(9),set.getDouble(10));
+			b.setLocation(set.getDouble(9), set.getDouble(10));
 			b.setPostcode(set.getString(11));
 			s.registerBuilding(b);
 		}
-		
+
 		set.close();
 		return streets;
 	}

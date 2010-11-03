@@ -110,8 +110,8 @@ public class IndexCreator {
 	
 	private boolean indexAddress;
 	private boolean supportOdbAddressFile;
-	private boolean normalizeStreets;
-	private boolean saveAddressWays;
+	private boolean normalizeStreets = true; // true by default
+	private boolean saveAddressWays = true; // true by default
 
 	private String regionName;
 	
@@ -1043,16 +1043,20 @@ public class IndexCreator {
 				if (e instanceof Way /* && OSMSettings.wayForCar(e.getTag(OSMTagKey.HIGHWAY)) */
 						&& e.getTag(OSMTagKey.HIGHWAY) != null && e.getTag(OSMTagKey.NAME) != null) {
 					boolean exist = false;
-					if(loadInMemory){
-						exist = addressStreetNodeLocalSet.contains(e.getId());
-					} else {
-						addressSearchStreetNodeStat.setLong(1, e.getId());
-						ResultSet rs = addressSearchStreetNodeStat.executeQuery();
-						exist = rs.next();
-						rs.close();
-						
+					
+					// if we saved address ways we could checked that we registered before 
+					if (saveAddressWays) {
+						if (loadInMemory) {
+							exist = addressStreetNodeLocalSet.contains(e.getId());
+						} else {
+							addressSearchStreetNodeStat.setLong(1, e.getId());
+							ResultSet rs = addressSearchStreetNodeStat.executeQuery();
+							exist = rs.next();
+							rs.close();
+						}
 					}
-					// check that building is not registered already 
+					
+					// check that street way is not registered already 
 					if (!exist) {
 						loadEntityData(e, false);
 						LatLon l = e.getLatLon();
@@ -1495,6 +1499,8 @@ public class IndexCreator {
 	
 	
 	public void writeBinaryAddressIndex(BinaryMapIndexWriter writer, IProgress progress) throws IOException, SQLException {
+		boolean readWayNodes = saveAddressWays;
+		
 		writer.startWriteAddressIndex(getRegionName());
 		DataIndexReader reader = new DataIndexReader();
 		List<City> cities = reader.readCities(addressConnection);
@@ -1510,6 +1516,10 @@ public class IndexCreator {
 			}
 		});
 		PreparedStatement streetstat = reader.getStreetsBuildingPreparedStatement(addressConnection);
+		PreparedStatement waynodesStat = null;
+		if(readWayNodes){
+			waynodesStat = reader.getStreetsWayNodesPreparedStatement(addressConnection);
+		}
 		
 		int j=0;
 		for (; j < cities.size(); j++) {
@@ -1522,6 +1532,7 @@ public class IndexCreator {
 		
 		Map<String, Set<Street>> postcodes = new TreeMap<String, Set<Street>>();
 		boolean writeCities = true;
+		
 		// write cities and after villages
 		writer.startCityIndexes(false);
 		for (int i = 0; i < cities.size(); i++) {
@@ -1538,8 +1549,12 @@ public class IndexCreator {
 			}
 
 			streets.clear();
-			reader.readStreetsBuildings(streetstat, c, streets);
-			writer.writeCityIndex(c, streets);
+			Map<Street, List<Node>> streetNodes = null;
+			if(readWayNodes){
+				streetNodes = new LinkedHashMap<Street, List<Node>>();
+			}
+			reader.readStreetsBuildings(streetstat, c, streets, waynodesStat, streetNodes);
+			writer.writeCityIndex(c, streets, streetNodes);
 			for (Street s : streets) {
 				for (Building b : s.getBuildings()) {
 					if (b.getPostcode() != null) {
@@ -2126,14 +2141,16 @@ public class IndexCreator {
 		 IndexCreator creator = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
 		 creator.setIndexMap(true);
 		 creator.setIndexAddress(true);
+//		 creator.setSaveAddressWays(true);
+		 creator.setNormalizeStreets(true);
 //		 creator.setIndexPOI(true);
 //		 creator.setIndexTransport(true);
 		 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 		 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
 		 
 		 
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/forest.osm"), new ConsoleProgressImplementation(3), null);

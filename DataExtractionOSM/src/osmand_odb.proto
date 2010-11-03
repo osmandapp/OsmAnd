@@ -114,7 +114,21 @@ message CityIndex {
 	required fixed32 x = 5; // x tile of 31 zoom
 	required fixed32 y = 6; // y tile of 31 zoom
 	
-	repeated StreetIndex streets = 10; 
+	optional InteresectedStreets intersections = 14;
+	
+	repeated StreetIndex streets = 18; 
+}
+
+message InteresectedStreets {
+
+    repeated StreetIntersection intersections = 5;
+}
+
+message StreetIntersection {
+	required uint32 intersectedStreet1 = 2; // index of street in parent list
+	required uint32 intersectedStreet2 = 3; // index of street in parent list
+	required sint32 intersectedX = 4; // delta encoded to parent x 24 zoom
+	required sint32 intersectedY = 5; // delta encoded to parent y 24 zoom
 }
 
 
@@ -130,12 +144,13 @@ message StreetIndex {
 	required string name = 1;
 	optional string name_en = 2;
 	
-	optional uint64 id = 6;
-	
 	required sint32 x = 3; // delta encoded to parent 24 zoom
 	required sint32 y = 4; // delta encoded to parent 24 zoom
 	
-	repeated BuildingIndex buildings = 10;
+	optional uint64 id = 6;
+	
+	
+	repeated BuildingIndex buildings = 18;
 } 
 
 message BuildingIndex {
