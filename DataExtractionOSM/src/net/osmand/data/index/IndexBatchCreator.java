@@ -282,10 +282,6 @@ public class IndexBatchCreator {
 			indexCreator.setNormalizeStreets(true);
 			indexCreator.setSaveAddressWays(writeWayNodes);
 
-			
-			String addressFileName = regionName + "_" + IndexConstants.ADDRESS_TABLE_VERSION + IndexConstants.ADDRESS_INDEX_EXT;
-			indexCreator.setAddressFileName(addressFileName);
-			indexCreator.setSupportOdbAddressFile(true);
 			String transportFileName = regionName + "_" + IndexConstants.TRANSPORT_TABLE_VERSION + IndexConstants.TRANSPORT_INDEX_EXT;
 			indexCreator.setTransportFileName(transportFileName);
 			String poiFileName = regionName + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT;
@@ -295,16 +291,13 @@ public class IndexBatchCreator {
 			try {
 				alreadyGeneratedFiles.add(f.getName());
 				indexCreator.generateIndexes(f, new ConsoleProgressImplementation(3),  null);
-				if (indexAddress) {
-					uploadIndex(new File(indexDirFiles, addressFileName), alreadyUploadedFiles);
-				}
 				if (indexPOI) {
 					uploadIndex(new File(indexDirFiles, poiFileName), alreadyUploadedFiles);
 				}
 				if (indexTransport) {
 					uploadIndex(new File(indexDirFiles, transportFileName), alreadyUploadedFiles);
 				}
-				if (indexMap) {
+				if (indexMap || indexAddress) {
 					uploadIndex(new File(indexDirFiles, mapFileName), alreadyUploadedFiles);
 				}
 			} catch (Exception e) {
@@ -363,6 +356,9 @@ public class IndexBatchCreator {
 		} else if(f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)){
 			regionName = f.getName().substring(0, f.getName().length() - IndexConstants.BINARY_MAP_INDEX_EXT.length() - 2);
 			summary = "Map index for ";
+			if(indexAddress){
+				summary = "Address, " + summary;
+			}
 		} else { 
 			return;
 		}
