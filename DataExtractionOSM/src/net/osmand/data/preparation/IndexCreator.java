@@ -27,6 +27,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
@@ -112,7 +114,6 @@ public class IndexCreator {
 	
 	private boolean normalizeStreets = true; // true by default
 	private boolean saveAddressWays = true; // true by default
-	private boolean recreateOnlyBinaryFile = false; //false;
 
 	private String regionName;
 	private String poiFileName = null;
@@ -125,6 +126,11 @@ public class IndexCreator {
 	private PreparedStatement pselectRelation;
 	private PreparedStatement pselectTags;
 
+	// constants to start process from the middle and save temporary results
+	private boolean recreateOnlyBinaryFile = true; //false;
+	private boolean deleteOsmDB = false;
+	private boolean deleteDatabaseIndexes = false;
+	
 	private Connection dbConn;
 	private File dbFile;
 	
@@ -955,8 +961,8 @@ public class IndexCreator {
 					loadEntityData(e, true);
 					TransportRoute route = indexTransportRoute((Relation) e);
 					if (route != null) {
-						DataIndexWriter.insertTransportIntoIndex(transStopsStat, transRouteStat, transRouteStopsStat, transportStopsTree, visitedStops, route,
-								pStatements, BATCH_SIZE);
+						DataIndexWriter.insertTransportIntoIndex(transRouteStat, transRouteStopsStat, transStopsStat, transportStopsTree, 
+								visitedStops, route, pStatements, BATCH_SIZE);
 					}
 				}
 			}
@@ -1637,18 +1643,19 @@ public class IndexCreator {
 			PreparedStatement selectTransportRouteData = mapConnection.prepareStatement("SELECT * FROM " + IndexTransportRoute.getTable());
 			PreparedStatement selectTransportData = mapConnection.prepareStatement("SELECT S.stop, S.direction," +
 					"  A.latitude,  A.longitude, A.name, A.name_en " +
-					"FROM transport_route_stop S INNER JOIN transport_stop A ON A.id = S.stop ORDER BY S.ord ASC WHERE S.route = ?");
+					"FROM transport_route_stop S INNER JOIN transport_stop A ON A.id = S.stop WHERE S.route = ? ORDER BY S.ord asc");
 			
 			writer.startWriteTransportIndex();
 			
 			// expect that memory would be enough
 			Map<String, Integer> stringTable = createStringTableForTransport();
-			
+			Map<Long, Long> transportRoutes = new LinkedHashMap<Long, Long>();
 			
 			ResultSet rs = selectTransportRouteData.executeQuery();
 			List<TransportStop> directStops = new ArrayList<TransportStop>();
 			List<TransportStop> reverseStops = new ArrayList<TransportStop>();
 			while(rs.next()){
+				
 				long idRoute = rs.getLong(IndexTransportRoute.ID.ordinal() + 1);
 				int dist = rs.getInt(IndexTransportRoute.DIST.ordinal() + 1);
 				String routeName = rs.getString(IndexTransportRoute.NAME.ordinal() + 1);
@@ -1662,6 +1669,8 @@ public class IndexCreator {
 				
 				selectTransportData.setLong(1, idRoute);
 				ResultSet rset = selectTransportData.executeQuery();
+				reverseStops.clear();
+				directStops.clear();
 				while (rset.next()) {
 					boolean dir = rset.getInt(2) != 0;
 					long idStop = rset.getInt(1);
@@ -1683,24 +1692,23 @@ public class IndexCreator {
 						reverseStops.add(st);
 					}
 				}
-				writer.writeTransportRoute(idRoute, routeName, routeEnName, ref, operator, type, dist, directStops, reverseStops, stringTable);
+				writer.writeTransportRoute(idRoute, routeName, routeEnName, ref, operator, type, dist, directStops, reverseStops, 
+						stringTable, transportRoutes);
 			}
 			rs.close();
 			selectTransportRouteData.close();
 			
-			
-			// TODO prepare transportStopsTree!!!
-			
 			PreparedStatement selectTransportStop = mapConnection.prepareStatement(
 					"SELECT A.id,  A.latitude,  A.longitude, A.name, A.name_en FROM transport_stop A where A.id = ?");
 			PreparedStatement selectTransportRouteStop = mapConnection.prepareStatement(
-					"SELECT S.route FROM transport_route_stop S WHERE S.stop = ? ");
+					"SELECT DISTINCT S.route FROM transport_route_stop S WHERE S.stop = ? ");
 			long rootIndex = transportStopsTree.getFileHdr().getRootIndex();
 			rtree.Node root = transportStopsTree.getReadNode(rootIndex);
 			Rect rootBounds = calcBounds(root);
 			if (rootBounds != null) {
 				writer.startTransportTreeElement(rootBounds.getMinX(), rootBounds.getMaxX(), rootBounds.getMinY(), rootBounds.getMaxY());
-				writeBinaryTransportTree(root, transportStopsTree, writer, selectTransportStop, selectTransportRouteStop);
+				writeBinaryTransportTree(root, transportStopsTree, writer, selectTransportStop, selectTransportRouteStop, 
+						transportRoutes, stringTable);
 				writer.endWriteTransportTreeElement();
 			}
 			
@@ -1713,8 +1721,10 @@ public class IndexCreator {
 	}
 	
 	public void writeBinaryTransportTree(rtree.Node parent, RTree r, BinaryMapIndexWriter writer, 
-			PreparedStatement selectTransportStop, PreparedStatement selectTransportRouteStop) throws IOException, RTreeException, SQLException {
+			PreparedStatement selectTransportStop, PreparedStatement selectTransportRouteStop, 
+			Map<Long, Long> transportRoutes, Map<String, Integer> stringTable) throws IOException, RTreeException, SQLException {
 		Element[] e = parent.getAllElements();
+		List<Long> routes = null;
 		for (int i = 0; i < parent.getTotalElements(); i++) {
 			Rect re = e[i].getRect();
 			if (e[i].getElementType() == rtree.Node.LEAF_NODE) {
@@ -1723,12 +1733,29 @@ public class IndexCreator {
 				selectTransportRouteStop.setLong(1, id);
 				ResultSet rs = selectTransportStop.executeQuery();
 				if (rs.next()) {
-					
+					int x24 = (int) MapUtils.getLongitudeFromTile(24, rs.getDouble(2));
+					int y24 = (int) MapUtils.getLongitudeFromTile(24, rs.getDouble(3));
+					String name = rs.getString(4);
+					String nameEn = rs.getString(5);
+					if(nameEn != null && nameEn.equals(Junidecode.unidecode(name))){
+						nameEn = null;
+					}
 					ResultSet rset = selectTransportRouteStop.executeQuery();
+					if(routes == null){
+						routes = new ArrayList<Long>();
+					} else {
+						routes.clear();
+					}
 					while(rset.next()){
-						
+						Long route = transportRoutes.get(rset.getLong(1));
+						if(route == null){
+							log.error("Something goes wrong with route id = " + rset.getLong(1));
+						} else {
+							routes.add(route);
+						}
 					}
 					rset.close();
+					writer.writeTransportStop(id, x24, y24, name, nameEn, stringTable, routes);
 				} else {
 					log.error("Something goes wrong with id = " + id);
 				}
@@ -1737,7 +1764,7 @@ public class IndexCreator {
 				rtree.Node ns = r.getReadNode(ptr);
 
 				writer.startTransportTreeElement(re.getMinX(), re.getMaxX(), re.getMinY(), re.getMaxY());
-				writeBinaryTransportTree(ns, r, writer, selectTransportStop, selectTransportRouteStop);
+				writeBinaryTransportTree(ns, r, writer, selectTransportStop, selectTransportRouteStop, transportRoutes, stringTable);
 				writer.endWriteTransportTreeElement();
 			}
 		}
@@ -1778,6 +1805,9 @@ public class IndexCreator {
 		return mapFile.getAbsolutePath()+".trans";
 	}
 	
+	public String getRTreeTransportStopsPackFileName(){
+		return mapFile.getAbsolutePath()+".ptrans";
+	}
 	public String getRTreeMapIndexPackFileName(){
 		return mapFile.getAbsolutePath()+".prtree";
 	}
@@ -1849,10 +1879,16 @@ public class IndexCreator {
 				File tempDBMapFile = new File(workingDir, getTempMapDBFileName());
 				mapConnection = DriverManager.getConnection("jdbc:sqlite:" + tempDBMapFile.getAbsolutePath());
 				mapConnection.setAutoCommit(false);
-				mapTree = new RTree[MAP_ZOOMS.length - 1];
 				try {
-					for (int i = 0; i < MAP_ZOOMS.length - 1; i++) {
-						mapTree[i] = new RTree(getRTreeMapIndexPackFileName() + i);
+					if (indexMap) {
+						mapTree = new RTree[MAP_ZOOMS.length - 1];
+						for (int i = 0; i < MAP_ZOOMS.length - 1; i++) {
+							mapTree[i] = new RTree(getRTreeMapIndexPackFileName() + i);
+						}
+
+					}
+					if (indexTransport) {
+						transportStopsTree = new RTree(getRTreeTransportStopsPackFileName());
 					}
 				} catch (RTreeException e) {
 					log.error("Error flushing", e);
@@ -1932,8 +1968,16 @@ public class IndexCreator {
 				if (indexMap) {
 					progress.setGeneralProgress("[90 of 100]");
 					progress.startTask("Serializing map data...", -1);
-					packingRtreeMapIndexes();
+					for (int i = 0; i < MAP_ZOOMS.length - 1; i++) {
+						mapTree[i] = packRtreeFile(mapTree[i], getRTreeMapIndexNonPackFileName() + i, getRTreeMapIndexPackFileName() + i);
+					}
 					log.info("Finish packing RTree files");
+				}
+				
+				if(indexTransport){
+					progress.setGeneralProgress("[90 of 100]");
+					progress.startTask("Serializing transport data...", -1);
+					transportStopsTree = packRtreeFile(transportStopsTree, getRTreeTransportStopsFileName(), getRTreeTransportStopsPackFileName());
 				}
 			}
 			
@@ -1964,6 +2008,7 @@ public class IndexCreator {
 					progress.startTask("Writing transport index to binary file...", -1);
 					closePreparedStatements(transRouteStat, transRouteStopsStat, transStopsStat);
 					mapConnection.commit();
+					writeBinaryTransportIndex(writer);
 				}
 				progress.finishTask();
 				writer.close();
@@ -1999,37 +2044,59 @@ public class IndexCreator {
 						poiIndexFile.setLastModified(lastModifiedDate);
 					}
 				}
+				
 				if (mapConnection != null) {
 					mapConnection.commit();
 					mapConnection.close();
 					mapConnection = null;
 					File tempDBFile = new File(workingDir, getTempMapDBFileName());
-					if(tempDBFile.exists()){
+					if(tempDBFile.exists() && deleteDatabaseIndexes){
 						// do not delete it for now
-						// tempDBFile.delete();
+						tempDBFile.delete();
 					}
 				}
 				
-				for (int i = 0; i < mapTree.length; i++) {
-					if (mapTree[i] != null) {
-						RandomAccessFile file = mapTree[i].getFileHdr().getFile();
-						file.close();
-					}
+				// delete map rtree files
+				if (mapTree != null) {
+					for (int i = 0; i < mapTree.length; i++) {
+						if (mapTree[i] != null) {
+							RandomAccessFile file = mapTree[i].getFileHdr().getFile();
+							file.close();
+						}
 
-				}
-				for (int i = 0; i < mapTree.length; i++) {
-					File f = new File(getRTreeMapIndexNonPackFileName() + i);
-					if (f.exists() && success) {
-//						f.delete();
 					}
-					f = new File(getRTreeMapIndexPackFileName() + i);
-					if (f.exists() && success) {
-//						f.delete();
+					for (int i = 0; i < mapTree.length; i++) {
+						File f = new File(getRTreeMapIndexNonPackFileName() + i);
+						if (f.exists() && deleteDatabaseIndexes) {
+							f.delete();
+						}
+						f = new File(getRTreeMapIndexPackFileName() + i);
+						if (f.exists() && deleteDatabaseIndexes) {
+							f.delete();
+						}
+					}
+				}
+				
+				// delete transport rtree files
+				if(transportStopsTree != null){
+					transportStopsTree.getFileHdr().getFile().close();
+				}
+				{
+					File f = new File(getRTreeTransportStopsFileName());
+					if (f.exists() && deleteDatabaseIndexes) {
+						f.delete();
+					}
+					f = new File(getRTreeTransportStopsPackFileName());
+					if (f.exists() && deleteDatabaseIndexes) {
+						f.delete();
 					}
 				}
 				
 				// do not delete first db connection
 				dbConn.close();
+				if(deleteOsmDB){
+					dbFile.delete();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -2055,31 +2122,29 @@ public class IndexCreator {
 		pStatements.remove(pstat);
 	}
 
-
-	private void packingRtreeMapIndexes() throws IOException {
-		assert rtree.Node.MAX < 50 : "It is better for search performance"; 
+	private RTree packRtreeFile(RTree tree, String nonPackFileName, String packFileName) throws IOException {
 		try {
-			for (int i = 0; i < MAP_ZOOMS.length-1; i++) {
-				mapTree[i].flush();
-				File file = new File(getRTreeMapIndexPackFileName() + i);
-				if (file.exists()) {
-					file.delete();
-				}
-				long rootIndex = mapTree[i].getFileHdr().getRootIndex();
-				if (!nodeIsLastSubTree(mapTree[i], rootIndex)) {
-					// there is a bug for small files in packing method
-					new Pack().packTree(mapTree[i], getRTreeMapIndexPackFileName() + i);
-					mapTree[i].getFileHdr().getFile().close();
-					file = new File(getRTreeMapIndexNonPackFileName() + i);
-					file.delete();
+			assert rtree.Node.MAX < 50 : "It is better for search performance";
+			tree.flush();
+			File file = new File(packFileName);
+			if (file.exists()) {
+				file.delete();
+			}
+			long rootIndex = tree.getFileHdr().getRootIndex();
+			if (!nodeIsLastSubTree(tree, rootIndex)) {
+				// there is a bug for small files in packing method
+				new Pack().packTree(tree, packFileName);
+				tree.getFileHdr().getFile().close();
+				file = new File(nonPackFileName);
+				file.delete();
 
-					mapTree[i] = new RTree(getRTreeMapIndexPackFileName() + i);
-				}
+				return new RTree(packFileName);
 			}
 		} catch (RTreeException e) {
 			log.error("Error flushing", e);
 			throw new IOException(e);
 		}
+		return tree;
 	}
 
 
@@ -2264,17 +2329,17 @@ public class IndexCreator {
 	 public static void main(String[] args) throws IOException, SAXException, SQLException {
 		 long time = System.currentTimeMillis();
 		 IndexCreator creator = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
-		 creator.setIndexMap(true);
-		 creator.setIndexAddress(true);
-		 creator.setSaveAddressWays(false);
-		 creator.setNormalizeStreets(true);
+//		 creator.setIndexMap(true);
+//		 creator.setIndexAddress(true);
+//		 creator.setSaveAddressWays(false);
+//		 creator.setNormalizeStreets(true);
 //		 creator.setIndexPOI(true);
-//		 creator.setIndexTransport(true);
+		 creator.setIndexTransport(true);
 		 
 		 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
-		 
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
 		 
@@ -2288,8 +2353,8 @@ public class IndexCreator {
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/den_haag.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/den_haag.osm"), new ConsoleProgressImplementation(3), null);
 		 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/netherlands.osm.bz2"), new ConsoleProgressImplementation(1), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/netherlands.osm.bz2"), new ConsoleProgressImplementation(1), null);
 		 
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/forest_complex.osm"), new ConsoleProgressImplementation(25), null);
 
