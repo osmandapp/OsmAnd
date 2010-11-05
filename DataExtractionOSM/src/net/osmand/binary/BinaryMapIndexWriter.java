@@ -33,6 +33,7 @@ import net.sf.junidecode.Junidecode;
 
 import com.google.protobuf.CodedOutputStream;
 import com.google.protobuf.WireFormat;
+import com.google.protobuf.WireFormat.FieldType;
 
 public class BinaryMapIndexWriter {
 
@@ -217,8 +218,9 @@ public class BinaryMapIndexWriter {
 		writeInt32Size();
 	}
 	
+	// debug data about size of map index
 	public static int COORDINATES_SIZE = 0;
-	public static int COORDINATES_COUNT= 0;
+	public static int COORDINATES_COUNT = 0;
 	public static int ID_SIZE = 0;
 	public static int TYPES_SIZE = 0;
 	public static int MAP_DATA_SIZE = 0;
@@ -541,6 +543,9 @@ public class BinaryMapIndexWriter {
 	}
 
 	private int registerString(Map<String, Integer> stringTable, String s) {
+		if(s == null){
+			s = "";
+		}
 		if (stringTable.containsKey(s)) {
 			return stringTable.get(s);
 		}
@@ -550,7 +555,8 @@ public class BinaryMapIndexWriter {
 	}
 	
 	public void writeTransportRoute(long idRoute, String routeName, String routeEnName, String ref, String operator, String type,
-			int dist, List<TransportStop> directStops, List<TransportStop> reverseStops, Map<String, Integer> stringTable) throws IOException {
+			int dist, List<TransportStop> directStops, List<TransportStop> reverseStops, 
+			Map<String, Integer> stringTable, Map<Long, Long> transportRoutesRegistry) throws IOException {
 		checkPeekState(TRANSPORT_INDEX_INIT);
 		TransportRoute.Builder tRoute = OsmandOdb.TransportRoute.newBuilder();
 		tRoute.setRef(ref);
@@ -589,7 +595,12 @@ public class BinaryMapIndexWriter {
 				}
 			}
 		}
-		codedOutStream.writeMessage(OsmandOdb.OsmAndTransportIndex.ROUTES_FIELD_NUMBER, tRoute.build());
+		codedOutStream.writeTag(OsmandOdb.OsmAndTransportIndex.ROUTES_FIELD_NUMBER, FieldType.MESSAGE.getWireType());
+		codedOutStream.flush();
+		if(transportRoutesRegistry != null){
+			transportRoutesRegistry.put(idRoute, raf.getFilePointer());
+		}
+		codedOutStream.writeMessageNoTag(tRoute.build());
 	}
 
 	public void startTransportTreeElement(int leftX, int rightX, int topY, int bottomY) throws IOException {
@@ -623,6 +634,37 @@ public class BinaryMapIndexWriter {
 		popState(TRANSPORT_STOPS_TREE);
 		stackBounds.pop();
 		writeInt32Size();
+	}
+	
+	public long getFilePointer() throws IOException {
+		codedOutStream.flush();
+		return raf.getFilePointer();
+	}
+	
+	public void writeTransportStop(long id, int x24, int y24, String name, String nameEn, 
+			Map<String, Integer> stringTable, List<Long> routes) throws IOException {
+		checkPeekState(TRANSPORT_STOPS_TREE);
+
+		Bounds bounds = stackBounds.peek();
+		if (stackBaseIds.peek() == -1) {
+			stackBaseIds.pop();
+			stackBaseIds.push(id);
+		}
+		codedOutStream.flush();
+		long fp = raf.getFilePointer();
+		OsmandOdb.TransportStop.Builder ts = OsmandOdb.TransportStop.newBuilder();
+		ts.setName(registerString(stringTable, name));
+		if(nameEn != null){
+			ts.setNameEn(registerString(stringTable, nameEn));
+		}
+		ts.setDx(x24 - bounds.leftX);
+		ts.setDy(y24 - bounds.topY);
+		ts.setId(id -stackBaseIds.peek());
+		for(Long i : routes){
+			ts.addRoutes((int)(fp - i));
+		}
+		
+		codedOutStream.writeMessage(OsmandOdb.TransportStopsTree.LEAFS_FIELD_NUMBER, ts.build());
 	}
 	
 	
@@ -669,6 +711,8 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeInt32(OsmandOdb.OsmAndStructure.VERSIONCONFIRM_FIELD_NUMBER, IndexConstants.BINARY_MAP_VERSION);
 		codedOutStream.flush();
 	}
+
+
 
 
 }

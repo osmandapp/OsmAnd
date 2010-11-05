@@ -192,14 +192,15 @@ message TransportRouteStop {
 
 message TransportStop {
    required sint64 id = 1; // delta encoded to parent base id
-   required sint32 dx = 2; // delta encoded to parent (24 zoom)
-   required sint32 dy = 3; // delta encoded to parent (24 zoom)
+   required sint32 dx = 2; // delta encoded to parent (24 zoom) to left
+   required sint32 dy = 3; // delta encoded to parent (24 zoom) to top
    
    required uint32 name = 6; // index in message table
    optional uint32 name_en = 7; // index in message table
    
    repeated uint32 routes = 16; // -shift to transport route containing that stop 
-   								// (TransportStop.Message.start - routes[i] = TransportRoute.Message.start) 
+   								// TransportStop.Message.start - routes[i] = TransportRoute.Message.start - sizeof(TransportRoute.Message.length)
+   								// message is started when body is started 
  
 }
 
