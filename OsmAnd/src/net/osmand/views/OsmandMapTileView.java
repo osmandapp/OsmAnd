@@ -612,6 +612,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			return;
 		}
 		if (request.zoom != getZoom()) {
+			refreshMap();
 			return;
 		}
 		float w = getCenterPointX();
