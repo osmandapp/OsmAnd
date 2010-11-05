@@ -51,7 +51,7 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 	private List<OpenStreetBug> objects = new ArrayList<OpenStreetBug>();
 	private Paint pointClosedUI;
 	private Paint pointOpenedUI;
-	private Pattern patternToParse = Pattern.compile("putAJAXMarker\\((\\d*), ((\\d|\\.)*), ((\\d|\\.)*), '([^']*)', (\\d)\\);"); //$NON-NLS-1$
+	private Pattern patternToParse = Pattern.compile("putAJAXMarker\\((\\d*), (-?(?:\\d|\\.)+), (-?(?:\\d|\\.)+), '([^']*)', (\\d)\\);"); //$NON-NLS-1$
 //	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm aaa", Locale.US); //$NON-NLS-1$
 	
 	private double cTopLatitude;
@@ -286,6 +286,7 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 		b.append("&l=").append(leftLongitude); //$NON-NLS-1$
 		b.append("&r=").append(rightLongitude); //$NON-NLS-1$
 		try {
+			log.info("Loading bugs " + b.toString()); //$NON-NLS-1$
 			URL url = new URL(b.toString());
 			URLConnection connection = url.openConnection();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -296,9 +297,9 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 					OpenStreetBug bug = new OpenStreetBug();
 					bug.setId(Long.parseLong(matcher.group(1)));
 					bug.setLongitude(Double.parseDouble(matcher.group(2)));
-					bug.setLatitude(Double.parseDouble(matcher.group(4)));
-					bug.setName(matcher.group(6).replace("<hr />", "\n")); //$NON-NLS-1$ //$NON-NLS-2$
-					bug.setOpened(matcher.group(7).equals("0")); //$NON-NLS-1$
+					bug.setLatitude(Double.parseDouble(matcher.group(3)));
+					bug.setName(matcher.group(4).replace("<hr />", "\n")); //$NON-NLS-1$ //$NON-NLS-2$
+					bug.setOpened(matcher.group(5).equals("0")); //$NON-NLS-1$
 					bugs.add(bug);
 				}
 			}
