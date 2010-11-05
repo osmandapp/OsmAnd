@@ -134,7 +134,7 @@ public class DataIndexWriter {
 	}
 	
 	
-	private static void writeRouteStops(PreparedStatement prepRouteStops, PreparedStatement prepStops, Map<PreparedStatement, Integer> count,
+	private static void writeRouteStops(RTree transportStopsTree, PreparedStatement prepRouteStops, PreparedStatement prepStops, Map<PreparedStatement, Integer> count,
 			Set<Long> writtenStops, TransportRoute r, List<TransportStop> stops, boolean direction) throws SQLException {
 		int i = 0;
 		for(TransportStop s : stops){
@@ -145,7 +145,16 @@ public class DataIndexWriter {
 				prepStops.setDouble(IndexTransportStop.LONGITUDE.ordinal() + 1, s.getLocation().getLongitude());
 				prepStops.setString(IndexTransportStop.NAME.ordinal() + 1, s.getName());
 				prepStops.setString(IndexTransportStop.NAME_EN.ordinal() + 1, s.getEnName());
+				int x = (int) MapUtils.getTileNumberX(24, s.getLocation().getLongitude());
+				int y = (int) MapUtils.getTileNumberX(24, s.getLocation().getLatitude());
 				addBatch(count, prepStops);
+				try {
+					transportStopsTree.insert(new LeafElement(new Rect(x, y, x, y), s.getId()));
+				} catch (RTreeInsertException e) {
+					throw new IllegalArgumentException(e);
+				} catch (IllegalValueException e) {
+					throw new IllegalArgumentException(e);
+				}
 				writtenStops.add(s.getId());
 			}
 			assert IndexTransportRouteStop.values().length == 4;
@@ -159,7 +168,8 @@ public class DataIndexWriter {
 	
 	
 	public static void insertTransportIntoIndex(PreparedStatement prepRoute, PreparedStatement prepRouteStops,
-			PreparedStatement prepStops, Set<Long> writtenStops, TransportRoute route, Map<PreparedStatement, Integer> statements,
+			PreparedStatement prepStops, RTree transportStopsTree, 
+			Set<Long> writtenStops, TransportRoute route, Map<PreparedStatement, Integer> statements,
 			int batchSize) throws SQLException {
 		assert IndexTransportRoute.values().length == 7;
 		prepRoute.setLong(IndexTransportRoute.ID.ordinal() + 1, route.getId());
@@ -171,8 +181,8 @@ public class DataIndexWriter {
 		prepRoute.setInt(IndexTransportRoute.DIST.ordinal() + 1, route.getAvgBothDistance());
 		addBatch(statements, prepRoute);
 		
-		writeRouteStops(prepRouteStops, prepStops, statements, writtenStops, route, route.getForwardStops(), true);
-		writeRouteStops(prepRouteStops, prepStops, statements, writtenStops, route, route.getBackwardStops(), false);
+		writeRouteStops(transportStopsTree, prepRouteStops, prepStops, statements, writtenStops, route, route.getForwardStops(), true);
+		writeRouteStops(transportStopsTree, prepRouteStops, prepStops, statements, writtenStops, route, route.getBackwardStops(), false);
 		
 	}
 	
@@ -268,8 +278,6 @@ public class DataIndexWriter {
 			mapBinaryStat.setInt(IndexBinaryMapRenderObject.HIGHWAY.ordinal() + 1, highwayAttributes);
 			mapBinaryStat.setString(IndexBinaryMapRenderObject.NAME.ordinal() + 1, name);
 			addBatch(statements, mapBinaryStat);
-		
-			
 			try {
 				mapTree.insert(new LeafElement(new Rect(minX, minY, maxX, maxY), id));
 			} catch (RTreeInsertException e1) {

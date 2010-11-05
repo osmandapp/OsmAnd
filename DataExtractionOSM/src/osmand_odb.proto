@@ -14,9 +14,18 @@ message OsmAndStructure {
    repeated OsmAndMapIndex mapIndex = 2;
    // encoded as fixed32 length delimited  
    repeated OsmAndAddressIndex addressIndex = 3;
+    // encoded as fixed32 length delimited  
+   repeated OsmAndTransportIndex transportIndex = 4;
    
    // last field should version again (to check consistency)
    required uint32 versionConfirm = 32;
+}
+
+/** 
+  String table, contains the common strings in each block.
+ */
+message StringTable {
+   repeated string s = 1;
 } 
 
 
@@ -51,16 +60,9 @@ message MapTree {
    repeated MapTree subtrees = 7;
    
    repeated MapData leafs = 8;
-   
 }
 
-// These messages could be read directly
-/** 
-  String table, contains the common strings in each block.
- */
-message StringTable {
-   repeated string s = 1;
-}
+
 
 
 /// Simple messages
@@ -76,7 +78,7 @@ message MapData {
   optional int32 highwayMeta = 6; 
 }
 
-
+/// Address messages
 
 message OsmAndAddressIndex {
 	
@@ -120,7 +122,6 @@ message CityIndex {
 }
 
 message InteresectedStreets {
-
     repeated StreetIntersection intersections = 5;
 }
 
@@ -162,4 +163,68 @@ message BuildingIndex {
 	required sint32 x = 3; // delta encoded to street 24 zoom
 	required sint32 y = 4; // delta encoded to street 24 zoom
 	
+}
+
+// transport messages
+
+message TransportRoute {
+   required uint64 id = 1;
+   
+   optional uint32 type = 3; // reference in string table
+   optional uint32 operator = 4; // reference in string table
+   optional string ref = 5;
+   optional uint32 name = 6; // reference in string table
+   optional uint32 name_en = 7; // reference in string table
+   optional uint32 distance = 8; // distance in meters
+   
+   repeated TransportRouteStop directStops = 15;
+   repeated TransportRouteStop reverseStops = 16; 
+}
+
+message TransportRouteStop {
+   required sint64 id = 1; // delta encoded to previous stop (first stop is delta to 0)
+   required sint32 dx = 2; // delta encoded to previous stop (24 zoom)
+   required sint32 dy = 3; // delta encoded to previous stop (24 zoom)
+   
+   required uint32 name = 6; // index in message table
+   optional uint32 name_en = 7; // index in message table
+}
+
+message TransportStop {
+   required sint64 id = 1; // delta encoded to parent base id
+   required sint32 dx = 2; // delta encoded to parent (24 zoom)
+   required sint32 dy = 3; // delta encoded to parent (24 zoom)
+   
+   required uint32 name = 6; // index in message table
+   optional uint32 name_en = 7; // index in message table
+   
+   repeated uint32 routes = 16; // -shift to transport route containing that stop 
+   								// (TransportStop.Message.start - routes[i] = TransportRoute.Message.start) 
+ 
+}
+
+message TransportStopsTree {
+   required sint32 left = 1; // delta encoded (24 zoom)
+   required sint32 right = 2; // delta encoded (24 zoom)
+   required sint32 top = 3; // delta encoded (24 zoom)
+   required sint32 bottom = 4; // delta encoded (24 zoom)
+   
+   // encoded as fixed32 length delimited
+   repeated TransportStopsTree subtrees = 7;
+   
+   repeated TransportStop leafs = 8;
+   
+   // written as last
+   optional uint64 baseId = 16;
+}
+			
+message OsmAndTransportIndex {
+	
+	repeated TransportRoute routes = 3; // routes 
+
+	// encoded as fixed32 length delimited
+	optional TransportStopsTree stops = 6;
+	
+	
+	required StringTable stringTable = 9;
 }

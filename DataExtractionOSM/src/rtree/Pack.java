@@ -81,6 +81,8 @@ public class Pack
       return 2;
     }
   }
+  
+  public final int BUFFER_SIZE = 8192;
   private int packTree(Element[] elmts, RTree rtree, String newFile)
   {
     try{
@@ -112,10 +114,11 @@ public class Pack
       //overwrite the old rtree file with the temp file
       FileInputStream fis=new FileInputStream(tmpPckFile);
       FileOutputStream fos=new FileOutputStream(fo);
-      int i=fis.available();
-      byte b[]=new byte[i];
-      while((i=fis.read(b))!=-1)
-        fos.write(b);
+      byte b[]=new byte[BUFFER_SIZE];
+      int i;
+      while((i=fis.read(b))!=-1){
+        fos.write(b, 0, i);
+      }
       fos.close();
       fis.close();
       rFile.close();

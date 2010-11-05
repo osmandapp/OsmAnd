@@ -282,8 +282,6 @@ public class IndexBatchCreator {
 			indexCreator.setNormalizeStreets(true);
 			indexCreator.setSaveAddressWays(writeWayNodes);
 
-			String transportFileName = regionName + "_" + IndexConstants.TRANSPORT_TABLE_VERSION + IndexConstants.TRANSPORT_INDEX_EXT;
-			indexCreator.setTransportFileName(transportFileName);
 			String poiFileName = regionName + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT;
 			indexCreator.setPoiFileName(poiFileName);
 			String mapFileName = regionName + "_" + IndexConstants.BINARY_MAP_VERSION + IndexConstants.BINARY_MAP_INDEX_EXT;
@@ -294,10 +292,7 @@ public class IndexBatchCreator {
 				if (indexPOI) {
 					uploadIndex(new File(indexDirFiles, poiFileName), alreadyUploadedFiles);
 				}
-				if (indexTransport) {
-					uploadIndex(new File(indexDirFiles, transportFileName), alreadyUploadedFiles);
-				}
-				if (indexMap || indexAddress) {
+				if (indexMap || indexAddress || indexTransport) {
 					uploadIndex(new File(indexDirFiles, mapFileName), alreadyUploadedFiles);
 				}
 			} catch (Exception e) {
@@ -355,10 +350,21 @@ public class IndexBatchCreator {
 			summary = "Transport index for ";
 		} else if(f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)){
 			regionName = f.getName().substring(0, f.getName().length() - IndexConstants.BINARY_MAP_INDEX_EXT.length() - 2);
-			summary = "Map index for ";
-			if(indexAddress){
-				summary = "Address, " + summary;
+			summary = " index for ";
+			boolean fir = true;
+			if (indexAddress) {
+				summary = "Address" + (fir ? "" : ", ") + summary;
+				fir = false;
 			}
+			if (indexTransport) {
+				summary = "Transport" + (fir ? "" : ", ") + summary;
+				fir = false;
+			}
+			if (indexMap) {
+				summary = "Map" + (fir ? "" : ", ") + summary;
+				fir = false;
+			}
+			
 		} else { 
 			return;
 		}
