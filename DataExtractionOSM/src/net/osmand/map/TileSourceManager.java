@@ -333,6 +333,12 @@ public class TileSourceManager {
 					+ tileType + urlAppend;
 			
 		}
+		
+		@Override
+		public boolean couldBeDownloadedFromInternet() {
+			return true;
+		}
+		
 	}
 
 	
