@@ -5,20 +5,26 @@ import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 
 import net.osmand.Algoritms;
 import net.osmand.binary.OsmandOdb.CityIndex;
 import net.osmand.binary.OsmandOdb.InteresectedStreets;
+import net.osmand.binary.OsmandOdb.OsmAndTransportIndex;
 import net.osmand.binary.OsmandOdb.PostcodeIndex;
 import net.osmand.binary.OsmandOdb.StreetIndex;
 import net.osmand.binary.OsmandOdb.StreetIntersection;
+import net.osmand.binary.OsmandOdb.TransportRoute;
+import net.osmand.binary.OsmandOdb.TransportRouteStop;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
+import net.osmand.data.TransportStop;
 import net.osmand.data.index.IndexConstants;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -68,6 +74,9 @@ public class BinaryMapIndexWriter {
 	private final static int CITY_INDEX_INIT = 6;
 	private final static int POSTCODES_INDEX_INIT = 7;
 	private final static int VILLAGES_INDEX_INIT = 8;
+	
+	private final static int TRANSPORT_INDEX_INIT = 9;
+	private final static int TRANSPORT_STOPS_TREE = 10;
 
 	public BinaryMapIndexWriter(final RandomAccessFile raf) throws IOException{
 		this.raf = raf;
@@ -386,24 +395,26 @@ public class BinaryMapIndexWriter {
 		
 		if(wayNodes != null){
 			InteresectedStreets.Builder sbuilders = OsmandOdb.InteresectedStreets.newBuilder();
-			
+			Map<Long, Set<Integer>> reverseMap = new LinkedHashMap<Long, Set<Integer>>();
 			for (int i = 0; i < streets.size(); i++) {
-				for (int j = i + 1; j < streets.size(); j++) {
-					Node intersection = null;
-					List<Node> l1 = wayNodes.get(streets.get(i));
-					List<Node> l2 = wayNodes.get(streets.get(j));
-					if (l1 != null && l2 != null) {
-						loop: for (Node n : l1) {
-							for (Node n2 : l2) {
-								if (n.getId() == n2.getId()) {
-									intersection = n;
-									break loop;
-								}
-							}
-						}
+				streets.get(i).setIndexInCity(i);
+				for (Node n : wayNodes.get(streets.get(i))) {
+					if(!reverseMap.containsKey(n.getId())){
+						reverseMap.put(n.getId(), new LinkedHashSet<Integer>(3));
 					}
-					
-					if(intersection != null){
+					reverseMap.get(n.getId()).add(i);
+				}
+			}
+			Set<Integer> checkedStreets = new LinkedHashSet<Integer>();
+			for (int i = 0; i < streets.size(); i++) {
+				Street s1 = streets.get(i);
+				checkedStreets.clear();
+				for(Node intersection : wayNodes.get(s1)){
+					for(Integer j : reverseMap.get(intersection.getId())){
+						if(i >= j || checkedStreets.contains(j)){
+							continue;
+						}
+						checkedStreets.add(j);
 						StreetIntersection.Builder builder = OsmandOdb.StreetIntersection.newBuilder();
 						builder.setIntersectedStreet1(i);
 						builder.setIntersectedStreet2(j);
@@ -515,6 +526,120 @@ public class BinaryMapIndexWriter {
 		return streetBuilder.build();
 	}
 	
+	public void startWriteTransportIndex() throws IOException {
+		pushState(TRANSPORT_INDEX_INIT, OSMAND_STRUCTURE_INIT);
+		codedOutStream.writeTag(OsmandOdb.OsmAndStructure.TRANSPORTINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+		stackBounds.push(new Bounds(0, 0, 0, 0)); // for transport stops tree
+		preserveInt32Size();
+	}
+	
+	public void endWriteTransportIndex() throws IOException {
+		popState(TRANSPORT_INDEX_INIT);
+		int len = writeInt32Size();
+		stackBounds.pop();
+		System.out.println("TRANSPORT INDEX SIZE : " + len);
+	}
+
+	private int registerString(Map<String, Integer> stringTable, String s) {
+		if (stringTable.containsKey(s)) {
+			return stringTable.get(s);
+		}
+		int size = stringTable.size();
+		stringTable.put(s, size);
+		return size;
+	}
+	
+	public void writeTransportRoute(long idRoute, String routeName, String routeEnName, String ref, String operator, String type,
+			int dist, List<TransportStop> directStops, List<TransportStop> reverseStops, Map<String, Integer> stringTable) throws IOException {
+		checkPeekState(TRANSPORT_INDEX_INIT);
+		TransportRoute.Builder tRoute = OsmandOdb.TransportRoute.newBuilder();
+		tRoute.setRef(ref);
+		tRoute.setOperator(registerString(stringTable, operator));
+		tRoute.setType(registerString(stringTable, type));
+		tRoute.setId(idRoute);
+		tRoute.setName(registerString(stringTable, routeName));
+		tRoute.setDistance(dist);
+		
+		if(routeEnName != null){
+			tRoute.setNameEn(registerString(stringTable, routeEnName));
+		}
+		for (int i = 0; i < 2; i++) {
+			List<TransportStop> stops = i == 0 ? directStops : reverseStops;
+			long id = 0;
+			int x24 = 0;
+			int y24 = 0;
+			for (TransportStop st : stops) {
+				TransportRouteStop.Builder tStop = OsmandOdb.TransportRouteStop.newBuilder();
+				tStop.setId(st.getId() - id);
+				id = st.getId();
+				int x = (int) MapUtils.getTileNumberX(24, st.getLocation().getLongitude());
+				int y = (int) MapUtils.getTileNumberY(24, st.getLocation().getLatitude());
+				tStop.setDx(x - x24);
+				tStop.setDy(y - y24);
+				x24 = x;
+				y24 = y;
+				tStop.setName(registerString(stringTable, st.getName()));
+				if (st.getEnName() != null) {
+					tStop.setNameEn(registerString(stringTable, st.getEnName()));
+				}
+				if (i == 0) {
+					tRoute.addDirectStops(tStop.build());
+				} else {
+					tRoute.addReverseStops(tStop.build());
+				}
+			}
+		}
+		codedOutStream.writeMessage(OsmandOdb.OsmAndTransportIndex.ROUTES_FIELD_NUMBER, tRoute.build());
+	}
+
+	public void startTransportTreeElement(int leftX, int rightX, int topY, int bottomY) throws IOException {
+		checkPeekState(TRANSPORT_STOPS_TREE, TRANSPORT_INDEX_INIT);
+		if(state.peek() == TRANSPORT_STOPS_TREE){
+			codedOutStream.writeTag(OsmandOdb.TransportStopsTree.SUBTREES_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+		} else {
+			codedOutStream.writeTag(OsmandOdb.OsmAndTransportIndex.STOPS_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+		}
+		state.push(TRANSPORT_STOPS_TREE);
+		preserveInt32Size();
+		
+		
+		Bounds bounds = stackBounds.peek();
+		
+		codedOutStream.writeSInt32(OsmandOdb.TransportStopsTree.LEFT_FIELD_NUMBER, leftX - bounds.leftX);
+		codedOutStream.writeSInt32(OsmandOdb.TransportStopsTree.RIGHT_FIELD_NUMBER, rightX - bounds.rightX);
+		codedOutStream.writeSInt32(OsmandOdb.TransportStopsTree.TOP_FIELD_NUMBER, topY - bounds.topY);
+		codedOutStream.writeSInt32(OsmandOdb.TransportStopsTree.BOTTOM_FIELD_NUMBER, bottomY - bounds.bottomY);
+		stackBounds.push(new Bounds(leftX, rightX, topY, bottomY));
+		stackBaseIds.push(-1L);
+		
+		
+	}
+
+	public void endWriteTransportTreeElement() throws IOException {
+		Long baseId = stackBaseIds.pop();
+		if(baseId >= 0){
+			codedOutStream.writeUInt64(OsmandOdb.TransportStopsTree.BASEID_FIELD_NUMBER, baseId);
+		}
+		popState(TRANSPORT_STOPS_TREE);
+		stackBounds.pop();
+		writeInt32Size();
+	}
+	
+	
+	public void writeTransportStringTable(Map<String, Integer> stringTable) throws IOException {
+		checkPeekState(TRANSPORT_INDEX_INIT);
+		// expect linked hash map
+		int i = 0;
+		OsmandOdb.StringTable.Builder st = OsmandOdb.StringTable.newBuilder();
+		for(String s : stringTable.keySet()){
+			if(stringTable.get(s) != i++){
+				throw new IllegalStateException();
+			}
+			st.addS(s);
+		}
+		codedOutStream.writeMessage(OsmAndTransportIndex.STRINGTABLE_FIELD_NUMBER, st.build());
+	}
+	
 	 
 	private void pushState(int push, int peek){
 		if(state.peek() != peek){
@@ -544,4 +669,6 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeInt32(OsmandOdb.OsmAndStructure.VERSIONCONFIRM_FIELD_NUMBER, IndexConstants.BINARY_MAP_VERSION);
 		codedOutStream.flush();
 	}
+
+
 }

@@ -112,10 +112,9 @@ public class IndexCreator {
 	
 	private boolean normalizeStreets = true; // true by default
 	private boolean saveAddressWays = true; // true by default
+	private boolean recreateOnlyBinaryFile = false; //false;
 
 	private String regionName;
-	
-	private String transportFileName = null;
 	private String poiFileName = null;
 	private String mapFileName = null;
 	private Long lastModifiedDate = null;
@@ -136,23 +135,23 @@ public class IndexCreator {
 	private PreparedStatement poiPreparedStatement;
 	
 	
-	Set<Long> visitedStops = new HashSet<Long>();
-	private File transportIndexFile;
-	private Connection transportConnection;
-	private PreparedStatement transRouteStat;
-	private PreparedStatement transRouteStopsStat;
-	private PreparedStatement transStopsStat;
-	
 	private File mapFile;
 	private RandomAccessFile mapRAFile;
 	private Connection mapConnection;
 
+	private PreparedStatement mapBinaryStat;
+	
 	private PreparedStatement addressCityStat;
 	private PreparedStatement addressStreetStat;
 	private PreparedStatement addressBuildingStat;
 	private PreparedStatement addressStreetNodeStat;
 
-	private PreparedStatement mapBinaryStat;
+	
+	private Set<Long> visitedStops = new HashSet<Long>();
+	private PreparedStatement transRouteStat;
+	private PreparedStatement transRouteStopsStat;
+	private PreparedStatement transStopsStat;
+	private RTree transportStopsTree; 
 
 	
 	private RTree[] mapTree = null;
@@ -473,10 +472,6 @@ public class IndexCreator {
 		this.poiFileName = poiFileName;
 	}
 	
-	public void setTransportFileName(String transportFileName) {
-		this.transportFileName = transportFileName;
-	}
-	
 	public void setNodesDBFile(File file){
 		dbFile = file;
 	}
@@ -493,13 +488,6 @@ public class IndexCreator {
 	
 	public String getTempMapDBFileName(){
 		return getMapFileName() + ".tmp";
-	}
-	
-	public String getTransportFileName() {
-		if(transportFileName == null){
-			return IndexConstants.TRANSPORT_INDEX_DIR + getRegionName() + IndexConstants.TRANSPORT_INDEX_EXT;
-		}
-		return transportFileName;
 	}
 	
 	public Long getLastModifiedDate() {
@@ -967,7 +955,7 @@ public class IndexCreator {
 					loadEntityData(e, true);
 					TransportRoute route = indexTransportRoute((Relation) e);
 					if (route != null) {
-						DataIndexWriter.insertTransportIntoIndex(transRouteStat, transRouteStopsStat, transStopsStat, visitedStops, route,
+						DataIndexWriter.insertTransportIntoIndex(transStopsStat, transRouteStat, transRouteStopsStat, transportStopsTree, visitedStops, route,
 								pStatements, BATCH_SIZE);
 					}
 				}
@@ -1493,7 +1481,7 @@ public class IndexCreator {
 			waynodesStat = reader.getStreetsWayNodesPreparedStatement(mapConnection);
 		}
 		
-		int j=0;
+		int j = 0;
 		for (; j < cities.size(); j++) {
 			City c = cities.get(j);
 			if (c.getType() != CityType.CITY && c.getType() != CityType.TOWN) {
@@ -1621,6 +1609,141 @@ public class IndexCreator {
 		}
 	}
 	
+	private int registerString(Map<String, Integer> stringTable, String s) {
+		if (stringTable.containsKey(s)) {
+			return stringTable.get(s);
+		}
+		int size = stringTable.size();
+		stringTable.put(s, size);
+		return size;
+	}
+	
+	private Map<String, Integer> createStringTableForTransport(){
+		Map<String, Integer> stringTable = new LinkedHashMap<String, Integer>();
+		registerString(stringTable, "bus");
+		registerString(stringTable, "trolleybus");
+		registerString(stringTable, "subway");
+		registerString(stringTable, "tram");
+		registerString(stringTable, "share_taxi");
+		registerString(stringTable, "taxi");
+		registerString(stringTable, "train");
+		registerString(stringTable, "ferry");
+		return stringTable;
+	}
+	
+	public void writeBinaryTransportIndex(BinaryMapIndexWriter writer) throws IOException, SQLException {
+		try {
+			visitedStops = null; // allow gc to collect it
+			PreparedStatement selectTransportRouteData = mapConnection.prepareStatement("SELECT * FROM " + IndexTransportRoute.getTable());
+			PreparedStatement selectTransportData = mapConnection.prepareStatement("SELECT S.stop, S.direction," +
+					"  A.latitude,  A.longitude, A.name, A.name_en " +
+					"FROM transport_route_stop S INNER JOIN transport_stop A ON A.id = S.stop ORDER BY S.ord ASC WHERE S.route = ?");
+			
+			writer.startWriteTransportIndex();
+			
+			// expect that memory would be enough
+			Map<String, Integer> stringTable = createStringTableForTransport();
+			
+			
+			ResultSet rs = selectTransportRouteData.executeQuery();
+			List<TransportStop> directStops = new ArrayList<TransportStop>();
+			List<TransportStop> reverseStops = new ArrayList<TransportStop>();
+			while(rs.next()){
+				long idRoute = rs.getLong(IndexTransportRoute.ID.ordinal() + 1);
+				int dist = rs.getInt(IndexTransportRoute.DIST.ordinal() + 1);
+				String routeName = rs.getString(IndexTransportRoute.NAME.ordinal() + 1);
+				String routeEnName = rs.getString(IndexTransportRoute.NAME_EN.ordinal() + 1);
+				if(routeEnName != null && routeEnName.equals(Junidecode.unidecode(routeName))){
+					routeEnName = null;
+				}
+				String ref = rs.getString(IndexTransportRoute.REF.ordinal() + 1);
+				String operator = rs.getString(IndexTransportRoute.OPERATOR.ordinal() + 1);
+				String type = rs.getString(IndexTransportRoute.TYPE.ordinal() + 1);
+				
+				selectTransportData.setLong(1, idRoute);
+				ResultSet rset = selectTransportData.executeQuery();
+				while (rset.next()) {
+					boolean dir = rset.getInt(2) != 0;
+					long idStop = rset.getInt(1);
+					String stopName = rset.getString(5);
+					String stopEnName = rset.getString(6);
+					if (stopEnName != null && stopEnName.equals(Junidecode.unidecode(stopName))) {
+						stopEnName = null;
+					}
+					TransportStop st = new TransportStop();
+					st.setId(idStop);
+					st.setName(stopName);
+					st.setLocation(rset.getDouble(3), rset.getDouble(4));
+					if (stopEnName != null) {
+						st.setEnName(stopEnName);
+					}
+					if(dir){
+						directStops.add(st);
+					} else {
+						reverseStops.add(st);
+					}
+				}
+				writer.writeTransportRoute(idRoute, routeName, routeEnName, ref, operator, type, dist, directStops, reverseStops, stringTable);
+			}
+			rs.close();
+			selectTransportRouteData.close();
+			
+			
+			// TODO prepare transportStopsTree!!!
+			
+			PreparedStatement selectTransportStop = mapConnection.prepareStatement(
+					"SELECT A.id,  A.latitude,  A.longitude, A.name, A.name_en FROM transport_stop A where A.id = ?");
+			PreparedStatement selectTransportRouteStop = mapConnection.prepareStatement(
+					"SELECT S.route FROM transport_route_stop S WHERE S.stop = ? ");
+			long rootIndex = transportStopsTree.getFileHdr().getRootIndex();
+			rtree.Node root = transportStopsTree.getReadNode(rootIndex);
+			Rect rootBounds = calcBounds(root);
+			if (rootBounds != null) {
+				writer.startTransportTreeElement(rootBounds.getMinX(), rootBounds.getMaxX(), rootBounds.getMinY(), rootBounds.getMaxY());
+				writeBinaryTransportTree(root, transportStopsTree, writer, selectTransportStop, selectTransportRouteStop);
+				writer.endWriteTransportTreeElement();
+			}
+			
+			writer.writeTransportStringTable(stringTable);
+
+			writer.endWriteTransportIndex();
+		} catch (RTreeException e) {
+			throw new IllegalStateException(e);
+		}
+	}
+	
+	public void writeBinaryTransportTree(rtree.Node parent, RTree r, BinaryMapIndexWriter writer, 
+			PreparedStatement selectTransportStop, PreparedStatement selectTransportRouteStop) throws IOException, RTreeException, SQLException {
+		Element[] e = parent.getAllElements();
+		for (int i = 0; i < parent.getTotalElements(); i++) {
+			Rect re = e[i].getRect();
+			if (e[i].getElementType() == rtree.Node.LEAF_NODE) {
+				long id = ((LeafElement) e[i]).getPtr();
+				selectTransportStop.setLong(1, id);
+				selectTransportRouteStop.setLong(1, id);
+				ResultSet rs = selectTransportStop.executeQuery();
+				if (rs.next()) {
+					
+					ResultSet rset = selectTransportRouteStop.executeQuery();
+					while(rset.next()){
+						
+					}
+					rset.close();
+				} else {
+					log.error("Something goes wrong with id = " + id);
+				}
+			} else {
+				long ptr = ((NonLeafElement) e[i]).getPtr();
+				rtree.Node ns = r.getReadNode(ptr);
+
+				writer.startTransportTreeElement(re.getMinX(), re.getMaxX(), re.getMinY(), re.getMaxY());
+				writeBinaryTransportTree(ns, r, writer, selectTransportStop, selectTransportRouteStop);
+				writer.endWriteTransportTreeElement();
+			}
+		}
+	}
+
+	
 	
 	public Rect calcBounds(rtree.Node n) {
 		Rect r = null;
@@ -1650,6 +1773,9 @@ public class IndexCreator {
 	
 	public String getRTreeMapIndexNonPackFileName(){
 		return mapFile.getAbsolutePath()+".rtree";
+	}
+	public String getRTreeTransportStopsFileName(){
+		return mapFile.getAbsolutePath()+".trans";
 	}
 	
 	public String getRTreeMapIndexPackFileName(){
@@ -1683,6 +1809,7 @@ public class IndexCreator {
 			normalizeSuffixes = DataExtractionSettings.getSettings().getSuffixesToNormalizeStreets();
 		}
 		
+		boolean success = false;
 		// Main generation method
 		try {
 			//////////////////////////////////////////////////////////////////////////
@@ -1716,84 +1843,102 @@ public class IndexCreator {
 			pselectRelation = dbConn.prepareStatement("select * from relations where id = ? order by ord");
 			pselectTags = dbConn.prepareStatement("select key, value from tags where id = ? and type = ?");
 			
-			// 2. Create index connections and index structure 
-			createDatabaseIndexesStructure();
-			
-			// 3. Processing all entries
-			// 3.1 write all cities
-
-			if (indexAddress) {
-				progress.setGeneralProgress("[40 of 100]");
-				progress.startTask("Indexing cities...", allNodes);
-				if (!loadFromPath) {
-					allNodes = iterateOverEntities(progress, EntityType.NODE, allNodes, STEP_CITY_NODES);
+			// do not create temp map file and rtree files
+			if (recreateOnlyBinaryFile) {
+				mapFile = new File(workingDir, getMapFileName());
+				File tempDBMapFile = new File(workingDir, getTempMapDBFileName());
+				mapConnection = DriverManager.getConnection("jdbc:sqlite:" + tempDBMapFile.getAbsolutePath());
+				mapConnection.setAutoCommit(false);
+				mapTree = new RTree[MAP_ZOOMS.length - 1];
+				try {
+					for (int i = 0; i < MAP_ZOOMS.length - 1; i++) {
+						mapTree[i] = new RTree(getRTreeMapIndexPackFileName() + i);
+					}
+				} catch (RTreeException e) {
+					log.error("Error flushing", e);
+					throw new IOException(e);
 				}
+			} else {
 
-				for (City c : cities.values()) {
-					DataIndexWriter.writeCity(addressCityStat, pStatements, c, BATCH_SIZE);
-				}
-				// commit to put all cities
-				if (pStatements.get(addressCityStat) > 0) {
-					addressCityStat.executeBatch();
-					pStatements.put(addressCityStat, 0);
-					mapConnection.commit();
-				}
+				// 2. Create index connections and index structure
+				createDatabaseIndexesStructure();
 
-			}
+				// 3. Processing all entries
+				// 3.1 write all cities
 
-			// 3.2 index address relations
-			if (indexAddress || indexMap) {
-				progress.setGeneralProgress("[40 of 100]");
-				progress.startTask("Preindexing address and map ways...", allRelations);
-				allRelations = iterateOverEntities(progress, EntityType.RELATION, allRelations, STEP_ADDRESS_RELATIONS_AND_MULTYPOLYGONS);
-				// commit to put all cities
 				if (indexAddress) {
+					progress.setGeneralProgress("[40 of 100]");
+					progress.startTask("Indexing cities...", allNodes);
+					if (!loadFromPath) {
+						allNodes = iterateOverEntities(progress, EntityType.NODE, allNodes, STEP_CITY_NODES);
+					}
+
+					for (City c : cities.values()) {
+						DataIndexWriter.writeCity(addressCityStat, pStatements, c, BATCH_SIZE);
+					}
+					// commit to put all cities
+					if (pStatements.get(addressCityStat) > 0) {
+						addressCityStat.executeBatch();
+						pStatements.put(addressCityStat, 0);
+						mapConnection.commit();
+					}
+
+				}
+
+				// 3.2 index address relations
+				if (indexAddress || indexMap) {
+					progress.setGeneralProgress("[40 of 100]");
+					progress.startTask("Preindexing address and map ways...", allRelations);
+					allRelations = iterateOverEntities(progress, EntityType.RELATION, allRelations,
+							STEP_ADDRESS_RELATIONS_AND_MULTYPOLYGONS);
+					// commit to put all cities
+					if (indexAddress) {
+						if (pStatements.get(addressBuildingStat) > 0) {
+							addressBuildingStat.executeBatch();
+							pStatements.put(addressBuildingStat, 0);
+						}
+						if (pStatements.get(addressStreetNodeStat) > 0) {
+							addressStreetNodeStat.executeBatch();
+							pStatements.put(addressStreetNodeStat, 0);
+						}
+						mapConnection.commit();
+					}
+				}
+
+				// 3.3 MAIN iterate over all entities
+				progress.setGeneralProgress("[50 of 100]");
+				progress.startTask("Processing osm nodes...", allNodes);
+				iterateOverEntities(progress, EntityType.NODE, allNodes, STEP_MAIN);
+				progress.setGeneralProgress("[70 of 100]");
+				progress.startTask("Processing osm ways...", allWays);
+				iterateOverEntities(progress, EntityType.WAY, allWays, STEP_MAIN);
+				progress.setGeneralProgress("[85 of 100]");
+				progress.startTask("Processing osm relations...", allRelations);
+				iterateOverEntities(progress, EntityType.RELATION, allRelations, STEP_MAIN);
+
+				// 3.4 update all postal codes from relations
+				if (indexAddress && !postalCodeRelations.isEmpty()) {
+					progress.setGeneralProgress("[90 of 100]");
+					progress.startTask("Registering postcodes...", -1);
 					if (pStatements.get(addressBuildingStat) > 0) {
 						addressBuildingStat.executeBatch();
 						pStatements.put(addressBuildingStat, 0);
+						mapConnection.commit();
 					}
-					if (pStatements.get(addressStreetNodeStat) > 0) {
-						addressStreetNodeStat.executeBatch();
-						pStatements.put(addressStreetNodeStat, 0);
-					}
-					mapConnection.commit();
+					processingPostcodes();
 				}
-			}
 
-			// 3.3 MAIN iterate over all entities
-			progress.setGeneralProgress("[50 of 100]");
-			progress.startTask("Processing osm nodes...", allNodes);
-			iterateOverEntities(progress, EntityType.NODE, allNodes, STEP_MAIN);
-			progress.setGeneralProgress("[70 of 100]");
-			progress.startTask("Processing osm nodes...", allWays);
-			iterateOverEntities(progress, EntityType.WAY, allWays, STEP_MAIN);
-			progress.setGeneralProgress("[85 of 100]");
-			progress.startTask("Processing osm nodes...", allRelations);
-			iterateOverEntities(progress, EntityType.RELATION, allRelations, STEP_MAIN);
-			
-
-			// 3.4 update all postal codes from relations
-			if (indexAddress && !postalCodeRelations.isEmpty()) {
-				progress.setGeneralProgress("[90 of 100]");
-				progress.startTask("Registering postcodes...", -1);
-				if (pStatements.get(addressBuildingStat) > 0) {
-					addressBuildingStat.executeBatch();
-					pStatements.put(addressBuildingStat, 0);
-					mapConnection.commit();
+				// 4. packing map rtree indexes
+				if (indexMap) {
+					progress.setGeneralProgress("[90 of 100]");
+					progress.startTask("Serializing map data...", -1);
+					packingRtreeMapIndexes();
+					log.info("Finish packing RTree files");
 				}
-				processingPostcodes();
-			}
-			
-			// 4. packing map rtree indexes
-			if (indexMap) {
-				progress.setGeneralProgress("[90 of 100]");
-				progress.startTask("Serializing map data...", -1);
-				packingRtreeMapIndexes();
-				log.info("Finish packing RTree files");
 			}
 			
 			// 5. Writing binary file
-			if(indexMap || indexAddress){
+			if(indexMap || indexAddress || indexTransport){
 				if(mapFile.exists()){
 					mapFile.delete();
 				}
@@ -1814,10 +1959,17 @@ public class IndexCreator {
 					mapConnection.commit();
 					writeBinaryAddressIndex(writer, progress);
 				}
+				if(indexTransport){
+					progress.setGeneralProgress("[95 of 100]");
+					progress.startTask("Writing transport index to binary file...", -1);
+					closePreparedStatements(transRouteStat, transRouteStopsStat, transStopsStat);
+					mapConnection.commit();
+				}
 				progress.finishTask();
 				writer.close();
 				log.info("Finish writing binary file");
 			}
+			success = true;
 		} finally {
 			try {
 				if (pselectNode != null) {
@@ -1847,21 +1999,6 @@ public class IndexCreator {
 						poiIndexFile.setLastModified(lastModifiedDate);
 					}
 				}
-				if (transportConnection != null) {
-					transportConnection.commit();
-					transportConnection.close();
-					transportConnection = null;
-					if (lastModifiedDate != null) {
-						transportIndexFile.setLastModified(lastModifiedDate);
-					}
-				}
-				if (mapRAFile != null) {
-					mapRAFile.close();
-					if (lastModifiedDate != null && mapFile.exists()) {
-						mapFile.setLastModified(lastModifiedDate);
-					}
-				}
-
 				if (mapConnection != null) {
 					mapConnection.commit();
 					mapConnection.close();
@@ -1882,12 +2019,12 @@ public class IndexCreator {
 				}
 				for (int i = 0; i < mapTree.length; i++) {
 					File f = new File(getRTreeMapIndexNonPackFileName() + i);
-					if (f.exists()) {
-						f.delete();
+					if (f.exists() && success) {
+//						f.delete();
 					}
 					f = new File(getRTreeMapIndexPackFileName() + i);
-					if (f.exists()) {
-						f.delete();
+					if (f.exists() && success) {
+//						f.delete();
 					}
 				}
 				
@@ -1997,7 +2134,7 @@ public class IndexCreator {
 
 	private void createDatabaseIndexesStructure() throws SQLException, IOException {
 		// 2.1 create temporary sqlite database to put temporary results to it
-		if (indexMap || indexTransport) {
+		if (indexMap || indexAddress || indexTransport) {
 			mapFile = new File(workingDir, getMapFileName());
 			// to save space
 			mapFile.getParentFile().mkdirs();
@@ -2075,35 +2212,37 @@ public class IndexCreator {
 		}
 
 		if (indexTransport) {
-			transportIndexFile = new File(workingDir, getTransportFileName());
-			// to save space
-			if (transportIndexFile.exists()) {
-				transportIndexFile.delete();
+			DataIndexWriter.createTransportIndexStructure(mapConnection);
+			try {
+				File file = new File(getRTreeTransportStopsFileName());
+				if (file.exists()) {
+					file.delete();
+				}
+				transportStopsTree = new RTree(file.getAbsolutePath());
+			} catch (RTreeException e) {
+			   throw new IOException(e);
 			}
-			transportIndexFile.getParentFile().mkdirs();
-			// creating nodes db to fast access for all nodes
-			transportConnection = DriverManager.getConnection("jdbc:sqlite:" + transportIndexFile.getAbsolutePath());
-
-			DataIndexWriter.createTransportIndexStructure(transportConnection);
-			transRouteStat = transportConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexTransportRoute
+			transRouteStat = mapConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexTransportRoute
 					.getTable(), IndexTransportRoute.values().length));
-			transRouteStopsStat = transportConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(
+			transRouteStopsStat = mapConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(
 					IndexTransportRouteStop.getTable(), IndexTransportRouteStop.values().length));
-			transStopsStat = transportConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexTransportStop
+			transStopsStat = mapConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexTransportStop
 					.getTable(), IndexTransportStop.values().length));
 			pStatements.put(transRouteStat, 0);
 			pStatements.put(transRouteStopsStat, 0);
 			pStatements.put(transStopsStat, 0);
-			transportConnection.setAutoCommit(false);
+			mapConnection.setAutoCommit(false);
 
 		}
 	}
 	
 	protected void closePreparedStatements(PreparedStatement... preparedStatements) throws SQLException{
 		for(PreparedStatement p : preparedStatements){
-			p.executeBatch();
-			p.close();
-			pStatements.remove(p);
+			if (p != null) {
+				p.executeBatch();
+				p.close();
+				pStatements.remove(p);
+			}
 		}
 	}
 	
@@ -2127,7 +2266,7 @@ public class IndexCreator {
 		 IndexCreator creator = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
 		 creator.setIndexMap(true);
 		 creator.setIndexAddress(true);
-		 creator.setSaveAddressWays(true);
+		 creator.setSaveAddressWays(false);
 		 creator.setNormalizeStreets(true);
 //		 creator.setIndexPOI(true);
 //		 creator.setIndexTransport(true);

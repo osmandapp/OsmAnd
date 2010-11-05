@@ -411,46 +411,6 @@ public class IndexConstants {
 	}
 	
 	
-	public static String indexMapLocationsTable = "map_locations"; //$NON-NLS-1$
-	public static String indexMapLocationsTable2 = "map_locations_2"; //$NON-NLS-1$
-	public static String indexMapLocationsTable3 = "map_locations_3"; //$NON-NLS-1$
-	
-	public enum IndexMapRenderObject implements IndexColumn {
-		ID("long", true), TYPE("integer"), NAME, NODES("BLOB");  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		boolean index = false;
-		String type = null;
-
-		private IndexMapRenderObject() {
-		}
-
-		private IndexMapRenderObject(String type) {
-			this.type = type;
-		}
-
-		private IndexMapRenderObject(String type, boolean index) {
-			this(type);
-			this.index = index;
-		}
-
-		public static String getTable() {
-			return "map_objects"; //$NON-NLS-1$
-		}
-
-		public String getTableName() {
-			return getTable();
-		}
-
-		@Override
-		public String getType() {
-			return type;
-		}
-
-		@Override
-		public boolean isIndex() {
-			return index;
-		}
-	}
-	
 	public enum IndexBinaryMapRenderObject implements IndexColumn {
 		ID("long", true), NAME, TYPES("BLOB"), RESTRICTIONS("BLOB"), NODES("BLOB"), HIGHWAY("INT");  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 		boolean index = false;
