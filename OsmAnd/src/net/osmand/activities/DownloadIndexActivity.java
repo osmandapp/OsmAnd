@@ -53,11 +53,15 @@ import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Filterable;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,6 +74,21 @@ public class DownloadIndexActivity extends ListActivity {
 	private ProgressDialog progressFileDlg = null;
 	private ProgressDialog progressListDlg = null;
 	private LinkedHashMap<String, DownloadEntry> entriesToDownload = new LinkedHashMap<String, DownloadEntry>();
+	private TextWatcher textWatcher = new TextWatcher() {
+
+        public void afterTextChanged(Editable s) {
+        }
+
+        public void beforeTextChanged(CharSequence s, int start, int count,
+                int after) {
+        }
+
+        public void onTextChanged(CharSequence s, int start, int before,
+                int count) {
+            ((DownloadIndexAdapter)getListAdapter()).getFilter().filter(s);
+        }
+
+    };
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +104,10 @@ public class DownloadIndexActivity extends ListActivity {
 			}
 			
 		});
+
+	    EditText filterText = (EditText) findViewById(R.id.search_box);
+		filterText.addTextChangedListener(textWatcher);
+
 		if(downloadListIndexThread.getCachedIndexFiles() != null){
 			setListAdapter(new DownloadIndexAdapter(new ArrayList<Entry<String,String>>(downloadListIndexThread.getCachedIndexFiles().entrySet())));
 		} else {
@@ -434,6 +457,10 @@ public class DownloadIndexActivity extends ListActivity {
 		if(isFinishing()){
 			interruptDownloading = true;
 		}
+	    if (textWatcher != null) {
+	    	EditText filterText = (EditText) findViewById(R.id.search_box);
+	    	filterText.removeTextChangedListener(textWatcher);
+	    }
 		downloadListIndexThread.uiActivity = null;
 		progressFileDlg = null;
 	}
@@ -537,19 +564,20 @@ public class DownloadIndexActivity extends ListActivity {
 	}
 
 
-	protected class DownloadIndexAdapter extends ArrayAdapter<Entry<String, String>> {
+	protected class DownloadIndexAdapter extends ArrayAdapter<Entry<String, String>> implements Filterable {
 
 		public DownloadIndexAdapter(List<Entry<String, String>> array) {
 			super(DownloadIndexActivity.this, net.osmand.R.layout.download_index_list_item, array);
 		}
 		
 		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			View row = convertView;
-			if (row == null) {
+		public View getView(final int position, View convertView, ViewGroup parent) {
+			View v = convertView;
+			if (v == null) {
 				LayoutInflater inflater = getLayoutInflater();
-				row = inflater.inflate(net.osmand.R.layout.download_index_list_item, parent, false);
+				v = inflater.inflate(net.osmand.R.layout.download_index_list_item, parent, false);
 			}
+			final View row = v; 
 			TextView item = (TextView) row.findViewById(R.id.download_item);
 			TextView description = (TextView) row.findViewById(R.id.download_descr);
 			Entry<String, String> e = getItem(position);
@@ -572,6 +600,14 @@ public class DownloadIndexActivity extends ListActivity {
 			}
 			CheckBox ch = (CheckBox) row.findViewById(R.id.check_download_item);
 			ch.setChecked(entriesToDownload.containsKey(e.getKey()));
+			ch.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					final CheckBox ch = (CheckBox) v.findViewById(R.id.check_download_item);
+					ch.setChecked(!ch.isChecked());
+					DownloadIndexActivity.this.onListItemClick(getListView(), row, position, getItemId(position));
+				}
+			});
 			item.setText(s.trim() + "\n " + name); //$NON-NLS-1$
 			description.setText(e.getValue().replace(':', '\n').trim());
 			return row;

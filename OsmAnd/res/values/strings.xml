@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="download_type_to_filter">type to filter</string>
 	<string name="use_high_res_maps">High resolution map</string>
 	<string name="use_high_res_maps_descr">Use high resolution map for high density devices</string>
 	<string name="unknown_location">Location unknown yet</string>

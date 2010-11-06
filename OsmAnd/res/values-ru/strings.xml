@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="download_type_to_filter">фильтровать</string>
 	<string name="use_high_res_maps">Карта высокого разрешения</string>
 	<string name="use_high_res_maps_descr">Отображать 1:1 карты для устройств высокого разрешения</string>
 	<string name="unknown_location">В данный момент местоположение не определено</string>
