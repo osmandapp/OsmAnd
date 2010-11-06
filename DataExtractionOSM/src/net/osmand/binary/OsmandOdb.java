@@ -962,6 +962,13 @@ public final class OsmandOdb {
       return levels_.get(index);
     }
     
+    // optional string name = 3;
+    public static final int NAME_FIELD_NUMBER = 3;
+    private boolean hasName;
+    private java.lang.String name_ = "";
+    public boolean hasName() { return hasName; }
+    public java.lang.String getName() { return name_; }
+    
     private void initFields() {
     }
     public final boolean isInitialized() {
@@ -977,6 +984,9 @@ public final class OsmandOdb {
       for (net.osmand.binary.OsmandOdb.MapRootLevel element : getLevelsList()) {
         output.writeMessage(1, element);
       }
+      if (hasName()) {
+        output.writeString(3, getName());
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -989,6 +999,10 @@ public final class OsmandOdb {
       for (net.osmand.binary.OsmandOdb.MapRootLevel element : getLevelsList()) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, element);
+      }
+      if (hasName()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(3, getName());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1158,6 +1172,9 @@ public final class OsmandOdb {
           }
           result.levels_.addAll(other.levels_);
         }
+        if (other.hasName()) {
+          setName(other.getName());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1187,6 +1204,10 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.MapRootLevel.Builder subBuilder = net.osmand.binary.OsmandOdb.MapRootLevel.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addLevels(subBuilder.buildPartial());
+              break;
+            }
+            case 26: {
+              setName(input.readString());
               break;
             }
           }
@@ -1242,6 +1263,27 @@ public final class OsmandOdb {
       }
       public Builder clearLevels() {
         result.levels_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // optional string name = 3;
+      public boolean hasName() {
+        return result.hasName();
+      }
+      public java.lang.String getName() {
+        return result.getName();
+      }
+      public Builder setName(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasName = true;
+        result.name_ = value;
+        return this;
+      }
+      public Builder clearName() {
+        result.hasName = false;
+        result.name_ = getDefaultInstance().getName();
         return this;
       }
       
@@ -1886,19 +1928,19 @@ public final class OsmandOdb {
     public boolean hasBottom() { return hasBottom; }
     public int getBottom() { return bottom_; }
     
-    // optional .StringTable stringTable = 5;
-    public static final int STRINGTABLE_FIELD_NUMBER = 5;
-    private boolean hasStringTable;
-    private net.osmand.binary.OsmandOdb.StringTable stringTable_;
-    public boolean hasStringTable() { return hasStringTable; }
-    public net.osmand.binary.OsmandOdb.StringTable getStringTable() { return stringTable_; }
+    // optional .StringTable oldstringTable = 5;
+    public static final int OLDSTRINGTABLE_FIELD_NUMBER = 5;
+    private boolean hasOldstringTable;
+    private net.osmand.binary.OsmandOdb.StringTable oldstringTable_;
+    public boolean hasOldstringTable() { return hasOldstringTable; }
+    public net.osmand.binary.OsmandOdb.StringTable getOldstringTable() { return oldstringTable_; }
     
-    // optional uint64 baseId = 6;
-    public static final int BASEID_FIELD_NUMBER = 6;
-    private boolean hasBaseId;
-    private long baseId_ = 0L;
-    public boolean hasBaseId() { return hasBaseId; }
-    public long getBaseId() { return baseId_; }
+    // optional uint64 oldbaseId = 6;
+    public static final int OLDBASEID_FIELD_NUMBER = 6;
+    private boolean hasOldbaseId;
+    private long oldbaseId_ = 0L;
+    public boolean hasOldbaseId() { return hasOldbaseId; }
+    public long getOldbaseId() { return oldbaseId_; }
     
     // repeated .MapTree subtrees = 7;
     public static final int SUBTREES_FIELD_NUMBER = 7;
@@ -1924,7 +1966,22 @@ public final class OsmandOdb {
       return leafs_.get(index);
     }
     
+    // optional uint64 baseId = 10;
+    public static final int BASEID_FIELD_NUMBER = 10;
+    private boolean hasBaseId;
+    private long baseId_ = 0L;
+    public boolean hasBaseId() { return hasBaseId; }
+    public long getBaseId() { return baseId_; }
+    
+    // optional .StringTable stringTable = 11;
+    public static final int STRINGTABLE_FIELD_NUMBER = 11;
+    private boolean hasStringTable;
+    private net.osmand.binary.OsmandOdb.StringTable stringTable_;
+    public boolean hasStringTable() { return hasStringTable; }
+    public net.osmand.binary.OsmandOdb.StringTable getStringTable() { return stringTable_; }
+    
     private void initFields() {
+      oldstringTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
       stringTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
     }
     public final boolean isInitialized() {
@@ -1956,17 +2013,23 @@ public final class OsmandOdb {
       if (hasBottom()) {
         output.writeSInt32(4, getBottom());
       }
-      if (hasStringTable()) {
-        output.writeMessage(5, getStringTable());
+      if (hasOldstringTable()) {
+        output.writeMessage(5, getOldstringTable());
       }
-      if (hasBaseId()) {
-        output.writeUInt64(6, getBaseId());
+      if (hasOldbaseId()) {
+        output.writeUInt64(6, getOldbaseId());
       }
       for (net.osmand.binary.OsmandOdb.MapTree element : getSubtreesList()) {
         output.writeMessage(7, element);
       }
       for (net.osmand.binary.OsmandOdb.MapData element : getLeafsList()) {
         output.writeMessage(8, element);
+      }
+      if (hasBaseId()) {
+        output.writeUInt64(10, getBaseId());
+      }
+      if (hasStringTable()) {
+        output.writeMessage(11, getStringTable());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1993,13 +2056,13 @@ public final class OsmandOdb {
         size += com.google.protobuf.CodedOutputStream
           .computeSInt32Size(4, getBottom());
       }
-      if (hasStringTable()) {
+      if (hasOldstringTable()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, getStringTable());
+          .computeMessageSize(5, getOldstringTable());
       }
-      if (hasBaseId()) {
+      if (hasOldbaseId()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(6, getBaseId());
+          .computeUInt64Size(6, getOldbaseId());
       }
       for (net.osmand.binary.OsmandOdb.MapTree element : getSubtreesList()) {
         size += com.google.protobuf.CodedOutputStream
@@ -2008,6 +2071,14 @@ public final class OsmandOdb {
       for (net.osmand.binary.OsmandOdb.MapData element : getLeafsList()) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(8, element);
+      }
+      if (hasBaseId()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(10, getBaseId());
+      }
+      if (hasStringTable()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(11, getStringTable());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2187,11 +2258,11 @@ public final class OsmandOdb {
         if (other.hasBottom()) {
           setBottom(other.getBottom());
         }
-        if (other.hasStringTable()) {
-          mergeStringTable(other.getStringTable());
+        if (other.hasOldstringTable()) {
+          mergeOldstringTable(other.getOldstringTable());
         }
-        if (other.hasBaseId()) {
-          setBaseId(other.getBaseId());
+        if (other.hasOldbaseId()) {
+          setOldbaseId(other.getOldbaseId());
         }
         if (!other.subtrees_.isEmpty()) {
           if (result.subtrees_.isEmpty()) {
@@ -2204,6 +2275,12 @@ public final class OsmandOdb {
             result.leafs_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.MapData>();
           }
           result.leafs_.addAll(other.leafs_);
+        }
+        if (other.hasBaseId()) {
+          setBaseId(other.getBaseId());
+        }
+        if (other.hasStringTable()) {
+          mergeStringTable(other.getStringTable());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2248,15 +2325,15 @@ public final class OsmandOdb {
             }
             case 42: {
               net.osmand.binary.OsmandOdb.StringTable.Builder subBuilder = net.osmand.binary.OsmandOdb.StringTable.newBuilder();
-              if (hasStringTable()) {
-                subBuilder.mergeFrom(getStringTable());
+              if (hasOldstringTable()) {
+                subBuilder.mergeFrom(getOldstringTable());
               }
               input.readMessage(subBuilder, extensionRegistry);
-              setStringTable(subBuilder.buildPartial());
+              setOldstringTable(subBuilder.buildPartial());
               break;
             }
             case 48: {
-              setBaseId(input.readUInt64());
+              setOldbaseId(input.readUInt64());
               break;
             }
             case 58: {
@@ -2269,6 +2346,19 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.MapData.Builder subBuilder = net.osmand.binary.OsmandOdb.MapData.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addLeafs(subBuilder.buildPartial());
+              break;
+            }
+            case 80: {
+              setBaseId(input.readUInt64());
+              break;
+            }
+            case 90: {
+              net.osmand.binary.OsmandOdb.StringTable.Builder subBuilder = net.osmand.binary.OsmandOdb.StringTable.newBuilder();
+              if (hasStringTable()) {
+                subBuilder.mergeFrom(getStringTable());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setStringTable(subBuilder.buildPartial());
               break;
             }
           }
@@ -2348,58 +2438,58 @@ public final class OsmandOdb {
         return this;
       }
       
-      // optional .StringTable stringTable = 5;
-      public boolean hasStringTable() {
-        return result.hasStringTable();
+      // optional .StringTable oldstringTable = 5;
+      public boolean hasOldstringTable() {
+        return result.hasOldstringTable();
       }
-      public net.osmand.binary.OsmandOdb.StringTable getStringTable() {
-        return result.getStringTable();
+      public net.osmand.binary.OsmandOdb.StringTable getOldstringTable() {
+        return result.getOldstringTable();
       }
-      public Builder setStringTable(net.osmand.binary.OsmandOdb.StringTable value) {
+      public Builder setOldstringTable(net.osmand.binary.OsmandOdb.StringTable value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        result.hasStringTable = true;
-        result.stringTable_ = value;
+        result.hasOldstringTable = true;
+        result.oldstringTable_ = value;
         return this;
       }
-      public Builder setStringTable(net.osmand.binary.OsmandOdb.StringTable.Builder builderForValue) {
-        result.hasStringTable = true;
-        result.stringTable_ = builderForValue.build();
+      public Builder setOldstringTable(net.osmand.binary.OsmandOdb.StringTable.Builder builderForValue) {
+        result.hasOldstringTable = true;
+        result.oldstringTable_ = builderForValue.build();
         return this;
       }
-      public Builder mergeStringTable(net.osmand.binary.OsmandOdb.StringTable value) {
-        if (result.hasStringTable() &&
-            result.stringTable_ != net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance()) {
-          result.stringTable_ =
-            net.osmand.binary.OsmandOdb.StringTable.newBuilder(result.stringTable_).mergeFrom(value).buildPartial();
+      public Builder mergeOldstringTable(net.osmand.binary.OsmandOdb.StringTable value) {
+        if (result.hasOldstringTable() &&
+            result.oldstringTable_ != net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance()) {
+          result.oldstringTable_ =
+            net.osmand.binary.OsmandOdb.StringTable.newBuilder(result.oldstringTable_).mergeFrom(value).buildPartial();
         } else {
-          result.stringTable_ = value;
+          result.oldstringTable_ = value;
         }
-        result.hasStringTable = true;
+        result.hasOldstringTable = true;
         return this;
       }
-      public Builder clearStringTable() {
-        result.hasStringTable = false;
-        result.stringTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
+      public Builder clearOldstringTable() {
+        result.hasOldstringTable = false;
+        result.oldstringTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
         return this;
       }
       
-      // optional uint64 baseId = 6;
-      public boolean hasBaseId() {
-        return result.hasBaseId();
+      // optional uint64 oldbaseId = 6;
+      public boolean hasOldbaseId() {
+        return result.hasOldbaseId();
       }
-      public long getBaseId() {
-        return result.getBaseId();
+      public long getOldbaseId() {
+        return result.getOldbaseId();
       }
-      public Builder setBaseId(long value) {
-        result.hasBaseId = true;
-        result.baseId_ = value;
+      public Builder setOldbaseId(long value) {
+        result.hasOldbaseId = true;
+        result.oldbaseId_ = value;
         return this;
       }
-      public Builder clearBaseId() {
-        result.hasBaseId = false;
-        result.baseId_ = 0L;
+      public Builder clearOldbaseId() {
+        result.hasOldbaseId = false;
+        result.oldbaseId_ = 0L;
         return this;
       }
       
@@ -2502,6 +2592,61 @@ public final class OsmandOdb {
       }
       public Builder clearLeafs() {
         result.leafs_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // optional uint64 baseId = 10;
+      public boolean hasBaseId() {
+        return result.hasBaseId();
+      }
+      public long getBaseId() {
+        return result.getBaseId();
+      }
+      public Builder setBaseId(long value) {
+        result.hasBaseId = true;
+        result.baseId_ = value;
+        return this;
+      }
+      public Builder clearBaseId() {
+        result.hasBaseId = false;
+        result.baseId_ = 0L;
+        return this;
+      }
+      
+      // optional .StringTable stringTable = 11;
+      public boolean hasStringTable() {
+        return result.hasStringTable();
+      }
+      public net.osmand.binary.OsmandOdb.StringTable getStringTable() {
+        return result.getStringTable();
+      }
+      public Builder setStringTable(net.osmand.binary.OsmandOdb.StringTable value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.hasStringTable = true;
+        result.stringTable_ = value;
+        return this;
+      }
+      public Builder setStringTable(net.osmand.binary.OsmandOdb.StringTable.Builder builderForValue) {
+        result.hasStringTable = true;
+        result.stringTable_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergeStringTable(net.osmand.binary.OsmandOdb.StringTable value) {
+        if (result.hasStringTable() &&
+            result.stringTable_ != net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance()) {
+          result.stringTable_ =
+            net.osmand.binary.OsmandOdb.StringTable.newBuilder(result.stringTable_).mergeFrom(value).buildPartial();
+        } else {
+          result.stringTable_ = value;
+        }
+        result.hasStringTable = true;
+        return this;
+      }
+      public Builder clearStringTable() {
+        result.hasStringTable = false;
+        result.stringTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
         return this;
       }
       
@@ -9729,6 +9874,13 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndTransportIndex_fieldAccessorTable;
     }
     
+    // optional string name = 1;
+    public static final int NAME_FIELD_NUMBER = 1;
+    private boolean hasName;
+    private java.lang.String name_ = "";
+    public boolean hasName() { return hasName; }
+    public java.lang.String getName() { return name_; }
+    
     // optional .TransportRoutes routes = 3;
     public static final int ROUTES_FIELD_NUMBER = 3;
     private boolean hasRoutes;
@@ -9769,6 +9921,9 @@ public final class OsmandOdb {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
+      if (hasName()) {
+        output.writeString(1, getName());
+      }
       if (hasRoutes()) {
         output.writeMessage(3, getRoutes());
       }
@@ -9787,6 +9942,10 @@ public final class OsmandOdb {
       if (size != -1) return size;
     
       size = 0;
+      if (hasName()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(1, getName());
+      }
       if (hasRoutes()) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, getRoutes());
@@ -9957,6 +10116,9 @@ public final class OsmandOdb {
       
       public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndTransportIndex other) {
         if (other == net.osmand.binary.OsmandOdb.OsmAndTransportIndex.getDefaultInstance()) return this;
+        if (other.hasName()) {
+          setName(other.getName());
+        }
         if (other.hasRoutes()) {
           mergeRoutes(other.getRoutes());
         }
@@ -9991,6 +10153,10 @@ public final class OsmandOdb {
               }
               break;
             }
+            case 10: {
+              setName(input.readString());
+              break;
+            }
             case 26: {
               net.osmand.binary.OsmandOdb.TransportRoutes.Builder subBuilder = net.osmand.binary.OsmandOdb.TransportRoutes.newBuilder();
               if (hasRoutes()) {
@@ -10022,6 +10188,27 @@ public final class OsmandOdb {
         }
       }
       
+      
+      // optional string name = 1;
+      public boolean hasName() {
+        return result.hasName();
+      }
+      public java.lang.String getName() {
+        return result.getName();
+      }
+      public Builder setName(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasName = true;
+        result.name_ = value;
+        return this;
+      }
+      public Builder clearName() {
+        result.hasName = false;
+        result.name_ = getDefaultInstance().getName();
+        return this;
+      }
       
       // optional .TransportRoutes routes = 3;
       public boolean hasRoutes() {
@@ -10265,61 +10452,63 @@ public final class OsmandOdb {
       "OsmAndMapIndex\022)\n\014addressIndex\030\003 \003(\0132\023.O" +
       "smAndAddressIndex\022-\n\016transportIndex\030\004 \003(" +
       "\0132\025.OsmAndTransportIndex\022\026\n\016versionConfi" +
-      "rm\030  \002(\r\"\030\n\013StringTable\022\t\n\001s\030\001 \003(\t\"/\n\016Os" +
+      "rm\030  \002(\r\"\030\n\013StringTable\022\t\n\001s\030\001 \003(\t\"=\n\016Os" +
       "mAndMapIndex\022\035\n\006levels\030\001 \003(\0132\r.MapRootLe" +
-      "vel\"\202\001\n\014MapRootLevel\022\017\n\007maxZoom\030\001 \002(\005\022\017\n" +
-      "\007minZoom\030\002 \002(\005\022\014\n\004left\030\003 \002(\005\022\r\n\005right\030\004 " +
-      "\002(\005\022\013\n\003top\030\005 \002(\005\022\016\n\006bottom\030\006 \002(\005\022\026\n\004root",
-      "\030\007 \003(\0132\010.MapTree\"\253\001\n\007MapTree\022\014\n\004left\030\001 \002" +
-      "(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom" +
-      "\030\004 \002(\021\022!\n\013stringTable\030\005 \001(\0132\014.StringTabl" +
-      "e\022\016\n\006baseId\030\006 \001(\004\022\032\n\010subtrees\030\007 \003(\0132\010.Ma" +
-      "pTree\022\027\n\005leafs\030\010 \003(\0132\010.MapData\"v\n\007MapDat" +
-      "a\022\023\n\013coordinates\030\001 \002(\014\022\r\n\005types\030\002 \002(\014\022\n\n" +
-      "\002id\030\003 \002(\022\022\020\n\010stringId\030\004 \001(\r\022\024\n\014restricti" +
-      "ons\030\005 \001(\014\022\023\n\013highwayMeta\030\006 \001(\005\"\225\001\n\022OsmAn" +
-      "dAddressIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en\030\002" +
-      " \001(\t\022\034\n\006cities\030\005 \001(\0132\014.CitiesIndex\022\"\n\tpo",
-      "stcodes\030\006 \001(\0132\017.PostcodesIndex\022\036\n\010villag" +
-      "es\030\007 \001(\0132\014.CitiesIndex\")\n\013CitiesIndex\022\032\n" +
-      "\006cities\030\001 \003(\0132\n.CityIndex\"3\n\016PostcodesIn" +
-      "dex\022!\n\tpostcodes\030\001 \003(\0132\016.PostcodeIndex\"\253" +
-      "\001\n\tCityIndex\022\021\n\tcity_type\030\001 \002(\r\022\014\n\004name\030" +
-      "\002 \002(\t\022\017\n\007name_en\030\003 \001(\t\022\n\n\002id\030\004 \001(\004\022\t\n\001x\030" +
-      "\005 \002(\007\022\t\n\001y\030\006 \002(\007\022+\n\rintersections\030\016 \001(\0132" +
-      "\024.InteresectedStreets\022\035\n\007streets\030\022 \003(\0132\014" +
-      ".StreetIndex\"A\n\023InteresectedStreets\022*\n\ri" +
-      "ntersections\030\005 \003(\0132\023.StreetIntersection\"",
-      "x\n\022StreetIntersection\022\032\n\022intersectedStre" +
-      "et1\030\002 \002(\r\022\032\n\022intersectedStreet2\030\003 \002(\r\022\024\n" +
-      "\014intersectedX\030\004 \002(\021\022\024\n\014intersectedY\030\005 \002(" +
-      "\021\"V\n\rPostcodeIndex\022\020\n\010postcode\030\001 \002(\t\022\t\n\001" +
-      "x\030\002 \002(\007\022\t\n\001y\030\003 \002(\007\022\035\n\007streets\030\005 \003(\0132\014.St" +
-      "reetIndex\"q\n\013StreetIndex\022\014\n\004name\030\001 \002(\t\022\017" +
-      "\n\007name_en\030\002 \001(\t\022\t\n\001x\030\003 \002(\021\022\t\n\001y\030\004 \002(\021\022\n\n" +
-      "\002id\030\006 \001(\004\022!\n\tbuildings\030\022 \003(\0132\016.BuildingI" +
-      "ndex\"b\n\rBuildingIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007n" +
-      "ame_en\030\002 \001(\t\022\n\n\002id\030\005 \001(\004\022\020\n\010postcode\030\006 \001",
-      "(\t\022\t\n\001x\030\003 \002(\021\022\t\n\001y\030\004 \002(\021\"2\n\017TransportRou" +
-      "tes\022\037\n\006routes\030\006 \003(\0132\017.TransportRoute\"\317\001\n" +
-      "\016TransportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003 \001(" +
-      "\r\022\020\n\010operator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022\014\n\004name" +
-      "\030\006 \001(\r\022\017\n\007name_en\030\007 \001(\r\022\020\n\010distance\030\010 \001(" +
-      "\r\022(\n\013directStops\030\017 \003(\0132\023.TransportRouteS" +
-      "top\022)\n\014reverseStops\030\020 \003(\0132\023.TransportRou" +
-      "teStop\"W\n\022TransportRouteStop\022\n\n\002id\030\001 \002(\022" +
-      "\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\014\n\004name\030\006 \002(\r\022\017" +
-      "\n\007name_en\030\007 \001(\r\"b\n\rTransportStop\022\n\n\002dx\030\001",
-      " \002(\021\022\n\n\002dy\030\002 \002(\021\022\n\n\002id\030\005 \002(\022\022\014\n\004name\030\006 \002" +
-      "(\r\022\017\n\007name_en\030\007 \001(\r\022\016\n\006routes\030\020 \003(\r\"\244\001\n\022" +
-      "TransportStopsTree\022\014\n\004left\030\001 \002(\021\022\r\n\005righ" +
-      "t\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022%\n\010" +
-      "subtrees\030\007 \003(\0132\023.TransportStopsTree\022\035\n\005l" +
-      "eafs\030\010 \003(\0132\016.TransportStop\022\016\n\006baseId\030\020 \001" +
-      "(\004\"\177\n\024OsmAndTransportIndex\022 \n\006routes\030\003 \001" +
-      "(\0132\020.TransportRoutes\022\"\n\005stops\030\006 \001(\0132\023.Tr" +
-      "ansportStopsTree\022!\n\013stringTable\030\t \002(\0132\014." +
-      "StringTableB\023\n\021net.osmand.binary"
+      "vel\022\014\n\004name\030\003 \001(\t\"\202\001\n\014MapRootLevel\022\017\n\007ma" +
+      "xZoom\030\001 \002(\005\022\017\n\007minZoom\030\002 \002(\005\022\014\n\004left\030\003 \002" +
+      "(\005\022\r\n\005right\030\004 \002(\005\022\013\n\003top\030\005 \002(\005\022\016\n\006bottom",
+      "\030\006 \002(\005\022\026\n\004root\030\007 \003(\0132\010.MapTree\"\344\001\n\007MapTr" +
+      "ee\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003" +
+      " \002(\021\022\016\n\006bottom\030\004 \002(\021\022$\n\016oldstringTable\030\005" +
+      " \001(\0132\014.StringTable\022\021\n\toldbaseId\030\006 \001(\004\022\032\n" +
+      "\010subtrees\030\007 \003(\0132\010.MapTree\022\027\n\005leafs\030\010 \003(\013" +
+      "2\010.MapData\022\016\n\006baseId\030\n \001(\004\022!\n\013stringTabl" +
+      "e\030\013 \001(\0132\014.StringTable\"v\n\007MapData\022\023\n\013coor" +
+      "dinates\030\001 \002(\014\022\r\n\005types\030\002 \002(\014\022\n\n\002id\030\003 \002(\022" +
+      "\022\020\n\010stringId\030\004 \001(\r\022\024\n\014restrictions\030\005 \001(\014" +
+      "\022\023\n\013highwayMeta\030\006 \001(\005\"\225\001\n\022OsmAndAddressI",
+      "ndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022\034\n\006c" +
+      "ities\030\005 \001(\0132\014.CitiesIndex\022\"\n\tpostcodes\030\006" +
+      " \001(\0132\017.PostcodesIndex\022\036\n\010villages\030\007 \001(\0132" +
+      "\014.CitiesIndex\")\n\013CitiesIndex\022\032\n\006cities\030\001" +
+      " \003(\0132\n.CityIndex\"3\n\016PostcodesIndex\022!\n\tpo" +
+      "stcodes\030\001 \003(\0132\016.PostcodeIndex\"\253\001\n\tCityIn" +
+      "dex\022\021\n\tcity_type\030\001 \002(\r\022\014\n\004name\030\002 \002(\t\022\017\n\007" +
+      "name_en\030\003 \001(\t\022\n\n\002id\030\004 \001(\004\022\t\n\001x\030\005 \002(\007\022\t\n\001" +
+      "y\030\006 \002(\007\022+\n\rintersections\030\016 \001(\0132\024.Interes" +
+      "ectedStreets\022\035\n\007streets\030\022 \003(\0132\014.StreetIn",
+      "dex\"A\n\023InteresectedStreets\022*\n\rintersecti" +
+      "ons\030\005 \003(\0132\023.StreetIntersection\"x\n\022Street" +
+      "Intersection\022\032\n\022intersectedStreet1\030\002 \002(\r" +
+      "\022\032\n\022intersectedStreet2\030\003 \002(\r\022\024\n\014intersec" +
+      "tedX\030\004 \002(\021\022\024\n\014intersectedY\030\005 \002(\021\"V\n\rPost" +
+      "codeIndex\022\020\n\010postcode\030\001 \002(\t\022\t\n\001x\030\002 \002(\007\022\t" +
+      "\n\001y\030\003 \002(\007\022\035\n\007streets\030\005 \003(\0132\014.StreetIndex" +
+      "\"q\n\013StreetIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en" +
+      "\030\002 \001(\t\022\t\n\001x\030\003 \002(\021\022\t\n\001y\030\004 \002(\021\022\n\n\002id\030\006 \001(\004" +
+      "\022!\n\tbuildings\030\022 \003(\0132\016.BuildingIndex\"b\n\rB",
+      "uildingIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en\030\002 " +
+      "\001(\t\022\n\n\002id\030\005 \001(\004\022\020\n\010postcode\030\006 \001(\t\022\t\n\001x\030\003" +
+      " \002(\021\022\t\n\001y\030\004 \002(\021\"2\n\017TransportRoutes\022\037\n\006ro" +
+      "utes\030\006 \003(\0132\017.TransportRoute\"\317\001\n\016Transpor" +
+      "tRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003 \001(\r\022\020\n\010oper" +
+      "ator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022\014\n\004name\030\006 \001(\r\022\017\n" +
+      "\007name_en\030\007 \001(\r\022\020\n\010distance\030\010 \001(\r\022(\n\013dire" +
+      "ctStops\030\017 \003(\0132\023.TransportRouteStop\022)\n\014re" +
+      "verseStops\030\020 \003(\0132\023.TransportRouteStop\"W\n" +
+      "\022TransportRouteStop\022\n\n\002id\030\001 \002(\022\022\n\n\002dx\030\002 ",
+      "\002(\021\022\n\n\002dy\030\003 \002(\021\022\014\n\004name\030\006 \002(\r\022\017\n\007name_en" +
+      "\030\007 \001(\r\"b\n\rTransportStop\022\n\n\002dx\030\001 \002(\021\022\n\n\002d" +
+      "y\030\002 \002(\021\022\n\n\002id\030\005 \002(\022\022\014\n\004name\030\006 \002(\r\022\017\n\007nam" +
+      "e_en\030\007 \001(\r\022\016\n\006routes\030\020 \003(\r\"\244\001\n\022Transport" +
+      "StopsTree\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013" +
+      "\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022%\n\010subtrees\030" +
+      "\007 \003(\0132\023.TransportStopsTree\022\035\n\005leafs\030\010 \003(" +
+      "\0132\016.TransportStop\022\016\n\006baseId\030\020 \001(\004\"\215\001\n\024Os" +
+      "mAndTransportIndex\022\014\n\004name\030\001 \001(\t\022 \n\006rout" +
+      "es\030\003 \001(\0132\020.TransportRoutes\022\"\n\005stops\030\006 \001(",
+      "\0132\023.TransportStopsTree\022!\n\013stringTable\030\t " +
+      "\002(\0132\014.StringTableB\023\n\021net.osmand.binary"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10347,7 +10536,7 @@ public final class OsmandOdb {
           internal_static_OsmAndMapIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndMapIndex_descriptor,
-              new java.lang.String[] { "Levels", },
+              new java.lang.String[] { "Levels", "Name", },
               net.osmand.binary.OsmandOdb.OsmAndMapIndex.class,
               net.osmand.binary.OsmandOdb.OsmAndMapIndex.Builder.class);
           internal_static_MapRootLevel_descriptor =
@@ -10363,7 +10552,7 @@ public final class OsmandOdb {
           internal_static_MapTree_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_MapTree_descriptor,
-              new java.lang.String[] { "Left", "Right", "Top", "Bottom", "StringTable", "BaseId", "Subtrees", "Leafs", },
+              new java.lang.String[] { "Left", "Right", "Top", "Bottom", "OldstringTable", "OldbaseId", "Subtrees", "Leafs", "BaseId", "StringTable", },
               net.osmand.binary.OsmandOdb.MapTree.class,
               net.osmand.binary.OsmandOdb.MapTree.Builder.class);
           internal_static_MapData_descriptor =
@@ -10491,7 +10680,7 @@ public final class OsmandOdb {
           internal_static_OsmAndTransportIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndTransportIndex_descriptor,
-              new java.lang.String[] { "Routes", "Stops", "StringTable", },
+              new java.lang.String[] { "Name", "Routes", "Stops", "StringTable", },
               net.osmand.binary.OsmandOdb.OsmAndTransportIndex.class,
               net.osmand.binary.OsmandOdb.OsmAndTransportIndex.Builder.class);
           return null;

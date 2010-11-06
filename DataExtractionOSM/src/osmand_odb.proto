@@ -31,7 +31,9 @@ message StringTable {
 
 message OsmAndMapIndex {
    // encoded as fixed32 length delimited 
-   repeated MapRootLevel levels = 1;  
+   repeated MapRootLevel levels = 1;
+   
+   optional string name = 3;
 }
 
 message MapRootLevel {
@@ -53,13 +55,18 @@ message MapTree {
    required sint32 top = 3; // delta encoded
    required sint32 bottom = 4; // delta encoded
    
-   optional StringTable stringTable = 5;
-   optional uint64 baseId = 6;
+   // deprecated fields used as base id (should be removed, when all maps be regenerated)
+   // leave for backward compatibility
+   optional StringTable oldstringTable = 5; 
+   optional uint64 oldbaseId = 6;  
    
    // encoded as fixed32 length delimited
    repeated MapTree subtrees = 7;
    
    repeated MapData leafs = 8;
+   
+   optional uint64 baseId = 10;
+   optional StringTable stringTable = 11;
 }
 
 
@@ -226,7 +233,8 @@ message TransportStopsTree {
 }
 			
 message OsmAndTransportIndex {
-	
+    optional string name = 1;
+    	
 	// encoded as fixed32 length delimited
 	optional TransportRoutes routes = 3; // routes 
 
@@ -235,4 +243,5 @@ message OsmAndTransportIndex {
 	
 	
 	required StringTable stringTable = 9;
+	
 }

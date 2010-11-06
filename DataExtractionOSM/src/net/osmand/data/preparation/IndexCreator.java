@@ -1553,7 +1553,7 @@ public class IndexCreator {
 			assert IndexConstants.IndexBinaryMapRenderObject.values().length == 6;
 			PreparedStatement selectData = mapConnection.prepareStatement("SELECT * FROM " + IndexBinaryMapRenderObject.getTable() + " WHERE id = ?");
 			
-			writer.startWriteMapIndex();
+			writer.startWriteMapIndex(regionName);
 			
 			for (int i = 0; i < MAP_ZOOMS.length - 1; i++) {
 				RTree rtree = mapTree[i];
@@ -1643,7 +1643,7 @@ public class IndexCreator {
 					"  A.latitude,  A.longitude, A.name, A.name_en " +
 					"FROM transport_route_stop S INNER JOIN transport_stop A ON A.id = S.stop WHERE S.route = ? ORDER BY S.ord asc");
 			
-			writer.startWriteTransportIndex();
+			writer.startWriteTransportIndex(regionName);
 			
 			writer.startWriteTransportRoutes();
 			
@@ -1942,12 +1942,14 @@ public class IndexCreator {
 				}
 
 				// 3.3 MAIN iterate over all entities
-				progress.setGeneralProgress("[50 of 100]");
-				progress.startTask("Processing osm nodes...", allNodes);
-				iterateOverEntities(progress, EntityType.NODE, allNodes, STEP_MAIN);
-				progress.setGeneralProgress("[70 of 100]");
-				progress.startTask("Processing osm ways...", allWays);
-				iterateOverEntities(progress, EntityType.WAY, allWays, STEP_MAIN);
+				if (indexPOI || indexAddress || indexMap) {
+					progress.setGeneralProgress("[50 of 100]");
+					progress.startTask("Processing osm nodes...", allNodes);
+					iterateOverEntities(progress, EntityType.NODE, allNodes, STEP_MAIN);
+					progress.setGeneralProgress("[70 of 100]");
+					progress.startTask("Processing osm ways...", allWays);
+					iterateOverEntities(progress, EntityType.WAY, allWays, STEP_MAIN);
+				}
 				progress.setGeneralProgress("[85 of 100]");
 				progress.startTask("Processing osm relations...", allRelations);
 				iterateOverEntities(progress, EntityType.RELATION, allRelations, STEP_MAIN);
@@ -2335,11 +2337,11 @@ public class IndexCreator {
 //		 creator.setIndexPOI(true);
 		 creator.setIndexTransport(true);
 		 
-		 creator.recreateOnlyBinaryFile = true;
+		 creator.recreateOnlyBinaryFile = false;
 		 creator.deleteDatabaseIndexes = false;
 		 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
@@ -2354,8 +2356,8 @@ public class IndexCreator {
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/den_haag.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/den_haag.osm"), new ConsoleProgressImplementation(3), null);
 		 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/netherlands.osm.bz2"), new ConsoleProgressImplementation(1), null);
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/netherlands.osm.bz2"), new ConsoleProgressImplementation(1), null);
 		 
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/forest_complex.osm"), new ConsoleProgressImplementation(25), null);
 

@@ -83,7 +83,15 @@ public class TransportStopsLayer implements OsmandMapLayer, ContextMenuLayer.ICo
 		text.append(view.getContext().getString(R.string.transport_Stop)).append(" : ").append(n.getName(OsmandSettings.usingEnglishNames(view.getSettings()))); //$NON-NLS-1$
 		text.append("\n").append(view.getContext().getString(R.string.transport_Routes)).append(" : ");  //$NON-NLS-1$ //$NON-NLS-2$
 		List<TransportIndexRepository> reps = view.getApplication().getResourceManager().searchTransportRepositories(n.getLocation().getLatitude(), n.getLocation().getLongitude());
-		if(!reps.isEmpty()){
+		
+		TransportIndexRepository tir = null;
+		for(TransportIndexRepository t : reps){
+			if(t.acceptTransportStop(n)){
+				tir = t;
+				break;
+			}
+		}
+		if(tir != null){
 			List<String> l;
 			if(!useName){
 				l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0}"); //$NON-NLS-1$

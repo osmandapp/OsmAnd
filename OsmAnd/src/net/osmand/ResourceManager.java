@@ -85,7 +85,7 @@ public class ResourceManager {
 	
 	protected final Map<String, AmenityIndexRepository> amenityRepositories = new LinkedHashMap<String, AmenityIndexRepository>();
 	
-	protected final Map<String, TransportIndexRepository> transportRepositories = new LinkedHashMap<String, TransportIndexRepository>();
+	protected final List<TransportIndexRepository> transportRepositories = new ArrayList<TransportIndexRepository>();
 	
 	protected final MapRenderRepositories renderer;
 	
@@ -377,6 +377,9 @@ public class ResourceManager {
 								RegionAddressRepositoryBinary rarb = new RegionAddressRepositoryBinary(index, rName);
 								addressMap.put(rName, rarb);
 							}
+							if(index.hasTransportData()){
+								transportRepositories.add(new TransportIndexRepositoryBinary(index));
+							}
 						}
 					} catch (SQLiteException e) {
 						log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
@@ -473,7 +476,7 @@ public class ResourceManager {
 			try {
 				boolean initialized = repository.initialize(progress, f);
 				if (initialized) {
-					transportRepositories.put(repository.getName(), repository);
+					transportRepositories.add(repository);
 				} else {
 					warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
 				}
@@ -551,7 +554,7 @@ public class ResourceManager {
 	////////////////////////////////////////////// Working with transport ////////////////////////////////////////////////
 	public List<TransportIndexRepository> searchTransportRepositories(double latitude, double longitude) {
 		List<TransportIndexRepository> repos = new ArrayList<TransportIndexRepository>();
-		for (TransportIndexRepository index : transportRepositories.values()) {
+		for (TransportIndexRepository index : transportRepositories) {
 			if (index.checkContains(latitude,longitude)) {
 				repos.add(index);
 			}
@@ -561,7 +564,7 @@ public class ResourceManager {
 	
 	
 	public void searchTransportAsync(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, List<TransportStop> toFill){
-		for(TransportIndexRepository index : transportRepositories.values()){
+		for(TransportIndexRepository index : transportRepositories){
 			if(index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)){
 				if(!index.checkCachedObjects(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, toFill, true)){
 					asyncLoadingTiles.requestToLoadTransport(
@@ -607,7 +610,7 @@ public class ResourceManager {
 	}
 	
 	public void closeTransport(){
-		for(TransportIndexRepository r : transportRepositories.values()){
+		for(TransportIndexRepository r : transportRepositories){
 			r.close();
 		}
 		transportRepositories.clear();
