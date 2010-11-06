@@ -146,7 +146,7 @@ public class DataIndexWriter {
 				prepStops.setString(IndexTransportStop.NAME.ordinal() + 1, s.getName());
 				prepStops.setString(IndexTransportStop.NAME_EN.ordinal() + 1, s.getEnName());
 				int x = (int) MapUtils.getTileNumberX(24, s.getLocation().getLongitude());
-				int y = (int) MapUtils.getTileNumberX(24, s.getLocation().getLatitude());
+				int y = (int) MapUtils.getTileNumberY(24, s.getLocation().getLatitude());
 				addBatch(count, prepStops);
 				try {
 					transportStopsTree.insert(new LeafElement(new Rect(x, y, x, y), s.getId()));
