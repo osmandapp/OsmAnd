@@ -1,5 +1,20 @@
 package net.osmand.activities;
 
+import static net.osmand.data.index.IndexConstants.ADDRESS_TABLE_VERSION;
+import static net.osmand.data.index.IndexConstants.ADDRESS_INDEX_EXT;
+import static net.osmand.data.index.IndexConstants.POI_TABLE_VERSION; 
+import static net.osmand.data.index.IndexConstants.POI_INDEX_EXT;
+import static net.osmand.data.index.IndexConstants.TRANSPORT_TABLE_VERSION;
+import static net.osmand.data.index.IndexConstants.TRANSPORT_INDEX_EXT;
+import static net.osmand.data.index.IndexConstants.ADDRESS_INDEX_EXT_ZIP;
+import static net.osmand.data.index.IndexConstants.POI_INDEX_EXT_ZIP;
+import static net.osmand.data.index.IndexConstants.TRANSPORT_INDEX_EXT_ZIP;
+import static net.osmand.data.index.IndexConstants.BINARY_MAP_VERSION;
+import static net.osmand.data.index.IndexConstants.BINARY_MAP_INDEX_EXT;
+import static net.osmand.data.index.IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
+import static net.osmand.data.index.IndexConstants.VOICE_VERSION;
+import static net.osmand.data.index.IndexConstants.VOICE_INDEX_EXT_ZIP;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -146,17 +161,16 @@ public class DownloadIndexActivity extends ListActivity {
 				}
 				
 			});
-			DownloaderIndexFromGoogleCode.getIndexFiles(new String[] { 
-					IndexConstants.ADDRESS_INDEX_EXT, IndexConstants.POI_INDEX_EXT, IndexConstants.TRANSPORT_INDEX_EXT, 
-					IndexConstants.ADDRESS_INDEX_EXT_ZIP, IndexConstants.POI_INDEX_EXT_ZIP, IndexConstants.TRANSPORT_INDEX_EXT_ZIP, 
-					IndexConstants.BINARY_MAP_INDEX_EXT, IndexConstants.BINARY_MAP_INDEX_EXT_ZIP, IndexConstants.VOICE_INDEX_EXT_ZIP, }, 
-					new String[] {
-					IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "",//$NON-NLS-1$//$NON-NLS-2$
-					IndexConstants.TRANSPORT_TABLE_VERSION + "", IndexConstants.ADDRESS_TABLE_VERSION + "", //$NON-NLS-1$ //$NON-NLS-2$
-					IndexConstants.POI_TABLE_VERSION + "", IndexConstants.TRANSPORT_TABLE_VERSION + "", //$NON-NLS-1$//$NON-NLS-2$
-					IndexConstants.BINARY_MAP_VERSION + "", IndexConstants.BINARY_MAP_VERSION + "", //$NON-NLS-1$//$NON-NLS-2$
-					IndexConstants.VOICE_VERSION + "", }, //$NON-NLS-1$ 
-					indexFiles);
+			DownloaderIndexFromGoogleCode.getIndexFiles(indexFiles,
+					ADDRESS_TABLE_VERSION + ADDRESS_INDEX_EXT,
+					ADDRESS_TABLE_VERSION + ADDRESS_INDEX_EXT_ZIP,
+					POI_TABLE_VERSION + POI_INDEX_EXT,
+					POI_TABLE_VERSION + POI_INDEX_EXT_ZIP,
+					TRANSPORT_TABLE_VERSION + TRANSPORT_INDEX_EXT,
+					TRANSPORT_TABLE_VERSION + TRANSPORT_INDEX_EXT_ZIP,
+					BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT,
+					BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT_ZIP,
+					VOICE_VERSION + VOICE_INDEX_EXT_ZIP);
 			
 			if (indexFiles != null && !indexFiles.isEmpty()) {
 				return indexFiles;
@@ -170,7 +184,7 @@ public class DownloadIndexActivity extends ListActivity {
 	}
 	
 	private final static int MB = 1 << 20;
-	
+
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
