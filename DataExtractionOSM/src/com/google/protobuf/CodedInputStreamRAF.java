@@ -540,6 +540,23 @@ public final class CodedInputStreamRAF {
 
     return oldLimit;
   }
+  
+  public int pushAbsoluteLimit(int byteLimit) throws InvalidProtocolBufferException {
+		if (byteLimit < 0) {
+			throw InvalidProtocolBufferException.negativeSize();
+		}
+		// that's absolute limit as parameter
+		// byteLimit += totalBytesRetired + bufferPos;
+		final int oldLimit = currentLimit;
+		if (byteLimit > oldLimit) {
+			throw InvalidProtocolBufferException.truncatedMessage();
+		}
+		currentLimit = byteLimit;
+
+		recomputeBufferSizeAfterLimit();
+
+		return oldLimit;
+	}
 
   private void recomputeBufferSizeAfterLimit() {
     bufferSize += bufferSizeAfterLimit;

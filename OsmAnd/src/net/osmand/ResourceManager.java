@@ -468,7 +468,7 @@ public class ResourceManager {
 
 	public void indexingTransport(final IProgress progress, List<String> warnings, File f) {
 		if (f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)) {
-			TransportIndexRepository repository = new TransportIndexRepository();
+			TransportIndexRepositoryOdb repository = new TransportIndexRepositoryOdb();
 			progress.startTask(Messages.getMessage("indexing_transport") + f.getName(), -1); //$NON-NLS-1$
 			try {
 				boolean initialized = repository.initialize(progress, f);

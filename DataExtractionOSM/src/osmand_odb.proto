@@ -167,6 +167,10 @@ message BuildingIndex {
 
 // transport messages
 
+message TransportRoutes {
+   repeated TransportRoute routes = 6; 
+}
+
 message TransportRoute {
    required uint64 id = 1;
    
@@ -191,9 +195,10 @@ message TransportRouteStop {
 }
 
 message TransportStop {
-   required sint64 id = 1; // delta encoded to parent base id
-   required sint32 dx = 2; // delta encoded to parent (24 zoom) to left
-   required sint32 dy = 3; // delta encoded to parent (24 zoom) to top
+   required sint32 dx = 1; // delta encoded to parent (24 zoom) to left
+   required sint32 dy = 2; // delta encoded to parent (24 zoom) to top
+
+   required sint64 id = 5; // delta encoded to parent base id 
    
    required uint32 name = 6; // index in message table
    optional uint32 name_en = 7; // index in message table
@@ -221,7 +226,8 @@ message TransportStopsTree {
 			
 message OsmAndTransportIndex {
 	
-	repeated TransportRoute routes = 3; // routes 
+	// encoded as fixed32 length delimited
+	optional TransportRoutes routes = 3; // routes 
 
 	// encoded as fixed32 length delimited
 	optional TransportStopsTree stops = 6;

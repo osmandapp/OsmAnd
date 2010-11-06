@@ -7077,6 +7077,340 @@ public final class OsmandOdb {
     // @@protoc_insertion_point(class_scope:BuildingIndex)
   }
   
+  public static final class TransportRoutes extends
+      com.google.protobuf.GeneratedMessage {
+    // Use TransportRoutes.newBuilder() to construct.
+    private TransportRoutes() {
+      initFields();
+    }
+    private TransportRoutes(boolean noInit) {}
+    
+    private static final TransportRoutes defaultInstance;
+    public static TransportRoutes getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public TransportRoutes getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return net.osmand.binary.OsmandOdb.internal_static_TransportRoutes_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return net.osmand.binary.OsmandOdb.internal_static_TransportRoutes_fieldAccessorTable;
+    }
+    
+    // repeated .TransportRoute routes = 6;
+    public static final int ROUTES_FIELD_NUMBER = 6;
+    private java.util.List<net.osmand.binary.OsmandOdb.TransportRoute> routes_ =
+      java.util.Collections.emptyList();
+    public java.util.List<net.osmand.binary.OsmandOdb.TransportRoute> getRoutesList() {
+      return routes_;
+    }
+    public int getRoutesCount() { return routes_.size(); }
+    public net.osmand.binary.OsmandOdb.TransportRoute getRoutes(int index) {
+      return routes_.get(index);
+    }
+    
+    private void initFields() {
+    }
+    public final boolean isInitialized() {
+      for (net.osmand.binary.OsmandOdb.TransportRoute element : getRoutesList()) {
+        if (!element.isInitialized()) return false;
+      }
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (net.osmand.binary.OsmandOdb.TransportRoute element : getRoutesList()) {
+        output.writeMessage(6, element);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      for (net.osmand.binary.OsmandOdb.TransportRoute element : getRoutesList()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, element);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static net.osmand.binary.OsmandOdb.TransportRoutes parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRoutes parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRoutes parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRoutes parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRoutes parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRoutes parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRoutes parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRoutes parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRoutes parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRoutes parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(net.osmand.binary.OsmandOdb.TransportRoutes prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private net.osmand.binary.OsmandOdb.TransportRoutes result;
+      
+      // Construct using net.osmand.binary.OsmandOdb.TransportRoutes.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new net.osmand.binary.OsmandOdb.TransportRoutes();
+        return builder;
+      }
+      
+      protected net.osmand.binary.OsmandOdb.TransportRoutes internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new net.osmand.binary.OsmandOdb.TransportRoutes();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return net.osmand.binary.OsmandOdb.TransportRoutes.getDescriptor();
+      }
+      
+      public net.osmand.binary.OsmandOdb.TransportRoutes getDefaultInstanceForType() {
+        return net.osmand.binary.OsmandOdb.TransportRoutes.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public net.osmand.binary.OsmandOdb.TransportRoutes build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private net.osmand.binary.OsmandOdb.TransportRoutes buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public net.osmand.binary.OsmandOdb.TransportRoutes buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        if (result.routes_ != java.util.Collections.EMPTY_LIST) {
+          result.routes_ =
+            java.util.Collections.unmodifiableList(result.routes_);
+        }
+        net.osmand.binary.OsmandOdb.TransportRoutes returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof net.osmand.binary.OsmandOdb.TransportRoutes) {
+          return mergeFrom((net.osmand.binary.OsmandOdb.TransportRoutes)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(net.osmand.binary.OsmandOdb.TransportRoutes other) {
+        if (other == net.osmand.binary.OsmandOdb.TransportRoutes.getDefaultInstance()) return this;
+        if (!other.routes_.isEmpty()) {
+          if (result.routes_.isEmpty()) {
+            result.routes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.TransportRoute>();
+          }
+          result.routes_.addAll(other.routes_);
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 50: {
+              net.osmand.binary.OsmandOdb.TransportRoute.Builder subBuilder = net.osmand.binary.OsmandOdb.TransportRoute.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addRoutes(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // repeated .TransportRoute routes = 6;
+      public java.util.List<net.osmand.binary.OsmandOdb.TransportRoute> getRoutesList() {
+        return java.util.Collections.unmodifiableList(result.routes_);
+      }
+      public int getRoutesCount() {
+        return result.getRoutesCount();
+      }
+      public net.osmand.binary.OsmandOdb.TransportRoute getRoutes(int index) {
+        return result.getRoutes(index);
+      }
+      public Builder setRoutes(int index, net.osmand.binary.OsmandOdb.TransportRoute value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.routes_.set(index, value);
+        return this;
+      }
+      public Builder setRoutes(int index, net.osmand.binary.OsmandOdb.TransportRoute.Builder builderForValue) {
+        result.routes_.set(index, builderForValue.build());
+        return this;
+      }
+      public Builder addRoutes(net.osmand.binary.OsmandOdb.TransportRoute value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        if (result.routes_.isEmpty()) {
+          result.routes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.TransportRoute>();
+        }
+        result.routes_.add(value);
+        return this;
+      }
+      public Builder addRoutes(net.osmand.binary.OsmandOdb.TransportRoute.Builder builderForValue) {
+        if (result.routes_.isEmpty()) {
+          result.routes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.TransportRoute>();
+        }
+        result.routes_.add(builderForValue.build());
+        return this;
+      }
+      public Builder addAllRoutes(
+          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.TransportRoute> values) {
+        if (result.routes_.isEmpty()) {
+          result.routes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.TransportRoute>();
+        }
+        super.addAll(values, result.routes_);
+        return this;
+      }
+      public Builder clearRoutes() {
+        result.routes_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:TransportRoutes)
+    }
+    
+    static {
+      defaultInstance = new TransportRoutes(true);
+      net.osmand.binary.OsmandOdb.internalForceInit();
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:TransportRoutes)
+  }
+  
   public static final class TransportRoute extends
       com.google.protobuf.GeneratedMessage {
     // Use TransportRoute.newBuilder() to construct.
@@ -8248,26 +8582,26 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_TransportStop_fieldAccessorTable;
     }
     
-    // required sint64 id = 1;
-    public static final int ID_FIELD_NUMBER = 1;
-    private boolean hasId;
-    private long id_ = 0L;
-    public boolean hasId() { return hasId; }
-    public long getId() { return id_; }
-    
-    // required sint32 dx = 2;
-    public static final int DX_FIELD_NUMBER = 2;
+    // required sint32 dx = 1;
+    public static final int DX_FIELD_NUMBER = 1;
     private boolean hasDx;
     private int dx_ = 0;
     public boolean hasDx() { return hasDx; }
     public int getDx() { return dx_; }
     
-    // required sint32 dy = 3;
-    public static final int DY_FIELD_NUMBER = 3;
+    // required sint32 dy = 2;
+    public static final int DY_FIELD_NUMBER = 2;
     private boolean hasDy;
     private int dy_ = 0;
     public boolean hasDy() { return hasDy; }
     public int getDy() { return dy_; }
+    
+    // required sint64 id = 5;
+    public static final int ID_FIELD_NUMBER = 5;
+    private boolean hasId;
+    private long id_ = 0L;
+    public boolean hasId() { return hasId; }
+    public long getId() { return id_; }
     
     // required uint32 name = 6;
     public static final int NAME_FIELD_NUMBER = 6;
@@ -8298,9 +8632,9 @@ public final class OsmandOdb {
     private void initFields() {
     }
     public final boolean isInitialized() {
-      if (!hasId) return false;
       if (!hasDx) return false;
       if (!hasDy) return false;
+      if (!hasId) return false;
       if (!hasName) return false;
       return true;
     }
@@ -8308,14 +8642,14 @@ public final class OsmandOdb {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (hasId()) {
-        output.writeSInt64(1, getId());
-      }
       if (hasDx()) {
-        output.writeSInt32(2, getDx());
+        output.writeSInt32(1, getDx());
       }
       if (hasDy()) {
-        output.writeSInt32(3, getDy());
+        output.writeSInt32(2, getDy());
+      }
+      if (hasId()) {
+        output.writeSInt64(5, getId());
       }
       if (hasName()) {
         output.writeUInt32(6, getName());
@@ -8335,17 +8669,17 @@ public final class OsmandOdb {
       if (size != -1) return size;
     
       size = 0;
-      if (hasId()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeSInt64Size(1, getId());
-      }
       if (hasDx()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeSInt32Size(2, getDx());
+          .computeSInt32Size(1, getDx());
       }
       if (hasDy()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeSInt32Size(3, getDy());
+          .computeSInt32Size(2, getDy());
+      }
+      if (hasId()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt64Size(5, getId());
       }
       if (hasName()) {
         size += com.google.protobuf.CodedOutputStream
@@ -8526,14 +8860,14 @@ public final class OsmandOdb {
       
       public Builder mergeFrom(net.osmand.binary.OsmandOdb.TransportStop other) {
         if (other == net.osmand.binary.OsmandOdb.TransportStop.getDefaultInstance()) return this;
-        if (other.hasId()) {
-          setId(other.getId());
-        }
         if (other.hasDx()) {
           setDx(other.getDx());
         }
         if (other.hasDy()) {
           setDy(other.getDy());
+        }
+        if (other.hasId()) {
+          setId(other.getId());
         }
         if (other.hasName()) {
           setName(other.getName());
@@ -8573,15 +8907,15 @@ public final class OsmandOdb {
               break;
             }
             case 8: {
-              setId(input.readSInt64());
-              break;
-            }
-            case 16: {
               setDx(input.readSInt32());
               break;
             }
-            case 24: {
+            case 16: {
               setDy(input.readSInt32());
+              break;
+            }
+            case 40: {
+              setId(input.readSInt64());
               break;
             }
             case 48: {
@@ -8610,25 +8944,7 @@ public final class OsmandOdb {
       }
       
       
-      // required sint64 id = 1;
-      public boolean hasId() {
-        return result.hasId();
-      }
-      public long getId() {
-        return result.getId();
-      }
-      public Builder setId(long value) {
-        result.hasId = true;
-        result.id_ = value;
-        return this;
-      }
-      public Builder clearId() {
-        result.hasId = false;
-        result.id_ = 0L;
-        return this;
-      }
-      
-      // required sint32 dx = 2;
+      // required sint32 dx = 1;
       public boolean hasDx() {
         return result.hasDx();
       }
@@ -8646,7 +8962,7 @@ public final class OsmandOdb {
         return this;
       }
       
-      // required sint32 dy = 3;
+      // required sint32 dy = 2;
       public boolean hasDy() {
         return result.hasDy();
       }
@@ -8661,6 +8977,24 @@ public final class OsmandOdb {
       public Builder clearDy() {
         result.hasDy = false;
         result.dy_ = 0;
+        return this;
+      }
+      
+      // required sint64 id = 5;
+      public boolean hasId() {
+        return result.hasId();
+      }
+      public long getId() {
+        return result.getId();
+      }
+      public Builder setId(long value) {
+        result.hasId = true;
+        result.id_ = value;
+        return this;
+      }
+      public Builder clearId() {
+        result.hasId = false;
+        result.id_ = 0L;
         return this;
       }
       
@@ -9395,17 +9729,12 @@ public final class OsmandOdb {
       return net.osmand.binary.OsmandOdb.internal_static_OsmAndTransportIndex_fieldAccessorTable;
     }
     
-    // repeated .TransportRoute routes = 3;
+    // optional .TransportRoutes routes = 3;
     public static final int ROUTES_FIELD_NUMBER = 3;
-    private java.util.List<net.osmand.binary.OsmandOdb.TransportRoute> routes_ =
-      java.util.Collections.emptyList();
-    public java.util.List<net.osmand.binary.OsmandOdb.TransportRoute> getRoutesList() {
-      return routes_;
-    }
-    public int getRoutesCount() { return routes_.size(); }
-    public net.osmand.binary.OsmandOdb.TransportRoute getRoutes(int index) {
-      return routes_.get(index);
-    }
+    private boolean hasRoutes;
+    private net.osmand.binary.OsmandOdb.TransportRoutes routes_;
+    public boolean hasRoutes() { return hasRoutes; }
+    public net.osmand.binary.OsmandOdb.TransportRoutes getRoutes() { return routes_; }
     
     // optional .TransportStopsTree stops = 6;
     public static final int STOPS_FIELD_NUMBER = 6;
@@ -9422,13 +9751,14 @@ public final class OsmandOdb {
     public net.osmand.binary.OsmandOdb.StringTable getStringTable() { return stringTable_; }
     
     private void initFields() {
+      routes_ = net.osmand.binary.OsmandOdb.TransportRoutes.getDefaultInstance();
       stops_ = net.osmand.binary.OsmandOdb.TransportStopsTree.getDefaultInstance();
       stringTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
     }
     public final boolean isInitialized() {
       if (!hasStringTable) return false;
-      for (net.osmand.binary.OsmandOdb.TransportRoute element : getRoutesList()) {
-        if (!element.isInitialized()) return false;
+      if (hasRoutes()) {
+        if (!getRoutes().isInitialized()) return false;
       }
       if (hasStops()) {
         if (!getStops().isInitialized()) return false;
@@ -9439,8 +9769,8 @@ public final class OsmandOdb {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      for (net.osmand.binary.OsmandOdb.TransportRoute element : getRoutesList()) {
-        output.writeMessage(3, element);
+      if (hasRoutes()) {
+        output.writeMessage(3, getRoutes());
       }
       if (hasStops()) {
         output.writeMessage(6, getStops());
@@ -9457,9 +9787,9 @@ public final class OsmandOdb {
       if (size != -1) return size;
     
       size = 0;
-      for (net.osmand.binary.OsmandOdb.TransportRoute element : getRoutesList()) {
+      if (hasRoutes()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, element);
+          .computeMessageSize(3, getRoutes());
       }
       if (hasStops()) {
         size += com.google.protobuf.CodedOutputStream
@@ -9611,10 +9941,6 @@ public final class OsmandOdb {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
         }
-        if (result.routes_ != java.util.Collections.EMPTY_LIST) {
-          result.routes_ =
-            java.util.Collections.unmodifiableList(result.routes_);
-        }
         net.osmand.binary.OsmandOdb.OsmAndTransportIndex returnMe = result;
         result = null;
         return returnMe;
@@ -9631,11 +9957,8 @@ public final class OsmandOdb {
       
       public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndTransportIndex other) {
         if (other == net.osmand.binary.OsmandOdb.OsmAndTransportIndex.getDefaultInstance()) return this;
-        if (!other.routes_.isEmpty()) {
-          if (result.routes_.isEmpty()) {
-            result.routes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.TransportRoute>();
-          }
-          result.routes_.addAll(other.routes_);
+        if (other.hasRoutes()) {
+          mergeRoutes(other.getRoutes());
         }
         if (other.hasStops()) {
           mergeStops(other.getStops());
@@ -9669,9 +9992,12 @@ public final class OsmandOdb {
               break;
             }
             case 26: {
-              net.osmand.binary.OsmandOdb.TransportRoute.Builder subBuilder = net.osmand.binary.OsmandOdb.TransportRoute.newBuilder();
+              net.osmand.binary.OsmandOdb.TransportRoutes.Builder subBuilder = net.osmand.binary.OsmandOdb.TransportRoutes.newBuilder();
+              if (hasRoutes()) {
+                subBuilder.mergeFrom(getRoutes());
+              }
               input.readMessage(subBuilder, extensionRegistry);
-              addRoutes(subBuilder.buildPartial());
+              setRoutes(subBuilder.buildPartial());
               break;
             }
             case 50: {
@@ -9697,54 +10023,40 @@ public final class OsmandOdb {
       }
       
       
-      // repeated .TransportRoute routes = 3;
-      public java.util.List<net.osmand.binary.OsmandOdb.TransportRoute> getRoutesList() {
-        return java.util.Collections.unmodifiableList(result.routes_);
+      // optional .TransportRoutes routes = 3;
+      public boolean hasRoutes() {
+        return result.hasRoutes();
       }
-      public int getRoutesCount() {
-        return result.getRoutesCount();
+      public net.osmand.binary.OsmandOdb.TransportRoutes getRoutes() {
+        return result.getRoutes();
       }
-      public net.osmand.binary.OsmandOdb.TransportRoute getRoutes(int index) {
-        return result.getRoutes(index);
-      }
-      public Builder setRoutes(int index, net.osmand.binary.OsmandOdb.TransportRoute value) {
+      public Builder setRoutes(net.osmand.binary.OsmandOdb.TransportRoutes value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        result.routes_.set(index, value);
+        result.hasRoutes = true;
+        result.routes_ = value;
         return this;
       }
-      public Builder setRoutes(int index, net.osmand.binary.OsmandOdb.TransportRoute.Builder builderForValue) {
-        result.routes_.set(index, builderForValue.build());
+      public Builder setRoutes(net.osmand.binary.OsmandOdb.TransportRoutes.Builder builderForValue) {
+        result.hasRoutes = true;
+        result.routes_ = builderForValue.build();
         return this;
       }
-      public Builder addRoutes(net.osmand.binary.OsmandOdb.TransportRoute value) {
-        if (value == null) {
-          throw new NullPointerException();
+      public Builder mergeRoutes(net.osmand.binary.OsmandOdb.TransportRoutes value) {
+        if (result.hasRoutes() &&
+            result.routes_ != net.osmand.binary.OsmandOdb.TransportRoutes.getDefaultInstance()) {
+          result.routes_ =
+            net.osmand.binary.OsmandOdb.TransportRoutes.newBuilder(result.routes_).mergeFrom(value).buildPartial();
+        } else {
+          result.routes_ = value;
         }
-        if (result.routes_.isEmpty()) {
-          result.routes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.TransportRoute>();
-        }
-        result.routes_.add(value);
-        return this;
-      }
-      public Builder addRoutes(net.osmand.binary.OsmandOdb.TransportRoute.Builder builderForValue) {
-        if (result.routes_.isEmpty()) {
-          result.routes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.TransportRoute>();
-        }
-        result.routes_.add(builderForValue.build());
-        return this;
-      }
-      public Builder addAllRoutes(
-          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.TransportRoute> values) {
-        if (result.routes_.isEmpty()) {
-          result.routes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.TransportRoute>();
-        }
-        super.addAll(values, result.routes_);
+        result.hasRoutes = true;
         return this;
       }
       public Builder clearRoutes() {
-        result.routes_ = java.util.Collections.emptyList();
+        result.hasRoutes = false;
+        result.routes_ = net.osmand.binary.OsmandOdb.TransportRoutes.getDefaultInstance();
         return this;
       }
       
@@ -9910,6 +10222,11 @@ public final class OsmandOdb {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_BuildingIndex_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_TransportRoutes_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_TransportRoutes_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_TransportRoute_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -9983,25 +10300,26 @@ public final class OsmandOdb {
       "\002id\030\006 \001(\004\022!\n\tbuildings\030\022 \003(\0132\016.BuildingI" +
       "ndex\"b\n\rBuildingIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007n" +
       "ame_en\030\002 \001(\t\022\n\n\002id\030\005 \001(\004\022\020\n\010postcode\030\006 \001",
-      "(\t\022\t\n\001x\030\003 \002(\021\022\t\n\001y\030\004 \002(\021\"\317\001\n\016TransportRo" +
-      "ute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003 \001(\r\022\020\n\010operato" +
-      "r\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022\014\n\004name\030\006 \001(\r\022\017\n\007na" +
-      "me_en\030\007 \001(\r\022\020\n\010distance\030\010 \001(\r\022(\n\013directS" +
-      "tops\030\017 \003(\0132\023.TransportRouteStop\022)\n\014rever" +
-      "seStops\030\020 \003(\0132\023.TransportRouteStop\"W\n\022Tr" +
-      "ansportRouteStop\022\n\n\002id\030\001 \002(\022\022\n\n\002dx\030\002 \002(\021" +
-      "\022\n\n\002dy\030\003 \002(\021\022\014\n\004name\030\006 \002(\r\022\017\n\007name_en\030\007 " +
-      "\001(\r\"b\n\rTransportStop\022\n\n\002id\030\001 \002(\022\022\n\n\002dx\030\002" +
-      " \002(\021\022\n\n\002dy\030\003 \002(\021\022\014\n\004name\030\006 \002(\r\022\017\n\007name_e",
-      "n\030\007 \001(\r\022\016\n\006routes\030\020 \003(\r\"\244\001\n\022TransportSto" +
-      "psTree\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003t" +
-      "op\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022%\n\010subtrees\030\007 \003" +
-      "(\0132\023.TransportStopsTree\022\035\n\005leafs\030\010 \003(\0132\016" +
-      ".TransportStop\022\016\n\006baseId\030\020 \001(\004\"~\n\024OsmAnd" +
-      "TransportIndex\022\037\n\006routes\030\003 \003(\0132\017.Transpo" +
-      "rtRoute\022\"\n\005stops\030\006 \001(\0132\023.TransportStopsT" +
-      "ree\022!\n\013stringTable\030\t \002(\0132\014.StringTableB\023" +
-      "\n\021net.osmand.binary"
+      "(\t\022\t\n\001x\030\003 \002(\021\022\t\n\001y\030\004 \002(\021\"2\n\017TransportRou" +
+      "tes\022\037\n\006routes\030\006 \003(\0132\017.TransportRoute\"\317\001\n" +
+      "\016TransportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003 \001(" +
+      "\r\022\020\n\010operator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022\014\n\004name" +
+      "\030\006 \001(\r\022\017\n\007name_en\030\007 \001(\r\022\020\n\010distance\030\010 \001(" +
+      "\r\022(\n\013directStops\030\017 \003(\0132\023.TransportRouteS" +
+      "top\022)\n\014reverseStops\030\020 \003(\0132\023.TransportRou" +
+      "teStop\"W\n\022TransportRouteStop\022\n\n\002id\030\001 \002(\022" +
+      "\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\014\n\004name\030\006 \002(\r\022\017" +
+      "\n\007name_en\030\007 \001(\r\"b\n\rTransportStop\022\n\n\002dx\030\001",
+      " \002(\021\022\n\n\002dy\030\002 \002(\021\022\n\n\002id\030\005 \002(\022\022\014\n\004name\030\006 \002" +
+      "(\r\022\017\n\007name_en\030\007 \001(\r\022\016\n\006routes\030\020 \003(\r\"\244\001\n\022" +
+      "TransportStopsTree\022\014\n\004left\030\001 \002(\021\022\r\n\005righ" +
+      "t\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022%\n\010" +
+      "subtrees\030\007 \003(\0132\023.TransportStopsTree\022\035\n\005l" +
+      "eafs\030\010 \003(\0132\016.TransportStop\022\016\n\006baseId\030\020 \001" +
+      "(\004\"\177\n\024OsmAndTransportIndex\022 \n\006routes\030\003 \001" +
+      "(\0132\020.TransportRoutes\022\"\n\005stops\030\006 \001(\0132\023.Tr" +
+      "ansportStopsTree\022!\n\013stringTable\030\t \002(\0132\014." +
+      "StringTableB\023\n\021net.osmand.binary"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10128,8 +10446,16 @@ public final class OsmandOdb {
               new java.lang.String[] { "Name", "NameEn", "Id", "Postcode", "X", "Y", },
               net.osmand.binary.OsmandOdb.BuildingIndex.class,
               net.osmand.binary.OsmandOdb.BuildingIndex.Builder.class);
-          internal_static_TransportRoute_descriptor =
+          internal_static_TransportRoutes_descriptor =
             getDescriptor().getMessageTypes().get(15);
+          internal_static_TransportRoutes_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_TransportRoutes_descriptor,
+              new java.lang.String[] { "Routes", },
+              net.osmand.binary.OsmandOdb.TransportRoutes.class,
+              net.osmand.binary.OsmandOdb.TransportRoutes.Builder.class);
+          internal_static_TransportRoute_descriptor =
+            getDescriptor().getMessageTypes().get(16);
           internal_static_TransportRoute_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TransportRoute_descriptor,
@@ -10137,7 +10463,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.TransportRoute.class,
               net.osmand.binary.OsmandOdb.TransportRoute.Builder.class);
           internal_static_TransportRouteStop_descriptor =
-            getDescriptor().getMessageTypes().get(16);
+            getDescriptor().getMessageTypes().get(17);
           internal_static_TransportRouteStop_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TransportRouteStop_descriptor,
@@ -10145,15 +10471,15 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.TransportRouteStop.class,
               net.osmand.binary.OsmandOdb.TransportRouteStop.Builder.class);
           internal_static_TransportStop_descriptor =
-            getDescriptor().getMessageTypes().get(17);
+            getDescriptor().getMessageTypes().get(18);
           internal_static_TransportStop_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TransportStop_descriptor,
-              new java.lang.String[] { "Id", "Dx", "Dy", "Name", "NameEn", "Routes", },
+              new java.lang.String[] { "Dx", "Dy", "Id", "Name", "NameEn", "Routes", },
               net.osmand.binary.OsmandOdb.TransportStop.class,
               net.osmand.binary.OsmandOdb.TransportStop.Builder.class);
           internal_static_TransportStopsTree_descriptor =
-            getDescriptor().getMessageTypes().get(18);
+            getDescriptor().getMessageTypes().get(19);
           internal_static_TransportStopsTree_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TransportStopsTree_descriptor,
@@ -10161,7 +10487,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.TransportStopsTree.class,
               net.osmand.binary.OsmandOdb.TransportStopsTree.Builder.class);
           internal_static_OsmAndTransportIndex_descriptor =
-            getDescriptor().getMessageTypes().get(19);
+            getDescriptor().getMessageTypes().get(20);
           internal_static_OsmAndTransportIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndTransportIndex_descriptor,
