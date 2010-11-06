@@ -16,8 +16,7 @@ public interface TransportIndexRepository {
 	
 	public boolean checkCachedObjects(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, List<TransportStop> toFill, boolean fillFound);
 	
-	
-	public List<TransportStop> searchTransportStops(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int limit, List<TransportStop> stops);
+	public boolean acceptTransportStop(TransportStop stop);
 	
 	/**
 	 * 

@@ -214,6 +214,11 @@ public class TransportIndexRepositoryOdb extends BaseLocationIndexRepository<Tra
 		return list;
 		
 	}
+	
+	@Override
+	public boolean acceptTransportStop(TransportStop stop) {
+		return checkContains(stop.getLocation().getLatitude(), stop.getLocation().getLongitude());
+	}
 
 	protected List<RouteInfoLocation> preloadRouteStopsAndCalculateDistance(final LatLon loc, LatLon locationToGo,
 			Map<Long, RouteInfoLocation> registeredRoutes) {

@@ -125,10 +125,13 @@ public class BinaryMapIndexWriter {
 		return length;
 	}
 	
-	public void startWriteMapIndex() throws IOException{
+	public void startWriteMapIndex(String name) throws IOException{
 		pushState(MAP_INDEX_INIT, OSMAND_STRUCTURE_INIT);
 		codedOutStream.writeTag(OsmandOdb.OsmAndStructure.MAPINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		preserveInt32Size();
+		if(name != null){
+			codedOutStream.writeString(OsmandOdb.OsmAndMapIndex.NAME_FIELD_NUMBER, name);
+		}
 	}
 	
 	
@@ -552,11 +555,14 @@ public class BinaryMapIndexWriter {
 		return size;
 	}
 	
-	public void startWriteTransportIndex() throws IOException {
+	public void startWriteTransportIndex(String name) throws IOException {
 		pushState(TRANSPORT_INDEX_INIT, OSMAND_STRUCTURE_INIT);
 		codedOutStream.writeTag(OsmandOdb.OsmAndStructure.TRANSPORTINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		stackBounds.push(new Bounds(0, 0, 0, 0)); // for transport stops tree
 		preserveInt32Size();
+		if(name != null){
+			codedOutStream.writeString(OsmandOdb.OsmAndTransportIndex.NAME_FIELD_NUMBER, name);
+		}
 	}
 	
 	public void endWriteTransportIndex() throws IOException {
