@@ -204,7 +204,8 @@ message TransportStop {
    optional uint32 name_en = 7; // index in message table
    
    repeated uint32 routes = 16; // -shift to transport route containing that stop 
-   								// TransportStop.Message.start - routes[i] = TransportRoute.Message.start - sizeof(TransportRoute.Message.length)
+   								// TransportStop.Message.start -  sizeof(TransportStop.Message.length) - routes[i] 
+   								//				= TransportRoute.Message.start - sizeof(TransportRoute.Message.length)
    								// message is started when body is started 
  
 }

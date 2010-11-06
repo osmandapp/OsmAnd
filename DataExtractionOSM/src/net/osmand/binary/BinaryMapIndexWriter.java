@@ -662,8 +662,10 @@ public class BinaryMapIndexWriter {
 			stackBaseIds.pop();
 			stackBaseIds.push(id);
 		}
+		codedOutStream.writeTag(OsmandOdb.TransportStopsTree.LEAFS_FIELD_NUMBER, WireFormat.FieldType.MESSAGE.getWireType());
 		codedOutStream.flush();
 		long fp = raf.getFilePointer();
+		
 		OsmandOdb.TransportStop.Builder ts = OsmandOdb.TransportStop.newBuilder();
 		ts.setName(registerString(stringTable, name));
 		if(nameEn != null){
@@ -676,7 +678,7 @@ public class BinaryMapIndexWriter {
 			ts.addRoutes((int)(fp - i));
 		}
 		
-		codedOutStream.writeMessage(OsmandOdb.TransportStopsTree.LEAFS_FIELD_NUMBER, ts.build());
+		codedOutStream.writeMessageNoTag(ts.build());
 	}
 	
 	

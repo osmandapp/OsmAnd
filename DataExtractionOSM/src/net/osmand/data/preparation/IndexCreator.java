@@ -1734,8 +1734,8 @@ public class IndexCreator {
 				selectTransportRouteStop.setLong(1, id);
 				ResultSet rs = selectTransportStop.executeQuery();
 				if (rs.next()) {
-					int x24 = (int) MapUtils.getLongitudeFromTile(24, rs.getDouble(2));
-					int y24 = (int) MapUtils.getLongitudeFromTile(24, rs.getDouble(3));
+					int x24 = (int) MapUtils.getTileNumberX(24, rs.getDouble(3));
+					int y24 = (int) MapUtils.getTileNumberY(24, rs.getDouble(2));
 					String name = rs.getString(4);
 					String nameEn = rs.getString(5);
 					if(nameEn != null && nameEn.equals(Junidecode.unidecode(name))){
