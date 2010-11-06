@@ -1,5 +1,20 @@
 package net.osmand.data.index;
 
+import static net.osmand.data.index.IndexConstants.ADDRESS_INDEX_EXT;
+import static net.osmand.data.index.IndexConstants.ADDRESS_INDEX_EXT_ZIP;
+import static net.osmand.data.index.IndexConstants.ADDRESS_TABLE_VERSION;
+import static net.osmand.data.index.IndexConstants.BINARY_MAP_INDEX_EXT;
+import static net.osmand.data.index.IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
+import static net.osmand.data.index.IndexConstants.BINARY_MAP_VERSION;
+import static net.osmand.data.index.IndexConstants.POI_INDEX_EXT;
+import static net.osmand.data.index.IndexConstants.POI_INDEX_EXT_ZIP;
+import static net.osmand.data.index.IndexConstants.POI_TABLE_VERSION;
+import static net.osmand.data.index.IndexConstants.TRANSPORT_INDEX_EXT;
+import static net.osmand.data.index.IndexConstants.TRANSPORT_INDEX_EXT_ZIP;
+import static net.osmand.data.index.IndexConstants.TRANSPORT_TABLE_VERSION;
+import static net.osmand.data.index.IndexConstants.VOICE_INDEX_EXT_ZIP;
+import static net.osmand.data.index.IndexConstants.VOICE_VERSION;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -12,6 +27,7 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import net.osmand.LogUtil;
@@ -28,12 +44,19 @@ public class DownloaderIndexFromGoogleCode {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws URISyntaxException, IOException {
-//		Map<String, String> indexFiles = DownloaderIndexFromGoogleCode.getIndexFiles(
-//				new String[] { IndexConstants.ADDRESS_INDEX_EXT,	IndexConstants.POI_INDEX_EXT, IndexConstants.TRANSPORT_INDEX_EXT,
-//						IndexConstants.ADDRESS_INDEX_EXT_ZIP,	IndexConstants.POI_INDEX_EXT_ZIP, IndexConstants.TRANSPORT_INDEX_EXT_ZIP,}, 
-//				new String[] {	IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "",  //$NON-NLS-1$//$NON-NLS-2$
-//								IndexConstants.TRANSPORT_TABLE_VERSION + "" , //$NON-NLS-1$
-//								IndexConstants.ADDRESS_TABLE_VERSION + "", IndexConstants.POI_TABLE_VERSION + "",  //$NON-NLS-1$//$NON-NLS-2$
+		Map<String, String> files = DownloaderIndexFromGoogleCode.getIndexFiles(new LinkedHashMap<String, String>(),
+				ADDRESS_TABLE_VERSION + ADDRESS_INDEX_EXT,
+				ADDRESS_TABLE_VERSION + ADDRESS_INDEX_EXT_ZIP,
+				POI_TABLE_VERSION + POI_INDEX_EXT,
+				POI_TABLE_VERSION + POI_INDEX_EXT_ZIP,
+				TRANSPORT_TABLE_VERSION + TRANSPORT_INDEX_EXT,
+				TRANSPORT_TABLE_VERSION + TRANSPORT_INDEX_EXT_ZIP,
+				BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT,
+				BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT_ZIP,
+				VOICE_VERSION + VOICE_INDEX_EXT_ZIP);
+		for(String s : files.keySet()){
+			System.out.println(s);
+		}
 //								IndexConstants.TRANSPORT_TABLE_VERSION + "" }); //$NON-NLS-1$
 //		Map<String, String> indexFiles = DownloaderIndexFromGoogleCode.getIndexFiles(
 //				new String[] { IndexConstants.VOICE_INDEX_EXT_ZIP}, 
@@ -54,29 +77,49 @@ public class DownloaderIndexFromGoogleCode {
 	}
 	
 	
-	private static Map<String, String> getContent(String[] ext, String[] version, Map<String, String> files) {
-		try {
-			URL url = new URL("http://code.google.com/p/osmand/downloads/list?num=1500&start=0"); //$NON-NLS-1$
-
-			BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-			String s = null;
-			String prevFile = null;
-			while ((s = reader.readLine()) != null) {
-				for(int i=0; i<ext.length; i++){
-					prevFile = getIndexFiles(files, s, prevFile, ext[i], version[i]);
+	private static Map<String, String> getContent(Map<String, String> files,
+			String... ext) {
+		BufferedReader reader = null;
+		int num = 400;
+		int start = 0;
+		int size = -1;
+		while (size != files.size()) {
+			size = files.size();
+			try {
+				URL url = new URL(
+						"http://code.google.com/p/osmand/downloads/list?num=" + num + "&start=" + start); //$NON-NLS-1$
+				reader = new BufferedReader(new InputStreamReader(url
+						.openStream()));
+				String s = null;
+				String prevFile = null;
+				while ((s = reader.readLine()) != null) {
+					if (s.indexOf("files") != -1 || s.indexOf("{") != -1) {
+						for (String extension : ext) {
+							prevFile = getIndexFiles(files, s, prevFile, extension);
+						}
+					}
+				}
+				start += num + 1;
+			} catch (MalformedURLException e) {
+				log.error("Unexpected exception", e); //$NON-NLS-1$
+			} catch (IOException e) {
+				log.error("Input/Output exception", e); //$NON-NLS-1$
+			} finally {
+				if (reader != null) {
+					try {
+						reader.close();
+					} catch (IOException e) {
+						log.error("Error closing stream to url.", e);
+					}
 				}
 			}
-		} catch (MalformedURLException e) {
-			log.error("Unexpected exception", e); //$NON-NLS-1$
-		} catch (IOException e) {
-			log.error("Input/Output exception", e); //$NON-NLS-1$
-			
 		}
+		log.info("Loaded indexes:" + files.size());
 		return files;
 	}
 	
 
-	private static String getIndexFiles(Map<String, String> files, String content, String prevFile, String ext, String version){
+	private static String getIndexFiles(Map<String, String> files, String content, String prevFile, String ext){
 		int i = 0;
 		int prevI = -1;
 		if((i = content.indexOf(ext, i)) != -1) {
@@ -88,7 +131,7 @@ public class DownloaderIndexFromGoogleCode {
 			while (content.charAt(j) == '_' || Character.isLetterOrDigit(content.charAt(j)) || content.charAt(j) == '-') {
 				j--;
 			}
-			if(content.substring(j + 1, i).endsWith("_"+version)){ //$NON-NLS-1$
+			if(content.substring(j + 1, i).endsWith("_")){ //$NON-NLS-1$
 				prevFile = content.substring(j + 1, i) + ext;
 			}
 			
@@ -103,12 +146,8 @@ public class DownloaderIndexFromGoogleCode {
 		return prevFile;
 	}
 	
-	public static Map<String, String> getIndexFiles(String[] ext, String[] version, Map<String, String> files){
-		return getContent(ext, version, files);
-	}
-	
-	public static Map<String, String> getIndexFiles(String ext, String version, Map<String, String> files){
-		return getContent(new String[]{ext}, new String[]{version}, files);
+	public static Map<String, String> getIndexFiles(Map<String, String> files, String... ext){
+		return getContent(files, ext);
 	}
 	
 	public static URL getInputStreamToLoadIndex(String indexName) throws IOException{
