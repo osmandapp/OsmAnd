@@ -27,8 +27,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.Map.Entry;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
@@ -127,9 +125,9 @@ public class IndexCreator {
 	private PreparedStatement pselectTags;
 
 	// constants to start process from the middle and save temporary results
-	private boolean recreateOnlyBinaryFile = true; //false;
+	private boolean recreateOnlyBinaryFile = false; //false;
 	private boolean deleteOsmDB = false;
-	private boolean deleteDatabaseIndexes = false;
+	private boolean deleteDatabaseIndexes = true;
 	
 	private Connection dbConn;
 	private File dbFile;
@@ -1647,6 +1645,8 @@ public class IndexCreator {
 			
 			writer.startWriteTransportIndex();
 			
+			writer.startWriteTransportRoutes();
+			
 			// expect that memory would be enough
 			Map<String, Integer> stringTable = createStringTableForTransport();
 			Map<Long, Long> transportRoutes = new LinkedHashMap<Long, Long>();
@@ -1697,6 +1697,7 @@ public class IndexCreator {
 			}
 			rs.close();
 			selectTransportRouteData.close();
+			writer.endWriteTransportRoutes();
 			
 			PreparedStatement selectTransportStop = mapConnection.prepareStatement(
 					"SELECT A.id,  A.latitude,  A.longitude, A.name, A.name_en FROM transport_stop A where A.id = ?");
@@ -1839,7 +1840,6 @@ public class IndexCreator {
 			normalizeSuffixes = DataExtractionSettings.getSettings().getSuffixesToNormalizeStreets();
 		}
 		
-		boolean success = false;
 		// Main generation method
 		try {
 			//////////////////////////////////////////////////////////////////////////
@@ -2014,7 +2014,6 @@ public class IndexCreator {
 				writer.close();
 				log.info("Finish writing binary file");
 			}
-			success = true;
 		} finally {
 			try {
 				if (pselectNode != null) {
@@ -2336,6 +2335,8 @@ public class IndexCreator {
 //		 creator.setIndexPOI(true);
 		 creator.setIndexTransport(true);
 		 
+		 creator.recreateOnlyBinaryFile = true;
+		 creator.deleteDatabaseIndexes = false;
 		 
 		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
 		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);

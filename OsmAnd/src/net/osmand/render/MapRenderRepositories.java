@@ -61,7 +61,7 @@ public class MapRenderRepositories {
 	
 	private boolean interrupted = false;
 	private RenderingContext currentRenderingContext;
-	private SearchRequest searchRequest;
+	private SearchRequest<BinaryMapDataObject> searchRequest;
 	
 	
 	public MapRenderRepositories(Context context){

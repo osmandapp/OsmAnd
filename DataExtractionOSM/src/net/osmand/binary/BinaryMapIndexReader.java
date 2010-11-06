@@ -7,7 +7,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
@@ -15,6 +17,7 @@ import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
+import net.osmand.data.TransportStop;
 import net.osmand.data.City.CityType;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -27,10 +30,13 @@ import com.google.protobuf.WireFormat;
 
 public class BinaryMapIndexReader {
 	
+	private final static int TRANSPORT_STOP_ZOOM = 24;
+	
 	private final RandomAccessFile raf;
 	private int version;
 	private List<MapRoot> mapIndexes = new ArrayList<MapRoot>();
 	private List<AddressRegion> addressIndexes = new ArrayList<AddressRegion>();
+	private List<TransportIndex> transportIndexes = new ArrayList<TransportIndex>();
 	private CodedInputStreamRAF codedIS;
 	
 	private final static Log log = LogUtil.getLog(BinaryMapIndexReader.class);
@@ -75,6 +81,16 @@ public class BinaryMapIndexReader {
 				codedIS.popLimit(oldLimit);
 				codedIS.seek(region.fileOffset + region.length);
 				break;
+			case OsmandOdb.OsmAndStructure.TRANSPORTINDEX_FIELD_NUMBER:
+				TransportIndex ind = new TransportIndex();
+				ind.length = readInt();
+				ind.fileOffset = codedIS.getTotalBytesRead();
+				oldLimit = codedIS.pushLimit(ind.length);
+				readTransportIndex(ind);
+				codedIS.popLimit(oldLimit);
+				codedIS.seek(ind.fileOffset + ind.length);
+				transportIndexes.add(ind);
+				break;
 			case OsmandOdb.OsmAndStructure.VERSIONCONFIRM_FIELD_NUMBER :
 				int cversion = codedIS.readUInt32();
 				initCorrectly = cversion == version;
@@ -86,6 +102,7 @@ public class BinaryMapIndexReader {
 		}
 	}
 	
+
 	private void skipUnknownField(int tag) throws IOException{
 		int wireType = WireFormat.getTagWireType(tag);
 		if(wireType == WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED){
@@ -96,6 +113,305 @@ public class BinaryMapIndexReader {
 		}
 	}
 	
+	private void readTransportIndex(TransportIndex ind) throws IOException {
+		while(true){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return;
+			case OsmandOdb.OsmAndTransportIndex.ROUTES_FIELD_NUMBER :
+				skipUnknownField(t);
+				break;
+			case OsmandOdb.OsmAndTransportIndex.STOPS_FIELD_NUMBER :
+				ind.stopsFileLength = readInt();
+				ind.stopsFileOffset = codedIS.getTotalBytesRead();
+				int old = codedIS.pushLimit(ind.stopsFileLength);
+				readTransportBounds(ind);
+				codedIS.popLimit(old);
+				break;
+			case OsmandOdb.OsmAndTransportIndex.STRINGTABLE_FIELD_NUMBER :
+				IndexStringTable st = new IndexStringTable();
+				st.length = codedIS.readRawVarint32();
+				st.fileOffset = codedIS.getTotalBytesRead();
+				readStringTable(st, 0, 30, true);
+				ind.stringTable = st;
+				codedIS.seek(st.length + st.fileOffset);
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+	
+	// if cache false put into window
+	private int readStringTable(IndexStringTable st, int startOffset, int length, boolean cache) throws IOException {
+		int old = codedIS.pushAbsoluteLimit(st.fileOffset + st.length);
+		int toSkip = seekUsingOffsets(st, startOffset);
+		if(!cache){
+			st.window.clear();
+			st.windowOffset = startOffset;
+		}
+		
+		while (length > 0) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				length = 0;
+				break;
+			case OsmandOdb.StringTable.S_FIELD_NUMBER:
+				if (toSkip > 0) {
+					toSkip--;
+					skipUnknownField(t);
+				} else {
+					String string = codedIS.readString();
+					if(cache){
+						st.cacheOfStrings.put(startOffset, string);
+					} else {
+						st.window.add(string);
+					}
+					startOffset++;
+					length--;
+				}
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+		codedIS.popLimit(old);
+		return startOffset;
+	}
+	
+	protected String getStringFromStringTable(IndexStringTable st, int ind) throws IOException {
+		int lastRead = Integer.MAX_VALUE;
+		while (lastRead >= ind) {
+			if (st.cacheOfStrings.containsKey(ind)) {
+				return st.cacheOfStrings.get(ind);
+			}
+			if (ind >= st.windowOffset && (ind - st.windowOffset) < st.window.size()) {
+				return st.window.get(ind - st.windowOffset);
+			}
+			lastRead = readStringTable(st, ind - IndexStringTable.WINDOW_SIZE / 4, IndexStringTable.WINDOW_SIZE, false);
+		}
+		return null;
+	}
+	
+	private int seekUsingOffsets(IndexStringTable st, int index) throws IOException {
+		initStringOffsets(st, index);
+		int shift = 0;
+		int a = index / IndexStringTable.SIZE_OFFSET_ARRAY;
+		if (a > st.offsets.size()) {
+			a = st.offsets.size();
+		}
+		if (a > 0) {
+			shift = st.offsets.get(a - 1);
+		}
+		codedIS.seek(st.fileOffset + shift);
+		return index - a;
+	}
+	
+	private void initStringOffsets(IndexStringTable st, int index) throws IOException {
+		if (index > IndexStringTable.SIZE_OFFSET_ARRAY * (st.offsets.size() + 1)) {
+			int shift = 0;
+			if (!st.offsets.isEmpty()) {
+				shift = st.offsets.get(st.offsets.size() - 1);
+			}
+			codedIS.seek(st.fileOffset + shift);
+			int old = codedIS.pushLimit(st.length - shift);
+			while (index > IndexStringTable.SIZE_OFFSET_ARRAY * (st.offsets.size() + 1)) {
+				int ind = 0;
+				while (ind < IndexStringTable.SIZE_OFFSET_ARRAY && ind != -1) {
+					int t = codedIS.readTag();
+					int tag = WireFormat.getTagFieldNumber(t);
+					switch (tag) {
+					case 0:
+						ind = -1;
+						break;
+					case OsmandOdb.StringTable.S_FIELD_NUMBER:
+						skipUnknownField(t);
+						ind++;
+						break;
+					default:
+						skipUnknownField(t);
+						break;
+					}
+				}
+				if(ind == IndexStringTable.SIZE_OFFSET_ARRAY){
+					st.offsets.add(codedIS.getTotalBytesRead() - st.fileOffset);
+				} else {
+					// invalid index
+					break;
+				}
+			}
+			codedIS.popLimit(old);
+		}
+
+	}
+	
+	private void readTransportBounds(TransportIndex ind) throws IOException {
+		while(true){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return;
+			case OsmandOdb.TransportStopsTree.LEFT_FIELD_NUMBER :
+				ind.left = codedIS.readSInt32();
+				break;
+			case OsmandOdb.TransportStopsTree.RIGHT_FIELD_NUMBER :
+				ind.right = codedIS.readSInt32(); 
+				break;
+			case OsmandOdb.TransportStopsTree.TOP_FIELD_NUMBER :
+				ind.top = codedIS.readSInt32();
+				break;
+			case OsmandOdb.TransportStopsTree.BOTTOM_FIELD_NUMBER :
+				ind.bottom = codedIS.readSInt32(); 
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+	
+	private void searchTransportTreeBounds(int pleft, int pright, int ptop, int pbottom,
+			SearchRequest<TransportStop> req) throws IOException {
+		int init = 0;
+		int lastIndexResult = -1;
+		int cright = 0;
+		int cleft = 0;
+		int ctop = 0;
+		int cbottom = 0;
+		req.numberOfReadSubtrees++;
+		while(true){
+			if(req.isInterrupted()){
+				return;
+			}
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			if(init == 0xf){
+				// coordinates are init
+				init = 0;
+				if(cright < req.left || cleft > req.right || ctop > req.bottom || cbottom < req.top){
+					return;
+				} else {
+					req.numberOfAcceptedSubtrees++;
+				}
+			}
+			switch (tag) {
+			case 0:
+				return;
+			case OsmandOdb.TransportStopsTree.BOTTOM_FIELD_NUMBER :
+				cbottom = codedIS.readSInt32() + pbottom;
+				init |= 1;
+				break;
+			case OsmandOdb.TransportStopsTree.LEFT_FIELD_NUMBER :
+				cleft = codedIS.readSInt32() + pleft;
+				init |= 2;
+				break;
+			case OsmandOdb.TransportStopsTree.RIGHT_FIELD_NUMBER :
+				cright = codedIS.readSInt32() + pright;
+				init |= 4;
+				break;
+			case OsmandOdb.TransportStopsTree.TOP_FIELD_NUMBER :
+				ctop = codedIS.readSInt32() + ptop;
+				init |= 8;
+				break;
+			case OsmandOdb.TransportStopsTree.LEAFS_FIELD_NUMBER :
+				int length = codedIS.readRawVarint32();
+				int oldLimit = codedIS.pushLimit(length);
+				if(lastIndexResult == -1){
+					lastIndexResult = req.searchResults.size();
+				}
+				TransportStop transportStop = readTransportStop(cleft, cright, ctop, cbottom, req);
+				if(transportStop != null){
+					req.searchResults.add(transportStop);
+					
+				}
+				codedIS.popLimit(oldLimit);
+				break;
+			case OsmandOdb.TransportStopsTree.SUBTREES_FIELD_NUMBER :
+				// left, ... already initialized 
+				length = readInt();
+				int filePointer = codedIS.getTotalBytesRead();
+				oldLimit = codedIS.pushLimit(length);
+				searchTransportTreeBounds(cleft, cright, ctop, cbottom, req);
+				codedIS.popLimit(oldLimit);
+				codedIS.seek(filePointer + length);
+				if(lastIndexResult >= 0){
+					throw new IllegalStateException();
+				}
+				break;
+			case OsmandOdb.TransportStopsTree.BASEID_FIELD_NUMBER :
+				long baseId = codedIS.readUInt64();
+				if (lastIndexResult != -1) {
+					for (int i = lastIndexResult; i < req.searchResults.size(); i++) {
+						TransportStop rs = req.searchResults.get(i);
+						rs.setId(rs.getId() + baseId);
+					}
+				}
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+	
+	
+	private TransportStop readTransportStop(int cleft, int cright, int ctop, int cbottom, SearchRequest<TransportStop> req) throws IOException {
+		int shift = codedIS.getTotalBytesRead();
+		int tag = WireFormat.getTagFieldNumber(codedIS.readTag());
+		if(OsmandOdb.TransportStop.DX_FIELD_NUMBER != tag) {
+			throw new IllegalArgumentException();
+		}
+		int x = codedIS.readSInt32() + cleft;
+		
+		tag = WireFormat.getTagFieldNumber(codedIS.readTag());
+		if(OsmandOdb.TransportStop.DY_FIELD_NUMBER != tag) {
+			throw new IllegalArgumentException();
+		}
+		int y = codedIS.readSInt32() + ctop;
+		if(cright < x || cleft > x || ctop > y || cbottom < y){
+			codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+			return null;
+		}
+		
+		req.numberOfAcceptedObjects++;
+		req.cacheTypes.clear();
+		
+		TransportStop dataObject = new TransportStop();
+		dataObject.setLocation(MapUtils.getLatitudeFromTile(TRANSPORT_STOP_ZOOM, y), MapUtils.getLongitudeFromTile(TRANSPORT_STOP_ZOOM, x));
+		
+		while(true){
+			int t = codedIS.readTag();
+			tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				dataObject.setReferencesToRoutes(req.cacheTypes.toArray());
+				return dataObject;
+			case OsmandOdb.TransportStop.ROUTES_FIELD_NUMBER :
+				req.cacheTypes.add(shift - codedIS.readUInt32());
+				break;
+			case OsmandOdb.TransportStop.NAME_EN_FIELD_NUMBER :
+				dataObject.setName(""+((char) codedIS.readUInt32())); //$NON-NLS-1$
+				break;
+			case OsmandOdb.TransportStop.NAME_FIELD_NUMBER :
+				dataObject.setName(""+((char) codedIS.readUInt32())); //$NON-NLS-1$
+				break;
+			case OsmandOdb.TransportStop.ID_FIELD_NUMBER :
+				dataObject.setId(codedIS.readSInt64());
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+
 	private void readAddressIndex(AddressRegion region) throws IOException {
 		while(true){
 			int t = codedIS.readTag();
@@ -242,7 +558,7 @@ public class BinaryMapIndexReader {
 	
 	
 	
-	public List<BinaryMapDataObject> searchMapIndex(SearchRequest req) throws IOException {
+	public List<BinaryMapDataObject> searchMapIndex(SearchRequest<BinaryMapDataObject> req) throws IOException {
 		for (MapRoot index : mapIndexes) {
 			if (index.minZoom <= req.zoom && index.maxZoom >= req.zoom) {
 				if(index.right < req.left || index.left > req.right || index.top > req.bottom || index.bottom < req.top){
@@ -808,7 +1124,7 @@ public class BinaryMapIndexReader {
 	}
 	
 	private void searchMapTreeBounds(int pleft, int pright, int ptop, int pbottom,
-			SearchRequest req) throws IOException {
+			SearchRequest<BinaryMapDataObject> req) throws IOException {
 		int init = 0;
 		int lastIndexResult = -1;
 		int cright = 0;
@@ -913,7 +1229,7 @@ public class BinaryMapIndexReader {
 	}
 	
 	private int MASK_TO_READ = ~((1 << BinaryMapIndexWriter.SHIFT_COORDINATES) - 1);
-	private BinaryMapDataObject readMapDataObject(int left, int right, int top, int bottom, SearchRequest req) throws IOException {
+	private BinaryMapDataObject readMapDataObject(int left, int right, int top, int bottom, SearchRequest<BinaryMapDataObject> req) throws IOException {
 		int tag = WireFormat.getTagFieldNumber(codedIS.readTag());
 		if(OsmandOdb.MapData.COORDINATES_FIELD_NUMBER != tag) {
 			throw new IllegalArgumentException();
@@ -1071,8 +1387,8 @@ public class BinaryMapIndexReader {
 	}
 
 	
-	public static SearchRequest buildSearchRequest(int sleft, int sright, int stop, int sbottom, int zoom){
-		SearchRequest request = new SearchRequest();
+	public static SearchRequest<BinaryMapDataObject> buildSearchRequest(int sleft, int sright, int stop, int sbottom, int zoom){
+		SearchRequest<BinaryMapDataObject> request = new SearchRequest<BinaryMapDataObject>();
 		request.left = sleft;
 		request.right = sright;
 		request.top = stop;
@@ -1086,21 +1402,24 @@ public class BinaryMapIndexReader {
 			raf.close();
 			codedIS = null;
 			mapIndexes.clear();
+			addressIndexes.clear();
+			transportIndexes.clear();
 		}
 	}
 	
 	public static interface SearchFilter {
 		
 		public boolean accept(TIntArrayList types);
+		
 	}
 	
-	public static class SearchRequest {
+	public static class SearchRequest<T> {
 		int left = 0;
 		int right = 0;
 		int top = 0;
 		int bottom = 0;
 		int zoom = 15;
-		List<BinaryMapDataObject> searchResults = new ArrayList<BinaryMapDataObject>();
+		List<T> searchResults = new ArrayList<T>();
 		TIntArrayList cacheCoordinates = new TIntArrayList();
 		TIntArrayList cacheTypes = new TIntArrayList();
 		SearchFilter searchFilter = null;
@@ -1122,7 +1441,7 @@ public class BinaryMapIndexReader {
 			this.searchFilter = searchFilter;
 		}
 		
-		public List<BinaryMapDataObject> getSearchResults() {
+		public List<T> getSearchResults() {
 			return searchResults;
 		}
 		
@@ -1162,6 +1481,37 @@ public class BinaryMapIndexReader {
 		
 	}
 	
+	private static class TransportIndex {
+		int fileOffset = 0;
+		int length = 0;
+		
+		int left = 0;
+		int right = 0;
+		int top = 0;
+		int bottom = 0;
+		
+		int stopsFileOffset = 0;
+		int stopsFileLength = 0;
+		
+		
+		IndexStringTable stringTable = null;
+	}
+	
+	private static class IndexStringTable {
+		private static final int SIZE_OFFSET_ARRAY = 4; 
+		private static final int WINDOW_SIZE = 25;
+		int fileOffset = 0;
+		int length = 0;
+		
+		// offset from start for each SIZE_OFFSET_ARRAY elements
+		// (SIZE_OFFSET_ARRAY + 1) offset : offsets[0] + skipOneString()
+		TIntArrayList offsets = new TIntArrayList();
+		Map<Integer, String> cacheOfStrings = new LinkedHashMap<Integer, String>();
+		
+		int windowOffset = 0;
+		List<String> window = new ArrayList<String>();
+	}
+	
 	
 	private static class AddressRegion {
 		String name;
@@ -1176,10 +1526,11 @@ public class BinaryMapIndexReader {
 	}
 	
 	public static void main(String[] args) throws IOException {
-//		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Minsk.map.pbf"), "r");
-		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Belarus.map.pbf"), "r");
+		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Minsk.map.pbf"), "r");
+//		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Belarus_4.map.pbf"), "r");
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
 		System.out.println("VERSION " + reader.getVersion());
+		long time = System.currentTimeMillis();
 		
 		// test search
 //		int sleft = MapUtils.get31TileNumberX(27.596);
@@ -1195,9 +1546,8 @@ public class BinaryMapIndexReader {
 //		}
 		
 		// test address index search
-		String reg = reader.getRegionNames().get(0);
-		long time = System.currentTimeMillis();
-		List<City> cs = reader.getCities(reg);
+//		String reg = reader.getRegionNames().get(0);
+//		List<City> cs = reader.getCities(reg);
 //		for(City c : cs){
 //			reader.preloadStreets(c);
 //			int buildings = 0;
@@ -1212,11 +1562,19 @@ public class BinaryMapIndexReader {
 //			reader.preloadStreets(c);
 ////			System.out.println(c.getName());
 //		}
-		System.out.println(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
-		List<City> villages = reader.getVillages(reg, "кост", false);
-
-		System.out.println("Villages " + villages.size());
-		System.out.println(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
+//		List<City> villages = reader.getVillages(reg, "коче", false);
+//		System.out.println("Villages " + villages.size());
+		
+		// test transport
+		for(TransportIndex i : reader.transportIndexes){
+			System.out.println(i.left + " " + i.right + " " + i.top + " " + i.bottom);
+			System.out.println(i.stringTable.cacheOfStrings);
+			System.out.println(reader.getStringFromStringTable(i.stringTable, 58));
+			System.out.println(i.stringTable.offsets);
+			System.out.println(i.stringTable.window);
+		}
+		
+		System.out.println("MEMORY " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()));
 		System.out.println("Time " + (System.currentTimeMillis() - time));
 	}
 	
