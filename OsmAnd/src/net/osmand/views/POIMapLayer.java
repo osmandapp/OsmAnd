@@ -18,6 +18,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.graphics.Paint.Style;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 	
 	
 	private Paint pointAltUI;
+	private Paint point;
 	private OsmandMapTileView view;
 	private List<Amenity> objects = new ArrayList<Amenity>();
 
@@ -96,8 +98,13 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 
 		pointAltUI = new Paint();
 		pointAltUI.setColor(Color.rgb(255, 128, 0));
-		pointAltUI.setAlpha(200);
-		pointAltUI.setAntiAlias(true);
+		pointAltUI.setAlpha(160);
+		pointAltUI.setStyle(Style.FILL);
+		
+		point = new Paint();
+		point.setColor(Color.GRAY);
+		point.setAntiAlias(true);
+		point.setStyle(Style.STROKE);
 		resourceManager = view.getApplication().getResourceManager();
 	}
 	
@@ -123,10 +130,13 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 
 			objects.clear();
 			resourceManager.searchAmenitiesAsync(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, view.getZoom(), filter, objects);
+			int r = getRadiusPoi(view.getZoom());
 			for (Amenity o : objects) {
 				int x = view.getMapXForPoint(o.getLocation().getLongitude());
 				int y = view.getMapYForPoint(o.getLocation().getLatitude());
-				canvas.drawCircle(x, y, getRadiusPoi(view.getZoom()), pointAltUI);
+				
+				canvas.drawCircle(x, y, r, pointAltUI);
+				canvas.drawCircle(x, y, r, point);
 			}
 
 		}
