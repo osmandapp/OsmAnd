@@ -252,9 +252,15 @@ public class MapRenderingTypes {
 		boolean polygon = multipolygon;
 		if (!point && !polygon) {
 			// determining area or path
-			List<Long> ids = ((Way) e).getNodeIds();
-			if (ids.size() > 1) {
-				polygon = ((long) ids.get(0) == (long)ids.get(ids.size() - 1));
+			boolean area = "yes".equals(e.getTag("area"));
+			boolean highway = e.getTag("highway") != null;
+			if(highway && !area){
+				// skip the check for first and last point
+			} else {
+				List<Long> ids = ((Way) e).getNodeIds();
+				if (ids.size() > 1) {
+					polygon = ((long) ids.get(0) == (long) ids.get(ids.size() - 1));
+				}
 			}
 		}
 		
