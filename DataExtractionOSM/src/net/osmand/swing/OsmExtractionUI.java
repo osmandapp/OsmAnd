@@ -36,6 +36,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.xml.stream.XMLStreamException;
 
 import net.osmand.ExceptionHandler;
+import net.osmand.Version;
 import net.osmand.data.preparation.IndexCreator;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.ITileSource;
@@ -207,6 +208,18 @@ public class OsmExtractionUI implements IMapLocationListener {
 		JMenuItem openLogFile = new JMenuItem("Open log file...");
 		menu.add(openLogFile);
 		
+		menu = new JMenu("About");
+		bar.add(menu);
+		JMenuItem aboutApplication = new JMenuItem("About...");
+		menu.add(aboutApplication);
+		
+		
+		aboutApplication.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(frame, Version.APP_MAP_CREATOR_FULL_NAME);
+			}
+		});
 
 		openLogFile.addActionListener(new ActionListener() {
 			@Override
