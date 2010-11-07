@@ -1068,6 +1068,7 @@ public class MapRenderingTypes {
 		register(st, "leisure", "slipway", LEISURE, 9, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(st, "leisure", "fishing", LEISURE, 10, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(st, 9, "leisure", "nature_reserve", LEISURE, 11, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(st, 13, "natural", "park", LEISURE, 12, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(st, 13, "leisure", "park", LEISURE, 12, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(st, 13, "leisure", "recreation_ground", LEISURE, 12, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(st, "leisure", "playground", LEISURE, 13, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
@@ -1242,6 +1243,8 @@ public class MapRenderingTypes {
 		register(st, 11, "landuse", "salt_pond", LANDUSE, 25, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(st, 11, "landuse", "quarry", LANDUSE, 26, POLYGON_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 		register(st, 11, "landuse", "vineyard", LANDUSE, 27, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(st, 11, "landuse", "field", LANDUSE, 28, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
+		register(st, 11, "natural", "field", LANDUSE, 28, POLYGON_TYPE); //$NON-NLS-1$ //$NON-NLS-2$
 	
 	// 16. military
 		register(st, "military", "airfield", MILITARY, 1, POLYGON_WITH_CENTER_TYPE, POINT_TYPE); //$NON-NLS-1$ //$NON-NLS-2$

@@ -224,6 +224,14 @@ public class PolygonRenderer {
 					rc.main.shader = o.getShader(R.drawable.h_vineyard);
 				}
 				break;
+			case 28:
+				rc.main.fillArea = zoom >= 11;
+				rc.main.color = 0x30666600;
+				if(zoom >= 14){
+					rc.second.strokeWidth= 1;
+					rc.second.color = 0x60666600;
+				}
+				break;
 			}
 		} else if (type == MapRenderingTypes.MILITARY) {
 			if(subtype == 3){
