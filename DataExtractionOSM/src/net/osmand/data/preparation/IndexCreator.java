@@ -95,8 +95,14 @@ import rtree.Rect;
 public class IndexCreator {
 	private static final Log log = LogFactory.getLog(IndexCreator.class);
 
+	// ONLY derby.jar needed for derby dialect
+	private static final String DERBY_DIALECT = "DERBY";
+	private static final String H2_DIALECT = "H2";
+	private static final String SQLITE_DIALECT = "SQLITE";
+	private static final String CURRENT_DB = H2_DIALECT;
 
-	public static final int BATCH_SIZE = 10;
+	public static final int BATCH_SIZE = 1000;
+	public static final int BATCH_SIZE_OSM = 10000;
 	public static final String TEMP_NODES_DB = "nodes.tmp.odb";
 	
 	public static final int STEP_CITY_NODES = 1;
@@ -104,6 +110,7 @@ public class IndexCreator {
 	public static final int STEP_MAIN = 3;
 	
 	private File workingDir = null;
+	
 	
 	private boolean indexMap;
 	private boolean indexPOI;
@@ -196,9 +203,29 @@ public class IndexCreator {
 	private String[] normalizeDefaultSuffixes;
 	private String[] normalizeSuffixes;
 	
+	
+	
 	// local purpose
 	List<Integer> typeUse= new ArrayList<Integer>(8);
 	List<Long> restrictionsUse= new ArrayList<Long>(8);
+	
+	public static boolean usingSQLite(){
+		return CURRENT_DB.equals(SQLITE_DIALECT);
+	}
+	
+	public static boolean usingDerby(){
+		return CURRENT_DB.equals(DERBY_DIALECT);
+	}
+	
+	public static boolean usingH2(){
+		return CURRENT_DB.equals(H2_DIALECT);
+	}
+	
+	public static String getCurrentLongType(){
+		return usingSQLite() ? "long" : "bigint";
+	}
+	
+	
 	
 	public IndexCreator(File workingDir){
 		this.workingDir = workingDir;
@@ -265,24 +292,57 @@ public class IndexCreator {
 		public void initDatabase() throws SQLException {
 			// prepare tables
 			Statement stat = dbConn.createStatement();
-			stat.executeUpdate("drop table if exists node;");
-			stat.executeUpdate("create table node (id long, latitude double, longitude double);");
-			stat.executeUpdate("create index IdIndex ON node (id, latitude, longitude);");
-			stat.executeUpdate("drop table if exists ways;");
-			stat.executeUpdate("create table ways (id long, node long, ord smallint);");
-			stat.executeUpdate("create index IdWIndex ON ways (id, node);");
-			stat.executeUpdate("drop table if exists relations;");
-			stat.executeUpdate("create table relations (id long, member long, type byte, role text, ord smallint);");
-			stat.executeUpdate("create index IdRIndex ON relations (id, member, type);");
-			stat.executeUpdate("drop table if exists tags;");
-			stat.executeUpdate("create table tags (id long, type byte, key, value);");
-			stat.executeUpdate("create index IdTIndex ON tags (id, type);");
+			if (usingDerby()) {
+				try {
+					stat.executeUpdate("drop table node");
+				} catch (SQLException e) {
+					// ignore it
+				}
+			} else {
+				stat.executeUpdate("drop table if exists node");
+			}
+			String longType = usingSQLite() ? "long" : "bigint";
+			stat.executeUpdate("create table node (id "+longType+", latitude double, longitude double)");
+			stat.executeUpdate("create index IdIndex ON node (id, latitude, longitude)");
+			if (usingDerby()) {
+				try {
+					stat.executeUpdate("drop table ways");
+				} catch (SQLException e) {
+					// ignore it
+				}
+			} else {
+				stat.executeUpdate("drop table if exists ways");
+			}
+			stat.executeUpdate("create table ways (id "+longType+", node "+longType+", ord smallint)");
+			stat.executeUpdate("create index IdWIndex ON ways (id, node)");
+			if (usingDerby()) {
+				try {
+					stat.executeUpdate("drop table relations");
+				} catch (SQLException e) {
+					// ignore it
+				}
+			} else {
+				stat.executeUpdate("drop table if exists relations");
+			}
+			stat.executeUpdate("create table relations (id "+longType+", member "+longType+", type smallint, role varchar(255), ord smallint)");
+			stat.executeUpdate("create index IdRIndex ON relations (id, member, type)");
+			if (usingDerby()) {
+				try {
+					stat.executeUpdate("drop table tags");
+				} catch (SQLException e) {
+					// ignore it
+				}
+			} else {
+				stat.executeUpdate("drop table if exists ефпы");
+			}
+			stat.executeUpdate("create table tags (id "+longType+", type smallint, skeys varchar(255), value varchar(255))");
+			stat.executeUpdate("create index IdTIndex ON tags (id, type)");
 			stat.close();
 
-			prepNode = dbConn.prepareStatement("insert into node values (?, ?, ?);");
-			prepWays = dbConn.prepareStatement("insert into ways values (?, ?, ?);");
-			prepRelations = dbConn.prepareStatement("insert into relations values (?, ?, ?, ?, ?);");
-			prepTags = dbConn.prepareStatement("insert into tags values (?, ?, ?, ?);");
+			prepNode = dbConn.prepareStatement("insert into node values (?, ?, ?)");
+			prepWays = dbConn.prepareStatement("insert into ways values (?, ?, ?)");
+			prepRelations = dbConn.prepareStatement("insert into relations values (?, ?, ?, ?, ?)");
+			prepTags = dbConn.prepareStatement("insert into tags values (?, ?, ?, ?)");
 			dbConn.setAutoCommit(false);
 		}
 		
@@ -303,7 +363,6 @@ public class IndexCreator {
 				prepTags.executeBatch();
 			}
 			prepTags.close();
-			dbConn.setAutoCommit(true);
 		}
 
 		@Override
@@ -319,8 +378,9 @@ public class IndexCreator {
 					prepNode.setDouble(2, ((Node) e).getLatitude());
 					prepNode.setDouble(3, ((Node) e).getLongitude());
 					prepNode.addBatch();
-					if (currentCountNode >= BATCH_SIZE) {
+					if (currentCountNode >= BATCH_SIZE_OSM) {
 						prepNode.executeBatch();
+						dbConn.commit(); // clear memory
 						currentCountNode = 0;
 					}
 				} else if (e instanceof Way) {
@@ -333,8 +393,9 @@ public class IndexCreator {
 						prepWays.setLong(3, ord++);
 						prepWays.addBatch();
 					}
-					if (currentWaysCount >= BATCH_SIZE) {
+					if (currentWaysCount >= BATCH_SIZE_OSM) {
 						prepWays.executeBatch();
+						dbConn.commit(); // clear memory
 						currentWaysCount = 0;
 					}
 				} else {
@@ -346,11 +407,12 @@ public class IndexCreator {
 						prepRelations.setLong(2, i.getKey().getId());
 						prepRelations.setLong(3, i.getKey().getType().ordinal());
 						prepRelations.setString(4, i.getValue());
-						prepWays.setLong(5, ord++);
+						prepRelations.setLong(5, ord++);
 						prepRelations.addBatch();
 					}
-					if (currentRelationsCount >= BATCH_SIZE) {
+					if (currentRelationsCount >= BATCH_SIZE_OSM) {
 						prepRelations.executeBatch();
+						dbConn.commit(); // clear memory
 						currentRelationsCount = 0;
 					}
 				}
@@ -362,8 +424,9 @@ public class IndexCreator {
 					prepTags.setString(4, i.getValue());
 					prepTags.addBatch();
 				}
-				if (currentTagsCount >= BATCH_SIZE) {
+				if (currentTagsCount >= BATCH_SIZE_OSM) {
 					prepTags.executeBatch();
+					dbConn.commit(); // clear memory
 					currentTagsCount = 0;
 				}
 			} catch (SQLException ex) {
@@ -398,10 +461,68 @@ public class IndexCreator {
 		this.regionName = regionName;
 	}
 	
+	private Connection getDatabaseConnection(String fileName) throws SQLException {
+		return getDatabaseConnection(fileName, false);
+	}
 	
+	public static void removeDatabase(File file) throws SQLException {
+		if(usingH2()){
+			File[] list = file.getParentFile().listFiles();
+			for(File f : list){
+				if(f.getName().startsWith(file.getName())){
+					Algoritms.removeAllFiles(f);
+				}
+			}
+		} else {
+			Algoritms.removeAllFiles(file);
+		}
+		
+	}
+	
+	public static boolean databaseFileExists(File dbFile){
+		if(usingH2()){
+			return new File(dbFile.getAbsolutePath() + ".h2.db").exists();
+		} else {
+			return dbFile.exists();
+		}
+	}
+	private Connection getDatabaseConnection(String fileName, boolean forceSqLite) throws SQLException {
+		if (usingSQLite() || forceSqLite) {
+			try {
+				Class.forName("org.sqlite.JDBC");
+			} catch (ClassNotFoundException e) {
+				log.error("Illegal configuration", e);
+				throw new IllegalStateException(e);
+			}
+			return DriverManager.getConnection("jdbc:sqlite:" + fileName);
+		} else if (usingDerby()) {
+			try {
+				Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+			} catch (ClassNotFoundException e) {
+				log.error("Illegal configuration", e);
+				throw new IllegalStateException(e);
+			}
+			Connection conn = DriverManager.getConnection("jdbc:derby:" + fileName + ";create=true");
+			conn.setAutoCommit(false);
+			return conn;
+		} else if(usingH2()){
+			try {
+				Class.forName("org.h2.Driver");
+			} catch (ClassNotFoundException e) {
+				log.error("Illegal configuration", e);
+				throw new IllegalStateException(e);
+			}
+			
+			return DriverManager. getConnection("jdbc:h2:file:"+fileName);
+		} else {
+			throw new UnsupportedOperationException();
+		}
+
+	}
 	
 	public void loadEntityData(Entity e, boolean loadTags) throws SQLException {
-		if(e instanceof Node){
+		if(e instanceof Node || (e instanceof Way && !((Way) e).getNodes().isEmpty())){
+			// do not load tags for nodes inside way
 			return;
 		}
 		Map<EntityId, Entity> map = new LinkedHashMap<EntityId, Entity>();
@@ -410,7 +531,7 @@ public class IndexCreator {
 			if (pselectRelation.execute()) {
 				ResultSet rs = pselectRelation.getResultSet();
 				while (rs.next()) {
-					((Relation) e).addMember(rs.getLong(2), EntityType.values()[rs.getByte(3)], rs.getString(4));
+					((Relation) e).addMember(rs.getLong(2), EntityType.values()[rs.getInt(3)], rs.getString(4));
 				}
 				rs.close();
 			}
@@ -451,11 +572,11 @@ public class IndexCreator {
 			} else if (i.getType() == EntityType.RELATION) {
 				pselectRelation.setLong(1, i.getId());
 				if (pselectRelation.execute()) {
-					ResultSet rs = pselectNode.getResultSet();
+					ResultSet rs = pselectRelation.getResultSet();
 					Relation rel = new Relation(i.getId());
 					map.put(i, rel);
 					while (rs.next()) {
-						rel.addMember(rs.getLong(1), EntityType.values()[rs.getByte(2)], rs.getString(3));
+						rel.addMember(rs.getLong(2), EntityType.values()[rs.getInt(3)], rs.getString(4));
 					}
 					// do not load relation members recursively ? It is not needed for transport, address, poi before
 					rs.close();
@@ -514,30 +635,65 @@ public class IndexCreator {
 		String select;
 		int count = 0;
 		
+//		stat.executeUpdate("create table tags (id "+longType+", type smallint, skeys varchar(255), value varchar(255))");
+//		stat.executeUpdate("create table ways (id "+longType+", node "+longType+", ord smallint)");
+//		stat.executeUpdate("create table relations (id "+longType+", member "+longType+", type smallint, role varchar(255), ord smallint)");
 		if(type == EntityType.NODE){
-			select = "select * from node";
+			// filter out all nodes without tags
+			select = "select n.id, n.latitude, n.longitude, t.skeys, t.value from node n inner join tags t on n.id = t.id and t.type = 0 order by n.id";
 		} else if(type == EntityType.WAY){
-			select = "select distinct id from ways";
+			select = "select w.id, w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " +
+					"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 inner join node n on w.node = n.id " +
+					"order by w.id, w.ord";
 		} else {
-			select = "select distinct id from relations";
+			select = "select r.id, t.skeys, t.value  from relations r inner join tags t on t.id = r.id and t.type = 2 and r.ord = 0";
 		}
 		
 		ResultSet rs = statement.executeQuery(select);
+		Entity prevEntity = null;
+		
+		long prevId = -1;
 		while(rs.next()){
-			count++;
-			if(progress != null){
-				progress.progress(1);
-			}
-			Entity e;
+			long curId = rs.getLong(1);
+			boolean newEntity = curId != prevId;
+			Entity e = prevEntity;
 			if(type == EntityType.NODE){
-				e = new Node(rs.getDouble(2),rs.getDouble(3),rs.getLong(1));
+				if(newEntity){
+					e = new Node(rs.getDouble(2),rs.getDouble(3), curId);
+				}
+				e.putTag(rs.getString(4), rs.getString(5));
 			} else if(type == EntityType.WAY){
-				e = new Way(rs.getLong(1));
+				if(newEntity){
+					e = new Way(curId);
+				}
+				int ord = rs.getInt(3);
+				if(ord == 0 && rs.getObject(4) != null){
+					e.putTag(rs.getString(4), rs.getString(5));
+				}
+				if(newEntity || ord > 0){
+					((Way) e).addNode(new Node(rs.getDouble(6), rs.getDouble(7), rs.getLong(2)));
+				}
 			} else {
-				e = new Relation(rs.getLong(1));
+				if(newEntity){
+					e = new Relation(curId);
+				}
+				e.putTag(rs.getString(2), rs.getString(3));
 			}
-			loadEntityTags(type, e);
-			iterateEntity(e, step);
+			if(newEntity){
+				count++;
+				if(progress != null){
+					progress.progress(1);
+				}
+				if(prevEntity != null){
+					iterateEntity(prevEntity, step);
+				}
+				prevEntity = e;
+			}
+			prevId = curId;
+		}
+		if(prevEntity != null){
+			count++;
+			iterateEntity(prevEntity, step);
 		}
 		rs.close();
 		return count;
@@ -967,7 +1123,7 @@ public class IndexCreator {
 			
 			if (indexMap && (e instanceof Way || e instanceof Node)) {
 				// manipulate what kind of way to load
-				loadEntityData(e, true);
+				loadEntityData(e, false);
 				boolean inverse = "-1".equals(e.getTag(OSMTagKey.ONEWAY));
 				for (int i = 0; i < MAP_ZOOMS.length - 1; i++) {
 					writeBinaryEntityToMapDatabase(e, e.getId(), i == 0 ? inverse : false, i);
@@ -1825,13 +1981,6 @@ public class IndexCreator {
 			}
 		}
 		
-		try {
-			Class.forName("org.sqlite.JDBC");
-		} catch (ClassNotFoundException e) {
-			log.error("Illegal configuration", e);
-			throw new IllegalStateException(e);
-		}
-		
 		cities.clear();
 		cityManager.clear();
 		postalCodeRelations.clear();
@@ -1844,15 +1993,15 @@ public class IndexCreator {
 		try {
 			//////////////////////////////////////////////////////////////////////////
 			// 1. creating nodes db to fast access for all nodes and simply import all relations, ways, nodes to it
-			boolean loadFromPath = dbFile == null || !dbFile.exists();
+			boolean loadFromPath = dbFile == null || !databaseFileExists(dbFile);
 			if (dbFile == null) {
 				dbFile = new File(workingDir, TEMP_NODES_DB);
 				// to save space
-				if (dbFile.exists()) {
-					dbFile.delete();
+				if (databaseFileExists(dbFile)) {
+					removeDatabase(dbFile);
 				}
 			}
-			dbConn = DriverManager.getConnection("jdbc:sqlite:" + dbFile.getAbsolutePath());
+			dbConn = getDatabaseConnection(dbFile.getAbsolutePath());
 			
 			int allRelations = 100000;
 			int allWays = 1000000;
@@ -1871,13 +2020,13 @@ public class IndexCreator {
 			pselectNode = dbConn.prepareStatement("select * from node where id = ?");
 			pselectWay = dbConn.prepareStatement("select * from ways where id = ? order by ord");
 			pselectRelation = dbConn.prepareStatement("select * from relations where id = ? order by ord");
-			pselectTags = dbConn.prepareStatement("select key, value from tags where id = ? and type = ?");
+			pselectTags = dbConn.prepareStatement("select skeys, value from tags where id = ? and type = ?");
 			
 			// do not create temp map file and rtree files
 			if (recreateOnlyBinaryFile) {
 				mapFile = new File(workingDir, getMapFileName());
 				File tempDBMapFile = new File(workingDir, getTempMapDBFileName());
-				mapConnection = DriverManager.getConnection("jdbc:sqlite:" + tempDBMapFile.getAbsolutePath());
+				mapConnection = getDatabaseConnection(tempDBMapFile.getAbsolutePath());
 				mapConnection.setAutoCommit(false);
 				try {
 					if (indexMap) {
@@ -2051,9 +2200,9 @@ public class IndexCreator {
 					mapConnection.close();
 					mapConnection = null;
 					File tempDBFile = new File(workingDir, getTempMapDBFileName());
-					if(tempDBFile.exists() && deleteDatabaseIndexes){
+					if(databaseFileExists(tempDBFile) && deleteDatabaseIndexes){
 						// do not delete it for now
-						tempDBFile.delete();
+						removeDatabase(tempDBFile);
 					}
 				}
 				
@@ -2081,8 +2230,6 @@ public class IndexCreator {
 				// delete transport rtree files
 				if(transportStopsTree != null){
 					transportStopsTree.getFileHdr().getFile().close();
-				}
-				{
 					File f = new File(getRTreeTransportStopsFileName());
 					if (f.exists() && deleteDatabaseIndexes) {
 						f.delete();
@@ -2094,9 +2241,21 @@ public class IndexCreator {
 				}
 				
 				// do not delete first db connection
-				dbConn.close();
+				if(dbConn != null){
+					if(usingH2()){
+						dbConn.createStatement().execute("SHUTDOWN COMPACT");
+					}
+					dbConn.close();
+				}
 				if(deleteOsmDB){
-					dbFile.delete();
+					if (usingDerby()) {
+						try {
+							DriverManager.getConnection("jdbc:derby:;shutdown=true");
+						} catch (SQLException e) {
+							// ignore exception
+						}
+					}
+					removeDatabase(dbFile);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -2184,6 +2343,7 @@ public class IndexCreator {
 				storage.parseOSM(stream, progress, streamFile, false);
 			}
 			filter.finishLoading();
+			dbConn.commit();
 
 			if (log.isInfoEnabled()) {
 				log.info("File parsed : " + (System.currentTimeMillis() - st));
@@ -2205,10 +2365,8 @@ public class IndexCreator {
 			// to save space
 			mapFile.getParentFile().mkdirs();
 			File tempDBMapFile = new File(workingDir, getTempMapDBFileName());
-			if(tempDBMapFile.exists()){
-				tempDBMapFile.delete();
-			}
-			mapConnection = DriverManager.getConnection("jdbc:sqlite:" + tempDBMapFile.getAbsolutePath());
+			removeDatabase(tempDBMapFile);
+			mapConnection = getDatabaseConnection(tempDBMapFile.getAbsolutePath());
 			mapConnection.setAutoCommit(false);
 		}
 		
@@ -2266,11 +2424,11 @@ public class IndexCreator {
 			poiIndexFile = new File(workingDir, getPoiFileName());
 			// to save space
 			if (poiIndexFile.exists()) {
-				poiIndexFile.delete();
+				Algoritms.removeAllFiles(poiIndexFile);
 			}
 			poiIndexFile.getParentFile().mkdirs();
 			// creating nodes db to fast access for all nodes
-			poiConnection = DriverManager.getConnection("jdbc:sqlite:" + poiIndexFile.getAbsolutePath());
+			poiConnection = getDatabaseConnection(poiIndexFile.getAbsolutePath(), true);
 			DataIndexWriter.createPoiIndexStructure(poiConnection);
 			poiPreparedStatement = DataIndexWriter.createStatementAmenityInsert(poiConnection);
 			pStatements.put(poiPreparedStatement, 0);
@@ -2320,7 +2478,6 @@ public class IndexCreator {
 		st.execute("DELETE FROM " + IndexStreetNodeTable.getTable() + " WHERE 1=1");
 		st.close();
 		dbConn.commit();
-		dbConn.setAutoCommit(true);
 		st = dbConn.createStatement();
 		st.execute("VACUUM");
 		st.close();
@@ -2330,18 +2487,18 @@ public class IndexCreator {
 	 public static void main(String[] args) throws IOException, SAXException, SQLException {
 		 long time = System.currentTimeMillis();
 		 IndexCreator creator = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
-//		 creator.setIndexMap(true);
-//		 creator.setIndexAddress(true);
-//		 creator.setSaveAddressWays(false);
-//		 creator.setNormalizeStreets(true);
+		 creator.setIndexMap(true);
+		 creator.setIndexAddress(true);
+		 creator.setSaveAddressWays(true);
+		 creator.setNormalizeStreets(true);
 //		 creator.setIndexPOI(true);
 		 creator.setIndexTransport(true);
 		 
 		 creator.recreateOnlyBinaryFile = false;
 		 creator.deleteDatabaseIndexes = false;
 		 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
@@ -2356,12 +2513,12 @@ public class IndexCreator {
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/den_haag.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/den_haag.osm"), new ConsoleProgressImplementation(3), null);
 		 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/netherlands.osm.bz2"), new ConsoleProgressImplementation(1), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/netherlands.osm.bz2"), new ConsoleProgressImplementation(1), null);
 		 
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/forest_complex.osm"), new ConsoleProgressImplementation(25), null);
 
-		 System.out.println(System.currentTimeMillis() - time);
+		 System.out.println("WHOLE GENERATION TIME :  " + (System.currentTimeMillis() - time));
 		 System.out.println("COORDINATES_SIZE " + BinaryMapIndexWriter.COORDINATES_SIZE + " count " + BinaryMapIndexWriter.COORDINATES_COUNT);
 		 System.out.println("TYPES_SIZE " + BinaryMapIndexWriter.TYPES_SIZE);
 		 System.out.println("ID_SIZE " + BinaryMapIndexWriter.ID_SIZE);
