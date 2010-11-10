@@ -530,8 +530,13 @@ public class IndexCreator {
 			pselectRelation.setLong(1, e.getId());
 			if (pselectRelation.execute()) {
 				ResultSet rs = pselectRelation.getResultSet();
+				boolean first = true;
 				while (rs.next()) {
-					((Relation) e).addMember(rs.getLong(2), EntityType.values()[rs.getInt(3)], rs.getString(4));
+					int ord = rs.getInt(4);
+					if (ord > 0 || first) {
+						first = false;
+						((Relation) e).addMember(rs.getLong(1), EntityType.values()[rs.getInt(2)], rs.getString(3));
+					}
 				}
 				rs.close();
 			}
@@ -539,57 +544,85 @@ public class IndexCreator {
 			pselectWay.setLong(1, e.getId());
 			if (pselectWay.execute()) {
 				ResultSet rs = pselectWay.getResultSet();
+				boolean first = true;
 				while (rs.next()) {
-					((Way) e).addNode(rs.getLong(2));
+					int ord = rs.getInt(2);
+					if (ord > 0 || first) {
+						first = false;
+						((Way) e).addNode(new Node(rs.getDouble(5), rs.getDouble(6), rs.getLong(1)));
+					}
 				}
 				rs.close();
 			}
 		}
 		Collection<EntityId> ids = e instanceof Relation? ((Relation)e).getMemberIds() : ((Way)e).getEntityIds();
+
 		for (EntityId i : ids) {
+			// pselectNode = dbConn.prepareStatement("select n.latitude, n.longitude, t.skeys, t.value from node n left join tags t on n.id = t.id and t.type = 0 where n.id = ?");
 			if (i.getType() == EntityType.NODE) {
 				pselectNode.setLong(1, i.getId());
 				if (pselectNode.execute()) {
 					ResultSet rs = pselectNode.getResultSet();
-					if (rs.next()) {
-						map.put(i, new Node(rs.getDouble(2), rs.getDouble(3), rs.getLong(1)));
+					Node n = null;
+					while (rs.next()) {
+						if(n == null){
+							n = new Node(rs.getDouble(1), rs.getDouble(2), i.getId());
+						}
+						if(rs.getObject(3) != null){
+							n.putTag(rs.getString(3), rs.getString(4));
+						}
 					}
+					map.put(i, n);
 					rs.close();
 				}
 			} else if (i.getType() == EntityType.WAY) {
+//				pselectWay = dbConn.prepareStatement("select w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " +
+//				"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 inner join node n on w.node = n.id " +
+//				"where w.id = ? order by w.ord");
 				pselectWay.setLong(1, i.getId());
 				if (pselectWay.execute()) {
 					ResultSet rs = pselectWay.getResultSet();
 					Way way = new Way(i.getId());
 					map.put(i, way);
+					boolean first = true;
 					while (rs.next()) {
-						way.addNode(rs.getLong(2));
+						int ord = rs.getInt(2);
+						if (ord > 0 || first) {
+							first = false;
+							way.addNode(new Node(rs.getDouble(5), rs.getDouble(6), rs.getLong(1)));
+						}
+						if(ord == 0 && rs.getObject(3) != null){
+							way.putTag(rs.getString(3), rs.getString(4));
+						}
 					}
 					rs.close();
-					// load way nodes
-					loadEntityData(way, loadTags);
 				}
 			} else if (i.getType() == EntityType.RELATION) {
 				pselectRelation.setLong(1, i.getId());
+//				pselectRelation = dbConn.prepareStatement("select r.member, r.type, r.role, r.ord, t.skeys, t.value" +
+//				"from relations r left join tags t on r.id = t.id and t.type = 2 and r.ord = 0 " +
+//				"where r.id = ? order by r.ord");
 				if (pselectRelation.execute()) {
 					ResultSet rs = pselectRelation.getResultSet();
 					Relation rel = new Relation(i.getId());
 					map.put(i, rel);
+					boolean first = true;
 					while (rs.next()) {
-						rel.addMember(rs.getLong(2), EntityType.values()[rs.getInt(3)], rs.getString(4));
+						int ord = rs.getInt(4);
+						if (ord > 0 || first) {
+							first = false;
+							rel.addMember(rs.getLong(1), EntityType.values()[rs.getInt(2)], rs.getString(3));
+						}
+						if(ord == 0 && rs.getObject(5) != null){
+							rel.putTag(rs.getString(5), rs.getString(6));
+						}
 					}
 					// do not load relation members recursively ? It is not needed for transport, address, poi before
 					rs.close();
 				}
 			}
 		}
-		if(loadTags){
-			for(Map.Entry<EntityId, Entity> es : map.entrySet()){
-				if( es.getValue().getTagKeySet().isEmpty()){
-					loadEntityTags(es.getKey().getType(), es.getValue());
-				}
-			}
-		}
+
 		e.initializeLinks(map);
 	}
 	
@@ -699,7 +732,7 @@ public class IndexCreator {
 		return count;
 	}
 
-	private void loadEntityTags(EntityType type, Entity e) throws SQLException {
+	protected void loadEntityTags(EntityType type, Entity e) throws SQLException {
 		pselectTags.setLong(1, e.getId());
 		pselectTags.setByte(2, (byte) type.ordinal());
 		ResultSet rsTags = pselectTags.executeQuery();
@@ -2017,9 +2050,14 @@ public class IndexCreator {
 					allRelations = filter.getAllRelations();
 				}
 			}
-			pselectNode = dbConn.prepareStatement("select * from node where id = ?");
-			pselectWay = dbConn.prepareStatement("select * from ways where id = ? order by ord");
-			pselectRelation = dbConn.prepareStatement("select * from relations where id = ? order by ord");
+			
+			pselectNode = dbConn.prepareStatement("select n.latitude, n.longitude, t.skeys, t.value from node n left join tags t on n.id = t.id and t.type = 0 where n.id = ?");
+			pselectWay = dbConn.prepareStatement("select w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " +
+					"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 inner join node n on w.node = n.id " +
+					"where w.id = ? order by w.ord");
+			pselectRelation = dbConn.prepareStatement("select r.member, r.type, r.role, r.ord, t.skeys, t.value " +
+					"from relations r left join tags t on r.id = t.id and t.type = 2 and r.ord = 0 " +
+					"where r.id = ? order by r.ord");
 			pselectTags = dbConn.prepareStatement("select skeys, value from tags where id = ? and type = ?");
 			
 			// do not create temp map file and rtree files
