@@ -141,6 +141,7 @@ public class DownloaderIndexFromGoogleCode {
 			if (j != -1 && j - i < 40) {
 				String description = content.substring(i, j + 1);
 				files.put(prevFile, description);
+				prevFile = null;
 			}
 		}
 		return prevFile;
