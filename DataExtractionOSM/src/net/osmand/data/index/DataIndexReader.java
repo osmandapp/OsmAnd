@@ -66,7 +66,7 @@ public class DataIndexReader {
 	public PreparedStatement getStreetsBuildingPreparedStatement(Connection c) throws SQLException{
 		return c.prepareStatement("SELECT A.id, A.name, A.name_en, A.latitude, A.longitude, "+
 				"B.id, B.name, B.name_en, B.latitude, B.longitude, B.postcode "+
-				"FROM street A INNER JOIN building B ON B.street = A.id WHERE A.city = ? "); //$NON-NLS-1$
+				"FROM street A LEFT JOIN building B ON B.street = A.id WHERE A.city = ? "); //$NON-NLS-1$
 	}
 	
 	public PreparedStatement getStreetsWayNodesPreparedStatement(Connection c) throws SQLException{
@@ -103,14 +103,16 @@ public class DataIndexReader {
 					rs.close();
 				}
 			}
-			Street s = visitedStreets.get(streetId);
-			Building b = new Building();
-			b.setId(set.getLong(6));
-			b.setName(set.getString(7));
-			b.setEnName(set.getString(8));
-			b.setLocation(set.getDouble(9), set.getDouble(10));
-			b.setPostcode(set.getString(11));
-			s.registerBuilding(b);
+			if (set.getObject(6) != null) {
+				Street s = visitedStreets.get(streetId);
+				Building b = new Building();
+				b.setId(set.getLong(6));
+				b.setName(set.getString(7));
+				b.setEnName(set.getString(8));
+				b.setLocation(set.getDouble(9), set.getDouble(10));
+				b.setPostcode(set.getString(11));
+				s.registerBuilding(b);
+			}
 		}
 
 		set.close();

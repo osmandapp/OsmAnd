@@ -1,5 +1,7 @@
 package net.osmand.data.index;
 
+import net.osmand.data.preparation.IndexCreator;
+
 public class IndexConstants {
 	
 	// Important : Every time you change schema of db upgrade version!!! 
@@ -57,9 +59,11 @@ public class IndexConstants {
 			b.append(c.toString());
 			if(c.getType() != null){
 				b.append(" ").append(c.getType()); //$NON-NLS-1$
+			} else {
+				b.append(" varchar(255)"); //$NON-NLS-1$
 			}
 		}
-		b.append(" ); "); //$NON-NLS-1$
+		b.append(" )"); //$NON-NLS-1$
 		return b.toString();
 	}
 	
@@ -83,7 +87,7 @@ public class IndexConstants {
 		if(where != null){
 			b.append(" WHERE " ).append(where); //$NON-NLS-1$
 		}
-		b.append(" ; "); //$NON-NLS-1$
+		b.append(" "); //$NON-NLS-1$
 		return b.toString();
 	}
 	
@@ -96,7 +100,7 @@ public class IndexConstants {
 			}
 			b.append("?"); //$NON-NLS-1$
 		}
-		b.append(");"); //$NON-NLS-1$
+		b.append(")"); //$NON-NLS-1$
 		return b.toString();
 	}
 	
@@ -116,7 +120,7 @@ public class IndexConstants {
 			}
 			b.append(c.toString());
 		}
-		b.append(" ); "); //$NON-NLS-1$
+		b.append(" ) "); //$NON-NLS-1$
 		if(first){
 			return null;
 		}
@@ -126,7 +130,7 @@ public class IndexConstants {
 	// POI index
 	
 	public enum IndexPoiTable implements IndexColumn {
-		ID("long"), LATITUDE("double", true), LONGITUDE("double", true), OPENING_HOURS, NAME, NAME_EN, TYPE, SUBTYPE; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		ID(IndexCreator.getCurrentLongType()), LATITUDE("double", true), LONGITUDE("double", true), OPENING_HOURS, NAME, NAME_EN, TYPE, SUBTYPE; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		boolean index = false;
 		String type = null;
 		private IndexPoiTable(){}
@@ -157,7 +161,7 @@ public class IndexConstants {
 	// Address index		
 		
 	public enum IndexCityTable implements IndexColumn {
-		ID("long", true), LATITUDE("double", true), LONGITUDE("double", true), NAME, NAME_EN, CITY_TYPE(null, true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		ID(IndexCreator.getCurrentLongType(), true), LATITUDE("double", true), LONGITUDE("double", true), NAME, NAME_EN, CITY_TYPE(null, true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		boolean index = false;
 		String type = null;
 
@@ -193,7 +197,7 @@ public class IndexConstants {
 	}
 	
 	public enum IndexStreetTable implements IndexColumn {
-		ID("long", true), LATITUDE("double", true), LONGITUDE("double", true), NAME(null, true), NAME_EN, CITY("long", true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		ID(IndexCreator.getCurrentLongType(), true), LATITUDE("double", true), LONGITUDE("double", true), NAME(null, true), NAME_EN, CITY(IndexCreator.getCurrentLongType(), true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		boolean index = false;
 		String type = null;
 
@@ -229,7 +233,8 @@ public class IndexConstants {
 	}
 	
 	public enum IndexStreetNodeTable implements IndexColumn {
-		ID("long", true), LATITUDE("double"), LONGITUDE("double"), STREET("long", true), WAY("long", true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+		ID(IndexCreator.getCurrentLongType(), true), LATITUDE("double"), LONGITUDE("double"), 
+		STREET(IndexCreator.getCurrentLongType(), true), WAY(IndexCreator.getCurrentLongType(), true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 		boolean index = false;
 		String type = null;
 
@@ -265,7 +270,8 @@ public class IndexConstants {
 	}
 	
 	public enum IndexBuildingTable implements IndexColumn {
-		ID("long", true), LATITUDE("double"), LONGITUDE("double"), NAME, NAME_EN, STREET("long", true), POSTCODE(null, true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		ID(IndexCreator.getCurrentLongType(), true), LATITUDE("double"), LONGITUDE("double"), NAME, 
+		NAME_EN, STREET(IndexCreator.getCurrentLongType(), true), POSTCODE(null, true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		boolean index = false;
 		String type = null;
 
@@ -302,7 +308,7 @@ public class IndexConstants {
 	
 	// Transport Index
 	public enum IndexTransportStop implements IndexColumn {
-		ID("long", true), LATITUDE("double", true), LONGITUDE("double", true), NAME, NAME_EN; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		ID(IndexCreator.getCurrentLongType(), true), LATITUDE("double", true), LONGITUDE("double", true), NAME, NAME_EN; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		boolean index = false;
 		String type = null;
 
@@ -339,7 +345,7 @@ public class IndexConstants {
 	
 	
 	public enum IndexTransportRouteStop implements IndexColumn {
-		STOP("long", true), ROUTE("long", true), ORD("int"), DIRECTION("short"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		STOP(IndexCreator.getCurrentLongType(), true), ROUTE(IndexCreator.getCurrentLongType(), true), ORD("int"), DIRECTION("smallint"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		boolean index = false;
 		String type = null;
 
@@ -375,7 +381,7 @@ public class IndexConstants {
 	}
 	
 	public enum IndexTransportRoute implements IndexColumn {
-		ID("long", true), TYPE(null, true), OPERATOR, REF(null, true), NAME, NAME_EN, DIST("int"); //$NON-NLS-1$ //$NON-NLS-2$
+		ID(IndexCreator.getCurrentLongType(), true), TYPE(null, true), OPERATOR, REF(null, true), NAME, NAME_EN, DIST("int"); //$NON-NLS-1$ //$NON-NLS-2$
 		boolean index = false;
 		String type = null;
 
@@ -412,7 +418,7 @@ public class IndexConstants {
 	
 	
 	public enum IndexBinaryMapRenderObject implements IndexColumn {
-		ID("long", true), NAME, TYPES("BLOB"), RESTRICTIONS("BLOB"), NODES("BLOB"), HIGHWAY("INT");  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+		ID(IndexCreator.getCurrentLongType(), true), NAME, TYPES("BLOB"), RESTRICTIONS("BLOB"), NODES("BLOB"), HIGHWAY("INT");  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 		boolean index = false;
 		String type = null;
 

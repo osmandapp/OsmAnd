@@ -9,6 +9,7 @@ public class ToDoConstants {
 	
 	// TODO max 101
 	// introduce bidforfix on site
+	// 1. Verify to use query
 	
 
 	// 	For 0.5 release

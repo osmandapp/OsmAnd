@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import com.sun.xml.internal.ws.wsdl.writer.UsingAddressing;
 
 import net.osmand.Algoritms;
 import net.osmand.data.Amenity;
@@ -30,6 +31,7 @@ import net.osmand.data.index.IndexConstants.IndexStreetTable;
 import net.osmand.data.index.IndexConstants.IndexTransportRoute;
 import net.osmand.data.index.IndexConstants.IndexTransportRouteStop;
 import net.osmand.data.index.IndexConstants.IndexTransportStop;
+import net.osmand.data.preparation.IndexCreator;
 import net.osmand.osm.Entity;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -72,7 +74,9 @@ public class DataIndexWriter {
 		Statement stat = conn.createStatement();
         stat.executeUpdate(IndexConstants.generateCreateSQL(IndexPoiTable.values()));
         stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexPoiTable.values()));
-        stat.execute("PRAGMA user_version = " + IndexConstants.POI_TABLE_VERSION); //$NON-NLS-1$
+        if(IndexCreator.usingSQLite()){
+        	stat.execute("PRAGMA user_version = " + IndexConstants.POI_TABLE_VERSION); //$NON-NLS-1$
+        }
         stat.close();
 	}
 	
@@ -129,7 +133,9 @@ public class DataIndexWriter {
         stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexStreetNodeTable.values()));
         stat.executeUpdate(IndexConstants.generateCreateSQL(IndexStreetTable.values()));
         stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexStreetTable.values()));
-        stat.execute("PRAGMA user_version = " + IndexConstants.ADDRESS_TABLE_VERSION); //$NON-NLS-1$
+        if(IndexCreator.usingSQLite()){
+        	stat.execute("PRAGMA user_version = " + IndexConstants.ADDRESS_TABLE_VERSION); //$NON-NLS-1$
+        }
         stat.close();
 	}
 	
@@ -194,7 +200,9 @@ public class DataIndexWriter {
         stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexTransportRouteStop.values()));
         stat.executeUpdate(IndexConstants.generateCreateSQL(IndexTransportStop.values()));
         stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexTransportStop.values()));
-        stat.execute("PRAGMA user_version = " + IndexConstants.TRANSPORT_TABLE_VERSION); //$NON-NLS-1$
+        if(IndexCreator.usingSQLite()){
+        	stat.execute("PRAGMA user_version = " + IndexConstants.TRANSPORT_TABLE_VERSION); //$NON-NLS-1$
+        }
         stat.close();
 	}
 
@@ -295,6 +303,7 @@ public class DataIndexWriter {
 		p.addBatch();
 		if(count.get(p) >= batchSize){
 			p.executeBatch();
+			p.getConnection().commit();
 			count.put(p, 0);
 		} else {
 			count.put(p, count.get(p) + 1);
