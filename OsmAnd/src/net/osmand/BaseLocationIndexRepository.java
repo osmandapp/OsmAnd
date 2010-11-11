@@ -6,6 +6,7 @@ import java.util.List;
 
 import net.osmand.data.MapObject;
 import net.osmand.osm.LatLon;
+import net.osmand.osm.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -41,7 +42,7 @@ public class BaseLocationIndexRepository<T extends MapObject> {
 		cZoom = 0;
 	}
 	
-	public boolean initialize(final IProgress progress, File file, int version, String tableLocation) {
+	public boolean initialize(final IProgress progress, File file, int version, String tableLocation, boolean searchX31) {
 		long start = System.currentTimeMillis();
 		if(db != null){
 			// close previous db
@@ -82,15 +83,29 @@ public class BaseLocationIndexRepository<T extends MapObject> {
 		}
 		
 		if (!found) {
-			Cursor query = db.query(tableLocation,
-					new String[] { "MAX(latitude)", "MAX(longitude)", "MIN(latitude)", "MIN(longitude)" }, null, null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-			if (query.moveToFirst()) {
-				dataTopLatitude = query.getDouble(0) + 1;
-				dataRightLongitude = query.getDouble(1) + 1.5;
-				dataBottomLatitude = query.getDouble(2) - 1;
-				dataLeftLongitude = query.getDouble(3) - 1.5;
+			if(searchX31){
+				Cursor query = db.query(tableLocation,
+						new String[] { "MIN(y)", "MAX(x)", "MAX(y)", "MIN(x)" }, null, null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				if (query.moveToFirst()) {
+					dataTopLatitude = MapUtils.get31LatitudeY(query.getInt(0)) + 1;
+					dataRightLongitude = MapUtils.get31LongitudeX(query.getInt(1)) + 1.5;
+					dataBottomLatitude = MapUtils.get31LatitudeY(query.getInt(2)) - 1;
+					dataLeftLongitude = MapUtils.get31LongitudeX(query.getInt(3)) - 1.5;
+				}
+				query.close();
+			} else {
+				Cursor query = db
+						.query(
+								tableLocation,
+								new String[] { "MAX(latitude)", "MAX(longitude)", "MIN(latitude)", "MIN(longitude)" }, null, null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				if (query.moveToFirst()) {
+					dataTopLatitude = query.getDouble(0) + 1;
+					dataRightLongitude = query.getDouble(1) + 1.5;
+					dataBottomLatitude = query.getDouble(2) - 1;
+					dataLeftLongitude = query.getDouble(3) - 1.5;
+				}
+				query.close();
 			}
-			query.close();
 			if (write) {
 				db.execSQL("INSERT INTO " + metaTable + " VALUES (?, ?, ? ,?)", new Double[]{dataTopLatitude, dataRightLongitude, dataBottomLatitude, dataLeftLongitude}); //$NON-NLS-1$ //$NON-NLS-2$
 			}

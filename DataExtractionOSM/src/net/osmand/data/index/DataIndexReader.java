@@ -161,7 +161,7 @@ public class DataIndexReader {
 		Connection c = getConnection(f);
 		try {
 			ArrayList<Street> streets = new ArrayList<Street>();
-			ArrayList<Building> buildings = new ArrayList<Building>();
+//			ArrayList<Building> buildings = new ArrayList<Building>();
 			PreparedStatement streetstat = getStreetsBuildingPreparedStatement(c);
 			int countCity = 0;
 			int countStreets = 0;
@@ -174,7 +174,7 @@ public class DataIndexReader {
 					continue;
 				}
 				streets.clear();
-				long time = System.currentTimeMillis();
+//				long time = System.currentTimeMillis();
 				readStreetsBuildings(streetstat, city, streets);
 				if(!streets.isEmpty()){
 					System.out.println(city.getName());
@@ -185,10 +185,11 @@ public class DataIndexReader {
 					countStreets ++;
 //					System.out.println("\tSTREET " + s.getName()); //$NON-NLS-1$
 //					buildings.clear();
-					for (Building b : s.getBuildings()) {
-						countBuildings ++;
+					countBuildings += s.getBuildings().size();
+//					for (Building b : s.getBuildings()) {
+//						countBuildings ++;
 //						System.out.println("\t\tBULDING " + b.getName()); //$NON-NLS-1$
-					}
+//					}
 				}
 
 			}

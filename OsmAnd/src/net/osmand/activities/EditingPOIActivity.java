@@ -663,26 +663,31 @@ public class EditingPOIActivity {
 	}
 	
 	public Node loadNode(Amenity n) {
+		if(n.getId() % 2 == 1){
+			// that's way id
+			return null;
+		}
+		long nodeId = n.getId() >> 1;
 		try {
-			String res = sendRequest(SITE_API+"api/0.6/node/"+n.getId(), "GET", null, ctx.getString(R.string.loading_poi_obj) + n.getId(), false); //$NON-NLS-1$ //$NON-NLS-2$
+			String res = sendRequest(SITE_API+"api/0.6/node/"+nodeId, "GET", null, ctx.getString(R.string.loading_poi_obj) + nodeId, false); //$NON-NLS-1$ //$NON-NLS-2$
 			if(res != null){
 				OsmBaseStorage st = new OsmBaseStorage();
 				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true); //$NON-NLS-1$
-				EntityId id = new Entity.EntityId(EntityType.NODE, n.getId());
+				EntityId id = new Entity.EntityId(EntityType.NODE, nodeId);
 				Node entity = (Node) st.getRegisteredEntities().get(id);
 				entityInfo = st.getRegisteredEntityInfo().get(id);
 				// check whether this is node (because id of node could be the same as relation) 
-				if(MapUtils.getDistance(entity.getLatLon(), n.getLocation()) < 50){
+				if(entity != null && MapUtils.getDistance(entity.getLatLon(), n.getLocation()) < 50){
 					return entity;
 				}
 				return null;
 			}
 			
 		} catch (IOException e) {
-			log.error("Loading node failed " + n.getId(), e); //$NON-NLS-1$
+			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
 			Toast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
 		} catch (SAXException e) {
-			log.error("Loading node failed " + n.getId(), e); //$NON-NLS-1$
+			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
 			Toast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
 		}
 		return null;

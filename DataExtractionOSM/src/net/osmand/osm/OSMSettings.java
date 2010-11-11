@@ -45,7 +45,15 @@ public class OSMSettings {
 		NATURAL("natural"), //$NON-NLS-1$
 		INTERNET_ACCESS("internet_access"), //$NON-NLS-1$
 		
+		
+		CONTACT_WEBSITE("contact:website"), //$NON-NLS-1$
+		CONTACT_PHONE("contact:phone"), //$NON-NLS-1$
+		
 		OPENING_HOURS("opening_hours"),  //$NON-NLS-1$
+		PHONE("phone"), //$NON-NLS-1$
+		WEBSITE("website"), //$NON-NLS-1$
+		URL("url"), //$NON-NLS-1$
+		WIKIPEDIA("wikipedia"), //$NON-NLS-1$
 		;
 		
 		private final String value;

@@ -44,31 +44,31 @@ public class DataIndexWriter {
 	public static void insertAmenityIntoPoi(PreparedStatement prep, Map<PreparedStatement, Integer> map, Amenity amenity, int batchSize) throws SQLException {
 		assert IndexConstants.POI_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
 		
-		prep.setLong(0, amenity.getId());
-		prep.setDouble(1, amenity.getLocation().getLatitude());
-		prep.setDouble(2, amenity.getLocation().getLongitude());
-		prep.setString(3, amenity.getEnName());
-		prep.setString(4, amenity.getName());
-		prep.setString(5, AmenityType.valueToString(amenity.getType()));
-		prep.setString(6, amenity.getSubType());
-		prep.setString(7, amenity.getOpeningHours());
-		prep.setString(8, amenity.getSite());
-		prep.setString(9, amenity.getPhone());
+		prep.setLong(1, amenity.getId());
+		prep.setInt(2, MapUtils.get31TileNumberX(amenity.getLocation().getLongitude()));
+		prep.setInt(3, MapUtils.get31TileNumberY(amenity.getLocation().getLatitude()));
+		prep.setString(4, amenity.getEnName());
+		prep.setString(5, amenity.getName());
+		prep.setString(6, AmenityType.valueToString(amenity.getType()));
+		prep.setString(7, amenity.getSubType());
+		prep.setString(8, amenity.getOpeningHours());
+		prep.setString(9, amenity.getSite());
+		prep.setString(10, amenity.getPhone());
 		addBatch(map, prep, batchSize);
 	}
 	
 	public static PreparedStatement createStatementAmenityInsert(Connection conn) throws SQLException{
-        return conn.prepareStatement("INSERT INTO " + IndexConstants.POI_TABLE + "(id, latitude, longitude, name_en, name, type, subtype, opening_hours, site, phone) " +  //$NON-NLS-1$//$NON-NLS-2$
+        return conn.prepareStatement("INSERT INTO " + IndexConstants.POI_TABLE + "(id, x, y, name_en, name, type, subtype, opening_hours, site, phone) " +  //$NON-NLS-1$//$NON-NLS-2$
 				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 	}
 	
 	public static void createPoiIndexStructure(Connection conn) throws SQLException{
 		Statement stat = conn.createStatement();
-        stat.executeUpdate("create table" + IndexConstants.POI_TABLE +  //$NON-NLS-1$
-        		"(id bigint, latitude double, longitude double, name_en varchar(255), name varchar(255), " +
+        stat.executeUpdate("create table " + IndexConstants.POI_TABLE +  //$NON-NLS-1$
+        		"(id bigint, x int, y int, name_en varchar(255), name varchar(255), " +
         		"type varchar(255), subtype varchar(255), opening_hours varchar(255), phone varchar(255), site varchar(255)," +
         		"primary key(id, type, subtype))");
-        stat.executeUpdate("create index poi_loc on poi (latitude, longitude, type, subtype)");
+        stat.executeUpdate("create index poi_loc on poi (x, y, type, subtype)");
         stat.executeUpdate("create index poi_id on poi (id, type, subtype)");
         if(IndexCreator.usingSQLite()){
         	stat.execute("PRAGMA user_version = " + IndexConstants.POI_TABLE_VERSION); //$NON-NLS-1$
@@ -211,7 +211,7 @@ public class DataIndexWriter {
 	
 	public static PreparedStatement createStatementTransportStopInsert(Connection conn) throws SQLException{
 		assert IndexConstants.TRANSPORT_STOP_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
-        return conn.prepareStatement("insert into transport_stop(id, latitude, longitude, name, name_en) values(?, ?, ?, ?, ?,)");
+        return conn.prepareStatement("insert into transport_stop(id, latitude, longitude, name, name_en) values(?, ?, ?, ?, ?)");
 	}
 	public static PreparedStatement createStatementTransportRouteStopInsert(Connection conn) throws SQLException{
 		assert IndexConstants.TRANSPORT_ROUTE_STOP_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$

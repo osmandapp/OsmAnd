@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import net.osmand.osm.Entity;
 import net.osmand.osm.MapRenderingTypes;
+import net.osmand.osm.Node;
 import net.osmand.osm.Relation;
 import net.osmand.osm.OSMSettings.OSMTagKey;
 
@@ -18,8 +19,33 @@ public class Amenity extends MapObject {
 
 	public Amenity(Entity entity){
 		super(entity);
+		// manipulate with id to distinguish way and nodes
+		this.id = entity.getId() << 1 + ((entity instanceof Node)? 0 : 1);
 		initTypeSubtype(entity, this);
 		this.openingHours = entity.getTag(OSMTagKey.OPENING_HOURS);
+		this.phone = entity.getTag(OSMTagKey.PHONE);
+		if (this.phone == null) {
+			this.phone = entity.getTag(OSMTagKey.CONTACT_PHONE);
+		}
+		this.site = entity.getTag(OSMTagKey.WIKIPEDIA);
+		if (this.site != null) {
+			if (!this.site.startsWith("http://")) { //$NON-NLS-1$
+				int i = this.site.indexOf(':');
+				if (i == -1) {
+					this.site = "http://en.wikipedia.org/wiki/" + this.site; //$NON-NLS-1$
+				} else {
+					this.site = "http://" + this.site.substring(0, i) + ".wikipedia.org/wiki/" + this.site.substring(i + 1); //$NON-NLS-1$ //$NON-NLS-2$
+				}
+			}
+		} else {
+			this.site = entity.getTag(OSMTagKey.WEBSITE);
+			if (this.site == null) {
+				this.site = entity.getTag(OSMTagKey.URL);
+				if (this.site == null) {
+					this.site = entity.getTag(OSMTagKey.CONTACT_WEBSITE);
+				}
+			}
+		}
 	}
 	
 	public Amenity(){
