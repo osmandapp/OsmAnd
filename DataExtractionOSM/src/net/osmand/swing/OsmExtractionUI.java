@@ -280,6 +280,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
+				exit();
 			}
 		});
 		settings.addActionListener(new ActionListener(){
@@ -502,13 +503,17 @@ public class OsmExtractionUI implements IMapLocationListener {
 	
 	public class ExitListener extends WindowAdapter {
 		public void windowClosing(WindowEvent event) {
-			// save preferences
-			DataExtractionSettings settings = DataExtractionSettings.getSettings();
-			settings.saveDefaultLocation(mapPanel.getLatitude(), mapPanel.getLongitude());
-			settings.saveDefaultZoom(mapPanel.getZoom());
-			settings.saveWindowBounds(frame.getBounds());
-			System.exit(0);
+			exit();
 		}
+	}
+	
+	public void exit(){
+		// save preferences
+		DataExtractionSettings settings = DataExtractionSettings.getSettings();
+		settings.saveDefaultLocation(mapPanel.getLatitude(), mapPanel.getLongitude());
+		settings.saveDefaultZoom(mapPanel.getZoom());
+		settings.saveWindowBounds(frame.getBounds());
+		System.exit(0);
 	}
 	
 
