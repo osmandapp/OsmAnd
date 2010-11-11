@@ -11,6 +11,7 @@ import net.osmand.activities.OsmandApplication;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.MapUtils;
+import net.sf.junidecode.Junidecode;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -91,7 +92,7 @@ public class NameFinderPoiFilter extends PoiFilter {
 								a.setId(Long.parseLong(parser.getAttributeValue("", "id"))); //$NON-NLS-1$ //$NON-NLS-2$
 								String name = parser.getAttributeValue("", "name");  //$NON-NLS-1$//$NON-NLS-2$
 								a.setName(name);
-								a.setEnName(name);
+								a.setEnName(Junidecode.unidecode(name));
 								a.setType(AmenityType.OTHER);
 								a.setSubType(parser.getAttributeValue("", "category"));  //$NON-NLS-1$//$NON-NLS-2$
 								searchedAmenities.add(a);

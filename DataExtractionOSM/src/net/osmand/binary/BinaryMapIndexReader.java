@@ -524,6 +524,9 @@ public class BinaryMapIndexReader {
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
+				if(dataObject.getEnName().length() == 0){
+					dataObject.setEnName(Junidecode.unidecode(dataObject.getName()));
+				}
 				end = true;
 				break;
 			case OsmandOdb.TransportRouteStop.NAME_EN_FIELD_NUMBER :
@@ -580,12 +583,15 @@ public class BinaryMapIndexReader {
 			switch (tag) {
 			case 0:
 				dataObject.setReferencesToRoutes(req.cacheTypes.toArray());
+				if(dataObject.getEnName().length() == 0){
+					dataObject.setEnName(Junidecode.unidecode(dataObject.getName()));
+				}
 				return dataObject;
 			case OsmandOdb.TransportStop.ROUTES_FIELD_NUMBER :
 				req.cacheTypes.add(shift - codedIS.readUInt32());
 				break;
 			case OsmandOdb.TransportStop.NAME_EN_FIELD_NUMBER :
-				dataObject.setName(""+((char) codedIS.readUInt32())); //$NON-NLS-1$
+				dataObject.setEnName(""+((char) codedIS.readUInt32())); //$NON-NLS-1$
 				break;
 			case OsmandOdb.TransportStop.NAME_FIELD_NUMBER :
 				int i = codedIS.readUInt32();
@@ -1211,7 +1217,7 @@ public class BinaryMapIndexReader {
 				break;
 			case OsmandOdb.CityIndex.NAME_FIELD_NUMBER :
 				c.setName(codedIS.readString());
-				if(c.getEnName() == null){
+				if(c.getEnName().length() == 0){
 					c.setEnName(Junidecode.unidecode(c.getName()));
 				}
 				break;
@@ -1328,7 +1334,7 @@ public class BinaryMapIndexReader {
 				break;
 			case OsmandOdb.BuildingIndex.NAME_FIELD_NUMBER :
 				b.setName(codedIS.readString());
-				if(b.getEnName() == null){
+				if(b.getEnName().length() == 0){
 					b.setEnName(Junidecode.unidecode(b.getName()));
 				}
 				break;

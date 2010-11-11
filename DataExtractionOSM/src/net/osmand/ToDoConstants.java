@@ -11,6 +11,10 @@ public class ToDoConstants {
 	// introduce bidforfix on site
 	// 1. Verify to use query
 	
+	// !!! Fix phone, site information for POI INDEX
+	// Move poi index to 1 version and remove backward support (save int coordinates and save for name_en)
+	// Show in message and test for some indexes !!!
+ 	
 
 	// 	For 0.5 release
 	//  101. 1) Introduce shell script to print information about indexes 2)Introduce activity to show active indexes
