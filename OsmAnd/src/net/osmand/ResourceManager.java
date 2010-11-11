@@ -2,6 +2,7 @@ package net.osmand;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.text.Collator;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -377,8 +378,14 @@ public class ResourceManager {
 								RegionAddressRepositoryBinary rarb = new RegionAddressRepositoryBinary(index, rName);
 								addressMap.put(rName, rarb);
 							}
-							if(index.hasTransportData()){
-								transportRepositories.add(new TransportIndexRepositoryBinary(index));
+							if (index.hasTransportData()) {
+								try {
+									RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
+									transportRepositories.add(new TransportIndexRepositoryBinary(new BinaryMapIndexReader(raf)));
+								} catch (IOException e) {
+									log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
+									warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+								}
 							}
 						}
 					} catch (SQLiteException e) {
