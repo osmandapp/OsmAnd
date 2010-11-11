@@ -12,9 +12,6 @@ import java.util.Map;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.data.index.IndexConstants;
-import net.osmand.data.index.IndexConstants.IndexTransportRoute;
-import net.osmand.data.index.IndexConstants.IndexTransportRouteStop;
-import net.osmand.data.index.IndexConstants.IndexTransportStop;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 
@@ -25,13 +22,15 @@ import android.database.Cursor;
 public class TransportIndexRepositoryOdb extends BaseLocationIndexRepository<TransportStop> implements TransportIndexRepository {
 	 private static final Log log = LogUtil.getLog(TransportIndexRepositoryOdb.class);
 
+	 private final static String TRANSPORT_STOP_TABLE = IndexConstants.TRANSPORT_STOP_TABLE;
+	 private final static String TRANSPORT_ROUTE_STOP_TABLE = IndexConstants.TRANSPORT_ROUTE_STOP_TABLE;
+	 private final static String TRANSPORT_ROUTE_TABLE = IndexConstants.TRANSPORT_ROUTE_TABLE;
 
 	public boolean initialize(final IProgress progress, File file) {
-		return super.initialize(progress, file, IndexConstants.TRANSPORT_TABLE_VERSION, IndexTransportStop.getTable());
+		return super.initialize(progress, file, IndexConstants.TRANSPORT_TABLE_VERSION, TRANSPORT_STOP_TABLE);
 	}
 	
-	
-	private final String[] columns = IndexConstants.generateColumnNames(IndexTransportStop.values());
+	private final String[] columns = new String[]{"id", "latitude", "longitude", "name", "name_en"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 	public List<TransportStop> searchTransportStops(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int limit, List<TransportStop> stops){
 		long now = System.currentTimeMillis();
 		String squery = "? < latitude AND latitude < ? AND ? < longitude AND longitude < ?"; //$NON-NLS-1$
@@ -39,17 +38,17 @@ public class TransportIndexRepositoryOdb extends BaseLocationIndexRepository<Tra
 		if(limit != -1){
 			squery += " ORDER BY RANDOM() LIMIT " +limit; //$NON-NLS-1$
 		}
-		Cursor query = db.query(IndexTransportStop.getTable(), columns, squery, 
+		Cursor query = db.query(TRANSPORT_STOP_TABLE, columns, squery,
 				new String[]{Double.toString(bottomLatitude), 
 				Double.toString(topLatitude), Double.toString(leftLongitude), Double.toString(rightLongitude)}, null, null, null);
 		if(query.moveToFirst()){
 			do {
 				TransportStop st = new TransportStop();
-				st.setId(query.getLong(IndexTransportStop.ID.ordinal()));
-				st.setLocation(query.getDouble(IndexTransportStop.LATITUDE.ordinal()), 
-							query.getDouble(IndexTransportStop.LONGITUDE.ordinal()));
-				st.setName(query.getString(IndexTransportStop.NAME.ordinal() ));
-				st.setEnName(query.getString(IndexTransportStop.NAME_EN.ordinal()));
+				st.setId(query.getLong(0));
+				st.setLocation(query.getDouble(1), 
+							query.getDouble(2));
+				st.setName(query.getString(3 ));
+				st.setEnName(query.getString(4));
 				stops.add(st);
 				if(limit != -1 && stops.size() >= limit){
 					break;
@@ -81,12 +80,8 @@ public class TransportIndexRepositoryOdb extends BaseLocationIndexRepository<Tra
 
 		if (cacheSQLRouteDescriptions == null) {
 			StringBuilder sql = new StringBuilder(200);
-			sql.append("SELECT DISTINCT ").append(IndexTransportRoute.REF).append(",").append(IndexTransportRoute.TYPE) //$NON-NLS-1$//$NON-NLS-2$
-					.append(",").append(IndexTransportRoute.NAME).append(",").append(IndexTransportRoute.NAME_EN); //$NON-NLS-1$ //$NON-NLS-2$
-			sql.append(" FROM ").append(IndexTransportRoute.getTable()).append(" JOIN ").append(IndexTransportRouteStop.getTable()); //$NON-NLS-1$ //$NON-NLS-2$
-			sql.append(" ON ").append(IndexTransportRoute.getTable()).append(".").append(IndexTransportRoute.ID).append(" = "); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			sql.append(IndexTransportRouteStop.getTable()).append(".").append(IndexTransportRouteStop.ROUTE); //$NON-NLS-1$
-			sql.append(" WHERE ").append(IndexTransportRouteStop.STOP).append(" = ?"); //$NON-NLS-1$ //$NON-NLS-2$
+			sql.append("SELECT DISTINCT ref, type, name, name_en FROM ").append(TRANSPORT_ROUTE_TABLE).append(" JOIN ").append(TRANSPORT_ROUTE_STOP_TABLE); //$NON-NLS-1$ //$NON-NLS-2$
+			sql.append(" ON transport_route.id = transport_route_stop.route WHERE transport_route_stop.stop = ?"); //$NON-NLS-1$
 			cacheSQLRouteDescriptions = sql.toString();
 		}
 		Cursor query = db.rawQuery(cacheSQLRouteDescriptions, new String[] { stop.getId() + "" }); //$NON-NLS-1$
@@ -133,36 +128,17 @@ public class TransportIndexRepositoryOdb extends BaseLocationIndexRepository<Tra
 		double bottomLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY + 0.5);
 		double leftLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX - 0.5);
 		double rightLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX + 0.5);
-		assert IndexTransportRoute.values().length == 7;
-		int shift = IndexTransportRoute.values().length;
-		assert IndexTransportStop.values().length == 5;
-		int shift2 = IndexTransportStop.values().length;
 		if(cacheSQLRoutes == null){
 			StringBuilder sql = new StringBuilder(200);
-			sql.append("SELECT "); //$NON-NLS-1$
-			String[] cols = IndexConstants.generateColumnNames(IndexTransportRoute.values());
-			for(int i=0; i<cols.length; i++){
-				if(i>0){
-					sql.append(", "); //$NON-NLS-1$
-				}
-				sql.append(IndexTransportRoute.getTable()).append(".").append(cols[i]); //$NON-NLS-1$
-			}
-			cols = IndexConstants.generateColumnNames(IndexTransportStop.values());
-			for(int i=0; i<cols.length; i++){
-				sql.append(", ").append(IndexTransportStop.getTable()).append(".").append(cols[i]); //$NON-NLS-1$ //$NON-NLS-2$
-			}
-			sql.append(", ").append(IndexTransportRouteStop.getTable()).append(".").append(IndexTransportRouteStop.DIRECTION); //$NON-NLS-1$ //$NON-NLS-2$
-			
-			sql.append(" FROM ").append(IndexTransportStop.getTable()); //$NON-NLS-1$
+			sql.append("SELECT R.id, R.dist, R.name, R.name_en, R.ref, R.operator, R.type, "); //$NON-NLS-1$
+			sql.append("T.id, T.name, T.name_en, T.latitude, T.longitude, TR.direction "); //$NON-NLS-1$
+			sql.append(" FROM ").append(TRANSPORT_STOP_TABLE).append(" T "); //$NON-NLS-1$ //$NON-NLS-2$
 			// join with stops table
-			sql.append(" JOIN ").append(IndexTransportRouteStop.getTable()); //$NON-NLS-1$ 
-			sql.append(" ON ").append(IndexTransportStop.getTable()).append(".").append(IndexTransportStop.ID); //$NON-NLS-1$ //$NON-NLS-2$
-			sql.append(" = ").append(IndexTransportRouteStop.getTable()).append(".").append(IndexTransportRouteStop.STOP); //$NON-NLS-1$ //$NON-NLS-2$
+			sql.append(" JOIN ").append(TRANSPORT_ROUTE_STOP_TABLE).append(" TR "); //$NON-NLS-1$ //$NON-NLS-2$ 
+			sql.append(" ON T.id = TR.stop "); //$NON-NLS-1$
 			// join with route table
-			sql.append(" JOIN ").append(IndexTransportRoute.getTable()); //$NON-NLS-1$ 
-			sql.append(" ON ").append(IndexTransportRoute.getTable()).append(".").append(IndexTransportRoute.ID); //$NON-NLS-1$ //$NON-NLS-2$
-			sql.append(" = ").append(IndexTransportRouteStop.getTable()).append(".").append(IndexTransportRouteStop.ROUTE); //$NON-NLS-1$ //$NON-NLS-2$
-
+			sql.append(" JOIN ").append(TRANSPORT_ROUTE_TABLE).append(" R "); //$NON-NLS-1$ //$NON-NLS-2$ 
+			sql.append(" ON R.id = TR.route "); //$NON-NLS-1$
 			sql.append(" WHERE ").append("? < latitude AND latitude < ? AND ? < longitude AND longitude < ?"); //$NON-NLS-1$ //$NON-NLS-2$
 			cacheSQLRoutes = sql.toString();
 		}
@@ -173,20 +149,19 @@ public class TransportIndexRepositoryOdb extends BaseLocationIndexRepository<Tra
 		if (query.moveToFirst()) {
 			do {
 				TransportRoute route = new TransportRoute();
-				route.setId(query.getLong(IndexTransportRoute.ID.ordinal()));
-				route.setDistance(query.getInt(IndexTransportRoute.DIST.ordinal()));
-				route.setName(query.getString(IndexTransportRoute.NAME.ordinal()));
-				route.setEnName(query.getString(IndexTransportRoute.NAME_EN.ordinal()));
-				route.setRef(query.getString(IndexTransportRoute.REF.ordinal()));
-				route.setOperator(query.getString(IndexTransportRoute.OPERATOR.ordinal()));
-				route.setType(query.getString(IndexTransportRoute.TYPE.ordinal()));
+				route.setId(query.getLong(0));
+				route.setDistance(query.getInt(1));
+				route.setName(query.getString(2));
+				route.setEnName(query.getString(3));
+				route.setRef(query.getString(4));
+				route.setOperator(query.getString(5));
+				route.setType(query.getString(6));
 				TransportStop s = new TransportStop();
-				s.setId(query.getLong(shift + IndexTransportStop.ID.ordinal()));
-				s.setName(query.getString(shift + IndexTransportStop.NAME.ordinal()));
-				s.setEnName(query.getString(shift + IndexTransportStop.NAME_EN.ordinal()));
-				s.setLocation(query.getDouble(shift + IndexTransportStop.LATITUDE.ordinal()), 
-						query.getDouble(shift + IndexTransportStop.LONGITUDE.ordinal()));
-				boolean direction = query.getInt(shift2 + shift) > 0; 
+				s.setId(query.getLong(7));
+				s.setName(query.getString(8));
+				s.setEnName(query.getString(9));
+				s.setLocation(query.getDouble(10),	query.getDouble(11));
+				boolean direction = query.getInt(12) > 0; 
 				long idToPut = route.getId() << 1 + (direction ? 1 : 0);
 				if(registeredRoutes.containsKey(idToPut)){
 					TransportStop st = registeredRoutes.get(idToPut).getStart();
@@ -227,21 +202,12 @@ public class TransportIndexRepositoryOdb extends BaseLocationIndexRepository<Tra
 		}
 		long now = System.currentTimeMillis();
 		StringBuilder sql = new StringBuilder(200);
-		sql.append("SELECT "); //$NON-NLS-1$
-		String[] cols = IndexConstants.generateColumnNames(IndexTransportStop.values());
-		for (int i = 0; i < cols.length; i++) {
-			if (i > 0) {
-				sql.append(", "); //$NON-NLS-1$
-			}
-			sql.append(IndexTransportStop.getTable()).append(".").append(cols[i]); //$NON-NLS-1$
-		}
-		sql.append(", ").append(IndexTransportRouteStop.getTable()).append(".").append(IndexTransportRouteStop.ROUTE); //$NON-NLS-1$ //$NON-NLS-2$
-		sql.append(", ").append(IndexTransportRouteStop.getTable()).append(".").append(IndexTransportRouteStop.DIRECTION); //$NON-NLS-1$ //$NON-NLS-2$
-		sql.append(" FROM ").append(IndexTransportStop.getTable()); //$NON-NLS-1$
+		sql.append("SELECT T.id, T.latitude, T.longitude, T.name, T.name_en, "); //$NON-NLS-1$
+		sql.append(" TR.route, TR.direction " ); //$NON-NLS-1$
+		sql.append(" FROM ").append(TRANSPORT_STOP_TABLE).append(" T "); //$NON-NLS-1$ //$NON-NLS-2$
 		// join with stops table
-		sql.append(" JOIN ").append(IndexTransportRouteStop.getTable()); //$NON-NLS-1$ 
-		sql.append(" ON ").append(IndexTransportStop.getTable()).append(".").append(IndexTransportStop.ID); //$NON-NLS-1$ //$NON-NLS-2$
-		sql.append(" = ").append(IndexTransportRouteStop.getTable()).append(".").append(IndexTransportRouteStop.STOP); //$NON-NLS-1$ //$NON-NLS-2$
+		sql.append(" JOIN ").append(TRANSPORT_ROUTE_STOP_TABLE).append(" TR "); //$NON-NLS-1$ //$NON-NLS-2$ 
+		sql.append(" ON T.id = TR.stop "); //$NON-NLS-1$
 
 		sql.append(" WHERE "); //$NON-NLS-1$
 		boolean f = true;
@@ -251,16 +217,14 @@ public class TransportIndexRepositoryOdb extends BaseLocationIndexRepository<Tra
 			} else {
 				sql.append(" OR "); //$NON-NLS-1$
 			}
-			sql.append("("); //$NON-NLS-1$
-			sql.append(IndexTransportRouteStop.getTable()).append(".").append(IndexTransportRouteStop.ROUTE); //$NON-NLS-1$
+			sql.append("(TR.route"); //$NON-NLS-1$
 			sql.append(" = ").append(il.getRoute().getId()); //$NON-NLS-1$
-			sql.append(" AND ").append(IndexTransportRouteStop.getTable()).append(".").append(IndexTransportRouteStop.DIRECTION); //$NON-NLS-1$ //$NON-NLS-2$
+			sql.append(" AND TR.direction"); //$NON-NLS-1$
 			sql.append(" = ").append(il.getDirection() ? 1 : 0); //$NON-NLS-1$
 			sql.append(")"); //$NON-NLS-1$
 		}
-		sql.append(" ORDER BY ").append(IndexTransportRouteStop.getTable()).append(".").append(IndexTransportRouteStop.ORD).append(" ASC"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		sql.append(" ORDER BY TR.ord asc"); //$NON-NLS-1$
 
-		int qShift = IndexTransportStop.values().length;
 
 		Map<Long, TransportStop> distanceToLoc = new LinkedHashMap<Long, TransportStop>();
 
@@ -270,19 +234,18 @@ public class TransportIndexRepositoryOdb extends BaseLocationIndexRepository<Tra
 			do {
 				TransportStop st = null;
 
-				long routeId = query.getLong(qShift);
-				int direction = query.getInt(qShift + 1);
+				long routeId = query.getLong(5);
+				int direction = query.getInt(6);
 				long id = routeId << 1 + direction;
 				boolean found = distanceToLoc.containsKey(id);
 				RouteInfoLocation i = registeredRoutes.get(id);
 				if (found) {
 					st = new TransportStop();
-					st.setId(query.getLong(IndexTransportStop.ID.ordinal()));
-					st.setLocation(query.getDouble(IndexTransportStop.LATITUDE.ordinal()), query.getDouble(IndexTransportStop.LONGITUDE
-							.ordinal()));
-					st.setName(query.getString(IndexTransportStop.NAME.ordinal()));
-					st.setEnName(query.getString(IndexTransportStop.NAME_EN.ordinal()));
-				} else if (query.getLong(IndexTransportStop.ID.ordinal()) == i.getStart().getId()) {
+					st.setId(query.getLong(0));
+					st.setLocation(query.getDouble(1), query.getDouble(2));
+					st.setName(query.getString(3));
+					st.setEnName(query.getString(4));
+				} else if (query.getLong(0) == i.getStart().getId()) {
 					st = i.getStart();
 					found = true;
 					distanceToLoc.put(id, st);

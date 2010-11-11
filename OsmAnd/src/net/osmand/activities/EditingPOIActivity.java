@@ -576,9 +576,9 @@ public class EditingPOIActivity {
 			Amenity a = new Amenity(n);
 			for(AmenityIndexRepository r: repos){
 				if(changed){
-					r.updateAmenity(a.getId(), n.getLatitude(), n.getLongitude(), a.getName(), a.getEnName(), a.getType(), a.getSubType(), a.getOpeningHours());
+					r.updateAmenity(a);
 				} else {
-					r.addAmenity(a.getId(), n.getLatitude(), n.getLongitude(), a.getName(), a.getEnName(), a.getType(), a.getSubType(), a.getOpeningHours());
+					r.addAmenity(a);
 				}
 				r.clearCache();
 			}

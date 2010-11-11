@@ -13,6 +13,8 @@ public class Amenity extends MapObject {
 	private String subType;
 	private AmenityType type;
 	private String openingHours;
+	private String phone;
+	private String site;
 
 	public Amenity(Entity entity){
 		super(entity);
@@ -97,6 +99,22 @@ public class Amenity extends MapObject {
 	@Override
 	public String toString() {
 		return getSimpleFormat(false);
+	}
+	
+	public String getSite() {
+		return site;
+	}
+
+	public void setSite(String site) {
+		this.site = site;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	
 	

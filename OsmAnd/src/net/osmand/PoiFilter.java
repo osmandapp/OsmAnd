@@ -9,7 +9,7 @@ import java.util.Map;
 import net.osmand.activities.OsmandApplication;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
-import net.osmand.data.index.IndexConstants.IndexPoiTable;
+import net.osmand.data.index.IndexConstants;
 import net.osmand.osm.MapUtils;
 
 public class PoiFilter {
@@ -170,6 +170,7 @@ public class PoiFilter {
 		if(areAllTypesAccepted()){
 			return null;
 		}
+		assert IndexConstants.POI_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
 		if(acceptedTypes.size() == 0){
 			return "1 > 1";  //$NON-NLS-1$
 		}
@@ -182,12 +183,10 @@ public class PoiFilter {
 			} else {
 				b.append(" OR "); //$NON-NLS-1$
 			}
-			b.append("("); //$NON-NLS-1$
-			b.append(IndexPoiTable.TYPE.name().toLowerCase()).append(" = '").append(AmenityType.valueToString(a)).append("'"); //$NON-NLS-1$ //$NON-NLS-2$
+			b.append("(type = '").append(AmenityType.valueToString(a)).append("'"); //$NON-NLS-1$ //$NON-NLS-2$
 			if(acceptedTypes.get(a) != null){
 				List<String> list = acceptedTypes.get(a);
-				b.append(" AND "); //$NON-NLS-1$
-				b.append(IndexPoiTable.SUBTYPE.name().toLowerCase()).append(" IN ("); //$NON-NLS-1$
+				b.append(" AND subtype IN ("); //$NON-NLS-1$
 				boolean bfirst = true;
 				for(String s : list){
 					if(bfirst){
