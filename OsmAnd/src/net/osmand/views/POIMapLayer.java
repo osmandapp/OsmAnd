@@ -82,6 +82,12 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 			if(n.getOpeningHours() != null){
 				format += "\n" + view.getContext().getString(R.string.opening_hours) +" : "+ n.getOpeningHours(); //$NON-NLS-1$ //$NON-NLS-2$
 			}
+			if(n.getPhone() != null){
+				format += "\n" + view.getContext().getString(R.string.phone) +" : "+ n.getPhone(); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+			if(n.getSite() != null){
+				format += "\n" + view.getContext().getString(R.string.website) +" : "+ n.getSite(); //$NON-NLS-1$ //$NON-NLS-2$
+			}
 			Toast.makeText(view.getContext(), format, Toast.LENGTH_SHORT).show();
 			return true;
 		}

@@ -14,6 +14,7 @@ public class ToDoConstants {
 	// !!! Fix phone, site information for POI INDEX
 	// Move poi index to 1 version and remove backward support (save int coordinates and save for name_en)
 	// Show in message and test for some indexes !!!
+	// TEST POI (phone, site, wiki), test show, update, delete
  	
 
 	// 	For 0.5 release

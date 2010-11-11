@@ -27,7 +27,7 @@ public class TransportIndexRepositoryOdb extends BaseLocationIndexRepository<Tra
 	 private final static String TRANSPORT_ROUTE_TABLE = IndexConstants.TRANSPORT_ROUTE_TABLE;
 
 	public boolean initialize(final IProgress progress, File file) {
-		return super.initialize(progress, file, IndexConstants.TRANSPORT_TABLE_VERSION, TRANSPORT_STOP_TABLE);
+		return super.initialize(progress, file, IndexConstants.TRANSPORT_TABLE_VERSION, TRANSPORT_STOP_TABLE, false);
 	}
 	
 	private final String[] columns = new String[]{"id", "latitude", "longitude", "name", "name_en"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$

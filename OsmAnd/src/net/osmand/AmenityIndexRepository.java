@@ -14,6 +14,7 @@ import net.osmand.data.AmenityType;
 import net.osmand.data.index.IndexConstants;
 import net.osmand.osm.Entity;
 import net.osmand.osm.LatLon;
+import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.io.IOsmStorageFilter;
 import net.osmand.osm.io.OsmBaseStorage;
@@ -34,10 +35,10 @@ public class AmenityIndexRepository extends BaseLocationIndexRepository<Amenity>
 	private String cFilterId;
 	
 	
-	private final String[] columns = new String[]{"id", "latitude", "longitude", "name", "name_en", "type", "subtype", "opening_hours"};        //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$//$NON-NLS-5$//$NON-NLS-6$//$NON-NLS-7$//$NON-NLS-8$
+	private final String[] columns = new String[]{"id", "x", "y", "name", "name_en", "type", "subtype", "opening_hours", "phone", "site"};        //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$//$NON-NLS-5$//$NON-NLS-6$//$NON-NLS-7$//$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$
 	public List<Amenity> searchAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int limit, PoiFilter filter, List<Amenity> amenities){
 		long now = System.currentTimeMillis();
-		String squery = "? < latitude AND latitude < ? AND ? < longitude AND longitude < ?"; //$NON-NLS-1$
+		String squery = "? < y AND y < ? AND ? < x AND x < ?"; //$NON-NLS-1$
 		
 		if(filter != null){
 			String sql = filter.buildSqlWhereFilter();
@@ -49,14 +50,15 @@ public class AmenityIndexRepository extends BaseLocationIndexRepository<Amenity>
 			squery += " ORDER BY RANDOM() LIMIT " +limit; //$NON-NLS-1$
 		}
 		Cursor query = db.query(IndexConstants.POI_TABLE, columns, squery, 
-				new String[]{Double.toString(bottomLatitude), 
-				Double.toString(topLatitude), Double.toString(leftLongitude), Double.toString(rightLongitude)}, null, null, null);
+				new String[]{MapUtils.get31TileNumberY(topLatitude)+"",  //$NON-NLS-1$
+				MapUtils.get31TileNumberY(bottomLatitude)+"", MapUtils.get31TileNumberX(leftLongitude)+"",  //$NON-NLS-1$ //$NON-NLS-2$
+				MapUtils.get31TileNumberX(rightLongitude)+""}, null, null, null); //$NON-NLS-1$
 		if(query.moveToFirst()){
 			do {
 				Amenity am = new Amenity();
 				am.setId(query.getLong(0));
-				am.setLocation(query.getDouble(1), 
-							query.getDouble(2));
+				am.setLocation(MapUtils.get31LatitudeY(query.getInt(2)), 
+						MapUtils.get31LongitudeX(query.getInt(1)));
 				am.setName(query.getString(3 ));
 				am.setEnName(query.getString(4));
 				if(am.getEnName().length() == 0){
@@ -65,6 +67,8 @@ public class AmenityIndexRepository extends BaseLocationIndexRepository<Amenity>
 				am.setType(AmenityType.fromString(query.getString(5)));
 				am.setSubType(query.getString(6));
 				am.setOpeningHours(query.getString(7));
+				am.setPhone(query.getString(8));
+				am.setSite(query.getString(9));
 				amenities.add(am);
 				if(limit != -1 && amenities.size() >= limit){
 					break;
@@ -88,8 +92,8 @@ public class AmenityIndexRepository extends BaseLocationIndexRepository<Amenity>
 	public boolean updateAmenity(Amenity a){
 		StringBuilder b = new StringBuilder();
 		b.append("UPDATE " + IndexConstants.POI_TABLE + " SET "); //$NON-NLS-1$ //$NON-NLS-2$
-		b.append(" latitude = ?, "). //$NON-NLS-1$
-		  append(" longitude = ?, "). //$NON-NLS-1$
+		b.append(" x = ?, "). //$NON-NLS-1$
+		  append(" y = ?, "). //$NON-NLS-1$
 		  append(" opening_hours = ?, "). //$NON-NLS-1$
 		  append(" name = ?, "). //$NON-NLS-1$
 		  append(" name_en = ?, ").//$NON-NLS-1$
@@ -100,7 +104,7 @@ public class AmenityIndexRepository extends BaseLocationIndexRepository<Amenity>
 		  append(" WHERE append( id = ?"); //$NON-NLS-1$
 		
 		db.execSQL(b.toString(),			
-				new Object[] { a.getLocation().getLatitude(), a.getLocation().getLongitude(), 
+				new Object[] { MapUtils.get31TileNumberX(a.getLocation().getLongitude()), MapUtils.get31TileNumberY(a.getLocation().getLatitude()),  
 			a.getOpeningHours(), a.getName(), a.getEnName(), AmenityType.valueToString(a.getType()), a.getSubType(),
 			a.getSite(), a.getPhone(),  a.getId()});
 		return true;
@@ -158,15 +162,19 @@ public class AmenityIndexRepository extends BaseLocationIndexRepository<Amenity>
 	}
 
 	public boolean initialize(final IProgress progress, File file) {
-		return super.initialize(progress, file, IndexConstants.POI_TABLE_VERSION, IndexConstants.POI_TABLE);
+		return super.initialize(progress, file, IndexConstants.POI_TABLE_VERSION, IndexConstants.POI_TABLE, true);
 	}
 	
 	
 	
 	public boolean updateAmenities(List<Amenity> amenities, double leftLon, double topLat, double rightLon, double bottomLat){
+		int l = MapUtils.get31TileNumberX(leftLon);
+		int r = MapUtils.get31TileNumberX(rightLon);
+		int t = MapUtils.get31TileNumberY(topLat);
+		int b = MapUtils.get31TileNumberY(bottomLat);
 		db.execSQL("DELETE FROM " + IndexConstants.POI_TABLE + " WHERE " + //$NON-NLS-1$ //$NON-NLS-2$
-				" longitude >= ? AND ? >= longitude  AND " + //$NON-NLS-1$
-				" latitude >= ? AND ? >= latitude ", new Double[] { leftLon, rightLon, bottomLat, topLat }); //$NON-NLS-1$
+				" x >= ? AND ? >= x  AND " + //$NON-NLS-1$
+				" y >= ? AND ? >= y ", new Integer[] { l, r, t, b }); //$NON-NLS-1$
 		
 		insertAmenities(amenities);
 		return true;
@@ -174,11 +182,11 @@ public class AmenityIndexRepository extends BaseLocationIndexRepository<Amenity>
 
 	private void insertAmenities(Collection<Amenity> amenities) {
 		SQLiteStatement stat = db.compileStatement("INSERT INTO " + IndexConstants.POI_TABLE +  //$NON-NLS-1$
-				"(id, latitude, longitude, name_en, name, type, subtype, opening_hours, site, phone) values(?,?,?,?,?,?,?,?,?)"); //$NON-NLS-1$
+				"(id, x, y, name_en, name, type, subtype, opening_hours, site, phone) values(?,?,?,?,?,?,?,?,?,?)"); //$NON-NLS-1$
 		for (Amenity a : amenities) {
 			stat.bindLong(1, a.getId());
-			stat.bindDouble(2, a.getLocation().getLatitude());
-			stat.bindDouble(3, a.getLocation().getLongitude());
+			stat.bindDouble(2, MapUtils.get31TileNumberX(a.getLocation().getLongitude()));
+			stat.bindDouble(3, MapUtils.get31TileNumberY(a.getLocation().getLatitude()));
 			bindString(stat, 4, a.getEnName());
 			bindString(stat, 5, a.getName());
 			bindString(stat, 6, AmenityType.valueToString(a.getType()));

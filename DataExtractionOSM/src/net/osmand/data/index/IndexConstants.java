@@ -41,7 +41,7 @@ public class IndexConstants {
 	
 	public final static String POI_TABLE = "poi"; //$NON-NLS-1$
 	
-	public final static String BINARY_MAP_TABLE = "binary_map_objects";
+	public final static String BINARY_MAP_TABLE = "binary_map_objects"; //$NON-NLS-1$
 	
 	public final static String TRANSPORT_STOP_TABLE = "transport_stop"; //$NON-NLS-1$
 	public final static String TRANSPORT_ROUTE_STOP_TABLE = "transport_route_stop"; //$NON-NLS-1$
