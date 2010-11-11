@@ -22,10 +22,6 @@ import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.data.City.CityType;
 import net.osmand.data.index.IndexConstants;
-import net.osmand.data.index.IndexConstants.IndexBuildingTable;
-import net.osmand.data.index.IndexConstants.IndexCityTable;
-import net.osmand.data.index.IndexConstants.IndexStreetNodeTable;
-import net.osmand.data.index.IndexConstants.IndexStreetTable;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.Node;
 import net.osmand.osm.Way;
@@ -300,11 +296,11 @@ public class RegionAddressRepositoryOdb implements RegionAddressRepository {
 			}
 			StringBuilder where = new StringBuilder(80);
 			where.
-				  append(IndexCityTable.CITY_TYPE.toString()).append(" not in ("). //$NON-NLS-1$
+				  append("city_type not in ("). //$NON-NLS-1$
 				  append('\'').append(CityType.valueToString(CityType.CITY)).append('\'').append(", "). //$NON-NLS-1$
 				  append('\'').append(CityType.valueToString(CityType.TOWN)).append('\'').append(") and "). //$NON-NLS-1$
-				  append(useEnglishNames ? IndexCityTable.NAME_EN.toString() : IndexCityTable.NAME.toString()).append(" LIKE '"+name+"%'"); //$NON-NLS-1$ //$NON-NLS-2$
-			Cursor query = db.query(IndexCityTable.getTable(), IndexConstants.generateColumnNames(IndexCityTable.values()), 
+				  append(useEnglishNames ? "name_en" : "name").append(" LIKE '"+name+"%'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			Cursor query = db.query("city", new String[]{"id","latitude", "longitude", "name", "name_en", "city_type"},  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 					where.toString(), null, null, null, null);
 			if (query.moveToFirst()) {
 				List<City> hamlets = new ArrayList<City>();
@@ -324,16 +320,16 @@ public class RegionAddressRepositoryOdb implements RegionAddressRepository {
 	
     public void preloadWayNodes(Street street){
     	if(street.getWayNodes().isEmpty()){
-    		Cursor query = db.query(IndexStreetNodeTable.getTable(), IndexConstants.generateColumnNames(IndexStreetNodeTable.values()), "? = street", //$NON-NLS-1$
+    		Cursor query = db.query("street_node", new String[]{"id", "latitude", "longitude", "street", "way"}, "? = street", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 					new String[] { street.getId() + "" }, null, null, null); //$NON-NLS-1$
 			log.debug("Start loading waynodes for "  + street.getName()); //$NON-NLS-1$
 			Map<Long, Way> ways = new LinkedHashMap<Long, Way>();
 			if (query.moveToFirst()) {
 				do {
-					Node n = new Node(query.getDouble(IndexStreetNodeTable.LATITUDE.ordinal()),
-							query.getDouble(IndexBuildingTable.LONGITUDE.ordinal()),
-							query.getLong(IndexStreetNodeTable.ID.ordinal()));
-					long way = query.getLong(IndexStreetNodeTable.WAY.ordinal());
+					Node n = new Node(query.getDouble(1),
+							query.getDouble(2),
+							query.getLong(0));
+					long way = query.getLong(4);
 					if(!ways.containsKey(way)){
 						ways.put(way, new Way(way));
 					}
@@ -352,7 +348,7 @@ public class RegionAddressRepositoryOdb implements RegionAddressRepository {
     public void preloadPostcodes() {
     	if (postCodes.isEmpty()) {
 			// check if it possible to load postcodes
-			Cursor query = db.query(true, IndexBuildingTable.getTable(), new String[] { IndexBuildingTable.POSTCODE.toString() }, null,
+			Cursor query = db.query(true, "building", new String[] { "postcode" }, null,  //$NON-NLS-1$//$NON-NLS-2$
 					null, null, null, null, null);
 			log.debug("Start loading postcodes for "); //$NON-NLS-1$
 			if (query.moveToFirst()) {
@@ -370,18 +366,19 @@ public class RegionAddressRepositoryOdb implements RegionAddressRepository {
 	
 	public void preloadBuildings(Street street){
 		if (street.getBuildings().isEmpty()) {
-			Cursor query = db.query(IndexBuildingTable.getTable(), IndexConstants.generateColumnNames(IndexBuildingTable.values()), "? = street", //$NON-NLS-1$
+			Cursor query = db.query("building", //$NON-NLS-1$
+					new String[]{"id","latitude", "longitude", "name", "name_en", "street", "postcode"} //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+					, "? = street", //$NON-NLS-1$
 						new String[] { street.getId() + "" }, null, null, null); //$NON-NLS-1$
 			log.debug("Start loading buildings for "  + street.getName()); //$NON-NLS-1$
 			if (query.moveToFirst()) {
 				do {
 					Building building = new Building();
-					building.setId(query.getLong(IndexBuildingTable.ID.ordinal()));
-					building.setLocation(query.getDouble(IndexBuildingTable.LATITUDE.ordinal()), query.getDouble(IndexBuildingTable.LONGITUDE
-							.ordinal()));
-					building.setName(query.getString(IndexBuildingTable.NAME.ordinal()));
-					building.setEnName(query.getString(IndexBuildingTable.NAME_EN.ordinal()));
-					building.setPostcode(query.getString(IndexBuildingTable.POSTCODE.ordinal()));
+					building.setId(query.getLong(0));
+					building.setLocation(query.getDouble(1), query.getDouble(2));
+					building.setName(query.getString(3));
+					building.setEnName(query.getString(4));
+					building.setPostcode(query.getString(6));
 					street.registerBuilding(building);
 				} while (query.moveToNext());
 				street.sortBuildings();
@@ -395,17 +392,18 @@ public class RegionAddressRepositoryOdb implements RegionAddressRepository {
 		assert o instanceof PostCode || o instanceof City;
 		City city = (City) (o instanceof City ? o : null); 
 		PostCode post = (PostCode) (o instanceof PostCode ? o : null);
+		
 		if (city != null && city.isEmptyWithStreets()) {
 			log.debug("Start loading streets for "  + city.getName()); //$NON-NLS-1$
-			Cursor query = db.query(IndexStreetTable.getTable(), IndexConstants.generateColumnNames(IndexStreetTable.values()), "? = city", //$NON-NLS-1$
+			Cursor query = db.query("street", new String[]{"id","latitude", "longitude", "name", "name_en", "city"}, "? = city", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
 					new String[] { city.getId() + "" }, null, null, null); //$NON-NLS-1$
 			if (query.moveToFirst()) {
 				do {
 					Street street = new Street(city);
-					street.setId(query.getLong(IndexStreetTable.ID.ordinal()));
-					street.setLocation(query.getDouble(IndexStreetTable.LATITUDE.ordinal()), query.getDouble(IndexStreetTable.LONGITUDE.ordinal()));
-					street.setName(query.getString(IndexStreetTable.NAME.ordinal()));
-					street.setEnName(query.getString(IndexStreetTable.NAME_EN.ordinal()));
+					street.setId(query.getLong(0));
+					street.setLocation(query.getDouble(1), query.getDouble(2));
+					street.setName(query.getString(3));
+					street.setEnName(query.getString(4));
 					city.registerStreet(street, useEnglishNames);
 				} while (query.moveToNext());
 			}
@@ -451,14 +449,13 @@ public class RegionAddressRepositoryOdb implements RegionAddressRepository {
 	}
 	
 	protected City parseCityFromCursor(Cursor query){
-		CityType type = CityType.valueFromString(query.getString(IndexCityTable.CITY_TYPE.ordinal()));
+		CityType type = CityType.valueFromString(query.getString(5));
 		if (type != null) {
 			City city = new City(type);
-			city.setId(query.getLong(IndexCityTable.ID.ordinal()));
-			city.setLocation(query.getDouble(IndexCityTable.LATITUDE.ordinal()), 
-					query.getDouble(IndexCityTable.LONGITUDE.ordinal()));
-			city.setName(query.getString(IndexCityTable.NAME.ordinal()));
-			city.setEnName(query.getString(IndexCityTable.NAME_EN.ordinal()));
+			city.setId(query.getLong(0));
+			city.setLocation(query.getDouble(1), query.getDouble(2));
+			city.setName(query.getString(3));
+			city.setEnName(query.getString(4));
 			return city;
 		}
 		return null;
@@ -468,11 +465,11 @@ public class RegionAddressRepositoryOdb implements RegionAddressRepository {
 		if (cities.isEmpty()) {
 			log.debug("Start loading cities for " +getName()); //$NON-NLS-1$
 			StringBuilder where = new StringBuilder();
-			where.append(IndexCityTable.CITY_TYPE.toString()).append('=').
+			where.append("city_type="). //$NON-NLS-1$
 				  append('\'').append(CityType.valueToString(CityType.CITY)).append('\'').append(" or "). //$NON-NLS-1$
-				  append(IndexCityTable.CITY_TYPE.toString()).append('=').
+				  append("city_type="). //$NON-NLS-1$
 				  append('\'').append(CityType.valueToString(CityType.TOWN)).append('\'');
-			Cursor query = db.query(IndexCityTable.getTable(), IndexConstants.generateColumnNames(IndexCityTable.values()), 
+			Cursor query = db.query("city", new String[]{"id","latitude", "longitude", "name", "name_en", "city_type"},   //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 					where.toString(), null, null, null, null);
 			if(query.moveToFirst()){
 				do {

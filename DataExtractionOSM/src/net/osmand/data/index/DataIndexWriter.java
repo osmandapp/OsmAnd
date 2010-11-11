@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import com.sun.xml.internal.ws.wsdl.writer.UsingAddressing;
 
 import net.osmand.Algoritms;
 import net.osmand.data.Amenity;
@@ -23,11 +22,7 @@ import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.data.City.CityType;
 import net.osmand.data.index.IndexConstants.IndexBinaryMapRenderObject;
-import net.osmand.data.index.IndexConstants.IndexBuildingTable;
-import net.osmand.data.index.IndexConstants.IndexCityTable;
 import net.osmand.data.index.IndexConstants.IndexPoiTable;
-import net.osmand.data.index.IndexConstants.IndexStreetNodeTable;
-import net.osmand.data.index.IndexConstants.IndexStreetTable;
 import net.osmand.data.index.IndexConstants.IndexTransportRoute;
 import net.osmand.data.index.IndexConstants.IndexTransportRouteStop;
 import net.osmand.data.index.IndexConstants.IndexTransportStop;
@@ -79,6 +74,11 @@ public class DataIndexWriter {
         }
         stat.close();
 	}
+
+	
+	public static PreparedStatement getStreetNodeInsertPreparedStatement(Connection conn) throws SQLException {
+		return conn.prepareStatement("insert into street_node (id, latitude, longitude, street, way) values (?, ?, ?, ?, ?)");
+	}
 	
 	public static void writeStreetWayNodes(PreparedStatement prepStreetNode, Map<PreparedStatement, Integer> count, Long streetId, Way way, int batchSize)
 			throws SQLException {
@@ -86,53 +86,108 @@ public class DataIndexWriter {
 			if (n == null) {
 				continue;
 			}
-			assert IndexStreetNodeTable.values().length == 5;
-			prepStreetNode.setLong(IndexStreetNodeTable.ID.ordinal() + 1, n.getId());
-			prepStreetNode.setDouble(IndexStreetNodeTable.LATITUDE.ordinal() + 1, n.getLatitude());
-			prepStreetNode.setDouble(IndexStreetNodeTable.LONGITUDE.ordinal() + 1, n.getLongitude());
-			prepStreetNode.setLong(IndexStreetNodeTable.WAY.ordinal() + 1, way.getId());
-			prepStreetNode.setLong(IndexStreetNodeTable.STREET.ordinal() + 1, streetId);
+			prepStreetNode.setLong(1, n.getId());
+			prepStreetNode.setDouble(2, n.getLatitude());
+			prepStreetNode.setDouble(3, n.getLongitude());
+			prepStreetNode.setLong(5, way.getId());
+			prepStreetNode.setLong(4, streetId);
 			addBatch(count, prepStreetNode, BATCH_SIZE);
 		}
+	}
+	
+	public static PreparedStatement getBuildingInsertPreparedStatement(Connection conn) throws SQLException {
+		return conn.prepareStatement("insert into building (id, latitude, longitude, name, name_en, street, postcode) values (?, ?, ?, ?, ?, ?, ?)");
 	}
 
 	public static void writeBuilding(PreparedStatement prepBuilding, Map<PreparedStatement, Integer> count, Long streetId, 
 			Building building, int batchSize)
 			throws SQLException {
-		assert IndexBuildingTable.values().length == 7;
-		prepBuilding.setLong(IndexBuildingTable.ID.ordinal() + 1, building.getId());
-		prepBuilding.setDouble(IndexBuildingTable.LATITUDE.ordinal() + 1, building.getLocation().getLatitude());
-		prepBuilding.setDouble(IndexBuildingTable.LONGITUDE.ordinal() + 1, building.getLocation().getLongitude());
-		prepBuilding.setString(IndexBuildingTable.NAME.ordinal() + 1, building.getName());
-		prepBuilding.setString(IndexBuildingTable.NAME_EN.ordinal() + 1, building.getEnName());
-		prepBuilding.setLong(IndexBuildingTable.STREET.ordinal() + 1, streetId);
-		prepBuilding.setString(IndexBuildingTable.POSTCODE.ordinal()+1, building.getPostcode() == null ? null : building.getPostcode().toUpperCase());
-		
+		prepBuilding.setLong(1, building.getId());
+		prepBuilding.setDouble(2, building.getLocation().getLatitude());
+		prepBuilding.setDouble(3, building.getLocation().getLongitude());
+		prepBuilding.setString(4, building.getName());
+		prepBuilding.setString(5, building.getEnName());
+		prepBuilding.setLong(6, streetId);
+		prepBuilding.setString(7, building.getPostcode() == null ? null : building.getPostcode().toUpperCase());
+
 		addBatch(count, prepBuilding);
 	}
+	
+	
+	
 
+	public static PreparedStatement getSearchStreetPreparedStatement(Connection mapConnection) throws SQLException {
+		return mapConnection.prepareStatement("SELECT ID FROM street WHERE ? = city AND ? = name");
+	}
+
+	public static PreparedStatement getSearchBuildingPreparedStatement(Connection mapConnection) throws SQLException {
+		return mapConnection.prepareStatement("SELECT id FROM building where ? = id");
+	}
+
+	public static PreparedStatement getStreeNodeSearchPreparedStatement(Connection mapConnection) throws SQLException {
+		return mapConnection.prepareStatement("SELECT way FROM street_node WHERE ? = way");
+	}
+	
+	public static PreparedStatement getUpdateBuildingPostcodePreparedStatement(Connection mapConnection) throws SQLException {
+		return mapConnection.prepareStatement("UPDATE building SET postcode = ? WHERE id = ?");
+	}
+	
+
+	public static PreparedStatement getCityInsertPreparedStatement(Connection conn) throws SQLException{
+		return conn.prepareStatement("insert into city (id, latitude, longitude, name, name_en, city_type) values (?, ?, ?, ?, ?, ?)");
+	}
+	
+	
 	public static void writeCity(PreparedStatement prepCity, Map<PreparedStatement, Integer> count, City city, int batchSize) throws SQLException {
-		assert IndexCityTable.values().length == 6;
-		prepCity.setLong(IndexCityTable.ID.ordinal() + 1, city.getId());
-		prepCity.setDouble(IndexCityTable.LATITUDE.ordinal() + 1, city.getLocation().getLatitude());
-		prepCity.setDouble(IndexCityTable.LONGITUDE.ordinal() + 1, city.getLocation().getLongitude());
-		prepCity.setString(IndexCityTable.NAME.ordinal() + 1, city.getName());
-		prepCity.setString(IndexCityTable.NAME_EN.ordinal() + 1, city.getEnName());
-		prepCity.setString(IndexCityTable.CITY_TYPE.ordinal() + 1, CityType.valueToString(city.getType()));
+		prepCity.setLong(1, city.getId());
+		prepCity.setDouble(2, city.getLocation().getLatitude());
+		prepCity.setDouble(3, city.getLocation().getLongitude());
+		prepCity.setString(4, city.getName());
+		prepCity.setString(5, city.getEnName());
+		prepCity.setString(6, CityType.valueToString(city.getType()));
 		addBatch(count, prepCity, batchSize);
+	}
+	
+	public static PreparedStatement getStreetInsertPreparedStatement(Connection conn) throws SQLException{
+		return conn.prepareStatement("insert into street (id, latitude, longitude, name, name_en, city) values (?, ?, ?, ?, ?, ?)");
+	}
+	
+	public static void insertStreetData(PreparedStatement addressStreetStat, long id, String name, String nameEn, double latitude,
+			double longitude, Long cityId) throws SQLException {
+		addressStreetStat.setLong(1, id);
+		addressStreetStat.setString(4, name);
+		addressStreetStat.setString(5, nameEn);
+		addressStreetStat.setDouble(2, latitude);
+		addressStreetStat.setDouble(3, longitude);
+		addressStreetStat.setLong(6, cityId);
 	}
 	
 	
 	public static void createAddressIndexStructure(Connection conn) throws SQLException{
 		Statement stat = conn.createStatement();
-        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexCityTable.values()));
-        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexCityTable.values()));
-        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexBuildingTable.values()));
-        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexBuildingTable.values()));
-        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexStreetNodeTable.values()));
-        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexStreetNodeTable.values()));
-        stat.executeUpdate(IndexConstants.generateCreateSQL(IndexStreetTable.values()));
-        stat.executeUpdate(IndexConstants.generateCreateIndexSQL(IndexStreetTable.values()));
+		
+        stat.executeUpdate("create table city (id bigint primary key, latitude double, longitude double, " +
+        			"name varchar(255), name_en varchar(255), city_type varchar(32))");
+        stat.executeUpdate("create index city_ind on city (id, city_type)");
+        
+        stat.executeUpdate("create table street (id bigint primary key, latitude double, longitude double, " +
+					"name varchar(255), name_en varchar(255), city bigint)");
+        stat.executeUpdate("create index street_city on street (city)");
+        stat.executeUpdate("create index street_id on street (id)");
+        // create index on name ?
+
+        stat.executeUpdate("create table building (id bigint, latitude double, longitude double, " +
+						"name varchar(255), name_en varchar(255), street bigint, postcode varchar(255), primary key(street, id))");
+        stat.executeUpdate("create index building_postcode on building (postcode)");
+        stat.executeUpdate("create index building_street on building (street)");
+        stat.executeUpdate("create index building_id on building (id)");
+        
+        
+        stat.executeUpdate("create table street_node (id bigint, latitude double, longitude double, " +
+						"street bigint, way bigint)");
+        stat.executeUpdate("create index street_node_street on street_node (street)");
+        stat.executeUpdate("create index street_node_way on street_node (way)");
+        
         if(IndexCreator.usingSQLite()){
         	stat.execute("PRAGMA user_version = " + IndexConstants.ADDRESS_TABLE_VERSION); //$NON-NLS-1$
         }
@@ -309,5 +364,7 @@ public class DataIndexWriter {
 			count.put(p, count.get(p) + 1);
 		}
 	}
-	
+
+
+
 }
