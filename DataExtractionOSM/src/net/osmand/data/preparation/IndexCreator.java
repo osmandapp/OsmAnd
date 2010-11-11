@@ -44,10 +44,6 @@ import net.osmand.data.index.DataIndexReader;
 import net.osmand.data.index.DataIndexWriter;
 import net.osmand.data.index.IndexConstants;
 import net.osmand.data.index.IndexConstants.IndexBinaryMapRenderObject;
-import net.osmand.data.index.IndexConstants.IndexBuildingTable;
-import net.osmand.data.index.IndexConstants.IndexCityTable;
-import net.osmand.data.index.IndexConstants.IndexStreetNodeTable;
-import net.osmand.data.index.IndexConstants.IndexStreetTable;
 import net.osmand.data.index.IndexConstants.IndexTransportRoute;
 import net.osmand.data.index.IndexConstants.IndexTransportRouteStop;
 import net.osmand.data.index.IndexConstants.IndexTransportStop;
@@ -220,11 +216,6 @@ public class IndexCreator {
 	public static boolean usingH2(){
 		return CURRENT_DB.equals(H2_DIALECT);
 	}
-	
-	public static String getCurrentLongType(){
-		return usingSQLite() ? "long" : "bigint";
-	}
-	
 	
 	
 	public IndexCreator(File workingDir){
@@ -1111,13 +1102,8 @@ public class IndexCreator {
 		}
 		
 		if (foundId == null) {
-			assert IndexStreetTable.values().length == 6;
-			addressStreetStat.setLong(IndexStreetTable.ID.ordinal() + 1, initId);
-			addressStreetStat.setString(IndexStreetTable.NAME_EN.ordinal() + 1, Junidecode.unidecode(name));
-			addressStreetStat.setString(IndexStreetTable.NAME.ordinal() + 1, name);
-			addressStreetStat.setDouble(IndexStreetTable.LATITUDE.ordinal() + 1, location.getLatitude());
-			addressStreetStat.setDouble(IndexStreetTable.LONGITUDE.ordinal() + 1, location.getLongitude());
-			addressStreetStat.setLong(IndexStreetTable.CITY.ordinal() + 1, city.getId());
+			DataIndexWriter.insertStreetData(addressStreetStat, initId, name, Junidecode.unidecode(name), 
+					location.getLatitude(), location.getLongitude(), city.getId());
 			if(loadInMemory){
 				DataIndexWriter.addBatch(pStatements, addressStreetStat, BATCH_SIZE);
 				addressStreetLocalMap.put(name+"_"+city.getId(), initId);
@@ -1681,7 +1667,7 @@ public class IndexCreator {
 				break;
 			}
 		}
-		progress.startTask("Searalizing city addresses...", j + ((cities.size() - j) / 100 + 1));
+		progress.startTask("Serializing city addresses...", j + ((cities.size() - j) / 100 + 1));
 		
 		Map<String, Set<Street>> postcodes = new TreeMap<String, Set<Street>>();
 		boolean writeCities = true;
@@ -1706,10 +1692,15 @@ public class IndexCreator {
 			if(readWayNodes){
 				streetNodes = new LinkedHashMap<Street, List<Node>>();
 			}
+			long time = System.currentTimeMillis();
 			reader.readStreetsBuildings(streetstat, c, streets, waynodesStat, streetNodes);
+			long f = System.currentTimeMillis() - time;
 			writer.writeCityIndex(c, streets, streetNodes);
+			int bCount = 0;
 			for (Street s : streets) {
+				bCount++;
 				for (Building b : s.getBuildings()) {
+					bCount++;
 					if (b.getPostcode() != null) {
 						if (!postcodes.containsKey(b.getPostcode())) {
 							postcodes.put(b.getPostcode(), new LinkedHashSet<Street>(3));
@@ -1718,6 +1709,7 @@ public class IndexCreator {
 					}
 				}
 			}
+			System.out.println("! " + c.getName() + " ! " + f + " " + bCount + " streets " + streets.size());
 		}
 		writer.endCityIndexes(!writeCities);
 		
@@ -2303,8 +2295,7 @@ public class IndexCreator {
 
 
 	private void processingPostcodes() throws SQLException {
-		PreparedStatement pstat = mapConnection.prepareStatement("UPDATE " + IndexBuildingTable.getTable() + " SET "
-				+ IndexBuildingTable.POSTCODE.name() + " = ? WHERE " + IndexBuildingTable.ID.name() + " = ?");
+		PreparedStatement pstat = DataIndexWriter.getUpdateBuildingPostcodePreparedStatement(mapConnection);;
 		pStatements.put(pstat, 0);
 		for (Relation r : postalCodeRelations) {
 			String tag = r.getTag(OSMTagKey.POSTAL_CODE);
@@ -2432,21 +2423,14 @@ public class IndexCreator {
 
 		if (indexAddress) {
 			DataIndexWriter.createAddressIndexStructure(mapConnection);
-			addressCityStat = mapConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexCityTable
-					.getTable(), IndexCityTable.values().length));
-			addressStreetStat = mapConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexStreetTable
-					.getTable(), IndexStreetTable.values().length));
-			addressSearchStreetStat = mapConnection.prepareStatement("SELECT " + IndexStreetTable.ID.name() + " FROM "
-					+ IndexStreetTable.getTable() + " WHERE ? = " + IndexStreetTable.CITY.name() + " AND ? ="
-					+ IndexStreetTable.NAME.name());
-			addressSearchBuildingStat = mapConnection.prepareStatement("SELECT " + IndexBuildingTable.ID.name() + " FROM "
-					+ IndexBuildingTable.getTable() + " WHERE ? = " + IndexBuildingTable.ID.name());
-			addressSearchStreetNodeStat = mapConnection.prepareStatement("SELECT " + IndexStreetNodeTable.WAY.name() + " FROM "
-					+ IndexStreetNodeTable.getTable() + " WHERE ? = " + IndexStreetNodeTable.WAY.name());
-			addressBuildingStat = mapConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(IndexBuildingTable
-					.getTable(), IndexBuildingTable.values().length));
-			addressStreetNodeStat = mapConnection.prepareStatement(IndexConstants.generatePrepareStatementToInsert(
-					IndexStreetNodeTable.getTable(), IndexStreetNodeTable.values().length));
+			addressCityStat = DataIndexWriter.getCityInsertPreparedStatement(mapConnection); 
+			addressStreetStat = DataIndexWriter.getStreetInsertPreparedStatement(mapConnection);
+			addressBuildingStat = DataIndexWriter.getBuildingInsertPreparedStatement(mapConnection);
+			addressStreetNodeStat = DataIndexWriter.getStreetNodeInsertPreparedStatement(mapConnection);
+			addressSearchStreetStat = DataIndexWriter.getSearchStreetPreparedStatement(mapConnection);
+			addressSearchBuildingStat = DataIndexWriter.getSearchBuildingPreparedStatement(mapConnection);
+			addressSearchStreetNodeStat = DataIndexWriter.getStreeNodeSearchPreparedStatement(mapConnection);
+			
 			pStatements.put(addressCityStat, 0);
 			pStatements.put(addressStreetStat, 0);
 			pStatements.put(addressStreetNodeStat, 0);
@@ -2513,11 +2497,13 @@ public class IndexCreator {
 		Connection dbConn = DriverManager.getConnection("jdbc:sqlite:" + sqlitedb.getAbsolutePath());
 		dbConn.setAutoCommit(false);
 		Statement st = dbConn.createStatement();
-		st.execute("DELETE FROM " + IndexStreetNodeTable.getTable() + " WHERE 1=1");
+		st.execute("DELETE FROM street_node WHERE 1=1");
 		st.close();
 		dbConn.commit();
 		st = dbConn.createStatement();
-		st.execute("VACUUM");
+		if (usingSQLite()) {
+			st.execute("VACUUM");
+		}
 		st.close();
 		dbConn.close();
 	}

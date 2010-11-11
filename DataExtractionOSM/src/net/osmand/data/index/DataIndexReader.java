@@ -17,9 +17,6 @@ import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.Street;
 import net.osmand.data.City.CityType;
-import net.osmand.data.index.IndexConstants.IndexBuildingTable;
-import net.osmand.data.index.IndexConstants.IndexCityTable;
-import net.osmand.data.index.IndexConstants.IndexStreetTable;
 import net.osmand.osm.Node;
 
 import org.apache.commons.logging.Log;
@@ -42,14 +39,14 @@ public class DataIndexReader {
 	public List<City> readCities(Connection c) throws SQLException{
 		List<City> cities = new ArrayList<City>();
 		Statement stat = c.createStatement();
-		ResultSet set = stat.executeQuery(IndexConstants.generateSelectSQL(IndexCityTable.values()));
+		ResultSet set = stat.executeQuery("select id, latitude, longitude , name , name_en , city_type from city"); //$NON-NLS-1$
 		while(set.next()){
-			City city = new City(CityType.valueFromString(set.getString(IndexCityTable.CITY_TYPE.ordinal() + 1)));
-			city.setName(set.getString(IndexCityTable.NAME.ordinal() + 1));
-			city.setEnName(set.getString(IndexCityTable.NAME_EN.ordinal() + 1));
-			city.setLocation(set.getDouble(IndexCityTable.LATITUDE.ordinal() + 1), 
-					set.getDouble(IndexCityTable.LONGITUDE.ordinal() + 1));
-			city.setId(set.getLong(IndexCityTable.ID.ordinal() + 1));
+			City city = new City(CityType.valueFromString(set.getString(6)));
+			city.setName(set.getString(4));
+			city.setEnName(set.getString(5));
+			city.setLocation(set.getDouble(2), 
+					set.getDouble(3));
+			city.setId(set.getLong(1));
 			cities.add(city);
 			
 		}
@@ -58,23 +55,22 @@ public class DataIndexReader {
 		return cities;
 	}
 	
-	public PreparedStatement getStreetsPreparedStatement(Connection c) throws SQLException{
-		return c.prepareStatement(IndexConstants.generateSelectSQL(IndexStreetTable.values(), 
-				IndexStreetTable.CITY.toString() +" = ? ")); //$NON-NLS-1$
-	}
+
+	
+	
 	
 	public PreparedStatement getStreetsBuildingPreparedStatement(Connection c) throws SQLException{
-		return c.prepareStatement("SELECT A.id, A.name, A.name_en, A.latitude, A.longitude, "+
-				"B.id, B.name, B.name_en, B.latitude, B.longitude, B.postcode "+
-				"FROM street A LEFT JOIN building B ON B.street = A.id WHERE A.city = ? "); //$NON-NLS-1$
-	}
-	
-	public PreparedStatement getStreetsWayNodesPreparedStatement(Connection c) throws SQLException{
-		return c.prepareStatement("SELECT A.id, A.latitude, A.longitude FROM street_node A WHERE A.street = ? "); //$NON-NLS-1$
+		return c.prepareStatement("SELECT A.id, A.name, A.name_en, A.latitude, A.longitude, "+ //$NON-NLS-1$
+				"B.id, B.name, B.name_en, B.latitude, B.longitude, B.postcode "+ //$NON-NLS-1$
+				"FROM street A left JOIN building B ON B.street = A.id WHERE A.city = ?"); //$NON-NLS-1$
 	}
 	
 	public List<Street> readStreetsBuildings(PreparedStatement streetBuildingsStat, City city, List<Street> streets) throws SQLException {
 		return readStreetsBuildings(streetBuildingsStat, city, streets, null, null);
+	}
+	
+	public PreparedStatement getStreetsWayNodesPreparedStatement(Connection c) throws SQLException{
+		return c.prepareStatement("SELECT A.id, A.latitude, A.longitude FROM street_node A WHERE A.street = ? "); //$NON-NLS-1$
 	}
 
 	public List<Street> readStreetsBuildings(PreparedStatement streetBuildingsStat, City city, List<Street> streets,
@@ -119,16 +115,20 @@ public class DataIndexReader {
 		return streets;
 	}
 	
+	public PreparedStatement getStreetsPreparedStatement(Connection c) throws SQLException{
+		return c.prepareStatement("select id, latitude, longitude , name, name_en, city from street where city = ?"); //$NON-NLS-1$
+	}
+	
 	public List<Street> readStreets(PreparedStatement streetsStat, City city, List<Street> streets) throws SQLException{
 		streetsStat.setLong(1, city.getId());
 		ResultSet set = streetsStat.executeQuery();
 		while(set.next()){
 			Street street = new Street(city);
-			street.setName(set.getString(IndexStreetTable.NAME.ordinal() + 1));
-			street.setEnName(set.getString(IndexStreetTable.NAME_EN.ordinal() + 1));
-			street.setLocation(set.getDouble(IndexStreetTable.LATITUDE.ordinal() + 1), 
-					set.getDouble(IndexStreetTable.LONGITUDE.ordinal() + 1));
-			street.setId(set.getLong(IndexStreetTable.ID.ordinal() + 1));
+			street.setName(set.getString(4));
+			street.setEnName(set.getString(5));
+			street.setLocation(set.getDouble(2), 
+					set.getDouble(3));
+			street.setId(set.getLong(1));
 			streets.add(street);
 		}
 		set.close();
@@ -136,8 +136,7 @@ public class DataIndexReader {
 	}
 	
 	public PreparedStatement getBuildingsPreparedStatement(Connection c) throws SQLException{
-		return c.prepareStatement(IndexConstants.generateSelectSQL(IndexBuildingTable.values(), 
-				IndexBuildingTable.STREET.toString() +" = ? "));
+		return c.prepareStatement("select id, latitude, longitude, name, name_en, street, postcode from building where street = ?"); //$NON-NLS-1$
 	}
 	
 	
@@ -146,11 +145,12 @@ public class DataIndexReader {
 		ResultSet set = buildingStat.executeQuery();
 		while(set.next()){
 			Building building = new Building();
-			building.setName(set.getString(IndexBuildingTable.NAME.ordinal() + 1));
-			building.setEnName(set.getString(IndexBuildingTable.NAME_EN.ordinal() + 1));
-			building.setLocation(set.getDouble(IndexBuildingTable.LATITUDE.ordinal() + 1), 
-					set.getDouble(IndexBuildingTable.LONGITUDE.ordinal() + 1));
-			building.setId(set.getLong(IndexBuildingTable.ID.ordinal() + 1));
+			building.setName(set.getString(4));
+			building.setEnName(set.getString(5));
+			building.setLocation(set.getDouble(2), 
+					set.getDouble(3));
+			building.setId(set.getLong(1));
+			building.setPostcode(set.getString(7));
 			buildings.add(building);
 		}
 		set.close();
