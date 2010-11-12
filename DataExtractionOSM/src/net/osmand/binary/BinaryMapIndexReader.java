@@ -31,7 +31,7 @@ import com.google.protobuf.WireFormat;
 
 public class BinaryMapIndexReader {
 	
-	private final static int TRANSPORT_STOP_ZOOM = 24;
+	public final static int TRANSPORT_STOP_ZOOM = 24;
 	
 	private final RandomAccessFile raf;
 	private int version;

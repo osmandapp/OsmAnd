@@ -380,11 +380,21 @@ public class CachedNodes
     buffHeader.reset();
   }
   
+  static Map<String, Integer> fileNamesMap = new LinkedHashMap<String, Integer>();
+  
   int calKey(String fileName,int idx)
   {
     if(fileName != null) {
+    	Integer i = fileNamesMap.get(fileName);
+    	if(i == null){
+    		if(fileNamesMap.size() > 31){
+    			throw new ArrayIndexOutOfBoundsException();
+    		}
+    		fileNamesMap.put(fileName, fileNamesMap.size());
+    		i = fileNamesMap.get(fileName);
+    	}
 //      System.out.println(idx + " " + fileName + " " + ((idx << 5)+ fileName.toLowerCase().hashCode() % 32));
-      return ((idx << 5)+ fileName.toLowerCase().hashCode() % 32);
+      return ((idx << 5)+ i);
     } else{
       System.out.println("CachedNodes.calKey: fileName null");
       return 0;
