@@ -387,14 +387,14 @@ public class CachedNodes
     if(fileName != null) {
     	Integer i = fileNamesMap.get(fileName);
     	if(i == null){
-    		if(fileNamesMap.size() > 31){
+    		if(fileNamesMap.size() > 1023){
     			throw new ArrayIndexOutOfBoundsException();
     		}
     		fileNamesMap.put(fileName, fileNamesMap.size());
     		i = fileNamesMap.get(fileName);
     	}
 //      System.out.println(idx + " " + fileName + " " + ((idx << 5)+ fileName.toLowerCase().hashCode() % 32));
-      return ((idx << 5)+ i);
+      return ((idx << 10)+ i);
     } else{
       System.out.println("CachedNodes.calKey: fileName null");
       return 0;
