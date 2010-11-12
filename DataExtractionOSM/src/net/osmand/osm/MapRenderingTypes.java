@@ -454,9 +454,9 @@ public class MapRenderingTypes {
 		// oneway
 		String one = e.getTag(OSMTagKey.ONEWAY);
 		attr <<= 1;
-		if(one != null){
-			attr |= 1;
-		}
+		if(one != null && (one.equals("yes") || one.equals("1") || one.equals("-1"))){
+ 			attr |= 1;
+ 		}
 		return attr;
 	}
 	
