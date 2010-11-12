@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.MessageFormat;
 
 import net.osmand.R;
+import net.osmand.ResourceManager;
 import net.osmand.Version;
 import net.osmand.activities.search.SearchActivity;
 import android.app.Activity;
@@ -35,7 +36,7 @@ import android.widget.TextView;
 public class MainMenuActivity extends Activity {
 
 	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
-	private static final String EXCEPTION_FILE_SIZE = "/osmand/exception.log"; //$NON-NLS-1$
+	private static final String EXCEPTION_FILE_SIZE = ResourceManager.APP_DIR + "exception.log"; //$NON-NLS-1$
 	
 	private Button showMap;
 	private Button settingsButton;
