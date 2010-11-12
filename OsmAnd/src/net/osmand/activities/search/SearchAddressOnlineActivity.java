@@ -79,9 +79,10 @@ public class SearchAddressOnlineActivity extends ListActivity {
 				try {
 					final List<Place> places = new ArrayList<Place>();
 					StringBuilder b = new StringBuilder();
-					b.append("http://nominatim.openstreetmap.org/search/"); //$NON-NLS-1$
-					b.append(URLEncoder.encode(search));
+					b.append("http://nominatim.openstreetmap.org/search"); //$NON-NLS-1$
 					b.append("?format=xml&addressdetails=0&accept-language=").append(Locale.getDefault().getLanguage()); //$NON-NLS-1$
+					b.append("&q=").append(URLEncoder.encode(search)); //$NON-NLS-1$
+					
 					log.info("Searching address at : " + b.toString()); //$NON-NLS-1$
 					URL url = new URL(b.toString());
 					URLConnection conn = url.openConnection();
