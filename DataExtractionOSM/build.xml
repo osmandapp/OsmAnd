@@ -41,6 +41,9 @@
 				<include name="logging.properties"/>
 				<include name="OsmAndMapCreator.bat"/>
 				<include name="OsmAndMapCreator.sh"/>
+				<include name="inspector.bat"/>
+				<include name="inspector.sh"/>
+				<exclude name="lib/h2*"/>
 			</fileset>
 		</copy>
 		<zip destfile="build.zip">
