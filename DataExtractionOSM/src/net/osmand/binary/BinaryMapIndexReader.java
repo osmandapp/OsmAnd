@@ -35,9 +35,11 @@ public class BinaryMapIndexReader {
 	
 	private final RandomAccessFile raf;
 	private int version;
-	private List<MapRoot> mapIndexes = new ArrayList<MapRoot>();
+	private List<MapIndex> mapIndexes = new ArrayList<MapIndex>();
 	private List<AddressRegion> addressIndexes = new ArrayList<AddressRegion>();
 	private List<TransportIndex> transportIndexes = new ArrayList<TransportIndex>();
+	private List<BinaryIndexPart> indexes = new ArrayList<BinaryIndexPart>();
+	
 	private CodedInputStreamRAF codedIS;
 	
 	private final static Log log = LogUtil.getLog(BinaryMapIndexReader.class);
@@ -48,6 +50,7 @@ public class BinaryMapIndexReader {
 	public BinaryMapIndexReader(final RandomAccessFile raf) throws IOException {
 		this.raf = raf;
 		codedIS = CodedInputStreamRAF.newInstance(raf, 1024);
+		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
 		init();
 	}
 
@@ -66,31 +69,39 @@ public class BinaryMapIndexReader {
 				version = codedIS.readUInt32();
 				break;
 			case OsmandOdb.OsmAndStructure.MAPINDEX_FIELD_NUMBER:
-				int length = readInt();
-				int filePointer = codedIS.getTotalBytesRead();
-				int oldLimit = codedIS.pushLimit(length);
-				readMapIndex();
+				MapIndex mapIndex = new MapIndex();
+				mapIndex.length = readInt();
+				mapIndex.filePointer = codedIS.getTotalBytesRead();
+				int oldLimit = codedIS.pushLimit(mapIndex.length);
+				readMapIndex(mapIndex);
 				codedIS.popLimit(oldLimit);
-				codedIS.seek(filePointer + length);
+				codedIS.seek(mapIndex.filePointer + mapIndex.length);
+				mapIndexes.add(mapIndex);
+				indexes.add(mapIndex);
 				break;
 			case OsmandOdb.OsmAndStructure.ADDRESSINDEX_FIELD_NUMBER:
 				AddressRegion region = new AddressRegion();
 				region.length = readInt();
-				region.fileOffset = codedIS.getTotalBytesRead();
+				region.filePointer = codedIS.getTotalBytesRead();
 				oldLimit = codedIS.pushLimit(region.length);
 				readAddressIndex(region);
 				codedIS.popLimit(oldLimit);
-				codedIS.seek(region.fileOffset + region.length);
+				codedIS.seek(region.filePointer + region.length);
+				if(region.name != null){
+					addressIndexes.add(region);
+					indexes.add(region);
+				}
 				break;
 			case OsmandOdb.OsmAndStructure.TRANSPORTINDEX_FIELD_NUMBER:
 				TransportIndex ind = new TransportIndex();
 				ind.length = readInt();
-				ind.fileOffset = codedIS.getTotalBytesRead();
+				ind.filePointer = codedIS.getTotalBytesRead();
 				oldLimit = codedIS.pushLimit(ind.length);
 				readTransportIndex(ind);
 				codedIS.popLimit(oldLimit);
-				codedIS.seek(ind.fileOffset + ind.length);
+				codedIS.seek(ind.filePointer + ind.length);
 				transportIndexes.add(ind);
+				indexes.add(ind);
 				break;
 			case OsmandOdb.OsmAndStructure.VERSIONCONFIRM_FIELD_NUMBER :
 				int cversion = codedIS.readUInt32();
@@ -101,6 +112,10 @@ public class BinaryMapIndexReader {
 				break;
 			}
 		}
+	}
+	
+	public List<BinaryIndexPart> getIndexes() {
+		return indexes;
 	}
 	
 
@@ -123,6 +138,9 @@ public class BinaryMapIndexReader {
 				return;
 			case OsmandOdb.OsmAndTransportIndex.ROUTES_FIELD_NUMBER :
 				skipUnknownField(t);
+				break;
+			case OsmandOdb.OsmAndTransportIndex.NAME_FIELD_NUMBER :
+				ind.setName(codedIS.readString());
 				break;
 			case OsmandOdb.OsmAndTransportIndex.STOPS_FIELD_NUMBER :
 				ind.stopsFileLength = readInt();
@@ -374,7 +392,7 @@ public class BinaryMapIndexReader {
 	private TransportIndex getTransportIndex(int filePointer) {
 		TransportIndex ind = null;
 		for(TransportIndex i : transportIndexes){
-			if(i.fileOffset <= filePointer && (filePointer - i.fileOffset) < i.length){
+			if(i.filePointer <= filePointer && (filePointer - i.filePointer) < i.length){
 				ind = i;
 				break;
 			}
@@ -613,9 +631,6 @@ public class BinaryMapIndexReader {
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				if(region.name != null){
-					addressIndexes.add(region);
-				}
 				return;
 			case OsmandOdb.OsmAndAddressIndex.NAME_FIELD_NUMBER :
 				region.name = codedIS.readString();
@@ -648,19 +663,24 @@ public class BinaryMapIndexReader {
 		}
 	}
 	
-	private void readMapIndex() throws IOException {
+	private void readMapIndex(MapIndex index) throws IOException {
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
 				return;
+			case OsmandOdb.OsmAndMapIndex.NAME_FIELD_NUMBER :
+				index.setName(codedIS.readString());
+				break;
 			case OsmandOdb.OsmAndMapIndex.LEVELS_FIELD_NUMBER :
 				int length = readInt();
 				int filePointer = codedIS.getTotalBytesRead();
 				int oldLimit = codedIS.pushLimit(length);
 				MapRoot mapRoot = readMapLevel();
-				mapIndexes.add(mapRoot);
+				mapRoot.length = length;
+				mapRoot.filePointer = filePointer;
+				index.getRoots().add(mapRoot);
 				codedIS.popLimit(oldLimit);
 				codedIS.seek(filePointer + length);
 				break;
@@ -758,19 +778,21 @@ public class BinaryMapIndexReader {
 		req.numberOfAcceptedObjects = 0;
 		req.numberOfAcceptedSubtrees = 0;
 		req.numberOfReadSubtrees = 0;
-		for (MapRoot index : mapIndexes) {
-			if (index.minZoom <= req.zoom && index.maxZoom >= req.zoom) {
-				if(index.right < req.left || index.left > req.right || index.top > req.bottom || index.bottom < req.top){
-					continue;
-				}
-				for (MapTree tree : index.trees) {
-					if(tree.right < req.left || tree.left > req.right || tree.top > req.bottom || tree.bottom < req.top){
+		for (MapIndex mapIndex : mapIndexes) {
+			for (MapRoot index : mapIndex.getRoots()) {
+				if (index.minZoom <= req.zoom && index.maxZoom >= req.zoom) {
+					if (index.right < req.left || index.left > req.right || index.top > req.bottom || index.bottom < req.top) {
 						continue;
 					}
-					codedIS.seek(tree.filePointer);
-					int oldLimit = codedIS.pushLimit(tree.length);
-					searchMapTreeBounds(index.left, index.right, index.top, index.bottom, req);
-					codedIS.popLimit(oldLimit);
+					for (MapTree tree : index.trees) {
+						if (tree.right < req.left || tree.left > req.right || tree.top > req.bottom || tree.bottom < req.top) {
+							continue;
+						}
+						codedIS.seek(tree.filePointer);
+						int oldLimit = codedIS.pushLimit(tree.length);
+						searchMapTreeBounds(index.left, index.right, index.top, index.bottom, req);
+						codedIS.popLimit(oldLimit);
+					}
 				}
 			}
 		}
@@ -1121,7 +1143,7 @@ public class BinaryMapIndexReader {
 	private void checkAddressIndex(int offset){
 		boolean ok = false;
 		for(AddressRegion r : addressIndexes){
-			if(offset >= r.fileOffset  && offset <= (r.length + r.fileOffset)){
+			if(offset >= r.filePointer  && offset <= (r.length + r.filePointer)){
 				ok = true;
 				break;
 			}
@@ -1701,13 +1723,44 @@ public class BinaryMapIndexReader {
 		}
 	}
 	
-	private static class MapRoot {
+	
+	public static class MapIndex extends BinaryIndexPart {
+		List<MapRoot> roots = new ArrayList<MapRoot>();
+		
+		public List<MapRoot> getRoots() {
+			return roots;
+		}
+	}
+	
+	
+	public static class MapRoot extends BinaryIndexPart {
 		int minZoom = 0;
 		int maxZoom = 0;
 		int left = 0;
 		int right = 0;
 		int top = 0;
 		int bottom = 0;
+		
+		public int getMinZoom() {
+			return minZoom;
+		}
+		
+		public int getMaxZoom() {
+			return maxZoom;
+		}
+		
+		public int getLeft() {
+			return left;
+		}
+		public int getRight() {
+			return right;
+		}
+		public int getTop() {
+			return top;
+		}
+		public int getBottom() {
+			return bottom;
+		}
 		
 		List<MapTree> trees = new ArrayList<MapTree>();
 	}
@@ -1728,9 +1781,7 @@ public class BinaryMapIndexReader {
 		
 	}
 	
-	private static class TransportIndex {
-		int fileOffset = 0;
-		int length = 0;
+	public static class TransportIndex extends BinaryIndexPart {
 		
 		int left = 0;
 		int right = 0;
@@ -1740,6 +1791,20 @@ public class BinaryMapIndexReader {
 		int stopsFileOffset = 0;
 		int stopsFileLength = 0;
 		
+		public int getLeft() {
+			return left;
+		}
+		
+		public int getRight() {
+			return right;
+		}
+		
+		public int getTop() {
+			return top;
+		}
+		public int getBottom() {
+			return bottom;
+		}
 		
 		IndexStringTable stringTable = null;
 	}
@@ -1760,12 +1825,8 @@ public class BinaryMapIndexReader {
 	}
 	
 	
-	private static class AddressRegion {
-		String name;
+	public static class AddressRegion extends BinaryIndexPart {
 		String enName;
-		
-		int fileOffset = 0;
-		int length = 0;
 		
 		int postcodesOffset = -1;
 		int villagesOffset = -1;

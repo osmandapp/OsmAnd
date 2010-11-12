@@ -7,15 +7,10 @@ package net.osmand;
  */
 public class ToDoConstants {
 	
-	// TODO max 101
+	// TODO max 104
 	// introduce bidforfix on site
-	// 1. Verify to use query
 	
-	// !!! Fix phone, site information for POI INDEX
-	// Move poi index to 1 version and remove backward support (save int coordinates and save for name_en)
-	// Show in message and test for some indexes !!!
-	// TEST POI (phone, site, wiki), test show, update, delete
- 	
+
 
 	// 	For 0.5 release
 	//  101. 1) Introduce shell script to print information about indexes 2)Introduce activity to show active indexes
@@ -23,11 +18,12 @@ public class ToDoConstants {
 	//  102. Refactoring rendering schema serializing to xml and prepare script to create fast java builder (support pure xml)
 	//		 Requires 
 	//   86. Allow to add/edit custom tags to POI objects (Issue)
-	//   92. Replace poi index with standard map index and unify POI categories
-	//   69. Add phone and site information to POI (enable call to POI and open site)
+	//   92. Replace poi index with standard map index and unify POI categories (unify done +)
+	//   69. Add phone and site information to POI [+] (enable call to POI and open site)
 	//   97. For voice navigation consider current speed of vehicle. Especially when speed > 50 pronounce more than 200 m
 	//   98. Implement rendering of different app mode. For Car render streets name with large font.
 	//   96. Introduce settings for MPH, imperial units
+	//  103. Allow add poi with multiple tags (different types/subtypes for one object). Fix for constructing and updating on mobile.
 	
 
 	// 	_19. colors for road trunk and motorway
@@ -40,8 +36,7 @@ public class ToDoConstants {
 	
 	// Not clear if it is really needed 
 	//   66. Transport routing (show next stop, total distance, show stop get out, voice) (needed ?).
-	//   85. Enable on/off screen for bike navigation (?)
-	//   83. Add monitoring service to send locations to internet (?)
+	//   83. Add monitoring service to send location to internet immediately (?)
 
 	
 	///////////////////////////   DONE //////////////////////////////
@@ -50,7 +45,8 @@ public class ToDoConstants {
 	//  100. Show impoted gpx points (as favorites), sort the by distance
 	//   91. Invent binary format (minimize disk space, maximize speed)
 	//   94. Revise index to decrease their size (especially address) - replace to float lat/lon and remove for POI 
-	//		 remove en_names from POI (possibly from address)	
+	//		 remove en_names from POI (possibly from address)
+	//   85. Enable on/off screen for bike navigation (?)[not needed replace for continuous gps logging]
 	// DONE SWING
 
 	
