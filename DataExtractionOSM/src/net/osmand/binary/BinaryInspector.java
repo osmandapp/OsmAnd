@@ -18,7 +18,7 @@ public class BinaryInspector {
 	
 	public static void main(String[] args) throws IOException {
 		args = new String[]{"E:\\Information\\OSM maps\\osmand\\Luxembourg.map.pbf"};
-		args = new String[]{"E:\\Information\\OSM maps\\osmand\\Minsk.map.pbf"};
+//		args = new String[]{"E:\\Information\\OSM maps\\osmand\\Minsk.map.pbf"};
 //		args = new String[]{"E:\\Information\\OSM maps\\osmand\\Belarus_4.map.pbf"};
 //		args = new String[]{"E:\\Information\\OSM maps\\osmand\\Netherlands.map.pbf"};
 //		args = new String[]{"E:\\Information\\OSM maps\\osm_map\\Netherlands\\Netherlands_trans.map.pbf"};
@@ -74,7 +74,9 @@ public class BinaryInspector {
 				System.out.println(MessageFormat.format("{0}. {1} data {3} - {2} bytes", i, partname, p.getLength(), name));
 				if(p instanceof TransportIndex){
 					TransportIndex ti = ((TransportIndex) p);
-					System.out.println("\t Bounds " + formatBounds(ti.getLeft(), ti.getRight(), ti.getTop(), ti.getBottom()));
+					int sh = (31 - BinaryMapIndexReader.TRANSPORT_STOP_ZOOM);
+					System.out.println("\t Bounds " + formatBounds(ti.getLeft() << sh, ti.getRight() << sh, 
+							ti.getTop() << sh, ti.getBottom() << sh));
 				} else if(p instanceof MapIndex){
 					MapIndex m = ((MapIndex) p);
 					for(MapRoot mi : m.getRoots()){

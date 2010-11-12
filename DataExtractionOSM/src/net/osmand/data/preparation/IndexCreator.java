@@ -1925,7 +1925,7 @@ public class IndexCreator {
 					while(rset.next()){
 						Long route = transportRoutes.get(rset.getLong(1));
 						if(route == null){
-							log.error("Something goes wrong with route id = " + rset.getLong(1));
+							log.error("Something goes wrong with transport route id = " + rset.getLong(1));
 						} else {
 							routes.add(route);
 						}
@@ -1933,7 +1933,7 @@ public class IndexCreator {
 					rset.close();
 					writer.writeTransportStop(id, x24, y24, name, nameEn, stringTable, routes);
 				} else {
-					log.error("Something goes wrong with id = " + id);
+					log.error("Something goes wrong with transport id = " + id);
 				}
 			} else {
 				long ptr = ((NonLeafElement) e[i]).getPtr();
@@ -2502,18 +2502,14 @@ public class IndexCreator {
 		 creator.setIndexTransport(true);
 		 
 		 creator.recreateOnlyBinaryFile = false;
-		 creator.deleteDatabaseIndexes = true;
+		 creator.deleteDatabaseIndexes = false;
 		 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
 		 
-		 
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/forest.osm"), new ConsoleProgressImplementation(3), null);
-		 
-
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);
 		 
@@ -2525,7 +2521,8 @@ public class IndexCreator {
 		 
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/forest_complex.osm"), new ConsoleProgressImplementation(25), null);
 		 
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/luxembourg.osm.pbf"), new ConsoleProgressImplementation(25), null);
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/luxembourg.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/luxembourg.osm.pbf"), new ConsoleProgressImplementation(15), null);
 
 		 System.out.println("WHOLE GENERATION TIME :  " + (System.currentTimeMillis() - time));
 		 System.out.println("COORDINATES_SIZE " + BinaryMapIndexWriter.COORDINATES_SIZE + " count " + BinaryMapIndexWriter.COORDINATES_COUNT);
