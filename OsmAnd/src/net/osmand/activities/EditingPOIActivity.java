@@ -111,7 +111,7 @@ public class EditingPOIActivity {
 		if(n != null){
 			dlg = new Dialog(ctx);
 			dlg.setTitle(R.string.poi_edit_title);
-			showDialog(n);
+			showDialog(n, a.getType(), a.getSubType());
 		} else {
 			Toast.makeText(ctx, ctx.getString(R.string.poi_error_poi_not_found), Toast.LENGTH_SHORT).show();
 		}
@@ -123,7 +123,7 @@ public class EditingPOIActivity {
 		n.putTag(OSMTagKey.AMENITY.getValue(), ""); //$NON-NLS-1$
 		n.putTag(OSMTagKey.OPENING_HOURS.getValue(), ""); //$NON-NLS-1$
 		dlg.setTitle(R.string.poi_create_title);
-		showDialog(n);
+		showDialog(n, null, null);
 	}
 	
 	public void showDeleteDialog(Amenity a){
@@ -157,8 +157,8 @@ public class EditingPOIActivity {
 		builder.show();
 	}
 	
-	private void showDialog(final Node n){
-		final Amenity a = new Amenity(n);
+	private void showDialog(final Node n, AmenityType type, String subtype){
+		final Amenity a = new Amenity(n, type, subtype);
 		dlg.setContentView(R.layout.editing_poi);
 		nameText =((EditText)dlg.findViewById(R.id.Name));
 		nameText.setText(a.getName());
@@ -564,26 +564,26 @@ public class EditingPOIActivity {
 		ser.endTag(null, "node"); //$NON-NLS-1$
 	}
 	
-	private void updateNodeInIndexes(String action, Node n){
+	private void updateNodeInIndexes(String action, Node n) {
 		List<AmenityIndexRepository> repos = app.getResourceManager().searchAmenityRepositories(n.getLatitude(), n.getLongitude());
-		if(DELETE_ACTION.equals(action)){
-			for(AmenityIndexRepository r: repos){
-				r.deleteAmenity(n.getId());
-				r.clearCache();
-			}
-		} else {
-			boolean changed = MODIFY_ACTION.equals(action);
-			Amenity a = new Amenity(n);
-			for(AmenityIndexRepository r: repos){
-				if(changed){
-					r.updateAmenity(a);
-				} else {
-					r.addAmenity(a);
-				}
+		// delete all amenities with same id
+		if (DELETE_ACTION.equals(action) || MODIFY_ACTION.equals(action)) {
+			for (AmenityIndexRepository r : repos) {
+				r.deleteAmenities(n.getId() << 1);
 				r.clearCache();
 			}
 		}
-		
+		// add amenities
+		if (!DELETE_ACTION.equals(action)) {
+			List<Amenity> ams = Amenity.parseAmenities(n, new ArrayList<Amenity>());
+			for (Amenity a : ams) {
+				for (AmenityIndexRepository r : repos) {
+					r.addAmenity(a);
+					r.clearCache();
+				}
+			}
+		}
+
 	}
 	
 	

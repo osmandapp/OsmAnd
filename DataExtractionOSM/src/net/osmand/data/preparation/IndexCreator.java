@@ -1109,16 +1109,23 @@ public class IndexCreator {
 		return foundId;
 	}
 	
+	private List<Amenity> tempAmenityList = new ArrayList<Amenity>();
+	
 	private void iterateEntity(Entity e, int step) throws SQLException {
 		if (step == STEP_MAIN) {
-			if (indexPOI && Amenity.isAmenity(e)) {
-				loadEntityData(e, false);
-				if (poiPreparedStatement != null) {
-					Amenity a = new Amenity(e);
-					if (a.getLocation() != null) {
-						// do not convert english name
-						// convertEnglishName(a);
-						DataIndexWriter.insertAmenityIntoPoi(poiPreparedStatement, pStatements, a, BATCH_SIZE);
+			if (indexPOI) {
+				tempAmenityList.clear();
+				tempAmenityList = Amenity.parseAmenities(e, tempAmenityList);
+				if(!tempAmenityList.isEmpty() && poiPreparedStatement != null){
+					// load data for way (location etc...)
+					loadEntityData(e, false);
+					for (Amenity a : tempAmenityList) {
+						a.setEntity(e);
+						if (a.getLocation() != null) {
+							// do not convert english name
+							// convertEnglishName(a);
+							DataIndexWriter.insertAmenityIntoPoi(poiPreparedStatement, pStatements, a, BATCH_SIZE);
+						}
 					}
 				}
 			}
@@ -2494,18 +2501,16 @@ public class IndexCreator {
 	 public static void main(String[] args) throws IOException, SAXException, SQLException {
 		 long time = System.currentTimeMillis();
 		 IndexCreator creator = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
-		 creator.setIndexMap(true);
-		 creator.setIndexAddress(true);
-		 creator.setSaveAddressWays(true);
-		 creator.setNormalizeStreets(true);
+//		 creator.setIndexMap(true);
+//		 creator.setIndexAddress(true);
 		 creator.setIndexPOI(true);
-		 creator.setIndexTransport(true);
+//		 creator.setIndexTransport(true);
 		 
 		 creator.recreateOnlyBinaryFile = false;
 		 creator.deleteDatabaseIndexes = false;
 		 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
@@ -2521,8 +2526,8 @@ public class IndexCreator {
 		 
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/forest_complex.osm"), new ConsoleProgressImplementation(25), null);
 		 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/luxembourg.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/luxembourg.osm.pbf"), new ConsoleProgressImplementation(15), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/luxembourg.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/luxembourg.osm.pbf"), new ConsoleProgressImplementation(15), null);
 
 		 System.out.println("WHOLE GENERATION TIME :  " + (System.currentTimeMillis() - time));
 		 System.out.println("COORDINATES_SIZE " + BinaryMapIndexWriter.COORDINATES_SIZE + " count " + BinaryMapIndexWriter.COORDINATES_COUNT);

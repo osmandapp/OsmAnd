@@ -1,6 +1,7 @@
 package net.osmand.data;
 
 import java.util.Collection;
+import java.util.List;
 
 import net.osmand.osm.Entity;
 import net.osmand.osm.MapRenderingTypes;
@@ -17,11 +18,12 @@ public class Amenity extends MapObject {
 	private String phone;
 	private String site;
 
-	public Amenity(Entity entity){
+	public Amenity(Entity entity, AmenityType type, String subtype){
 		super(entity);
 		// manipulate with id to distinguish way and nodes
 		this.id = entity.getId() << 1 + ((entity instanceof Node)? 0 : 1);
-		initTypeSubtype(entity, this);
+		this.type = type;
+		this.subType = subtype;
 		this.openingHours = entity.getTag(OSMTagKey.OPENING_HOURS);
 		this.phone = entity.getTag(OSMTagKey.PHONE);
 		if (this.phone == null) {
@@ -51,32 +53,6 @@ public class Amenity extends MapObject {
 	public Amenity(){
 	}
 	
-	private static AmenityType initTypeSubtype(Entity entity, Amenity init) {
-		Collection<String> keySet = entity.getTagKeySet();
-		if (!keySet.isEmpty()) {
-			for (String t : keySet) {
-				AmenityType type = MapRenderingTypes.getAmenityType(t, entity.getTag(t));
-				if (type != null) {
-					if (init != null) {
-						init.type = type;
-						init.subType = MapRenderingTypes.getAmenitySubtype(t, entity.getTag(t));
-					}
-					return type;
-				}
-			}
-			for (String t : keySet) {
-				AmenityType type = MapRenderingTypes.getAmenityType(t, null);
-				if (type != null) {
-					if (init != null) {
-						init.type = type;
-						init.subType = MapRenderingTypes.getAmenitySubtype(t, entity.getTag(t));
-					}
-					return type;
-				}
-			}
-		}
-		return null;
-	}
 	public AmenityType getType(){
 		return type;
 	}
@@ -93,12 +69,33 @@ public class Amenity extends MapObject {
 		this.subType = subType;
 	}
 	
-	public static boolean isAmenity(Entity n){
-		if(n instanceof Relation){
+	public static List<Amenity> parseAmenities(Entity entity, List<Amenity> amenitiesList){
+		if(entity instanceof Relation){
 			// it could be collection of amenities
-			return false;
+			return amenitiesList;
 		}
-		return initTypeSubtype(n, null) != null;
+				
+		Collection<String> keySet = entity.getTagKeySet();
+		if (!keySet.isEmpty()) {
+			int shift = 0;
+			for (String t : keySet) {
+				AmenityType type = MapRenderingTypes.getAmenityType(t, entity.getTag(t));
+				if (type != null) {
+					String subtype = MapRenderingTypes.getAmenitySubtype(t, entity.getTag(t));
+					amenitiesList.add(shift, new Amenity(entity, type, subtype));
+					shift++;
+				} else {
+					type = MapRenderingTypes.getAmenityType(t, null);
+					if (type != null) {
+						String subtype = MapRenderingTypes.getAmenitySubtype(t, entity.getTag(t));
+						// add amenity to the end
+						amenitiesList.add(new Amenity(entity, type, subtype));
+					}
+					
+				}
+			}
+		}
+		return amenitiesList;
 	}
 	
 	public String getOpeningHours() {
