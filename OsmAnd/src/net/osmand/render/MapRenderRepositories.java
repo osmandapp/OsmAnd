@@ -115,6 +115,7 @@ public class MapRenderRepositories {
 		try {
 			c.close();
 		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	

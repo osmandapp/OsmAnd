@@ -227,6 +227,11 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 
 	@Override
 	public void close() {
+		try {
+			file.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
