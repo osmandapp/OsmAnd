@@ -8,12 +8,15 @@ import net.osmand.activities.MapActivity;
 import net.osmand.activities.search.SearchHistoryHelper.HistoryEntry;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -45,6 +48,13 @@ public class SearchHistoryActivity extends ListActivity {
 				setListAdapter(new HistoryAdapter(helper.getHistoryEntries(SearchHistoryActivity.this)));
 			}
 		});
+		lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
+				return SearchHistoryActivity.this.onItemLongClick(pos);
+			}
+
+		});
 	}
 	@Override
 	protected void onResume() {
@@ -57,6 +67,32 @@ public class SearchHistoryActivity extends ListActivity {
 		}
 		setListAdapter(new HistoryAdapter(historyEntries));
 	}
+	
+	private boolean onItemLongClick(int pos) {
+		final HistoryEntry entry = ((HistoryAdapter) getListAdapter()).getItem(pos);
+		AlertDialog.Builder builder = new AlertDialog.Builder(SearchHistoryActivity.this);
+		builder.setTitle(entry.getName());
+		builder.setItems(new String[] { getString(R.string.show_poi_on_map), getString(R.string.navigate_to) },
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						if (which == 0) {
+							OsmandSettings.setMapLocationToShow(SearchHistoryActivity.this, entry.getLat(), entry.getLon());
+						} else if (which == 1) {
+							OsmandSettings.setPointToNavigate(SearchHistoryActivity.this, entry.getLat(), entry.getLon());
+						}
+
+						Intent newIntent = new Intent(SearchHistoryActivity.this, MapActivity.class);
+						startActivity(newIntent);
+
+					}
+
+				});
+		builder.show();
+		return true;
+	}
+	
 	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
@@ -78,7 +114,7 @@ public class SearchHistoryActivity extends ListActivity {
 		}
 		
 		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
+		public View getView(final int position, View convertView, ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {
 				LayoutInflater inflater = getLayoutInflater();
@@ -108,8 +144,16 @@ public class SearchHistoryActivity extends ListActivity {
 				public void onClick(View v) {
 					selectModel(model);
 				}
-				
 			};
+			
+			View.OnLongClickListener longClickListener = new View.OnLongClickListener() {
+				@Override
+				public boolean onLongClick(View v) {
+					return onItemLongClick(position);
+				}
+			};
+			distanceLabel.setOnLongClickListener(longClickListener);
+			label.setOnLongClickListener(longClickListener);
 			distanceLabel.setOnClickListener(clickListener);
 			label.setOnClickListener(clickListener);
 			return row;

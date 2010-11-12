@@ -210,7 +210,6 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		// ListActivity has a ListView, which you can get with:
 		ListView lv = getListView();
 
-		// Then you can create a listener like so:
 		lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
