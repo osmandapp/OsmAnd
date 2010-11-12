@@ -3,6 +3,7 @@ package net.osmand.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.LogUtil;
 import net.osmand.OsmandSettings;
 import net.osmand.PoiFilter;
 import net.osmand.R;
@@ -12,6 +13,7 @@ import net.osmand.data.Amenity;
 import net.osmand.osm.LatLon;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -19,6 +21,7 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Paint.Style;
+import android.net.Uri;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -26,6 +29,7 @@ import android.widget.Toast;
 public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMenuProvider {
 	private static final int startZoom = 10;
 	public static final int LIMIT_POI = 200;
+	public static final org.apache.commons.logging.Log log = LogUtil.getLog(POIMapLayer.class);
 	
 	
 	private Paint pointAltUI;
@@ -163,6 +167,15 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 		final Amenity a = (Amenity) o;
 		actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_modify));
 		actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_delete));
+		int ind = 2;
+		final int phoneIndex = a.getPhone() != null ? ind++ : -1;
+		final int siteIndex = a.getSite() != null ? ind++ : -1;
+		if(a.getPhone() != null){
+			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_call));
+		}
+		if(a.getSite() != null){
+			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_website));
+		}
 		final EditingPOIActivity edit = new EditingPOIActivity(view.getContext(), view.getApplication(), view);
 		return new DialogInterface.OnClickListener(){
 
@@ -170,8 +183,27 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 			public void onClick(DialogInterface dialog, int which) {
 				if (which == 0) {
 					edit.showEditDialog(a);
-				} else {
+				} else if(which == 1) {
 					edit.showDeleteDialog(a);
+				} else if (which == phoneIndex) {
+					try {
+						Intent intent = new Intent(Intent.ACTION_VIEW);
+						intent.setData(Uri.parse("tel:"+a.getPhone())); //$NON-NLS-1$
+						view.getContext().startActivity(intent);
+					} catch (RuntimeException e) {
+						log.error("Failed to invoke call", e); //$NON-NLS-1$
+						Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+					}
+				} else if (which == siteIndex) {
+					try {
+						Intent intent = new Intent(Intent.ACTION_VIEW);
+						intent.setData(Uri.parse(a.getSite())); 
+						view.getContext().startActivity(intent);
+					} catch (RuntimeException e) {
+						log.error("Failed to invoke call", e); //$NON-NLS-1$
+						Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+					}
+				} else {
 				}
 			}
 		};

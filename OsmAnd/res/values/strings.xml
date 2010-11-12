@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="poi_context_menu_website">See POI website</string>
+	<string name="poi_context_menu_call">Show POI phone</string>
 	<string name="website">web site</string>
 	<string name="phone">phone</string>
 	<string name="download_type_to_filter">type to filter</string>
