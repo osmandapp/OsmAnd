@@ -7,7 +7,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
@@ -110,7 +112,7 @@ public class AmenityIndexRepository extends BaseLocationIndexRepository<Amenity>
 		return true;
 	}
 	
-	public boolean deleteAmenity(long id){
+	public boolean deleteAmenities(long id){
 		db.execSQL("DELETE FROM " + IndexConstants.POI_TABLE+ " WHERE id="+id); //$NON-NLS-1$ //$NON-NLS-2$
 		return true;
 	}
@@ -215,12 +217,17 @@ public class AmenityIndexRepository extends BaseLocationIndexRepository<Amenity>
 			log.info("Start loading poi : " + u); //$NON-NLS-1$
 			InputStream is = url.openStream();
 			OsmBaseStorage st = new OsmBaseStorage();
-			final List<Entity> amen = new ArrayList<Entity>();
+			final Map<Amenity, Entity> amen = new LinkedHashMap<Amenity, Entity>();
+			final List<Amenity> tempList = new ArrayList<Amenity>();
 			st.getFilters().add(new IOsmStorageFilter(){
 				@Override
 				public boolean acceptEntityToLoad(OsmBaseStorage storage, Entity.EntityId id, Entity entity) {
-					if(Amenity.isAmenity(entity)){
-						amen.add(entity);
+					Amenity.parseAmenities(entity, tempList);
+					if(!tempList.isEmpty()){
+						for(Amenity a : tempList){
+							amen.put(a, entity);
+						}
+						tempList.clear();
 						return true;
 					}
 					// to 
@@ -228,8 +235,9 @@ public class AmenityIndexRepository extends BaseLocationIndexRepository<Amenity>
 				}
 			});
 			st.parseOSM(is, null, null, false);
-			for (Entity e : amen) {
-				Amenity am = new Amenity(e);
+			for (Amenity am : amen.keySet()) {
+				// update location (when all nodes of way are loaded)
+				am.setEntity(amen.get(am));
 				if(am.getEnName().length() == 0){
 					am.setEnName(Junidecode.unidecode(am.getName()));
 				}
