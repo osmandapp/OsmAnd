@@ -494,7 +494,9 @@ public class RoutingHelper {
 			uiActivity.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-					Toast.makeText(uiActivity, msg, Toast.LENGTH_SHORT).show();
+					if(uiActivity != null){
+						Toast.makeText(uiActivity, msg, Toast.LENGTH_SHORT).show();
+					}
 				}
 			});
 		}

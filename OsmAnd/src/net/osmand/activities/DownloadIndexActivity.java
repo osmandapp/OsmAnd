@@ -85,7 +85,10 @@ public class DownloadIndexActivity extends ListActivity {
 
         public void onTextChanged(CharSequence s, int start, int before,
                 int count) {
-            ((DownloadIndexAdapter)getListAdapter()).getFilter().filter(s);
+        	DownloadIndexAdapter adapter = ((DownloadIndexAdapter)getListAdapter());
+        	if(adapter != null){
+        		adapter.getFilter().filter(s);
+        	}
         }
 
     };
