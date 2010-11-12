@@ -123,7 +123,7 @@ public class EditingPOIActivity {
 		n.putTag(OSMTagKey.AMENITY.getValue(), ""); //$NON-NLS-1$
 		n.putTag(OSMTagKey.OPENING_HOURS.getValue(), ""); //$NON-NLS-1$
 		dlg.setTitle(R.string.poi_create_title);
-		showDialog(n, null, null);
+		showDialog(n, AmenityType.OTHER, ""); //$NON-NLS-1$
 	}
 	
 	public void showDeleteDialog(Amenity a){

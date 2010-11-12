@@ -7,23 +7,20 @@ package net.osmand;
  */
 public class ToDoConstants {
 	
-	// TODO max 104
+	// TODO max 105
 	// introduce bidforfix on site
 	
 
 
 	// 	For 0.5 release
-	//  101. 1) Introduce shell script to print information about indexes 2)Introduce activity to show active indexes
-    //       3) Split BinaryMapIndexReader to Adapters
 	//  102. Refactoring rendering schema serializing to xml and prepare script to create fast java builder (support pure xml)
-	//		 Requires 
+
 	//   86. Allow to add/edit custom tags to POI objects (Issue)
-	//   92. Replace poi index with standard map index and unify POI categories (unify done +)
-	//   69. Add phone and site information to POI [+] (enable call to POI and open site)
+	//   92. Support poi index with standard map index and unify POI categories (unify done +)
 	//   97. For voice navigation consider current speed of vehicle. Especially when speed > 50 pronounce more than 200 m
 	//   98. Implement rendering of different app mode. For Car render streets name with large font.
 	//   96. Introduce settings for MPH, imperial units
-	//  103. Allow add poi with multiple tags (different types/subtypes for one object). Fix for constructing and updating on mobile.
+	//  104. Add activity to show current loaded indexes and information about them
 	
 
 	// 	_19. colors for road trunk and motorway
@@ -47,6 +44,10 @@ public class ToDoConstants {
 	//   94. Revise index to decrease their size (especially address) - replace to float lat/lon and remove for POI 
 	//		 remove en_names from POI (possibly from address)
 	//   85. Enable on/off screen for bike navigation (?)[not needed replace for continuous gps logging]
+	//  101. Introduce shell script to print information about indexes and to modify them
+	//   69. Add phone and site information to POI (enable call to POI and open site)
+	//  103. Allow add poi with multiple tags (different types/subtypes for one object). Fix for constructing and updating on mobile. (Issue)
+	
 	// DONE SWING
 
 	

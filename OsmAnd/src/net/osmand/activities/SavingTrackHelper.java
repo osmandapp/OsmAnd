@@ -9,6 +9,7 @@ import java.util.Map;
 import net.osmand.GPXUtilities;
 import net.osmand.LogUtil;
 import net.osmand.OsmandSettings;
+import net.osmand.ResourceManager;
 import net.osmand.GPXUtilities.TrkPt;
 
 import org.apache.commons.logging.Log;
@@ -80,7 +81,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		List<String> warnings = new ArrayList<String>();
 		File file = Environment.getExternalStorageDirectory();
 		if(db != null && file.canWrite()){
-			file = new File(file, "/osmand/"+TRACKS_PATH); //$NON-NLS-1$
+			file = new File(file, ResourceManager.APP_DIR + TRACKS_PATH);
 			file.mkdirs();
 			if (file.exists()) {
 				Cursor query = db.rawQuery("SELECT " + TRACK_COL_LAT + "," + TRACK_COL_LON + "," + TRACK_COL_ALTITUDE + "," //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$

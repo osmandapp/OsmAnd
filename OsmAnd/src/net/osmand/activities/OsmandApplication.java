@@ -26,7 +26,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class OsmandApplication extends Application {
-	public static final String EXCEPTION_PATH = "/osmand/exception.log"; //$NON-NLS-1$
+	public static final String EXCEPTION_PATH = ResourceManager.APP_DIR + "exception.log"; //$NON-NLS-1$
 	
 	ResourceManager manager = null; 
 	PoiFiltersHelper poiFilters = null;
