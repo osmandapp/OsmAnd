@@ -181,7 +181,13 @@ public class AmenityIndexRepository extends BaseLocationIndexRepository<Amenity>
 	}
 
 	private void insertAmenities(Collection<Amenity> amenities) {
-		SQLiteStatement stat = db.compileStatement("INSERT INTO " + IndexConstants.POI_TABLE +  //$NON-NLS-1$
+		SQLiteStatement stat = db.compileStatement("DELETE FROM " + IndexConstants.POI_TABLE + " WHERE id = ?");  //$NON-NLS-1$//$NON-NLS-2$
+		for (Amenity a : amenities) {
+			stat.bindLong(1, a.getId());
+			stat.execute();
+		}
+		stat.close();
+		stat = db.compileStatement("INSERT INTO " + IndexConstants.POI_TABLE +  //$NON-NLS-1$
 				"(id, x, y, name_en, name, type, subtype, opening_hours, site, phone) values(?,?,?,?,?,?,?,?,?,?)"); //$NON-NLS-1$
 		for (Amenity a : amenities) {
 			stat.bindLong(1, a.getId());
