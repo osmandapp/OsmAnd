@@ -3,6 +3,7 @@ package net.osmand.data;
 import java.util.Collection;
 import java.util.List;
 
+import net.osmand.Algoritms;
 import net.osmand.osm.Entity;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.Node;
@@ -82,20 +83,37 @@ public class Amenity extends MapObject {
 				AmenityType type = MapRenderingTypes.getAmenityType(t, entity.getTag(t));
 				if (type != null) {
 					String subtype = MapRenderingTypes.getAmenitySubtype(t, entity.getTag(t));
-					amenitiesList.add(shift, new Amenity(entity, type, subtype));
-					shift++;
+					Amenity a = new Amenity(entity, type, subtype);
+					if(checkAmenitiesToAdd(a, amenitiesList)){
+						amenitiesList.add(shift, a);
+						shift++;
+					}
 				} else {
 					type = MapRenderingTypes.getAmenityType(t, null);
 					if (type != null) {
 						String subtype = MapRenderingTypes.getAmenitySubtype(t, entity.getTag(t));
-						// add amenity to the end
-						amenitiesList.add(new Amenity(entity, type, subtype));
+						Amenity a = new Amenity(entity, type, subtype);
+						if(checkAmenitiesToAdd(a, amenitiesList)){
+							// 	add amenity to the end
+							amenitiesList.add(a);
+						}
 					}
 					
 				}
 			}
 		}
 		return amenitiesList;
+	}
+	
+	private static boolean checkAmenitiesToAdd(Amenity a, List<Amenity> amenitiesList){
+		// check amenity for duplication
+		for(Amenity b : amenitiesList){
+			if(b.getType() == a.getType() && Algoritms.objectEquals(a.getSubType(), b.getSubType())){
+				return false;
+			}
+		}
+		return true;
+		
 	}
 	
 	public String getOpeningHours() {
