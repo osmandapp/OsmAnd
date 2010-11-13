@@ -28,10 +28,13 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	private LinkedHashMap<Long, City> cities = new LinkedHashMap<Long, City>();
 	private Map<String, PostCode> postCodes = new TreeMap<String, PostCode>(Collator.getInstance());
 	private boolean useEnglishNames = false;
+	private Collator collator;
 	
 	public RegionAddressRepositoryBinary(BinaryMapIndexReader file, String name) {
 		this.file = file;
 		this.region = name;
+		this.collator = Collator.getInstance();
+		this.collator.setStrength(Collator.PRIMARY);
 	}
 	
 	public void close(){
@@ -55,15 +58,49 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		for (Building building : street.getBuildings()) {
 			String bName = useEnglishNames ? building.getEnName() : building.getName();
 			String lowerCase = bName.toLowerCase();
-			if (lowerCase.startsWith(name)) {
+			if (cstartsWith(lowerCase,name)) { 
 				buildingsToFill.add(ind, building);
 				ind++;
-			} else if (lowerCase.contains(name)) {
+			} else if (ccontains(name, lowerCase)) {
 				buildingsToFill.add(building);
 			}
 		}
 	}
+
+	/**
+	 * check part contains in base
+	 * @return
+	 */
+	private boolean ccontains(String part, String base) {
+		int pos = 0;
+		if(part.length() > 3){
+			// improve searching by searching first 3 characters
+			pos = cindexOf(pos, part.substring(0, 3), base);
+			if(pos == -1){
+				return false;
+			}
+		}
+		pos = cindexOf(pos, part, base);
+		if(pos == -1){
+			return false;
+		}
+		return true;
+	}
+	
+	private int cindexOf(int start, String part, String base){
+		for (int pos = start; pos <= base.length() - part.length(); pos++) {
+			if (collator.equals(base.substring(pos, pos + part.length()), part)) {
+				return pos;
+			}
+		}
+		return -1;
+	}
 		
+	private boolean cstartsWith(String lowerCase, String name) {
+		//simulate starts with for collator
+		return collator.equals(lowerCase.substring(0, Math.min(lowerCase.length(), name.length())), name);
+	}
+
 	private void preloadBuildings(Street street) {
 		if(street.getBuildings().isEmpty()){
 			try {
@@ -92,10 +129,10 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			for (Street s : streets) {
 				String sName = useEnglishNames ? s.getEnName() : s.getName();
 				String lowerCase = sName.toLowerCase();
-				if (lowerCase.startsWith(name)) {
+				if (cstartsWith(lowerCase,name)) {
 					streetsToFill.add(ind, s);
 					ind++;
-				} else if (lowerCase.contains(name)) {
+				} else if (ccontains(name, lowerCase) || ccontains(lowerCase, name)) {
 					streetsToFill.add(s);
 				}
 			}
@@ -152,7 +189,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 					for (City c : cities.values()) {
 						String cName = useEnglishNames ? c.getEnName() : c.getName();
 						String lowerCase = cName.toLowerCase();
-						if (lowerCase.startsWith(name)) {
+						if (cstartsWith(lowerCase,name)) {
 							citiesToFill.add(c);
 						}
 					}
@@ -163,10 +200,10 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 				for (City c : src) {
 					String cName = useEnglishNames ? c.getEnName() : c.getName();
 					String lowerCase = cName.toLowerCase();
-					if (lowerCase.startsWith(name)) {
+					if (cstartsWith(lowerCase,name)) {
 						citiesToFill.add(ind, c);
 						ind++;
-					} else if (lowerCase.contains(name)) {
+					} else if (ccontains(name, lowerCase)) {
 						citiesToFill.add(c);
 					}
 				}
@@ -177,7 +214,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 					if (cName.startsWith(name)) {
 						citiesToFill.add(ind, c);
 						ind++;
-					} else if (cName.contains(name)) {
+					} else if (ccontains(name, cName)) {
 						citiesToFill.add(c);
 					}
 				}
@@ -292,7 +329,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		for (Street s : streets) {
 			String sName = useEnglishNames ? s.getEnName() : s.getName();
 			String lowerCase = sName.toLowerCase();
-			if (lowerCase.equals(name)) {
+			if (collator.equals(lowerCase,name)) {
 				return s;
 			}
 		}
