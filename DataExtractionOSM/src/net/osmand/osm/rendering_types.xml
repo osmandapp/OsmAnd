@@ -1,0 +1,621 @@
+<osmand_types>
+	<!-- 3 different types for polygon="true" that object will be rendered as polygon, polyline ="true" as line, point ="true" - as point -->
+	<!--  You can combine any 3 types. -->
+	<!-- building="true" means that object will be rendered as polygon (default building) + center point icon -->
+
+
+	<!--  Restrictions of  types format. -->
+	<!-- 1) 31 (5 bytes) maximum number of different types  -->
+	<!-- 2) In each type only 31 (5 bytes) different polyline and polygon (in sum) subtypes available. -->
+	<!-- 3) In each type only 127 (7 bytes) all different subtypes available -->
+	<!-- Try to not change id of types and subtypes, some of the constants are hardcoded (for poi categorization and rendering order). -->
+	<type name="highway" id="1">
+		<subtype id="2" polyline="true" tag="highway" value="motorway" maxzoom="6" />
+		<subtype id="2" polyline="true" tag="highway" value="motorway_link" maxzoom="10" />
+		<subtype id="1" polyline="true" tag="highway" value="trunk" maxzoom="6" />
+		<subtype id="1" polyline="true" tag="highway" value="trunk_link" maxzoom="10" />
+		<subtype id="3" polyline="true" tag="highway" value="primary" maxzoom="7" />
+		<subtype id="3" polyline="true" tag="highway" value="primary_link" maxzoom="10" />
+		<subtype id="4" polyline="true" tag="highway" value="secondary" maxzoom="10" />
+		<subtype id="4" polyline="true" tag="highway" value="secondary_link" maxzoom="10" />
+		<subtype id="5" polyline="true" tag="highway" value="tertiary" maxzoom="13" />
+		<subtype id="6" polygon="true" polyline="true" tag="highway" value="residential" maxzoom="14" />
+		<subtype id="7" polygon="true" polyline="true" tag="highway" value="service" maxzoom="15" />
+
+		<subtype id="8" polyline="true" tag="highway" value="unclassified" maxzoom="14" />
+		<subtype id="8" polyline="true" tag="highway" value="road" maxzoom="14" />
+		<subtype id="9" polyline="true" tag="highway" value="track" maxzoom="13" />
+		<subtype id="10" polyline="true" tag="highway" value="path" maxzoom="14" />
+		<subtype id="11" polyline="true" tag="highway" value="living_street" maxzoom="15" />
+
+
+		<subtype id="16" polygon="true" polyline="true" tag="highway" value="pedestrian" maxzoom="15" />
+		<subtype id="17" polyline="true" tag="highway" value="cycleway" maxzoom="14" />
+		<subtype id="18" polyline="true" tag="highway" value="byway" maxzoom="14" />
+		<subtype id="19" polyline="true" tag="highway" value="footway" maxzoom="15" />
+		<subtype id="20" polyline="true" tag="highway" value="steps" maxzoom="15" />
+		<subtype id="21" polyline="true" tag="highway" value="bridleway" maxzoom="14" />
+		<subtype id="22" polygon="true" point="true" tag="highway" value="services" maxzoom="15" />
+		<!-- <subtype id="" polyline="true" tag="highway" value="bus_guideway" maxzoom="15" />  -->
+
+		<subtype id="23" polyline="true" point="true" tag="highway" value="ford" maxzoom="15" />
+		<subtype id="25" polyline="true" tag="highway" value="construction" maxzoom="15" />
+		<subtype id="26" polyline="true" tag="highway" value="proposed" maxzoom="15" />
+
+		<!--  POINT SUBTYPES -->
+		<subtype id="35" point="true" tag="highway" value="mini_roundabout" maxzoom="15" />
+		<subtype id="36" point="true" tag="highway" value="stop" maxzoom="15" />
+		<subtype id="37" point="true" tag="highway" value="give_way" maxzoom="15" />
+		<subtype id="38" point="true" tag="highway" value="traffic_signals" maxzoom="15" />
+		<subtype id="39" point="true" tag="highway" value="motorway_junction" maxzoom="15" />
+		<subtype id="40" point="true" tag="highway" value="bus_stop" maxzoom="15" />
+		<subtype id="41" point="true" tag="highway" value="platform" maxzoom="15" />
+		<subtype id="42" point="true" tag="highway" value="turning_circle" maxzoom="15" />
+		<subtype id="43" point="true" tag="highway" value="emergency_access_point" maxzoom="15" />
+		<subtype id="44" point="true" tag="highway" value="speed_camera" maxzoom="15" />
+		<subtype id="45" point="true" tag="highway" value="street_lamp" maxzoom="15" />
+
+		<subtype id="50" point="true" tag="traffic_calming" value="yes" maxzoom="15" />
+		<subtype id="51" point="true" tag="traffic_calming" value="bump" maxzoom="15" />
+		<subtype id="52" point="true" tag="traffic_calming" value="chicane" maxzoom="15" />
+		<subtype id="53" point="true" tag="traffic_calming" value="cushion" maxzoom="15" />
+		<subtype id="54" point="true" tag="traffic_calming" value="hump" maxzoom="15" />
+		<subtype id="55" point="true" tag="traffic_calming" value="rumble_strip" maxzoom="15" />
+		<subtype id="56" point="true" tag="traffic_calming" value="table" maxzoom="15" />
+		<subtype id="57" point="true" tag="traffic_calming" value="choker" maxzoom="15" />
+		<subtype id="58" point="true" tag="traffic_calming" maxzoom="15" />
+	</type>
+	<type id="2" name="barrier">
+		<subtype id="1" polyline="true" tag="barrier" value="hedge" maxzoom="15" />
+		<subtype id="1" polyline="true" tag="natural" value="hedge" maxzoom="15" />
+		<subtype id="2" polyline="true" tag="barrier" value="fence" maxzoom="15" />
+		<subtype id="2" polyline="true" tag="fenced" value="yes" maxzoom="15" />
+		<subtype id="3" polyline="true" tag="barrier" value="wall" maxzoom="15" />
+		<subtype id="1" polyline="true" tag="barrier" value="ditch" maxzoom="15" />
+		<subtype id="4" polyline="true" tag="barrier" value="retaining_wall" maxzoom="15" />
+		<subtype id="5" polyline="true" tag="barrier" value="city_wall" maxzoom="13" />
+		<subtype id="5" polyline="true" tag="historic" value="city_walls" maxzoom="13" />
+		<subtype id="6" point="true" polyline="true" tag="barrier" value="bollard" maxzoom="15" />
+		<subtype id="16" point="true" tag="barrier" value="cycle_barrier" maxzoom="15" />
+		<subtype id="17" point="true" tag="barrier" value="block" maxzoom="15" />
+		<subtype id="18" point="true" tag="barrier" value="cattle_grid" maxzoom="15" />
+		<subtype id="19" point="true" tag="barrier" value="toll_booth" maxzoom="15" />
+		<subtype id="20" point="true" tag="barrier" value="entrance" maxzoom="15" />
+		<subtype id="21" point="true" tag="barrier" value="gate" maxzoom="15" />
+		<subtype id="21" point="true" tag="highway" value="gate" maxzoom="15" />
+		<subtype id="22" point="true" tag="barrier" value="lift_gate" maxzoom="15" />
+		<subtype id="23" point="true" tag="barrier" value="stile" maxzoom="15" />
+		<subtype id="24" point="true" tag="barrier" value="horse_stile" maxzoom="15" />
+		<subtype id="25" point="true" tag="barrier" value="kissing_gate" maxzoom="15" />
+		<subtype id="26" point="true" tag="barrier" value="sally_port" maxzoom="15" />
+		<subtype id="27" point="true" tag="barrier" value="turnstile" maxzoom="15" />
+		<subtype id="28" point="true" tag="barrier" value="kent_carriage_gap" maxzoom="15" />
+	</type>
+
+
+	<type id="3" name="waterway">
+		<subtype id="1" polyline="true" tag="waterway" value="stream" maxzoom="13" />
+		<subtype id="3" polygon="true" tag="waterway" value="riverbank" maxzoom="9" />
+		<subtype id="2" polyline="true" tag="waterway" value="river" maxzoom="9" />
+		<subtype id="4" polyline="true" tag="waterway" value="canal" maxzoom="10" />
+		<subtype id="5" polyline="true" tag="waterway" value="ditch" maxzoom="15" />
+		<subtype id="6" polyline="true" tag="waterway" value="drain" maxzoom="15" />
+		<subtype id="7" point="true" polygon_center="true" tag="waterway" value="dock" maxzoom="13" />
+		<subtype id="8" point="true" tag="waterway" value="lock_gate" maxzoom="15" />
+		<subtype id="8" point="true" tag="waterway" value="lock" maxzoom="15" />
+		<subtype id="9" point="true" tag="waterway" value="turning_point" maxzoom="15" />
+		<subtype id="10" point="true" tag="waterway" value="boatyard" maxzoom="15" />
+		<subtype id="11" point="true" polyline="true" tag="waterway" value="weir" maxzoom="15" />
+		<subtype id="12" polyline="true" tag="waterway" value="dam" maxzoom="13" />
+		<subtype id="13" point="true" polygon_center="true" tag="waterway" value="mill_pond" maxzoom="13" />
+
+	</type>
+
+	<type id="4" name="railway">
+		<subtype id="1" polyline="true" tag="railway" value="rail" maxzoom="7" />
+		<subtype id="2" polyline="true" tag="railway" value="tram" maxzoom="13" />
+		<subtype id="3" polyline="true" tag="railway" value="light_rail" maxzoom="13" />
+		<subtype id="4" polyline="true" tag="railway" value="abandoned" maxzoom="15" />
+		<subtype id="5" polyline="true" tag="railway" value="disused" maxzoom="15" />
+		<subtype id="6" polyline="true" tag="railway" value="subway" maxzoom="13" />
+		<subtype id="7" polyline="true" tag="railway" value="preserved" maxzoom="13" />
+		<subtype id="8" polyline="true" tag="railway" value="narrow_gauge" maxzoom="15" />
+		<subtype id="9" polyline="true" tag="railway" value="construction" maxzoom="15" />
+		<subtype id="10" polyline="true" tag="railway" value="monorail" maxzoom="15" />
+		<subtype id="11" polyline="true" tag="railway" value="funicular" maxzoom="15" />
+		<subtype id="12" polyline="true" tag="railway" value="platform" maxzoom="15" />
+		<subtype id="13" point="true" polygon_center="true" tag="railway" value="station" maxzoom="12" />
+		<subtype id="14" point="true" tag="railway" value="turntable" maxzoom="15" />
+		<subtype id="22" point="true" tag="railway" value="halt" maxzoom="15" />
+		<subtype id="23" point="true" tag="railway" value="tram_stop" maxzoom="15" />
+		<subtype id="24" point="true" tag="railway" value="crossing" maxzoom="15" />
+		<subtype id="25" point="true" tag="railway" value="level_crossing" maxzoom="15" />
+		<subtype id="26" point="true" tag="railway" value="subway_entrance" maxzoom="15" />
+		<subtype id="27" point="true" tag="railway" value="buffer_stop" maxzoom="15" />
+	</type>
+
+
+	<type id="5" name="aeroway">
+		<subtype id="1" point="true" polygon_center="true" tag="aeroway" value="aerodrome" maxzoom="12" />
+		<subtype id="2" point="true" polygon_center="true" tag="aeroway" value="terminal" maxzoom="15" />
+		<subtype id="3" point="true" polygon_center="true" tag="aeroway" value="helipad" maxzoom="12" />
+		<subtype id="7" polyline="true" tag="aeroway" value="runway" maxzoom="12" />
+		<subtype id="8" polyline="true" tag="aeroway" value="taxiway" maxzoom="12" />
+		<subtype id="9" polygon="true" tag="aeroway" value="apron" maxzoom="12" />
+		<subtype id="10" point="true" polygon_center="true" tag="aeroway" value="airport" maxzoom="12" />
+		<subtype id="12" point="true" tag="aeroway" value="gate" maxzoom="15" />
+		<subtype id="13" point="true" tag="aeroway" value="windsock" maxzoom="15" />
+	</type>
+
+
+	<type id="6" name="aerialway">
+		<subtype id="1" polyline="true" tag="aerialway" value="cable_car" maxzoom="13" />
+		<subtype id="2" polyline="true" tag="aerialway" value="gondola" maxzoom="13" />
+		<subtype id="3" polyline="true" tag="aerialway" value="chair_lift" maxzoom="13" />
+		<subtype id="4" polyline="true" tag="aerialway" value="mixed_lift" maxzoom="13" />
+		<subtype id="5" polyline="true" tag="aerialway" value="drag_lift" maxzoom="13" />
+		<subtype id="6" polyline="true" tag="aerialway" value="goods" maxzoom="15" />
+		<subtype id="7" building="true" tag="aerialway" value="station" maxzoom="15" />
+		<subtype id="8" point="true" tag="aerialway" value="pylon" maxzoom="15" />
+		<subtype id="9" polyline="true" tag="aerialway" value="goods" maxzoom="15" />
+
+	</type>
+
+	<type id="7" name="power">
+		<subtype id="1" point="true" tag="power" value="tower" maxzoom="13" />
+		<subtype id="2" point="true" tag="power" value="pole" maxzoom="15" />
+		<subtype id="3" polyline="true" tag="power" value="line" maxzoom="13" />
+		<subtype id="4" polyline="true" tag="power" value="minor_line" maxzoom="15" />
+		<subtype id="5" point="true" polygon="true" tag="power" value="station" maxzoom="1" />
+		<subtype id="6" point="true" polygon="true" tag="power" value="sub_station" maxzoom="1" />
+		<subtype id="7" point="true" tag="power" value="generator" maxzoom="15" />
+		<subtype id="8" point="true" tag="power" value="cable_distribution_cabinet" maxzoom="15" />
+	</type>
+
+
+	<type id="8" name="man_made">
+		<subtype id="1" polygon="true" tag="building" value="yes" maxzoom="15" />
+		<subtype id="1" polygon="true" tag="building" maxzoom="15" />
+		<subtype id="2" point="true" polygon="true" tag="man_made" value="wastewater_plant" maxzoom="15" />
+		<subtype id="3" building="true" tag="man_made" value="water_works" maxzoom="15" />
+		<subtype id="4" point="true" polygon="true" tag="man_made" value="works" maxzoom="15" />
+		<subtype id="5" polygon="true" tag="building" value="garages" maxzoom="15" />
+		<subtype id="7" polyline="true" tag="man_made" value="cutline" maxzoom="15" />
+		<subtype id="8" polyline="true" tag="man_made" value="groyne" maxzoom="13" />
+		<subtype id="8" polyline="true" tag="man_made" value="breakwater" maxzoom="13" />
+		<subtype id="9" polyline="true" tag="man_made" value="pier" maxzoom="13" />
+		<subtype id="10" polyline="true" tag="man_made" value="pipeline" maxzoom="15" />
+		<subtype id="11" polygon="true" tag="man_made" value="reservoir_covered" maxzoom="15" />
+		<subtype id="12" polyline="true" tag="man_made" value="embankment" maxzoom="15" />
+
+		<subtype id="15" point="true" tag="man_made" value="beacon" maxzoom="15" />
+		<subtype id="16" point="true" tag="man_made" value="crane" maxzoom="15" />
+		<subtype id="17" point="true" tag="man_made" value="lighthouse" maxzoom="15" />
+		<subtype id="18" point="true" tag="man_made" value="mineshaft" maxzoom="15" />
+		<subtype id="19" point="true" tag="man_made" value="adit" maxzoom="15" />
+		<subtype id="20" point="true" tag="man_made" value="petroleum_well" maxzoom="15" />
+		<subtype id="21" point="true" tag="man_made" value="surveillance" maxzoom="15" />
+		<subtype id="22" point="true" tag="man_made" value="survey_point" maxzoom="15" />
+		<subtype id="23" point="true" tag="man_made" value="tower" maxzoom="15" />
+		<subtype id="24" point="true" tag="man_made" value="watermill" maxzoom="15" />
+		<subtype id="25" point="true" tag="man_made" value="water_tower" maxzoom="15" />
+		<subtype id="26" point="true" tag="man_made" value="water_well" maxzoom="15" />
+		<subtype id="27" point="true" tag="man_made" value="windmill" maxzoom="15" />
+	</type>
+
+
+	<type id="9" name="leisure">
+		<subtype id="1" point="true" polygon="true" tag="leisure" value="dog_park" maxzoom="15" />
+		<subtype id="2" point="true" polygon="true" tag="leisure" value="sports_centre" maxzoom="15" />
+		<subtype id="3" point="true" polygon="true" tag="leisure" value="golf_course" maxzoom="15" />
+		<subtype id="4" point="true" polygon="true" tag="leisure" value="stadium" maxzoom="15" />
+		<subtype id="5" polyline="true" polygon="true" tag="leisure" value="track" maxzoom="13" />
+		<subtype id="6" point="true" polygon="true" tag="leisure" value="pitch" maxzoom="15" />
+		<subtype id="7" point="true" polygon="true" tag="leisure" value="water_park" maxzoom="15" />
+		<subtype id="8" point="true" polyline="true" tag="leisure" value="marina" maxzoom="13" />
+		<subtype id="9" point="true" polygon="true" tag="leisure" value="slipway" maxzoom="15" />
+		<subtype id="10" point="true" polygon="true" tag="leisure" value="fishing" maxzoom="15" />
+		<subtype id="11" point="true" polygon="true" tag="leisure" value="nature_reserve" maxzoom="9" />
+		<subtype id="12" point="true" polygon="true" tag="natural" value="park" maxzoom="13" />
+		<subtype id="12" point="true" polygon="true" tag="leisure" value="park" maxzoom="13" />
+		<subtype id="12" point="true" polygon="true" tag="leisure" value="recreation_ground" maxzoom="13" />
+		<subtype id="13" point="true" polygon="true" tag="leisure" value="playground" maxzoom="15" />
+		<subtype id="14" point="true" polygon="true" tag="leisure" value="garden" maxzoom="13" />
+		<subtype id="15" point="true" polygon="true" tag="leisure" value="common" maxzoom="13" />
+		<subtype id="16" point="true" polygon="true" tag="leisure" value="ice_rink" maxzoom="15" />
+		<subtype id="17" point="true" polygon="true" tag="leisure" value="miniature_golf" maxzoom="15" />
+		<subtype id="18" point="true" polygon="true" tag="leisure" value="dance" maxzoom="15" />
+	</type>
+
+
+	<type id="10" name="office">
+		<subtype id="5" point="true" tag="office" value="accountant" maxzoom="15" />
+		<subtype id="6" point="true" tag="office" value="architect" maxzoom="15" />
+		<subtype id="7" point="true" tag="office" value="company" maxzoom="15" />
+		<subtype id="8" point="true" tag="office" value="employment_agency" maxzoom="15" />
+		<subtype id="9" point="true" tag="office" value="estate_agent" maxzoom="15" />
+		<subtype id="10" point="true" tag="office" value="government" maxzoom="15" />
+		<subtype id="11" point="true" tag="office" value="insurance" maxzoom="15" />
+		<subtype id="12" point="true" tag="office" value="it" maxzoom="15" />
+		<subtype id="13" point="true" tag="office" value="lawyer" maxzoom="15" />
+		<subtype id="14" point="true" tag="office" value="ngo" maxzoom="15" />
+		<subtype id="15" point="true" tag="office" value="quango" maxzoom="15" />
+		<subtype id="16" point="true" tag="office" value="research" maxzoom="15" />
+		<subtype id="17" point="true" tag="office" value="telecommunication" maxzoom="15" />
+		<subtype id="18" point="true" tag="office" value="travel_agent" maxzoom="15" />
+		<subtype id="19" point="true" tag="amenity" value="architect_office" maxzoom="15" />
+	</type>
+
+
+	<type id="11" name="shop">
+		<subtype id="41" point="true" tag="shop" value="alcohol" maxzoom="15" />
+		<subtype id="42" point="true" tag="shop" value="bakery" maxzoom="15" />
+		<subtype id="43" point="true" tag="shop" value="beauty" maxzoom="15" />
+		<subtype id="44" point="true" tag="shop" value="beverages" maxzoom="15" />
+		<subtype id="45" point="true" tag="shop" value="bicycle" maxzoom="15" />
+		<subtype id="46" point="true" tag="shop" value="books" maxzoom="15" />
+		<subtype id="47" point="true" tag="shop" value="boutique" maxzoom="15" />
+		<subtype id="48" point="true" tag="shop" value="butcher" maxzoom="15" />
+		<subtype id="49" point="true" tag="shop" value="car" maxzoom="15" />
+		<subtype id="50" point="true" tag="shop" value="car_repair" maxzoom="15" />
+		<subtype id="11" point="true" tag="shop" value="charity" maxzoom="15" />
+		<subtype id="12" point="true" tag="shop" value="chemist" maxzoom="15" />
+		<subtype id="13" point="true" tag="shop" value="clothes" maxzoom="15" />
+		<subtype id="13" point="true" tag="shop" value="fashion" maxzoom="15" />
+		<subtype id="14" point="true" tag="shop" value="computer" maxzoom="15" />
+		<subtype id="15" point="true" tag="shop" value="confectionery" maxzoom="15" />
+		<subtype id="16" point="true" tag="shop" value="convenience" maxzoom="15" />
+		<subtype id="17" point="true" tag="shop" value="department_store" maxzoom="15" />
+		<subtype id="18" point="true" tag="shop" value="dry_cleaning" maxzoom="15" />
+		<subtype id="19" point="true" tag="shop" value="doityourself" maxzoom="15" />
+		<subtype id="20" point="true" tag="shop" value="electronics" maxzoom="15" />
+		<subtype id="21" point="true" tag="shop" value="fabrics" maxzoom="15" />
+		<subtype id="22" point="true" tag="shop" value="farm" maxzoom="15" />
+		<subtype id="23" point="true" tag="shop" value="florist" maxzoom="15" />
+		<subtype id="24" point="true" tag="shop" value="funeral_directors" maxzoom="15" />
+		<subtype id="25" point="true" tag="shop" value="furniture" maxzoom="15" />
+		<subtype id="26" point="true" tag="shop" value="garden_centre" maxzoom="15" />
+		<subtype id="27" point="true" tag="shop" value="general" maxzoom="15" />
+		<subtype id="28" point="true" tag="shop" value="gift" maxzoom="15" />
+		<subtype id="29" point="true" tag="shop" value="glaziery" maxzoom="15" />
+		<subtype id="30" point="true" tag="shop" value="greengrocer" maxzoom="15" />
+		<subtype id="31" point="true" tag="shop" value="hairdresser" maxzoom="15" />
+		<subtype id="32" point="true" tag="shop" value="hardware" maxzoom="15" />
+		<subtype id="33" point="true" tag="shop" value="hearing_aids" maxzoom="15" />
+		<subtype id="34" point="true" tag="shop" value="hifi" maxzoom="15" />
+		<subtype id="35" point="true" tag="shop" value="ice_cream" maxzoom="15" />
+		<subtype id="40" point="true" tag="shop" value="jewelry" maxzoom="15" />
+		<subtype id="51" point="true" tag="shop" value="kiosk" maxzoom="15" />
+		<subtype id="52" point="true" tag="shop" value="laundry" maxzoom="15" />
+		<subtype id="53" point="true" tag="shop" value="mall" maxzoom="15" />
+		<subtype id="54" point="true" tag="shop" value="massage" maxzoom="15" />
+		<subtype id="55" point="true" tag="shop" value="money_lender" maxzoom="15" />
+		<subtype id="56" point="true" tag="shop" value="motorcycle" maxzoom="15" />
+		<subtype id="57" point="true" tag="shop" value="newsagent" maxzoom="15" />
+		<subtype id="58" point="true" tag="shop" value="optician" maxzoom="15" />
+		<subtype id="59" point="true" tag="shop" value="organic" maxzoom="15" />
+		<subtype id="60" point="true" tag="shop" value="outdoor" maxzoom="15" />
+		<subtype id="61" point="true" tag="shop" value="pawnbroker" maxzoom="15" />
+		<subtype id="62" point="true" tag="shop" value="second_hand" maxzoom="15" />
+		<subtype id="63" point="true" tag="shop" value="sports" maxzoom="15" />
+		<subtype id="64" point="true" tag="shop" value="stationery" maxzoom="15" />
+		<subtype id="65" point="true" tag="shop" value="supermarket" maxzoom="15" />
+		<subtype id="66" point="true" tag="shop" value="shoes" maxzoom="15" />
+		<subtype id="67" point="true" tag="shop" value="tattoo" maxzoom="15" />
+		<subtype id="68" point="true" tag="shop" value="toys" maxzoom="15" />
+		<subtype id="69" point="true" tag="shop" value="travel_agency" maxzoom="15" />
+		<subtype id="70" point="true" tag="shop" value="variety_store" maxzoom="15" />
+		<subtype id="71" point="true" tag="shop" value="video" maxzoom="15" />
+		<subtype id="75" point="true" tag="shop" maxzoom="15" />
+	</type>
+
+
+	<type id="12" name="emergency">
+		<subtype id="1" building="true" tag="emergency" value="ambulance_station" maxzoom="15" />
+		<subtype id="2" building="true" tag="emergency" value="ses_station" maxzoom="15" />
+		<subtype id="3" point="true" tag="emergency" value="fire_extinguisher" maxzoom="15" />
+		<subtype id="4" point="true" tag="emergency" value="fire_flapper" maxzoom="15" />
+		<subtype id="5" point="true" tag="emergency" value="fire_hose" maxzoom="15" />
+		<subtype id="6" point="true" tag="emergency" value="fire_hydrant" maxzoom="15" />
+		<subtype id="7" point="true" tag="emergency" value="phone" maxzoom="15" />
+		<subtype id="9" point="true" tag="emergency" value="siren" maxzoom="15" />
+		<subtype id="10" point="true" tag="amenity" value="fire_station" maxzoom="15" />
+	</type>
+
+
+	<type id="13" name="tourism">
+		<subtype id="2" point="true" polygon="true" tag="tourism" value="attraction" maxzoom="13" />
+		<subtype id="3" point="true" polygon="true" tag="tourism" value="artwork" maxzoom="15" />
+		<subtype id="4" point="true" polygon="true" tag="tourism" value="camp_site" maxzoom="15" />
+		<subtype id="5" point="true" polygon="true" tag="tourism" value="caravan_site" maxzoom="15" />
+		<subtype id="6" point="true" polygon="true" tag="tourism" value="picnic_site" maxzoom="15" />
+		<subtype id="7" point="true" polygon="true" tag="tourism" value="theme_park" maxzoom="13" />
+		<subtype id="8" point="true" polygon="true" tag="tourism" value="zoo" maxzoom="15" />
+		<subtype id="9" building="true" tag="tourism" value="alpine_hut" maxzoom="15" />
+		<subtype id="10" building="true" tag="tourism" value="chalet" maxzoom="15" />
+		<subtype id="11" building="true" tag="tourism" value="guest_house" maxzoom="15" />
+		<subtype id="12" building="true" tag="tourism" value="hostel" maxzoom="15" />
+		<subtype id="13" building="true" tag="tourism" value="hotel" maxzoom="15" />
+		<subtype id="14" building="true" tag="tourism" value="motel" maxzoom="15" />
+		<subtype id="15" building="true" tag="tourism" value="museum" maxzoom="15" />
+		<subtype id="16" point="true" tag="tourism" value="information" maxzoom="15" />
+		<subtype id="17" point="true" tag="tourism" value="viewpoint" maxzoom="15" />
+		<subtype id="18" point="true" tag="tourism" maxzoom="15" />
+	</type>
+
+
+	<type id="14" name="historic">
+		<subtype id="1" point="true" polygon="true" tag="historic" value="archaeological_site" maxzoom="15" />
+		<subtype id="2" point="true" polygon="true" tag="historic" value="battlefield" maxzoom="15" />
+		<subtype id="4" point="true" polygon="true" tag="historic" value="castle" maxzoom="15" />
+		<subtype id="5" point="true" polygon="true" tag="historic" value="fort" maxzoom="15" />
+		<subtype id="8" point="true" polygon="true" tag="historic" value="ruins" maxzoom="15" />
+		<subtype id="7" building="true" tag="historic" value="monument" maxzoom="15" />
+		<subtype id="3" point="true" tag="historic" value="boundary_stone" maxzoom="15" />
+		<subtype id="6" point="true" tag="historic" value="memorial" maxzoom="15" />
+		<subtype id="9" point="true" tag="historic" value="wayside_cross" maxzoom="15" />
+		<subtype id="10" point="true" tag="historic" value="wayside_shrine" maxzoom="15" />
+		<subtype id="11" point="true" tag="historic" value="wreck" maxzoom="15" />
+		<subtype id="12" point="true" tag="historic" maxzoom="15" />
+	</type>
+
+
+	<type id="15" name="landuse">
+		<subtype id="1" polygon="true" tag="landuse" value="allotments" maxzoom="11" />
+		<subtype id="2" point="true" polygon="true" tag="landuse" value="basin" maxzoom="11" />
+		<subtype id="3" point="true" polygon="true" tag="landuse" value="brownfield" maxzoom="11" />
+		<subtype id="4" polygon="true" tag="landuse" value="cemetery" maxzoom="11" />
+		<subtype id="4" polygon="true" tag="landuse" value="grave_yard" maxzoom="15" />
+		<subtype id="5" polygon="true" tag="landuse" value="commercial" maxzoom="11" />
+		<subtype id="6" point="true" polygon="true" tag="landuse" value="construction" maxzoom="11" />
+		<subtype id="7" polygon="true" tag="landuse" value="farm" maxzoom="11" />
+		<subtype id="7" polygon="true" tag="landuse" value="farmland" maxzoom="11" />
+		<subtype id="9" polygon="true" tag="landuse" value="farmyard" maxzoom="11" />
+		<subtype id="10" polygon="true" tag="landuse" value="forest" maxzoom="8" />
+		<subtype id="11" polygon="true" tag="landuse" value="garages" maxzoom="15" />
+		<subtype id="12" polygon="true" tag="landuse" value="grass" maxzoom="11" />
+		<subtype id="13" polygon="true" tag="landuse" value="greenfield" maxzoom="11" />
+		<subtype id="14" polygon="true" tag="landuse" value="greenhouse_horticulture" maxzoom="11" />
+		<subtype id="15" polygon="true" tag="landuse" value="industrial" maxzoom="11" />
+		<subtype id="16" polygon="true" tag="landuse" value="landfill" maxzoom="11" />
+		<subtype id="17" point="true" polygon="true" tag="landuse" value="meadow" maxzoom="11" />
+		<subtype id="18" polygon="true" tag="landuse" value="military" maxzoom="10" />
+		<subtype id="19" polygon="true" tag="landuse" value="orchard" maxzoom="11" />
+		<subtype id="20" polygon="true" tag="landuse" value="railway" maxzoom="11" />
+		<subtype id="21" polygon="true" tag="landuse" value="recreation_ground" maxzoom="11" />
+		<subtype id="21" polygon="true" tag="landuse" value="conservation" maxzoom="11" />
+		<subtype id="21" polygon="true" tag="landuse" value="village_green" maxzoom="11" />
+		<subtype id="22" point="true" polygon="true" tag="landuse" value="reservoir" maxzoom="7" />
+		<subtype id="22" point="true" polygon="true" tag="landuse" value="water" maxzoom="7" />
+		<subtype id="23" polygon="true" tag="landuse" value="residential" maxzoom="11" />
+		<subtype id="24" polygon="true" tag="landuse" value="retail" maxzoom="11" />
+		<subtype id="25" point="true" polygon="true" tag="landuse" value="salt_pond" maxzoom="11" />
+		<subtype id="26" point="true" polygon="true" tag="landuse" value="quarry" maxzoom="11" />
+		<subtype id="27" polygon="true" tag="landuse" value="vineyard" maxzoom="11" />
+		<subtype id="28" polygon="true" tag="landuse" value="field" maxzoom="11" />
+		<subtype id="28" polygon="true" tag="natural" value="field" maxzoom="11" />
+	</type>
+
+
+	<type id="16" name="military">
+		<subtype id="1" point="true" polygon_center="true" tag="military" value="airfield" maxzoom="15" />
+		<subtype id="2" point="true" polygon_center="true" tag="military" value="bunker" maxzoom="15" />
+		<subtype id="3" polygon="true" tag="military" value="barracks" maxzoom="15" />
+		<subtype id="4" point="true" polygon_center="true" tag="military" value="danger_area" maxzoom="15" />
+		<subtype id="5" point="true" polygon="true" tag="military" value="range" maxzoom="15" />
+		<subtype id="6" point="true" polygon="true" tag="military" value="naval_base" maxzoom="15" />
+		<subtype id="7" point="true" polygon="true" tag="military" maxzoom="15" />
+	</type>
+
+
+	<type id="17" name="natural">
+		<subtype id="5" polygon="true" tag="natural" value="coastline" maxzoom="5" />
+		<subtype id="1" point="true" polygon="true" tag="natural" value="bay" maxzoom="15" />
+		<subtype id="2" point="true" polygon="true" tag="natural" value="beach" maxzoom="12" />
+		<subtype id="3" point="true" polygon_center="true" tag="natural" value="cave_entrance" maxzoom="13" />
+		<subtype id="4" point="true" polyline="true" tag="natural" value="cliff" maxzoom="15" />
+		<subtype id="6" point="true" polygon="true" tag="natural" value="fell" maxzoom="15" />
+		<subtype id="7" point="true" polygon="true" tag="natural" value="glacier" maxzoom="7" />
+		<subtype id="8" point="true" polygon="true" tag="natural" value="heath" maxzoom="13" />
+		<subtype id="9" point="true" polygon="true" tag="natural" value="land" maxzoom="13" />
+		<subtype id="11" point="true" polygon="true" tag="natural" value="marsh" maxzoom="13" />
+		<subtype id="12" point="true" polygon="true" tag="natural" value="mud" maxzoom="13" />
+		<subtype id="13" point="true" tag="natural" value="peak" maxzoom="12" />
+		<subtype id="14" point="true" polygon="true" tag="natural" value="sand" maxzoom="15" />
+		<subtype id="15" point="true" polygon="true" tag="natural" value="scree" maxzoom="15" />
+		<subtype id="16" point="true" polygon="true" tag="natural" value="scrub" maxzoom="13" />
+		<subtype id="17" point="true" tag="natural" value="spring" maxzoom="15" />
+		<subtype id="18" point="true" tag="natural" value="stone" maxzoom="15" />
+		<subtype id="19" point="true" tag="natural" value="tree" maxzoom="15" />
+		<subtype id="20" point="true" tag="natural" value="volcano" maxzoom="11" />
+		<subtype id="21" point="true" polygon="true" tag="natural" value="water" maxzoom="8" />
+		<subtype id="21" point="true" polygon="true" tag="natural" value="lake" maxzoom="8" />
+		<subtype id="22" point="true" polygon="true" tag="natural" value="wetland" maxzoom="13" />
+		<subtype id="23" point="true" polygon="true" tag="natural" value="wood" maxzoom="8" />
+		<subtype id="23" point="true" polygon="true" tag="landuse" value="wood" maxzoom="8" />
+
+		<subtype id="31" point="true" polygon="true" tag="natural" maxzoom="15" />
+	</type>
+
+
+	<type id="18" name="sustenance">
+		<subtype id="1" building="true" tag="amenity" value="restaurant" maxzoom="15" />
+		<subtype id="2" building="true" tag="amenity" value="cafe" maxzoom="15" />
+		<subtype id="3" building="true" tag="amenity" value="food_court" maxzoom="15" />
+		<subtype id="4" building="true" tag="amenity" value="fast_food" maxzoom="15" />
+		<subtype id="5" building="true" tag="amenity" value="pub" maxzoom="15" />
+		<subtype id="6" building="true" tag="amenity" value="bar" maxzoom="15" />
+		<subtype id="7" building="true" tag="amenity" value="biergarten" maxzoom="15" />
+		<subtype id="8" point="true" tag="amenity" value="drinking_water" maxzoom="15" />
+		<subtype id="9" point="true" tag="amenity" value="bbq" maxzoom="15" />
+	</type>
+
+
+	<type id="19" name="education">
+		<subtype id="1" point="true" polygon_center="true" tag="amenity" value="kindergarten" maxzoom="15" />
+		<subtype id="2" point="true" polygon_center="true" tag="amenity" value="school" maxzoom="15" />
+		<subtype id="3" point="true" polygon_center="true" tag="amenity" value="college" maxzoom="15" />
+		<subtype id="4" point="true" tag="amenity" value="library" maxzoom="15" />
+		<subtype id="5" point="true" polygon_center="true" tag="amenity" value="university" maxzoom="15" />
+	</type>
+
+
+	<type id="20" name="transportation">
+		<subtype id="1" point="true" polygon_center="true" tag="amenity" value="parking" maxzoom="15" />
+		<subtype id="2" point="true" polygon_center="true" tag="amenity" value="bicycle_parking" maxzoom="15" />
+		<subtype id="3" point="true" polygon="true" tag="amenity" value="ferry_terminal" maxzoom="12" />
+		<subtype id="4" point="true" tag="amenity" value="fuel" maxzoom="13" />
+		<subtype id="16" point="true" tag="amenity" value="taxi" maxzoom="15" />
+		<subtype id="17" point="true" tag="amenity" value="bicycle_rental" maxzoom="15" />
+		<subtype id="18" point="true" tag="amenity" value="bus_station" maxzoom="13" />
+		<subtype id="19" point="true" tag="amenity" value="car_rental" maxzoom="15" />
+		<subtype id="20" point="true" tag="amenity" value="car_sharing" maxzoom="15" />
+		<subtype id="21" point="true" tag="amenity" value="car_wash" maxzoom="15" />
+		<subtype id="22" point="true" tag="amenity" value="grit_bin" maxzoom="15" />
+	</type>
+
+
+	<type id="21" name="finance">
+		<subtype id="1" point="true" tag="amenity" value="atm" maxzoom="15" />
+		<subtype id="2" building="true" tag="amenity" value="bank" maxzoom="15" />
+		<subtype id="3" point="true" tag="amenity" value="bureau_de_change" maxzoom="15" />
+	</type>
+
+
+	<type id="22" name="healthcare">
+		<subtype id="1" building="true" tag="amenity" value="pharmacy" maxzoom="15" />
+		<subtype id="2" point="true" polygon_center="true" tag="amenity" value="hospital" maxzoom="15" />
+		<subtype id="3" point="true" tag="amenity" value="baby_hatch" maxzoom="15" />
+		<subtype id="4" point="true" tag="amenity" value="dentist" maxzoom="15" />
+		<subtype id="5" point="true" tag="amenity" value="doctors" maxzoom="15" />
+		<subtype id="6" point="true" tag="amenity" value="veterinary" maxzoom="15" />
+		<subtype id="7" point="true" tag="amenity" value="first_aid" maxzoom="15" />
+	</type>
+
+
+	<type id="23" name="entertainment">
+		<subtype id="2" point="true" tag="amenity" value="arts_centre" maxzoom="15" />
+		<subtype id="3" point="true" polygon_center="true" tag="amenity" value="cinema" maxzoom="15" />
+		<subtype id="4" point="true" tag="amenity" value="community_centre" maxzoom="15" />
+		<subtype id="5" point="true" tag="amenity" value="social_centre" maxzoom="15" />
+		<subtype id="6" building="true" tag="amenity" value="nightclub" maxzoom="15" />
+		<subtype id="7" point="true" tag="amenity" value="stripclub" maxzoom="15" />
+		<subtype id="8" point="true" tag="amenity" value="studio" maxzoom="15" />
+		<subtype id="9" building="true" tag="amenity" value="theatre" maxzoom="15" />
+		<subtype id="10" point="true" tag="amenity" value="sauna" maxzoom="15" />
+		<subtype id="11" building="true" tag="amenity" value="brothel" maxzoom="15" />
+	</type>
+
+
+	<type id="24" name="amenity_other">
+		<subtype id="1" point="true" polygon="true" tag="amenity" value="marketplace" maxzoom="15" />
+		<subtype id="5" building="true" tag="amenity" value="courthouse" maxzoom="15" />
+		<subtype id="6" building="true" tag="amenity" value="crematorium" maxzoom="15" />
+		<subtype id="7" point="true" tag="amenity" value="embassy" maxzoom="15" />
+		<subtype id="8" point="true" tag="amenity" value="grave_yard" maxzoom="15" />
+		<subtype id="9" point="true" tag="amenity" value="hunting_stand" maxzoom="15" />
+		<subtype id="10" point="true" tag="amenity" value="police" maxzoom="15" />
+		<subtype id="11" point="true" tag="amenity" value="post_box" maxzoom="15" />
+		<subtype id="12" building="true" tag="amenity" value="post_office" maxzoom="15" />
+		<subtype id="13" point="true" tag="amenity" value="prison" maxzoom="15" />
+		<subtype id="14" point="true" tag="amenity" value="public_building" maxzoom="15" />
+		<subtype id="15" point="true" tag="amenity" value="recycling" maxzoom="15" />
+		<subtype id="16" point="true" tag="amenity" value="shelter" maxzoom="15" />
+		<subtype id="17" point="true" tag="amenity" value="telephone" maxzoom="15" />
+		<subtype id="18" point="true" tag="amenity" value="toilets" maxzoom="15" />
+		<subtype id="19" building="true" tag="amenity" value="townhall" maxzoom="15" />
+		<subtype id="20" point="true" tag="amenity" value="vending_machine" maxzoom="15" />
+		<subtype id="21" point="true" tag="amenity" value="waste_basket" maxzoom="15" />
+		<subtype id="22" point="true" tag="amenity" value="waste_disposal" maxzoom="15" />
+		<subtype id="23" point="true" tag="amenity" value="fountain" maxzoom="15" />
+		<subtype id="24" point="true" tag="amenity" value="bench" maxzoom="15" />
+		<subtype id="25" point="true" tag="amenity" value="clock" maxzoom="15" />
+		<subtype id="26" point="true" tag="amenity" value="place_of_worship" maxzoom="15" />
+		<subtype id="30" point="true" tag="amenity" maxzoom="15" />
+	</type>
+
+
+	<type id="25" name="administrative">
+		<subtype id="41" point="true" tag="place" value="continent" maxzoom="5" />
+		<subtype id="42" point="true" tag="place" value="country" maxzoom="5" />
+		<subtype id="43" point="true" tag="place" value="state" maxzoom="5" />
+		<subtype id="44" point="true" tag="place" value="region" maxzoom="5" />
+		<subtype id="45" point="true" tag="place" value="county" maxzoom="5" />
+		<subtype id="6" point="true" polygon_center="true" tag="place" value="city" maxzoom="6" />
+		<subtype id="7" point="true" polygon_center="true" tag="place" value="town" maxzoom="7" />
+		<subtype id="8" point="true" polygon_center="true" tag="place" value="village" maxzoom="10" />
+		<subtype id="9" point="true" polygon_center="true" tag="place" value="hamlet" maxzoom="10" />
+		<subtype id="10" point="true" polygon_center="true" tag="place" value="suburb" maxzoom="10" />
+		<subtype id="11" point="true" polygon_center="true" tag="place" value="locality" maxzoom="10" />
+		<subtype id="12" point="true" polygon_center="true" tag="place" value="island" maxzoom="10" />
+		<!-- register(st, "boundary", "administrative", ADMINISTRATIVE, 15, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$  -->
+		<subtype id="21" polyline="true" tag="admin_level" value="1" maxzoom="15" />
+		<subtype id="22" polyline="true" tag="admin_level" value="2" maxzoom="5" />
+		<subtype id="23" polyline="true" tag="admin_level" value="3" maxzoom="5" />
+		<subtype id="24" polyline="true" tag="admin_level" value="4" maxzoom="5" />
+		<subtype id="25" polyline="true" tag="admin_level" value="5" maxzoom="6" />
+		<subtype id="26" polyline="true" tag="admin_level" value="6" maxzoom="6" />
+		<subtype id="27" polyline="true" tag="admin_level" value="7" maxzoom="6" />
+		<subtype id="28" polyline="true" tag="admin_level" value="8" maxzoom="10" />
+		<subtype id="29" polyline="true" tag="admin_level" value="9" maxzoom="11" />
+		<subtype id="30" polyline="true" tag="admin_level" value="10" maxzoom="12" />
+		<subtype id="16" polyline="true" tag="boundary" value="civil" maxzoom="7" />
+		<subtype id="17" polyline="true" tag="boundary" value="political" maxzoom="7" />
+		<subtype id="18" polyline="true" tag="boundary" value="maritime" maxzoom="7" />
+		<subtype id="19" polyline="true" tag="boundary" value="national_park" maxzoom="7" />
+		<subtype id="20" polyline="true" tag="boundary" value="protected_area" maxzoom="7" />
+		<subtype id="33" point="true" tag="addr:housenumber" maxzoom="15" />
+	</type>
+
+
+	<type id="27" name="sport">
+		<subtype id="1" point="true" tag="sport" value="9pin" maxzoom="15" />
+		<subtype id="2" point="true" tag="sport" value="10pin" maxzoom="15" />
+		<subtype id="3" point="true" tag="sport" value="archery" maxzoom="15" />
+		<subtype id="4" point="true" tag="sport" value="athletics" maxzoom="15" />
+		<subtype id="5" point="true" tag="sport" value="australian_football" maxzoom="15" />
+		<subtype id="6" point="true" tag="sport" value="baseball" maxzoom="15" />
+		<subtype id="7" point="true" tag="sport" value="basketball" maxzoom="15" />
+		<subtype id="8" point="true" tag="sport" value="beachvolleyball" maxzoom="15" />
+		<subtype id="9" point="true" tag="sport" value="boules" maxzoom="15" />
+		<subtype id="10" point="true" tag="sport" value="bowls" maxzoom="15" />
+		<subtype id="11" point="true" tag="sport" value="canoe" maxzoom="15" />
+		<subtype id="12" point="true" tag="sport" value="chess" maxzoom="15" />
+		<subtype id="13" point="true" tag="sport" value="climbing" maxzoom="15" />
+		<subtype id="14" point="true" tag="sport" value="cricket" maxzoom="15" />
+		<subtype id="15" point="true" tag="sport" value="cricket_nets" maxzoom="15" />
+		<subtype id="16" point="true" tag="sport" value="croquet" maxzoom="15" />
+		<subtype id="17" point="true" tag="sport" value="cycling" maxzoom="15" />
+		<subtype id="18" point="true" tag="sport" value="diving" maxzoom="15" />
+		<subtype id="19" point="true" tag="sport" value="dog_racing" maxzoom="15" />
+		<subtype id="20" point="true" tag="sport" value="equestrian" maxzoom="15" />
+		<subtype id="21" point="true" tag="sport" value="football" maxzoom="15" />
+		<subtype id="22" point="true" tag="sport" value="golf" maxzoom="15" />
+		<subtype id="23" point="true" tag="sport" value="gymnastics" maxzoom="15" />
+		<subtype id="24" point="true" tag="sport" value="hockey" maxzoom="15" />
+		<subtype id="25" point="true" tag="sport" value="horse_racing" maxzoom="15" />
+		<subtype id="26" point="true" tag="sport" value="ice_stock" maxzoom="15" />
+		<subtype id="27" point="true" tag="sport" value="korfball" maxzoom="15" />
+		<subtype id="28" point="true" tag="sport" value="motor" maxzoom="15" />
+		<subtype id="29" point="true" tag="sport" value="multi" maxzoom="15" />
+		<subtype id="30" point="true" tag="sport" value="orienteering" maxzoom="15" />
+		<subtype id="31" point="true" tag="sport" value="paddle_tennis" maxzoom="15" />
+		<subtype id="32" point="true" tag="sport" value="paragliding" maxzoom="15" />
+		<subtype id="33" point="true" tag="sport" value="pelota" maxzoom="15" />
+		<subtype id="34" point="true" tag="sport" value="racquet" maxzoom="15" />
+		<subtype id="35" point="true" tag="sport" value="rowing" maxzoom="15" />
+		<subtype id="36" point="true" tag="sport" value="rugby" maxzoom="15" />
+		<subtype id="37" point="true" tag="sport" value="shooting" maxzoom="15" />
+		<subtype id="38" point="true" tag="sport" value="skating" maxzoom="15" />
+		<subtype id="39" point="true" tag="sport" value="skateboard" maxzoom="15" />
+		<subtype id="40" point="true" tag="sport" value="skiing" maxzoom="15" />
+		<subtype id="41" point="true" tag="sport" value="soccer" maxzoom="15" />
+		<subtype id="42" point="true" tag="sport" value="swimming" maxzoom="15" />
+		<subtype id="43" point="true" tag="sport" value="table_tennis" maxzoom="15" />
+		<subtype id="44" point="true" tag="sport" value="team_handball" maxzoom="15" />
+		<subtype id="45" point="true" tag="sport" value="tennis" maxzoom="15" />
+		<subtype id="46" point="true" tag="sport" value="toboggan" maxzoom="15" />
+		<subtype id="47" point="true" tag="sport" value="volleyball" maxzoom="15" />
+		<subtype id="50" point="true" tag="sport" maxzoom="15" />
+	</type>
+</osmand_types>
