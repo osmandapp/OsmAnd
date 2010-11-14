@@ -22,7 +22,7 @@
 
 		<jar destfile="OsmAndMapCreator.jar" manifest="MANIFEST.MF">
 			<fileset dir="bin">
-				<include name="**/*.class" />
+				<include name="**/*" />
 			</fileset>
 			<fileset dir="src">
 				<include name="**/*.java" />
