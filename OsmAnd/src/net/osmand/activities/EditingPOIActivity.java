@@ -120,7 +120,6 @@ public class EditingPOIActivity {
 	public void showCreateDialog(double latitude, double longitude){
 		dlg = new Dialog(ctx);
 		Node n = new Node(latitude, longitude, -1);
-		n.putTag(OSMTagKey.AMENITY.getValue(), ""); //$NON-NLS-1$
 		n.putTag(OSMTagKey.OPENING_HOURS.getValue(), ""); //$NON-NLS-1$
 		dlg.setTitle(R.string.poi_create_title);
 		showDialog(n, AmenityType.OTHER, ""); //$NON-NLS-1$
