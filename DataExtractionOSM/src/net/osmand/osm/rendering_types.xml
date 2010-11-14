@@ -549,7 +549,7 @@
 		<subtype id="11" point="true" polygon_center="true" tag="place" value="locality" maxzoom="10" />
 		<subtype id="12" point="true" polygon_center="true" tag="place" value="island" maxzoom="10" />
 		<!-- register(st, "boundary", "administrative", ADMINISTRATIVE, 15, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$  -->
-		<subtype id="21" polyline="true" tag="admin_level" value="1" maxzoom="15" />
+		<subtype id="21" polyline="true" tag="admin_level" value="1" maxzoom="5" />
 		<subtype id="22" polyline="true" tag="admin_level" value="2" maxzoom="5" />
 		<subtype id="23" polyline="true" tag="admin_level" value="3" maxzoom="5" />
 		<subtype id="24" polyline="true" tag="admin_level" value="4" maxzoom="5" />
