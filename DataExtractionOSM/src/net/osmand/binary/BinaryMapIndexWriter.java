@@ -14,6 +14,7 @@ import java.util.Stack;
 import net.osmand.Algoritms;
 import net.osmand.binary.OsmandOdb.CityIndex;
 import net.osmand.binary.OsmandOdb.InteresectedStreets;
+import net.osmand.binary.OsmandOdb.MapEncodingRule;
 import net.osmand.binary.OsmandOdb.OsmAndTransportIndex;
 import net.osmand.binary.OsmandOdb.PostcodeIndex;
 import net.osmand.binary.OsmandOdb.StreetIndex;
@@ -29,6 +30,7 @@ import net.osmand.data.index.IndexConstants;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
+import net.osmand.osm.MapRenderingTypes.MapRulType;
 import net.sf.junidecode.Junidecode;
 
 import com.google.protobuf.CodedOutputStream;
@@ -162,6 +164,35 @@ public class BinaryMapIndexWriter {
 		stackBounds.pop();
 		writeInt32Size();
 	}
+	
+	public void writeMapEncodingRules(Map<String, MapRulType> types) throws IOException{
+		checkPeekState(MAP_INDEX_INIT);
+		codedOutStream.flush();
+		long fp = raf.getFilePointer();
+		MapEncodingRule.Builder builder = OsmandOdb.MapEncodingRule.newBuilder(); 
+		for(String tag : types.keySet()){
+			MapRulType rule = types.get(tag);
+			int type = rule.getType(null);
+			int subType = rule.getSubType(null);
+			if(type != 0 && subType != 0){
+				builder.setTag(tag).setType(type).setSubtype(subType).setMinZoom(rule.getMinZoom(null));
+				builder = OsmandOdb.MapEncodingRule.newBuilder();
+			}
+			
+			for(String val : types.get(tag).getValuesSet()){
+				type = rule.getType(val);
+				subType = rule.getSubType(val);
+				builder.setTag(tag).setValue(val).setType(type).setSubtype(subType).setMinZoom(rule.getMinZoom(null));
+				codedOutStream.writeMessage(OsmandOdb.OsmAndMapIndex.RULES_FIELD_NUMBER, builder.build());
+				builder = OsmandOdb.MapEncodingRule.newBuilder();
+			}
+			
+		}
+		codedOutStream.flush();
+		long newfp = raf.getFilePointer();
+		System.out.println("RENDERING SCHEMA takes " + (newfp - fp));
+	}
+	
 	
 	public void startMapTreeElement(int leftX, int rightX, int topY, int bottomY) throws IOException{
 		startMapTreeElement(-1L, leftX, rightX, topY, bottomY);
@@ -724,6 +755,10 @@ public class BinaryMapIndexWriter {
 		if(st != state){
 			throw new IllegalStateException("expected " + state + " != "+ st);
 		}
+	}
+	
+	public void flush() throws IOException {
+		codedOutStream.flush();
 	}
 	
 	public void close() throws IOException{

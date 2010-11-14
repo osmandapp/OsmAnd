@@ -34,6 +34,17 @@ message OsmAndMapIndex {
    repeated MapRootLevel levels = 1;
    
    optional string name = 3;
+   
+   repeated MapEncodingRule rules = 8;
+}
+
+message MapEncodingRule {
+	required string tag = 3;
+	optional string value = 5;
+	required uint32 type = 6;
+	required uint32 subtype = 7;
+	
+	optional uint32 minZoom = 9;
 }
 
 message MapRootLevel {

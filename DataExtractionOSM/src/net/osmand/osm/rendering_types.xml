@@ -8,7 +8,7 @@
 	<!-- 1) 31 (5 bytes) maximum number of different types  -->
 	<!-- 2) In each type only 31 (5 bytes) different polyline and polygon (in sum) subtypes available. -->
 	<!-- 3) In each type only 127 (7 bytes) all different subtypes available -->
-	<!-- Try to not change id of types and subtypes, some of the constants are hardcoded (for poi categorization and rendering order). -->
+	<!-- TODO Try to not change id of types and subtypes, some of the constants are hardcoded (for rendering order, rendering). -->
 	<type name="highway" id="1">
 		<subtype id="2" polyline="true" tag="highway" value="motorway" maxzoom="6" />
 		<subtype id="2" polyline="true" tag="highway" value="motorway_link" maxzoom="10" />

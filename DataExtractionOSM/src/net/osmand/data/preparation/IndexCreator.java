@@ -904,7 +904,7 @@ public class IndexCreator {
 						}
 					}
 					
-					Long streetId = getStreetInCity(c, name, location, a6.getId());
+					Long streetId = getStreetInCity(c, name, location, (a6.getId() << 1) | 1);
 					if(streetId == null){
 						return;
 					}
@@ -1169,17 +1169,17 @@ public class IndexCreator {
 						loadEntityData(e, false);
 						LatLon l = e.getLatLon();
 						City city = getClosestCity(l);
-						Long idStreet = getStreetInCity(city, e.getTag(OSMTagKey.ADDR_STREET), l, e.getId());
+						Long idStreet = getStreetInCity(city, e.getTag(OSMTagKey.ADDR_STREET), l, e.getId() << 1);
 						if (idStreet != null) {
 							Building building = new Building(e);
 							building.setName(e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER));
 							DataIndexWriter.writeBuilding(addressBuildingStat, pStatements, idStreet, building, BATCH_SIZE);
 						}
 					}
-				}
-				// suppose that streets with names are ways for car
-				if (e instanceof Way /* && OSMSettings.wayForCar(e.getTag(OSMTagKey.HIGHWAY)) */
+				} else if (e instanceof Way /* && OSMSettings.wayForCar(e.getTag(OSMTagKey.HIGHWAY)) */
 						&& e.getTag(OSMTagKey.HIGHWAY) != null && e.getTag(OSMTagKey.NAME) != null) {
+					// suppose that streets with names are ways for car
+					// Ignore all ways that have house numbers and highway type
 					boolean exist = false;
 					
 					// if we saved address ways we could checked that we registered before 
@@ -1199,7 +1199,7 @@ public class IndexCreator {
 						loadEntityData(e, false);
 						LatLon l = e.getLatLon();
 						City city = getClosestCity(l);
-						Long idStreet = getStreetInCity(city, e.getTag(OSMTagKey.NAME), l, e.getId());
+						Long idStreet = getStreetInCity(city, e.getTag(OSMTagKey.NAME), l, e.getId() << 1);
 						if (idStreet != null && saveAddressWays) {
 							DataIndexWriter.writeStreetWayNodes(addressStreetNodeStat, pStatements, idStreet, (Way) e, BATCH_SIZE);
 						}
@@ -1543,12 +1543,9 @@ public class IndexCreator {
 		}
 
 		restrictionsUse.clear();
-		if (MapRenderingTypes.isHighwayType(type)) {
-			// try to find restrictions only for max zoom level
-			if (level == 0 && highwayRestrictions.containsKey(baseId)) {
-				restrictionsUse.addAll(highwayRestrictions.get(baseId));
-			}
-
+		// try to find restrictions only for max zoom level
+		if (level == 0 && highwayRestrictions.containsKey(baseId)) {
+			restrictionsUse.addAll(highwayRestrictions.get(baseId));
 		}
 
 		boolean point = (type & 3) == MapRenderingTypes.POINT_TYPE;
@@ -1609,7 +1606,7 @@ public class IndexCreator {
 
 		if (!skip) {
 			int highwayAttributes = 0;
-			if(MapRenderingTypes.isHighwayType(type)){
+			if (e.getTag(OSMTagKey.HIGHWAY) != null) {
 				highwayAttributes = MapRenderingTypes.getHighwayAttributes(e);
 			}
 			String eName = MapRenderingTypes.getEntityName(e, type);
@@ -1725,6 +1722,7 @@ public class IndexCreator {
 		progress.finishTask();
 		
 		writer.endWriteAddressIndex();
+		writer.flush();
 		
 	}
 
@@ -1756,9 +1754,9 @@ public class IndexCreator {
 					writer.endWriteMapLevelIndex();
 				}
 			}
-			
-			
+			writer.writeMapEncodingRules(MapRenderingTypes.getEncodingRuleTypes());
 			writer.endWriteMapIndex();
+			writer.flush();
 		} catch (RTreeException e) {
 			throw new IllegalStateException(e);
 		}
@@ -1898,6 +1896,7 @@ public class IndexCreator {
 			writer.writeTransportStringTable(stringTable);
 
 			writer.endWriteTransportIndex();
+			writer.flush();
 		} catch (RTreeException e) {
 			throw new IllegalStateException(e);
 		}
@@ -2186,8 +2185,21 @@ public class IndexCreator {
 				}
 				progress.finishTask();
 				writer.close();
+				mapRAFile.close();
 				log.info("Finish writing binary file");
 			}
+		} catch (RuntimeException e) {
+			log.error("Log exception", e);
+			throw e;
+		} catch (SQLException e) {
+			log.error("Log exception", e);
+			throw e;
+		} catch (IOException e) {
+			log.error("Log exception", e);
+			throw e;
+		} catch (SAXException e) {
+			log.error("Log exception", e);
+			throw e;
 		} finally {
 			try {
 				if (pselectNode != null) {
@@ -2501,12 +2513,12 @@ public class IndexCreator {
 	 public static void main(String[] args) throws IOException, SAXException, SQLException {
 		 long time = System.currentTimeMillis();
 		 IndexCreator creator = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
-//		 creator.setIndexMap(true);
+		 creator.setIndexMap(true);
 //		 creator.setIndexAddress(true);
 		 creator.setIndexPOI(true);
 //		 creator.setIndexTransport(true);
 		 
-		 creator.recreateOnlyBinaryFile = false;
+		 creator.recreateOnlyBinaryFile = true;
 		 creator.deleteDatabaseIndexes = false;
 		 
 		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));

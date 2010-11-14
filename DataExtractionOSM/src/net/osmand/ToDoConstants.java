@@ -14,6 +14,8 @@ public class ToDoConstants {
 
 	// 	For 0.5 release
 	//  102. Refactoring rendering schema serializing to xml and prepare script to create fast java builder (support pure xml)
+	//       Refactoring MapRenderingTypes to xml either
+	//       Input MAP_ZOOMS as parameter
 
 	//   86. Allow to add/edit custom tags to POI objects (Issue)
 	//   92. Support poi index with standard map index and unify POI categories (unify done +)

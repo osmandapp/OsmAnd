@@ -3,6 +3,7 @@ package net.osmand.osm;
 import gnu.trove.map.TIntByteMap;
 import gnu.trove.map.hash.TIntByteHashMap;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -10,6 +11,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
@@ -172,7 +174,7 @@ public class MapRenderingTypes {
 	// special type means that ways will transform in area with the same point subtype = as area subtype
 	// instead of zero point subtype (only for ways!)
 	private final static int DEFAULT_POLYGON_BUILDING = 10;
-	private static class MapRulType {
+	public static class MapRulType {
 		private String tag;
 		// val could be null means others for that tag
 		private Integer nullRule;
@@ -184,6 +186,10 @@ public class MapRenderingTypes {
 		
 		public String getTag() {
 			return tag;
+		}
+		
+		public Collection<String> getValuesSet(){
+			return rules.keySet();
 		}
 		
 		public void registerType(int minZoom, String val, int pointRule, int polylineRule, int polygonRule, int type, int subtype){
@@ -241,6 +247,21 @@ public class MapRenderingTypes {
 			return (i >> 25);
 		}
 		
+		public int getType(String val) {
+			Integer i = val == null ? nullRule : rules.get(val);
+			if (i == null) {
+				return 0;
+			}
+			return i & MASK_5;
+		}
+		
+		public int getSubType(String val) {
+			Integer i = val == null ? nullRule : rules.get(val);
+			if (i == null) {
+				return 0;
+			}
+			return (i & MASK_13) >> 5;
+		}
 		
 		public int getType(String val, int mask){
 			Integer i = val == null ? nullRule : rules.get(val);
@@ -250,6 +271,16 @@ public class MapRenderingTypes {
 			return i & mask;
 		}
 	}
+	
+
+	public static Map<String, MapRulType> getEncodingRuleTypes(){
+		if (types == null) {
+			types = new LinkedHashMap<String, MapRulType>();
+			init(INIT_RULE_TYPES);
+		}
+		return types;
+	}
+	
 	
 	// if type equals 0 no need to save that point
 	public static int encodeEntityWithType(Entity e, int zoom, boolean multipolygon, List<Integer> additionalTypes) {
@@ -314,7 +345,7 @@ public class MapRenderingTypes {
 						int attr = getLayerAttributes(e) << 12;
 						boolean prevPoint = (polylineType == 0 && polygonType == 0);
 						polylineType = POLYLINE_TYPE | (typeVal & MASK_12) | attr;
-						if (((polylineType >> 2) & MASK_4) == HIGHWAY || prevPoint){
+						if (tag.equals("highway") || prevPoint){ //$NON-NLS-1$
 							additionalTypes.add(0, polylineType);
 						} else { 
 							additionalTypes.add(polylineType);
@@ -351,11 +382,6 @@ public class MapRenderingTypes {
 			additionalTypes.remove(0);
 		}
 		return type;
-	}
-	
-	// 
-	public static boolean isHighwayType(int t){
-		return (t & 3) == POLYLINE_TYPE && ((t >> 2) & MASK_5) == HIGHWAY;
 	}
 	
 	public static boolean isOneWayWay(int highwayAttributes){
@@ -504,7 +530,7 @@ public class MapRenderingTypes {
 	}
 	
 	public static String getEntityName(Entity e, int mainType) {
-		if (e.getTag(OSMTagKey.REF) != null && getMainObjectType(mainType) == HIGHWAY) {
+		if (e.getTag(OSMTagKey.REF) != null && e.getTag(OSMTagKey.HIGHWAY) != null) {
 			String ref = e.getTag(OSMTagKey.REF);
 			if (ref.length() > 5 && ref.indexOf('_') != -1) {
 				ref = ref.substring(0, ref.indexOf('_'));
@@ -520,10 +546,10 @@ public class MapRenderingTypes {
 		if (name == null) {
 			name = e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER);
 		}
-		if(name == null && getMainObjectType(mainType) == NATURAL && getObjectSubType(mainType) == 13){
+		if(name == null && "peak".equals(e.getTag(OSMTagKey.HIGHWAY))){ //$NON-NLS-1$
 			name = e.getTag("ele"); //$NON-NLS-1$
 		}
-		if(name == null && getMainObjectType(mainType) == AEROWAY && getObjectSubType(mainType) == 17){
+		if(name == null && "gete".equals(e.getTag("aeroway"))){ //$NON-NLS-1$ //$NON-NLS-2$
 			name = e.getTag(OSMTagKey.REF); 
 		}
 		return name;
@@ -687,9 +713,22 @@ public class MapRenderingTypes {
 				}
 			});
 			log.info("Time to init " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
-		} catch (Exception e) {
+		} catch (IOException e) {
 			log.error("Unexpected error", e); //$NON-NLS-1$
 			e.printStackTrace();
+			throw new RuntimeException(e);
+		} catch (RuntimeException e) {
+			log.error("Unexpected error", e); //$NON-NLS-1$
+			e.printStackTrace();
+			throw e;
+		} catch (ParserConfigurationException e) {
+			log.error("Unexpected error", e); //$NON-NLS-1$
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} catch (SAXException e) {
+			log.error("Unexpected error", e); //$NON-NLS-1$
+			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 

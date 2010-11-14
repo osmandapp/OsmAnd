@@ -17,7 +17,6 @@ import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
-import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.data.City.CityType;
 import net.osmand.osm.LatLon;
@@ -673,16 +672,56 @@ public class BinaryMapIndexReader {
 			case OsmandOdb.OsmAndMapIndex.NAME_FIELD_NUMBER :
 				index.setName(codedIS.readString());
 				break;
+			case OsmandOdb.OsmAndMapIndex.RULES_FIELD_NUMBER :
+				int len = codedIS.readInt32();
+				int oldLimit = codedIS.pushLimit(len);
+				readMapEncodingRule(index);
+				codedIS.popLimit(oldLimit);
+				break;
 			case OsmandOdb.OsmAndMapIndex.LEVELS_FIELD_NUMBER :
 				int length = readInt();
 				int filePointer = codedIS.getTotalBytesRead();
-				int oldLimit = codedIS.pushLimit(length);
+				oldLimit = codedIS.pushLimit(length);
 				MapRoot mapRoot = readMapLevel();
 				mapRoot.length = length;
 				mapRoot.filePointer = filePointer;
 				index.getRoots().add(mapRoot);
 				codedIS.popLimit(oldLimit);
 				codedIS.seek(filePointer + length);
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+	
+	private void readMapEncodingRule(MapIndex index) throws IOException {
+		int subtype = 0;
+		int type = 0;
+		String tags = null;
+		String val = null;
+		while(true){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				if(!index.encodingRules.containsKey(tags)){
+					index.encodingRules.put(tags, new LinkedHashMap<String, Integer>());
+				}
+				index.encodingRules.get(tags).put(val, ((subtype << 5) | type));
+				return;
+			case OsmandOdb.MapEncodingRule.VALUE_FIELD_NUMBER :
+				val = codedIS.readString();
+				break;
+			case OsmandOdb.MapEncodingRule.TAG_FIELD_NUMBER :
+				tags = codedIS.readString();
+				break;
+			case OsmandOdb.MapEncodingRule.SUBTYPE_FIELD_NUMBER :
+				subtype = codedIS.readUInt32();
+				break;
+			case OsmandOdb.MapEncodingRule.TYPE_FIELD_NUMBER :
+				type = codedIS.readUInt32();
 				break;
 			default:
 				skipUnknownField(t);
@@ -1726,6 +1765,7 @@ public class BinaryMapIndexReader {
 	
 	public static class MapIndex extends BinaryIndexPart {
 		List<MapRoot> roots = new ArrayList<MapRoot>();
+		Map<String, Map<String, Integer>> encodingRules = new LinkedHashMap<String, Map<String,Integer>>();
 		
 		public List<MapRoot> getRoots() {
 			return roots;
@@ -1834,13 +1874,13 @@ public class BinaryMapIndexReader {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Minsk.map.pbf"), "r");
-//		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Belarus_4.map.pbf"), "r");
+		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Minsk.obf"), "r");
+//		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Belarus_4.obf"), "r");
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
 		System.out.println("VERSION " + reader.getVersion());
 		long time = System.currentTimeMillis();
 		
-		
+		System.out.println(reader.mapIndexes.get(0).encodingRules);
 		
 		// test search
 //		int sleft = MapUtils.get31TileNumberX(27.596);
@@ -1876,41 +1916,41 @@ public class BinaryMapIndexReader {
 //		System.out.println("Villages " + villages.size());
 		
 		// test transport
-		for(TransportIndex i : reader.transportIndexes){
-			System.out.println(i.left + " " + i.right + " " + i.top + " " + i.bottom);
-			System.out.println(i.stringTable.cacheOfStrings);
-			System.out.println(i.stringTable.offsets);
-			System.out.println(i.stringTable.window);
-		}
-		{
-			int sleft = MapUtils.get31TileNumberX(27.573);
-			int sright = MapUtils.get31TileNumberX(27.581);
-			int stop = MapUtils.get31TileNumberY(53.912);
-			int sbottom = MapUtils.get31TileNumberY(53.908);
-			for (TransportStop s : reader.searchTransportIndex(buildSearchTransportRequest(sleft, sright, stop, sbottom, 15, null))) {
-				System.out.println(s.getName());
-				for (int i : s.getReferencesToRoutes()) {
-					TransportRoute route = reader.getTransportRoute(i);
-					System.out.println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
-							+ route.getAvgBothDistance());
-				}
-			}
-		}
-		{
-			int sleft = MapUtils.get31TileNumberX(27.473);
-			int sright = MapUtils.get31TileNumberX(27.681);
-			int stop = MapUtils.get31TileNumberY(53.912);
-			int sbottom = MapUtils.get31TileNumberY(53.708);
-			for (TransportStop s : reader.searchTransportIndex(buildSearchTransportRequest(sleft, sright, stop, sbottom, 16, null))) {
-				System.out.println(s.getName());
-				for (int i : s.getReferencesToRoutes()) {
-					TransportRoute route = reader.getTransportRoute(i);
-					System.out.println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
-							+ route.getAvgBothDistance());
-				}
-			}
-
-		}
+//		for(TransportIndex i : reader.transportIndexes){
+//			System.out.println(i.left + " " + i.right + " " + i.top + " " + i.bottom);
+//			System.out.println(i.stringTable.cacheOfStrings);
+//			System.out.println(i.stringTable.offsets);
+//			System.out.println(i.stringTable.window);
+//		}
+//		{
+//			int sleft = MapUtils.get31TileNumberX(27.573);
+//			int sright = MapUtils.get31TileNumberX(27.581);
+//			int stop = MapUtils.get31TileNumberY(53.912);
+//			int sbottom = MapUtils.get31TileNumberY(53.908);
+//			for (TransportStop s : reader.searchTransportIndex(buildSearchTransportRequest(sleft, sright, stop, sbottom, 15, null))) {
+//				System.out.println(s.getName());
+//				for (int i : s.getReferencesToRoutes()) {
+//					TransportRoute route = reader.getTransportRoute(i);
+//					System.out.println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
+//							+ route.getAvgBothDistance());
+//				}
+//			}
+//		}
+//		{
+//			int sleft = MapUtils.get31TileNumberX(27.473);
+//			int sright = MapUtils.get31TileNumberX(27.681);
+//			int stop = MapUtils.get31TileNumberY(53.912);
+//			int sbottom = MapUtils.get31TileNumberY(53.708);
+//			for (TransportStop s : reader.searchTransportIndex(buildSearchTransportRequest(sleft, sright, stop, sbottom, 16, null))) {
+//				System.out.println(s.getName());
+//				for (int i : s.getReferencesToRoutes()) {
+//					TransportRoute route = reader.getTransportRoute(i);
+//					System.out.println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
+//							+ route.getAvgBothDistance());
+//				}
+//			}
+//		}
+		
 		System.out.println("MEMORY " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()));
 		System.out.println("Time " + (System.currentTimeMillis() - time));
 	}

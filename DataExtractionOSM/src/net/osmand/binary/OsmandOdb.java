@@ -969,10 +969,25 @@ public final class OsmandOdb {
     public boolean hasName() { return hasName; }
     public java.lang.String getName() { return name_; }
     
+    // repeated .MapEncodingRule rules = 8;
+    public static final int RULES_FIELD_NUMBER = 8;
+    private java.util.List<net.osmand.binary.OsmandOdb.MapEncodingRule> rules_ =
+      java.util.Collections.emptyList();
+    public java.util.List<net.osmand.binary.OsmandOdb.MapEncodingRule> getRulesList() {
+      return rules_;
+    }
+    public int getRulesCount() { return rules_.size(); }
+    public net.osmand.binary.OsmandOdb.MapEncodingRule getRules(int index) {
+      return rules_.get(index);
+    }
+    
     private void initFields() {
     }
     public final boolean isInitialized() {
       for (net.osmand.binary.OsmandOdb.MapRootLevel element : getLevelsList()) {
+        if (!element.isInitialized()) return false;
+      }
+      for (net.osmand.binary.OsmandOdb.MapEncodingRule element : getRulesList()) {
         if (!element.isInitialized()) return false;
       }
       return true;
@@ -986,6 +1001,9 @@ public final class OsmandOdb {
       }
       if (hasName()) {
         output.writeString(3, getName());
+      }
+      for (net.osmand.binary.OsmandOdb.MapEncodingRule element : getRulesList()) {
+        output.writeMessage(8, element);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1003,6 +1021,10 @@ public final class OsmandOdb {
       if (hasName()) {
         size += com.google.protobuf.CodedOutputStream
           .computeStringSize(3, getName());
+      }
+      for (net.osmand.binary.OsmandOdb.MapEncodingRule element : getRulesList()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, element);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1150,6 +1172,10 @@ public final class OsmandOdb {
           result.levels_ =
             java.util.Collections.unmodifiableList(result.levels_);
         }
+        if (result.rules_ != java.util.Collections.EMPTY_LIST) {
+          result.rules_ =
+            java.util.Collections.unmodifiableList(result.rules_);
+        }
         net.osmand.binary.OsmandOdb.OsmAndMapIndex returnMe = result;
         result = null;
         return returnMe;
@@ -1174,6 +1200,12 @@ public final class OsmandOdb {
         }
         if (other.hasName()) {
           setName(other.getName());
+        }
+        if (!other.rules_.isEmpty()) {
+          if (result.rules_.isEmpty()) {
+            result.rules_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.MapEncodingRule>();
+          }
+          result.rules_.addAll(other.rules_);
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1208,6 +1240,12 @@ public final class OsmandOdb {
             }
             case 26: {
               setName(input.readString());
+              break;
+            }
+            case 66: {
+              net.osmand.binary.OsmandOdb.MapEncodingRule.Builder subBuilder = net.osmand.binary.OsmandOdb.MapEncodingRule.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addRules(subBuilder.buildPartial());
               break;
             }
           }
@@ -1287,6 +1325,57 @@ public final class OsmandOdb {
         return this;
       }
       
+      // repeated .MapEncodingRule rules = 8;
+      public java.util.List<net.osmand.binary.OsmandOdb.MapEncodingRule> getRulesList() {
+        return java.util.Collections.unmodifiableList(result.rules_);
+      }
+      public int getRulesCount() {
+        return result.getRulesCount();
+      }
+      public net.osmand.binary.OsmandOdb.MapEncodingRule getRules(int index) {
+        return result.getRules(index);
+      }
+      public Builder setRules(int index, net.osmand.binary.OsmandOdb.MapEncodingRule value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.rules_.set(index, value);
+        return this;
+      }
+      public Builder setRules(int index, net.osmand.binary.OsmandOdb.MapEncodingRule.Builder builderForValue) {
+        result.rules_.set(index, builderForValue.build());
+        return this;
+      }
+      public Builder addRules(net.osmand.binary.OsmandOdb.MapEncodingRule value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        if (result.rules_.isEmpty()) {
+          result.rules_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.MapEncodingRule>();
+        }
+        result.rules_.add(value);
+        return this;
+      }
+      public Builder addRules(net.osmand.binary.OsmandOdb.MapEncodingRule.Builder builderForValue) {
+        if (result.rules_.isEmpty()) {
+          result.rules_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.MapEncodingRule>();
+        }
+        result.rules_.add(builderForValue.build());
+        return this;
+      }
+      public Builder addAllRules(
+          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.MapEncodingRule> values) {
+        if (result.rules_.isEmpty()) {
+          result.rules_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.MapEncodingRule>();
+        }
+        super.addAll(values, result.rules_);
+        return this;
+      }
+      public Builder clearRules() {
+        result.rules_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:OsmAndMapIndex)
     }
     
@@ -1297,6 +1386,455 @@ public final class OsmandOdb {
     }
     
     // @@protoc_insertion_point(class_scope:OsmAndMapIndex)
+  }
+  
+  public static final class MapEncodingRule extends
+      com.google.protobuf.GeneratedMessage {
+    // Use MapEncodingRule.newBuilder() to construct.
+    private MapEncodingRule() {
+      initFields();
+    }
+    private MapEncodingRule(boolean noInit) {}
+    
+    private static final MapEncodingRule defaultInstance;
+    public static MapEncodingRule getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public MapEncodingRule getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return net.osmand.binary.OsmandOdb.internal_static_MapEncodingRule_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return net.osmand.binary.OsmandOdb.internal_static_MapEncodingRule_fieldAccessorTable;
+    }
+    
+    // required string tag = 3;
+    public static final int TAG_FIELD_NUMBER = 3;
+    private boolean hasTag;
+    private java.lang.String tag_ = "";
+    public boolean hasTag() { return hasTag; }
+    public java.lang.String getTag() { return tag_; }
+    
+    // optional string value = 5;
+    public static final int VALUE_FIELD_NUMBER = 5;
+    private boolean hasValue;
+    private java.lang.String value_ = "";
+    public boolean hasValue() { return hasValue; }
+    public java.lang.String getValue() { return value_; }
+    
+    // required uint32 type = 6;
+    public static final int TYPE_FIELD_NUMBER = 6;
+    private boolean hasType;
+    private int type_ = 0;
+    public boolean hasType() { return hasType; }
+    public int getType() { return type_; }
+    
+    // required uint32 subtype = 7;
+    public static final int SUBTYPE_FIELD_NUMBER = 7;
+    private boolean hasSubtype;
+    private int subtype_ = 0;
+    public boolean hasSubtype() { return hasSubtype; }
+    public int getSubtype() { return subtype_; }
+    
+    // optional uint32 minZoom = 9;
+    public static final int MINZOOM_FIELD_NUMBER = 9;
+    private boolean hasMinZoom;
+    private int minZoom_ = 0;
+    public boolean hasMinZoom() { return hasMinZoom; }
+    public int getMinZoom() { return minZoom_; }
+    
+    private void initFields() {
+    }
+    public final boolean isInitialized() {
+      if (!hasTag) return false;
+      if (!hasType) return false;
+      if (!hasSubtype) return false;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (hasTag()) {
+        output.writeString(3, getTag());
+      }
+      if (hasValue()) {
+        output.writeString(5, getValue());
+      }
+      if (hasType()) {
+        output.writeUInt32(6, getType());
+      }
+      if (hasSubtype()) {
+        output.writeUInt32(7, getSubtype());
+      }
+      if (hasMinZoom()) {
+        output.writeUInt32(9, getMinZoom());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasTag()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(3, getTag());
+      }
+      if (hasValue()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(5, getValue());
+      }
+      if (hasType()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(6, getType());
+      }
+      if (hasSubtype()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(7, getSubtype());
+      }
+      if (hasMinZoom()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(9, getMinZoom());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static net.osmand.binary.OsmandOdb.MapEncodingRule parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.MapEncodingRule parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.MapEncodingRule parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.MapEncodingRule parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.MapEncodingRule parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.MapEncodingRule parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.MapEncodingRule parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static net.osmand.binary.OsmandOdb.MapEncodingRule parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static net.osmand.binary.OsmandOdb.MapEncodingRule parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.MapEncodingRule parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(net.osmand.binary.OsmandOdb.MapEncodingRule prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private net.osmand.binary.OsmandOdb.MapEncodingRule result;
+      
+      // Construct using net.osmand.binary.OsmandOdb.MapEncodingRule.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new net.osmand.binary.OsmandOdb.MapEncodingRule();
+        return builder;
+      }
+      
+      protected net.osmand.binary.OsmandOdb.MapEncodingRule internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new net.osmand.binary.OsmandOdb.MapEncodingRule();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return net.osmand.binary.OsmandOdb.MapEncodingRule.getDescriptor();
+      }
+      
+      public net.osmand.binary.OsmandOdb.MapEncodingRule getDefaultInstanceForType() {
+        return net.osmand.binary.OsmandOdb.MapEncodingRule.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public net.osmand.binary.OsmandOdb.MapEncodingRule build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private net.osmand.binary.OsmandOdb.MapEncodingRule buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public net.osmand.binary.OsmandOdb.MapEncodingRule buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        net.osmand.binary.OsmandOdb.MapEncodingRule returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof net.osmand.binary.OsmandOdb.MapEncodingRule) {
+          return mergeFrom((net.osmand.binary.OsmandOdb.MapEncodingRule)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(net.osmand.binary.OsmandOdb.MapEncodingRule other) {
+        if (other == net.osmand.binary.OsmandOdb.MapEncodingRule.getDefaultInstance()) return this;
+        if (other.hasTag()) {
+          setTag(other.getTag());
+        }
+        if (other.hasValue()) {
+          setValue(other.getValue());
+        }
+        if (other.hasType()) {
+          setType(other.getType());
+        }
+        if (other.hasSubtype()) {
+          setSubtype(other.getSubtype());
+        }
+        if (other.hasMinZoom()) {
+          setMinZoom(other.getMinZoom());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 26: {
+              setTag(input.readString());
+              break;
+            }
+            case 42: {
+              setValue(input.readString());
+              break;
+            }
+            case 48: {
+              setType(input.readUInt32());
+              break;
+            }
+            case 56: {
+              setSubtype(input.readUInt32());
+              break;
+            }
+            case 72: {
+              setMinZoom(input.readUInt32());
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // required string tag = 3;
+      public boolean hasTag() {
+        return result.hasTag();
+      }
+      public java.lang.String getTag() {
+        return result.getTag();
+      }
+      public Builder setTag(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasTag = true;
+        result.tag_ = value;
+        return this;
+      }
+      public Builder clearTag() {
+        result.hasTag = false;
+        result.tag_ = getDefaultInstance().getTag();
+        return this;
+      }
+      
+      // optional string value = 5;
+      public boolean hasValue() {
+        return result.hasValue();
+      }
+      public java.lang.String getValue() {
+        return result.getValue();
+      }
+      public Builder setValue(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasValue = true;
+        result.value_ = value;
+        return this;
+      }
+      public Builder clearValue() {
+        result.hasValue = false;
+        result.value_ = getDefaultInstance().getValue();
+        return this;
+      }
+      
+      // required uint32 type = 6;
+      public boolean hasType() {
+        return result.hasType();
+      }
+      public int getType() {
+        return result.getType();
+      }
+      public Builder setType(int value) {
+        result.hasType = true;
+        result.type_ = value;
+        return this;
+      }
+      public Builder clearType() {
+        result.hasType = false;
+        result.type_ = 0;
+        return this;
+      }
+      
+      // required uint32 subtype = 7;
+      public boolean hasSubtype() {
+        return result.hasSubtype();
+      }
+      public int getSubtype() {
+        return result.getSubtype();
+      }
+      public Builder setSubtype(int value) {
+        result.hasSubtype = true;
+        result.subtype_ = value;
+        return this;
+      }
+      public Builder clearSubtype() {
+        result.hasSubtype = false;
+        result.subtype_ = 0;
+        return this;
+      }
+      
+      // optional uint32 minZoom = 9;
+      public boolean hasMinZoom() {
+        return result.hasMinZoom();
+      }
+      public int getMinZoom() {
+        return result.getMinZoom();
+      }
+      public Builder setMinZoom(int value) {
+        result.hasMinZoom = true;
+        result.minZoom_ = value;
+        return this;
+      }
+      public Builder clearMinZoom() {
+        result.hasMinZoom = false;
+        result.minZoom_ = 0;
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:MapEncodingRule)
+    }
+    
+    static {
+      defaultInstance = new MapEncodingRule(true);
+      net.osmand.binary.OsmandOdb.internalForceInit();
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:MapEncodingRule)
   }
   
   public static final class MapRootLevel extends
@@ -10349,6 +10887,11 @@ public final class OsmandOdb {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_OsmAndMapIndex_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_MapEncodingRule_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_MapEncodingRule_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_MapRootLevel_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -10452,63 +10995,67 @@ public final class OsmandOdb {
       "OsmAndMapIndex\022)\n\014addressIndex\030\003 \003(\0132\023.O" +
       "smAndAddressIndex\022-\n\016transportIndex\030\004 \003(" +
       "\0132\025.OsmAndTransportIndex\022\026\n\016versionConfi" +
-      "rm\030  \002(\r\"\030\n\013StringTable\022\t\n\001s\030\001 \003(\t\"=\n\016Os" +
+      "rm\030  \002(\r\"\030\n\013StringTable\022\t\n\001s\030\001 \003(\t\"^\n\016Os" +
       "mAndMapIndex\022\035\n\006levels\030\001 \003(\0132\r.MapRootLe" +
-      "vel\022\014\n\004name\030\003 \001(\t\"\202\001\n\014MapRootLevel\022\017\n\007ma" +
-      "xZoom\030\001 \002(\005\022\017\n\007minZoom\030\002 \002(\005\022\014\n\004left\030\003 \002" +
-      "(\005\022\r\n\005right\030\004 \002(\005\022\013\n\003top\030\005 \002(\005\022\016\n\006bottom",
-      "\030\006 \002(\005\022\026\n\004root\030\007 \003(\0132\010.MapTree\"\344\001\n\007MapTr" +
-      "ee\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003" +
-      " \002(\021\022\016\n\006bottom\030\004 \002(\021\022$\n\016oldstringTable\030\005" +
-      " \001(\0132\014.StringTable\022\021\n\toldbaseId\030\006 \001(\004\022\032\n" +
-      "\010subtrees\030\007 \003(\0132\010.MapTree\022\027\n\005leafs\030\010 \003(\013" +
-      "2\010.MapData\022\016\n\006baseId\030\n \001(\004\022!\n\013stringTabl" +
-      "e\030\013 \001(\0132\014.StringTable\"v\n\007MapData\022\023\n\013coor" +
-      "dinates\030\001 \002(\014\022\r\n\005types\030\002 \002(\014\022\n\n\002id\030\003 \002(\022" +
-      "\022\020\n\010stringId\030\004 \001(\r\022\024\n\014restrictions\030\005 \001(\014" +
-      "\022\023\n\013highwayMeta\030\006 \001(\005\"\225\001\n\022OsmAndAddressI",
-      "ndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en\030\002 \001(\t\022\034\n\006c" +
-      "ities\030\005 \001(\0132\014.CitiesIndex\022\"\n\tpostcodes\030\006" +
-      " \001(\0132\017.PostcodesIndex\022\036\n\010villages\030\007 \001(\0132" +
-      "\014.CitiesIndex\")\n\013CitiesIndex\022\032\n\006cities\030\001" +
-      " \003(\0132\n.CityIndex\"3\n\016PostcodesIndex\022!\n\tpo" +
-      "stcodes\030\001 \003(\0132\016.PostcodeIndex\"\253\001\n\tCityIn" +
-      "dex\022\021\n\tcity_type\030\001 \002(\r\022\014\n\004name\030\002 \002(\t\022\017\n\007" +
-      "name_en\030\003 \001(\t\022\n\n\002id\030\004 \001(\004\022\t\n\001x\030\005 \002(\007\022\t\n\001" +
-      "y\030\006 \002(\007\022+\n\rintersections\030\016 \001(\0132\024.Interes" +
-      "ectedStreets\022\035\n\007streets\030\022 \003(\0132\014.StreetIn",
-      "dex\"A\n\023InteresectedStreets\022*\n\rintersecti" +
-      "ons\030\005 \003(\0132\023.StreetIntersection\"x\n\022Street" +
-      "Intersection\022\032\n\022intersectedStreet1\030\002 \002(\r" +
-      "\022\032\n\022intersectedStreet2\030\003 \002(\r\022\024\n\014intersec" +
-      "tedX\030\004 \002(\021\022\024\n\014intersectedY\030\005 \002(\021\"V\n\rPost" +
-      "codeIndex\022\020\n\010postcode\030\001 \002(\t\022\t\n\001x\030\002 \002(\007\022\t" +
-      "\n\001y\030\003 \002(\007\022\035\n\007streets\030\005 \003(\0132\014.StreetIndex" +
-      "\"q\n\013StreetIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en" +
-      "\030\002 \001(\t\022\t\n\001x\030\003 \002(\021\022\t\n\001y\030\004 \002(\021\022\n\n\002id\030\006 \001(\004" +
-      "\022!\n\tbuildings\030\022 \003(\0132\016.BuildingIndex\"b\n\rB",
-      "uildingIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en\030\002 " +
-      "\001(\t\022\n\n\002id\030\005 \001(\004\022\020\n\010postcode\030\006 \001(\t\022\t\n\001x\030\003" +
-      " \002(\021\022\t\n\001y\030\004 \002(\021\"2\n\017TransportRoutes\022\037\n\006ro" +
-      "utes\030\006 \003(\0132\017.TransportRoute\"\317\001\n\016Transpor" +
-      "tRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003 \001(\r\022\020\n\010oper" +
-      "ator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022\014\n\004name\030\006 \001(\r\022\017\n" +
-      "\007name_en\030\007 \001(\r\022\020\n\010distance\030\010 \001(\r\022(\n\013dire" +
-      "ctStops\030\017 \003(\0132\023.TransportRouteStop\022)\n\014re" +
-      "verseStops\030\020 \003(\0132\023.TransportRouteStop\"W\n" +
-      "\022TransportRouteStop\022\n\n\002id\030\001 \002(\022\022\n\n\002dx\030\002 ",
-      "\002(\021\022\n\n\002dy\030\003 \002(\021\022\014\n\004name\030\006 \002(\r\022\017\n\007name_en" +
-      "\030\007 \001(\r\"b\n\rTransportStop\022\n\n\002dx\030\001 \002(\021\022\n\n\002d" +
-      "y\030\002 \002(\021\022\n\n\002id\030\005 \002(\022\022\014\n\004name\030\006 \002(\r\022\017\n\007nam" +
-      "e_en\030\007 \001(\r\022\016\n\006routes\030\020 \003(\r\"\244\001\n\022Transport" +
-      "StopsTree\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013" +
-      "\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022%\n\010subtrees\030" +
-      "\007 \003(\0132\023.TransportStopsTree\022\035\n\005leafs\030\010 \003(" +
-      "\0132\016.TransportStop\022\016\n\006baseId\030\020 \001(\004\"\215\001\n\024Os" +
-      "mAndTransportIndex\022\014\n\004name\030\001 \001(\t\022 \n\006rout" +
-      "es\030\003 \001(\0132\020.TransportRoutes\022\"\n\005stops\030\006 \001(",
-      "\0132\023.TransportStopsTree\022!\n\013stringTable\030\t " +
-      "\002(\0132\014.StringTableB\023\n\021net.osmand.binary"
+      "vel\022\014\n\004name\030\003 \001(\t\022\037\n\005rules\030\010 \003(\0132\020.MapEn" +
+      "codingRule\"]\n\017MapEncodingRule\022\013\n\003tag\030\003 \002" +
+      "(\t\022\r\n\005value\030\005 \001(\t\022\014\n\004type\030\006 \002(\r\022\017\n\007subty",
+      "pe\030\007 \002(\r\022\017\n\007minZoom\030\t \001(\r\"\202\001\n\014MapRootLev" +
+      "el\022\017\n\007maxZoom\030\001 \002(\005\022\017\n\007minZoom\030\002 \002(\005\022\014\n\004" +
+      "left\030\003 \002(\005\022\r\n\005right\030\004 \002(\005\022\013\n\003top\030\005 \002(\005\022\016" +
+      "\n\006bottom\030\006 \002(\005\022\026\n\004root\030\007 \003(\0132\010.MapTree\"\344" +
+      "\001\n\007MapTree\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022" +
+      "\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022$\n\016oldstrin" +
+      "gTable\030\005 \001(\0132\014.StringTable\022\021\n\toldbaseId\030" +
+      "\006 \001(\004\022\032\n\010subtrees\030\007 \003(\0132\010.MapTree\022\027\n\005lea" +
+      "fs\030\010 \003(\0132\010.MapData\022\016\n\006baseId\030\n \001(\004\022!\n\013st" +
+      "ringTable\030\013 \001(\0132\014.StringTable\"v\n\007MapData",
+      "\022\023\n\013coordinates\030\001 \002(\014\022\r\n\005types\030\002 \002(\014\022\n\n\002" +
+      "id\030\003 \002(\022\022\020\n\010stringId\030\004 \001(\r\022\024\n\014restrictio" +
+      "ns\030\005 \001(\014\022\023\n\013highwayMeta\030\006 \001(\005\"\225\001\n\022OsmAnd" +
+      "AddressIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007name_en\030\002 " +
+      "\001(\t\022\034\n\006cities\030\005 \001(\0132\014.CitiesIndex\022\"\n\tpos" +
+      "tcodes\030\006 \001(\0132\017.PostcodesIndex\022\036\n\010village" +
+      "s\030\007 \001(\0132\014.CitiesIndex\")\n\013CitiesIndex\022\032\n\006" +
+      "cities\030\001 \003(\0132\n.CityIndex\"3\n\016PostcodesInd" +
+      "ex\022!\n\tpostcodes\030\001 \003(\0132\016.PostcodeIndex\"\253\001" +
+      "\n\tCityIndex\022\021\n\tcity_type\030\001 \002(\r\022\014\n\004name\030\002",
+      " \002(\t\022\017\n\007name_en\030\003 \001(\t\022\n\n\002id\030\004 \001(\004\022\t\n\001x\030\005" +
+      " \002(\007\022\t\n\001y\030\006 \002(\007\022+\n\rintersections\030\016 \001(\0132\024" +
+      ".InteresectedStreets\022\035\n\007streets\030\022 \003(\0132\014." +
+      "StreetIndex\"A\n\023InteresectedStreets\022*\n\rin" +
+      "tersections\030\005 \003(\0132\023.StreetIntersection\"x" +
+      "\n\022StreetIntersection\022\032\n\022intersectedStree" +
+      "t1\030\002 \002(\r\022\032\n\022intersectedStreet2\030\003 \002(\r\022\024\n\014" +
+      "intersectedX\030\004 \002(\021\022\024\n\014intersectedY\030\005 \002(\021" +
+      "\"V\n\rPostcodeIndex\022\020\n\010postcode\030\001 \002(\t\022\t\n\001x" +
+      "\030\002 \002(\007\022\t\n\001y\030\003 \002(\007\022\035\n\007streets\030\005 \003(\0132\014.Str",
+      "eetIndex\"q\n\013StreetIndex\022\014\n\004name\030\001 \002(\t\022\017\n" +
+      "\007name_en\030\002 \001(\t\022\t\n\001x\030\003 \002(\021\022\t\n\001y\030\004 \002(\021\022\n\n\002" +
+      "id\030\006 \001(\004\022!\n\tbuildings\030\022 \003(\0132\016.BuildingIn" +
+      "dex\"b\n\rBuildingIndex\022\014\n\004name\030\001 \002(\t\022\017\n\007na" +
+      "me_en\030\002 \001(\t\022\n\n\002id\030\005 \001(\004\022\020\n\010postcode\030\006 \001(" +
+      "\t\022\t\n\001x\030\003 \002(\021\022\t\n\001y\030\004 \002(\021\"2\n\017TransportRout" +
+      "es\022\037\n\006routes\030\006 \003(\0132\017.TransportRoute\"\317\001\n\016" +
+      "TransportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003 \001(\r" +
+      "\022\020\n\010operator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022\014\n\004name\030" +
+      "\006 \001(\r\022\017\n\007name_en\030\007 \001(\r\022\020\n\010distance\030\010 \001(\r",
+      "\022(\n\013directStops\030\017 \003(\0132\023.TransportRouteSt" +
+      "op\022)\n\014reverseStops\030\020 \003(\0132\023.TransportRout" +
+      "eStop\"W\n\022TransportRouteStop\022\n\n\002id\030\001 \002(\022\022" +
+      "\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\014\n\004name\030\006 \002(\r\022\017\n" +
+      "\007name_en\030\007 \001(\r\"b\n\rTransportStop\022\n\n\002dx\030\001 " +
+      "\002(\021\022\n\n\002dy\030\002 \002(\021\022\n\n\002id\030\005 \002(\022\022\014\n\004name\030\006 \002(" +
+      "\r\022\017\n\007name_en\030\007 \001(\r\022\016\n\006routes\030\020 \003(\r\"\244\001\n\022T" +
+      "ransportStopsTree\022\014\n\004left\030\001 \002(\021\022\r\n\005right" +
+      "\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022%\n\010s" +
+      "ubtrees\030\007 \003(\0132\023.TransportStopsTree\022\035\n\005le",
+      "afs\030\010 \003(\0132\016.TransportStop\022\016\n\006baseId\030\020 \001(" +
+      "\004\"\215\001\n\024OsmAndTransportIndex\022\014\n\004name\030\001 \001(\t" +
+      "\022 \n\006routes\030\003 \001(\0132\020.TransportRoutes\022\"\n\005st" +
+      "ops\030\006 \001(\0132\023.TransportStopsTree\022!\n\013string" +
+      "Table\030\t \002(\0132\014.StringTableB\023\n\021net.osmand." +
+      "binary"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10536,11 +11083,19 @@ public final class OsmandOdb {
           internal_static_OsmAndMapIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndMapIndex_descriptor,
-              new java.lang.String[] { "Levels", "Name", },
+              new java.lang.String[] { "Levels", "Name", "Rules", },
               net.osmand.binary.OsmandOdb.OsmAndMapIndex.class,
               net.osmand.binary.OsmandOdb.OsmAndMapIndex.Builder.class);
-          internal_static_MapRootLevel_descriptor =
+          internal_static_MapEncodingRule_descriptor =
             getDescriptor().getMessageTypes().get(3);
+          internal_static_MapEncodingRule_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_MapEncodingRule_descriptor,
+              new java.lang.String[] { "Tag", "Value", "Type", "Subtype", "MinZoom", },
+              net.osmand.binary.OsmandOdb.MapEncodingRule.class,
+              net.osmand.binary.OsmandOdb.MapEncodingRule.Builder.class);
+          internal_static_MapRootLevel_descriptor =
+            getDescriptor().getMessageTypes().get(4);
           internal_static_MapRootLevel_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_MapRootLevel_descriptor,
@@ -10548,7 +11103,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.MapRootLevel.class,
               net.osmand.binary.OsmandOdb.MapRootLevel.Builder.class);
           internal_static_MapTree_descriptor =
-            getDescriptor().getMessageTypes().get(4);
+            getDescriptor().getMessageTypes().get(5);
           internal_static_MapTree_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_MapTree_descriptor,
@@ -10556,7 +11111,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.MapTree.class,
               net.osmand.binary.OsmandOdb.MapTree.Builder.class);
           internal_static_MapData_descriptor =
-            getDescriptor().getMessageTypes().get(5);
+            getDescriptor().getMessageTypes().get(6);
           internal_static_MapData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_MapData_descriptor,
@@ -10564,7 +11119,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.MapData.class,
               net.osmand.binary.OsmandOdb.MapData.Builder.class);
           internal_static_OsmAndAddressIndex_descriptor =
-            getDescriptor().getMessageTypes().get(6);
+            getDescriptor().getMessageTypes().get(7);
           internal_static_OsmAndAddressIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndAddressIndex_descriptor,
@@ -10572,7 +11127,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.OsmAndAddressIndex.class,
               net.osmand.binary.OsmandOdb.OsmAndAddressIndex.Builder.class);
           internal_static_CitiesIndex_descriptor =
-            getDescriptor().getMessageTypes().get(7);
+            getDescriptor().getMessageTypes().get(8);
           internal_static_CitiesIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CitiesIndex_descriptor,
@@ -10580,7 +11135,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.CitiesIndex.class,
               net.osmand.binary.OsmandOdb.CitiesIndex.Builder.class);
           internal_static_PostcodesIndex_descriptor =
-            getDescriptor().getMessageTypes().get(8);
+            getDescriptor().getMessageTypes().get(9);
           internal_static_PostcodesIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PostcodesIndex_descriptor,
@@ -10588,7 +11143,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.PostcodesIndex.class,
               net.osmand.binary.OsmandOdb.PostcodesIndex.Builder.class);
           internal_static_CityIndex_descriptor =
-            getDescriptor().getMessageTypes().get(9);
+            getDescriptor().getMessageTypes().get(10);
           internal_static_CityIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_CityIndex_descriptor,
@@ -10596,7 +11151,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.CityIndex.class,
               net.osmand.binary.OsmandOdb.CityIndex.Builder.class);
           internal_static_InteresectedStreets_descriptor =
-            getDescriptor().getMessageTypes().get(10);
+            getDescriptor().getMessageTypes().get(11);
           internal_static_InteresectedStreets_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_InteresectedStreets_descriptor,
@@ -10604,7 +11159,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.InteresectedStreets.class,
               net.osmand.binary.OsmandOdb.InteresectedStreets.Builder.class);
           internal_static_StreetIntersection_descriptor =
-            getDescriptor().getMessageTypes().get(11);
+            getDescriptor().getMessageTypes().get(12);
           internal_static_StreetIntersection_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_StreetIntersection_descriptor,
@@ -10612,7 +11167,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.StreetIntersection.class,
               net.osmand.binary.OsmandOdb.StreetIntersection.Builder.class);
           internal_static_PostcodeIndex_descriptor =
-            getDescriptor().getMessageTypes().get(12);
+            getDescriptor().getMessageTypes().get(13);
           internal_static_PostcodeIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_PostcodeIndex_descriptor,
@@ -10620,7 +11175,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.PostcodeIndex.class,
               net.osmand.binary.OsmandOdb.PostcodeIndex.Builder.class);
           internal_static_StreetIndex_descriptor =
-            getDescriptor().getMessageTypes().get(13);
+            getDescriptor().getMessageTypes().get(14);
           internal_static_StreetIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_StreetIndex_descriptor,
@@ -10628,7 +11183,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.StreetIndex.class,
               net.osmand.binary.OsmandOdb.StreetIndex.Builder.class);
           internal_static_BuildingIndex_descriptor =
-            getDescriptor().getMessageTypes().get(14);
+            getDescriptor().getMessageTypes().get(15);
           internal_static_BuildingIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_BuildingIndex_descriptor,
@@ -10636,7 +11191,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.BuildingIndex.class,
               net.osmand.binary.OsmandOdb.BuildingIndex.Builder.class);
           internal_static_TransportRoutes_descriptor =
-            getDescriptor().getMessageTypes().get(15);
+            getDescriptor().getMessageTypes().get(16);
           internal_static_TransportRoutes_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TransportRoutes_descriptor,
@@ -10644,7 +11199,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.TransportRoutes.class,
               net.osmand.binary.OsmandOdb.TransportRoutes.Builder.class);
           internal_static_TransportRoute_descriptor =
-            getDescriptor().getMessageTypes().get(16);
+            getDescriptor().getMessageTypes().get(17);
           internal_static_TransportRoute_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TransportRoute_descriptor,
@@ -10652,7 +11207,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.TransportRoute.class,
               net.osmand.binary.OsmandOdb.TransportRoute.Builder.class);
           internal_static_TransportRouteStop_descriptor =
-            getDescriptor().getMessageTypes().get(17);
+            getDescriptor().getMessageTypes().get(18);
           internal_static_TransportRouteStop_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TransportRouteStop_descriptor,
@@ -10660,7 +11215,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.TransportRouteStop.class,
               net.osmand.binary.OsmandOdb.TransportRouteStop.Builder.class);
           internal_static_TransportStop_descriptor =
-            getDescriptor().getMessageTypes().get(18);
+            getDescriptor().getMessageTypes().get(19);
           internal_static_TransportStop_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TransportStop_descriptor,
@@ -10668,7 +11223,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.TransportStop.class,
               net.osmand.binary.OsmandOdb.TransportStop.Builder.class);
           internal_static_TransportStopsTree_descriptor =
-            getDescriptor().getMessageTypes().get(19);
+            getDescriptor().getMessageTypes().get(20);
           internal_static_TransportStopsTree_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TransportStopsTree_descriptor,
@@ -10676,7 +11231,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.TransportStopsTree.class,
               net.osmand.binary.OsmandOdb.TransportStopsTree.Builder.class);
           internal_static_OsmAndTransportIndex_descriptor =
-            getDescriptor().getMessageTypes().get(20);
+            getDescriptor().getMessageTypes().get(21);
           internal_static_OsmAndTransportIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndTransportIndex_descriptor,
