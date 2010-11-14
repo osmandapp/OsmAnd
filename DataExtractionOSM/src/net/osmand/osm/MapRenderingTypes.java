@@ -159,8 +159,10 @@ public class MapRenderingTypes {
 	
 	private static TIntByteMap objectsToMinZoom = null;
 	
-	private static Map<String, Map<String, AmenityType>> amenityTagValToType = null;
-	private static Map<String, Map<String, String>> amenityTagValToPrefix = null;
+	
+	private static Map<String, AmenityType> amenityTagValToType = null;
+	private static Map<String, String> amenityTagValToPrefix = null;
+	private static String TAG_DELIMETER = "&&"; //$NON-NLS-1$
 	
 	private static Map<AmenityType, Map<String, String>> amenityTypeNameToTagVal = null;
 	private static Map<String, AmenityType> amenityNameToType = null;
@@ -529,9 +531,7 @@ public class MapRenderingTypes {
 	
 	
 	private static void initAmenityMap(){
-		if (amenityTagValToType == null) {
-			amenityTagValToType = new LinkedHashMap<String, Map<String, AmenityType>>();
-			amenityTagValToPrefix = new LinkedHashMap<String, Map<String, String>>();
+		if (amenityTypeNameToTagVal == null) {
 			amenityTypeNameToTagVal = new LinkedHashMap<AmenityType, Map<String, String>>();
 			init(INIT_AMENITY_MAP);
 		}
@@ -550,34 +550,6 @@ public class MapRenderingTypes {
 		return objectsToMinZoom;
 	}
 	
-	public static Map<String, Map<String, AmenityType>> getAmenityTagValToTypeMap() {
-		initAmenityMap();
-		return amenityTagValToType;
-	}
-	
-	public static AmenityType getAmenityType(String tag, String val){
-		Map<String, Map<String, AmenityType>> amenityTagValToTypeMap = getAmenityTagValToTypeMap();
-		if(amenityTagValToTypeMap.containsKey(tag)){
-			return amenityTagValToTypeMap.get(tag).get(val);
-		}
-		return null;
-	}
-	
-	public static String getAmenitySubtype(String tag, String val){
-		Map<String, Map<String, String>> amenityTagValToPrefix = getAmenityTagValToPrefix();
-		if(amenityTagValToPrefix.containsKey(tag)){
-			String prefix = amenityTagValToPrefix.get(tag).get(val);
-			if(prefix != null){
-				return prefix + val;
-			}
-		}
-		return val;
-	}
-	
-	public static Map<String, Map<String, String>> getAmenityTagValToPrefix() {
-		initAmenityMap();
-		return amenityTagValToPrefix;
-	}
 	
 	public static Map<AmenityType, Map<String, String>> getAmenityTypeNameToTagVal() {
 		initAmenityMap();
@@ -605,24 +577,14 @@ public class MapRenderingTypes {
 
 	
 	private static void registerAmenity(String tag, String val, int type, int subtype){
-		AmenityType t = getAmenityType(type, subtype);
+		AmenityType t = getAmenityType(tag, val);
 		if (t != null) {
-			if (!amenityTagValToType.containsKey(tag)) {
-				amenityTagValToType.put(tag, new LinkedHashMap<String, AmenityType>());
-			}
-			amenityTagValToType.get(tag).put(val, t);
-			String prefix = getAmenityPrefix(type, subtype);
-			if(prefix != null){
-				if (!amenityTagValToPrefix.containsKey(tag)) {
-					amenityTagValToPrefix.put(tag, new LinkedHashMap<String, String>());
-				}
-				amenityTagValToPrefix.get(tag).put(val, prefix);
-			}
 			if (val != null) {
 				if (!amenityTypeNameToTagVal.containsKey(t)) {
 					amenityTypeNameToTagVal.put(t, new LinkedHashMap<String, String>());
 				}
 				String name = val;
+				String prefix = getAmenitySubtypePrefix(tag, val);
 				if (prefix != null) {
 					name = prefix + name;
 				}
@@ -651,144 +613,8 @@ public class MapRenderingTypes {
 	}
 
 	
-
-
-	private static String getAmenityPrefix(int type, int subtype) {
-		switch (type) {
-		case 1:
-			if (subtype >= 50 && subtype < 58) {
-				return "traffic_calming_"; //$NON-NLS-1$
-			}
-			break;
-		case 7:
-			return "power_"; //$NON-NLS-1$
-		case 3:
-			if(subtype != 3){
-				return "water_"; //$NON-NLS-1$
-			}
-			break;
-		case 4:
-			// ignore subway_entrance
-			if(subtype != 26){
-				return "railway_"; //$NON-NLS-1$
-			}
-		case 5:
-			return "aeroway_"; //$NON-NLS-1$
-		case 6:
-			return "aerialway_"; //$NON-NLS-1$
-
-		}
-		return null;
-	}
 	
-	private static AmenityType getAmenityType(int type, int subtype){
-		AmenityType t = null;
-		switch (type) {
-		case 1:
-			if(subtype >= 50 && subtype <= 58){
-				t = AmenityType.BARRIER;
-			} else if(subtype < 32 || (subtype >= 40 && subtype < 45)){
-				t = AmenityType.TRANSPORTATION;
-			}
-			break;
-		case 2:
-			t = AmenityType.BARRIER;
-			break;
-		case 3:
-			if(subtype <= 6){
-				t = AmenityType.NATURAL;
-			} else {
-				t = AmenityType.MAN_MADE;
-			}
-			break;
-		case 4:
-		case 5:
-			t = AmenityType.TRANSPORTATION;
-			break;
-		case 6:
-			if(subtype != 8){
-				t = AmenityType.TRANSPORTATION;
-			}
-			break;
-		case 7:
-			if(subtype >= 4 && subtype <= 8){
-				t = AmenityType.MAN_MADE;
-			} else {
-				t = null; // do not add power tower to index
-			}
-			break;
-		case 8:
-			if(subtype <= 5){
-				t = null; // do not index building
-			} else {
-				t = AmenityType.MAN_MADE;
-			}
-			break;
-		case 9:
-			t = AmenityType.LEISURE;
-			break;
-		case 10:
-			t = AmenityType.OFFICE;
-			break;
-		case 11:
-			t = AmenityType.SHOP;
-			break;
-		case 12:
-			t = AmenityType.EMERGENCY;
-			break;
-		case 13:
-			t = AmenityType.TOURISM;
-			break;
-		case 14:
-			t = AmenityType.HISTORIC;
-			break;
-		case 15:
-			if(subtype == 2 || subtype == 4 || subtype == 10 || (subtype>= 17 & subtype < 20) ||subtype == 21
-					||subtype == 22 ||subtype == 25 ||subtype == 26 ||subtype == 27){
-				t = AmenityType.LANDUSE;
-			}
-			break;
-		case 16:
-			t = AmenityType.MILITARY;
-			break;
-		case 17:
-			t = AmenityType.NATURAL;
-			break;
-		case 18:
-			t = AmenityType.SUSTENANCE;
-			break;
-		case 19:
-			t = AmenityType.EDUCATION;
-			break;
-		case 20:
-			t = AmenityType.TRANSPORTATION;
-			break;
-		case 21:
-			t = AmenityType.FINANCE;
-			break;
-		case 22:
-			t = AmenityType.HEALTHCARE;
-			break;
-		case 23:
-			t = AmenityType.ENTERTAINMENT;
-			break;
-		case 24:
-			t = AmenityType.OTHER;
-			break;
-		case 25:
-			if(subtype >= 6 && subtype <= 12){
-				t = AmenityType.ADMINISTRATIVE;
-			}
-			break;
-		case 27:
-			t = AmenityType.SPORT;
-			break;
-
-		default:
-			break;
-		}
-		return t;
-	}
+	
 	
 	private final static int INIT_RULE_TYPES = 0;
 	private final static int INIT_AMENITY_MAP = 1;
@@ -887,6 +713,184 @@ public class MapRenderingTypes {
 		}
 	}
 	
+	public static String getAmenitySubtype(String tag, String val){
+		String prefix = getAmenitySubtypePrefix(tag, val);
+		if(prefix != null){
+			return prefix + val;
+		}
+		return val;
+	}
+	
+	public static String getAmenitySubtypePrefix(String tag, String val){
+		if(amenityTagValToPrefix == null){
+			amenityTagValToPrefix = new LinkedHashMap<String, String>();
+			amenityTagValToPrefix.put("traffic_calming", "traffic_calming_"); //$NON-NLS-1$ //$NON-NLS-2$
+			amenityTagValToPrefix.put("power", "power_");  //$NON-NLS-1$//$NON-NLS-2$
+			amenityTagValToPrefix.put("waterway", "water_"); //$NON-NLS-1$ //$NON-NLS-2$
+			amenityTagValToPrefix.put("waterway"+TAG_DELIMETER+"riverbank", null); //$NON-NLS-1$ //$NON-NLS-2$
+			
+			amenityTagValToPrefix.put("railway", "railway_"); //$NON-NLS-1$ //$NON-NLS-2$
+			amenityTagValToPrefix.put("railway"+TAG_DELIMETER+"subway_entrance", null); //$NON-NLS-1$ //$NON-NLS-2$
+			
+			amenityTagValToPrefix.put("aeroway", "aeroway_"); //$NON-NLS-1$ //$NON-NLS-2$
+			amenityTagValToPrefix.put("aerialway", "aerialway_"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		if(val != null && amenityTagValToPrefix.containsKey(tag+TAG_DELIMETER+val)){
+			return amenityTagValToPrefix.get(tag+TAG_DELIMETER+val);
+		}
+		return amenityTagValToPrefix.get(tag);
+	}
+	
+	public static AmenityType getAmenityType(String tag, String val){
+		// register amenity types
+		if(amenityTagValToType == null){
+			initAmenityTagValToType();
+		}
+		if(amenityTagValToType.containsKey(tag+TAG_DELIMETER+val)){
+			return amenityTagValToType.get(tag+TAG_DELIMETER+val);
+		}
+		return amenityTagValToType.get(tag);
+	}
+
+	
+	
+	private static void initAmenityTagValToType() {
+		amenityTagValToType = new LinkedHashMap<String, AmenityType>();
+		amenityTagValToType.put("highway", AmenityType.TRANSPORTATION); //$NON-NLS-1$
+		amenityTagValToType.put("highway"+TAG_DELIMETER+"mini_roundabout", null); //$NON-NLS-1$ //$NON-NLS-2$
+		amenityTagValToType.put("highway"+TAG_DELIMETER+"stop", null); //$NON-NLS-1$ //$NON-NLS-2$
+		amenityTagValToType.put("highway"+TAG_DELIMETER+"give_way", null); //$NON-NLS-1$ //$NON-NLS-2$
+		amenityTagValToType.put("highway"+TAG_DELIMETER+"traffic_signals", null); //$NON-NLS-1$ //$NON-NLS-2$
+		amenityTagValToType.put("highway"+TAG_DELIMETER+"street_lamp", null); //$NON-NLS-1$ //$NON-NLS-2$
+		amenityTagValToType.put("highway"+TAG_DELIMETER+"motorway_junction", null); //$NON-NLS-1$ //$NON-NLS-2$
+		
+		amenityTagValToType.put("traffic_calming", AmenityType.BARRIER); //$NON-NLS-1$
+		amenityTagValToType.put("barrier", AmenityType.BARRIER); //$NON-NLS-1$
+		amenityTagValToType.put("natural"+TAG_DELIMETER+"hedge", AmenityType.BARRIER);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("historic"+TAG_DELIMETER+"city_walls", AmenityType.BARRIER); //$NON-NLS-1$ //$NON-NLS-2$
+		amenityTagValToType.put("highway"+TAG_DELIMETER+"gate", AmenityType.BARRIER); //$NON-NLS-1$ //$NON-NLS-2$
+		
+		amenityTagValToType.put("waterway"+TAG_DELIMETER+"stream", AmenityType.NATURAL);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("waterway"+TAG_DELIMETER+"riverbank", AmenityType.NATURAL);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("waterway"+TAG_DELIMETER+"river", AmenityType.NATURAL);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("waterway"+TAG_DELIMETER+"canal", AmenityType.NATURAL);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("waterway"+TAG_DELIMETER+"ditch", AmenityType.NATURAL);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("waterway"+TAG_DELIMETER+"drain", AmenityType.NATURAL);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("waterway", AmenityType.MAN_MADE);  //$NON-NLS-1$
+		
+		amenityTagValToType.put("railway", AmenityType.TRANSPORTATION);  //$NON-NLS-1$
+		amenityTagValToType.put("aeroway", AmenityType.TRANSPORTATION);  //$NON-NLS-1$
+		amenityTagValToType.put("aerialway", AmenityType.TRANSPORTATION);  //$NON-NLS-1$
+		amenityTagValToType.put("aerialway"+TAG_DELIMETER+"pylon", null);  //$NON-NLS-1$//$NON-NLS-2$
+		
+		// do not add power tower to index
+		amenityTagValToType.put("power"+TAG_DELIMETER+"station", AmenityType.MAN_MADE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("power"+TAG_DELIMETER+"sub_station", AmenityType.MAN_MADE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("power"+TAG_DELIMETER+"generator", AmenityType.MAN_MADE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("power"+TAG_DELIMETER+"cable_distribution_cabinet", AmenityType.MAN_MADE);  //$NON-NLS-1$//$NON-NLS-2$
+		
+		amenityTagValToType.put("building", null);  //$NON-NLS-1$
+		amenityTagValToType.put("man_made"+TAG_DELIMETER+"wastewater_plant", null);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("man_made"+TAG_DELIMETER+"water_works", null);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("man_made"+TAG_DELIMETER+"works", null);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("man_made", AmenityType.MAN_MADE);  //$NON-NLS-1$
+		
+		amenityTagValToType.put("leisure", AmenityType.LEISURE);  //$NON-NLS-1$
+		amenityTagValToType.put("natural"+TAG_DELIMETER+"park", AmenityType.LEISURE);  //$NON-NLS-1$//$NON-NLS-2$
+		
+		amenityTagValToType.put("office", AmenityType.OFFICE);  //$NON-NLS-1$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"architect_office", AmenityType.OFFICE);  //$NON-NLS-1$//$NON-NLS-2$
+		
+		amenityTagValToType.put("shop", AmenityType.SHOP);  //$NON-NLS-1$
+		
+		amenityTagValToType.put("emergency", AmenityType.EMERGENCY);  //$NON-NLS-1$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"fire_station", AmenityType.EMERGENCY);  //$NON-NLS-1$//$NON-NLS-2$
+		
+		amenityTagValToType.put("tourism", AmenityType.TOURISM);  //$NON-NLS-1$
+		
+		amenityTagValToType.put("historic", AmenityType.HISTORIC);  //$NON-NLS-1$
+		
+		amenityTagValToType.put("landuse"+TAG_DELIMETER+"basin", AmenityType.LANDUSE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("landuse"+TAG_DELIMETER+"grave_yard", AmenityType.LANDUSE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("landuse"+TAG_DELIMETER+"cemetery", AmenityType.LANDUSE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("landuse"+TAG_DELIMETER+"forest", AmenityType.LANDUSE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("landuse"+TAG_DELIMETER+"meadow", AmenityType.LANDUSE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("landuse"+TAG_DELIMETER+"military", AmenityType.LANDUSE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("landuse"+TAG_DELIMETER+"orchard", AmenityType.LANDUSE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("landuse"+TAG_DELIMETER+"recreation_ground", AmenityType.LANDUSE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("landuse"+TAG_DELIMETER+"conservation", AmenityType.LANDUSE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("landuse"+TAG_DELIMETER+"village_green", AmenityType.LANDUSE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("landuse"+TAG_DELIMETER+"reservoir", AmenityType.LANDUSE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("landuse"+TAG_DELIMETER+"water", AmenityType.LANDUSE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("landuse"+TAG_DELIMETER+"salt_pond", AmenityType.LANDUSE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("landuse"+TAG_DELIMETER+"quarry", AmenityType.LANDUSE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("landuse"+TAG_DELIMETER+"vineyard", AmenityType.LANDUSE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("landuse"+TAG_DELIMETER+"wood", AmenityType.NATURAL);  //$NON-NLS-1$//$NON-NLS-2$
+		
+		amenityTagValToType.put("military", AmenityType.MILITARY);  //$NON-NLS-1$
+		
+		amenityTagValToType.put("natural", AmenityType.NATURAL);  //$NON-NLS-1$
+		amenityTagValToType.put("natural"+TAG_DELIMETER+"field", null);  //$NON-NLS-1$ //$NON-NLS-2$
+		
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"restaurant", AmenityType.SUSTENANCE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"cafe", AmenityType.SUSTENANCE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"food_court", AmenityType.SUSTENANCE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"fast_food", AmenityType.SUSTENANCE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"pub", AmenityType.SUSTENANCE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"bar", AmenityType.SUSTENANCE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"biergarten", AmenityType.SUSTENANCE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"drinking_water", AmenityType.SUSTENANCE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"bbq", AmenityType.SUSTENANCE);  //$NON-NLS-1$//$NON-NLS-2$
+		
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"kindergarten", AmenityType.EDUCATION);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"school", AmenityType.EDUCATION);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"college", AmenityType.EDUCATION);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"library", AmenityType.EDUCATION);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"university", AmenityType.EDUCATION);  //$NON-NLS-1$//$NON-NLS-2$
+		
+		
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"kindergarten", AmenityType.EDUCATION);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"parking", AmenityType.TRANSPORTATION);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"bicycle_parking", AmenityType.TRANSPORTATION);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"ferry_terminal", AmenityType.TRANSPORTATION);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"fuel", AmenityType.TRANSPORTATION);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"taxi", AmenityType.TRANSPORTATION);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"bicycle_rental", AmenityType.TRANSPORTATION);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"bus_station", AmenityType.TRANSPORTATION);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"car_rental", AmenityType.TRANSPORTATION);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"car_sharing", AmenityType.TRANSPORTATION);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"car_wash", AmenityType.TRANSPORTATION);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"grit_bin", AmenityType.TRANSPORTATION);  //$NON-NLS-1$//$NON-NLS-2$
+		
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"atm", AmenityType.FINANCE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"bank", AmenityType.FINANCE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"bureau_de_change", AmenityType.FINANCE);  //$NON-NLS-1$//$NON-NLS-2$
+		
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"pharmacy", AmenityType.HEALTHCARE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"hospital", AmenityType.HEALTHCARE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"baby_hatch", AmenityType.HEALTHCARE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"dentist", AmenityType.HEALTHCARE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"doctors", AmenityType.HEALTHCARE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"veterinary", AmenityType.HEALTHCARE);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"first_aid", AmenityType.HEALTHCARE);  //$NON-NLS-1$//$NON-NLS-2$
+		
+		
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"arts_centre", AmenityType.ENTERTAINMENT);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"cinema", AmenityType.ENTERTAINMENT);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"community_centre", AmenityType.ENTERTAINMENT);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"social_centre", AmenityType.ENTERTAINMENT);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"nightclub", AmenityType.ENTERTAINMENT);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"stripclub", AmenityType.ENTERTAINMENT);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"studio", AmenityType.ENTERTAINMENT);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"theatre", AmenityType.ENTERTAINMENT);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"sauna", AmenityType.ENTERTAINMENT);  //$NON-NLS-1$//$NON-NLS-2$
+		amenityTagValToType.put("amenity"+TAG_DELIMETER+"brothel", AmenityType.ENTERTAINMENT);  //$NON-NLS-1$//$NON-NLS-2$
+		
+		amenityTagValToType.put("amenity", AmenityType.OTHER);  //$NON-NLS-1$
+		amenityTagValToType.put("place", AmenityType.ADMINISTRATIVE);  //$NON-NLS-1$
+		amenityTagValToType.put("sport", AmenityType.SPORT);  //$NON-NLS-1$
+	}
+	
 	
 	public static void main(String[] args) {
 //		Map<String, Map<String, AmenityType>> amenityMap = getAmenityTagValToTypeMap();
@@ -902,6 +906,9 @@ public class MapRenderingTypes {
 //		}
 //		System.out.println(getAmenityNameToType());
 //		long ts = System.currentTimeMillis();
+		initAmenityMap();
+		System.out.println(amenityTypeNameToTagVal);
+		System.out.println(getAmenityNameToType());
 	}
 
 }
