@@ -8,6 +8,8 @@
 		android:layout_marginRight="8dp" android:layout_marginBottom="6dp" 
 		android:layout_width="120dp" android:layout_height="wrap_content" android:layout_gravity="bottom|right"/>
 
+<View android:id="@+id/ProgressBar"  
+			android:layout_width="40dp"  android:layout_height="40dp" android:layout_marginRight="25dp" android:layout_marginTop="5dp" android:layout_gravity="top|right"/>
 <ImageButton android:layout_gravity="bottom|left" android:id="@+id/BackToMenu"	android:background="@drawable/back_menu"
 			android:layout_width="96dp" android:layout_height="96dp"/>
 <ImageButton android:layout_gravity="top|right" android:layout_marginTop="96dp" android:id="@+id/BackToLocation" android:background="@drawable/back_location"

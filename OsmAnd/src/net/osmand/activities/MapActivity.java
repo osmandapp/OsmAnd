@@ -834,11 +834,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 		
 		View progress = findViewById(R.id.ProgressBar);
-		if (progress == null) {
-			// strange solution (not reproducible) - that is workaround
-			setContentView(R.layout.main);
-			progress = findViewById(R.id.ProgressBar);
-		}
 		if(progress != null){
 			((OsmandApplication) getApplication()).getResourceManager().setBusyIndicator(new BusyIndicator(this, progress));
 		}
