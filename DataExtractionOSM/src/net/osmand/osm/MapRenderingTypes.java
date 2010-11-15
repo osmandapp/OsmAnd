@@ -795,13 +795,13 @@ public class MapRenderingTypes {
 	
 	private static void initAmenityTagValToType() {
 		amenityTagValToType = new LinkedHashMap<String, AmenityType>();
-		amenityTagValToType.put("highway", AmenityType.TRANSPORTATION); //$NON-NLS-1$
-		amenityTagValToType.put("highway"+TAG_DELIMETER+"mini_roundabout", null); //$NON-NLS-1$ //$NON-NLS-2$
-		amenityTagValToType.put("highway"+TAG_DELIMETER+"stop", null); //$NON-NLS-1$ //$NON-NLS-2$
-		amenityTagValToType.put("highway"+TAG_DELIMETER+"give_way", null); //$NON-NLS-1$ //$NON-NLS-2$
-		amenityTagValToType.put("highway"+TAG_DELIMETER+"traffic_signals", null); //$NON-NLS-1$ //$NON-NLS-2$
-		amenityTagValToType.put("highway"+TAG_DELIMETER+"street_lamp", null); //$NON-NLS-1$ //$NON-NLS-2$
-		amenityTagValToType.put("highway"+TAG_DELIMETER+"motorway_junction", null); //$NON-NLS-1$ //$NON-NLS-2$
+
+		amenityTagValToType.put("highway"+TAG_DELIMETER+"bus_stop", AmenityType.TRANSPORTATION); //$NON-NLS-1$ //$NON-NLS-2$
+		amenityTagValToType.put("highway"+TAG_DELIMETER+"platform", AmenityType.TRANSPORTATION); //$NON-NLS-1$ //$NON-NLS-2$
+		amenityTagValToType.put("highway"+TAG_DELIMETER+"turning_circle", AmenityType.TRANSPORTATION); //$NON-NLS-1$ //$NON-NLS-2$
+		amenityTagValToType.put("highway"+TAG_DELIMETER+"emergency_access_point", AmenityType.TRANSPORTATION); //$NON-NLS-1$ //$NON-NLS-2$
+		amenityTagValToType.put("highway"+TAG_DELIMETER+"speed_camera", AmenityType.TRANSPORTATION); //$NON-NLS-1$ //$NON-NLS-2$
+		
 		
 		amenityTagValToType.put("traffic_calming", AmenityType.BARRIER); //$NON-NLS-1$
 		amenityTagValToType.put("barrier", AmenityType.BARRIER); //$NON-NLS-1$
