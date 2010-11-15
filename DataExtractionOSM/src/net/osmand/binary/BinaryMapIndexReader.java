@@ -1334,7 +1334,7 @@ public class BinaryMapIndexReader {
 				break;
 			case OsmandOdb.StreetIndex.NAME_FIELD_NUMBER :
 				s.setName(codedIS.readString());
-				if(s.getEnName() == null){
+				if(s.getEnName().length() == 0){
 					s.setEnName(Junidecode.unidecode(s.getName()));
 				}
 				break;
