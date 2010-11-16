@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="reload">Перезагрузить</string>
 	<string name="poi_context_menu_website">Просмотреть вебсайт POI</string>
 	<string name="poi_context_menu_call">Показать телефон POI</string>
 	<string name="website">веб сайт</string>
