@@ -1,19 +1,19 @@
 package net.osmand.activities;
 
-import static net.osmand.data.index.IndexConstants.ADDRESS_TABLE_VERSION;
 import static net.osmand.data.index.IndexConstants.ADDRESS_INDEX_EXT;
-import static net.osmand.data.index.IndexConstants.POI_TABLE_VERSION; 
-import static net.osmand.data.index.IndexConstants.POI_INDEX_EXT;
-import static net.osmand.data.index.IndexConstants.TRANSPORT_TABLE_VERSION;
-import static net.osmand.data.index.IndexConstants.TRANSPORT_INDEX_EXT;
 import static net.osmand.data.index.IndexConstants.ADDRESS_INDEX_EXT_ZIP;
-import static net.osmand.data.index.IndexConstants.POI_INDEX_EXT_ZIP;
-import static net.osmand.data.index.IndexConstants.TRANSPORT_INDEX_EXT_ZIP;
-import static net.osmand.data.index.IndexConstants.BINARY_MAP_VERSION;
+import static net.osmand.data.index.IndexConstants.ADDRESS_TABLE_VERSION;
 import static net.osmand.data.index.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.data.index.IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
-import static net.osmand.data.index.IndexConstants.VOICE_VERSION;
+import static net.osmand.data.index.IndexConstants.BINARY_MAP_VERSION;
+import static net.osmand.data.index.IndexConstants.POI_INDEX_EXT;
+import static net.osmand.data.index.IndexConstants.POI_INDEX_EXT_ZIP;
+import static net.osmand.data.index.IndexConstants.POI_TABLE_VERSION;
+import static net.osmand.data.index.IndexConstants.TRANSPORT_INDEX_EXT;
+import static net.osmand.data.index.IndexConstants.TRANSPORT_INDEX_EXT_ZIP;
+import static net.osmand.data.index.IndexConstants.TRANSPORT_TABLE_VERSION;
 import static net.osmand.data.index.IndexConstants.VOICE_INDEX_EXT_ZIP;
+import static net.osmand.data.index.IndexConstants.VOICE_VERSION;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -56,11 +56,14 @@ import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -69,6 +72,7 @@ import android.widget.Toast;
 public class DownloadIndexActivity extends ListActivity {
 	
 	private final static Log log = LogUtil.getLog(DownloadIndexActivity.class);
+	private static final int RELOAD_ID = 0;
 	private static DownloadIndexListThread downloadListIndexThread = new DownloadIndexListThread();
 
 	private ProgressDialog progressFileDlg = null;
@@ -114,18 +118,41 @@ public class DownloadIndexActivity extends ListActivity {
 		if(downloadListIndexThread.getCachedIndexFiles() != null){
 			setListAdapter(new DownloadIndexAdapter(new ArrayList<Entry<String,String>>(downloadListIndexThread.getCachedIndexFiles().entrySet())));
 		} else {
-			progressListDlg = ProgressDialog.show(this, getString(R.string.downloading), getString(R.string.downloading_list_indexes));
-			progressListDlg.setCancelable(true);
-			downloadListIndexThread.uiActivity = this;
-			if(downloadListIndexThread.getState() == Thread.State.NEW){
-				downloadListIndexThread.start();
-			} else if(downloadListIndexThread.getState() == Thread.State.TERMINATED){
-				// possibly exception occurred we don't have cache of files
-				downloadListIndexThread = new DownloadIndexListThread();
-				downloadListIndexThread.uiActivity = this;
-			}
+			downloadIndexList();
 		}
-		
+	}
+
+	private void downloadIndexList() {
+		progressListDlg = ProgressDialog.show(this, getString(R.string.downloading), getString(R.string.downloading_list_indexes));
+		progressListDlg.setCancelable(true);
+		downloadListIndexThread.uiActivity = this;
+		if(downloadListIndexThread.getState() == Thread.State.NEW){
+			downloadListIndexThread.start();
+		} else if(downloadListIndexThread.getState() == Thread.State.TERMINATED){
+			// possibly exception occurred we don't have cache of files
+			downloadListIndexThread = new DownloadIndexListThread();
+			downloadListIndexThread.uiActivity = this;
+		}
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuItem item = menu.add(0, RELOAD_ID, 0, R.string.reload);
+		item.setIcon(R.drawable.ic_menu_refresh);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if(item.getItemId() == RELOAD_ID){
+			//re-create the thread
+			downloadListIndexThread = new DownloadIndexListThread();
+			downloadIndexList();
+		} else {
+			return false;
+		}
+		return true;
 	}
 	
 	private static class DownloadIndexListThread extends Thread {
@@ -569,8 +596,14 @@ public class DownloadIndexActivity extends ListActivity {
 
 	protected class DownloadIndexAdapter extends ArrayAdapter<Entry<String, String>> implements Filterable {
 
+		List<Entry<String, String>> origArray;
+		private List<Entry<String, String>> origReference;
+		private DownloadIndexFilter myFilter;
+
 		public DownloadIndexAdapter(List<Entry<String, String>> array) {
 			super(DownloadIndexActivity.this, net.osmand.R.layout.download_index_list_item, array);
+			this.origArray = new ArrayList<Entry<String,String>>(array);
+			this.origReference = array;
 		}
 		
 		@Override
@@ -614,6 +647,53 @@ public class DownloadIndexActivity extends ListActivity {
 			item.setText(s.trim() + "\n " + name); //$NON-NLS-1$
 			description.setText(e.getValue().replace(':', '\n').trim());
 			return row;
+		}
+		
+		@Override
+		public Filter getFilter() {
+			if (myFilter == null) {
+				myFilter = new DownloadIndexFilter();
+			}
+			return myFilter;
+		}
+		
+		private final class DownloadIndexFilter extends Filter {
+			@Override
+			protected FilterResults performFiltering(CharSequence constraint) {
+				FilterResults results = new FilterResults();
+				if (constraint == null || constraint.length() == 0) {
+					results.values = origArray;
+					results.count = origArray.size();
+				} else {
+					CharSequence lowerCase = constraint.toString()
+							.toLowerCase();
+					List<Entry<String, String>> filter = new ArrayList<Entry<String, String>>();
+					for (Entry<String, String> item : origArray) {
+						if (item.getKey().toLowerCase().contains(lowerCase)) {
+							filter.add(item);
+						}
+					}
+					results.values = filter;
+					results.count = filter.size();
+				}
+				return results;
+			}
+
+			@SuppressWarnings("unchecked")
+			@Override
+			protected void publishResults(CharSequence constraint,
+					FilterResults results) {
+				synchronized (origReference) {
+					origReference.clear();
+					origReference.addAll((List<Entry<String, String>>) results.values);
+				}
+				if (results.count > 0) {
+					notifyDataSetChanged();
+				} else {
+					notifyDataSetInvalidated();
+				}
+
+			}
 		}
 	}
 	
