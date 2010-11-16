@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="poi_context_menu_website">POI weboldal megtekintése</string>
+	<string name="poi_context_menu_call">POI telefonszám megtekintése</string>
+	<string name="website">weboldal</string>
+	<string name="phone">telefon</string>
+	<string name="download_type_to_filter">típus szűrése</string>
 	<string name="use_high_res_maps">Nagy felbontású térkép</string>
 	<string name="use_high_res_maps_descr">Nagy felbontású térkép használata nagy felbontású eszközön</string>
 	<string name="unknown_location">A jelenlegi helyzet nem ismert</string>
@@ -16,7 +21,7 @@
 	<string name="no_vector_map_loaded">Nincs betöltött vektor térkép</string>
 	<string name="gpx_reverse_route">Útvonal visszafelé</string>
 	<string name="gpx_direct_route">Útvonal előrefelé</string>
-	<string name="map_route_by_gpx">Útvonal GPX alapjánstring</string>
+	<string name="map_route_by_gpx">Útvonal GPX alapján</string>
 	<string name="gpx_files_not_found">Nem található GPX fálj /osmand/tracks könyvtárban</string>
 	<string name="layer_gpx_layer">GPX nyomok...</string>
 	<string name="error_reading_gpx">GPX adat olvasási hiba</string>
