@@ -109,6 +109,47 @@ public class RenderingIcons {
 		icons.put("vineyard", R.drawable.h_vineyard); //$NON-NLS-1$
 		icons.put("windmill", R.drawable.h_windmill); //$NON-NLS-1$
 		icons.put("zoo", R.drawable.h_zoo); //$NON-NLS-1$
+		
+		icons.put("mot_shield1", R.drawable.mot_shield1); //$NON-NLS-1$
+		icons.put("mot_shield2", R.drawable.mot_shield2); //$NON-NLS-1$
+		icons.put("mot_shield3", R.drawable.mot_shield3); //$NON-NLS-1$
+		icons.put("mot_shield4", R.drawable.mot_shield4); //$NON-NLS-1$
+		icons.put("mot_shield5", R.drawable.mot_shield5); //$NON-NLS-1$
+		icons.put("mot_shield6", R.drawable.mot_shield6); //$NON-NLS-1$
+		icons.put("mot_shield7", R.drawable.mot_shield7); //$NON-NLS-1$
+		icons.put("mot_shield8", R.drawable.mot_shield8); //$NON-NLS-1$
+		icons.put("pri_shield1", R.drawable.pri_shield1); //$NON-NLS-1$
+		icons.put("pri_shield2", R.drawable.pri_shield2); //$NON-NLS-1$
+		icons.put("pri_shield3", R.drawable.pri_shield3); //$NON-NLS-1$
+		icons.put("pri_shield4", R.drawable.pri_shield4); //$NON-NLS-1$
+		icons.put("pri_shield5", R.drawable.pri_shield5); //$NON-NLS-1$
+		icons.put("pri_shield6", R.drawable.pri_shield6); //$NON-NLS-1$
+		icons.put("pri_shield7", R.drawable.pri_shield7); //$NON-NLS-1$
+		icons.put("pri_shield8", R.drawable.pri_shield8); //$NON-NLS-1$
+		icons.put("sec_shield1", R.drawable.sec_shield1); //$NON-NLS-1$
+		icons.put("sec_shield2", R.drawable.sec_shield2); //$NON-NLS-1$
+		icons.put("sec_shield3", R.drawable.sec_shield3); //$NON-NLS-1$
+		icons.put("sec_shield4", R.drawable.sec_shield4); //$NON-NLS-1$
+		icons.put("sec_shield5", R.drawable.sec_shield5); //$NON-NLS-1$
+		icons.put("sec_shield6", R.drawable.sec_shield6); //$NON-NLS-1$
+		icons.put("sec_shield7", R.drawable.sec_shield7); //$NON-NLS-1$
+		icons.put("sec_shield8", R.drawable.sec_shield8); //$NON-NLS-1$
+		icons.put("ter_shield1", R.drawable.ter_shield1); //$NON-NLS-1$
+		icons.put("ter_shield2", R.drawable.ter_shield2); //$NON-NLS-1$
+		icons.put("ter_shield3", R.drawable.ter_shield3); //$NON-NLS-1$
+		icons.put("ter_shield4", R.drawable.ter_shield4); //$NON-NLS-1$
+		icons.put("ter_shield5", R.drawable.ter_shield5); //$NON-NLS-1$
+		icons.put("ter_shield6", R.drawable.ter_shield6); //$NON-NLS-1$
+		icons.put("ter_shield7", R.drawable.ter_shield7); //$NON-NLS-1$
+		icons.put("ter_shield8", R.drawable.ter_shield8); //$NON-NLS-1$
+		icons.put("tru_shield1", R.drawable.tru_shield1); //$NON-NLS-1$
+		icons.put("tru_shield2", R.drawable.tru_shield2); //$NON-NLS-1$
+		icons.put("tru_shield3", R.drawable.tru_shield3); //$NON-NLS-1$
+		icons.put("tru_shield4", R.drawable.tru_shield4); //$NON-NLS-1$
+		icons.put("tru_shield5", R.drawable.tru_shield5); //$NON-NLS-1$
+		icons.put("tru_shield6", R.drawable.tru_shield6); //$NON-NLS-1$
+		icons.put("tru_shield7", R.drawable.tru_shield7); //$NON-NLS-1$
+		icons.put("tru_shield8", R.drawable.tru_shield8); //$NON-NLS-1$
 	}
 
 }
