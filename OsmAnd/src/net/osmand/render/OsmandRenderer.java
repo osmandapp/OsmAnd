@@ -1218,7 +1218,7 @@ public class OsmandRenderer {
 					wrapWidth = 30;
 					shadowRadius = 1;
 				}
-			} else if ((zoom >= 15 && point) || zoom >= 17) {
+			} else if ((zoom >= 15 && !point) || zoom >= 17) {
 				textColor = 0xff000000;
 				shadowRadius = 2;
 				wrapWidth = 15;
