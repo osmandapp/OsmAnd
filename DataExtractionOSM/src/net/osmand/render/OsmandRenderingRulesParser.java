@@ -67,8 +67,9 @@ public class OsmandRenderingRulesParser {
 		public TextAttributes text = null;
 		public List<EffectAttributes> effectAttributes = new ArrayList<EffectAttributes>(3);
 		
-		protected EffectAttributes getEffectAttributes(int i){
-			while(i >= effectAttributes.size()){
+		protected EffectAttributes getEffectAttributes(int i) {
+			i -= 2;
+			while (i >= effectAttributes.size()) {
 				effectAttributes.add(new EffectAttributes());
 			}
 			return effectAttributes.get(i);
@@ -238,6 +239,10 @@ public class OsmandRenderingRulesParser {
 				}
 				if(toMerge.text.textShield != null && mergeInto.text.textShield == null){
 					mergeInto.text.textShield = toMerge.text.textShield;
+				}
+				
+				if(toMerge.text.ref != null && mergeInto.text.ref == null){
+					mergeInto.text.ref = toMerge.text.ref;
 				}
 				
 				if(toMerge.text.textMinDistance != 0 && mergeInto.text.textMinDistance == 0){
@@ -447,17 +452,31 @@ public class OsmandRenderingRulesParser {
 		if(s.shader != null){
 			res+=" shader=" + s.shader; //$NON-NLS-1$
 		}
-		if(s.main.color != 0){
-			res +=" color="+colorToString(s.main.color); //$NON-NLS-1$
-		}
+		
 		if(s.icon != null){
 			res+= " icon="+s.icon; //$NON-NLS-1$
 		}
-		if(s.main.strokeWidth != 0){
-			res+= " strokeWidth="+s.main.strokeWidth; //$NON-NLS-1$
+		
+		res = generateAttributes(s.main, res, "");
+		int p = 2;
+		for(EffectAttributes ef : s.effectAttributes){
+			res = generateAttributes(ef, res, "_"+(p++));
 		}
-		if(s.main.pathEffect != null){
-			res+= " pathEffect="+s.main.pathEffect; //$NON-NLS-1$
+		if(s.text != null){
+			if(s.text.textSize != 0){
+				res+= " textSize="+s.text.textSize; //$NON-NLS-1$
+			}
+			if(s.text.ref != null){
+				res+= " ref="+s.text.ref; //$NON-NLS-1$
+			}
+			if(s.text.textColor != 0){
+				res+= " textColor="+colorToString(s.text.textColor); //$NON-NLS-1$
+			}
+			if(s.text.textShield != null){
+				res+= " textShield="+s.text.textShield; //$NON-NLS-1$
+			}
+			
+			
 		}
 		if(state == POLYGON_STATE){
 //			return res;
@@ -469,5 +488,19 @@ public class OsmandRenderingRulesParser {
 //			return res;
 		}
 		return null;
+	}
+
+
+	private static String generateAttributes(EffectAttributes s, String res, String prefix) {
+		if(s.color != 0){
+			res +=" color"+prefix+"="+colorToString(s.color); //$NON-NLS-1$
+		}
+		if(s.strokeWidth != 0){
+			res+= " strokeWidth"+prefix+"="+s.strokeWidth; //$NON-NLS-1$
+		}
+		if(s.pathEffect != null){
+			res+= " pathEffect"+prefix+"="+s.pathEffect; //$NON-NLS-1$
+		}
+		return res;
 	}
 }

@@ -605,7 +605,7 @@ public class OsmandRenderer {
 				String name = ((MultyPolygon) obj).getName(i);
 				if (name != null) {
 					rc.clearText();
-					name = render.renderObjectText(name, tag, value, rc);
+					name = render.renderObjectText(name, tag, value, rc, false);
 					if (rc.textSize > 0 && name != null) {
 						TextDrawInfo info = new TextDrawInfo(name);
 						info.fillProperties(rc, xText / cnt, yText / cnt);
@@ -671,7 +671,7 @@ public class OsmandRenderer {
 			String name = obj.getName();
 			if(name != null){
 				rc.clearText();
-				name = render.renderObjectText(name, pair.tag, pair.value, rc);
+				name = render.renderObjectText(name, pair.tag, pair.value, rc, false);
 				if (rc.textSize > 0 && name != null) {
 					TextDrawInfo info = new TextDrawInfo(name);
 					info.fillProperties(rc, xText, yText);
@@ -694,7 +694,7 @@ public class OsmandRenderer {
 			name = obj.getName();
 			if (name != null) {
 				rc.clearText();
-				name = render.renderObjectText(name, pair.tag, pair.value, rc);
+				name = render.renderObjectText(name, pair.tag, pair.value, rc, false);
 			}
 		}
 		if(resId == null && name == null){
@@ -739,8 +739,13 @@ public class OsmandRenderer {
 		if(render == null || pair == null){
 			return;
 		}
-		render.renderPolyline(pair.tag, pair.value, rc.zoom, rc, this);
+		int layer = MapRenderingTypes.getNegativeWayLayer(wholeType);
+		render.renderPolyline(pair.tag, pair.value, rc.zoom, rc, this, layer);
 		if(rc.main.strokeWidth == 0){
+			return;
+		}
+		int length = obj.getPointsLength();
+		if(length < 2){
 			return;
 		}
 		if("highway".equals(pair.tag) && rc.zoom >= 16 && MapRenderingTypes.isOneWayWay(obj.getHighwayAttributes())){ //$NON-NLS-1$
@@ -748,11 +753,6 @@ public class OsmandRenderer {
 		}
 		
 		
-		
-		int length = obj.getPointsLength();
-		if(length < 2){
-			return;
-		}
 		rc.visible++;
 		
 		Path path = null;
@@ -815,44 +815,65 @@ public class OsmandRenderer {
 			}
 			if (obj.getName() != null) {
 				String name = obj.getName();
-				rc.clearText();
-				name = TextRenderer.renderObjectText(name, subtype, type, rc.zoom, false, rc);
-				if(rc.textSize == 0 && rc.showAnotherText != null){
-					name = TextRenderer.renderObjectText(rc.showAnotherText, subtype, type, rc.zoom, false, rc);
-				}
-				if (name != null && rc.textSize > 0) {
-					if (!rc.showTextOnPath) {
-						TextDrawInfo text = new TextDrawInfo(name);
-						text.fillProperties(rc, middlePoint.x, middlePoint.y);
-						rc.textToDraw.add(text);
-					} 
-					if(rc.showAnotherText != null){
-						name = TextRenderer.renderObjectText(rc.showAnotherText, subtype, type, rc.zoom, false, rc);
+				String ref = null;
+				if(name.charAt(0) == MapRenderingTypes.REF_CHAR){
+					ref = name.substring(1);
+					name = ""; //$NON-NLS-1$
+					for(int k = 0; k < ref.length(); k++){
+						if(ref.charAt(k) == MapRenderingTypes.REF_CHAR){
+							if(k < ref.length() - 1){
+								name = ref.substring(k + 1);
+							}
+							ref = ref.substring(0, k);
+							break;
+						}
 					}
+				}
+				if(ref != null){
+					rc.clearText();
+					ref = render.renderObjectText(ref, pair.tag, pair.value, rc, true);
+					TextDrawInfo text = new TextDrawInfo(ref);
+					if(!rc.showTextOnPath){
+						text.fillProperties(rc, middlePoint.x, middlePoint.y);
+					} else {
+						// TODO
+					}
+					rc.textToDraw.add(text);
 					
-					if (rc.showTextOnPath && paintText.measureText(obj.getName()) < Math.max(Math.abs(xLength), Math.abs(yLength))) {
-						if (inverse) {
-							path.rewind();
-							boolean st = true;
-							for (int i = obj.getPointsLength() - 1; i >= 0; i--) {
-								PointF p = calcPoint(obj, i, rc);
-								if (st) {
-									st = false;
-									path.moveTo(p.x, p.y);
-								} else {
-									path.lineTo(p.x, p.y);
+				}
+				
+				if(name != null && name.length() > 0){
+					rc.clearText();
+					name = render.renderObjectText(name, pair.tag, pair.value, rc, false);
+					if (rc.textSize > 0) {
+						TextDrawInfo text = new TextDrawInfo(name);
+						if (!rc.showTextOnPath) {
+							text.fillProperties(rc, middlePoint.x, middlePoint.y);
+							rc.textToDraw.add(text);
+						} else {
+							if (paintText.measureText(obj.getName()) < Math.max(Math.abs(xLength), Math.abs(yLength))) {
+								if (inverse) {
+									path.rewind();
+									boolean st = true;
+									for (int i = obj.getPointsLength() - 1; i >= 0; i--) {
+										PointF p = calcPoint(obj, i, rc);
+										if (st) {
+											st = false;
+											path.moveTo(p.x, p.y);
+										} else {
+											path.lineTo(p.x, p.y);
+										}
+									}
 								}
+								text.fillProperties(rc, xMid / 2, yMid / 2);
+								text.pathRotate = pathRotate;
+								text.drawOnPath = path;
+								text.vOffset = rc.main.strokeWidth / 2 - 1;
+								rc.textToDraw.add(text);
 							}
 						}
-
-						TextDrawInfo text = new TextDrawInfo(name);
-						text.fillProperties(rc, xMid / 2, yMid / 2);
-						text.pathRotate = pathRotate;
-						text.drawOnPath = path;
-						text.vOffset = rc.main.strokeWidth / 2 - 1;
-						rc.textToDraw.add(text);
-
 					}
+					
 				}
 			}
 		}
