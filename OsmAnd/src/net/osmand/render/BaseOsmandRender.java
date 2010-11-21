@@ -25,6 +25,7 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 	
 	public String name = "default"; //$NON-NLS-1$
 	public List<String> depends = new ArrayList<String>();
+	public List<BaseOsmandRender> dependRenderers = new ArrayList<BaseOsmandRender>();
 	private static final Log log = LogUtil.getLog(BaseOsmandRender.class);
 
 	@SuppressWarnings("unchecked")
@@ -84,10 +85,18 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 		}
 	}
 	
-	public Integer getPointIcon(String tag, String val, int zoom){
-		Integer i = getPointIconImpl(tag,val, zoom);
-		if(i== null){
-			return getPointIconImpl(tag, null, zoom);
+	public Integer getPointIcon(String tag, String val, int zoom) {
+		Integer i = getPointIconImpl(tag, val, zoom);
+		if (i == null) {
+			i = getPointIconImpl(tag, null, zoom);
+		}
+		if (i == null) {
+			for (BaseOsmandRender d : dependRenderers) {
+				i = d.getPointIcon(tag, val, zoom);
+				if (i != null) {
+					break;
+				}
+			}
 		}
 		return i;
 	}
@@ -105,6 +114,15 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 		if (f == 0) {
 			f = getObjectOrderImpl("", null, type, layer); //$NON-NLS-1$
 		}
+		if(f == 0){
+			for(BaseOsmandRender d : dependRenderers){
+				f = d.getObjectOrder(tag, val, type, layer);
+				if (f != 0) {
+					break;
+				}
+			}
+		}
+		
 		if (f == 0) {
 			if (type == 0 || type == 3) {
 				return 1f;
@@ -115,6 +133,60 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 			}
 		}
 		return f;
+	}
+	
+	public boolean renderPolyline(String tag, String val, int zoom, RenderingContext rc, OsmandRenderer o, int layer){
+		boolean r = renderPolylineImpl(tag,val, zoom, rc, o, layer);
+		if(!r){
+			r = renderPolylineImpl(tag, null, zoom, rc, o, layer);
+		}
+		if(!r){
+			for(BaseOsmandRender d : dependRenderers){
+				r = d.renderPolyline(tag, val, zoom, rc, o, layer);
+				if (r) {
+					break;
+				}
+			}
+		}
+		return r;
+	}
+	public boolean renderPolygon(String tag, String val, int zoom, RenderingContext rc, OsmandRenderer o){
+		boolean r = renderPolygonImpl(tag,val, zoom, rc, o);
+		if(!r){
+			r = renderPolygonImpl(tag, null, zoom, rc, o);
+		}
+		if(!r){
+			for(BaseOsmandRender d : dependRenderers){
+				r = d.renderPolygon(tag, val, zoom, rc, o);
+				if (r) {
+					break;
+				}
+			}
+		}
+		return r;
+	}
+
+	public String renderObjectText(String name, String tag, String val, RenderingContext rc, boolean ref) {
+		if(name == null || name.length() == 0){
+			return null;
+		}
+		String ret = renderObjectTextImpl(name, tag, val, rc, ref);
+		if(rc.textSize == 0){
+			ret = renderObjectTextImpl(name, tag, null, rc, ref);
+		}
+		if(rc.textSize == 0){
+			for(BaseOsmandRender d : dependRenderers){
+				ret = d.renderObjectText(name, tag, val, rc, ref);
+				if (rc.textSize > 0) {
+					break;
+				}
+			}
+		}
+		if(rc.textSize > 0){
+			return ret;
+		} else {
+			return null;
+		}
 	}
 
 	private float getObjectOrderImpl(String tag, String val, int type, int layer) {
@@ -147,14 +219,6 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 		return null;
 	}
 	
-	public boolean renderPolyline(String tag, String val, int zoom, RenderingContext rc, OsmandRenderer o, int layer){
-		boolean r = renderPolylineImpl(tag,val, zoom, rc, o, layer);
-		if(!r){
-			return renderPolylineImpl(tag, null, zoom, rc, o, layer);
-		}
-		return r;
-	}
-
 	private boolean renderPolylineImpl(String tag, String val, int zoom, RenderingContext rc, OsmandRenderer o, int layer) {
 		Map<String, List<FilterState>> map = rules[OsmandRenderingRulesParser.LINE_STATE].get(tag);
 		if (map != null) {
@@ -199,13 +263,7 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 		return false;
 	}
 	
-	public boolean renderPolygon(String tag, String val, int zoom, RenderingContext rc, OsmandRenderer o){
-		boolean r = renderPolygonImpl(tag,val, zoom, rc, o);
-		if(!r){
-			return renderPolygonImpl(tag, null, zoom, rc, o);
-		}
-		return r;
-	}
+	
 
 	private boolean renderPolygonImpl(String tag, String val, int zoom, RenderingContext rc, OsmandRenderer o) {
 		Map<String, List<FilterState>> map = rules[OsmandRenderingRulesParser.POLYGON_STATE].get(tag);
@@ -258,16 +316,6 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 		}
 	}
 	
-	public String renderObjectText(String name, String tag, String val, RenderingContext rc, boolean ref) {
-		if(name == null || name.length() == 0){
-			return null;
-		}
-		String ret = renderObjectTextImpl(name, tag, val, rc, ref);
-		if(rc.textSize > 0){
-			return ret;
-		}
-		return renderObjectTextImpl(name, tag, null, rc, ref);
-	}
 	
 	private boolean checkRefTextRule(FilterState f, boolean ref){
 		if(ref){
@@ -317,5 +365,13 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 		rc.textHaloRadius = f.text.textHaloRadius;
 		rc.textBold = f.text.textBold;
 		rc.textDy = f.text.textDy;
+	}
+	
+	public List<String> getDepends() {
+		return depends;
+	}
+	
+	public void setDependRenderers(List<BaseOsmandRender> dependRenderers) {
+		this.dependRenderers = dependRenderers;
 	}
 }
