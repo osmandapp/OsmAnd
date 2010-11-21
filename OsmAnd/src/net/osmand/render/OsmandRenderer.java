@@ -290,10 +290,15 @@ public class OsmandRenderer {
 					if(mask != 1){
 						layer = MapRenderingTypes.getNegativeWayLayer(wholeType);
 					}
-					TagValuePair pair = o.getMapIndex().decodeType(MapRenderingTypes.getMainObjectType(wholeType), 
-							MapRenderingTypes.getObjectSubType(wholeType));
-					if(pair != null){
-						put(orderMap, render.getObjectOrder(pair.tag, pair.value, mask, layer), sh + j, init);
+					if (o instanceof MultyPolygon) {
+						put(orderMap, render.getObjectOrder(((MultyPolygon) o).getTag(), ((MultyPolygon) o).getValue(), 
+								mask, layer), sh + j, init);
+					} else {
+						TagValuePair pair = o.getMapIndex().decodeType(MapRenderingTypes.getMainObjectType(wholeType),
+								MapRenderingTypes.getObjectSubType(wholeType));
+						if (pair != null) {
+							put(orderMap, render.getObjectOrder(pair.tag, pair.value, mask, layer), sh + j, init);
+						}
 					}
 					
 				}
