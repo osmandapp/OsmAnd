@@ -247,21 +247,21 @@ public class CommandPlayer {
 	public static final String A_RIGHT_SH = "right_sh"; //$NON-NLS-1$
 	public static final String A_RIGHT_SL = "right_sl"; //$NON-NLS-1$
 	
-	protected static final String С_PREPARE_TURN = "prepare_turn";  //$NON-NLS-1$
-	protected static final String С_PREPARE_ROUNDABOUT = "prepare_roundabout";  //$NON-NLS-1$
-	protected static final String С_PREPARE_MAKE_UT = "prepare_make_ut";  //$NON-NLS-1$
-	protected static final String С_ROUNDABOUT = "roundabout";  //$NON-NLS-1$
-	protected static final String С_GO_AHEAD = "go_ahead";  //$NON-NLS-1$
-	protected static final String С_TURN = "turn";  //$NON-NLS-1$
-	protected static final String С_MAKE_UT = "make_ut";  //$NON-NLS-1$
-	protected static final String С_PREAMBLE = "preamble";  //$NON-NLS-1$
-	protected static final String С_AND_ARRIVE_DESTINATION = "and_arrive_destination";  //$NON-NLS-1$
-	protected static final String С_THEN = "then";  //$NON-NLS-1$
-	protected static final String С_REACHED_DESTINATION = "reached_destination";  //$NON-NLS-1$
-	protected static final String С_BEAR_LEFT = "bear_left";  //$NON-NLS-1$
-	protected static final String С_BEAR_RIGHT = "bear_right";  //$NON-NLS-1$
-	protected static final String С_ROUTE_RECALC = "route_recalc";  //$NON-NLS-1$
-	protected static final String С_ROUTE_NEW_CALC = "route_new_calc";  //$NON-NLS-1$
+	protected static final String C_PREPARE_TURN = "prepare_turn";  //$NON-NLS-1$
+	protected static final String C_PREPARE_ROUNDABOUT = "prepare_roundabout";  //$NON-NLS-1$
+	protected static final String C_PREPARE_MAKE_UT = "prepare_make_ut";  //$NON-NLS-1$
+	protected static final String C_ROUNDABOUT = "roundabout";  //$NON-NLS-1$
+	protected static final String C_GO_AHEAD = "go_ahead";  //$NON-NLS-1$
+	protected static final String C_TURN = "turn";  //$NON-NLS-1$
+	protected static final String C_MAKE_UT = "make_ut";  //$NON-NLS-1$
+	protected static final String C_PREAMBLE = "preamble";  //$NON-NLS-1$
+	protected static final String C_AND_ARRIVE_DESTINATION = "and_arrive_destination";  //$NON-NLS-1$
+	protected static final String C_THEN = "then";  //$NON-NLS-1$
+	protected static final String C_REACHED_DESTINATION = "reached_destination";  //$NON-NLS-1$
+	protected static final String C_BEAR_LEFT = "bear_left";  //$NON-NLS-1$
+	protected static final String C_BEAR_RIGHT = "bear_right";  //$NON-NLS-1$
+	protected static final String C_ROUTE_RECALC = "route_recalc";  //$NON-NLS-1$
+	protected static final String C_ROUTE_NEW_CALC = "route_new_calc";  //$NON-NLS-1$
 	
 	
 	protected static final String DELAY_CONST = "delay_"; //$NON-NLS-1$
@@ -278,7 +278,7 @@ public class CommandPlayer {
 		
 		public CommandBuilder(boolean preamble) {
 			if (preamble) {
-				addCommand(С_PREAMBLE);
+				addCommand(C_PREAMBLE);
 			}
 		}
 		
@@ -320,32 +320,32 @@ public class CommandPlayer {
 		
 		
 		public CommandBuilder goAhead(){
-			return addCommand(С_GO_AHEAD);
+			return addCommand(C_GO_AHEAD);
 		}
 		
 		public CommandBuilder goAhead(double dist){
-			return addCommand(С_GO_AHEAD, dist);
+			return addCommand(C_GO_AHEAD, dist);
 		}
 		
 		public CommandBuilder makeUT(){
-			return addCommand(С_MAKE_UT);
+			return addCommand(C_MAKE_UT);
 		}
 		
 		public CommandBuilder makeUT(double dist){
-			return addCommand(С_MAKE_UT, dist);
+			return addCommand(C_MAKE_UT, dist);
 		}
 		
 		public CommandBuilder prepareMakeUT(double dist){
-			return addCommand(С_PREPARE_MAKE_UT, dist);
+			return addCommand(C_PREPARE_MAKE_UT, dist);
 		}
 		
 		
 		public CommandBuilder turn(String param){
-			return addCommand(С_TURN, param);
+			return addCommand(C_TURN, param);
 		}
 		
 		public CommandBuilder turn(String param, double dist){
-			return addCommand(С_TURN, param, dist);
+			return addCommand(C_TURN, param, dist);
 		}
 		
 		/**
@@ -355,47 +355,47 @@ public class CommandPlayer {
 		 * @return
 		 */
 		public CommandBuilder prepareTurn(String param, double dist){
-			return addCommand(С_PREPARE_TURN, param, dist);
+			return addCommand(C_PREPARE_TURN, param, dist);
 		}
 		
 		public CommandBuilder prepareRoundAbout(double dist){
-			return addCommand(С_PREPARE_ROUNDABOUT, dist);
+			return addCommand(C_PREPARE_ROUNDABOUT, dist);
 		}
 		
 		public CommandBuilder roundAbout(double dist, double angle, int exit){
-			return addCommand(С_ROUNDABOUT, dist, angle, exit);
+			return addCommand(C_ROUNDABOUT, dist, angle, exit);
 		}
 		
 		public CommandBuilder roundAbout(double angle, int exit){
-			return addCommand(С_ROUNDABOUT, angle, exit);
+			return addCommand(C_ROUNDABOUT, angle, exit);
 		}
 		
 		public CommandBuilder andArriveAtDestination(){
-			return addCommand(С_AND_ARRIVE_DESTINATION);
+			return addCommand(C_AND_ARRIVE_DESTINATION);
 		}
 		
 		public CommandBuilder arrivedAtDestination(){
-			return addCommand(С_REACHED_DESTINATION);
+			return addCommand(C_REACHED_DESTINATION);
 		}
 		
 		public CommandBuilder bearLeft(){
-			return addCommand(С_BEAR_LEFT);
+			return addCommand(C_BEAR_LEFT);
 		}
 		
 		public CommandBuilder bearRight(){
-			return addCommand(С_BEAR_RIGHT);
+			return addCommand(C_BEAR_RIGHT);
 		}
 		
 		public CommandBuilder then(){
-			return addCommand(С_THEN);
+			return addCommand(C_THEN);
 		}
 		
 		public CommandBuilder newRouteCalculated(double dist){
-			return addCommand(С_ROUTE_NEW_CALC, dist);
+			return addCommand(C_ROUTE_NEW_CALC, dist);
 		}
 		
 		public CommandBuilder routeRecalculated(double dist){
-			return addCommand(С_ROUTE_RECALC, dist);
+			return addCommand(C_ROUTE_RECALC, dist);
 		}
 	
 		

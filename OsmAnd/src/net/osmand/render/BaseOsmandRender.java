@@ -28,7 +28,7 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 	private static final Log log = LogUtil.getLog(BaseOsmandRender.class);
 
 	@SuppressWarnings("unchecked")
-	private Map<String, Map<String, List<FilterState>>>[] rules = new LinkedHashMap[5]; 
+	private Map<String, Map<String, List<FilterState>>>[] rules = new LinkedHashMap[6]; 
 	
 	
 	private static BaseOsmandRender defaultRender = null;
@@ -63,9 +63,12 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 
 	@Override
 	public void visitRule(int state, FilterState filter) {
-		boolean accept = filter.minzoom != -1;
+		boolean accept = filter.minzoom != -1 || state == OsmandRenderingRulesParser.ORDER_STATE;
 		if(state == OsmandRenderingRulesParser.POINT_STATE){
 			accept &= RenderingIcons.getIcons().containsKey(filter.icon);
+		}
+		if(state == OsmandRenderingRulesParser.ORDER_STATE){
+			accept &= filter.order != 0 && filter.orderType != 0;
 		}
 		if (accept) {
 			if (rules[state] == null) {
@@ -87,6 +90,46 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 			return getPointIconImpl(tag, null, zoom);
 		}
 		return i;
+	}
+	
+	// type 
+	public float getObjectOrder(String tag, String val, int type, int layer) {
+		if(type == 0){
+			// replace multipolygon with polygon 
+			type = 3;
+		}
+		float f = getObjectOrderImpl(tag, val, type, layer);
+		if (f == 0) {
+			f = getObjectOrderImpl(tag, null, type, layer);
+		}
+		if (f == 0) {
+			f = getObjectOrderImpl("", null, type, layer); //$NON-NLS-1$
+		}
+		if (f == 0) {
+			if (type == 0 || type == 3) {
+				return 1f;
+			} else if (type == 1) {
+				return 128f;
+			} else {
+				return 35f;
+			}
+		}
+		return f;
+	}
+
+	private float getObjectOrderImpl(String tag, String val, int type, int layer) {
+		Map<String, List<FilterState>> map = rules[OsmandRenderingRulesParser.ORDER_STATE].get(tag);
+		if (map != null) {
+			List<FilterState> list = map.get(val);
+			if (list != null) {
+				for (FilterState f : list) {
+					if(f.orderType == type && f.layer == layer){
+						return f.order;
+					}
+				}
+			}
+		}
+		return 0;
 	}
 
 	private Integer getPointIconImpl(String tag, String val, int zoom) {

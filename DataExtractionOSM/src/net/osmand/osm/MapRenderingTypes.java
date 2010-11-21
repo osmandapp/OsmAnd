@@ -393,6 +393,17 @@ public class MapRenderingTypes {
 		return (3 & (type >> 12));
 	}
 	
+	// 0 - normal, -1 - under, 1 - bridge,over
+	public static int getNegativeWayLayer(int type) {
+		int i = (3 & (type >> 12));
+		if (i == 1) {
+			return -1;
+		} else if (i == 2) {
+			return 1;
+		}
+		return 0;
+	}
+	
 	// HIGHWAY special attributes :
 	// o/oneway			1 bit
 	// f/free toll 		1 bit

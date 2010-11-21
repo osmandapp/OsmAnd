@@ -57,6 +57,8 @@ public class OsmandRenderingRulesParser {
 		public String val = null;
 		public int layer = 0;
 		public int textLength = 0;
+		public float order = 0;
+		public int orderType = -1;
 		
 		public String shader = null;
 		
@@ -94,6 +96,7 @@ public class OsmandRenderingRulesParser {
 	public final static int POLYGON_STATE = 2;
 	public final static int LINE_STATE = 3;
 	public final static int TEXT_STATE = 4;
+	public final static int ORDER_STATE = 5;
 	
 	public void parseRenderingRules(InputStream is, RenderingRuleVisitor visitor) throws IOException, SAXException {
 		try {
@@ -123,6 +126,8 @@ public class OsmandRenderingRulesParser {
 			if("filter".equals(name)){ //$NON-NLS-1$
 				FilterState st = parseFilterAttributes(attributes);
 				stack.push(st);
+			} else if("order".equals(name)){ //$NON-NLS-1$
+				state = ORDER_STATE;
 			} else if("text".equals(name)){ //$NON-NLS-1$
 				state = TEXT_STATE;
 			} else if("point".equals(name)){ //$NON-NLS-1$
@@ -150,7 +155,7 @@ public class OsmandRenderingRulesParser {
 			if ("filter".equals(name)) { //$NON-NLS-1$
 				List<FilterState> list = popAndAggregateState();
 				for (FilterState pop : list) {
-					if (pop.tag != null && pop.minzoom != -1) {
+					if (pop.tag != null && (pop.minzoom != -1 || state == ORDER_STATE)) {
 						visitor.visitRule(state, pop);
 					}
 				}
@@ -215,8 +220,14 @@ public class OsmandRenderingRulesParser {
 			if(toMerge.tag != null && mergeInto.tag == null){
 				mergeInto.tag = toMerge.tag;
 			}
+			if(toMerge.orderType != -1 && mergeInto.orderType == -1){
+				mergeInto.orderType = toMerge.orderType;
+			}
 			if(toMerge.layer != 0 && mergeInto.layer == 0){
 				mergeInto.layer = toMerge.layer;
+			}
+			if(toMerge.order != 0 && mergeInto.order == 0){
+				mergeInto.order = toMerge.order;
 			}
 			if(toMerge.textLength != 0 && mergeInto.textLength == 0){
 				mergeInto.textLength = toMerge.textLength;
@@ -315,6 +326,11 @@ public class OsmandRenderingRulesParser {
 					state.maxzoom = Integer.parseInt(val);
 				} else if(name.equals("layer")){ //$NON-NLS-1$
 					state.layer = Integer.parseInt(val);
+				} else if(name.equals("orderType")){ //$NON-NLS-1$
+					int i1 = val.equals("polygon") ? 3 : (val.equals("line") ? 2 : 1);  //$NON-NLS-1$ //$NON-NLS-2$
+					state.orderType = i1;
+				} else if(name.equals("order")){ //$NON-NLS-1$
+					state.order = Float.parseFloat(val);
 				} else if(name.equals("icon")){ //$NON-NLS-1$
 					state.icon = val;
 				} else if(name.equals("color")){ //$NON-NLS-1$
@@ -457,10 +473,18 @@ public class OsmandRenderingRulesParser {
 			res+= " icon="+s.icon; //$NON-NLS-1$
 		}
 		
-		res = generateAttributes(s.main, res, "");
+		if(s.order != 0){
+			res+= " order="+s.order; //$NON-NLS-1$
+		}
+		
+		if(s.orderType != 0){
+			res+= " orderType="+s.orderType; //$NON-NLS-1$
+		}
+		
+		res = generateAttributes(s.main, res, ""); //$NON-NLS-1$
 		int p = 2;
 		for(EffectAttributes ef : s.effectAttributes){
-			res = generateAttributes(ef, res, "_"+(p++));
+			res = generateAttributes(ef, res, "_"+(p++)); //$NON-NLS-1$
 		}
 		if(s.text != null){
 			if(s.text.textSize != 0){
@@ -481,11 +505,13 @@ public class OsmandRenderingRulesParser {
 		if(state == POLYGON_STATE){
 //			return res;
 		} else if(state == LINE_STATE){
-			return res;
+//			return res;
 		} else if(state == POINT_STATE){
 //			return res;
 		} else if(state == TEXT_STATE){
 //			return res;
+		} else if(state == ORDER_STATE){
+			return res;
 		}
 		return null;
 	}
@@ -493,13 +519,13 @@ public class OsmandRenderingRulesParser {
 
 	private static String generateAttributes(EffectAttributes s, String res, String prefix) {
 		if(s.color != 0){
-			res +=" color"+prefix+"="+colorToString(s.color); //$NON-NLS-1$
+			res +=" color"+prefix+"="+colorToString(s.color); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		if(s.strokeWidth != 0){
-			res+= " strokeWidth"+prefix+"="+s.strokeWidth; //$NON-NLS-1$
+			res+= " strokeWidth"+prefix+"="+s.strokeWidth; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		if(s.pathEffect != null){
-			res+= " pathEffect"+prefix+"="+s.pathEffect; //$NON-NLS-1$
+			res+= " pathEffect"+prefix+"="+s.pathEffect; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		return res;
 	}

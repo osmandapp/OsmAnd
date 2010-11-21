@@ -9,76 +9,144 @@
 		shop_supermarket, sosphone, spring station_small, station, telephone, theatre, toilets, tower_water, traffic_light transport_ford, tree,
 		tree2, view_point, vineyard, windmill, zoo
 	-->
-	<!-- TODO oneway!!! -->
+
+	<!-- input exact layer, orderType check tag, value -->
+	<order>
+		<!-- point has order 128  -->
+		<filter orderType="polygon">
+			<filter tag="" layer="-1" order="0.5" />
+			<filter tag="" layer="1" order="64" />
+			<filter tag="" order="1" />
+
+			<filter tag="building" order="64" />
+			<filter tag="building" layer="-1" order="2" />
+
+			<filter tag="landuse" order="1" />
+			<filter tag="landuse" value="reservoir" order="5" />
+			<filter tag="landuse" value="water" order="5" />
+			<filter tag="natural" value="water" order="5" />
+			<filter tag="waterway" order="5" />
+
+			<filter tag="leisure" order="2" />
+			<filter tag="leisure" value="pitch" order="4" />
+
+			<filter tag="power" order="4" />
+
+			<filter tag="natural" value="coastline" order="0.5" />
+			<filter tag="natural" order="1" />
+		</filter>
+		<filter orderType="line">
+			<filter tag="" layer="-1" order="10" />
+			<filter tag="" order="11" />
+			<filter tag="" layer="1" order="67" />
+			
+			<filter tag="railway" layer="-1" order="58" />
+			<filter tag="railway" order="58" />
+			
+			<!-- over buildings -->
+			<filter tag="aerialway" order="68" />
+			<filter tag="power" order="68" />
+			<filter tag="administrative" order="62" />
+			<filter tag="waterway" order="18" />
+			
+			<filter tag="highway" value="motorway" order="57" />
+			<filter tag="highway" value="trunk" order="56" />
+			<filter tag="highway" value="primary" order="55" />
+			<filter tag="highway" value="secondary" order="54" />
+			<filter tag="highway" value="tertiary" order="53" />
+			<filter tag="highway" value="residential" order="52" />
+			<filter tag="highway" value="service" order="52" />
+			<filter tag="highway" value="unclassified" order="51" />
+			<filter tag="highway" value="road" order="51" />
+			<filter tag="highway" value="track" order="50" />
+			<filter tag="highway" value="path" order="48" />
+			<filter tag="highway" value="living_street" order="47" />
+			
+			<filter tag="highway" value="construction" order="46" />
+			<filter tag="highway" value="proposed" order="45" />
+			<filter tag="highway" value="motorway_link" order="44" />
+			<filter tag="highway" value="trunk_link" order="43" />
+			<filter tag="highway" value="primary_link" order="42" />
+			<filter tag="highway" value="secondary_link" order="41" />
+			
+			<filter tag="highway" value="pedestrian" order="40" />
+			<filter tag="highway" value="cycleway" order="39" />
+			<filter tag="highway" value="byway" order="38" />
+			<filter tag="highway" value="footway" order="37" />
+			<filter tag="highway" value="steps" order="36" />
+			<filter tag="highway" value="bridleway" order="35" />
+		
+		</filter>
+	</order>
 
 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom], textLength, ref -->
 	<text>
 		<!-- Highway ref  -->
 		<filter minzoom="10" tag="highway" value="trunk" ref="only" textMinDistance="70" textColor="#ffffff" textSize="10" textBold="true">
-			<filter textLength="1" textShield="tru_shield1"/>
-			<filter textLength="2" textShield="tru_shield2"/>
-			<filter textLength="3" textShield="tru_shield3"/>
-			<filter textLength="4" textShield="tru_shield4"/>
-			<filter textLength="5" textShield="tru_shield5"/>
-			<filter textLength="6" textShield="tru_shield6"/>
+			<filter textLength="1" textShield="tru_shield1" />
+			<filter textLength="2" textShield="tru_shield2" />
+			<filter textLength="3" textShield="tru_shield3" />
+			<filter textLength="4" textShield="tru_shield4" />
+			<filter textLength="5" textShield="tru_shield5" />
+			<filter textLength="6" textShield="tru_shield6" />
 		</filter>
-		
+
 		<filter minzoom="10" tag="highway" value="motorway" ref="only" textMinDistance="70" textColor="#ffffff" textSize="10" textBold="true">
-			<filter textLength="1" textShield="mot_shield1"/>
-			<filter textLength="2" textShield="mot_shield2"/>
-			<filter textLength="3" textShield="mot_shield3"/>
-			<filter textLength="4" textShield="mot_shield4"/>
-			<filter textLength="5" textShield="mot_shield5"/>
-			<filter textLength="6" textShield="mot_shield6"/>
+			<filter textLength="1" textShield="mot_shield1" />
+			<filter textLength="2" textShield="mot_shield2" />
+			<filter textLength="3" textShield="mot_shield3" />
+			<filter textLength="4" textShield="mot_shield4" />
+			<filter textLength="5" textShield="mot_shield5" />
+			<filter textLength="6" textShield="mot_shield6" />
 		</filter>
-		
+
 		<filter minzoom="11" tag="highway" value="primary" ref="only" textMinDistance="70" textColor="#ffffff" textSize="10" textBold="true">
-			<filter textLength="1" textShield="pri_shield1"/>
-			<filter textLength="2" textShield="pri_shield2"/>
-			<filter textLength="3" textShield="pri_shield3"/>
-			<filter textLength="4" textShield="pri_shield4"/>
-			<filter textLength="5" textShield="pri_shield5"/>
-			<filter textLength="6" textShield="pri_shield6"/>
+			<filter textLength="1" textShield="pri_shield1" />
+			<filter textLength="2" textShield="pri_shield2" />
+			<filter textLength="3" textShield="pri_shield3" />
+			<filter textLength="4" textShield="pri_shield4" />
+			<filter textLength="5" textShield="pri_shield5" />
+			<filter textLength="6" textShield="pri_shield6" />
 		</filter>
-		
+
 		<filter minzoom="14" tag="highway" value="secondary" ref="only" textMinDistance="70" textColor="#ffffff" textSize="10" textBold="true">
-			<filter textLength="1" textShield="sec_shield1"/>
-			<filter textLength="2" textShield="sec_shield2"/>
-			<filter textLength="3" textShield="sec_shield3"/>
-			<filter textLength="4" textShield="sec_shield4"/>
-			<filter textLength="5" textShield="sec_shield5"/>
-			<filter textLength="6" textShield="sec_shield6"/>
+			<filter textLength="1" textShield="sec_shield1" />
+			<filter textLength="2" textShield="sec_shield2" />
+			<filter textLength="3" textShield="sec_shield3" />
+			<filter textLength="4" textShield="sec_shield4" />
+			<filter textLength="5" textShield="sec_shield5" />
+			<filter textLength="6" textShield="sec_shield6" />
 		</filter>
-		
+
 		<filter minzoom="15" tag="highway" value="tertiary" ref="only" textMinDistance="70" textColor="#ffffff" textSize="10" textBold="true">
-			<filter textLength="1" textShield="ter_shield1"/>
-			<filter textLength="2" textShield="ter_shield2"/>
-			<filter textLength="3" textShield="ter_shield3"/>
-			<filter textLength="4" textShield="ter_shield4"/>
-			<filter textLength="5" textShield="ter_shield5"/>
-			<filter textLength="6" textShield="ter_shield6"/>
+			<filter textLength="1" textShield="ter_shield1" />
+			<filter textLength="2" textShield="ter_shield2" />
+			<filter textLength="3" textShield="ter_shield3" />
+			<filter textLength="4" textShield="ter_shield4" />
+			<filter textLength="5" textShield="ter_shield5" />
+			<filter textLength="6" textShield="ter_shield6" />
 		</filter>
-		 
+
 		<!-- Highway text -->
 		<filter minzoom="16" textSize="9" textOnPath="true" tag="highway" value="motorway" />
 		<filter minzoom="16" textSize="9" textOnPath="true" tag="highway" value="motorway_link" />
-		
+
 		<switch>
-			<case tag="highway" value="trunk"/>
-			<case tag="highway" value="trunk_link"/>
-			<case tag="highway" value="primary"/>
-			<case tag="highway" value="primary_link"/>
-			<case tag="highway" value="secondary"/>
-			<case tag="highway" value="secondary_link"/>
+			<case tag="highway" value="trunk" />
+			<case tag="highway" value="trunk_link" />
+			<case tag="highway" value="primary" />
+			<case tag="highway" value="primary_link" />
+			<case tag="highway" value="secondary" />
+			<case tag="highway" value="secondary_link" />
 			<filter>
 				<filter minzoom="13" maxzoom="13" textSize="8" textOnPath="true" />
 				<filter minzoom="14" maxzoom="14" textSize="9" textOnPath="true" />
 				<filter minzoom="15" maxzoom="16" textSize="10" textOnPath="true" />
-				<filter minzoom="17" textSize="12" textOnPath="true"/>
+				<filter minzoom="17" textSize="12" textOnPath="true" />
 			</filter>
-			
+
 		</switch>
-		
+
 		<filter minzoom="15" maxzoom="16" textSize="9" textOnPath="true" tag="highway" value="tertiary" />
 		<filter minzoom="17" textSize="11" textOnPath="true" tag="highway" value="tertiary" />
 		<filter minzoom="15" maxzoom="16" textSize="9" textOnPath="true" tag="highway" value="residential" />
@@ -89,7 +157,7 @@
 		<filter minzoom="17" textSize="11" textOnPath="true" tag="highway" value="unclassified" />
 		<filter minzoom="15" maxzoom="16" textSize="9" textOnPath="true" tag="highway" value="road" />
 		<filter minzoom="17" textSize="11" textOnPath="true" tag="highway" value="road" />
-		
+
 		<filter minzoom="16" textSize="9" textOnPath="true" tag="highway" value="track" />
 		<filter minzoom="16" textSize="9" textOnPath="true" tag="highway" value="path" />
 		<filter minzoom="16" textSize="9" textOnPath="true" tag="highway" value="living_street" />
