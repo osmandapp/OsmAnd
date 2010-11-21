@@ -25,6 +25,7 @@ import net.osmand.RotatedTileBox;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.index.IndexConstants;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
@@ -193,7 +194,7 @@ public class MapRenderRepositories {
 			ArrayList<BinaryMapDataObject> tempList = new ArrayList<BinaryMapDataObject>();
 			System.gc(); // to clear previous objects
 			TLongSet ids = new TLongHashSet();
-			Map<Integer, List<BinaryMapDataObject>> multiPolygons = new LinkedHashMap<Integer, List<BinaryMapDataObject>>();
+			Map<TagValuePair, List<BinaryMapDataObject>> multiPolygons = new LinkedHashMap<TagValuePair, List<BinaryMapDataObject>>();
 			int leftX = MapUtils.get31TileNumberX(cLeftLongitude);
 			int rightX = MapUtils.get31TileNumberX(cRightLongitude);
 			int bottomY = MapUtils.get31TileNumberY(cBottomLatitude);
@@ -242,7 +243,19 @@ public class MapRenderRepositories {
 					count++;
 					
 					for(int i=0; i < r.getTypes().length; i++){
-						registerMultipolygon(multiPolygons, r.getTypes()[i], r);
+						if ((r.getTypes()[i] & 0x3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
+							// multy polygon
+							int type = MapRenderingTypes.getMainObjectType(r.getTypes()[i]);
+							int subtype = MapRenderingTypes.getObjectSubType(r.getTypes()[i]);
+							TagValuePair pair = r.getMapIndex().decodeType(type, subtype);
+							if(pair != null){
+								pair = new TagValuePair(pair.tag, pair.value, r.getTypes()[i]);
+								if (!multiPolygons.containsKey(pair)) {
+									multiPolygons.put(pair, new ArrayList<BinaryMapDataObject>());
+								}
+								multiPolygons.get(pair).add(r);
+							}
+						}
 					}
 					
 					
@@ -339,30 +352,18 @@ public class MapRenderRepositories {
 
 	
 	/// Manipulating with multipolygons
-	private void registerMultipolygon(Map<Integer, List<BinaryMapDataObject>> multyPolygons, int type, BinaryMapDataObject obj) {
-		if ((type & 0x3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
-			// multy polygon
-			if (type != 0) {
-				if (!multyPolygons.containsKey(type)) {
-					multyPolygons.put(type, new ArrayList<BinaryMapDataObject>());
-				}
-				multyPolygons.get(type).add(obj);
-			}
-
-		}
-	}
 	
-	public List<MultyPolygon> proccessMultiPolygons(Map<Integer, List<BinaryMapDataObject>> multyPolygons, int leftX, int rightX, int bottomY, int topY, int zoom){
+	public List<MultyPolygon> proccessMultiPolygons(Map<TagValuePair, List<BinaryMapDataObject>> multyPolygons, int leftX, int rightX, int bottomY, int topY, int zoom){
 		List<MultyPolygon> listPolygons = new ArrayList<MultyPolygon>(multyPolygons.size());
 		List<List<Long>> completedRings = new ArrayList<List<Long>>();
 		List<List<Long>> incompletedRings = new ArrayList<List<Long>>();
 		List<String> completedRingNames = new ArrayList<String>();
 		List<String> incompletedRingNames = new ArrayList<String>();
-		for (Integer type : multyPolygons.keySet()) {
+		for (TagValuePair type : multyPolygons.keySet()) {
 			List<BinaryMapDataObject> directList;
 			List<BinaryMapDataObject> inverselist;
-			if(((type >> 15) & 1) == 1){
-				int directType = (type & ((1 << 15) - 1));
+			if(((type.additionalAttribute >> 15) & 1) == 1){
+				TagValuePair directType = new TagValuePair(type.tag, type.value, type.additionalAttribute & ((1 << 15) - 1));
 				if (!multyPolygons.containsKey(directType)) {
 					inverselist = multyPolygons.get(type);
 					directList = Collections.emptyList();
@@ -371,7 +372,7 @@ public class MapRenderRepositories {
 					continue;
 				}
 			} else {
-				int inverseType = (type | (1 << 15));
+				TagValuePair inverseType = new TagValuePair(type.tag, type.value, type.additionalAttribute | (1 << 15));
 				directList = multyPolygons.get(type);
 				inverselist = Collections.emptyList();
 				if (multyPolygons.containsKey(inverseType)) {
@@ -394,10 +395,13 @@ public class MapRenderRepositories {
 
 	private MultyPolygon processMultiPolygon(int leftX, int rightX, int bottomY, int topY, List<MultyPolygon> listPolygons,
 			List<List<Long>> completedRings, List<List<Long>> incompletedRings, List<String> completedRingNames, List<String> incompletedRingNames, 
-			Integer type, List<BinaryMapDataObject> directList, List<BinaryMapDataObject> inverselist, int zoom) {
+			TagValuePair type, List<BinaryMapDataObject> directList, List<BinaryMapDataObject> inverselist, int zoom) {
 		MultyPolygon pl = new MultyPolygon();
+		// TODO delete setType at all!!!
 		// delete direction last bit (to not show point)
-		pl.setType(type & 0x7fff);
+		pl.setType(type.additionalAttribute);
+		pl.setTag(type.tag);
+		pl.setValue(type.value);
 		long dbId = 0;
 		for (int km = 0; km < 2; km++) {
 			List<BinaryMapDataObject> list = km == 0 ? directList : inverselist;
@@ -443,8 +447,7 @@ public class MapRenderRepositories {
 		} else {
 			// due to self intersection small objects (for low zooms check only coastline)
 			if (zoom >= 13
-					|| (MapRenderingTypes.getMainObjectType(pl.getTypes()[0]) == MapRenderingTypes.NATURAL && MapRenderingTypes
-							.getObjectSubType(pl.getTypes()[0]) == 5)) {
+					|| ("natural".equals(type.tag) && "coastline".equals(type.value))) {  //$NON-NLS-1$//$NON-NLS-2$
 				boolean clockwiseFound = false;
 				for (List<Long> c : completedRings) {
 					if (isClockwiseWay(c)) {

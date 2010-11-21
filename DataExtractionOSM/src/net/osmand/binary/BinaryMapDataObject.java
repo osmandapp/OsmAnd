@@ -1,5 +1,6 @@
 package net.osmand.binary;
 
+import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.osm.MapRenderingTypes;
 
 public class BinaryMapDataObject {
@@ -14,6 +15,8 @@ public class BinaryMapDataObject {
 	
 	protected String name;
 	
+	protected MapIndex mapIndex = null;
+	
 	
 	public BinaryMapDataObject(){
 	}
@@ -21,6 +24,7 @@ public class BinaryMapDataObject {
 	protected void setStringId(int stringId) {
 		this.stringId = stringId;
 	}
+	
 	
 	protected void setCoordinates(int[] coordinates) {
 		this.coordinates = coordinates;
@@ -57,6 +61,14 @@ public class BinaryMapDataObject {
 	
 	public int getHighwayAttributes() {
 		return highwayAttributes;
+	}
+	
+	public MapIndex getMapIndex() {
+		return mapIndex;
+	}
+	
+	public void setMapIndex(MapIndex mapIndex) {
+		this.mapIndex = mapIndex;
 	}
 	
 	protected void setHighwayAttributes(int highwayAttributes) {

@@ -3,6 +3,7 @@ package net.osmand.render;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TFloatObjectHashMap;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -13,13 +14,14 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.LogUtil;
-import net.osmand.R;
 import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MultyPolygon;
 import net.sf.junidecode.Junidecode;
 
 import org.apache.commons.logging.Log;
+import org.xml.sax.SAXException;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -62,6 +64,8 @@ public class OsmandRenderer {
 	private Map<Integer, Bitmap> cachedIcons = new LinkedHashMap<Integer, Bitmap>();
 
 	private final Context context;
+
+	private BaseOsmandRender render;
 
 	
 	private static class TextDrawInfo {
@@ -210,26 +214,32 @@ public class OsmandRenderer {
 		}
 	}
 	
-	public OsmandRenderer(Context context){
+	public OsmandRenderer(Context context) {
 		this.context = context;
-		
+
 		paintIcon = new Paint();
 		paintIcon.setStyle(Style.STROKE);
-		
+
 		paintText = new TextPaint();
 		paintText.setStyle(Style.FILL);
 		paintText.setColor(Color.BLACK);
 		paintText.setTextAlign(Align.CENTER);
 		paintText.setTypeface(Typeface.create("Droid Serif", Typeface.NORMAL)); //$NON-NLS-1$
 		paintText.setAntiAlias(true);
-		
+
 		paint = new Paint();
 		paint.setAntiAlias(true);
-		
+
 		paintFillEmpty = new Paint();
 		paintFillEmpty.setStyle(Style.FILL);
 		paintFillEmpty.setColor(clFillScreen);
-		
+		try {
+			render = BaseOsmandRender.defaultRender();
+		} catch (IOException e) {
+			log.error("Exception initialize renderer", e); //$NON-NLS-1$
+		} catch (SAXException e) {
+			log.error("Exception initialize renderer", e); //$NON-NLS-1$
+		}
 	}
 	
 	public PathEffect getDashEffect(String dashes){
@@ -545,17 +555,38 @@ public class OsmandRenderer {
 		return rc.tempPoint;
 	}
 
+	
+	
+
+	
+	
+	public void clearCachedResources(){
+		Collection<Bitmap> values = new ArrayList<Bitmap>(cachedIcons.values());
+		cachedIcons.clear();
+		for(Bitmap b : values){
+			if(b != null){
+				b.recycle();
+			}
+		}
+		shaders.clear();
+	}
+	
 	private void drawMultiPolygon(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype) {
-		Path path = null;
+		String tag = ((MultyPolygon)obj).getTag();
+		String value = ((MultyPolygon)obj).getValue();
+		if(render == null || tag == null){
+			return;
+		}
 		rc.main.emptyArea();
 		rc.second.emptyLine();
 		rc.main.color = Color.rgb(245, 245, 245);
-		PolygonRenderer.renderPolygon(rc, rc.zoom, type, subtype, this);
-		if (!rc.main.fillArea) {
+		
+		boolean rendered = render.renderPolygon(tag, value, rc.zoom, rc, this);
+		if(!rendered){
 			return;
 		}
 		rc.visible++;
-		path = new Path();
+		Path path = new Path();
 		for (int i = 0; i < ((MultyPolygon) obj).getBoundsCount(); i++) {
 			int cnt = ((MultyPolygon) obj).getBoundPointsCount(i);
 			float xText = 0;
@@ -574,7 +605,7 @@ public class OsmandRenderer {
 				String name = ((MultyPolygon) obj).getName(i);
 				if (name != null) {
 					rc.clearText();
-					name = renderObjectText(name, subtype, type, rc.zoom, true, rc);
+					name = render.renderObjectText(name, tag, value, rc);
 					if (rc.textSize > 0 && name != null) {
 						TextDrawInfo info = new TextDrawInfo(name);
 						info.fillProperties(rc, xText / cnt, yText / cnt);
@@ -594,7 +625,12 @@ public class OsmandRenderer {
 		}
 	}
 	
+	
 	private void drawPolygon(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype) {
+		TagValuePair pair = obj.getMapIndex().decodeType(type, subtype);
+		if(render == null || pair == null){
+			return;
+		}
 		float xText = 0;
 		float yText = 0;
 		int zoom = rc.zoom;
@@ -603,8 +639,8 @@ public class OsmandRenderer {
 		rc.second.emptyLine();
 		rc.main.color = Color.rgb(245, 245, 245);
 		
-		PolygonRenderer.renderPolygon(rc, zoom, type, subtype, this);
-		if(!rc.main.fillArea){
+		boolean rendered = render.renderPolygon(pair.tag, pair.value, zoom, rc, this);
+		if(!rendered){
 			return;
 		}
 		rc.visible++;
@@ -635,7 +671,7 @@ public class OsmandRenderer {
 			String name = obj.getName();
 			if(name != null){
 				rc.clearText();
-				name = renderObjectText(name, subtype, type, rc.zoom, true, rc);
+				name = render.renderObjectText(name, pair.tag, pair.value, rc);
 				if (rc.textSize > 0 && name != null) {
 					TextDrawInfo info = new TextDrawInfo(name);
 					info.fillProperties(rc, xText, yText);
@@ -645,31 +681,23 @@ public class OsmandRenderer {
 		}
 		return;
 	}
-
-	
-	
-	public void clearCachedResources(){
-		Collection<Bitmap> values = new ArrayList<Bitmap>(cachedIcons.values());
-		cachedIcons.clear();
-		for(Bitmap b : values){
-			if(b != null){
-				b.recycle();
-			}
-		}
-		shaders.clear();
-	}
 	
 	private void drawPoint(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype, boolean renderText) {
-		int resId = PointRenderer.getPointBitmap(rc.zoom, type, subtype);
+		TagValuePair pair = obj.getMapIndex().decodeType(type, subtype);
+		if(render == null || pair == null){
+			return;
+		}
+		
+		Integer resId = render.getPointIcon(pair.tag, pair.value, rc.zoom);
 		String name = null;
 		if (renderText) {
 			name = obj.getName();
 			if (name != null) {
 				rc.clearText();
-				name = renderObjectText(name, subtype, type, rc.zoom, true, rc);
+				name = render.renderObjectText(name, pair.tag, pair.value, rc);
 			}
 		}
-		if(resId == 0 && name == null){
+		if(resId == null && name == null){
 			return;
 		}
 		int len = obj.getPointsLength();
@@ -685,7 +713,7 @@ public class OsmandRenderer {
 			ps.y /= len;
 		}
 		
-		if(resId != 0){
+		if(resId != null){
 			IconDrawInfo ico = new IconDrawInfo();
 			ico.x = ps.x;
 			ico.y = ps.y;
@@ -699,10 +727,140 @@ public class OsmandRenderer {
 		}
 			
 	}
-
+	
 
 	
 	private void drawPolyline(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype, int wholeType) {
+		rc.main.emptyLine();
+		rc.second.emptyLine();
+		rc.third.emptyLine();
+		rc.adds = null;
+		TagValuePair pair = obj.getMapIndex().decodeType(type, subtype);
+		if(render == null || pair == null){
+			return;
+		}
+		render.renderPolyline(pair.tag, pair.value, rc.zoom, rc, this);
+		if(rc.main.strokeWidth == 0){
+			return;
+		}
+		if("highway".equals(pair.tag) && rc.zoom >= 16 && MapRenderingTypes.isOneWayWay(obj.getHighwayAttributes())){ //$NON-NLS-1$
+			rc.adds = PolylineRenderer.getOneWayProperties();
+		}
+		
+		
+		
+		int length = obj.getPointsLength();
+		if(length < 2){
+			return;
+		}
+		rc.visible++;
+		
+		Path path = null;
+		float pathRotate = 0;
+		float xLength = 0;
+		float yLength = 0;
+		boolean inverse = false;
+		float xPrev = 0;
+		float yPrev = 0;
+		float xMid = 0;
+		float yMid = 0;
+		PointF middlePoint = new PointF();
+		int middle = obj.getPointsLength() / 2;
+		
+		for (int i = 0; i < length ; i++) {
+			PointF p = calcPoint(obj, i, rc);
+			if(i == 0 || i == length -1){
+				xMid += p.x;
+				yMid += p.y;
+			}
+			if (path == null) {
+				path = new Path();
+				path.moveTo(p.x, p.y);
+			} else {
+				xLength += p.x - xPrev; // not abs
+				yLength += p.y - yPrev; // not abs
+				if(i == middle){
+					middlePoint.set(p.x, p.y);
+					double rot = - Math.atan2(p.x - xPrev, p.y - yPrev) * 180 / Math.PI;
+					if (rot < 0) {
+						rot += 360;
+					}
+					if (rot < 180) {
+						rot += 180;
+						inverse = true;
+					}
+					pathRotate = (float) rot;
+				}
+				path.lineTo(p.x, p.y);
+			}
+			xPrev = p.x;
+			yPrev = p.y;
+		}
+		if (path != null) {
+			rc.main.updatePaint(paint);
+			canvas.drawPath(path, paint);
+			if (rc.second.strokeWidth != 0) {
+				rc.second.updatePaint(paint);
+				canvas.drawPath(path, paint);
+				if (rc.third.strokeWidth != 0) {
+					rc.third.updatePaint(paint);
+					canvas.drawPath(path, paint);
+				}
+			}
+			if (rc.adds != null) {
+				for (int i = 0; i < rc.adds.length; i++) {
+					rc.adds[i].updatePaint(paint);
+					canvas.drawPath(path, paint);
+				}
+			}
+			if (obj.getName() != null) {
+				String name = obj.getName();
+				rc.clearText();
+				name = TextRenderer.renderObjectText(name, subtype, type, rc.zoom, false, rc);
+				if(rc.textSize == 0 && rc.showAnotherText != null){
+					name = TextRenderer.renderObjectText(rc.showAnotherText, subtype, type, rc.zoom, false, rc);
+				}
+				if (name != null && rc.textSize > 0) {
+					if (!rc.showTextOnPath) {
+						TextDrawInfo text = new TextDrawInfo(name);
+						text.fillProperties(rc, middlePoint.x, middlePoint.y);
+						rc.textToDraw.add(text);
+					} 
+					if(rc.showAnotherText != null){
+						name = TextRenderer.renderObjectText(rc.showAnotherText, subtype, type, rc.zoom, false, rc);
+					}
+					
+					if (rc.showTextOnPath && paintText.measureText(obj.getName()) < Math.max(Math.abs(xLength), Math.abs(yLength))) {
+						if (inverse) {
+							path.rewind();
+							boolean st = true;
+							for (int i = obj.getPointsLength() - 1; i >= 0; i--) {
+								PointF p = calcPoint(obj, i, rc);
+								if (st) {
+									st = false;
+									path.moveTo(p.x, p.y);
+								} else {
+									path.lineTo(p.x, p.y);
+								}
+							}
+						}
+
+						TextDrawInfo text = new TextDrawInfo(name);
+						text.fillProperties(rc, xMid / 2, yMid / 2);
+						text.pathRotate = pathRotate;
+						text.drawOnPath = path;
+						text.vOffset = rc.main.strokeWidth / 2 - 1;
+						rc.textToDraw.add(text);
+
+					}
+				}
+			}
+		}
+	}
+
+	
+	// TODO delete !!!
+	private void drawPolylineOld(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype, int wholeType) {
 		rc.main.emptyLine();
 		rc.second.emptyLine();
 		rc.third.emptyLine();
@@ -781,9 +939,9 @@ public class OsmandRenderer {
 			if (obj.getName() != null) {
 				String name = obj.getName();
 				rc.clearText();
-				name = renderObjectText(name, subtype, type, rc.zoom, false, rc);
+				name = TextRenderer.renderObjectText(name, subtype, type, rc.zoom, false, rc);
 				if(rc.textSize == 0 && rc.showAnotherText != null){
-					name = renderObjectText(rc.showAnotherText, subtype, type, rc.zoom, false, rc);
+					name = TextRenderer.renderObjectText(rc.showAnotherText, subtype, type, rc.zoom, false, rc);
 				}
 				if (name != null && rc.textSize > 0) {
 					if (!rc.showTextOnPath) {
@@ -792,7 +950,7 @@ public class OsmandRenderer {
 						rc.textToDraw.add(text);
 					} 
 					if(rc.showAnotherText != null){
-						name = renderObjectText(rc.showAnotherText, subtype, type, rc.zoom, false, rc);
+						name = TextRenderer.renderObjectText(rc.showAnotherText, subtype, type, rc.zoom, false, rc);
 					}
 					
 					if (rc.showTextOnPath && paintText.measureText(obj.getName()) < Math.max(Math.abs(xLength), Math.abs(yLength))) {
@@ -822,760 +980,147 @@ public class OsmandRenderer {
 			}
 		}
 	}
-
-	private static int[] trunkShields = new int[]{R.drawable.tru_shield1, R.drawable.tru_shield2, R.drawable.tru_shield3,
-		R.drawable.tru_shield4, R.drawable.tru_shield5, R.drawable.tru_shield6, R.drawable.tru_shield7,};
-	private static int[] motorShields = new int[]{R.drawable.mot_shield1, R.drawable.mot_shield2, R.drawable.mot_shield3,
-		R.drawable.mot_shield4, R.drawable.mot_shield5, R.drawable.mot_shield6, R.drawable.mot_shield7,};
-	private static int[] primaryShields = new int[]{R.drawable.pri_shield1, R.drawable.pri_shield2, R.drawable.pri_shield3,
-		R.drawable.pri_shield4, R.drawable.pri_shield5, R.drawable.pri_shield6, R.drawable.pri_shield7,};
-	private static int[] secondaryShields = new int[]{R.drawable.sec_shield1, R.drawable.sec_shield2, R.drawable.sec_shield3,
-		R.drawable.sec_shield4, R.drawable.sec_shield5, R.drawable.sec_shield6, R.drawable.sec_shield7,};
-	private static int[] tertiaryShields = new int[]{R.drawable.ter_shield1, R.drawable.ter_shield2, R.drawable.ter_shield3,
-		R.drawable.ter_shield4, R.drawable.ter_shield5, R.drawable.ter_shield6, R.drawable.ter_shield7,};
-
-	public static String renderObjectText(String name, int subType, int type, int zoom, boolean point, RenderingContext rc) {
-		if(name == null || name.length() == 0){
-			return null;
-		}
-		int textSize = 0;
-		int textColor = 0;
-		int wrapWidth = 0;
-		int shadowRadius = 0;
-		int textMinDistance = 0;
-		int textShield = 0;
-		int dy = 0;
-		boolean bold = false;
-		boolean showTextOnPath = false;
+	
+	private void drawPolygonOld(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype) {
+		float xText = 0;
+		float yText = 0;
+		int zoom = rc.zoom;
+		Path path = null;
+		rc.main.emptyArea();
+		rc.second.emptyLine();
+		rc.main.color = Color.rgb(245, 245, 245);
 		
-		switch (type) {
-		case MapRenderingTypes.HIGHWAY : {
-			if(name.charAt(0) == MapRenderingTypes.REF_CHAR){
-				name = name.substring(1);
-				for(int k = 0; k < name.length(); k++){
-					if(name.charAt(k) == MapRenderingTypes.REF_CHAR){
-						if(k < name.length() - 1 && zoom > 14){
-							rc.showAnotherText = name.substring(k + 1);
-						}
-						name = name.substring(0, k);
-						break;
-					}
-				}
-				if(rc.showAnotherText != null && zoom >= 16){
-					break;
-				}
-				if(name.length() > 6){
-					name = name.substring(0, 6);
-				}
-				int len = name.length();
-				if(len == 0){
-					// skip it
-				} else {
-					textSize = 10;
-					textColor = Color.WHITE;
-					bold = true;
-					textMinDistance = 70;
-					// spacing = 750
-					if (subType == MapRenderingTypes.PL_HW_TRUNK) {
-						textShield = trunkShields[len - 1];
-						if(zoom < 10){
-							textSize = 0;
-						}
-					} else if (subType == MapRenderingTypes.PL_HW_MOTORWAY) {
-						textShield = motorShields[len - 1];
-						if(zoom < 10){
-							textSize = 0;
-						}
-					} else if (subType == MapRenderingTypes.PL_HW_PRIMARY) {
-						textShield = primaryShields[len - 1];
-						if(zoom < 11){
-							textSize = 0;
-						}
-					} else if (subType == MapRenderingTypes.PL_HW_SECONDARY) {
-						if(zoom < 14){
-							textSize = 0;
-						}
-						textShield = secondaryShields[len - 1];
-					} else if (subType == MapRenderingTypes.PL_HW_TERTIARY) {
-						if(zoom < 15){
-							textSize = 0;
-						}
-						textShield = tertiaryShields[len - 1];
-					} else {
-						if(zoom < 16){
-							textSize = 0;
-						} else {
-							showTextOnPath = true;
-							textColor = Color.BLACK;
-							textSize = 10;
-							textMinDistance = 40;
-							shadowRadius = 1;
-							// spacing = 750;
-						}
-					}
-				}
+		PolygonRenderer.renderPolygon(rc, zoom, type, subtype, this);
+		if(!rc.main.fillArea){
+			return;
+		}
+		rc.visible++;
+		int len = obj.getPointsLength();
+		for (int i = 0; i < obj.getPointsLength(); i++) {
+
+			PointF p = calcPoint(obj, i, rc);
+			xText += p.x;
+			yText += p.y;
+			if (path == null) {
+				path = new Path();
+				path.moveTo(p.x, p.y);
 			} else {
-				if(subType == MapRenderingTypes.PL_HW_TRUNK || subType == MapRenderingTypes.PL_HW_PRIMARY 
-						|| subType == MapRenderingTypes.PL_HW_SECONDARY){
-					textColor = Color.BLACK;
-					showTextOnPath = true;
-					if(zoom == 13 && type != MapRenderingTypes.PL_HW_SECONDARY){
-						textSize = 8;
-					} else if(zoom == 14){
-						textSize = 9;
-					} else if(zoom > 14 && zoom < 17){
-						textSize = 10;
-					} else if(zoom > 16){
-						textSize = 12;
-					}
-				} else if(subType == MapRenderingTypes.PL_HW_TERTIARY || subType == MapRenderingTypes.PL_HW_RESIDENTIAL
-						|| subType == MapRenderingTypes.PL_HW_UNCLASSIFIED || subType == MapRenderingTypes.PL_HW_SERVICE){
-					textColor = Color.BLACK;
-					showTextOnPath = true;
-					if(zoom < 15){
-						textSize = 0;
-					} else if(zoom < 17){
-						textSize = 9;
-					} else {
-						textSize = 11;
-					}
-				} else if(subType < 32){
-					// highway subtype
-					if(zoom >= 16){
-						textColor = Color.BLACK;
-						showTextOnPath = true;
-						textSize = 9;
-					}
-				} else if(subType == 40){
-					// bus stop
-					if(zoom >= 17){
-						textMinDistance = 20;
-						textColor = Color.BLACK;
-						textSize = 9;
-						wrapWidth = 25;
-						dy = 11;
-					}
-				}
-			}
-		} break;
-		case MapRenderingTypes.WATERWAY : {
-			if (subType == 1) {
-				if (zoom >= 15 /* && !tunnel */) {
-					showTextOnPath = true;
-					textSize = 8;
-					shadowRadius = 1;
-					textColor = 0xff6699cc;
-				}
-			} else if (subType == 2 || subType == 4) {
-				if (zoom >= 12 /* && !tunnel */) {
-					textSize = 9;
-					showTextOnPath = true;
-					shadowRadius = 1;
-					textColor = 0xff6699cc;
-					textMinDistance = 70;
-				}
-			} else if (subType == 5 || subType == 6) {
-				if (zoom >= 15 /* && !tunnel */) {
-					textSize = 8;
-					showTextOnPath = true;
-					shadowRadius = 1;
-					textColor = 0xff6699cc;
-				}
-			} else if (subType == 12) {
-				if(zoom >= 15){
-					textColor = Color.BLACK;
-					textSize = 8;
-					shadowRadius = 1;
-				}
-			} else if (subType == 8) {
-				if (zoom >= 15) {
-					shadowRadius = 1;
-					textSize = 9;
-					textColor = 0xff0066ff;
-					wrapWidth = 70;
-					dy = 10;
-				}
+				path.lineTo(p.x, p.y);
 			}
 		}
-			break;
-		case MapRenderingTypes.AEROWAY: {
-			textColor = 0xff6692da;
-			shadowRadius = 1;
-			if(name.charAt(0) == MapRenderingTypes.REF_CHAR){
-				name = name.substring(1);
-			}
-			if (subType == 7 || subType == 8) {
-				if (zoom >= 15) {
-					showTextOnPath = true;
-					textSize = 10;
-					textColor = 0xff333333;
-					textMinDistance = 50;
-					shadowRadius = 1;
-					// spacing = 750;
-				}
-			} else if (subType == 10) {
-				// airport
-				if (zoom >= 10 && zoom <= 12) {
-					textSize = 9;
-					dy = -12;
-					bold = true;
 
-				}
-			} else if (subType == 1) {
-				// aerodrome
-				if (zoom >= 10 && zoom <= 12) {
-					textSize = 8;
-					dy = -12;
-				}
-			} else if (subType == 12) {
-				if (zoom >= 17) {
-					textSize = 10;
-					textColor = 0xffaa66cc;
-					shadowRadius = 1;
-					wrapWidth = 10;
-				}
-			}
-		}
-			break;
-		case MapRenderingTypes.AERIALWAY: {
-			if (subType == 7) {
-				if (zoom >= 14) {
-					textColor = 0xff6666ff;
-					shadowRadius = 1;
-					if (zoom == 14) {
-						dy = -7;
-						textSize = 8;
+		if (path != null && len > 0) {
+			xText /= len;
+			yText /= len;
 
-					} else {
-						dy = -10;
-						textSize = 10;
-					}
+			rc.main.updatePaint(paint);
+			canvas.drawPath(path, paint);
+			if (rc.second.strokeWidth != 0) {
+				rc.second.updatePaint(paint);
+				canvas.drawPath(path, paint);
+			}
+			String name = obj.getName();
+			if(name != null){
+				rc.clearText();
+				name = TextRenderer.renderObjectText(name, subtype, type, rc.zoom, true, rc);
+				if (rc.textSize > 0 && name != null) {
+					TextDrawInfo info = new TextDrawInfo(name);
+					info.fillProperties(rc, xText, yText);
+					rc.textToDraw.add(info);
 				}
+			}
+		}
+		return;
+	}
+	
+	private void drawPointOld(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype, boolean renderText) {
+		int resId = PointRenderer.getPointBitmap(rc.zoom, type, subtype);
+		String name = null;
+		if (renderText) {
+			name = obj.getName();
+			if (name != null) {
+				rc.clearText();
+				name = TextRenderer.renderObjectText(name, subtype, type, rc.zoom, true, rc);
+			}
+		}
+		if(resId == 0 && name == null){
+			return;
+		}
+		int len = obj.getPointsLength();
+		rc.visible++;
+		PointF ps = new PointF(0, 0);
+		for (int i = 0; i < len; i++) {
+			PointF p = calcPoint(obj, i, rc);
+			ps.x += p.x;
+			ps.y += p.y;
+		}
+		if(len > 1){
+			ps.x /= len;
+			ps.y /= len;
+		}
+		
+		if(resId != 0){
+			IconDrawInfo ico = new IconDrawInfo();
+			ico.x = ps.x;
+			ico.y = ps.y;
+			ico.resId = resId;
+			rc.iconsToDraw.add(ico);
+		}
+		if (name != null && rc.textSize > 0) {
+			TextDrawInfo info = new TextDrawInfo(name);
+			info.fillProperties(rc, ps.x, ps.y);
+			rc.textToDraw.add(info);
+		}
+			
+	}
 
-			}
+	private void drawMultiPolygonOld(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype) {
+		Path path = null;
+		rc.main.emptyArea();
+		rc.second.emptyLine();
+		rc.main.color = Color.rgb(245, 245, 245);
+		PolygonRenderer.renderPolygon(rc, rc.zoom, type, subtype, this);
+		if (!rc.main.fillArea) {
+			return;
 		}
-			break;
-		case MapRenderingTypes.RAILWAY: {
-			if (zoom >= 14) {
-				textColor = 0xff6666ff;
-				shadowRadius = 1;
-				if (subType == 13) {
-					bold = true;
-					if (zoom == 14) {
-						dy = -8;
-						textSize = 9;
-					} else {
-						dy = -10;
-						textSize = 11;
-					}
-				} else if (subType == 22 || subType == 23) {
-					if (zoom == 14) {
-						dy = -7;
-						textSize = 8;
-					} else {
-						dy = -10;
-						textSize = 10;
-					}
+		rc.visible++;
+		path = new Path();
+		for (int i = 0; i < ((MultyPolygon) obj).getBoundsCount(); i++) {
+			int cnt = ((MultyPolygon) obj).getBoundPointsCount(i);
+			float xText = 0;
+			float yText = 0;
+			for (int j = 0; j < cnt; j++) {
+				PointF p = calcMultiPolygonPoint((MultyPolygon) obj, j, i, rc);
+				xText += p.x;
+				yText += p.y;
+				if (j == 0) {
+					path.moveTo(p.x, p.y);
+				} else {
+					path.lineTo(p.x, p.y);
 				}
 			}
-		}
-			break;
-		case MapRenderingTypes.EMERGENCY: {
-			if (zoom >= 17) {
-				if (subType == 10) {
-					dy = 9;
-					textColor = 0xff734a08;
-					wrapWidth = 30;
-					textSize = 10;
-				}
-			}
-		}
-			break;
-		case MapRenderingTypes.NATURAL: {
-			if (subType == 23) {
-				if (zoom >= 12) {
-					shadowRadius = 2;
-					textColor = 0xff00000;
-					textSize = 10;
-					wrapWidth = 10;
-				}
-			} else if (subType == 13) {
-				if (zoom >= 14) {
-					shadowRadius = 1;
-					textColor = 0xff654321;
-					textSize = 9;
-					dy = 5;
-				}
-			} else if (subType == 3) {
-				if (zoom >= 15) {
-					shadowRadius = 1;
-					textColor = 0xff654321;
-					textSize = 10;
-					dy = 9;
-					wrapWidth = 20;
-				}
-			} else if (subType == 21) {
-				if (zoom >= 12) {
-					textSize = 10;
-					shadowRadius = 1;
-					wrapWidth = 20;
-					textColor = 0xff6699cc;
-				}
-			} else if (subType == 2) {
-				if (zoom >= 14) {
-					textSize = 10;
-					shadowRadius = 1;
-					wrapWidth = 20;
-					textColor = 0xff6699cc;
-				}
-			} else if (subType == 17) {
-				if (zoom >= 16) {
-					textSize = 8;
-					shadowRadius = 1;
-					dy = 10;
-					wrapWidth = 20;
-					textColor = 0xff6699cc;
-				}
-			}
-		}
-			break;
-		case MapRenderingTypes.LANDUSE: {
-			if (zoom >= 15) {
-				if (subType == 22) {
-					textSize = 10;
-					shadowRadius = 1;
-					wrapWidth = 20;
-					textColor = 0xff6699cc;
-				} else if (point) {
-					textColor = 0xff000000;
-					shadowRadius = 2;
-					wrapWidth = 10;
-					textSize = 9;
-				}
-			}
-		}
-			break;
-		case MapRenderingTypes.TOURISM: {
-			if (subType == 9) {
-				if (zoom >= 16) {
-					textColor = 0xff6699cc;
-					shadowRadius = 1;
-					dy = 15;
-					textSize = 9;
-				}
-			} else if (subType == 12 || subType == 13 || subType == 14) {
-				if (zoom >= 17) {
-					textColor = 0xff0066ff;
-					shadowRadius = 1;
-					dy = 14;
-					textSize = 10;
-				}
-			} else if (subType == 11) {
-				if (zoom >= 17) {
-					textColor = 0xff0066ff;
-					shadowRadius = 1;
-					dy = 13;
-					textSize = 8;
-				}
-			} else if (subType == 4) {
-				if (zoom >= 17) {
-					shadowRadius = 1;
-					textSize = 10;
-					textColor = 0xff0066ff;
-					wrapWidth = 70;
-					dy = 15;
-				}
-			} else if (subType == 5) {
-				if (zoom >= 17) {
-					shadowRadius = 1;
-					textSize = 10;
-					textColor = 0xff0066ff;
-					wrapWidth = 70;
-					dy = 19;
-				}
-			} else if (subType == 7) {
-				if (zoom >= 15) {
-					textColor = 0xff734a08;
-					textSize = 9;
-					wrapWidth = 30;
-					shadowRadius = 1;
-				}
-			} else if (subType == 15) {
-				if (zoom >= 17) {
-					textColor = 0xff734a08;
-					textSize = 10;
-					dy = 12;
-					shadowRadius = 1;
-				}
-			}
-		}
-			break;
-		case MapRenderingTypes.LEISURE: {
-			if (subType == 8) {
-				if (zoom >= 15) {
-					textColor = Color.BLUE;
-					textSize = 9;
-					wrapWidth = 30;
-					shadowRadius = 1;
-				}
-			} else if ((zoom >= 15 && !point) || zoom >= 17) {
-				textColor = 0xff000000;
-				shadowRadius = 2;
-				wrapWidth = 15;
-				textSize = 9;
-			}
-		}
-			break;
-		case MapRenderingTypes.HISTORIC: {
-			if (zoom >= 17) {
-				if (subType == 6) {
-					shadowRadius = 1;
-					textColor = 0xff654321;
-					textSize = 9;
-					dy = 12;
-					wrapWidth = 20;
-				}
-			}
-		}
-			break;
-		case MapRenderingTypes.AMENITY_TRANSPORTATION: {
-			if (zoom >= 17) {
-				if (subType == 1) {
-					dy = 9;
-					textColor = 0xff0066ff;
-					textSize = 9;
-					wrapWidth = 34;
-				} else if (subType == 4 || subType == 18) {
-					textColor = 0xff0066ff;
-					shadowRadius = 1;
-					dy = 13;
-					textSize = 9;
-				}
-			}
-		}
-			break;
-		case MapRenderingTypes.AMENITY_EDUCATION: {
-			if (subType == 4) {
-				if (zoom >= 17) {
-					dy = 12;
-					textColor = 0xff734a08;
-					bold = true;
-					textSize = 10;
-				}
-			} else if (subType == 5) {
-				if (zoom >= 15) {
-					textColor = 0xff000033;
-					bold = true;
-					textSize = 9;
-					wrapWidth = 16;
-				}
-			} else if (subType == 1 || subType == 2 || subType == 3) {
-				if (zoom >= 16) {
-					textColor = 0xff000033;
-					if(subType != 1){
-						dy = 11;
-					}
-					textSize = 9;
-					wrapWidth = 16;
-				}
-			}
-		}
-			break;
-		case MapRenderingTypes.MAN_MADE: {
-			if (subType == 1 || subType == 5) {
-				if(zoom >= 16){
-					textColor = 0xff444444;
-					textSize = 9;
-					if(zoom >= 17){
-						textSize = 11;
-						if(zoom >= 18){
-							textSize = 15;
-						}
-					} 
-					wrapWidth = 16;
-				}
-			} else if (subType == 17) {
-				if (zoom >= 15) {
-					textColor = 0xff000033;
-					textSize = 9;
-					shadowRadius = 2;
-					dy = 16;
-					wrapWidth = 12;
-				}
-			} else if (subType == 27) {
-				if (zoom >= 17) {
-					textSize = 9;
-					textColor = 0xff734a08;
-					dy = 12;
-					shadowRadius = 1;
-					wrapWidth = 20;
-				}
-			}
-		}
-			break;
-		case MapRenderingTypes.AMENITY_ENTERTAINMENT: {
-			if (zoom >= 17) {
-				textSize = 9;
-				textColor = 0xff734a08;
-				dy = 12;
-				shadowRadius = 1;
-				wrapWidth = 15;
-			}
-		} break;
-		case MapRenderingTypes.AMENITY_FINANCE: {
-			if (subType == 2) {
-				if (zoom >= 17) {
-					shadowRadius = 1;
-					textSize = 9;
-					textColor = Color.BLACK;
-					dy = 14;
-				}
-			}
-		}
-			break;
-		case MapRenderingTypes.MILITARY: {
-			if (subType == 4) {
-				if (zoom >= 12) {
-					bold = true;
-					textSize = 9;
-					shadowRadius = 1;
-					wrapWidth = 10;
-					textColor = 0xffffc0cb;
-				}
-			}
-		}
-			break;
-		case MapRenderingTypes.SHOP: {
-			if (subType == 42 || subType == 13 || subType == 16 || subType == 19 || subType == 31 || subType == 48) {
-				if (zoom >= 17) {
-					textColor = 0xff993399;
-					textSize = 8;
-					dy = 13;
-					shadowRadius = 1;
-					wrapWidth = 14;
-				}
-			} else if (subType == 65 || subType == 17) {
-				if (zoom >= 16) {
-					textSize = 9;
-					textColor = 0xff993399;
-					dy = 13;
-					shadowRadius = 1;
-					wrapWidth = 20;
-				}
-			}
-
-		}
-			break;
-		case MapRenderingTypes.AMENITY_HEALTHCARE: {
-			if (subType == 2) {
-				if (zoom >= 16) {
-					textSize = 8;
-					textColor = 0xffda0092;
-					dy = 12;
-					shadowRadius = 2;
-					wrapWidth = 24;
-				}
-			} else if (subType == 1) {
-				if (zoom >= 17) {
-					textSize = 8;
-					textColor = 0xffda0092;
-					dy = 11;
-					shadowRadius = 1;
-					wrapWidth = 12;
-				}
-			}
-
-		}
-			break;
-		case MapRenderingTypes.AMENITY_OTHER: {
-			if (subType == 10) {
-				if (zoom >= 17) {
-					wrapWidth = 30;
-					textSize = 10;
-					textColor = 0xff734a08;
-					dy = 10;
-				}
-			} else if (subType == 26) {
-				if (zoom >= 17) {
-					wrapWidth = 30;
-					textSize = 11;
-					textColor = 0x000033;
-					dy = 10;
-				}
-			} else if (subType == 16) {
-				if (zoom >= 16) {
-					textColor = 0xff6699cc;
-					shadowRadius = 1;
-					dy = 15;
-					textSize = 9;
-				}
-			} else if (subType == 7) {
-				if (zoom >= 17) {
-					textColor = 0xff0066ff;
-					shadowRadius = 1;
-					wrapWidth = 20;
-					dy = 8;
-					textSize = 9;
-				}
-			} else if (subType == 13) {
-				if (zoom >= 17) {
-					textColor = 0xff734a08;
-					textSize = 10;
-					shadowRadius = 1;
-					wrapWidth = 20;
-					dy = 16;
-				}
-			} else if (subType == 2) {
-				if (zoom >= 16) {
-					textColor = 0xff660033;
-					textSize = 10;
-					shadowRadius = 2;
-					wrapWidth = 10;
-				}
-			}
-		}
-			break;
-		case MapRenderingTypes.AMENITY_SUSTENANCE: {
-			if (zoom >= 17) {
-				if (subType >= 1 && subType <= 4) {
-					shadowRadius = 1;
-					textColor = 0xff734a08;
-					wrapWidth = 34;
-					dy = 13;
-					textSize = 10;
-				} else if (subType >= 4 && subType <= 6) {
-					shadowRadius = 1;
-					textColor = 0xff734a08;
-					wrapWidth = 34;
-					dy = 13;
-					textSize = 10;
-				}
-			}
-		}
-			break;
-		case MapRenderingTypes.ADMINISTRATIVE: {
-			shadowRadius = 1;
-			switch (subType) {
-			case 11: {
-				if (zoom >= 14 && zoom < 16) {
-					textColor = 0xFF000000;
-					textSize = 8;
-				} else if (zoom >= 16) {
-					textColor = 0xFF777777;
-					textSize = 11;
-				}
-			}
-				break;
-			case 8:
-			case 9: {
-				if (zoom >= 12 && zoom < 15) {
-					textColor = 0xFF000000;
-					textSize = 9;
-				} else if (zoom >= 15) {
-					textColor = 0xFF777777;
-					textSize = 12;
-				}
-			}
-				break;
-			case 10: {
-				if (zoom >= 12 && zoom < 14) {
-					textColor = 0xFF000000;
-					textSize = 10;
-				} else if (zoom >= 14) {
-					textColor = 0xFF777777;
-					textSize = 13;
-				}
-			}
-				break;
-			case 19: {
-				if (zoom >= 8) {
-					textColor = 0xFF99cc99;
-					wrapWidth = 14;
-					if (zoom < 10) {
-						bold = true;
-						textSize = 8;
-					} else if (zoom < 12) {
-						bold = true;
-						textSize = 11;
+			if (cnt > 0) {
+				String name = ((MultyPolygon) obj).getName(i);
+				if (name != null) {
+					rc.clearText();
+					name = TextRenderer.renderObjectText(name, subtype, type, rc.zoom, true, rc);
+					if (rc.textSize > 0 && name != null) {
+						TextDrawInfo info = new TextDrawInfo(name);
+						info.fillProperties(rc, xText / cnt, yText / cnt);
+						rc.textToDraw.add(info);
 					}
 				}
 			}
-				break;
-			case 12: {
-				if (zoom >= 10) {
-					textColor = 0xFF000000;
-					textSize = 9;
-				}
-			}
-				break;
-			case 7: {
-				wrapWidth = 20;
-				if (zoom >= 9 && zoom < 11) {
-					textColor = 0xFF000000;
-					textSize = 8;
-				} else if (zoom >= 11 && zoom < 14) {
-					textColor = 0xFF000000;
-					textSize = 11;
-				} else if (zoom >= 14) {
-					textColor = 0xFF777777;
-					textSize = 13;
-				}
-			}
-				break;
-			case 6: {
-				wrapWidth = 20;
-				textColor = 0xFF000000;
-				if (zoom >= 6 && zoom < 9) {
-					textSize = 8;
-				} else if (zoom >= 9 && zoom < 11) {
-					textSize = 11;
-				} else if (zoom >= 11 && zoom <= 14) {
-					textSize = 14;
-				}
-			}
-				break;
-			case 42: {
-				wrapWidth = 20;
-				textColor = 0xff9d6c9d;
-				if (zoom >= 2 && zoom < 4) {
-					textSize = 8;
-				} else if (zoom >= 4 && zoom < 7) {
-					textSize = 10;
-				}
-			}
-				break;
-			case 43:
-			case 44: {
-				wrapWidth = 20;
-				textColor = 0xff9d6c9d;
-				if (zoom >= 4 && zoom < 8) {
-					textSize = 9;
-				} else if (zoom >= 7 && zoom < 9) {
-					textSize = 11;
-				}
-			}
-				break;
-			case 33: {
-				if (zoom >= 17) {
-					textSize = 9;
-					textColor = 0xff444444;
-				}
-			}
-				break;
-			}
 		}
-			break;
+		rc.main.updatePaint(paint);
+		canvas.drawPath(path, paint);
+		if (rc.second.strokeWidth != 0) {
+		    //rc.second.strokeWidth = 1.5f;
+		    //rc.second.color = Color.BLACK; 
+		    
+			rc.second.updatePaint(paint);
+			canvas.drawPath(path, paint);
 		}
-		rc.textColor = textColor;
-		rc.textSize = textSize;
-		rc.textMinDistance = textMinDistance;
-		rc.showTextOnPath = showTextOnPath;
-		rc.textShield = textShield;
-		rc.textWrapWidth = wrapWidth;
-		rc.textHaloRadius = shadowRadius;
-		rc.textBold = bold;
-		rc.textDy = dy;
-		return name;
 	}
 
 	

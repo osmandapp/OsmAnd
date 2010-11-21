@@ -9,6 +9,8 @@ public class MultyPolygon extends BinaryMapDataObject {
 	// first 32 bits - x, second 32 bits - y  
 	private long[][] lines = null;
 	private String[] names = null;
+	private String tag = null;
+	private String value = null;
 	public MultyPolygon(){
 		super();
 		id = -1;
@@ -61,6 +63,22 @@ public class MultyPolygon extends BinaryMapDataObject {
 	
 	public int getPoint31YTile(int ind, int b) {
 		return (int)(lines[b][ind] & Integer.MAX_VALUE);
+	}
+	
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+	
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
+	public String getTag() {
+		return tag;
+	}
+	
+	public String getValue() {
+		return value;
 	}
 }
 

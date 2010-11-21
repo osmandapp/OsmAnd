@@ -20,7 +20,9 @@ import net.osmand.data.Street;
 import net.osmand.data.TransportStop;
 import net.osmand.data.City.CityType;
 import net.osmand.osm.LatLon;
+import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
+import net.osmand.osm.MapRenderingTypes.MapRulType;
 import net.sf.junidecode.Junidecode;
 
 import org.apache.commons.logging.Log;
@@ -42,9 +44,6 @@ public class BinaryMapIndexReader {
 	private CodedInputStreamRAF codedIS;
 	
 	private final static Log log = LogUtil.getLog(BinaryMapIndexReader.class);
-	
-
-	
 	
 	public BinaryMapIndexReader(final RandomAccessFile raf) throws IOException {
 		this.raf = raf;
@@ -668,6 +667,19 @@ public class BinaryMapIndexReader {
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
+				if(index.encodingRules.isEmpty()){
+					// init encoding rules by default
+					Map<String, MapRulType> map = MapRenderingTypes.getEncodingRuleTypes();
+					for(String tags : map.keySet()){
+						MapRulType rt = map.get(tags);
+						if(rt.getType(null) != 0){
+							initMapEncodingRule(index, rt.getType(null), rt.getSubType(null), tags, null);
+						}
+						for (String value : rt.getValuesSet()) {
+							initMapEncodingRule(index, rt.getType(value), rt.getSubType(value), tags, value);
+						}
+					}
+				}
 				return;
 			case OsmandOdb.OsmAndMapIndex.NAME_FIELD_NUMBER :
 				index.setName(codedIS.readString());
@@ -696,6 +708,17 @@ public class BinaryMapIndexReader {
 		}
 	}
 	
+	private void initMapEncodingRule(MapIndex index, int type, int subtype, String tag, String val) {
+		int ind = ((subtype << 5) | type);
+		if(!index.encodingRules.containsKey(tag)){
+			index.encodingRules.put(tag, new LinkedHashMap<String, Integer>());
+		}
+		index.encodingRules.get(tag).put(val, ind);
+		if(!index.decodingRules.containsKey(ind)){
+			index.decodingRules.put(ind, new TagValuePair(tag, val));
+		}
+	}
+	
 	private void readMapEncodingRule(MapIndex index) throws IOException {
 		int subtype = 0;
 		int type = 0;
@@ -706,10 +729,7 @@ public class BinaryMapIndexReader {
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				if(!index.encodingRules.containsKey(tags)){
-					index.encodingRules.put(tags, new LinkedHashMap<String, Integer>());
-				}
-				index.encodingRules.get(tags).put(val, ((subtype << 5) | type));
+				initMapEncodingRule(index, type, subtype, tags, val);
 				return;
 			case OsmandOdb.MapEncodingRule.VALUE_FIELD_NUMBER :
 				val = codedIS.readString();
@@ -729,6 +749,7 @@ public class BinaryMapIndexReader {
 			}
 		}
 	}
+
 
 	private MapRoot readMapLevel() throws IOException {
 		MapRoot root = new MapRoot();
@@ -829,7 +850,7 @@ public class BinaryMapIndexReader {
 						}
 						codedIS.seek(tree.filePointer);
 						int oldLimit = codedIS.pushLimit(tree.length);
-						searchMapTreeBounds(index.left, index.right, index.top, index.bottom, req);
+						searchMapTreeBounds(index.left, index.right, index.top, index.bottom, req, mapIndex);
 						codedIS.popLimit(oldLimit);
 					}
 				}
@@ -1416,7 +1437,7 @@ public class BinaryMapIndexReader {
 	}
 	
 	private void searchMapTreeBounds(int pleft, int pright, int ptop, int pbottom,
-			SearchRequest<BinaryMapDataObject> req) throws IOException {
+			SearchRequest<BinaryMapDataObject> req, MapIndex root) throws IOException {
 		int init = 0;
 		int lastIndexResult = -1;
 		int cright = 0;
@@ -1464,7 +1485,7 @@ public class BinaryMapIndexReader {
 				if(lastIndexResult == -1){
 					lastIndexResult = req.searchResults.size();
 				}
-				BinaryMapDataObject mapObject = readMapDataObject(cleft, cright, ctop, cbottom, req);
+				BinaryMapDataObject mapObject = readMapDataObject(cleft, cright, ctop, cbottom, req, root);
 				if(mapObject != null){
 					req.searchResults.add(mapObject);
 					
@@ -1476,7 +1497,7 @@ public class BinaryMapIndexReader {
 				length = readInt();
 				int filePointer = codedIS.getTotalBytesRead();
 				oldLimit = codedIS.pushLimit(length);
-				searchMapTreeBounds(cleft, cright, ctop, cbottom, req);
+				searchMapTreeBounds(cleft, cright, ctop, cbottom, req, root);
 				codedIS.popLimit(oldLimit);
 				codedIS.seek(filePointer + length);
 				if(lastIndexResult >= 0){
@@ -1523,7 +1544,8 @@ public class BinaryMapIndexReader {
 	}
 	
 	private int MASK_TO_READ = ~((1 << BinaryMapIndexWriter.SHIFT_COORDINATES) - 1);
-	private BinaryMapDataObject readMapDataObject(int left, int right, int top, int bottom, SearchRequest<BinaryMapDataObject> req) throws IOException {
+	private BinaryMapDataObject readMapDataObject(int left, int right, int top, int bottom, SearchRequest<BinaryMapDataObject> req, 
+			MapIndex root) throws IOException {
 		int tag = WireFormat.getTagFieldNumber(codedIS.readTag());
 		if(OsmandOdb.MapData.COORDINATES_FIELD_NUMBER != tag) {
 			throw new IllegalArgumentException();
@@ -1596,6 +1618,7 @@ public class BinaryMapIndexReader {
 		BinaryMapDataObject dataObject = new BinaryMapDataObject();		
 		dataObject.coordinates = req.cacheCoordinates.toArray();
 		dataObject.types = req.cacheTypes.toArray();
+		dataObject.mapIndex = root;
 		
 		while(true){
 			int t = codedIS.readTag();
@@ -1765,11 +1788,72 @@ public class BinaryMapIndexReader {
 	
 	public static class MapIndex extends BinaryIndexPart {
 		List<MapRoot> roots = new ArrayList<MapRoot>();
-		Map<String, Map<String, Integer>> encodingRules = new LinkedHashMap<String, Map<String,Integer>>();
+		Map<String, Map<String, Integer>> encodingRules = new LinkedHashMap<String, Map<String, Integer>>();
+		Map<Integer, TagValuePair> decodingRules = new LinkedHashMap<Integer, TagValuePair>();
 		
 		public List<MapRoot> getRoots() {
 			return roots;
 		}
+		
+		public TagValuePair decodeType(int type, int subtype){
+			return decodingRules.get(((subtype << 5) | type));
+		}
+		
+	}
+	
+	public static class TagValuePair {
+		public String tag;
+		public String value;
+		public int additionalAttribute;
+		public TagValuePair(String tag, String value) {
+			super();
+			this.tag = tag;
+			this.value = value;
+		}
+		
+		public TagValuePair(String tag, String value, int additionalAttribute) {
+			super();
+			this.tag = tag;
+			this.value = value;
+			this.additionalAttribute = additionalAttribute;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + additionalAttribute;
+			result = prime * result + ((tag == null) ? 0 : tag.hashCode());
+			result = prime * result + ((value == null) ? 0 : value.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			TagValuePair other = (TagValuePair) obj;
+			if (additionalAttribute != other.additionalAttribute)
+				return false;
+			if (tag == null) {
+				if (other.tag != null)
+					return false;
+			} else if (!tag.equals(other.tag))
+				return false;
+			if (value == null) {
+				if (other.value != null)
+					return false;
+			} else if (!value.equals(other.value))
+				return false;
+			return true;
+		}
+		
+		
+		
 	}
 	
 	
@@ -1856,7 +1940,7 @@ public class BinaryMapIndexReader {
 		int length = 0;
 		
 		// offset from start for each SIZE_OFFSET_ARRAY elements
-		// (SIZE_OFFSET_ARRAY + 1) offset : offsets[0] + skipOneString()
+		// (SIZE_OFFSET_ARRAY + 1) offset = offsets[0] + skipOneString()
 		TIntArrayList offsets = new TIntArrayList();
 		Map<Integer, String> cacheOfStrings = new LinkedHashMap<Integer, String>();
 		
@@ -1874,10 +1958,10 @@ public class BinaryMapIndexReader {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Minsk.obf"), "r");
+		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Minsk.obf"), "r"); //$NON-NLS-1$ //$NON-NLS-2$
 //		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Belarus_4.obf"), "r");
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
-		System.out.println("VERSION " + reader.getVersion());
+		System.out.println("VERSION " + reader.getVersion()); //$NON-NLS-1$
 		long time = System.currentTimeMillis();
 		
 		System.out.println(reader.mapIndexes.get(0).encodingRules);
@@ -1951,8 +2035,8 @@ public class BinaryMapIndexReader {
 //			}
 //		}
 		
-		System.out.println("MEMORY " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()));
-		System.out.println("Time " + (System.currentTimeMillis() - time));
+		System.out.println("MEMORY " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())); //$NON-NLS-1$
+		System.out.println("Time " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
 	}
 	
 }
