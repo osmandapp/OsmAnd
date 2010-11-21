@@ -1,4 +1,4 @@
-<renderer>
+<renderer name="default" depends="">
 	<!--
 		Currently available icons : aerodrome, airport, alpinehut, atm, bank, bar, beach, bollard, bus_station, bus_stop_small, bus_stop,
 		cable_car, cafe, camp_site, car_share, caravan_park, cave_entrance, chair_lift, cinema, cliff, cliff2, danger, department_store, embassy,
@@ -11,7 +11,7 @@
 	-->
 	<!-- TODO oneway!!! -->
 
-	<!-- PRIORITY Input to filter : tag, value, point, zoom [minzoom, maxzoom], textLength, ref -->
+	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom], textLength, ref -->
 	<text>
 		<!-- Highway ref  -->
 		<filter minzoom="10" tag="highway" value="trunk" ref="only" textMinDistance="70" textColor="#ffffff" textSize="10" textBold="true">
@@ -175,7 +175,7 @@
 		<filter minzoom="16" textSize="9" textColor="#000033" textWrapWidth="16" tag="amenity" value="kindergarten" />
 		<filter minzoom="16" textSize="9" textColor="#000033" textDy="11" textWrapWidth="16" tag="amenity" value="school" />
 		<filter minzoom="16" textSize="9" textColor="#000033" textDy="11" textWrapWidth="16" tag="amenity" value="college" />
-		<filter minzoom="17" textSize="10" textBold="true" textColor="#734a08" textDy="12" tag="amenity" value="library" />
+		<filter minzoom="17" textSize="10" textBold="true" textColor="#734a08" textWrapWidth="16" textDy="12" tag="amenity" value="library" />
 		<filter minzoom="15" textSize="9" textBold="true" textColor="#000033" textWrapWidth="16" tag="amenity" value="university" />
 
 		<filter minzoom="17" textSize="9" textColor="#0066ff" textDy="9" textWrapWidth="34" tag="amenity" value="parking" />

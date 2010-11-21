@@ -9,14 +9,14 @@ public class RenderingIcons {
 	
 	private static Map<String, Integer> icons = new LinkedHashMap<String, Integer>();
 	
-	public Map<String, Integer> getIcons(){
+	public static Map<String, Integer> getIcons(){
 		if(icons.isEmpty()){
 			initIcons();
 		}
 		return icons;
 	}
 
-	private void initIcons() {
+	private static void initIcons() {
 		icons.put("aerodrome", R.drawable.h_aerodrome); //$NON-NLS-1$
 		icons.put("airport", R.drawable.h_airport); //$NON-NLS-1$
 		icons.put("alpinehut", R.drawable.h_alpinehut); //$NON-NLS-1$

@@ -18,10 +18,10 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-public class OsmandRenderingRules {
+public class OsmandRenderingRulesParser {
 
 	
-	private final static Log log = LogUtil.getLog(OsmandRenderingRules.class);
+	private final static Log log = LogUtil.getLog(OsmandRenderingRulesParser.class);
 	
 	public static class EffectAttributes {
 		public int color = 0;
@@ -77,15 +77,27 @@ public class OsmandRenderingRules {
 		
 	}
 	
+	public interface RenderingRuleVisitor {
+		
+		/**
+		 * @param state - one of the point, polygon, line, text state
+		 * @param filter
+		 */
+		public void visitRule(int state, FilterState  filter);
+		
+		public void rendering(String name, String depends);
+	}
 	
-	private final static int POINT_STATE = 1;
-	private final static int POLYGON_STATE = 2;
-	private final static int LINE_STATE = 3;
-	private final static int TEXT_STATE = 4;
-	public void parseRenderingRules(InputStream is) throws IOException, SAXException {
+	
+	public final static int POINT_STATE = 1;
+	public final static int POLYGON_STATE = 2;
+	public final static int LINE_STATE = 3;
+	public final static int TEXT_STATE = 4;
+	
+	public void parseRenderingRules(InputStream is, RenderingRuleVisitor visitor) throws IOException, SAXException {
 		try {
 			final SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
-			saxParser.parse(is, new RenderingRulesHandler(saxParser));
+			saxParser.parse(is, new RenderingRulesHandler(saxParser, visitor));
 		} catch (ParserConfigurationException e) {
 			throw new SAXException(e);
 		}
@@ -93,12 +105,15 @@ public class OsmandRenderingRules {
 	
 	private class RenderingRulesHandler extends DefaultHandler {
 		private final SAXParser parser;
+		private final RenderingRuleVisitor visitor;
 		private int state;
 
 		Stack<Object> stack = new Stack<Object>();
 		
-		public RenderingRulesHandler(SAXParser parser){
+		
+		public RenderingRulesHandler(SAXParser parser, RenderingRuleVisitor visitor){
 			this.parser = parser;
+			this.visitor = visitor;
 		}
 		
 		@Override
@@ -121,8 +136,10 @@ public class OsmandRenderingRules {
 			} else if("case".equals(name)){ //$NON-NLS-1$
 				FilterState st = parseFilterAttributes(attributes);
 				((SwitchState)stack.peek()).filters.add(st);
+			} else if("renderer".equals(name)){ //$NON-NLS-1$
+				visitor.rendering(attributes.getValue("name"), attributes.getValue("depends")); //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
-//				System.err.println("Unknown tag " + name);
+				log.warn("Unknown tag" + name); //$NON-NLS-1$
 			}
 		}
 		
@@ -133,61 +150,15 @@ public class OsmandRenderingRules {
 				List<FilterState> list = popAndAggregateState();
 				for (FilterState pop : list) {
 					if (pop.tag != null && pop.minzoom != -1) {
-						String gen = generateAttributes(pop);
-						if (gen != null) {
-							String res = "";
-							if (pop.maxzoom != -1) {
-								res += " zoom : " +pop.minzoom + "-" + pop.maxzoom;
-							} else {
-								res += " zoom : " +pop.minzoom;
-							}
-							res += " tag="+pop.tag;
-							res += " val="+pop.val;
-							if(pop.layer != 0){
-								res += " layer="+pop.layer;
-							}
-							
-							res += gen;
-							System.out.println(res);
-						}
+						visitor.visitRule(state, pop);
 					}
 				}
-			} else if("switch".equals(name)){
+			} else if("switch".equals(name)){ //$NON-NLS-1$
 				stack.pop();
 			}
 		}
 		
-		private String generateAttributes(FilterState s){
-			String res = "";
-			if(s.shader != null){
-				res+=" shader=" + s.shader;
-			}
-			if(s.main.color != 0){
-				res +=" color="+colorToString(s.main.color);
-			}
-			if(s.icon != null){
-				res+= " icon="+s.icon;
-			}
-			if(s.main.strokeWidth != 0){
-				res+= " strokeWidth="+s.main.strokeWidth;
-			}
-			if(s.main.pathEffect != null){
-				res+= " pathEffect="+s.main.pathEffect;
-			}
-			if(state == POLYGON_STATE){
-				return null;
-//				if(s.shader != null){
-//					return " shader=" + s.shader;
-//				}
-//				return " color=" + colorToString(s.main.color);
-//			} else if(state == POINT_STATE){
-//				return " icon=" + s.icon;
-			} else if(state == LINE_STATE){
-				return res;
-			} else {
-				return null;
-			}
-		}
+		
 		
 		public List<FilterState> popAndAggregateState() {
 			FilterState pop = (FilterState) stack.pop();
@@ -204,8 +175,8 @@ public class OsmandRenderingRules {
 					}
 				} else {
 					List<FilterState> filters = ((SwitchState)o).filters;
-					if(res == null){
-						res =new ArrayList<FilterState>();
+					if (res == null) {
+						res = new ArrayList<FilterState>();
 						res.add(pop);
 					}
 					int l = res.size();
@@ -217,7 +188,7 @@ public class OsmandRenderingRules {
 						}
 					}
 					for (int j = 0; j < res.size(); j++) {
-						mergeStateInto(filters.get(j % filters.size()), res.get(j));
+						mergeStateInto(filters.get(j / l), res.get(j));
 					}
 				}
 				
@@ -327,76 +298,76 @@ public class OsmandRenderingRules {
 			for(int i=0; i<attributes.getLength(); i++){
 				String name = attributes.getLocalName(i);
 				String val = attributes.getValue(i);
-				if(name.equals("tag")){
+				if(name.equals("tag")){ //$NON-NLS-1$
 					state.tag = val;
-				} else if(name.equals("value")){
+				} else if(name.equals("value")){ //$NON-NLS-1$
 					state.val = val;
-				} else if(name.equals("minzoom")){
+				} else if(name.equals("minzoom")){ //$NON-NLS-1$
 					state.minzoom = Integer.parseInt(val);
-				} else if(name.equals("maxzoom")){
+				} else if(name.equals("maxzoom")){ //$NON-NLS-1$
 					state.maxzoom = Integer.parseInt(val);
-				} else if(name.equals("maxzoom")){
+				} else if(name.equals("maxzoom")){ //$NON-NLS-1$
 					state.maxzoom = Integer.parseInt(val);
-				} else if(name.equals("layer")){
+				} else if(name.equals("layer")){ //$NON-NLS-1$
 					state.layer = Integer.parseInt(val);
-				} else if(name.equals("icon")){
+				} else if(name.equals("icon")){ //$NON-NLS-1$
 					state.icon = val;
-				} else if(name.equals("color")){
+				} else if(name.equals("color")){ //$NON-NLS-1$
 					state.main.color = parseColor(val);
-				} else if(name.startsWith("color_")){
+				} else if(name.startsWith("color_")){ //$NON-NLS-1$
 					EffectAttributes ef = state.getEffectAttributes(Integer.parseInt(name.substring(6)));
 					ef.color = parseColor(val);
-				} else if(name.equals("shader")){
+				} else if(name.equals("shader")){ //$NON-NLS-1$
 					state.shader = val;
-				} else if(name.equals("strokeWidth")){
+				} else if(name.equals("strokeWidth")){ //$NON-NLS-1$
 					state.main.strokeWidth = Float.parseFloat(val);
-				} else if(name.startsWith("strokeWidth_")){
+				} else if(name.startsWith("strokeWidth_")){ //$NON-NLS-1$
 					EffectAttributes ef = state.getEffectAttributes(Integer.parseInt(name.substring(12)));
 					ef.strokeWidth = Float.parseFloat(val);
-				} else if(name.equals("pathEffect")){
+				} else if(name.equals("pathEffect")){ //$NON-NLS-1$
 					state.main.pathEffect = val;
-				} else if(name.startsWith("pathEffect_")){
+				} else if(name.startsWith("pathEffect_")){ //$NON-NLS-1$
 					EffectAttributes ef = state.getEffectAttributes(Integer.parseInt(name.substring(11)));
 					ef.pathEffect = val;
-				} else if(name.equals("shadowRadius")){
+				} else if(name.equals("shadowRadius")){ //$NON-NLS-1$
 					state.main.shadowRadius = Float.parseFloat(val);
-				} else if(name.startsWith("shadowRadius_")){
+				} else if(name.startsWith("shadowRadius_")){ //$NON-NLS-1$
 					EffectAttributes ef = state.getEffectAttributes(Integer.parseInt(name.substring(14)));
 					ef.shadowRadius = Float.parseFloat(val);
-				} else if(name.equals("shadowColor")){
+				} else if(name.equals("shadowColor")){ //$NON-NLS-1$
 					state.main.shadowColor = parseColor(val);
-				} else if(name.startsWith("shadowColor_")){
+				} else if(name.startsWith("shadowColor_")){ //$NON-NLS-1$
 					EffectAttributes ef = state.getEffectAttributes(Integer.parseInt(name.substring(12)));
 					ef.shadowColor = parseColor(val);
-				} else if(name.equals("cap")){
+				} else if(name.equals("cap")){ //$NON-NLS-1$
 					state.main.cap = val;
-				} else if(name.startsWith("cap_")){
+				} else if(name.startsWith("cap_")){ //$NON-NLS-1$
 					EffectAttributes ef = state.getEffectAttributes(Integer.parseInt(name.substring(4)));
 					ef.cap = val;
-				} else if(name.equals("ref")){
+				} else if(name.equals("ref")){ //$NON-NLS-1$
 					state.text.ref = val;
-				} else if(name.equals("textSize")){
+				} else if(name.equals("textSize")){ //$NON-NLS-1$
 					state.text.textSize = Float.parseFloat(val);
-				} else if(name.equals("textBold")){
+				} else if(name.equals("textBold")){ //$NON-NLS-1$
 					state.text.textBold = Boolean.parseBoolean(val);
-				} else if(name.equals("textColor")){
+				} else if(name.equals("textColor")){ //$NON-NLS-1$
 					state.text.textColor = parseColor(val);
-				} else if(name.equals("textLength")){
+				} else if(name.equals("textLength")){ //$NON-NLS-1$
 					state.textLength = Integer.parseInt(val);
-				} else if(name.equals("textShield")){
+				} else if(name.equals("textShield")){ //$NON-NLS-1$
 					state.text.textShield = val;
-				} else if(name.equals("textMinDistance")){
+				} else if(name.equals("textMinDistance")){ //$NON-NLS-1$
 					state.text.textMinDistance = Integer.parseInt(val);
-				} else if(name.equals("textOnPath")){
+				} else if(name.equals("textOnPath")){ //$NON-NLS-1$
 					state.text.textOnPath = Boolean.parseBoolean(val);
-				} else if(name.equals("textWrapWidth")){
+				} else if(name.equals("textWrapWidth")){ //$NON-NLS-1$
 					state.text.textWrapWidth = Integer.parseInt(val);
-				} else if(name.equals("textDy")){
+				} else if(name.equals("textDy")){ //$NON-NLS-1$
 					state.text.textDy = Integer.parseInt(val);
-				} else if(name.equals("textHaloRadius")){
+				} else if(name.equals("textHaloRadius")){ //$NON-NLS-1$
 					state.text.textHaloRadius = Float.parseFloat(val);
 				} else {
-					log.warn("Unknown attribute " + name);
+					log.warn("Unknown attribute " + name); //$NON-NLS-1$
 				}
 			}
 			return state;
@@ -420,23 +391,83 @@ public class OsmandRenderingRules {
                 // Set the alpha value
                 color |= 0x00000000ff000000;
             } else if (colorString.length() != 9) {
-                throw new IllegalArgumentException("Unknown color" + colorString);
+                throw new IllegalArgumentException("Unknown color" + colorString); //$NON-NLS-1$
             }
             return (int)color;
         }
-        throw new IllegalArgumentException("Unknown color" + colorString);
+        throw new IllegalArgumentException("Unknown color" + colorString); //$NON-NLS-1$
     }
     
+    
+    // TEST purpose 
+	public static void main(String[] args) throws IOException, SAXException {
+		OsmandRenderingRulesParser parser = new OsmandRenderingRulesParser();
+		parser.parseRenderingRules(OsmandRenderingRulesParser.class.getResourceAsStream("default.render.xml"),  //$NON-NLS-1$
+				new RenderingRuleVisitor() {
+
+			@Override
+			public void rendering(String name, String depends) {
+				System.out.println("Renderer " + name); //$NON-NLS-1$
+			}
+
+			@Override
+			public void visitRule(int state, FilterState filter) {
+				String gen = generateAttributes(state, filter);
+				if (gen != null) {
+					String res = ""; //$NON-NLS-1$
+					if (filter.maxzoom != -1) {
+						res += " zoom : " +filter.minzoom + "-" + filter.maxzoom; //$NON-NLS-1$ //$NON-NLS-2$
+					} else {
+						res += " zoom : " +filter.minzoom; //$NON-NLS-1$
+					}
+					res += " tag="+filter.tag; //$NON-NLS-1$
+					res += " val="+filter.val; //$NON-NLS-1$
+					if(filter.layer != 0){
+						res += " layer="+filter.layer; //$NON-NLS-1$
+					}
+					
+					res += gen;
+					System.out.println(res);
+				}
+			}
+
+		});
+	}
+
     public static String colorToString(int color) {
 		if ((0xFF000000 & color) == 0xFF000000) {
-			return "#" + Integer.toHexString(color & 0x00FFFFFF);
+			return "#" + Integer.toHexString(color & 0x00FFFFFF); //$NON-NLS-1$
 		} else {
-			return "#" + Integer.toHexString(color);
+			return "#" + Integer.toHexString(color); //$NON-NLS-1$
 		}
 	}
 	
-	public static void main(String[] args) throws IOException, SAXException {
-		OsmandRenderingRules parser = new OsmandRenderingRules();
-		parser.parseRenderingRules(OsmandRenderingRules.class.getResourceAsStream("default.render.xml"));
+	private static String generateAttributes(int state, FilterState s){
+		String res = ""; //$NON-NLS-1$
+		if(s.shader != null){
+			res+=" shader=" + s.shader; //$NON-NLS-1$
+		}
+		if(s.main.color != 0){
+			res +=" color="+colorToString(s.main.color); //$NON-NLS-1$
+		}
+		if(s.icon != null){
+			res+= " icon="+s.icon; //$NON-NLS-1$
+		}
+		if(s.main.strokeWidth != 0){
+			res+= " strokeWidth="+s.main.strokeWidth; //$NON-NLS-1$
+		}
+		if(s.main.pathEffect != null){
+			res+= " pathEffect="+s.main.pathEffect; //$NON-NLS-1$
+		}
+		if(state == POLYGON_STATE){
+//			return res;
+		} else if(state == LINE_STATE){
+			return res;
+		} else if(state == POINT_STATE){
+//			return res;
+		} else if(state == TEXT_STATE){
+//			return res;
+		}
+		return null;
 	}
 }

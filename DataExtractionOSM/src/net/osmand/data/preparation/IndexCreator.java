@@ -2514,18 +2514,18 @@ public class IndexCreator {
 		 long time = System.currentTimeMillis();
 		 IndexCreator creator = new IndexCreator(new File("e:/Information/OSM maps/osmand/"));
 		 creator.setIndexMap(true);
-//		 creator.setIndexAddress(true);
+		 creator.setIndexAddress(true);
 		 creator.setIndexPOI(true);
-//		 creator.setIndexTransport(true);
+		 creator.setIndexTransport(true);
 		 
-		 creator.recreateOnlyBinaryFile = true;
-		 creator.deleteDatabaseIndexes = false;
+		 creator.recreateOnlyBinaryFile = false;
+		 creator.deleteDatabaseIndexes = true;
 		 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 
-//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
-//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
+		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
+		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.bz2"), new ConsoleProgressImplementation(3), null);
 		 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);
@@ -2540,6 +2540,8 @@ public class IndexCreator {
 		 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/luxembourg.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/luxembourg.osm.pbf"), new ConsoleProgressImplementation(15), null);
+		 
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/new_zealand.osm.bz2"), new ConsoleProgressImplementation(3), null);
 
 		 System.out.println("WHOLE GENERATION TIME :  " + (System.currentTimeMillis() - time));
 		 System.out.println("COORDINATES_SIZE " + BinaryMapIndexWriter.COORDINATES_SIZE + " count " + BinaryMapIndexWriter.COORDINATES_COUNT);
