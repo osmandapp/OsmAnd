@@ -277,17 +277,30 @@ public class OsmandRenderer {
 		int sz = objects.size();
 		int init = sz / 4;
 		TFloatObjectHashMap<TIntArrayList> orderMap = new TFloatObjectHashMap<TIntArrayList>();
-//		TreeMap<Float, TIntArrayList> orderMap = new TreeMap<Float, TIntArrayList>();
-		for (int i = 0; i < sz; i++) {
-			BinaryMapDataObject o = objects.get(i);
-			int sh = i << 8;
-			
-			for (int j = 0; j < o.getTypes().length; j++) {
-				put(orderMap, BinaryMapDataObject.getOrder(o.getTypes()[j]), sh + j, init);
-			}
-			
-			if(rc.interrupted){
-				return null;
+		if (render != null) {
+			for (int i = 0; i < sz; i++) {
+				BinaryMapDataObject o = objects.get(i);
+				int sh = i << 8;
+
+				for (int j = 0; j < o.getTypes().length; j++) {
+					// put(orderMap, BinaryMapDataObject.getOrder(o.getTypes()[j]), sh + j, init);
+					int wholeType = o.getTypes()[j];
+					int mask = wholeType & 3;
+					int layer = 0;
+					if(mask != 1){
+						layer = MapRenderingTypes.getNegativeWayLayer(wholeType);
+					}
+					TagValuePair pair = o.getMapIndex().decodeType(MapRenderingTypes.getMainObjectType(wholeType), 
+							MapRenderingTypes.getObjectSubType(wholeType));
+					if(pair != null){
+						put(orderMap, render.getObjectOrder(pair.tag, pair.value, mask, layer), sh + j, init);
+					}
+					
+				}
+
+				if (rc.interrupted) {
+					return null;
+				}
 			}
 		}
 		
