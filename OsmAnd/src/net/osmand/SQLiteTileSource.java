@@ -30,6 +30,8 @@ public class SQLiteTileSource implements ITileSource {
 	private String name;
 	private SQLiteDatabase db;
 	private final File file;
+	private int minZoom = 1;
+	private int maxZoom = 17;
 	
 	public SQLiteTileSource(File f){
 		this.file = f;
@@ -56,12 +58,14 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public int getMaximumZoomSupported() {
-		return base != null ? base.getMaximumZoomSupported() : 17;
+		getDatabase();
+		return base != null ? base.getMaximumZoomSupported() : maxZoom;
 	}
 
 	@Override
 	public int getMinimumZoomSupported() {
-		return base != null ? base.getMinimumZoomSupported() : 1;
+		getDatabase();
+		return base != null ? base.getMinimumZoomSupported() : minZoom;
 	}
 
 	@Override
@@ -127,6 +131,16 @@ public class SQLiteTileSource implements ITileSource {
 				if(!Algoritms.isEmpty(template)){
 					urlTemplate = template;
 				}
+			} catch (RuntimeException e) {
+			}
+			try {
+				long z;
+				z = db.compileStatement("SELECT minzoom FROM info").simpleQueryForLong(); //$NON-NLS-1$
+				if (z < 17 && z >= 0)
+					maxZoom = 17 - (int)z;
+				z = db.compileStatement("SELECT maxzoom FROM info").simpleQueryForLong(); //$NON-NLS-1$
+				if (z < 17 && z >= 0)
+					minZoom = 17 - (int)z;
 			} catch (RuntimeException e) {
 			}
 		}
