@@ -2,6 +2,7 @@ package net.osmand.activities;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -20,6 +21,8 @@ import net.osmand.OsmandSettings.ApplicationMode;
 import net.osmand.activities.RouteProvider.RouteService;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.render.BaseOsmandRender;
+import net.osmand.render.RendererRegistry;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -88,6 +91,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private ListPreference maxLevelToDownload;
 	private ListPreference mapScreenOrientation;
 	private ListPreference voicePreference;
+	private ListPreference rendererPreference;
 	private ListPreference routeServiceInterval;
 	private ListPreference routeServiceWaitInterval;
 	private ListPreference routeServiceProvider;
@@ -154,6 +158,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		routerPreference.setOnPreferenceChangeListener(this);
 		voicePreference =(ListPreference) screen.findPreference(OsmandSettings.VOICE_PROVIDER);
 		voicePreference.setOnPreferenceChangeListener(this);
+		rendererPreference =(ListPreference) screen.findPreference(OsmandSettings.RENDERER);
+		rendererPreference.setOnPreferenceChangeListener(this);
 		routeServiceInterval =(ListPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_INTERVAL);
 		routeServiceInterval.setOnPreferenceChangeListener(this);
 		routeServiceWaitInterval =(ListPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_WAIT_INTERVAL);
@@ -296,6 +302,21 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			voicePreference.setValue(provider);
 		} else {
 			voicePreference.setValueIndex(0);
+		}
+		
+		String vectorRenderer = OsmandSettings.getVectorRenderer(prefs);
+		Collection<String> rendererNames = RendererRegistry.getRegistry().getRendererNames();
+		entries = new String[rendererNames.size()];
+		k = 0;
+		for(String s : rendererNames){
+			entries[k++] = s;
+		}
+		rendererPreference.setEntries(entries);
+		rendererPreference.setEntryValues(entries);
+		if(rendererNames.contains(vectorRenderer)){
+			rendererPreference.setValue(vectorRenderer);
+		} else {
+			rendererPreference.setValueIndex(0);
 		}
 		
 		int startZoom = 12;
@@ -450,6 +471,17 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			}
 			if(s != null){
 				edit.putInt(OsmandSettings.ROUTER_SERVICE, s.ordinal());
+			}
+			edit.commit();
+		} else if (preference == rendererPreference) {
+			BaseOsmandRender loaded = RendererRegistry.getRegistry().getRenderer((String) newValue);
+			if(loaded == null){
+				Toast.makeText(this, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
+			} else {
+				RendererRegistry.getRegistry().setCurrentSelectedRender(loaded);
+				edit.putString(OsmandSettings.RENDERER, (String) newValue);
+				Toast.makeText(this, R.string.renderer_load_sucess, Toast.LENGTH_SHORT).show();
+				((OsmandApplication)getApplication()).getResourceManager().getRenderer().clearCache();
 			}
 			edit.commit();
 		} else if (preference == voicePreference) {

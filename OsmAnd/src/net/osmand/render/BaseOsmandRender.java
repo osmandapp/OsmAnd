@@ -32,27 +32,23 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 	private Map<String, Map<String, List<FilterState>>>[] rules = new LinkedHashMap[6]; 
 	
 	
-	private static BaseOsmandRender defaultRender = null;
-	public static BaseOsmandRender defaultRender() throws IOException, SAXException{
-		if(defaultRender == null){
-			defaultRender = new BaseOsmandRender(OsmandRenderingRulesParser.class.getResourceAsStream("default.render.xml")); //$NON-NLS-1$
-		}
-		return defaultRender;
-	}
+	private int defaultColor;
 	
-	public BaseOsmandRender(InputStream is) throws IOException, SAXException {
+	
+	public void init(InputStream is) throws IOException, SAXException{
 		long time = System.currentTimeMillis();
 		OsmandRenderingRulesParser parser = new OsmandRenderingRulesParser();
 		parser.parseRenderingRules(is, this);
 		log.info("Init render " + name + " for " + (System.currentTimeMillis() - time) + " ms");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 	}
 	
-	protected BaseOsmandRender(){
+	public BaseOsmandRender(){
 	}
 
 	@Override
-	public void rendering(String name, String depends) {
+	public void rendering(String name, String depends, int defaultColor) {
 		this.name = name;
+		this.defaultColor = defaultColor;
 		if(depends != null && depends.length() > 0){
 			for(String s : depends.split(",")) { //$NON-NLS-1$
 				if(s.trim().length() > 0){
@@ -60,6 +56,19 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 				}
 			}
 		}
+	}
+	
+	public int getDefaultColor() {
+		int r = defaultColor;
+		if (r == 0) {
+			for (BaseOsmandRender d : dependRenderers) {
+				r = d.getDefaultColor();
+				if (r != 0) {
+					break;
+				}
+			}
+		}
+		return r;
 	}
 
 	@Override
@@ -190,13 +199,15 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 	}
 
 	private float getObjectOrderImpl(String tag, String val, int type, int layer) {
-		Map<String, List<FilterState>> map = rules[OsmandRenderingRulesParser.ORDER_STATE].get(tag);
-		if (map != null) {
-			List<FilterState> list = map.get(val);
-			if (list != null) {
-				for (FilterState f : list) {
-					if(f.orderType == type && f.layer == layer){
-						return f.order;
+		if (rules[OsmandRenderingRulesParser.ORDER_STATE] != null) {
+			Map<String, List<FilterState>> map = rules[OsmandRenderingRulesParser.ORDER_STATE].get(tag);
+			if (map != null) {
+				List<FilterState> list = map.get(val);
+				if (list != null) {
+					for (FilterState f : list) {
+						if (f.orderType == type && f.layer == layer) {
+							return f.order;
+						}
 					}
 				}
 			}
@@ -205,13 +216,15 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 	}
 
 	private Integer getPointIconImpl(String tag, String val, int zoom) {
-		Map<String, List<FilterState>> map = rules[OsmandRenderingRulesParser.POINT_STATE].get(tag);
-		if (map != null) {
-			List<FilterState> list = map.get(val);
-			if (list != null) {
-				for (FilterState f : list) {
-					if (f.minzoom <= zoom && (zoom <= f.maxzoom || f.maxzoom == -1)) {
-						return RenderingIcons.getIcons().get(f.icon);
+		if (rules[OsmandRenderingRulesParser.POINT_STATE] != null) {
+			Map<String, List<FilterState>> map = rules[OsmandRenderingRulesParser.POINT_STATE].get(tag);
+			if (map != null) {
+				List<FilterState> list = map.get(val);
+				if (list != null) {
+					for (FilterState f : list) {
+						if (f.minzoom <= zoom && (zoom <= f.maxzoom || f.maxzoom == -1)) {
+							return RenderingIcons.getIcons().get(f.icon);
+						}
 					}
 				}
 			}
@@ -220,6 +233,9 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 	}
 	
 	private boolean renderPolylineImpl(String tag, String val, int zoom, RenderingContext rc, OsmandRenderer o, int layer) {
+		if(rules[OsmandRenderingRulesParser.LINE_STATE] == null){
+			return false;
+		}
 		Map<String, List<FilterState>> map = rules[OsmandRenderingRulesParser.LINE_STATE].get(tag);
 		if (map != null) {
 			List<FilterState> list = map.get(val);
@@ -266,6 +282,9 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 	
 
 	private boolean renderPolygonImpl(String tag, String val, int zoom, RenderingContext rc, OsmandRenderer o) {
+		if(rules[OsmandRenderingRulesParser.POLYGON_STATE] == null){
+			return false;
+		}
 		Map<String, List<FilterState>> map = rules[OsmandRenderingRulesParser.POLYGON_STATE].get(tag);
 		if (map != null) {
 			List<FilterState> list = map.get(val);
@@ -326,6 +345,9 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 	}
 
 	private String renderObjectTextImpl(String name, String tag, String val, RenderingContext rc, boolean ref) {
+		if(rules[OsmandRenderingRulesParser.TEXT_STATE] == null){
+			return null;
+		}
 		Map<String, List<FilterState>> map = rules[OsmandRenderingRulesParser.TEXT_STATE].get(tag);
 		if (map != null) {
 			List<FilterState> list = map.get(val);

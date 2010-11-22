@@ -24,7 +24,9 @@ import net.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.ITileSource;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.render.BaseOsmandRender;
 import net.osmand.render.MapRenderRepositories;
+import net.osmand.render.RendererRegistry;
 import net.osmand.views.POIMapLayer;
 
 import org.apache.commons.logging.Log;
@@ -98,7 +100,6 @@ public class ResourceManager {
 	public ResourceManager(OsmandApplication context) {
 		this.context = context;
 		this.renderer = new MapRenderRepositories(context);
-		// TODO start/stop this thread when needed?
 		asyncLoadingTiles.start();
 		dirWithTiles = new File(Environment.getExternalStorageDirectory(), TILES_PATH);
 		if(Environment.getExternalStorageDirectory().canRead()){
@@ -333,12 +334,6 @@ public class ResourceManager {
 			}
 
 			if (cacheOfImages.get(req.tileId) == null && req.url != null) {
-				// TODO we could check that network is available (context is required)
-				// ConnectivityManager mgr = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-				// NetworkInfo info = mgr.getActiveNetworkInfo();
-				// if (info != null && info.isConnected()) {
-				// downloader.requestToDownload(req);
-				// }
 				downloader.requestToDownload(req);
 			}
 
@@ -350,6 +345,7 @@ public class ResourceManager {
 
 	public List<String> reloadIndexes(IProgress progress){
 		close();
+		initRenderers(progress);
 		// do it lazy
 		// indexingImageTiles(progress);
 		List<String> warnings = new ArrayList<String>();
@@ -360,6 +356,27 @@ public class ResourceManager {
 		return warnings;
 	}
 	
+	private void initRenderers(IProgress progress) {
+		File file = new File(Environment.getExternalStorageDirectory(), APP_DIR + IndexConstants.RENDERERS_DIR);
+		Map<String, File> externalRenderers = new LinkedHashMap<String, File>(); 
+		if (file.exists() && file.canRead()) {
+			for (File f : file.listFiles()) {
+				if (f.getName().endsWith(IndexConstants.RENDERER_INDEX_EXT)) {
+					String name = f.getName().substring(0, f.getName().length() - IndexConstants.RENDERER_INDEX_EXT.length());
+					externalRenderers.put(name, f);
+				}
+			}
+		}
+		RendererRegistry.getRegistry().setExternalRenderers(externalRenderers);
+		String r = OsmandSettings.getVectorRenderer(OsmandSettings.getPrefs(context));
+		if(r != null){
+			BaseOsmandRender obj = RendererRegistry.getRegistry().getRenderer(r);
+			if(obj != null){
+				RendererRegistry.getRegistry().setCurrentSelectedRender(obj);
+			}
+		}
+	}
+
 	public List<String> indexingMaps(final IProgress progress) {
 		File file = new File(Environment.getExternalStorageDirectory(), MAPS_PATH);
 		List<String> warnings = new ArrayList<String>();
