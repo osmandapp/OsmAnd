@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-	<string name="use_high_res_maps">Mapa s veľkým rozlíšením</string>
+<string name="reload">Znovu načítať indexy</string>
+<string name="poi_context_menu_website">Zobraziť web stránku POI</string>
+<string name="poi_context_menu_call">Zobraziť telefónny kontakt POI</string>
+<string name="website">Web stránka</string>
+<string name="phone">Telefónny kontakt</string>
+<string name="download_type_to_filter">sem zadajte čo vyhľadať</string>
+<string name="use_high_res_maps">Mapa s veľkým rozlíšením</string>
 <string name="use_high_res_maps_descr">Použiť mapu s veľkým rozlíšením pre zariadenia s vysokou hustotou bodov</string>
 <string name="unknown_location">Pozícia nie je zatiaľ známa</string>
 <string name="download_files_question">Stiahnuť {0} súbor/y?</string>
@@ -12,7 +18,7 @@
 <string name="transport_search_again">Hľadať znova prepravu</string>
 
 <string name="map_index">Mapa</string>
-<string name="voice">Hlas</string>
+<string name="voice">Hlasové údaje</string>
 <string name="no_vector_map_loaded">Vektorové mapy neboli načítané</string>
 <string name="gpx_reverse_route">Obrátiť cestu</string>
 <string name="gpx_direct_route">Priama cesta</string>
@@ -169,7 +175,7 @@
 <string name="download_index_success">Index bol úspešne stiahnutý</string>
 <string name="error_io_error">Vyskytla sa vstupno/výstupná chyba</string>
 <string name="downloading_file">Sťahuje sa súbor...</string>
-<string name="downloading">Sťahuje sa...</string>
+<string name="downloading">Sťahovanie...</string>
 <string name="downloading_list_indexes">Sťahuje sa zoznam dostupných indexov</string>
 <string name="list_index_files_was_not_loaded">Zoznam indexových súborov nebol prijatý z osmand.googlecode.com.</string>
 <string name="select_index_file_to_download">Ak nemôžete nájsť vašu oblasť, môžete si ju sami vytvoriť. Viď osmand.net</string>
@@ -183,7 +189,7 @@
 <string name="follow_route">Nasledovať cestu</string>
 <string name="mark_final_location_first">Prosím, najskôr zvoľte cieľ</string>
 <string name="get_directions">Pokyny</string>
-<string name="gps_status_app_not_found">Nedá sa nájsť aplikácia stavu GPS</string>
+<string name="gps_status_app_not_found">Nedá sa nájsť aplikácia pre stav GPS</string>
 <string name="show_gps_status">Zobraziť stav GPS</string>
 <string name="opening_hours">Otváracie hodiny</string>
 <string name="opening_changeset">Otvára sa zmenový súbor...</string>
@@ -347,9 +353,9 @@
 
 <string name="favourites_context_menu_title">Kontextové menu</string>
 <string name="favourites_context_menu_navigate">Navigovať sem</string>
-<string name="favourites_context_menu_edit">Upravit obľúbené</string>
-<string name="favourites_context_menu_delete">Vymazať obľúbené</string>
-<string name="favourites_edit_dialog_title">Premenovať obľúbené</string>
+<string name="favourites_context_menu_edit">Upraviť obľúbený bod</string>
+<string name="favourites_context_menu_delete">Vymazať obľúbený bod</string>
+<string name="favourites_edit_dialog_title">Premenovať obľúbený bod</string>
 
 <string name="favourites_remove_dialog_title">Ste si istý?</string>
 <string name="favourites_remove_dialog_success">Obľúbený bod {0} bol úspešne zmazaný.</string>
@@ -368,7 +374,7 @@
 <string name="osb_comment_dialog_error">Vyskytla sa výnimka: komentár nebol pridaný</string>
 
 <string name="osb_close_menu_item">Zavrieť chybu</string>
-<string name="osb_close_dialog_title">Zatvára sa chyba</string>
+<string name="osb_close_dialog_title">Zatvorenie chyby</string>
 <string name="osb_close_dialog_close_button">Zavrieť chybu</string>
 <string name="osb_close_dialog_success">Chyba bola úspešne uzavretá</string>
 <string name="osb_close_dialog_error">Vyskytla sa výnimka: chyba nebola uzavretá</string>
@@ -380,8 +386,8 @@
 <string name="poi_remove_title">Vymazať POI</string>
 <string name="default_buttons_delete">Vymazať</string>
 <string name="poi_remove_success">POI bol úspešne vymazaný</string>
-<string name="poi_action_add">pridať</string>
-<string name="poi_action_change">zmeniť</string>
+<string name="poi_action_add">Pridať</string>
+<string name="poi_action_change">Zmeniť</string>
 <string name="poi_action_succeded_template">Akcia {0} úspešne ukončená.</string>
 <string name="poi_error_unexpected_template">Vyskytla sa neočakávaná chyba počas vykonávania akcie {0}.</string>
 <string name="poi_error_io_error_template">Vyskytla sa vstupno/výstupná chyba počas vykonávania akcie {0}.</string>
