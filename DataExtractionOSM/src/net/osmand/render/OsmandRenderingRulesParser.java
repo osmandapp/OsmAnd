@@ -88,7 +88,7 @@ public class OsmandRenderingRulesParser {
 		 */
 		public void visitRule(int state, FilterState  filter);
 		
-		public void rendering(String name, String depends);
+		public void rendering(String name, String depends, int defaultColor);
 	}
 	
 	
@@ -143,7 +143,12 @@ public class OsmandRenderingRulesParser {
 				FilterState st = parseFilterAttributes(attributes);
 				((SwitchState)stack.peek()).filters.add(st);
 			} else if("renderer".equals(name)){ //$NON-NLS-1$
-				visitor.rendering(attributes.getValue("name"), attributes.getValue("depends")); //$NON-NLS-1$ //$NON-NLS-2$
+				String dc = attributes.getValue("defaultColor");
+				int defaultColor = 0;
+				if(dc != null && dc.length() > 0){
+					defaultColor = parseColor(dc);
+				}
+				visitor.rendering(attributes.getValue("name"), attributes.getValue("depends"), defaultColor); //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
 				log.warn("Unknown tag" + name); //$NON-NLS-1$
 			}
@@ -427,7 +432,7 @@ public class OsmandRenderingRulesParser {
 				new RenderingRuleVisitor() {
 
 			@Override
-			public void rendering(String name, String depends) {
+			public void rendering(String name, String depends, int defColor) {
 				System.out.println("Renderer " + name); //$NON-NLS-1$
 			}
 

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="renderer_load_sucess">Renderer was sucessfully loaded</string>
+	<string name="renderer_load_exception">Exception occured: renderer was not loaded</string>
+	<string name="renderers">Vector renderer</string>
+	<string name="renderers_descr">Choose vector rendering style</string>
+
 	<string name="reload">reload</string>
 	<string name="poi_context_menu_website">See POI website</string>
 	<string name="poi_context_menu_call">Show POI phone</string>

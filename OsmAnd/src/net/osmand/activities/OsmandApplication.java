@@ -111,7 +111,7 @@ public class OsmandApplication extends Application {
 
 	public void startApplication() {
 		startDialog = new ProgressDialogImplementation(this, null, false);
-		
+
 		startDialog.setRunnable("Initializing app", new Runnable() { //$NON-NLS-1$
 
 					@Override
@@ -121,14 +121,14 @@ public class OsmandApplication extends Application {
 							warnings = manager.reloadIndexes(startDialog);
 							String voice = OsmandSettings.getVoiceProvider(OsmandSettings.getPrefs(OsmandApplication.this));
 							player = null;
-							if(voice != null){
+							if (voice != null) {
 								startDialog.startTask(getString(R.string.voice_data_initializing), -1);
 								String w = initCommandPlayer();
 								if (w != null) {
 									warnings.add(w);
 								}
 							}
-							
+
 							SavingTrackHelper helper = new SavingTrackHelper(OsmandApplication.this);
 							if (helper.hasDataToSave()) {
 								startDialog.startTask(getString(R.string.saving_gpx_tracks), -1);

@@ -3,7 +3,6 @@ package net.osmand.render;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TFloatObjectHashMap;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,7 +20,6 @@ import net.osmand.osm.MultyPolygon;
 import net.sf.junidecode.Junidecode;
 
 import org.apache.commons.logging.Log;
-import org.xml.sax.SAXException;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -48,6 +46,8 @@ import android.util.FloatMath;
 public class OsmandRenderer {
 	private static final Log log = LogUtil.getLog(OsmandRenderer.class);
 	
+	private final int clFillScreen = Color.rgb(241, 238, 232);
+	
 	private TextPaint paintText;
 	private Paint paint;
 	
@@ -56,9 +56,6 @@ public class OsmandRenderer {
 	
 	public static final int TILE_SIZE = 256; 
 	
-	/// Colors
-	private int clFillScreen = Color.rgb(241, 238, 232);
-
 	private Map<String, PathEffect> dashEffect = new LinkedHashMap<String, PathEffect>();
 	private Map<Integer, Shader> shaders = new LinkedHashMap<Integer, Shader>();
 	private Map<Integer, Bitmap> cachedIcons = new LinkedHashMap<Integer, Bitmap>();
@@ -233,13 +230,7 @@ public class OsmandRenderer {
 		paintFillEmpty = new Paint();
 		paintFillEmpty.setStyle(Style.FILL);
 		paintFillEmpty.setColor(clFillScreen);
-		try {
-			render = BaseOsmandRender.defaultRender();
-		} catch (IOException e) {
-			log.error("Exception initialize renderer", e); //$NON-NLS-1$
-		} catch (SAXException e) {
-			log.error("Exception initialize renderer", e); //$NON-NLS-1$
-		}
+		render = RendererRegistry.getRegistry().defaultRender();
 	}
 	
 	public PathEffect getDashEffect(String dashes){
@@ -273,6 +264,7 @@ public class OsmandRenderer {
 	
 	public Bitmap generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, boolean useEnglishNames) {
 		long now = System.currentTimeMillis();
+		render = RendererRegistry.getRegistry().getCurrentSelectedRenderer();
 		// put in order map
 		int sz = objects.size();
 		int init = sz / 4;
@@ -318,6 +310,12 @@ public class OsmandRenderer {
 			bmp = Bitmap.createBitmap(rc.width, rc.height, Config.RGB_565);
 			
 			Canvas cv = new Canvas(bmp);
+			if(render != null){
+				int dc = render.getDefaultColor();
+				if(dc != 0){
+					paintFillEmpty.setColor(dc);
+				}
+			}
 			cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillEmpty);
 			float[] keys = orderMap.keys();
 			Arrays.sort(keys);

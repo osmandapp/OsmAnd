@@ -1,4 +1,4 @@
-<renderer name="default" depends="">
+<renderer name="default" depends="" defaultColor="#f1eee8">
 	<!--
 		Currently available icons : aerodrome, airport, alpinehut, atm, bank, bar, beach, bollard, bus_station, bus_stop_small, bus_stop,
 		cable_car, cafe, camp_site, car_share, caravan_park, cave_entrance, chair_lift, cinema, cliff, cliff2, danger, department_store, embassy,

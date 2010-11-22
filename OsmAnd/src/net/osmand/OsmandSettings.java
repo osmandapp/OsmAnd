@@ -619,6 +619,13 @@ public class OsmandSettings {
 		return prefs.getString(VOICE_PROVIDER, null);
 	}
 	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String RENDERER = "renderer"; //$NON-NLS-1$
+	
+	public static String getVectorRenderer(SharedPreferences prefs){
+		return prefs.getString(RENDERER, null);
+	}
+	
 	public static final String VOICE_MUTE = "voice_mute"; //$NON-NLS-1$
 	public static final boolean VOICE_MUTE_DEF = false;
 	
