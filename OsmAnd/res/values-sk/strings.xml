@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+<string name="show_point_options">Možnosti bodu</string>
+<string name="renderer_load_sucess">Vykresľovač bol úspešne načítaný</string>
+<string name="renderer_load_exception">Nastala sa výnimka: vykresľovač nebol načítaný</string>
+<string name="renderers">Vektorový vykresľovač</string>
+<string name="renderers_descr">Vybrať štýl vektorového vykresľovania</string>
+
 <string name="reload">Znovu načítať indexy</string>
 <string name="poi_context_menu_website">Zobraziť web stránku POI</string>
 <string name="poi_context_menu_call">Zobraziť telefónny kontakt POI</string>
