@@ -8,15 +8,13 @@ package net.osmand;
 public class ToDoConstants {
 	
 	// TODO max 105
-	// introduce bidforfix on site
+
+	// FIX botanicheskii sad, flood waterb
 	
 
 
 	// 	For 0.5 release
-	//  102. Refactoring rendering schema serializing to xml and prepare script to create fast java builder (support pure xml)
-	//       Refactoring MapRenderingTypes to xml either
-	//       Input MAP_ZOOMS as parameter
-
+	//  105. Input MAP_ZOOMS and MapRenderingTypes xml as parameter for index creator
 	//   86. Allow to add/edit custom tags to POI objects (Issue)
 	//   92. Support poi index with standard map index and unify POI categories (unify done +)
 	//   97. For voice navigation consider current speed of vehicle. Especially when speed > 50 pronounce more than 200 m
@@ -24,7 +22,6 @@ public class ToDoConstants {
 	//   96. Introduce settings for MPH, imperial units
 	//  104. Add activity to show current loaded indexes and information about them
 	
-
 	// 	_19. colors for road trunk and motorway
 	// 	_12. Fix : find proper location for streets ! centralize them (when create index)?
 	
@@ -49,6 +46,8 @@ public class ToDoConstants {
 	//  101. Introduce shell script to print information about indexes and to modify them
 	//   69. Add phone and site information to POI (enable call to POI and open site)
 	//  103. Allow add poi with multiple tags (different types/subtypes for one object). Fix for constructing and updating on mobile. (Issue)
+	//  102. Refactoring rendering schema serializing to xml and prepare script to create fast java builder (support pure xml)
+	//       Refactoring MapRenderingTypes to xml either
 	
 	// DONE SWING
 
