@@ -1296,7 +1296,7 @@ public class IndexCreator {
 						for (Way es : l) {
 							boolean inner = "inner".equals(entities.get(es));
 							if (innerType != inner) {
-								throw new IllegalStateException();
+								throw new IllegalStateException("Way:" + es.getId() + " is strange part of completed ring. InnerType:" + innerType + " way inner: " + inner + " way inner string:" + entities.get(es));
 							}
 							if (!inner && name != null) {
 								multiPolygonsNames.put(es.getId(), name);
