@@ -20,6 +20,7 @@ public class IndexConstants {
 	public static final String ADDRESS_INDEX_DIR = "Address/"; //$NON-NLS-1$
 	public static final String VOICE_INDEX_DIR = "voice/"; //$NON-NLS-1$
 	public static final String TRANSPORT_INDEX_DIR = "Transport/"; //$NON-NLS-1$
+	public static final String RENDERERS_DIR = "rendering/"; //$NON-NLS-1$
 	
 	public static final String POI_INDEX_EXT = ".poi.odb"; //$NON-NLS-1$
 	public static final String ADDRESS_INDEX_EXT = ".addr.odb"; //$NON-NLS-1$
@@ -31,6 +32,8 @@ public class IndexConstants {
 	public static final String TRANSPORT_INDEX_EXT_ZIP = ".trans.zip"; //$NON-NLS-1$
 	public static final String VOICE_INDEX_EXT_ZIP = ".voice.zip"; //$NON-NLS-1$
 	public static final String BINARY_MAP_INDEX_EXT_ZIP = ".obf.zip"; //$NON-NLS-1$
+	
+	public static final String RENDERER_INDEX_EXT = ".render.xml"; //$NON-NLS-1$
 	
 
 	public final static String STREET_NODE_TABLE = "street_node"; //$NON-NLS-1$
