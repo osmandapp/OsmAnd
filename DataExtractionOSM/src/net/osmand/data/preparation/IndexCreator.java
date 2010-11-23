@@ -1285,27 +1285,39 @@ public class IndexCreator {
 					}
 					// skip incompleted rings and do not add whole relation ?
 					if(!incompletedRings.isEmpty()){
+						log.warn("In multipolygon  " + e.getId() + " there are incompleted ways : " + incompletedRings);
 						return;
 //						completedRings.addAll(incompletedRings);
 					}
+					
+					// skip completed rings that are not one type
+					for(List<Way> l : completedRings){
+						boolean innerType = "inner".equals(entities.get(l.get(0)));
+						for (Way way : l) {
+							boolean inner = "inner".equals(entities.get(way));
+							if (innerType != inner) {
+								log.warn("Probably map bug: Multipoligon contains outer and inner ways.\n" + 
+										"Way:" + way.getId() + " is strange part of completed ring. InnerType:" + innerType + " way inner: " + inner + " way inner string:" + entities.get(way));
+								return;
+							}
+						}
+					}
+					
 					for(List<Way> l : completedRings){
 						boolean innerType = "inner".equals(entities.get(l.get(0)));
 						boolean clockwise = isClockwiseWay(l);
 						// clockwise - outer (like coastline), anticlockwise - inner
 						boolean inverse = clockwise != !innerType;
-						for (Way es : l) {
-							boolean inner = "inner".equals(entities.get(es));
-							if (innerType != inner) {
-								throw new IllegalStateException("Way:" + es.getId() + " is strange part of completed ring. InnerType:" + innerType + " way inner: " + inner + " way inner string:" + entities.get(es));
-							}
+						for (Way way : l) {
+							boolean inner = "inner".equals(entities.get(way));
 							if (!inner && name != null) {
-								multiPolygonsNames.put(es.getId(), name);
+								multiPolygonsNames.put(way.getId(), name);
 							}
-							putMultipolygonType(multiPolygonsWays[0], es.getId(), mtType, inverse);
+							putMultipolygonType(multiPolygonsWays[0], way.getId(), mtType, inverse);
 							for (int i = 1; i < multiPolygonsWays.length; i++) {
 								int type = findMultiPolygonType(e, i);
 								if (type != 0) {
-									putMultipolygonType(multiPolygonsWays[i], es.getId(), type, inverse);
+									putMultipolygonType(multiPolygonsWays[i], way.getId(), type, inverse);
 								}
 							}
 						}
@@ -1553,7 +1565,7 @@ public class IndexCreator {
 		int zoom;
 		long id = (baseId << 3) | ((level & 3) << 1);
 		rtree = mapTree[level];
-		zoom = MAP_ZOOMS[MAP_ZOOMS.length - level - 1] - 2;
+		zoom = MAP_ZOOMS[MAP_ZOOMS.length - level - 1];
 		boolean skip = false;
 		if (e instanceof Way) {
 			id |= 1;
@@ -1594,7 +1606,8 @@ public class IndexCreator {
 				}
 				e = way;
 				skip = way.getNodes().size() < 2;
-				if (/* !hasMulti && */(maxX - minX) <= 4 && (maxY - minY) <= 4) {
+				if (/* !hasMulti && */
+						((maxX - minX) <= 3 && (maxY - minY) <= 5) && ((maxX - minX) <= 5 && (maxY - minY) <= 3)) {
 					skip = true;
 				}
 				if(!cycle && hasMulti){
