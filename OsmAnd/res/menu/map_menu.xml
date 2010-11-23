@@ -16,6 +16,7 @@
 
 <item android:title="@string/show_gps_status" android:id="@+id/map_show_gps_status" android:icon="@android:drawable/ic_menu_compass"></item> 
 <item android:title="@string/map_route_by_gpx" android:id="@+id/map_gpx_routing"></item>
+<item android:id="@+id/map_show_point_options" android:title="@string/show_point_options"></item>
 </group>
 
 

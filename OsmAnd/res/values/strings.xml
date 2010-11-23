@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="show_point_options">Point options</string>
 	<string name="renderer_load_sucess">Renderer was sucessfully loaded</string>
 	<string name="renderer_load_exception">Exception occured: renderer was not loaded</string>
 	<string name="renderers">Vector renderer</string>
