@@ -152,7 +152,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 	
 	public void insertData(double lat, double lon, double alt, double speed, long time, SharedPreferences settings){
-		if (time - lastTimeUpdated > OsmandSettings.getSavingTrackInterval(settings)) {
+		if (time - lastTimeUpdated > OsmandSettings.getSavingTrackInterval(settings)*1000) {
 			SQLiteDatabase db = getWritableDatabase();
 			if (db != null) {
 				db.execSQL(updateScript, new Object[] { lat, lon, alt, speed, time });
