@@ -1012,6 +1012,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     	} else if (item.getItemId() == R.id.map_gpx_routing) {
 			useGPXFileLayer(true, navigationLayer.getPointToNavigate());
 			return true;
+    	} else if (item.getItemId() == R.id.map_show_point_options) {
+			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
+    		return true;
     	}
     	return super.onOptionsItemSelected(item);
     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="show_point_options">Контекстное меню</string>
 	<string name="renderer_load_sucess">Стиль успешно загружен</string>
 	<string name="renderer_load_exception">Произошла ошибка во время загрузки данного стиля</string>
 	<string name="renderers">Рендеринг карты</string>
