@@ -30,8 +30,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -46,11 +46,10 @@ import net.osmand.data.index.IndexConstants;
 import org.apache.commons.logging.Log;
 
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.Editable;
@@ -100,8 +99,7 @@ public class DownloadIndexActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// that is needed to prevent rotation while files are downloaded
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		// recreation upon rotation is prevented in manifest file
 		setContentView(R.layout.download_index);
 		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener(){
 
@@ -125,13 +123,13 @@ public class DownloadIndexActivity extends ListActivity {
 	private void downloadIndexList() {
 		progressListDlg = ProgressDialog.show(this, getString(R.string.downloading), getString(R.string.downloading_list_indexes));
 		progressListDlg.setCancelable(true);
-		downloadListIndexThread.uiActivity = this;
+		downloadListIndexThread.setUiActivity(this);
 		if(downloadListIndexThread.getState() == Thread.State.NEW){
 			downloadListIndexThread.start();
 		} else if(downloadListIndexThread.getState() == Thread.State.TERMINATED){
 			// possibly exception occurred we don't have cache of files
 			downloadListIndexThread = new DownloadIndexListThread();
-			downloadListIndexThread.uiActivity = this;
+			downloadListIndexThread.setUiActivity(this);
 		}
 	}
 	
@@ -385,6 +383,7 @@ public class DownloadIndexActivity extends ListActivity {
 													@Override
 													public void run() {
 														((DownloadIndexAdapter) getListAdapter()).notifyDataSetChanged();
+														findViewById(R.id.DownloadButton).setVisibility(entriesToDownload.isEmpty() ? View.GONE : View.VISIBLE);
 													}
 												});
 											}
@@ -491,7 +490,7 @@ public class DownloadIndexActivity extends ListActivity {
 	    	EditText filterText = (EditText) findViewById(R.id.search_box);
 	    	filterText.removeTextChangedListener(textWatcher);
 	    }
-		downloadListIndexThread.uiActivity = null;
+		downloadListIndexThread.setUiActivity(null);
 		progressFileDlg = null;
 	}
 	
