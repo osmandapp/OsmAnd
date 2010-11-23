@@ -672,7 +672,7 @@ public class MapRenderingTypes {
 					if(name.equals("type")){ //$NON-NLS-1$
 						currentType = Integer.parseInt(attributes.getValue("id")); //$NON-NLS-1$
 					} else if (name.equals("subtype")) { //$NON-NLS-1$
-						String val = attributes.getValue("maxzoom"); //$NON-NLS-1$
+						String val = attributes.getValue("minzoom"); //$NON-NLS-1$
 						int maxzoom = 15;
 						if (val != null) {
 							maxzoom = Integer.parseInt(val);
