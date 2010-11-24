@@ -758,7 +758,11 @@ public class MapRenderingTypes {
 			}
 		} else if(st == INIT_TYPE_ZOOM){
 			if(minZoom < 15){
-				objectsToMinZoom.put((((subtype) << 5) | type) << 2, (byte) minZoom);
+				int value = (((subtype) << 5) | type) << 2;
+				if(!objectsToMinZoom.containsKey(value)){
+					// add only first
+					objectsToMinZoom.put(value, (byte) minZoom);
+				}
 			}
 		}
 	}
