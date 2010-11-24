@@ -1565,7 +1565,7 @@ public class IndexCreator {
 		int zoom;
 		long id = (baseId << 3) | ((level & 3) << 1);
 		rtree = mapTree[level];
-		zoom = MAP_ZOOMS[MAP_ZOOMS.length - level - 1];
+		zoom = MAP_ZOOMS[MAP_ZOOMS.length - level - 1] - 1;
 		boolean skip = false;
 		if (e instanceof Way) {
 			id |= 1;
@@ -2537,8 +2537,8 @@ public class IndexCreator {
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 
-		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
-		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.pbf"), new ConsoleProgressImplementation(3), null);
+//		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
+//		 creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.pbf"), new ConsoleProgressImplementation(3), null);
 		 
 //		 creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);
@@ -2555,6 +2555,7 @@ public class IndexCreator {
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/luxembourg.osm.pbf"), new ConsoleProgressImplementation(15), null);
 		 
 //		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/new_zealand.osm.bz2"), new ConsoleProgressImplementation(3), null);
+		 creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/map.osm"), new ConsoleProgressImplementation(15), null);
 
 		 System.out.println("WHOLE GENERATION TIME :  " + (System.currentTimeMillis() - time));
 		 System.out.println("COORDINATES_SIZE " + BinaryMapIndexWriter.COORDINATES_SIZE + " count " + BinaryMapIndexWriter.COORDINATES_COUNT);

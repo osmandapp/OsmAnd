@@ -36,12 +36,15 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.graphics.Bitmap.Config;
+import android.graphics.BitmapFactory.Options;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
 import android.graphics.Shader.TileMode;
 import android.text.TextPaint;
+import android.util.DisplayMetrics;
 import android.util.FloatMath;
+import android.view.WindowManager;
 
 public class OsmandRenderer {
 	private static final Log log = LogUtil.getLog(OsmandRenderer.class);
@@ -63,7 +66,7 @@ public class OsmandRenderer {
 	private final Context context;
 
 	private BaseOsmandRender render;
-
+	private DisplayMetrics dm;
 	
 	private static class TextDrawInfo {
 		
@@ -231,6 +234,9 @@ public class OsmandRenderer {
 		paintFillEmpty.setStyle(Style.FILL);
 		paintFillEmpty.setColor(clFillScreen);
 		render = RendererRegistry.getRegistry().defaultRender();
+		dm = new DisplayMetrics();
+		WindowManager wmgr = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		wmgr.getDefaultDisplay().getMetrics(dm);
 	}
 	
 	public PathEffect getDashEffect(String dashes){
@@ -334,14 +340,35 @@ public class OsmandRenderer {
 					return null;
 				}
 			}
+			
+			int skewConstant = 16;
+			
+			int iconsW = rc.width / skewConstant ;
+			int iconsH = rc.height / skewConstant;
+			int[] alreadyDrawnIcons = new int[iconsW * iconsH / 32];
 			for(IconDrawInfo icon : rc.iconsToDraw){
-				if(icon.resId != 0){
-					if(cachedIcons.get(icon.resId) == null){
+				if (icon.resId != 0) {
+					if (cachedIcons.get(icon.resId) == null) {
+						Options options = new BitmapFactory.Options();
+						options.inScaled = false;
 						cachedIcons.put(icon.resId, BitmapFactory.decodeResource(context.getResources(), icon.resId));
 					}
 					Bitmap ico = cachedIcons.get(icon.resId);
-					if (ico  != null) {
-						cv.drawBitmap(ico, icon.x - ico.getWidth() / 2, icon.y - ico.getHeight() / 2, paintIcon);
+					if (ico != null) {
+						if (icon.y >= 0 && icon.y < rc.height && icon.x >= 0 && icon.x < rc.width) {
+							int z = (((int) icon.x / skewConstant) + ((int) icon.y / skewConstant) * iconsW);
+							int i = z / 32;
+							if (i >= alreadyDrawnIcons.length) {
+								continue;
+							}
+							int ind = alreadyDrawnIcons[i];
+							int b = z % 32;
+							// check bit b if it is set
+							if (((ind >> b) & 1) == 0) {
+								alreadyDrawnIcons[i] = ind | (1 << b);
+								cv.drawBitmap(ico, icon.x - ico.getWidth() / 2, icon.y - ico.getHeight() / 2, paintIcon);
+							}
+						}
 					}
 				}
 				if(rc.interrupted){
@@ -381,7 +408,7 @@ public class OsmandRenderer {
 					text.text = Junidecode.unidecode(text.text);
 				}
 				RectF bounds = new RectF();
-				paintText.setTextSize(text.textSize);
+				paintText.setTextSize(text.textSize * dm.density);
 				paintText.setFakeBoldText(text.bold);
 				float mes = paintText.measureText(text.text);
 				if(text.drawOnPath == null || 

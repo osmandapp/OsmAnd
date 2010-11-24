@@ -148,6 +148,11 @@ public abstract class Entity {
 		return id < 0;
 	}
 
+	
+	@Override
+	public String toString() {
+		return EntityId.valueOf(this).toString();
+	}
 	@Override
 	public int hashCode() {
 		if (id < 0) {
