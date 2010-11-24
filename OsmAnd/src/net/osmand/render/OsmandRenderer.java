@@ -341,7 +341,7 @@ public class OsmandRenderer {
 				}
 			}
 			
-			int skewConstant = 16;
+			int skewConstant = 20;
 			
 			int iconsW = rc.width / skewConstant ;
 			int iconsH = rc.height / skewConstant;
@@ -351,7 +351,9 @@ public class OsmandRenderer {
 					if (cachedIcons.get(icon.resId) == null) {
 						Options options = new BitmapFactory.Options();
 						options.inScaled = false;
-						cachedIcons.put(icon.resId, BitmapFactory.decodeResource(context.getResources(), icon.resId));
+						options.inTargetDensity = dm.densityDpi;
+						options.inDensity = dm.densityDpi;
+						cachedIcons.put(icon.resId, BitmapFactory.decodeResource(context.getResources(), icon.resId, options));
 					}
 					Bitmap ico = cachedIcons.get(icon.resId);
 					if (ico != null) {
