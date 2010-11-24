@@ -196,7 +196,7 @@ public class RouteProvider {
 							minDist = d;
 						}
 					}
-					res = new RouteCalculationResult(gpxRoute.subList(startI, endI), null, start, end, null);
+					res = new RouteCalculationResult(new ArrayList<Location>(gpxRoute.subList(startI, endI)), null, start, end, null);
 					addMissingTurnsToRoute(res, start, end, mode, ctx);
 				} else if (type == RouteService.YOURS) {
 					res = findYOURSRoute(start, end, mode);
