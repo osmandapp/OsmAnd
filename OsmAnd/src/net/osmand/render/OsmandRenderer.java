@@ -341,7 +341,7 @@ public class OsmandRenderer {
 				}
 			}
 			
-			int skewConstant = 20;
+			int skewConstant = (int) (16 * dm.density);
 			
 			int iconsW = rc.width / skewConstant ;
 			int iconsH = rc.height / skewConstant;
