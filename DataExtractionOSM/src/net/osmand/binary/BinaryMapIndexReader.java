@@ -1783,6 +1783,11 @@ public class BinaryMapIndexReader {
 		public boolean isInterrupted() {
 			return interrupted;
 		}
+		
+		public void clearSearchResults(){
+			// recreate whole list to allow GC collect old data 
+			searchResults = new ArrayList<T>();
+		}
 	}
 	
 	
