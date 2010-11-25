@@ -108,6 +108,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			new BooleanPreference(OsmandSettings.USE_ENGLISH_NAMES, OsmandSettings.USE_ENGLISH_NAMES_DEF),
 			new BooleanPreference(OsmandSettings.AUTO_ZOOM_MAP, OsmandSettings.AUTO_ZOOM_MAP_DEF),
 			new BooleanPreference(OsmandSettings.SAVE_TRACK_TO_GPX, OsmandSettings.SAVE_TRACK_TO_GPX_DEF),
+			new BooleanPreference(OsmandSettings.DEBUG_RENDERING_INFO, OsmandSettings.DEBUG_RENDERING_INFO_DEF),
 	};
 	private BroadcastReceiver broadcastReceiver;
 	
@@ -221,7 +222,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		saveTrackInterval.setEntryValues(new String[]{"1", "2", "5", "15", "30", "60", "300"}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 		saveTrackInterval.setValue(OsmandSettings.getSavingTrackInterval(prefs)+""); //$NON-NLS-1$
 		
-		String[] ints = new String[]{"0", "1", "2", "5", "8", "10", "15", "20", "25", "30", "40", "45", "60", "90" };  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$ //$NON-NLS-11$ //$NON-NLS-12$ //$NON-NLS-13$
+		String[] ints = new String[]{"0", "1", "2", "5", "8", "10", "15", "20", "25", "30", "40", "45", "60", "90" };  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$ //$NON-NLS-11$ //$NON-NLS-12$ //$NON-NLS-13$ //$NON-NLS-14$
 		String[] intDescriptions = new String[ints.length];
 		for(int i=0; i<intDescriptions.length; i++){
 			intDescriptions[i] = ints[i] + " " + getString(R.string.int_min); //$NON-NLS-1$

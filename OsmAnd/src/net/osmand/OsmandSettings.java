@@ -251,6 +251,15 @@ public class OsmandSettings {
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
+	public static final String DEBUG_RENDERING_INFO = "debug_rendering"; //$NON-NLS-1$
+	public static final boolean DEBUG_RENDERING_INFO_DEF = false; 
+
+	public static boolean isDebugRendering(Context ctx) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(DEBUG_RENDERING_INFO, DEBUG_RENDERING_INFO_DEF);
+	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SHOW_YANDEX_TRAFFIC = "show_yandex_traffic"; //$NON-NLS-1$
 	public static final boolean SHOW_YANDEX_TRAFFIC_DEF = false;
 
