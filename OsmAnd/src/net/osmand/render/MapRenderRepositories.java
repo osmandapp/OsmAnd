@@ -21,6 +21,7 @@ import java.util.Set;
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
 import net.osmand.OsmandSettings;
+import net.osmand.R;
 import net.osmand.RotatedTileBox;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -37,11 +38,15 @@ import org.apache.commons.logging.Log;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.Toast;
 
 public class MapRenderRepositories {
 	
 	private final static Log log = LogUtil.getLog(MapRenderRepositories.class);
 	private final Context context;
+	private Handler handler;
 	private Map<String, BinaryMapIndexReader> files = new LinkedHashMap<String, BinaryMapIndexReader>();
 	private OsmandRenderer renderer;
 
@@ -64,10 +69,10 @@ public class MapRenderRepositories {
 	private RenderingContext currentRenderingContext;
 	private SearchRequest<BinaryMapDataObject> searchRequest;
 	
-	
 	public MapRenderRepositories(Context context){
 		this.context = context;
 		this.renderer = new OsmandRenderer(context);
+		handler = new Handler(Looper.getMainLooper());
 	}
 	
 	public Context getContext() {
@@ -264,6 +269,7 @@ public class MapRenderRepositories {
 					}
 					tempList.add(r);
 				}
+				searchRequest.clearSearchResults();
 			}
 			
 			List<MultyPolygon> pMulti = proccessMultiPolygons(multiPolygons, leftX, rightX, bottomY, topY, zoom);
@@ -286,51 +292,86 @@ public class MapRenderRepositories {
 		if(currentRenderingContext != null){
 			currentRenderingContext = null;
 		}
-		// prevent editing
-		requestedBox = new RotatedTileBox(tileRect);
+		try {
+			// prevent editing
+			requestedBox = new RotatedTileBox(tileRect);
 
-		// calculate data box
-		RectF dataBox = requestedBox.calculateLatLonBox(new RectF());
-		if (cObjectsBox.left > dataBox.left || cObjectsBox.top > dataBox.top || 
-				cObjectsBox.right < dataBox.right || cObjectsBox.bottom < dataBox.bottom) {
-			// increase data box in order for rotate
-			if ((dataBox.right - dataBox.left) > (dataBox.top - dataBox.bottom)) {
-				double wi = (dataBox.right - dataBox.left) * .2;
-				dataBox.left -= wi;
-				dataBox.right += wi;
-			} else {
-				double hi = (dataBox.bottom - dataBox.top) * .2;
-				dataBox.top -= hi;
-				dataBox.bottom += hi;
+			// calculate data box
+			RectF dataBox = requestedBox.calculateLatLonBox(new RectF());
+			long now = System.currentTimeMillis();
+			if (cObjectsBox.left > dataBox.left || cObjectsBox.top > dataBox.top || cObjectsBox.right < dataBox.right
+					|| cObjectsBox.bottom < dataBox.bottom) {
+				// increase data box in order for rotate
+				if ((dataBox.right - dataBox.left) > (dataBox.top - dataBox.bottom)) {
+					double wi = (dataBox.right - dataBox.left) * .2;
+					dataBox.left -= wi;
+					dataBox.right += wi;
+				} else {
+					double hi = (dataBox.bottom - dataBox.top) * .2;
+					dataBox.top -= hi;
+					dataBox.bottom += hi;
+				}
+				boolean loaded = loadVectorData(dataBox, requestedBox.getZoom());
+				if (!loaded || checkWhetherInterrupted()) {
+					return;
+				}
 			}
-			boolean loaded = loadVectorData(dataBox, requestedBox.getZoom());
-			if(!loaded || checkWhetherInterrupted()){
+			final long searchTime = System.currentTimeMillis() - now;
+
+			currentRenderingContext = new OsmandRenderer.RenderingContext();
+			currentRenderingContext.leftX = (float) requestedBox.getLeftTileX();
+			currentRenderingContext.topY = (float) requestedBox.getTopTileY();
+			currentRenderingContext.zoom = requestedBox.getZoom();
+			currentRenderingContext.rotate = requestedBox.getRotate();
+			currentRenderingContext.width = (int) (requestedBox.getTileWidth() * OsmandRenderer.TILE_SIZE);
+			currentRenderingContext.height = (int) (requestedBox.getTileHeight() * OsmandRenderer.TILE_SIZE);
+			if (checkWhetherInterrupted()) {
 				return;
 			}
-		}
-		
-		currentRenderingContext = new OsmandRenderer.RenderingContext();
-		currentRenderingContext.leftX = (float) requestedBox.getLeftTileX();
-		currentRenderingContext.topY = (float) requestedBox.getTopTileY();
-		currentRenderingContext.zoom = requestedBox.getZoom();
-		currentRenderingContext.rotate = requestedBox.getRotate();
-		currentRenderingContext.width = (int) (requestedBox.getTileWidth() * OsmandRenderer.TILE_SIZE);
-		currentRenderingContext.height = (int) (requestedBox.getTileHeight() * OsmandRenderer.TILE_SIZE);
-		if(checkWhetherInterrupted()){
-			return;
-		}
-		
-		Bitmap bmp = renderer.generateNewBitmap(currentRenderingContext, cObjects, OsmandSettings.usingEnglishNames(OsmandSettings.getPrefs(context)));
-		if(checkWhetherInterrupted()){
+
+			now = System.currentTimeMillis();
+			Bitmap bmp = renderer.generateNewBitmap(currentRenderingContext, cObjects, OsmandSettings.usingEnglishNames(OsmandSettings
+					.getPrefs(context)));
+			if (checkWhetherInterrupted()) {
+				currentRenderingContext = null;
+				return;
+			}
+			final long renderingTime = System.currentTimeMillis() - now;
 			currentRenderingContext = null;
-			return;
-		}
-		currentRenderingContext = null;
-		Bitmap oldBmp = this.bmp;
-		this.bmp = bmp;
-		this.bmpLocation = tileRect;
-		if(oldBmp != null){
-			oldBmp.recycle();
+			Bitmap oldBmp = this.bmp;
+			this.bmp = bmp;
+			this.bmpLocation = tileRect;
+			if (oldBmp != null) {
+				oldBmp.recycle();
+			}
+			if(OsmandSettings.isDebugRendering(context)){
+				final String msg = "Search done in "+ searchTime+" ms\nRendering done in "+ renderingTime+ " ms";    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+				handler.post(new Runnable(){
+					@Override
+					public void run() {
+						Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+					}
+				});
+			}
+		} catch (RuntimeException e) {
+			log.error("Runtime memory exception", e); //$NON-NLS-1$
+			handler.post(new Runnable(){
+				@Override
+				public void run() {
+					Toast.makeText(context, R.string.rendering_exception, Toast.LENGTH_SHORT).show();
+				}
+			});
+		} catch (OutOfMemoryError e) {
+			log.error("Out of memory error", e); //$NON-NLS-1$
+			cObjects = new ArrayList<BinaryMapDataObject>();
+			cObjectsBox = new RectF();
+			handler.post(new Runnable(){
+				@Override
+				public void run() {
+					Toast.makeText(context, R.string.rendering_out_of_memory, Toast.LENGTH_SHORT).show();
+				}
+			});
+			
 		}
 		
 	}
@@ -341,7 +382,7 @@ public class MapRenderRepositories {
 	
 	
 	public synchronized void clearCache() {
-		cObjects.clear();
+		cObjects = new ArrayList<BinaryMapDataObject>();
 		cObjectsBox = new RectF();
 		if(bmp != null){
 			bmp.recycle();

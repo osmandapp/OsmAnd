@@ -378,8 +378,10 @@ public class OsmandRenderer {
 				}
 			}
 			drawTextOverCanvas(rc, cv, useEnglishNames);
+			long time = System.currentTimeMillis() - now;
 			log.info(String.format("Rendering has been done in %s ms. (%s points, %s points inside, %s visile from %s)",//$NON-NLS-1$
-					System.currentTimeMillis() - now, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects)); 
+					time, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects));
+			
 		}
 		
 		return bmp;
