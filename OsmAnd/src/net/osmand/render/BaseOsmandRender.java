@@ -180,22 +180,19 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 			return null;
 		}
 		String ret = renderObjectTextImpl(name, tag, val, rc, ref);
-		if(rc.textSize == 0){
+		if(ret == null){
 			ret = renderObjectTextImpl(name, tag, null, rc, ref);
 		}
-		if(rc.textSize == 0){
+		if(ret == null){
 			for(BaseOsmandRender d : dependRenderers){
 				ret = d.renderObjectText(name, tag, val, rc, ref);
-				if (rc.textSize > 0) {
+				if (ret != null) {
 					break;
 				}
 			}
 		}
-		if(rc.textSize > 0){
-			return ret;
-		} else {
-			return null;
-		}
+		
+		return ret;
 	}
 
 	private float getObjectOrderImpl(String tag, String val, int type, int layer) {
@@ -223,7 +220,8 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 				if (list != null) {
 					for (FilterState f : list) {
 						if (f.minzoom <= zoom && (zoom <= f.maxzoom || f.maxzoom == -1)) {
-							return RenderingIcons.getIcons().get(f.icon);
+							Integer i = RenderingIcons.getIcons().get(f.icon);
+							return i == null ? 0 : i;
 						}
 					}
 				}
@@ -355,7 +353,7 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 				// first find rule with same text length
 				for (FilterState f : list) {
 					if (f.minzoom <= rc.zoom && (rc.zoom <= f.maxzoom || f.maxzoom == -1) && checkRefTextRule(f, ref)) {
-						if(f.textLength == name.length() && f.text.textSize > 0){
+						if(f.textLength == name.length()){
 							fillTextProperties(f, rc);
 							return name;
 						}
@@ -364,7 +362,7 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 				
 				for (FilterState f : list) {
 					if (f.minzoom <= rc.zoom && (rc.zoom <= f.maxzoom || f.maxzoom == -1) && checkRefTextRule(f, ref)) {
-						if(f.textLength == 0 && f.text.textSize > 0){
+						if(f.textLength == 0){
 							fillTextProperties(f, rc);
 							return name;
 						}

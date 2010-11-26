@@ -744,7 +744,7 @@ public class OsmandRenderer {
 				name = render.renderObjectText(name, pair.tag, pair.value, rc, false);
 			}
 		}
-		if(resId == null && name == null){
+		if((resId == null || resId == 0) && name == null){
 			return;
 		}
 		int len = obj.getPointsLength();
@@ -760,7 +760,7 @@ public class OsmandRenderer {
 			ps.y /= len;
 		}
 		
-		if(resId != null){
+		if(resId != null && resId != 0){
 			IconDrawInfo ico = new IconDrawInfo();
 			ico.x = ps.x;
 			ico.y = ps.y;
@@ -787,8 +787,8 @@ public class OsmandRenderer {
 			return;
 		}
 		int layer = MapRenderingTypes.getNegativeWayLayer(wholeType);
-		render.renderPolyline(pair.tag, pair.value, rc.zoom, rc, this, layer);
-		if(rc.main.strokeWidth == 0){
+		boolean res = render.renderPolyline(pair.tag, pair.value, rc.zoom, rc, this, layer);
+		if(rc.main.strokeWidth == 0 || !res){
 			return;
 		}
 		int length = obj.getPointsLength();
