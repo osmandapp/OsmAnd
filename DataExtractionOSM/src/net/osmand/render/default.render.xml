@@ -604,24 +604,7 @@
 				<filter minzoom="6" maxzoom="6" strokeWidth="2" />
 				<filter minzoom="7" maxzoom="9" strokeWidth="3.5" />
 				<filter minzoom="10" maxzoom="12" strokeWidth="5" />
-				<switch>
-					<case layer="-1" pathEffect="4_4" />
-					<case /> <!-- all other cases -->
-					<filter>
-						<filter minzoom="13" maxzoom="14" strokeWidth="7" />
-						<filter minzoom="15" maxzoom="15" strokeWidth="9" />
-						<filter minzoom="16" maxzoom="16" strokeWidth="11" />
-						<filter minzoom="17" maxzoom="17" strokeWidth="13" />
-						<filter minzoom="18" strokeWidth="16" />
-					</filter>
-				</switch>
-				<!-- bridge -->
-				<filter layer="1" color="#000000" color_2="#809bc0" cap_2="SQUARE">
-					<filter minzoom="15" maxzoom="15" strokeWidth="11" strokeWidth_2="9" />
-					<filter minzoom="16" maxzoom="16" strokeWidth="13" strokeWidth_2="11" />
-					<filter minzoom="17" maxzoom="17" strokeWidth="15" strokeWidth_2="13" />
-					<filter minzoom="18" strokeWidth="18" strokeWidth_2="16" />
-				</filter>
+				<filter minzoom="13" maxzoom="13" strokeWidth="7" />
 			</filter>
 		</switch>
 
@@ -633,24 +616,7 @@
 				<filter minzoom="6" maxzoom="6" strokeWidth="2" />
 				<filter minzoom="7" maxzoom="9" strokeWidth="3.5" />
 				<filter minzoom="10" maxzoom="12" strokeWidth="5" />
-				<switch>
-					<case layer="-1" pathEffect="4_4" />
-					<case /> <!-- all other cases -->
-					<filter>
-						<filter minzoom="13" maxzoom="14" strokeWidth="7" />
-						<filter minzoom="15" maxzoom="15" strokeWidth="9" />
-						<filter minzoom="16" maxzoom="16" strokeWidth="11" />
-						<filter minzoom="17" maxzoom="17" strokeWidth="13" />
-						<filter minzoom="18" strokeWidth="16" />
-					</filter>
-				</switch>
-				<!-- bridge -->
-				<filter layer="1" color="#000000" color_2="#a8daa8" cap_2="SQUARE">
-					<filter minzoom="15" maxzoom="15" strokeWidth="11" strokeWidth_2="9" />
-					<filter minzoom="16" maxzoom="16" strokeWidth="13" strokeWidth_2="11" />
-					<filter minzoom="17" maxzoom="17" strokeWidth="15" strokeWidth_2="13" />
-					<filter minzoom="18" strokeWidth="18" strokeWidth_2="16" />
-				</filter>
+				<filter minzoom="13" maxzoom="13" strokeWidth="7" />
 			</filter>
 		</switch>
 
@@ -661,73 +627,53 @@
 				<filter minzoom="7" maxzoom="7" strokeWidth="1.5" />
 				<filter minzoom="8" maxzoom="9" strokeWidth="2" />
 				<filter minzoom="10" maxzoom="12" strokeWidth="3" />
-				<switch>
-					<case layer="-1" pathEffect="4_4" />
-					<case /> <!-- all other cases -->
-					<filter>
-						<filter minzoom="13" maxzoom="14" strokeWidth="7" />
-						<filter minzoom="15" maxzoom="15" strokeWidth="9" />
-						<filter minzoom="16" maxzoom="16" strokeWidth="11" />
-						<filter minzoom="17" maxzoom="17" strokeWidth="13" />
-						<filter minzoom="18" strokeWidth="16" />
-					</filter>
-				</switch>
-				<!-- bridge -->
-				<filter layer="1" color="#000000" color_2="#eb989a" cap_2="SQUARE">
-					<filter minzoom="15" maxzoom="15" strokeWidth="11" strokeWidth_2="9" />
-					<filter minzoom="16" maxzoom="16" strokeWidth="13" strokeWidth_2="11" />
-					<filter minzoom="17" maxzoom="17" strokeWidth="15" strokeWidth_2="13" />
-					<filter minzoom="18" strokeWidth="18" strokeWidth_2="16" />
-				</filter>
+				<filter minzoom="13" maxzoom="13" strokeWidth="7" />
 			</filter>
 		</switch>
-
 		<switch>
 			<case tag="highway" value="secondary" />
 			<case tag="highway" value="secondary_link" />
 			<filter color="#fdd6a4">
 				<filter minzoom="8" maxzoom="10" strokeWidth="1" />
 				<filter minzoom="11" maxzoom="12" strokeWidth="2" />
-				<switch>
-					<case layer="-1" pathEffect="4_4" />
-					<case /> <!-- all other cases -->
-					<filter>
-						<filter minzoom="13" maxzoom="14" strokeWidth="6" />
-						<filter minzoom="15" maxzoom="15" strokeWidth="9" />
-						<filter minzoom="16" maxzoom="16" strokeWidth="11" />
-						<filter minzoom="17" maxzoom="17" strokeWidth="13" />
-						<filter minzoom="18" strokeWidth="16" />
-					</filter>
-				</switch>
-				<!-- bridge -->
-				<filter layer="1" color="#000000" color_2="#eb989a" cap_2="SQUARE">
-					<filter minzoom="15" maxzoom="15" strokeWidth="11" strokeWidth_2="9" />
-					<filter minzoom="16" maxzoom="16" strokeWidth="13" strokeWidth_2="11" />
-					<filter minzoom="17" maxzoom="17" strokeWidth="15" strokeWidth_2="13" />
-					<filter minzoom="18" strokeWidth="18" strokeWidth_2="16" />
-				</filter>
+				<filter minzoom="13" maxzoom="13" strokeWidth="6" />
 			</filter>
 		</switch>
-
 		<switch>
 			<case tag="highway" value="tertiary" />
 			<case tag="highway" value="tertiary_link" />
-			<filter color="#fefeb3" shadowColor="#bababa">
+			<filter color="#fefeb3" shadowColor="#bababa" shadowRadius="1">
+				<filter minzoom="13" maxzoom="13" strokeWidth="4" />
+			</filter>
+		</switch>
 
+
+		'
+		<switch>
+			<case tag="highway" value="motorway" color="#809bc0" color_2="#809bc0" />
+			<case tag="highway" value="motorway_link" color="#809bc0" color_2="#809bc0" />
+			<case tag="highway" value="trunk" color="#a8daa8" color_2="#a8daa8" />
+			<case tag="highway" value="trunk_link" color="#a8daa8" color_2="#a8daa8" />
+			<case tag="highway" value="primary" color="#eb989a" color_2="#eb989a" />
+			<case tag="highway" value="primary_link" color="#eb989a" color_2="#eb989a" />
+			<case tag="highway" value="secondary" color="#fdd6a4" color_2="#fdd6a4" />
+			<case tag="highway" value="secondary_link" color="#fdd6a4" color_2="#fdd6a4" />
+			<case tag="highway" value="tertiary" color="#fefeb3" color_2="#fefeb3" shadowColor="#bababa" />
+			<case tag="highway" value="tertiary_link" color="#fefeb3" color_2="#fefeb3" shadowColor="#bababa" />
+			<filter>
 				<switch>
 					<case layer="-1" pathEffect="4_4" />
 					<case /> <!-- all other cases -->
-					<filter>
-						<filter minzoom="13" maxzoom="13" strokeWidth="4" shadowRadius="1" />
-						<filter minzoom="14" maxzoom="14" strokeWidth="6" shadowRadius="1" />
-						<filter minzoom="15" maxzoom="15" strokeWidth="9" shadowRadius="2" />
-						<filter minzoom="16" maxzoom="16" strokeWidth="11" shadowRadius="2" />
+					<filter shadowRadius="1">
+						<filter minzoom="14" maxzoom="14" strokeWidth="7" />
+						<filter minzoom="15" maxzoom="15" strokeWidth="9" />
+						<filter minzoom="16" maxzoom="16" strokeWidth="11" />
 						<filter minzoom="17" maxzoom="17" strokeWidth="13" shadowRadius="2" />
 						<filter minzoom="18" strokeWidth="16" shadowRadius="2" />
 					</filter>
 				</switch>
 				<!-- bridge -->
-				<filter layer="1" color="#000000" color_2="#fefeb3" cap_2="SQUARE" shadowRadius="2">
+				<filter layer="1" color="#000000" cap_2="SQUARE">
 					<filter minzoom="15" maxzoom="15" strokeWidth="11" strokeWidth_2="9" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="13" strokeWidth_2="11" />
 					<filter minzoom="17" maxzoom="17" strokeWidth="15" strokeWidth_2="13" />
@@ -735,37 +681,20 @@
 				</filter>
 			</filter>
 		</switch>
-
 
 		<switch>
 			<case tag="highway" value="residential" />
-			<case tag="highway" value="service" minzoom="15" />
 			<case tag="highway" value="unclassified" />
 			<case tag="highway" value="road" />
-			<filter color="#ffffff" shadowColor="#c2c2c2" shadowRadius="1">
-				<switch>
-					<case layer="-1" pathEffect="4_4" />
-					<case /> <!-- all other cases -->
-					<filter>
-						<filter minzoom="14" maxzoom="14" strokeWidth="4" />
-						<filter minzoom="15" maxzoom="15" strokeWidth="9" />
-						<filter minzoom="16" maxzoom="16" strokeWidth="11" />
-						<filter minzoom="17" maxzoom="17" strokeWidth="13" />
-						<filter minzoom="18" strokeWidth="16" />
-					</filter>
-				</switch>
-				<!-- bridge -->
-				<filter layer="1" color="#000000" color_2="#ffffff" cap_2="SQUARE">
-					<filter minzoom="15" maxzoom="15" strokeWidth="11" strokeWidth_2="9" />
-					<filter minzoom="16" maxzoom="16" strokeWidth="13" strokeWidth_2="11" />
-					<filter minzoom="17" maxzoom="17" strokeWidth="15" strokeWidth_2="13" />
-					<filter minzoom="18" strokeWidth="18" strokeWidth_2="16" />
-				</filter>
-			</filter>
+			<filter minzoom="14" maxzoom="14" strokeWidth="4" color="#ffffff" shadowColor="#c2c2c2" shadowRadius="1" />
 		</switch>
-
+		
 		<switch>
+			<case tag="highway" value="unclassified" color="#ffffff" color_2="#ffffff" shadowColor="#c2c2c2" />
+			<case tag="highway" value="road" color="#ffffff" color_2="#ffffff" shadowColor="#c2c2c2" />
+			<case tag="highway" value="service" color="#ffffff" color_2="#ffffff" shadowColor="#c2c2c2" />
 			<case tag="highway" value="living_street" color="#ffffff" shadowColor="#c2c2c2" color_2="#ffffff" />
+			<case tag="highway" value="residential" color="#ffffff" color_2="#ffffff" shadowColor="#c2c2c2" />
 			<case tag="highway" value="pedestrian" color="#ececec" shadowColor="#b0b0b0" color_2="#ececec" />
 			<filter shadowRadius="1">
 				<switch>
@@ -773,17 +702,17 @@
 					<case /> <!-- all other cases -->
 					<filter>
 						<filter minzoom="15" maxzoom="15" strokeWidth="6" />
-						<filter minzoom="16" maxzoom="16" strokeWidth="8" />
-						<filter minzoom="17" maxzoom="17" strokeWidth="10" />
-						<filter minzoom="18" strokeWidth="13" />
+						<filter minzoom="16" maxzoom="16" strokeWidth="9" />
+						<filter minzoom="17" maxzoom="17" strokeWidth="11" />
+						<filter minzoom="18" strokeWidth="14" />
 					</filter>
 				</switch>
 				<!-- bridge -->
 				<filter layer="1" color="#000000" cap_2="SQUARE">
 					<filter minzoom="15" maxzoom="15" strokeWidth="8" strokeWidth_2="6" />
-					<filter minzoom="16" maxzoom="16" strokeWidth="10" strokeWidth_2="8" />
-					<filter minzoom="17" maxzoom="17" strokeWidth="12" strokeWidth_2="10" />
-					<filter minzoom="18" strokeWidth="15" strokeWidth_2="13" />
+					<filter minzoom="16" maxzoom="16" strokeWidth="11" strokeWidth_2="9" />
+					<filter minzoom="17" maxzoom="17" strokeWidth="13" strokeWidth_2="11" />
+					<filter minzoom="18" strokeWidth="15" strokeWidth_2="14" />
 				</filter>
 			</filter>
 		</switch>

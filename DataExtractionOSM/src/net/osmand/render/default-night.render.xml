@@ -1,4 +1,4 @@
-<renderer name="default-night" depends="default" defaultColor="#090A25">
+<renderer name="default-night" depends="default" defaultColor="#08314b">
  	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom], textLength, ref -->
  	<text>
  		<!-- Highway ref  -->
