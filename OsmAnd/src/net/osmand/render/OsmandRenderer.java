@@ -194,6 +194,9 @@ public class OsmandRenderer {
 			p.setStyle(fillArea ? Style.FILL_AND_STROKE : Style.STROKE);
 			p.setColor(color);
 			p.setShader(shader);
+			if(shadowColor == 0){
+				shadowLayer = 0;
+			}
 			p.setShadowLayer(shadowLayer, 0, 0, shadowColor);
 			p.setStrokeWidth(strokeWidth);
 			p.setStrokeCap(cap);

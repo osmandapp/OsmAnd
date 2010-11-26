@@ -135,19 +135,19 @@
 					<case layer="-1" pathEffect="4_4" />
 					<case /> <!-- all other cases -->
 					<filter>
-						<filter minzoom="14" maxzoom="14" strokeWidth="9" />
-						<filter minzoom="15" maxzoom="15" strokeWidth="11" />
-						<filter minzoom="16" maxzoom="16" strokeWidth="13" />
-						<filter minzoom="17" maxzoom="17" strokeWidth="16" />
-						<filter minzoom="18" strokeWidth="18" />
+						<filter minzoom="14" maxzoom="14" strokeWidth="7" />
+						<filter minzoom="15" maxzoom="15" strokeWidth="9" />
+						<filter minzoom="16" maxzoom="16" strokeWidth="11" />
+						<filter minzoom="17" maxzoom="17" strokeWidth="14" />
+						<filter minzoom="18" strokeWidth="17" />
 					</filter>
 				</switch>
 				<!-- bridge -->
 				<filter layer="1" color="#000000" cap_2="SQUARE">
-					<filter minzoom="15" maxzoom="15" strokeWidth="13" strokeWidth_2="11" />
-					<filter minzoom="16" maxzoom="16" strokeWidth="15" strokeWidth_2="13" />
-					<filter minzoom="17" maxzoom="17" strokeWidth="18" strokeWidth_2="16" />
-					<filter minzoom="18" strokeWidth="18" strokeWidth_2="18" />
+					<filter minzoom="15" maxzoom="15" strokeWidth="11" strokeWidth_2="9" />
+					<filter minzoom="16" maxzoom="16" strokeWidth="13" strokeWidth_2="11" />
+					<filter minzoom="17" maxzoom="17" strokeWidth="16" strokeWidth_2="14" />
+					<filter minzoom="18" strokeWidth="19" strokeWidth_2="17" />
 				</filter>
 			</filter>
 		</switch>
