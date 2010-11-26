@@ -39,16 +39,16 @@
 			<filter tag="" layer="-1" order="10" />
 			<filter tag="" order="11" />
 			<filter tag="" layer="1" order="67" />
-			
+
 			<filter tag="railway" layer="-1" order="58" />
 			<filter tag="railway" order="58" />
-			
+
 			<!-- over buildings -->
 			<filter tag="aerialway" order="68" />
 			<filter tag="power" order="68" />
 			<filter tag="administrative" order="62" />
 			<filter tag="waterway" order="18" />
-			
+
 			<filter tag="highway" value="motorway" order="57" />
 			<filter tag="highway" value="trunk" order="56" />
 			<filter tag="highway" value="primary" order="55" />
@@ -61,21 +61,21 @@
 			<filter tag="highway" value="track" order="50" />
 			<filter tag="highway" value="path" order="48" />
 			<filter tag="highway" value="living_street" order="47" />
-			
+
 			<filter tag="highway" value="construction" order="46" />
 			<filter tag="highway" value="proposed" order="45" />
 			<filter tag="highway" value="motorway_link" order="44" />
 			<filter tag="highway" value="trunk_link" order="43" />
 			<filter tag="highway" value="primary_link" order="42" />
 			<filter tag="highway" value="secondary_link" order="41" />
-			
+
 			<filter tag="highway" value="pedestrian" order="40" />
 			<filter tag="highway" value="cycleway" order="39" />
 			<filter tag="highway" value="byway" order="38" />
 			<filter tag="highway" value="footway" order="37" />
 			<filter tag="highway" value="steps" order="36" />
 			<filter tag="highway" value="bridleway" order="35" />
-		
+
 		</filter>
 	</order>
 
@@ -147,31 +147,34 @@
 
 		</switch>
 
-		<filter minzoom="15" maxzoom="16" textSize="9" textOnPath="true" tag="highway" value="tertiary" />
-		<filter minzoom="17" textSize="11" textOnPath="true" tag="highway" value="tertiary" />
-		<filter minzoom="15" maxzoom="16" textSize="9" textOnPath="true" tag="highway" value="residential" />
-		<filter minzoom="17" textSize="11" textOnPath="true" tag="highway" value="residential" />
-		<filter minzoom="15" maxzoom="16" textSize="9" textOnPath="true" tag="highway" value="service" />
-		<filter minzoom="17" textSize="11" textOnPath="true" tag="highway" value="service" />
-		<filter minzoom="15" maxzoom="16" textSize="9" textOnPath="true" tag="highway" value="unclassified" />
-		<filter minzoom="17" textSize="11" textOnPath="true" tag="highway" value="unclassified" />
-		<filter minzoom="15" maxzoom="16" textSize="9" textOnPath="true" tag="highway" value="road" />
-		<filter minzoom="17" textSize="11" textOnPath="true" tag="highway" value="road" />
+		<switch>
+			<case tag="highway" value="tertiary" />
+			<case tag="highway" value="tertiary_link" />
+			<case tag="highway" value="residential" />
+			<case tag="highway" value="service" />
+			<case tag="highway" value="unclassified" />
+			<case tag="highway" value="road" />
+			<filter>
+				<filter minzoom="15" maxzoom="16" textSize="9" textOnPath="true" />
+				<filter minzoom="17" textSize="11" textOnPath="true" />
+			</filter>
+		</switch>
 
-		<filter minzoom="16" textSize="9" textOnPath="true" tag="highway" value="track" />
-		<filter minzoom="16" textSize="9" textOnPath="true" tag="highway" value="path" />
-		<filter minzoom="16" textSize="9" textOnPath="true" tag="highway" value="living_street" />
-		<filter minzoom="16" textSize="9" textOnPath="true" tag="highway" value="pedestrian" />
-		<filter minzoom="16" textSize="9" textOnPath="true" tag="highway" value="cycleway" />
-		<filter minzoom="16" textSize="9" textOnPath="true" tag="highway" value="byway" />
-		<filter minzoom="16" textSize="9" textOnPath="true" tag="highway" value="footway" />
-		<filter minzoom="16" textSize="9" textOnPath="true" tag="highway" value="steps" />
-		<filter minzoom="16" textSize="9" textOnPath="true" tag="highway" value="bridleway" />
-		<filter minzoom="16" textSize="9" textOnPath="true" tag="highway" value="services" />
-		<filter minzoom="16" textSize="9" textOnPath="true" tag="highway" value="ford" />
-		<filter minzoom="16" textSize="9" textOnPath="true" tag="highway" value="construction" />
-		<filter minzoom="16" textSize="9" textOnPath="true" tag="highway" value="proposed" />
-
+		<filter minzoom="16" textSize="9" textOnPath="true">
+			<filter tag="highway" value="track" />
+			<filter tag="highway" value="path" />
+			<filter tag="highway" value="living_street" />
+			<filter tag="highway" value="pedestrian" />
+			<filter tag="highway" value="cycleway" />
+			<filter tag="highway" value="byway" />
+			<filter tag="highway" value="footway" />
+			<filter tag="highway" value="steps" />
+			<filter tag="highway" value="bridleway" />
+			<filter tag="highway" value="services" />
+			<filter tag="highway" value="ford" />
+			<filter tag="highway" value="construction" />
+			<filter tag="highway" value="proposed" />
+		</filter>
 
 		<!-- Natural -->
 		<filter minzoom="15" textSize="9" textHaloRadius="2" textWrapWidth="15" tag="natural" value="park" />

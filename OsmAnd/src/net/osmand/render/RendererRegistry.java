@@ -24,8 +24,11 @@ public class RendererRegistry {
 	private final static Log log = LogUtil.getLog(RendererRegistry.class);
 	
 	public final static String DEFAULT_RENDER = "default";  //$NON-NLS-1$
+	public final static String CAR_RENDER = "car";  //$NON-NLS-1$
 	public final static String NIGHT_SUFFIX = "-night"; //$NON-NLS-1$
 	public final static String DEFAULT_NIGHT_RENDER = DEFAULT_RENDER + NIGHT_SUFFIX; 
+	public final static String CAR_NIGHT_RENDER = CAR_RENDER + NIGHT_SUFFIX; 
+
 	
 	public static RendererRegistry getRegistry() {
 		return registry;
@@ -34,6 +37,8 @@ public class RendererRegistry {
 	public RendererRegistry(){
 		internalRenderers.put(DEFAULT_RENDER, "default.render.xml"); //$NON-NLS-1$
 		internalRenderers.put(DEFAULT_NIGHT_RENDER, "default-night.render.xml"); //$NON-NLS-1$
+		internalRenderers.put(CAR_RENDER, "car.render.xml"); //$NON-NLS-1$
+		internalRenderers.put(CAR_NIGHT_RENDER, "car-night.render.xml"); //$NON-NLS-1$
 	}
 	
 	private BaseOsmandRender defaultRender = null;
@@ -91,7 +96,7 @@ public class RendererRegistry {
 		if(externalRenderers.containsKey(name)){
 			is = new FileInputStream(externalRenderers.get(name));
 		} else if(internalRenderers.containsKey(name)){
-			is = OsmandRenderingRulesParser.class.getResourceAsStream("default.render.xml"); //$NON-NLS-1$
+			is = OsmandRenderingRulesParser.class.getResourceAsStream(internalRenderers.get(name));
 		} else {
 			throw new IllegalArgumentException("Not found " + name); //$NON-NLS-1$
 		}

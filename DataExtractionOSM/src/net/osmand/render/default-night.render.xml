@@ -1,3 +1,106 @@
-<renderer name="default-night" depends="default" defaultColor="#08314b">
+<renderer name="default-night" depends="default" defaultColor="#090A25">
+ 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom], textLength, ref -->
+ 	<text>
+ 		<!-- Highway ref  -->
+		<filter minzoom="10" tag="highway" value="trunk" ref="only" textMinDistance="70" textColor="#C2C2C2" textSize="10" textBold="true">
+			<filter textLength="1" textShield="tru_shield1" />
+			<filter textLength="2" textShield="tru_shield2" />
+			<filter textLength="3" textShield="tru_shield3" />
+			<filter textLength="4" textShield="tru_shield4" />
+			<filter textLength="5" textShield="tru_shield5" />
+			<filter textLength="6" textShield="tru_shield6" />
+		</filter>
 
+		<filter minzoom="10" tag="highway" value="motorway" ref="only" textMinDistance="70" textColor="#C2C2C2" textSize="10" textBold="true">
+			<filter textLength="1" textShield="mot_shield1" />
+			<filter textLength="2" textShield="mot_shield2" />
+			<filter textLength="3" textShield="mot_shield3" />
+			<filter textLength="4" textShield="mot_shield4" />
+			<filter textLength="5" textShield="mot_shield5" />
+			<filter textLength="6" textShield="mot_shield6" />
+		</filter>
+
+		<filter minzoom="11" tag="highway" value="primary" ref="only" textMinDistance="70" textColor="#C2C2C2" textSize="10" textBold="true">
+			<filter textLength="1" textShield="pri_shield1" />
+			<filter textLength="2" textShield="pri_shield2" />
+			<filter textLength="3" textShield="pri_shield3" />
+			<filter textLength="4" textShield="pri_shield4" />
+			<filter textLength="5" textShield="pri_shield5" />
+			<filter textLength="6" textShield="pri_shield6" />
+		</filter>
+
+		<filter minzoom="14" tag="highway" value="secondary" ref="only" textMinDistance="70" textColor="#C2C2C2" textSize="10" textBold="true">
+			<filter textLength="1" textShield="sec_shield1" />
+			<filter textLength="2" textShield="sec_shield2" />
+			<filter textLength="3" textShield="sec_shield3" />
+			<filter textLength="4" textShield="sec_shield4" />
+			<filter textLength="5" textShield="sec_shield5" />
+			<filter textLength="6" textShield="sec_shield6" />
+		</filter>
+
+		<filter minzoom="15" tag="highway" value="tertiary" ref="only" textMinDistance="70" textColor="#C2C2C2" textSize="10" textBold="true">
+			<filter textLength="1" textShield="ter_shield1" />
+			<filter textLength="2" textShield="ter_shield2" />
+			<filter textLength="3" textShield="ter_shield3" />
+			<filter textLength="4" textShield="ter_shield4" />
+			<filter textLength="5" textShield="ter_shield5" />
+			<filter textLength="6" textShield="ter_shield6" />
+		</filter>
+
+
+ 	
+		<filter minzoom="10" textSize="8" textColor="#4D6EA4" textHaloRadius="1" textDy="-12" tag="aeroway" value="aerodrome" />
+		<filter minzoom="10" textSize="9" textBold="true" textColor="#4D6EA4" textHaloRadius="1" textDy="-12" tag="aeroway" value="airport" />
+
+ 
+		<filter minzoom="15" textSize="9" textColor="#0000C0" textHaloRadius="1" textWrapWidth="30" tag="leisure" value="marina" />
+ 
+    </text>
+ 
+ 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
+ 	<polygon>
+ 		<filter minzoom="15" strokeWidth_2="1" color_2="#8C8C8C" color="#ffffff">
+			<filter tag="highway" value="unclassified" />
+			<filter tag="highway" value="road" />
+			<filter tag="highway" value="service" />
+			<filter tag="highway" value="residential" />
+		</filter>
+ 
+		<filter minzoom="13" color="#B08D8D">
+ 			<filter tag="railway" value="station" />
+ 		</filter>
+ 
+		<filter minzoom="8" color="#8EA3A3">
+ 			<filter tag="waterway" value="riverbank" />
+ 		</filter>
+ 
+		<filter minzoom="10" color="#8EA3A3">
+ 			<filter tag="waterway" value="canal" />
+ 			<filter tag="waterway" value="dock" />
+ 			<filter tag="waterway" value="mill_pond" />
+ 		</filter>
+ 
+ 		<!-- aeroway -->
+		<filter minzoom="12" color="#649F9F" tag="aeroway">
+ 			<filter value="aerodrome" />
+ 			<filter value="airport" />
+ 		</filter>
+ 
+		<filter minzoom="15" color="#A179C9" tag="aeroway" value="terminal" />
+		<filter minzoom="13" color="#B8A5C9" tag="aeroway" value="apron" />
+ 
+		<filter color="#8EA3A3">
+			<filter minzoom="6" tag="natural" value="coastline" />
+			<filter minzoom="7" tag="natural" value="water" />
+			<filter minzoom="7" tag="natural" value="lake" />
+		</filter>
+ 
+ 		<!-- landuse -->
+		<filter minzoom="10" color="#8EA3A3" tag="landuse" value="basin" />
+		<filter minzoom="7" color="#8EA3A3" tag="landuse" value="reservoir" />
+		<filter minzoom="7" color="#8EA3A3" tag="landuse" value="water" />
+		
+
+ 	</polygon>
+ 
 </renderer>

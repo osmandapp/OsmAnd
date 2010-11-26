@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+<string name="rendering_exception">Nastala chyba pri vykresľovaní vybratej oblasti</string>
+<string name="rendering_out_of_memory">Nedostatok pamäte na zobrazenie vybratej oblasti</string>
 <string name="show_point_options">Možnosti bodu</string>
 <string name="renderer_load_sucess">Vykresľovač bol úspešne načítaný</string>
-<string name="renderer_load_exception">Nastala sa výnimka: vykresľovač nebol načítaný</string>
+<string name="renderer_load_exception">Nastala výnimka: vykresľovač nebol načítaný</string>
 <string name="renderers">Vektorový vykresľovač</string>
 <string name="renderers_descr">Vybrať štýl vektorového vykresľovania</string>
 
