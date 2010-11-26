@@ -66,6 +66,14 @@ public class RendererRegistry {
 		return defaultRender;
 	}
 	
+	public BaseOsmandRender carRender() {
+		BaseOsmandRender renderer = getRenderer(CAR_RENDER);
+		if(renderer == null){
+			return defaultRender();
+		}
+		return renderer;
+	}
+	
 	public BaseOsmandRender getRenderer(String name){
 		if(renderers.containsKey(name)){
 			return renderers.get(name);

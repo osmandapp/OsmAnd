@@ -1098,10 +1098,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			public void onClick(DialogInterface dialog, int which) {
 				ApplicationMode mode = getAppMode(buttons);
 				// change global settings
-				if (OsmandSettings.getApplicationMode(settings) != mode) {
+				ApplicationMode old = OsmandSettings.getApplicationMode(settings);
+				if (old != mode) {
 					Editor edit = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_WRITEABLE).edit();
 					edit.putString(OsmandSettings.APPLICATION_MODE, mode.name());
-					SettingsActivity.setAppMode(mode, edit);
+					SettingsActivity.setAppMode(mode, edit, (OsmandApplication) getApplication(), old);
 					edit.commit();
 					updateApplicationModeSettings();	
 					mapView.refreshMap();

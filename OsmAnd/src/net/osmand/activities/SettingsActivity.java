@@ -413,8 +413,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.commit();
 			
 		} else if(preference == applicationMode){
+			ApplicationMode old = OsmandSettings.getApplicationMode(prefs);
 			edit.putString(OsmandSettings.APPLICATION_MODE, (String) newValue);
-			setAppMode(ApplicationMode.valueOf(newValue.toString()), edit);
+			setAppMode(ApplicationMode.valueOf(newValue.toString()), edit, (OsmandApplication) getApplication(), old);
 			edit.commit();
 			updateAllSettings();
 		} else if(preference == mapScreenOrientation){
@@ -563,7 +564,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 	}
 		
-	public static void setAppMode(ApplicationMode preset, Editor edit){
+	public static void setAppMode(ApplicationMode preset, Editor edit, OsmandApplication application, ApplicationMode old){
 		if(preset == ApplicationMode.CAR){
 			OsmandSettings.setUseInternetToDownloadTiles(true, edit);
 //			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, _);
@@ -620,6 +621,23 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.CENTER_CONSTANT);
 //			edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
 			
+		}
+		
+		BaseOsmandRender current = RendererRegistry.getRegistry().getCurrentSelectedRenderer();
+		BaseOsmandRender defaultRender = RendererRegistry.getRegistry().defaultRender();
+		boolean change = current == defaultRender || (old == ApplicationMode.CAR && 
+				current == RendererRegistry.getRegistry().carRender());
+		if(change){
+			BaseOsmandRender newRenderer;
+			if(preset == ApplicationMode.CAR){
+				newRenderer = RendererRegistry.getRegistry().carRender();
+			} else {
+				newRenderer = defaultRender;
+			}
+			if(newRenderer != current){
+				RendererRegistry.getRegistry().setCurrentSelectedRender(newRenderer);
+				application.getResourceManager().getRenderer().clearCache();
+			}
 		}
 	}
 
