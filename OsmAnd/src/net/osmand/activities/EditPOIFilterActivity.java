@@ -115,7 +115,6 @@ public class EditPOIFilterActivity extends ListActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.edit_filter_delete) {
-			EditPOIFilterActivity.this.finish();
 			Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage(R.string.edit_filter_delete_dialog_title);
 			builder.setNegativeButton(R.string.default_buttons_no, null);
@@ -127,6 +126,7 @@ public class EditPOIFilterActivity extends ListActivity {
 								EditPOIFilterActivity.this,
 								MessageFormat.format(EditPOIFilterActivity.this.getText(R.string.edit_filter_delete_message).toString(),
 										filter.getName()), Toast.LENGTH_SHORT).show();
+						EditPOIFilterActivity.this.finish();
 					}
 
 				}
