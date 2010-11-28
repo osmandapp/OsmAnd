@@ -63,13 +63,13 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 
 	
 	public static JMenu getMenuToChooseSource(final MapPanel panel){
-		final JMenu tiles = new JMenu("Source of tiles");
-		final JMenu userDefined = new JMenu("User defined");
+		final JMenu tiles = new JMenu(Messages.getString("MapPanel.SOURCE.OF.TILES")); //$NON-NLS-1$
+		final JMenu userDefined = new JMenu(Messages.getString("MapPanel.USER.DEFINED")); //$NON-NLS-1$
 		final List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
 		final List<TileSourceTemplate> udf = TileSourceManager.getUserDefinedTemplates(DataExtractionSettings.getSettings().getTilesDirectory());
 		final Map<TileSourceTemplate, JCheckBoxMenuItem> items = new LinkedHashMap<TileSourceTemplate, JCheckBoxMenuItem>();
 		tiles.add(userDefined);
-		userDefined.add(new AbstractAction("Create new tile source"){
+		userDefined.add(new AbstractAction(Messages.getString("MapPanel.NEW.TILE.SRC")){ //$NON-NLS-1$
 			private static final long serialVersionUID = -8286622335859339130L;
 
 			@Override
@@ -137,7 +137,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 
 	public static void main(String[] args) throws IOException {
-		JFrame frame = new JFrame("Map view");
+		JFrame frame = new JFrame(Messages.getString("MapPanel.MAP.VIEW")); //$NON-NLS-1$
 	    try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
@@ -327,7 +327,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	}
 	 
 	public String getFileForImage (int x, int y, int zoom, String ext){
-		return map.getName() +"/"+zoom+"/"+(x) +"/"+y+ext+".tile";
+		return map.getName() +"/"+zoom+"/"+(x) +"/"+y+ext+".tile"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 	}
 	
 	public Image getImageFor(int x, int y, int zoom, boolean loadIfNeeded) throws IOException{
@@ -344,13 +344,13 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 					remove.flush();
 				}
 				if(log.isInfoEnabled()){
-					log.info("Before running gc on map tiles. Total Memory : " + (Runtime.getRuntime().totalMemory() >> 20) + " Mb. Used memory : " 
-						+ ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) >> 20) + " Mb");
+					log.info("Before running gc on map tiles. Total Memory : " + (Runtime.getRuntime().totalMemory() >> 20) + " Mb. Used memory : "  //$NON-NLS-1$ //$NON-NLS-2$
+						+ ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) >> 20) + " Mb"); //$NON-NLS-1$
 				}
 				System.gc();
 				if(log.isInfoEnabled()){
-					log.info("After running gc on map tiles. Total Memory : " + (Runtime.getRuntime().totalMemory() >> 20) + " Mb. Used memory : " 
-						+ ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) >> 20) + " Mb");
+					log.info("After running gc on map tiles. Total Memory : " + (Runtime.getRuntime().totalMemory() >> 20) + " Mb. Used memory : "  //$NON-NLS-1$ //$NON-NLS-2$
+						+ ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) >> 20) + " Mb"); //$NON-NLS-1$
 				}
 			}
 			if (!downloader.isFileCurrentlyDownloaded(en)) {
@@ -362,7 +362,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 //							log.debug("Loaded file : " + file + " " + (System.currentTimeMillis() - time) + " ms");
 //						}
 					} catch (IIOException e) {
-						log.error("Eror reading png " + x + " " + y + " zoom : " + zoom, e);
+						log.error("Eror reading png " + x + " " + y + " zoom : " + zoom, e); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 					}
 				} 
 				if(loadIfNeeded && cache.get(file) == null){
@@ -393,7 +393,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 				images[i][j] = getImageFor(request.xTile, request.yTile, zoom, false);
 				repaint();
 			} catch (IOException e) {
-				log.error("Eror reading png " + request.xTile + " " + request.yTile + " zoom : " + zoom, e);
+				log.error("Eror reading png " + request.xTile + " " + request.yTile + " zoom : " + zoom, e); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 
 		}
@@ -440,7 +440,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 			}
 			repaint();
 		} catch (IOException e) {
-			log.error("Eror reading png preparing images");
+			log.error("Eror reading png preparing images"); //$NON-NLS-1$
 		}
 	}
 	

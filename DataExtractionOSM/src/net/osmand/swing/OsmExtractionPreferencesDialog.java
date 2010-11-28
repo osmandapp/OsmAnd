@@ -36,7 +36,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 
 	public OsmExtractionPreferencesDialog(Component parent){
     	super(JOptionPane.getFrameForComponent(parent), true);
-    	setTitle("Preferences");
+    	setTitle(Messages.getString("OsmExtractionPreferencesDialog.PREFERENCES")); //$NON-NLS-1$
         initDialog();
         
     }
@@ -62,9 +62,9 @@ public class OsmExtractionPreferencesDialog extends JDialog {
         
         FlowLayout l = new FlowLayout(FlowLayout.RIGHT);
         JPanel buttonsPane = new JPanel(l);
-        okButton = new JButton("OK");
+        okButton = new JButton(Messages.getString("OsmExtractionPreferencesDialog.OK")); //$NON-NLS-1$
         buttonsPane.add(okButton);
-        cancelButton = new JButton("Cancel");
+        cancelButton = new JButton(Messages.getString("OsmExtractionPreferencesDialog.CANCEL")); //$NON-NLS-1$
         buttonsPane.add(cancelButton);
         
         buttonsPane.setMaximumSize(new Dimension(Short.MAX_VALUE, (int) l.preferredLayoutSize(buttonsPane).getHeight()));
@@ -76,21 +76,21 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 	private void createGeneralSection(JPanel root) {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(3, 1, 5, 5));
-		panel.setBorder(BorderFactory.createTitledBorder("General"));
+		panel.setBorder(BorderFactory.createTitledBorder(Messages.getString("OsmExtractionPreferencesDialog.GENERAL"))); //$NON-NLS-1$
 		root.add(panel);
 		
 		useInternet = new JCheckBox();
-		useInternet.setText("Use internet to download tiles");
+		useInternet.setText(Messages.getString("OsmExtractionPreferencesDialog.INTERNET.TO.DOWNLOAD.FILES")); //$NON-NLS-1$
 		useInternet.setSelected(DataExtractionSettings.getSettings().useInternetToLoadImages());
 		panel.add(useInternet);
 		
 		supressWarning = new JCheckBox();
-		supressWarning.setText("Supress warnings for duplicated id in osm file");
+		supressWarning.setText(Messages.getString("OsmExtractionPreferencesDialog.DUPLICATED.ID")); //$NON-NLS-1$
 		supressWarning.setSelected(DataExtractionSettings.getSettings().isSupressWarningsForDuplicatedId());
 		panel.add(supressWarning);
 		
 		loadWholeOsmInfo = new JCheckBox();
-		loadWholeOsmInfo.setText("Load whole osm info (to save valid osm file - use in JOSM...)");
+		loadWholeOsmInfo.setText(Messages.getString("OsmExtractionPreferencesDialog.LOAD.WHOLE.OSM")); //$NON-NLS-1$
 		loadWholeOsmInfo.setSelected(DataExtractionSettings.getSettings().getLoadEntityInfo());
 		panel.add(loadWholeOsmInfo);
 		panel.setMaximumSize(new Dimension(Short.MAX_VALUE, panel.getPreferredSize().height));
@@ -101,10 +101,10 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		JPanel panel = new JPanel();
 		GridBagLayout l = new GridBagLayout();
 		panel.setLayout(l);
-		panel.setBorder(BorderFactory.createTitledBorder("Normalizing streets"));
+		panel.setBorder(BorderFactory.createTitledBorder(Messages.getString("OsmExtractionPreferencesDialog.NORMALIZE.STREETS"))); //$NON-NLS-1$
 		root.add(panel);
 
-		JLabel label = new JLabel("Street name suffixes (av., avenue)");
+		JLabel label = new JLabel(Messages.getString("OsmExtractionPreferencesDialog.NAME.SUFFIXES")); //$NON-NLS-1$
 		panel.add(label);
 		GridBagConstraints constr = new GridBagConstraints();
 		constr.anchor = GridBagConstraints.WEST;
@@ -123,7 +123,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		constr.gridy = 0;
 		l.setConstraints(streetSuffixes, constr);
 		
-		label = new JLabel("Street name default suffixes (str., street, rue)");
+		label = new JLabel(Messages.getString("OsmExtractionPreferencesDialog.DEFAULT.SUFFIXES")); //$NON-NLS-1$
 		panel.add(label);
 		constr = new GridBagConstraints();
 		constr.ipadx = 5;

@@ -38,10 +38,10 @@ public class MapInformationLayer implements MapPanelLayer {
 		gpsLocation.setOpaque(false);
 		updateLocationLabel();
 		
-		JButton zoomIn = new JButton("+");
-		JButton zoomOut = new JButton("-");
+		JButton zoomIn = new JButton("+"); //$NON-NLS-1$
+		JButton zoomOut = new JButton("-"); //$NON-NLS-1$
 		areaButton = new JButton();
-		areaButton.setAction(new AbstractAction("Preload area"){
+		areaButton.setAction(new AbstractAction(Messages.getString("MapInformationLayer.PRELOAD.AREA")){ //$NON-NLS-1$
 			private static final long serialVersionUID = -5512220294374994021L;
 
 			@Override
@@ -88,7 +88,7 @@ public class MapInformationLayer implements MapPanelLayer {
 		double latitude = map.getLatitude();
 		double longitude = map.getLongitude();
 		int zoom = map.getZoom();
-		gpsLocation.setText(MessageFormat.format("Lat : {0,number,#.####}, lon : {1,number,#.####}, zoom : {2}", latitude, longitude, zoom));
+		gpsLocation.setText(MessageFormat.format("Lat : {0,number,#.####}, lon : {1,number,#.####}, zoom : {2}", latitude, longitude, zoom)); //$NON-NLS-1$
 	}
 	@Override
 	public void prepareToDraw() {

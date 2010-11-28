@@ -42,7 +42,7 @@ public class NewTileSourceDialog extends JDialog {
 
 	public NewTileSourceDialog(Component parent){
     	super(JOptionPane.getFrameForComponent(parent), true);
-    	setTitle("Create new tile source");
+    	setTitle(Messages.getString("NewTileSourceDialog.CREATE.NEW.TILE")); //$NON-NLS-1$
         initDialog();
         
     }
@@ -67,9 +67,9 @@ public class NewTileSourceDialog extends JDialog {
         
         FlowLayout l = new FlowLayout(FlowLayout.RIGHT);
         JPanel buttonsPane = new JPanel(l);
-        okButton = new JButton("OK");
+        okButton = new JButton("OK"); //$NON-NLS-1$
         buttonsPane.add(okButton);
-        cancelButton = new JButton("Cancel");
+        cancelButton = new JButton(Messages.getString("NewTileSourceDialog.CANCEL")); //$NON-NLS-1$
         buttonsPane.add(cancelButton);
         
         buttonsPane.setMaximumSize(new Dimension(Short.MAX_VALUE, (int) l.preferredLayoutSize(buttonsPane).getHeight()));
@@ -83,11 +83,11 @@ public class NewTileSourceDialog extends JDialog {
 		JPanel panel = new JPanel();
 		GridBagLayout l = new GridBagLayout();
 		panel.setLayout(l);
-		panel.setBorder(BorderFactory.createTitledBorder("Input source"));
+		panel.setBorder(BorderFactory.createTitledBorder(Messages.getString("NewTileSourceDialog.INPUT.SOURCE"))); //$NON-NLS-1$
 		root.add(panel);
 		
 
-		JLabel label = new JLabel("Name of template : ");
+		JLabel label = new JLabel(Messages.getString("NewTileSourceDialog.NAME")); //$NON-NLS-1$
 		panel.add(label);
 		GridBagConstraints constr = new GridBagConstraints();
 		constr.anchor = GridBagConstraints.WEST;
@@ -97,7 +97,7 @@ public class NewTileSourceDialog extends JDialog {
 		l.setConstraints(label, constr);
 
 		templateName = new JTextField();
-		templateName.setText("Mapnik example");
+		templateName.setText(Messages.getString("NewTileSourceDialog.MAPNIK.EXAMPLE")); //$NON-NLS-1$
 		panel.add(templateName);
 		constr = new GridBagConstraints();
 		constr.fill = GridBagConstraints.HORIZONTAL;
@@ -106,7 +106,7 @@ public class NewTileSourceDialog extends JDialog {
 		constr.gridy = 0;
 		l.setConstraints(templateName, constr);
 
-		label = new JLabel("Url template with placeholders {$x}, {$y}, {$z} : ");
+		label = new JLabel(Messages.getString("NewTileSourceDialog.URL.TEMPLATE")); //$NON-NLS-1$
 		panel.add(label);
 		constr = new GridBagConstraints();
 		constr.ipadx = 5;
@@ -118,7 +118,7 @@ public class NewTileSourceDialog extends JDialog {
 
 		templateUrl = new JTextField();
 		// Give hint about wms 
-		templateUrl.setText("http://tile.openstreetmap.org/{$z}/{$x}/{$y}.png");
+		templateUrl.setText("http://tile.openstreetmap.org/{$z}/{$x}/{$y}.png"); //$NON-NLS-1$
 		panel.add(templateUrl);
 		constr = new GridBagConstraints();
 		constr.weightx = 1;
@@ -129,7 +129,7 @@ public class NewTileSourceDialog extends JDialog {
 		l.setConstraints(templateUrl, constr);
 		
 		
-		label = new JLabel("To add wms service you can use retiling pattern : ");
+		label = new JLabel(Messages.getString("NewTileSourceDialog.ADD.WMS.SERVICE")); //$NON-NLS-1$
 		panel.add(label);
 		constr = new GridBagConstraints();
 		constr.ipadx = 5;
@@ -141,7 +141,7 @@ public class NewTileSourceDialog extends JDialog {
 
 		label = new JLabel();
 		// Give hint about wms 
-		label.setText("http://whoots.mapwarper.net/tms/{$z}/{$x}/{$y}/{layer}/http://path.to.wms.server");
+		label.setText("http://whoots.mapwarper.net/tms/{$z}/{$x}/{$y}/{layer}/http://path.to.wms.server"); //$NON-NLS-1$
 		panel.add(label);
 		constr = new GridBagConstraints();
 		constr.weightx = 1;
@@ -176,16 +176,16 @@ public class NewTileSourceDialog extends JDialog {
 	
 	public boolean okPressed(){
 		if(Algoritms.isEmpty(templateName.getText())){
-			JOptionPane.showMessageDialog(this, "Please specify template name" , "Error creating new tile source", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, Messages.getString("NewTileSourceDialog.SPECIFY.TEMPLATE.NAME") , Messages.getString("NewTileSourceDialog.ERROR.CREATING.NEW.TILE.SRC"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 			return false;
 		}
 		if(Algoritms.isEmpty(templateUrl.getText())){
-			JOptionPane.showMessageDialog(this, "Please specify template url" , "Error creating new tile source", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, Messages.getString("NewTileSourceDialog.SPECIFY.TEMPLATE.URL") , Messages.getString("NewTileSourceDialog.ERROR.CREATING.NEW.TILE.SRC"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 			return false;
 		}
 		String url = templateUrl.getText();
-		if(url.indexOf("{$x}") == -1 || url.indexOf("{$y}") == -1 || url.indexOf("{$z}") == -1){
-			JOptionPane.showMessageDialog(this, "Please specify all placeholders {$x}, {$y}, {$z} in url" , "Error creating new tile source", JOptionPane.ERROR_MESSAGE);
+		if(url.indexOf("{$x}") == -1 || url.indexOf("{$y}") == -1 || url.indexOf("{$z}") == -1){ //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			JOptionPane.showMessageDialog(this, Messages.getString("NewTileSourceDialog.SPECIFY.ALL.PLACEHLDRS") , Messages.getString("NewTileSourceDialog.ERROR.CREATING.NEW.TILE.SRC"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 			return false;
 		}
 		File tilesDirectory = DataExtractionSettings.getSettings().getTilesDirectory();
@@ -193,13 +193,13 @@ public class NewTileSourceDialog extends JDialog {
 			File dir = new File(tilesDirectory, templateName.getText());
 			if(dir.mkdirs()){
 				try {
-					FileOutputStream ous = new FileOutputStream(new File(dir, "url"));
-					ous.write(url.getBytes("UTF-8"));
+					FileOutputStream ous = new FileOutputStream(new File(dir, "url")); //$NON-NLS-1$
+					ous.write(url.getBytes("UTF-8")); //$NON-NLS-1$
 					ous.close();
 				} catch (UnsupportedEncodingException e) {
-					log.error("Error creating new tile source " + url, e);
+					log.error(Messages.getString("NewTileSourceDialog.ERROR.CREATING.NEW.TILE.SRC") +" " + url, e); //$NON-NLS-1$
 				} catch (IOException e) {
-					log.error("Error creating new tile source " + url, e);
+					log.error(Messages.getString("NewTileSourceDialog.ERROR.CREATING.NEW.TILE.SRC") +" " + url, e); //$NON-NLS-1$
 				}
 			}
 		}
