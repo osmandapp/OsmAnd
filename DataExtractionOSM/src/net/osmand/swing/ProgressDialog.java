@@ -109,7 +109,7 @@ public class ProgressDialog extends JDialog implements IProgress {
         pane.add(label, BorderLayout.CENTER);
         add(pane);
         
-        label.setText("Please waiting...");
+        label.setText(Messages.getString("OsmExtractionUI.PLEASE.WAIT")); //$NON-NLS-1$
         progressBar.setIndeterminate(true);
         setSize(550, 100);
         double x = getParent().getBounds().getCenterX();
@@ -141,8 +141,8 @@ public class ProgressDialog extends JDialog implements IProgress {
 	
 	private void updateMessage() {
 		if(!progressBar.isIndeterminate()){
-			String format = String.format("\t %.1f %%", progressBar.getValue() * 100f / ((float) progressBar.getMaximum()));
-			label.setText(taskName +  format + (genProgress == null ? "" : ("   " + genProgress)));
+			String format = String.format("\t %.1f %%", progressBar.getValue() * 100f / ((float) progressBar.getMaximum())); //$NON-NLS-1$
+			label.setText(taskName +  format + (genProgress == null ? "" : ("   " + genProgress))); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -177,19 +177,19 @@ public class ProgressDialog extends JDialog implements IProgress {
 	@Override
 	public void startTask(String taskName, int work) {
 		if (log.isDebugEnabled()) {
-			log.debug("Memory before task exec: " + Runtime.getRuntime().totalMemory() + " free : " + Runtime.getRuntime().freeMemory());
+			log.debug("Memory before task exec: " + Runtime.getRuntime().totalMemory() + " free : " + Runtime.getRuntime().freeMemory()); //$NON-NLS-1$ //$NON-NLS-2$
 			if (previousTaskStarted == 0) {
-				log.debug(taskName + " started");
+				log.debug(taskName + " started"); //$NON-NLS-1$
 			} else {
-				log.debug(taskName + " started after " + (System.currentTimeMillis() - previousTaskStarted) + " ms");
+				log.debug(taskName + " started after " + (System.currentTimeMillis() - previousTaskStarted) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			
 		}
 		previousTaskStarted = System.currentTimeMillis();
 		if(taskName == null){
-			taskName = "";
+			taskName = ""; //$NON-NLS-1$
 		}
-		label.setText(taskName + (genProgress == null ? "" : ("   "+genProgress)));
+		label.setText(taskName + (genProgress == null ? "" : ("   "+genProgress))); //$NON-NLS-1$ //$NON-NLS-2$
 		this.taskName = taskName;
 		startWork(work);
 	}

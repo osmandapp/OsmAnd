@@ -56,7 +56,7 @@ public class TileBundleDownloadDialog extends JDialog {
     	selectionArea = panel.getSelectionArea();
     	zoom = panel.getZoom();
     	tilesLocation = panel.getTilesLocation();
-    	setTitle("Download bundle tiles");
+    	setTitle(Messages.getString("TileBundleDownloadDialog.DOWNLOAD.BUNDLE.TILES")); //$NON-NLS-1$
         initDialog();
         
     }
@@ -89,14 +89,14 @@ public class TileBundleDownloadDialog extends JDialog {
         JPanel zoomControls = new JPanel();
         zoomControls.setLayout(new BoxLayout(zoomControls, BoxLayout.X_AXIS));
         
-        JLabel lab = new JLabel("Start zoom level : ");
+        JLabel lab = new JLabel(Messages.getString("TileBundleDownloadDialog.START.ZOOM.LEVEL")); //$NON-NLS-1$
         zoomControls.add(lab);
         startSpinner = new JSpinner(getSpinnerModel(map.getMinimumZoomSupported(), zoom));
         zoomControls.add(startSpinner);
         startSpinner.setMaximumSize(new Dimension(15, startSpinner.getMaximumSize().height));
         
         zoomControls.add(Box.createHorizontalStrut(15));
-        lab = new JLabel("End zoom level : ");
+        lab = new JLabel(Messages.getString("TileBundleDownloadDialog.END.ZOOM.LEVEL")); //$NON-NLS-1$
         zoomControls.add(lab);
         endSpinner = new JSpinner(getSpinnerModel(zoom, map.getMaximumZoomSupported()));
         zoomControls.add(endSpinner);
@@ -108,13 +108,13 @@ public class TileBundleDownloadDialog extends JDialog {
         JPanel buttonControls = new JPanel();
         buttonControls.setLayout(new BoxLayout(buttonControls, BoxLayout.X_AXIS));
         buttonControls.add(Box.createHorizontalGlue());
-        specifyFolder = new JButton("Specify different folder");
+        specifyFolder = new JButton(Messages.getString("TileBundleDownloadDialog.SPECIFY.FOLDER")); //$NON-NLS-1$
         buttonControls.add(specifyFolder);
         buttonControls.add(Box.createHorizontalStrut(3));
-        downloadButton = new JButton("Download tiles");
+        downloadButton = new JButton(Messages.getString("TileBundleDownloadDialog.DOWNLOAD.TILES")); //$NON-NLS-1$
         buttonControls.add(downloadButton);
         buttonControls.add(Box.createHorizontalStrut(3));
-        cancelButton = new JButton("Cancel");
+        cancelButton = new JButton(Messages.getString("TileBundleDownloadDialog.CANCEL")); //$NON-NLS-1$
         buttonControls.add(cancelButton);
         pane.add(buttonControls, BorderLayout.SOUTH);
         
@@ -156,7 +156,7 @@ public class TileBundleDownloadDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser fc = new JFileChooser();
-		        fc.setDialogTitle("Choose working directory");
+		        fc.setDialogTitle(Messages.getString("TileBundleDownloadDialog.CHOOSE.DIRECTORY")); //$NON-NLS-1$
 		        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		        if(tilesLocation != null){
 		        	fc.setCurrentDirectory(tilesLocation);
@@ -173,7 +173,7 @@ public class TileBundleDownloadDialog extends JDialog {
 	
 	public void downloadTiles(){
 		setVisible(false);
-		final ProgressDialog progressDialog = new ProgressDialog(this, "Downloading tiles");
+		final ProgressDialog progressDialog = new ProgressDialog(this, Messages.getString("TileBundleDownloadDialog.DOWNLOADING.TILES")); //$NON-NLS-1$
 		int numberTiles = 0;
 		final int startZoom = (Integer) startSpinner.getValue();
 		final int endZoom = (Integer) endSpinner.getValue();
@@ -190,7 +190,7 @@ public class TileBundleDownloadDialog extends JDialog {
 
 			@Override
 			public void run() {
-				progressDialog.startTask("Loading...", number);
+				progressDialog.startTask(Messages.getString("TileBundleDownloadDialog.LOADING"), number); //$NON-NLS-1$
 				for (int zoom = startZoom; zoom <= endZoom; zoom++) {
 					int x1 = (int) MapUtils.getTileNumberX(zoom, selectionArea.getLon1());
 					int x2 = (int) MapUtils.getTileNumberX(zoom, selectionArea.getLon2());
@@ -249,7 +249,7 @@ public class TileBundleDownloadDialog extends JDialog {
 	}
 	
 	public String getFileForImage (int x, int y, int zoom, String ext){
-		return map.getName() +"/"+zoom+"/"+(x) +"/"+y+ext+".tile";
+		return map.getName() +"/"+zoom+"/"+(x) +"/"+y+ext+".tile"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 	}
 	
 	
@@ -263,7 +263,7 @@ public class TileBundleDownloadDialog extends JDialog {
 			numberTiles += (x2 - x1 + 1) * (y2 - y1 + 1);
 		}
 		
-		String text = MessageFormat.format("Request to download {0} tiles from ''{1}'' (approximately {2} Mb)", 
+		String text = MessageFormat.format(Messages.getString("TileBundleDownloadDialog.REQUEST.DOWNLOAD"),  //$NON-NLS-1$
 				numberTiles, map.getName(),	(double)numberTiles*12/1000);
 		label.setText(text);
 	}
