@@ -1665,7 +1665,9 @@ public class IndexCreator {
 	private void processingLowLevelWays(IProgress progress) throws SQLException {
 		restrictionsUse.clear();
 		mapLowLevelBinaryStat.executeBatch();
-		pStatements.put(mapLowLevelBinaryStat, 0);
+		mapLowLevelBinaryStat.close();
+		pStatements.remove(mapLowLevelBinaryStat);
+		mapLowLevelBinaryStat = null;
 		mapConnection.commit();
 		
 		PreparedStatement startStat = mapConnection.prepareStatement("SELECT id, start_node, end_node, nodes FROM " 
@@ -1964,6 +1966,10 @@ public class IndexCreator {
 
 		writer.endWriteAddressIndex();
 		writer.flush();
+		streetstat.close();
+		if (readWayNodes) {
+			waynodesStat.close();
+		}
 
 	}
 
@@ -1994,6 +2000,7 @@ public class IndexCreator {
 					writer.endWriteMapLevelIndex();
 				}
 			}
+			selectData.close();
 			writer.writeMapEncodingRules(MapRenderingTypes.getEncodingRuleTypes());
 			writer.endWriteMapIndex();
 			writer.flush();
@@ -2116,6 +2123,7 @@ public class IndexCreator {
 			}
 			rs.close();
 			selectTransportRouteData.close();
+			selectTransportData.close();
 			writer.endWriteTransportRoutes();
 
 			PreparedStatement selectTransportStop = mapConnection.prepareStatement(
@@ -2131,6 +2139,8 @@ public class IndexCreator {
 						transportRoutes, stringTable);
 				writer.endWriteTransportTreeElement();
 			}
+			selectTransportStop.close();
+			selectTransportRouteStop.close();
 
 			writer.writeTransportStringTable(stringTable);
 
