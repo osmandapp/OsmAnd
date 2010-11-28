@@ -687,7 +687,7 @@ public class OsmandRenderer {
 		Path path = null;
 		rc.main.emptyArea();
 		rc.second.emptyLine();
-		rc.main.color = Color.rgb(245, 245, 245);
+		// rc.main.color = Color.rgb(245, 245, 245);
 		
 		boolean rendered = render.renderPolygon(pair.tag, pair.value, zoom, rc, this);
 		if(!rendered){
@@ -709,8 +709,6 @@ public class OsmandRenderer {
 		}
 
 		if (path != null && len > 0) {
-			xText /= len;
-			yText /= len;
 
 			rc.main.updatePaint(paint);
 			canvas.drawPath(path, paint);
@@ -723,6 +721,8 @@ public class OsmandRenderer {
 				rc.clearText();
 				name = render.renderObjectText(name, pair.tag, pair.value, rc, false);
 				if (rc.textSize > 0 && name != null) {
+					xText /= len;
+					yText /= len;
 					TextDrawInfo info = new TextDrawInfo(name);
 					info.fillProperties(rc, xText, yText);
 					rc.textToDraw.add(info);
@@ -781,24 +781,24 @@ public class OsmandRenderer {
 
 	
 	private void drawPolyline(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype, int wholeType) {
-		rc.main.emptyLine();
-		rc.second.emptyLine();
-		rc.third.emptyLine();
-		rc.adds = null;
 		TagValuePair pair = obj.getMapIndex().decodeType(type, subtype);
 		if(render == null || pair == null){
-			return;
-		}
-		int layer = MapRenderingTypes.getNegativeWayLayer(wholeType);
-		boolean res = render.renderPolyline(pair.tag, pair.value, rc.zoom, rc, this, layer);
-		if(rc.main.strokeWidth == 0 || !res){
 			return;
 		}
 		int length = obj.getPointsLength();
 		if(length < 2){
 			return;
 		}
-		if("highway".equals(pair.tag) && rc.zoom >= 16 && MapRenderingTypes.isOneWayWay(obj.getHighwayAttributes())){ //$NON-NLS-1$
+		int layer = MapRenderingTypes.getNegativeWayLayer(wholeType);
+		rc.main.emptyLine();
+		rc.second.emptyLine();
+		rc.third.emptyLine();
+		rc.adds = null;
+		boolean res = render.renderPolyline(pair.tag, pair.value, rc.zoom, rc, this, layer);
+		if(rc.main.strokeWidth == 0 || !res){
+			return;
+		}
+		if(rc.zoom >= 16 && "highway".equals(pair.tag) && MapRenderingTypes.isOneWayWay(obj.getHighwayAttributes())){ //$NON-NLS-1$
 			rc.adds = PolylineRenderer.getOneWayProperties();
 		}
 		
