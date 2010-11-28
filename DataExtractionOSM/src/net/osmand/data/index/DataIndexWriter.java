@@ -302,15 +302,63 @@ public class DataIndexWriter {
 	public static void createMapIndexStructure(Connection conn) throws SQLException{
 		Statement stat = conn.createStatement();
 		assert IndexConstants.BINARY_MAP_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
+		assert IndexConstants.LOW_LEVEL_MAP_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
         stat.executeUpdate("create table binary_map_objects (id bigint primary key, name varchar(255), " +
         		"types binary, restrictions binary, nodes binary, highway int)");
         stat.executeUpdate("create index binary_map_objects_ind on binary_map_objects (id)");
+        
+        stat.executeUpdate("create table low_level_map_objects (id bigint primary key, start_node bigint, " +
+		"end_node bigint, name varchar(255), nodes binary, type bigint, level smallint)");
+        stat.executeUpdate("create index low_level_map_objects_ind on low_level_map_objects (id)");
+        stat.executeUpdate("create index low_level_map_objects_ind_loc on low_level_map_objects (start_node, end_node)");
         stat.close();
 	}
 
 	public static PreparedStatement createStatementMapBinaryInsert(Connection conn) throws SQLException{
 		assert IndexConstants.BINARY_MAP_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
         return conn.prepareStatement("insert into binary_map_objects(id, name, types, restrictions, nodes, highway) values(?, ?, ?, ?, ?, ?)");
+	}
+	
+	public static PreparedStatement createStatementLowLevelMapBinaryInsert(Connection conn) throws SQLException{
+		assert IndexConstants.LOW_LEVEL_MAP_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
+        return conn.prepareStatement("insert into low_level_map_objects(id, start_node, end_node, name, nodes, type, level) values(?, ?, ?, ?, ?, ?, ?)");
+	}
+	
+	public static void insertLowLevelMapBinaryObject(Map<PreparedStatement, Integer> statements, 
+			PreparedStatement mapLowLevelBinaryStat, int level,long types, long id, List<Node> nodes, String name) throws SQLException{
+		assert IndexConstants.LOW_LEVEL_MAP_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
+		boolean first = true;
+		long firstId = -1;
+		long lastId = -1;
+		ByteArrayOutputStream bnodes = new ByteArrayOutputStream();
+		try {
+			for (Node n : nodes) {
+				if (n != null) {
+					if (first) {
+						firstId = n.getId();
+						first = false;
+					}
+					lastId = n.getId();
+					Algoritms.writeInt(bnodes, Float.floatToRawIntBits((float) n.getLatitude()));
+					Algoritms.writeInt(bnodes, Float.floatToRawIntBits((float) n.getLongitude()));
+				}
+			}
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
+		}
+		if(firstId == -1){
+			return;
+		}
+		// conn.prepareStatement("insert into binary_map_objects(id, name, types, restrictions, nodes, highway) values(?, ?, ?, ?, ?, ?)");
+		mapLowLevelBinaryStat.setLong(1, id);
+		mapLowLevelBinaryStat.setLong(2, firstId);
+		mapLowLevelBinaryStat.setLong(3, lastId);
+		mapLowLevelBinaryStat.setString(4, name);
+		mapLowLevelBinaryStat.setBytes(5, bnodes.toByteArray());
+		mapLowLevelBinaryStat.setLong(6, types);
+		mapLowLevelBinaryStat.setShort(7, (short) level);
+		
+		addBatch(statements, mapLowLevelBinaryStat);
 	}
 	public static void insertBinaryMapRenderObjectIndex(Map<PreparedStatement, Integer> statements, 
 			PreparedStatement mapBinaryStat, RTree mapTree, Entity e, String name,
