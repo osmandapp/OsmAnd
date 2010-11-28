@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+        <string name="rendering_exception">Hiba történt a kiválasztott terület megjelenítésekor</string>
+        <string name="rendering_out_of_memory">Nincs elég memória a terület megjelenítéséhez</string>
+        <string name="show_point_options">Pont beállítások</string>
+        <string name="renderer_load_sucess">Megjelenítő stílus betöltve</string>
+        <string name="renderer_load_exception">Hiba: nem tölthető be a megjelenítő stílus</string>
+        <string name="renderers">Vektoros megjelenítés</string>
+        <string name="renderers_descr">Vektoros megjelenítési stílus választás</string>
+
+        <string name="reload">újratöltés</string>
 	<string name="poi_context_menu_website">POI weboldal megtekintése</string>
 	<string name="poi_context_menu_call">POI telefonszám megtekintése</string>
 	<string name="website">weboldal</string>
