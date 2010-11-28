@@ -11,13 +11,16 @@ import org.apache.commons.logging.Log;
 
 public class ConsoleProgressImplementation implements IProgress {
 	public static double deltaPercentsToPrint = 3.5;
+	public static long deltaTimeToPrint = 1000;
 	private static Log log = LogUtil.getLog(ConsoleProgressImplementation.class);
 	
 	String currentTask;
 	int work;
 	int currentDone;
 	double delta;
+	long deltaTime = deltaTimeToPrint;
 	private long previousTaskStarted = 0;
+	private long lastTimePrinted = 0;
 	
 	double lastPercentPrint = 0;
 	public ConsoleProgressImplementation(){
@@ -26,6 +29,11 @@ public class ConsoleProgressImplementation implements IProgress {
 	
 	public ConsoleProgressImplementation(double deltaToPrint){
 		delta = deltaToPrint;
+	}
+	
+	public ConsoleProgressImplementation(double deltaToPrint, int deltaTime){
+		delta = deltaToPrint;
+		deltaToPrint = deltaTime;
 	}
 	
 	@Override
@@ -48,8 +56,13 @@ public class ConsoleProgressImplementation implements IProgress {
 	
 	private void printIfNeeded() {
 		if(getCurrentPercent() - lastPercentPrint >= delta){
-			System.out.println(MessageFormat.format("Done {0} %.", getCurrentPercent())); //$NON-NLS-1$
 			this.lastPercentPrint = getCurrentPercent();
+			long now = System.currentTimeMillis();
+			if(now - lastTimePrinted >= deltaTimeToPrint || deltaTime < 0){
+				System.out.println(MessageFormat.format("Done {0} %.", getCurrentPercent())); //$NON-NLS-1$
+				lastTimePrinted = now;
+			}
+			
 		}
 	}
 

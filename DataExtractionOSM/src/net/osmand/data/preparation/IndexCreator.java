@@ -90,7 +90,7 @@ public class IndexCreator {
 	private static final String SQLITE_DIALECT = "SQLITE";
 	private static final String CURRENT_DB = SQLITE_DIALECT;
 
-	public static final int BATCH_SIZE = 1000;
+	public static final int BATCH_SIZE = 5000;
 	public static final int BATCH_SIZE_OSM = 10000;
 	public static final String TEMP_NODES_DB = "nodes.tmp.odb";
 
@@ -137,6 +137,8 @@ public class IndexCreator {
 	private Connection mapConnection;
 
 	private PreparedStatement mapBinaryStat;
+	private PreparedStatement mapLowLevelBinaryStat;
+	private int lowLevelWays = -1;
 
 	private PreparedStatement addressCityStat;
 	private PreparedStatement addressStreetStat;
@@ -163,17 +165,6 @@ public class IndexCreator {
 	}
 	private Map<Long, String> multiPolygonsNames = new LinkedHashMap<Long, String>();
 	private Map<Long, List<Long>> highwayRestrictions = new LinkedHashMap<Long, List<Long>>();
-	
-	private Map<Long, List<Way>>[] lowLevelSt = new Map[MAP_ZOOMS.length - 1];
-	private Map<Long, List<Way>>[] lowLevelEnd = new Map[MAP_ZOOMS.length - 1];
-	{
-		for (int i = 0; i < lowLevelSt.length; i++) {
-			lowLevelSt[i] = new LinkedHashMap<Long, List<Way>>();
-		}
-		for (int i = 0; i < lowLevelEnd.length; i++) {
-			lowLevelEnd[i] = new LinkedHashMap<Long, List<Way>>();
-		}
-	}
 
 	// MEMORY address : choose what to use ?
 	private boolean loadInMemory = true;
@@ -476,7 +467,11 @@ public class IndexCreator {
 				log.error("Illegal configuration", e);
 				throw new IllegalStateException(e);
 			}
-			return DriverManager.getConnection("jdbc:sqlite:" + fileName);
+			Connection connection = DriverManager.getConnection("jdbc:sqlite:" + fileName);
+			Statement statement = connection.createStatement();
+			statement.executeUpdate("PRAGMA synchronous = 0");
+			statement.close();
+			return connection;
 		} else if (usingDerby()) {
 			try {
 				Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
@@ -1626,7 +1621,7 @@ public class IndexCreator {
 	}
 	
 
-	protected Way simplifyWay(Way originalE, long id, boolean hasMulti, int zoom, String name, int type, int level) {
+	protected Way simplifyWay(Way originalE, long id, boolean hasMulti, int zoom, String name, int type, int level) throws SQLException {
 		List<Node> nodes = originalE.getNodes();
 		Way way = new Way(id);
 		for (String t : originalE.getTagKeySet()) {
@@ -1635,8 +1630,8 @@ public class IndexCreator {
 		boolean cycle = originalE.getNodeIds().get(0).longValue() == originalE.getNodeIds().get(nodes.size() - 1).longValue();
 		long longType = encodeTypesToOneLong(type);
 
-		boolean skip = checkForSmallAreas(nodes, zoom, 3);
-		if (skip && (cycle || !hasMulti)) {
+		boolean skip = checkForSmallAreas(nodes, zoom, 3, 3);
+		if (skip && cycle/* || !hasMulti)*/) {
 			return null;
 		}
 
@@ -1648,98 +1643,137 @@ public class IndexCreator {
 			// nothing to do
 			return way;
 		} else {
-			way.putTag(OSMTagKey.NAME.getValue(), name);
-			way.putTag("long_type", longType + "");
-			long stId = way.getNodes().get(0).getId();
-			long endId = way.getNodes().get(way.getNodes().size() - 1).getId();
-			if (!lowLevelSt[level].containsKey(stId)) {
-				lowLevelSt[level].put(stId, new ArrayList<Way>(2));
-			}
-			lowLevelSt[level].get(stId).add(way);
-			if (!lowLevelEnd[level].containsKey(endId)) {
-				lowLevelEnd[level].put(endId, new ArrayList<Way>(2));
-			}
-			lowLevelEnd[level].get(endId).add(way);
+			lowLevelWays ++;
+			DataIndexWriter.insertLowLevelMapBinaryObject(pStatements, mapLowLevelBinaryStat, level, longType, id, way.getNodes(), name);
 			return null;
 		}
 
 	}
 	
-	private void processingLowLevelWays() throws SQLException {
-		for (int level = 1; level < MAP_ZOOMS.length - 1; level++) {
-			Set<Long> visitedWays = new LinkedHashSet<Long>();
-			int zoom = MAP_ZOOMS[MAP_ZOOMS.length - level - 1];
-			for(Long stId : lowLevelSt[level].keySet()){
-				for (Way w : lowLevelSt[level].get(stId)) {
-					if (visitedWays.contains(w.getId())) {
-						continue;
-					}
-					visitedWays.add(w.getId());
-					// combine startPoint with EndPoint
-					boolean combined = true;
-					while (combined) {
-						combined = false;
-						List<Way> list = lowLevelEnd[level].get(w.getNodeIds().get(0));
-						if (list != null) {
-							for (Way ws : list) {
-								if (!visitedWays.contains(ws.getId())
-										&& Algoritms.objectEquals(ws.getTag(OSMTagKey.NAME), w.getTag(OSMTagKey.NAME))
-										&& Algoritms.objectEquals(ws.getTag("long_type"), w.getTag("long_type"))) {
-									visitedWays.add(ws.getId());
-									for (int i = 1; i < w.getNodes().size(); i++) {
-										ws.addNode(w.getNodes().get(i));
-									}
-									w = ws;
-									combined = true;
-									break;
-								}
-							}
-						}
-					}
-
-					
-					// combined end point
-					combined = true;
-					while (combined) {
-						combined = false;
-						List<Way> list = lowLevelSt[level].get(w.getNodeIds().get(w.getNodeIds().size() - 1));
-						if (list != null) {
-							for (Way ws : list) {
-								if (!visitedWays.contains(ws.getId())
-										&& Algoritms.objectEquals(ws.getTag(OSMTagKey.NAME), w.getTag(OSMTagKey.NAME))
-										&& Algoritms.objectEquals(ws.getTag("long_type"), w.getTag("long_type"))) {
-									visitedWays.add(ws.getId());
-									for (int i = 1; i < ws.getNodes().size(); i++) {
-										w.addNode(ws.getNodes().get(i));
-									}
-									combined = true;
-									break;
-								}
-							}
-						}
-					}
-					boolean skip = false;
-					boolean cycle = w.getNodes().get(0).getId() == w.getNodes().get(w.getNodes().size() - 1).getId();
-					boolean hasMulti = multiPolygonsWays[level].containsKey(w.getId() >> 3);
-					if(cycle || !hasMulti){
-						skip = checkForSmallAreas(w.getNodes(), zoom - 1, 4);
-					}
-					
-					if (!skip) {
-						Way newWs = new Way(w.getId());
-						simplifyDouglasPeucker(w.getNodes(), zoom - 1 + 8, 3, newWs);
-
-						Long l = Long.parseLong(w.getTag("long_type"));
-						int type = decodeTypesFromOneLong(l);
-						DataIndexWriter.insertBinaryMapRenderObjectIndex(pStatements, mapBinaryStat, mapTree[level], newWs, w
-								.getTag(OSMTagKey.NAME), w.getId(), type, typeUse, 0, restrictionsUse, false, false, BATCH_SIZE);
-					}
-				}
-			}
+	private void loadNodes(byte[] nodes, List<Float> toPut){
+		toPut.clear();
+		for (int i = 0; i < nodes.length;) {
+			int lat = Algoritms.parseIntFromBytes(nodes, i);
+			i += 4;
+			int lon = Algoritms.parseIntFromBytes(nodes, i);
+			i += 4;
+			toPut.add(Float.intBitsToFloat(lat));
+			toPut.add(Float.intBitsToFloat(lon));
 		}
 	}
 	
-	private boolean checkForSmallAreas(List<Node> nodes, int zoom, int sz) {
+	private void processingLowLevelWays(IProgress progress) throws SQLException {
+		restrictionsUse.clear();
+		mapLowLevelBinaryStat.executeBatch();
+		pStatements.put(mapLowLevelBinaryStat, 0);
+		mapConnection.commit();
+		
+		PreparedStatement startStat = mapConnection.prepareStatement("SELECT id, start_node, end_node, nodes FROM " 
+				+ IndexConstants.LOW_LEVEL_MAP_TABLE + " WHERE start_node = ? AND type=? AND level = ? AND name=?");
+		PreparedStatement endStat = mapConnection.prepareStatement("SELECT id, start_node, end_node, nodes FROM " 
+				+ IndexConstants.LOW_LEVEL_MAP_TABLE + " WHERE end_node = ? AND type=? AND level = ? AND name=?");
+		Statement selectStatement = mapConnection.createStatement();
+		ResultSet rs = selectStatement.executeQuery("SELECT id, start_node, end_node, name, nodes, type, level FROM " + IndexConstants.LOW_LEVEL_MAP_TABLE);
+		Set<Long> visitedWays = new LinkedHashSet<Long>();
+		ArrayList<Float> list = new ArrayList<Float>(100);
+		while(rs.next()){
+			if(lowLevelWays != -1){
+				progress.progress(1);
+			}
+			long id = rs.getLong(1);
+			if(visitedWays.contains(id)){
+				continue;
+			}
+			
+			visitedWays.add(id);
+			int level = rs.getInt(7);
+			int zoom = MAP_ZOOMS[MAP_ZOOMS.length - level - 1];
+			
+			long startNode = rs.getLong(2);
+			long endNode = rs.getLong(3);
+			
+			String name = rs.getString(4);
+			long ltype = rs.getLong(6);
+			loadNodes(rs.getBytes(5), list);
+			ArrayList<Float> wayNodes = new ArrayList<Float>(list);
+			
+			
+			// combine startPoint with EndPoint
+			boolean combined = true;
+			while (combined) {
+				combined = false;
+				endStat.setLong(1, startNode);
+				endStat.setLong(2, ltype);
+				endStat.setShort(3, (short) level);
+				endStat.setString(4, name);
+				ResultSet fs = endStat.executeQuery();
+				while (fs.next()) {
+					if (!visitedWays.contains(fs.getLong(1))) {
+						combined = true;
+						long lid = fs.getLong(1);
+						startNode = fs.getLong(2);
+						visitedWays.add(lid);
+						loadNodes(fs.getBytes(4), list);
+						ArrayList li = new ArrayList<Float>(list);
+						// remove first lat/lon point
+						wayNodes.remove(0);
+						wayNodes.remove(0);
+						li.addAll(wayNodes);
+						wayNodes = li;
+					}
+				}
+				fs.close();
+			}
+			
+			// combined end point
+			combined = true;
+			while (combined) {
+				combined = false;
+				startStat.setLong(1, endNode);
+				startStat.setLong(2, ltype);
+				startStat.setShort(3, (short) level);
+				startStat.setString(4, name);
+				ResultSet fs = startStat.executeQuery();
+				while (fs.next()) {
+					if (!visitedWays.contains(fs.getLong(1))) {
+						combined = true;
+						long lid = fs.getLong(1);
+						endNode = fs.getLong(3);
+						visitedWays.add(lid);
+						loadNodes(fs.getBytes(4), list);
+						for (int i = 2; i < list.size(); i++) {
+							wayNodes.add(list.get(i));
+						}
+					}
+				}
+				fs.close();
+			}
+			List<Node> wNodes = new ArrayList<Node>();
+			for (int i = 0; i < wayNodes.size(); i += 2) {
+				wNodes.add(new Node(wayNodes.get(i), wayNodes.get(i + 1), i == 0 ? startNode : endNode));
+			}
+			boolean skip = false;
+			boolean cycle = startNode == endNode;
+			boolean hasMulti = multiPolygonsWays[level].containsKey(id >> 3);
+			if(cycle || !hasMulti){
+				skip = checkForSmallAreas(wNodes, zoom - 1, 1, 4);
+			}
+			
+			if (!skip) {
+				Way newWs = new Way(id);
+				simplifyDouglasPeucker(wNodes, zoom - 1 + 8, 3, newWs);
+				
+				int type = decodeTypesFromOneLong(ltype);
+				DataIndexWriter.insertBinaryMapRenderObjectIndex(pStatements, mapBinaryStat, mapTree[level], newWs, name, 
+						id, type, typeUse, 0, restrictionsUse, false, false, BATCH_SIZE);
+			}
+			
+		}
+		
+	}
+	
+	
+	private boolean checkForSmallAreas(List<Node> nodes, int zoom, int minz, int maxz) {
 		int minX = Integer.MAX_VALUE;
 		int maxX = Integer.MIN_VALUE;
 		int minY = Integer.MAX_VALUE;
@@ -1759,8 +1793,8 @@ public class IndexCreator {
 		if (c < 2) {
 			return true;
 		}
-		return ((maxX - minX) <= (sz - 1) && (maxY - minY) <= (sz + 1)) || 
-				((maxX - minX) <= (sz + 1) && (maxY - minY) <= (sz - 1));
+		return ((maxX - minX) <= minz && (maxY - minY) <= maxz) || 
+				((maxX - minX) <= maxz && (maxY - minY) <= minz);
 
 	}
 	
@@ -2203,6 +2237,7 @@ public class IndexCreator {
 
 		cities.clear();
 		cityManager.clear();
+		lowLevelWays = -1;
 		postalCodeRelations.clear();
 		if (normalizeStreets) {
 			normalizeDefaultSuffixes = DataExtractionSettings.getSettings().getDefaultSuffixesToNormalizeStreets();
@@ -2331,8 +2366,8 @@ public class IndexCreator {
 				// 3.4 combine all low level ways and simplify them
 				if(indexMap){
 					progress.setGeneralProgress("[90 of 100]");
-					progress.startTask("Indexing low level ways...", -1);
-					processingLowLevelWays();
+					progress.startTask("Indexing low level ways...", lowLevelWays);
+					processingLowLevelWays(progress);
 				}
 
 				// 3.5 update all postal codes from relations
@@ -2373,7 +2408,7 @@ public class IndexCreator {
 				if (indexMap) {
 					progress.setGeneralProgress("[95 of 100]");
 					progress.startTask("Writing map index to binary file...", -1);
-					closePreparedStatements(mapBinaryStat);
+					closePreparedStatements(mapBinaryStat, mapLowLevelBinaryStat);
 					mapConnection.commit();
 					writeBinaryMapIndex(writer);
 				}
@@ -2615,6 +2650,7 @@ public class IndexCreator {
 		if (indexMap) {
 			DataIndexWriter.createMapIndexStructure(mapConnection);
 			mapBinaryStat = DataIndexWriter.createStatementMapBinaryInsert(mapConnection);
+			mapLowLevelBinaryStat = DataIndexWriter.createStatementLowLevelMapBinaryInsert(mapConnection);
 			try {
 				mapTree = new RTree[MAP_ZOOMS.length - 1];
 				for (int i = 0; i < MAP_ZOOMS.length - 1; i++) {
@@ -2630,6 +2666,7 @@ public class IndexCreator {
 				throw new IOException(e);
 			}
 			pStatements.put(mapBinaryStat, 0);
+			pStatements.put(mapLowLevelBinaryStat, 0);
 		}
 
 		if (indexAddress) {
@@ -2728,12 +2765,12 @@ public class IndexCreator {
 		creator.recreateOnlyBinaryFile = false;
 		creator.deleteDatabaseIndexes = true;
 
-//		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-//		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 		
 
-		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
-		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.pbf"), new ConsoleProgressImplementation(3), null);
+//		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
+//		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.pbf"), new ConsoleProgressImplementation(3), null);
 
 //		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
 //		creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);
