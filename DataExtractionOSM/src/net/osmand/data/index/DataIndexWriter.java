@@ -364,7 +364,7 @@ public class DataIndexWriter {
 	public static void insertBinaryMapRenderObjectIndex(Map<PreparedStatement, Integer> statements, 
 			PreparedStatement mapBinaryStat, RTree mapTree, Entity e, String name,
 			long id, int type, List<Integer> typeUse, int highwayAttributes, List<Long> restrictions, 	
-			boolean inversePath, boolean writeAsPoint, int batchSize) throws SQLException {
+			boolean inversePath, boolean writeAsPoint, boolean commit) throws SQLException {
 		if(e instanceof Relation){
 			throw new IllegalArgumentException();
 		}
@@ -428,7 +428,7 @@ public class DataIndexWriter {
 			mapBinaryStat.setBytes(5, bnodes.toByteArray());
 			mapBinaryStat.setInt(6, highwayAttributes);
 			
-			addBatch(statements, mapBinaryStat);
+			addBatch(statements, mapBinaryStat, commit);
 			try {
 				mapTree.insert(new LeafElement(new Rect(minX, minY, maxX, maxY), id));
 			} catch (RTreeInsertException e1) {
@@ -438,15 +438,25 @@ public class DataIndexWriter {
 			}
 		}
 	}
-	private static void addBatch(Map<PreparedStatement, Integer> count, PreparedStatement p) throws SQLException{
-		addBatch(count, p, BATCH_SIZE);
+	private static void addBatch(Map<PreparedStatement, Integer> count, PreparedStatement p) throws SQLException {
+		addBatch(count, p, BATCH_SIZE, true);
+	}
+	
+	public static void addBatch(Map<PreparedStatement, Integer> count, PreparedStatement p, boolean commit) throws SQLException{
+		addBatch(count, p, BATCH_SIZE, commit);
 	}
 	
 	public static void addBatch(Map<PreparedStatement, Integer> count, PreparedStatement p, int batchSize) throws SQLException{
+		addBatch(count, p, batchSize, true);
+	}
+	
+	public static void addBatch(Map<PreparedStatement, Integer> count, PreparedStatement p, int batchSize, boolean commit) throws SQLException{
 		p.addBatch();
 		if(count.get(p) >= batchSize){
 			p.executeBatch();
-			p.getConnection().commit();
+			if(commit){
+				p.getConnection().commit();
+			}
 			count.put(p, 0);
 		} else {
 			count.put(p, count.get(p) + 1);
