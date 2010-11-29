@@ -825,7 +825,7 @@ public class ResourceManager {
 						} else if(req instanceof MapLoadRequest){
 							if(!mapLoaded){
 								MapLoadRequest r = (MapLoadRequest) req;
-								renderer.loadMap(r.tileBox);
+								renderer.loadMap(r.tileBox, downloader.getDownloaderCallbacks());
 								mapLoaded = true;
 							}
 						}

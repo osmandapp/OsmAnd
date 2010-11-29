@@ -26,6 +26,7 @@
 <ListPreference android:title="@string/voice_provider" android:key="voice_provider" android:summary="@string/voice_provider_descr"></ListPreference>
 <ListPreference android:key="renderer" android:title="@string/renderers" android:summary="@string/renderers_descr"></ListPreference>
 <CheckBoxPreference android:summary="Use this flag to check rendering performance" android:title="Trace rendering" android:key="debug_rendering"></CheckBoxPreference>
+<CheckBoxPreference android:summary="Choose show continuous rendering or whole image" android:title="Continuous rendering" android:key="use_step_by_step_rendering"/>
 </PreferenceScreen>
 
 <PreferenceScreen android:title="@string/routing_settings" android:summary="@string/routing_settings_descr">
