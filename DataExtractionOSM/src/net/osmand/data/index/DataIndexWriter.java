@@ -310,7 +310,8 @@ public class DataIndexWriter {
         stat.executeUpdate("create table low_level_map_objects (id bigint primary key, start_node bigint, " +
 		"end_node bigint, name varchar(255), nodes binary, type bigint, level smallint)");
         stat.executeUpdate("create index low_level_map_objects_ind on low_level_map_objects (id)");
-        stat.executeUpdate("create index low_level_map_objects_ind_loc on low_level_map_objects (start_node, end_node)");
+        stat.executeUpdate("create index low_level_map_objects_ind_st on low_level_map_objects (start_node, type)");
+        stat.executeUpdate("create index low_level_map_objects_ind_end on low_level_map_objects (end_node, type)");
         stat.close();
 	}
 
