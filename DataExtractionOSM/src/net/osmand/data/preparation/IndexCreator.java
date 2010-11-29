@@ -1567,7 +1567,7 @@ public class IndexCreator {
 		}
 		if (!skip) {
 			DataIndexWriter.insertBinaryMapRenderObjectIndex(pStatements, mapBinaryStat, rtree, e, eName, id, type, typeUse,
-					highwayAttributes, restrictionsUse, inverse, point, BATCH_SIZE);
+					highwayAttributes, restrictionsUse, inverse, point, true);
 		}
 	}
 
@@ -1768,7 +1768,7 @@ public class IndexCreator {
 				
 				int type = decodeTypesFromOneLong(ltype);
 				DataIndexWriter.insertBinaryMapRenderObjectIndex(pStatements, mapBinaryStat, mapTree[level], newWs, name, 
-						id, type, typeUse, 0, restrictionsUse, false, false, BATCH_SIZE);
+						id, type, typeUse, 0, restrictionsUse, false, false, false);
 			}
 			
 		}
@@ -2780,8 +2780,8 @@ public class IndexCreator {
 		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
 		
 
-//		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb"));
-//		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.pbf"), new ConsoleProgressImplementation(3), null);
+//		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb")); //$NON-NLS-1$
+//		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.pbf"), new ConsoleProgressImplementation(3), null); //$NON-NLS-1$
 
 //		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
 //		creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);
