@@ -109,6 +109,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			new BooleanPreference(OsmandSettings.AUTO_ZOOM_MAP, OsmandSettings.AUTO_ZOOM_MAP_DEF),
 			new BooleanPreference(OsmandSettings.SAVE_TRACK_TO_GPX, OsmandSettings.SAVE_TRACK_TO_GPX_DEF),
 			new BooleanPreference(OsmandSettings.DEBUG_RENDERING_INFO, OsmandSettings.DEBUG_RENDERING_INFO_DEF),
+			new BooleanPreference(OsmandSettings.USE_STEP_BY_STEP_RENDERING, OsmandSettings.USE_STEP_BY_STEP_RENDERING_DEF),
 	};
 	private BroadcastReceiver broadcastReceiver;
 	

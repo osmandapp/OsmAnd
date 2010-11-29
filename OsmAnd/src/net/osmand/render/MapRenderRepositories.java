@@ -28,6 +28,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.index.IndexConstants;
+import net.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.MultyPolygon;
@@ -36,8 +37,10 @@ import net.osmand.render.OsmandRenderer.RenderingContext;
 import org.apache.commons.logging.Log;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
+import android.graphics.Bitmap.Config;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
@@ -68,11 +71,13 @@ public class MapRenderRepositories {
 	private boolean interrupted = false;
 	private RenderingContext currentRenderingContext;
 	private SearchRequest<BinaryMapDataObject> searchRequest;
+	private SharedPreferences prefs;
 	
 	public MapRenderRepositories(Context context){
 		this.context = context;
 		this.renderer = new OsmandRenderer(context);
 		handler = new Handler(Looper.getMainLooper());
+		prefs = OsmandSettings.getPrefs(context);
 	}
 	
 	public Context getContext() {
@@ -287,7 +292,7 @@ public class MapRenderRepositories {
 	}
 		
 	
-	public synchronized void loadMap(RotatedTileBox tileRect) {
+	public synchronized void loadMap(RotatedTileBox tileRect, List<IMapDownloaderCallback> notifyList) {
 		interrupted = false;
 		if(currentRenderingContext != null){
 			currentRenderingContext = null;
@@ -330,19 +335,38 @@ public class MapRenderRepositories {
 			}
 
 			now = System.currentTimeMillis();
-			Bitmap bmp = renderer.generateNewBitmap(currentRenderingContext, cObjects, OsmandSettings.usingEnglishNames(OsmandSettings
-					.getPrefs(context)));
+			
+			
+			Bitmap bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.RGB_565);
+			
+			boolean stepByStep = OsmandSettings.isUsingStepByStepRendering(prefs);
+			// 1. generate image step by step
+			if (stepByStep) {
+				Bitmap oldBmp = this.bmp;
+				this.bmp = bmp;
+				this.bmpLocation = tileRect;
+				if (oldBmp != null) {
+					oldBmp.recycle();
+				}
+			}
+			
+			renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, 
+					OsmandSettings.usingEnglishNames(prefs), stepByStep ? notifyList : null);
 			if (checkWhetherInterrupted()) {
 				currentRenderingContext = null;
 				return;
 			}
 			final long renderingTime = System.currentTimeMillis() - now;
 			currentRenderingContext = null;
-			Bitmap oldBmp = this.bmp;
-			this.bmp = bmp;
-			this.bmpLocation = tileRect;
-			if (oldBmp != null) {
-				oldBmp.recycle();
+			
+			// 2. replace whole image
+			if (!stepByStep) {
+				Bitmap oldBmp = this.bmp;
+				this.bmp = bmp;
+				this.bmpLocation = tileRect;
+				if (oldBmp != null) {
+					oldBmp.recycle();
+				}
 			}
 			if(OsmandSettings.isDebugRendering(context)){
 				final String msg = "Search done in "+ searchTime+" ms\nRendering done in "+ renderingTime+ " ms";    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$

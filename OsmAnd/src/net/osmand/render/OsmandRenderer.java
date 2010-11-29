@@ -15,6 +15,7 @@ import java.util.Map;
 import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MultyPolygon;
 import net.sf.junidecode.Junidecode;
@@ -35,7 +36,6 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
-import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory.Options;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Cap;
@@ -271,9 +271,20 @@ public class OsmandRenderer {
 	}
 	
 	
-	public Bitmap generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, boolean useEnglishNames) {
+	public Bitmap generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, boolean useEnglishNames, List<IMapDownloaderCallback> notifyList) {
 		long now = System.currentTimeMillis();
 		render = RendererRegistry.getRegistry().getCurrentSelectedRenderer();
+		
+		// fill area
+		Canvas cv = new Canvas(bmp);
+		if(render != null){
+			int dc = render.getDefaultColor();
+			if(dc != 0){
+				paintFillEmpty.setColor(dc);
+			}
+		}
+		cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillEmpty);
+		
 		// put in order map
 		int sz = objects.size();
 		int init = sz / 4;
@@ -310,24 +321,16 @@ public class OsmandRenderer {
 			}
 		}
 		
-		Bitmap bmp = null; 
 		if (objects != null && !objects.isEmpty() && rc.width > 0 && rc.height > 0) {
 			// init rendering context
 			rc.tileDivisor = (int) (1 << (31 - rc.zoom));
 			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
-			bmp = Bitmap.createBitmap(rc.width, rc.height, Config.RGB_565);
 			
-			Canvas cv = new Canvas(bmp);
-			if(render != null){
-				int dc = render.getDefaultColor();
-				if(dc != 0){
-					paintFillEmpty.setColor(dc);
-				}
-			}
-			cv.drawRect(0, 0, bmp.getWidth(), bmp.getHeight(), paintFillEmpty);
+			
 			float[] keys = orderMap.keys();
 			Arrays.sort(keys);
+			int objCount = 0;
 			for (int k = 0; k < keys.length; k++) {
 				TIntArrayList list = orderMap.get(keys[k]);
 				for (int j = 0; j < list.size(); j++) {
@@ -338,11 +341,18 @@ public class OsmandRenderer {
 
 					// show text only for main type
 					drawObj(obj, cv, rc, obj.getTypes()[l], l == 0);
+					
+					objCount++;
+				}
+				if(objCount > 35){
+					notifyListeners(notifyList);
+					objCount = 0;
 				}
 				if(rc.interrupted){
 					return null;
 				}
 			}
+			notifyListeners(notifyList);
 			
 			int skewConstant = (int) (16 * dm.density);
 			
@@ -380,6 +390,7 @@ public class OsmandRenderer {
 					return null;
 				}
 			}
+			notifyListeners(notifyList);
 			drawTextOverCanvas(rc, cv, useEnglishNames);
 			long time = System.currentTimeMillis() - now;
 			log.info(String.format("Rendering has been done in %s ms. (%s points, %s points inside, %s visile from %s)",//$NON-NLS-1$
@@ -388,6 +399,14 @@ public class OsmandRenderer {
 		}
 		
 		return bmp;
+	}
+
+	private void notifyListeners(List<IMapDownloaderCallback> notifyList) {
+		if (notifyList != null) {
+			for (IMapDownloaderCallback c : notifyList) {
+				c.tileDownloaded(null);
+			}
+		}
 	}
 	private final static boolean findAllTextIntersections = true;
 

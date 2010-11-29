@@ -354,6 +354,20 @@ public class OsmandSettings {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		return prefs.edit().putBoolean(USE_ENGLISH_NAMES, useEnglishNames).commit();
 	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String USE_STEP_BY_STEP_RENDERING = "use_step_by_step_rendering"; //$NON-NLS-1$
+	public static final boolean USE_STEP_BY_STEP_RENDERING_DEF = true;
+
+	public static boolean isUsingStepByStepRendering(SharedPreferences prefs) {
+		return prefs.getBoolean(USE_STEP_BY_STEP_RENDERING, USE_STEP_BY_STEP_RENDERING_DEF);
+	}
+	
+	public static boolean setUsingStepByStepRendering(Context ctx, boolean rendering) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putBoolean(USE_STEP_BY_STEP_RENDERING, rendering).commit();
+	}
+
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String MAP_VECTOR_DATA = "map_vector_data"; //$NON-NLS-1$
