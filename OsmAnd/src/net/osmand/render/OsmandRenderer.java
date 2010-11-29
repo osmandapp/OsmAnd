@@ -344,7 +344,7 @@ public class OsmandRenderer {
 					
 					objCount++;
 				}
-				if(objCount > 35){
+				if(objCount > 25){
 					notifyListeners(notifyList);
 					objCount = 0;
 				}
@@ -818,7 +818,7 @@ public class OsmandRenderer {
 			return;
 		}
 		if(rc.zoom >= 16 && "highway".equals(pair.tag) && MapRenderingTypes.isOneWayWay(obj.getHighwayAttributes())){ //$NON-NLS-1$
-			rc.adds = PolylineRenderer.getOneWayProperties();
+			rc.adds = getOneWayProperties();
 		}
 		
 		
@@ -947,270 +947,40 @@ public class OsmandRenderer {
 			}
 		}
 	}
-
-	
-	// TODO delete !!!
-	private void drawPolylineOld(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype, int wholeType) {
-		rc.main.emptyLine();
-		rc.second.emptyLine();
-		rc.third.emptyLine();
-		rc.adds = null;
-		
-		PolylineRenderer.renderPolyline(type, subtype, wholeType, obj.getHighwayAttributes(), rc, this);
-		
-		
-		if(rc.main.strokeWidth == 0){
-			return;
-		}
-		int length = obj.getPointsLength();
-		if(length < 2){
-			return;
-		}
-		rc.visible++;
-		
-		Path path = null;
-		float pathRotate = 0;
-		float xLength = 0;
-		float yLength = 0;
-		boolean inverse = false;
-		float xPrev = 0;
-		float yPrev = 0;
-		float xMid = 0;
-		float yMid = 0;
-		PointF middlePoint = new PointF();
-		int middle = obj.getPointsLength() / 2;
-		
-		for (int i = 0; i < length ; i++) {
-			PointF p = calcPoint(obj, i, rc);
-			if(i == 0 || i == length -1){
-				xMid += p.x;
-				yMid += p.y;
-			}
-			if (path == null) {
-				path = new Path();
-				path.moveTo(p.x, p.y);
-			} else {
-				xLength += p.x - xPrev; // not abs
-				yLength += p.y - yPrev; // not abs
-				if(i == middle){
-					middlePoint.set(p.x, p.y);
-					double rot = - Math.atan2(p.x - xPrev, p.y - yPrev) * 180 / Math.PI;
-					if (rot < 0) {
-						rot += 360;
-					}
-					if (rot < 180) {
-						rot += 180;
-						inverse = true;
-					}
-					pathRotate = (float) rot;
-				}
-				path.lineTo(p.x, p.y);
-			}
-			xPrev = p.x;
-			yPrev = p.y;
-		}
-		if (path != null) {
-			rc.main.updatePaint(paint);
-			canvas.drawPath(path, paint);
-			if (rc.second.strokeWidth != 0) {
-				rc.second.updatePaint(paint);
-				canvas.drawPath(path, paint);
-				if (rc.third.strokeWidth != 0) {
-					rc.third.updatePaint(paint);
-					canvas.drawPath(path, paint);
-				}
-			}
-			if (rc.adds != null) {
-				for (int i = 0; i < rc.adds.length; i++) {
-					rc.adds[i].updatePaint(paint);
-					canvas.drawPath(path, paint);
-				}
-			}
-			if (obj.getName() != null) {
-				String name = obj.getName();
-				rc.clearText();
-				name = TextRenderer.renderObjectText(name, subtype, type, rc.zoom, false, rc);
-				if(rc.textSize == 0 && rc.showAnotherText != null){
-					name = TextRenderer.renderObjectText(rc.showAnotherText, subtype, type, rc.zoom, false, rc);
-				}
-				if (name != null && rc.textSize > 0) {
-					if (!rc.showTextOnPath) {
-						TextDrawInfo text = new TextDrawInfo(name);
-						text.fillProperties(rc, middlePoint.x, middlePoint.y);
-						rc.textToDraw.add(text);
-					} 
-					if(rc.showAnotherText != null){
-						name = TextRenderer.renderObjectText(rc.showAnotherText, subtype, type, rc.zoom, false, rc);
-					}
-					
-					if (rc.showTextOnPath && paintText.measureText(obj.getName()) < Math.max(Math.abs(xLength), Math.abs(yLength))) {
-						if (inverse) {
-							path.rewind();
-							boolean st = true;
-							for (int i = obj.getPointsLength() - 1; i >= 0; i--) {
-								PointF p = calcPoint(obj, i, rc);
-								if (st) {
-									st = false;
-									path.moveTo(p.x, p.y);
-								} else {
-									path.lineTo(p.x, p.y);
-								}
-							}
-						}
-
-						TextDrawInfo text = new TextDrawInfo(name);
-						text.fillProperties(rc, xMid / 2, yMid / 2);
-						text.pathRotate = pathRotate;
-						text.drawOnPath = path;
-						text.vOffset = rc.main.strokeWidth / 2 - 1;
-						rc.textToDraw.add(text);
-
-					}
-				}
-			}
-		}
-	}
-	
-	private void drawPolygonOld(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype) {
-		float xText = 0;
-		float yText = 0;
-		int zoom = rc.zoom;
-		Path path = null;
-		rc.main.emptyArea();
-		rc.second.emptyLine();
-		rc.main.color = Color.rgb(245, 245, 245);
-		
-		PolygonRenderer.renderPolygon(rc, zoom, type, subtype, this);
-		if(!rc.main.fillArea){
-			return;
-		}
-		rc.visible++;
-		int len = obj.getPointsLength();
-		for (int i = 0; i < obj.getPointsLength(); i++) {
-
-			PointF p = calcPoint(obj, i, rc);
-			xText += p.x;
-			yText += p.y;
-			if (path == null) {
-				path = new Path();
-				path.moveTo(p.x, p.y);
-			} else {
-				path.lineTo(p.x, p.y);
-			}
-		}
-
-		if (path != null && len > 0) {
-			xText /= len;
-			yText /= len;
-
-			rc.main.updatePaint(paint);
-			canvas.drawPath(path, paint);
-			if (rc.second.strokeWidth != 0) {
-				rc.second.updatePaint(paint);
-				canvas.drawPath(path, paint);
-			}
-			String name = obj.getName();
-			if(name != null){
-				rc.clearText();
-				name = TextRenderer.renderObjectText(name, subtype, type, rc.zoom, true, rc);
-				if (rc.textSize > 0 && name != null) {
-					TextDrawInfo info = new TextDrawInfo(name);
-					info.fillProperties(rc, xText, yText);
-					rc.textToDraw.add(info);
-				}
-			}
-		}
-		return;
-	}
-	
-	private void drawPointOld(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype, boolean renderText) {
-		int resId = PointRenderer.getPointBitmap(rc.zoom, type, subtype);
-		String name = null;
-		if (renderText) {
-			name = obj.getName();
-			if (name != null) {
-				rc.clearText();
-				name = TextRenderer.renderObjectText(name, subtype, type, rc.zoom, true, rc);
-			}
-		}
-		if(resId == 0 && name == null){
-			return;
-		}
-		int len = obj.getPointsLength();
-		rc.visible++;
-		PointF ps = new PointF(0, 0);
-		for (int i = 0; i < len; i++) {
-			PointF p = calcPoint(obj, i, rc);
-			ps.x += p.x;
-			ps.y += p.y;
-		}
-		if(len > 1){
-			ps.x /= len;
-			ps.y /= len;
-		}
-		
-		if(resId != 0){
-			IconDrawInfo ico = new IconDrawInfo();
-			ico.x = ps.x;
-			ico.y = ps.y;
-			ico.resId = resId;
-			rc.iconsToDraw.add(ico);
-		}
-		if (name != null && rc.textSize > 0) {
-			TextDrawInfo info = new TextDrawInfo(name);
-			info.fillProperties(rc, ps.x, ps.y);
-			rc.textToDraw.add(info);
-		}
+	private static RenderingPaintProperties[] oneWay = null;
+	public static RenderingPaintProperties[] getOneWayProperties(){
+		if(oneWay == null){
+			PathEffect arrowDashEffect1 = new DashPathEffect(new float[] { 0, 12, 10, 152 }, 0);
+			PathEffect arrowDashEffect2 = new DashPathEffect(new float[] { 0, 12, 9, 153 }, 1);
+			PathEffect arrowDashEffect3 = new DashPathEffect(new float[] { 0, 18, 2, 154 }, 1);
+			PathEffect arrowDashEffect4 = new DashPathEffect(new float[] { 0, 18, 1, 155 }, 1);
+			oneWay = new RenderingPaintProperties[4];
+			oneWay[0] = new RenderingPaintProperties();
+			oneWay[0].emptyLine();
+			oneWay[0].color = 0xff6c70d5;
+			oneWay[0].strokeWidth = 1;
+			oneWay[0].pathEffect = arrowDashEffect1;
 			
-	}
-
-	private void drawMultiPolygonOld(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype) {
-		Path path = null;
-		rc.main.emptyArea();
-		rc.second.emptyLine();
-		rc.main.color = Color.rgb(245, 245, 245);
-		PolygonRenderer.renderPolygon(rc, rc.zoom, type, subtype, this);
-		if (!rc.main.fillArea) {
-			return;
+			oneWay[1] = new RenderingPaintProperties();
+			oneWay[1].emptyLine();
+			oneWay[1].color = 0xff6c70d5;
+			oneWay[1].strokeWidth = 2;
+			oneWay[1].pathEffect = arrowDashEffect2;
+			
+			oneWay[2] = new RenderingPaintProperties();
+			oneWay[2].emptyLine();
+			oneWay[2].color = 0xff6c70d5;
+			oneWay[2].strokeWidth = 3;
+			oneWay[2].pathEffect = arrowDashEffect3;
+			
+			oneWay[3] = new RenderingPaintProperties();
+			oneWay[3].emptyLine();
+			oneWay[3].color = 0xff6c70d5;
+			oneWay[3].strokeWidth = 4;
+			oneWay[3].pathEffect = arrowDashEffect4;
+				
 		}
-		rc.visible++;
-		path = new Path();
-		for (int i = 0; i < ((MultyPolygon) obj).getBoundsCount(); i++) {
-			int cnt = ((MultyPolygon) obj).getBoundPointsCount(i);
-			float xText = 0;
-			float yText = 0;
-			for (int j = 0; j < cnt; j++) {
-				PointF p = calcMultiPolygonPoint((MultyPolygon) obj, j, i, rc);
-				xText += p.x;
-				yText += p.y;
-				if (j == 0) {
-					path.moveTo(p.x, p.y);
-				} else {
-					path.lineTo(p.x, p.y);
-				}
-			}
-			if (cnt > 0) {
-				String name = ((MultyPolygon) obj).getName(i);
-				if (name != null) {
-					rc.clearText();
-					name = TextRenderer.renderObjectText(name, subtype, type, rc.zoom, true, rc);
-					if (rc.textSize > 0 && name != null) {
-						TextDrawInfo info = new TextDrawInfo(name);
-						info.fillProperties(rc, xText / cnt, yText / cnt);
-						rc.textToDraw.add(info);
-					}
-				}
-			}
-		}
-		rc.main.updatePaint(paint);
-		canvas.drawPath(path, paint);
-		if (rc.second.strokeWidth != 0) {
-		    //rc.second.strokeWidth = 1.5f;
-		    //rc.second.color = Color.BLACK; 
-		    
-			rc.second.updatePaint(paint);
-			canvas.drawPath(path, paint);
-		}
+		return oneWay;
 	}
 
 	
