@@ -11,18 +11,17 @@ public class ToDoConstants {
 
 	
 	// 	For 0.5 release
-	//  105. Input MAP_ZOOMS and MapRenderingTypes xml as parameter for index creator
-	//   86. Allow to add/edit custom tags to POI objects (Issue)
 	//   97. For voice navigation consider current speed of vehicle. Especially when speed > 50 pronounce more than 200 m
-	//   96. Introduce settings for MPH, imperial units
 	//  104. Add activity to show current loaded indexes and information about them
 	
-	// 	_19. colors for road trunk and motorway
-	
 	// Outside base 0.5 release
+	//   86. Allow to add/edit custom tags to POI objects (Issue)
 	//   92. Support poi index with standard map index and unify POI categories (unify done +)
+	//   96. Introduce settings for MPH, imperial units
+
+	// 	_19. colors for road trunk and motorway
+	// 	_12. Fix : find proper location for streets ! centralize them (when create index)?
 	
-	// 	_12. Fix : find proper location for streets ! centralize them (when create index)?	
 	/////////////////////////////  UNKNOWN STATE  ////////////////////
 	// Unscheduled (complex)
 	//   65. Intermediate points - for better control routing, to avoid traffic jams ...(?)
@@ -35,6 +34,7 @@ public class ToDoConstants {
 	
 	///////////////////////////   DONE //////////////////////////////
 	// DONE ANDROID :
+	//  105. Input MAP_ZOOMS and MapRenderingTypes xml as parameter for index creator
 	//   99. Implement better file downloader for big files
 	//  100. Show impoted gpx points (as favorites), sort the by distance
 	//   91. Invent binary format (minimize disk space, maximize speed)
