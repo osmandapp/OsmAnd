@@ -43,6 +43,7 @@ public class MapZooms {
 		int zeroLevel = 15;
 		List<MapZoomPair> list = new ArrayList<MapZoomPair>();
 		for(String s : split){
+			s = s.trim();
 			int i = s.indexOf('-');
 			if(i == -1){
 				zeroLevel = Integer.parseInt(s);

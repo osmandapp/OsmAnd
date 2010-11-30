@@ -29,10 +29,12 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 
 	private JTextField streetSuffixes;
 	private JTextField streetDefaultSuffixes;
+	private JTextField mapZooms;
+	private JTextField renderingTypesFile;
 
 	private JCheckBox useInternet;
-	private JCheckBox supressWarning;
-	private JCheckBox loadWholeOsmInfo;
+//	private JCheckBox supressWarning;
+//	private JCheckBox loadWholeOsmInfo;
 
 	public OsmExtractionPreferencesDialog(Component parent){
     	super(JOptionPane.getFrameForComponent(parent), true);
@@ -75,7 +77,8 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 	
 	private void createGeneralSection(JPanel root) {
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(3, 1, 5, 5));
+//		panel.setLayout(new GridLayout(3, 1, 5, 5));
+		panel.setLayout(new GridLayout(1, 1, 5, 5));
 		panel.setBorder(BorderFactory.createTitledBorder(Messages.getString("OsmExtractionPreferencesDialog.GENERAL"))); //$NON-NLS-1$
 		root.add(panel);
 		
@@ -84,15 +87,16 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		useInternet.setSelected(DataExtractionSettings.getSettings().useInternetToLoadImages());
 		panel.add(useInternet);
 		
-		supressWarning = new JCheckBox();
-		supressWarning.setText(Messages.getString("OsmExtractionPreferencesDialog.DUPLICATED.ID")); //$NON-NLS-1$
-		supressWarning.setSelected(DataExtractionSettings.getSettings().isSupressWarningsForDuplicatedId());
-		panel.add(supressWarning);
+//		supressWarning = new JCheckBox();
+//		supressWarning.setText(Messages.getString("OsmExtractionPreferencesDialog.DUPLICATED.ID")); //$NON-NLS-1$
+//		supressWarning.setSelected(DataExtractionSettings.getSettings().isSupressWarningsForDuplicatedId());
+//		panel.add(supressWarning);
+//		
+//		loadWholeOsmInfo = new JCheckBox();
+//		loadWholeOsmInfo.setText(Messages.getString("OsmExtractionPreferencesDialog.LOAD.WHOLE.OSM")); //$NON-NLS-1$
+//		loadWholeOsmInfo.setSelected(DataExtractionSettings.getSettings().getLoadEntityInfo());
+//		panel.add(loadWholeOsmInfo);
 		
-		loadWholeOsmInfo = new JCheckBox();
-		loadWholeOsmInfo.setText(Messages.getString("OsmExtractionPreferencesDialog.LOAD.WHOLE.OSM")); //$NON-NLS-1$
-		loadWholeOsmInfo.setSelected(DataExtractionSettings.getSettings().getLoadEntityInfo());
-		panel.add(loadWholeOsmInfo);
 		panel.setMaximumSize(new Dimension(Short.MAX_VALUE, panel.getPreferredSize().height));
 		
 	}
@@ -101,7 +105,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		JPanel panel = new JPanel();
 		GridBagLayout l = new GridBagLayout();
 		panel.setLayout(l);
-		panel.setBorder(BorderFactory.createTitledBorder(Messages.getString("OsmExtractionPreferencesDialog.NORMALIZE.STREETS"))); //$NON-NLS-1$
+		panel.setBorder(BorderFactory.createTitledBorder("Map creation parameters"));
 		root.add(panel);
 
 		JLabel label = new JLabel(Messages.getString("OsmExtractionPreferencesDialog.NAME.SUFFIXES")); //$NON-NLS-1$
@@ -142,6 +146,48 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		constr.gridx = 1;
 		constr.gridy = 1;
 		l.setConstraints(streetDefaultSuffixes, constr);
+		
+		label = new JLabel("Map zooms (specify zoom levels in binary map <= 4)"); 
+		panel.add(label);
+		constr = new GridBagConstraints();
+		constr.ipadx = 5;
+		constr.gridx = 0;
+		constr.gridy = 2;
+		constr.anchor = GridBagConstraints.WEST;
+		l.setConstraints(label, constr);
+		
+		mapZooms = new JTextField();
+		mapZooms.setText(DataExtractionSettings.getSettings().getMapZoomsValue());
+		panel.add(mapZooms);
+		constr = new GridBagConstraints();
+		constr.weightx = 1;
+		constr.fill = GridBagConstraints.HORIZONTAL;
+		constr.ipadx = 5;
+		constr.gridx = 1;
+		constr.gridy = 2;
+		l.setConstraints(mapZooms, constr);
+		
+		
+		label = new JLabel("Rendering types (xml config to extract osm data) file path"); 
+		panel.add(label);
+		constr = new GridBagConstraints();
+		constr.ipadx = 5;
+		constr.gridx = 0;
+		constr.gridy = 3;
+		constr.anchor = GridBagConstraints.WEST;
+		l.setConstraints(label, constr);
+		
+		renderingTypesFile = new JTextField();
+		renderingTypesFile.setText(DataExtractionSettings.getSettings().getMapRenderingTypesFile());
+		panel.add(renderingTypesFile);
+		constr = new GridBagConstraints();
+		constr.weightx = 1;
+		constr.fill = GridBagConstraints.HORIZONTAL;
+		constr.ipadx = 5;
+		constr.gridx = 1;
+		constr.gridy = 3;
+		l.setConstraints(renderingTypesFile, constr);
+		
 		panel.setMaximumSize(new Dimension(Short.MAX_VALUE, panel.getPreferredSize().height));
 	}
 
@@ -175,12 +221,19 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		if(settings.useInternetToLoadImages() != useInternet.isSelected()){
 			settings.setUseInterentToLoadImages(useInternet.isSelected());
 		}
-		if(settings.isSupressWarningsForDuplicatedId() != supressWarning.isSelected()){
-			settings.setSupressWarningsForDuplicatedId	(supressWarning.isSelected());
+		
+		if(!settings.getMapZoomsValue().equals(mapZooms.getText())){
+			settings.setMapZooms(mapZooms.getText());
 		}
-		if(settings.getLoadEntityInfo() != loadWholeOsmInfo.isSelected()){
-			settings.setLoadEntityInfo(loadWholeOsmInfo.isSelected());
+		if(!settings.getMapRenderingTypesFile().equals(renderingTypesFile.getText())){
+			settings.setMapRenderingTypesFile(renderingTypesFile.getText());
 		}
+//		if(settings.isSupressWarningsForDuplicatedId() != supressWarning.isSelected()){
+//			settings.setSupressWarningsForDuplicatedId	(supressWarning.isSelected());
+//		}
+//		if(settings.getLoadEntityInfo() != loadWholeOsmInfo.isSelected()){
+//			settings.setLoadEntityInfo(loadWholeOsmInfo.isSelected());
+//		}
 		
 	}
 	

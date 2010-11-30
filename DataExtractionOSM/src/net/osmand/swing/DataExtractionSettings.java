@@ -57,7 +57,13 @@ public class DataExtractionSettings {
 		return MapZooms.parseZooms(value);
 	}
 	
+	public String getMapZoomsValue(){
+		return preferences.get("map_zooms", MapZooms.MAP_ZOOMS_DEFAULT);
+	}
+	
 	public void setMapZooms(String zooms){
+		// check string
+		MapZooms.parseZooms(zooms);
 		preferences.put("map_zooms", zooms);
 	}
 	
