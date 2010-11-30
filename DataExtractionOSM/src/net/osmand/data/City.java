@@ -4,6 +4,7 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import net.osmand.Algoritms;
@@ -48,14 +49,21 @@ public class City extends MapObject {
 	private CityType type = null;
 	// Be attentive ! Working with street names ignoring case
 	private Map<String, Street> streets = new TreeMap<String, Street>(Collator.getInstance()); 
+	private String isin = null;
 	
 	public City(Node el){
 		super(el);
 		type = CityType.valueFromString(el.getTag(OSMTagKey.PLACE));
+		isin = el.getTag(OSMTagKey.IS_IN);
+		isin = isin != null ? isin.toLowerCase() : null;
 	}
 	
 	public City(CityType type){
 		this.type = type;
+	}
+	
+	public String getIsInValue() {
+		return isin;
 	}
 	
 	public boolean isEmptyWithStreets(){
