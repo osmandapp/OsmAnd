@@ -153,17 +153,11 @@ public class IndexCreator {
 	private RTree transportStopsTree;
 
 	private RTree[] mapTree = null;
-	// maximum 5 limitation => 4 levels allowed
-	public static final int[] MAP_ZOOMS = new int[] { 5, 8, 11, 14, 22 };
-	// public static final int[] MAP_ZOOMS = new int[]{5, 9, 14, 22};
+	private MapZooms mapZooms = null;  
+	
 
 	// MEMORY map : save it in memory while that is allowed
-	private Map<Long, Set<Integer>>[] multiPolygonsWays = new Map[MAP_ZOOMS.length - 1];
-	{
-		for (int i = 0; i < multiPolygonsWays.length; i++) {
-			multiPolygonsWays[i] = new LinkedHashMap<Long, Set<Integer>>();
-		}
-	}
+	private Map<Long, Set<Integer>>[] multiPolygonsWays;
 	private Map<Long, String> multiPolygonsNames = new LinkedHashMap<Long, String>();
 	private Map<Long, List<Long>> highwayRestrictions = new LinkedHashMap<Long, List<Long>>();
 
@@ -231,7 +225,7 @@ public class IndexCreator {
 		this.normalizeStreets = normalizeStreets;
 	}
 
-	protected static int defineLevel(int minZoom) {
+/*	protected static int defineLevel(int minZoom) {
 		int level = 0;
 		if (minZoom < 15) {
 			for (int i = 1; i < MAP_ZOOMS.length; i++) {
@@ -243,7 +237,7 @@ public class IndexCreator {
 		}
 		return level;
 	}
-
+*/
 	protected class NewDataExtractionOsmFilter implements IOsmStorageFilter {
 
 		int currentCountNode = 0;
@@ -1130,7 +1124,7 @@ public class IndexCreator {
 				// manipulate what kind of way to load
 				loadEntityData(e, false);
 				boolean inverse = "-1".equals(e.getTag(OSMTagKey.ONEWAY)); //$NON-NLS-1$
-				for (int i = 0; i < MAP_ZOOMS.length - 1; i++) {
+				for (int i = 0; i < mapZooms.size(); i++) {
 					writeBinaryEntityToMapDatabase(e, e.getId(), i == 0 ? inverse : false, i);
 				}
 
@@ -1374,7 +1368,7 @@ public class IndexCreator {
 	}
 
 	private int findMultiPolygonType(Entity e, int level) {
-		int t = MapRenderingTypes.encodeEntityWithType(e, MAP_ZOOMS[MAP_ZOOMS.length - level - 1], true, typeUse);
+		int t = MapRenderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), true, typeUse);
 		int mtType = 0;
 		if (t != 0) {
 			if ((t & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
@@ -1501,7 +1495,7 @@ public class IndexCreator {
 	}
 
 	private void writeBinaryEntityToMapDatabase(Entity e, long baseId, boolean inverse, int level) throws SQLException {
-		int type = MapRenderingTypes.encodeEntityWithType(e, MAP_ZOOMS[MAP_ZOOMS.length - level - 1], false, typeUse);
+		int type = MapRenderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), false, typeUse);
 		Map<Long, Set<Integer>> multiPolygonsWays = this.multiPolygonsWays[level];
 		boolean hasMulti = e instanceof Way && multiPolygonsWays.containsKey(e.getId());
 		if (hasMulti) {
@@ -1545,7 +1539,7 @@ public class IndexCreator {
 		int zoom;
 		long id = (baseId << 3) | ((level & 3) << 1);
 		rtree = mapTree[level];
-		zoom = MAP_ZOOMS[MAP_ZOOMS.length - level - 1] - 1;
+		zoom = mapZooms.getLevel(level).getMaxZoom() - 1;
 		boolean skip = false;
 
 		String eName = MapRenderingTypes.getEntityName(e, type);
@@ -1690,7 +1684,7 @@ public class IndexCreator {
 			
 			visitedWays.add(id);
 			int level = rs.getInt(7);
-			int zoom = MAP_ZOOMS[MAP_ZOOMS.length - level - 1];
+			int zoom = mapZooms.getLevel(level).getMaxZoom();
 			
 			long startNode = rs.getLong(2);
 			long endNode = rs.getLong(3);
@@ -1980,14 +1974,14 @@ public class IndexCreator {
 
 			writer.startWriteMapIndex(regionName);
 
-			for (int i = 0; i < MAP_ZOOMS.length - 1; i++) {
+			for (int i = 0; i < mapZooms.size(); i++) {
 				RTree rtree = mapTree[i];
 				long rootIndex = rtree.getFileHdr().getRootIndex();
 				rtree.Node root = rtree.getReadNode(rootIndex);
 				Rect rootBounds = calcBounds(root);
 				if (rootBounds != null) {
 					boolean last = nodeIsLastSubTree(rtree, rootIndex);
-					writer.startWriteMapLevelIndex(MAP_ZOOMS[MAP_ZOOMS.length - i - 2] + 1, MAP_ZOOMS[MAP_ZOOMS.length - i - 1], rootBounds
+					writer.startWriteMapLevelIndex(mapZooms.getLevel(i).getMinZoom(), mapZooms.getLevel(i).getMaxZoom(), rootBounds
 							.getMinX(), rootBounds.getMaxX(), rootBounds.getMinY(), rootBounds.getMaxY());
 					if (last) {
 						writer.startMapTreeElement(rootBounds.getMinX(), rootBounds.getMaxX(), rootBounds.getMinY(), rootBounds.getMaxY());
@@ -2235,9 +2229,15 @@ public class IndexCreator {
 		return mapFile.getAbsolutePath() + ".prtree"; //$NON-NLS-1$
 	}
 
-	public void generateIndexes(File readFile, IProgress progress, IOsmStorageFilter addFilter) throws IOException, SAXException,
+	public void generateIndexes(File readFile, IProgress progress, IOsmStorageFilter addFilter, MapZooms mapZooms) throws IOException, SAXException,
 			SQLException {
 
+		this.mapZooms = mapZooms;
+		multiPolygonsWays = new Map[mapZooms.size()];
+		for (int i = 0; i < multiPolygonsWays.length; i++) {
+			multiPolygonsWays[i] = new LinkedHashMap<Long, Set<Integer>>();
+		}
+		
 		// clear previous results and setting variables
 		if (readFile != null && regionName == null) {
 			int i = readFile.getName().indexOf('.');
@@ -2301,8 +2301,8 @@ public class IndexCreator {
 				mapConnection.setAutoCommit(false);
 				try {
 					if (indexMap) {
-						mapTree = new RTree[MAP_ZOOMS.length - 1];
-						for (int i = 0; i < MAP_ZOOMS.length - 1; i++) {
+						mapTree = new RTree[mapZooms.size()];
+						for (int i = 0; i < mapZooms.size(); i++) {
 							mapTree[i] = new RTree(getRTreeMapIndexPackFileName() + i);
 						}
 
@@ -2397,7 +2397,7 @@ public class IndexCreator {
 				if (indexMap) {
 					progress.setGeneralProgress("[90 / 100]"); //$NON-NLS-1$
 					progress.startTask(Messages.getString("IndexCreator.PACK_RTREE_MAP"), -1); //$NON-NLS-1$
-					for (int i = 0; i < MAP_ZOOMS.length - 1; i++) {
+					for (int i = 0; i < mapZooms.size(); i++) {
 						mapTree[i] = packRtreeFile(mapTree[i], getRTreeMapIndexNonPackFileName() + i, getRTreeMapIndexPackFileName() + i);
 					}
 				}
@@ -2663,8 +2663,8 @@ public class IndexCreator {
 			mapBinaryStat = DataIndexWriter.createStatementMapBinaryInsert(mapConnection);
 			mapLowLevelBinaryStat = DataIndexWriter.createStatementLowLevelMapBinaryInsert(mapConnection);
 			try {
-				mapTree = new RTree[MAP_ZOOMS.length - 1];
-				for (int i = 0; i < MAP_ZOOMS.length - 1; i++) {
+				mapTree = new RTree[mapZooms.size()];
+				for (int i = 0; i < mapZooms.size(); i++) {
 					File file = new File(getRTreeMapIndexNonPackFileName() + i);
 					if (file.exists()) {
 						file.delete();
@@ -2777,7 +2777,7 @@ public class IndexCreator {
 		creator.deleteDatabaseIndexes = true;
 
 		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null);
+		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null, MapZooms.getDefault());
 		
 
 //		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb")); //$NON-NLS-1$

@@ -25,6 +25,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.data.preparation.IndexCreator;
+import net.osmand.data.preparation.MapZooms;
 import net.osmand.impl.ConsoleProgressImplementation;
 
 import org.apache.commons.logging.Log;
@@ -50,6 +51,7 @@ public class IndexBatchCreator {
 	boolean downloadFiles = false;
 	boolean generateIndexes = false;
 	boolean uploadIndexes = false;
+	MapZooms mapZooms = null;
 	boolean deleteFilesAfterUploading = true;
 	
 	File osmDirFiles;
@@ -123,6 +125,12 @@ public class IndexBatchCreator {
 		indexMap = Boolean.parseBoolean(process.getAttribute("indexMap"));
 		indexTransport = Boolean.parseBoolean(process.getAttribute("indexTransport"));
 		indexAddress = Boolean.parseBoolean(process.getAttribute("indexAddress"));
+		String zooms = process.getAttribute("mapZooms");
+		if(zooms == null || zooms.length() == 0){
+			mapZooms = MapZooms.getDefault();
+		} else {
+			mapZooms = MapZooms.parseZooms(zooms);
+		}
 	
 		String dir = process.getAttribute("directory_for_osm_files");
 		if(dir == null || !new File(dir).exists()) {
@@ -288,7 +296,7 @@ public class IndexBatchCreator {
 			indexCreator.setMapFileName(mapFileName);
 			try {
 				alreadyGeneratedFiles.add(f.getName());
-				indexCreator.generateIndexes(f, new ConsoleProgressImplementation(3),  null);
+				indexCreator.generateIndexes(f, new ConsoleProgressImplementation(3),  null, mapZooms);
 				if (indexPOI) {
 					uploadIndex(new File(indexDirFiles, poiFileName), alreadyUploadedFiles);
 				}
