@@ -62,8 +62,8 @@ public enum AmenityType {
 		return AmenityType.values();
 	}
 	
-	public static Collection<String> getSubCategories(AmenityType t){
-		Map<AmenityType, Map<String, String>> amenityTypeNameToTagVal = MapRenderingTypes.getAmenityTypeNameToTagVal();
+	public static Collection<String> getSubCategories(AmenityType t, MapRenderingTypes renderingTypes){
+		Map<AmenityType, Map<String, String>> amenityTypeNameToTagVal = renderingTypes.getAmenityTypeNameToTagVal();
 		if(!amenityTypeNameToTagVal.containsKey(t)){
 			return Collections.emptyList(); 
 		}

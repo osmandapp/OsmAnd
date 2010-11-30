@@ -15,6 +15,7 @@ import net.osmand.R;
 import net.osmand.activities.search.SearchPOIActivity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
+import net.osmand.osm.MapRenderingTypes;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.AlertDialog.Builder;
@@ -163,7 +164,7 @@ public class EditPOIFilterActivity extends ListActivity {
 		ScrollView scroll = new ScrollView(this);
 		ListView listView = new ListView(this);
 		
-		final LinkedHashSet<String> subCategories = new LinkedHashSet<String>(AmenityType.getSubCategories(amenity));
+		final LinkedHashSet<String> subCategories = new LinkedHashSet<String>(AmenityType.getSubCategories(amenity, MapRenderingTypes.getDefault()));
 		List<String> subtypes = filter.getAcceptedSubtypes(amenity);
 		boolean allSubTypesAccepted = subtypes == null;
 		LinkedHashSet<String> acceptedCategories = subtypes == null ? null : new LinkedHashSet<String>(subtypes);

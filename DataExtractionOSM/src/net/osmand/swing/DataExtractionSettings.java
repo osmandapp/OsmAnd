@@ -61,6 +61,15 @@ public class DataExtractionSettings {
 		preferences.put("map_zooms", zooms);
 	}
 	
+	
+	public String getMapRenderingTypesFile(){
+		return preferences.get("rendering_types_file", "");
+	}
+	
+	
+	public void setMapRenderingTypesFile(String fileName){
+		preferences.put("rendering_types_file", fileName);
+	}
 	public int getDefaultZoom(){
 		return preferences.getInt("default_zoom",  5);
 	}

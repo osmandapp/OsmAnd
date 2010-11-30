@@ -30,20 +30,21 @@ public class BinaryInspector {
 	public static void main(String[] args) throws IOException {
 		inspector(args);
 		// test cases show info
-//		inspector(new String[]{"E:\\Information\\OSM maps\\osmand\\Minsk.map.pbf"});
-//		inspector(new String[]{"E:\\Information\\OSM maps\\osmand\\Belarus_4.map.pbf"});
+//		inspector(new String[]{"E:\\Information\\OSM maps\\osmand\\Minsk.obf"});
+//		inspector(new String[]{"E:\\Information\\OSM maps\\osmand\\Belarus_4.obf"});
+//		inspector(new String[]{"E:\\Information\\OSM maps\\osmand\\Belarus.obf"});
 //		inspector(new String[]{"E:\\Information\\OSM maps\\osm_map\\Poland.obf"});
-//		inspector(new String[]{"E:\\Information\\OSM maps\\osm_map\\Netherlands\\Netherlands_trans.map.pbf"});
+//		inspector(new String[]{"E:\\Information\\OSM maps\\osm_map\\Netherlands\\Netherlands_trans.map.obf"});
 		
 		// test case extract parts
-//		inspector(new String[]{"-c", "E:\\Information\\OSM maps\\osmand\\Netherlands-addr-trans.map.pbf", 
-//				"E:\\Information\\OSM maps\\osmand\\Netherlands.map.pbf", "-1"});
+//		inspector(new String[]{"-c", "E:\\Information\\OSM maps\\osmand\\Netherlands-addr-trans.map.obf", 
+//				"E:\\Information\\OSM maps\\osmand\\Netherlands.map.obf", "-1"});
 		
 		// test case 
-//		inspector(new String[]{"-c", "E:\\Information\\OSM maps\\osmand\\Netherlands-addr-trans.map.pbf", 
-//				"E:\\Information\\OSM maps\\osmand\\Netherlands.map.pbf", "-1",
-//				"E:\\Information\\OSM maps\\osmand\\Belarus_4.map.pbf", "E:\\Information\\OSM maps\\osmand\\Minsk.map.pbf"});
-//		inspector(new String[]{"E:\\Information\\OSM maps\\osmand\\Netherlands-addr-trans.map.pbf"});
+//		inspector(new String[]{"-c", "E:\\Information\\OSM maps\\osmand\\Netherlands-addr-trans.map.obf", 
+//				"E:\\Information\\OSM maps\\osmand\\Netherlands.map.obf", "-1",
+//				"E:\\Information\\OSM maps\\osmand\\Belarus_4.map.obf", "E:\\Information\\OSM maps\\osmand\\Minsk.map.obf"});
+//		inspector(new String[]{"E:\\Information\\OSM maps\\osmand\\Netherlands-addr-trans.map.obf"});
 	}
 	
 
@@ -74,7 +75,7 @@ public class BinaryInspector {
 							} 
 						}
 					}
-					List<Integer> extracted = combineParts(new File(args[1]), parts);
+					List<Float> extracted = combineParts(new File(args[1]), parts);
 					if(extracted != null){
 						System.out.println("\n"+extracted.size()+" parts were successfully extracted to " + args[1]);
 					}
@@ -100,11 +101,11 @@ public class BinaryInspector {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static List<Integer> combineParts(File fileToExtract, Map<File, String> partsToExtractFrom) throws IOException {
+	public static List<Float> combineParts(File fileToExtract, Map<File, String> partsToExtractFrom) throws IOException {
 		BinaryMapIndexReader[] indexes = new BinaryMapIndexReader[partsToExtractFrom.size()];
 		RandomAccessFile[] rafs = new RandomAccessFile[partsToExtractFrom.size()];
 		
-		LinkedHashSet<Integer>[] partsSet = new LinkedHashSet[partsToExtractFrom.size()];
+		LinkedHashSet<Float>[] partsSet = new LinkedHashSet[partsToExtractFrom.size()];
 		int c = 0;
 		Set<String> addressNames = new LinkedHashSet<String>();
 		
@@ -117,7 +118,7 @@ public class BinaryInspector {
 			}
 			rafs[c] = new RandomAccessFile(f, "r");
 			indexes[c] = new BinaryMapIndexReader(rafs[c]);
-			partsSet[c] = new LinkedHashSet<Integer>();
+			partsSet[c] = new LinkedHashSet<Float>();
 			if(version == -1){
 				version = indexes[c].getVersion();
 			} else {
@@ -127,19 +128,19 @@ public class BinaryInspector {
 				}
 			}
 			
-			LinkedHashSet<Integer> temp = new LinkedHashSet<Integer>();
+			LinkedHashSet<Float> temp = new LinkedHashSet<Float>();
 			String pattern = partsToExtractFrom.get(f);
 			boolean minus = true;
 			if(pattern != null){
 				minus = pattern.startsWith("-");
 				String[] split = pattern.substring(1).split(",");
 				for(String s : split){
-					temp.add(Integer.parseInt(s));
+					temp.add(Float.parseFloat(s));
 				}
 			}
 			
 			for (int i = 0; i < indexes[c].getIndexes().size(); i++) {
-				partsSet[c].add(i + 1);
+				partsSet[c].add(i + 1f);
 			}
 			if(minus){
 				partsSet[c].removeAll(temp);
@@ -153,21 +154,21 @@ public class BinaryInspector {
 		// write files 
 		FileOutputStream fout = new FileOutputStream(fileToExtract);
 		CodedOutputStream ous = CodedOutputStream.newInstance(fout, BUFFER_SIZE);
-		List<Integer> list = new ArrayList<Integer>();
+		List<Float> list = new ArrayList<Float>();
 		byte[] BUFFER_TO_READ = new byte[BUFFER_SIZE];
 		
 		ous.writeInt32(OsmandOdb.OsmAndStructure.VERSION_FIELD_NUMBER, version);
 		
 		
 		for (int k = 0; k < indexes.length; k++) {
-			LinkedHashSet<Integer> partSet = partsSet[k];
+			LinkedHashSet<Float> partSet = partsSet[k];
 			BinaryMapIndexReader index = indexes[k];
 			RandomAccessFile raf = rafs[k];
 			for (int i = 0; i < index.getIndexes().size(); i++) {
-				if (!partSet.contains(i + 1)) {
+				if (!partSet.contains(i + 1f)) {
 					continue;
 				}
-				list.add(i + 1);
+				list.add(i + 1f);
 
 				BinaryIndexPart part = index.getIndexes().get(i);
 				String map;
@@ -175,7 +176,7 @@ public class BinaryInspector {
 					ous.writeTag(OsmandOdb.OsmAndStructure.ADDRESSINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 					map = "Address";
 					if (addressNames.contains(part.getName())) {
-						System.err.println("Error : going to merge 2 same addresses skip " + part.getName());
+						System.err.println("Error : going to merge 2 addresses with same names. Skip " + part.getName());
 						continue;
 					}
 					addressNames.add(part.getName());
@@ -249,10 +250,12 @@ public class BinaryInspector {
 							ti.getTop() << sh, ti.getBottom() << sh));
 				} else if(p instanceof MapIndex){
 					MapIndex m = ((MapIndex) p);
+					int j = 1;
 					for(MapRoot mi : m.getRoots()){
-						System.out.println(MessageFormat.format("\tMap level minZoom = {0}, maxZoom = {1}, size = {2} bytes \n\t\tBounds {3}",
+						System.out.println(MessageFormat.format("\t{4}.{5} Map level minZoom = {0}, maxZoom = {1}, size = {2} bytes \n\t\tBounds {3}",
 								mi.getMinZoom(), mi.getMaxZoom(), mi.getLength(), 
-								formatBounds(mi.getLeft(), mi.getRight(), mi.getTop(), mi.getBottom())));
+								formatBounds(mi.getLeft(), mi.getRight(), mi.getTop(), mi.getBottom()), 
+								i, j++));
 					}
 				}
 				i++;

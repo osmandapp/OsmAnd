@@ -154,6 +154,7 @@ public class IndexCreator {
 
 	private RTree[] mapTree = null;
 	private MapZooms mapZooms = null;  
+	private MapRenderingTypes renderingTypes = MapRenderingTypes.getDefault();
 	
 
 	// MEMORY map : save it in memory while that is allowed
@@ -1368,7 +1369,7 @@ public class IndexCreator {
 	}
 
 	private int findMultiPolygonType(Entity e, int level) {
-		int t = MapRenderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), true, typeUse);
+		int t = renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), true, typeUse);
 		int mtType = 0;
 		if (t != 0) {
 			if ((t & 3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
@@ -1495,7 +1496,7 @@ public class IndexCreator {
 	}
 
 	private void writeBinaryEntityToMapDatabase(Entity e, long baseId, boolean inverse, int level) throws SQLException {
-		int type = MapRenderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), false, typeUse);
+		int type = renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), false, typeUse);
 		Map<Long, Set<Integer>> multiPolygonsWays = this.multiPolygonsWays[level];
 		boolean hasMulti = e instanceof Way && multiPolygonsWays.containsKey(e.getId());
 		if (hasMulti) {
@@ -1996,7 +1997,7 @@ public class IndexCreator {
 				}
 			}
 			selectData.close();
-			writer.writeMapEncodingRules(MapRenderingTypes.getEncodingRuleTypes());
+			writer.writeMapEncodingRules(renderingTypes.getEncodingRuleTypes());
 			writer.endWriteMapIndex();
 			writer.flush();
 		} catch (RTreeException e) {
@@ -2229,8 +2230,12 @@ public class IndexCreator {
 		return mapFile.getAbsolutePath() + ".prtree"; //$NON-NLS-1$
 	}
 
-	public void generateIndexes(File readFile, IProgress progress, IOsmStorageFilter addFilter, MapZooms mapZooms) throws IOException, SAXException,
+	public void generateIndexes(File readFile, IProgress progress, IOsmStorageFilter addFilter, MapZooms mapZooms, MapRenderingTypes renderingTypes) 
+	throws IOException, SAXException,
 			SQLException {
+		if(renderingTypes != null){
+			this.renderingTypes = renderingTypes;
+		}
 
 		this.mapZooms = mapZooms;
 		multiPolygonsWays = new Map[mapZooms.size()];
@@ -2777,7 +2782,8 @@ public class IndexCreator {
 		creator.deleteDatabaseIndexes = true;
 
 		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null, MapZooms.getDefault());
+		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), 
+				null, MapZooms.getDefault(), null);
 		
 
 //		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb")); //$NON-NLS-1$

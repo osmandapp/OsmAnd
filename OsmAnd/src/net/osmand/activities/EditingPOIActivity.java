@@ -185,7 +185,7 @@ public class EditingPOIActivity {
 			@Override
 			public void afterTextChanged(Editable s) {
 				String str = s.toString();
-				AmenityType t = MapRenderingTypes.getAmenityNameToType().get(str);
+				AmenityType t = MapRenderingTypes.getDefault().getAmenityNameToType().get(str);
 				if(t != null && a.getType() != t){
 					a.setType(t);
 					typeButton.setText(AmenityType.toPublicString(t));
@@ -241,7 +241,7 @@ public class EditingPOIActivity {
 				final String msg = n.getId() == -1 ? resources.getString(R.string.poi_action_add) : resources
 						.getString(R.string.poi_action_change);
 				String action = n.getId() == -1 ? CREATE_ACTION : MODIFY_ACTION;
-				Map<AmenityType, Map<String, String>> typeNameToTagVal = MapRenderingTypes.getAmenityTypeNameToTagVal();
+				Map<AmenityType, Map<String, String>> typeNameToTagVal = MapRenderingTypes.getDefault().getAmenityTypeNameToTagVal();
 				AmenityType type = a.getType();
 				String tag = type.getDefaultTag();
 				String subType = typeText.getText().toString();
@@ -289,8 +289,8 @@ public class EditingPOIActivity {
 	
 	private void updateSubTypesAdapter(AmenityType t){
 		
-		Set<String> subCategories = new LinkedHashSet<String>(AmenityType.getSubCategories(t));
-		for(String s : MapRenderingTypes.getAmenityNameToType().keySet()){
+		Set<String> subCategories = new LinkedHashSet<String>(AmenityType.getSubCategories(t, MapRenderingTypes.getDefault()));
+		for(String s : MapRenderingTypes.getDefault().getAmenityNameToType().keySet()){
 			if(!subCategories.contains(s)){
 				subCategories.add(s);
 			}

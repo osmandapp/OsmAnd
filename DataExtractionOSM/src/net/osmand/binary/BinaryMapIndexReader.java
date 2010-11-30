@@ -669,7 +669,7 @@ public class BinaryMapIndexReader {
 			case 0:
 				if(index.encodingRules.isEmpty()){
 					// init encoding rules by default
-					Map<String, MapRulType> map = MapRenderingTypes.getEncodingRuleTypes();
+					Map<String, MapRulType> map = MapRenderingTypes.getDefault().getEncodingRuleTypes();
 					for(String tags : map.keySet()){
 						MapRulType rt = map.get(tags);
 						if(rt.getType(null) != 0){
