@@ -27,7 +27,7 @@
         <!-- Countries to download from osm server -->
 
 		<!-- EUROPE -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/europe/{0}.osm.bz2" region_prefix="" skip="true">
+		<regions siteToDownload="http://download.geofabrik.de/osm/europe/{0}.osm.bz2" region_prefix="" skip="true" region_suffix="_Europe">
 			<region name="albania" esize="6" />
 			<region name="andorra" esize="1" />
 			<region name="austria" esize="110" />
@@ -78,7 +78,7 @@
 		</regions>
 
 		<!-- FRANCE -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/europe/france/{0}.osm.bz2" region_prefix="France_">
+		<regions siteToDownload="http://download.geofabrik.de/osm/europe/france/{0}.osm.bz2" region_prefix="France_" region_suffix="_Europe">
 			<region name="alsace" esize="" />
 			<region name="aquitaine" esize="" />
 			<region name="auvergne" esize="" />
@@ -104,7 +104,7 @@
 		</regions>
 
 		<!-- GERMANY -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/europe/germany/{0}.osm.bz2" region_prefix="Germany_">
+		<regions siteToDownload="http://download.geofabrik.de/osm/europe/germany/{0}.osm.bz2" region_prefix="Germany_" region_suffix="_Europe">
 			<region name="baden-wuerttemberg" esize="" />
 			<region name="bayern" esize="" />
 			<region name="berlin" esize="" />
@@ -124,7 +124,7 @@
 		</regions>
 
 		<!--  CENTRAL AMERICA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/north_america/{0}/{0}.osm.bz2" region_prefix="">
+		<regions siteToDownload="http://downloads.cloudmade.com/north_america/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_NA">
 			<region name="bahamas" esize="" />
 			<region name="costa_rica" esize="" />
 			<region name="cuba" esize="" />
@@ -163,7 +163,7 @@
 		
 		
 		<!--  SOUTH AMERICA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/south_america/{0}/{0}.osm.bz2" region_prefix="">
+		<regions siteToDownload="http://downloads.cloudmade.com/south_america/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_SA">
 			<region name="argentina" esize=""/>
 			<region name="bolivia" esize=""/>
 			<region name="brazil" esize=""/>
@@ -182,7 +182,7 @@
 		
 		
 		<!-- ASIA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/asia/{0}/{0}.osm.bz2" region_prefix="">
+		<regions siteToDownload="http://downloads.cloudmade.com/asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia">
 			<region name="afghanistan" esize=""/>
 			<region name="bahrain" esize=""/>
 			<region name="bangladesh" esize=""/>
@@ -235,7 +235,7 @@
 		</regions>
 		
 		<!-- USA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/north_america/united_states/{0}/{0}.osm.bz2" region_prefix="US_">
+		<regions siteToDownload="http://downloads.cloudmade.com/north_america/united_states/{0}/{0}.osm.bz2" region_prefix="US_" region_suffix="_NA">
 			<region name="alabama" esize=""/>
 			<region name="alaska" esize=""/>
 			<region name="arizona" esize=""/>
@@ -291,7 +291,7 @@
 		</regions>
 		
 		<!-- Canada -->
-		<regions siteToDownload="http://downloads.cloudmade.com/north_america/canada/{0}/{0}.osm.bz2" region_prefix="Canada_">
+		<regions siteToDownload="http://downloads.cloudmade.com/north_america/canada/{0}/{0}.osm.bz2" region_prefix="Canada_" region_suffix="_NA">
 			<region name="alberta" esize=""/>
 			<region name="british_columbia" esize=""/>
 			<region name="manitoba" esize=""/>
@@ -308,7 +308,7 @@
 		</regions>
 		
 		<!-- Russia -->
-		<regions siteToDownload="http://gis-lab.info/data/osm/{0}/{0}.osm.bz2" region_prefix="Russia_">
+		<regions siteToDownload="http://gis-lab.info/data/osm/{0}/{0}.osm.bz2" region_prefix="Russia_" region_suffix="_Asia">
 			<region name="adygeya" esize=""/>
 			<region name="altay" esize=""/>
 			<region name="altayskiy" esize=""/>
@@ -395,7 +395,7 @@
 		</regions>
 		
 		<!-- AFRICA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/africa/{0}/{0}.osm.bz2" region_prefix="">
+		<regions siteToDownload="http://downloads.cloudmade.com/africa/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Africa">
 			<region name="algeria" esize=""/>
 			<region name="egypt" esize=""/>
 			<region name="madagascar" esize=""/>
@@ -461,7 +461,7 @@
 		
 		
 		<!-- OCEANIA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/oceania/{0}/{0}.osm.bz2" region_prefix="">
+		<regions siteToDownload="http://downloads.cloudmade.com/oceania/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Australia">
 			<region name="australia" esize=""/>
 			<region name="new_zealand" esize=""/>
 			<!--  NOT GENERATED
