@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.prefs.Preferences;
 
+import net.osmand.data.preparation.MapZooms;
 import net.osmand.osm.LatLon;
 
 
@@ -49,6 +50,15 @@ public class DataExtractionSettings {
 	public void saveDefaultLocation(double lat, double lon){
 		preferences.putDouble("default_lat",  lat);
 		preferences.putDouble("default_lon",  lon);
+	}
+	
+	public MapZooms getMapZooms(){
+		String value = preferences.get("map_zooms", MapZooms.MAP_ZOOMS_DEFAULT);
+		return MapZooms.parseZooms(value);
+	}
+	
+	public void setMapZooms(String zooms){
+		preferences.put("map_zooms", zooms);
 	}
 	
 	public int getDefaultZoom(){

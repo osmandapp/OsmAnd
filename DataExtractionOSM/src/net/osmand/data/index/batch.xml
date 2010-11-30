@@ -22,7 +22,7 @@
 	<process directory_for_osm_files="E:/Information/OSM maps/osm_batch" directory_for_index_files="E:/Information/OSM maps/osm_batch_ind"
 		downloadOsmFiles="true" generateIndexes="true" uploadIndexes="true"
 		deleteFilesAfterUploading="true" indexPOI="true" indexMap="true"
-		indexTransport="true" indexAddress="true">
+		indexTransport="true" indexAddress="true" mapZooms="">
 
         <!-- Countries to download from osm server -->
 

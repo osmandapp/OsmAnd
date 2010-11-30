@@ -411,7 +411,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 						creator.setNormalizeStreets(normalizingStreets.isSelected());
 						creator.setIndexTransport(buildTransportIndex.isSelected());
 						creator.setIndexMap(buildMapIndex.isSelected());
-						creator.generateIndexes(f, dlg, filter);
+						creator.generateIndexes(f, dlg, filter, DataExtractionSettings.getSettings().getMapZooms());
 					} catch (IOException e) {
 						throw new IllegalArgumentException(e);
 					} catch (SAXException e) {
