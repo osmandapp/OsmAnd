@@ -3,6 +3,7 @@ package net.osmand.osm;
 import gnu.trove.map.TIntByteMap;
 import gnu.trove.map.hash.TIntByteHashMap;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
@@ -72,65 +73,8 @@ public class MapRenderingTypes {
 	public final static char REF_CHAR = ((char)0x0019);
 	public final static char DELIM_CHAR = ((char)0x0018);
 	
+	
 
-	public final static int HIGHWAY = 1; 
-	public final static int BARRIER = 2; 
-	public final static int WATERWAY = 3; 
-	public final static int RAILWAY = 4;
-	public final static int AEROWAY = 5;
-	public final static int AERIALWAY = 6;  
-	public final static int POWER = 7; 
-	public final static int MAN_MADE = 8; 
-	public final static int LEISURE = 9;  
-	public final static int OFFICE = 10; 
-	public final static int SHOP = 11;  
-	public final static int EMERGENCY = 12;  
-	public final static int TOURISM = 13; 
-	public final static int HISTORIC = 14; 
-	public final static int LANDUSE = 15;  
-	public final static int MILITARY = 16; 
-	public final static int NATURAL = 17;
-	public final static int AMENITY_SUSTENANCE = 18; 
-	public final static int AMENITY_EDUCATION = 19; 
-	public final static int AMENITY_TRANSPORTATION = 20; 
-	public final static int AMENITY_FINANCE = 21; 
-	public final static int AMENITY_HEALTHCARE = 22; 
-	public final static int AMENITY_ENTERTAINMENT = 23;
-	public final static int AMENITY_OTHER = 24; 
-	public final static int ADMINISTRATIVE = 25;
-	public final static int ROUTE = 26; //NOT DONE YET
-	public final static int SPORT = 27; //+no icons
-	
-	
-	public final static int SUBTYPE_BUILDING = 1;
-	public final static int SUBTYPE_GARAGES = 5;
-	public final static int SUBTYPE_PARKING = 1;
-	
-	
-	public final static int PL_HW_TRUNK = 1;
-	public final static int PL_HW_MOTORWAY = 2;
-	public final static int PL_HW_PRIMARY = 3;
-	public final static int PL_HW_SECONDARY = 4;
-	public final static int PL_HW_TERTIARY = 5;
-	public final static int PL_HW_RESIDENTIAL = 6;
-	public final static int PL_HW_SERVICE = 7;
-	public final static int PL_HW_UNCLASSIFIED = 8;
-	public final static int PL_HW_TRACK = 9;
-	public final static int PL_HW_PATH = 10;
-	public final static int PL_HW_LIVING_STREET = 11;
-	
-	public final static int PL_HW_PEDESTRIAN = 16;
-	public final static int PL_HW_CYCLEWAY = 17;
-	public final static int PL_HW_BYWAY = 18;
-	public final static int PL_HW_FOOTWAY = 19;
-	public final static int PL_HW_STEPS = 20;
-	public final static int PL_HW_BRIDLEWAY = 21;
-	public final static int PL_HW_SERVICES = 22;
-	public final static int PL_HW_FORD = 23;
-	
-	public final static int PL_HW_CONSTRUCTION = 25;
-	public final static int PL_HW_PROPOSED = 26;
-	
 	
 	public final static byte RESTRICTION_NO_RIGHT_TURN = 1;
 	public final static byte RESTRICTION_NO_LEFT_TURN = 2;
@@ -154,21 +98,35 @@ public class MapRenderingTypes {
 			return (type >> 7) & PG_SUBTYPE_MASK;
 		}
 	}
-	
+
+	private String resourceName = null;
 
 	// stored information to convert from osm tags to int type
-	private static Map<String, MapRulType> types = null;
+	private Map<String, MapRulType> types = null;
 	
-	private static TIntByteMap objectsToMinZoom = null;
+	private TIntByteMap objectsToMinZoom = null;
 	
 	
 	private static Map<String, AmenityType> amenityTagValToType = null;
 	private static Map<String, String> amenityTagValToPrefix = null;
 	private static String TAG_DELIMETER = "&&"; //$NON-NLS-1$
 	
-	private static Map<AmenityType, Map<String, String>> amenityTypeNameToTagVal = null;
-	private static Map<String, AmenityType> amenityNameToType = null;
+	private Map<AmenityType, Map<String, String>> amenityTypeNameToTagVal = null;
+	private Map<String, AmenityType> amenityNameToType = null;
 	
+	public MapRenderingTypes(String fileName){
+		this.resourceName = fileName;
+	}
+	
+	
+	private static MapRenderingTypes DEFAULT_INSTANCE = null;
+	
+	public static MapRenderingTypes getDefault() {
+		if(DEFAULT_INSTANCE == null){
+			DEFAULT_INSTANCE = new MapRenderingTypes(null);
+		}
+		return DEFAULT_INSTANCE;
+	}
 
 	private final static int POLYGON_WITH_CENTER_TYPE = 9;
 	// special type means that ways will transform in area with the same point subtype = as area subtype
@@ -273,7 +231,7 @@ public class MapRenderingTypes {
 	}
 	
 
-	public static Map<String, MapRulType> getEncodingRuleTypes(){
+	public Map<String, MapRulType> getEncodingRuleTypes(){
 		if (types == null) {
 			types = new LinkedHashMap<String, MapRulType>();
 			init(INIT_RULE_TYPES);
@@ -283,7 +241,7 @@ public class MapRenderingTypes {
 	
 	
 	// if type equals 0 no need to save that point
-	public static int encodeEntityWithType(Entity e, int zoom, boolean multipolygon, List<Integer> additionalTypes) {
+	public int encodeEntityWithType(Entity e, int zoom, boolean multipolygon, List<Integer> additionalTypes) {
 		if (types == null) {
 			types = new LinkedHashMap<String, MapRulType>();
 			init(INIT_RULE_TYPES);
@@ -364,6 +322,9 @@ public class MapRenderingTypes {
 							additionalTypes.add(pointType);
 						}
 					} else if (polygon && (pr == DEFAULT_POLYGON_BUILDING)) {
+						// TODO get polygon type
+						int MAN_MADE = 8;
+						int SUBTYPE_BUILDING = 1;
 						if(polygonType == 0 && polylineType == 0){
 							int attr = getLayerAttributes(e) << 12;
 							polygonType = (multipolygon ? MULTY_POLYGON_TYPE : POLYGON_TYPE) | (((SUBTYPE_BUILDING << 5) | MAN_MADE) << 2) | attr;
@@ -567,7 +528,7 @@ public class MapRenderingTypes {
 	}
 	
 	
-	private static void initAmenityMap(){
+	private void initAmenityMap(){
 		if (amenityTypeNameToTagVal == null) {
 			amenityTypeNameToTagVal = new LinkedHashMap<AmenityType, Map<String, String>>();
 			init(INIT_AMENITY_MAP);
@@ -579,7 +540,7 @@ public class MapRenderingTypes {
 	 * @return <type, minzoom> map
 	 * only when minzoom < 15
 	 */
-	public static TIntByteMap getObjectTypeMinZoom(){
+	public TIntByteMap getObjectTypeMinZoom(){
 		if(objectsToMinZoom == null){
 			objectsToMinZoom = new TIntByteHashMap();
 			init(INIT_TYPE_ZOOM);
@@ -588,12 +549,12 @@ public class MapRenderingTypes {
 	}
 	
 	
-	public static Map<AmenityType, Map<String, String>> getAmenityTypeNameToTagVal() {
+	public Map<AmenityType, Map<String, String>> getAmenityTypeNameToTagVal() {
 		initAmenityMap();
 		return amenityTypeNameToTagVal;
 	}
 	
-	public static Map<String, AmenityType> getAmenityNameToType(){
+	public Map<String, AmenityType> getAmenityNameToType(){
 		initAmenityMap();
 		if(amenityNameToType == null){
 			amenityNameToType = new LinkedHashMap<String, AmenityType>();
@@ -613,7 +574,7 @@ public class MapRenderingTypes {
 	
 
 	
-	private static void registerAmenity(String tag, String val, int type, int subtype){
+	private void registerAmenity(String tag, String val, int type, int subtype){
 		AmenityType t = getAmenityType(tag, val);
 		if (t != null) {
 			if (val != null) {
@@ -657,9 +618,14 @@ public class MapRenderingTypes {
 	private final static int INIT_AMENITY_MAP = 1;
 	private final static int INIT_TYPE_ZOOM = 2;
 	
-	private static void init(final int st){
-		InputStream is = MapRenderingTypes.class.getResourceAsStream("rendering_types.xml"); //$NON-NLS-1$
+	private void init(final int st){
+		InputStream is;
 		try {
+			if(resourceName == null){
+				is = MapRenderingTypes.class.getResourceAsStream("rendering_types.xml"); //$NON-NLS-1$
+			} else {
+				is = new FileInputStream(resourceName);
+			}
 			long time = System.currentTimeMillis();
 			final SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
 			
@@ -724,6 +690,7 @@ public class MapRenderingTypes {
 				}
 			});
 			log.info("Time to init " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
+			is.close();
 		} catch (IOException e) {
 			log.error("Unexpected error", e); //$NON-NLS-1$
 			e.printStackTrace();
@@ -743,7 +710,7 @@ public class MapRenderingTypes {
 		}
 	}
 
-	private static void stepSubtype(int st, int minZoom, String tag, String val, int type, int subtype, int polygonRule, int polylineRule,
+	private void stepSubtype(int st, int minZoom, String tag, String val, int type, int subtype, int polygonRule, int polylineRule,
 			int pointRule) {
 		if(st == INIT_RULE_TYPES){
 			MapRulType rtype = types.get(tag);
@@ -960,9 +927,10 @@ public class MapRenderingTypes {
 //		}
 //		System.out.println(getAmenityNameToType());
 //		long ts = System.currentTimeMillis();
-		initAmenityMap();
-		System.out.println(amenityTypeNameToTagVal);
-		System.out.println(getAmenityNameToType());
+		MapRenderingTypes def = MapRenderingTypes.getDefault();
+		def.initAmenityMap();
+		System.out.println(def.amenityTypeNameToTagVal);
+		System.out.println(def.getAmenityNameToType());
 	}
 
 }

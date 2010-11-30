@@ -27,6 +27,8 @@ import net.osmand.LogUtil;
 import net.osmand.data.preparation.IndexCreator;
 import net.osmand.data.preparation.MapZooms;
 import net.osmand.impl.ConsoleProgressImplementation;
+import net.osmand.osm.MapRenderingTypes;
+import net.osmand.swing.DataExtractionSettings;
 
 import org.apache.commons.logging.Log;
 import org.w3c.dom.Document;
@@ -52,6 +54,7 @@ public class IndexBatchCreator {
 	boolean generateIndexes = false;
 	boolean uploadIndexes = false;
 	MapZooms mapZooms = null;
+	MapRenderingTypes types = MapRenderingTypes.getDefault();
 	boolean deleteFilesAfterUploading = true;
 	
 	File osmDirFiles;
@@ -130,6 +133,13 @@ public class IndexBatchCreator {
 			mapZooms = MapZooms.getDefault();
 		} else {
 			mapZooms = MapZooms.parseZooms(zooms);
+		}
+		
+		String f = process.getAttribute("renderingTypesFile");
+		if(f == null || f.length() == 0){
+			types = MapRenderingTypes.getDefault();
+		} else {
+			types = new MapRenderingTypes(f);
 		}
 	
 		String dir = process.getAttribute("directory_for_osm_files");
@@ -296,7 +306,7 @@ public class IndexBatchCreator {
 			indexCreator.setMapFileName(mapFileName);
 			try {
 				alreadyGeneratedFiles.add(f.getName());
-				indexCreator.generateIndexes(f, new ConsoleProgressImplementation(3),  null, mapZooms);
+				indexCreator.generateIndexes(f, new ConsoleProgressImplementation(3),  null, mapZooms, types);
 				if (indexPOI) {
 					uploadIndex(new File(indexDirFiles, poiFileName), alreadyUploadedFiles);
 				}

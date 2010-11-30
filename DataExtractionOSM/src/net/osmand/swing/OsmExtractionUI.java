@@ -40,6 +40,7 @@ import net.osmand.Version;
 import net.osmand.data.preparation.IndexCreator;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.ITileSource;
+import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.io.IOsmStorageFilter;
 import net.osmand.osm.io.OsmBaseStorage;
 import net.osmand.osm.io.OsmBoundsFilter;
@@ -411,7 +412,14 @@ public class OsmExtractionUI implements IMapLocationListener {
 						creator.setNormalizeStreets(normalizingStreets.isSelected());
 						creator.setIndexTransport(buildTransportIndex.isSelected());
 						creator.setIndexMap(buildMapIndex.isSelected());
-						creator.generateIndexes(f, dlg, filter, DataExtractionSettings.getSettings().getMapZooms());
+						String fn = DataExtractionSettings.getSettings().getMapRenderingTypesFile();
+						MapRenderingTypes types;
+						if(fn == null || fn.length() == 0){
+							types = MapRenderingTypes.getDefault();
+						} else {
+							types = new MapRenderingTypes(fn);
+						}
+						creator.generateIndexes(f, dlg, filter, DataExtractionSettings.getSettings().getMapZooms(), types);
 					} catch (IOException e) {
 						throw new IllegalArgumentException(e);
 					} catch (SAXException e) {

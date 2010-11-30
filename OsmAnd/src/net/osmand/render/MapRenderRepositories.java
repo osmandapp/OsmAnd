@@ -212,7 +212,8 @@ public class MapRenderRepositories {
 			searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom);
 			if (zoom < 15) {
 				searchRequest.setSearchFilter(new BinaryMapIndexReader.SearchFilter() {
-					TIntByteMap map = MapRenderingTypes.getObjectTypeMinZoom();
+					// not correct should be used map from rendering to display minzoom
+					TIntByteMap map = MapRenderingTypes.getDefault().getObjectTypeMinZoom();
 
 					@Override
 					public boolean accept(TIntArrayList types) {
