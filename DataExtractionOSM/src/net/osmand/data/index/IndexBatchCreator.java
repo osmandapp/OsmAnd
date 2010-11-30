@@ -250,7 +250,13 @@ public class IndexBatchCreator {
 		int count = 0;
 		int downloaded = 0;
 		int mbDownloaded = 0;
-		File toSave = new File(osmDirFiles, country+".osm.bz2");
+		String ext = ".osm";
+		if(url.endsWith(".osm.bz2")){
+			ext = ".osm.bz2";
+		} else if(url.endsWith(".osm.pbf")){
+			ext = ".osm.pbf";
+		}
+		File toSave = new File(osmDirFiles, country+ext);
 		try {
 			log.info("Downloading country " + country + " from " + url);  //$NON-NLS-1$//$NON-NLS-2$
 			FileOutputStream ostream = new FileOutputStream(toSave);
