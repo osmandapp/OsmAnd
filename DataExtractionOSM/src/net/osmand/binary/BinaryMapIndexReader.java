@@ -116,6 +116,14 @@ public class BinaryMapIndexReader {
 		return indexes;
 	}
 	
+	public boolean containsMapData(){
+		return mapIndexes.size() > 0;
+	}
+	
+	public boolean containsAddressData(){
+		return addressIndexes.size() > 0;
+	}
+	
 
 	private void skipUnknownField(int tag) throws IOException{
 		int wireType = WireFormat.getTagWireType(tag);

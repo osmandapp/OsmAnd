@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.RandomAccessFile;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.preparation.IndexCreator;
 import net.osmand.data.preparation.MapZooms;
 import net.osmand.impl.ConsoleProgressImplementation;
@@ -373,17 +375,37 @@ public class IndexBatchCreator {
 			summary = "Transport index for ";
 		} else if(f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)){
 			regionName = f.getName().substring(0, f.getName().length() - IndexConstants.BINARY_MAP_INDEX_EXT.length() - 2);
+			boolean addr = indexAddress;
+			boolean trans = indexTransport;
+			boolean map = indexMap;
+			RandomAccessFile raf = null;
+			try {
+				raf = new RandomAccessFile(f, "r");
+				BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
+				trans = reader.hasTransportData();
+				map = reader.containsMapData();
+				addr = reader.containsAddressData();
+				reader.close();
+			} catch (Exception e) {
+				log.info("Exception", e);
+				if (raf != null) {
+					try {
+						raf.close();
+					} catch (IOException e1) {
+					}
+				}
+			}
 			summary = " index for ";
 			boolean fir = true;
-			if (indexAddress) {
+			if (addr) {
 				summary = "Address" + (fir ? "" : ", ") + summary;
 				fir = false;
 			}
-			if (indexTransport) {
+			if (trans) {
 				summary = "Transport" + (fir ? "" : ", ") + summary;
 				fir = false;
 			}
-			if (indexMap) {
+			if (map) {
 				summary = "Map" + (fir ? "" : ", ") + summary;
 				fir = false;
 			}
