@@ -65,7 +65,6 @@ public class IndexBatchCreator {
 	boolean indexPOI = false;
 	boolean indexTransport = false;
 	boolean indexAddress = false;
-	boolean writeWayNodes = false; 
 	boolean indexMap = false;
 	
 	
@@ -311,7 +310,7 @@ public class IndexBatchCreator {
 			indexCreator.setIndexMap(indexMap);
 			indexCreator.setLastModifiedDate(f.lastModified());
 			indexCreator.setNormalizeStreets(true);
-			indexCreator.setSaveAddressWays(writeWayNodes);
+			indexCreator.setSaveAddressWays(true);
 
 			String poiFileName = regionName + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT;
 			indexCreator.setPoiFileName(poiFileName);
@@ -423,7 +422,7 @@ public class IndexBatchCreator {
 			// do not upload small files
 			return;
 		}
-		if(mbLengh > 3 && f.getName().endsWith(".odb") && zip){
+		if(mbLengh > 3 && (f.getName().endsWith(".odb") || f.getName().endsWith(".obf")) && zip){
 			String zipFileName = f.getName().subSequence(0, f.getName().length() - 4)+".zip";
 			File zFile = new File(f.getParentFile(), zipFileName);
 			log.info("Zipping file " + f.getName());

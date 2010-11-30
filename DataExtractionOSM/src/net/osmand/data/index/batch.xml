@@ -27,7 +27,7 @@
         <!-- Countries to download from osm server -->
 
 		<!-- EUROPE -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/europe/{0}.osm.bz2" region_prefix="" skip="true" region_suffix="_Europe">
+		<regions siteToDownload="http://download.geofabrik.de/osm/europe/{0}.osm.pbf" region_prefix="" region_suffix="_Europe">
 			<region name="albania" esize="6" />
 			<region name="andorra" esize="1" />
 			<region name="austria" esize="110" />
