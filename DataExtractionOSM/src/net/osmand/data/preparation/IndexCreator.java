@@ -2,6 +2,7 @@ package net.osmand.data.preparation;
 
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -1907,11 +1908,28 @@ public class IndexCreator {
 
 		Map<String, Set<Street>> postcodes = new TreeMap<String, Set<Street>>();
 		boolean writeCities = true;
+		
+		// collect suburbs with is in value
+		List<City> suburbs = new ArrayList<City>();
+		for(City s : cities){
+			if(s.getType() == CityType.SUBURB && s.getIsInValue() != null){
+				suburbs.add(s);
+			}
+		}
 
 		// write cities and after villages
 		writer.startCityIndexes(false);
 		for (int i = 0; i < cities.size(); i++) {
 			City c = cities.get(i);
+			List<City> listSuburbs = null;
+			for (City suburb : suburbs) {
+				if (suburb.getIsInValue().contains(c.getName().toLowerCase())) {
+					if(listSuburbs == null){
+						listSuburbs = new ArrayList<City>();
+					}
+					listSuburbs.add(suburb);
+				}
+			}
 			if (writeCities) {
 				progress.progress(1);
 			} else if ((cities.size() - i) % 100 == 0) {
@@ -1929,7 +1947,7 @@ public class IndexCreator {
 				streetNodes = new LinkedHashMap<Street, List<Node>>();
 			}
 			long time = System.currentTimeMillis();
-			reader.readStreetsBuildings(streetstat, c, streets, waynodesStat, streetNodes);
+			reader.readStreetsBuildings(streetstat, c, streets, waynodesStat, streetNodes, listSuburbs);
 			long f = System.currentTimeMillis() - time;
 			writer.writeCityIndex(c, streets, streetNodes);
 			int bCount = 0;
@@ -2605,7 +2623,7 @@ public class IndexCreator {
 	private NewDataExtractionOsmFilter extractOsmToNodesDB(File readFile, IProgress progress, IOsmStorageFilter addFilter) throws FileNotFoundException,
 			IOException, SQLException, SAXException {
 		boolean pbfFile = false;
-		InputStream stream = new FileInputStream(readFile);
+		InputStream stream = new BufferedInputStream(new FileInputStream(readFile), 8192*4);;
 		InputStream streamFile = stream;
 		long st = System.currentTimeMillis();
 		if (readFile.getName().endsWith(".bz2")) { //$NON-NLS-1$

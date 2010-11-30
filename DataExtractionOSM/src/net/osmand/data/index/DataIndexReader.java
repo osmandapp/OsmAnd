@@ -66,7 +66,7 @@ public class DataIndexReader {
 	}
 	
 	public List<Street> readStreetsBuildings(PreparedStatement streetBuildingsStat, City city, List<Street> streets) throws SQLException {
-		return readStreetsBuildings(streetBuildingsStat, city, streets, null, null);
+		return readStreetsBuildings(streetBuildingsStat, city, streets, null, null, null);
 	}
 	
 	public PreparedStatement getStreetsWayNodesPreparedStatement(Connection c) throws SQLException{
@@ -74,8 +74,26 @@ public class DataIndexReader {
 	}
 
 	public List<Street> readStreetsBuildings(PreparedStatement streetBuildingsStat, City city, List<Street> streets,
-			PreparedStatement waynodesStat, Map<Street, List<Node>> streetNodes) throws SQLException {
+			PreparedStatement waynodesStat, Map<Street, List<Node>> streetNodes, List<City> citySuburbs) throws SQLException {
 		Map<Long, Street> visitedStreets = new LinkedHashMap<Long, Street>();
+		//read streets for city
+		readStreatsByBuildingsForCity(streetBuildingsStat, city, streets,
+				waynodesStat, streetNodes, visitedStreets);
+		//read streets for suburbs of the city
+		if (citySuburbs != null) {
+			for (City suburb : citySuburbs) {
+				readStreatsByBuildingsForCity(streetBuildingsStat, suburb, streets, waynodesStat, streetNodes, visitedStreets);
+			}
+		}
+		return streets;
+	}
+
+
+	private void readStreatsByBuildingsForCity(
+			PreparedStatement streetBuildingsStat, City city,
+			List<Street> streets, PreparedStatement waynodesStat,
+			Map<Street, List<Node>> streetNodes,
+			Map<Long, Street> visitedStreets) throws SQLException {
 		streetBuildingsStat.setLong(1, city.getId());
 		ResultSet set = streetBuildingsStat.executeQuery();
 		while (set.next()) {
@@ -112,7 +130,6 @@ public class DataIndexReader {
 		}
 
 		set.close();
-		return streets;
 	}
 	
 	public PreparedStatement getStreetsPreparedStatement(Connection c) throws SQLException{
