@@ -28,7 +28,6 @@ import net.osmand.data.preparation.IndexCreator;
 import net.osmand.data.preparation.MapZooms;
 import net.osmand.impl.ConsoleProgressImplementation;
 import net.osmand.osm.MapRenderingTypes;
-import net.osmand.swing.DataExtractionSettings;
 
 import org.apache.commons.logging.Log;
 import org.w3c.dom.Document;
@@ -44,6 +43,7 @@ public class IndexBatchCreator {
 	
 	public static class RegionCountries {
 		String namePrefix = ""; // for states of the country
+		String nameSuffix = "";
 		Set<String> regionNames = new LinkedHashSet<String>();
 		String siteToDownload = "";
 	}
@@ -181,6 +181,10 @@ public class IndexBatchCreator {
 				if(countries.namePrefix == null){
 					countries.namePrefix = "";
 				}
+				countries.nameSuffix = el.getAttribute("region_suffix");
+				if(countries.nameSuffix == null){
+					countries.nameSuffix = "";
+				}
 				NodeList ncountries = el.getElementsByTagName("region");
 				for(int j=0; j< ncountries.getLength(); j++){
 					Element ncountry = (Element) ncountries.item(j);
@@ -225,10 +229,11 @@ public class IndexBatchCreator {
 		for(RegionCountries regionCountries : countriesToDownload){
 			String prefix = regionCountries.namePrefix;
 			String site = regionCountries.siteToDownload;
+			String suffix = regionCountries.nameSuffix;
 			for(String name : regionCountries.regionNames){
 				name = name.toLowerCase();
 				String url = MessageFormat.format(site, name);
-				downloadFile(url, prefix+name, alreadyGeneratedFiles, alreadyUploadedFiles);
+				downloadFile(url, prefix+name+suffix, alreadyGeneratedFiles, alreadyUploadedFiles);
 			}
 		}
 		

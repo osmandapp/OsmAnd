@@ -130,6 +130,7 @@ public class DownloadIndexActivity extends ListActivity {
 			// possibly exception occurred we don't have cache of files
 			downloadListIndexThread = new DownloadIndexListThread();
 			downloadListIndexThread.setUiActivity(this);
+			downloadListIndexThread.start();
 		}
 	}
 	
