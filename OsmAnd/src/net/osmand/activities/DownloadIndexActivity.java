@@ -1,17 +1,11 @@
 package net.osmand.activities;
 
-import static net.osmand.data.index.IndexConstants.ADDRESS_INDEX_EXT;
-import static net.osmand.data.index.IndexConstants.ADDRESS_INDEX_EXT_ZIP;
-import static net.osmand.data.index.IndexConstants.ADDRESS_TABLE_VERSION;
 import static net.osmand.data.index.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.data.index.IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
 import static net.osmand.data.index.IndexConstants.BINARY_MAP_VERSION;
 import static net.osmand.data.index.IndexConstants.POI_INDEX_EXT;
 import static net.osmand.data.index.IndexConstants.POI_INDEX_EXT_ZIP;
 import static net.osmand.data.index.IndexConstants.POI_TABLE_VERSION;
-import static net.osmand.data.index.IndexConstants.TRANSPORT_INDEX_EXT;
-import static net.osmand.data.index.IndexConstants.TRANSPORT_INDEX_EXT_ZIP;
-import static net.osmand.data.index.IndexConstants.TRANSPORT_TABLE_VERSION;
 import static net.osmand.data.index.IndexConstants.VOICE_INDEX_EXT_ZIP;
 import static net.osmand.data.index.IndexConstants.VOICE_VERSION;
 
@@ -30,8 +24,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.TreeMap;
+import java.util.Map.Entry;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -46,9 +40,9 @@ import net.osmand.data.index.IndexConstants;
 import org.apache.commons.logging.Log;
 
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Environment;
@@ -214,12 +208,12 @@ public class DownloadIndexActivity extends ListActivity {
 				
 			});
 			DownloaderIndexFromGoogleCode.getIndexFiles(indexFiles,
-					ADDRESS_TABLE_VERSION + ADDRESS_INDEX_EXT,
-					ADDRESS_TABLE_VERSION + ADDRESS_INDEX_EXT_ZIP,
+//					ADDRESS_TABLE_VERSION + ADDRESS_INDEX_EXT,
+//					ADDRESS_TABLE_VERSION + ADDRESS_INDEX_EXT_ZIP,
 					POI_TABLE_VERSION + POI_INDEX_EXT,
 					POI_TABLE_VERSION + POI_INDEX_EXT_ZIP,
-					TRANSPORT_TABLE_VERSION + TRANSPORT_INDEX_EXT,
-					TRANSPORT_TABLE_VERSION + TRANSPORT_INDEX_EXT_ZIP,
+//					TRANSPORT_TABLE_VERSION + TRANSPORT_INDEX_EXT,
+//					TRANSPORT_TABLE_VERSION + TRANSPORT_INDEX_EXT_ZIP,
 					BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT,
 					BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT_ZIP,
 					VOICE_VERSION + VOICE_INDEX_EXT_ZIP);
@@ -626,7 +620,29 @@ public class DownloadIndexActivity extends ListActivity {
 			} else if(e.getKey().endsWith(IndexConstants.TRANSPORT_INDEX_EXT) || e.getKey().endsWith(IndexConstants.TRANSPORT_INDEX_EXT_ZIP)){
 				s = getString(R.string.transport);
 			} else if(e.getKey().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || e.getKey().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)){
-				s = getString(R.string.map_index);
+				boolean f = true;
+				String lowerCase = e.getValue().toLowerCase();
+				if (lowerCase.contains("map")) { //$NON-NLS-1$
+					if (f) {
+						s += ", "; //$NON-NLS-1$
+						f = false;
+					}
+					s += getString(R.string.map_index);
+				}
+				if (lowerCase.contains("transport")) { //$NON-NLS-1$
+					if (f) {
+						s += ", "; //$NON-NLS-1$
+						f = false;
+					}
+					s += getString(R.string.transport);
+				}
+				if (lowerCase.contains("address")) { //$NON-NLS-1$
+					if (f) {
+						s += ", "; //$NON-NLS-1$
+						f = false;
+					}
+					s += getString(R.string.address);
+				}
 			} else if(e.getKey().endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)){
 				s = getString(R.string.voice);
 			}
@@ -644,7 +660,7 @@ public class DownloadIndexActivity extends ListActivity {
 					DownloadIndexActivity.this.onListItemClick(getListView(), row, position, getItemId(position));
 				}
 			});
-			item.setText(s.trim() + "\n " + name); //$NON-NLS-1$
+			item.setText(s.trim() + "\n " + name + "\n"); //$NON-NLS-1$
 			description.setText(e.getValue().replace(':', '\n').trim());
 			return row;
 		}
