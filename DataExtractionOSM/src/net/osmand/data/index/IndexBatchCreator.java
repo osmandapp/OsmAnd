@@ -435,7 +435,11 @@ public class IndexBatchCreator {
 			return;
 		}
 		if(mbLengh > 3 && (f.getName().endsWith(".odb") || f.getName().endsWith(".obf")) && zip){
-			String zipFileName = f.getName().subSequence(0, f.getName().length() - 4)+".zip";
+			String n = f.getName();
+			if(f.getName().endsWith(".odb")){
+				n = f.getName().substring(0, f.getName().length() - 4);
+			}
+			String zipFileName = n+".zip";
 			File zFile = new File(f.getParentFile(), zipFileName);
 			log.info("Zipping file " + f.getName());
 			try {
