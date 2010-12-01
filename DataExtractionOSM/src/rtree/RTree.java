@@ -71,6 +71,7 @@ public class RTree //the tree that would be made
   public static void clearCache(){
 	  chdNodes = new CachedNodes();
 	  fileList = new HashMap();
+	  CachedNodes.clearFileNamesMap();
   }
   
   public RTree(String fileName)

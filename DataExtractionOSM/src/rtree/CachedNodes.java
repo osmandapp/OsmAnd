@@ -382,6 +382,10 @@ public class CachedNodes
   
   static Map<String, Integer> fileNamesMap = new LinkedHashMap<String, Integer>();
   
+  static void clearFileNamesMap(){
+	  fileNamesMap.clear();
+  }
+  
   int calKey(String fileName,int idx)
   {
     if(fileName != null) {
