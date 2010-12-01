@@ -28,10 +28,10 @@
 				<include name="**/*.java" />
 			</fileset>
 		</jar>
-		
+
 		<delete file="MANIFEST.MF" />
 	</target>
-	
+
 	<target name="build" depends="jar">
 		<delete dir="build"/>
 		<copy todir="build">
@@ -44,6 +44,16 @@
 				<include name="inspector.bat"/>
 				<include name="inspector.sh"/>
 				<exclude name="lib/h2*"/>
+			</fileset>
+			<fileset dir="src/net/osmand/osm/">
+				<include name="rendering_types.xml"/>
+			</fileset>
+			<fileset dir=".">
+				<include name="batch_indexing.bat"/>
+				<include name="batch_indexing.sh"/>
+			</fileset>
+			<fileset dir="src/net/osmand/data/index">
+				<include name="batch.xml" />
 			</fileset>
 		</copy>
 		<zip destfile="build.zip">

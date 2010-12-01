@@ -76,6 +76,35 @@
 			-->
 		</regions>
 
+		<!-- GREAT BRITAIN (WITHOUT ENGLAND!) -->
+		<regions siteToDownload="http://download.geofabrik.de/osm/europe/great_britain/{0}.osm.pbf" region_prefix="GB_" region_suffix="_Europe">
+			<region name="scotland" esize="23"/>		
+			<region name="wales" esize="10"/>
+
+		</regions>
+
+		<!-- ENGLAND -->
+		<regions siteToDownload="http://download.geofabrik.de/osm/europe/great_britain/england/{0}.osm.pbf" region_prefix="GB_England_" region_suffix="_Europe">
+		<region name="buckinghamshire" esize="3"/>
+		<region name="cambridgeshire" esize="4"/>
+		<region name="cumbria" esize="4"/>
+		<region name="east_yorkshire_with_hull" esize="2"/>
+		<region name="essex" esize="10"/>
+		<region name="herefordshire" esize="1"/>
+		<region name="kent" esize="7"/>
+		<region name="lancashire" esize="5"/>
+		<region name="leicestershire" esize="3"/>
+		<region name="norfolk" esize="5"/>
+		<region name="nottinghamshire" esize="5"/>
+		<region name="oxfordshire" esize="4"/>
+		<region name="shropshire" esize="2"/>
+		<region name="somerset" esize="3"/>
+		<region name="suffolk" esize="3"/>
+		<region name="surrey" esize="8"/>
+		<region name="wiltshire" esize="3"/>
+
+		</regions>
+
 		<!-- FRANCE -->
 		<regions siteToDownload="http://download.geofabrik.de/osm/europe/france/{0}.osm.bz2" region_prefix="France_" 
 			skip="true" region_suffix="_Europe">
