@@ -55,7 +55,7 @@ public class DownloaderIndexFromGoogleCode {
 				BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT_ZIP,
 				VOICE_VERSION + VOICE_INDEX_EXT_ZIP);
 		for(String s : files.keySet()){
-			System.out.println(s);
+			System.out.println(s + " " + files.get(s)); //$NON-NLS-1$
 		}
 //								IndexConstants.TRANSPORT_TABLE_VERSION + "" }); //$NON-NLS-1$
 //		Map<String, String> indexFiles = DownloaderIndexFromGoogleCode.getIndexFiles(
@@ -114,7 +114,7 @@ public class DownloaderIndexFromGoogleCode {
 				}
 			}
 		}
-		log.info("Loaded indexes:" + files.size());
+		log.info("Loaded indexes:" + files.size()); //$NON-NLS-1$
 		return files;
 	}
 	
@@ -139,8 +139,8 @@ public class DownloaderIndexFromGoogleCode {
 		if (prevFile != null && ((i = content.indexOf('{')) != -1)) {
 			int j = content.indexOf('}');
 			if (j != -1 && j - i < 40) {
-				String description = content.substring(i, j + 1);
-				files.put(prevFile, description);
+				// String description = content.substring(i, j + 1);
+				files.put(prevFile, content);
 				prevFile = null;
 			}
 		}
@@ -160,8 +160,8 @@ public class DownloaderIndexFromGoogleCode {
 	public static String deleteFileFromGoogleDownloads(String fileName, String token, String pagegen, String cookieHSID, String cookieSID) throws IOException {
 		// prepare data
 		Map<String, String> cookies = new HashMap<String, String>();
-		cookies.put("HSID", cookieHSID);  //$NON-NLS-1$//$NON-NLS-2$
-		cookies.put("SID", cookieSID); //$NON-NLS-1$ //$NON-NLS-2$
+		cookies.put("HSID", cookieHSID);  //$NON-NLS-1$
+		cookies.put("SID", cookieSID); //$NON-NLS-1$
 		StringBuilder cookieString = new StringBuilder();
 		int size = cookies.size();
 		for (String c : cookies.keySet()) {

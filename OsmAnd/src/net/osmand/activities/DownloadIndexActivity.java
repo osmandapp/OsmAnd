@@ -307,7 +307,7 @@ public class DownloadIndexActivity extends ListActivity {
 			entry.unzip = unzipDir;
 			entry.fileToUnzip = new File(parent, baseName + toCheckPostfix);
 			// if(!fileToUnzip.exists()){
-			// builder.setMessage(MessageFormat.format(getString(R.string.download_question), baseName, e.getValue()));
+			// builder.setMessage(MessageFormat.format(getString(R.string.download_question), baseName, extractDateAndSize(e.getValue())));
 			if (entry.fileToUnzip.exists()) {
 				Builder builder = new AlertDialog.Builder(this);
 				MessageFormat format;
@@ -318,7 +318,7 @@ public class DownloadIndexActivity extends ListActivity {
 				}
 				String description = format
 						.format(new Object[] { new Date(entry.fileToUnzip.lastModified()), ((float) entry.fileToUnzip.length() / MB) });
-				builder.setMessage(MessageFormat.format(getString(R.string.download_question_exist), baseName, description, e.getValue()));
+				builder.setMessage(MessageFormat.format(getString(R.string.download_question_exist), baseName, description, extractDateAndSize(e.getValue())));
 				
 				builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 					@Override
@@ -577,6 +577,10 @@ public class DownloadIndexActivity extends ListActivity {
 		}
 	}
 	
+	private static String extractDateAndSize(String m){
+		return m.substring(m.indexOf('{'));
+	}
+	
 	public void showWarning(final String messages){
 		runOnUiThread(new Runnable(){
 			@Override
@@ -660,8 +664,8 @@ public class DownloadIndexActivity extends ListActivity {
 					DownloadIndexActivity.this.onListItemClick(getListView(), row, position, getItemId(position));
 				}
 			});
-			item.setText(s.trim() + "\n " + name + "\n"); //$NON-NLS-1$
-			description.setText(e.getValue().replace(':', '\n').trim());
+			item.setText(s.trim() + "\n " + name); //$NON-NLS-1$
+			description.setText(extractDateAndSize(e.getValue()).replace(':', '\n').trim());
 			return row;
 		}
 		
