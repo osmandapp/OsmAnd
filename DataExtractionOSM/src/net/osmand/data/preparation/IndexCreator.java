@@ -2390,28 +2390,28 @@ public class IndexCreator {
 
 				// 3.3 MAIN iterate over all entities
 				if (indexPOI || indexAddress || indexMap) {
-					progress.setGeneralProgress("[50 of 100]");
-					progress.startTask("Processing osm nodes...", allNodes);
+					progress.setGeneralProgress("[50 / 100]");
+					progress.startTask(Messages.getString("IndexCreator.PROCESS_OSM_NODES"), allNodes);
 					iterateOverEntities(progress, EntityType.NODE, allNodes, STEP_MAIN);
-					progress.setGeneralProgress("[70 of 100]");
-					progress.startTask("Processing osm ways...", allWays);
+					progress.setGeneralProgress("[70 / 100]");
+					progress.startTask(Messages.getString("IndexCreator.PROCESS_OSM_WAYS"), allWays);
 					iterateOverEntities(progress, EntityType.WAY, allWays, STEP_MAIN);
 				}
-				progress.setGeneralProgress("[85 of 100]");
-				progress.startTask("Processing osm relations...", allRelations);
+				progress.setGeneralProgress("[85 / 100]");
+				progress.startTask(Messages.getString("IndexCreator.PROCESS_OSM_REL"), allRelations);
 				iterateOverEntities(progress, EntityType.RELATION, allRelations, STEP_MAIN);
 				
 				// 3.4 combine all low level ways and simplify them
 				if(indexMap){
-					progress.setGeneralProgress("[90 of 100]");
-					progress.startTask("Indexing low level ways...", lowLevelWays);
+					progress.setGeneralProgress("[90 / 100]");
+					progress.startTask(Messages.getString("IndexCreator.INDEX_LO_LEVEL_WAYS"), lowLevelWays);
 					processingLowLevelWays(progress);
 				}
 
 				// 3.5 update all postal codes from relations
 				if (indexAddress && !postalCodeRelations.isEmpty()) {
-					progress.setGeneralProgress("[90 of 100]");
-					progress.startTask("Registering postcodes...", -1);
+					progress.setGeneralProgress("[90 / 100]");
+					progress.startTask(Messages.getString("IndexCreator.REGISTER_PCODES"), -1);
 					if (pStatements.get(addressBuildingStat) > 0) {
 						addressBuildingStat.executeBatch();
 						pStatements.put(addressBuildingStat, 0);
