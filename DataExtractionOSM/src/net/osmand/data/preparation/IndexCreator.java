@@ -934,11 +934,14 @@ public class IndexCreator {
 								// special check that address do not contain twice in a3 - border and separate a6
 								if (!a6.getMemberIds().contains(id)) {
 									Building building = new Building(border);
-									building.setName(hno);
-									DataIndexWriter.writeBuilding(addressBuildingStat, pStatements, 
-											streetId, building, BATCH_SIZE);
-									if (loadInMemory) {
-										addressBuildingLocalSet.add(id.getId());
+									if (building.getLocation() != null) {
+										building.setName(hno);
+										DataIndexWriter.writeBuilding(addressBuildingStat, pStatements, streetId, building, BATCH_SIZE);
+										if (loadInMemory) {
+											addressBuildingLocalSet.add(id.getId());
+										}
+									} else {
+										log.error("Strange border " + id + " location couldn't be found");
 									}
 								}
 							}
