@@ -87,13 +87,13 @@ public class DownloaderIndexFromGoogleCode {
 			size = files.size();
 			try {
 				URL url = new URL(
-						"http://code.google.com/p/osmand/downloads/list?num=" + num + "&start=" + start); //$NON-NLS-1$
+						"http://code.google.com/p/osmand/downloads/list?num=" + num + "&start=" + start); //$NON-NLS-1$ //$NON-NLS-2$
 				reader = new BufferedReader(new InputStreamReader(url
 						.openStream()));
 				String s = null;
 				String prevFile = null;
 				while ((s = reader.readLine()) != null) {
-					if (s.indexOf("files") != -1 || s.indexOf("{") != -1) {
+					if (s.indexOf("files") != -1 || s.indexOf("{") != -1) { //$NON-NLS-1$ //$NON-NLS-2$
 						for (String extension : ext) {
 							prevFile = getIndexFiles(files, s, prevFile, extension);
 						}
@@ -109,7 +109,7 @@ public class DownloaderIndexFromGoogleCode {
 					try {
 						reader.close();
 					} catch (IOException e) {
-						log.error("Error closing stream to url.", e);
+						log.error("Error closing stream to url.", e); //$NON-NLS-1$
 					}
 				}
 			}
