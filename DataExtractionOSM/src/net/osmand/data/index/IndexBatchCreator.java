@@ -37,6 +37,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import rtree.RTree;
+
+
 
 public class IndexBatchCreator {
 	
@@ -234,7 +237,7 @@ public class IndexBatchCreator {
 			for(String name : regionCountries.regionNames){
 				name = name.toLowerCase();
 				String url = MessageFormat.format(site, name);
-				downloadFile(url, prefix+name+suffix, alreadyGeneratedFiles, alreadyUploadedFiles);
+				downloadFile(url, prefix+name, suffix,alreadyGeneratedFiles, alreadyUploadedFiles);
 			}
 		}
 		
@@ -244,7 +247,7 @@ public class IndexBatchCreator {
 	private final static int DOWNLOAD_DEBUG = 1 << 20;
 	private final static int MB = 1 << 20;
 	private final static int BUFFER_SIZE = 1 << 15;
-	protected void downloadFile(String url, String country, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
+	protected void downloadFile(String url, String country, String suffix, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
 		byte[] buffer = new byte[BUFFER_SIZE];
 		int count = 0;
 		int downloaded = 0;
@@ -255,7 +258,7 @@ public class IndexBatchCreator {
 		} else if(url.endsWith(".osm.pbf")){
 			ext = ".osm.pbf";
 		}
-		File toSave = new File(osmDirFiles, country+ext);
+		File toSave = new File(osmDirFiles, country + suffix + ext);
 		try {
 			log.info("Downloading country " + country + " from " + url);  //$NON-NLS-1$//$NON-NLS-2$
 			FileOutputStream ostream = new FileOutputStream(toSave);
@@ -271,7 +274,7 @@ public class IndexBatchCreator {
 			}
 			ostream.close();
 			stream.close();
-			generateIndex(toSave, alreadyGeneratedFiles, alreadyUploadedFiles);
+			generateIndex(toSave, country, alreadyGeneratedFiles, alreadyUploadedFiles);
 		} catch (IOException e) {
 			log.error("Input/output exception " + toSave.getName() + " downloading from " + url, e); //$NON-NLS-1$ //$NON-NLS-2$
 		}
@@ -283,8 +286,8 @@ public class IndexBatchCreator {
 			if (alreadyGeneratedFiles.contains(f.getName())) {
 				continue;
 			}
-			if (f.getName().endsWith(".osm.bz2") || f.getName().endsWith(".osm")) {
-				generateIndex(f, alreadyGeneratedFiles, alreadyUploadedFiles);
+			if (f.getName().endsWith(".osm.bz2") || f.getName().endsWith(".osm") || f.getName().endsWith(".osm.pbf")) {
+				generateIndex(f, null, alreadyGeneratedFiles, alreadyUploadedFiles);
 			}
 		}
 		System.out.println("GENERATING INDEXES FINISHED ");
@@ -292,15 +295,23 @@ public class IndexBatchCreator {
 	
 	
 	
-	protected void generateIndex(File f, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
+	protected void generateIndex(File f, String rName, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
 		if (!generateIndexes) {
 			return;
 		}
 		try {
+			// be independent of previous results
+			RTree.clearCache();
+			
 			String regionName = f.getName();
 			int i = f.getName().indexOf('.');
 			if (i > -1) {
 				regionName = Algoritms.capitalizeFirstLetterAndLowercase(f.getName().substring(0, i));
+			}
+			if(Algoritms.isEmpty(rName)){
+				rName = regionName;
+			} else {
+				rName = Algoritms.capitalizeFirstLetterAndLowercase(rName);
 			}
 			
 			IndexCreator indexCreator = new IndexCreator(indexDirFiles);
@@ -311,6 +322,7 @@ public class IndexBatchCreator {
 			indexCreator.setLastModifiedDate(f.lastModified());
 			indexCreator.setNormalizeStreets(true);
 			indexCreator.setSaveAddressWays(true);
+			indexCreator.setRegionName(rName);
 
 			String poiFileName = regionName + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT;
 			indexCreator.setPoiFileName(poiFileName);

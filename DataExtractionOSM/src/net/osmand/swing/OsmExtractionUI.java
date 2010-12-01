@@ -52,6 +52,8 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.tools.bzip2.CBZip2OutputStream;
 import org.xml.sax.SAXException;
 
+import rtree.RTree;
+
 
 public class OsmExtractionUI implements IMapLocationListener {
 
@@ -419,6 +421,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 						} else {
 							types = new MapRenderingTypes(fn);
 						}
+						RTree.clearCache();
 						creator.generateIndexes(f, dlg, filter, DataExtractionSettings.getSettings().getMapZooms(), types);
 					} catch (IOException e) {
 						throw new IllegalArgumentException(e);

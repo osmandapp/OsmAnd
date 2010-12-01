@@ -68,6 +68,11 @@ public class RTree //the tree that would be made
       flHdr = flH;
     }
   }
+  public static void clearCache(){
+	  chdNodes = new CachedNodes();
+	  fileList = new HashMap();
+  }
+  
   public RTree(String fileName)
     throws  RTreeException
   {

@@ -36,6 +36,7 @@ public class FileHdr
   /**Index of the top most element*/
   private int topIdx;
   private RandomAccessFile file;
+  private String fileName;
   private boolean dirty = false;/*Tells whethet this is a dirty filehdr or not*/
   /**If any write thread is interested then increment this. This variable 
      results in the fact that writes will always have the preference. 
@@ -66,6 +67,7 @@ public class FileHdr
   {
     try{
       this.file = new RandomAccessFile(fileName,"rw");
+      this.fileName = fileName;
       this.writeThr = false;
       this.stkLimit = stkLimit;
       waiters = new Vector();
@@ -315,6 +317,7 @@ public class FileHdr
       flush();
       file.close();
     }catch (Exception e) {
+      System.err.println(fileName);
       e.printStackTrace();
     }
   }

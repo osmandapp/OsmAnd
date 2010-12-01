@@ -2076,6 +2076,7 @@ public class IndexCreator {
 
 	public void writeBinaryTransportIndex(BinaryMapIndexWriter writer) throws IOException, SQLException {
 		try {
+			transportStopsTree.flush();
 			visitedStops = null; // allow gc to collect it
 			PreparedStatement selectTransportRouteData = mapConnection.prepareStatement(
 					"SELECT id, dist, name, name_en, ref, operator, type FROM transport_route"); //$NON-NLS-1$
