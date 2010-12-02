@@ -77,14 +77,14 @@
 		</regions>
 
 		<!-- GREAT BRITAIN (WITHOUT ENGLAND!) -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/europe/great_britain/{0}.osm.pbf" region_prefix="GB_" region_suffix="_Europe">
+		<regions siteToDownload="http://download.geofabrik.de/osm/europe/great_britain/{0}.osm.pbf" region_prefix="GB_" skip="true" region_suffix="_Europe">
 			<region name="scotland" esize="23"/>		
 			<region name="wales" esize="10"/>
 
 		</regions>
 
 		<!-- ENGLAND -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/europe/great_britain/england/{0}.osm.pbf" region_prefix="GB_England_" region_suffix="_Europe">
+		<regions siteToDownload="http://download.geofabrik.de/osm/europe/great_britain/england/{0}.osm.pbf" region_prefix="GB_England_" skip="true" region_suffix="_Europe">
 		<region name="buckinghamshire" esize="3"/>
 		<region name="cambridgeshire" esize="4"/>
 		<region name="cumbria" esize="4"/>
@@ -106,7 +106,7 @@
 		</regions>
 
 		<!-- FRANCE -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/europe/france/{0}.osm.bz2" region_prefix="France_" 
+		<regions siteToDownload="http://download.geofabrik.de/osm/europe/france/{0}.osm.pbf" region_prefix="France_" 
 			skip="true" region_suffix="_Europe">
 			<region name="alsace" esize="" />
 			<region name="aquitaine" esize="" />
@@ -133,7 +133,7 @@
 		</regions>
 
 		<!-- GERMANY -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/europe/germany/{0}.osm.bz2" region_prefix="Germany_" skip="true" 
+		<regions siteToDownload="http://download.geofabrik.de/osm/europe/germany/{0}.osm.pbf" region_prefix="Germany_" skip="true" 
 			region_suffix="_Europe">
 			<region name="baden-wuerttemberg" esize="" />
 			<region name="bayern" esize="" />
@@ -154,17 +154,17 @@
 		</regions>
 
 		<!--  CENTRAL AMERICA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/north_america/{0}/{0}.osm.bz2" region_prefix="" skip="true" region_suffix="_NA">
-			<region name="bahamas" esize="" />
-			<region name="costa_rica" esize="" />
-			<region name="cuba" esize="" />
-			<region name="dominica" esize="" />
-			<region name="dominican_republic" esize="" />
-			<region name="guatemala" esize="" />
-			<region name="haiti" esize="" />
-			<region name="honduras" esize="" />
-			<region name="jamaica" esize="" />
-			<region name="mexico" esize="" />
+		<regions siteToDownload="http://downloads.cloudmade.com/north_america/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_CentralAmerica" skip="true">
+			<region name="bahamas" esize="1" />
+			<region name="costa_rica" esize="3" />
+			<region name="cuba" esize="3" />
+			<region name="dominica" esize="1" />
+			<region name="dominican_republic" esize="6" />
+			<region name="guatemala" esize="4" />
+			<region name="haiti" esize="21" />
+			<region name="honduras" esize="3" />
+			<region name="jamaica" esize="1" />
+			<region name="mexico" esize="58" />
 			<!-- NOT GENERATED
 			<region name="anguilla" esize=""/>
 			<region name="antigua_and_barbuda" esize=""/>
@@ -214,59 +214,59 @@
 		
 		<!-- ASIA -->
 		<regions siteToDownload="http://downloads.cloudmade.com/asia/{0}/{0}.osm.bz2" region_prefix="" skip="true" region_suffix="_Asia">
-			<region name="afghanistan" esize=""/>
-			<region name="bahrain" esize=""/>
-			<region name="bangladesh" esize=""/>
-			<region name="bhutan" esize=""/>
-			<region name="british_indian_ocean_territory" esize=""/>
-			<region name="brunei" esize=""/>
-			<region name="cambodia" esize=""/>
-			<region name="china" esize=""/>
-			<region name="christmas_island" esize=""/>
-			<region name="democratic_republic_of_timor-leste" esize=""/>
-			<region name="gaza_strip" esize=""/>
-			<region name="india" esize=""/>
-			<region name="indonesia" esize=""/>
-			<region name="iran" esize=""/>
-			<region name="iraq" esize=""/>
-			<region name="israel" esize=""/>
-			<region name="jordan" esize=""/>
-			<region name="kazakhstan" esize=""/>
-			<region name="kuwait" esize=""/>
-			<region name="kyrgyzstan" esize=""/>
-			<region name="laos" esize=""/>
-			<region name="lebanon" esize=""/>
-			<region name="macau" esize=""/>
-			<region name="malaysia" esize=""/>
-			<region name="maldives" esize=""/>
-			<region name="mongolia" esize=""/>
-			<region name="nepal" esize=""/>
-			<region name="north_korea" esize=""/>
-			<region name="oman" esize=""/>
-			<region name="pakistan" esize=""/>
-			<region name="paracel_islands" esize=""/>
-			<region name="philippines" esize=""/>
-			<region name="qatar" esize=""/>
-			<region name="saudi_arabia" esize=""/>
-			<region name="singapore" esize=""/>
-			<region name="south_korea" esize=""/>
-			<region name="spratly_islands" esize=""/>
-			<region name="sri_lanka" esize=""/>
-			<region name="syria" esize=""/>
-			<region name="taiwan" esize=""/>
-			<region name="tajikistan" esize=""/>
-			<region name="thailand" esize=""/>
-			<region name="turkmenistan" esize=""/>
-			<region name="union_of_myanmar" esize=""/>
-			<region name="united_arab_emirates" esize=""/>
-			<region name="uzbekistan" esize=""/>
+			<region name="afghanistan" esize="6"/>
+			<region name="bahrain" esize="1"/>
+			<region name="bangladesh" esize="3"/>
+			<region name="bhutan" esize="1"/>
+			<region name="british_indian_ocean_territory" esize="1"/>
+			<region name="brunei" esize="1"/>
+			<region name="cambodia" esize="2"/>
+			<region name="china" esize="67"/>
+			<region name="christmas_island" esize="1"/>
+			<region name="democratic_republic_of_timor-leste" esize="1"/>
+			<region name="gaza_strip" esize="3"/> 
+			<region name="india" esize="47"/>
+			<region name="indonesia" esize="21"/>
+			<region name="iran" esize="11"/>
+			<region name="iraq" esize="3"/>
+			<region name="israel" esize="18"/>
+			<region name="jordan" esize="1"/>
+			<region name="kazakhstan" esize="15"/>
+			<region name="kuwait" esize="1"/>
+			<region name="kyrgyzstan" esize="4"/>
+			<region name="laos" esize="3"/>
+			<region name="lebanon" esize="3"/>
+			<region name="macau" esize="1"/>
+			<region name="malaysia" esize="7"/>
+			<region name="maldives" esize="1"/>
+			<region name="mongolia" esize="3"/>
+			<region name="nepal" esize="2"/>
+			<region name="north_korea" esize="5"/>
+			<region name="oman" esize="2"/>
+			<region name="pakistan" esize="14"/>
+			<region name="paracel_islands" esize="1"/>
+			<region name="philippines" esize="25"/>
+			<region name="qatar" esize="1"/>
+			<region name="saudi_arabia" esize="9"/>
+			<region name="singapore" esize="2"/>
+			<region name="south_korea" esize="25"/>
+			<region name="spratly_islands" esize="1"/>
+			<region name="sri_lanka" esize="2"/>
+			<region name="syria" esize="4"/>
+			<region name="taiwan" esize="4"/>
+			<region name="tajikistan" esize="3"/>
+			<region name="thailand" esize="12"/>
+			<region name="turkmenistan" esize="1"/>
+			<region name="union_of_myanmar" esize="7"/>
+			<region name="united_arab_emirates" esize="2"/>
+			<region name="uzbekistan" esize="3"/>
 			<region name="vietnam" esize=""/>
 			<region name="yemen" esize=""/>
 			<!-- <region name="japan" esize="500"/>  -->		
 		</regions>
 		
 		<!-- USA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/north_america/united_states/{0}/{0}.osm.bz2" skip="true" region_prefix="US_" region_suffix="_NA">
+		<regions siteToDownload="http://downloads.cloudmade.com/north_america/united_states/{0}/{0}.osm.bz2" skip="true" region_prefix="US_" region_suffix="_NorthAmerica">
 			<region name="alabama" esize=""/>
 			<region name="alaska" esize=""/>
 			<region name="arizona" esize=""/>
@@ -322,7 +322,7 @@
 		</regions>
 		
 		<!-- Canada -->
-		<regions siteToDownload="http://downloads.cloudmade.com/north_america/canada/{0}/{0}.osm.bz2" skip="true" region_prefix="Canada_" region_suffix="_NA">
+		<regions siteToDownload="http://downloads.cloudmade.com/north_america/canada/{0}/{0}.osm.bz2" region_prefix="Canada_" skip="true" region_suffix="_NorthAmerica">
 			<region name="alberta" esize=""/>
 			<region name="british_columbia" esize=""/>
 			<region name="manitoba" esize=""/>
@@ -426,12 +426,11 @@
 		</regions>
 		
 		<!-- AFRICA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/africa/{0}/{0}.osm.bz2" region_prefix="" skip="true" region_suffix="_Africa">
-			<region name="algeria" esize=""/>
+		<regions siteToDownload="http://downloads.cloudmade.com/africa/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Africa" skip="true">
+			<region name="algeria" esize=""/>  
 			<region name="egypt" esize=""/>
 			<region name="madagascar" esize=""/>
-			<region name="morocco" esize=""/>
-			<region name="south_africa" esize=""/>
+			<region name="morocco" esize=""/> 
 			<!-- NOT GENERATED
 			<region name="angola" esize=""/>
 			<region name="benin" esize=""/>
@@ -490,11 +489,15 @@
 			 -->
 		</regions>
 		
+		<!-- South Africa -->
+		<regions siteToDownload="http://download.geofabrik.de/osm/africa/{0}.osm.pbf" region_prefix="" region_suffix="_Africa" skip="true">
+			<region name="south_africa_and_lesotho" esize="21"/> 	
+		</regions>
 		
 		<!-- OCEANIA -->
 		<regions siteToDownload="http://downloads.cloudmade.com/oceania/{0}/{0}.osm.bz2" region_prefix="" skip="true" region_suffix="_Australia">
-			<region name="australia" esize=""/>
-			<region name="new_zealand" esize=""/>
+			<!-- <region name="australia" esize=""/>  -->
+			<region name="new_zealand" esize="23"/>
 			<!--  NOT GENERATED
 			<region name="american_samoa" esize=""/>
 			<region name="baker_island" esize=""/>

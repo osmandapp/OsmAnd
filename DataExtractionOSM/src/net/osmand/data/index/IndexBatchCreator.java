@@ -434,7 +434,7 @@ public class IndexBatchCreator {
 			// do not upload small files
 			return;
 		}
-		if(mbLengh > 3 && (f.getName().endsWith(".odb") || f.getName().endsWith(".obf")) && zip){
+		if(mbLengh > 2 && (f.getName().endsWith(".odb") || f.getName().endsWith(".obf")) && zip){
 			String n = f.getName();
 			if(f.getName().endsWith(".odb")){
 				n = f.getName().substring(0, f.getName().length() - 4);
