@@ -123,6 +123,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	@SuppressWarnings("unused")
 	private boolean providerSupportsSpeed = false;
 	private String currentLocationProvider = null;
+	private long lastTimeAutoZooming = 0;
 	
     /** Called when the activity is first created. */
 	private OsmandMapTileView mapView;
@@ -511,7 +512,12 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				if(OsmandSettings.isAutoZoomEnabled(settings) && location.hasSpeed()){
 	    			int z = defineZoomFromSpeed(location.getSpeed(), mapView.getZoom());
 	    			if(mapView.getZoom() != z && !mapView.mapIsAnimating()){
-	    				mapView.setZoom(z);
+	    				long now = System.currentTimeMillis();
+	    				// prevent ui hysterisis (check time interval for autozoom)
+	    				if(Math.abs(mapView.getZoom() - z) > 2 || (lastTimeAutoZooming - now) > 6500){
+	    					lastTimeAutoZooming = now;
+	    					mapView.setZoom(z);
+	    				}
 	    			}
 	    		}
 				if (location.hasBearing() && currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING && !mapView.mapIsAnimating()) {
