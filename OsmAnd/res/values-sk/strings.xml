@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+<string name="continuous_rendering">Postupné vykresľovanie</string>
+<string name="continuous_rendering_descr">Vybrať medzi postupným alebo celoobrazovým vykresľovaním</string>
 <string name="rendering_exception">Nastala chyba pri vykresľovaní vybratej oblasti</string>
 <string name="rendering_out_of_memory">Nedostatok pamäte na zobrazenie vybratej oblasti</string>
 <string name="show_point_options">Možnosti bodu</string>
@@ -14,8 +16,8 @@
 <string name="website">Web stránka</string>
 <string name="phone">Telefónny kontakt</string>
 <string name="download_type_to_filter">sem zadajte čo vyhľadať</string>
-<string name="use_high_res_maps">Mapa s veľkým rozlíšením</string>
-<string name="use_high_res_maps_descr">Použiť mapu s veľkým rozlíšením pre zariadenia s vysokou hustotou bodov</string>
+<string name="use_high_res_maps">Mapa s vysokým rozlíšením</string>
+<string name="use_high_res_maps_descr">Použiť mapu s vysokým rozlíšením pre zariadenia s vysokou hustotou bodov</string>
 <string name="unknown_location">Pozícia nie je zatiaľ známa</string>
 <string name="download_files_question">Stiahnuť {0} súbor/y?</string>
 <string name="download_files">Stiahnuť</string>
