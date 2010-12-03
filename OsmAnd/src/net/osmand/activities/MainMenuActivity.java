@@ -15,22 +15,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.graphics.Camera;
-import android.graphics.Color;
-import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.text.util.Linkify;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
-import android.view.animation.Animation;
-import android.view.animation.Transformation;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainMenuActivity extends Activity {
@@ -38,10 +31,10 @@ public class MainMenuActivity extends Activity {
 	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = ResourceManager.APP_DIR + "exception.log"; //$NON-NLS-1$
 	
-	private Button showMap;
-	private Button settingsButton;
-	private Button searchButton;
-	private Button favouritesButton;
+	private View showMap;
+	private View settingsButton;
+	private View searchButton;
+	private View favouritesButton;
 	
 	
 
@@ -98,8 +91,8 @@ public class MainMenuActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(Version.VELCOM_EDITION ? R.layout.menu_velcom : R.layout.menu);
-		if(Version.VELCOM_EDITION){
+		setContentView(R.layout.menu);
+		/* if(Version.VELCOM_EDITION){
 			final ImageView imgView = (ImageView) findViewById(R.id.VelcomMini);
 			final Camera camera = new Camera();
 			final float firstRotate = 0.25f;
@@ -163,14 +156,12 @@ public class MainMenuActivity extends Activity {
 			alphaAnimation.setDuration(animationTime);
 			textView.startAnimation(alphaAnimation);
 			textView.setVisibility(View.INVISIBLE);
-		} else {
-			final TextView textView = (TextView) findViewById(R.id.TextVersion);
-			textView.setText(Version.APP_FULL_NAME);
-			Linkify.addLinks((TextView) findViewById(R.id.TextSite), Linkify.WEB_URLS);
-			((TextView) findViewById(R.id.TextSite)).setTextColor(Color.WHITE);
-		}
+		} else { */
+		
+		final TextView textView = (TextView) findViewById(R.id.TextVersion);
+		textView.setText(Version.APP_VERSION+ " "+ Version.APP_DESCRIPTION); //$NON-NLS-1$
 
-		showMap = (Button) findViewById(R.id.MapButton);
+		showMap = findViewById(R.id.MapButton);
 		showMap.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -178,7 +169,7 @@ public class MainMenuActivity extends Activity {
 				startActivityForResult(mapIndent, 0);
 			}
 		});
-		settingsButton = (Button) findViewById(R.id.SettingsButton);
+		settingsButton = findViewById(R.id.SettingsButton);
 		settingsButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -187,7 +178,7 @@ public class MainMenuActivity extends Activity {
 			}
 		});
 		
-		favouritesButton = (Button) findViewById(R.id.FavoritesButton);
+		favouritesButton = findViewById(R.id.FavoritesButton);
 		favouritesButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -196,7 +187,7 @@ public class MainMenuActivity extends Activity {
 			}
 		});
 		
-		searchButton = (Button) findViewById(R.id.SearchButton);
+		searchButton = findViewById(R.id.SearchButton);
 		searchButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
