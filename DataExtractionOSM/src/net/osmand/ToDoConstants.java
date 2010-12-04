@@ -34,19 +34,6 @@ public class ToDoConstants {
 	
 	///////////////////////////   DONE //////////////////////////////
 	// DONE ANDROID :
-	//  105. Input MAP_ZOOMS and MapRenderingTypes xml as parameter for index creator
-	//   99. Implement better file downloader for big files
-	//  100. Show impoted gpx points (as favorites), sort the by distance
-	//   91. Invent binary format (minimize disk space, maximize speed)
-	//   94. Revise index to decrease their size (especially address) - replace to float lat/lon and remove for POI 
-	//		 remove en_names from POI (possibly from address)
-	//   85. Enable on/off screen for bike navigation (?)[not needed replace for continuous gps logging]
-	//  101. Introduce shell script to print information about indexes and to modify them
-	//   69. Add phone and site information to POI (enable call to POI and open site)
-	//  103. Allow add poi with multiple tags (different types/subtypes for one object). Fix for constructing and updating on mobile. (Issue)
-	//  102. Refactoring rendering schema serializing to xml and prepare script to create fast java builder (support pure xml)
-	//       Refactoring MapRenderingTypes to xml either
-	//   98. Implement rendering of different app mode. For Car render streets name with large font.
 	
 	// DONE SWING
 
