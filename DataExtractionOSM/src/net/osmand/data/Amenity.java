@@ -21,8 +21,6 @@ public class Amenity extends MapObject {
 
 	public Amenity(Entity entity, AmenityType type, String subtype){
 		super(entity);
-		// manipulate with id to distinguish way and nodes
-		this.id = entity.getId() << 1 + ((entity instanceof Node)? 0 : 1);
 		this.type = type;
 		this.subType = subtype;
 		this.openingHours = entity.getTag(OSMTagKey.OPENING_HOURS);
@@ -49,6 +47,13 @@ public class Amenity extends MapObject {
 				}
 			}
 		}
+	}
+
+	@Override
+	public void setEntity(Entity e) {
+		super.setEntity(e);
+		// manipulate with id to distinguish way and nodes
+		this.id = (e.getId() << 1) + ((e instanceof Node)? 0 : 1);
 	}
 	
 	public Amenity(){
