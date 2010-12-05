@@ -4,6 +4,6 @@
   <Content type="html">
   <![CDATA[
     <iframe src="http://www.facebook.com/widgets/like.php?href=http://osmand.googlecode.com" 
-scrolling="no" frameborder="0" style="border:none; width:450px; height:80px"/>
+scrolling="no" frameborder="0" style="border:none; width:450px; height:40px"/>
     ]]></Content> 
 </Module>
