@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+<string name="tiles_to_download_estimated_size">Pri priblížení {0} sa stiahne {1} dlaždíc ({2} Mb )</string>
+<string name="context_menu_item_download_map">Stiahnuť mapu</string>
+<string name="select_max_zoom_preload_area">Vybrať max. priblíženie na načítanie viditeľnej oblasti</string>
+<string name="maps_could_not_be_downloaded">Táto mapa sa nedá stiahnuť</string>
 <string name="continuous_rendering">Postupné vykresľovanie</string>
 <string name="continuous_rendering_descr">Vybrať medzi postupným alebo celoobrazovým vykresľovaním</string>
 <string name="rendering_exception">Nastala chyba pri vykresľovaní vybratej oblasti</string>
