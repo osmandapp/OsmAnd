@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+  <ModulePrefs title="hello world example" /> 
+  <Content type="html">
+    <iframe src="http://www.facebook.com/widgets/like.php?href=http://osmand.googlecode.com" 
+scrolling="no" frameborder="0" style="border:none; width:450px; height:80px"/>
+  </Content> 
+</Module>
