@@ -656,6 +656,10 @@ public class ResourceManager {
 		closeTransport();
 	}
 	
+	public synchronized void reloadTilesFromFS(){
+		imagesOnFS.clear();
+	}
+	
 	/// On low memory method ///
 	public void onLowMemory() {
 		log.info("On low memory : cleaning tiles - size = " + cacheOfImages.size()); //$NON-NLS-1$

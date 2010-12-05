@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="tiles_to_download_estimated_size">На масштабе {0} загрузить {1} тайлов ({2} Mb )</string>
+	<string name="context_menu_item_download_map">Загрузить карту</string>
+	<string name="select_max_zoom_preload_area">Выберите максимальный масштаб для загрузки видимой области</string>
+	<string name="maps_could_not_be_downloaded">Выбранная карта не может быть загружена</string>
 	<string name="continuous_rendering">Быстрый рендеринг</string>
 	<string name="continuous_rendering_descr">Выберите способ как отрисовывать карту</string>
 	<string name="rendering_exception">Во время отображения карты произошла непредвиденная ошибка</string>

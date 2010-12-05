@@ -88,9 +88,9 @@ public class MainMenuActivity extends Activity {
 		}
 	}
 	
-	public Animation getAnimation(boolean left){
-		Animation anim = new TranslateAnimation(TranslateAnimation.RELATIVE_TO_SELF, left ? -1 : 1, 
-				TranslateAnimation.RELATIVE_TO_SELF, 0, TranslateAnimation.RELATIVE_TO_SELF, 0, TranslateAnimation.RELATIVE_TO_SELF, 0);
+	public Animation getAnimation(int left, int top){
+		Animation anim = new TranslateAnimation(TranslateAnimation.RELATIVE_TO_SELF, left, 
+				TranslateAnimation.RELATIVE_TO_SELF, 0, TranslateAnimation.RELATIVE_TO_SELF, top, TranslateAnimation.RELATIVE_TO_SELF, 0);
 		anim.setDuration(700);
 		anim.setInterpolator(new AccelerateInterpolator());
 		return anim;
@@ -102,16 +102,18 @@ public class MainMenuActivity extends Activity {
 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.menu);
+		View head = (View) findViewById(R.id.Headliner);
+		head.startAnimation(getAnimation(0, -1));
 		
 		View leftview = (View) findViewById(R.id.MapButton);
-		leftview.startAnimation(getAnimation(true));
+		leftview.startAnimation(getAnimation(-1, 0));
 		leftview = (View) findViewById(R.id.FavoritesButton);
-		leftview.startAnimation(getAnimation(true));
+		leftview.startAnimation(getAnimation(-1, 0));
 		
 		View rightview = (View) findViewById(R.id.SettingsButton);
-		rightview.startAnimation(getAnimation(false));
+		rightview.startAnimation(getAnimation(1, 0));
 		rightview = (View) findViewById(R.id.SearchButton);
-		rightview.startAnimation(getAnimation(false));
+		rightview.startAnimation(getAnimation(1, 0));
 		
 		final TextView textView = (TextView) findViewById(R.id.TextVersion);
 		textView.setText(Version.APP_VERSION+ " "+ Version.APP_DESCRIPTION); //$NON-NLS-1$

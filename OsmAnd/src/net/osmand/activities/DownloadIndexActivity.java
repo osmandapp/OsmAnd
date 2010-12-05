@@ -629,6 +629,7 @@ public class DownloadIndexActivity extends ListActivity {
 				if (lowerCase.contains("map")) { //$NON-NLS-1$
 					if (!f) {
 						s += ", "; //$NON-NLS-1$
+					} else {
 						f = false;
 					}
 					s += getString(R.string.map_index);
@@ -636,6 +637,7 @@ public class DownloadIndexActivity extends ListActivity {
 				if (lowerCase.contains("transport")) { //$NON-NLS-1$
 					if (!f) {
 						s += ", "; //$NON-NLS-1$
+					} else {
 						f = false;
 					}
 					s += getString(R.string.transport);
@@ -643,6 +645,7 @@ public class DownloadIndexActivity extends ListActivity {
 				if (lowerCase.contains("address")) { //$NON-NLS-1$
 					if (!f) {
 						s += ", "; //$NON-NLS-1$
+					} else {
 						f = false;
 					}
 					s += getString(R.string.address);

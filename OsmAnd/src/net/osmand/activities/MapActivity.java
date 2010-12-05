@@ -1554,6 +1554,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		actions.add(resources.getString(R.string.context_menu_item_create_poi));
 		actions.add(resources.getString(R.string.context_menu_item_open_bug));
 		actions.add(resources.getString(R.string.context_menu_item_update_map));
+		actions.add(resources.getString(R.string.context_menu_item_download_map));
     	builder.setItems(actions.toArray(new String[actions.size()]), new DialogInterface.OnClickListener(){
 
 			@Override
@@ -1587,6 +1588,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					osmBugsLayer.openBug(MapActivity.this, getLayoutInflater(), mapView, latitude, longitude);
 				} else if(which == 7){
 					reloadTile(mapView.getZoom(), latitude, longitude);
+				} else if(which == 8){
+					DownloadTilesDialog dlg = new DownloadTilesDialog(MapActivity.this, 
+							(OsmandApplication) getApplication(), mapView);
+					dlg.openDialog();
 				}
 			}
     	});

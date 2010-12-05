@@ -96,7 +96,7 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 		for(int r : stop.getReferencesToRoutes()) {
 			try {
 				TransportRoute route = file.getTransportRoute(r);
-				res.add(f.format(new String[] { route.getRef(), route.getType(), route.getName(), route.getEnName()}));
+				res.add(f.format(new String[] { route.getRef()+"", route.getType()+"", route.getName()+"", route.getEnName()+""})); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			} catch (IOException e) {
 				log.error("Disk error ", e); //$NON-NLS-1$
 			}
