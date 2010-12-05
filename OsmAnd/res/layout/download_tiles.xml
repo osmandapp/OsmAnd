@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent" android:orientation="vertical">
+  <TextView android:text="@string/select_max_zoom_preload_area" android:gravity="center"
+  			android:layout_width="fill_parent" android:layout_height="wrap_content" 
+  			android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginTop="5dp"/> 
+  <SeekBar android:id="@+id/ZoomToDownload" android:layout_width="fill_parent" android:layout_height="wrap_content" 
+      android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginTop="5dp"/>
+  <LinearLayout 
+  			android:layout_width="fill_parent" android:layout_height="wrap_content" 
+  			android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginTop="5dp">
+  	<TextView android:text="10" android:gravity="left" android:layout_weight="0.5" android:id="@+id/MinZoom"
+  			android:layout_width="wrap_content" android:layout_height="wrap_content"/> 
+  	<TextView android:text="15" android:gravity="right" android:layout_weight="0.5" android:id="@+id/MaxZoom"
+  			android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+  </LinearLayout>
+  <TextView android:text="@string/tiles_to_download_estimated_size" android:gravity="center" android:id="@+id/DownloadDescription"
+  			android:layout_width="fill_parent" android:layout_height="wrap_content"/>			 
+  <ImageView android:layout_width="fill_parent" android:layout_height="fill_parent"
+  			 android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginTop="5dp" 
+  			 android:layout_marginBottom="5dp" 
+  				android:id="@+id/AreaPreview"/>   
+</LinearLayout>

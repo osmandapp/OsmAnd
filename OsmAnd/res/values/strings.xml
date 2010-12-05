@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="tiles_to_download_estimated_size">At zoom {0} download {1} tiles ({2} Mb )</string>
+	<string name="context_menu_item_download_map">Download map</string>
+	<string name="select_max_zoom_preload_area">Select max zoom to preload visible area</string>
+	<string name="maps_could_not_be_downloaded">This map could not be downloaded</string>
+	
 	<string name="continuous_rendering">Continuous rendering</string>
 	<string name="continuous_rendering_descr">Choose show continuous rendering or whole image</string>
 	<string name="rendering_exception">Error occurred while rendering selected area</string>
