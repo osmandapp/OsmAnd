@@ -2,6 +2,8 @@
 <Module>
   <ModulePrefs title="hello world example" /> 
   <Content type="html">
+  	<a 
+  	href="https://www.paypal.com/en_US/cgi-bin/webscr?cmd=_xclick&business=andrei.adamian%40gmail%2ecom&item_name=osmand&no_shipping=1&no_note=1&tax=0&currency_code=EUR&bn=PP%2dDonationsBF&charset=UTF%2d8"><img src="http://www.paypal.com/en_US/i/btn/x-click-but04.gif" alt="Donate"/></a>
     <iframe src="http://www.facebook.com/widgets/like.php?href=http://osmand.googlecode.com" 
 scrolling="no" frameborder="0" style="border:none; width:450px; height:80px"/>
   </Content> 
