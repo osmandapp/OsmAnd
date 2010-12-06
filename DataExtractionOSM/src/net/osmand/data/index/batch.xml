@@ -23,7 +23,10 @@
 		downloadOsmFiles="true" generateIndexes="true" uploadIndexes="true"
 		deleteFilesAfterUploading="true" indexPOI="true" indexMap="true"
 		indexTransport="true" indexAddress="true" mapZooms="" renderingTypesFile="">
-		<!-- add wget="C:/Program Files/GNUWin32/bin/wget.exe" to process, to use wget for download -->
+		<!-- Add wget="C:/Program Files/GNUWin32/bin/wget.exe" to process, to use wget for download.
+			 On linux systems if wget is in your path it can be wget="wget" or you can make own script with wget command:
+			 wget="/path/to/script/wget.sh"  
+		-->
 
         <!-- Countries to download from osm server -->
 		<!-- EUROPE -->
