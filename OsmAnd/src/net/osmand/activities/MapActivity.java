@@ -773,6 +773,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		rm.updateMapSource(vectorData, newSource);
 		
 		mapView.setMap(vectorData ? null : newSource);
+		ZoomControls zoomControls = (ZoomControls) findViewById(R.id.ZoomControls);
+		zoomControls.setIsZoomInEnabled(mapView.getZoom() + 1 < mapView.getMaximumShownMapZoom());
+		zoomControls.setIsZoomOutEnabled(mapView.getZoom() + 1 > mapView.getMinimumShownMapZoom());
 		rendererLayer.setVisible(vectorData);
 	}
 	
