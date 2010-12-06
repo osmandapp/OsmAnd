@@ -1,17 +1,8 @@
 package net.osmand.data.index;
 
-import static net.osmand.data.index.IndexConstants.ADDRESS_INDEX_EXT;
-import static net.osmand.data.index.IndexConstants.ADDRESS_INDEX_EXT_ZIP;
-import static net.osmand.data.index.IndexConstants.ADDRESS_TABLE_VERSION;
 import static net.osmand.data.index.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.data.index.IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
 import static net.osmand.data.index.IndexConstants.BINARY_MAP_VERSION;
-import static net.osmand.data.index.IndexConstants.POI_INDEX_EXT;
-import static net.osmand.data.index.IndexConstants.POI_INDEX_EXT_ZIP;
-import static net.osmand.data.index.IndexConstants.POI_TABLE_VERSION;
-import static net.osmand.data.index.IndexConstants.TRANSPORT_INDEX_EXT;
-import static net.osmand.data.index.IndexConstants.TRANSPORT_INDEX_EXT_ZIP;
-import static net.osmand.data.index.IndexConstants.TRANSPORT_TABLE_VERSION;
 import static net.osmand.data.index.IndexConstants.VOICE_INDEX_EXT_ZIP;
 import static net.osmand.data.index.IndexConstants.VOICE_VERSION;
 
@@ -45,35 +36,27 @@ public class DownloaderIndexFromGoogleCode {
 	 */
 	public static void main(String[] args) throws URISyntaxException, IOException {
 		Map<String, String> files = DownloaderIndexFromGoogleCode.getIndexFiles(new LinkedHashMap<String, String>(),
-				ADDRESS_TABLE_VERSION + ADDRESS_INDEX_EXT,
-				ADDRESS_TABLE_VERSION + ADDRESS_INDEX_EXT_ZIP,
-				POI_TABLE_VERSION + POI_INDEX_EXT,
-				POI_TABLE_VERSION + POI_INDEX_EXT_ZIP,
-				TRANSPORT_TABLE_VERSION + TRANSPORT_INDEX_EXT,
-				TRANSPORT_TABLE_VERSION + TRANSPORT_INDEX_EXT_ZIP,
 				BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT,
 				BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT_ZIP,
 				VOICE_VERSION + VOICE_INDEX_EXT_ZIP);
 		for(String s : files.keySet()){
 			System.out.println(s + " " + files.get(s)); //$NON-NLS-1$
 		}
-//								IndexConstants.TRANSPORT_TABLE_VERSION + "" }); //$NON-NLS-1$
-//		Map<String, String> indexFiles = DownloaderIndexFromGoogleCode.getIndexFiles(
-//				new String[] { IndexConstants.VOICE_INDEX_EXT_ZIP}, 
-//				new String[] {	IndexConstants.VOICE_VERSION + "", }, //$NON-NLS-1$
-//				new TreeMap<String, String>());   
-//		System.out.println(indexFiles);
+
 		
-		String odb = ""; //$NON-NLS-1$
+//		String odb = ""; //$NON-NLS-1$
 		// put your cookies and personal information for delete
 		
-		String cookieHSID = ""; //$NON-NLS-1$
-		String cookieSID = ""; //$NON-NLS-1$
-		String pagegen = ""; //$NON-NLS-1$
-		String token = ""; //$NON-NLS-1$
-		
-		
-		deleteFileFromGoogleDownloads(odb, token, pagegen, cookieHSID,cookieSID);
+//		String cookieHSID = ""; //$NON-NLS-1$
+//		String cookieSID = ""; //$NON-NLS-1$
+//		String pagegen = ""; //$NON-NLS-1$
+//		String token = ""; //$NON-NLS-1$
+//		
+//		for(String odb : indexFiles.keySet()){
+//			System.out.println("DELETING " + odb);
+//			deleteFileFromGoogleDownloads(odb, token, pagegen, cookieHSID,cookieSID);
+//		}
+//		System.out.println("DELETED " + indexFiles.size());
 	}
 	
 	
@@ -82,9 +65,9 @@ public class DownloaderIndexFromGoogleCode {
 		BufferedReader reader = null;
 		int num = 400;
 		int start = 0;
-		int size = -1;
-		while (size != files.size()) {
-			size = files.size();
+		boolean downloadNext = true;
+		while (downloadNext) {
+			downloadNext = false;
 			try {
 				URL url = new URL(
 						"http://code.google.com/p/osmand/downloads/list?num=" + num + "&start=" + start); //$NON-NLS-1$ //$NON-NLS-2$
@@ -93,7 +76,9 @@ public class DownloaderIndexFromGoogleCode {
 				String s = null;
 				String prevFile = null;
 				while ((s = reader.readLine()) != null) {
-					if (s.indexOf("files") != -1 || s.indexOf("{") != -1) { //$NON-NLS-1$ //$NON-NLS-2$
+					boolean hrefDownload = s.indexOf("files") != -1;
+					if (hrefDownload || s.indexOf("{") != -1) { //$NON-NLS-1$ //$NON-NLS-2$
+						downloadNext |= hrefDownload;
 						for (String extension : ext) {
 							prevFile = getIndexFiles(files, s, prevFile, extension);
 						}

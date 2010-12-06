@@ -23,6 +23,7 @@
 		downloadOsmFiles="true" generateIndexes="true" uploadIndexes="true"
 		deleteFilesAfterUploading="true" indexPOI="true" indexMap="true"
 		indexTransport="true" indexAddress="true" mapZooms="" renderingTypesFile="">
+		<!-- add wget="C:/Program Files/GNUWin32/bin/wget.exe" to process, to use wget for download -->
 
         <!-- Countries to download from osm server -->
 		<!-- EUROPE -->
@@ -195,20 +196,20 @@
 		<!--  SOUTH AMERICA -->
 		<regions siteToDownload="http://downloads.cloudmade.com/south_america/{0}/{0}.osm.bz2" region_prefix="" skip="true" 
 			region_suffix="_SA">
-			<region name="argentina" esize=""/>
-			<region name="bolivia" esize=""/>
-			<region name="brazil" esize=""/>
-			<region name="chile" esize=""/>
-			<region name="colombia" esize=""/>
-			<region name="ecuador" esize=""/>
-			<region name="falkland_islands" esize=""/>
-			<region name="french_guiana" esize=""/>
-			<region name="guyana" esize=""/>
-			<region name="paraguay" esize=""/>
-			<region name="peru" esize=""/>
-			<region name="suriname" esize=""/>
-			<region name="uruguay" esize=""/>
-			<region name="venezuela" esize=""/>
+			<region name="argentina" esize="22"/>
+			<region name="bolivia" esize="5"/>
+			<region name="brazil" esize="68"/>
+			<region name="chile" esize="30"/>
+			<region name="colombia" esize="30"/>
+			<region name="ecuador" esize="15"/>
+			<region name="falkland_islands" esize="1"/>
+			<region name="french_guiana" esize="3"/>
+			<region name="guyana" esize="2"/>
+			<region name="paraguay" esize="3"/>
+			<region name="peru" esize="10"/>
+			<region name="suriname" esize="1"/>
+			<region name="uruguay" esize="9"/>
+			<region name="venezuela" esize="11"/>
 		</regions>
 		
 		
@@ -271,14 +272,14 @@
 			<region name="alaska" esize=""/>
 			<region name="arizona" esize=""/>
 			<region name="arkansas" esize=""/>
-			<region name="california" esize=""/>
+			<region name="california" esize=""/> <!-- !big! -->
 			<region name="colorado" esize=""/>
 			<region name="connecticut" esize=""/>
 			<region name="delaware" esize=""/>
 			<region name="district_of_columbia" esize=""/>
 			<region name="florida" esize=""/>
 			<region name="georgia" esize=""/>
-			<region name="guantanamo_bay" esize=""/>
+			<region name="guantanamo_bay" esize=""/> <!-- ??? -->
 			<region name="hawaii" esize=""/>
 			<region name="idaho" esize=""/>
 			<region name="illinois" esize=""/>
@@ -311,10 +312,10 @@
 			<region name="south_carolina" esize=""/>
 			<region name="south_dakota" esize=""/>
 			<region name="tennessee" esize=""/>
-			<region name="texas" esize=""/>
+			<region name="texas" esize=""/> <!-- !big! -->
 			<region name="utah" esize=""/>
 			<region name="vermont" esize=""/>
-			<region name="virginia" esize=""/>
+			<region name="virginia" esize=""/> <!-- !big! -->
 			<region name="washington" esize=""/>
 			<region name="west_virginia" esize=""/>
 			<region name="wisconsin" esize=""/>
@@ -323,7 +324,7 @@
 		
 		<!-- Canada -->
 		<regions siteToDownload="http://downloads.cloudmade.com/north_america/canada/{0}/{0}.osm.bz2" region_prefix="Canada_" skip="true" region_suffix="_NorthAmerica">
-			<region name="alberta" esize=""/>
+			<region name="alberta" esize="36"/>
 			<region name="british_columbia" esize=""/>
 			<region name="manitoba" esize=""/>
 			<region name="new_brunswick" esize=""/>
