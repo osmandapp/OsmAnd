@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="continuous_rendering">Folyamatos megjelenítés</string>
+	<string name="continuous_rendering_descr">Folyamatos megjelenítés választása vagy csak a teljes képé</string>
         <string name="rendering_exception">Hiba történt a kiválasztott terület megjelenítésekor</string>
         <string name="rendering_out_of_memory">Nincs elég memória a terület megjelenítéséhez</string>
         <string name="show_point_options">Pont beállítások</string>
@@ -19,11 +21,11 @@
 	<string name="unknown_location">A jelenlegi helyzet nem ismert</string>
 	<string name="download_files_question">{0} fájl letöltése?</string>
 	<string name="download_files">Letöltés</string>
-	<string name="context_menu_item_search_transport">Tömegközlekedés keresése</string>
-	<string name="transport_searching_transport">Tömegközlekedés keresése (nincs kijelölt cél)</string>
-	<string name="transport_searching_route">Tömegközlekedés keresése ({0})</string>
+	<string name="context_menu_item_search_transport">Közlekedés keresése</string>
+	<string name="transport_searching_transport">Közlekedés keresése (nincs kijelölt cél)</string>
+	<string name="transport_searching_route">Közlekedés keresése ({0})</string>
 	<string name="transport_search_none">nincs</string>
-	<string name="transport_search_again">Tömegközlekedés keresése újra</string>
+	<string name="transport_search_again">Közlekedés keresése újra</string>
 
 	<string name="map_index">Térkép</string>
 	<string name="voice">Hang</string>
@@ -36,7 +38,7 @@
 	<string name="error_reading_gpx">GPX adat olvasási hiba</string>
 
 	<string name="vector_data">Vektoros OSM térkép</string>
-	<string name="transport_context_menu">Tömegközlekedés keresése a célnál</string>
+	<string name="transport_context_menu">Közlekedés keresése a célnál</string>
 	<string name="point_on_map">Pont a térképen\n Lat {0,number,#.####} Lon {1,number,#.####}</string>
 	<string name="osb_bug_name">Hiba</string>
 	<string name="poi_context_menu_modify">POI módosítás</string>
@@ -59,7 +61,7 @@
 	<string name="poi_namefinder_query_empty">POI kiválasztáshoz írj be keresést</string>
 	<string name="any_poi">Bármely</string>
 	
-	<string name="layer_transport_route">Tömegközlekedési útvonal</string>
+	<string name="layer_transport_route">Közlekedési útvonal</string>
 	<string name="thanks_yandex_traffic">Köszönet Yandexnek a forgalmi információkért.</string>
 	<string name="layer_yandex_traffic">Yandex forgalmi információ</string>
 	<string name="layer_route">Útvonal</string>
@@ -141,7 +143,7 @@
 	<string name="transport_to_go_before">to go before</string>
 	<string name="transport_stops_to_pass">stops to pass</string>
 	<string name="transport_route_distance">Útvonal távolsága</string>
-	<string name="transport">Tömegközlekedés</string>
+	<string name="transport">Közlekedés</string>
 	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">Tömegközlekedési megállok mutatása a térképen</string>
 	<string name="show_transport_over_map">Tömegközlekedési megállok mutatása</string>
