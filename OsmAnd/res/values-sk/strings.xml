@@ -50,7 +50,7 @@
 <string name="rotate_map_compass_opt">Podľa kompasu</string>
 <string name="rotate_map_bearing_opt">Podľa smeru pohybu</string>
 <string name="rotate_map_none_opt">Neotáčať</string>
-<string name="rotate_map_to_bearing_descr">Zvoliť ako otáčať mapu</string>
+<string name="rotate_map_to_bearing_descr">Vybrať ako otáčať mapu</string>
 <string name="rotate_map_to_bearing">Otáčanie mapy</string>
 <string name="show_route">Zobraziť cestu</string>
 <string name="fav_imported_sucessfully">Obľúbené úspešne importované</string>
@@ -108,7 +108,7 @@
 <string name="voice_provider">Hlasové údaje</string>
 <string name="voice_data_initializing">Inicializácia hlasových údajov...</string>
 <string name="voice_data_not_supported">Nepodporovaná verzia hlasových údajov</string>
-<string name="voice_data_corrupted">Zvolené hlasové údaje sú poškodené</string>
+<string name="voice_data_corrupted">Vybrané hlasové údaje sú poškodené</string>
 <string name="voice_data_unavailable">Aktuálne hlasové údaje nie sú dostupné</string>
 <string name="stop_routing">Zastaviť rutovanie</string>
 <string name="sd_unmounted">SD karta nie je prístupná.\nNebudete schopný vidieť mapu alebo niečo nájsť.</string>
@@ -288,9 +288,9 @@
 <string name="map_view_3d_descr">Zapnúť 3D zobrazenie mapy</string>
 <string name="map_view_3d">3D zobrazenie mapy</string>
 
-<string name="show_poi_over_map_description">Zobraziť POI namape (použije sa posledný zvolený filter)</string>
+<string name="show_poi_over_map_description">Zobraziť POI namape (použije sa posledný vybraný filter)</string>
 <string name="show_poi_over_map">Zobraziť POI</string>
-<string name="map_tile_source_descr">Zvoliť zdroj dlaždíc: </string>
+<string name="map_tile_source_descr">Vybraný zdroj dlaždíc: </string>
 <string name="map_tile_source">Zdroj dlaždíc mapy</string>
 <string name="map_source">Zdroj mapy</string>
 <string name="use_internet">Použiť internet</string>
@@ -311,13 +311,13 @@
 <string name="search_activity">Hľadať</string>
 <color name="color_white">#FFFFFF</color>
 <color name="color_red">#FF0000</color>
-<string name="searchpoi_activity">Zvoliť POI</string>
+<string name="searchpoi_activity">Vybrať POI</string>
 <string name="search_POI_level_btn">Nájsť viac</string>
 <string name="incremental_search_city">Hľadať mestá vzostupne. Pre nájdenie miest/PSČ, zadajte prvých 3 alebo viac znakov.</string>
 <string name="incremental_search_street">Hľadať ulicu vzostupne</string>
 <string name="incremental_search_building">Hľadať budovu vzostupne</string>
-<string name="choose_available_region">Zvoliť oblasť zo zoznamu</string>
-<string name="choose_intersected_street">Zvoliť pretínajúcu ulicu</string>
+<string name="choose_available_region">Vybrať oblasť zo zoznamu</string>
+<string name="choose_intersected_street">Vybrať pretínajúcu ulicu</string>
 <string name="Closest_Amenities">Najbližšie body záujmu</string>
 <string name="app_mode_default">Štandardný</string>
 <string name="app_mode_car">Automobil</string>
@@ -418,7 +418,7 @@
 <string name="filter_current_poiButton">Filter</string>
 <string name="edit_filter_delete_menu_item">Vymazať</string>
 <string name="edit_filter_save_as_menu_item">Uložiť ako</string>
-<string name="edit_filter_delete_dialog_title">Vymazať zvolený filter?</string>
+<string name="edit_filter_delete_dialog_title">Vymazať vybraný filter?</string>
 <string name="edit_filter_delete_message">Filter {0} bol zmazaný</string>
 <string name="edit_filter_create_message">Filter {0} bol vytvorený</string>
 <string name="default_buttons_selectall">Vybrať všetko</string>
