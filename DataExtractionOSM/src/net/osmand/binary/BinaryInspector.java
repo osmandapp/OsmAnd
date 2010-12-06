@@ -109,6 +109,7 @@ public class BinaryInspector {
 		int c = 0;
 		Set<String> addressNames = new LinkedHashSet<String>();
 		
+		
 		int version = -1;
 		// Go through all files and validate conistency 
 		for(File f : partsToExtractFrom.keySet()){
@@ -131,6 +132,16 @@ public class BinaryInspector {
 			LinkedHashSet<Float> temp = new LinkedHashSet<Float>();
 			String pattern = partsToExtractFrom.get(f);
 			boolean minus = true;
+			for (int i = 0; i < indexes[c].getIndexes().size(); i++) {
+				partsSet[c].add(i + 1f);
+				BinaryIndexPart part = indexes[c].getIndexes().get(i);
+				if(part instanceof MapIndex){
+					List<MapRoot> roots = ((MapIndex) part).getRoots();
+					for(int j=0; j<roots.size(); j++){
+						partsSet[c].add((i+1f)+(j+1)/10f);
+					}
+				}
+			}
 			if(pattern != null){
 				minus = pattern.startsWith("-");
 				String[] split = pattern.substring(1).split(",");
@@ -139,9 +150,7 @@ public class BinaryInspector {
 				}
 			}
 			
-			for (int i = 0; i < indexes[c].getIndexes().size(); i++) {
-				partsSet[c].add(i + 1f);
-			}
+			
 			if(minus){
 				partsSet[c].removeAll(temp);
 			} else {
@@ -172,38 +181,68 @@ public class BinaryInspector {
 
 				BinaryIndexPart part = index.getIndexes().get(i);
 				String map;
-				if (part instanceof AddressRegion) {
-					ous.writeTag(OsmandOdb.OsmAndStructure.ADDRESSINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
-					map = "Address";
-					if (addressNames.contains(part.getName())) {
-						System.err.println("Error : going to merge 2 addresses with same names. Skip " + part.getName());
-						continue;
-					}
-					addressNames.add(part.getName());
-				} else if (part instanceof TransportIndex) {
-					ous.writeTag(OsmandOdb.OsmAndStructure.TRANSPORTINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
-					map = "Transport";
-				} else if (part instanceof MapIndex) {
+				if (part instanceof MapIndex) {
 					ous.writeTag(OsmandOdb.OsmAndStructure.MAPINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 					map = "Map";
+					List<MapRoot> roots = ((MapIndex) part).getRoots();
+					List<MapRoot> toSkip = new ArrayList<MapRoot>();
+					int newL = 0;
+					int tagAndFieldSize = CodedOutputStream.computeTagSize(OsmandOdb.OsmAndMapIndex.LEVELS_FIELD_NUMBER) + 4;
+					for(int j=0; j<roots.size(); j++){
+						if (!partSet.contains(i + 1f + (j+1)*0.1f)) {
+							newL -= (roots.get(j).getLength() + tagAndFieldSize);
+							toSkip.add(roots.get(j));
+						}
+						
+					}
+					
+					
+					writeInt(ous, part.getLength() + newL);
+					long seek = part.getFilePointer();
+					while(seek < (part.getFilePointer()+ part.getLength())){
+						MapRoot next = null;
+						for(MapRoot r : toSkip){
+							if(seek < r.getFilePointer()) {
+								if(next == null || next.getFilePointer() > r.getFilePointer()){
+									next = r;
+								}
+							}
+							
+						}
+						if(next == null){
+							copyBinaryPart(ous, BUFFER_TO_READ, raf, seek, (int) (part.getLength() - (seek - part.getFilePointer())));
+							break;
+						} else {
+							int l = (int) (next.getFilePointer() - seek - tagAndFieldSize);
+							if(l > 0){
+								copyBinaryPart(ous, BUFFER_TO_READ, raf, seek, l);
+							}
+							seek += next.getLength() + tagAndFieldSize + l;
+						}
+						
+					}
+					
+					System.out.println(MessageFormat.format("{2} part {0} is extracted {1} bytes", part.getName(), part.getLength() + newL, map));
 				} else {
-					throw new UnsupportedOperationException();
-				}
-				writeInt(ous, part.getLength());
-				raf.seek(part.getFilePointer());
-				int toRead = part.getLength();
-				while (toRead > 0) {
-					int read = raf.read(BUFFER_TO_READ);
-					if (read == -1) {
-						throw new IllegalArgumentException("Unexpected end of file");
+					if (part instanceof AddressRegion) {
+						ous.writeTag(OsmandOdb.OsmAndStructure.ADDRESSINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+						map = "Address";
+						if (addressNames.contains(part.getName())) {
+							System.err.println("Error : going to merge 2 addresses with same names. Skip " + part.getName());
+							continue;
+						}
+						addressNames.add(part.getName());
+					} else if (part instanceof TransportIndex) {
+						ous.writeTag(OsmandOdb.OsmAndStructure.TRANSPORTINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+						map = "Transport";
+					} else {
+						throw new UnsupportedOperationException();
 					}
-					if (toRead < read) {
-						read = toRead;
-					}
-					ous.writeRawBytes(BUFFER_TO_READ, 0, read);
-					toRead -= read;
+					writeInt(ous, part.getLength());
+					copyBinaryPart(ous, BUFFER_TO_READ, raf, part.getFilePointer(), part.getLength());
+					System.out.println(MessageFormat.format("{2} part {0} is extracted {1} bytes", part.getName(), part.getLength(), map));
 				}
-				System.out.println(MessageFormat.format("{2} part {0} is extracted {1} bytes", part.getName(), part.getLength(), map));
+				
 			}
 		}
 		
@@ -213,6 +252,24 @@ public class BinaryInspector {
 		
 		
 		return list;
+	}
+
+
+	private static void copyBinaryPart(CodedOutputStream ous, byte[] BUFFER, RandomAccessFile raf, long fp, int length)
+			throws IOException {
+		raf.seek(fp);
+		int toRead = length;
+		while (toRead > 0) {
+			int read = raf.read(BUFFER);
+			if (read == -1) {
+				throw new IllegalArgumentException("Unexpected end of file");
+			}
+			if (toRead < read) {
+				read = toRead;
+			}
+			ous.writeRawBytes(BUFFER, 0, read);
+			toRead -= read;
+		}
 	}
 	
 
