@@ -2,7 +2,7 @@
 <resources>
 <string name="tiles_to_download_estimated_size">Pri priblížení {0} sa stiahne {1} dlaždíc ({2} Mb )</string>
 <string name="context_menu_item_download_map">Stiahnuť mapu</string>
-<string name="select_max_zoom_preload_area">Vybrať max. priblíženie na načítanie viditeľnej oblasti</string>
+<string name="select_max_zoom_preload_area">Vybrať max. priblíženie viditeľnej oblasti na načítanie</string>
 <string name="maps_could_not_be_downloaded">Táto mapa sa nedá stiahnuť</string>
 <string name="continuous_rendering">Postupné vykresľovanie</string>
 <string name="continuous_rendering_descr">Vybrať medzi postupným alebo celoobrazovým vykresľovaním</string>
@@ -162,7 +162,7 @@
 <string name="search_history_city">Mesto: {0}</string>
 <string name="search_history_street">Ulica: {0}, {1}</string>
 <string name="search_history_int_streets">Pretínajúce ulice: {0} x {1} v {2}</string>
-<string name="search_history_building">Budova: {0}, {1}, {2}</string>
+<string name="search_history_building">Adresa: {0}, {1}, {2}</string>
 <string name="search_history_navigate_to">Navigovať do: šírka = {0}, dĺžka = {1}</string>
 <string name="favorite">Obľúbené</string>
 <string name="clear_all">Zmazať všetko</string>
@@ -274,7 +274,7 @@
 <string name="use_english_names">Použiť anglické názvy</string>
 <string name="app_settings">Nastavenia aplikácie</string>
 <string name="search_address">Hľadať adresu</string>
-<string name="choose_building">Vybrať budovu</string>
+<string name="choose_building">Vybrať číslo domu/vchodu</string>
 <string name="choose_street">Vybrať ulicu</string>
 <string name="choose_city">Vybrať mesto</string>
 <string name="ChooseCountry">Vybrať krajinu</string>
@@ -344,8 +344,8 @@
 <string name="search_address_region">Oblasť</string>
 <string name="search_address_city">Mesto</string>
 <string name="search_address_street">Ulica</string>
-<string name="search_address_building">Budova</string>
-<string name="search_address_building_option">Budova</string>
+<string name="search_address_building">Číslo</string>
+<string name="search_address_building_option">Číslo domu/vchodu</string>
 <string name="search_address_street_option">Pretínajúca ulica</string>
 
 <string name="search_tabs_location">Pozícia</string>
