@@ -1,11 +1,15 @@
 package net.osmand.data.index;
 
+import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.net.URL;
 import java.text.MessageFormat;
@@ -77,6 +81,7 @@ public class IndexBatchCreator {
 	String cookieSID = "";
 	String pagegen = "";
 	String token = "";
+	private String wget;
 	
 	
 	public static void main(String[] args) {
@@ -113,8 +118,9 @@ public class IndexBatchCreator {
 			System.out.println("XML configuration file could not be read from " + name);
 			e.printStackTrace();
 			log.error("XML configuration file could not be read from " + name, e);
+		} finally {
+			safeClose(stream, "Error closing stream for " + name);
 		}
-		
 	}
 	
 	public void runBatch(Document doc){
@@ -127,6 +133,7 @@ public class IndexBatchCreator {
 		generateIndexes = Boolean.parseBoolean(process.getAttribute("generateIndexes"));
 		uploadIndexes = Boolean.parseBoolean(process.getAttribute("uploadIndexes"));
 		deleteFilesAfterUploading = Boolean.parseBoolean(process.getAttribute("deleteFilesAfterUploading"));
+		wget = process.getAttribute("wget");
 		
 		indexPOI = Boolean.parseBoolean(process.getAttribute("indexPOI"));
 		indexMap = Boolean.parseBoolean(process.getAttribute("indexMap"));
@@ -211,7 +218,7 @@ public class IndexBatchCreator {
 		Set<String> alreadyUploadedFiles = new LinkedHashSet<String>();
 		Set<String> alreadyGeneratedFiles = new LinkedHashSet<String>();
 		if(downloadFiles){
-			downloadFiles(countriesToDownload, alreadyGeneratedFiles, alreadyUploadedFiles);
+			downloadFilesAndGenerateIndex(countriesToDownload, alreadyGeneratedFiles, alreadyUploadedFiles);
 		}
 		if(generateIndexes){
 			generatedIndexes(alreadyGeneratedFiles, alreadyUploadedFiles);
@@ -223,7 +230,7 @@ public class IndexBatchCreator {
 	
 
 	
-	protected void downloadFiles(List<RegionCountries> countriesToDownload, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles){
+	protected void downloadFilesAndGenerateIndex(List<RegionCountries> countriesToDownload, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles){
 		// clean before downloading
 //		for(File f : osmDirFiles.listFiles()){
 //			log.info("Delete old file " + f.getName());  //$NON-NLS-1$
@@ -237,32 +244,84 @@ public class IndexBatchCreator {
 			for(String name : regionCountries.regionNames){
 				name = name.toLowerCase();
 				String url = MessageFormat.format(site, name);
-				downloadFile(url, prefix+name, suffix,alreadyGeneratedFiles, alreadyUploadedFiles);
+				String country = prefix+name;
+				File toSave = downloadFile(url, country, suffix, alreadyGeneratedFiles, alreadyUploadedFiles);
+				if (toSave != null && generateIndexes) {
+					generateIndex(toSave, country, alreadyGeneratedFiles, alreadyUploadedFiles);
+				}
 			}
 		}
-		
 		System.out.println("DOWNLOADING FILES FINISHED");
 	}
 	
-	private final static int DOWNLOAD_DEBUG = 1 << 20;
-	private final static int MB = 1 << 20;
-	private final static int BUFFER_SIZE = 1 << 15;
-	protected void downloadFile(String url, String country, String suffix, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
-		byte[] buffer = new byte[BUFFER_SIZE];
-		int count = 0;
-		int downloaded = 0;
-		int mbDownloaded = 0;
+	protected File downloadFile(String url, String country, String suffix, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
 		String ext = ".osm";
 		if(url.endsWith(".osm.bz2")){
 			ext = ".osm.bz2";
 		} else if(url.endsWith(".osm.pbf")){
 			ext = ".osm.pbf";
 		}
-		File toSave = new File(osmDirFiles, country + suffix + ext);
+		File toIndex = null;
+		File saveTo = new File(osmDirFiles, country + suffix + ext);
+		if (wget == null || wget.trim().length() == 0) {
+			toIndex = internalDownload(url, country, saveTo);
+		} else {
+			toIndex = wgetDownload(url, country, saveTo);
+		}
+		return toIndex;
+	}
+
+	private File wgetDownload(String url, String country, File toSave) 
+	{
+		BufferedReader wgetOutput = null;
+		OutputStream wgetInput = null;
+		Process wgetProc = null;
 		try {
+			log.info("Executing " + wget + " " + url + " -O "+ toSave.getCanonicalPath()); //$NON-NLS-1$//$NON-NLS-2$ $NON-NLS-3$
+			ProcessBuilder exec = new ProcessBuilder(wget, "--read-timeout=5", "--progress=dot:binary", url, "-O", //$NON-NLS-1$//$NON-NLS-2$ $NON-NLS-3$
+					toSave.getCanonicalPath());
+			exec.redirectErrorStream(true);
+			wgetProc = exec.start();
+			wgetOutput = new BufferedReader(new InputStreamReader(wgetProc.getInputStream()));
+			String line;
+			while ((line = wgetOutput.readLine()) != null) {
+				log.info("wget output:" + line); //$NON-NLS-1$
+			}
+			int exitValue = wgetProc.waitFor();
+			wgetProc = null;
+			if (exitValue != 0) {
+				log.error("Wget exited with error code: " + exitValue); //$NON-NLS-1$
+			} else {
+				return toSave;
+			}
+		} catch (IOException e) {
+			log.error("Input/output exception " + toSave.getName() + " downloading from " + url + "using wget: " + wget, e); //$NON-NLS-1$ //$NON-NLS-2$ $NON-NLS-3$
+		} catch (InterruptedException e) {
+			log.error("Interrupted exception " + toSave.getName() + " downloading from " + url + "using wget: " + wget, e); //$NON-NLS-1$ //$NON-NLS-2$ $NON-NLS-3$
+		} finally {
+			safeClose(wgetOutput, ""); //$NON-NLS-1$
+			safeClose(wgetInput, ""); //$NON-NLS-1$
+			if (wgetProc != null) {
+				wgetProc.destroy();
+			}
+		}
+		return null;
+	}
+	
+	private final static int DOWNLOAD_DEBUG = 1 << 20;
+	private final static int MB = 1 << 20;
+	private final static int BUFFER_SIZE = 1 << 15;
+	private File internalDownload(String url, String country, File toSave) {
+		int count = 0;
+		int downloaded = 0;
+		int mbDownloaded = 0;
+		byte[] buffer = new byte[BUFFER_SIZE];
+		OutputStream ostream = null;
+		InputStream stream = null;
+		try {
+			ostream = new FileOutputStream(toSave);
+			stream = new URL(url).openStream();
 			log.info("Downloading country " + country + " from " + url);  //$NON-NLS-1$//$NON-NLS-2$
-			FileOutputStream ostream = new FileOutputStream(toSave);
-			InputStream stream = new URL(url).openStream();
 			while ((count = stream.read(buffer)) != -1) {
 				ostream.write(buffer, 0, count);
 				downloaded += count;
@@ -272,13 +331,24 @@ public class IndexBatchCreator {
 					log.info(mbDownloaded +" megabytes downloaded of " + toSave.getName());
 				}
 			}
-			ostream.close();
-			stream.close();
-			generateIndex(toSave, country, alreadyGeneratedFiles, alreadyUploadedFiles);
+			return toSave;
 		} catch (IOException e) {
 			log.error("Input/output exception " + toSave.getName() + " downloading from " + url, e); //$NON-NLS-1$ //$NON-NLS-2$
+		} finally {
+			safeClose(ostream, "Input/output exception " + toSave.getName() + " to close stream "); //$NON-NLS-1$ //$NON-NLS-2$
+			safeClose(stream, "Input/output exception " + url + " to close stream "); //$NON-NLS-1$ //$NON-NLS-2$
 		}
-		
+		return null;
+	}
+
+	private static void safeClose(Closeable ostream, String message) {
+		if (ostream != null) {
+			try {
+				ostream.close();
+			} catch (Exception e) {
+				log.error(message, e); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+		}
 	}
 	
 	protected void generatedIndexes(Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
