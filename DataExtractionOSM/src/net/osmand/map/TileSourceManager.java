@@ -193,6 +193,8 @@ public class TileSourceManager {
 			list.add(getGoogleMapsSatelliteSource());
 			list.add(getGoogleMapsTerrainSource());
 			
+			list.add(getCykloatlasCzSource());
+			
 			list.add(getMicrosoftMapsSource());
 			list.add(getMicrosoftEarthSource());
 			list.add(getMicrosoftHybridSource());
@@ -203,6 +205,25 @@ public class TileSourceManager {
 	}
 	
 	
+	public static class CykloatlasSourceTemplate extends TileSourceTemplate {
+
+		public CykloatlasSourceTemplate(String name, String urlToLoad){
+			super(name, urlToLoad, ".png", 15, 7, 256, 8, 26000); //$NON-NLS-1$
+		}
+
+		@Override
+		public String getUrlToLoad(int x, int y, int zoom) {
+			String z = Integer.toString(zoom);
+			// use int to string not format numbers! (non-nls)
+			if(urlToLoad == null){
+				return null;
+			}
+			if (zoom >= 13)
+				z += "c";
+			return MessageFormat.format(urlToLoad, z, x+"", y+""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		}
+		
+	}
 	
 	
 	public static TileSourceTemplate getMapnikSource(){
@@ -216,6 +237,10 @@ public class TileSourceManager {
 	public static TileSourceTemplate getCycleMapSource(){
 //		return new TileSourceTemplate("CycleMap", "http://b.andy.sandbox.cloudmade.com/tiles/cycle/{0}/{1}/{2}.png", ".png", 17, 0, 256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 		return new TileSourceTemplate("CycleMap", "http://b.tile.opencyclemap.org/cycle/{0}/{1}/{2}.png", ".png", 17, 0, 256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+	}
+	
+	public static TileSourceTemplate getCykloatlasCzSource(){
+		return new CykloatlasSourceTemplate("Cykloatlas CZ", "http://services.tmapserver.cz/tiles/gm/shc/{0}/{1}/{2}.png");  //$NON-NLS-1$//$NON-NLS-2$
 	}
 	
 	public static TileSourceTemplate getAerialMapSource(){
