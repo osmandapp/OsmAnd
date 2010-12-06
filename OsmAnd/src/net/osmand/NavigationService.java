@@ -55,10 +55,7 @@ public class NavigationService extends Service implements LocationListener {
 				LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 				if(register){
 					boolean continuous = serviceOffInterval == 0;
-					if(continuous){
-						serviceOffInterval = OsmandSettings.getSavingTrackInterval(OsmandSettings.getPrefs(NavigationService.this)) * 1000;
-					}
-					locationManager.requestLocationUpdates(serviceOffProvider, serviceOffInterval, 0, NavigationService.this);
+					locationManager.requestLocationUpdates(serviceOffProvider, continuous? 1000 : serviceOffInterval, 0, NavigationService.this);
 					if(!continuous){
 						delayedAction(false, serviceError);
 					}
