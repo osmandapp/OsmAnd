@@ -25,7 +25,8 @@
 		indexTransport="true" indexAddress="true" mapZooms="" renderingTypesFile="">
 		<!-- Add wget="C:/Program Files/GNUWin32/bin/wget.exe" to process, to use wget for download.
 			 On linux systems if wget is in your path it can be wget="wget" or you can make own script with wget command:
-			 wget="/path/to/script/wget.sh"  
+			 wget="/path/to/script/wget.sh"
+			 Defaultly enabled parameter of wget is: --read-timeout=5 that prevents hanging of download from  cloudmade/geofabrik server  
 		-->
 
         <!-- Countries to download from osm server -->
@@ -169,7 +170,6 @@
 			<region name="honduras" esize="3" />
 			<region name="jamaica" esize="1" />
 			<region name="mexico" esize="58" />
-			<!-- NOT GENERATED
 			<region name="anguilla" esize=""/>
 			<region name="antigua_and_barbuda" esize=""/>
 			<region name="aruba" esize=""/>
@@ -192,7 +192,7 @@
 			<region name="st_vincent_and_the_grenadines" esize=""/>
 			<region name="trinidad_and_tobago" esize=""/>
 			<region name="virgin_islands" esize=""/>
-			 -->
+
 		</regions>
 		
 		
@@ -435,7 +435,6 @@
 			<region name="egypt" esize=""/>
 			<region name="madagascar" esize=""/>
 			<region name="morocco" esize=""/> 
-			<!-- NOT GENERATED
 			<region name="angola" esize=""/>
 			<region name="benin" esize=""/>
 			<region name="botswana" esize=""/>
@@ -490,7 +489,7 @@
 			<region name="western_sahara" esize=""/>
 			<region name="zambia" esize=""/>
 			<region name="zimbabwe" esize=""/>
-			 -->
+
 		</regions>
 		
 		<!-- South Africa -->
@@ -502,7 +501,6 @@
 		<regions siteToDownload="http://downloads.cloudmade.com/oceania/{0}/{0}.osm.bz2" region_prefix="" skip="true" region_suffix="_Australia">
 			<!-- <region name="australia" esize=""/>  -->
 			<region name="new_zealand" esize="23"/>
-			<!--  NOT GENERATED
 			<region name="american_samoa" esize=""/>
 			<region name="baker_island" esize=""/>
 			<region name="cocos_keeling_islands" esize=""/>
@@ -533,7 +531,7 @@
 			<region name="vanuatu" esize=""/>
 			<region name="wake_island" esize=""/>
 			<region name="wallis_and_futuna" esize=""/>
-			 -->
+
 		</regions>		
 	</process>
 	
