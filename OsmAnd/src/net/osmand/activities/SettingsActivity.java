@@ -574,9 +574,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, false);
 			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, true);
 			edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, false);
+			edit.putBoolean(OsmandSettings.USE_STEP_BY_STEP_RENDERING, true);
 //			edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
 			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, true);
-			edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, 15);
+			edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, 5);
 			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.BOTTOM_CONSTANT);
 //			edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
 			
@@ -600,6 +601,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_COMPASS);
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, true);
 			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
+			edit.putBoolean(OsmandSettings.USE_STEP_BY_STEP_RENDERING, false);
 //			if(useInternetToDownloadTiles.isChecked()){
 //				edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, true);
 //			}
@@ -615,6 +617,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_NONE);
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, false);
 			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
+			edit.putBoolean(OsmandSettings.USE_STEP_BY_STEP_RENDERING, true);
 //			edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, _);
 //			edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
 			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, false);
