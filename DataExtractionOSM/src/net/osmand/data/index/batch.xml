@@ -275,7 +275,6 @@
 			<region name="alaska" esize=""/>
 			<region name="arizona" esize=""/>
 			<region name="arkansas" esize=""/>
-			<region name="california" esize=""/> <!-- !big! -->
 			<region name="colorado" esize=""/>
 			<region name="connecticut" esize=""/>
 			<region name="delaware" esize=""/>
@@ -305,7 +304,6 @@
 			<region name="new_jersey" esize=""/>
 			<region name="new_mexico" esize=""/>
 			<region name="new_york" esize=""/>
-			<region name="north_carolina" esize=""/>
 			<region name="north_dakota" esize=""/>
 			<region name="ohio" esize=""/>
 			<region name="oklahoma" esize=""/>
@@ -315,14 +313,19 @@
 			<region name="south_carolina" esize=""/>
 			<region name="south_dakota" esize=""/>
 			<region name="tennessee" esize=""/>
-			<region name="texas" esize=""/> <!-- !big! -->
 			<region name="utah" esize=""/>
 			<region name="vermont" esize=""/>
-			<region name="virginia" esize=""/> <!-- !big! -->
 			<region name="washington" esize=""/>
 			<region name="west_virginia" esize=""/>
 			<region name="wisconsin" esize=""/>
 			<region name="wyoming" esize=""/>
+			<!-- 
+			<region name="virginia" esize=""/>
+			<region name="texas" esize=""/>
+			<region name="california" esize=""/>
+			<region name="north_carolina" esize=""/>
+			 -->
+		
 		</regions>
 		
 		<!-- Canada -->
