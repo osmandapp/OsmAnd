@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="general_settings_descr">Настроить использование интернета, выбрать ориентацию экрана, вращение карты и другое</string>
+    <string name="general_settings">Общие</string>
+	<string name="rendering_settings_descr">Выбрать источник карты и внешний вид</string>
+    <string name="rendering_settings">Карта</string>
+    <string name="index_settings_descr">Загрузить и обновить индексы</string>
+    <string name="index_settings">Данные для офлайн использования</string>
+	<string name="osmand_service">Фоновый режим</string>
+	<string name="osmand_service_descr">Запустить OsmAnd в фоновом режиме для записи трека и навигации</string>
 	<string name="fast_route_mode">Наибыстрейший маршрут</string>
 	<string name="fast_route_mode_descr">Включите опцию для расчета наибыстрейшего маршрута или отключите для расчета кратчайшего.</string>
 	<string name="tiles_to_download_estimated_size">На масштабе {0} загрузить {1} тайлов ({2} Mb )</string>
