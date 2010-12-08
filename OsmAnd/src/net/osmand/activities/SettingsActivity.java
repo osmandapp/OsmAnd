@@ -110,6 +110,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			new BooleanPreference(OsmandSettings.SAVE_TRACK_TO_GPX, OsmandSettings.SAVE_TRACK_TO_GPX_DEF),
 			new BooleanPreference(OsmandSettings.DEBUG_RENDERING_INFO, OsmandSettings.DEBUG_RENDERING_INFO_DEF),
 			new BooleanPreference(OsmandSettings.USE_STEP_BY_STEP_RENDERING, OsmandSettings.USE_STEP_BY_STEP_RENDERING_DEF),
+			new BooleanPreference(OsmandSettings.FAST_ROUTE_MODE, OsmandSettings.FAST_ROUTE_MODE_DEF),
 	};
 	private BroadcastReceiver broadcastReceiver;
 	

@@ -362,11 +362,7 @@ public class OsmandRenderer {
 			for(IconDrawInfo icon : rc.iconsToDraw){
 				if (icon.resId != 0) {
 					if (cachedIcons.get(icon.resId) == null) {
-						Options options = new BitmapFactory.Options();
-						options.inScaled = false;
-						options.inTargetDensity = dm.densityDpi;
-						options.inDensity = dm.densityDpi;
-						cachedIcons.put(icon.resId, BitmapFactory.decodeResource(context.getResources(), icon.resId, options));
+						cachedIcons.put(icon.resId, UnscaledBitmapLoader.loadFromResource(context.getResources(), icon.resId, null, dm));
 					}
 					Bitmap ico = cachedIcons.get(icon.resId);
 					if (ico != null) {

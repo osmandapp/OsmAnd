@@ -161,7 +161,7 @@ public class RouteProvider {
 	}
 
 	public RouteCalculationResult calculateRouteImpl(Location start, LatLon end, ApplicationMode mode, RouteService type, Context ctx,
-			List<Location> gpxRoute){
+			List<Location> gpxRoute, boolean fast){
 		long time = System.currentTimeMillis();
 		if (start != null && end != null) {
 			if(log.isInfoEnabled()){
@@ -199,10 +199,10 @@ public class RouteProvider {
 					res = new RouteCalculationResult(new ArrayList<Location>(gpxRoute.subList(startI, endI)), null, start, end, null);
 					addMissingTurnsToRoute(res, start, end, mode, ctx);
 				} else if (type == RouteService.YOURS) {
-					res = findYOURSRoute(start, end, mode);
+					res = findYOURSRoute(start, end, mode, fast);
 					addMissingTurnsToRoute(res, start, end, mode, ctx);
 				} else {
-					res = findCloudMadeRoute(start, end, mode, ctx);
+					res = findCloudMadeRoute(start, end, mode, ctx, fast);
 					// for test purpose
 					addMissingTurnsToRoute(res, start, end, mode, ctx);
 				}
@@ -422,7 +422,7 @@ public class RouteProvider {
 	}
 
 
-	protected RouteCalculationResult findYOURSRoute(Location start, LatLon end, ApplicationMode mode) throws MalformedURLException, IOException,
+	protected RouteCalculationResult findYOURSRoute(Location start, LatLon end, ApplicationMode mode, boolean fast) throws MalformedURLException, IOException,
 			ParserConfigurationException, FactoryConfigurationError, SAXException {
 		List<Location> res = new ArrayList<Location>();
 		StringBuilder uri = new StringBuilder();
@@ -438,7 +438,7 @@ public class RouteProvider {
 		} else {
 			uri.append("&v=motorcar"); //$NON-NLS-1$
 		}
-		uri.append("&fast=1").append("&layer=mapnik"); //$NON-NLS-1$ //$NON-NLS-2$
+		uri.append("&fast=").append(fast ? "1" : "0").append("&layer=mapnik"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 
 		URL url = new URL(uri.toString());
 		URLConnection connection = url.openConnection();
@@ -481,7 +481,7 @@ public class RouteProvider {
 	}
 	
 	
-	protected RouteCalculationResult findCloudMadeRoute(Location start, LatLon end, ApplicationMode mode, Context ctx) throws MalformedURLException, IOException,
+	protected RouteCalculationResult findCloudMadeRoute(Location start, LatLon end, ApplicationMode mode, Context ctx, boolean fast) throws MalformedURLException, IOException,
 	ParserConfigurationException, FactoryConfigurationError, SAXException {
 		List<Location> res = new ArrayList<Location>();
 		List<RouteDirectionInfo> directions = null;
@@ -498,7 +498,11 @@ public class RouteProvider {
 		} else if (ApplicationMode.BICYCLE == mode) {
 			uri.append("bicycle.gpx"); //$NON-NLS-1$
 		} else {
-			uri.append("car.gpx"); //$NON-NLS-1$
+			if(fast){
+				uri.append("car.gpx"); //$NON-NLS-1$
+			} else {
+				uri.append("car/shortest.gpx"); //$NON-NLS-1$
+			}
 		}
 		uri.append("?lang=").append(Locale.getDefault().getLanguage()); //$NON-NLS-1$
 

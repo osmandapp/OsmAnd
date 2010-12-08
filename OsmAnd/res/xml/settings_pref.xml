@@ -32,6 +32,8 @@
 
 <PreferenceScreen android:title="@string/routing_settings" android:summary="@string/routing_settings_descr">
 <ListPreference android:title="@string/router_service" android:key="router_service" android:summary="@string/router_service_descr"></ListPreference>
+<CheckBoxPreference android:summary="@string/fast_route_mode_descr" android:title="@string/fast_route_mode" android:key="fast_route_mode"></CheckBoxPreference>
+
 <CheckBoxPreference android:summary="@string/background_router_service_descr" android:title="@string/background_router_service" android:key="service_off_enabled"></CheckBoxPreference>
 <ListPreference android:key="service_off_provider" android:title="@string/background_service_provider" android:summary="@string/background_service_provider_descr"></ListPreference>
 <ListPreference android:key="service_off_interval" android:title="@string/background_service_int" android:summary="@string/background_service_int_descr"></ListPreference>
