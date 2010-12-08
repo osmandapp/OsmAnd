@@ -1,55 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-  xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-<ListPreference android:summary="@string/settings_preset_descr" android:title="@string/settings_preset" android:key="application_mode"></ListPreference>
-<!--  <CheckBoxPreference android:key="use_internet_to_calculate_route" android:title="@string/use_online_routing" android:summary="@string/use_online_routing_descr"></CheckBoxPreference>  -->
-<PreferenceScreen android:title="@string/map_preferences" android:summary="@string/map_preferences_descr">
-<CheckBoxPreference android:key="use_internet_to_download_tiles" android:title="@string/use_internet" android:summary="@string/use_internet_to_download_tile"></CheckBoxPreference>
-<ListPreference android:title="@string/map_tile_source" android:summary="@string/map_tile_source_descr" android:key="map_tile_sources"></ListPreference>
-<ListPreference android:title="@string/max_level_download_tile" android:summary="@string/max_level_download_tile_descr" android:key="max_level_download_tile"></ListPreference>
-<!--  <CheckBoxPreference android:key="show_poi_over_map" android:title="@string/show_poi_over_map" android:summary="@string/show_poi_over_map_description"></CheckBoxPreference>  -->
-<!--  <CheckBoxPreference android:key="show_transport_over_map" android:title="@string/show_transport_over_map" android:summary="@string/show_transport_over_map_description"></CheckBoxPreference>  -->
-<CheckBoxPreference android:title="@string/auto_zoom_map" android:summary="@string/auto_zoom_map_descr" android:key="auto_zoom_map"></CheckBoxPreference>
-<CheckBoxPreference android:key="show_view_angle" android:title="@string/show_view_angle" android:summary="@string/show_view_angle_descr"></CheckBoxPreference>
-<ListPreference android:key="rotate_map" android:title="@string/rotate_map_to_bearing" android:summary="@string/rotate_map_to_bearing_descr"></ListPreference>
-<ListPreference android:key="map_screen_orientation" android:title="@string/map_screen_orientation" android:summary="@string/map_screen_orientation_descr"></ListPreference>
-<ListPreference android:key="position_on_map" android:title="@string/position_on_map" android:summary="@string/position_on_map_descr"></ListPreference>
-<CheckBoxPreference android:key="use_trackball_for_movements" android:title="@string/use_trackball" android:summary="@string/use_trackball_descr"></CheckBoxPreference>
-<CheckBoxPreference android:key="use_high_res_maps" android:title="@string/use_high_res_maps" android:summary="@string/use_high_res_maps_descr"></CheckBoxPreference>
-</PreferenceScreen>
+	<ListPreference android:summary="@string/settings_preset_descr" android:title="@string/settings_preset" android:key="application_mode"></ListPreference>
 
-<PreferenceScreen android:title="@string/data_settings" android:summary="@string/data_settings_descr">
-<CheckBoxPreference android:summary="@string/use_english_names_descr" android:title="@string/use_english_names" android:key="use_english_names"></CheckBoxPreference>
-<Preference android:title="@string/reload_indexes" android:key="reload_indexes" android:summary="@string/reload_indexes_descr"></Preference>
-<Preference android:title="@string/download_indexes" android:key="download_indexes" android:summary="@string/download_indexes_descr"></Preference>
-<ListPreference android:title="@string/voice_provider" android:key="voice_provider" android:summary="@string/voice_provider_descr"></ListPreference>
-<ListPreference android:key="renderer" android:title="@string/renderers" android:summary="@string/renderers_descr"></ListPreference>
-<CheckBoxPreference android:summary="@string/continuous_rendering_descr" android:title="@string/continuous_rendering" android:key="use_step_by_step_rendering"/>
-<CheckBoxPreference android:summary="Use this flag to check rendering performance" android:title="Trace rendering" android:key="debug_rendering"></CheckBoxPreference>
+	<PreferenceScreen android:title="@string/rendering_settings" android:summary="@string/rendering_settings_descr">
+		<ListPreference android:title="@string/map_tile_source" android:summary="@string/map_tile_source_descr" android:key="map_tile_sources"></ListPreference>
+		<CheckBoxPreference android:summary="@string/use_english_names_descr" android:title="@string/use_english_names"
+			android:key="use_english_names"></CheckBoxPreference>
+		<ListPreference android:key="renderer" android:title="@string/renderers" android:summary="@string/renderers_descr"></ListPreference>
+		<CheckBoxPreference android:summary="@string/continuous_rendering_descr" android:title="@string/continuous_rendering"
+			android:key="use_step_by_step_rendering" />
+		<CheckBoxPreference android:key="use_high_res_maps" android:title="@string/use_high_res_maps" android:summary="@string/use_high_res_maps_descr"></CheckBoxPreference>
+		<CheckBoxPreference android:summary="Use this flag to check rendering performance" android:title="Trace rendering"
+			android:key="debug_rendering"></CheckBoxPreference>
 
-</PreferenceScreen>
+	</PreferenceScreen>
 
-<PreferenceScreen android:title="@string/routing_settings" android:summary="@string/routing_settings_descr">
-<ListPreference android:title="@string/router_service" android:key="router_service" android:summary="@string/router_service_descr"></ListPreference>
-<CheckBoxPreference android:summary="@string/fast_route_mode_descr" android:title="@string/fast_route_mode" android:key="fast_route_mode"></CheckBoxPreference>
+	<PreferenceScreen android:title="@string/routing_settings" android:summary="@string/routing_settings_descr">
+		<ListPreference android:title="@string/router_service" android:key="router_service" android:summary="@string/router_service_descr"></ListPreference>
+		<CheckBoxPreference android:summary="@string/fast_route_mode_descr" android:title="@string/fast_route_mode"
+			android:key="fast_route_mode"></CheckBoxPreference>
+		<ListPreference android:title="@string/voice_provider" android:key="voice_provider" android:summary="@string/voice_provider_descr"></ListPreference>
+		<!--
+			<CheckBoxPreference android:key="use_internet_to_calculate_route" android:title="@string/use_online_routing"
+			android:summary="@string/use_online_routing_descr"></CheckBoxPreference>
+		-->
+	</PreferenceScreen>
+	
+	<PreferenceScreen android:title="@string/index_settings" android:summary="@string/index_settings_descr">
+		<Preference android:title="@string/reload_indexes" android:key="reload_indexes" android:summary="@string/reload_indexes_descr"></Preference>
+		<Preference android:title="@string/download_indexes" android:key="download_indexes" android:summary="@string/download_indexes_descr"></Preference>
+	</PreferenceScreen>
 
-<CheckBoxPreference android:summary="@string/background_router_service_descr" android:title="@string/background_router_service" android:key="service_off_enabled"></CheckBoxPreference>
-<ListPreference android:key="service_off_provider" android:title="@string/background_service_provider" android:summary="@string/background_service_provider_descr"></ListPreference>
-<ListPreference android:key="service_off_interval" android:title="@string/background_service_int" android:summary="@string/background_service_int_descr"></ListPreference>
-<ListPreference android:key="service_off_wait_interval" android:title="@string/background_service_wait_int" android:summary="@string/background_service_wait_int_descr"></ListPreference>
-</PreferenceScreen>
+	<PreferenceScreen android:title="@string/osmand_service" android:summary="@string/osmand_service_descr">
+		<CheckBoxPreference android:summary="@string/background_router_service_descr" android:title="@string/background_router_service"
+			android:key="service_off_enabled"></CheckBoxPreference>
+		<ListPreference android:key="service_off_provider" android:title="@string/background_service_provider" android:summary="@string/background_service_provider_descr"></ListPreference>
+		<ListPreference android:key="service_off_interval" android:title="@string/background_service_int" android:summary="@string/background_service_int_descr"></ListPreference>
+		<ListPreference android:key="service_off_wait_interval" android:title="@string/background_service_wait_int"
+			android:summary="@string/background_service_wait_int_descr"></ListPreference>
+	</PreferenceScreen>
+	
+	
+	<PreferenceScreen android:title="@string/general_settings" android:summary="@string/general_settings_descr">
+		<CheckBoxPreference android:key="use_internet_to_download_tiles" android:title="@string/use_internet" android:summary="@string/use_internet_to_download_tile"></CheckBoxPreference>
+		
+		<ListPreference android:title="@string/max_level_download_tile" android:summary="@string/max_level_download_tile_descr"
+			android:key="max_level_download_tile"></ListPreference>
+		<CheckBoxPreference android:title="@string/auto_zoom_map" android:summary="@string/auto_zoom_map_descr" android:key="auto_zoom_map"></CheckBoxPreference>
+		<CheckBoxPreference android:key="show_view_angle" android:title="@string/show_view_angle" android:summary="@string/show_view_angle_descr"></CheckBoxPreference>
+		<ListPreference android:key="rotate_map" android:title="@string/rotate_map_to_bearing" android:summary="@string/rotate_map_to_bearing_descr"></ListPreference>
+		<ListPreference android:key="map_screen_orientation" android:title="@string/map_screen_orientation" android:summary="@string/map_screen_orientation_descr"></ListPreference>
+		<ListPreference android:key="position_on_map" android:title="@string/position_on_map" android:summary="@string/position_on_map_descr"></ListPreference>
+		<CheckBoxPreference android:key="use_trackball_for_movements" android:title="@string/use_trackball" android:summary="@string/use_trackball_descr"></CheckBoxPreference>
+		
+	</PreferenceScreen>
+	
 
-<PreferenceScreen android:title="@string/monitor_preferences" android:summary="@string/monitor_preferences_descr">
-<CheckBoxPreference android:summary="@string/save_track_to_gpx_descrp" android:title="@string/save_track_to_gpx" android:key="save_track_to_gpx"></CheckBoxPreference>
-<ListPreference android:summary="@string/save_track_interval_descr" android:title="@string/save_track_interval" android:key="save_track_interval"></ListPreference>
-<Preference android:summary="@string/save_current_track_descr" android:title="@string/save_current_track" android:key="save_current_track"></Preference>
-</PreferenceScreen>	
+	<PreferenceScreen android:title="@string/monitor_preferences" android:summary="@string/monitor_preferences_descr">
+		<CheckBoxPreference android:summary="@string/save_track_to_gpx_descrp" android:title="@string/save_track_to_gpx"
+			android:key="save_track_to_gpx"></CheckBoxPreference>
+		<ListPreference android:summary="@string/save_track_interval_descr" android:title="@string/save_track_interval"
+			android:key="save_track_interval"></ListPreference>
+		<Preference android:summary="@string/save_current_track_descr" android:title="@string/save_current_track" android:key="save_current_track"></Preference>
+	</PreferenceScreen>
 
-<PreferenceScreen android:title="@string/osm_settings" android:summary="@string/osm_settings_descr">
-<!--  <CheckBoxPreference android:key="show_osm_bugs" android:title="@string/show_osm_bugs" android:summary="@string/show_osm_bugs_descr"></CheckBoxPreference>  -->
-<EditTextPreference android:title="@string/user_name" android:summary="@string/user_name_descr" android:key="user_name"></EditTextPreference>
-<EditTextPreference android:title="@string/user_password"  android:password="true" android:summary="@string/user_password_descr" android:key="user_password"></EditTextPreference>
-</PreferenceScreen>
+	<PreferenceScreen android:title="@string/osm_settings" android:summary="@string/osm_settings_descr">
+		<!--
+			<CheckBoxPreference android:key="show_osm_bugs" android:title="@string/show_osm_bugs"
+			android:summary="@string/show_osm_bugs_descr"></CheckBoxPreference>
+		-->
+		<EditTextPreference android:title="@string/user_name" android:summary="@string/user_name_descr" android:key="user_name"></EditTextPreference>
+		<EditTextPreference android:title="@string/user_password" android:password="true" android:summary="@string/user_password_descr"
+			android:key="user_password"></EditTextPreference>
+	</PreferenceScreen>
 
 </PreferenceScreen>
