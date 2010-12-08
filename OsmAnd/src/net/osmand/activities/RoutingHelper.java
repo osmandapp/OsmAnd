@@ -439,11 +439,12 @@ public class RoutingHelper {
 		if(currentRunningJob == null){
 			// do not evaluate very often
 			if (System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval) {
+				final boolean fastRouteMode = OsmandSettings.isFastRouteMode(context);
 				synchronized (this) {
 					currentRunningJob = new Thread(new Runnable() {
 						@Override
 						public void run() {
-							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, currentGPXRoute);
+							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, currentGPXRoute, fastRouteMode);
 							synchronized (RoutingHelper.this) {
 								if (res.isCalculated()) {
 									setNewRoute(res);

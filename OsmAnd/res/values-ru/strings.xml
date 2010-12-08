@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="fast_route_mode">Наибыстрейший маршрут</string>
+	<string name="fast_route_mode_descr">Включите опцию для расчета наибыстрейшего маршрута или отключите для расчета кратчайшего.</string>
 	<string name="tiles_to_download_estimated_size">На масштабе {0} загрузить {1} тайлов ({2} Mb )</string>
 	<string name="context_menu_item_download_map">Загрузить карту</string>
 	<string name="select_max_zoom_preload_area">Выберите максимальный масштаб для загрузки видимой области</string>

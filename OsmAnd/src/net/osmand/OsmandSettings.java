@@ -229,6 +229,15 @@ public class OsmandSettings {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		return prefs.getBoolean(SAVE_TRACK_TO_GPX, SAVE_TRACK_TO_GPX_DEF);
 	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String FAST_ROUTE_MODE = "fast_route_mode"; //$NON-NLS-1$
+	public static final boolean FAST_ROUTE_MODE_DEF = true; 
+
+	public static boolean isFastRouteMode(Context ctx) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(FAST_ROUTE_MODE, FAST_ROUTE_MODE_DEF);
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SAVE_TRACK_INTERVAL = "save_track_interval"; //$NON-NLS-1$

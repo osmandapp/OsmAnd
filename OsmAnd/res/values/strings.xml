@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="fast_route_mode">Fastest route</string>
+	<string name="fast_route_mode_descr">Enable for calculate fastest route or disable for shortest route </string>
+	
 	<string name="tiles_to_download_estimated_size">At zoom {0} download {1} tiles ({2} Mb )</string>
 	<string name="context_menu_item_download_map">Download map</string>
 	<string name="select_max_zoom_preload_area">Select max zoom to preload visible area</string>
@@ -243,7 +246,7 @@
     <string name="user_password_descr">Your OSM password</string>
     <string name="user_password">User password</string>
     <string name="osm_settings_descr">Specify OSM settings: OSM login</string>
-    <string name="monitor_preferences_descr">Specify monitoring settings: save track</string>
+    <string name="monitor_preferences_descr">Specify monitoring settings</string>
     <string name="data_settings_descr">Specify language, download/reload data</string>
     <string name="map_preferences_descr">Specify map settings: map source, rotation, center position, screen orientation</string>
     <string name="data_settings">Data</string>
