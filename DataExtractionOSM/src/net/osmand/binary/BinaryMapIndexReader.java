@@ -740,10 +740,10 @@ public class BinaryMapIndexReader {
 				initMapEncodingRule(index, type, subtype, tags, val);
 				return;
 			case OsmandOdb.MapEncodingRule.VALUE_FIELD_NUMBER :
-				val = codedIS.readString();
+				val = codedIS.readString().intern();
 				break;
 			case OsmandOdb.MapEncodingRule.TAG_FIELD_NUMBER :
-				tags = codedIS.readString();
+				tags = codedIS.readString().intern();
 				break;
 			case OsmandOdb.MapEncodingRule.SUBTYPE_FIELD_NUMBER :
 				subtype = codedIS.readUInt32();
