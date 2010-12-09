@@ -2,7 +2,8 @@
 <resources>
 <string name="general_settings_descr">Konfigurácia použitia internetu, otáčania mapy, orientácie obrazovky a iného</string>
 <string name="general_settings">Všeobecné</string>
-<string name="rendering_settings_descr">Konfigurácia zdroja mapy a vzhľadu</string>    <string name="rendering_settings">Map appearance</string>
+<string name="rendering_settings_descr">Konfigurácia zdroja mapy a vzhľadu</string>
+<string name="rendering_settings">Vzhľad mapy</string>
 <string name="index_settings_descr">Získať/aktualizovať údaje pre offline použitie</string>
 <string name="index_settings">Údaje pre offline použitie</string>
 <string name="osmand_service">Služba na pozadí</string>
