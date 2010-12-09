@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+  <ModulePrefs title="hello world example" /> 
+  <Content type="html">
+  <![CDATA[
+    <iframe src="http://www.bidforfix.com/p/osmand.net/ads/iframe/" 
+scrolling="no" frameborder="0" style="border:none"/>
+    ]]></Content> 
+</Module>
