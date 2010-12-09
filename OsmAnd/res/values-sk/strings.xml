@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+<string name="general_settings_descr">Konfigurácia použitia internetu, otáčania mapy, orientácie obrazovky a iného</string>
+<string name="general_settings">Všeobecné</string>
+<string name="rendering_settings_descr">Konfigurácia zdroja mapy a vzhľadu</string>    <string name="rendering_settings">Map appearance</string>
+<string name="index_settings_descr">Získať/aktualizovať údaje pre offline použitie</string>
+<string name="index_settings">Údaje pre offline použitie</string>
+<string name="osmand_service">Služba na pozadí</string>
+<string name="osmand_service_descr">Spustenie služby na pozadí pre použitie OsmAndu počas vypnutej obrazovky</string>
 <string name="fast_route_mode">Najrýchlejšia trasa</string>
 <string name="fast_route_mode_descr">Zapnite na výpočet najrýchlejšej trasy alebo vypnite pre najkratšiu trasu </string>
 <string name="tiles_to_download_estimated_size">Pri priblížení {0} sa stiahne {1} dlaždíc ({2} Mb )</string>
@@ -125,7 +132,7 @@
 <string name="route_tu">Otočte sa a pokračujte</string>
 <string name="route_head">Pokračujte rovno</string>
 <string name="first_time_continue">Pokračovať</string>
-<string name="first_time_download">Stiahnuť indexy</string>
+<string name="first_time_download">Stiahnuť oblasti</string>
 <string name="first_time_msg">Ďakujeme, že ste sa rozhodli pre OsmAnd. \nNa použitie všetkých funkcií aplikácie potrebujete indexové súbory, ktoré môžete stiahnuť (Nastavenia -&gt; Údaje) alebo si ich pripraviť sami. Potom budete môcť: vyhľadávať adresy, body zájmov(POI) a verejnú dopravu.</string>
 <string name="search_poi_location">Hľadá sa signál...</string>
 <string name="search_near_map">Hľadať v blízkosti poslednej pozície na mape</string>
@@ -186,14 +193,14 @@
 <string name="router_service">Rutovanie</string>
 <string name="sd_dir_not_accessible">Adresár na SD karte pre uloženie nie je prístupný</string>
 <string name="download_question">Stiahnuť {0} - {1} ?</string>
-<string name="download_question_exist">Index pre {0} už existuje ({1}). Chcete ho aktualizovať ({2}) ?</string>
+<string name="download_question_exist">Offline údaje pre {0} už existujú ({1}). Chcete ich aktualizovať ({2}) ?</string>
 <string name="address">Adresa</string>
-<string name="download_index_success">Index bol úspešne stiahnutý</string>
+<string name="download_index_success">Sťahovanie úspešné</string>
 <string name="error_io_error">Vyskytla sa vstupno/výstupná chyba</string>
 <string name="downloading_file">Sťahuje sa súbor...</string>
 <string name="downloading">Sťahovanie...</string>
-<string name="downloading_list_indexes">Sťahuje sa zoznam dostupných indexov</string>
-<string name="list_index_files_was_not_loaded">Zoznam indexových súborov nebol prijatý z osmand.googlecode.com.</string>
+<string name="downloading_list_indexes">Sťahuje sa zoznam dostupných oblastí</string>
+<string name="list_index_files_was_not_loaded">Zoznam oblastí nebol prijatý z osmand.googlecode.com.</string>
 <string name="select_index_file_to_download">Ak nemôžete nájsť vašu oblasť, môžete si ju sami vytvoriť. Viď osmand.net</string>
 <string name="show_poi_on_map">Zobraziť na mape</string>
 <string name="fav_points_edited">Obľúbený bod bol upravený</string>
@@ -235,10 +242,10 @@
 <string name="previous_run_crashed">Predošlé spustenie aplikácie zlyhalo. Záznamový súbor je v {0}. Prosím, oznámte to a priložte záznamový súbor.</string>
 <string name="saving_gpx_tracks">Ukladajú sa GPX stopy na SD kartu...</string>
 <string name="finished_task">Dokončené</string>
-<string name="reload_indexes_descr">Znovu načítať údajové indexy z SD karty</string>
-<string name="reload_indexes">Znovu načítať indexy</string>
-<string name="download_indexes_descr">Stiahnuť indexy z internetu</string>
-<string name="download_indexes">Stiahnuť indexy</string>
+<string name="reload_indexes_descr">Znovu načítať offline údaje z SD karty</string>
+<string name="reload_indexes">Znovu načítať offline údaje</string>
+<string name="download_indexes_descr">Stiahnuť údaje pre offline použitie z internetu</string>
+<string name="download_indexes">Stiahnuť offline údaje</string>
 <string name="use_online_routing_descr">Použiť internet na výpočet cesty</string>
 <string name="use_online_routing">Použiť online rutovanie</string>
 <string name="user_password_descr">Vaše OSM heslo</string>
@@ -246,8 +253,8 @@
 <string name="osm_settings_descr">Určiť nastavenia OSM: OSM prihlásenie</string>
 <string name="monitor_preferences_descr">Určiť monitorovacie nastavenia: uloženie stopy</string>
 <string name="data_settings_descr">Určiť jazyk, stiahnutie/znovu načítanie údajov</string>
-<string name="map_preferences_descr">Určiť nastavenia mapy: zdroj mapy, otáčanie, stredovú pozíciu, orientácia obrazovky</string>
 <string name="data_settings">Údaje</string>
+<string name="map_preferences_descr">Určiť nastavenia mapy: zdroj mapy, otáčanie, stredovú pozíciu, orientáciu obrazovky</string>
 <string name="osm_settings">OSM</string>
 <string name="auto_zoom_map_descr">Autom. priblížiť mapu podľa vašej rýchlosti</string>
 <string name="auto_zoom_map">Autom. priblíženie mapy</string>
