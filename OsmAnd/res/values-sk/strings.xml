@@ -251,7 +251,7 @@
 <string name="user_password_descr">Vaše OSM heslo</string>
 <string name="user_password">Užívateľské heslo</string>
 <string name="osm_settings_descr">Určiť nastavenia OSM: OSM prihlásenie</string>
-<string name="monitor_preferences_descr">Určiť monitorovacie nastavenia: uloženie stopy</string>
+<string name="monitor_preferences_descr">Určiť monitorovacie nastavenia</string>
 <string name="data_settings_descr">Určiť jazyk, stiahnutie/znovu načítanie údajov</string>
 <string name="data_settings">Údaje</string>
 <string name="map_preferences_descr">Určiť nastavenia mapy: zdroj mapy, otáčanie, stredovú pozíciu, orientáciu obrazovky</string>
