@@ -36,7 +36,6 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
-import android.graphics.BitmapFactory.Options;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;

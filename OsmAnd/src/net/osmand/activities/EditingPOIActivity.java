@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Set;
 
 import net.osmand.AmenityIndexRepository;
+import net.osmand.AmenityIndexRepositoryOdb;
 import net.osmand.Base64;
 import net.osmand.LogUtil;
 import net.osmand.OsmandSettings;
@@ -568,8 +569,10 @@ public class EditingPOIActivity {
 		// delete all amenities with same id
 		if (DELETE_ACTION.equals(action) || MODIFY_ACTION.equals(action)) {
 			for (AmenityIndexRepository r : repos) {
-				r.deleteAmenities(n.getId() << 1);
-				r.clearCache();
+				if (r instanceof AmenityIndexRepositoryOdb) {
+					((AmenityIndexRepositoryOdb) r).deleteAmenities(n.getId() << 1);
+					((AmenityIndexRepositoryOdb) r).clearCache();
+				}
 			}
 		}
 		// add amenities
@@ -577,8 +580,10 @@ public class EditingPOIActivity {
 			List<Amenity> ams = Amenity.parseAmenities(n, new ArrayList<Amenity>());
 			for (Amenity a : ams) {
 				for (AmenityIndexRepository r : repos) {
-					r.addAmenity(a);
-					r.clearCache();
+					if (r instanceof AmenityIndexRepositoryOdb) {
+						((AmenityIndexRepositoryOdb) r).addAmenity(a);
+						((AmenityIndexRepositoryOdb) r).clearCache();
+					}
 				}
 			}
 		}

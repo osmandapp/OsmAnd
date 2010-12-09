@@ -4,8 +4,8 @@
     <string name="general_settings">Общие</string>
 	<string name="rendering_settings_descr">Выбрать источник карты и внешний вид</string>
     <string name="rendering_settings">Карта</string>
-    <string name="index_settings_descr">Загрузить и обновить индексы</string>
-    <string name="index_settings">Данные для офлайн использования</string>
+    <string name="index_settings_descr">Загрузить и обновить данные для офлайн использования</string>
+    <string name="index_settings">Данные</string>
 	<string name="osmand_service">Фоновый режим</string>
 	<string name="osmand_service_descr">Запустить OsmAnd в фоновом режиме для записи трека и навигации</string>
 	<string name="fast_route_mode">Наибыстрейший маршрут</string>

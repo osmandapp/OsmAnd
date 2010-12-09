@@ -1,10 +1,11 @@
 package net.osmand;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import net.osmand.activities.OsmandApplication;
 import net.osmand.data.Amenity;
@@ -18,7 +19,7 @@ public class PoiFilter {
 	public final static String USER_PREFIX = "user_"; //$NON-NLS-1$
 	public final static String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id"; //$NON-NLS-1$
 	
-	private Map<AmenityType, List<String>> acceptedTypes = new LinkedHashMap<AmenityType, List<String>>();
+	private Map<AmenityType, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<AmenityType, LinkedHashSet<String>>();
 	private String filterByName = null;
 
 	protected String filterId;
@@ -46,7 +47,7 @@ public class PoiFilter {
 	}
 	
 	// constructor for standard filters
-	public PoiFilter(String name, String filterId, Map<AmenityType, List<String>> acceptedTypes, OsmandApplication app){
+	public PoiFilter(String name, String filterId, Map<AmenityType, LinkedHashSet<String>> acceptedTypes, OsmandApplication app){
 		application = app;
 		isStandardFilter = false;
 		if(filterId == null){
@@ -130,9 +131,9 @@ public class PoiFilter {
 	 * @param type
 	 * @return null if all subtypes are accepted/ empty list if type is not accepted at all
 	 */
-	public List<String> getAcceptedSubtypes(AmenityType type){
+	public Set<String> getAcceptedSubtypes(AmenityType type){
 		if(!acceptedTypes.containsKey(type)){
-			return Collections.emptyList();
+			return Collections.emptySet();
 		}
 		return acceptedTypes.get(type);
 	}
@@ -141,8 +142,15 @@ public class PoiFilter {
 		return acceptedTypes.containsKey(t);
 	}
 	
-	public boolean isWholeTypeAccepted(AmenityType type){
-		return acceptedTypes.get(type) == null;
+	public boolean acceptTypeSubtype(AmenityType t, String subtype){
+		if(!acceptedTypes.containsKey(t)){
+			return false;
+		}
+		LinkedHashSet<String> set = acceptedTypes.get(t);
+		if(set == null){
+			return true;
+		}
+		return set.contains(subtype);
 	}
 	
 	public boolean areAllTypesAccepted(){
@@ -160,7 +168,7 @@ public class PoiFilter {
 	
 	public void setTypeToAccept(AmenityType type, boolean accept){
 		if(accept){
-			acceptedTypes.put(type, new ArrayList<String>());
+			acceptedTypes.put(type, new LinkedHashSet<String>());
 		} else {
 			acceptedTypes.remove(type);
 		}
@@ -185,7 +193,7 @@ public class PoiFilter {
 			}
 			b.append("(type = '").append(AmenityType.valueToString(a)).append("'"); //$NON-NLS-1$ //$NON-NLS-2$
 			if(acceptedTypes.get(a) != null){
-				List<String> list = acceptedTypes.get(a);
+				LinkedHashSet<String> list = acceptedTypes.get(a);
 				b.append(" AND subtype IN ("); //$NON-NLS-1$
 				boolean bfirst = true;
 				for(String s : list){
@@ -204,11 +212,11 @@ public class PoiFilter {
 		return b.toString();
 	}
 	
-	public Map<AmenityType, List<String>> getAcceptedTypes(){
-		return new LinkedHashMap<AmenityType, List<String>>(acceptedTypes);
+	public Map<AmenityType, LinkedHashSet<String>> getAcceptedTypes(){
+		return new LinkedHashMap<AmenityType, LinkedHashSet<String>>(acceptedTypes);
 	}
 	
-	public void selectSubTypesToAccept(AmenityType t, List<String> accept){
+	public void selectSubTypesToAccept(AmenityType t, LinkedHashSet<String> accept){
 		acceptedTypes.put(t, accept);
 	}
 	
