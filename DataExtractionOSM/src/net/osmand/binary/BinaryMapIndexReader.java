@@ -1612,7 +1612,7 @@ public class BinaryMapIndexReader {
 		
 		boolean accept = true;
 		if (req.searchFilter != null) {
-			accept = req.searchFilter.accept(req.cacheTypes);
+			accept = req.searchFilter.accept(req.cacheTypes, root);
 		}
 		
 		
@@ -1722,6 +1722,7 @@ public class BinaryMapIndexReader {
 		return request;
 	}
 	
+	
 	public static SearchRequest<TransportStop> buildSearchTransportRequest(int sleft, int sright, int stop, int sbottom, int limit, List<TransportStop> stops){
 		SearchRequest<TransportStop> request = new SearchRequest<TransportStop>();
 		if (stops != null) {
@@ -1747,11 +1748,12 @@ public class BinaryMapIndexReader {
 	
 	public static interface SearchFilter {
 		
-		public boolean accept(TIntArrayList types);
+		public boolean accept(TIntArrayList types, MapIndex index);
 		
 	}
 	
 	public static class SearchRequest<T> {
+		// 31 zoom tiles
 		int left = 0;
 		int right = 0;
 		int top = 0;
@@ -1810,6 +1812,15 @@ public class BinaryMapIndexReader {
 		
 		public TagValuePair decodeType(int type, int subtype){
 			return decodingRules.get(((subtype << 5) | type));
+		}
+		
+		public TagValuePair decodeType(int wholeType){
+			if((wholeType & 3) != MapRenderingTypes.POINT_TYPE ){
+				wholeType = (wholeType >> 2) & MapRenderingTypes.MASK_10;
+			} else {
+				wholeType >>= 2;
+			}
+			return decodingRules.get(wholeType);
 		}
 		
 	}

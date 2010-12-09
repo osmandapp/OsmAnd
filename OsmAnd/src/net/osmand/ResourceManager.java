@@ -86,7 +86,7 @@ public class ResourceManager {
 	// Indexes
 	private final Map<String, RegionAddressRepository> addressMap = new TreeMap<String, RegionAddressRepository>(Collator.getInstance());
 	
-	protected final Map<String, AmenityIndexRepository> amenityRepositories = new LinkedHashMap<String, AmenityIndexRepository>();
+	protected final List<AmenityIndexRepository> amenityRepositories =  new ArrayList<AmenityIndexRepository>();
 	
 	protected final List<TransportIndexRepository> transportRepositories = new ArrayList<TransportIndexRepository>();
 	
@@ -404,6 +404,16 @@ public class ResourceManager {
 									warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
 								}
 							}
+							if(index.containsMapData()){
+								// that's not fully acceptable
+//								try {
+//									RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
+//									amenityRepositories.add(new AmenityIndexRepositoryBinary(new BinaryMapIndexReader(raf)));
+//								} catch (IOException e) {
+//									log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
+//									warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+//								}
+							}
 						}
 					} catch (SQLiteException e) {
 						log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
@@ -432,13 +442,13 @@ public class ResourceManager {
 	
 	public void indexingPoi(final IProgress progress, List<String> warnings, File f) {
 		if (f.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
-			AmenityIndexRepository repository = new AmenityIndexRepository();
+			AmenityIndexRepositoryOdb repository = new AmenityIndexRepositoryOdb();
 			
 			progress.startTask(Messages.getMessage("indexing_poi") + f.getName(), -1); //$NON-NLS-1$
 			try {
 				boolean initialized = repository.initialize(progress, f);
 				if (initialized) {
-					amenityRepositories.put(repository.getName(), repository);
+					amenityRepositories.add(repository);
 				} else {
 					warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
 				}
@@ -514,7 +524,7 @@ public class ResourceManager {
 	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
 	public List<AmenityIndexRepository> searchAmenityRepositories(double latitude, double longitude) {
 		List<AmenityIndexRepository> repos = new ArrayList<AmenityIndexRepository>();
-		for (AmenityIndexRepository index : amenityRepositories.values()) {
+		for (AmenityIndexRepository index : amenityRepositories) {
 			if (index.checkContains(latitude,longitude)) {
 				repos.add(index);
 			}
@@ -530,9 +540,10 @@ public class ResourceManager {
 		double leftLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX - 0.5);
 		double rightLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX + 0.5);
 		List<Amenity> amenities = new ArrayList<Amenity>();
-		for (AmenityIndexRepository index : amenityRepositories.values()) {
+		for (AmenityIndexRepository index : amenityRepositories) {
 			if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
-				if (!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, filter.getFilterId(), amenities)) {
+				if (!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, filter.getFilterId(), 
+						amenities, false)) {
 					index.searchAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, limit, filter, amenities);
 				}
 			}
@@ -553,7 +564,7 @@ public class ResourceManager {
 			
 		} else {
 			String filterId = filter == null ? null : filter.getFilterId();
-			for (AmenityIndexRepository index : amenityRepositories.values()) {
+			for (AmenityIndexRepository index : amenityRepositories) {
 				if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
 					if (!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, filterId, toFill,
 							true)) {
@@ -620,7 +631,7 @@ public class ResourceManager {
 	////////////////////////////////////////////// Closing methods ////////////////////////////////////////////////
 	
 	public void closeAmenities(){
-		for(AmenityIndexRepository r : amenityRepositories.values()){
+		for(AmenityIndexRepository r : amenityRepositories){
 			r.close();
 		}
 		amenityRepositories.clear();
@@ -664,7 +675,7 @@ public class ResourceManager {
 	public void onLowMemory() {
 		log.info("On low memory : cleaning tiles - size = " + cacheOfImages.size()); //$NON-NLS-1$
 		clearTiles();
-		for(AmenityIndexRepository r : amenityRepositories.values()){
+		for(AmenityIndexRepository r : amenityRepositories){
 			r.clearCache();
 		}
 		for(RegionAddressRepository r : addressMap.values()){

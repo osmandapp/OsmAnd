@@ -1,7 +1,6 @@
 package net.osmand.binary;
 
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
-import net.osmand.osm.MapRenderingTypes;
 
 public class BinaryMapDataObject {
 	protected int[] coordinates = null;

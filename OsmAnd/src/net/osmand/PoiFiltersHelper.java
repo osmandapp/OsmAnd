@@ -3,6 +3,7 @@ package net.osmand;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -59,14 +60,14 @@ public class PoiFiltersHelper {
 	
 	private List<PoiFilter> getUserDefinedDefaultFilters(){
 		List<PoiFilter> filters = new ArrayList<PoiFilter>();
-		Map<AmenityType, List<String>> types = new LinkedHashMap<AmenityType, List<String>>();
+		Map<AmenityType, LinkedHashSet<String>> types = new LinkedHashMap<AmenityType, LinkedHashSet<String>>();
 
-		List<String> list = new ArrayList<String>();
+		LinkedHashSet<String> list = new LinkedHashSet<String>();
 		list.add("fuel"); //$NON-NLS-1$
 		list.add("car_wash"); //$NON-NLS-1$
 		list.add("car_repair"); //$NON-NLS-1$
 		types.put(AmenityType.TRANSPORTATION, list);
-		list = new ArrayList<String>();
+		list = new LinkedHashSet<String>();
 		list.add("car"); //$NON-NLS-1$
 		list.add("car_repair"); //$NON-NLS-1$
 		types.put(AmenityType.SHOP, list);
@@ -76,7 +77,7 @@ public class PoiFiltersHelper {
 		
 		types.put(AmenityType.HISTORIC, null);
 		types.put(AmenityType.TOURISM, null);
-		list = new ArrayList<String>();
+		list = new LinkedHashSet<String>();
 		list.add("place_of_worship"); //$NON-NLS-1$
 		list.add("internet_access"); //$NON-NLS-1$
 		list.add("bench"); //$NON-NLS-1$
@@ -93,13 +94,13 @@ public class PoiFiltersHelper {
 		filters.add(new PoiFilter(Messages.getMessage("poi_filter_for_tourists"), null, types, application)); //$NON-NLS-1$
 		types.clear();
 		
-		list = new ArrayList<String>();
+		list = new LinkedHashSet<String>();
 		list.add("fuel"); //$NON-NLS-1$
 		types.put(AmenityType.TRANSPORTATION, list);
 		filters.add(new PoiFilter(Messages.getMessage("poi_filter_fuel"), null, types, application)); //$NON-NLS-1$
 		types.clear();
 		
-		list = new ArrayList<String>();
+		list = new LinkedHashSet<String>();
 		list.add("alcohol"); //$NON-NLS-1$
 		list.add("bakery"); //$NON-NLS-1$
 		list.add("beverages"); //$NON-NLS-1$
@@ -125,7 +126,7 @@ public class PoiFiltersHelper {
 			////ctx.deleteDatabase(PoiFilterDbHelper.DATABASE_NAME);
 			
 			cacheUserDefinedFilters = new ArrayList<PoiFilter>();
-			PoiFilter filter = new PoiFilter(Messages.getMessage("poi_filter_custom_filter"), PoiFilter.CUSTOM_FILTER_ID, new LinkedHashMap<AmenityType, List<String>>(), application); //$NON-NLS-1$
+			PoiFilter filter = new PoiFilter(Messages.getMessage("poi_filter_custom_filter"), PoiFilter.CUSTOM_FILTER_ID, new LinkedHashMap<AmenityType, LinkedHashSet<String>>(), application); //$NON-NLS-1$
 			cacheUserDefinedFilters.add(filter);
 			PoiFilterDbHelper helper = openDbHelper();
 			cacheUserDefinedFilters.addAll(helper.getFilters());
@@ -241,7 +242,7 @@ public class PoiFiltersHelper {
 	    		if(!addOnlyCategories){
 	    			db.execSQL("INSERT INTO " + FILTER_NAME + " VALUES (?, ?, ?)",new Object[]{p.getName(), p.getFilterId(), p.getFilterByName()}); //$NON-NLS-1$ //$NON-NLS-2$
 	    		}
-	    		Map<AmenityType, List<String>> types = p.getAcceptedTypes();
+	    		Map<AmenityType, LinkedHashSet<String>> types = p.getAcceptedTypes();
 	    		SQLiteStatement insertCategories = db.compileStatement("INSERT INTO " +  CATEGORIES_NAME + " VALUES (?, ?, ?)"); //$NON-NLS-1$ //$NON-NLS-2$
 	    		for(AmenityType a : types.keySet()){
 	    			if(types.get(a) == null){
@@ -270,21 +271,21 @@ public class PoiFiltersHelper {
 	    	if(db != null){
 	    		Cursor query = db.rawQuery("SELECT " + CATEGORIES_FILTER_ID +", " + CATEGORIES_COL_CATEGORY +"," + CATEGORIES_COL_SUBCATEGORY +" FROM " +  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 	    				CATEGORIES_NAME, null);
-	    		Map<String, Map<AmenityType, List<String>>> map = new LinkedHashMap<String, Map<AmenityType,List<String>>>();
+	    		Map<String, Map<AmenityType, LinkedHashSet<String>>> map = new LinkedHashMap<String, Map<AmenityType,LinkedHashSet<String>>>();
 	    		if(query.moveToFirst()){
 	    			do {
 	    				String filterId = query.getString(0);
 	    				if(!map.containsKey(filterId)){
-	    					map.put(filterId, new LinkedHashMap<AmenityType, List<String>>());
+	    					map.put(filterId, new LinkedHashMap<AmenityType, LinkedHashSet<String>>());
 	    				}
-	    				Map<AmenityType, List<String>> m = map.get(filterId);
+	    				Map<AmenityType, LinkedHashSet<String>> m = map.get(filterId);
 	    				AmenityType a = AmenityType.fromString(query.getString(1));
 	    				String subCategory = query.getString(2);
 	    				if(subCategory == null){
 	    					m.put(a, null);
 	    				} else {
 	    					if(m.get(a) == null){
-	    						m.put(a, new ArrayList<String>());
+	    						m.put(a, new LinkedHashSet<String>());
 	    					}
 	    					m.get(a).add(subCategory);
 	    				}

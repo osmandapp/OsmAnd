@@ -4,9 +4,8 @@
 package net.osmand.activities;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
+import java.util.Set;
 
 import net.osmand.OsmandSettings;
 import net.osmand.PoiFilter;
@@ -165,10 +164,8 @@ public class EditPOIFilterActivity extends ListActivity {
 		ListView listView = new ListView(this);
 		
 		final LinkedHashSet<String> subCategories = new LinkedHashSet<String>(AmenityType.getSubCategories(amenity, MapRenderingTypes.getDefault()));
-		List<String> subtypes = filter.getAcceptedSubtypes(amenity);
-		boolean allSubTypesAccepted = subtypes == null;
-		LinkedHashSet<String> acceptedCategories = subtypes == null ? null : new LinkedHashSet<String>(subtypes);
-		if (subtypes != null) {
+		Set<String> acceptedCategories = filter.getAcceptedSubtypes(amenity);
+		if (acceptedCategories != null) {
 			for (String s : acceptedCategories) {
 				if (!subCategories.contains(s)) {
 					subCategories.add(s);
@@ -179,7 +176,7 @@ public class EditPOIFilterActivity extends ListActivity {
 		final String[] array = subCategories.toArray(new String[0]);
 		final boolean[] selected = new boolean[array.length];
 		for (int i = 0; i < selected.length; i++) {
-			if (allSubTypesAccepted) {
+			if (acceptedCategories == null) {
 				selected[i] = true;
 			} else {
 				selected[i] = acceptedCategories.contains(array[i]);
@@ -192,7 +189,7 @@ public class EditPOIFilterActivity extends ListActivity {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				List<String> accepted = new ArrayList<String>();
+				LinkedHashSet<String> accepted = new LinkedHashSet<String>();
 				for (int i = 0; i < selected.length; i++) {
 					if(selected[i]){
 						accepted.add(array[i]);

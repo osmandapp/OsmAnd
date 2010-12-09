@@ -13,6 +13,7 @@ import java.util.Map;
 
 import net.osmand.Algoritms;
 import net.osmand.AmenityIndexRepository;
+import net.osmand.AmenityIndexRepositoryOdb;
 import net.osmand.BusyIndicator;
 import net.osmand.FavouritePoint;
 import net.osmand.FavouritesDbHelper;
@@ -1228,12 +1229,14 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			public void run() {
 				try {
 					List<Amenity> amenities = new ArrayList<Amenity>();
-					boolean loadingPOIs = AmenityIndexRepository.loadingPOIs(amenities, leftLon, topLat, rightLon, bottomLat);
+					boolean loadingPOIs = AmenityIndexRepositoryOdb.loadingPOIs(amenities, leftLon, topLat, rightLon, bottomLat);
 					if(!loadingPOIs){
 						showToast(getString(R.string.update_poi_error_loading));
 					} else {
 						for(AmenityIndexRepository r  : repos){
-							r.updateAmenities(amenities, leftLon, topLat, rightLon, bottomLat);
+							if(r instanceof AmenityIndexRepositoryOdb){
+								((AmenityIndexRepositoryOdb) r).updateAmenities(amenities, leftLon, topLat, rightLon, bottomLat);
+							}
 						}
 						showToast(MessageFormat.format(getString(R.string.update_poi_success), amenities.size()));
 						mapView.refreshMap();

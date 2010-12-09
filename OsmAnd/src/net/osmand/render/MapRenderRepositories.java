@@ -216,7 +216,7 @@ public class MapRenderRepositories {
 					TIntByteMap map = MapRenderingTypes.getDefault().getObjectTypeMinZoom();
 
 					@Override
-					public boolean accept(TIntArrayList types) {
+					public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex root) {
 						for (int j = 0; j < types.size(); j++) {
 							int type = types.get(j);
 							if ((type & 3) == MapRenderingTypes.POINT_TYPE) {
