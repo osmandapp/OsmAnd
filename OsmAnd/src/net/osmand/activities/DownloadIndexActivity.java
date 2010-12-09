@@ -667,7 +667,7 @@ public class DownloadIndexActivity extends ListActivity {
 					DownloadIndexActivity.this.onListItemClick(getListView(), row, position, getItemId(position));
 				}
 			});
-			item.setText(s.trim() + "\n " + name); //$NON-NLS-1$
+			item.setText(s.trim() + "\n" + name); //$NON-NLS-1$
 			description.setText(extractDateAndSize(e.getValue()).replace(':', '\n').trim());
 			return row;
 		}

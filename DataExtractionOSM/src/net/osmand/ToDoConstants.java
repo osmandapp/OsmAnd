@@ -7,19 +7,16 @@ package net.osmand;
  */
 public class ToDoConstants {
 	
-	// TODO max 107
+	// TODO max 108
 
 	// !!! ROUTING
-	// ! New UI
-	//  TODO remove old indexes
-	//  TODO remove zoomlevel from index
+	// ! New UI (+)
 	
 	// 	For 0.5 release
 	//  104. Add activity to show current loaded indexes and information about them
 	//   97. For voice navigation consider current speed of vehicle. Especially when speed > 50 pronounce more than 200 m
-	//  105. Route mode fast/short (Issue)
+	//  108. Auto switch at night rendering.
 	//   92. Support poi index with standard map index and unify POI categories (unify done +)
- 
 	
 	// Outside base 0.5 release
 	//   86. Allow to add/edit custom tags to POI objects (Issue)
@@ -40,6 +37,7 @@ public class ToDoConstants {
 	///////////////////////////   DONE //////////////////////////////
 	// DONE ANDROID :
 	//  106. Download region from android device (select minzoom/maxzoom)
+	//  105. Route mode fast/short (Issue)
 	
 	// DONE SWING
 
