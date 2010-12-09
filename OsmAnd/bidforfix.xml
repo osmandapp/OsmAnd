@@ -4,6 +4,6 @@
   <Content type="html">
   <![CDATA[
     <iframe src="http://www.bidforfix.com/p/osmand.net/ads/iframe/" 
-scrolling="no" frameborder="0" style="border:none"/>
+scrolling="no" frameborder="0" style="border:none; width:800px; height:100px"/>
     ]]></Content> 
 </Module>
