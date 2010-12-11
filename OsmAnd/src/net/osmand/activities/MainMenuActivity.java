@@ -37,6 +37,7 @@ public class MainMenuActivity extends Activity {
 	private View settingsButton;
 	private View searchButton;
 	private View favouritesButton;
+	private View closeButton;
 	
 	
 
@@ -141,6 +142,14 @@ public class MainMenuActivity extends Activity {
 			public void onClick(View v) {
 				final Intent settings = new Intent(MainMenuActivity.this, FavouritesActivity.class);
 				startActivity(settings);
+			}
+		});
+		
+		closeButton = findViewById(R.id.CloseButton);
+		closeButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
 			}
 		});
 		
