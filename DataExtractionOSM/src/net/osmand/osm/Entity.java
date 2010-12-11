@@ -62,6 +62,15 @@ public abstract class Entity {
 			return id;
 		}
 
+		public String getOsmUrl() {
+			final String browseUrl = "http://www.openstreetmap.org/browse/";
+			if (type == EntityType.NODE)
+				return browseUrl + "node/" + id;
+			if (type == EntityType.WAY)
+				return browseUrl + "way/" + id;
+			return null;
+		}
+
 		@Override
 		public boolean equals(Object obj) {
 			if (this == obj)
@@ -149,6 +158,10 @@ public abstract class Entity {
 	}
 
 	
+	public String getOsmUrl() {
+		return EntityId.valueOf(this).getOsmUrl();
+	}
+
 	@Override
 	public String toString() {
 		return EntityId.valueOf(this).toString();

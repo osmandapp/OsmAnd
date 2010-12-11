@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -43,7 +44,6 @@ import net.osmand.data.City.CityType;
 import net.osmand.data.index.DataIndexReader;
 import net.osmand.data.index.DataIndexWriter;
 import net.osmand.data.index.IndexConstants;
-import net.osmand.impl.ConsoleProgressImplementation;
 import net.osmand.osm.Entity;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapRenderingTypes;
@@ -1096,6 +1096,29 @@ public class IndexCreator {
 
 	private List<Amenity> tempAmenityList = new ArrayList<Amenity>();
 
+	public void checkEntity(Entity e){
+		String name = e.getTag(OSMTagKey.NAME);
+		if (name == null){
+			String msg = "";
+			Collection<String> keys = e.getTagKeySet();
+			int cnt = 0;
+			for (Iterator iter = keys.iterator(); iter.hasNext();) {
+				String key = (String) iter.next();
+				if (key.startsWith("name:") && key.length() <= 8) {
+					// ignore specialties like name:botanical
+					if (cnt == 0)
+						msg += "Entity misses default name tag, but it has localized name tag(s):\n";
+					msg += key + "=" + e.getTag(key) + "\n";
+					cnt++;
+				}
+			}
+			if (cnt > 0) {
+				msg += "Consider adding the name tag at " + e.getOsmUrl();
+				log.warn(msg);
+			}
+		}
+	}
+
 	private void iterateEntity(Entity e, int step) throws SQLException {
 		if (step == STEP_MAIN) {
 			if (indexPOI) {
@@ -1105,6 +1128,7 @@ public class IndexCreator {
 					// load data for way (location etc...)
 					loadEntityData(e, false);
 					for (Amenity a : tempAmenityList) {
+						checkEntity(e);
 						a.setEntity(e);
 						if (a.getLocation() != null) {
 							// do not convert english name
@@ -2803,11 +2827,13 @@ public class IndexCreator {
 		creator.recreateOnlyBinaryFile = false;
 		creator.deleteDatabaseIndexes = true;
 
-		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), 
-				null, MapZooms.getDefault(), null);
 		
-
+//		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/ukraine.osm"), 
+//				new ConsoleProgressImplementation(3), null, MapZooms.getDefault(), null);
+		
+//		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+//		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null, MapZooms.getDefault(), null);
+		
 //		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb")); //$NON-NLS-1$
 //		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.pbf"), new ConsoleProgressImplementation(3), null); //$NON-NLS-1$
 
