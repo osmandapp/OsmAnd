@@ -3,6 +3,7 @@ package net.osmand;
 import gnu.trove.list.array.TIntArrayList;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -17,6 +18,7 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
+import net.osmand.osm.LatLon;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 import net.sf.junidecode.Junidecode;
@@ -164,24 +166,65 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	}
 
 	
-	@Override
-	public boolean checkCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom,
-			String filterId, List<Amenity> toFill, boolean fillFound) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
+
+
+	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
+	private String cFilterId;
+	protected List<Amenity> cachedObjects = new ArrayList<Amenity>(); 
+	protected double cTopLatitude;
+	protected double cBottomLatitude;
+	protected double cLeftLongitude;
+	protected double cRightLongitude;
+	protected int cZoom;
+	
+	public synchronized boolean checkCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, 
+			int zoom, String filterId, List<Amenity> toFill, boolean fillFound){
+		boolean inside = cTopLatitude >= topLatitude && cLeftLongitude <= leftLongitude && cRightLongitude >= rightLongitude
+				&& cBottomLatitude <= bottomLatitude && zoom == cZoom;
+		boolean noNeedToSearch = inside &&  Algoritms.objectEquals(filterId, cFilterId);
+		if((inside || fillFound) && toFill != null && Algoritms.objectEquals(filterId, cFilterId)){
+			for(Amenity a : cachedObjects){
+				LatLon location = a.getLocation();
+				if (location.getLatitude() <= topLatitude && location.getLongitude() >= leftLongitude && location.getLongitude() <= rightLongitude
+						&& location.getLatitude() >= bottomLatitude) {
+					toFill.add(a);
+				}
+			}
+		}
+		return noNeedToSearch;
+	}
+	
 	@Override
 	public void clearCache() {
-		// TODO Auto-generated method stub
-		
+		cachedObjects.clear();
+		cTopLatitude = 0;
+		cBottomLatitude = 0;
+		cRightLongitude = 0;
+		cLeftLongitude = 0;
+		cZoom = 0;
+		cFilterId = null;
 	}
 
 	@Override
 	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom,
 			int limitPoi, PoiFilter filter, List<Amenity> toFill) {
-		// TODO Auto-generated method stub
-		
+		cTopLatitude = topLatitude + (topLatitude - bottomLatitude);
+		cBottomLatitude = bottomLatitude - (topLatitude - bottomLatitude);
+		cLeftLongitude = leftLongitude - (rightLongitude - leftLongitude);
+		cRightLongitude = rightLongitude + (rightLongitude - leftLongitude);
+		cFilterId = filter == null ? null : filter.getFilterId();
+		cZoom = zoom;
+		// first of all put all entities in temp list in order to not freeze other read threads
+		ArrayList<Amenity> tempList = new ArrayList<Amenity>();
+		searchAmenities(cTopLatitude, cLeftLongitude, cBottomLatitude, cRightLongitude, limitPoi, filter, tempList);
+		synchronized (this) {
+			cachedObjects.clear();
+			cachedObjects.addAll(tempList);
+		}
+
+		checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, cZoom, filter.getFilterId(), toFill, true);
+
 	}
 
 	
