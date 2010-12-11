@@ -92,7 +92,7 @@
 <string name="use_trackball">Použiť trackball</string>
 <string name="background_service_wait_int_descr">Vybrať čakací interval na rozpoznanie umiestnenia</string>
 <string name="background_service_wait_int">Čakací interval</string>
-<string name="service_stop_background_service">Vypnúť navigačná službu na pozadí</string>
+<string name="service_stop_background_service">Vypnúť navigačnú službu na pozadí</string>
 <string name="where_am_i">Kde som?</string>
 <string name="process_navigation_service">Navigačná služba OsmAnd</string>
 <string name="network_provider">Sieť</string>
