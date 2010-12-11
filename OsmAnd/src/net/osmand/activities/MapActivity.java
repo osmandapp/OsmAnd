@@ -319,9 +319,20 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
 		if(prefs == null || !prefs.contains(OsmandSettings.LAST_KNOWN_MAP_LAT)){
 			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-			Location location = service.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+			Location location = null;
+			try {
+				location = service.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+			}
+			catch(IllegalArgumentException e) {
+				Log.d(LogUtil.TAG, "GPS location provider not available"); //$NON-NLS-1$
+			}
+
 			if(location == null){
-				location = service.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+				try {
+					location = service.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+				} catch(IllegalArgumentException e) {
+					Log.d(LogUtil.TAG, "Network location provider not available"); //$NON-NLS-1$
+				}
 			}
 			if(location != null){
 				mapView.setLatLon(location.getLatitude(), location.getLongitude());
@@ -805,12 +816,20 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 
 		
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-		service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, gpsListener);
-		currentLocationProvider = LocationManager.GPS_PROVIDER;
+		try {
+			service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, gpsListener);
+			currentLocationProvider = LocationManager.GPS_PROVIDER;
+		} catch (IllegalArgumentException e) {
+			Log.d(LogUtil.TAG, "GPS location provider not available"); //$NON-NLS-1$
+		}
 		if(!useOnlyGPS()){
 			// try to always  ask for network provide : it is faster way to find location
-			service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, networkListener);
-			currentLocationProvider = LocationManager.NETWORK_PROVIDER;
+			try {
+				service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, networkListener);
+				currentLocationProvider = LocationManager.NETWORK_PROVIDER;
+			} catch(IllegalArgumentException e) {
+				Log.d(LogUtil.TAG, "Network location provider not available"); //$NON-NLS-1$
+			}
 		}
 		
 		LocationProvider  prov = service.getProvider(currentLocationProvider); 
