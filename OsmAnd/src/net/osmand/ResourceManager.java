@@ -406,6 +406,7 @@ public class ResourceManager {
 							}
 							if(index.containsMapData()){
 								// that's not fully acceptable
+								// TODO
 //								try {
 //									RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
 //									amenityRepositories.add(new AmenityIndexRepositoryBinary(new BinaryMapIndexReader(raf)));

@@ -14,11 +14,20 @@ public class ToDoConstants {
 	
 	// 	For 0.5 release
 	//  104. Add activity to show current loaded indexes and information about them
-	//   97. For voice navigation consider current speed of vehicle. Especially when speed > 50 pronounce more than 200 m
 	//  108. Auto switch at night rendering.
+
+	//   97. For voice navigation consider current speed of vehicle. Especially when speed > 50 pronounce more than 200 m
+	//  112. Investigate exiting/minimizing app (Issue)
 	//   92. Support poi index with standard map index and unify POI categories (unify done +)
+	//       Done partially (works very slow), 
+	//		 possibly introduce settings to limit usage of functionality or put poi index into binary index
 	
 	// Outside base 0.5 release
+	//  109. Update download index activity (introduce select/deselect all, update existing) 
+	//			and make green text for already loaded indexes.
+	//  113. Calculate speed cameras/bumps on the road (announce about them)
+	//  110. Use android voice for pronounce command (could be used in future to pronounce street)
+	//  111. Investigate showing street name while driving
 	//   86. Allow to add/edit custom tags to POI objects (Issue)
 	//   96. Introduce settings for MPH, imperial units (Issue)
 
