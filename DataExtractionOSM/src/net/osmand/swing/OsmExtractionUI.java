@@ -14,6 +14,7 @@ import java.io.OutputStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 
 import javax.swing.AbstractAction;
 import javax.swing.JCheckBox;
@@ -407,7 +408,8 @@ public class OsmExtractionUI implements IMapLocationListener {
 
 				@Override
 				public void run() {
-					IndexCreator creator = new IndexCreator(DataExtractionSettings.getSettings().getDefaultWorkingDir());
+					File dir = DataExtractionSettings.getSettings().getDefaultWorkingDir();
+					IndexCreator creator = new IndexCreator(dir);
 					try {
 						creator.setIndexAddress(buildAddressIndex.isSelected());
 						creator.setIndexPOI(buildPoiIndex.isSelected());
@@ -454,7 +456,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 						comma = true;
 						msg.append(Messages.getString("OsmExtractionUI.TRANSPORT")); //$NON-NLS-1$
 					}
-					msg.append(Messages.getString("OsmExtractionUI.SUCCESFULLY_CREATED")); //$NON-NLS-1$
+					msg.append(MessageFormat.format(Messages.getString("OsmExtractionUI.WERE_SUCCESFULLY_CREATED"), dir.getAbsolutePath())); //$NON-NLS-1$
 					JOptionPane pane = new JOptionPane(msg);
 					JDialog dialog = pane.createDialog(frame, Messages.getString("OsmExtractionUI.GENERATION_DATA")); //$NON-NLS-1$
 					dialog.setVisible(true);
