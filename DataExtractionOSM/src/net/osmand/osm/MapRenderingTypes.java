@@ -521,7 +521,7 @@ public class MapRenderingTypes {
 		if(name == null && "peak".equals(e.getTag(OSMTagKey.HIGHWAY))){ //$NON-NLS-1$
 			name = e.getTag("ele"); //$NON-NLS-1$
 		}
-		if(name == null && "gete".equals(e.getTag("aeroway"))){ //$NON-NLS-1$ //$NON-NLS-2$
+		if(name == null && "gate".equals(e.getTag("aeroway"))){ //$NON-NLS-1$ //$NON-NLS-2$
 			name = e.getTag(OSMTagKey.REF); 
 		}
 		return name;
