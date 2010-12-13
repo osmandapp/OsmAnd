@@ -434,23 +434,23 @@ public class OsmandRenderer {
 				float mes = paintText.measureText(text.text);
 				if(text.drawOnPath == null || 
 						(text.pathRotate > 45 && text.pathRotate < 135) || (text.pathRotate > 225 && text.pathRotate < 315)){
-					bounds.set(text.centerX - mes / 2, text.centerY - 3 * text.textSize / 2,
-							text.centerX + mes / 2, text.centerY + 3 * text.textSize / 2);
+					bounds.set(text.centerX - mes / 2, text.centerY - 3 * text.textSize / 2 ,
+							text.centerX + mes / 2 , text.centerY + 3 * text.textSize / 2 );
 				} else {
-					bounds.set(text.centerX - 3 * text.textSize / 2, text.centerY - mes/2, 
-										text.centerX + 3 * text.textSize / 2, text.centerY + mes/2);
+					bounds.set(text.centerX - 3 * text.textSize , text.centerY - mes, 
+							text.centerX + 3 * text.textSize , text.centerY + mes );
 				}
 				if(text.minDistance > 0){
-					bounds.set(bounds.left - text.minDistance / 2, bounds.top - text.minDistance / 2
-							, bounds.right + text.minDistance / 2, bounds.bottom + text.minDistance / 2);
+					bounds.set(bounds.left - text.minDistance / 2, bounds.top - text.minDistance / 2,
+							bounds.right + text.minDistance / 2, bounds.bottom + text.minDistance / 2);
 				}
 				List<RectF> boundsIntersect = text.drawOnPath == null || findAllTextIntersections? 
 						boundsNotPathIntersect : boundsPathIntersect;
 				if(boundsIntersect.isEmpty()){
 					boundsIntersect.add(bounds);
 				} else {
-					final int diff = (int) 3 ;
-					final int diff2 =  (int) 15;
+					final int diff = (int) (3 * dm.density);
+					final int diff2 = (int) (15 * dm.density);
 					// implement binary search 
 					int index = Collections.binarySearch(boundsIntersect, bounds, c);
 					if (index < 0) {
@@ -524,7 +524,7 @@ public class OsmandRenderer {
 						}
 						Bitmap ico = cachedIcons.get(text.shieldRes);
 						if (ico  != null) {
-							cv.drawBitmap(ico, text.centerX - ico.getWidth() / 2 - 0.5f, text.centerY - text.textSize - 2, paintIcon);
+							cv.drawBitmap(ico, text.centerX - ico.getWidth() / 2 - 0.5f * dm.density, text.centerY - text.textSize - 2 * dm.density, paintIcon);
 						}
 					}
 					if(text.text.length() > text.textWrap){
