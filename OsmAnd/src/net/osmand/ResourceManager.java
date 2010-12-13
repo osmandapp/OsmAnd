@@ -358,6 +358,9 @@ public class ResourceManager {
 	
 	private void initRenderers(IProgress progress) {
 		File file = new File(Environment.getExternalStorageDirectory(), APP_DIR + IndexConstants.RENDERERS_DIR);
+		if(Environment.getExternalStorageDirectory().canRead()){
+			file.mkdirs();
+		}
 		Map<String, File> externalRenderers = new LinkedHashMap<String, File>(); 
 		if (file.exists() && file.canRead()) {
 			for (File f : file.listFiles()) {
@@ -379,6 +382,9 @@ public class ResourceManager {
 
 	public List<String> indexingMaps(final IProgress progress) {
 		File file = new File(Environment.getExternalStorageDirectory(), MAPS_PATH);
+		if(Environment.getExternalStorageDirectory().canRead()){
+			file.mkdirs();
+		}
 		List<String> warnings = new ArrayList<String>();
 		renderer.clearAllResources();
 		if (file.exists() && file.canRead()) {
@@ -431,6 +437,9 @@ public class ResourceManager {
 	// POI INDEX //
 	public List<String> indexingPoi(final IProgress progress) {
 		File file = new File(Environment.getExternalStorageDirectory(), POI_PATH);
+		if(Environment.getExternalStorageDirectory().canRead()){
+			file.mkdirs();
+		}
 		List<String> warnings = new ArrayList<String>();
 		closeAmenities();
 		if (file.exists() && file.canRead()) {
