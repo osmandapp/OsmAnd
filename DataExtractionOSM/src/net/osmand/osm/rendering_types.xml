@@ -143,7 +143,7 @@
 		<subtype id="8" polyline="true" tag="aeroway" value="taxiway" minzoom="12" />
 		<subtype id="9" polygon="true" tag="aeroway" value="apron" minzoom="12" />
 		<subtype id="10" point="true" polygon_center="true" tag="aeroway" value="airport" minzoom="12" />
-		<subtype id="12" point="true" tag="aeroway" value="gate" minzoom="15" />
+		<subtype id="12" point="true" tag="aeroway" value="gate" minzoom="15" nameNullTag="ref"/>
 		<subtype id="13" point="true" tag="aeroway" value="windsock" minzoom="15" />
 	</type>
 
@@ -420,7 +420,7 @@
 		<subtype id="9" point="true" polygon="true" tag="natural" value="land" minzoom="13" />
 		<subtype id="11" point="true" polygon="true" tag="natural" value="marsh" minzoom="13" />
 		<subtype id="12" point="true" polygon="true" tag="natural" value="mud" minzoom="13" />
-		<subtype id="13" point="true" tag="natural" value="peak" minzoom="12" />
+		<subtype id="13" point="true" tag="natural" value="peak" minzoom="12" nameNullTag="ele"/>
 		<subtype id="14" point="true" polygon="true" tag="natural" value="sand" minzoom="15" />
 		<subtype id="15" point="true" polygon="true" tag="natural" value="scree" minzoom="15" />
 		<subtype id="16" point="true" polygon="true" tag="natural" value="scrub" minzoom="13" />

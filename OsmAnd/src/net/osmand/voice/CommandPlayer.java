@@ -89,7 +89,7 @@ public class CommandPlayer {
 			}
 		}
 		
-		// see comments while it is impossible to read from zip
+		// see comments why it is impossible to read from zip
 //		voiceZipFile = null;
 		if(voiceDir != null) {
 			long time = System.currentTimeMillis();

@@ -137,13 +137,18 @@ public class MapRenderingTypes {
 		// val could be null means others for that tag
 		private Integer nullRule;
 		private Map<String, Integer> rules = new LinkedHashMap<String, Integer>();
+		private String nameNullTag;
 		
-		public MapRulType(String tag){
+		public MapRulType(String tag, String nameNullTag){
 			this.tag = tag;
 		}
 		
 		public String getTag() {
 			return tag;
+		}
+		
+		public String getNameNullTag() {
+			return nameNullTag;
 		}
 		
 		public Collection<String> getValuesSet(){
@@ -501,7 +506,7 @@ public class MapRenderingTypes {
 		return (attr & 3) == 1;
 	}
 	
-	public static String getEntityName(Entity e, int mainType) {
+	public String getEntityName(Entity e) {
 		if (e.getTag(OSMTagKey.REF) != null && e.getTag(OSMTagKey.HIGHWAY) != null) {
 			String ref = e.getTag(OSMTagKey.REF);
 			if (ref.length() > 5 && ref.indexOf('_') != -1) {
@@ -518,12 +523,25 @@ public class MapRenderingTypes {
 		if (name == null) {
 			name = e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER);
 		}
-		if(name == null && "peak".equals(e.getTag(OSMTagKey.HIGHWAY))){ //$NON-NLS-1$
-			name = e.getTag("ele"); //$NON-NLS-1$
+		if (name == null) {
+			Collection<String> tagKeySet = e.getTagKeySet();
+			Map<String, MapRulType> types = getEncodingRuleTypes();
+			for (int i = 0; i < 2 && name == null; i++) {
+				for (String tag : tagKeySet) {
+					if (types.containsKey(tag)) {
+						MapRulType rType = types.get(tag);
+						if (rType.getNameNullTag() != null) {
+							name = e.getTag(rType.getNameNullTag());
+							if (name != null) {
+								break;
+							}
+
+						}
+					}
+				}
+			}
 		}
-		if(name == null && "gate".equals(e.getTag("aeroway"))){ //$NON-NLS-1$ //$NON-NLS-2$
-			name = e.getTag(OSMTagKey.REF); 
-		}
+		
 		return name;
 	}
 	
@@ -643,6 +661,7 @@ public class MapRenderingTypes {
 						if (val != null) {
 							maxzoom = Integer.parseInt(val);
 						}
+						String nameNullTag = attributes.getValue("nameNullTag");
 
 						String tag = attributes.getValue("tag"); //$NON-NLS-1$
 						val = attributes.getValue("value"); //$NON-NLS-1$
@@ -683,9 +702,7 @@ public class MapRenderingTypes {
 							polygonRule = POINT_TYPE;
 						}
 						
-						
-						
-						stepSubtype(st, maxzoom, tag, val, currentType, subtype, polygonRule, polylineRule, pointRule);
+						stepSubtype(st, maxzoom, tag, val, currentType, subtype, polygonRule, polylineRule, pointRule, nameNullTag);
 					}
 				}
 			});
@@ -711,11 +728,11 @@ public class MapRenderingTypes {
 	}
 
 	private void stepSubtype(int st, int minZoom, String tag, String val, int type, int subtype, int polygonRule, int polylineRule,
-			int pointRule) {
+			int pointRule, String nameNullTag) {
 		if(st == INIT_RULE_TYPES){
 			MapRulType rtype = types.get(tag);
 			if(rtype == null){
-				rtype = new MapRulType(tag);
+				rtype = new MapRulType(tag, nameNullTag);
 				types.put(tag, rtype);
 			}
 			rtype.registerType(minZoom, val, pointRule, polylineRule, polygonRule, type, subtype);
