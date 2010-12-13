@@ -7,7 +7,7 @@ package net.osmand;
  */
 public class ToDoConstants {
 	
-	// TODO max 108
+	// TODO max 115
 
 	// !!! ROUTING
 	// ! New UI (+)
@@ -30,6 +30,7 @@ public class ToDoConstants {
 	//  111. Investigate showing street name while driving
 	//   86. Allow to add/edit custom tags to POI objects (Issue)
 	//   96. Introduce settings for MPH, imperial units (Issue)
+	//  114. Index streets according to city bounds
 
 	// 	_19. colors for road trunk and motorway
 	
