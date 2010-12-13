@@ -1282,7 +1282,7 @@ public class IndexCreator {
 				int mtType = findMultiPolygonType(e, 0);
 				if (mtType != 0) {
 
-					String name = MapRenderingTypes.getEntityName(e, mtType);
+					String name = renderingTypes.getEntityName(e);
 					List<List<Way>> completedRings = new ArrayList<List<Way>>();
 					List<List<Way>> incompletedRings = new ArrayList<List<Way>>();
 					for (Entity es : entities.keySet()) {
@@ -1571,7 +1571,7 @@ public class IndexCreator {
 		zoom = mapZooms.getLevel(level).getMaxZoom() - 1;
 		boolean skip = false;
 
-		String eName = MapRenderingTypes.getEntityName(e, type);
+		String eName = renderingTypes.getEntityName(e);
 		if (eName == null) {
 			eName = multiPolygonsNames.get(baseId);
 		}
