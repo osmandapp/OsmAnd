@@ -293,25 +293,28 @@ public class OsmandRenderer {
 				BinaryMapDataObject o = objects.get(i);
 				int sh = i << 8;
 
-				for (int j = 0; j < o.getTypes().length; j++) {
-					// put(orderMap, BinaryMapDataObject.getOrder(o.getTypes()[j]), sh + j, init);
-					int wholeType = o.getTypes()[j];
-					int mask = wholeType & 3;
-					int layer = 0;
-					if(mask != 1){
-						layer = MapRenderingTypes.getNegativeWayLayer(wholeType);
-					}
-					if (o instanceof MultyPolygon) {
-						put(orderMap, render.getObjectOrder(((MultyPolygon) o).getTag(), ((MultyPolygon) o).getValue(), 
-								mask, layer), sh + j, init);
-					} else {
+				if (o instanceof MultyPolygon) {
+					int mask = MapRenderingTypes.MULTY_POLYGON_TYPE;
+					int layer = ((MultyPolygon) o).getLayer();
+					put(orderMap, render.getObjectOrder(((MultyPolygon) o).getTag(), ((MultyPolygon) o).getValue(), 
+							mask, layer), sh, init);
+				} else {
+					for (int j = 0; j < o.getTypes().length; j++) {
+						// put(orderMap, BinaryMapDataObject.getOrder(o.getTypes()[j]), sh + j, init);
+						int wholeType = o.getTypes()[j];
+						int mask = wholeType & 3;
+						int layer = 0;
+						if (mask != 1) {
+							layer = MapRenderingTypes.getNegativeWayLayer(wholeType);
+						}
+
 						TagValuePair pair = o.getMapIndex().decodeType(MapRenderingTypes.getMainObjectType(wholeType),
 								MapRenderingTypes.getObjectSubType(wholeType));
 						if (pair != null) {
 							put(orderMap, render.getObjectOrder(pair.tag, pair.value, mask, layer), sh + j, init);
 						}
+
 					}
-					
 				}
 
 				if (rc.interrupted) {
@@ -339,7 +342,7 @@ public class OsmandRenderer {
 					BinaryMapDataObject obj = objects.get(ind);
 
 					// show text only for main type
-					drawObj(obj, cv, rc, obj.getTypes()[l], l == 0);
+					drawObj(obj, cv, rc, l, l == 0);
 					
 					objCount++;
 				}
@@ -524,7 +527,9 @@ public class OsmandRenderer {
 						}
 						Bitmap ico = cachedIcons.get(text.shieldRes);
 						if (ico  != null) {
-							cv.drawBitmap(ico, text.centerX - ico.getWidth() / 2 - 0.5f * dm.density, text.centerY - text.textSize - 2 * dm.density, paintIcon);
+							cv.drawBitmap(ico, text.centerX - ico.getWidth() / 2 - 0.5f * dm.density, 
+									text.centerY - text.textSize / 2 - 6.5f * dm.density,
+									paintIcon);
 						}
 					}
 					if(text.text.length() > text.textWrap){
@@ -566,24 +571,31 @@ public class OsmandRenderer {
 	}
 
 	
-	protected void drawObj(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int mainType, boolean renderText) {
-		int t = mainType & 3;					
-		int type = MapRenderingTypes.getMainObjectType(mainType);
-		int subtype = MapRenderingTypes.getObjectSubType(mainType);
-		rc.allObjects ++;
-		if(t == MapRenderingTypes.POINT_TYPE){
-			drawPoint(obj, canvas, rc, type, subtype, renderText);
-		} else if(t == MapRenderingTypes.POLYLINE_TYPE){
-			drawPolyline(obj, canvas, rc, type, subtype, mainType);
-		} else if(t == MapRenderingTypes.POLYGON_TYPE){
-			drawPolygon(obj, canvas, rc, type, subtype);
+	protected void drawObj(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int l, boolean renderText) {
+		rc.allObjects++;
+		if (obj instanceof MultyPolygon) {
+			drawMultiPolygon(obj, canvas, rc);
 		} else {
-			if(t == MapRenderingTypes.MULTY_POLYGON_TYPE &&  !(obj instanceof MultyPolygon)){
-				return;
+			int mainType = obj.getTypes()[l];
+			int t = mainType & 3;
+			int type = MapRenderingTypes.getMainObjectType(mainType);
+			int subtype = MapRenderingTypes.getObjectSubType(mainType);
+			TagValuePair pair = obj.getMapIndex().decodeType(type, subtype);
+			if (t == MapRenderingTypes.POINT_TYPE) {
+				drawPoint(obj, canvas, rc, pair, renderText);
+			} else if (t == MapRenderingTypes.POLYLINE_TYPE) {
+				int layer = MapRenderingTypes.getNegativeWayLayer(mainType);
+				drawPolyline(obj, canvas, rc, pair, layer);
+			} else if (t == MapRenderingTypes.POLYGON_TYPE) {
+				drawPolygon(obj, canvas, rc, pair);
+			} else {
+				if (t == MapRenderingTypes.MULTY_POLYGON_TYPE && !(obj instanceof MultyPolygon)) {
+					// log this situation
+					return;
+				}
 			}
-			drawMultiPolygon(obj, canvas, rc, type, subtype);
 		}
-		
+
 	}
 	
 	
@@ -635,7 +647,7 @@ public class OsmandRenderer {
 		shaders.clear();
 	}
 	
-	private void drawMultiPolygon(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype) {
+	private void drawMultiPolygon(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc) {
 		String tag = ((MultyPolygon)obj).getTag();
 		String value = ((MultyPolygon)obj).getValue();
 		if(render == null || tag == null){
@@ -690,8 +702,8 @@ public class OsmandRenderer {
 	}
 	
 	
-	private void drawPolygon(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype) {
-		TagValuePair pair = obj.getMapIndex().decodeType(type, subtype);
+	private void drawPolygon(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, TagValuePair pair) {
+		
 		if(render == null || pair == null){
 			return;
 		}
@@ -746,8 +758,7 @@ public class OsmandRenderer {
 		return;
 	}
 	
-	private void drawPoint(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype, boolean renderText) {
-		TagValuePair pair = obj.getMapIndex().decodeType(type, subtype);
+	private void drawPoint(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, TagValuePair pair, boolean renderText) {
 		if(render == null || pair == null){
 			return;
 		}
@@ -794,8 +805,7 @@ public class OsmandRenderer {
 	
 
 	
-	private void drawPolyline(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int type, int subtype, int wholeType) {
-		TagValuePair pair = obj.getMapIndex().decodeType(type, subtype);
+	private void drawPolyline(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, TagValuePair pair, int layer) {
 		if(render == null || pair == null){
 			return;
 		}
@@ -803,7 +813,6 @@ public class OsmandRenderer {
 		if(length < 2){
 			return;
 		}
-		int layer = MapRenderingTypes.getNegativeWayLayer(wholeType);
 		rc.main.emptyLine();
 		rc.second.emptyLine();
 		rc.third.emptyLine();
