@@ -44,6 +44,7 @@ import net.osmand.data.City.CityType;
 import net.osmand.data.index.DataIndexReader;
 import net.osmand.data.index.DataIndexWriter;
 import net.osmand.data.index.IndexConstants;
+import net.osmand.impl.ConsoleProgressImplementation;
 import net.osmand.osm.Entity;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapRenderingTypes;
@@ -154,7 +155,7 @@ public class IndexCreator {
 	private RTree transportStopsTree;
 
 	private RTree[] mapTree = null;
-	private MapZooms mapZooms = null;  
+	private MapZooms mapZooms = MapZooms.getDefault();  
 	private MapRenderingTypes renderingTypes = MapRenderingTypes.getDefault();
 	
 
@@ -1267,16 +1268,22 @@ public class IndexCreator {
 				loadEntityData(e, true);
 				Map<Entity, String> entities = ((Relation) e).getMemberEntities();
 
+				boolean outerFound = false;
 				for (Entity es : entities.keySet()) {
 					if (es instanceof Way) {
 						boolean inner = "inner".equals(entities.get(es)); //$NON-NLS-1$
 						if (!inner) {
+							outerFound = true;
 							for (String t : es.getTagKeySet()) {
 								e.putTag(t, es.getTag(t));
 							}
 							break;
 						}
 					}
+				}
+				if(!outerFound){
+					log.warn("Probably map bug: Multipoligon id=" + e.getId() + " contains only inner ways : "); //$NON-NLS-1$ //$NON-NLS-2$
+					return;
 				}
 
 				int mtType = findMultiPolygonType(e, 0);
@@ -2276,6 +2283,10 @@ public class IndexCreator {
 		return mapFile.getAbsolutePath() + ".prtree"; //$NON-NLS-1$
 	}
 
+	public void generateIndexes(File readFile, IProgress progress, IOsmStorageFilter addFilter) throws IOException, SAXException, SQLException{
+		generateIndexes(readFile, progress, addFilter, null, null);
+	}
+	
 	public void generateIndexes(File readFile, IProgress progress, IOsmStorageFilter addFilter, MapZooms mapZooms, MapRenderingTypes renderingTypes) 
 	throws IOException, SAXException,
 			SQLException {
@@ -2283,7 +2294,11 @@ public class IndexCreator {
 			this.renderingTypes = renderingTypes;
 		}
 
-		this.mapZooms = mapZooms;
+		if(mapZooms != null){
+			this.mapZooms = mapZooms;
+		} else {
+			mapZooms = this.mapZooms;
+		}
 		multiPolygonsWays = new Map[mapZooms.size()];
 		for (int i = 0; i < multiPolygonsWays.length; i++) {
 			multiPolygonsWays[i] = new LinkedHashMap<Long, Set<Integer>>();
@@ -2854,6 +2869,7 @@ public class IndexCreator {
 		// creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/new_zealand.osm.bz2"), new ConsoleProgressImplementation(3), null);
 		
 //		creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/map.osm"), new ConsoleProgressImplementation(15), null);
+		creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/bayarea.osm"), new ConsoleProgressImplementation(15), null);
 
 		System.out.println("WHOLE GENERATION TIME :  " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
 		 System.out.println("COORDINATES_SIZE " + BinaryMapIndexWriter.COORDINATES_SIZE + " count " + BinaryMapIndexWriter.COORDINATES_COUNT); //$NON-NLS-1$ //$NON-NLS-2$
