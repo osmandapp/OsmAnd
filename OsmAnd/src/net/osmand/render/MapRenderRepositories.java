@@ -256,9 +256,8 @@ public class MapRenderRepositories {
 					for(int i=0; i < r.getTypes().length; i++){
 						if ((r.getTypes()[i] & 0x3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
 							// multy polygon
-							int type = MapRenderingTypes.getMainObjectType(r.getTypes()[i]);
-							int subtype = MapRenderingTypes.getObjectSubType(r.getTypes()[i]);
-							TagValuePair pair = r.getMapIndex().decodeType(type, subtype);
+							TagValuePair pair = r.getMapIndex().decodeType(MapRenderingTypes.getMainObjectType(r.getTypes()[i]),
+									MapRenderingTypes.getObjectSubType(r.getTypes()[i]));
 							if(pair != null){
 								pair = new TagValuePair(pair.tag, pair.value, r.getTypes()[i]);
 								if (!multiPolygons.containsKey(pair)) {
@@ -449,7 +448,8 @@ public class MapRenderRepositories {
 			incompletedRings.clear();
 			completedRingNames.clear();
 			incompletedRingNames.clear();
-			
+			log.debug("Process multypolygon " + type.tag + " " + type.value +  //$NON-NLS-1$ //$NON-NLS-2$
+					" direct list : " +directList + " rev : " + inverselist); //$NON-NLS-1$ //$NON-NLS-2$
 			MultyPolygon pl = processMultiPolygon(leftX, rightX, bottomY, topY, listPolygons, completedRings, incompletedRings, 
 					completedRingNames, incompletedRingNames, type,	directList, inverselist, zoom);
 			if(pl != null){
@@ -463,11 +463,10 @@ public class MapRenderRepositories {
 			List<List<Long>> completedRings, List<List<Long>> incompletedRings, List<String> completedRingNames, List<String> incompletedRingNames, 
 			TagValuePair type, List<BinaryMapDataObject> directList, List<BinaryMapDataObject> inverselist, int zoom) {
 		MultyPolygon pl = new MultyPolygon();
-		// TODO delete setType at all!!!
 		// delete direction last bit (to not show point)
-		pl.setType(type.additionalAttribute);
 		pl.setTag(type.tag);
 		pl.setValue(type.value);
+		pl.setLayer(MapRenderingTypes.getNegativeWayLayer(type.additionalAttribute));
 		long dbId = 0;
 		for (int km = 0; km < 2; km++) {
 			List<BinaryMapDataObject> list = km == 0 ? directList : inverselist;
