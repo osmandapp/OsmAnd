@@ -11,6 +11,7 @@ public class MultyPolygon extends BinaryMapDataObject {
 	private String[] names = null;
 	private String tag = null;
 	private String value = null;
+	private int layer = 0;
 	public MultyPolygon(){
 		super();
 		id = -1;
@@ -26,6 +27,13 @@ public class MultyPolygon extends BinaryMapDataObject {
 		throw new UnsupportedOperationException();
 	}
 	
+	public int getLayer() {
+		return layer;
+	}
+	
+	public void setLayer(int layer) {
+		this.layer = layer;
+	}
 	
 	public void setNames(String[] names) {
 		this.names = names;
