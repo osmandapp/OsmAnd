@@ -6,7 +6,7 @@
     <string name="rendering_settings">Térkép megjelenítés</string>
     <string name="index_settings_descr">Adat letöltés és frissítés kapcsolat nélküli használathoz</string>
     <string name="index_settings">Adatok kapcsolat nélküli munkához</string>
-	<string name="osmand_service">Háttérszolháltatás</string>
+	<string name="osmand_service">Háttérszolgáltatás</string>
 	<string name="osmand_service_descr">Háttérszolgáltatás használata kikapcsolt képernyős használathoz</string>
 	<string name="fast_route_mode">Leggyorsabb útvonal</string>
 	<string name="fast_route_mode_descr">Leggyorsabb útvonal kiszámításának engedése vagy a legrövidebb út tiltása </string>
