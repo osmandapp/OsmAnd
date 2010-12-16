@@ -14,10 +14,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.MessageFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -48,6 +49,7 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.Editable;
@@ -70,11 +72,16 @@ public class DownloadIndexActivity extends ListActivity {
 	
 	private final static Log log = LogUtil.getLog(DownloadIndexActivity.class);
 	private static final int RELOAD_ID = 0;
+	private static final int SELECT_ALL_ID = 1;
+	private static final int DESELECT_ALL_ID = 2;
+	private static final int FILTER_EXISTING_REGIONS = 3;
+	
 	private static final boolean USE_DOWNLOAD_OSMAND_NET = true;
 	private static DownloadIndexListThread downloadListIndexThread = new DownloadIndexListThread();
 
 	private ProgressDialog progressFileDlg = null;
 	private ProgressDialog progressListDlg = null;
+	private Map<String, String> indexFileNames = null;
 	private LinkedHashMap<String, DownloadEntry> entriesToDownload = new LinkedHashMap<String, DownloadEntry>();
 	private TextWatcher textWatcher = new TextWatcher() {
 
@@ -95,6 +102,7 @@ public class DownloadIndexActivity extends ListActivity {
 
     };
 	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -108,6 +116,8 @@ public class DownloadIndexActivity extends ListActivity {
 			}
 			
 		});
+		
+		indexFileNames = ((OsmandApplication)getApplication()).getResourceManager().getIndexFileNames();
 
 	    EditText filterText = (EditText) findViewById(R.id.search_box);
 		filterText.addTextChangedListener(textWatcher);
@@ -137,7 +147,10 @@ public class DownloadIndexActivity extends ListActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		MenuItem item = menu.add(0, RELOAD_ID, 0, R.string.reload);
-		item.setIcon(R.drawable.ic_menu_refresh);
+		// item.setIcon(R.drawable.ic_menu_refresh);
+		item = menu.add(0, SELECT_ALL_ID, 0, R.string.select_all);
+		item = menu.add(0, DESELECT_ALL_ID, 0, R.string.deselect_all);
+		item = menu.add(0, FILTER_EXISTING_REGIONS, 0, R.string.filter_existing_indexes);
 		return true;
 	}
 
@@ -147,6 +160,35 @@ public class DownloadIndexActivity extends ListActivity {
 			//re-create the thread
 			downloadListIndexThread = new DownloadIndexListThread();
 			downloadIndexList();
+		} else if(item.getItemId() == SELECT_ALL_ID){
+			List<Entry<String, String>> origReference = ((DownloadIndexAdapter)getListAdapter()).getOrigReference();
+			int selected = 0;
+			for(Entry<String, String> es : origReference){
+				if(!entriesToDownload.containsKey(es.getKey())){
+					selected++;
+					entriesToDownload.put(es.getKey(), createDownloadEntry(es));
+				}
+			}
+			Toast.makeText(this, MessageFormat.format(getString(R.string.items_were_selected), selected), Toast.LENGTH_SHORT).show();
+			((DownloadIndexAdapter)getListAdapter()).notifyDataSetInvalidated();
+			if(selected > 0){
+				findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+			}
+		} else if(item.getItemId() == FILTER_EXISTING_REGIONS){
+			List<Entry<String, String>> origArray = ((DownloadIndexAdapter)getListAdapter()).getOrigArray();
+			List<Entry<String, String>> ref = ((DownloadIndexAdapter)getListAdapter()).getOrigReference();
+			ref.clear();
+			for(Entry<String, String> es : origArray){
+				DownloadEntry em = createDownloadEntry(es);
+				if(em != null && em.fileToUnzip.exists()){
+					ref.add(es);
+				}
+			}
+			((DownloadIndexAdapter)getListAdapter()).notifyDataSetChanged();
+		} else if(item.getItemId() == DESELECT_ALL_ID){
+			entriesToDownload.clear();
+			((DownloadIndexAdapter)getListAdapter()).notifyDataSetInvalidated();
+			findViewById(R.id.DownloadButton).setVisibility(View.GONE);
 		} else {
 			return false;
 		}
@@ -275,9 +317,53 @@ public class DownloadIndexActivity extends ListActivity {
 		}
 		
 		
-		int ls = e.getKey().lastIndexOf('_');
-		final String baseName = e.getKey().substring(0, ls);
 		
+		
+		final DownloadEntry entry = createDownloadEntry(e);
+		if (entry != null) {
+			// if(!fileToUnzip.exists()){
+			// builder.setMessage(MessageFormat.format(getString(R.string.download_question), baseName, extractDateAndSize(e.getValue())));
+			if (entry.fileToUnzip.exists()) {
+				Builder builder = new AlertDialog.Builder(this);
+				MessageFormat format;
+				if (entry.fileToUnzip.isDirectory()) {
+					format = new MessageFormat("{0,date,dd.MM.yyyy}", Locale.US); //$NON-NLS-1$
+				} else {
+					format = new MessageFormat("{0,date,dd.MM.yyyy} : {1, number,##.#} MB", Locale.US); //$NON-NLS-1$
+				}
+				String description = format.format(new Object[] { new Date(entry.fileToUnzip.lastModified()),
+						((float) entry.fileToUnzip.length() / MB) });
+				builder.setMessage(MessageFormat.format(getString(R.string.download_question_exist), entry.baseName, description,
+						extractDateAndSize(e.getValue())));
+
+				builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						entriesToDownload.put(e.getKey(), entry);
+						int x = getListView().getScrollX();
+						int y = getListView().getScrollY();
+						findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+						getListView().scrollTo(x, y);
+						ch.setChecked(!ch.isChecked());
+					}
+				});
+				builder.setNegativeButton(R.string.default_buttons_no, null);
+				builder.show();
+			} else {
+				entriesToDownload.put(e.getKey(), entry);
+				int x = getListView().getScrollX();
+				int y = getListView().getScrollY();
+				findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+				getListView().scrollTo(x, y);
+				ch.setChecked(!ch.isChecked());
+			}
+
+		}
+		
+	}
+
+	private DownloadEntry createDownloadEntry(final Entry<String, String> e) {
+		String key = e.getKey();
 		File parent = null;
 		String toSavePostfix = null;
 		String toCheckPostfix = null;
@@ -323,51 +409,28 @@ public class DownloadIndexActivity extends ListActivity {
 		if(parent != null){
 			parent.mkdirs();
 		}
+		final DownloadEntry entry;
 		if(parent == null || !parent.exists()){
 			Toast.makeText(DownloadIndexActivity.this, getString(R.string.sd_dir_not_accessible), Toast.LENGTH_LONG).show();
+			entry = null;
 		} else {
-			final DownloadEntry entry = new DownloadEntry();
-			entry.fileToSave = new File(parent, baseName + toSavePostfix);
+			entry = new DownloadEntry();
+			int ls = e.getKey().lastIndexOf('_');
+			entry.baseName = e.getKey().substring(0, ls);
+			String extractDateAndSize = extractDateAndSize(e.getValue());
+			entry.fileToSave = new File(parent, entry.baseName + toSavePostfix);
 			entry.unzip = unzipDir;
-			entry.fileToUnzip = new File(parent, baseName + toCheckPostfix);
-			// if(!fileToUnzip.exists()){
-			// builder.setMessage(MessageFormat.format(getString(R.string.download_question), baseName, extractDateAndSize(e.getValue())));
-			if (entry.fileToUnzip.exists()) {
-				Builder builder = new AlertDialog.Builder(this);
-				MessageFormat format;
-				if (entry.fileToUnzip.isDirectory()) {
-					format = new MessageFormat("{0,date,dd.MM.yyyy}", Locale.US); //$NON-NLS-1$
-				} else {
-					format = new MessageFormat("{0,date,dd.MM.yyyy} : {1, number,##.#} MB", Locale.US); //$NON-NLS-1$
+			if(extractDateAndSize.length() > 10){
+				SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy"); //$NON-NLS-1$
+				try {
+					Date d = format.parse(extractDateAndSize.substring(1, 11));
+					entry.dateModified = d.getTime();
+				} catch (ParseException e1) {
 				}
-				String description = format
-						.format(new Object[] { new Date(entry.fileToUnzip.lastModified()), ((float) entry.fileToUnzip.length() / MB) });
-				builder.setMessage(MessageFormat.format(getString(R.string.download_question_exist), baseName, description, extractDateAndSize(e.getValue())));
-				
-				builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						entriesToDownload.put(e.getKey(), entry);
-						int x = getListView().getScrollX();
-						int y = getListView().getScrollY();
-						findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
-						getListView().scrollTo(x, y);
-						ch.setChecked(!ch.isChecked());
-					}
-				});
-				builder.setNegativeButton(R.string.default_buttons_no, null);
-				builder.show();
-			} else {
-				entriesToDownload.put(e.getKey(), entry);
-				int x = getListView().getScrollX();
-				int y = getListView().getScrollY();
-				findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
-				getListView().scrollTo(x, y);
-				ch.setChecked(!ch.isChecked());
 			}
-				
+			entry.fileToUnzip = new File(parent, entry.baseName + toCheckPostfix);
 		}
-		
+		return entry;
 	}
 	
 	protected void downloadFiles() {
@@ -396,7 +459,7 @@ public class DownloadIndexActivity extends ListActivity {
 									for (String s : new ArrayList<String>(entriesToDownload.keySet())) {
 										DownloadEntry entry = entriesToDownload.get(s);
 										if (entry != null) {
-											if (downloadFile(s, entry.fileToSave, entry.fileToUnzip, entry.unzip, impl)) {
+											if (downloadFile(s, entry.fileToSave, entry.fileToUnzip, entry.unzip, impl, entry.dateModified)) {
 												entriesToDownload.remove(s);
 												runOnUiThread(new Runnable() {
 													@Override
@@ -432,6 +495,8 @@ public class DownloadIndexActivity extends ListActivity {
 		public File fileToSave;
 		public File fileToUnzip;
 		public boolean unzip;
+		public Long dateModified;
+		public String baseName;
 		
 	}
 	
@@ -514,7 +579,7 @@ public class DownloadIndexActivity extends ListActivity {
 	}
 	
 	protected boolean downloadFile(final String key, final File fileToDownload, final File fileToUnZip, final boolean unzipToDir,
-			IProgress progress) throws InterruptedException {
+			IProgress progress, Long dateModified) throws InterruptedException {
 		FileOutputStream out = null;
 		try {
 
@@ -539,6 +604,7 @@ public class DownloadIndexActivity extends ListActivity {
 				ZipInputStream zipIn = new ZipInputStream(new FileInputStream(fileToDownload));
 				ZipEntry entry = null;
 				while ((entry = zipIn.getNextEntry()) != null) {
+					File fs;
 					if (!unzipToDir) {
 						String name = entry.getName();
 						// small simplification
@@ -550,10 +616,12 @@ public class DownloadIndexActivity extends ListActivity {
 								name = name.substring(0, ind) + name.substring(i, name.length());
 							}
 						}
-						out = new FileOutputStream(new File(fileToUnZip.getParent(), name));
+						fs = new File(fileToUnZip.getParent(), name);
+						
 					} else {
-						out = new FileOutputStream(new File(fileToUnZip, entry.getName()));
+						fs = new File(fileToUnZip, entry.getName());
 					}
+					out = new FileOutputStream(fs);
 					int read;
 					byte[] buffer = new byte[BUFFER_SIZE];
 					while ((read = zipIn.read(buffer)) != -1) {
@@ -567,6 +635,9 @@ public class DownloadIndexActivity extends ListActivity {
 
 			ArrayList<String> warnings = new ArrayList<String>();
 			ResourceManager manager = ((OsmandApplication) getApplication()).getResourceManager();
+			if(dateModified != null){
+				toIndex.setLastModified(dateModified);
+			}
 			if (toIndex.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)) {
 				manager.indexingAddress(progress, warnings, toIndex);
 			} else if (toIndex.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
@@ -576,6 +647,9 @@ public class DownloadIndexActivity extends ListActivity {
 			} else if (toIndex.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 				manager.indexingMaps(progress);
 			} else if (toIndex.getName().endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
+			}
+			if(dateModified != null){
+				toIndex.setLastModified(dateModified);
 			}
 			if (warnings.isEmpty()) {
 				showWarning(getString(R.string.download_index_success));
@@ -616,6 +690,22 @@ public class DownloadIndexActivity extends ListActivity {
 		});
 	}
 
+	private String convertServerFileNameToLocal(String name){
+		int l = name.lastIndexOf('_');
+		String s;
+		if(name.endsWith(IndexConstants.POI_INDEX_EXT) || name.endsWith(IndexConstants.POI_INDEX_EXT_ZIP)){
+			s = IndexConstants.POI_INDEX_EXT;
+		} else if(name.endsWith(IndexConstants.ADDRESS_INDEX_EXT) || name.endsWith(IndexConstants.ADDRESS_INDEX_EXT_ZIP)){
+			s = IndexConstants.ADDRESS_INDEX_EXT;
+		} else if(name.endsWith(IndexConstants.TRANSPORT_INDEX_EXT) || name.endsWith(IndexConstants.TRANSPORT_INDEX_EXT_ZIP)){
+			s = IndexConstants.TRANSPORT_INDEX_EXT;
+		} else if(name.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || name.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)){
+			s = IndexConstants.BINARY_MAP_INDEX_EXT;
+		} else {
+			s = ""; //$NON-NLS-1$
+		}
+		return name.substring(0, l) + s;
+	}
 
 	protected class DownloadIndexAdapter extends ArrayAdapter<Entry<String, String>> implements Filterable {
 
@@ -693,9 +783,38 @@ public class DownloadIndexActivity extends ListActivity {
 				}
 			});
 			item.setText(s.trim() + "\n" + name); //$NON-NLS-1$
-			description.setText(extractDateAndSize(e.getValue()).replace(':', '\n').trim());
+			String dateAndSize = extractDateAndSize(e.getValue());
+			if(indexFileNames != null){
+				String sfName = convertServerFileNameToLocal(e.getKey());
+				if(!indexFileNames.containsKey(sfName)){
+					item.setTextColor(Color.WHITE);
+				} else {
+					if(dateAndSize.length() > 10){
+						if(dateAndSize.substring(1, 11).equals(indexFileNames.get(sfName))){
+							item.setTextColor(Color.GREEN);
+						} else {
+							item.setTextColor(Color.BLUE);
+						}
+					} else {
+						item.setTextColor(Color.GREEN);
+					}
+						
+				}
+				
+			}
+			description.setText(dateAndSize.replace(':', '\n').trim());
 			return row;
 		}
+		
+		
+		public List<Entry<String, String>> getOrigReference() {
+			return origReference;
+		}
+		
+		public List<Entry<String, String>> getOrigArray() {
+			return origArray;
+		}
+		
 		
 		@Override
 		public Filter getFilter() {
