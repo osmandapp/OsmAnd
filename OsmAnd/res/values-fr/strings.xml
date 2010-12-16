@@ -24,9 +24,8 @@
 	<string name="auto_zoom_map_descr">Zoom automatique en fonction de votre vitesse</string> 
 	<string name="auto_zoom_map">Zoom auto. sur la carte</string>
 	<string name="background_router_service_descr">Activer le service en arrière-plan pour suivre votre position sur de longues durées</string>
-	<string name="background_router_service">Router service</string>
 	<string name="background_router_service">Service de géolocalisation</string> 
-	<string name="background_service_int_descr">Choisir un intervalle d'actualisation de votre position dans le service en arrière plan</string> 
+	<string name="background_service_int_descr">Choisir un intervalle d\'actualisation de votre position dans le service en arrière plan</string> 
 	<string name="background_service_int">Intervalle de géolocalisation</string> 
 	<string name="background_service_provider_descr">Choisir un fournisseur de géolocalisation pour le service arrière plan</string> 
 	<string name="background_service_provider">Fournisseur de géolocalisation</string> 
@@ -44,7 +43,6 @@
 	<string name="closing_changeset">Fermeture des modifications</string> 
 	<string name="commiting_node">Envoi des nœuds...</string> 
 	<string name="context_menu_item_add_favorite">Ajouter aux favoris</string> 
-	<string name="context_menu_item_create_poi">Create POI</string>
 	<string name="context_menu_item_create_poi">Créer un Point d\'Intérêt</string> 
 	<string name="context_menu_item_download_map">Télécharger la carte</string>
 	<string name="context_menu_item_navigate_point">Se déplacer vers le point</string> 
@@ -123,14 +121,14 @@
 	<string name="first_time_msg">Merci d\'avoir choisi OsmAnd. \nPour utiliser toutes les fonctionnalités de l\'application, vous devez avoir des index que vous pouvez télécharger (Paramètres -&gt; Données) ou les préparer vous-même. Vous pourrez alors les utiliser pour rechercher une adresse, un Point d\'Intérêt (PI), un moyen de transport...</string> 
 	<string name="follow_route">Suivre le trajet</string> 
 	<string name="follow">Suivre</string> 
-	<string name="general_settings_descr">Configurer l'utilisation d'internet, la rotation de la carte, l'orientation de l'écran...</string>
+	<string name="general_settings_descr">Configurer l\'utilisation d\'internet, la rotation de la carte, l\'orientation de l\'écran...</string>
 	<string name="general_settings">Général</string>
 	<string name="get_directions">Directions</string>
 	<string name="go_back_to_osmand">Retourner à la carte OsmAnd</string> 
 	<string name="gps_provider">GPS</string>
 	<string name="gps_status_app_not_found">Position GPS introuvable</string> 
-	<string name="gpx_direct_route">Itinéraire d'aller</string>
-	<string name="gpx_files_not_found">Aucun fichier GPX n'a été trouvé dans le dossier /osmand/tracks</string>
+	<string name="gpx_direct_route">Itinéraire d\'aller</string>
+	<string name="gpx_files_not_found">Aucun fichier GPX n\'a été trouvé dans le dossier /osmand/tracks</string>
 	<string name="gpx_reverse_route">Itinéraire de retour</string>
 	<string name="hello">Application de navigation OsmAnd</string> 
 	<string name="hide_poi_filter">Masquer le filtre</string> 
@@ -140,7 +138,7 @@
 	<string name="incremental_search_building">Recherche progressive des édifices</string> 
 	<string name="incremental_search_city">Recherche progressive de ville. Afin de trouver les villages/codes postaux, veuillez inscrire au moins les trois premiers caractères.</string> 
 	<string name="incremental_search_street">Recherche progressive des rues</string> 
-	<string name="index_settings_descr">Obtenir ou mettre à jour les données pour l'utilisation hors-ligne</string>
+	<string name="index_settings_descr">Obtenir ou mettre à jour les données pour l\'utilisation hors-ligne</string>
 	<string name="index_settings">Données hors-ligne</string>
 	<string name="interval_15_seconds">15 secondes</string> 
 	<string name="interval_1_minute">1 minute</string>
@@ -176,7 +174,7 @@
 	<string name="map_orientation_landscape">Paysage</string> 
 	<string name="map_orientation_portrait">Portrait</string>
 	<string name="map_preferences">Carte</string> 
-	<string name="map_preferences_descr">Préciser les paramètres de la carte : rotation, position centrale, orientation de l'écran</string> 
+	<string name="map_preferences_descr">Préciser les paramètres de la carte : rotation, position centrale, orientation de l\'écran</string> 
 	<string name="map_route_by_gpx">Itinéraire GPX enregistrés</string>
 	<string name="maps_could_not_be_downloaded">Impossible de télécharger cette carte</string>
 	<string name="map_screen_orientation_descr">Choisir l\'orientation de l\'écran</string> 
@@ -194,7 +192,7 @@
 	<string name="menu_layers">Couches</string> 
 	<string name="menu_mute_off">Son activé</string> 
 	<string name="menu_mute_on">Son désactivé</string> 
-	<string name="monitor_preferences_descr">Définir les paramètres d'enregistrement du parcours</string> 
+	<string name="monitor_preferences_descr">Définir les paramètres d\'enregistrement du parcours</string> 
 	<string name="monitor_preferences">Enregistrement du parcours</string> 
 	<string name="navigate_point_cancel">Annuler</string> 
 	<string name="navigate_point_format_D">DDD.DDDDD</string>
@@ -209,8 +207,8 @@
 	<string name="new_route_calculated_dist">Nouveau trajet calculé, distance</string> 
 	<string name="no_fav_to_save">Aucun point favori à enregistrer</string> 
 	<string name="none_region_found">Aucune région trouvée sur la carte SD. Essayez d\'en télécharger une d\'internet.</string> 
-	<string name="no_vector_map_loaded">Aucune carte vectorielle n'a été chargée</string>
-	<string name="off_router_service_no_gps_available">Le service d\'arrière plan requiert l'activation de la géolocalisation.</string> 
+	<string name="no_vector_map_loaded">Aucune carte vectorielle n\'a été chargée</string>
+	<string name="off_router_service_no_gps_available">Le service d\'arrière plan requiert l\'activation de la géolocalisation.</string> 
 	<string name="only_show">Afficher seulement</string> 
 	<string name="opening_changeset">Ouverture des modifications...</string> 
 	<string name="opening_hours">Heures d\'ouverture</string> 
@@ -231,8 +229,8 @@
 	<string name="osb_comment_dialog_success">Ajout du commentaire réussi</string> 
 	<string name="osb_comment_dialog_title">Ajout d\'un commentaire au bogue</string> 
 	<string name="osb_comment_menu_item">Ajouter commentaire</string> 
-	<string name="osmand_service_descr">Démarrer le service d'arrière-plan pour utiliser OsmAnd pendant la veille</string>
-	<string name="osmand_service">Service d'arrière-plan</string>
+	<string name="osmand_service_descr">Démarrer le service d\'arrière-plan pour utiliser OsmAnd pendant la veille</string>
+	<string name="osmand_service">Service d\'arrière-plan</string>
 	<string name="osm_settings_descr">Définir les paramètres de connexion à OpenStreetMap</string> 
 	<string name="osm_settings">OSM</string>
 	<string name="phone">Téléphone</string>
@@ -272,7 +270,7 @@
 	<string name="reload_indexes">Recharger les index</string> 
 	<string name="reload">Recharger</string>
 	<string name="reload_tile">Recharger carreau</string> 
-	<string name="renderer_load_exception">Erreur: le moteur de rendu n'est pas chargé</string>
+	<string name="renderer_load_exception">Erreur: le moteur de rendu n\'est pas chargé</string>
 	<string name="renderer_load_sucess">Le moteur de rendu a bien été chargé</string>
 	<string name="renderers_descr">Choisir le style du moteur de rendu vectoriel</string>
 	<string name="renderers">Moteur de rendu vectoriel</string>
@@ -361,7 +359,7 @@
 	<string name="show_route">Afficher trajet</string> 
 	<string name="show_transport_over_map">Afficher les arrêts des transports</string> 
 	<string name="show_transport_over_map_description">Afficher les arrêts des transports publics sur la carte</string> 
-	<string name="show_view_angle">Afficher l'angle de vue</string>
+	<string name="show_view_angle">Afficher l\'angle de vue</string>
 	<string name="show_view_angle_descr">Afficher un angle de vue basé sur le compas</string> 
 	<string name="stop_navigation">Effacer le point</string> 
 	<string name="stop_routing">Arrêt de la géolocalisation</string> 
@@ -371,9 +369,9 @@
 	<string name="transport_finish_search">Terminer la recherche</string> 
 	<string name="transport_route_distance">Distance du trajet</string> 
 	<string name="transport_Routes">Routes</string>
-	<string name="transport_search_after">Chercher la route d'après</string> 
+	<string name="transport_search_after">Chercher la route d\'après</string> 
 	<string name="transport_search_again">Rechercher les transports une nouvelle fois</string>
-	<string name="transport_search_before">Chercher la route d'avant</string> 
+	<string name="transport_search_before">Chercher la route d\'avant</string> 
 	<string name="transport_searching_route">Recherche de transport ({0} pour cible)</string> 
 	<string name="transport_searching_transport">Recherche transport (sans cible)</string> 
 	<string name="transport_search_none">aucun</string> 
@@ -403,8 +401,8 @@
 	<string name="use_internet">Utiliser internet</string> 
 	<string name="use_online_routing_descr">Utiliser internet pour calculer le trajet</string> 
 	<string name="use_online_routing">Utiliser la géolocalisation en-ligne</string> 
-	<string name="user_name_descr">Votre nom d'utilisateur pour le service OpenStreetMap</string> 
-	<string name="user_name">Nom d'utilisateur</string> 
+	<string name="user_name_descr">Votre nom d\'utilisateur pour le service OpenStreetMap</string> 
+	<string name="user_name">Nom d\'utilisateur</string> 
 	<string name="user_password_descr">Votre mot de passe pour le service OpenStreetMap</string> 
 	<string name="user_password">Mot de passe</string> 
 	<string name="use_trackball_descr">Utiliser le pointeur pour se déplacer sur la carte</string> 
@@ -415,7 +413,7 @@
 	<string name="voice_data_not_supported">Les données vocales utilisent une version non supportée</string> 
 	<string name="voice_data_unavailable">Données vocales inaccessibles</string> 
 	<string name="voice_not_use">Aucune voix</string> 
-	<string name="voice_provider_descr">Choisir la langue pour la prononciation de l'itinéraire</string> 
+	<string name="voice_provider_descr">Choisir la langue pour la prononciation de l\'itinéraire</string> 
 	<string name="voice_provider">Données vocales</string> 
 	<string name="voice">Voix</string>
 	<string name="website">site web</string>
