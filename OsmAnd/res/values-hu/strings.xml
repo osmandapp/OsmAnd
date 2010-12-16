@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="items_were_selected">{0} elem lett kijelölve</string>
+	<string name="filter_existing_indexes">Szűrő letöltv</string>
+	<string name="deselect_all">Kijelölés megszüntetése</string>
+	<string name="select_all">Mindet kijelöl</string>
+	<string name="reload">Újratölt</string>
 	<string name="general_settings_descr">Internet használat, térkép forgatás, kijelző helyzet és egyéb beállítások</string>
     <string name="general_settings">Általános</string>
 	<string name="rendering_settings_descr">Térkép forrás és megjelenítés beállítás</string>
@@ -25,7 +30,6 @@
         <string name="renderers">Vektoros megjelenítés</string>
         <string name="renderers_descr">Vektoros megjelenítési stílus választás</string>
 
-        <string name="reload">újratöltés</string>
 	<string name="poi_context_menu_website">POI weboldal megtekintése</string>
 	<string name="poi_context_menu_call">POI telefonszám megtekintése</string>
 	<string name="website">weboldal</string>
