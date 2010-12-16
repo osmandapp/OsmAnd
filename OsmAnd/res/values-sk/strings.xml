@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+<string name="items_were_selected">Bolo vybraných {0} položiek</string>
+<string name="filter_existing_indexes">Zobraziť stiahnuté</string>
+<string name="deselect_all">Zrušiť výber</string>
+<string name="select_all">Vybrať všetko</string>
+<string name="reload">Znovu načítať</string>
 <string name="general_settings_descr">Konfigurácia použitia internetu, otáčania mapy, orientácie obrazovky a iného</string>
 <string name="general_settings">Všeobecné</string>
 <string name="rendering_settings_descr">Konfigurácia zdroja mapy a vzhľadu</string>
@@ -16,20 +21,18 @@
 <string name="maps_could_not_be_downloaded">Táto mapa sa nedá stiahnuť</string>
 <string name="continuous_rendering">Postupné vykresľovanie</string>
 <string name="continuous_rendering_descr">Vybrať medzi postupným alebo celoobrazovým vykresľovaním</string>
-<string name="rendering_exception">Nastala chyba pri vykresľovaní vybratej oblasti</string>
-<string name="rendering_out_of_memory">Nedostatok pamäte na zobrazenie vybratej oblasti</string>
+<string name="rendering_exception">Nastala chyba pri vykresľovaní vybranej oblasti</string>
+<string name="rendering_out_of_memory">Nedostatok pamäte na zobrazenie vybranej oblasti</string>
 <string name="show_point_options">Možnosti bodu</string>
 <string name="renderer_load_sucess">Vykresľovač bol úspešne načítaný</string>
 <string name="renderer_load_exception">Nastala výnimka: vykresľovač nebol načítaný</string>
 <string name="renderers">Vektorový vykresľovač</string>
 <string name="renderers_descr">Vybrať štýl vektorového vykresľovania</string>
-
-<string name="reload">Znovu načítať indexy</string>
 <string name="poi_context_menu_website">Zobraziť web stránku POI</string>
 <string name="poi_context_menu_call">Zobraziť telefónny kontakt POI</string>
 <string name="website">Web stránka</string>
 <string name="phone">Telefónny kontakt</string>
-<string name="download_type_to_filter">sem zadajte čo vyhľadať</string>
+<string name="download_type_to_filter">sem zadajte čo chcete nájsť</string>
 <string name="use_high_res_maps">Mapa s vysokým rozlíšením</string>
 <string name="use_high_res_maps_descr">Použiť mapu s vysokým rozlíšením pre zariadenia s vysokou hustotou bodov</string>
 <string name="unknown_location">Pozícia nie je zatiaľ známa</string>
