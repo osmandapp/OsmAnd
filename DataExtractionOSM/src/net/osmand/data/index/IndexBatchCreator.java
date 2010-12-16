@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,6 +58,8 @@ public class IndexBatchCreator {
 		String siteToDownload = "";
 	}
 	
+	private boolean uploadToOsmandDownloads = true;
+	
 	
 	// process atributtes
 	boolean downloadFiles = false;
@@ -85,6 +88,7 @@ public class IndexBatchCreator {
 	
 	
 	public static void main(String[] args) {
+		
 		IndexBatchCreator creator = new IndexBatchCreator();
 		if(args == null || args.length == 0){
 			System.out.println("Please specify -local parameter or path to batch.xml configuration file as 1 argument.");
@@ -174,8 +178,14 @@ public class IndexBatchCreator {
 			cookieSID = authorization.getAttribute("cookieSID");
 			pagegen = authorization.getAttribute("pagegen");
 			token = authorization.getAttribute("token");
-			user = authorization.getAttribute("google_code_user");
-			password = authorization.getAttribute("google_code_password");
+			uploadToOsmandDownloads = Boolean.parseBoolean(process.getAttribute("upload_osmand_download"));
+			if(uploadToOsmandDownloads){
+				user = authorization.getAttribute("osmand_download_user");
+				password = authorization.getAttribute("osmand_download_password");
+			} else {
+				user = authorization.getAttribute("google_code_user"); 
+				password = authorization.getAttribute("google_code_password");
+			}
 		}
 		
 		List<RegionCountries> countriesToDownload = new ArrayList<RegionCountries>();
@@ -446,7 +456,7 @@ public class IndexBatchCreator {
 		if(!uploadIndexes){
 			return;
 		}
-		MessageFormat format = new MessageFormat("{0,date,dd.MM.yyyy} : {1, number,##.#} MB", Locale.US);
+		
 		String summary;
 		double mbLengh = (double)f.length() / MB;
 		boolean zip = true;
@@ -533,37 +543,53 @@ public class IndexBatchCreator {
 			f = zFile;
 			
 		}
-		try {
-			DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName(), token, pagegen, cookieHSID, cookieSID);
+		
+		if (!uploadToOsmandDownloads) {
 			try {
-				Thread.sleep(4000);
-			} catch (InterruptedException e) {
-				// wait 5 seconds
+				DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName(), token, pagegen, cookieHSID, cookieSID);
+				try {
+					Thread.sleep(4000);
+				} catch (InterruptedException e) {
+					// wait 5 seconds
+				}
+			} catch (IOException e) {
+				log.warn("Deleting file from downloads" + f.getName() + " " + e.getMessage());
 			}
-		} catch (IOException e) {
-			log.warn("Deleting file from downloads" + f.getName() +  " " + e.getMessage());
 		}
 		
 		mbLengh = (double)f.length() / MB;
-		if(mbLengh > 100){
+		if(mbLengh > 100 && !uploadToOsmandDownloads){
 			System.err.println("ERROR : file " + f.getName() + " exceeded 100 mb!!! Could not be uploaded.");
 			return; // restriction for google code
 		}
-		String descriptionFile = "{"+format.format(new Object[]{new Date(f.lastModified()), mbLengh})+"}";
-		summary +=  regionName + " " + descriptionFile;
 		
 		
-		GoogleCodeUploadIndex uploader = new GoogleCodeUploadIndex();
-		uploader.setFileName(f.getAbsolutePath());
-		uploader.setTargetFileName(f.getName());
-		uploader.setProjectName("osmand");
-		uploader.setUserName(user);
-		uploader.setPassword(password);
-		uploader.setLabels("Type-Archive, Testdata");
-		uploader.setSummary(summary.replace('_', ' '));
+		summary +=  regionName;
+		summary = summary.replace('_', ' ');
+		
 		try {
-			uploader.upload();
-			if(deleteFilesAfterUploading){
+			MessageFormat dateFormat = new MessageFormat("{0,date,dd.MM.yyyy}", Locale.US);
+			MessageFormat numberFormat = new MessageFormat("{0,number,##.#}", Locale.US);
+			String size = numberFormat.format(new Object[] {mbLengh});
+			String date = dateFormat.format(new Object[] {new Date(f.lastModified())});
+			if (uploadToOsmandDownloads) {
+				uploadToDownloadOsmandNet(f, summary, size,date);
+			} else {
+				String descriptionFile = "{" + date + " : " + size + "}";
+				summary += " " + descriptionFile;
+				GoogleCodeUploadIndex uploader = new GoogleCodeUploadIndex();
+				uploader.setFileName(f.getAbsolutePath());
+				uploader.setTargetFileName(f.getName());
+				uploader.setProjectName("osmand");
+				uploader.setUserName(user);
+				uploader.setPassword(password);
+				uploader.setLabels("Type-Archive, Testdata");
+				uploader.setSummary(summary);
+				uploader.upload();
+
+			}
+			
+			if (deleteFilesAfterUploading) {
 				f.delete();
 			}
 			alreadyUploadedFiles.add(f.getName());
@@ -572,6 +598,25 @@ public class IndexBatchCreator {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
+	private void uploadToDownloadOsmandNet(File f, String description, String size, String date) throws IOException{
+		log.info("Uploading file " + f.getName() + " " + size + " MB " + date + " of " + description);
+		// Upload to ftp
+		FTPFileUpload upload = new FTPFileUpload();
+		upload.upload("download.osmand.net", user, password, "indexes/" + f.getName(), f, 1 << 15);
+		
+		
+		String url = "http://download.osmand.net/xml_update.php?";
+		url += "index="+URLEncoder.encode(f.getName());
+		url += "&description="+URLEncoder.encode(description);
+		url += "&date="+URLEncoder.encode(date);
+		url += "&size="+URLEncoder.encode(size);
+		url += "&action=update";
+		log.info("Updating index " + url);  //$NON-NLS-1$//$NON-NLS-2$
+		URL ourl = new URL(url);
+		InputStream is = ourl.openStream();
+		safeClose(is, "close file"); //$NON-NLS-1$
+		log.info("Finish updating index");
+	}
 	
-
 }
