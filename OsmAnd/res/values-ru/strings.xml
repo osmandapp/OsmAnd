@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="items_were_selected">{0} items were selected</string>
+	<string name="filter_existing_indexes">Загруженные</string>
+	<string name="deselect_all">Снять выбор</string>
+	<string name="select_all">Выбрать все</string>
+	<string name="reload">Перезагрузить</string>
 	<string name="general_settings_descr">Настроить использование интернета, выбрать ориентацию экрана, вращение карты и другое</string>
     <string name="general_settings">Общие</string>
 	<string name="rendering_settings_descr">Выбрать источник карты и внешний вид</string>
@@ -23,7 +28,6 @@
 	<string name="renderer_load_exception">Произошла ошибка во время загрузки данного стиля</string>
 	<string name="renderers">Рендеринг карты</string>
 	<string name="renderers_descr">Выберите стиль для рендеринга карты</string>
-	<string name="reload">Перезагрузить</string>
 	<string name="poi_context_menu_website">Просмотреть вебсайт POI</string>
 	<string name="poi_context_menu_call">Показать телефон POI</string>
 	<string name="website">веб сайт</string>
