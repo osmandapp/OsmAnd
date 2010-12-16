@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="OsmAnd" default="help">
 
-<!-- The local.properties file is created and updated by the 'android'
+	<!-- The local.properties file is created and updated by the 'android'
      tool.
      It contains the path to the SDK. It should *NOT* be checked into
      Version Control Systems. -->
-    <property file="local.properties" />
+	<property file="local.properties" />
 
-    <!-- The build.properties file can be created by you and is never touched
+	<!-- The build.properties file can be created by you and is never touched
          by the 'android' tool. This is the place to change some of the
          default property values used by the Ant rules.
          Here are some properties you may want to change/update:
@@ -24,30 +24,28 @@
          application and should be checked into Version Control Systems.
 
          -->
-    <property file="build.properties" />
+	<property file="build.properties" />
 
-    <!-- The default.properties file is created and updated by the 'android'
+	<!-- The default.properties file is created and updated by the 'android'
          tool, as well as ADT.
          This file is an integral part of the build system for your
          application and should be checked into Version Control Systems. -->
-    <property file="default.properties" />
+	<property file="default.properties" />
 
-    <!-- Custom Android task to deal with the project target, and import the
+	<!-- Custom Android task to deal with the project target, and import the
          proper rules.
          This requires ant 1.6.0 or above. -->
-    <path id="android.antlibs">
-        <pathelement path="${sdk.dir}/tools/lib/anttasks.jar" />
-        <pathelement path="${sdk.dir}/tools/lib/sdklib.jar" />
-        <pathelement path="${sdk.dir}/tools/lib/androidprefs.jar" />
-    </path>
+	<path id="android.antlibs">
+		<pathelement path="${sdk.dir}/tools/lib/anttasks.jar" />
+		<pathelement path="${sdk.dir}/tools/lib/sdklib.jar" />
+		<pathelement path="${sdk.dir}/tools/lib/androidprefs.jar" />
+	</path>
 
-    <taskdef name="setup"
-        classname="com.android.ant.SetupTask"
-        classpathref="android.antlibs" />
+	<taskdef name="setup" classname="com.android.ant.SetupTask" classpathref="android.antlibs" />
 
-<!-- extension targets. Uncomment the ones where you want to do custom work
+	<!-- extension targets. Uncomment the ones where you want to do custom work
      in between standard targets -->
-<!--
+	<!--
     <target name="-pre-build">
     </target>
     <target name="-pre-compile">
@@ -60,179 +58,150 @@
     </target>
 -->
 
-    <property name="use.dir" value="../DataExtractionOSM/src/"/>
-    <property name="use.absolute.dir" location="${use.dir}" />
-    <property name="raw.absolute.dir" location="raw" />
-    <property name="base.dir" location="." />
+	<property name="use.dir" value="../DataExtractionOSM/src/" />
+	<property name="use.absolute.dir" location="${use.dir}" />
+	<property name="raw.absolute.dir" location="raw" />
+	<property name="base.dir" location="." />
 
-    <target name="-pre-build">
-        <delete dir="${raw.absolute.dir}" verbose="${verbose}" />
-        <mkdir dir="${raw.absolute.dir}/classes" />
-	<copy todir="${raw.absolute.dir}">
-	    <fileset dir="${use.absolute.dir}">
-	      <exclude name="**/*.java"/>
-	    </fileset>
-	</copy>
-    </target>
+	<target name="-pre-build">
+		<delete dir="${raw.absolute.dir}" verbose="${verbose}" />
+		<mkdir dir="${raw.absolute.dir}/classes" />
+		<copy todir="${raw.absolute.dir}">
+			<fileset dir="${use.absolute.dir}">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
 
-<target name="-package-resources">
-<echo>Packaging resources and assets...</echo>
-<exec executable="${aapt}">
-<!-- failonerror="true"> -->
-<arg value="package" />
-<arg value="-f" />
-<arg value="-M" />
-<arg value="${base.dir}/AndroidManifest.xml" />
-<arg value="-S" />
-<arg value="${resource.absolute.dir}" />
-<arg value="-A" />
-<arg value="${asset.absolute.dir}" />
-<arg value="-I" />
-<arg value="${android.jar}" />
-<arg value="-F" />
-<arg value="${out.absolute.dir}/${resource.package.file.name}" />
-<arg value="${raw.absolute.dir}" />
-</exec>
-</target>
+	<target name="-package-resources">
+		<echo>Packaging resources and assets...</echo>
+		<exec executable="${aapt}">
+			<!-- failonerror="true"> -->
+			<arg value="package" />
+			<arg value="-f" />
+			<arg value="-M" />
+			<arg value="${base.dir}/AndroidManifest.xml" />
+			<arg value="-S" />
+			<arg value="${resource.absolute.dir}" />
+			<arg value="-A" />
+			<arg value="${asset.absolute.dir}" />
+			<arg value="-I" />
+			<arg value="${android.jar}" />
+			<arg value="-F" />
+			<arg value="${out.absolute.dir}/${resource.package.file.name}" />
+			<arg value="${raw.absolute.dir}" />
+		</exec>
+	</target>
 
-    <macrodef name="package-helper">
-        <attribute name="sign.package" />
-        <attribute name="output.filepath" />
-        <element name="extra-jars" optional="yes" />
-        <sequential>
-            <apkbuilder
-                    outfolder="${out.absolute.dir}"
-                    resourcefile="${resource.package.file.name}"
-                    apkfilepath="@{output.filepath}"
-                    signed="@{sign.package}"
-                    debug="${manifest.debuggable}"
-                    abifilter="${filter.abi}"
-                    verbose="${verbose}"
-                    hascode="${manifest.hasCode}">
-                <dex path="${intermediate.dex.file}"/>
-                <sourcefolder path="${source.absolute.dir}"/>
-                <sourcefolder path="${use.absolute.dir}"/>
-                <sourcefolder refid="android.libraries.src"/>
-                <jarfolder path="${external.libs.absolute.dir}" />
-                <jarfolder refid="android.libraries.libs" />
-                <nativefolder path="${native.libs.absolute.dir}" />
-                <nativefolder refid="android.libraries.libs" />
-                <extra-jars/>
-            </apkbuilder>
-        </sequential>
-    </macrodef>
+	<macrodef name="package-helper">
+		<attribute name="sign.package" />
+		<attribute name="output.filepath" />
+		<element name="extra-jars" optional="yes" />
+		<sequential>
+			<apkbuilder outfolder="${out.absolute.dir}" resourcefile="${resource.package.file.name}" apkfilepath="@{output.filepath}" signed="@{sign.package}" debug="${manifest.debuggable}" abifilter="${filter.abi}" verbose="${verbose}" hascode="${manifest.hasCode}">
+				<dex path="${intermediate.dex.file}" />
+				<sourcefolder path="${source.absolute.dir}" />
+				<sourcefolder path="${use.absolute.dir}" />
+				<sourcefolder refid="android.libraries.src" />
+				<jarfolder path="${external.libs.absolute.dir}" />
+				<jarfolder refid="android.libraries.libs" />
+				<nativefolder path="${native.libs.absolute.dir}" />
+				<nativefolder refid="android.libraries.libs" />
+				<extra-jars />
+			</apkbuilder>
+		</sequential>
+	</macrodef>
 
 
-    <!-- Compiles this project's .java files into .class files. -->
-    <target name="compile" depends="-resource-src, -aidl, -pre-compile"
-                description="Compiles project's .java files into .class files">
-        <if condition="${manifest.hasCode}">
-            <then>
-                <!-- If android rules are used for a test project, its classpath should include
+	<!-- Compiles this project's .java files into .class files. -->
+	<target name="compile" depends="-resource-src, -aidl, -pre-compile" description="Compiles project's .java files into .class files">
+		<if condition="${manifest.hasCode}">
+			<then>
+				<!-- If android rules are used for a test project, its classpath should include
                      tested project's location -->
-                <condition property="extensible.classpath"
-                        value="${tested.project.absolute.dir}/bin/classes"
-                        else=".">
-                    <isset property="tested.project.absolute.dir" />
-                </condition>
-                <condition property="extensible.libs.classpath"
-                        value="${tested.project.absolute.dir}/libs"
-                        else="${jar.libs.dir}">
-                    <isset property="tested.project.absolute.dir" />
-                </condition>
-                <javac encoding="${java.encoding}"
-                        source="${java.source}" target="${java.target}"
-                        debug="true" extdirs=""
-                        destdir="${out.classes.absolute.dir}"
-                        bootclasspathref="android.target.classpath"
-                        verbose="${verbose}"
-                        classpath="${extensible.classpath}"
-                        classpathref="jar.libs.ref">
-                    <src path="${source.absolute.dir}" />
-<!-- osmchange -->
-                    <src path="${use.absolute.dir}" />
-                    <exclude name="**/ExceptionHandler.java"/>
-                    <exclude name="**/LogUtil.java"/>
-                    <exclude name="**/DataIndexWriter.java"/>
-                    <exclude name="**/IndexBatchCreator.java"/>
-                    <exclude name="**/DataExtraction.java"/>
-                    <exclude name="**/IndexCreator.java"/>
-                    <exclude name="**/OsmStorageWriter.java"/>
-                    <exclude name="**/net/osmand/osm/util/"/>
-                    <exclude name="**/net/osmand/swing/"/>
-                    <exclude name="**/rtree/"/>
-<!-- osmchange -->
-                    <src path="${gen.absolute.dir}" />
-                    <src refid="project.libraries.src" />
-                    <classpath>
-                        <fileset dir="${extensible.libs.classpath}" includes="*.jar" />
-                    </classpath>
-                </javac>
-            </then>
-            <else>
-                <echo>hasCode = false. Skipping...</echo>
-            </else>
-        </if>
-    </target>
+				<condition property="extensible.classpath" value="${tested.project.absolute.dir}/bin/classes" else=".">
+					<isset property="tested.project.absolute.dir" />
+				</condition>
+				<condition property="extensible.libs.classpath" value="${tested.project.absolute.dir}/libs" else="${jar.libs.dir}">
+					<isset property="tested.project.absolute.dir" />
+				</condition>
+				<javac encoding="${java.encoding}" source="${java.source}" target="${java.target}" debug="true" extdirs="" destdir="${out.classes.absolute.dir}" bootclasspathref="android.target.classpath" verbose="${verbose}" classpath="${extensible.classpath}" classpathref="jar.libs.ref">
+					<src path="${source.absolute.dir}" />
+					<!-- osmchange -->
+					<src path="${use.absolute.dir}" />
+					<exclude name="**/ExceptionHandler.java" />
+					<exclude name="**/LogUtil.java" />
+					<exclude name="**/DataIndexWriter.java" />
+					<exclude name="**/IndexBatchCreator.java" />
+					<exclude name="**/DataExtraction.java" />
+					<exclude name="**/IndexCreator.java" />
+					<exclude name="**/OsmStorageWriter.java" />
+					<exclude name="**/net/osmand/osm/util/" />
+					<exclude name="**/net/osmand/swing/" />
+					<exclude name="**/rtree/" />
+					<!-- osmchange -->
+					<src path="${gen.absolute.dir}" />
+					<src refid="project.libraries.src" />
+					<classpath>
+						<fileset dir="${extensible.libs.classpath}" includes="*.jar" />
+					</classpath>
+				</javac>
+			</then>
+			<else>
+				<echo>hasCode = false. Skipping...</echo>
+			</else>
+		</if>
+	</target>
 
-    <!--taskdef classname="net.bluecow.googlecode.ant.GoogleCodeUploadTask" 
-        classpath="ant-lib/ant-googlecode-0.0.2.jar" name="gcupload"/--> 
+	<!--taskdef classname="net.bluecow.googlecode.ant.GoogleCodeUploadTask" 
+        classpath="ant-lib/ant-googlecode-0.0.2.jar" name="gcupload"/-->
 
-    <path id="lib.path">
-      <fileset dir="ant-lib" includes="*.jar"/>
-    </path>
+	<path id="lib.path">
+		<fileset dir="ant-lib" includes="*.jar" />
+	</path>
 
-    <typedef resource="org/tigris/subversion/svnant/svnantlib.xml" classpathref="lib.path" /> 
+	<typedef resource="org/tigris/subversion/svnant/svnantlib.xml" classpathref="lib.path" />
 
-    <target name="update">
-	<svn svnkit="true"><info target="."/></svn>
-	<echo>Current revision: ${svn.info.rev}</echo>
-	<svn svnkit="true">
-		<update dir="." revision="HEAD"/>
-		<update dir="${use.absolute.dir}" revision="HEAD"/>
-		<info target="."/>
-	</svn>
-	<echo>Updated to revision: ${svn.info.rev}</echo>
-	<echo>Modyfing Version.java to include revision info: debug r${svn.info.rev}</echo>
-	<replaceregexp file="${use.absolute.dir}/net/osmand/Version.java"
-               match='(APP_DESCRIPTION.*=.*\").*(\".*)'
-               replace='\1debug r${svn.info.rev}\2'
-               byline="true"
-	/>
-    </target>
+	<target name="update">
+		<svn svnkit="true">
+			<info target="." />
+		</svn>
+		<echo>Current revision: ${svn.info.rev}</echo>
+		<svn svnkit="true">
+			<update dir="." revision="HEAD" />
+			<update dir="${use.absolute.dir}" revision="HEAD" />
+			<info target="." />
+		</svn>
+		<echo>Updated to revision: ${svn.info.rev}</echo>
+		<echo>Modyfing Version.java to include revision info: debug r${svn.info.rev}</echo>
+		<replaceregexp file="${use.absolute.dir}/net/osmand/Version.java" match='(APP_DESCRIPTION.*=.*\").*(\".*)' replace='\1debug r${svn.info.rev}\2' byline="true" />
+	</target>
 
-    <target name="nightbuild" depends="clean,update,debug">
-	<!--gcupload  
+	<target name="nightbuild" depends="clean,update,debug">
+		<!--gcupload  
 	username="pavol.zibrita@gmail.com"
 	password="Ha6Rj8cY3UA9"
 	projectname="osmand"
 	filename="bin/OsmAnd-debug.apk"
 	targetfilename="OsmAnd-nightbuild.apk"
 	summary="Latest nightbuild of OsmAnd"
-	labels="Testdata, Type-Package, OpSys-All" /--> 
-  <ftp action="del"
-       server="download.osmand.net"
-       userid="osmand"
-       password="lCAcjren">
-    <fileset>
-      <include name="night-builds/OsmAnd-debug.apk"/>
-    </fileset>
-  </ftp>
+	labels="Testdata, Type-Package, OpSys-All" /-->
+		<ftp action="del" server="download.osmand.net" userid="${ftp.user}" password="${ftp.password}">
+			<fileset>
+				<include name="night-builds/OsmAnd-debug.apk" />
+			</fileset>
+		</ftp>
 
 
-    <ftp server="download.osmand.net"
-       remotedir="night-builds"
-       userid="osmand"
-       password="lCAcjren"
-       depends="yes">
-    <fileset dir="bin"> 
-	<include name="OsmAnd-debug.apk"/>
-    </fileset>
-  </ftp>
+		<ftp server="download.osmand.net" remotedir="night-builds" userid="${ftp.user}" password="${ftp.password}" depends="yes">
+			<fileset dir="bin">
+				<include name="OsmAnd-debug.apk" />
+			</fileset>
+		</ftp>
 
-   </target>
+	</target>
 
-    <!-- Execute the Android Setup task that will setup some properties
+	<!-- Execute the Android Setup task that will setup some properties
          specific to the target, and import the build rules files.
 
          The rules file is imported from
@@ -250,6 +219,6 @@
                below to <setup import="false" />.
              - customize to your needs.
     -->
-    <setup />
+	<setup />
 
 </project>

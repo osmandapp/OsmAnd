@@ -8,3 +8,5 @@
 # For customization when using a Version Control System, please read the
 # header note.
 sdk.dir=/home/zibrita/osmand-build/android-sdk-linux_86
+ftp.user=osmand
+ftp.password=
