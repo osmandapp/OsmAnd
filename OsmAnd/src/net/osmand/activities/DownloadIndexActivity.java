@@ -14,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.MessageFormat;
@@ -38,6 +39,9 @@ import net.osmand.data.index.DownloaderIndexFromGoogleCode;
 import net.osmand.data.index.IndexConstants;
 
 import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -66,6 +70,7 @@ public class DownloadIndexActivity extends ListActivity {
 	
 	private final static Log log = LogUtil.getLog(DownloadIndexActivity.class);
 	private static final int RELOAD_ID = 0;
+	private static final boolean USE_DOWNLOAD_OSMAND_NET = true;
 	private static DownloadIndexListThread downloadListIndexThread = new DownloadIndexListThread();
 
 	private ProgressDialog progressFileDlg = null;
@@ -165,7 +170,7 @@ public class DownloadIndexActivity extends ListActivity {
 		
 		@Override
 		public void run() {
-			indexFiles = downloadIndex();
+			indexFiles = downloadIndexesListFromInternet();
 			if(uiActivity != null &&  uiActivity.progressListDlg != null){
 				uiActivity.progressListDlg.dismiss();
 				uiActivity.progressListDlg = null;
@@ -186,7 +191,7 @@ public class DownloadIndexActivity extends ListActivity {
 	
 	
 
-	protected static Map<String, String> downloadIndex(){
+	protected static Map<String, String> downloadIndexesListFromInternet(){
 		try {
 			log.debug("Start loading list of index files"); //$NON-NLS-1$
 			TreeMap<String, String> indexFiles = new TreeMap<String, String>(new Comparator<String>(){
@@ -207,16 +212,35 @@ public class DownloadIndexActivity extends ListActivity {
 				}
 				
 			});
-			DownloaderIndexFromGoogleCode.getIndexFiles(indexFiles,
-//					ADDRESS_TABLE_VERSION + ADDRESS_INDEX_EXT,
-//					ADDRESS_TABLE_VERSION + ADDRESS_INDEX_EXT_ZIP,
-					POI_TABLE_VERSION + POI_INDEX_EXT,
-					POI_TABLE_VERSION + POI_INDEX_EXT_ZIP,
-//					TRANSPORT_TABLE_VERSION + TRANSPORT_INDEX_EXT,
-//					TRANSPORT_TABLE_VERSION + TRANSPORT_INDEX_EXT_ZIP,
-					BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT,
-					BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT_ZIP,
-					VOICE_VERSION + VOICE_INDEX_EXT_ZIP);
+			String[] accepted = new String[] { POI_TABLE_VERSION + POI_INDEX_EXT, POI_TABLE_VERSION + POI_INDEX_EXT_ZIP,
+					BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT, BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT_ZIP,
+					VOICE_VERSION + VOICE_INDEX_EXT_ZIP };
+			if(USE_DOWNLOAD_OSMAND_NET){
+				try {
+					URL url = new URL("http://download.osmand.net/indexes.xml"); //$NON-NLS-1$
+					XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
+					parser.setInput(url.openStream(), "UTF-8"); //$NON-NLS-1$
+					int next;
+					while((next = parser.next()) != XmlPullParser.END_DOCUMENT) {
+						if(next == XmlPullParser.START_TAG && parser.getName().equals("region")) { //$NON-NLS-1$
+							String name = parser.getAttributeValue(null, "name"); //$NON-NLS-1$
+							String size = parser.getAttributeValue(null, "size"); //$NON-NLS-1$
+							String date = parser.getAttributeValue(null, "date"); //$NON-NLS-1$
+							String description = parser.getAttributeValue(null, "description"); //$NON-NLS-1$
+							indexFiles.put(name, description + " {"+date +" : " + size +" MB }");  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+						}
+					}
+				} catch (IOException e) {
+					log.error("Error while loading indexes from repository", e); //$NON-NLS-1$
+					return null;
+				} catch (XmlPullParserException e) {
+					log.error("Error while loading indexes from repository", e); //$NON-NLS-1$
+					return null;
+				}
+			} else {
+				DownloaderIndexFromGoogleCode.getIndexFiles(indexFiles,
+						accepted);
+			}
 			
 			if (indexFiles != null && !indexFiles.isEmpty()) {
 				return indexFiles;
@@ -495,7 +519,8 @@ public class DownloadIndexActivity extends ListActivity {
 		try {
 
 			out = new FileOutputStream(fileToDownload);
-			URL url = DownloaderIndexFromGoogleCode.getInputStreamToLoadIndex(key);
+			URL url = USE_DOWNLOAD_OSMAND_NET ? new URL("http://download.osmand.net/indexes/"+key):  //$NON-NLS-1$
+				DownloaderIndexFromGoogleCode.getInputStreamToLoadIndex(key);
 			try {
 				downloadFile(key, out, url, progress);
 			} finally {
