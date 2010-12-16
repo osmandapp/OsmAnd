@@ -13,7 +13,7 @@
 		pagegen="" token=""
 		google_code_user="" google_code_password="" 
 		osmand_download_user="" osmand_download_password=""/>
-	<!-- There are 3 subprocess : 
+	<!-- There are 3 subprocess : 	
 		 1. Download fresh osm files from servers to 'directory_for_osm_files' (override existings).
 		 2. Generate index files from all files in 'directory_for_osm_files' and put all indexes into 'directory_for_index_files'
 		 3. Upload index files from 'directory_for_index_files' to googlecode.
@@ -29,9 +29,7 @@
 			 wget="/path/to/script/wget.sh"
 			 Defaultly enabled parameter of wget is: &-&-read-timeout=5 that prevents hanging of download from  cloudmade/geofabrik server  
 		-->
-		<regions siteToDownload="http://download.geofabrik.de/osm/europe/{0}.osm.pbf" region_prefix="" region_suffix="_Europe">
-			<region name="andorra" esize="6" />
-		</regions>
+
 		
         <!-- Countries to download from osm server -->
 		<!-- EUROPE -->
@@ -77,41 +75,16 @@
 			<region name="turkey" esize="20" />
 			<region name="ukraine" esize="25" />
 
-			<!--
-				<region name="czech_republic" esize="180"/>
-				<region name="netherlands" esize="450"/> 
-				<region name="great_britain" esize="320"/> 
-				<region name="italy" esize="255"/>
-			-->
+			<region name="czech_republic" esize="180"/>
+			<region name="netherlands" esize="450"/> 
+			<region name="italy" esize="255"/>
 		</regions>
 
-		<!-- GREAT BRITAIN (WITHOUT ENGLAND!) -->
+		<!-- GREAT BRITAIN -->
 		<regions siteToDownload="http://download.geofabrik.de/osm/europe/great_britain/{0}.osm.pbf" region_prefix="GB_" skip="true" region_suffix="_Europe">
 			<region name="scotland" esize="23"/>		
 			<region name="wales" esize="10"/>
-
-		</regions>
-
-		<!-- ENGLAND -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/europe/great_britain/england/{0}.osm.pbf" region_prefix="GB_England_" skip="true" region_suffix="_Europe">
-		<region name="buckinghamshire" esize="3"/>
-		<region name="cambridgeshire" esize="4"/>
-		<region name="cumbria" esize="4"/>
-		<region name="east_yorkshire_with_hull" esize="2"/>
-		<region name="essex" esize="10"/>
-		<region name="herefordshire" esize="1"/>
-		<region name="kent" esize="7"/>
-		<region name="lancashire" esize="5"/>
-		<region name="leicestershire" esize="3"/>
-		<region name="norfolk" esize="5"/>
-		<region name="nottinghamshire" esize="5"/>
-		<region name="oxfordshire" esize="4"/>
-		<region name="shropshire" esize="2"/>
-		<region name="somerset" esize="3"/>
-		<region name="suffolk" esize="3"/>
-		<region name="surrey" esize="8"/>
-		<region name="wiltshire" esize="3"/>
-
+			<region name="england" esize="230"/>
 		</regions>
 
 		<!-- FRANCE -->
@@ -270,7 +243,8 @@
 			<region name="uzbekistan" esize="3"/>
 			<region name="vietnam" esize=""/>
 			<region name="yemen" esize=""/>
-			<!-- <region name="japan" esize="500"/>  -->		
+			<!-- <region name="japan" esize="500"/> 
+				  <region name="russian_federation" esize="360"/>  -->
 		</regions>
 		
 		<!-- USA -->
