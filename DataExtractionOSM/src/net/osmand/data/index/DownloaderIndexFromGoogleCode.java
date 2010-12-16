@@ -76,8 +76,8 @@ public class DownloaderIndexFromGoogleCode {
 				String s = null;
 				String prevFile = null;
 				while ((s = reader.readLine()) != null) {
-					boolean hrefDownload = s.indexOf("files") != -1;
-					if (hrefDownload || s.indexOf("{") != -1) { //$NON-NLS-1$ //$NON-NLS-2$
+					boolean hrefDownload = s.indexOf("files") != -1; //$NON-NLS-1$
+					if (hrefDownload || s.indexOf("{") != -1) { //$NON-NLS-1$
 						downloadNext |= hrefDownload;
 						for (String extension : ext) {
 							prevFile = getIndexFiles(files, s, prevFile, extension);
