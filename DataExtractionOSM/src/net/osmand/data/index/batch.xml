@@ -11,7 +11,8 @@
 	<authorization_info cookieHSID=""
 		cookieSID=""
 		pagegen="" token=""
-		google_code_user="" google_code_password="" />
+		google_code_user="" google_code_password="" 
+		osmand_download_user="" osmand_download_password=""/>
 	<!-- There are 3 subprocess : 
 		 1. Download fresh osm files from servers to 'directory_for_osm_files' (override existings).
 		 2. Generate index files from all files in 'directory_for_osm_files' and put all indexes into 'directory_for_index_files'
@@ -19,16 +20,19 @@
 		 All these subprocess could be ran independently ! So you can create some files check them and after that try to upload on googlecode,
 		 or you can upload any file you have to googlecode (just put into 'directory_for_index_files')
 	 -->
-	<process directory_for_osm_files="E:/Information/OSM maps/osm_batch" directory_for_index_files="E:/Information/OSM maps/osm_batch_ind"
-		downloadOsmFiles="true" generateIndexes="true" uploadIndexes="true"
+	<process directory_for_osm_files="D:/android/batch_gen_osm" directory_for_index_files="D:/android/batch_gen_index"
+		downloadOsmFiles="true" generateIndexes="true" uploadIndexes="true" upload_osmand_download="true"
 		deleteFilesAfterUploading="true" indexPOI="true" indexMap="true"
 		indexTransport="true" indexAddress="true" mapZooms="" renderingTypesFile="">
 		<!-- Add wget="C:/Program Files/GNUWin32/bin/wget.exe" to process, to use wget for download.
 			 On linux systems if wget is in your path it can be wget="wget" or you can make own script with wget command:
 			 wget="/path/to/script/wget.sh"
-			 Defaultly enabled parameter of wget is: --read-timeout=5 that prevents hanging of download from  cloudmade/geofabrik server  
+			 Defaultly enabled parameter of wget is: &-&-read-timeout=5 that prevents hanging of download from  cloudmade/geofabrik server  
 		-->
-
+		<regions siteToDownload="http://download.geofabrik.de/osm/europe/{0}.osm.pbf" region_prefix="" region_suffix="_Europe">
+			<region name="andorra" esize="6" />
+		</regions>
+		
         <!-- Countries to download from osm server -->
 		<!-- EUROPE -->
 		<regions siteToDownload="http://download.geofabrik.de/osm/europe/{0}.osm.pbf" region_prefix="" skip="true" region_suffix="_Europe">
