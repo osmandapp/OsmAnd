@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="items_were_selected">{0} items were selected</string>
+	<string name="filter_existing_indexes">Filter downloaded</string>
+	<string name="deselect_all">Deselect all</string>
+	<string name="select_all">Select all</string>
+	<string name="reload">Reload</string>
+	
 	<string name="general_settings_descr">Config internet usage, map rotation, screen orientation and other</string>
     <string name="general_settings">General</string>
 	<string name="rendering_settings_descr">Config map source and appearance</string>
@@ -25,7 +31,7 @@
 	<string name="renderers">Vector renderer</string>
 	<string name="renderers_descr">Choose vector rendering style</string>
 
-	<string name="reload">reload</string>
+	
 	<string name="poi_context_menu_website">See POI website</string>
 	<string name="poi_context_menu_call">Show POI phone</string>
 	<string name="website">web site</string>

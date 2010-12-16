@@ -7,6 +7,7 @@ import java.text.Collator;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,6 +83,8 @@ public class ResourceManager {
 	protected final List<AmenityIndexRepository> amenityRepositories =  new ArrayList<AmenityIndexRepository>();
 	
 	protected final List<TransportIndexRepository> transportRepositories = new ArrayList<TransportIndexRepository>();
+	
+	protected final Map<String, String> indexFileNames = new LinkedHashMap<String, String>();
 	
 	protected final MapRenderRepositories renderer;
 	
@@ -389,6 +392,7 @@ public class ResourceManager {
 						if (index == null) {
 							warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
 						} else {
+							indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$
 							for(String rName : index.getRegionNames()) {
 								// skip duplicate names (don't make collision between getName() and name in the map)
 								RegionAddressRepositoryBinary rarb = new RegionAddressRepositoryBinary(index, rName);
@@ -452,6 +456,7 @@ public class ResourceManager {
 				boolean initialized = repository.initialize(progress, f);
 				if (initialized) {
 					amenityRepositories.add(repository);
+					indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$
 				} else {
 					warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
 				}
@@ -483,6 +488,7 @@ public class ResourceManager {
 				boolean initialized = repository.initialize(progress, f);
 				if (initialized) {
 					addressMap.put(repository.getName(), repository);
+					indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$
 				} else {
 					warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
 				}
@@ -514,6 +520,7 @@ public class ResourceManager {
 				boolean initialized = repository.initialize(progress, f);
 				if (initialized) {
 					transportRepositories.add(repository);
+					indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$
 				} else {
 					warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
 				}
@@ -664,10 +671,15 @@ public class ResourceManager {
 
 	public synchronized void close(){
 		imagesOnFS.clear();
+		indexFileNames.clear();
 		renderer.clearAllResources();
 		closeAmenities();
 		closeAddresses();
 		closeTransport();
+	}
+	
+	public Map<String, String> getIndexFileNames() {
+		return indexFileNames;
 	}
 	
 	public synchronized void reloadTilesFromFS(){
