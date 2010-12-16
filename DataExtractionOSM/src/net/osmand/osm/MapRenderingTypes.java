@@ -661,7 +661,7 @@ public class MapRenderingTypes {
 						if (val != null) {
 							maxzoom = Integer.parseInt(val);
 						}
-						String nameNullTag = attributes.getValue("nameNullTag");
+						String nameNullTag = attributes.getValue("nameNullTag"); //$NON-NLS-1$
 
 						String tag = attributes.getValue("tag"); //$NON-NLS-1$
 						val = attributes.getValue("value"); //$NON-NLS-1$
@@ -923,6 +923,8 @@ public class MapRenderingTypes {
 		amenityTagValToType.put("amenity"+TAG_DELIMETER+"theatre", AmenityType.ENTERTAINMENT);  //$NON-NLS-1$//$NON-NLS-2$
 		amenityTagValToType.put("amenity"+TAG_DELIMETER+"sauna", AmenityType.ENTERTAINMENT);  //$NON-NLS-1$//$NON-NLS-2$
 		amenityTagValToType.put("amenity"+TAG_DELIMETER+"brothel", AmenityType.ENTERTAINMENT);  //$NON-NLS-1$//$NON-NLS-2$
+		
+		amenityTagValToType.put("geocache", AmenityType.GEOCACHE); //$NON-NLS-1$
 		
 		amenityTagValToType.put("amenity", AmenityType.OTHER);  //$NON-NLS-1$
 		amenityTagValToType.put("place", AmenityType.ADMINISTRATIVE);  //$NON-NLS-1$
