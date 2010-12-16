@@ -504,6 +504,11 @@
 		<subtype id="9" building="true" tag="amenity" value="theatre" minzoom="15" />
 		<subtype id="10" point="true" tag="amenity" value="sauna" minzoom="15" />
 		<subtype id="11" building="true" tag="amenity" value="brothel" minzoom="15" />
+		
+		<subtype id="33" point="true" tag="geocache" minzoom="15" />
+		<subtype id="34" point="true" tag="geocache" value="found" minzoom="15" />
+		<subtype id="35" point="true" tag="geocache" value="not found" minzoom="15" />
+		
 	</type>
 
 

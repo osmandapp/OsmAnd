@@ -31,7 +31,7 @@ public enum AmenityType {
 	EMERGENCY("amenity_type_emergency", "emergency"), // [TAG] emergency //$NON-NLS-1$ //$NON-NLS-2$
 	MILITARY("amenity_type_military", "military"), // [TAG] military //$NON-NLS-1$ //$NON-NLS-2$
 	ADMINISTRATIVE("amenity_type_administrative", "administrative"), // [TAG] administrative //$NON-NLS-1$ //$NON-NLS-2$
-	GEOCACHE("amenity_type_geocache", "geocache"),
+	GEOCACHE("amenity_type_geocache", "geocache"),  //$NON-NLS-1$//$NON-NLS-2$
 	OTHER("amenity_type_other", "amenity"), // grave-yard, police, post-office [+Internet_access] //$NON-NLS-1$ //$NON-NLS-2$
 	;
 	

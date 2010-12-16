@@ -435,6 +435,8 @@
 		<filter minzoom="16" icon="hostel" tag="tourism" value="motel" />
 		<filter minzoom="16" icon="museum" tag="tourism" value="museum" />
 		<filter minzoom="16" icon="view_point" tag="tourism" value="viewpoint" />
+		<filter minzoom="16" icon="geocache_found" tag="geocache" value="found" />
+		<filter minzoom="16" icon="geocache_not_found" tag="geocache" />
 	</point>
 
 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->

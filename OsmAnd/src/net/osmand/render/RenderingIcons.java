@@ -47,6 +47,9 @@ public class RenderingIcons {
 		icons.put("forest", R.drawable.h_forest); //$NON-NLS-1$
 		icons.put("fuel", R.drawable.h_fuel); //$NON-NLS-1$
 		icons.put("gate2", R.drawable.h_gate2); //$NON-NLS-1$
+		icons.put("geocache_found", R.drawable.h_geocache_found); //$NON-NLS-1$
+		icons.put("geocache_not_found", R.drawable.h_geocache_not_found); //$NON-NLS-1$
+		icons.put("guest_house", R.drawable.h_guest_house); //$NON-NLS-1$
 		icons.put("glacier", R.drawable.h_glacier); //$NON-NLS-1$
 		icons.put("grave_yard", R.drawable.h_grave_yard); //$NON-NLS-1$
 		icons.put("guest_house", R.drawable.h_guest_house); //$NON-NLS-1$
