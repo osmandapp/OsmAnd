@@ -24,6 +24,7 @@ import static net.osmand.osm.io.OsmBaseStorage.ELEM_WAY;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -33,6 +34,7 @@ import java.util.Map.Entry;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
+import javax.xml.stream.XMLOutputFactory;
 
 import net.osmand.Algoritms;
 import net.osmand.data.MapObject;
@@ -42,9 +44,6 @@ import net.osmand.osm.Node;
 import net.osmand.osm.Relation;
 import net.osmand.osm.Way;
 import net.osmand.osm.Entity.EntityId;
-
-import com.sun.org.apache.xerces.internal.impl.PropertyManager;
-import com.sun.xml.internal.stream.writers.XMLStreamWriterImpl;
 
 public class OsmStorageWriter {
 
@@ -59,12 +58,12 @@ public class OsmStorageWriter {
 	public void saveStorage(OutputStream output, OsmBaseStorage storage, Collection<EntityId> interestedObjects, boolean includeLinks) throws XMLStreamException, IOException {
 		Map<EntityId, Entity> entities = storage.getRegisteredEntities();
 		Map<EntityId, EntityInfo> entityInfo = storage.getRegisteredEntityInfo();
-		PropertyManager propertyManager = new PropertyManager(PropertyManager.CONTEXT_WRITER);
 //		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 //        String indent = "{http://xml.apache.org/xslt}indent-amount";
 //        transformer.setOutputProperty(indent, "4");
-        
-		XMLStreamWriter streamWriter = new XMLStreamWriterImpl(output, propertyManager);
+                XMLOutputFactory xof = XMLOutputFactory.newInstance();
+                XMLStreamWriter streamWriter = xof.createXMLStreamWriter(new OutputStreamWriter(output));
+ 
 		List<Node> nodes = new ArrayList<Node>();
 		List<Way> ways = new ArrayList<Way>();
 		List<Relation> relations = new ArrayList<Relation>();
