@@ -178,14 +178,6 @@
 	</target>
 
 	<target name="nightbuild" depends="clean,update,debug">
-		<!--gcupload  
-	username="pavol.zibrita@gmail.com"
-	password="Ha6Rj8cY3UA9"
-	projectname="osmand"
-	filename="bin/OsmAnd-debug.apk"
-	targetfilename="OsmAnd-nightbuild.apk"
-	summary="Latest nightbuild of OsmAnd"
-	labels="Testdata, Type-Package, OpSys-All" /-->
 		<ftp action="del" server="download.osmand.net" userid="${ftp.user}" password="${ftp.password}">
 			<fileset>
 				<include name="night-builds/OsmAnd-debug.apk" />
