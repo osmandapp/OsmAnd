@@ -1,14 +1,46 @@
 <!--  build JAR libraty -->
 <project name="DataExtractionOSM" default="build" basedir=".">
 
-	<target name="jar">
-		<path id="build-classpath">
-			<fileset dir="lib">
-				<include name="*.jar"/>
-			</fileset>
-		</path>
+	<property name="file.to.upload" value="OsmAndMapCreator-nightbuild.zip"/>
+	<property name="src.dir" value="src"/>
+	<property name="src.absolute.dir" location="${src.dir}" />
+	<property name="bin.dir" value="bin"/>
+	<property name="bin.absolute.dir" location="${bin.dir}" />
+	<property name="lib.dir" value="lib"/>
+	<property name="lib.absolute.dir" location="${lib.dir}" />
+
+	<path id="ant.lib.path">
+		<fileset dir="ant-lib" includes="*.jar" />
+	</path>
+
+	<path id="build.path">
+		<fileset dir="${lib.absolute.dir}">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+
+	<property file="local.properties" />
+
+	<target name="-dirs">
+	   <mkdir dir="${bin.absolute.dir}"/>
+	</target>
+
+	<target name="clean">
+	   <delete dir="${bin.absolute.dir}"/>
+	</target>
+
+	<target name="compile" depends="-dirs">
+	 <javac srcdir="${src.absolute.dir}"
+		 destdir="${bin.absolute.dir}"
+		 classpathref="build.path"
+		 debug="on"
+		 source="1.6"
+	  />
+	</target>
+
+	<target name="jar" depends="-dirs">
 		<manifestclasspath property="lib.list" jarfile="OsmAndMapCreator.jar">
-			<classpath refid="build-classpath"/>
+			<classpath refid="build.path"/>
 		</manifestclasspath>
 		<echo>list is  ${lib.list}</echo>
 
@@ -21,10 +53,10 @@
 		</manifest>
 
 		<jar destfile="OsmAndMapCreator.jar" manifest="MANIFEST.MF">
-			<fileset dir="bin">
+			<fileset dir="${bin.absolute.dir}">
 				<include name="**/*" />
 			</fileset>
-			<fileset dir="src">
+			<fileset dir="${src.absolute.dir}">
 				<include name="**/*.java" />
 			</fileset>
 		</jar>
@@ -63,5 +95,29 @@
 		<delete file="OsmAndMapCreator.jar" />
 	</target>
 
-</project>
+	<typedef resource="org/tigris/subversion/svnant/svnantlib.xml" classpathref="ant.lib.path" />
 
+	<target name="update">
+		<svn svnkit="true">
+			<update dir="." revision="HEAD" />
+			<info target="." />
+		</svn>
+		<echo>Updated to revision: ${svn.info.rev}</echo>
+	</target>
+
+	<target name="nightbuild" depends="clean,update,compile,build">
+		<move file="build.zip" tofile="${file.to.upload}"/>
+		<ftp action="del" server="download.osmand.net" userid="${ftp.user}" password="${ftp.password}">
+			<fileset>
+				<include name="night-builds/${file.to.upload}" />
+			</fileset>
+		</ftp>
+
+
+		<ftp server="download.osmand.net" remotedir="night-builds" userid="${ftp.user}" password="${ftp.password}" depends="yes">
+			<fileset dir=".">
+				<include name="${file.to.upload}" />
+			</fileset>
+		</ftp>
+	</target>
+</project>
