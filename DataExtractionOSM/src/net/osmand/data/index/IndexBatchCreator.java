@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.MessageFormat;
@@ -613,9 +614,15 @@ public class IndexBatchCreator {
 		url += "&size="+URLEncoder.encode(size);
 		url += "&action=update";
 		log.info("Updating index " + url);  //$NON-NLS-1$//$NON-NLS-2$
-		URL ourl = new URL(url);
-		InputStream is = ourl.openStream();
-		safeClose(is, "close file"); //$NON-NLS-1$
+		HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+		connection.setRequestMethod("POST");
+		connection.connect();
+		if(connection.getResponseCode() != HttpURLConnection.HTTP_OK){
+			log.error("Error updating indexes " + connection.getResponseMessage());
+		}
+		InputStream is = connection.getInputStream();
+		while(is.read() != -1);
+		connection.disconnect();
 		log.info("Finish updating index");
 	}
 	
