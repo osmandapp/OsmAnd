@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="download_files_question">Download {0} files ({1} MB)?</string>
 	<string name="items_were_selected">{0} items were selected</string>
 	<string name="filter_existing_indexes">Filter downloaded</string>
 	<string name="deselect_all">Deselect all</string>
@@ -40,7 +41,6 @@
 	<string name="use_high_res_maps">High resolution map</string>
 	<string name="use_high_res_maps_descr">Use high resolution map for high density devices</string>
 	<string name="unknown_location">Location unknown yet</string>
-	<string name="download_files_question">Download {0} files?</string>
 	<string name="download_files">Download</string>
 	<string name="context_menu_item_search_transport">Search transport</string>
 	<string name="transport_searching_transport">Searching transport (no target)</string>
