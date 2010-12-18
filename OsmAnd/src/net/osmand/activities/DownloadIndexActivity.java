@@ -428,6 +428,14 @@ public class DownloadIndexActivity extends ListActivity {
 				} catch (ParseException e1) {
 				}
 			}
+			int i = extractDateAndSize.lastIndexOf("MB"); //$NON-NLS-1$
+			if(i > 12){
+				String size = extractDateAndSize.substring(14, i - 1);
+				try {
+					entry.sizeMB = Double.parseDouble(size);
+				} catch (NumberFormatException e1) {
+				}
+			}
 			entry.fileToUnzip = new File(parent, entry.baseName + toCheckPostfix);
 		}
 		return entry;
@@ -435,7 +443,11 @@ public class DownloadIndexActivity extends ListActivity {
 	
 	protected void downloadFiles() {
 		Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(MessageFormat.format(getString(R.string.download_files_question), entriesToDownload.size()));
+		double sz = 0;
+		for(DownloadEntry es : entriesToDownload.values()){
+			sz += es.sizeMB;
+		}
+		builder.setMessage(MessageFormat.format(getString(R.string.download_files_question), entriesToDownload.size(), sz));
 		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -496,6 +508,7 @@ public class DownloadIndexActivity extends ListActivity {
 		public File fileToUnzip;
 		public boolean unzip;
 		public Long dateModified;
+		public double sizeMB;
 		public String baseName;
 		
 	}

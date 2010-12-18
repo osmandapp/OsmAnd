@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="download_files_question">Загрузить {0} файл(ов) ({1} MB)?</string>
 	<string name="items_were_selected">{0} items were selected</string>
 	<string name="filter_existing_indexes">Загруженные</string>
 	<string name="deselect_all">Снять выбор</string>
@@ -36,7 +37,6 @@
 	<string name="use_high_res_maps">Карта высокого разрешения</string>
 	<string name="use_high_res_maps_descr">Отображать 1:1 карты для устройств высокого разрешения</string>
 	<string name="unknown_location">В данный момент местоположение не определено</string>
-	<string name="download_files_question">Загрузить {0} файл(ов)?</string>
 	<string name="download_files">Загрузить</string>
 	<string name="context_menu_item_search_transport">Искать транспорт</string>
 	<string name="transport_context_menu">Искать транспорт на остановке</string>
