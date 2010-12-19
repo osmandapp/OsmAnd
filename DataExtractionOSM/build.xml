@@ -1,6 +1,8 @@
 <!--  build JAR libraty -->
 <project name="DataExtractionOSM" default="build" basedir=".">
 
+	<property file="local.properties" />
+
 	<property name="file.to.upload" value="OsmAndMapCreator-nightbuild.zip"/>
 	<property name="src.dir" value="src"/>
 	<property name="src.absolute.dir" location="${src.dir}" />
@@ -8,6 +10,7 @@
 	<property name="bin.absolute.dir" location="${bin.dir}" />
 	<property name="lib.dir" value="lib"/>
 	<property name="lib.absolute.dir" location="${lib.dir}" />
+	<property name="java.encoding" value="UTF-8" />
 
 	<path id="ant.lib.path">
 		<fileset dir="ant-lib" includes="*.jar" />
@@ -18,8 +21,6 @@
 			<include name="*.jar"/>
 		</fileset>
 	</path>
-
-	<property file="local.properties" />
 
 	<target name="-dirs">
 	   <mkdir dir="${bin.absolute.dir}"/>
@@ -32,6 +33,7 @@
 	<target name="compile" depends="-dirs">
 	 <javac srcdir="${src.absolute.dir}"
 		 destdir="${bin.absolute.dir}"
+		 encoding="${java.encoding}"
 		 classpathref="build.path"
 		 debug="on"
 		 source="1.6"
