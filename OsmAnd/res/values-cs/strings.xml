@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+  <string name="download_files_question">Stáhnout {0} souborů ({1} MB)?</string>
+  <string name="items_were_selected">vybráno {0} položek</string>
+  <string name="filter_existing_indexes">Zobrazit jen aktualizace</string>
+  <string name="deselect_all">Odznačit vše</string>
+  <string name="select_all">Vybrat vše</string>
+  <string name="reload">Načíst znovu</string>
+
+  <string name="general_settings_descr">Nastavení použití internetu, natočení mapy, orientace displeje a dalších</string>
+  <string name="general_settings">Obecné</string>
+  <string name="rendering_settings_descr">Nastavení zdroje mapy a vzhledu</string>
+  <string name="rendering_settings">Vzhled mapy</string>
+  <string name="index_settings_descr">Stáhnout nebo aktualizovat  data pro offline použití</string>
+  <string name="index_settings">Offline data</string>
+  <string name="osmand_service">Služba na pozadí</string>
+  <string name="osmand_service_descr">Povolit běh aplikace na pozadí a při vypnutém displeji</string>
+  <string name="fast_route_mode">Nejrychlejší trasa</string>
+  <string name="fast_route_mode_descr">Zapněte pro výpočet nejrychlejší trasy, vypněte, pokud chcete hledat tu nejkratší</string>
+  <string name="tiles_to_download_estimated_size">Pro zoom {0} je třeba stáhnout {1} dlaždic, celkem {2} MB</string>
+  <string name="context_menu_item_download_map">Stáhnout mapu</string>
+  <string name="select_max_zoom_preload_area">Vyberte maximální zvětšení stahovaných dlaždic</string>
+  <string name="maps_could_not_be_downloaded">Tuto mapu nelze stáhnout</string>
+
+  <string name="continuous_rendering">Průběžné vykreslování</string>
+  <string name="continuous_rendering_descr">Při zaškrtnuté volbě se mapa bude vykreslovat postupně</string>
+
   <string name="rendering_exception">Nastala chyba při vykreslování vybrané oblasti</string>
   <string name="rendering_out_of_memory">Nedostatek paměti pro zobrazení vybrané oblasti</string>
   <string name="show_point_options">Možnosti bodu</string>
@@ -8,7 +33,6 @@
   <string name="renderers">Vektorový vykreslovač</string>
   <string name="renderers_descr">Vybrat styl vektorového vykreslování</string>
 
-  <string name="reload">znovu načíst</string>
   <string name="poi_context_menu_website">Zobrazit web POI</string>
   <string name="poi_context_menu_call">Zobrazit telefon POI</string>
   <string name="website">web stránka</string>
@@ -17,7 +41,6 @@
   <string name="use_high_res_maps">Vysoké rozlišení</string>
   <string name="use_high_res_maps_descr">Použít mapu s vysokým rozlišením pro jemné displeje</string>
   <string name="unknown_location">Pozice ještě není známa</string>
-  <string name="download_files_question">Stáhnout {0} souborů?</string>
   <string name="download_files">Stáhnout</string>
   <string name="context_menu_item_search_transport">Hledat dopravu</string>
   <string name="transport_searching_transport">Hledám dopravu (žádný cíl)</string>
@@ -117,7 +140,7 @@
   <string name="route_tu">Otočte se a pokračujte</string>
   <string name="route_head">Jeďte rovně</string>
   <string name="first_time_continue">Pokračujte</string>
-  <string name="first_time_download">Stáhnout indexy</string>
+  <string name="first_time_download">Stáhnout regiony</string>
   <string name="first_time_msg">Děkujeme, že jste si zvolili OsmAnd. \nAAbyste mohli využívat všech možností aplikace, potřebujete indexové soubory, které si můžete stáhnout (Nastavení -&gt; Data) nebo připravit sami. Poté budete moci hledat podle adres, hledat body zájmu (POI) a spojení veřejnou dopravou.</string>
   <string name="search_poi_location">Hladám signál...</string>
   <string name="search_near_map">Hledat poblíž poslední polohy</string>
@@ -227,16 +250,16 @@
   <string name="previous_run_crashed">Aplikace minule selhala. Soubor s hlášením je v {0}. Prosím ohlaste problém a přiložte hlášení o chybě.</string>
   <string name="saving_gpx_tracks">Ukládám GPX trasy na SD...</string>
   <string name="finished_task">Hotovo</string>
-  <string name="reload_indexes_descr">Znovu načte indexy z SD karty</string>
-  <string name="reload_indexes">Znovu načíst indexy</string>
-  <string name="download_indexes_descr">Stáhne indexy z internetu</string>
-  <string name="download_indexes">Stáhnout indexy</string>
+  <string name="reload_indexes_descr">Znovu načte data z SD karty</string>
+  <string name="reload_indexes">Znovu načíst data</string>
+  <string name="download_indexes_descr">Stáhne data pro offline použití z internetu</string>
+  <string name="download_indexes">Stáhnout offline data</string>
   <string name="use_online_routing_descr">Použít internet k výpočtu trasy</string>
   <string name="use_online_routing">Použít online navigaci</string>
   <string name="user_password_descr">Vaše heslo na OSM</string>
   <string name="user_password">Heslo</string>
   <string name="osm_settings_descr">Nastavení OSM: přihlašovací údaje</string>
-  <string name="monitor_preferences_descr">Nastavení sledování: ukládání cesty</string>
+  <string name="monitor_preferences_descr">Nastavení sledování</string>
   <string name="data_settings_descr">Volba jazyka, stažení a aktualizace dat</string>
   <string name="map_preferences_descr">Nastavení mapy: zdroj map, otáčení, vystředování, orientace obrazovky</string>
   <string name="data_settings">Data</string>
