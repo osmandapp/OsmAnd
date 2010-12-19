@@ -129,6 +129,39 @@ public class BinaryMapIndexReader {
 		return addressIndexes.size() > 0;
 	}
 	
+	public boolean hasTransportData(){
+		return transportIndexes.size() > 0;
+	}
+	
+	
+
+	public RandomAccessFile getRaf() {
+		return raf;
+	}
+	
+	public int readByte() throws IOException{
+		byte b = codedIS.readRawByte();
+		if(b < 0){
+			return b + 256;
+		} else {
+			return b;
+		}
+	}
+	
+	public final int readInt() throws IOException {
+		int ch1 = readByte();
+		int ch2 = readByte();
+		int ch3 = readByte();
+		int ch4 = readByte();
+		return ((ch1 << 24) + (ch2 << 16) + (ch3 << 8) + (ch4 << 0));
+	}
+	
+	
+	public int getVersion() {
+		return version;
+	}
+	
+	
 
 	protected void skipUnknownField(int tag) throws IOException {
 		int wireType = WireFormat.getTagWireType(tag);
@@ -218,11 +251,6 @@ public class BinaryMapIndexReader {
 		log.info("Read " + req.numberOfReadSubtrees + " subtrees. Go through " + req.numberOfAcceptedSubtrees + " subtrees.");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 		return req.getSearchResults();
 	}
-	
-	public boolean hasTransportData(){
-		return transportIndexes.size() > 0;
-	}
-	
 	
 	/**
 	 * Address public methods
@@ -796,33 +824,6 @@ public class BinaryMapIndexReader {
 				break;
 			}
 		}
-	}
-	
-
-	public RandomAccessFile getRaf() {
-		return raf;
-	}
-	
-	public int readByte() throws IOException{
-		byte b = codedIS.readRawByte();
-		if(b < 0){
-			return b + 256;
-		} else {
-			return b;
-		}
-	}
-	
-	public final int readInt() throws IOException {
-		int ch1 = readByte();
-		int ch2 = readByte();
-		int ch3 = readByte();
-		int ch4 = readByte();
-		return ((ch1 << 24) + (ch2 << 16) + (ch3 << 8) + (ch4 << 0));
-	}
-	
-	
-	public int getVersion() {
-		return version;
 	}
 	
 
