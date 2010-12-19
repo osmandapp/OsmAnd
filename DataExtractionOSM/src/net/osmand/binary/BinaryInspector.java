@@ -13,10 +13,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import net.osmand.binary.BinaryMapIndexReader.AddressRegion;
+import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.MapRoot;
-import net.osmand.binary.BinaryMapIndexReader.TransportIndex;
+import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.osm.MapUtils;
 
 import com.google.protobuf.CodedOutputStream;
