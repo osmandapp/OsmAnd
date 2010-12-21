@@ -14,8 +14,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -536,14 +536,19 @@ public class DownloadIndexActivity extends ListActivity {
 						} catch (InterruptedException e) {
 						}
 					}
-					URLConnection conn = url.openConnection();
+					HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 					conn.setReadTimeout(30000);
-					conn.setConnectTimeout(30000);
-					is = conn.getInputStream();
-					long skipped = 0;
-					while (skipped < fileread) {
-						skipped += is.skip(fileread - skipped);
+					if (fileread > 0) {
+						String range = "bytes="+fileread + "-" + (length -1); //$NON-NLS-1$ //$NON-NLS-2$
+						conn.setRequestProperty("Range", range);  //$NON-NLS-1$
 					}
+					conn.setConnectTimeout(30000);
+					log.info(conn.getResponseMessage() + " " + conn.getResponseCode()); //$NON-NLS-1$
+					is = conn.getInputStream();
+//					long skipped = 0;
+//					while (skipped < fileread) {
+//						skipped += is.skip(fileread - skipped);
+//					}
 					if (first) {
 						length = conn.getContentLength();
 						progress.startTask(getString(R.string.downloading_file) + " " + fileName, length); //$NON-NLS-1$
@@ -558,7 +563,9 @@ public class DownloadIndexActivity extends ListActivity {
 						progress.progress(read);
 						fileread += read;
 					}
-					triesDownload = 0;
+					if(length <= fileread){
+						triesDownload = 0;
+					}
 				} catch (IOException e) {
 					log.error("IOException", e); //$NON-NLS-1$
 					triesDownload--;
@@ -597,7 +604,7 @@ public class DownloadIndexActivity extends ListActivity {
 		try {
 
 			out = new FileOutputStream(fileToDownload);
-			URL url = USE_DOWNLOAD_OSMAND_NET ? new URL("http://download.osmand.net/indexes/"+key):  //$NON-NLS-1$
+			URL url = USE_DOWNLOAD_OSMAND_NET ? new URL("http://download.osmand.net/download?file="+key):  //$NON-NLS-1$
 				DownloaderIndexFromGoogleCode.getInputStreamToLoadIndex(key);
 			try {
 				downloadFile(key, out, url, progress);
@@ -663,6 +670,7 @@ public class DownloadIndexActivity extends ListActivity {
 			}
 			if(dateModified != null){
 				toIndex.setLastModified(dateModified);
+				manager.updateIndexLastDateModified(toIndex);
 			}
 			if (warnings.isEmpty()) {
 				showWarning(getString(R.string.download_index_success));
