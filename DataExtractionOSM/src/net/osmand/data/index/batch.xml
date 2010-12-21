@@ -425,6 +425,7 @@
 		</regions>
 		
 		<!-- BIG countries -->		
+		
 		<regions siteToDownload="http://downloads.cloudmade.com/oceania/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Oceania" skip="true">
 			<region name="australia" esize="150"/>  
 		</regions>
@@ -433,6 +434,12 @@
 			 <region name="japan" esize="500"/> 
 			 <region name="russian_federation" esize="360"/> 
 		</regions>
+		
+		<regions siteToDownload="http://download.geofabrik.de/osm/{0}.osm.pbf" region_prefix="" region_suffix=""  skip="true">
+			 <region name="africa" esize="101"/> 
+		</regions>
+		
+		
 		
 		<!-- VERY SMALL COUNTRIES TO MAKE (not worth) -->
 		<!-- Oceania -->
