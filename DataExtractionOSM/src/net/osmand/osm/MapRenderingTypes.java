@@ -378,8 +378,10 @@ public class MapRenderingTypes {
 	// a/vehicle access 4 bit   (height, weight?) - one bit bicycle
 	// p/parking      	1 bit
 	// c/cycle oneway 	1 bit
+	// TODO 
+	// ci/inside city   1 bit
 	
-	// ENCODING :  c|p|aaaa|sss|rr|f|o - 13 bit
+	// ENCODING :  ci|c|p|aaaa|sss|rr|f|o - 14 bit
 	
 	public static int getHighwayAttributes(Entity e){
 		int attr = 0;
