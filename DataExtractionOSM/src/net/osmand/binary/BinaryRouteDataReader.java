@@ -49,6 +49,8 @@ public class BinaryRouteDataReader {
 			autoValues.put("primary_link", 70d);
 			autoValues.put("secondary", 50d);
 			autoValues.put("secondary_link", 50d);
+			autoValues.put("tertiary", 50d);
+			autoValues.put("tertiary_link", 50d);
 			autoValues.put("residential", 50d);
 			autoValues.put("service", 40d);
 			autoValues.put("unclassified", 40d);
@@ -135,31 +137,86 @@ public class BinaryRouteDataReader {
 		ctx.loadedTiles.add(tileC);
 	}
 	
+	private static class RouteSegment {
+		int segment = 0;
+		BinaryMapDataObject road;
+	}
+	
+	private static double dist(int x1, int y1, int x2, int y2) {
+		return Math.sqrt(((double)x1 - x2) * ((double)x1 - x2) + ((double)y1 - y2) * ((double)y1 - y2));
+	}
+	
+	public RouteSegment findRouteSegment(double lat, double lon, RoutingContext ctx) throws IOException {
+		double tileX = MapUtils.getTileNumberX(ZOOM_LOAD_TILES, lon);
+		double tileY = MapUtils.getTileNumberY(ZOOM_LOAD_TILES, lat);
+		searchRoutes(ctx, (int) tileX , (int) tileY);
+		
+		RouteSegment road = null;
+		double dist = 0; 
+		int px = MapUtils.get31TileNumberX(lon);
+		int py = MapUtils.get31TileNumberY(lat);
+		for(BinaryMapDataObject r : ctx.values()){
+			if(r.getPointsLength() > 1){
+				double prevDist = dist(r.getPoint31XTile(0), r.getPoint31YTile(0), px, py);
+				for (int j = 1; j < r.getPointsLength(); j++) {
+					double cDist = dist(r.getPoint31XTile(j), r.getPoint31YTile(j), px, py);
+					double mDist = dist(r.getPoint31XTile(j), r.getPoint31YTile(j), r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1));
+					if (road == null || prevDist + cDist - mDist < dist) {
+						road = new RouteSegment();
+						road.road = r;
+						road.segment = j;
+						dist = prevDist + cDist - mDist;
+					}
+					prevDist = cDist;
+				}
+			}
+		}
+		return road;
+	}
+	
 	public static void main(String[] args) throws IOException {
-		RandomAccessFile raf = new RandomAccessFile(new File("d:\\android\\data\\Minsk.obf"), "r"); //$NON-NLS-1$ //$NON-NLS-2$
+		RandomAccessFile raf = new RandomAccessFile(new File("d:\\android\\data\\Belarus.obf"), "r"); //$NON-NLS-1$ //$NON-NLS-2$
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
-		BinaryRouteDataReader route = new BinaryRouteDataReader(reader);
+		BinaryRouteDataReader router = new BinaryRouteDataReader(reader);
 		
 //		int sleft = MapUtils.get31TileNumberX(27.596);
 //		int sright = MapUtils.get31TileNumberX(27.599);
 //		int stop = MapUtils.get31TileNumberY(53.921);
 //		int sbottom = MapUtils.get31TileNumberY(53.919);
 		
-		double tileX = MapUtils.getTileNumberX(15, 27.596);
-		double tileY = MapUtils.getTileNumberY(15, 53.919);
+		double lon = 27.5976;
+		double lat = 53.9199;
+		
 		RoutingContext ctx = new RoutingContext();
 		
 		long ms = System.currentTimeMillis();
-		route.searchRoutes(ctx, (int) tileX, (int) tileY);
+		// find closest way
+		RouteSegment routeSegment = router.findRouteSegment(lat, lon, ctx);
+		if (routeSegment != null) {
+			BinaryMapDataObject road = routeSegment.road;
+			TagValuePair pair = road.mapIndex.decodeType(road.getTypes()[0]);
+			System.out.println("ROAD TO START " + pair.tag + " " + pair.value + " " + road.name + " " + routeSegment.segment + " "
+					+ (road.id >> 3));
+		}
+
+		double tileX = Math.round(MapUtils.getTileNumberX(ZOOM_LOAD_TILES, lon));
+		double tileY = Math.round(MapUtils.getTileNumberY(ZOOM_LOAD_TILES, lat));
+		// preload neighboors
+		router.searchRoutes(ctx, (int) tileX, (int) tileY);
+		router.searchRoutes(ctx, (int) tileX - 1, (int) tileY);
+		router.searchRoutes(ctx, (int) tileX, (int) tileY - 1);
+		router.searchRoutes(ctx, (int) tileX - 1, (int) tileY - 1);
 		Collection<BinaryMapDataObject> res = ctx.values();  
 		System.out.println(res.size() + " objects for " + (System.currentTimeMillis() - ms) + " ms");
 		for(BinaryMapDataObject r : res){
 			TagValuePair pair = r.mapIndex.decodeType(r.getTypes()[0]);
-			if(r.name != null){
-				System.out.println(pair.tag + " " + pair.value + " " + r.name);
-			} else {
-				System.out.println(pair.tag + " " + pair.value);
-			}
+//			if(r.name != null){
+//				System.out.println(pair.tag + " " + pair.value + " " + r.name );
+//			} else {
+//				System.out.println(pair.tag + " " + pair.value + " " + (r.id >> 3));
+//			}
 		}
 	}
+
+	
 }
