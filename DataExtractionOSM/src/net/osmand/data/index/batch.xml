@@ -426,7 +426,7 @@
 		
 		<!-- BIG countries -->		
 		
-		<regions siteToDownload="http://downloads.cloudmade.com/oceania/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Oceania" skip="true">
+		<regions siteToDownload="http://downloads.cloudmade.com/oceania/australia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Oceania" skip="true">
 			<region name="australia" esize="150"/>  
 		</regions>
 		
