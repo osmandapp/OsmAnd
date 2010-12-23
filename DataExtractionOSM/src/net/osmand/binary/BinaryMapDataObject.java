@@ -1,6 +1,7 @@
 package net.osmand.binary;
 
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 
 public class BinaryMapDataObject {
 	protected int[] coordinates = null;
@@ -43,6 +44,13 @@ public class BinaryMapDataObject {
 	
 	public int[] getTypes(){
 		return types;
+	}
+	
+	public TagValuePair getTagValue(int indType){
+		if(mapIndex == null){
+			return null;
+		}
+		return mapIndex.decodeType(types[indType]);
 	}
 	
 	public long getId() {
