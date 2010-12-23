@@ -9,8 +9,8 @@ public class ToDoConstants {
 	
 	// TODO max 115
 
-	// !!! ROUTING
 	// ! New UI (+)
+	// !!63. Support simple offline routing(require index file with turn restrictions etc) (Issue)
 	
 	// 	For 0.5 release
 	//  104. Add activity to show current loaded indexes and information about them
@@ -23,21 +23,19 @@ public class ToDoConstants {
 	//		 possibly introduce settings to limit usage of functionality or put poi index into binary index
 	
 	// Outside base 0.5 release
-	//  109. Update download index activity (introduce select/deselect all, update existing) 
-	//			and make green text for already loaded indexes.
 	//  113. Calculate speed cameras/bumps on the road (announce about them)
-	//  110. Use android voice for pronounce command (could be used in future to pronounce street)
-	//  111. Investigate showing street name while driving
+	//  110. Use android voice for pronounce command (could be used in future to pronounce street) (Issue)
+	//  111. Investigate showing street name while driving (Issue)
 	//   86. Allow to add/edit custom tags to POI objects (Issue)
 	//   96. Introduce settings for MPH, imperial units (Issue)
-	//  114. Index streets according to city bounds
+	//  114. Index streets according to city bounds (Issue)
 
 	// 	_19. colors for road trunk and motorway
 	
 	/////////////////////////////  UNKNOWN STATE  ////////////////////
 	// Unscheduled (complex)
 	//   65. Intermediate points - for better control routing, to avoid traffic jams ...(?)
-	//   63. Support simple offline routing(require index file with turn restrictions etc) (?)
+
 	
 	// Not clear if it is really needed 
 	//   66. Transport routing (show next stop, total distance, show stop get out, voice) (needed ?).
@@ -48,6 +46,8 @@ public class ToDoConstants {
 	// DONE ANDROID :
 	//  106. Download region from android device (select minzoom/maxzoom)
 	//  105. Route mode fast/short (Issue)
+	//  109. Update download index activity (introduce select/deselect all, update existing) 
+	//			and make green text for already loaded indexes.
 	
 	// DONE SWING
 

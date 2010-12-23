@@ -5,12 +5,15 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
 import java.io.StringReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.swing.AbstractAction;
@@ -21,6 +24,13 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import net.osmand.ExceptionHandler;
+import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryRouteDataReader;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.binary.BinaryRouteDataReader.RouteSegment;
+import net.osmand.binary.BinaryRouteDataReader.RouteSegmentResult;
+import net.osmand.binary.BinaryRouteDataReader.RoutingContext;
 import net.osmand.data.DataTileManager;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -109,6 +119,22 @@ public class MapRouterLayer implements MapPanelLayer {
 			}
 		};
 		menu.add(altroute);
+		Action selfRoute = new AbstractAction("Calculate self route") {
+			private static final long serialVersionUID = 507156107455281238L;
+
+			public void actionPerformed(ActionEvent e) {
+				List<Way> ways = selfRoute(startRoute, endRoute);
+				DataTileManager<Way> points = new DataTileManager<Way>();
+				points.setZoom(11);
+				for(Way w : ways){
+					LatLon n = w.getLatLon();
+					points.registerObject(n.getLatitude(), n.getLongitude(), w);
+				}
+				map.setPoints(points);
+			}
+		};
+		
+		menu.add(selfRoute);
 
 	}
 	
@@ -270,6 +296,65 @@ public class MapRouterLayer implements MapPanelLayer {
 				ExceptionHandler.handle(e);
 			}
 			System.out.println("Finding cloudmade routes " + res.size() + " " + (System.currentTimeMillis() - time) + " ms");
+		}
+		return res;
+	}
+	
+	public List<Way> selfRoute(LatLon start, LatLon end) {
+		List<Way> res = new ArrayList<Way>();
+		long time = System.currentTimeMillis();
+		System.out.println("Self made route from " + start + " to " + end);
+		if (start != null && end != null) {
+			try {
+				
+				RandomAccessFile raf = new RandomAccessFile(new File("d:\\android\\data\\Belarus.obf"), "r"); //$NON-NLS-1$ //$NON-NLS-2$
+				BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
+				BinaryRouteDataReader router = new BinaryRouteDataReader(reader);
+				RoutingContext ctx = new RoutingContext();
+				
+				// find closest way
+				RouteSegment st = router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);
+				if (st != null) {
+					BinaryMapDataObject road = st.getRoad();
+					TagValuePair pair = road.getTagValue(0);
+					System.out.println("ROAD TO START " + pair.tag + " " + pair.value + " " + road.getName() + " " 
+							+ (road.getId() >> 3));
+				}
+				
+				RouteSegment e = router.findRouteSegment(end.getLatitude(), end.getLongitude(), ctx);
+				if ( e != null) {
+					BinaryMapDataObject road =  e.getRoad();
+					TagValuePair pair = road.getTagValue(0);
+					System.out.println("ROAD TO END " + pair.tag + " " + pair.value + " " + road.getName()+ " " +  
+							+ (road.getId()  >> 3));
+				}
+				
+				
+
+				for(RouteSegmentResult s : router.searchRoute(ctx, st, e)){
+//					double dist = MapUtils.getDistance(s.startPoint, s.endPoint);
+					Way way = new Way(-1);
+					boolean plus = s.startPointIndex < s.endPointIndex;
+					int i=s.startPointIndex;
+					while (true) {
+						net.osmand.osm.Node n = new net.osmand.osm.Node(MapUtils.get31LatitudeY(s.object.getPoint31YTile(i)), MapUtils
+								.get31LongitudeX(s.object.getPoint31XTile(i)), -1);
+						way.addNode(n);
+						if (i == s.endPointIndex) {
+							break;
+						}
+						if (plus) {
+							i++;
+						} else {
+							i--;
+						}
+					}
+					res.add(way);
+				}
+			} catch (IOException e) {
+				ExceptionHandler.handle(e);
+			}
+			System.out.println("Finding self routes " + res.size() + " " + (System.currentTimeMillis() - time) + " ms");
 		}
 		return res;
 	}
