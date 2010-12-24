@@ -12,9 +12,11 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -52,17 +54,17 @@ public class BinaryRouteDataReader {
 			autoValues.put("trunk_link", 110d);
 			autoValues.put("primary", 70d);
 			autoValues.put("primary_link", 70d);
-			autoValues.put("secondary", 50d);
-			autoValues.put("secondary_link", 50d);
-			autoValues.put("tertiary", 50d);
-			autoValues.put("tertiary_link", 50d);
-			autoValues.put("residential", 50d);
-			autoValues.put("service", 40d);
-			autoValues.put("unclassified", 40d);
-			autoValues.put("road", 40d);
-			autoValues.put("track", 30d);
-			autoValues.put("path", 30d);
-			autoValues.put("living_street", 30d);
+			autoValues.put("secondary", 60d);
+			autoValues.put("secondary_link", 60d);
+			autoValues.put("tertiary", 30d);
+			autoValues.put("tertiary_link", 30d);
+			autoValues.put("residential", 30d);
+			autoValues.put("service", 5d);
+			autoValues.put("unclassified", 5d);
+			autoValues.put("road", 25d);
+			autoValues.put("track", 20d);
+			autoValues.put("path", 20d);
+			autoValues.put("living_street", 20d);
 		}
 		
 		private boolean acceptLine(TagValuePair pair){
@@ -75,12 +77,37 @@ public class BinaryRouteDataReader {
 		private boolean acceptPoint(TagValuePair pair){
 			if(pair.tag.equals("traffic_calming")){
 				return true;
-			} else if(pair.tag.equals("highway") && pair.tag.equals("traffic_signals")){
+			} else if(pair.tag.equals("highway") && pair.value.equals("traffic_signals")){
 				return true;
-			} else if(pair.tag.equals("highway") && pair.tag.equals("speed_camera")){
+			} else if(pair.tag.equals("highway") && pair.value.equals("speed_camera")){
 				return true;
 			}
 			return false;
+		}
+		
+		public boolean isOneWay(int highwayAttributes){
+			// TODO correctly define roundabout!!!
+			return MapRenderingTypes.isOneWayWay(highwayAttributes) || 
+					MapRenderingTypes.isRoundabout(highwayAttributes);
+		}
+
+		/**
+		 * return speed in m/s
+		 */
+		public double defineSpeed(BinaryMapDataObject road) {
+			double speed = MapRenderingTypes.getMaxSpeedIfDefined(road.getHighwayAttributes()) / 3.6d;
+			if(speed != 0) {
+				return speed;
+			}
+			TagValuePair pair = road.getTagValue(0);
+			if("highway".equals(pair.tag) && autoValues.containsKey(pair.value)){
+				return autoValues.get(pair.value) / 3.6d;
+			}
+			return 9;
+		}
+
+		public double getMinDefaultSpeed() {
+			return 10;
 		}
 		
 	}
@@ -92,12 +119,15 @@ public class BinaryRouteDataReader {
 		
 		TIntSet loadedTiles = new TIntHashSet();
 		
+		int timeToLoad = 0;
+		int timeToCalculate = 0;
+		
 		public Collection<BinaryMapDataObject> values(){
 			return idObjects.valueCollection();
 		}
 	}
 	
-	private final static int ZOOM_LOAD_TILES = 15;
+	private final static int ZOOM_LOAD_TILES = 13;
 	
 	public static class RouteSegment {
 		int segmentStart = 0;
@@ -105,9 +135,14 @@ public class BinaryRouteDataReader {
 		BinaryMapDataObject road;
 		// needed to store intersection of routes
 		RouteSegment next = null;
+		
 		// search context (needed for searching route)
-		int parentRoute = 0;
+		RouteSegment parentRoute = null;
 		int parentSegmentEnd = 0;
+		
+		// distance measured in time (seconds)
+		double distanceFromStart = 0;
+		double distanceToEnd = 0;
 		
 		public BinaryMapDataObject getRoad() {
 			return road;
@@ -122,15 +157,22 @@ public class BinaryRouteDataReader {
 		public int endPointIndex;
 	}
 	
-	private static double dist(int x1, int y1, int x2, int y2) {
-		return Math.sqrt(((double)x1 - x2) * ((double)x1 - x2) + ((double)y1 - y2) * ((double)y1 - y2));
+	private static double squareRootDist(int x1, int y1, int x2, int y2) {
+		double dy = (y1 - y2) * 0.01863d;
+		double dx = (x1 - x2) * 0.011d;
+		return Math.sqrt(dx * dx + dy * dy);
+	}
+	
+	private static int absDist(int x1, int y1, int x2, int y2) {
+		return Math.abs(x1 - x2) + Math.abs(y1 - y2);
 	}
    
 	public void loadRoutes(final RoutingContext ctx, int tileX, int tileY) throws IOException {
-		int tileC = tileX << ZOOM_LOAD_TILES + tileY;
+		int tileC = (tileX << ZOOM_LOAD_TILES) + tileY;
 		if(ctx.loadedTiles.contains(tileC)){
 			return;
 		}
+		long now = System.currentTimeMillis();
 		
 		SearchRequest<BinaryMapDataObject> request = new SearchRequest<BinaryMapDataObject>();
 		request.left = tileX << (31 - ZOOM_LOAD_TILES);
@@ -178,6 +220,7 @@ public class BinaryRouteDataReader {
 			}
 		}
 		ctx.loadedTiles.add(tileC);
+		ctx.timeToLoad += (System.currentTimeMillis() - now);
 	}
 	
 
@@ -193,10 +236,10 @@ public class BinaryRouteDataReader {
 		int py = MapUtils.get31TileNumberY(lat);
 		for(BinaryMapDataObject r : ctx.values()){
 			if(r.getPointsLength() > 1){
-				double prevDist = dist(r.getPoint31XTile(0), r.getPoint31YTile(0), px, py);
+				double prevDist = squareRootDist(r.getPoint31XTile(0), r.getPoint31YTile(0), px, py);
 				for (int j = 1; j < r.getPointsLength(); j++) {
-					double cDist = dist(r.getPoint31XTile(j), r.getPoint31YTile(j), px, py);
-					double mDist = dist(r.getPoint31XTile(j), r.getPoint31YTile(j), r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1));
+					double cDist = squareRootDist(r.getPoint31XTile(j), r.getPoint31YTile(j), px, py);
+					double mDist = squareRootDist(r.getPoint31XTile(j), r.getPoint31YTile(j), r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1));
 					if (road == null || prevDist + cDist - mDist < dist) {
 						road = new RouteSegment();
 						road.road = r;
@@ -211,68 +254,155 @@ public class BinaryRouteDataReader {
 		return road;
 	}
 	
+	
+	
 	public List<RouteSegmentResult> searchRoute(RoutingContext ctx, RouteSegment start, RouteSegment end) throws IOException {
 		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
-		
-		List<RouteSegment> searchList = new ArrayList<RouteSegment>();
+		long now = System.currentTimeMillis();
+
+		PriorityQueue<RouteSegment> graphSegments = new PriorityQueue<RouteSegment>(50, new Comparator<RouteSegment>(){
+			@Override
+			public int compare(RouteSegment o1, RouteSegment o2) {
+				return Double.compare(o1.distanceFromStart + o1.distanceToEnd, o2.distanceFromStart + o2.distanceToEnd);
+			}
+			
+		});
 		TLongHashSet visitedPoints = new TLongHashSet();
-		searchList.add(start);
-		int stIndex = 0;
-		int endIndex = -1;
-		while(stIndex < searchList.size() && endIndex == -1){
-			RouteSegment segment = searchList.get(stIndex);
+		graphSegments.add(start);
+		RouteSegment endRoute = null;
+		int endX = end.road.getPoint31XTile(end.segmentEnd);
+		int endY = end.road.getPoint31YTile(end.segmentEnd);
+		int startX = start.road.getPoint31XTile(start.segmentStart);
+		int startY = start.road.getPoint31YTile(start.segmentStart);
+		start.distanceToEnd = squareRootDist(startX, startY, endX, endY) / 10;
+		
+//		double maxAreaDist = 100 * squareRootDist(startX, startY, endX, endY);
+		
+		while(!graphSegments.isEmpty() && endRoute == null){
+			RouteSegment segment = graphSegments.poll();
 			BinaryMapDataObject road = segment.road;
- 
 			
 			// try to find all ways
-			// TODO check for one way (?) and start from segment end
-			for (int j = 0; j < road.getPointsLength() && endIndex == -1; j++) {
+			boolean oneway = ctx.router.isOneWay(road.getHighwayAttributes());
+			
+			int middle = segment.segmentEnd;
+			boolean minus = true;
+			boolean plus = true;
+			int d = 0;
+			int middlex = road.getPoint31XTile(middle);
+			int middley = road.getPoint31YTile(middle);
+			double trafficSignalsTime = 0;
+			while(endRoute == null && ((!oneway && minus) || plus)) {
+				int j = middle + d;
+				if(oneway){
+					d++;
+				} else {
+					if(d <= 0){
+						d = -d + 1;
+					} else {
+						d = -d;
+					}
+				}
+				
+				if(j < 0){
+					minus = false;
+					continue;
+				}
+				if(j >= road.getPointsLength()){
+					plus = false;
+					continue;
+				}
+				if(end.road.id == road.id && end.segmentStart == j){
+					endRoute = segment;
+					break;
+				}
+				
 				long l = (((long) road.getPoint31XTile(j)) << 31) + (long) road.getPoint31YTile(j);
 				if(visitedPoints.contains(l)){
 					continue;
 				}
-				// TODO efficient (?)
 				loadRoutes(ctx, (road.getPoint31XTile(j) >> (31 - ZOOM_LOAD_TILES)), (road.getPoint31YTile(j) >> (31 - ZOOM_LOAD_TILES)));
 				
 				RouteSegment next = ctx.routes.get(l);
-				if(next != null){
+				
+				if (next != null) {
 					visitedPoints.add(l);
+					if (d != 0) {
+						RouteSegment trafficSignalsTest = next;
+						while (trafficSignalsTest != null) {
+							if ((trafficSignalsTest.road.getTypes()[0] & 3) == MapRenderingTypes.POINT_TYPE) {
+								TagValuePair pair = trafficSignalsTest.road.getTagValue(0);
+								if (pair != null && pair.tag.equals("highway") && pair.value.equals("traffic_signals")) {
+									trafficSignalsTime += 25;
+								}
+							}
+							trafficSignalsTest = trafficSignalsTest.next;
+						}
+					}
 				}
 				while(next != null){
+					// TODO consider restrictions !
 					if(next.road.id != road.id){
-						next.parentRoute = stIndex; 
+						next.parentRoute = segment; 
 						next.parentSegmentEnd = j;
-						searchList.add(next);
-						// TODO check that there is way to that point !!!
-						if(end.road.id == next.road.id){
-							endIndex = searchList.size() - 1;
-							break;
+						int x = road.getPoint31XTile(j);
+						int y = road.getPoint31YTile(j);
+						
+						// Using A* routing algorithm
+						// g(x) - calculate distance to that point and calculate time
+						
+						double speed = ctx.router.defineSpeed(road);
+						if(speed == 0){
+							speed = ctx.router.getMinDefaultSpeed();
 						}
+						
+						next.distanceFromStart = segment.distanceFromStart + squareRootDist(x, y, middlex, middley) / speed; 
+						// for each turn add 45 seconds
+						// TODO consider right turn 20 seconds and left turn 45 seconds 
+						if (j < road.getPointsLength() - 1) {
+							next.distanceFromStart += 30;
+						}
+						// traffic signals time
+						next.distanceFromStart += trafficSignalsTime;
+						// h(x) - calculate approximate distance to the end point and divide to 37 km/h = 10 m/s
+						// max speed
+						next.distanceToEnd = squareRootDist(x, y, endX, endY) / 30;
+						
+						graphSegments.add(next);
 					}
 					next = next.next;
 				}
 				
+				
 			}
-			stIndex++;
 		}
-		stIndex = endIndex;
-		start.parentRoute = -1;
-		int parentSegmentEnd = end.segmentEnd;
-		while(stIndex != -1){
-			RouteSegment segment = searchList.get(stIndex);
+		// reverse start and end point for end if needed
+		int parentSegmentEnd = endRoute != null && endRoute.segmentStart <= end.segmentStart ? 
+				end.segmentEnd : end.segmentStart;
+		RouteSegment segment = endRoute;
+		while(segment != null){
 			RouteSegmentResult res = new RouteSegmentResult();
 			res.object = segment.road;
 			res.endPointIndex = parentSegmentEnd;
 			res.startPointIndex = segment.segmentStart;
-			res.startPoint = convertPoint(res.object, res.startPointIndex);
-			res.endPoint = convertPoint(res.object, res.endPointIndex);
+			parentSegmentEnd = segment.parentSegmentEnd;
+			System.out.println(segment.road.name + " time to go " + 
+					(segment.distanceFromStart  / 60) + " estimate time " + (segment.distanceToEnd  / 60));
+			segment = segment.parentRoute;
 			if(res.startPointIndex != res.endPointIndex) {
 				// skip duplicates
 				result.add(0, res);
+				// reverse start and end point for start if needed
+				if(segment == null && res.startPointIndex > res.endPointIndex){
+					res.startPointIndex = start.segmentEnd;
+				}
 			}
-			parentSegmentEnd = segment.parentSegmentEnd;
-			stIndex = segment.parentRoute;
+			res.startPoint = convertPoint(res.object, res.startPointIndex);
+			res.endPoint = convertPoint(res.object, res.endPointIndex);
+			
 		}
+		ctx.timeToCalculate = (int) (System.currentTimeMillis() - now);
+		System.out.println("Time to calculate : " + ctx.timeToCalculate +", time to load : " + ctx.timeToLoad + ", loaded tiles : " + ctx.loadedTiles.size());
 		return result;
 	}
 	
@@ -335,6 +465,11 @@ public class BinaryRouteDataReader {
 		
 		Collection<BinaryMapDataObject> res = ctx.values();
 		System.out.println(res.size() + " objects for " + (System.currentTimeMillis() - ms) + " ms");
+		
+		LatLon ls = new LatLon(0, 5);
+		LatLon le = new LatLon(1, 5);
+		System.out.println("X equator " + MapUtils.getDistance(ls, le) / (MapUtils.get31TileNumberX(ls.getLongitude()) - MapUtils.get31TileNumberX(le.getLongitude())));
+		System.out.println("Y equator " + MapUtils.getDistance(ls, le) / (MapUtils.get31TileNumberY(ls.getLatitude()) - MapUtils.get31TileNumberY(le.getLatitude())));
 		
 //		for(BinaryMapDataObject r : res){
 //			TagValuePair pair = r.mapIndex.decodeType(r.getTypes()[0]);

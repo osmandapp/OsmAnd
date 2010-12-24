@@ -6,8 +6,10 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -31,8 +33,11 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 	private JTextField streetDefaultSuffixes;
 	private JTextField mapZooms;
 	private JTextField renderingTypesFile;
+	private JTextField pathToObfRoutingFile;
 
 	private JCheckBox useInternet;
+
+	
 //	private JCheckBox supressWarning;
 //	private JCheckBox loadWholeOsmInfo;
 
@@ -78,7 +83,8 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 	private void createGeneralSection(JPanel root) {
 		JPanel panel = new JPanel();
 //		panel.setLayout(new GridLayout(3, 1, 5, 5));
-		panel.setLayout(new GridLayout(1, 1, 5, 5));
+		GridBagLayout l = new GridBagLayout();
+		panel.setLayout(l);
 		panel.setBorder(BorderFactory.createTitledBorder(Messages.getString("OsmExtractionPreferencesDialog.GENERAL"))); //$NON-NLS-1$
 		root.add(panel);
 		
@@ -86,6 +92,34 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		useInternet.setText(Messages.getString("OsmExtractionPreferencesDialog.INTERNET.TO.DOWNLOAD.FILES")); //$NON-NLS-1$
 		useInternet.setSelected(DataExtractionSettings.getSettings().useInternetToLoadImages());
 		panel.add(useInternet);
+		GridBagConstraints constr = new GridBagConstraints();
+		constr.ipadx = 5;
+		constr.gridx = 0;
+		constr.gridy = 0;
+		constr.gridwidth = 2;
+		constr.anchor = GridBagConstraints.WEST;
+		l.setConstraints(useInternet, constr);
+		
+		JLabel label = new JLabel("Path to obf file (test routing purpose) : ");
+		panel.add(label);
+		constr = new GridBagConstraints();
+		constr.ipadx = 5;
+		constr.gridx = 0;
+		constr.gridy = 1;
+		constr.anchor = GridBagConstraints.WEST;
+		l.setConstraints(label, constr);
+		
+		pathToObfRoutingFile = new JTextField();
+		File file = DataExtractionSettings.getSettings().getDefaultRoutingFile();
+		pathToObfRoutingFile.setText(file == null ? "" : file.getAbsolutePath());
+		panel.add(pathToObfRoutingFile);
+		constr = new GridBagConstraints();
+		constr.weightx = 1;
+		constr.fill = GridBagConstraints.HORIZONTAL;
+		constr.ipadx = 5;
+		constr.gridx = 1;
+		constr.gridy = 1;
+		l.setConstraints(pathToObfRoutingFile, constr);
 		
 //		supressWarning = new JCheckBox();
 //		supressWarning.setText(Messages.getString("OsmExtractionPreferencesDialog.DUPLICATED.ID")); //$NON-NLS-1$
@@ -227,6 +261,11 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		}
 		if(!settings.getMapRenderingTypesFile().equals(renderingTypesFile.getText())){
 			settings.setMapRenderingTypesFile(renderingTypesFile.getText());
+		}
+		File f = settings.getDefaultRoutingFile();
+		String routingFile = f == null ? "" : f.getAbsolutePath();
+		if(!routingFile.equals(pathToObfRoutingFile.getText())){
+			settings.setDefaultRoutingPath(pathToObfRoutingFile.getText());
 		}
 //		if(settings.isSupressWarningsForDuplicatedId() != supressWarning.isSelected()){
 //			settings.setSupressWarningsForDuplicatedId	(supressWarning.isSelected());
