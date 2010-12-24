@@ -41,6 +41,19 @@ public class DataExtractionSettings {
 		preferences.put("working_dir", path.getAbsolutePath());
 	}
 	
+	
+	public File getDefaultRoutingFile(){
+		String routingFile = preferences.get("routing_file", null);
+		if(routingFile == null || !new File(routingFile).exists()){
+			return null;
+		}
+		return new File(routingFile);
+	}
+	
+	public void setDefaultRoutingPath(String path){
+		preferences.put("routing_file", path);
+	}
+	
 	public LatLon getDefaultLocation(){
 		double lat = preferences.getDouble("default_lat",  53.9);
 		double lon = preferences.getDouble("default_lon",  27.56);

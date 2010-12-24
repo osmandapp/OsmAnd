@@ -354,6 +354,10 @@ public class MapRenderingTypes {
 		return (highwayAttributes & 1) > 0;
 	}
 	
+	public static boolean isRoundabout(int highwayAttributes){
+		return ((highwayAttributes >> 2) & 1) > 0;
+	}
+	
 	// 0 - normal, 1 - under, 2 - bridge,over
 	public static int getWayLayer(int type){
 		return (3 & (type >> 12));
@@ -370,11 +374,38 @@ public class MapRenderingTypes {
 		return 0;
 	}
 	
+	// return 0 if not defined
+	public static int getMaxSpeedIfDefined(int highwayAttributes){
+		switch((highwayAttributes >> 4) & 7) {
+		case 0:
+			return 20;
+		case 1:
+			return 40;
+		case 2:
+			// for old format it should return 0;
+			// TODO it should be uncommented because now it is fixed
+			// return 60;
+			return 0;
+		case 3:
+			return 80;
+		case 4:
+			return 100;
+		case 5:
+			return 120;
+		case 6:
+			return 140;
+		case 7:
+			return 0;
+		
+		}
+		return 0;
+	}
+	
 	// HIGHWAY special attributes :
 	// o/oneway			1 bit
 	// f/free toll 		1 bit
 	// r/roundabout  	2 bit (+ 1 bit direction)
-	// s/max speed   	3 bit [0 - 30km/h, 1 - 50km/h, 2 - 70km/h, 3 - 90km/h, 4 - 110km/h, 5 - 130 km/h, 6 >]
+	// s/max speed   	3 bit [0 - 30km/h, 1 - 50km/h, 2 - 70km/h, 3 - 90km/h, 4 - 110km/h, 5 - 130 km/h, 6 >, 7 - 0/not specified]
 	// a/vehicle access 4 bit   (height, weight?) - one bit bicycle
 	// p/parking      	1 bit
 	// c/cycle oneway 	1 bit
@@ -427,7 +458,7 @@ public class MapRenderingTypes {
 			} catch (NumberFormatException es) {
 			}
 			if(kmh <= 0){
-				attr |= 2;
+				attr |= 7;
 			} else if(kmh <= 30){
 				attr |= 0;
 			} else if(kmh <= 50){
@@ -444,7 +475,7 @@ public class MapRenderingTypes {
 				attr |= 6;
 			}
 		} else {
-			attr |= 2;
+			attr |= 7;
 		}
 		
 		
@@ -948,6 +979,8 @@ public class MapRenderingTypes {
 //		}
 //		System.out.println(getAmenityNameToType());
 //		long ts = System.currentTimeMillis();
+		System.out.println(MapUtils.getTileNumberX(13, 23.95)+ " " + MapUtils.getTileNumberY(13, 52.136));
+		
 		MapRenderingTypes def = MapRenderingTypes.getDefault();
 		def.initAmenityMap();
 		System.out.println(def.amenityTypeNameToTagVal);

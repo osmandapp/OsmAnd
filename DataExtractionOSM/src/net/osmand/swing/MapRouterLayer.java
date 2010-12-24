@@ -13,11 +13,11 @@ import java.io.StringReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -89,7 +89,7 @@ public class MapRouterLayer implements MapPanelLayer {
 			}
 		};
 		menu.add(end);
-		Action route = new AbstractAction("Calculate route") {
+		Action route = new AbstractAction("Calculate YOURS route") {
 			private static final long serialVersionUID = 507156107455281238L;
 
 			public void actionPerformed(ActionEvent e) {
@@ -104,7 +104,7 @@ public class MapRouterLayer implements MapPanelLayer {
 			}
 		};
 		menu.add(route);
-		Action altroute = new AbstractAction("Calculate alternative route") {
+		Action altroute = new AbstractAction("Calculate CloudMade route") {
 			private static final long serialVersionUID = 507156107455281238L;
 
 			public void actionPerformed(ActionEvent e) {
@@ -119,18 +119,20 @@ public class MapRouterLayer implements MapPanelLayer {
 			}
 		};
 		menu.add(altroute);
-		Action selfRoute = new AbstractAction("Calculate self route") {
+		Action selfRoute = new AbstractAction("Calculate OsmAnd route") {
 			private static final long serialVersionUID = 507156107455281238L;
 
 			public void actionPerformed(ActionEvent e) {
 				List<Way> ways = selfRoute(startRoute, endRoute);
-				DataTileManager<Way> points = new DataTileManager<Way>();
-				points.setZoom(11);
-				for(Way w : ways){
-					LatLon n = w.getLatLon();
-					points.registerObject(n.getLatitude(), n.getLongitude(), w);
+				if (ways != null) {
+					DataTileManager<Way> points = new DataTileManager<Way>();
+					points.setZoom(11);
+					for (Way w : ways) {
+						LatLon n = w.getLatLon();
+						points.registerObject(n.getLatitude(), n.getLongitude(), w);
+					}
+					map.setPoints(points);
 				}
-				map.setPoints(points);
 			}
 		};
 		
@@ -303,11 +305,17 @@ public class MapRouterLayer implements MapPanelLayer {
 	public List<Way> selfRoute(LatLon start, LatLon end) {
 		List<Way> res = new ArrayList<Way>();
 		long time = System.currentTimeMillis();
+		File file = DataExtractionSettings.getSettings().getDefaultRoutingFile();
+		if(file == null){
+			JOptionPane.showMessageDialog(OsmExtractionUI.MAIN_APP.getFrame(), "Please specify obf file in settings", "Obf file not found", 
+					JOptionPane.ERROR_MESSAGE);
+			return null;
+		}
 		System.out.println("Self made route from " + start + " to " + end);
 		if (start != null && end != null) {
 			try {
 				
-				RandomAccessFile raf = new RandomAccessFile(new File("d:\\android\\data\\Belarus.obf"), "r"); //$NON-NLS-1$ //$NON-NLS-2$
+				RandomAccessFile raf = new RandomAccessFile(file, "r"); //$NON-NLS-1$ //$NON-NLS-2$
 				BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
 				BinaryRouteDataReader router = new BinaryRouteDataReader(reader);
 				RoutingContext ctx = new RoutingContext();
