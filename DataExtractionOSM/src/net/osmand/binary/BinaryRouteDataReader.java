@@ -260,6 +260,8 @@ public class BinaryRouteDataReader {
 		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
 		long now = System.currentTimeMillis();
 
+		ArrayList<RouteSegment> addedRoutesWORestrictions = new ArrayList<RouteSegment>(5);
+		ArrayList<RouteSegment> addedRoutesOthers = new ArrayList<RouteSegment>(5);
 		PriorityQueue<RouteSegment> graphSegments = new PriorityQueue<RouteSegment>(50, new Comparator<RouteSegment>(){
 			@Override
 			public int compare(RouteSegment o1, RouteSegment o2) {
@@ -276,8 +278,21 @@ public class BinaryRouteDataReader {
 		int startY = start.road.getPoint31YTile(start.segmentStart);
 		start.distanceToEnd = squareRootDist(startX, startY, endX, endY) / 10;
 		
-//		double maxAreaDist = 100 * squareRootDist(startX, startY, endX, endY);
+		// add possible first junctions
+		RouteSegment gotoStart = ctx.routes.get((startX << 31l) + (long)startY);
+		while(gotoStart != null){
+			if(gotoStart.road.id != start.road.id){
+				gotoStart.distanceToEnd = start.distanceToEnd;
+				long nt = (gotoStart.road.id << 8l) + gotoStart.segmentStart;
+				visitedPoints.add(nt);
+				graphSegments.add(gotoStart);
+			}
+			gotoStart = gotoStart.next;
+			
+		}
 		
+		
+		// TODO think about u-turn
 		while(!graphSegments.isEmpty() && endRoute == null){
 			RouteSegment segment = graphSegments.poll();
 			BinaryMapDataObject road = segment.road;
@@ -285,10 +300,10 @@ public class BinaryRouteDataReader {
 			// try to find all ways
 			boolean oneway = ctx.router.isOneWay(road.getHighwayAttributes());
 			
-			int middle = segment.segmentEnd;
+			int middle = segment.segmentStart;
 			boolean minus = true;
 			boolean plus = true;
-			int d = 0;
+			int d = 1;
 			int middlex = road.getPoint31XTile(middle);
 			int middley = road.getPoint31YTile(middle);
 			double trafficSignalsTime = 0;
@@ -312,21 +327,18 @@ public class BinaryRouteDataReader {
 					plus = false;
 					continue;
 				}
-				if(end.road.id == road.id && end.segmentStart == j){
+				if(end.road.id == road.id && Math.abs(end.segmentStart - j) <= 1){
 					endRoute = segment;
 					break;
 				}
 				
 				long l = (((long) road.getPoint31XTile(j)) << 31) + (long) road.getPoint31YTile(j);
-				if(visitedPoints.contains(l)){
-					continue;
-				}
 				loadRoutes(ctx, (road.getPoint31XTile(j) >> (31 - ZOOM_LOAD_TILES)), (road.getPoint31YTile(j) >> (31 - ZOOM_LOAD_TILES)));
 				
 				RouteSegment next = ctx.routes.get(l);
 				
 				if (next != null) {
-					visitedPoints.add(l);
+					//visitedPoints.add(t);
 					if (d != 0) {
 						RouteSegment trafficSignalsTest = next;
 						while (trafficSignalsTest != null) {
@@ -340,37 +352,72 @@ public class BinaryRouteDataReader {
 						}
 					}
 				}
+				addedRoutesWORestrictions.clear();
+				addedRoutesOthers.clear();
+				boolean exclusiveRestriction = false;
 				while(next != null){
-					// TODO consider restrictions !
-					if(next.road.id != road.id){
-						next.parentRoute = segment; 
-						next.parentSegmentEnd = j;
-						int x = road.getPoint31XTile(j);
-						int y = road.getPoint31YTile(j);
-						
-						// Using A* routing algorithm
-						// g(x) - calculate distance to that point and calculate time
-						
-						double speed = ctx.router.defineSpeed(road);
-						if(speed == 0){
-							speed = ctx.router.getMinDefaultSpeed();
+					long nt = (next.road.id << 8l) + next.segmentStart;
+					if(!visitedPoints.contains(nt) && next.road.id>>3 != road.id>>3){
+						int type = -1;
+						for(int i = 0; i< road.getRestrictionCount(); i++){
+							if(road.getRestriction(i) == next.road.id){
+								type = road.getRestrictionType(i);
+								break;
+							}
 						}
-						
-						next.distanceFromStart = segment.distanceFromStart + squareRootDist(x, y, middlex, middley) / speed; 
-						// for each turn add 45 seconds
-						// TODO consider right turn 20 seconds and left turn 45 seconds 
-						if (j < road.getPointsLength() - 1) {
-							next.distanceFromStart += 30;
+						if(type == -1 && exclusiveRestriction){
+							// continue;
+						} else if(type == MapRenderingTypes.RESTRICTION_NO_LEFT_TURN ||
+								type == MapRenderingTypes.RESTRICTION_NO_RIGHT_TURN ||
+								type == MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON ||
+								type == MapRenderingTypes.RESTRICTION_NO_U_TURN){
+							// continue;
+						} else {
+							next.parentRoute = segment;
+							next.parentSegmentEnd = j;
+							int x = road.getPoint31XTile(j);
+							int y = road.getPoint31YTile(j);
+							
+							// Using A* routing algorithm
+							// g(x) - calculate distance to that point and calculate time
+							
+							double speed = ctx.router.defineSpeed(road);
+							if(speed == 0){
+								speed = ctx.router.getMinDefaultSpeed();
+							}
+							
+							next.distanceFromStart = segment.distanceFromStart + squareRootDist(x, y, middlex, middley) / speed; 
+							// for each turn add 45 seconds
+							// TODO consider right turn 20 seconds and left turn 45 seconds 
+							if (j < road.getPointsLength() - 1 || next.segmentStart != 0) {
+								next.distanceFromStart += 30;
+							}
+							// traffic signals time
+							next.distanceFromStart += trafficSignalsTime;
+							// h(x) - calculate approximate distance to the end point and divide to 37 km/h = 10 m/s
+							// max speed
+							next.distanceToEnd = squareRootDist(x, y, endX, endY) / 30;
+							if(type == -1){
+								addedRoutesOthers.add(next);
+							} else {
+								exclusiveRestriction = true;
+								addedRoutesOthers.clear();
+								addedRoutesWORestrictions.add(next);
+							}
 						}
-						// traffic signals time
-						next.distanceFromStart += trafficSignalsTime;
-						// h(x) - calculate approximate distance to the end point and divide to 37 km/h = 10 m/s
-						// max speed
-						next.distanceToEnd = squareRootDist(x, y, endX, endY) / 30;
-						
-						graphSegments.add(next);
 					}
 					next = next.next;
+				}
+				
+				for(RouteSegment s : addedRoutesOthers){
+					long nt = (s.road.id << 8l) + s.segmentStart;
+					visitedPoints.add(nt);
+					graphSegments.add(s);
+				}
+				for(RouteSegment s : addedRoutesWORestrictions){
+					long nt = (s.road.id << 8l) + s.segmentStart;
+					visitedPoints.add(nt);
+					graphSegments.add(s);
 				}
 				
 				

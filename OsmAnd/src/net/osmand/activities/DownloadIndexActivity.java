@@ -146,11 +146,11 @@ public class DownloadIndexActivity extends ListActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuItem item = menu.add(0, RELOAD_ID, 0, R.string.reload);
+		/*MenuItem item = */menu.add(0, RELOAD_ID, 0, R.string.reload);
 		// item.setIcon(R.drawable.ic_menu_refresh);
-		item = menu.add(0, SELECT_ALL_ID, 0, R.string.select_all);
-		item = menu.add(0, DESELECT_ALL_ID, 0, R.string.deselect_all);
-		item = menu.add(0, FILTER_EXISTING_REGIONS, 0, R.string.filter_existing_indexes);
+		/*item = */menu.add(0, SELECT_ALL_ID, 0, R.string.select_all);
+		/*item = */menu.add(0, DESELECT_ALL_ID, 0, R.string.deselect_all);
+		/*item = */menu.add(0, FILTER_EXISTING_REGIONS, 0, R.string.filter_existing_indexes);
 		return true;
 	}
 
