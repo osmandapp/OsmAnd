@@ -56,7 +56,7 @@ package net.osmand;
 * 
 * Known limitations:
 * 
-*	It is assumed that the data provided are within valie ranges
+*	It is assumed that the data provided are within value ranges
 *	(i.e. latitude between -90 and +90, longitude between 0 and 360,
 *	a valid date, and time zone between -14 and +14.
 * 
@@ -172,13 +172,9 @@ package net.osmand;
 *----------------------------------------------------------------------------*/
 
 // Import required classes and packages
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
 import java.text.ParseException;
-import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.TimeZone;
 
 
@@ -189,7 +185,7 @@ import java.util.TimeZone;
 * 	This Java class performs calculations to determine the time of 
 *	sunrise and sunset given lat, long, and date.
 *
-*	It is assumed that the data provided are within valie ranges
+*	It is assumed that the data provided are within value ranges
 *	(i.e. latitude between -90 and +90, longitude between 0 and 360,
 *	a valid date, and time zone between -14 and +14.
 *  
@@ -224,7 +220,7 @@ public class SunriseSunset
 	private double	dfMinRise, dfMinSet;	// minute of event: SUNUP.BAS M3
 	private	double	dfSinLat, dfCosLat;		// sin and cos of latitude
 	private	double	dfZenith;				// SUNUP.BAS Z: Zenith
-	private	SimpleDateFormat dfmtDate;		// formatting for date alone
+//	private	SimpleDateFormat dfmtDate;		// formatting for date alone
 	private	SimpleDateFormat dfmtDateTime;	// formatting for date and time
 	private	SimpleDateFormat dfmtYear;		// formatting for year
 	private	SimpleDateFormat dfmtMonth;		// formatting for month

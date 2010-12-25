@@ -20,6 +20,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -45,6 +47,50 @@ public class OsmandSettings {
 		}
 		public static String toHumanString(ApplicationMode m, Context ctx){
 			return ctx.getResources().getString(m.key);
+		}
+
+	}
+
+	public enum DayNightMode {
+		AUTO(R.string.daynight_mode_auto), 
+		DAY(R.string.daynight_mode_day), 
+		NIGHT(R.string.daynight_mode_night),
+		SENSOR(R.string.daynight_mode_sensor);
+
+		private final int key;
+		
+		DayNightMode(int key) {
+			this.key = key;
+		}
+		
+		public  String toHumanString(Context ctx){
+			return ctx.getResources().getString(key);
+		}
+
+		public boolean isSensor() {
+			return this == SENSOR;
+		}
+
+		public boolean isAuto() {
+			return this == AUTO;
+		}
+
+		public boolean isDay() {
+			return this == DAY;
+		}
+
+		public boolean isNight() {
+			return this == NIGHT;
+		}
+		
+		public static DayNightMode[] possibleValues(Context context) {
+	         SensorManager mSensorManager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);         
+	         Sensor mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+	         if (mLight != null) {
+	        	 return DayNightMode.values();
+	         } else {
+	        	 return new DayNightMode[] { AUTO, DAY, NIGHT };
+	         }
 		}
 
 	}
@@ -200,6 +246,23 @@ public class OsmandSettings {
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
+	public static final String DAYNIGHT_MODE = "daynight_mode"; //$NON-NLS-1$
+	public static DayNightMode getDayNightMode(SharedPreferences prefs) {
+		String s = prefs.getString(DAYNIGHT_MODE, DayNightMode.AUTO.name());
+		try {
+			return DayNightMode.valueOf(s);
+		} catch (IllegalArgumentException e) {
+			return DayNightMode.AUTO;
+		}
+	}
+
+	public static boolean setDayNightMode(Context ctx, DayNightMode p) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.edit().putString(APPLICATION_MODE, p.name()).commit();
+	}
+		
+	
+	// this value string is synchronized with settings_pref.xml preference name
 	public static final String ROUTER_SERVICE = "router_service"; //$NON-NLS-1$
 
 	public static RouteService getRouterService(SharedPreferences prefs) {
@@ -298,7 +361,7 @@ public class OsmandSettings {
 	public static final String MAP_SCREEN_ORIENTATION = "map_screen_orientation"; //$NON-NLS-1$
 	
 	public static int getMapOrientation(SharedPreferences prefs){
-		return prefs.getInt(MAP_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		return prefs.getInt(MAP_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name

@@ -40,6 +40,7 @@ public class OsmandApplication extends Application {
 	private List<String> startingWarnings;
 	private ProgressDialog progressDlg;
 	private Handler uiHandler;
+	private DayNightHelper daynightHelper;
 	
 	
 	
@@ -48,6 +49,7 @@ public class OsmandApplication extends Application {
     	super.onCreate();
     	routingHelper = new RoutingHelper(OsmandSettings.getApplicationMode(OsmandSettings.getPrefs(OsmandApplication.this)), OsmandApplication.this, player);
     	manager = new ResourceManager(this);
+    	daynightHelper = new DayNightHelper(this);
     	uiHandler = new Handler();
     	startApplication();
 	}
@@ -68,6 +70,10 @@ public class OsmandApplication extends Application {
     
     public ResourceManager getResourceManager() {
 		return manager;
+	}
+    
+    public DayNightHelper getDaynightHelper() {
+		return daynightHelper;
 	}
 	
 	@Override

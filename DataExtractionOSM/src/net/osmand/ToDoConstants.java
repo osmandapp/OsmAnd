@@ -14,7 +14,6 @@ public class ToDoConstants {
 	
 	// 	For 0.5 release
 	//  104. Add activity to show current loaded indexes and information about them
-	//  108. Auto switch at night rendering.
 
 	//   97. For voice navigation consider current speed of vehicle. Especially when speed > 50 pronounce more than 200 m
 	//  112. Investigate exiting/minimizing app (Issue)
@@ -48,6 +47,7 @@ public class ToDoConstants {
 	//  105. Route mode fast/short (Issue)
 	//  109. Update download index activity (introduce select/deselect all, update existing) 
 	//			and make green text for already loaded indexes.
+	//  108. Auto switch at night rendering.
 	
 	// DONE SWING
 

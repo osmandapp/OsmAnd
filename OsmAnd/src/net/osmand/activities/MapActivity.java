@@ -700,6 +700,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		currentLocationProvider = null;
 		routingHelper.setUiActivity(null);
 		
+		((OsmandApplication)getApplication()).getDaynightHelper().onMapPause();
 		
 		OsmandSettings.setLastKnownMapLocation(this, (float) mapView.getLatitude(), (float) mapView.getLongitude());
 		AnimateDraggingMapThread animatedThread = mapView.getAnimatedDraggingThread();
@@ -866,6 +867,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		if(progress != null){
 			((OsmandApplication) getApplication()).getResourceManager().setBusyIndicator(new BusyIndicator(this, progress));
 		}
+		
+		((OsmandApplication)getApplication()).getDaynightHelper().onMapResume();
 	}
 	
 	
