@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
@@ -19,8 +20,16 @@ import net.osmand.R;
 import net.osmand.OsmandSettings.ApplicationMode;
 import net.osmand.activities.RoutingHelper.RouteDirectionInfo;
 import net.osmand.activities.RoutingHelper.TurnType;
+import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryRouteDataReader;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.binary.BinaryRouteDataReader.RouteSegment;
+import net.osmand.binary.BinaryRouteDataReader.RouteSegmentResult;
+import net.osmand.binary.BinaryRouteDataReader.RoutingContext;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.render.MapRenderRepositories;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -36,7 +45,7 @@ public class RouteProvider {
 	private static final org.apache.commons.logging.Log log = LogUtil.getLog(RouteProvider.class);
 	
 	public enum RouteService {
-		CLOUDMADE("CloudMade"), YOURS("YOURS"); //$NON-NLS-1$ //$NON-NLS-2$
+		CLOUDMADE("CloudMade"), YOURS("YOURS"), OSMAND("OsmAnd"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		private final String name;
 		private RouteService(String name){
 			this.name = name;
@@ -200,6 +209,9 @@ public class RouteProvider {
 					addMissingTurnsToRoute(res, start, end, mode, ctx);
 				} else if (type == RouteService.YOURS) {
 					res = findYOURSRoute(start, end, mode, fast);
+					addMissingTurnsToRoute(res, start, end, mode, ctx);
+				} else if (type == RouteService.OSMAND) {
+					res = findVectorMapsRoute(start, end, mode, fast, (OsmandApplication)ctx.getApplicationContext());
 					addMissingTurnsToRoute(res, start, end, mode, ctx);
 				} else {
 					res = findCloudMadeRoute(start, end, mode, ctx, fast);
@@ -477,6 +489,44 @@ public class RouteProvider {
 				
 			}
 		}
+		return new RouteCalculationResult(res, null, start, end, null);
+	}
+	
+	protected RouteCalculationResult findVectorMapsRoute(Location start, LatLon end, ApplicationMode mode, boolean fast, OsmandApplication app) throws IOException {
+		// TODO consider mode, fast/short mode
+		MapRenderRepositories repositories = app.getResourceManager().getRenderer();
+		Collection<BinaryMapIndexReader> data = repositories.getVectorData();
+		BinaryRouteDataReader router = new BinaryRouteDataReader(data.toArray(new BinaryMapIndexReader[data.size()]));
+		RoutingContext ctx = new BinaryRouteDataReader.RoutingContext();
+		RouteSegment st= router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);
+		if (st == null) {
+			return new RouteCalculationResult("Start point is far from allowed road.");
+		}
+		RouteSegment en = router.findRouteSegment(end.getLatitude(), end.getLongitude(), ctx);
+		if (en == null) {
+			return new RouteCalculationResult("End point is far from allowed road.");
+		}
+		List<Location> res = new ArrayList<Location>();
+		List<RouteSegmentResult> result = router.searchRoute(ctx, st, en);
+		for(RouteSegmentResult s : result){
+			boolean plus = s.startPointIndex < s.endPointIndex;
+			int i=s.startPointIndex;
+			while (true) {
+				Location n = new Location(""); //$NON-NLS-1$
+				n.setLatitude(MapUtils.get31LatitudeY(s.object.getPoint31YTile(i)));
+				n.setLongitude(MapUtils.get31LongitudeX(s.object.getPoint31XTile(i)));
+				res.add(n);
+				if (i == s.endPointIndex) {
+					break;
+				}
+				if (plus) {
+					i++;
+				} else {
+					i--;
+				}
+			}
+		}
+		
 		return new RouteCalculationResult(res, null, start, end, null);
 	}
 	

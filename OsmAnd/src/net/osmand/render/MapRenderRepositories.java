@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -116,6 +117,10 @@ public class MapRenderRepositories {
 		return reader;
 	}
 
+	
+	public Collection<BinaryMapIndexReader> getVectorData(){
+		return files.values();
+	}
 	
 	public RotatedTileBox getBitmapLocation() {
 		return bmpLocation;
