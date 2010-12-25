@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.LogUtil;
+import net.osmand.activities.OsmandApplication;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
@@ -272,7 +273,8 @@ public class OsmandRenderer {
 	
 	public Bitmap generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, boolean useEnglishNames, List<IMapDownloaderCallback> notifyList) {
 		long now = System.currentTimeMillis();
-		render = RendererRegistry.getRegistry().getCurrentSelectedRenderer();
+		boolean renderDay = ((OsmandApplication)context.getApplicationContext()).getDaynightHelper().getDayNightRenderer();
+		render = RendererRegistry.getRegistry().getCurrentSelectedRendererForDayNight(renderDay);
 		
 		// fill area
 		Canvas cv = new Canvas(bmp);

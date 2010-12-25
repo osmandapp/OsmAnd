@@ -73,15 +73,23 @@ public class RendererRegistry {
 		}
 		return renderer;
 	}
-	
+
+	public boolean hasDayNightRenderer(String name){
+		return hasRender(name) && hasRender(name + NIGHT_SUFFIX);
+	}
+
 	public BaseOsmandRender getRenderer(String name){
 		if(renderers.containsKey(name)){
 			return renderers.get(name);
 		}
-		if(!externalRenderers.containsKey(name) && !internalRenderers.containsKey(name)){
+		if(!hasRender(name)){
 			return null;
 		}
 		return getRenderer(name, new LinkedHashSet<String>());
+	}
+
+	private boolean hasRender(String name) {
+		return externalRenderers.containsKey(name) || internalRenderers.containsKey(name);
 	}
 	
 	private BaseOsmandRender getRenderer(String name, Set<String> loadedRenderers) {
@@ -151,6 +159,16 @@ public class RendererRegistry {
 	
 	public void setCurrentSelectedRender(BaseOsmandRender currentSelectedRender) {
 		this.currentSelectedRender = currentSelectedRender;
+	}
+
+	public BaseOsmandRender getCurrentSelectedRendererForDayNight(boolean forDay) {
+		BaseOsmandRender local = getCurrentSelectedRenderer();
+		if (forDay && local.isDayRender()) {
+			return local;
+		} else {
+			BaseOsmandRender localNight = getRenderer(local.name + NIGHT_SUFFIX);
+			return localNight != null ? localNight : local;
+		}
 	}
 	
 }

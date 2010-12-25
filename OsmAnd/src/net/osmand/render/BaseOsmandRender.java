@@ -45,6 +45,11 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 	public BaseOsmandRender(){
 	}
 
+	public boolean isDayRender()
+	{
+		return !name.endsWith(RendererRegistry.NIGHT_SUFFIX);
+	}
+	
 	@Override
 	public void rendering(String name, String depends, int defaultColor) {
 		this.name = name;
