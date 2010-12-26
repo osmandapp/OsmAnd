@@ -108,8 +108,8 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		l.setConstraints(label, constr);
 		
 		pathToObfRoutingFile = new JTextField();
-		File file = DataExtractionSettings.getSettings().getDefaultRoutingFile();
-		pathToObfRoutingFile.setText(file == null ? "" : file.getAbsolutePath());
+		
+		pathToObfRoutingFile.setText(DataExtractionSettings.getSettings().getDefaultRoutingFilePath());
 		panel.add(pathToObfRoutingFile);
 		constr = new GridBagConstraints();
 		constr.weightx = 1;
@@ -260,9 +260,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		if(!settings.getMapRenderingTypesFile().equals(renderingTypesFile.getText())){
 			settings.setMapRenderingTypesFile(renderingTypesFile.getText());
 		}
-		File f = settings.getDefaultRoutingFile();
-		String routingFile = f == null ? "" : f.getAbsolutePath();
-		if(!routingFile.equals(pathToObfRoutingFile.getText())){
+		if(!settings.getDefaultRoutingFilePath().equals(pathToObfRoutingFile.getText())){
 			settings.setDefaultRoutingPath(pathToObfRoutingFile.getText());
 		}
 //		if(settings.isSupressWarningsForDuplicatedId() != supressWarning.isSelected()){
