@@ -1,5 +1,8 @@
 package net.osmand;
 
+import static net.osmand.CollatorStringMatcher.ccontains;
+import static net.osmand.CollatorStringMatcher.cstartsWith;
+
 import java.io.IOException;
 import java.text.Collator;
 import java.util.Collection;
@@ -25,16 +28,17 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	private String region;
 	
 	
-	private LinkedHashMap<Long, City> cities = new LinkedHashMap<Long, City>();
-	private Map<String, PostCode> postCodes = new TreeMap<String, PostCode>(Collator.getInstance());
+	private final LinkedHashMap<Long, City> cities = new LinkedHashMap<Long, City>();
+	private final Map<String, PostCode> postCodes;
 	private boolean useEnglishNames = false;
-	private Collator collator;
+	private final Collator collator;
 	
 	public RegionAddressRepositoryBinary(BinaryMapIndexReader file, String name) {
 		this.file = file;
 		this.region = name;
 		this.collator = Collator.getInstance();
-		this.collator.setStrength(Collator.PRIMARY);
+		this.collator.setStrength(Collator.PRIMARY); //ignores also case
+		this.postCodes = new TreeMap<String, PostCode>(collator);
 	}
 	
 	public void close(){
@@ -56,50 +60,16 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		name = name.toLowerCase();
 		int ind = 0;
 		for (Building building : street.getBuildings()) {
-			String bName = useEnglishNames ? building.getEnName() : building.getName();
-			String lowerCase = bName.toLowerCase();
-			if (cstartsWith(lowerCase,name)) { 
+			String bName = useEnglishNames ? building.getEnName() : building.getName(); //lower case not needed, collator ensures that
+			if (cstartsWith(collator,bName,name)) { 
 				buildingsToFill.add(ind, building);
 				ind++;
-			} else if (ccontains(name, lowerCase)) {
+			} else if (ccontains(collator,name,bName)) {
 				buildingsToFill.add(building);
 			}
 		}
 	}
 
-	/**
-	 * check part contains in base
-	 * @return
-	 */
-	private boolean ccontains(String part, String base) {
-		int pos = 0;
-		if(part.length() > 3){
-			// improve searching by searching first 3 characters
-			pos = cindexOf(pos, part.substring(0, 3), base);
-			if(pos == -1){
-				return false;
-			}
-		}
-		pos = cindexOf(pos, part, base);
-		if(pos == -1){
-			return false;
-		}
-		return true;
-	}
-	
-	private int cindexOf(int start, String part, String base){
-		for (int pos = start; pos <= base.length() - part.length(); pos++) {
-			if (collator.equals(base.substring(pos, pos + part.length()), part)) {
-				return pos;
-			}
-		}
-		return -1;
-	}
-		
-	private boolean cstartsWith(String lowerCase, String name) {
-		//simulate starts with for collator
-		return collator.equals(lowerCase.substring(0, Math.min(lowerCase.length(), name.length())), name);
-	}
 
 	private void preloadBuildings(Street street) {
 		if(street.getBuildings().isEmpty()){
@@ -127,19 +97,15 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		} else {
 			int ind = 0;
 			for (Street s : streets) {
-				String sName = useEnglishNames ? s.getEnName() : s.getName();
-				String lowerCase = sName.toLowerCase();
-				if (cstartsWith(lowerCase,name)) {
+				String sName = useEnglishNames ? s.getEnName() : s.getName(); //lower case not needed, collator ensures that
+				if (cstartsWith(collator,sName,name)) {
 					streetsToFill.add(ind, s);
 					ind++;
-				} else if (ccontains(name, lowerCase) || ccontains(lowerCase, name)) {
+				} else if (ccontains(collator,name,sName) || ccontains(collator,sName,name)) {
 					streetsToFill.add(s);
 				}
 			}
 		}
-		
-	
-		
 	}
 
 	private void preloadStreets(MapObject o) {
@@ -187,9 +153,8 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 				} else {
 					name = name.toLowerCase();
 					for (City c : cities.values()) {
-						String cName = useEnglishNames ? c.getEnName() : c.getName();
-						String lowerCase = cName.toLowerCase();
-						if (cstartsWith(lowerCase,name)) {
+						String cName = useEnglishNames ? c.getEnName() : c.getName(); //lower case not needed, collator ensures that
+						if (cstartsWith(collator,cName,name)) {
 							citiesToFill.add(c);
 						}
 					}
@@ -198,23 +163,22 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 				name = name.toLowerCase();
 				Collection<City> src = cities.values();
 				for (City c : src) {
-					String cName = useEnglishNames ? c.getEnName() : c.getName();
-					String lowerCase = cName.toLowerCase();
-					if (cstartsWith(lowerCase,name)) {
+					String cName = useEnglishNames ? c.getEnName() : c.getName(); //lower case not needed, collator ensures that
+					if (cstartsWith(collator,cName,name)) {
 						citiesToFill.add(ind, c);
 						ind++;
-					} else if (ccontains(name, lowerCase)) {
+					} else if (ccontains(collator,name,cName)) {
 						citiesToFill.add(c);
 					}
 				}
 				int initialsize = citiesToFill.size();
 				
-				for(City c : file.getVillages(region, name, useEnglishNames )){
-					String cName = c.getName(useEnglishNames).toLowerCase();
-					if (cName.startsWith(name)) {
+				for(City c : file.getVillages(region, new ContainsStringMatcher(name,collator), useEnglishNames )){
+					String cName = c.getName(useEnglishNames); //lower case not needed, collator ensures that
+					if (cstartsWith(collator,cName,name)) {
 						citiesToFill.add(ind, c);
 						ind++;
-					} else if (ccontains(name, cName)) {
+					} else if (ccontains(collator,name, cName)) {
 						citiesToFill.add(c);
 					}
 				}
@@ -327,9 +291,8 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		preloadStreets(o);
 		Collection<Street> streets = post == null ? city.getStreets() : post.getStreets();
 		for (Street s : streets) {
-			String sName = useEnglishNames ? s.getEnName() : s.getName();
-			String lowerCase = sName.toLowerCase();
-			if (collator.equals(lowerCase,name)) {
+			String sName = useEnglishNames ? s.getEnName() : s.getName(); //lower case not needed, collator ensures that
+			if (collator.equals(sName,name)) {
 				return s;
 			}
 		}
