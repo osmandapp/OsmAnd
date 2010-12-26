@@ -323,7 +323,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		} else {
 			rendererPreference.setValueIndex(0);
 		}
-		updateDayNightAccess(vectorRenderer);
+		updateDayNightAccess(rendererPreference.getValue());
 		
 		int startZoom = 12;
 		int endZoom = 19;
