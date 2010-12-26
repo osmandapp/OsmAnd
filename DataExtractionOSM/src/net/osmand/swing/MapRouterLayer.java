@@ -305,8 +305,8 @@ public class MapRouterLayer implements MapPanelLayer {
 	public List<Way> selfRoute(LatLon start, LatLon end) {
 		List<Way> res = new ArrayList<Way>();
 		long time = System.currentTimeMillis();
-		File file = DataExtractionSettings.getSettings().getDefaultRoutingFile();
-		if(file == null){
+		File[] files = DataExtractionSettings.getSettings().getDefaultRoutingFile();
+		if(files == null){
 			JOptionPane.showMessageDialog(OsmExtractionUI.MAIN_APP.getFrame(), "Please specify obf file in settings", "Obf file not found", 
 					JOptionPane.ERROR_MESSAGE);
 			return null;
@@ -314,10 +314,14 @@ public class MapRouterLayer implements MapPanelLayer {
 		System.out.println("Self made route from " + start + " to " + end);
 		if (start != null && end != null) {
 			try {
+				BinaryMapIndexReader[] rs = new BinaryMapIndexReader[files.length];
+				for(int i=0; i<files.length; i++){
+					RandomAccessFile raf = new RandomAccessFile(files[i], "r"); //$NON-NLS-1$ //$NON-NLS-2$
+					rs[i] = new BinaryMapIndexReader(raf);
+					
+				}
 				
-				RandomAccessFile raf = new RandomAccessFile(file, "r"); //$NON-NLS-1$ //$NON-NLS-2$
-				BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
-				BinaryRouteDataReader router = new BinaryRouteDataReader(reader);
+				BinaryRouteDataReader router = new BinaryRouteDataReader(rs);
 				RoutingContext ctx = new RoutingContext();
 				
 				// find closest way

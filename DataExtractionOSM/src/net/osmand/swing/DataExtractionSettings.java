@@ -42,13 +42,35 @@ public class DataExtractionSettings {
 	}
 	
 	
-	public File getDefaultRoutingFile(){
+	public File[] getDefaultRoutingFile(){
 		String routingFile = preferences.get("routing_file", null);
-		if(routingFile == null || !new File(routingFile).exists()){
+		if(routingFile == null){
 			return null;
 		}
-		return new File(routingFile);
+		String[] files = routingFile.split(",");
+		List<File> fs = new ArrayList<File>();
+		for(String f : files){
+			if(new File(f.trim()).exists()){
+				fs.add(new File(f.trim()));
+			}
+		}
+		
+		return fs.toArray(new File[fs.size()]);
 	}
+	
+    public String getDefaultRoutingFilePath(){
+    	File[] file = getDefaultRoutingFile();
+		String path = "";
+		if (file != null) {
+			for (int i = 0; i < file.length; i++) {
+				if (i > 0) {
+					path += ", ";
+				}
+				path += file[i].getAbsolutePath();
+			}
+		}
+		return path;
+    }
 	
 	public void setDefaultRoutingPath(String path){
 		preferences.put("routing_file", path);

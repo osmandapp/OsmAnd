@@ -73,11 +73,11 @@ public class BinaryRouteDataReader {
 			autoPriorityValues.put("tertiary", 1.0d);
 			autoPriorityValues.put("tertiary_link", 1.0d);
 			autoPriorityValues.put("residential", 0.8d);
-			autoPriorityValues.put("service", 0.5d);
+			autoPriorityValues.put("service", 0.6d);
 			autoPriorityValues.put("unclassified", 0.7d);
 			autoPriorityValues.put("road", 0.7d);
-			autoPriorityValues.put("track", 0.5d);
-			autoPriorityValues.put("path", 0.5d);
+			autoPriorityValues.put("track", 0.2d);
+			autoPriorityValues.put("path", 0.2d);
 			autoPriorityValues.put("living_street", 0.5d);
 		}
 		
@@ -216,6 +216,7 @@ public class BinaryRouteDataReader {
 		RouteSegment next = null;
 		
 		// search context (needed for searching route)
+		// Initially it should be null (!) because it checks was it segment visited before
 		RouteSegment parentRoute = null;
 		int parentSegmentEnd = 0;
 		
@@ -285,7 +286,9 @@ public class BinaryRouteDataReader {
 		for (BinaryMapIndexReader r : map) {
 			r.searchMapIndex(request);
 			for (BinaryMapDataObject o : request.searchResults) {
-				if (ctx.idObjects.containsKey(o.getId())) {
+				BinaryMapDataObject old = ctx.idObjects.get(o.getId());
+				// sometimes way are presented only partially in one index
+				if (old != null && old.getPointsLength() >= o.getPointsLength()) {
 					continue;
 				}
 				ctx.idObjects.put(o.getId(), o);
@@ -338,11 +341,12 @@ public class BinaryRouteDataReader {
 	
 	
 	// TODO write unit tests
+	// TODO add information about turns
 	// TODO think about u-turn
 	// TODO fix roundabout
 	// TODO access
 	// TODO bicycle router (?)
-	// TODO routing between indexes
+	// TODO fastest/shortest way
 	/**
 	 * Calculate route between start.segmentEnd and end.segmentStart (using A* algorithm)
 	 * return list of segments
@@ -381,8 +385,9 @@ public class BinaryRouteDataReader {
 		
 		// because first point of the start is not visited do the same as in cycle but only for one point
 		long ls = (((long) startX) << 31) + (long) startY;
+		loadRoutes(ctx, (startX >> (31 - ZOOM_LOAD_TILES)), (startY >> (31 - ZOOM_LOAD_TILES)));
 		RouteSegment startNbs = ctx.routes.get(ls);
-		while(startNbs != null) {
+		while(startNbs != null) { // startNbs.road.id >> 3, start.road.id >> 3
 			if(startNbs.road.id != start.road.id){
 				startNbs.parentRoute = start;
 				startNbs.parentSegmentEnd = start.segmentStart;
@@ -453,6 +458,8 @@ public class BinaryRouteDataReader {
 				// 2. calculate point and try to load neighbor ways if they are not loaded
 				long l = (((long) road.getPoint31XTile(j)) << 31) + (long) road.getPoint31YTile(j);
 				loadRoutes(ctx, (road.getPoint31XTile(j) >> (31 - ZOOM_LOAD_TILES)), (road.getPoint31YTile(j) >> (31 - ZOOM_LOAD_TILES)));
+				long nt = (road.id << 8l) + segment.segmentStart;
+				visitedSegments.add(nt);
 				
 				// 3. get intersected ways
 				RouteSegment next = ctx.routes.get(l);
@@ -473,9 +480,9 @@ public class BinaryRouteDataReader {
 					
 					// 3.2 calculate possible ways to put into priority queue 
 					while(next != null){
-						long nt = (next.road.id << 8l) + next.segmentStart;
+						long nts = (next.road.id << 8l) + next.segmentStart;
 						/* next.road.id >> 3 != road.id >> 3 - used that line for debug with osm map */
-						if(next.road.id != road.id && !visitedSegments.contains(nt)){
+						if(next.road.id != road.id && !visitedSegments.contains(nts)){
 							int type = -1;
 							for(int i = 0; i< road.getRestrictionCount(); i++){
 								if(road.getRestriction(i) == next.road.id){
@@ -491,10 +498,7 @@ public class BinaryRouteDataReader {
 									type == MapRenderingTypes.RESTRICTION_NO_U_TURN){
 								// next = next.next; continue; 
 							} else {
-								// because no one segment is visited twice (see check before)
-								// put additional information to recover whole route after 
-								next.parentRoute = segment;
-								next.parentSegmentEnd = j;
+								
 								int x = road.getPoint31XTile(j);
 								int y = road.getPoint31YTile(j);
 								
@@ -505,24 +509,38 @@ public class BinaryRouteDataReader {
 									speed = ctx.router.getMinDefaultSpeed();
 								}
 								
-								next.distanceFromStart = segment.distanceFromStart + squareRootDist(x, y, middlex, middley) / speed; 
+								double distanceFromStart = segment.distanceFromStart + squareRootDist(x, y, middlex, middley) / speed; 
 								// calculate turn time 
-								next.distanceFromStart += ctx.router.calculateTurnTime(middley, middlex, x, y, segment, next, j); 
-									
+								distanceFromStart += ctx.router.calculateTurnTime(middley, middlex, x, y, segment, next, j); 
 								// add obstacles time
-								next.distanceFromStart += obstaclesTime;
+								distanceFromStart += obstaclesTime;
 								
 								
-								next.distanceToEnd = squareRootDist(x, y, endX, endY) / ctx.router.getMaxDefaultSpeed();
-								if(type == -1){
-									// case no restriction
-									segmentsToVisitNotForbidden.add(next);
-								} else {
-									// case exclusive restriction (only_right, only_straight, ...)
-									exclusiveRestriction = true;
-									segmentsToVisitNotForbidden.clear();
-									segmentsToVisitPrescricted.add(next);
+								double distanceToEnd = squareRootDist(x, y, endX, endY) / ctx.router.getMaxDefaultSpeed();
+								
+								if(next.parentRoute == null || next.distanceFromStart + next.distanceToEnd > 
+											distanceFromStart + distanceToEnd){
+									next.distanceFromStart = distanceFromStart;
+									next.distanceToEnd = distanceToEnd;
+									if(next.parentRoute != null){
+										// already in queue remove it
+										graphSegments.remove(next);
+									}
+									// put additional information to recover whole route after 
+									next.parentRoute = segment;
+									next.parentSegmentEnd = j;
+									if(type == -1){
+										// case no restriction
+										segmentsToVisitNotForbidden.add(next);
+									} else {
+										// case exclusive restriction (only_right, only_straight, ...)
+										exclusiveRestriction = true;
+										segmentsToVisitNotForbidden.clear();
+										segmentsToVisitPrescricted.add(next);
+									}
 								}
+									
+								
 							}
 						}
 						next = next.next;
@@ -530,13 +548,9 @@ public class BinaryRouteDataReader {
 					
 					// add all allowed route segments to priority queue
 					for(RouteSegment s : segmentsToVisitNotForbidden){
-						long nt = (s.road.id << 8l) + s.segmentStart;
-						visitedSegments.add(nt);
 						graphSegments.add(s);
 					}
 					for(RouteSegment s : segmentsToVisitPrescricted){
-						long nt = (s.road.id << 8l) + s.segmentStart;
-						visitedSegments.add(nt);
 						graphSegments.add(s);
 					}
 				}
@@ -551,6 +565,11 @@ public class BinaryRouteDataReader {
 				end.segmentEnd : end.segmentStart;
 		RouteSegment segment = finalRoute;
 		
+		System.out.println("ROUTE : ");
+		System.out.println("Start lat=" + MapUtils.get31LatitudeY(start.road.getPoint31YTile(start.segmentEnd)) + 
+				" lon=" + MapUtils.get31LongitudeX(start.road.getPoint31XTile(start.segmentEnd)));
+		System.out.println("END lat=" + MapUtils.get31LatitudeY(end.road.getPoint31YTile(end.segmentStart)) + 
+				" lon=" + MapUtils.get31LongitudeX(end.road.getPoint31XTile(end.segmentStart)));
 		while(segment != null){
 			RouteSegmentResult res = new RouteSegmentResult();
 			res.object = segment.road;
@@ -567,6 +586,7 @@ public class BinaryRouteDataReader {
 			}
 			// do not add segments consists from 1 poitn 
 			if(res.startPointIndex != res.endPointIndex) {
+				System.out.println("id="+(res.object.id >> 3) + " start=" + res.startPointIndex + " end=" + res.endPointIndex);
 				result.add(0, res);
 			}
 			res.startPoint = convertPoint(res.object, res.startPointIndex);
