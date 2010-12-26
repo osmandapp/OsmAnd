@@ -95,7 +95,7 @@ public class DayNightHelper implements SensorEventListener {
 				SunriseSunset daynightSwitch = new SunriseSunset(
 						lastKnownLocation.getLatitude(),
 						lastKnownLocation.getLongitude(), new Date(), TimeZone
-								.getDefault().getRawOffset());
+								.getDefault().getRawOffset()/3600000);
 				day = daynightSwitch.isDaytime();
 				log.debug("Sunrise/sunset setting to day: " + day);
 			} catch (IllegalArgumentException e) {
