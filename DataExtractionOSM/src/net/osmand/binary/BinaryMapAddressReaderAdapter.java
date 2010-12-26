@@ -3,6 +3,7 @@ package net.osmand.binary;
 import java.io.IOException;
 import java.util.List;
 
+import net.osmand.StringMatcher;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.PostCode;
@@ -80,7 +81,7 @@ public class BinaryMapAddressReaderAdapter {
 		}
 	}
 	
-	protected void readCities(List<City> cities, String nameContains, boolean useEn) throws IOException {
+	protected void readCities(List<City> cities, StringMatcher matcher, boolean useEn) throws IOException {
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -92,7 +93,7 @@ public class BinaryMapAddressReaderAdapter {
 				int length = codedIS.readRawVarint32();
 				
 				int oldLimit = codedIS.pushLimit(length);
-				if(nameContains != null){
+				if(matcher != null){
 					String name = null;
 					int read = 0;
 					int toRead = useEn ? 3 : 2;
@@ -115,7 +116,7 @@ public class BinaryMapAddressReaderAdapter {
 							break;
 						}
 					}
-					if(name == null || !name.toLowerCase().contains(nameContains)){
+					if(name == null || !matcher.matches(name)){
 						codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 						codedIS.popLimit(oldLimit);
 						break;

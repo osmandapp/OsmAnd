@@ -13,6 +13,7 @@ import java.util.Map;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
+import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.data.City;
@@ -317,14 +318,14 @@ public class BinaryMapIndexReader {
 	public List<City> getVillages(String region) throws IOException {
 		return getVillages(region, null, false);
 	}
-	public List<City> getVillages(String region, String nameContains, boolean useEn) throws IOException {
+	public List<City> getVillages(String region, StringMatcher nameMatcher, boolean useEn) throws IOException {
 		List<City> cities = new ArrayList<City>();
 		AddressRegion r = getRegionByName(region);
 		if(r.villagesOffset != -1){
 			codedIS.seek(r.villagesOffset);
 			int len = readInt();
 			int old = codedIS.pushLimit(len);
-			addressAdapter.readCities(cities, nameContains, useEn);
+			addressAdapter.readCities(cities, nameMatcher, useEn);
 			codedIS.popLimit(old);
 		}
 		return cities;
