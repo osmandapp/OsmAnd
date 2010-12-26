@@ -507,27 +507,30 @@ public class RouteProvider {
 			return new RouteCalculationResult("End point is far from allowed road.");
 		}
 		List<Location> res = new ArrayList<Location>();
-		List<RouteSegmentResult> result = router.searchRoute(ctx, st, en);
-		for(RouteSegmentResult s : result){
-			boolean plus = s.startPointIndex < s.endPointIndex;
-			int i=s.startPointIndex;
-			while (true) {
-				Location n = new Location(""); //$NON-NLS-1$
-				n.setLatitude(MapUtils.get31LatitudeY(s.object.getPoint31YTile(i)));
-				n.setLongitude(MapUtils.get31LongitudeX(s.object.getPoint31XTile(i)));
-				res.add(n);
-				if (i == s.endPointIndex) {
-					break;
-				}
-				if (plus) {
-					i++;
-				} else {
-					i--;
+		try {
+			List<RouteSegmentResult> result = router.searchRoute(ctx, st, en);
+			for (RouteSegmentResult s : result) {
+				boolean plus = s.startPointIndex < s.endPointIndex;
+				int i = s.startPointIndex;
+				while (true) {
+					Location n = new Location(""); //$NON-NLS-1$
+					n.setLatitude(MapUtils.get31LatitudeY(s.object.getPoint31YTile(i)));
+					n.setLongitude(MapUtils.get31LongitudeX(s.object.getPoint31XTile(i)));
+					res.add(n);
+					if (i == s.endPointIndex) {
+						break;
+					}
+					if (plus) {
+						i++;
+					} else {
+						i--;
+					}
 				}
 			}
+			return new RouteCalculationResult(res, null, start, end, null);
+		} catch (OutOfMemoryError e) {
+			return new RouteCalculationResult("No enough memory to calculate route.");
 		}
-		
-		return new RouteCalculationResult(res, null, start, end, null);
 	}
 	
 	
