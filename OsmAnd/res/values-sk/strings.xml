@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+<string name="daynight_mode_day">Denný režim</string>
+<string name="daynight_mode_night">Nočný režim</string>
+<string name="daynight_mode_auto">Východ/západ slnka</string>
+<string name="daynight_mode_sensor">Svetelný senzor</string>
+<string name="daynight_descr">Vybrať ako prepínať medzi denným/nočným režim</string>
+<string name="daynight_none_descr">Vyberte vykresľovač s jeho vlastným nočným režimom</string>
+<string name="daynight">Denný/nočný režim</string>
+
+<string name="download_files_question">Stiahnuť {0} súbor/y/ov ({1} MB)?</string>
 <string name="items_were_selected">Bolo vybraných {0} položiek</string>
 <string name="filter_existing_indexes">Zobraziť stiahnuté</string>
 <string name="deselect_all">Zrušiť výber</string>
 <string name="select_all">Vybrať všetko</string>
 <string name="reload">Znovu načítať</string>
+
 <string name="general_settings_descr">Konfigurácia použitia internetu, otáčania mapy, orientácie obrazovky a iného</string>
 <string name="general_settings">Všeobecné</string>
 <string name="rendering_settings_descr">Konfigurácia zdroja mapy a vzhľadu</string>
@@ -36,7 +46,7 @@
 <string name="use_high_res_maps">Mapa s vysokým rozlíšením</string>
 <string name="use_high_res_maps_descr">Použiť mapu s vysokým rozlíšením pre zariadenia s vysokou hustotou bodov</string>
 <string name="unknown_location">Pozícia nie je zatiaľ známa</string>
-<string name="download_files_question">Stiahnuť {0} súbor/y?</string>
+
 <string name="download_files">Stiahnuť</string>
 <string name="context_menu_item_search_transport">Hľadať prepravu</string>
 <string name="transport_searching_transport">Hľadá sa preprava (bez cieľa)</string>
@@ -287,7 +297,7 @@
 <string name="use_english_names">Použiť anglické názvy</string>
 <string name="app_settings">Nastavenia aplikácie</string>
 <string name="search_address">Hľadať adresu</string>
-<string name="choose_building">Vybrať číslo domu/vchodu</string>
+<string name="choose_building">Vybrať popisné číslo</string>
 <string name="choose_street">Vybrať ulicu</string>
 <string name="choose_city">Vybrať mesto</string>
 <string name="ChooseCountry">Vybrať krajinu</string>
@@ -358,7 +368,7 @@
 <string name="search_address_city">Mesto</string>
 <string name="search_address_street">Ulica</string>
 <string name="search_address_building">Číslo</string>
-<string name="search_address_building_option">Číslo domu/vchodu</string>
+<string name="search_address_building_option">Popisné číslo</string>
 <string name="search_address_street_option">Pretínajúca ulica</string>
 
 <string name="search_tabs_location">Pozícia</string>
