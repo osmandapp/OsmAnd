@@ -21,26 +21,27 @@ import android.location.Location;
 import android.location.LocationManager;
 
 /**
- * Class to help determine if we want to render day or night map
- * - it uses the DayNightMode enumeration for its behavior
- * - it uses the {@link RendererRegistry} to check if the night part is present
- * - it uses the LightSensor and needs calls from MapActivity on onPause and onResume to register/unregister
- *   the sensor listener
- * - it uses the {@link SunriseSunset} and {@link LocationManager} to find out about sunset/sunrise and use it
+ * Class to help determine if we want to render day or night map - it uses the
+ * DayNightMode enumeration for its behavior - it uses the
+ * {@link RendererRegistry} to check if the night part is present - it uses the
+ * LightSensor and needs calls from MapActivity on onPause and onResume to
+ * register/unregister the sensor listener - it uses the {@link SunriseSunset}
+ * and {@link LocationManager} to find out about sunset/sunrise and use it
  * 
- * Note: the usage of SunriseSunset is not optimized in any way, it is recalculated on each demand. If this
- * way it would be resource consuming, some recalculation threshold could be specified to recalculate the sun-rise/set
- * only sometimes.
- * Note2: the light sensor threshold is hard coded to {@link SensorManager#LIGHT_CLOUDY} and could be made customizable
+ * Note: the usage of SunriseSunset is not optimized in any way, it is
+ * recalculated on each demand. If this way it would be resource consuming, some
+ * recalculation threshold could be specified to recalculate the sun-rise/set
+ * only sometimes. Note2: the light sensor threshold is hard coded to
+ * {@link SensorManager#LIGHT_CLOUDY} and could be made customizable
  * 
  * @author pavol.zibrita
  */
 public class DayNightHelper implements SensorEventListener {
 	private static final Log log = LogUtil.getLog(DayNightHelper.class);
-	
-	String currentRenderName = "";
-	boolean daynightcheck = false;
-	boolean sensorcheck = false;
+
+	private String currentRenderName = "";
+	private boolean daynightcheck = false;
+	private boolean sensorcheck = false;
 	private final OsmandApplication osmandApplication;
 
 	public DayNightHelper(OsmandApplication osmandApplication) {
@@ -87,16 +88,23 @@ public class DayNightHelper implements SensorEventListener {
 		// We are in auto mode!
 		if (daynightcheck) {
 			LocationManager locationProvider = (LocationManager) osmandApplication
-					.getSystemService(Context.LOCATION_SERVICE); // Or use
-																	// LocationManager.GPS_PROVIDER
-			Location lastKnownLocation = locationProvider
-					.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-			SunriseSunset daynightSwitch = new SunriseSunset(
-					lastKnownLocation.getLatitude(),
-					lastKnownLocation.getLongitude(), new Date(), TimeZone
-							.getDefault().getRawOffset());
-			day = daynightSwitch.isDaytime();
-			log.debug("Sunrise/sunset setting to day: " + day);
+					.getSystemService(Context.LOCATION_SERVICE);
+			try {
+				Location lastKnownLocation = locationProvider
+						.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+				SunriseSunset daynightSwitch = new SunriseSunset(
+						lastKnownLocation.getLatitude(),
+						lastKnownLocation.getLongitude(), new Date(), TimeZone
+								.getDefault().getRawOffset());
+				day = daynightSwitch.isDaytime();
+				log.debug("Sunrise/sunset setting to day: " + day);
+			} catch (IllegalArgumentException e) {
+				log.warn("Network location provider not available"); //$NON-NLS-1$
+				daynightcheck = false;
+			} catch (SecurityException e) {
+				log.warn("Missing permitions to get actual location!");
+				daynightcheck = false;
+			}
 		}
 		if (sensorcheck) {
 			day = lux > SensorManager.LIGHT_CLOUDY;
