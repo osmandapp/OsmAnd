@@ -8,6 +8,7 @@ import java.text.Collator;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -36,7 +37,13 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	public RegionAddressRepositoryBinary(BinaryMapIndexReader file, String name) {
 		this.file = file;
 		this.region = name;
-		this.collator = Collator.getInstance();
+		//This is hack, as collator seems to be broken for "cs"-Czech country, things like Z-ž don't match, and "cz" fixes this
+		if ("cs".equals(Locale.getDefault().getLanguage())) {
+			this.collator = Collator.getInstance(new Locale("cz", Locale.getDefault().getCountry(),Locale.getDefault().getVariant()));
+		//hack end
+		} else {
+			this.collator = Collator.getInstance();
+		}
 		this.collator.setStrength(Collator.PRIMARY); //ignores also case
 		this.postCodes = new TreeMap<String, PostCode>(collator);
 	}
