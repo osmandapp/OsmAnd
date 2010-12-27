@@ -650,7 +650,16 @@
 		</switch>
 
 
-		'
+		<switch>
+			<case tag="highway" value="service" />
+			<filter>
+				<filter minzoom="15" maxzoom="15" strokeWidth="3" color="#ffffff" shadowColor="#c2c2c2" shadowRadius="1"  />
+				<filter minzoom="16" maxzoom="16" strokeWidth="5" color="#ffffff" shadowColor="#c2c2c2" shadowRadius="1"  />
+				<filter minzoom="17" maxzoom="17" strokeWidth="7" color="#ffffff" shadowColor="#c2c2c2" shadowRadius="1"  />
+				<filter minzoom="18" strokeWidth="10" color="#ffffff" shadowColor="#c2c2c2" shadowRadius="1"  />
+			</filter>
+		</switch>
+		
 		<switch>
 			<case tag="highway" value="motorway" color="#809bc0" color_2="#809bc0" />
 			<case tag="highway" value="motorway_link" color="#809bc0" color_2="#809bc0" />
@@ -694,7 +703,6 @@
 		<switch>
 			<case tag="highway" value="unclassified" color="#ffffff" color_2="#ffffff" shadowColor="#c2c2c2" />
 			<case tag="highway" value="road" color="#ffffff" color_2="#ffffff" shadowColor="#c2c2c2" />
-			<case tag="highway" value="service" color="#ffffff" color_2="#ffffff" shadowColor="#c2c2c2" />
 			<case tag="highway" value="living_street" color="#ffffff" shadowColor="#c2c2c2" color_2="#ffffff" />
 			<case tag="highway" value="residential" color="#ffffff" color_2="#ffffff" shadowColor="#c2c2c2" />
 			<case tag="highway" value="pedestrian" color="#ececec" shadowColor="#b0b0b0" color_2="#ececec" />

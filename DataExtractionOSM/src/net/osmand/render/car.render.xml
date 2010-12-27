@@ -54,27 +54,9 @@
 		</filter>
 
 
-		<filter minzoom="16" maxzoom="16" textSize="9" textColor="#444444" textWrapWidth="16" tag="building" />
-		<filter minzoom="17" maxzoom="17" textSize="11" textColor="#444444" textWrapWidth="16" tag="building" />
-		<filter minzoom="18" textSize="15" textColor="#444444" textWrapWidth="16" tag="building" />
-
-		<filter minzoom="6" maxzoom="8" textSize="8" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
-		<filter minzoom="9" maxzoom="10" textSize="11" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
-		<filter minzoom="11" textSize="14" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
-		<filter minzoom="9" maxzoom="10" textSize="8" textHaloRadius="1" textWrapWidth="20" tag="place" value="town" />
-		<filter minzoom="11" maxzoom="13" textSize="11" textHaloRadius="1" textWrapWidth="20" tag="place" value="town" />
-		<filter minzoom="14" textSize="13" textColor="#777777" textHaloRadius="1" textWrapWidth="20" tag="place" value="town" />
-
-		<filter minzoom="12" maxzoom="14" textSize="9" textHaloRadius="1" tag="place" value="village" />
 		<filter minzoom="15" textSize="13" textColor="#777777" textHaloRadius="1" tag="place" value="village" />
-		<filter minzoom="12" maxzoom="14" textSize="9" textHaloRadius="1" tag="place" value="hamlet" />
 		<filter minzoom="15" textSize="13" textColor="#777777" textHaloRadius="1" tag="place" value="hamlet" />
-		<filter minzoom="12" maxzoom="13" textSize="10" textHaloRadius="1" tag="place" value="suburb" />
-		<filter minzoom="14" textSize="13" textColor="#777777" textHaloRadius="1" tag="place" value="suburb" />
-		<filter minzoom="14" maxzoom="15" textSize="8" textHaloRadius="1" tag="place" value="locality" />
 		<filter minzoom="16" textSize="13" textColor="#777777" textHaloRadius="1" tag="place" value="locality" />
-		<filter minzoom="10" textSize="9" textHaloRadius="1" tag="place" value="island" />
-
 	</text>
 	<line>
 		<switch>
@@ -162,5 +144,18 @@
 
 
 	</line>
-
+	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
+	<point>
+		<filter minzoom="16" icon="traffic_light" tag="highway" value="traffic_signals" /> <!-- Default value: 17 -->		
+		<filter minzoom="16" icon="atm" tag="amenity" value="atm" /> <!-- 17 -->	
+		<filter minzoom="15" icon="shop_bakery" tag="shop" value="bakery" /> <!-- 17 -->
+		<filter minzoom="15" icon="shop_butcher" tag="shop" value="butcher" /> <!-- 17 -->
+		<filter minzoom="15" icon="shop_clothes" tag="shop" value="clothes" /> <!-- 16 -->		
+		<filter minzoom="15" icon="shop_clothes" tag="shop" value="fashion" /> <!-- 16 -->		
+		<filter minzoom="15" icon="shop_convenience" tag="shop" value="convenience" /> <!-- 17 -->
+		<filter minzoom="15" icon="shop_diy" tag="shop" value="electronics" /> <!-- 16 -->			
+		<filter minzoom="15" icon="shop_supermarket" tag="shop" value="general" /> <!-- 16 -->			
+		<filter minzoom="15" icon="shop_supermarket" tag="shop" value="supermarket" /> <!-- 16 -->			
+	</point>		
+		
 </renderer>

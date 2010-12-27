@@ -273,8 +273,11 @@ public class OsmandRenderer {
 	
 	public Bitmap generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, boolean useEnglishNames, List<IMapDownloaderCallback> notifyList) {
 		long now = System.currentTimeMillis();
-		boolean renderDay = ((OsmandApplication)context.getApplicationContext()).getDaynightHelper().getDayNightRenderer();
-		render = RendererRegistry.getRegistry().getCurrentSelectedRendererForDayNight(renderDay);
+		Boolean renderDay = ((OsmandApplication)context.getApplicationContext()).getDaynightHelper().getDayNightRenderer();
+		render = RendererRegistry.getRegistry().getCurrentSelectedRenderer();
+		if(renderDay != null && renderDay.booleanValue() != render.isDayRender()){
+			render = RendererRegistry.getRegistry().getOppositeRendererForDayNight(render);
+		}
 		
 		// fill area
 		Canvas cv = new Canvas(bmp);
