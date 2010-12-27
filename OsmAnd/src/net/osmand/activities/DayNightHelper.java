@@ -38,10 +38,7 @@ import android.location.LocationManager;
  */
 public class DayNightHelper implements SensorEventListener {
 	private static final Log log = LogUtil.getLog(DayNightHelper.class);
-
-	private String currentRenderName = "";
-	private boolean daynightcheck = false;
-	private boolean sensorcheck = false;
+	
 	private final OsmandApplication osmandApplication;
 
 	public DayNightHelper(OsmandApplication osmandApplication) {
@@ -53,64 +50,56 @@ public class DayNightHelper implements SensorEventListener {
 	DayNightMode dayNightMode = DayNightMode.AUTO;
 	private DayNightHelper listener;
 	private float lux = SensorManager.LIGHT_SUNLIGHT;
-
+	
 	public void setDayNightMode(DayNightMode mode) {
 		if (this.dayNightMode != mode) {
 			this.dayNightMode = mode;
-			this.currentRenderName = "";
-			this.daynightcheck = false;
-			this.sensorcheck = false;
 			osmandApplication.getResourceManager().getRenderer().clearCache();
+			unregisterServiceListener();
+			if(dayNightMode.isSensor()){
+				registerServiceListener();
+			}
 		}
-		unregisterServiceListener();
-		registerServiceListener();
 	}
 
-	public boolean getDayNightRenderer() {
-		RendererRegistry registry = RendererRegistry.getRegistry();
-		String name = registry.getCurrentSelectedRenderer().name;
-		boolean day = true;
-		if (!currentRenderName.equals(name)) {
-			currentRenderName = name;
-			if (registry.hasDayNightRenderer(name)) {
-				if (dayNightMode.isDay()) {
-					day = true;
-				} else if (dayNightMode.isNight()) {
-					day = false;
-				} else if (dayNightMode.isAuto()) {
-					daynightcheck = true;
-				} else if (dayNightMode.isSensor()) {
-					sensorcheck = true;
-					registerServiceListener();
-				}
-			}
-		}
-		// We are in auto mode!
-		if (daynightcheck) {
-			LocationManager locationProvider = (LocationManager) osmandApplication
-					.getSystemService(Context.LOCATION_SERVICE);
+	/**
+	 * @return null if could not be determined (in case of error)
+	 */
+	public Boolean getDayNightRenderer() {
+		if (dayNightMode.isDay()) {
+			return Boolean.TRUE;
+		} else if (dayNightMode.isNight()) {
+			return Boolean.FALSE;
+		} else // We are in auto mode!
+		if (dayNightMode.isAuto()) {
 			try {
-				Location lastKnownLocation = locationProvider
-						.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-				SunriseSunset daynightSwitch = new SunriseSunset(
-						lastKnownLocation.getLatitude(),
-						lastKnownLocation.getLongitude(), new Date(), TimeZone
-								.getDefault().getRawOffset()/3600000);
-				day = daynightSwitch.isDaytime();
-				log.debug("Sunrise/sunset setting to day: " + day);
+				LocationManager locationProvider = (LocationManager) osmandApplication.getSystemService(Context.LOCATION_SERVICE);
+				// Or use LocationManager.GPS_PROVIDER
+				Location lastKnownLocation = locationProvider.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+				if(lastKnownLocation == null){
+					return null;
+				}
+				SunriseSunset daynightSwitch = new SunriseSunset(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
+						new Date(), TimeZone.getDefault().getRawOffset());
+				boolean daytime = daynightSwitch.isDaytime();
+				log.debug("Sunrise/sunset setting to day: " + daytime); //$NON-NLS-1$
+				if (daytime) {
+					return Boolean.TRUE;
+				} else {
+					return Boolean.FALSE;
+				}
+
 			} catch (IllegalArgumentException e) {
 				log.warn("Network location provider not available"); //$NON-NLS-1$
-				daynightcheck = false;
 			} catch (SecurityException e) {
-				log.warn("Missing permitions to get actual location!");
-				daynightcheck = false;
+				log.warn("Missing permitions to get actual location!"); //$NON-NLS-1$
 			}
+			return null;
+		} else if (dayNightMode.isSensor()) {
+			log.debug("lux value:" + lux + " setting to day: " + (lux > SensorManager.LIGHT_CLOUDY)); //$NON-NLS-1$ //$NON-NLS-2$
+			return lux > SensorManager.LIGHT_CLOUDY ? Boolean.TRUE : Boolean.FALSE;
 		}
-		if (sensorcheck) {
-			day = lux > SensorManager.LIGHT_CLOUDY;
-			log.debug("lux value:" + lux + " setting to day: " + day);
-		}
-		return day;
+		return null;
 	}
 
 	public void onMapPause() {
@@ -132,12 +121,11 @@ public class DayNightHelper implements SensorEventListener {
 	}
 
 	private void registerServiceListener() {
-		if (dayNightMode.isSensor() && sensorcheck) {
-			SensorManager mSensorManager = (SensorManager) osmandApplication
-					.getSystemService(Context.SENSOR_SERVICE);
+		if (listener == null && dayNightMode.isSensor()) {
+			SensorManager mSensorManager = (SensorManager) osmandApplication.getSystemService(Context.SENSOR_SERVICE);
 			Sensor mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 			List<Sensor> list = mSensorManager.getSensorList(Sensor.TYPE_LIGHT);
-			log.info("Light sensors:" + list.size());
+			log.info("Light sensors:" + list.size()); //$NON-NLS-1$
 			mSensorManager.registerListener(this, mLight,
 					SensorManager.SENSOR_DELAY_NORMAL);
 			listener = this;

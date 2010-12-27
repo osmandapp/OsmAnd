@@ -161,14 +161,20 @@ public class RendererRegistry {
 		this.currentSelectedRender = currentSelectedRender;
 	}
 
-	public BaseOsmandRender getCurrentSelectedRendererForDayNight(boolean forDay) {
-		BaseOsmandRender local = getCurrentSelectedRenderer();
-		if (forDay && local.isDayRender()) {
-			return local;
+	/**
+	 * @return opposite renderer if exists otherwise return input
+	 */
+	public BaseOsmandRender getOppositeRendererForDayNight(BaseOsmandRender base) {
+		String oppositeName;
+		if(base.name.endsWith(NIGHT_SUFFIX)){
+			oppositeName = base.name.substring(0, base.name.length() - NIGHT_SUFFIX.length());
 		} else {
-			BaseOsmandRender localNight = getRenderer(local.name + NIGHT_SUFFIX);
-			return localNight != null ? localNight : local;
+			oppositeName = base.name + NIGHT_SUFFIX;
 		}
+		
+		BaseOsmandRender opposite = getRenderer(oppositeName);
+		return opposite != null ? opposite : base;
 	}
+
 	
 }
