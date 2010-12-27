@@ -111,7 +111,7 @@
 			<case tag="highway" value="unclassified" color="#0f0a35" shadowColor="#1e146c" color_2="#0f0a35" />
 			<case tag="highway" value="road" color="#0f0a35" shadowColor="#1e146c" color_2="#0f0a35" />
 			<case tag="highway" value="living_street" color="#0f0a35" shadowColor="#1e146c" color_2="#0f0a35" />
-			<case tag="highway" value="pedestrian" color="#ececec" shadowColor="#b0b0b0" color_2="#ececec"/>
+			<case tag="highway" value="pedestrian" color_2="#171717" color="#171717" shadowColor="#b0b0b0" />
 			<filter shadowRadius="1">
 				<switch>
 					<case layer="-1" pathEffect="4_4" />
