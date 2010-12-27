@@ -8,7 +8,6 @@ import net.osmand.LogUtil;
 import net.osmand.OsmandSettings;
 import net.osmand.OsmandSettings.DayNightMode;
 import net.osmand.SunriseSunset;
-import net.osmand.render.RendererRegistry;
 
 import org.apache.commons.logging.Log;
 
@@ -22,16 +21,17 @@ import android.location.LocationManager;
 
 /**
  * Class to help determine if we want to render day or night map - it uses the
- * DayNightMode enumeration for its behavior - it uses the
- * {@link RendererRegistry} to check if the night part is present - it uses the
- * LightSensor and needs calls from MapActivity on onPause and onResume to
- * register/unregister the sensor listener - it uses the {@link SunriseSunset}
- * and {@link LocationManager} to find out about sunset/sunrise and use it
+ * DayNightMode enumeration for its behavior<BR> 
+ * - it uses the LightSensor and needs calls from MapActivity on onPause and onResume to
+ * register/unregister the sensor listener<BR>
+ * - it uses the {@link SunriseSunset} and {@link LocationManager} to find 
+ * out about sunset/sunrise and use it
  * 
  * Note: the usage of SunriseSunset is not optimized in any way, it is
  * recalculated on each demand. If this way it would be resource consuming, some
  * recalculation threshold could be specified to recalculate the sun-rise/set
- * only sometimes. Note2: the light sensor threshold is hard coded to
+ * only sometimes.<BR>
+ * Note2: the light sensor threshold is hard coded to
  * {@link SensorManager#LIGHT_CLOUDY} and could be made customizable
  * 
  * @author pavol.zibrita
@@ -80,7 +80,7 @@ public class DayNightHelper implements SensorEventListener {
 					return null;
 				}
 				SunriseSunset daynightSwitch = new SunriseSunset(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
-						new Date(), TimeZone.getDefault().getRawOffset());
+						new Date(), TimeZone.getDefault().getRawOffset()/3600000);
 				boolean daytime = daynightSwitch.isDaytime();
 				log.debug("Sunrise/sunset setting to day: " + daytime); //$NON-NLS-1$
 				if (daytime) {
