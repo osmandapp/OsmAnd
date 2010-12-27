@@ -74,10 +74,10 @@ public class BinaryRouteDataReader {
 			autoPriorityValues.put("tertiary_link", 1.0d);
 			autoPriorityValues.put("residential", 0.8d);
 			autoPriorityValues.put("service", 0.6d);
-			autoPriorityValues.put("unclassified", 0.7d);
-			autoPriorityValues.put("road", 0.7d);
-			autoPriorityValues.put("track", 0.2d);
-			autoPriorityValues.put("path", 0.2d);
+			autoPriorityValues.put("unclassified", 0.4d);
+			autoPriorityValues.put("road", 0.4d);
+			autoPriorityValues.put("track", 0.1d);
+			autoPriorityValues.put("path", 0.1d);
 			autoPriorityValues.put("living_street", 0.5d);
 		}
 		
