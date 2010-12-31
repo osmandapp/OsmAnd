@@ -49,12 +49,12 @@ public class BinaryMapAddressReaderAdapter {
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
+				if(region.enName == null || region.enName.length() == 0){
+					region.enName = Junidecode.unidecode(region.name);
+				}
 				return;
 			case OsmandOdb.OsmAndAddressIndex.NAME_FIELD_NUMBER :
 				region.name = codedIS.readString();
-				if(region.enName == null){
-					region.enName = Junidecode.unidecode(region.name);
-				}
 				break;
 			case OsmandOdb.OsmAndAddressIndex.NAME_EN_FIELD_NUMBER :
 				region.enName = codedIS.readString();
@@ -198,6 +198,9 @@ public class BinaryMapAddressReaderAdapter {
 			switch (tag) {
 			case 0:
 				c.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
+				if(c.getEnName().length() == 0){
+					c.setEnName(Junidecode.unidecode(c.getName()));
+				}
 				return c;
 			case OsmandOdb.CityIndex.CITY_TYPE_FIELD_NUMBER :
 				int type = codedIS.readUInt32();
@@ -214,9 +217,6 @@ public class BinaryMapAddressReaderAdapter {
 				break;
 			case OsmandOdb.CityIndex.NAME_FIELD_NUMBER :
 				c.setName(codedIS.readString());
-				if(c.getEnName().length() == 0){
-					c.setEnName(Junidecode.unidecode(c.getName()));
-				}
 				break;
 			case OsmandOdb.CityIndex.X_FIELD_NUMBER :
 				x = codedIS.readFixed32();
@@ -261,6 +261,9 @@ public class BinaryMapAddressReaderAdapter {
 				if(loadLocation){
 					s.setLocation(MapUtils.getLatitudeFromTile(24, y), MapUtils.getLongitudeFromTile(24, x));
 				}
+				if(s.getEnName().length() == 0){
+					s.setEnName(Junidecode.unidecode(s.getName()));
+				}
 				return s;
 			case OsmandOdb.StreetIndex.ID_FIELD_NUMBER :
 				s.setId(codedIS.readUInt64());
@@ -270,9 +273,6 @@ public class BinaryMapAddressReaderAdapter {
 				break;
 			case OsmandOdb.StreetIndex.NAME_FIELD_NUMBER :
 				s.setName(codedIS.readString());
-				if(s.getEnName().length() == 0){
-					s.setEnName(Junidecode.unidecode(s.getName()));
-				}
 				break;
 			case OsmandOdb.StreetIndex.X_FIELD_NUMBER :
 				int sx = codedIS.readSInt32();
@@ -322,6 +322,9 @@ public class BinaryMapAddressReaderAdapter {
 			switch (tag) {
 			case 0:
 				b.setLocation(MapUtils.getLatitudeFromTile(24, y), MapUtils.getLongitudeFromTile(24, x));
+				if(b.getEnName().length() == 0){
+					b.setEnName(Junidecode.unidecode(b.getName()));
+				}
 				return b;
 			case OsmandOdb.BuildingIndex.ID_FIELD_NUMBER :
 				b.setId(codedIS.readUInt64());
@@ -331,9 +334,6 @@ public class BinaryMapAddressReaderAdapter {
 				break;
 			case OsmandOdb.BuildingIndex.NAME_FIELD_NUMBER :
 				b.setName(codedIS.readString());
-				if(b.getEnName().length() == 0){
-					b.setEnName(Junidecode.unidecode(b.getName()));
-				}
 				break;
 			case OsmandOdb.BuildingIndex.X_FIELD_NUMBER :
 				x =  codedIS.readSInt32() + street24X;
