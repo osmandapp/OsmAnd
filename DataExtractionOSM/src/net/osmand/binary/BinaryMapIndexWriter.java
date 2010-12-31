@@ -405,7 +405,7 @@ public class BinaryMapIndexWriter {
 	}
 	
 	private boolean checkEnNameToWrite(MapObject obj){
-		if(obj.getEnName() == null){
+		if(obj.getEnName() == null || obj.getEnName().length() == 0){
 			return false;
 		}
 		return !obj.getEnName().equals(Junidecode.unidecode(obj.getName()));
