@@ -47,7 +47,7 @@ public class PointNavigationLayer implements OsmandMapLayer {
 
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, boolean nightMode) {
 		if(pointToNavigate == null){
 			return;
 		}

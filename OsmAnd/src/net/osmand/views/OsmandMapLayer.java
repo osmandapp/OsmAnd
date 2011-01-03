@@ -9,7 +9,7 @@ public interface OsmandMapLayer {
 	
 	public void initLayer(OsmandMapTileView view);
 	
-	public void onDraw(Canvas canvas, RectF latlonRect);
+	public void onDraw(Canvas canvas, RectF latlonRect, boolean nightMode);
 	
 	public void destroyLayer();
 	

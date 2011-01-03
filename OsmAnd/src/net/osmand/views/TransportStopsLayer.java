@@ -80,28 +80,27 @@ public class TransportStopsLayer implements OsmandMapLayer, ContextMenuLayer.ICo
 
 	private String getStopDescription(TransportStop n, boolean useName) {
 		StringBuilder text = new StringBuilder(250);
-		text.append(view.getContext().getString(R.string.transport_Stop)).append(" : ").append(n.getName(OsmandSettings.usingEnglishNames(view.getSettings()))); //$NON-NLS-1$
-		text.append("\n").append(view.getContext().getString(R.string.transport_Routes)).append(" : ");  //$NON-NLS-1$ //$NON-NLS-2$
-		List<TransportIndexRepository> reps = view.getApplication().getResourceManager().searchTransportRepositories(n.getLocation().getLatitude(), n.getLocation().getLongitude());
-		
-		TransportIndexRepository tir = null;
-		for(TransportIndexRepository t : reps){
-			if(t.acceptTransportStop(n)){
-				tir = t;
-				break;
-			}
-		}
-		if(tir != null){
-			List<String> l;
-			if(!useName){
-				l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0}"); //$NON-NLS-1$
-			} else if(OsmandSettings.usingEnglishNames(view.getSettings())){
-				 l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0} - {3}"); //$NON-NLS-1$
-			} else {
-				l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0} - {2}"); //$NON-NLS-1$
-			}
-			for(String s : l){
-				text.append("\n").append(s); //$NON-NLS-1$
+		text.append(view.getContext().getString(R.string.transport_Stop))
+				.append(" : ").append(n.getName(OsmandSettings.usingEnglishNames(view.getSettings()))); //$NON-NLS-1$
+		text.append("\n").append(view.getContext().getString(R.string.transport_Routes)).append(" : "); //$NON-NLS-1$ //$NON-NLS-2$
+		List<TransportIndexRepository> reps = view.getApplication().getResourceManager().searchTransportRepositories(
+				n.getLocation().getLatitude(), n.getLocation().getLongitude());
+
+		for (TransportIndexRepository t : reps) {
+			if (t.acceptTransportStop(n)) {
+				List<String> l;
+				if (!useName) {
+					l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0}"); //$NON-NLS-1$
+				} else if (OsmandSettings.usingEnglishNames(view.getSettings())) {
+					l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0} - {3}"); //$NON-NLS-1$
+				} else {
+					l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0} - {2}"); //$NON-NLS-1$
+				}
+				if (l != null) {
+					for (String s : l) {
+						text.append("\n").append(s); //$NON-NLS-1$
+					}
+				}
 			}
 		}
 		return text.toString();
@@ -123,7 +122,7 @@ public class TransportStopsLayer implements OsmandMapLayer, ContextMenuLayer.ICo
 
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, boolean nightMode) {
 		if (view.getZoom() >= startZoom) {
 			objects.clear();
 			view.getApplication().getResourceManager().searchTransportAsync(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, view.getZoom(), objects);
