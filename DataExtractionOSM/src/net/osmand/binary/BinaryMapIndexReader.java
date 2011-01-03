@@ -663,7 +663,6 @@ public class BinaryMapIndexReader {
 			case OsmandOdb.MapTree.BASEID_FIELD_NUMBER :
 			case OsmandOdb.MapTree.OLDBASEID_FIELD_NUMBER :
 				long baseId = codedIS.readUInt64();
-
 				if (lastIndexResult != -1) {
 					for (int i = lastIndexResult; i < req.searchResults.size(); i++) {
 						BinaryMapDataObject rs = req.searchResults.get(i);
@@ -1042,11 +1041,6 @@ public class BinaryMapIndexReader {
 		int right = 0;
 		int top = 0;
 		int bottom = 0;
-		
-		long baseId = 0;
-		
-		List<String> stringTable = null;
-		List<MapTree> subTrees = null;
 		
 	}
 
