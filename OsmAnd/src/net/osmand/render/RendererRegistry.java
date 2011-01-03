@@ -74,10 +74,6 @@ public class RendererRegistry {
 		return renderer;
 	}
 
-	public boolean hasDayNightRenderer(String name){
-		return hasRender(name) && hasRender(name + NIGHT_SUFFIX);
-	}
-
 	public BaseOsmandRender getRenderer(String name){
 		if(renderers.containsKey(name)){
 			return renderers.get(name);
@@ -166,10 +162,10 @@ public class RendererRegistry {
 	 */
 	public BaseOsmandRender getOppositeRendererForDayNight(BaseOsmandRender base) {
 		String oppositeName;
-		if(base.name.endsWith(NIGHT_SUFFIX)){
-			oppositeName = base.name.substring(0, base.name.length() - NIGHT_SUFFIX.length());
-		} else {
+		if (base.isDayRender()) {
 			oppositeName = base.name + NIGHT_SUFFIX;
+		} else {
+			oppositeName = base.name.substring(0, base.name.length() - NIGHT_SUFFIX.length());
 		}
 		
 		BaseOsmandRender opposite = getRenderer(oppositeName);

@@ -50,6 +50,9 @@ public class DayNightHelper implements SensorEventListener {
 	DayNightMode dayNightMode = DayNightMode.AUTO;
 	private DayNightHelper listener;
 	private float lux = SensorManager.LIGHT_SUNLIGHT;
+
+	private long lastAutoCall = 0;
+	private Boolean lastAutoValue = null;
 	
 	public void setDayNightMode(DayNightMode mode) {
 		if (this.dayNightMode != mode) {
@@ -73,29 +76,34 @@ public class DayNightHelper implements SensorEventListener {
 			return Boolean.FALSE;
 		} else // We are in auto mode!
 		if (dayNightMode.isAuto()) {
-			try {
-				LocationManager locationProvider = (LocationManager) osmandApplication.getSystemService(Context.LOCATION_SERVICE);
-				// Or use LocationManager.GPS_PROVIDER
-				Location lastKnownLocation = locationProvider.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-				if(lastKnownLocation == null){
-					return null;
+			long currentTime = System.currentTimeMillis();
+			//allow recalculation each 5 seconds
+			if (currentTime - lastAutoCall > 5000) {
+				lastAutoCall = System.currentTimeMillis();
+				try {
+					LocationManager locationProvider = (LocationManager) osmandApplication.getSystemService(Context.LOCATION_SERVICE);
+					// Or use LocationManager.GPS_PROVIDER
+					Location lastKnownLocation = locationProvider.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+					if(lastKnownLocation == null){
+						return null;
+					}
+					double longitude = lastKnownLocation.getLongitude();
+					Date actualTime = new Date();
+					SunriseSunset daynightSwitch = new SunriseSunset(lastKnownLocation.getLatitude(), longitude < 0 ? 360 - longitude : longitude ,
+							actualTime, TimeZone.getDefault().getOffset(actualTime.getTime())/3600000);
+					boolean daytime = daynightSwitch.isDaytime();
+					log.debug("Sunrise/sunset setting to day: " + daytime); //$NON-NLS-1$
+					lastAutoValue = Boolean.valueOf(daytime);
+					return lastAutoValue;
+				} catch (IllegalArgumentException e) {
+					log.warn("Network location provider not available"); //$NON-NLS-1$
+				} catch (SecurityException e) {
+					log.warn("Missing permitions to get actual location!"); //$NON-NLS-1$
 				}
-				SunriseSunset daynightSwitch = new SunriseSunset(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
-						new Date(), TimeZone.getDefault().getRawOffset()/3600000);
-				boolean daytime = daynightSwitch.isDaytime();
-				log.debug("Sunrise/sunset setting to day: " + daytime); //$NON-NLS-1$
-				if (daytime) {
-					return Boolean.TRUE;
-				} else {
-					return Boolean.FALSE;
-				}
-
-			} catch (IllegalArgumentException e) {
-				log.warn("Network location provider not available"); //$NON-NLS-1$
-			} catch (SecurityException e) {
-				log.warn("Missing permitions to get actual location!"); //$NON-NLS-1$
+				return null;
+			} else {
+				return lastAutoValue;
 			}
-			return null;
 		} else if (dayNightMode.isSensor()) {
 			log.debug("lux value:" + lux + " setting to day: " + (lux > SensorManager.LIGHT_CLOUDY)); //$NON-NLS-1$ //$NON-NLS-2$
 			return lux > SensorManager.LIGHT_CLOUDY ? Boolean.TRUE : Boolean.FALSE;

@@ -5,7 +5,6 @@
 	<string name="daynight_mode_auto">Sunrise/Sunset</string>
 	<string name="daynight_mode_sensor">Light sensor</string>
 	<string name="daynight_descr">Choose day/night mode switching rule</string>
-	<string name="daynight_none_descr">Select renderer with night counterpart</string>
 	<string name="daynight">Day/night mode</string>
 
 	<string name="download_files_question">Download {0} files ({1} MB)?</string>
