@@ -59,7 +59,7 @@ public class TransportInfoLayer implements OsmandMapLayer {
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, boolean nightMode) {
 		if(routeHelper.routeIsCalculated() && visible){
 			List<RouteInfoLocation> list = routeHelper.getRoute();
 			for(RouteInfoLocation l : list){

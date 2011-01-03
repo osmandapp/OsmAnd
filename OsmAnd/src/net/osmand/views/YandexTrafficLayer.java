@@ -218,7 +218,7 @@ public class YandexTrafficLayer implements OsmandMapLayer {
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, boolean nightMode) {
 		if (visible) {
 			pixRect.set(0, 0, view.getWidth(), view.getHeight());
 			float tileY = (float) MapUtils.getTileEllipsoidNumberY(view.getZoom(), view.getLatitude());

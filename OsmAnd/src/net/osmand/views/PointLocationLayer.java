@@ -82,7 +82,7 @@ public class PointLocationLayer implements OsmandMapLayer {
 	}
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, boolean nightMode) {
 		if (isLocationVisible(lastKnownLocation)) {
 			int locationX = view.getMapXForPoint(lastKnownLocation.getLongitude());
 			int locationY = view.getMapYForPoint(lastKnownLocation.getLatitude());

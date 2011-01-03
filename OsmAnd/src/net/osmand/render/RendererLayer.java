@@ -52,7 +52,7 @@ public class RendererLayer implements OsmandMapLayer {
 	
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, boolean nightMode) {
 		if (view.getZoom() >= startZoom && visible) {
 			if (!view.isZooming()){
 				pixRect.set(0, 0, view.getWidth(), view.getHeight());

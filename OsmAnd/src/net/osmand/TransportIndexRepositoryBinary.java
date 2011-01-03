@@ -85,17 +85,20 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 	 * @param stop
 	 * @param format
 	 *            0} - ref, {1} - type, {2} - name, {3} - name_en
-	 * @return
+	 * @return null if something goes wrong
 	 */
 	public List<String> getRouteDescriptionsForStop(TransportStop stop, String format) {
 		assert acceptTransportStop(stop);
 		long now = System.currentTimeMillis();
-		List<String> res = new ArrayList<String>();
+		
 		MessageFormat f = new MessageFormat(format);
-
+		List<String> res = new ArrayList<String>();
 		for(int r : stop.getReferencesToRoutes()) {
 			try {
 				TransportRoute route = file.getTransportRoute(r);
+				if(route == null){
+					return null;
+				}
 				res.add(f.format(new String[] { route.getRef()+"", route.getType()+"", route.getName()+"", route.getEnName()+""})); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			} catch (IOException e) {
 				log.error("Disk error ", e); //$NON-NLS-1$

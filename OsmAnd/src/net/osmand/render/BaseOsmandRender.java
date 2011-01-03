@@ -42,11 +42,10 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 		log.info("Init render " + name + " for " + (System.currentTimeMillis() - time) + " ms");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 	}
 	
-	public BaseOsmandRender(){
+	public BaseOsmandRender() {
 	}
 
-	public boolean isDayRender()
-	{
+	public boolean isDayRender() {
 		return !name.endsWith(RendererRegistry.NIGHT_SUFFIX);
 	}
 	
