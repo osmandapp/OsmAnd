@@ -5,7 +5,6 @@
 <string name="daynight_mode_auto">Východ/západ slnka</string>
 <string name="daynight_mode_sensor">Svetelný senzor</string>
 <string name="daynight_descr">Vybrať ako prepínať medzi denným/nočným režim</string>
-<string name="daynight_none_descr">Vyberte vykresľovač s jeho vlastným nočným režimom</string>
 <string name="daynight">Denný/nočný režim</string>
 
 <string name="download_files_question">Stiahnuť {0} súbor/y/ov ({1} MB)?</string>

@@ -323,7 +323,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		} else {
 			rendererPreference.setValueIndex(0);
 		}
-		updateDayNightAccess(rendererPreference.getValue());
 		
 		int startZoom = 12;
 		int endZoom = 19;
@@ -492,7 +491,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				Toast.makeText(this, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 			} else {
 				RendererRegistry.getRegistry().setCurrentSelectedRender(loaded);
-				updateDayNightAccess(newValue);
 				edit.putString(OsmandSettings.RENDERER, (String) newValue);
 				Toast.makeText(this, R.string.renderer_load_sucess, Toast.LENGTH_SHORT).show();
 				((OsmandApplication)getApplication()).getResourceManager().getRenderer().clearCache();
@@ -527,16 +525,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		return true;
 	}
 
-	private void updateDayNightAccess(Object newValue) {
-		if (newValue != null && RendererRegistry.getRegistry().hasDayNightRenderer((String)newValue)) {
-			daynightMode.setSummary(R.string.daynight_descr);
-			daynightMode.setEnabled(true);
-		} else {
-			daynightMode.setSummary(R.string.daynight_none_descr);
-			daynightMode.setEnabled(false);
-		}
-	}
-	
 	public void reloadIndexes(){
 		progressDlg = ProgressDialog.show(this, getString(R.string.loading_data), getString(R.string.reading_indexes), true);
 		final ProgressDialogImplementation impl = new ProgressDialogImplementation(progressDlg);

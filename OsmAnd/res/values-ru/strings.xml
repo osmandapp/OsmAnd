@@ -5,7 +5,6 @@
 	<string name="daynight_mode_auto">Восход/закат</string>
 	<string name="daynight_mode_sensor">Датчик освещенности</string>
 	<string name="daynight_descr">Выберите режим переключения дневного/ночного вида карты</string>
-	<string name="daynight_none_descr">Выберите стиль рендеринга с ночным и дневным режимом</string>
 	<string name="daynight">Дневной/ночной режим</string>
 
 	<string name="download_files_question">Загрузить {0} файл(ов) ({1} MB)?</string>

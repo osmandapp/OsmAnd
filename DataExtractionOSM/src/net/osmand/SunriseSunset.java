@@ -244,6 +244,7 @@ public class SunriseSunset
 	private	double	dfV0, dfV1, dfV2;		// SUNUP.BAS V0, V1, V2
 	
 	private TimeZone tz = TimeZone.getTimeZone( "GMT" );
+	private double origTimeZone;
 	
 	
 /******************************************************************************
@@ -265,6 +266,7 @@ public class SunriseSunset
 		dfLon 		= dfLonIn;
 		dateInput 	= dateInputIn;
 		dfTimeZone 	= dfTimeZoneIn;
+		origTimeZone 	= dfTimeZoneIn;
 		
 		// Call the method to do the calculations.
 		doCalculations();
@@ -607,7 +609,7 @@ public class SunriseSunset
 										+ " " + iYear 
 										+ " " + (int)dfHourRise
 										+ ":" + (int)dfMinRise 
-										+ " GMT" );
+										+ " GMT+"+origTimeZone );
 			}
 		
 			// Load dateSunset with data
@@ -618,7 +620,7 @@ public class SunriseSunset
 										+ " " + iYear 
 										+ " " + (int)dfHourSet
 										+ ":" + (int)dfMinSet 
-										+ " GMT" );
+										+ " GMT+"+origTimeZone );
 			}
 		} // end of try
 
