@@ -532,7 +532,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	    				}
 	    			}
 	    		}
-				if (location.hasBearing() && currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING && !mapView.mapIsAnimating()) {
+				if (location.hasBearing() && currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
 					mapView.setRotate(-location.getBearing());
 				}
 				mapView.setLatLon(location.getLatitude(), location.getLongitude());
