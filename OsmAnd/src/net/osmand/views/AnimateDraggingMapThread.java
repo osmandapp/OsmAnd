@@ -1,6 +1,10 @@
 package net.osmand.views;
 
+import net.osmand.LogUtil;
 import net.osmand.osm.MapUtils;
+
+import org.apache.commons.logging.Log;
+
 import android.util.FloatMath;
 
 /**
@@ -8,6 +12,9 @@ import android.util.FloatMath;
  * Defines accelerator to stop dragging screen. 
  */
 public class AnimateDraggingMapThread implements Runnable {
+	
+	protected static final Log log = LogUtil.getLog(AnimateDraggingMapThread.class);
+	
 	public interface AnimateDraggingCallback {
 		
 		public void dragTo(float curX, float curY, float newX, float newY, boolean notify);
@@ -16,6 +23,9 @@ public class AnimateDraggingMapThread implements Runnable {
 		
 		public void zoomTo(float zoom, boolean notify);
 		
+		public void rotateTo(float rotate);
+		
+		public float getRotate();
 		
 	}
 	
@@ -55,6 +65,7 @@ public class AnimateDraggingMapThread implements Runnable {
 	private double targetLatitude = 0;
 	private double targetLongitude = 0;
 	private int targetZoom = 0;
+	private float targetRotate = 0;
 	
 	@Override
 	public void run() {
@@ -133,6 +144,24 @@ public class AnimateDraggingMapThread implements Runnable {
 						if(curX == moveX && curY == moveY){
 							phaseOfMoving ++;
 							callback.setLatLon(moveLat, moveLon, notifyListener);
+						}
+					}
+				}
+				//do not rotate when animating
+				if (!conditionToCountinue) {
+					float rotationDiff = targetRotate-callback.getRotate();
+					if (Math.abs((rotationDiff+360)%360) < Math.abs((rotationDiff-360)%360)) {
+						rotationDiff = (rotationDiff+360)%360;
+					} else {
+						rotationDiff = (rotationDiff-360)%360;
+					}
+					float absDiff = Math.abs(rotationDiff);
+					if (absDiff > 0) {
+						if (absDiff < 2) {
+							callback.rotateTo(targetRotate);
+						} else {
+							conditionToCountinue = true;
+							callback.rotateTo(((absDiff/10)*Math.signum(rotationDiff) + callback.getRotate())%360);
 						}
 					}
 				}
@@ -267,6 +296,18 @@ public class AnimateDraggingMapThread implements Runnable {
 		stopped = false;
 		Thread thread = new Thread(this,"Animatable dragging"); //$NON-NLS-1$
 		thread.start();
+	}
+	
+	public void startRotate(float rotate)
+	{
+		this.targetRotate = rotate;
+		if (!isAnimating()) {
+			stopped = false;
+			//do we need to kill and recreate the thread? wait would be enough as now it
+			//also handles the rotation?
+			Thread thread = new Thread(this,"Animatable dragging"); //$NON-NLS-1$
+			thread.start();			
+		}
 	}
 	
 	public int getTargetZoom() {

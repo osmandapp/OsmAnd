@@ -950,10 +950,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		if(currentScreenOrientation == 1){
 			val += 90;
 		}
-		if (currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS && !mapView.mapIsAnimating()) {
-			if(Math.abs(mapView.getRotate() + val) > 10){
-				mapView.setRotate(-val);
-			}
+		if (currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS) {
+			mapView.setRotate(-val);
 		}
 		if(currentShowingAngle){
 			if(locationLayer.getHeading() == null || Math.abs(locationLayer.getHeading() - val) > 10){
