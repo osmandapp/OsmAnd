@@ -147,24 +147,6 @@ public class AnimateDraggingMapThread implements Runnable {
 						}
 					}
 				}
-				//do not rotate when animating
-				if (!conditionToCountinue) {
-					float rotationDiff = targetRotate-callback.getRotate();
-					if (Math.abs((rotationDiff+360)%360) < Math.abs((rotationDiff-360)%360)) {
-						rotationDiff = (rotationDiff+360)%360;
-					} else {
-						rotationDiff = (rotationDiff-360)%360;
-					}
-					float absDiff = Math.abs(rotationDiff);
-					if (absDiff > 0) {
-						if (absDiff < 2) {
-							callback.rotateTo(targetRotate);
-						} else {
-							conditionToCountinue = true;
-							callback.rotateTo(((absDiff/10)*Math.signum(rotationDiff) + callback.getRotate())%360);
-						}
-					}
-				}
 			}
 			if(curZ != ((int) Math.round(curZ))){
 				if(Math.abs(curZ - endZ) > 3){
@@ -173,6 +155,28 @@ public class AnimateDraggingMapThread implements Runnable {
 					callback.zoomTo(endZ, notifyListener);
 				}
 			}
+			//rotate after animation
+			conditionToCountinue = true;
+			while (conditionToCountinue && callback != null) {
+				conditionToCountinue = false;
+				float rotationDiff = targetRotate-callback.getRotate();
+				if (Math.abs((rotationDiff+360)%360) < Math.abs((rotationDiff-360)%360)) {
+					rotationDiff = (rotationDiff+360)%360;
+				} else {
+					rotationDiff = (rotationDiff-360)%360;
+				}
+				float absDiff = Math.abs(rotationDiff);
+				if (absDiff > 0) {
+					Thread.sleep(60);
+					if (absDiff < 1) {
+						callback.rotateTo(targetRotate);
+					} else {
+						conditionToCountinue = true;
+						callback.rotateTo(((absDiff/10)*Math.signum(rotationDiff) + callback.getRotate())%360);
+					}
+				}
+			}
+
 		} catch (InterruptedException e) {
 		}
 		currentThread = null;
@@ -302,7 +306,7 @@ public class AnimateDraggingMapThread implements Runnable {
 	{
 		this.targetRotate = rotate;
 		if (!isAnimating()) {
-			stopped = false;
+			//stopped = false;
 			//do we need to kill and recreate the thread? wait would be enough as now it
 			//also handles the rotation?
 			Thread thread = new Thread(this,"Animatable dragging"); //$NON-NLS-1$
