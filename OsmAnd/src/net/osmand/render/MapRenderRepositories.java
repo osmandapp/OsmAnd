@@ -494,8 +494,8 @@ public class MapRenderRepositories {
 					x = o.getPoint31XTile(km == 0 ? i : len - i - 1);
 					y = o.getPoint31YTile(km == 0 ? i : len - i - 1);
 					boolean inside = leftX <= x && x <= rightX && y >= topY && y <= bottomY;
-					calculateLineCoordinates(inside, x, y, pinside, px, py, leftX, rightX, bottomY, topY, coordinates);
-					if(pinside && !inside){
+					boolean lineEnded = calculateLineCoordinates(inside, x, y, pinside, px, py, leftX, rightX, bottomY, topY, coordinates);
+					if(lineEnded){
 						processMultipolygonLine(completedRings, incompletedRings, completedRingNames, incompletedRingNames, 
 								coordinates, o.getName());
 						// create new line if it goes outside
@@ -677,6 +677,8 @@ public class MapRenderRepositories {
 			
 			int x = (int) (i.get(i.size() - 1) >> 32);
 			int y = (int) (i.get(i.size() - 1) & mask);
+			x = (int) (i.get(4) >> 32);
+			y = (int) (i.get(4) & mask);
 			// 31 - (zoom + 8)
 			int EVAL_DELTA = 6 << (23 - zoom); 
 			int UNDEFINED_MIN_DIFF = -1 - EVAL_DELTA;			
@@ -779,71 +781,89 @@ public class MapRenderRepositories {
 			completedRings.add(i);
 			completedRingNames.add(name);
 		}
-		
-		
 	}
-
-	private void calculateLineCoordinates(boolean inside, int x, int y, boolean pinside, int px, int py, int leftX, int rightX,
-			int bottomY, int topY, List<Long> coordinates) {
-		if (pinside) {
-			 if(!inside) {
-				int by = -1;
-				int bx = -1;
-				if (by == -1 && y < topY && py >= topY) {
-					int tx = (int) (px + ((double) (x - px) * (topY - py)) / (y - py));
-					if (leftX <= tx && tx <= rightX) {
-						bx = tx;
-						by = topY;
-					}
-				}
-				if (by == -1 && y > bottomY && py <= bottomY) {
-					int tx = (int) (px + ((double) (x - px) * (py - bottomY)) / (py - y));
-					if (leftX <= tx && tx <= rightX) {
-						bx = tx;
-						by = bottomY;
-					}
-				}
-				if (by == -1 && x < leftX && px >= leftX) {
-					by = (int) (py + ((double) (y - py) * (leftX - px)) / (x - px));
-					bx = leftX;
-				}
-				if (by == -1 && x > rightX && px <= rightX) {
-					by = (int) (py + ((double) (y - py) * (px - rightX)) / (px - x));
-					bx = rightX;
-				}
-				coordinates.add((((long) bx) << 32) | ((long) by));
+	
+	/**
+	 * @return -1 if there is no instersection or x<<32 | y
+	 */
+	private long calculateIntersection(int x, int y, boolean pinside, int px, int py, int leftX, int rightX,
+			int bottomY, int topY){
+		int by = -1;
+		int bx = -1;
+		if (by == -1 && py < topY && y >= topY) {
+			int tx = (int) (px + ((double) (x - px) * (topY - py)) / (y - py));
+			if (leftX <= tx && tx <= rightX) {
+				bx = tx;
+				by = topY;
 			}
-		} else if (inside) {
-			int by = -1;
-			int bx = -1;
-			if (by == -1 && py < topY && y >= topY) {
-				int tx = (int) (px + ((double) (x - px) * (topY - py)) / (y - py));
-				if (leftX <= tx && tx <= rightX) {
-					bx = tx;
-					by = topY;
-				}
+		}
+		if (by == -1 && py > bottomY && y <= bottomY) {
+			int tx = (int) (px + ((double) (x - px) * (py - bottomY)) / (py - y));
+			if (leftX <= tx && tx <= rightX) {
+				bx = tx;
+				by = bottomY;
 			}
-			if (by == -1 && py > bottomY && y <= bottomY) {
-				int tx = (int) (px + ((double) (x - px) * (py - bottomY)) / (py - y));
-				if (leftX <= tx && tx <= rightX) {
-					bx = tx;
-					by = bottomY;
-				}
-			}
-			if (by == -1 && px < leftX && x >= leftX) {
-				by = (int) (py + ((double) (y - py) * (leftX - px)) / (x - px));
+		}
+		if (by == -1 && px < leftX && x >= leftX) {
+			int ty = (int) (py + ((double) (y - py) * (leftX - px)) / (x - px));
+			if (ty >= topY && ty <= bottomY) {
+				by = ty;
 				bx = leftX;
 			}
-			if (by == -1 && px > rightX && x <= rightX) {
-				by = (int) (py + ((double) (y - py) * (px - rightX)) / (px - x));
+
+		}
+		if (by == -1 && px > rightX && x <= rightX) {
+			int ty = (int) (py + ((double) (y - py) * (px - rightX)) / (px - x));
+			if (ty >= topY && ty <= bottomY) {
+				by = ty;
 				bx = rightX;
 			}
-			coordinates.add((((long) bx) << 32) | ((long) by));
+
+		}
+		if(by == -1){
+			if(px == rightX || px == leftX || py == topY || py == bottomY){
+				bx = px;
+				by = py;
+			}
+		}
+		if (by != -1) {
+			return (((long) bx) << 32) | ((long) by);
+		}
+		return -1l;
+	}
+
+	private boolean calculateLineCoordinates(boolean inside, int x, int y, boolean pinside, int px, int py, int leftX, int rightX,
+			int bottomY, int topY, List<Long> coordinates) {
+		boolean lineEnded = false;
+		if (pinside) {
+			if (!inside) {
+				long is = calculateIntersection(x, y, pinside, px, py, leftX, rightX, bottomY, topY);
+				if (is == -1) {
+					// it is an error (!)
+					is = (((long) px) << 32) | ((long) py);
+				}
+				coordinates.add(is);
+				lineEnded = true;
+			} else {
+				coordinates.add((((long) x) << 32) | ((long) y));
+			}
+		} else {
+			long is = calculateIntersection(x, y, pinside, px, py, leftX, rightX, bottomY, topY);
+			if(inside){
+				// assert is != -1;
+				coordinates.add(is);
+				coordinates.add((((long) x) << 32) | ((long) y));
+			} else if(is != -1){
+				int bx = (int) (is >> 32);
+				int by = (int) (is & 0xffffffff);
+				coordinates.add(is);
+				is = calculateIntersection(x, y, pinside, bx, by, leftX, rightX, bottomY, topY);
+				coordinates.add(is);
+				lineEnded = true;
+			}
 		}
 		
-		if (inside) {
-			coordinates.add((((long) x) << 32) | ((long) y));
-		}
+		return lineEnded;
 	}
 
 
