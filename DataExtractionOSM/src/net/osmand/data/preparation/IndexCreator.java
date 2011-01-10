@@ -159,6 +159,7 @@ public class IndexCreator {
 	private RTree[] mapTree = null;
 	private MapZooms mapZooms = MapZooms.getDefault();  
 	private MapRenderingTypes renderingTypes = MapRenderingTypes.getDefault();
+	private String cityAdminLevel = "8";
 	
 
 	// MEMORY map : save it in memory while that is allowed
@@ -182,7 +183,6 @@ public class IndexCreator {
 	private DataTileManager<City> cityVillageManager = new DataTileManager<City>(13);
 	private DataTileManager<City> cityManager = new DataTileManager<City>(10);
 	private List<Relation> postalCodeRelations = new ArrayList<Relation>();
-	// TODO
 	private Map<City, Boundary> citiBoundaries = new LinkedHashMap<City, Boundary>();
 	private Set<Long> visitedBoundaryWays = new HashSet<Long>();
 
@@ -834,11 +834,18 @@ public class IndexCreator {
 		return r;
 	}
 	
+	public String getCityAdminLevel() {
+		return cityAdminLevel;
+	}
+	
+	public void setCityAdminLevel(String cityAdminLevel) {
+		this.cityAdminLevel = cityAdminLevel;
+	}
+	
 	public void indexBoundariesRelation(Entity e) throws SQLException {
 		String adminLevel = e.getTag("admin_level");
 		Boundary boundary = null;
-		// mostly city admin_level
-		if ("8".equals(adminLevel)) {
+		if (cityAdminLevel.equals(adminLevel)) {
 			if (e instanceof Relation) {
 				Relation i = (Relation) e;
 				loadEntityData(i, true);
@@ -899,16 +906,22 @@ public class IndexCreator {
 					}
 				}
 			}
-			if(!cityFound && boundary.getName() != null){
-				/// create new city for named boundary very rare case that's why do not proper generate id
+			if (!cityFound && boundary.getName() != null) {
+				// / create new city for named boundary very rare case that's why do not proper generate id
 				// however it could be a problem
 				City nCity = new City(CityType.SUBURB);
 				nCity.setLocation(point.getLatitude(), point.getLongitude());
 				nCity.setId(-boundary.getBoundaryId());
+				nCity.setName(boundary.getName());
+				citiBoundaries.put(nCity, boundary);
 				cityVillageManager.registerObject(point.getLatitude(), point.getLongitude(), nCity);
-				// do not put into cities because there is no id
-				// cities.put(ncity.getEntityId(), nCity);
 				
+				DataIndexWriter.writeCity(addressCityStat, pStatements, nCity, BATCH_SIZE);
+				// commit to put all cities
+				if (pStatements.get(addressCityStat) > 0) {
+					addressCityStat.executeBatch();
+					pStatements.put(addressCityStat, 0);
+				}
 			}
 		}
 	}
@@ -2523,6 +2536,12 @@ public class IndexCreator {
 					progress.startTask(Messages.getString("IndexCreator.PREINDEX_ADRESS_MAP"), allRelations); //$NON-NLS-1$
 					allRelations = iterateOverEntities(progress, EntityType.RELATION, allRelations,
 							STEP_ADDRESS_RELATIONS_AND_MULTYPOLYGONS);
+					if (indexAddress) {
+						progress.setGeneralProgress("[40 / 100]"); //$NON-NLS-1$
+						progress.startTask(Messages.getString("IndexCreator.PREINDEX_ADRESS_MAP"), allWays); //$NON-NLS-1$
+						allWays = iterateOverEntities(progress, EntityType.WAY, allWays, STEP_BORDER_CITY_WAYS);
+					}
+					
 					// commit to put all cities
 					if (indexAddress) {
 						if (pStatements.get(addressBuildingStat) > 0) {
@@ -2535,11 +2554,7 @@ public class IndexCreator {
 						}
 						mapConnection.commit();
 					}
-					if (indexAddress) {
-						progress.setGeneralProgress("[40 / 100]"); //$NON-NLS-1$
-						progress.startTask(Messages.getString("IndexCreator.PREINDEX_ADRESS_MAP"), allWays); //$NON-NLS-1$
-						allWays = iterateOverEntities(progress, EntityType.WAY, allWays, STEP_BORDER_CITY_WAYS);
-					}
+
 				}
 
 				// 3.3 MAIN iterate over all entities
@@ -2949,19 +2964,24 @@ public class IndexCreator {
 		
 		long time = System.currentTimeMillis();
 		IndexCreator creator = new IndexCreator(new File("/home/victor/Projects/OsmAnd/data/osmand/")); //$NON-NLS-1$
-//		creator.setIndexMap(true);
+		creator.setIndexMap(true);
 		creator.setIndexAddress(true);
-//		creator.setIndexPOI(true);
-//		creator.setIndexTransport(true);
+		creator.setIndexPOI(true);
+		creator.setIndexTransport(true);
+		// for NL
+		creator.setCityAdminLevel("10");
 
 		creator.recreateOnlyBinaryFile = false;
 		creator.deleteDatabaseIndexes = true;
-
-		
-//		creator.generateIndexes(new File("/home/victor/Projects/OsmAnd/data/osm maps/amsteelven_part.osm"), 
+				
+//		creator.generateIndexes(new File("/home/victor/Projects/OsmAnd/data/osm-maps/amsteelven_part.osm"), 
 //				new ConsoleProgressImplementation(3), null, MapZooms.getDefault(), null);
-		creator.generateIndexes(new File("/home/victor/Projects/OsmAnd/data/osm-maps/minsk_around.osm.bz2"), 
-				new ConsoleProgressImplementation(3), null, MapZooms.getDefault(), null);
+//		creator.generateIndexes(new File("/home/victor/Projects/OsmAnd/data/osm-maps/schiphol-rijk.osm"), 
+//				new ConsoleProgressImplementation(3), null, MapZooms.getDefault(), null);
+		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
+		creator.generateIndexes(new File("/home/victor/Projects/OsmAnd/data/osm-maps/netherlands.osm.pbf"), 
+				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), null);
+		
 		
 //		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
 //		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null, MapZooms.getDefault(), null);
@@ -2975,8 +2995,6 @@ public class IndexCreator {
 		// creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/den_haag.tmp.odb"));
 		// creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/den_haag.osm"), new ConsoleProgressImplementation(3), null);
 
-		// creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
-		// creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/netherlands.osm.bz2"), new ConsoleProgressImplementation(1), null);
 
 		// creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/forest_complex.osm"), new ConsoleProgressImplementation(25), null);
 

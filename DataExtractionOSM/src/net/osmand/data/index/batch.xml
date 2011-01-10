@@ -77,7 +77,7 @@
 			<region name="ukraine" esize="25" />
 
 			<region name="czech_republic" esize="180"/>
-			<region name="netherlands" esize="450"/> 
+			<region name="netherlands" esize="450" cityAdminLevel="10"/> 
 			<region name="italy" esize="255"/>
 		</regions>
 
