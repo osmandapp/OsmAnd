@@ -34,6 +34,7 @@ import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.binary.BinaryMapIndexWriter;
 import net.osmand.data.Amenity;
+import net.osmand.data.Boundary;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.DataTileManager;
@@ -99,7 +100,8 @@ public class IndexCreator {
 
 	public static final int STEP_CITY_NODES = 1;
 	public static final int STEP_ADDRESS_RELATIONS_AND_MULTYPOLYGONS = 2;
-	public static final int STEP_MAIN = 3;
+	public static final int STEP_BORDER_CITY_WAYS = 3;
+	public static final int STEP_MAIN = 4;
 
 	private File workingDir = null;
 
@@ -180,6 +182,9 @@ public class IndexCreator {
 	private DataTileManager<City> cityVillageManager = new DataTileManager<City>(13);
 	private DataTileManager<City> cityManager = new DataTileManager<City>(10);
 	private List<Relation> postalCodeRelations = new ArrayList<Relation>();
+	// TODO
+	private Map<City, Boundary> citiBoundaries = new LinkedHashMap<City, Boundary>();
+	private Set<Long> visitedBoundaryWays = new HashSet<Long>();
 
 	private String[] normalizeDefaultSuffixes;
 	private String[] normalizeSuffixes;
@@ -827,7 +832,85 @@ public class IndexCreator {
 		});
 
 		return r;
+	}
+	
+	public void indexBoundariesRelation(Entity e) throws SQLException {
+		String adminLevel = e.getTag("admin_level");
+		Boundary boundary = null;
+		// mostly city admin_level
+		if ("8".equals(adminLevel)) {
+			if (e instanceof Relation) {
+				Relation i = (Relation) e;
+				loadEntityData(i, true);
+				boundary = new Boundary();
+				if (i.getTag(OSMTagKey.NAME) != null) {
+					boundary.setName(i.getTag(OSMTagKey.NAME));
+				}
+				boundary.setBoundaryId(i.getId());
+				Map<Entity, String> entities = i.getMemberEntities();
+				for (Entity es : entities.keySet()) {
+					if (es instanceof Way) {
+						boolean inner = "inner".equals(entities.get(es)); //$NON-NLS-1$
+						if (inner) {
+							boundary.getInnerWays().add((Way) es);
+						} else {
+							String wName = es.getTag(OSMTagKey.NAME);
+							// if name are not equal keep the way for further check (it could be different suburb)
+							if (Algoritms.objectEquals(wName, boundary.getName()) || wName == null) {
+								visitedBoundaryWays.add(es.getId());
+							}
+							boundary.getOuterWays().add((Way) es);
+						}
+					}
+				}
+			} else if (e instanceof Way) {
+				if (!visitedBoundaryWays.contains(e.getId())) {
+					boundary = new Boundary();
+					if (e.getTag(OSMTagKey.NAME) != null) {
+						boundary.setName(e.getTag(OSMTagKey.NAME));
+					}
+					boundary.setBoundaryId(e.getId());
+					boundary.getOuterWays().add((Way) e);
 
+				}
+
+			}
+		}
+		
+		if(boundary != null){
+			LatLon point = boundary.getCenterPoint();
+			boolean cityFound = false; 
+			for (City c : cityManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
+				if(boundary.containsPoint(c.getLocation())){
+					if(boundary.getName() == null || boundary.getName().equalsIgnoreCase(c.getName())) {
+						citiBoundaries.put(c, boundary);
+						cityFound = true;
+					}
+				}
+			}
+			// TODO mark all suburbs inside city as is_in tag (!) or use another solution
+			if (!cityFound) {
+				for (City c : cityVillageManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
+					if(boundary.containsPoint(c.getLocation())){
+						if(boundary.getName() == null || boundary.getName().equalsIgnoreCase(c.getName())) {
+							citiBoundaries.put(c, boundary);
+							cityFound = true;
+						}
+					}
+				}
+			}
+			if(!cityFound && boundary.getName() != null){
+				/// create new city for named boundary very rare case that's why do not proper generate id
+				// however it could be a problem
+				City nCity = new City(CityType.SUBURB);
+				nCity.setLocation(point.getLatitude(), point.getLongitude());
+				nCity.setId(-boundary.getBoundaryId());
+				cityVillageManager.registerObject(point.getLatitude(), point.getLongitude(), nCity);
+				// do not put into cities because there is no id
+				// cities.put(ncity.getEntityId(), nCity);
+				
+			}
+		}
 	}
 
 	public void indexAddressRelation(Relation i) throws SQLException {
@@ -959,6 +1042,23 @@ public class IndexCreator {
 	public City getClosestCity(LatLon point) {
 		if (point == null) {
 			return null;
+		}
+		
+		for (City c : cityManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
+			Boundary boundary = citiBoundaries.get(c);
+			if(boundary != null){
+				if(boundary.containsPoint(point)){
+					return c;
+				}
+			}
+		}
+		for (City c : cityVillageManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
+			Boundary boundary = citiBoundaries.get(c);
+			if(boundary != null){
+				if(boundary.containsPoint(point)){
+					return c;
+				}
+			}
 		}
 		City closest = null;
 		double relDist = Double.POSITIVE_INFINITY;
@@ -1222,10 +1322,20 @@ public class IndexCreator {
 					}
 				}
 			}
+		} else if(step == STEP_BORDER_CITY_WAYS) {
+			if (indexAddress) {
+				if (e instanceof Way && "administrative".equals(e.getTag(OSMTagKey.BOUNDARY))) { //$NON-NLS-1$
+					indexBoundariesRelation(e);
+				}
+			}
 		} else if (step == STEP_ADDRESS_RELATIONS_AND_MULTYPOLYGONS) {
 			if (indexAddress) {
 				if (e instanceof Relation && "address".equals(e.getTag(OSMTagKey.TYPE))) { //$NON-NLS-1$
 					indexAddressRelation((Relation) e);
+				}
+				
+				if (e instanceof Relation && "administrative".equals(e.getTag(OSMTagKey.BOUNDARY))) { //$NON-NLS-1$
+					indexBoundariesRelation((Relation) e);
 				}
 			}
 			if (indexMap && e instanceof Relation && "restriction".equals(e.getTag(OSMTagKey.TYPE))) { //$NON-NLS-1$
@@ -2409,7 +2519,7 @@ public class IndexCreator {
 
 				// 3.2 index address relations
 				if (indexAddress || indexMap) {
-					progress.setGeneralProgress("[40 / 100]"); //$NON-NLS-1$
+					progress.setGeneralProgress("[30 / 100]"); //$NON-NLS-1$
 					progress.startTask(Messages.getString("IndexCreator.PREINDEX_ADRESS_MAP"), allRelations); //$NON-NLS-1$
 					allRelations = iterateOverEntities(progress, EntityType.RELATION, allRelations,
 							STEP_ADDRESS_RELATIONS_AND_MULTYPOLYGONS);
@@ -2424,6 +2534,11 @@ public class IndexCreator {
 							pStatements.put(addressStreetNodeStat, 0);
 						}
 						mapConnection.commit();
+					}
+					if (indexAddress) {
+						progress.setGeneralProgress("[40 / 100]"); //$NON-NLS-1$
+						progress.startTask(Messages.getString("IndexCreator.PREINDEX_ADRESS_MAP"), allWays); //$NON-NLS-1$
+						allWays = iterateOverEntities(progress, EntityType.WAY, allWays, STEP_BORDER_CITY_WAYS);
 					}
 				}
 
@@ -2833,18 +2948,20 @@ public class IndexCreator {
 		
 		
 		long time = System.currentTimeMillis();
-		IndexCreator creator = new IndexCreator(new File("e:/Information/OSM maps/osmand/")); //$NON-NLS-1$
-		creator.setIndexMap(true);
+		IndexCreator creator = new IndexCreator(new File("/home/victor/Projects/OsmAnd/data/osmand/")); //$NON-NLS-1$
+//		creator.setIndexMap(true);
 		creator.setIndexAddress(true);
-		creator.setIndexPOI(true);
-		creator.setIndexTransport(true);
+//		creator.setIndexPOI(true);
+//		creator.setIndexTransport(true);
 
 		creator.recreateOnlyBinaryFile = false;
 		creator.deleteDatabaseIndexes = true;
 
 		
-//		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/ukraine.osm"), 
+//		creator.generateIndexes(new File("/home/victor/Projects/OsmAnd/data/osm maps/amsteelven_part.osm"), 
 //				new ConsoleProgressImplementation(3), null, MapZooms.getDefault(), null);
+		creator.generateIndexes(new File("/home/victor/Projects/OsmAnd/data/osm-maps/minsk_around.osm.bz2"), 
+				new ConsoleProgressImplementation(3), null, MapZooms.getDefault(), null);
 		
 //		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
 //		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null, MapZooms.getDefault(), null);
@@ -2869,7 +2986,7 @@ public class IndexCreator {
 		// creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/new_zealand.osm.bz2"), new ConsoleProgressImplementation(3), null);
 		
 //		creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/map.osm"), new ConsoleProgressImplementation(15), null);
-		creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/bayarea.osm"), new ConsoleProgressImplementation(15), null);
+//		creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/bayarea.osm"), new ConsoleProgressImplementation(15), null);
 
 		System.out.println("WHOLE GENERATION TIME :  " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
 		 System.out.println("COORDINATES_SIZE " + BinaryMapIndexWriter.COORDINATES_SIZE + " count " + BinaryMapIndexWriter.COORDINATES_COUNT); //$NON-NLS-1$ //$NON-NLS-2$
