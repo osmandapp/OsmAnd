@@ -4,7 +4,6 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 import net.osmand.Algoritms;

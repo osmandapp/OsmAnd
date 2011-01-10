@@ -20,9 +20,9 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 	private City city;
 	private PostCode postcode;
 	private Street street1;
-	volatile private List<Street> initialList = new ArrayList<Street>();
-	private List<Street> filterList = new ArrayList<Street>();
+	private List<Street> initialList = new ArrayList<Street>();
 	private ProgressDialog progressDlg;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		SharedPreferences prefs = OsmandSettings.getPrefs(this);
@@ -75,8 +75,7 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 								setText(getFilter().toString());
 							}
 						});
-					}
-					
+					}					
 				}
 			}
 		}.start();
@@ -85,10 +84,12 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 	public List<Street> getObjects(String filter) {
 		int ind = 0;
 		filter = filter.toLowerCase();
+		List<Street> filterList = new ArrayList<Street>();
 		if(filter.length() == 0){
-			return initialList;
+			filterList.addAll(initialList);
+			return filterList;
 		}
-		filterList.clear();
+		
 		for (Street s : initialList) {
 			String lowerCase = s.getName(region.useEnglishNames()).toLowerCase();
 			if (lowerCase.startsWith(filter)) {

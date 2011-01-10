@@ -9,6 +9,7 @@ public class OSMSettings {
 		// ways
 		HIGHWAY("highway"), //$NON-NLS-1$
 		BUILDING("building"), //$NON-NLS-1$
+		BOUNDARY("boundary"), //$NON-NLS-1$
 		POSTAL_CODE("postal_code"), //$NON-NLS-1$
 		RAILWAY("railway"), //$NON-NLS-1$
 		ONEWAY("oneway"), //$NON-NLS-1$
