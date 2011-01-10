@@ -19,9 +19,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -55,8 +57,12 @@ public class IndexBatchCreator {
 	public static class RegionCountries {
 		String namePrefix = ""; // for states of the country
 		String nameSuffix = "";
-		Set<String> regionNames = new LinkedHashSet<String>();
+		Map<String, RegionSpecificData> regionNames = new LinkedHashMap<String, RegionSpecificData>();
 		String siteToDownload = "";
+	}
+	
+	private static class RegionSpecificData {
+		public String cityAdminLevel;
 	}
 	
 	private boolean uploadToOsmandDownloads = true;
@@ -211,8 +217,10 @@ public class IndexBatchCreator {
 				for(int j=0; j< ncountries.getLength(); j++){
 					Element ncountry = (Element) ncountries.item(j);
 					String name = ncountry.getAttribute("name");
+					RegionSpecificData data = new RegionSpecificData();
+					data.cityAdminLevel = ncountry.getAttribute("cityAdminLevel");
 					if(name != null && !Boolean.parseBoolean(ncountry.getAttribute("skip"))){
-						countries.regionNames.add(name);
+						countries.regionNames.put(name, data);
 					}
 				}
 				countriesToDownload.add(countries);
@@ -252,13 +260,14 @@ public class IndexBatchCreator {
 			String prefix = regionCountries.namePrefix;
 			String site = regionCountries.siteToDownload;
 			String suffix = regionCountries.nameSuffix;
-			for(String name : regionCountries.regionNames){
+			for(String name : regionCountries.regionNames.keySet()){
 				name = name.toLowerCase();
+				RegionSpecificData regionSpecificData = regionCountries.regionNames.get(name);
 				String url = MessageFormat.format(site, name);
 				String country = prefix+name;
 				File toSave = downloadFile(url, country, suffix, alreadyGeneratedFiles, alreadyUploadedFiles);
 				if (toSave != null && generateIndexes) {
-					generateIndex(toSave, country, alreadyGeneratedFiles, alreadyUploadedFiles);
+					generateIndex(toSave, country, regionSpecificData, alreadyGeneratedFiles, alreadyUploadedFiles);
 				}
 			}
 		}
@@ -376,7 +385,7 @@ public class IndexBatchCreator {
 	
 	
 	
-	protected void generateIndex(File f, String rName, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
+	protected void generateIndex(File f, String rName, RegionSpecificData regionSpecificData, Set<String> alreadyGeneratedFiles, Set<String> alreadyUploadedFiles) {
 		if (!generateIndexes) {
 			return;
 		}
@@ -404,6 +413,9 @@ public class IndexBatchCreator {
 			indexCreator.setNormalizeStreets(true);
 			indexCreator.setSaveAddressWays(true);
 			indexCreator.setRegionName(rName);
+			if (regionSpecificData != null && regionSpecificData.cityAdminLevel != null) {
+				indexCreator.setCityAdminLevel(regionSpecificData.cityAdminLevel);
+			}
 
 			String poiFileName = regionName + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT;
 			indexCreator.setPoiFileName(poiFileName);
