@@ -194,6 +194,7 @@ public class TileSourceManager {
 			list.add(getGoogleMapsTerrainSource());
 			
 			list.add(getCykloatlasCzSource());
+			list.add(getHikeBikeMapDeSource());
 			
 			list.add(getMicrosoftMapsSource());
 			list.add(getMicrosoftEarthSource());
@@ -243,6 +244,10 @@ public class TileSourceManager {
 		return new CykloatlasSourceTemplate("Cykloatlas CZ", "http://services.tmapserver.cz/tiles/gm/shc/{0}/{1}/{2}.png");  //$NON-NLS-1$//$NON-NLS-2$
 	}
 	
+	public static TileSourceTemplate getHikeBikeMapDeSource(){
+		return new TileSourceTemplate("HikeBikeMap DE", "http://toolserver.org/tiles/hikebike/{0}/{1}/{2}.png", ".png", 17, 0, 256, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+	}
+
 	public static TileSourceTemplate getAerialMapSource(){
 		return new TileSourceTemplate("OpenAerialMap", "http://tile.openaerialmap.org/tiles/1.0.0/openaerialmap-900913/{0}/{1}/{2}.jpg", ".jpg", 13, 0, 256, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 	}
