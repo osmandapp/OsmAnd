@@ -27,7 +27,7 @@
 	<string name="context_menu_item_download_map">Загрузить карту</string>
 	<string name="select_max_zoom_preload_area">Выберите максимальный масштаб для загрузки видимой области</string>
 	<string name="maps_could_not_be_downloaded">Выбранная карта не может быть загружена</string>
-	<string name="continuous_rendering">Быстрый рендеринг</string>
+	<string name="continuous_rendering">Непрерывный рендеринг</string>
 	<string name="continuous_rendering_descr">Выберите способ как отрисовывать карту</string>
 	<string name="rendering_exception">Во время отображения карты произошла непредвиденная ошибка</string>
 	<string name="rendering_out_of_memory">Ошибка : недостаточно памяти, чтобы отобразить карту</string>
