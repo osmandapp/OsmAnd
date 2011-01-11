@@ -377,7 +377,7 @@ public class IndexBatchCreator {
 				continue;
 			}
 			if (f.getName().endsWith(".osm.bz2") || f.getName().endsWith(".osm") || f.getName().endsWith(".osm.pbf")) {
-				generateIndex(f, null, alreadyGeneratedFiles, alreadyUploadedFiles);
+				generateIndex(f, null, null, alreadyGeneratedFiles, alreadyUploadedFiles);
 			}
 		}
 		System.out.println("GENERATING INDEXES FINISHED ");
