@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="daynight_mode_day">Nappal</string>
+	<string name="daynight_mode_night">Éjjel</string>
+	<string name="daynight_mode_auto">Napkelte/Napnyugta</string>
+	<string name="daynight_mode_sensor">Fényérzékelő szenzor</string>
+	<string name="daynight_descr">Éjjel/nappali mód váltás szabálya</string>
+	<string name="daynight">Éjjel/nappali mód</string>
+
+	<string name="download_files_question">{0} fájl letöltés ({1} MB)?</string>
 	<string name="items_were_selected">{0} elem lett kijelölve</string>
 	<string name="filter_existing_indexes">Szűrő letöltv</string>
 	<string name="deselect_all">Kijelölés megszüntetése</string>
@@ -275,7 +283,7 @@
     <string name="monitor_preferences">Megfigyelés</string>
     <string name="save_track_to_gpx_descrp">Az útvonalak napi csoportosításban kerülnek mentésre a track könyvtárba</string>
     <string name="save_track_to_gpx">Útvonal mentése GPX-be</string>
-    <string name="navigate_to">Vezess ide:</string>
+    <string name="navigate_to">Vezess ide</string>
     <string name="update_tile">Térkép frissítés</string>
     <string name="reload_tile">Térképszelet újraolvasása</string>
     <string name="user_name_descr">OSM felhasználói név</string>
