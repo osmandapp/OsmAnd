@@ -7,7 +7,6 @@
 	<string name="daynight_descr">Éjjel/nappali mód váltás szabálya</string>
 	<string name="daynight">Éjjel/nappali mód</string>
 
-	<string name="download_files_question">{0} fájl letöltés ({1} MB)?</string>
 	<string name="items_were_selected">{0} elem lett kijelölve</string>
 	<string name="filter_existing_indexes">Szűrő letöltv</string>
 	<string name="deselect_all">Kijelölés megszüntetése</string>
@@ -46,7 +45,7 @@
 	<string name="use_high_res_maps">Nagy felbontású térkép</string>
 	<string name="use_high_res_maps_descr">Nagy felbontású térkép használata nagy felbontású eszközön</string>
 	<string name="unknown_location">A jelenlegi helyzet nem ismert</string>
-	<string name="download_files_question">{0} fájl letöltése?</string>
+	<string name="download_files_question">{0} fájl letöltés ({1} MB)?</string>
 	<string name="download_files">Letöltés</string>
 	<string name="context_menu_item_search_transport">Közlekedés keresése</string>
 	<string name="transport_searching_transport">Közlekedés keresése (nincs kijelölt cél)</string>
