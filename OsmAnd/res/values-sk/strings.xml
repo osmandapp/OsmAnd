@@ -275,12 +275,12 @@
 <string name="settings_preset_descr">Vybrať preddefinované nastavenia</string>
 <string name="settings_preset">Režim aplikácie</string>
 <string name="settings">Nastavenia</string>
-<string name="save_current_track_descr">Uložiť aktuálnu stopu na SD kartu</string>
+<string name="save_current_track_descr">Uloženie aktuálnej stopy na SD kartu</string>
 <string name="save_current_track">Uložiť aktuálnu stopu</string>
 <string name="save_track_interval_descr">Vybrať časový interval na ukladanie stopy</string>
 <string name="save_track_interval">Interval ukladania stopy</string>
 <string name="monitor_preferences">Monitorovanie</string>
-<string name="save_track_to_gpx_descrp">Stopy budú uložené do adresára stôp, zoskupené podľa dní</string>
+<string name="save_track_to_gpx_descrp">Stopy budú ukladané do adresára stôp, zoskupené podľa dní</string>
 <string name="save_track_to_gpx">Ukladať stopu do GPX</string>
 <string name="navigate_to">Navigovať sem</string>
 <string name="update_tile">Aktualizovať mapu</string>
@@ -375,7 +375,7 @@
 <string name="context_menu_item_navigate_point">Navigovať do tohto bodu</string>
 <string name="context_menu_item_add_favorite">Pridať do Obľúbených</string>
 <string name="context_menu_item_update_map">Aktualizovať mapu</string>
-<string name="context_menu_item_open_bug">Otvoriť chybu OSM</string>
+<string name="context_menu_item_open_bug">Otvoriť OSM chybu</string>
 <string name="context_menu_item_create_poi">Vytvoriť POI</string>
 
 <string name="default_buttons_yes">Áno</string>
@@ -396,7 +396,7 @@
 <string name="favourites_remove_dialog_title">Ste si istý?</string>
 <string name="favourites_remove_dialog_success">Obľúbený bod {0} bol úspešne zmazaný.</string>
 
-<string name="osb_add_dialog_title">Zadajte opis chyby</string>
+<string name="osb_add_dialog_title">Zadajte popis k chybe</string>
 <string name="osb_add_dialog_success">Chyba úspešne pridaná</string>
 <string name="osb_add_dialog_error">Vyskytla sa výnimka: chyba nebola pridaná</string>
 
@@ -424,9 +424,9 @@
 <string name="poi_remove_success">POI bol úspešne vymazaný</string>
 <string name="poi_action_add">Pridať</string>
 <string name="poi_action_change">Zmeniť</string>
-<string name="poi_action_succeded_template">Akcia {0} úspešne ukončená.</string>
-<string name="poi_error_unexpected_template">Vyskytla sa neočakávaná chyba počas vykonávania akcie {0}.</string>
-<string name="poi_error_io_error_template">Vyskytla sa vstupno/výstupná chyba počas vykonávania akcie {0}.</string>
+<string name="poi_action_succeded_template">Akcia: {0} úspešne ukončená.</string>
+<string name="poi_error_unexpected_template">Vyskytla sa neočakávaná chyba počas vykonávania akcie: {0}.</string>
+<string name="poi_error_io_error_template">Vyskytla sa vstupno/výstupná chyba počas vykonávania akcie: {0}.</string>
 
 <string name="poi_error_info_not_loaded">Info o uzle nebolo načítané</string>
 
