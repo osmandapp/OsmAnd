@@ -30,8 +30,40 @@ public class TileSourceManager {
 		private int avgSize;
 		private int bitDensity;
 		
+		public TileSourceTemplate(File dir, String name, String urlToLoad) {
+			this(name, urlToLoad, determineExt(dir,".jpg"), 18, 1, 256, 16, 20000); //$NON-NLS-1$
+		}
+
+		private static String determineExt(File dir, String defaultExt) {
+			String foundExt = findOneTile(dir);
+			return foundExt == null ? defaultExt : foundExt;
+		}
+
+		private static String findOneTile(File dir) {
+			if (dir.isDirectory()) {
+				for (File file : dir.listFiles()) {
+					if (file.isDirectory()) {
+						String ext = findOneTile(file);
+						if (ext != null) {
+							return ext;
+						}
+					} else {
+						String fileName = file.getName();
+						if (fileName.endsWith(".tile")) {
+							String substring = fileName.substring(0,fileName.length()-".tile".length());
+							int extInt = substring.lastIndexOf(".");
+							if (extInt != -1) {
+								return substring.substring(extInt,substring.length());
+							}
+						}
+					}
+				}
+			}
+			return null;
+		}
+
 		// default constructor
-		public TileSourceTemplate(String name, String urlToLoad){
+		public TileSourceTemplate(String name, String urlToLoad) {
 			this(name, urlToLoad, ".jpg", 18, 1, 256, 16, 20000); //$NON-NLS-1$
 		}
 		
