@@ -28,23 +28,23 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Paint.Style;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
 import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.view.WindowManager;
 import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.GestureDetector.OnGestureListener;
+import android.view.MotionEvent;
+import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
+import android.view.SurfaceView;
+import android.view.WindowManager;
 
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback, AnimateDraggingCallback, OnGestureListener,
 		OnDoubleTapListener, MultiTouchZoomListener {
@@ -517,21 +517,23 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 						
 						for (int i = 0; i < width; i++) {
 							for (int j = 0; j < height; j++) {
-								float x1 = (i + left - tileX) * ftileSize + w;
-								float y1 = (j + top - tileY) * ftileSize + h;
-								String ordImgTile = mgr.calculateTileId(map, left + i, top + j, nzoom);
+								int leftPlusI = (int) FloatMath.floor((float)MapUtils.getTileNumberX(nzoom, MapUtils.getLongitudeFromTile(nzoom, left+i)));
+								int topPlusJ = (int) FloatMath.floor((float)MapUtils.getTileNumberY(nzoom, MapUtils.getLatitudeFromTile(nzoom, top + j)));
+								float x1 = (left + i - tileX) * ftileSize + w;
+								float y1 = (top + j - tileY) * ftileSize + h;
+								String ordImgTile = mgr.calculateTileId(map, leftPlusI, topPlusJ, nzoom);
 								// asking tile image async
-								boolean imgExist = mgr.tileExistOnFileSystem(ordImgTile, map, left + i, top + j, nzoom);
+								boolean imgExist = mgr.tileExistOnFileSystem(ordImgTile, map, leftPlusI, topPlusJ, nzoom);
 								Bitmap bmp = null;
 								boolean originalBeLoaded = useInternet && nzoom <= maxLevel;
 								if (imgExist || originalBeLoaded) {
-									bmp = mgr.getTileImageForMapAsync(ordImgTile, map, left + i, top + j, nzoom, useInternet);
+									bmp = mgr.getTileImageForMapAsync(ordImgTile, map, leftPlusI, topPlusJ, nzoom, useInternet);
 								}
 								if (bmp == null) {
 									int div = 2;
 									// asking if there is small version of the map (in cache)
-									String imgTile2 = mgr.calculateTileId(map, (left + i) / 2, (top + j) / 2, nzoom - 1);
-									String imgTile4 = mgr.calculateTileId(map, (left + i) / 4, (top + j) / 4, nzoom - 2);
+									String imgTile2 = mgr.calculateTileId(map, leftPlusI / 2, topPlusJ / 2, nzoom - 1);
+									String imgTile4 = mgr.calculateTileId(map, leftPlusI / 4, topPlusJ / 4, nzoom - 2);
 									if (originalBeLoaded || imgExist) {
 										bmp = mgr.getTileImageFromCache(imgTile2);
 										div = 2;
@@ -541,14 +543,14 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 										}
 									}
 									if (!originalBeLoaded && !imgExist) {
-										if (mgr.tileExistOnFileSystem(imgTile2, map, (left + i) / 2, (top + j) / 2, nzoom - 1)
+										if (mgr.tileExistOnFileSystem(imgTile2, map, leftPlusI / 2, topPlusJ / 2, nzoom - 1)
 												|| (useInternet && nzoom - 1 <= maxLevel)) {
-											bmp = mgr.getTileImageForMapAsync(imgTile2, map, (left + i) / 2, (top + j) / 2, nzoom - 1,
+											bmp = mgr.getTileImageForMapAsync(imgTile2, map, leftPlusI / 2, topPlusJ / 2, nzoom - 1,
 													useInternet);
 											div = 2;
-										} else if (mgr.tileExistOnFileSystem(imgTile4, map, (left + i) / 4, (top + j) / 4, nzoom - 2)
+										} else if (mgr.tileExistOnFileSystem(imgTile4, map, leftPlusI / 4, topPlusJ / 4, nzoom - 2)
 												|| (useInternet && nzoom - 2 <= maxLevel)) {
-											bmp = mgr.getTileImageForMapAsync(imgTile4, map, (left + i) / 4, (top + j) / 4, nzoom - 2,
+											bmp = mgr.getTileImageForMapAsync(imgTile4, map, leftPlusI / 4, topPlusJ / 4, nzoom - 2,
 													useInternet);
 											div = 4;
 										}

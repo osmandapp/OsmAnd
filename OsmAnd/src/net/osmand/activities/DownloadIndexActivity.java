@@ -719,7 +719,7 @@ public class DownloadIndexActivity extends ListActivity {
 			} else if (toIndex.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)) {
 				manager.indexingTransport(progress, warnings, toIndex);
 			} else if (toIndex.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-				manager.indexingMaps(progress);
+				warnings.addAll(manager.indexingMaps(progress));
 			} else if (toIndex.getName().endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
 			}
 			if(dateModified != null){

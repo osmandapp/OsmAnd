@@ -422,6 +422,9 @@ public class ResourceManager {
 					} catch (SQLiteException e) {
 						log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
 						warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+					} catch (OutOfMemoryError oome) {
+						log.error("Exception reading " + f.getAbsolutePath(), oome); //$NON-NLS-1$
+						warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_big_for_memory"), f.getName()));
 					}
 				} else if(f.getName().endsWith(".map.odb")){ //$NON-NLS-1$
 					warnings.add(MessageFormat.format(Messages.getMessage("old_map_index_is_not_supported"), f.getName())); //$NON-NLS-1$

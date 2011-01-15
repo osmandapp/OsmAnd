@@ -198,7 +198,7 @@ public class RouteProvider {
 					l.setLatitude(end.getLatitude());
 					l.setLongitude(end.getLongitude());
 					minDist = Integer.MAX_VALUE;
-					for (int i = 0; i < gpxRoute.size(); i++) {
+					for (int i = startI; i < gpxRoute.size(); i++) {
 						float d = gpxRoute.get(i).distanceTo(l);
 						if (d < minDist) {
 							endI = i + 1;

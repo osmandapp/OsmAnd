@@ -110,6 +110,14 @@ public class MapRenderRepositories {
 				}
 			}
 			return null;
+		} catch (OutOfMemoryError oome) {
+			if(raf != null){
+				try {
+					raf.close();
+				} catch (IOException e1) {
+				}
+			}
+			throw oome;
 		}
 		if (log.isDebugEnabled()) {
 			log.debug("Initializing db " + file.getAbsolutePath() + " " + (System.currentTimeMillis() - start) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
