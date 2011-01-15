@@ -479,7 +479,7 @@ public class OsmandSettings {
 					} catch (IOException e) {
 						Log.d(LogUtil.TAG, "Error reading url " + dir.getName(), e); //$NON-NLS-1$
 					}
-					return new TileSourceManager.TileSourceTemplate(dir.getName(), url);
+					return new TileSourceManager.TileSourceTemplate(dir, dir.getName(), url);
 				}
 			}
 				
