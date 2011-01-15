@@ -8,10 +8,18 @@ import static net.osmand.data.index.IndexConstants.POI_INDEX_EXT_ZIP;
 import static net.osmand.data.index.IndexConstants.POI_TABLE_VERSION;
 import static net.osmand.data.index.IndexConstants.VOICE_INDEX_EXT_ZIP;
 import static net.osmand.data.index.IndexConstants.VOICE_VERSION;
+import static net.osmand.data.index.IndexConstants.ADDRESS_INDEX_EXT;
+import static net.osmand.data.index.IndexConstants.ADDRESS_INDEX_EXT_ZIP;
+import static net.osmand.data.index.IndexConstants.ADDRESS_TABLE_VERSION;
+import static net.osmand.data.index.IndexConstants.TRANSPORT_INDEX_EXT;
+import static net.osmand.data.index.IndexConstants.TRANSPORT_INDEX_EXT_ZIP;
+import static net.osmand.data.index.IndexConstants.TRANSPORT_TABLE_VERSION;
+
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -20,14 +28,15 @@ import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -45,9 +54,9 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -123,7 +132,7 @@ public class DownloadIndexActivity extends ListActivity {
 		filterText.addTextChangedListener(textWatcher);
 
 		if(downloadListIndexThread.getCachedIndexFiles() != null){
-			setListAdapter(new DownloadIndexAdapter(new ArrayList<Entry<String,String>>(downloadListIndexThread.getCachedIndexFiles().entrySet())));
+			setListAdapter(new DownloadIndexAdapter(downloadListIndexThread.getCachedIndexFiles()));
 		} else {
 			downloadIndexList();
 		}
@@ -160,37 +169,42 @@ public class DownloadIndexActivity extends ListActivity {
 			//re-create the thread
 			downloadListIndexThread = new DownloadIndexListThread();
 			downloadIndexList();
-		} else if(item.getItemId() == SELECT_ALL_ID){
-			List<Entry<String, String>> origReference = ((DownloadIndexAdapter)getListAdapter()).getOrigReference();
-			int selected = 0;
-			for(Entry<String, String> es : origReference){
-				if(!entriesToDownload.containsKey(es.getKey())){
-					selected++;
-					entriesToDownload.put(es.getKey(), createDownloadEntry(es));
-				}
-			}
-			Toast.makeText(this, MessageFormat.format(getString(R.string.items_were_selected), selected), Toast.LENGTH_SHORT).show();
-			((DownloadIndexAdapter)getListAdapter()).notifyDataSetInvalidated();
-			if(selected > 0){
-				findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
-			}
-		} else if(item.getItemId() == FILTER_EXISTING_REGIONS){
-			List<Entry<String, String>> origArray = ((DownloadIndexAdapter)getListAdapter()).getOrigArray();
-			List<Entry<String, String>> ref = ((DownloadIndexAdapter)getListAdapter()).getOrigReference();
-			ref.clear();
-			for(Entry<String, String> es : origArray){
-				DownloadEntry em = createDownloadEntry(es);
-				if(em != null && em.fileToUnzip.exists()){
-					ref.add(es);
-				}
-			}
-			((DownloadIndexAdapter)getListAdapter()).notifyDataSetChanged();
-		} else if(item.getItemId() == DESELECT_ALL_ID){
-			entriesToDownload.clear();
-			((DownloadIndexAdapter)getListAdapter()).notifyDataSetInvalidated();
-			findViewById(R.id.DownloadButton).setVisibility(View.GONE);
 		} else {
-			return false;
+			final DownloadIndexAdapter listAdapter = (DownloadIndexAdapter)getListAdapter();
+			if(item.getItemId() == SELECT_ALL_ID){
+				int selected = 0;
+				for (int i = 0; i < listAdapter.getCount(); i++) {
+					IndexItem es = listAdapter.getItem(i);
+					if(!entriesToDownload.containsKey(es.getFileName())){
+						selected++;
+						entriesToDownload.put(es.getFileName(), createDownloadEntry(es.getFileEntry()));
+					}
+				}
+				Toast.makeText(this, MessageFormat.format(getString(R.string.items_were_selected), selected), Toast.LENGTH_SHORT).show();
+				listAdapter.notifyDataSetInvalidated();
+				if(selected > 0){
+					findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+				}
+			} else if(item.getItemId() == FILTER_EXISTING_REGIONS){
+				final List<String> listAlreadyDownloaded = listAlreadyDownloadedWithAlternatives();
+				final List<IndexItem> filtered = new ArrayList<DownloadIndexActivity.IndexItem>();
+				for(String file : listAlreadyDownloaded) {
+					IndexItem fileItem = listAdapter.getIndexFiles().get(file);
+					if (fileItem != null) {
+						filtered.add(fileItem);
+					}
+				}
+				listAdapter.clear();
+				for (IndexItem fileItem : filtered) {
+					listAdapter.add(fileItem);
+				}
+			} else if(item.getItemId() == DESELECT_ALL_ID){
+				entriesToDownload.clear();
+				listAdapter.notifyDataSetInvalidated();
+				findViewById(R.id.DownloadButton).setVisibility(View.GONE);
+			} else {
+				return false;
+			}
 		}
 		return true;
 	}
@@ -220,7 +234,7 @@ public class DownloadIndexActivity extends ListActivity {
 					@Override
 					public void run() {
 						if (indexFiles != null) {
-							uiActivity.setListAdapter(uiActivity.new DownloadIndexAdapter(new ArrayList<Entry<String,String>>(indexFiles.entrySet())));
+							uiActivity.setListAdapter(uiActivity.new DownloadIndexAdapter(indexFiles));
 						} else {
 							Toast.makeText(uiActivity, R.string.list_index_files_was_not_loaded, Toast.LENGTH_LONG).show();
 						}
@@ -254,9 +268,6 @@ public class DownloadIndexActivity extends ListActivity {
 				}
 				
 			});
-			String[] accepted = new String[] { POI_TABLE_VERSION + POI_INDEX_EXT, POI_TABLE_VERSION + POI_INDEX_EXT_ZIP,
-					BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT, BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT_ZIP,
-					VOICE_VERSION + VOICE_INDEX_EXT_ZIP };
 			if(USE_DOWNLOAD_OSMAND_NET){
 				try {
 					URL url = new URL("http://download.osmand.net/indexes.xml"); //$NON-NLS-1$
@@ -280,6 +291,9 @@ public class DownloadIndexActivity extends ListActivity {
 					return null;
 				}
 			} else {
+				String[] accepted = new String[] { POI_TABLE_VERSION + POI_INDEX_EXT, POI_TABLE_VERSION + POI_INDEX_EXT_ZIP,
+						BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT, BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT_ZIP,
+						VOICE_VERSION + VOICE_INDEX_EXT_ZIP };
 				DownloaderIndexFromGoogleCode.getIndexFiles(indexFiles,
 						accepted);
 			}
@@ -300,8 +314,8 @@ public class DownloadIndexActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		final Entry<String, String> e = ((DownloadIndexAdapter)getListAdapter()).getItem(position);
-		String key = e.getKey();
+		final IndexItem e = ((DownloadIndexAdapter)getListAdapter()).getItem(position);
+		String key = e.getFileName();
 		final CheckBox ch = (CheckBox) v.findViewById(R.id.check_download_item);
 		
 		if(ch.isChecked()){
@@ -319,7 +333,7 @@ public class DownloadIndexActivity extends ListActivity {
 		
 		
 		
-		final DownloadEntry entry = createDownloadEntry(e);
+		final DownloadEntry entry = createDownloadEntry(e.getFileEntry());
 		if (entry != null) {
 			// if(!fileToUnzip.exists()){
 			// builder.setMessage(MessageFormat.format(getString(R.string.download_question), baseName, extractDateAndSize(e.getValue())));
@@ -334,12 +348,12 @@ public class DownloadIndexActivity extends ListActivity {
 				String description = format.format(new Object[] { new Date(entry.fileToUnzip.lastModified()),
 						((float) entry.fileToUnzip.length() / MB) });
 				builder.setMessage(MessageFormat.format(getString(R.string.download_question_exist), entry.baseName, description,
-						extractDateAndSize(e.getValue())));
+						extractDateAndSize(e.getFileEntry().getValue())));
 
 				builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						entriesToDownload.put(e.getKey(), entry);
+						entriesToDownload.put(e.getFileName(), entry);
 						int x = getListView().getScrollX();
 						int y = getListView().getScrollY();
 						findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
@@ -350,7 +364,7 @@ public class DownloadIndexActivity extends ListActivity {
 				builder.setNegativeButton(R.string.default_buttons_no, null);
 				builder.show();
 			} else {
-				entriesToDownload.put(e.getKey(), entry);
+				entriesToDownload.put(e.getFileName(), entry);
 				int x = getListView().getScrollX();
 				int y = getListView().getScrollY();
 				findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
@@ -362,47 +376,82 @@ public class DownloadIndexActivity extends ListActivity {
 		
 	}
 
+	private List<String> listAlreadyDownloadedWithAlternatives()
+	{
+		List<String> files = new ArrayList<String>();
+		File externalStorageDirectory = Environment.getExternalStorageDirectory();
+		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.ADDRESS_PATH),ADDRESS_INDEX_EXT,ADDRESS_INDEX_EXT_ZIP,ADDRESS_TABLE_VERSION));
+		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.POI_PATH),POI_INDEX_EXT,POI_INDEX_EXT_ZIP,POI_TABLE_VERSION));
+		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.TRANSPORT_PATH),TRANSPORT_INDEX_EXT,TRANSPORT_INDEX_EXT_ZIP,TRANSPORT_TABLE_VERSION));
+		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.APP_DIR),BINARY_MAP_INDEX_EXT,BINARY_MAP_INDEX_EXT_ZIP,BINARY_MAP_VERSION));
+		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.VOICE_PATH),"",VOICE_INDEX_EXT_ZIP, VOICE_VERSION));
+		return files;
+	}
+	
+	private Collection<? extends String> listWithAlternatives(File file, final String ext, final String secondaryExt, final int version) {
+		final List<String> files = new ArrayList<String>();
+		if (file.isDirectory()) {
+			file.list(new FilenameFilter() {
+				@Override
+				public boolean accept(File dir, String filename) {
+					if (filename.endsWith(ext)) {
+						files.add(filename);
+						files.add(filename.substring(0,filename.length()-ext.length())+"_"+version+ext);
+						if (secondaryExt != null) {
+							files.add(filename.substring(0,filename.length()-ext.length())+"_"+version+secondaryExt);
+						}
+					}
+					return filename.endsWith(ext);
+				}
+			});
+
+		}
+		return files;
+	}
+
 	private DownloadEntry createDownloadEntry(final Entry<String, String> e) {
 		String key = e.getKey();
+		String value = e.getValue();
 		File parent = null;
 		String toSavePostfix = null;
 		String toCheckPostfix = null;
 		boolean unzipDir = false;
-		if(key.endsWith(IndexConstants.ADDRESS_INDEX_EXT)){
-			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.ADDRESS_PATH);
-			toSavePostfix = IndexConstants.ADDRESS_INDEX_EXT;
-			toCheckPostfix = IndexConstants.ADDRESS_INDEX_EXT;
+		File externalStorageDirectory = Environment.getExternalStorageDirectory();
+		if(key.endsWith(ADDRESS_INDEX_EXT)){
+			parent = new File(externalStorageDirectory, ResourceManager.ADDRESS_PATH);
+			toSavePostfix = ADDRESS_INDEX_EXT;
+			toCheckPostfix = ADDRESS_INDEX_EXT;
 		} else if(key.endsWith(IndexConstants.ADDRESS_INDEX_EXT_ZIP)){
-			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.ADDRESS_PATH);
-			toSavePostfix = IndexConstants.ADDRESS_INDEX_EXT_ZIP;
-			toCheckPostfix = IndexConstants.ADDRESS_INDEX_EXT;
+			parent = new File(externalStorageDirectory, ResourceManager.ADDRESS_PATH);
+			toSavePostfix = ADDRESS_INDEX_EXT_ZIP;
+			toCheckPostfix = ADDRESS_INDEX_EXT;
 		} else if(key.endsWith(IndexConstants.POI_INDEX_EXT)){
-			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.POI_PATH);
-			toSavePostfix = IndexConstants.POI_INDEX_EXT;
-			toCheckPostfix = IndexConstants.POI_INDEX_EXT;
+			parent = new File(externalStorageDirectory, ResourceManager.POI_PATH);
+			toSavePostfix = POI_INDEX_EXT;
+			toCheckPostfix = POI_INDEX_EXT;
 		} else if(key.endsWith(IndexConstants.POI_INDEX_EXT_ZIP)){
-			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.POI_PATH);
-			toSavePostfix = IndexConstants.POI_INDEX_EXT_ZIP;
-			toCheckPostfix = IndexConstants.POI_INDEX_EXT;
+			parent = new File(externalStorageDirectory, ResourceManager.POI_PATH);
+			toSavePostfix = POI_INDEX_EXT_ZIP;
+			toCheckPostfix = POI_INDEX_EXT;
 		} else if(key.endsWith(IndexConstants.TRANSPORT_INDEX_EXT)){
-			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.TRANSPORT_PATH);
-			toSavePostfix = IndexConstants.TRANSPORT_INDEX_EXT;
-			toCheckPostfix = IndexConstants.TRANSPORT_INDEX_EXT;
+			parent = new File(externalStorageDirectory, ResourceManager.TRANSPORT_PATH);
+			toSavePostfix = TRANSPORT_INDEX_EXT;
+			toCheckPostfix = TRANSPORT_INDEX_EXT;
 		} else if(key.endsWith(IndexConstants.TRANSPORT_INDEX_EXT_ZIP)){
-			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.TRANSPORT_PATH);
-			toSavePostfix = IndexConstants.TRANSPORT_INDEX_EXT_ZIP;
-			toCheckPostfix = IndexConstants.TRANSPORT_INDEX_EXT;
+			parent = new File(externalStorageDirectory, ResourceManager.TRANSPORT_PATH);
+			toSavePostfix = TRANSPORT_INDEX_EXT_ZIP;
+			toCheckPostfix = TRANSPORT_INDEX_EXT;
 		} else if(key.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)){
-			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.APP_DIR);
-			toSavePostfix = IndexConstants.BINARY_MAP_INDEX_EXT;
-			toCheckPostfix = IndexConstants.BINARY_MAP_INDEX_EXT;
+			parent = new File(externalStorageDirectory, ResourceManager.APP_DIR);
+			toSavePostfix = BINARY_MAP_INDEX_EXT;
+			toCheckPostfix = BINARY_MAP_INDEX_EXT;
 		} else if(key.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)){
-			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.APP_DIR);
-			toSavePostfix = IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
-			toCheckPostfix = IndexConstants.BINARY_MAP_INDEX_EXT;
+			parent = new File(externalStorageDirectory, ResourceManager.APP_DIR);
+			toSavePostfix = BINARY_MAP_INDEX_EXT_ZIP;
+			toCheckPostfix = BINARY_MAP_INDEX_EXT;
 		} else if(key.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)){
-			parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.VOICE_PATH);
-			toSavePostfix = IndexConstants.VOICE_INDEX_EXT_ZIP;
+			parent = new File(externalStorageDirectory, ResourceManager.VOICE_PATH);
+			toSavePostfix = VOICE_INDEX_EXT_ZIP;
 			toCheckPostfix = ""; //$NON-NLS-1$
 			unzipDir = true;
 		}
@@ -415,9 +464,9 @@ public class DownloadIndexActivity extends ListActivity {
 			entry = null;
 		} else {
 			entry = new DownloadEntry();
-			int ls = e.getKey().lastIndexOf('_');
-			entry.baseName = e.getKey().substring(0, ls);
-			String extractDateAndSize = extractDateAndSize(e.getValue());
+			int ls = key.lastIndexOf('_');
+			entry.baseName = key.substring(0, ls);
+			String extractDateAndSize = extractDateAndSize(value);
 			entry.fileToSave = new File(parent, entry.baseName + toSavePostfix);
 			entry.unzip = unzipDir;
 			if(extractDateAndSize.length() > 10){
@@ -544,6 +593,11 @@ public class DownloadIndexActivity extends ListActivity {
 					}
 					conn.setConnectTimeout(30000);
 					log.info(conn.getResponseMessage() + " " + conn.getResponseCode()); //$NON-NLS-1$
+					if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+						conn.disconnect();
+						triesDownload--;
+						continue;
+					}
 					is = conn.getInputStream();
 //					long skipped = 0;
 //					while (skipped < fileread) {
@@ -728,29 +782,22 @@ public class DownloadIndexActivity extends ListActivity {
 		return name.substring(0, l) + s;
 	}
 
-	protected class DownloadIndexAdapter extends ArrayAdapter<Entry<String, String>> implements Filterable {
-
-		List<Entry<String, String>> origArray;
-		private List<Entry<String, String>> origReference;
-		private DownloadIndexFilter myFilter;
-
-		public DownloadIndexAdapter(List<Entry<String, String>> array) {
-			super(DownloadIndexActivity.this, net.osmand.R.layout.download_index_list_item, array);
-			this.origArray = new ArrayList<Entry<String,String>>(array);
-			this.origReference = array;
+	protected class IndexItem {
+		private final Entry<String,String> fileEntry;
+		private String key;
+		private String description;
+		private String date;
+		
+		public IndexItem(Entry<String,String> e) {
+			fileEntry = e;
 		}
 		
-		@Override
-		public View getView(final int position, View convertView, ViewGroup parent) {
-			View v = convertView;
-			if (v == null) {
-				LayoutInflater inflater = getLayoutInflater();
-				v = inflater.inflate(net.osmand.R.layout.download_index_list_item, parent, false);
+		private void initialize()
+		{
+			if (key != null) {
+				return;
 			}
-			final View row = v; 
-			TextView item = (TextView) row.findViewById(R.id.download_item);
-			TextView description = (TextView) row.findViewById(R.id.download_descr);
-			Entry<String, String> e = getItem(position);
+			Entry<String,String> e = fileEntry;
 			int l = e.getKey().lastIndexOf('_');
 			String s = ""; //$NON-NLS-1$
 			if(e.getKey().endsWith(IndexConstants.POI_INDEX_EXT) || e.getKey().endsWith(IndexConstants.POI_INDEX_EXT_ZIP)){
@@ -789,12 +836,73 @@ public class DownloadIndexActivity extends ListActivity {
 			} else if(e.getKey().endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)){
 				s = getString(R.string.voice);
 			}
-			String name = e.getKey().substring(0, l).replace('_', ' ');
+			String name = e.getKey().substring(0, l < 0 ? e.getKey().length() : l).replace('_', ' ');
 			if(e.getKey().endsWith(".zip")){ //$NON-NLS-1$
 				name += " (zip)"; //$NON-NLS-1$
 			}
+			key = s.trim() + "\n" + name;
+			description = extractDateAndSize(e.getValue()).replace(':', '\n').trim();
+			if (description.length() > 10) {
+				date = description.substring(1, 11);
+			} else {
+				date = null;
+			}
+		}
+		public String getFileName() {
+			return fileEntry.getKey();
+		}
+		public Entry<String, String> getFileEntry() {
+			return fileEntry;
+		}
+		public String getName() {
+			initialize();
+			return key;
+		}
+		public String getDescription() {
+			initialize();
+			return description;
+		}
+		public Object getDate() {
+			initialize();
+			return date;
+		}
+		
+	}
+	protected class DownloadIndexAdapter extends ArrayAdapter<IndexItem> implements Filterable {
+		
+		private DownloadIndexFilter myFilter;
+		private final Map<String, IndexItem> indexFiles;
+
+		public DownloadIndexAdapter(Map<String, String> indexFiles) {
+			super(DownloadIndexActivity.this, net.osmand.R.layout.download_index_list_item);
+			this.indexFiles = new LinkedHashMap<String, DownloadIndexActivity.IndexItem>(indexFiles.size());
+			for (Entry<String, String> entry : indexFiles.entrySet()) {
+				IndexItem item = new IndexItem(entry);
+				this.indexFiles.put(entry.getKey(), item);
+				add(item);
+			}
+		}
+
+		public Map<String, IndexItem> getIndexFiles() {
+			return indexFiles;
+		}
+		
+		@Override
+		public View getView(final int position, View convertView, ViewGroup parent) {
+			View v = convertView;
+			if (v == null) {
+				LayoutInflater inflater = getLayoutInflater();
+				v = inflater.inflate(net.osmand.R.layout.download_index_list_item, parent, false);
+			}
+			final View row = v; 
+			TextView item = (TextView) row.findViewById(R.id.download_item);
+			TextView description = (TextView) row.findViewById(R.id.download_descr);
+			IndexItem e = getItem(position);
+			item.setText(e.getName()); //$NON-NLS-1$
+			description.setText(e.getDescription());
+			
 			CheckBox ch = (CheckBox) row.findViewById(R.id.check_download_item);
-			ch.setChecked(entriesToDownload.containsKey(e.getKey()));
+			ch.setChecked(entriesToDownload.containsKey(e.getFileName()));
 			ch.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -803,15 +911,14 @@ public class DownloadIndexActivity extends ListActivity {
 					DownloadIndexActivity.this.onListItemClick(getListView(), row, position, getItemId(position));
 				}
 			});
-			item.setText(s.trim() + "\n" + name); //$NON-NLS-1$
-			String dateAndSize = extractDateAndSize(e.getValue());
+			
 			if(indexFileNames != null){
-				String sfName = convertServerFileNameToLocal(e.getKey());
+				String sfName = convertServerFileNameToLocal(e.getFileName());
 				if(!indexFileNames.containsKey(sfName)){
 					item.setTextColor(Color.WHITE);
 				} else {
-					if(dateAndSize.length() > 10){
-						if(dateAndSize.substring(1, 11).equals(indexFileNames.get(sfName))){
+					if(e.getDate() != null){
+						if(e.getDate().equals(indexFileNames.get(sfName))){
 							item.setTextColor(Color.GREEN);
 						} else {
 							item.setTextColor(Color.BLUE);
@@ -819,23 +926,10 @@ public class DownloadIndexActivity extends ListActivity {
 					} else {
 						item.setTextColor(Color.GREEN);
 					}
-						
 				}
-				
 			}
-			description.setText(dateAndSize.replace(':', '\n').trim());
 			return row;
 		}
-		
-		
-		public List<Entry<String, String>> getOrigReference() {
-			return origReference;
-		}
-		
-		public List<Entry<String, String>> getOrigArray() {
-			return origArray;
-		}
-		
 		
 		@Override
 		public Filter getFilter() {
@@ -850,14 +944,14 @@ public class DownloadIndexActivity extends ListActivity {
 			protected FilterResults performFiltering(CharSequence constraint) {
 				FilterResults results = new FilterResults();
 				if (constraint == null || constraint.length() == 0) {
-					results.values = origArray;
-					results.count = origArray.size();
+					results.values = indexFiles.values();
+					results.count = indexFiles.size();
 				} else {
 					CharSequence lowerCase = constraint.toString()
 							.toLowerCase();
-					List<Entry<String, String>> filter = new ArrayList<Entry<String, String>>();
-					for (Entry<String, String> item : origArray) {
-						if (item.getKey().toLowerCase().contains(lowerCase)) {
+					List<IndexItem> filter = new ArrayList<IndexItem>();
+					for (IndexItem item : indexFiles.values()) {
+						if (item.getName().toLowerCase().contains(lowerCase)) {
 							filter.add(item);
 						}
 					}
@@ -869,18 +963,11 @@ public class DownloadIndexActivity extends ListActivity {
 
 			@SuppressWarnings("unchecked")
 			@Override
-			protected void publishResults(CharSequence constraint,
-					FilterResults results) {
-				synchronized (origReference) {
-					origReference.clear();
-					origReference.addAll((List<Entry<String, String>>) results.values);
+			protected void publishResults(CharSequence constraint, FilterResults results) {
+				clear();
+				for (IndexItem item : (Collection<IndexItem>) results.values) {
+					add(item);
 				}
-				if (results.count > 0) {
-					notifyDataSetChanged();
-				} else {
-					notifyDataSetInvalidated();
-				}
-
 			}
 		}
 	}
