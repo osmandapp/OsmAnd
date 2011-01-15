@@ -37,15 +37,8 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	public RegionAddressRepositoryBinary(BinaryMapIndexReader file, String name) {
 		this.file = file;
 		this.region = name;
-		//This is hack, as collator seems to be broken for "cs"-Czech country, things like Z-ž don't match, and "cz" fixes this
-		//Android issue: http://code.google.com/p/android/issues/detail?id=13423
-		if ("cs".equals(Locale.getDefault().getLanguage())) {
-			this.collator = Collator.getInstance(new Locale("cz", Locale.getDefault().getCountry(),Locale.getDefault().getVariant()));
-		//hack end
-		} else {
-			this.collator = Collator.getInstance();
-		}
-		this.collator.setStrength(Collator.PRIMARY); //ignores also case
+ 	    this.collator = Collator.getInstance();
+ 	    this.collator.setStrength(Collator.PRIMARY); //ignores also case
 		this.postCodes = new TreeMap<String, PostCode>(collator);
 	}
 	
