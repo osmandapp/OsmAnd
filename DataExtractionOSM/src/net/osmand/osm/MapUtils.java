@@ -176,7 +176,12 @@ public class MapUtils {
 	public static double getTileNumberY(float zoom,  double latitude){
 		latitude = checkLatitude(latitude);
 		double eval = Math.log( Math.tan(Math.toRadians(latitude)) + 1/Math.cos(Math.toRadians(latitude)) );
-		return  (1 - eval / Math.PI) / 2 * getPowZoom(zoom);
+		if (Double.isInfinite(eval) || Double.isNaN(eval)) {
+			latitude = latitude < 0 ? - 89.9 : 89.9;
+			eval = Math.log( Math.tan(Math.toRadians(latitude)) + 1/Math.cos(Math.toRadians(latitude)) );
+		}
+		double result = (1 - eval / Math.PI) / 2 * getPowZoom(zoom);
+		return  result;
 	}
 	
 	public static double getTileEllipsoidNumberY(float zoom, double latitude){
@@ -241,7 +246,9 @@ public class MapUtils {
 	}
 	
 	public static double getLatitudeFromTile(float zoom, double y){
-		return Math.atan(Math.sinh(Math.PI * (1 - 2 * y / getPowZoom(zoom)))) * 180d / Math.PI;
+		int sign = y < 0 ? -1 : 1;
+		double result = Math.atan(sign*Math.sinh(Math.PI * (1 - 2 * y / getPowZoom(zoom)))) * 180d / Math.PI;
+		return result;
 	}
 	
 	public static int getLengthXFromMeters(float zoom, double latitude, double longitude,  double meters, float tileSize, int widthOfDisplay) {
