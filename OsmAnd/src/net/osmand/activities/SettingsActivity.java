@@ -281,9 +281,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		fill(daynightMode, names, values, OsmandSettings.getDayNightMode(prefs).name());
 		
-		String[] entries = new String[2];
+		String[] entries = new String[RouteService.values().length];
 		String entry = OsmandSettings.getRouterService(prefs).getName();
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < RouteService.values().length; i++) {
 			entries[i] = RouteService.values()[i].getName();
 		}
 		fill(routerPreference, entries, entries, entry);
