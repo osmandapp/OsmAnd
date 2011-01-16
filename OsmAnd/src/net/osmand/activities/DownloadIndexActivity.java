@@ -1,20 +1,19 @@
 package net.osmand.activities;
 
+import static net.osmand.data.index.IndexConstants.ADDRESS_INDEX_EXT;
+import static net.osmand.data.index.IndexConstants.ADDRESS_INDEX_EXT_ZIP;
+import static net.osmand.data.index.IndexConstants.ADDRESS_TABLE_VERSION;
 import static net.osmand.data.index.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.data.index.IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
 import static net.osmand.data.index.IndexConstants.BINARY_MAP_VERSION;
 import static net.osmand.data.index.IndexConstants.POI_INDEX_EXT;
 import static net.osmand.data.index.IndexConstants.POI_INDEX_EXT_ZIP;
 import static net.osmand.data.index.IndexConstants.POI_TABLE_VERSION;
-import static net.osmand.data.index.IndexConstants.VOICE_INDEX_EXT_ZIP;
-import static net.osmand.data.index.IndexConstants.VOICE_VERSION;
-import static net.osmand.data.index.IndexConstants.ADDRESS_INDEX_EXT;
-import static net.osmand.data.index.IndexConstants.ADDRESS_INDEX_EXT_ZIP;
-import static net.osmand.data.index.IndexConstants.ADDRESS_TABLE_VERSION;
 import static net.osmand.data.index.IndexConstants.TRANSPORT_INDEX_EXT;
 import static net.osmand.data.index.IndexConstants.TRANSPORT_INDEX_EXT_ZIP;
 import static net.osmand.data.index.IndexConstants.TRANSPORT_TABLE_VERSION;
-
+import static net.osmand.data.index.IndexConstants.VOICE_INDEX_EXT_ZIP;
+import static net.osmand.data.index.IndexConstants.VOICE_VERSION;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,8 +34,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.TreeMap;
+import java.util.Map.Entry;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -54,9 +53,9 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -153,13 +152,17 @@ public class DownloadIndexActivity extends ListActivity {
 	}
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
-		/*MenuItem item = */menu.add(0, RELOAD_ID, 0, R.string.reload);
-		// item.setIcon(R.drawable.ic_menu_refresh);
-		/*item = */menu.add(0, SELECT_ALL_ID, 0, R.string.select_all);
-		/*item = */menu.add(0, DESELECT_ALL_ID, 0, R.string.deselect_all);
-		/*item = */menu.add(0, FILTER_EXISTING_REGIONS, 0, R.string.filter_existing_indexes);
+	
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		super.onPrepareOptionsMenu(menu);
+		menu.clear();
+		menu.add(0, RELOAD_ID, 0, R.string.reload);
+		if (getListAdapter() != null) {
+			// item.setIcon(R.drawable.ic_menu_refresh);
+			menu.add(0, SELECT_ALL_ID, 0, R.string.select_all);
+			menu.add(0, DESELECT_ALL_ID, 0, R.string.deselect_all);
+			menu.add(0, FILTER_EXISTING_REGIONS, 0, R.string.filter_existing_indexes);
+		}
 		return true;
 	}
 
