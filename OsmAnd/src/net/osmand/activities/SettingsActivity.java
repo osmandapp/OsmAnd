@@ -281,12 +281,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		fill(daynightMode, names, values, OsmandSettings.getDayNightMode(prefs).name());
 		
-		String[] entries = new String[RouteService.values().length];
+		String[] entries = new String[2];
 		String entry = OsmandSettings.getRouterService(prefs).getName();
-		for(int i=0; i<entries.length; i++){
+		for (int i = 0; i < 2; i++) {
 			entries[i] = RouteService.values()[i].getName();
 		}
-		fill(routerPreference,entries,entries,entry);
+		fill(routerPreference, entries, entries, entry);
 
 		// read available voice data
 		File extStorage = new File(Environment.getExternalStorageDirectory(), ResourceManager.VOICE_PATH);
@@ -355,12 +355,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		tileSourcePreference.setSummary(summary + mapName);
     }
     
-    private void fill(ListPreference component, String[] list, String[] values, String selected)
-    {
-    	component.setEntries(list);
-    	component.setEntryValues(values);
-    	component.setValue(selected);
-    }
+	private void fill(ListPreference component, String[] list, String[] values, String selected) {
+		component.setEntries(list);
+		component.setEntryValues(values);
+		component.setValue(selected);
+	}
     
     public static Map<String, String> getTileSourceEntries(Context ctx){
 		Map<String, String> map = new LinkedHashMap<String, String>();
