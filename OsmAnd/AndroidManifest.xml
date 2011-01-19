@@ -39,6 +39,11 @@
         <activity android:name=".activities.search.SearchStreet2ByNameActivity"></activity>
         <activity android:name=".activities.search.SearchBuildingByNameActivity"></activity>
 		<activity android:name=".activities.EditPOIFilterActivity"></activity>
+		<activity android:name=".activities.search.GeoIntentActivity"><intent-filter><action android:name="android.intent.action.VIEW"></action>
+			<category android:name="android.intent.category.DEFAULT"></category>
+			<data android:scheme="geo"></data>
+			</intent-filter>
+		</activity>
 		<service android:process="net.osmand.plus" android:label="@string/process_navigation_service" android:name=".NavigationService">
 			<intent-filter><action android:name="net.osmand.plus.NavigationService"></action></intent-filter>
 		</service>
