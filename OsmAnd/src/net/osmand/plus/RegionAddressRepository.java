@@ -64,7 +64,7 @@ public interface RegionAddressRepository {
 	
 	public void fillWithSuggestedStreetsIntersectStreets(City city, Street st, List<Street> streetsToFill);
 	
-	public void fillWithSuggestedStreets(MapObject cityOrPostcode, String name, List<Street> streetsToFill);
+	public void fillWithSuggestedStreets(MapObject cityOrPostcode, List<Street> streetsToFill, String... name);
 	
 	public void fillWithSuggestedCities(String name, List<MapObject> citiesToFill, LatLon currentLocation);
 

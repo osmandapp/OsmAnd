@@ -85,20 +85,22 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 
 	@Override
-	public void fillWithSuggestedStreets(MapObject o, String name, List<Street> streetsToFill) {
+	public void fillWithSuggestedStreets(MapObject o, List<Street> streetsToFill, String... names) {
 		assert o instanceof PostCode || o instanceof City;
 		City city = (City) (o instanceof City ? o : null); 
 		PostCode post = (PostCode) (o instanceof PostCode ? o : null);
-		name = name.toLowerCase();
 		preloadStreets(o);
 		Collection<Street> streets = post == null ? city.getStreets() : post.getStreets() ;
 		
-		if(name.length() == 0){
+		if(names.length == 0){
 			streetsToFill.addAll(streets);
-		} else {
-			int ind = 0;
-			for (Street s : streets) {
-				String sName = useEnglishNames ? s.getEnName() : s.getName(); //lower case not needed, collator ensures that
+			return;
+		}
+		
+		int ind = 0;
+		for (Street s : streets) {
+			String sName = useEnglishNames ? s.getEnName() : s.getName(); //lower case not needed, collator ensures that
+			for (String name : names) {
 				if (cstartsWith(collator,sName,name)) {
 					streetsToFill.add(ind, s);
 					ind++;
