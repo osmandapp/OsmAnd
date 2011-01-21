@@ -680,21 +680,27 @@ public class DownloadIndexActivity extends ListActivity {
 				}
 				ZipInputStream zipIn = new ZipInputStream(new FileInputStream(fileToDownload));
 				ZipEntry entry = null;
+				boolean first = true;
 				while ((entry = zipIn.getNextEntry()) != null) {
 					File fs;
 					if (!unzipToDir) {
-						String name = entry.getName();
-						// small simplification
-						int ind = name.lastIndexOf('_');
-						if (ind > 0) {
-							// cut version
-							int i = name.indexOf('.', ind);
-							if (i > 0) {
-								name = name.substring(0, ind) + name.substring(i, name.length());
+						if (first) {
+							fs = toIndex;
+							first = false;
+						} else {
+							String name = entry.getName();
+							// small simplification
+							int ind = name.lastIndexOf('_');
+							if (ind > 0) {
+								// cut version
+								int i = name.indexOf('.', ind);
+								if (i > 0) {
+									name = name.substring(0, ind) + name.substring(i, name.length());
+								}
 							}
+							fs = new File(fileToUnZip.getParent(), name);
+							toIndex = fs;
 						}
-						fs = new File(fileToUnZip.getParent(), name);
-						
 					} else {
 						fs = new File(fileToUnZip, entry.getName());
 					}
