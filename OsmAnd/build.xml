@@ -160,39 +160,6 @@
 		<fileset dir="ant-lib" includes="*.jar" />
 	</path>
 
-	<typedef resource="org/tigris/subversion/svnant/svnantlib.xml" classpathref="lib.path" />
-
-	<target name="update">
-		<svn svnkit="true">
-			<info target="." />
-		</svn>
-		<echo>Current revision: ${svn.info.rev}</echo>
-		<svn svnkit="true">
-			<update dir="." revision="HEAD" />
-			<update dir="${use.absolute.dir}" revision="HEAD" />
-			<info target="." />
-		</svn>
-		<echo>Updated to revision: ${svn.info.rev}</echo>
-		<echo>Modyfing Version.java to include revision info: debug r${svn.info.rev}</echo>
-		<replaceregexp file="${use.absolute.dir}/net/osmand/Version.java" match='(APP_DESCRIPTION.*=.*\").*(\".*)' replace='\1debug r${svn.info.rev}\2' byline="true" />
-	</target>
-
-	<target name="nightbuild" depends="clean,update,debug">
-		<ftp action="del" server="download.osmand.net" userid="${ftp.user}" password="${ftp.password}">
-			<fileset>
-				<include name="night-builds/OsmAnd-debug.apk" />
-			</fileset>
-		</ftp>
-
-
-		<ftp server="download.osmand.net" remotedir="night-builds" userid="${ftp.user}" password="${ftp.password}" depends="yes">
-			<fileset dir="bin">
-				<include name="OsmAnd-debug.apk" />
-			</fileset>
-		</ftp>
-
-	</target>
-
 	<!-- Execute the Android Setup task that will setup some properties
          specific to the target, and import the build rules files.
 
@@ -213,4 +180,40 @@
     -->
 	<setup />
 
+	
+	<!-- NOT used now for night builds could be deleted -->
+	<typedef resource="org/tigris/subversion/svnant/svnantlib.xml" classpathref="lib.path" />
+	
+	<target name="update">
+		<svn svnkit="true">
+			<info target="." />
+		</svn>
+		<echo>Current revision: ${svn.info.rev}</echo>
+		<svn svnkit="true">
+			<update dir="." revision="HEAD" />
+			<update dir="${use.absolute.dir}" revision="HEAD" />
+			<info target="." />
+		</svn>
+		<echo>Updated to revision: ${svn.info.rev}</echo>
+		<echo>Modyfing Version.java to include revision info: debug r${svn.info.rev}</echo>
+		<replaceregexp file="${use.absolute.dir}/net/osmand/Version.java" match='(APP_DESCRIPTION.*=.*\").*(\".*)' replace='\1debug r${svn.info.rev}\2' byline="true" />
+	</target>
+	
+	
+
+	<target name="nightbuild" depends="clean,update,debug">
+		<ftp action="del" server="download.osmand.net" userid="${ftp.user}" password="${ftp.password}">
+			<fileset>
+				<include name="night-builds/OsmAnd-debug.apk" />
+			</fileset>
+		</ftp>
+
+
+		<ftp server="download.osmand.net" remotedir="night-builds" userid="${ftp.user}" password="${ftp.password}" depends="yes">
+			<fileset dir="bin">
+				<include name="OsmAnd-debug.apk" />
+			</fileset>
+		</ftp>
+
+	</target>
 </project>

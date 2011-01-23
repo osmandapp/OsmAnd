@@ -11,7 +11,7 @@ mkdir $LOG_DIR
 # check build already run today
 if [ -e "$LOG_FILE" ]; then
     echo "Build already ran today"
-   # exit
+    exit
 fi
 touch $LOG_FILE
 
@@ -23,7 +23,7 @@ touch $LOG_FILE
 "${DIRECTORY}/build_branches.sh" &> $LOG_FILE
 
 # 3. upload to ftp server
-#"${DIRECTORY}/upload_ftp.sh" &> $LOG_FILE
+"${DIRECTORY}/upload_ftp.sh" &> $LOG_FILE
 
 # 4. Synchronize github with googlecode mercurial
 "${DIRECTORY}/sync_git_hg.sh" &> $LOG_FILE
