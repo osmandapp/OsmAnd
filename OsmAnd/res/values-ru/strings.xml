@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="trace_rendering_descr">Используйте эту опцию для оценки производительности отрисовки</string>
+    <string name="trace_rendering">Производительность карты</string>
 	<string name="daynight_mode_day">Дневной</string>
 	<string name="daynight_mode_night">Ночной</string>
 	<string name="daynight_mode_auto">Восход/закат</string>

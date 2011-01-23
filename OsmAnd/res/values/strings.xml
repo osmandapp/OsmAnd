@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="trace_rendering_descr">Use this flag to check rendering performance</string>
+    <string name="trace_rendering">Trace rendering</string>
 	<string name="daynight_mode_day">Day</string>
 	<string name="daynight_mode_night">Night</string>
 	<string name="daynight_mode_auto">Sunrise/Sunset</string>
