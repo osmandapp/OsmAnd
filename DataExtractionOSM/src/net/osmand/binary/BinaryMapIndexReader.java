@@ -1084,7 +1084,7 @@ public class BinaryMapIndexReader {
 //			reader.preloadStreets(c);
 ////			System.out.println(c.getName());
 //		}
-//		List<City> villages = reader.getVillages(reg, "коче", false);
+//		List<City> villages = reader.getVillages(reg, "", false);
 //		System.out.println("Villages " + villages.size());
 		
 		// test transport
