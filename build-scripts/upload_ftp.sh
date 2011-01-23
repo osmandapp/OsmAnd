@@ -9,14 +9,14 @@ BUILD_DIR="$DIRECTORY"/builds
 
 . "$DIRECTORY"/local.properties
 # 3. upload to ftp server
-lftp -c open $FTP_USER,$FTP_PWD $FTP_SITE || ls $FTP_FOLDER || mirror -R $FTP_FOLDER $BUILD_DIR
+lftp -c set net:timeout=45 || open $FTP_USER,$FTP_PWD $FTP_SITE || ls $FTP_FOLDER || mirror -R $FTP_FOLDER $BUILD_DIR
 
-ftp -n -v $FTP_SITE <<SCRIPT 2>&1
-quote USER $FTP_USER
-quote PASS $FTP_PWD
-cd $FTP_FOLDER 
-ls
-quit
+#ftp -n -v $FTP_SITE <<SCRIPT 2>&1
+#quote USER $FTP_USER
+#quote PASS $FTP_PWD
+#cd $FTP_FOLDER 
+#ls
+#quit
 
 
 
