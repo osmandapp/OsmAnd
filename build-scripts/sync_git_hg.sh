@@ -13,7 +13,12 @@ if [ ! -d "$HG_DIR" ]; then
 fi
 cd "${HG_DIR}"
 hg pull "${GIT_URL}"
-hg push "${HG_URL}"
+hg update -c
+# First time add entries to .hgrc (!)
+# [paths]
+# default = git://github.com/osmandapp/Osmand.git
+# googlecode = https://username:password@osmand.googlecode.com/hg
+hg push googlecode
 
 echo "Synchronization is ok"
 
