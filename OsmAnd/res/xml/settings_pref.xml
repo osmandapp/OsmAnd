@@ -12,7 +12,7 @@
 		<CheckBoxPreference android:summary="@string/continuous_rendering_descr" android:title="@string/continuous_rendering"
 			android:key="use_step_by_step_rendering" />
 		<CheckBoxPreference android:key="use_high_res_maps" android:title="@string/use_high_res_maps" android:summary="@string/use_high_res_maps_descr"></CheckBoxPreference>
-		<CheckBoxPreference android:summary="Use this flag to check rendering performance" android:title="Trace rendering"
+		<CheckBoxPreference android:summary="@string/trace_rendering_descr" android:title="@string/trace_rendering"
 			android:key="debug_rendering"></CheckBoxPreference>
 
 	</PreferenceScreen>
