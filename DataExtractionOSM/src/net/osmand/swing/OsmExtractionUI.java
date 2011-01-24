@@ -59,8 +59,22 @@ import rtree.RTree;
 public class OsmExtractionUI implements IMapLocationListener {
 
 	private static final Log log = LogFactory.getLog(OsmExtractionUI.class);
-	public static final String LOG_PATH  = System.getProperty("user.home")+"/Application Data/Osmand/osmand.log"; //$NON-NLS-1$ //$NON-NLS-2$
+	public static final String LOG_PATH  = getUserLogDirectoryPath() + "/Osmand/osmand.log"; //$NON-NLS-1$ //$NON-NLS-2$
 	public static OsmExtractionUI MAIN_APP;
+
+	public static String getUserLogDirectoryPath() {
+		String path = null;
+		if (System.getProperty("os.name").startsWith("Windows")) {
+			path = System.getenv("APPDATA").replaceAll("\\\\", "/");
+		} else if (System.getProperty("os.name").startsWith("Mac")) {
+			path = System.getProperty("user.home") + "/Library/Logs";
+		} else if (System.getenv("XDG_CACHE_HOME") != null) {
+			path = System.getenv("XDG_CACHE_HOME");
+		} else {
+			path = System.getProperty("user.home") + "/.cache";
+		}
+		return path;
+	}
 	
 	public static void main(String[] args) {
 		// first of all config log
