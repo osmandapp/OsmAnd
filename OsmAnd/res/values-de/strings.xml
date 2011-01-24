@@ -6,7 +6,7 @@
 	<string name="poi_namefinder_query_empty">Input search query to find POI</string>
 	<string name="any_poi">Any</string>
 	<string name="layer_transport_route">ÖPNV Linien</string>
-	<string name="thanks_yandex_traffic">Thanks to Yandex that they give information about traffic.</string>
+	<string name="thanks_yandex_traffic">Dank an Yandex für die Überlassung von Verkehrsinformationen.</string>
 	<string name="layer_yandex_traffic">Yandex Verkehr</string>
 	<string name="layer_route">Route</string>
 	<string name="layer_favorites">Favoriten</string>
@@ -20,12 +20,12 @@
 	<string name="context_menu_item_show_route">Zeige Route von</string>
 	<string name="use_trackball_descr">Trackball für Kartenbewegung benutzen</string>
 	<string name="use_trackball">Trackball verwenden</string>
-	<string name="background_service_wait_int_descr">Choose wait interval determining location</string>
+	<string name="background_service_wait_int_descr">Wähle Wartezeit zwischen Positionsbestimmungen</string>
 	<string name="background_service_wait_int">Warte Intervall</string>
 	<string name="service_stop_background_service">Schalte Hintergrund Navigation aus</string>
 	<string name="where_am_i">Wo bin ich?</string>
-	<string name="process_navigation_service">Osmand Nativationsdienst</string>
-	<string name="network_provider">Neztwerk</string>
+	<string name="process_navigation_service">Osmand Navigationsdienst</string>
+	<string name="network_provider">Netzwerk</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">Sekunden</string>
 	<string name="int_min">Min.</string> 
@@ -35,7 +35,7 @@
 	<string name="background_service_provider">Dienst zur Positionsbestimmung</string>
 	<string name="background_router_service_descr">Aufzeichnung der Position in großen Zeitabständen im Hintergrund aktivieren</string>
 	<string name="background_router_service">Positionsaufzeichnung im Hintergrund</string>
-	<string name="off_router_service_no_gps_available">Hintergrunddienst Background routing service OsmAnd requires turned on location.</string>
+	<string name="off_router_service_no_gps_available">Hintergrunddienst zur Routenberechnung erfordert aktiviertes GPS.</string>
 	<string name="routing_settings_descr">Navigationsoptionen</string>
 	<string name="routing_settings">Navigieren</string>
 	<string name="hide_poi_filter">Filter verstecken</string>
