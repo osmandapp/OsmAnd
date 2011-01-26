@@ -37,4 +37,10 @@
 			<locationURI>OSMAND_TRUNK/DataExtractionOSM/src</locationURI>
 		</link>
 	</linkedResources>
+	<variableList>
+		<variable>
+			<name>OSMAND_TRUNK</name>
+			<value>$%7BPARENT-1-PROJECT_LOC%7D</value>
+		</variable>
+	</variableList>
 </projectDescription>
