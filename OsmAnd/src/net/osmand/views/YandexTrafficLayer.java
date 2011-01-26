@@ -6,7 +6,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -152,10 +151,7 @@ public class YandexTrafficLayer implements OsmandMapLayer {
 					}
 				}
 				for(String s : unusedTiles){
-					Bitmap bmp = tiles.remove(s);
-					if(bmp != null){
-						bmp.recycle();
-					}
+					tiles.remove(s);
 				}
 				for (int i = tMinX; i <= tMaxX; i++) {
 					for (int j = tMinY; j <= tMaxY; j++) {
@@ -173,12 +169,7 @@ public class YandexTrafficLayer implements OsmandMapLayer {
 		} catch (IOException e) {
 			log.error("IOException", e); //$NON-NLS-1$
 		} catch (OutOfMemoryError e) {
-			for(String s : new ArrayList<String>(tiles.keySet())){
-				Bitmap bmp = tiles.remove(s);
-				if(bmp != null){
-					bmp.recycle();
-				}
-			}
+			tiles.clear();
 			System.gc();
 			if(callInd == 0){
 				updateCachedImages(tMinX, tMaxX, tMinY, tMaxY, tZoom, 1);
@@ -272,13 +263,7 @@ public class YandexTrafficLayer implements OsmandMapLayer {
 	}
 
 	private void clearCache() {
-		ArrayList<String> l = new ArrayList<String>(tiles.keySet());
-		for(String k : l){
-			Bitmap b = tiles.remove(k);
-			if(b != null){
-				b.recycle();
-			}
-		}
+		tiles.clear();
 	}
 	
 
