@@ -355,12 +355,8 @@ public class MapRenderRepositories {
 			boolean stepByStep = OsmandSettings.isUsingStepByStepRendering(prefs);
 			// 1. generate image step by step
 			if (stepByStep) {
-				Bitmap oldBmp = this.bmp;
 				this.bmp = bmp;
 				this.bmpLocation = tileRect;
-				if (oldBmp != null) {
-					oldBmp.recycle();
-				}
 			}
 			
 			renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, 
@@ -374,12 +370,8 @@ public class MapRenderRepositories {
 			
 			// 2. replace whole image
 			if (!stepByStep) {
-				Bitmap oldBmp = this.bmp;
 				this.bmp = bmp;
 				this.bmpLocation = tileRect;
-				if (oldBmp != null) {
-					oldBmp.recycle();
-				}
 			}
 			if(OsmandSettings.isDebugRendering(context)){
 				final String msg = "Search done in "+ searchTime+" ms\nRendering done in "+ renderingTime+ " ms";    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
@@ -422,7 +414,6 @@ public class MapRenderRepositories {
 		cObjects = new ArrayList<BinaryMapDataObject>();
 		cObjectsBox = new RectF();
 		if(bmp != null){
-			bmp.recycle();
 			bmp = null;
 		}
 		requestedBox = bmpLocation = null;

@@ -5,7 +5,6 @@ import gnu.trove.map.hash.TFloatObjectHashMap;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -642,13 +641,7 @@ public class OsmandRenderer {
 	
 	
 	public void clearCachedResources(){
-		Collection<Bitmap> values = new ArrayList<Bitmap>(cachedIcons.values());
 		cachedIcons.clear();
-		for(Bitmap b : values){
-			if(b != null){
-				b.recycle();
-			}
-		}
 		shaders.clear();
 	}
 	

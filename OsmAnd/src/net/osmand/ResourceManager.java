@@ -713,13 +713,7 @@ public class ResourceManager {
 	
 	public synchronized void updateMapSource(boolean useVectorMap, ITileSource source){
 		log.info("Clear cache with new source " + cacheOfImages.size()); //$NON-NLS-1$
-		ArrayList<String> list = new ArrayList<String>(cacheOfImages.keySet());
-		for (int i = 0; i < list.size(); i ++) {
-			Bitmap bmp = cacheOfImages.remove(list.get(i));
-			if(bmp != null){
-				bmp.recycle();
-			}
-		}
+		cacheOfImages.clear();
 		renderer.clearCache();
 		if(source == null || source.getBitDensity() == 0){
 			maxImgCacheSize = 32;
@@ -735,10 +729,7 @@ public class ResourceManager {
 		ArrayList<String> list = new ArrayList<String>(cacheOfImages.keySet());
 		// remove first images (as we think they are older)
 		for (int i = 0; i < list.size() /2; i ++) {
-			Bitmap bmp = cacheOfImages.remove(list.get(i));
-			if(bmp != null){
-				bmp.recycle();
-			}
+			cacheOfImages.remove(list.get(i));
 		}
 	}
 	
