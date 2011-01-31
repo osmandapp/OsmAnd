@@ -18,17 +18,17 @@ import net.osmand.BusyIndicator;
 import net.osmand.FavouritePoint;
 import net.osmand.FavouritesDbHelper;
 import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFileResult;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LogUtil;
 import net.osmand.OsmandSettings;
+import net.osmand.OsmandSettings.ApplicationMode;
 import net.osmand.PoiFilter;
 import net.osmand.PoiFiltersHelper;
 import net.osmand.R;
 import net.osmand.ResourceManager;
 import net.osmand.SQLiteTileSource;
 import net.osmand.Version;
-import net.osmand.GPXUtilities.GPXFileResult;
-import net.osmand.GPXUtilities.WptPt;
-import net.osmand.OsmandSettings.ApplicationMode;
 import net.osmand.activities.search.SearchActivity;
 import net.osmand.activities.search.SearchPoiFilterActivity;
 import net.osmand.activities.search.SearchTransportActivity;
@@ -60,12 +60,12 @@ import net.osmand.views.TransportStopsLayer;
 import net.osmand.views.YandexTrafficLayer;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
-import android.app.AlertDialog.Builder;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -85,6 +85,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -101,8 +102,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -1008,7 +1009,22 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			if(resolved != null){
 				startActivity(intent);
 			} else {
-				Toast.makeText(this, getString(R.string.gps_status_app_not_found), Toast.LENGTH_LONG).show();
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setMessage(getString(R.string.gps_status_app_not_found))
+						.setPositiveButton(
+								getString(R.string.default_buttons_yes),
+								new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										Intent intent = new Intent(
+												Intent.ACTION_VIEW,
+												Uri.parse("market://search?q=pname:" + GPS_STATUS_COMPONENT));
+										startActivity(intent);
+									}
+								})
+						.setNegativeButton(getString(R.string.default_buttons_no), null)
+						.show();
 			}
 			return true;
 //		} else if (item.getItemId() == R.id.map_mark_point) {
