@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -85,6 +86,7 @@ public class GPXUtilities {
 	
 	public static String saveToXMLFiles(File dir, Map<String, List<List<TrkPt>>> data, Context ctx){
 		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT);
+		format.setTimeZone(TimeZone.getTimeZone("UTC"));
 		try {
 			for (String f : data.keySet()) {
 				File fout = new File(dir, f + ".gpx"); //$NON-NLS-1$
