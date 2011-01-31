@@ -229,7 +229,7 @@
 	<string name="follow_route">Follow to the route</string>
 	<string name="mark_final_location_first">Please select destination first</string>
 	<string name="get_directions">Directions</string>
-	<string name="gps_status_app_not_found">GPS status app could not be found</string>
+	<string name="gps_status_app_not_found">GPS status application not installed. Search in Market?</string>
     <string name="show_gps_status">Show GPS status</string>
 	<string name="opening_hours">Opening hours</string>
 	<string name="opening_changeset">Openging changeset...</string>
