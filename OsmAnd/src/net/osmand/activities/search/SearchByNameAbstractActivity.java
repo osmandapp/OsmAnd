@@ -191,10 +191,17 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 	
 
 	class NamesAdapter extends ArrayAdapter<T> {
+		private final List<T> list;
+
 		NamesAdapter(List<T> list) {
 			super(SearchByNameAbstractActivity.this, R.layout.searchbyname_list, list);
+			this.list = list;
 		}
 
+		public List<T> getList() {
+			return list;
+		}
+		
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row;
 			if (convertView != null) {

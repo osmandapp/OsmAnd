@@ -93,6 +93,14 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			fillWithSuggestedStreetsInCities(citiesToLook, name, streetsToFill);
 			List<City> villages = file.getVillages(region);
 			fillWithSuggestedStreetsInCities(villages, name, streetsToFill);
+			Collections.sort(streetsToFill, new Comparator<Street>() {
+				@Override
+						public int compare(Street object1, Street object2) {
+							String name1 = object1.getName(useEnglishNames);
+							String name2 = object2.getName(useEnglishNames);
+							return collator.compare(name1,name2);
+						}
+			});
 		} catch (IOException e) {
 			log.error("Disk operation failed" , e); 
 		}

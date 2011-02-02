@@ -38,15 +38,11 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	public List<Street> getObjects(String filter) {
 		NamesAdapter list = (NamesAdapter)getListAdapter();
 		boolean countrySearch = isCountrySearch();
-		boolean incremental = filter.startsWith(oldfilter) && oldfilter.length() > 0 && list.getCount() > 0;
+		boolean incremental = filter.startsWith(oldfilter) && oldfilter.length() > 0 && !list.getList().isEmpty();
 		this.oldfilter = filter;
 		List<Street> result = new ArrayList<Street>();
 		if (incremental) {
-			List<Street> streets = new ArrayList<Street>();
-			for (int i = 0; i < list.getCount(); i++ ) {
-				streets.add((Street) list.getItem(i));
-			}
-			region.fillWithSuggestedStreets(filter,result,streets,countrySearch);
+			region.fillWithSuggestedStreets(filter,result,list.getList(),countrySearch);
 		} else {
 			if (!countrySearch) {
 				region.fillWithSuggestedStreets(postcode == null ? city : postcode, filter, result);

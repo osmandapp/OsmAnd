@@ -70,7 +70,7 @@ public interface RegionAddressRepository {
 	public void fillWithSuggestedStreets(String name, List<Street> streetsToFill);
 
 	public void fillWithSuggestedStreets(final String name,
-			List<Street> streetsToFill, Collection<Street> streets, boolean onlyStartCheck);
+			List<Street> streetsToFill, Collection<Street> sortedStreets, boolean onlyStartCheck);
 
 	public void fillWithSuggestedCities(String name, List<MapObject> citiesToFill, LatLon currentLocation);
 
