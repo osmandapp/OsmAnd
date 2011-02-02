@@ -884,12 +884,12 @@ public class IndexCreator {
 			}
 		}
 		
-		if(boundary != null){
+		if (boundary != null && boundary.getCenterPoint() != null) {
 			LatLon point = boundary.getCenterPoint();
-			boolean cityFound = false; 
+			boolean cityFound = false;
 			for (City c : cityManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
-				if(boundary.containsPoint(c.getLocation())){
-					if(boundary.getName() == null || boundary.getName().equalsIgnoreCase(c.getName())) {
+				if (boundary.containsPoint(c.getLocation())) {
+					if (boundary.getName() == null || boundary.getName().equalsIgnoreCase(c.getName())) {
 						citiBoundaries.put(c, boundary);
 						cityFound = true;
 					}
@@ -898,8 +898,8 @@ public class IndexCreator {
 			// TODO mark all suburbs inside city as is_in tag (!) or use another solution
 			if (!cityFound) {
 				for (City c : cityVillageManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
-					if(boundary.containsPoint(c.getLocation())){
-						if(boundary.getName() == null || boundary.getName().equalsIgnoreCase(c.getName())) {
+					if (boundary.containsPoint(c.getLocation())) {
+						if (boundary.getName() == null || boundary.getName().equalsIgnoreCase(c.getName())) {
 							citiBoundaries.put(c, boundary);
 							cityFound = true;
 						}
@@ -915,7 +915,7 @@ public class IndexCreator {
 				nCity.setName(boundary.getName());
 				citiBoundaries.put(nCity, boundary);
 				cityVillageManager.registerObject(point.getLatitude(), point.getLongitude(), nCity);
-				
+
 				DataIndexWriter.writeCity(addressCityStat, pStatements, nCity, BATCH_SIZE);
 				// commit to put all cities
 				if (pStatements.get(addressCityStat) > 0) {
