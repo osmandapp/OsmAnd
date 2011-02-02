@@ -1,6 +1,7 @@
 package net.osmand.activities.search;
 
 import java.util.List;
+import java.util.concurrent.Semaphore;
 
 import net.osmand.R;
 import android.app.ListActivity;
@@ -106,10 +107,27 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 				showProgress(View.VISIBLE);
 				List<T> loadedObjects = getObjects(filter);
 				updateUIList(loadedObjects);
+				//because of incremental, wait for the ui update
+				waitForUIThread();
 			}
 		});
 		msg.what = 1;
 		handlerToLoop.sendMessageDelayed(msg, 150);
+	}
+
+	private void waitForUIThread() {
+		final Semaphore semafor = new Semaphore(1);
+		try {
+			semafor.acquire();
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					semafor.release();
+				}
+			});
+			semafor.acquire();
+		} catch (InterruptedException e) {
+		}
 	}
 	
 	private void showProgress(final int v){
