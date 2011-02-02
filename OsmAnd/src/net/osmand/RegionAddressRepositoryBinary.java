@@ -5,10 +5,12 @@ import static net.osmand.CollatorStringMatcher.cstartsWith;
 
 import java.io.IOException;
 import java.text.Collator;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -85,6 +87,34 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 
 	@Override
+	public void fillWithSuggestedStreets(String name, List<Street> streetsToFill) {
+		try {
+			Collection<City> citiesToLook = cities.isEmpty() ? file.getCities(region) : cities.values();
+			fillWithSuggestedStreetsInCities(citiesToLook, name, streetsToFill);
+			List<City> villages = file.getVillages(region);
+			fillWithSuggestedStreetsInCities(villages, name, streetsToFill);
+		} catch (IOException e) {
+			log.error("Disk operation failed" , e); 
+		}
+	}
+
+	private void fillWithSuggestedStreetsInCities(
+			Collection<City> citiesToLook, String name,
+			List<Street> streetsToFill) throws IOException {
+		for (City city : citiesToLook) {
+			boolean preloaded = false;
+			if (city.getStreets().isEmpty()) {
+				preloaded = true;
+				file.preloadStreets(city);
+			}
+			fillWithSuggestedStreets(name, streetsToFill, city.getStreets(), true);
+			if (preloaded) {
+				city.removeAllStreets(); //so that we don't have memory issues
+			}
+		}
+	}
+	
+	@Override
 	public void fillWithSuggestedStreets(MapObject o, String name, List<Street> streetsToFill) {
 		assert o instanceof PostCode || o instanceof City;
 		City city = (City) (o instanceof City ? o : null); 
@@ -93,17 +123,64 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		preloadStreets(o);
 		Collection<Street> streets = post == null ? city.getStreets() : post.getStreets() ;
 		
+		fillWithSuggestedStreets(name, streetsToFill, streets, false);
+	}
+
+	@Override
+	public void fillWithSuggestedStreets(final String name,
+			List<Street> streetsToFill, Collection<Street> streets, boolean onlyStartCheck) {
 		if(name.length() == 0){
 			streetsToFill.addAll(streets);
 		} else {
 			int ind = 0;
-			for (Street s : streets) {
-				String sName = useEnglishNames ? s.getEnName() : s.getName(); //lower case not needed, collator ensures that
-				if (cstartsWith(collator,sName,name)) {
-					streetsToFill.add(ind, s);
-					ind++;
-				} else if (ccontains(collator,name,sName) || ccontains(collator,sName,name)) {
-					streetsToFill.add(s);
+			if (onlyStartCheck) {
+				//we assume the streets are ordered!
+				ArrayList<Street> streetList = new ArrayList<Street>(streets);
+				Comparator<Street> startCompare = new Comparator<Street>() {
+					int length = name.length();
+					@Override
+							public int compare(Street object1, Street object2) {
+								String name1 = object1.getName(useEnglishNames);
+								String name2 = object2.getName(useEnglishNames);
+								return collator.compare(
+										name1.substring(0, Math.min(
+												name1.length(), length)),
+										name2.substring(0, Math.min(
+												name2.length(), length)));
+							}
+				};
+				Street searchedStreet = new Street(null,name);
+				int index = Collections.binarySearch(streetList, searchedStreet, startCompare);
+				if (index > -1) {
+					streetsToFill.add(streetList.get(index));
+					boolean found = true;
+					int i = 1;
+					while (found) {
+						found = false;
+						if (index + i < streetList.size()) {
+							if (startCompare.compare(streetList.get(index+i),searchedStreet) == 0) {
+								streetsToFill.add(streetList.get(index+i));
+								found = true;
+							}
+						}
+						if (index - i >= 0) {
+							if (startCompare.compare(streetList.get(index-i),searchedStreet) == 0) {
+								streetsToFill.add(streetList.get(index-i));
+								found = true;
+							}
+						}
+						i++;
+					}
+				}
+			} else {
+				for (Street s : streets) {
+					String sName = useEnglishNames ? s.getEnName() : s.getName(); //lower case not needed, collator ensures that
+					if (cstartsWith(collator,sName,name)) {
+						streetsToFill.add(ind, s);
+						ind++;
+					} else if (onlyStartCheck && (ccontains(collator,name,sName) || ccontains(collator,sName,name))) {
+						streetsToFill.add(s);
+					}
 				}
 			}
 		}
@@ -249,7 +326,25 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			return null;
 		}
 		preloadCities();
-		return cities.get(id);
+		City city = cities.get(id);
+		if (city == null) {
+			return getVilageById(id);
+		} else {
+			return city;
+		}
+	}
+
+	private City getVilageById(Long id) {
+		try {
+			for (City c : file.getVillages(region)) {
+				if (c.getId().equals(id)) {
+					return c;
+				}
+			}
+		} catch (IOException e) {
+			log.error("Disk operation failed", e); //$NON-NLS-1$
+		}
+		return null;
 	}
 
 

@@ -47,17 +47,23 @@ public class City extends MapObject {
 	
 	private CityType type = null;
 	// Be attentive ! Working with street names ignoring case
-	private Map<String, Street> streets = new TreeMap<String, Street>(Collator.getInstance()); 
+	private final Map<String, Street> streets; 
 	private String isin = null;
 	
 	public City(Node el){
 		super(el);
+		Collator instance = Collator.getInstance();
+		instance.setStrength(Collator.PRIMARY);
+		streets = new TreeMap<String, Street>(instance);
 		type = CityType.valueFromString(el.getTag(OSMTagKey.PLACE));
 		isin = el.getTag(OSMTagKey.IS_IN);
 		isin = isin != null ? isin.toLowerCase() : null;
 	}
 	
 	public City(CityType type){
+		Collator instance = Collator.getInstance();
+		instance.setStrength(Collator.PRIMARY);
+		streets = new TreeMap<String, Street>(instance);
 		this.type = type;
 	}
 	
@@ -70,14 +76,14 @@ public class City extends MapObject {
 	}
 	
 	public Street registerStreet(String street){
-		if(!streets.containsKey(street.toLowerCase())){
-			streets.put(street.toLowerCase(), new Street(this, street));
+		if(!streets.containsKey(street)){
+			streets.put(street, new Street(this, street));
 		}
-		return streets.get(street.toLowerCase()); 
+		return streets.get(street); 
 	}
 	
 	public Street unregisterStreet(String name){
-		return streets.remove(name.toLowerCase()); 
+		return streets.remove(name); 
 	}
 	
 	public void removeAllStreets(){
@@ -86,7 +92,6 @@ public class City extends MapObject {
 	
 	public Street registerStreet(Street street, boolean en){
 		String name = en ? street.getEnName(): street.getName();
-		name = name.toLowerCase();
 		if(!Algoritms.isEmpty(name)){
 			if(!streets.containsKey(name)){
 				return streets.put(name, street);
@@ -125,7 +130,7 @@ public class City extends MapObject {
 	}
 	
 	public Street getStreet(String name){
-		return streets.get(name.toLowerCase());
+		return streets.get(name);
 	}
 	
 	@Override

@@ -78,11 +78,13 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 		runOnUiThread(new Runnable(){
 			@Override
 			public void run() {
-				((NamesAdapter)getListAdapter()).setNotifyOnChange(false);
+				NamesAdapter namesAdapter = (NamesAdapter)getListAdapter();
+				namesAdapter.setNotifyOnChange(false);
+				namesAdapter.clear();
 				for(T o : objects){
-					((NamesAdapter)getListAdapter()).add(o);
+					namesAdapter.add(o);
 				}
-				((NamesAdapter)getListAdapter()).notifyDataSetChanged();
+				namesAdapter.notifyDataSetChanged();
 				progress.setVisibility(View.INVISIBLE);
 			}
 		});
@@ -93,7 +95,6 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 			((NamesAdapter) getListAdapter()).getFilter().filter(filter);
 			return;
 		}
-		((NamesAdapter) getListAdapter()).clear();
 
 		if(handlerToLoop == null){
 			return;
@@ -104,9 +105,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 			public void run() {
 				showProgress(View.VISIBLE);
 				List<T> loadedObjects = getObjects(filter);
-				if(handlerToLoop != null && !handlerToLoop.hasMessages(1)){
-					updateUIList(loadedObjects);
-				}
+				updateUIList(loadedObjects);
 			}
 		});
 		msg.what = 1;

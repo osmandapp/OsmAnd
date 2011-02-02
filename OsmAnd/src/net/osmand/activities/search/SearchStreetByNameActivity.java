@@ -18,6 +18,8 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	private RegionAddressRepository region;
 	private City city;
 	private PostCode postcode;
+	private String oldfilter = "";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		SharedPreferences prefs = OsmandSettings.getPrefs(this);
@@ -29,27 +31,51 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 			}
 		}
 		super.onCreate(savedInstanceState);
-		((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_street);
+		((TextView)findViewById(R.id.Label)).setText(isCountrySearch() ? R.string.incremental_search_street_in_country : R.string.incremental_search_street);
 	}
 	
 	@Override
 	public List<Street> getObjects(String filter) {
-		List<Street> l = new ArrayList<Street>();
-		if (city != null || postcode != null) {
-			region.fillWithSuggestedStreets(postcode == null ? city : postcode, filter, l);
+		NamesAdapter list = (NamesAdapter)getListAdapter();
+		boolean countrySearch = isCountrySearch();
+		boolean incremental = filter.startsWith(oldfilter) && oldfilter.length() > 0 && list.getCount() > 0;
+		this.oldfilter = filter;
+		List<Street> result = new ArrayList<Street>();
+		if (incremental) {
+			List<Street> streets = new ArrayList<Street>();
+			for (int i = 0; i < list.getCount(); i++ ) {
+				streets.add((Street) list.getItem(i));
+			}
+			region.fillWithSuggestedStreets(filter,result,streets,countrySearch);
+		} else {
+			if (!countrySearch) {
+				region.fillWithSuggestedStreets(postcode == null ? city : postcode, filter, result);
+			} else if (filter.length() > 2) {
+				region.fillWithSuggestedStreets(filter, result);
+			}
 		}
-		return l;
+		return result;
+	}
+
+	private boolean isCountrySearch() {
+		return city == null && postcode == null;
 	}
 	
 	@Override
 	public void updateTextView(Street obj, TextView txt) {
-		txt.setText(obj.getName(region.useEnglishNames()));
+		if (city != null || postcode != null) {
+			txt.setText(obj.getName(region.useEnglishNames()));
+		} else {
+			txt.setText(obj.getDisplayName(region.useEnglishNames()));
+		}
 	}
 	
 	@Override
 	public void itemSelected(Street obj) {
+		if (obj.getCity() != null) { //can be in case of postcode
+			OsmandSettings.setLastSearchedCity(this, obj.getCity().getId());
+		}
 		OsmandSettings.setLastSearchedStreet(this, obj.getName(region.useEnglishNames()));
 		finish();
-		
 	}
 }

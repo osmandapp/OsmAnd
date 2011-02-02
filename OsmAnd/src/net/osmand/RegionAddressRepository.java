@@ -1,6 +1,7 @@
 package net.osmand;
 
 import java.text.Collator;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
@@ -65,7 +66,12 @@ public interface RegionAddressRepository {
 	public void fillWithSuggestedStreetsIntersectStreets(City city, Street st, List<Street> streetsToFill);
 	
 	public void fillWithSuggestedStreets(MapObject cityOrPostcode, String name, List<Street> streetsToFill);
-	
+
+	public void fillWithSuggestedStreets(String name, List<Street> streetsToFill);
+
+	public void fillWithSuggestedStreets(final String name,
+			List<Street> streetsToFill, Collection<Street> streets, boolean onlyStartCheck);
+
 	public void fillWithSuggestedCities(String name, List<MapObject> citiesToFill, LatLon currentLocation);
 
 	public LatLon findStreetIntersection(Street street, Street street2);
@@ -84,5 +90,6 @@ public interface RegionAddressRepository {
 	
 	// called to close resources
 	public void close();
+
 	
 }

@@ -1,6 +1,7 @@
 package net.osmand;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -206,6 +207,32 @@ public class RegionAddressRepositoryOdb implements RegionAddressRepository {
 		}
 	}
 	
+	@Override
+	public void fillWithSuggestedStreets(String name, List<Street> streetsToFill) {
+		try {
+			preloadCities();
+			fillWithSuggestedStreetsInCities(cities.values(), name, streetsToFill);
+			fillWithSuggestedStreetsInCities(getVillages(), name, streetsToFill);
+		} catch (IOException e) {
+			log.error("Disk operation failed" , e); 
+		}
+	}
+	
+	private void fillWithSuggestedStreetsInCities(
+			Collection<City> citiesToLook, String name,
+			List<Street> streetsToFill) throws IOException {
+		for (City city : citiesToLook) {
+			boolean preloaded = false;
+			if (city.getStreets().isEmpty()) {
+				preloaded = true;
+				preloadStreets(city);
+			}
+			fillWithSuggestedStreets(name, streetsToFill, city.getStreets(), true);
+			if (preloaded) {
+				city.removeAllStreets(); //so that we don't have memory issues
+			}
+		}
+	}
 	
 	public void fillWithSuggestedStreets(MapObject o, String name, List<Street> streetsToFill){
 		assert o instanceof PostCode || o instanceof City;
@@ -215,7 +242,13 @@ public class RegionAddressRepositoryOdb implements RegionAddressRepository {
 		name = name.toLowerCase();
 		
 		Collection<Street> streets = post == null ? city.getStreets() : post.getStreets() ; 
-		int ind = 0;
+		fillWithSuggestedStreets(name, streetsToFill, streets, false);
+	}
+
+	@Override
+	public void fillWithSuggestedStreets(String name,
+			List<Street> streetsToFill, Collection<Street> streets, boolean startsWithOnly) {
+		int ind;
 		if(name.length() == 0){
 			streetsToFill.addAll(streets);
 			return;
@@ -227,7 +260,7 @@ public class RegionAddressRepositoryOdb implements RegionAddressRepository {
 			if (lowerCase.startsWith(name)) {
 				streetsToFill.add(ind, s);
 				ind++;
-			} else if (lowerCase.contains(name)) {
+			} else if (!startsWithOnly && lowerCase.contains(name)) {
 				streetsToFill.add(s);
 			}
 		}
@@ -316,6 +349,26 @@ public class RegionAddressRepositoryOdb implements RegionAddressRepository {
 			
 			log.debug("Loaded citites " + (citiesToFill.size() - initialsize)); //$NON-NLS-1$
 		}
+	}
+	
+	private List<City> getVillages()
+	{
+		List<City> hamlets = new ArrayList<City>();
+		StringBuilder where = new StringBuilder(80);
+		where.
+			  append("city_type not in ("). //$NON-NLS-1$
+			  append('\'').append(CityType.valueToString(CityType.CITY)).append('\'').append(", "). //$NON-NLS-1$
+			  append('\'').append(CityType.valueToString(CityType.TOWN)).append('\'').append(") and "). //$NON-NLS-1$
+			  append(useEnglishNames ? "name_en" : "name").append(" LIKE '"+name+"%'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		Cursor query = db.query("city", new String[]{"id","latitude", "longitude", "name", "name_en", "city_type"},  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+				where.toString(), null, null, null, null);
+		if (query.moveToFirst()) {
+			do {
+				hamlets.add(parseCityFromCursor(query));
+			} while (query.moveToNext());
+		}
+		query.close();
+		return hamlets;
 	}
 	
     public void preloadWayNodes(Street street){
