@@ -11,6 +11,7 @@ if [ ! -d "$GIT_DIR" ]; then
 fi
 # update git
 cd "${GIT_DIR}"
+git reset --hard
 git checkout master
 git pull ${GIT_ORIGIN_NAME}
 

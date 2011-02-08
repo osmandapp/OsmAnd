@@ -18,7 +18,7 @@ hg update -c
 # [paths]
 # default = git://github.com/osmandapp/Osmand.git
 # googlecode = https://username:password@osmand.googlecode.com/hg
-hg push googlecode
+hg push -f googlecode
 
 echo "Synchronization is ok"
 
