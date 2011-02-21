@@ -64,22 +64,6 @@ public class RoutingHelper {
 	private VoiceRouter voiceRouter;
 	
 	
-	// TEST CODE
-//	private static List<Location> testRoute = new ArrayList<Location>();
-//	private static void addTestLocation(double lat, double lon){
-//		Location l = new Location("p");
-//		l.setLatitude(lat);
-//		l.setLongitude(lon);
-//		testRoute.add(l);
-//	}
-//	static {
-//		addTestLocation(53.83330108605482, 27.590844306640605);
-//		addTestLocation(53.69992563864831, 27.52381053894041);
-//		addTestLocation(53.69728328030487, 27.521235618286113);
-//	}
-	// END TEST CODE
-	
-	
 	public RoutingHelper(ApplicationMode mode, Context context, CommandPlayer player){
 		this.mode = mode;
 		this.context = context;
@@ -507,6 +491,9 @@ public class RoutingHelper {
 		return finalLocation != null && !routeNodes.isEmpty();
 	}
 	
+	protected Context getContext() {
+		return context;
+	}
 	
 	public synchronized void fillLocationsToShow(double topLatitude, double leftLongitude, double bottomLatitude,double rightLongitude, List<Location> l){
 		l.clear();

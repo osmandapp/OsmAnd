@@ -282,10 +282,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 		LatLon pointToNavigate = OsmandSettings.getPointToNavigate(settings);
 		
-		// TODO how this situation could be ?
+		// This situtation could be when navigation suddenly crashed and after restarting
+		// it tries to continue the last route
 		if(!Algoritms.objectEquals(routingHelper.getFinalLocation(), pointToNavigate)){
-			// there is no way how to clear mode. Only user can do : clear point to navigate, exit from app & set up new point.
-			// that case help to not calculate route at all.
 			routingHelper.setFollowingMode(false);
 			routingHelper.setFinalAndCurrentLocation(pointToNavigate, null);
 
@@ -300,7 +299,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						routingHelper.setFollowingMode(true);
-						
+						((OsmandApplication)getApplication()).showDialogInitializingCommandPlayer(MapActivity.this);
 					}
 				});
 				builder.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener(){
@@ -1165,6 +1164,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				routingHelper.setFollowingMode(true);
 				routingHelper.setFinalAndCurrentLocation(navigationLayer.getPointToNavigate(), location);
 				
+				((OsmandApplication) getApplication()).showDialogInitializingCommandPlayer(MapActivity.this);
+				
 			}
     	};
     	DialogInterface.OnClickListener showRoute = new DialogInterface.OnClickListener(){
@@ -1489,6 +1490,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					OsmandSettings.setFollowingByRoute(MapActivity.this, true);
 					routingHelper.setFollowingMode(true);
 					routingHelper.setFinalAndCurrentLocation(endPoint, startForRouting, l);
+					((OsmandApplication)getApplication()).showDialogInitializingCommandPlayer(MapActivity.this);
 				}
 				
 			}

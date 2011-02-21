@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="voice_is_not_available_msg">Голосовая навигация не доступна. Перейдите в настройки и укажите голосовые данные или загрузите их.</string>
+	<string name="voice_is_not_available_title">Голосовые данные не найдены</string>
 	<string name="trace_rendering_descr">Используйте эту опцию для оценки производительности отрисовки</string>
     <string name="trace_rendering">Производительность карты</string>
 	<string name="daynight_mode_day">Дневной</string>
@@ -115,8 +117,8 @@
 	<string name="background_router_service_descr">Включить фоновый сервис для обновления через долгий период времени</string>
 	<string name="background_router_service">Сервис навигации</string>
 	<string name="off_router_service_no_gps_available">Сервис маршрутизации OsmAnd включен, отключив позиционирование, он перестает вести по маршруту.</string>
-	<string name="routing_settings_descr">Изменить настройки маршрутизации</string>
-	<string name="routing_settings">Маршрутизация</string>
+	<string name="routing_settings_descr">Изменить настройки навигации</string>
+	<string name="routing_settings">Навигация</string>
 	<string name="hide_poi_filter">Скрыть фильтр</string>
 	<string name="show_poi_filter">Показать фильтр</string>
 	<string name="search_poi_filter">Фильтр</string>
