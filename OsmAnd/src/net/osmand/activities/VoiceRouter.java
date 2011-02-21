@@ -25,7 +25,7 @@ public class VoiceRouter {
 	private int currentStatus = STATUS_UNKNOWN;
 
 
-	public VoiceRouter(RoutingHelper router, CommandPlayer player){
+	public VoiceRouter(RoutingHelper router, CommandPlayer player) {
 		this.router = router;
 		this.player = player;
 		updateAppMode();
@@ -34,6 +34,7 @@ public class VoiceRouter {
 	public void setPlayer(CommandPlayer player) {
 		this.player = player;
 	}
+	
 	
 	public void setMute(boolean mute) {
 		this.mute = mute;

@@ -8,6 +8,7 @@ import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.List;
 
+import net.osmand.Algoritms;
 import net.osmand.FavouritesDbHelper;
 import net.osmand.LogUtil;
 import net.osmand.OsmandSettings;
@@ -16,9 +17,13 @@ import net.osmand.ProgressDialogImplementation;
 import net.osmand.R;
 import net.osmand.ResourceManager;
 import net.osmand.voice.CommandPlayer;
+import android.app.AlertDialog;
 import android.app.Application;
 import android.app.ProgressDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Environment;
 import android.os.Handler;
 import android.text.format.DateFormat;
@@ -32,7 +37,7 @@ public class OsmandApplication extends Application {
 	PoiFiltersHelper poiFilters = null;
 	RoutingHelper routingHelper = null;
 	FavouritesDbHelper favorites = null;
-	CommandPlayer player;
+	CommandPlayer player = null;
 	
 	
 	// start variables
@@ -41,8 +46,6 @@ public class OsmandApplication extends Application {
 	private ProgressDialog progressDlg;
 	private Handler uiHandler;
 	private DayNightHelper daynightHelper;
-	
-	
 	
 	
     public void	onCreate(){
@@ -107,12 +110,54 @@ public class OsmandApplication extends Application {
 		return player;
 	}
 	
-	public String initCommandPlayer(){
-		if(player == null){
+
+	public void showDialogInitializingCommandPlayer(final Context uiContext){
+		String voiceProvider = OsmandSettings.getVoiceProvider(OsmandSettings.getPrefs(this));
+		if(voiceProvider == null){
+			Builder builder = new AlertDialog.Builder(uiContext);
+			builder.setCancelable(true);
+			builder.setNegativeButton(R.string.default_buttons_cancel, null);
+			builder.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					uiContext.startActivity(new Intent(uiContext, SettingsActivity.class));
+				}
+			});
+			builder.setTitle(R.string.voice_is_not_available_title);
+			builder.setMessage(R.string.voice_is_not_available_msg);
+			builder.show();
+		}
+		if(player == null 
+				|| !Algoritms.objectEquals(voiceProvider, player.getCurrentVoice())){
+			initVoiceDataInDifferentThread(uiContext);
+		}
+	}
+
+	private void initVoiceDataInDifferentThread(Context uiContext) {
+		final ProgressDialog dlg = ProgressDialog.show(uiContext, getString(R.string.loading_data), getString(R.string.voice_data_initializing));
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				String w = null;
+				try {
+					w = initCommandPlayer();
+				} finally {
+					dlg.dismiss();
+				}
+				if(w != null){
+					showWarning(dlg.getContext(), w);
+				}
+			}
+		}).start();
+	}
+	
+	public String initCommandPlayer() {
+		if (player == null) {
 			player = new CommandPlayer(OsmandApplication.this);
 			routingHelper.getVoiceRouter().setPlayer(player);
 		}
-		return player.init();
+		return player.init(OsmandSettings.getVoiceProvider(OsmandSettings.getPrefs(this)));
 	}
 
 	public void startApplication() {
@@ -125,16 +170,7 @@ public class OsmandApplication extends Application {
 						List<String> warnings = null;
 						try {
 							warnings = manager.reloadIndexes(startDialog);
-							String voice = OsmandSettings.getVoiceProvider(OsmandSettings.getPrefs(OsmandApplication.this));
 							player = null;
-							if (voice != null) {
-								startDialog.startTask(getString(R.string.voice_data_initializing), -1);
-								String w = initCommandPlayer();
-								if (w != null) {
-									warnings.add(w);
-								}
-							}
-
 							SavingTrackHelper helper = new SavingTrackHelper(OsmandApplication.this);
 							if (helper.hasDataToSave()) {
 								startDialog.startTask(getString(R.string.saving_gpx_tracks), -1);
@@ -174,13 +210,17 @@ public class OsmandApplication extends Application {
 				}
 				b.append(w);
 			}
-			uiHandler.post(new Runnable() {
-				@Override
-				public void run() {
-					Toast.makeText(uiContext, b.toString(), Toast.LENGTH_LONG).show();
-				}
-			});
+			showWarning(uiContext, b.toString());
 		}
+	}
+
+	private void showWarning(final Context uiContext, final String b) {
+		uiHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				Toast.makeText(uiContext, b.toString(), Toast.LENGTH_LONG).show();
+			}
+		});
 	}
 	
 
