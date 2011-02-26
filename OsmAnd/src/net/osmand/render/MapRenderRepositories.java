@@ -24,6 +24,7 @@ import net.osmand.LogUtil;
 import net.osmand.OsmandSettings;
 import net.osmand.R;
 import net.osmand.RotatedTileBox;
+import net.osmand.activities.OsmandApplication;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -73,7 +74,6 @@ public class MapRenderRepositories {
 	private RenderingContext currentRenderingContext;
 	private SearchRequest<BinaryMapDataObject> searchRequest;
 	private SharedPreferences prefs;
-	
 	public MapRenderRepositories(Context context){
 		this.context = context;
 		this.renderer = new OsmandRenderer(context);
@@ -196,7 +196,7 @@ public class MapRenderRepositories {
 		return false;
 	}
 	
-	private boolean loadVectorData(RectF dataBox, final int zoom){
+	private boolean loadVectorData(RectF dataBox, final int zoom, BaseOsmandRender renderingType){
 		double cBottomLatitude = dataBox.bottom;
 		double cTopLatitude = dataBox.top;
 		double cLeftLongitude = dataBox.left;
@@ -225,23 +225,14 @@ public class MapRenderRepositories {
 			searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom);
 			if (zoom < 15) {
 				searchRequest.setSearchFilter(new BinaryMapIndexReader.SearchFilter() {
-					// not correct should be used map from rendering to display minzoom
-					TIntByteMap map = MapRenderingTypes.getDefault().getObjectTypeMinZoom();
 
 					@Override
 					public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex root) {
 						for (int j = 0; j < types.size(); j++) {
 							int type = types.get(j);
-							if ((type & 3) == MapRenderingTypes.POINT_TYPE) {
-								// keep 13 bit after last 2 bits and
-								// 0111 1111 1111 1100
-								type &= 0x7ffc;
-							} else {
-								// 0000 1111 1111 1100
-								type &= 0xffc;
-							}
-							byte b = map.get(type);
-							if (b != 0 && b <= zoom) {
+							int mask = type & 3;
+							TagValuePair pair = root.decodeType(type);
+							if (renderingType.isObjectVisible(pair.tag, pair.value, zoom, mask)) {
 								return true;
 							}
 						}
@@ -311,12 +302,20 @@ public class MapRenderRepositories {
 			currentRenderingContext = null;
 		}
 		try {
+			// find selected rendering type 
+			Boolean renderDay = ((OsmandApplication)context.getApplicationContext()).getDaynightHelper().getDayNightRenderer();
+			BaseOsmandRender renderingType = RendererRegistry.getRegistry().getCurrentSelectedRenderer();
+			if(renderDay != null && renderingType != null && renderDay.booleanValue() != renderingType.isDayRender()){
+				renderingType = RendererRegistry.getRegistry().getOppositeRendererForDayNight(renderingType);
+			}
+			
 			// prevent editing
 			requestedBox = new RotatedTileBox(tileRect);
 
 			// calculate data box
 			RectF dataBox = requestedBox.calculateLatLonBox(new RectF());
 			long now = System.currentTimeMillis();
+			
 			if (cObjectsBox.left > dataBox.left || cObjectsBox.top > dataBox.top || cObjectsBox.right < dataBox.right
 					|| cObjectsBox.bottom < dataBox.bottom) {
 				// increase data box in order for rotate
@@ -329,7 +328,7 @@ public class MapRenderRepositories {
 					dataBox.top -= hi;
 					dataBox.bottom += hi;
 				}
-				boolean loaded = loadVectorData(dataBox, requestedBox.getZoom());
+				boolean loaded = loadVectorData(dataBox, requestedBox.getZoom(), MapRenderingTypes.getDefault());
 				if (!loaded || checkWhetherInterrupted()) {
 					return;
 				}
@@ -359,8 +358,10 @@ public class MapRenderRepositories {
 				this.bmpLocation = tileRect;
 			}
 			
+			
+			
 			renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, 
-					OsmandSettings.usingEnglishNames(prefs), stepByStep ? notifyList : null);
+					OsmandSettings.usingEnglishNames(prefs), renderingType, stepByStep ? notifyList : null);
 			if (checkWhetherInterrupted()) {
 				currentRenderingContext = null;
 				return;

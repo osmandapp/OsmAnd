@@ -198,6 +198,43 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 		
 		return ret;
 	}
+	
+	public boolean isObjectVisible(String tag, String val, int zoom, int type) {
+		if (type == 0) {
+			// replace multipolygon with polygon
+			type = 3;
+		}
+		if (isObjectVisibleImpl(tag, val, zoom, type)) {
+			return true;
+		}
+		if (isObjectVisibleImpl(tag, null, zoom, type)) {
+			return true;
+		}
+		for (BaseOsmandRender d : dependRenderers) {
+			if (d.isObjectVisibleImpl(tag, val, zoom, type)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	private boolean isObjectVisibleImpl(String tag, String val, int zoom, int type) {
+		if (rules[type] != null) {
+			Map<String, List<FilterState>> map = rules[type].get(tag);
+			if (map != null) {
+				List<FilterState> list = map.get(val);
+				if (list != null) {
+					for (FilterState f : list) {
+						if (f.minzoom <= zoom && (zoom <= f.maxzoom || f.maxzoom == -1)) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
 
 	private float getObjectOrderImpl(String tag, String val, int type, int layer) {
 		if (rules[OsmandRenderingRulesParser.ORDER_STATE] != null) {
