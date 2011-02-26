@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.LogUtil;
-import net.osmand.activities.OsmandApplication;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
@@ -64,7 +63,6 @@ public class OsmandRenderer {
 
 	private final Context context;
 
-	private BaseOsmandRender render;
 	private DisplayMetrics dm;
 	
 	private static class TextDrawInfo {
@@ -235,7 +233,6 @@ public class OsmandRenderer {
 		paintFillEmpty = new Paint();
 		paintFillEmpty.setStyle(Style.FILL);
 		paintFillEmpty.setColor(clFillScreen);
-		render = RendererRegistry.getRegistry().defaultRender();
 		dm = new DisplayMetrics();
 		WindowManager wmgr = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
@@ -270,18 +267,15 @@ public class OsmandRenderer {
 	}
 	
 	
-	public Bitmap generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, boolean useEnglishNames, List<IMapDownloaderCallback> notifyList) {
+	public Bitmap generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, boolean useEnglishNames,
+			BaseOsmandRender renderer,
+			List<IMapDownloaderCallback> notifyList) {
 		long now = System.currentTimeMillis();
-		Boolean renderDay = ((OsmandApplication)context.getApplicationContext()).getDaynightHelper().getDayNightRenderer();
-		render = RendererRegistry.getRegistry().getCurrentSelectedRenderer();
-		if(renderDay != null && renderDay.booleanValue() != render.isDayRender()){
-			render = RendererRegistry.getRegistry().getOppositeRendererForDayNight(render);
-		}
 		
 		// fill area
 		Canvas cv = new Canvas(bmp);
-		if(render != null){
-			int dc = render.getDefaultColor();
+		if(renderer != null){
+			int dc = renderer.getDefaultColor();
 			if(dc != 0){
 				paintFillEmpty.setColor(dc);
 			}
@@ -292,7 +286,7 @@ public class OsmandRenderer {
 		int sz = objects.size();
 		int init = sz / 4;
 		TFloatObjectHashMap<TIntArrayList> orderMap = new TFloatObjectHashMap<TIntArrayList>();
-		if (render != null) {
+		if (renderer != null) {
 			for (int i = 0; i < sz; i++) {
 				BinaryMapDataObject o = objects.get(i);
 				int sh = i << 8;
@@ -300,7 +294,7 @@ public class OsmandRenderer {
 				if (o instanceof MultyPolygon) {
 					int mask = MapRenderingTypes.MULTY_POLYGON_TYPE;
 					int layer = ((MultyPolygon) o).getLayer();
-					put(orderMap, render.getObjectOrder(((MultyPolygon) o).getTag(), ((MultyPolygon) o).getValue(), 
+					put(orderMap, renderer.getObjectOrder(((MultyPolygon) o).getTag(), ((MultyPolygon) o).getValue(), 
 							mask, layer), sh, init);
 				} else {
 					for (int j = 0; j < o.getTypes().length; j++) {
@@ -315,7 +309,7 @@ public class OsmandRenderer {
 						TagValuePair pair = o.getMapIndex().decodeType(MapRenderingTypes.getMainObjectType(wholeType),
 								MapRenderingTypes.getObjectSubType(wholeType));
 						if (pair != null) {
-							put(orderMap, render.getObjectOrder(pair.tag, pair.value, mask, layer), sh + j, init);
+							put(orderMap, renderer.getObjectOrder(pair.tag, pair.value, mask, layer), sh + j, init);
 						}
 
 					}
@@ -346,7 +340,7 @@ public class OsmandRenderer {
 					BinaryMapDataObject obj = objects.get(ind);
 
 					// show text only for main type
-					drawObj(obj, cv, rc, l, l == 0);
+					drawObj(obj, renderer, cv, rc, l, l == 0);
 					
 					objCount++;
 				}
@@ -575,10 +569,10 @@ public class OsmandRenderer {
 	}
 
 	
-	protected void drawObj(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, int l, boolean renderText) {
+	protected void drawObj(BinaryMapDataObject obj, BaseOsmandRender render, Canvas canvas, RenderingContext rc, int l, boolean renderText) {
 		rc.allObjects++;
 		if (obj instanceof MultyPolygon) {
-			drawMultiPolygon(obj, canvas, rc);
+			drawMultiPolygon(obj, render,canvas, rc);
 		} else {
 			int mainType = obj.getTypes()[l];
 			int t = mainType & 3;
@@ -586,12 +580,12 @@ public class OsmandRenderer {
 			int subtype = MapRenderingTypes.getObjectSubType(mainType);
 			TagValuePair pair = obj.getMapIndex().decodeType(type, subtype);
 			if (t == MapRenderingTypes.POINT_TYPE) {
-				drawPoint(obj, canvas, rc, pair, renderText);
+				drawPoint(obj, render, canvas, rc, pair, renderText);
 			} else if (t == MapRenderingTypes.POLYLINE_TYPE) {
 				int layer = MapRenderingTypes.getNegativeWayLayer(mainType);
-				drawPolyline(obj, canvas, rc, pair, layer);
+				drawPolyline(obj, render, canvas, rc, pair, layer);
 			} else if (t == MapRenderingTypes.POLYGON_TYPE) {
-				drawPolygon(obj, canvas, rc, pair);
+				drawPolygon(obj, render, canvas, rc, pair);
 			} else {
 				if (t == MapRenderingTypes.MULTY_POLYGON_TYPE && !(obj instanceof MultyPolygon)) {
 					// log this situation
@@ -645,7 +639,7 @@ public class OsmandRenderer {
 		shaders.clear();
 	}
 	
-	private void drawMultiPolygon(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc) {
+	private void drawMultiPolygon(BinaryMapDataObject obj, BaseOsmandRender render, Canvas canvas, RenderingContext rc) {
 		String tag = ((MultyPolygon)obj).getTag();
 		String value = ((MultyPolygon)obj).getValue();
 		if(render == null || tag == null){
@@ -701,7 +695,7 @@ public class OsmandRenderer {
 	}
 	
 	
-	private void drawPolygon(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, TagValuePair pair) {
+	private void drawPolygon(BinaryMapDataObject obj, BaseOsmandRender render, Canvas canvas, RenderingContext rc, TagValuePair pair) {
 		
 		if(render == null || pair == null){
 			return;
@@ -757,7 +751,7 @@ public class OsmandRenderer {
 		return;
 	}
 	
-	private void drawPoint(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, TagValuePair pair, boolean renderText) {
+	private void drawPoint(BinaryMapDataObject obj, BaseOsmandRender render, Canvas canvas, RenderingContext rc, TagValuePair pair, boolean renderText) {
 		if(render == null || pair == null){
 			return;
 		}
@@ -804,7 +798,7 @@ public class OsmandRenderer {
 	
 
 	
-	private void drawPolyline(BinaryMapDataObject obj, Canvas canvas, RenderingContext rc, TagValuePair pair, int layer) {
+	private void drawPolyline(BinaryMapDataObject obj, BaseOsmandRender render, Canvas canvas, RenderingContext rc, TagValuePair pair, int layer) {
 		if(render == null || pair == null){
 			return;
 		}

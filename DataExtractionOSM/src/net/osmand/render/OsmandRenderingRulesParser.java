@@ -12,6 +12,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import net.osmand.LogUtil;
+import net.osmand.osm.MapRenderingTypes;
 
 import org.apache.commons.logging.Log;
 import org.xml.sax.Attributes;
@@ -92,9 +93,9 @@ public class OsmandRenderingRulesParser {
 	}
 	
 	
-	public final static int POINT_STATE = 1;
-	public final static int POLYGON_STATE = 2;
-	public final static int LINE_STATE = 3;
+	public final static int POINT_STATE = MapRenderingTypes.POINT_TYPE;
+	public final static int LINE_STATE = MapRenderingTypes.POLYLINE_TYPE;
+	public final static int POLYGON_STATE = MapRenderingTypes.POLYGON_TYPE;
 	public final static int TEXT_STATE = 4;
 	public final static int ORDER_STATE = 5;
 	
