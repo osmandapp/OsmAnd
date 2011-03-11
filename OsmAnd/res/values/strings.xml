@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="application_dir">Storage directory</string>
+	<string name="application_dir_change_warning">Changing storage directory will not move or delete the data. You must do it yourself! Do it at your own risk! Continue anyway?</string>
 	<string name="gps_status_app_not_found">GPS status application not installed. Search in Market?</string>
 	
 	<string name="voice_is_not_available_msg">Voice guidance is not available. Please go to settings, choose preferrable voice data or download it.</string>

@@ -29,7 +29,6 @@ import gnu.trove.procedure.TFloatProcedure;
 import gnu.trove.procedure.TObjectProcedure;
 import gnu.trove.iterator.TFloatIterator;
 import gnu.trove.iterator.TFloatObjectIterator;
-import gnu.trove.iterator.TPrimitiveIterator;
 import gnu.trove.function.TObjectFunction;
 import gnu.trove.set.TFloatSet;
 import gnu.trove.TFloatCollection;

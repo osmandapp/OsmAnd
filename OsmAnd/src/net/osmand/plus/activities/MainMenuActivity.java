@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.MessageFormat;
 
 import net.osmand.Version;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.search.SearchActivity;
@@ -18,7 +19,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -44,7 +44,7 @@ public class MainMenuActivity extends Activity {
 	
 	public void checkPreviousRunsForExceptions() {
 		long size = getPreferences(MODE_WORLD_READABLE).getLong(EXCEPTION_FILE_SIZE, 0);
-		final File file = new File(Environment.getExternalStorageDirectory(), OsmandApplication.EXCEPTION_PATH);
+		final File file = OsmandSettings.extendOsmandPath(getApplicationContext(), OsmandApplication.EXCEPTION_PATH);
 		if (file.exists() && file.length() > 0) {
 			if (size != file.length()) {
 				String msg = MessageFormat.format(getString(R.string.previous_run_crashed), OsmandApplication.EXCEPTION_PATH);
