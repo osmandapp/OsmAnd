@@ -28,7 +28,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -193,7 +192,7 @@ public class FavouritesActivity extends ListActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if(item.getItemId() == EXPORT_ID){
-			File appDir = new File(Environment.getExternalStorageDirectory(), ResourceManager.APP_DIR);
+			File appDir = OsmandSettings.extendOsmandPath(getApplicationContext(), ResourceManager.APP_DIR);
 			if(favouritesAdapter.isEmpty()){
 				Toast.makeText(this, R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
 			} else if(!appDir.exists()){
@@ -215,7 +214,7 @@ public class FavouritesActivity extends ListActivity {
 				}
 			}
 		} else if(item.getItemId() == IMPORT_ID){
-			File appDir = new File(Environment.getExternalStorageDirectory(), ResourceManager.APP_DIR);
+			File appDir = OsmandSettings.extendOsmandPath(getApplicationContext(), ResourceManager.APP_DIR);
 			File f = new File(appDir, FILE_TO_SAVE);
 			if(!f.exists()){
 				Toast.makeText(this, MessageFormat.format(getString(R.string.fav_file_to_load_not_found), f.getAbsolutePath()), Toast.LENGTH_LONG).show();
