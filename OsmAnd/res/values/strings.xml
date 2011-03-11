@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="voice_is_not_available_msg">Voice guidance is not available. Please go to settings, choose preferrable voice data or download it.</string>
+	<string name="voice_is_not_available_title">Voice data is not specified</string>
 	<string name="trace_rendering_descr">Use this flag to check rendering performance</string>
     <string name="trace_rendering">Trace rendering</string>
 	<string name="daynight_mode_day">Day</string>

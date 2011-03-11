@@ -33,11 +33,15 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Environment;
 
+/**
+ * That class represents command player. 
+ * It gets commands from input, analyze what files should be played and play 
+ * them using media player 
+ */
 public class CommandPlayer {
 	
 	private static final Log log = LogUtil.getLog(CommandPlayer.class);
 	
-
 	protected Context ctx;
 	// or zip file
 	private File voiceDir;
@@ -76,8 +80,7 @@ public class CommandPlayer {
 		return voiceDir.getName(); 
 	}
 	
-	public String init(){
-		String voiceProvider = OsmandSettings.getVoiceProvider(OsmandSettings.getPrefs(ctx));
+	public String init(String voiceProvider){
 		prologSystem.clearTheory();
 		voiceDir = null;
 		if(voiceProvider != null){
@@ -89,7 +92,7 @@ public class CommandPlayer {
 			}
 		}
 		
-		// see comments why it is impossible to read from zip
+		// see comments below why it is impossible to read from zip (don't know how to play file from zip) 
 //		voiceZipFile = null;
 		if(voiceDir != null) {
 			long time = System.currentTimeMillis();

@@ -497,7 +497,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.commit();
 		} else if (preference == voicePreference) {
 			int i = voicePreference.findIndexOfValue((String) newValue);
-			if(i==0){
+			if (i == 0) {
 				edit.putString(OsmandSettings.VOICE_PROVIDER, null);
 			} else {
 				edit.putString(OsmandSettings.VOICE_PROVIDER, (String) newValue);
