@@ -214,6 +214,7 @@
 <string name="download_question_exist">Offline údaje pre {0} už existujú ({1}). Chcete ich aktualizovať ({2}) ?</string>
 <string name="address">Adresa</string>
 <string name="download_index_success">Sťahovanie úspešné</string>
+<string name="map_download_success">Stiahnuté. Zapnite Vrstvy -> Zdroj mapy... -> Vektorové OSM mapy.</string>
 <string name="error_io_error">Vyskytla sa vstupno/výstupná chyba</string>
 <string name="downloading_file">Sťahuje sa súbor...</string>
 <string name="downloading">Sťahovanie...</string>

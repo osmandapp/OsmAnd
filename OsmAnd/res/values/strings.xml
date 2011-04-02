@@ -215,6 +215,7 @@
 	<string name="download_question_exist">Offline data for {0} already exists ({1}). Do you want to update it ({2}) ?</string>
 	<string name="address">Address</string>
 	<string name="download_index_success">Download successful</string>
+	<string name="map_download_success">Successful. Switch on Layers -> Map Source... -> Vector OSM maps to see the data.</string>
 	<string name="error_io_error">Input/output error occured</string>
 	<string name="downloading_file">Downloading file...</string>
 	<string name="downloading">Downloading...</string>
