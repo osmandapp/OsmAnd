@@ -1,6 +1,7 @@
 package net.osmand.osm;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -73,6 +74,7 @@ public class OpeningHoursParser {
 			StringBuilder b = new StringBuilder(25);
 			boolean dash = false;
 			boolean first = true;
+			boolean open24_7 = true;
 			for(int i=0; i< 7; i++){
 				if (days[i]) {
 					if (i > 0 && days[i - 1] && i < 6 && days[i + 1]) {
@@ -89,7 +91,12 @@ public class OpeningHoursParser {
 					}
 					b.append(daysStr[i]);
 					dash = false;
+				} else {
+					open24_7 = false;
 				}
+			}
+			if(open24_7 && startTime == 0 && endTime / 60 == 24){
+				return "24/7";
 			}
 			int stHour = startTime / 60;
 			int stTime = startTime - stHour * 60;
@@ -112,9 +119,17 @@ public class OpeningHoursParser {
 	public static OpeningHoursRule parseRule(String r){
 		int startDay = -1;
 		int previousDay = -1;
-		BasicDayOpeningHourRule basic = new BasicDayOpeningHourRule();
 		int k = 0;
+		// check 24/7
+		BasicDayOpeningHourRule basic = new BasicDayOpeningHourRule();
 		boolean[] days = basic.getDays();
+		if("24/7".equals(r)){
+			Arrays.fill(days, true);
+			basic.setStartTime(0);
+			basic.setEndTime(24*60);
+			return basic;
+		}
+		
 		for (; k < r.length(); k++) {
 			char ch = r.charAt(k);
 			if (Character.isDigit(ch)) {
@@ -199,6 +214,7 @@ public class OpeningHoursParser {
 	}
 	public static String toStringOpenedHours(List<? extends OpeningHoursRule> rules){
 		StringBuilder b = new StringBuilder(100);
+		// check 24/7
 		boolean first = true;
 		for (OpeningHoursRule p : rules) {
 			if(p == null){
@@ -230,6 +246,12 @@ public class OpeningHoursParser {
 		System.out.println(hours);
 		System.out.println(toStringOpenedHours(hours));
 		hours = parseOpenedHours("Mo, We-Fr, Th, Sa 08:30-14:40; Sa 08:00 - 14:00"); //$NON-NLS-1$
+		System.out.println(hours);
+		System.out.println(toStringOpenedHours(hours));
+		hours = parseOpenedHours("Mo-Su 00:00-24:00"); //$NON-NLS-1$
+		System.out.println(hours);
+		System.out.println(toStringOpenedHours(hours));
+		hours = parseOpenedHours("24/7"); //$NON-NLS-1$
 		System.out.println(hours);
 		System.out.println(toStringOpenedHours(hours));
 	}
