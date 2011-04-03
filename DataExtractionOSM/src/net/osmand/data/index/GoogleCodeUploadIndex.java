@@ -59,6 +59,11 @@ public class GoogleCodeUploadIndex {
      */
     private String summary;
     
+    /**
+     * Description of the upload.
+     */
+    private String description;
+    
     
     /**
      * The labels that the download should have, separated by commas. Extra
@@ -90,6 +95,7 @@ public class GoogleCodeUploadIndex {
         
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setDoOutput(true);
+        conn.setDoInput(true);
         conn.setRequestProperty("Authorization", "Basic " + createAuthToken(userName, password)); //$NON-NLS-1$ //$NON-NLS-2$
         conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY); //$NON-NLS-1$ //$NON-NLS-2$
         conn.setRequestProperty("User-Agent", "Google Code Upload Ant Task 0.1"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -97,18 +103,19 @@ public class GoogleCodeUploadIndex {
         log("Attempting to connect (username is " + userName + ")..."); //$NON-NLS-1$ //$NON-NLS-2$
         conn.connect();
         
-        log("Sending request parameters..."); //$NON-NLS-1$
+        //log("Sending request parameters..."); //$NON-NLS-1$
         OutputStream out = conn.getOutputStream();
         sendLine(out, "--" + BOUNDARY); //$NON-NLS-1$
         sendLine(out, "content-disposition: form-data; name=\"summary\""); //$NON-NLS-1$
         sendLine(out, ""); //$NON-NLS-1$
         sendLine(out, summary);
         
+
         if (labels != null) {
             String[] labelArray = labels.split("\\,"); //$NON-NLS-1$
             
             if (labelArray != null && labelArray.length > 0) {
-                log("Setting "+labelArray.length+" label(s)"); //$NON-NLS-1$ //$NON-NLS-2$
+                // log("Setting "+labelArray.length+" label(s)"); //$NON-NLS-1$ //$NON-NLS-2$
                 
                 for (int n = 0, i = labelArray.length; n < i; n++) {
                     sendLine(out, "--" + BOUNDARY); //$NON-NLS-1$
@@ -136,18 +143,29 @@ public class GoogleCodeUploadIndex {
         out.flush();
         out.close();
         
+        log("Response code " + conn.getResponseCode());
+        in = conn.getErrorStream();
+		if (in != null) {
+			StringBuilder errorBody = new StringBuilder();
+			while ((count = in.read(buf)) >= 0) {
+				errorBody.append(new String(buf, 0, count, "utf-8")); //$NON-NLS-1$
+			}
+			if (errorBody.length() > 0) {
+				log("ERROR " + errorBody.toString());
+			}
+			in.close();
+		}
+        
+        
         // For whatever reason, you have to read from the input stream before
         // the url connection will start sending
         in = conn.getInputStream();
         
-        log("Upload finished. Reading response."); //$NON-NLS-1$
-        
-        log("HTTP Response Headers: " + conn.getHeaderFields()); //$NON-NLS-1$
         StringBuilder responseBody = new StringBuilder();
         while ( (count = in.read(buf)) >= 0 ) {
             responseBody.append(new String(buf, 0, count, "ascii")); //$NON-NLS-1$
         }
-        log(responseBody.toString());
+        log("Upload finished response " + responseBody.toString());
         in.close();
         
         conn.disconnect();
@@ -249,7 +267,19 @@ public class GoogleCodeUploadIndex {
         this.labels = labels;
     }
     
-    public static void main(String[] args) throws IOException {
+    
+    
+    public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public static void main(String[] args) throws IOException {
 		GoogleCodeUploadIndex uploadIndex = new GoogleCodeUploadIndex();
 //    	uploadIndex.setLabels("");
 //		uploadIndex.setProjectName("osmand");

@@ -17,6 +17,7 @@ import java.net.URLEncoder;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -53,6 +54,11 @@ public class IndexBatchCreator {
 	
 	
 	protected static final Log log = LogUtil.getLog(IndexBatchCreator.class);
+	private final static double MIN_SIZE_TO_UPLOAD = 0.015d;
+	private final static double MIN_SIZE_TO_NOT_ZIP = 2d;
+	private final static double MAX_SIZE_TO_NOT_SPLIT = 190d; 
+	private final static double MAX_UPLOAD_SIZE = 195d;
+	
 	
 	public static class RegionCountries {
 		String namePrefix = ""; // for states of the country
@@ -465,6 +471,8 @@ public class IndexBatchCreator {
 		
 	}
 	
+	
+	
 	protected void uploadIndex(File f, Set<String> alreadyUploadedFiles){
 		if(!uploadIndexes){
 			return;
@@ -473,35 +481,33 @@ public class IndexBatchCreator {
 		String summary;
 		double mbLengh = (double)f.length() / MB;
 		boolean zip = true;
-		String regionName;
+		String regionName  = f.getName().substring(0, f.getName().lastIndexOf('_', f.getName().indexOf('.')));
 		if(f.getName().endsWith(IndexConstants.POI_INDEX_EXT) || f.getName().endsWith(IndexConstants.POI_INDEX_EXT_ZIP)){
-			regionName = f.getName().substring(0, f.getName().length() - IndexConstants.POI_INDEX_EXT.length() - 2);
 			summary = "POI index for " ;
 		} else if(f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT) || f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT_ZIP)){
-			regionName = f.getName().substring(0, f.getName().length() - IndexConstants.ADDRESS_INDEX_EXT.length() - 2);
 			summary = "Address index for " ;
 		} else if(f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT) || f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT_ZIP)){
-			regionName = f.getName().substring(0, f.getName().length() - IndexConstants.TRANSPORT_INDEX_EXT.length() - 2);
 			summary = "Transport index for ";
 		} else if(f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)){
-			regionName = f.getName().substring(0, f.getName().length() - IndexConstants.BINARY_MAP_INDEX_EXT.length() - 2);
 			boolean addr = indexAddress;
 			boolean trans = indexTransport;
 			boolean map = indexMap;
 			RandomAccessFile raf = null;
-			try {
-				raf = new RandomAccessFile(f, "r");
-				BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
-				trans = reader.hasTransportData();
-				map = reader.containsMapData();
-				addr = reader.containsAddressData();
-				reader.close();
-			} catch (Exception e) {
-				log.info("Exception", e);
-				if (raf != null) {
-					try {
-						raf.close();
-					} catch (IOException e1) {
+			if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+				try {
+					raf = new RandomAccessFile(f, "r");
+					BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
+					trans = reader.hasTransportData();
+					map = reader.containsMapData();
+					addr = reader.containsAddressData();
+					reader.close();
+				} catch (Exception e) {
+					log.info("Exception", e);
+					if (raf != null) {
+						try {
+							raf.close();
+						} catch (IOException e1) {
+						}
 					}
 				}
 			}
@@ -523,11 +529,12 @@ public class IndexBatchCreator {
 		} else { 
 			return;
 		}
-		if(mbLengh < 0.015){
+		
+		if(mbLengh < MIN_SIZE_TO_UPLOAD){
 			// do not upload small files
 			return;
 		}
-		if(mbLengh > 2 && (f.getName().endsWith(".odb") || f.getName().endsWith(".obf")) && zip){
+		if(mbLengh > MIN_SIZE_TO_NOT_ZIP && (f.getName().endsWith(".odb") || f.getName().endsWith(".obf")) && zip){
 			String n = f.getName();
 			if(f.getName().endsWith(".odb")){
 				n = f.getName().substring(0, f.getName().length() - 4);
@@ -557,6 +564,58 @@ public class IndexBatchCreator {
 			
 		}
 		
+		
+		summary +=  regionName;
+		summary = summary.replace('_', ' ');
+		
+		mbLengh = (double)f.length() / MB;
+		try {
+			List<File> splittedFiles = splitFiles(f, mbLengh);
+			for (File fs : splittedFiles) {
+				uploadFileToServer(fs, summary, mbLengh);
+				// remove source file if file was splitted
+				if (deleteFilesAfterUploading && f.exists()) {
+					f.delete();
+				}
+			}
+			alreadyUploadedFiles.add(f.getName());
+		} catch (IOException e) {
+			log.error("Input/output exception uploading " + f.getName(), e);
+		}
+	}
+	
+	private List<File> splitFiles(File f, double mbLengh) throws IOException {
+		if(mbLengh < MAX_SIZE_TO_NOT_SPLIT) {
+			return Collections.singletonList(f);
+		} else {
+			ArrayList<File> arrayList = new ArrayList<File>();
+			FileInputStream in = new FileInputStream(f);
+			byte[] buffer = new byte[BUFFER_SIZE];
+			
+			int i = 1;
+			int read = 0;
+			while(read != -1){
+				File fout = new File(f.getParent(), f.getName() + "-"+i);
+				arrayList.add(fout);
+				FileOutputStream fo = new FileOutputStream(fout);
+				int limit = (int) (MAX_SIZE_TO_NOT_SPLIT * MB);
+				while(limit > 0 && ((read = in.read(buffer)) != -1)){
+					fo.write(buffer, 0, read);
+					limit -= read;
+				}
+				fo.flush();
+				fo.close();
+				i++;
+			}
+			
+			in.close();
+			
+			return arrayList;
+		}
+		
+	}
+	
+	private void uploadFileToServer(File f, String summary, double mbLengh) throws IOException {
 		if (!uploadToOsmandDownloads) {
 			try {
 				DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName(), token, pagegen, cookieHSID, cookieSID);
@@ -569,45 +628,35 @@ public class IndexBatchCreator {
 				log.warn("Deleting file from downloads" + f.getName() + " " + e.getMessage());
 			}
 		}
-		
-		mbLengh = (double)f.length() / MB;
-		if(mbLengh > 100 && !uploadToOsmandDownloads){
-			System.err.println("ERROR : file " + f.getName() + " exceeded 100 mb!!! Could not be uploaded.");
+		if (mbLengh > MAX_UPLOAD_SIZE && !uploadToOsmandDownloads) {
+			System.err.println("ERROR : file " + f.getName() + " exceeded 200 mb!!! Could not be uploaded.");
 			return; // restriction for google code
 		}
-		
-		
-		summary +=  regionName;
-		summary = summary.replace('_', ' ');
-		
-		try {
-			MessageFormat dateFormat = new MessageFormat("{0,date,dd.MM.yyyy}", Locale.US);
-			MessageFormat numberFormat = new MessageFormat("{0,number,##.#}", Locale.US);
-			String size = numberFormat.format(new Object[] {mbLengh});
-			String date = dateFormat.format(new Object[] {new Date(f.lastModified())});
-			if (uploadToOsmandDownloads) {
-				uploadToDownloadOsmandNet(f, summary, size,date);
-			} else {
-				String descriptionFile = "{" + date + " : " + size + "}";
-				summary += " " + descriptionFile;
-				GoogleCodeUploadIndex uploader = new GoogleCodeUploadIndex();
-				uploader.setFileName(f.getAbsolutePath());
-				uploader.setTargetFileName(f.getName());
-				uploader.setProjectName("osmand");
-				uploader.setUserName(user);
-				uploader.setPassword(password);
-				uploader.setLabels("Type-Archive, Testdata");
-				uploader.setSummary(summary);
-				uploader.upload();
 
-			}
-			
-			if (deleteFilesAfterUploading) {
-				f.delete();
-			}
-			alreadyUploadedFiles.add(f.getName());
-		} catch (IOException e) {
-			log.error("Input/output exception uploading " + f.getName(), e);
+		MessageFormat dateFormat = new MessageFormat("{0,date,dd.MM.yyyy}", Locale.US);
+		MessageFormat numberFormat = new MessageFormat("{0,number,##.#}", Locale.US);
+		String size = numberFormat.format(new Object[] { mbLengh });
+		String date = dateFormat.format(new Object[] { new Date(f.lastModified()) });
+		if (uploadToOsmandDownloads) {
+			uploadToDownloadOsmandNet(f, summary, size, date);
+		} else {
+			String descriptionFile = "{" + date + " : " + size + " MB}";
+			summary += " " + descriptionFile;
+			GoogleCodeUploadIndex uploader = new GoogleCodeUploadIndex();
+			uploader.setFileName(f.getAbsolutePath());
+			uploader.setTargetFileName(f.getName());
+			uploader.setProjectName("osmand");
+			uploader.setUserName(user);
+			uploader.setPassword(password);
+			uploader.setLabels("Type-Archive, Testdata");
+			uploader.setSummary(summary);
+			uploader.setDescription(summary);
+			uploader.upload();
+
+		}
+
+		if (deleteFilesAfterUploading) {
+			f.delete();
 		}
 	}
 	
