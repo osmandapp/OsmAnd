@@ -5,6 +5,7 @@ package net.osmand.activities.search;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.List;
 
 import net.osmand.Algoritms;
@@ -58,6 +59,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -129,10 +131,10 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 					if(res != null){
 						Toast.makeText(SearchPOIActivity.this, res, Toast.LENGTH_LONG).show();
 					}
-					amenityAdapter.setNewModel(((NameFinderPoiFilter) filter).getSearchedAmenities());
+					amenityAdapter.setNewModel(((NameFinderPoiFilter) filter).getSearchedAmenities(), "");
 					showOnMap.setEnabled(amenityAdapter.getCount() > 0);
 				} else {
-					amenityAdapter.setNewModel(filter.searchFurther(location.getLatitude(), location.getLongitude()));
+					amenityAdapter.setNewModel(filter.searchFurther(location.getLatitude(), location.getLongitude()), searchFilter.getText().toString());
 				}
 				
 				searchedLocation = location;
@@ -199,7 +201,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 				filter.clearPreviousZoom();
 			} else if(!isNameFinderFilter()) {
 				searchedLocation = location;
-				amenityAdapter.setNewModel(filter.initializeNewSearch(location.getLatitude(), location.getLongitude(), 40));
+				amenityAdapter.setNewModel(filter.initializeNewSearch(location.getLatitude(), location.getLongitude(), 40), "");
 			}
 			setListAdapter(amenityAdapter);
 			searchPOILevel.setEnabled(filter.isSearchFurtherAvailable());
@@ -258,7 +260,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			if (location == null) {
 				searchedLocation = l;
 				if (!isNameFinderFilter()) {
-					amenityAdapter.setNewModel(filter.searchAgain(l.getLatitude(), l.getLongitude()));
+					amenityAdapter.setNewModel(filter.searchAgain(l.getLatitude(), l.getLongitude()), searchFilter.getText().toString());
 					searchPOILevel.setText(R.string.search_POI_level_btn);
 				} else {
 					searchPOILevel.setText(R.string.search_button);
@@ -267,7 +269,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 				searchArea.setText(filter.getSearchArea());
 				handled = true;
 			} else if (searchedLocation != null && l.distanceTo(searchedLocation) > MIN_DISTANCE_TO_RESEARCH) {
-				amenityAdapter.setNewModel(filter.searchAgain(l.getLatitude(), l.getLongitude()));
+				amenityAdapter.setNewModel(filter.searchAgain(l.getLatitude(), l.getLongitude()), searchFilter.getText().toString());
 				handled = true;
 			} else if(location.distanceTo(l) > MIN_DISTANCE_TO_UPDATE){
 				handled = true;
@@ -556,22 +558,26 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		}
 		
 	}
-
 	class AmenityAdapter extends ArrayAdapter<Amenity> {
+		private AmenityFilter filter;
+		private List<Amenity> originalAmenityList;
 		AmenityAdapter(List<Amenity> list) {
 			super(SearchPOIActivity.this, R.layout.searchpoi_list, list);
+			originalAmenityList = new ArrayList<Amenity>(list);
 			this.setNotifyOnChange(false);
 		}
 
-		public void setNewModel(List<Amenity> amenityList) {
+		public void setNewModel(List<Amenity> amenityList, String filter) {
 			setNotifyOnChange(false);
+			originalAmenityList = new ArrayList<Amenity>(amenityList);
 			clear();
 			for (Amenity obj : amenityList) {
-				this.add(obj);
+				add(obj);
 			}
+			getFilter().filter(filter);
 			setNotifyOnChange(true);
 			this.notifyDataSetChanged();
-
+			
 		}
 
 		public View getView(int position, View convertView, ViewGroup parent) {
@@ -635,6 +641,47 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 				distanceLabel.setText(" " + MapUtils.getFormattedDistance((int) mes[0])); //$NON-NLS-1$
 			}
 			return (row);
+		}
+		
+		@Override
+		public Filter getFilter() {
+			if (filter == null) {
+				filter = new AmenityFilter();
+			}
+			return filter;
+		}
+		
+		private final class AmenityFilter extends Filter {
+			@Override
+			protected FilterResults performFiltering(CharSequence constraint) {
+				FilterResults results = new FilterResults();
+				if (constraint == null || constraint.length() == 0) {
+					results.values = originalAmenityList;
+					results.count = originalAmenityList.size();
+				} else {
+					String lowerCase = constraint.toString()
+							.toLowerCase();
+					List<Amenity> filter = new ArrayList<Amenity>();
+					for (Amenity item : originalAmenityList) {
+						String lower = item.getStringWithoutType(OsmandSettings.usingEnglishNames(settings)).toLowerCase();
+						if(lower.indexOf(lowerCase) != -1){
+							filter.add(item);
+						}
+					}
+					results.values = filter;
+					results.count = filter.size();
+				}
+				return results;
+			}
+
+			@SuppressWarnings("unchecked")
+			@Override
+			protected void publishResults(CharSequence constraint, FilterResults results) {
+				clear();
+				for (Amenity item : (Collection<Amenity>) results.values) {
+					add(item);
+				}
+			}
 		}
 	}
 
