@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+<string name="voice_is_not_available_msg">Hlasové navigovanie nie je dostupné. Prosím, choďte do nastavení a zvoľte alebo stiahnite preferované hlasové údaje.</string>
+<string name="voice_is_not_available_title">Hlasové údaje nie sú určené</string>
+<string name="trace_rendering_descr">Použiť na kontrolu vykresľovacieho výkonu</string>
+<string name="trace_rendering">Sledovač vykresľovania</string>
+
 <string name="daynight_mode_day">Denný režim</string>
 <string name="daynight_mode_night">Nočný režim</string>
 <string name="daynight_mode_auto">Východ/západ slnka</string>
@@ -85,7 +90,7 @@
 <string name="send_report">Odoslať hlásenie</string>
 <string name="none_region_found">Žiadne regióny neboli nájdené na SD karte. Skúste stiahnuť regióny z internetu.</string>
 <string name="poi_namefinder_query_empty">Vaša požiadavka na nájdenie POI</string>
-<string name="any_poi">Akýkoľvek</string>
+<string name="any_poi">Akékoľvek</string>
 
 <string name="layer_transport_route">Transport route</string>
 <string name="thanks_yandex_traffic">Vďaka Yandex-u za dopravné informácie.</string>
