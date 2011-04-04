@@ -568,23 +568,32 @@ public class IndexBatchCreator {
 		summary +=  regionName;
 		summary = summary.replace('_', ' ');
 		
-		mbLengh = (double)f.length() / MB;
+		List<File> splittedFiles = Collections.emptyList(); 
 		try {
-			List<File> splittedFiles = splitFiles(f, mbLengh);
+			splittedFiles = splitFiles(f);
+			boolean uploaded =true;
 			for (File fs : splittedFiles) {
-				uploadFileToServer(fs, summary, mbLengh);
-				// remove source file if file was splitted
-				if (deleteFilesAfterUploading && f.exists()) {
-					f.delete();
-				}
+				uploaded &= uploadFileToServer(fs, f, summary);
+			}
+			// remove source file if file was splitted
+			if (uploaded &&  deleteFilesAfterUploading && f.exists()) {
+				f.delete();
 			}
 			alreadyUploadedFiles.add(f.getName());
 		} catch (IOException e) {
 			log.error("Input/output exception uploading " + f.getName(), e);
+		} finally {
+			// remove all splitted files
+			for(File fs : splittedFiles){
+				if(!fs.equals(f)){
+					fs.delete();
+				}
+			}
 		}
 	}
 	
-	private List<File> splitFiles(File f, double mbLengh) throws IOException {
+	private List<File> splitFiles(File f) throws IOException {
+		double mbLengh = (double)f.length() / MB;
 		if(mbLengh < MAX_SIZE_TO_NOT_SPLIT) {
 			return Collections.singletonList(f);
 		} else {
@@ -615,7 +624,12 @@ public class IndexBatchCreator {
 		
 	}
 	
-	private void uploadFileToServer(File f, String summary, double mbLengh) throws IOException {
+	private boolean uploadFileToServer(File f, File original, String summary) throws IOException {
+		if (f.length() / MB > MAX_UPLOAD_SIZE && !uploadToOsmandDownloads) {
+			System.err.println("ERROR : file " + f.getName() + " exceeded 200 mb!!! Could not be uploaded.");
+			return false; // restriction for google code
+		}
+		double originalLength = original.length() / MB;
 		if (!uploadToOsmandDownloads) {
 			try {
 				DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName(), token, pagegen, cookieHSID, cookieSID);
@@ -628,15 +642,12 @@ public class IndexBatchCreator {
 				log.warn("Deleting file from downloads" + f.getName() + " " + e.getMessage());
 			}
 		}
-		if (mbLengh > MAX_UPLOAD_SIZE && !uploadToOsmandDownloads) {
-			System.err.println("ERROR : file " + f.getName() + " exceeded 200 mb!!! Could not be uploaded.");
-			return; // restriction for google code
-		}
+		
 
 		MessageFormat dateFormat = new MessageFormat("{0,date,dd.MM.yyyy}", Locale.US);
 		MessageFormat numberFormat = new MessageFormat("{0,number,##.#}", Locale.US);
-		String size = numberFormat.format(new Object[] { mbLengh });
-		String date = dateFormat.format(new Object[] { new Date(f.lastModified()) });
+		String size = numberFormat.format(new Object[] { originalLength });
+		String date = dateFormat.format(new Object[] { new Date(original.lastModified()) });
 		if (uploadToOsmandDownloads) {
 			uploadToDownloadOsmandNet(f, summary, size, date);
 		} else {
@@ -655,9 +666,7 @@ public class IndexBatchCreator {
 
 		}
 
-		if (deleteFilesAfterUploading) {
-			f.delete();
-		}
+		return true;
 	}
 	
 	@SuppressWarnings("deprecation")
