@@ -83,7 +83,7 @@ public class DayNightHelper implements SensorEventListener {
 				try {
 					LocationManager locationProvider = (LocationManager) osmandApplication.getSystemService(Context.LOCATION_SERVICE);
 					// Or use LocationManager.GPS_PROVIDER
-					Location lastKnownLocation = locationProvider.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+					Location lastKnownLocation = locationProvider.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
 					if(lastKnownLocation == null){
 						return null;
 					}
