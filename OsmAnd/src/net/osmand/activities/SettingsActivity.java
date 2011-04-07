@@ -574,82 +574,82 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	}
 		
 	public static void setAppMode(ApplicationMode preset, Editor edit, OsmandApplication application, ApplicationMode old){
-		if(preset == ApplicationMode.CAR){
+		if (preset == ApplicationMode.CAR) {
 			OsmandSettings.setUseInternetToDownloadTiles(true, edit);
-//			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, _);
+			// edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, _);
 			edit.putBoolean(OsmandSettings.SHOW_TRANSPORT_OVER_MAP, false);
 			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_BEARING);
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, false);
 			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, true);
 			edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, false);
 			edit.putBoolean(OsmandSettings.USE_STEP_BY_STEP_RENDERING, true);
-//			edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
+			// edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
 			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, true);
 			edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, 5);
 			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.BOTTOM_CONSTANT);
-//			edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
-			
-		} else if(preset == ApplicationMode.BICYCLE){
-//			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
-//			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_CALCULATE_ROUTE, _);
-//			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
+			// edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
+
+		} else if (preset == ApplicationMode.BICYCLE) {
+			// edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
+			// edit.putBoolean(OsmandSettings.USE_INTERNET_TO_CALCULATE_ROUTE, _);
+			// edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
 			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_BEARING);
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, true);
 			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
-//			edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, _);
-//			edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
+			// edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, _);
+			// edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
 			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, true);
 			edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, 30);
 			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.BOTTOM_CONSTANT);
-//			edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
-			
-		} else if(preset == ApplicationMode.PEDESTRIAN){
-//			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
-//			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
+			// edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
+
+		} else if (preset == ApplicationMode.PEDESTRIAN) {
+			// edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
+			// edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
 			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_COMPASS);
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, true);
 			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
 			edit.putBoolean(OsmandSettings.USE_STEP_BY_STEP_RENDERING, false);
-//			if(useInternetToDownloadTiles.isChecked()){
-//				edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, true);
-//			}
-//			edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
+			// if(useInternetToDownloadTiles.isChecked()){
+			// edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, true);
+			// }
+			// edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
 			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, false);
-//			edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, _);
+			// edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, _);
 			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.CENTER_CONSTANT);
-//			edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
-			
-		} else if(preset == ApplicationMode.DEFAULT){
-//			edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
-//			edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
+			// edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
+
+		} else if (preset == ApplicationMode.DEFAULT) {
+			// edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
+			// edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
 			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_NONE);
 			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, false);
 			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
 			edit.putBoolean(OsmandSettings.USE_STEP_BY_STEP_RENDERING, true);
-//			edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, _);
-//			edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
+			// edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, _);
+			// edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
 			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, false);
-//			edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, _);
+			// edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, _);
 			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.CENTER_CONSTANT);
-//			edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
-			
+			// edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
+
 		}
-		
+
 		BaseOsmandRender current = RendererRegistry.getRegistry().getCurrentSelectedRenderer();
 		BaseOsmandRender defaultRender = RendererRegistry.getRegistry().defaultRender();
-		boolean change = current == defaultRender || (old == ApplicationMode.CAR && 
-				current == RendererRegistry.getRegistry().carRender());
-		if(change){
-			BaseOsmandRender newRenderer;
-			if(preset == ApplicationMode.CAR){
-				newRenderer = RendererRegistry.getRegistry().carRender();
-			} else {
-				newRenderer = defaultRender;
-			}
-			if(newRenderer != current){
-				RendererRegistry.getRegistry().setCurrentSelectedRender(newRenderer);
-				application.getResourceManager().getRenderer().clearCache();
-			}
+		BaseOsmandRender newRenderer;
+		if (preset == ApplicationMode.CAR) {
+			newRenderer = RendererRegistry.getRegistry().carRender();
+		} else if (preset == ApplicationMode.BICYCLE) {
+			newRenderer = RendererRegistry.getRegistry().bicycleRender();
+		} else if (preset == ApplicationMode.PEDESTRIAN) {
+			newRenderer = RendererRegistry.getRegistry().pedestrianRender();
+		} else {
+			newRenderer = defaultRender;
+		}
+		if (newRenderer != current) {
+			RendererRegistry.getRegistry().setCurrentSelectedRender(newRenderer);
+			application.getResourceManager().getRenderer().clearCache();
 		}
 	}
 
