@@ -24,9 +24,9 @@
 	</LinearLayout>
 	
 	<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
-	 	<TableRow android:layout_height = "wrap_content"  >
+	 	<TableRow android:layout_height = "wrap_content"  android:layout_width = "fill_parent">
 	 		<LinearLayout android:id="@+id/MapButton" android:background="@drawable/button_left" android:orientation="vertical" android:clickable="true"
-	 					android:layout_width="240dp" android:layout_height="294dp">
+	 					android:layout_weight="3" android:layout_width="wrap_content" android:layout_height="284dp">
 	 			<ImageView
 					android:src="@drawable/button_icon_map"
 					android:scaleType="center" 
@@ -40,9 +40,9 @@
 				    android:text="@string/map_Button" android:typeface="serif" android:textColor="#000000"
 				  	android:textSize="27sp"/>	
 	 		</LinearLayout>
-			<LinearLayout android:layout_weight="1" android:layout_height="fill_parent" />
+			<LinearLayout android:layout_weight="1" android:layout_width="wrap_content" android:layout_height="fill_parent" />
 			<LinearLayout android:id="@+id/SearchButton"  android:background="@drawable/button_right" android:orientation="vertical" android:clickable="true"
-						android:layout_width="240dp" android:layout_height="294dp">
+						android:layout_weight="3" android:layout_width="wrap_content" android:layout_height="284dp">
 					<ImageView
 					android:src="@drawable/button_icon_search"
 					android:scaleType="center" 
@@ -60,7 +60,7 @@
 		</TableRow>
 		<TableRow android:layout_height = "wrap_content"  >
 		<LinearLayout android:id="@+id/FavoritesButton"  android:background="@drawable/button_left" android:orientation="vertical"
-					android:layout_width="240dp" android:layout_height="294dp">
+					android:layout_weight="3" android:layout_width="wrap_content" android:layout_height="284dp">
 	 			<ImageView
 					android:src="@drawable/button_icon_favorites"
 					android:scaleType="center" 
@@ -76,7 +76,7 @@
 	 		</LinearLayout>
 			<LinearLayout android:layout_weight="1" android:layout_height="fill_parent" />
 			<LinearLayout android:id="@+id/SettingsButton"  android:background="@drawable/button_right" android:orientation="vertical" 
-					android:layout_width="240dp" android:layout_height="294dp">
+					android:layout_weight="3" android:layout_width="wrap_content" android:layout_height="284dp">
 					<ImageView
 					android:src="@drawable/button_icon_settings"
 					android:scaleType="center" 
