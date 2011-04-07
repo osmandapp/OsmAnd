@@ -25,6 +25,8 @@ public class RendererRegistry {
 	
 	public final static String DEFAULT_RENDER = "default";  //$NON-NLS-1$
 	public final static String CAR_RENDER = "car";  //$NON-NLS-1$
+	public final static String BICYCLE_RENDER = "bicycle";  //$NON-NLS-1$
+	public final static String PEDESTRIAN_RENDER = "pedestrian";  //$NON-NLS-1$
 	public final static String NIGHT_SUFFIX = "-night"; //$NON-NLS-1$
 	public final static String DEFAULT_NIGHT_RENDER = DEFAULT_RENDER + NIGHT_SUFFIX; 
 	public final static String CAR_NIGHT_RENDER = CAR_RENDER + NIGHT_SUFFIX; 
@@ -39,6 +41,7 @@ public class RendererRegistry {
 		internalRenderers.put(DEFAULT_NIGHT_RENDER, "default-night.render.xml"); //$NON-NLS-1$
 		internalRenderers.put(CAR_RENDER, "car.render.xml"); //$NON-NLS-1$
 		internalRenderers.put(CAR_NIGHT_RENDER, "car-night.render.xml"); //$NON-NLS-1$
+		internalRenderers.put(BICYCLE_RENDER, "bicycle.render.xml"); //$NON-NLS-1$
 	}
 	
 	private BaseOsmandRender defaultRender = null;
@@ -68,6 +71,22 @@ public class RendererRegistry {
 	
 	public BaseOsmandRender carRender() {
 		BaseOsmandRender renderer = getRenderer(CAR_RENDER);
+		if(renderer == null){
+			return defaultRender();
+		}
+		return renderer;
+	}
+	
+	public BaseOsmandRender bicycleRender() {
+		BaseOsmandRender renderer = getRenderer(BICYCLE_RENDER);
+		if(renderer == null){
+			return defaultRender();
+		}
+		return renderer;
+	}
+	
+	public BaseOsmandRender pedestrianRender() {
+		BaseOsmandRender renderer = getRenderer(PEDESTRIAN_RENDER);
 		if(renderer == null){
 			return defaultRender();
 		}
