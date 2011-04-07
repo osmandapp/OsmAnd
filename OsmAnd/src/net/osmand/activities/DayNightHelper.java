@@ -1,5 +1,6 @@
 package net.osmand.activities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -81,9 +82,7 @@ public class DayNightHelper implements SensorEventListener {
 			if (currentTime - lastAutoCall > 5000) {
 				lastAutoCall = System.currentTimeMillis();
 				try {
-					LocationManager locationProvider = (LocationManager) osmandApplication.getSystemService(Context.LOCATION_SERVICE);
-					// Or use LocationManager.GPS_PROVIDER
-					Location lastKnownLocation = locationProvider.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+					Location lastKnownLocation = getLocation();
 					if(lastKnownLocation == null){
 						return null;
 					}
@@ -109,6 +108,26 @@ public class DayNightHelper implements SensorEventListener {
 			return lux > SensorManager.LIGHT_CLOUDY ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return null;
+	}
+
+	private Location getLocation() {
+		Location lastKnownLocation = null;
+		LocationManager locationProvider = (LocationManager) osmandApplication.getSystemService(Context.LOCATION_SERVICE);
+		List<String> providers = new ArrayList<String>(locationProvider.getProviders(true));
+		//note, passive provider is from API_LEVEL 8 but it is a constant, we can check for it.
+		int passiveFirst = providers.indexOf(LocationManager.PASSIVE_PROVIDER);
+		//put passive provider to first place
+		if (passiveFirst > -1) {
+			providers.add(0,providers.remove(passiveFirst));
+		}
+		//find location
+		for (String provider : providers) {
+			lastKnownLocation = locationProvider.getLastKnownLocation(provider);
+			if (lastKnownLocation == null) {
+				break;
+			}
+		}
+		return lastKnownLocation;
 	}
 
 	public void onMapPause() {
