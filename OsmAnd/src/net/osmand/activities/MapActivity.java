@@ -66,6 +66,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -1009,21 +1010,20 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				startActivity(intent);
 			} else {
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
-				builder.setMessage(getString(R.string.gps_status_app_not_found))
-						.setPositiveButton(
-								getString(R.string.default_buttons_yes),
-								new DialogInterface.OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-										Intent intent = new Intent(
-												Intent.ACTION_VIEW,
-												Uri.parse("market://search?q=pname:" + GPS_STATUS_COMPONENT));
-										startActivity(intent);
-									}
-								})
-						.setNegativeButton(getString(R.string.default_buttons_no), null)
-						.show();
+				builder.setMessage(getString(R.string.gps_status_app_not_found));
+				builder.setPositiveButton(getString(R.string.default_buttons_yes),
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:" + GPS_STATUS_COMPONENT));
+								try {
+									startActivity(intent);
+								} catch (ActivityNotFoundException e) {
+								}
+							}
+						});
+				builder.setNegativeButton(getString(R.string.default_buttons_no), null);
+				builder.show();
 			}
 			return true;
 //		} else if (item.getItemId() == R.id.map_mark_point) {
