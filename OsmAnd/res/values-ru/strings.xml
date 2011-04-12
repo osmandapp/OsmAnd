@@ -227,7 +227,7 @@
 	<string name="follow_route">Следовать по маршруту</string>
 	<string name="mark_final_location_first">Отметьте сначала точку назначения</string>
 	<string name="get_directions">Маршрут</string>
-	<string name="gps_status_app_not_found">Приложение Gps status не найдено</string>
+	<string name="gps_status_app_not_found">Приложение Gps status не найдено. Искать на маркете</string>
 	<string name="show_gps_status">GPS статус</string>
 	<string name="opening_hours">Рабочие часы</string>
 	<string name="opening_changeset">Открытие пакета правок</string>
