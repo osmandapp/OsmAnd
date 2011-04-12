@@ -15,7 +15,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import net.osmand.Base64;
-import net.osmand.LogUtil;
+import net.osmand.plus.LogUtil;
 
 import org.apache.commons.logging.Log;
 

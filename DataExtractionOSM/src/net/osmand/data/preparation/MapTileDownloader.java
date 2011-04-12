@@ -17,8 +17,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import net.osmand.Algoritms;
-import net.osmand.LogUtil;
 import net.osmand.Version;
+import net.osmand.plus.LogUtil;
 
 import org.apache.commons.logging.Log;
 

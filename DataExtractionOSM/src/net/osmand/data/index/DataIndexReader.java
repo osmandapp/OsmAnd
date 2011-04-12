@@ -12,12 +12,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.LogUtil;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.Street;
 import net.osmand.data.City.CityType;
 import net.osmand.osm.Node;
+import net.osmand.plus.LogUtil;
 
 import org.apache.commons.logging.Log;
 

@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import net.osmand.LogUtil;
+import net.osmand.plus.LogUtil;
 
 import org.apache.commons.logging.Log;
 

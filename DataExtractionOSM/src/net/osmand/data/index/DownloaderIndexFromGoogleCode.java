@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import net.osmand.LogUtil;
+import net.osmand.plus.LogUtil;
 
 import org.apache.commons.logging.Log;
 
