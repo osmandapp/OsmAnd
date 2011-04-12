@@ -408,7 +408,6 @@ public class ResourceManager {
 								}
 							}
 							if(index.containsMapData()){
-								warnings.add(Messages.getMessage("map_download_success"));
 								// that's not fully acceptable
 								// TODO
 //								try {
