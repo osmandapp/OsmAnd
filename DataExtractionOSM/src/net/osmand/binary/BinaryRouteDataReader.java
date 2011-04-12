@@ -18,13 +18,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.LogUtil;
 
 import org.apache.commons.logging.Log;
 

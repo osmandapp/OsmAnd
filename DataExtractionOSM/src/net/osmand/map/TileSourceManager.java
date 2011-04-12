@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import net.osmand.Algoritms;
-import net.osmand.LogUtil;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.LogUtil;
 
 import org.apache.commons.logging.Log;
 

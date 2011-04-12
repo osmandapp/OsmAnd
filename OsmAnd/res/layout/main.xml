@@ -3,11 +3,11 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-<net.osmand.views.OsmandMapTileView android:id="@+id/MapView" android:layout_width="fill_parent" android:layout_height="fill_parent"/>
+<net.osmand.plus.views.OsmandMapTileView android:id="@+id/MapView" android:layout_width="fill_parent" android:layout_height="fill_parent"/>
 <View android:id="@+id/ProgressBar"  
 			android:layout_width="40dp"  android:layout_height="40dp" android:layout_marginRight="25dp" android:layout_marginTop="5dp" android:layout_gravity="top|right"/>  			 
 			
-<net.osmand.views.OsmZoomControls android:id="@+id/ZoomControls"
+<net.osmand.plus.views.OsmZoomControls android:id="@+id/ZoomControls"
 		android:layout_marginRight="3dp" android:layout_marginBottom="2dp"
 		android:layout_width="120dp" android:layout_height="wrap_content" android:layout_gravity="bottom|right"/>
 
