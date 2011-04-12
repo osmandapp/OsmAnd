@@ -43,6 +43,7 @@ import java.util.zip.ZipInputStream;
 import net.osmand.DownloadOsmandIndexesHelper;
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
+import net.osmand.OsmandSettings;
 import net.osmand.ProgressDialogImplementation;
 import net.osmand.R;
 import net.osmand.ResourceManager;
@@ -58,7 +59,9 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
@@ -665,6 +668,14 @@ public class DownloadIndexActivity extends ListActivity {
 			}
 
 			ArrayList<String> warnings = new ArrayList<String>();
+			
+			if (toIndex.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+				SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+				if (!OsmandSettings.isUsingMapVectorData(prefs)) {
+					warnings.add(getString(R.string.map_download_success));
+				}
+			}
+			
 			ResourceManager manager = ((OsmandApplication) getApplication()).getResourceManager();
 			if(dateModified != null){
 				toIndex.setLastModified(dateModified);
