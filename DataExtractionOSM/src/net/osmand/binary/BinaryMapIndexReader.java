@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.Algoritms;
+import net.osmand.LogUtil;
 import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
@@ -23,7 +24,6 @@ import net.osmand.osm.LatLon;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.MapRenderingTypes.MapRulType;
-import net.osmand.plus.LogUtil;
 import net.sf.junidecode.Junidecode;
 
 import org.apache.commons.logging.Log;

@@ -7,6 +7,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.LogUtil;
 import net.osmand.Messages;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;

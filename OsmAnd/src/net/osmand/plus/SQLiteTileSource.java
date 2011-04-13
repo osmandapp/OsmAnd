@@ -7,6 +7,7 @@ import java.nio.ByteBuffer;
 import java.text.MessageFormat;
 
 import net.osmand.Algoritms;
+import net.osmand.LogUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;

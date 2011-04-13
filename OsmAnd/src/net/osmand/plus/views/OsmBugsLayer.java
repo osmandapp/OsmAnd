@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.osmand.plus.LogUtil;
+import net.osmand.LogUtil;
+import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.osm.LatLon;
 
 import org.apache.commons.logging.Log;
 

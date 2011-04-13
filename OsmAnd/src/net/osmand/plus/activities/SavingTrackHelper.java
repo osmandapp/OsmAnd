@@ -6,11 +6,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.LogUtil;
+import net.osmand.GPXUtilities;
+import net.osmand.LogUtil;
+import net.osmand.GPXUtilities.TrkPt;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ResourceManager;
-import net.osmand.plus.GPXUtilities.TrkPt;
 
 import org.apache.commons.logging.Log;
 

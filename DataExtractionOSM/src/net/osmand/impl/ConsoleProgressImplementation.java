@@ -4,7 +4,7 @@ import java.text.MessageFormat;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
-import net.osmand.plus.LogUtil;
+import net.osmand.LogUtil;
 
 import org.apache.commons.logging.Log;
 

@@ -8,11 +8,11 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import net.osmand.LogUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.osm.LatLon;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.activities.RouteProvider.RouteService;
 import net.osmand.plus.activities.search.SearchHistoryHelper;

@@ -14,7 +14,6 @@ import static net.osmand.data.index.IndexConstants.TRANSPORT_INDEX_EXT_ZIP;
 import static net.osmand.data.index.IndexConstants.TRANSPORT_TABLE_VERSION;
 import static net.osmand.data.index.IndexConstants.VOICE_INDEX_EXT_ZIP;
 import static net.osmand.data.index.IndexConstants.VOICE_VERSION;
-import static net.osmand.plus.DownloadOsmandIndexesHelper.IndexItem;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,30 +28,25 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.Map.Entry;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import net.osmand.IProgress;
+import net.osmand.LogUtil;
+import net.osmand.data.index.IndexConstants;
 import net.osmand.plus.DownloadOsmandIndexesHelper;
-import net.osmand.plus.LogUtil;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
-import net.osmand.data.index.DownloaderIndexFromGoogleCode;
-import net.osmand.data.index.IndexConstants;
+import net.osmand.plus.DownloadOsmandIndexesHelper.IndexItem;
 
 import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;

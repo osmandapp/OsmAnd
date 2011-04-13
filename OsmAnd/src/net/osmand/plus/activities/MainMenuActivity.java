@@ -3,10 +3,10 @@ package net.osmand.plus.activities;
 import java.io.File;
 import java.text.MessageFormat;
 
+import net.osmand.Version;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.Version;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;

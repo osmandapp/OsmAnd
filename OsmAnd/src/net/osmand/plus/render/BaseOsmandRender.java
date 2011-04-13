@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.plus.LogUtil;
+import net.osmand.LogUtil;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.render.OsmandRenderer.RenderingPaintProperties;
 import net.osmand.render.OsmandRenderingRulesParser;

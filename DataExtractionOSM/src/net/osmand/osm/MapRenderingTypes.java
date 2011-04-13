@@ -18,7 +18,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 import net.osmand.data.AmenityType;
 import net.osmand.osm.OSMSettings.OSMTagKey;
-import net.osmand.plus.LogUtil;
+import net.osmand.LogUtil;
 
 import org.apache.commons.logging.Log;
 import org.xml.sax.Attributes;

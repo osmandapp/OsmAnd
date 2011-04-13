@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import net.osmand.plus.LogUtil;
+import net.osmand.LogUtil;
+import net.osmand.osm.LatLon;
+import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.OsmandSettings.ApplicationMode;
 import net.osmand.plus.activities.RouteProvider.RouteCalculationResult;
 import net.osmand.plus.activities.RouteProvider.RouteService;
 import net.osmand.plus.voice.CommandPlayer;
-import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
 import android.app.Activity;
 import android.content.Context;
 import android.location.Location;

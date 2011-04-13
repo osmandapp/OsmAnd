@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand;
 
 import org.apache.commons.logging.Log;
 

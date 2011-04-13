@@ -2,7 +2,6 @@ package net.osmand.plus;
 
 
 import net.osmand.Version;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.activities.RoutingHelper;
 import net.osmand.plus.activities.SavingTrackHelper;

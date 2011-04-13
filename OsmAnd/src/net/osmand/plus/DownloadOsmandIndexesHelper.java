@@ -6,8 +6,8 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 
+import net.osmand.LogUtil;
 import net.osmand.data.index.IndexConstants;
-import net.osmand.plus.R;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;

@@ -1,6 +1,5 @@
 package net.osmand.plus;
 
-import net.osmand.plus.R;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;

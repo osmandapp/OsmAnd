@@ -2,7 +2,7 @@ package net.osmand.plus.views;
 
 import java.lang.reflect.Method;
 
-import net.osmand.plus.LogUtil;
+import net.osmand.LogUtil;
 
 import org.apache.commons.logging.Log;
 

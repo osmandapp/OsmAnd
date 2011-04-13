@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.IProgress;
+import net.osmand.LogUtil;
 import net.osmand.data.MapObject;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;

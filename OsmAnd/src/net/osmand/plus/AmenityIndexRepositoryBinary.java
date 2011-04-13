@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.Algoritms;
+import net.osmand.LogUtil;
 import net.osmand.binary.BinaryIndexPart;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;

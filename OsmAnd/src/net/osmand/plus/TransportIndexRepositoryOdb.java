@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.IProgress;
+import net.osmand.LogUtil;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.data.index.IndexConstants;
