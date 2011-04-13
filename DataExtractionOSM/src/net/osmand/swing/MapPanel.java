@@ -738,7 +738,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 			}
 			
 			// possible bug if popup neither button1|| button3
-			if(willBePopupShown && e.isPopupTrigger()){
+			if(willBePopupShown && (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3)){
 				popupMenuPoint = new Point(e.getX(), e.getY());
 				popupMenu.show(MapPanel.this, e.getX(), e.getY());
 				willBePopupShown = false;
