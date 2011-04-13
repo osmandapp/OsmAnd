@@ -5,10 +5,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-import net.osmand.plus.LogUtil;
+import net.osmand.LogUtil;
+import net.osmand.SunriseSunset;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.DayNightMode;
-import net.osmand.SunriseSunset;
 
 import org.apache.commons.logging.Log;
 

@@ -11,11 +11,10 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import net.osmand.plus.LogUtil;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.LogUtil;
+import net.osmand.data.index.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
-import net.osmand.data.index.IndexConstants;
 
 import org.apache.commons.logging.Log;
 

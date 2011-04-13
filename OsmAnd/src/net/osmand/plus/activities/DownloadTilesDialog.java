@@ -3,15 +3,15 @@ package net.osmand.plus.activities;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
-import net.osmand.plus.LogUtil;
-import net.osmand.plus.R;
-import net.osmand.plus.ResourceManager;
-import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.LogUtil;
 import net.osmand.data.preparation.MapTileDownloader;
 import net.osmand.data.preparation.MapTileDownloader.DownloadRequest;
 import net.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.ITileSource;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.R;
+import net.osmand.plus.ResourceManager;
+import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
 

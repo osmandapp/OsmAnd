@@ -2,13 +2,13 @@ package net.osmand.plus.views;
 
 import net.osmand.Algoritms;
 import net.osmand.Messages;
+import net.osmand.osm.LatLon;
+import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.activities.RoutingHelper.TurnType;
-import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;

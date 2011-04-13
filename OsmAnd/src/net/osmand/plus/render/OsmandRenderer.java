@@ -11,12 +11,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MultyPolygon;
-import net.osmand.plus.LogUtil;
 import net.sf.junidecode.Junidecode;
 
 import org.apache.commons.logging.Log;

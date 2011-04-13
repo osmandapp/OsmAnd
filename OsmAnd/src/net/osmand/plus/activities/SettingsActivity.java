@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import net.osmand.map.TileSourceManager;
+import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFiltersHelper;
@@ -22,8 +24,6 @@ import net.osmand.plus.OsmandSettings.DayNightMode;
 import net.osmand.plus.activities.RouteProvider.RouteService;
 import net.osmand.plus.render.BaseOsmandRender;
 import net.osmand.plus.render.RendererRegistry;
-import net.osmand.map.TileSourceManager;
-import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -41,10 +41,10 @@ import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.widget.Toast;
 
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {

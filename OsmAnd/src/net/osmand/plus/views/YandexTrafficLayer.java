@@ -12,9 +12,9 @@ import java.util.Map;
 import java.util.Set;
 
 import net.osmand.Algoritms;
-import net.osmand.plus.LogUtil;
-import net.osmand.plus.R;
+import net.osmand.LogUtil;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.R;
 
 import org.apache.commons.logging.Log;
 

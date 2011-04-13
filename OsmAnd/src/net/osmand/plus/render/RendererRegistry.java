@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import net.osmand.plus.LogUtil;
+import net.osmand.LogUtil;
 import net.osmand.render.OsmandRenderingRulesParser;
 
 import org.apache.commons.logging.Log;

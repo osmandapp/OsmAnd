@@ -17,7 +17,7 @@ import net.osmand.data.City;
 import net.osmand.data.Street;
 import net.osmand.data.City.CityType;
 import net.osmand.osm.Node;
-import net.osmand.plus.LogUtil;
+import net.osmand.LogUtil;
 
 import org.apache.commons.logging.Log;
 

@@ -15,12 +15,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
 
-import net.osmand.plus.LogUtil;
-import net.osmand.plus.R;
-import net.osmand.plus.OsmandSettings.ApplicationMode;
-import net.osmand.plus.activities.RoutingHelper.RouteDirectionInfo;
-import net.osmand.plus.activities.RoutingHelper.TurnType;
-import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryRouteDataReader;
 import net.osmand.binary.BinaryRouteDataReader.RouteSegment;
@@ -28,6 +23,11 @@ import net.osmand.binary.BinaryRouteDataReader.RouteSegmentResult;
 import net.osmand.binary.BinaryRouteDataReader.RoutingContext;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.R;
+import net.osmand.plus.OsmandSettings.ApplicationMode;
+import net.osmand.plus.activities.RoutingHelper.RouteDirectionInfo;
+import net.osmand.plus.activities.RoutingHelper.TurnType;
+import net.osmand.plus.render.MapRenderRepositories;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

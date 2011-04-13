@@ -3,11 +3,11 @@ package net.osmand.plus.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.data.TransportStop;
+import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TransportIndexRepository;
-import net.osmand.data.TransportStop;
-import net.osmand.osm.LatLon;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;

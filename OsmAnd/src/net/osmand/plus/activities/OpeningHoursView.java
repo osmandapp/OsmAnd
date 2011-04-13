@@ -5,9 +5,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
-import net.osmand.plus.R;
 import net.osmand.osm.OpeningHoursParser.BasicDayOpeningHourRule;
 import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
+import net.osmand.plus.R;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;

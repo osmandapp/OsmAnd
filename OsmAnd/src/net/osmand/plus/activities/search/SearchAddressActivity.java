@@ -3,17 +3,17 @@ package net.osmand.plus.activities.search;
 
 import java.text.MessageFormat;
 
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.RegionAddressRepository;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.osm.LatLon;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.RegionAddressRepository;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandApplication;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;

@@ -1,4 +1,5 @@
-package net.osmand.plus;
+package net.osmand;
+
 public class FavouritePoint {
 	private String name;
 	private double latitude;

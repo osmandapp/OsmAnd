@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.Locale;
 
 import net.osmand.Algoritms;
-import net.osmand.plus.LogUtil;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
+import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;

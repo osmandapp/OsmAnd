@@ -20,12 +20,7 @@ import java.util.Map;
 import java.util.Set;
 
 import net.osmand.Base64;
-import net.osmand.plus.AmenityIndexRepository;
-import net.osmand.plus.AmenityIndexRepositoryOdb;
-import net.osmand.plus.LogUtil;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
@@ -41,6 +36,11 @@ import net.osmand.osm.OSMSettings.OSMTagKey;
 import net.osmand.osm.OpeningHoursParser.BasicDayOpeningHourRule;
 import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
 import net.osmand.osm.io.OsmBaseStorage;
+import net.osmand.plus.AmenityIndexRepository;
+import net.osmand.plus.AmenityIndexRepositoryOdb;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
 import org.apache.http.HttpResponse;

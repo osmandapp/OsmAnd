@@ -1,7 +1,6 @@
 package net.osmand.plus.render;
 
 import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.TIntByteMap;
 import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TLongHashSet;
 
@@ -20,12 +19,7 @@ import java.util.Map;
 import java.util.Set;
 
 import net.osmand.IProgress;
-import net.osmand.plus.LogUtil;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.RotatedTileBox;
-import net.osmand.plus.activities.OsmandApplication;
-import net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -35,6 +29,11 @@ import net.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.MultyPolygon;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.RotatedTileBox;
+import net.osmand.plus.activities.OsmandApplication;
+import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 
 import org.apache.commons.logging.Log;
 

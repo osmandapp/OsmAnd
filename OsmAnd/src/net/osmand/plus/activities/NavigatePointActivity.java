@@ -5,12 +5,12 @@ import java.text.DecimalFormatSymbols;
 import java.text.MessageFormat;
 import java.util.Locale;
 
-import net.osmand.plus.LogUtil;
+import net.osmand.LogUtil;
+import net.osmand.osm.LatLon;
+import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;

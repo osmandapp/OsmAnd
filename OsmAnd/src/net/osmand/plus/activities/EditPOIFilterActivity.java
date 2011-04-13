@@ -7,14 +7,14 @@ import java.text.MessageFormat;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import net.osmand.data.AmenityType;
+import net.osmand.osm.LatLon;
+import net.osmand.osm.MapRenderingTypes;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchPOIActivity;
-import net.osmand.data.AmenityType;
-import net.osmand.osm.LatLon;
-import net.osmand.osm.MapRenderingTypes;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.AlertDialog.Builder;

@@ -16,6 +16,7 @@ import java.util.TreeSet;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
+import net.osmand.LogUtil;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;

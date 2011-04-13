@@ -15,6 +15,7 @@ import java.util.Stack;
 import java.util.TreeMap;
 
 import net.osmand.IProgress;
+import net.osmand.LogUtil;
 import net.osmand.Messages;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;

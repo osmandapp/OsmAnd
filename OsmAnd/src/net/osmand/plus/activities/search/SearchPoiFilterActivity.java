@@ -6,13 +6,13 @@ package net.osmand.plus.activities.search;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.OsmandApplication;
-import net.osmand.osm.LatLon;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;

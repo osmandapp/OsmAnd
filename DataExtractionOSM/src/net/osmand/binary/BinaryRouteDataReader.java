@@ -24,7 +24,7 @@ import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
-import net.osmand.plus.LogUtil;
+import net.osmand.LogUtil;
 
 import org.apache.commons.logging.Log;
 

@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 import net.osmand.Algoritms;
 import net.osmand.osm.MapUtils;
-import net.osmand.plus.LogUtil;
+import net.osmand.LogUtil;
 
 import org.apache.commons.logging.Log;
 

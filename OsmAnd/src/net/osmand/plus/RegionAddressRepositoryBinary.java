@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Building;
 import net.osmand.data.City;

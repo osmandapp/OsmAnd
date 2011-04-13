@@ -9,8 +9,8 @@ import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.List;
 
 import net.osmand.Algoritms;
+import net.osmand.LogUtil;
 import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.LogUtil;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.ProgressDialogImplementation;

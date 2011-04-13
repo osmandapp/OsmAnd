@@ -6,12 +6,12 @@ package net.osmand.plus.activities;
 import java.text.MessageFormat;
 import java.util.List;
 
+import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.activities.RoutingHelper.TurnType;
 import net.osmand.plus.views.MapInfoLayer;
-import net.osmand.osm.MapUtils;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.graphics.Canvas;

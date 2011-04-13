@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 import net.osmand.Algoritms;
 import net.osmand.Version;
-import net.osmand.plus.LogUtil;
+import net.osmand.LogUtil;
 
 import org.apache.commons.logging.Log;
 

@@ -2,10 +2,10 @@ package net.osmand.plus.views;
 
 import java.util.List;
 
-import net.osmand.plus.FavouritePoint;
+import net.osmand.FavouritePoint;
+import net.osmand.osm.LatLon;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.R;
-import net.osmand.osm.LatLon;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;

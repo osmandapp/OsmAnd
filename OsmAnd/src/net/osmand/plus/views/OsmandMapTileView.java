@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.LogUtil;
 import net.osmand.data.preparation.MapTileDownloader;
 import net.osmand.data.preparation.MapTileDownloader.DownloadRequest;
 import net.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
@@ -13,7 +14,6 @@ import net.osmand.map.IMapLocationListener;
 import net.osmand.map.ITileSource;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
-import net.osmand.plus.LogUtil;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.OsmandApplication;
@@ -28,23 +28,23 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Paint.Style;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
 import android.view.GestureDetector;
-import android.view.GestureDetector.OnDoubleTapListener;
-import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
-import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.WindowManager;
+import android.view.GestureDetector.OnDoubleTapListener;
+import android.view.GestureDetector.OnGestureListener;
+import android.view.SurfaceHolder.Callback;
 
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback, AnimateDraggingCallback, OnGestureListener,
 		OnDoubleTapListener, MultiTouchZoomListener {

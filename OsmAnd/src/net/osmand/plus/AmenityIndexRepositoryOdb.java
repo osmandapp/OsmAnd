@@ -13,6 +13,7 @@ import java.util.Map;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
+import net.osmand.LogUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.index.IndexConstants;

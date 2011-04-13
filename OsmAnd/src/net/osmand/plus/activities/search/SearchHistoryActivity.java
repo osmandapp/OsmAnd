@@ -2,12 +2,12 @@ package net.osmand.plus.activities.search;
 
 import java.util.List;
 
+import net.osmand.osm.LatLon;
+import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchHistoryHelper.HistoryEntry;
-import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;

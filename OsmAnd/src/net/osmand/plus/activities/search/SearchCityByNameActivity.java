@@ -3,15 +3,15 @@ package net.osmand.plus.activities.search;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.RegionAddressRepository;
-import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.PostCode;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.RegionAddressRepository;
+import net.osmand.plus.activities.OsmandApplication;
 import android.os.Bundle;
 import android.widget.TextView;
 
