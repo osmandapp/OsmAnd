@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.MessageFormat;
 
 import net.osmand.Version;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.search.SearchActivity;
@@ -19,6 +20,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.URLSpan;
+import android.text.style.UnderlineSpan;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -39,7 +45,7 @@ public class MainMenuActivity extends Activity {
 	private View favouritesButton;
 	private View closeButton;
 	
-	
+	private static final String CONTRIBUTION_VERSION_FLAG = "CONTRIBUTION_VERSION_FLAG";
 
 	
 	public void checkPreviousRunsForExceptions() {
@@ -116,8 +122,29 @@ public class MainMenuActivity extends Activity {
 		rightview = (View) findViewById(R.id.SearchButton);
 		rightview.startAnimation(getAnimation(1, 0));
 		
-		final TextView textView = (TextView) findViewById(R.id.TextVersion);
-		textView.setText(Version.APP_VERSION+ " "+ Version.APP_DESCRIPTION); //$NON-NLS-1$
+		String textVersion = Version.APP_VERSION+ " "+ Version.APP_DESCRIPTION;
+		final TextView textVersionView = (TextView) findViewById(R.id.TextVersion);
+		textVersionView.setText(textVersion);
+		SharedPreferences prefs = OsmandSettings.getPrefs(this);
+		
+		// only one commit should be with contribution version flag
+		// prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
+		if (prefs.contains(CONTRIBUTION_VERSION_FLAG)) {
+			final TextView appName = (TextView) findViewById(R.id.AppName);
+			appName.setText("OsmAnd!+");
+			SpannableString content = new SpannableString(textVersion);
+			content.setSpan(new ClickableSpan() {
+				
+				@Override
+				public void onClick(View widget) {
+					final Intent mapIndent = new Intent(MainMenuActivity.this, ContributionVersionActivity.class);
+					startActivityForResult(mapIndent, 0);					
+				}
+			}, 0, content.length(), 0);
+			textVersionView.setText(content);
+			textVersionView.setMovementMethod(LinkMovementMethod.getInstance());
+		}
+		
 
 		showMap = findViewById(R.id.MapButton);
 		showMap.setOnClickListener(new OnClickListener() {

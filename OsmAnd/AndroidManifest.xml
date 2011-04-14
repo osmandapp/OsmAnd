@@ -17,6 +17,8 @@
         <activity android:name=".activities.DownloadIndexActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name=".activities.ShowRouteInfoActivity"></activity>
         <activity android:name=".activities.FavouritesActivity" android:label="@string/favourites_activity"></activity>
+        <activity android:name=".activities.ContributionVersionActivity" android:label="@string/contribution_activity"></activity>
+        
         
         <activity android:name=".activities.search.SearchPOIActivity" android:label="@string/searchpoi_activity"></activity>
         <activity android:name=".activities.search.SearchPoiFilterActivity"></activity>

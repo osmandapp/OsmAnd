@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent" android:orientation="vertical">
+  
+<TextView android:id="@+id/Label" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:text="@string/select_build_to_install"></TextView>
+
+<ListView android:id="@android:id/list" android:layout_width="fill_parent" android:layout_weight="1" android:layout_height="wrap_content" 
+		android:layout_marginLeft="3dp" android:layout_marginTop="3dp" android:layout_marginRight="3dp" ></ListView>
+<Button android:id="@+id/DownloadButton" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:text="@string/download_files"
+		android:layout_marginLeft = "3dp" android:layout_marginTop ="3dp" android:layout_marginRight = "3dp" android:visibility="gone"/>
+</LinearLayout>
