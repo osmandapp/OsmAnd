@@ -115,7 +115,8 @@ public class DayNightHelper implements SensorEventListener {
 		LocationManager locationProvider = (LocationManager) osmandApplication.getSystemService(Context.LOCATION_SERVICE);
 		List<String> providers = new ArrayList<String>(locationProvider.getProviders(true));
 		//note, passive provider is from API_LEVEL 8 but it is a constant, we can check for it.
-		int passiveFirst = providers.indexOf(LocationManager.PASSIVE_PROVIDER);
+		// constant should not be changed in future
+		int passiveFirst = providers.indexOf("passive"); //LocationManager.PASSIVE_PROVIDER
 		//put passive provider to first place
 		if (passiveFirst > -1) {
 			providers.add(0,providers.remove(passiveFirst));
