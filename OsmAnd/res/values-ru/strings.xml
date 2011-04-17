@@ -322,7 +322,6 @@
     <string name="settings_activity">Настройки</string>
     <string name="show_gps_coordinates_text">Показать gps координаты на карте</string>
     <string name="use_internet_to_download_tile">Использовать Интернет для загрузки недостающих частей карты</string>
-    <string name="app_name">OsmAnd</string>
     <string name="app_description">Навигационное приложение</string>
 
 	<string name="exit_Button">Выход</string>

@@ -18,7 +18,6 @@
 	<string name="app_mode_car">Auto</string>
 	<string name="app_mode_default">Predeterminado</string>
 	<string name="app_mode_pedestrian">Peatón</string>
-	<string name="app_name">OsmAnd</string>
 	<string name="app_settings">Configuraciones</string>
 	<string name="arrived_at_destination">Llegó a su destino</string>
 	<string name="auth_failed"> Fallo de autorización</string>
