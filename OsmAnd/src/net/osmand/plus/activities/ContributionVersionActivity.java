@@ -1,7 +1,11 @@
 package net.osmand.plus.activities;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,24 +13,29 @@ import java.util.Date;
 import java.util.List;
 
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
+import net.osmand.plus.ResourceManager;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Filterable;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,13 +44,21 @@ public class ContributionVersionActivity extends ListActivity {
 
 	private static ContributionVersionActivityThread thread = new ContributionVersionActivityThread();
 	private static final int DOWNLOAD_BUILDS_LIST = 1;
+	private static final int INSTALL_BUILD = 2;
+	private static final int ACTIVITY_TO_INSTALL = 23;
+	
 	private static final String URL_TO_RETRIEVE_BUILDS = "http://download.osmand.net/builds.php";
-	private static final String CONTRIBUTION_INSTALL_APP_DATE = "CONTRIBUTION_INSTALL_APP_DATE"; 
-	private ProgressDialog progressFileDlg;
+	private static final String URL_GET_BUILD = "http://download.osmand.net/";
+	private static final String CONTRIBUTION_INSTALL_APP_DATE = "CONTRIBUTION_INSTALL_APP_DATE";
+	
+	private ProgressDialog progressDlg;
 	private Date currentInstalledDate;
 	
 	private List<OsmAndBuild> downloadedBuilds = new ArrayList<OsmAndBuild>();
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+	private File pathToDownload = new File(Environment.getExternalStorageDirectory(), ResourceManager.APP_DIR + "osmandToInstall.apk");
+	private OsmAndBuild currentSelectedBuild = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,11 +75,22 @@ public class ContributionVersionActivity extends ListActivity {
 		}
 		
 		downloadedBuilds.clear();
-		startThreadOperation(DOWNLOAD_BUILDS_LIST, getString(R.string.loading_builds));
+		startThreadOperation(DOWNLOAD_BUILDS_LIST, getString(R.string.loading_builds), -1);
 	}
 
-	private void startThreadOperation(int operationId, String message) {
-		progressFileDlg = ProgressDialog.show(this, getString(R.string.loading), message);
+	private void startThreadOperation(int operationId, String message, int total) {
+		
+		progressDlg = new ProgressDialog(this);
+		progressDlg.setTitle(getString(R.string.loading));
+		progressDlg.setMessage(message);
+		if(total != -1){
+			progressDlg.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			progressDlg.setMax(total);
+			progressDlg.setProgress(0);
+		} else {
+			progressDlg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		}
+		progressDlg.show();
 //		progressFileDlg.setCancelable(false);
 		if(thread.getState() == Thread.State.TERMINATED || thread.getOperationId() != operationId){
 			thread = new ContributionVersionActivityThread();
@@ -75,17 +103,48 @@ public class ContributionVersionActivity extends ListActivity {
 	}
 	
 	protected void endThreadOperation(int operationId, Exception e){
-		if(progressFileDlg != null){
-			progressFileDlg.dismiss();
-			progressFileDlg = null;
+		if(progressDlg != null){
+			progressDlg.dismiss();
+			progressDlg = null;
 		}
 		if(operationId == DOWNLOAD_BUILDS_LIST){
 			if(e != null){
-				Toast.makeText(this, R.string.loading_builds_failed + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
+				Toast.makeText(this, getString(R.string.loading_builds_failed) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
 				finish();
 			} else {
 				setListAdapter(new OsmandBuildsAdapter(downloadedBuilds));
 			}
+		} else if(operationId == INSTALL_BUILD){
+			if(currentSelectedBuild != null){
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+	            intent.setDataAndType(Uri.fromFile(pathToDownload), "application/vnd.android.package-archive");
+	            startActivityForResult(intent, ACTIVITY_TO_INSTALL);
+	            //startActivity(intent);
+	            //updateLastInstalledBuild(true);
+			}
+		}
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(ACTIVITY_TO_INSTALL == requestCode && resultCode == RESULT_OK){
+			updateLastInstalledBuild(true);
+		}
+	}
+
+	private void updateLastInstalledBuild(boolean showMessage) {
+		if (currentSelectedBuild != null) {
+			if (showMessage) {
+				Toast.makeText(
+						this,
+						MessageFormat.format(getString(R.string.build_installed), currentSelectedBuild.tag, dateFormat
+								.format(currentSelectedBuild.date)), Toast.LENGTH_LONG).show();
+			}
+			OsmandSettings.getPrefs(this).edit().putString(CONTRIBUTION_INSTALL_APP_DATE, dateFormat.format(currentSelectedBuild.date))
+					.commit();
+			currentInstalledDate = currentSelectedBuild.date;
+			getListAdapter().notifyDataSetInvalidated();
 		}
 	}
 	
@@ -115,8 +174,26 @@ public class ContributionVersionActivity extends ListActivity {
 					}
 				}
 			}
-			
-			
+		} else if(operationId == INSTALL_BUILD){
+			URLConnection connection = new URL(URL_GET_BUILD + currentSelectedBuild.path).openConnection();
+			if(pathToDownload.exists()){
+				pathToDownload.delete();
+			}
+			byte[] buffer = new byte[1024];
+			InputStream is = connection.getInputStream();
+			FileOutputStream fout = new FileOutputStream(pathToDownload);
+			try {
+				int totalRead = 0;
+				int read;
+				while((read = is.read(buffer, 0, 1024)) != -1){
+					fout.write(buffer, 0, read);
+					totalRead += read;
+					progressDlg.setProgress(totalRead / 1024);
+				}
+			} finally {
+				fout.close();
+				is.close();
+			}
 		}
 		
 	}
@@ -124,12 +201,21 @@ public class ContributionVersionActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		OsmAndBuild item = (OsmAndBuild) getListAdapter().getItem(position);
-		// TODO
-		Toast.makeText(this, "Install " + item.path, Toast.LENGTH_LONG).show();
-		OsmandSettings.getPrefs(this).edit().putString(CONTRIBUTION_INSTALL_APP_DATE, dateFormat.format(item.date)).commit();
-		currentInstalledDate = item.date;
-		getListAdapter().notifyDataSetInvalidated();
+		final OsmAndBuild item = (OsmAndBuild) getListAdapter().getItem(position);
+		Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(MessageFormat.format(getString(R.string.install_selected_build), item.tag, dateFormat.format(item.date), item.size));
+		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				currentSelectedBuild = item;
+				int kb = (int) (Double.parseDouble(item.size) * 1024);
+				startThreadOperation(INSTALL_BUILD, getString(R.string.downloading_build), kb);
+			}
+		});
+		
+		builder.setNegativeButton(R.string.default_buttons_no, null);
+		builder.show();
 		
 	}
 	
@@ -142,9 +228,9 @@ public class ContributionVersionActivity extends ListActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 		thread.setActivity(null);
-		if(progressFileDlg != null){
-			progressFileDlg.dismiss();
-			progressFileDlg = null;
+		if(progressDlg != null){
+			progressDlg.dismiss();
+			progressDlg = null;
 		}
 	}
 	

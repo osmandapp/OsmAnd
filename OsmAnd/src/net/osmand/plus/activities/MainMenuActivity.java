@@ -14,7 +14,9 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Build;
@@ -23,8 +25,6 @@ import android.os.Environment;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.text.style.URLSpan;
-import android.text.style.UnderlineSpan;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -33,6 +33,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainMenuActivity extends Activity {
 
@@ -48,11 +49,11 @@ public class MainMenuActivity extends Activity {
 	private static final String CONTRIBUTION_VERSION_FLAG = "CONTRIBUTION_VERSION_FLAG";
 
 	
-	public void checkPreviousRunsForExceptions() {
+	public void checkPreviousRunsForExceptions(boolean firstTime) {
 		long size = getPreferences(MODE_WORLD_READABLE).getLong(EXCEPTION_FILE_SIZE, 0);
 		final File file = new File(Environment.getExternalStorageDirectory(), OsmandApplication.EXCEPTION_PATH);
 		if (file.exists() && file.length() > 0) {
-			if (size != file.length()) {
+			if (size != file.length() && !firstTime) {
 				String msg = MessageFormat.format(getString(R.string.previous_run_crashed), OsmandApplication.EXCEPTION_PATH);
 				Builder builder = new AlertDialog.Builder(MainMenuActivity.this);
 				builder.setMessage(msg).setNeutralButton(getString(R.string.close), null);
@@ -85,9 +86,8 @@ public class MainMenuActivity extends Activity {
 
 				});
 				builder.show();
-				getPreferences(MODE_WORLD_READABLE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
 			}
-
+			getPreferences(MODE_WORLD_READABLE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
 		} else {
 			if (size > 0) {
 				getPreferences(MODE_WORLD_READABLE).edit().putLong(EXCEPTION_FILE_SIZE, 0).commit();
@@ -191,25 +191,43 @@ public class MainMenuActivity extends Activity {
 		
 		
 		((OsmandApplication)getApplication()).checkApplicationIsBeingInitialized(this);
-		checkPreviousRunsForExceptions();
+		
 		
 		SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);
+		boolean firstTime = false;
 		if(!pref.contains(FIRST_TIME_APP_RUN)){
+			firstTime = true;
 			pref.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
-			Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(R.string.first_time_msg);
-			builder.setPositiveButton(R.string.first_time_download, new DialogInterface.OnClickListener(){
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					startActivity(new Intent(MainMenuActivity.this, DownloadIndexActivity.class));
-				}
-				
-			});
-			builder.setNegativeButton(R.string.first_time_continue, null);
 			
-			builder.show();
+			boolean netOsmandWasInstalled = false;
+			try {
+				ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo("net.osmand", PackageManager.GET_META_DATA);
+				netOsmandWasInstalled = applicationInfo != null;
+			} catch (NameNotFoundException e) {
+				netOsmandWasInstalled = false;
+			}
+			
+			if(netOsmandWasInstalled){
+				Builder builder = new AlertDialog.Builder(this);
+				builder.setMessage(R.string.osmand_net_previously_installed);
+				builder.setPositiveButton(R.string.default_buttons_ok, null);
+				builder.show();
+			} else {
+				Builder builder = new AlertDialog.Builder(this);
+				builder.setMessage(R.string.first_time_msg);
+				builder.setPositiveButton(R.string.first_time_download, new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						startActivity(new Intent(MainMenuActivity.this, DownloadIndexActivity.class));
+					}
+
+				});
+				builder.setNegativeButton(R.string.first_time_continue, null);
+				builder.show();
+			}
 		}
+		checkPreviousRunsForExceptions(firstTime);
 	}
 	
 

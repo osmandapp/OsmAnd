@@ -321,7 +321,6 @@
     <string name="settings_activity">Beállítások</string>
     <string name="show_gps_coordinates_text">GPS koordináták mutatása a térképen</string>
     <string name="use_internet_to_download_tile">Internet használata a hiányzó térképszeletek letöltésére</string>
-    <string name="app_name">OsmAnd</string>
     <string name="app_description">Navigációs alkalmazás</string>
 
 <string name="exit_Button">Kilép</string>
