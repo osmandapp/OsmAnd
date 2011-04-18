@@ -45,7 +45,6 @@
 	
 	<PreferenceScreen android:title="@string/general_settings" android:summary="@string/general_settings_descr">
 		<CheckBoxPreference android:key="use_internet_to_download_tiles" android:title="@string/use_internet" android:summary="@string/use_internet_to_download_tile"></CheckBoxPreference>
-		<EditTextPreference android:title="@string/application_dir" android:key="external_storage_dir"></EditTextPreference>
 		<ListPreference android:title="@string/max_level_download_tile" android:summary="@string/max_level_download_tile_descr"
 			android:key="max_level_download_tile"></ListPreference>
 		<CheckBoxPreference android:title="@string/auto_zoom_map" android:summary="@string/auto_zoom_map_descr" android:key="auto_zoom_map"></CheckBoxPreference>
@@ -53,6 +52,7 @@
 		<ListPreference android:key="rotate_map" android:title="@string/rotate_map_to_bearing" android:summary="@string/rotate_map_to_bearing_descr"></ListPreference>
 		<ListPreference android:key="map_screen_orientation" android:title="@string/map_screen_orientation" android:summary="@string/map_screen_orientation_descr"></ListPreference>
 		<ListPreference android:key="position_on_map" android:title="@string/position_on_map" android:summary="@string/position_on_map_descr"></ListPreference>
+		<EditTextPreference android:title="@string/application_dir" android:key="external_storage_dir"></EditTextPreference>
 		<CheckBoxPreference android:key="use_trackball_for_movements" android:title="@string/use_trackball" android:summary="@string/use_trackball_descr"></CheckBoxPreference>
 		
 	</PreferenceScreen>

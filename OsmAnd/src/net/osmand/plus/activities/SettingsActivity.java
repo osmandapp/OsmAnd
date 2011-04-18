@@ -150,7 +150,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		userPassword.setOnPreferenceChangeListener(this);
 		applicationDir = (EditTextPreference) screen.findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
 		applicationDir.setOnPreferenceChangeListener(this);
-		updateApplicationDirSummary();
 		
 		applicationMode =(ListPreference) screen.findPreference(OsmandSettings.APPLICATION_MODE);
 		applicationMode.setOnPreferenceChangeListener(this);
@@ -365,6 +364,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			summary = summary.substring(0, summary.lastIndexOf(':') + 1);
 		}
 		tileSourcePreference.setSummary(summary + mapName);
+		
+		updateApplicationDirSummary();
     }
     
 	private void fill(ListPreference component, String[] list, String[] values, String selected) {
@@ -456,6 +457,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.commit();
 		} else if(preference == applicationDir){
 			warnAboutChangingStorage(edit, (String) newValue);
+			return false;
 		} else if(preference == positionOnMap){
 			edit.putInt(OsmandSettings.POSITION_ON_MAP, positionOnMap.findIndexOfValue((String) newValue));
 			edit.commit();
@@ -539,6 +541,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	}
 
 	private void warnAboutChangingStorage(final Editor edit, final String newValue) {
+		File path = new File(newValue);
+		path.mkdirs();
+		if(!path.canRead() || !path.exists()){
+			Toast.makeText(this, R.string.specified_dir_doesnt_exist, Toast.LENGTH_LONG).show()	;
+			return;
+		}
+		
 		Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(getString(R.string.application_dir_change_warning));
 		builder.setPositiveButton(R.string.default_buttons_yes, new OnClickListener() {
@@ -547,8 +556,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				//edit the preference
 				edit.putString(OsmandSettings.EXTERNAL_STORAGE_DIR, newValue);
 				edit.commit();
-				updateApplicationDirSummary();
+				((OsmandApplication)getApplication()).getResourceManager().resetStoreDirectory();
 				reloadIndexes();
+				updateApplicationDirSummary();
 			}
 		});
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
@@ -562,6 +572,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			@Override
 			public void run() {
 				try {
+					
 					showWarnings(((OsmandApplication)getApplication()).getResourceManager().reloadIndexes(impl));
 				} finally {
 					if(progressDlg !=null){
