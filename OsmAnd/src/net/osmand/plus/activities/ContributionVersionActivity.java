@@ -13,7 +13,6 @@ import java.util.Date;
 import java.util.List;
 
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 
@@ -119,8 +118,7 @@ public class ContributionVersionActivity extends ListActivity {
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 	            intent.setDataAndType(Uri.fromFile(pathToDownload), "application/vnd.android.package-archive");
 	            startActivityForResult(intent, ACTIVITY_TO_INSTALL);
-	            //startActivity(intent);
-	            //updateLastInstalledBuild(true);
+	            updateInstalledApp(false, currentSelectedBuild.date);
 			}
 		}
 	}
@@ -128,24 +126,20 @@ public class ContributionVersionActivity extends ListActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if(ACTIVITY_TO_INSTALL == requestCode && resultCode == RESULT_OK){
-			updateLastInstalledBuild(true);
+		if(ACTIVITY_TO_INSTALL == requestCode && resultCode != RESULT_OK){
+			updateInstalledApp(false, currentInstalledDate);
 		}
 	}
 
-	private void updateLastInstalledBuild(boolean showMessage) {
-		if (currentSelectedBuild != null) {
-			if (showMessage) {
-				Toast.makeText(
-						this,
-						MessageFormat.format(getString(R.string.build_installed), currentSelectedBuild.tag, dateFormat
-								.format(currentSelectedBuild.date)), Toast.LENGTH_LONG).show();
-			}
-			OsmandSettings.getPrefs(this).edit().putString(CONTRIBUTION_INSTALL_APP_DATE, dateFormat.format(currentSelectedBuild.date))
-					.commit();
-			currentInstalledDate = currentSelectedBuild.date;
-			getListAdapter().notifyDataSetInvalidated();
+	private void updateInstalledApp(boolean showMessage, Date d) {
+		if (showMessage) {
+			Toast.makeText(
+					this,
+					MessageFormat.format(getString(R.string.build_installed), currentSelectedBuild.tag, dateFormat
+							.format(currentSelectedBuild.date)), Toast.LENGTH_LONG).show();
 		}
+		OsmandSettings.getPrefs(this).edit().putString(CONTRIBUTION_INSTALL_APP_DATE, dateFormat.format(d))
+				.commit();
 	}
 	
 	protected void executeThreadOperation(int operationId) throws Exception {
@@ -188,7 +182,10 @@ public class ContributionVersionActivity extends ListActivity {
 				while((read = is.read(buffer, 0, 1024)) != -1){
 					fout.write(buffer, 0, read);
 					totalRead += read;
-					progressDlg.setProgress(totalRead / 1024);
+					if(totalRead > 1024){
+						progressDlg.incrementProgressBy(totalRead / 1024);
+						totalRead %= 1024;
+					}
 				}
 			} finally {
 				fout.close();
@@ -260,10 +257,10 @@ public class ContributionVersionActivity extends ListActivity {
 			description.setText(format.toString());
 
 			if(currentInstalledDate != null){
-				if(currentInstalledDate.after(build.date)){
-					tagView.setTextColor(Color.BLUE);
-				} else {
+				if(currentInstalledDate.before(build.date)){
 					tagView.setTextColor(Color.GREEN);
+				} else {
+					tagView.setTextColor(Color.BLUE);
 				}
 			} else {
 				tagView.setTextColor(Color.WHITE);

@@ -61,7 +61,6 @@
 	<string name="use_high_res_maps">Nagy felbontású térkép</string>
 	<string name="use_high_res_maps_descr">Nagy felbontású térkép használata nagy felbontású eszközön</string>
 	<string name="unknown_location">A jelenlegi helyzet nem ismert</string>
-	<string name="download_files_question">{0} fájl letöltése?</string>
 	<string name="download_files">Letöltés</string>
 	<string name="context_menu_item_search_transport">Közlekedés keresése</string>
 	<string name="transport_searching_transport">Közlekedés keresése (nincs kijelölt cél)</string>
@@ -241,7 +240,6 @@
 	<string name="follow_route">Útvonal követése</string>
 	<string name="mark_final_location_first">Először válassza ki a célt</string>
 	<string name="get_directions">Útirány</string>
-	<string name="gps_status_app_not_found">GPS állapot alkalmazás nem található</string>
     <string name="show_gps_status">GPS állapot mutatása</string>
 	<string name="opening_hours">Órák nyitása</string>
 	<string name="opening_changeset">Változások megnyitása...</string>
