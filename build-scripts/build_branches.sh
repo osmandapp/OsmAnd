@@ -6,6 +6,7 @@ GIT_ORIGIN_NAME=origin
 BUILD_DIR="$DIRECTORY"/builds
 VERSION_FILE=./DataExtractionOSM/src/net/osmand/Version.java 
 DATE=$(date +%d-%m-%y)
+SHORT_DATE=$(date +%d-%m)
 
 # clean all files in build directory
 rm -r "$BUILD_DIR"
@@ -31,7 +32,7 @@ do
         git checkout $BRANCH		  
 		  git merge $GIT_ORIGIN_NAME/$BRANCH
 		  
-		  sed -e "s/\(APP_DESCRIPTION.*=.*\"\).*\(\".*\)/\1$DATE $BRANCH\2/g" $VERSION_FILE >  ${VERSION_FILE}.bak
+		  sed -e "s/\(APP_DESCRIPTION.*=.*\"\).*\(\".*\)/\1$SHORT_DATE $BRANCH\2/g" $VERSION_FILE >  ${VERSION_FILE}.bak
 	     mv ${VERSION_FILE}.bak ${VERSION_FILE}
 
         ## build map creator
