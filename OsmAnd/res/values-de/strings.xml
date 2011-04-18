@@ -3,7 +3,7 @@
 	<string name="osb_bug_name">OSM Fehler</string>
 	<string name="poi_context_menu_modify">Ändern POI</string>
 	<string name="poi_context_menu_delete">Löschen POI</string>
-	<string name="poi_namefinder_query_empty">Input search query to find POI</string>
+	<string name="poi_namefinder_query_empty">Suchbegriff eingeben</string>
 	<string name="any_poi">Alles</string>
 	<string name="layer_transport_route">ÖPNV Linien</string>
 	<string name="thanks_yandex_traffic">Dank an Yandex für die Überlassung von Verkehrsinformationen.</string>
@@ -134,7 +134,7 @@
 	<string name="downloading">Herunterladen...</string>
 	<string name="downloading_list_indexes">Herunterladen einer Liste der verfügbaren Indizes</string>
 	<string name="list_index_files_was_not_loaded">Die Indizes wurden von osmand.googlecode.com nicht geladen.</string>
-    <string name="select_index_file_to_download">Wenn Sie ihre Region nicht finden dann können Sie diese selbst hinzufügen.
+	<string name="select_index_file_to_download">Wenn Sie ihre Region nicht finden dann können Sie diese selbst hinzufügen.
 See osmand.net.</string>
 	<string name="show_poi_on_map">Auf Karte zeigen</string>
 	<string name="fav_points_edited">Favorite point wurde bearbeitet</string>
@@ -144,14 +144,14 @@ See osmand.net.</string>
 	<string name="follow">Folgen</string>
 	<string name="recalculate_route_to_your_location">Neuberechnung der Route ausgehend Ihrer aktuellen Position</string>
 	<string name="follow_route">Folgen Sie der Strecke</string>
-	<string name="mark_final_location_first">Please mark point navigate to first</string>
+	<string name="mark_final_location_first">Geben Sie erst ein Ziel ein</string>
 	<string name="get_directions">Strecke</string>
 	<string name="gps_status_app_not_found">Die GPS Status App wurde nicht gefunden.</string>
-    <string name="show_gps_status">GPS Status anzeigen</string>
+	<string name="show_gps_status">GPS Status anzeigen</string>
 	<string name="opening_hours">Öffnungszeiten</string>
-	<string name="opening_changeset">Openging changeset</string>
-	<string name="closing_changeset">Closing changeset</string>
-	<string name="commiting_node">Commiting node</string>
+	<string name="opening_changeset">Öffne changeset</string>
+	<string name="closing_changeset">Schließe changeset</string>
+	<string name="commiting_node">Übertrage Knoten</string>
 	<string name="loading_poi_obj">POI wird geladen</string>
 	<string name="auth_failed">Autorisierung fehlgeschlagen</string>
 	<string name="failed_op">fehlgeschlagen</string>
@@ -165,7 +165,7 @@ See osmand.net.</string>
 	<string name="error_occurred_saving_gpx">Fehler während des Speicherns aufgetreten</string>
 	<string name="error_calculating_route">Fehler während der Streckenberechnung</string>
 	<string name="error_calculating_route_occured">Während der Streckenberechnung ist ein Fehler aufgetreten</string>
-	<string name="empty_route_calculated">Es wurde keine Stecke berechnet</string>									
+	<string name="empty_route_calculated">Es wurde keine Stecke berechnet</string>
 	<string name="new_route_calculated_dist">Neue Strecke wird berechnet</string>
 	<string name="arrived_at_destination">Sie haben den Zielpunkt erreicht</string>
 	<string name="invalid_locations">Position ist ungültig</string>
@@ -173,13 +173,13 @@ See osmand.net.</string>
 	<string name="close">Schließen</string>
 	<string name="loading_data">Daten werden geladen...</string>
 	<string name="reading_indexes">Verarbeite Indizes...</string>
-	<string name="previous_run_crashed">Das vorherige Program war abgestürzt. Logdatei unter {0}.  Fehler bitte melden und Logdatei anhängen.</string>
+	<string name="previous_run_crashed">Das vorherige Program war abgestürzt. Logdatei unter {0}. Fehler bitte melden und Logdatei anhängen.</string>
 	<string name="saving_gpx_tracks">GPX Pfad wird auf der SD-Karte gespeichern...</string>
 	<string name="finished_task">Abgeschlossen</string>
-    <string name="reload_indexes_descr">Neuladen der Daten Indizes von SD-Karte</string>
+	<string name="reload_indexes_descr">Datenverzeichnisse von SD-Karte neu laden</string>
     <string name="reload_indexes">Verzeichnisse neu laden</string>
-    <string name="download_indexes_descr">Download indexes from internet</string>
-    <string name="download_indexes">Download indexes</string>
+    <string name="download_indexes_descr">Lade Verzeichnisse aus dem Internet</string>
+    <string name="download_indexes">Indizes herunterladen</string>
     <string name="use_online_routing_descr">Internet zur Streckenberechnung verwenden</string>
     <string name="use_online_routing">Online Streckenberechnung</string>
     <string name="user_password_descr">OpenStreetMap.org Kennwort</string>
@@ -197,7 +197,7 @@ See osmand.net.</string>
     <string name="settings_preset">Standardeinstellungen</string>
     <string name="settings">Einstellungen</string>
     <string name="save_current_track_descr">Aktuellen Weg auf SD-Karte speichern</string>
-    <string name="save_current_track">Positionslogging aktivieren</string>	
+    <string name="save_current_track">Positionslogging aktivieren</string>
     <string name="save_track_interval_descr">Wartezeit zwischen zwei Positionsbestimmungen</string>
     <string name="save_track_interval">Positionsaktualisierungintervall</string>
     <string name="monitor_preferences">Positionslogging</string>
@@ -213,8 +213,8 @@ See osmand.net.</string>
     <string name="show_osm_bugs">OSM-Fehlerberichte anzeigen</string>
     <string name="favourites_activity">Bevorzugte Punkte</string>
     <string name="add_to_favourite">Zu Favoriten hinzufügen</string>
-    <string name="use_english_names_descr">Select use native or english names</string>
-    <string name="use_english_names">Use english names</string>
+    <string name="use_english_names_descr">Wähle ob einheimische oder englische Namen genutzt werden sollen</string>
+    <string name="use_english_names">Nutze englische Namen</string>
     <string name="app_settings">Anwendungseinstellungen</string>
     <string name="search_address">Adresse suchen </string>
     <string name="choose_building">Gebäude wählen</string>
@@ -226,13 +226,13 @@ See osmand.net.</string>
     <string name="map_specify_point">Koordinaten suchen</string>
     <string name="show_view_angle_descr">Kartenausrichtung automatisch der Blickrichtung anpassen</string>
     <string name="show_view_angle">Automatische Kartenausrichtung</string>
-    <string name="stop_navigation">Clear point</string>
-    <string name="navigate_to_point">Mark point</string>
+    <string name="stop_navigation">Lösche Punkt</string>
+    <string name="navigate_to_point">Markiere Punkt</string>
     <string name="map_view_3d_descr">3D-Kartenansicht verwenden</string>
     <string name="map_view_3d">3D-Kartenansicht</string>
     <string name="rotate_map_to_bearing_descr">Karte per Kompass an Blickrichtung ausrichten</string>
     <string name="rotate_map_to_bearing">Karte ausrichten</string>
-    <string name="show_poi_over_map_description">zuletzt gewählte POI auf der Karte anzeigen</string>
+    <string name="show_poi_over_map_description">Zuletzt gewählte POIs auf der Karte anzeigen</string>
     <string name="show_poi_over_map">POIs anzeigen</string>
     <string name="map_tile_source_descr">Quelle der Kartendarstellung wählen</string>
     <string name="map_tile_source">Kartendarstellung</string>
@@ -243,6 +243,7 @@ See osmand.net.</string>
     <string name="settings_activity">Einstellungen</string>
     <string name="show_gps_coordinates_text">GPS-Koordinaten auf der Karte anzeigen</string>
     <string name="use_internet_to_download_tile">Fehlende Kartenteile aus dem Internet nachladen</string>
+    <string name="app_name">OsmAnd</string>
     <string name="app_description">Navigationsanwendung OsmAnd</string>
 
 	<string name="exit_Button">Beenden</string>
@@ -256,7 +257,7 @@ See osmand.net.</string>
 	<color name="color_red">#FF0000</color>
 	<string name="searchpoi_activity">POI wählen</string>
 	<string name="search_POI_level_btn">Finde mehr</string>
-  <string name="incremental_search_city">Suche Stadt inkrementell. Um Städte/Postleitzahlen zu finden mindestens 3 Zeichen eingeben.</string>
+	<string name="incremental_search_city">Suche Stadt inkrementell. Um Städte/Postleitzahlen zu finden mindestens 3 Zeichen eingeben.</string>
 	<string name="incremental_search_street">Suche Straße inkrementell</string>
 	<string name="incremental_search_building">Suche Gebäude inkrementell</string>
 	<string name="choose_available_region">Wähle Region</string>
@@ -303,7 +304,7 @@ See osmand.net.</string>
 	<string name="default_buttons_cancel">Abbrechen</string>
 	<string name="default_buttons_apply">übernehmen</string><string name="default_buttons_add">Hinzufügen</string><string name="default_buttons_no">Nein</string><string name="add_favorite_dialog_top_text">Geben Sie diesem Punkt einen Namen</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorit</string>
-	<string name="add_favorite_dialog_favourite_added_template">Favorit point \'\'{0}\'\' wurde erfolgreich hinzugefügt.</string>
+	<string name="add_favorite_dialog_favourite_added_template">Favorit Punkt \'\'{0}\'\' wurde erfolgreich hinzugefügt.</string>
 
 	<string name="favourites_context_menu_title">Kontextmenü</string>
 	<string name="favourites_context_menu_navigate">Navigiere zu</string>
@@ -331,11 +332,11 @@ See osmand.net.</string>
 	<string name="osb_comment_dialog_author">Autor</string>
 	<string name="poi_edit_title">POI bearbeiten</string>
 	<string name="poi_create_title">POI einsenden</string>
-	<string name="poi_error_poi_not_found">Node can not be found or amenity is not a single node</string>
+	<string name="poi_error_poi_not_found">POI wurde nicht gefunden oder die Einrichtugn ist kein einzelner Knoten</string>
 	<string name="poi_remove_confirm_template">Sind Sie sicher, dass Sie {0} (Kommentar eingeben) ?</string>
-	<string name="poi_remove_title">Delete POI</string>
+	<string name="poi_remove_title">Lösche POI</string>
 	<string name="default_buttons_delete">Löschen</string>
-	<string name="poi_remove_success">Der POI wurde erfolgreich gelöscht</string>
+	<string name="poi_remove_success">POI wurde erfolgreich gelöscht</string>
 	<string name="poi_action_add">hinzufügen</string>
 	<string name="poi_action_change">ändern</string>
 	<string name="poi_action_succeded_template">Aktion {0} wurde erfolgreich abgeschlossen.</string>
@@ -349,13 +350,13 @@ See osmand.net.</string>
 	<string name="poi_dialog_comment">Kommentar</string>
 	<string name="poi_dialog_comment_default">POI Änderung</string>
 	<string name="poi_dialog_other_tags_message">Alle anderen Tags werden beibehalten</string>
-	
+
 	<string name="default_buttons_commit">Ändern</string>
 	<string name="default_buttons_reset">Zurücksetzen</string>
 	<string name="filter_current_poiButton">Filtern</string>
 	<string name="edit_filter_delete_menu_item">Löschen</string>
 	<string name="edit_filter_save_as_menu_item">Speichern als</string>
-	<string name="edit_filter_delete_dialog_title">Are you sure about deleting selected filter?</string>
+	<string name="edit_filter_delete_dialog_title">Ausgewählten Filter wirklich löschen?</string>
 	<string name="edit_filter_delete_message">Der Filter {0} wurde gelöscht.</string>
 	<string name="edit_filter_create_message">Der Filter {0} wurde erstellt.</string>
 	<string name="default_buttons_selectall">Alles markieren</string>
