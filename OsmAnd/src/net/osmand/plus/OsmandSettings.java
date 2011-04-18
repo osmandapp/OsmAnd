@@ -461,13 +461,11 @@ public class OsmandSettings {
 		return getExternalStorageDirectory(getPrefs(ctx));
 	}
 	
-	public static File extendOsmandPath(SharedPreferences prefs, String path)
-	{
+	public static File extendOsmandPath(SharedPreferences prefs, String path) {
 		return new File(getExternalStorageDirectory(prefs), path);
 	}
 
-	public static File extendOsmandPath(Context ctx, String path)
-	{
+	public static File extendOsmandPath(Context ctx, String path) {
 		return new File(getExternalStorageDirectory(ctx), path);
 	}
 	

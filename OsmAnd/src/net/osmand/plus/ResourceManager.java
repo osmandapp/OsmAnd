@@ -101,20 +101,10 @@ public class ResourceManager {
 		this.context = context;
 		this.renderer = new MapRenderRepositories(context);
 		asyncLoadingTiles.start();
-		OsmandSettings.getSharedPreferences(context).registerOnSharedPreferenceChangeListener(new OnSharedPreferenceChangeListener() {
-			@Override
-			public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
-					String key) {
-				if (key == OsmandSettings.EXTERNAL_STORAGE_DIR) {
-					resetStoreDirectory();
-				}
-			}
-		});
 		resetStoreDirectory();
 	}
 
-	private void resetStoreDirectory() 
-	{
+	public void resetStoreDirectory() {
 		dirWithTiles = OsmandSettings.extendOsmandPath(context, TILES_PATH);
 		dirWithTiles.mkdirs();
 	}

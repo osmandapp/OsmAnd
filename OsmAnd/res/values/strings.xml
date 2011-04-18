@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+
+	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
 	<string name="application_dir">Storage directory</string>
 	<string name="application_dir_change_warning">Changing storage directory will not move or delete the data. You must do it yourself! Do it at your own risk! Continue anyway?</string>
 	<string name="gps_status_app_not_found">GPS status application not installed. Search in Market?</string>
