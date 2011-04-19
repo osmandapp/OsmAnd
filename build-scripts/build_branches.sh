@@ -25,14 +25,13 @@ do
 	  git diff --exit-code "$BRANCH" "$GIT_ORIGIN_NAME/$BRANCH" --quiet
 	  RES_DIFF=$?	  
 	  if [ $RES_DIFF != 0 ]; then
-	     echo "Checkouting branch and create build for $BRANCH"
-		  ## reset all previous changes in working tree
-        git checkout . 
-		  git reset HEAD --hard
-        git checkout $BRANCH		  
-		  git merge $GIT_ORIGIN_NAME/$BRANCH
-		  
-		  sed -e "s/\(APP_DESCRIPTION.*=.*\"\).*\(\".*\)/\1$SHORT_DATE $BRANCH\2/g" $VERSION_FILE >  ${VERSION_FILE}.bak
+             echo "Checkouting branch and create build for $BRANCH"
+             ## reset all previous changes in working tree
+             git checkout . 
+             git reset HEAD --hard
+             git checkout $BRANCH
+             git reset $GIT_ORIGIN_NAME/$BRANCH --hard
+	     sed -e "s/\(APP_DESCRIPTION.*=.*\"\).*\(\".*\)/\1$SHORT_DATE $BRANCH\2/g" $VERSION_FILE >  ${VERSION_FILE}.bak
 	     mv ${VERSION_FILE}.bak ${VERSION_FILE}
 
         ## build map creator
