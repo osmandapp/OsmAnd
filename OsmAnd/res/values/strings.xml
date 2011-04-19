@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="use_osmand_routing_service">OsmAnd offline routing</string>
+	<string name="use_osmand_routing_service_descr">Use offline routing for long distances (experimental)</string>
+	<string name="osmand_routing_experimental">OsmAnd offline routing is experimental feature and it doesn\'t work for distance more than 20 km.\n Routing service is automatically switched to online Cloudmade.</string>
 	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
 	<string name="application_dir">Storage directory</string>
 	<string name="application_dir_change_warning">Changing storage directory will not move or delete the data. You must do it yourself! Do it at your own risk! Continue anyway?</string>

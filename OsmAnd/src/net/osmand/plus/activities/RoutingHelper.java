@@ -30,6 +30,7 @@ public class RoutingHelper {
 		public void routeWasCancelled();
 	}
 	
+	private final double DISTANCE_TO_USE_OSMAND_ROUTER = 20000;
 	
 	private List<IRouteInformationListener> listeners = new ArrayList<IRouteInformationListener>();
 
@@ -57,7 +58,7 @@ public class RoutingHelper {
 	private Thread currentRunningJob;
 	private long lastTimeEvaluatedRoute = 0;
 	private int evalWaitInterval = 3000;
-
+	
 	private ApplicationMode mode;
 	
 	private RouteProvider provider = new RouteProvider();
@@ -419,7 +420,21 @@ public class RoutingHelper {
 	}
 	
 	public void calculateRoute(final Location start, final LatLon end, final List<Location> currentGPXRoute){
-		final RouteService service = OsmandSettings.getRouterService(OsmandSettings.getPrefs(context));
+		if(start == null || end == null){
+			return;
+		}
+		
+		// temporary check while osmand offline router is not stable
+		RouteService serviceToUse= OsmandSettings.getRouterService(OsmandSettings.getPrefs(context));
+		if (serviceToUse == RouteService.OSMAND && !OsmandSettings.isOsmandRoutingServiceUsed(context)) {
+			double distance = MapUtils.getDistance(end, start.getLatitude(), start.getLongitude());
+			if (distance > DISTANCE_TO_USE_OSMAND_ROUTER) {
+				showMessage(context.getString(R.string.osmand_routing_experimental));
+				serviceToUse = RouteService.CLOUDMADE;
+			}
+		}
+		final RouteService service = serviceToUse;
+		
 		if(currentRunningJob == null){
 			// do not evaluate very often
 			if (System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval) {

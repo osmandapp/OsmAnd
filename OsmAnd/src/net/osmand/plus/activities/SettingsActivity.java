@@ -117,6 +117,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			new BooleanPreference(OsmandSettings.DEBUG_RENDERING_INFO, OsmandSettings.DEBUG_RENDERING_INFO_DEF),
 			new BooleanPreference(OsmandSettings.USE_STEP_BY_STEP_RENDERING, OsmandSettings.USE_STEP_BY_STEP_RENDERING_DEF),
 			new BooleanPreference(OsmandSettings.FAST_ROUTE_MODE, OsmandSettings.FAST_ROUTE_MODE_DEF),
+			new BooleanPreference(OsmandSettings.USE_OSMAND_ROUTING_SERVICE_ALWAYS, OsmandSettings.USE_OSMAND_ROUTING_SERVICE_ALWAYS_DEF),
 	};
 	private BroadcastReceiver broadcastReceiver;
 	
