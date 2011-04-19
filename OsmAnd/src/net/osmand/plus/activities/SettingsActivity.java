@@ -24,19 +24,22 @@ import net.osmand.plus.OsmandSettings.DayNightMode;
 import net.osmand.plus.activities.RouteProvider.RouteService;
 import net.osmand.plus.render.BaseOsmandRender;
 import net.osmand.plus.render.RendererRegistry;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.app.AlertDialog.Builder;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
@@ -78,6 +81,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	
 	private EditTextPreference userPassword;
 	private EditTextPreference userName;
+	private EditTextPreference applicationDir;
 	
 	private Preference saveCurrentTrack;
 	private Preference reloadIndexes;
@@ -144,6 +148,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		userName.setOnPreferenceChangeListener(this);
 		userPassword = (EditTextPreference) screen.findPreference(OsmandSettings.USER_PASSWORD);
 		userPassword.setOnPreferenceChangeListener(this);
+		applicationDir = (EditTextPreference) screen.findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
+		applicationDir.setOnPreferenceChangeListener(this);
 		
 		applicationMode =(ListPreference) screen.findPreference(OsmandSettings.APPLICATION_MODE);
 		applicationMode.setOnPreferenceChangeListener(this);
@@ -187,6 +193,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		};
 		registerReceiver(broadcastReceiver, new IntentFilter(NavigationService.OSMAND_STOP_SERVICE_ACTION));
     }
+
+	private void updateApplicationDirSummary() {
+		String storageDir = OsmandSettings.getExternalStorageDirectory(getApplicationContext()).getAbsolutePath();
+		applicationDir.setText(storageDir);
+		applicationDir.setSummary(storageDir);
+	}
     
     @Override
     protected void onResume() {
@@ -207,6 +219,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     	}
 		userName.setText(OsmandSettings.getUserName(prefs));
 		userPassword.setText(OsmandSettings.getUserPassword(prefs));
+		applicationDir.setText(OsmandSettings.getExternalStorageDirectory(prefs).getAbsolutePath());
 		useInternetToDownload.setChecked(OsmandSettings.isUsingInternetToDownloadTiles(prefs));
 		
 		Resources resources = this.getResources();
@@ -289,7 +302,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		fill(routerPreference, entries, entries, entry);
 
 		// read available voice data
-		File extStorage = new File(Environment.getExternalStorageDirectory(), ResourceManager.VOICE_PATH);
+		File extStorage = OsmandSettings.extendOsmandPath(getApplicationContext(), ResourceManager.VOICE_PATH);
 		Set<String> setFiles = new LinkedHashSet<String>();
 		if (extStorage.exists()) {
 			for (File f : extStorage.listFiles()) {
@@ -353,6 +366,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			summary = summary.substring(0, summary.lastIndexOf(':') + 1);
 		}
 		tileSourcePreference.setSummary(summary + mapName);
+		
+		updateApplicationDirSummary();
     }
     
 	private void fill(ListPreference component, String[] list, String[] values, String selected) {
@@ -363,7 +378,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     
     public static Map<String, String> getTileSourceEntries(Context ctx){
 		Map<String, String> map = new LinkedHashMap<String, String>();
-		File dir = new File(Environment.getExternalStorageDirectory(), ResourceManager.TILES_PATH);
+		File dir = OsmandSettings.extendOsmandPath(ctx, ResourceManager.TILES_PATH);
 		if (dir != null && dir.canRead()) {
 			File[] files = dir.listFiles();
 			Arrays.sort(files, new Comparator<File>(){
@@ -420,12 +435,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		} else if(preference == applicationMode){
 			ApplicationMode old = OsmandSettings.getApplicationMode(prefs);
 			edit.putString(OsmandSettings.APPLICATION_MODE, (String) newValue);
-			setAppMode(ApplicationMode.valueOf(newValue.toString()), edit, (OsmandApplication) getApplication(), old);
+			setAppMode(ApplicationMode.valueOf(newValue.toString()), edit, getMyApplication(), old);
 			edit.commit();
 			updateAllSettings();
 		} else if(preference == daynightMode){
 			edit.putString(OsmandSettings.DAYNIGHT_MODE, (String) newValue);
-			((OsmandApplication)getApplication()).getDaynightHelper().setDayNightMode(DayNightMode.valueOf(newValue.toString()));
+			getMyApplication().getDaynightHelper().setDayNightMode(DayNightMode.valueOf(newValue.toString()));
 			edit.commit();
 		} else if(preference == mapScreenOrientation){
 			edit.putInt(OsmandSettings.MAP_SCREEN_ORIENTATION, Integer.parseInt(newValue.toString()));
@@ -442,6 +457,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		} else if(preference == userName){
 			edit.putString(OsmandSettings.USER_NAME, (String) newValue);
 			edit.commit();
+		} else if(preference == applicationDir){
+			warnAboutChangingStorage(edit, (String) newValue);
+			return false;
 		} else if(preference == positionOnMap){
 			edit.putInt(OsmandSettings.POSITION_ON_MAP, positionOnMap.findIndexOfValue((String) newValue));
 			edit.commit();
@@ -492,7 +510,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				RendererRegistry.getRegistry().setCurrentSelectedRender(loaded);
 				edit.putString(OsmandSettings.RENDERER, (String) newValue);
 				Toast.makeText(this, R.string.renderer_load_sucess, Toast.LENGTH_SHORT).show();
-				((OsmandApplication)getApplication()).getResourceManager().getRenderer().clearCache();
+				getMyApplication().getResourceManager().getRenderer().clearCache();
 			}
 			edit.commit();
 		} else if (preference == voicePreference) {
@@ -503,7 +521,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				edit.putString(OsmandSettings.VOICE_PROVIDER, (String) newValue);
 			}
 			edit.commit();
-			((OsmandApplication)getApplication()).initCommandPlayer();
+			getMyApplication().initCommandPlayer();
 		} else if (preference == tileSourcePreference) {
 			if(VECTOR_MAP.equals((String) newValue)){
 				edit.putBoolean(OsmandSettings.MAP_VECTOR_DATA, true);
@@ -524,6 +542,32 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		return true;
 	}
 
+	private void warnAboutChangingStorage(final Editor edit, final String newValue) {
+		final String newDir = newValue != null ? newValue.trim(): newValue;
+		File path = new File(newDir);
+		path.mkdirs();
+		if(!path.canRead() || !path.exists()){
+			Toast.makeText(this, R.string.specified_dir_doesnt_exist, Toast.LENGTH_LONG).show()	;
+			return;
+		}
+		
+		Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(getString(R.string.application_dir_change_warning));
+		builder.setPositiveButton(R.string.default_buttons_yes, new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				//edit the preference
+				edit.putString(OsmandSettings.EXTERNAL_STORAGE_DIR, newDir);
+				edit.commit();
+				getMyApplication().getResourceManager().resetStoreDirectory();
+				reloadIndexes();
+				updateApplicationDirSummary();
+			}
+		});
+		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.show();
+	}
+
 	public void reloadIndexes(){
 		progressDlg = ProgressDialog.show(this, getString(R.string.loading_data), getString(R.string.reading_indexes), true);
 		final ProgressDialogImplementation impl = new ProgressDialogImplementation(progressDlg);
@@ -531,7 +575,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			@Override
 			public void run() {
 				try {
-					showWarnings(((OsmandApplication)getApplication()).getResourceManager().reloadIndexes(impl));
+					showWarnings(getMyApplication().getResourceManager().reloadIndexes(impl));
 				} finally {
 					if(progressDlg !=null){
 						progressDlg.dismiss();
@@ -541,6 +585,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			}
 		});
 		impl.run();
+	}
+	
+	private OsmandApplication getMyApplication() {
+		return (OsmandApplication)getApplication();
 	}
 	
 	@Override
@@ -651,6 +699,15 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			RendererRegistry.getRegistry().setCurrentSelectedRender(newRenderer);
 			application.getResourceManager().getRenderer().clearCache();
 		}
+	}
+	
+	@Override
+	public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
+			Preference preference) {
+		if (preference == applicationDir) {
+			return true;
+		}
+		return super.onPreferenceTreeClick(preferenceScreen, preference);
 	}
 
 	@Override

@@ -19,7 +19,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Environment;
 import android.text.format.DateFormat;
 
 public class SavingTrackHelper extends SQLiteOpenHelper {
@@ -79,7 +78,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public List<String> saveDataToGpx(){
 		SQLiteDatabase db = getReadableDatabase();
 		List<String> warnings = new ArrayList<String>();
-		File file = Environment.getExternalStorageDirectory();
+		File file = OsmandSettings.getExternalStorageDirectory(ctx);
 		if(db != null && file.canWrite()){
 			file = new File(file, ResourceManager.APP_DIR + TRACKS_PATH);
 			file.mkdirs();

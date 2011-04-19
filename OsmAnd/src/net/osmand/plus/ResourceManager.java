@@ -35,10 +35,11 @@ import net.osmand.plus.views.POIMapLayer;
 
 import org.apache.commons.logging.Log;
 
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Environment;
 
 /**
  * Resource manager is responsible to work with all resources 
@@ -100,11 +101,12 @@ public class ResourceManager {
 		this.context = context;
 		this.renderer = new MapRenderRepositories(context);
 		asyncLoadingTiles.start();
-		dirWithTiles = new File(Environment.getExternalStorageDirectory(), TILES_PATH);
-		if(Environment.getExternalStorageDirectory().canRead()){
-			dirWithTiles.mkdirs();
-		}
-		
+		resetStoreDirectory();
+	}
+
+	public void resetStoreDirectory() {
+		dirWithTiles = OsmandSettings.extendOsmandPath(context, TILES_PATH);
+		dirWithTiles.mkdirs();
 	}
 	
 	public OsmandApplication getContext() {
@@ -356,10 +358,8 @@ public class ResourceManager {
 	}
 	
 	private void initRenderers(IProgress progress) {
-		File file = new File(Environment.getExternalStorageDirectory(), APP_DIR + IndexConstants.RENDERERS_DIR);
-		if(Environment.getExternalStorageDirectory().canRead()){
-			file.mkdirs();
-		}
+		File file = OsmandSettings.extendOsmandPath(context, APP_DIR + IndexConstants.RENDERERS_DIR);
+		file.mkdirs();
 		Map<String, File> externalRenderers = new LinkedHashMap<String, File>(); 
 		if (file.exists() && file.canRead()) {
 			for (File f : file.listFiles()) {
@@ -380,10 +380,8 @@ public class ResourceManager {
 	}
 
 	public List<String> indexingMaps(final IProgress progress) {
-		File file = new File(Environment.getExternalStorageDirectory(), MAPS_PATH);
-		if(Environment.getExternalStorageDirectory().canRead()){
-			file.mkdirs();
-		}
+		File file = OsmandSettings.extendOsmandPath(context, MAPS_PATH);
+		file.mkdirs();
 		List<String> warnings = new ArrayList<String>();
 		renderer.clearAllResources();
 		if (file.exists() && file.canRead()) {
@@ -439,10 +437,8 @@ public class ResourceManager {
 	
 	// POI INDEX //
 	public List<String> indexingPoi(final IProgress progress) {
-		File file = new File(Environment.getExternalStorageDirectory(), POI_PATH);
-		if(Environment.getExternalStorageDirectory().canRead()){
-			file.mkdirs();
-		}
+		File file = OsmandSettings.extendOsmandPath(context, POI_PATH);
+		file.mkdirs();
 		List<String> warnings = new ArrayList<String>();
 		closeAmenities();
 		if (file.exists() && file.canRead()) {
@@ -481,7 +477,7 @@ public class ResourceManager {
 	
 		
 	public List<String> indexingAddresses(final IProgress progress){
-		File file = new File(Environment.getExternalStorageDirectory(), ADDRESS_PATH);
+		File file = OsmandSettings.extendOsmandPath(context, ADDRESS_PATH);
 		List<String> warnings = new ArrayList<String>();
 		closeAddresses();
 		if (file.exists() && file.canRead()) {
@@ -513,7 +509,7 @@ public class ResourceManager {
 	
 	
 	public List<String> indexingTransport(final IProgress progress){
-		File file = new File(Environment.getExternalStorageDirectory(), TRANSPORT_PATH);
+		File file = OsmandSettings.extendOsmandPath(context, TRANSPORT_PATH);
 		List<String> warnings = new ArrayList<String>();
 		closeTransport();
 		if (file.exists() && file.canRead()) {
@@ -747,7 +743,7 @@ public class ResourceManager {
 				String tileId, ITileSource source, int tileX, int tileY, int zoom) {
 			super(url, fileToSave, tileX, tileY, zoom);
 			this.dirWithTiles = dirWithTiles;
-			tileSource = source;
+			this.tileSource = source;
 			this.tileId = tileId;
 		}
 	}
