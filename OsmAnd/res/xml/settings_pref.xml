@@ -22,10 +22,9 @@
 		<CheckBoxPreference android:summary="@string/fast_route_mode_descr" android:title="@string/fast_route_mode"
 			android:key="fast_route_mode"></CheckBoxPreference>
 		<ListPreference android:title="@string/voice_provider" android:key="voice_provider" android:summary="@string/voice_provider_descr"></ListPreference>
-		<!--
-			<CheckBoxPreference android:key="use_internet_to_calculate_route" android:title="@string/use_online_routing"
-			android:summary="@string/use_online_routing_descr"></CheckBoxPreference>
-		-->
+		<CheckBoxPreference android:summary="@string/use_osmand_routing_service_descr" android:title="@string/use_osmand_routing_service"
+			android:key="use_osmand_routing_service"></CheckBoxPreference>
+		
 	</PreferenceScreen>
 	
 	<PreferenceScreen android:title="@string/index_settings" android:summary="@string/index_settings_descr">

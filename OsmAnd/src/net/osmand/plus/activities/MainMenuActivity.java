@@ -127,7 +127,7 @@ public class MainMenuActivity extends Activity {
 		SharedPreferences prefs = OsmandSettings.getPrefs(this);
 		
 		// only one commit should be with contribution version flag
-		prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
+		// prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
 		if (prefs.contains(CONTRIBUTION_VERSION_FLAG)) {
 			final TextView appName = (TextView) findViewById(R.id.AppName);
 			appName.setText("OsmAnd!");

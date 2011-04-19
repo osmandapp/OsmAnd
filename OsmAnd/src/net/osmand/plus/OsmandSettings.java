@@ -309,6 +309,18 @@ public class OsmandSettings {
 	public static int getSavingTrackInterval(SharedPreferences prefs) {
 		return prefs.getInt(SAVE_TRACK_INTERVAL, 5);
 	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String USE_OSMAND_ROUTING_SERVICE_ALWAYS = "use_osmand_routing_service"; //$NON-NLS-1$
+	public static final boolean USE_OSMAND_ROUTING_SERVICE_ALWAYS_DEF = false; 
+
+	public static boolean isOsmandRoutingServiceUsed(Context ctx) {
+		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		return prefs.getBoolean(USE_OSMAND_ROUTING_SERVICE_ALWAYS, USE_OSMAND_ROUTING_SERVICE_ALWAYS_DEF);
+	}
+
+
+
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SHOW_OSM_BUGS = "show_osm_bugs"; //$NON-NLS-1$
