@@ -195,7 +195,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     }
 
 	private void updateApplicationDirSummary() {
-		applicationDir.setSummary(OsmandSettings.getExternalStorageDirectory(getApplicationContext()).getAbsolutePath());
+		String storageDir = OsmandSettings.getExternalStorageDirectory(getApplicationContext()).getAbsolutePath();
+		applicationDir.setText(storageDir);
+		applicationDir.setSummary(storageDir);
 	}
     
     @Override
@@ -433,12 +435,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		} else if(preference == applicationMode){
 			ApplicationMode old = OsmandSettings.getApplicationMode(prefs);
 			edit.putString(OsmandSettings.APPLICATION_MODE, (String) newValue);
-			setAppMode(ApplicationMode.valueOf(newValue.toString()), edit, (OsmandApplication) getApplication(), old);
+			setAppMode(ApplicationMode.valueOf(newValue.toString()), edit, getMyApplication(), old);
 			edit.commit();
 			updateAllSettings();
 		} else if(preference == daynightMode){
 			edit.putString(OsmandSettings.DAYNIGHT_MODE, (String) newValue);
-			((OsmandApplication)getApplication()).getDaynightHelper().setDayNightMode(DayNightMode.valueOf(newValue.toString()));
+			getMyApplication().getDaynightHelper().setDayNightMode(DayNightMode.valueOf(newValue.toString()));
 			edit.commit();
 		} else if(preference == mapScreenOrientation){
 			edit.putInt(OsmandSettings.MAP_SCREEN_ORIENTATION, Integer.parseInt(newValue.toString()));
@@ -508,7 +510,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				RendererRegistry.getRegistry().setCurrentSelectedRender(loaded);
 				edit.putString(OsmandSettings.RENDERER, (String) newValue);
 				Toast.makeText(this, R.string.renderer_load_sucess, Toast.LENGTH_SHORT).show();
-				((OsmandApplication)getApplication()).getResourceManager().getRenderer().clearCache();
+				getMyApplication().getResourceManager().getRenderer().clearCache();
 			}
 			edit.commit();
 		} else if (preference == voicePreference) {
@@ -519,7 +521,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				edit.putString(OsmandSettings.VOICE_PROVIDER, (String) newValue);
 			}
 			edit.commit();
-			((OsmandApplication)getApplication()).initCommandPlayer();
+			getMyApplication().initCommandPlayer();
 		} else if (preference == tileSourcePreference) {
 			if(VECTOR_MAP.equals((String) newValue)){
 				edit.putBoolean(OsmandSettings.MAP_VECTOR_DATA, true);
@@ -541,7 +543,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	}
 
 	private void warnAboutChangingStorage(final Editor edit, final String newValue) {
-		File path = new File(newValue);
+		final String newDir = newValue != null ? newValue.trim(): newValue;
+		File path = new File(newDir);
 		path.mkdirs();
 		if(!path.canRead() || !path.exists()){
 			Toast.makeText(this, R.string.specified_dir_doesnt_exist, Toast.LENGTH_LONG).show()	;
@@ -554,9 +557,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				//edit the preference
-				edit.putString(OsmandSettings.EXTERNAL_STORAGE_DIR, newValue);
+				edit.putString(OsmandSettings.EXTERNAL_STORAGE_DIR, newDir);
 				edit.commit();
-				((OsmandApplication)getApplication()).getResourceManager().resetStoreDirectory();
+				getMyApplication().getResourceManager().resetStoreDirectory();
 				reloadIndexes();
 				updateApplicationDirSummary();
 			}
@@ -572,8 +575,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			@Override
 			public void run() {
 				try {
-					
-					showWarnings(((OsmandApplication)getApplication()).getResourceManager().reloadIndexes(impl));
+					showWarnings(getMyApplication().getResourceManager().reloadIndexes(impl));
 				} finally {
 					if(progressDlg !=null){
 						progressDlg.dismiss();
@@ -583,6 +585,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			}
 		});
 		impl.run();
+	}
+	
+	private OsmandApplication getMyApplication() {
+		return (OsmandApplication)getApplication();
 	}
 	
 	@Override
