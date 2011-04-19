@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
+	<string name="application_dir">Storage directory</string>
+	<string name="application_dir_change_warning">Changing storage directory will not move or delete the data. You must do it yourself! Do it at your own risk! Continue anyway?</string>
+
 	<string name="osmand_net_previously_installed">You have installed previous OsmAnd version. All offline data will be supported by new application. Favorite points should be exported in old application and imported.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
 	<string name="downloading_build">Downloading build...</string>

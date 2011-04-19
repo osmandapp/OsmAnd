@@ -39,8 +39,10 @@ import java.util.zip.ZipInputStream;
 
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
+import net.osmand.data.index.DownloaderIndexFromGoogleCode;
 import net.osmand.data.index.IndexConstants;
 import net.osmand.plus.DownloadOsmandIndexesHelper;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -55,7 +57,6 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -315,7 +316,7 @@ public class DownloadIndexActivity extends ListActivity {
 	private List<String> listAlreadyDownloadedWithAlternatives()
 	{
 		List<String> files = new ArrayList<String>();
-		File externalStorageDirectory = Environment.getExternalStorageDirectory();
+		File externalStorageDirectory = OsmandSettings.getExternalStorageDirectory(getApplicationContext());
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.ADDRESS_PATH),ADDRESS_INDEX_EXT,ADDRESS_INDEX_EXT_ZIP,ADDRESS_TABLE_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.POI_PATH),POI_INDEX_EXT,POI_INDEX_EXT_ZIP,POI_TABLE_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.TRANSPORT_PATH),TRANSPORT_INDEX_EXT,TRANSPORT_INDEX_EXT_ZIP,TRANSPORT_TABLE_VERSION));
@@ -351,7 +352,8 @@ public class DownloadIndexActivity extends ListActivity {
 		String toSavePostfix = null;
 		String toCheckPostfix = null;
 		boolean unzipDir = false;
-		File externalStorageDirectory = Environment.getExternalStorageDirectory();
+		
+		File externalStorageDirectory = OsmandSettings.getExternalStorageDirectory(getApplicationContext());
 		if(fileName.endsWith(ADDRESS_INDEX_EXT)){
 			parent = new File(externalStorageDirectory, ResourceManager.ADDRESS_PATH);
 			toSavePostfix = ADDRESS_INDEX_EXT;

@@ -24,7 +24,6 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Environment;
 import android.os.Handler;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -234,7 +233,7 @@ public class OsmandApplication extends Application {
 
 		@Override
 		public void uncaughtException(final Thread thread, final Throwable ex) {
-			File file = new File(Environment.getExternalStorageDirectory(), EXCEPTION_PATH);
+			File file = OsmandSettings.extendOsmandPath(getApplicationContext(), EXCEPTION_PATH);
 			try {
 				ByteArrayOutputStream out = new ByteArrayOutputStream();
 				PrintStream printStream = new PrintStream(out);
@@ -244,7 +243,7 @@ public class OsmandApplication extends Application {
 						append(DateFormat.format("MMMM dd, yyyy h:mm:ss", System.currentTimeMillis())).append("\n"). //$NON-NLS-1$//$NON-NLS-2$
 						append(new String(out.toByteArray()));
 
-				if (Environment.getExternalStorageDirectory().canRead()) {
+				if (file.getParentFile().canWrite()) {
 					BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
 					writer.write(msg.toString());
 					writer.close();

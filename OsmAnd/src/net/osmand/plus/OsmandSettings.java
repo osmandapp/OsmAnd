@@ -450,6 +450,25 @@ public class OsmandSettings {
 		return prefs.getBoolean(MAP_VECTOR_DATA, false);
 	}
 
+	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
+//	public static final String MAP_TILE_SOURCES = "map_tile_sources"; //$NON-NLS-1$
+	
+	public static File getExternalStorageDirectory(SharedPreferences prefs) {
+		return new File(prefs.getString(EXTERNAL_STORAGE_DIR, Environment.getExternalStorageDirectory().getAbsolutePath()));
+	}
+	
+	public static File getExternalStorageDirectory(Context ctx) {
+		return getExternalStorageDirectory(getPrefs(ctx));
+	}
+	
+	public static File extendOsmandPath(SharedPreferences prefs, String path) {
+		return new File(getExternalStorageDirectory(prefs), path);
+	}
+
+	public static File extendOsmandPath(Context ctx, String path) {
+		return new File(getExternalStorageDirectory(ctx), path);
+	}
+	
 	public static ITileSource getMapTileSource(SharedPreferences prefs) {
 		String tileName = prefs.getString(MAP_TILE_SOURCES, null);
 		if (tileName != null) {
@@ -460,7 +479,7 @@ public class OsmandSettings {
 					return l;
 				}
 			}
-			File tPath = new File(Environment.getExternalStorageDirectory(), ResourceManager.TILES_PATH);
+			File tPath = OsmandSettings.extendOsmandPath(prefs, ResourceManager.TILES_PATH);
 			File dir = new File(tPath, tileName);
 			if(dir.exists()){
 				if(tileName.endsWith(SQLiteTileSource.EXT)){

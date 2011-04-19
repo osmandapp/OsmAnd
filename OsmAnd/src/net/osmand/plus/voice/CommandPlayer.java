@@ -13,6 +13,7 @@ import java.util.List;
 
 import net.osmand.LogUtil;
 import net.osmand.data.index.IndexConstants;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 
@@ -30,7 +31,6 @@ import alice.tuprolog.Theory;
 import alice.tuprolog.Var;
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.os.Environment;
 
 /**
  * That class represents command player. 
@@ -83,7 +83,7 @@ public class CommandPlayer {
 		prologSystem.clearTheory();
 		voiceDir = null;
 		if(voiceProvider != null){
-			File parent = new File(Environment.getExternalStorageDirectory(), ResourceManager.VOICE_PATH);
+			File parent = OsmandSettings.extendOsmandPath(ctx, ResourceManager.VOICE_PATH);
 			voiceDir = new File(parent, voiceProvider);
 			if(!voiceDir.exists()){
 				voiceDir = null;

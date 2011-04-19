@@ -1369,7 +1369,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	
 	private void useGPXFileLayer(final boolean useRouting, final LatLon endForRouting) {
 		final List<String> list = new ArrayList<String>();
-		final File dir = new File(Environment.getExternalStorageDirectory(), ResourceManager.APP_DIR + SavingTrackHelper.TRACKS_PATH);
+		final File dir = OsmandSettings.extendOsmandPath(getApplicationContext(), ResourceManager.APP_DIR + SavingTrackHelper.TRACKS_PATH);
 		if (dir != null && dir.canRead()) {
 			File[] files = dir.listFiles();
 			if (files != null) {

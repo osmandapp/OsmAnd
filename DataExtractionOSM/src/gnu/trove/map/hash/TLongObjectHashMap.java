@@ -29,7 +29,6 @@ import gnu.trove.procedure.TLongProcedure;
 import gnu.trove.procedure.TObjectProcedure;
 import gnu.trove.iterator.TLongIterator;
 import gnu.trove.iterator.TLongObjectIterator;
-import gnu.trove.iterator.TPrimitiveIterator;
 import gnu.trove.function.TObjectFunction;
 import gnu.trove.set.TLongSet;
 import gnu.trove.TLongCollection;
