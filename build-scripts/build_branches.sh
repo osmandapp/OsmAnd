@@ -4,6 +4,7 @@ DIRECTORY=$(cd `dirname $0` && pwd)
 GIT_DIR="$DIRECTORY"/osmand-git
 GIT_ORIGIN_NAME=origin
 BUILD_DIR="$DIRECTORY"/builds
+LATESTS_DIR="$DIRECTORY"/latests
 VERSION_FILE=./DataExtractionOSM/src/net/osmand/Version.java 
 DATE=$(date +%d-%m-%y)
 SHORT_DATE=$(date +%d-%m)
@@ -11,6 +12,8 @@ SHORT_DATE=$(date +%d-%m)
 # clean all files in build directory
 rm -r "$BUILD_DIR"
 mkdir "$BUILD_DIR"
+rm -r "$LATESTS_DIR"
+mkdir "$LATESTS_DIR"
 cd "${GIT_DIR}"
  
 git branch -r | while read i 
@@ -22,21 +25,26 @@ do
      
      echo "Checking if there are changes : $BRANCH - $GIT_ORIGIN_NAME/$BRANCH"
 	  
-	  git diff --exit-code "$BRANCH" "$GIT_ORIGIN_NAME/$BRANCH" --quiet
-	  RES_DIFF=$?	  
-	  if [ $RES_DIFF != 0 ]; then
-             echo "Checkouting branch and create build for $BRANCH"
-             ## reset all previous changes in working tree
-             git checkout . 
-             git reset HEAD --hard
-             git checkout $BRANCH
-             git reset $GIT_ORIGIN_NAME/$BRANCH --hard
-	     sed -e "s/\(APP_DESCRIPTION.*=.*\"\).*\(\".*\)/\1$SHORT_DATE $BRANCH\2/g" $VERSION_FILE >  ${VERSION_FILE}.bak
-	     mv ${VERSION_FILE}.bak ${VERSION_FILE}
+     git diff --exit-code "$BRANCH" "$GIT_ORIGIN_NAME/$BRANCH" --quiet
+     RES_DIFF=$?	  
+     if [ $RES_DIFF != 0 ]; then
+        echo "Checkouting branch and create build for $BRANCH"
+        ## reset all previous changes in working tree
+        git checkout . 
+        git reset HEAD --hard
+        git checkout $BRANCH
+        git reset $GIT_ORIGIN_NAME/$BRANCH --hard
+	sed -e "s/\(APP_DESCRIPTION.*=.*\"\).*\(\".*\)/\1$SHORT_DATE $BRANCH\2/g" $VERSION_FILE >  ${VERSION_FILE}.bak
+        mv ${VERSION_FILE}.bak ${VERSION_FILE}
 
         ## build map creator
         cd ./DataExtractionOSM/
         ant clean compile build
+ 	if [ "$BRANCH" = "release" ]; then
+           cp build.zip "$LATESTS_DIR/OsmAndMapCreator-stable.zip"
+        elif [ "$BRANCH" = "master" ]; then
+           cp build.zip "$LATESTS_DIR/OsmAndMapCreator-development.zip"
+        fi
         mv build.zip "$BUILD_DIR/OsmAndMapCreator-$BRANCH-nb-$DATE.zip"
 
         ## build osmand app
@@ -48,7 +56,12 @@ do
           mkdir assets
         fi
         ant clean debug
+	if [ "$BRANCH" = "release" ]; then
+           cp bin/OsmAnd-debug.apk "$LATESTS_DIR/OsmAnd-stable.apk"
+        elif [ "$BRANCH" = "master" ]; then
+           cp bin/OsmAnd-debug.apk "$LATESTS_DIR/OsmAnd-development.apk"
+        fi
         mv bin/OsmAnd-debug.apk "$BUILD_DIR/OsmAnd-$BRANCH-nb-$DATE.apk" 
-	  fi
+     fi
   fi
 done
