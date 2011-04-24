@@ -80,6 +80,9 @@ public class NavigationService extends Service implements LocationListener {
 		serviceOffInterval = OsmandSettings.getServiceOffInterval(settings);
 		serviceOffProvider = OsmandSettings.getServiceOffProvider(settings);
 		serviceError = OsmandSettings.getServiceOffWaitInterval(settings);
+		// TODO Test values
+//		serviceOffInterval = 20 * 1000;
+//		serviceError = 15 * 1000;
 		savingTrackHelper = new SavingTrackHelper(this);
 		delayedAction(true, 500);
 		routingHelper = ((OsmandApplication)getApplication()).getRoutingHelper();

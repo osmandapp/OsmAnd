@@ -1046,7 +1046,7 @@ public class BinaryMapIndexReader {
 
 	
 	public static void main(String[] args) throws IOException {
-		RandomAccessFile raf = new RandomAccessFile(new File("/home/victor/projects/OsmAnd/download/384/Spain_europe_1.obf"), "r");
+		RandomAccessFile raf = new RandomAccessFile(new File("/home/victor/projects/OsmAnd/download/384/La_coruna.obf"), "r");
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
 		System.out.println("VERSION " + reader.getVersion()); //$NON-NLS-1$
 		long time = System.currentTimeMillis();
@@ -1067,17 +1067,17 @@ public class BinaryMapIndexReader {
 //		}
 		
 		// test address index search
-//		String reg = reader.getRegionNames().get(0);
-//		List<City> cs = reader.getCities(reg);
-//		for(City c : cs){
+		String reg = reader.getRegionNames().get(0);
+		List<City> cs = reader.getCities(reg);
+		for(City c : cs){
+			int buildings = 0;
 //			reader.preloadStreets(c);
-//			int buildings = 0;
 //			for(Street s : c.getStreets()){
 //				reader.preloadBuildings(s);
 //				buildings += s.getBuildings().size();
 //			}
-//			System.out.println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings + " " + c.getEnName());
-//		}
+			System.out.println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings + " " + c.getEnName());
+		}
 //		List<PostCode> postcodes = reader.getPostcodes(reg);
 //		for(PostCode c : postcodes){
 //			reader.preloadStreets(c);

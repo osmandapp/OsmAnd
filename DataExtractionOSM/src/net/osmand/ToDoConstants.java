@@ -15,6 +15,7 @@ public class ToDoConstants {
 		
 		
 //		=== Common issues ===
+//	    || 124 || Animated transition using only raster images (?) - skip animations (!) - don not render vectoring for animations ||
 //      || 123 || Improve gpx file showing (very slow for big files) ||
 //      || 122 || Frozen sqlite db images (bug?). When images are loaded into sqlite the whole map is frozen || 	
 //      || 121 || Filter network location from GPS location (wait for 10 seconds before start using network location) ||

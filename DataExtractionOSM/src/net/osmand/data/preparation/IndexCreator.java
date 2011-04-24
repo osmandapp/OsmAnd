@@ -2963,48 +2963,25 @@ public class IndexCreator {
 		
 		
 		long time = System.currentTimeMillis();
-		IndexCreator creator = new IndexCreator(new File("/home/victor/Projects/OsmAnd/data/osmand/")); //$NON-NLS-1$
+		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/download/384/")); //$NON-NLS-1$
 		creator.setIndexMap(true);
 		creator.setIndexAddress(true);
 		creator.setIndexPOI(true);
 		creator.setIndexTransport(true);
 		// for NL
-		creator.setCityAdminLevel("10");
+//		creator.setCityAdminLevel("10");
 
 		creator.recreateOnlyBinaryFile = false;
 		creator.deleteDatabaseIndexes = true;
 				
-//		creator.generateIndexes(new File("/home/victor/Projects/OsmAnd/data/osm-maps/amsteelven_part.osm"), 
-//				new ConsoleProgressImplementation(3), null, MapZooms.getDefault(), null);
-//		creator.generateIndexes(new File("/home/victor/Projects/OsmAnd/data/osm-maps/schiphol-rijk.osm"), 
-//				new ConsoleProgressImplementation(3), null, MapZooms.getDefault(), null);
-		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/netherlands.tmp.odb"));
-		creator.generateIndexes(new File("/home/victor/Projects/OsmAnd/data/osm-maps/netherlands.osm.pbf"), 
+		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/download/384/spain.osm.pbf"), 
 				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), null);
 		
 		
 //		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
 //		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null, MapZooms.getDefault(), null);
 		
-//		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/belarus_nodes.tmp.odb")); //$NON-NLS-1$
-//		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/belarus.osm.pbf"), new ConsoleProgressImplementation(3), null); //$NON-NLS-1$
 
-//		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/ams.tmp.odb"));
-//		creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/ams_part_map.osm"), new ConsoleProgressImplementation(3), null);
-
-		// creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/den_haag.tmp.odb"));
-		// creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/den_haag.osm"), new ConsoleProgressImplementation(3), null);
-
-
-		// creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/forest_complex.osm"), new ConsoleProgressImplementation(25), null);
-
-		// creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/luxembourg.tmp.odb"));
-		// creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/luxembourg.osm.pbf"), new ConsoleProgressImplementation(15), null);
-
-		// creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/new_zealand.osm.bz2"), new ConsoleProgressImplementation(3), null);
-		
-//		creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/map.osm"), new ConsoleProgressImplementation(15), null);
-//		creator.generateIndexes(new File("e:/Information/OSM maps/osm_map/bayarea.osm"), new ConsoleProgressImplementation(15), null);
 
 		System.out.println("WHOLE GENERATION TIME :  " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
 		 System.out.println("COORDINATES_SIZE " + BinaryMapIndexWriter.COORDINATES_SIZE + " count " + BinaryMapIndexWriter.COORDINATES_COUNT); //$NON-NLS-1$ //$NON-NLS-2$
