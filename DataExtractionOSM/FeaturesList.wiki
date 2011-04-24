@@ -1,0 +1,193 @@
+#summary FeaturesList is list of feature that could be implemented in application sorted by priority
+#labels Phase-Design,Featured
+#sidebar Sidebar
+
+= Introduction =
+
+Features described in that list are not intented to be understood to final user but it is desirable to have clear feature descriptions with right priority. In the code there is a class `ToDoConstants` where this list is synchronized.
+
+== Osmand application (to do 122) ==
+
+=== Refactoring issues ===
+|| 116 || Move all messages.properties related Android application inside strings.xml to have better access with their translation || 
+
+=== Common issues ===
+|| 121 || Filter network location from GPS location (wait for 10 seconds before start using network location) ||
+|| 120 || Show icons over poi circle ||
+|| 119 || Dialog on main screen tips and tricks ||
+|| 118 || Config switching between maps on different zoom levels <14 (using raster), > 14 vector ||
+|| 117 || Share location (send/get location from SMS, email) - Issue ||
+|| 112 || Investigate exiting/minimizing app (Issue) ||
+|| 97 || For voice navigation consider current speed of vehicle. Especially when speed > 50 pronounce more than 200 m ||
+|| 104 || Add activity to show current loaded indexes and information about them ||
+|| 86 || Allow to add/edit custom tags to POI objects (Issue) ||
+|| 92 || Support poi index with standard map index and unify POI categories (unify done +, works very slow) ||
+|| 96 || Introduce settings for MPH, imperial units ||
+|| 113 || Calculate speed cameras/bumps on the road (announce about them) ||
+|| 110 || Use android voice for pronounce command (could be used in future to pronounce street) (Issue) ||	
+|| 111 || Investigate showing street name while driving (Issue) ||	
+|| 86 || Allow to add/edit custom tags to POI objects (Issue) ||
+|| 96 || Introduce settings for MPH, imperial units (Issue) ||
+
+=== Not clear if really needed (Means golden ratio complexity/necessity) ===
+|| 66 || Transport routing (show next stop, total distance, show stop get out, voice) ||
+|| 85 || Enable on/off screen for bike navigation ||
+|| 83 || Add monitoring service to send locations to internet ||
+
+=== Unscheduled (complex) ===
+|| 65 || Intermediate points - for better control routing, to avoid traffic jams ...(?) ||
+
+
+
+== Osmand application done ==
+
+|| *0.5.3* || *Version 0.5.3 (20.04.2011) * ||
+|| 114 || Index streets according to city bounds (Issue) ||
+|| 63 || Support simple offline routing(require new index file) ||
+||  106 || Download region from android device (select minzoom/maxzoom) ||
+||  105 || Route mode fast/short ||
+||  109 || Update download index activity (introduce select/deselect all, update existing)	and make green text for already loaded indexes ||
+||  108 || Auto switch at night rendering ||
+	
+|| *0.5.1* || *Version 0.5.1 * ||
+|| 105 || Input MAP_ZOOMS and MapRenderingTypes xml as parameter for index creator ||
+|| 99 || Implement better file downloader for big files ||
+|| 100 || Show impoted gpx points (as favorites), sort the by distance ||
+|| 91 || Invent binary format (minimize disk space, maximize speed) ||
+|| 94 || Revise index to decrease their size (especially address) - replace to float lat/lon and remove for POI ||
+|| 85 || Enable on/off screen for bike navigation (?)[not needed replace for continuous gps logging] ||
+|| 101 || Introduce shell script to print information about indexes and to modify them ||
+|| 69 || Add phone and site information to POI (enable call to POI and open site) ||
+|| 103 || Allow add poi with multiple tags (different types/subtypes for one object). Fix for constructing and updating on mobile. (Issue) ||
+|| 102 || Refactoring rendering schema serializing to xml and prepare script to create fast java builder (support pure xml) ||
+|| 98 || Implement rendering of different app mode. For Car render streets name with large font ||
+
+|| *0.4.1* || *Version 0.4.1 * ||
+|| 81 || Add some objects to POI category (1) to add them into OSM 2) to help navigation)  highway (?), traffic_calming (?), barrier(?), military(?-), landuse (?), office(?), man_made(?), power(?), railway( station, subway?) - issue 17 ||
+|| 87 || Use network availability for defining loading tiles from internet ||
+|| 89 || Transport redesign UI (enable run from context menu, switch go to goal/not) ||
+|| 90 || Use Junidecode library on the client for fast english translation ||
+|| 93 || Implement multytype vector objects (?) - building with fence, road & tram ... (binary format) ||
+|| 96 || Download voice data through UI interface (Issue) ||
+|| 95 || Show progress while map rendered and loaded (Issue) ||
+
+|| *0.4* || *Version 0.4 * ||
+|| 40 || Support simple vector road rendering (require new index file) - in progress ||
+|| 88 || Implement show gpx track from folder ||
+|| 94 || Implement navigate using selected gpx track ||
+|| 70 || Show building numbers over map (require changing address index - index 2 more columns lat/lon for fast search). * (Not needed, because of vector rendering) * ||
+|| *0.3.4* || *Version 0.3.4 (06.08.2010) * ||
+|| 82 || Rotate map according compass ||
+|| 85 || Remove context menu on long press map ! Accumulate actions and show label ||
+
+|| *0.3.3* || *Version 0.3.3 (03.08.2010) * ||
+|| 80 || Export/import favorite points ||
+|| 78 || Add ruler to the main tile view (100m, 200m,...) ||
+
+|| *0.3.2* || *Version 0.3.2 (02.08.2010)* ||
+|| 84 || Send letter to developer when app crashes ||
+|| 82 || Add overzoom +2 for Mapnik ||
+|| 79 || Download any WMS layer and add to swing version (add tile manager ${x}, ${y}, ${z} to swing and to android) ||
+|| 77 || Implement upload gps track onto osm server (not implemented yet in OSM?) -  not really needed, because gps tracks should be prepared before loading to OSM (OSM is not ready for it) ||
+
+|| *0.3.1* || *Version 0.3.1 (25.07.2010)* ||
+|| 64 || Traffic information  - yandex traffic ||
+
+|| *0.3* || *Version 0.3 (23.07.2010)* ||
+|| 72 || Implement layers menu in map view (select/unselect vector layers to show) ||
+|| 73 || Implement addition POI filter to search online without sd indexes ||
+|| 74 || Implement preview route : show next turn & description (in "show only" route mode) & preview transport route ||
+|| 68 || Implement service to app work with screen offline (audio guidance & add new item to status bar & introduce error interval for gps building) ||
+|| 71 || Implement different mechanism for tiles (big sqlite planet see rmaps) ||
+|| 60 || Audio guidance for routing ||
+
+|| *0.2.3* || *Version 0.2.3 (13.07.2010)* ||
+|| 45 || Get clear <Use internet> settings. Move that setting on top settings screen. That setting should rule all activities that use internet. It should ask whenever internet is used (would you like to use internet for that operation - if using internet is not checked). Internet using now for : edit POI osm, show osm bugs layer, download tiles. ||
+|| 69 || Multitouch zoom, animated zoom, animate map shift (when select some point to see)! ||
+|| 43 || Enable poi filter by name ||
+|| 58 || Upload/Download zip-index from site & unzip them on phone ||
+|| 61 || Provide route information for YOURS (calclate turns/angle/expected time). 	 Fix some missing turns in CloudMade (for secondary roads wo name). Add them (if dist to prev/next turn > 150m) (dacha) ||
+
+
+|| *0.2.1* || *Version 0.2.1 (07.07.2010)* ||
+|| 50 || Invent opening hours editor in order to edit POI hours better on device ||
+|| 33 || Build transport locations. Create transport index (transport-stops) ||
+|| 67 || Improve POI search show direction where to go in search & introduce option show near you ||
+|| 42 || Revise UI (icons/layouts) ||
+|| 55 || Update POI data from internet for selected area (do not suggest to create or extend POI index)  ||
+|| 62 || History of searched points	 (once point was selected to go/to show it is saved in history db and could be shown) ||
+|| 47 || Internet connectivity could be checked before trying to use (merged with 45) ||
+|| 26 || Show the whole street on map (when it is chosen in search activity). Possibly extend that story to show layer with streets. (Closed : because it is not necessary) ||
+|| 53 || Add progress bars : to internet communication activities [editing/commiting/deleting poi], do not hide edit poi dialog if operation failed ||
+|| 63 || Implement internet search address (OSM Nominatim) ||
+|| 56 || Add usage of CloudMade API for calculating route (show next turn & distance to it instead of mini map) ||
+|| 57 || Implement routing information about expected time arriving ||
+|| 58 || Implement difference about show route/follow route (show travel time/arrival time, show mini map/next turn, etc) ||
+|| 59 || Show route information (directions/time, ....). Now is shown in context menu route (about route) ||
+|| 46 || Implement downloading strategy for tiles : select max zoom to download (16,15,14,...). That means you can save internet because 16 extends up to 18, 14 extends up to 16 - suitable for speed > 40 ||
+
+|| *0.2* || *Version 0.2 (23.06.2010)* ||
+|| 32 || Introduce POI predefined filters (car filter(other-fuel, transportation-car_wash, show-car) and others) ||
+|| 48 ||  Enable change favourite point (for example fav - "car") means last point you left car. It is not static point ||
+|| 51 || Implement console application that prepare indexes to upload on server... 0) run in background 1) download from internet 2) generates indices for Europe (take care about memory) 3) upload? ||
+|| 52 || Make good distribution of POI on map (when POI a lot they are coupling in one place on the south) ||
+|| 54 || Invent screen to update index from internet (from osmand.googlecode.com) ||
+|| 49 || Calculate route from specified point (not from your location only) ||
+|| 37 || Get rid of exit button (!). Think about when notification should go & how clear resources if it is necessary. DONE : add to app settings preference (Refresh indexes) ||
+|| 30 || Performance issue : introduce one place where refreshMap will be called using postMessage mechanism (delay more than > 50 ? ms) - `[done]`. Introduce cache of existing files (tiles). Possibly add all tiles to zip file (save from  defragmentation)  ||
+|| 31 || Translation ||
+|| 34 || Suppport navigation for calculated route (example of get route from internet is in swing app).  DONE : `MiniMap` done, Routing settings done, `RouteLayer` done, `RoutingHelper` done ||
+|| 44 || Show gps status (possibly open existing gps-compass app (free) or suggest to install it - no sense to write own activity) ||
+|| 36 || Add  search by postcode || 
+|| 34 || Suppport navigation for calculated route (example of get route from internet is in swing app) ||
+|| 8 || Enable change POI directly on map (requires OSM login) ||
+|| 20 || Implement save track/route to gpx ||
+|| 44 || Introduce settings presets (car/bicycle/pedestrian/default) - show different icons for car (bigger),  possibly change fonts, position ||
+|| 45 || Autozoom feature (for car navigation) ||
+|| 31 || Translate to other languages. See [TranslateHelp] to translate to other languages. ||	
+|| 39 || Support old-versionned resources (1) odb indexes, 2) favourites table, 3) atomic settings. Add versioning info to index tables & disable their usage if they are old ||
+|| 41 || POI layer over map (shows poi by selected filter) ||
+|| 38 || Add button in search "navigate to" - user can directly navigate to ||
+|| 35 || Enable trackball navigation in android ||
+|| 16 || Support open street bugs api ||
+
+|| *0.1* || *Version 0.1 (03.06.2010) * ||
+|| 14 || Show zoom level on map ||
+|| 13 || Save point as favourite & introduce favourite points dialog ||
+|| 29 || Show opened/closed amenities (in search poi) ||
+|| 3 || Revise osmand UI. Preparing new icons (new main icon, new back location, menu icon) ||
+|| 25 || POI search near to map location (show categories & type). Second cut. (implement incremental search) ||
+|| 27 || Search intersection of streets ||
+|| 24 || Implement `ResourceManager`, load cities/streets/buildings on Low memory (clear previous all addresses cities) ||
+|| 28 || Implement transliteration search for android version ||
+|| 5 || Search for city/streets/buildings ||
+|| 15 || Investigate interruption of any long running operation & implement where it is needed. ProgressDialogImplementation should support setOnCancelListener or obtain CANCEL message &  throw InterruptedException in all methods (remaining, progress, startTask, ...) when call it. Otherwise thread could be stopped however it is not good method ||
+|| 21 || Implement zooming tile (if tile doesn't exist local, we can zoom in previous tile) ||
+|| 11 || Print out additional info speed, altitude, number of satellites ||
+|| 19 || Show how map is rotated where north/south on map (do not consider compass) ||
+|| 23 || Implement moving point from center to bottom (for rotating map) ||
+|| 17 || Enable go to location by specifying coordinates ||
+|| 9 || Configure file log & see log from file (when exception happened to see from device) ||
+|| 2 || Showing compass on the map : use device compass if exists ||
+|| 18 || Implement go to point ||
+|| 0 || Minimize memory used for index & improve time for reading index ||
+|| 12 || Show information of where are you going (the arrow on the map) ||
+|| 10 || Specify auto-rotating map (bearing of your direction) ||
+|| 22 || Investigate 3D tile view (how it is done in osmand). Looking not very good, because of angle of perspective (best perspective angle = 60) use  	android.graphics.Camera.rotateX(60), getMatrix(m), canvas.concat(m) (find example in internet). Problems : to calculate how to drag point on map, to calculate how many tiles are needed, is location visible .... ||
+|| 1 || POI search near to map location (show categories & type). First cut. (implement incremental search) ||
+
+== Swing application done ==
+|| 1 || Not implemented as not important - download tiles without using dir tiles ||
+|| 13 || Accept pdf files for map creation ||
+|| 12 || Reinvent UI of swing app (remove Region object and clear other MapObject) use indexes to show results ||
+|| 9 || Fix issues with big files (such as netherlands) - save memory (!), but needs more time to do it. The main idea is that local sqlite db is created from osm xml file and after index will be done. Requires now a few memory about 100 MB ||
+|| 11 || Index buildings using interpolations (from nodes) ||
+|| 10 || Improve address indexing (use relations). Use relation "a6" (to accumulate streets!),  "a3" to read all cities & define boundaries for city (& define that street in city) ||
+|| 2 || Internal (Simplify `MapPanel` - introduce layers for it) - add test feature routing ||
+|| 3 || Implement clear progress for indexing ||
+|| 7 || Implement saving bundle of tiles in specified folder ||
+|| 6 || Implement renaming/deleting street/building/city ||
+|| 8 || Implement basic transliteration version ||
+|| 2 || Config file log & see log from file ||
+|| 3 || Reinvent index mechanism (save in zip file with tile indexes, save city/town addresses separately, read partially !) ||
+|| 4 || Invent different file extensions for poi.index, address.index,... ||
