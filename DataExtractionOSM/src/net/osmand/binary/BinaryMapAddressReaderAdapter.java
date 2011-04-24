@@ -93,38 +93,7 @@ public class BinaryMapAddressReaderAdapter {
 				int length = codedIS.readRawVarint32();
 				
 				int oldLimit = codedIS.pushLimit(length);
-				if(matcher != null){
-					String name = null;
-					int read = 0;
-					int toRead = useEn ? 3 : 2;
-					int seek = codedIS.getTotalBytesRead();
-					while(read++ < toRead){
-						int ts = codedIS.readTag();
-						int tags = WireFormat.getTagFieldNumber(ts);
-						switch (tags) {
-						case OsmandOdb.CityIndex.NAME_EN_FIELD_NUMBER :
-							name = codedIS.readString();
-							break;
-						case OsmandOdb.CityIndex.NAME_FIELD_NUMBER :
-							name = codedIS.readString();
-							if(useEn){
-								name = Junidecode.unidecode(name);
-							}
-							break;
-						case OsmandOdb.CityIndex.CITY_TYPE_FIELD_NUMBER :
-							codedIS.readUInt32();
-							break;
-						}
-					}
-					if(name == null || !matcher.matches(name)){
-						codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-						codedIS.popLimit(oldLimit);
-						break;
-					}
-					codedIS.seek(seek);
-				}
-				
-				City c = readCity(null, offset, false);
+				City c = readCity(null, offset, false, matcher, useEn);
 				if(c != null){
 					cities.add(c);
 				}
@@ -188,13 +157,14 @@ public class BinaryMapAddressReaderAdapter {
 	}
 	
 	
-	protected City readCity(City c, int fileOffset, boolean loadStreets) throws IOException{
+	protected City readCity(City c, int fileOffset,  boolean loadStreets, StringMatcher nameMatcher, boolean useEn) throws IOException{
 		int x = 0;
 		int y = 0;
 		int streetInd = 0;
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
+			boolean englishNameMatched = false;
 			switch (tag) {
 			case 0:
 				c.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
@@ -211,12 +181,38 @@ public class BinaryMapAddressReaderAdapter {
 				break;
 			case OsmandOdb.CityIndex.ID_FIELD_NUMBER :
 				c.setId(codedIS.readUInt64());
+				if(nameMatcher != null && useEn && !englishNameMatched){
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+					return null;
+				}
 				break;
 			case OsmandOdb.CityIndex.NAME_EN_FIELD_NUMBER :
-				c.setEnName(codedIS.readString());
+				String enName = codedIS.readString();
+				if (nameMatcher != null && enName.length() > 0) {
+					if(!nameMatcher.matches(enName)){
+						codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+						return null;
+					} else {
+						englishNameMatched = true;
+					}
+				}
+				c.setEnName(enName);
 				break;
 			case OsmandOdb.CityIndex.NAME_FIELD_NUMBER :
-				c.setName(codedIS.readString());
+				String name = codedIS.readString();
+				c.setName(name);
+				if(nameMatcher != null){
+					if(!useEn){
+						if(!nameMatcher.matches(name)) {
+							codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+							return null;
+						}
+					} else {
+						if(nameMatcher.matches(Junidecode.unidecode(name))){
+							englishNameMatched = true;
+						}
+					}
+				}
 				break;
 			case OsmandOdb.CityIndex.X_FIELD_NUMBER :
 				x = codedIS.readFixed32();

@@ -337,7 +337,7 @@ public class BinaryMapIndexReader {
 		codedIS.seek(c.getFileOffset());
 		int size = codedIS.readRawVarint32();
 		int old = codedIS.pushLimit(size);
-		addressAdapter.readCity(c, c.getFileOffset(), true);
+		addressAdapter.readCity(c, c.getFileOffset(), true, null, false);
 		codedIS.popLimit(old);
 	}
 	
@@ -1046,8 +1046,7 @@ public class BinaryMapIndexReader {
 
 	
 	public static void main(String[] args) throws IOException {
-		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Minsk.obf"), "r"); //$NON-NLS-1$ //$NON-NLS-2$
-//		RandomAccessFile raf = new RandomAccessFile(new File("e:\\Information\\OSM maps\\osmand\\Belarus_4.obf"), "r");
+		RandomAccessFile raf = new RandomAccessFile(new File("/home/victor/projects/OsmAnd/download/384/Spain_europe_1.obf"), "r");
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
 		System.out.println("VERSION " + reader.getVersion()); //$NON-NLS-1$
 		long time = System.currentTimeMillis();
@@ -1077,14 +1076,20 @@ public class BinaryMapIndexReader {
 //				reader.preloadBuildings(s);
 //				buildings += s.getBuildings().size();
 //			}
-//			System.out.println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings);
+//			System.out.println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings + " " + c.getEnName());
 //		}
 //		List<PostCode> postcodes = reader.getPostcodes(reg);
 //		for(PostCode c : postcodes){
 //			reader.preloadStreets(c);
-////			System.out.println(c.getName());
+//			System.out.println(c.getName());
 //		}
-//		List<City> villages = reader.getVillages(reg, "", false);
+//		List<City> villages = reader.getVillages(reg, new StringMatcher() {
+//			
+//			@Override
+//			public boolean matches(String name) {
+//				return false;
+//			}
+//		}, true);
 //		System.out.println("Villages " + villages.size());
 		
 		// test transport
