@@ -887,11 +887,13 @@ public class IndexCreator {
 		if (boundary != null && boundary.getCenterPoint() != null) {
 			LatLon point = boundary.getCenterPoint();
 			boolean cityFound = false;
+			boolean containsCityInside = false;
 			for (City c : cityManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
 				if (boundary.containsPoint(c.getLocation())) {
 					if (boundary.getName() == null || boundary.getName().equalsIgnoreCase(c.getName())) {
 						citiBoundaries.put(c, boundary);
 						cityFound = true;
+						containsCityInside = true;
 					}
 				}
 			}
@@ -909,7 +911,7 @@ public class IndexCreator {
 			if (!cityFound && boundary.getName() != null) {
 				// / create new city for named boundary very rare case that's why do not proper generate id
 				// however it could be a problem
-				City nCity = new City(CityType.SUBURB);
+				City nCity = new City(containsCityInside ? CityType.CITY : CityType.SUBURB);
 				nCity.setLocation(point.getLatitude(), point.getLongitude());
 				nCity.setId(-boundary.getBoundaryId());
 				nCity.setName(boundary.getName());
