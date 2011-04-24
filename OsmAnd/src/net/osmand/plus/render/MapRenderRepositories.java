@@ -34,6 +34,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import net.osmand.render.OsmandRenderingRulesParser;
 
 import org.apache.commons.logging.Log;
 
@@ -231,7 +232,11 @@ public class MapRenderRepositories {
 							int type = types.get(j);
 							int mask = type & 3;
 							TagValuePair pair = root.decodeType(type);
-							if (pair != null && renderingType.isObjectVisible(pair.tag, pair.value, zoom, mask)) {
+							if (pair != null &&  renderingType.isObjectVisible(pair.tag, pair.value, zoom, mask)) {
+								return true;
+							}
+							if(pair != null && mask == OsmandRenderingRulesParser.POINT_STATE && 
+									renderingType.isObjectVisible(pair.tag, pair.value, zoom, OsmandRenderingRulesParser.TEXT_STATE)){
 								return true;
 							}
 						}
