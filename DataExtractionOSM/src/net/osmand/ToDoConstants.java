@@ -8,13 +8,14 @@ package net.osmand;
 public class ToDoConstants {
 	
 	
-//	    == Osmand application (TODO 123) ==
+//	    == Osmand application (TODO 124) ==
 
 //		=== Refactoring issues ===
 //		|| 116 || Move all messages.properties related Android application inside strings.xml to have better access with their translation ||
 		
 		
 //		=== Common issues ===
+//      || 123 || Improve gpx file showing (very slow for big files) ||
 //      || 122 || Frozen sqlite db images (bug?). When images are loaded into sqlite the whole map is frozen || 	
 //      || 121 || Filter network location from GPS location (wait for 10 seconds before start using network location) ||
 //      || 120 || Show icons over poi circle ||

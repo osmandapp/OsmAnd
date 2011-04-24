@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,8 +29,9 @@ public class GPXUtilities {
 	public final static Log log = LogUtil.getLog(GPXUtilities.class);
 	
 	
+	private final static String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";  //$NON-NLS-1$
 	
-	public final static String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";  //$NON-NLS-1$
+	private final static NumberFormat latLonFormat = new DecimalFormat("0.00#####");   
 	
 	public static class TrkPt {
 		public double lat;
@@ -43,6 +46,7 @@ public class GPXUtilities {
 		public double lon;
 		public String name;
 	}
+	
 	
 	
 	public static boolean saveToXMLFiles(File fout, List<WptPt> data, Context ctx ){
@@ -61,8 +65,8 @@ public class GPXUtilities {
 
 			for (WptPt l : data) {
 				serializer.startTag(null, "wpt"); //$NON-NLS-1$
-				serializer.attribute(null, "lat", l.lat + ""); //$NON-NLS-1$ //$NON-NLS-2$
-				serializer.attribute(null, "lon", l.lon + ""); //$NON-NLS-1$ //$NON-NLS-2$
+				serializer.attribute(null, "lat", latLonFormat.format(l.lat)); //$NON-NLS-1$ 
+				serializer.attribute(null, "lon", latLonFormat.format(l.lon)); //$NON-NLS-1$ //$NON-NLS-2$
 				serializer.startTag(null, "name"); //$NON-NLS-1$
 				serializer.text(l.name);
 				serializer.endTag(null, "name"); //$NON-NLS-1$
@@ -113,8 +117,8 @@ public class GPXUtilities {
 					serializer.startTag(null, "trkseg"); //$NON-NLS-1$
 					for(TrkPt p : l){
 						serializer.startTag(null, "trkpt"); //$NON-NLS-1$
-						serializer.attribute(null, "lat", p.lat+""); //$NON-NLS-1$ //$NON-NLS-2$
-						serializer.attribute(null, "lon", p.lon+""); //$NON-NLS-1$ //$NON-NLS-2$
+						serializer.attribute(null, "lat", latLonFormat.format(p.lat)); //$NON-NLS-1$ //$NON-NLS-2$
+						serializer.attribute(null, "lon", latLonFormat.format(p.lon)); //$NON-NLS-1$ //$NON-NLS-2$
 						serializer.startTag(null, "time"); //$NON-NLS-1$
 						serializer.text(format.format(new Date(p.time)));
 						serializer.endTag(null, "time"); //$NON-NLS-1$
