@@ -263,7 +263,7 @@ public class MapRenderRepositories {
 					
 					for(int i=0; i < r.getTypes().length; i++){
 						if ((r.getTypes()[i] & 0x3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
-							// multy polygon
+							// multy polygon r.getId() >> 3
 							TagValuePair pair = r.getMapIndex().decodeType(MapRenderingTypes.getMainObjectType(r.getTypes()[i]),
 									MapRenderingTypes.getObjectSubType(r.getTypes()[i]));
 							if(pair != null){
