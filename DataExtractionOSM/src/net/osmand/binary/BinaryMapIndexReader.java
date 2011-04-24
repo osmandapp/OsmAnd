@@ -1046,7 +1046,7 @@ public class BinaryMapIndexReader {
 
 	
 	public static void main(String[] args) throws IOException {
-		RandomAccessFile raf = new RandomAccessFile(new File("/home/victor/projects/OsmAnd/download/384/La_coruna.obf"), "r");
+		RandomAccessFile raf = new RandomAccessFile(new File("/home/victor/projects/OsmAnd/download/384/Spain_europe_1.obf"), "r");
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
 		System.out.println("VERSION " + reader.getVersion()); //$NON-NLS-1$
 		long time = System.currentTimeMillis();
