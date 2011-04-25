@@ -366,8 +366,8 @@
 	<string name="navigate_point_latitude">Широта</string>
 	<string name="navigate_point_longitude">Долгота</string>
 	<string name="navigate_point_format_D">ГГГ.ГГГГ</string>
-	<string name="navigate_point_format_DM">ГГГ:ММ.МММММ</string>
-	<string name="navigate_point_format_DMS">ГГГ:ММ:СС.ССССС</string>
+	<string name="navigate_point_format_DM">ГГГ ММ.МММММ</string>
+	<string name="navigate_point_format_DMS">ГГГ ММ СС.ССССС</string>
 	<string name="search_shown_on_map">Показать</string>
 	<string name="navigate_point_cancel">Отмена</string>
 	<string name="search_address_top_text">Выберите адрес</string>

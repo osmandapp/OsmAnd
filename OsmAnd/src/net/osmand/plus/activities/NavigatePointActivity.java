@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.MessageFormat;
 import java.util.Locale;
+import java.util.StringTokenizer;
 
 import net.osmand.LogUtil;
 import net.osmand.osm.LatLon;
@@ -91,8 +92,9 @@ public class NavigatePointActivity extends Activity {
 					newFormat = Location.FORMAT_SECONDS;
 				}
 				try { 
-					double lat = Location.convert(((TextView) findViewById(R.id.LatitudeEdit)).getText().toString());
-					double lon = Location.convert(((TextView) findViewById(R.id.LongitudeEdit)).getText().toString());
+					double lat = convert(((TextView) findViewById(R.id.LatitudeEdit)).getText().toString());
+					double lon = convert(((TextView) findViewById(R.id.LongitudeEdit)).getText().toString());
+					((TextView) findViewById(R.id.ValidateTextView)).setVisibility(View.INVISIBLE);
 					((TextView)findViewById(R.id.LatitudeEdit)).setText(convert(lat, newFormat));
 					((TextView)findViewById(R.id.LongitudeEdit)).setText(convert(lon, newFormat));
 				} catch (RuntimeException e) {
@@ -123,9 +125,8 @@ public class NavigatePointActivity extends Activity {
 	
 	public void showOnMap(boolean navigate){
 		try {
-			// TODO there is a bug in android implementation : doesn't convert if min = 59.23 or sec = 59.32 or deg=179.3
-			double lat = Location.convert(((TextView) findViewById(R.id.LatitudeEdit)).getText().toString());
-			double lon = Location.convert(((TextView) findViewById(R.id.LongitudeEdit)).getText().toString());
+			double lat = convert(((TextView) findViewById(R.id.LatitudeEdit)).getText().toString());
+			double lon = convert(((TextView) findViewById(R.id.LongitudeEdit)).getText().toString());
 			
 			if(navigate){
 				OsmandSettings.setPointToNavigate(this, lat, lon);
@@ -147,11 +148,86 @@ public class NavigatePointActivity extends Activity {
 		}
 	}
 	
-	
+	////////////////////////////////////////////////////////////////////////////
 	// THIS code is copied from Location.convert() in order to change locale
+	// and to fix bug in android implementation : doesn't convert if min = 59.23 or sec = 59.32 or deg=179.3
  	public static final int FORMAT_DEGREES = 0;
 	public static final int FORMAT_MINUTES = 1;
 	public static final int FORMAT_SECONDS = 2;
+	private static final char DELIM = ':';
+	
+	/**
+     * Converts a String in one of the formats described by
+     * FORMAT_DEGREES, FORMAT_MINUTES, or FORMAT_SECONDS into a
+     * double.
+     *
+     * @throws NullPointerException if coordinate is null
+     * @throws IllegalArgumentException if the coordinate is not
+     * in one of the valid formats.
+     */
+    public static double convert(String coordinate) {
+    	coordinate = coordinate.replace(' ', ':');
+        if (coordinate == null) {
+            throw new NullPointerException("coordinate");
+        }
+
+        boolean negative = false;
+        if (coordinate.charAt(0) == '-') {
+            coordinate = coordinate.substring(1);
+            negative = true;
+        }
+
+        StringTokenizer st = new StringTokenizer(coordinate, ":");
+        int tokens = st.countTokens();
+        if (tokens < 1) {
+            throw new IllegalArgumentException("coordinate=" + coordinate);
+        }
+        try {
+            String degrees = st.nextToken();
+            double val;
+            if (tokens == 1) {
+                val = Double.parseDouble(degrees);
+                return negative ? -val : val;
+            }
+
+            String minutes = st.nextToken();
+            int deg = Integer.parseInt(degrees);
+            double min;
+            double sec = 0.0;
+
+            if (st.hasMoreTokens()) {
+                min = Integer.parseInt(minutes);
+                String seconds = st.nextToken();
+                sec = Double.parseDouble(seconds);
+            } else {
+                min = Double.parseDouble(minutes);
+            }
+
+            boolean isNegative180 = negative && (deg == 180) &&
+                (min == 0) && (sec == 0);
+
+            // deg must be in [0, 179] except for the case of -180 degrees
+            if ((deg < 0.0) || (deg > 180 && !isNegative180)) {
+                throw new IllegalArgumentException("coordinate=" + coordinate);
+            }
+            if (min < 0 || min > 60d) {
+                throw new IllegalArgumentException("coordinate=" +
+                        coordinate);
+            }
+            if (sec < 0 || sec > 60d) {
+                throw new IllegalArgumentException("coordinate=" +
+                        coordinate);
+            }
+
+            val = deg*3600.0 + min*60.0 + sec;
+            val /= 3600.0;
+            return negative ? -val : val;
+        } catch (NumberFormatException nfe) {
+            throw new IllegalArgumentException("coordinate=" + coordinate);
+        }
+    }
+	
+
 
 	public static String convert(double coordinate, int outputType) {
 		if (coordinate < -180.0 || coordinate > 180.0 || Double.isNaN(coordinate)) {
@@ -173,13 +249,13 @@ public class NavigatePointActivity extends Activity {
 		if (outputType == FORMAT_MINUTES || outputType == FORMAT_SECONDS) {
 			int degrees = (int) Math.floor(coordinate);
 			sb.append(degrees);
-			sb.append(':');
+			sb.append(DELIM);
 			coordinate -= degrees;
 			coordinate *= 60.0;
 			if (outputType == FORMAT_SECONDS) {
 				int minutes = (int) Math.floor(coordinate);
 				sb.append(minutes);
-				sb.append(':');
+				sb.append(DELIM);
 				coordinate -= minutes;
 				coordinate *= 60.0;
 			}

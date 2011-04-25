@@ -293,8 +293,8 @@
 <string name="navigate_point_latitude">Latitude</string>
 <string name="navigate_point_longitude">Longitude</string>
 <string name="navigate_point_format_D">GGG.GGGGG</string>
-<string name="navigate_point_format_DM">GGG:MM.MMMMM</string>
-<string name="navigate_point_format_DMS">GGG:MM:SS.SSSSS</string>
+<string name="navigate_point_format_DM">GGG MM.MMMMM</string>
+<string name="navigate_point_format_DMS">GGG MM SS.SSSSS</string>
 <string name="search_shown_on_map">Visualizzare sulla mappa</string>
 <string name="navigate_point_cancel">Annulla</string>
 <string name="search_address_top_text">Selezionare indirizzo</string>
