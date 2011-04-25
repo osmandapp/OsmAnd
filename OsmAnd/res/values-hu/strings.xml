@@ -372,8 +372,8 @@
 <string name="navigate_point_latitude">Szélesség</string>
 <string name="navigate_point_longitude">Hosszúság</string>
 <string name="navigate_point_format_D">FFF.FFFFF</string>
-<string name="navigate_point_format_DM">FFF:PP.PPPPP</string>
-<string name="navigate_point_format_DMS">FFF:PP:MM.MMMMM</string>
+<string name="navigate_point_format_DM">FFF PP.PPPPP</string>
+<string name="navigate_point_format_DMS">FFF PP MM.MMMMM</string>
 <string name="search_shown_on_map">Térképen mutat</string>
 <string name="navigate_point_cancel">Mégse</string>
 <string name="search_address_top_text">Cím kiválasztása</string>

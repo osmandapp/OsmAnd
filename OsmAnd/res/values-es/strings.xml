@@ -190,9 +190,6 @@
 	<string name="monitor_preferences">Monitoreo</string>
 	<string name="monitor_preferences_descr">Especificar configuración de monitoreo</string>
 	<string name="navigate_point_cancel">Cancelar</string>
-	<string name="navigate_point_format_D">DDD.DDDDD</string>
-	<string name="navigate_point_format_DM">DDD:MM.MMMMM</string>
-	<string name="navigate_point_format_DMS">DDD:MM:SS.SSSSS</string>
 	<string name="navigate_point_latitude">Latitud</string>
 	<string name="navigate_point_longitude">Longitud</string>
 	<string name="navigate_point_top_text">Ingresar Latitud &amp; longitud en el formato seleccionado (D - grados, M - minutos, S - segundos)</string>
