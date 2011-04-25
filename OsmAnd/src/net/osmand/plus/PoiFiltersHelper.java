@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -7,7 +8,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.Messages;
 import net.osmand.data.AmenityType;
 import net.osmand.plus.activities.OsmandApplication;
 import android.content.Context;
@@ -72,7 +72,7 @@ public class PoiFiltersHelper {
 		list.add("car"); //$NON-NLS-1$
 		list.add("car_repair"); //$NON-NLS-1$
 		types.put(AmenityType.SHOP, list);
-		filters.add(new PoiFilter(Messages.getMessage("poi_filter_car_aid"), null, types, application)); //$NON-NLS-1$
+		filters.add(new PoiFilter(application.getString(R.string.poi_filter_car_aid), null, types, application)); //$NON-NLS-1$
 		types.clear();
 		
 		
@@ -92,13 +92,13 @@ public class PoiFiltersHelper {
 		list.add("waste_basket"); //$NON-NLS-1$
 		list.add("waste_disposal"); //$NON-NLS-1$
 		types.put(AmenityType.OTHER, list);
-		filters.add(new PoiFilter(Messages.getMessage("poi_filter_for_tourists"), null, types, application)); //$NON-NLS-1$
+		filters.add(new PoiFilter(application.getString(R.string.poi_filter_for_tourists), null, types, application)); //$NON-NLS-1$
 		types.clear();
 		
 		list = new LinkedHashSet<String>();
 		list.add("fuel"); //$NON-NLS-1$
 		types.put(AmenityType.TRANSPORTATION, list);
-		filters.add(new PoiFilter(Messages.getMessage("poi_filter_fuel"), null, types, application)); //$NON-NLS-1$
+		filters.add(new PoiFilter(application.getString(R.string.poi_filter_fuel), null, types, application)); //$NON-NLS-1$
 		types.clear();
 		
 		list = new LinkedHashSet<String>();
@@ -116,7 +116,7 @@ public class PoiFiltersHelper {
 		list.add("supermarket"); //$NON-NLS-1$
 		list.add("variety_store"); //$NON-NLS-1$
 		types.put(AmenityType.SHOP, list);
-		filters.add(new PoiFilter(Messages.getMessage("poi_filter_food_shop"), null, types, application)); //$NON-NLS-1$
+		filters.add(new PoiFilter(application.getString(R.string.poi_filter_food_shop), null, types, application)); //$NON-NLS-1$
 		types.clear();
 		
 		return filters;
@@ -127,7 +127,7 @@ public class PoiFiltersHelper {
 			////ctx.deleteDatabase(PoiFilterDbHelper.DATABASE_NAME);
 			
 			cacheUserDefinedFilters = new ArrayList<PoiFilter>();
-			PoiFilter filter = new PoiFilter(Messages.getMessage("poi_filter_custom_filter"), PoiFilter.CUSTOM_FILTER_ID, new LinkedHashMap<AmenityType, LinkedHashSet<String>>(), application); //$NON-NLS-1$
+			PoiFilter filter = new PoiFilter(application.getString(R.string.poi_filter_custom_filter), PoiFilter.CUSTOM_FILTER_ID, new LinkedHashMap<AmenityType, LinkedHashSet<String>>(), application); //$NON-NLS-1$
 			cacheUserDefinedFilters.add(filter);
 			PoiFilterDbHelper helper = openDbHelper();
 			cacheUserDefinedFilters.addAll(helper.getFilters());

@@ -13,6 +13,7 @@ import java.util.Set;
 
 import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
+import net.osmand.OsmAndFormatter;
 import net.osmand.GPXUtilities.GPXFileResult;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.osm.LatLon;
@@ -277,7 +278,7 @@ public class FavouritesActivity extends ListActivity {
 			LatLon lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(OsmandSettings.getPrefs(FavouritesActivity.this));
 			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(), 
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
-			distanceLabel.setText(MapUtils.getFormattedDistance(dist));
+			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist, FavouritesActivity.this));
 			label.setText(model.getName());
 			return row;
 		}

@@ -15,6 +15,7 @@ import net.osmand.Algoritms;
 import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
 import net.osmand.LogUtil;
+import net.osmand.OsmAndFormatter;
 import net.osmand.Version;
 import net.osmand.GPXUtilities.GPXFileResult;
 import net.osmand.GPXUtilities.WptPt;
@@ -1510,7 +1511,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			list.add(f.getName());
 		}
 		for(AmenityType t : AmenityType.values()){
-			list.add(AmenityType.toPublicString(t));
+			list.add(OsmAndFormatter.toPublicString(t, this));
 		}
 		Builder builder = new AlertDialog.Builder(this);
 		builder.setItems(list.toArray(new String[list.size()]), new DialogInterface.OnClickListener(){

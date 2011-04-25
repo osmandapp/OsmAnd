@@ -7,6 +7,7 @@ import java.text.MessageFormat;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import net.osmand.OsmAndFormatter;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapRenderingTypes;
@@ -255,7 +256,7 @@ public class EditPOIFilterActivity extends ListActivity {
 			check.setChecked(filter.isTypeAccepted(model));
 
 			TextView text = (TextView) row.findViewById(R.id.filter_poi_label);
-			text.setText(AmenityType.toPublicString(model));
+			text.setText(OsmAndFormatter.toPublicString(model, EditPOIFilterActivity.this));
 			addRowListener(model, text, check);
 			return (row);
 		}

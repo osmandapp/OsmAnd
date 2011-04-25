@@ -3,6 +3,7 @@ package net.osmand.plus.activities.search;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.OsmAndFormatter;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.PostCode;
@@ -41,7 +42,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<MapOb
 		LatLon l = obj.getLocation();
 		if (getFilter().length() > 2 && location != null && l != null) {
 			txt.setText(obj.getName(region.useEnglishNames()) + " - " + //$NON-NLS-1$
-					MapUtils.getFormattedDistance((int) MapUtils.getDistance(l, location))); 
+					OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(l, location), this)); 
 		} else {
 			txt.setText(obj.getName(region.useEnglishNames()));
 		}

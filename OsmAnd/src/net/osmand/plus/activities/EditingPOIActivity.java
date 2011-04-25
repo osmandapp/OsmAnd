@@ -21,6 +21,7 @@ import java.util.Set;
 
 import net.osmand.Base64;
 import net.osmand.LogUtil;
+import net.osmand.OsmAndFormatter;
 import net.osmand.Version;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
@@ -134,7 +135,8 @@ public class EditingPOIActivity {
 		}
 		
 		Builder builder = new AlertDialog.Builder(ctx);
-		builder.setTitle(MessageFormat.format(this.view.getResources().getString(R.string.poi_remove_confirm_template), a.getStringWithoutType(OsmandSettings.usingEnglishNames(OsmandSettings.getPrefs(ctx)))));
+		builder.setTitle(MessageFormat.format(this.view.getResources().getString(R.string.poi_remove_confirm_template), 
+				OsmAndFormatter.getPoiStringWithoutType(a, OsmandSettings.usingEnglishNames(OsmandSettings.getPrefs(ctx)))));
 		final EditText comment = new EditText(ctx);
 		comment.setText(R.string.poi_remove_title);
 		builder.setView(comment);
@@ -189,7 +191,7 @@ public class EditingPOIActivity {
 				AmenityType t = MapRenderingTypes.getDefault().getAmenityNameToType().get(str);
 				if(t != null && a.getType() != t){
 					a.setType(t);
-					typeButton.setText(AmenityType.toPublicString(t));
+					typeButton.setText(OsmAndFormatter.toPublicString(t, ctx));
 					updateSubTypesAdapter(t);
 				}
 				
@@ -212,7 +214,7 @@ public class EditingPOIActivity {
 				Builder builder = new AlertDialog.Builder(ctx);
 				String[] vals = new String[AmenityType.values().length];
 				for(int i=0; i<vals.length; i++){
-					vals[i] = AmenityType.toPublicString(AmenityType.values()[i]); 
+					vals[i] = OsmAndFormatter.toPublicString(AmenityType.values()[i], ctx); 
 				}
 				builder.setItems(vals, new Dialog.OnClickListener(){
 					@Override
@@ -302,7 +304,7 @@ public class EditingPOIActivity {
 	
 	private void updateType(Amenity a){
 		typeText.setText(a.getSubType());
-		typeButton.setText(AmenityType.toPublicString(a.getType()));
+		typeButton.setText(OsmAndFormatter.toPublicString(a.getType(), ctx));
 		updateSubTypesAdapter(a.getType());
 	}
 	

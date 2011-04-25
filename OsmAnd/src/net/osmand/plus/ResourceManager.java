@@ -16,7 +16,6 @@ import java.util.TreeMap;
 
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
-import net.osmand.Messages;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.TransportStop;
@@ -35,8 +34,6 @@ import net.osmand.plus.views.POIMapLayer;
 
 import org.apache.commons.logging.Log;
 
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -116,7 +113,7 @@ public class ResourceManager {
 	////////////////////////////////////////////// Working with tiles ////////////////////////////////////////////////
 	
 	public void indexingImageTiles(IProgress progress){
-		progress.startTask(Messages.getMessage("reading_cached_tiles"), -1); //$NON-NLS-1$
+		progress.startTask(context.getString(R.string.reading_cached_tiles), -1); //$NON-NLS-1$
 		imagesOnFS.clear();
 		for(File c : dirWithTiles.listFiles()){
 			indexImageTilesFS("", c); //$NON-NLS-1$
@@ -387,11 +384,11 @@ public class ResourceManager {
 		if (file.exists() && file.canRead()) {
 			for (File f : file.listFiles()) {
 				if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-					progress.startTask(Messages.getMessage("indexing_map") + f.getName(), -1); //$NON-NLS-1$
+					progress.startTask(context.getString(R.string.indexing_map) + " " + f.getName(), -1); //$NON-NLS-1$
 					try {
 						BinaryMapIndexReader index = renderer.initializeNewResource(progress, f);
 						if (index == null) {
-							warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+							warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 						} else {
 							indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$
 							for(String rName : index.getRegionNames()) {
@@ -405,7 +402,7 @@ public class ResourceManager {
 									transportRepositories.add(new TransportIndexRepositoryBinary(new BinaryMapIndexReader(raf)));
 								} catch (IOException e) {
 									log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
-									warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+									warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 								}
 							}
 							if(index.containsMapData()){
@@ -422,13 +419,13 @@ public class ResourceManager {
 						}
 					} catch (SQLiteException e) {
 						log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
-						warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+						warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 					} catch (OutOfMemoryError oome) {
 						log.error("Exception reading " + f.getAbsolutePath(), oome); //$NON-NLS-1$
-						warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_big_for_memory"), f.getName()));
+						warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_big_for_memory), f.getName()));
 					}
 				} else if(f.getName().endsWith(".map.odb")){ //$NON-NLS-1$
-					warnings.add(MessageFormat.format(Messages.getMessage("old_map_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+					warnings.add(MessageFormat.format(context.getString(R.string.old_map_index_is_not_supported), f.getName())); //$NON-NLS-1$
 				}
 			}
 		}
@@ -453,18 +450,18 @@ public class ResourceManager {
 		if (f.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
 			AmenityIndexRepositoryOdb repository = new AmenityIndexRepositoryOdb();
 			
-			progress.startTask(Messages.getMessage("indexing_poi") + f.getName(), -1); //$NON-NLS-1$
+			progress.startTask(context.getString(R.string.indexing_poi) + " " +  f.getName(), -1); //$NON-NLS-1$
 			try {
 				boolean initialized = repository.initialize(progress, f);
 				if (initialized) {
 					amenityRepositories.add(repository);
 					indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$
 				} else {
-					warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 				}
 			} catch (SQLiteException e) {
 				log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
-				warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+				warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 			}
 		}
 	}
@@ -491,18 +488,18 @@ public class ResourceManager {
 	public void indexingAddress(final IProgress progress, List<String> warnings, File f) {
 		if (f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)) {
 			RegionAddressRepositoryOdb repository = new RegionAddressRepositoryOdb();
-			progress.startTask(Messages.getMessage("indexing_address") + f.getName(), -1); //$NON-NLS-1$
+			progress.startTask(context.getString(R.string.indexing_address) + " " + f.getName(), -1); //$NON-NLS-1$
 			try {
 				boolean initialized = repository.initialize(progress, f);
 				if (initialized) {
 					addressMap.put(repository.getName(), repository);
 					indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$
 				} else {
-					warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 				}
 			} catch (SQLiteException e) {
 				log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
-				warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+				warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 			}
 		}
 	}
@@ -523,18 +520,18 @@ public class ResourceManager {
 	public void indexingTransport(final IProgress progress, List<String> warnings, File f) {
 		if (f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)) {
 			TransportIndexRepositoryOdb repository = new TransportIndexRepositoryOdb();
-			progress.startTask(Messages.getMessage("indexing_transport") + f.getName(), -1); //$NON-NLS-1$
+			progress.startTask(context.getString(R.string.indexing_transport) + " " +  f.getName(), -1); //$NON-NLS-1$
 			try {
 				boolean initialized = repository.initialize(progress, f);
 				if (initialized) {
 					transportRepositories.add(repository);
 					indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$
 				} else {
-					warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 				}
 			} catch (SQLiteException e) {
 				log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
-				warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
+				warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 			}
 		}
 	}

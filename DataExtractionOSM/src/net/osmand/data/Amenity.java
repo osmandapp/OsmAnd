@@ -130,21 +130,9 @@ public class Amenity extends MapObject {
 	}
 	
 
-	public String getSimpleFormat(boolean en){
-		return AmenityType.toPublicString(type) + " : " + getStringWithoutType(en); //$NON-NLS-1$
-	}
-	
-	public String getStringWithoutType(boolean en){
-		String n = getName(en);
-		if(n.length() == 0){
-			return getSubType();
-		}
-		return getSubType() + " " + n; //$NON-NLS-1$
-	}
-	
 	@Override
 	public String toString() {
-		return getSimpleFormat(false);
+		return type.toString() + " : " + subType + " "+ getName();
 	}
 	
 	public String getSite() {
