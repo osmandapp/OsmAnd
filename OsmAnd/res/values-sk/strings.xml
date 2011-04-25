@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+
+	<string name="amenity_type_administrative">Administratíva</string>
+	<string name="amenity_type_barrier">Prekážky</string>
+	<string name="amenity_type_education">Výuka</string>
+	<string name="amenity_type_emergency">Pomoc v núdzi</string>
+	<string name="amenity_type_entertainment">Zábava</string>
+	<string name="amenity_type_finance">Peniaze</string>
+	<string name="amenity_type_geocache">Geocache</string>
+	<string name="amenity_type_healthcare">Zdravie</string>
+	<string name="amenity_type_historic">História</string>
+	<string name="amenity_type_landuse">Využitie územia</string>
+	<string name="amenity_type_leisure">Voľný čas</string>
+	<string name="amenity_type_manmade">Človekom vytvorené</string>
+	<string name="amenity_type_military">Armáda</string>
+	<string name="amenity_type_natural">Príroda</string>
+	<string name="amenity_type_office">Kancelária</string>
+	<string name="amenity_type_other">Iné</string>
+	<string name="amenity_type_shop">Nakupovanie</string>
+	<string name="amenity_type_sport">Šport</string>
+	<string name="amenity_type_sustenance">Jedlo</string>
+	<string name="amenity_type_tourism">Turistika</string>
+	<string name="amenity_type_transportation">Doprava</string>
+	<string name="indexing_address">Indexovanie adries </string>
+	<string name="indexing_map">Indexovanie máp </string>
+	<string name="indexing_poi">Indexovanie POI </string>
+	<string name="indexing_transport">Indexovanie dopravy </string>
+	<string name="input_output_error">Vyskytla sa vstupno/výstupná chyba</string>
+	<string name="km">km</string>
+	<string name="km_h">km/h</string>
+	<string name="m">m</string>
+	<string name="old_map_index_is_not_supported">Verzia indexu \'\'{0}\'\' nie je podporovaná</string>
+	<string name="poi_filter_car_aid">Pomoc s automobilom</string>
+	<string name="poi_filter_closest_poi">Najbližsí bod záujmu</string>
+	<string name="poi_filter_custom_filter">Vlastný filter</string>
+	<string name="poi_filter_food_shop">Obchody s jedlom</string>
+	<string name="poi_filter_for_tourists">Pre turistov</string>
+	<string name="poi_filter_fuel">Palivo</string>
+	<string name="poi_filter_namefinder">Online hľadač mien</string>
+	<string name="reading_cached_tiles">Čítajú sa dlaždice zo zásobníka...</string>
+	<string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
+	<string name="version_index_is_not_supported">Verzia indexu \'\'{0}\'\' nie je podporovaná</string>
+	
 <string name="use_osmand_routing_service">OsmAnd offline rutovanie</string>
 <string name="use_osmand_routing_service_descr">Použitie offline rutovania na dlhé vzdialenosti (experimentálne)</string>
 <string name="osmand_routing_experimental">OsmAnd offline rutovanie je experimentálna funkcia a nefunguje na vzdialenosť väčšiu ako 20 km.\n Rutovacia služba je automaticky prpenutá na online Cloudmade.</string>

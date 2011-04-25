@@ -10,6 +10,7 @@ import java.util.Locale;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
+import net.osmand.OsmAndFormatter;
 import net.osmand.Version;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -184,7 +185,7 @@ public class SearchAddressOnlineActivity extends ListActivity {
 			TextView distanceLabel = (TextView) row.findViewById(R.id.distance_label);
 			if(location != null){
 				int dist = (int) (MapUtils.getDistance(location, model.lat, model.lon));
-				distanceLabel.setText(MapUtils.getFormattedDistance(dist));
+				distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist, SearchAddressOnlineActivity.this));
 			} else {
 				distanceLabel.setText(""); //$NON-NLS-1$
 			}

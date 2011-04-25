@@ -1,13 +1,11 @@
 package net.osmand.osm;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import net.osmand.Messages;
 import net.osmand.data.MapObject;
 
 
@@ -297,17 +295,4 @@ public class MapUtils {
 	}
 	
 
-	public static String getFormattedDistance(int meters){
-		if(meters >= 100000){
-			return meters / 1000 + " " + Messages.getMessage(Messages.KEY_KM);   //$NON-NLS-1$
-		} else if(meters >= 10000){
-			return MessageFormat.format("{0,number,#.#} "+Messages.getMessage(Messages.KEY_KM), ((float) meters) / 1000); //$NON-NLS-1$ 
-		} else if(meters > 1500){
-			return MessageFormat.format("{0,number,#.#} "+Messages.getMessage(Messages.KEY_KM), ((float) meters) / 1000); //$NON-NLS-1$ 
-		} else if(meters > 900){
-			return MessageFormat.format("{0,number,#.##} "+Messages.getMessage(Messages.KEY_KM), ((float) meters) / 1000); //$NON-NLS-1$
-		} else {
-			return meters + " "+Messages.getMessage(Messages.KEY_M); //$NON-NLS-1$ 
-		}
-	}
 }

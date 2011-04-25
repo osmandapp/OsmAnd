@@ -1,5 +1,46 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+
+	<string name="amenity_type_administrative">Administrativa</string>
+	<string name="amenity_type_barrier">Překážky</string>
+	<string name="amenity_type_education">Školství</string>
+	<string name="amenity_type_emergency">Pomoc v nouzi</string>
+	<string name="amenity_type_entertainment">Zábava</string>
+	<string name="amenity_type_finance">Finance</string>
+	<string name="amenity_type_geocache">Geocache</string>
+	<string name="amenity_type_healthcare">Zdravotnictví</string>
+	<string name="amenity_type_historic">Historie</string>
+	<string name="amenity_type_landuse">Využité území</string>
+	<string name="amenity_type_leisure">Volný čas</string>
+	<string name="amenity_type_manmade">Lidská díla</string>
+	<string name="amenity_type_military">Armáda</string>
+	<string name="amenity_type_natural">Příroda</string>
+	<string name="amenity_type_office">Kanceláře</string>
+	<string name="amenity_type_other">Jiné</string>
+	<string name="amenity_type_shop">Obchod</string>
+	<string name="amenity_type_sport">Sport</string>
+	<string name="amenity_type_sustenance">Stravování</string>
+	<string name="amenity_type_tourism">Turistika</string>
+	<string name="amenity_type_transportation">Doprava</string>
+	<string name="indexing_address">Indexuji adresy</string>
+	<string name="indexing_map">Indexuji mapu</string>
+	<string name="indexing_poi">Indexuji POI</string>
+	<string name="indexing_transport">Indexuji dopravu</string>
+	<string name="input_output_error">Došlo k chybě vstupu/výstupu</string>
+	<string name="km">km</string>
+	<string name="km_h">km/h</string>
+	<string name="m">m</string>
+	<string name="old_map_index_is_not_supported">Zastaralý formát mapových dat \'\'{0}\'\' není podporován</string>
+	<string name="poi_filter_car_aid">Autoservis</string>
+	<string name="poi_filter_closest_poi">Nejbližší POI</string>
+	<string name="poi_filter_custom_filter">Vlastní filtr</string>
+	<string name="poi_filter_food_shop">Potraviny</string>
+	<string name="poi_filter_for_tourists">Pro turisty</string>
+	<string name="poi_filter_fuel">Čerpací stanice</string>
+	<string name="poi_filter_namefinder">Online NameFinder</string>
+	<string name="reading_cached_tiles">Načítám uložené dlaždice...</string>
+	<string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
+	<string name="version_index_is_not_supported">Verze indexu \'\'{0}\'\' není podporována</string>
   <string name="loading_builds_failed">Stahování seznamu balíčků selhalo.</string>
   <string name="loading_builds">Načítám balíčky...</string>
   <string name="select_build_to_install">Vyberte balíček OsmAnd k nainstalování</string>

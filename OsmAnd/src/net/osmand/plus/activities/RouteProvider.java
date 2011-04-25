@@ -16,6 +16,7 @@ import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
 
 import net.osmand.LogUtil;
+import net.osmand.OsmAndFormatter;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryRouteDataReader;
 import net.osmand.binary.BinaryRouteDataReader.RouteSegment;
@@ -341,7 +342,7 @@ public class RouteProvider {
 				// calculate for previousRoute 
 				previousInfo.distance = listDistance[previousLocation]- listDistance[i];
 				previousInfo.expectedTime = (int) (previousInfo.distance / speed);
-				previousInfo.descriptionRoute += " " + MapUtils.getFormattedDistance(previousInfo.distance); //$NON-NLS-1$
+				previousInfo.descriptionRoute += " " + OsmAndFormatter.getFormattedDistance(previousInfo.distance, ctx); //$NON-NLS-1$
 
 				previousInfo = new RouteDirectionInfo();
 				previousInfo.turnType = type;
@@ -358,7 +359,7 @@ public class RouteProvider {
 			
 		previousInfo.distance = listDistance[previousLocation];
 		previousInfo.expectedTime = (int) (previousInfo.distance / speed);
-		previousInfo.descriptionRoute += " " + MapUtils.getFormattedDistance(previousInfo.distance); //$NON-NLS-1$
+		previousInfo.descriptionRoute += " " + OsmAndFormatter.getFormattedDistance(previousInfo.distance, ctx); //$NON-NLS-1$
 		
 		// add last direction go straight (to show arrow in screen after all turns)
 		if(previousInfo.distance > 80){

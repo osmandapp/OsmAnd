@@ -2,6 +2,7 @@ package net.osmand.plus.activities.search;
 
 import java.util.List;
 
+import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
@@ -126,7 +127,7 @@ public class SearchHistoryActivity extends ListActivity {
 			final HistoryEntry model = getItem(position);
 			if(location != null){
 				int dist = (int) (MapUtils.getDistance(location, model.lat, model.lon));
-				distanceLabel.setText(MapUtils.getFormattedDistance(dist));
+				distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist, SearchHistoryActivity.this));
 			} else {
 				distanceLabel.setText(""); //$NON-NLS-1$
 			}

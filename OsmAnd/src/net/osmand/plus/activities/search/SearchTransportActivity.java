@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.Algoritms;
-import net.osmand.Messages;
+import net.osmand.OsmAndFormatter;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.LatLon;
@@ -142,7 +142,7 @@ public class SearchTransportActivity extends ListActivity {
 	}
 	
 	public String getSearchArea(){
-		return " < " + 125 * (1 << (17 - zoom)) + " " + Messages.getMessage(Messages.KEY_M); //$NON-NLS-1$//$NON-NLS-2$
+		return " < " + 125 * (1 << (17 - zoom)) + " " + getString(R.string.m); //$NON-NLS-1$//$NON-NLS-2$
 	}
 	public boolean isSearchFurtherAvailable() {
 		return zoom >= finalZoom;
@@ -228,18 +228,18 @@ public class SearchTransportActivity extends ListActivity {
 			}
 			ind++;
 		}
-		text.append(getString(R.string.transport_route_distance)).append(" ").append(MapUtils.getFormattedDistance((int) dist));  //$NON-NLS-1$/
+		text.append(getString(R.string.transport_route_distance)).append(" ").append(OsmAndFormatter.getFormattedDistance((int) dist, this));  //$NON-NLS-1$/
 		if(!part){
 			text.append(", ").append(getString(R.string.transport_stops_to_pass)).append(" ").append(eInd - stInd);   //$NON-NLS-1$ //$NON-NLS-2$
 			LatLon endStop = getEndStop(position - 1);
 			if (endStop != null) {
-				String before = MapUtils.getFormattedDistance((int) MapUtils.getDistance(endStop, route.getStart().getLocation()));
+				String before = OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(endStop, route.getStart().getLocation()), SearchTransportActivity.this);
 				text.append(", ").append(getString(R.string.transport_to_go_before)).append(" ").append(before); //$NON-NLS-2$//$NON-NLS-1$
 			}
 
 			LatLon stStop = getStartStop(position + 1);
 			if (stStop != null) {
-				String after = MapUtils.getFormattedDistance((int) MapUtils.getDistance(stStop, route.getStop().getLocation()));
+				String after = OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(stStop, route.getStop().getLocation()), SearchTransportActivity.this);
 				text.append(", ").append(getString(R.string.transport_to_go_after)).append(" ").append(after); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
@@ -268,9 +268,9 @@ public class SearchTransportActivity extends ListActivity {
 			String name = st.getName(OsmandSettings.usingEnglishNames(settings));
 			if(locationToGo != null){
 				n.append(name).append(" - ["); //$NON-NLS-1$
-				n.append(MapUtils.getFormattedDistance((int) MapUtils.getDistance(locationToGo, st.getLocation()))).append("]"); //$NON-NLS-1$ 
+				n.append(OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(locationToGo, st.getLocation()), SearchTransportActivity.this)).append("]"); //$NON-NLS-1$ 
 			} else if(locationToStart != null){
-				n.append("[").append(MapUtils.getFormattedDistance((int) MapUtils.getDistance(locationToStart, st.getLocation()))).append("] - "); //$NON-NLS-1$ //$NON-NLS-2$
+				n.append("[").append(OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(locationToStart, st.getLocation()), SearchTransportActivity.this)).append("] - "); //$NON-NLS-1$ //$NON-NLS-2$
 				n.append(name);
 			} else {
 				n.append(name);
@@ -455,7 +455,7 @@ public class SearchTransportActivity extends ListActivity {
 			labelW.append(" - ["); //$NON-NLS-1$
 			
 			if (locationToGo != null) {
-				labelW.append(MapUtils.getFormattedDistance(stop.getDistToLocation()));
+				labelW.append(OsmAndFormatter.getFormattedDistance(stop.getDistToLocation(), SearchTransportActivity.this));
 			} else {
 				labelW.append(getString(R.string.transport_search_none));
 			}
@@ -469,7 +469,7 @@ public class SearchTransportActivity extends ListActivity {
 			}
 			
 			int dist = locationToStart == null ? 0 : (int) (MapUtils.getDistance(stop.getStart().getLocation(), locationToStart));
-			distanceLabel.setText(" " + MapUtils.getFormattedDistance(dist)); //$NON-NLS-1$
+			distanceLabel.setText(" " + OsmAndFormatter.getFormattedDistance(dist, SearchTransportActivity.this)); //$NON-NLS-1$
 
 			return (row);
 		}
@@ -491,7 +491,7 @@ public class SearchTransportActivity extends ListActivity {
 
 				if(st != null && end != null){
 					int dist = (int) MapUtils.getDistance(st, end);
-					text.setText(MessageFormat.format(getString(R.string.transport_searching_route), MapUtils.getFormattedDistance(dist)));
+					text.setText(MessageFormat.format(getString(R.string.transport_searching_route), OsmAndFormatter.getFormattedDistance(dist, SearchTransportActivity.this)));
 				} else {
 					text.setText(getString(R.string.transport_searching_transport));
 				}
@@ -538,12 +538,12 @@ public class SearchTransportActivity extends ListActivity {
 				labelW.append(" ("); //$NON-NLS-1$
 				labelW.append(info.getStopNumbers()).append(" ").append(getString(R.string.transport_stops)).append(", "); //$NON-NLS-1$ //$NON-NLS-2$
 				int startDist = (int) MapUtils.getDistance(getEndStop(position - 1), info.getStart().getLocation());
-				labelW.append(getString(R.string.transport_to_go_before)).append(" ").append(MapUtils.getFormattedDistance(startDist)); //$NON-NLS-1$
+				labelW.append(getString(R.string.transport_to_go_before)).append(" ").append(OsmAndFormatter.getFormattedDistance(startDist, SearchTransportActivity.this)); //$NON-NLS-1$
 				if (position == getCount() - 1) {
 					LatLon stop = getStartStop(position + 1);
 					if(stop != null) {
 						int endDist = (int) MapUtils.getDistance(stop, info.getStop().getLocation());
-						labelW.append(", ").append(getString(R.string.transport_to_go_after)).append(" ").append(MapUtils.getFormattedDistance(endDist));  //$NON-NLS-1$ //$NON-NLS-2$
+						labelW.append(", ").append(getString(R.string.transport_to_go_after)).append(" ").append(OsmAndFormatter.getFormattedDistance(endDist, SearchTransportActivity.this));  //$NON-NLS-1$ //$NON-NLS-2$
 					}
 				}
 

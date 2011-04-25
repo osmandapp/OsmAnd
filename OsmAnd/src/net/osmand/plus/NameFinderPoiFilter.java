@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.LogUtil;
-import net.osmand.Messages;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.MapUtils;
@@ -33,7 +32,7 @@ public class NameFinderPoiFilter extends PoiFilter {
 	
 	public NameFinderPoiFilter(OsmandApplication application) {
 		super(null, application);
-		this.name = Messages.getMessage("poi_filter_namefinder"); //$NON-NLS-1$
+		this.name = application.getString(R.string.poi_filter_namefinder); //$NON-NLS-1$
 		this.filterId = FILTER_ID;
 	}
 	
@@ -114,10 +113,10 @@ public class NameFinderPoiFilter extends PoiFilter {
 			stream.close();
 		} catch (IOException e) {
 			log.error("Error loading name finder poi", e); //$NON-NLS-1$
-			return Messages.getMessage("input_output_error"); //$NON-NLS-1$
+			return getApplication().getString(R.string.input_output_error); //$NON-NLS-1$
 		} catch (XmlPullParserException e) {
 			log.error("Error parsing name finder poi", e); //$NON-NLS-1$
-			return Messages.getMessage("input_output_error"); //$NON-NLS-1$
+			return getApplication().getString(R.string.input_output_error); //$NON-NLS-1$
 		}
 		MapUtils.sortListOfMapObject(searchedAmenities, latitude, longitude);
 		return null;

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import net.osmand.LogUtil;
+import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
@@ -462,7 +463,7 @@ public class RoutingHelper {
 								int[] dist = res.getListDistance();
 								int l = dist != null && dist.length > 0 ? dist[0] : 0;
 								showMessage(context.getString(R.string.new_route_calculated_dist)
-										+ " : " + MapUtils.getFormattedDistance(l)); //$NON-NLS-1$
+										+ " : " + OsmAndFormatter.getFormattedDistance(l, context)); //$NON-NLS-1$
 								if (uiActivity instanceof MapActivity) {
 									// be aware that is non ui thread
 									((MapActivity) uiActivity).getMapView().refreshMap();

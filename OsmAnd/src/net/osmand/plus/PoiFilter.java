@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import net.osmand.Messages;
+import net.osmand.OsmAndFormatter;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.index.IndexConstants;
@@ -39,7 +39,7 @@ public class PoiFilter {
 		this.application = application;
 		isStandardFilter = true;
 		filterId = STD_PREFIX + type;
-		name = type == null ? Messages.getMessage("poi_filter_closest_poi") : AmenityType.toPublicString(type); //$NON-NLS-1$
+		name = type == null ? application.getString(R.string.poi_filter_closest_poi) : OsmAndFormatter.toPublicString(type, application); //$NON-NLS-1$
 		if(type == null){
 			initSearchAll();
 		} else {
@@ -85,9 +85,9 @@ public class PoiFilter {
 	public String getSearchArea(){
 		if(zoom <= 14){
 			int d = (int) (1 * (1 << (14 - zoom)));
-			return " < " + d + " " + Messages.getMessage(Messages.KEY_KM);  //$NON-NLS-1$//$NON-NLS-2$
+			return " < " + d + " " + application.getString(R.string.km);  //$NON-NLS-1$//$NON-NLS-2$
 		} else {
-			return " < 500 " + Messages.getMessage(Messages.KEY_M);  //$NON-NLS-1$
+			return " < 500 " + application.getString(R.string.m);  //$NON-NLS-1$
 		}
 	}
 	
@@ -236,6 +236,10 @@ public class PoiFilter {
 	
 	public boolean isStandardFilter(){
 		return isStandardFilter;
+	}
+	
+	public OsmandApplication getApplication() {
+		return application;
 	}
 	
 }

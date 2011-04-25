@@ -39,7 +39,6 @@ import java.util.zip.ZipInputStream;
 
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
-import net.osmand.data.index.DownloaderIndexFromGoogleCode;
 import net.osmand.data.index.IndexConstants;
 import net.osmand.plus.DownloadOsmandIndexesHelper;
 import net.osmand.plus.OsmandSettings;

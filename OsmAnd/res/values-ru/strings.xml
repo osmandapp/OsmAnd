@@ -1,5 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+	<string name="amenity_type_administrative">Административное</string>
+	<string name="amenity_type_barrier">Препятствие</string>
+	<string name="amenity_type_education">Образование</string>
+	<string name="amenity_type_emergency">Экстренные службы</string>
+	<string name="amenity_type_entertainment">Развлечения</string>
+	<string name="amenity_type_finance">Финансы</string>
+	<string name="amenity_type_geocache">Геотайник</string>
+	<string name="amenity_type_healthcare">Здоровье</string>
+	<string name="amenity_type_historic">Историческое</string>
+	<string name="amenity_type_landuse">Землепользование</string>
+	<string name="amenity_type_leisure">Досуг</string>
+	<string name="amenity_type_manmade">Сооружения</string>
+	<string name="amenity_type_military">Военное</string>
+	<string name="amenity_type_natural">Природа</string>
+	<string name="amenity_type_office">Офис</string>
+	<string name="amenity_type_other">Другое</string>
+	<string name="amenity_type_shop">Магазины</string>
+	<string name="amenity_type_sport">Спорт</string>
+	<string name="amenity_type_sustenance">Еда</string>
+	<string name="amenity_type_tourism">Туризм</string>
+	<string name="amenity_type_transportation">Транспорт</string>
+	<string name="indexing_address">Индексируется адрес</string>
+	<string name="indexing_map">Индексируются карты</string>
+	<string name="indexing_poi">Индексируются POI</string>
+	<string name="indexing_transport">Индексируется транспорт</string>
+	<string name="input_output_error">Произошла ошибка ввода/вывода</string>
+	<string name="km">км</string>
+	<string name="km_h">км/ч</string>
+	<string name="m">м</string>
+	<string name="old_map_index_is_not_supported">Карта старого формата \'\'{0}\'\' не поддерживается</string>
+	<string name="poi_filter_car_aid">Автопомощь</string>
+	<string name="poi_filter_closest_poi">Ближайшие poi</string>
+	<string name="poi_filter_custom_filter">Новый фильтр</string>
+	<string name="poi_filter_food_shop">Продуктовые магазины</string>
+	<string name="poi_filter_for_tourists">Для туристов</string>
+	<string name="poi_filter_fuel">Заправки</string>
+	<string name="poi_filter_namefinder">NameFinder (интернет)</string>
+	<string name="reading_cached_tiles">Чтение кэшированных тайлов...</string>
+	<string name="version_index_is_big_for_memory">Индекс \'\'{0}\'\' не помещается в памяти</string>
+	<string name="version_index_is_not_supported">Версия индекса \'\'{0}\'\' не поддерживается</string>
+	
+	
+	<string name="use_osmand_routing_service">OsmAnd offline навигация</string>
+	<string name="use_osmand_routing_service_descr">Использовать offline навигацию на длинные расстояние (экспериментально)</string>
+	<string name="osmand_routing_experimental">OsmAnd offline навигация является экспериментальной и не работает на расстояния более 20 километров.\n В этом случае автоматически переключается на Cloudmade.</string>
+	<string name="specified_dir_doesnt_exist">Невозможно найти указанную директорию.</string>
+	<string name="application_dir">Директория приложения</string>
+	<string name="application_dir_change_warning">Изменение директории не переносит файлы автоматически. Вы должны это сделать самостоятельно. Продолжить?</string>
+	
 	<string name="osmand_net_previously_installed">У вас имеется предыдущая версия OsmAnd. Все офлайн данные поддерживаются новым приложением. Избранные точки можно экспортировать в старом и импортировать в новом.</string>
 	<string name="build_installed">Сборка {0} успешно установлена ({1}).</string>
 	<string name="downloading_build">Загружается сборка...</string>

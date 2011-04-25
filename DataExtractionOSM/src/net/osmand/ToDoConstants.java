@@ -8,10 +8,11 @@ package net.osmand;
 public class ToDoConstants {
 	
 	
-//	    == Osmand application (TODO 124) ==
+//	    == Osmand application (TODO 126) ==
 
 //		=== Refactoring issues ===
 //		|| 116 || Move all messages.properties related Android application inside strings.xml to have better access with their translation ||
+//	    || 125 || Introduce service layer rather than singletons and put all related into new package (services). Review architecture. Split some big classes. ||
 		
 		
 //		=== Common issues ===

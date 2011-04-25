@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+
+	<string name="amenity_type_administrative">Administrative</string>
+	<string name="amenity_type_barrier">Barrier</string>
+	<string name="amenity_type_education">Education</string>
+	<string name="amenity_type_emergency">Emergency</string>
+	<string name="amenity_type_entertainment">Entertainment</string>
+	<string name="amenity_type_finance">Finance</string>
+	<string name="amenity_type_geocache">Geocache</string>
+	<string name="amenity_type_healthcare">Healthcare</string>
+	<string name="amenity_type_historic">Historic</string>
+	<string name="amenity_type_landuse">Landuse</string>
+	<string name="amenity_type_leisure">Leisure</string>
+	<string name="amenity_type_manmade">Man made</string>
+	<string name="amenity_type_military">Military</string>
+	<string name="amenity_type_natural">Natural</string>
+	<string name="amenity_type_office">Office</string>
+	<string name="amenity_type_other">Other</string>
+	<string name="amenity_type_shop">Shop</string>
+	<string name="amenity_type_sport">Sport</string>
+	<string name="amenity_type_sustenance">Sustenance</string>
+	<string name="amenity_type_tourism">Tourism</string>
+	<string name="amenity_type_transportation">Transportation</string>
+	<string name="indexing_address">Indexing address</string>
+	<string name="indexing_map">Indexing map</string>
+	<string name="indexing_poi">Indexing POI</string>
+	<string name="indexing_transport">Indexing transport</string>
+	<string name="input_output_error">Input output error occurred</string>
+	<string name="km">km</string>
+	<string name="km_h">km/h</string>
+	<string name="m">m</string>
+	<string name="old_map_index_is_not_supported">Deprecated format map data \'\'{0}\'\' is not supported</string>
+	<string name="poi_filter_car_aid">Car aid</string>
+	<string name="poi_filter_closest_poi">Closest poi</string>
+	<string name="poi_filter_custom_filter">Custom filter</string>
+	<string name="poi_filter_food_shop">Food shop</string>
+	<string name="poi_filter_for_tourists">For tourists</string>
+	<string name="poi_filter_fuel">Fuel</string>
+	<string name="poi_filter_namefinder">Online NameFinder</string>
+	<string name="reading_cached_tiles">Reading cached tiles...</string>
+	<string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
+	<string name="version_index_is_not_supported">The version of index \'\'{0}\'\' is not supported</string>
+					
 	<string name="use_osmand_routing_service">OsmAnd offline routing</string>
 	<string name="use_osmand_routing_service_descr">Use offline routing for long distances (experimental)</string>
 	<string name="osmand_routing_experimental">OsmAnd offline routing is experimental feature and it doesn\'t work for distance more than 20 km.\n Routing service is automatically switched to online Cloudmade.</string>

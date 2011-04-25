@@ -1,7 +1,7 @@
 package net.osmand.plus.views;
 
 import net.osmand.Algoritms;
-import net.osmand.Messages;
+import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
@@ -208,7 +208,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 					cachedMeters = 0;
 					cachedDistString = null;
 				} else {
-					cachedDistString = MapUtils.getFormattedDistance(cachedMeters);
+					cachedDistString = OsmAndFormatter.getFormattedDistance(cachedMeters, map);
 					float right = paintBlack.measureText(cachedDistString) + 25 * scaleCoefficient + boundsForDist.left;
 					if(cachedSpeedString != null){
 						boundsForSpeed.right = boundsForDist.right = Math.max(right, boundsForDist.right);
@@ -235,7 +235,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		if(map.getLastKnownLocation() != null && map.getLastKnownLocation().hasSpeed()){
 			if(Math.abs(map.getLastKnownLocation().getSpeed() - cachedSpeed) > .3f){
 				cachedSpeed = map.getLastKnownLocation().getSpeed();
-				cachedSpeedString = ((int) (cachedSpeed * 3.6f)) + Messages.getMessage(Messages.KEY_KM_H);
+				cachedSpeedString = ((int) (cachedSpeed * 3.6f)) + map.getString(R.string.km_h);
 				float right = paintBlack.measureText(cachedSpeedString) + 8 * scaleCoefficient + boundsForSpeed.left;
 				boundsForSpeed.right = boundsForDist.right = Math.max(right, boundsForDist.right);
 			}
@@ -312,7 +312,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 			}
 
 			rulerDistPix = (int) (view.getWidth() * screenPercent / dist * baseDist);
-			rulerDistName = MapUtils.getFormattedDistance(baseDist);
+			rulerDistName = OsmAndFormatter.getFormattedDistance(baseDist, map);
 			rulerBaseLine = (int) (view.getHeight() - 70 * dm.density);
 			if(view.getParent() instanceof View){
 				View zoomControls = ((View) view.getParent()).findViewById(R.id.ZoomControls);
@@ -368,7 +368,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 							canvas.drawText(cachedExitOut, boundsForMiniRoute.centerX() - 6 * scaleCoefficient, 
 									boundsForMiniRoute.centerY() - 9 * scaleCoefficient, paintBlack);
 						}
-						canvas.drawText(MapUtils.getFormattedDistance(d), boundsForMiniRoute.left + 10 * scaleCoefficient, 
+						canvas.drawText(OsmAndFormatter.getFormattedDistance(d, map), boundsForMiniRoute.left + 10 * scaleCoefficient, 
 								boundsForMiniRoute.bottom - 9 * scaleCoefficient, paintBlack);
 					}
 				}
