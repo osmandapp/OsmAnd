@@ -213,6 +213,25 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     	unregisterReceiver(broadcastReceiver);
     }
     
+    
+    private void fillTime(ListPreference component, int[] seconds, int[] minutes, int currentSeconds){
+    	int minutesLength = minutes == null? 0 : minutes.length;
+    	int secondsLength = seconds == null? 0 : seconds.length;
+    	
+    	
+    	String[] ints = new String[secondsLength + minutesLength];
+		String[] intDescriptions = new String[ints.length];
+		for (int i = 0; i < secondsLength; i++) {
+			ints[i] = seconds[i] + "";
+			intDescriptions[i] = ints[i] + " " + getString(R.string.int_seconds); //$NON-NLS-1$
+		}
+		for (int i = 0; i < minutesLength; i++) {
+			ints[secondsLength + i] = (minutes[i] * 60) + "";
+			intDescriptions[secondsLength + i] = minutes[i] + " " + getString(R.string.int_min); //$NON-NLS-1$
+		}
+		fill(component, intDescriptions, ints, currentSeconds+"");
+    }
+    
     public void updateAllSettings(){
     	SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
     	for(BooleanPreference b : booleanPreferences){
@@ -230,30 +249,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		positionOnMap.setEntries(e);
 		positionOnMap.setValueIndex(OsmandSettings.getPositionOnMap(prefs));
 		
-		fill(saveTrackInterval, new String[]{
-				resources.getString(R.string.interval_1_second),
-				resources.getString(R.string.interval_2_seconds),
-				resources.getString(R.string.interval_5_seconds),
-				resources.getString(R.string.interval_15_seconds),
-				resources.getString(R.string.interval_30_seconds),
-				resources.getString(R.string.interval_1_minute),
-				resources.getString(R.string.interval_5_minutes)}, //				
-				new String[]{"1", "2", "5", "15", "30", "60", "300"}, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
-				OsmandSettings.getSavingTrackInterval(prefs)+""); //$NON-NLS-1$
+		fillTime(saveTrackInterval, new int[]{1, 2, 3, 5, 15, 20, 30}, new int[]{1, 2, 3, 5}, OsmandSettings.getSavingTrackInterval(prefs)); //$NON-NLS-1$
 		
-		String[] ints = new String[]{"0", "1", "2", "5", "8", "10", "15", "20", "25", "30", "40", "45", "60", "90" };  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$ //$NON-NLS-11$ //$NON-NLS-12$ //$NON-NLS-13$ //$NON-NLS-14$
-		String[] intDescriptions = new String[ints.length];
-		for(int i=0; i<intDescriptions.length; i++){
-			intDescriptions[i] = ints[i] + " " + getString(R.string.int_min); //$NON-NLS-1$
-		}
-		fill(routeServiceInterval, intDescriptions, ints, OsmandSettings.getServiceOffInterval(prefs)/60000+""); //$NON-NLS-1$
+		fillTime(routeServiceInterval, new int[]{0, 30, 45, 60}, new int[]{2, 3, 5, 8, 10, 15, 20, 30, 40, 50, 70, 90}, OsmandSettings.getServiceOffInterval(prefs)/1000); //$NON-NLS-1$
 		
-		ints = new String[]{"15", "30", "45", "60", "90", "120", "180", "300", "600"};  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$
-		intDescriptions = new String[ints.length];
-		for(int i=0; i<intDescriptions.length; i++){
-			intDescriptions[i] = ints[i] + " " + getString(R.string.int_seconds); //$NON-NLS-1$
-		}
-		fill(routeServiceWaitInterval, intDescriptions, ints, OsmandSettings.getServiceOffWaitInterval(prefs)/1000+""); //$NON-NLS-1$
+		fillTime(routeServiceWaitInterval, new int[]{15, 30, 45, 60, 90}, new int[]{2, 3, 5, 10}, OsmandSettings.getServiceOffWaitInterval(prefs)/1000);
 		
 		fill(rotateMap, //
 				new String[]{getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt)}, //
@@ -468,7 +468,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			edit.putInt(OsmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE, Integer.parseInt((String) newValue));
 			edit.commit();
 		} else if (preference == routeServiceInterval) {
-			edit.putInt(OsmandSettings.SERVICE_OFF_INTERVAL, Integer.parseInt((String) newValue) * 60000);
+			edit.putInt(OsmandSettings.SERVICE_OFF_INTERVAL, Integer.parseInt((String) newValue) * 1000);
 			edit.commit();
 		} else if (preference == routeServiceWaitInterval) {
 			edit.putInt(OsmandSettings.SERVICE_OFF_WAIT_INTERVAL, Integer.parseInt((String) newValue) * 1000);

@@ -8,14 +8,15 @@ package net.osmand;
 public class ToDoConstants {
 	
 	
-//	    == Osmand application (TODO 126) ==
+//	    == Osmand application (TODO 127) ==
+	    // FIX Background service
 
 //		=== Refactoring issues ===
-//		|| 116 || Move all messages.properties related Android application inside strings.xml to have better access with their translation ||
 //	    || 125 || Introduce service layer rather than singletons and put all related into new package (services). Review architecture. Split some big classes. ||
 		
 		
 //		=== Common issues ===
+//      || 126 || Do not use network location if gps was found recently || 	
 //	    || 124 || Animated transition using only raster images (?) - skip animations (!) - don not render vectoring for animations ||
 //      || 123 || Improve gpx file showing (very slow for big files) ||
 //      || 122 || Frozen sqlite db images (bug?). When images are loaded into sqlite the whole map is frozen || 	
@@ -51,7 +52,7 @@ public class ToDoConstants {
 	
 	///////////////////////////   DONE //////////////////////////////
 	// DONE ANDROID :
-
+//	|| 116 || Move all messages.properties related Android application inside strings.xml to have better access with their translation ||
 	
 	// DONE SWING
 
