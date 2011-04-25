@@ -104,7 +104,6 @@ public class BinaryRouteDataReader {
 		}
 		
 		public boolean isOneWay(int highwayAttributes){
-			// TODO correctly define roundabout!!!
 			return MapRenderingTypes.isOneWayWay(highwayAttributes) || 
 					MapRenderingTypes.isRoundabout(highwayAttributes);
 		}
@@ -160,17 +159,6 @@ public class BinaryRouteDataReader {
 			return 30;
 		}
 
-		/**
-		 * @return turn time in milliseconds
-		 */
-		public double calculateTurnTime(int middley, int middlex, int x, int y, boolean lineAreNotConnected) {
-			if(!lineAreNotConnected){
-				return 20;
-			} else {
-				
-			}
-			return 0;
-		}
 
 		public double calculateTurnTime(int middley, int middlex, int x, int y, RouteSegment segment, RouteSegment next, int j) {
 			boolean lineAreNotConnected = j < segment.road.getPointsLength() - 1 || next.segmentStart != 0;
@@ -482,7 +470,8 @@ public class BinaryRouteDataReader {
 					while(next != null){
 						long nts = (next.road.id << 8l) + next.segmentStart;
 						/* next.road.id >> 3 != road.id >> 3 - used that line for debug with osm map */
-						if(next.road.id != road.id && !visitedSegments.contains(nts)){
+						// road.id could be equal on roundabout, but we should accept them
+						if(!visitedSegments.contains(nts)){
 							int type = -1;
 							for(int i = 0; i< road.getRestrictionCount(); i++){
 								if(road.getRestriction(i) == next.road.id){
