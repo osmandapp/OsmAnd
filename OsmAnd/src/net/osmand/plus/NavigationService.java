@@ -39,7 +39,8 @@ public class NavigationService extends Service implements LocationListener {
 	private RoutingHelper routingHelper;
 	private Notification notification;
 	private SharedPreferences settings;
-	
+	private boolean serviceActive = true;
+	private boolean registered = false;
 	
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -53,18 +54,27 @@ public class NavigationService extends Service implements LocationListener {
 
 			@Override
 			public void run() {
+				if (!serviceActive) {
+					return;
+				}
 				LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-				if(register){
-					boolean continuous = serviceOffInterval == 0;
-					locationManager.requestLocationUpdates(serviceOffProvider, continuous? 1000 : serviceOffInterval, 0, NavigationService.this);
-					if(!continuous){
+				if (register) {
+					registered = true;
+					locationManager.requestLocationUpdates(serviceOffProvider, 1000, 0, NavigationService.this);
+					// Wait serviceError and 
+					if (!isContinuous() || serviceOffInterval > serviceError) {
 						delayedAction(false, serviceError);
 					}
 				} else {
-					locationManager.removeUpdates(NavigationService.this);
-					delayedAction(true, serviceOffInterval);
+					// That is needed to not remove twice
+					// RemovingUpdates : after serviceError and after successful found position   
+					if(registered){
+						registered = false;
+						locationManager.removeUpdates(NavigationService.this);
+						delayedAction(true, serviceOffInterval);
+					}
 				}
-				
+
 			}
 			
 		}, delay);
@@ -75,27 +85,27 @@ public class NavigationService extends Service implements LocationListener {
 	public void onCreate() {
 		super.onCreate();
 		setForeground(true);
+		serviceActive = true;
 		handler = new Handler();
 		settings = OsmandSettings.getSharedPreferences(this);
 		serviceOffInterval = OsmandSettings.getServiceOffInterval(settings);
 		serviceOffProvider = OsmandSettings.getServiceOffProvider(settings);
 		serviceError = OsmandSettings.getServiceOffWaitInterval(settings);
-		// TODO Test values
-//		serviceOffInterval = 20 * 1000;
-//		serviceError = 15 * 1000;
 		savingTrackHelper = new SavingTrackHelper(this);
-		delayedAction(true, 500);
+		
 		routingHelper = ((OsmandApplication)getApplication()).getRoutingHelper();
 		OsmandSettings.setServiceOffEnabled(this, true);
 		
-		registerReceiver(new BroadcastReceiver(){
+		registerReceiver(new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				NavigationService.this.stopSelf();
 			}
-			
+
 		}, new IntentFilter(OSMAND_STOP_SERVICE_ACTION));
 		
+		// register listener
+		delayedAction(true, 500);
 		Intent notificationIntent = new Intent(OSMAND_STOP_SERVICE_ACTION);
 		notification = new Notification(R.drawable.icon, "", //$NON-NLS-1$
 				System.currentTimeMillis());
@@ -107,6 +117,10 @@ public class NavigationService extends Service implements LocationListener {
 		mNotificationManager.notify(NOTIFICATION_SERVICE_ID, notification);
 	}
 	
+	private boolean isContinuous(){
+		return serviceOffInterval == 0;
+	}
+	
 	
 	@Override
 	public void onDestroy() {
@@ -114,6 +128,7 @@ public class NavigationService extends Service implements LocationListener {
 		LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 		locationManager.removeUpdates(this);
 		OsmandSettings.setServiceOffEnabled(this, false);
+		serviceActive = false;
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		mNotificationManager.cancel(NOTIFICATION_SERVICE_ID);
 		
@@ -124,6 +139,10 @@ public class NavigationService extends Service implements LocationListener {
 	@Override
 	public void onLocationChanged(Location location) {
 		if(location != null && !OsmandSettings.getMapActivityEnabled(settings)){
+			if(!isContinuous()){
+				// unregister listener and wait next time
+				delayedAction(false, 500);
+			}
 			savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(), 
 					location.getSpeed(), location.getTime(), settings);
 			if(routingHelper.isFollowingMode()){

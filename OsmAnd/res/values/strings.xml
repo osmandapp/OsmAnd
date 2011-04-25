@@ -412,13 +412,6 @@
 <string name="app_mode_pedestrian">Pedestrian</string>
 <string name="position_on_map_center">Center</string>
 <string name="position_on_map_bottom">Bottom</string>
-<string name="interval_1_second">1 second</string>
-<string name="interval_2_seconds">2 seconds</string>
-<string name="interval_5_seconds">5 seconds</string>
-<string name="interval_15_seconds">15 seconds</string>
-<string name="interval_30_seconds">30 seconds</string>
-<string name="interval_1_minute">1 minute</string>
-<string name="interval_5_minutes">5 minutes</string>
 <string name="navigate_point_top_text">Input latitude &amp; longitude in the selected format (D - degrees, M - minutes, S - seconds)</string>
 <string name="navigate_point_latitude">Latitude</string>
 <string name="navigate_point_longitude">Longitude</string>
