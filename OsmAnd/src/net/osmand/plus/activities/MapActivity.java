@@ -122,12 +122,15 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	// stupid error but anyway hero 2.1 : always lost gps signal (temporarily unavailable) for timeout = 2000
 	private static final int GPS_TIMEOUT_REQUEST = 1000;
 	private static final int GPS_DIST_REQUEST = 5;
+	// use only gps (not network) for 12 seconds 
+	private static final int USE_ONLY_GPS_INTERVAL = 12000; 
 	
 	private boolean providerSupportsBearing = false;
 	@SuppressWarnings("unused")
 	private boolean providerSupportsSpeed = false;
 	private String currentLocationProvider = null;
 	private long lastTimeAutoZooming = 0;
+	private long lastTimeGPXLocationFixed = 0;
 	
     /** Called when the activity is first created. */
 	private OsmandMapTileView mapView;
@@ -603,8 +606,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		return false;
 	}
 	
-	private boolean useOnlyGPS(){
-		return (routingHelper != null && routingHelper.isFollowingMode()) || isRunningOnEmulator();
+	private boolean useOnlyGPS() {
+		return (routingHelper != null && routingHelper.isFollowingMode())
+				|| (System.currentTimeMillis() - lastTimeGPXLocationFixed) < USE_ONLY_GPS_INTERVAL || isRunningOnEmulator();
 	}
     
 
@@ -642,6 +646,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private LocationListener gpsListener = new LocationListener(){
 		@Override
 		public void onLocationChanged(Location location) {
+			if (location != null) {
+				lastTimeGPXLocationFixed = location.getTime();
+			}
 			setLocation(location);
 		}
 
