@@ -35,6 +35,7 @@
 		<service android:process="net.osmand.plus" android:label="@string/process_navigation_service" android:name=".NavigationService">
 			<intent-filter><action android:name="net.osmand.plus.NavigationService"></action></intent-filter>
 		</service>
+		<receiver android:name=".OnNavigationServiceAlarmReceiver"/>
 </application>
 
 

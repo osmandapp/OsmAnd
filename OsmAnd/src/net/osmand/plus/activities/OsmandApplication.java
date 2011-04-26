@@ -11,6 +11,7 @@ import java.util.List;
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.ProgressDialogImplementation;
@@ -45,6 +46,7 @@ public class OsmandApplication extends Application {
 	private ProgressDialog progressDlg;
 	private Handler uiHandler;
 	private DayNightHelper daynightHelper;
+	private NavigationService navigationService;
 	
 	
     public void	onCreate(){
@@ -157,6 +159,14 @@ public class OsmandApplication extends Application {
 			routingHelper.getVoiceRouter().setPlayer(player);
 		}
 		return player.init(OsmandSettings.getVoiceProvider(OsmandSettings.getPrefs(this)));
+	}
+	
+	public NavigationService getNavigationService() {
+		return navigationService;
+	}
+	
+	public void setNavigationService(NavigationService navigationService) {
+		this.navigationService = navigationService;
 	}
 
 	public void startApplication() {

@@ -779,15 +779,7 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SERVICE_OFF_ENABLED = "service_off_enabled"; //$NON-NLS-1$
-	public static final boolean SERVICE_OFF_ENABLED_DEF = false; 
-	public static boolean getServiceOffEnabled(SharedPreferences prefs) {
-		return prefs.getBoolean(SERVICE_OFF_ENABLED, SERVICE_OFF_ENABLED_DEF);
-	}
 	
-	public static boolean setServiceOffEnabled(Context ctx, boolean en) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putBoolean(SERVICE_OFF_ENABLED, en).commit();
-	}
 	
 	
 	// this value string is synchronized with settings_pref.xml preference name
