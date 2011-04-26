@@ -265,7 +265,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				new String[]{LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER}, //
 				OsmandSettings.getServiceOffProvider(prefs));
 		
-		routeServiceEnabled.setChecked(OsmandSettings.getServiceOffEnabled(prefs));
+		routeServiceEnabled.setChecked(getMyApplication().getNavigationService() != null);
 
 		fill(mapScreenOrientation, //
 				new String[] {
@@ -484,11 +484,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			if ((Boolean) newValue) {
 				ComponentName name = startService(serviceIntent);
 				if (name == null) {
-					routeServiceEnabled.setChecked(OsmandSettings.getServiceOffEnabled(prefs));
+					routeServiceEnabled.setChecked(getMyApplication().getNavigationService() != null);
 				}
 			} else {
 				if(!stopService(serviceIntent)){
-					routeServiceEnabled.setChecked(OsmandSettings.getServiceOffEnabled(prefs));
+					routeServiceEnabled.setChecked(getMyApplication().getNavigationService() != null);
 				}
 			}
 		} else if (preference == routerPreference) {
