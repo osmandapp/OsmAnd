@@ -9,33 +9,29 @@ public class ToDoConstants {
 	
 	
 //	    == Osmand application (TODO 127) ==
-	    // FIX Background service
 
 //		=== Refactoring issues ===
-//	    || 125 || Introduce service layer rather than singletons and put all related into new package (services). Review architecture. Split some big classes. ||
+//	    !|| 125 || Introduce service layer rather than singletons and put all related into new package (services). Review architecture. Split some big classes. ||
 		
 		
 //		=== Common issues ===
-//      || 126 || Do not use network location if gps was found recently || 	
-//	    || 124 || Animated transition using only raster images (?) - skip animations (!) - don not render vectoring for animations ||
-//      || 123 || Improve gpx file showing (very slow for big files) ||
-//      || 122 || Frozen sqlite db images (bug?). When images are loaded into sqlite the whole map is frozen || 	
-//      || 121 || Filter network location from GPS location (wait for 10 seconds before start using network location) ||
-//      || 120 || Show icons over poi circle ||
-//      || 119 || Dialog on main screen tips and tricks ||
-//      || 118 || Config switching between maps on different zoom levels <14 (using raster), > 14 vector ||
-//      || 117 || Share location (send/get location from SMS, email) - Issue ||	
-//		|| 112 || Investigate exiting/minimizing app (Issue) ||
-//		|| 97 || For voice navigation consider current speed of vehicle. Especially when speed > 50 pronounce more than 200 m ||
-//		|| 104 || Add activity to show current loaded indexes and information about them ||
-//		|| 86 || Allow to add/edit custom tags to POI objects (Issue) ||
-//		|| 92 || Support poi index with standard map index and unify POI categories (unify done +, works very slow) ||
-//		|| 96 || Introduce settings for MPH, imperial units ||
-//		|| 113 || Calculate speed cameras/bumps on the road (announce about them) ||
-//		|| 110 || Use android voice for pronounce command (could be used in future to pronounce street) (Issue) ||	
-//		|| 111 || Investigate showing street name while driving (Issue) ||	
-//		|| 86 || Allow to add/edit custom tags to POI objects (Issue) ||
-//		|| 96 || Introduce settings for MPH, imperial units (Issue) ||
+//      || 123 || Improve gpx file showing (very slow for big files) (Issue 412) ||
+//      || 124 || Animated transition using only raster images (?) - skip animations (!) - don not render vectoring for animations (Issue 238) ||
+//      || 122 || Frozen sqlite db images (bug?). When images are loaded into sqlite the whole map is frozen (issue 413) || 	
+//      || 120 || Show icons over poi circle (issue 414) ||
+//      || 110 || Use android voice for pronounce command (could be used in future to pronounce street) (Issue 70) ||
+//      || 119 || Dialog on main screen tips and tricks (Issue 415) ||
+//      || 117 || Share location (send/get location from SMS, email) (Issue 416)||	
+//		|| 112 || Investigate exiting/minimizing app (Issue 214) ||
+//      || 118 || Config switching between maps on different zoom levels <14 (using raster), > 14 vector (Issue 419) ||
+//		|| 97 || For voice navigation consider current speed of vehicle. Especially when speed > 50 pronounce more than 200 m (Issue 420) ||
+//		|| 104 || Add activity to show current loaded indexes and information about them (Issue 366) ||
+//      || 96 || Introduce settings for MPH, imperial units (Issue 54) ||
+//      || 111 || Investigate showing street name while driving (Issue 286) ||  
+//      || 86 || Allow to add/edit custom tags to POI objects (Issue 44) ||
+//		|| 92 || Support poi index with standard map index and unify POI categories (unify done +, works very slow) (Issue 417) ||
+//		|| 113 || Calculate speed cameras/bumps on the road (announce about them) (Issue 418) ||
+
 
 	
 //		=== Not clear if really needed (Means golden ratio complexity/necessity) ===
@@ -52,6 +48,7 @@ public class ToDoConstants {
 	
 	///////////////////////////   DONE //////////////////////////////
 	// DONE ANDROID :
+//  || 126 || Do not use network location if gps was found recently (Issue 407) ||
 //	|| 116 || Move all messages.properties related Android application inside strings.xml to have better access with their translation ||
 	
 	// DONE SWING
