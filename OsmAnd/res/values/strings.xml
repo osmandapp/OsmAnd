@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-
+	<string name="add_waypoint_dialog_added">Waypoint \'\'{0}\'\' was successfully added</string>
+	<string name="add_waypoint_dialog_title">Add waypoint to recorded GPX track</string>
+	<string name="context_menu_item_add_waypoint">Add Gpx waypoint</string>
 	<string name="amenity_type_administrative">Administrative</string>
 	<string name="amenity_type_barrier">Barrier</string>
 	<string name="amenity_type_education">Education</string>
@@ -42,7 +44,7 @@
 	<string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
 	<string name="version_index_is_not_supported">The version of index \'\'{0}\'\' is not supported</string>
 					
-	<string name="use_osmand_routing_service">OsmAnd offline routing</string>
+	<string name="use_osmand_routing_service">OsmAnd routing</string>
 	<string name="use_osmand_routing_service_descr">Use offline routing for long distances (experimental)</string>
 	<string name="osmand_routing_experimental">OsmAnd offline routing is experimental feature and it doesn\'t work for distance more than 20 km.\n Routing service is automatically switched to online Cloudmade.</string>
 	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
