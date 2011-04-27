@@ -93,9 +93,17 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = getReadableDatabase();
 		if(db != null){
 			Cursor q = db.query(false, TRACK_NAME, new String[0], null, null, null, null, null, null);
-			boolean m = q.moveToFirst();
-			q.close();
-			return m;
+                        boolean has = q.moveToFirst();
+                        q.close();
+			if(has) {
+                            return true;
+                        }
+                        q = db.query(false, POINT_NAME, new String[0], null, null, null, null, null, null);
+			has = q.moveToFirst();
+                        q.close();
+			if(has) {
+                            return true;
+                        }
 		}
 		
 		return false;
@@ -139,6 +147,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		if (db != null && warnings.isEmpty()) {
 			// remove all from db
 			db.execSQL("DELETE FROM " + TRACK_NAME + " WHERE " + TRACK_COL_DATE + " <= ?", new Object[] { System.currentTimeMillis() }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			db.execSQL("DELETE FROM " + POINT_NAME + " WHERE " + POINT_COL_DATE + " <= ?", new Object[] { System.currentTimeMillis() }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		return warnings;
 	}
