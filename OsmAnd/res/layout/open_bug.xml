@@ -6,7 +6,7 @@
   <TableRow>
   <TextView android:id="@+id/TextView"  android:layout_marginLeft="5dp"
   			android:layout_height="wrap_content" android:text="@string/osb_comment_dialog_message"></TextView>
-  <EditText android:text="" android:id="@+id/BugMessage" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
+  <EditText android:text="" android:id="@+id/BugMessage" android:minLines="3" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
   			android:layout_height="wrap_content" ></EditText>
   </TableRow>
   <TableRow>
