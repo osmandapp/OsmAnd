@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.TimeZone;
 
 import net.osmand.plus.R;
@@ -25,7 +24,6 @@ import org.xmlpull.v1.XmlSerializer;
 import android.content.Context;
 import android.location.Location;
 import android.util.Xml;
-import android.widget.Toast;
 
 public class GPXUtilities {
 	public final static Log log = LogUtil.getLog(GPXUtilities.class);
@@ -47,12 +45,28 @@ public class GPXUtilities {
 		public double lat;
 		public double lon;
 		public String name;
+		// by default
+		public long time = 0;
+	}
+	
+	public static class TrkSegment {
+		public List<TrkPt> points = new ArrayList<TrkPt>();
+	}
+	
+	public static class Track {
+		public List<TrkSegment> segments = new ArrayList<TrkSegment>();
+	}
+	
+	public static class GPXFile {
+		public List<Track> tracks = new ArrayList<Track>();
+		public List<WptPt> points = new ArrayList<WptPt>();
 	}
 	
 	
-	
-	public static boolean saveToXMLFiles(File fout, List<WptPt> data, Context ctx ){
+	public static String writeGpxFile(File fout, GPXFile file, Context ctx) {
 		try {
+			SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT);
+			format.setTimeZone(TimeZone.getTimeZone("UTC"));
 			FileOutputStream output = new FileOutputStream(fout);
 			XmlSerializer serializer = Xml.newSerializer();
 			serializer.setOutput(output, "UTF-8"); //$NON-NLS-1$
@@ -65,59 +79,11 @@ public class GPXUtilities {
 			serializer.attribute("xsi", "schemaLocation", "http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			serializer.attribute(null, "xmlns", "http://www.topografix.com/GPX/1/1"); //$NON-NLS-1$ //$NON-NLS-2$
 
-			for (WptPt l : data) {
-				serializer.startTag(null, "wpt"); //$NON-NLS-1$
-				serializer.attribute(null, "lat", latLonFormat.format(l.lat)); //$NON-NLS-1$ 
-				serializer.attribute(null, "lon", latLonFormat.format(l.lon)); //$NON-NLS-1$ //$NON-NLS-2$
-				serializer.startTag(null, "name"); //$NON-NLS-1$
-				serializer.text(l.name);
-				serializer.endTag(null, "name"); //$NON-NLS-1$
-				serializer.endTag(null, "wpt"); //$NON-NLS-1$
-			}
-
-			serializer.endTag(null, "gpx"); //$NON-NLS-1$
-			serializer.flush();
-			serializer.endDocument();
-
-			return true;
-		} catch (RuntimeException e) {
-			log.error("Error saving gpx", e); //$NON-NLS-1$
-			Toast.makeText(ctx, ctx.getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_LONG).show();
-			return false;
-		} catch (IOException e) {
-			log.error("Error saving gpx", e); //$NON-NLS-1$
-			Toast.makeText(ctx, ctx.getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_LONG).show();
-			return false;
-		}
-		
-	}
-	
-	public static String saveToXMLFiles(File dir, Map<String, List<List<TrkPt>>> data, Context ctx){
-		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT);
-		format.setTimeZone(TimeZone.getTimeZone("UTC"));
-		try {
-			for (String f : data.keySet()) {
-				File fout = new File(dir, f + ".gpx"); //$NON-NLS-1$
-				int ind = 1;
-				while(fout.exists()){
-					fout = new File(dir, f + "_"+(++ind)+".gpx"); //$NON-NLS-1$ //$NON-NLS-2$
-				}
-				FileOutputStream output = new FileOutputStream(fout);
-				XmlSerializer serializer = Xml.newSerializer();
-				serializer.setOutput(output, "UTF-8"); //$NON-NLS-1$
-				serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true); //$NON-NLS-1$
-				serializer.startDocument("UTF-8", true); //$NON-NLS-1$
-				serializer.startTag(null, "gpx"); //$NON-NLS-1$
-				serializer.attribute(null, "version", "1.1"); //$NON-NLS-1$ //$NON-NLS-2$
-				serializer.attribute(null, "creator", Version.APP_NAME_VERSION); //$NON-NLS-1$
-				serializer.attribute("xmlns", "xsi", "http://www.w3.org/2001/XMLSchema-instance"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				serializer.attribute("xsi", "schemaLocation", "http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				serializer.attribute(null, "xmlns", "http://www.topografix.com/GPX/1/1"); //$NON-NLS-1$ //$NON-NLS-2$
-				
+			for (Track track : file.tracks) {
 				serializer.startTag(null, "trk"); //$NON-NLS-1$
-				for(List<TrkPt> l : data.get(f)){
+				for (TrkSegment segment : track.segments) {
 					serializer.startTag(null, "trkseg"); //$NON-NLS-1$
-					for(TrkPt p : l){
+					for (TrkPt p : segment.points) {
 						serializer.startTag(null, "trkpt"); //$NON-NLS-1$
 						serializer.attribute(null, "lat", latLonFormat.format(p.lat)); //$NON-NLS-1$ //$NON-NLS-2$
 						serializer.attribute(null, "lon", latLonFormat.format(p.lon)); //$NON-NLS-1$ //$NON-NLS-2$
@@ -125,25 +91,39 @@ public class GPXUtilities {
 						serializer.text(format.format(new Date(p.time)));
 						serializer.endTag(null, "time"); //$NON-NLS-1$
 						serializer.startTag(null, "ele"); //$NON-NLS-1$
-						serializer.text(p.ele+""); //$NON-NLS-1$
+						serializer.text(p.ele + ""); //$NON-NLS-1$
 						serializer.endTag(null, "ele"); //$NON-NLS-1$
 						if (p.speed > 0) {
 							serializer.startTag(null, "speed"); //$NON-NLS-1$
 							serializer.text(p.speed + ""); //$NON-NLS-1$
 							serializer.endTag(null, "speed"); //$NON-NLS-1$
 						}
-						
+
 						serializer.endTag(null, "trkpt"); //$NON-NLS-1$
 					}
 					serializer.endTag(null, "trkseg"); //$NON-NLS-1$
 				}
 				serializer.endTag(null, "trk"); //$NON-NLS-1$
-				
-				serializer.endTag(null, "gpx"); //$NON-NLS-1$
-				serializer.flush();
-				serializer.endDocument();
 			}
-			return null;
+			
+			for (WptPt l : file.points) {
+				serializer.startTag(null, "wpt"); //$NON-NLS-1$
+				serializer.attribute(null, "lat", latLonFormat.format(l.lat)); //$NON-NLS-1$ 
+				serializer.attribute(null, "lon", latLonFormat.format(l.lon)); //$NON-NLS-1$ //$NON-NLS-2$
+				serializer.startTag(null, "name"); //$NON-NLS-1$
+				serializer.text(l.name);
+				serializer.endTag(null, "name"); //$NON-NLS-1$
+				if (l.time != 0) {
+					serializer.startTag(null, "time"); //$NON-NLS-1$
+					serializer.text(format.format(new Date(l.time)));
+					serializer.endTag(null, "time"); //$NON-NLS-1$
+				}
+				serializer.endTag(null, "wpt"); //$NON-NLS-1$
+			}
+
+			serializer.endTag(null, "gpx"); //$NON-NLS-1$
+			serializer.flush();
+			serializer.endDocument();
 		} catch (RuntimeException e) {
 			log.error("Error saving gpx", e); //$NON-NLS-1$
 			return ctx.getString(R.string.error_occurred_saving_gpx);
@@ -151,6 +131,7 @@ public class GPXUtilities {
 			log.error("Error saving gpx", e); //$NON-NLS-1$
 			return ctx.getString(R.string.error_occurred_saving_gpx);
 		}
+		return null;
 	}
 	
 	

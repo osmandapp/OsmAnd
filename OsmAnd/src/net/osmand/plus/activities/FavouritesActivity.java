@@ -14,6 +14,7 @@ import java.util.Set;
 import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
 import net.osmand.OsmAndFormatter;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXFileResult;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.osm.LatLon;
@@ -200,18 +201,21 @@ public class FavouritesActivity extends ListActivity {
 				Toast.makeText(this, R.string.sd_dir_not_accessible, Toast.LENGTH_LONG).show();
 			} else {
 				File f = new File(appDir, FILE_TO_SAVE);
-				List<WptPt> wpt = new ArrayList<WptPt>();
+				GPXFile gpx = new GPXFile();
 				for (int i = 0; i < favouritesAdapter.getCount(); i++) {
 					FavouritePoint p = favouritesAdapter.getItem(i);
 					WptPt pt = new WptPt();
 					pt.lat = p.getLatitude();
 					pt.lon = p.getLongitude();
 					pt.name = p.getName();
-					wpt.add(pt);
+					gpx.points.add(pt);
 				}
-				if(GPXUtilities.saveToXMLFiles(f, wpt, this)){
+				String warning = GPXUtilities.writeGpxFile(f, gpx, this);
+				if(warning == null){
 					Toast.makeText(this, MessageFormat.format(getString(R.string.fav_saved_sucessfully), f.getAbsolutePath()), 
 							Toast.LENGTH_LONG).show();
+				} else {
+					Toast.makeText(this, warning, Toast.LENGTH_LONG).show();
 				}
 			}
 		} else if(item.getItemId() == IMPORT_ID){

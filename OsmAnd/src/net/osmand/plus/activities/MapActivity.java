@@ -1604,6 +1604,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		actions.add(resources.getString(R.string.context_menu_item_search_transport));
 		actions.add(resources.getString(R.string.context_menu_item_add_favorite));
 		actions.add(resources.getString(R.string.context_menu_item_create_poi));
+		actions.add(resources.getString(R.string.context_menu_item_add_waypoint));
 		actions.add(resources.getString(R.string.context_menu_item_open_bug));
 		actions.add(resources.getString(R.string.context_menu_item_update_map));
 		actions.add(resources.getString(R.string.context_menu_item_download_map));
@@ -1637,10 +1638,12 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					EditingPOIActivity activity = new EditingPOIActivity(MapActivity.this, (OsmandApplication) getApplication(), mapView);
 					activity.showCreateDialog(latitude, longitude);
 				} else if(which == 6){
-					osmBugsLayer.openBug(MapActivity.this, getLayoutInflater(), mapView, latitude, longitude);
+					addWaypoint(latitude, longitude);
 				} else if(which == 7){
-					reloadTile(mapView.getZoom(), latitude, longitude);
+					osmBugsLayer.openBug(MapActivity.this, getLayoutInflater(), mapView, latitude, longitude);
 				} else if(which == 8){
+					reloadTile(mapView.getZoom(), latitude, longitude);
+				} else if(which == 9){
 					DownloadTilesDialog dlg = new DownloadTilesDialog(MapActivity.this, 
 							(OsmandApplication) getApplication(), mapView);
 					dlg.openDialog();
@@ -1708,6 +1711,27 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		builder.create().show();
     }
 
+    protected void addWaypoint(final double latitude, final double longitude){
+    	
+    	Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.add_waypoint_dialog_title);
+		final EditText editText = new EditText(this);
+		builder.setView(editText);
+		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				String name = editText.getText().toString();
+				savingTrackHelper.insertPointData(latitude, longitude, System.currentTimeMillis(), name);
+				Toast.makeText(MapActivity.this, MessageFormat.format(getString(R.string.add_waypoint_dialog_added), name), Toast.LENGTH_SHORT)
+							.show();
+				
+			}
+		});
+		builder.create().show();
+    }
+    
+    
 	private void openChangeLocationDialog() {
 		NavigatePointActivity dlg = new NavigatePointActivity(this);
 		dlg.showDialog();
