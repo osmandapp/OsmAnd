@@ -179,13 +179,6 @@
 	<string name="index_settings_descr">Obtener/actualizzar datos para uso sin Internet</string>
 	<string name="int_min">min.</string>
 	<string name="int_seconds">segundos</string>
-	<string name="interval_15_seconds">15 segundos</string>
-	<string name="interval_1_minute">1 minuto</string>
-	<string name="interval_1_second">1 segundo</string>
-	<string name="interval_2_seconds">2 segundos</string>
-	<string name="interval_30_seconds">30 segundos</string>
-	<string name="interval_5_minutes">5 minutos</string>
-	<string name="interval_5_seconds">5 segundos</string>
 	<string name="invalid_locations">Los lugares no son válidos</string>
 	<string name="items_were_selected">Se seleccionó {0} artículos</string>
 	<string name="layer_favorites">Favoritos</string>
