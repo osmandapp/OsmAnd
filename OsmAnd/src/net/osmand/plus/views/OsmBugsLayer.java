@@ -314,23 +314,22 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 		return bugs;
 	}
 	
-
-	public void openBug(final Context ctx, LayoutInflater layoutInflater, final OsmandMapTileView mapView,  final double latitude, final double longitude){
+	private void openBugAlertDialog(final Context ctx, final LayoutInflater layoutInflater, final OsmandMapTileView mapView, final double latitude, final double longitude, String message, String authorName){
+		final View openBug = layoutInflater.inflate(R.layout.open_bug, null);
 		Builder builder = new AlertDialog.Builder(ctx);
 		builder.setTitle(R.string.osb_add_dialog_title);
-		final View view = layoutInflater.inflate(R.layout.open_bug, null);
-		builder.setView(view);
-		((EditText)view.findViewById(R.id.AuthorName)).setText(OsmandSettings.getUserNameForOsmBug(OsmandSettings.getPrefs(ctx)));
+		builder.setView(openBug);
+		((EditText)openBug.findViewById(R.id.BugMessage)).setText(message);
+		((EditText)openBug.findViewById(R.id.AuthorName)).setText(authorName);
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				String text = ((EditText)view.findViewById(R.id.BugMessage)).getText().toString();
-				String author = ((EditText)view.findViewById(R.id.AuthorName)).getText().toString();
+				String text = ((EditText)openBug.findViewById(R.id.BugMessage)).getText().toString();
+				String author = ((EditText)openBug.findViewById(R.id.AuthorName)).getText().toString();
 				// do not set name as author it is ridiculous in that case
 				OsmandSettings.setUserNameForOsmBug(ctx, author);
-				boolean bug = createNewBug(latitude, longitude, 
-						text, author);
+				boolean bug = createNewBug(latitude, longitude, text, author);
 		    	if (bug) {
 		    		Toast.makeText(ctx, ctx.getResources().getString(R.string.osb_add_dialog_success), Toast.LENGTH_LONG).show();
 					clearCache();
@@ -339,10 +338,16 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 					}
 				} else {
 					Toast.makeText(ctx, ctx.getResources().getString(R.string.osb_add_dialog_error), Toast.LENGTH_LONG).show();
+					openBugAlertDialog(ctx, layoutInflater, mapView, latitude, longitude, text, author);
 				}
 			}
 		});
 		builder.show();
+	}
+	
+
+	public void openBug(final Context ctx, LayoutInflater layoutInflater, final OsmandMapTileView mapView,  final double latitude, final double longitude){
+		openBugAlertDialog(ctx, layoutInflater, mapView, latitude, longitude, "", OsmandSettings.getUserNameForOsmBug(OsmandSettings.getPrefs(ctx)));
 	}
 	
 	public void commentBug(final Context ctx, LayoutInflater layoutInflater, final OpenStreetBug bug){
