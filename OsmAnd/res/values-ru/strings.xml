@@ -407,13 +407,6 @@
 	<string name="app_mode_pedestrian">Пешеход</string>
 	<string name="position_on_map_center">В центре</string>
 	<string name="position_on_map_bottom">Внизу</string>
-	<string name="interval_1_second">1 секунда</string>
-	<string name="interval_2_seconds">2 секунды</string>
-	<string name="interval_5_seconds">5 секунд</string>
-	<string name="interval_15_seconds">15 секунд</string>
-	<string name="interval_30_seconds">30 секунд</string>
-	<string name="interval_1_minute">1 минута</string>
-	<string name="interval_5_minutes">5 минут</string>
 	<string name="navigate_point_top_text">Введите широту и долготу в формате (Г - градусы, М - минуты, С - секунды)</string>
 	<string name="navigate_point_latitude">Широта</string>
 	<string name="navigate_point_longitude">Долгота</string>

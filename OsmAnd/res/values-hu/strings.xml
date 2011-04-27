@@ -401,13 +401,6 @@
 <string name="app_mode_pedestrian">Gyalogos</string>
 <string name="position_on_map_center">Közép</string>
 <string name="position_on_map_bottom">Alul</string>
-<string name="interval_1_second">1 másodperc</string>
-<string name="interval_2_seconds">2 másodperc</string>
-<string name="interval_5_seconds">5 másodperc</string>
-<string name="interval_15_seconds">15 másodperc</string>
-<string name="interval_30_seconds">30 másodperc</string>
-<string name="interval_1_minute">1 perc</string>
-<string name="interval_5_minutes">5 perc</string>
 <string name="navigate_point_top_text">Földrajzi szélesség &amp; hosszúság megadása a kiválasztott alakban (F - fok, P - perc, M - másodperc)</string>
 <string name="navigate_point_latitude">Szélesség</string>
 <string name="navigate_point_longitude">Hosszúság</string>

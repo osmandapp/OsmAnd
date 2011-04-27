@@ -310,13 +310,6 @@ See osmand.net.</string>
 	<string name="app_mode_pedestrian">Fußgänger</string>
 	<string name="position_on_map_center">Mitte</string>
 	<string name="position_on_map_bottom">Unten</string>
-	<string name="interval_1_second">1 Sekunde</string>
-	<string name="interval_2_seconds">2 Sekunden</string>
-	<string name="interval_5_seconds">5 Sekunden</string>
-	<string name="interval_15_seconds">15 Sekunden</string>
-	<string name="interval_30_seconds">30 Sekunden</string>
-	<string name="interval_1_minute">1 Minute</string>
-	<string name="interval_5_minutes">5 Minuten</string>
 	<string name="navigate_point_top_text">Breiten- und Längengrad in folgendem Format angeben (D - Grad, M - Minuten, S - Sekunden)</string>
 	<string name="navigate_point_latitude">Breitengrad</string>
 	<string name="navigate_point_longitude">Längengrad</string>

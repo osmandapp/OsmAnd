@@ -282,13 +282,6 @@
 <string name="app_mode_pedestrian">Pedone</string>
 <string name="position_on_map_center">Centro</string>
 <string name="position_on_map_bottom">In basso</string>
-<string name="interval_1_second">1 secondo</string>
-<string name="interval_2_seconds">2 secondi</string>
-<string name="interval_5_seconds">5 secondi</string>
-<string name="interval_15_seconds">15 secondi</string>
-<string name="interval_30_seconds">30 secondi</string>
-<string name="interval_1_minute">1 minuto</string>
-<string name="interval_5_minutes">5 minuti</string>
 <string name="navigate_point_top_text">Inserire latitudine &amp; longitudine nel formato (G - gradi, M - minuti, S - secondi)</string>
 <string name="navigate_point_latitude">Latitude</string>
 <string name="navigate_point_longitude">Longitude</string>

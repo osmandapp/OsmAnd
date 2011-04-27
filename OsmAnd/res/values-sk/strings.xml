@@ -409,13 +409,6 @@
 <string name="app_mode_pedestrian">Chodec</string>
 <string name="position_on_map_center">Stred</string>
 <string name="position_on_map_bottom">Spodok</string>
-<string name="interval_1_second">1 sekunda</string>
-<string name="interval_2_seconds">2 sekundy</string>
-<string name="interval_5_seconds">5 sekúnd</string>
-<string name="interval_15_seconds">15 sekúnd</string>
-<string name="interval_30_seconds">30 sekúnd</string>
-<string name="interval_1_minute">1 minúta</string>
-<string name="interval_5_minutes">5 minút</string>
 <string name="navigate_point_top_text">Zadajte zemepisnú šírku a dĺžku vo vybranom formáte (D - stupne, M - minúty, S - sekundy)</string>
 <string name="navigate_point_latitude">Zem. šírka</string>
 <string name="navigate_point_longitude">Zem. dĺžka</string>
