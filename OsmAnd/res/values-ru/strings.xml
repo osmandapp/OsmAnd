@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="add_waypoint_dialog_added">Точка \'\'{0}\'\' была успешно добавлена</string>
+	<string name="send_location_way_choose_title">Поделиться используя</string>
+	<string name="send_location_sms_pattern">Я нахожусь : {0} , {1}</string>
+	<string name="send_location_email_pattern">Чтобы увидить местоположение следуйте ссылке {0} или android ссылке {1}</string>
+	<string name="send_location">Отправить местоположение</string>
+	<string name="context_menu_item_share_location">Поделиться</string>
+	<string name="add_waypoint_dialog_added">Точка \'\'{0}\'\' была успешно добавлена</string>
 	<string name="add_waypoint_dialog_title">Добавить точку к записи GPX трека</string>
 	<string name="context_menu_item_add_waypoint">Добавить точку к треку</string>
 	<string name="amenity_type_administrative">Административное</string>

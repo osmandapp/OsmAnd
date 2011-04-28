@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="send_location_way_choose_title">Share location using</string>
+	<string name="send_location_sms_pattern">Mine location : {0} ; {1}</string>
+	<string name="send_location_email_pattern">To see location follow the web browser link {0} or android intent link {1}</string>
+	<string name="send_location">Send location</string>
+	<string name="context_menu_item_share_location">Share location</string>
 	<string name="add_waypoint_dialog_added">Waypoint \'\'{0}\'\' was successfully added</string>
 	<string name="add_waypoint_dialog_title">Add waypoint to recorded GPX track</string>
 	<string name="context_menu_item_add_waypoint">Add Gpx waypoint</string>
