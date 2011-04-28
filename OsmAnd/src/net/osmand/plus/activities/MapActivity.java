@@ -96,6 +96,8 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.text.ClipboardManager;
+import android.text.Html;
 import android.util.FloatMath;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -1592,22 +1594,28 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     public void contextMenuPoint(final double latitude, final double longitude, List<String> additionalItems, 
     		final DialogInterface.OnClickListener additionalActions){
     	Builder builder = new AlertDialog.Builder(this);
-    	Resources resources = this.getResources();
     	final int sizeAdditional = additionalActions == null || additionalItems == null ? 0 : additionalItems.size();
     	List<String> actions = new ArrayList<String>();
     	if(sizeAdditional > 0){
     		actions.addAll(additionalItems);
     	}
-    	actions.add(resources.getString(R.string.context_menu_item_navigate_point));
-    	actions.add(resources.getString(R.string.context_menu_item_search_poi));
-		actions.add(resources.getString(R.string.context_menu_item_show_route));
-		actions.add(resources.getString(R.string.context_menu_item_search_transport));
-		actions.add(resources.getString(R.string.context_menu_item_add_favorite));
-		actions.add(resources.getString(R.string.context_menu_item_create_poi));
-		actions.add(resources.getString(R.string.context_menu_item_add_waypoint));
-		actions.add(resources.getString(R.string.context_menu_item_open_bug));
-		actions.add(resources.getString(R.string.context_menu_item_update_map));
-		actions.add(resources.getString(R.string.context_menu_item_download_map));
+    	final int[] contextMenuStandardActions = new int[]{
+    			R.string.context_menu_item_navigate_point,
+    			R.string.context_menu_item_search_poi,
+    			R.string.context_menu_item_show_route,
+    			R.string.context_menu_item_search_transport,
+    			R.string.context_menu_item_add_favorite,
+    			R.string.context_menu_item_share_location,
+    			R.string.context_menu_item_create_poi,
+    			R.string.context_menu_item_add_waypoint,
+    			R.string.context_menu_item_open_bug,
+    			R.string.context_menu_item_update_map,
+    			R.string.context_menu_item_download_map
+    	};
+    	for(int j = 0; j<contextMenuStandardActions.length; j++){
+    		actions.add(getResources().getString(contextMenuStandardActions[j]));
+    	}
+    	
     	builder.setItems(actions.toArray(new String[actions.size()]), new DialogInterface.OnClickListener(){
 
 			@Override
@@ -1616,34 +1624,36 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					additionalActions.onClick(dialog, which);
 					return;
 				}
-				which -= sizeAdditional;
-				if(which == 0){
+				int standardId = contextMenuStandardActions[which - sizeAdditional];
+				if(standardId == R.string.context_menu_item_navigate_point){
 					navigateToPoint(new LatLon(latitude, longitude));
-				} else if(which == 1){
+				} else if(standardId == R.string.context_menu_item_search_poi){
 					Intent intent = new Intent(MapActivity.this, SearchPoiFilterActivity.class);
 					intent.putExtra(SearchPoiFilterActivity.SEARCH_LAT, latitude);
 					intent.putExtra(SearchPoiFilterActivity.SEARCH_LON, longitude);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(intent);
-				} else if(which == 2){
+				} else if(standardId == R.string.context_menu_item_show_route){
 					getDirections(latitude, longitude, false);
-				} else if(which == 3){
+				} else if(standardId == R.string.context_menu_item_search_transport){
 					Intent intent = new Intent(MapActivity.this, SearchTransportActivity.class);
 					intent.putExtra(SearchTransportActivity.LAT_KEY, latitude);
 					intent.putExtra(SearchTransportActivity.LON_KEY, longitude);
 					startActivity(intent);
-				} else if(which == 4){
+				} else if(standardId == R.string.context_menu_item_add_favorite){
 					addFavouritePoint(latitude, longitude);
-				} else if(which == 5){
+				} else if(standardId == R.string.context_menu_item_share_location){
+					shareLocation(latitude, longitude, mapView.getZoom());
+				} else if(standardId == R.string.context_menu_item_search_poi){
 					EditingPOIActivity activity = new EditingPOIActivity(MapActivity.this, (OsmandApplication) getApplication(), mapView);
 					activity.showCreateDialog(latitude, longitude);
-				} else if(which == 6){
+				} else if(standardId == R.string.context_menu_item_add_waypoint){
 					addWaypoint(latitude, longitude);
-				} else if(which == 7){
+				} else if(standardId == R.string.context_menu_item_open_bug){
 					osmBugsLayer.openBug(MapActivity.this, getLayoutInflater(), mapView, latitude, longitude);
-				} else if(which == 8){
+				} else if(standardId == R.string.context_menu_item_update_map){
 					reloadTile(mapView.getZoom(), latitude, longitude);
-				} else if(which == 9){
+				} else if(standardId == R.string.context_menu_item_download_map){
 					DownloadTilesDialog dlg = new DownloadTilesDialog(MapActivity.this, 
 							(OsmandApplication) getApplication(), mapView);
 					dlg.openDialog();
@@ -1729,6 +1739,44 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			}
 		});
 		builder.create().show();
+    }
+    
+    protected void shareLocation(final double latitude, final double longitude, int zoom){
+    	final String shortOsmUrl = MapUtils.buildShortOsmUrl(latitude, longitude, zoom);
+		final String simpleGeo = "geo:"+((float) latitude)+","+((float)longitude) +"?z="+zoom;
+		//final String geoIntent = "<a href=\""+simpleGeo+"\">geo link</a>";
+		
+		AlertDialog.Builder builder = new Builder(this);
+		builder.setTitle(R.string.send_location_way_choose_title);
+		builder.setItems(new String[]{
+				"Email", "SMS", "Clipboard"
+		}, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				String sms = MessageFormat.format(getString(R.string.send_location_sms_pattern), shortOsmUrl, simpleGeo);
+				String email = MessageFormat.format(getString(R.string.send_location_email_pattern), shortOsmUrl, simpleGeo );
+				if(which == 0){
+					Intent intent = new Intent(Intent.ACTION_SEND);
+					intent.setType("vnd.android.cursor.dir/email"); //$NON-NLS-1$
+					intent.putExtra(Intent.EXTRA_SUBJECT, "Mine location"); //$NON-NLS-1$
+					intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(email));
+					intent.setType("text/html");
+					startActivity(Intent.createChooser(intent, getString(R.string.send_location)));
+				} else if(which == 1){
+					Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+					sendIntent.putExtra("sms_body", sms); 
+					sendIntent.setType("vnd.android-dir/mms-sms");
+					startActivity(sendIntent);   
+				} else if (which == 2){
+					ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+					clipboard.setText(sms);
+				}
+				
+			}
+		});
+    	
+    	builder.show();
     }
     
     

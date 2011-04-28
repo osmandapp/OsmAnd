@@ -18,6 +18,22 @@ import net.osmand.data.MapObject;
  *
  */
 public class MapUtils {
+	
+	private static final String BASE_SHORT_OSM_URL = "http://osm.org/go/";
+	
+	/**
+     * This array is a lookup table that translates 6-bit positive integer
+     * index values into their "Base64 Alphabet" equivalents as specified
+     * in Table 1 of RFC 2045.
+     */
+    private static final char intToBase64[] = {
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+        'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '_', '@'
+    };
+	
 	public static double getDistance(Node e1, Node e2){
 		return getDistance(e1.getLatitude(), e1.getLongitude(), e2.getLatitude(), e2.getLongitude());
 	}
@@ -292,6 +308,41 @@ public class MapUtils {
 						lat, lon));
 			}
 		});
+	}
+	
+	// Examples
+//	System.out.println(buildShortOsmUrl(51.51829d, 0.07347d, 16)); // http://osm.org/go/0EEQsyfu
+//	System.out.println(buildShortOsmUrl(52.30103d, 4.862927d, 18)); // http://osm.org/go/0E4_JiVhs
+//	System.out.println(buildShortOsmUrl(40.59d, -115.213d, 9)); // http://osm.org/go/TelHTB--
+	public static String buildShortOsmUrl(double latitude, double longitude, int zoom){
+		long lat = (long) (((latitude + 90d)/180d)*(1l << 32));
+		long lon = (long) (((longitude + 180d)/360d)*(1l << 32));
+		long code = interleaveBits(lon, lat);
+		StringBuilder str = new StringBuilder(10);
+		str.append(BASE_SHORT_OSM_URL);
+	    // add eight to the zoom level, which approximates an accuracy of one pixel in a tile.
+		for(int i=0; i< Math.ceil((zoom+8)/3d); i++){
+		    str.append(intToBase64[(int) ((code >> (58 - 6 * i)) & 0x3f)]);
+		}
+			    // append characters onto the end of the string to represent
+			    // partial zoom levels (characters themselves have a granularity of 3 zoom levels).
+		for(int j=0; j< (zoom + 8) % 3 ; j++){
+			str.append('-');
+		}
+		str.append("?m");
+		return str.toString();
+	}
+	
+	/**	
+	 * interleaves the bits of two 32-bit numbers. the result is known as a Morton code.	   
+	 */
+	private static long interleaveBits(long x, long y){
+		long c = 0;
+		for(byte b = 31; b>=0; b--){
+			c = (c << 1) | ((x >> b) & 1);
+			c = (c << 1) | ((y >> b) & 1);
+		}
+		return c;
 	}
 	
 
