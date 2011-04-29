@@ -1744,6 +1744,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     protected void shareLocation(final double latitude, final double longitude, int zoom){
     	final String shortOsmUrl = MapUtils.buildShortOsmUrl(latitude, longitude, zoom);
 		final String simpleGeo = "geo:"+((float) latitude)+","+((float)longitude) +"?z="+zoom;
+		final String tr = "geo://osmand.net?lat="+((float) latitude)+"&lon="+((float)longitude) +"&z="+zoom;
 		//final String geoIntent = "<a href=\""+simpleGeo+"\">geo link</a>";
 		
 		AlertDialog.Builder builder = new Builder(this);
@@ -1755,7 +1756,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				String sms = MessageFormat.format(getString(R.string.send_location_sms_pattern), shortOsmUrl, simpleGeo);
-				String email = MessageFormat.format(getString(R.string.send_location_email_pattern), shortOsmUrl, simpleGeo );
+				String email = MessageFormat.format(getString(R.string.send_location_email_pattern), shortOsmUrl, tr );
 				if(which == 0){
 					Intent intent = new Intent(Intent.ACTION_SEND);
 					intent.setType("vnd.android.cursor.dir/email"); //$NON-NLS-1$
