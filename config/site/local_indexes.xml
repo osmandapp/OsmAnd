@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<osmand_regions>
+	<!-- EUROPE -->
+	<regions name="Europe">
+		<!-- Restrict download big files due to internet payments could be download from googlecode
+		<region name="Benelux_europe_1.obf.zip" size="294.8" date="01.04.2011" description="Map, Transport, Address data for Benelux europe" downloadCount="83"/> -->
+		<region name="Netherlands_europe_1.obf.zip" size="240.9" date="25.03.2011" description="Map, Transport, Address data for netherlands europe" downloadCount="2467"/>
+        	<!-- !!! Restrict download big files due to internet payments -->      
+		<!--
+		<region name="France_europe_1.obf.zip" size="485.1" date="22.12.2010" description="Map, Transport, Address data for France europe"/> -->
+	</regions>
+
+	<!-- North America -->
+	<regions name="North America">
+        <!-- !!! Restrict download big files due to internet payments -->      
+	<!--
+		<region name="Canada_1.obf.zip" size="232.5" date="15.12.2010" description="Map, Transport, Address index for Canada North America" downloadCount="214"/>
+		<region name="Us-midwest_1.obf.zip" size="339.1" date="15.12.2010" description="Map, Transport, Address index for Us-midwest North America" downloadCount="171"/>		<region name="Us-northeast_1.obf.zip" size="175.7" date="16.12.2010" description="Map, Transport, Address index for Us-northeast North America" downloadCount="182"/>
+		<region name="Us-pacific_1.obf.zip" size="13.7" date="16.12.2010" description="Map, Transport, Address index for Us-pacific North America" downloadCount="120"/>
+		<region name="Us-south_1.obf.zip" size="614.2" date="15.12.2010" description="Map, Transport, Address index for Us-south North America" downloadCount="130"/>
+		<region name="Us-west_1.obf.zip" size="400.8" date="23.12.2010" description="Map, Transport, Address index for Us-west North America" downloadCount="114"/>-->
+	</regions>
+
+</osmand_regions>
