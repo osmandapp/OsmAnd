@@ -198,12 +198,12 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		// for voice navigation
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);  
-//	     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,   
-//	                                WindowManager.LayoutParams.FLAG_FULLSCREEN); 
-		
+		// Full screen is not used here
+//	     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
 		ProgressDialog dlg = ((OsmandApplication)getApplication()).checkApplicationIsBeingInitialized(this);
 		if(dlg != null){
+			// Do some action on close
 			dlg.setOnDismissListener(new DialogInterface.OnDismissListener(){
 				@Override
 				public void onDismiss(DialogInterface dialog) {
@@ -214,6 +214,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				}
 			});
 		}
+		parseLaunchIntentLocation();
 		
 		mapView = (OsmandMapTileView) findViewById(R.id.MapView);
 		mapView.setTrackBallDelegate(new OsmandMapTileView.OnTrackBallListener(){
@@ -1241,6 +1242,35 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		builder.create().show();
     }
     
+    protected void parseLaunchIntentLocation(){
+    	Intent intent = getIntent();
+    	if(intent != null && intent.getData() != null){
+    		Uri data = intent.getData();
+    		if("http".equalsIgnoreCase(data.getScheme()) && "download.osmand.net".equals(data.getHost()) &&
+    				"/go".equals( data.getPath())) {
+    			String lat = data.getQueryParameter("lat");
+    			String lon = data.getQueryParameter("lon");
+				if (lat != null && lon != null) {
+					try {
+						double lt = Double.parseDouble(lat);
+						double ln = Double.parseDouble(lon);
+						SharedPreferences prefs = OsmandSettings.getSharedPreferences(this);
+						Editor edit = prefs.edit();
+						edit.putFloat(OsmandSettings.LAST_KNOWN_MAP_LAT, (float) lt);
+						edit.putFloat(OsmandSettings.LAST_KNOWN_MAP_LON, (float) ln);
+						String zoom = data.getQueryParameter("z");
+						if(zoom != null){
+							edit.putInt(OsmandSettings.LAST_KNOWN_MAP_ZOOM, Integer.parseInt(zoom));
+						}
+						edit.commit();
+					} catch (NumberFormatException e) {
+					}
+				}
+    		}
+    	}
+    }
+    
+    
     protected void showToast(final String msg){
     	runOnUiThread(new Runnable(){
 			@Override
@@ -1743,9 +1773,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     
     protected void shareLocation(final double latitude, final double longitude, int zoom){
     	final String shortOsmUrl = MapUtils.buildShortOsmUrl(latitude, longitude, zoom);
-		final String simpleGeo = "geo:"+((float) latitude)+","+((float)longitude) +"?z="+zoom;
-		final String tr = "geo://osmand.net?lat="+((float) latitude)+"&lon="+((float)longitude) +"&z="+zoom;
-		//final String geoIntent = "<a href=\""+simpleGeo+"\">geo link</a>";
+		// final String simpleGeo = "geo:"+((float) latitude)+","+((float)longitude) +"?z="+zoom;
+		final String appLink = "http://download.osmand.net/go?lat="+((float) latitude)+"&lon="+((float)longitude) +"&z="+zoom;
 		
 		AlertDialog.Builder builder = new Builder(this);
 		builder.setTitle(R.string.send_location_way_choose_title);
@@ -1755,8 +1784,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				String sms = MessageFormat.format(getString(R.string.send_location_sms_pattern), shortOsmUrl, simpleGeo);
-				String email = MessageFormat.format(getString(R.string.send_location_email_pattern), shortOsmUrl, tr );
+				String sms = MessageFormat.format(getString(R.string.send_location_sms_pattern), shortOsmUrl, appLink);
+				String email = MessageFormat.format(getString(R.string.send_location_email_pattern), shortOsmUrl, appLink );
 				if(which == 0){
 					Intent intent = new Intent(Intent.ACTION_SEND);
 					intent.setType("vnd.android.cursor.dir/email"); //$NON-NLS-1$
