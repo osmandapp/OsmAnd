@@ -21,12 +21,10 @@ public class ToDoConstants {
 //      || 120 || Show icons over poi circle (issue 414) ||
 //      || 110 || Use android voice for pronounce command (could be used in future to pronounce street) (Issue 70) ||
 //      || 119 || Dialog on main screen tips and tricks (Issue 415) ||
-//      || 117 || Share location (send/get location from SMS, email) (Issue 416)||	
 //		|| 112 || Investigate exiting/minimizing app (Issue 214) ||
 //      || 118 || Config switching between maps on different zoom levels <14 (using raster), > 14 vector (Issue 419) ||
 //		|| 97 || For voice navigation consider current speed of vehicle. Especially when speed > 50 pronounce more than 200 m (Issue 420) ||
 //		|| 104 || Add activity to show current loaded indexes and information about them (Issue 366) ||
-//      || 96 || Introduce settings for MPH, imperial units (Issue 54) ||
 //      || 111 || Investigate showing street name while driving (Issue 286) ||  
 //      || 86 || Allow to add/edit custom tags to POI objects (Issue 44) ||
 //		|| 92 || Support poi index with standard map index and unify POI categories (unify done +, works very slow) (Issue 417) ||
@@ -48,9 +46,7 @@ public class ToDoConstants {
 	
 	///////////////////////////   DONE //////////////////////////////
 	// DONE ANDROID :
-//  || 126 || Do not use network location if gps was found recently (Issue 407) ||
-//	|| 116 || Move all messages.properties related Android application inside strings.xml to have better access with their translation ||
-	
+
 	// DONE SWING
 
 	
