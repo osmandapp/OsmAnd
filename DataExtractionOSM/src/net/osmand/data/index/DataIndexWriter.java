@@ -11,17 +11,14 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import net.osmand.Algoritms;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.Building;
 import net.osmand.data.City;
-import net.osmand.data.TransportRoute;
-import net.osmand.data.TransportStop;
 import net.osmand.data.City.CityType;
-import net.osmand.data.preparation.IndexCreator;
+import net.osmand.data.preparation.DBDialect;
 import net.osmand.osm.Entity;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -62,7 +59,7 @@ public class DataIndexWriter {
 				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 	}
 	
-	public static void createPoiIndexStructure(Connection conn) throws SQLException{
+	public static void createPoiIndexStructure(Connection conn, DBDialect dialect) throws SQLException{
 		Statement stat = conn.createStatement();
         stat.executeUpdate("create table " + IndexConstants.POI_TABLE +  //$NON-NLS-1$
         		"(id bigint, x int, y int, name_en varchar(255), name varchar(255), " +
@@ -70,7 +67,7 @@ public class DataIndexWriter {
         		"primary key(id, type, subtype))");
         stat.executeUpdate("create index poi_loc on poi (x, y, type, subtype)");
         stat.executeUpdate("create index poi_id on poi (id, type, subtype)");
-        if(IndexCreator.usingSQLite()){
+        if(dialect == DBDialect.SQLITE){
         	stat.execute("PRAGMA user_version = " + IndexConstants.POI_TABLE_VERSION); //$NON-NLS-1$
         }
         stat.close();
@@ -174,7 +171,7 @@ public class DataIndexWriter {
 	}
 	
 	
-	public static void createAddressIndexStructure(Connection conn) throws SQLException{
+	public static void createAddressIndexStructure(Connection conn, DBDialect dialect) throws SQLException{
 		Statement stat = conn.createStatement();
 		assert IndexConstants.CITY_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
 		assert IndexConstants.STREET_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
@@ -203,101 +200,15 @@ public class DataIndexWriter {
         stat.executeUpdate("create index street_node_street on street_node (street)");
         stat.executeUpdate("create index street_node_way on street_node (way)");
         
-        if(IndexCreator.usingSQLite()){
+        if(dialect == DBDialect.SQLITE){
         	stat.execute("PRAGMA user_version = " + IndexConstants.ADDRESS_TABLE_VERSION); //$NON-NLS-1$
         }
         stat.close();
 	}
 	
-	public static PreparedStatement createStatementTransportStopInsert(Connection conn) throws SQLException{
-		assert IndexConstants.TRANSPORT_STOP_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
-        return conn.prepareStatement("insert into transport_stop(id, latitude, longitude, name, name_en) values(?, ?, ?, ?, ?)");
-	}
-	public static PreparedStatement createStatementTransportRouteStopInsert(Connection conn) throws SQLException{
-		assert IndexConstants.TRANSPORT_ROUTE_STOP_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
-        return conn.prepareStatement("insert into transport_route_stop(route, stop, direction, ord) values(?, ?, ?, ?)");
-	}
 	
-	private static void writeRouteStops(RTree transportStopsTree, PreparedStatement prepRouteStops, PreparedStatement prepStops, Map<PreparedStatement, Integer> count,
-			Set<Long> writtenStops, TransportRoute r, List<TransportStop> stops, boolean direction) throws SQLException {
-		assert IndexConstants.TRANSPORT_STOP_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
-		assert IndexConstants.TRANSPORT_ROUTE_STOP_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
-		int i = 0;
-		for(TransportStop s : stops){
-			if (!writtenStops.contains(s.getId())) {
-				prepStops.setLong(1, s.getId());
-				prepStops.setDouble(2, s.getLocation().getLatitude());
-				prepStops.setDouble(3, s.getLocation().getLongitude());
-				prepStops.setString(4, s.getName());
-				prepStops.setString(5, s.getEnName());
-				int x = (int) MapUtils.getTileNumberX(24, s.getLocation().getLongitude());
-				int y = (int) MapUtils.getTileNumberY(24, s.getLocation().getLatitude());
-				addBatch(count, prepStops);
-				try {
-					transportStopsTree.insert(new LeafElement(new Rect(x, y, x, y), s.getId()));
-				} catch (RTreeInsertException e) {
-					throw new IllegalArgumentException(e);
-				} catch (IllegalValueException e) {
-					throw new IllegalArgumentException(e);
-				}
-				writtenStops.add(s.getId());
-			}
-			prepRouteStops.setLong(1, r.getId());
-			prepRouteStops.setLong(2, s.getId());
-			prepRouteStops.setInt(3, direction ? 1 : 0);
-			prepRouteStops.setInt(4, i++);
-			addBatch(count, prepRouteStops);
-		}
-	}
 	
-	public static PreparedStatement createStatementTransportRouteInsert(Connection conn) throws SQLException{
-		assert IndexConstants.TRANSPORT_ROUTE_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
-        return conn.prepareStatement("insert into transport_route(id, type, operator, ref, name, name_en, dist) values(?, ?, ?, ?, ?, ?, ?)");
-	}
 	
-	public static void insertTransportIntoIndex(PreparedStatement prepRoute, PreparedStatement prepRouteStops,
-			PreparedStatement prepStops, RTree transportStopsTree, 
-			Set<Long> writtenStops, TransportRoute route, Map<PreparedStatement, Integer> statements,
-			int batchSize) throws SQLException {
-		assert IndexConstants.TRANSPORT_ROUTE_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
-		prepRoute.setLong(1, route.getId());
-		prepRoute.setString(2, route.getType());
-		prepRoute.setString(3, route.getOperator());
-		prepRoute.setString(4, route.getRef());
-		prepRoute.setString(5, route.getName());
-		prepRoute.setString(6, route.getEnName());
-		prepRoute.setInt(7, route.getAvgBothDistance());
-		addBatch(statements, prepRoute);
-		
-		writeRouteStops(transportStopsTree, prepRouteStops, prepStops, statements, writtenStops, route, route.getForwardStops(), true);
-		writeRouteStops(transportStopsTree, prepRouteStops, prepStops, statements, writtenStops, route, route.getBackwardStops(), false);
-		
-	}
-	
-	public static void createTransportIndexStructure(Connection conn) throws SQLException{
-		Statement stat = conn.createStatement();
-		assert IndexConstants.TRANSPORT_ROUTE_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
-		assert IndexConstants.TRANSPORT_STOP_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
-		assert IndexConstants.TRANSPORT_ROUTE_STOP_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
-		
-        stat.executeUpdate("create table transport_route (id bigint primary key, type varchar(255), operator varchar(255)," +
-        		"ref varchar(255), name varchar(255), name_en varchar(255), dist int)");
-        stat.executeUpdate("create index transport_route_id on transport_route (id)");
-        
-        stat.executeUpdate("create table transport_route_stop (stop bigint, route bigint, ord int, direction smallint, primary key (route, ord, direction))");
-        stat.executeUpdate("create index transport_route_stop_stop on transport_route_stop (stop)");
-        stat.executeUpdate("create index transport_route_stop_route on transport_route_stop (route)");
-        
-        stat.executeUpdate("create table transport_stop (id bigint primary key, latitude double, longitude double, name varchar(255), name_en varchar(255))");
-        stat.executeUpdate("create index transport_stop_id on transport_stop (id)");
-        stat.executeUpdate("create index transport_stop_location on transport_stop (latitude, longitude)");
-        
-        if(IndexCreator.usingSQLite()){
-        	stat.execute("PRAGMA user_version = " + IndexConstants.TRANSPORT_TABLE_VERSION); //$NON-NLS-1$
-        }
-        stat.close();
-	}
-
 	
 	public static void createMapIndexStructure(Connection conn) throws SQLException{
 		Statement stat = conn.createStatement();
