@@ -2,8 +2,12 @@ package net.osmand.data.preparation;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import net.osmand.osm.Entity;
@@ -42,6 +46,7 @@ public class OsmDbCreator implements IOsmStorageFilter {
 	private PreparedStatement prepTags;
 	private Connection dbConn;
 	private final IndexCreator indexCreator;
+
 
 	public OsmDbCreator(IndexCreator indexCreator) {
 		this.indexCreator = indexCreator;
@@ -176,5 +181,6 @@ public class OsmDbCreator implements IOsmStorageFilter {
 	public int getAllWays() {
 		return allWays;
 	}
+	
 
 }

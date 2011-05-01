@@ -21,7 +21,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -32,17 +31,17 @@ import java.util.TreeMap;
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.binary.BinaryMapIndexWriter;
-import net.osmand.data.Amenity;
 import net.osmand.data.Boundary;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.DataTileManager;
+import net.osmand.data.MapAlgorithms;
 import net.osmand.data.Street;
-import net.osmand.data.TransportRoute;
 import net.osmand.data.City.CityType;
 import net.osmand.data.index.DataIndexReader;
 import net.osmand.data.index.DataIndexWriter;
 import net.osmand.data.index.IndexConstants;
+import net.osmand.data.preparation.OsmDbAccessor.OsmDbVisitor;
 import net.osmand.impl.ConsoleProgressImplementation;
 import net.osmand.osm.Entity;
 import net.osmand.osm.LatLon;
@@ -93,9 +92,6 @@ public class IndexCreator {
 	public static final int BATCH_SIZE_OSM = 10000;
 	public static final String TEMP_NODES_DB = "nodes.tmp.odb";
 
-	public static final int STEP_CITY_NODES = 1;
-	public static final int STEP_ADDRESS_RELATIONS_AND_MULTYPOLYGONS = 2;
-	public static final int STEP_BORDER_CITY_WAYS = 3;
 	public static final int STEP_MAIN = 4;
 
 	private File workingDir = null;
@@ -113,13 +109,10 @@ public class IndexCreator {
 	private String mapFileName = null;
 	private Long lastModifiedDate = null;
 
-	private PreparedStatement pselectNode;
-	private PreparedStatement pselectWay;
-	private PreparedStatement pselectRelation;
-	private PreparedStatement pselectTags;
-
 	
 	private IndexTransportCreator indexTransportCreator;
+	private IndexPoiCreator indexPoiCreator;
+	private OsmDbAccessor accessor;
 	// constants to start process from the middle and save temporary results
 	private boolean recreateOnlyBinaryFile = false; // false;
 	private boolean deleteOsmDB = false;
@@ -129,10 +122,6 @@ public class IndexCreator {
 	private File dbFile;
 
 	Map<PreparedStatement, Integer> pStatements = new LinkedHashMap<PreparedStatement, Integer>();
-
-	private Connection poiConnection;
-	private File poiIndexFile;
-	private PreparedStatement poiPreparedStatement;
 
 	private File mapFile;
 	private RandomAccessFile mapRAFile;
@@ -188,7 +177,9 @@ public class IndexCreator {
 
 	public IndexCreator(File workingDir) {
 		this.workingDir = workingDir;
-		this.indexTransportCreator = new IndexTransportCreator(this); 
+		this.indexTransportCreator = new IndexTransportCreator(this);
+		this.indexPoiCreator = new IndexPoiCreator(this);
+		this.accessor = new OsmDbAccessor(this);
 	}
 
 	public void setIndexAddress(boolean indexAddress) {
@@ -241,12 +232,12 @@ public class IndexCreator {
 	}
 
 	private Connection getDatabaseConnection(String fileName) throws SQLException {
-		return getDatabaseConnection(fileName, false);
+		return getDatabaseConnection(fileName, dialect);
 	}
 
 
-	private Connection getDatabaseConnection(String fileName, boolean forceSqLite) throws SQLException {
-		if (DBDialect.SQLITE == dialect || forceSqLite) {
+	protected Connection getDatabaseConnection(String fileName, DBDialect dialect) throws SQLException {
+		if (DBDialect.SQLITE == dialect) {
 			try {
 				Class.forName("org.sqlite.JDBC");
 			} catch (ClassNotFoundException e) {
@@ -283,112 +274,7 @@ public class IndexCreator {
 
 	}
 
-	public void loadEntityData(Entity e, boolean loadTags) throws SQLException {
-		if (e instanceof Node || (e instanceof Way && !((Way) e).getNodes().isEmpty())) {
-			// do not load tags for nodes inside way
-			return;
-		}
-		Map<EntityId, Entity> map = new LinkedHashMap<EntityId, Entity>();
-		if (e instanceof Relation && ((Relation) e).getMemberIds().isEmpty()) {
-			pselectRelation.setLong(1, e.getId());
-			if (pselectRelation.execute()) {
-				ResultSet rs = pselectRelation.getResultSet();
-				boolean first = true;
-				while (rs.next()) {
-					int ord = rs.getInt(4);
-					if (ord > 0 || first) {
-						first = false;
-						((Relation) e).addMember(rs.getLong(1), EntityType.values()[rs.getInt(2)], rs.getString(3));
-					}
-				}
-				rs.close();
-			}
-		} else if (e instanceof Way && ((Way) e).getEntityIds().isEmpty()) {
-			pselectWay.setLong(1, e.getId());
-			if (pselectWay.execute()) {
-				ResultSet rs = pselectWay.getResultSet();
-				boolean first = true;
-				while (rs.next()) {
-					int ord = rs.getInt(2);
-					if (ord > 0 || first) {
-						first = false;
-						((Way) e).addNode(new Node(rs.getDouble(5), rs.getDouble(6), rs.getLong(1)));
-					}
-				}
-				rs.close();
-			}
-		}
-		Collection<EntityId> ids = e instanceof Relation ? ((Relation) e).getMemberIds() : ((Way) e).getEntityIds();
-
-		for (EntityId i : ids) {
-			// pselectNode = dbConn.prepareStatement("select n.latitude, n.longitude, t.skeys, t.value from node n left join tags t on n.id = t.id and t.type = 0 where n.id = ?");
-			if (i.getType() == EntityType.NODE) {
-				pselectNode.setLong(1, i.getId());
-				if (pselectNode.execute()) {
-					ResultSet rs = pselectNode.getResultSet();
-					Node n = null;
-					while (rs.next()) {
-						if (n == null) {
-							n = new Node(rs.getDouble(1), rs.getDouble(2), i.getId());
-						}
-						if (rs.getObject(3) != null) {
-							n.putTag(rs.getString(3), rs.getString(4));
-						}
-					}
-					map.put(i, n);
-					rs.close();
-				}
-			} else if (i.getType() == EntityType.WAY) {
-				// pselectWay = dbConn.prepareStatement("select w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " +
-				// "from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 inner join node n on w.node = n.id " +
-				// "where w.id = ? order by w.ord");
-				pselectWay.setLong(1, i.getId());
-				if (pselectWay.execute()) {
-					ResultSet rs = pselectWay.getResultSet();
-					Way way = new Way(i.getId());
-					map.put(i, way);
-					boolean first = true;
-					while (rs.next()) {
-						int ord = rs.getInt(2);
-						if (ord > 0 || first) {
-							first = false;
-							way.addNode(new Node(rs.getDouble(5), rs.getDouble(6), rs.getLong(1)));
-						}
-						if (ord == 0 && rs.getObject(3) != null) {
-							way.putTag(rs.getString(3), rs.getString(4));
-						}
-					}
-					rs.close();
-				}
-			} else if (i.getType() == EntityType.RELATION) {
-				pselectRelation.setLong(1, i.getId());
-				// pselectRelation = dbConn.prepareStatement("select r.member, r.type, r.role, r.ord, t.skeys, t.value" +
-				// "from relations r left join tags t on r.id = t.id and t.type = 2 and r.ord = 0 " +
-				// "where r.id = ? order by r.ord");
-				if (pselectRelation.execute()) {
-					ResultSet rs = pselectRelation.getResultSet();
-					Relation rel = new Relation(i.getId());
-					map.put(i, rel);
-					boolean first = true;
-					while (rs.next()) {
-						int ord = rs.getInt(4);
-						if (ord > 0 || first) {
-							first = false;
-							rel.addMember(rs.getLong(1), EntityType.values()[rs.getInt(2)], rs.getString(3));
-						}
-						if (ord == 0 && rs.getObject(5) != null) {
-							rel.putTag(rs.getString(5), rs.getString(6));
-						}
-					}
-					// do not load relation members recursively ? It is not needed for transport, address, poi before
-					rs.close();
-				}
-			}
-		}
-
-		e.initializeLinks(map);
-	}
-
+	
 	public void setPoiFileName(String poiFileName) {
 		this.poiFileName = poiFileName;
 	}
@@ -427,86 +313,7 @@ public class IndexCreator {
 		return poiFileName;
 	}
 
-	public int iterateOverEntities(IProgress progress, EntityType type, int allCount, int step) throws SQLException {
-		Statement statement = dbConn.createStatement();
-		String select;
-		int count = 0;
 
-		// stat.executeUpdate("create table tags (id "+longType+", type smallint, skeys varchar(255), value varchar(255))");
-		// stat.executeUpdate("create table ways (id "+longType+", node "+longType+", ord smallint)");
-//		stat.executeUpdate("create table relations (id "+longType+", member "+longType+", type smallint, role varchar(255), ord smallint)");
-		if (type == EntityType.NODE) {
-			// filter out all nodes without tags
-			select = "select n.id, n.latitude, n.longitude, t.skeys, t.value from node n inner join tags t on n.id = t.id and t.type = 0 order by n.id"; //$NON-NLS-1$
-		} else if (type == EntityType.WAY) {
-			select = "select w.id, w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " + //$NON-NLS-1$
-					"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 inner join node n on w.node = n.id " + //$NON-NLS-1$
-					"order by w.id, w.ord"; //$NON-NLS-1$
-		} else {
-			select = "select r.id, t.skeys, t.value  from relations r inner join tags t on t.id = r.id and t.type = 2 and r.ord = 0"; //$NON-NLS-1$
-		}
-
-		ResultSet rs = statement.executeQuery(select);
-		Entity prevEntity = null;
-
-		long prevId = -1;
-		while (rs.next()) {
-			long curId = rs.getLong(1);
-			boolean newEntity = curId != prevId;
-			Entity e = prevEntity;
-			if (type == EntityType.NODE) {
-				if (newEntity) {
-					e = new Node(rs.getDouble(2), rs.getDouble(3), curId);
-				}
-				e.putTag(rs.getString(4), rs.getString(5));
-			} else if (type == EntityType.WAY) {
-				if (newEntity) {
-					e = new Way(curId);
-				}
-				int ord = rs.getInt(3);
-				if (ord == 0 && rs.getObject(4) != null) {
-					e.putTag(rs.getString(4), rs.getString(5));
-				}
-				if (newEntity || ord > 0) {
-					((Way) e).addNode(new Node(rs.getDouble(6), rs.getDouble(7), rs.getLong(2)));
-				}
-			} else {
-				if (newEntity) {
-					e = new Relation(curId);
-				}
-				e.putTag(rs.getString(2), rs.getString(3));
-			}
-			if (newEntity) {
-				count++;
-				if (progress != null) {
-					progress.progress(1);
-				}
-				if (prevEntity != null) {
-					iterateEntity(prevEntity, step);
-				}
-				prevEntity = e;
-			}
-			prevId = curId;
-		}
-		if (prevEntity != null) {
-			count++;
-			iterateEntity(prevEntity, step);
-		}
-		rs.close();
-		return count;
-	}
-
-	protected void loadEntityTags(EntityType type, Entity e) throws SQLException {
-		pselectTags.setLong(1, e.getId());
-		pselectTags.setByte(2, (byte) type.ordinal());
-		ResultSet rsTags = pselectTags.executeQuery();
-		while (rsTags.next()) {
-			e.putTag(rsTags.getString(1), rsTags.getString(2));
-		}
-		rsTags.close();
-	}
-
-	
 	
 	public String getCityAdminLevel() {
 		return cityAdminLevel;
@@ -516,13 +323,13 @@ public class IndexCreator {
 		this.cityAdminLevel = cityAdminLevel;
 	}
 	
-	public void indexBoundariesRelation(Entity e) throws SQLException {
+	public void indexBoundariesRelation(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		String adminLevel = e.getTag("admin_level");
 		Boundary boundary = null;
 		if (cityAdminLevel.equals(adminLevel)) {
 			if (e instanceof Relation) {
 				Relation i = (Relation) e;
-				loadEntityData(i, true);
+				ctx.loadEntityData(i, true);
 				boundary = new Boundary();
 				if (i.getTag(OSMTagKey.NAME) != null) {
 					boundary.setName(i.getTag(OSMTagKey.NAME));
@@ -602,7 +409,7 @@ public class IndexCreator {
 		}
 	}
 
-	public void indexAddressRelation(Relation i) throws SQLException {
+	public void indexAddressRelation(Relation i, OsmDbAccessorContext ctx) throws SQLException {
 		String type = i.getTag(OSMTagKey.ADDRESS_TYPE);
 		boolean house = "house".equals(type); //$NON-NLS-1$
 		boolean street = "a6".equals(type); //$NON-NLS-1$
@@ -610,7 +417,7 @@ public class IndexCreator {
 			// try to find appropriate city/street
 			City c = null;
 			// load with member ways with their nodes and tags !
-			loadEntityData(i, true);
+			ctx.loadEntityData(i, true);
 
 			Collection<Entity> members = i.getMembers("is_in"); //$NON-NLS-1$
 			Relation a3 = null;
@@ -620,7 +427,7 @@ public class IndexCreator {
 					a6 = i;
 				}
 				Entity in = members.iterator().next();
-				loadEntityData(in, true);
+				ctx.loadEntityData(in, true);
 				if (in instanceof Relation) {
 					// go one level up for house
 					if (house) {
@@ -628,7 +435,7 @@ public class IndexCreator {
 						members = ((Relation) in).getMembers("is_in"); //$NON-NLS-1$
 						if (!members.isEmpty()) {
 							in = members.iterator().next();
-							loadEntityData(in, true);
+							ctx.loadEntityData(in, true);
 							if (in instanceof Relation) {
 								a3 = (Relation) in;
 							}
@@ -884,264 +691,215 @@ public class IndexCreator {
 		return foundId;
 	}
 
-	private List<Amenity> tempAmenityList = new ArrayList<Amenity>();
+	
 
-	public void checkEntity(Entity e){
-		String name = e.getTag(OSMTagKey.NAME);
-		if (name == null){
-			String msg = "";
-			Collection<String> keys = e.getTagKeySet();
-			int cnt = 0;
-			for (Iterator iter = keys.iterator(); iter.hasNext();) {
-				String key = (String) iter.next();
-				if (key.startsWith("name:") && key.length() <= 8) {
-					// ignore specialties like name:botanical
-					if (cnt == 0)
-						msg += "Entity misses default name tag, but it has localized name tag(s):\n";
-					msg += key + "=" + e.getTag(key) + "\n";
-					cnt++;
+
+	private void iterateMainEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
+		if (indexPOI) {
+			indexPoiCreator.iterateEntity(e, pStatements);
+		}
+		if (indexTransport) {
+			indexTransportCreator.visitEntityMainStep(e, ctx, pStatements);
+		}
+
+		if (indexMap && (e instanceof Way || e instanceof Node)) {
+			// manipulate what kind of way to load
+			ctx.loadEntityData(e, false);
+			boolean inverse = "-1".equals(e.getTag(OSMTagKey.ONEWAY)); //$NON-NLS-1$
+			for (int i = 0; i < mapZooms.size(); i++) {
+				writeBinaryEntityToMapDatabase(e, e.getId(), i == 0 ? inverse : false, i);
+			}
+
+		}
+
+		if (indexAddress) {
+			// index not only buildings but also nodes that belongs to addr:interpolation ways
+			if (e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER) != null && e.getTag(OSMTagKey.ADDR_STREET) != null) {
+				// TODO e.getTag(OSMTagKey.ADDR_CITY) could be used to find city however many cities could have same name!
+				// check that building is not registered already
+				boolean exist = false;
+				if (loadInMemory) {
+					exist = addressBuildingLocalSet.contains(e.getId());
+				} else {
+					addressSearchBuildingStat.setLong(1, e.getId());
+					ResultSet rs = addressSearchBuildingStat.executeQuery();
+					exist = rs.next();
+					rs.close();
+
+				}
+				if (!exist) {
+					ctx.loadEntityData(e, false);
+					LatLon l = e.getLatLon();
+					City city = getClosestCity(l);
+					Long idStreet = getStreetInCity(city, e.getTag(OSMTagKey.ADDR_STREET), l, (e.getId() << 2));
+					if (idStreet != null) {
+						Building building = new Building(e);
+						building.setName(e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER));
+						DataIndexWriter.writeBuilding(addressBuildingStat, pStatements, idStreet, building, BATCH_SIZE);
+					}
+				}
+			} else if (e instanceof Way /* && OSMSettings.wayForCar(e.getTag(OSMTagKey.HIGHWAY)) */
+					&& e.getTag(OSMTagKey.HIGHWAY) != null && e.getTag(OSMTagKey.NAME) != null) {
+				// suppose that streets with names are ways for car
+				// Ignore all ways that have house numbers and highway type
+				boolean exist = false;
+
+				// if we saved address ways we could checked that we registered before
+				if (saveAddressWays) {
+					if (loadInMemory) {
+						exist = addressStreetNodeLocalSet.contains(e.getId());
+					} else {
+						addressSearchStreetNodeStat.setLong(1, e.getId());
+						ResultSet rs = addressSearchStreetNodeStat.executeQuery();
+						exist = rs.next();
+						rs.close();
+					}
+				}
+
+				// check that street way is not registered already
+				if (!exist) {
+					ctx.loadEntityData(e, false);
+					LatLon l = e.getLatLon();
+					City city = getClosestCity(l);
+					Long idStreet = getStreetInCity(city, e.getTag(OSMTagKey.NAME), l, (e.getId() << 2) | 1);
+					if (idStreet != null && saveAddressWays) {
+						DataIndexWriter.writeStreetWayNodes(addressStreetNodeStat, pStatements, idStreet, (Way) e, BATCH_SIZE);
+					}
 				}
 			}
-			if (cnt > 0) {
-				msg += "Consider adding the name tag at " + e.getOsmUrl();
-				log.warn(msg);
+			if (e instanceof Relation) {
+				if (e.getTag(OSMTagKey.POSTAL_CODE) != null) {
+					ctx.loadEntityData(e, false);
+					postalCodeRelations.add((Relation) e);
+				}
 			}
 		}
 	}
-
-	private void iterateEntity(Entity e, int step) throws SQLException {
-		if (step == STEP_MAIN) {
-			if (indexPOI) {
-				tempAmenityList.clear();
-				tempAmenityList = Amenity.parseAmenities(e, tempAmenityList);
-				if (!tempAmenityList.isEmpty() && poiPreparedStatement != null) {
-					// load data for way (location etc...)
-					loadEntityData(e, false);
-					for (Amenity a : tempAmenityList) {
-						checkEntity(e);
-						a.setEntity(e);
-						if (a.getLocation() != null) {
-							// do not convert english name
-							// convertEnglishName(a);
-							DataIndexWriter.insertAmenityIntoPoi(poiPreparedStatement, pStatements, a, BATCH_SIZE);
-						}
-					}
-				}
+	
+	public void indexAddressRelationsAndMultiPolygons(Entity e, OsmDbAccessorContext ctx) throws SQLException {
+		if (indexAddress) {
+			if (e instanceof Relation && "address".equals(e.getTag(OSMTagKey.TYPE))) { //$NON-NLS-1$
+				indexAddressRelation((Relation) e, ctx);
 			}
-			if (indexTransport) {
-				if (e instanceof Relation && e.getTag(OSMTagKey.ROUTE) != null) {
-					loadEntityData(e, true);
-					TransportRoute route = indexTransportCreator.indexTransportRoute((Relation) e);
-					if (route != null) {
-						indexTransportCreator.insertTransportIntoIndex(route, pStatements);
-					}
-				}
+			
+			if (e instanceof Relation && "administrative".equals(e.getTag(OSMTagKey.BOUNDARY))) { //$NON-NLS-1$
+				indexBoundariesRelation((Relation) e, ctx);
 			}
-
-			if (indexMap && (e instanceof Way || e instanceof Node)) {
-				// manipulate what kind of way to load
-				loadEntityData(e, false);
-				boolean inverse = "-1".equals(e.getTag(OSMTagKey.ONEWAY)); //$NON-NLS-1$
-				for (int i = 0; i < mapZooms.size(); i++) {
-					writeBinaryEntityToMapDatabase(e, e.getId(), i == 0 ? inverse : false, i);
+		}
+		if (indexMap && e instanceof Relation && "restriction".equals(e.getTag(OSMTagKey.TYPE))) { //$NON-NLS-1$
+			String val = e.getTag("restriction"); //$NON-NLS-1$
+			if (val != null) {
+				byte type = -1;
+				if ("no_right_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_NO_RIGHT_TURN;
+				} else if ("no_left_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_NO_LEFT_TURN;
+				} else if ("no_u_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_NO_U_TURN;
+				} else if ("no_straight_on".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON;
+				} else if ("only_right_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN;
+				} else if ("only_left_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_ONLY_LEFT_TURN;
+				} else if ("only_straight_on".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON;
 				}
-
-			}
-
-			if (indexAddress) {
-				// index not only buildings but also nodes that belongs to addr:interpolation ways
-				if (e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER) != null && e.getTag(OSMTagKey.ADDR_STREET) != null) {
-					// TODO e.getTag(OSMTagKey.ADDR_CITY) could be used to find city however many cities could have same name!
-					// check that building is not registered already
-					boolean exist = false;
-					if (loadInMemory) {
-						exist = addressBuildingLocalSet.contains(e.getId());
-					} else {
-						addressSearchBuildingStat.setLong(1, e.getId());
-						ResultSet rs = addressSearchBuildingStat.executeQuery();
-						exist = rs.next();
-						rs.close();
-
-					}
-					if (!exist) {
-						loadEntityData(e, false);
-						LatLon l = e.getLatLon();
-						City city = getClosestCity(l);
-						Long idStreet = getStreetInCity(city, e.getTag(OSMTagKey.ADDR_STREET), l, (e.getId() << 2));
-						if (idStreet != null) {
-							Building building = new Building(e);
-							building.setName(e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER));
-							DataIndexWriter.writeBuilding(addressBuildingStat, pStatements, idStreet, building, BATCH_SIZE);
-						}
-					}
-				} else if (e instanceof Way /* && OSMSettings.wayForCar(e.getTag(OSMTagKey.HIGHWAY)) */
-						&& e.getTag(OSMTagKey.HIGHWAY) != null && e.getTag(OSMTagKey.NAME) != null) {
-					// suppose that streets with names are ways for car
-					// Ignore all ways that have house numbers and highway type
-					boolean exist = false;
-
-					// if we saved address ways we could checked that we registered before
-					if (saveAddressWays) {
-						if (loadInMemory) {
-							exist = addressStreetNodeLocalSet.contains(e.getId());
-						} else {
-							addressSearchStreetNodeStat.setLong(1, e.getId());
-							ResultSet rs = addressSearchStreetNodeStat.executeQuery();
-							exist = rs.next();
-							rs.close();
-						}
-					}
-
-					// check that street way is not registered already
-					if (!exist) {
-						loadEntityData(e, false);
-						LatLon l = e.getLatLon();
-						City city = getClosestCity(l);
-						Long idStreet = getStreetInCity(city, e.getTag(OSMTagKey.NAME), l, (e.getId() << 2) | 1);
-						if (idStreet != null && saveAddressWays) {
-							DataIndexWriter.writeStreetWayNodes(addressStreetNodeStat, pStatements, idStreet, (Way) e, BATCH_SIZE);
-						}
-					}
-				}
-				if (e instanceof Relation) {
-					if (e.getTag(OSMTagKey.POSTAL_CODE) != null) {
-						loadEntityData(e, false);
-						postalCodeRelations.add((Relation) e);
-					}
-				}
-			}
-		} else if(step == STEP_BORDER_CITY_WAYS) {
-			if (indexAddress) {
-				if (e instanceof Way && "administrative".equals(e.getTag(OSMTagKey.BOUNDARY))) { //$NON-NLS-1$
-					indexBoundariesRelation(e);
-				}
-			}
-		} else if (step == STEP_ADDRESS_RELATIONS_AND_MULTYPOLYGONS) {
-			if (indexAddress) {
-				if (e instanceof Relation && "address".equals(e.getTag(OSMTagKey.TYPE))) { //$NON-NLS-1$
-					indexAddressRelation((Relation) e);
-				}
-				
-				if (e instanceof Relation && "administrative".equals(e.getTag(OSMTagKey.BOUNDARY))) { //$NON-NLS-1$
-					indexBoundariesRelation((Relation) e);
-				}
-			}
-			if (indexMap && e instanceof Relation && "restriction".equals(e.getTag(OSMTagKey.TYPE))) { //$NON-NLS-1$
-				String val = e.getTag("restriction"); //$NON-NLS-1$
-				if (val != null) {
-					byte type = -1;
-					if ("no_right_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
-						type = MapRenderingTypes.RESTRICTION_NO_RIGHT_TURN;
-					} else if ("no_left_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
-						type = MapRenderingTypes.RESTRICTION_NO_LEFT_TURN;
-					} else if ("no_u_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
-						type = MapRenderingTypes.RESTRICTION_NO_U_TURN;
-					} else if ("no_straight_on".equalsIgnoreCase(val)) { //$NON-NLS-1$
-						type = MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON;
-					} else if ("only_right_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
-						type = MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN;
-					} else if ("only_left_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
-						type = MapRenderingTypes.RESTRICTION_ONLY_LEFT_TURN;
-					} else if ("only_straight_on".equalsIgnoreCase(val)) { //$NON-NLS-1$
-						type = MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON;
-					}
-					if (type != -1) {
-						loadEntityData(e, true);
-						Collection<EntityId> fromL = ((Relation) e).getMemberIds("from"); //$NON-NLS-1$
-						Collection<EntityId> toL = ((Relation) e).getMemberIds("to"); //$NON-NLS-1$
-						if (!fromL.isEmpty() && !toL.isEmpty()) {
-							EntityId from = fromL.iterator().next();
-							EntityId to = toL.iterator().next();
-							if (from.getType() == EntityType.WAY) {
-								if (!highwayRestrictions.containsKey(from.getId())) {
-									highwayRestrictions.put(from.getId(), new ArrayList<Long>(4));
-								}
-								highwayRestrictions.get(from.getId()).add((to.getId() << 3) | (long) type);
+				if (type != -1) {
+					ctx.loadEntityData(e, true);
+					Collection<EntityId> fromL = ((Relation) e).getMemberIds("from"); //$NON-NLS-1$
+					Collection<EntityId> toL = ((Relation) e).getMemberIds("to"); //$NON-NLS-1$
+					if (!fromL.isEmpty() && !toL.isEmpty()) {
+						EntityId from = fromL.iterator().next();
+						EntityId to = toL.iterator().next();
+						if (from.getType() == EntityType.WAY) {
+							if (!highwayRestrictions.containsKey(from.getId())) {
+								highwayRestrictions.put(from.getId(), new ArrayList<Long>(4));
 							}
+							highwayRestrictions.get(from.getId()).add((to.getId() << 3) | (long) type);
 						}
 					}
 				}
 			}
-			if (indexMap && e instanceof Relation && "multipolygon".equals(e.getTag(OSMTagKey.TYPE))) { //$NON-NLS-1$
-				loadEntityData(e, true);
-				Map<Entity, String> entities = ((Relation) e).getMemberEntities();
+		}
+		if (indexMap && e instanceof Relation && "multipolygon".equals(e.getTag(OSMTagKey.TYPE))) { //$NON-NLS-1$
+			ctx.loadEntityData(e, true);
+			Map<Entity, String> entities = ((Relation) e).getMemberEntities();
 
-				boolean outerFound = false;
+			boolean outerFound = false;
+			for (Entity es : entities.keySet()) {
+				if (es instanceof Way) {
+					boolean inner = "inner".equals(entities.get(es)); //$NON-NLS-1$
+					if (!inner) {
+						outerFound = true;
+						for (String t : es.getTagKeySet()) {
+							e.putTag(t, es.getTag(t));
+						}
+						break;
+					}
+				}
+			}
+			if(!outerFound){
+				log.warn("Probably map bug: Multipoligon id=" + e.getId() + " contains only inner ways : "); //$NON-NLS-1$ //$NON-NLS-2$
+				return;
+			}
+
+			int mtType = findMultiPolygonType(e, 0);
+			if (mtType != 0) {
+
+				String name = renderingTypes.getEntityName(e);
+				List<List<Way>> completedRings = new ArrayList<List<Way>>();
+				List<List<Way>> incompletedRings = new ArrayList<List<Way>>();
 				for (Entity es : entities.keySet()) {
 					if (es instanceof Way) {
-						boolean inner = "inner".equals(entities.get(es)); //$NON-NLS-1$
-						if (!inner) {
-							outerFound = true;
-							for (String t : es.getTagKeySet()) {
-								e.putTag(t, es.getTag(t));
-							}
-							break;
+						if (!((Way) es).getNodeIds().isEmpty()) {
+							combineMultiPolygons((Way) es, completedRings, incompletedRings);
 						}
 					}
 				}
-				if(!outerFound){
-					log.warn("Probably map bug: Multipoligon id=" + e.getId() + " contains only inner ways : "); //$NON-NLS-1$ //$NON-NLS-2$
+				// skip incompleted rings and do not add whole relation ?
+				if (!incompletedRings.isEmpty()) {
+					 // log.warn("In multipolygon  " + e.getId() + " there are incompleted ways : " + incompletedRings);
 					return;
+					// completedRings.addAll(incompletedRings);
 				}
 
-				int mtType = findMultiPolygonType(e, 0);
-				if (mtType != 0) {
-
-					String name = renderingTypes.getEntityName(e);
-					List<List<Way>> completedRings = new ArrayList<List<Way>>();
-					List<List<Way>> incompletedRings = new ArrayList<List<Way>>();
-					for (Entity es : entities.keySet()) {
-						if (es instanceof Way) {
-							if (!((Way) es).getNodeIds().isEmpty()) {
-								combineMultiPolygons((Way) es, completedRings, incompletedRings);
-							}
+				// skip completed rings that are not one type
+				for (List<Way> l : completedRings) {
+					boolean innerType = "inner".equals(entities.get(l.get(0))); //$NON-NLS-1$
+					for (Way way : l) {
+						boolean inner = "inner".equals(entities.get(way)); //$NON-NLS-1$
+						if (innerType != inner) {
+							log.warn("Probably map bug: Multipoligon contains outer and inner ways.\n" +  //$NON-NLS-1$
+									"Way:" + way.getId() + " is strange part of completed ring. InnerType:" + innerType + " way inner: " + inner + " way inner string:" + entities.get(way)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+							return;
 						}
 					}
-					// skip incompleted rings and do not add whole relation ?
-					if (!incompletedRings.isEmpty()) {
-						 // log.warn("In multipolygon  " + e.getId() + " there are incompleted ways : " + incompletedRings);
-						return;
-						// completedRings.addAll(incompletedRings);
-					}
-
-					// skip completed rings that are not one type
-					for (List<Way> l : completedRings) {
-						boolean innerType = "inner".equals(entities.get(l.get(0))); //$NON-NLS-1$
-						for (Way way : l) {
-							boolean inner = "inner".equals(entities.get(way)); //$NON-NLS-1$
-							if (innerType != inner) {
-								log.warn("Probably map bug: Multipoligon contains outer and inner ways.\n" +  //$NON-NLS-1$
-										"Way:" + way.getId() + " is strange part of completed ring. InnerType:" + innerType + " way inner: " + inner + " way inner string:" + entities.get(way)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-								return;
-							}
-						}
-					}
-
-					for (List<Way> l : completedRings) {
-						boolean innerType = "inner".equals(entities.get(l.get(0))); //$NON-NLS-1$
-						boolean clockwise = isClockwiseWay(l);
-						// clockwise - outer (like coastline), anticlockwise - inner
-						boolean inverse = clockwise != !innerType;
-						for (Way way : l) {
-							boolean inner = "inner".equals(entities.get(way)); //$NON-NLS-1$
-							if (!inner && name != null) {
-								multiPolygonsNames.put(way.getId(), name);
-							}
-							putMultipolygonType(multiPolygonsWays[0], way.getId(), mtType, inverse);
-							for (int i = 1; i < multiPolygonsWays.length; i++) {
-								int type = findMultiPolygonType(e, i);
-								if (type != 0) {
-									putMultipolygonType(multiPolygonsWays[i], way.getId(), type, inverse);
-								}
-							}
-						}
-					}
-
 				}
+
+				for (List<Way> l : completedRings) {
+					boolean innerType = "inner".equals(entities.get(l.get(0))); //$NON-NLS-1$
+					boolean clockwise = isClockwiseWay(l);
+					// clockwise - outer (like coastline), anticlockwise - inner
+					boolean inverse = clockwise != !innerType;
+					for (Way way : l) {
+						boolean inner = "inner".equals(entities.get(way)); //$NON-NLS-1$
+						if (!inner && name != null) {
+							multiPolygonsNames.put(way.getId(), name);
+						}
+						putMultipolygonType(multiPolygonsWays[0], way.getId(), mtType, inverse);
+						for (int i = 1; i < multiPolygonsWays.length; i++) {
+							int type = findMultiPolygonType(e, i);
+							if (type != 0) {
+								putMultipolygonType(multiPolygonsWays[i], way.getId(), type, inverse);
+							}
+						}
+					}
+				}
+
 			}
-		} else if (step == STEP_CITY_NODES) {
-			registerCityIfNeeded(e);
 		}
+
 	}
 
 	public void combineMultiPolygons(Way w, List<List<Way>> completedRings, List<List<Way>> incompletedRings) {
@@ -1464,7 +1222,7 @@ public class IndexCreator {
 			return null;
 		}
 
-		simplifyDouglasPeucker(nodes, zoom + 8, 3, way);
+		MapAlgorithms.simplifyDouglasPeucker(nodes, zoom + 8, 3, way);
 		if (way.getNodes().size() < 2) {
 			return null;
 		}
@@ -1592,7 +1350,7 @@ public class IndexCreator {
 			
 			if (!skip) {
 				Way newWs = new Way(id);
-				simplifyDouglasPeucker(wNodes, zoom - 1 + 8, 3, newWs);
+				MapAlgorithms.simplifyDouglasPeucker(wNodes, zoom - 1 + 8, 3, newWs);
 				
 				int type = decodeTypesFromOneLong(ltype);
 				DataIndexWriter.insertBinaryMapRenderObjectIndex(pStatements, mapBinaryStat, mapTree[level], newWs, name, 
@@ -1602,7 +1360,6 @@ public class IndexCreator {
 		}
 		
 	}
-	
 	
 	private boolean checkForSmallAreas(List<Node> nodes, int zoom, int minz, int maxz) {
 		int minX = Integer.MAX_VALUE;
@@ -1629,71 +1386,8 @@ public class IndexCreator {
 
 	}
 	
-	private void simplifyDouglasPeucker(List<Node> n, int zoom, int epsilon, Way w){
-		ArrayList<Integer> l = new ArrayList<Integer>();
-		int first = 0;
-		while(first < n.size()){
-			if(n.get(first) != null){
-				break;
-			}
-			first++;
-		}
-		int last = n.size() - 1;
-		while (last >= 0) {
-			if (n.get(last) != null) {
-				break;
-			}
-			last--;
-		}
-		if(last - first < 1){
-			return;
-		}
-		boolean cycle = n.get(first).getId() == n.get(last).getId();
-		simplifyDouglasPeucker(n, zoom, epsilon, l, first, cycle ? last - 1: last);
-		w.addNode(n.get(first));
-		for (int i = 0; i < l.size(); i++) {
-			w.addNode(n.get(l.get(i)));
-		}
-		if (cycle) {
-			w.addNode(n.get(first));
-		}
-	}
 	
-	private void simplifyDouglasPeucker(List<Node> n, int zoom, int epsilon, List<Integer> ints, int start, int end){
-		double dmax = -1;
-		int index = -1;
-		for (int i = start + 1; i <= end - 1; i++) {
-			if(n.get(i) == null){
-				continue;
-			}
-			double d = orthogonalDistance(zoom, n.get(start), n.get(end), n.get(i));// calculate distance from line
-			if (d > dmax) {
-				dmax = d;
-				index = i;
-			}
-		}
-		if(dmax >= epsilon){
-			simplifyDouglasPeucker(n, zoom, epsilon, ints, start, index);
-			simplifyDouglasPeucker(n, zoom, epsilon, ints, index, end);
-		} else {
-			ints.add(end);
-		}
-	}
-
-	private double orthogonalDistance(int zoom, Node nodeLineStart, Node nodeLineEnd, Node node) {
-		double x1 = MapUtils.getTileNumberX(zoom, nodeLineStart.getLongitude());
-		double y1 = MapUtils.getTileNumberY(zoom, nodeLineStart.getLatitude());
-		double x2 = MapUtils.getTileNumberX(zoom, nodeLineEnd.getLongitude());
-		double y2 = MapUtils.getTileNumberY(zoom, nodeLineEnd.getLatitude());
-		double x = MapUtils.getTileNumberX(zoom, node.getLongitude());
-		double y = MapUtils.getTileNumberY(zoom, node.getLatitude());
-		double A = x - x1;
-		double B = y - y1;
-		double C = x2 - x1;
-		double D = y2 - y1;
-		return Math.abs(A * D - C * B) / Math.sqrt(C * C + D * D);
-	}
-
+	
 	public boolean nodeIsLastSubTree(RTree tree, long ptr) throws RTreeException {
 		rtree.Node parent = tree.getReadNode(ptr);
 		Element[] e = parent.getAllElements();
@@ -1983,15 +1677,7 @@ public class IndexCreator {
 					allRelations = filter.getAllRelations();
 				}
 			}
-
-			pselectNode = dbConn.prepareStatement("select n.latitude, n.longitude, t.skeys, t.value from node n left join tags t on n.id = t.id and t.type = 0 where n.id = ?"); //$NON-NLS-1$
-			pselectWay = dbConn.prepareStatement("select w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " + //$NON-NLS-1$
-					"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 inner join node n on w.node = n.id " + //$NON-NLS-1$
-					"where w.id = ? order by w.ord"); //$NON-NLS-1$
-			pselectRelation = dbConn.prepareStatement("select r.member, r.type, r.role, r.ord, t.skeys, t.value " + //$NON-NLS-1$
-					"from relations r left join tags t on r.id = t.id and t.type = 2 and r.ord = 0 " + //$NON-NLS-1$
-					"where r.id = ? order by r.ord"); //$NON-NLS-1$
-			pselectTags = dbConn.prepareStatement("select skeys, value from tags where id = ? and type = ?"); //$NON-NLS-1$
+			accessor.initDatabase(dbConn);
 
 			// do not create temp map file and rtree files
 			if (recreateOnlyBinaryFile) {
@@ -2026,7 +1712,13 @@ public class IndexCreator {
 					progress.setGeneralProgress("[40 / 100]"); //$NON-NLS-1$
 					progress.startTask(Messages.getString("IndexCreator.INDEX_CITIES"), allNodes); //$NON-NLS-1$
 					if (!loadFromPath) {
-						allNodes = iterateOverEntities(progress, EntityType.NODE, allNodes, STEP_CITY_NODES);
+						// load cities names
+						allNodes = accessor.iterateOverEntities(progress, EntityType.NODE, allNodes, new OsmDbVisitor() {
+							@Override
+							public void iterateEntity(Entity e, OsmDbAccessorContext ctx) {
+								registerCityIfNeeded(e);								
+							}
+						});
 					}
 
 					for (City c : cities.values()) {
@@ -2045,12 +1737,23 @@ public class IndexCreator {
 				if (indexAddress || indexMap) {
 					progress.setGeneralProgress("[30 / 100]"); //$NON-NLS-1$
 					progress.startTask(Messages.getString("IndexCreator.PREINDEX_ADRESS_MAP"), allRelations); //$NON-NLS-1$
-					allRelations = iterateOverEntities(progress, EntityType.RELATION, allRelations,
-							STEP_ADDRESS_RELATIONS_AND_MULTYPOLYGONS);
+					allRelations = accessor.iterateOverEntities(progress, EntityType.RELATION, allRelations, new OsmDbVisitor() {
+						@Override
+						public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
+							indexAddressRelationsAndMultiPolygons(e, ctx);
+						}
+					});
 					if (indexAddress) {
 						progress.setGeneralProgress("[40 / 100]"); //$NON-NLS-1$
 						progress.startTask(Messages.getString("IndexCreator.PREINDEX_ADRESS_MAP"), allWays); //$NON-NLS-1$
-						allWays = iterateOverEntities(progress, EntityType.WAY, allWays, STEP_BORDER_CITY_WAYS);
+						allWays = accessor.iterateOverEntities(progress, EntityType.WAY, allWays, new OsmDbVisitor() {
+							@Override
+							public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
+								if (e instanceof Way && "administrative".equals(e.getTag(OSMTagKey.BOUNDARY))) { //$NON-NLS-1$
+									indexBoundariesRelation(e ,ctx);
+								}
+							}
+						});
 					}
 					
 					// commit to put all cities
@@ -2072,14 +1775,29 @@ public class IndexCreator {
 				if (indexPOI || indexAddress || indexMap) {
 					progress.setGeneralProgress("[50 / 100]");
 					progress.startTask(Messages.getString("IndexCreator.PROCESS_OSM_NODES"), allNodes);
-					iterateOverEntities(progress, EntityType.NODE, allNodes, STEP_MAIN);
+					accessor.iterateOverEntities(progress, EntityType.NODE, allNodes, new OsmDbVisitor() {
+						@Override
+						public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
+							iterateMainEntity(e, ctx);
+						}
+					});
 					progress.setGeneralProgress("[70 / 100]");
 					progress.startTask(Messages.getString("IndexCreator.PROCESS_OSM_WAYS"), allWays);
-					iterateOverEntities(progress, EntityType.WAY, allWays, STEP_MAIN);
+					accessor.iterateOverEntities(progress, EntityType.WAY, allWays, new OsmDbVisitor() {
+						@Override
+						public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
+							iterateMainEntity(e, ctx);
+						}
+					});
 				}
 				progress.setGeneralProgress("[85 / 100]");
 				progress.startTask(Messages.getString("IndexCreator.PROCESS_OSM_REL"), allRelations);
-				iterateOverEntities(progress, EntityType.RELATION, allRelations, STEP_MAIN);
+				accessor.iterateOverEntities(progress, EntityType.RELATION, allRelations, new OsmDbVisitor() {
+					@Override
+					public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
+						iterateMainEntity(e, ctx);
+					}
+				});
 				
 				// 3.4 combine all low level ways and simplify them
 				if(indexMap){
@@ -2164,18 +1882,8 @@ public class IndexCreator {
 			throw e;
 		} finally {
 			try {
-				if (pselectNode != null) {
-					pselectNode.close();
-				}
-				if (pselectWay != null) {
-					pselectWay.close();
-				}
-				if (pselectRelation != null) {
-					pselectRelation.close();
-				}
-				if (pselectTags != null) {
-					pselectTags.close();
-				}
+				accessor.closeReadingConnection();
+				
 				for (PreparedStatement p : pStatements.keySet()) {
 					if (pStatements.get(p) > 0) {
 						p.executeBatch();
@@ -2183,14 +1891,7 @@ public class IndexCreator {
 					p.close();
 				}
 
-				if (poiConnection != null) {
-					poiConnection.commit();
-					poiConnection.close();
-					poiConnection = null;
-					if (lastModifiedDate != null) {
-						poiIndexFile.setLastModified(lastModifiedDate);
-					}
-				}
+				indexPoiCreator.commitAndClosePoiFile(lastModifiedDate);
 
 				if (mapConnection != null) {
 					mapConnection.commit();
@@ -2221,19 +1922,6 @@ public class IndexCreator {
 						if (f.exists() && deleteDatabaseIndexes) {
 							f.delete();
 						}
-					}
-				}
-
-				// delete transport rtree files
-				if (indexTransportCreator.transportStopsTree != null) {
-					indexTransportCreator.transportStopsTree.getFileHdr().getFile().close();
-					File f = new File(getRTreeTransportStopsFileName());
-					if (f.exists() && deleteDatabaseIndexes) {
-						f.delete();
-					}
-					f = new File(getRTreeTransportStopsPackFileName());
-					if (f.exists() && deleteDatabaseIndexes) {
-						f.delete();
 					}
 				}
 
@@ -2409,18 +2097,7 @@ public class IndexCreator {
 		}
 
 		if (indexPOI) {
-			poiIndexFile = new File(workingDir, getPoiFileName());
-			// to save space
-			if (poiIndexFile.exists()) {
-				Algoritms.removeAllFiles(poiIndexFile);
-			}
-			poiIndexFile.getParentFile().mkdirs();
-			// creating nodes db to fast access for all nodes
-			poiConnection = getDatabaseConnection(poiIndexFile.getAbsolutePath(), true);
-			DataIndexWriter.createPoiIndexStructure(poiConnection, dialect);
-			poiPreparedStatement = DataIndexWriter.createStatementAmenityInsert(poiConnection);
-			pStatements.put(poiPreparedStatement, 0);
-			poiConnection.setAutoCommit(false);
+			indexPoiCreator.createDatabaseStructure(new File(workingDir, getPoiFileName()), pStatements);
 		}
 
 		if (indexTransport) {
