@@ -183,6 +183,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		Cursor query = db.rawQuery("SELECT " + TRACK_COL_LAT + "," + TRACK_COL_LON + "," + TRACK_COL_ALTITUDE + "," //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 				+ TRACK_COL_SPEED + "," + TRACK_COL_DATE + " FROM " + TRACK_NAME +" ORDER BY " + TRACK_COL_DATE +" ASC", null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		long previousTime = 0;
+		long previousInterval = 0;
 		TrkSegment segment = null;
 		Track track = null;
 		if (query.moveToFirst()) {
@@ -194,11 +195,12 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				pt.speed = query.getDouble(3);
 				long time = query.getLong(4);
 				pt.time = time;
+				long currentInterval = Math.abs(time - previousTime);
 				
-				if (track != null &&  Math.abs(time - previousTime) < 60000) {
-					// 1 hour - same segment
+				if (track != null && (currentInterval < 6 * 60 * 1000 || currentInterval < 10 * previousInterval)) {
+					// 6 minute - same segment
 					segment.points.add(pt);
-				} else if (track != null && Math.abs(time - previousTime) < 2 * 60000) {
+				} else if (track != null && currentInterval < 2 * 60 * 60 * 1000) {
 					// 2 hour - same track
 					segment = new TrkSegment();
 					segment.points.add(pt);
@@ -219,7 +221,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 						dataTracks.put(date, file);
 					}
 				}
-
+				previousInterval = currentInterval;
 				previousTime = time;
 			} while (query.moveToNext());
 		}
