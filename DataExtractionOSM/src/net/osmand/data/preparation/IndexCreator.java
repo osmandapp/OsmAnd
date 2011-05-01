@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.Map.Entry;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
@@ -40,7 +39,6 @@ import net.osmand.data.City;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.Street;
 import net.osmand.data.TransportRoute;
-import net.osmand.data.TransportStop;
 import net.osmand.data.City.CityType;
 import net.osmand.data.index.DataIndexReader;
 import net.osmand.data.index.DataIndexWriter;
@@ -89,10 +87,7 @@ public class IndexCreator {
 	private static final Log log = LogFactory.getLog(IndexCreator.class);
 
 	// ONLY derby.jar needed for derby dialect
-	private static final String DERBY_DIALECT = "DERBY";
-	private static final String H2_DIALECT = "H2";
-	private static final String SQLITE_DIALECT = "SQLITE";
-	private static final String CURRENT_DB = SQLITE_DIALECT;
+	private final DBDialect dialect = DBDialect.SQLITE;
 
 	public static final int BATCH_SIZE = 5000;
 	public static final int BATCH_SIZE_OSM = 10000;
@@ -123,6 +118,8 @@ public class IndexCreator {
 	private PreparedStatement pselectRelation;
 	private PreparedStatement pselectTags;
 
+	
+	private IndexTransportCreator indexTransportCreator;
 	// constants to start process from the middle and save temporary results
 	private boolean recreateOnlyBinaryFile = false; // false;
 	private boolean deleteOsmDB = false;
@@ -149,12 +146,6 @@ public class IndexCreator {
 	private PreparedStatement addressStreetStat;
 	private PreparedStatement addressBuildingStat;
 	private PreparedStatement addressStreetNodeStat;
-
-	private Set<Long> visitedStops = new HashSet<Long>();
-	private PreparedStatement transRouteStat;
-	private PreparedStatement transRouteStopsStat;
-	private PreparedStatement transStopsStat;
-	private RTree transportStopsTree;
 
 	private RTree[] mapTree = null;
 	private MapZooms mapZooms = MapZooms.getDefault();  
@@ -193,20 +184,11 @@ public class IndexCreator {
 	List<Integer> typeUse = new ArrayList<Integer>(8);
 	List<Long> restrictionsUse = new ArrayList<Long>(8);
 
-	public static boolean usingSQLite() {
-		return CURRENT_DB.equals(SQLITE_DIALECT);
-	}
 
-	public static boolean usingDerby() {
-		return CURRENT_DB.equals(DERBY_DIALECT);
-	}
-
-	public static boolean usingH2() {
-		return CURRENT_DB.equals(H2_DIALECT);
-	}
 
 	public IndexCreator(File workingDir) {
 		this.workingDir = workingDir;
+		this.indexTransportCreator = new IndexTransportCreator(this); 
 	}
 
 	public void setIndexAddress(boolean indexAddress) {
@@ -246,184 +228,6 @@ public class IndexCreator {
 		return level;
 	}
 */
-	protected class NewDataExtractionOsmFilter implements IOsmStorageFilter {
-
-		int currentCountNode = 0;
-		private PreparedStatement prepNode;
-		int allNodes = 0;
-
-		int currentRelationsCount = 0;
-		private PreparedStatement prepRelations;
-		int allRelations = 0;
-
-		int currentWaysCount = 0;
-		private PreparedStatement prepWays;
-		int allWays = 0;
-
-		int currentTagsCount = 0;
-		private PreparedStatement prepTags;
-
-		public void initDatabase() throws SQLException {
-			// prepare tables
-			Statement stat = dbConn.createStatement();
-			if (usingDerby()) {
-				try {
-					stat.executeUpdate("drop table node"); //$NON-NLS-1$
-				} catch (SQLException e) {
-					// ignore it
-				}
-			} else {
-				stat.executeUpdate("drop table if exists node"); //$NON-NLS-1$
-			}
-			stat.executeUpdate("create table node (id bigint primary key, latitude double, longitude double)"); //$NON-NLS-1$
-			stat.executeUpdate("create index IdIndex ON node (id)"); //$NON-NLS-1$
-			if (usingDerby()) {
-				try {
-					stat.executeUpdate("drop table ways"); //$NON-NLS-1$
-				} catch (SQLException e) {
-					// ignore it
-				}
-			} else {
-				stat.executeUpdate("drop table if exists ways"); //$NON-NLS-1$
-			}
-			stat.executeUpdate("create table ways (id bigint, node bigint, ord smallint, primary key (id, ord))"); //$NON-NLS-1$
-			stat.executeUpdate("create index IdWIndex ON ways (id)"); //$NON-NLS-1$
-			if (usingDerby()) {
-				try {
-					stat.executeUpdate("drop table relations"); //$NON-NLS-1$
-				} catch (SQLException e) {
-					// ignore it
-				}
-			} else {
-				stat.executeUpdate("drop table if exists relations"); //$NON-NLS-1$
-			}
-			stat
-					.executeUpdate("create table relations (id bigint, member bigint, type smallint, role varchar(255), ord smallint, primary key (id, ord))"); //$NON-NLS-1$
-			stat.executeUpdate("create index IdRIndex ON relations (id)"); //$NON-NLS-1$
-			if (usingDerby()) {
-				try {
-					stat.executeUpdate("drop table tags"); //$NON-NLS-1$
-				} catch (SQLException e) {
-					// ignore it
-				}
-			} else {
-				stat.executeUpdate("drop table if exists tags"); //$NON-NLS-1$
-			}
-			stat.executeUpdate("create table tags (id bigint, type smallint, skeys varchar(255), value varchar(255), primary key (id, type, skeys))"); //$NON-NLS-1$
-			stat.executeUpdate("create index IdTIndex ON tags (id, type)"); //$NON-NLS-1$
-			stat.close();
-
-			prepNode = dbConn.prepareStatement("insert into node values (?, ?, ?)"); //$NON-NLS-1$
-			prepWays = dbConn.prepareStatement("insert into ways values (?, ?, ?)"); //$NON-NLS-1$
-			prepRelations = dbConn.prepareStatement("insert into relations values (?, ?, ?, ?, ?)"); //$NON-NLS-1$
-			prepTags = dbConn.prepareStatement("insert into tags values (?, ?, ?, ?)"); //$NON-NLS-1$
-			dbConn.setAutoCommit(false);
-		}
-
-		public void finishLoading() throws SQLException {
-			if (currentCountNode > 0) {
-				prepNode.executeBatch();
-			}
-			prepNode.close();
-			if (currentWaysCount > 0) {
-				prepWays.executeBatch();
-			}
-			prepWays.close();
-			if (currentRelationsCount > 0) {
-				prepRelations.executeBatch();
-			}
-			prepRelations.close();
-			if (currentTagsCount > 0) {
-				prepTags.executeBatch();
-			}
-			prepTags.close();
-		}
-
-		@Override
-		public boolean acceptEntityToLoad(OsmBaseStorage storage, EntityId entityId, Entity e) {
-			// Register all city labelbs
-			registerCityIfNeeded(e);
-			// put all nodes into temporary db to get only required nodes after loading all data
-			try {
-				if (e instanceof Node) {
-					currentCountNode++;
-					if (!e.getTags().isEmpty()) {
-						allNodes++;
-					}
-					prepNode.setLong(1, e.getId());
-					prepNode.setDouble(2, ((Node) e).getLatitude());
-					prepNode.setDouble(3, ((Node) e).getLongitude());
-					prepNode.addBatch();
-					if (currentCountNode >= BATCH_SIZE_OSM) {
-						prepNode.executeBatch();
-						dbConn.commit(); // clear memory
-						currentCountNode = 0;
-					}
-				} else if (e instanceof Way) {
-					allWays++;
-					short ord = 0;
-					for (Long i : ((Way) e).getNodeIds()) {
-						currentWaysCount++;
-						prepWays.setLong(1, e.getId());
-						prepWays.setLong(2, i);
-						prepWays.setLong(3, ord++);
-						prepWays.addBatch();
-					}
-					if (currentWaysCount >= BATCH_SIZE_OSM) {
-						prepWays.executeBatch();
-						dbConn.commit(); // clear memory
-						currentWaysCount = 0;
-					}
-				} else {
-					allRelations++;
-					short ord = 0;
-					for (Entry<EntityId, String> i : ((Relation) e).getMembersMap().entrySet()) {
-						currentRelationsCount++;
-						prepRelations.setLong(1, e.getId());
-						prepRelations.setLong(2, i.getKey().getId());
-						prepRelations.setLong(3, i.getKey().getType().ordinal());
-						prepRelations.setString(4, i.getValue());
-						prepRelations.setLong(5, ord++);
-						prepRelations.addBatch();
-					}
-					if (currentRelationsCount >= BATCH_SIZE_OSM) {
-						prepRelations.executeBatch();
-						dbConn.commit(); // clear memory
-						currentRelationsCount = 0;
-					}
-				}
-				for (Entry<String, String> i : e.getTags().entrySet()) {
-					currentTagsCount++;
-					prepTags.setLong(1, e.getId());
-					prepTags.setLong(2, EntityType.valueOf(e).ordinal());
-					prepTags.setString(3, i.getKey());
-					prepTags.setString(4, i.getValue());
-					prepTags.addBatch();
-				}
-				if (currentTagsCount >= BATCH_SIZE_OSM) {
-					prepTags.executeBatch();
-					dbConn.commit(); // clear memory
-					currentTagsCount = 0;
-				}
-			} catch (SQLException ex) {
-				log.error("Could not save in db", ex); //$NON-NLS-1$
-			}
-			// do not add to storage
-			return false;
-		}
-
-		public int getAllNodes() {
-			return allNodes;
-		}
-
-		public int getAllRelations() {
-			return allRelations;
-		}
-
-		public int getAllWays() {
-			return allWays;
-		}
-	}
 
 	public String getRegionName() {
 		if (regionName == null) {
@@ -440,30 +244,9 @@ public class IndexCreator {
 		return getDatabaseConnection(fileName, false);
 	}
 
-	public static void removeDatabase(File file) throws SQLException {
-		if (usingH2()) {
-			File[] list = file.getParentFile().listFiles();
-			for (File f : list) {
-				if (f.getName().startsWith(file.getName())) {
-					Algoritms.removeAllFiles(f);
-				}
-			}
-		} else {
-			Algoritms.removeAllFiles(file);
-		}
-
-	}
-
-	public static boolean databaseFileExists(File dbFile) {
-		if (usingH2()) {
-			return new File(dbFile.getAbsolutePath() + ".h2.db").exists(); //$NON-NLS-1$
-		} else {
-			return dbFile.exists();
-		}
-	}
 
 	private Connection getDatabaseConnection(String fileName, boolean forceSqLite) throws SQLException {
-		if (usingSQLite() || forceSqLite) {
+		if (DBDialect.SQLITE == dialect || forceSqLite) {
 			try {
 				Class.forName("org.sqlite.JDBC");
 			} catch (ClassNotFoundException e) {
@@ -475,7 +258,7 @@ public class IndexCreator {
 			statement.executeUpdate("PRAGMA synchronous = 0");
 			statement.close();
 			return connection;
-		} else if (usingDerby()) {
+		} else if (DBDialect.DERBY == dialect) {
 			try {
 				Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
 			} catch (ClassNotFoundException e) {
@@ -485,7 +268,7 @@ public class IndexCreator {
 			Connection conn = DriverManager.getConnection("jdbc:derby:" + fileName + ";create=true");
 			conn.setAutoCommit(false);
 			return conn;
-		} else if (usingH2()) {
+		} else if (DBDialect.H2 == dialect) {
 			try {
 				Class.forName("org.h2.Driver");
 			} catch (ClassNotFoundException e) {
@@ -723,116 +506,7 @@ public class IndexCreator {
 		rsTags.close();
 	}
 
-	private static Set<String> acceptedRoutes = new HashSet<String>();
-	static {
-		acceptedRoutes.add("bus"); //$NON-NLS-1$
-		acceptedRoutes.add("trolleybus"); //$NON-NLS-1$
-		acceptedRoutes.add("share_taxi"); //$NON-NLS-1$
-
-		acceptedRoutes.add("subway"); //$NON-NLS-1$
-		acceptedRoutes.add("train"); //$NON-NLS-1$
-
-		acceptedRoutes.add("tram"); //$NON-NLS-1$
-
-		acceptedRoutes.add("ferry"); //$NON-NLS-1$
-	}
-
-	private TransportRoute indexTransportRoute(Relation rel) {
-		String ref = rel.getTag(OSMTagKey.REF);
-		String route = rel.getTag(OSMTagKey.ROUTE);
-		String operator = rel.getTag(OSMTagKey.OPERATOR);
-		if (route == null || ref == null) {
-			return null;
-		}
-		if (!acceptedRoutes.contains(route)) {
-			return null;
-		}
-		TransportRoute r = new TransportRoute(rel, ref);
-		r.setOperator(operator);
-		r.setType(route);
-
-		if (operator != null) {
-			route = operator + " : " + route; //$NON-NLS-1$
-		}
-
-		final Map<TransportStop, Integer> forwardStops = new LinkedHashMap<TransportStop, Integer>();
-		final Map<TransportStop, Integer> backwardStops = new LinkedHashMap<TransportStop, Integer>();
-		int currentStop = 0;
-		int forwardStop = 0;
-		int backwardStop = 0;
-		for (Entry<Entity, String> e : rel.getMemberEntities().entrySet()) {
-			if (e.getValue().contains("stop")) { //$NON-NLS-1$
-				if (e.getKey() instanceof Node) {
-					TransportStop stop = new TransportStop(e.getKey());
-					boolean forward = e.getValue().contains("forward"); //$NON-NLS-1$
-					boolean backward = e.getValue().contains("backward"); //$NON-NLS-1$
-					currentStop++;
-					if (forward || !backward) {
-						forwardStop++;
-					}
-					if (backward) {
-						backwardStop++;
-					}
-					boolean common = !forward && !backward;
-					int index = -1;
-					int i = e.getValue().length() - 1;
-					int accum = 1;
-					while (i >= 0 && Character.isDigit(e.getValue().charAt(i))) {
-						if (index < 0) {
-							index = 0;
-						}
-						index = accum * Character.getNumericValue(e.getValue().charAt(i)) + index;
-						accum *= 10;
-						i--;
-					}
-					if (index < 0) {
-						index = forward ? forwardStop : (backward ? backwardStop : currentStop);
-					}
-					if (forward || common) {
-						forwardStops.put(stop, index);
-						r.getForwardStops().add(stop);
-					}
-					if (backward || common) {
-						if (common) {
-							// put with negative index
-							backwardStops.put(stop, -index);
-						} else {
-							backwardStops.put(stop, index);
-						}
-
-						r.getBackwardStops().add(stop);
-					}
-
-				}
-
-			} else if (e.getKey() instanceof Way) {
-				r.addWay((Way) e.getKey());
-			}
-		}
-		if (forwardStops.isEmpty() && backwardStops.isEmpty()) {
-			return null;
-		}
-		Collections.sort(r.getForwardStops(), new Comparator<TransportStop>() {
-			@Override
-			public int compare(TransportStop o1, TransportStop o2) {
-				return forwardStops.get(o1) - forwardStops.get(o2);
-			}
-		});
-		// all common stops are with negative index (reeval them)
-		for (TransportStop s : new ArrayList<TransportStop>(backwardStops.keySet())) {
-			if (backwardStops.get(s) < 0) {
-				backwardStops.put(s, backwardStops.size() + backwardStops.get(s) - 1);
-			}
-		}
-		Collections.sort(r.getBackwardStops(), new Comparator<TransportStop>() {
-			@Override
-			public int compare(TransportStop o1, TransportStop o2) {
-				return backwardStops.get(o1) - backwardStops.get(o2);
-			}
-		});
-
-		return r;
-	}
+	
 	
 	public String getCityAdminLevel() {
 		return cityAdminLevel;
@@ -1257,10 +931,9 @@ public class IndexCreator {
 			if (indexTransport) {
 				if (e instanceof Relation && e.getTag(OSMTagKey.ROUTE) != null) {
 					loadEntityData(e, true);
-					TransportRoute route = indexTransportRoute((Relation) e);
+					TransportRoute route = indexTransportCreator.indexTransportRoute((Relation) e);
 					if (route != null) {
-						DataIndexWriter.insertTransportIntoIndex(transRouteStat, transRouteStopsStat, transStopsStat, transportStopsTree,
-								visitedStops, route, pStatements, BATCH_SIZE);
+						indexTransportCreator.insertTransportIntoIndex(route, pStatements);
 					}
 				}
 			}
@@ -1641,7 +1314,7 @@ public class IndexCreator {
 		return ang;
 	}
 
-	private void registerCityIfNeeded(Entity e) {
+	public void registerCityIfNeeded(Entity e) {
 		if (e instanceof Node && e.getTag(OSMTagKey.PLACE) != null) {
 			City city = new City((Node) e);
 			if (city.getType() != null && !Algoritms.isEmpty(city.getName())) {
@@ -2211,170 +1884,6 @@ public class IndexCreator {
 		}
 	}
 
-	private int registerString(Map<String, Integer> stringTable, String s) {
-		if (stringTable.containsKey(s)) {
-			return stringTable.get(s);
-		}
-		int size = stringTable.size();
-		stringTable.put(s, size);
-		return size;
-	}
-
-	private Map<String, Integer> createStringTableForTransport() {
-		Map<String, Integer> stringTable = new LinkedHashMap<String, Integer>();
-		registerString(stringTable, "bus"); //$NON-NLS-1$
-		registerString(stringTable, "trolleybus"); //$NON-NLS-1$
-		registerString(stringTable, "subway"); //$NON-NLS-1$
-		registerString(stringTable, "tram"); //$NON-NLS-1$
-		registerString(stringTable, "share_taxi"); //$NON-NLS-1$
-		registerString(stringTable, "taxi"); //$NON-NLS-1$
-		registerString(stringTable, "train"); //$NON-NLS-1$
-		registerString(stringTable, "ferry"); //$NON-NLS-1$
-		return stringTable;
-	}
-
-	public void writeBinaryTransportIndex(BinaryMapIndexWriter writer) throws IOException, SQLException {
-		try {
-			transportStopsTree.flush();
-			visitedStops = null; // allow gc to collect it
-			PreparedStatement selectTransportRouteData = mapConnection.prepareStatement(
-					"SELECT id, dist, name, name_en, ref, operator, type FROM transport_route"); //$NON-NLS-1$
-			PreparedStatement selectTransportData = mapConnection.prepareStatement("SELECT S.stop, S.direction," + //$NON-NLS-1$
-					"  A.latitude,  A.longitude, A.name, A.name_en " + //$NON-NLS-1$
-					"FROM transport_route_stop S INNER JOIN transport_stop A ON A.id = S.stop WHERE S.route = ? ORDER BY S.ord asc"); //$NON-NLS-1$
-
-			writer.startWriteTransportIndex(regionName);
-
-			writer.startWriteTransportRoutes();
-
-			// expect that memory would be enough
-			Map<String, Integer> stringTable = createStringTableForTransport();
-			Map<Long, Long> transportRoutes = new LinkedHashMap<Long, Long>();
-
-			ResultSet rs = selectTransportRouteData.executeQuery();
-			List<TransportStop> directStops = new ArrayList<TransportStop>();
-			List<TransportStop> reverseStops = new ArrayList<TransportStop>();
-			while (rs.next()) {
-
-				long idRoute = rs.getLong(1);
-				int dist = rs.getInt(2);
-				String routeName = rs.getString(3);
-				String routeEnName = rs.getString(4);
-				if (routeEnName != null && routeEnName.equals(Junidecode.unidecode(routeName))) {
-					routeEnName = null;
-				}
-				String ref = rs.getString(5);
-				String operator = rs.getString(6);
-				String type = rs.getString(7);
-
-				selectTransportData.setLong(1, idRoute);
-				ResultSet rset = selectTransportData.executeQuery();
-				reverseStops.clear();
-				directStops.clear();
-				while (rset.next()) {
-					boolean dir = rset.getInt(2) != 0;
-					long idStop = rset.getInt(1);
-					String stopName = rset.getString(5);
-					String stopEnName = rset.getString(6);
-					if (stopEnName != null && stopEnName.equals(Junidecode.unidecode(stopName))) {
-						stopEnName = null;
-					}
-					TransportStop st = new TransportStop();
-					st.setId(idStop);
-					st.setName(stopName);
-					st.setLocation(rset.getDouble(3), rset.getDouble(4));
-					if (stopEnName != null) {
-						st.setEnName(stopEnName);
-					}
-					if (dir) {
-						directStops.add(st);
-					} else {
-						reverseStops.add(st);
-					}
-				}
-				writer.writeTransportRoute(idRoute, routeName, routeEnName, ref, operator, type, dist, directStops, reverseStops,
-						stringTable, transportRoutes);
-			}
-			rs.close();
-			selectTransportRouteData.close();
-			selectTransportData.close();
-			writer.endWriteTransportRoutes();
-
-			PreparedStatement selectTransportStop = mapConnection.prepareStatement(
-					"SELECT A.id,  A.latitude,  A.longitude, A.name, A.name_en FROM transport_stop A where A.id = ?"); //$NON-NLS-1$
-			PreparedStatement selectTransportRouteStop = mapConnection.prepareStatement(
-					"SELECT DISTINCT S.route FROM transport_route_stop S WHERE S.stop = ? "); //$NON-NLS-1$
-			long rootIndex = transportStopsTree.getFileHdr().getRootIndex();
-			rtree.Node root = transportStopsTree.getReadNode(rootIndex);
-			Rect rootBounds = calcBounds(root);
-			if (rootBounds != null) {
-				writer.startTransportTreeElement(rootBounds.getMinX(), rootBounds.getMaxX(), rootBounds.getMinY(), rootBounds.getMaxY());
-				writeBinaryTransportTree(root, transportStopsTree, writer, selectTransportStop, selectTransportRouteStop, 
-						transportRoutes, stringTable);
-				writer.endWriteTransportTreeElement();
-			}
-			selectTransportStop.close();
-			selectTransportRouteStop.close();
-
-			writer.writeTransportStringTable(stringTable);
-
-			writer.endWriteTransportIndex();
-			writer.flush();
-		} catch (RTreeException e) {
-			throw new IllegalStateException(e);
-		}
-	}
-
-	public void writeBinaryTransportTree(rtree.Node parent, RTree r, BinaryMapIndexWriter writer, 
-			PreparedStatement selectTransportStop, PreparedStatement selectTransportRouteStop, 
-			Map<Long, Long> transportRoutes, Map<String, Integer> stringTable) throws IOException, RTreeException, SQLException {
-		Element[] e = parent.getAllElements();
-		List<Long> routes = null;
-		for (int i = 0; i < parent.getTotalElements(); i++) {
-			Rect re = e[i].getRect();
-			if (e[i].getElementType() == rtree.Node.LEAF_NODE) {
-				long id = ((LeafElement) e[i]).getPtr();
-				selectTransportStop.setLong(1, id);
-				selectTransportRouteStop.setLong(1, id);
-				ResultSet rs = selectTransportStop.executeQuery();
-				if (rs.next()) {
-					int x24 = (int) MapUtils.getTileNumberX(24, rs.getDouble(3));
-					int y24 = (int) MapUtils.getTileNumberY(24, rs.getDouble(2));
-					String name = rs.getString(4);
-					String nameEn = rs.getString(5);
-					if (nameEn != null && nameEn.equals(Junidecode.unidecode(name))) {
-						nameEn = null;
-					}
-					ResultSet rset = selectTransportRouteStop.executeQuery();
-					if (routes == null) {
-						routes = new ArrayList<Long>();
-					} else {
-						routes.clear();
-					}
-					while (rset.next()) {
-						Long route = transportRoutes.get(rset.getLong(1));
-						if (route == null) {
-							log.error("Something goes wrong with transport route id = " + rset.getLong(1)); //$NON-NLS-1$
-						} else {
-							routes.add(route);
-						}
-					}
-					rset.close();
-					writer.writeTransportStop(id, x24, y24, name, nameEn, stringTable, routes);
-				} else {
-					log.error("Something goes wrong with transport id = " + id); //$NON-NLS-1$
-				}
-			} else {
-				long ptr = ((NonLeafElement) e[i]).getPtr();
-				rtree.Node ns = r.getReadNode(ptr);
-
-				writer.startTransportTreeElement(re.getMinX(), re.getMaxX(), re.getMinY(), re.getMaxY());
-				writeBinaryTransportTree(ns, r, writer, selectTransportStop, selectTransportRouteStop, transportRoutes, stringTable);
-				writer.endWriteTransportTreeElement();
-			}
-		}
-	}
-
 	public Rect calcBounds(rtree.Node n) {
 		Rect r = null;
 		Element[] e = n.getAllElements();
@@ -2450,12 +1959,12 @@ public class IndexCreator {
 		try {
 			// ////////////////////////////////////////////////////////////////////////
 			// 1. creating nodes db to fast access for all nodes and simply import all relations, ways, nodes to it
-			boolean loadFromPath = dbFile == null || !databaseFileExists(dbFile);
+			boolean loadFromPath = dbFile == null || !dialect.databaseFileExists(dbFile);
 			if (dbFile == null) {
 				dbFile = new File(workingDir, TEMP_NODES_DB);
 				// to save space
-				if (databaseFileExists(dbFile)) {
-					removeDatabase(dbFile);
+				if (dialect.databaseFileExists(dbFile)) {
+					dialect.removeDatabase(dbFile);
 				}
 			}
 			dbConn = getDatabaseConnection(dbFile.getAbsolutePath());
@@ -2467,7 +1976,7 @@ public class IndexCreator {
 				progress.setGeneralProgress("[35 / 100]"); //$NON-NLS-1$
 				progress.startTask(Messages.getString("IndexCreator.LOADING_FILE") + readFile.getAbsolutePath(), -1); //$NON-NLS-1$
 
-				NewDataExtractionOsmFilter filter = extractOsmToNodesDB(readFile, progress, addFilter);
+				OsmDbCreator filter = extractOsmToNodesDB(readFile, progress, addFilter);
 				if (filter != null) {
 					allNodes = filter.getAllNodes();
 					allWays = filter.getAllWays();
@@ -2499,7 +2008,7 @@ public class IndexCreator {
 
 					}
 					if (indexTransport) {
-						transportStopsTree = new RTree(getRTreeTransportStopsPackFileName());
+						indexTransportCreator.createRTreeFile(getRTreeTransportStopsPackFileName());
 					}
 				} catch (RTreeException e) {
 					log.error("Error flushing", e); //$NON-NLS-1$
@@ -2603,7 +2112,7 @@ public class IndexCreator {
 				if (indexTransport) {
 					progress.setGeneralProgress("[90 / 100]"); //$NON-NLS-1$
 					progress.startTask(Messages.getString("IndexCreator.PACK_RTREE_TRANSP"), -1); //$NON-NLS-1$
-					transportStopsTree = packRtreeFile(transportStopsTree, getRTreeTransportStopsFileName(), getRTreeTransportStopsPackFileName());
+					indexTransportCreator.transportStopsTree = packRtreeFile(indexTransportCreator.transportStopsTree, getRTreeTransportStopsFileName(), getRTreeTransportStopsPackFileName());
 				}
 			}
 
@@ -2629,12 +2138,12 @@ public class IndexCreator {
 					mapConnection.commit();
 					writeBinaryAddressIndex(writer, progress);
 				}
+				
+				
 				if (indexTransport) {
 					progress.setGeneralProgress("[95 of 100]");
 					progress.startTask("Writing transport index to binary file...", -1);
-					closePreparedStatements(transRouteStat, transRouteStopsStat, transStopsStat);
-					mapConnection.commit();
-					writeBinaryTransportIndex(writer);
+					indexTransportCreator.writeBinaryTransportIndex(writer, regionName, mapConnection);
 				}
 				progress.finishTask();
 				writer.close();
@@ -2688,9 +2197,9 @@ public class IndexCreator {
 					mapConnection.close();
 					mapConnection = null;
 					File tempDBFile = new File(workingDir, getTempMapDBFileName());
-					if (databaseFileExists(tempDBFile) && deleteDatabaseIndexes) {
+					if (dialect.databaseFileExists(tempDBFile) && deleteDatabaseIndexes) {
 						// do not delete it for now
-						removeDatabase(tempDBFile);
+						dialect.removeDatabase(tempDBFile);
 					}
 				}
 
@@ -2716,8 +2225,8 @@ public class IndexCreator {
 				}
 
 				// delete transport rtree files
-				if (transportStopsTree != null) {
-					transportStopsTree.getFileHdr().getFile().close();
+				if (indexTransportCreator.transportStopsTree != null) {
+					indexTransportCreator.transportStopsTree.getFileHdr().getFile().close();
 					File f = new File(getRTreeTransportStopsFileName());
 					if (f.exists() && deleteDatabaseIndexes) {
 						f.delete();
@@ -2730,20 +2239,20 @@ public class IndexCreator {
 
 				// do not delete first db connection
 				if (dbConn != null) {
-					if (usingH2()) {
+					if (DBDialect.H2 == dialect) {
 						dbConn.createStatement().execute("SHUTDOWN COMPACT"); //$NON-NLS-1$
 					}
 					dbConn.close();
 				}
 				if (deleteOsmDB) {
-					if (usingDerby()) {
+					if (DBDialect.DERBY == dialect) {
 						try {
 							DriverManager.getConnection("jdbc:derby:;shutdown=true"); //$NON-NLS-1$
 						} catch (SQLException e) {
 							// ignore exception
 						}
 					}
-					removeDatabase(dbFile);
+					dialect.removeDatabase(dbFile);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -2769,7 +2278,7 @@ public class IndexCreator {
 		pStatements.remove(pstat);
 	}
 
-	private RTree packRtreeFile(RTree tree, String nonPackFileName, String packFileName) throws IOException {
+	public RTree packRtreeFile(RTree tree, String nonPackFileName, String packFileName) throws IOException {
 		try {
 			assert rtree.Node.MAX < 50 : "It is better for search performance"; //$NON-NLS-1$
 			tree.flush();
@@ -2795,7 +2304,7 @@ public class IndexCreator {
 	}
 
 
-	private NewDataExtractionOsmFilter extractOsmToNodesDB(File readFile, IProgress progress, IOsmStorageFilter addFilter) throws FileNotFoundException,
+	private OsmDbCreator extractOsmToNodesDB(File readFile, IProgress progress, IOsmStorageFilter addFilter) throws FileNotFoundException,
 			IOException, SQLException, SAXException {
 		boolean pbfFile = false;
 		InputStream stream = new BufferedInputStream(new FileInputStream(readFile), 8192*4);;
@@ -2818,10 +2327,10 @@ public class IndexCreator {
 		}
 
 		// 1. Loading osm file
-		NewDataExtractionOsmFilter filter = new NewDataExtractionOsmFilter();
+		OsmDbCreator filter = new OsmDbCreator(this);
 		try {
 			// 1 init database to store temporary data
-			filter.initDatabase();
+			filter.initDatabase(dialect, dbConn);
 			storage.getFilters().add(filter);
 			if (pbfFile) {
 				storage.parseOSMPbf(stream, progress, false);
@@ -2850,7 +2359,7 @@ public class IndexCreator {
 			// to save space
 			mapFile.getParentFile().mkdirs();
 			File tempDBMapFile = new File(workingDir, getTempMapDBFileName());
-			removeDatabase(tempDBMapFile);
+			dialect.removeDatabase(tempDBMapFile);
 			mapConnection = getDatabaseConnection(tempDBMapFile.getAbsolutePath());
 			mapConnection.setAutoCommit(false);
 		}
@@ -2879,7 +2388,7 @@ public class IndexCreator {
 		}
 
 		if (indexAddress) {
-			DataIndexWriter.createAddressIndexStructure(mapConnection);
+			DataIndexWriter.createAddressIndexStructure(mapConnection, dialect);
 			addressCityStat = DataIndexWriter.getCityInsertPreparedStatement(mapConnection);
 			addressStreetStat = DataIndexWriter.getStreetInsertPreparedStatement(mapConnection);
 			addressBuildingStat = DataIndexWriter.getBuildingInsertPreparedStatement(mapConnection);
@@ -2908,31 +2417,14 @@ public class IndexCreator {
 			poiIndexFile.getParentFile().mkdirs();
 			// creating nodes db to fast access for all nodes
 			poiConnection = getDatabaseConnection(poiIndexFile.getAbsolutePath(), true);
-			DataIndexWriter.createPoiIndexStructure(poiConnection);
+			DataIndexWriter.createPoiIndexStructure(poiConnection, dialect);
 			poiPreparedStatement = DataIndexWriter.createStatementAmenityInsert(poiConnection);
 			pStatements.put(poiPreparedStatement, 0);
 			poiConnection.setAutoCommit(false);
 		}
 
 		if (indexTransport) {
-			DataIndexWriter.createTransportIndexStructure(mapConnection);
-			try {
-				File file = new File(getRTreeTransportStopsFileName());
-				if (file.exists()) {
-					file.delete();
-				}
-				transportStopsTree = new RTree(file.getAbsolutePath());
-			} catch (RTreeException e) {
-				throw new IOException(e);
-			}
-			transRouteStat = DataIndexWriter.createStatementTransportRouteInsert(mapConnection);
-			transRouteStopsStat = DataIndexWriter.createStatementTransportRouteStopInsert(mapConnection);
-			transStopsStat = DataIndexWriter.createStatementTransportStopInsert(mapConnection);
-			pStatements.put(transRouteStat, 0);
-			pStatements.put(transRouteStopsStat, 0);
-			pStatements.put(transStopsStat, 0);
-			mapConnection.setAutoCommit(false);
-
+			indexTransportCreator.createTransportIndexStructure(mapConnection, dialect, getRTreeTransportStopsFileName(), pStatements);
 		}
 	}
 
@@ -2946,26 +2438,11 @@ public class IndexCreator {
 		}
 	}
 
-	public static void removeWayNodes(File sqlitedb) throws SQLException {
-		Connection dbConn = DriverManager.getConnection("jdbc:sqlite:" + sqlitedb.getAbsolutePath()); //$NON-NLS-1$
-		dbConn.setAutoCommit(false);
-		Statement st = dbConn.createStatement();
-		st.execute("DELETE FROM street_node WHERE 1=1"); //$NON-NLS-1$
-		st.close();
-		dbConn.commit();
-		st = dbConn.createStatement();
-		if (usingSQLite()) {
-			st.execute("VACUUM"); //$NON-NLS-1$
-		}
-		st.close();
-		dbConn.close();
-	}
-
 	public static void main(String[] args) throws IOException, SAXException, SQLException {
 		
 		
 		long time = System.currentTimeMillis();
-		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/download/384/")); //$NON-NLS-1$
+		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/data/osm-gen/")); //$NON-NLS-1$
 		creator.setIndexMap(true);
 		creator.setIndexAddress(true);
 		creator.setIndexPOI(true);
@@ -2976,8 +2453,11 @@ public class IndexCreator {
 		creator.recreateOnlyBinaryFile = false;
 		creator.deleteDatabaseIndexes = true;
 				
-		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/download/384/spain.osm.pbf"), 
+//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/download/384/spain.osm.pbf"), 
+//				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), null);
+		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/minsk_around.osm"), 
 				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), null);
+		
 		
 		
 //		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
