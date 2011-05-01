@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="send_location_way_choose_title">Поделиться используя</string>
-	<string name="send_location_sms_pattern">Я нахожусь : {0} , {1}</string>
+	<string name="send_location_sms_pattern">Tut : {0}\n{1}</string>
 	<string name="send_location_email_pattern">Чтобы увидить местоположение следуйте ссылке {0} или android ссылке {1}</string>
 	<string name="send_location">Отправить местоположение</string>
 	<string name="context_menu_item_share_location">Поделиться местоположением</string>
