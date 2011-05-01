@@ -94,6 +94,22 @@ public class OsmandSettings {
 		}
 
 	}
+	
+	public enum MetricsConstants {
+	    KILOMETERS_AND_METERS(R.string.si_km_m),
+		MILES_AND_YARDS(R.string.si_mi_yard),
+		MILES_AND_FOOTS(R.string.si_mi_foots);
+		
+		private final int key;
+		MetricsConstants(int key) {
+			this.key = key;
+		}
+		
+		public String toHumanString(Context ctx){
+			return ctx.getResources().getString(key);
+		}
+		
+	}
 
 	// These settings are stored in SharedPreferences
 	public static final String SHARED_PREFERENCES_NAME = "net.osmand.settings"; //$NON-NLS-1$
@@ -147,7 +163,31 @@ public class OsmandSettings {
 		}
 		return internetConnectionAvailable;
 	}
+
 	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String DEFAULT_METRIC_SYSTEM = "default_metric_system"; //$NON-NLS-1$
+	public static final int DEFAULT_METRIC_SYSTEM_DEF = 0;
+	// cache of metrics constants as they are used very often
+	private static MetricsConstants metricConstants = null;
+
+	public static MetricsConstants getDefaultMetricConstants(Context ctx) {
+		if (metricConstants == null) {
+			int value = getSharedPreferences(ctx).getInt(DEFAULT_METRIC_SYSTEM, DEFAULT_METRIC_SYSTEM_DEF);
+			if (value >= MetricsConstants.values().length) {
+				metricConstants = MetricsConstants.KILOMETERS_AND_METERS;
+			} else {
+				metricConstants = MetricsConstants.values()[value];
+			}
+		}
+		return metricConstants;
+	}
+	
+	public static void setDefaultMetricConstants(Editor editor, MetricsConstants constants){
+		editor.putInt(DEFAULT_METRIC_SYSTEM, constants.ordinal()).commit();
+		metricConstants = constants;
+	}
+
 
 	
 	// this value string is synchronized with settings_pref.xml preference name

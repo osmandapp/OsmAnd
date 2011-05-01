@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="unit_of_length_descr">Изменить единицы измерения длины и скорости</string>
+	<string name="unit_of_length">Единицы измерения</string>
+	<string name="si_mi_foots">Мили/футы</string>
+	<string name="si_mi_yard">Мили/ярды</string>
+	<string name="si_km_m">Километры/метры</string>
+	<string name="yard">ярд</string>
+	<string name="foot">фт</string>
+	<string name="mile_per_hour">мл/ч</string>
+	<string name="mile">мл</string>
 	<string name="send_location_way_choose_title">Поделиться используя</string>
 	<string name="send_location_sms_pattern">Tut : {0}\n{1}</string>
 	<string name="send_location_email_pattern">Чтобы увидить местоположение следуйте ссылке {0} или android ссылке {1}</string>

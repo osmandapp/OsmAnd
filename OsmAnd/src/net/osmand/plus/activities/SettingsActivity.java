@@ -21,6 +21,7 @@ import net.osmand.plus.ResourceManager;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.OsmandSettings.ApplicationMode;
 import net.osmand.plus.OsmandSettings.DayNightMode;
+import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.activities.RouteProvider.RouteService;
 import net.osmand.plus.render.BaseOsmandRender;
 import net.osmand.plus.render.RendererRegistry;
@@ -97,6 +98,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private ListPreference maxLevelToDownload;
 	private ListPreference mapScreenOrientation;
 	private ListPreference voicePreference;
+	private ListPreference metricPreference;
 	private ListPreference rendererPreference;
 	private ListPreference routeServiceInterval;
 	private ListPreference routeServiceWaitInterval;
@@ -162,16 +164,18 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		saveTrackInterval.setOnPreferenceChangeListener(this);
 		positionOnMap =(ListPreference) screen.findPreference(OsmandSettings.POSITION_ON_MAP);
 		positionOnMap.setOnPreferenceChangeListener(this);
-		mapScreenOrientation =(ListPreference) screen.findPreference(OsmandSettings.MAP_SCREEN_ORIENTATION);
+		mapScreenOrientation = (ListPreference) screen.findPreference(OsmandSettings.MAP_SCREEN_ORIENTATION);
 		mapScreenOrientation.setOnPreferenceChangeListener(this);
-		maxLevelToDownload =(ListPreference) screen.findPreference(OsmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE);
+		maxLevelToDownload = (ListPreference) screen.findPreference(OsmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE);
 		maxLevelToDownload.setOnPreferenceChangeListener(this);
-		tileSourcePreference =(ListPreference) screen.findPreference(OsmandSettings.MAP_TILE_SOURCES);
+		tileSourcePreference = (ListPreference) screen.findPreference(OsmandSettings.MAP_TILE_SOURCES);
 		tileSourcePreference.setOnPreferenceChangeListener(this);
-		routerPreference =(ListPreference) screen.findPreference(OsmandSettings.ROUTER_SERVICE);
+		routerPreference = (ListPreference) screen.findPreference(OsmandSettings.ROUTER_SERVICE);
 		routerPreference.setOnPreferenceChangeListener(this);
-		voicePreference =(ListPreference) screen.findPreference(OsmandSettings.VOICE_PROVIDER);
+		voicePreference = (ListPreference) screen.findPreference(OsmandSettings.VOICE_PROVIDER);
 		voicePreference.setOnPreferenceChangeListener(this);
+		metricPreference = (ListPreference) screen.findPreference(OsmandSettings.DEFAULT_METRIC_SYSTEM);
+		metricPreference.setOnPreferenceChangeListener(this);
 		rendererPreference =(ListPreference) screen.findPreference(OsmandSettings.RENDERER);
 		rendererPreference.setOnPreferenceChangeListener(this);
 		routeServiceInterval =(ListPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_INTERVAL);
@@ -301,6 +305,15 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			entries[i] = RouteService.values()[i].getName();
 		}
 		fill(routerPreference, entries, entries, entry);
+		
+		names = new String[MetricsConstants.values().length];
+		values = new String[MetricsConstants.values().length];
+		entry = OsmandSettings.getDefaultMetricConstants(this).name();
+		for (int i = 0; i < MetricsConstants.values().length; i++) {
+			values[i] = MetricsConstants.values()[i].name();
+			names[i] = MetricsConstants.values()[i].toHumanString(this);
+		}
+		fill(metricPreference, names, values, entry);
 
 		// read available voice data
 		File extStorage = OsmandSettings.extendOsmandPath(getApplicationContext(), ResourceManager.VOICE_PATH);
@@ -523,6 +536,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			}
 			edit.commit();
 			getMyApplication().initCommandPlayer();
+		} else if (preference == metricPreference) {
+			MetricsConstants mc = MetricsConstants.valueOf((String) newValue);
+			OsmandSettings.setDefaultMetricConstants(edit, mc);
 		} else if (preference == tileSourcePreference) {
 			if(VECTOR_MAP.equals((String) newValue)){
 				edit.putBoolean(OsmandSettings.MAP_VECTOR_DATA, true);

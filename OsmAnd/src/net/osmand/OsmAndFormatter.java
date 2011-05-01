@@ -4,23 +4,57 @@ import java.text.MessageFormat;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.OsmandSettings.MetricsConstants;
 
 import android.content.Context;
 
 public class OsmAndFormatter {
+	private final static float METERS_IN_KILOMETER = 1000f;
+	private final static float METERS_IN_MILE = 1609.344f; // 1609.344
+	private final static float YARDS_IN_METER = 1.0936f;
+	private final static float FOOTS_IN_METER = YARDS_IN_METER * 3f; 
 	
 	public static String getFormattedDistance(int meters, Context ctx) {
-		if (meters >= 100000) {
-			return meters / 1000 + " " + ctx.getString(R.string.km); //$NON-NLS-1$
-		} else if (meters >= 10000) {
-			return MessageFormat.format("{0,number,#.#} " + ctx.getString(R.string.km), ((float) meters) / 1000); //$NON-NLS-1$ 
-		} else if (meters > 1500) {
-			return MessageFormat.format("{0,number,#.#} " + ctx.getString(R.string.km), ((float) meters) / 1000); //$NON-NLS-1$ 
-		} else if (meters > 900) {
-			return MessageFormat.format("{0,number,#.##} " + ctx.getString(R.string.km), ((float) meters) / 1000); //$NON-NLS-1$
+		MetricsConstants mc = OsmandSettings.getDefaultMetricConstants(ctx);
+		int mainUnitStr;
+		float mainUnitInMeters;
+		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
+			mainUnitStr = R.string.km;
+			mainUnitInMeters = METERS_IN_KILOMETER;
 		} else {
-			return meters + " " + ctx.getString(R.string.m); //$NON-NLS-1$ 
+			mainUnitStr = R.string.mile;
+			mainUnitInMeters = METERS_IN_MILE;
+		}
+
+		if (meters >= 100 * mainUnitInMeters) {
+			return meters / mainUnitInMeters + " " + ctx.getString(mainUnitStr); //$NON-NLS-1$
+		} else if (meters > 1.5f * mainUnitInMeters) {
+			return MessageFormat.format("{0,number,#.#} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters); //$NON-NLS-1$ 
+		} else if (meters > 0.9f * mainUnitInMeters) {
+			return MessageFormat.format("{0,number,#.##} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters); //$NON-NLS-1$
+		} else {
+			if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
+				return meters + " " + ctx.getString(R.string.m); //$NON-NLS-1$
+			} else if (mc == MetricsConstants.MILES_AND_YARDS) {
+				int yards = (int) (meters * YARDS_IN_METER);
+				return yards + " " + ctx.getString(R.string.yard); //$NON-NLS-1$
+			} else if(mc == MetricsConstants.MILES_AND_FOOTS) {
+				int foots = (int) (meters * FOOTS_IN_METER);
+				return foots + " " + ctx.getString(R.string.foot); //$NON-NLS-1$
+			}
+			return meters + " " + ctx.getString(R.string.m); //$NON-NLS-1$
+		}
+	}
+	
+	public static String getFormattedSpeed(float metersperseconds, Context ctx) {
+		MetricsConstants mc = OsmandSettings.getDefaultMetricConstants(ctx);
+		float kmh = metersperseconds * 3.6f;
+		if(mc == MetricsConstants.KILOMETERS_AND_METERS){
+			return ((int) kmh) + ctx.getString(R.string.km_h);
+		} else {
+			return ((int) (kmh * METERS_IN_KILOMETER / METERS_IN_MILE)) + ctx.getString(R.string.mile_per_hour);
 		}
 	}
 	
