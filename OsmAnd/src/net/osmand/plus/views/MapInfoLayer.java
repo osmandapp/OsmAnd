@@ -235,7 +235,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		if(map.getLastKnownLocation() != null && map.getLastKnownLocation().hasSpeed()){
 			if(Math.abs(map.getLastKnownLocation().getSpeed() - cachedSpeed) > .3f){
 				cachedSpeed = map.getLastKnownLocation().getSpeed();
-				cachedSpeedString = ((int) (cachedSpeed * 3.6f)) + map.getString(R.string.km_h);
+				cachedSpeedString = OsmAndFormatter.getFormattedSpeed(cachedSpeed, map); 
 				float right = paintBlack.measureText(cachedSpeedString) + 8 * scaleCoefficient + boundsForSpeed.left;
 				boundsForSpeed.right = boundsForDist.right = Math.max(right, boundsForDist.right);
 			}
