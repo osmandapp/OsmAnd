@@ -17,18 +17,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import rtree.Element;
-import rtree.IllegalValueException;
-import rtree.LeafElement;
-import rtree.NonLeafElement;
-import rtree.RTree;
-import rtree.RTreeException;
-import rtree.RTreeInsertException;
-import rtree.Rect;
-
 import net.osmand.binary.BinaryMapIndexWriter;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
@@ -41,6 +29,18 @@ import net.osmand.osm.Relation;
 import net.osmand.osm.Way;
 import net.osmand.osm.OSMSettings.OSMTagKey;
 import net.sf.junidecode.Junidecode;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import rtree.Element;
+import rtree.IllegalValueException;
+import rtree.LeafElement;
+import rtree.NonLeafElement;
+import rtree.RTree;
+import rtree.RTreeException;
+import rtree.RTreeInsertException;
+import rtree.Rect;
 
 public class IndexTransportCreator {
 	
@@ -119,9 +119,15 @@ public class IndexTransportCreator {
 	}
 	
 	
-	public void insertTransportIntoIndex(TransportRoute route, Map<PreparedStatement, Integer> pStatements) throws SQLException {
-		insertTransportIntoIndex(transRouteStat, transRouteStopsStat, transStopsStat, transportStopsTree,
-				visitedStops, route, pStatements, BATCH_SIZE);
+	public void visitEntityMainStep(Entity e, OsmDbAccessorContext ctx, Map<PreparedStatement, Integer> pStatements) throws SQLException {
+		if (e instanceof Relation && e.getTag(OSMTagKey.ROUTE) != null) {
+			ctx.loadEntityData(e, true);
+			TransportRoute route = indexTransportRoute((Relation) e);
+			if (route != null) {
+				insertTransportIntoIndex(transRouteStat, transRouteStopsStat, transStopsStat, transportStopsTree,
+						visitedStops, route, pStatements, BATCH_SIZE);
+			}
+		}
 	}
 	
 	public void insertTransportIntoIndex(PreparedStatement prepRoute, PreparedStatement prepRouteStops,
@@ -136,7 +142,7 @@ public class IndexTransportCreator {
 		prepRoute.setString(5, route.getName());
 		prepRoute.setString(6, route.getEnName());
 		prepRoute.setInt(7, route.getAvgBothDistance());
-		addBatch(statements, prepRoute);
+		DataIndexWriter.addBatch(statements, prepRoute);
 		
 		writeRouteStops(transportStopsTree, prepRouteStops, prepStops, statements, writtenStops, route, route.getForwardStops(), true);
 		writeRouteStops(transportStopsTree, prepRouteStops, prepStops, statements, writtenStops, route, route.getBackwardStops(), false);
@@ -166,7 +172,7 @@ public class IndexTransportCreator {
 				prepStops.setString(5, s.getEnName());
 				int x = (int) MapUtils.getTileNumberX(24, s.getLocation().getLongitude());
 				int y = (int) MapUtils.getTileNumberY(24, s.getLocation().getLatitude());
-				addBatch(count, prepStops);
+				DataIndexWriter.addBatch(count, prepStops);
 				try {
 					transportStopsTree.insert(new LeafElement(new Rect(x, y, x, y), s.getId()));
 				} catch (RTreeInsertException e) {
@@ -180,7 +186,7 @@ public class IndexTransportCreator {
 			prepRouteStops.setLong(2, s.getId());
 			prepRouteStops.setInt(3, direction ? 1 : 0);
 			prepRouteStops.setInt(4, i++);
-			addBatch(count, prepRouteStops);
+			DataIndexWriter.addBatch(count, prepRouteStops);
 		}
 	}
 	
@@ -325,6 +331,21 @@ public class IndexTransportCreator {
 		return stringTable;
 	}
 
+	
+	public void commitAndCloseFiles(String rtreeStopsFileName, String rtreeStopsPackFileName, boolean deleteDatabaseIndexes) throws IOException {
+		// delete transport rtree files
+		if (transportStopsTree != null) {
+			transportStopsTree.getFileHdr().getFile().close();
+			File f = new File(rtreeStopsFileName);
+			if (f.exists() && deleteDatabaseIndexes) {
+				f.delete();
+			}
+			f = new File(rtreeStopsPackFileName);
+			if (f.exists() && deleteDatabaseIndexes) {
+				f.delete();
+			}
+		}
+	}
 	
 
 	public void writeBinaryTransportTree(rtree.Node parent, RTree r, BinaryMapIndexWriter writer, 
@@ -474,29 +495,4 @@ public class IndexTransportCreator {
 		return r;
 	}
 	
-	private static void addBatch(Map<PreparedStatement, Integer> count, PreparedStatement p) throws SQLException {
-		addBatch(count, p, BATCH_SIZE, true);
-	}
-	
-	public static void addBatch(Map<PreparedStatement, Integer> count, PreparedStatement p, boolean commit) throws SQLException{
-		addBatch(count, p, BATCH_SIZE, commit);
-	}
-	
-	public static void addBatch(Map<PreparedStatement, Integer> count, PreparedStatement p, int batchSize) throws SQLException{
-		addBatch(count, p, batchSize, true);
-	}
-	
-	public static void addBatch(Map<PreparedStatement, Integer> count, PreparedStatement p, int batchSize, boolean commit) throws SQLException{
-		p.addBatch();
-		if(count.get(p) >= batchSize){
-			p.executeBatch();
-			if(commit){
-				p.getConnection().commit();
-			}
-			count.put(p, 0);
-		} else {
-			count.put(p, count.get(p) + 1);
-		}
-	}
-
 }

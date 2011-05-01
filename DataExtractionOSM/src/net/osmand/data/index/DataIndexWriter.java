@@ -38,41 +38,6 @@ public class DataIndexWriter {
 	private static final int BATCH_SIZE = 1000;
 
 
-	public static void insertAmenityIntoPoi(PreparedStatement prep, Map<PreparedStatement, Integer> map, Amenity amenity, int batchSize) throws SQLException {
-		assert IndexConstants.POI_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
-		
-		prep.setLong(1, amenity.getId());
-		prep.setInt(2, MapUtils.get31TileNumberX(amenity.getLocation().getLongitude()));
-		prep.setInt(3, MapUtils.get31TileNumberY(amenity.getLocation().getLatitude()));
-		prep.setString(4, amenity.getEnName());
-		prep.setString(5, amenity.getName());
-		prep.setString(6, AmenityType.valueToString(amenity.getType()));
-		prep.setString(7, amenity.getSubType());
-		prep.setString(8, amenity.getOpeningHours());
-		prep.setString(9, amenity.getSite());
-		prep.setString(10, amenity.getPhone());
-		addBatch(map, prep, batchSize);
-	}
-	
-	public static PreparedStatement createStatementAmenityInsert(Connection conn) throws SQLException{
-        return conn.prepareStatement("INSERT INTO " + IndexConstants.POI_TABLE + "(id, x, y, name_en, name, type, subtype, opening_hours, site, phone) " +  //$NON-NLS-1$//$NON-NLS-2$
-				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-	}
-	
-	public static void createPoiIndexStructure(Connection conn, DBDialect dialect) throws SQLException{
-		Statement stat = conn.createStatement();
-        stat.executeUpdate("create table " + IndexConstants.POI_TABLE +  //$NON-NLS-1$
-        		"(id bigint, x int, y int, name_en varchar(255), name varchar(255), " +
-        		"type varchar(255), subtype varchar(255), opening_hours varchar(255), phone varchar(255), site varchar(255)," +
-        		"primary key(id, type, subtype))");
-        stat.executeUpdate("create index poi_loc on poi (x, y, type, subtype)");
-        stat.executeUpdate("create index poi_id on poi (id, type, subtype)");
-        if(dialect == DBDialect.SQLITE){
-        	stat.execute("PRAGMA user_version = " + IndexConstants.POI_TABLE_VERSION); //$NON-NLS-1$
-        }
-        stat.close();
-	}
-
 	
 	public static PreparedStatement getStreetNodeInsertPreparedStatement(Connection conn) throws SQLException {
 		assert IndexConstants.STREET_NODE_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
@@ -349,7 +314,7 @@ public class DataIndexWriter {
 			}
 		}
 	}
-	private static void addBatch(Map<PreparedStatement, Integer> count, PreparedStatement p) throws SQLException {
+	public static void addBatch(Map<PreparedStatement, Integer> count, PreparedStatement p) throws SQLException {
 		addBatch(count, p, BATCH_SIZE, true);
 	}
 	
