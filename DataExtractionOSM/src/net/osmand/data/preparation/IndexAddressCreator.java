@@ -190,7 +190,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 					citiBoundaries.put(nCity, boundary);
 					cityVillageManager.registerObject(point.getLatitude(), point.getLongitude(), nCity);
 
-					writeCity(addressCityStat, pStatements, nCity);
+					writeCity(nCity);
 					// commit to put all cities
 					if (pStatements.get(addressCityStat) > 0) {
 						addressCityStat.executeBatch();
@@ -270,7 +270,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 							for (Map.Entry<Entity, String> r : i.getMemberEntities().entrySet()) {
 								if ("street".equals(r.getValue())) { //$NON-NLS-1$
 									if (r.getKey() instanceof Way && saveAddressWays) {
-										writeStreetWayNodes(addressStreetNodeStat, pStatements, streetId, (Way) r.getKey());
+										writeStreetWayNodes(streetId, (Way) r.getKey());
 										if (loadInMemory) {
 											addressStreetNodeLocalSet.add(r.getKey().getId());
 										}
@@ -282,7 +282,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 										if (hno != null) {
 											Building building = new Building(r.getKey());
 											building.setName(hno);
-											writeBuilding(addressBuildingStat, pStatements, streetId, building);
+											writeBuilding(streetId, building);
 											if (loadInMemory) {
 												addressBuildingLocalSet.add(r.getKey().getId());
 											}
@@ -308,7 +308,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 										Building building = new Building(border);
 										if (building.getLocation() != null) {
 											building.setName(hno);
-											writeBuilding(addressBuildingStat, pStatements, streetId, building);
+											writeBuilding(streetId, building);
 											if (loadInMemory) {
 												addressBuildingLocalSet.add(id.getId());
 											}
@@ -424,7 +424,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			insertStreetData(addressStreetStat, initId, name, Junidecode.unidecode(name), 
 					location.getLatitude(), location.getLongitude(), city.getId());
 			if (loadInMemory) {
-				addBatch(pStatements, addressStreetStat, BATCH_SIZE);
+				addBatch(addressStreetStat);
 				addressStreetLocalMap.put(name + "_" + city.getId(), initId); //$NON-NLS-1$
 			} else {
 				addressStreetStat.execute();
@@ -509,7 +509,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				if (idStreet != null) {
 					Building building = new Building(e);
 					building.setName(e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER));
-					writeBuilding(addressBuildingStat, pStatements, idStreet, building);
+					writeBuilding(idStreet, building);
 				}
 			}
 		} else if (e instanceof Way /* && OSMSettings.wayForCar(e.getTag(OSMTagKey.HIGHWAY)) */
@@ -537,7 +537,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				City city = getClosestCity(l);
 				Long idStreet = getStreetInCity(city, e.getTag(OSMTagKey.NAME), l, (e.getId() << 2) | 1);
 				if (idStreet != null && saveAddressWays) {
-					writeStreetWayNodes(addressStreetNodeStat, pStatements, idStreet, (Way) e);
+					writeStreetWayNodes(idStreet, (Way) e);
 				}
 			}
 		}
@@ -550,45 +550,42 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	}
 	
 	
-	private void writeStreetWayNodes(PreparedStatement prepStreetNode, Map<PreparedStatement, Integer> count, Long streetId, Way way)
+	private void writeStreetWayNodes(Long streetId, Way way)
 			throws SQLException {
 		for (Node n : way.getNodes()) {
 			if (n == null) {
 				continue;
 			}
-			prepStreetNode.setLong(1, n.getId());
-			prepStreetNode.setDouble(2, n.getLatitude());
-			prepStreetNode.setDouble(3, n.getLongitude());
-			prepStreetNode.setLong(5, way.getId());
-			prepStreetNode.setLong(4, streetId);
-			addBatch(count, prepStreetNode, BATCH_SIZE);
+			addressStreetNodeStat.setLong(1, n.getId());
+			addressStreetNodeStat.setDouble(2, n.getLatitude());
+			addressStreetNodeStat.setDouble(3, n.getLongitude());
+			addressStreetNodeStat.setLong(5, way.getId());
+			addressStreetNodeStat.setLong(4, streetId);
+			addBatch(addressStreetNodeStat);
 		}
 	}
 	
 
-	private void writeBuilding(PreparedStatement prepBuilding, Map<PreparedStatement, Integer> count, Long streetId, 
-			Building building)
-			throws SQLException {
-		prepBuilding.setLong(1, building.getId());
-		prepBuilding.setDouble(2, building.getLocation().getLatitude());
-		prepBuilding.setDouble(3, building.getLocation().getLongitude());
-		prepBuilding.setString(4, building.getName());
-		prepBuilding.setString(5, building.getEnName());
-		prepBuilding.setLong(6, streetId);
-		prepBuilding.setString(7, building.getPostcode() == null ? null : building.getPostcode().toUpperCase());
-
-		addBatch(count, prepBuilding);
+	private void writeBuilding(Long streetId, Building building) throws SQLException {
+		addressBuildingStat.setLong(1, building.getId());
+		addressBuildingStat.setDouble(2, building.getLocation().getLatitude());
+		addressBuildingStat.setDouble(3, building.getLocation().getLongitude());
+		addressBuildingStat.setString(4, building.getName());
+		addressBuildingStat.setString(5, building.getEnName());
+		addressBuildingStat.setLong(6, streetId);
+		addressBuildingStat.setString(7, building.getPostcode() == null ? null : building.getPostcode().toUpperCase());
+		addBatch(addressBuildingStat);
 	}
 	
 	
-	private void writeCity(PreparedStatement prepCity, Map<PreparedStatement, Integer> count, City city) throws SQLException {
-		prepCity.setLong(1, city.getId());
-		prepCity.setDouble(2, city.getLocation().getLatitude());
-		prepCity.setDouble(3, city.getLocation().getLongitude());
-		prepCity.setString(4, city.getName());
-		prepCity.setString(5, city.getEnName());
-		prepCity.setString(6, CityType.valueToString(city.getType()));
-		addBatch(count, prepCity, BATCH_SIZE);
+	private void writeCity(City city) throws SQLException {
+		addressCityStat.setLong(1, city.getId());
+		addressCityStat.setDouble(2, city.getLocation().getLatitude());
+		addressCityStat.setDouble(3, city.getLocation().getLongitude());
+		addressCityStat.setString(4, city.getName());
+		addressCityStat.setString(5, city.getEnName());
+		addressCityStat.setString(6, CityType.valueToString(city.getType()));
+		addBatch(addressCityStat);
 	}
 	
 	
@@ -605,7 +602,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 
 	public void writeCitiesIntoDb() throws SQLException {
 		for (City c : cities.values()) {
-			writeCity(addressCityStat, pStatements, c);
+			writeCity(c);
 		}
 		// commit to put all cities
 		if (pStatements.get(addressCityStat) > 0) {
@@ -628,7 +625,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			for (EntityId l : r.getMemberIds()) {
 				pstat.setString(1, tag);
 				pstat.setLong(2, l.getId());
-				addBatch(pStatements, pstat, BATCH_SIZE);
+				addBatch(pstat);
 			}
 		}
 		if (pStatements.get(pstat) > 0) {
