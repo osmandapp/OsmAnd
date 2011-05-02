@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +14,6 @@ import java.util.Map;
 import net.osmand.Algoritms;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
-import net.osmand.data.index.DataIndexWriter;
 import net.osmand.data.index.IndexConstants;
 import net.osmand.osm.Entity;
 import net.osmand.osm.MapUtils;
@@ -24,11 +22,9 @@ import net.osmand.osm.OSMSettings.OSMTagKey;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class IndexPoiCreator {
+public class IndexPoiCreator extends AbstractIndexPartCreator {
 	
-	private static final int BATCH_SIZE = 1000;
 	private static final Log log = LogFactory.getLog(IndexPoiCreator.class);
-	private final IndexCreator creator;
 	
 	private Connection poiConnection;
 	private File poiIndexFile;
@@ -36,16 +32,15 @@ public class IndexPoiCreator {
 	
 	private List<Amenity> tempAmenityList = new ArrayList<Amenity>();
 
-	public IndexPoiCreator(IndexCreator creator){
-		this.creator = creator;
+	public IndexPoiCreator(){
 	}
 	
-	public void iterateEntity(Entity e, Map<PreparedStatement, Integer> pStatements) throws SQLException{
+	public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException{
 		tempAmenityList.clear();
 		tempAmenityList = Amenity.parseAmenities(e, tempAmenityList);
 		if (!tempAmenityList.isEmpty() && poiPreparedStatement != null) {
 			// load data for way (location etc...)
-			creator.loadEntityData(e, false);
+			ctx.loadEntityData(e, false);
 			for (Amenity a : tempAmenityList) {
 				checkEntity(e);
 				a.setEntity(e);
@@ -68,6 +63,7 @@ public class IndexPoiCreator {
 			}
 		}
 		
+		closeAllPreparedStatements();
 	}
 	
 	public void insertAmenityIntoPoi( Map<PreparedStatement, Integer> map, Amenity amenity) throws SQLException {
@@ -83,7 +79,7 @@ public class IndexPoiCreator {
 		poiPreparedStatement.setString(8, amenity.getOpeningHours());
 		poiPreparedStatement.setString(9, amenity.getSite());
 		poiPreparedStatement.setString(10, amenity.getPhone());
-		DataIndexWriter.addBatch(map, poiPreparedStatement, BATCH_SIZE);
+		addBatch(map, poiPreparedStatement, BATCH_SIZE);
 	}
 	
 	public void checkEntity(Entity e){
@@ -109,7 +105,7 @@ public class IndexPoiCreator {
 		}
 	}
 	
-	public void createDatabaseStructure(File poiIndexFile, Map<PreparedStatement, Integer> pStatements) throws SQLException {
+	public void createDatabaseStructure(File poiIndexFile) throws SQLException {
 		this.poiIndexFile = poiIndexFile;
 		// to save space
 		if (poiIndexFile.exists()) {
@@ -117,7 +113,7 @@ public class IndexPoiCreator {
 		}
 		poiIndexFile.getParentFile().mkdirs();
 		// creating nodes db to fast access for all nodes
-		poiConnection = creator.getDatabaseConnection(poiIndexFile.getAbsolutePath(), DBDialect.SQLITE);
+		poiConnection = DBDialect.SQLITE.getDatabaseConnection(poiIndexFile.getAbsolutePath(), log);
 		createPoiIndexStructure(poiConnection);
 		poiPreparedStatement = createStatementAmenityInsert(poiConnection);
 		pStatements.put(poiPreparedStatement, 0);
