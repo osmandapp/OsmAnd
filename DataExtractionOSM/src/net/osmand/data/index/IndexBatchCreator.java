@@ -484,10 +484,6 @@ public class IndexBatchCreator {
 		String regionName  = f.getName().substring(0, f.getName().lastIndexOf('_', f.getName().indexOf('.')));
 		if(f.getName().endsWith(IndexConstants.POI_INDEX_EXT) || f.getName().endsWith(IndexConstants.POI_INDEX_EXT_ZIP)){
 			summary = "POI index for " ;
-		} else if(f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT) || f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT_ZIP)){
-			summary = "Address index for " ;
-		} else if(f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT) || f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT_ZIP)){
-			summary = "Transport index for ";
 		} else if(f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)){
 			boolean addr = indexAddress;
 			boolean trans = indexTransport;

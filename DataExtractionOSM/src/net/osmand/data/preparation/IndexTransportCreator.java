@@ -20,8 +20,6 @@ import java.util.Map.Entry;
 import net.osmand.binary.BinaryMapIndexWriter;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
-import net.osmand.data.index.DataIndexWriter;
-import net.osmand.data.index.IndexConstants;
 import net.osmand.osm.Entity;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
@@ -42,17 +40,15 @@ import rtree.RTreeException;
 import rtree.RTreeInsertException;
 import rtree.Rect;
 
-public class IndexTransportCreator {
+public class IndexTransportCreator extends AbstractIndexPartCreator {
 	
-	private final IndexCreator creator;
-	private static final int BATCH_SIZE = 1000;
 	private static final Log log = LogFactory.getLog(IndexTransportCreator.class);
 
 	private Set<Long> visitedStops = new HashSet<Long>();
 	private PreparedStatement transRouteStat;
 	private PreparedStatement transRouteStopsStat;
 	private PreparedStatement transStopsStat;
-	protected RTree transportStopsTree;
+	private RTree transportStopsTree;
 
 	
 	private static Set<String> acceptedRoutes = new HashSet<String>();
@@ -69,8 +65,7 @@ public class IndexTransportCreator {
 		acceptedRoutes.add("ferry"); //$NON-NLS-1$
 	}
 
-	public IndexTransportCreator(IndexCreator creator){
-		this.creator = creator;
+	public IndexTransportCreator(){
 	}
 	
 	
@@ -78,11 +73,8 @@ public class IndexTransportCreator {
 		transportStopsTree = new RTree(rtreeTransportStopFile);
 	}
 	
-	public void createTransportIndexStructure(Connection conn, DBDialect dialect, String rtreeStopsFileName, Map<PreparedStatement, Integer> pStatements) throws SQLException, IOException{
+	public void createTransportIndexStructure(Connection conn, DBDialect dialect, String rtreeStopsFileName) throws SQLException, IOException{
 		Statement stat = conn.createStatement();
-		assert IndexConstants.TRANSPORT_ROUTE_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
-		assert IndexConstants.TRANSPORT_STOP_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
-		assert IndexConstants.TRANSPORT_ROUTE_STOP_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
 		
         stat.executeUpdate("create table transport_route (id bigint primary key, type varchar(255), operator varchar(255)," +
         		"ref varchar(255), name varchar(255), name_en varchar(255), dist int)");
@@ -96,9 +88,9 @@ public class IndexTransportCreator {
         stat.executeUpdate("create index transport_stop_id on transport_stop (id)");
         stat.executeUpdate("create index transport_stop_location on transport_stop (latitude, longitude)");
         
-        if(dialect == DBDialect.SQLITE){
-        	stat.execute("PRAGMA user_version = " + IndexConstants.TRANSPORT_TABLE_VERSION); //$NON-NLS-1$
-        }
+//        if(dialect == DBDialect.SQLITE){
+//        	stat.execute("PRAGMA user_version = " + IndexConstants.TRANSPORT_TABLE_VERSION); //$NON-NLS-1$
+//        }
         stat.close();
         
         try {
@@ -119,7 +111,11 @@ public class IndexTransportCreator {
 	}
 	
 	
-	public void visitEntityMainStep(Entity e, OsmDbAccessorContext ctx, Map<PreparedStatement, Integer> pStatements) throws SQLException {
+	public void packRTree(String rtreeTransportStopsFileName, String rtreeTransportStopsPackFileName) throws IOException {
+		transportStopsTree = packRtreeFile(transportStopsTree, rtreeTransportStopsFileName, rtreeTransportStopsPackFileName);
+	}
+	
+	public void visitEntityMainStep(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		if (e instanceof Relation && e.getTag(OSMTagKey.ROUTE) != null) {
 			ctx.loadEntityData(e, true);
 			TransportRoute route = indexTransportRoute((Relation) e);
@@ -130,11 +126,11 @@ public class IndexTransportCreator {
 		}
 	}
 	
-	public void insertTransportIntoIndex(PreparedStatement prepRoute, PreparedStatement prepRouteStops,
+	
+	private  void insertTransportIntoIndex(PreparedStatement prepRoute, PreparedStatement prepRouteStops,
 			PreparedStatement prepStops, RTree transportStopsTree, 
 			Set<Long> writtenStops, TransportRoute route, Map<PreparedStatement, Integer> statements,
 			int batchSize) throws SQLException {
-		assert IndexConstants.TRANSPORT_ROUTE_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
 		prepRoute.setLong(1, route.getId());
 		prepRoute.setString(2, route.getType());
 		prepRoute.setString(3, route.getOperator());
@@ -142,26 +138,22 @@ public class IndexTransportCreator {
 		prepRoute.setString(5, route.getName());
 		prepRoute.setString(6, route.getEnName());
 		prepRoute.setInt(7, route.getAvgBothDistance());
-		DataIndexWriter.addBatch(statements, prepRoute);
+		addBatch(statements, prepRoute);
 		
 		writeRouteStops(transportStopsTree, prepRouteStops, prepStops, statements, writtenStops, route, route.getForwardStops(), true);
 		writeRouteStops(transportStopsTree, prepRouteStops, prepStops, statements, writtenStops, route, route.getBackwardStops(), false);
 		
 	}
 	
-	public static PreparedStatement createStatementTransportStopInsert(Connection conn) throws SQLException{
-		assert IndexConstants.TRANSPORT_STOP_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
+	private PreparedStatement createStatementTransportStopInsert(Connection conn) throws SQLException{
         return conn.prepareStatement("insert into transport_stop(id, latitude, longitude, name, name_en) values(?, ?, ?, ?, ?)");
 	}
-	public static PreparedStatement createStatementTransportRouteStopInsert(Connection conn) throws SQLException{
-		assert IndexConstants.TRANSPORT_ROUTE_STOP_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
+	private PreparedStatement createStatementTransportRouteStopInsert(Connection conn) throws SQLException{
         return conn.prepareStatement("insert into transport_route_stop(route, stop, direction, ord) values(?, ?, ?, ?)");
 	}
 	
-	private static void writeRouteStops(RTree transportStopsTree, PreparedStatement prepRouteStops, PreparedStatement prepStops, Map<PreparedStatement, Integer> count,
+	private void writeRouteStops(RTree transportStopsTree, PreparedStatement prepRouteStops, PreparedStatement prepStops, Map<PreparedStatement, Integer> count,
 			Set<Long> writtenStops, TransportRoute r, List<TransportStop> stops, boolean direction) throws SQLException {
-		assert IndexConstants.TRANSPORT_STOP_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
-		assert IndexConstants.TRANSPORT_ROUTE_STOP_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
 		int i = 0;
 		for(TransportStop s : stops){
 			if (!writtenStops.contains(s.getId())) {
@@ -172,7 +164,7 @@ public class IndexTransportCreator {
 				prepStops.setString(5, s.getEnName());
 				int x = (int) MapUtils.getTileNumberX(24, s.getLocation().getLongitude());
 				int y = (int) MapUtils.getTileNumberY(24, s.getLocation().getLatitude());
-				DataIndexWriter.addBatch(count, prepStops);
+				addBatch(count, prepStops);
 				try {
 					transportStopsTree.insert(new LeafElement(new Rect(x, y, x, y), s.getId()));
 				} catch (RTreeInsertException e) {
@@ -186,12 +178,11 @@ public class IndexTransportCreator {
 			prepRouteStops.setLong(2, s.getId());
 			prepRouteStops.setInt(3, direction ? 1 : 0);
 			prepRouteStops.setInt(4, i++);
-			DataIndexWriter.addBatch(count, prepRouteStops);
+			addBatch(count, prepRouteStops);
 		}
 	}
 	
-	public static PreparedStatement createStatementTransportRouteInsert(Connection conn) throws SQLException{
-		assert IndexConstants.TRANSPORT_ROUTE_TABLE != null : "use constants here to show table usage "; //$NON-NLS-1$
+	private PreparedStatement createStatementTransportRouteInsert(Connection conn) throws SQLException{
         return conn.prepareStatement("insert into transport_route(id, type, operator, ref, name, name_en, dist) values(?, ?, ?, ?, ?, ?, ?)");
 	}
 	
@@ -199,7 +190,7 @@ public class IndexTransportCreator {
 	public void writeBinaryTransportIndex(BinaryMapIndexWriter writer, String regionName,
 			Connection mapConnection) throws IOException, SQLException {
 		try {
-			creator.closePreparedStatements(transRouteStat, transRouteStopsStat, transStopsStat);
+			closePreparedStatements(transRouteStat, transRouteStopsStat, transStopsStat);
 			mapConnection.commit();
 			transportStopsTree.flush();
 			
@@ -332,7 +323,7 @@ public class IndexTransportCreator {
 	}
 
 	
-	public void commitAndCloseFiles(String rtreeStopsFileName, String rtreeStopsPackFileName, boolean deleteDatabaseIndexes) throws IOException {
+	public void commitAndCloseFiles(String rtreeStopsFileName, String rtreeStopsPackFileName, boolean deleteDatabaseIndexes) throws IOException, SQLException {
 		// delete transport rtree files
 		if (transportStopsTree != null) {
 			transportStopsTree.getFileHdr().getFile().close();
@@ -345,6 +336,7 @@ public class IndexTransportCreator {
 				f.delete();
 			}
 		}
+		closeAllPreparedStatements();
 	}
 	
 
