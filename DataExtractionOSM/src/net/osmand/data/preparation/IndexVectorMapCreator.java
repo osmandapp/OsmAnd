@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.Set;
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.binary.BinaryMapIndexWriter;
+import net.osmand.data.Boundary;
 import net.osmand.data.MapAlgorithms;
 import net.osmand.osm.Entity;
 import net.osmand.osm.LatLon;
@@ -130,6 +132,13 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 						}
 					}
 				}
+				
+				Node nodeOut = checkOuterWaysEncloseInnerWays(completedRings, entities);
+				if(nodeOut != null){
+					log.warn("Map bug: Multipoligon contains 'inner' way point outside of 'outer' border.\n" +  //$NON-NLS-1$
+							"Multipolygon id : " + e.getId() + ", inner node out id : " + nodeOut.getId()); //$NON-NLS-1$
+					return;
+				}
 
 				for (List<Way> l : completedRings) {
 					boolean innerType = "inner".equals(entities.get(l.get(0))); //$NON-NLS-1$
@@ -155,6 +164,29 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		}
 	}
 
+
+
+	private Node checkOuterWaysEncloseInnerWays(List<List<Way>> completedRings, Map<Entity, String> entities) {
+		List<Way> innerWays = new ArrayList<Way>();
+		Boundary outerBoundary = new Boundary();
+		for(List<Way> ring : completedRings){
+			boolean innerType = "inner".equals(entities.get(ring.get(0))); //$NON-NLS-1$
+			if(!innerType){
+				outerBoundary.getOuterWays().addAll(ring);
+			} else {
+				innerWays.addAll(ring);
+			}
+		}
+		
+		for(Way innerWay : innerWays){
+			for(Node node : innerWay.getNodes()){
+				if(!outerBoundary.containsPoint(node.getLatitude(), node.getLongitude())){
+					return node;
+				}
+			}
+		}
+		return null;
+	}
 
 
 	private void indexHighwayRestrictions(Entity e, OsmDbAccessorContext ctx) throws SQLException {
