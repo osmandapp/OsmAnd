@@ -1,17 +1,11 @@
 package net.osmand.plus.activities;
 
-import static net.osmand.data.index.IndexConstants.ADDRESS_INDEX_EXT;
-import static net.osmand.data.index.IndexConstants.ADDRESS_INDEX_EXT_ZIP;
-import static net.osmand.data.index.IndexConstants.ADDRESS_TABLE_VERSION;
 import static net.osmand.data.index.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.data.index.IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
 import static net.osmand.data.index.IndexConstants.BINARY_MAP_VERSION;
 import static net.osmand.data.index.IndexConstants.POI_INDEX_EXT;
 import static net.osmand.data.index.IndexConstants.POI_INDEX_EXT_ZIP;
 import static net.osmand.data.index.IndexConstants.POI_TABLE_VERSION;
-import static net.osmand.data.index.IndexConstants.TRANSPORT_INDEX_EXT;
-import static net.osmand.data.index.IndexConstants.TRANSPORT_INDEX_EXT_ZIP;
-import static net.osmand.data.index.IndexConstants.TRANSPORT_TABLE_VERSION;
 import static net.osmand.data.index.IndexConstants.VOICE_INDEX_EXT_ZIP;
 import static net.osmand.data.index.IndexConstants.VOICE_VERSION;
 
@@ -312,13 +306,10 @@ public class DownloadIndexActivity extends ListActivity {
 		
 	}
 
-	private List<String> listAlreadyDownloadedWithAlternatives()
-	{
+	private List<String> listAlreadyDownloadedWithAlternatives() {
 		List<String> files = new ArrayList<String>();
 		File externalStorageDirectory = OsmandSettings.getExternalStorageDirectory(getApplicationContext());
-		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.ADDRESS_PATH),ADDRESS_INDEX_EXT,ADDRESS_INDEX_EXT_ZIP,ADDRESS_TABLE_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.POI_PATH),POI_INDEX_EXT,POI_INDEX_EXT_ZIP,POI_TABLE_VERSION));
-		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.TRANSPORT_PATH),TRANSPORT_INDEX_EXT,TRANSPORT_INDEX_EXT_ZIP,TRANSPORT_TABLE_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.APP_DIR),BINARY_MAP_INDEX_EXT,BINARY_MAP_INDEX_EXT_ZIP,BINARY_MAP_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.VOICE_PATH),"",VOICE_INDEX_EXT_ZIP, VOICE_VERSION));
 		return files;
@@ -353,15 +344,7 @@ public class DownloadIndexActivity extends ListActivity {
 		boolean unzipDir = false;
 		
 		File externalStorageDirectory = OsmandSettings.getExternalStorageDirectory(getApplicationContext());
-		if(fileName.endsWith(ADDRESS_INDEX_EXT)){
-			parent = new File(externalStorageDirectory, ResourceManager.ADDRESS_PATH);
-			toSavePostfix = ADDRESS_INDEX_EXT;
-			toCheckPostfix = ADDRESS_INDEX_EXT;
-		} else if(fileName.endsWith(IndexConstants.ADDRESS_INDEX_EXT_ZIP)){
-			parent = new File(externalStorageDirectory, ResourceManager.ADDRESS_PATH);
-			toSavePostfix = ADDRESS_INDEX_EXT_ZIP;
-			toCheckPostfix = ADDRESS_INDEX_EXT;
-		} else if(fileName.endsWith(IndexConstants.POI_INDEX_EXT)){
+		if(fileName.endsWith(IndexConstants.POI_INDEX_EXT)){
 			parent = new File(externalStorageDirectory, ResourceManager.POI_PATH);
 			toSavePostfix = POI_INDEX_EXT;
 			toCheckPostfix = POI_INDEX_EXT;
@@ -369,14 +352,6 @@ public class DownloadIndexActivity extends ListActivity {
 			parent = new File(externalStorageDirectory, ResourceManager.POI_PATH);
 			toSavePostfix = POI_INDEX_EXT_ZIP;
 			toCheckPostfix = POI_INDEX_EXT;
-		} else if(fileName.endsWith(IndexConstants.TRANSPORT_INDEX_EXT)){
-			parent = new File(externalStorageDirectory, ResourceManager.TRANSPORT_PATH);
-			toSavePostfix = TRANSPORT_INDEX_EXT;
-			toCheckPostfix = TRANSPORT_INDEX_EXT;
-		} else if(fileName.endsWith(IndexConstants.TRANSPORT_INDEX_EXT_ZIP)){
-			parent = new File(externalStorageDirectory, ResourceManager.TRANSPORT_PATH);
-			toSavePostfix = TRANSPORT_INDEX_EXT_ZIP;
-			toCheckPostfix = TRANSPORT_INDEX_EXT;
 		} else if(fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)){
 			parent = new File(externalStorageDirectory, ResourceManager.APP_DIR);
 			toSavePostfix = BINARY_MAP_INDEX_EXT;
@@ -664,12 +639,8 @@ public class DownloadIndexActivity extends ListActivity {
 			if(dateModified != null){
 				toIndex.setLastModified(dateModified);
 			}
-			if (toIndex.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)) {
-				manager.indexingAddress(progress, warnings, toIndex);
-			} else if (toIndex.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
+			if (toIndex.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
 				manager.indexingPoi(progress, warnings, toIndex);
-			} else if (toIndex.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)) {
-				manager.indexingTransport(progress, warnings, toIndex);
 			} else if (toIndex.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 				warnings.addAll(manager.indexingMaps(progress));
 			} else if (toIndex.getName().endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
@@ -718,10 +689,6 @@ public class DownloadIndexActivity extends ListActivity {
 		String s;
 		if(name.endsWith(IndexConstants.POI_INDEX_EXT) || name.endsWith(IndexConstants.POI_INDEX_EXT_ZIP)){
 			s = IndexConstants.POI_INDEX_EXT;
-		} else if(name.endsWith(IndexConstants.ADDRESS_INDEX_EXT) || name.endsWith(IndexConstants.ADDRESS_INDEX_EXT_ZIP)){
-			s = IndexConstants.ADDRESS_INDEX_EXT;
-		} else if(name.endsWith(IndexConstants.TRANSPORT_INDEX_EXT) || name.endsWith(IndexConstants.TRANSPORT_INDEX_EXT_ZIP)){
-			s = IndexConstants.TRANSPORT_INDEX_EXT;
 		} else if(name.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || name.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)){
 			s = IndexConstants.BINARY_MAP_INDEX_EXT;
 		} else {

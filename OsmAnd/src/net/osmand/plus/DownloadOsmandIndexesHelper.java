@@ -97,11 +97,6 @@ public class DownloadOsmandIndexesHelper {
 			String s = ""; //$NON-NLS-1$
 			if (fileName.endsWith(IndexConstants.POI_INDEX_EXT) || fileName.endsWith(IndexConstants.POI_INDEX_EXT_ZIP)) {
 				s = ctx.getString(R.string.poi);
-			} else if (fileName.endsWith(IndexConstants.ADDRESS_INDEX_EXT) || fileName.endsWith(IndexConstants.ADDRESS_INDEX_EXT_ZIP)) {
-				s = ctx.getString(R.string.address);
-			} else if (fileName.endsWith(IndexConstants.TRANSPORT_INDEX_EXT)
-					|| fileName.endsWith(IndexConstants.TRANSPORT_INDEX_EXT_ZIP)) {
-				s = ctx.getString(R.string.transport);
 			} else if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)
 					|| fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
 				boolean f = true;
@@ -147,11 +142,6 @@ public class DownloadOsmandIndexesHelper {
 		
 		public boolean isAccepted(){
 			if (fileName.endsWith(IndexConstants.POI_INDEX_EXT) || fileName.endsWith(IndexConstants.POI_INDEX_EXT_ZIP)) {
-				return true;
-			} else if (fileName.endsWith(IndexConstants.ADDRESS_INDEX_EXT) || fileName.endsWith(IndexConstants.ADDRESS_INDEX_EXT_ZIP)) {
-				return true;
-			} else if (fileName.endsWith(IndexConstants.TRANSPORT_INDEX_EXT)
-					|| fileName.endsWith(IndexConstants.TRANSPORT_INDEX_EXT_ZIP)) {
 				return true;
 			} else if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)
 					|| fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
