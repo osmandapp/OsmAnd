@@ -596,10 +596,10 @@ public class IndexCreator {
 		creator.recreateOnlyBinaryFile = false;
 		creator.deleteDatabaseIndexes = true;
 				
-//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/download/384/spain.osm.pbf"), 
-//				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), null);
-		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/minsk_around.osm"), 
+		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/download/406/map.osm"), 
 				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), null);
+//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/minsk_around.osm"), 
+//				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), null);
 		
 		
 		
