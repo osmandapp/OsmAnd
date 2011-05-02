@@ -44,7 +44,7 @@ import android.graphics.BitmapFactory;
  * Such as indexes, tiles.
  * Also it is responsible to create cache for that resources if they
  *  can't be loaded fully into memory & clear them on request. 
- *
+ *SQLITE
  */
 public class ResourceManager {
 
@@ -52,8 +52,6 @@ public class ResourceManager {
 	public static final String POI_PATH = APP_DIR + IndexConstants.POI_INDEX_DIR; 
 	public static final String VOICE_PATH = APP_DIR + IndexConstants.VOICE_INDEX_DIR;
 	public static final String MAPS_PATH = APP_DIR;
-	public static final String ADDRESS_PATH = APP_DIR + IndexConstants.ADDRESS_INDEX_DIR;
-	public static final String TRANSPORT_PATH = APP_DIR + IndexConstants.TRANSPORT_INDEX_DIR;
 	public static final String TILES_PATH = APP_DIR+"tiles/"; //$NON-NLS-1$
 	public static final String TEMP_SOURCE_TO_LOAD = "temp"; //$NON-NLS-1$
 	public static final String VECTOR_MAP = "#vector_map"; //$NON-NLS-1$
@@ -348,8 +346,6 @@ public class ResourceManager {
 		// indexingImageTiles(progress);
 		List<String> warnings = new ArrayList<String>();
 		warnings.addAll(indexingPoi(progress));
-		warnings.addAll(indexingAddresses(progress));
-		warnings.addAll(indexingTransport(progress));
 		warnings.addAll(indexingMaps(progress));
 		return warnings;
 	}
@@ -472,69 +468,6 @@ public class ResourceManager {
 		}
 	}
 	
-		
-	public List<String> indexingAddresses(final IProgress progress){
-		File file = OsmandSettings.extendOsmandPath(context, ADDRESS_PATH);
-		List<String> warnings = new ArrayList<String>();
-		closeAddresses();
-		if (file.exists() && file.canRead()) {
-			for (File f : file.listFiles()) {
-				indexingAddress(progress, warnings, f);
-			}
-		}
-		return warnings;
-	}
-
-	public void indexingAddress(final IProgress progress, List<String> warnings, File f) {
-		if (f.getName().endsWith(IndexConstants.ADDRESS_INDEX_EXT)) {
-			RegionAddressRepositoryOdb repository = new RegionAddressRepositoryOdb();
-			progress.startTask(context.getString(R.string.indexing_address) + " " + f.getName(), -1); //$NON-NLS-1$
-			try {
-				boolean initialized = repository.initialize(progress, f);
-				if (initialized) {
-					addressMap.put(repository.getName(), repository);
-					indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$
-				} else {
-					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
-				}
-			} catch (SQLiteException e) {
-				log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
-				warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
-			}
-		}
-	}
-	
-	
-	public List<String> indexingTransport(final IProgress progress){
-		File file = OsmandSettings.extendOsmandPath(context, TRANSPORT_PATH);
-		List<String> warnings = new ArrayList<String>();
-		closeTransport();
-		if (file.exists() && file.canRead()) {
-			for (File f : file.listFiles()) {
-				indexingTransport(progress, warnings, f);
-			}
-		}
-		return warnings;
-	}
-
-	public void indexingTransport(final IProgress progress, List<String> warnings, File f) {
-		if (f.getName().endsWith(IndexConstants.TRANSPORT_INDEX_EXT)) {
-			TransportIndexRepositoryOdb repository = new TransportIndexRepositoryOdb();
-			progress.startTask(context.getString(R.string.indexing_transport) + " " +  f.getName(), -1); //$NON-NLS-1$
-			try {
-				boolean initialized = repository.initialize(progress, f);
-				if (initialized) {
-					transportRepositories.add(repository);
-					indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$
-				} else {
-					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
-				}
-			} catch (SQLiteException e) {
-				log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
-				warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
-			}
-		}
-	}
 	
 	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
 	public List<AmenityIndexRepository> searchAmenityRepositories(double latitude, double longitude) {
