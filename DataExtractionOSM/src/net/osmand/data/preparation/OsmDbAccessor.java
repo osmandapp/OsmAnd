@@ -18,24 +18,28 @@ import net.osmand.osm.Entity.EntityId;
 import net.osmand.osm.Entity.EntityType;
 
 public class OsmDbAccessor implements OsmDbAccessorContext {
-	private final IndexCreator indexCreator;
 	
 	private PreparedStatement pselectNode;
 	private PreparedStatement pselectWay;
 	private PreparedStatement pselectRelation;
 	private PreparedStatement pselectTags;
+	private int allRelations ;
+	private int allWays;
+	private int allNodes;
 	private Connection dbConn;
 	
 	public interface OsmDbVisitor {
 		public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException;
 	}
 	
-	public OsmDbAccessor(IndexCreator indexCreator){
-		this.indexCreator = indexCreator;
+	public OsmDbAccessor(){
 	}
 	
-	public void initDatabase(Connection dbConn) throws SQLException {
+	public void initDatabase(Connection dbConn, int allNodes, int allWays, int allRelations) throws SQLException {
 		this.dbConn = dbConn;
+		this.allNodes = allNodes;
+		this.allWays = allWays;
+		this.allRelations = allRelations;
 		pselectNode = dbConn.prepareStatement("select n.latitude, n.longitude, t.skeys, t.value from node n left join tags t on n.id = t.id and t.type = 0 where n.id = ?"); //$NON-NLS-1$
 		pselectWay = dbConn.prepareStatement("select w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " + //$NON-NLS-1$
 				"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 inner join node n on w.node = n.id " + //$NON-NLS-1$
@@ -44,6 +48,18 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 				"from relations r left join tags t on r.id = t.id and t.type = 2 and r.ord = 0 " + //$NON-NLS-1$
 				"where r.id = ? order by r.ord"); //$NON-NLS-1$
 		pselectTags = dbConn.prepareStatement("select skeys, value from tags where id = ? and type = ?"); //$NON-NLS-1$
+	}
+	
+	public int getAllNodes() {
+		return allNodes;
+	}
+	
+	public int getAllRelations() {
+		return allRelations;
+	}
+	
+	public int getAllWays() {
+		return allWays;
 	}
 	
 	public void loadEntityData(Entity e, boolean loadTags) throws SQLException {
@@ -153,8 +169,7 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 	}
 	
 	
-	public int iterateOverEntities(IProgress progress, EntityType type, int allCount,
-			OsmDbVisitor visitor) throws SQLException {
+	public int iterateOverEntities(IProgress progress, EntityType type, OsmDbVisitor visitor) throws SQLException {
 		Statement statement = dbConn.createStatement();
 		String select;
 		int count = 0;
@@ -220,6 +235,13 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 			visitor.iterateEntity(prevEntity, this);
 		}
 		rs.close();
+		if(EntityType.NODE == type){
+			allNodes = count;
+		} else if(EntityType.WAY == type){
+			allWays = count;
+		} else if(EntityType.RELATION == type){
+			allRelations = count;
+		}
 		return count;
 	}
 

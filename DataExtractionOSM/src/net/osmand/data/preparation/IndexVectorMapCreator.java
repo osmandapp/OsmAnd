@@ -71,42 +71,11 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	}
 	
 	public void indexMapRelationsAndMultiPolygons(Entity e, OsmDbAccessorContext ctx) throws SQLException {
-		if (e instanceof Relation && "restriction".equals(e.getTag(OSMTagKey.TYPE))) { //$NON-NLS-1$
-			String val = e.getTag("restriction"); //$NON-NLS-1$
-			if (val != null) {
-				byte type = -1;
-				if ("no_right_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_NO_RIGHT_TURN;
-				} else if ("no_left_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_NO_LEFT_TURN;
-				} else if ("no_u_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_NO_U_TURN;
-				} else if ("no_straight_on".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON;
-				} else if ("only_right_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN;
-				} else if ("only_left_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_ONLY_LEFT_TURN;
-				} else if ("only_straight_on".equalsIgnoreCase(val)) { //$NON-NLS-1$
-					type = MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON;
-				}
-				if (type != -1) {
-					ctx.loadEntityData(e, true);
-					Collection<EntityId> fromL = ((Relation) e).getMemberIds("from"); //$NON-NLS-1$
-					Collection<EntityId> toL = ((Relation) e).getMemberIds("to"); //$NON-NLS-1$
-					if (!fromL.isEmpty() && !toL.isEmpty()) {
-						EntityId from = fromL.iterator().next();
-						EntityId to = toL.iterator().next();
-						if (from.getType() == EntityType.WAY) {
-							if (!highwayRestrictions.containsKey(from.getId())) {
-								highwayRestrictions.put(from.getId(), new ArrayList<Long>(4));
-							}
-							highwayRestrictions.get(from.getId()).add((to.getId() << 3) | (long) type);
-						}
-					}
-				}
-			}
-		}
+		indexHighwayRestrictions(e, ctx);
+		indexMultiPolygon(e, ctx);
+	}
+
+	private void indexMultiPolygon(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		if (e instanceof Relation && "multipolygon".equals(e.getTag(OSMTagKey.TYPE))) { //$NON-NLS-1$
 			ctx.loadEntityData(e, true);
 			Map<Entity, String> entities = ((Relation) e).getMemberEntities();
@@ -184,7 +153,47 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 			}
 		}
+	}
 
+
+
+	private void indexHighwayRestrictions(Entity e, OsmDbAccessorContext ctx) throws SQLException {
+		if (e instanceof Relation && "restriction".equals(e.getTag(OSMTagKey.TYPE))) { //$NON-NLS-1$
+			String val = e.getTag("restriction"); //$NON-NLS-1$
+			if (val != null) {
+				byte type = -1;
+				if ("no_right_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_NO_RIGHT_TURN;
+				} else if ("no_left_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_NO_LEFT_TURN;
+				} else if ("no_u_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_NO_U_TURN;
+				} else if ("no_straight_on".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON;
+				} else if ("only_right_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN;
+				} else if ("only_left_turn".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_ONLY_LEFT_TURN;
+				} else if ("only_straight_on".equalsIgnoreCase(val)) { //$NON-NLS-1$
+					type = MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON;
+				}
+				if (type != -1) {
+					ctx.loadEntityData(e, true);
+					Collection<EntityId> fromL = ((Relation) e).getMemberIds("from"); //$NON-NLS-1$
+					Collection<EntityId> toL = ((Relation) e).getMemberIds("to"); //$NON-NLS-1$
+					if (!fromL.isEmpty() && !toL.isEmpty()) {
+						EntityId from = fromL.iterator().next();
+						EntityId to = toL.iterator().next();
+						if (from.getType() == EntityType.WAY) {
+							if (!highwayRestrictions.containsKey(from.getId())) {
+								highwayRestrictions.put(from.getId(), new ArrayList<Long>(4));
+							}
+							highwayRestrictions.get(from.getId()).add((to.getId() << 3) | (long) type);
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	private void putMultipolygonType(Map<Long, Set<Integer>> multiPolygonsWays, long baseId, int mtType, boolean inverse) {
@@ -220,7 +229,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	}
 	
 
-	public void combineMultiPolygons(Way w, List<List<Way>> completedRings, List<List<Way>> incompletedRings) {
+	private void combineMultiPolygons(Way w, List<List<Way>> completedRings, List<List<Way>> incompletedRings) {
 		long lId = w.getEntityIds().get(w.getEntityIds().size() - 1).getId().longValue();
 		long fId = w.getEntityIds().get(0).getId().longValue();
 		if (fId == lId) {
@@ -262,6 +271,8 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 			}
 		}
 	}
+	
+	
 
 	private void writeBinaryEntityToMapDatabase(Entity e, long baseId, boolean inverse, int level) throws SQLException {
 		int type = renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), false, typeUse);
@@ -329,13 +340,12 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 		}
 		if (!skip) {
-			insertBinaryMapRenderObjectIndex(pStatements, mapBinaryStat, rtree, e, eName, id, type, typeUse,
-					highwayAttributes, restrictionsUse, inverse, point, true);
+			insertBinaryMapRenderObjectIndex(rtree, e, eName, id, type, typeUse, highwayAttributes, restrictionsUse, inverse, point, true);
 		}
 	}
 	
 
-	protected long encodeTypesToOneLong(int mainType) {
+	private long encodeTypesToOneLong(int mainType) {
 		long i = 0;
 		int ind = 0;
 		int sh = 0;
@@ -409,7 +419,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 			return way;
 		} else {
 			lowLevelWays ++;
-			insertLowLevelMapBinaryObject(pStatements, mapLowLevelBinaryStat, level, longType, id, way.getNodes(), name);
+			insertLowLevelMapBinaryObject(level, longType, id, way.getNodes(), name);
 			return null;
 		}
 
@@ -485,7 +495,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 						startNode = fs.getLong(2);
 						visitedWays.add(lid);
 						loadNodes(fs.getBytes(4), list);
-						ArrayList li = new ArrayList<Float>(list);
+						ArrayList<Float> li = new ArrayList<Float>(list);
 						// remove first lat/lon point
 						wayNodes.remove(0);
 						wayNodes.remove(0);
@@ -535,7 +545,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				MapAlgorithms.simplifyDouglasPeucker(wNodes, zoom - 1 + 8, 3, newWs);
 				
 				int type = decodeTypesFromOneLong(ltype);
-				insertBinaryMapRenderObjectIndex(pStatements, mapBinaryStat, mapTree[level], newWs, name, 
+				insertBinaryMapRenderObjectIndex(mapTree[level], newWs, name, 
 						id, type, typeUse, 0, restrictionsUse, false, false, false);
 			}
 			
@@ -568,6 +578,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public void initSettings(MapZooms mapZooms, MapRenderingTypes renderingTypes) {
 		this.mapZooms = mapZooms;
 		this.renderingTypes = renderingTypes;
@@ -723,8 +734,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
         return conn.prepareStatement("insert into low_level_map_objects(id, start_node, end_node, name, nodes, type, level) values(?, ?, ?, ?, ?, ?, ?)");
 	}
 	
-	private void insertLowLevelMapBinaryObject(Map<PreparedStatement, Integer> statements, 
-			PreparedStatement mapLowLevelBinaryStat, int level,long types, long id, List<Node> nodes, String name) throws SQLException{
+	private void insertLowLevelMapBinaryObject(int level,long types, long id, List<Node> nodes, String name) throws SQLException{
 		boolean first = true;
 		long firstId = -1;
 		long lastId = -1;
@@ -756,10 +766,10 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		mapLowLevelBinaryStat.setLong(6, types);
 		mapLowLevelBinaryStat.setShort(7, (short) level);
 		
-		addBatch(statements, mapLowLevelBinaryStat);
+		addBatch(mapLowLevelBinaryStat);
 	}
-	private void insertBinaryMapRenderObjectIndex(Map<PreparedStatement, Integer> statements, 
-			PreparedStatement mapBinaryStat, RTree mapTree, Entity e, String name,
+	
+	private void insertBinaryMapRenderObjectIndex(RTree mapTree, Entity e, String name,
 			long id, int type, List<Integer> typeUse, int highwayAttributes, List<Long> restrictions, 	
 			boolean inversePath, boolean writeAsPoint, boolean commit) throws SQLException {
 		if(e instanceof Relation){
@@ -824,7 +834,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 			mapBinaryStat.setBytes(5, bnodes.toByteArray());
 			mapBinaryStat.setInt(6, highwayAttributes);
 			
-			addBatch(statements, mapBinaryStat, commit);
+			addBatch(mapBinaryStat, commit);
 			try {
 				mapTree.insert(new LeafElement(new Rect(minX, minY, maxX, maxY), id));
 			} catch (RTreeInsertException e1) {

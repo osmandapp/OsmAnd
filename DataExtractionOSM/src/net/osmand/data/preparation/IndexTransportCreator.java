@@ -73,7 +73,72 @@ public class IndexTransportCreator extends AbstractIndexPartCreator {
 		transportStopsTree = new RTree(rtreeTransportStopFile);
 	}
 	
-	public void createTransportIndexStructure(Connection conn, DBDialect dialect, String rtreeStopsFileName) throws SQLException, IOException{
+	public void writeBinaryTransportTree(rtree.Node parent, RTree r, BinaryMapIndexWriter writer, 
+			PreparedStatement selectTransportStop, PreparedStatement selectTransportRouteStop, 
+			Map<Long, Long> transportRoutes, Map<String, Integer> stringTable) throws IOException, RTreeException, SQLException {
+		Element[] e = parent.getAllElements();
+		List<Long> routes = null;
+		for (int i = 0; i < parent.getTotalElements(); i++) {
+			Rect re = e[i].getRect();
+			if (e[i].getElementType() == rtree.Node.LEAF_NODE) {
+				long id = ((LeafElement) e[i]).getPtr();
+				selectTransportStop.setLong(1, id);
+				selectTransportRouteStop.setLong(1, id);
+				ResultSet rs = selectTransportStop.executeQuery();
+				if (rs.next()) {
+					int x24 = (int) MapUtils.getTileNumberX(24, rs.getDouble(3));
+					int y24 = (int) MapUtils.getTileNumberY(24, rs.getDouble(2));
+					String name = rs.getString(4);
+					String nameEn = rs.getString(5);
+					if (nameEn != null && nameEn.equals(Junidecode.unidecode(name))) {
+						nameEn = null;
+					}
+					ResultSet rset = selectTransportRouteStop.executeQuery();
+					if (routes == null) {
+						routes = new ArrayList<Long>();
+					} else {
+						routes.clear();
+					}
+					while (rset.next()) {
+						Long route = transportRoutes.get(rset.getLong(1));
+						if (route == null) {
+							log.error("Something goes wrong with transport route id = " + rset.getLong(1)); //$NON-NLS-1$
+						} else {
+							routes.add(route);
+						}
+					}
+					rset.close();
+					writer.writeTransportStop(id, x24, y24, name, nameEn, stringTable, routes);
+				} else {
+					log.error("Something goes wrong with transport id = " + id); //$NON-NLS-1$
+				}
+			} else {
+				long ptr = ((NonLeafElement) e[i]).getPtr();
+				rtree.Node ns = r.getReadNode(ptr);
+
+				writer.startTransportTreeElement(re.getMinX(), re.getMaxX(), re.getMinY(), re.getMaxY());
+				writeBinaryTransportTree(ns, r, writer, selectTransportStop, selectTransportRouteStop, transportRoutes, stringTable);
+				writer.endWriteTransportTreeElement();
+			}
+		}
+	}
+	
+
+	public void packRTree(String rtreeTransportStopsFileName, String rtreeTransportStopsPackFileName) throws IOException {
+		transportStopsTree = packRtreeFile(transportStopsTree, rtreeTransportStopsFileName, rtreeTransportStopsPackFileName);
+	}
+	
+	public void visitEntityMainStep(Entity e, OsmDbAccessorContext ctx) throws SQLException {
+		if (e instanceof Relation && e.getTag(OSMTagKey.ROUTE) != null) {
+			ctx.loadEntityData(e, true);
+			TransportRoute route = indexTransportRoute((Relation) e);
+			if (route != null) {
+				insertTransportIntoIndex(route);
+			}
+		}
+	}
+	
+	public void createDatabaseStructure(Connection conn, DBDialect dialect, String rtreeStopsFileName) throws SQLException, IOException{
 		Statement stat = conn.createStatement();
 		
         stat.executeUpdate("create table transport_route (id bigint primary key, type varchar(255), operator varchar(255)," +
@@ -111,37 +176,18 @@ public class IndexTransportCreator extends AbstractIndexPartCreator {
 	}
 	
 	
-	public void packRTree(String rtreeTransportStopsFileName, String rtreeTransportStopsPackFileName) throws IOException {
-		transportStopsTree = packRtreeFile(transportStopsTree, rtreeTransportStopsFileName, rtreeTransportStopsPackFileName);
-	}
-	
-	public void visitEntityMainStep(Entity e, OsmDbAccessorContext ctx) throws SQLException {
-		if (e instanceof Relation && e.getTag(OSMTagKey.ROUTE) != null) {
-			ctx.loadEntityData(e, true);
-			TransportRoute route = indexTransportRoute((Relation) e);
-			if (route != null) {
-				insertTransportIntoIndex(transRouteStat, transRouteStopsStat, transStopsStat, transportStopsTree,
-						visitedStops, route, pStatements, BATCH_SIZE);
-			}
-		}
-	}
-	
-	
-	private  void insertTransportIntoIndex(PreparedStatement prepRoute, PreparedStatement prepRouteStops,
-			PreparedStatement prepStops, RTree transportStopsTree, 
-			Set<Long> writtenStops, TransportRoute route, Map<PreparedStatement, Integer> statements,
-			int batchSize) throws SQLException {
-		prepRoute.setLong(1, route.getId());
-		prepRoute.setString(2, route.getType());
-		prepRoute.setString(3, route.getOperator());
-		prepRoute.setString(4, route.getRef());
-		prepRoute.setString(5, route.getName());
-		prepRoute.setString(6, route.getEnName());
-		prepRoute.setInt(7, route.getAvgBothDistance());
-		addBatch(statements, prepRoute);
+	private void insertTransportIntoIndex(TransportRoute route) throws SQLException {
+		transRouteStat.setLong(1, route.getId());
+		transRouteStat.setString(2, route.getType());
+		transRouteStat.setString(3, route.getOperator());
+		transRouteStat.setString(4, route.getRef());
+		transRouteStat.setString(5, route.getName());
+		transRouteStat.setString(6, route.getEnName());
+		transRouteStat.setInt(7, route.getAvgBothDistance());
+		addBatch(transRouteStat);
 		
-		writeRouteStops(transportStopsTree, prepRouteStops, prepStops, statements, writtenStops, route, route.getForwardStops(), true);
-		writeRouteStops(transportStopsTree, prepRouteStops, prepStops, statements, writtenStops, route, route.getBackwardStops(), false);
+		writeRouteStops(route, route.getForwardStops(), true);
+		writeRouteStops(route, route.getBackwardStops(), false);
 		
 	}
 	
@@ -152,19 +198,18 @@ public class IndexTransportCreator extends AbstractIndexPartCreator {
         return conn.prepareStatement("insert into transport_route_stop(route, stop, direction, ord) values(?, ?, ?, ?)");
 	}
 	
-	private void writeRouteStops(RTree transportStopsTree, PreparedStatement prepRouteStops, PreparedStatement prepStops, Map<PreparedStatement, Integer> count,
-			Set<Long> writtenStops, TransportRoute r, List<TransportStop> stops, boolean direction) throws SQLException {
+	private void writeRouteStops(TransportRoute r, List<TransportStop> stops, boolean direction) throws SQLException {
 		int i = 0;
 		for(TransportStop s : stops){
-			if (!writtenStops.contains(s.getId())) {
-				prepStops.setLong(1, s.getId());
-				prepStops.setDouble(2, s.getLocation().getLatitude());
-				prepStops.setDouble(3, s.getLocation().getLongitude());
-				prepStops.setString(4, s.getName());
-				prepStops.setString(5, s.getEnName());
+			if (!visitedStops.contains(s.getId())) {
+				transStopsStat.setLong(1, s.getId());
+				transStopsStat.setDouble(2, s.getLocation().getLatitude());
+				transStopsStat.setDouble(3, s.getLocation().getLongitude());
+				transStopsStat.setString(4, s.getName());
+				transStopsStat.setString(5, s.getEnName());
 				int x = (int) MapUtils.getTileNumberX(24, s.getLocation().getLongitude());
 				int y = (int) MapUtils.getTileNumberY(24, s.getLocation().getLatitude());
-				addBatch(count, prepStops);
+				addBatch(transStopsStat);
 				try {
 					transportStopsTree.insert(new LeafElement(new Rect(x, y, x, y), s.getId()));
 				} catch (RTreeInsertException e) {
@@ -172,13 +217,13 @@ public class IndexTransportCreator extends AbstractIndexPartCreator {
 				} catch (IllegalValueException e) {
 					throw new IllegalArgumentException(e);
 				}
-				writtenStops.add(s.getId());
+				visitedStops.add(s.getId());
 			}
-			prepRouteStops.setLong(1, r.getId());
-			prepRouteStops.setLong(2, s.getId());
-			prepRouteStops.setInt(3, direction ? 1 : 0);
-			prepRouteStops.setInt(4, i++);
-			addBatch(count, prepRouteStops);
+			transRouteStopsStat.setLong(1, r.getId());
+			transRouteStopsStat.setLong(2, s.getId());
+			transRouteStopsStat.setInt(3, direction ? 1 : 0);
+			transRouteStopsStat.setInt(4, i++);
+			addBatch(transRouteStopsStat);
 		}
 	}
 	
@@ -281,9 +326,8 @@ public class IndexTransportCreator extends AbstractIndexPartCreator {
 		} catch (RTreeException e) {
 			throw new IllegalStateException(e);
 		}
-	}
-	
-	public Rect calcBounds(rtree.Node n) {
+	}	
+	private Rect calcBounds(rtree.Node n) {
 		Rect r = null;
 		Element[] e = n.getAllElements();
 		for (int i = 0; i < n.getTotalElements(); i++) {
@@ -340,57 +384,9 @@ public class IndexTransportCreator extends AbstractIndexPartCreator {
 	}
 	
 
-	public void writeBinaryTransportTree(rtree.Node parent, RTree r, BinaryMapIndexWriter writer, 
-			PreparedStatement selectTransportStop, PreparedStatement selectTransportRouteStop, 
-			Map<Long, Long> transportRoutes, Map<String, Integer> stringTable) throws IOException, RTreeException, SQLException {
-		Element[] e = parent.getAllElements();
-		List<Long> routes = null;
-		for (int i = 0; i < parent.getTotalElements(); i++) {
-			Rect re = e[i].getRect();
-			if (e[i].getElementType() == rtree.Node.LEAF_NODE) {
-				long id = ((LeafElement) e[i]).getPtr();
-				selectTransportStop.setLong(1, id);
-				selectTransportRouteStop.setLong(1, id);
-				ResultSet rs = selectTransportStop.executeQuery();
-				if (rs.next()) {
-					int x24 = (int) MapUtils.getTileNumberX(24, rs.getDouble(3));
-					int y24 = (int) MapUtils.getTileNumberY(24, rs.getDouble(2));
-					String name = rs.getString(4);
-					String nameEn = rs.getString(5);
-					if (nameEn != null && nameEn.equals(Junidecode.unidecode(name))) {
-						nameEn = null;
-					}
-					ResultSet rset = selectTransportRouteStop.executeQuery();
-					if (routes == null) {
-						routes = new ArrayList<Long>();
-					} else {
-						routes.clear();
-					}
-					while (rset.next()) {
-						Long route = transportRoutes.get(rset.getLong(1));
-						if (route == null) {
-							log.error("Something goes wrong with transport route id = " + rset.getLong(1)); //$NON-NLS-1$
-						} else {
-							routes.add(route);
-						}
-					}
-					rset.close();
-					writer.writeTransportStop(id, x24, y24, name, nameEn, stringTable, routes);
-				} else {
-					log.error("Something goes wrong with transport id = " + id); //$NON-NLS-1$
-				}
-			} else {
-				long ptr = ((NonLeafElement) e[i]).getPtr();
-				rtree.Node ns = r.getReadNode(ptr);
-
-				writer.startTransportTreeElement(re.getMinX(), re.getMaxX(), re.getMinY(), re.getMaxY());
-				writeBinaryTransportTree(ns, r, writer, selectTransportStop, selectTransportRouteStop, transportRoutes, stringTable);
-				writer.endWriteTransportTreeElement();
-			}
-		}
-	}
 	
-	public TransportRoute indexTransportRoute(Relation rel) {
+	
+	private TransportRoute indexTransportRoute(Relation rel) {
 		String ref = rel.getTag(OSMTagKey.REF);
 		String route = rel.getTag(OSMTagKey.ROUTE);
 		String operator = rel.getTag(OSMTagKey.OPERATOR);

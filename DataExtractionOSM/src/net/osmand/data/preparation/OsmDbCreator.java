@@ -99,8 +99,6 @@ public class OsmDbCreator implements IOsmStorageFilter {
 
 	@Override
 	public boolean acceptEntityToLoad(OsmBaseStorage storage, EntityId entityId, Entity e) {
-		// Register all city labelbs
-		indexCreator.registerCityIfNeeded(e);
 		// put all nodes into temporary db to get only required nodes after loading all data
 		try {
 			if (e instanceof Node) {
