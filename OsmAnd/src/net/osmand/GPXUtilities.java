@@ -75,9 +75,9 @@ public class GPXUtilities {
 			serializer.startTag(null, "gpx"); //$NON-NLS-1$
 			serializer.attribute(null, "version", "1.1"); //$NON-NLS-1$ //$NON-NLS-2$
 			serializer.attribute(null, "creator", Version.APP_NAME_VERSION); //$NON-NLS-1$
-			serializer.attribute("xmlns", "xsi", "http://www.w3.org/2001/XMLSchema-instance"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			serializer.attribute("xsi", "schemaLocation", "http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			serializer.attribute(null, "xmlns", "http://www.topografix.com/GPX/1/1"); //$NON-NLS-1$ //$NON-NLS-2$
+			serializer.attribute(null, "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+			serializer.attribute(null, "xsi:schemaLocation", "http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
+			
 
 			for (Track track : file.tracks) {
 				serializer.startTag(null, "trk"); //$NON-NLS-1$
@@ -87,16 +87,18 @@ public class GPXUtilities {
 						serializer.startTag(null, "trkpt"); //$NON-NLS-1$
 						serializer.attribute(null, "lat", latLonFormat.format(p.lat)); //$NON-NLS-1$ //$NON-NLS-2$
 						serializer.attribute(null, "lon", latLonFormat.format(p.lon)); //$NON-NLS-1$ //$NON-NLS-2$
-						serializer.startTag(null, "time"); //$NON-NLS-1$
-						serializer.text(format.format(new Date(p.time)));
-						serializer.endTag(null, "time"); //$NON-NLS-1$
 						serializer.startTag(null, "ele"); //$NON-NLS-1$
 						serializer.text(p.ele + ""); //$NON-NLS-1$
 						serializer.endTag(null, "ele"); //$NON-NLS-1$
+						serializer.startTag(null, "time"); //$NON-NLS-1$
+						serializer.text(format.format(new Date(p.time)));
+						serializer.endTag(null, "time"); //$NON-NLS-1$
 						if (p.speed > 0) {
+							serializer.startTag(null, "extensions");
 							serializer.startTag(null, "speed"); //$NON-NLS-1$
 							serializer.text(p.speed + ""); //$NON-NLS-1$
 							serializer.endTag(null, "speed"); //$NON-NLS-1$
+							serializer.endTag(null, "extensions");
 						}
 
 						serializer.endTag(null, "trkpt"); //$NON-NLS-1$
@@ -110,14 +112,14 @@ public class GPXUtilities {
 				serializer.startTag(null, "wpt"); //$NON-NLS-1$
 				serializer.attribute(null, "lat", latLonFormat.format(l.lat)); //$NON-NLS-1$ 
 				serializer.attribute(null, "lon", latLonFormat.format(l.lon)); //$NON-NLS-1$ //$NON-NLS-2$
-				serializer.startTag(null, "name"); //$NON-NLS-1$
-				serializer.text(l.name);
-				serializer.endTag(null, "name"); //$NON-NLS-1$
 				if (l.time != 0) {
 					serializer.startTag(null, "time"); //$NON-NLS-1$
 					serializer.text(format.format(new Date(l.time)));
 					serializer.endTag(null, "time"); //$NON-NLS-1$
 				}
+				serializer.startTag(null, "name"); //$NON-NLS-1$
+				serializer.text(l.name);
+				serializer.endTag(null, "name"); //$NON-NLS-1$
 				serializer.endTag(null, "wpt"); //$NON-NLS-1$
 			}
 
