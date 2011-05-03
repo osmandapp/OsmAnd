@@ -467,7 +467,7 @@
 <string name="favourites_context_menu_delete">Delete favorite</string>
 <string name="favourites_edit_dialog_title">Rename favorite</string>
 
-<string name="favourites_remove_dialog_title">Are you sure?</string>
+<string name="favourites_remove_dialog_title">Are you sure about removing favourite point?</string>
 <string name="favourites_remove_dialog_success">Favourite point {0} was succesfully deleted.</string>
 
 <string name="osb_add_dialog_title">Enter bug text</string>
