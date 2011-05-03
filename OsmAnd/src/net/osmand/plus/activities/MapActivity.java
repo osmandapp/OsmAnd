@@ -136,6 +136,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	
     /** Called when the activity is first created. */
 	private OsmandMapTileView mapView;
+	private MapActivityActions mapActions = new MapActivityActions(this);
 	
 	private ImageButton backToLocation;
 	private ImageButton backToMenu;
@@ -173,8 +174,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private Dialog progressDlg = null;
 	private SharedPreferences settings;
 	
-	
-
 	private boolean isMapLinkedToLocation(){
 		return OsmandSettings.isMapSyncToGpsLocation(settings);
 	}
@@ -438,6 +437,14 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     	super.onStart();
     }
     
+    protected void setProgressDlg(Dialog progressDlg) {
+		this.progressDlg = progressDlg;
+	}
+    
+    protected Dialog getProgressDlg() {
+		return progressDlg;
+	}
+    
     @Override
     protected void onStop() {
     	// TODO keep this check?
@@ -482,6 +489,24 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			sensorRegistered = true;
 		}
     }
+    
+    protected void backToLocationImpl() {
+		backToLocation.setVisibility(View.INVISIBLE);
+		if(!isMapLinkedToLocation()){
+			OsmandSettings.setSyncMapToGpsLocation(MapActivity.this, true);
+			if(locationLayer.getLastKnownLocation() != null){
+				Location lastKnownLocation = locationLayer.getLastKnownLocation();
+				AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
+				int fZoom = mapView.getZoom() < 15 ? 15 : mapView.getZoom();
+				thread.startMoving(mapView.getLatitude(), mapView.getLongitude(), 
+						lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), mapView.getZoom(), fZoom, 
+						mapView.getSourceTileSize(), mapView.getRotate(), false);
+			}
+		}
+		if(locationLayer.getLastKnownLocation() == null){
+			Toast.makeText(this, R.string.unknown_location, Toast.LENGTH_LONG).show();
+		}
+	}
     
     private void updateSpeedBearing(Location location) {
 		// For network/gps it's bad way (not accurate). It's widely used for testing purposes
@@ -1047,7 +1072,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			openLayerSelectionDialog();
 			return true;
 		} else if (item.getItemId() == R.id.map_specify_point) {
-			openChangeLocationDialog();
+			NavigatePointActivity dlg = new NavigatePointActivity(this);
+			dlg.showDialog();
 			return true;
 		} else if (item.getItemId() == R.id.map_mute) {
 			routingHelper.getVoiceRouter().setMute(!routingHelper.getVoiceRouter().isMute());
@@ -1206,41 +1232,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     }
     
     
-    protected void reloadTile(final int zoom, final double latitude, final double longitude){
-    	Builder builder = new AlertDialog.Builder(this);
-    	builder.setMessage(R.string.context_menu_item_update_map_confirm);
-    	builder.setNegativeButton(R.string.default_buttons_cancel, null);
-    	builder.setPositiveButton(R.string.context_menu_item_update_map, new DialogInterface.OnClickListener(){
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				Rect pixRect = new Rect(0, 0, mapView.getWidth(), mapView.getHeight());
-		    	RectF tilesRect = new RectF();
-		    	mapView.calculateTileRectangle(pixRect, mapView.getCenterPointX(), mapView.getCenterPointY(), 
-		    			mapView.getXTile(), mapView.getYTile(), tilesRect);
-		    	int left = (int) FloatMath.floor(tilesRect.left);
-				int top = (int) FloatMath.floor(tilesRect.top);
-				int width = (int) (FloatMath.ceil(tilesRect.right) - left);
-				int height = (int) (FloatMath.ceil(tilesRect.bottom) - top);
-				for (int i = 0; i <width; i++) {
-					for (int j = 0; j< height; j++) {
-						((OsmandApplication)getApplication()).getResourceManager().
-								clearTileImageForMap(null, mapView.getMap(), i + left, j + top, zoom);	
-					}
-				}
-				
-				
-				mapView.refreshMap();
-			}
-    	});
-    	builder.setNeutralButton(R.string.context_menu_item_update_poi, new DialogInterface.OnClickListener(){
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				updatePoiDb(zoom, latitude, longitude);
-				
-			}
-    	});
-		builder.create().show();
-    }
+    
     
     protected void parseLaunchIntentLocation(){
     	Intent intent = getIntent();
@@ -1270,67 +1262,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     	}
     }
     
-    
-    protected void showToast(final String msg){
-    	runOnUiThread(new Runnable(){
-			@Override
-			public void run() {
-				Toast.makeText(MapActivity.this, msg, Toast.LENGTH_LONG).show();
-			}
-    	});
-    }
-    
-    protected void updatePoiDb(int zoom, double latitude, double longitude){
-    	if(zoom < 15){
-    		Toast.makeText(this, getString(R.string.update_poi_is_not_available_for_zoom), Toast.LENGTH_SHORT).show();
-    		return;
-    	}
-    	final List<AmenityIndexRepository> repos = ((OsmandApplication) getApplication()).
-    								getResourceManager().searchAmenityRepositories(latitude, longitude);
-    	if(repos.isEmpty()){
-    		Toast.makeText(this, getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_SHORT).show();
-    		return;
-    	}
-    	Rect pixRect = new Rect(-mapView.getWidth()/2, -mapView.getHeight()/2, 3*mapView.getWidth()/2, 3*mapView.getHeight()/2);
-    	RectF tileRect = new RectF();
-    	mapView.calculateTileRectangle(pixRect, mapView.getCenterPointX(), mapView.getCenterPointY(), 
-    			mapView.getXTile(), mapView.getYTile(), tileRect);
-    	final double leftLon = MapUtils.getLongitudeFromTile(zoom, tileRect.left); 
-    	final double topLat = MapUtils.getLatitudeFromTile(zoom, tileRect.top);
-		final double rightLon = MapUtils.getLongitudeFromTile(zoom, tileRect.right);
-		final double bottomLat = MapUtils.getLatitudeFromTile(zoom, tileRect.bottom);
-    	
-    	progressDlg = ProgressDialog.show(this, getString(R.string.loading), getString(R.string.loading_data));
-    	new Thread(new Runnable(){
-			@Override
-			public void run() {
-				try {
-					List<Amenity> amenities = new ArrayList<Amenity>();
-					boolean loadingPOIs = AmenityIndexRepositoryOdb.loadingPOIs(amenities, leftLon, topLat, rightLon, bottomLat);
-					if(!loadingPOIs){
-						showToast(getString(R.string.update_poi_error_loading));
-					} else {
-						for(AmenityIndexRepository r  : repos){
-							if(r instanceof AmenityIndexRepositoryOdb){
-								((AmenityIndexRepositoryOdb) r).updateAmenities(amenities, leftLon, topLat, rightLon, bottomLat);
-							}
-						}
-						showToast(MessageFormat.format(getString(R.string.update_poi_success), amenities.size()));
-						mapView.refreshMap();
-					}
-				} catch(Exception e) {
-					Log.e(LogUtil.TAG, "Error updating local data", e); //$NON-NLS-1$
-					showToast(getString(R.string.update_poi_error_local));
-				} finally {
-					if(progressDlg !=null){
-						progressDlg.dismiss();
-						progressDlg = null;
-					}
-				}
-			}
-    	}, "LoadingPOI").start(); //$NON-NLS-1$
-    	
-    }
     
 	private void openLayerSelectionDialog(){
 		List<String> layersList = new ArrayList<String>();
@@ -1671,18 +1602,18 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					intent.putExtra(SearchTransportActivity.LON_KEY, longitude);
 					startActivity(intent);
 				} else if(standardId == R.string.context_menu_item_add_favorite){
-					addFavouritePoint(latitude, longitude);
+					mapActions.addFavouritePoint(latitude, longitude);
 				} else if(standardId == R.string.context_menu_item_share_location){
-					shareLocation(latitude, longitude, mapView.getZoom());
+					mapActions.shareLocation(latitude, longitude, mapView.getZoom());
 				} else if(standardId == R.string.context_menu_item_search_poi){
 					EditingPOIActivity activity = new EditingPOIActivity(MapActivity.this, (OsmandApplication) getApplication(), mapView);
 					activity.showCreateDialog(latitude, longitude);
 				} else if(standardId == R.string.context_menu_item_add_waypoint){
-					addWaypoint(latitude, longitude);
+					mapActions.addWaypoint(latitude, longitude, savingTrackHelper);
 				} else if(standardId == R.string.context_menu_item_open_bug){
 					osmBugsLayer.openBug(MapActivity.this, getLayoutInflater(), mapView, latitude, longitude);
 				} else if(standardId == R.string.context_menu_item_update_map){
-					reloadTile(mapView.getZoom(), latitude, longitude);
+					mapActions.reloadTile(mapView.getZoom(), latitude, longitude);
 				} else if(standardId == R.string.context_menu_item_download_map){
 					DownloadTilesDialog dlg = new DownloadTilesDialog(MapActivity.this, 
 							(OsmandApplication) getApplication(), mapView);
@@ -1693,148 +1624,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		builder.create().show();
     }
     
-    
-    protected void addFavouritePoint(final double latitude, final double longitude){
-    	final Resources resources = this.getResources();
-    	final FavouritePoint p = new FavouritePoint(latitude, longitude, resources.getString(R.string.add_favorite_dialog_default_favourite_name));
-    	
-    	Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.add_favorite_dialog_top_text);
-		final EditText editText = new EditText(this);
-		builder.setView(editText);
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
-		builder.setNeutralButton(R.string.update_existing, new DialogInterface.OnClickListener(){
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				Builder b = new AlertDialog.Builder(MapActivity.this);
-				final FavouritesDbHelper helper = ((OsmandApplication)getApplication()).getFavorites();
-				final Collection<FavouritePoint> points = helper.getFavouritePoints();
-				final String[] ar = new String[points.size()];
-				Iterator<FavouritePoint> it = points.iterator();
-				int i=0;
-				while(it.hasNext()){
-					ar[i++] = it.next().getName();
-				}
-				b.setItems(ar, new DialogInterface.OnClickListener(){
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						FavouritePoint fv = helper.getFavoritePointByName(ar[which]);
-						if(helper.editFavourite(fv, latitude, longitude)){
-							Toast.makeText(MapActivity.this, getString(R.string.fav_points_edited), Toast.LENGTH_SHORT).show();
-						}
-						mapView.refreshMap();
-					}
-				});
-				if(ar.length == 0){
-					Toast.makeText(MapActivity.this, getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
-					helper.close();
-				}  else {
-					b.show();
-				}
-			}
-			
-		});
-		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				final FavouritesDbHelper helper = ((OsmandApplication)getApplication()).getFavorites();
-				p.setName(editText.getText().toString());
-				boolean added = helper.addFavourite(p);
-				if (added) {
-					Toast.makeText(MapActivity.this, MessageFormat.format(getString(R.string.add_favorite_dialog_favourite_added_template), p.getName()), Toast.LENGTH_SHORT)
-							.show();
-				}
-				mapView.refreshMap();
-			}
-		});
-		builder.create().show();
-    }
-
-    protected void addWaypoint(final double latitude, final double longitude){
-    	
-    	Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.add_waypoint_dialog_title);
-		final EditText editText = new EditText(this);
-		builder.setView(editText);
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
-		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				String name = editText.getText().toString();
-				savingTrackHelper.insertPointData(latitude, longitude, System.currentTimeMillis(), name);
-				Toast.makeText(MapActivity.this, MessageFormat.format(getString(R.string.add_waypoint_dialog_added), name), Toast.LENGTH_SHORT)
-							.show();
-				
-			}
-		});
-		builder.create().show();
-    }
-    
-    protected void shareLocation(final double latitude, final double longitude, int zoom){
-    	final String shortOsmUrl = MapUtils.buildShortOsmUrl(latitude, longitude, zoom);
-		// final String simpleGeo = "geo:"+((float) latitude)+","+((float)longitude) +"?z="+zoom;
-		final String appLink = "http://download.osmand.net/go?lat="+((float) latitude)+"&lon="+((float)longitude) +"&z="+zoom;
-		
-		AlertDialog.Builder builder = new Builder(this);
-		builder.setTitle(R.string.send_location_way_choose_title);
-		builder.setItems(new String[]{
-				"Email", "SMS", "Clipboard"
-		}, new DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				String sms = MessageFormat.format(getString(R.string.send_location_sms_pattern), shortOsmUrl, appLink);
-				String email = MessageFormat.format(getString(R.string.send_location_email_pattern), shortOsmUrl, appLink );
-				if(which == 0){
-					Intent intent = new Intent(Intent.ACTION_SEND);
-					intent.setType("vnd.android.cursor.dir/email"); //$NON-NLS-1$
-					intent.putExtra(Intent.EXTRA_SUBJECT, "Mine location"); //$NON-NLS-1$
-					intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(email));
-					intent.setType("text/html");
-					startActivity(Intent.createChooser(intent, getString(R.string.send_location)));
-				} else if(which == 1){
-					Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-					sendIntent.putExtra("sms_body", sms); 
-					sendIntent.setType("vnd.android-dir/mms-sms");
-					startActivity(sendIntent);   
-				} else if (which == 2){
-					ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-					clipboard.setText(sms);
-				}
-				
-			}
-		});
-    	
-    	builder.show();
-    }
-    
-    
-	private void openChangeLocationDialog() {
-		NavigatePointActivity dlg = new NavigatePointActivity(this);
-		dlg.showDialog();
-	}
-	
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 	}
 
-	protected void backToLocationImpl() {
-		backToLocation.setVisibility(View.INVISIBLE);
-		if(!isMapLinkedToLocation()){
-			OsmandSettings.setSyncMapToGpsLocation(MapActivity.this, true);
-			if(locationLayer.getLastKnownLocation() != null){
-				Location lastKnownLocation = locationLayer.getLastKnownLocation();
-				AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
-				int fZoom = mapView.getZoom() < 15 ? 15 : mapView.getZoom();
-				thread.startMoving(mapView.getLatitude(), mapView.getLongitude(), 
-						lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), mapView.getZoom(), fZoom, 
-						mapView.getSourceTileSize(), mapView.getRotate(), false);
-			}
-		}
-		if(locationLayer.getLastKnownLocation() == null){
-			Toast.makeText(this, R.string.unknown_location, Toast.LENGTH_LONG).show();
-		}
-	}
+	
 
 }
