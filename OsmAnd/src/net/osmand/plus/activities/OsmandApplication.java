@@ -47,6 +47,7 @@ public class OsmandApplication extends Application {
 	private Handler uiHandler;
 	private DayNightHelper daynightHelper;
 	private NavigationService navigationService;
+	private boolean applicationInitializing = false;
 	
 	
     public void	onCreate(){
@@ -87,6 +88,8 @@ public class OsmandApplication extends Application {
 	}
 	
 	public ProgressDialog checkApplicationIsBeingInitialized(Context uiContext){
+		// start application if it was previously closed
+		startApplication();
 		synchronized (OsmandApplication.this) {
 			if(startDialog != null){
 				progressDlg = ProgressDialog.show(uiContext, getString(R.string.loading_data), getString(R.string.reading_indexes), true);
@@ -170,8 +173,20 @@ public class OsmandApplication extends Application {
 	public void setNavigationService(NavigationService navigationService) {
 		this.navigationService = navigationService;
 	}
+	
+	public synchronized void closeApplication(){
+		if(applicationInitializing){
+			manager.close();
+		}
+		applicationInitializing = false; 
+	}
+	
 
-	public void startApplication() {
+	public synchronized void startApplication() {
+		if(applicationInitializing){
+			return;
+		}
+		applicationInitializing = true;
 		startDialog = new ProgressDialogImplementation(this, null, false);
 
 		startDialog.setRunnable("Initializing app", new Runnable() { //$NON-NLS-1$

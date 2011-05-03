@@ -196,7 +196,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		settings = OsmandSettings.getPrefs(this);		
 		// for voice navigation
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);  
+		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		// Full screen is not used here
 //	     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);

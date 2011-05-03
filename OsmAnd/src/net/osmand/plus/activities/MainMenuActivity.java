@@ -174,6 +174,7 @@ public class MainMenuActivity extends Activity {
 		closeButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				((OsmandApplication) getApplication()).closeApplication();
 				finish();
 			}
 		});
