@@ -29,7 +29,7 @@ public class OsmAndFormatter {
 		}
 
 		if (meters >= 100 * mainUnitInMeters) {
-			return ((int) meters / mainUnitInMeters) + " " + ctx.getString(mainUnitStr); //$NON-NLS-1$
+			return (int) (meters / mainUnitInMeters) + " " + ctx.getString(mainUnitStr); //$NON-NLS-1$
 		} else if (meters > 1.5f * mainUnitInMeters) {
 			return MessageFormat.format("{0,number,#.#} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters); //$NON-NLS-1$ 
 		} else if (meters > 0.9f * mainUnitInMeters) {
