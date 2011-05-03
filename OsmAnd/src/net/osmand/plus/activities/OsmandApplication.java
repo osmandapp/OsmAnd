@@ -128,11 +128,13 @@ public class OsmandApplication extends Application {
 			builder.setTitle(R.string.voice_is_not_available_title);
 			builder.setMessage(R.string.voice_is_not_available_msg);
 			builder.show();
+		} else {
+			if(player == null 
+					|| !Algoritms.objectEquals(voiceProvider, player.getCurrentVoice())){
+				initVoiceDataInDifferentThread(uiContext);
+			}
 		}
-		if(player == null 
-				|| !Algoritms.objectEquals(voiceProvider, player.getCurrentVoice())){
-			initVoiceDataInDifferentThread(uiContext);
-		}
+		
 	}
 
 	private void initVoiceDataInDifferentThread(Context uiContext) {
