@@ -55,7 +55,7 @@
 	<string name="poi_filter_fuel">Palivo</string>
 	<string name="poi_filter_namefinder">Online hľadač mien</string>
 	<string name="reading_cached_tiles">Čítajú sa dlaždice zo zásobníka...</string>
-	<string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
+	<string name="version_index_is_big_for_memory">Index \'\'{0}\'\' sa nezmestil do pamäti</string>
 	<string name="version_index_is_not_supported">Verzia indexu \'\'{0}\'\' nie je podporovaná</string>
 	
 <string name="use_osmand_routing_service">OsmAnd offline rutovanie</string>
