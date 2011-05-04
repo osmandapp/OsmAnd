@@ -6,6 +6,7 @@ import static net.osmand.data.IndexConstants.BINARY_MAP_VERSION;
 import static net.osmand.data.IndexConstants.VOICE_INDEX_EXT_ZIP;
 import static net.osmand.data.IndexConstants.VOICE_VERSION;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -17,8 +18,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.osmand.LogUtil;
@@ -35,13 +38,13 @@ public class DownloaderIndexFromGoogleCode {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws URISyntaxException, IOException {
-		Map<String, String> files = DownloaderIndexFromGoogleCode.getContent(new LinkedHashMap<String, String>(),
-				BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT,
-				BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT_ZIP,
-				VOICE_VERSION + VOICE_INDEX_EXT_ZIP);
-		for(String s : files.keySet()){
-			System.out.println(s + " " + files.get(s)); //$NON-NLS-1$
-		}
+//		Map<String, String> files = DownloaderIndexFromGoogleCode.getContent(new LinkedHashMap<String, String>(),
+//				BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT,
+//				BINARY_MAP_VERSION + BINARY_MAP_INDEX_EXT_ZIP,
+//				VOICE_VERSION + VOICE_INDEX_EXT_ZIP);
+//		for(String s : files.keySet()){
+//			System.out.println(s + " " + files.get(s)); //$NON-NLS-1$
+//		}
 
 		
 //		String odb = ""; //$NON-NLS-1$
@@ -57,6 +60,7 @@ public class DownloaderIndexFromGoogleCode {
 //			deleteFileFromGoogleDownloads(odb, token, pagegen, cookieHSID,cookieSID);
 //		}
 //		System.out.println("DELETED " + indexFiles.size());
+		
 	}
 	
 	

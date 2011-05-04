@@ -184,7 +184,7 @@ public class GoogleCodeUploadIndex {
      * Creates a (base64-encoded) HTTP basic authentication token for the
      * given user name and password.
      */
-    private static String createAuthToken(String userName, String password) {
+    public  static String createAuthToken(String userName, String password) {
         String string = (userName + ":" + password); //$NON-NLS-1$
         try {
             return Base64.encode(string.getBytes("UTF-8")); //$NON-NLS-1$
