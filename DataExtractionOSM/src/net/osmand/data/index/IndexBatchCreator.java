@@ -474,24 +474,24 @@ public class IndexBatchCreator {
 	
 	
 	
-	protected void uploadIndex(File f, Set<String> alreadyUploadedFiles){
+	protected void uploadIndex(final File f, Set<String> alreadyUploadedFiles){
 		if(!uploadIndexes){
 			return;
 		}
 		
-		log.info("Upload index " + f.getName());
+		String fileName = f.getName();
+		log.info("Upload index " + fileName);
 		String summary;
 		double mbLengh = (double)f.length() / MB;
 		boolean zip = true;
-		String regionName  = f.getName().substring(0, f.getName().lastIndexOf('_', f.getName().indexOf('.')));
-		if(f.getName().endsWith(IndexConstants.POI_INDEX_EXT) || f.getName().endsWith(IndexConstants.POI_INDEX_EXT_ZIP)){
+		if(fileName.endsWith(IndexConstants.POI_INDEX_EXT) || fileName.endsWith(IndexConstants.POI_INDEX_EXT_ZIP)){
 			summary = "POI index for " ;
-		} else if(f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)){
+		} else if(fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)){
 			boolean addr = indexAddress;
 			boolean trans = indexTransport;
 			boolean map = indexMap;
 			RandomAccessFile raf = null;
-			if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+			if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 				try {
 					raf = new RandomAccessFile(f, "r");
 					BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
@@ -532,18 +532,19 @@ public class IndexBatchCreator {
 			// do not upload small files
 			return;
 		}
-		if(mbLengh > MIN_SIZE_TO_NOT_ZIP && (f.getName().endsWith(".odb") || f.getName().endsWith(".obf")) && zip){
-			String n = f.getName();
-			if(f.getName().endsWith(".odb")){
-				n = f.getName().substring(0, f.getName().length() - 4);
+		File toUpload = f;
+		if(mbLengh > MIN_SIZE_TO_NOT_ZIP && (fileName.endsWith(".odb") || fileName.endsWith(".obf")) && zip){
+			String n = fileName;
+			if(fileName.endsWith(".odb")){
+				n = fileName.substring(0, fileName.length() - 4);
 			}
 			String zipFileName = n+".zip";
 			File zFile = new File(f.getParentFile(), zipFileName);
-			log.info("Zipping file " + f.getName());
+			log.info("Zipping file " + fileName);
 			try {
 				ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(zFile));
 				zout.setLevel(9);
-				zout.putNextEntry(new ZipEntry(f.getName()));
+				zout.putNextEntry(new ZipEntry(fileName));
 				FileInputStream is = new FileInputStream(f);
 				byte[] BUFFER = new byte[8192];
 				int read = 0;
@@ -558,32 +559,31 @@ public class IndexBatchCreator {
 			if(f.delete()){
 				log.info("Source odb file was deleted");
 			}
-			f = zFile;
-			
+			toUpload = zFile;
 		}
 		
-		
+		String regionName  = fileName.substring(0, fileName.lastIndexOf('_', fileName.indexOf('.')));
 		summary +=  regionName;
 		summary = summary.replace('_', ' ');
 		
 		List<File> splittedFiles = Collections.emptyList(); 
 		try {
-			splittedFiles = splitFiles(f);
+			splittedFiles = splitFiles(toUpload);
 			boolean uploaded =true;
 			for (File fs : splittedFiles) {
-				uploaded &= uploadFileToServer(fs, f, summary);
+				uploaded &= uploadFileToServer(fs, toUpload, summary);
 			}
 			// remove source file if file was splitted
-			if (uploaded &&  deleteFilesAfterUploading && f.exists()) {
-				f.delete();
+			if (uploaded &&  deleteFilesAfterUploading && toUpload.exists()) {
+				toUpload.delete();
 			}
-			alreadyUploadedFiles.add(f.getName());
+			alreadyUploadedFiles.add(fileName);
 		} catch (IOException e) {
-			log.error("Input/output exception uploading " + f.getName(), e);
+			log.error("Input/output exception uploading " + fileName, e);
 		} finally {
 			// remove all splitted files
 			for(File fs : splittedFiles){
-				if(!fs.equals(f)){
+				if(!fs.equals(toUpload)){
 					fs.delete();
 				}
 			}
