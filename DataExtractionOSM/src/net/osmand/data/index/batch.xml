@@ -68,7 +68,7 @@
 			<region name="portugal" esize="15" />
 			<region name="romania" esize="30" />
 			<region name="serbia" esize="15" />
-			<region name="slovakia" esize="80" />
+			<region name="slovakia" esize="80" cityAdminLevel="6"/>
 			<region name="slovenia" esize="15" />
 			<region name="spain" esize="150" />
 			<region name="sweden" esize="90" />
