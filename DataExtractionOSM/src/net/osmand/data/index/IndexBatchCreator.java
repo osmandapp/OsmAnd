@@ -479,6 +479,7 @@ public class IndexBatchCreator {
 			return;
 		}
 		
+		log.info("Upload index " + f.getName());
 		String summary;
 		double mbLengh = (double)f.length() / MB;
 		boolean zip = true;
