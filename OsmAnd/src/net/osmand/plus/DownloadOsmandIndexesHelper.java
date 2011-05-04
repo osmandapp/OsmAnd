@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import net.osmand.LogUtil;
-import net.osmand.data.index.IndexConstants;
+import net.osmand.data.IndexConstants;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;

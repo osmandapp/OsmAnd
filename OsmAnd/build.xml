@@ -129,16 +129,14 @@
 					<src path="${source.absolute.dir}" />
 					<!-- osmchange -->
 					<src path="${use.absolute.dir}" />
-					<exclude name="**/ExceptionHandler.java" />
 					<exclude name="**/LogUtil.java" />
-					<exclude name="**/DataIndexWriter.java" />
-					<exclude name="**/IndexBatchCreator.java" />
-					<exclude name="**/DataExtraction.java" />
-					<exclude name="**/IndexCreator.java" />
 					<exclude name="**/OsmStorageWriter.java" />
+					<exclude name="**/net/osmand/data/index/" />
+					<exclude name="**/net/osmand/data/preparation/" />
 					<exclude name="**/net/osmand/osm/util/" />
 					<exclude name="**/net/osmand/swing/" />
 					<exclude name="**/rtree/" />
+					
 					<!-- osmchange -->
 					<src path="${gen.absolute.dir}" />
 					<src refid="project.libraries.src" />

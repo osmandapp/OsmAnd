@@ -36,7 +36,6 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.xml.stream.XMLStreamException;
 
-import net.osmand.ExceptionHandler;
 import net.osmand.Version;
 import net.osmand.data.preparation.IndexCreator;
 import net.osmand.map.IMapLocationListener;
@@ -430,7 +429,6 @@ public class OsmExtractionUI implements IMapLocationListener {
 						creator.setNormalizeStreets(normalizingStreets.isSelected());
 						creator.setIndexTransport(buildTransportIndex.isSelected());
 						creator.setIndexMap(buildMapIndex.isSelected());
-						creator.setCityAdminLevel(DataExtractionSettings.getSettings().getCityAdminLevel());
 						String fn = DataExtractionSettings.getSettings().getMapRenderingTypesFile();
 						MapRenderingTypes types;
 						if(fn == null || fn.length() == 0){
@@ -884,6 +882,5 @@ public class OsmExtractionUI implements IMapLocationListener {
 	    }
 	  }
 */
-
 
 }

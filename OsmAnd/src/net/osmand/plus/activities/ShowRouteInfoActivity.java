@@ -7,7 +7,6 @@ import java.text.MessageFormat;
 import java.util.List;
 
 import net.osmand.OsmAndFormatter;
-import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.RoutingHelper.RouteDirectionInfo;

@@ -35,6 +35,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.IndexConstants;
 import net.osmand.data.preparation.IndexCreator;
 import net.osmand.data.preparation.MapZooms;
 import net.osmand.impl.ConsoleProgressImplementation;

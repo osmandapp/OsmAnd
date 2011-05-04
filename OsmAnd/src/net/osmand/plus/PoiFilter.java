@@ -10,7 +10,7 @@ import java.util.Set;
 import net.osmand.OsmAndFormatter;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
-import net.osmand.data.index.IndexConstants;
+import net.osmand.data.IndexConstants;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.activities.OsmandApplication;
 

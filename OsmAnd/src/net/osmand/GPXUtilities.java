@@ -75,6 +75,7 @@ public class GPXUtilities {
 			serializer.startTag(null, "gpx"); //$NON-NLS-1$
 			serializer.attribute(null, "version", "1.1"); //$NON-NLS-1$ //$NON-NLS-2$
 			serializer.attribute(null, "creator", Version.APP_NAME_VERSION); //$NON-NLS-1$
+			serializer.attribute(null, "xmlns", "http://www.topografix.com/GPX/1/1"); //$NON-NLS-1$ //$NON-NLS-2$
 			serializer.attribute(null, "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
 			serializer.attribute(null, "xsi:schemaLocation", "http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
 			

@@ -1,13 +1,13 @@
 package net.osmand.plus.activities;
 
-import static net.osmand.data.index.IndexConstants.BINARY_MAP_INDEX_EXT;
-import static net.osmand.data.index.IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
-import static net.osmand.data.index.IndexConstants.BINARY_MAP_VERSION;
-import static net.osmand.data.index.IndexConstants.POI_INDEX_EXT;
-import static net.osmand.data.index.IndexConstants.POI_INDEX_EXT_ZIP;
-import static net.osmand.data.index.IndexConstants.POI_TABLE_VERSION;
-import static net.osmand.data.index.IndexConstants.VOICE_INDEX_EXT_ZIP;
-import static net.osmand.data.index.IndexConstants.VOICE_VERSION;
+import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT;
+import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
+import static net.osmand.data.IndexConstants.BINARY_MAP_VERSION;
+import static net.osmand.data.IndexConstants.POI_INDEX_EXT;
+import static net.osmand.data.IndexConstants.POI_INDEX_EXT_ZIP;
+import static net.osmand.data.IndexConstants.POI_TABLE_VERSION;
+import static net.osmand.data.IndexConstants.VOICE_INDEX_EXT_ZIP;
+import static net.osmand.data.IndexConstants.VOICE_VERSION;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,7 +33,7 @@ import java.util.zip.ZipInputStream;
 
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
-import net.osmand.data.index.IndexConstants;
+import net.osmand.data.IndexConstants;
 import net.osmand.plus.DownloadOsmandIndexesHelper;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressDialogImplementation;

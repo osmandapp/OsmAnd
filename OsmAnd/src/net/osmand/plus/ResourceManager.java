@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -18,11 +19,11 @@ import net.osmand.IProgress;
 import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
+import net.osmand.data.IndexConstants;
+import net.osmand.data.MapTileDownloader;
 import net.osmand.data.TransportStop;
-import net.osmand.data.index.IndexConstants;
-import net.osmand.data.preparation.MapTileDownloader;
-import net.osmand.data.preparation.MapTileDownloader.DownloadRequest;
-import net.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
+import net.osmand.data.MapTileDownloader.DownloadRequest;
+import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.ITileSource;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;

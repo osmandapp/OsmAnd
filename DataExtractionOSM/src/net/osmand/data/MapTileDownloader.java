@@ -1,4 +1,4 @@
-package net.osmand.data.preparation;
+package net.osmand.data;
 
 import java.io.BufferedInputStream;
 import java.io.File;
