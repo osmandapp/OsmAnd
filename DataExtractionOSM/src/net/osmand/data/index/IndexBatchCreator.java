@@ -72,7 +72,7 @@ public class IndexBatchCreator {
 		public String cityAdminLevel;
 	}
 	
-	private boolean uploadToOsmandDownloads = true;
+	private boolean uploadToOsmandGooglecode = true;
 	
 	
 	// process atributtes
@@ -94,11 +94,13 @@ public class IndexBatchCreator {
 	
 	String user;
 	String password;
+	
+	private String wget;
+	
 	String cookieHSID = "";
 	String cookieSID = "";
 	String pagegen = "";
 	String token = "";
-	private String wget;
 	
 	
 	public static void main(String[] args) {
@@ -192,13 +194,13 @@ public class IndexBatchCreator {
 			cookieSID = authorization.getAttribute("cookieSID");
 			pagegen = authorization.getAttribute("pagegen");
 			token = authorization.getAttribute("token");
-			uploadToOsmandDownloads = Boolean.parseBoolean(process.getAttribute("upload_osmand_download"));
-			if(uploadToOsmandDownloads){
-				user = authorization.getAttribute("osmand_download_user");
-				password = authorization.getAttribute("osmand_download_password");
-			} else {
+			uploadToOsmandGooglecode = Boolean.parseBoolean(process.getAttribute("upload_osmand_googlecode"));
+			if(uploadToOsmandGooglecode){
 				user = authorization.getAttribute("google_code_user"); 
 				password = authorization.getAttribute("google_code_password");
+			} else {
+				user = authorization.getAttribute("osmand_download_user");
+				password = authorization.getAttribute("osmand_download_password");
 			}
 		}
 		
@@ -623,12 +625,12 @@ public class IndexBatchCreator {
 	}
 	
 	private boolean uploadFileToServer(File f, File original, String summary) throws IOException {
-		if (f.length() / MB > MAX_UPLOAD_SIZE && !uploadToOsmandDownloads) {
+		if (f.length() / MB > MAX_UPLOAD_SIZE && uploadToOsmandGooglecode) {
 			System.err.println("ERROR : file " + f.getName() + " exceeded 200 mb!!! Could not be uploaded.");
 			return false; // restriction for google code
 		}
 		double originalLength = (double) original.length() / MB;
-		if (!uploadToOsmandDownloads) {
+		if (uploadToOsmandGooglecode) {
 			try {
 				DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName(), token, pagegen, cookieHSID, cookieSID);
 				try {
@@ -646,7 +648,7 @@ public class IndexBatchCreator {
 		MessageFormat numberFormat = new MessageFormat("{0,number,##.#}", Locale.US);
 		String size = numberFormat.format(new Object[] { originalLength });
 		String date = dateFormat.format(new Object[] { new Date(original.lastModified()) });
-		if (uploadToOsmandDownloads) {
+		if (!uploadToOsmandGooglecode) {
 			uploadToDownloadOsmandNet(f, summary, size, date);
 		} else {
 			String descriptionFile = "{" + date + " : " + size + " MB}";

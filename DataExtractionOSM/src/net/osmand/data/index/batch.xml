@@ -21,7 +21,7 @@
 		 or you can upload any file you have to googlecode (just put into 'directory_for_index_files')
 	 -->
 	<process directory_for_osm_files="D:/android/batch_gen_osm" directory_for_index_files="D:/android/batch_gen_index"
-		downloadOsmFiles="true" generateIndexes="true" uploadIndexes="true" upload_osmand_download="true"
+		downloadOsmFiles="true" generateIndexes="true" uploadIndexes="true" upload_osmand_googlecode="true"
 		deleteFilesAfterUploading="true" indexPOI="true" indexMap="true"
 		indexTransport="true" indexAddress="true" mapZooms="" renderingTypesFile=""
 		>
