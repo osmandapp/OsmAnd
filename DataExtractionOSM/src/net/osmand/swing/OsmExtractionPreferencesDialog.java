@@ -123,9 +123,9 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		label = new JLabel("City admin level : ");
         panel.add(label);
         constr = new GridBagConstraints();
-        constr.ipadx = 6;
+        constr.ipadx = 5;
         constr.gridx = 0;
-        constr.gridy = 1;
+        constr.gridy = 2;
         constr.anchor = GridBagConstraints.WEST;
         l.setConstraints(label, constr);
         
@@ -136,9 +136,9 @@ public class OsmExtractionPreferencesDialog extends JDialog {
         constr = new GridBagConstraints();
         constr.weightx = 1;
         constr.fill = GridBagConstraints.HORIZONTAL;
-        constr.ipadx = 6;
+        constr.ipadx = 5;
         constr.gridx = 1;
-        constr.gridy = 1;
+        constr.gridy = 2;
         l.setConstraints(cityAdminLevel, constr);
 		
 //		supressWarning = new JCheckBox();
