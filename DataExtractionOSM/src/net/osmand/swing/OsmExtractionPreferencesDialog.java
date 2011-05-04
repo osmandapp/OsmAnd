@@ -29,6 +29,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 	private JTextField streetSuffixes;
 	private JTextField streetDefaultSuffixes;
 	private JTextField mapZooms;
+	private JTextField cityAdminLevel;
 	private JTextField renderingTypesFile;
 	private JTextField pathToObfRoutingFile;
 
@@ -46,7 +47,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
     }
 	
 	public void showDialog(){
-		setSize(600, 280);
+		setSize(600, 380);
         double x = getParent().getBounds().getCenterX();
         double y = getParent().getBounds().getCenterY();
         setLocation((int) x - getWidth() / 2, (int) y - getHeight() / 2);
@@ -117,6 +118,28 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		constr.gridx = 1;
 		constr.gridy = 1;
 		l.setConstraints(pathToObfRoutingFile, constr);
+		
+		
+		label = new JLabel("City admin level : ");
+        panel.add(label);
+        constr = new GridBagConstraints();
+        constr.ipadx = 6;
+        constr.gridx = 0;
+        constr.gridy = 1;
+        constr.anchor = GridBagConstraints.WEST;
+        l.setConstraints(label, constr);
+        
+        cityAdminLevel = new JTextField();
+        
+        cityAdminLevel.setText(DataExtractionSettings.getSettings().getCityAdminLevel());
+        panel.add(cityAdminLevel);
+        constr = new GridBagConstraints();
+        constr.weightx = 1;
+        constr.fill = GridBagConstraints.HORIZONTAL;
+        constr.ipadx = 6;
+        constr.gridx = 1;
+        constr.gridy = 1;
+        l.setConstraints(cityAdminLevel, constr);
 		
 //		supressWarning = new JCheckBox();
 //		supressWarning.setText(Messages.getString("OsmExtractionPreferencesDialog.DUPLICATED.ID")); //$NON-NLS-1$
@@ -262,6 +285,9 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		if(!settings.getDefaultRoutingFilePath().equals(pathToObfRoutingFile.getText())){
 			settings.setDefaultRoutingPath(pathToObfRoutingFile.getText());
 		}
+		if(!settings.getCityAdminLevel().equals(cityAdminLevel.getText())){
+            settings.setCityAdminLevel(cityAdminLevel.getText());
+        }
 //		if(settings.isSupressWarningsForDuplicatedId() != supressWarning.isSelected()){
 //			settings.setSupressWarningsForDuplicatedId	(supressWarning.isSelected());
 //		}
