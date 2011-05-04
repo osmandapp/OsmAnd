@@ -137,7 +137,6 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				if(nodeOut != null){
 					log.warn("Map bug: Multipoligon contains 'inner' way point outside of 'outer' border.\n" +  //$NON-NLS-1$
 							"Multipolygon id : " + e.getId() + ", inner node out id : " + nodeOut.getId()); //$NON-NLS-1$
-					return;
 				}
 
 				for (List<Way> l : completedRings) {
@@ -167,25 +166,32 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 
 	private Node checkOuterWaysEncloseInnerWays(List<List<Way>> completedRings, Map<Entity, String> entities) {
-		List<Way> innerWays = new ArrayList<Way>();
+		List<List<Way>> innerWays = new ArrayList<List<Way>>();
 		Boundary outerBoundary = new Boundary();
+		Node toReturn = null;
 		for(List<Way> ring : completedRings){
 			boolean innerType = "inner".equals(entities.get(ring.get(0))); //$NON-NLS-1$
 			if(!innerType){
 				outerBoundary.getOuterWays().addAll(ring);
 			} else {
-				innerWays.addAll(ring);
+				innerWays.add(ring);
 			}
 		}
 		
-		for(Way innerWay : innerWays){
-			for(Node node : innerWay.getNodes()){
-				if(!outerBoundary.containsPoint(node.getLatitude(), node.getLongitude())){
-					return node;
+		for (List<Way> innerRing : innerWays) {
+			ring: for (Way innerWay : innerRing) {
+				for (Node node : innerWay.getNodes()) {
+					if (!outerBoundary.containsPoint(node.getLatitude(), node.getLongitude())) {
+						if (toReturn == null) {
+							toReturn = node;
+						}
+						completedRings.remove(innerRing);
+						break ring;
+					}
 				}
 			}
 		}
-		return null;
+		return toReturn;
 	}
 
 

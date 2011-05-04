@@ -51,7 +51,7 @@ public class Boundary {
 		// b node above
 		Node b = a == node2 ? node : node2;
 		if(latitude == a.getLatitude() || latitude == b.getLatitude()){
-			latitude += 0.00001d;
+			latitude += 0.00000001d;
 		}
 		if(latitude < a.getLatitude() || latitude > b.getLatitude()){
 			return false;
