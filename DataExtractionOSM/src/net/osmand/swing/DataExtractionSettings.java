@@ -153,6 +153,14 @@ public class DataExtractionSettings {
 		preferences.putBoolean("use_internet", b);
 	}
 	
+	public String getCityAdminLevel(){
+		return preferences.getString("cityAdminLevel", "8");
+	}
+	
+	public void setCityAdminLevel(String s){
+		preferences.putString("cityAdminLevel", s);
+	}
+	
 	public boolean isSupressWarningsForDuplicatedId(){
 		return preferences.getBoolean("supress_duplicated_id", true);
 	}
