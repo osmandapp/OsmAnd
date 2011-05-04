@@ -154,11 +154,11 @@ public class DataExtractionSettings {
 	}
 	
 	public String getCityAdminLevel(){
-		return preferences.getString("cityAdminLevel", "8");
+		return preferences.get("cityAdminLevel", "8");
 	}
 	
 	public void setCityAdminLevel(String s){
-		preferences.putString("cityAdminLevel", s);
+		preferences.put("cityAdminLevel", s);
 	}
 	
 	public boolean isSupressWarningsForDuplicatedId(){
