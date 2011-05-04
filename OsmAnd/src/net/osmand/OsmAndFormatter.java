@@ -7,7 +7,6 @@ import net.osmand.data.AmenityType;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
-
 import android.content.Context;
 
 public class OsmAndFormatter {

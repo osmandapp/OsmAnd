@@ -24,10 +24,9 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import net.osmand.ExceptionHandler;
-import net.osmand.data.preparation.MapTileDownloader;
-import net.osmand.data.preparation.MapTileDownloader.DownloadRequest;
-import net.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
+import net.osmand.data.MapTileDownloader;
+import net.osmand.data.MapTileDownloader.DownloadRequest;
+import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.ITileSource;
 import net.osmand.osm.MapUtils;
 import net.osmand.swing.MapPanel.MapSelectionArea;

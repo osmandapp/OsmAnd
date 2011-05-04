@@ -14,7 +14,7 @@ import java.util.Map;
 import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
-import net.osmand.data.preparation.MapTileDownloader.IMapDownloaderCallback;
+import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MultyPolygon;
 import net.sf.junidecode.Junidecode;

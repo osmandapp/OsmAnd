@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.binary.BinaryMapIndexWriter;
-import net.osmand.data.index.IndexConstants;
+import net.osmand.data.IndexConstants;
 import net.osmand.data.preparation.OsmDbAccessor.OsmDbVisitor;
 import net.osmand.impl.ConsoleProgressImplementation;
 import net.osmand.osm.Entity;

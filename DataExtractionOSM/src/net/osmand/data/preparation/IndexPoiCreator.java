@@ -13,7 +13,7 @@ import java.util.List;
 import net.osmand.Algoritms;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
-import net.osmand.data.index.IndexConstants;
+import net.osmand.data.IndexConstants;
 import net.osmand.osm.Entity;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.OSMSettings.OSMTagKey;

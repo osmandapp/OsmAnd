@@ -1,10 +1,10 @@
 package net.osmand.data.index;
 
-import static net.osmand.data.index.IndexConstants.BINARY_MAP_INDEX_EXT;
-import static net.osmand.data.index.IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
-import static net.osmand.data.index.IndexConstants.BINARY_MAP_VERSION;
-import static net.osmand.data.index.IndexConstants.VOICE_INDEX_EXT_ZIP;
-import static net.osmand.data.index.IndexConstants.VOICE_VERSION;
+import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT;
+import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
+import static net.osmand.data.IndexConstants.BINARY_MAP_VERSION;
+import static net.osmand.data.IndexConstants.VOICE_INDEX_EXT_ZIP;
+import static net.osmand.data.IndexConstants.VOICE_VERSION;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.LogUtil;
-import net.osmand.data.index.IndexConstants;
+import net.osmand.data.IndexConstants;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;

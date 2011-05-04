@@ -1,8 +1,8 @@
-package net.osmand;
+package net.osmand.swing;
 
 import javax.swing.JOptionPane;
 
-import net.osmand.swing.OsmExtractionUI;
+import net.osmand.LogUtil;
 
 import org.apache.commons.logging.Log;
 
