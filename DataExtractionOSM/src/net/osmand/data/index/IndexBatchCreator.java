@@ -625,7 +625,7 @@ public class IndexBatchCreator {
 			System.err.println("ERROR : file " + f.getName() + " exceeded 200 mb!!! Could not be uploaded.");
 			return false; // restriction for google code
 		}
-		double originalLength = original.length() / MB;
+		double originalLength = (double) original.length() / MB;
 		if (!uploadToOsmandDownloads) {
 			try {
 				DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName(), token, pagegen, cookieHSID, cookieSID);
