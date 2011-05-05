@@ -1,4 +1,4 @@
-package net.osmand.activities.search;
+package net.osmand.plus.activities.search;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,12 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import net.osmand.OsmandSettings;
-import net.osmand.R;
-import net.osmand.RegionAddressRepository;
-import net.osmand.ResourceManager;
-import net.osmand.activities.MapActivity;
-import net.osmand.activities.OsmandApplication;
+import net.osmand.OsmAndFormatter;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.PostCode;
@@ -23,11 +18,17 @@ import net.osmand.data.Street;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.RegionAddressRepository;
+import net.osmand.plus.ResourceManager;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandApplication;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -47,6 +48,7 @@ public class GeoIntentActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search_address_offline);
+		getMyApplication().checkApplicationIsBeingInitialized(this);
 		location = OsmandSettings.getLastKnownMapLocation(OsmandSettings
 				.getPrefs(this));
 		final Intent intent = getIntent();
@@ -129,7 +131,7 @@ public class GeoIntentActivity extends ListActivity {
 				int dist = (int) (MapUtils.getDistance(location, model
 						.getLocation().getLatitude(), model.getLocation()
 						.getLongitude()));
-				distanceLabel.setText(MapUtils.getFormattedDistance(dist));
+				distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist,getContext()));
 			} else {
 				distanceLabel.setText(""); //$NON-NLS-1$
 			}
@@ -282,7 +284,11 @@ public class GeoIntentActivity extends ListActivity {
 	}
 
 	private ResourceManager resourceManager() {
-		return ((OsmandApplication) getApplication()).getResourceManager();
+		return getMyApplication().getResourceManager();
+	}
+
+	private OsmandApplication getMyApplication() {
+		return ((OsmandApplication) getApplication());
 	}
 
 	private class GeoPointSearch implements MyService {
