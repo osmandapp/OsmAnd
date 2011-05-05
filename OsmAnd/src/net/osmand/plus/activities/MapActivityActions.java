@@ -154,7 +154,7 @@ public class MapActivityActions {
     }
     
     protected String getString(int res){
-    	return getString(res);
+    	return mapActivity.getString(res);
     }
     
     protected void updatePoiDb(int zoom, double latitude, double longitude){
