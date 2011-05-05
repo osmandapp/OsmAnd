@@ -387,45 +387,9 @@
 				
 		
 		<!--  CENTRAL AMERICA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/americas/central_america/{0}/{0}.osm.bz2" region_prefix=""  skip="true" region_suffix="_CentralAmerica">
-			<region name="belize" esize=""/>
-			<region name="clipperton_island" esize=""/>
-			<region name="costa_rica" esize="3" />
-			<region name="el_salvador" esize=""/>
-			<region name="guatemala" esize="4" />
-			<region name="honduras" esize="3" />
-			<region name="nicaragua" esize=""/>
-			<region name="panama" esize=""/>
+		<regions siteToDownload="http://download.geofabrik.de/osm/{0}.osm.pbf" region_prefix=""  skip="true" region_suffix="">
+			<region name="central-america" esize=""/>
 		</regions>	
-			
-			
-		<!--  CARIBBEAN -->	
-		<regions siteToDownload="http://downloads.cloudmade.com/americas/caribbean/{0}/{0}.osm.bz2" region_prefix=""  skip="true" region_suffix="_Caribbean">
-			<region name="anguilla" esize=""/>
-			<region name="antigua_and_barbuda" esize=""/>
-			<region name="aruba" esize=""/>
-			<region name="barbados" esize=""/>
-			<region name="bahamas" esize="1" />
-			<region name="british_virgin_islands" esize=""/>
-			<region name="cuba" esize="3" />
-			<region name="cayman_islands" esize="3" />
-			<region name="dominica" esize="1" />
-			<region name="dominican_republic" esize="6" />
-			<region name="grenada" esize=""/>
-			<region name="guadeloupe" esize=""/>
-			<region name="haiti" esize="21" />
-			<region name="jamaica" esize="1" />
-			<region name="martinique" esize=""/>
-			<region name="montserrat" esize=""/>
-			<region name="netherlands_antilles" esize=""/>
-			<region name="puerto_rico" esize=""/>
-			<region name="saint_kitts_and_nevis" esize=""/>
-			<region name="saint_lucia" esize=""/>
-			<region name="saint_vincent_and_the_grenadines" esize=""/>
-			<region name="trinidad_and_tobago" esize=""/>
-			<region name="turks_and_caicos_islands" esize=""/>
-			<region name="virgin_islands_us" esize=""/>
-		</regions>
 			
 		<!--  NORTH AMERICA EXCEPT USA AND CANADA-->	
 		<regions siteToDownload="http://downloads.cloudmade.com/americas/northern_america/{0}/{0}.osm.bz2" region_prefix=""  skip="true" region_suffix="_NorthAmerica">	
@@ -435,157 +399,22 @@
 			<region name="greenland" esize=""/>
 			<region name="st_pierre_and_miquelon" esize=""/>
 		</regions>	
-			
-			
-		
-		
-		<!--  SOUTH AMERICA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/americas/south_america/{0}/{0}.osm.bz2" region_prefix="" skip="true"
-			region_suffix="_SouthAmerica">
-			<region name="argentina" esize="22"/>
-			<region name="bolivia" esize="5"/>
-			<region name="brazil" esize="68"/>
-			<region name="chile" esize="30"/>
-			<region name="colombia" esize="30"/>
-			<region name="ecuador" esize="15"/>
-			<region name="falkland_islands" esize="1"/>
-			<region name="french_guiana" esize="3"/>
-			<region name="guyana" esize="2"/>
-			<region name="paraguay" esize="3"/>
-			<region name="peru" esize="10"/>
-			<region name="suriname" esize="1"/>
-			<region name="uruguay" esize="9"/>
-			<region name="venezuela" esize="11"/>
-		</regions>
-		
-		<!-- EASTERN AFRICA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/africa/eastern_africa/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Africa"  skip="true">
-			<region name="burundi" esize=""/>
-			<region name="comoros" esize=""/>
-			<region name="djibouti" esize=""/>
-			<region name="eritrea" esize=""/>
-			<region name="ethiopia" esize=""/>
-			<region name="kenya" esize=""/>
-			<region name="madagascar" esize=""/>
-			<region name="malawi" esize=""/>
-			<region name="mauritius" esize=""/>
-			<region name="mayotte" esize=""/>
-			<region name="mozambique" esize=""/>
-			<region name="reunion" esize=""/>
-			<region name="rwanda" esize=""/>
-			<region name="seychelles" esize=""/>
-			<region name="somalia" esize=""/>
-			<region name="tanzania" esize=""/>
-			<region name="uganda" esize=""/>
-			<region name="zambia" esize=""/>
-			<region name="zimbabwe" esize=""/>
-		</regions>
-		
-		<!-- MIDDLE AFRICA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/africa/middle_africa/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Africa"  skip="true">
-			<region name="angola" esize=""/>
-			<region name="cameroon" esize=""/>
-			<region name="central_african_republic" esize=""/>
-			<region name="chad" esize=""/>
-			<region name="democratic_republic_of_the_congo" esize=""/>
-			<region name="equatorial_guinea" esize=""/>
-			<region name="gabon" esize=""/>
-			<region name="republic_of_congo" esize=""/>
-			<region name="sao_tome_and_principe" esize=""/>
-		</regions>
-			
-		<!-- NORTHERN AFRICA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/africa/northern_africa/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Africa"  skip="true">
-			<region name="algeria" esize=""/>  
-			<region name="egypt" esize=""/>
-			<region name="libya" esize=""/>
-			<region name="morocco" esize=""/>
-			<region name="sudan" esize=""/>
-			<region name="tunisia" esize=""/>
-			<region name="western_sahara" esize=""/>
-		</regions>	
-			
-		<!-- SOUTHERN AFRICA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/africa/southern_africa/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Africa"  skip="true">
-			<region name="botswana" esize=""/>
-			<region name="lesotho" esize=""/>
-			<region name="namibia" esize=""/>
-			<region name="swaziland" esize=""/>
-			<region name="south_africa" esize=""/>
-		</regions>		
-			
-		<!-- WESTERN AFRICA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/africa/western_africa/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Africa"  skip="true">
-			<region name="benin" esize=""/>
-			<region name="burkina_faso" esize=""/>
-			<region name="cape_verde" esize=""/>
-			<region name="cote_d_ivoire" esize=""/>
-			<region name="gambia" esize=""/>
-			<region name="ghana" esize=""/>
-			<region name="guinea" esize=""/>
-			<region name="guinea-bissau" esize=""/>
-			<region name="liberia" esize=""/>
-			<region name="mali" esize=""/>
-			<region name="mauritania" esize=""/>
-			<region name="niger" esize=""/>
-			<region name="nigeria" esize=""/>
-			<region name="saint_helena" esize=""/>
-			<region name="senegal" esize=""/>
-			<region name="sierra_leone" esize=""/>
-			<region name="togo" esize=""/>
-		</regions>	
-			
-		
-		<!-- OCEANIA - MELANESIA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/oceania/melanesia/{0}/{0}.osm.bz2" region_prefix="Melanesia_" region_suffix="_Oceania"  skip="true">
-			<region name="fiji" esize=""/>
-			<region name="new_caledonia" esize=""/>
-			<region name="papua_new_guinea" esize=""/>
-			<region name="solomon_islands" esize=""/>
-			<region name="vanuatu" esize=""/>
-		</regions>
-		
-		<!-- OCEANIA - MICRONESIA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/oceania/micronesia/{0}/{0}.osm.bz2" region_prefix="Micronesia_" region_suffix="_Oceania"  skip="true">
-			<region name="guam" esize=""/>
-			<region name="kiribati" esize=""/>
-			<region name="marshall_islands" esize=""/>
-			<region name="micronesia" esize=""/>
-			<region name="nauru" esize=""/>
-			<region name="northern_mariana_islands" esize=""/>
-			<region name="palau" esize=""/>
-		</regions>
-		
-		<!-- OCEANIA - POLYNESIA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/oceania/polynesia/{0}/{0}.osm.bz2" region_prefix="Polynesia_" region_suffix="_Oceania"  skip="true">
-			<region name="american_samoa" esize=""/>
-			<region name="cook_islands" esize=""/>
-			<region name="french_polynesia" esize=""/>
-			<region name="niue" esize=""/>
-			<region name="pitcairn_islands" esize=""/>
-			<region name="samoa" esize=""/>
-			<region name="tokelau" esize=""/>
-			<region name="tonga" esize=""/>
-			<region name="tuvalu" esize=""/>
-			<region name="wallis_and_futuna" esize=""/>
-		</regions>
-		
-		<!-- OCEANIA - AUSTRALIA AND NEW ZEALAND -->
-		<regions siteToDownload="http://downloads.cloudmade.com/oceania/australia_and_new_zealand/{0}/{0}.osm.bz2" region_prefix="AU_&_NZ_" region_suffix="_Oceania"  skip="true">
-			<region name="australia" esize=""/>
-			<region name="cocos_islands" esize=""/>
-			<region name="new_zealand" esize=""/>
-			<region name="norfolk_islands" esize=""/>
-		</regions>
-		
-		<!-- ANTARTICA -->
-		<regions siteToDownload="http://downloads.cloudmade.com/antartica/antartica/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Antartica"  skip="true">
-			<region name="antarctica" esize=""/>
-			<region name="bouvet_island" esize=""/>
-			<region name="french_southern_territories" esize=""/>
-			<region name="heard_island_and_mcdonald_islands" esize=""/>
-			<region name="south_georgia_and_the_south_sandwich_islands" esize=""/>
-		</regions>
 				
+		<!--  SOUTH AMERICA -->
+		<regions siteToDownload="http://download.geofabrik.de/osm/{0}.osm.pbf" region_prefix="" skip="true"
+			region_suffix="">
+			<region name="south-america" esize="22"/>
+		</regions>
+		
+		<!-- AFRICA -->
+		<regions siteToDownload="http://download.geofabrik.de/osm/{0}.osm.pbf" region_prefix="" region_suffix="_Africa"  skip="true">
+			<region name="africa" esize=""/>
+		</regions>
+			
+		<!-- AUSTRALIA-OCEANIA -->
+		<regions siteToDownload="http://download.geofabrik.de/osm/{0}.osm.pbf" region_prefix="" region_suffix=""  skip="true">
+			<region name="australia-oceania" esize=""/>
+		</regions>
+									
 	</process>
 </batch_process> 
