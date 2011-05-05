@@ -19,11 +19,11 @@
 	<string name="context_menu_item_add_waypoint">Pridať Gpx waypoint</string>
 	<string name="amenity_type_administrative">Administratíva</string>
 	<string name="amenity_type_barrier">Prekážky</string>
-	<string name="amenity_type_education">Výuka</string>
+	<string name="amenity_type_education">Školstvo</string>
 	<string name="amenity_type_emergency">Pomoc v núdzi</string>
 	<string name="amenity_type_entertainment">Zábava</string>
 	<string name="amenity_type_finance">Peniaze</string>
-	<string name="amenity_type_geocache">Geocache</string>
+	<string name="amenity_type_geocache">Geocaching</string>
 	<string name="amenity_type_healthcare">Zdravie</string>
 	<string name="amenity_type_historic">História</string>
 	<string name="amenity_type_landuse">Využitie územia</string>
@@ -81,9 +81,9 @@
 
 <string name="daynight_mode_day">Denný režim</string>
 <string name="daynight_mode_night">Nočný režim</string>
-<string name="daynight_mode_auto">Východ/západ slnka</string>
+<string name="daynight_mode_auto">Automaticky</string>
 <string name="daynight_mode_sensor">Svetelný senzor</string>
-<string name="daynight_descr">Vybrať ako prepínať medzi denným/nočným režim</string>
+<string name="daynight_descr">Vybrať medzi denným/nočným režimom</string>
 <string name="daynight">Denný/nočný režim</string>
 
 <string name="download_files_question">Stiahnuť {0} súbor/y/ov ({1} MB)?</string>
@@ -154,7 +154,7 @@
 <string name="rotate_map_to_bearing_descr">Vybrať ako otáčať mapu</string>
 <string name="rotate_map_to_bearing">Otáčanie mapy</string>
 <string name="show_route">Zobraziť cestu</string>
-<string name="fav_imported_sucessfully">Obľúbené úspešne importované</string>
+<string name="fav_imported_sucessfully">Obľúbené body úspešne importované</string>
 <string name="fav_file_to_load_not_found">GPX súbor obsahujúci obľúbené sa nenachádza v {0}</string>
 <string name="fav_saved_sucessfully">Obľúbené úspešne uložené do {0}</string>
 <string name="no_fav_to_save">Žiadne obľúbené body na uloženie</string>
@@ -227,8 +227,8 @@
 <string name="first_time_download">Stiahnuť oblasti</string>
 <string name="first_time_msg">Ďakujeme, že ste sa rozhodli pre OsmAnd. \nNa použitie všetkých funkcií aplikácie potrebujete indexové súbory, ktoré môžete stiahnuť (Nastavenia -&gt; Údaje) alebo si ich pripraviť sami. Potom budete môcť: vyhľadávať adresy, body zájmov(POI) a verejnú dopravu.</string>
 <string name="search_poi_location">Hľadá sa signál...</string>
-<string name="search_near_map">Hľadať v blízkosti poslednej pozície na mape</string>
-<string name="search_nearby">Hľadať neďaľeko</string>
+<string name="search_near_map">Hľadať v blízkosti poslednej pozície</string>
+<string name="search_nearby">Hľadať neďaleko Vás</string>
 <string name="map_orientation_default">Podľa zariadenia</string>
 <string name="map_orientation_portrait">Na výšku</string>
 <string name="map_orientation_landscape">Na šírku</string>
@@ -273,7 +273,7 @@
 <string name="search_nothing_found">Nič sa nenašlo</string>
 <string name="searching">Vyhľadáva sa</string>
 <string name="searching_address">Hľadá sa adresa...</string>
-<string name="search_osm_nominatim">Nájdite adresu použiťím OSM Nominatim</string>
+<string name="search_osm_nominatim">Hľadanie adresy použiťím OSM Nominatim</string>
 <string name="hint_search_online">Číslo domu, ulica, mesto</string>
 <string name="search_offline_address">Offline</string>
 <string name="search_online_address">Internet</string>
@@ -287,7 +287,7 @@
 <string name="download_question">Stiahnuť {0} - {1} ?</string>
 <string name="download_question_exist">Offline údaje pre {0} už existujú ({1}). Chcete ich aktualizovať ({2}) ?</string>
 <string name="address">Adresa</string>
-<string name="download_index_success">Sťahovanie úspešné</string>
+<string name="download_index_success">Sťahovanie úspešne dokončené</string>
 <string name="error_io_error">Vyskytla sa vstupno/výstupná chyba</string>
 <string name="downloading_file">Sťahuje sa súbor...</string>
 <string name="downloading">Sťahovanie...</string>
