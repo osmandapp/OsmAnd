@@ -134,6 +134,14 @@
 			<region name="schleswig-holstein" esize="" />
 			<region name="thueringen" esize="" />
 		</regions>
+
+		<!-- USA-AVAILABLE ON GEOFABRIK.DE [SOURCE: GEOFABRIK.DE] (REST OF USA IS BELOW FROM CLOUDMADE.COM) -->
+		<regions siteToDownload="http://download.geofabrik.de/osm/north-america/us/{0}.osm.pbf" skip="true" region_prefix="US_" region_suffix="_NorthAmerica">
+			<region name="california" esize=""/>
+			<region name="florida" esize=""/>
+			<region name="oregon" esize=""/>
+			<region name="texas" esize=""/>
+		</regions>
 		
 		<!-- USA [SOURCE: CLOUDMADE.COM]-->
 		<regions siteToDownload="http://downloads.cloudmade.com/americas/northern_america/united_states/{0}/{0}.osm.bz2" skip="true" region_prefix="US_" region_suffix="_NorthAmerica">
@@ -145,7 +153,6 @@
 			<region name="connecticut" esize=""/>
 			<region name="delaware" esize=""/>
 			<region name="district_of_columbia" esize=""/>
-			<region name="florida" esize=""/>
 			<region name="georgia" esize=""/>
 			<region name="guantanamo_bay" esize=""/> <!-- ??? -->
 			<region name="hawaii" esize=""/>
@@ -173,7 +180,6 @@
 			<region name="north_dakota" esize=""/>
 			<region name="ohio" esize=""/>
 			<region name="oklahoma" esize=""/>
-			<region name="oregon" esize=""/>
 			<region name="pennsylvania" esize=""/>
 			<region name="rhode_island" esize=""/>
 			<region name="south_carolina" esize=""/>
@@ -186,8 +192,6 @@
 			<region name="wisconsin" esize=""/>
 			<region name="wyoming" esize=""/>
 			<region name="virginia" esize=""/>
-			<region name="texas" esize=""/>
-			<region name="california" esize=""/>
 			<region name="north_carolina" esize=""/>
 		</regions>
 		
@@ -204,6 +208,12 @@
 			<region name="wake" esize=""/>
 		</regions>
 		
+		<!-- CANADA-AVAILABLE ON GEOFABRIK.DE [SOURCE: GEOFABRIK.DE] (REST OF CANADA IS BELOW FROM CLOUDMADE.COM) -->
+		<regions siteToDownload="http://download.geofabrik.de/osm/north-america/canada/{0}.osm.pbf" region_prefix="Canada_" skip="true" region_suffix="_NorthAmerica">
+			<region name="ontario" esize=""/>
+			<region name="quebec" esize=""/>
+		</regions>
+		
 		
 		<!-- Canada [SOURCE: CLOUDMADE.COM]-->
 		<regions siteToDownload="http://downloads.cloudmade.com/americas/northern_america/canada/{0}/{0}.osm.bz2" region_prefix="Canada_" skip="true" region_suffix="_NorthAmerica">
@@ -215,9 +225,7 @@
 			<region name="nova_scotia" esize=""/>
 			<region name="nunavut" esize=""/>
 			<region name="nw_territories" esize=""/>
-			<region name="ontario" esize=""/>
 			<region name="pr_edwrd_island" esize=""/>
-			<region name="quebec" esize=""/>
 			<region name="saskatchewan" esize=""/>
 			<region name="yukon" esize=""/>
 		</regions>
@@ -309,7 +317,7 @@
 			<region name="zabaikal" esize=""/>
 		</regions>
 		
-		<!-- ASIA [SOURCE: GEOFABRIK.DE] (REST OF ASIA IS BELOW FROM CLOUDMADE.COM) -->
+		<!-- ASIA-AVAILABLE ON GEOFABRIK.DE [SOURCE: GEOFABRIK.DE] (REST OF ASIA IS BELOW FROM CLOUDMADE.COM) -->
 		<regions siteToDownload="http://download.geofabrik.de/osm/asia/{0}.osm.pbf" region_prefix="" region_suffix="_Asia" skip="true">
 			<region name="azerbaijan" esize="15"/>
 			<region name="china" esize="4"/>
@@ -402,7 +410,7 @@
 			<region name="bermuda" esize=""/>
 			<region name="saint_pierre_and_miquelon" esize=""/>
 			<region name="greenland" esize=""/>
-			<region name="st_pierre_and_miquelon" esize=""/>
+			<region name="saint_pierre_and_miquelon" esize=""/>
 		</regions>	
 				
 		<!--  SOUTH AMERICA [SOURCE: GEOFABRIK.DE] -->
