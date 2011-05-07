@@ -1594,7 +1594,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					mapActions.addFavouritePoint(latitude, longitude);
 				} else if(standardId == R.string.context_menu_item_share_location){
 					mapActions.shareLocation(latitude, longitude, mapView.getZoom());
-				} else if(standardId == R.string.context_menu_item_search_poi){
+				} else if(standardId == R.string.context_menu_item_create_poi){
 					EditingPOIActivity activity = new EditingPOIActivity(MapActivity.this, (OsmandApplication) getApplication(), mapView);
 					activity.showCreateDialog(latitude, longitude);
 				} else if(standardId == R.string.context_menu_item_add_waypoint){
