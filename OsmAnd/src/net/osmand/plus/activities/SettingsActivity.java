@@ -641,7 +641,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			startActivity(new Intent(this, DownloadIndexActivity.class));
 			return true;
 		} else if(preference == reloadIndexes){
-			reloadIndexes();
+			// TODO refactor
+			Intent intent = new Intent(this, LocalIndexesActivity.class);
+			startActivity(intent);
+			// reloadIndexes();
 			return true;
 		} else if(preference == saveCurrentTrack){
 			SavingTrackHelper helper = new SavingTrackHelper(this);
