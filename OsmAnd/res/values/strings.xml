@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="system_locale">System</string>
+	<string name="preferred_locale_descr">Change display language</string>
+	<string name="preferred_locale">Preferred locale</string>
 	<string name="tip_map_switch">Map source</string>
 	<string name="tip_map_switch_t">The fastest way to change map source and layers is pressing \'Menu\'->\'Layers\' on map.
 \n\tUnder \'Map source...\' you can choose predefined tile sources or manually created using OsmAndMapCreator on PC.

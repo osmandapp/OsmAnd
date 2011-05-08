@@ -53,6 +53,7 @@
 		<EditTextPreference android:title="@string/application_dir" android:key="external_storage_dir"></EditTextPreference>
 		<ListPreference android:key="default_metric_system" android:title="@string/unit_of_length" android:summary="@string/unit_of_length_descr"></ListPreference>
 		<ListPreference android:key="position_on_map" android:title="@string/position_on_map" android:summary="@string/position_on_map_descr"></ListPreference>
+		<ListPreference android:key="preferred_locale" android:title="@string/preferred_locale" android:summary="@string/preferred_locale_descr"></ListPreference>
 		<CheckBoxPreference android:key="use_trackball_for_movements" android:title="@string/use_trackball" android:summary="@string/use_trackball_descr"></CheckBoxPreference>
 		
 	</PreferenceScreen>
