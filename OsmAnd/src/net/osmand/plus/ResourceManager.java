@@ -61,6 +61,7 @@ public class ResourceManager {
 	public static final String POI_PATH = APP_DIR + IndexConstants.POI_INDEX_DIR; 
 	public static final String VOICE_PATH = APP_DIR + IndexConstants.VOICE_INDEX_DIR;
 	public static final String MAPS_PATH = APP_DIR;
+	public static final String BACKUP_PATH = APP_DIR + "backup/";
 	public static final String TILES_PATH = APP_DIR+"tiles/"; //$NON-NLS-1$
 	public static final String TEMP_SOURCE_TO_LOAD = "temp"; //$NON-NLS-1$
 	public static final String VECTOR_MAP = "#vector_map"; //$NON-NLS-1$
