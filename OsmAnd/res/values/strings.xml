@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="tip_map_switch">Map source</string>
+	<string name="tip_map_switch_t">The fastest way to change map source and layers is pressing \'Menu\'->\'Layers\' on map.
+\n\tUnder \'Map source...\' you can choose predefined tile sources or manually created using OsmAndMapCreator on PC.
+\n\tOsmAnd supports custom sources.</string>
+	<string name="tip_app_mode">Application mode</string>
+	<string name="tip_app_mode_t">OsmAnd supports different modes representing map for typical situations.
+\n\tYou can change mode in \'Menu\'->\'Settings\'->\'Application mode\'.</string>
+	<string name="tip_navigation">Navigation</string>
+	<string name="tip_navigation_t">To enable navigation you should select destination point first. After that press \'Menu\'->\'Directions\' on map and select navigation type.</string>
+	<string name="tip_select_destination_point">Select destination point</string>
+	<string name="tip_select_destination_point_t">You can select destination point in map context menu \'Navigate to\' or in search activities.
+\n\tYou can also navigate to favorite point by long pressing in \'Favorites\'.</string>
+	<string name="tip_search">Search activities</string>
+	<string name="tip_search_t">You can search place directly on map view or by address, by location, as poi or as predefined favorite.
+\n\tPressing \'Search\' on map opens search activities. There you have 2 options : \'Navigate to\' or \'Show on map\'.</string>
+	<string name="tip_map_context_menu">Map context menu</string>
+	<string name="tip_map_context_menu_t">\tMap context menu is available by long touching on map or by pressing track ball button.
+\n\tAfter touching box with coordinates appears, to open context menu dialog - tap on it, to hide box - long press on it. Also map context menu is available under \'Menu\' button on map.
+\n\tMap context menu consists of actions that use location as input.</string>
+	<string name="tip_desctination_point">Destination point</string>
+	<string name="tip_desctination_point_t">\tKey concept of OsmAnd is destination point that is marked as red point on map.
+\n\tYou can always see the distance to it and the direction (red triangle) on map. To mark any point as destination you should choose \'Navigate to\' point. 
+\n\tThat button is available on all search activities, in context menu of map and on long press for map items. 
+Destination point is widely used to measure distance and to straight forward navigation.</string>
+	<string name="tip_initial">Tips and tricks</string>
+	<string name="tip_initial_t">\tOsmAnd is navigation application that has variety of features. 
+\n\tTo better use them you can follow by tips and tricks available as link on main menu.</string>
+	<string name="next_button">Next</string>
+	<string name="previous_button">Previous</string>
+	
 	<string name="unit_of_length_descr">Change unit of length and speed</string>
 	<string name="unit_of_length">Unit of length</string>
 	<string name="si_mi_foots">Miles/foots</string>
@@ -411,6 +441,8 @@
 <string name="favorites_Button">Favorites</string>
 <string name="search_button">Search</string>
 <color name="menu_background">#FF9030</color>
+<color name="color_light_gray">#d7d7d7</color>
+<color name="color_black">#000000</color>
 <string name="search_activity">Search</string>
 <color name="color_white">#FFFFFF</color>
 <color name="color_red">#FF0000</color>

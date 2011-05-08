@@ -10,6 +10,7 @@ import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.search.SearchActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -36,6 +37,7 @@ import android.widget.TextView;
 public class MainMenuActivity extends Activity {
 
 	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
+	private static final String TIPS_SHOW = "TIPS_SHOW"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = ResourceManager.APP_DIR + "exception.log"; //$NON-NLS-1$
 	
 	private View showMap;
@@ -120,15 +122,15 @@ public class MainMenuActivity extends Activity {
 		rightview = (View) findViewById(R.id.SearchButton);
 		rightview.startAnimation(getAnimation(1, 0));
 		
-		String textVersion = Version.APP_VERSION+ " "+ Version.APP_DESCRIPTION;
+		String textVersion = Version.APP_VERSION + " " + Version.APP_DESCRIPTION;
 		final TextView textVersionView = (TextView) findViewById(R.id.TextVersion);
 		textVersionView.setText(textVersion);
 		SharedPreferences prefs = OsmandSettings.getPrefs(this);
 		
 		// only one commit should be with contribution version flag
 		// prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
+		final TextView appName = (TextView) findViewById(R.id.AppName);
 		if (prefs.contains(CONTRIBUTION_VERSION_FLAG)) {
-			final TextView appName = (TextView) findViewById(R.id.AppName);
 			appName.setText("OsmAnd!");
 			SpannableString content = new SpannableString(textVersion);
 			content.setSpan(new ClickableSpan() {
@@ -142,6 +144,19 @@ public class MainMenuActivity extends Activity {
 			textVersionView.setText(content);
 			textVersionView.setMovementMethod(LinkMovementMethod.getInstance());
 		}
+		SpannableString appLink = new SpannableString(appName.getText());
+		appLink.setSpan(new ClickableSpan() {
+			
+			@Override
+			public void onClick(View widget) {
+				TipsAndTricksActivity activity = new TipsAndTricksActivity(MainMenuActivity.this);
+				Dialog dlg = activity.getDialogToShowTips(false);
+				dlg.show();
+			}
+		}, appLink.length() - 1, appLink.length(), 0);
+		appName.setText(appLink);
+		appName.setMovementMethod(LinkMovementMethod.getInstance());
+		
 		
 
 		showMap = findViewById(R.id.MapButton);
@@ -224,6 +239,16 @@ public class MainMenuActivity extends Activity {
 				});
 				builder.setNegativeButton(R.string.first_time_continue, null);
 				builder.show();
+			}
+		} else {
+			int i = pref.getInt(TIPS_SHOW, 0);
+			if (i < 7){
+				pref.edit().putInt(TIPS_SHOW, ++i).commit();
+				if(i == 1 || i == 5){
+					TipsAndTricksActivity activity = new TipsAndTricksActivity(this);
+					Dialog dlg = activity.getDialogToShowTips(true);
+					dlg.show();
+				}
 			}
 		}
 		checkPreviousRunsForExceptions(firstTime);
