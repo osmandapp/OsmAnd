@@ -99,6 +99,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private ListPreference mapScreenOrientation;
 	private ListPreference voicePreference;
 	private ListPreference metricPreference;
+	private ListPreference preferredLocale;
 	private ListPreference rendererPreference;
 	private ListPreference routeServiceInterval;
 	private ListPreference routeServiceWaitInterval;
@@ -176,6 +177,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		voicePreference.setOnPreferenceChangeListener(this);
 		metricPreference = (ListPreference) screen.findPreference(OsmandSettings.DEFAULT_METRIC_SYSTEM);
 		metricPreference.setOnPreferenceChangeListener(this);
+		preferredLocale = (ListPreference) screen.findPreference(OsmandSettings.PREFERRED_LOCALE);
+		preferredLocale.setOnPreferenceChangeListener(this);
 		rendererPreference =(ListPreference) screen.findPreference(OsmandSettings.RENDERER);
 		rendererPreference.setOnPreferenceChangeListener(this);
 		routeServiceInterval =(ListPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_INTERVAL);
@@ -314,6 +317,16 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			names[i] = MetricsConstants.values()[i].toHumanString(this);
 		}
 		fill(metricPreference, names, values, entry);
+		
+		String[] locales = //getResources().getAssets().getLocales();
+			new String [] {	"en", "cs", "de", "es", "fr", "hu", "it", "pt", "ru", "sk"};
+		values = new String[locales.length + 1];
+		names = new String[locales.length + 1] ;
+		values[0] = OsmandSettings.PREFERRED_LOCALE_DEF;
+		names[0] = getString(R.string.system_locale);
+		System.arraycopy(locales, 0, names, 1, locales.length);
+		System.arraycopy(locales, 0, values, 1, locales.length);
+		fill(preferredLocale, names, values, OsmandSettings.getPreferredLocale(prefs));
 
 		// read available voice data
 		File extStorage = OsmandSettings.extendOsmandPath(getApplicationContext(), ResourceManager.VOICE_PATH);
@@ -539,6 +552,14 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		} else if (preference == metricPreference) {
 			MetricsConstants mc = MetricsConstants.valueOf((String) newValue);
 			OsmandSettings.setDefaultMetricConstants(edit, mc);
+		} else if (preference == preferredLocale) {
+			edit.putString(OsmandSettings.PREFERRED_LOCALE, (String) newValue);
+			edit.commit();
+			// restart activity
+			getMyApplication().checkPrefferedLocale();
+			Intent intent = getIntent();
+			finish();
+			startActivity(intent);
 		} else if (preference == tileSourcePreference) {
 			if(VECTOR_MAP.equals((String) newValue)){
 				edit.putBoolean(OsmandSettings.MAP_VECTOR_DATA, true);

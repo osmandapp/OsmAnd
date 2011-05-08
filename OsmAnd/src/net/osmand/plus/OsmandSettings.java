@@ -232,12 +232,22 @@ public class OsmandSettings {
 		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		return prefs.edit().putBoolean(SHOW_TRANSPORT_OVER_MAP, val).commit();
 	}
+	
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String PREFERRED_LOCALE = "preferred_locale"; //$NON-NLS-1$
+	public static final String PREFERRED_LOCALE_DEF = ""; //$NON-NLS-1$
+
+	public static String getPreferredLocale(SharedPreferences prefs) {
+		return prefs.getString(PREFERRED_LOCALE, PREFERRED_LOCALE_DEF); //$NON-NLS-1$
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String USER_NAME = "user_name"; //$NON-NLS-1$
+	public static final String USER_NAME_DEF = "NoName"; //$NON-NLS-1$
 
 	public static String getUserName(SharedPreferences prefs) {
-		return prefs.getString(USER_NAME, "NoName"); //$NON-NLS-1$
+		return prefs.getString(USER_NAME, USER_NAME_DEF);
 	}
 
 	public static boolean setUserName(Context ctx, String name) {

@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.List;
+import java.util.Locale;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
@@ -25,6 +26,8 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Handler;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -48,6 +51,7 @@ public class OsmandApplication extends Application {
 	private DayNightHelper daynightHelper;
 	private NavigationService navigationService;
 	private boolean applicationInitializing = false;
+	private Locale prefferedLocale = null;
 	
 	
     public void	onCreate(){
@@ -56,10 +60,11 @@ public class OsmandApplication extends Application {
     	manager = new ResourceManager(this);
     	daynightHelper = new DayNightHelper(this);
     	uiHandler = new Handler();
+    	checkPrefferedLocale();
     	startApplication();
 	}
     
-    public PoiFiltersHelper getPoiFilters() {
+	public PoiFiltersHelper getPoiFilters() {
     	if(poiFilters == null){
     		poiFilters = new PoiFiltersHelper(this);
     	}
@@ -85,6 +90,29 @@ public class OsmandApplication extends Application {
 	public void onLowMemory() {
 		super.onLowMemory();
 		manager.onLowMemory();
+	}
+	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		if (prefferedLocale != null) {
+			newConfig.locale = prefferedLocale;
+			Locale.setDefault(prefferedLocale);
+			getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
+		}
+	}
+	
+	public void checkPrefferedLocale() {
+    	SharedPreferences settings = OsmandSettings.getSharedPreferences(this);
+        Configuration config = getBaseContext().getResources().getConfiguration();
+        String lang = OsmandSettings.getPreferredLocale(settings);
+		if (!"".equals(lang) && !config.locale.getLanguage().equals(lang)) {
+			prefferedLocale = new Locale(lang);
+			Locale.setDefault(prefferedLocale);
+			config.locale = prefferedLocale;
+			getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+		}
+		
 	}
 	
 	public ProgressDialog checkApplicationIsBeingInitialized(Context uiContext){

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="system_locale">Системная</string>
+	<string name="preferred_locale_descr">Изменить язык программы</string>
+	<string name="preferred_locale">Локализация</string>
 	<string name="tip_map_switch">Источник карты</string>
 	<string name="tip_map_switch_t">Наиболее быстрый способ изменить источник карты и слои \'Меню\'->\'Слои\'.
 \n\tПод \'Карта источник...\' вы можете выбрать из предопределенных типов или собственных, созданных OsmAndMapCreator на PC.
