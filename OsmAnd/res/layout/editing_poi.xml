@@ -5,6 +5,7 @@
   android:layout_height="fill_parent">
 <LinearLayout android:layout_width="fill_parent"
   android:layout_height="fill_parent" android:orientation="vertical">
+<TextView android:text="@string/create_poi_link_to_osm_doc" android:id="@+id/LinkToOsmDoc" android:layout_marginLeft="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
 <TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:stretchColumns="1">
 <TableRow>
 <TextView android:text="@string/poi_dialog_name" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>

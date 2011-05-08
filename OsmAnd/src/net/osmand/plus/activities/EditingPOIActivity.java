@@ -65,15 +65,19 @@ import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
 import android.util.Xml;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class EditingPOIActivity {
@@ -174,6 +178,15 @@ public class EditingPOIActivity {
 		commentText = ((EditText)dlg.findViewById(R.id.Comment));
 		updateType(a);
 		
+		TextView linkToOsmDoc = (TextView) dlg.findViewById(R.id.LinkToOsmDoc);
+		linkToOsmDoc.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				ctx.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://wiki.openstreetmap.org/wiki/Map_Features")));
+			}
+		});
+		linkToOsmDoc.setMovementMethod(LinkMovementMethod.getInstance());
 		
 		openHoursButton.setOnClickListener(new View.OnClickListener(){
 

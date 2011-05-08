@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="create_poi_link_to_osm_doc"><u>Интернет OSM</u> классификация с картинками</string>
 	<string name="system_locale">Системная</string>
 	<string name="preferred_locale_descr">Изменить язык программы</string>
 	<string name="preferred_locale">Локализация</string>
