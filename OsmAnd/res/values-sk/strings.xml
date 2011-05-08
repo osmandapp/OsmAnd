@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="system_locale">Systémový</string>
+	<string name="preferred_locale_descr">Zmeniť zobrazovaný jazyk</string>
+	<string name="preferred_locale">Preferovaný jazyk</string>
 	<string name="tip_map_switch">Zdroj mapy</string>
 	<string name="tip_map_switch_t">Najrýchlejšia cesta ako zmeniť zdroj mapy a vrstvy je stlačením \'Menu\'->\'Vrstvy\' na mape.
 \n\tPoložkou \'Zdroj mapy...\' možete vybrať predefinovaný zdroj dlaždíc alebo ručne vytvorený s OsmAndMapCreator-om na PC.
