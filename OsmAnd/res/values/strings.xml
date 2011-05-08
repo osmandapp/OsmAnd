@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
 	<string name="system_locale">System</string>
 	<string name="preferred_locale_descr">Change display language</string>
 	<string name="preferred_locale">Preferred locale</string>
