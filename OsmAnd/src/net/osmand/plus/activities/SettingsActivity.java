@@ -19,7 +19,6 @@ import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.OsmandSettings.ApplicationMode;
 import net.osmand.plus.OsmandSettings.DayNightMode;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.activities.RouteProvider.RouteService;
@@ -438,11 +437,20 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		
     }
     
+    private void editBoolean(String id, boolean value){
+    	OsmandSettings.getWriteableEditor(this).putBoolean(id, value).commit();
+    }
+    
+    private void editString(String id, String value){
+    	OsmandSettings.getWriteableEditor(this).putString(id, value).commit();
+    }
+    
+    private void editInt(String id, int value){
+    	OsmandSettings.getWriteableEditor(this).putInt(id, value).commit();
+    }
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		SharedPreferences prefs = OsmandSettings.getPrefs(this);
-		Editor edit = prefs.edit();
 		// handle boolean prefences
 		BooleanPreference p = null;
 		for(BooleanPreference b : booleanPreferences){
@@ -452,59 +460,40 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			}
 		}
 		if(p != null){
-			edit.putBoolean(p.getId(), (Boolean)newValue);
-			if(p.getId() == OsmandSettings.SHOW_POI_OVER_MAP && ((Boolean) newValue)){
-				edit.putString(OsmandSettings.SELECTED_POI_FILTER_FOR_MAP, PoiFiltersHelper.getOsmDefinedFilterId(null));
-			}
-			
-			edit.commit();
-			
+			editBoolean(p.getId(), (Boolean)newValue);
 		} else if(preference == applicationMode){
-			ApplicationMode old = OsmandSettings.getApplicationMode(prefs);
-			edit.putString(OsmandSettings.APPLICATION_MODE, (String) newValue);
-			setAppMode(ApplicationMode.valueOf(newValue.toString()), edit, getMyApplication(), old);
-			edit.commit();
-			updateAllSettings();
+			boolean changed = ApplicationMode.setAppMode(ApplicationMode.valueOf(newValue.toString()), getMyApplication());
+			if(changed){
+				updateAllSettings();
+			}
 		} else if(preference == daynightMode){
-			edit.putString(OsmandSettings.DAYNIGHT_MODE, (String) newValue);
+			editString(OsmandSettings.DAYNIGHT_MODE, (String) newValue);
 			getMyApplication().getDaynightHelper().setDayNightMode(DayNightMode.valueOf(newValue.toString()));
-			edit.commit();
 		} else if(preference == mapScreenOrientation){
-			edit.putInt(OsmandSettings.MAP_SCREEN_ORIENTATION, Integer.parseInt(newValue.toString()));
-			edit.commit();
+			editInt(OsmandSettings.MAP_SCREEN_ORIENTATION, Integer.parseInt(newValue.toString()));
 		} else if(preference == saveTrackInterval){
-			edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, Integer.parseInt(newValue.toString()));
-			edit.commit();
+			editInt(OsmandSettings.SAVE_TRACK_INTERVAL, Integer.parseInt(newValue.toString()));
 		} else if(preference == userPassword){
-			edit.putString(OsmandSettings.USER_PASSWORD, (String) newValue);
-			edit.commit();
+			editString(OsmandSettings.USER_PASSWORD, (String) newValue);
 		} else if(preference == useInternetToDownload){
-			OsmandSettings.setUseInternetToDownloadTiles((Boolean) newValue, edit);
-			edit.commit();
+			OsmandSettings.setUseInternetToDownloadTiles((Boolean) newValue, OsmandSettings.getWriteableEditor(this));
 		} else if(preference == userName){
-			edit.putString(OsmandSettings.USER_NAME, (String) newValue);
-			edit.commit();
+			editString(OsmandSettings.USER_NAME, (String) newValue);
 		} else if(preference == applicationDir){
-			warnAboutChangingStorage(edit, (String) newValue);
+			warnAboutChangingStorage((String) newValue);
 			return false;
 		} else if(preference == positionOnMap){
-			edit.putInt(OsmandSettings.POSITION_ON_MAP, positionOnMap.findIndexOfValue((String) newValue));
-			edit.commit();
+			editInt(OsmandSettings.POSITION_ON_MAP, positionOnMap.findIndexOfValue((String) newValue));
 		} else if (preference == maxLevelToDownload) {
-			edit.putInt(OsmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE, Integer.parseInt((String) newValue));
-			edit.commit();
+			editInt(OsmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE, Integer.parseInt((String) newValue));
 		} else if (preference == routeServiceInterval) {
-			edit.putInt(OsmandSettings.SERVICE_OFF_INTERVAL, Integer.parseInt((String) newValue) * 1000);
-			edit.commit();
+			editInt(OsmandSettings.SERVICE_OFF_INTERVAL, Integer.parseInt((String) newValue) * 1000);
 		} else if (preference == routeServiceWaitInterval) {
-			edit.putInt(OsmandSettings.SERVICE_OFF_WAIT_INTERVAL, Integer.parseInt((String) newValue) * 1000);
-			edit.commit();
+			editInt(OsmandSettings.SERVICE_OFF_WAIT_INTERVAL, Integer.parseInt((String) newValue) * 1000);
 		} else if (preference == rotateMap) {
-			edit.putInt(OsmandSettings.ROTATE_MAP, Integer.parseInt((String) newValue));
-			edit.commit();
+			editInt(OsmandSettings.ROTATE_MAP, Integer.parseInt((String) newValue));
 		} else if (preference == routeServiceProvider) {
-			edit.putString(OsmandSettings.SERVICE_OFF_PROVIDER, (String) newValue);
-			edit.commit();
+			editString(OsmandSettings.SERVICE_OFF_PROVIDER, (String) newValue);
 		} else if (preference == routeServiceEnabled) {
 			Intent serviceIntent = new Intent(this, NavigationService.class);
 			if ((Boolean) newValue) {
@@ -526,35 +515,31 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				}
 			}
 			if(s != null){
-				edit.putInt(OsmandSettings.ROUTER_SERVICE, s.ordinal());
+				editInt(OsmandSettings.ROUTER_SERVICE, s.ordinal());
 			}
-			edit.commit();
 		} else if (preference == rendererPreference) {
 			BaseOsmandRender loaded = RendererRegistry.getRegistry().getRenderer((String) newValue);
 			if(loaded == null){
 				Toast.makeText(this, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 			} else {
 				RendererRegistry.getRegistry().setCurrentSelectedRender(loaded);
-				edit.putString(OsmandSettings.RENDERER, (String) newValue);
+				editString(OsmandSettings.RENDERER, (String) newValue);
 				Toast.makeText(this, R.string.renderer_load_sucess, Toast.LENGTH_SHORT).show();
 				getMyApplication().getResourceManager().getRenderer().clearCache();
 			}
-			edit.commit();
 		} else if (preference == voicePreference) {
 			int i = voicePreference.findIndexOfValue((String) newValue);
 			if (i == 0) {
-				edit.putString(OsmandSettings.VOICE_PROVIDER, null);
+				editString(OsmandSettings.VOICE_PROVIDER, null);
 			} else {
-				edit.putString(OsmandSettings.VOICE_PROVIDER, (String) newValue);
+				editString(OsmandSettings.VOICE_PROVIDER, (String) newValue);
 			}
-			edit.commit();
 			getMyApplication().initCommandPlayer();
 		} else if (preference == metricPreference) {
 			MetricsConstants mc = MetricsConstants.valueOf((String) newValue);
-			OsmandSettings.setDefaultMetricConstants(edit, mc);
+			OsmandSettings.setDefaultMetricConstants(mc, this);
 		} else if (preference == preferredLocale) {
-			edit.putString(OsmandSettings.PREFERRED_LOCALE, (String) newValue);
-			edit.commit();
+			editString(OsmandSettings.PREFERRED_LOCALE, (String) newValue);
 			// restart activity
 			getMyApplication().checkPrefferedLocale();
 			Intent intent = getIntent();
@@ -562,16 +547,16 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			startActivity(intent);
 		} else if (preference == tileSourcePreference) {
 			if(VECTOR_MAP.equals((String) newValue)){
-				edit.putBoolean(OsmandSettings.MAP_VECTOR_DATA, true);
+				editBoolean(OsmandSettings.MAP_VECTOR_DATA, true);
 			} else {
-				edit.putString(OsmandSettings.MAP_TILE_SOURCES, (String) newValue);
-				edit.putBoolean(OsmandSettings.MAP_VECTOR_DATA, false);
+				editString(OsmandSettings.MAP_TILE_SOURCES, (String) newValue);
+				editBoolean(OsmandSettings.MAP_VECTOR_DATA, false);
 			}
-			edit.commit();
 			String summary = tileSourcePreference.getSummary().toString();
 			if (summary.lastIndexOf(':') != -1) {
 				summary = summary.substring(0, summary.lastIndexOf(':') + 1);
 			}
+			SharedPreferences prefs = OsmandSettings.getPrefs(this);
 			summary += " " + (OsmandSettings.isUsingMapVectorData(prefs) ? getString(R.string.vector_data) : //$NON-NLS-1$
 				OsmandSettings.getMapTileSourceName(prefs));
 			tileSourcePreference.setSummary(summary);
@@ -580,7 +565,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		return true;
 	}
 
-	private void warnAboutChangingStorage(final Editor edit, final String newValue) {
+	private void warnAboutChangingStorage(final String newValue) {
 		final String newDir = newValue != null ? newValue.trim(): newValue;
 		File path = new File(newDir);
 		path.mkdirs();
@@ -595,8 +580,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				//edit the preference
-				edit.putString(OsmandSettings.EXTERNAL_STORAGE_DIR, newDir);
-				edit.commit();
+				editString(OsmandSettings.EXTERNAL_STORAGE_DIR, newDir);
 				getMyApplication().getResourceManager().resetStoreDirectory();
 				reloadIndexes();
 				updateApplicationDirSummary();
@@ -659,85 +643,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 	}
 		
-	public static void setAppMode(ApplicationMode preset, Editor edit, OsmandApplication application, ApplicationMode old){
-		if (preset == ApplicationMode.CAR) {
-			OsmandSettings.setUseInternetToDownloadTiles(true, edit);
-			// edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, _);
-			edit.putBoolean(OsmandSettings.SHOW_TRANSPORT_OVER_MAP, false);
-			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_BEARING);
-			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, false);
-			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, true);
-			edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, false);
-			edit.putBoolean(OsmandSettings.USE_STEP_BY_STEP_RENDERING, true);
-			// edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
-			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, true);
-			edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, 5);
-			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.BOTTOM_CONSTANT);
-			// edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
-
-		} else if (preset == ApplicationMode.BICYCLE) {
-			// edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
-			// edit.putBoolean(OsmandSettings.USE_INTERNET_TO_CALCULATE_ROUTE, _);
-			// edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
-			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_BEARING);
-			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, true);
-			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
-			// edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, _);
-			// edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
-			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, true);
-			edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, 30);
-			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.BOTTOM_CONSTANT);
-			// edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
-
-		} else if (preset == ApplicationMode.PEDESTRIAN) {
-			// edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
-			// edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
-			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_COMPASS);
-			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, true);
-			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
-			edit.putBoolean(OsmandSettings.USE_STEP_BY_STEP_RENDERING, false);
-			// if(useInternetToDownloadTiles.isChecked()){
-			// edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, true);
-			// }
-			// edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
-			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, false);
-			// edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, _);
-			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.CENTER_CONSTANT);
-			// edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
-
-		} else if (preset == ApplicationMode.DEFAULT) {
-			// edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
-			// edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
-			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_NONE);
-			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, false);
-			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
-			edit.putBoolean(OsmandSettings.USE_STEP_BY_STEP_RENDERING, true);
-			// edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, _);
-			// edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
-			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, false);
-			// edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, _);
-			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.CENTER_CONSTANT);
-			// edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
-
-		}
-
-		BaseOsmandRender current = RendererRegistry.getRegistry().getCurrentSelectedRenderer();
-		BaseOsmandRender defaultRender = RendererRegistry.getRegistry().defaultRender();
-		BaseOsmandRender newRenderer;
-		if (preset == ApplicationMode.CAR) {
-			newRenderer = RendererRegistry.getRegistry().carRender();
-		} else if (preset == ApplicationMode.BICYCLE) {
-			newRenderer = RendererRegistry.getRegistry().bicycleRender();
-		} else if (preset == ApplicationMode.PEDESTRIAN) {
-			newRenderer = RendererRegistry.getRegistry().pedestrianRender();
-		} else {
-			newRenderer = defaultRender;
-		}
-		if (newRenderer != current) {
-			RendererRegistry.getRegistry().setCurrentSelectedRender(newRenderer);
-			application.getResourceManager().getRenderer().clearCache();
-		}
-	}
 	
 	@Override
 	public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,

@@ -10,7 +10,6 @@ import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.OsmandSettings.ApplicationMode;
 import net.osmand.plus.activities.RouteProvider.RouteCalculationResult;
 import net.osmand.plus.activities.RouteProvider.RouteService;
 import net.osmand.plus.voice.CommandPlayer;

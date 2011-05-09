@@ -25,7 +25,6 @@ import net.osmand.binary.BinaryRouteDataReader.RoutingContext;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.R;
-import net.osmand.plus.OsmandSettings.ApplicationMode;
 import net.osmand.plus.activities.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.activities.RoutingHelper.TurnType;
 import net.osmand.plus.render.MapRenderRepositories;
