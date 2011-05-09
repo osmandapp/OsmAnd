@@ -309,7 +309,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 		navigationLayer.setPointToNavigate(pointToNavigate);
 		
-		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_READABLE);
+		SharedPreferences prefs = OsmandSettings.getPrefs(this);
 		if(prefs == null || !prefs.contains(OsmandSettings.LAST_KNOWN_MAP_LAT)){
 			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 			Location location = null;
@@ -1171,7 +1171,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				// change global settings
 				ApplicationMode old = OsmandSettings.getApplicationMode(settings);
 				if (old != mode) {
-					Editor edit = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, MODE_WORLD_WRITEABLE).edit();
+					Editor edit = OsmandSettings.getWriteableEditor(MapActivity.this);
 					edit.putString(OsmandSettings.APPLICATION_MODE, mode.name());
 					SettingsActivity.setAppMode(mode, edit, (OsmandApplication) getApplication(), old);
 					edit.commit();
@@ -1235,7 +1235,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					try {
 						double lt = Double.parseDouble(lat);
 						double ln = Double.parseDouble(lon);
-						SharedPreferences prefs = OsmandSettings.getSharedPreferences(this);
+						SharedPreferences prefs = OsmandSettings.getPrefs(this);
 						Editor edit = prefs.edit();
 						edit.putFloat(OsmandSettings.LAST_KNOWN_MAP_LAT, (float) lt);
 						edit.putFloat(OsmandSettings.LAST_KNOWN_MAP_LON, (float) ln);

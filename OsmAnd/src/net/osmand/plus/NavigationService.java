@@ -86,7 +86,7 @@ public class NavigationService extends Service implements LocationListener {
 		// initializing variables
 		setForeground(true);
 		handler = new Handler();
-		settings = OsmandSettings.getSharedPreferences(this);
+		settings = OsmandSettings.getPrefs(this);
 		serviceOffInterval = OsmandSettings.getServiceOffInterval(settings);
 		serviceOffProvider = OsmandSettings.getServiceOffProvider(settings);
 		serviceError = OsmandSettings.getServiceOffWaitInterval(settings);

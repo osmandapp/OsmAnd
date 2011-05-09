@@ -240,7 +240,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     }
     
     public void updateAllSettings(){
-    	SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+    	SharedPreferences prefs = OsmandSettings.getPrefs(this);
     	for(BooleanPreference b : booleanPreferences){
     		b.getPref().setChecked(prefs.getBoolean(b.getId(), b.getDefValue()));
     	}
@@ -441,7 +441,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		SharedPreferences prefs = getSharedPreferences(OsmandSettings.SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		SharedPreferences prefs = OsmandSettings.getPrefs(this);
 		Editor edit = prefs.edit();
 		// handle boolean prefences
 		BooleanPreference p = null;
