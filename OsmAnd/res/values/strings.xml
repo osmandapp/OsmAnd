@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="tip_osm_help">Openstreetmap improving</string>
+	<string name="tip_osm_help_t">OsmAnd uses maps based on Openstreetmap.org data and it is designed not only for trips and routing but for improving and helping to Openstreetmap project too. You can easily create and upload new POI or OSM bug with just some clicks!
+\nAt first you need to enter login information in \'Main Menu\'->\'Settings\'->\'OSM\'.
+\n\tFor new POI adding you can use option \'Create POI\' in Map context menu. Then you can proceed with entering information about new POI in Create POI dialog and finally Commit it.
+\n\tIf you find some error in the map, you can report that and Openstreetmap community can then faster fix this problem.
+\n\tFor OSM bug adding you should use option \'Open OSM bug\' in Map context menu. Then is opened dialog, where you can enter detailed description of problem and finally post it with \'Add\' button.
+\n\tDon\'t forget that you need internet connection to use this functions!</string>
+	
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
     <string name="error_doing_search">Error occurred in offline search</string>
     <string name="search_offline_geo_error">Could not parse geo intent:{0}</string>

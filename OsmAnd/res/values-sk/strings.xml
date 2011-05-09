@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="tip_osm_help">Vylepšovanie Openstreetmap-u</string>
+	<string name="tip_osm_help_t">OsmAnd používa mapy založené na dátach Openstreetmap.org a nie je navrhnutý len pre cestovanie a navigovanie ale aj pre vylepšovanie a pomoc projektu Openstreetmap. Iba pár kliknutiami môžete jednoducho vytvoriť a nahrať nový bod záujmu(POI) alebo OSM chybu!
+\nAko prvé potrebujete zadať prihlasovacie informácie cez \'Hlavné menu\'->\'Nastavenia\'->\'OSM\'.
+\n\tNa pridanie nového POI použite možnosť \'Vytvoriť POI\' v kontextovom menu mapy. Potom môžete postupovať so zadávaním informácií o novom POI v dialógu vytvárania POI a na koniec ho Nahrať.
+\n\tAk nájdete na mape nejakú chybu, môžete to oznámiť Openstreetmap komunite, ktorá potom môže tento problém rýchlejšie odstrániť.
+\n\tNa pridanie OSM chyby použite možnosť \'Otvoriť OSM chybu\' v kontextovom menu mapy. Potom je otvorený dialóg, kde môžete zadať podrobný popis problému a na koniec ho zverejniť tlačidlom \'Pridať\'.
+\n\tNezabudnite, že pre používanie týchto funkcií potrebujete internetové pripojenie!</string>
+	
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> mapová klasifikácia s obrázkami</string>
     <string name="error_doing_search">Prihodila sa chyba pri offline hľadaní</string>
     <string name="search_offline_geo_error">Nedá sa parsovať geo obsah:{0}</string>
