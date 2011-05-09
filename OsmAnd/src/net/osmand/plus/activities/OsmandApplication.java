@@ -103,7 +103,7 @@ public class OsmandApplication extends Application {
 	}
 	
 	public void checkPrefferedLocale() {
-    	SharedPreferences settings = OsmandSettings.getSharedPreferences(this);
+    	SharedPreferences settings = OsmandSettings.getPrefs(this);
         Configuration config = getBaseContext().getResources().getConfiguration();
         String lang = OsmandSettings.getPreferredLocale(settings);
 		if (!"".equals(lang) && !config.locale.getLanguage().equals(lang)) {
