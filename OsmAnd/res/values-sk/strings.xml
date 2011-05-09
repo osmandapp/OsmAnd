@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> mapová klasifikácia s obrázkami</string>
+    <string name="error_doing_search">Prihodila sa chyba pri offline hľadaní</string>
+    <string name="search_offline_geo_error">Nedá sa parsovať geo obsah:{0}</string>
+	<string name="search_osm_offline">Nájsť adresu použitím offline máp</string>
+	
 	<string name="system_locale">Systémový</string>
 	<string name="preferred_locale_descr">Zmeniť zobrazovaný jazyk</string>
 	<string name="preferred_locale">Preferovaný jazyk</string>
