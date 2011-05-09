@@ -183,12 +183,18 @@ public class BinaryRouteDataReader {
 		
 	}
 	
+	public interface RouteSegmentVisitor {
+		public void visitSegment(RouteSegment segment);
+	}
+	
 	public static class RoutingContext {
 		TLongObjectMap<BinaryMapDataObject> idObjects = new TLongObjectHashMap<BinaryMapDataObject>();
 		TLongObjectMap<RouteSegment> routes = new TLongObjectHashMap<RouteSegment>();
 		CarRouter router = new CarRouter();
 		
 		TIntSet loadedTiles = new TIntHashSet();
+		// set collection to not null to monitor visited ways
+		public RouteSegmentVisitor visitor = null;
 		
 		long timeToLoad = 0;
 		long timeToCalculate = 0;
@@ -398,6 +404,11 @@ public class BinaryRouteDataReader {
 		while(!graphSegments.isEmpty() && finalRoute == null){
 			RouteSegment segment = graphSegments.poll();
 			BinaryMapDataObject road = segment.road;
+			
+			// for debug purposes
+			if (ctx.visitor != null) {
+				ctx.visitor.visitSegment(segment);
+			}
 			
 			// Always start from segmentStart (!), not from segmentEnd
 			// It makes difference only for the first start segment
