@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
+    <string name="error_doing_search">Error occurred in offline search</string>
+    <string name="search_offline_geo_error">Could not parse geo intent:{0}</string>
+	<string name="search_osm_offline">Search address using offline maps</string>
+
 	<string name="system_locale">System</string>
 	<string name="preferred_locale_descr">Change display language</string>
 	<string name="preferred_locale">Preferred locale</string>
@@ -33,7 +37,7 @@ Destination point is widely used to measure distance and to straight forward nav
 \n\tTo better use them you can follow by tips and tricks available as link on main menu.</string>
 	<string name="next_button">Next</string>
 	<string name="previous_button">Previous</string>
-	
+
 	<string name="unit_of_length_descr">Change unit of length and speed</string>
 	<string name="unit_of_length">Unit of length</string>
 	<string name="si_mi_foots">Miles/foots</string>
