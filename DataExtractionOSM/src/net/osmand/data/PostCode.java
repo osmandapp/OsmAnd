@@ -26,6 +26,11 @@ public class PostCode extends MapObject {
 		return streets.values();
 	}
 	
+	public void removeAllStreets()
+	{
+		streets.clear();
+	}
+	
 	public Street registerStreet(Street street, boolean useEnglishNames){
 		String name = street.getName(useEnglishNames);
 		streets.put(name, street);

@@ -36,7 +36,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	public List<Street> getObjects(String filter) {
 		List<Street> l = new ArrayList<Street>();
 		if (city != null || postcode != null) {
-			region.fillWithSuggestedStreets(postcode == null ? city : postcode, filter, l);
+			region.fillWithSuggestedStreets(postcode == null ? city : postcode, l, filter);
 		}
 		return l;
 	}

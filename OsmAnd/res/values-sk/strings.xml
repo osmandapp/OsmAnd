@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="system_locale">Systémový</string>
+	<string name="preferred_locale_descr">Zmeniť zobrazovaný jazyk</string>
+	<string name="preferred_locale">Preferovaný jazyk</string>
+	<string name="tip_map_switch">Zdroj mapy</string>
+	<string name="tip_map_switch_t">Najrýchlejšia cesta ako zmeniť zdroj mapy a vrstvy je stlačením \'Menu\'->\'Vrstvy\' na mape.
+\n\tPoložkou \'Zdroj mapy...\' možete vybrať predefinovaný zdroj dlaždíc alebo ručne vytvorený s OsmAndMapCreator-om na PC.
+\n\tOsmAnd podporuje užívateľské zdroje.</string>
+	<string name="tip_app_mode">Režim aplikácie</string>
+	<string name="tip_app_mode_t">OsmAnd podporuje rozličné režimy reprezentujúce mapu pre typické situácie.
+\n\tMôžete zmeniť režim v \'Menu\'->\'Nastavenia\'->\'Režim aplikácie\'.</string>
+	<string name="tip_navigation">Navigácia</string>
+	<string name="tip_navigation_t">Na zapnutie navigácie musíte najskôr vybrať cieľový bod. Potom stlačte \'Menu\'->\'Pokyny\' na mape a vyberte typ navigovania.</string>
+	<string name="tip_select_destination_point">Výber cieľového bodu</string>
+	<string name="tip_select_destination_point_t">Môžete vybrať cieľový bod v kontextovom menu \'Navigovať do\' alebo v vyhľadaním.
+\n\tTaktiež môžete navigovať do obľúbeného bodu dlhým stlačením v \'Obľúbené\'.</string>
+	<string name="tip_search">Vyhľadávanie</string>
+	<string name="tip_search_t">Môžete vyhľadať miesto priamo na mape alebo adresou, umiestnením, ako bod záujmu(POI) alebo vo forme obľúbeného bodu.
+\n\tStlačením \'Hľadať\' na mape sa otvorí vyhľadávanie. Tam máte 2 možnosti : \'Navigovať do\' alebo \'Zobraziť na mape\'.</string>
+	<string name="tip_map_context_menu">Kontextové menu</string>
+	<string name="tip_map_context_menu_t">\tKontextové menu mapy je dostupné dlhším držaním na mape alebo stlačením track ball tlačidla.
+\n\tPo kliknutí na zobrazený obdĺžnik so súradnicami sa zobrazí kontextové menu. Pre skrytie obdĺžnika ho dlhšie podržte. Kontextové menu je tiež dostupné pod tlačidlom \'Menu\' na mape.
+\n\tKontextové menu mapy pozostáva z akcií, ktoré používaju umiestnenie ako vstup.</string>
+	<string name="tip_desctination_point">Cieľový bod</string>
+	<string name="tip_desctination_point_t">\tKľúčový koncept OsmAndu je cieľový bod, ktorý je označený ako červený bod na mape.
+\n\tMôžete vždy vidieť vzdialenosť k nemu a smer (červený trojuholník) na mape. Na označenie akéhokoľvek bodu ako cieľového, použite \'Navigovať  do\' na bod. 
+\n\tToto tlačidlo je dostupné vo všetkých vyhľadávacích aktivitách, v kontextovom menu mapy a medzi položkami pri dlhom stlačení na mape. 
+Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navigáciu.</string>
+	<string name="tip_initial">Tipy a triky</string>
+	<string name="tip_initial_t">\tOsmAnd je navigačná aplikácia, ktorá ma rozmanité funkcie. 
+\n\tNa jej lepšie využitie môžete využiť tipy a triky dostupné ako odkaz v hlavnej ponuke.</string>
+	<string name="next_button">Ďalší</string>
+	<string name="previous_button">Predošlý</string>
+	
 	<string name="unit_of_length_descr">Zmena jednotiek dĺžky a rýchlosti</string>
 	<string name="unit_of_length">Jednotky dĺžky</string>
 	<string name="si_mi_foots">Míle/stopy</string>
