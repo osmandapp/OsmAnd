@@ -31,7 +31,6 @@ import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.OsmandSettings.ApplicationMode;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchPoiFilterActivity;
 import net.osmand.plus.activities.search.SearchTransportActivity;
@@ -590,7 +589,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		if(point != null){
 			OsmandSettings.setPointToNavigate(this, point.getLatitude(), point.getLongitude());
 		} else {
-			OsmandSettings.clearPointToNavigate(settings);
+			OsmandSettings.clearPointToNavigate(this);
 		}
 		routingHelper.setFinalAndCurrentLocation(point, null, routingHelper.getCurrentGPXRoute());
 		if(point == null){
@@ -880,8 +879,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		checkExternalStorage();
 		showAndHideMapPosition();
 		
-		LatLon latLon = OsmandSettings.getAndClearMapLocationToShow(settings);
 		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
+		LatLon latLon = OsmandSettings.getAndClearMapLocationToShow(settings);
 		if (latLon != null && !latLon.equals(cur)) {
 			mapView.getAnimatedDraggingThread().startMoving(cur.getLatitude(), cur.getLongitude(), latLon.getLatitude(),
 					latLon.getLongitude(), mapView.getZoom(), OsmandSettings.getMapZoomToShow(settings), mapView.getSourceTileSize(),
@@ -1169,12 +1168,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			public void onClick(DialogInterface dialog, int which) {
 				ApplicationMode mode = getAppMode(buttons);
 				// change global settings
-				ApplicationMode old = OsmandSettings.getApplicationMode(settings);
-				if (old != mode) {
-					Editor edit = OsmandSettings.getWriteableEditor(MapActivity.this);
-					edit.putString(OsmandSettings.APPLICATION_MODE, mode.name());
-					SettingsActivity.setAppMode(mode, edit, (OsmandApplication) getApplication(), old);
-					edit.commit();
+				boolean changed = ApplicationMode.setAppMode(mode, (OsmandApplication) getApplication());
+				if (changed) {
 					updateApplicationModeSettings();	
 					mapView.refreshMap();
 				}
@@ -1235,8 +1230,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					try {
 						double lt = Double.parseDouble(lat);
 						double ln = Double.parseDouble(lon);
-						SharedPreferences prefs = OsmandSettings.getPrefs(this);
-						Editor edit = prefs.edit();
+						Editor edit = OsmandSettings.getWriteableEditor(this);
 						edit.putFloat(OsmandSettings.LAST_KNOWN_MAP_LAT, (float) lt);
 						edit.putFloat(OsmandSettings.LAST_KNOWN_MAP_LON, (float) ln);
 						String zoom = data.getQueryParameter("z");
