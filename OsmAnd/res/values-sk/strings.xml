@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="tip_location_sharing">Zdieľanie umiestnenia</string>
+	<string name="tip_location_sharing_t">Objavili ste nejaké zaujímavé miesto na Vašom výlete a chcete zdieľať jeho pozíciu s Vašimi priateľmi alebo rodinou?
+	\nOsmAnd Vám umožňuje jednoducho zdieľať hodcijaké umiestnenie chcete.
+	\n\tMôžete to urobiť cez \'Kontextové menu mapy\'->\'Zdieľať umiestnenie\'.
+	\nPotom vyberiete spôsob ako zdieľať Vaše umiestnenie. Na výber je: E-Mail, SMS alebo len skopírovanie súradníc umiestnenia do schránky.</string>	
 	<string name="tip_favorites">Obľúbené body</string>
 	<string name="tip_favorites_t">Ak Vás unavuje hľadať miesta, ktoré často navštevujete, môžete si tieto miesta jednoducho pridať medzi Obľúbené a potom ich používať iba pár kliknutiami.
 	\n\tNa vytvorenie Obľúbeného bodu musíte ísť do Kontextového menu mapy, vybrať možnosť \'Pridať do obľúbených\' a zadať preň vhodné meno. Po uložení potom môžte k nemu jednoducho pristupovať cez \'Hlavné Menu\'->\'Obľúbené\'.
@@ -60,7 +65,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 	<string name="foot">ft</string>
 	<string name="mile_per_hour">mph</string>
 	<string name="mile">mi</string>
-	<string name="send_location_way_choose_title">Zdieľanie umiestnenia použitím</string>
+	<string name="send_location_way_choose_title">Zdieľať umiestnenie cez</string>
 	<string name="send_location_sms_pattern">Ja som tu : {0}\n{1}</string>
 	<string name="send_location_email_pattern">Na zobrazenie umiestnenia nasledujte webovský odkaz {0} alebo odkaz androidovského obsahu {1}</string>
 	<string name="send_location">Poslať umiestnenie</string>
