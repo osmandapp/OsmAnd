@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="tip_location_sharing">Location sharing</string>
+	<string name="tip_location_sharing_t">Do you find some interresting place on your trip and want to share it\'s location with your friends or family?
+	\nOsmAnd affords you to easily share any location you want.
+	\n\tYou can do that in \'Map context menu\'->\'Share location\' menu.
+	\nThen you should select way to share your location. The choices are: E-Mail, SMS or just copy location coordinates  to clipboard.</string>
 	<string name="tip_favorites">Favorite points</string>
 	<string name="tip_favorites_t">If you are tired to search for places that you are oftenly visiting, you can easily add this places into Favorites and then use it only by some clicks.
 	\n\tFor creating Favorite point you must go to Map context menu, select option \'Add to favorites\' and enter adequate name for it. After saving it, then you can easily access it thru \'Main Menu\'->\'Favorites\' menu.
