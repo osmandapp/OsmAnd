@@ -8,11 +8,6 @@ LOG_FILE="$LOG_DIR/${DATE}.log"
 
 
 mkdir $LOG_DIR
-# check build already run today
-if [ -e "$LOG_FILE" ]; then
-    echo "Build already ran today"
-    exit
-fi
 touch $LOG_FILE
 
 
