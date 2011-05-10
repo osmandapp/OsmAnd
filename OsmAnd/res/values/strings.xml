@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-	<string name="tip_osm_help">Openstreetmap improving</string>
-	<string name="tip_osm_help_t">OsmAnd uses maps based on Openstreetmap.org data and it is designed not only for trips and routing but for improving and helping to Openstreetmap project too. You can easily create and upload new POI or OSM bug with just some clicks!
+	<string name="tip_favorites">Favorite points</string>
+	<string name="tip_favorites_t">If you are tired to search for places that you are oftenly visiting, you can easily add this places into Favorites and then use it only by some clicks.
+	\n\tFor creating Favorite point you must go to Map context menu, select option \'Add to favorites\' and enter adequate name for it. After saving it, then you can easily access it thru \'Main Menu\'->\'Favorites\' menu.
+	\n\tWith long tap on favorite point in \'Favorites\' menu you can Navigate to it, Edit or Delete it.
+	\n\tFor displaying all Favorite points directly on map, you can enable layer \'Favorites\' in \'Map context menu\'->\'Layers\'.</string>
+	<string name="tip_osm_improve">Openstreetmap improving</string>
+	<string name="tip_osm_improve_t">OsmAnd uses maps based on Openstreetmap.org data and it is designed not only for trips and routing but for improving and helping to Openstreetmap project too. You can easily create and upload new POI or OSM bug with just some clicks!
 \nAt first you need to enter login information in \'Main Menu\'->\'Settings\'->\'OSM\'.
 \n\tFor new POI adding you can use option \'Create POI\' in Map context menu. Then you can proceed with entering information about new POI in Create POI dialog and finally Commit it.
 \n\tIf you find some error in the map, you can report that and Openstreetmap community can then faster fix this problem.

@@ -14,7 +14,8 @@ import android.widget.TextView;
 
 public class TipsAndTricksActivity {
 	private int[][] tipNamesAndDescriptions = new int[][] {
-			{R.string.tip_osm_help,R.string.tip_osm_help_t},
+			{R.string.tip_favorites,R.string.tip_favorites_t},
+			{R.string.tip_osm_improve,R.string.tip_osm_improve_t},
 			{R.string.tip_desctination_point,R.string.tip_desctination_point_t},
 			{R.string.tip_map_context_menu,R.string.tip_map_context_menu_t},
 			{R.string.tip_search,R.string.tip_search_t},
