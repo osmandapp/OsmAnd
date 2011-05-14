@@ -5,7 +5,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import net.osmand.LogUtil;
@@ -13,9 +17,12 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.osm.LatLon;
+import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.activities.RouteProvider.RouteService;
 import net.osmand.plus.activities.search.SearchHistoryHelper;
+import net.osmand.plus.render.BaseOsmandRender;
+import net.osmand.plus.render.RendererRegistry;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -29,28 +36,840 @@ import android.os.Environment;
 import android.util.Log;
 
 public class OsmandSettings {
-
-	public enum ApplicationMode {
-		/*
-		 * DEFAULT("Default"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian");
-		 */
-
-		DEFAULT(R.string.app_mode_default), 
-		CAR(R.string.app_mode_car), 
-		BICYCLE(R.string.app_mode_bicycle), 
-		PEDESTRIAN(R.string.app_mode_pedestrian);
-
-		private final int key;
-		
-		ApplicationMode(int key) {
-			this.key = key;
+	// GLOBAL instance - make instance global for application
+	// if some problems appear it can be unique for Application (ApplicationContext)
+	private static OsmandSettings INSTANCE;
+	
+	public static OsmandSettings getOsmandSettings(Context ctx) {
+		if (INSTANCE == null) {
+			synchronized (ctx.getApplicationContext()) {
+				if (INSTANCE == null) {
+					INSTANCE = new OsmandSettings((OsmandApplication) ctx.getApplicationContext());
+				}
+			}
 		}
-		public static String toHumanString(ApplicationMode m, Context ctx){
-			return ctx.getResources().getString(m.key);
+		return INSTANCE;
+	}
+	
+	public interface OsmandPreference<T> {
+		T get();
+		
+		boolean set(T obj);
+		
+		String getId();
+	}
+	
+	// These settings are stored in SharedPreferences
+	private static final String SHARED_PREFERENCES_NAME = "net.osmand.settings"; //$NON-NLS-1$
+	
+	/// Settings variables
+	private OsmandApplication ctx;
+	private SharedPreferences globalPreferences;
+	private SharedPreferences defaultProfilePreferences;
+	private SharedPreferences profilePreferences;
+	private ApplicationMode currentMode;
+	
+	// cache variables
+	private long lastTimeInternetConnectionChecked = 0;
+	private boolean internetConnectionAvailable = true;
+	
+	// TODO make all layers profile preferenced????
+	// TODO profile preferences for map is using vector map???
+	private OsmandSettings(OsmandApplication ctx){
+		this.ctx = ctx;
+		globalPreferences = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		// start from default settings
+		currentMode = ApplicationMode.DEFAULT;
+		
+		defaultProfilePreferences = getProfilePreferences(ApplicationMode.DEFAULT);
+		profilePreferences = defaultProfilePreferences;
+		if(FOLLOW_TO_THE_ROUTE.get()){
+			currentMode = readApplicationMode();
+			profilePreferences = getProfilePreferences(currentMode);
+		}
+	}
+	
+	private SharedPreferences getProfilePreferences(ApplicationMode mode){
+		return ctx.getSharedPreferences(SHARED_PREFERENCES_NAME + "." + mode.name().toLowerCase(), Context.MODE_WORLD_READABLE);
+	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<ApplicationMode> APPLICATION_MODE = new OsmandPreference<ApplicationMode>(){
+		public String getId() {
+			return "application_mode";
+		};
+		
+		@Override
+		public ApplicationMode get() {
+			return currentMode;
+		}
+
+		@Override
+		public boolean set(ApplicationMode val) {
+			ApplicationMode oldMode = currentMode;
+			boolean changed = globalPreferences.edit().putString(getId(), val.name()).commit();
+			if(changed){
+				currentMode = val;
+				profilePreferences = getProfilePreferences(currentMode);
+				switchApplicationMode(oldMode);
+			}
+			return changed;
+		}
+	}; 
+	
+	public ApplicationMode getApplicationMode(){
+		return APPLICATION_MODE.get();
+	}
+	
+	protected ApplicationMode readApplicationMode() {
+		String s = globalPreferences.getString(APPLICATION_MODE.getId(), ApplicationMode.DEFAULT.name());
+		try {
+			return ApplicationMode.valueOf(s);
+		} catch (IllegalArgumentException e) {
+			return ApplicationMode.DEFAULT;
+		}
+	}
+
+	protected void switchApplicationMode(ApplicationMode oldMode){
+		// change some global settings/ for car
+		if(currentMode == ApplicationMode.CAR){
+			SHOW_TRANSPORT_OVER_MAP.set(false);
+			SHOW_OSM_BUGS.set(false);
+		}
+		// update vector renderer 
+		RendererRegistry registry = ctx.getRendererRegistry();
+		BaseOsmandRender newRenderer = registry.getRenderer(RENDERER.get());
+		if (newRenderer == null) {
+			newRenderer = registry.defaultRender();
+		}
+		if(registry.getCurrentSelectedRenderer() != newRenderer){
+			registry.setCurrentSelectedRender(newRenderer);
+			ctx.getResourceManager().getRenderer().clearCache();
+		}
+	}
+	
+
+	// Check internet connection available every 15 seconds
+	public boolean isInternetConnectionAvailable(){
+		long delta = System.currentTimeMillis() - lastTimeInternetConnectionChecked;
+		if(delta < 0 || delta > 15000){
+			ConnectivityManager mgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo active = mgr.getActiveNetworkInfo();
+			if(active == null){
+				internetConnectionAvailable = false;
+			} else {
+				NetworkInfo.State state = active.getState();
+				internetConnectionAvailable = state != NetworkInfo.State.DISCONNECTED && state != NetworkInfo.State.DISCONNECTING;
+			}
+		}
+		return internetConnectionAvailable;
+	}
+	
+	/////////////// PREFERENCES classes ////////////////
+	
+	public abstract class CommonPreference<T> implements OsmandPreference<T> {
+		private final String id;
+		private final boolean global;
+		private T cachedValue;
+		private SharedPreferences cachedPreference;
+		private boolean cache;
+		private Map<ApplicationMode, T> defaultValues;
+		private T defaultValue;
+		
+		public CommonPreference(String id, boolean global, T defaultValue){
+			this.id = id;
+			this.global = global;
+			this.defaultValue = defaultValue;
+		}
+		
+		public CommonPreference(String id, boolean global, boolean cache, T defaultValue){
+			this.id = id;
+			this.global = global;
+			this.cache = cache;
+			this.defaultValue = defaultValue; 
+		}
+		
+		protected SharedPreferences getPreferences(){
+			return global ? globalPreferences : profilePreferences;
+		}
+		
+		public void setModeDefaultValue(ApplicationMode mode, T defValue){
+			if(defaultValues == null){
+				defaultValues = new LinkedHashMap<ApplicationMode, T>();
+			}
+			defaultValues.put(mode, defValue);
+		}
+		
+		protected T getDefaultValue(){
+			if(global){
+				return defaultValue;
+			}
+			if(defaultValues != null && defaultValues.containsKey(currentMode)){
+				return defaultValues.get(currentMode);
+			}
+			if(defaultProfilePreferences.contains(getId())) {
+				return getValue(defaultProfilePreferences, defaultValue);
+			} else {
+				return defaultValue;
+			}
+		}
+		
+		protected abstract T getValue(SharedPreferences prefs, T defaultValue);
+		
+		protected abstract boolean setValue(SharedPreferences prefs, T val);
+
+		@Override
+		public T get() {
+			if(cache && cachedValue != null && cachedPreference == getPreferences()){
+				return cachedValue;
+			}
+			cachedPreference = getPreferences();
+			cachedValue = getValue(cachedPreference, getDefaultValue());
+			return cachedValue;
+		}
+
+		@Override
+		public String getId() {
+			return id;
+		}
+
+		@Override
+		public boolean set(T obj) {
+			SharedPreferences prefs = getPreferences();
+			if(setValue(prefs,obj)){
+				cachedValue = obj;
+				cachedPreference = prefs;
+				return true;
+			}
+			return false;
+		}
+		
+	}
+	
+	private class BooleanPreference extends CommonPreference<Boolean> {
+
+		private BooleanPreference(String id, boolean defaultValue, boolean global) {
+			super(id, global, defaultValue);
+		}
+		
+		private BooleanPreference(String id, boolean defaultValue, boolean global, boolean cache) {
+			super(id, global, cache);
+		}
+		
+		@Override
+		protected Boolean getValue(SharedPreferences prefs, Boolean defaultValue) {
+			return prefs.getBoolean(getId(), defaultValue);
+		}
+
+		@Override
+		protected boolean setValue(SharedPreferences prefs, Boolean val) {
+			return prefs.edit().putBoolean(getId(), val).commit();
 		}
 
 	}
+	private class IntPreference extends CommonPreference<Integer> {
 
+
+		private IntPreference(String id, int defaultValue, boolean global) {
+			super(id, global, defaultValue);
+		}
+		
+		private IntPreference(String id, int defaultValue, boolean global, boolean cache) {
+			super(id, global, cache, defaultValue);
+		}
+		
+		@Override
+		protected Integer getValue(SharedPreferences prefs, Integer defaultValue) {
+			return prefs.getInt(getId(), defaultValue);
+		}
+
+		@Override
+		protected boolean setValue(SharedPreferences prefs, Integer val) {
+			return prefs.edit().putInt(getId(), val).commit();
+		}
+
+	}
+	
+	private class StringPreference extends CommonPreference<String> {
+
+		private StringPreference(String id, String defaultValue, boolean global) {
+			super(id, global, defaultValue);
+		}
+
+		@Override
+		protected String getValue(SharedPreferences prefs, String defaultValue) {
+			return prefs.getString(getId(), defaultValue);
+		}
+
+		@Override
+		protected boolean setValue(SharedPreferences prefs, String val) {
+			return prefs.edit().putString(getId(), val).commit();
+		}
+
+	}
+	
+	private class EnumIntPreference<E extends Enum<E>> extends CommonPreference<E> {
+
+		private final E[] values;
+
+		private EnumIntPreference(String id, E defaultValue, boolean global, boolean cache,
+				E[] values) {
+			super(id, global, cache, defaultValue);
+			this.values = values;
+		}
+		
+		private EnumIntPreference(String id, E defaultValue, boolean global, E[] values) {
+			super(id, global, defaultValue);
+			this.values = values;
+		}
+
+
+		@Override
+		protected E getValue(SharedPreferences prefs, E defaultValue) {
+			int i = prefs.getInt(getId(), -1);
+			if(i < 0 || i >= values.length){
+				return defaultValue;
+			}
+			return values[i];
+		}
+		
+		@Override
+		protected boolean setValue(SharedPreferences prefs,E val) {
+			return prefs.edit().putInt(getId(), val.ordinal()).commit();
+		}
+
+	}
+	/////////////// PREFERENCES classes ////////////////
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<Boolean> USE_INTERNET_TO_DOWNLOAD_TILES =
+		new BooleanPreference("use_internet_to_download_tiles", true, false, true);
+	{
+		USE_INTERNET_TO_DOWNLOAD_TILES.setModeDefaultValue(ApplicationMode.CAR, true);
+	}
+
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	// cache of metrics constants as they are used very often
+	public final OsmandPreference<MetricsConstants> METRIC_SYSTEM = new EnumIntPreference<MetricsConstants>(
+			"default_metric_system", MetricsConstants.KILOMETERS_AND_METERS, true, true, MetricsConstants.values());
+
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> USE_TRACKBALL_FOR_MOVEMENTS =
+		new BooleanPreference("use_trackball_for_movements", true, true);
+	
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> USE_HIGH_RES_MAPS =
+		new BooleanPreference("use_high_res_maps", false, false, true);
+	
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> SHOW_POI_OVER_MAP =
+		new BooleanPreference("show_poi_over_map", false, true);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> SHOW_TRANSPORT_OVER_MAP = 
+		new BooleanPreference("show_transport_over_map", false, true);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<String> PREFERRED_LOCALE = 
+		new StringPreference("preferred_locale", "", true);
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<String> USER_NAME = 
+		new StringPreference("user_name", "NoName", true);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<String> USER_OSM_BUG_NAME = 
+		new StringPreference("user_osm_bug_name", "NoName/Osmand", true);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<String> USER_PASSWORD = 
+		new StringPreference("user_password", "", true);
+
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<DayNightMode> DAYNIGHT_MODE = 
+		new EnumIntPreference<DayNightMode>("daynight_mode", DayNightMode.AUTO, false, DayNightMode.values()) {
+		protected boolean setValue(SharedPreferences prefs, DayNightMode val) {
+			ctx.getDaynightHelper().setDayNightMode(val);
+			return super.setValue(prefs, val);
+		}
+	};
+		
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<RouteService> ROUTER_SERVICE = 
+		new EnumIntPreference<RouteService>("router_service", RouteService.OSMAND, false, RouteService.values());
+
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String SAVE_CURRENT_TRACK = "save_current_track"; //$NON-NLS-1$
+	public static final String RELOAD_INDEXES = "reload_indexes"; //$NON-NLS-1$
+	public static final String DOWNLOAD_INDEXES = "download_indexes"; //$NON-NLS-1$
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX = new BooleanPreference("save_track_to_gpx", false, false);
+	{
+		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.CAR, true);
+		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.BICYCLE, true);
+		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
+	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference("fast_route_mode", true, false);
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference("save_track_interval", 5, false);
+	{
+		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.CAR, 5);
+		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.BICYCLE, 10);
+		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 20);
+	}
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> USE_OSMAND_ROUTING_SERVICE_ALWAYS = 
+		new BooleanPreference("use_osmand_routing_service", true, false);
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> SHOW_OSM_BUGS = new BooleanPreference("show_osm_bugs", false, true);	
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> DEBUG_RENDERING_INFO = new BooleanPreference("debug_rendering", false, true);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> SHOW_YANDEX_TRAFFIC = new BooleanPreference("show_yandex_traffic", false, false);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> SHOW_FAVORITES = new BooleanPreference("show_favorites", false, false);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Integer> MAP_SCREEN_ORIENTATION = 
+		new IntPreference("map_screen_orientation", ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED, true);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<Boolean> SHOW_VIEW_ANGLE = new BooleanPreference("show_view_angle", false, true);
+	{
+		SHOW_VIEW_ANGLE.setModeDefaultValue(ApplicationMode.BICYCLE, true);
+		SHOW_VIEW_ANGLE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
+		SHOW_VIEW_ANGLE.setModeDefaultValue(ApplicationMode.CAR, false);
+	}
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<Boolean> AUTO_ZOOM_MAP = new BooleanPreference("auto_zoom_map", false, true);
+	{
+		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.CAR, true);
+	}
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final int ROTATE_MAP_NONE = 0;
+	public static final int ROTATE_MAP_BEARING = 1;
+	public static final int ROTATE_MAP_COMPASS = 2;
+	public final CommonPreference<Integer> ROTATE_MAP = 
+			new IntPreference("rotate_map", ROTATE_MAP_NONE, false);
+	{
+		ROTATE_MAP.setModeDefaultValue(ApplicationMode.CAR, ROTATE_MAP_BEARING);
+		ROTATE_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, ROTATE_MAP_BEARING);
+		ROTATE_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, ROTATE_MAP_COMPASS);
+	}
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final int CENTER_CONSTANT = 0;
+	public static final int BOTTOM_CONSTANT = 1;
+	public final CommonPreference<Integer> POSITION_ON_MAP = new IntPreference("position_on_map", CENTER_CONSTANT, false);
+	{
+		POSITION_ON_MAP.setModeDefaultValue(ApplicationMode.CAR, BOTTOM_CONSTANT);
+		POSITION_ON_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, BOTTOM_CONSTANT);
+		POSITION_ON_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, CENTER_CONSTANT);
+		
+	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Integer> MAX_LEVEL_TO_DOWNLOAD_TILE = new IntPreference("max_level_download_tile", 18, false, true);
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> MAP_VIEW_3D = new BooleanPreference("map_view_3d", false, false);
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> USE_ENGLISH_NAMES = new BooleanPreference("use_english_names", false, true);
+	
+	public boolean usingEnglishNames(){
+		return USE_ENGLISH_NAMES.get();
+	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<Boolean> USE_STEP_BY_STEP_RENDERING = new BooleanPreference("use_step_by_step_rendering",
+			true, false);
+	{
+		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.CAR, true);
+		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.BICYCLE, false);
+		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
+	}
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String MAP_VECTOR_DATA = "map_vector_data"; //$NON-NLS-1$
+	public static final String MAP_TILE_SOURCES = "map_tile_sources"; //$NON-NLS-1$
+	
+
+	public boolean isUsingMapVectorData(){
+		return globalPreferences.getBoolean(MAP_VECTOR_DATA, false);
+	}
+	
+	public boolean setUsingMapVectorData(boolean val){
+		return globalPreferences.edit().putBoolean(MAP_VECTOR_DATA, val).commit();
+	}
+	
+	public boolean setMapTileSource(String tileSource){
+		return globalPreferences.edit().putString(MAP_TILE_SOURCES, tileSource).commit();
+	}
+	
+	public String getMapTileSourceName(){
+		return globalPreferences.getString(MAP_TILE_SOURCES, TileSourceManager.getMapnikSource().getName());
+	}
+	
+	public ITileSource getMapTileSource() {
+		String tileName = globalPreferences.getString(MAP_TILE_SOURCES, null);
+		if (tileName != null) {
+			
+			List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
+			for (TileSourceTemplate l : list) {
+				if (l.getName().equals(tileName)) {
+					return l;
+				}
+			}
+			File tPath = extendOsmandPath(ResourceManager.TILES_PATH);
+			File dir = new File(tPath, tileName);
+			if(dir.exists()){
+				if(tileName.endsWith(SQLiteTileSource.EXT)){
+					return new SQLiteTileSource(dir);
+				} else if (dir.isDirectory()) {
+					String url = null;
+					File readUrl = new File(dir, "url"); //$NON-NLS-1$
+					try {
+						if (readUrl.exists()) {
+							BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(readUrl), "UTF-8")); //$NON-NLS-1$
+							url = reader.readLine();
+							url = url.replaceAll(Pattern.quote("{$z}"), "{0}"); //$NON-NLS-1$ //$NON-NLS-2$
+							url = url.replaceAll(Pattern.quote("{$x}"), "{1}"); //$NON-NLS-1$//$NON-NLS-2$
+							url = url.replaceAll(Pattern.quote("{$y}"), "{2}"); //$NON-NLS-1$ //$NON-NLS-2$
+							reader.close();
+						}
+					} catch (IOException e) {
+						Log.d(LogUtil.TAG, "Error reading url " + dir.getName(), e); //$NON-NLS-1$
+					}
+					return new TileSourceManager.TileSourceTemplate(dir, dir.getName(), url);
+				}
+			}
+				
+		}
+		return TileSourceManager.getMapnikSource();
+	}
+	
+	public Map<String, String> getTileSourceEntries(){
+		Map<String, String> map = new LinkedHashMap<String, String>();
+		File dir = extendOsmandPath(ResourceManager.TILES_PATH);
+		if (dir != null && dir.canRead()) {
+			File[] files = dir.listFiles();
+			Arrays.sort(files, new Comparator<File>(){
+				@Override
+				public int compare(File object1, File object2) {
+					if(object1.lastModified() > object2.lastModified()){
+						return -1;
+					} else if(object1.lastModified() == object2.lastModified()){
+						return 0;
+					}
+					return 1;
+				}
+				
+			});
+			if (files != null) {
+				for (File f : files) {
+					if (f.getName().endsWith(SQLiteTileSource.EXT)) {
+						String n = f.getName();
+						map.put(f.getName(), n.substring(0, n.lastIndexOf('.')));
+					} else if (f.isDirectory() && !f.getName().equals(ResourceManager.TEMP_SOURCE_TO_LOAD)) {
+						map.put(f.getName(), f.getName());
+					}
+				}
+			}
+		}
+		for(TileSourceTemplate l : TileSourceManager.getKnownSourceTemplates()){
+			map.put(l.getName(), l.getName());
+		}
+		return map;
+		
+    }
+
+	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
+	
+	public File getExternalStorageDirectory() {
+		return new File(globalPreferences.getString(EXTERNAL_STORAGE_DIR, Environment.getExternalStorageDirectory().getAbsolutePath()));
+	}
+	
+	public boolean setExternalStorageDirectory(String externalStorageDir) {
+		return globalPreferences.edit().putString(EXTERNAL_STORAGE_DIR, externalStorageDir).commit();
+	}
+	
+	public File extendOsmandPath(String path) {
+		return new File(getExternalStorageDirectory(), path);
+	}
+
+
+	// This value is a key for saving last known location shown on the map
+	public static final String LAST_KNOWN_MAP_LAT = "last_known_map_lat"; //$NON-NLS-1$
+	public static final String LAST_KNOWN_MAP_LON = "last_known_map_lon"; //$NON-NLS-1$
+	public static final String IS_MAP_SYNC_TO_GPS_LOCATION = "is_map_sync_to_gps_location"; //$NON-NLS-1$
+	public static final String LAST_KNOWN_MAP_ZOOM = "last_known_map_zoom"; //$NON-NLS-1$
+	
+	public static final String MAP_LAT_TO_SHOW = "map_lat_to_show"; //$NON-NLS-1$
+	public static final String MAP_LON_TO_SHOW = "map_lon_to_show"; //$NON-NLS-1$
+	public static final String MAP_ZOOM_TO_SHOW = "map_zoom_to_show"; //$NON-NLS-1$
+
+	public LatLon getLastKnownMapLocation() {
+		float lat = globalPreferences.getFloat(LAST_KNOWN_MAP_LAT, 0);
+		float lon = globalPreferences.getFloat(LAST_KNOWN_MAP_LON, 0);
+		return new LatLon(lat, lon);
+	}
+	
+	public boolean isLastKnownMapLocation(){
+		return globalPreferences.contains(LAST_KNOWN_MAP_LAT);
+	}
+
+	public void setMapLocationToShow(double latitude, double longitude) {
+		setMapLocationToShow(latitude, longitude, getLastKnownMapZoom(), null);
+	}
+	
+	public void setMapLocationToShow(double latitude, double longitude, int zoom) {
+		setMapLocationToShow(latitude, longitude, null);
+	}
+	
+	public LatLon getAndClearMapLocationToShow(){
+		if(!globalPreferences.contains(MAP_LAT_TO_SHOW)){
+			return null;
+		}
+		float lat = globalPreferences.getFloat(MAP_LAT_TO_SHOW, 0);
+		float lon = globalPreferences.getFloat(MAP_LON_TO_SHOW, 0);
+		globalPreferences.edit().remove(MAP_LAT_TO_SHOW).commit();
+		return new LatLon(lat, lon);
+	}
+	
+	public int getMapZoomToShow() {
+		return globalPreferences.getInt(MAP_ZOOM_TO_SHOW, 5);
+	}
+	
+	public void setMapLocationToShow(double latitude, double longitude, int zoom, String historyDescription) {
+		Editor edit = globalPreferences.edit();
+		edit.putFloat(MAP_LAT_TO_SHOW, (float) latitude);
+		edit.putFloat(MAP_LON_TO_SHOW, (float) longitude);
+		edit.putInt(MAP_ZOOM_TO_SHOW, zoom);
+		edit.putBoolean(IS_MAP_SYNC_TO_GPS_LOCATION, false);
+		edit.commit();
+		if(historyDescription != null){
+			SearchHistoryHelper.getInstance().addNewItemToHistory(latitude, longitude, historyDescription, ctx);
+		}
+	}
+	
+	public void setMapLocationToShow(double latitude, double longitude, String historyDescription) {
+		setMapLocationToShow(latitude, longitude, getLastKnownMapZoom(), historyDescription);
+	}
+
+	// Do not use that method if you want to show point on map. Use setMapLocationToShow
+	public void setLastKnownMapLocation(double latitude, double longitude) {
+		Editor edit = globalPreferences.edit();
+		edit.putFloat(LAST_KNOWN_MAP_LAT, (float) latitude);
+		edit.putFloat(LAST_KNOWN_MAP_LON, (float) longitude);
+		edit.commit();
+	}
+
+	public boolean setSyncMapToGpsLocation(boolean value) {
+		return globalPreferences.edit().putBoolean(IS_MAP_SYNC_TO_GPS_LOCATION, value).commit();
+	}
+
+	public boolean isMapSyncToGpsLocation() {
+		return globalPreferences.getBoolean(IS_MAP_SYNC_TO_GPS_LOCATION, true);
+	}
+
+	public int getLastKnownMapZoom() {
+		return globalPreferences.getInt(LAST_KNOWN_MAP_ZOOM, 5);
+	}
+
+	public void setLastKnownMapZoom(int zoom) {
+		globalPreferences.edit().putInt(LAST_KNOWN_MAP_ZOOM, zoom).commit();
+	}
+
+	public final static String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
+	public final static String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
+
+	public LatLon getPointToNavigate() {
+		float lat = globalPreferences.getFloat(POINT_NAVIGATE_LAT, 0);
+		float lon = globalPreferences.getFloat(POINT_NAVIGATE_LON, 0);
+		if (lat == 0 && lon == 0) {
+			return null;
+		}
+		return new LatLon(lat, lon);
+	}
+
+	public boolean clearPointToNavigate() {
+		return globalPreferences.edit().remove(POINT_NAVIGATE_LAT).remove(POINT_NAVIGATE_LON).commit();
+	}
+
+	public boolean setPointToNavigate(double latitude, double longitude) {
+		return globalPreferences.edit().putFloat(POINT_NAVIGATE_LAT, (float) latitude).putFloat(POINT_NAVIGATE_LON, (float) longitude).commit();
+	}
+
+	public static final String LAST_SEARCHED_REGION = "last_searched_region"; //$NON-NLS-1$
+	public static final String LAST_SEARCHED_CITY = "last_searched_city"; //$NON-NLS-1$
+	public static final String lAST_SEARCHED_POSTCODE= "last_searched_postcode"; //$NON-NLS-1$
+	public static final String LAST_SEARCHED_STREET = "last_searched_street"; //$NON-NLS-1$
+	public static final String LAST_SEARCHED_BUILDING = "last_searched_building"; //$NON-NLS-1$
+	public static final String LAST_SEARCHED_INTERSECTED_STREET = "last_searched_intersected_street"; //$NON-NLS-1$
+
+	public String getLastSearchedRegion() {
+		return globalPreferences.getString(LAST_SEARCHED_REGION, ""); //$NON-NLS-1$
+	}
+
+	public boolean setLastSearchedRegion(String region) {
+		Editor edit = globalPreferences.edit().putString(LAST_SEARCHED_REGION, region).putLong(LAST_SEARCHED_CITY, -1).putString(LAST_SEARCHED_STREET,
+				"").putString(LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$ //$NON-NLS-2$
+		if (globalPreferences.contains(LAST_SEARCHED_INTERSECTED_STREET)) {
+			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
+		}
+		return edit.commit();
+	}
+	
+	public String getLastSearchedPostcode(){
+		return globalPreferences.getString(lAST_SEARCHED_POSTCODE, null);	
+	}
+	
+	public boolean setLastSearchedPostcode(String postcode){
+		Editor edit = globalPreferences.edit().putLong(LAST_SEARCHED_CITY, -1).putString(LAST_SEARCHED_STREET, "").putString( //$NON-NLS-1$
+				LAST_SEARCHED_BUILDING, "").putString(lAST_SEARCHED_POSTCODE, postcode); //$NON-NLS-1$
+		if(globalPreferences.contains(LAST_SEARCHED_INTERSECTED_STREET)){
+			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
+		}
+		return edit.commit();
+	}
+
+	public Long getLastSearchedCity() {
+		return globalPreferences.getLong(LAST_SEARCHED_CITY, -1);
+	}
+
+	public boolean setLastSearchedCity(Long cityId) {
+		Editor edit = globalPreferences.edit().putLong(LAST_SEARCHED_CITY, cityId).putString(LAST_SEARCHED_STREET, "").putString( //$NON-NLS-1$
+				LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$
+		edit.remove(lAST_SEARCHED_POSTCODE);
+		if(globalPreferences.contains(LAST_SEARCHED_INTERSECTED_STREET)){
+			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
+		}
+		return edit.commit();
+	}
+
+	public String getLastSearchedStreet() {
+		return globalPreferences.getString(LAST_SEARCHED_STREET, ""); //$NON-NLS-1$
+	}
+
+	public boolean setLastSearchedStreet(String street) {
+		Editor edit = globalPreferences.edit().putString(LAST_SEARCHED_STREET, street).putString(LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$
+		if (globalPreferences.contains(LAST_SEARCHED_INTERSECTED_STREET)) {
+			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
+		}
+		return edit.commit();
+	}
+
+	public String getLastSearchedBuilding() {
+		return globalPreferences.getString(LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$
+	}
+
+	public boolean setLastSearchedBuilding(String building) {
+		return globalPreferences.edit().putString(LAST_SEARCHED_BUILDING, building).remove(LAST_SEARCHED_INTERSECTED_STREET).commit();
+	}
+
+	public String getLastSearchedIntersectedStreet() {
+		if (!globalPreferences.contains(LAST_SEARCHED_INTERSECTED_STREET)) {
+			return null;
+		}
+		return globalPreferences.getString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
+	}
+
+	public boolean setLastSearchedIntersectedStreet(String street) {
+		return globalPreferences.edit().putString(LAST_SEARCHED_INTERSECTED_STREET, street).commit();
+	}
+
+	public boolean removeLastSearchedIntersectedStreet() {
+		return globalPreferences.edit().remove(LAST_SEARCHED_INTERSECTED_STREET).commit();
+	}
+
+	public static final String SELECTED_POI_FILTER_FOR_MAP = "selected_poi_filter_for_map"; //$NON-NLS-1$
+
+	public boolean setPoiFilterForMap(String filterId) {
+		return globalPreferences.edit().putString(SELECTED_POI_FILTER_FOR_MAP, filterId).commit();
+	}
+
+	public PoiFilter getPoiFilterForMap(OsmandApplication application) {
+		String filterId = globalPreferences.getString(SELECTED_POI_FILTER_FOR_MAP, null);
+		PoiFilter filter = application.getPoiFilters().getFilterById(filterId);
+		if (filter != null) {
+			return filter;
+		}
+		return new PoiFilter(null, application);
+	}
+	
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<String> VOICE_PROVIDER = new StringPreference("voice_provider", null, false);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<String> RENDERER = new StringPreference("renderer", RendererRegistry.DEFAULT_RENDER, false) {
+		protected boolean setValue(SharedPreferences prefs, String val) {
+			if(val == null){
+				val = RendererRegistry.DEFAULT_RENDER;
+			}
+			BaseOsmandRender loaded = ctx.getRendererRegistry().getRenderer(val);
+			if (loaded != null) {
+				ctx.getRendererRegistry().setCurrentSelectedRender(loaded);
+				super.setValue(prefs, val);
+				ctx.getResourceManager().getRenderer().clearCache();
+				return true;
+			}
+			return false;
+		};
+	};
+	{
+		RENDERER.setModeDefaultValue(ApplicationMode.CAR, RendererRegistry.CAR_RENDER);
+		RENDERER.setModeDefaultValue(ApplicationMode.PEDESTRIAN, RendererRegistry.PEDESTRIAN_RENDER);
+		RENDERER.setModeDefaultValue(ApplicationMode.BICYCLE, RendererRegistry.BICYCLE_RENDER);
+	}
+	
+	
+	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference("voice_mute", false, true);
+	
+	// for background service
+	public final OsmandPreference<Boolean> MAP_ACTIVITY_ENABLED = new BooleanPreference("map_activity_enabled", false, true);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public static final String SERVICE_OFF_ENABLED = "service_off_enabled"; //$NON-NLS-1$
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<String> SERVICE_OFF_PROVIDER = new StringPreference("service_off_provider", LocationManager.GPS_PROVIDER, true);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Integer> SERVICE_OFF_INTERVAL = new IntPreference("service_off_interval", 
+			5 * 60 * 1000, true);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Integer> SERVICE_OFF_WAIT_INTERVAL = new IntPreference("service_off_wait_interval", 
+			90 * 1000, true);
+	
+	public final OsmandPreference<String> CONTRIBUTION_INSTALL_APP_DATE = new StringPreference("CONTRIBUTION_INSTALL_APP_DATE", null, true);
+	
+	
+	public final OsmandPreference<Boolean> FOLLOW_TO_THE_ROUTE = new BooleanPreference("follow_to_route", false, true);
+	
+	public final OsmandPreference<Boolean> SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME = 
+		new BooleanPreference("show_arrival_time", true, true);
+	
 	public enum DayNightMode {
 		AUTO(R.string.daynight_mode_auto), 
 		DAY(R.string.daynight_mode_day), 
@@ -110,773 +929,5 @@ public class OsmandSettings {
 		}
 		
 	}
-
-	// These settings are stored in SharedPreferences
-	public static final String SHARED_PREFERENCES_NAME = "net.osmand.settings"; //$NON-NLS-1$
-
-	public static final int CENTER_CONSTANT = 0;
-	public static final int BOTTOM_CONSTANT = 1;
-	
-	public static final Editor getWriteableEditor(Context ctx){
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit();
-	}
-	
-	public static final SharedPreferences getSharedPreferences(Context ctx){
-		return ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-	}
-	
-	public static final SharedPreferences getPrefs(Context ctx){
-		return ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-	}
-
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String USE_INTERNET_TO_DOWNLOAD_TILES = "use_internet_to_download_tiles"; //$NON-NLS-1$
-	public static final boolean USE_INTERNET_TO_DOWNLOAD_TILES_DEF = true;
-	private static Boolean CACHE_USE_INTERNET_TO_DOWNLOAD_TILES = null;
-	private static long lastTimeInternetConnectionChecked = 0;
-	private static boolean internetConnectionAvailable = true;
-
-	public static boolean isUsingInternetToDownloadTiles(SharedPreferences prefs) {
-		if(CACHE_USE_INTERNET_TO_DOWNLOAD_TILES == null){
-			CACHE_USE_INTERNET_TO_DOWNLOAD_TILES = prefs.getBoolean(USE_INTERNET_TO_DOWNLOAD_TILES, USE_INTERNET_TO_DOWNLOAD_TILES_DEF);
-		}
-		return CACHE_USE_INTERNET_TO_DOWNLOAD_TILES;
-	}
-	
-	public static void setUseInternetToDownloadTiles(boolean use, Editor edit) {
-		edit.putBoolean(USE_INTERNET_TO_DOWNLOAD_TILES, use);
-		CACHE_USE_INTERNET_TO_DOWNLOAD_TILES = use;
-	}
-	
-	public static boolean isInternetConnectionAvailable(Context ctx){
-		long delta = System.currentTimeMillis() - lastTimeInternetConnectionChecked;
-		if(delta < 0 || delta > 15000){
-			ConnectivityManager mgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
-			NetworkInfo active = mgr.getActiveNetworkInfo();
-			if(active == null){
-				internetConnectionAvailable = false;
-			} else {
-				NetworkInfo.State state = active.getState();
-				internetConnectionAvailable = state != NetworkInfo.State.DISCONNECTED && state != NetworkInfo.State.DISCONNECTING;
-			}
-		}
-		return internetConnectionAvailable;
-	}
-
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String DEFAULT_METRIC_SYSTEM = "default_metric_system"; //$NON-NLS-1$
-	public static final int DEFAULT_METRIC_SYSTEM_DEF = 0;
-	// cache of metrics constants as they are used very often
-	private static MetricsConstants metricConstants = null;
-
-	public static MetricsConstants getDefaultMetricConstants(Context ctx) {
-		if (metricConstants == null) {
-			int value = getSharedPreferences(ctx).getInt(DEFAULT_METRIC_SYSTEM, DEFAULT_METRIC_SYSTEM_DEF);
-			if (value >= MetricsConstants.values().length) {
-				metricConstants = MetricsConstants.KILOMETERS_AND_METERS;
-			} else {
-				metricConstants = MetricsConstants.values()[value];
-			}
-		}
-		return metricConstants;
-	}
-	
-	public static void setDefaultMetricConstants(Editor editor, MetricsConstants constants){
-		editor.putInt(DEFAULT_METRIC_SYSTEM, constants.ordinal()).commit();
-		metricConstants = constants;
-	}
-
-
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String USE_TRACKBALL_FOR_MOVEMENTS = "use_trackball_for_movements"; //$NON-NLS-1$
-	public static final boolean USE_TRACKBALL_FOR_MOVEMENTS_DEF = true;
-
-	public static boolean isUsingTrackBall(SharedPreferences prefs) {
-		return prefs.getBoolean(USE_TRACKBALL_FOR_MOVEMENTS, USE_TRACKBALL_FOR_MOVEMENTS_DEF);
-	}
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String USE_HIGH_RES_MAPS = "use_high_res_maps"; //$NON-NLS-1$
-	public static final boolean USE_HIGH_RES_MAPS_DEF = false;
-
-	public static boolean isUsingHighResMaps(SharedPreferences prefs) {
-		return prefs.getBoolean(USE_HIGH_RES_MAPS, USE_HIGH_RES_MAPS_DEF);
-	}
-	
-
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String SHOW_POI_OVER_MAP = "show_poi_over_map"; //$NON-NLS-1$
-	public static final Boolean SHOW_POI_OVER_MAP_DEF = false;
-
-	public static boolean isShowingPoiOverMap(SharedPreferences prefs) {
-		return prefs.getBoolean(SHOW_POI_OVER_MAP, SHOW_POI_OVER_MAP_DEF);
-	}
-	
-	public static boolean setShowPoiOverMap(Context ctx, boolean val) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putBoolean(SHOW_POI_OVER_MAP, val).commit();
-	}
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String SHOW_TRANSPORT_OVER_MAP = "show_transport_over_map"; //$NON-NLS-1$
-	public static final boolean SHOW_TRANSPORT_OVER_MAP_DEF = false;
-
-	public static boolean isShowingTransportOverMap(SharedPreferences prefs) {
-		return prefs.getBoolean(SHOW_TRANSPORT_OVER_MAP, SHOW_TRANSPORT_OVER_MAP_DEF);
-	}
-	
-	public static boolean setShowTransortOverMap(Context ctx, boolean val) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putBoolean(SHOW_TRANSPORT_OVER_MAP, val).commit();
-	}
-	
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String PREFERRED_LOCALE = "preferred_locale"; //$NON-NLS-1$
-	public static final String PREFERRED_LOCALE_DEF = ""; //$NON-NLS-1$
-
-	public static String getPreferredLocale(SharedPreferences prefs) {
-		return prefs.getString(PREFERRED_LOCALE, PREFERRED_LOCALE_DEF); //$NON-NLS-1$
-	}
-
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String USER_NAME = "user_name"; //$NON-NLS-1$
-	public static final String USER_NAME_DEF = "NoName"; //$NON-NLS-1$
-
-	public static String getUserName(SharedPreferences prefs) {
-		return prefs.getString(USER_NAME, USER_NAME_DEF);
-	}
-
-	public static boolean setUserName(Context ctx, String name) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putString(USER_NAME, name).commit();
-	}
-	
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String USER_OSM_BUG_NAME = "user_osm_bug_name"; //$NON-NLS-1$
-
-	public static String getUserNameForOsmBug(SharedPreferences prefs) {
-		return prefs.getString(USER_OSM_BUG_NAME, "NoName/Osmand"); //$NON-NLS-1$
-	}
-
-	public static boolean setUserNameForOsmBug(Context ctx, String name) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putString(USER_OSM_BUG_NAME, name).commit();
-	}
-	
-	public static final String USER_PASSWORD = "user_password"; //$NON-NLS-1$
-	public static String getUserPassword(SharedPreferences prefs){
-		return prefs.getString(USER_PASSWORD, ""); //$NON-NLS-1$
-	}
-	
-	public static boolean setUserPassword(Context ctx, String name){
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putString(USER_PASSWORD, name).commit();
-	}
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String APPLICATION_MODE = "application_mode"; //$NON-NLS-1$
-
-	public static ApplicationMode getApplicationMode(SharedPreferences prefs) {
-		String s = prefs.getString(APPLICATION_MODE, ApplicationMode.DEFAULT.name());
-		try {
-			return ApplicationMode.valueOf(s);
-		} catch (IllegalArgumentException e) {
-			return ApplicationMode.DEFAULT;
-		}
-	}
-
-	public static boolean setApplicationMode(Context ctx, ApplicationMode p) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putString(APPLICATION_MODE, p.name()).commit();
-	}
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String DAYNIGHT_MODE = "daynight_mode"; //$NON-NLS-1$
-	public static DayNightMode getDayNightMode(SharedPreferences prefs) {
-		String s = prefs.getString(DAYNIGHT_MODE, DayNightMode.AUTO.name());
-		try {
-			return DayNightMode.valueOf(s);
-		} catch (IllegalArgumentException e) {
-			return DayNightMode.AUTO;
-		}
-	}
-
-	public static boolean setDayNightMode(Context ctx, DayNightMode p) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putString(APPLICATION_MODE, p.name()).commit();
-	}
-		
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String ROUTER_SERVICE = "router_service"; //$NON-NLS-1$
-
-	public static RouteService getRouterService(SharedPreferences prefs) {
-		int ord = prefs.getInt(ROUTER_SERVICE, RouteService.OSMAND.ordinal());
-		// that fix specially for 0.5.2 release
-		if(ord < RouteService.values().length){
-			return RouteService.values()[ord];
-		} else {
-			return RouteService.OSMAND;
-		}
-	}
-
-	public static boolean setRouterService(Context ctx, RouteService p) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putInt(ROUTER_SERVICE, p.ordinal()).commit();
-	}	
-
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String SAVE_CURRENT_TRACK = "save_current_track"; //$NON-NLS-1$
-	public static final String RELOAD_INDEXES = "reload_indexes"; //$NON-NLS-1$
-	public static final String DOWNLOAD_INDEXES = "download_indexes"; //$NON-NLS-1$
-
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String SAVE_TRACK_TO_GPX = "save_track_to_gpx"; //$NON-NLS-1$
-	public static final boolean SAVE_TRACK_TO_GPX_DEF = false; 
-
-	public static boolean isSavingTrackToGpx(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.getBoolean(SAVE_TRACK_TO_GPX, SAVE_TRACK_TO_GPX_DEF);
-	}
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String FAST_ROUTE_MODE = "fast_route_mode"; //$NON-NLS-1$
-	public static final boolean FAST_ROUTE_MODE_DEF = true; 
-
-	public static boolean isFastRouteMode(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.getBoolean(FAST_ROUTE_MODE, FAST_ROUTE_MODE_DEF);
-	}
-
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String SAVE_TRACK_INTERVAL = "save_track_interval"; //$NON-NLS-1$
-
-	public static int getSavingTrackInterval(SharedPreferences prefs) {
-		return prefs.getInt(SAVE_TRACK_INTERVAL, 5);
-	}
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String USE_OSMAND_ROUTING_SERVICE_ALWAYS = "use_osmand_routing_service"; //$NON-NLS-1$
-	public static final boolean USE_OSMAND_ROUTING_SERVICE_ALWAYS_DEF = false; 
-
-	public static boolean isOsmandRoutingServiceUsed(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.getBoolean(USE_OSMAND_ROUTING_SERVICE_ALWAYS, USE_OSMAND_ROUTING_SERVICE_ALWAYS_DEF);
-	}
-
-
-
-
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String SHOW_OSM_BUGS = "show_osm_bugs"; //$NON-NLS-1$
-	public static final boolean SHOW_OSM_BUGS_DEF = false;
-
-	public static boolean isShowingOsmBugs(SharedPreferences prefs) {
-		return prefs.getBoolean(SHOW_OSM_BUGS, SHOW_OSM_BUGS_DEF);
-	}
-	
-	public static boolean setShowingOsmBugs(Context ctx, boolean val) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putBoolean(SHOW_OSM_BUGS, val).commit();
-	}
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String DEBUG_RENDERING_INFO = "debug_rendering"; //$NON-NLS-1$
-	public static final boolean DEBUG_RENDERING_INFO_DEF = false; 
-
-	public static boolean isDebugRendering(Context ctx) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.getBoolean(DEBUG_RENDERING_INFO, DEBUG_RENDERING_INFO_DEF);
-	}
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String SHOW_YANDEX_TRAFFIC = "show_yandex_traffic"; //$NON-NLS-1$
-	public static final boolean SHOW_YANDEX_TRAFFIC_DEF = false;
-
-	public static boolean isShowingYandexTraffic(SharedPreferences prefs) {
-		return prefs.getBoolean(SHOW_YANDEX_TRAFFIC, SHOW_YANDEX_TRAFFIC_DEF);
-	}
-	
-	public static boolean setShowingYandexTraffic(Context ctx, boolean val) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putBoolean(SHOW_YANDEX_TRAFFIC, val).commit();
-	}
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String SHOW_FAVORITES = "show_favorites"; //$NON-NLS-1$
-	public static final boolean SHOW_FAVORITES_DEF = false;
-
-	public static boolean isShowingFavorites(SharedPreferences prefs) {
-		return prefs.getBoolean(SHOW_FAVORITES, SHOW_FAVORITES_DEF);
-	}
-	
-	public static boolean setShowingFavorites(Context ctx, boolean val) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putBoolean(SHOW_FAVORITES, val).commit();
-	}
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String MAP_SCREEN_ORIENTATION = "map_screen_orientation"; //$NON-NLS-1$
-	
-	public static int getMapOrientation(SharedPreferences prefs){
-		return prefs.getInt(MAP_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-	}
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String SHOW_VIEW_ANGLE = "show_view_angle"; //$NON-NLS-1$
-	public static final boolean SHOW_VIEW_ANGLE_DEF = false;
-
-	public static boolean isShowingViewAngle(SharedPreferences prefs) {
-		return prefs.getBoolean(SHOW_VIEW_ANGLE, SHOW_VIEW_ANGLE_DEF);
-	}
-
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String AUTO_ZOOM_MAP = "auto_zoom_map"; //$NON-NLS-1$
-	public static final boolean AUTO_ZOOM_MAP_DEF = false;
-
-	public static boolean isAutoZoomEnabled(SharedPreferences prefs) {
-		return prefs.getBoolean(AUTO_ZOOM_MAP, AUTO_ZOOM_MAP_DEF);
-	}
-
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String ROTATE_MAP = "rotate_map"; //$NON-NLS-1$
-	public static final int ROTATE_MAP_TO_BEARING_DEF = 0;
-	public static final int ROTATE_MAP_NONE = 0;
-	public static final int ROTATE_MAP_BEARING = 1;
-	public static final int ROTATE_MAP_COMPASS = 2;
-	
-	// return 0 - no rotate, 1 - to bearing, 2 - to compass
-	public static int getRotateMap(SharedPreferences prefs) {
-		return prefs.getInt(ROTATE_MAP, ROTATE_MAP_TO_BEARING_DEF);
-	}
-
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String POSITION_ON_MAP = "position_on_map"; //$NON-NLS-1$
-
-	public static int getPositionOnMap(SharedPreferences prefs) {
-		return prefs.getInt(POSITION_ON_MAP, CENTER_CONSTANT);
-	}
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String MAX_LEVEL_TO_DOWNLOAD_TILE = "max_level_download_tile"; //$NON-NLS-1$
-
-	public static int getMaximumLevelToDownloadTile(SharedPreferences prefs) {
-		return prefs.getInt(MAX_LEVEL_TO_DOWNLOAD_TILE, 18);
-	}
-
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String MAP_VIEW_3D = "map_view_3d"; //$NON-NLS-1$
-	public static final boolean MAP_VIEW_3D_DEF = false;
-
-	public static boolean isMapView3D(SharedPreferences prefs) {
-		return prefs.getBoolean(MAP_VIEW_3D, MAP_VIEW_3D_DEF);
-	}
-
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String USE_ENGLISH_NAMES = "use_english_names"; //$NON-NLS-1$
-	public static final boolean USE_ENGLISH_NAMES_DEF = false;
-
-	public static boolean usingEnglishNames(SharedPreferences prefs) {
-		return prefs.getBoolean(USE_ENGLISH_NAMES, USE_ENGLISH_NAMES_DEF);
-	}
-
-	public static boolean setUseEnglishNames(Context ctx, boolean useEnglishNames) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putBoolean(USE_ENGLISH_NAMES, useEnglishNames).commit();
-	}
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String USE_STEP_BY_STEP_RENDERING = "use_step_by_step_rendering"; //$NON-NLS-1$
-	public static final boolean USE_STEP_BY_STEP_RENDERING_DEF = true;
-
-	public static boolean isUsingStepByStepRendering(SharedPreferences prefs) {
-		return prefs.getBoolean(USE_STEP_BY_STEP_RENDERING, USE_STEP_BY_STEP_RENDERING_DEF);
-	}
-	
-	public static boolean setUsingStepByStepRendering(Context ctx, boolean rendering) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putBoolean(USE_STEP_BY_STEP_RENDERING, rendering).commit();
-	}
-
-
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String MAP_VECTOR_DATA = "map_vector_data"; //$NON-NLS-1$
-	public static final String MAP_TILE_SOURCES = "map_tile_sources"; //$NON-NLS-1$
-	
-	public static boolean isUsingMapVectorData(SharedPreferences prefs){
-		return prefs.getBoolean(MAP_VECTOR_DATA, false);
-	}
-
-	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
-//	public static final String MAP_TILE_SOURCES = "map_tile_sources"; //$NON-NLS-1$
-	
-	public static File getExternalStorageDirectory(SharedPreferences prefs) {
-		return new File(prefs.getString(EXTERNAL_STORAGE_DIR, Environment.getExternalStorageDirectory().getAbsolutePath()));
-	}
-	
-	public static File getExternalStorageDirectory(Context ctx) {
-		return getExternalStorageDirectory(getPrefs(ctx));
-	}
-	
-	public static File extendOsmandPath(SharedPreferences prefs, String path) {
-		return new File(getExternalStorageDirectory(prefs), path);
-	}
-
-	public static File extendOsmandPath(Context ctx, String path) {
-		return new File(getExternalStorageDirectory(ctx), path);
-	}
-	
-	public static ITileSource getMapTileSource(SharedPreferences prefs) {
-		String tileName = prefs.getString(MAP_TILE_SOURCES, null);
-		if (tileName != null) {
-			
-			List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
-			for (TileSourceTemplate l : list) {
-				if (l.getName().equals(tileName)) {
-					return l;
-				}
-			}
-			File tPath = OsmandSettings.extendOsmandPath(prefs, ResourceManager.TILES_PATH);
-			File dir = new File(tPath, tileName);
-			if(dir.exists()){
-				if(tileName.endsWith(SQLiteTileSource.EXT)){
-					return new SQLiteTileSource(dir);
-				} else if (dir.isDirectory()) {
-					String url = null;
-					File readUrl = new File(dir, "url"); //$NON-NLS-1$
-					try {
-						if (readUrl.exists()) {
-							BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(readUrl), "UTF-8")); //$NON-NLS-1$
-							url = reader.readLine();
-							url = url.replaceAll(Pattern.quote("{$z}"), "{0}"); //$NON-NLS-1$ //$NON-NLS-2$
-							url = url.replaceAll(Pattern.quote("{$x}"), "{1}"); //$NON-NLS-1$//$NON-NLS-2$
-							url = url.replaceAll(Pattern.quote("{$y}"), "{2}"); //$NON-NLS-1$ //$NON-NLS-2$
-							reader.close();
-						}
-					} catch (IOException e) {
-						Log.d(LogUtil.TAG, "Error reading url " + dir.getName(), e); //$NON-NLS-1$
-					}
-					return new TileSourceManager.TileSourceTemplate(dir, dir.getName(), url);
-				}
-			}
-				
-		}
-		return TileSourceManager.getMapnikSource();
-	}
-
-	public static String getMapTileSourceName(SharedPreferences prefs) {
-		String tileName = prefs.getString(MAP_TILE_SOURCES, null);
-		if (tileName != null) {
-			return tileName;
-		}
-		return TileSourceManager.getMapnikSource().getName();
-	}
-
-	// This value is a key for saving last known location shown on the map
-	public static final String LAST_KNOWN_MAP_LAT = "last_known_map_lat"; //$NON-NLS-1$
-	public static final String LAST_KNOWN_MAP_LON = "last_known_map_lon"; //$NON-NLS-1$
-	public static final String IS_MAP_SYNC_TO_GPS_LOCATION = "is_map_sync_to_gps_location"; //$NON-NLS-1$
-	public static final String LAST_KNOWN_MAP_ZOOM = "last_known_map_zoom"; //$NON-NLS-1$
-	
-	public static final String MAP_LAT_TO_SHOW = "map_lat_to_show"; //$NON-NLS-1$
-	public static final String MAP_LON_TO_SHOW = "map_lon_to_show"; //$NON-NLS-1$
-	public static final String MAP_ZOOM_TO_SHOW = "map_zoom_to_show"; //$NON-NLS-1$
-
-	public static LatLon getLastKnownMapLocation(SharedPreferences prefs) {
-		float lat = prefs.getFloat(LAST_KNOWN_MAP_LAT, 0);
-		float lon = prefs.getFloat(LAST_KNOWN_MAP_LON, 0);
-		return new LatLon(lat, lon);
-	}
-
-	public static void setMapLocationToShow(Context ctx, double latitude, double longitude) {
-		setMapLocationToShow(ctx, latitude, longitude, getLastKnownMapZoom(getSharedPreferences(ctx)), null);
-	}
-	
-	public static void setMapLocationToShow(Context ctx, double latitude, double longitude, int zoom) {
-		setMapLocationToShow(ctx, latitude, longitude, null);
-	}
-	
-	public static LatLon getAndClearMapLocationToShow(SharedPreferences prefs){
-		if(!prefs.contains(MAP_LAT_TO_SHOW)){
-			return null;
-		}
-		float lat = prefs.getFloat(MAP_LAT_TO_SHOW, 0);
-		float lon = prefs.getFloat(MAP_LON_TO_SHOW, 0);
-		prefs.edit().remove(MAP_LAT_TO_SHOW).commit();
-		return new LatLon(lat, lon);
-	}
-	
-	public static int getMapZoomToShow(SharedPreferences prefs) {
-		return prefs.getInt(MAP_ZOOM_TO_SHOW, 5);
-	}
-	
-	public static void setMapLocationToShow(Context ctx, double latitude, double longitude, int zoom, String historyDescription) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		Editor edit = prefs.edit();
-		edit.putFloat(MAP_LAT_TO_SHOW, (float) latitude);
-		edit.putFloat(MAP_LON_TO_SHOW, (float) longitude);
-		edit.putInt(MAP_ZOOM_TO_SHOW, zoom);
-		edit.putBoolean(IS_MAP_SYNC_TO_GPS_LOCATION, false);
-		edit.commit();
-		if(historyDescription != null){
-			SearchHistoryHelper.getInstance().addNewItemToHistory(latitude, longitude, historyDescription, ctx);
-		}
-	}
-	
-	public static void setMapLocationToShow(Context ctx, double latitude, double longitude, String historyDescription) {
-		setMapLocationToShow(ctx, latitude, longitude, getLastKnownMapZoom(getSharedPreferences(ctx)), historyDescription);
-	}
-
-	// Do not use that method if you want to show point on map. Use setMapLocationToShow
-	public static void setLastKnownMapLocation(Context ctx, double latitude, double longitude) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		Editor edit = prefs.edit();
-		edit.putFloat(LAST_KNOWN_MAP_LAT, (float) latitude);
-		edit.putFloat(LAST_KNOWN_MAP_LON, (float) longitude);
-		edit.commit();
-	}
-
-	public static boolean setSyncMapToGpsLocation(Context ctx, boolean value) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putBoolean(IS_MAP_SYNC_TO_GPS_LOCATION, value).commit();
-	}
-
-	public static boolean isMapSyncToGpsLocation(SharedPreferences prefs) {
-		return prefs.getBoolean(IS_MAP_SYNC_TO_GPS_LOCATION, true);
-	}
-
-	public static int getLastKnownMapZoom(SharedPreferences prefs) {
-		return prefs.getInt(LAST_KNOWN_MAP_ZOOM, 5);
-	}
-
-	public static void setLastKnownMapZoom(Context ctx, int zoom) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		Editor edit = prefs.edit();
-		edit.putInt(LAST_KNOWN_MAP_ZOOM, zoom);
-		edit.commit();
-	}
-
-	public final static String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
-	public final static String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
-
-	public static LatLon getPointToNavigate(SharedPreferences prefs) {
-		float lat = prefs.getFloat(POINT_NAVIGATE_LAT, 0);
-		float lon = prefs.getFloat(POINT_NAVIGATE_LON, 0);
-		if (lat == 0 && lon == 0) {
-			return null;
-		}
-		return new LatLon(lat, lon);
-	}
-
-	public static boolean clearPointToNavigate(SharedPreferences prefs) {
-		return prefs.edit().remove(POINT_NAVIGATE_LAT).remove(POINT_NAVIGATE_LON).commit();
-	}
-
-	public static boolean setPointToNavigate(Context ctx, double latitude, double longitude) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putFloat(POINT_NAVIGATE_LAT, (float) latitude).putFloat(POINT_NAVIGATE_LON, (float) longitude).commit();
-	}
-
-	public static final String LAST_SEARCHED_REGION = "last_searched_region"; //$NON-NLS-1$
-	public static final String LAST_SEARCHED_CITY = "last_searched_city"; //$NON-NLS-1$
-	public static final String lAST_SEARCHED_POSTCODE= "last_searched_postcode"; //$NON-NLS-1$
-	public static final String LAST_SEARCHED_STREET = "last_searched_street"; //$NON-NLS-1$
-	public static final String LAST_SEARCHED_BUILDING = "last_searched_building"; //$NON-NLS-1$
-	public static final String LAST_SEARCHED_INTERSECTED_STREET = "last_searched_intersected_street"; //$NON-NLS-1$
-
-	public static String getLastSearchedRegion(SharedPreferences prefs) {
-		return prefs.getString(LAST_SEARCHED_REGION, ""); //$NON-NLS-1$
-	}
-
-	public static boolean setLastSearchedRegion(Context ctx, String region) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		Editor edit = prefs.edit().putString(LAST_SEARCHED_REGION, region).putLong(LAST_SEARCHED_CITY, -1).putString(LAST_SEARCHED_STREET,
-				"").putString(LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$ //$NON-NLS-2$
-		if (prefs.contains(LAST_SEARCHED_INTERSECTED_STREET)) {
-			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
-		}
-		return edit.commit();
-	}
-	
-	public static String getLastSearchedPostcode(SharedPreferences prefs){
-		return prefs.getString(lAST_SEARCHED_POSTCODE, null);	
-	}
-	
-	public static boolean setLastSearchedPostcode(Context ctx, String postcode){
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		Editor edit = prefs.edit().putLong(LAST_SEARCHED_CITY, -1).putString(LAST_SEARCHED_STREET, "").putString( //$NON-NLS-1$
-				LAST_SEARCHED_BUILDING, "").putString(lAST_SEARCHED_POSTCODE, postcode); //$NON-NLS-1$
-		if(prefs.contains(LAST_SEARCHED_INTERSECTED_STREET)){
-			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
-		}
-		return edit.commit();
-	}
-
-	public static Long getLastSearchedCity(SharedPreferences prefs) {
-		return prefs.getLong(LAST_SEARCHED_CITY, -1);
-	}
-
-	public static boolean setLastSearchedCity(Context ctx, Long cityId) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		Editor edit = prefs.edit().putLong(LAST_SEARCHED_CITY, cityId).putString(LAST_SEARCHED_STREET, "").putString( //$NON-NLS-1$
-				LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$
-		edit.remove(lAST_SEARCHED_POSTCODE);
-		if(prefs.contains(LAST_SEARCHED_INTERSECTED_STREET)){
-			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
-		}
-		return edit.commit();
-	}
-
-	public static String getLastSearchedStreet(SharedPreferences prefs) {
-		return prefs.getString(LAST_SEARCHED_STREET, ""); //$NON-NLS-1$
-	}
-
-	public static boolean setLastSearchedStreet(Context ctx, String street) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		Editor edit = prefs.edit().putString(LAST_SEARCHED_STREET, street).putString(LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$
-		if (prefs.contains(LAST_SEARCHED_INTERSECTED_STREET)) {
-			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
-		}
-		return edit.commit();
-	}
-
-	public static String getLastSearchedBuilding(SharedPreferences prefs) {
-		return prefs.getString(LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$
-	}
-
-	public static boolean setLastSearchedBuilding(Context ctx, String building) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putString(LAST_SEARCHED_BUILDING, building).remove(LAST_SEARCHED_INTERSECTED_STREET).commit();
-	}
-
-	public static String getLastSearchedIntersectedStreet(SharedPreferences prefs) {
-		if (!prefs.contains(LAST_SEARCHED_INTERSECTED_STREET)) {
-			return null;
-		}
-		return prefs.getString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
-	}
-
-	public static boolean setLastSearchedIntersectedStreet(Context ctx, String street) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putString(LAST_SEARCHED_INTERSECTED_STREET, street).commit();
-	}
-
-	public static boolean removeLastSearchedIntersectedStreet(Context ctx) {
-		SharedPreferences prefs = getPrefs(ctx);
-		return prefs.edit().remove(LAST_SEARCHED_INTERSECTED_STREET).commit();
-	}
-
-	public static final String SELECTED_POI_FILTER_FOR_MAP = "selected_poi_filter_for_map"; //$NON-NLS-1$
-
-	public static boolean setPoiFilterForMap(Context ctx, String filterId) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putString(SELECTED_POI_FILTER_FOR_MAP, filterId).commit();
-	}
-
-	public static PoiFilter getPoiFilterForMap(Context ctx, OsmandApplication application) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		String filterId = prefs.getString(SELECTED_POI_FILTER_FOR_MAP, null);
-		PoiFilter filter = application.getPoiFilters().getFilterById(filterId);
-		if (filter != null) {
-			return filter;
-		}
-		return new PoiFilter(null, application);
-	}
-	
-
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String VOICE_PROVIDER = "voice_provider"; //$NON-NLS-1$
-	
-	public static String getVoiceProvider(SharedPreferences prefs){
-		return prefs.getString(VOICE_PROVIDER, null);
-	}
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String RENDERER = "renderer"; //$NON-NLS-1$
-	
-	public static String getVectorRenderer(SharedPreferences prefs){
-		return prefs.getString(RENDERER, null);
-	}
-	
-	public static final String VOICE_MUTE = "voice_mute"; //$NON-NLS-1$
-	public static final boolean VOICE_MUTE_DEF = false;
-	
-	public static boolean isVoiceMute(SharedPreferences prefs){
-		return prefs.getBoolean(VOICE_MUTE, VOICE_MUTE_DEF);
-	}
-	
-	public static boolean setVoiceMute(Context ctx, boolean mute){
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putBoolean(VOICE_MUTE, mute).commit();
-	}
-	
-	// for background service
-	public static final String MAP_ACTIVITY_ENABLED = "map_activity_enabled"; //$NON-NLS-1$
-	public static final boolean MAP_ACTIVITY_ENABLED_DEF = false; 
-	public static boolean getMapActivityEnabled(SharedPreferences prefs) {
-		return prefs.getBoolean(MAP_ACTIVITY_ENABLED, MAP_ACTIVITY_ENABLED_DEF);
-	}
-	
-	public static boolean setMapActivityEnabled(Context ctx, boolean en) {
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putBoolean(MAP_ACTIVITY_ENABLED, en).commit();
-	}
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String SERVICE_OFF_ENABLED = "service_off_enabled"; //$NON-NLS-1$
-	
-	
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String SERVICE_OFF_PROVIDER = "service_off_provider"; //$NON-NLS-1$
-	public static String getServiceOffProvider(SharedPreferences prefs) {
-		return prefs.getString(SERVICE_OFF_PROVIDER, LocationManager.GPS_PROVIDER);
-	}
-	
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String SERVICE_OFF_INTERVAL = "service_off_interval"; //$NON-NLS-1$
-	public static final int SERVICE_OFF_INTERVAL_DEF = 5 * 60 * 1000;
-	public static int getServiceOffInterval(SharedPreferences prefs) {
-		return prefs.getInt(SERVICE_OFF_INTERVAL, SERVICE_OFF_INTERVAL_DEF);
-	}
-	
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public static final String SERVICE_OFF_WAIT_INTERVAL = "service_off_wait_interval"; //$NON-NLS-1$
-	public static final int SERVICE_OFF_WAIT_INTERVAL_DEF = 90 * 1000;
-	public static int getServiceOffWaitInterval(SharedPreferences prefs) {
-		return prefs.getInt(SERVICE_OFF_WAIT_INTERVAL, SERVICE_OFF_WAIT_INTERVAL_DEF);
-	}
-	
-	
-	public static final String FOLLOW_TO_THE_ROUTE = "follow_to_route"; //$NON-NLS-1$
-	
-	public static boolean isFollowingByRoute(SharedPreferences prefs){
-		return prefs.getBoolean(FOLLOW_TO_THE_ROUTE, false);
-	}
-	
-	public static boolean setFollowingByRoute(Context ctx, boolean val){
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putBoolean(FOLLOW_TO_THE_ROUTE, val).commit();
-	}
-	
-	public static final String SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME = "show_arrival_time"; //$NON-NLS-1$
-	
-	public static boolean isShowingArrivalTime(SharedPreferences prefs){
-		return prefs.getBoolean(SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME, true);
-	}
-	
-	public static boolean setShowingArrivalTime(Context ctx, boolean val){
-		SharedPreferences prefs = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-		return prefs.edit().putBoolean(SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME, val).commit();
-	}
-	
-	
 	
 }

@@ -51,7 +51,7 @@ public class MainMenuActivity extends Activity {
 	
 	public void checkPreviousRunsForExceptions(boolean firstTime) {
 		long size = getPreferences(MODE_WORLD_READABLE).getLong(EXCEPTION_FILE_SIZE, 0);
-		final File file = OsmandSettings.extendOsmandPath(getApplicationContext(), OsmandApplication.EXCEPTION_PATH);
+		final File file = OsmandSettings.getOsmandSettings(this).extendOsmandPath(OsmandApplication.EXCEPTION_PATH);
 		if (file.exists() && file.length() > 0) {
 			if (size != file.length() && !firstTime) {
 				String msg = MessageFormat.format(getString(R.string.previous_run_crashed), OsmandApplication.EXCEPTION_PATH);
@@ -87,10 +87,10 @@ public class MainMenuActivity extends Activity {
 				});
 				builder.show();
 			}
-			getPreferences(MODE_WORLD_READABLE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
+			getPreferences(MODE_WORLD_WRITEABLE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
 		} else {
 			if (size > 0) {
-				getPreferences(MODE_WORLD_READABLE).edit().putLong(EXCEPTION_FILE_SIZE, 0).commit();
+				getPreferences(MODE_WORLD_WRITEABLE).edit().putLong(EXCEPTION_FILE_SIZE, 0).commit();
 			}
 		}
 	}
@@ -125,7 +125,7 @@ public class MainMenuActivity extends Activity {
 		String textVersion = Version.APP_VERSION + " " + Version.APP_DESCRIPTION;
 		final TextView textVersionView = (TextView) findViewById(R.id.TextVersion);
 		textVersionView.setText(textVersion);
-		SharedPreferences prefs = OsmandSettings.getPrefs(this);
+		SharedPreferences prefs = getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
 		
 		// only one commit should be with contribution version flag
 		// prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();

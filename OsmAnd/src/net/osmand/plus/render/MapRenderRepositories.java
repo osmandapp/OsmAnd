@@ -39,7 +39,6 @@ import net.osmand.render.OsmandRenderingRulesParser;
 import org.apache.commons.logging.Log;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
 import android.graphics.Bitmap.Config;
@@ -73,12 +72,12 @@ public class MapRenderRepositories {
 	private boolean interrupted = false;
 	private RenderingContext currentRenderingContext;
 	private SearchRequest<BinaryMapDataObject> searchRequest;
-	private SharedPreferences prefs;
+	private OsmandSettings prefs;
 	public MapRenderRepositories(Context context){
 		this.context = context;
 		this.renderer = new OsmandRenderer(context);
 		handler = new Handler(Looper.getMainLooper());
-		prefs = OsmandSettings.getPrefs(context);
+		prefs = OsmandSettings.getOsmandSettings(context);
 	}
 	
 	public Context getContext() {
@@ -306,11 +305,12 @@ public class MapRenderRepositories {
 			currentRenderingContext = null;
 		}
 		try {
-			// find selected rendering type 
-			Boolean renderDay = ((OsmandApplication)context.getApplicationContext()).getDaynightHelper().getDayNightRenderer();
-			BaseOsmandRender renderingType = RendererRegistry.getRegistry().getCurrentSelectedRenderer();
+			// find selected rendering type
+			OsmandApplication app = ((OsmandApplication)context.getApplicationContext());
+			Boolean renderDay = app.getDaynightHelper().getDayNightRenderer();
+			BaseOsmandRender renderingType = app.getRendererRegistry().getCurrentSelectedRenderer();
 			if(renderDay != null && renderingType != null && renderDay.booleanValue() != renderingType.isDayRender()){
-				renderingType = RendererRegistry.getRegistry().getOppositeRendererForDayNight(renderingType);
+				renderingType = app.getRendererRegistry().getOppositeRendererForDayNight(renderingType);
 			}
 			
 			// prevent editing
@@ -355,7 +355,7 @@ public class MapRenderRepositories {
 			
 			Bitmap bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.RGB_565);
 			
-			boolean stepByStep = OsmandSettings.isUsingStepByStepRendering(prefs);
+			boolean stepByStep = prefs.USE_STEP_BY_STEP_RENDERING.get();
 			// 1. generate image step by step
 			if (stepByStep) {
 				this.bmp = bmp;
@@ -365,7 +365,7 @@ public class MapRenderRepositories {
 			
 			
 			renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, 
-					OsmandSettings.usingEnglishNames(prefs), renderingType, stepByStep ? notifyList : null);
+					prefs.USE_ENGLISH_NAMES.get(), renderingType, stepByStep ? notifyList : null);
 			if (checkWhetherInterrupted()) {
 				currentRenderingContext = null;
 				return;
@@ -378,7 +378,7 @@ public class MapRenderRepositories {
 				this.bmp = bmp;
 				this.bmpLocation = tileRect;
 			}
-			if(OsmandSettings.isDebugRendering(context)){
+			if(prefs.DEBUG_RENDERING_INFO.get()){
 				final String msg = "Search done in "+ searchTime+" ms\nRendering done in "+ renderingTime+ " ms";    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 				handler.post(new Runnable(){
 					@Override

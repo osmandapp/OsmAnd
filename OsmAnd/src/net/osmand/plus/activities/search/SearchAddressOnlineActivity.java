@@ -65,7 +65,7 @@ public class SearchAddressOnlineActivity extends ListActivity {
 				searchPlaces(((EditText) findViewById(R.id.SearchText)).getText().toString());
 			}
 		});
-		location = OsmandSettings.getLastKnownMapLocation(OsmandSettings.getPrefs(this));
+		location = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
 	}
 
 	protected void searchPlaces(final String search) {
@@ -158,7 +158,7 @@ public class SearchAddressOnlineActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		Place item = ((PlacesAdapter) getListAdapter()).getItem(position);
-		OsmandSettings.setMapLocationToShow(this, item.lat, item.lon, getString(R.string.address)+ " : " + item.displayName); //$NON-NLS-1$
+		OsmandSettings.getOsmandSettings(this).setMapLocationToShow(item.lat, item.lon, getString(R.string.address)+ " : " + item.displayName); //$NON-NLS-1$
 		startActivity(new Intent(this, MapActivity.class));
 	}
 	

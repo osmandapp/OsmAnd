@@ -144,7 +144,7 @@ public class TransportInfoLayer implements OsmandMapLayer {
 						int x = view.getRotatedMapXForPoint(location.getLatitude(), location.getLongitude());
 						int y = view.getRotatedMapYForPoint(location.getLatitude(), location.getLongitude());
 						if (Math.abs(x - ex) < getRadius() * 3 /2 && Math.abs(y - ey) < getRadius() * 3 /2) {
-							Toast.makeText(view.getContext(), st.getName(OsmandSettings.usingEnglishNames(view.getSettings())) + " : " + //$NON-NLS-1$
+							Toast.makeText(view.getContext(), st.getName(view.getSettings().USE_ENGLISH_NAMES.get()) + " : " + //$NON-NLS-1$
 									route.getType() + " " + route.getRef() //$NON-NLS-1$
 							, Toast.LENGTH_LONG).show();
 							return true;

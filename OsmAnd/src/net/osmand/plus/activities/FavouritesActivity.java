@@ -99,7 +99,7 @@ public class FavouritesActivity extends ListActivity {
 			list.addAll(helper.getFavoritePointsFromGPXFile());
 		}
 		favouritesAdapter = new FavouritesAdapter(list);
-		final LatLon mapLocation = OsmandSettings.getLastKnownMapLocation(OsmandSettings.getPrefs(this));
+		final LatLon mapLocation = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
 		if(mapLocation != null){
 			favouritesAdapter.sort(new Comparator<FavouritePoint>(){
 
@@ -122,8 +122,8 @@ public class FavouritesActivity extends ListActivity {
 
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		FavouritePoint point = favouritesAdapter.getItem(position);
-		OsmandSettings.setShowingFavorites(this, true);
-		OsmandSettings.setMapLocationToShow(this, point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName()); //$NON-NLS-1$
+		OsmandSettings.getOsmandSettings(this).SHOW_FAVORITES.set( true);
+		OsmandSettings.getOsmandSettings(this).setMapLocationToShow(point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName()); //$NON-NLS-1$
 		Intent newIntent = new Intent(FavouritesActivity.this, MapActivity.class);
 		startActivity(newIntent);
 	}
@@ -134,7 +134,7 @@ public class FavouritesActivity extends ListActivity {
 		final FavouritePoint point = (FavouritePoint) favouritesAdapter.getItem(menuInfo.position);
 		if (aItem.getItemId() == NAVIGATE_TO) {
 			//OsmandSettings.setMapLocationToShow(this, point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName()); //$NON-NLS-1$
-			OsmandSettings.setPointToNavigate(this, point.getLatitude(), point.getLongitude());
+			OsmandSettings.getOsmandSettings(this).setPointToNavigate(point.getLatitude(), point.getLongitude());
 			Intent newIntent = new Intent(FavouritesActivity.this, MapActivity.class);
 			startActivity(newIntent);
 		} else if (aItem.getItemId() == EDIT_ITEM) {
@@ -194,7 +194,7 @@ public class FavouritesActivity extends ListActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if(item.getItemId() == EXPORT_ID){
-			File appDir = OsmandSettings.extendOsmandPath(getApplicationContext(), ResourceManager.APP_DIR);
+			File appDir = OsmandSettings.getOsmandSettings(this).extendOsmandPath(ResourceManager.APP_DIR);
 			if(favouritesAdapter.isEmpty()){
 				Toast.makeText(this, R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
 			} else if(!appDir.exists()){
@@ -219,7 +219,7 @@ public class FavouritesActivity extends ListActivity {
 				}
 			}
 		} else if(item.getItemId() == IMPORT_ID){
-			File appDir = OsmandSettings.extendOsmandPath(getApplicationContext(), ResourceManager.APP_DIR);
+			File appDir = OsmandSettings.getOsmandSettings(this).extendOsmandPath(ResourceManager.APP_DIR);
 			File f = new File(appDir, FILE_TO_SAVE);
 			if(!f.exists()){
 				Toast.makeText(this, MessageFormat.format(getString(R.string.fav_file_to_load_not_found), f.getAbsolutePath()), Toast.LENGTH_LONG).show();
@@ -279,7 +279,7 @@ public class FavouritesActivity extends ListActivity {
 			} else {
 				icon.setImageResource(R.drawable.opened_poi);
 			}
-			LatLon lastKnownMapLocation = OsmandSettings.getLastKnownMapLocation(OsmandSettings.getPrefs(FavouritesActivity.this));
+			LatLon lastKnownMapLocation = OsmandSettings.getOsmandSettings(FavouritesActivity.this).getLastKnownMapLocation();
 			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(), 
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
 			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist, FavouritesActivity.this));

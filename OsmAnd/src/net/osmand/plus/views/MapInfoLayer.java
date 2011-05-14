@@ -4,7 +4,6 @@ import net.osmand.Algoritms;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RoutingHelper.RouteDirectionInfo;
@@ -172,7 +171,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		pathTransform.postTranslate(boundsForMiniRoute.left, boundsForMiniRoute.top);
 		
 		
-		showArrivalTime = OsmandSettings.isShowingArrivalTime(view.getSettings());
+		showArrivalTime = view.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME.get();
 	}
 	
 	private void scaleRect(RectF r){
@@ -567,14 +566,14 @@ public class MapInfoLayer implements OsmandMapLayer {
 			}
 			if (boundsForLeftTime.contains(point.x, point.y) && routeLayer.getHelper().isFollowingMode()) {
 				showArrivalTime = !showArrivalTime;
-				OsmandSettings.setShowingArrivalTime(view.getContext(), showArrivalTime);
+				view.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME.set(showArrivalTime);
 				view.refreshMap();
 				return true;
 			}
 		}
 		if(cachedDistString != null && boundsForDist.contains(point.x, point.y)){
 			AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
-			LatLon pointToNavigate = OsmandSettings.getPointToNavigate(view.getSettings());
+			LatLon pointToNavigate = view.getSettings().getPointToNavigate();
 			if(pointToNavigate != null){
 				int fZoom = view.getZoom() < 15 ? 15 : view.getZoom(); 
 				thread.startMoving(view.getLatitude(), view.getLongitude(), pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), 

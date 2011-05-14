@@ -1,6 +1,5 @@
 package net.osmand.plus.activities;
 
-import net.osmand.plus.OsmandSettings.ApplicationMode;
 import net.osmand.plus.activities.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.activities.RoutingHelper.TurnType;
 import net.osmand.plus.voice.CommandPlayer;

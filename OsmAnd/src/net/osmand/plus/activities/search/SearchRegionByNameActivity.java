@@ -35,7 +35,7 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 
 	@Override
 	public void itemSelected(RegionAddressRepository obj) {
-		OsmandSettings.setLastSearchedRegion(this, obj.getName());
+		OsmandSettings.getOsmandSettings(this).setLastSearchedRegion(obj.getName());
 		finish();
 	}
 	

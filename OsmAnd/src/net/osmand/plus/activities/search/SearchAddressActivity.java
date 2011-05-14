@@ -45,6 +45,7 @@ public class SearchAddressActivity extends Activity {
 	private Button searchOnline;
 	
 	private ProgressDialog progressDlg;
+	private OsmandSettings osmandSettings;
 	
 
 	@Override
@@ -60,6 +61,7 @@ public class SearchAddressActivity extends Activity {
 		countryButton = (Button) findViewById(R.id.CountryButton);
 		buildingButton = (Button) findViewById(R.id.BuildingButton);
 		searchOnline = (Button) findViewById(R.id.SearchOnline);
+		osmandSettings = OsmandSettings.getOsmandSettings(SearchAddressActivity.this);
 		attachListeners();
 	}
 	
@@ -96,10 +98,10 @@ public class SearchAddressActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				if(radioBuilding){
-					OsmandSettings.removeLastSearchedIntersectedStreet(SearchAddressActivity.this);
+					osmandSettings.removeLastSearchedIntersectedStreet();
 					startActivity(new Intent(SearchAddressActivity.this, SearchBuildingByNameActivity.class));
 				} else {
-					OsmandSettings.setLastSearchedIntersectedStreet(SearchAddressActivity.this, ""); //$NON-NLS-1$
+					osmandSettings.setLastSearchedIntersectedStreet(""); //$NON-NLS-1$
 					startActivity(new Intent(SearchAddressActivity.this, SearchStreet2ByNameActivity.class));
 				}
 			}
@@ -175,7 +177,7 @@ public class SearchAddressActivity extends Activity {
 		LatLon l = null;
 		String historyName = null;
 		int zoom = 12;
-		boolean en = OsmandSettings.usingEnglishNames(OsmandSettings.getPrefs(this));
+		boolean en = osmandSettings.USE_ENGLISH_NAMES.get();
 		if (street2 != null && street != null) {
 			l = region.findStreetIntersection(street, street2);
 			if(l != null) {
@@ -201,9 +203,9 @@ public class SearchAddressActivity extends Activity {
 		}
 		if (l != null) {
 			if(navigateTo){
-				OsmandSettings.setPointToNavigate(SearchAddressActivity.this, l.getLatitude(), l.getLongitude());
+				osmandSettings.setPointToNavigate(l.getLatitude(), l.getLongitude());
 			} else {
-				OsmandSettings.setMapLocationToShow(SearchAddressActivity.this, l.getLatitude(), l.getLongitude(), zoom, historyName);
+				osmandSettings.setMapLocationToShow(l.getLatitude(), l.getLongitude(), zoom, historyName);
 			}
 			
 			startActivity(new Intent(SearchAddressActivity.this, MapActivity.class));
@@ -280,28 +282,27 @@ public class SearchAddressActivity extends Activity {
 	}
 	
 	public void loadData(){
-		SharedPreferences prefs = OsmandSettings.getPrefs(this);
 		if (region != null) {
-			if(region.useEnglishNames() != OsmandSettings.usingEnglishNames(prefs)){
-				region.setUseEnglishNames(OsmandSettings.usingEnglishNames(prefs));
+			if(region.useEnglishNames() != osmandSettings.USE_ENGLISH_NAMES.get()){
+				region.setUseEnglishNames(osmandSettings.USE_ENGLISH_NAMES.get());
 			}
-			String postcodeStr = OsmandSettings.getLastSearchedPostcode(prefs);
+			String postcodeStr = osmandSettings.getLastSearchedPostcode();
 			if(postcodeStr != null){
 				postcode = region.getPostcode(postcodeStr);
 			} else {
-				city = region.getCityById(OsmandSettings.getLastSearchedCity(prefs));
+				city = region.getCityById(osmandSettings.getLastSearchedCity());
 			}
 			
 			if (postcode != null || city != null) {
 				MapObject o = postcode == null ? city : postcode;
-				street = region.getStreetByName(o, OsmandSettings.getLastSearchedStreet(prefs));
+				street = region.getStreetByName(o, osmandSettings.getLastSearchedStreet());
 				if (street != null) {
-					String str = OsmandSettings.getLastSearchedIntersectedStreet(prefs);
+					String str = osmandSettings.getLastSearchedIntersectedStreet();
 					radioBuilding = str == null;
 					if(str != null){
 						street2 = region.getStreetByName(o, str);
 					} else {
-						building = region.getBuildingByName(street, OsmandSettings.getLastSearchedBuilding(prefs));
+						building = region.getBuildingByName(street, osmandSettings.getLastSearchedBuilding());
 					}
 				}
 			}
@@ -334,16 +335,15 @@ public class SearchAddressActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		SharedPreferences prefs = OsmandSettings.getPrefs(this);
 		region = null;
-		String lastSearchedRegion = OsmandSettings.getLastSearchedRegion(prefs);
+		String lastSearchedRegion = osmandSettings.getLastSearchedRegion();
 		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(lastSearchedRegion);
 		String progressMsg = null;
 		// try to determine whether progress dialog & new thread needed
 
 		if (region != null) {
-			Long cityId = OsmandSettings.getLastSearchedCity(prefs);
-			String postcode = OsmandSettings.getLastSearchedPostcode(prefs);
+			Long cityId = osmandSettings.getLastSearchedCity();
+			String postcode = osmandSettings.getLastSearchedPostcode();
 			if (!region.areCitiesPreloaded()) {
 				progressMsg = getString(R.string.loading_cities);
 			} else if (postcode != null && !region.arePostcodesPreloaded()) {
@@ -352,7 +352,7 @@ public class SearchAddressActivity extends Activity {
 				progressMsg = getString(R.string.loading_streets_buildings);
 			} else if (postcode != null && region.getPostcode(postcode) != null && region.getPostcode(postcode).isEmptyWithStreets()) {
 				progressMsg = getString(R.string.loading_streets_buildings);
-			} else if (OsmandSettings.usingEnglishNames(prefs) != region.useEnglishNames()) {
+			} else if (osmandSettings.USE_ENGLISH_NAMES.get() != region.useEnglishNames()) {
 				progressMsg = getString(R.string.converting_names);
 			}
 		}
