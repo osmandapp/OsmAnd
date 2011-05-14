@@ -1,9 +1,7 @@
 package net.osmand.plus.activities;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -11,15 +9,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import net.osmand.map.TileSourceManager;
-import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
-import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.OsmandSettings.DayNightMode;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
@@ -35,11 +29,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
-import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
-import android.content.res.Resources;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -55,31 +46,27 @@ import android.widget.Toast;
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
 	private final static String VECTOR_MAP = "#VECTOR_MAP"; //$NON-NLS-1$
 	
-	private EditTextPreference userPassword;
-	private EditTextPreference userName;
-	private EditTextPreference applicationDir;
 	
 	private Preference saveCurrentTrack;
 	private Preference reloadIndexes;
 	private Preference downloadIndexes;
 
 	private ListPreference applicationMode;
-	private ListPreference saveTrackInterval;
+	private EditTextPreference applicationDir;
 	private ListPreference tileSourcePreference;
 	private ListPreference rendererPreference;
-	private ListPreference routeServiceInterval;
-	private ListPreference routeServiceWaitInterval;
 	
 	private CheckBoxPreference routeServiceEnabled;
+	private BroadcastReceiver broadcastReceiver;
 	
 	private ProgressDialog progressDlg;
 	
-	private BroadcastReceiver broadcastReceiver;
 	private OsmandSettings osmandSettings;
 	
 	private Map<String, Preference> screenPreferences = new LinkedHashMap<String, Preference>();
 	private Map<String, OsmandPreference<Boolean>> booleanPreferences = new LinkedHashMap<String, OsmandPreference<Boolean>>();
 	private Map<String, OsmandPreference<?>> listPreferences = new LinkedHashMap<String, OsmandPreference<?>>();
+	private Map<String, OsmandPreference<String>> editTextPreferences = new LinkedHashMap<String, OsmandPreference<String>>();
 	private Map<String, Map<String, ?>> listPrefValues = new LinkedHashMap<String, Map<String, ?>>();
 	
 	
@@ -102,6 +89,29 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		for(int i=0; i<names.length; i++){
 			vals.put(names[i], values[i]);
 		}
+	}
+	
+	private void registerEditTextPreference(OsmandPreference<String> b, PreferenceScreen screen){
+		EditTextPreference p = (EditTextPreference) screen.findPreference(b.getId());
+		p.setOnPreferenceChangeListener(this);
+		screenPreferences.put(b.getId(), p);
+		editTextPreferences.put(b.getId(), b);
+	}
+	
+	private  void registerTimeListPreference(OsmandPreference<Integer> b, PreferenceScreen screen, int[] seconds, int[] minutes, int coeff){
+		int minutesLength = minutes == null? 0 : minutes.length;
+    	int secondsLength = seconds == null? 0 : seconds.length;
+    	Integer[] ints = new Integer[secondsLength + minutesLength];
+		String[] intDescriptions = new String[ints.length];
+		for (int i = 0; i < secondsLength; i++) {
+			ints[i] = seconds[i]*coeff;
+			intDescriptions[i] = ints[i] + " " + getString(R.string.int_seconds); //$NON-NLS-1$
+		}
+		for (int i = 0; i < minutesLength; i++) {
+			ints[secondsLength + i] = (minutes[i] * 60)*coeff;
+			intDescriptions[secondsLength + i] = minutes[i] + " " + getString(R.string.int_min); //$NON-NLS-1$
+		}
+		registerListPreference(b, screen, intDescriptions, ints);
 	}
 	
 	private Set<String> getVoiceFiles(){
@@ -149,10 +159,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		routeServiceEnabled =(CheckBoxPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_ENABLED);
 		routeServiceEnabled.setOnPreferenceChangeListener(this);
 		
-		userName = (EditTextPreference) screen.findPreference(osmandSettings.USER_NAME.getId());
-		userName.setOnPreferenceChangeListener(this);
-		userPassword = (EditTextPreference) screen.findPreference(osmandSettings.USER_PASSWORD.getId());
-		userPassword.setOnPreferenceChangeListener(this);
+		registerEditTextPreference(osmandSettings.USER_NAME, screen);
+		registerEditTextPreference(osmandSettings.USER_PASSWORD, screen);
+		
 		applicationDir = (EditTextPreference) screen.findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
 		applicationDir.setOnPreferenceChangeListener(this);
 		
@@ -223,21 +232,16 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		entrieValues = new String[]{LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER};
 		registerListPreference(osmandSettings.SERVICE_OFF_PROVIDER, screen, entries, entries);
 		
-		saveTrackInterval =(ListPreference) screen.findPreference(osmandSettings.SAVE_TRACK_INTERVAL.getId());
-		saveTrackInterval.setOnPreferenceChangeListener(this);
-		routeServiceInterval =(ListPreference) screen.findPreference(osmandSettings.SERVICE_OFF_INTERVAL.getId());
-		routeServiceInterval.setOnPreferenceChangeListener(this);
-		routeServiceWaitInterval =(ListPreference) screen.findPreference(osmandSettings.SERVICE_OFF_WAIT_INTERVAL.getId());
-		routeServiceWaitInterval.setOnPreferenceChangeListener(this);
-		
+		registerTimeListPreference(osmandSettings.SAVE_TRACK_INTERVAL, screen, new int[]{1, 2, 3, 5, 15, 20, 30}, new int[]{1, 2, 3, 5}, 1);
+		registerTimeListPreference(osmandSettings.SERVICE_OFF_INTERVAL, screen, 
+				new int[]{0, 30, 45, 60}, new int[]{2, 3, 5, 8, 10, 15, 20, 30, 40, 50, 70, 90}, 1000);
+		registerTimeListPreference(osmandSettings.SERVICE_OFF_WAIT_INTERVAL, screen, 
+				new int[]{15, 30, 45, 60, 90}, new int[]{2, 3, 5, 10}, 1000);
 		
 		applicationMode =(ListPreference) screen.findPreference(OsmandSettings.APPLICATION_MODE);
 		applicationMode.setOnPreferenceChangeListener(this);
 		tileSourcePreference = (ListPreference) screen.findPreference(OsmandSettings.MAP_TILE_SOURCES);
 		tileSourcePreference.setOnPreferenceChangeListener(this);
-		
-		
-		
 		
 		rendererPreference =(ListPreference) screen.findPreference(osmandSettings.RENDERER.getId());
 		rendererPreference.setOnPreferenceChangeListener(this);
@@ -273,24 +277,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     }
     
     
-    private void fillTime(ListPreference component, int[] seconds, int[] minutes, int currentSeconds){
-    	int minutesLength = minutes == null? 0 : minutes.length;
-    	int secondsLength = seconds == null? 0 : seconds.length;
-    	
-    	
-    	String[] ints = new String[secondsLength + minutesLength];
-		String[] intDescriptions = new String[ints.length];
-		for (int i = 0; i < secondsLength; i++) {
-			ints[i] = seconds[i] + "";
-			intDescriptions[i] = ints[i] + " " + getString(R.string.int_seconds); //$NON-NLS-1$
-		}
-		for (int i = 0; i < minutesLength; i++) {
-			ints[secondsLength + i] = (minutes[i] * 60) + "";
-			intDescriptions[secondsLength + i] = minutes[i] + " " + getString(R.string.int_min); //$NON-NLS-1$
-		}
-		fill(component, intDescriptions, ints, currentSeconds+"");
-    }
-    
     public void updateAllSettings(){
     	for(OsmandPreference<Boolean> b : booleanPreferences.values()){
     		CheckBoxPreference pref = (CheckBoxPreference) screenPreferences.get(b.getId());
@@ -314,24 +300,14 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			listPref.setValue(p.get() + "");
     	}
     	
+    	for(OsmandPreference<String> s : editTextPreferences.values()){
+    		EditTextPreference pref = (EditTextPreference) screenPreferences.get(s.getId());
+    		pref.setText(s.get());
+    	}
     	
-		userName.setText(OsmandSettings.getUserName(prefs));
-		userPassword.setText(OsmandSettings.getUserPassword(prefs));
-		applicationDir.setText(OsmandSettings.getExternalStorageDirectory(prefs).getAbsolutePath());
-		
-		Resources resources = this.getResources();
-		
-		fillTime(saveTrackInterval, new int[]{1, 2, 3, 5, 15, 20, 30}, new int[]{1, 2, 3, 5}, OsmandSettings.getSavingTrackInterval(prefs)); //$NON-NLS-1$
-		
-		fillTime(routeServiceInterval, new int[]{0, 30, 45, 60}, new int[]{2, 3, 5, 8, 10, 15, 20, 30, 40, 50, 70, 90}, OsmandSettings.getServiceOffInterval(prefs)/1000); //$NON-NLS-1$
-		
-		fillTime(routeServiceWaitInterval, new int[]{15, 30, 45, 60, 90}, new int[]{2, 3, 5, 10}, OsmandSettings.getServiceOffWaitInterval(prefs)/1000);
-		
-		
+		applicationDir.setText(osmandSettings.getExternalStorageDirectory().getAbsolutePath());
 		
 		routeServiceEnabled.setChecked(getMyApplication().getNavigationService() != null);
-
-		
 		
 		ApplicationMode[] presets = ApplicationMode.values(); 
 		String[] names = new String[presets.length];
@@ -340,14 +316,14 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			names[i] = ApplicationMode.toHumanString(presets[i], this);
 			values[i] = presets[i].name();
 		}
-		fill(applicationMode, names, values, OsmandSettings.getApplicationMode(prefs).name());
+		fill(applicationMode, names, values, osmandSettings.getApplicationMode().name());
 
 		
 		
 		
-		String vectorRenderer = OsmandSettings.getVectorRenderer(prefs);
+		String vectorRenderer = osmandSettings.RENDERER.get();
 		Collection<String> rendererNames = RendererRegistry.getRegistry().getRendererNames();
-		entries = (String[]) rendererNames.toArray(new String[rendererNames.size()]);
+		String[] entries = (String[]) rendererNames.toArray(new String[rendererNames.size()]);
 		rendererPreference.setEntries(entries);
 		rendererPreference.setEntryValues(entries);
 		if(rendererNames.contains(vectorRenderer)){
@@ -358,7 +334,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		
 		
 
-		Map<String, String> entriesMap = getTileSourceEntries(this);
+		Map<String, String> entriesMap = osmandSettings.getTileSourceEntries();
 		entries = new String[entriesMap.size() + 1];
 		values = new String[entriesMap.size() + 1];
 		values[0] = VECTOR_MAP;
@@ -369,11 +345,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			values[ki] = es.getKey();
 			ki++;
 		}
-		String value = OsmandSettings.isUsingMapVectorData(prefs)? VECTOR_MAP : OsmandSettings.getMapTileSourceName(prefs);
+		String value = osmandSettings.isUsingMapVectorData()? VECTOR_MAP : osmandSettings.getMapTileSourceName();
 		fill(tileSourcePreference, entries, values, value);
 
-		String mapName = " " + (OsmandSettings.isUsingMapVectorData(prefs) ? getString(R.string.vector_data) : //$NON-NLS-1$
-				OsmandSettings.getMapTileSourceName(prefs));
+		String mapName = " " + (osmandSettings.isUsingMapVectorData() ? getString(R.string.vector_data) : //$NON-NLS-1$
+				osmandSettings.getMapTileSourceName());
 		String summary = tileSourcePreference.getSummary().toString();
 		if (summary.lastIndexOf(':') != -1) {
 			summary = summary.substring(0, summary.lastIndexOf(':') + 1);
@@ -389,67 +365,25 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		component.setValue(selected);
 	}
     
-    public static Map<String, String> getTileSourceEntries(Context ctx){
-		Map<String, String> map = new LinkedHashMap<String, String>();
-		File dir = OsmandSettings.extendOsmandPath(ctx, ResourceManager.TILES_PATH);
-		if (dir != null && dir.canRead()) {
-			File[] files = dir.listFiles();
-			Arrays.sort(files, new Comparator<File>(){
-				@Override
-				public int compare(File object1, File object2) {
-					if(object1.lastModified() > object2.lastModified()){
-						return -1;
-					} else if(object1.lastModified() == object2.lastModified()){
-						return 0;
-					}
-					return 1;
-				}
-				
-			});
-			if (files != null) {
-				for (File f : files) {
-					if (f.getName().endsWith(SQLiteTileSource.EXT)) {
-						String n = f.getName();
-						map.put(f.getName(), n.substring(0, n.lastIndexOf('.')));
-					} else if (f.isDirectory() && !f.getName().equals(ResourceManager.TEMP_SOURCE_TO_LOAD)) {
-						map.put(f.getName(), f.getName());
-					}
-				}
-			}
-		}
-		for(TileSourceTemplate l : TileSourceManager.getKnownSourceTemplates()){
-			map.put(l.getName(), l.getName());
-		}
-		return map;
-		
-    }
     
-    private void editBoolean(String id, boolean value){
-    	OsmandSettings.getWriteableEditor(this).putBoolean(id, value).commit();
-    }
-    
-    private void editString(String id, String value){
-    	OsmandSettings.getWriteableEditor(this).putString(id, value).commit();
-    }
-    
-    private void editInt(String id, int value){
-    	OsmandSettings.getWriteableEditor(this).putInt(id, value).commit();
-    }
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		// handle boolean prefences
 		OsmandPreference<Boolean> boolPref = booleanPreferences.get(preference.getKey());
 		OsmandPreference<Object> listPref = (OsmandPreference<Object>) listPreferences.get(preference.getKey());
+		OsmandPreference<String> editPref = editTextPreferences.get(preference.getKey());
 		if(boolPref != null){
 			boolPref.set((Boolean)newValue);
+		} else if (editPref != null) {
+			editPref.set((String) newValue);
 		} else if (listPref != null) {
 			CharSequence entry = ((ListPreference) preference).getEntry();
 			Map<String, ?> map = listPrefValues.get(preference.getKey());
 			Object obj = map.get(entry);
 			listPref.set(obj);
 			
+			// Specific actions after list preference changed
 			if(listPref.getId().equals(osmandSettings.DAYNIGHT_MODE.getId())){
 				getMyApplication().getDaynightHelper().setDayNightMode(osmandSettings.DAYNIGHT_MODE.get());
 			} else if(listPref.getId().equals(osmandSettings.VOICE_PROVIDER.getId())){
@@ -462,20 +396,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				startActivity(intent);
 			}
 		} else if(preference == applicationMode){
-			boolean changed = ApplicationMode.setAppMode(ApplicationMode.valueOf(newValue.toString()), getMyApplication());
+			boolean changed = osmandSettings.setApplicationMode(ApplicationMode.valueOf(newValue.toString()), getMyApplication());
 			if(changed){
 				updateAllSettings();
 			}
-		} else if(preference == saveTrackInterval){
-			editInt(OsmandSettings.SAVE_TRACK_INTERVAL, Integer.parseInt(newValue.toString()));
-		} else if (preference == routeServiceInterval) {
-			editInt(OsmandSettings.SERVICE_OFF_INTERVAL, Integer.parseInt((String) newValue) * 1000);
-		} else if (preference == routeServiceWaitInterval) {
-			editInt(OsmandSettings.SERVICE_OFF_WAIT_INTERVAL, Integer.parseInt((String) newValue) * 1000);
-		} else if(preference == userPassword){
-			editString(OsmandSettings.USER_PASSWORD, (String) newValue);
-		} else if(preference == userName){
-			editString(OsmandSettings.USER_NAME, (String) newValue);
 		} else if(preference == applicationDir){
 			warnAboutChangingStorage((String) newValue);
 			return false;
@@ -497,24 +421,23 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				Toast.makeText(this, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 			} else {
 				RendererRegistry.getRegistry().setCurrentSelectedRender(loaded);
-				editString(OsmandSettings.RENDERER, (String) newValue);
+				osmandSettings.RENDERER.set((String) newValue);
 				Toast.makeText(this, R.string.renderer_load_sucess, Toast.LENGTH_SHORT).show();
 				getMyApplication().getResourceManager().getRenderer().clearCache();
 			}
 		} else if (preference == tileSourcePreference) {
 			if(VECTOR_MAP.equals((String) newValue)){
-				editBoolean(OsmandSettings.MAP_VECTOR_DATA, true);
+				osmandSettings.setUsingMapVectorData(true);
 			} else {
-				editString(OsmandSettings.MAP_TILE_SOURCES, (String) newValue);
-				editBoolean(OsmandSettings.MAP_VECTOR_DATA, false);
+				osmandSettings.setUsingMapVectorData(true);
+				osmandSettings.setMapTileSource((String) newValue);
 			}
 			String summary = tileSourcePreference.getSummary().toString();
 			if (summary.lastIndexOf(':') != -1) {
 				summary = summary.substring(0, summary.lastIndexOf(':') + 1);
 			}
-			SharedPreferences prefs = OsmandSettings.getPrefs(this);
-			summary += " " + (OsmandSettings.isUsingMapVectorData(prefs) ? getString(R.string.vector_data) : //$NON-NLS-1$
-				OsmandSettings.getMapTileSourceName(prefs));
+			summary += " " + (osmandSettings.isUsingMapVectorData() ? getString(R.string.vector_data) : //$NON-NLS-1$
+				osmandSettings.getMapTileSourceName());
 			tileSourcePreference.setSummary(summary);
 			
 		}
@@ -536,7 +459,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				//edit the preference
-				editString(OsmandSettings.EXTERNAL_STORAGE_DIR, newDir);
+				osmandSettings.setExternalStorageDirectory(newDir);
 				getMyApplication().getResourceManager().resetStoreDirectory();
 				reloadIndexes();
 				updateApplicationDirSummary();

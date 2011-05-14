@@ -5,7 +5,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import net.osmand.LogUtil;
@@ -17,8 +21,6 @@ import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.activities.RouteProvider.RouteService;
 import net.osmand.plus.activities.search.SearchHistoryHelper;
-import net.osmand.plus.render.BaseOsmandRender;
-import net.osmand.plus.render.RendererRegistry;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -68,124 +70,27 @@ public class OsmandSettings {
 	private long lastTimeInternetConnectionChecked = 0;
 	private boolean internetConnectionAvailable = true;
 	
+	//TODO make all layers profile preferenced????
 	private OsmandSettings(Context ctx){
 		this.ctx = ctx;
 		globalPreferences = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
+		// start from default settings
+		currentMode = ApplicationMode.DEFAULT;
 		updateProfilePreferences();
 	}
 	
 	private void updateProfilePreferences(){
-		currentMode = getApplicationMode(globalPreferences);
 		profilePreferences = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME + "." + currentMode.name().toLowerCase(), Context.MODE_WORLD_READABLE);
 	}
 	
-	public SharedPreferences getPrefs(Context ctx){
-		return ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
-	}
-
-	
-public boolean setAppMode(ApplicationMode preset, OsmandApplication app) {
-		
-		ApplicationMode old = OsmandSettings.getApplicationMode(OsmandSettings.getPrefs(app));
-		if(preset == old){
-			return false;
-		}
-		Editor edit = OsmandSettings.getWriteableEditor(app);
-		edit.putString(OsmandSettings.APPLICATION_MODE, preset.toString());
-		if (preset == ApplicationMode.CAR) {
-			OsmandSettings.setUseInternetToDownloadTiles(true, edit);
-			// edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, _);
-			edit.putBoolean(OsmandSettings.SHOW_TRANSPORT_OVER_MAP, false);
-			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_BEARING);
-			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, false);
-			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, true);
-			edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, false);
-			edit.putBoolean(OsmandSettings.USE_STEP_BY_STEP_RENDERING, true);
-			// edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
-			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, true);
-			edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, 5);
-			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.BOTTOM_CONSTANT);
-			// edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
-
-		} else if (preset == ApplicationMode.BICYCLE) {
-			// edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
-			// edit.putBoolean(OsmandSettings.USE_INTERNET_TO_CALCULATE_ROUTE, _);
-			// edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
-			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_BEARING);
-			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, true);
-			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
-			// edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, _);
-			// edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
-			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, true);
-			edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, 30);
-			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.BOTTOM_CONSTANT);
-			// edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
-
-		} else if (preset == ApplicationMode.PEDESTRIAN) {
-			// edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
-			// edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
-			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_COMPASS);
-			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, true);
-			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
-			edit.putBoolean(OsmandSettings.USE_STEP_BY_STEP_RENDERING, false);
-			// if(useInternetToDownloadTiles.isChecked()){
-			// edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, true);
-			// }
-			// edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
-			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, false);
-			// edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, _);
-			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.CENTER_CONSTANT);
-			// edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
-
-		} else if (preset == ApplicationMode.DEFAULT) {
-			// edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
-			// edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
-			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_NONE);
-			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, false);
-			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
-			edit.putBoolean(OsmandSettings.USE_STEP_BY_STEP_RENDERING, true);
-			// edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, _);
-			// edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
-			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, false);
-			// edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, _);
-			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.CENTER_CONSTANT);
-			// edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
-
-		}
-
-		BaseOsmandRender current = RendererRegistry.getRegistry().getCurrentSelectedRenderer();
-		BaseOsmandRender defaultRender = RendererRegistry.getRegistry().defaultRender();
-		BaseOsmandRender newRenderer;
-		if (preset == ApplicationMode.CAR) {
-			newRenderer = RendererRegistry.getRegistry().carRender();
-		} else if (preset == ApplicationMode.BICYCLE) {
-			newRenderer = RendererRegistry.getRegistry().bicycleRender();
-		} else if (preset == ApplicationMode.PEDESTRIAN) {
-			newRenderer = RendererRegistry.getRegistry().pedestrianRender();
-		} else {
-			newRenderer = defaultRender;
-		}
-		if (newRenderer != current) {
-			RendererRegistry.getRegistry().setCurrentSelectedRender(newRenderer);
-			app.getResourceManager().getRenderer().clearCache();
-		}
-		return edit.commit();
-	}
-
-	protected void switchApplicationMode(){
-		// TODO
-		// change some global settings
-		// for car
-		if(currentMode == ApplicationMode.CAR){
-			SHOW_TRANSPORT_OVER_MAP.set(false);
-			SHOW_OSM_BUGS.set(false);
-		}
-	}
-	// TODO
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String APPLICATION_MODE = "application_mode"; //$NON-NLS-1$
-
+	
 	public ApplicationMode getApplicationMode() {
+		return currentMode;
+	}
+
+	protected ApplicationMode readApplicationMode() {
 		String s = globalPreferences.getString(APPLICATION_MODE, ApplicationMode.DEFAULT.name());
 		try {
 			return ApplicationMode.valueOf(s);
@@ -194,13 +99,115 @@ public boolean setAppMode(ApplicationMode preset, OsmandApplication app) {
 		}
 	}
 
-	// TODO
-	public boolean setApplicationMode(Context ctx, ApplicationMode p) {
-		return globalPreferences.edit().putString(APPLICATION_MODE, p.name()).commit();
+	public boolean setApplicationMode(ApplicationMode p, OsmandApplication app) {
+		ApplicationMode oldMode = currentMode;
+		boolean changed = globalPreferences.edit().putString(APPLICATION_MODE, p.name()).commit();
+		if(changed){
+			currentMode = p;
+			updateProfilePreferences();
+			switchApplicationMode(oldMode);
+		}
+		return changed;
 	}
 	
+	protected void switchApplicationMode(ApplicationMode oldMode){
+		// TODO
+		// change some global settings
+		// for car
+		if(currentMode == ApplicationMode.CAR){
+			SHOW_TRANSPORT_OVER_MAP.set(false);
+			SHOW_OSM_BUGS.set(false);
+		}
+		// TODO clear preferences ???
+		
+		
+//		ApplicationMode old = OsmandSettings.getApplicationMode(OsmandSettings.getPrefs(app));
+//		if(preset == old){
+//			return false;
+//		}
+//		Editor edit = OsmandSettings.getWriteableEditor(app);
+//		edit.putString(OsmandSettings.APPLICATION_MODE, preset.toString());
+//		if (preset == ApplicationMode.CAR) {
+//			OsmandSettings.setUseInternetToDownloadTiles(true, edit);
+//			// edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, _);
+//			edit.putBoolean(OsmandSettings.SHOW_TRANSPORT_OVER_MAP, false);
+//			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_BEARING);
+//			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, false);
+//			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, true);
+//			edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, false);
+//			edit.putBoolean(OsmandSettings.USE_STEP_BY_STEP_RENDERING, true);
+//			// edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
+//			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, true);
+//			edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, 5);
+//			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.BOTTOM_CONSTANT);
+//			// edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
+//
+//		} else if (preset == ApplicationMode.BICYCLE) {
+//			// edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
+//			// edit.putBoolean(OsmandSettings.USE_INTERNET_TO_CALCULATE_ROUTE, _);
+//			// edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
+//			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_BEARING);
+//			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, true);
+//			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
+//			// edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, _);
+//			// edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
+//			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, true);
+//			edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, 30);
+//			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.BOTTOM_CONSTANT);
+//			// edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
+//
+//		} else if (preset == ApplicationMode.PEDESTRIAN) {
+//			// edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
+//			// edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
+//			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_COMPASS);
+//			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, true);
+//			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
+//			edit.putBoolean(OsmandSettings.USE_STEP_BY_STEP_RENDERING, false);
+//			// if(useInternetToDownloadTiles.isChecked()){
+//			// edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, true);
+//			// }
+//			// edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
+//			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, false);
+//			// edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, _);
+//			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.CENTER_CONSTANT);
+//			// edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
+//
+//		} else if (preset == ApplicationMode.DEFAULT) {
+//			// edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
+//			// edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
+//			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_NONE);
+//			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, false);
+//			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
+//			edit.putBoolean(OsmandSettings.USE_STEP_BY_STEP_RENDERING, true);
+//			// edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, _);
+//			// edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
+//			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, false);
+//			// edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, _);
+//			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.CENTER_CONSTANT);
+//			// edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
+//
+//		}
+//
+//		BaseOsmandRender current = RendererRegistry.getRegistry().getCurrentSelectedRenderer();
+//		BaseOsmandRender defaultRender = RendererRegistry.getRegistry().defaultRender();
+//		BaseOsmandRender newRenderer;
+//		if (preset == ApplicationMode.CAR) {
+//			newRenderer = RendererRegistry.getRegistry().carRender();
+//		} else if (preset == ApplicationMode.BICYCLE) {
+//			newRenderer = RendererRegistry.getRegistry().bicycleRender();
+//		} else if (preset == ApplicationMode.PEDESTRIAN) {
+//			newRenderer = RendererRegistry.getRegistry().pedestrianRender();
+//		} else {
+//			newRenderer = defaultRender;
+//		}
+//		if (newRenderer != current) {
+//			RendererRegistry.getRegistry().setCurrentSelectedRender(newRenderer);
+//			app.getResourceManager().getRenderer().clearCache();
+//		}
+//		return edit.commit();
+	}
 	
-	//TODO make all layers profile preferenced????
+
 	// Check internet connection available every 15 seconds
 	public boolean isInternetConnectionAvailable(){
 		long delta = System.currentTimeMillis() - lastTimeInternetConnectionChecked;
@@ -537,20 +544,23 @@ public boolean setAppMode(ApplicationMode preset, OsmandApplication app) {
 	public static final String MAP_VECTOR_DATA = "map_vector_data"; //$NON-NLS-1$
 	public static final String MAP_TILE_SOURCES = "map_tile_sources"; //$NON-NLS-1$
 	
+	// TODO profile preferences ???
 	public boolean isUsingMapVectorData(){
 		return globalPreferences.getBoolean(MAP_VECTOR_DATA, false);
 	}
-
-	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
 	
-	public File getExternalStorageDirectory() {
-		return new File(globalPreferences.getString(EXTERNAL_STORAGE_DIR, Environment.getExternalStorageDirectory().getAbsolutePath()));
+	public boolean setUsingMapVectorData(boolean val){
+		return globalPreferences.edit().putBoolean(MAP_VECTOR_DATA, val).commit();
 	}
 	
-	public File extendOsmandPath(String path) {
-		return new File(getExternalStorageDirectory(), path);
+	public boolean setMapTileSource(String tileSource){
+		return globalPreferences.edit().putString(MAP_TILE_SOURCES, tileSource).commit();
 	}
-
+	
+	public String getMapTileSourceName(){
+		return globalPreferences.getString(MAP_TILE_SOURCES, TileSourceManager.getMapnikSource().getName());
+	}
+	
 	public ITileSource getMapTileSource() {
 		String tileName = globalPreferences.getString(MAP_TILE_SOURCES, null);
 		if (tileName != null) {
@@ -588,14 +598,56 @@ public boolean setAppMode(ApplicationMode preset, OsmandApplication app) {
 		}
 		return TileSourceManager.getMapnikSource();
 	}
-
-	public static String getMapTileSourceName(SharedPreferences prefs) {
-		String tileName = prefs.getString(MAP_TILE_SOURCES, null);
-		if (tileName != null) {
-			return tileName;
+	
+	public Map<String, String> getTileSourceEntries(){
+		Map<String, String> map = new LinkedHashMap<String, String>();
+		File dir = extendOsmandPath(ResourceManager.TILES_PATH);
+		if (dir != null && dir.canRead()) {
+			File[] files = dir.listFiles();
+			Arrays.sort(files, new Comparator<File>(){
+				@Override
+				public int compare(File object1, File object2) {
+					if(object1.lastModified() > object2.lastModified()){
+						return -1;
+					} else if(object1.lastModified() == object2.lastModified()){
+						return 0;
+					}
+					return 1;
+				}
+				
+			});
+			if (files != null) {
+				for (File f : files) {
+					if (f.getName().endsWith(SQLiteTileSource.EXT)) {
+						String n = f.getName();
+						map.put(f.getName(), n.substring(0, n.lastIndexOf('.')));
+					} else if (f.isDirectory() && !f.getName().equals(ResourceManager.TEMP_SOURCE_TO_LOAD)) {
+						map.put(f.getName(), f.getName());
+					}
+				}
+			}
 		}
-		return TileSourceManager.getMapnikSource().getName();
+		for(TileSourceTemplate l : TileSourceManager.getKnownSourceTemplates()){
+			map.put(l.getName(), l.getName());
+		}
+		return map;
+		
+    }
+
+	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
+	
+	public File getExternalStorageDirectory() {
+		return new File(globalPreferences.getString(EXTERNAL_STORAGE_DIR, Environment.getExternalStorageDirectory().getAbsolutePath()));
 	}
+	
+	public boolean setExternalStorageDirectory(String externalStorageDir) {
+		return globalPreferences.edit().putString(EXTERNAL_STORAGE_DIR, externalStorageDir).commit();
+	}
+	
+	public File extendOsmandPath(String path) {
+		return new File(getExternalStorageDirectory(), path);
+	}
+
 
 	// This value is a key for saving last known location shown on the map
 	public static final String LAST_KNOWN_MAP_LAT = "last_known_map_lat"; //$NON-NLS-1$

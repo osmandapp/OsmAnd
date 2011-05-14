@@ -1167,7 +1167,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			public void onClick(DialogInterface dialog, int which) {
 				ApplicationMode mode = getAppMode(buttons);
 				// change global settings
-				boolean changed = settings.setAppMode(mode, (OsmandApplication) getApplication());
+				boolean changed = settings.setApplicationMode(mode, (OsmandApplication) getApplication());
 				if (changed) {
 					updateApplicationModeSettings();	
 					mapView.refreshMap();
@@ -1493,7 +1493,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	}
 	
 	private void selectMapLayer(){
-		Map<String, String> entriesMap = SettingsActivity.getTileSourceEntries(this);
+		Map<String, String> entriesMap = settings.getTileSourceEntries();
 		Builder builder = new AlertDialog.Builder(this);
 		final ArrayList<String> keys = new ArrayList<String>(entriesMap.keySet());
 		String[] items = new String[entriesMap.size() + 1];
@@ -1505,20 +1505,18 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		builder.setItems(items, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Editor edit = OsmandSettings.getWriteableEditor(MapActivity.this);
 				if(which == 0){
 					MapRenderRepositories r = ((OsmandApplication)getApplication()).getResourceManager().getRenderer();
 					if(r.isEmpty()){
 						Toast.makeText(MapActivity.this, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
 						return;
 					} else {
-						edit.putBoolean(OsmandSettings.MAP_VECTOR_DATA, true);
+						settings.setUsingMapVectorData(true);
 					}
 				} else {
-					edit.putBoolean(OsmandSettings.MAP_VECTOR_DATA, false);
-					edit.putString(OsmandSettings.MAP_TILE_SOURCES, keys.get(which - 1));
+					settings.setMapTileSource(keys.get(which - 1));
+					settings.setUsingMapVectorData(false);
 				}
-				edit.commit();
 				updateMapSource();
 			}
 			
