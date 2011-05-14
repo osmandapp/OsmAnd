@@ -63,8 +63,6 @@ import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.hardware.Sensor;
@@ -298,6 +296,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						settings.FOLLOW_TO_THE_ROUTE.set(false);
+						settings.APPLICATION_MODE.set(ApplicationMode.DEFAULT);
+						updateApplicationModeSettings();
 						routingHelper.setFinalLocation(null);
 						mapView.refreshMap();
 					}
