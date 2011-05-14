@@ -21,7 +21,6 @@ import org.xml.sax.SAXException;
 
 public class RendererRegistry {
 
-	private final static RendererRegistry registry = new RendererRegistry();
 	private final static Log log = LogUtil.getLog(RendererRegistry.class);
 	
 	public final static String DEFAULT_RENDER = "default";  //$NON-NLS-1$
@@ -33,9 +32,6 @@ public class RendererRegistry {
 	public final static String CAR_NIGHT_RENDER = CAR_RENDER + NIGHT_SUFFIX; 
 
 	
-	public static RendererRegistry getRegistry() {
-		return registry;
-	}
 	
 	public RendererRegistry(){
 		internalRenderers.put(DEFAULT_RENDER, "default.render.xml"); //$NON-NLS-1$

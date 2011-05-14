@@ -21,6 +21,8 @@ import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.activities.RouteProvider.RouteService;
 import net.osmand.plus.activities.search.SearchHistoryHelper;
+import net.osmand.plus.render.BaseOsmandRender;
+import net.osmand.plus.render.RendererRegistry;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -42,7 +44,7 @@ public class OsmandSettings {
 		if (INSTANCE == null) {
 			synchronized (ctx.getApplicationContext()) {
 				if (INSTANCE == null) {
-					INSTANCE = new OsmandSettings(ctx.getApplicationContext());
+					INSTANCE = new OsmandSettings((OsmandApplication) ctx.getApplicationContext());
 				}
 			}
 		}
@@ -61,8 +63,9 @@ public class OsmandSettings {
 	private static final String SHARED_PREFERENCES_NAME = "net.osmand.settings"; //$NON-NLS-1$
 	
 	/// Settings variables
-	private Context ctx;
+	private OsmandApplication ctx;
 	private SharedPreferences globalPreferences;
+	private SharedPreferences defaultProfilePreferences;
 	private SharedPreferences profilePreferences;
 	private ApplicationMode currentMode;
 	
@@ -71,27 +74,49 @@ public class OsmandSettings {
 	private boolean internetConnectionAvailable = true;
 	
 	//TODO make all layers profile preferenced????
-	private OsmandSettings(Context ctx){
+	private OsmandSettings(OsmandApplication ctx){
 		this.ctx = ctx;
 		globalPreferences = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		// start from default settings
 		currentMode = ApplicationMode.DEFAULT;
-		updateProfilePreferences();
+		defaultProfilePreferences = getProfilePreferences(ApplicationMode.DEFAULT);
+		profilePreferences = defaultProfilePreferences;
 	}
 	
-	private void updateProfilePreferences(){
-		profilePreferences = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME + "." + currentMode.name().toLowerCase(), Context.MODE_WORLD_READABLE);
+	private SharedPreferences getProfilePreferences(ApplicationMode mode){
+		return ctx.getSharedPreferences(SHARED_PREFERENCES_NAME + "." + mode.name().toLowerCase(), Context.MODE_WORLD_READABLE);
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public static final String APPLICATION_MODE = "application_mode"; //$NON-NLS-1$
-	
-	public ApplicationMode getApplicationMode() {
-		return currentMode;
-	}
+	public final OsmandPreference<ApplicationMode> APPLICATION_MODE = new OsmandPreference<ApplicationMode>(){
+		public String getId() {
+			return "application_mode";
+		};
+		
+		@Override
+		public ApplicationMode get() {
+			return currentMode;
+		}
 
+		@Override
+		public boolean set(ApplicationMode val) {
+			ApplicationMode oldMode = currentMode;
+			boolean changed = globalPreferences.edit().putString(getId(), val.name()).commit();
+			if(changed){
+				currentMode = val;
+				profilePreferences = getProfilePreferences(currentMode);
+				switchApplicationMode(oldMode);
+			}
+			return changed;
+		}
+	}; 
+	
+	public ApplicationMode getApplicationMode(){
+		return APPLICATION_MODE.get();
+	}
+	
 	protected ApplicationMode readApplicationMode() {
-		String s = globalPreferences.getString(APPLICATION_MODE, ApplicationMode.DEFAULT.name());
+		String s = globalPreferences.getString(APPLICATION_MODE.getId(), ApplicationMode.DEFAULT.name());
 		try {
 			return ApplicationMode.valueOf(s);
 		} catch (IllegalArgumentException e) {
@@ -99,17 +124,6 @@ public class OsmandSettings {
 		}
 	}
 
-	public boolean setApplicationMode(ApplicationMode p, OsmandApplication app) {
-		ApplicationMode oldMode = currentMode;
-		boolean changed = globalPreferences.edit().putString(APPLICATION_MODE, p.name()).commit();
-		if(changed){
-			currentMode = p;
-			updateProfilePreferences();
-			switchApplicationMode(oldMode);
-		}
-		return changed;
-	}
-	
 	protected void switchApplicationMode(ApplicationMode oldMode){
 		// TODO
 		// change some global settings
@@ -230,33 +244,53 @@ public class OsmandSettings {
 		private final String id;
 		private final boolean global;
 		private T cachedValue;
+		private SharedPreferences cachedPreference;
 		private boolean cache;
+		private Map<ApplicationMode, T> defaultValues;
+		private T defaultValue;
 		
-		public CommonPreference(String id, boolean global){
+		public CommonPreference(String id, boolean global, T defaultValue){
 			this.id = id;
 			this.global = global;
+			this.defaultValue = defaultValue;
 		}
 		
-		public CommonPreference(String id, boolean global, boolean cache){
+		public CommonPreference(String id, boolean global, boolean cache, T defaultValue){
 			this.id = id;
 			this.global = global;
-			this.cache = cache; 
+			this.cache = cache;
+			this.defaultValue = defaultValue; 
 		}
 		
 		protected SharedPreferences getPreferences(){
 			return global ? globalPreferences : profilePreferences;
 		}
 		
-		protected abstract T getValue();
+		protected T getDefaultValue(){
+			if(global){
+				return defaultValue;
+			}
+			if(defaultValues != null && defaultValues.containsKey(currentMode)){
+				return defaultValues.get(currentMode);
+			}
+			if(defaultProfilePreferences.contains(getId())) {
+				return getValue(defaultProfilePreferences, defaultValue);
+			} else {
+				return defaultValue;
+			}
+		}
 		
-		protected abstract boolean setValue(T val);
+		protected abstract T getValue(SharedPreferences prefs, T defaultValue);
+		
+		protected abstract boolean setValue(SharedPreferences prefs, T val);
 
 		@Override
 		public T get() {
-			if(cache && cachedValue != null){
+			if(cache && cachedValue != null && cachedPreference == getPreferences()){
 				return cachedValue;
 			}
-			cachedValue = getValue();
+			cachedPreference = getPreferences();
+			cachedValue = getValue(cachedPreference, getDefaultValue());
 			return cachedValue;
 		}
 
@@ -267,8 +301,10 @@ public class OsmandSettings {
 
 		@Override
 		public boolean set(T obj) {
-			if(setValue(obj)){
+			SharedPreferences prefs = getPreferences();
+			if(setValue(prefs,obj)){
 				cachedValue = obj;
+				cachedPreference = prefs;
 				return true;
 			}
 			return false;
@@ -278,114 +314,94 @@ public class OsmandSettings {
 	
 	private class BooleanPreference extends CommonPreference<Boolean> {
 
-		private final boolean defValue;
-
 		private BooleanPreference(String id, boolean defaultValue, boolean global) {
-			super(id, global);
-			this.defValue = defaultValue;
+			super(id, global, defaultValue);
 		}
 		
 		private BooleanPreference(String id, boolean defaultValue, boolean global, boolean cache) {
 			super(id, global, cache);
-			this.defValue = defaultValue;
 		}
 		
-		protected boolean getDefaultValue(){
-			return defValue;
-		}
 		@Override
-		protected Boolean getValue() {
-			return getPreferences().getBoolean(getId(), getDefaultValue());
+		protected Boolean getValue(SharedPreferences prefs, Boolean defaultValue) {
+			return prefs.getBoolean(getId(), defaultValue);
 		}
 
 		@Override
-		protected boolean setValue(Boolean val) {
-			return getPreferences().edit().putBoolean(getId(), val).commit();
+		protected boolean setValue(SharedPreferences prefs, Boolean val) {
+			return prefs.edit().putBoolean(getId(), val).commit();
 		}
 
 	}
 	private class IntPreference extends CommonPreference<Integer> {
 
-		private final int defValue;
 
 		private IntPreference(String id, int defaultValue, boolean global) {
-			super(id, global);
-			this.defValue = defaultValue;
+			super(id, global, defaultValue);
 		}
 		
 		private IntPreference(String id, int defaultValue, boolean global, boolean cache) {
-			super(id, global, cache);
-			this.defValue = defaultValue;
+			super(id, global, cache, defaultValue);
 		}
 		
-		protected int getDefValue() {
-			return defValue;
+		@Override
+		protected Integer getValue(SharedPreferences prefs, Integer defaultValue) {
+			return prefs.getInt(getId(), defaultValue);
 		}
 
 		@Override
-		protected Integer getValue() {
-			return getPreferences().getInt(getId(), getDefValue());
-		}
-
-		@Override
-		protected boolean setValue(Integer val) {
-			return getPreferences().edit().putInt(getId(), val).commit();
+		protected boolean setValue(SharedPreferences prefs, Integer val) {
+			return prefs.edit().putInt(getId(), val).commit();
 		}
 
 	}
 	
 	private class StringPreference extends CommonPreference<String> {
 
-		private final String defValue;
-
 		private StringPreference(String id, String defaultValue, boolean global) {
-			super(id, global);
-			this.defValue = defaultValue;
+			super(id, global, defaultValue);
 		}
 
 		@Override
-		protected String getValue() {
-			return getPreferences().getString(getId(), defValue);
+		protected String getValue(SharedPreferences prefs, String defaultValue) {
+			return prefs.getString(getId(), defaultValue);
 		}
 
 		@Override
-		protected boolean setValue(String val) {
-			return getPreferences().edit().putString(getId(), val).commit();
+		protected boolean setValue(SharedPreferences prefs, String val) {
+			return prefs.edit().putString(getId(), val).commit();
 		}
 
 	}
 	
 	private class EnumIntPreference<E extends Enum<E>> extends CommonPreference<E> {
 
-		private final E defValue;
 		private final E[] values;
 
 		private EnumIntPreference(String id, E defaultValue, boolean global, boolean cache,
 				E[] values) {
-			super(id, global, cache);
-			this.defValue = defaultValue;
+			super(id, global, cache, defaultValue);
 			this.values = values;
 		}
 		
 		private EnumIntPreference(String id, E defaultValue, boolean global, E[] values) {
-			super(id, global);
-			this.defValue = defaultValue;
+			super(id, global, defaultValue);
 			this.values = values;
 		}
 
 
 		@Override
-		protected E getValue() {
-			int i = getPreferences().getInt(getId(), -1);
+		protected E getValue(SharedPreferences prefs, E defaultValue) {
+			int i = prefs.getInt(getId(), -1);
 			if(i < 0 || i >= values.length){
-				return defValue;
+				return defaultValue;
 			}
 			return values[i];
 		}
 		
 		@Override
-		protected boolean setValue(E val) {
-			return getPreferences().edit().putInt(getId(), val.ordinal()).commit();
+		protected boolean setValue(SharedPreferences prefs,E val) {
+			return prefs.edit().putInt(getId(), val.ordinal()).commit();
 		}
 
 	}
@@ -393,7 +409,7 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_INTERNET_TO_DOWNLOAD_TILES =
-		new BooleanPreference("use_internet_to_download_tiles", true, true, true);
+		new BooleanPreference("use_internet_to_download_tiles", true, false, true);
 
 	
 	// this value string is synchronized with settings_pref.xml preference name
@@ -439,7 +455,12 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<DayNightMode> DAYNIGHT_MODE = 
-		new EnumIntPreference<DayNightMode>("daynight_mode", DayNightMode.AUTO, false, DayNightMode.values());
+		new EnumIntPreference<DayNightMode>("daynight_mode", DayNightMode.AUTO, false, DayNightMode.values()) {
+		protected boolean setValue(SharedPreferences prefs, DayNightMode val) {
+			ctx.getDaynightHelper().setDayNightMode(val);
+			return super.setValue(prefs, val);
+		}
+	};
 		
 	
 	// this value string is synchronized with settings_pref.xml preference name
@@ -455,7 +476,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SAVE_TRACK_TO_GPX = new 
 		BooleanPreference("save_track_to_gpx", false, false){
-		protected boolean getDefaultValue() {
+		protected Boolean getDefaultValue() {
 			boolean defaultValue = false;
 			if (currentMode == ApplicationMode.CAR || currentMode == ApplicationMode.BICYCLE) {
 				defaultValue = true;
@@ -853,8 +874,21 @@ public class OsmandSettings {
 	public final OsmandPreference<String> VOICE_PROVIDER = new StringPreference("voice_provider", null, false);
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	// TODO init default value !!!
-	public final OsmandPreference<String> RENDERER = new StringPreference("renderer", null, false);
+	public final OsmandPreference<String> RENDERER = new StringPreference("renderer", RendererRegistry.DEFAULT_RENDER, false) {
+		protected boolean setValue(SharedPreferences prefs, String val) {
+			if(val == null){
+				val = RendererRegistry.DEFAULT_RENDER;
+			}
+			BaseOsmandRender loaded = ctx.getRendererRegistry().getRenderer(val);
+			if (loaded != null) {
+				ctx.getRendererRegistry().setCurrentSelectedRender(loaded);
+				super.setValue(prefs, val);
+				ctx.getResourceManager().getRenderer().clearCache();
+				return true;
+			}
+			return false;
+		};
+	};
 	
 	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference("voice_mute", false, true);
 	

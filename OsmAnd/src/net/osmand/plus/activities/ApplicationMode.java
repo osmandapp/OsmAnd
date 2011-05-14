@@ -1,11 +1,7 @@
 package net.osmand.plus.activities;
 
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.render.BaseOsmandRender;
-import net.osmand.plus.render.RendererRegistry;
 import android.content.Context;
-import android.content.SharedPreferences.Editor;
 
 public enum ApplicationMode {
 	/*

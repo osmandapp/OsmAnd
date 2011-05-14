@@ -39,7 +39,6 @@ import net.osmand.render.OsmandRenderingRulesParser;
 import org.apache.commons.logging.Log;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
 import android.graphics.Bitmap.Config;
@@ -306,11 +305,12 @@ public class MapRenderRepositories {
 			currentRenderingContext = null;
 		}
 		try {
-			// find selected rendering type 
-			Boolean renderDay = ((OsmandApplication)context.getApplicationContext()).getDaynightHelper().getDayNightRenderer();
-			BaseOsmandRender renderingType = RendererRegistry.getRegistry().getCurrentSelectedRenderer();
+			// find selected rendering type
+			OsmandApplication app = ((OsmandApplication)context.getApplicationContext());
+			Boolean renderDay = app.getDaynightHelper().getDayNightRenderer();
+			BaseOsmandRender renderingType = app.getRendererRegistry().getCurrentSelectedRenderer();
 			if(renderDay != null && renderingType != null && renderDay.booleanValue() != renderingType.isDayRender()){
-				renderingType = RendererRegistry.getRegistry().getOppositeRendererForDayNight(renderingType);
+				renderingType = app.getRendererRegistry().getOppositeRendererForDayNight(renderingType);
 			}
 			
 			// prevent editing

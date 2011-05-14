@@ -18,6 +18,7 @@ import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
+import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.voice.CommandPlayer;
 import android.app.AlertDialog;
 import android.app.Application;
@@ -41,6 +42,9 @@ public class OsmandApplication extends Application {
 	FavouritesDbHelper favorites = null;
 	CommandPlayer player = null;
 	OsmandSettings osmandSettings;
+	DayNightHelper daynightHelper;
+	NavigationService navigationService;
+	RendererRegistry rendererRegistry;
 	
 	
 	// start variables
@@ -48,8 +52,7 @@ public class OsmandApplication extends Application {
 	private List<String> startingWarnings;
 	private ProgressDialog progressDlg;
 	private Handler uiHandler;
-	private DayNightHelper daynightHelper;
-	private NavigationService navigationService;
+	
 	private boolean applicationInitializing = false;
 	private Locale prefferedLocale = null;
 
@@ -61,8 +64,13 @@ public class OsmandApplication extends Application {
     	manager = new ResourceManager(this);
     	daynightHelper = new DayNightHelper(this);
     	uiHandler = new Handler();
+    	rendererRegistry = new RendererRegistry();
     	checkPrefferedLocale();
     	startApplication();
+	}
+    
+    public RendererRegistry getRendererRegistry() {
+		return rendererRegistry;
 	}
     
     public OsmandSettings getSettings() {
