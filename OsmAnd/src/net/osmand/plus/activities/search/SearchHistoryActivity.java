@@ -36,7 +36,7 @@ public class SearchHistoryActivity extends ListActivity {
 		lv.setId(android.R.id.list);
 		
 		setContentView(lv);
-		location = OsmandSettings.getLastKnownMapLocation(OsmandSettings.getPrefs(this));
+		location = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
 		helper = SearchHistoryHelper.getInstance();
 		
 		
@@ -79,9 +79,9 @@ public class SearchHistoryActivity extends ListActivity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						if (which == 0) {
-							OsmandSettings.setMapLocationToShow(SearchHistoryActivity.this, entry.getLat(), entry.getLon());
+							OsmandSettings.getOsmandSettings(SearchHistoryActivity.this).setMapLocationToShow(entry.getLat(), entry.getLon());
 						} else if (which == 1) {
-							OsmandSettings.setPointToNavigate(SearchHistoryActivity.this, entry.getLat(), entry.getLon());
+							OsmandSettings.getOsmandSettings(SearchHistoryActivity.this).setPointToNavigate(entry.getLat(), entry.getLon());
 						}
 
 						Intent newIntent = new Intent(SearchHistoryActivity.this, MapActivity.class);
@@ -103,7 +103,7 @@ public class SearchHistoryActivity extends ListActivity {
 
 	private void selectModel(HistoryEntry model) {
 		helper.selectEntry(model, this);
-		OsmandSettings.setMapLocationToShow(this, model.getLat(), model.getLon());
+		OsmandSettings.getOsmandSettings(SearchHistoryActivity.this).setMapLocationToShow(model.getLat(), model.getLon());
 		startActivity(new Intent(this, MapActivity.class));
 	}
 	

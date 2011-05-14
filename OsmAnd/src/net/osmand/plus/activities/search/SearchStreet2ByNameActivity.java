@@ -11,7 +11,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
 import net.osmand.plus.activities.OsmandApplication;
 import android.app.ProgressDialog;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -22,21 +21,22 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 	private Street street1;
 	private List<Street> initialList = new ArrayList<Street>();
 	private ProgressDialog progressDlg;
+	private OsmandSettings settings;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		SharedPreferences prefs = OsmandSettings.getPrefs(this);
-		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(OsmandSettings.getLastSearchedRegion(prefs));
+		settings = OsmandSettings.getOsmandSettings(this);
+		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
 		if(region != null){
-			postcode = region.getPostcode(OsmandSettings.getLastSearchedPostcode(prefs));
-			city = region.getCityById(OsmandSettings.getLastSearchedCity(prefs));
+			postcode = region.getPostcode(settings.getLastSearchedPostcode());
+			city = region.getCityById(settings.getLastSearchedCity());
 			if(postcode != null){
-				street1 = region.getStreetByName(postcode, (OsmandSettings.getLastSearchedStreet(prefs)));
+				street1 = region.getStreetByName(postcode, (settings.getLastSearchedStreet()));
 				if(street1 != null){
 					city = street1.getCity();
 				}
 			} else if(city != null){
-				street1 = region.getStreetByName(city, (OsmandSettings.getLastSearchedStreet(prefs)));
+				street1 = region.getStreetByName(city, (settings.getLastSearchedStreet()));
 			}
 			if(city != null){
 				startLoadDataInThread(getString(R.string.loading_streets));
@@ -109,7 +109,7 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 	
 	@Override
 	public void itemSelected(Street obj) {
-		OsmandSettings.setLastSearchedIntersectedStreet(this, obj.getName(region.useEnglishNames()));
+		settings.setLastSearchedIntersectedStreet(obj.getName(region.useEnglishNames()));
 		finish();
 		
 	}

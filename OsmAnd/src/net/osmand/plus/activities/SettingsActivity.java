@@ -9,6 +9,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -21,6 +22,7 @@ import net.osmand.plus.ResourceManager;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.OsmandSettings.DayNightMode;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.activities.RouteProvider.RouteService;
 import net.osmand.plus.render.BaseOsmandRender;
 import net.osmand.plus.render.RendererRegistry;
@@ -53,32 +55,6 @@ import android.widget.Toast;
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
 	private final static String VECTOR_MAP = "#VECTOR_MAP"; //$NON-NLS-1$
 	
-	private class BooleanPreference {
-		private final boolean defValue;
-		private final String id;
-		private CheckBoxPreference pref;
-
-		public BooleanPreference(String id, boolean defValue){
-			this.id = id;
-			this.defValue = defValue;
-		}
-		
-		public String getId() {
-			return id;
-		}
-		
-		public boolean getDefValue() {
-			return defValue;
-		}
-		
-		public void setPref(CheckBoxPreference pref) {
-			this.pref = pref;
-		}
-		public CheckBoxPreference getPref() {
-			return pref;
-		}
-	}
-	
 	private EditTextPreference userPassword;
 	private EditTextPreference userName;
 	private EditTextPreference applicationDir;
@@ -88,57 +64,81 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private Preference downloadIndexes;
 
 	private ListPreference applicationMode;
-	private ListPreference daynightMode;
 	private ListPreference saveTrackInterval;
-	private ListPreference rotateMap;
 	private ListPreference tileSourcePreference;
-	private ListPreference positionOnMap;
-	private ListPreference routerPreference;
-	private ListPreference maxLevelToDownload;
-	private ListPreference mapScreenOrientation;
-	private ListPreference voicePreference;
-	private ListPreference metricPreference;
-	private ListPreference preferredLocale;
 	private ListPreference rendererPreference;
 	private ListPreference routeServiceInterval;
 	private ListPreference routeServiceWaitInterval;
-	private ListPreference routeServiceProvider;
 	
 	private CheckBoxPreference routeServiceEnabled;
-	private CheckBoxPreference useInternetToDownload;
 	
 	private ProgressDialog progressDlg;
 	
-	private BooleanPreference[] booleanPreferences = new BooleanPreference[]{
-			new BooleanPreference(OsmandSettings.SHOW_VIEW_ANGLE, OsmandSettings.SHOW_VIEW_ANGLE_DEF),
-			new BooleanPreference(OsmandSettings.USE_TRACKBALL_FOR_MOVEMENTS, OsmandSettings.USE_TRACKBALL_FOR_MOVEMENTS_DEF),
-			new BooleanPreference(OsmandSettings.USE_HIGH_RES_MAPS, OsmandSettings.USE_HIGH_RES_MAPS_DEF),
-			new BooleanPreference(OsmandSettings.USE_ENGLISH_NAMES, OsmandSettings.USE_ENGLISH_NAMES_DEF),
-			new BooleanPreference(OsmandSettings.AUTO_ZOOM_MAP, OsmandSettings.AUTO_ZOOM_MAP_DEF),
-			new BooleanPreference(OsmandSettings.SAVE_TRACK_TO_GPX, OsmandSettings.SAVE_TRACK_TO_GPX_DEF),
-			new BooleanPreference(OsmandSettings.DEBUG_RENDERING_INFO, OsmandSettings.DEBUG_RENDERING_INFO_DEF),
-			new BooleanPreference(OsmandSettings.USE_STEP_BY_STEP_RENDERING, OsmandSettings.USE_STEP_BY_STEP_RENDERING_DEF),
-			new BooleanPreference(OsmandSettings.FAST_ROUTE_MODE, OsmandSettings.FAST_ROUTE_MODE_DEF),
-			new BooleanPreference(OsmandSettings.USE_OSMAND_ROUTING_SERVICE_ALWAYS, OsmandSettings.USE_OSMAND_ROUTING_SERVICE_ALWAYS_DEF),
-	};
 	private BroadcastReceiver broadcastReceiver;
+	private OsmandSettings osmandSettings;
+	
+	private Map<String, Preference> screenPreferences = new LinkedHashMap<String, Preference>();
+	private Map<String, OsmandPreference<Boolean>> booleanPreferences = new LinkedHashMap<String, OsmandPreference<Boolean>>();
+	private Map<String, OsmandPreference<?>> listPreferences = new LinkedHashMap<String, OsmandPreference<?>>();
+	private Map<String, Map<String, ?>> listPrefValues = new LinkedHashMap<String, Map<String, ?>>();
 	
 	
+	
+	private void registerBooleanPreference(OsmandPreference<Boolean> b, PreferenceScreen screen){
+		CheckBoxPreference p = (CheckBoxPreference) screen.findPreference(b.getId());
+		p.setOnPreferenceChangeListener(this);
+		screenPreferences.put(b.getId(), p);
+		booleanPreferences.put(b.getId(), b);
+	}
+	
+	private <T> void registerListPreference(OsmandPreference<T> b, PreferenceScreen screen, String[] names, T[] values){
+		ListPreference p = (ListPreference) screen.findPreference(b.getId());
+		p.setOnPreferenceChangeListener(this);
+		LinkedHashMap<String, Object> vals = new LinkedHashMap<String, Object>();
+		screenPreferences.put(b.getId(), p);
+		listPreferences.put(b.getId(), b);
+		listPrefValues.put(b.getId(), vals);
+		assert names.length == values.length;
+		for(int i=0; i<names.length; i++){
+			vals.put(names[i], values[i]);
+		}
+	}
+	
+	private Set<String> getVoiceFiles(){
+		// read available voice data
+		File extStorage = osmandSettings.extendOsmandPath(ResourceManager.VOICE_PATH);
+		Set<String> setFiles = new LinkedHashSet<String>();
+		if (extStorage.exists()) {
+			for (File f : extStorage.listFiles()) {
+				if (f.isDirectory()) {
+					setFiles.add(f.getName());
+				}
+			}
+		}
+		return setFiles;
+	}
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.settings_pref);
+		String[] entries;
+		String[] entrieValues;
 		PreferenceScreen screen = getPreferenceScreen();
+		osmandSettings = OsmandSettings.getOsmandSettings(this);
 		
-		for(BooleanPreference b : booleanPreferences){
-			CheckBoxPreference p = (CheckBoxPreference) screen.findPreference(b.getId());
-			p.setOnPreferenceChangeListener(this);
-			b.setPref(p);
-		}
-		
-		useInternetToDownload =(CheckBoxPreference) screen.findPreference(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES);
-		useInternetToDownload.setOnPreferenceChangeListener(this);
+		registerBooleanPreference(osmandSettings.SHOW_VIEW_ANGLE,screen); 
+	    registerBooleanPreference(osmandSettings.USE_TRACKBALL_FOR_MOVEMENTS,screen); 
+	    registerBooleanPreference(osmandSettings.USE_HIGH_RES_MAPS,screen); 
+	    registerBooleanPreference(osmandSettings.USE_ENGLISH_NAMES,screen); 
+	    registerBooleanPreference(osmandSettings.AUTO_ZOOM_MAP,screen); 
+	    registerBooleanPreference(osmandSettings.SAVE_TRACK_TO_GPX,screen); 
+	    registerBooleanPreference(osmandSettings.DEBUG_RENDERING_INFO,screen); 
+	    registerBooleanPreference(osmandSettings.USE_STEP_BY_STEP_RENDERING,screen); 
+	    registerBooleanPreference(osmandSettings.FAST_ROUTE_MODE,screen);
+	    registerBooleanPreference(osmandSettings.USE_OSMAND_ROUTING_SERVICE_ALWAYS,screen); 
+	    registerBooleanPreference(osmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES,screen);
+	    
 		
 		reloadIndexes =(Preference) screen.findPreference(OsmandSettings.RELOAD_INDEXES);
 		reloadIndexes.setOnPreferenceClickListener(this);
@@ -146,49 +146,102 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		downloadIndexes.setOnPreferenceClickListener(this);
 		saveCurrentTrack =(Preference) screen.findPreference(OsmandSettings.SAVE_CURRENT_TRACK);
 		saveCurrentTrack.setOnPreferenceClickListener(this);
+		routeServiceEnabled =(CheckBoxPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_ENABLED);
+		routeServiceEnabled.setOnPreferenceChangeListener(this);
 		
-		userName = (EditTextPreference) screen.findPreference(OsmandSettings.USER_NAME);
+		userName = (EditTextPreference) screen.findPreference(osmandSettings.USER_NAME.getId());
 		userName.setOnPreferenceChangeListener(this);
-		userPassword = (EditTextPreference) screen.findPreference(OsmandSettings.USER_PASSWORD);
+		userPassword = (EditTextPreference) screen.findPreference(osmandSettings.USER_PASSWORD.getId());
 		userPassword.setOnPreferenceChangeListener(this);
 		applicationDir = (EditTextPreference) screen.findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
 		applicationDir.setOnPreferenceChangeListener(this);
 		
+		// List preferences
+		registerListPreference(osmandSettings.ROTATE_MAP, screen, 
+				new String[]{getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt)},
+				new Integer[]{OsmandSettings.ROTATE_MAP_NONE, OsmandSettings.ROTATE_MAP_BEARING, OsmandSettings.ROTATE_MAP_COMPASS});
+		
+		registerListPreference(osmandSettings.MAP_SCREEN_ORIENTATION, screen, 
+				new String[] {getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)},
+				new Integer[] {ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
+		
+		registerListPreference(osmandSettings.POSITION_ON_MAP, screen,
+				new String[] {getString(R.string.position_on_map_center), getString(R.string.position_on_map_bottom)},
+				new Integer[] {OsmandSettings.CENTER_CONSTANT, OsmandSettings.BOTTOM_CONSTANT});
+		
+		entries = new String[DayNightMode.values().length];
+		for(int i=0; i<entries.length; i++){
+			entries[i] = DayNightMode.values()[i].toHumanString(this);
+		}
+		registerListPreference(osmandSettings.DAYNIGHT_MODE, screen, entries,DayNightMode.values());
+		
+		entries = new String[MetricsConstants.values().length];
+		for(int i=0; i<entries.length; i++){
+			entries[i] = MetricsConstants.values()[i].toHumanString(this);
+		}
+		registerListPreference(osmandSettings.METRIC_SYSTEM, screen, entries, MetricsConstants.values());
+		
+		//getResources().getAssets().getLocales();
+		entries = new String[] { "", "en", "cs", "de", "es", "fr", "hu", "it", "pt", "ru", "sk" };
+		entrieValues = new String[entries.length];
+		entrieValues[0] = getString(R.string.system_locale);
+		for (int i=1; i< entries.length; i++) {
+			entrieValues[i] = entries[i];
+		}
+		registerListPreference(osmandSettings.PREFERRED_LOCALE, screen, entries, entries);
+		
+		Set<String> voiceFiles = getVoiceFiles();
+		entries = new String[voiceFiles.size() + 1];
+		entrieValues = new String[voiceFiles.size() + 1];
+		int k = 0;
+		entries[k++] = getString(R.string.voice_not_use);
+		for (String s : voiceFiles) {
+			entries[k] = s;
+			entrieValues[k] = s;
+			k++;
+		}
+		registerListPreference(osmandSettings.VOICE_PROVIDER, screen, entries, entries);
+		
+		int startZoom = 12;
+		int endZoom = 19;
+		entries = new String[endZoom - startZoom + 1];
+		Integer[] intValues = new Integer[endZoom - startZoom + 1];
+		for (int i = startZoom; i <= endZoom; i++) {
+			entries[i - startZoom] = i + ""; //$NON-NLS-1$
+			intValues[i - startZoom] = i ;
+		}
+		registerListPreference(osmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE, screen, entries, intValues);
+		
+		entries = new String[RouteService.values().length];
+		for(int i=0; i<entries.length; i++){
+			entries[i] = RouteService.values()[i].getName();
+		}
+		registerListPreference(osmandSettings.ROUTER_SERVICE, screen, entries, RouteService.values());
+		
+		
+		entries = new String[]{getString(R.string.gps_provider), getString(R.string.network_provider)};
+		entrieValues = new String[]{LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER};
+		registerListPreference(osmandSettings.SERVICE_OFF_PROVIDER, screen, entries, entries);
+		
+		saveTrackInterval =(ListPreference) screen.findPreference(osmandSettings.SAVE_TRACK_INTERVAL.getId());
+		saveTrackInterval.setOnPreferenceChangeListener(this);
+		routeServiceInterval =(ListPreference) screen.findPreference(osmandSettings.SERVICE_OFF_INTERVAL.getId());
+		routeServiceInterval.setOnPreferenceChangeListener(this);
+		routeServiceWaitInterval =(ListPreference) screen.findPreference(osmandSettings.SERVICE_OFF_WAIT_INTERVAL.getId());
+		routeServiceWaitInterval.setOnPreferenceChangeListener(this);
+		
+		
 		applicationMode =(ListPreference) screen.findPreference(OsmandSettings.APPLICATION_MODE);
 		applicationMode.setOnPreferenceChangeListener(this);
-		daynightMode =(ListPreference) screen.findPreference(OsmandSettings.DAYNIGHT_MODE);
-		daynightMode.setOnPreferenceChangeListener(this);
-		rotateMap =(ListPreference) screen.findPreference(OsmandSettings.ROTATE_MAP);
-		rotateMap.setOnPreferenceChangeListener(this);
-		saveTrackInterval =(ListPreference) screen.findPreference(OsmandSettings.SAVE_TRACK_INTERVAL);
-		saveTrackInterval.setOnPreferenceChangeListener(this);
-		positionOnMap =(ListPreference) screen.findPreference(OsmandSettings.POSITION_ON_MAP);
-		positionOnMap.setOnPreferenceChangeListener(this);
-		mapScreenOrientation = (ListPreference) screen.findPreference(OsmandSettings.MAP_SCREEN_ORIENTATION);
-		mapScreenOrientation.setOnPreferenceChangeListener(this);
-		maxLevelToDownload = (ListPreference) screen.findPreference(OsmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE);
-		maxLevelToDownload.setOnPreferenceChangeListener(this);
 		tileSourcePreference = (ListPreference) screen.findPreference(OsmandSettings.MAP_TILE_SOURCES);
 		tileSourcePreference.setOnPreferenceChangeListener(this);
-		routerPreference = (ListPreference) screen.findPreference(OsmandSettings.ROUTER_SERVICE);
-		routerPreference.setOnPreferenceChangeListener(this);
-		voicePreference = (ListPreference) screen.findPreference(OsmandSettings.VOICE_PROVIDER);
-		voicePreference.setOnPreferenceChangeListener(this);
-		metricPreference = (ListPreference) screen.findPreference(OsmandSettings.DEFAULT_METRIC_SYSTEM);
-		metricPreference.setOnPreferenceChangeListener(this);
-		preferredLocale = (ListPreference) screen.findPreference(OsmandSettings.PREFERRED_LOCALE);
-		preferredLocale.setOnPreferenceChangeListener(this);
-		rendererPreference =(ListPreference) screen.findPreference(OsmandSettings.RENDERER);
-		rendererPreference.setOnPreferenceChangeListener(this);
-		routeServiceInterval =(ListPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_INTERVAL);
-		routeServiceInterval.setOnPreferenceChangeListener(this);
-		routeServiceWaitInterval =(ListPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_WAIT_INTERVAL);
-		routeServiceWaitInterval.setOnPreferenceChangeListener(this);
-		routeServiceProvider =(ListPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_PROVIDER);
-		routeServiceProvider.setOnPreferenceChangeListener(this);
 		
-		routeServiceEnabled =(CheckBoxPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_ENABLED);
-		routeServiceEnabled.setOnPreferenceChangeListener(this);
+		
+		
+		
+		rendererPreference =(ListPreference) screen.findPreference(osmandSettings.RENDERER.getId());
+		rendererPreference.setOnPreferenceChangeListener(this);
+		
 		
 		
 		broadcastReceiver = new BroadcastReceiver(){
@@ -202,7 +255,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     }
 
 	private void updateApplicationDirSummary() {
-		String storageDir = OsmandSettings.getExternalStorageDirectory(getApplicationContext()).getAbsolutePath();
+		String storageDir = osmandSettings.getExternalStorageDirectory().getAbsolutePath();
 		applicationDir.setText(storageDir);
 		applicationDir.setSummary(storageDir);
 	}
@@ -239,21 +292,34 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     }
     
     public void updateAllSettings(){
-    	SharedPreferences prefs = OsmandSettings.getPrefs(this);
-    	for(BooleanPreference b : booleanPreferences){
-    		b.getPref().setChecked(prefs.getBoolean(b.getId(), b.getDefValue()));
+    	for(OsmandPreference<Boolean> b : booleanPreferences.values()){
+    		CheckBoxPreference pref = (CheckBoxPreference) screenPreferences.get(b.getId());
+    		pref.setChecked(b.get());
     	}
+    	
+    	
+    	for(OsmandPreference<?> p : listPreferences.values()){
+    		ListPreference listPref = (ListPreference) screenPreferences.get(p.getId());
+    		Map<String, ?> prefValues = listPrefValues.get(p.getId());
+    		String[] entryValues = new String[prefValues.size()];
+    		String[] entries = new String[prefValues.size()];
+    		int i = 0;
+    		for(Entry<String, ?> e : prefValues.entrySet()){
+    			entries[i] = e.getKey();
+				entryValues[i] = e.getValue() + ""; // case of null
+    			i++;
+    		}
+    		listPref.setEntries(entries);
+    		listPref.setEntryValues(entryValues);
+			listPref.setValue(p.get() + "");
+    	}
+    	
+    	
 		userName.setText(OsmandSettings.getUserName(prefs));
 		userPassword.setText(OsmandSettings.getUserPassword(prefs));
 		applicationDir.setText(OsmandSettings.getExternalStorageDirectory(prefs).getAbsolutePath());
-		useInternetToDownload.setChecked(OsmandSettings.isUsingInternetToDownloadTiles(prefs));
 		
 		Resources resources = this.getResources();
-		String[] e = new String[] {resources.getString(R.string.position_on_map_center), 
-				resources.getString(R.string.position_on_map_bottom)};
-		positionOnMap.setEntryValues(e);
-		positionOnMap.setEntries(e);
-		positionOnMap.setValueIndex(OsmandSettings.getPositionOnMap(prefs));
 		
 		fillTime(saveTrackInterval, new int[]{1, 2, 3, 5, 15, 20, 30}, new int[]{1, 2, 3, 5}, OsmandSettings.getSavingTrackInterval(prefs)); //$NON-NLS-1$
 		
@@ -261,27 +327,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		
 		fillTime(routeServiceWaitInterval, new int[]{15, 30, 45, 60, 90}, new int[]{2, 3, 5, 10}, OsmandSettings.getServiceOffWaitInterval(prefs)/1000);
 		
-		fill(rotateMap, //
-				new String[]{getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt)}, //
-				new String[]{OsmandSettings.ROTATE_MAP_NONE+"", OsmandSettings.ROTATE_MAP_BEARING+"", OsmandSettings.ROTATE_MAP_COMPASS+""}, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				OsmandSettings.getRotateMap(prefs)+""); //$NON-NLS-1$
 		
-		fill(routeServiceProvider,//
-				new String[]{getString(R.string.gps_provider), getString(R.string.network_provider)}, //
-				new String[]{LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER}, //
-				OsmandSettings.getServiceOffProvider(prefs));
 		
 		routeServiceEnabled.setChecked(getMyApplication().getNavigationService() != null);
 
-		fill(mapScreenOrientation, //
-				new String[] {
-						resources.getString(R.string.map_orientation_portrait),
-						resources.getString(R.string.map_orientation_landscape),
-						resources.getString(R.string.map_orientation_default), }, //
-				new String[] {
-						ActivityInfo.SCREEN_ORIENTATION_PORTRAIT + "", //$NON-NLS-1$
-						ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE + "", ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED + "" }, //$NON-NLS-1$ //$NON-NLS-2$
-				OsmandSettings.getMapOrientation(prefs) + ""); //$NON-NLS-1$
+		
 		
 		ApplicationMode[] presets = ApplicationMode.values(); 
 		String[] names = new String[presets.length];
@@ -292,65 +342,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		fill(applicationMode, names, values, OsmandSettings.getApplicationMode(prefs).name());
 
-		DayNightMode[] dnpresets = DayNightMode.possibleValues(this); 
-		names = new String[dnpresets.length];
-		values = new String[dnpresets.length];
-		for(int i=0; i< dnpresets.length; i++){
-			names[i] = dnpresets[i].toHumanString(this);
-			values[i] = dnpresets[i].name();
-		}
-		fill(daynightMode, names, values, OsmandSettings.getDayNightMode(prefs).name());
 		
-		String[] entries = new String[RouteService.values().length];
-		String entry = OsmandSettings.getRouterService(prefs).getName();
-		for (int i = 0; i < RouteService.values().length; i++) {
-			entries[i] = RouteService.values()[i].getName();
-		}
-		fill(routerPreference, entries, entries, entry);
 		
-		names = new String[MetricsConstants.values().length];
-		values = new String[MetricsConstants.values().length];
-		entry = OsmandSettings.getDefaultMetricConstants(this).name();
-		for (int i = 0; i < MetricsConstants.values().length; i++) {
-			values[i] = MetricsConstants.values()[i].name();
-			names[i] = MetricsConstants.values()[i].toHumanString(this);
-		}
-		fill(metricPreference, names, values, entry);
-		
-		String[] locales = //getResources().getAssets().getLocales();
-			new String [] {	"en", "cs", "de", "es", "fr", "hu", "it", "pt", "ru", "sk"};
-		values = new String[locales.length + 1];
-		names = new String[locales.length + 1] ;
-		values[0] = OsmandSettings.PREFERRED_LOCALE_DEF;
-		names[0] = getString(R.string.system_locale);
-		System.arraycopy(locales, 0, names, 1, locales.length);
-		System.arraycopy(locales, 0, values, 1, locales.length);
-		fill(preferredLocale, names, values, OsmandSettings.getPreferredLocale(prefs));
-
-		// read available voice data
-		File extStorage = OsmandSettings.extendOsmandPath(getApplicationContext(), ResourceManager.VOICE_PATH);
-		Set<String> setFiles = new LinkedHashSet<String>();
-		if (extStorage.exists()) {
-			for (File f : extStorage.listFiles()) {
-				if (f.isDirectory()) {
-					setFiles.add(f.getName());
-				}
-			}
-		}
-		String provider = OsmandSettings.getVoiceProvider(prefs);
-		entries = new String[setFiles.size() + 1];
-		int k = 0; 
-		entries[k++] = getString(R.string.voice_not_use);
-		for(String s : setFiles){
-			entries[k++] = s;
-		}
-		voicePreference.setEntries(entries);
-		voicePreference.setEntryValues(entries);
-		if(setFiles.contains(provider)){
-			voicePreference.setValue(provider);
-		} else {
-			voicePreference.setValueIndex(0);
-		}
 		
 		String vectorRenderer = OsmandSettings.getVectorRenderer(prefs);
 		Collection<String> rendererNames = RendererRegistry.getRegistry().getRendererNames();
@@ -363,13 +356,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			rendererPreference.setValueIndex(0);
 		}
 		
-		int startZoom = 12;
-		int endZoom = 19;
-		entries = new String[endZoom - startZoom + 1];
-		for (int i = startZoom; i <= endZoom; i++) {
-			entries[i - startZoom] = i + ""; //$NON-NLS-1$
-		}
-		fill(maxLevelToDownload, entries, entries, OsmandSettings.getMaximumLevelToDownloadTile(prefs)+""); //$NON-NLS-1$
+		
 
 		Map<String, String> entriesMap = getTileSourceEntries(this);
 		entries = new String[entriesMap.size() + 1];
@@ -449,51 +436,49 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     	OsmandSettings.getWriteableEditor(this).putInt(id, value).commit();
     }
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		// handle boolean prefences
-		BooleanPreference p = null;
-		for(BooleanPreference b : booleanPreferences){
-			if(b.getPref() == preference){
-				p = b;
-				break;
+		OsmandPreference<Boolean> boolPref = booleanPreferences.get(preference.getKey());
+		OsmandPreference<Object> listPref = (OsmandPreference<Object>) listPreferences.get(preference.getKey());
+		if(boolPref != null){
+			boolPref.set((Boolean)newValue);
+		} else if (listPref != null) {
+			CharSequence entry = ((ListPreference) preference).getEntry();
+			Map<String, ?> map = listPrefValues.get(preference.getKey());
+			Object obj = map.get(entry);
+			listPref.set(obj);
+			
+			if(listPref.getId().equals(osmandSettings.DAYNIGHT_MODE.getId())){
+				getMyApplication().getDaynightHelper().setDayNightMode(osmandSettings.DAYNIGHT_MODE.get());
+			} else if(listPref.getId().equals(osmandSettings.VOICE_PROVIDER.getId())){
+				getMyApplication().initCommandPlayer();
+			} else if(listPref.getId().equals(osmandSettings.PREFERRED_LOCALE.getId())){
+				// restart activity
+				getMyApplication().checkPrefferedLocale();
+				Intent intent = getIntent();
+				finish();
+				startActivity(intent);
 			}
-		}
-		if(p != null){
-			editBoolean(p.getId(), (Boolean)newValue);
 		} else if(preference == applicationMode){
 			boolean changed = ApplicationMode.setAppMode(ApplicationMode.valueOf(newValue.toString()), getMyApplication());
 			if(changed){
 				updateAllSettings();
 			}
-		} else if(preference == daynightMode){
-			editString(OsmandSettings.DAYNIGHT_MODE, (String) newValue);
-			getMyApplication().getDaynightHelper().setDayNightMode(DayNightMode.valueOf(newValue.toString()));
-		} else if(preference == mapScreenOrientation){
-			editInt(OsmandSettings.MAP_SCREEN_ORIENTATION, Integer.parseInt(newValue.toString()));
 		} else if(preference == saveTrackInterval){
 			editInt(OsmandSettings.SAVE_TRACK_INTERVAL, Integer.parseInt(newValue.toString()));
+		} else if (preference == routeServiceInterval) {
+			editInt(OsmandSettings.SERVICE_OFF_INTERVAL, Integer.parseInt((String) newValue) * 1000);
+		} else if (preference == routeServiceWaitInterval) {
+			editInt(OsmandSettings.SERVICE_OFF_WAIT_INTERVAL, Integer.parseInt((String) newValue) * 1000);
 		} else if(preference == userPassword){
 			editString(OsmandSettings.USER_PASSWORD, (String) newValue);
-		} else if(preference == useInternetToDownload){
-			OsmandSettings.setUseInternetToDownloadTiles((Boolean) newValue, OsmandSettings.getWriteableEditor(this));
 		} else if(preference == userName){
 			editString(OsmandSettings.USER_NAME, (String) newValue);
 		} else if(preference == applicationDir){
 			warnAboutChangingStorage((String) newValue);
 			return false;
-		} else if(preference == positionOnMap){
-			editInt(OsmandSettings.POSITION_ON_MAP, positionOnMap.findIndexOfValue((String) newValue));
-		} else if (preference == maxLevelToDownload) {
-			editInt(OsmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE, Integer.parseInt((String) newValue));
-		} else if (preference == routeServiceInterval) {
-			editInt(OsmandSettings.SERVICE_OFF_INTERVAL, Integer.parseInt((String) newValue) * 1000);
-		} else if (preference == routeServiceWaitInterval) {
-			editInt(OsmandSettings.SERVICE_OFF_WAIT_INTERVAL, Integer.parseInt((String) newValue) * 1000);
-		} else if (preference == rotateMap) {
-			editInt(OsmandSettings.ROTATE_MAP, Integer.parseInt((String) newValue));
-		} else if (preference == routeServiceProvider) {
-			editString(OsmandSettings.SERVICE_OFF_PROVIDER, (String) newValue);
 		} else if (preference == routeServiceEnabled) {
 			Intent serviceIntent = new Intent(this, NavigationService.class);
 			if ((Boolean) newValue) {
@@ -506,17 +491,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					routeServiceEnabled.setChecked(getMyApplication().getNavigationService() != null);
 				}
 			}
-		} else if (preference == routerPreference) {
-			RouteService s = null;
-			for(RouteService r : RouteService.values()){
-				if(r.getName().equals(newValue)){
-					s = r;
-					break;
-				}
-			}
-			if(s != null){
-				editInt(OsmandSettings.ROUTER_SERVICE, s.ordinal());
-			}
 		} else if (preference == rendererPreference) {
 			BaseOsmandRender loaded = RendererRegistry.getRegistry().getRenderer((String) newValue);
 			if(loaded == null){
@@ -527,24 +501,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				Toast.makeText(this, R.string.renderer_load_sucess, Toast.LENGTH_SHORT).show();
 				getMyApplication().getResourceManager().getRenderer().clearCache();
 			}
-		} else if (preference == voicePreference) {
-			int i = voicePreference.findIndexOfValue((String) newValue);
-			if (i == 0) {
-				editString(OsmandSettings.VOICE_PROVIDER, null);
-			} else {
-				editString(OsmandSettings.VOICE_PROVIDER, (String) newValue);
-			}
-			getMyApplication().initCommandPlayer();
-		} else if (preference == metricPreference) {
-			MetricsConstants mc = MetricsConstants.valueOf((String) newValue);
-			OsmandSettings.setDefaultMetricConstants(mc, this);
-		} else if (preference == preferredLocale) {
-			editString(OsmandSettings.PREFERRED_LOCALE, (String) newValue);
-			// restart activity
-			getMyApplication().checkPrefferedLocale();
-			Intent intent = getIntent();
-			finish();
-			startActivity(intent);
 		} else if (preference == tileSourcePreference) {
 			if(VECTOR_MAP.equals((String) newValue)){
 				editBoolean(OsmandSettings.MAP_VECTOR_DATA, true);

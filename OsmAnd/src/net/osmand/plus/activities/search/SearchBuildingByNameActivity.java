@@ -20,18 +20,19 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 	private City city;
 	private Street street;
 	private PostCode postcode;
+	private OsmandSettings settings;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		SharedPreferences prefs = OsmandSettings.getPrefs(this);
-		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(OsmandSettings.getLastSearchedRegion(prefs));
+		settings = OsmandSettings.getOsmandSettings(this);
+		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
 		if(region != null){
-			postcode = region.getPostcode(OsmandSettings.getLastSearchedPostcode(prefs));
-			city = region.getCityById(OsmandSettings.getLastSearchedCity(prefs));
+			postcode = region.getPostcode(settings.getLastSearchedPostcode());
+			city = region.getCityById(settings.getLastSearchedCity());
 			if(postcode != null){
-				street = region.getStreetByName(postcode, OsmandSettings.getLastSearchedStreet(prefs));
+				street = region.getStreetByName(postcode, settings.getLastSearchedStreet());
 			} else if(city != null){
-				street = region.getStreetByName(city, OsmandSettings.getLastSearchedStreet(prefs));
+				street = region.getStreetByName(city, settings.getLastSearchedStreet());
 			}
 		}
 		super.onCreate(savedInstanceState);
@@ -54,7 +55,7 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 	
 	@Override
 	public void itemSelected(Building obj) {
-		OsmandSettings.setLastSearchedBuilding(this, obj.getName(region.useEnglishNames()));
+		settings.setLastSearchedBuilding(obj.getName(region.useEnglishNames()));
 		finish();
 		
 	}

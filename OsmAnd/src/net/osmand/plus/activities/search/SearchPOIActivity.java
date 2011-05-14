@@ -96,7 +96,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 	private String currentLocationProvider = null;
 	private boolean sensorRegistered = false;
 	private Handler uiHandler;
-	private SharedPreferences settings;
+	private OsmandSettings settings;
 	
 
 	
@@ -116,7 +116,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		searchFilterLayout = findViewById(R.id.SearchFilterLayout);
 		showOnMap = (Button) findViewById(R.id.ShowOnMap);
 		
-		settings = OsmandSettings.getPrefs(this);
+		settings = OsmandSettings.getOsmandSettings(this);
 		
 		searchPOILevel.setOnClickListener(new OnClickListener() {
 			@Override
@@ -185,10 +185,10 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		showOnMap.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				OsmandSettings.setPoiFilterForMap(SearchPOIActivity.this, filter.getFilterId());
-				OsmandSettings.setShowPoiOverMap(SearchPOIActivity.this, true);
+				settings.setPoiFilterForMap(filter.getFilterId());
+				settings.SHOW_POI_OVER_MAP.set(true);
 				if(/*searchNearBy && */location != null){
-					OsmandSettings.setMapLocationToShow(SearchPOIActivity.this, location.getLatitude(), location.getLongitude(), 15);
+					settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(), 15);
 				}
 				Intent newIntent = new Intent(SearchPOIActivity.this, MapActivity.class);
 				startActivity(newIntent);
@@ -216,7 +216,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			@Override
 			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
 				final Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(pos);
-				String format = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, OsmandSettings.usingEnglishNames(settings));
+				String format = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.USE_ENGLISH_NAMES.get());
 				if (amenity.getOpeningHours() != null) {
 					format += "  "+getString(R.string.opening_hours) + " : " + amenity.getOpeningHours(); //$NON-NLS-1$ //$NON-NLS-2$
 				}
@@ -228,18 +228,18 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						if(which == 0){
-							int z = OsmandSettings.getLastKnownMapZoom(settings);
-							String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, OsmandSettings.usingEnglishNames(settings));
-							OsmandSettings.setMapLocationToShow(SearchPOIActivity.this, 
+							int z = settings.getLastKnownMapZoom();
+							String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.usingEnglishNames());
+							settings.setMapLocationToShow( 
 									amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 
 									Math.max(16, z), getString(R.string.poi)+" : " + poiSimpleFormat); //$NON-NLS-1$
 						} else if(which == 1){
 							LatLon l = amenity.getLocation();
-							OsmandSettings.setPointToNavigate(SearchPOIActivity.this, l.getLatitude(), l.getLongitude());
+							settings.setPointToNavigate(l.getLatitude(), l.getLongitude());
 						}
 						if(filter != null){
-							OsmandSettings.setPoiFilterForMap(SearchPOIActivity.this, filter.getFilterId());
-							OsmandSettings.setShowPoiOverMap(SearchPOIActivity.this, true);
+							settings.setPoiFilterForMap(filter.getFilterId());
+							settings.SHOW_POI_OVER_MAP.set(true);
 						}
 						
 						Intent newIntent = new Intent(SearchPOIActivity.this, MapActivity.class);
@@ -480,13 +480,13 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		if(filter != null){
-			OsmandSettings.setPoiFilterForMap(SearchPOIActivity.this, filter.getFilterId());
-			OsmandSettings.setShowPoiOverMap(SearchPOIActivity.this, true);
+			settings.setPoiFilterForMap(filter.getFilterId());
+			settings.SHOW_POI_OVER_MAP.set(true);
 		}
-		int z = OsmandSettings.getLastKnownMapZoom(settings);
+		int z = settings.getLastKnownMapZoom();
 		Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
-		String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, this, OsmandSettings.usingEnglishNames(settings));
-		OsmandSettings.setMapLocationToShow(this, amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 
+		String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, this, settings.usingEnglishNames());
+		settings.setMapLocationToShow( amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 
 				Math.max(16, z), getString(R.string.poi)+" : " + poiSimpleFormat); //$NON-NLS-1$
 		Intent newIntent = new Intent(SearchPOIActivity.this, MapActivity.class);
 		startActivity(newIntent);
@@ -598,7 +598,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 				LatLon l = amenity.getLocation();
 				Location.distanceBetween(l.getLatitude(), l.getLongitude(), location.getLatitude(), location.getLongitude(), mes);
 			}
-			String str = OsmAndFormatter.getPoiStringWithoutType(amenity, OsmandSettings.usingEnglishNames(settings));
+			String str = OsmAndFormatter.getPoiStringWithoutType(amenity, settings.usingEnglishNames());
 			label.setText(str);
 			int opened = -1;
 			if (amenity.getOpeningHours() != null) {
@@ -664,7 +664,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 							.toLowerCase();
 					List<Amenity> filter = new ArrayList<Amenity>();
 					for (Amenity item : originalAmenityList) {
-						String lower = OsmAndFormatter.getPoiStringWithoutType(item, OsmandSettings.usingEnglishNames(settings)).toLowerCase();
+						String lower = OsmAndFormatter.getPoiStringWithoutType(item, settings.usingEnglishNames()).toLowerCase();
 						if(lower.indexOf(lowerCase) != -1){
 							filter.add(item);
 						}

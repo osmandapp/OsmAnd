@@ -19,11 +19,13 @@ import android.widget.TextView;
 public class SearchCityByNameActivity extends SearchByNameAbstractActivity<MapObject> {
 	private RegionAddressRepository region;
 	private LatLon location;
+	private OsmandSettings settings;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(OsmandSettings.getLastSearchedRegion(OsmandSettings.getPrefs(this)));
-		location = OsmandSettings.getLastKnownMapLocation(OsmandSettings.getPrefs(this));
+		settings = ((OsmandApplication)getApplication()).getSettings();
+		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
+		location = settings.getLastKnownMapLocation();
 		super.onCreate(savedInstanceState);
 		((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_city);
 	}
@@ -51,12 +53,12 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<MapOb
 	@Override
 	public void itemSelected(MapObject obj) {
 		if (obj instanceof City) {
-			OsmandSettings.setLastSearchedCity(this, obj.getId());
+			settings.setLastSearchedCity(obj.getId());
 			if (region.getCityById(obj.getId()) == null) {
 				region.addCityToPreloadedList((City) obj);
 			}
 		} else if(obj instanceof PostCode){
-			OsmandSettings.setLastSearchedPostcode(this, obj.getName());
+			settings.setLastSearchedPostcode(obj.getName());
 		}
 		finish();
 		

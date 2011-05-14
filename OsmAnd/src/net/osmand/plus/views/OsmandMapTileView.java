@@ -234,7 +234,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		// that trigger allows to scale tiles for certain devices
 		// for example for device with density > 1 draw tiles the same size as with density = 1
 		// It makes text bigger but blurry, the settings could be introduced for that
-		if (dm != null && dm.density > 1f && !OsmandSettings.isUsingHighResMaps(getSettings()) ) {
+		if (dm != null && dm.density > 1f && !getSettings().USE_HIGH_RES_MAPS.get() ) {
 			res *= dm.density;
 		}
 		return res;
@@ -457,11 +457,11 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	protected Rect boundsRect = new Rect();
 	protected RectF bitmapToDraw = new RectF();
 	protected Rect bitmapToZoom = new Rect();
-	protected SharedPreferences settings = null;
+	protected OsmandSettings settings = null;
 	
-	public SharedPreferences getSettings(){
+	public OsmandSettings getSettings(){
 		if(settings == null){
-			settings = OsmandSettings.getPrefs(getContext());
+			settings = OsmandSettings.getOsmandSettings(getContext());
 		}
 		return settings;
 	}
@@ -471,7 +471,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			return;
 		}
 
-		boolean useInternet = OsmandSettings.isUsingInternetToDownloadTiles(getSettings());
+		boolean useInternet = getSettings().USE_INTERNET_TO_DOWNLOAD_TILES.get();
 		if (useInternet) {
 			MapTileDownloader.getInstance().refuseAllPreviousRequests();
 		}
@@ -510,9 +510,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 					latlonRect.right = (float) MapUtils.getLongitudeFromTile(nzoom, tilesRect.right);
 					if (map != null) {
 						ResourceManager mgr = getApplication().getResourceManager();
-						useInternet = useInternet && OsmandSettings.isInternetConnectionAvailable(getContext())
+						useInternet = useInternet && settings.isInternetConnectionAvailable()
 								&& map.couldBeDownloadedFromInternet();
-						int maxLevel = Math.min(OsmandSettings.getMaximumLevelToDownloadTile(getSettings()), map.getMaximumZoomSupported());
+						
+						int maxLevel = Math.min(getSettings().MAX_LEVEL_TO_DOWNLOAD_TILE.get(), map.getMaximumZoomSupported());
 
 						
 						for (int i = 0; i < width; i++) {
