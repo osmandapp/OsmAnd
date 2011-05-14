@@ -26,7 +26,6 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Handler;
 import android.text.format.DateFormat;
@@ -41,6 +40,7 @@ public class OsmandApplication extends Application {
 	RoutingHelper routingHelper = null;
 	FavouritesDbHelper favorites = null;
 	CommandPlayer player = null;
+	OsmandSettings osmandSettings;
 	
 	
 	// start variables
@@ -52,16 +52,21 @@ public class OsmandApplication extends Application {
 	private NavigationService navigationService;
 	private boolean applicationInitializing = false;
 	private Locale prefferedLocale = null;
-	
+
 	
     public void	onCreate(){
     	super.onCreate();
-    	routingHelper = new RoutingHelper(OsmandSettings.getApplicationMode(OsmandSettings.getPrefs(OsmandApplication.this)), OsmandApplication.this, player);
+    	osmandSettings = OsmandSettings.getOsmandSettings(this);
+    	routingHelper = new RoutingHelper(osmandSettings, OsmandApplication.this, player);
     	manager = new ResourceManager(this);
     	daynightHelper = new DayNightHelper(this);
     	uiHandler = new Handler();
     	checkPrefferedLocale();
     	startApplication();
+	}
+    
+    public OsmandSettings getSettings() {
+		return osmandSettings;
 	}
     
 	public PoiFiltersHelper getPoiFilters() {
@@ -103,9 +108,8 @@ public class OsmandApplication extends Application {
 	}
 	
 	public void checkPrefferedLocale() {
-    	SharedPreferences settings = OsmandSettings.getPrefs(this);
         Configuration config = getBaseContext().getResources().getConfiguration();
-        String lang = OsmandSettings.getPreferredLocale(settings);
+        String lang = osmandSettings.PREFERRED_LOCALE.get();
 		if (!"".equals(lang) && !config.locale.getLanguage().equals(lang)) {
 			prefferedLocale = new Locale(lang);
 			Locale.setDefault(prefferedLocale);
@@ -144,7 +148,7 @@ public class OsmandApplication extends Application {
 	
 
 	public void showDialogInitializingCommandPlayer(final Context uiContext){
-		String voiceProvider = OsmandSettings.getVoiceProvider(OsmandSettings.getPrefs(this));
+		String voiceProvider = osmandSettings.VOICE_PROVIDER.get();
 		if(voiceProvider == null){
 			Builder builder = new AlertDialog.Builder(uiContext);
 			builder.setCancelable(true);
@@ -191,7 +195,7 @@ public class OsmandApplication extends Application {
 			player = new CommandPlayer(OsmandApplication.this);
 			routingHelper.getVoiceRouter().setPlayer(player);
 		}
-		return player.init(OsmandSettings.getVoiceProvider(OsmandSettings.getPrefs(this)));
+		return player.init(osmandSettings.VOICE_PROVIDER.get());
 	}
 	
 	public NavigationService getNavigationService() {
@@ -288,7 +292,7 @@ public class OsmandApplication extends Application {
 
 		@Override
 		public void uncaughtException(final Thread thread, final Throwable ex) {
-			File file = OsmandSettings.extendOsmandPath(getApplicationContext(), EXCEPTION_PATH);
+			File file = osmandSettings.extendOsmandPath(EXCEPTION_PATH);
 			try {
 				ByteArrayOutputStream out = new ByteArrayOutputStream();
 				PrintStream printStream = new PrintStream(out);

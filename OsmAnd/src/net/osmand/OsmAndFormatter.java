@@ -16,7 +16,8 @@ public class OsmAndFormatter {
 	private final static float FOOTS_IN_METER = YARDS_IN_METER * 3f; 
 	
 	public static String getFormattedDistance(int meters, Context ctx) {
-		MetricsConstants mc = OsmandSettings.getDefaultMetricConstants(ctx);
+		OsmandSettings settings = OsmandSettings.getOsmandSettings(ctx);
+		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		int mainUnitStr;
 		float mainUnitInMeters;
 		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
@@ -48,7 +49,8 @@ public class OsmAndFormatter {
 	}
 	
 	public static String getFormattedSpeed(float metersperseconds, Context ctx) {
-		MetricsConstants mc = OsmandSettings.getDefaultMetricConstants(ctx);
+		OsmandSettings settings = OsmandSettings.getOsmandSettings(ctx);
+		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		float kmh = metersperseconds * 3.6f;
 		if(mc == MetricsConstants.KILOMETERS_AND_METERS){
 			return ((int) kmh) + ctx.getString(R.string.km_h);

@@ -65,7 +65,7 @@ public class ContributionVersionActivity extends ListActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.download_builds);
 		
-		String installDate = OsmandSettings.getPrefs(this).getString(CONTRIBUTION_INSTALL_APP_DATE, null);
+		String installDate = OsmandSettings.getOsmandSettings(this).CONTRIBUTION_INSTALL_APP_DATE.get();
 		if(installDate != null){
 			try {
 				currentInstalledDate = dateFormat.parse(installDate);
@@ -138,8 +138,7 @@ public class ContributionVersionActivity extends ListActivity {
 					MessageFormat.format(getString(R.string.build_installed), currentSelectedBuild.tag, dateFormat
 							.format(currentSelectedBuild.date)), Toast.LENGTH_LONG).show();
 		}
-		OsmandSettings.getWriteableEditor(this).putString(CONTRIBUTION_INSTALL_APP_DATE, dateFormat.format(d))
-				.commit();
+		OsmandSettings.getOsmandSettings(this).CONTRIBUTION_INSTALL_APP_DATE.set(dateFormat.format(d));
 	}
 	
 	protected void executeThreadOperation(int operationId) throws Exception {

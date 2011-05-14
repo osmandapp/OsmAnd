@@ -7,7 +7,6 @@ import java.util.TimeZone;
 
 import net.osmand.LogUtil;
 import net.osmand.SunriseSunset;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.DayNightMode;
 
 import org.apache.commons.logging.Log;
@@ -44,8 +43,7 @@ public class DayNightHelper implements SensorEventListener {
 
 	public DayNightHelper(OsmandApplication osmandApplication) {
 		this.osmandApplication = osmandApplication;
-		setDayNightMode(OsmandSettings.getDayNightMode(OsmandSettings
-				.getPrefs(osmandApplication)));
+		setDayNightMode(osmandApplication.getSettings().DAYNIGHT_MODE.get());
 	}
 
 	DayNightMode dayNightMode = DayNightMode.AUTO;

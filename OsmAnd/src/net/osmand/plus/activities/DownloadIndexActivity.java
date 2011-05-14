@@ -308,7 +308,7 @@ public class DownloadIndexActivity extends ListActivity {
 
 	private List<String> listAlreadyDownloadedWithAlternatives() {
 		List<String> files = new ArrayList<String>();
-		File externalStorageDirectory = OsmandSettings.getExternalStorageDirectory(getApplicationContext());
+		File externalStorageDirectory = OsmandSettings.getOsmandSettings(getApplicationContext()).getExternalStorageDirectory();
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.POI_PATH),POI_INDEX_EXT,POI_INDEX_EXT_ZIP,POI_TABLE_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.APP_DIR),BINARY_MAP_INDEX_EXT,BINARY_MAP_INDEX_EXT_ZIP,BINARY_MAP_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.VOICE_PATH),"",VOICE_INDEX_EXT_ZIP, VOICE_VERSION));
@@ -343,7 +343,7 @@ public class DownloadIndexActivity extends ListActivity {
 		String toCheckPostfix = null;
 		boolean unzipDir = false;
 		
-		File externalStorageDirectory = OsmandSettings.getExternalStorageDirectory(getApplicationContext());
+		File externalStorageDirectory = OsmandSettings.getOsmandSettings(getApplicationContext()).getExternalStorageDirectory();
 		if(fileName.endsWith(IndexConstants.POI_INDEX_EXT)){
 			parent = new File(externalStorageDirectory, ResourceManager.POI_PATH);
 			toSavePostfix = POI_INDEX_EXT;

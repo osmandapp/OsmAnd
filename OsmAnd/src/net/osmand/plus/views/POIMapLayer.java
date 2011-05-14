@@ -7,7 +7,6 @@ import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.data.Amenity;
 import net.osmand.osm.LatLon;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -83,7 +82,8 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 	public boolean onTouchEvent(PointF point) {
 		Amenity n = getAmenityFromPoint(point);
 		if(n != null){
-			String format = OsmAndFormatter.getPoiSimpleFormat(n, view.getContext(), OsmandSettings.usingEnglishNames(view.getSettings()));
+			String format = OsmAndFormatter.getPoiSimpleFormat(n, view.getContext(),
+					view.getSettings().USE_ENGLISH_NAMES.get());
 			if(n.getOpeningHours() != null){
 				format += "\n" + view.getContext().getString(R.string.opening_hours) +" : "+ n.getOpeningHours(); //$NON-NLS-1$ //$NON-NLS-2$
 			}
@@ -213,7 +213,7 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 	@Override
 	public String getObjectDescription(Object o) {
 		if(o instanceof Amenity){
-			return OsmAndFormatter.getPoiSimpleFormat((Amenity) o, view.getContext(), OsmandSettings.usingEnglishNames(view.getSettings()));
+			return OsmAndFormatter.getPoiSimpleFormat((Amenity) o, view.getContext(), view.getSettings().USE_ENGLISH_NAMES.get());
 		}
 		return null;
 	}

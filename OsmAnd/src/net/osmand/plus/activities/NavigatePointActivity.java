@@ -49,7 +49,7 @@ public class NavigatePointActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		LatLon loc = OsmandSettings.getLastKnownMapLocation(OsmandSettings.getPrefs(this));
+		LatLon loc = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
 		setContentView(R.layout.navigate_point);
 		setTitle(R.string.map_specify_point);
 		initUI(loc.getLatitude(), loc.getLongitude());
@@ -129,7 +129,7 @@ public class NavigatePointActivity extends Activity {
 			double lon = convert(((TextView) findViewById(R.id.LongitudeEdit)).getText().toString());
 			
 			if(navigate){
-				OsmandSettings.setPointToNavigate(this, lat, lon);
+				OsmandSettings.getOsmandSettings(this).setPointToNavigate(lat, lon);
 			} else {
 				// in case when it is dialog
 				if(activity != null) {
@@ -137,7 +137,7 @@ public class NavigatePointActivity extends Activity {
 					activity.getMapView().getAnimatedDraggingThread().startMoving(v.getLatitude(), v.getLongitude(),
 							lat, lon, v.getZoom(), v.getZoom(), v.getSourceTileSize(), v.getRotate(), true);
 				} else {
-					OsmandSettings.setMapLocationToShow(this, lat, lon, MessageFormat.format(getString(R.string.search_history_navigate_to), lat, lon));
+					OsmandSettings.getOsmandSettings(this).setMapLocationToShow(lat, lon, MessageFormat.format(getString(R.string.search_history_navigate_to), lat, lon));
 				}
 			}
 			close();

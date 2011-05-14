@@ -14,7 +14,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -44,7 +43,7 @@ public class NavigationService extends Service implements LocationListener {
 	
 	private SavingTrackHelper savingTrackHelper;
 	private RoutingHelper routingHelper;
-	private SharedPreferences settings;
+	private OsmandSettings settings;
 	
 	private Handler handler;
 
@@ -86,10 +85,10 @@ public class NavigationService extends Service implements LocationListener {
 		// initializing variables
 		setForeground(true);
 		handler = new Handler();
-		settings = OsmandSettings.getPrefs(this);
-		serviceOffInterval = OsmandSettings.getServiceOffInterval(settings);
-		serviceOffProvider = OsmandSettings.getServiceOffProvider(settings);
-		serviceError = OsmandSettings.getServiceOffWaitInterval(settings);
+		settings = OsmandSettings.getOsmandSettings(this);
+		serviceOffInterval = settings.SERVICE_OFF_INTERVAL.get();
+		serviceOffProvider = settings.SERVICE_OFF_PROVIDER.get();
+		serviceError = settings.SERVICE_OFF_WAIT_INTERVAL.get();
 		savingTrackHelper = new SavingTrackHelper(this);
 		
 		routingHelper = ((OsmandApplication)getApplication()).getRoutingHelper();
@@ -159,7 +158,7 @@ public class NavigationService extends Service implements LocationListener {
 
 	@Override
 	public void onLocationChanged(Location location) {
-		if(location != null && !OsmandSettings.getMapActivityEnabled(settings)){
+		if(location != null && !settings.MAP_ACTIVITY_ENABLED.get()){
 			if(!isContinuous()){
 				// unregister listener and wait next time
 				LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);

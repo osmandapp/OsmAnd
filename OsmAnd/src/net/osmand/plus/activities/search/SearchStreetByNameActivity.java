@@ -18,14 +18,16 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	private RegionAddressRepository region;
 	private City city;
 	private PostCode postcode;
+	private OsmandSettings settings;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		SharedPreferences prefs = OsmandSettings.getPrefs(this);
-		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(OsmandSettings.getLastSearchedRegion(prefs));
+		settings = OsmandSettings.getOsmandSettings(this);
+		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
 		if(region != null){
-			postcode = region.getPostcode(OsmandSettings.getLastSearchedPostcode(prefs));
+			postcode = region.getPostcode(settings.getLastSearchedPostcode());
 			if (postcode == null) {
-				city = region.getCityById(OsmandSettings.getLastSearchedCity(prefs));
+				city = region.getCityById(settings.getLastSearchedCity());
 			}
 		}
 		super.onCreate(savedInstanceState);
@@ -48,7 +50,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	
 	@Override
 	public void itemSelected(Street obj) {
-		OsmandSettings.setLastSearchedStreet(this, obj.getName(region.useEnglishNames()));
+		settings.setLastSearchedStreet(obj.getName(region.useEnglishNames()));
 		finish();
 		
 	}

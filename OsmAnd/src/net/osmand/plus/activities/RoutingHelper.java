@@ -60,13 +60,16 @@ public class RoutingHelper {
 	private int evalWaitInterval = 3000;
 	
 	private ApplicationMode mode;
+	private OsmandSettings settings;
 	
 	private RouteProvider provider = new RouteProvider();
 	private VoiceRouter voiceRouter;
+
 	
 	
-	public RoutingHelper(ApplicationMode mode, Context context, CommandPlayer player){
-		this.mode = mode;
+	
+	public RoutingHelper(OsmandSettings settings, Context context, CommandPlayer player){
+		this.settings = settings;
 		this.context = context;
 		voiceRouter = new VoiceRouter(this, player);
 	}
@@ -138,7 +141,7 @@ public class RoutingHelper {
 		if(currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < 60){
 			if(lastFixedLocation != null && lastFixedLocation.distanceTo(lastPoint) < 60){
 				showMessage(context.getString(R.string.arrived_at_destination));
-				OsmandSettings.setFollowingByRoute(context, false);
+				settings.FOLLOW_TO_THE_ROUTE.set(false);
 				voiceRouter.arrivedDestinationPoint();
 				updateCurrentRoute(routeNodes.size() - 1);
 				// clear final location to prevent all time showing message
@@ -425,8 +428,8 @@ public class RoutingHelper {
 		}
 		
 		// temporary check while osmand offline router is not stable
-		RouteService serviceToUse= OsmandSettings.getRouterService(OsmandSettings.getPrefs(context));
-		if (serviceToUse == RouteService.OSMAND && !OsmandSettings.isOsmandRoutingServiceUsed(context)) {
+		RouteService serviceToUse= settings.ROUTER_SERVICE.get();
+		if (serviceToUse == RouteService.OSMAND && !settings.USE_OSMAND_ROUTING_SERVICE_ALWAYS.get()) {
 			double distance = MapUtils.getDistance(end, start.getLatitude(), start.getLongitude());
 			if (distance > DISTANCE_TO_USE_OSMAND_ROUTER) {
 				showMessage(context.getString(R.string.osmand_routing_experimental));
@@ -438,7 +441,7 @@ public class RoutingHelper {
 		if(currentRunningJob == null){
 			// do not evaluate very often
 			if (System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval) {
-				final boolean fastRouteMode = OsmandSettings.isFastRouteMode(context);
+				final boolean fastRouteMode = settings.FAST_ROUTE_MODE.get();
 				synchronized (this) {
 					currentRunningJob = new Thread(new Runnable() {
 						@Override

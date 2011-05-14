@@ -81,7 +81,7 @@ public class TransportStopsLayer implements OsmandMapLayer, ContextMenuLayer.ICo
 	private String getStopDescription(TransportStop n, boolean useName) {
 		StringBuilder text = new StringBuilder(250);
 		text.append(view.getContext().getString(R.string.transport_Stop))
-				.append(" : ").append(n.getName(OsmandSettings.usingEnglishNames(view.getSettings()))); //$NON-NLS-1$
+				.append(" : ").append(n.getName(view.getSettings().USE_ENGLISH_NAMES.get())); //$NON-NLS-1$
 		text.append("\n").append(view.getContext().getString(R.string.transport_Routes)).append(" : "); //$NON-NLS-1$ //$NON-NLS-2$
 		List<TransportIndexRepository> reps = view.getApplication().getResourceManager().searchTransportRepositories(
 				n.getLocation().getLatitude(), n.getLocation().getLongitude());
@@ -91,7 +91,7 @@ public class TransportStopsLayer implements OsmandMapLayer, ContextMenuLayer.ICo
 				List<String> l;
 				if (!useName) {
 					l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0}"); //$NON-NLS-1$
-				} else if (OsmandSettings.usingEnglishNames(view.getSettings())) {
+				} else if (view.getSettings().USE_ENGLISH_NAMES.get()) {
 					l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0} - {3}"); //$NON-NLS-1$
 				} else {
 					l = reps.get(0).getRouteDescriptionsForStop(n, "{1} {0} - {2}"); //$NON-NLS-1$
