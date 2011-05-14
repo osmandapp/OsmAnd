@@ -73,14 +73,20 @@ public class OsmandSettings {
 	private long lastTimeInternetConnectionChecked = 0;
 	private boolean internetConnectionAvailable = true;
 	
-	//TODO make all layers profile preferenced????
+	// TODO make all layers profile preferenced????
+	// TODO profile preferences for map is using vector map???
 	private OsmandSettings(OsmandApplication ctx){
 		this.ctx = ctx;
 		globalPreferences = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
 		// start from default settings
 		currentMode = ApplicationMode.DEFAULT;
+		
 		defaultProfilePreferences = getProfilePreferences(ApplicationMode.DEFAULT);
 		profilePreferences = defaultProfilePreferences;
+		if(FOLLOW_TO_THE_ROUTE.get()){
+			currentMode = readApplicationMode();
+			profilePreferences = getProfilePreferences(currentMode);
+		}
 	}
 	
 	private SharedPreferences getProfilePreferences(ApplicationMode mode){
@@ -125,100 +131,21 @@ public class OsmandSettings {
 	}
 
 	protected void switchApplicationMode(ApplicationMode oldMode){
-		// TODO
-		// change some global settings
-		// for car
+		// change some global settings/ for car
 		if(currentMode == ApplicationMode.CAR){
 			SHOW_TRANSPORT_OVER_MAP.set(false);
 			SHOW_OSM_BUGS.set(false);
 		}
-		// TODO clear preferences ???
-		
-		
-//		ApplicationMode old = OsmandSettings.getApplicationMode(OsmandSettings.getPrefs(app));
-//		if(preset == old){
-//			return false;
-//		}
-//		Editor edit = OsmandSettings.getWriteableEditor(app);
-//		edit.putString(OsmandSettings.APPLICATION_MODE, preset.toString());
-//		if (preset == ApplicationMode.CAR) {
-//			OsmandSettings.setUseInternetToDownloadTiles(true, edit);
-//			// edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, _);
-//			edit.putBoolean(OsmandSettings.SHOW_TRANSPORT_OVER_MAP, false);
-//			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_BEARING);
-//			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, false);
-//			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, true);
-//			edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, false);
-//			edit.putBoolean(OsmandSettings.USE_STEP_BY_STEP_RENDERING, true);
-//			// edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
-//			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, true);
-//			edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, 5);
-//			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.BOTTOM_CONSTANT);
-//			// edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
-//
-//		} else if (preset == ApplicationMode.BICYCLE) {
-//			// edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
-//			// edit.putBoolean(OsmandSettings.USE_INTERNET_TO_CALCULATE_ROUTE, _);
-//			// edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
-//			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_BEARING);
-//			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, true);
-//			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
-//			// edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, _);
-//			// edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
-//			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, true);
-//			edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, 30);
-//			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.BOTTOM_CONSTANT);
-//			// edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
-//
-//		} else if (preset == ApplicationMode.PEDESTRIAN) {
-//			// edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
-//			// edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
-//			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_COMPASS);
-//			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, true);
-//			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
-//			edit.putBoolean(OsmandSettings.USE_STEP_BY_STEP_RENDERING, false);
-//			// if(useInternetToDownloadTiles.isChecked()){
-//			// edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, true);
-//			// }
-//			// edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
-//			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, false);
-//			// edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, _);
-//			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.CENTER_CONSTANT);
-//			// edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
-//
-//		} else if (preset == ApplicationMode.DEFAULT) {
-//			// edit.putBoolean(OsmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES, _);
-//			// edit.putBoolean(OsmandSettings.SHOW_POI_OVER_MAP, true);
-//			edit.putInt(OsmandSettings.ROTATE_MAP, OsmandSettings.ROTATE_MAP_NONE);
-//			edit.putBoolean(OsmandSettings.SHOW_VIEW_ANGLE, false);
-//			edit.putBoolean(OsmandSettings.AUTO_ZOOM_MAP, false);
-//			edit.putBoolean(OsmandSettings.USE_STEP_BY_STEP_RENDERING, true);
-//			// edit.putBoolean(OsmandSettings.SHOW_OSM_BUGS, _);
-//			// edit.putBoolean(OsmandSettings.USE_ENGLISH_NAMES, _);
-//			edit.putBoolean(OsmandSettings.SAVE_TRACK_TO_GPX, false);
-//			// edit.putInt(OsmandSettings.SAVE_TRACK_INTERVAL, _);
-//			edit.putInt(OsmandSettings.POSITION_ON_MAP, OsmandSettings.CENTER_CONSTANT);
-//			// edit.putString(OsmandSettings.MAP_TILE_SOURCES, _);
-//
-//		}
-//
-//		BaseOsmandRender current = RendererRegistry.getRegistry().getCurrentSelectedRenderer();
-//		BaseOsmandRender defaultRender = RendererRegistry.getRegistry().defaultRender();
-//		BaseOsmandRender newRenderer;
-//		if (preset == ApplicationMode.CAR) {
-//			newRenderer = RendererRegistry.getRegistry().carRender();
-//		} else if (preset == ApplicationMode.BICYCLE) {
-//			newRenderer = RendererRegistry.getRegistry().bicycleRender();
-//		} else if (preset == ApplicationMode.PEDESTRIAN) {
-//			newRenderer = RendererRegistry.getRegistry().pedestrianRender();
-//		} else {
-//			newRenderer = defaultRender;
-//		}
-//		if (newRenderer != current) {
-//			RendererRegistry.getRegistry().setCurrentSelectedRender(newRenderer);
-//			app.getResourceManager().getRenderer().clearCache();
-//		}
-//		return edit.commit();
+		// update vector renderer 
+		RendererRegistry registry = ctx.getRendererRegistry();
+		BaseOsmandRender newRenderer = registry.getRenderer(RENDERER.get());
+		if (newRenderer == null) {
+			newRenderer = registry.defaultRender();
+		}
+		if(registry.getCurrentSelectedRenderer() != newRenderer){
+			registry.setCurrentSelectedRender(newRenderer);
+			ctx.getResourceManager().getRenderer().clearCache();
+		}
 	}
 	
 
@@ -240,7 +167,7 @@ public class OsmandSettings {
 	
 	/////////////// PREFERENCES classes ////////////////
 	
-	private abstract class CommonPreference<T> implements OsmandPreference<T> {
+	public abstract class CommonPreference<T> implements OsmandPreference<T> {
 		private final String id;
 		private final boolean global;
 		private T cachedValue;
@@ -264,6 +191,13 @@ public class OsmandSettings {
 		
 		protected SharedPreferences getPreferences(){
 			return global ? globalPreferences : profilePreferences;
+		}
+		
+		public void setModeDefaultValue(ApplicationMode mode, T defValue){
+			if(defaultValues == null){
+				defaultValues = new LinkedHashMap<ApplicationMode, T>();
+			}
+			defaultValues.put(mode, defValue);
 		}
 		
 		protected T getDefaultValue(){
@@ -408,8 +342,11 @@ public class OsmandSettings {
 	/////////////// PREFERENCES classes ////////////////
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> USE_INTERNET_TO_DOWNLOAD_TILES =
+	public final CommonPreference<Boolean> USE_INTERNET_TO_DOWNLOAD_TILES =
 		new BooleanPreference("use_internet_to_download_tiles", true, false, true);
+	{
+		USE_INTERNET_TO_DOWNLOAD_TILES.setModeDefaultValue(ApplicationMode.CAR, true);
+	}
 
 	
 	// this value string is synchronized with settings_pref.xml preference name
@@ -474,33 +411,23 @@ public class OsmandSettings {
 	public static final String DOWNLOAD_INDEXES = "download_indexes"; //$NON-NLS-1$
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> SAVE_TRACK_TO_GPX = new 
-		BooleanPreference("save_track_to_gpx", false, false){
-		protected Boolean getDefaultValue() {
-			boolean defaultValue = false;
-			if (currentMode == ApplicationMode.CAR || currentMode == ApplicationMode.BICYCLE) {
-				defaultValue = true;
-			}
-			return defaultValue;
-		};
-	};
+	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX = new BooleanPreference("save_track_to_gpx", false, false);
+	{
+		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.CAR, true);
+		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.BICYCLE, true);
+		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
+	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new 
-		BooleanPreference("fast_route_mode", true, false);
+	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference("fast_route_mode", true, false);
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Integer> SAVE_TRACK_INTERVAL = new 
-				IntPreference("save_track_interval", 5, false){
-		
-		protected int getDefValue() {
-			int defValue = 5;
-			if(currentMode == ApplicationMode.BICYCLE){
-				defValue = 15;
-			}
-			return defValue;
-		}
-	};
+	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference("save_track_interval", 5, false);
+	{
+		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.CAR, 5);
+		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.BICYCLE, 10);
+		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 20);
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_OSMAND_ROUTING_SERVICE_ALWAYS = 
@@ -522,27 +449,42 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> MAP_SCREEN_ORIENTATION = 
 		new IntPreference("map_screen_orientation", ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED, true);
 	
-	// TODO switch modes
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> SHOW_VIEW_ANGLE = 
-		new BooleanPreference("show_view_angle", false, true);
+	public final CommonPreference<Boolean> SHOW_VIEW_ANGLE = new BooleanPreference("show_view_angle", false, true);
+	{
+		SHOW_VIEW_ANGLE.setModeDefaultValue(ApplicationMode.BICYCLE, true);
+		SHOW_VIEW_ANGLE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
+		SHOW_VIEW_ANGLE.setModeDefaultValue(ApplicationMode.CAR, false);
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> AUTO_ZOOM_MAP = 
-		new BooleanPreference("auto_zoom_map", false, true);
+	public final CommonPreference<Boolean> AUTO_ZOOM_MAP = new BooleanPreference("auto_zoom_map", false, true);
+	{
+		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.CAR, true);
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public static final int ROTATE_MAP_TO_BEARING_DEF = 0;
 	public static final int ROTATE_MAP_NONE = 0;
 	public static final int ROTATE_MAP_BEARING = 1;
 	public static final int ROTATE_MAP_COMPASS = 2;
-	public final OsmandPreference<Integer> ROTATE_MAP = 
-			new IntPreference("rotate_map", ROTATE_MAP_TO_BEARING_DEF, false);
+	public final CommonPreference<Integer> ROTATE_MAP = 
+			new IntPreference("rotate_map", ROTATE_MAP_NONE, false);
+	{
+		ROTATE_MAP.setModeDefaultValue(ApplicationMode.CAR, ROTATE_MAP_BEARING);
+		ROTATE_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, ROTATE_MAP_BEARING);
+		ROTATE_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, ROTATE_MAP_COMPASS);
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final int CENTER_CONSTANT = 0;
 	public static final int BOTTOM_CONSTANT = 1;
-	public final OsmandPreference<Integer> POSITION_ON_MAP = new IntPreference("position_on_map", CENTER_CONSTANT, false);
+	public final CommonPreference<Integer> POSITION_ON_MAP = new IntPreference("position_on_map", CENTER_CONSTANT, false);
+	{
+		POSITION_ON_MAP.setModeDefaultValue(ApplicationMode.CAR, BOTTOM_CONSTANT);
+		POSITION_ON_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, BOTTOM_CONSTANT);
+		POSITION_ON_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, CENTER_CONSTANT);
+		
+	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Integer> MAX_LEVEL_TO_DOWNLOAD_TILE = new IntPreference("max_level_download_tile", 18, false, true);
@@ -558,14 +500,19 @@ public class OsmandSettings {
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> USE_STEP_BY_STEP_RENDERING = new BooleanPreference("use_step_by_step_rendering",
+	public final CommonPreference<Boolean> USE_STEP_BY_STEP_RENDERING = new BooleanPreference("use_step_by_step_rendering",
 			true, false);
+	{
+		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.CAR, true);
+		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.BICYCLE, false);
+		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String MAP_VECTOR_DATA = "map_vector_data"; //$NON-NLS-1$
 	public static final String MAP_TILE_SOURCES = "map_tile_sources"; //$NON-NLS-1$
 	
-	// TODO profile preferences ???
+
 	public boolean isUsingMapVectorData(){
 		return globalPreferences.getBoolean(MAP_VECTOR_DATA, false);
 	}
@@ -874,7 +821,7 @@ public class OsmandSettings {
 	public final OsmandPreference<String> VOICE_PROVIDER = new StringPreference("voice_provider", null, false);
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<String> RENDERER = new StringPreference("renderer", RendererRegistry.DEFAULT_RENDER, false) {
+	public final CommonPreference<String> RENDERER = new StringPreference("renderer", RendererRegistry.DEFAULT_RENDER, false) {
 		protected boolean setValue(SharedPreferences prefs, String val) {
 			if(val == null){
 				val = RendererRegistry.DEFAULT_RENDER;
@@ -889,6 +836,12 @@ public class OsmandSettings {
 			return false;
 		};
 	};
+	{
+		RENDERER.setModeDefaultValue(ApplicationMode.CAR, RendererRegistry.CAR_RENDER);
+		RENDERER.setModeDefaultValue(ApplicationMode.PEDESTRIAN, RendererRegistry.PEDESTRIAN_RENDER);
+		RENDERER.setModeDefaultValue(ApplicationMode.BICYCLE, RendererRegistry.BICYCLE_RENDER);
+	}
+	
 	
 	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference("voice_mute", false, true);
 	
