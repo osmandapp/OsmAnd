@@ -18,8 +18,6 @@ import net.osmand.plus.OsmandSettings.DayNightMode;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.activities.RouteProvider.RouteService;
-import net.osmand.plus.render.BaseOsmandRender;
-import net.osmand.plus.render.RendererRegistry;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
@@ -51,10 +49,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private Preference reloadIndexes;
 	private Preference downloadIndexes;
 
-	private ListPreference applicationMode;
 	private EditTextPreference applicationDir;
 	private ListPreference tileSourcePreference;
-	private ListPreference rendererPreference;
 	
 	private CheckBoxPreference routeServiceEnabled;
 	private BroadcastReceiver broadcastReceiver;
@@ -104,11 +100,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     	Integer[] ints = new Integer[secondsLength + minutesLength];
 		String[] intDescriptions = new String[ints.length];
 		for (int i = 0; i < secondsLength; i++) {
-			ints[i] = seconds[i]*coeff;
-			intDescriptions[i] = ints[i] + " " + getString(R.string.int_seconds); //$NON-NLS-1$
+			ints[i] = seconds[i] * coeff;
+			intDescriptions[i] = seconds[i] + " " + getString(R.string.int_seconds); //$NON-NLS-1$
 		}
 		for (int i = 0; i < minutesLength; i++) {
-			ints[secondsLength + i] = (minutes[i] * 60)*coeff;
+			ints[secondsLength + i] = (minutes[i] * 60) * coeff;
 			intDescriptions[secondsLength + i] = minutes[i] + " " + getString(R.string.int_min); //$NON-NLS-1$
 		}
 		registerListPreference(b, screen, intDescriptions, ints);
@@ -149,21 +145,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	    registerBooleanPreference(osmandSettings.USE_OSMAND_ROUTING_SERVICE_ALWAYS,screen); 
 	    registerBooleanPreference(osmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES,screen);
 	    
-		
-		reloadIndexes =(Preference) screen.findPreference(OsmandSettings.RELOAD_INDEXES);
-		reloadIndexes.setOnPreferenceClickListener(this);
-		downloadIndexes =(Preference) screen.findPreference(OsmandSettings.DOWNLOAD_INDEXES);
-		downloadIndexes.setOnPreferenceClickListener(this);
-		saveCurrentTrack =(Preference) screen.findPreference(OsmandSettings.SAVE_CURRENT_TRACK);
-		saveCurrentTrack.setOnPreferenceClickListener(this);
-		routeServiceEnabled =(CheckBoxPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_ENABLED);
-		routeServiceEnabled.setOnPreferenceChangeListener(this);
-		
 		registerEditTextPreference(osmandSettings.USER_NAME, screen);
 		registerEditTextPreference(osmandSettings.USER_PASSWORD, screen);
 		
-		applicationDir = (EditTextPreference) screen.findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
-		applicationDir.setOnPreferenceChangeListener(this);
+		
 		
 		// List preferences
 		registerListPreference(osmandSettings.ROTATE_MAP, screen, 
@@ -191,13 +176,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerListPreference(osmandSettings.METRIC_SYSTEM, screen, entries, MetricsConstants.values());
 		
 		//getResources().getAssets().getLocales();
-		entries = new String[] { "", "en", "cs", "de", "es", "fr", "hu", "it", "pt", "ru", "sk" };
-		entrieValues = new String[entries.length];
-		entrieValues[0] = getString(R.string.system_locale);
-		for (int i=1; i< entries.length; i++) {
-			entrieValues[i] = entries[i];
+		entrieValues = new String[] { "", "en", "cs", "de", "es", "fr", "hu", "it", "pt", "ru", "sk" };
+		entries = new String[entrieValues.length];
+		entries[0] = getString(R.string.system_locale);
+		for (int i = 1; i < entries.length; i++) {
+			entries[i] = entrieValues[i];
 		}
-		registerListPreference(osmandSettings.PREFERRED_LOCALE, screen, entries, entries);
+		registerListPreference(osmandSettings.PREFERRED_LOCALE, screen, entries, entrieValues);
 		
 		Set<String> voiceFiles = getVoiceFiles();
 		entries = new String[voiceFiles.size() + 1];
@@ -209,7 +194,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			entrieValues[k] = s;
 			k++;
 		}
-		registerListPreference(osmandSettings.VOICE_PROVIDER, screen, entries, entries);
+		registerListPreference(osmandSettings.VOICE_PROVIDER, screen, entries, entrieValues);
 		
 		int startZoom = 12;
 		int endZoom = 19;
@@ -230,7 +215,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		
 		entries = new String[]{getString(R.string.gps_provider), getString(R.string.network_provider)};
 		entrieValues = new String[]{LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER};
-		registerListPreference(osmandSettings.SERVICE_OFF_PROVIDER, screen, entries, entries);
+		registerListPreference(osmandSettings.SERVICE_OFF_PROVIDER, screen, entries, entrieValues);
 		
 		registerTimeListPreference(osmandSettings.SAVE_TRACK_INTERVAL, screen, new int[]{1, 2, 3, 5, 15, 20, 30}, new int[]{1, 2, 3, 5}, 1);
 		registerTimeListPreference(osmandSettings.SERVICE_OFF_INTERVAL, screen, 
@@ -238,14 +223,31 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerTimeListPreference(osmandSettings.SERVICE_OFF_WAIT_INTERVAL, screen, 
 				new int[]{15, 30, 45, 60, 90}, new int[]{2, 3, 5, 10}, 1000);
 		
-		applicationMode =(ListPreference) screen.findPreference(OsmandSettings.APPLICATION_MODE);
-		applicationMode.setOnPreferenceChangeListener(this);
+		
+		entries = new String[ApplicationMode.values().length];
+		for(int i=0; i<entries.length; i++){
+			entries[i] = ApplicationMode.toHumanString(ApplicationMode.values()[i], this);
+		}
+		registerListPreference(osmandSettings.APPLICATION_MODE, screen, entries, ApplicationMode.values());
+		
+		Collection<String> rendererNames = getMyApplication().getRendererRegistry().getRendererNames();
+		entries = (String[]) rendererNames.toArray(new String[rendererNames.size()]);
+		registerListPreference(osmandSettings.RENDERER, screen, entries, entries);
+		
 		tileSourcePreference = (ListPreference) screen.findPreference(OsmandSettings.MAP_TILE_SOURCES);
 		tileSourcePreference.setOnPreferenceChangeListener(this);
 		
-		rendererPreference =(ListPreference) screen.findPreference(osmandSettings.RENDERER.getId());
-		rendererPreference.setOnPreferenceChangeListener(this);
-		
+
+		reloadIndexes =(Preference) screen.findPreference(OsmandSettings.RELOAD_INDEXES);
+		reloadIndexes.setOnPreferenceClickListener(this);
+		downloadIndexes =(Preference) screen.findPreference(OsmandSettings.DOWNLOAD_INDEXES);
+		downloadIndexes.setOnPreferenceClickListener(this);
+		saveCurrentTrack =(Preference) screen.findPreference(OsmandSettings.SAVE_CURRENT_TRACK);
+		saveCurrentTrack.setOnPreferenceClickListener(this);
+		routeServiceEnabled =(CheckBoxPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_ENABLED);
+		routeServiceEnabled.setOnPreferenceChangeListener(this);
+		applicationDir = (EditTextPreference) screen.findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
+		applicationDir.setOnPreferenceChangeListener(this);
 		
 		
 		broadcastReceiver = new BroadcastReceiver(){
@@ -258,7 +260,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerReceiver(broadcastReceiver, new IntentFilter(NavigationService.OSMAND_STOP_SERVICE_ACTION));
     }
 
-	private void updateApplicationDirSummary() {
+	private void updateApplicationDirTextAndSummary() {
 		String storageDir = osmandSettings.getExternalStorageDirectory().getAbsolutePath();
 		applicationDir.setText(storageDir);
 		applicationDir.setSummary(storageDir);
@@ -283,7 +285,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     		pref.setChecked(b.get());
     	}
     	
-    	
     	for(OsmandPreference<?> p : listPreferences.values()){
     		ListPreference listPref = (ListPreference) screenPreferences.get(p.getId());
     		Map<String, ?> prefValues = listPrefValues.get(p.getId());
@@ -305,38 +306,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     		pref.setText(s.get());
     	}
     	
-		applicationDir.setText(osmandSettings.getExternalStorageDirectory().getAbsolutePath());
-		
+    	// Specific properties
 		routeServiceEnabled.setChecked(getMyApplication().getNavigationService() != null);
 		
-		ApplicationMode[] presets = ApplicationMode.values(); 
-		String[] names = new String[presets.length];
-		String[] values = new String[presets.length];
-		for(int i=0; i<presets.length; i++){
-			names[i] = ApplicationMode.toHumanString(presets[i], this);
-			values[i] = presets[i].name();
-		}
-		fill(applicationMode, names, values, osmandSettings.getApplicationMode().name());
-
-		
-		
-		
-		String vectorRenderer = osmandSettings.RENDERER.get();
-		Collection<String> rendererNames = RendererRegistry.getRegistry().getRendererNames();
-		String[] entries = (String[]) rendererNames.toArray(new String[rendererNames.size()]);
-		rendererPreference.setEntries(entries);
-		rendererPreference.setEntryValues(entries);
-		if(rendererNames.contains(vectorRenderer)){
-			rendererPreference.setValue(vectorRenderer);
-		} else {
-			rendererPreference.setValueIndex(0);
-		}
-		
-		
-
 		Map<String, String> entriesMap = osmandSettings.getTileSourceEntries();
-		entries = new String[entriesMap.size() + 1];
-		values = new String[entriesMap.size() + 1];
+		String[] entries = new String[entriesMap.size() + 1];
+		String[] values = new String[entriesMap.size() + 1];
 		values[0] = VECTOR_MAP;
 		entries[0] = getString(R.string.vector_data);
 		int ki = 1;
@@ -348,6 +323,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		String value = osmandSettings.isUsingMapVectorData()? VECTOR_MAP : osmandSettings.getMapTileSourceName();
 		fill(tileSourcePreference, entries, values, value);
 
+		updateTileSourceSummary();
+		
+		updateApplicationDirTextAndSummary();
+    }
+
+	private void updateTileSourceSummary() {
 		String mapName = " " + (osmandSettings.isUsingMapVectorData() ? getString(R.string.vector_data) : //$NON-NLS-1$
 				osmandSettings.getMapTileSourceName());
 		String summary = tileSourcePreference.getSummary().toString();
@@ -355,9 +336,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			summary = summary.substring(0, summary.lastIndexOf(':') + 1);
 		}
 		tileSourcePreference.setSummary(summary + mapName);
-		
-		updateApplicationDirSummary();
-    }
+	}
     
 	private void fill(ListPreference component, String[] list, String[] values, String selected) {
 		component.setEntries(list);
@@ -378,27 +357,32 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		} else if (editPref != null) {
 			editPref.set((String) newValue);
 		} else if (listPref != null) {
-			CharSequence entry = ((ListPreference) preference).getEntry();
+			int ind = ((ListPreference) preference).findIndexOfValue((String) newValue);
+			CharSequence entry = ((ListPreference) preference).getEntries()[ind];
 			Map<String, ?> map = listPrefValues.get(preference.getKey());
 			Object obj = map.get(entry);
-			listPref.set(obj);
+			boolean changed = listPref.set(obj);
 			
 			// Specific actions after list preference changed
-			if(listPref.getId().equals(osmandSettings.DAYNIGHT_MODE.getId())){
-				getMyApplication().getDaynightHelper().setDayNightMode(osmandSettings.DAYNIGHT_MODE.get());
-			} else if(listPref.getId().equals(osmandSettings.VOICE_PROVIDER.getId())){
-				getMyApplication().initCommandPlayer();
-			} else if(listPref.getId().equals(osmandSettings.PREFERRED_LOCALE.getId())){
-				// restart activity
-				getMyApplication().checkPrefferedLocale();
-				Intent intent = getIntent();
-				finish();
-				startActivity(intent);
+			if (changed) {
+				if (listPref.getId().equals(osmandSettings.VOICE_PROVIDER.getId())) {
+					getMyApplication().initCommandPlayer();
+				} else if (listPref.getId().equals(osmandSettings.APPLICATION_MODE.getId())) {
+					updateAllSettings();
+				} else if (listPref.getId().equals(osmandSettings.PREFERRED_LOCALE.getId())) {
+					// restart application to update locale
+					getMyApplication().checkPrefferedLocale();
+					Intent intent = getIntent();
+					finish();
+					startActivity(intent);
+				}
 			}
-		} else if(preference == applicationMode){
-			boolean changed = osmandSettings.setApplicationMode(ApplicationMode.valueOf(newValue.toString()), getMyApplication());
-			if(changed){
-				updateAllSettings();
+			if (listPref.getId().equals(osmandSettings.RENDERER.getId())) {
+				if(changed){
+					Toast.makeText(this, R.string.renderer_load_sucess, Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(this, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
+				}
 			}
 		} else if(preference == applicationDir){
 			warnAboutChangingStorage((String) newValue);
@@ -415,16 +399,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					routeServiceEnabled.setChecked(getMyApplication().getNavigationService() != null);
 				}
 			}
-		} else if (preference == rendererPreference) {
-			BaseOsmandRender loaded = RendererRegistry.getRegistry().getRenderer((String) newValue);
-			if(loaded == null){
-				Toast.makeText(this, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
-			} else {
-				RendererRegistry.getRegistry().setCurrentSelectedRender(loaded);
-				osmandSettings.RENDERER.set((String) newValue);
-				Toast.makeText(this, R.string.renderer_load_sucess, Toast.LENGTH_SHORT).show();
-				getMyApplication().getResourceManager().getRenderer().clearCache();
-			}
 		} else if (preference == tileSourcePreference) {
 			if(VECTOR_MAP.equals((String) newValue)){
 				osmandSettings.setUsingMapVectorData(true);
@@ -432,14 +406,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				osmandSettings.setUsingMapVectorData(true);
 				osmandSettings.setMapTileSource((String) newValue);
 			}
-			String summary = tileSourcePreference.getSummary().toString();
-			if (summary.lastIndexOf(':') != -1) {
-				summary = summary.substring(0, summary.lastIndexOf(':') + 1);
-			}
-			summary += " " + (osmandSettings.isUsingMapVectorData() ? getString(R.string.vector_data) : //$NON-NLS-1$
-				osmandSettings.getMapTileSourceName());
-			tileSourcePreference.setSummary(summary);
-			
+			updateTileSourceSummary();
 		}
 		return true;
 	}
@@ -462,7 +429,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				osmandSettings.setExternalStorageDirectory(newDir);
 				getMyApplication().getResourceManager().resetStoreDirectory();
 				reloadIndexes();
-				updateApplicationDirSummary();
+				updateApplicationDirTextAndSummary();
 			}
 		});
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);

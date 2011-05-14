@@ -178,7 +178,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     @Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		settings = OsmandSettings.getOsmandSettings(this);		
+		settings = ((OsmandApplication) getApplication()).getSettings();		
 		// for voice navigation
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
@@ -1167,7 +1167,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			public void onClick(DialogInterface dialog, int which) {
 				ApplicationMode mode = getAppMode(buttons);
 				// change global settings
-				boolean changed = settings.setApplicationMode(mode, (OsmandApplication) getApplication());
+				boolean changed = settings.APPLICATION_MODE.set(mode);
 				if (changed) {
 					updateApplicationModeSettings();	
 					mapView.refreshMap();
