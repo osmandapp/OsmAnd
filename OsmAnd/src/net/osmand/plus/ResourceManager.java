@@ -101,7 +101,7 @@ public class ResourceManager {
 	}
 
 	public void resetStoreDirectory() {
-		dirWithTiles = OsmandSettings.extendOsmandPath(context, TILES_PATH);
+		dirWithTiles = context.getSettings().extendOsmandPath(TILES_PATH);
 		dirWithTiles.mkdirs();
 	}
 	
@@ -352,7 +352,7 @@ public class ResourceManager {
 	}
 	
 	private void initRenderers(IProgress progress) {
-		File file = OsmandSettings.extendOsmandPath(context, APP_DIR + IndexConstants.RENDERERS_DIR);
+		File file = context.getSettings().extendOsmandPath(APP_DIR + IndexConstants.RENDERERS_DIR);
 		file.mkdirs();
 		Map<String, File> externalRenderers = new LinkedHashMap<String, File>(); 
 		if (file.exists() && file.canRead()) {
@@ -363,18 +363,18 @@ public class ResourceManager {
 				}
 			}
 		}
-		RendererRegistry.getRegistry().setExternalRenderers(externalRenderers);
-		String r = OsmandSettings.getVectorRenderer(OsmandSettings.getPrefs(context));
+		context.getRendererRegistry().setExternalRenderers(externalRenderers);
+		String r = context.getSettings().RENDERER.get();
 		if(r != null){
-			BaseOsmandRender obj = RendererRegistry.getRegistry().getRenderer(r);
+			BaseOsmandRender obj = context.getRendererRegistry().getRenderer(r);
 			if(obj != null){
-				RendererRegistry.getRegistry().setCurrentSelectedRender(obj);
+				context.getRendererRegistry().setCurrentSelectedRender(obj);
 			}
 		}
 	}
 
 	public List<String> indexingMaps(final IProgress progress) {
-		File file = OsmandSettings.extendOsmandPath(context, MAPS_PATH);
+		File file = context.getSettings().extendOsmandPath(MAPS_PATH);
 		file.mkdirs();
 		List<String> warnings = new ArrayList<String>();
 		renderer.clearAllResources();
@@ -431,7 +431,7 @@ public class ResourceManager {
 	
 	// POI INDEX //
 	public List<String> indexingPoi(final IProgress progress) {
-		File file = OsmandSettings.extendOsmandPath(context, POI_PATH);
+		File file = context.getSettings().extendOsmandPath(POI_PATH);
 		file.mkdirs();
 		List<String> warnings = new ArrayList<String>();
 		closeAmenities();

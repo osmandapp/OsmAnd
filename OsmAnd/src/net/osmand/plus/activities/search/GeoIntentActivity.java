@@ -49,8 +49,7 @@ public class GeoIntentActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search_address_offline);
 		getMyApplication().checkApplicationIsBeingInitialized(this);
-		location = OsmandSettings.getLastKnownMapLocation(OsmandSettings
-				.getPrefs(this));
+		location = getMyApplication().getSettings().getLastKnownMapLocation();
 		final Intent intent = getIntent();
 		if (intent != null) {
 			progressDlg = ProgressDialog.show(this,
@@ -145,7 +144,7 @@ public class GeoIntentActivity extends ListActivity {
 		super.onListItemClick(l, v, position, id);
 		MapObject item = ((MapObjectAdapter) getListAdapter())
 				.getItem(position);
-		OsmandSettings.setMapLocationToShow(this, item.getLocation()
+		getMyApplication().getSettings().setMapLocationToShow(item.getLocation()
 				.getLatitude(), item.getLocation().getLongitude(),
 				getString(R.string.address) + " : " + item.toString()); //$NON-NLS-1$
 		startActivity(new Intent(this, MapActivity.class));

@@ -81,7 +81,7 @@ public class ShowRouteInfoActivity extends ListActivity {
 		RouteDirectionInfo item = ((RouteInfoAdapter)getListAdapter()).getItem(position - 1);
 		Location loc = helper.getLocationFromRouteDirection(item);
 		if(loc != null){
-			OsmandSettings.setMapLocationToShow(this, loc.getLatitude(),loc.getLongitude());
+			OsmandSettings.getOsmandSettings(this).setMapLocationToShow(loc.getLatitude(),loc.getLongitude());
 			startActivity(new Intent(this, MapActivity.class));
 		}
 	}
