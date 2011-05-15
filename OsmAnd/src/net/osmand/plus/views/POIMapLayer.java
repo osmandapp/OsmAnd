@@ -166,8 +166,14 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 				int y = view.getMapYForPoint(o.getLocation().getLatitude());
 				canvas.drawCircle(x, y, r, pointAltUI);
 				canvas.drawCircle(x, y, r, point);
+				String id = null;
 				if(icons.containsKey(o.getSubType())){
-					int resId = icons.get(o.getSubType());
+					id = o.getSubType();
+				} else if (icons.containsKey(o.getType().getDefaultTag() + "_" + o.getSubType())) {
+					id = o.getType().getDefaultTag() + "_" + o.getSubType();
+				}
+				if(id != null){
+					int resId = icons.get(id);
 					Bitmap bmp = getCachedImg(resId);
 					if(bmp != null){
 						canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintIcon);
