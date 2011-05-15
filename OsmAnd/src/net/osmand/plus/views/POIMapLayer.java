@@ -1,7 +1,9 @@
 package net.osmand.plus.views;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
@@ -11,10 +13,13 @@ import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.EditingPOIActivity;
+import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.render.UnscaledBitmapLoader;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -33,13 +38,15 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 	
 	
 	private Paint pointAltUI;
+	private Paint paintIcon;
 	private Paint point;
 	private OsmandMapTileView view;
 	private List<Amenity> objects = new ArrayList<Amenity>();
-
+	
 	private ResourceManager resourceManager;
 	private PoiFilter filter;
 	private DisplayMetrics dm;
+	private Map<Integer, Bitmap> cachedIcons = new LinkedHashMap<Integer, Bitmap>();
 	
 	@Override
 	public boolean onLongPressEvent(PointF point) {
@@ -112,6 +119,8 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 		pointAltUI.setAlpha(160);
 		pointAltUI.setStyle(Style.FILL);
 		
+		paintIcon = new Paint();
+		
 		point = new Paint();
 		point.setColor(Color.GRAY);
 		point.setAntiAlias(true);
@@ -134,20 +143,37 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 		}
 		return (int) (r * dm.density);
 	}
-
+	
+	public Bitmap getCachedImg(int resId) {
+		if (cachedIcons.containsKey(resId)) {
+			return cachedIcons.get(resId);
+		}
+		Bitmap bmp = UnscaledBitmapLoader.loadFromResource(view.getResources(), resId, null, dm);
+		cachedIcons.put(resId, bmp);
+		return bmp;
+	}
+	
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, boolean nightMode) {
+		
 		if (view.getZoom() >= startZoom) {
-
+			Map<String, Integer> icons = RenderingIcons.getIcons();
 			objects.clear();
 			resourceManager.searchAmenitiesAsync(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, view.getZoom(), filter, objects);
 			int r = getRadiusPoi(view.getZoom());
 			for (Amenity o : objects) {
 				int x = view.getMapXForPoint(o.getLocation().getLongitude());
 				int y = view.getMapYForPoint(o.getLocation().getLatitude());
-				
 				canvas.drawCircle(x, y, r, pointAltUI);
 				canvas.drawCircle(x, y, r, point);
+				if(icons.containsKey(o.getSubType())){
+					int resId = icons.get(o.getSubType());
+					Bitmap bmp = getCachedImg(resId);
+					if(bmp != null){
+						canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintIcon);
+					}
+				}
+				
 			}
 
 		}
@@ -155,7 +181,7 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 
 	@Override
 	public void destroyLayer() {
-		
+		cachedIcons.clear();
 	}
 
 	@Override
