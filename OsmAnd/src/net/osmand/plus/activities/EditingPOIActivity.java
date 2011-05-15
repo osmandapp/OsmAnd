@@ -73,6 +73,7 @@ import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.util.Xml;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -188,6 +189,27 @@ public class EditingPOIActivity {
 		});
 		linkToOsmDoc.setMovementMethod(LinkMovementMethod.getInstance());
 		
+		
+		// show on focuse with empty text predefined list of subcategories
+		typeText.setOnFocusChangeListener(new OnFocusChangeListener() {
+			
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if(hasFocus && typeText.getText().length() == 0 && a.getType() != null){
+					Builder builder = new AlertDialog.Builder(ctx);
+					final String[] subCats = AmenityType.getSubCategories(a.getType(), MapRenderingTypes.getDefault()).toArray(new String[0]);
+					builder.setItems(subCats, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							typeText.setText(subCats[which]);
+							a.setSubType(subCats[which]);
+						}
+					});
+					builder.show();
+				}
+			}
+		});
+		
 		openHoursButton.setOnClickListener(new View.OnClickListener(){
 
 			@Override
@@ -201,6 +223,7 @@ public class EditingPOIActivity {
 			@Override
 			public void afterTextChanged(Editable s) {
 				String str = s.toString();
+				a.setSubType(str);
 				AmenityType t = MapRenderingTypes.getDefault().getAmenityNameToType().get(str);
 				if(t != null && a.getType() != t){
 					a.setType(t);

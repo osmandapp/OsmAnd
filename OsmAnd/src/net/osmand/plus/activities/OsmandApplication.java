@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 public class OsmandApplication extends Application {
 	public static final String EXCEPTION_PATH = ResourceManager.APP_DIR + "exception.log"; //$NON-NLS-1$
+	private static final org.apache.commons.logging.Log LOG = LogUtil.getLog(OsmandApplication.class);
 	
 	ResourceManager manager = null; 
 	PoiFiltersHelper poiFilters = null;
@@ -59,6 +60,7 @@ public class OsmandApplication extends Application {
 	
     public void	onCreate(){
     	super.onCreate();
+    	long timeToStart = System.currentTimeMillis();
     	osmandSettings = OsmandSettings.getOsmandSettings(this);
     	routingHelper = new RoutingHelper(osmandSettings, OsmandApplication.this, player);
     	manager = new ResourceManager(this);
@@ -67,6 +69,9 @@ public class OsmandApplication extends Application {
     	rendererRegistry = new RendererRegistry();
     	checkPrefferedLocale();
     	startApplication();
+    	if(LOG.isDebugEnabled()){
+    		LOG.debug("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
+    	}
 	}
     
     public RendererRegistry getRendererRegistry() {
