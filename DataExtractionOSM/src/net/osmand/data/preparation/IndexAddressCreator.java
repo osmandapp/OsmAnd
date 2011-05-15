@@ -436,11 +436,11 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		return foundId;
 	}
 
-	public City getClosestCity(LatLon point) {
+	public City getClosestCity(LatLon point, Set<String> isInNames) {
 		if (point == null) {
 			return null;
 		}
-		
+		// search by boundaries
 		for (City c : cityManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
 			Boundary boundary = citiBoundaries.get(c);
 			if(boundary != null){
@@ -457,22 +457,30 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				}
 			}
 		}
+		
+		// search by distance considering is_in names 
 		City closest = null;
 		double relDist = Double.POSITIVE_INFINITY;
 		for (City c : cityManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
 			double rel = MapUtils.getDistance(c.getLocation(), point) / c.getType().getRadius();
+			if(isInNames.contains(c.getName())){
+				return c;
+			}
 			if (rel < relDist) {
 				closest = c;
 				relDist = rel;
-				if (relDist < 0.2d) {
+				if (relDist < 0.2d && isInNames.isEmpty()) {
 					break;
 				}
 			}
 		}
-		if (relDist < 0.2d) {
+		if (relDist < 0.2d && isInNames.isEmpty()) {
 			return closest;
 		}
 		for (City c : cityVillageManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
+			if(isInNames.contains(c.getName())){
+				return c;
+			}
 			double rel = MapUtils.getDistance(c.getLocation(), point) / c.getType().getRadius();
 			if (rel < relDist) {
 				closest = c;
@@ -485,6 +493,21 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		return closest;
 	}
 	
+	private Set<String> getIsINames(Entity e) {
+		String values = e.getTag(OSMTagKey.IS_IN);
+		if (values == null) {
+			return Collections.emptySet();
+		}
+		if (values.indexOf(';') != -1) {
+			String[] splitted = values.split(";");
+			Set<String> set = new HashSet<String>();
+			for (int i = 0; i < splitted.length; i++) {
+				set.add(splitted[i].trim());
+			}
+			return set;
+		}
+		return Collections.singleton(values.trim());
+	}
 	
 	public void iterateMainEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		// index not only buildings but also nodes that belongs to addr:interpolation ways
@@ -504,7 +527,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			if (!exist) {
 				ctx.loadEntityData(e, false);
 				LatLon l = e.getLatLon();
-				City city = getClosestCity(l);
+				City city = getClosestCity(l, getIsINames(e));
 				Long idStreet = getStreetInCity(city, e.getTag(OSMTagKey.ADDR_STREET), l, (e.getId() << 2));
 				if (idStreet != null) {
 					Building building = new Building(e);
@@ -534,7 +557,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			if (!exist) {
 				ctx.loadEntityData(e, false);
 				LatLon l = e.getLatLon();
-				City city = getClosestCity(l);
+				City city = getClosestCity(l, getIsINames(e));
 				Long idStreet = getStreetInCity(city, e.getTag(OSMTagKey.NAME), l, (e.getId() << 2) | 1);
 				if (idStreet != null && saveAddressWays) {
 					writeStreetWayNodes(idStreet, (Way) e);
