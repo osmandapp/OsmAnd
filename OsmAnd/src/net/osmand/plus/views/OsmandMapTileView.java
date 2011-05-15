@@ -100,7 +100,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private Map<OsmandMapLayer, Float> zOrders = new HashMap<OsmandMapLayer, Float>();
 
 	// UI Part
-	// handler to refresh map (in ui thread - not necessary in ui thread, but msg queue is desirable).
+	// handler to refresh map (in ui thread - ui thread is not necessary, but msg queue is required).
 	protected Handler handler = new Handler();
 
 	private AnimateDraggingMapThread animatedDraggingThread;
@@ -614,71 +614,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	public void tileDownloaded(DownloadRequest request) {
-		if (request == null || rotate != 0) {
-			// if image is rotated call refresh the whole canvas
-			// because we can't find dirty rectangular region
-			
-			// if request null then we don't know exact images were changed
-			refreshMap();
-			return;
-		}
-		if (request.error) {
-			return;
-		}
-		if (request.zoom != getZoom()) {
-			refreshMap();
-			return;
-		}
-		float w = getCenterPointX();
-		float h = getCenterPointY();
-		float tileX = getXTile();
-		float tileY = getYTile();
-
-		SurfaceHolder holder = getHolder();
-		synchronized (holder) {
-			tilesRect.set(request.xTile, request.yTile, request.xTile + 1, request.yTile + 1);
-			calculatePixelRectangle(boundsRect, w, h, tileX, tileY, tilesRect);
-
-			if (boundsRect.left > getWidth() || boundsRect.right < 0 || boundsRect.bottom < 0 || boundsRect.top > getHeight()) {
-				return;
-			}
-
-			Canvas canvas = holder.lockCanvas(boundsRect);
-			if (canvas != null) {
-				boolean nightMode = false;
-				if(application != null){
-					Boolean dayNightRenderer = application.getDaynightHelper().getDayNightRenderer();
-					if(dayNightRenderer != null){
-						nightMode = !dayNightRenderer.booleanValue();
-					}
-				}
-				canvas.save();
-				canvas.rotate(rotate, w, h);
-
-				try {
-					Bitmap bmp = null;
-					if (map != null) {
-						ResourceManager mgr = getApplication().getResourceManager();
-						bmp = mgr.getTileImageForMapSync(null, map, request.xTile, request.yTile, request.zoom, false);
-					}
-
-					float x = (request.xTile - tileX) * getTileSize() + w;
-					float y = (request.yTile - tileY) * getTileSize() + h;
-					float tileSize = getTileSize();
-					if (bmp == null) {
-						drawEmptyTile(canvas, x, y, tileSize, nightMode);
-					} else {
-						bitmapToZoom.set(0, 0, getSourceTileSize(), getSourceTileSize());
-						bitmapToDraw.set(x, y, x + tileSize, y + tileSize);
-						canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
-					}
-					drawOverMap(canvas, latlonRect, nightMode);
-				} finally {
-					holder.unlockCanvasAndPost(canvas);
-				}
-			}
-
-		}
+		// force to refresh map because image can be loaded from different threads
+		// and threads can block each other especially for sqlite images when they
+		// are inserting into db they block main thread
+		refreshMap();
 	}
 
 	// ///////////////////////////////// DRAGGING PART ///////////////////////////////////////

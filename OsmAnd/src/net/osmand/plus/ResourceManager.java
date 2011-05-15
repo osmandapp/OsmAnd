@@ -30,7 +30,6 @@ import net.osmand.osm.MapUtils;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.render.BaseOsmandRender;
 import net.osmand.plus.render.MapRenderRepositories;
-import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.views.POIMapLayer;
 
 import org.apache.commons.logging.Log;
@@ -174,6 +173,9 @@ public class ResourceManager {
 		if(!imagesOnFS.containsKey(file)){
 			boolean ex = false;
 			if(map instanceof SQLiteTileSource){
+				if(((SQLiteTileSource) map).isLocked()){
+					return false;
+				}
 				ex = ((SQLiteTileSource) map).exists(x, y, zoom);
 			} else {
 				if(file == null){
@@ -308,6 +310,9 @@ public class ResourceManager {
 		}
 		if (req.dirWithTiles.canRead() && !downloader.isFileCurrentlyDownloaded(req.fileToSave)) {
 			long time = System.currentTimeMillis();
+			if (log.isDebugEnabled()) {
+				log.debug("Start loaded file : " + req.tileId + " " + Thread.currentThread().getName()); //$NON-NLS-1$ //$NON-NLS-2$
+			}
 			Bitmap bmp = null;
 			if (req.tileSource instanceof SQLiteTileSource) {
 				bmp = ((SQLiteTileSource) req.tileSource).getImage(req.xTile, req.yTile, req.zoom);

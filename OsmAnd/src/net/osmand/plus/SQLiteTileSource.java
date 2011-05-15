@@ -34,6 +34,7 @@ public class SQLiteTileSource implements ITileSource {
 	private final File file;
 	private int minZoom = 1;
 	private int maxZoom = 17;
+	private boolean locked = false;
 	
 	public SQLiteTileSource(File f){
 		this.file = f;
@@ -167,6 +168,10 @@ public class SQLiteTileSource implements ITileSource {
 			return false;
 		}
 	}
+	
+	public boolean isLocked() {
+		return locked;
+	}
 
 	public Bitmap getImage(int x, int y, int zoom) {
 		SQLiteDatabase db = getDatabase();
@@ -207,22 +212,27 @@ public class SQLiteTileSource implements ITileSource {
 		if(exists(x, y, zoom)){
 			return;
 		}
-		ByteBuffer buf = ByteBuffer.allocate((int) fileToSave.length());
-		FileInputStream is = new FileInputStream(fileToSave);
-		int i = 0;
-		byte[] b = new byte[BUF_SIZE];
-		while((i=is.read(b, 0, BUF_SIZE)) > - 1){
-			buf.put(b, 0, i);
+		try {
+			locked = true;
+			ByteBuffer buf = ByteBuffer.allocate((int) fileToSave.length());
+			FileInputStream is = new FileInputStream(fileToSave);
+			int i = 0;
+			byte[] b = new byte[BUF_SIZE];
+			while ((i = is.read(b, 0, BUF_SIZE)) > -1) {
+				buf.put(b, 0, i);
+			}
+
+			SQLiteStatement statement = db.compileStatement("INSERT INTO tiles VALUES(?, ?, ?, ?, ?)"); //$NON-NLS-1$
+			statement.bindLong(1, x);
+			statement.bindLong(2, y);
+			statement.bindLong(3, 17 - zoom);
+			statement.bindLong(4, 0);
+			statement.bindBlob(5, buf.array());
+			statement.execute();
+			statement.close();
+		} finally {
+			locked = false;
 		}
-		
-		SQLiteStatement statement = db.compileStatement("INSERT INTO tiles VALUES(?, ?, ?, ?, ?)"); //$NON-NLS-1$
-		statement.bindLong(1, x);
-		statement.bindLong(2, y);
-		statement.bindLong(3, 17 - zoom);
-		statement.bindLong(4, 0);
-		statement.bindBlob(5, buf.array());
-		statement.execute();
-		statement.close();
 		
 	}
 	
