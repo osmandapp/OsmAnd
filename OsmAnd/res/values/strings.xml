@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="level_to_switch_vector_raster_descr">Max zoom level to use vector rendering instead of raster</string>
+	<string name="level_to_switch_vector_raster">Zoom vector level</string>
 	<string name="tip_location_sharing">Location sharing</string>
 	<string name="tip_location_sharing_t">Do you find some interresting place on your trip and want to share it\'s location with your friends or family?
 	\nOsmAnd affords you to easily share any location you want.

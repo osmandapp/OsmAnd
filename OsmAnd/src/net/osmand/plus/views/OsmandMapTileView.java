@@ -23,7 +23,6 @@ import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import org.apache.commons.logging.Log;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;

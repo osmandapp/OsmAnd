@@ -206,6 +206,16 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		registerListPreference(osmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE, screen, entries, intValues);
 		
+		startZoom = 3;
+		endZoom = 18;
+		entries = new String[endZoom - startZoom + 1];
+		intValues = new Integer[endZoom - startZoom + 1];
+		for (int i = startZoom; i <= endZoom; i++) {
+			entries[i - startZoom] = i + ""; //$NON-NLS-1$
+			intValues[i - startZoom] = i ;
+		}
+		registerListPreference(osmandSettings.LEVEL_TO_SWITCH_VECTOR_RASTER, screen, entries, intValues);
+		
 		entries = new String[RouteService.values().length];
 		for(int i=0; i<entries.length; i++){
 			entries[i] = RouteService.values()[i].getName();

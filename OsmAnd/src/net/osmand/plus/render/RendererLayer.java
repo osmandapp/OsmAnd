@@ -53,7 +53,8 @@ public class RendererLayer implements OsmandMapLayer {
 
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, boolean nightMode) {
-		if (view.getZoom() >= startZoom && visible) {
+		Integer zoom = view.getSettings().LEVEL_TO_SWITCH_VECTOR_RASTER.get();
+		if (view.getZoom() >= Math.max(zoom, startZoom) && visible) {
 			if (!view.isZooming()){
 				pixRect.set(0, 0, view.getWidth(), view.getHeight());
 				updateRotatedTileBox();
@@ -95,6 +96,8 @@ public class RendererLayer implements OsmandMapLayer {
 					canvas.drawBitmap(bmp, null, destImage, paintImg);
 				}
 			}
+		} else {
+			resourceManager.getRenderer().clearCache();
 		}
 	}
 
