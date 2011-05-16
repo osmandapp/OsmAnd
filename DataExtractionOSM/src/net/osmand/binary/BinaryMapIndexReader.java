@@ -501,9 +501,13 @@ public class BinaryMapIndexReader {
 				break;
 			case OsmandOdb.MapRootLevel.MAXZOOM_FIELD_NUMBER :
 				root.maxZoom = codedIS.readInt32();
+				if ((root.maxZoom >= 10) && (root.maxZoom < 20))  // increase detail level
+					root.maxZoom--;
 				break;
 			case OsmandOdb.MapRootLevel.MINZOOM_FIELD_NUMBER :
 				root.minZoom = codedIS.readInt32();
+				if (root.minZoom > 10)  // increase detail level
+					root.minZoom--;
 				break;
 			case OsmandOdb.MapRootLevel.ROOT_FIELD_NUMBER :
 				MapTree r = new MapTree();
