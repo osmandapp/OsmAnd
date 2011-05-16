@@ -403,7 +403,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			if(VECTOR_MAP.equals((String) newValue)){
 				osmandSettings.setUsingMapVectorData(true);
 			} else {
-				osmandSettings.setUsingMapVectorData(true);
+				osmandSettings.setUsingMapVectorData(false);
 				osmandSettings.setMapTileSource((String) newValue);
 			}
 			updateTileSourceSummary();
