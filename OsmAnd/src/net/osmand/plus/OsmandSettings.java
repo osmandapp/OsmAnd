@@ -83,10 +83,10 @@ public class OsmandSettings {
 		
 		defaultProfilePreferences = getProfilePreferences(ApplicationMode.DEFAULT);
 		profilePreferences = defaultProfilePreferences;
-		if(FOLLOW_TO_THE_ROUTE.get()){
+//		if(FOLLOW_TO_THE_ROUTE.get()){
 			currentMode = readApplicationMode();
 			profilePreferences = getProfilePreferences(currentMode);
-		}
+//		}
 	}
 	
 	private SharedPreferences getProfilePreferences(ApplicationMode mode){
