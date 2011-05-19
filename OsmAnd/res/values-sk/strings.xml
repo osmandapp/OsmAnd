@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="tip_day_night_mode">Denný/Nočný režim</string>
+	<string name="tip_day_night_mode_t">Môžete zmeniť vzhľad mapy, podľa toho, či používate Osmand cez deň(jasné svetelné podmienky) alebo v noci(tmavé svetelné podmienky).
+	\nKeď jazdíte v noci, je bezpečnejšie, keď sú farby mapy tmavšie, pretože nie ste tak oslepovaný ako s jasnejšími farbami na displeji.
+	\n\tMôžete nastaviť ako meniť režim cez \'Hlavné menu\'->\'Nastavenia\'->\'vzhľad mapy\'->\'Denný/nočný režim\'.
+	\nMožnosti sú:
+	\n\t"Východ/Západ slnka" - automatický režim, ovládaný polohou slnka(štandardný)
+	\n\t"Deň" - vždy použiť denný režim
+	\n\t"Noc" - vždy použiť nočný režim 
+	\n\t"Svetelný senzor" - vzhľad mapy je ovládaný svetelným senzorom Vášho zariadenia(iba ak je dostupný)</string>	
 	<string name="tip_location_sharing">Zdieľanie umiestnenia</string>
 	<string name="tip_location_sharing_t">Objavili ste nejaké zaujímavé miesto na Vašom výlete a chcete zdieľať jeho pozíciu s Vašimi priateľmi alebo rodinou?
 	\nOsmAnd Vám umožňuje jednoducho zdieľať hodcijaké umiestnenie chcete.
@@ -137,7 +146,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 
 <string name="daynight_mode_day">Denný režim</string>
 <string name="daynight_mode_night">Nočný režim</string>
-<string name="daynight_mode_auto">Automaticky</string>
+<string name="daynight_mode_auto">Východ/Západ slnka</string>
 <string name="daynight_mode_sensor">Svetelný senzor</string>
 <string name="daynight_descr">Vybrať medzi denným/nočným režimom</string>
 <string name="daynight">Denný/nočný režim</string>
