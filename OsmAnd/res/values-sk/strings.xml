@@ -110,7 +110,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 	<string name="poi_filter_for_tourists">Pre turistov</string>
 	<string name="poi_filter_fuel">Palivo</string>
 	<string name="poi_filter_namefinder">Online hľadač mien</string>
-	<string name="reading_cached_tiles">Čítajú sa dlaždice zo zásobníka...</string>
+	<string name="reading_cached_tiles">Načítavajú sa dlaždice zo zásobníka...</string>
 	<string name="version_index_is_big_for_memory">Index \'\'{0}\'\' sa nezmestil do pamäti</string>
 	<string name="version_index_is_not_supported">Verzia indexu \'\'{0}\'\' nie je podporovaná</string>
 	
@@ -293,8 +293,8 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="opening_hours_not_supported">Formát otváracích hodín nie je podporovaný na úpravu</string>
 <string name="add_new_rule">Pridať nové pravidlo</string>
 <string name="transport_Routes">Cesty</string>
-<string name="transport_Stop">Zastaviť</string>
-<string name="transport_stops">zastávky</string>
+<string name="transport_Stop">Zastávka</string>
+<string name="transport_stops">Zastávky</string>
 
 <string name="transport_search_after">Hľadať cestu po</string> 
 <string name="transport_search_before">Hľadať cestu pred</string>
@@ -385,7 +385,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="go_back_to_osmand">Ísť späť na OsmAnd mapu</string>
 <string name="close">Zavrieť</string>
 <string name="loading_data">Načítavajú sa údaje</string>
-<string name="reading_indexes">Čítajú sa indexy...</string>
+<string name="reading_indexes">Načítavajú sa indexy...</string>
 <string name="previous_run_crashed">Predošlé spustenie aplikácie zlyhalo. Záznamový súbor je v {0}. Prosím, oznámte to a priložte záznamový súbor.</string>
 <string name="saving_gpx_tracks">Ukladajú sa GPX stopy na SD kartu...</string>
 <string name="finished_task">Dokončené</string>
