@@ -428,6 +428,11 @@
 		<regions siteToDownload="http://download.geofabrik.de/osm/{0}.osm.pbf" region_prefix="" region_suffix=""  skip="true">
 			<region name="australia-oceania" esize=""/>
 		</regions>
-									
+				
+		<!-- NEW ZEALAND-AUSTRALIA [SOURCE: GEOFABRIK.DE] -->
+		<regions siteToDownload="http://download.geofabrik.de/osm/australia-oceania/{0}.osm.pbf" region_prefix="" region_suffix="Australia"  skip="true">
+			<region name="new-zealand" esize=""/>
+		</regions>
+							
 	</process>
 </batch_process> 
