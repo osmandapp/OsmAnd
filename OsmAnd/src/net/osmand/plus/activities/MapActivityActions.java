@@ -9,6 +9,7 @@ import java.util.List;
 import net.osmand.FavouritePoint;
 import net.osmand.LogUtil;
 import net.osmand.data.Amenity;
+import net.osmand.map.ITileSource;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.AmenityIndexRepository;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
@@ -124,6 +125,11 @@ public class MapActivityActions {
     	builder.setPositiveButton(R.string.context_menu_item_update_map, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				final ITileSource mapSource = mapView.getMap();
+				if(mapSource == null || mapView.isVectorDataVisible() || !mapSource.couldBeDownloadedFromInternet()){
+					Toast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
+					return;
+				}
 				Rect pixRect = new Rect(0, 0, mapView.getWidth(), mapView.getHeight());
 		    	RectF tilesRect = new RectF();
 		    	mapView.calculateTileRectangle(pixRect, mapView.getCenterPointX(), mapView.getCenterPointY(), 

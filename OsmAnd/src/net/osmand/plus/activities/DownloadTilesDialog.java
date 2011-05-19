@@ -45,7 +45,7 @@ public class DownloadTilesDialog {
 	
 	public void openDialog(){
 		final ITileSource mapSource = mapView.getMap();
-		if(mapSource == null || !mapSource.couldBeDownloadedFromInternet()){
+		if(mapSource == null || mapView.isVectorDataVisible() || !mapSource.couldBeDownloadedFromInternet()){
 			Toast.makeText(ctx, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
 			return;
 		}
