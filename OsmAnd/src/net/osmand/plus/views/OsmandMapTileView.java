@@ -86,6 +86,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	// name of source map
 	private ITileSource map = null;
+	
+	private boolean vectorData;
 
 	private IMapLocationListener locationListener;
 
@@ -225,7 +227,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	 * Returns real tile size in pixels for float zoom .  
 	 */
 	public float getTileSize() {
-		float res = map == null ? 256 : map.getTileSize();
+		float res = getSourceTileSize();
 		if (zoom != (int) zoom) {
 			res *= (float) Math.pow(2, zoom - (int) zoom);
 		}
@@ -240,7 +242,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	public int getSourceTileSize() {
-		return map == null ? 256 : map.getTileSize();
+		return map == null || vectorData ? 256 : map.getTileSize();
 	}
 
 	/**
@@ -258,7 +260,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 	
 	public int getMaximumShownMapZoom(){
-		if(map == null){
+		if(map == null || vectorData){
 			return 21;
 		} else {
 			return map.getMaximumZoomSupported() + OVERZOOM_IN;
@@ -266,7 +268,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 	
 	public int getMinimumShownMapZoom(){
-		if(map == null){
+		if(map == null || vectorData){
 			return 1;
 		} else {
 			return map.getMinimumZoomSupported();
@@ -377,6 +379,18 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				}
 			}
 		}
+	}
+	
+	public boolean isVectorData() {
+		return vectorData;
+	}
+	
+	public boolean isVectorDataVisible() {
+		return vectorData && zoom >= settings.LEVEL_TO_SWITCH_VECTOR_RASTER.get();
+	}
+	
+	public void setVectorData(boolean vectorData) {
+		this.vectorData = vectorData;
 	}
 
 	public int getCenterPointX() {
@@ -507,7 +521,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 					latlonRect.left = (float) MapUtils.getLongitudeFromTile(nzoom, tilesRect.left);
 					latlonRect.bottom = (float) MapUtils.getLatitudeFromTile(nzoom, tilesRect.bottom);
 					latlonRect.right = (float) MapUtils.getLongitudeFromTile(nzoom, tilesRect.right);
-					if (map != null) {
+					if (map != null && !isVectorDataVisible()) {
 						ResourceManager mgr = getApplication().getResourceManager();
 						useInternet = useInternet && settings.isInternetConnectionAvailable()
 								&& map.couldBeDownloadedFromInternet();

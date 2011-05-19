@@ -808,12 +808,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			((SQLiteTileSource)mapView.getMap()).closeDB();
 		}
 		rm.updateMapSource(vectorData, newSource);
-		
-		mapView.setMap(vectorData ? null : newSource);
+		mapView.setMap(newSource);
+		mapView.setVectorData(vectorData);
 		ZoomControls zoomControls = (ZoomControls) findViewById(R.id.ZoomControls);
 		zoomControls.setIsZoomInEnabled(mapView.getZoom() + 1 < mapView.getMaximumShownMapZoom());
 		zoomControls.setIsZoomOutEnabled(mapView.getZoom() + 1 > mapView.getMinimumShownMapZoom());
-		rendererLayer.setVisible(vectorData);
 	}
 	
 	@Override
@@ -827,7 +826,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 		boolean showTiles = !settings.isUsingMapVectorData();
 		ITileSource source = showTiles ? settings.getMapTileSource() : null;
-		if (showTiles != !rendererLayer.isVisible() || !Algoritms.objectEquals(mapView.getMap(), source)) {
+		if (showTiles != !mapView.isVectorData() || !Algoritms.objectEquals(mapView.getMap(), source)) {
 			updateMapSource();
 		}
 		
