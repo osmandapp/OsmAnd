@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="tip_update_index">Aktualizácia indexov</string>
+	<string name="tip_update_index_t">Veľmi dôležité je mať aktuálne mapové údaje. Osmand je vybavený dobrým sťahovacím manažérom, s ktorým môžete ľahko zistiť, či Vaše indexy môžu byť aktualizované.
+	\n\tNa kontrolu aktualizácií choďte do \'Hlavné menu\'->\'Nastavenia\'->\'Údaje pre offline použitie\'->\'Stiahnuť offline údaje\'. Po načítaní zoznamu indexov z internetu, vyberte možnosť \'Zobraziť stiahnuté\' z kontextového menu.
+	\nTeraz sú zobrazené iba stiahnuté indexy vo Vašom zariadení a sú zvýraznené príslušnou farbou:
+	\n\t\'Zelená\' - indikuje, že Vaše indexy sú aktuálne so serverovými
+	\n\t\'Modrá\' - indikuje, že Vaše indexy môžu byť aktualizované zo servera</string>
+	<string name="level_to_switch_vector_raster_descr">Max. úroveň priblíženia použitá pri vektorovom vykresľovaní a nie rastrovom</string>
+	<string name="level_to_switch_vector_raster">Úroveň vektorového zoomu</string>
 	<string name="tip_day_night_mode">Denný/Nočný režim</string>
 	<string name="tip_day_night_mode_t">Môžete zmeniť vzhľad mapy, podľa toho, či používate Osmand cez deň(jasné svetelné podmienky) alebo v noci(tmavé svetelné podmienky).
 	\nKeď jazdíte v noci, je bezpečnejšie, keď sú farby mapy tmavšie, pretože nie ste tak oslepovaný ako s jasnejšími farbami na displeji.
 	\n\tMôžete nastaviť ako meniť režim cez \'Hlavné menu\'->\'Nastavenia\'->\'vzhľad mapy\'->\'Denný/nočný režim\'.
 	\nMožnosti sú:
-	\n\t"Východ/Západ slnka" - automatický režim, ovládaný polohou slnka(štandardný)
-	\n\t"Deň" - vždy použiť denný režim
-	\n\t"Noc" - vždy použiť nočný režim 
-	\n\t"Svetelný senzor" - vzhľad mapy je ovládaný svetelným senzorom Vášho zariadenia(iba ak je dostupný)</string>	
+	\n\t\'Východ/Západ slnka\' - automatický režim, ovládaný polohou slnka(štandardný)
+	\n\t\'Deň\' - vždy použiť denný režim
+	\n\t\'Noc\' - vždy použiť nočný režim 
+	\n\t\'Svetelný senzor\' - vzhľad mapy je ovládaný svetelným senzorom Vášho zariadenia(iba ak je dostupný)</string>	
 	<string name="tip_location_sharing">Zdieľanie umiestnenia</string>
 	<string name="tip_location_sharing_t">Objavili ste nejaké zaujímavé miesto na Vašom výlete a chcete zdieľať jeho pozíciu s Vašimi priateľmi alebo rodinou?
 	\nOsmAnd Vám umožňuje jednoducho zdieľať hodcijaké umiestnenie chcete.
