@@ -69,6 +69,7 @@ public class IndexBatchCreator {
 	
 	private static class RegionSpecificData {
 		public String cityAdminLevel;
+		public String includeSuburbInStreetName;
 	}
 	
 	private boolean uploadToOsmandDownloads = true;
@@ -225,6 +226,7 @@ public class IndexBatchCreator {
 					String name = ncountry.getAttribute("name");
 					RegionSpecificData data = new RegionSpecificData();
 					data.cityAdminLevel = ncountry.getAttribute("cityAdminLevel");
+					data.includeSuburbInStreetName = ncountry.getAttribute("includeSuburbInStreetName");
 					if(name != null && !Boolean.parseBoolean(ncountry.getAttribute("skip"))){
 						countries.regionNames.put(name, data);
 					}
@@ -419,8 +421,12 @@ public class IndexBatchCreator {
 			indexCreator.setNormalizeStreets(true);
 			indexCreator.setSaveAddressWays(true);
 			indexCreator.setRegionName(rName);
-			if (regionSpecificData != null && regionSpecificData.cityAdminLevel != null) {
+			if (regionSpecificData != null && regionSpecificData.cityAdminLevel != null && 
+					regionSpecificData.cityAdminLevel!="") {
 				indexCreator.setCityAdminLevel(regionSpecificData.cityAdminLevel);
+			}
+			if (regionSpecificData != null && regionSpecificData.includeSuburbInStreetName != null) {
+				indexCreator.setIncludeSuburbInStreetName(regionSpecificData.includeSuburbInStreetName);
 			}
 
 			String poiFileName = regionName + "_" + IndexConstants.POI_TABLE_VERSION + IndexConstants.POI_INDEX_EXT;

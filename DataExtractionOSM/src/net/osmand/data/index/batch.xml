@@ -49,7 +49,7 @@
 			<region name="faroe_islands" esize="2" />
 			<region name="finland" esize="85" />
 			<region name="greece" esize="25" />
-			<region name="hungary" esize="20" />
+			<region name="hungary" esize="20" includeSuburbInStreetName="1"/>
 			<region name="iceland" esize="10" />
 			<region name="ireland" esize="30" />
 			<region name="isle_of_man" esize="1" />

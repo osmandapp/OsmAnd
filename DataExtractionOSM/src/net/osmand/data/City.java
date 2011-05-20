@@ -50,6 +50,11 @@ public class City extends MapObject {
 	private Map<String, Street> streets = new TreeMap<String, Street>(Collator.getInstance()); 
 	private String isin = null;
 	
+	//Issue 352  This value indicates if a city has suburb boundaries
+	public ArrayList<Boundary> suburbBoundaries = null;
+	
+	//End Issue 352
+	
 	public City(Node el){
 		super(el);
 		type = CityType.valueFromString(el.getTag(OSMTagKey.PLACE));

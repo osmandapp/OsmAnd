@@ -160,6 +160,29 @@ public class IndexCreator {
 	private MapZooms mapZooms = MapZooms.getDefault();  
 	private MapRenderingTypes renderingTypes = MapRenderingTypes.getDefault();
 	private String cityAdminLevel = "8";
+	// Issue #352
+	/* Issue  #352 - handling multiple streets with the same name in the the same city.
+	   
+	   How it works:
+
+		In City there is a new member ArrayList<Boundary> suburbBoundaries, where the boundaries of the suburbs in that city are stored.
+
+		In IndexCreator
+
+		1) There is a new variable: includeSuburbInStreetName hen it is "1" then it adds the suburb name to street name, in cities where there are suburbs.
+		2) In indexBoundariesRelation it looks for cityAdminLevel+1 boundaries as well, and if it finds any then it stores it to the suburbBoundaries of the corresponding city.
+		3) There are 3 locations, where street names are handled, in this locations it is added to append the suburb name to the street name
+		4) I have added a parameter to getClosesCity, to be able to specify if cities and villages has to be searched or only cities. (Made this with parameter overloading so the original sintax is intact)
+
+		In IndexBacthCreator added the needed changes to handle the includeSuburbInStreetName parameter in the batch.xml
+
+		In bacth.xml added includeSuburbInStreetName to Hungary.
+	*/
+
+
+	private String includeSuburbInStreetName = "0"; //1-handle same street names in same city but different suburb/district
+	
+	// Issue #352 end
 	
 
 	// MEMORY map : save it in memory while that is allowed
@@ -845,7 +868,9 @@ public class IndexCreator {
 	public void indexBoundariesRelation(Entity e) throws SQLException {
 		String adminLevel = e.getTag("admin_level");
 		Boundary boundary = null;
-		if (cityAdminLevel.equals(adminLevel)) {
+
+		if (cityAdminLevel.equals(adminLevel)|| //Issue #352
+				(includeSuburbInStreetName.equals("1")&& Integer.toString(Integer.parseInt(cityAdminLevel)+1).equals(adminLevel)) ) {
 			if (e instanceof Relation) {
 				Relation i = (Relation) e;
 				loadEntityData(i, true);
@@ -883,46 +908,66 @@ public class IndexCreator {
 
 			}
 		}
-		
+
 		if (boundary != null && boundary.getCenterPoint() != null) {
 			LatLon point = boundary.getCenterPoint();
-			boolean cityFound = false;
-			boolean containsCityInside = false;
-			for (City c : cityManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
-				if (boundary.containsPoint(c.getLocation())) {
-					if (boundary.getName() == null || boundary.getName().equalsIgnoreCase(c.getName())) {
-						citiBoundaries.put(c, boundary);
-						cityFound = true;
-						containsCityInside = true;
-					}
-				}
-			}
-			// TODO mark all suburbs inside city as is_in tag (!) or use another solution
-			if (!cityFound) {
-				for (City c : cityVillageManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
+			if (!Integer.toString(Integer.parseInt(cityAdminLevel)+1).equals(adminLevel)){ //check if this is a city or suburb
+				boolean cityFound = false;
+				boolean containsCityInside = false;
+				for (City c : cityManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
 					if (boundary.containsPoint(c.getLocation())) {
 						if (boundary.getName() == null || boundary.getName().equalsIgnoreCase(c.getName())) {
 							citiBoundaries.put(c, boundary);
 							cityFound = true;
+							containsCityInside = true;
 						}
 					}
 				}
-			}
-			if (!cityFound && boundary.getName() != null) {
-				// / create new city for named boundary very rare case that's why do not proper generate id
-				// however it could be a problem
-				City nCity = new City(containsCityInside ? CityType.CITY : CityType.SUBURB);
-				nCity.setLocation(point.getLatitude(), point.getLongitude());
-				nCity.setId(-boundary.getBoundaryId());
-				nCity.setName(boundary.getName());
-				citiBoundaries.put(nCity, boundary);
-				cityVillageManager.registerObject(point.getLatitude(), point.getLongitude(), nCity);
+				// TODO mark all suburbs inside city as is_in tag (!) or use another solution
+				if (!cityFound) {
+					for (City c : cityVillageManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
+						if (boundary.containsPoint(c.getLocation())) {
+							if (boundary.getName() == null || boundary.getName().equalsIgnoreCase(c.getName())) {
+								citiBoundaries.put(c, boundary);
+								cityFound = true;
+							}
+						}
+					}
+				}
+				if (!cityFound && boundary.getName() != null) {
+					// / create new city for named boundary very rare case that's why do not proper generate id
+					// however it could be a problem
+					City nCity = new City(containsCityInside ? CityType.CITY : CityType.SUBURB);
+					nCity.setLocation(point.getLatitude(), point.getLongitude());
+					nCity.setId(-boundary.getBoundaryId());
+					nCity.setName(boundary.getName());
+					citiBoundaries.put(nCity, boundary);
+					cityVillageManager.registerObject(point.getLatitude(), point.getLongitude(), nCity);
 
-				DataIndexWriter.writeCity(addressCityStat, pStatements, nCity, BATCH_SIZE);
-				// commit to put all cities
-				if (pStatements.get(addressCityStat) > 0) {
-					addressCityStat.executeBatch();
-					pStatements.put(addressCityStat, 0);
+					DataIndexWriter.writeCity(addressCityStat, pStatements, nCity, BATCH_SIZE);
+					// commit to put all cities
+					if (pStatements.get(addressCityStat) > 0) {
+						addressCityStat.executeBatch();
+						pStatements.put(addressCityStat, 0);
+					}
+				}
+			}
+			else {
+				//This is just a suburb, store the boundary in the cities suburbBoundaries
+				if(boundary.getName()!= null && (e instanceof Relation)) {
+					City city = getClosestCity(point,true);
+					String cityName=e.getTag(OSMTagKey.IS_IN);
+					//log.info("Suburb processing:"+e.getTag(OSMTagKey.NAME)+":"+city.getName()+":"+((cityName!=null)?cityName:""));					
+					if ((cityName!=null) && (cityName!=city.getName()))
+					{
+						log.info("Suburb city name mismatch"+city.getName()+" "+cityName);
+					}
+					if (city!=null){
+						if (city.suburbBoundaries==null){
+							city.suburbBoundaries= new ArrayList<Boundary>();
+						}
+						city.suburbBoundaries.add(boundary);
+					}
 				}
 			}
 		}
@@ -941,9 +986,9 @@ public class IndexCreator {
 			Collection<Entity> members = i.getMembers("is_in"); //$NON-NLS-1$
 			Relation a3 = null;
 			Relation a6 = null;
-			if (!members.isEmpty()) {
+			if (!members.isEmpty()) { //depending on the tag put the street entity in a6 and the city to a3
 				if (street) {
-					a6 = i;
+					a6 = i; //if this was a street address 
 				}
 				Entity in = members.iterator().next();
 				loadEntityData(in, true);
@@ -966,16 +1011,18 @@ public class IndexCreator {
 				}
 			}
 
-			if (a3 != null) {
+			if (a3 != null) { //we have the city
 				Collection<EntityId> memberIds = a3.getMemberIds("label"); //$NON-NLS-1$
 				if (!memberIds.isEmpty()) {
-					c = cities.get(memberIds.iterator().next());
+					c = cities.get(memberIds.iterator().next()); //c will contain the city
 				}
 			}
 			if (c != null && a6 != null) {
 				String name = a6.getTag(OSMTagKey.NAME);
+				
 
 				if (name != null) {
+					//get the location of the street
 					LatLon location = c.getLocation();
 					for (Entity e : i.getMembers(null)) {
 						if (e instanceof Way) {
@@ -986,6 +1033,18 @@ public class IndexCreator {
 							}
 						}
 					}
+					//Issue #352 start
+					if (includeSuburbInStreetName.equals("1")){
+						if (c.suburbBoundaries!=null){
+							for(Boundary b: c.suburbBoundaries){
+								if (b.containsPoint(location)) {
+									name+=" "+b.getName();
+									//log.info("1:"+name);
+								}
+							}
+						}
+					}
+					//Issue #352 end
 
 					Long streetId = getStreetInCity(c, name, location, (a6.getId() << 2) | 2);
 					if (streetId == null) {
@@ -1054,7 +1113,12 @@ public class IndexCreator {
 		}
 	}
 
-	public City getClosestCity(LatLon point) {
+	public City getClosestCity(LatLon point ) {
+		return getClosestCity(point, false);
+	}
+	
+	public City getClosestCity(LatLon point,boolean onlyCities) {
+		// Issue #352 - create a get closes city where villages are not searched
 		if (point == null) {
 			return null;
 		}
@@ -1067,14 +1131,15 @@ public class IndexCreator {
 				}
 			}
 		}
-		for (City c : cityVillageManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
-			Boundary boundary = citiBoundaries.get(c);
-			if(boundary != null){
-				if(boundary.containsPoint(point)){
-					return c;
+		if (!onlyCities)
+			for (City c : cityVillageManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
+				Boundary boundary = citiBoundaries.get(c);
+				if(boundary != null){
+					if(boundary.containsPoint(point)){
+						return c;
+					}
 				}
 			}
-		}
 		City closest = null;
 		double relDist = Double.POSITIVE_INFINITY;
 		for (City c : cityManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
@@ -1090,16 +1155,17 @@ public class IndexCreator {
 		if (relDist < 0.2d) {
 			return closest;
 		}
-		for (City c : cityVillageManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
-			double rel = MapUtils.getDistance(c.getLocation(), point) / c.getType().getRadius();
-			if (rel < relDist) {
-				closest = c;
-				relDist = rel;
-				if (relDist < 0.2d) {
-					break;
+		if (!onlyCities)
+			for (City c : cityVillageManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
+				double rel = MapUtils.getDistance(c.getLocation(), point) / c.getType().getRadius();
+				if (rel < relDist) {
+					closest = c;
+					relDist = rel;
+					if (relDist < 0.2d) {
+						break;
+					}
 				}
 			}
-		}
 		return closest;
 	}
 
@@ -1294,7 +1360,20 @@ public class IndexCreator {
 						loadEntityData(e, false);
 						LatLon l = e.getLatLon();
 						City city = getClosestCity(l);
-						Long idStreet = getStreetInCity(city, e.getTag(OSMTagKey.ADDR_STREET), l, (e.getId() << 2));
+						// Issue #352 start
+						String streetName = e.getTag(OSMTagKey.ADDR_STREET);
+						if ((includeSuburbInStreetName.equals("1"))&&(streetName!=null)&&(l!=null)){
+							if (city.suburbBoundaries!=null){
+								for(Boundary b: city.suburbBoundaries){
+									if (b.containsPoint(l)) {
+										streetName+=" "+b.getName();
+										//log.info("2:"+streetName);
+									}
+								}
+							}
+						}
+						// Issue #352 end
+						Long idStreet = getStreetInCity(city, streetName, l, (e.getId() << 2));
 						if (idStreet != null) {
 							Building building = new Building(e);
 							building.setName(e.getTag(OSMTagKey.ADDR_HOUSE_NUMBER));
@@ -1324,7 +1403,20 @@ public class IndexCreator {
 						loadEntityData(e, false);
 						LatLon l = e.getLatLon();
 						City city = getClosestCity(l);
-						Long idStreet = getStreetInCity(city, e.getTag(OSMTagKey.NAME), l, (e.getId() << 2) | 1);
+						// Issue #352 start
+						String streetName = e.getTag(OSMTagKey.NAME);
+						if ((includeSuburbInStreetName.equals("1"))&&(streetName!=null)&&(l!=null)){
+							if (city.suburbBoundaries!=null){
+								for(Boundary b: city.suburbBoundaries){
+									if (b.containsPoint(l)) {
+										streetName+=" "+b.getName();
+										//log.info("3:"+streetName);
+									}
+								}
+							}
+						}
+						// Issue #352 end						
+						Long idStreet = getStreetInCity(city, streetName, l, (e.getId() << 2) | 1);
 						if (idStreet != null && saveAddressWays) {
 							DataIndexWriter.writeStreetWayNodes(addressStreetNodeStat, pStatements, idStreet, (Way) e, BATCH_SIZE);
 						}
@@ -2994,5 +3086,10 @@ public class IndexCreator {
 		System.out.println("- STRING_TABLE_SIZE " + BinaryMapIndexWriter.STRING_TABLE_SIZE); //$NON-NLS-1$
 		System.out.println("-- MAP_DATA_AND_STRINGS SIZE " + (BinaryMapIndexWriter.MAP_DATA_SIZE + BinaryMapIndexWriter.STRING_TABLE_SIZE)); //$NON-NLS-1$
 
+	}
+
+	public void setIncludeSuburbInStreetName(String includeSuburbInStreetName2) {
+		includeSuburbInStreetName=includeSuburbInStreetName2;
+		
 	}
 }
