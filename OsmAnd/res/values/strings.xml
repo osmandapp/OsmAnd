@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="tip_update_index">Index updating</string>
+	<string name="tip_update_index_t">Very important is to have actual map data. Osmand is equipped with good download manager with which you can easily check if your indexes can be updated.
+	\n\tFor checking updates go to \'Main Menu\'->\'Settings\'->\'Data for offline usage\'->\'Download offline data\'. After reloading index list from internet, select option \'Filter downloaded\' from context menu.
+	\nNow are displayed only downloaded indexes in your device and they are highlited with relevant color:
+	\n\t\'Green\' - indicates, that your indexes are actual with server
+	\n\t\'Blue\' - indicates, that your indexes can be updated from server</string>
 	<string name="level_to_switch_vector_raster_descr">Max zoom level to use vector rendering instead of raster</string>
 	<string name="level_to_switch_vector_raster">Zoom vector level</string>
 	<string name="tip_day_night_mode">Day/Night Mode</string>
@@ -7,10 +13,10 @@
 	\nWhen you are driving in night, is safer when the map colors are darker, because you are not so dazzled like with brighter colors on the display.
 	\n\tYou can set policy of mode switching in \'Main Menu\'->\'Settings\'->\'Map appearance\'->\'Day/night mode\'.
 	\nChoices are:
-	\n\t"Sunrise/Sunset" - automatic mode, controlled by position of sun(default)
-	\n\t"Day" - always use day mode
-	\n\t"Night" - always use night mode 
-	\n\t"Light sensor" - map appearance is controlled by light sensor of your device(only if available)</string>	
+	\n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of sun(default)
+	\n\t\'Day\' - always use day mode
+	\n\t\'Night\' - always use night mode 
+	\n\t\'Light sensor\' - map appearance is controlled by light sensor of your device(only if available)</string>	
 	<string name="tip_location_sharing">Location sharing</string>
 	<string name="tip_location_sharing_t">Do you find some interesting place on your trip and want to share it\'s location with your friends or family?
 	\nOsmAnd affords you to easily share any location you want.
