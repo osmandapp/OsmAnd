@@ -40,6 +40,7 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.FavoritesLayer;
 import net.osmand.plus.views.GPXLayer;
+import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmBugsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -97,7 +98,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-import android.widget.ZoomControls;
 
 public class MapActivity extends Activity implements IMapLocationListener, SensorEventListener {
 
@@ -122,7 +122,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private MapActivityActions mapActions = new MapActivityActions(this);
 	
 	private ImageButton backToLocation;
-	private ImageButton backToMenu;
 	
 	// the order of layer should be preserved ! when you are inserting new layer
 	private RendererLayer rendererLayer;
@@ -266,6 +265,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		routeInfoLayer = new RouteInfoLayer(routingHelper, (LinearLayout) findViewById(R.id.RouteLayout));
 		mapView.addLayer(routeInfoLayer, 10);
 		
+		// 11. route info layer
+		MapControlsLayer mapControlsLayer = new MapControlsLayer(this);
+		mapView.addLayer(mapControlsLayer, 11);
+		
 
 		
 		savingTrackHelper = new SavingTrackHelper(this);
@@ -332,35 +335,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}
 		
 		
-		
-		final ZoomControls zoomControls = (ZoomControls) findViewById(R.id.ZoomControls);
-		updateZoomControls(zoomControls, mapView.getZoom());
-		zoomControls.setOnZoomInClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				updateZoomControls(zoomControls, mapView.getZoom() + 1);
-				mapView.getAnimatedDraggingThread().stopAnimatingSync();
-				mapView.getAnimatedDraggingThread().startZooming(mapView.getZoom(), mapView.getZoom() + 1);
-				showAndHideMapPosition();
-				// user can preview map manually switch off auto zoom while user don't press back to location
-				if(settings.AUTO_ZOOM_MAP.get()){
-					locationChanged(mapView.getLatitude(), mapView.getLongitude(), null);
-				}
-			}
-		});
-		zoomControls.setOnZoomOutClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				updateZoomControls(zoomControls, mapView.getZoom() - 1);
-				mapView.getAnimatedDraggingThread().stopAnimatingSync();
-				mapView.getAnimatedDraggingThread().startZooming(mapView.getZoom(), mapView.getZoom() - 1);
-				showAndHideMapPosition();
-				// user can preview map manually switch off auto zoom while user don't press back to location
-				if(settings.AUTO_ZOOM_MAP.get()){
-					locationChanged(mapView.getLatitude(), mapView.getLongitude(), null);
-				}
-			}
-		});
 		backToLocation = (ImageButton)findViewById(R.id.BackToLocation);
 		backToLocation.setOnClickListener(new OnClickListener(){
 			@Override
@@ -372,30 +346,23 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 		
 		
-		backToMenu = (ImageButton)findViewById(R.id.BackToMenu);
-		backToMenu.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent newIntent = new Intent(MapActivity.this, MainMenuActivity.class);
-				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(newIntent);
-			}
-		});
-		
-		// Possibly use that method instead of 
-		/*mapView.setOnLongClickListener(new OsmandMapTileView.OnLongClickListener(){
-			@Override
-			public boolean onLongPressEvent(PointF point) {
-				LatLon l = mapView.getLatLonFromScreenPoint(point.x, point.y);
-				return true;
-			}
-		});*/
-		
 	}
     
-    private void updateZoomControls(ZoomControls zoomControls, int zoom){
-    	zoomControls.setIsZoomInEnabled(zoom < mapView.getMaximumShownMapZoom());
-		zoomControls.setIsZoomOutEnabled(zoom > mapView.getMinimumShownMapZoom());
+    public void changeZoom(int newZoom){
+    	mapView.getAnimatedDraggingThread().stopAnimatingSync();
+		mapView.getAnimatedDraggingThread().startZooming(mapView.getZoom(), newZoom);
+		showAndHideMapPosition();
+		// user can preview map manually switch off auto zoom while user don't press back to location
+		if(settings.AUTO_ZOOM_MAP.get()){
+			locationChanged(mapView.getLatitude(), mapView.getLongitude(), null);
+		}
+    }
+    
+    
+    public void backToMainMenu(){
+    	Intent newIntent = new Intent(MapActivity.this, MainMenuActivity.class);
+		newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(newIntent);    	
     }
  
     @Override
@@ -810,9 +777,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		rm.updateMapSource(vectorData, newSource);
 		mapView.setMap(newSource);
 		mapView.setVectorData(vectorData);
-		ZoomControls zoomControls = (ZoomControls) findViewById(R.id.ZoomControls);
-		zoomControls.setIsZoomInEnabled(mapView.getZoom() + 1 < mapView.getMaximumShownMapZoom());
-		zoomControls.setIsZoomOutEnabled(mapView.getZoom() + 1 > mapView.getMinimumShownMapZoom());
+		// TODO move to another place
+//		ZoomControls zoomControls = (ZoomControls) findViewById(R.id.ZoomControls);
+//		zoomControls.setIsZoomInEnabled(mapView.getZoom() + 1 < mapView.getMaximumShownMapZoom());
+//		zoomControls.setIsZoomOutEnabled(mapView.getZoom() + 1 > mapView.getMinimumShownMapZoom());
 	}
 	
 	@Override
