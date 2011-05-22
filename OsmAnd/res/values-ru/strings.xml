@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="level_to_switch_vector_raster_descr">Максимальный масштаб для использования векторных карт вместо растровых</string>
+	<string name="level_to_switch_vector_raster">Векторные карты</string>
+	
+	<string name="tip_osm_improve">Улучшить Openstreetmap</string>
+	<string name="tip_osm_improve_t">OsmAnd использует данные Openstreetmap.org data и имеет возможности улучшения этих данных. Вы можете добавить POI или сообщить о неточности на карте !
+\nПрежде всего необходимо ввести свои инициалы  \'Меню\'->\'Настройки\'->\'OSM\'.
+\n\tДля добавления POI используйет \'Добавить POI\' в контекстном меню карты.
+\n\tЕсли вы нашли неточность на карте, вы можете сообщить об этом Openstreetmap сообществу.
+\n\tНе забывайте, что для этих функций вам понадобится интернет!</string>
 	<string name="create_poi_link_to_osm_doc"><u>Интернет OSM</u> классификация</string>
 	<string name="error_doing_search">Ошибка offline поиска</string>
     <string name="search_offline_geo_error">Невозможно разобрать запрос : {0}</string>
