@@ -15,7 +15,6 @@ import net.osmand.map.ITileSource;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.views.AnimateDraggingMapThread.AnimateDraggingCallback;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
@@ -23,7 +22,6 @@ import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import org.apache.commons.logging.Log;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -48,7 +46,6 @@ import android.view.SurfaceHolder.Callback;
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback, AnimateDraggingCallback, OnGestureListener,
 		OnDoubleTapListener, MultiTouchZoomListener {
 
-	public static final int OVERZOOM_IN = 2;
 
 	protected final int emptyTileDivisor = 16;
 	
@@ -84,9 +81,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	private boolean showMapPosition = true;
 
-	// name of source map
-	private ITileSource map = null;
-	
 	private boolean vectorData;
 
 	private IMapLocationListener locationListener;
@@ -98,6 +92,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private OnTrackBallListener trackBallDelegate;
 
 	private List<OsmandMapLayer> layers = new ArrayList<OsmandMapLayer>();
+	
+	private MapTileLayer mainLayer = new MapTileLayer();
+	
 	private Map<OsmandMapLayer, Float> zOrders = new HashMap<OsmandMapLayer, Float>();
 
 	// UI Part
@@ -118,7 +115,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	Paint paintBlackFill;
 	Paint paintWhiteFill;
 	Paint paintCenter;
-	Paint paintBitmap;
 
 	private DisplayMetrics dm;
 
@@ -126,14 +122,15 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	public OsmandMapTileView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		initView();
 		application = (OsmandApplication) context.getApplicationContext();
+		initView();
+		
 	}
 
 	public OsmandMapTileView(Context context) {
 		super(context);
-		initView();
 		application = (OsmandApplication) context.getApplicationContext();
+		initView();
 	}
 
 	// ///////////////////////////// INITIALIZING UI PART ///////////////////////////////////
@@ -162,9 +159,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		paintCenter.setStrokeWidth(2);
 		paintCenter.setAntiAlias(true);
 
-		paintBitmap = new Paint();
-		paintBitmap.setFilterBitmap(true);
-
 		setClickable(true);
 		setLongClickable(true);
 		setFocusable(true);
@@ -180,6 +174,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		WindowManager mgr = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
 		dm = new DisplayMetrics();
 		mgr.getDefaultDisplay().getMetrics(dm);
+		
+		mainLayer.initLayer(this);
 	}
 
 	@Override
@@ -242,7 +238,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	public int getSourceTileSize() {
-		return map == null || vectorData ? 256 : map.getTileSize();
+		return vectorData ? 256 : mainLayer.getSourceTileSize();
 	}
 
 	/**
@@ -260,18 +256,18 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 	
 	public int getMaximumShownMapZoom(){
-		if(map == null || vectorData){
+		if(vectorData){
 			return 21;
 		} else {
-			return map.getMaximumZoomSupported() + OVERZOOM_IN;
+			return mainLayer.getMaximumShownMapZoom();
 		}
 	}
 	
 	public int getMinimumShownMapZoom(){
-		if(map == null || vectorData){
+		if(vectorData){
 			return 1;
 		} else {
-			return map.getMinimumZoomSupported();
+			return mainLayer.getMinimumShownMapZoom();
 		}
 	}
 
@@ -286,8 +282,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	// for internal usage
 	@Override
 	public void zoomTo(float zoom, boolean notify) {
-		if ((map == null && zoom < 23)
-				|| (map != null && (map.getMaximumZoomSupported() + OVERZOOM_IN) >= zoom && map.getMinimumZoomSupported() <= zoom)) {
+		if ((vectorData && zoom < 23)
+				|| (!vectorData && getMaximumShownMapZoom() >= zoom && getMinimumShownMapZoom() <= zoom)) {
 			this.zoom = zoom;
 			refreshMap();
 			if (notify && locationListener != null) {
@@ -316,16 +312,16 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	public ITileSource getMap() {
-		return map;
+		return mainLayer.getMap();
 	}
 
 	public void setMap(ITileSource map) {
-		this.map = map;
-		if (map != null && map.getMaximumZoomSupported() + OVERZOOM_IN < this.zoom) {
-			zoom = map.getMaximumZoomSupported() + OVERZOOM_IN;
+		mainLayer.setMap(map);
+		if (mainLayer.getMaximumShownMapZoom() < this.zoom) {
+			zoom = mainLayer.getMaximumShownMapZoom();
 		}
-		if (map != null && map.getMinimumZoomSupported() > this.zoom) {
-			zoom = map.getMinimumZoomSupported();
+		if (mainLayer.getMinimumShownMapZoom() > this.zoom) {
+			zoom = mainLayer.getMinimumShownMapZoom();
 		}
 		refreshMap();
 	}
@@ -408,19 +404,26 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		this.mapPosition = type;
 	}
 
-	private void drawOverMap(Canvas canvas, RectF latlonRect, boolean nightMode) {
+	private void drawOverMap(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode) {
 		int w = getCenterPointX();
 		int h = getCenterPointY();
 		canvas.restore();
 
-		for (int i = 0; i < layers.size(); i++) {
+		for (int i = -1; i < layers.size(); i++) {
 			try {
-				OsmandMapLayer layer = layers.get(i);
+
+				OsmandMapLayer layer;
+				if (i == -1) {
+					layer = mainLayer;
+					mainLayer.setVisible(!isVectorDataVisible());
+				} else {
+					layer = layers.get(i);
+				}
 				canvas.save();
 				if (!layer.drawInScreenPixels()) {
 					canvas.rotate(rotate, w, h);
 				}
-				layer.onDraw(canvas, latlonRect, nightMode);
+				layer.onDraw(canvas, latlonRect, tilesRect, nightMode);
 				canvas.restore();
 			} catch (IndexOutOfBoundsException e) {
 				// skip it
@@ -489,8 +492,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			MapTileDownloader.getInstance().refuseAllPreviousRequests();
 		}
 		float ftileSize = getTileSize();
-		int tileSize = getSourceTileSize();
-		
 
 		SurfaceHolder holder = getHolder();
 		synchronized (holder) {
@@ -503,99 +504,32 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			if (canvas != null) {
 				canvas.save();
 				boolean nightMode = false;
-				if(application != null){
+				if (application != null) {
 					Boolean dayNightRenderer = application.getDaynightHelper().getDayNightRenderer();
-					if(dayNightRenderer != null){
+					if (dayNightRenderer != null) {
 						nightMode = !dayNightRenderer.booleanValue();
 					}
 				}
-				boundsRect.set(0, 0, getWidth(), getHeight());
-				canvas.rotate(rotate, w, h);
 				try {
+					boundsRect.set(0, 0, getWidth(), getHeight());
 					calculateTileRectangle(boundsRect, w, h, tileX, tileY, tilesRect);
 					int left = (int) FloatMath.floor(tilesRect.left);
-					int top = (int) FloatMath.floor(tilesRect.top );
+					int top = (int) FloatMath.floor(tilesRect.top);
 					int width = (int) FloatMath.ceil(tilesRect.right - left);
 					int height = (int) FloatMath.ceil(tilesRect.bottom - top);
 					latlonRect.top = (float) MapUtils.getLatitudeFromTile(nzoom, tilesRect.top);
 					latlonRect.left = (float) MapUtils.getLongitudeFromTile(nzoom, tilesRect.left);
 					latlonRect.bottom = (float) MapUtils.getLatitudeFromTile(nzoom, tilesRect.bottom);
 					latlonRect.right = (float) MapUtils.getLongitudeFromTile(nzoom, tilesRect.right);
-					if (map != null && !isVectorDataVisible()) {
-						ResourceManager mgr = getApplication().getResourceManager();
-						useInternet = useInternet && settings.isInternetConnectionAvailable()
-								&& map.couldBeDownloadedFromInternet();
-						
-						int maxLevel = Math.min(getSettings().MAX_LEVEL_TO_DOWNLOAD_TILE.get(), map.getMaximumZoomSupported());
 
-						
-						for (int i = 0; i < width; i++) {
-							for (int j = 0; j < height; j++) {
-								int leftPlusI = (int) FloatMath.floor((float)MapUtils.getTileNumberX(nzoom, MapUtils.getLongitudeFromTile(nzoom, left+i)));
-								int topPlusJ = (int) FloatMath.floor((float)MapUtils.getTileNumberY(nzoom, MapUtils.getLatitudeFromTile(nzoom, top + j)));
-								float x1 = (left + i - tileX) * ftileSize + w;
-								float y1 = (top + j - tileY) * ftileSize + h;
-								String ordImgTile = mgr.calculateTileId(map, leftPlusI, topPlusJ, nzoom);
-								// asking tile image async
-								boolean imgExist = mgr.tileExistOnFileSystem(ordImgTile, map, leftPlusI, topPlusJ, nzoom);
-								Bitmap bmp = null;
-								boolean originalBeLoaded = useInternet && nzoom <= maxLevel;
-								if (imgExist || originalBeLoaded) {
-									bmp = mgr.getTileImageForMapAsync(ordImgTile, map, leftPlusI, topPlusJ, nzoom, useInternet);
-								}
-								if (bmp == null) {
-									int div = 2;
-									// asking if there is small version of the map (in cache)
-									String imgTile2 = mgr.calculateTileId(map, leftPlusI / 2, topPlusJ / 2, nzoom - 1);
-									String imgTile4 = mgr.calculateTileId(map, leftPlusI / 4, topPlusJ / 4, nzoom - 2);
-									if (originalBeLoaded || imgExist) {
-										bmp = mgr.getTileImageFromCache(imgTile2);
-										div = 2;
-										if (bmp == null) {
-											bmp = mgr.getTileImageFromCache(imgTile4);
-											div = 4;
-										}
-									}
-									if (!originalBeLoaded && !imgExist) {
-										if (mgr.tileExistOnFileSystem(imgTile2, map, leftPlusI / 2, topPlusJ / 2, nzoom - 1)
-												|| (useInternet && nzoom - 1 <= maxLevel)) {
-											bmp = mgr.getTileImageForMapAsync(imgTile2, map, leftPlusI / 2, topPlusJ / 2, nzoom - 1,
-													useInternet);
-											div = 2;
-										} else if (mgr.tileExistOnFileSystem(imgTile4, map, leftPlusI / 4, topPlusJ / 4, nzoom - 2)
-												|| (useInternet && nzoom - 2 <= maxLevel)) {
-											bmp = mgr.getTileImageForMapAsync(imgTile4, map, leftPlusI / 4, topPlusJ / 4, nzoom - 2,
-													useInternet);
-											div = 4;
-										}
-									}
-
-									if (bmp == null) {
-										drawEmptyTile(canvas, x1, y1, ftileSize, nightMode);
-									} else {
-										int xZoom = ((left + i) % div) * tileSize / div;
-										int yZoom = ((top + j) % div) * tileSize / div;
-										bitmapToZoom.set(xZoom, yZoom, xZoom + tileSize / div, yZoom + tileSize / div);
-										bitmapToDraw.set(x1, y1, x1 + ftileSize, y1 + ftileSize);
-										canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
-									}
-								} else {
-									bitmapToZoom.set(0, 0, map.getTileSize(), map.getTileSize());
-									bitmapToDraw.set(x1, y1, x1 + ftileSize, y1 + ftileSize);
-									canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
-								}
-							}
-						}
-					} else {
-						for (int i = 0; i < width; i++) {
-							for (int j = 0; j < height; j++) {
-								float x1 = (i + left - tileX) * ftileSize + w;
-								float y1 = (j + top - tileY) * ftileSize + h;
-								drawEmptyTile(canvas, x1, y1, ftileSize, nightMode);
-							}
+					for (int i = 0; i < width; i++) {
+						for (int j = 0; j < height; j++) {
+							float x1 = (i + left - tileX) * ftileSize + w;
+							float y1 = (j + top - tileY) * ftileSize + h;
+							drawEmptyTile(canvas, x1, y1, ftileSize, nightMode);
 						}
 					}
-					drawOverMap(canvas, latlonRect, nightMode);
+					drawOverMap(canvas, latlonRect, tilesRect, nightMode);
 				} finally {
 					holder.unlockCanvasAndPost(canvas);
 				}

@@ -58,7 +58,7 @@ public class RouteLayer implements OsmandMapLayer {
 	
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
 		path.reset();
 		if (helper.hasPointsToShow()) {
 			long time = System.currentTimeMillis();
