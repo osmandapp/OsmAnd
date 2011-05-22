@@ -6,24 +6,19 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ResourceManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Paint.Style;
 import android.util.FloatMath;
 
-public class MapTileLayer implements OsmandMapLayer {
+public class MapTileLayer extends BaseMapLayer {
 
 	protected final int emptyTileDivisor = 16;
 	public static final int OVERZOOM_IN = 2;
 	
 	private ITileSource map = null;
 	
-	Paint paintGrayFill;
-	Paint paintBlackFill;
-	Paint paintWhiteFill;
 	Paint paintBitmap;
 	
 	protected RectF tilesRect = new RectF();
@@ -46,24 +41,6 @@ public class MapTileLayer implements OsmandMapLayer {
 		this.view = view;
 		settings = view.getSettings();
 		resourceManager = view.getApplication().getResourceManager();
-		
-		paintGrayFill = new Paint();
-		paintGrayFill.setColor(Color.GRAY);
-		paintGrayFill.setStyle(Style.FILL);
-		// when map rotate
-		paintGrayFill.setAntiAlias(true);
-		
-		paintBlackFill= new Paint();
-		paintBlackFill.setColor(Color.BLACK);
-		paintBlackFill.setStyle(Style.FILL);
-		// when map rotate
-		paintBlackFill.setAntiAlias(true);
-
-		paintWhiteFill = new Paint();
-		paintWhiteFill.setColor(Color.WHITE);
-		paintWhiteFill.setStyle(Style.FILL);
-		// when map rotate
-		paintWhiteFill.setAntiAlias(true);
 
 		paintBitmap = new Paint();
 		paintBitmap.setFilterBitmap(true);
@@ -73,6 +50,14 @@ public class MapTileLayer implements OsmandMapLayer {
 	@Override
 	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode) {
 		if (map == null || !visible) {
+			return;
+		}
+		drawTileMap(canvas, tilesRect);
+
+	}
+
+	public void drawTileMap(Canvas canvas, RectF tilesRect) {
+		if(map == null){
 			return;
 		}
 		ResourceManager mgr = resourceManager;
@@ -147,7 +132,6 @@ public class MapTileLayer implements OsmandMapLayer {
 				}
 			}
 		}
-
 	}
 	
 	public int getSourceTileSize() {

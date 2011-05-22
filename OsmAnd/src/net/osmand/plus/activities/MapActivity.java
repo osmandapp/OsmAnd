@@ -35,13 +35,14 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchPoiFilterActivity;
 import net.osmand.plus.activities.search.SearchTransportActivity;
 import net.osmand.plus.render.MapRenderRepositories;
-import net.osmand.plus.render.RendererLayer;
+import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.FavoritesLayer;
 import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmBugsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.POIMapLayer;
@@ -124,7 +125,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private ImageButton backToLocation;
 	
 	// the order of layer should be preserved ! when you are inserting new layer
-	private RendererLayer rendererLayer;
+	private MapTileLayer mapTileLayer; 
+	private MapVectorLayer mapVectorLayer;
 	private GPXLayer gpxLayer;
 	private RouteLayer routeLayer;
 	private YandexTrafficLayer trafficLayer;
@@ -221,9 +223,13 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		mapView.setMapLocationListener(this);
 		routingHelper = ((OsmandApplication) getApplication()).getRoutingHelper();
 		
+		mapTileLayer = new MapTileLayer();
+		mapView.addLayer(mapTileLayer, 0.0f);
+		mapView.setMainLayer(mapTileLayer);
+		
 		// 0.5 layer
-		rendererLayer = new RendererLayer();
-		mapView.addLayer(rendererLayer, 0.5f);
+		mapVectorLayer = new MapVectorLayer(mapTileLayer);
+		mapView.addLayer(mapVectorLayer, 0.5f);
 		
 		// 0.6 gpx layer
 		gpxLayer = new GPXLayer();
@@ -401,7 +407,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     
     @Override
     protected void onStop() {
-    	// TODO keep this check?
     	if(routingHelper.isFollowingMode()){
     		mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
     		mNotificationManager.notify(APP_NOTIFICATION_ID, getNotification());
@@ -771,16 +776,19 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			}
 		}
 		ITileSource newSource = settings.getMapTileSource();
-		if(mapView.getMap() instanceof SQLiteTileSource){
-			((SQLiteTileSource)mapView.getMap()).closeDB();
+		ITileSource oldMap = mapTileLayer.getMap();
+		if(oldMap instanceof SQLiteTileSource){
+			((SQLiteTileSource)oldMap).closeDB();
 		}
 		rm.updateMapSource(vectorData, newSource);
-		mapView.setMap(newSource);
-		mapView.setVectorData(vectorData);
-		// TODO move to another place
-//		ZoomControls zoomControls = (ZoomControls) findViewById(R.id.ZoomControls);
-//		zoomControls.setIsZoomInEnabled(mapView.getZoom() + 1 < mapView.getMaximumShownMapZoom());
-//		zoomControls.setIsZoomOutEnabled(mapView.getZoom() + 1 > mapView.getMinimumShownMapZoom());
+		mapTileLayer.setMap(newSource);
+		mapTileLayer.setVisible(!vectorData);
+		mapVectorLayer.setVisible(vectorData);
+		if(vectorData){
+			mapView.setMainLayer(mapVectorLayer);
+		} else {
+			mapView.setMainLayer(mapTileLayer);
+		}
 	}
 	
 	@Override
@@ -794,7 +802,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 		boolean showTiles = !settings.isUsingMapVectorData();
 		ITileSource source = showTiles ? settings.getMapTileSource() : null;
-		if (showTiles != !mapView.isVectorData() || !Algoritms.objectEquals(mapView.getMap(), source)) {
+		if (showTiles != mapTileLayer.isVisible() || !Algoritms.objectEquals(mapTileLayer.getMap(), source)) {
 			updateMapSource();
 		}
 		
