@@ -232,11 +232,30 @@ public class TileSourceManager {
 			list.add(getMicrosoftEarthSource());
 			list.add(getMicrosoftHybridSource());
 			
+			list.add(getEniroMapSource());
+			list.add(getEniroAerialSource());
+			list.add(getEniroNauticalSource());
+			list.add(getStatkartTopoSource());
+			list.add(getStatkartNauticalSource());
 		}
 		return list;
 		
 	}
 	
+	public static class EniroTileSourceTemplate extends TileSourceTemplate {  // special Eniro y-tile addressing
+		public EniroTileSourceTemplate(String name, String urlToLoad, int maxZoom, int minZoom){
+			super(name, urlToLoad, ".png", maxZoom, minZoom, 256, 32, 18000);
+		}
+
+		@Override
+		public String getUrlToLoad(int x, int y, int zoom) {
+			if(urlToLoad == null){
+				return null;
+			}
+			y = (1 << zoom) - 1 - y;
+			return MessageFormat.format(urlToLoad, zoom+"", x+"", y+"");
+		}
+	}
 	
 	public static class CykloatlasSourceTemplate extends TileSourceTemplate {
 
@@ -341,6 +360,26 @@ public class TileSourceManager {
 	
 	public static TileSourceTemplate getMicrosoftHybridSource(){
 		return new MicrosoftTileSourceTemplate("Microsoft Hybrid", 'h', "jpg", ".jpg", 19, 1, 256, 32, 18000); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	}
+	
+	public static TileSourceTemplate getEniroMapSource(){
+		return new EniroTileSourceTemplate("Eniro Map NO SE FI DK PL", "http://map.eniro.com/geowebcache/service/tms1.0.0/map/{0}/{1}/{2}.png", 20, 2);
+	}
+	
+	public static TileSourceTemplate getEniroAerialSource(){
+		return new EniroTileSourceTemplate("Eniro Aerial NO SE DK", "http://map.eniro.com/geowebcache/service/tms1.0.0/aerial/{0}/{1}/{2}.png", 19, 2);
+	}
+	
+	public static TileSourceTemplate getEniroNauticalSource(){
+		return new EniroTileSourceTemplate("Eniro Nautical NO SE", "http://map.eniro.com/geowebcache/service/tms1.0.0/nautical/{0}/{1}/{2}.png", 16, 5);
+	}
+	
+	public static TileSourceTemplate getStatkartTopoSource(){
+		return new TileSourceTemplate("Statkart Topo NO", "http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo2&zoom={0}&x={1}&y={2}", ".png", 17, 5, 256, 32, 18000);
+	}
+	
+	public static TileSourceTemplate getStatkartNauticalSource(){
+		return new TileSourceTemplate("Statkart Nautical NO", "http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=sjo_hovedkart2&zoom={0}&x={1}&y={2}", ".png", 14, 3, 256, 32, 18000);
 	}
 	
 	
