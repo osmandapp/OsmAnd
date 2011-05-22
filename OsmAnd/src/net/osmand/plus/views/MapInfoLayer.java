@@ -4,7 +4,6 @@ import net.osmand.Algoritms;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.activities.RoutingHelper.TurnType;
@@ -23,7 +22,6 @@ import android.location.Location;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
-import android.view.View;
 import android.view.WindowManager;
 
 public class MapInfoLayer implements OsmandMapLayer {
@@ -312,13 +310,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 
 			rulerDistPix = (int) (view.getWidth() * screenPercent / dist * baseDist);
 			rulerDistName = OsmAndFormatter.getFormattedDistance(baseDist, map);
-			rulerBaseLine = (int) (view.getHeight() - 70 * dm.density);
-			if(view.getParent() instanceof View){
-				View zoomControls = ((View) view.getParent()).findViewById(R.id.ZoomControls);
-				if(zoomControls != null){
-					rulerBaseLine = (int) (zoomControls.getTop() - 5 * dm.density);
-				}
-			}
+			rulerBaseLine = (int) (view.getHeight() - 50 * dm.density);
 			rulerTextLen = paintBlack.measureText(rulerDistName);
 		} 
 		if (rulerDistName != null) {
