@@ -96,8 +96,9 @@ public class MapControlsLayer implements OsmandMapLayer {
 
 	@Override
 	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode) {
-		boolean zoomInEnabled = view.getZoom() < view.getMaximumShownMapZoom();
-		boolean zoomOutEnabled = view.getZoom() > view.getMinimumShownMapZoom();
+		BaseMapLayer mainLayer = view.getMainLayer();
+		boolean zoomInEnabled = mainLayer != null && view.getZoom() < mainLayer.getMaximumShownMapZoom();
+		boolean zoomOutEnabled = mainLayer != null && view.getZoom() > mainLayer.getMinimumShownMapZoom();
 		if(zoomInButton.isEnabled() != zoomInEnabled){
 			zoomInButton.setEnabled(zoomInEnabled);
 		}

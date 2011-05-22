@@ -11,7 +11,6 @@ import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.IMapLocationListener;
-import net.osmand.map.ITileSource;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
@@ -81,8 +80,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	private boolean showMapPosition = true;
 
-	private boolean vectorData;
-
 	private IMapLocationListener locationListener;
 
 	private OnLongClickListener onLongClickListener;
@@ -93,7 +90,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	private List<OsmandMapLayer> layers = new ArrayList<OsmandMapLayer>();
 	
-	private MapTileLayer mainLayer = new MapTileLayer();
+	private BaseMapLayer mainLayer;
 	
 	private Map<OsmandMapLayer, Float> zOrders = new HashMap<OsmandMapLayer, Float>();
 
@@ -175,7 +172,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		dm = new DisplayMetrics();
 		mgr.getDefaultDisplay().getMetrics(dm);
 		
-		mainLayer.initLayer(this);
 	}
 
 	@Override
@@ -238,7 +234,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	public int getSourceTileSize() {
-		return vectorData ? 256 : mainLayer.getSourceTileSize();
+		if(mainLayer instanceof MapTileLayer){
+			return ((MapTileLayer) mainLayer).getSourceTileSize();
+		}
+		return 256;
 	}
 
 	/**
@@ -255,24 +254,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return (float) MapUtils.getTileNumberY(getZoom(), latitude);
 	}
 	
-	public int getMaximumShownMapZoom(){
-		if(vectorData){
-			return 21;
-		} else {
-			return mainLayer.getMaximumShownMapZoom();
-		}
-	}
-	
-	public int getMinimumShownMapZoom(){
-		if(vectorData){
-			return 1;
-		} else {
-			return mainLayer.getMinimumShownMapZoom();
-		}
-	}
-
 	public void setZoom(float zoom) {
-		if (zoom <= getMaximumShownMapZoom() && zoom >= getMinimumShownMapZoom()) {
+		if (mainLayer != null && zoom <= mainLayer.getMaximumShownMapZoom() && zoom >= mainLayer.getMinimumShownMapZoom()) {
 			animatedDraggingThread.stopAnimating();
 			this.zoom = zoom;
 			refreshMap();
@@ -282,8 +265,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	// for internal usage
 	@Override
 	public void zoomTo(float zoom, boolean notify) {
-		if ((vectorData && zoom < 23)
-				|| (!vectorData && getMaximumShownMapZoom() >= zoom && getMinimumShownMapZoom() <= zoom)) {
+		if (mainLayer != null && mainLayer.getMaximumShownMapZoom() >= zoom && mainLayer.getMinimumShownMapZoom() <= zoom) {
 			this.zoom = zoom;
 			refreshMap();
 			if (notify && locationListener != null) {
@@ -311,21 +293,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return rotate;
 	}
 
-	public ITileSource getMap() {
-		return mainLayer.getMap();
-	}
 
-	public void setMap(ITileSource map) {
-		mainLayer.setMap(map);
-		if (mainLayer.getMaximumShownMapZoom() < this.zoom) {
-			zoom = mainLayer.getMaximumShownMapZoom();
-		}
-		if (mainLayer.getMinimumShownMapZoom() > this.zoom) {
-			zoom = mainLayer.getMinimumShownMapZoom();
-		}
-		refreshMap();
-	}
-	
 	public void setLatLon(double latitude, double longitude) {
 		animatedDraggingThread.stopAnimating();
 		this.latitude = latitude;
@@ -377,16 +345,19 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 	}
 	
-	public boolean isVectorData() {
-		return vectorData;
+	public BaseMapLayer getMainLayer() {
+		return mainLayer;
 	}
 	
-	public boolean isVectorDataVisible() {
-		return vectorData && zoom >= settings.LEVEL_TO_SWITCH_VECTOR_RASTER.get();
-	}
-	
-	public void setVectorData(boolean vectorData) {
-		this.vectorData = vectorData;
+	public void setMainLayer(BaseMapLayer mainLayer) {
+		this.mainLayer = mainLayer;
+		if (mainLayer.getMaximumShownMapZoom() < this.zoom) {
+			zoom = mainLayer.getMaximumShownMapZoom();
+		}
+		if (mainLayer.getMinimumShownMapZoom() > this.zoom) {
+			zoom = mainLayer.getMinimumShownMapZoom();
+		}
+		refreshMap();
 	}
 
 	public int getCenterPointX() {
@@ -404,36 +375,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		this.mapPosition = type;
 	}
 
-	private void drawOverMap(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode) {
-		int w = getCenterPointX();
-		int h = getCenterPointY();
-		canvas.restore();
-
-		for (int i = -1; i < layers.size(); i++) {
-			try {
-
-				OsmandMapLayer layer;
-				if (i == -1) {
-					layer = mainLayer;
-					mainLayer.setVisible(!isVectorDataVisible());
-				} else {
-					layer = layers.get(i);
-				}
-				canvas.save();
-				if (!layer.drawInScreenPixels()) {
-					canvas.rotate(rotate, w, h);
-				}
-				layer.onDraw(canvas, latlonRect, tilesRect, nightMode);
-				canvas.restore();
-			} catch (IndexOutOfBoundsException e) {
-				// skip it
-			}
-		}
-		if (showMapPosition) {
-			canvas.drawCircle(w, h, 3 * dm.density, paintCenter);
-			canvas.drawCircle(w, h, 7 * dm.density, paintCenter);
-		}
-	}
 
 	public void calculateTileRectangle(Rect pixRect, float cx, float cy, float ctilex, float ctiley, RectF tileRect) {
 		float x1 = calcDiffTileX(pixRect.left - cx, pixRect.top - cy);
@@ -535,7 +476,30 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				}
 			}
 		}
+	}
+	
+	private void drawOverMap(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode) {
+		int w = getCenterPointX();
+		int h = getCenterPointY();
+		canvas.restore();
 
+		for (int i = -1; i < layers.size(); i++) {
+			try {
+				OsmandMapLayer layer = layers.get(i);
+				canvas.save();
+				if (!layer.drawInScreenPixels()) {
+					canvas.rotate(rotate, w, h);
+				}
+				layer.onDraw(canvas, latlonRect, tilesRect, nightMode);
+				canvas.restore();
+			} catch (IndexOutOfBoundsException e) {
+				// skip it
+			}
+		}
+		if (showMapPosition) {
+			canvas.drawCircle(w, h, 3 * dm.density, paintCenter);
+			canvas.drawCircle(w, h, 7 * dm.density, paintCenter);
+		}
 	}
 
 	public boolean mapIsRefreshing() {
@@ -717,6 +681,16 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		initialMultiTouchLocation = getLatLonFromScreenPoint(centerPoint.x, centerPoint.y);
 		initialMultiTouchZoom = zoom;
 	}
+	
+	public LatLon getLatLonFromScreenPoint(float x, float y) {
+		float dx = x - getCenterPointX();
+		float dy = y - getCenterPointY();
+		float fy = calcDiffTileY(dx, dy);
+		float fx = calcDiffTileX(dx, dy);
+		double latitude = MapUtils.getLatitudeFromTile(getZoom(), getYTile() + fy);
+		double longitude = MapUtils.getLongitudeFromTile(getZoom(), getXTile() + fx);
+		return new LatLon(latitude, longitude);
+	}
 
 	private void zoomPositionChanged(float calcZoom) {
 		float dx = initialMultiTouchCenterPoint.x - getCenterPointX();
@@ -740,7 +714,11 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			zoomPositionChanged(calcZoom);
 		}
 	}
+	public AnimateDraggingMapThread getAnimatedDraggingThread() {
+		return animatedDraggingThread;
+	}
 
+	// Start OnGestureListener
 	@Override
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 		if (Math.abs(e1.getX() - e2.getX()) + Math.abs(e1.getX() - e2.getX()) > 50 * dm.density) {
@@ -752,10 +730,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return true;
 	}
 
-	public AnimateDraggingMapThread getAnimatedDraggingThread() {
-		return animatedDraggingThread;
-	}
-
+	
 	@Override
 	public void onLongPress(MotionEvent e) {
 		if (multiTouchSupport.isInZoomMode()) {
@@ -801,17 +776,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 		return false;
 	}
+	// End OnGestureListener
 
-	public LatLon getLatLonFromScreenPoint(float x, float y) {
-		float dx = x - getCenterPointX();
-		float dy = y - getCenterPointY();
-		float fy = calcDiffTileY(dx, dy);
-		float fx = calcDiffTileX(dx, dy);
-		double latitude = MapUtils.getLatitudeFromTile(getZoom(), getYTile() + fy);
-		double longitude = MapUtils.getLongitudeFromTile(getZoom(), getXTile() + fx);
-		return new LatLon(latitude, longitude);
-	}
 
+	// Start OnDoubleTapListener 
 	@Override
 	public boolean onDoubleTap(MotionEvent e) {
 		LatLon l = getLatLonFromScreenPoint(e.getX(), e.getY());
@@ -829,5 +797,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	public boolean onSingleTapConfirmed(MotionEvent e) {
 		return false;
 	}
+	
+	// End OnDoubleTapListener 
 
 }
