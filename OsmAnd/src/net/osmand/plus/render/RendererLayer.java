@@ -15,7 +15,6 @@ import android.graphics.RectF;
 public class RendererLayer implements OsmandMapLayer {
 
 	private OsmandMapTileView view;
-	private final static int startZoom = 5;
 	private Rect pixRect = new Rect();
 	private RotatedTileBox rotatedTileBox = new RotatedTileBox(0, 0, 0, 0, 0, 0);
 	private ResourceManager resourceManager;
@@ -51,9 +50,8 @@ public class RendererLayer implements OsmandMapLayer {
 	
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, boolean nightMode) {
-		Integer zoom = view.getSettings().LEVEL_TO_SWITCH_VECTOR_RASTER.get();
-		if (view.getZoom() >= Math.max(zoom, startZoom) && view.isVectorDataVisible()) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+		if (view.isVectorDataVisible()) {
 			if (!view.isZooming()){
 				pixRect.set(0, 0, view.getWidth(), view.getHeight());
 				updateRotatedTileBox();

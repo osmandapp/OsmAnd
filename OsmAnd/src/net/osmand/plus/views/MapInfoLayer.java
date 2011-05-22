@@ -189,7 +189,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 	}
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latlonBounds, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latlonBounds, RectF tilesRect, boolean nightMode) {
 		// prepare data (left distance, speed)
 		if(map.getPointToNavigate() != null){
 			int d = 0;
