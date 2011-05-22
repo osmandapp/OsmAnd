@@ -328,7 +328,7 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 				String text = ((EditText)openBug.findViewById(R.id.BugMessage)).getText().toString();
 				String author = ((EditText)openBug.findViewById(R.id.AuthorName)).getText().toString();
 				// do not set name as author it is ridiculous in that case
-				view.getSettings().USER_OSM_BUG_NAME.set(author);
+				OsmandSettings.getOsmandSettings(ctx).USER_OSM_BUG_NAME.set(author);
 				boolean bug = createNewBug(latitude, longitude, text, author);
 		    	if (bug) {
 		    		Toast.makeText(ctx, ctx.getResources().getString(R.string.osb_add_dialog_success), Toast.LENGTH_LONG).show();
