@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
 	<string name="tip_update_index">Index updating</string>
-	<string name="tip_update_index_t">Very important is to have actual map data. Osmand is equipped with good download manager with which you can easily check if your indexes can be updated.
+	<string name="tip_update_index_t">It is very important to have actual map data. Osmand is equipped with download manager with which you can easily check if your indexes can be updated.
 	\n\tFor checking updates go to \'Main Menu\'->\'Settings\'->\'Data for offline usage\'->\'Download offline data\'. After reloading index list from internet, select option \'Filter downloaded\' from context menu.
-	\nNow are displayed only downloaded indexes in your device and they are highlited with relevant color:
+	\nNow only downloaded indexes in your device are displayed  and they are highlighted with relevant color:
 	\n\t\'Green\' - indicates, that your indexes are actual with server
 	\n\t\'Blue\' - indicates, that your indexes can be updated from server</string>
 	<string name="level_to_switch_vector_raster_descr">Max zoom level to use vector rendering instead of raster</string>
@@ -23,7 +23,7 @@
 	\n\tYou can do that in \'Map context menu\'->\'Share location\' menu.
 	\nThen you should select way to share your location. The choices are: E-Mail, SMS or just copy location coordinates  to clipboard.</string>
 	<string name="tip_favorites">Favorite points</string>
-	<string name="tip_favorites_t">If you are tired to search for places that you are oftenly visiting, you can easily add this places into Favorites and then use it only by some clicks.
+	<string name="tip_favorites_t">If you are tired to search for places that you are often visiting, you can easily add this places into Favorites and then use it only by some clicks.
 	\n\tFor creating Favorite point you must go to Map context menu, select option \'Add to favorites\' and enter adequate name for it. After saving it, then you can easily access it thru \'Main Menu\'->\'Favorites\' menu.
 	\n\tWith long tap on favorite point in \'Favorites\' menu you can Navigate to it, Edit or Delete it.
 	\n\tFor displaying all Favorite points directly on map, you can enable layer \'Favorites\' in \'Map context menu\'->\'Layers\'.</string>
@@ -34,7 +34,6 @@
 \n\tIf you find some error in the map, you can report that and Openstreetmap community can then faster fix this problem.
 \n\tFor OSM bug adding you should use option \'Open OSM bug\' in Map context menu. Then is opened dialog, where you can enter detailed description of problem and finally post it with \'Add\' button.
 \n\tDon\'t forget that you need internet connection to use this functions!</string>
-	
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
     <string name="error_doing_search">Error occurred in offline search</string>
     <string name="search_offline_geo_error">Could not parse geo intent:{0}</string>
