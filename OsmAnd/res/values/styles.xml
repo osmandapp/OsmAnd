@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+<style name="Dialog_Fullscreen" parent="android:Theme"> 
+	<item name="android:windowNoTitle">true</item> 
+	<item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowBackground">@color/color_transparent</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:backgroundDimEnabled">false</item>
+</style> 
+</resources>
