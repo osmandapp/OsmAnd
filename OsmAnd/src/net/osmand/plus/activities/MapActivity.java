@@ -67,6 +67,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -94,6 +96,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -366,9 +371,74 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     
     
     public void backToMainMenu(){
-    	Intent newIntent = new Intent(MapActivity.this, MainMenuActivity.class);
-		newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(newIntent);    	
+    	final Dialog dlg = new Dialog(this, R.style.Dialog_Fullscreen);
+    	final View view = (View) getLayoutInflater().inflate(R.layout.menu, null);
+    	view.setBackgroundColor(Color.argb(200, 150, 150, 150));
+    	dlg.setContentView(view);
+    	MainMenuActivity.onCreateMainMenu(dlg.getWindow(), this);
+		Animation anim = new Animation() {
+			@Override
+			protected void applyTransformation(float interpolatedTime, Transformation t) {
+				ColorDrawable colorDraw = ((ColorDrawable) view.getBackground());
+				colorDraw.setAlpha((int) (interpolatedTime * 200));
+			}
+		};
+		anim.setDuration(700);
+		anim.setInterpolator(new AccelerateInterpolator());
+		view.setAnimation(anim);
+		
+		View showMap = dlg.findViewById(R.id.MapButton);
+		showMap.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dlg.dismiss();
+			}
+		});
+		View settingsButton = dlg.findViewById(R.id.SettingsButton);
+		settingsButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final Intent settings = new Intent(MapActivity.this, SettingsActivity.class);
+				MapActivity.this.startActivity(settings);
+				dlg.dismiss();
+			}
+		});
+		
+		View favouritesButton = dlg.findViewById(R.id.FavoritesButton);
+		favouritesButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final Intent settings = new Intent(MapActivity.this, FavouritesActivity.class);
+				MapActivity.this.startActivity(settings);
+				dlg.dismiss();
+			}
+		});
+		
+		View closeButton = dlg.findViewById(R.id.CloseButton);
+		closeButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				((OsmandApplication) getApplication()).closeApplication();
+				dlg.dismiss();
+				MapActivity.this.setResult(MainMenuActivity.APP_EXIT_CODE);
+				MapActivity.this.finish();
+			}
+		});
+		
+		View searchButton = dlg.findViewById(R.id.SearchButton);
+		searchButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final Intent search = new Intent(MapActivity.this, SearchActivity.class);
+				MapActivity.this.startActivity(search);
+				dlg.dismiss();
+			}
+		});
+		dlg.show();
+		
+		// Intent newIntent = new Intent(MapActivity.this, MainMenuActivity.class);
+		//newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		// startActivity(newIntent);    	
     }
  
     @Override
