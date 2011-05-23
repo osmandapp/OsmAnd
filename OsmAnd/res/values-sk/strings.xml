@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
 	<string name="tip_update_index">Aktualizácia indexov</string>
-	<string name="tip_update_index_t">Veľmi dôležité je mať aktuálne mapové údaje. Osmand je vybavený dobrým sťahovacím manažérom, s ktorým môžete ľahko zistiť, či Vaše indexy môžu byť aktualizované.
+	<string name="tip_update_index_t">Veľmi dôležité je mať aktuálne mapové údaje. Osmand je vybavený sťahovacím manažérom, s ktorým môžete ľahko zistiť, či Vaše indexy môžu byť aktualizované.
 	\n\tNa kontrolu aktualizácií choďte do \'Hlavné menu\'->\'Nastavenia\'->\'Údaje pre offline použitie\'->\'Stiahnuť offline údaje\'. Po načítaní zoznamu indexov z internetu, vyberte možnosť \'Zobraziť stiahnuté\' z kontextového menu.
 	\nTeraz sú zobrazené iba stiahnuté indexy vo Vašom zariadení a sú zvýraznené príslušnou farbou:
 	\n\t\'Zelená\' - indikuje, že Vaše indexy sú aktuálne so serverovými
@@ -156,7 +156,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="daynight_mode_night">Nočný režim</string>
 <string name="daynight_mode_auto">Východ/Západ slnka</string>
 <string name="daynight_mode_sensor">Svetelný senzor</string>
-<string name="daynight_descr">Vybrať medzi denným/nočným režimom</string>
+<string name="daynight_descr">Výber medzi denným/nočným režimom</string>
 <string name="daynight">Denný/nočný režim</string>
 
 <string name="download_files_question">Stiahnuť {0} súbor/y/ov ({1} MB)?</string>
@@ -170,7 +170,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="general_settings">Všeobecné</string>
 <string name="rendering_settings_descr">Konfigurácia zdroja mapy a vzhľadu</string>
 <string name="rendering_settings">Vzhľad mapy</string>
-<string name="index_settings_descr">Získať/aktualizovať údaje pre offline použitie</string>
+<string name="index_settings_descr">Získanie/aktualizácia údajov pre offline použitie</string>
 <string name="index_settings">Údaje pre offline použitie</string>
 <string name="osmand_service">Služba na pozadí</string>
 <string name="osmand_service_descr">Spustenie služby na pozadí pre použitie OsmAndu počas vypnutej obrazovky</string>
@@ -181,21 +181,21 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="select_max_zoom_preload_area">Vybrať max. priblíženie viditeľnej oblasti na načítanie</string>
 <string name="maps_could_not_be_downloaded">Táto mapa sa nedá stiahnuť</string>
 <string name="continuous_rendering">Postupné vykresľovanie</string>
-<string name="continuous_rendering_descr">Vybrať medzi postupným alebo celoobrazovým vykresľovaním</string>
+<string name="continuous_rendering_descr">Výber medzi postupným alebo celoobrazovým vykresľovaním</string>
 <string name="rendering_exception">Nastala chyba pri vykresľovaní vybranej oblasti</string>
 <string name="rendering_out_of_memory">Nedostatok pamäte na zobrazenie vybranej oblasti</string>
 <string name="show_point_options">Možnosti bodu</string>
 <string name="renderer_load_sucess">Vykresľovač bol úspešne načítaný</string>
 <string name="renderer_load_exception">Nastala výnimka: vykresľovač nebol načítaný</string>
 <string name="renderers">Vektorový vykresľovač</string>
-<string name="renderers_descr">Vybrať štýl vektorového vykresľovania</string>
+<string name="renderers_descr">Výber štýlu vektorového vykresľovania</string>
 <string name="poi_context_menu_website">Zobraziť web stránku POI</string>
 <string name="poi_context_menu_call">Zobraziť telefónny kontakt POI</string>
 <string name="website">Web stránka</string>
 <string name="phone">Telefónny kontakt</string>
 <string name="download_type_to_filter">sem zadajte čo chcete nájsť</string>
 <string name="use_high_res_maps">Mapa s vysokým rozlíšením</string>
-<string name="use_high_res_maps_descr">Použiť mapu s vysokým rozlíšením pre zariadenia s vysokou hustotou bodov</string>
+<string name="use_high_res_maps_descr">Použitie mapy s vysokým rozlíšením pre zariadenia s vysokou hustotou bodov</string>
 <string name="unknown_location">Pozícia nie je zatiaľ známa</string>
 
 <string name="download_files">Stiahnuť</string>
@@ -224,7 +224,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="rotate_map_compass_opt">Podľa kompasu</string>
 <string name="rotate_map_bearing_opt">Podľa smeru pohybu</string>
 <string name="rotate_map_none_opt">Neotáčať</string>
-<string name="rotate_map_to_bearing_descr">Vybrať ako otáčať mapu</string>
+<string name="rotate_map_to_bearing_descr">Výber spôsobu otáčania mapy</string>
 <string name="rotate_map_to_bearing">Otáčanie mapy</string>
 <string name="show_route">Zobraziť cestu</string>
 <string name="fav_imported_sucessfully">Obľúbené body úspešne importované</string>
@@ -252,9 +252,9 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="continue_follow_previous_route">Predošlá cesta nebolo ukončená. Pokračovať v jej nasledovaní?</string>
 <string name="context_menu_item_search_poi">Hľadať bod záujmu (POI)</string>
 <string name="context_menu_item_show_route">Cestovať odtiaľto</string>
-<string name="use_trackball_descr">Použiť trackball na pohyb po mape</string>
+<string name="use_trackball_descr">Použitie trackballu na pohyb po mape</string>
 <string name="use_trackball">Použiť trackball</string>
-<string name="background_service_wait_int_descr">Vybrať čakací interval na rozpoznanie umiestnenia</string>
+<string name="background_service_wait_int_descr">Výber čakacieho intervalu na rozpoznanie umiestnenia</string>
 <string name="background_service_wait_int">Čakací interval</string>
 <string name="service_stop_background_service">Vypnúť navigačnú službu na pozadí</string>
 <string name="where_am_i">Kde som?</string>
@@ -263,14 +263,14 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="gps_provider">GPS</string>
 <string name="int_seconds">sekúnd</string>
 <string name="int_min">min.</string>
-<string name="background_service_int_descr">Vybrať interval na rozpoznanie umiestnenia pre službu na pozadí</string>
+<string name="background_service_int_descr">Výber intervalu na rozpoznanie umiestnenia pre službu na pozadí</string>
 <string name="background_service_int">Umiestňovací interval</string>
-<string name="background_service_provider_descr">Vybrať poskytovateľa umiestnenia pre službu na pozadí</string>
+<string name="background_service_provider_descr">Výber poskytovateľa umiestnenia pre službu na pozadí</string>
 <string name="background_service_provider">Poskytovateľ umiestnenia</string>
-<string name="background_router_service_descr">Zapnúť službu na pozadí na sledovanie pozície v dlhých časových periódach</string>
+<string name="background_router_service_descr">Zapnútie služby na pozadí na sledovanie pozície v dlhých časových periódach</string>
 <string name="background_router_service">Služba rutovania</string>
 <string name="off_router_service_no_gps_available">Služba na pozadí pre rutovanie potrebuje zapnutý zdroj umiestnenia.</string>
-<string name="routing_settings_descr">Určiť možnosti rutovania</string>
+<string name="routing_settings_descr">Určenie možností rutovania</string>
 <string name="routing_settings">Rutovanie</string>
 <string name="hide_poi_filter">Skryť filter</string>
 <string name="show_poi_filter">Zobraziť filter</string>
@@ -278,7 +278,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="menu_mute_off">Zvuk zapnutý</string>
 <string name="menu_mute_on">Zvuk vypnutý</string>
 <string name="voice_not_use">Žiadny</string>
-<string name="voice_provider_descr">Vybrať hlasové údaje pre rutovanie</string>
+<string name="voice_provider_descr">Výber hlasových údajov pre rutovanie</string>
 <string name="voice_provider">Hlasové údaje</string>
 <string name="voice_data_initializing">Inicializácia hlasových údajov...</string>
 <string name="voice_data_not_supported">Nepodporovaná verzia hlasových údajov</string>
@@ -306,7 +306,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="map_orientation_portrait">Na výšku</string>
 <string name="map_orientation_landscape">Na šírku</string>
 <string name="map_screen_orientation">Orientácia zobrazenia mapy</string>
-<string name="map_screen_orientation_descr">Vybrať orientáciu obrazovky</string>
+<string name="map_screen_orientation_descr">Výber orientácie obrazovky</string>
 <string name="opening_hours_not_supported">Formát otváracích hodín nie je podporovaný na úpravu</string>
 <string name="add_new_rule">Pridať nové pravidlo</string>
 <string name="transport_Routes">Cesty</string>
@@ -323,7 +323,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="transport_route_distance">Vzdialenosť cesty</string>
 <string name="transport">Doprava</string>
 <string name="default_buttons_ok">OK</string>
-<string name="show_transport_over_map_description">Zobraziť zastávky verejnej dopravy na mape</string>
+<string name="show_transport_over_map_description">Zobrazenie zastáviek verejnej dopravy na mape</string>
 <string name="show_transport_over_map">Zobraziť zastávky dopravy</string>
 <string name="hello">Navigačná aplikácia OsmAnd</string>
 <string name="update_poi_success">Údaje POI boli úspešne aktualizované ({0} bolo načítaných)</string>
@@ -344,19 +344,19 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="uploading_data">Nahrávajú sa údaje...</string>
 <string name="uploading">Nahrávanie</string>
 <string name="search_nothing_found">Nič sa nenašlo</string>
-<string name="searching">Vyhľadáva sa</string>
+<string name="searching">Vyhľadávanie</string>
 <string name="searching_address">Hľadá sa adresa...</string>
 <string name="search_osm_nominatim">Hľadanie adresy použiťím OSM Nominatim</string>
 <string name="hint_search_online">Číslo domu, ulica, mesto</string>
 <string name="search_offline_address">Offline</string>
 <string name="search_online_address">Internet</string>
 <string name="max_level_download_tile">Max. úroveň priblíženia</string>
-<string name="max_level_download_tile_descr">Vybrať maximálnu úroveň priblíženia na stiahnutie</string>
+<string name="max_level_download_tile_descr">Výber maximálnej úrovne priblíženia na stiahnutie</string>
 <string name="route_about">O ceste</string>
 <string name="route_general_information">Celková vzdialenosť {0}, čas cestovania {1} h {2} m.</string>
-<string name="router_service_descr">Vybrať rutovaciu službu</string>
+<string name="router_service_descr">Výber rutovacej služby</string>
 <string name="router_service">Rutovanie</string>
-<string name="sd_dir_not_accessible">Adresár na SD karte pre uloženie nie je prístupný</string>
+<string name="sd_dir_not_accessible">Adresár pre uloženie na SD karte nie je prístupný</string>
 <string name="download_question">Stiahnuť {0} - {1} ?</string>
 <string name="download_question_exist">Offline údaje pre {0} už existujú ({1}). Chcete ich aktualizovať ({2}) ?</string>
 <string name="address">Adresa</string>
@@ -366,7 +366,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="downloading">Sťahovanie...</string>
 <string name="downloading_list_indexes">Sťahuje sa zoznam dostupných oblastí</string>
 <string name="list_index_files_was_not_loaded">Zoznam oblastí nebol prijatý z osmand.googlecode.com.</string>
-<string name="select_index_file_to_download">Ak nemôžete nájsť vašu oblasť, môžete si ju sami vytvoriť. Viď osmand.net</string>
+<string name="select_index_file_to_download">Ak nemôžete nájsť Vašu oblasť, môžete si ju sami vytvoriť. Viď osmand.net</string>
 <string name="show_poi_on_map">Zobraziť na mape</string>
 <string name="fav_points_edited">Obľúbený bod bol upravený</string>
 <string name="fav_points_not_exist">Neexistujú žiadne obľúbené body</string>
@@ -406,29 +406,29 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="previous_run_crashed">Predošlé spustenie aplikácie zlyhalo. Záznamový súbor je v {0}. Prosím, oznámte to a priložte záznamový súbor.</string>
 <string name="saving_gpx_tracks">Ukladajú sa GPX stopy na SD kartu...</string>
 <string name="finished_task">Dokončené</string>
-<string name="reload_indexes_descr">Znovu načítať offline údaje z SD karty</string>
+<string name="reload_indexes_descr">Znovu načítanie offline údajov z SD karty</string>
 <string name="reload_indexes">Znovu načítať offline údaje</string>
-<string name="download_indexes_descr">Stiahnuť údaje pre offline použitie z internetu</string>
+<string name="download_indexes_descr">Stiahnutie údajov pre offline použitie z internetu</string>
 <string name="download_indexes">Stiahnuť offline údaje</string>
-<string name="use_online_routing_descr">Použiť internet na výpočet cesty</string>
+<string name="use_online_routing_descr">Použitie internetu na výpočet cesty</string>
 <string name="use_online_routing">Použiť online rutovanie</string>
 <string name="user_password_descr">Vaše OSM heslo</string>
 <string name="user_password">Užívateľské heslo</string>
 <string name="osm_settings_descr">Určiť nastavenia OSM: OSM prihlásenie</string>
-<string name="monitor_preferences_descr">Určiť monitorovacie nastavenia</string>
-<string name="data_settings_descr">Určiť jazyk, stiahnutie/znovu načítanie údajov</string>
+<string name="monitor_preferences_descr">Určenie monitorovacích nastavení</string>
+<string name="data_settings_descr">Výber jazyka, stiahnutie/znovu načítanie údajov</string>
 <string name="data_settings">Údaje</string>
-<string name="map_preferences_descr">Určiť nastavenia mapy: zdroj mapy, otáčanie, stredovú pozíciu, orientáciu obrazovky</string>
+<string name="map_preferences_descr">Určenie nastavení mapy: zdroj mapy, otáčanie, stredová pozícia, orientácia obrazovky</string>
 <string name="osm_settings">OSM</string>
-<string name="auto_zoom_map_descr">Autom. priblížiť mapu podľa vašej rýchlosti</string>
+<string name="auto_zoom_map_descr">Autom. priblíženie mapy podľa Vašej rýchlosti</string>
 <string name="auto_zoom_map">Autom. priblíženie mapy</string>
 <string name="additional_settings">Ďalšie nastavenia</string>
-<string name="settings_preset_descr">Vybrať preddefinované nastavenia</string>
+<string name="settings_preset_descr">Výber preddefinovaných nastavení</string>
 <string name="settings_preset">Režim aplikácie</string>
 <string name="settings">Nastavenia</string>
 <string name="save_current_track_descr">Uloženie aktuálnej stopy na SD kartu</string>
 <string name="save_current_track">Uložiť aktuálnu stopu</string>
-<string name="save_track_interval_descr">Vybrať časový interval na ukladanie stopy</string>
+<string name="save_track_interval_descr">Výber časového intervalu na ukladanie stopy</string>
 <string name="save_track_interval">Interval ukladania stopy</string>
 <string name="monitor_preferences">Monitorovanie</string>
 <string name="save_track_to_gpx_descrp">Stopy budú ukladané do adresára stôp, zoskupené podľa dní</string>
@@ -439,11 +439,11 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="user_name_descr">Vaše OSM užívateľské meno</string>
 <string name="user_name">Užívateľské meno</string>
 <string name="mark_point">Cieľ</string>
-<string name="show_osm_bugs_descr">Zobraziť OpenStreetBugs na mape</string>
+<string name="show_osm_bugs_descr">Zobrazenie OpenStreetBugs na mape</string>
 <string name="show_osm_bugs">Zobraziť OpenStreetBugs</string>
 <string name="favourites_activity">Zoznam obľúbených bodov</string>
 <string name="add_to_favourite">Pridať do Obľúbených</string>
-<string name="use_english_names_descr">Vybrať medzi domácimi a anglickými názvami</string>
+<string name="use_english_names_descr">Výber medzi domácimi a anglickými názvami</string>
 <string name="use_english_names">Použiť anglické názvy</string>
 <string name="app_settings">Nastavenia aplikácie</string>
 <string name="search_address">Hľadať adresu</string>
@@ -451,17 +451,17 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="choose_street">Vybrať ulicu</string>
 <string name="choose_city">Vybrať mesto</string>
 <string name="ChooseCountry">Vybrať krajinu</string>
-<string name="position_on_map_descr">Vybrať pozíciu na mape</string>
+<string name="position_on_map_descr">Výber pozície na mape</string>
 <string name="position_on_map">Pozícia na mape</string>
 <string name="map_specify_point">Určiť bod</string>
 <string name="show_view_angle_descr">Uhol pohľadu zobrazenia podľa kompasu</string>
 <string name="show_view_angle">Zobraziť uhol pohľadu</string>
 <string name="stop_navigation">Zmazať cieľ</string>
 <string name="navigate_to_point">Označiť bod</string>
-<string name="map_view_3d_descr">Zapnúť 3D zobrazenie mapy</string>
+<string name="map_view_3d_descr">Zapnutie 3D zobrazenia mapy</string>
 <string name="map_view_3d">3D zobrazenie mapy</string>
 
-<string name="show_poi_over_map_description">Zobraziť POI namape (použije sa posledný vybraný filter)</string>
+<string name="show_poi_over_map_description">Zobrazenie POI na mape (použije sa posledný vybraný filter)</string>
 <string name="show_poi_over_map">Zobraziť POI</string>
 <string name="map_tile_source_descr">Vybraný zdroj dlaždíc: </string>
 <string name="map_tile_source">Zdroj dlaždíc mapy</string>
