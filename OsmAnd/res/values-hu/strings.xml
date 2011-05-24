@@ -1,5 +1,94 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+  <string name="tip_update_index">Index adatok frissítése</string>
+  <string name="tip_update_index_t">Fontos az aktuális térképek megléte. Az Osmand program tartalmaz egy letöltéskezelőt amivel egyszerűen ellenőrizhető, hogy a meglévő index adatokat fel lehet-e frissíteni.
+\n\tA frissítések ellenőrzéséhez a \'Main Menu\'->\'Settings\'->\'Data for offline usage\'->\'Download offline data\'. After reloading index list from internet, select option \'Filter downloaded\' from context menu.
+\nNow only downloaded indexes in your device are displayed and they are highlighted with relevant color:
+\n\t\'Green\' - indicates, that your indexes are actual with server
+\n\t\'Blue\' - indicates, that your indexes can be updated from server</string>
+<string name="level_to_switch_vector_raster_descr">Maximális nagyítási szint vektoros megjelenítéshez raszteres helyett</string>
+<string name="level_to_switch_vector_raster">Vektoros nagyítási szint</string>
+<string name="tip_day_night_mode">Éjjel/Nappali mód</string>
+<string name="tip_day_night_mode_t">A térkép megjelenítése nappali (erős fényviszonyok) vagy éjjeli (gyenge fényviszonyok) használatnak megfelelően megváltoztatható.
+\nÉjjel biztonságosabbak a sötét térkép színek mert nem vakít annyira mint a nappali megjelenítés világos színei.
+\n\tA váltás módja beállítható a \'Main Menu\'->\'Settings\'->\'Map appearance\'->\'Day/night mode\'.
+\nVálasztható:
+\n\t\'Sunrise/Sunset\' - automatikus, a Nap pozíciója által vezérelt(alapértelmezett)
+\n\t\'Day\' - mindig nappali módot használ
+\n\t\'Night\' - mindig éjjeli módot használ
+\n\t\'Light sensor\' - a térkép megjelenését az eszköz fényérzékelő szenzora, ha létezik, vezérli.</string>
+<string name="tip_location_sharing">Hely megosztás</string>
+<string name="tip_location_sharing_t">Do you find some interesting place on your trip and want to share it\'s location with your friends or family?
+\nOsmAnd affords you to easily share any location you want.
+\n\tYou can do that in \'Map context menu\'->\'Share location\' menu.
+\nThen you should select way to share your location. The choices are: E-Mail, SMS or just copy location coordinates to clipboard.</string>
+<string name="tip_favorites">Favorite points</string>
+<string name="tip_favorites_t">If you are tired to search for places that you are often visiting, you can easily add this places into Favorites and then use it only by some clicks.
+\n\tFor creating Favorite point you must go to Map context menu, select option \'Add to favorites\' and enter adequate name for it. After saving it, then you can easily access it thru \'Main Menu\'->\'Favorites\' menu.
+\n\tWith long tap on favorite point in \'Favorites\' menu you can Navigate to it, Edit or Delete it.
+\n\tFor displaying all Favorite points directly on map, you can enable layer \'Favorites\' in \'Map context menu\'->\'Layers\'.</string>
+<string name="tip_osm_improve">Openstreetmap improving</string>
+<string name="tip_osm_improve_t">OsmAnd uses maps based on Openstreetmap.org data and it is designed not only for trips and routing but for improving and helping to Openstreetmap project too. You can easily create and upload new POI or OSM bug with just some clicks!
+\nAt first you need to enter login information in \'Main Menu\'->\'Settings\'->\'OSM\'.
+\n\tFor new POI adding you can use option \'Create POI\' in Map context menu. Then you can proceed with entering information about new POI in Create POI dialog and finally Commit it.
+\n\tIf you find some error in the map, you can report that and Openstreetmap community can then faster fix this problem.
+\n\tFor OSM bug adding you should use option \'Open OSM bug\' in Map context menu. Then is opened dialog, where you can enter detailed description of problem and finally post it with \'Add\' button.
+\n\tDon\'t forget that you need internet connection to use this functions!</string>
+<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
+    <string name="error_doing_search">Error occurred in offline search</string>
+    <string name="search_offline_geo_error">Could not parse geo intent:{0}</string>
+<string name="search_osm_offline">Search address using offline maps</string>
+
+<string name="system_locale">Rendszer</string>
+<string name="preferred_locale_descr">Képernyő nyelvének megváltoztatása</string>
+<string name="preferred_locale">Előnyben részesített nyelv</string>
+<string name="tip_map_switch">Térkép forrás</string>
+<string name="tip_map_switch_t">The fastest way to change map source and layers is pressing \'Menu\'->\'Layers\' on map.
+\n\tUnder \'Map source...\' you can choose predefined tile sources or manually created using OsmAndMapCreator on PC.
+\n\tOsmAnd supports custom sources.</string>
+<string name="tip_app_mode">Application mode</string>
+<string name="tip_app_mode_t">OsmAnd supports different modes representing map for typical situations.
+\n\tYou can change mode in \'Menu\'->\'Settings\'->\'Application mode\'.</string>
+<string name="tip_navigation">Navigation</string>
+<string name="tip_navigation_t">To enable navigation you should select destination point first. After that press \'Menu\'->\'Directions\' on map and select navigation type.</string>
+<string name="tip_select_destination_point">Select destination point</string>
+<string name="tip_select_destination_point_t">You can select destination point in map context menu \'Navigate to\' or in search activities.
+\n\tYou can also navigate to favorite point by long pressing in \'Favorites\'.</string>
+<string name="tip_search">Search activities</string>
+<string name="tip_search_t">You can search place directly on map view or by address, by location, as poi or as predefined favorite.
+\n\tPressing \'Search\' on map opens search activities. There you have 2 options : \'Navigate to\' or \'Show on map\'.</string>
+<string name="tip_map_context_menu">Map context menu</string>
+<string name="tip_map_context_menu_t">\tMap context menu is available by long touching on map or by pressing track ball button.
+\n\tAfter touching box with coordinates appears, to open context menu dialog - tap on it, to hide box - long press on it. Also map context menu is available under \'Menu\' button on map.
+\n\tMap context menu consists of actions that use location as input.</string>
+<string name="tip_desctination_point">Destination point</string>
+<string name="tip_desctination_point_t">\tKey concept of OsmAnd is destination point that is marked as red point on map.
+\n\tYou can always see the distance to it and the direction (red triangle) on map. To mark any point as destination you should choose \'Navigate to\' point.
+\n\tThat button is available on all search activities, in context menu of map and on long press for map items.
+Destination point is widely used to measure distance and to straight forward navigation.</string>
+<string name="tip_initial">Tips and tricks</string>
+<string name="tip_initial_t">\tOsmAnd is navigation application that has variety of features.
+\n\tTo better use them you can follow by tips and tricks available as link on main menu.</string>
+<string name="next_button">Következő</string>
+<string name="previous_button">Előző</string>
+
+<string name="unit_of_length_descr">Hosszúság és sebesség mértékegységének megváltoztatása</string>
+<string name="unit_of_length">Hossz mértékegység</string>
+<string name="si_mi_foots">Miles/foots</string>
+<string name="si_mi_yard">Miles/yards</string>
+<string name="si_km_m">Kilometers/meters</string>
+<string name="yard">yd</string>
+<string name="foot">ft</string>
+<string name="mile_per_hour">mph</string>
+<string name="mile">mi</string>
+<string name="send_location_way_choose_title">Share location using</string>
+<string name="send_location_sms_pattern">I\'m here : {0}\n{1}</string>
+<string name="send_location_email_pattern">To see location follow the web browser link {0} or android intent link {1}</string>
+<string name="send_location">Send location</string>
+<string name="context_menu_item_share_location">Share location</string>
+<string name="add_waypoint_dialog_added">Waypoint \'\'{0}\'\' was successfully added</string>
+<string name="add_waypoint_dialog_title">Add waypoint to recorded GPX track</string>
+<string name="context_menu_item_add_waypoint">Add Gpx waypoint</string>
 	<string name="amenity_type_administrative">Adminisztráció</string>
 	<string name="amenity_type_barrier">Határ</string>
 	<string name="amenity_type_education">Oktatás</string>
