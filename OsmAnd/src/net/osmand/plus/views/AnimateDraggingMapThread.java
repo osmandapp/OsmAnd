@@ -8,6 +8,7 @@ import org.apache.commons.logging.Log;
 import android.os.SystemClock;
 import android.util.FloatMath;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 
@@ -33,6 +34,18 @@ public class AnimateDraggingMapThread implements Runnable {
 		
 	}
 	
+	private final static float DRAGGING_ANIMATION_TIME = 1900f;
+	private final static float ZOOM_ANIMATION_TIME = 800f;
+	private final static int DEFAULT_SLEEP_TO_REDRAW = 55;
+	
+	private volatile boolean stopped;
+	private volatile Thread currentThread = null;
+	private AnimateDraggingCallback callback = null;
+	private boolean notifyListener;
+	
+	private float targetRotate = 0;
+	
+	
 	private boolean animateDrag = true;
 	private float curX;
 	private float curY;
@@ -45,7 +58,7 @@ public class AnimateDraggingMapThread implements Runnable {
 	private final float  a = 0.0014f;
 	
 	private long time;
-	private volatile boolean stopped;
+	
 	
 	// 0 - zoom out, 1 - moving, 2 - zoom in
 	private byte phaseOfMoving ;
@@ -62,14 +75,10 @@ public class AnimateDraggingMapThread implements Runnable {
 	private double moveLat;
 	private double moveLon;
 	
-	private volatile Thread currentThread = null;
-	private AnimateDraggingCallback callback = null;
-	private boolean notifyListener;
 
 	private double targetLatitude = 0;
 	private double targetLongitude = 0;
 	private int targetZoom = 0;
-	private float targetRotate = 0;
 	
 	@Override
 	public void run() {
@@ -162,30 +171,34 @@ public class AnimateDraggingMapThread implements Runnable {
 				}
 			}
 			//rotate after animation
-			conditionToCountinue = true;
-			while (conditionToCountinue && callback != null) {
-				conditionToCountinue = false;
-				float rotationDiff = targetRotate - callback.getRotate();
-				if (Math.abs((rotationDiff + 360) % 360) < Math.abs((rotationDiff - 360) % 360)) {
-					rotationDiff = (rotationDiff + 360) % 360;
-				} else {
-					rotationDiff = (rotationDiff - 360) % 360;
-				}
-				float absDiff = Math.abs(rotationDiff);
-				if (absDiff > 0) {
-					Thread.sleep(60);
-					if (absDiff < 1) {
-						callback.rotateTo(targetRotate);
-					} else {
-						conditionToCountinue = true;
-						callback.rotateTo(((absDiff / 10) * Math.signum(rotationDiff) + callback.getRotate()) % 360);
-					}
-				}
-			}
-
+			pendingRotateAnimation();
 		} catch (InterruptedException e) {
 		}
 		currentThread = null;
+	}
+	
+	
+	private void pendingRotateAnimation() throws InterruptedException{
+		boolean conditionToCountinue = true;
+		while (conditionToCountinue && callback != null) {
+			conditionToCountinue = false;
+			float rotationDiff = targetRotate - callback.getRotate();
+			if (Math.abs((rotationDiff + 360) % 360) < Math.abs((rotationDiff - 360) % 360)) {
+				rotationDiff = (rotationDiff + 360) % 360;
+			} else {
+				rotationDiff = (rotationDiff - 360) % 360;
+			}
+			float absDiff = Math.abs(rotationDiff);
+			if (absDiff > 0) {
+				Thread.sleep(DEFAULT_SLEEP_TO_REDRAW);
+				if (absDiff < 1) {
+					callback.rotateTo(targetRotate);
+				} else {
+					conditionToCountinue = true;
+					callback.rotateTo(((absDiff / 10) * Math.signum(rotationDiff) + callback.getRotate()) % 360);
+				}
+			}
+		}
 	}
 	
 
@@ -212,26 +225,6 @@ public class AnimateDraggingMapThread implements Runnable {
 			} catch (InterruptedException e) {
 			}
 		}
-	}
-	
-	public void startZooming(int zoomStart, int zoomEnd){
-		stopAnimatingSync();
-		targetZoom = 0;
-		this.notifyListener = false;
-		if(zoomStart < zoomEnd){
-			dirZ = 1;
-		} else {
-			dirZ = -1;
-		}
-		curZ = zoomStart;
-		endZ = zoomEnd;
-		timeZEnd = 600;
-		phaseOfMoving = 2;
-		animateDrag = false;
-		time = System.currentTimeMillis();
-		stopped = false;
-		Thread thread = new Thread(this,"Animatable dragging"); //$NON-NLS-1$
-		thread.start();
 	}
 	
 	public void startMoving(double curLat, double curLon, double finalLat, double finalLon, int curZoom, int endZoom, int tileSize, float rotate, boolean notifyListener){
@@ -291,17 +284,72 @@ public class AnimateDraggingMapThread implements Runnable {
 		thread.start();
 	}
 	
+	
+	public void startZooming(final int zoomStart, final int zoomEnd){
+		stopAnimatingSync();
+		
+		stopped = false;
+		final boolean notifyListener = true;
+		final float animationTime = ZOOM_ANIMATION_TIME;
+		
+		Thread thread = new Thread(new Runnable(){
+			@Override
+			public void run() {
+				currentThread = Thread.currentThread();
+				float curZoom = zoomStart;
+				AccelerateInterpolator interpolator = new AccelerateInterpolator(1);
+				
+				long timeMillis = SystemClock.uptimeMillis();
+				float normalizedTime = 0f;
+				while(!stopped){
+					normalizedTime = (SystemClock.uptimeMillis() - timeMillis) / animationTime; 
+					if(normalizedTime > 1f){
+						break;
+					}
+					float interpolation = interpolator.getInterpolation(normalizedTime);
+					curZoom = interpolation * (zoomEnd - zoomStart) + zoomStart;
+					callback.zoomTo(curZoom, notifyListener);
+					try {
+						Thread.sleep(DEFAULT_SLEEP_TO_REDRAW);
+					} catch (InterruptedException e) {
+						stopped = true;
+					}
+				}
+				
+				if(curZoom != ((int) Math.round(curZoom))){
+					if(Math.abs(curZoom - zoomEnd) > 2){
+						if(zoomStart > zoomEnd){
+							curZoom = (float) Math.floor(curZoom);
+						} else {
+							curZoom = (float) Math.ceil(curZoom);
+						}
+						callback.zoomTo(curZoom, notifyListener);
+					} else {
+						callback.zoomTo(zoomEnd, notifyListener);
+					}
+				}
+				try {
+					pendingRotateAnimation();
+				} catch (InterruptedException e) {
+				}
+				currentThread = null;
+			}
+		},"Animatable zooming"); //$NON-NLS-1$
+		thread.start();
+	}
+	
+	
 	public void startDragging(final float velocityX, final float velocityY, float startX, float startY, 
 			final float  endX, final float  endY){
 		stopAnimatingSync();
 		this.notifyListener = true;
 		stopped = false;
-		final float animationTime = 1900f;
-		System.out.println("Velocity x " +  velocityX + " velocity Y " + velocityY);
+		final float animationTime = DRAGGING_ANIMATION_TIME;
 		
 		Thread thread = new Thread(new Runnable(){
 			@Override
 			public void run() {
+				currentThread = Thread.currentThread();
 				float curX = endX;
 				float curY = endY;
 				
@@ -325,16 +373,16 @@ public class AnimateDraggingMapThread implements Runnable {
 					curY = newY;
 					prevNormalizedTime = normalizedTime;
 					try {
-						Thread.sleep(50);
+						Thread.sleep(DEFAULT_SLEEP_TO_REDRAW);
 					} catch (InterruptedException e) {
 						stopped = true;
 					}
 				}
-				
-				if(!stopped){
-					
+				try {
+					pendingRotateAnimation();
+				} catch (InterruptedException e) {
 				}
-				
+				currentThread = null;
 			}
 		},"Animatable dragging"); //$NON-NLS-1$
 		thread.start();

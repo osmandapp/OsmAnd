@@ -15,6 +15,7 @@ public class ToDoConstants {
 //      Fix issue with min/max zoom
 //      Refactoring animation (no need source tile size?)
 //      Empty screen replace (?)
+//      Remove notification from OsmAndMapTileView (?)
 //      Refactoring ResourceManager with cached images (tiles density)
 //      YandexLayer goes to MapTileLayer
 //      Add transparency filter to bitmap layers
