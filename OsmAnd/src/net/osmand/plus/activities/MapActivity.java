@@ -116,6 +116,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	// use only gps (not network) for 12 seconds 
 	private static final int USE_ONLY_GPS_INTERVAL = 12000; 
 	
+	private static final int SHOW_POSITION_MSG_ID = 7;
+	private static final int SHOW_POSITION_DELAY = 2500;
+	
 	private boolean providerSupportsBearing = false;
 	@SuppressWarnings("unused")
 	private boolean providerSupportsSpeed = false;
@@ -794,7 +797,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		if(!currentShowingAngle){
 			locationLayer.setHeading(null);
 		}
-		locationLayer.setAppMode(settings.getApplicationMode());
 		routingHelper.setAppMode(settings.getApplicationMode());
 		mapView.setMapPosition(settings.POSITION_ON_MAP.get());
 		registerUnregisterSensor(getLastKnownLocation());
@@ -962,25 +964,24 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	}
 	
 	
-	public void showAndHideMapPosition(){
+	public void showAndHideMapPosition() {
 		mapView.setShowMapPosition(true);
-		if(mapPositionHandler == null){
+		if (mapPositionHandler == null) {
 			mapPositionHandler = new Handler();
 		}
-		Message msg = Message.obtain(mapPositionHandler, new Runnable(){
+		Message msg = Message.obtain(mapPositionHandler, new Runnable() {
 			@Override
 			public void run() {
-				if(mapView.isShowMapPosition()){
+				if (mapView.isShowMapPosition()) {
 					mapView.setShowMapPosition(false);
 					mapView.refreshMap();
 				}
 			}
-			
+
 		});
-		msg.what = 7;
-		mapPositionHandler.removeMessages(7);
-		mapPositionHandler.sendMessageDelayed(msg, 2500);
-		
+		msg.what = SHOW_POSITION_MSG_ID;
+		mapPositionHandler.removeMessages(SHOW_POSITION_MSG_ID);
+		mapPositionHandler.sendMessageDelayed(msg, SHOW_POSITION_DELAY);
 	}
 	
 	

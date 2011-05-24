@@ -42,8 +42,7 @@ import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.SurfaceHolder.Callback;
 
-public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback, AnimateDraggingCallback, OnGestureListener,
-		OnDoubleTapListener, MultiTouchZoomListener {
+public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback, AnimateDraggingCallback {
 
 
 	protected final int emptyTileDivisor = 16;
@@ -99,10 +98,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	protected Handler handler = new Handler();
 
 	private AnimateDraggingMapThread animatedDraggingThread;
-
-	private float initialMultiTouchZoom;
-	private PointF initialMultiTouchCenterPoint;
-	private LatLon initialMultiTouchLocation;
 
 	private GestureDetector gestureDetector;
 
@@ -164,9 +159,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 		animatedDraggingThread = new AnimateDraggingMapThread();
 		animatedDraggingThread.setCallback(this);
-		gestureDetector = new GestureDetector(getContext(), this);
-		multiTouchSupport = new MultiTouchSupport(getContext(), this);
-		gestureDetector.setOnDoubleTapListener(this);
+		gestureDetector = new GestureDetector(getContext(), new MapTileViewOnGestureListener());
+		multiTouchSupport = new MultiTouchSupport(getContext(), new MapTileViewMultiTouchZoomListener());
+		gestureDetector.setOnDoubleTapListener(new MapTileViewOnDoubleTapListener());
 
 		WindowManager mgr = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
 		dm = new DisplayMetrics();
@@ -424,15 +419,15 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	private void refreshMapInternal() {
-		if (handler.hasMessages(1)) {
-			return;
-		}
+		handler.removeMessages(1);
+		
+		long time = System.currentTimeMillis();
 
 		boolean useInternet = getSettings().USE_INTERNET_TO_DOWNLOAD_TILES.get();
 		if (useInternet) {
 			MapTileDownloader.getInstance().refuseAllPreviousRequests();
 		}
-		float ftileSize = getTileSize();
+		
 
 		SurfaceHolder holder = getHolder();
 		synchronized (holder) {
@@ -443,8 +438,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			float h = getCenterPointY();
 			Canvas canvas = holder.lockCanvas();
 			if (canvas != null) {
-				canvas.save();
 				boolean nightMode = false;
+				log.info("Canvas " + (System.currentTimeMillis() - time));
 				if (application != null) {
 					Boolean dayNightRenderer = application.getDaynightHelper().getDayNightRenderer();
 					if (dayNightRenderer != null) {
@@ -456,21 +451,32 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 					calculateTileRectangle(boundsRect, w, h, tileX, tileY, tilesRect);
 					int left = (int) FloatMath.floor(tilesRect.left);
 					int top = (int) FloatMath.floor(tilesRect.top);
-					int width = (int) FloatMath.ceil(tilesRect.right - left);
-					int height = (int) FloatMath.ceil(tilesRect.bottom - top);
 					latlonRect.top = (float) MapUtils.getLatitudeFromTile(nzoom, tilesRect.top);
 					latlonRect.left = (float) MapUtils.getLongitudeFromTile(nzoom, tilesRect.left);
 					latlonRect.bottom = (float) MapUtils.getLatitudeFromTile(nzoom, tilesRect.bottom);
 					latlonRect.right = (float) MapUtils.getLongitudeFromTile(nzoom, tilesRect.right);
-
-					for (int i = 0; i < width; i++) {
-						for (int j = 0; j < height; j++) {
-							float x1 = (i + left - tileX) * ftileSize + w;
-							float y1 = (j + top - tileY) * ftileSize + h;
-							drawEmptyTile(canvas, x1, y1, ftileSize, nightMode);
-						}
+					log.info("Calc" + (System.currentTimeMillis() - time));
+					if(nightMode){
+						canvas.drawARGB(255, 220, 220, 220);
+					} else {
+						canvas.drawARGB(255, 240, 240, 240);
 					}
+					// TODO map
+//					float ftileSize = getTileSize();
+//					int width = (int) FloatMath.ceil(tilesRect.right - left);
+//					int height = (int) FloatMath.ceil(tilesRect.bottom - top);
+//					for (int i = 0; i < width; i++) {
+//						for (int j = 0; j < height; j++) {
+//							float x1 = (i + left - tileX) * ftileSize + w;
+//							float y1 = (j + top - tileY) * ftileSize + h;
+//							drawEmptyTile(canvas, x1, y1, ftileSize, nightMode);
+//						}
+//					}
+					log.info("Draw before layers" + (System.currentTimeMillis() - time));
+					
 					drawOverMap(canvas, latlonRect, tilesRect, nightMode);
+					
+					log.info("Draw with layers " + (System.currentTimeMillis() - time));
 				} finally {
 					holder.unlockCanvasAndPost(canvas);
 				}
@@ -481,21 +487,32 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private void drawOverMap(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode) {
 		int w = getCenterPointX();
 		int h = getCenterPointY();
-		canvas.restore();
 
-		for (int i = -1; i < layers.size(); i++) {
+		// long prev = System.currentTimeMillis();
+		canvas.save();
+		boolean rotated = false;
+		for (int i = 0; i < layers.size(); i++) {
 			try {
 				OsmandMapLayer layer = layers.get(i);
-				canvas.save();
-				if (!layer.drawInScreenPixels()) {
-					canvas.rotate(rotate, w, h);
+				// rotate if needed
+				if ((!layer.drawInScreenPixels()) != rotated) {
+					canvas.restore();
+					rotated = !layer.drawInScreenPixels();
+					canvas.save();
+					if(rotated){
+						canvas.rotate(rotate, w, h);
+					}
 				}
 				layer.onDraw(canvas, latlonRect, tilesRect, nightMode);
-				canvas.restore();
+				
 			} catch (IndexOutOfBoundsException e) {
 				// skip it
 			}
+			// long time = System.currentTimeMillis();
+			// log.debug("Layer time " + (time - prev) + " " + zOrders.get(layers.get(i)));
+			// prev = time;
 		}
+		canvas.restore();
 		if (showMapPosition) {
 			canvas.drawCircle(w, h, 3 * dm.density, paintCenter);
 			canvas.drawCircle(w, h, 7 * dm.density, paintCenter);
@@ -660,29 +677,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		this.onClickListener = l;
 	}
 
-	@Override
-	public boolean onDown(MotionEvent e) {
-		// enable double tap animation
-		// animatedDraggingThread.stopAnimating();
-		return false;
-	}
 
-	@Override
-	public void onZoomEnded(float distance, float relativeToStart) {
-		float dz = (float) (Math.log(relativeToStart) / Math.log(2) * 1.5);
-		float calcZoom = initialMultiTouchZoom + dz;
-		setZoom(Math.round(calcZoom));
-		zoomPositionChanged(getZoom());
-	}
-
-	@Override
-	public void onZoomStarted(float distance, PointF centerPoint) {
-		initialMultiTouchCenterPoint = centerPoint;
-		initialMultiTouchLocation = getLatLonFromScreenPoint(centerPoint.x, centerPoint.y);
-		initialMultiTouchZoom = zoom;
-	}
-	
-	public LatLon getLatLonFromScreenPoint(float x, float y) {
+		public LatLon getLatLonFromScreenPoint(float x, float y) {
 		float dx = x - getCenterPointX();
 		float dy = y - getCenterPointY();
 		float fy = calcDiffTileY(dx, dy);
@@ -692,112 +688,144 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return new LatLon(latitude, longitude);
 	}
 
-	private void zoomPositionChanged(float calcZoom) {
-		float dx = initialMultiTouchCenterPoint.x - getCenterPointX();
-		float dy = initialMultiTouchCenterPoint.y - getCenterPointY();
-		float ex = calcDiffTileX(dx, dy);
-		float ey = calcDiffTileY(dx, dy);
-		int z = (int)calcZoom;
-		double tx = MapUtils.getTileNumberX(z, initialMultiTouchLocation.getLongitude());
-		double ty = MapUtils.getTileNumberY(z, initialMultiTouchLocation.getLatitude());
-		double lat = MapUtils.getLatitudeFromTile(z, ty - ey);
-		double lon = MapUtils.getLongitudeFromTile(z, tx - ex);
-		setLatLon(lat, lon);
-	}
+	
 
-	@Override
-	public void onZooming(float distance, float relativeToStart) {
-		float dz = (float) (Math.log(relativeToStart) / Math.log(2) * 1.5);
-		float calcZoom = initialMultiTouchZoom + dz;
-		if (Math.abs(calcZoom - zoom) > 0.05) {
-			setZoom(calcZoom);
-			zoomPositionChanged(calcZoom);
-		}
-	}
+	
 	public AnimateDraggingMapThread getAnimatedDraggingThread() {
 		return animatedDraggingThread;
 	}
 
-	// Start OnGestureListener
-	@Override
-	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-		if (Math.abs(e1.getX() - e2.getX()) + Math.abs(e1.getX() - e2.getX()) > 50 * dm.density) {
-			animatedDraggingThread.startDragging(Math.abs(velocityX / 1000), Math.abs(velocityY / 1000), e1.getX(), e1.getY(), e2.getX(),
-					e2.getY());
-		} else {
-			onScroll(e1, e2, e1.getX() - e2.getX(), e1.getY() - e2.getY());
+	
+	private class MapTileViewMultiTouchZoomListener implements MultiTouchZoomListener {
+		private float initialMultiTouchZoom;
+		private PointF initialMultiTouchCenterPoint;
+		private LatLon initialMultiTouchLocation;
+		
+		@Override
+		public void onZoomEnded(float distance, float relativeToStart) {
+			float dz = (float) (Math.log(relativeToStart) / Math.log(2) * 1.5);
+			float calcZoom = initialMultiTouchZoom + dz;
+			setZoom(Math.round(calcZoom));
+			zoomPositionChanged(getZoom());
 		}
-		return true;
+
+		@Override
+		public void onZoomStarted(float distance, PointF centerPoint) {
+			initialMultiTouchCenterPoint = centerPoint;
+			initialMultiTouchLocation = getLatLonFromScreenPoint(centerPoint.x, centerPoint.y);
+			initialMultiTouchZoom = zoom;
+		}
+
+		@Override
+		public void onZooming(float distance, float relativeToStart) {
+			float dz = (float) (Math.log(relativeToStart) / Math.log(2) * 1.5);
+			float calcZoom = initialMultiTouchZoom + dz;
+			if (Math.abs(calcZoom - zoom) > 0.05) {
+				setZoom(calcZoom);
+				zoomPositionChanged(calcZoom);
+			}
+		}
+		
+		private void zoomPositionChanged(float calcZoom) {
+			float dx = initialMultiTouchCenterPoint.x - getCenterPointX();
+			float dy = initialMultiTouchCenterPoint.y - getCenterPointY();
+			float ex = calcDiffTileX(dx, dy);
+			float ey = calcDiffTileY(dx, dy);
+			int z = (int)calcZoom;
+			double tx = MapUtils.getTileNumberX(z, initialMultiTouchLocation.getLongitude());
+			double ty = MapUtils.getTileNumberY(z, initialMultiTouchLocation.getLatitude());
+			double lat = MapUtils.getLatitudeFromTile(z, ty - ey);
+			double lon = MapUtils.getLongitudeFromTile(z, tx - ex);
+			setLatLon(lat, lon);
+		}
+
 	}
 
-	
-	@Override
-	public void onLongPress(MotionEvent e) {
-		if (multiTouchSupport.isInZoomMode()) {
-			return;
+	private class MapTileViewOnGestureListener implements OnGestureListener {
+		@Override
+		public boolean onDown(MotionEvent e) {
+			// enable double tap animation
+			// animatedDraggingThread.stopAnimating();
+			return false;
 		}
-		if (log.isDebugEnabled()) {
-			log.debug("On long click event " + e.getX() + " " + e.getY()); //$NON-NLS-1$ //$NON-NLS-2$
+
+		@Override
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+			if (Math.abs(e1.getX() - e2.getX()) + Math.abs(e1.getX() - e2.getX()) > 50 * dm.density) {
+				animatedDraggingThread.startDragging(Math.abs(velocityX / 1000), Math.abs(velocityY / 1000), e1.getX(), e1.getY(), e2
+						.getX(), e2.getY());
+			} else {
+				onScroll(e1, e2, e1.getX() - e2.getX(), e1.getY() - e2.getY());
+			}
+			return true;
 		}
-		PointF point = new PointF(e.getX(), e.getY());
-		for (int i = layers.size() - 1; i >= 0; i--) {
-			if (layers.get(i).onLongPressEvent(point)) {
+
+		@Override
+		public void onLongPress(MotionEvent e) {
+			if (multiTouchSupport.isInZoomMode()) {
+				return;
+			}
+			if (log.isDebugEnabled()) {
+				log.debug("On long click event " + e.getX() + " " + e.getY()); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+			PointF point = new PointF(e.getX(), e.getY());
+			for (int i = layers.size() - 1; i >= 0; i--) {
+				if (layers.get(i).onLongPressEvent(point)) {
+					return;
+				}
+			}
+			if (onLongClickListener != null && onLongClickListener.onLongPressEvent(point)) {
 				return;
 			}
 		}
-		if (onLongClickListener != null && onLongClickListener.onLongPressEvent(point)) {
-			return;
-		}
-	}
 
-	@Override
-	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-		dragTo(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
-		return true;
-	}
-
-	@Override
-	public void onShowPress(MotionEvent e) {
-	}
-
-	@Override
-	public boolean onSingleTapUp(MotionEvent e) {
-		PointF point = new PointF(e.getX(), e.getY());
-		if (log.isDebugEnabled()) {
-			log.debug("On click event " + point.x + " " + point.y); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-		for (int i = layers.size() - 1; i >= 0; i--) {
-			if (layers.get(i).onTouchEvent(point)) {
-				return true;
-			}
-		}
-		if (onClickListener != null && onClickListener.onPressEvent(point)) {
+		@Override
+		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+			dragTo(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
 			return true;
 		}
-		return false;
+
+		@Override
+		public void onShowPress(MotionEvent e) {
+		}
+
+		@Override
+		public boolean onSingleTapUp(MotionEvent e) {
+			PointF point = new PointF(e.getX(), e.getY());
+			if (log.isDebugEnabled()) {
+				log.debug("On click event " + point.x + " " + point.y); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+			for (int i = layers.size() - 1; i >= 0; i--) {
+				if (layers.get(i).onTouchEvent(point)) {
+					return true;
+				}
+			}
+			if (onClickListener != null && onClickListener.onPressEvent(point)) {
+				return true;
+			}
+			return false;
+		}
 	}
-	// End OnGestureListener
 
 
-	// Start OnDoubleTapListener 
-	@Override
-	public boolean onDoubleTap(MotionEvent e) {
-		LatLon l = getLatLonFromScreenPoint(e.getX(), e.getY());
-		getAnimatedDraggingThread().startMoving(getLatitude(), getLongitude(), l.getLatitude(), l.getLongitude(), getZoom(), getZoom() + 1,
-				getSourceTileSize(), getRotate(), true);
-		return true;
-	}
+	private class MapTileViewOnDoubleTapListener implements OnDoubleTapListener {
+		@Override
+		public boolean onDoubleTap(MotionEvent e) {
+			LatLon l = getLatLonFromScreenPoint(e.getX(), e.getY());
+			getAnimatedDraggingThread().startMoving(getLatitude(), getLongitude(), l.getLatitude(), l.getLongitude(), getZoom(),
+					getZoom() + 1, getSourceTileSize(), getRotate(), true);
+			return true;
+		}
 
-	@Override
-	public boolean onDoubleTapEvent(MotionEvent e) {
-		return false;
-	}
+		@Override
+		public boolean onDoubleTapEvent(MotionEvent e) {
+			return false;
+		}
 
-	@Override
-	public boolean onSingleTapConfirmed(MotionEvent e) {
-		return false;
+		@Override
+		public boolean onSingleTapConfirmed(MotionEvent e) {
+			return false;
+		}
 	}
-	
-	// End OnDoubleTapListener 
 
 }
