@@ -421,7 +421,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private void refreshMapInternal() {
 		handler.removeMessages(1);
 		
-		long time = System.currentTimeMillis();
+		// long time = System.currentTimeMillis();
 
 		boolean useInternet = getSettings().USE_INTERNET_TO_DOWNLOAD_TILES.get();
 		if (useInternet) {
@@ -439,7 +439,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			Canvas canvas = holder.lockCanvas();
 			if (canvas != null) {
 				boolean nightMode = false;
-				log.info("Canvas " + (System.currentTimeMillis() - time));
 				if (application != null) {
 					Boolean dayNightRenderer = application.getDaynightHelper().getDayNightRenderer();
 					if (dayNightRenderer != null) {
@@ -455,7 +454,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 					latlonRect.left = (float) MapUtils.getLongitudeFromTile(nzoom, tilesRect.left);
 					latlonRect.bottom = (float) MapUtils.getLatitudeFromTile(nzoom, tilesRect.bottom);
 					latlonRect.right = (float) MapUtils.getLongitudeFromTile(nzoom, tilesRect.right);
-					log.info("Calc" + (System.currentTimeMillis() - time));
 					if(nightMode){
 						canvas.drawARGB(255, 220, 220, 220);
 					} else {
@@ -472,11 +470,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 //							drawEmptyTile(canvas, x1, y1, ftileSize, nightMode);
 //						}
 //					}
-					log.info("Draw before layers" + (System.currentTimeMillis() - time));
-					
 					drawOverMap(canvas, latlonRect, tilesRect, nightMode);
 					
-					log.info("Draw with layers " + (System.currentTimeMillis() - time));
+//					log.info("Draw with layers " + (System.currentTimeMillis() - time));
 				} finally {
 					holder.unlockCanvasAndPost(canvas);
 				}
@@ -752,8 +748,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 			if (Math.abs(e1.getX() - e2.getX()) + Math.abs(e1.getX() - e2.getX()) > 50 * dm.density) {
-				animatedDraggingThread.startDragging(Math.abs(velocityX / 1000), Math.abs(velocityY / 1000), e1.getX(), e1.getY(), e2
-						.getX(), e2.getY());
+				animatedDraggingThread.startDragging(velocityX, velocityY, 
+						e1.getX(), e1.getY(), e2.getX(), e2.getY());
 			} else {
 				onScroll(e1, e2, e1.getX() - e2.getX(), e1.getY() - e2.getY());
 			}
