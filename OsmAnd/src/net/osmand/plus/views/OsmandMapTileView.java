@@ -271,7 +271,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	public void setRotate(float rotate) {
 		float diff = rotate-this.rotate;
-		if (Math.min(Math.abs((diff+360)%360),Math.abs((diff-360)%360)) > 5) { //check smallest rotation
+		if (Math.min(Math.abs((diff + 360) % 360), Math.abs((diff - 360) % 360)) > 5) { // check smallest rotation
 			animatedDraggingThread.startRotate(rotate);
 		}
 	}
@@ -485,22 +485,17 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		int h = getCenterPointY();
 
 		// long prev = System.currentTimeMillis();
-		canvas.save();
-		boolean rotated = false;
 		for (int i = 0; i < layers.size(); i++) {
 			try {
+				
 				OsmandMapLayer layer = layers.get(i);
+				canvas.save();
 				// rotate if needed
-				if ((!layer.drawInScreenPixels()) != rotated) {
-					canvas.restore();
-					rotated = !layer.drawInScreenPixels();
-					canvas.save();
-					if(rotated){
-						canvas.rotate(rotate, w, h);
-					}
+				if (!layer.drawInScreenPixels()) {
+					canvas.rotate(rotate, w, h);
 				}
 				layer.onDraw(canvas, latlonRect, tilesRect, nightMode);
-				
+				canvas.restore();
 			} catch (IndexOutOfBoundsException e) {
 				// skip it
 			}
