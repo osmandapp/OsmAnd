@@ -5,7 +5,11 @@ import net.osmand.osm.MapUtils;
 
 import org.apache.commons.logging.Log;
 
+import android.os.SystemClock;
 import android.util.FloatMath;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 
 /**
  * Thread for animated dragging.
@@ -70,7 +74,9 @@ public class AnimateDraggingMapThread implements Runnable {
 	@Override
 	public void run() {
 		currentThread = Thread.currentThread();
+		AccelerateDecelerateInterpolator interpolator = new AccelerateDecelerateInterpolator();
 		try {
+			
 			boolean conditionToCountinue = true;
 			while (!stopped && conditionToCountinue) {
 				// calculate sleep
@@ -159,11 +165,11 @@ public class AnimateDraggingMapThread implements Runnable {
 			conditionToCountinue = true;
 			while (conditionToCountinue && callback != null) {
 				conditionToCountinue = false;
-				float rotationDiff = targetRotate-callback.getRotate();
-				if (Math.abs((rotationDiff+360)%360) < Math.abs((rotationDiff-360)%360)) {
-					rotationDiff = (rotationDiff+360)%360;
+				float rotationDiff = targetRotate - callback.getRotate();
+				if (Math.abs((rotationDiff + 360) % 360) < Math.abs((rotationDiff - 360) % 360)) {
+					rotationDiff = (rotationDiff + 360) % 360;
 				} else {
-					rotationDiff = (rotationDiff-360)%360;
+					rotationDiff = (rotationDiff - 360) % 360;
 				}
 				float absDiff = Math.abs(rotationDiff);
 				if (absDiff > 0) {
@@ -172,7 +178,7 @@ public class AnimateDraggingMapThread implements Runnable {
 						callback.rotateTo(targetRotate);
 					} else {
 						conditionToCountinue = true;
-						callback.rotateTo(((absDiff/10)*Math.signum(rotationDiff) + callback.getRotate())%360);
+						callback.rotateTo(((absDiff / 10) * Math.signum(rotationDiff) + callback.getRotate()) % 360);
 					}
 				}
 			}
@@ -285,32 +291,63 @@ public class AnimateDraggingMapThread implements Runnable {
 		thread.start();
 	}
 	
-	public void startDragging(float velocityX, float velocityY, float  startX, float  startY, float  endX, float  endY){
+	public void startDragging(final float velocityX, final float velocityY, float startX, float startY, 
+			final float  endX, final float  endY){
 		stopAnimatingSync();
-		targetZoom = 0;
 		this.notifyListener = true;
-		vx = velocityX;
-		vy = velocityY;
-		dirX = (byte) (endX > startX ? 1 : -1);
-		dirY = (byte) (endY > startY ? 1 : -1);
-		animateDrag = true;
-		ax = vx * a;
-		ay = vy * a;
-		time = System.currentTimeMillis();
 		stopped = false;
-		Thread thread = new Thread(this,"Animatable dragging"); //$NON-NLS-1$
+		final float animationTime = 1900f;
+		System.out.println("Velocity x " +  velocityX + " velocity Y " + velocityY);
+		
+		Thread thread = new Thread(new Runnable(){
+			@Override
+			public void run() {
+				float curX = endX;
+				float curY = endY;
+				
+				DecelerateInterpolator interpolator = new DecelerateInterpolator(1);
+				
+				long timeMillis = SystemClock.uptimeMillis();
+				float normalizedTime = 0f;
+				float prevNormalizedTime = 0f;
+				while(!stopped){
+					normalizedTime = (SystemClock.uptimeMillis() - timeMillis) / animationTime; 
+					if(normalizedTime >= 1f){
+						break;
+					}
+					float interpolation = interpolator.getInterpolation(normalizedTime);
+					
+					float newX = velocityX * (1 - interpolation) * (normalizedTime - prevNormalizedTime) + curX;
+					float newY = velocityY * (1 - interpolation) * (normalizedTime - prevNormalizedTime) + curY;
+					
+					callback.dragTo(curX, curY, newX, newY, notifyListener);
+					curX = newX;
+					curY = newY;
+					prevNormalizedTime = normalizedTime;
+					try {
+						Thread.sleep(50);
+					} catch (InterruptedException e) {
+						stopped = true;
+					}
+				}
+				
+				if(!stopped){
+					
+				}
+				
+			}
+		},"Animatable dragging"); //$NON-NLS-1$
 		thread.start();
 	}
 	
-	public void startRotate(float rotate)
-	{
+	public void startRotate(float rotate) {
 		this.targetRotate = rotate;
 		if (!isAnimating()) {
-			//stopped = false;
-			//do we need to kill and recreate the thread? wait would be enough as now it
-			//also handles the rotation?
-			Thread thread = new Thread(this,"Animatable dragging"); //$NON-NLS-1$
-			thread.start();			
+			// stopped = false;
+			// do we need to kill and recreate the thread? wait would be enough as now it
+			// also handles the rotation?
+			Thread thread = new Thread(this, "Animatable dragging"); //$NON-NLS-1$
+			thread.start();
 		}
 	}
 	
