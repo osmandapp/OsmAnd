@@ -14,11 +14,13 @@ public class ToDoConstants {
 //      || 124 || Animated transition using only raster images (?) - skip animations (!) - don not render vectoring for animations (Issue 238) ||
 //      Fix issue with min/max zoom
 //      Refactoring animation (no need source tile size?)
+//      Empty screen replace (?)
 //      Refactoring ResourceManager with cached images (tiles density)
 //      YandexLayer goes to MapTileLayer
 //      Add transparency filter to bitmap layers
 //      Download layers from internet (?) and allow to add own tile sources
 //      Manage tile sources and allow to compact them into sqlite db	
+	
 
 //		=== Refactoring issues ===
 //	    !|| 125 || Introduce service layer rather than singletons and put all related into new package (services). Review architecture. Split some big classes. ||
