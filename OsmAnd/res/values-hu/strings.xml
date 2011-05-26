@@ -50,18 +50,18 @@
 <string name="tip_app_mode_t">OsmAnd alkalmazás több tipikus megjelenítési módot támogat különböző felhasználási esetekre.
 \n\tA mód kiválasztható a  \'Főmenü\'->\'Beállítások\'->\'Működési mód\' alatt.</string>
 <string name="tip_navigation">Navigáció</string>
-<string name="tip_navigation_t">To enable navigation you should select destination point first. After that press \'Menu\'->\'Directions\' on map and select navigation type.</string>
-<string name="tip_select_destination_point">Select destination point</string>
-<string name="tip_select_destination_point_t">You can select destination point in map context menu \'Navigate to\' or in search activities.
-\n\tYou can also navigate to favorite point by long pressing in \'Favorites\'.</string>
-<string name="tip_search">Search activities</string>
-<string name="tip_search_t">You can search place directly on map view or by address, by location, as poi or as predefined favorite.
-\n\tPressing \'Search\' on map opens search activities. There you have 2 options : \'Navigate to\' or \'Show on map\'.</string>
-<string name="tip_map_context_menu">Map context menu</string>
-<string name="tip_map_context_menu_t">\tMap context menu is available by long touching on map or by pressing track ball button.
-\n\tAfter touching box with coordinates appears, to open context menu dialog - tap on it, to hide box - long press on it. Also map context menu is available under \'Menu\' button on map.
-\n\tMap context menu consists of actions that use location as input.</string>
-<string name="tip_desctination_point">Destination point</string>
+<string name="tip_navigation_t">A navigáció bekapcsolásához először ki kell választani a cél helyet. Ezután a \'Térkép menü\'->\'Útirány\' menüt kell választani és megjelölni a közlekedési formát.</string>
+<string name="tip_select_destination_point">Cél hely kiválasztása</string>
+<string name="tip_select_destination_point_t">A cél helyet a \'Térkép menü\'->\'Vezess ide\' pontjával vagy cím kereséssel lehet meghatározni.
+\n\tKedvenc ponthoz a \'Főmenü\'->\'Kedvencek\' menüpont alatt a pontra hosszan rányomva lehet navigálni.</string>
+<string name="tip_search">Cím keresés</string>
+<string name="tip_search_t">Helyet lehet a térképen keresni vagy cím alapján vagy koordináta alapján esetleg mint POI vagy Kedvenc pont.
+\n\t\'Keresés\' menüvel lehet keresni. Két lehetőség közül lehet választani: \'Vezess ide\' or \'Térképen mutat\'.</string>
+<string name="tip_map_context_menu">Térkép menü</string>
+<string name="tip_map_context_menu_t">\tA térkép menü a térképen egy pont hosszú megnyomásával vagy a \'track ball\' gomb megnyomásával érhető el.
+\n\tA térképen a pont megnyomása után egy szövegmező jelenik meg, a térkép menü eléréséhez ezt meg kell nyomni. A szövegmező eltüntetéséhez azt hosszan kell megnyomni. A térkép menü a térkép nézetben a \'Menü\' gomb megnyomásával is elérhető.
+\n\tA térkép menü olyan elemekből áll ami a térkép felhasználó által megadott pontját használja fel.</string>
+<string name="tip_desctination_point">Cél pont</string>
 <string name="tip_desctination_point_t">\tKey concept of OsmAnd is destination point that is marked as red point on map.
 \n\tYou can always see the distance to it and the direction (red triangle) on map. To mark any point as destination you should choose \'Navigate to\' point.
 \n\tThat button is available on all search activities, in context menu of map and on long press for map items.
