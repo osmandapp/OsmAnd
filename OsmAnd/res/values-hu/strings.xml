@@ -43,13 +43,13 @@
 <string name="preferred_locale_descr">Képernyő nyelvének megváltoztatása</string>
 <string name="preferred_locale">Előnyben részesített nyelv</string>
 <string name="tip_map_switch">Térkép forrás</string>
-<string name="tip_map_switch_t">The fastest way to change map source and layers is pressing \'Menu\'->\'Layers\' on map.
-\n\tUnder \'Map source...\' you can choose predefined tile sources or manually created using OsmAndMapCreator on PC.
-\n\tOsmAnd supports custom sources.</string>
-<string name="tip_app_mode">Application mode</string>
-<string name="tip_app_mode_t">OsmAnd supports different modes representing map for typical situations.
-\n\tYou can change mode in \'Menu\'->\'Settings\'->\'Application mode\'.</string>
-<string name="tip_navigation">Navigation</string>
+<string name="tip_map_switch_t">A térkép forrásának és rétegeknek a cseréjére a leggyorsabb megoldás a \'Térkép menü\'->\'Rétegek\' menüpont.
+\n\t\'Térkép forrás...\' alatt lehet választani az előre definiált térképek és az OsmAndMapCreator által PC-n készített térképek között.
+\n\tOsmAnd egyéni forrásokat is támogat.</string>
+<string name="tip_app_mode">Működési mód</string>
+<string name="tip_app_mode_t">OsmAnd alkalmazás több tipikus megjelenítési módot támogat különböző felhasználási esetekre.
+\n\tA mód kiválasztható a  \'Főmenü\'->\'Beállítások\'->\'Működési mód\' alatt.</string>
+<string name="tip_navigation">Navigáció</string>
 <string name="tip_navigation_t">To enable navigation you should select destination point first. After that press \'Menu\'->\'Directions\' on map and select navigation type.</string>
 <string name="tip_select_destination_point">Select destination point</string>
 <string name="tip_select_destination_point_t">You can select destination point in map context menu \'Navigate to\' or in search activities.
