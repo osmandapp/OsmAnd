@@ -76,9 +76,7 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 							textView.setText(info.descriptionRoute);
 							textView.layout(0, 0, textSize, (int) ((textView.getPaint().getTextSize()+4) * textView.getLineCount()));
 						}
-						view.getAnimatedDraggingThread().startMoving(view.getLatitude(), view.getLongitude(),
-								l.getLatitude(), l.getLongitude(),
-								view.getZoom(), view.getZoom(), view.getSourceTileSize(), view.getRotate(), true);
+						view.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(), view.getZoom(), true);
 					}
 					
 				}
@@ -98,9 +96,7 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 						textView.setText(info.descriptionRoute);
 						textView.layout(0, 0, textSize, (int) ((textView.getPaint().getTextSize() + 4) * textView.getLineCount()));
 					}
-					view.getAnimatedDraggingThread().startMoving(view.getLatitude(), view.getLongitude(),
-							l.getLatitude(), l.getLongitude(),
-							view.getZoom(), view.getZoom(), view.getSourceTileSize(), view.getRotate(), true);
+					view.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(), view.getZoom(), true);
 				}
 				view.refreshMap();
 			}

@@ -358,18 +358,12 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			
 		});
 		
-		
-		
 	}
     
     public void changeZoom(int newZoom){
-    	mapView.getAnimatedDraggingThread().stopAnimatingSync();
-		mapView.getAnimatedDraggingThread().startZooming(mapView.getZoom(), newZoom);
+    	boolean changeLocation = settings.AUTO_ZOOM_MAP.get();
+		mapView.getAnimatedDraggingThread().startZooming(newZoom, changeLocation);
 		showAndHideMapPosition();
-		// user can preview map manually switch off auto zoom while user don't press back to location
-		if(settings.AUTO_ZOOM_MAP.get()){
-			locationChanged(mapView.getLatitude(), mapView.getLongitude(), null);
-		}
     }
     
     
@@ -437,7 +431,16 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				dlg.dismiss();
 			}
 		});
+		view.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				dlg.dismiss();
+			}
+		});
+		
 		dlg.show();
+		
 		
 		// Intent newIntent = new Intent(MapActivity.this, MainMenuActivity.class);
 		//newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -530,9 +533,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				Location lastKnownLocation = locationLayer.getLastKnownLocation();
 				AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
 				int fZoom = mapView.getZoom() < 15 ? 15 : mapView.getZoom();
-				thread.startMoving(mapView.getLatitude(), mapView.getLongitude(), 
-						lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), mapView.getZoom(), fZoom, 
-						mapView.getSourceTileSize(), mapView.getRotate(), false);
+				thread.startMoving( lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), fZoom, false);
 			}
 		}
 		if(locationLayer.getLastKnownLocation() == null){
@@ -928,9 +929,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
 		LatLon latLon = settings.getAndClearMapLocationToShow();
 		if (latLon != null && !latLon.equals(cur)) {
-			mapView.getAnimatedDraggingThread().startMoving(cur.getLatitude(), cur.getLongitude(), latLon.getLatitude(),
-					latLon.getLongitude(), mapView.getZoom(), settings.getMapZoomToShow(), mapView.getSourceTileSize(),
-					mapView.getRotate(), true);
+			mapView.getAnimatedDraggingThread().startMoving(latLon.getLatitude(),
+					latLon.getLongitude(), settings.getMapZoomToShow(),  true);
 		}
 		
 		
