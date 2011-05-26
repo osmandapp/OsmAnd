@@ -13,7 +13,6 @@ public class ToDoConstants {
 	// Map Refactoring
 //      || 124 || Animated transition using only raster images (?) - skip animations (!) - don not render vectoring for animations (Issue 238) ||
 //      Fix issue with min/max zoom
-//      Refactoring animation (no need source tile size?)
 //      Empty screen replace (?)
 //      Remove notification from OsmAndMapTileView (?)
 //      Refactoring ResourceManager with cached images (tiles density)

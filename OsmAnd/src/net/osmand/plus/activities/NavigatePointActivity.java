@@ -134,8 +134,7 @@ public class NavigatePointActivity extends Activity {
 				// in case when it is dialog
 				if(activity != null) {
 					OsmandMapTileView v = activity.getMapView();
-					activity.getMapView().getAnimatedDraggingThread().startMoving(v.getLatitude(), v.getLongitude(),
-							lat, lon, v.getZoom(), v.getZoom(), v.getSourceTileSize(), v.getRotate(), true);
+					v.getAnimatedDraggingThread().startMoving(lat, lon, v.getZoom(), true);
 				} else {
 					OsmandSettings.getOsmandSettings(this).setMapLocationToShow(lat, lon, MessageFormat.format(getString(R.string.search_history_navigate_to), lat, lon));
 				}
