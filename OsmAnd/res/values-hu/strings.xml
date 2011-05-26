@@ -2,27 +2,27 @@
 <resources>
   <string name="tip_update_index">Index adatok frissítése</string>
   <string name="tip_update_index_t">Fontos az aktuális térképek megléte. Az Osmand program tartalmaz egy letöltéskezelőt amivel egyszerűen ellenőrizhető, hogy a meglévő index adatokat fel lehet-e frissíteni.
-\n\tA frissítések ellenőrzéséhez a \'Main Menu\'->\'Settings\'->\'Data for offline usage\'->\'Download offline data\'. After reloading index list from internet, select option \'Filter downloaded\' from context menu.
-\nNow only downloaded indexes in your device are displayed and they are highlighted with relevant color:
-\n\t\'Green\' - indicates, that your indexes are actual with server
-\n\t\'Blue\' - indicates, that your indexes can be updated from server</string>
+\n\tA frissítések ellenőrzéséhez a \'Főmenü\'->\'Beállítások\'->\'Adatok kapcsolat nélküli munkához\'->\'Index adatok letöltése\'. Az index adatok internetről való frissítése után a \'Letöltöttek szűrése\' menüt kell választani.
+\nÍgy most már csak a letöltött index adatok jelennek meg a következő színekkel jelölve:
+\n\t\'Zölt\' - azt jelenti, hogy az index állomány megegyezik a szerveren lévővel
+\n\t\'Kék\' - azt jelenti, hogy újabb verzió tölthető le a szerverről</string>
 <string name="level_to_switch_vector_raster_descr">Maximális nagyítási szint vektoros megjelenítéshez raszteres helyett</string>
 <string name="level_to_switch_vector_raster">Vektoros nagyítási szint</string>
 <string name="tip_day_night_mode">Éjjel/Nappali mód</string>
 <string name="tip_day_night_mode_t">A térkép megjelenítése nappali (erős fényviszonyok) vagy éjjeli (gyenge fényviszonyok) használatnak megfelelően megváltoztatható.
 \nÉjjel biztonságosabbak a sötét térkép színek mert nem vakít annyira mint a nappali megjelenítés világos színei.
-\n\tA váltás módja beállítható a \'Main Menu\'->\'Settings\'->\'Map appearance\'->\'Day/night mode\'.
+\n\tA váltás módja beállítható a \'Főmenü\'->\'Beállítások\'->\'Térkép megjelenítés\'->\'Éjjel/nappali mód\'.
 \nVálasztható:
-\n\t\'Sunrise/Sunset\' - automatikus, a Nap pozíciója által vezérelt(alapértelmezett)
-\n\t\'Day\' - mindig nappali módot használ
-\n\t\'Night\' - mindig éjjeli módot használ
-\n\t\'Light sensor\' - a térkép megjelenését az eszköz fényérzékelő szenzora, ha létezik, vezérli.</string>
+\n\t\'Napkelte/Napnyugta\' - automatikus, a Nap pozíciója által vezérelt(alapértelmezett)
+\n\t\'Nappal\' - mindig nappali módot használ
+\n\t\'Éjjel\' - mindig éjjeli módot használ
+\n\t\'Fényérzékelő\' - a térkép megjelenését az eszköz fényérzékelő szenzora, ha létezik, vezérli.</string>
 <string name="tip_location_sharing">Hely megosztás</string>
-<string name="tip_location_sharing_t">Do you find some interesting place on your trip and want to share it\'s location with your friends or family?
-\nOsmAnd affords you to easily share any location you want.
-\n\tYou can do that in \'Map context menu\'->\'Share location\' menu.
-\nThen you should select way to share your location. The choices are: E-Mail, SMS or just copy location coordinates to clipboard.</string>
-<string name="tip_favorites">Favorite points</string>
+<string name="tip_location_sharing_t">Érdekes helyet találtál az utazásod során és meg akarod osztani a pozíciót a barátoddal, családoddal?
+\nOsmAnd lehetőséget biztosít, hogy megoszthass minden helyet amit csak akarsz másokkal.
+\n\tVálaszd a \'Térkép menű\'->\'Hely megosztása\' pontot.
+\nEzután meg kell határoznod milyen módon szeretnéd mással megosztani a koordinátákat. Lehetséges választás: E-Mail, SMS vagy a koordináták másolása a vágólapra.</string>
+<string name="tip_favorites">Kedvencek</string>
 <string name="tip_favorites_t">If you are tired to search for places that you are often visiting, you can easily add this places into Favorites and then use it only by some clicks.
 \n\tFor creating Favorite point you must go to Map context menu, select option \'Add to favorites\' and enter adequate name for it. After saving it, then you can easily access it thru \'Main Menu\'->\'Favorites\' menu.
 \n\tWith long tap on favorite point in \'Favorites\' menu you can Navigate to it, Edit or Delete it.
