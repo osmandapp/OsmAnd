@@ -4,7 +4,7 @@
   <string name="tip_update_index_t">Fontos az aktuális térképek megléte. Az Osmand program tartalmaz egy letöltéskezelőt amivel egyszerűen ellenőrizhető, hogy a meglévő index adatokat fel lehet-e frissíteni.
 \n\tA frissítések ellenőrzéséhez a \'Főmenü\'->\'Beállítások\'->\'Adatok kapcsolat nélküli munkához\'->\'Index adatok letöltése\'. Az index adatok internetről való frissítése után a \'Letöltöttek szűrése\' menüt kell választani.
 \nÍgy most már csak a letöltött index adatok jelennek meg a következő színekkel jelölve:
-\n\t\'Zölt\' - azt jelenti, hogy az index állomány megegyezik a szerveren lévővel
+\n\t\'Zöld\' - azt jelenti, hogy az index állomány megegyezik a szerveren lévővel
 \n\t\'Kék\' - azt jelenti, hogy újabb verzió tölthető le a szerverről</string>
 <string name="level_to_switch_vector_raster_descr">Maximális nagyítási szint vektoros megjelenítéshez raszteres helyett</string>
 <string name="level_to_switch_vector_raster">Vektoros nagyítási szint</string>
@@ -23,11 +23,11 @@
 \n\tVálaszd a \'Térkép menű\'->\'Hely megosztása\' pontot.
 \nEzután meg kell határoznod milyen módon szeretnéd mással megosztani a koordinátákat. Lehetséges választás: E-Mail, SMS vagy a koordináták másolása a vágólapra.</string>
 <string name="tip_favorites">Kedvencek</string>
-<string name="tip_favorites_t">If you are tired to search for places that you are often visiting, you can easily add this places into Favorites and then use it only by some clicks.
-\n\tFor creating Favorite point you must go to Map context menu, select option \'Add to favorites\' and enter adequate name for it. After saving it, then you can easily access it thru \'Main Menu\'->\'Favorites\' menu.
-\n\tWith long tap on favorite point in \'Favorites\' menu you can Navigate to it, Edit or Delete it.
-\n\tFor displaying all Favorite points directly on map, you can enable layer \'Favorites\' in \'Map context menu\'->\'Layers\'.</string>
-<string name="tip_osm_improve">Openstreetmap improving</string>
+<string name="tip_favorites_t">Ha fárasztó a sűrűn használt helyek előkeresése hozzá lehet adni a Kedvencekhez amivel utána pár kattintással előkereshető.
+\n\tKedvenc pont hozzáadásához a térkép menüjébe kell belépni és a \'Hozzáadás a kedvencekhez\'-et kell választani és egy megfelelő névvel kell ellátni. Mentés után egyszerűen a \'Főmenü\'->\'Kedvencek\' menüponton keresztül elérhető..
+\n\tA \'Kedvencek\' menüben a pontra hosszan rányomva navigálhatunk oda, szerkeszthetjük vagy törölhetjük.
+\n\tA térképen minden kedvenc pont megjelenítéséhez a engedélyezni kell a \'Kedvencek\' réteget a \'Térkép menü\'->\'Rétegek\' pontjában.</string>
+<string name="tip_osm_improve">Openstreetmap fejlesztése</string>
 <string name="tip_osm_improve_t">OsmAnd uses maps based on Openstreetmap.org data and it is designed not only for trips and routing but for improving and helping to Openstreetmap project too. You can easily create and upload new POI or OSM bug with just some clicks!
 \nAt first you need to enter login information in \'Main Menu\'->\'Settings\'->\'OSM\'.
 \n\tFor new POI adding you can use option \'Create POI\' in Map context menu. Then you can proceed with entering information about new POI in Create POI dialog and finally Commit it.
@@ -35,9 +35,9 @@
 \n\tFor OSM bug adding you should use option \'Open OSM bug\' in Map context menu. Then is opened dialog, where you can enter detailed description of problem and finally post it with \'Add\' button.
 \n\tDon\'t forget that you need internet connection to use this functions!</string>
 <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
-    <string name="error_doing_search">Error occurred in offline search</string>
+    <string name="error_doing_search">Hiba történt a kapcsolat nélküli keresésben</string>
     <string name="search_offline_geo_error">Could not parse geo intent:{0}</string>
-<string name="search_osm_offline">Search address using offline maps</string>
+<string name="search_osm_offline">Cím keresése kapcsolat nélkül működő térképpel</string>
 
 <string name="system_locale">Rendszer</string>
 <string name="preferred_locale_descr">Képernyő nyelvének megváltoztatása</string>
@@ -81,14 +81,14 @@ Destination point is widely used to measure distance and to straight forward nav
 <string name="foot">ft</string>
 <string name="mile_per_hour">mph</string>
 <string name="mile">mi</string>
-<string name="send_location_way_choose_title">Share location using</string>
-<string name="send_location_sms_pattern">I\'m here : {0}\n{1}</string>
-<string name="send_location_email_pattern">To see location follow the web browser link {0} or android intent link {1}</string>
-<string name="send_location">Send location</string>
-<string name="context_menu_item_share_location">Share location</string>
-<string name="add_waypoint_dialog_added">Waypoint \'\'{0}\'\' was successfully added</string>
-<string name="add_waypoint_dialog_title">Add waypoint to recorded GPX track</string>
-<string name="context_menu_item_add_waypoint">Add Gpx waypoint</string>
+<string name="send_location_way_choose_title">Hely megosztásának módja</string>
+<string name="send_location_sms_pattern">Itt vagyok / I\'m here : {0}\n{1}</string>
+<string name="send_location_email_pattern">A hely megjelenítéséhez kattints a {0} linkre a webböngészőben vagy az Androidra szánt linkre {1}\n\nTo see location follow the web browser link {0} or android intent link {1}</string>
+<string name="send_location">Hely pozíció elküldése</string>
+<string name="context_menu_item_share_location">Hely megosztása</string>
+<string name="add_waypoint_dialog_added">Sikeres útpont felvétel: \'\'{0}\'\'</string>
+<string name="add_waypoint_dialog_title">Útpont hozzáadása a felvett GPX útvonalhoz</string>
+<string name="context_menu_item_add_waypoint"Gpx útpont hozzáadás</string>
 	<string name="amenity_type_administrative">Adminisztráció</string>
 	<string name="amenity_type_barrier">Határ</string>
 	<string name="amenity_type_education">Oktatás</string>
