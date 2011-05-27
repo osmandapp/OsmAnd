@@ -532,7 +532,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			if(locationLayer.getLastKnownLocation() != null){
 				Location lastKnownLocation = locationLayer.getLastKnownLocation();
 				AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
-				int fZoom = mapView.getZoom() < 15 ? 15 : mapView.getZoom();
+				int fZoom = mapView.getZoom() < 14 ? 14 : mapView.getZoom();
 				thread.startMoving( lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), fZoom, false);
 			}
 		}
@@ -853,7 +853,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		if(oldMap instanceof SQLiteTileSource){
 			((SQLiteTileSource)oldMap).closeDB();
 		}
-		rm.updateMapSource(vectorData, newSource);
 		mapTileLayer.setMap(newSource);
 		mapTileLayer.setVisible(!vectorData);
 		mapVectorLayer.setVisible(vectorData);

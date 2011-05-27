@@ -646,19 +646,6 @@ public class ResourceManager {
 	}	
 	
 	
-	public synchronized void updateMapSource(boolean useVectorMap, ITileSource source){
-		log.info("Clear cache with new source " + cacheOfImages.size()); //$NON-NLS-1$
-		cacheOfImages.clear();
-		renderer.clearCache();
-		if(source == null || source.getBitDensity() == 0){
-			maxImgCacheSize = 32;
-		} else {
-			maxImgCacheSize = Math.max(384 / source.getBitDensity() , 32);
-		}
-		
-	}
-	
-	
 	protected synchronized void clearTiles(){
 		log.info("Cleaning tiles - size = " + cacheOfImages.size()); //$NON-NLS-1$
 		ArrayList<String> list = new ArrayList<String>(cacheOfImages.keySet());

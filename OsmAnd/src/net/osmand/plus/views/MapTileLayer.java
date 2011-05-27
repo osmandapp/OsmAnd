@@ -17,7 +17,7 @@ public class MapTileLayer extends BaseMapLayer {
 	protected final int emptyTileDivisor = 16;
 	public static final int OVERZOOM_IN = 2;
 	
-	private ITileSource map = null;
+	protected ITileSource map = null;
 	
 	Paint paintBitmap;
 	
@@ -26,8 +26,8 @@ public class MapTileLayer extends BaseMapLayer {
 	protected RectF bitmapToDraw = new RectF();
 	protected Rect bitmapToZoom = new Rect();
 
-	private OsmandMapTileView view;
-	private ResourceManager resourceManager;
+	protected OsmandMapTileView view;
+	protected ResourceManager resourceManager;
 	private OsmandSettings settings;
 	private boolean visible = true;
 	
@@ -63,7 +63,7 @@ public class MapTileLayer extends BaseMapLayer {
 		ResourceManager mgr = resourceManager;
 		int nzoom = view.getZoom();
 		float tileX = view.getXTile();
-		float tileY = view.getYTile();
+		float tileY = map.isEllipticYTile() ? view.getEllipticYTile() :	view.getYTile();
 		float w = view.getCenterPointX();
 		float h = view.getCenterPointY();
 		float ftileSize = view.getTileSize();
@@ -82,7 +82,13 @@ public class MapTileLayer extends BaseMapLayer {
 			for (int j = 0; j < height; j++) {
 				int leftPlusI = (int) FloatMath.floor((float) MapUtils
 						.getTileNumberX(nzoom, MapUtils.getLongitudeFromTile(nzoom, left + i)));
-				int topPlusJ = (int) FloatMath.floor((float) MapUtils.getTileNumberY(nzoom, MapUtils.getLatitudeFromTile(nzoom, top + j)));
+				float topTileY;
+				if(map.isEllipticYTile()){
+					topTileY = (float) MapUtils.getTileEllipsoidNumberY(nzoom, MapUtils.getLatitudeFromTile(nzoom, top + j));
+				} else {
+					topTileY = (float) MapUtils.getTileNumberY(nzoom, MapUtils.getLatitudeFromTile(nzoom, top + j));
+				}
+				int topPlusJ = (int) FloatMath.floor(topTileY);
 				float x1 = (left + i - tileX) * ftileSize + w;
 				float y1 = (top + j - tileY) * ftileSize + h;
 				String ordImgTile = mgr.calculateTileId(map, leftPlusI, topPlusJ, nzoom);

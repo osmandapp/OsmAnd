@@ -8,7 +8,6 @@ import org.apache.commons.logging.Log;
 import android.os.SystemClock;
 import android.util.FloatMath;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 
@@ -23,7 +22,7 @@ public class AnimateDraggingMapThread {
 	private final static float DRAGGING_ANIMATION_TIME = 1900f;
 	private final static float ZOOM_ANIMATION_TIME = 800f;
 	private final static float ZOOM_MOVE_ANIMATION_TIME = 650f;
-	private final static float MOVE_MOVE_ANIMATION_TIME = 1300f;
+	private final static float MOVE_MOVE_ANIMATION_TIME = 2000f;
 	private final static int DEFAULT_SLEEP_TO_REDRAW = 55;
 	
 	private volatile boolean stopped;
@@ -143,6 +142,8 @@ public class AnimateDraggingMapThread {
 		final float mMoveX = FloatMath.cos(rad) * mStX - FloatMath.sin(rad) * mStY; 
 		final float mMoveY = FloatMath.sin(rad) * mStX + FloatMath.cos(rad) * mStY;
 		
+		final float animationTime = Math.max(450, (Math.abs(mStX) + Math.abs(mStY)) / 1200f * MOVE_MOVE_ANIMATION_TIME);
+		
 		startThreadAnimating(new Runnable() {
 			
 			@Override
@@ -153,7 +154,7 @@ public class AnimateDraggingMapThread {
 				}
 				
 				if(!stopped){
-					animatingMoveInThread(mMoveX, mMoveY, MOVE_MOVE_ANIMATION_TIME, notifyListener);
+					animatingMoveInThread(mMoveX, mMoveY, animationTime, notifyListener);
 				}
 				if(!stopped){
 					tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
@@ -202,6 +203,7 @@ public class AnimateDraggingMapThread {
 	
 	private void animatingZoomInThread(int zoomStart, int zoomEnd, float animationTime, boolean notifyListener){
 		float curZoom = zoomStart;
+		animationTime *= Math.abs(zoomEnd - zoomStart);
 		// AccelerateInterpolator interpolator = new AccelerateInterpolator(1);
 		LinearInterpolator interpolator = new LinearInterpolator();
 		

@@ -88,6 +88,7 @@ public class MapVectorLayer extends BaseMapLayer {
 		}
 		if(!isVectorDataVisible() && tileLayer != null){
 			tileLayer.drawTileMap(canvas, tilesRect);
+			resourceManager.getRenderer().interruptLoadingMap();
 		} else {
 			if (!view.isZooming()){
 				pixRect.set(0, 0, view.getWidth(), view.getHeight());
