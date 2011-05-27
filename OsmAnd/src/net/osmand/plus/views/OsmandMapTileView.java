@@ -247,6 +247,13 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return (float) MapUtils.getTileNumberY(getZoom(), latitude);
 	}
 	
+	/**
+	 * @return y tile based on (int) zoom
+	 */
+	public float getEllipticYTile() {
+		return (float) MapUtils.getTileEllipsoidNumberY(getZoom(), latitude);
+	}
+	
 	public void setZoom(float zoom) {
 		if (mainLayer != null && zoom <= mainLayer.getMaximumShownMapZoom() && zoom >= mainLayer.getMinimumShownMapZoom()) {
 			animatedDraggingThread.stopAnimating();
@@ -436,19 +443,19 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				try {
 					boundsRect.set(0, 0, getWidth(), getHeight());
 					calculateTileRectangle(boundsRect, w, h, tileX, tileY, tilesRect);
-					int left = (int) FloatMath.floor(tilesRect.left);
-					int top = (int) FloatMath.floor(tilesRect.top);
 					latlonRect.top = (float) MapUtils.getLatitudeFromTile(nzoom, tilesRect.top);
 					latlonRect.left = (float) MapUtils.getLongitudeFromTile(nzoom, tilesRect.left);
 					latlonRect.bottom = (float) MapUtils.getLatitudeFromTile(nzoom, tilesRect.bottom);
 					latlonRect.right = (float) MapUtils.getLongitudeFromTile(nzoom, tilesRect.right);
 					if(nightMode){
-						canvas.drawARGB(255, 220, 220, 220);
+						canvas.drawARGB(255, 100, 100, 100);
 					} else {
-						canvas.drawARGB(255, 240, 240, 240);
+						canvas.drawARGB(255, 225, 225, 225);
 					}
 					// TODO map
 //					float ftileSize = getTileSize();
+//					int left = (int) FloatMath.floor(tilesRect.left);
+//					int top = (int) FloatMath.floor(tilesRect.top);
 //					int width = (int) FloatMath.ceil(tilesRect.right - left);
 //					int height = (int) FloatMath.ceil(tilesRect.bottom - top);
 //					for (int i = 0; i < width; i++) {

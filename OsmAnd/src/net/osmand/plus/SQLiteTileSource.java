@@ -250,6 +250,11 @@ public class SQLiteTileSource implements ITileSource {
 		}
 		return urlTemplate != null;
 	}
+
+	@Override
+	public boolean isEllipticYTile() {
+		return false;
+	}
 	
 	
 

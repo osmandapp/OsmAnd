@@ -547,7 +547,7 @@ public class OsmandSettings {
 			if(dir.exists()){
 				if(tileName.endsWith(SQLiteTileSource.EXT)){
 					return new SQLiteTileSource(dir);
-				} else if (dir.isDirectory()) {
+				} else if (dir.isDirectory() && !dir.getName().startsWith(".")) {
 					String url = null;
 					File readUrl = new File(dir, "url"); //$NON-NLS-1$
 					try {

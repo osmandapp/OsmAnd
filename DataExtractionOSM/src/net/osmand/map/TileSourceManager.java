@@ -29,6 +29,7 @@ public class TileSourceManager {
 		protected String ext;
 		private int avgSize;
 		private int bitDensity;
+		private boolean ellipticYTile;
 		
 		public TileSourceTemplate(File dir, String name, String urlToLoad) {
 			this(name, urlToLoad, determineExt(dir,".jpg"), 18, 1, 256, 16, 20000); //$NON-NLS-1$
@@ -76,6 +77,16 @@ public class TileSourceManager {
 			this.ext = ext;
 			this.avgSize = avgSize;
 			this.bitDensity = bitDensity;
+		}
+		
+		
+		public void setEllipticYTile(boolean ellipticYTile) {
+			this.ellipticYTile = ellipticYTile;
+		}
+		
+		@Override
+		public boolean isEllipticYTile() {
+			return ellipticYTile;
 		}
 
 		@Override
