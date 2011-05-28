@@ -45,12 +45,7 @@ public class AnimateDraggingMapThread {
 		boolean conditionToCountinue = true;
 		while (conditionToCountinue && !stopped) {
 			conditionToCountinue = false;
-			float rotationDiff = targetRotate - tileView.getRotate();
-			if (Math.abs((rotationDiff + 360) % 360) < Math.abs((rotationDiff - 360) % 360)) {
-				rotationDiff = (rotationDiff + 360) % 360;
-			} else {
-				rotationDiff = (rotationDiff - 360) % 360;
-			}
+			float rotationDiff = MapUtils.unifyRotationDiff(tileView.getRotate(), targetRotate);
 			float absDiff = Math.abs(rotationDiff);
 			if (absDiff > 0) {
 				Thread.sleep(DEFAULT_SLEEP_TO_REDRAW);
@@ -58,7 +53,7 @@ public class AnimateDraggingMapThread {
 					tileView.rotateToAnimate(targetRotate);
 				} else {
 					conditionToCountinue = true;
-					tileView.rotateToAnimate(((absDiff / 10) * Math.signum(rotationDiff) + tileView.getRotate()) % 360);
+					tileView.rotateToAnimate(rotationDiff / 5 + tileView.getRotate());
 				}
 			}
 		}

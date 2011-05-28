@@ -63,10 +63,18 @@ public class MapTileLayer extends BaseMapLayer {
 		ResourceManager mgr = resourceManager;
 		int nzoom = view.getZoom();
 		float tileX = view.getXTile();
-		float tileY = map.isEllipticYTile() ? view.getEllipticYTile() :	view.getYTile();
+		float tileY = view.getYTile();
 		float w = view.getCenterPointX();
 		float h = view.getCenterPointY();
 		float ftileSize = view.getTileSize();
+		
+		// recalculate for ellipsoid coordinates
+		if (map.isEllipticYTile()) {
+			float ellipticYTile = view.getEllipticYTile();
+			tilesRect.bottom += (ellipticYTile - tileY);
+			tilesRect.top += (ellipticYTile - tileY);
+			tileY = ellipticYTile;
+		}
 
 		int left = (int) FloatMath.floor(tilesRect.left);
 		int top = (int) FloatMath.floor(tilesRect.top);
@@ -80,15 +88,18 @@ public class MapTileLayer extends BaseMapLayer {
 
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				int leftPlusI = (int) FloatMath.floor((float) MapUtils
-						.getTileNumberX(nzoom, MapUtils.getLongitudeFromTile(nzoom, left + i)));
-				float topTileY;
-				if(map.isEllipticYTile()){
-					topTileY = (float) MapUtils.getTileEllipsoidNumberY(nzoom, MapUtils.getLatitudeFromTile(nzoom, top + j));
-				} else {
-					topTileY = (float) MapUtils.getTileNumberY(nzoom, MapUtils.getLatitudeFromTile(nzoom, top + j));
-				}
-				int topPlusJ = (int) FloatMath.floor(topTileY);
+//				int leftPlusI = (int) FloatMath.floor((float) MapUtils
+//						.getTileNumberX(nzoom, MapUtils.getLongitudeFromTile(nzoom, left + i)));
+//				float topTileY;
+//				if(map.isEllipticYTile()){
+//					topTileY = (float) MapUtils.getTileEllipsoidNumberY(nzoom, MapUtils.getLatitudeFromEllipsoidTileY(nzoom, top + j));
+//				} else {
+//					topTileY = (float) MapUtils.getTileNumberY(nzoom, MapUtils.getLatitudeFromTile(nzoom, top + j));
+//				}
+//				int topPlusJ = (int) FloatMath.floor(topTileY);
+				
+				int leftPlusI = left + i;
+				int topPlusJ = top + j;
 				float x1 = (left + i - tileX) * ftileSize + w;
 				float y1 = (top + j - tileY) * ftileSize + h;
 				String ordImgTile = mgr.calculateTileId(map, leftPlusI, topPlusJ, nzoom);

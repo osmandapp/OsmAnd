@@ -265,8 +265,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 
 	public void setRotate(float rotate) {
-		float diff = rotate-this.rotate;
-		if (Math.min(Math.abs((diff + 360) % 360), Math.abs((diff - 360) % 360)) > 5) { // check smallest rotation
+		float diff = MapUtils.unifyRotationDiff(rotate, this.rotate);
+		if (Math.abs(diff) > 5) { // check smallest rotation
 			animatedDraggingThread.startRotate(rotate);
 		}
 	}
@@ -601,7 +601,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	protected void rotateToAnimate(float rotate) {
-		this.rotate = rotate;
+		this.rotate = MapUtils.unifyRotationTo360(rotate);
 		float rotateRad = (float) Math.toRadians(rotate);
 		this.rotateCos = FloatMath.cos(rotateRad);
 		this.rotateSin = FloatMath.sin(rotateRad);

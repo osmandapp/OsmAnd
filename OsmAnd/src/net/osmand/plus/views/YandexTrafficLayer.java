@@ -21,12 +21,12 @@ import android.widget.Toast;
 
 public class YandexTrafficLayer extends MapTileLayer {
 
+	private final static Log log = LogUtil.getLog(MapTileLayer.class);
+	private final static String YANDEX_PREFFIX = ".YandexTraffic_";
 	private static final long DELTA = 10 * 60 * 1000;
 	
 	private long lastTimestampUpdated;
 	private String mTimestamp = null;
-	private final static Log log = LogUtil.getLog(MapTileLayer.class);
-	private final static String YANDEX_PREFFIX = ".YandexTraffic_";
 	private boolean updateThreadRan = false;
 		
 	public void setVisible(boolean visible) {
@@ -88,7 +88,8 @@ public class YandexTrafficLayer extends MapTileLayer {
 				if (!newTimestamp.equals(mTimestamp)) {
 					mTimestamp = newTimestamp;
 					TileSourceTemplate template = new TileSourceTemplate(YANDEX_PREFFIX + mTimestamp,
-							"http://jgo.maps.yandex.net/tiles?l=trf&x={1}&y={2}&z={3}&tm" + mTimestamp, ".png", 17, 7, 256, 8, 18000);
+							"http://jgo.maps.yandex.net/tiles?l=trf&x={1}&y={2}&z={0}&tm=" + mTimestamp, ".png", 17, 7, 256, 8, 18000);
+					template.setEllipticYTile(true);
 					clearCache();
 					this.map = template;
 				}
