@@ -72,6 +72,7 @@ public class OsmandSettings {
 	// cache variables
 	private long lastTimeInternetConnectionChecked = 0;
 	private boolean internetConnectionAvailable = true;
+	private List<TileSourceTemplate> internetAvailableSourceTemplates = null;
 	
 	// TODO make all layers profile preferenced????
 	// TODO profile preferences for map is using vector map???
@@ -532,11 +533,18 @@ public class OsmandSettings {
 		return globalPreferences.getString(MAP_TILE_SOURCES, TileSourceManager.getMapnikSource().getName());
 	}
 	
+	// TODO review mechanism?
 	public ITileSource getMapTileSource() {
 		String tileName = globalPreferences.getString(MAP_TILE_SOURCES, null);
 		if (tileName != null) {
-			
-			List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
+			List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates(false);
+			// TODO show Toast if not available ?
+			if(internetAvailableSourceTemplates == null && isInternetConnectionAvailable()){
+				internetAvailableSourceTemplates = TileSourceManager.downloadTileSourceTemplates();
+			}
+			if(internetAvailableSourceTemplates != null){
+				list.addAll(internetAvailableSourceTemplates);
+			}
 			for (TileSourceTemplate l : list) {
 				if (l.getName().equals(tileName)) {
 					return l;
@@ -546,7 +554,7 @@ public class OsmandSettings {
 			File dir = new File(tPath, tileName);
 			if(dir.exists()){
 				if(tileName.endsWith(SQLiteTileSource.EXT)){
-					return new SQLiteTileSource(dir);
+					return new SQLiteTileSource(dir, list);
 				} else if (dir.isDirectory() && !dir.getName().startsWith(".")) {
 					String url = null;
 					File readUrl = new File(dir, "url"); //$NON-NLS-1$
@@ -562,7 +570,9 @@ public class OsmandSettings {
 					} catch (IOException e) {
 						Log.d(LogUtil.TAG, "Error reading url " + dir.getName(), e); //$NON-NLS-1$
 					}
-					return new TileSourceManager.TileSourceTemplate(dir, dir.getName(), url);
+					
+					return new TileSourceManager.TileSourceTemplate(dir.getName(), url, 
+							TileSourceManager.determineExtOfTiles(dir, ".jpg"), 18, 1, 256, 16, 20000); //$NON-NLS-1$
 				}
 			}
 				
@@ -592,13 +602,14 @@ public class OsmandSettings {
 					if (f.getName().endsWith(SQLiteTileSource.EXT)) {
 						String n = f.getName();
 						map.put(f.getName(), n.substring(0, n.lastIndexOf('.')));
-					} else if (f.isDirectory() && !f.getName().equals(ResourceManager.TEMP_SOURCE_TO_LOAD)) {
+					} else if (f.isDirectory() && !f.getName().equals(ResourceManager.TEMP_SOURCE_TO_LOAD)
+							&& !f.getName().startsWith(".")) {
 						map.put(f.getName(), f.getName());
 					}
 				}
 			}
 		}
-		for(TileSourceTemplate l : TileSourceManager.getKnownSourceTemplates()){
+		for(TileSourceTemplate l : TileSourceManager.getKnownSourceTemplates(false)){
 			map.put(l.getName(), l.getName());
 		}
 		return map;
