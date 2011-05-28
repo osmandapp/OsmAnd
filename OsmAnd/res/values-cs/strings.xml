@@ -41,11 +41,311 @@
 	<string name="reading_cached_tiles">Načítám uložené dlaždice...</string>
 	<string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
 	<string name="version_index_is_not_supported">Verze indexu \'\'{0}\'\' není podporována</string>
+
+  <string name="osmand_net_previously_installed">
+    Máte nainstalovanou předchozí verzi programu. Všechna offline date
+    budou novou verzí podporována. Oblíbená místa byste měli napřed
+    exportovat a po instalaci importovat.
+  </string>
+  <string name="build_installed">Balíček {0} úspěšně instalován ({1}).</string>
+  <string name="downloading_build">Stahuji balíček...</string>
+  <string name="install_selected_build">Opravdu chcete instalovat OsmAnd - {0} z {1} {2} MB.</string>
   <string name="loading_builds_failed">Stahování seznamu balíčků selhalo.</string>
   <string name="loading_builds">Načítám balíčky...</string>
   <string name="select_build_to_install">Vyberte balíček OsmAnd k nainstalování</string>
   <string name="contribution_activity">Speciální aktivita pro vývojovou verzi</string>
 
+  <string name="tip_update_index">Index updating</string>
+  <string name="tip_update_index_t">
+    \t
+
+    Mít k dispozici aktuální mapová data je důležité. OsmAnd obsahuje
+    správce stahování map, kde můžete snadno ověřit, zda jsou k
+    dispozici novější mapy.
+
+    \n\t
+
+    Pro zkontrolování aktualizací \'Hlavní
+    Menu\'->\'Nastavení\'->\'Offline data\'->\'Stáhnout offline
+    data\'. Po aktualizaci seznamu z internetu vyberte z kontextového
+    menu \'Zobrazit jen aktualizace\'.
+
+    \n\t
+
+    Teď se zobrazí jen indexy, které už máte stažené. Navíc jsou
+    zvýrazněné následovně:
+
+    \n\t
+
+    Zelená - označuje aktuální mapy a data
+
+    \n\t
+
+    Modrá - označuje mapy a data, u kterých lze stáhnout novější verzi
+  </string>
+
+  <string name="tip_day_night_mode">Denní/noční režim</string>
+  <string name="tip_day_night_mode_t">
+    \t
+
+    OsmAnd se dokáže ručně nebo automaticky přepínat mezi denním a
+    nočním barevným režimem.
+
+    \n\t
+
+    Pokud řídíte v noci, tmavší zobrazovací režim je vhodnější, neboť
+    méně oslňuje. Naopak, světlé zobrazení v denním režimu je
+    za denního světla lépe čitelné.
+
+    \n\t
+
+    Zobrazovací režim lze nastavit v \'Hlavní
+    Menu\'->\'Nastavení\'->\'Vzhled mapy\'->\'Denní/noční režim\'.
+
+    \n
+    Volby jsou následující:
+
+    \n\t
+
+    \'Východ/západ slunce\' - automatický režim, řízený polohou slunce
+
+    \n\t
+
+    \'Den\' - stále používat denní režim
+
+    \n\t
+
+    \'Noc\' - stále používat noční režim
+
+    \n\t
+
+    \'Senzor osvětlení\' - zobrazení mapy se řídí senzorem osvětlení
+    (pouze pokud je dostupný)
+  </string>
+
+  <string name="tip_location_sharing">Location sharing</string>
+  <string name="tip_location_sharing_t">
+    \t
+
+    Našli jste po cestě nějaké zajímavé místo a chcete se o něj
+    podělit s ostatními?
+
+    \n\t
+
+    OsmAnd umožňuje vaši polohu snadno sdílet.
+
+    \n\t
+
+    V kontextovém menu mapy vyberte volbu \'Sdílet polohu\'. Následně
+    můžete zvolit způsob, jak polohu odešlete. Máte na výběr mezi
+    E-Mailem, SMS nebo zkopírováním souřadnic do schránky.
+  </string>
+  <string name="tip_favorites">Oblíbená místa</string>
+  <string name="tip_favorites_t">
+    \t
+
+    Pokud už Vás nebaví vyhledávat místa, která často navštěvujete,
+    můžete je snadno přidat do seznamu oblíbených.
+
+    \n\t
+
+    Pro přidání oblíbeného místa otevřete kontextové menu mapy,
+    vyberte \'Přidat k oblíbeným\' a zadejte vhodné jméno. Po uložení
+    se k oblíbeným dostanete pomocí \'Hlavní Menu\'->\'Oblíbené\'.
+
+    \n\t
+
+    Dlouhým stisknutím položky v oblíbených vyvoláte další možnosti -
+    navigaci, její úpravy nebo vymazání.
+
+    \n\t
+
+    Zapnutím mapová vrstvy \'Oblíbené\' se všechna oblíbená místa
+    zobrazí na mapě.
+  </string>
+  <string name="tip_osm_improve">Vylepšování Openstreetmap</string>
+  <string name="tip_osm_improve_t">
+    \t
+
+    OsmAnd využívá mapy založené na datech Openstreetmap.org a kromě
+    navigace umožňuje také vylepšování a pomoc projektu
+    Openstreetmap. Několika kliknutími tak můžete snadno vytvářet nové
+    body zájmu (POI) nebo hlášení o chybách OSM. Pro začátek je pouze
+    potřeba zadat přihlašovací informace v \Hlavní
+    Menu\'->\'Nastavení\'->\'OSM\'.
+
+    \n\t
+
+    Nové POI zadáte volbou \'Vytvořit POI\' v kontextovém menu
+    mapy. Pak můžete zadat informace o novém POI a stisknutím tlačítka
+    ho odeslat.
+
+    \n\t
+
+    Pokud v mapě najdete chybu, můžete ji nahlásit a přispět tak k
+    jejímu rychlejšímu opravení.
+
+    \n\t
+
+    Pro přidání OSM chyby použijte volbu \'Otevřít chybu OSM\' v
+    kontextovém menu mapy. Tím se otevře dialog, kde můžete zadat
+    detailní popis problému. Chybu odešlete tlačítkem Add.
+
+    \n\t
+
+    Nezapomeňte, že pro tyto funkce potřebujete internetové připojení!
+  </string>
+
+  <string name="level_to_switch_vector_raster_descr">
+    Úroveň zvětšení, od které se zobrazení přepne z rastrového na
+    vektorové.
+  </string>
+  <string name="level_to_switch_vector_raster">Zvětšení vektorové mapy</string>
+
+  <string name="create_poi_link_to_osm_doc">
+    <u>Online OSM</u> - mapová klasifikace
+  </string>
+  <string name="error_doing_search">Při hledání offline došlo k chybě</string>
+  <string name="search_offline_geo_error">Nemohu rozpoznat geo intent:{0}</string>
+  <string name="search_osm_offline">Hledat adresu pomocí offline map</string>
+
+  <string name="system_locale">Systém</string>
+  <string name="preferred_locale_descr">Volba jazyka</string>
+  <string name="preferred_locale">Jazyk</string>
+  <string name="tip_map_switch">Zdroj map</string>
+  <string name="tip_map_switch_t">
+    \t
+
+    Nejrychlejší způsob, jak změnit zdroj mapy, je stisknutím
+    \'Menu\'->\'Vrstvy\' na mapě.
+
+    \n\t
+
+    Volbou \'Zdroj map...\' můžete změnit předdefinovaný zdroj
+    mapových dlaždic, nebo vybrat data ručně vytvořená na pomocí
+    OsmAnd Map Creatoru na PC.
+  </string>
+  <string name="tip_app_mode">Režim aplikace</string>
+  <string name="tip_app_mode_t">
+    \t
+
+    OsmAnd podporuje různé režimy zobrazení mapy pro typické situace.
+
+    \n\t
+
+    Režim můžete změnit v \'Menu\'->\'Nastavení\'->\'Režim aplikace\'.
+  </string>
+  <string name="tip_navigation">Navigace</string>
+  <string name="tip_navigation_t">
+    \t
+
+    Pro zapnutí navigace musíte nejprve vybrat cílový bod. Poté
+    vyberte \'Menu\'->\'Navigace\' na mapě a vyberte typ navigování.
+  </string>
+  <string name="tip_select_destination_point">Výběr cílového bodu</string>
+  <string name="tip_select_destination_point_t">
+    \t
+
+    Cílový bod můžete vybrat v kontextovém menu \'Navigovat do\', nebo
+    ve vyhledávání.
+
+    \n\t
+
+    Můžete navigovat i do oblíbených bodů dlouhým stisknutím položky v
+    \'Oblíbené\'.
+  </string>
+  <string name="tip_search">Vyhledávání</string>
+  <string name="tip_search_t">
+    \t
+
+    Můžete vyhledat místo přímo na mapě, podle adresy, umístění, jako
+    bod zájmu (POI), nebo v seznamu oblíbených.
+
+    \n\t
+
+    Vyhledávání se otevře stisknutím \'Hledat\'. Nalezené místo pak
+    můžete nechat zobrazit na mapě, nebo ho použít jako cílový bod.
+  </string>
+  <string name="tip_map_context_menu">Kontextové menu mapy</string>
+  <string name="tip_map_context_menu_t">
+    \t
+
+    Kontextové menu mapy obsahuje funkce závisející na aktuální poloze
+    a je dostupné dlouhým stisknutím prstem na mapě, nebo stisknutím
+    trackballu.
+
+    \n\t
+
+    Po stisknutí se objeví obdélník se souřadnicemi. Klepnutím na něj
+    se otevře kontextové menu, po dlouhém stisknutí obdélník naopak
+    zmizí. Kontextové menu je dostupné také tlačítkem \'Menu\'.
+  </string>
+  <string name="tip_desctination_point">Cílový bod</string>
+  <string name="tip_desctination_point_t">
+    \t
+
+    Cílový bod je v mapě OsmAndu označen červenou tečkou.
+
+    \n\t
+
+    Na mapě je vždy zobrazen směr k němu (červený trojúhelník) a jeho
+    vzdálenost. Pro označení libovolného bodu vyberte v menu položku
+    \'Navigovat do bodu\'.
+
+    \n\t
+
+    Toto tlačítko je dostupné u každého vyhledávání, v kontextovém
+    menu mapy a při dlouhém stisknutí kdekoli na mapě.
+
+    \n\t
+
+    Cílový bod se často využívá pro měření vzdáleností a hrubou
+    navigaci vzdušnou čarou.
+  </string>
+  <string name="tip_initial">Tipy a triky</string>
+  <string name="tip_initial_t">
+    \t
+
+    OsmAnd je navigační aplikace s řadou funkcí.
+
+    \n\t
+
+    Pokud se s nimi chcete seznámit, popis tipů a triků můžete vyvolat
+    klepnutím na link nahoře v hlavním menu.
+  </string>
+  <string name="next_button">Další</string>
+  <string name="previous_button">Předchozí</string>
+
+  <string name="unit_of_length_descr">Zvolte jednotku vzdálenosti a rychlosti</string>
+  <string name="unit_of_length">Jednotka vzdálenosti</string>
+  <string name="si_mi_foots">Míle/stopy</string>
+  <string name="si_mi_yard">Míle/yardy</string>
+  <string name="si_km_m">Kilometry/metry</string>
+  <string name="yard">yd</string>
+  <string name="foot">ft</string>
+  <string name="mile_per_hour">mph</string>
+  <string name="mile">mi</string>
+  <string name="send_location_way_choose_title">Sdílet polohu pomocí</string>
+  <string name="send_location_sms_pattern">Jsem tady : {0}\n{1}</string>
+  <string name="send_location_email_pattern">
+    Pro zobrazení polohy následujte link {0} v prohlížeči nebo android
+    intent link {1}
+  </string>
+  <string name="send_location">Poslat polohu</string>
+  <string name="context_menu_item_share_location">Sdílet polohu</string>
+  <string name="add_waypoint_dialog_added">Bod \'\'{0}\'\' byl přidán</string>
+  <string name="add_waypoint_dialog_title">Přidat bod na zaznamenávanou GPX trasu</string>
+  <string name="context_menu_item_add_waypoint">Přidat bod na Gpx trasu</string>
+  <string name="use_osmand_routing_service">Navigace OsmAnd</string>
+  <string name="use_osmand_routing_service_descr">Používat offline
+  navigaci pro dlouhé vzdálenosti (experimentální)</string>
+  <string name="osmand_routing_experimental">Offline navigace je
+  experimentální a nefunguje pro vzdálenosti delší než 20
+  km.\nNavigace se automaticky přepnula na online Cloudmade.</string>
+  <string name="specified_dir_doesnt_exist">Nemohu najít zadaný adresář.</string>
+  <string name="application_dir">Adresář pro data</string>
+  <string name="application_dir_change_warning">Změna adresáře pro
+  data žádná data nemaže ani nepřesouvá - to musíte provést Vy. Pokračovat?</string>
   <string name="gps_status_app_not_found">Aplikace pro zobrazení stavu GPS naní instalovaná. Hledat na Marketu?</string>
 
   <string name="voice_is_not_available_msg">Hlasové navádění není dostupné. V nastaveních vyberte požadovaná hlasová data nebo je stáhněte.</string>
@@ -72,7 +372,7 @@
   <string name="general_settings">Obecné</string>
   <string name="rendering_settings_descr">Nastavení zdroje mapy a vzhledu</string>
   <string name="rendering_settings">Vzhled mapy</string>
-  <string name="index_settings_descr">Stáhnout nebo aktualizovat  data pro offline použití</string>
+  <string name="index_settings_descr">Stáhnout nebo aktualizovat data pro offline použití</string>
   <string name="index_settings">Offline data</string>
   <string name="osmand_service">Služba na pozadí</string>
   <string name="osmand_service_descr">Povolit běh aplikace na pozadí a při vypnutém displeji</string>
@@ -202,7 +502,16 @@
   <string name="route_head">Jeďte rovně</string>
   <string name="first_time_continue">Pokračujte</string>
   <string name="first_time_download">Stáhnout regiony</string>
-  <string name="first_time_msg">Děkujeme, že jste si zvolili OsmAnd.\nAbyste mohli využívat všech možností aplikace, potřebujete indexové soubory, které si můžete stáhnout (Nastavení -&gt; Data) nebo připravit sami. Poté budete moci hledat podle adres, hledat body zájmu (POI) a spojení veřejnou dopravou.</string>
+  <string name="first_time_msg">
+    Děkujeme, že jste si zvolili OsmAnd.
+
+    \n
+
+    Abyste mohli využívat všech možností aplikace, potřebujete
+    indexové soubory, které si můžete stáhnout (Nastavení -&gt; Data)
+    nebo připravit sami. Poté budete moci hledat podle adres, hledat
+    body zájmu (POI) a spojení veřejnou dopravou.
+  </string>
   <string name="search_poi_location">Hladám signál...</string>
   <string name="search_near_map">Hledat poblíž poslední polohy</string>
   <string name="search_nearby">Hledat poblíž</string>
@@ -404,7 +713,7 @@
   <string name="navigate_point_top_text">Zadejte zem. šířku a délku ve vybraném formátu (D - stupně, M - minuty, S - vteřiny)</string>
   <string name="navigate_point_latitude">Šířka</string>
   <string name="navigate_point_longitude">Délka</string>
-  
+
   <string name="search_shown_on_map">Ukázat na mapě</string>
   <string name="navigate_point_cancel">Zrušit</string>
   <string name="search_address_top_text">Zvolit addresu</string>
@@ -438,7 +747,9 @@
   <string name="favourites_context_menu_delete">Snazat oblíbené</string>
   <string name="favourites_edit_dialog_title">Přejmenovat oblíbené</string>
 
-  <string name="favourites_remove_dialog_title">Jste si jistý?</string>
+  <string name="favourites_remove_dialog_title">
+    Opravdu chcete odstranit oblíbené místo?
+  </string>
   <string name="favourites_remove_dialog_success">Oblíbené místo {0} bylo vymazáno.</string>
 
   <string name="osb_add_dialog_title">Vložte text chyby</string>
