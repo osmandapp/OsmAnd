@@ -18,7 +18,9 @@ public class ToDoConstants {
 //      Refactoring ResourceManager with cached images (tiles density)
 //      YandexLayer goes to MapTileLayer
 //      Add transparency filter to bitmap layers
-//      Download layers from internet (?) and allow to add own tile sources
+//      Download layers from internet / Yandex Traffic (not download on osmand?) 
+	// Review all constructors of TileSourceTemplate
+///     allow to add own tile sources from application (?) 
 //      Manage tile sources and allow to compact them into sqlite db	
 	
 

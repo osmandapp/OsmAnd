@@ -65,7 +65,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	public static JMenu getMenuToChooseSource(final MapPanel panel){
 		final JMenu tiles = new JMenu(Messages.getString("MapPanel.SOURCE.OF.TILES")); //$NON-NLS-1$
 		final JMenu userDefined = new JMenu(Messages.getString("MapPanel.USER.DEFINED")); //$NON-NLS-1$
-		final List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
+		final List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates(true);
 		final List<TileSourceTemplate> udf = TileSourceManager.getUserDefinedTemplates(DataExtractionSettings.getSettings().getTilesDirectory());
 		final Map<TileSourceTemplate, JCheckBoxMenuItem> items = new LinkedHashMap<TileSourceTemplate, JCheckBoxMenuItem>();
 		tiles.add(userDefined);

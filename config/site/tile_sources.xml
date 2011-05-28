@@ -1,4 +1,32 @@
 <?xml version="1.0"?>
 <tile_sources>
-   <tile_source />
+<!-- by default added
+   <tile_source name="Cloudmade" url_template="http://tile.cloudmade.com/7ded028e030c5929b28bf823486ce84f/1/256/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/> -->
+   <tile_source name="GoogleMaps" url_template="http://mt3.google.com/vt/v=w2.97&amp;x={1}&amp;y={2}&amp;z={0}" ext=".png" min_zoom="1" max_zoom="19" tile_size="256" img_density="16" avg_img_size="18000"/>
+   <tile_source name="GoogleMaps Satellite" url_template="http://khm1.google.com/kh/v=65&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="1" max_zoom="20" tile_size="256" img_density="32" avg_img_size="18000"/>
+   <tile_source name="GoogleMaps Terrain" url_template="http://mt3.google.com/vt/v=w2p.111&amp;hl=en&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="1" max_zoom="15" tile_size="256" img_density="32" avg_img_size="18000"/>
+
+   <tile_source rule="cykloatlas_cz" name="Cykloatlas CZ" url_template="http://services.tmapserver.cz/tiles/gm/shc/{0}/{1}/{2}.png" ext=".png" min_zoom="7" max_zoom="15" tile_size="256" img_density="16" avg_img_size="26000"/>
+
+   <tile_source name="OpenAerialMap" url_template="http://tile.openaerialmap.org/tiles/1.0.0/openaerialmap-900913/{0}/{1}/{2}.jpg" ext=".jpg" min_zoom="1" max_zoom="13" tile_size="256" img_density="16" avg_img_size="18000"/>
+   <tile_source name="MapSurfer" url_template="http://tiles1.mapsurfer.net/tms_r.ashx?z={0}&amp;x={1}&amp;y={2}" ext=".png" min_zoom="1" max_zoom="19" tile_size="256" img_density="16" avg_img_size="18000"/>
+   <tile_source name="HikeBikeMap DE" url_template="http://toolserver.org/tiles/hikebike/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="17" tile_size="256" img_density="8" avg_img_size="18000"/>
+   <tile_source name="NavigationDebug" url_template="http://ec2-184-73-15-218.compute-1.amazonaws.com/6700/256/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/>
+   <tile_source name="OpenPisteMap" url_template="http://openpistemap.org/tiles/contours/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="17" tile_size="256" img_density="32" avg_img_size="18000"/>
+
+   <tile_source name="Yandex RU" url_template="http://vec01.maps.yandex.ru/tiles?l=map&amp;v=2.15.0&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000" ellipsoid="true"/>
+   <tile_source name="Yandex Satellite RU" url_template="http://sat01.maps.yandex.ru/tiles?l=sat&amp;v=1.19.0&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="1" max_zoom="18" tile_size="256" img_density="32" avg_img_size="18000" ellipsoid="true"/>
+   <tile_source rule="yandex_traffic" name="Yandex Traffic RU"/>
+
+   <tile_source rule="microsoft" name="Microsoft Maps" map_type="r" map_ext="png" ext=".png" min_zoom="1" max_zoom="19" tile_size="256" img_density="16" avg_img_size="18000"/>
+   <tile_source rule="microsoft" name="Microsoft Hybrid" map_type="h" map_ext="jpg" ext=".jpg" min_zoom="1" max_zoom="19" tile_size="256" img_density="32" avg_img_size="18000"/>
+   <tile_source rule="microsoft" name="Microsoft Earth" map_type="a" map_ext="jpg" ext=".jpg" min_zoom="1" max_zoom="19" tile_size="256" img_density="32" avg_img_size="18000"/>
+
+<!--
+   <tile_source rule="wms_tile" url_template="http://wms.latlon.org" name="Genshtab (BLR)" layer="gshtab" ext=".jpg" min_zoom="5" max_zoom="17" tile_size="256" img_density="32" avg_img_size="18000"/>  NOT WORK ?-->
+
+<!--
+	// WMS layers : http://whoots.mapwarper.net/tms/{$z}/{$x}/{$y}/ {layer}/{Path}
+	// 1. Landsat http://onearth.jpl.nasa.gov/wms.cgi global_mosaic (NOT WORK)
+	// 2. Genshtab http://wms.latlon.org gshtab -->
 </tile_sources>
