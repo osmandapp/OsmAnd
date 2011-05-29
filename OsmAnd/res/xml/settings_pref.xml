@@ -11,6 +11,7 @@
 			android:key="use_english_names"></CheckBoxPreference>
 		<ListPreference android:key="renderer" android:title="@string/renderers" android:summary="@string/renderers_descr"></ListPreference>
 		<ListPreference android:key="daynight_mode" android:title="@string/daynight" android:summary="@string/daynight_descr"></ListPreference>
+		<ListPreference android:title="@string/map_overlay" android:summary="@string/map_overlay_descr" android:key="map_overlay"></ListPreference>
 		<CheckBoxPreference android:summary="@string/continuous_rendering_descr" android:title="@string/continuous_rendering"
 			android:key="use_step_by_step_rendering" />
 		<CheckBoxPreference android:key="use_high_res_maps" android:title="@string/use_high_res_maps" android:summary="@string/use_high_res_maps_descr"></CheckBoxPreference>

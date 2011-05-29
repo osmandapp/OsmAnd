@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="layer_overlay">Карта покрытия...</string>
+	<string name="default_none">Нету</string>
+	<string name="map_overlay">Карта покрытия</string>
+	<string name="map_overlay_descr">Выберите слой для покрытия основной карты</string>
 	<string name="map_vector_data">Векторные карты</string>
 	<string name="map_vector_data_descr">Использовать загруженные векторные карты</string>
 	<string name="tile_source_already_installed">Карта уже установлена, настройки будут обновлены</string>

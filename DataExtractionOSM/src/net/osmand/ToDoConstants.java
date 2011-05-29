@@ -12,7 +12,6 @@ public class ToDoConstants {
 
 	// Map Refactoring
 //      Remove notification from OsmAndMapTileView (?)
-//      Add transparency filter to bitmap layers
 //      Allow to create over/under map layers
 //      Allow to config transparency filter
 //      Yandex Traffic make downloadable 

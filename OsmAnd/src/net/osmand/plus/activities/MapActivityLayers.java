@@ -15,8 +15,6 @@ import net.osmand.GPXUtilities.GPXFileResult;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.AmenityType;
 import net.osmand.map.ITileSource;
-import net.osmand.map.TileSourceManager;
-import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
@@ -61,6 +59,7 @@ public class MapActivityLayers {
 	// the order of layer should be preserved ! when you are inserting new layer
 	private MapTileLayer mapTileLayer; 
 	private MapVectorLayer mapVectorLayer;
+	private MapTileLayer overlayLayer;
 	private GPXLayer gpxLayer;
 	private RouteLayer routeLayer;
 	private YandexTrafficLayer trafficLayer;
@@ -97,9 +96,12 @@ public class MapActivityLayers {
 		mapVectorLayer = new MapVectorLayer(mapTileLayer);
 		mapView.addLayer(mapVectorLayer, 0.5f);
 		
-		// 0.6 gpx layer
+		overlayLayer = new MapTileLayer();
+		// mapView.addLayer(overlayLayer, 0.7f);
+		
+		// 0.9 gpx layer
 		gpxLayer = new GPXLayer();
-		mapView.addLayer(gpxLayer, 0.6f);
+		mapView.addLayer(gpxLayer, 0.9f);
 		
 		// 1. route layer
 		routeLayer = new RouteLayer(routingHelper);
@@ -108,7 +110,6 @@ public class MapActivityLayers {
 		// 1.5. traffic layer
 		trafficLayer = new YandexTrafficLayer();
 		mapView.addLayer(trafficLayer, 1.5f);
-		
 		
 		// 2. osm bugs layer
 		osmBugsLayer = new OsmBugsLayer(activity);
@@ -182,6 +183,9 @@ public class MapActivityLayers {
 	public void updateMapSource(OsmandMapTileView mapView){
 		OsmandSettings settings = getApplication().getSettings();
 		boolean showTiles = !settings.MAP_VECTOR_DATA.get();
+		// update overlay layer
+		updateOverlay(mapView, settings);
+		
 		ITileSource source = showTiles ? settings.getMapTileSource() : null;
 		if (showTiles == mapTileLayer.isVisible() && Algoritms.objectEquals(mapTileLayer.getMap(), source)) {
 			return;
@@ -209,6 +213,22 @@ public class MapActivityLayers {
 		} else {
 			mapView.setMainLayer(mapTileLayer);
 		}
+		
+
+		
+	}
+
+	private void updateOverlay(OsmandMapTileView mapView, OsmandSettings settings) {
+		ITileSource overlay = settings.getTileSourceByName(settings.MAP_OVERLAY.get());
+		if(!Algoritms.objectEquals(overlay, overlayLayer.getMap())){
+			if(overlay == null){
+				mapView.removeLayer(overlayLayer);
+			} else {
+				mapView.addLayer(overlayLayer, 0.7f);
+			}
+			overlayLayer.setMap(overlay);
+			mapView.refreshMap();
+		}
 	}
 	
 	public void openLayerSelectionDialog(final OsmandMapTileView mapView){
@@ -220,6 +240,7 @@ public class MapActivityLayers {
 		layersList.add(getString(R.string.layer_osm_bugs));
 		layersList.add(getString(R.string.layer_favorites));
 		layersList.add(getString(R.string.layer_gpx_layer));
+		layersList.add(getString(R.string.layer_overlay));
 		final int routeInfoInd = routeInfoLayer.couldBeVisible() ? layersList.size() : -1;
 		if(routeInfoLayer.couldBeVisible()){
 			layersList.add(getString(R.string.layer_route));
@@ -238,6 +259,7 @@ public class MapActivityLayers {
 		selected[3] = settings.SHOW_OSM_BUGS.get();
 		selected[4] = settings.SHOW_FAVORITES.get();
 		selected[5] = gpxLayer.isVisible();
+		selected[6] = overlayLayer.getMap() != null;
 		selected[trafficInd] = trafficLayer.isVisible();
 		if(routeInfoInd != -1){
 			selected[routeInfoInd] = routeInfoLayer.isUserDefinedVisible(); 
@@ -272,6 +294,14 @@ public class MapActivityLayers {
 					} else {
 						dialog.dismiss();
 						useGPXFileLayer(false, null, mapView);
+					}
+				} else if(item == 6){
+					if(overlayLayer.getMap() != null){
+						settings.MAP_OVERLAY.set(null);
+						updateMapSource(mapView);
+					} else {
+						dialog.dismiss();
+						selectMapOverlayLayer(mapView);
 					}
 				} else if(item == routeInfoInd){
 					routeInfoLayer.setVisible(isChecked);
@@ -451,7 +481,7 @@ public class MapActivityLayers {
 						}
 					});
 				} else {
-					settings.setMapTileSource(keys.get(which - 1));
+					settings.MAP_TILE_SOURCES.set(keys.get(which - 1));
 					settings.MAP_VECTOR_DATA.set(false);
 					updateMapSource(mapView);
 				}
@@ -462,6 +492,39 @@ public class MapActivityLayers {
 		builder.show();
 	}
 	
+	
+	private void selectMapOverlayLayer(final OsmandMapTileView mapView){
+		final OsmandSettings settings = getApplication().getSettings();
+		Map<String, String> entriesMap = settings.getTileSourceEntries();
+		final ArrayList<String> keys = new ArrayList<String>(entriesMap.keySet());
+		Builder builder = new AlertDialog.Builder(activity);
+		final String[] items = new String[entriesMap.size() + 1];
+		int i = 0;
+		for(String it : entriesMap.values()){
+			items[i++] = it;
+		}
+		
+		items[i] = getString(R.string.more_external_layer);
+		builder.setItems(items, new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				if (which == items.length - 1){
+					SettingsActivity.installMapLayers(activity, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							openLayerSelectionDialog(mapView);							
+						}
+					});
+				} else {
+					settings.MAP_OVERLAY.set(keys.get(which));
+					updateMapSource(mapView);
+				}
+				
+			}
+			
+		});
+		builder.show();
+	}
 	
 	
 	private String getString(int resId) {

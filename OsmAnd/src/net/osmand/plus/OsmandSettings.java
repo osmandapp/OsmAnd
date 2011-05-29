@@ -69,7 +69,6 @@ public class OsmandSettings {
 	private List<TileSourceTemplate> internetAvailableSourceTemplates = null;
 	
 	// TODO make all layers profile preferenced????
-	// TODO profile preferences for map is using vector map???
 	private OsmandSettings(OsmandApplication ctx){
 		this.ctx = ctx;
 		globalPreferences = ctx.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_WORLD_READABLE);
@@ -514,16 +513,12 @@ public class OsmandSettings {
 			false, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public static final String MAP_TILE_SOURCES = "map_tile_sources"; //$NON-NLS-1$
+	public final CommonPreference<String> MAP_OVERLAY = new StringPreference("map_overlay",
+			null, true);
 	
-
-	public boolean setMapTileSource(String tileSource){
-		return globalPreferences.edit().putString(MAP_TILE_SOURCES, tileSource).commit();
-	}
-	
-	public String getMapTileSourceName(){
-		return globalPreferences.getString(MAP_TILE_SOURCES, TileSourceManager.getMapnikSource().getName());
-	}
+	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference("map_tile_sources",
+			TileSourceManager.getMapnikSource().getName(), true);
 	
 	public List<TileSourceTemplate> getInternetAvailableSourceTemplates(){
 		if(internetAvailableSourceTemplates == null && isInternetConnectionAvailable()){
@@ -533,7 +528,7 @@ public class OsmandSettings {
 	}
 	
 	public ITileSource getMapTileSource() {
-		String tileName = globalPreferences.getString(MAP_TILE_SOURCES, null);
+		String tileName = MAP_TILE_SOURCES.get();
 		if (tileName != null) {
 			ITileSource ts = getTileSourceByName(tileName);
 			if(ts != null){
@@ -542,8 +537,12 @@ public class OsmandSettings {
 		}
 		return TileSourceManager.getMapnikSource();
 	}
+	
 
-	private ITileSource getTileSourceByName(String tileName) {
+	public ITileSource getTileSourceByName(String tileName) {
+		if(tileName == null || tileName.length() == 0){
+			return null;
+		}
 		List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
 		File tPath = extendOsmandPath(ResourceManager.TILES_PATH);
 		File dir = new File(tPath, tileName);

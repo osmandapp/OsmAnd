@@ -55,6 +55,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
 	private EditTextPreference applicationDir;
 	private ListPreference tileSourcePreference;
+	private ListPreference overlayPreference;
 	
 	private CheckBoxPreference routeServiceEnabled;
 	private BroadcastReceiver broadcastReceiver;
@@ -249,8 +250,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		entries = (String[]) rendererNames.toArray(new String[rendererNames.size()]);
 		registerListPreference(osmandSettings.RENDERER, screen, entries, entries);
 		
-		tileSourcePreference = (ListPreference) screen.findPreference(OsmandSettings.MAP_TILE_SOURCES);
+		tileSourcePreference = (ListPreference) screen.findPreference(osmandSettings.MAP_TILE_SOURCES.getId());
 		tileSourcePreference.setOnPreferenceChangeListener(this);
+		overlayPreference = (ListPreference) screen.findPreference(osmandSettings.MAP_OVERLAY.getId());
+		overlayPreference.setOnPreferenceChangeListener(this);
 		
 
 		reloadIndexes =(Preference) screen.findPreference(OsmandSettings.RELOAD_INDEXES);
@@ -331,10 +334,32 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     }
 
 	private void updateTileSourceSummary() {
+		fillTileSourcesToPreference(tileSourcePreference, osmandSettings.MAP_TILE_SOURCES.get(), false);
+		fillTileSourcesToPreference(overlayPreference, osmandSettings.MAP_OVERLAY.get(), true);
+
+		String mapName = " " + osmandSettings.MAP_TILE_SOURCES.get(); //$NON-NLS-1$
+		String summary = tileSourcePreference.getSummary().toString();
+		if (summary.lastIndexOf(':') != -1) {
+			summary = summary.substring(0, summary.lastIndexOf(':') + 1);
+		}
+		tileSourcePreference.setSummary(summary + mapName);
+	}
+
+	private void fillTileSourcesToPreference(ListPreference tileSourcePreference, String value, boolean addNone) {
 		Map<String, String> entriesMap = osmandSettings.getTileSourceEntries();
-		String[] entries = new String[entriesMap.size() + 1];
-		String[] values = new String[entriesMap.size() + 1];
+		int add = addNone ? 1 : 0;
+		String[] entries = new String[entriesMap.size() + 1 + add];
+		String[] values = new String[entriesMap.size() + 1 + add];
 		int ki = 0;
+		if(addNone){
+			entries[ki] = getString(R.string.default_none);
+			values[ki] = "";
+			ki++;
+		}
+		if (value == null) {
+			value = "";
+		}
+		
 		for(Map.Entry<String, String> es : entriesMap.entrySet()){
 			entries[ki] = es.getValue();
 			values[ki] = es.getKey();
@@ -342,15 +367,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		entries[ki] = getString(R.string.more_external_layer);
 		values[ki] = MORE_VALUE;
-		String value = osmandSettings.getMapTileSourceName();
 		fill(tileSourcePreference, entries, values, value);
-
-		String mapName = " " + osmandSettings.getMapTileSourceName(); //$NON-NLS-1$
-		String summary = tileSourcePreference.getSummary().toString();
-		if (summary.lastIndexOf(':') != -1) {
-			summary = summary.substring(0, summary.lastIndexOf(':') + 1);
-		}
-		tileSourcePreference.setSummary(summary + mapName);
 	}
     
 	private void fill(ListPreference component, String[] list, String[] values, String selected) {
@@ -421,7 +438,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					routeServiceEnabled.setChecked(getMyApplication().getNavigationService() != null);
 				}
 			}
-		} else if (preference == tileSourcePreference) {
+		} else if (preference == tileSourcePreference  || preference == overlayPreference) {
 			if(MORE_VALUE.equals(newValue)){
 				SettingsActivity.installMapLayers(this, new DialogInterface.OnClickListener() {
 					@Override
@@ -429,9 +446,14 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 						updateTileSourceSummary();							
 					}
 				});
-			} else {
-				osmandSettings.setMapTileSource((String) newValue);
+			} else if(preference == tileSourcePreference){
+				osmandSettings.MAP_TILE_SOURCES.set((String) newValue);
 				updateTileSourceSummary();
+			} else {
+				if(((String) newValue).length() == 0){
+					newValue = null;
+				}
+				osmandSettings.MAP_OVERLAY.set(((String) newValue));
 			}
 		}
 		return true;
