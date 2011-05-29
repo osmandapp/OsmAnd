@@ -15,6 +15,8 @@ import net.osmand.GPXUtilities.GPXFileResult;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.AmenityType;
 import net.osmand.map.ITileSource;
+import net.osmand.map.TileSourceManager;
+import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
@@ -421,12 +423,14 @@ public class MapActivityLayers {
 		Map<String, String> entriesMap = settings.getTileSourceEntries();
 		Builder builder = new AlertDialog.Builder(activity);
 		final ArrayList<String> keys = new ArrayList<String>(entriesMap.keySet());
-		String[] items = new String[entriesMap.size() + 1];
+		final String[] items = new String[entriesMap.size() + 2];
 		items[0] = getString(R.string.vector_data);
 		int i = 1;
 		for(String it : entriesMap.values()){
 			items[i++] = it;
 		}
+		
+		items[i] = getString(R.string.more_external_layer);
 		builder.setItems(items, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -438,14 +442,67 @@ public class MapActivityLayers {
 					} else {
 						settings.setUsingMapVectorData(true);
 					}
+					updateMapSource(mapView);
+				} else if (which == items.length - 1){
+					installMapLayers(mapView);
 				} else {
 					settings.setMapTileSource(keys.get(which - 1));
 					settings.setUsingMapVectorData(false);
+					updateMapSource(mapView);
 				}
-				updateMapSource(mapView);
+				
 			}
 			
 		});
+		builder.show();
+	}
+	
+	private void installMapLayers(final OsmandMapTileView mapView){
+		final OsmandSettings settings = getApplication().getSettings();
+		final Map<String, String> entriesMap = settings.getTileSourceEntries();
+		if(!settings.isInternetConnectionAvailable(true)){
+			Toast.makeText(activity, R.string.internet_not_available, Toast.LENGTH_LONG).show();
+			return;
+		}
+		final List<TileSourceTemplate> downloaded = TileSourceManager.downloadTileSourceTemplates();
+		if(downloaded == null || downloaded.isEmpty()){
+			Toast.makeText(activity, R.string.error_io_error, Toast.LENGTH_SHORT).show();
+			return;
+		}
+		Builder builder = new AlertDialog.Builder(activity);
+		String[] names = new String[downloaded.size()];
+		for(int i=0; i<names.length; i++){
+			names[i] = downloaded.get(i).getName();
+		}
+		final boolean[] selected = new boolean[downloaded.size()];
+		builder.setMultiChoiceItems(names, selected, new DialogInterface.OnMultiChoiceClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				selected[which] = isChecked;
+				if(entriesMap.containsKey(downloaded.get(which).getName()) && isChecked){
+					Toast.makeText(activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
+		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setTitle(R.string.select_tile_source_to_install);
+		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				List<TileSourceTemplate> toInstall = new ArrayList<TileSourceTemplate>();
+				for(int i=0; i<selected.length; i++){
+					if(selected[i]){
+						toInstall.add(downloaded.get(i));
+					}
+				}
+				for(TileSourceTemplate ts : toInstall){
+					settings.installTileSource(ts);
+				}
+				openLayerSelectionDialog(mapView);
+			}
+		});
+		
 		builder.show();
 	}
 	
