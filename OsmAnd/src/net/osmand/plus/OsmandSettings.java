@@ -533,51 +533,53 @@ public class OsmandSettings {
 		return globalPreferences.getString(MAP_TILE_SOURCES, TileSourceManager.getMapnikSource().getName());
 	}
 	
-	// TODO review mechanism?
+	public List<TileSourceTemplate> getInternetAvailableSourceTemplates(){
+		if(internetAvailableSourceTemplates == null && isInternetConnectionAvailable()){
+			internetAvailableSourceTemplates = TileSourceManager.downloadTileSourceTemplates();
+		}
+		return internetAvailableSourceTemplates;
+	}
+	
 	public ITileSource getMapTileSource() {
 		String tileName = globalPreferences.getString(MAP_TILE_SOURCES, null);
 		if (tileName != null) {
-			List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates(false);
-			// TODO show Toast if not available ?
-			if(internetAvailableSourceTemplates == null && isInternetConnectionAvailable()){
-				internetAvailableSourceTemplates = TileSourceManager.downloadTileSourceTemplates();
+			ITileSource ts = getTileSourceByName(tileName);
+			if(ts != null){
+				return ts;
 			}
-			if(internetAvailableSourceTemplates != null){
-				list.addAll(internetAvailableSourceTemplates);
-			}
-			for (TileSourceTemplate l : list) {
-				if (l.getName().equals(tileName)) {
-					return l;
-				}
-			}
-			File tPath = extendOsmandPath(ResourceManager.TILES_PATH);
-			File dir = new File(tPath, tileName);
-			if(dir.exists()){
-				if(tileName.endsWith(SQLiteTileSource.EXT)){
-					return new SQLiteTileSource(dir, list);
-				} else if (dir.isDirectory() && !dir.getName().startsWith(".")) {
-					String url = null;
-					File readUrl = new File(dir, "url"); //$NON-NLS-1$
-					try {
-						if (readUrl.exists()) {
-							BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(readUrl), "UTF-8")); //$NON-NLS-1$
-							url = reader.readLine();
-							url = url.replaceAll(Pattern.quote("{$z}"), "{0}"); //$NON-NLS-1$ //$NON-NLS-2$
-							url = url.replaceAll(Pattern.quote("{$x}"), "{1}"); //$NON-NLS-1$//$NON-NLS-2$
-							url = url.replaceAll(Pattern.quote("{$y}"), "{2}"); //$NON-NLS-1$ //$NON-NLS-2$
-							reader.close();
-						}
-					} catch (IOException e) {
-						Log.d(LogUtil.TAG, "Error reading url " + dir.getName(), e); //$NON-NLS-1$
-					}
-					
-					return new TileSourceManager.TileSourceTemplate(dir.getName(), url, 
-							TileSourceManager.determineExtOfTiles(dir, ".jpg"), 18, 1, 256, 16, 20000); //$NON-NLS-1$
-				}
-			}
-				
 		}
 		return TileSourceManager.getMapnikSource();
+	}
+
+	private ITileSource getTileSourceByName(String tileName) {
+		List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
+		File tPath = extendOsmandPath(ResourceManager.TILES_PATH);
+		File dir = new File(tPath, tileName);
+		if(dir.exists()){
+			if(tileName.endsWith(SQLiteTileSource.EXT)){
+				return new SQLiteTileSource(dir, list);
+			} else if (dir.isDirectory() && !dir.getName().startsWith(".")) {
+				TileSourceTemplate t = TileSourceManager.createTileSourceTemplate(dir);
+				if(!TileSourceManager.isTileSourceMetaInfoExist(dir)){
+					// try to find among other templates
+					List<TileSourceTemplate> templates = getInternetAvailableSourceTemplates();
+					if(templates != null){
+						list.addAll(templates);
+					}
+					for (TileSourceTemplate l : list) {
+						if (l.getName().equals(tileName)) {
+							try {
+								TileSourceManager.createMetaInfoFile(dir, l, true);
+							} catch (IOException e) {
+							}
+							return l;
+						}
+					}
+				}
+				return t;
+			}
+		}
+		return null;
 	}
 	
 	public Map<String, String> getTileSourceEntries(){
@@ -609,7 +611,7 @@ public class OsmandSettings {
 				}
 			}
 		}
-		for(TileSourceTemplate l : TileSourceManager.getKnownSourceTemplates(false)){
+		for(TileSourceTemplate l : TileSourceManager.getKnownSourceTemplates()){
 			map.put(l.getName(), l.getName());
 		}
 		return map;
