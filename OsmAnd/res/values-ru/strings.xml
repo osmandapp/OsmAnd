@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="map_vector_data">Векторные карты</string>
+	<string name="map_vector_data_descr">Использовать загруженные векторные карты</string>
 	<string name="tile_source_already_installed">Карта уже установлена, настройки будут обновлены</string>
 	<string name="select_tile_source_to_install">Выберите карты для установки или обновления</string>
 	<string name="internet_not_available">Интернет соединение не доступно</string>
@@ -437,7 +439,7 @@
     <string name="show_poi_over_map_description">Показывать слой POI</string>
     <string name="show_poi_over_map">POI</string>
     <string name="map_tile_source_descr">Загружать недостающие части карты из : </string>
-    <string name="map_tile_source">Источник данных</string>
+    <string name="map_tile_source">Растровые карты</string>
     <string name="map_source">Источник карты</string>
     <string name="use_internet">Интернет</string>
     <string name="show_location">Показать место</string>

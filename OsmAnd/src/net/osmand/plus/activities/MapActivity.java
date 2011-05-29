@@ -158,7 +158,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				@Override
 				public void onDismiss(DialogInterface dialog) {
 					OsmandApplication app = ((OsmandApplication)getApplication());
-					if(settings.isUsingMapVectorData() && app.getResourceManager().getRenderer().isEmpty()){
+					if(settings.MAP_VECTOR_DATA.get() && app.getResourceManager().getRenderer().isEmpty()){
 						Toast.makeText(MapActivity.this, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
 					}
 				}

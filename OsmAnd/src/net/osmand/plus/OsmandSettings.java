@@ -508,20 +508,15 @@ public class OsmandSettings {
 		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.BICYCLE, false);
 		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
 	}
-
+	
 	// this value string is synchronized with settings_pref.xml preference name
-	public static final String MAP_VECTOR_DATA = "map_vector_data"; //$NON-NLS-1$
+	public final CommonPreference<Boolean> MAP_VECTOR_DATA = new BooleanPreference("map_vector_data",
+			false, true);
+	
+	// this value string is synchronized with settings_pref.xml preference name
 	public static final String MAP_TILE_SOURCES = "map_tile_sources"; //$NON-NLS-1$
 	
 
-	public boolean isUsingMapVectorData(){
-		return globalPreferences.getBoolean(MAP_VECTOR_DATA, false);
-	}
-	
-	public boolean setUsingMapVectorData(boolean val){
-		return globalPreferences.edit().putBoolean(MAP_VECTOR_DATA, val).commit();
-	}
-	
 	public boolean setMapTileSource(String tileSource){
 		return globalPreferences.edit().putString(MAP_TILE_SOURCES, tileSource).commit();
 	}

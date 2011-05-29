@@ -11,22 +11,17 @@ public class ToDoConstants {
 //	    == Osmand application (TODO 127) ==
 
 	// Map Refactoring
-//      || 124 || Animated transition using only raster images (?) - skip animations (!) - don not render vectoring for animations (Issue 238) ||
-//      Fix issue with min/max zoom
-//      Empty screen replace (?)
 //      Remove notification from OsmAndMapTileView (?)
-//      Refactoring ResourceManager with cached images (tiles density)
-//      YandexLayer goes to MapTileLayer
 //      Add transparency filter to bitmap layers
-//      Download layers from internet / Yandex Traffic (not download on osmand?) 
-	// Review all constructors of TileSourceTemplate
-///     allow to add own tile sources from application (?) 
-//      Manage tile sources and allow to compact them into sqlite db	
+//      Allow to create over/under map layers
+//      Allow to config transparency filter
+//      Yandex Traffic make downloadable 
+//      allow to add own tile sources from OsmAnd (?) 
+//      allow to create sqlite sources from OsmAnd (?)	
 	
 
 //		=== Refactoring issues ===
 //	    !|| 125 || Introduce service layer rather than singletons and put all related into new package (services). Review architecture. Split some big classes. ||
-
 	
 //		=== Common issues ===
 //	    || 104 || Add activity to show current loaded indexes and information about them (Issue 366) ||
@@ -49,9 +44,6 @@ public class ToDoConstants {
 //		=== Unscheduled (complex) ===
 //		|| 65 || Intermediate points - for better control routing, to avoid traffic jams ...(?) ||
 
-	// 	_19. colors for road trunk and motorway
-	
-	
 	///////////////////////////   DONE //////////////////////////////
 	// DONE ANDROID :
 //	|| 112 || Investigate exiting/minimizing app (Issue 214) ||
@@ -59,9 +51,8 @@ public class ToDoConstants {
 //  || 120 || Show icons over poi circle (issue 414) ||
 //  || 119 || Dialog on main screen tips and tricks (Issue 415) ||
 //  || 118 || Config switching between maps on different zoom levels <14 (using raster), > 14 vector (Issue 419) ||
+//  || 124 || Animated transition using only raster images (?) - skip animations (!) - don not render vectoring for animations (Issue 238) ||
 	
 	// DONE SWING
-
-	
 	
 }

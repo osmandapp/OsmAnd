@@ -47,7 +47,7 @@ public class DownloadTilesDialog {
 	
 	public void openDialog(){
 		BaseMapLayer mainLayer = mapView.getMainLayer();
-		if(!(mainLayer instanceof MapTileLayer) || ((MapTileLayer) mainLayer).isVisible()){
+		if(!(mainLayer instanceof MapTileLayer) || !((MapTileLayer) mainLayer).isVisible()){
 			Toast.makeText(ctx, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
 		}
 		final ITileSource mapSource = ((MapTileLayer) mainLayer).getMap();
