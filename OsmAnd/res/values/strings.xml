@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="tile_source_already_installed">Map is already installed, settings will be updated</string>
+	<string name="select_tile_source_to_install">Select maps to install or update</string>
+	<string name="internet_not_available">Internet connection required for operation is not available</string>
+	<string name="more_external_layer">More...</string>
 	<string name="tip_update_index">Index updating</string>
 	<string name="tip_update_index_t">It is very important to have actual map data. Osmand is equipped with download manager with which you can easily check if your indexes can be updated.
 	\n\tFor checking updates go to \'Main Menu\'->\'Settings\'->\'Data for offline usage\'->\'Download offline data\'. After reloading index list from internet, select option \'Filter downloaded\' from context menu.
 	\nNow only downloaded indexes in your device are displayed  and they are highlighted with relevant color:
 	\n\t\'Green\' - indicates, that your indexes are actual with server
 	\n\t\'Blue\' - indicates, that your indexes can be updated from server</string>
+	
 	<string name="level_to_switch_vector_raster_descr">Max zoom level to use vector rendering instead of raster</string>
 	<string name="level_to_switch_vector_raster">Zoom vector level</string>
 	<string name="tip_day_night_mode">Day/Night Mode</string>
@@ -485,6 +490,7 @@ Destination point is widely used to measure distance and to straight forward nav
 <color name="menu_background">#FF9030</color>
 <color name="color_light_gray">#d7d7d7</color>
 <color name="color_black">#000000</color>
+<color name="color_transparent">#00000000</color>
 <string name="search_activity">Search</string>
 <color name="color_white">#FFFFFF</color>
 <color name="color_red">#FF0000</color>

@@ -40,13 +40,9 @@ public class MainMenuActivity extends Activity {
 	private static final String TIPS_SHOW = "TIPS_SHOW"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = ResourceManager.APP_DIR + "exception.log"; //$NON-NLS-1$
 	
-	private View showMap;
-	private View settingsButton;
-	private View searchButton;
-	private View favouritesButton;
-	private View closeButton;
-	
 	private static final String CONTRIBUTION_VERSION_FLAG = "CONTRIBUTION_VERSION_FLAG";
+	
+	public static final int APP_EXIT_CODE = 4;
 
 	
 	public void checkPreviousRunsForExceptions(boolean firstTime) {
@@ -95,7 +91,15 @@ public class MainMenuActivity extends Activity {
 		}
 	}
 	
-	public Animation getAnimation(int left, int top){
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode == APP_EXIT_CODE){
+			finish();
+		}
+	}
+	
+	public static Animation getAnimation(int left, int top){
 		Animation anim = new TranslateAnimation(TranslateAnimation.RELATIVE_TO_SELF, left, 
 				TranslateAnimation.RELATIVE_TO_SELF, 0, TranslateAnimation.RELATIVE_TO_SELF, top, TranslateAnimation.RELATIVE_TO_SELF, 0);
 		anim.setDuration(700);
@@ -103,33 +107,28 @@ public class MainMenuActivity extends Activity {
 		return anim;
 	}
 	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.menu);
-		View head = (View) findViewById(R.id.Headliner);
+	public static void onCreateMainMenu(Window window, final Activity activity){
+		View head = (View) window.findViewById(R.id.Headliner);
 		head.startAnimation(getAnimation(0, -1));
 		
-		View leftview = (View) findViewById(R.id.MapButton);
+		View leftview = (View) window.findViewById(R.id.MapButton);
 		leftview.startAnimation(getAnimation(-1, 0));
-		leftview = (View) findViewById(R.id.FavoritesButton);
+		leftview = (View) window.findViewById(R.id.FavoritesButton);
 		leftview.startAnimation(getAnimation(-1, 0));
 		
-		View rightview = (View) findViewById(R.id.SettingsButton);
+		View rightview = (View) window.findViewById(R.id.SettingsButton);
 		rightview.startAnimation(getAnimation(1, 0));
-		rightview = (View) findViewById(R.id.SearchButton);
+		rightview = (View) window.findViewById(R.id.SearchButton);
 		rightview.startAnimation(getAnimation(1, 0));
 		
 		String textVersion = Version.APP_VERSION + " " + Version.APP_DESCRIPTION;
-		final TextView textVersionView = (TextView) findViewById(R.id.TextVersion);
+		final TextView textVersionView = (TextView) window.findViewById(R.id.TextVersion);
 		textVersionView.setText(textVersion);
-		SharedPreferences prefs = getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
+		SharedPreferences prefs = activity.getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
 		
 		// only one commit should be with contribution version flag
 		// prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
-		final TextView appName = (TextView) findViewById(R.id.AppName);
+		final TextView appName = (TextView) window.findViewById(R.id.AppName);
 		if (prefs.contains(CONTRIBUTION_VERSION_FLAG)) {
 			appName.setText("OsmAnd!");
 			SpannableString content = new SpannableString(textVersion);
@@ -137,8 +136,8 @@ public class MainMenuActivity extends Activity {
 				
 				@Override
 				public void onClick(View widget) {
-					final Intent mapIndent = new Intent(MainMenuActivity.this, ContributionVersionActivity.class);
-					startActivityForResult(mapIndent, 0);					
+					final Intent mapIndent = new Intent(activity, ContributionVersionActivity.class);
+					activity.startActivityForResult(mapIndent, 0);					
 				}
 			}, 0, content.length(), 0);
 			textVersionView.setText(content);
@@ -149,60 +148,72 @@ public class MainMenuActivity extends Activity {
 			
 			@Override
 			public void onClick(View widget) {
-				TipsAndTricksActivity activity = new TipsAndTricksActivity(MainMenuActivity.this);
-				Dialog dlg = activity.getDialogToShowTips(false);
+				TipsAndTricksActivity tactivity = new TipsAndTricksActivity(activity);
+				Dialog dlg = tactivity.getDialogToShowTips(false);
 				dlg.show();
 			}
 		}, appLink.length() - 1, appLink.length(), 0);
 		appName.setText(appLink);
 		appName.setMovementMethod(LinkMovementMethod.getInstance());
 		
-		
+	}
+	
+	
 
-		showMap = findViewById(R.id.MapButton);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.menu);
+		
+		onCreateMainMenu(getWindow(), this);
+
+		Window window = getWindow();
+		final Activity activity = this;
+		View showMap = window.findViewById(R.id.MapButton);
 		showMap.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent mapIndent = new Intent(MainMenuActivity.this, MapActivity.class);
-				startActivityForResult(mapIndent, 0);
+				final Intent mapIndent = new Intent(activity, MapActivity.class);
+				activity.startActivityForResult(mapIndent, 0);
 			}
 		});
-		settingsButton = findViewById(R.id.SettingsButton);
+		View settingsButton = window.findViewById(R.id.SettingsButton);
 		settingsButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent settings = new Intent(MainMenuActivity.this, SettingsActivity.class);
-				startActivity(settings);
+				final Intent settings = new Intent(activity, SettingsActivity.class);
+				activity.startActivity(settings);
 			}
 		});
-		
-		favouritesButton = findViewById(R.id.FavoritesButton);
+
+		View favouritesButton = window.findViewById(R.id.FavoritesButton);
 		favouritesButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent settings = new Intent(MainMenuActivity.this, FavouritesActivity.class);
-				startActivity(settings);
+				final Intent settings = new Intent(activity, FavouritesActivity.class);
+				activity.startActivity(settings);
 			}
 		});
-		
-		closeButton = findViewById(R.id.CloseButton);
+
+		View closeButton = window.findViewById(R.id.CloseButton);
 		closeButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				((OsmandApplication) getApplication()).closeApplication();
-				finish();
+				((OsmandApplication) activity.getApplication()).closeApplication();
+				activity.finish();
 			}
 		});
-		
-		searchButton = findViewById(R.id.SearchButton);
+
+		View searchButton = window.findViewById(R.id.SearchButton);
 		searchButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent search = new Intent(MainMenuActivity.this, SearchActivity.class);
-				startActivity(search);
+				final Intent search = new Intent(activity, SearchActivity.class);
+				activity.startActivity(search);
 			}
 		});
-		
 		
 		((OsmandApplication)getApplication()).checkApplicationIsBeingInitialized(this);
 		
@@ -245,8 +256,8 @@ public class MainMenuActivity extends Activity {
 			if (i < 7){
 				pref.edit().putInt(TIPS_SHOW, ++i).commit();
 				if(i == 1 || i == 5){
-					TipsAndTricksActivity activity = new TipsAndTricksActivity(this);
-					Dialog dlg = activity.getDialogToShowTips(true);
+					TipsAndTricksActivity tipsActivity = new TipsAndTricksActivity(this);
+					Dialog dlg = tipsActivity.getDialogToShowTips(true);
 					dlg.show();
 				}
 			}

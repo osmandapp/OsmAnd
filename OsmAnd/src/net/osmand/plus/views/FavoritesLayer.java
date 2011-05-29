@@ -87,7 +87,7 @@ public class FavoritesLayer implements OsmandMapLayer, ContextMenuLayer.IContext
 	
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
 		if (view.getZoom() >= startZoom) {
 			
 

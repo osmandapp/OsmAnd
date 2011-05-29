@@ -76,9 +76,7 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 							textView.setText(info.descriptionRoute);
 							textView.layout(0, 0, textSize, (int) ((textView.getPaint().getTextSize()+4) * textView.getLineCount()));
 						}
-						view.getAnimatedDraggingThread().startMoving(view.getLatitude(), view.getLongitude(),
-								l.getLatitude(), l.getLongitude(),
-								view.getZoom(), view.getZoom(), view.getSourceTileSize(), view.getRotate(), true);
+						view.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(), view.getZoom(), true);
 					}
 					
 				}
@@ -98,9 +96,7 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 						textView.setText(info.descriptionRoute);
 						textView.layout(0, 0, textSize, (int) ((textView.getPaint().getTextSize() + 4) * textView.getLineCount()));
 					}
-					view.getAnimatedDraggingThread().startMoving(view.getLatitude(), view.getLongitude(),
-							l.getLatitude(), l.getLongitude(),
-							view.getZoom(), view.getZoom(), view.getSourceTileSize(), view.getRotate(), true);
+					view.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(), view.getZoom(), true);
 				}
 				view.refreshMap();
 			}
@@ -166,7 +162,7 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 
 	public final int shiftCenter = 55;
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
 		if(isVisible()){
 			border.set(layout.getLeft() - 10 * dm.density, layout.getTop() - 4 * dm.density, 
 					layout.getRight() - (shiftCenter - 5) * dm.density, layout.getBottom() + 4 * dm.density);

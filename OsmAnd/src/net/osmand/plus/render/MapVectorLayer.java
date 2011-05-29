@@ -3,7 +3,8 @@ package net.osmand.plus.render;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.RotatedTileBox;
-import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.BaseMapLayer;
+import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -12,16 +13,21 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
-public class RendererLayer implements OsmandMapLayer {
+public class MapVectorLayer extends BaseMapLayer {
 
 	private OsmandMapTileView view;
-	private final static int startZoom = 5;
 	private Rect pixRect = new Rect();
 	private RotatedTileBox rotatedTileBox = new RotatedTileBox(0, 0, 0, 0, 0, 0);
 	private ResourceManager resourceManager;
 	private Paint paintImg;
 	
 	private RectF destImage = new RectF();
+	private final MapTileLayer tileLayer;
+	private boolean visible = false;
+	
+	public MapVectorLayer(MapTileLayer tileLayer){
+		this.tileLayer = tileLayer;
+	}
 	
 
 	@Override
@@ -48,12 +54,42 @@ public class RendererLayer implements OsmandMapLayer {
 		rotatedTileBox.set(xL, yT, ((float) pixRect.width()) / ts, ((float) pixRect.height()) / ts, view.getRotate(), view.getZoom());
 	}
 	
+	public boolean isVectorDataVisible() {
+		return visible &&  view.getZoom() >= view.getSettings().LEVEL_TO_SWITCH_VECTOR_RASTER.get();
+	}
+	
+	
+	public boolean isVisible() {
+		return visible;
+	}
+	
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+		if(!visible){
+			resourceManager.getRenderer().clearCache();
+		}
+	}
+	
+	@Override
+	public int getMaximumShownMapZoom() {
+		return 23;
+	}
+	
+	@Override
+	public int getMinimumShownMapZoom() {
+		return 1;
+	}
 	
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, boolean nightMode) {
-		Integer zoom = view.getSettings().LEVEL_TO_SWITCH_VECTOR_RASTER.get();
-		if (view.getZoom() >= Math.max(zoom, startZoom) && view.isVectorDataVisible()) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+		if(!visible){
+			return;
+		}
+		if(!isVectorDataVisible() && tileLayer != null){
+			tileLayer.drawTileMap(canvas, tilesRect);
+			resourceManager.getRenderer().interruptLoadingMap();
+		} else {
 			if (!view.isZooming()){
 				pixRect.set(0, 0, view.getWidth(), view.getHeight());
 				updateRotatedTileBox();
@@ -83,20 +119,12 @@ public class RendererLayer implements OsmandMapLayer {
 				float x1 = MapUtils.calcDiffPixelX(sin, cos, dleftX1, dtopY1, view.getTileSize()) + view.getCenterPointX();
 				float y1 = MapUtils.calcDiffPixelY(sin, cos, dleftX1, dtopY1, view.getTileSize()) + view.getCenterPointY();
 				
-				/*float drightX1 = (bmpLoc.getRightBottomTileX() * mult - tx) ;
-				float dbottomY1 = (bmpLoc.getRightBottomTileY() * mult - ty);
-				float x2 = MapUtils.calcDiffPixelX(sin, cos, drightX1, dbottomY1, view.getTileSize()) + view.getCenterPointX();
-				float y2 = MapUtils.calcDiffPixelY(sin, cos, drightX1, dbottomY1, view.getTileSize()) + view.getCenterPointY();
-				destImage.set(x1, y1, x2, y2);*/
-				
 				canvas.rotate(-rot, view.getCenterPointX(), view.getCenterPointY());
 				destImage.set(x1, y1, x1 + bmpLoc.getTileWidth() * mult * view.getTileSize(), y1 + bmpLoc.getTileHeight() * mult * view.getTileSize());
 				if(!bmp.isRecycled()){
 					canvas.drawBitmap(bmp, null, destImage, paintImg);
 				}
 			}
-		} else {
-			resourceManager.getRenderer().clearCache();
 		}
 	}
 

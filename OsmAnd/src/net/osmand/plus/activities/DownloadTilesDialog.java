@@ -11,6 +11,8 @@ import net.osmand.map.ITileSource;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
+import net.osmand.plus.views.BaseMapLayer;
+import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
@@ -44,8 +46,12 @@ public class DownloadTilesDialog {
 	
 	
 	public void openDialog(){
-		final ITileSource mapSource = mapView.getMap();
-		if(mapSource == null || mapView.isVectorDataVisible() || !mapSource.couldBeDownloadedFromInternet()){
+		BaseMapLayer mainLayer = mapView.getMainLayer();
+		if(!(mainLayer instanceof MapTileLayer) || ((MapTileLayer) mainLayer).isVisible()){
+			Toast.makeText(ctx, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
+		}
+		final ITileSource mapSource = ((MapTileLayer) mainLayer).getMap();
+		if(mapSource == null || !mapSource.couldBeDownloadedFromInternet()){
 			Toast.makeText(ctx, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
 			return;
 		}

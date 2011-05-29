@@ -15,6 +15,8 @@ import net.osmand.plus.AmenityIndexRepository;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.R;
+import net.osmand.plus.views.BaseMapLayer;
+import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -125,8 +127,12 @@ public class MapActivityActions {
     	builder.setPositiveButton(R.string.context_menu_item_update_map, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				final ITileSource mapSource = mapView.getMap();
-				if(mapSource == null || mapView.isVectorDataVisible() || !mapSource.couldBeDownloadedFromInternet()){
+				BaseMapLayer mainLayer = mapView.getMainLayer();
+				if(!(mainLayer instanceof MapTileLayer) || ((MapTileLayer) mainLayer).isVisible()){
+					Toast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
+				}
+				final ITileSource mapSource = ((MapTileLayer) mainLayer).getMap();
+				if(mapSource == null || !mapSource.couldBeDownloadedFromInternet()){
 					Toast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
 					return;
 				}
@@ -141,7 +147,7 @@ public class MapActivityActions {
 				for (int i = 0; i <width; i++) {
 					for (int j = 0; j< height; j++) {
 						((OsmandApplication)mapActivity.getApplication()).getResourceManager().
-								clearTileImageForMap(null, mapView.getMap(), i + left, j + top, zoom);	
+								clearTileImageForMap(null, mapSource, i + left, j + top, zoom);	
 					}
 				}
 				

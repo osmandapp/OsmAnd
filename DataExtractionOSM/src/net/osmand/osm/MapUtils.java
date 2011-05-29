@@ -206,7 +206,7 @@ public class MapUtils {
 		final double M2 = (double) Math.log((1 + Math.sin(E2))
 				/ (1 - Math.sin(E2)))/ 2- J2	* Math.log((1 + J2 * Math.sin(E2))/ (1 - J2 * Math.sin(E2))) / 2;
 		final double B2 = getPowZoom(zoom);
-		return Math.floor(B2 / 2 - M2 * B2 / 2 / Math.PI);
+		return B2 / 2 - M2 * B2 / 2 / Math.PI;
 	}
 	
 	public static double getLatitudeFromEllipsoidTileY(float zoom, float tileNumberY){
@@ -343,6 +343,41 @@ public class MapUtils {
 			c = (c << 1) | ((y >> b) & 1);
 		}
 		return c;
+	}
+
+	/**
+	 * Calculate rotation diff D, that R (rotate) + D = T (targetRotate)
+	 * D is between -180, 180 
+	 * @param rotate
+	 * @param targetRotate
+	 * @return 
+	 */
+	public static float unifyRotationDiff(float rotate, float targetRotate) {
+		float d = targetRotate - rotate;
+		while(d >= 180){
+			d -= 360;
+		}
+		while(d < -180){
+			d += 360;
+		}
+		return d;
+	}
+	
+	/**
+	 * Calculate rotation diff D, that R (rotate) + D = T (targetRotate)
+	 * D is between -180, 180 
+	 * @param rotate
+	 * @param targetRotate
+	 * @return 
+	 */
+	public static float unifyRotationTo360(float rotate) {
+		while(rotate < 0){
+			rotate += 360;
+		}
+		while(rotate > 360){
+			rotate -= 360;
+		}
+		return rotate;
 	}
 	
 

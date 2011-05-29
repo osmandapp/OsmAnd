@@ -4,7 +4,6 @@ import net.osmand.Algoritms;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.activities.RoutingHelper.TurnType;
@@ -23,7 +22,6 @@ import android.location.Location;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
-import android.view.View;
 import android.view.WindowManager;
 
 public class MapInfoLayer implements OsmandMapLayer {
@@ -189,7 +187,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 	}
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latlonBounds, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latlonBounds, RectF tilesRect, boolean nightMode) {
 		// prepare data (left distance, speed)
 		if(map.getPointToNavigate() != null){
 			int d = 0;
@@ -312,13 +310,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 
 			rulerDistPix = (int) (view.getWidth() * screenPercent / dist * baseDist);
 			rulerDistName = OsmAndFormatter.getFormattedDistance(baseDist, map);
-			rulerBaseLine = (int) (view.getHeight() - 70 * dm.density);
-			if(view.getParent() instanceof View){
-				View zoomControls = ((View) view.getParent()).findViewById(R.id.ZoomControls);
-				if(zoomControls != null){
-					rulerBaseLine = (int) (zoomControls.getTop() - 5 * dm.density);
-				}
-			}
+			rulerBaseLine = (int) (view.getHeight() - 50 * dm.density);
 			rulerTextLen = paintBlack.measureText(rulerDistName);
 		} 
 		if (rulerDistName != null) {
@@ -410,6 +402,48 @@ public class MapInfoLayer implements OsmandMapLayer {
 				
 			}
 		}
+	}
+	
+
+	@Override
+	public void destroyLayer() {
+	}
+
+	@Override
+	public boolean drawInScreenPixels() {
+		return true;
+	}
+
+	@Override
+	public boolean onLongPressEvent(PointF point) {
+		return false;
+	}
+
+	@Override
+	public boolean onTouchEvent(PointF point) {
+		if (routeLayer != null && routeLayer.getHelper().isRouterEnabled()) {
+			if (boundsForMiniRoute.contains(point.x, point.y) && routeLayer.getHelper().isFollowingMode()) {
+				showMiniMap = !showMiniMap;
+				view.refreshMap();
+				return true;
+			}
+			if (boundsForLeftTime.contains(point.x, point.y) && routeLayer.getHelper().isFollowingMode()) {
+				showArrivalTime = !showArrivalTime;
+				view.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME.set(showArrivalTime);
+				view.refreshMap();
+				return true;
+			}
+		}
+		if(cachedDistString != null && boundsForDist.contains(point.x, point.y)){
+			AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
+			LatLon pointToNavigate = view.getSettings().getPointToNavigate();
+			if(pointToNavigate != null){
+				int fZoom = view.getZoom() < 15 ? 15 : view.getZoom(); 
+				thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), 
+						fZoom, true);
+			}
+		}
+		return false;
 	}
 
 	// draw path 96x96
@@ -542,46 +576,6 @@ public class MapInfoLayer implements OsmandMapLayer {
 		}
 	}
 
-	@Override
-	public void destroyLayer() {
-	}
-
-	@Override
-	public boolean drawInScreenPixels() {
-		return true;
-	}
-
-	@Override
-	public boolean onLongPressEvent(PointF point) {
-		return false;
-	}
-
-	@Override
-	public boolean onTouchEvent(PointF point) {
-		if (routeLayer != null && routeLayer.getHelper().isRouterEnabled()) {
-			if (boundsForMiniRoute.contains(point.x, point.y) && routeLayer.getHelper().isFollowingMode()) {
-				showMiniMap = !showMiniMap;
-				view.refreshMap();
-				return true;
-			}
-			if (boundsForLeftTime.contains(point.x, point.y) && routeLayer.getHelper().isFollowingMode()) {
-				showArrivalTime = !showArrivalTime;
-				view.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME.set(showArrivalTime);
-				view.refreshMap();
-				return true;
-			}
-		}
-		if(cachedDistString != null && boundsForDist.contains(point.x, point.y)){
-			AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
-			LatLon pointToNavigate = view.getSettings().getPointToNavigate();
-			if(pointToNavigate != null){
-				int fZoom = view.getZoom() < 15 ? 15 : view.getZoom(); 
-				thread.startMoving(view.getLatitude(), view.getLongitude(), pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), 
-						view.getZoom(), fZoom, view.getSourceTileSize(), view.getRotate(), true);
-			}
-		}
-		return false;
-	}
 
 
 }

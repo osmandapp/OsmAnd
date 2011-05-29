@@ -137,7 +137,11 @@ public class BinaryRouteDataReader {
 			boolean highway = "highway".equals(pair.tag);
 			double priority = highway && autoPriorityValues.containsKey(pair.value) ? autoPriorityValues.get(pair.value) : 1d;
 			if(speed == 0 && highway) {
-				speed = autoNotDefinedValues.get(pair.value) / 3.6d;
+				Double value = autoNotDefinedValues.get(pair.value);
+				if(value == null){
+					value = 50d;
+				}
+				speed =  value / 3.6d;
 			}
 			return speed * priority;
 		}

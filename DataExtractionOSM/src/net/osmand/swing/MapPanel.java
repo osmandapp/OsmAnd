@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,7 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.UIManager;
@@ -60,79 +62,127 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	
 	protected static final Log log = LogUtil.getLog(MapPanel.class);
 	public static final int divNonLoadedImage = 16;
+	
+	private static Map<String, TileSourceTemplate> getCommonTemplates(File dir){
+		final List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
+		Map<String, TileSourceTemplate> map = new LinkedHashMap<String, TileSourceTemplate>();
+		for(TileSourceTemplate t : list){
+			map.put(t.getName(), t);
+		}
+		for(File f : dir.listFiles()){
+			if(f.isDirectory()){
+				if(map.containsKey(f.getName())){
+					if(TileSourceManager.isTileSourceMetaInfoExist(f)){
+						map.put(f.getName(), TileSourceManager.createTileSourceTemplate(f));
+					} else {
+						try {
+							TileSourceManager.createMetaInfoFile(f, map.get(f.getName()), false);
+						} catch (IOException e) {
+						}
+					}
+				} else {
+					map.put(f.getName(), TileSourceManager.createTileSourceTemplate(f));
+				}
+				
+			}
+		}
+		return map;
+	}
 
 	
 	public static JMenu getMenuToChooseSource(final MapPanel panel){
 		final JMenu tiles = new JMenu(Messages.getString("MapPanel.SOURCE.OF.TILES")); //$NON-NLS-1$
-		final JMenu userDefined = new JMenu(Messages.getString("MapPanel.USER.DEFINED")); //$NON-NLS-1$
-		final List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
-		final List<TileSourceTemplate> udf = TileSourceManager.getUserDefinedTemplates(DataExtractionSettings.getSettings().getTilesDirectory());
-		final Map<TileSourceTemplate, JCheckBoxMenuItem> items = new LinkedHashMap<TileSourceTemplate, JCheckBoxMenuItem>();
-		tiles.add(userDefined);
-		userDefined.add(new AbstractAction(Messages.getString("MapPanel.NEW.TILE.SRC")){ //$NON-NLS-1$
+		final JMenu downloadedMenu = new JMenu("Additional"); //$NON-NLS-1$
+		final File tilesDirectory = DataExtractionSettings.getSettings().getTilesDirectory();
+		Map<String, TileSourceTemplate> udf = getCommonTemplates(tilesDirectory);
+		final List<TileSourceTemplate> downloaded = TileSourceManager.downloadTileSourceTemplates();
+		final Map<TileSourceTemplate, JCheckBoxMenuItem> items = new IdentityHashMap<TileSourceTemplate, JCheckBoxMenuItem>();
+		
+		tiles.add(downloadedMenu);
+		for(final TileSourceTemplate l : udf.values()){
+			JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(l.getName());
+			tiles.add(menuItem);
+			items.put(l, menuItem);
+			menuItem.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					for (final Map.Entry<TileSourceTemplate, JCheckBoxMenuItem> es : items.entrySet()) {
+						es.getValue().setSelected(l.equals(es.getKey()));
+					}
+					File dir = new File(tilesDirectory, l.getName());
+					try {
+						dir.mkdirs();
+						TileSourceManager.createMetaInfoFile(dir, l, false);
+					} catch (IOException e1) {
+					}
+					panel.setMapName(l);
+				}
+			});
+		}
+		
+		for(final TileSourceTemplate l : downloaded){
+			JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(l.getName());
+			downloadedMenu.add(menuItem);
+			items.put(l, menuItem);
+			menuItem.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					for (final Map.Entry<TileSourceTemplate, JCheckBoxMenuItem> es : items.entrySet()) {
+						es.getValue().setSelected(l.equals(es.getKey()));
+					}
+					File dir = new File(tilesDirectory, l.getName());
+					try {
+						dir.mkdirs();
+						TileSourceManager.createMetaInfoFile(dir, l, true);
+					} catch (IOException e1) {
+					}
+					panel.setMapName(l);
+				}
+			});
+		}
+
+		for (final Map.Entry<TileSourceTemplate, JCheckBoxMenuItem> em : items.entrySet()) {
+			if(Algoritms.objectEquals(panel.getMap(), em.getKey())){
+				em.getValue().setSelected(true);
+			}
+		}
+
+		tiles.addSeparator();
+		tiles.add(createNewTileSourceAction(panel, tiles, items));
+		return tiles;
+	}
+
+
+	private static AbstractAction createNewTileSourceAction(final MapPanel panel, final JMenu tiles,
+			final Map<TileSourceTemplate, JCheckBoxMenuItem> items) {
+		return new AbstractAction(Messages.getString("MapPanel.NEW.TILE.SRC")){ //$NON-NLS-1$
 			private static final long serialVersionUID = -8286622335859339130L;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				NewTileSourceDialog dlg = new NewTileSourceDialog(panel);
 				dlg.showDialog();
-				List<TileSourceTemplate> templates = TileSourceManager.getUserDefinedTemplates(DataExtractionSettings.getSettings().getTilesDirectory());
-				TileSourceTemplate added =null;
-				for(final TileSourceTemplate te : templates){
-					if(!items.containsKey(te)){
-						added = te;
-						JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(te.getName());
-						userDefined.add(menuItem);
-						items.put(added, menuItem);
-						menuItem.addActionListener(new ActionListener() {
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								for (final Map.Entry<TileSourceTemplate, JCheckBoxMenuItem> es : items.entrySet()) {
-									es.getValue().setSelected(te.equals(es.getKey()));
-								}
-								panel.setMapName(te);
+				final TileSourceTemplate l = dlg.getTileSourceTemplate();
+				if(l != null){
+					JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(l.getName());
+					tiles.add(menuItem);
+					items.put(l, menuItem);
+					menuItem.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							for (final Map.Entry<TileSourceTemplate, JCheckBoxMenuItem> es : items.entrySet()) {
+								es.getValue().setSelected(l.equals(es.getKey()));
 							}
-						});
-					}
-				}
-				if(added != null){
+							panel.setMapName(l);
+						}
+					});
 					for (final Map.Entry<TileSourceTemplate, JCheckBoxMenuItem> es : items.entrySet()) {
-						es.getValue().setSelected(added.equals(es.getKey()));
+						es.getValue().setSelected(l.equals(es.getKey()));
 					}
-					panel.setMapName(added);
+					panel.setMapName(l);
 				}
 			}
-		});
-		
-		for(final TileSourceTemplate l : list){
-			JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(l.getName());
-			tiles.add(menuItem);
-			items.put(l, menuItem);
-		}
-		
-		for(final TileSourceTemplate l : udf){
-			JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(l.getName());
-			userDefined.add(menuItem);
-			items.put(l, menuItem);
-		}
-
-		
-		for (final Map.Entry<TileSourceTemplate, JCheckBoxMenuItem> em : items.entrySet()) {
-			if(Algoritms.objectEquals(panel.getMap(), em.getKey())){
-				em.getValue().setSelected(true);
-			}
-			em.getValue().addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					for (final Map.Entry<TileSourceTemplate, JCheckBoxMenuItem> es : items.entrySet()) {
-						es.getValue().setSelected(em.getKey().equals(es.getKey()));
-					}
-					panel.setMapName(em.getKey());
-				}
-			});
-		}
-		
-		return tiles;
+		};
 	}
 	
 
@@ -482,6 +532,9 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 	}
 	
 	public void setMapName(ITileSource map){
+		if(!map.couldBeDownloadedFromInternet()){
+			JOptionPane.showMessageDialog(this, "That map is not downloadable from internet");
+		}
 		this.map = map;
 		if(map.getMaximumZoomSupported() < this.zoom){
 			zoom = map.getMaximumZoomSupported();
