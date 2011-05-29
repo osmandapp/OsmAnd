@@ -241,7 +241,7 @@ public class TileSourceManager {
 	public static class CykloatlasSourceTemplate extends TileSourceTemplate {
 
 		public CykloatlasSourceTemplate(String name, String urlToLoad){
-			super(name, urlToLoad, ".png", 15, 7, 256, 8, 26000); //$NON-NLS-1$
+			super(name, urlToLoad, ".png", 16, 7, 256, 8, 26000); //$NON-NLS-1$
 		}
 
 		@Override
