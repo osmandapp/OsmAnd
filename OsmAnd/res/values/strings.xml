@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="layer_overlay">Overlay map...</string>
+	<string name="default_none">None</string>
+	<string name="map_overlay">Overlay map</string>
+	<string name="map_overlay_descr">Choose overlay map</string>
 	<string name="map_vector_data">Vector maps</string>
 	<string name="map_vector_data_descr">Use downloaded vector maps</string>
 	<string name="tile_source_already_installed">Map is already installed, settings will be updated</string>
