@@ -10,19 +10,28 @@ public class ToDoConstants {
 	
 //	    == Osmand application (TODO 127) ==
 
+	// Map Refactoring
+//      || 124 || Animated transition using only raster images (?) - skip animations (!) - don not render vectoring for animations (Issue 238) ||
+//      Fix issue with min/max zoom
+//      Empty screen replace (?)
+//      Remove notification from OsmAndMapTileView (?)
+//      Refactoring ResourceManager with cached images (tiles density)
+//      YandexLayer goes to MapTileLayer
+//      Add transparency filter to bitmap layers
+//      Download layers from internet / Yandex Traffic (not download on osmand?) 
+	// Review all constructors of TileSourceTemplate
+///     allow to add own tile sources from application (?) 
+//      Manage tile sources and allow to compact them into sqlite db	
+	
+
 //		=== Refactoring issues ===
 //	    !|| 125 || Introduce service layer rather than singletons and put all related into new package (services). Review architecture. Split some big classes. ||
-		
-		
+
+	
 //		=== Common issues ===
 //	    || 104 || Add activity to show current loaded indexes and information about them (Issue 366) ||
 //      || 123 || Improve gpx file showing (very slow for big files) (Issue 412) ||
-//      || 124 || Animated transition using only raster images (?) - skip animations (!) - don not render vectoring for animations (Issue 238) ||
-//      || 122 || Frozen sqlite db images (bug?). When images are loaded into sqlite the whole map is frozen (issue 413) || 	
-//      || 120 || Show icons over poi circle (issue 414) ||
 //      || 110 || Use android voice for pronounce command (could be used in future to pronounce street) (Issue 70) ||
-//      || 119 || Dialog on main screen tips and tricks (Issue 415) ||
-//      || 118 || Config switching between maps on different zoom levels <14 (using raster), > 14 vector (Issue 419) ||
 //		|| 97 || For voice navigation consider current speed of vehicle. Especially when speed > 50 pronounce more than 200 m (Issue 420) ||
 //      || 111 || Investigate showing street name while driving (Issue 286) ||  
 //      || 86 || Allow to add/edit custom tags to POI objects (Issue 44) ||
@@ -46,6 +55,10 @@ public class ToDoConstants {
 	///////////////////////////   DONE //////////////////////////////
 	// DONE ANDROID :
 //	|| 112 || Investigate exiting/minimizing app (Issue 214) ||
+//  || 122 || Frozen sqlite db images (bug?). When images are loaded into sqlite the whole map is frozen (issue 413) || 	
+//  || 120 || Show icons over poi circle (issue 414) ||
+//  || 119 || Dialog on main screen tips and tricks (Issue 415) ||
+//  || 118 || Config switching between maps on different zoom levels <14 (using raster), > 14 vector (Issue 419) ||
 	
 	// DONE SWING
 

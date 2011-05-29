@@ -26,13 +26,14 @@ public class PointLocationLayer implements OsmandMapLayer {
 	private Paint area;
 	private Paint headingPaint;
 	private Path pathForDirection;
-	private ApplicationMode appMode = ApplicationMode.DEFAULT;
 	
 	protected Location lastKnownLocation = null;
 	private DisplayMetrics dm;
 	private OsmandMapTileView view;
 	
 	private Float heading = null;
+	
+	private ApplicationMode appMode;
 	
 	
 
@@ -82,10 +83,13 @@ public class PointLocationLayer implements OsmandMapLayer {
 	}
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
 		if (isLocationVisible(lastKnownLocation)) {
+			checkAppMode(view.getSettings().getApplicationMode());
+			
 			int locationX = view.getMapXForPoint(lastKnownLocation.getLongitude());
 			int locationY = view.getMapYForPoint(lastKnownLocation.getLatitude());
+			
 			int radius = MapUtils.getLengthXFromMeters(view.getZoom(), view.getLatitude(), view.getLongitude(), 
 					lastKnownLocation.getAccuracy(), view.getTileSize(), view.getWidth());
 
@@ -180,15 +184,14 @@ public class PointLocationLayer implements OsmandMapLayer {
 	public void destroyLayer() {
 		
 	}
-	public ApplicationMode getAppMode() {
-		return appMode;
-	}
-	public void setAppMode(ApplicationMode appMode) {
-		this.appMode = appMode;
-		if(this.appMode == ApplicationMode.CAR || this.appMode == ApplicationMode.BICYCLE){
-			this.bearing.setAlpha(180);
-		} else {
-			this.bearing.setAlpha(150);
+	public void checkAppMode(ApplicationMode appMode) {
+		if (appMode != this.appMode) {
+			this.appMode = appMode;
+			if (this.appMode == ApplicationMode.CAR || this.appMode == ApplicationMode.BICYCLE) {
+				this.bearing.setAlpha(180);
+			} else {
+				this.bearing.setAlpha(150);
+			}
 		}
 	}
 	@Override
@@ -205,8 +208,6 @@ public class PointLocationLayer implements OsmandMapLayer {
 	public boolean onTouchEvent(PointF point) {
 		return false;
 	}
-
-
 
 
 }

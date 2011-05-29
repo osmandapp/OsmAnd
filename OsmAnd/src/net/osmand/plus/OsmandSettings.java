@@ -1,18 +1,13 @@
 package net.osmand.plus;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
-import net.osmand.LogUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -33,7 +28,6 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
-import android.util.Log;
 
 public class OsmandSettings {
 	// GLOBAL instance - make instance global for application
@@ -72,6 +66,7 @@ public class OsmandSettings {
 	// cache variables
 	private long lastTimeInternetConnectionChecked = 0;
 	private boolean internetConnectionAvailable = true;
+	private List<TileSourceTemplate> internetAvailableSourceTemplates = null;
 	
 	// TODO make all layers profile preferenced????
 	// TODO profile preferences for map is using vector map???
@@ -151,8 +146,11 @@ public class OsmandSettings {
 
 	// Check internet connection available every 15 seconds
 	public boolean isInternetConnectionAvailable(){
+		return isInternetConnectionAvailable(false);
+	}
+	public boolean isInternetConnectionAvailable(boolean update){
 		long delta = System.currentTimeMillis() - lastTimeInternetConnectionChecked;
-		if(delta < 0 || delta > 15000){
+		if(delta < 0 || delta > 15000 || update){
 			ConnectivityManager mgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
 			NetworkInfo active = mgr.getActiveNetworkInfo();
 			if(active == null){
@@ -450,7 +448,7 @@ public class OsmandSettings {
 		new IntPreference("map_screen_orientation", ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Boolean> SHOW_VIEW_ANGLE = new BooleanPreference("show_view_angle", false, true);
+	public final CommonPreference<Boolean> SHOW_VIEW_ANGLE = new BooleanPreference("show_view_angle", false, true, true);
 	{
 		SHOW_VIEW_ANGLE.setModeDefaultValue(ApplicationMode.BICYCLE, true);
 		SHOW_VIEW_ANGLE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
@@ -468,7 +466,7 @@ public class OsmandSettings {
 	public static final int ROTATE_MAP_BEARING = 1;
 	public static final int ROTATE_MAP_COMPASS = 2;
 	public final CommonPreference<Integer> ROTATE_MAP = 
-			new IntPreference("rotate_map", ROTATE_MAP_NONE, false);
+			new IntPreference("rotate_map", ROTATE_MAP_NONE, false, true);
 	{
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.CAR, ROTATE_MAP_BEARING);
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, ROTATE_MAP_BEARING);
@@ -532,42 +530,67 @@ public class OsmandSettings {
 		return globalPreferences.getString(MAP_TILE_SOURCES, TileSourceManager.getMapnikSource().getName());
 	}
 	
+	public List<TileSourceTemplate> getInternetAvailableSourceTemplates(){
+		if(internetAvailableSourceTemplates == null && isInternetConnectionAvailable()){
+			internetAvailableSourceTemplates = TileSourceManager.downloadTileSourceTemplates();
+		}
+		return internetAvailableSourceTemplates;
+	}
+	
 	public ITileSource getMapTileSource() {
 		String tileName = globalPreferences.getString(MAP_TILE_SOURCES, null);
 		if (tileName != null) {
-			
-			List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
-			for (TileSourceTemplate l : list) {
-				if (l.getName().equals(tileName)) {
-					return l;
-				}
+			ITileSource ts = getTileSourceByName(tileName);
+			if(ts != null){
+				return ts;
 			}
-			File tPath = extendOsmandPath(ResourceManager.TILES_PATH);
-			File dir = new File(tPath, tileName);
-			if(dir.exists()){
-				if(tileName.endsWith(SQLiteTileSource.EXT)){
-					return new SQLiteTileSource(dir);
-				} else if (dir.isDirectory()) {
-					String url = null;
-					File readUrl = new File(dir, "url"); //$NON-NLS-1$
-					try {
-						if (readUrl.exists()) {
-							BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(readUrl), "UTF-8")); //$NON-NLS-1$
-							url = reader.readLine();
-							url = url.replaceAll(Pattern.quote("{$z}"), "{0}"); //$NON-NLS-1$ //$NON-NLS-2$
-							url = url.replaceAll(Pattern.quote("{$x}"), "{1}"); //$NON-NLS-1$//$NON-NLS-2$
-							url = url.replaceAll(Pattern.quote("{$y}"), "{2}"); //$NON-NLS-1$ //$NON-NLS-2$
-							reader.close();
-						}
-					} catch (IOException e) {
-						Log.d(LogUtil.TAG, "Error reading url " + dir.getName(), e); //$NON-NLS-1$
-					}
-					return new TileSourceManager.TileSourceTemplate(dir, dir.getName(), url);
-				}
-			}
-				
 		}
 		return TileSourceManager.getMapnikSource();
+	}
+
+	private ITileSource getTileSourceByName(String tileName) {
+		List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
+		File tPath = extendOsmandPath(ResourceManager.TILES_PATH);
+		File dir = new File(tPath, tileName);
+		if(dir.exists()){
+			if(tileName.endsWith(SQLiteTileSource.EXT)){
+				return new SQLiteTileSource(dir, list);
+			} else if (dir.isDirectory() && !dir.getName().startsWith(".")) {
+				TileSourceTemplate t = TileSourceManager.createTileSourceTemplate(dir);
+				if(!TileSourceManager.isTileSourceMetaInfoExist(dir)){
+					// try to find among other templates
+					List<TileSourceTemplate> templates = getInternetAvailableSourceTemplates();
+					if(templates != null){
+						list.addAll(templates);
+					}
+					for (TileSourceTemplate l : list) {
+						if (l.getName().equals(tileName)) {
+							try {
+								TileSourceManager.createMetaInfoFile(dir, l, true);
+							} catch (IOException e) {
+							}
+							return l;
+						}
+					}
+				}
+				return t;
+			}
+		}
+		return null;
+	}
+	
+	public boolean installTileSource(TileSourceTemplate toInstall){
+		File tPath = extendOsmandPath(ResourceManager.TILES_PATH);
+		File dir = new File(tPath, toInstall.getName());
+		dir.mkdirs();
+		if(dir.exists() && dir.isDirectory()){
+			try {
+				TileSourceManager.createMetaInfoFile(dir, toInstall, true);
+			} catch (IOException e) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public Map<String, String> getTileSourceEntries(){
@@ -592,7 +615,8 @@ public class OsmandSettings {
 					if (f.getName().endsWith(SQLiteTileSource.EXT)) {
 						String n = f.getName();
 						map.put(f.getName(), n.substring(0, n.lastIndexOf('.')));
-					} else if (f.isDirectory() && !f.getName().equals(ResourceManager.TEMP_SOURCE_TO_LOAD)) {
+					} else if (f.isDirectory() && !f.getName().equals(ResourceManager.TEMP_SOURCE_TO_LOAD)
+							&& !f.getName().startsWith(".")) {
 						map.put(f.getName(), f.getName());
 					}
 				}

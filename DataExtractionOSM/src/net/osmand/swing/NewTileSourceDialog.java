@@ -8,9 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -24,6 +22,8 @@ import javax.swing.JTextField;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
+import net.osmand.map.TileSourceManager;
+import net.osmand.map.TileSourceManager.TileSourceTemplate;
 
 import org.apache.commons.logging.Log;
 
@@ -38,6 +38,7 @@ public class NewTileSourceDialog extends JDialog {
 
 	private JTextField templateName;
 	private JTextField templateUrl;
+	private TileSourceTemplate tileSourceTemplate;
 
 
 	public NewTileSourceDialog(Component parent){
@@ -193,11 +194,10 @@ public class NewTileSourceDialog extends JDialog {
 			File dir = new File(tilesDirectory, templateName.getText());
 			if(dir.mkdirs()){
 				try {
-					FileOutputStream ous = new FileOutputStream(new File(dir, "url")); //$NON-NLS-1$
-					ous.write(url.getBytes("UTF-8")); //$NON-NLS-1$
-					ous.close();
-				} catch (UnsupportedEncodingException e) {
-					log.error(Messages.getString("NewTileSourceDialog.ERROR.CREATING.NEW.TILE.SRC") +" " + url, e); //$NON-NLS-1$
+					url = url.replace("{$x}", "{1}").replace("{$y}", "{2}").replace("{$z}", "{0}");
+					tileSourceTemplate = new TileSourceManager.TileSourceTemplate(templateName.getText(), 
+							url, ".jpg", 18, 1, 256, 16, 20000);
+					TileSourceManager.createMetaInfoFile(dir, tileSourceTemplate, true);
 				} catch (IOException e) {
 					log.error(Messages.getString("NewTileSourceDialog.ERROR.CREATING.NEW.TILE.SRC") +" " + url, e); //$NON-NLS-1$
 				}
@@ -208,6 +208,9 @@ public class NewTileSourceDialog extends JDialog {
 	}
 	
 
+	public TileSourceTemplate getTileSourceTemplate() {
+		return tileSourceTemplate;
+	}
 
 }
 

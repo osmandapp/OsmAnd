@@ -5,11 +5,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.text.MessageFormat;
+import java.util.List;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.map.ITileSource;
-import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 
 import org.apache.commons.logging.Log;
@@ -36,14 +36,14 @@ public class SQLiteTileSource implements ITileSource {
 	private int maxZoom = 17;
 	private boolean locked = false;
 	
-	public SQLiteTileSource(File f){
+	public SQLiteTileSource(File f, List<TileSourceTemplate> toFindUrl){
 		this.file = f;
 		int i = f.getName().lastIndexOf('.');
 		name = f.getName().substring(0, i);
 		i = name.lastIndexOf('.');
 		if(i > 0){
 			String sourceName = name.substring(i+1);
-			for(TileSourceTemplate is : TileSourceManager.getKnownSourceTemplates()){
+			for(TileSourceTemplate is : toFindUrl){
 				if(is.getName().equalsIgnoreCase(sourceName)){
 					base = is;
 					urlTemplate = is.getUrlTemplate();
@@ -249,6 +249,11 @@ public class SQLiteTileSource implements ITileSource {
 			return false;
 		}
 		return urlTemplate != null;
+	}
+
+	@Override
+	public boolean isEllipticYTile() {
+		return false;
 	}
 	
 	

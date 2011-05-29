@@ -7,14 +7,9 @@
 <View android:id="@+id/ProgressBar"  
 			android:layout_width="40dp"  android:layout_height="40dp" android:layout_marginRight="25dp" android:layout_marginTop="5dp" android:layout_gravity="top|right"/>  			 
 			
-<net.osmand.plus.views.OsmZoomControls android:id="@+id/ZoomControls"
-		android:layout_marginRight="3dp" android:layout_marginBottom="2dp"
-		android:layout_width="120dp" android:layout_height="wrap_content" android:layout_gravity="bottom|right"/>
-
 
 <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="top|right" android:layout_marginTop="64dp" android:id="@+id/BackToLocation" android:background="@drawable/back_location"></ImageButton>
 
-<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom|left" android:id="@+id/BackToMenu" android:background="@drawable/back_menu"/>
 <LinearLayout android:layout_width="wrap_content" android:id="@+id/RouteLayout" android:orientation="horizontal" android:layout_height="wrap_content" 
 				android:layout_marginBottom="12dp" android:layout_gravity="bottom|center" >
 

@@ -17,6 +17,8 @@ public interface ITileSource {
 	
 	public int getBitDensity();
 	
+	public boolean isEllipticYTile();
+	
 	public boolean couldBeDownloadedFromInternet();
 	
 }
