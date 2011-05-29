@@ -181,13 +181,13 @@ public class MapActivityLayers {
 	
 	public void updateMapSource(OsmandMapTileView mapView){
 		OsmandSettings settings = getApplication().getSettings();
-		boolean showTiles = !settings.isUsingMapVectorData();
+		boolean showTiles = !settings.MAP_VECTOR_DATA.get();
 		ITileSource source = showTiles ? settings.getMapTileSource() : null;
 		if (showTiles == mapTileLayer.isVisible() && Algoritms.objectEquals(mapTileLayer.getMap(), source)) {
 			return;
 		}
 		
-		boolean vectorData = settings.isUsingMapVectorData();
+		boolean vectorData = settings.MAP_VECTOR_DATA.get();
 		OsmandApplication app = ((OsmandApplication)getApplication());
 		ResourceManager rm = app.getResourceManager();
 		if(vectorData && !app.isApplicationInitializing()){
@@ -440,14 +440,19 @@ public class MapActivityLayers {
 						Toast.makeText(activity, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
 						return;
 					} else {
-						settings.setUsingMapVectorData(true);
+						settings.MAP_VECTOR_DATA.set(true);
 					}
 					updateMapSource(mapView);
 				} else if (which == items.length - 1){
-					installMapLayers(mapView);
+					SettingsActivity.installMapLayers(activity, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							openLayerSelectionDialog(mapView);							
+						}
+					});
 				} else {
 					settings.setMapTileSource(keys.get(which - 1));
-					settings.setUsingMapVectorData(false);
+					settings.MAP_VECTOR_DATA.set(false);
 					updateMapSource(mapView);
 				}
 				
@@ -457,54 +462,7 @@ public class MapActivityLayers {
 		builder.show();
 	}
 	
-	private void installMapLayers(final OsmandMapTileView mapView){
-		final OsmandSettings settings = getApplication().getSettings();
-		final Map<String, String> entriesMap = settings.getTileSourceEntries();
-		if(!settings.isInternetConnectionAvailable(true)){
-			Toast.makeText(activity, R.string.internet_not_available, Toast.LENGTH_LONG).show();
-			return;
-		}
-		final List<TileSourceTemplate> downloaded = TileSourceManager.downloadTileSourceTemplates();
-		if(downloaded == null || downloaded.isEmpty()){
-			Toast.makeText(activity, R.string.error_io_error, Toast.LENGTH_SHORT).show();
-			return;
-		}
-		Builder builder = new AlertDialog.Builder(activity);
-		String[] names = new String[downloaded.size()];
-		for(int i=0; i<names.length; i++){
-			names[i] = downloaded.get(i).getName();
-		}
-		final boolean[] selected = new boolean[downloaded.size()];
-		builder.setMultiChoiceItems(names, selected, new DialogInterface.OnMultiChoiceClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-				selected[which] = isChecked;
-				if(entriesMap.containsKey(downloaded.get(which).getName()) && isChecked){
-					Toast.makeText(activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
-				}
-			}
-		});
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
-		builder.setTitle(R.string.select_tile_source_to_install);
-		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				List<TileSourceTemplate> toInstall = new ArrayList<TileSourceTemplate>();
-				for(int i=0; i<selected.length; i++){
-					if(selected[i]){
-						toInstall.add(downloaded.get(i));
-					}
-				}
-				for(TileSourceTemplate ts : toInstall){
-					settings.installTileSource(ts);
-				}
-				openLayerSelectionDialog(mapView);
-			}
-		});
-		
-		builder.show();
-	}
+	
 	
 	private String getString(int resId) {
 		return activity.getString(resId);

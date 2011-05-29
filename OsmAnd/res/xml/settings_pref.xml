@@ -4,6 +4,8 @@
 	<ListPreference android:summary="@string/settings_preset_descr" android:title="@string/settings_preset" android:key="application_mode"></ListPreference>
 
 	<PreferenceScreen android:title="@string/rendering_settings" android:summary="@string/rendering_settings_descr">
+		<CheckBoxPreference android:summary="@string/map_vector_data_descr" android:title="@string/map_vector_data"
+			android:key="map_vector_data"></CheckBoxPreference>
 		<ListPreference android:title="@string/map_tile_source" android:summary="@string/map_tile_source_descr" android:key="map_tile_sources"></ListPreference>
 		<CheckBoxPreference android:summary="@string/use_english_names_descr" android:title="@string/use_english_names"
 			android:key="use_english_names"></CheckBoxPreference>

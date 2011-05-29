@@ -1,6 +1,7 @@
 package net.osmand.plus.activities;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -9,6 +10,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
+import net.osmand.map.TileSourceManager;
+import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressDialogImplementation;
@@ -18,6 +21,8 @@ import net.osmand.plus.OsmandSettings.DayNightMode;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.activities.RouteProvider.RouteService;
+import net.osmand.plus.render.MapRenderRepositories;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
@@ -42,8 +47,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.widget.Toast;
 
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
-	private final static String VECTOR_MAP = "#VECTOR_MAP"; //$NON-NLS-1$
-	
+	private static final String MORE_VALUE = "MORE_VALUE";
 	
 	private Preference saveCurrentTrack;
 	private Preference reloadIndexes;
@@ -144,6 +148,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	    registerBooleanPreference(osmandSettings.FAST_ROUTE_MODE,screen);
 	    registerBooleanPreference(osmandSettings.USE_OSMAND_ROUTING_SERVICE_ALWAYS,screen); 
 	    registerBooleanPreference(osmandSettings.USE_INTERNET_TO_DOWNLOAD_TILES,screen);
+	    registerBooleanPreference(osmandSettings.MAP_VECTOR_DATA,screen);
 	    
 		registerEditTextPreference(osmandSettings.USER_NAME, screen);
 		registerEditTextPreference(osmandSettings.USER_PASSWORD, screen);
@@ -319,28 +324,28 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     	// Specific properties
 		routeServiceEnabled.setChecked(getMyApplication().getNavigationService() != null);
 		
-		Map<String, String> entriesMap = osmandSettings.getTileSourceEntries();
-		String[] entries = new String[entriesMap.size() + 1];
-		String[] values = new String[entriesMap.size() + 1];
-		values[0] = VECTOR_MAP;
-		entries[0] = getString(R.string.vector_data);
-		int ki = 1;
-		for(Map.Entry<String, String> es : entriesMap.entrySet()){
-			entries[ki] = es.getValue();
-			values[ki] = es.getKey();
-			ki++;
-		}
-		String value = osmandSettings.isUsingMapVectorData()? VECTOR_MAP : osmandSettings.getMapTileSourceName();
-		fill(tileSourcePreference, entries, values, value);
-
+		
 		updateTileSourceSummary();
 		
 		updateApplicationDirTextAndSummary();
     }
 
 	private void updateTileSourceSummary() {
-		String mapName = " " + (osmandSettings.isUsingMapVectorData() ? getString(R.string.vector_data) : //$NON-NLS-1$
-				osmandSettings.getMapTileSourceName());
+		Map<String, String> entriesMap = osmandSettings.getTileSourceEntries();
+		String[] entries = new String[entriesMap.size() + 1];
+		String[] values = new String[entriesMap.size() + 1];
+		int ki = 0;
+		for(Map.Entry<String, String> es : entriesMap.entrySet()){
+			entries[ki] = es.getValue();
+			values[ki] = es.getKey();
+			ki++;
+		}
+		entries[ki] = getString(R.string.more_external_layer);
+		values[ki] = MORE_VALUE;
+		String value = osmandSettings.getMapTileSourceName();
+		fill(tileSourcePreference, entries, values, value);
+
+		String mapName = " " + osmandSettings.getMapTileSourceName(); //$NON-NLS-1$
 		String summary = tileSourcePreference.getSummary().toString();
 		if (summary.lastIndexOf(':') != -1) {
 			summary = summary.substring(0, summary.lastIndexOf(':') + 1);
@@ -364,6 +369,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		OsmandPreference<String> editPref = editTextPreferences.get(preference.getKey());
 		if(boolPref != null){
 			boolPref.set((Boolean)newValue);
+			if (boolPref.getId().equals(osmandSettings.MAP_VECTOR_DATA.getId())) {
+				MapRenderRepositories r = ((OsmandApplication)getApplication()).getResourceManager().getRenderer();
+				if(r.isEmpty()){
+					Toast.makeText(this, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
+					return false;
+				}
+			}
 		} else if (editPref != null) {
 			editPref.set((String) newValue);
 		} else if (listPref != null) {
@@ -410,16 +422,22 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				}
 			}
 		} else if (preference == tileSourcePreference) {
-			if(VECTOR_MAP.equals((String) newValue)){
-				osmandSettings.setUsingMapVectorData(true);
+			if(MORE_VALUE.equals(newValue)){
+				SettingsActivity.installMapLayers(this, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						updateTileSourceSummary();							
+					}
+				});
 			} else {
-				osmandSettings.setUsingMapVectorData(false);
 				osmandSettings.setMapTileSource((String) newValue);
+				updateTileSourceSummary();
 			}
-			updateTileSourceSummary();
 		}
 		return true;
 	}
+	
+	
 
 	private void warnAboutChangingStorage(final String newValue) {
 		final String newDir = newValue != null ? newValue.trim(): newValue;
@@ -544,5 +562,56 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			return true;
 		}
 		return false;
+	}
+	
+	public static void installMapLayers(final Activity activity, final DialogInterface.OnClickListener onClickListener){
+		final OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
+		final Map<String, String> entriesMap = settings.getTileSourceEntries();
+		if(!settings.isInternetConnectionAvailable(true)){
+			Toast.makeText(activity, R.string.internet_not_available, Toast.LENGTH_LONG).show();
+			return;
+		}
+		final List<TileSourceTemplate> downloaded = TileSourceManager.downloadTileSourceTemplates();
+		if(downloaded == null || downloaded.isEmpty()){
+			Toast.makeText(activity, R.string.error_io_error, Toast.LENGTH_SHORT).show();
+			return;
+		}
+		Builder builder = new AlertDialog.Builder(activity);
+		String[] names = new String[downloaded.size()];
+		for(int i=0; i<names.length; i++){
+			names[i] = downloaded.get(i).getName();
+		}
+		final boolean[] selected = new boolean[downloaded.size()];
+		builder.setMultiChoiceItems(names, selected, new DialogInterface.OnMultiChoiceClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				selected[which] = isChecked;
+				if(entriesMap.containsKey(downloaded.get(which).getName()) && isChecked){
+					Toast.makeText(activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
+		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setTitle(R.string.select_tile_source_to_install);
+		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				List<TileSourceTemplate> toInstall = new ArrayList<TileSourceTemplate>();
+				for(int i=0; i<selected.length; i++){
+					if(selected[i]){
+						toInstall.add(downloaded.get(i));
+					}
+				}
+				for(TileSourceTemplate ts : toInstall){
+					settings.installTileSource(ts);
+				}
+				if(onClickListener != null){
+					onClickListener.onClick(dialog, which);
+				}
+			}
+		});
+		
+		builder.show();
 	}
 }
