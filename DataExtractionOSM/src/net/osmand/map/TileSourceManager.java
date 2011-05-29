@@ -188,7 +188,7 @@ public class TileSourceManager {
 			return def;
 		}
 		try {
-			return Integer.parseInt(value);
+			return Integer.parseInt(val);
 		} catch (NumberFormatException e) {
 			return def;
 		}
