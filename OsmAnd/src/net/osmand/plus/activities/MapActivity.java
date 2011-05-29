@@ -1101,9 +1101,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     	builder.show();
     }
     
-    
-    
-    
     protected void parseLaunchIntentLocation(){
     	Intent intent = getIntent();
     	if(intent != null && intent.getData() != null){

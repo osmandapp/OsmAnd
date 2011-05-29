@@ -22,7 +22,6 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import net.osmand.LogUtil;
-import net.osmand.osm.MapUtils;
 
 import org.apache.commons.logging.Log;
 import org.xml.sax.Attributes;
@@ -314,10 +313,7 @@ public class TileSourceManager {
 	public static java.util.List<TileSourceTemplate> getKnownSourceTemplates() {
 		java.util.List<TileSourceTemplate> list = new ArrayList<TileSourceTemplate>();
 		list.add(getMapnikSource());
-		list.add(getOsmaRenderSource());
 		list.add(getCycleMapSource());
-		list.add(getCloudMadeSource());
-
 		return list;
 
 	}
@@ -326,16 +322,9 @@ public class TileSourceManager {
 		return new TileSourceTemplate("Mapnik", "http://tile.openstreetmap.org/{0}/{1}/{2}.png", ".png", 18, 1, 256, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
-	public static TileSourceTemplate getOsmaRenderSource(){
-		return new TileSourceTemplate("OsmaRender", "http://tah.openstreetmap.org/Tiles/tile/{0}/{1}/{2}.png", ".png", 17, 1, 256, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
-	}
 	
 	public static TileSourceTemplate getCycleMapSource(){
 		return new TileSourceTemplate("CycleMap", "http://b.tile.opencyclemap.org/cycle/{0}/{1}/{2}.png", ".png", 17, 0, 256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
-	}
-		
-	public static TileSourceTemplate getCloudMadeSource(){
-		return new TileSourceTemplate("Cloudmade", "http://tile.cloudmade.com/7ded028e030c5929b28bf823486ce84f/1/256/{0}/{1}/{2}.png", ".png", 18, 0, 256, 16, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	
@@ -343,15 +332,23 @@ public class TileSourceManager {
 		final List<TileSourceTemplate> templates = new ArrayList<TileSourceTemplate>();
 		try {
 			URLConnection connection = new URL("http://download.osmand.net/tile_sources.php").openConnection();
-			SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
+			final SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
 			saxParser.parse(connection.getInputStream(), new DefaultHandler(){
 				@Override
 				public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+					String name = saxParser.isNamespaceAware() ? localName : qName;
 					Map<String, String> attrs = new LinkedHashMap<String, String>();
-					if(qName.equals("tile_source")){
+					if(name.equals("tile_source")){
 						attrs.clear();
 						for(int i=0; i< attributes.getLength(); i++){
-							attrs.put(attributes.getQName(i), attributes.getValue(i));
+							String local = attributes.getLocalName(i);
+							if(local != null){
+								attrs.put(local, attributes.getValue(i));
+							} else if(attributes.getQName(i) != null){
+								attrs.put(attributes.getQName(i), attributes.getValue(i));
+							} else {
+								return;
+							}
 						}
 						TileSourceTemplate template = createTileSourceTemplate(attrs);
 						if(template != null){
@@ -359,9 +356,6 @@ public class TileSourceManager {
 						}
 					}
 				}
-
-				
-				
 			});
 		} catch (IOException e) {
 			log.error("Exception while downloading tile sources", e);

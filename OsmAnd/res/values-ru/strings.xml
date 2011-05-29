@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="tile_source_already_installed">Карта уже установлена, настройки будут обновлены</string>
+	<string name="select_tile_source_to_install">Выберите карты для установки или обновления</string>
+	<string name="internet_not_available">Интернет соединение не доступно</string>
+	<string name="more_external_layer">Больше...</string>
 	<string name="create_poi_link_to_osm_doc"><u>Интернет OSM</u> классификация</string>
 	<string name="error_doing_search">Ошибка offline поиска</string>
     <string name="search_offline_geo_error">Невозможно разобрать запрос : {0}</string>

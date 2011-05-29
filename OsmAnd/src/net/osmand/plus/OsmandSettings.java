@@ -146,8 +146,11 @@ public class OsmandSettings {
 
 	// Check internet connection available every 15 seconds
 	public boolean isInternetConnectionAvailable(){
+		return isInternetConnectionAvailable(false);
+	}
+	public boolean isInternetConnectionAvailable(boolean update){
 		long delta = System.currentTimeMillis() - lastTimeInternetConnectionChecked;
-		if(delta < 0 || delta > 15000){
+		if(delta < 0 || delta > 15000 || update){
 			ConnectivityManager mgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
 			NetworkInfo active = mgr.getActiveNetworkInfo();
 			if(active == null){
@@ -574,6 +577,20 @@ public class OsmandSettings {
 			}
 		}
 		return null;
+	}
+	
+	public boolean installTileSource(TileSourceTemplate toInstall){
+		File tPath = extendOsmandPath(ResourceManager.TILES_PATH);
+		File dir = new File(tPath, toInstall.getName());
+		dir.mkdirs();
+		if(dir.exists() && dir.isDirectory()){
+			try {
+				TileSourceManager.createMetaInfoFile(dir, toInstall, true);
+			} catch (IOException e) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public Map<String, String> getTileSourceEntries(){
