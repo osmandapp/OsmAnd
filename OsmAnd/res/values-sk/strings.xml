@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="layer_overlay">Prekrývacia mapa...</string>
+	<string name="default_none">Žiadna</string>
+	<string name="map_overlay">Prekrývacia mapa</string>
+	<string name="map_overlay_descr">Výber mapy na prekrytie</string>
+	<string name="map_vector_data">Vektorové mapy</string>
+	<string name="map_vector_data_descr">Použitie stiahnutých vektorových máp</string>
+	<string name="tile_source_already_installed">Mapa je už nainštalovaná, nastavenia budú zaktualizované</string>
+	<string name="select_tile_source_to_install">Vyberte mapy na inštaláciu alebo aktualizáciu</string>
+	<string name="internet_not_available">Internetové pripojenie potrebné pre operáciu nie je dostupné</string>
+	<string name="more_external_layer">Viac...</string>
 	<string name="tip_update_index">Aktualizácia indexov</string>
 	<string name="tip_update_index_t">Veľmi dôležité je mať aktuálne mapové údaje. Osmand je vybavený sťahovacím manažérom, s ktorým môžete ľahko zistiť, či Vaše indexy môžu byť aktualizované.
 	\n\tNa kontrolu aktualizácií choďte do \'Hlavné menu\'->\'Nastavenia\'->\'Údaje pre offline použitie\'->\'Stiahnuť offline údaje\'. Po načítaní zoznamu indexov z internetu, vyberte možnosť \'Zobraziť stiahnuté\' z kontextového menu.
