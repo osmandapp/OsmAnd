@@ -23,17 +23,17 @@
 \n\tVálaszd a \'Térkép menű\'->\'Hely megosztása\' pontot.
 \nEzután meg kell határoznod milyen módon szeretnéd mással megosztani a koordinátákat. Lehetséges választás: E-Mail, SMS vagy a koordináták másolása a vágólapra.</string>
 <string name="tip_favorites">Kedvencek</string>
-<string name="tip_favorites_t">Ha fárasztó a sűrűn használt helyek előkeresése hozzá lehet adni a Kedvencekhez amivel utána pár kattintással előkereshető.
-\n\tKedvenc pont hozzáadásához a térkép menüjébe kell belépni és a \'Hozzáadás a kedvencekhez\'-et kell választani és egy megfelelő névvel kell ellátni. Mentés után egyszerűen a \'Főmenü\'->\'Kedvencek\' menüponton keresztül elérhető..
-\n\tA \'Kedvencek\' menüben a pontra hosszan rányomva navigálhatunk oda, szerkeszthetjük vagy törölhetjük.
-\n\tA térképen minden kedvenc pont megjelenítéséhez a engedélyezni kell a \'Kedvencek\' réteget a \'Térkép menü\'->\'Rétegek\' pontjában.</string>
+<string name="tip_favorites_t">Ha hosszadalmas a sűrűn használt helyek előkeresése, hozzá lehet adni a Kedvencekhez, utána pár kattintással előkereshető.
+\n\tKedvenc pont hozzáadásához a térkép menüjébe kell belépni és a \'Hozzáadás a kedvencekhez\'-et kell választani és egy megfelelő névvel kell ellátni. Mentés után egyszerűen a \'Főmenü\'->\'Kedvencek\' menüponton keresztül érhető el.
+\n\tA \'Kedvencek\' menüben a pontra hosszan rányomva navigálhatunk a ponthoz, szerkeszthetjük vagy törölhetjük.
+\n\tA térképen minden kedvenc pont megjelenítéséhez engedélyezni kell a \'Kedvencek\' réteget a \'Térkép menü\'->\'Rétegek\' pontjában.</string>
 <string name="tip_osm_improve">Openstreetmap fejlesztése</string>
-<string name="tip_osm_improve_t">OsmAnd uses maps based on Openstreetmap.org data and it is designed not only for trips and routing but for improving and helping to Openstreetmap project too. You can easily create and upload new POI or OSM bug with just some clicks!
-\nAt first you need to enter login information in \'Main Menu\'->\'Settings\'->\'OSM\'.
-\n\tFor new POI adding you can use option \'Create POI\' in Map context menu. Then you can proceed with entering information about new POI in Create POI dialog and finally Commit it.
-\n\tIf you find some error in the map, you can report that and Openstreetmap community can then faster fix this problem.
-\n\tFor OSM bug adding you should use option \'Open OSM bug\' in Map context menu. Then is opened dialog, where you can enter detailed description of problem and finally post it with \'Add\' button.
-\n\tDon\'t forget that you need internet connection to use this functions!</string>
+<string name="tip_osm_improve_t">OsmAnd nem csak hogy az Openstreetmap.org-ról használ adatokat, amit nem csak útvonal tervezéshez lehet használni, hanem az adatok kiegészítéséhez, javításához, az Openstreetmap.org fejlesztéséhez is megfelelő. Egyszerűen feltölthető pár kattintással új POI vagy „OSM bug”!
+\nElőször is meg kell adni a bejelentkező információkat a \'Főmenü\'->\'Beállítások\'->\'OSM\' résznél.
+\n\tÚj POI létrehozásához térkép nézetben a menüből ki kell választani a \'POI készítés\' pontot. Ezután meg lehet adni az információkat az új POI-ról majd \'Alkalmaz\'-zal el lehet menteni.
+\n\tHa hibás a térkép, jelezhető a hiba és az Openstreetmap közösség gyorsan javítani tudja.
+\n\tHiba bejelntésére a \'Térkép menü\' -> \'OSM bug megnyitása\' menüpont használható. A megjelenő űrlapon részletesen le kell írni a hibát és a \'Hozzáad\' gombbal kell küldeni.
+\n\tNem szabad elfelejteni, hogy mindehhez internetkapcsolatra van szükség!</string>
 <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
     <string name="error_doing_search">Hiba történt a kapcsolat nélküli keresésben</string>
     <string name="search_offline_geo_error">Could not parse geo intent:{0}</string>
