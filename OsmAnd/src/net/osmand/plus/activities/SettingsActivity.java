@@ -22,6 +22,7 @@ import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.activities.RouteProvider.RouteService;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.views.SeekBarPreference;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -69,6 +70,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private Map<String, OsmandPreference<Boolean>> booleanPreferences = new LinkedHashMap<String, OsmandPreference<Boolean>>();
 	private Map<String, OsmandPreference<?>> listPreferences = new LinkedHashMap<String, OsmandPreference<?>>();
 	private Map<String, OsmandPreference<String>> editTextPreferences = new LinkedHashMap<String, OsmandPreference<String>>();
+	private Map<String, OsmandPreference<Integer>> seekBarPreferences = new LinkedHashMap<String, OsmandPreference<Integer>>();
+	
 	private Map<String, Map<String, ?>> listPrefValues = new LinkedHashMap<String, Map<String, ?>>();
 	
 	
@@ -78,6 +81,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		p.setOnPreferenceChangeListener(this);
 		screenPreferences.put(b.getId(), p);
 		booleanPreferences.put(b.getId(), b);
+	}
+	
+	private void registerSeekBarPreference(OsmandPreference<Integer> b, PreferenceScreen screen){
+		SeekBarPreference p = (SeekBarPreference) screen.findPreference(b.getId());
+		p.setOnPreferenceChangeListener(this);
+		screenPreferences.put(b.getId(), p);
+		seekBarPreferences.put(b.getId(), b);
 	}
 	
 	private <T> void registerListPreference(OsmandPreference<T> b, PreferenceScreen screen, String[] names, T[] values){
@@ -156,6 +166,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerEditTextPreference(osmandSettings.USER_PASSWORD, screen);
 		
 		
+		registerSeekBarPreference(osmandSettings.MAP_OVERLAY_TRANSPARENCY, screen);
+		registerSeekBarPreference(osmandSettings.MAP_TRANSPARENCY, screen);
 		
 		// List preferences
 		registerListPreference(osmandSettings.ROTATE_MAP, screen, 
@@ -306,6 +318,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     		pref.setChecked(b.get());
     	}
     	
+    	for(OsmandPreference<Integer> b : seekBarPreferences.values()){
+    		SeekBarPreference pref = (SeekBarPreference) screenPreferences.get(b.getId());
+    		pref.setValue(b.get());
+    	}
+    	
     	for(OsmandPreference<?> p : listPreferences.values()){
     		ListPreference listPref = (ListPreference) screenPreferences.get(p.getId());
     		Map<String, ?> prefValues = listPrefValues.get(p.getId());
@@ -386,6 +403,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		// handle boolean prefences
 		OsmandPreference<Boolean> boolPref = booleanPreferences.get(preference.getKey());
+		OsmandPreference<Integer> seekPref = seekBarPreferences.get(preference.getKey());
 		OsmandPreference<Object> listPref = (OsmandPreference<Object>) listPreferences.get(preference.getKey());
 		OsmandPreference<String> editPref = editTextPreferences.get(preference.getKey());
 		if(boolPref != null){
@@ -397,6 +415,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					return false;
 				}
 			}
+		} else if (seekPref != null) {
+			seekPref.set((Integer) newValue);
 		} else if (editPref != null) {
 			editPref.set((String) newValue);
 		} else if (listPref != null) {

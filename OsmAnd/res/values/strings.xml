@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="overlay_transparency_descr">Modify overlay transparency</string>
+	<string name="overlay_transparency">Overlay transparency</string>
+	<string name="map_transparency_descr">Modify base map transparency</string>
+	<string name="map_transparency">Map transparency</string>
+	<string name="modify_transparency">Modify transparency</string>
 	<string name="layer_underlay">Underlay map...</string>
 	<string name="map_underlay">Underlay map</string>
 	<string name="map_underlay_descr">Choose underlay map</string>
