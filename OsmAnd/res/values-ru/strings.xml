@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="overlay_transparency_descr">Изменить прозрачность карты покрытия</string>
+	<string name="overlay_transparency">Прозрачность покрытия</string>
+	<string name="map_transparency_descr">Изменить прозрачность основной карты</string>
+	<string name="map_transparency">Прозрачность карты</string>
+	<string name="modify_transparency">Изменить прозрачность</string>
 	<string name="layer_underlay">Карта подложки...</string>
 	<string name="map_underlay">Карта подложки</string>
 	<string name="map_underlay_descr">Выберите слой подложки для основной карты </string>

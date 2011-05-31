@@ -24,6 +24,7 @@ public class MapVectorLayer extends BaseMapLayer {
 	private RectF destImage = new RectF();
 	private final MapTileLayer tileLayer;
 	private boolean visible = false;
+	private int alpha;
 	
 	public MapVectorLayer(MapTileLayer tileLayer){
 		this.tileLayer = tileLayer;
@@ -128,6 +129,18 @@ public class MapVectorLayer extends BaseMapLayer {
 		}
 	}
 
+	
+	public void setAlpha(int alpha) {
+		this.alpha = alpha;
+		if (paintImg != null) {
+			paintImg.setAlpha(alpha);
+		}
+	}
+	
+	public int getAlpha() {
+		return alpha;
+	}
+	
 	@Override
 	public boolean onLongPressEvent(PointF point) {
 		return false;

@@ -521,6 +521,14 @@ public class OsmandSettings {
 			null, true);
 	
 	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<Integer> MAP_OVERLAY_TRANSPARENCY = new IntPreference("overlay_transparency",
+			200, true);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<Integer> MAP_TRANSPARENCY = new IntPreference("map_transparency",
+			255, true);
+	
+	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference("map_tile_sources",
 			TileSourceManager.getMapnikSource().getName(), true);
 	
