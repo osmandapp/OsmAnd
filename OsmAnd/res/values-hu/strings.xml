@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
   <string name="tip_update_index">Index adatok frissítése</string>
-  <string name="tip_update_index_t">Fontos az aktuális térképek megléte. Az Osmand program tartalmaz egy letöltéskezelőt amivel egyszerűen ellenőrizhető, hogy a meglévő index adatokat fel lehet-e frissíteni.
-\n\tA frissítések ellenőrzéséhez a \'Főmenü\'->\'Beállítások\'->\'Adatok kapcsolat nélküli munkához\'->\'Index adatok letöltése\'. Az index adatok internetről való frissítése után a \'Letöltöttek szűrése\' menüt kell választani.
+  <string name="tip_update_index_t">Fontos az aktuális térképek megléte. Az Osmand program tartalmaz egy letöltéskezelőt amivel egyszerűen ellenőrizhető, hogy létezik-e frissebb a meglévő index adatokból.
+\n\tA frissítések ellenőrzéséhez a \'Főmenü\'->\'Beállítások\'->\'Adatok kapcsolat nélküli munkához\'->\'Index adatok letöltése\' menüpontot kell választani. Az index adatok internetről való frissítése után a \'Letöltöttek szűrése\' menüt kell választani.
 \nÍgy most már csak a letöltött index adatok jelennek meg a következő színekkel jelölve:
 \n\t\'Zöld\' - azt jelenti, hogy az index állomány megegyezik a szerveren lévővel
 \n\t\'Kék\' - azt jelenti, hogy újabb verzió tölthető le a szerverről</string>
@@ -19,7 +19,7 @@
 \n\t\'Fényérzékelő\' - a térkép megjelenését az eszköz fényérzékelő szenzora, ha létezik, vezérli.</string>
 <string name="tip_location_sharing">Hely megosztás</string>
 <string name="tip_location_sharing_t">Érdekes helyet találtál az utazásod során és meg akarod osztani a pozíciót a barátoddal, családoddal?
-\nOsmAnd lehetőséget biztosít, hogy megoszthass minden helyet amit csak akarsz másokkal.
+\nOsmAnd lehetőséget biztosít, hogy megoszthass másokkal minden helyet amit csak akarsz.
 \n\tVálaszd a \'Térkép menű\'->\'Hely megosztása\' pontot.
 \nEzután meg kell határoznod milyen módon szeretnéd mással megosztani a koordinátákat. Lehetséges választás: E-Mail, SMS vagy a koordináták másolása a vágólapra.</string>
 <string name="tip_favorites">Kedvencek</string>
@@ -39,8 +39,8 @@
     <string name="search_offline_geo_error">Could not parse geo intent:{0}</string>
 <string name="search_osm_offline">Cím keresése kapcsolat nélkül működő térképpel</string>
 
-<string name="system_locale">Rendszer</string>
-<string name="preferred_locale_descr">Képernyő nyelvének megváltoztatása</string>
+<string name="system_locale">Rendszer nyelve</string>
+<string name="preferred_locale_descr">Képernyőn megjelenő szöveg nyelvének megváltoztatása</string>
 <string name="preferred_locale">Előnyben részesített nyelv</string>
 <string name="tip_map_switch">Térkép forrás</string>
 <string name="tip_map_switch_t">A térkép forrásának és rétegeknek a cseréjére a leggyorsabb megoldás a \'Térkép menü\'->\'Rétegek\' menüpont.
@@ -52,20 +52,20 @@
 <string name="tip_navigation">Navigáció</string>
 <string name="tip_navigation_t">A navigáció bekapcsolásához először ki kell választani a cél helyet. Ezután a \'Térkép menü\'->\'Útirány\' menüt kell választani és megjelölni a közlekedési formát.</string>
 <string name="tip_select_destination_point">Cél hely kiválasztása</string>
-<string name="tip_select_destination_point_t">A cél helyet a \'Térkép menü\'->\'Vezess ide\' pontjával vagy cím kereséssel lehet meghatározni.
+<string name="tip_select_destination_point_t">A cél helyet a \'Térkép menü\'->\'Ponthoz vezet\' pontjával vagy cím kereséssel lehet meghatározni (\'Vezess ide\').
 \n\tKedvenc ponthoz a \'Főmenü\'->\'Kedvencek\' menüpont alatt a pontra hosszan rányomva lehet navigálni.</string>
 <string name="tip_search">Cím keresés</string>
-<string name="tip_search_t">Helyet lehet a térképen keresni vagy cím alapján vagy koordináta alapján esetleg mint POI vagy Kedvenc pont.
-\n\t\'Keresés\' menüvel lehet keresni. Két lehetőség közül lehet választani: \'Vezess ide\' or \'Térképen mutat\'.</string>
+<string name="tip_search_t">A térképen helyet keresni cím alapján vagy koordináta alapján, esetleg mint POI vagy Kedvenc pont lehet.
+\n\t\'Keresés\' menüvel lehet keresni. Két lehetőség közül lehet választani: \'Vezess ide\' vagy \'Térképen mutat\'.</string>
 <string name="tip_map_context_menu">Térkép menü</string>
 <string name="tip_map_context_menu_t">\tA térkép menü a térképen egy pont hosszú megnyomásával vagy a \'track ball\' gomb megnyomásával érhető el.
-\n\tA térképen a pont megnyomása után egy szövegmező jelenik meg, a térkép menü eléréséhez ezt meg kell nyomni. A szövegmező eltüntetéséhez azt hosszan kell megnyomni. A térkép menü a térkép nézetben a \'Menü\' gomb megnyomásával is elérhető.
+\n\tA térképen a pont megnyomása után egy szövegmező jelenik meg, a menü eléréséhez ezt meg kell nyomni. A szövegmező eltüntetéséhez azt hosszan kell megnyomni. A térkép menü a térkép nézetben a \'Menü\' gomb megnyomásával is elérhető.
 \n\tA térkép menü olyan elemekből áll ami a térkép felhasználó által megadott pontját használja fel.</string>
 <string name="tip_desctination_point">Cél</string>
 <string name="tip_desctination_point_t">\tOsmAnd a cél helyét egy piros ponttal jelöli meg a térképen.
 \n\tA távolság és az irány (piros háromszög) a céltól mindig látható a térképen. Bármelyik pont kijelölhető célnak a \'Ponthoz vezet\' vagy \'Vezess ide\' kiválasztásával.
 \n\tEz a lehetőség minden keresésnél elérhető vagy a \'Térkép menü\'-ből vagy a térkép objektum hosszú megnyomásával.
-A cél megadása sokszor távolságmérésre használatos vagy egyenesen odanavigáláshoz.</string>
+A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanavigáláshoz.</string>
 <string name="tip_initial">Tippek és trükkök</string>
 <string name="tip_initial_t">\tAz OsmAnd navigációs alkalmazás sok lehetőséggel rendelkezik.
 \n\tA gyorsabb megértés érdekében ajánlott a tippek és trükkök elolvasása ami egy linken keresztül elérhető a főmenüből.</string>
