@@ -61,24 +61,24 @@
 <string name="tip_map_context_menu_t">\tA térkép menü a térképen egy pont hosszú megnyomásával vagy a \'track ball\' gomb megnyomásával érhető el.
 \n\tA térképen a pont megnyomása után egy szövegmező jelenik meg, a térkép menü eléréséhez ezt meg kell nyomni. A szövegmező eltüntetéséhez azt hosszan kell megnyomni. A térkép menü a térkép nézetben a \'Menü\' gomb megnyomásával is elérhető.
 \n\tA térkép menü olyan elemekből áll ami a térkép felhasználó által megadott pontját használja fel.</string>
-<string name="tip_desctination_point">Cél pont</string>
-<string name="tip_desctination_point_t">\tKey concept of OsmAnd is destination point that is marked as red point on map.
-\n\tYou can always see the distance to it and the direction (red triangle) on map. To mark any point as destination you should choose \'Navigate to\' point.
-\n\tThat button is available on all search activities, in context menu of map and on long press for map items.
-Destination point is widely used to measure distance and to straight forward navigation.</string>
-<string name="tip_initial">Tips and tricks</string>
-<string name="tip_initial_t">\tOsmAnd is navigation application that has variety of features.
-\n\tTo better use them you can follow by tips and tricks available as link on main menu.</string>
+<string name="tip_desctination_point">Cél</string>
+<string name="tip_desctination_point_t">\tOsmAnd a cél helyét egy piros ponttal jelöli meg a térképen.
+\n\tA távolság és az irány (piros háromszög) a céltól mindig látható a térképen. Bármelyik pont kijelölhető célnak a \'Ponthoz vezet\' vagy \'Vezess ide\' kiválasztásával.
+\n\tEz a lehetőség minden keresésnél elérhető vagy a \'Térkép menü\'-ből vagy a térkép objektum hosszú megnyomásával.
+A cél megadása sokszor távolságmérésre használatos vagy egyenesen odanavigáláshoz.</string>
+<string name="tip_initial">Tippek és trükkök</string>
+<string name="tip_initial_t">\tAz OsmAnd navigációs alkalmazás sok lehetőséggel rendelkezik.
+\n\tA gyorsabb megértés érdekében ajánlott a tippek és trükkök elolvasása ami egy linken keresztül elérhető a főmenüből.</string>
 <string name="next_button">Következő</string>
 <string name="previous_button">Előző</string>
 
 <string name="unit_of_length_descr">Hosszúság és sebesség mértékegységének megváltoztatása</string>
 <string name="unit_of_length">Hossz mértékegység</string>
-<string name="si_mi_foots">Miles/foots</string>
-<string name="si_mi_yard">Miles/yards</string>
-<string name="si_km_m">Kilometers/meters</string>
+<string name="si_mi_foots">Mérföld/láb</string>
+<string name="si_mi_yard">Mérföld/yard</string>
+<string name="si_km_m">Kilométer/méter</string>
 <string name="yard">yd</string>
-<string name="foot">ft</string>
+<string name="foot">láb</string>
 <string name="mile_per_hour">mph</string>
 <string name="mile">mi</string>
 <string name="send_location_way_choose_title">Hely megosztásának módja</string>
