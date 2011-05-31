@@ -24,11 +24,13 @@ public class MapTileLayer extends BaseMapLayer {
 	protected RectF latlonRect = new RectF();
 	protected RectF bitmapToDraw = new RectF();
 	protected Rect bitmapToZoom = new Rect();
+	
 
 	protected OsmandMapTileView view;
 	protected ResourceManager resourceManager;
 	private OsmandSettings settings;
 	private boolean visible = true;
+	private int alpha = 255;
 	
 	@Override
 	public boolean drawInScreenPixels() {
@@ -43,6 +45,18 @@ public class MapTileLayer extends BaseMapLayer {
 
 		paintBitmap = new Paint();
 		paintBitmap.setFilterBitmap(true);
+		paintBitmap.setAlpha(alpha);
+	}
+	
+	public void setAlpha(int alpha) {
+		this.alpha = alpha;
+		if (paintBitmap != null) {
+			paintBitmap.setAlpha(alpha);
+		}
+	}
+	
+	public int getAlpha() {
+		return alpha;
 	}
 	
 

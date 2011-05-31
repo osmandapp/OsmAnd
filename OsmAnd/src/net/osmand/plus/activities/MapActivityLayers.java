@@ -22,6 +22,7 @@ import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.SQLiteTileSource;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.views.ContextMenuLayer;
@@ -60,6 +61,7 @@ public class MapActivityLayers {
 	private MapTileLayer mapTileLayer; 
 	private MapVectorLayer mapVectorLayer;
 	private MapTileLayer overlayLayer;
+	private MapTileLayer underlayLayer;
 	private GPXLayer gpxLayer;
 	private RouteLayer routeLayer;
 	private YandexTrafficLayer trafficLayer;
@@ -87,6 +89,9 @@ public class MapActivityLayers {
 	public void createLayers(OsmandMapTileView mapView){
 		
 		RoutingHelper routingHelper = ((OsmandApplication) getApplication()).getRoutingHelper();
+		
+		underlayLayer = new MapTileLayer();
+		// mapView.addLayer(underlayLayer, -0.5f);
 		
 		mapTileLayer = new MapTileLayer();
 		mapView.addLayer(mapTileLayer, 0.0f);
@@ -184,7 +189,8 @@ public class MapActivityLayers {
 		OsmandSettings settings = getApplication().getSettings();
 		boolean showTiles = !settings.MAP_VECTOR_DATA.get();
 		// update overlay layer
-		updateOverlay(mapView, settings);
+		updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, 0.7f);
+		updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, -0.5f);
 		
 		ITileSource source = showTiles ? settings.getMapTileSource() : null;
 		if (showTiles == mapTileLayer.isVisible() && Algoritms.objectEquals(mapTileLayer.getMap(), source)) {
@@ -218,15 +224,16 @@ public class MapActivityLayers {
 		
 	}
 
-	private void updateOverlay(OsmandMapTileView mapView, OsmandSettings settings) {
-		ITileSource overlay = settings.getTileSourceByName(settings.MAP_OVERLAY.get());
-		if(!Algoritms.objectEquals(overlay, overlayLayer.getMap())){
+	private void updateLayer(OsmandMapTileView mapView, OsmandSettings settings,
+			MapTileLayer layer, CommonPreference<String> preference, float layerOrder) {
+		ITileSource overlay = settings.getTileSourceByName(preference.get());
+		if(!Algoritms.objectEquals(overlay, layer.getMap())){
 			if(overlay == null){
-				mapView.removeLayer(overlayLayer);
+				mapView.removeLayer(layer);
 			} else {
-				mapView.addLayer(overlayLayer, 0.7f);
+				mapView.addLayer(layer, layerOrder);
 			}
-			overlayLayer.setMap(overlay);
+			layer.setMap(overlay);
 			mapView.refreshMap();
 		}
 	}
@@ -241,6 +248,7 @@ public class MapActivityLayers {
 		layersList.add(getString(R.string.layer_favorites));
 		layersList.add(getString(R.string.layer_gpx_layer));
 		layersList.add(getString(R.string.layer_overlay));
+		layersList.add(getString(R.string.layer_underlay));
 		final int routeInfoInd = routeInfoLayer.couldBeVisible() ? layersList.size() : -1;
 		if(routeInfoLayer.couldBeVisible()){
 			layersList.add(getString(R.string.layer_route));
@@ -260,6 +268,7 @@ public class MapActivityLayers {
 		selected[4] = settings.SHOW_FAVORITES.get();
 		selected[5] = gpxLayer.isVisible();
 		selected[6] = overlayLayer.getMap() != null;
+		selected[7] = underlayLayer.getMap() != null;
 		selected[trafficInd] = trafficLayer.isVisible();
 		if(routeInfoInd != -1){
 			selected[routeInfoInd] = routeInfoLayer.isUserDefinedVisible(); 
@@ -301,7 +310,15 @@ public class MapActivityLayers {
 						updateMapSource(mapView);
 					} else {
 						dialog.dismiss();
-						selectMapOverlayLayer(mapView);
+						selectMapOverlayLayer(mapView, settings.MAP_OVERLAY);
+					}
+				} else if(item == 7){
+					if(underlayLayer.getMap() != null){
+						settings.MAP_UNDERLAY.set(null);
+						updateMapSource(mapView);
+					} else {
+						dialog.dismiss();
+						selectMapOverlayLayer(mapView, settings.MAP_UNDERLAY);
 					}
 				} else if(item == routeInfoInd){
 					routeInfoLayer.setVisible(isChecked);
@@ -493,7 +510,7 @@ public class MapActivityLayers {
 	}
 	
 	
-	private void selectMapOverlayLayer(final OsmandMapTileView mapView){
+	private void selectMapOverlayLayer(final OsmandMapTileView mapView, final CommonPreference<String> mapPref){
 		final OsmandSettings settings = getApplication().getSettings();
 		Map<String, String> entriesMap = settings.getTileSourceEntries();
 		final ArrayList<String> keys = new ArrayList<String>(entriesMap.keySet());
@@ -516,7 +533,7 @@ public class MapActivityLayers {
 						}
 					});
 				} else {
-					settings.MAP_OVERLAY.set(keys.get(which));
+					mapPref.set(keys.get(which));
 					updateMapSource(mapView);
 				}
 				

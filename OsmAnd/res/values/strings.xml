@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="layer_underlay">Underlay map...</string>
+	<string name="map_underlay">Underlay map</string>
+	<string name="map_underlay_descr">Choose underlay map</string>
 	<string name="layer_overlay">Overlay map...</string>
 	<string name="default_none">None</string>
 	<string name="map_overlay">Overlay map</string>
@@ -9,7 +12,7 @@
 	<string name="tile_source_already_installed">Map is already installed, settings will be updated</string>
 	<string name="select_tile_source_to_install">Select maps to install or update</string>
 	<string name="internet_not_available">Internet connection required for operation is not available</string>
-	<string name="more_external_layer">More...</string>
+	<string name="more_external_layer">Install more...</string>
 	<string name="tip_update_index">Index updating</string>
 	<string name="tip_update_index_t">It is very important to have actual map data. Osmand is equipped with download manager with which you can easily check if your indexes can be updated.
 	\n\tFor checking updates go to \'Main Menu\'->\'Settings\'->\'Data for offline usage\'->\'Download offline data\'. After reloading index list from internet, select option \'Filter downloaded\' from context menu.
