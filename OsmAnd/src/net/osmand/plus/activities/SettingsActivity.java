@@ -56,6 +56,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private EditTextPreference applicationDir;
 	private ListPreference tileSourcePreference;
 	private ListPreference overlayPreference;
+	private ListPreference underlayPreference;
 	
 	private CheckBoxPreference routeServiceEnabled;
 	private BroadcastReceiver broadcastReceiver;
@@ -254,6 +255,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		tileSourcePreference.setOnPreferenceChangeListener(this);
 		overlayPreference = (ListPreference) screen.findPreference(osmandSettings.MAP_OVERLAY.getId());
 		overlayPreference.setOnPreferenceChangeListener(this);
+		underlayPreference = (ListPreference) screen.findPreference(osmandSettings.MAP_UNDERLAY.getId());
+		underlayPreference.setOnPreferenceChangeListener(this);
 		
 
 		reloadIndexes =(Preference) screen.findPreference(OsmandSettings.RELOAD_INDEXES);
@@ -336,6 +339,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private void updateTileSourceSummary() {
 		fillTileSourcesToPreference(tileSourcePreference, osmandSettings.MAP_TILE_SOURCES.get(), false);
 		fillTileSourcesToPreference(overlayPreference, osmandSettings.MAP_OVERLAY.get(), true);
+		fillTileSourcesToPreference(underlayPreference, osmandSettings.MAP_OVERLAY.get(), true);
 
 		String mapName = " " + osmandSettings.MAP_TILE_SOURCES.get(); //$NON-NLS-1$
 		String summary = tileSourcePreference.getSummary().toString();
@@ -438,7 +442,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					routeServiceEnabled.setChecked(getMyApplication().getNavigationService() != null);
 				}
 			}
-		} else if (preference == tileSourcePreference  || preference == overlayPreference) {
+		} else if (preference == tileSourcePreference  || preference == overlayPreference 
+				|| preference == underlayPreference) {
 			if(MORE_VALUE.equals(newValue)){
 				SettingsActivity.installMapLayers(this, new DialogInterface.OnClickListener() {
 					@Override
@@ -453,7 +458,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				if(((String) newValue).length() == 0){
 					newValue = null;
 				}
-				osmandSettings.MAP_OVERLAY.set(((String) newValue));
+				if(preference == underlayPreference){
+					osmandSettings.MAP_UNDERLAY.set(((String) newValue));
+				} else if(preference == overlayPreference){
+					osmandSettings.MAP_OVERLAY.set(((String) newValue));
+				}
 			}
 		}
 		return true;
