@@ -24,7 +24,6 @@ public class MapVectorLayer extends BaseMapLayer {
 	private RectF destImage = new RectF();
 	private final MapTileLayer tileLayer;
 	private boolean visible = false;
-	private int alpha;
 	
 	public MapVectorLayer(MapTileLayer tileLayer){
 		this.tileLayer = tileLayer;
@@ -46,6 +45,7 @@ public class MapVectorLayer extends BaseMapLayer {
 		resourceManager = view.getApplication().getResourceManager();
 		paintImg = new Paint();
 		paintImg.setFilterBitmap(true);
+		paintImg.setAlpha(getAlpha());
 	}
 	
 	private void updateRotatedTileBox(){
@@ -130,16 +130,13 @@ public class MapVectorLayer extends BaseMapLayer {
 	}
 
 	
+	@Override
 	public void setAlpha(int alpha) {
-		this.alpha = alpha;
+		super.setAlpha(alpha);
 		if (paintImg != null) {
 			paintImg.setAlpha(alpha);
 		}
-	}
-	
-	public int getAlpha() {
-		return alpha;
-	}
+	}	
 	
 	@Override
 	public boolean onLongPressEvent(PointF point) {

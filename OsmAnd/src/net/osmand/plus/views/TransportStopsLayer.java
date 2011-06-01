@@ -5,7 +5,6 @@ import java.util.List;
 
 import net.osmand.data.TransportStop;
 import net.osmand.osm.LatLon;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TransportIndexRepository;
 import android.content.Context;
