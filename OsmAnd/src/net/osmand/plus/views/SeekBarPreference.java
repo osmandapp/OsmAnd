@@ -161,6 +161,7 @@ public class SeekBarPreference extends DialogPreference implements
 	public void setValue(final int value) {
 		this.value = value;
 		this.valueToSave = value;
+		persistInt(value);
 		if (seekBar != null) {
 			seekBar.setProgress(value);
 		}

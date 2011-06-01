@@ -30,7 +30,6 @@ public class MapTileLayer extends BaseMapLayer {
 	protected ResourceManager resourceManager;
 	private OsmandSettings settings;
 	private boolean visible = true;
-	private int alpha = 255;
 	
 	@Override
 	public boolean drawInScreenPixels() {
@@ -45,18 +44,15 @@ public class MapTileLayer extends BaseMapLayer {
 
 		paintBitmap = new Paint();
 		paintBitmap.setFilterBitmap(true);
-		paintBitmap.setAlpha(alpha);
+		paintBitmap.setAlpha(getAlpha());
 	}
 	
+	@Override
 	public void setAlpha(int alpha) {
-		this.alpha = alpha;
+		super.setAlpha(alpha);
 		if (paintBitmap != null) {
 			paintBitmap.setAlpha(alpha);
 		}
-	}
-	
-	public int getAlpha() {
-		return alpha;
 	}
 	
 

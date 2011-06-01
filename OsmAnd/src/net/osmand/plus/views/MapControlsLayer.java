@@ -1,11 +1,14 @@
 package net.osmand.plus.views;
 
 import net.osmand.plus.R;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.activities.MapActivity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.os.Handler;
+import android.os.Message;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -13,8 +16,14 @@ import android.view.WindowManager;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.SeekBar;
 
 public class MapControlsLayer implements OsmandMapLayer {
+
+	private static final int SHOW_SEEKBAR_MSG_ID = 2;
+	private static final int SHOW_SEEKBAR_DELAY = 7000;
+	private static final int SHOW_SEEKBAR_SECOND_DELAY = 25000;
+	
 
 	private OsmandMapTileView view;
 	private DisplayMetrics dm;
@@ -23,6 +32,10 @@ public class MapControlsLayer implements OsmandMapLayer {
 	private Button backToMenuButton;
 	private final MapActivity activity;
 	
+	private SeekBar transparencyBar;
+	private Handler showBarHandler;
+	private CommonPreference<Integer> settingsToTransparency;
+	private BaseMapLayer[] transparencyLayers;
 
 	public MapControlsLayer(MapActivity activity){
 		this.activity = activity;
@@ -57,6 +70,7 @@ public class MapControlsLayer implements OsmandMapLayer {
 		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 					Gravity.BOTTOM | Gravity.RIGHT);
 		int minimumWidth = view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumWidth();
+		int minimumHeight = view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumHeight();
 		params.setMargins(0, 0, minimumWidth , 0);
 		parent.addView(zoomOutButton, params);
 		
@@ -66,6 +80,14 @@ public class MapControlsLayer implements OsmandMapLayer {
 					Gravity.BOTTOM | Gravity.LEFT);
 		parent.addView(backToMenuButton, params);
 		backToMenuButton.setEnabled(true);
+		
+		transparencyBar = new SeekBar(view.getContext());
+		transparencyBar.setVisibility(View.GONE);
+		transparencyBar.setMax(255);
+		params = new FrameLayout.LayoutParams((int) (dm.density * 100), LayoutParams.WRAP_CONTENT,
+				Gravity.BOTTOM | Gravity.CENTER);
+		params.setMargins(0, 0, 0, minimumHeight + 3);
+		parent.addView(transparencyBar, params);
 		
 		zoomInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -88,6 +110,53 @@ public class MapControlsLayer implements OsmandMapLayer {
 				
 			}
 		});
+		transparencyBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+			}
+			
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+			}
+			
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+				if(settingsToTransparency != null && transparencyLayers != null){
+					settingsToTransparency.set(progress);
+					for(BaseMapLayer base : transparencyLayers){
+						base.setAlpha(progress);
+					}
+					MapControlsLayer.this.view.refreshMap();
+					showAndHideTransparencyBar(settingsToTransparency, transparencyLayers, SHOW_SEEKBAR_SECOND_DELAY);
+				}
+			}
+		});
+	}
+	
+	public void showAndHideTransparencyBar(CommonPreference<Integer> transparenPreference,
+			BaseMapLayer[] layerToChange) {
+		showAndHideTransparencyBar(transparenPreference, layerToChange, SHOW_SEEKBAR_DELAY);
+	}
+	private void showAndHideTransparencyBar(CommonPreference<Integer> transparenPreference,
+			BaseMapLayer[] layerToChange, int delay) {
+		transparencyBar.setVisibility(View.VISIBLE);
+		transparencyBar.setProgress(transparenPreference.get());
+		this.transparencyLayers = layerToChange;
+		this.settingsToTransparency = transparenPreference;
+		if (showBarHandler == null) {
+			showBarHandler = new Handler();
+		}
+		Message msg = Message.obtain(showBarHandler, new Runnable() {
+			@Override
+			public void run() {
+				transparencyBar.setVisibility(View.GONE);
+			}
+
+		});
+		msg.what = SHOW_SEEKBAR_MSG_ID;
+		showBarHandler.removeMessages(SHOW_SEEKBAR_MSG_ID);
+		showBarHandler.sendMessageDelayed(msg, delay);
 	}
 	
 	@Override

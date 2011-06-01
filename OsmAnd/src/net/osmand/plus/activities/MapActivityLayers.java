@@ -25,6 +25,7 @@ import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.MapVectorLayer;
+import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.FavoritesLayer;
 import net.osmand.plus.views.GPXLayer;
@@ -75,6 +76,7 @@ public class MapActivityLayers {
 	private MapInfoLayer mapInfoLayer;
 	private ContextMenuLayer contextMenuLayer;
 	private RouteInfoLayer routeInfoLayer;
+	private MapControlsLayer mapControlsLayer;
 
 
 	public MapActivityLayers(MapActivity activity) {
@@ -144,7 +146,7 @@ public class MapActivityLayers {
 		mapView.addLayer(routeInfoLayer, 10);
 		
 		// 11. route info layer
-		MapControlsLayer mapControlsLayer = new MapControlsLayer(activity);
+		mapControlsLayer = new MapControlsLayer(activity);
 		mapView.addLayer(mapControlsLayer, 11);
 
 	}
@@ -187,6 +189,14 @@ public class MapActivityLayers {
 	
 	public void updateMapSource(OsmandMapTileView mapView){
 		OsmandSettings settings = getApplication().getSettings();
+		
+		// update transparency
+		overlayLayer.setAlpha(settings.MAP_OVERLAY_TRANSPARENCY.get());
+		int mapTransparency = settings.MAP_UNDERLAY.get() == null ? 255 :  settings.MAP_TRANSPARENCY.get();
+		mapTileLayer.setAlpha(mapTransparency);
+		mapVectorLayer.setAlpha(mapTransparency);
+		
+		
 		boolean showTiles = !settings.MAP_VECTOR_DATA.get();
 		// update overlay layer
 		updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, 0.7f);
@@ -219,11 +229,7 @@ public class MapActivityLayers {
 		} else {
 			mapView.setMainLayer(mapTileLayer);
 		}
-		// update transparency
-		overlayLayer.setAlpha(settings.MAP_OVERLAY_TRANSPARENCY.get());
-		int mapTransparency = settings.MAP_UNDERLAY.get() == null ? 255 :  settings.MAP_TRANSPARENCY.get();
-		mapTileLayer.setAlpha(mapTransparency);
-		mapVectorLayer.setAlpha(mapTransparency);
+
 		
 
 		
@@ -315,7 +321,8 @@ public class MapActivityLayers {
 						updateMapSource(mapView);
 					} else {
 						dialog.dismiss();
-						selectMapOverlayLayer(mapView, settings.MAP_OVERLAY);
+						selectMapOverlayLayer(mapView, settings.MAP_OVERLAY, settings.MAP_OVERLAY_TRANSPARENCY, 
+								overlayLayer);
 					}
 				} else if(item == 7){
 					if(underlayLayer.getMap() != null){
@@ -323,7 +330,8 @@ public class MapActivityLayers {
 						updateMapSource(mapView);
 					} else {
 						dialog.dismiss();
-						selectMapOverlayLayer(mapView, settings.MAP_UNDERLAY);
+						selectMapOverlayLayer(mapView, settings.MAP_UNDERLAY,settings.MAP_TRANSPARENCY, 
+								mapTileLayer, mapVectorLayer);
 					}
 				} else if(item == routeInfoInd){
 					routeInfoLayer.setVisible(isChecked);
@@ -515,7 +523,9 @@ public class MapActivityLayers {
 	}
 	
 	
-	private void selectMapOverlayLayer(final OsmandMapTileView mapView, final CommonPreference<String> mapPref){
+	private void selectMapOverlayLayer(final OsmandMapTileView mapView, 
+			final CommonPreference<String> mapPref, final CommonPreference<Integer> transparencyPref,
+			final BaseMapLayer... transparencyToChange){
 		final OsmandSettings settings = getApplication().getSettings();
 		Map<String, String> entriesMap = settings.getTileSourceEntries();
 		final ArrayList<String> keys = new ArrayList<String>(entriesMap.keySet());
@@ -539,6 +549,7 @@ public class MapActivityLayers {
 					});
 				} else {
 					mapPref.set(keys.get(which));
+					mapControlsLayer.showAndHideTransparencyBar(transparencyPref, transparencyToChange);
 					updateMapSource(mapView);
 				}
 				

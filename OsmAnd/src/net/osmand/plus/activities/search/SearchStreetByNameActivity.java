@@ -10,7 +10,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
 import net.osmand.plus.activities.OsmandApplication;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
