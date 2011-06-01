@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="overlay_transparency_descr">Úprava priehľadnosti prekrývacej mapy</string>
+	<string name="overlay_transparency">Priehľadnosť prekrývacej mapy</string>
+	<string name="map_transparency_descr">Úprava priehľadnosti základnej mapy</string>
+	<string name="map_transparency">Priehľadnosť mapy</string>
+	<string name="modify_transparency">Upravte priehľadnosť</string>
+	<string name="layer_underlay">Podkladová mapa...</string>
+	<string name="map_underlay">Podkladová mapa</string>
+	<string name="map_underlay_descr">Výber podkladovej mapy</string>
 	<string name="layer_overlay">Prekrývacia mapa...</string>
 	<string name="default_none">Žiadna</string>
 	<string name="map_overlay">Prekrývacia mapa</string>
