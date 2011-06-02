@@ -93,7 +93,7 @@ Destination point is widely used to measure distance and to straight forward nav
 
 	<string name="unit_of_length_descr">Change unit of length and speed</string>
 	<string name="unit_of_length">Unit of length</string>
-	<string name="si_mi_foots">Miles/foots</string>
+	<string name="si_mi_foots">Miles/feet</string>
 	<string name="si_mi_yard">Miles/yards</string>
 	<string name="si_km_m">Kilometers/meters</string>
 	<string name="yard">yd</string>
