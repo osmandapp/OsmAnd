@@ -28,13 +28,12 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import bsh.Interpreter;
 
 
 public class TileSourceManager {
 	private static final Log log = LogUtil.getLog(TileSourceManager.class);
-	private static final String RULE_CYCLOATLAS = "cykloatlas_cz";
-	private static final String RULE_WMS = "wms_tile";
-	private static final String RULE_MICROSOFT = "microsoft";
+	private static final String RULE_BEANSHELL = "beanshell";
 	
 	
 
@@ -197,19 +196,13 @@ public class TileSourceManager {
 	public static void createMetaInfoFile(File dir, TileSourceTemplate tm, boolean override) throws IOException{
 		File metainfo = new File(dir, ".metainfo"); //$NON-NLS-1$
 		Map<String, String> properties = new LinkedHashMap<String, String>();
-		if(tm instanceof MicrosoftTileSourceTemplate){
-			properties.put("rule", RULE_MICROSOFT);
-			properties.put("map_type", ((MicrosoftTileSourceTemplate) tm).getMapTypeChar()+"");
-			properties.put("map_ext", ((MicrosoftTileSourceTemplate) tm).getTileType());
-		} else {
-			if(tm instanceof CykloatlasSourceTemplate){
-				properties.put("rule", RULE_CYCLOATLAS);
-			}
-			if(tm.getUrlTemplate() == null){
-				return;
-			}
-			properties.put("url_template", tm.getUrlTemplate());
+		if(tm instanceof BeanshellSourceTemplate){
+			properties.put("rule", RULE_BEANSHELL);
 		}
+		if(tm.getUrlTemplate() == null){
+			return;
+		}
+		properties.put("url_template", tm.getUrlTemplate());
 		
 		properties.put("ext", tm.getTileFormat());
 		properties.put("min_zoom", tm.getMinimumZoomSupported()+"");
@@ -331,7 +324,7 @@ public class TileSourceManager {
 	public static List<TileSourceTemplate> downloadTileSourceTemplates() {
 		final List<TileSourceTemplate> templates = new ArrayList<TileSourceTemplate>();
 		try {
-			URLConnection connection = new URL("http://download.osmand.net/tile_sources.php").openConnection();
+			URLConnection connection = new URL("http://geraldine.fjfi.cvut.cz/~makovicka/tile_sources.xml").openConnection();
 			final SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
 			saxParser.parse(connection.getInputStream(), new DefaultHandler(){
 				@Override
@@ -374,13 +367,9 @@ public class TileSourceManager {
 		TileSourceTemplate template = null;
 		String rule = attrs.get("rule");
 		if(rule == null){
-			template = createSimpleTileSourceTemplate(attrs, false);
-		} else if(RULE_CYCLOATLAS.equalsIgnoreCase(rule)){
-			template = createSimpleTileSourceTemplate(attrs, true);
-		} else if (RULE_MICROSOFT.equalsIgnoreCase(rule)) {
-			template = createMicrofsoftTileSourceTemplate(attrs);
-		} else if (RULE_WMS.equalsIgnoreCase(rule)) {
-			template = createWmsTileSourceTemplate(attrs);
+			template = createSimpleTileSourceTemplate(attrs);
+		} else if(RULE_BEANSHELL.equalsIgnoreCase(rule)){
+			template = createBeanshellTileSourceTemplate(attrs);
 		} else {
 			// TODO rule == yandex_traffic
 		}
@@ -390,7 +379,7 @@ public class TileSourceManager {
 		return template;
 	}
 
-	private static TileSourceTemplate createSimpleTileSourceTemplate(Map<String, String> attributes, boolean cycloAtlas) {
+	private static TileSourceTemplate createSimpleTileSourceTemplate(Map<String, String> attributes) {
 		String name = attributes.get("name");
 		String urlTemplate = attributes.get("url_template");
 		if (name == null || urlTemplate == null) {
@@ -408,21 +397,16 @@ public class TileSourceManager {
 			ellipsoid = true;
 		}
 		TileSourceTemplate templ;
-		if (cycloAtlas) {
-			templ = new CykloatlasSourceTemplate(name, urlTemplate, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
-		} else {
-			templ = new TileSourceTemplate(name, urlTemplate, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
-		}
+		templ = new TileSourceTemplate(name, urlTemplate, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
 		templ.setEllipticYTile(ellipsoid);
 		return templ;
 	}
 	
-	private static TileSourceTemplate createMicrofsoftTileSourceTemplate(Map<String, String> attributes) {
+	private static TileSourceTemplate createBeanshellTileSourceTemplate(Map<String, String> attributes) {
 		String name = attributes.get("name");
-		String mapType = attributes.get("map_type");
-		String mapExt = attributes.get("map_ext");
-		
-		if (name == null || mapExt == null || mapType == null) {
+		String tileScript= attributes.get("tile_script");
+		String initScript = attributes.get("init_script");
+		if (name == null || tileScript == null) {
 			return null;
 		}
 		int maxZoom = parseInt(attributes, "max_zoom", 18);
@@ -431,113 +415,47 @@ public class TileSourceManager {
 		String ext = attributes.get("ext") == null ? ".jpg" : attributes.get("ext");
 		int bitDensity = parseInt(attributes, "img_density", 16);
 		int avgTileSize = parseInt(attributes, "avg_img_size", 18000);
-		TileSourceTemplate templ = new MicrosoftTileSourceTemplate(name, mapType.charAt(0), mapType, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
-		return templ;
-	}
-	
-	private static TileSourceTemplate createWmsTileSourceTemplate(Map<String, String> attributes) {
-		String name = attributes.get("name");
-		String layer = attributes.get("layer");
-		String urlTemplate = attributes.get("url_template");
-		
-		if (name == null || urlTemplate == null || layer == null) {
-			return null;
+		boolean ellipsoid = false;
+		if (Boolean.parseBoolean(attributes.get("ellipsoid"))) {
+			ellipsoid = true;
 		}
-		int maxZoom = parseInt(attributes, "max_zoom", 18);
-		int minZoom = parseInt(attributes, "min_zoom", 5);
-		int tileSize = parseInt(attributes, "tile_size", 256);
-		String ext = attributes.get("ext") == null ? ".jpg" : attributes.get("ext");
-		int bitDensity = parseInt(attributes, "img_density", 16);
-		int avgTileSize = parseInt(attributes, "avg_img_size", 18000);
-		urlTemplate = " http://whoots.mapwarper.net/tms/{0}/{1}/{2}/"+layer+"/"+urlTemplate;
-		TileSourceTemplate templ = new TileSourceTemplate(name, urlTemplate, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
+		TileSourceTemplate templ;
+		templ = new BeanshellSourceTemplate(name, initScript, tileScript, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
+		templ.setEllipticYTile(ellipsoid);
 		return templ;
 	}
-	
-	
-	
-
 	
 	protected static final char[] NUM_CHAR = { '0', '1', '2', '3' };
 
-	/**
-	 * See: http://msdn.microsoft.com/en-us/library/bb259689.aspx
-	 * @param zoom
-	 * @param tilex
-	 * @param tiley
-	 * @return quadtree encoded tile number
-	 * 
-	 */
-	public static String encodeQuadTree(int zoom, int tilex, int tiley) {
-		char[] tileNum = new char[zoom];
-		for (int i = zoom - 1; i >= 0; i--) {
-			// Binary encoding using ones for tilex and twos for tiley. if a bit
-			// is set in tilex and tiley we get a three.
-			int num = (tilex % 2) | ((tiley % 2) << 1);
-			tileNum[i] = NUM_CHAR[num];
-			tilex >>= 1;
-			tiley >>= 1;
-		}
-		return new String(tileNum);
-	}
-	
-	public static class MicrosoftTileSourceTemplate extends TileSourceTemplate {
+	public static class BeanshellSourceTemplate extends TileSourceTemplate {
 
-		private final char mapTypeChar;
-		int serverNum = 0; // 0..3
-		protected String urlBase = ".ortho.tiles.virtualearth.net/tiles/"; //$NON-NLS-1$
-		protected String urlAppend = "?g=45"; //$NON-NLS-1$
-		private final String tileType;
-
-		public MicrosoftTileSourceTemplate(String name, char mapTypeChar , String type, 
-				String ext, int maxZoom, int minZoom, int tileSize, int bitDensity, int avgSize) {
-			super(name, null, ext, maxZoom, minZoom, tileSize, bitDensity, avgSize);
-			this.mapTypeChar = mapTypeChar;
-			this.tileType = type;
-		}
+		Interpreter bshInterpreter;
+		protected String tileScript;
 		
-		public char getMapTypeChar() {
-			return mapTypeChar;
-		}
-		
-		public String getTileType() {
-			return tileType;
-		}
-		
-		
-		@Override
-		public String getUrlToLoad(int x, int y, int zoom) {
-			String tileNum = encodeQuadTree(zoom, x, y);
-//			serverNum = (serverNum + 1) % serverNumMax;
-			return "http://" + mapTypeChar + serverNum + urlBase + mapTypeChar + tileNum + "." //$NON-NLS-1$ //$NON-NLS-2$
-					+ tileType + urlAppend;
-			
-		}
-		
-		@Override
-		public boolean couldBeDownloadedFromInternet() {
-			return true;
-		}
-		
-	}
-	
-	public static class CykloatlasSourceTemplate extends TileSourceTemplate {
-
-		public CykloatlasSourceTemplate(String name, String urlToLoad, String ext, int maxZoom, int minZoom, int tileSize, int bitDensity,
-				int avgSize) {
-			super(name, urlToLoad, ext, maxZoom, minZoom, tileSize, bitDensity, avgSize);
+		public BeanshellSourceTemplate(String name, String initScript, String tileScript, String ext,
+				int maxZoom, int minZoom, int tileSize, int bitDensity, int avgSize) {
+			super(name, tileScript, ext, maxZoom, minZoom, tileSize, bitDensity, avgSize);
+			bshInterpreter = new Interpreter();
+			if (initScript != null) {
+				try {
+					bshInterpreter.eval(initScript);
+				} catch (bsh.EvalError e) {
+					log.error("Error executing the map init script " + initScript, e);
+				}
+			}
 		}
 
 		@Override
 		public String getUrlToLoad(int x, int y, int zoom) {
-			String z = Integer.toString(zoom);
-			// use int to string not format numbers! (non-nls)
-			if(urlToLoad == null){
+			try {
+				bshInterpreter.set("x", x);
+				bshInterpreter.set("y", y);
+				bshInterpreter.set("z", zoom);
+				bshInterpreter.eval(urlToLoad);
+				return (String) bshInterpreter.get("url");
+			} catch (bsh.EvalError e) {
 				return null;
 			}
-			if (zoom >= 13)
-				z += "c";
-			return MessageFormat.format(urlToLoad, z, x+"", y+""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		
 	}
