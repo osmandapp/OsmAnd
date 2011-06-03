@@ -7,15 +7,15 @@
    <tile_source name="GoogleMaps Satellite" url_template="http://khm1.google.com/kh/v=65&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="7" max_zoom="20" tile_size="256" img_density="32" avg_img_size="18000"/>
    <tile_source name="GoogleMaps Terrain" url_template="http://mt3.google.com/vt/v=w2p.111&amp;hl=en&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="5" max_zoom="15" tile_size="256" img_density="32" avg_img_size="18000"/>
 
-   <tile_source rule="beanshell" name="Microsoft Maps" min_zoom="1" max_zoom="19" tile_size="256" img_density="16" avg_img_size="18000"
+   <tile_source rule="beanshell" name="Microsoft Maps" min_zoom="1" max_zoom="19" tile_size="256" img_density="16" avg_img_size="18000" ext="png"
    init_script="public static String eqt(int z, int x, int y) {static final char[] NUM_CHAR = { &apos;0&apos;, &apos;1&apos;, &apos;2&apos;, &apos;3&apos; };char[] tn = new char[z];for (int i = z - 1; i &gt;= 0; i--) {int num = (x % 2) | ((y % 2) &lt;&lt; 1);tn[i] = NUM_CHAR[num];x &gt;&gt;= 1;y &gt;&gt;= 1;}return new String(tn);}"
-   tile_script="url = &quot;http://&quot; + &quot;r&quot; + &quot;0&quot; + &quot;.ortho.tiles.virtualearth.net/tiles/&quot; + &quot;r&quot; + eqt(z,x,y) + &quot;.png&quot; + &quot;?g=45&quot;;"/>
-   <tile_source rule="beanshell" name="Microsoft Hybrid" min_zoom="1" max_zoom="19" tile_size="256" img_density="32" avg_img_size="18000"
+   url_template="url = &quot;http://&quot; + &quot;r&quot; + &quot;0&quot; + &quot;.ortho.tiles.virtualearth.net/tiles/&quot; + &quot;r&quot; + eqt(z,x,y) + &quot;.png&quot; + &quot;?g=45&quot;;"/>
+   <tile_source rule="beanshell" name="Microsoft Hybrid" min_zoom="1" max_zoom="19" tile_size="256" img_density="32" avg_img_size="18000" ext="jpg"
    init_script="public static String eqt(int z, int x, int y) {static final char[] NUM_CHAR = { &apos;0&apos;, &apos;1&apos;, &apos;2&apos;, &apos;3&apos; };char[] tn = new char[z];for (int i = z - 1; i &gt;= 0; i--) {int num = (x % 2) | ((y % 2) &lt;&lt; 1);tn[i] = NUM_CHAR[num];x &gt;&gt;= 1;y &gt;&gt;= 1;}return new String(tn);}"
-   tile_script="url = &quot;http://&quot; + &quot;h&quot; + &quot;0&quot; + &quot;.ortho.tiles.virtualearth.net/tiles/&quot; + &quot;h&quot; + eqt(z,x,y) + &quot;.jpg&quot; + &quot;?g=45&quot;;"/>
-   <tile_source rule="beanshell" name="Microsoft Earth" min_zoom="1" max_zoom="19" tile_size="256" img_density="32" avg_img_size="18000"
+   url_template="url = &quot;http://&quot; + &quot;h&quot; + &quot;0&quot; + &quot;.ortho.tiles.virtualearth.net/tiles/&quot; + &quot;h&quot; + eqt(z,x,y) + &quot;.jpg&quot; + &quot;?g=45&quot;;"/>
+   <tile_source rule="beanshell" name="Microsoft Earth" min_zoom="1" max_zoom="19" tile_size="256" img_density="32" avg_img_size="18000" ext="jpg"
    init_script="public static String eqt(int z, int x, int y) {static final char[] NUM_CHAR = { &apos;0&apos;, &apos;1&apos;, &apos;2&apos;, &apos;3&apos; };char[] tn = new char[z];for (int i = z - 1; i &gt;= 0; i--) {int num = (x % 2) | ((y % 2) &lt;&lt; 1);tn[i] = NUM_CHAR[num];x &gt;&gt;= 1;y &gt;&gt;= 1;}return new String(tn);}"
-   tile_script="url = &quot;http://&quot; + &quot;a&quot; + &quot;0&quot; + &quot;.ortho.tiles.virtualearth.net/tiles/&quot; + &quot;a&quot; + eqt(z,x,y) + &quot;.jpg&quot; + &quot;?g=45&quot;;"/>
+   url_template="url = &quot;http://&quot; + &quot;a&quot; + &quot;0&quot; + &quot;.ortho.tiles.virtualearth.net/tiles/&quot; + &quot;a&quot; + eqt(z,x,y) + &quot;.jpg&quot; + &quot;?g=45&quot;;"/>
 
    <tile_source name="ÖPNV Transit" url_template="http://tile.xn--pnvkarte-m4a.de/tilegen/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/> 
    <tile_source name="OpenCycleMap" url_template="http://c.tile.opencyclemap.org/cycle/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/>
@@ -25,7 +25,7 @@
    <tile_source name="OpenPisteMap" url_template="http://openpistemap.org/tiles/contours/{0}/{1}/{2}.png" ext=".png" min_zoom="5" max_zoom="17" tile_size="256" img_density="32" avg_img_size="18000"/>
    <tile_source name="Relief" url_template="http://www.maps-for-free.com/layer/relief/z{0}/row{2}/{0}_{1}-{2}.jpg" ext=".jpg" min_zoom="1" max_zoom="12" tile_size="256" img_density="32" avg_img_size="24000"/>
 
-   <tile_source rule="beanshell" name="Cykloatlas CZ" tile_script="url = &quot;http://services.tmapserver.cz/tiles/gm/shc/&quot; + z + (z &gt;= 13 ? &quot;c&quot; : &quot;&quot;) + &quot;/&quot; + x + &quot;/&quot; + y + &quot;.png&quot;;" min_zoom="7" max_zoom="16" tile_size="256" img_density="16" avg_img_size="26000"/>
+   <tile_source rule="beanshell" name="Cykloatlas CZ" url_template="url = &quot;http://services.tmapserver.cz/tiles/gm/shc/&quot; + z + (z &gt;= 13 ? &quot;c&quot; : &quot;&quot;) + &quot;/&quot; + x + &quot;/&quot; + y + &quot;.png&quot;;" ext="png" min_zoom="7" max_zoom="16" tile_size="256" img_density="16" avg_img_size="26000"/>
    <tile_source name="Cykloatlas CZ HillShade" url_template="http://services.tmapserver.cz/tiles/gm/sum/{0}/{1}/{2}.png" ext=".png" min_zoom="7" max_zoom="15" tile_size="256" img_density="16" avg_img_size="26000"/>
 
    <tile_source name="MTB Map CZ" url_template="http://tchor.fi.muni.cz:8080/mtbmap_tiles/{0}/{1}/{2}.png" ext=".png" min_zoom="7" max_zoom="16" tile_size="256" img_density="32" avg_img_size="18000"/>
@@ -41,7 +41,6 @@
    <tile_source name="Wanderreitkarte Topo (DE, NL)" url_template="http://www.wanderreitkarte.de/topo/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/> 
    <tile_source name="Wanderreitkarte HillShade (DE, NL)" url_template="http://www.wanderreitkarte.de/hills/{0}/{1}/{2}.png" ext=".png" min_zoom="8" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/> 
    <tile_source name="Wanderreitkarte BaseLayer (DE, NL)" url_template="http://www.wanderreitkarte.de/base/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/> 
-
 <!--
    <tile_source rule="wms_tile" url_template="http://wms.latlon.org" name="Genshtab (BLR)" layer="gshtab" ext=".jpg" min_zoom="5" max_zoom="17" tile_size="256" img_density="32" avg_img_size="18000"/>  NOT WORK ?-->
 
