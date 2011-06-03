@@ -196,8 +196,9 @@ public class TileSourceManager {
 	public static void createMetaInfoFile(File dir, TileSourceTemplate tm, boolean override) throws IOException{
 		File metainfo = new File(dir, ".metainfo"); //$NON-NLS-1$
 		Map<String, String> properties = new LinkedHashMap<String, String>();
-		if(tm instanceof BeanshellSourceTemplate){
+		if(tm instanceof BeanShellTileSourceTemplate){
 			properties.put("rule", RULE_BEANSHELL);
+			properties.put("init_script", ((BeanShellTileSourceTemplate) tm).getInitScript());
 		}
 		if(tm.getUrlTemplate() == null){
 			return;
@@ -280,29 +281,6 @@ public class TileSourceManager {
 		return null;
 	}
 	
-	
-//	public static class WMSSourceTemplate extends TileSourceTemplate {
-//
-//		public WMSSourceTemplate(String name, String wmsUrl) {
-//			super("WMS " + name, wmsUrl, ".jpg", 18, 3, 256, 16, 20000); //$NON-NLS-1$ //$NON-NLS-2$
-//		}
-//		
-//		@Override
-//		public String getUrlToLoad(int x, int y, int zoom) {
-//			double yEnd = MapUtils.getLatitudeFromTile(zoom, y + 1);
-//			double yStart = MapUtils.getLatitudeFromTile(zoom, y );
-//			double xStart = MapUtils.getLongitudeFromTile(zoom, x);
-//			double xEnd = MapUtils.getLongitudeFromTile(zoom, x + 1);
-//			StringBuilder load = new StringBuilder();
-//			load.append(urlToLoad).append("bbox=").append(xStart).append(','). //$NON-NLS-1$
-//				 append(yEnd).append(',').append(xEnd).append(',').append(yStart);
-//			load.append("&srs=EPSG:4326").append("&width=").append(tileSize).append("&height=").append(tileSize); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-//			return load.toString();
-//		}
-//		
-//	}
-
-	
 	public static java.util.List<TileSourceTemplate> getKnownSourceTemplates() {
 		java.util.List<TileSourceTemplate> list = new ArrayList<TileSourceTemplate>();
 		list.add(getMapnikSource());
@@ -310,17 +288,16 @@ public class TileSourceManager {
 		return list;
 
 	}
-	
+
 	public static TileSourceTemplate getMapnikSource(){
 		return new TileSourceTemplate("Mapnik", "http://tile.openstreetmap.org/{0}/{1}/{2}.png", ".png", 18, 1, 256, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 	}
-	
-	
+
 	public static TileSourceTemplate getCycleMapSource(){
 		return new TileSourceTemplate("CycleMap", "http://b.tile.opencyclemap.org/cycle/{0}/{1}/{2}.png", ".png", 17, 0, 256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 	}
-	
-	
+
+
 	public static List<TileSourceTemplate> downloadTileSourceTemplates() {
 		final List<TileSourceTemplate> templates = new ArrayList<TileSourceTemplate>();
 		try {
@@ -404,9 +381,9 @@ public class TileSourceManager {
 	
 	private static TileSourceTemplate createBeanshellTileSourceTemplate(Map<String, String> attributes) {
 		String name = attributes.get("name");
-		String tileScript= attributes.get("tile_script");
+		String urlTemplate = attributes.get("url_template");
 		String initScript = attributes.get("init_script");
-		if (name == null || tileScript == null) {
+		if (name == null || urlTemplate == null) {
 			return null;
 		}
 		int maxZoom = parseInt(attributes, "max_zoom", 18);
@@ -420,22 +397,27 @@ public class TileSourceManager {
 			ellipsoid = true;
 		}
 		TileSourceTemplate templ;
-		templ = new BeanshellSourceTemplate(name, initScript, tileScript, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
+		templ = new BeanShellTileSourceTemplate(name, initScript, urlTemplate, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
 		templ.setEllipticYTile(ellipsoid);
 		return templ;
 	}
 	
 	protected static final char[] NUM_CHAR = { '0', '1', '2', '3' };
 
-	public static class BeanshellSourceTemplate extends TileSourceTemplate {
+	public static class BeanShellTileSourceTemplate extends TileSourceTemplate {
 
 		Interpreter bshInterpreter;
-		protected String tileScript;
+		protected String initScript;
 		
-		public BeanshellSourceTemplate(String name, String initScript, String tileScript, String ext,
+		public String getInitScript() {
+			return initScript;
+		}
+
+		public BeanShellTileSourceTemplate(String name, String initScript, String urlToLoad, String ext,
 				int maxZoom, int minZoom, int tileSize, int bitDensity, int avgSize) {
-			super(name, tileScript, ext, maxZoom, minZoom, tileSize, bitDensity, avgSize);
+			super(name, urlToLoad, ext, maxZoom, minZoom, tileSize, bitDensity, avgSize);
 			bshInterpreter = new Interpreter();
+			this.initScript = initScript;
 			if (initScript != null) {
 				try {
 					bshInterpreter.eval(initScript);
