@@ -1,5 +1,94 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+  <string name="tip_update_index">Index adatok frissítése</string>
+  <string name="tip_update_index_t">Fontos az aktuális térképek megléte. Az Osmand program tartalmaz egy letöltéskezelőt amivel egyszerűen ellenőrizhető, hogy létezik-e frissebb a meglévő index adatokból.
+\n\tA frissítések ellenőrzéséhez a \'Főmenü\'->\'Beállítások\'->\'Adatok kapcsolat nélküli munkához\'->\'Index adatok letöltése\' menüpontot kell választani. Az index adatok internetről való frissítése után a \'Letöltöttek szűrése\' menüt kell választani.
+\nÍgy most már csak a letöltött index adatok jelennek meg a következő színekkel jelölve:
+\n\t\'Zöld\' - azt jelenti, hogy az index állomány megegyezik a szerveren lévővel
+\n\t\'Kék\' - azt jelenti, hogy újabb verzió tölthető le a szerverről</string>
+<string name="level_to_switch_vector_raster_descr">Maximális nagyítási szint vektoros megjelenítéshez raszteres helyett</string>
+<string name="level_to_switch_vector_raster">Vektoros nagyítási szint</string>
+<string name="tip_day_night_mode">Éjjel/Nappali mód</string>
+<string name="tip_day_night_mode_t">A térkép megjelenítése nappali (erős fényviszonyok) vagy éjjeli (gyenge fényviszonyok) használatnak megfelelően megváltoztatható.
+\nÉjjel biztonságosabbak a sötét térkép színek mert nem vakít annyira mint a nappali megjelenítés világos színei.
+\n\tA váltás módja beállítható a \'Főmenü\'->\'Beállítások\'->\'Térkép megjelenítés\'->\'Éjjel/nappali mód\'.
+\nVálasztható:
+\n\t\'Napkelte/Napnyugta\' - automatikus, a Nap pozíciója által vezérelt(alapértelmezett)
+\n\t\'Nappal\' - mindig nappali módot használ
+\n\t\'Éjjel\' - mindig éjjeli módot használ
+\n\t\'Fényérzékelő\' - a térkép megjelenését az eszköz fényérzékelő szenzora, ha létezik, vezérli.</string>
+<string name="tip_location_sharing">Hely megosztás</string>
+<string name="tip_location_sharing_t">Érdekes helyet találtál az utazásod során és meg akarod osztani a pozíciót a barátoddal, családoddal?
+\nOsmAnd lehetőséget biztosít, hogy megoszthass másokkal minden helyet amit csak akarsz.
+\n\tVálaszd a \'Térkép menű\'->\'Hely megosztása\' pontot.
+\nEzután meg kell határoznod milyen módon szeretnéd mással megosztani a koordinátákat. Lehetséges választás: E-Mail, SMS vagy a koordináták másolása a vágólapra.</string>
+<string name="tip_favorites">Kedvencek</string>
+<string name="tip_favorites_t">Ha hosszadalmas a sűrűn használt helyek előkeresése, hozzá lehet adni a Kedvencekhez, utána pár kattintással előkereshető.
+\n\tKedvenc pont hozzáadásához a térkép menüjébe kell belépni és a \'Hozzáadás a kedvencekhez\'-et kell választani és egy megfelelő névvel kell ellátni. Mentés után egyszerűen a \'Főmenü\'->\'Kedvencek\' menüponton keresztül érhető el.
+\n\tA \'Kedvencek\' menüben a pontra hosszan rányomva navigálhatunk a ponthoz, szerkeszthetjük vagy törölhetjük.
+\n\tA térképen minden kedvenc pont megjelenítéséhez engedélyezni kell a \'Kedvencek\' réteget a \'Térkép menü\'->\'Rétegek\' pontjában.</string>
+<string name="tip_osm_improve">Openstreetmap fejlesztése</string>
+<string name="tip_osm_improve_t">OsmAnd nem csak hogy az Openstreetmap.org-ról használ adatokat, amit nem csak útvonal tervezéshez lehet használni, hanem az adatok kiegészítéséhez, javításához, az Openstreetmap.org fejlesztéséhez is megfelelő. Egyszerűen feltölthető pár kattintással új POI vagy „OSM bug”!
+\nElőször is meg kell adni a bejelentkező információkat a \'Főmenü\'->\'Beállítások\'->\'OSM\' résznél.
+\n\tÚj POI létrehozásához térkép nézetben a menüből ki kell választani a \'POI készítés\' pontot. Ezután meg lehet adni az információkat az új POI-ról majd \'Alkalmaz\'-zal el lehet menteni.
+\n\tHa hibás a térkép, jelezhető a hiba és az Openstreetmap közösség gyorsan javítani tudja.
+\n\tHiba bejelntésére a \'Térkép menü\' -> \'OSM bug megnyitása\' menüpont használható. A megjelenő űrlapon részletesen le kell írni a hibát és a \'Hozzáad\' gombbal kell küldeni.
+\n\tNem szabad elfelejteni, hogy mindehhez internetkapcsolatra van szükség!</string>
+<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
+    <string name="error_doing_search">Hiba történt a kapcsolat nélküli keresésben</string>
+    <string name="search_offline_geo_error">Could not parse geo intent:{0}</string>
+<string name="search_osm_offline">Cím keresése kapcsolat nélkül működő térképpel</string>
+
+<string name="system_locale">Rendszer nyelve</string>
+<string name="preferred_locale_descr">Képernyőn megjelenő szöveg nyelvének megváltoztatása</string>
+<string name="preferred_locale">Előnyben részesített nyelv</string>
+<string name="tip_map_switch">Térkép forrás</string>
+<string name="tip_map_switch_t">A térkép forrásának és rétegeknek a cseréjére a leggyorsabb megoldás a \'Térkép menü\'->\'Rétegek\' menüpont.
+\n\t\'Térkép forrás...\' alatt lehet választani az előre definiált térképek és az OsmAndMapCreator által PC-n készített térképek között.
+\n\tOsmAnd egyéni forrásokat is támogat.</string>
+<string name="tip_app_mode">Működési mód</string>
+<string name="tip_app_mode_t">OsmAnd alkalmazás több tipikus megjelenítési módot támogat különböző felhasználási esetekre.
+\n\tA mód kiválasztható a  \'Főmenü\'->\'Beállítások\'->\'Működési mód\' alatt.</string>
+<string name="tip_navigation">Navigáció</string>
+<string name="tip_navigation_t">A navigáció bekapcsolásához először ki kell választani a cél helyet. Ezután a \'Térkép menü\'->\'Útirány\' menüt kell választani és megjelölni a közlekedési formát.</string>
+<string name="tip_select_destination_point">Cél hely kiválasztása</string>
+<string name="tip_select_destination_point_t">A cél helyet a \'Térkép menü\'->\'Ponthoz vezet\' pontjával vagy cím kereséssel lehet meghatározni (\'Vezess ide\').
+\n\tKedvenc ponthoz a \'Főmenü\'->\'Kedvencek\' menüpont alatt a pontra hosszan rányomva lehet navigálni.</string>
+<string name="tip_search">Cím keresés</string>
+<string name="tip_search_t">A térképen helyet keresni cím alapján vagy koordináta alapján, esetleg mint POI vagy Kedvenc pont lehet.
+\n\t\'Keresés\' menüvel lehet keresni. Két lehetőség közül lehet választani: \'Vezess ide\' vagy \'Térképen mutat\'.</string>
+<string name="tip_map_context_menu">Térkép menü</string>
+<string name="tip_map_context_menu_t">\tA térkép menü a térképen egy pont hosszú megnyomásával vagy a \'track ball\' gomb megnyomásával érhető el.
+\n\tA térképen a pont megnyomása után egy szövegmező jelenik meg, a menü eléréséhez ezt meg kell nyomni. A szövegmező eltüntetéséhez azt hosszan kell megnyomni. A térkép menü a térkép nézetben a \'Menü\' gomb megnyomásával is elérhető.
+\n\tA térkép menü olyan elemekből áll ami a térkép felhasználó által megadott pontját használja fel.</string>
+<string name="tip_desctination_point">Cél</string>
+<string name="tip_desctination_point_t">\tOsmAnd a cél helyét egy piros ponttal jelöli meg a térképen.
+\n\tA távolság és az irány (piros háromszög) a céltól mindig látható a térképen. Bármelyik pont kijelölhető célnak a \'Ponthoz vezet\' vagy \'Vezess ide\' kiválasztásával.
+\n\tEz a lehetőség minden keresésnél elérhető vagy a \'Térkép menü\'-ből vagy a térkép objektum hosszú megnyomásával.
+A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanavigáláshoz.</string>
+<string name="tip_initial">Tippek és trükkök</string>
+<string name="tip_initial_t">\tAz OsmAnd navigációs alkalmazás sok lehetőséggel rendelkezik.
+\n\tA gyorsabb megértés érdekében ajánlott a tippek és trükkök elolvasása ami egy linken keresztül elérhető a főmenüből.</string>
+<string name="next_button">Következő</string>
+<string name="previous_button">Előző</string>
+
+<string name="unit_of_length_descr">Hosszúság és sebesség mértékegységének megváltoztatása</string>
+<string name="unit_of_length">Hossz mértékegység</string>
+<string name="si_mi_foots">Mérföld/láb</string>
+<string name="si_mi_yard">Mérföld/yard</string>
+<string name="si_km_m">Kilométer/méter</string>
+<string name="yard">yd</string>
+<string name="foot">láb</string>
+<string name="mile_per_hour">mph</string>
+<string name="mile">mi</string>
+<string name="send_location_way_choose_title">Hely megosztásának módja</string>
+<string name="send_location_sms_pattern">Itt vagyok / I\'m here : {0}\n{1}</string>
+<string name="send_location_email_pattern">A hely megjelenítéséhez kattints a {0} linkre a webböngészőben vagy az Androidra szánt linkre {1}\n\nTo see location follow the web browser link {0} or android intent link {1}</string>
+<string name="send_location">Hely pozíció elküldése</string>
+<string name="context_menu_item_share_location">Hely megosztása</string>
+<string name="add_waypoint_dialog_added">Sikeres útpont felvétel: \'\'{0}\'\'</string>
+<string name="add_waypoint_dialog_title">Útpont hozzáadása a felvett GPX útvonalhoz</string>
+<string name="context_menu_item_add_waypoint"Gpx útpont hozzáadás</string>
 	<string name="amenity_type_administrative">Adminisztráció</string>
 	<string name="amenity_type_barrier">Határ</string>
 	<string name="amenity_type_education">Oktatás</string>
