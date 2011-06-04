@@ -41,14 +41,18 @@ public class AnimateDraggingMapThread {
 	
 	
 	
-	private void pendingRotateAnimation() throws InterruptedException {
-		boolean conditionToCountinue = true;
-		while (conditionToCountinue && !stopped) {
+	private void pendingRotateAnimation() {
+		boolean conditionToCountinue = false;
+		do {
 			conditionToCountinue = false;
 			float rotationDiff = MapUtils.unifyRotationDiff(tileView.getRotate(), targetRotate);
 			float absDiff = Math.abs(rotationDiff);
 			if (absDiff > 0) {
-				Thread.sleep(DEFAULT_SLEEP_TO_REDRAW);
+				try {
+					Thread.sleep(DEFAULT_SLEEP_TO_REDRAW);
+				} catch (InterruptedException e) {
+					//do nothing
+				}
 				if (absDiff < 1) {
 					tileView.rotateToAnimate(targetRotate);
 				} else {
@@ -56,7 +60,7 @@ public class AnimateDraggingMapThread {
 					tileView.rotateToAnimate(rotationDiff / 5 + tileView.getRotate());
 				}
 			}
-		}
+		} while (conditionToCountinue);
 	}
 	
 
@@ -159,11 +163,7 @@ public class AnimateDraggingMapThread {
 					animatingZoomInThread(moveZoom, endZoom, ZOOM_MOVE_ANIMATION_TIME, notifyListener);
 				}
 				
-				try {
-					pendingRotateAnimation();
-				} catch (InterruptedException e) {
-				}
-				
+				pendingRotateAnimation();
 			}
 		});
 	}
@@ -243,10 +243,7 @@ public class AnimateDraggingMapThread {
 			public void run() {
 				setTargetValues(zoomEnd, tileView.getLatitude(), tileView.getLongitude());
 				animatingZoomInThread(zoomStart, zoomEnd, animationTime, notifyListener);
-				try {
-					pendingRotateAnimation();
-				} catch (InterruptedException e) {
-				}
+				pendingRotateAnimation();
 			}
 		}); //$NON-NLS-1$
 	}
@@ -286,10 +283,7 @@ public class AnimateDraggingMapThread {
 						stopped = true;
 					}
 				}
-				try {
-					pendingRotateAnimation();
-				} catch (InterruptedException e) {
-				}
+				pendingRotateAnimation();
 			}
 		}); //$NON-NLS-1$
 	}
@@ -314,10 +308,7 @@ public class AnimateDraggingMapThread {
 				@Override
 				public void run() {
 					targetRotate = rotate;
-					try {
-						pendingRotateAnimation();
-					} catch (InterruptedException e) {
-					}
+					pendingRotateAnimation();
 				}
 			});
 		} else {
