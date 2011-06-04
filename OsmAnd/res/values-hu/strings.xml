@@ -88,7 +88,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 <string name="context_menu_item_share_location">Hely megosztása</string>
 <string name="add_waypoint_dialog_added">Sikeres útpont felvétel: \'\'{0}\'\'</string>
 <string name="add_waypoint_dialog_title">Útpont hozzáadása a felvett GPX útvonalhoz</string>
-<string name="context_menu_item_add_waypoint"Gpx útpont hozzáadás</string>
+<string name="context_menu_item_add_waypoint">Gpx útpont hozzáadás</string>
 	<string name="amenity_type_administrative">Adminisztráció</string>
 	<string name="amenity_type_barrier">Határ</string>
 	<string name="amenity_type_education">Oktatás</string>
