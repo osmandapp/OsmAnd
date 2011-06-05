@@ -69,6 +69,9 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		for(TileSourceTemplate t : list){
 			map.put(t.getName(), t);
 		}
+		if (!dir.isDirectory()) {
+			return map;
+		}
 		for(File f : dir.listFiles()){
 			if(f.isDirectory()){
 				if(map.containsKey(f.getName())){
