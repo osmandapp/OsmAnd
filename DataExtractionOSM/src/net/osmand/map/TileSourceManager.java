@@ -198,7 +198,6 @@ public class TileSourceManager {
 		Map<String, String> properties = new LinkedHashMap<String, String>();
 		if(tm instanceof BeanShellTileSourceTemplate){
 			properties.put("rule", RULE_BEANSHELL);
-			properties.put("init_script", ((BeanShellTileSourceTemplate) tm).getInitScript());
 		}
 		if(tm.getUrlTemplate() == null){
 			return;
@@ -382,7 +381,6 @@ public class TileSourceManager {
 	private static TileSourceTemplate createBeanshellTileSourceTemplate(Map<String, String> attributes) {
 		String name = attributes.get("name");
 		String urlTemplate = attributes.get("url_template");
-		String initScript = attributes.get("init_script");
 		if (name == null || urlTemplate == null) {
 			return null;
 		}
@@ -397,7 +395,7 @@ public class TileSourceManager {
 			ellipsoid = true;
 		}
 		TileSourceTemplate templ;
-		templ = new BeanShellTileSourceTemplate(name, initScript, urlTemplate, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
+		templ = new BeanShellTileSourceTemplate(name, urlTemplate, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
 		templ.setEllipticYTile(ellipsoid);
 		return templ;
 	}
@@ -407,23 +405,15 @@ public class TileSourceManager {
 	public static class BeanShellTileSourceTemplate extends TileSourceTemplate {
 
 		Interpreter bshInterpreter;
-		protected String initScript;
 		
-		public String getInitScript() {
-			return initScript;
-		}
-
-		public BeanShellTileSourceTemplate(String name, String initScript, String urlToLoad, String ext,
+		public BeanShellTileSourceTemplate(String name, String urlToLoad, String ext,
 				int maxZoom, int minZoom, int tileSize, int bitDensity, int avgSize) {
 			super(name, urlToLoad, ext, maxZoom, minZoom, tileSize, bitDensity, avgSize);
 			bshInterpreter = new Interpreter();
-			this.initScript = initScript;
-			if (initScript != null) {
-				try {
-					bshInterpreter.eval(initScript);
-				} catch (bsh.EvalError e) {
-					log.error("Error executing the map init script " + initScript, e);
-				}
+			try {
+				bshInterpreter.eval(urlToLoad);
+			} catch (bsh.EvalError e) {
+				log.error("Error executing the map init script " + urlToLoad, e);
 			}
 		}
 
@@ -433,7 +423,7 @@ public class TileSourceManager {
 				bshInterpreter.set("x", x);
 				bshInterpreter.set("y", y);
 				bshInterpreter.set("z", zoom);
-				bshInterpreter.eval(urlToLoad);
+				bshInterpreter.eval("url = getTileUrl(z, x, y);");
 				return (String) bshInterpreter.get("url");
 			} catch (bsh.EvalError e) {
 				return null;
