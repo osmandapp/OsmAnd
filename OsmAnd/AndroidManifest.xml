@@ -49,6 +49,7 @@
 			<intent-filter><action android:name="net.osmand.plus.NavigationService"></action></intent-filter>
 		</service>
 		<receiver android:name=".OnNavigationServiceAlarmReceiver"/>
+		<activity android:name=".activities.InitTTSActivity"></activity>
 </application>
 
 

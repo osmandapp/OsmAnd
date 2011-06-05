@@ -2,8 +2,9 @@ package net.osmand.plus.activities;
 
 import net.osmand.plus.activities.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.activities.RoutingHelper.TurnType;
+import net.osmand.plus.voice.AbstractPrologCommandPlayer;
+import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
-import net.osmand.plus.voice.CommandPlayer.CommandBuilder;
 
 
 public class VoiceRouter {
@@ -227,17 +228,17 @@ public class VoiceRouter {
 	
 	private String getTurnType(TurnType t){
 		if(TurnType.TL.equals(t.getValue())){
-			return CommandPlayer.A_LEFT;
+			return AbstractPrologCommandPlayer.A_LEFT;
 		} else if(TurnType.TSHL.equals(t.getValue())){
-			return CommandPlayer.A_LEFT_SH;
+			return AbstractPrologCommandPlayer.A_LEFT_SH;
 		} else if(TurnType.TSLL.equals(t.getValue())){
-			return CommandPlayer.A_LEFT_SL;
+			return AbstractPrologCommandPlayer.A_LEFT_SL;
 		} else if(TurnType.TR.equals(t.getValue())){
-			return CommandPlayer.A_RIGHT;
+			return AbstractPrologCommandPlayer.A_RIGHT;
 		} else if(TurnType.TSHR.equals(t.getValue())){
-			return CommandPlayer.A_RIGHT_SH;
+			return AbstractPrologCommandPlayer.A_RIGHT_SH;
 		} else if(TurnType.TSLR.equals(t.getValue())){
-			return CommandPlayer.A_RIGHT_SL;
+			return AbstractPrologCommandPlayer.A_RIGHT_SL;
 		}
 		return null;
 	}

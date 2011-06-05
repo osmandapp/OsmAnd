@@ -24,10 +24,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.voice.CommandPlayer;
+import net.osmand.plus.voice.CommandPlayerException;
+import net.osmand.plus.voice.CommandPlayerFactory;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Application;
 import android.app.ProgressDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -211,30 +213,35 @@ public class OsmandApplication extends Application {
 		
 	}
 
-	private void initVoiceDataInDifferentThread(Context uiContext) {
-		final ProgressDialog dlg = ProgressDialog.show(uiContext, getString(R.string.loading_data), getString(R.string.voice_data_initializing));
+	private void initVoiceDataInDifferentThread(final Context uiContext) {
+//		final ProgressDialog dlg = ProgressDialog.show(uiContext,
+//				getString(R.string.loading_data),
+//				getString(R.string.voice_data_initializing));
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				String w = null;
 				try {
-					w = initCommandPlayer();
-				} finally {
-					dlg.dismiss();
-				}
-				if(w != null){
-					showWarning(dlg.getContext(), w);
+					initCommandPlayer();
+//					dlg.dismiss();
+				} catch (CommandPlayerException e) {
+//					dlg.dismiss();
+					showWarning(uiContext, e.getError());
 				}
 			}
 		}).start();
 	}
 	
-	public String initCommandPlayer() {
-		if (player == null) {
-			player = new CommandPlayer(OsmandApplication.this);
+	public void initCommandPlayer()
+		throws CommandPlayerException
+	{
+		final String voiceProvider = osmandSettings.VOICE_PROVIDER.get();
+		if (player == null || !Algoritms.objectEquals(voiceProvider, player.getCurrentVoice())) {
+			if (player != null) {
+				player.clear();
+			}
+			player = CommandPlayerFactory.createCommandPlayer(voiceProvider,OsmandApplication.this, getApplicationContext());
 			routingHelper.getVoiceRouter().setPlayer(player);
 		}
-		return player.init(osmandSettings.VOICE_PROVIDER.get());
 	}
 	
 	public NavigationService getNavigationService() {
