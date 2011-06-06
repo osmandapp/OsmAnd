@@ -214,17 +214,17 @@ public class OsmandApplication extends Application {
 	}
 
 	private void initVoiceDataInDifferentThread(final Context uiContext) {
-//		final ProgressDialog dlg = ProgressDialog.show(uiContext,
-//				getString(R.string.loading_data),
-//				getString(R.string.voice_data_initializing));
+		final ProgressDialog dlg = ProgressDialog.show(uiContext,
+				getString(R.string.loading_data),
+				getString(R.string.voice_data_initializing));
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				try {
 					initCommandPlayer();
-//					dlg.dismiss();
+					dlg.dismiss();
 				} catch (CommandPlayerException e) {
-//					dlg.dismiss();
+					dlg.dismiss();
 					showWarning(uiContext, e.getError());
 				}
 			}

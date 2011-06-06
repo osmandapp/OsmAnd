@@ -23,6 +23,7 @@ import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.activities.RouteProvider.RouteService;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.views.SeekBarPreference;
+import net.osmand.plus.voice.CommandPlayerFactory;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -144,6 +145,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     @Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		CommandPlayerFactory.onActivityInit(this);
 		addPreferencesFromResource(R.xml.settings_pref);
 		String[] entries;
 		String[] entrieValues;
@@ -299,6 +301,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerReceiver(broadcastReceiver, new IntentFilter(NavigationService.OSMAND_STOP_SERVICE_ACTION));
     }
 
+    @Override
+    protected void onPause() {
+    	super.onPause();
+    	CommandPlayerFactory.onActivityStop(this);
+    }
+    
 	private void updateApplicationDirTextAndSummary() {
 		String storageDir = osmandSettings.getExternalStorageDirectory().getAbsolutePath();
 		applicationDir.setText(storageDir);
@@ -309,12 +317,14 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     protected void onResume() {
 		super.onResume();
 		updateAllSettings();
+		CommandPlayerFactory.onActivityInit(this);
 	}
     
     @Override
     protected void onDestroy() {
     	super.onDestroy();
     	unregisterReceiver(broadcastReceiver);
+    	CommandPlayerFactory.onActivityStop(this);
     }
     
     
