@@ -10,6 +10,7 @@ import net.osmand.LogUtil;
 
 import org.apache.commons.logging.Log;
 
+import android.app.Activity;
 import android.content.Context;
 import android.media.MediaPlayer;
 
@@ -36,6 +37,16 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	{
 		super(ctx, voiceProvider, CONFIG_FILE);
 		mediaPlayer = new MediaPlayer();
+	}
+	
+	@Override
+	public void onActivityInit(Activity ctx) {
+		//do nothing here
+	}
+	
+	@Override
+	public void onActvitiyStop(Activity ctx) {
+		//do nothing here
 	}
 	
 	@Override
