@@ -6,7 +6,7 @@ GIT_ORIGIN_NAME=origin
 BUILD_DIR="$DIRECTORY"/builds
 LATESTS_DIR="$DIRECTORY"/latests
 VERSION_FILE=./DataExtractionOSM/src/net/osmand/Version.java 
-DATE=$(date +%y-%m-%d)
+DATE=$(date +%Y-%m-%d)
 SHORT_DATE=$(date +%d-%m)
 
 # clean all files in build directory
