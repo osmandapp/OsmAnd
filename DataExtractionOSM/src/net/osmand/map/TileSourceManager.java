@@ -202,9 +202,6 @@ public class TileSourceManager {
 			properties.put("map_type", ((MicrosoftTileSourceTemplate) tm).getMapTypeChar()+"");
 			properties.put("map_ext", ((MicrosoftTileSourceTemplate) tm).getTileType());
 		} else {
-			if(tm instanceof CykloatlasSourceTemplate){
-				properties.put("rule", RULE_CYCLOATLAS);
-			}
 			if(tm.getUrlTemplate() == null){
 				return;
 			}
@@ -331,7 +328,7 @@ public class TileSourceManager {
 	public static List<TileSourceTemplate> downloadTileSourceTemplates() {
 		final List<TileSourceTemplate> templates = new ArrayList<TileSourceTemplate>();
 		try {
-			URLConnection connection = new URL("http://download.osmand.net/tile_sources.php").openConnection();
+			URLConnection connection = new URL("http://download.osmand.net//tile_sources.php").openConnection();
 			final SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
 			saxParser.parse(connection.getInputStream(), new DefaultHandler(){
 				@Override
@@ -373,10 +370,8 @@ public class TileSourceManager {
 	private static TileSourceTemplate createTileSourceTemplate(Map<String, String> attrs) {
 		TileSourceTemplate template = null;
 		String rule = attrs.get("rule");
-		if(rule == null){
-			template = createSimpleTileSourceTemplate(attrs, false);
-		} else if(RULE_CYCLOATLAS.equalsIgnoreCase(rule)){
-			template = createSimpleTileSourceTemplate(attrs, true);
+		if(rule == null || RULE_CYCLOATLAS.equalsIgnoreCase(rule)){
+			template = createSimpleTileSourceTemplate(attrs);
 		} else if (RULE_MICROSOFT.equalsIgnoreCase(rule)) {
 			template = createMicrofsoftTileSourceTemplate(attrs);
 		} else if (RULE_WMS.equalsIgnoreCase(rule)) {
@@ -390,7 +385,7 @@ public class TileSourceManager {
 		return template;
 	}
 
-	private static TileSourceTemplate createSimpleTileSourceTemplate(Map<String, String> attributes, boolean cycloAtlas) {
+	private static TileSourceTemplate createSimpleTileSourceTemplate(Map<String, String> attributes) {
 		String name = attributes.get("name");
 		String urlTemplate = attributes.get("url_template");
 		if (name == null || urlTemplate == null) {
@@ -407,12 +402,7 @@ public class TileSourceManager {
 		if (Boolean.parseBoolean(attributes.get("ellipsoid"))) {
 			ellipsoid = true;
 		}
-		TileSourceTemplate templ;
-		if (cycloAtlas) {
-			templ = new CykloatlasSourceTemplate(name, urlTemplate, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
-		} else {
-			templ = new TileSourceTemplate(name, urlTemplate, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
-		}
+		TileSourceTemplate templ = new TileSourceTemplate(name, urlTemplate, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
 		templ.setEllipticYTile(ellipsoid);
 		return templ;
 	}
@@ -521,26 +511,5 @@ public class TileSourceManager {
 		
 	}
 	
-	public static class CykloatlasSourceTemplate extends TileSourceTemplate {
-
-		public CykloatlasSourceTemplate(String name, String urlToLoad, String ext, int maxZoom, int minZoom, int tileSize, int bitDensity,
-				int avgSize) {
-			super(name, urlToLoad, ext, maxZoom, minZoom, tileSize, bitDensity, avgSize);
-		}
-
-		@Override
-		public String getUrlToLoad(int x, int y, int zoom) {
-			String z = Integer.toString(zoom);
-			// use int to string not format numbers! (non-nls)
-			if(urlToLoad == null){
-				return null;
-			}
-			if (zoom >= 13)
-				z += "c";
-			return MessageFormat.format(urlToLoad, z, x+"", y+""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		}
-		
-	}
-
 	
 }
