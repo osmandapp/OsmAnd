@@ -103,6 +103,9 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		
 		tiles.add(downloadedMenu);
 		for(final TileSourceTemplate l : udf.values()){
+			if(l == null){
+				continue;
+			}
 			JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(l.getName());
 			tiles.add(menuItem);
 			items.put(l, menuItem);
@@ -124,6 +127,9 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		}
 		
 		for(final TileSourceTemplate l : downloaded){
+			if(l == null){
+				continue;
+			}
 			JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(l.getName());
 			downloadedMenu.add(menuItem);
 			items.put(l, menuItem);
