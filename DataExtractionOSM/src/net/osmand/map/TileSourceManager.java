@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
@@ -28,15 +29,13 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import bsh.Interpreter;
 
 
 public class TileSourceManager {
 	private static final Log log = LogUtil.getLog(TileSourceManager.class);
-	private static final String RULE_CYCLOATLAS = "cykloatlas_cz";
+	private static final String RULE_BEANSHELL = "beanshell";
 	private static final String RULE_WMS = "wms_tile";
-	private static final String RULE_MICROSOFT = "microsoft";
-	
-	
 
 	public static class TileSourceTemplate implements ITileSource {
 		private int maxZoom;
@@ -49,6 +48,7 @@ public class TileSourceManager {
 		private int bitDensity;
 		private boolean ellipticYTile;
 		private String rule;
+		private boolean isRuleAcceptable = true;
 
 		public TileSourceTemplate(String name, String urlToLoad, String ext, int maxZoom, int minZoom, int tileSize, int bitDensity,
 				int avgSize) {
@@ -103,6 +103,14 @@ public class TileSourceManager {
 		public String getTileFormat() {
 			return ext;
 		}
+		
+		public boolean isRuleAcceptable() {
+			return isRuleAcceptable;
+		}
+		
+		public void setRuleAcceptable(boolean isRuleAcceptable) {
+			this.isRuleAcceptable = isRuleAcceptable;
+		}
 
 		@Override
 		public String getUrlToLoad(int x, int y, int zoom) {
@@ -121,6 +129,7 @@ public class TileSourceManager {
 		public boolean couldBeDownloadedFromInternet() {
 			return urlToLoad != null;
 		}
+		
 
 		@Override
 		public int hashCode() {
@@ -194,33 +203,30 @@ public class TileSourceManager {
 		}
 	}
 	
-	public static void createMetaInfoFile(File dir, TileSourceTemplate tm, boolean override) throws IOException{
+	public static void createMetaInfoFile(File dir, TileSourceTemplate tm, boolean override) throws IOException {
 		File metainfo = new File(dir, ".metainfo"); //$NON-NLS-1$
 		Map<String, String> properties = new LinkedHashMap<String, String>();
-		if(tm instanceof MicrosoftTileSourceTemplate){
-			properties.put("rule", RULE_MICROSOFT);
-			properties.put("map_type", ((MicrosoftTileSourceTemplate) tm).getMapTypeChar()+"");
-			properties.put("map_ext", ((MicrosoftTileSourceTemplate) tm).getTileType());
-		} else {
-			if(tm.getUrlTemplate() == null){
-				return;
-			}
-			properties.put("url_template", tm.getUrlTemplate());
+		if (tm instanceof BeanShellTileSourceTemplate) {
+			properties.put("rule", RULE_BEANSHELL);
 		}
-		
+		if (tm.getUrlTemplate() == null) {
+			return;
+		}
+		properties.put("url_template", tm.getUrlTemplate());
+
 		properties.put("ext", tm.getTileFormat());
-		properties.put("min_zoom", tm.getMinimumZoomSupported()+"");
-		properties.put("max_zoom", tm.getMaximumZoomSupported()+"");
-		properties.put("tile_size", tm.getTileSize()+"");
-		properties.put("img_density", tm.getBitDensity()+"");
-		properties.put("avg_img_size", tm.getAverageSize()+"");
-		
-		if(tm.isEllipticYTile()){
-			properties.put("ellipsoid", tm.isEllipticYTile()+"");
+		properties.put("min_zoom", tm.getMinimumZoomSupported() + "");
+		properties.put("max_zoom", tm.getMaximumZoomSupported() + "");
+		properties.put("tile_size", tm.getTileSize() + "");
+		properties.put("img_density", tm.getBitDensity() + "");
+		properties.put("avg_img_size", tm.getAverageSize() + "");
+
+		if (tm.isEllipticYTile()) {
+			properties.put("ellipsoid", tm.isEllipticYTile() + "");
 		}
 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(metainfo)));
-		for(String key : properties.keySet()){
-			writer.write("["+key+"]\n"+properties.get(key)+"\n");
+		for (String key : properties.keySet()) {
+			writer.write("[" + key + "]\n" + properties.get(key) + "\n");
 		}
 		writer.close();
 	}
@@ -229,13 +235,21 @@ public class TileSourceManager {
 		return new File(dir, ".metainfo").exists() || new File(dir, "url").exists();
 	}
 	
+	/**
+	 * @param dir
+	 * @return doesn't return null 
+	 */
 	public static TileSourceTemplate createTileSourceTemplate(File dir) {
 		// read metainfo file
 		Map<String, String> metaInfo = readMetaInfoFile(dir);
+		boolean ruleAcceptable = true;
 		if(!metaInfo.isEmpty()){
 			metaInfo.put("name", dir.getName());
 			TileSourceTemplate template = createTileSourceTemplate(metaInfo);
-			return template;
+			if(template != null){
+				return template;
+			}
+			ruleAcceptable = false;
 		}
 		
 		// try to find url
@@ -257,8 +271,10 @@ public class TileSourceManager {
 				log.debug("Error reading url " + dir.getName(), e); //$NON-NLS-1$
 			}
 
-		return new TileSourceManager.TileSourceTemplate(dir.getName(), url,
+		TileSourceTemplate template = new TileSourceManager.TileSourceTemplate(dir.getName(), url,
 				ext, 18, 1, 256, 16, 20000); //$NON-NLS-1$
+		template.setRuleAcceptable(ruleAcceptable);
+		return template;
 	}
 
 	private static String findOneTile(File dir) {
@@ -284,29 +300,6 @@ public class TileSourceManager {
 		return null;
 	}
 	
-	
-//	public static class WMSSourceTemplate extends TileSourceTemplate {
-//
-//		public WMSSourceTemplate(String name, String wmsUrl) {
-//			super("WMS " + name, wmsUrl, ".jpg", 18, 3, 256, 16, 20000); //$NON-NLS-1$ //$NON-NLS-2$
-//		}
-//		
-//		@Override
-//		public String getUrlToLoad(int x, int y, int zoom) {
-//			double yEnd = MapUtils.getLatitudeFromTile(zoom, y + 1);
-//			double yStart = MapUtils.getLatitudeFromTile(zoom, y );
-//			double xStart = MapUtils.getLongitudeFromTile(zoom, x);
-//			double xEnd = MapUtils.getLongitudeFromTile(zoom, x + 1);
-//			StringBuilder load = new StringBuilder();
-//			load.append(urlToLoad).append("bbox=").append(xStart).append(','). //$NON-NLS-1$
-//				 append(yEnd).append(',').append(xEnd).append(',').append(yStart);
-//			load.append("&srs=EPSG:4326").append("&width=").append(tileSize).append("&height=").append(tileSize); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-//			return load.toString();
-//		}
-//		
-//	}
-
-	
 	public static java.util.List<TileSourceTemplate> getKnownSourceTemplates() {
 		java.util.List<TileSourceTemplate> list = new ArrayList<TileSourceTemplate>();
 		list.add(getMapnikSource());
@@ -314,17 +307,16 @@ public class TileSourceManager {
 		return list;
 
 	}
-	
+
 	public static TileSourceTemplate getMapnikSource(){
 		return new TileSourceTemplate("Mapnik", "http://tile.openstreetmap.org/{0}/{1}/{2}.png", ".png", 18, 1, 256, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 	}
-	
-	
+
 	public static TileSourceTemplate getCycleMapSource(){
 		return new TileSourceTemplate("CycleMap", "http://b.tile.opencyclemap.org/cycle/{0}/{1}/{2}.png", ".png", 17, 0, 256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 	}
-	
-	
+
+
 	public static List<TileSourceTemplate> downloadTileSourceTemplates() {
 		final List<TileSourceTemplate> templates = new ArrayList<TileSourceTemplate>();
 		try {
@@ -370,20 +362,43 @@ public class TileSourceManager {
 	private static TileSourceTemplate createTileSourceTemplate(Map<String, String> attrs) {
 		TileSourceTemplate template = null;
 		String rule = attrs.get("rule");
-		if(rule == null || RULE_CYCLOATLAS.equalsIgnoreCase(rule)){
+		if(rule == null){
 			template = createSimpleTileSourceTemplate(attrs);
-		} else if (RULE_MICROSOFT.equalsIgnoreCase(rule)) {
-			template = createMicrofsoftTileSourceTemplate(attrs);
+		} else if(RULE_BEANSHELL.equalsIgnoreCase(rule)){
+			template = createBeanshellTileSourceTemplate(attrs);
 		} else if (RULE_WMS.equalsIgnoreCase(rule)) {
 			template = createWmsTileSourceTemplate(attrs);
 		} else {
 			// TODO rule == yandex_traffic
+			return null;
 		}
 		if(template != null){
 			template.setRule(rule);
 		}
 		return template;
 	}
+	
+	
+	private static TileSourceTemplate createWmsTileSourceTemplate(Map<String, String> attributes) {
+		String name = attributes.get("name");
+		String layer = attributes.get("layer");
+		String urlTemplate = attributes.get("url_template");
+		
+		if (name == null || urlTemplate == null || layer == null) {
+			return null;
+		}
+		int maxZoom = parseInt(attributes, "max_zoom", 18);
+		int minZoom = parseInt(attributes, "min_zoom", 5);
+		int tileSize = parseInt(attributes, "tile_size", 256);
+		String ext = attributes.get("ext") == null ? ".jpg" : attributes.get("ext");
+		int bitDensity = parseInt(attributes, "img_density", 16);
+		int avgTileSize = parseInt(attributes, "avg_img_size", 18000);
+		urlTemplate = " http://whoots.mapwarper.net/tms/{0}/{1}/{2}/"+layer+"/"+urlTemplate;
+		TileSourceTemplate templ = new TileSourceTemplate(name, urlTemplate, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
+		return templ;
+	}
+	
+
 
 	private static TileSourceTemplate createSimpleTileSourceTemplate(Map<String, String> attributes) {
 		String name = attributes.get("name");
@@ -407,30 +422,10 @@ public class TileSourceManager {
 		return templ;
 	}
 	
-	private static TileSourceTemplate createMicrofsoftTileSourceTemplate(Map<String, String> attributes) {
+	private static TileSourceTemplate createBeanshellTileSourceTemplate(Map<String, String> attributes) {
 		String name = attributes.get("name");
-		String mapType = attributes.get("map_type");
-		String mapExt = attributes.get("map_ext");
-		
-		if (name == null || mapExt == null || mapType == null) {
-			return null;
-		}
-		int maxZoom = parseInt(attributes, "max_zoom", 18);
-		int minZoom = parseInt(attributes, "min_zoom", 5);
-		int tileSize = parseInt(attributes, "tile_size", 256);
-		String ext = attributes.get("ext") == null ? ".jpg" : attributes.get("ext");
-		int bitDensity = parseInt(attributes, "img_density", 16);
-		int avgTileSize = parseInt(attributes, "avg_img_size", 18000);
-		TileSourceTemplate templ = new MicrosoftTileSourceTemplate(name, mapType.charAt(0), mapType, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
-		return templ;
-	}
-	
-	private static TileSourceTemplate createWmsTileSourceTemplate(Map<String, String> attributes) {
-		String name = attributes.get("name");
-		String layer = attributes.get("layer");
 		String urlTemplate = attributes.get("url_template");
-		
-		if (name == null || urlTemplate == null || layer == null) {
+		if (name == null || urlTemplate == null) {
 			return null;
 		}
 		int maxZoom = parseInt(attributes, "max_zoom", 18);
@@ -439,77 +434,59 @@ public class TileSourceManager {
 		String ext = attributes.get("ext") == null ? ".jpg" : attributes.get("ext");
 		int bitDensity = parseInt(attributes, "img_density", 16);
 		int avgTileSize = parseInt(attributes, "avg_img_size", 18000);
-		urlTemplate = " http://whoots.mapwarper.net/tms/{0}/{1}/{2}/"+layer+"/"+urlTemplate;
-		TileSourceTemplate templ = new TileSourceTemplate(name, urlTemplate, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
+		boolean ellipsoid = false;
+		if (Boolean.parseBoolean(attributes.get("ellipsoid"))) {
+			ellipsoid = true;
+		}
+		TileSourceTemplate templ;
+		templ = new BeanShellTileSourceTemplate(name, urlTemplate, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
+		templ.setEllipticYTile(ellipsoid);
 		return templ;
 	}
 	
-	
-	
+	public static class BeanShellTileSourceTemplate extends TileSourceTemplate {
 
-	
-	protected static final char[] NUM_CHAR = { '0', '1', '2', '3' };
+		Interpreter bshInterpreter;
+		
+		public BeanShellTileSourceTemplate(String name, String urlToLoad, String ext,
+				int maxZoom, int minZoom, int tileSize, int bitDensity, int avgSize) {
+			super(name, urlToLoad, ext, maxZoom, minZoom, tileSize, bitDensity, avgSize);
+			bshInterpreter = new Interpreter();
+			try {
+				bshInterpreter.eval(urlToLoad);
+				bshInterpreter.getClassManager().setClassLoader(new ClassLoader() {
+					@Override
+					public URL getResource(String resName) {
+						return null;
+					}
+					
+					@Override
+					public InputStream getResourceAsStream(String resName) {
+						return null;
+					}
+					
+					@Override
+					public Class<?> loadClass(String className) throws ClassNotFoundException {
+						throw new ClassNotFoundException("Error requesting " + className);
+					}
+				});
+			} catch (bsh.EvalError e) {
+				log.error("Error executing the map init script " + urlToLoad, e);
+			}
+		}
 
-	/**
-	 * See: http://msdn.microsoft.com/en-us/library/bb259689.aspx
-	 * @param zoom
-	 * @param tilex
-	 * @param tiley
-	 * @return quadtree encoded tile number
-	 * 
-	 */
-	public static String encodeQuadTree(int zoom, int tilex, int tiley) {
-		char[] tileNum = new char[zoom];
-		for (int i = zoom - 1; i >= 0; i--) {
-			// Binary encoding using ones for tilex and twos for tiley. if a bit
-			// is set in tilex and tiley we get a three.
-			int num = (tilex % 2) | ((tiley % 2) << 1);
-			tileNum[i] = NUM_CHAR[num];
-			tilex >>= 1;
-			tiley >>= 1;
-		}
-		return new String(tileNum);
-	}
-	
-	public static class MicrosoftTileSourceTemplate extends TileSourceTemplate {
-
-		private final char mapTypeChar;
-		int serverNum = 0; // 0..3
-		protected String urlBase = ".ortho.tiles.virtualearth.net/tiles/"; //$NON-NLS-1$
-		protected String urlAppend = "?g=45"; //$NON-NLS-1$
-		private final String tileType;
-
-		public MicrosoftTileSourceTemplate(String name, char mapTypeChar , String type, 
-				String ext, int maxZoom, int minZoom, int tileSize, int bitDensity, int avgSize) {
-			super(name, null, ext, maxZoom, minZoom, tileSize, bitDensity, avgSize);
-			this.mapTypeChar = mapTypeChar;
-			this.tileType = type;
-		}
-		
-		public char getMapTypeChar() {
-			return mapTypeChar;
-		}
-		
-		public String getTileType() {
-			return tileType;
-		}
-		
-		
 		@Override
 		public String getUrlToLoad(int x, int y, int zoom) {
-			String tileNum = encodeQuadTree(zoom, x, y);
-//			serverNum = (serverNum + 1) % serverNumMax;
-			return "http://" + mapTypeChar + serverNum + urlBase + mapTypeChar + tileNum + "." //$NON-NLS-1$ //$NON-NLS-2$
-					+ tileType + urlAppend;
-			
-		}
-		
-		@Override
-		public boolean couldBeDownloadedFromInternet() {
-			return true;
+			try {
+				return (String) bshInterpreter.eval(String.format("getTileUrl(%d,%d,%d);", zoom, x, y));
+			} catch (bsh.EvalError e) {
+				log.error(e.getMessage(), e);
+				return null;
+			}
 		}
 		
 	}
 	
+
 	
 }
