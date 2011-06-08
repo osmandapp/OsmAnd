@@ -59,6 +59,15 @@ public class OsmAndFormatter {
 		}
 	}
 	
+	public static String getFormattedAlt (double alt, Context ctx) {
+		OsmandSettings settings = OsmandSettings.getOsmandSettings(ctx);
+		MetricsConstants mc = settings.METRIC_SYSTEM.get();
+		if(mc == MetricsConstants.KILOMETERS_AND_METERS)
+		   return ((int)alt) +" "+ ctx.getString(R.string.m);
+		else 
+		   return ((int)(alt * FOOTS_IN_METER)) +" "+ ctx.getString(R.string.foot);
+	}
+
 	public static String toPublicString(AmenityType t, Context ctx) {
 		switch (t) {
 		case SUSTENANCE:

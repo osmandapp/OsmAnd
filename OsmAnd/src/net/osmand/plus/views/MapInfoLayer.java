@@ -52,8 +52,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 	private RectF boundsForMiniRoute;
 	private RectF boundsForLeftTime;
 	private RectF boundsForSpeed;
-	
-	
+	private RectF boundsForAlt;
 	
 	private String cachedLeftTimeString = null;
 	private long cachedLeftTime = 0;
@@ -62,6 +61,8 @@ public class MapInfoLayer implements OsmandMapLayer {
 	private int cachedMeters = 0;
 	private String cachedSpeedString = null;
 	private float cachedSpeed = 0;
+	private String cachedAltString = null;
+	private double cachedAlt = 0;
 	private int cachedZoom = 0;
 	private String cachedZoomString = ""; //$NON-NLS-1$
 	private int centerMiniRouteY;
@@ -136,6 +137,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		boundsForMiniRoute = new RectF(0, 64, 96, 196);
 		
 		boundsForLeftTime = new RectF(0, 0, 75, 32);
+		boundsForAlt = new RectF(0, 32, 75, 64);
 
 		// Scale to have proper view
 		scaleRect(boundsForCompass);
@@ -144,8 +146,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		scaleRect(boundsForSpeed);
 		scaleRect(boundsForMiniRoute);
 		scaleRect(boundsForLeftTime);
-		
-		
+		scaleRect(boundsForAlt);
 		
 		centerMiniRouteX = (int) (boundsForMiniRoute.width()/2);
 		centerMiniRouteY= (int) (boundsForMiniRoute.top + 3 * boundsForMiniRoute.height() /4);
@@ -241,6 +242,29 @@ public class MapInfoLayer implements OsmandMapLayer {
 				canvas.drawRoundRect(boundsForSpeed, roundCorner, roundCorner, paintBlack);
 				canvas.drawText(cachedSpeedString, boundsForSpeed.left + 8 * scaleCoefficient, boundsForSpeed.bottom - 9f * scaleCoefficient, paintBlack);
 			}
+		}
+		
+		//draw alt
+		if (map.getLastKnownLocation() != null && map.getLastKnownLocation().hasAltitude() ) {
+		cachedAlt = map.getLastKnownLocation().getAltitude();
+		cachedAltString = OsmAndFormatter.getFormattedAlt(cachedAlt,map);
+		
+		boundsForAlt.left = -paintBlack
+		.measureText(cachedAltString)
+		- 10
+		* scaleCoefficient
+		+ boundsForAlt.right;
+		int aw = (int) (boundsForAlt.right - boundsForAlt.left);
+		boundsForAlt.right = view.getWidth();
+		boundsForAlt.left = view.getWidth() - aw;
+		
+		canvas.drawRoundRect(boundsForAlt, roundCorner, roundCorner,
+				paintAlphaGray);
+		canvas.drawRoundRect(boundsForAlt, roundCorner, roundCorner,
+				paintBlack);
+		canvas.drawText(cachedAltString, boundsForAlt.left + 5
+				* scaleCoefficient,
+				boundsForAlt.bottom - 8 * scaleCoefficient, paintBlack);
 		}
 		// draw distance to point
 		if(cachedDistString != null){
