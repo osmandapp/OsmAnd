@@ -18,7 +18,10 @@ touch $LOG_FILE
 "${DIRECTORY}/build_branches.sh" 2>&1 >>$LOG_FILE
 
 # 3. upload to ftp server 
-"${DIRECTORY}/upload_ftp.sh" 2>&1 >>$LOG_FILE
+#"${DIRECTORY}/upload_ftp.sh" 2>&1 >>$LOG_FILE
+
+# 3. upload to ftp server 
+"${DIRECTORY}/copyto_dir.sh" 2>&1 >>$LOG_FILE
 
 # 4. Synchronize github with googlecode mercurial
 "${DIRECTORY}/sync_git_hg.sh" 2>&1 >>$LOG_FILE
