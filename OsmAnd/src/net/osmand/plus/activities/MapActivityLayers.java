@@ -187,7 +187,7 @@ public class MapActivityLayers {
 		trafficLayer.setVisible(settings.SHOW_YANDEX_TRAFFIC.get());
 	}
 	
-	public void updateMapSource(OsmandMapTileView mapView){
+	public void updateMapSource(OsmandMapTileView mapView, CommonPreference<String> settingsToWarnAboutMap){
 		OsmandSettings settings = getApplication().getSettings();
 		
 		// update transparency
@@ -196,16 +196,9 @@ public class MapActivityLayers {
 		mapTileLayer.setAlpha(mapTransparency);
 		mapVectorLayer.setAlpha(mapTransparency);
 		
-		
-		boolean showTiles = !settings.MAP_VECTOR_DATA.get();
 		// update overlay layer
-		updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, 0.7f);
-		updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, -0.5f);
-		
-		ITileSource source = showTiles ? settings.getMapTileSource() : null;
-		if (showTiles == mapTileLayer.isVisible() && Algoritms.objectEquals(mapTileLayer.getMap(), source)) {
-			return;
-		}
+		updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, 0.7f, settings.MAP_OVERLAY == settingsToWarnAboutMap);
+		updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, -0.5f, settings.MAP_UNDERLAY == settingsToWarnAboutMap);
 		
 		boolean vectorData = settings.MAP_VECTOR_DATA.get();
 		OsmandApplication app = ((OsmandApplication)getApplication());
@@ -216,7 +209,7 @@ public class MapActivityLayers {
 				vectorData = false;
 			}
 		}
-		ITileSource newSource = settings.getMapTileSource();
+		ITileSource newSource = settings.getMapTileSource(settings.MAP_TILE_SOURCES == settingsToWarnAboutMap);
 		ITileSource oldMap = mapTileLayer.getMap();
 		if(oldMap instanceof SQLiteTileSource){
 			((SQLiteTileSource)oldMap).closeDB();
@@ -229,15 +222,11 @@ public class MapActivityLayers {
 		} else {
 			mapView.setMainLayer(mapTileLayer);
 		}
-
-		
-
-		
 	}
 
 	private void updateLayer(OsmandMapTileView mapView, OsmandSettings settings,
-			MapTileLayer layer, CommonPreference<String> preference, float layerOrder) {
-		ITileSource overlay = settings.getTileSourceByName(preference.get());
+			MapTileLayer layer, CommonPreference<String> preference, float layerOrder, boolean warnWhenSelected) {
+		ITileSource overlay = settings.getTileSourceByName(preference.get(), warnWhenSelected);
 		if(!Algoritms.objectEquals(overlay, layer.getMap())){
 			if(overlay == null){
 				mapView.removeLayer(layer);
@@ -318,7 +307,7 @@ public class MapActivityLayers {
 				} else if(item == 6){
 					if(overlayLayer.getMap() != null){
 						settings.MAP_OVERLAY.set(null);
-						updateMapSource(mapView);
+						updateMapSource(mapView, null);
 					} else {
 						dialog.dismiss();
 						selectMapOverlayLayer(mapView, settings.MAP_OVERLAY, settings.MAP_OVERLAY_TRANSPARENCY, 
@@ -327,7 +316,7 @@ public class MapActivityLayers {
 				} else if(item == 7){
 					if(underlayLayer.getMap() != null){
 						settings.MAP_UNDERLAY.set(null);
-						updateMapSource(mapView);
+						updateMapSource(mapView, null);
 					} else {
 						dialog.dismiss();
 						selectMapOverlayLayer(mapView, settings.MAP_UNDERLAY,settings.MAP_TRANSPARENCY, 
@@ -494,28 +483,28 @@ public class MapActivityLayers {
 		builder.setItems(items, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if(which == 0){
-					MapRenderRepositories r = ((OsmandApplication)getApplication()).getResourceManager().getRenderer();
-					if(r.isEmpty()){
+				if (which == 0) {
+					MapRenderRepositories r = ((OsmandApplication) getApplication()).getResourceManager().getRenderer();
+					if (r.isEmpty()) {
 						Toast.makeText(activity, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
 						return;
 					} else {
 						settings.MAP_VECTOR_DATA.set(true);
 					}
-					updateMapSource(mapView);
-				} else if (which == items.length - 1){
+					updateMapSource(mapView, null);
+				} else if (which == items.length - 1) {
 					SettingsActivity.installMapLayers(activity, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							openLayerSelectionDialog(mapView);							
+							openLayerSelectionDialog(mapView);
 						}
 					});
 				} else {
 					settings.MAP_TILE_SOURCES.set(keys.get(which - 1));
 					settings.MAP_VECTOR_DATA.set(false);
-					updateMapSource(mapView);
+					updateMapSource(mapView, settings.MAP_TILE_SOURCES);
 				}
-				
+
 			}
 			
 		});
@@ -550,7 +539,7 @@ public class MapActivityLayers {
 				} else {
 					mapPref.set(keys.get(which));
 					mapControlsLayer.showAndHideTransparencyBar(transparencyPref, transparencyToChange);
-					updateMapSource(mapView);
+					updateMapSource(mapView, mapPref);
 				}
 				
 			}

@@ -28,6 +28,7 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
+import android.widget.Toast;
 
 public class OsmandSettings {
 	// GLOBAL instance - make instance global for application
@@ -539,10 +540,10 @@ public class OsmandSettings {
 		return internetAvailableSourceTemplates;
 	}
 	
-	public ITileSource getMapTileSource() {
+	public ITileSource getMapTileSource(boolean warnWhenSelected) {
 		String tileName = MAP_TILE_SOURCES.get();
 		if (tileName != null) {
-			ITileSource ts = getTileSourceByName(tileName);
+			ITileSource ts = getTileSourceByName(tileName, warnWhenSelected);
 			if(ts != null){
 				return ts;
 			}
@@ -551,7 +552,7 @@ public class OsmandSettings {
 	}
 	
 
-	public ITileSource getTileSourceByName(String tileName) {
+	public ITileSource getTileSourceByName(String tileName, boolean warnWhenSelected) {
 		if(tileName == null || tileName.length() == 0){
 			return null;
 		}
@@ -563,6 +564,10 @@ public class OsmandSettings {
 				return new SQLiteTileSource(dir, list);
 			} else if (dir.isDirectory() && !dir.getName().startsWith(".")) {
 				TileSourceTemplate t = TileSourceManager.createTileSourceTemplate(dir);
+				if(!t.isRuleAcceptable()){
+					Toast.makeText(ctx, 
+							ctx.getString(R.string.warning_tile_layer_not_downloadable, dir.getName()), Toast.LENGTH_SHORT).show();
+				}
 				if(!TileSourceManager.isTileSourceMetaInfoExist(dir)){
 					// try to find among other templates
 					List<TileSourceTemplate> templates = getInternetAvailableSourceTemplates();
@@ -579,6 +584,7 @@ public class OsmandSettings {
 						}
 					}
 				}
+				
 				return t;
 			}
 		}

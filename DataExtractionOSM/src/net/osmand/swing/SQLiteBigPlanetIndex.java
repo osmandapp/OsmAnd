@@ -11,6 +11,7 @@ import java.sql.Statement;
 
 import net.osmand.LogUtil;
 import net.osmand.map.ITileSource;
+import net.osmand.map.TileSourceManager.BeanShellTileSourceTemplate;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 
 import org.apache.commons.logging.Log;
@@ -41,7 +42,7 @@ public class SQLiteBigPlanetIndex {
 		
 
 		PreparedStatement pStatement = conn.prepareStatement("INSERT INTO INFO VALUES(?,?,?)");
-		if (template instanceof TileSourceTemplate) {
+		if (template instanceof TileSourceTemplate && !(template instanceof BeanShellTileSourceTemplate)) {
 			pStatement.setInt(1, template.getMinimumZoomSupported());
 			pStatement.setInt(2, template.getMaximumZoomSupported());
 			pStatement.setString(3, ((TileSourceTemplate) template).getUrlTemplate());
