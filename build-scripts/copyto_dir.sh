@@ -2,8 +2,8 @@
 DIRECTORY=$(cd `dirname $0` && pwd)
 
 FTP_SITE=download.osmand.net
-FTP_FOLDER=/home/osmand/www/night-builds
-FTP_LATEST=/home/osmand/www/latest-night-build
+FTP_FOLDER=/var/www-download/night-builds
+FTP_LATEST=/var/www-download/latest-night-build
 # FTP_USER in local.properties
 # FTP_PWD= in local.properties
 BUILD_DIR="$DIRECTORY"/builds
