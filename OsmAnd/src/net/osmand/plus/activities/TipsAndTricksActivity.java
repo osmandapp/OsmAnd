@@ -138,6 +138,7 @@ public class TipsAndTricksActivity {
 				historyInd[0] ++;
 				dlg.setTitle(getTipName(toShow.get(historyInd[0])));
 				tipDescription.setText(getTipDescription(toShow.get(historyInd[0])));
+				tipDescription.scrollTo(0, 0);
 				
 				prevButton.setEnabled(historyInd[0] >  0);
 				nextButton.setEnabled(historyInd[0] < getNumberOfTips() - 1);
@@ -151,6 +152,7 @@ public class TipsAndTricksActivity {
 					historyInd[0] --;
 					dlg.setTitle(getTipName(toShow.get(historyInd[0])));
 					tipDescription.setText(getTipDescription(toShow.get(historyInd[0])));
+					tipDescription.scrollTo(0, 0);
 				}
 				prevButton.setEnabled(historyInd[0] > 0);
 				nextButton.setEnabled(historyInd[0] < getNumberOfTips() - 1);

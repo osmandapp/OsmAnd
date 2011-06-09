@@ -37,8 +37,8 @@
 	 			<ImageView
 					android:src="@drawable/button_icon_map"
 					android:scaleType="center" 
-					android:layout_gravity="top|right"
-					android:layout_marginRight="45dp"
+					android:layout_gravity="center|right"
+					android:layout_marginRight="67dp" android:layout_marginBottom="7dp"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>
 				
@@ -49,9 +49,9 @@
 					<ImageView
 					android:src="@drawable/button_icon_search"
 					android:scaleType="center" 
-					android:layout_gravity="top|left"
+					android:layout_gravity="center|left"
+					android:layout_marginLeft="67dp" android:layout_marginBottom="7dp"
 					android:layout_width="wrap_content"
-					android:layout_marginLeft="53dp"
 					android:layout_height="wrap_content"/>
 					
 					<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
@@ -75,8 +75,8 @@
 	 			<ImageView
 					android:src="@drawable/button_icon_favorites"
 					android:scaleType="center" 
-					android:layout_gravity="top|right"
-					android:layout_marginRight="45dp"
+					android:layout_gravity="center|right"
+					android:layout_marginRight="67dp" android:layout_marginBottom="7dp"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>
 	 		</LinearLayout>
@@ -86,8 +86,8 @@
 					<ImageView
 					android:src="@drawable/button_icon_settings"
 					android:scaleType="center" 
-					android:layout_gravity="top|left"
-					android:layout_marginLeft="53dp"
+					android:layout_gravity="center|left"
+					android:layout_marginLeft="67dp" android:layout_marginBottom="7dp"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>
 					

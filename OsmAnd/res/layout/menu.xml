@@ -12,10 +12,10 @@
   		<ImageView android:src="@drawable/headline_osmand_icon"  
   					android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="8dp"/>
   		<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/AppName"
-  				  android:layout_marginLeft="0dp" android:layout_weight="1" android:layout_marginTop="5dp" 
+  				  android:layout_marginLeft="0dp" android:layout_weight="1" android:layout_marginTop="3dp" 
 				  android:text="OsmAnd+" android:textColor="#000000"	android:typeface="serif" android:textSize="20sp"/>
 		<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
-				  android:layout_marginTop="5dp"
+				  android:layout_marginTop="3dp"
 				  android:text="0.5.1 beta(b6)" android:textColor="#000000"	android:typeface="serif" android:id="@+id/TextVersion"
 				  android:textSize="13sp"/> 
 		<ImageView android:layout_marginRight="12dp" android:clickable="true" android:id="@+id/CloseButton"
@@ -31,7 +31,7 @@
 	 			<ImageView
 					android:src="@drawable/button_icon_map"
 					android:scaleType="center" 
-					android:layout_gravity="center_vertical"
+					android:layout_gravity="center" android:layout_marginRight="20dp" android:layout_marginTop="20dp"
 					android:layout_weight="1"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>
@@ -47,7 +47,7 @@
 					<ImageView
 					android:src="@drawable/button_icon_search"
 					android:scaleType="center" 
-					android:layout_gravity="center_vertical|right"
+					android:layout_gravity="center" android:layout_marginLeft="20dp" android:layout_marginTop="20dp"
 					android:layout_weight="1"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>
@@ -65,7 +65,7 @@
 	 			<ImageView
 					android:src="@drawable/button_icon_favorites"
 					android:scaleType="center" 
-					android:layout_gravity="top"
+					android:layout_gravity="center" android:layout_marginRight="20dp" android:layout_marginTop="20dp"
 					android:layout_weight="1"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>
@@ -81,7 +81,7 @@
 					<ImageView
 					android:src="@drawable/button_icon_settings"
 					android:scaleType="center" 
-					android:layout_gravity="top|right"
+					android:layout_gravity="center" android:layout_marginLeft="20dp" android:layout_marginTop="20dp"
 					android:layout_weight="1"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>

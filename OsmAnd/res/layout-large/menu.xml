@@ -31,7 +31,7 @@
 	 			<ImageView
 					android:src="@drawable/button_icon_map"
 					android:scaleType="center" 
-					android:layout_gravity="center_vertical"
+					android:layout_gravity="center" android:layout_marginRight="30dp" android:layout_marginTop="30dp"
 					android:layout_weight="1"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>
@@ -47,7 +47,7 @@
 					<ImageView
 					android:src="@drawable/button_icon_search"
 					android:scaleType="center" 
-					android:layout_gravity="center_vertical|right"
+					android:layout_gravity="center" android:layout_marginLeft="30dp" android:layout_marginTop="30dp"
 					android:layout_weight="1"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>
@@ -65,7 +65,7 @@
 	 			<ImageView
 					android:src="@drawable/button_icon_favorites"
 					android:scaleType="center" 
-					android:layout_gravity="top"
+					android:layout_gravity="center" android:layout_marginRight="30dp" android:layout_marginTop="30dp"
 					android:layout_weight="1"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>
@@ -81,7 +81,7 @@
 					<ImageView
 					android:src="@drawable/button_icon_settings"
 					android:scaleType="center" 
-					android:layout_gravity="top|right"
+					android:layout_gravity="center" android:layout_marginLeft="30dp" android:layout_marginTop="30dp"
 					android:layout_weight="1"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>
