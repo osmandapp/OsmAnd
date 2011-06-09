@@ -723,7 +723,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}
 		currentScreenOrientation = getWindow().getWindowManager().getDefaultDisplay().getOrientation();
 		
-		mapLayers.updateMapSource(mapView);
+		mapLayers.updateMapSource(mapView, null);
 		updateApplicationModeSettings();
 		
 		mapLayers.getPoiMapLayer().setFilter(settings.getPoiFilterForMap((OsmandApplication) getApplication()));

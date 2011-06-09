@@ -32,7 +32,7 @@ do
         ## reset all previous changes in working tree
         git checkout . 
         git reset HEAD --hard
-        git checkout $BRANCH
+        git checkout -f $BRANCH
         git reset $GIT_ORIGIN_NAME/$BRANCH --hard
 	sed -e "s/\(APP_DESCRIPTION.*=.*\"\).*\(\".*\)/\1$SHORT_DATE $BRANCH\2/g" $VERSION_FILE >  ${VERSION_FILE}.bak
         mv ${VERSION_FILE}.bak ${VERSION_FILE}
