@@ -551,42 +551,62 @@ public class OsmandSettings {
 		return TileSourceManager.getMapnikSource();
 	}
 	
+	private TileSourceTemplate checkAmongAvailableTileSources(File dir, List<TileSourceTemplate> list){
+		for (TileSourceTemplate l : list) {
+			if (dir.getName().equals(l.getName())) {
+				try {
+					dir.mkdirs();
+					TileSourceManager.createMetaInfoFile(dir, l, true);
+				} catch (IOException e) {
+				}
+				return l;
+			}
+			
+		}
+		return null;
+	}
+		
+	
 
 	public ITileSource getTileSourceByName(String tileName, boolean warnWhenSelected) {
 		if(tileName == null || tileName.length() == 0){
 			return null;
 		}
-		List<TileSourceTemplate> list = TileSourceManager.getKnownSourceTemplates();
+		List<TileSourceTemplate> knownTemplates = TileSourceManager.getKnownSourceTemplates();
 		File tPath = extendOsmandPath(ResourceManager.TILES_PATH);
 		File dir = new File(tPath, tileName);
-		if(dir.exists()){
-			if(tileName.endsWith(SQLiteTileSource.EXT)){
-				return new SQLiteTileSource(dir, list);
-			} else if (dir.isDirectory() && !dir.getName().startsWith(".")) {
-				TileSourceTemplate t = TileSourceManager.createTileSourceTemplate(dir);
-				if(!t.isRuleAcceptable()){
-					Toast.makeText(ctx, 
-							ctx.getString(R.string.warning_tile_layer_not_downloadable, dir.getName()), Toast.LENGTH_SHORT).show();
-				}
-				if(!TileSourceManager.isTileSourceMetaInfoExist(dir)){
-					// try to find among other templates
-					List<TileSourceTemplate> templates = getInternetAvailableSourceTemplates();
-					if(templates != null){
-						list.addAll(templates);
-					}
-					for (TileSourceTemplate l : list) {
-						if (l.getName().equals(tileName)) {
-							try {
-								TileSourceManager.createMetaInfoFile(dir, l, true);
-							} catch (IOException e) {
-							}
-							return l;
-						}
-					}
-				}
-				
-				return t;
+		if (!dir.exists()) {
+			TileSourceTemplate ret = checkAmongAvailableTileSources(dir, knownTemplates);
+			if (ret != null) {
+				return ret;
 			}
+			// try to find among other templates
+			ret = checkAmongAvailableTileSources(dir, getInternetAvailableSourceTemplates());
+			if (ret != null) {
+				return ret;
+			}
+		} else if (tileName.endsWith(SQLiteTileSource.EXT)) {
+			return new SQLiteTileSource(dir, knownTemplates);
+		} else if (dir.isDirectory() && !dir.getName().startsWith(".")) {
+			TileSourceTemplate t = TileSourceManager.createTileSourceTemplate(dir);
+			if (warnWhenSelected && !t.isRuleAcceptable()) {
+				Toast.makeText(ctx, ctx.getString(R.string.warning_tile_layer_not_downloadable, dir.getName()), Toast.LENGTH_SHORT).show();
+			}
+			if (!TileSourceManager.isTileSourceMetaInfoExist(dir)) {
+				TileSourceTemplate ret = checkAmongAvailableTileSources(dir, knownTemplates);
+				if (ret != null) {
+					t = ret;
+				} else {
+					// try to find among other templates
+					ret = checkAmongAvailableTileSources(dir, getInternetAvailableSourceTemplates());
+					if (ret != null) {
+						t = ret;
+					}
+				}
+
+			}
+
+			return t;
 		}
 		return null;
 	}
