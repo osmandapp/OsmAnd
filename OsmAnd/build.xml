@@ -114,7 +114,7 @@
 
 
 	<!-- Compiles this project's .java files into .class files. -->
-	<target name="compile" depends="-resource-src, -aidl, -pre-compile" description="Compiles project's .java files into .class files">
+	<target name="compile" depends="-pre-build, -resource-src, -aidl, -pre-compile" description="Compiles project's .java files into .class files">
 		<if condition="${manifest.hasCode}">
 			<then>
 				<!-- If android rules are used for a test project, its classpath should include
