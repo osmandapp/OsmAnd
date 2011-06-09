@@ -1,6 +1,10 @@
 <?php
 function downloadFile($filename) {
-	if (!file_exists($filename)) die('File doesn\'t exist');
+	if (!file_exists($filename)) {
+		header('HTTP/1.0 404 Not Found');
+		//die('File doesn\'t exist');
+		die(1);
+	}
 
 	$from=0; 
 	$cr=NULL;
@@ -67,12 +71,11 @@ function update_count_of_downloads($file) {
 
 
  $file = $_GET['file'];
- $direct = $_GET['direct'];
  if(!isset($_SERVER['HTTP_RANGE']) ) {
   update_count_of_downloads($file) ;
  }
  set_time_limit(0);
- if($direct == 'yes' or !url_exists('http://osmand.googlecode.com/files/'.$file)) {
+ if(isset($_GET['direct']) or !url_exists('http://osmand.googlecode.com/files/'.$file)) {
     downloadFile('indexes/'.$file);
  } else {
     header('HTTP/1.1 302 Found');
