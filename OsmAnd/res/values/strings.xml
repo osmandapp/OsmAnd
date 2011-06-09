@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-	<string name="warning_tile_layer_not_downloadable">Map layer {0} is not downloadable by the application, please try to reinstall it.</string>
+	<string name="warning_tile_layer_not_downloadable">Map layer %1$s is not downloadable by the application, please try to reinstall it.</string>
 	<string name="overlay_transparency_descr">Modify overlay transparency</string>
 	<string name="overlay_transparency">Overlay transparency</string>
 	<string name="map_transparency_descr">Modify base map transparency</string>
