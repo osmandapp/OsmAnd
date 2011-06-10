@@ -70,6 +70,10 @@ function update_count_of_downloads($file) {
 }
 
 
+ if(!isset($_GET['file']) ) {
+   header('HTTP/1.0 404 Not Found');
+   die(1);
+ }
  $file = $_GET['file'];
  if(!isset($_SERVER['HTTP_RANGE']) ) {
   update_count_of_downloads($file) ;
