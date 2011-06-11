@@ -4,10 +4,13 @@ import net.osmand.Algoritms;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.activities.RoutingHelper.TurnType;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -35,8 +38,6 @@ public class MapInfoLayer implements OsmandMapLayer {
 	private boolean showArrivalTime = true; 
 	
 	
-	private Path pathForCompass;
-	private Path pathForCompass2;
 	private Path pathForTurn;
 	
 	private Paint paintBlack;
@@ -74,6 +75,8 @@ public class MapInfoLayer implements OsmandMapLayer {
 	
 	private float scaleCoefficient;
 	private float roundCorner;
+	private Bitmap compass;
+	private Paint paintImg;
 	
 	
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
@@ -94,12 +97,16 @@ public class MapInfoLayer implements OsmandMapLayer {
 			scaleCoefficient *= 1.5f;
 		}
 		
-		roundCorner = 3* scaleCoefficient;
+		roundCorner = 3 * scaleCoefficient;
 		
 		paintBlack.setStyle(Style.STROKE);
 		paintBlack.setColor(Color.BLACK);
 		paintBlack.setTextSize(23 * scaleCoefficient);
 		paintBlack.setAntiAlias(true);
+		
+		paintImg = new Paint();
+		paintImg.setDither(true);
+		paintImg.setAntiAlias(true);
 		
 		paintAlphaGray = new Paint();
 		paintAlphaGray.setStyle(Style.FILL_AND_STROKE);
@@ -145,29 +152,16 @@ public class MapInfoLayer implements OsmandMapLayer {
 		scaleRect(boundsForMiniRoute);
 		scaleRect(boundsForLeftTime);
 		
-		
-		
 		centerMiniRouteX = (int) (boundsForMiniRoute.width()/2);
 		centerMiniRouteY= (int) (boundsForMiniRoute.top + 3 * boundsForMiniRoute.height() /4);
 		scaleMiniRoute = 0.15f;
-		
-		pathForCompass = new Path();
-		pathForCompass.moveTo(9 * scaleCoefficient, 15.5f * scaleCoefficient);
-		pathForCompass.lineTo(22f * scaleCoefficient, 15.5f * scaleCoefficient);
-		pathForCompass.lineTo(15.5f * scaleCoefficient, 30f * scaleCoefficient);
-		pathForCompass.lineTo(9 * scaleCoefficient, 15.5f * scaleCoefficient);
-
-		pathForCompass2 = new Path();
-		pathForCompass2.moveTo(9 * scaleCoefficient, 15.5f * scaleCoefficient);
-		pathForCompass2.lineTo(22f * scaleCoefficient, 15.5f * scaleCoefficient);
-		pathForCompass2.lineTo(15.5f * scaleCoefficient, 2f * scaleCoefficient);
-		pathForCompass2.lineTo(9 * scaleCoefficient, 15.5f * scaleCoefficient);
 		
 		pathForTurn = new Path();
 		pathTransform = new Matrix();
 		pathTransform.postScale(scaleCoefficient, scaleCoefficient);
 		pathTransform.postTranslate(boundsForMiniRoute.left, boundsForMiniRoute.top);
 		
+		compass = BitmapFactory.decodeResource(view.getResources(), R.drawable.compass);
 		
 		showArrivalTime = view.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME.get();
 	}
@@ -261,9 +255,8 @@ public class MapInfoLayer implements OsmandMapLayer {
 		// draw compass the last (!) because it use rotating
 		canvas.drawRoundRect(boundsForCompass, roundCorner, roundCorner, paintAlphaGray);
 		canvas.drawRoundRect(boundsForCompass, roundCorner, roundCorner, paintBlack);
-		canvas.rotate(view.getRotate(), 15 * scaleCoefficient, 15 * scaleCoefficient);
-		canvas.drawPath(pathForCompass2, fillRed);
-		canvas.drawPath(pathForCompass, fillBlack);
+		canvas.rotate(view.getRotate(), 17 * scaleCoefficient, 15 * scaleCoefficient);
+		canvas.drawBitmap(compass, 0, 0, paintBlack);
 	}
 	
 	
@@ -445,6 +438,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		}
 		return false;
 	}
+	
 
 	// draw path 96x96
 	public static void calcTurnPath(Path pathForTurn, TurnType turnType, Matrix transform) {
