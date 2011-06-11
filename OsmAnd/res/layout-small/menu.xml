@@ -9,10 +9,10 @@
   	<LinearLayout android:layout_height="wrap_content"  android:layout_width="fill_parent" android:gravity="center_horizontal" >
   	<LinearLayout android:layout_height="wrap_content"  android:layout_width="wrap_content"  
   		android:background="@drawable/headliner" android:orientation="horizontal"  android:id="@+id/Headliner"  >
-  		<ImageView android:src="@drawable/headline_osmand_icon"  
-  					android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="5dp"/>
+  		<ImageView  android:src="@drawable/icon_small" android:layout_marginLeft="12dp" android:layout_marginTop="4dp"  
+  					android:layout_height="wrap_content" android:layout_width="wrap_content"/>
   		<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/AppName" 
-  				  android:layout_marginLeft="0dp" android:layout_weight="1" android:layout_marginTop="5dp" 
+  				  android:layout_marginLeft="1dp" android:layout_weight="1" android:layout_marginTop="5dp" 
 				  android:text="OsmAnd+" android:textColor="#000000"	android:typeface="serif" android:textSize="20sp"/>
 		<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
 				  android:layout_marginTop="5dp"
