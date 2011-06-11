@@ -25,74 +25,50 @@
 	</LinearLayout>
 	
 	<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
-	 	<TableRow android:layout_height = "wrap_content"  >
-	 		<LinearLayout android:id="@+id/MapButton" android:background="@drawable/button_left" android:orientation="vertical" android:clickable="true"
-	 					android:layout_width="160dp" android:layout_height="196dp">
+	 	<TableRow android:layout_height = "wrap_content"  android:layout_marginTop="17dp" >
+	 		<LinearLayout android:id="@+id/MapButton" android:background="@drawable/bg_leftr" android:orientation="vertical" android:clickable="true"
+	 					android:layout_weight="3"  android:layout_height="167dp">
 	 			<ImageView
-					android:src="@drawable/button_icon_map"
-					android:scaleType="center" 
-					android:layout_gravity="center" android:layout_marginRight="20dp" android:layout_marginTop="20dp"
-					android:layout_weight="1"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"/>
+					android:src="@drawable/button_icon_map" android:scaleType="center" android:layout_gravity="center"
+					 android:layout_weight="1" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
-					android:layout_gravity="center_horizontal" 
-					android:layout_marginBottom="30dp" android:layout_marginRight="15dp"
-				    android:text="@string/map_Button" android:typeface="serif" android:textColor="#000000"
-				  	android:textSize="18sp"/>	
+					android:layout_gravity="center_horizontal|top" android:textSize="18sp" 
+				    android:text="@string/map_Button" android:typeface="serif" android:textColor="#000000"/>	
 	 		</LinearLayout>
-			<LinearLayout android:layout_weight="1" android:layout_height="fill_parent" />
-			<LinearLayout android:id="@+id/SearchButton"  android:background="@drawable/button_right" android:orientation="vertical" android:clickable="true"
-						android:layout_width="160dp" android:layout_height="196dp">
+			<LinearLayout android:layout_weight="2" android:layout_height="fill_parent" />
+			<LinearLayout android:id="@+id/SearchButton"  android:background="@drawable/bg_rightr" android:orientation="vertical" android:clickable="true"
+						android:layout_weight="3"  android:layout_height="167dp">
 					<ImageView
-					android:src="@drawable/button_icon_search"
-					android:scaleType="center" 
-					android:layout_gravity="center" android:layout_marginLeft="20dp" android:layout_marginTop="20dp"
-					android:layout_weight="1"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"/>
+					android:src="@drawable/button_icon_search" android:scaleType="center" android:layout_gravity="center"
+					android:layout_weight="1" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 					
 					<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
-					android:layout_gravity="center_horizontal" 
-					android:layout_marginBottom="30dp" android:layout_marginLeft="15dp"
-				    android:text="@string/search_button" android:typeface="serif" android:textColor="#000000"
-				  	android:textSize="18sp"/>	
+					android:layout_gravity="center_horizontal|top" android:textSize="18sp"					
+				    android:text="@string/search_button" android:typeface="serif" android:textColor="#000000"/>	
 			</LinearLayout>
 		</TableRow>
-		<TableRow android:layout_height = "wrap_content"  >
-		<LinearLayout android:id="@+id/FavoritesButton"  android:background="@drawable/button_left" android:orientation="vertical"
-					android:layout_width="160dp" android:layout_height="196dp">
+		<TableRow android:layout_height = "wrap_content" android:layout_marginTop="20dp" >
+			<LinearLayout android:id="@+id/FavoritesButton" android:background="@drawable/bg_leftr" android:orientation="vertical" android:clickable="true"
+	 					android:layout_weight="3" android:layout_height="167dp">
 	 			<ImageView
-					android:src="@drawable/button_icon_favorites"
-					android:scaleType="center" 
-					android:layout_gravity="center" android:layout_marginRight="20dp" android:layout_marginTop="20dp"
-					android:layout_weight="1"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"/>
+					android:src="@drawable/button_icon_favorites" android:scaleType="center" android:layout_gravity="center"
+					 android:layout_weight="1" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
-					android:layout_gravity="center_horizontal" 
-					android:layout_marginBottom="30dp" android:layout_marginRight="15dp"
-				    android:text="@string/favorites_Button" android:typeface="serif" android:textColor="#000000"
-				  	android:textSize="18sp"/>	
+					android:layout_gravity="center_horizontal|top" android:textSize="18sp" 
+				    android:text="@string/favorites_Button" android:typeface="serif" android:textColor="#000000"/>	
 	 		</LinearLayout>
-			<LinearLayout android:layout_weight="1" android:layout_height="fill_parent" />
-			<LinearLayout android:id="@+id/SettingsButton"  android:background="@drawable/button_right" android:orientation="vertical" 
-					android:layout_width="160dp" android:layout_height="196dp">
+			<LinearLayout android:layout_weight="2" android:layout_height="fill_parent" />
+			<LinearLayout android:id="@+id/SettingsButton"  android:background="@drawable/bg_rightr" android:orientation="vertical" android:clickable="true"
+						android:layout_weight="3" android:layout_height="167dp">
 					<ImageView
-					android:src="@drawable/button_icon_settings"
-					android:scaleType="center" 
-					android:layout_gravity="center" android:layout_marginLeft="20dp" android:layout_marginTop="20dp"
-					android:layout_weight="1"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"/>
+					android:src="@drawable/button_icon_settings" android:scaleType="center" android:layout_gravity="center"
+					android:layout_weight="1" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 					
 					<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
-					android:layout_gravity="center_horizontal" 
-					android:layout_marginBottom="30dp" android:layout_marginLeft="15dp"
-				    android:text="@string/settings_Button" android:typeface="serif" android:textColor="#000000"
-				  	android:textSize="18sp"/>	
+					android:layout_gravity="center_horizontal|top" android:textSize="18sp"					
+				    android:text="@string/settings_Button" android:typeface="serif" android:textColor="#000000"/>	
 			</LinearLayout>
-			</TableRow>
+		</TableRow>
 		
 	</TableLayout>
  </LinearLayout>  
