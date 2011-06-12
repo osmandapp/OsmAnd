@@ -24,10 +24,10 @@
 	</LinearLayout>
 	</LinearLayout>
 	
-	<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+	<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content" >
 	 	<TableRow android:layout_height = "wrap_content"  >
-	 		<LinearLayout android:id="@+id/MapButton" android:background="@drawable/button_left" android:clickable="true"
-	 					android:layout_width="240dp" android:layout_height="121dp">
+	 		<LinearLayout android:id="@+id/MapButton" android:background="@drawable/bg_left" android:clickable="true"
+	 					android:layout_weight="1" android:layout_height="112dp">
 	 			<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
 					android:layout_gravity="center_vertical" 
 					android:layout_marginLeft="15dp" android:layout_marginBottom="5dp"
@@ -37,64 +37,57 @@
 	 			<ImageView
 					android:src="@drawable/button_icon_map"
 					android:layout_gravity="center|right"
-					android:layout_marginRight="45dp" android:layout_marginBottom="5dp"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>
-				
 	 		</LinearLayout>
-			<LinearLayout android:layout_weight="1" android:layout_height="fill_parent" />
-			<LinearLayout android:id="@+id/SearchButton"  android:background="@drawable/button_right" android:clickable="true"
-						android:layout_width="240dp" android:layout_height="121dp">
-					<ImageView
+			<LinearLayout android:layout_weight="2" android:layout_height="fill_parent" />
+			<LinearLayout android:id="@+id/SearchButton"  android:background="@drawable/bg_right" android:clickable="true"
+						android:layout_weight="1" android:layout_height="112dp">
+				<ImageView
 					android:src="@drawable/button_icon_search"
 					android:layout_gravity="center|left"
 					android:layout_width="wrap_content"
-					android:layout_marginLeft="45dp" android:layout_marginBottom="5dp"
 					android:layout_height="wrap_content"/>
 					
-					<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
+				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
 					android:layout_gravity="center_vertical" 
 					android:layout_weight="1"
 					android:layout_marginLeft="5dp"
 					android:layout_marginRight="15dp" android:layout_marginBottom="5dp"
 				    android:text="@string/search_button"  android:textColor="#000000" android:typeface="serif"
-				  	android:textSize="16sp"/>	
+				  	android:textSize="16sp"/>
 			</LinearLayout>
 		</TableRow>
-		<TableRow android:layout_height = "wrap_content"  >
-		<LinearLayout android:id="@+id/FavoritesButton"  android:background="@drawable/button_left" 
-					android:layout_width="240dp" android:layout_height="121dp">
+		<TableRow android:layout_height = "wrap_content" android:layout_marginTop = "4dp"  >
+		<LinearLayout android:id="@+id/FavoritesButton"  android:background="@drawable/bg_left" 
+					android:layout_weight="1" android:layout_height="112dp">
 				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
-					android:layout_marginLeft="15dp" android:layout_marginBottom="5dp"
-					android:layout_gravity="center_vertical|left"
+					android:layout_marginLeft="15dp" android:layout_gravity="center_vertical|left"
 				    android:text="@string/favorites_Button"  android:textColor="#000000" android:typeface="serif"
 				    android:layout_weight="1"
 				  	android:textSize="16sp"/>
 	 			<ImageView
 					android:src="@drawable/button_icon_favorites"
 					android:layout_gravity="center|right"
-					android:layout_marginRight="45dp" android:layout_marginBottom="5dp"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>
 	 		</LinearLayout>
-			<LinearLayout android:layout_weight="1" android:layout_height="fill_parent" />
-			<LinearLayout android:id="@+id/SettingsButton"  android:background="@drawable/button_right" 
-					android:layout_width="240dp" android:layout_height="121dp">
-					<ImageView
+			<LinearLayout android:layout_weight="2" android:layout_height="fill_parent" />
+			<LinearLayout android:id="@+id/SettingsButton"  android:background="@drawable/bg_right" 
+					android:layout_weight="1" android:layout_height="112dp">
+				<ImageView
 					android:src="@drawable/button_icon_settings"
 					android:layout_gravity="center|left"
-					android:layout_marginLeft="45dp" android:layout_marginBottom="5dp"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>
 					
 					<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
 					android:layout_gravity="center_vertical|right"
 					android:layout_weight="1"
-					android:layout_marginLeft="5dp"
-					android:layout_marginRight="15dp" android:layout_marginBottom="5dp"
+					android:layout_marginLeft="5dp" android:layout_marginRight="15dp"
 				    android:text="@string/settings_Button"  android:textColor="#000000" android:typeface="serif"
-				  	android:textSize="16sp"/>	
-			</LinearLayout>
+				  	android:textSize="16sp"/>
+			 </LinearLayout> 		
 			</TableRow>
 		
 	</TableLayout>
