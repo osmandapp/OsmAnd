@@ -4,6 +4,7 @@ import java.util.List;
 
 import alice.tuprolog.Struct;
 import android.app.Activity;
+import android.content.Context;
 
 public interface CommandPlayer {
 
@@ -19,5 +20,5 @@ public interface CommandPlayer {
 	
 	public void onActivityInit(Activity ctx);
 	
-	public void onActvitiyStop(Activity ctx);
+	public void onActvitiyStop(Context ctx);
 }

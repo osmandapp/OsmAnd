@@ -26,6 +26,7 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.voice.CommandPlayerFactory;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Application;
@@ -188,7 +189,7 @@ public class OsmandApplication extends Application {
 	}
 	
 
-	public void showDialogInitializingCommandPlayer(final Context uiContext){
+	public void showDialogInitializingCommandPlayer(final Activity uiContext){
 		String voiceProvider = osmandSettings.VOICE_PROVIDER.get();
 		if(voiceProvider == null){
 			Builder builder = new AlertDialog.Builder(uiContext);
@@ -213,7 +214,7 @@ public class OsmandApplication extends Application {
 		
 	}
 
-	private void initVoiceDataInDifferentThread(final Context uiContext) {
+	private void initVoiceDataInDifferentThread(final Activity uiContext) {
 		final ProgressDialog dlg = ProgressDialog.show(uiContext,
 				getString(R.string.loading_data),
 				getString(R.string.voice_data_initializing));
@@ -221,7 +222,7 @@ public class OsmandApplication extends Application {
 			@Override
 			public void run() {
 				try {
-					initCommandPlayer();
+					initCommandPlayer(uiContext);
 					dlg.dismiss();
 				} catch (CommandPlayerException e) {
 					dlg.dismiss();
@@ -231,7 +232,7 @@ public class OsmandApplication extends Application {
 		}).start();
 	}
 	
-	public void initCommandPlayer()
+	public void initCommandPlayer(Activity ctx)
 		throws CommandPlayerException
 	{
 		final String voiceProvider = osmandSettings.VOICE_PROVIDER.get();
@@ -239,7 +240,7 @@ public class OsmandApplication extends Application {
 			if (player != null) {
 				player.clear();
 			}
-			player = CommandPlayerFactory.createCommandPlayer(voiceProvider,OsmandApplication.this, getApplicationContext());
+			player = CommandPlayerFactory.createCommandPlayer(voiceProvider,OsmandApplication.this, ctx);
 			routingHelper.getVoiceRouter().setPlayer(player);
 		}
 	}
