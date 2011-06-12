@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.LogUtil;
-import net.osmand.data.IndexConstants;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -45,10 +44,12 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 	public static final String A_RIGHT_SH = "right_sh";
 	public static final String A_RIGHT_SL = "right_sl";
 	protected static final String DELAY_CONST = "delay_";
+	private final int voiceVersion;
 
-	protected AbstractPrologCommandPlayer(Context ctx, String voiceProvider, String configFile)
+	protected AbstractPrologCommandPlayer(Context ctx, String voiceProvider, String configFile, int voiceVersion)
 		throws CommandPlayerException 
 	{
+		this.voiceVersion = voiceVersion;
 		long time = System.currentTimeMillis();
 		try {
 			this.ctx = ctx;
@@ -102,33 +103,32 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 				wrong = true;
 			}
 			if (wrong) {
-				throw new CommandPlayerException(
-						ctx.getString(R.string.voice_data_corrupted));
+				throw new CommandPlayerException(ctx.getString(R.string.voice_data_corrupted));
 			} else {
-				boolean versionSupported = false;
-				Var v = new Var("VERSION"); //$NON-NLS-1$
-				SolveInfo s = prologSystem.solve(new Struct(P_VERSION, v));
-				if (s.isSuccess()) {
-					prologSystem.solveEnd();
-					try {
-						Term val = s.getVarValue(v.getName());
-						if (val instanceof Number) {
-							versionSupported = ((Number) val).intValue() == IndexConstants.VOICE_VERSION;
-						}
-					} catch (NoSolutionException e) {
-					}
-				}
-				if (!versionSupported) {
-					throw new CommandPlayerException(
-							ctx.getString(R.string.voice_data_not_supported));
+				Term val = solveSimplePredicate(P_VERSION);
+				if (!(val instanceof Number) || ((Number)val).intValue() != voiceVersion) {
+					throw new CommandPlayerException(ctx.getString(R.string.voice_data_not_supported));
 				}
 			}
-
 			if (log.isInfoEnabled()) {
 				log.info("Initializing voice subsystem  " + voiceProvider + " : " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 
 		}
+	}
+
+	protected Term solveSimplePredicate(String predicate) {
+		Term val = null;
+		Var v = new Var("MyVariable"); //$NON-NLS-1$
+		SolveInfo s = prologSystem.solve(new Struct(predicate, v));
+		if (s.isSuccess()) {
+			prologSystem.solveEnd();
+			try {
+				val = s.getVarValue(v.getName());
+			} catch (NoSolutionException e) {
+			}
+		}
+		return val;
 	}
 
 	@Override

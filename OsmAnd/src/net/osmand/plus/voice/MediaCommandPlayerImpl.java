@@ -22,6 +22,7 @@ import android.media.MediaPlayer;
 public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	
 	private static final String CONFIG_FILE = "_config.p";
+	private static final int MEDIA_VOICE_VERSION = 0;
 
 	private static final Log log = LogUtil.getLog(MediaCommandPlayerImpl.class);
 	
@@ -35,7 +36,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	public MediaCommandPlayerImpl(Context ctx, String voiceProvider)
 		throws CommandPlayerException
 	{
-		super(ctx, voiceProvider, CONFIG_FILE);
+		super(ctx, voiceProvider, CONFIG_FILE, MEDIA_VOICE_VERSION);
 		mediaPlayer = new MediaPlayer();
 	}
 	
@@ -45,7 +46,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	}
 	
 	@Override
-	public void onActvitiyStop(Activity ctx) {
+	public void onActvitiyStop(Context ctx) {
 		//do nothing here
 	}
 	

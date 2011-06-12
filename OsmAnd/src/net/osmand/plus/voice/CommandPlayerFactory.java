@@ -7,37 +7,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.OsmandApplication;
 import android.app.Activity;
-import android.content.Context;
-import android.speech.tts.TextToSpeech;
-import android.speech.tts.TextToSpeech.OnInitListener;
 
 public class CommandPlayerFactory 
 {
-
-	private static TextToSpeech mTts;
-
-	public static void onActivityInit(Activity ctx) {
-		if (mTts != null) {
-			mTts.shutdown();
-		}
-		mTts = new TextToSpeech(ctx, new OnInitListener() {
-			@Override
-			public void onInit(int status) {
-				if (status != TextToSpeech.SUCCESS) {
-					mTts = null;
-				}
-			}
-		});
-	}
-	
-	public static void onActivityStop(Activity ctx) {
-		if (mTts != null) {
-			mTts.shutdown();
-			mTts = null;
-		}
-	}
-	
-	public static CommandPlayer createCommandPlayer(String voiceProvider, OsmandApplication osmandApplication, Context ctx)
+	public static CommandPlayer createCommandPlayer(String voiceProvider, OsmandApplication osmandApplication, Activity ctx)
 		throws CommandPlayerException
 	{
 		if (voiceProvider != null){
@@ -48,8 +21,8 @@ public class CommandPlayerFactory
 			}
 			if (MediaCommandPlayerImpl.isMyData(voiceDir)) {
 				return new MediaCommandPlayerImpl(osmandApplication, voiceProvider);
-			} else if (TTSCommandPlayerImpl.isMyData(voiceDir, mTts)) {
-				return new TTSCommandPlayerImpl(osmandApplication, voiceProvider, mTts);
+			} else if (TTSCommandPlayerImpl.isMyData(voiceDir)) {
+				return new TTSCommandPlayerImpl(ctx, voiceProvider);
 			}
 			throw new CommandPlayerException(ctx.getString(R.string.voice_data_not_supported));
 		}
