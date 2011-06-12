@@ -198,6 +198,16 @@ public class OsmandSettings {
 			defaultValues.put(mode, defValue);
 		}
 		
+		public T getProfileDefaultValue(){
+			if(global){
+				return defaultValue;
+			}
+			if(defaultValues != null && defaultValues.containsKey(currentMode)){
+				return defaultValues.get(currentMode);
+			}
+			return defaultValue;
+		}
+		
 		protected T getDefaultValue(){
 			if(global){
 				return defaultValue;
