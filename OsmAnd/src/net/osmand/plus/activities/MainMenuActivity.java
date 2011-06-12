@@ -136,8 +136,8 @@ public class MainMenuActivity extends Activity {
 				
 				@Override
 				public void onClick(View widget) {
-					final Intent mapIndent = new Intent(activity, ContributionVersionActivity.class);
-					activity.startActivityForResult(mapIndent, 0);					
+					final Intent mapIntent = new Intent(activity, ContributionVersionActivity.class);
+					activity.startActivityForResult(mapIntent, 0);					
 				}
 			}, 0, content.length(), 0);
 			textVersionView.setText(content);
