@@ -256,7 +256,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		canvas.drawRoundRect(boundsForCompass, roundCorner, roundCorner, paintAlphaGray);
 		canvas.drawRoundRect(boundsForCompass, roundCorner, roundCorner, paintBlack);
 		canvas.rotate(view.getRotate(), 17 * scaleCoefficient, 15 * scaleCoefficient);
-		canvas.drawBitmap(compass, 0, 0, paintBlack);
+		canvas.drawBitmap(compass, 0, 0, paintImg);
 	}
 	
 	
@@ -435,6 +435,10 @@ public class MapInfoLayer implements OsmandMapLayer {
 				thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), 
 						fZoom, true);
 			}
+		}
+		if(boundsForCompass.contains(point.x, point.y)){
+			map.switchRotateMapMode();
+			return true;
 		}
 		return false;
 	}

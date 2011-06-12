@@ -123,6 +123,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private Dialog progressDlg = null;
 	// App settings
 	private OsmandSettings settings;
+	// Store previous map rotation settings for rotate button
+	private Integer previousMapRotate = null;
 	
 	
 	private boolean isMapLinkedToLocation(){
@@ -521,6 +523,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				backToLocation.setVisibility(View.INVISIBLE);
 			}
 		}
+    	// When location is changed we need to refresh map in order to show movement! 
+    	mapView.refreshMap();
     }
     
     public int defineZoomFromSpeed(float speed, int currentZoom){
@@ -713,6 +717,22 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		mapLayers.updateLayers(mapView);
 	}
 	
+	
+	public void switchRotateMapMode(){
+		if(settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS){
+			previousMapRotate = settings.ROTATE_MAP.get();
+			settings.ROTATE_MAP.set(OsmandSettings.ROTATE_MAP_COMPASS);
+		} else if(previousMapRotate != null){
+			settings.ROTATE_MAP.set(previousMapRotate);
+		} else {
+			settings.ROTATE_MAP.set(settings.ROTATE_MAP.getProfileDefaultValue());
+		}
+		registerUnregisterSensor(getLastKnownLocation());
+		if(settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS){
+			mapView.setRotate(0);
+		}
+		mapView.refreshMap();
+	}
 	
 	@Override
 	protected void onResume() {
