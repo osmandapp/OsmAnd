@@ -362,7 +362,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private void updateTileSourceSummary() {
 		fillTileSourcesToPreference(tileSourcePreference, osmandSettings.MAP_TILE_SOURCES.get(), false);
 		fillTileSourcesToPreference(overlayPreference, osmandSettings.MAP_OVERLAY.get(), true);
-		fillTileSourcesToPreference(underlayPreference, osmandSettings.MAP_OVERLAY.get(), true);
+		fillTileSourcesToPreference(underlayPreference, osmandSettings.MAP_UNDERLAY.get(), true);
 
 		String mapName = " " + osmandSettings.MAP_TILE_SOURCES.get(); //$NON-NLS-1$
 		String summary = tileSourcePreference.getSummary().toString();
