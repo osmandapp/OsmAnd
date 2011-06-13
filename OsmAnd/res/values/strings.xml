@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+
+	<string name="choose_audio_stream">Voice guidance stream</string>
+	<string name="choose_audio_stream_descr">Choose channel to provide voice guidance (depends on system configuration)</string>
+	<string name="voice_stream_voice_call">Voice call stream</string>
+	<string name="voice_stream_notification">Notification stream</string>
+	<string name="voice_stream_music">Music stream</string>
 	<string name="warning_tile_layer_not_downloadable">Map layer %1$s is not downloadable by the application, please try to reinstall it.</string>
 	<string name="overlay_transparency_descr">Modify overlay transparency</string>
 	<string name="overlay_transparency">Overlay transparency</string>

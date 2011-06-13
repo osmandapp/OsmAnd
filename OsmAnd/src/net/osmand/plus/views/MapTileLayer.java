@@ -62,7 +62,6 @@ public class MapTileLayer extends BaseMapLayer {
 			return;
 		}
 		drawTileMap(canvas, tilesRect);
-
 	}
 
 	public void drawTileMap(Canvas canvas, RectF tilesRect) {

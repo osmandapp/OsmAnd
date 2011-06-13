@@ -25,9 +25,11 @@ import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.location.LocationManager;
+import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
+import android.provider.MediaStore.Audio;
 import android.widget.Toast;
 
 public class OsmandSettings {
@@ -502,6 +504,10 @@ public class OsmandSettings {
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> MAP_VIEW_3D = new BooleanPreference("map_view_3d", false, false);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Integer> AUDIO_STREAM_GUIDANCE = new IntPreference("audio_stream",
+			AudioManager.STREAM_MUSIC, true);
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_ENGLISH_NAMES = new BooleanPreference("use_english_names", false, true);

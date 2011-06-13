@@ -36,6 +36,7 @@ import android.content.IntentFilter;
 import android.content.DialogInterface.OnClickListener;
 import android.content.pm.ActivityInfo;
 import android.location.LocationManager;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -181,6 +182,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerListPreference(osmandSettings.POSITION_ON_MAP, screen,
 				new String[] {getString(R.string.position_on_map_center), getString(R.string.position_on_map_bottom)},
 				new Integer[] {OsmandSettings.CENTER_CONSTANT, OsmandSettings.BOTTOM_CONSTANT});
+		
+		registerListPreference(osmandSettings.AUDIO_STREAM_GUIDANCE, screen,
+				new String[] {getString(R.string.voice_stream_music), getString(R.string.voice_stream_notification),
+				getString(R.string.voice_stream_voice_call)},
+				new Integer[] {AudioManager.STREAM_MUSIC, AudioManager.STREAM_NOTIFICATION, AudioManager.STREAM_VOICE_CALL});
 		
 		entries = new String[DayNightMode.values().length];
 		for(int i=0; i<entries.length; i++){
