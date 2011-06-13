@@ -45,6 +45,17 @@
    <tile_source name="OpenWandelkaartBaseLayer (BE,NL)" url_template="http://overlay.openstreet.nl/basemap/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/> 
    <tile_source name="OpenWandelkaartRoads (BE,NL)" url_template="http://overlay.openstreet.nl/roads/{0}/{1}/{2}.png" ext=".png" min_zoom="7" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/>
 
+   <tile_source name="Statkart Topo (NO)" url_template="http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo2&amp;zoom={0}&amp;x={1}&amp;y={2}" ext=".png" min_zoom="5" max_zoom="17" tile_size="256" img_density="32" avg_img_size="18000"/>
+   <tile_source name="Statkart Nautical (NO)" url_template="http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=sjo_hovedkart2&amp;zoom={0}&amp;x={1}&amp;y={2}" ext=".png" min_zoom="3" max_zoom="14" tile_size="256" img_density="32" avg_img_size="18000"/>
+   
+   <tile_source name="Eniro Map (NO,SE,FI,DK,PL))" rule="beanshell" ext=".png" min_zoom="2" max_zoom="20" tile_size="256" img_density="16" avg_img_size="18000"
+   		url_template='String getTileUrl(int z, int x, int y) {return "http://map.eniro.com/geowebcache/service/tms1.0.0/map/"+z+"/"+x+"/"+((1 &lt;&lt; z) - 1 - y) + ".png";}'/>
+   <tile_source name="Eniro Aerial (NO,SE,DK)" rule="beanshell" ext=".png" min_zoom="2" max_zoom="19" tile_size="256" img_density="16" avg_img_size="18000"
+   		url_template='String getTileUrl(int z, int x, int y) {return "http://map.eniro.com/geowebcache/service/tms1.0.0/aerial/"+z+"/"+x+"/"+((1 &lt;&lt; z) - 1 - y) + ".png";}'/>
+   <tile_source name="Eniro Nautical (NO,SE)" rule="beanshell" ext=".png" min_zoom="5" max_zoom="16" tile_size="256" img_density="32" avg_img_size="18000"
+   		url_template='String getTileUrl(int z, int x, int y) {return "http://map.eniro.com/geowebcache/service/tms1.0.0/nautical/"+z+"/"+x+"/"+((1 &lt;&lt; z) - 1 - y) + ".png";}'/>	
+   
+
 <!--
    <tile_source rule="wms_tile" url_template="http://wms.latlon.org" name="Genshtab (BLR)" layer="gshtab" ext=".jpg" min_zoom="5" max_zoom="17" tile_size="256" img_density="32" avg_img_size="18000"/>  NOT WORK ?-->
 

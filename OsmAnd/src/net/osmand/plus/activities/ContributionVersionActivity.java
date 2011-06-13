@@ -48,7 +48,6 @@ public class ContributionVersionActivity extends ListActivity {
 	
 	private static final String URL_TO_RETRIEVE_BUILDS = "http://download.osmand.net/builds.php";
 	private static final String URL_GET_BUILD = "http://download.osmand.net/";
-	private static final String CONTRIBUTION_INSTALL_APP_DATE = "CONTRIBUTION_INSTALL_APP_DATE";
 	
 	private ProgressDialog progressDlg;
 	private Date currentInstalledDate;
