@@ -236,11 +236,10 @@ public class AnimateDraggingMapThread {
 	
 	public void startZooming(final int zoomEnd, final boolean notifyListener){
 		final float animationTime = ZOOM_ANIMATION_TIME;
-		final int zoomStart = tileView.getZoom();
-		
 		startThreadAnimating(new Runnable(){
 			@Override
 			public void run() {
+				final int zoomStart = tileView.getZoom();
 				setTargetValues(zoomEnd, tileView.getLatitude(), tileView.getLongitude());
 				animatingZoomInThread(zoomStart, zoomEnd, animationTime, notifyListener);
 				pendingRotateAnimation();

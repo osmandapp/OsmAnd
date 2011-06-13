@@ -92,7 +92,12 @@ public class MapControlsLayer implements OsmandMapLayer {
 		zoomInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				activity.changeZoom(view.getZoom() + 1);
+				if(view.isZooming()){
+					activity.changeZoom(view.getZoom() + 2);
+				} else {
+					activity.changeZoom(view.getZoom() + 1);
+				}
+				
 			}
 		});
 		
