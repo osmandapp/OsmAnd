@@ -689,7 +689,6 @@ public class OsmandSettings {
 	// This value is a key for saving last known location shown on the map
 	public static final String LAST_KNOWN_MAP_LAT = "last_known_map_lat"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_LON = "last_known_map_lon"; //$NON-NLS-1$
-	public static final String IS_MAP_SYNC_TO_GPS_LOCATION = "is_map_sync_to_gps_location"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_ZOOM = "last_known_map_zoom"; //$NON-NLS-1$
 	
 	public static final String MAP_LAT_TO_SHOW = "map_lat_to_show"; //$NON-NLS-1$
@@ -733,7 +732,6 @@ public class OsmandSettings {
 		edit.putFloat(MAP_LAT_TO_SHOW, (float) latitude);
 		edit.putFloat(MAP_LON_TO_SHOW, (float) longitude);
 		edit.putInt(MAP_ZOOM_TO_SHOW, zoom);
-		edit.putBoolean(IS_MAP_SYNC_TO_GPS_LOCATION, false);
 		edit.commit();
 		if(historyDescription != null){
 			SearchHistoryHelper.getInstance().addNewItemToHistory(latitude, longitude, historyDescription, ctx);
@@ -750,14 +748,6 @@ public class OsmandSettings {
 		edit.putFloat(LAST_KNOWN_MAP_LAT, (float) latitude);
 		edit.putFloat(LAST_KNOWN_MAP_LON, (float) longitude);
 		edit.commit();
-	}
-
-	public boolean setSyncMapToGpsLocation(boolean value) {
-		return globalPreferences.edit().putBoolean(IS_MAP_SYNC_TO_GPS_LOCATION, value).commit();
-	}
-
-	public boolean isMapSyncToGpsLocation() {
-		return globalPreferences.getBoolean(IS_MAP_SYNC_TO_GPS_LOCATION, true);
 	}
 
 	public int getLastKnownMapZoom() {
