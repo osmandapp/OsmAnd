@@ -548,10 +548,10 @@
 
 <string name="default_buttons_yes">Ja</string>
 <string name="default_buttons_cancel">Abbrechen</string>
-<string name="default_buttons_apply">Übernehmen</string><string name="default_buttons_add">Hinzufügen</string><string name="default_buttons_no">Nein</string><string name="add_favorite_dialog_top_text">Geben Sie diesem Punkt einen Namen</string>
+<string name="default_buttons_apply">Übernehmen</string>
 <string name="default_buttons_add">Hinzufügen</string>
 <string name="default_buttons_no">Nein</string>
-<string name="add_favorite_dialog_top_text">Favoritenname eingeben</string>
+<string name="add_favorite_dialog_top_text">Geben Sie diesem Punkt einen Namen</string>
 <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
 <string name="add_favorite_dialog_favourite_added_template">Favorit Punkt \'\'{0}\'\' wurde erfolgreich hinzugefügt.</string>
 
