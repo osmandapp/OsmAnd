@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-  <string name="warning_tile_layer_not_downloadable">%1$s térkép réteget nem tudja az alkalmazás letölteni, újra kell telepíteni.</string>
+  <string name="warning_tile_layer_not_downloadable">%1$s térkép réteget nem tudja az alkalmazás letölteni, meg kell próbálni újratelepíteni.</string>
   <string name="overlay_transparency_descr">Rátét áttetszőség megváltoztatása</string>
   <string name="overlay_transparency">Rátét áttetszőség</string>
   <string name="map_transparency_descr">Alap térkép áttetszőség megváltoztatása</string>
