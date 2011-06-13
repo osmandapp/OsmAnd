@@ -322,10 +322,20 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		closeButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				((OsmandApplication) getApplication()).closeApplication();
 				dlg.dismiss();
-				MapActivity.this.setResult(MainMenuActivity.APP_EXIT_CODE);
-				MapActivity.this.finish();
+				
+				((OsmandApplication) getApplication()).closeApplication();
+				// 1. Work for almost all cases when user open apps from main menu
+				Intent newIntent = new Intent(MapActivity.this, MainMenuActivity.class);
+				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				newIntent.putExtra(MainMenuActivity.APP_EXIT_KEY, MainMenuActivity.APP_EXIT_CODE);
+				startActivity(newIntent);
+				// 2. good analogue but user will come back to the current activity onResume()
+				// 	   so application is not reloaded !!!
+				// moveTaskToBack(true);
+				// 3. bad results if user comes from favorites
+				//MapActivity.this.setResult(MainMenuActivity.APP_EXIT_CODE);
+				//MapActivity.this.finish();
 			}
 		});
 		
@@ -347,8 +357,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		});
 		
 		dlg.show();
-		
-		
 		// Intent newIntent = new Intent(MapActivity.this, MainMenuActivity.class);
 		//newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		// startActivity(newIntent);    	
@@ -454,7 +462,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     private void updateSpeedBearing(Location location) {
 		// For network/gps it's bad way (not accurate). It's widely used for testing purposes
     	// possibly keep using only for emulator case
-//		if (!providerSupportsSpeed
     	PointLocationLayer locationLayer = mapLayers.getLocationLayer();
     	if (isRunningOnEmulator()
     			&& locationLayer.getLastKnownLocation() != null && location != null) {
@@ -467,7 +474,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				} else {
 					speed = ((float) d * 1000) / time ;
 				}
-				// incorrect in case of airplane
+				// Be aware only for emulator ! code is incorrect in case of airplane
 				if (speed > 100) {
 					speed = 100;
 				}
@@ -747,7 +754,13 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		updateApplicationModeSettings();
 		
 		mapLayers.getPoiMapLayer().setFilter(settings.getPoiFilterForMap((OsmandApplication) getApplication()));
+		
 		backToLocation.setVisibility(View.INVISIBLE);
+		if(isMapLinkedToLocation() && !routingHelper.isFollowingMode()){
+			// by default turn off causing unexpected movements due to network establishing
+			// best to show previous location
+			settings.setSyncMapToGpsLocation(false);
+		}
 		
 		routingHelper.setUiActivity(this);
 

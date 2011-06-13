@@ -43,6 +43,7 @@ public class MainMenuActivity extends Activity {
 	private static final String CONTRIBUTION_VERSION_FLAG = "CONTRIBUTION_VERSION_FLAG";
 	
 	public static final int APP_EXIT_CODE = 4;
+	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
 
 	
 	public void checkPreviousRunsForExceptions(boolean firstTime) {
@@ -163,6 +164,12 @@ public class MainMenuActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if(getIntent() != null){
+			Intent intent = getIntent();
+			if(intent.getExtras() != null && intent.getExtras().containsKey(APP_EXIT_KEY)){
+				finish();
+			}
+		}
 		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.menu);
@@ -202,6 +209,7 @@ public class MainMenuActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				((OsmandApplication) activity.getApplication()).closeApplication();
+				//moveTaskToBack(true);
 				activity.finish();
 			}
 		});
