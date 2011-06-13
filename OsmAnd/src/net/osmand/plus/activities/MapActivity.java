@@ -126,9 +126,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	// Store previous map rotation settings for rotate button
 	private Integer previousMapRotate = null;
 	
+	private boolean isMapLinkedToLocation = false;
 	
 	private boolean isMapLinkedToLocation(){
-		return settings.isMapSyncToGpsLocation();
+		return isMapLinkedToLocation;
 	}
 	
 	private Notification getNotification(){
@@ -446,7 +447,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		backToLocation.setVisibility(View.INVISIBLE);
 		PointLocationLayer locationLayer = mapLayers.getLocationLayer();
 		if(!isMapLinkedToLocation()){
-			settings.setSyncMapToGpsLocation(true);
+			isMapLinkedToLocation = true;
 			if(locationLayer.getLastKnownLocation() != null){
 				Location lastKnownLocation = locationLayer.getLastKnownLocation();
 				AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
@@ -756,10 +757,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		mapLayers.getPoiMapLayer().setFilter(settings.getPoiFilterForMap((OsmandApplication) getApplication()));
 		
 		backToLocation.setVisibility(View.INVISIBLE);
-		if(isMapLinkedToLocation() && !routingHelper.isFollowingMode()){
+		isMapLinkedToLocation = false;
+		if(routingHelper.isFollowingMode()){
 			// by default turn off causing unexpected movements due to network establishing
 			// best to show previous location
-			settings.setSyncMapToGpsLocation(false);
+			isMapLinkedToLocation = true;
 		}
 		
 		routingHelper.setUiActivity(this);
@@ -868,7 +870,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		// when user start dragging 
 		if(mapLayers.getLocationLayer().getLastKnownLocation() != null){
 			if(isMapLinkedToLocation()){
-				settings.setSyncMapToGpsLocation(false);
+				isMapLinkedToLocation = false;
 			}
 			if (backToLocation.getVisibility() != View.VISIBLE) {
 				runOnUiThread(new Runnable() {
