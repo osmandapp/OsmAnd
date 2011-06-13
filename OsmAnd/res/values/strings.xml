@@ -320,7 +320,7 @@ Destination point is widely used to measure distance and to straight forward nav
 	<string name="route_head">Head</string>
 	<string name="first_time_continue">Continue</string>
 	<string name="first_time_download">Download regions</string>
-	<string name="first_time_msg">Thank you for choosing OsmAnd. \nTo use all features of the application you need index files, which you can download (Settings -&gt; Data) or prepare yourself. Afterwards, you will be able to search by address, search for POIs, and search for public transport.</string>
+	<string name="first_time_msg">Thank you for choosing OsmAnd. \nTo use all features of the application you need map/voice data files, which you can download (Settings -&gt; Data) or prepare yourself. Afterwards, you will be able to search by address, search for POIs, listen voice instructions and search for public transport.</string>
 	<string name="search_poi_location">Searching signal...</string>
 	<string name="search_near_map">Search near last map location</string>
 	<string name="search_nearby">Search nearby</string>
