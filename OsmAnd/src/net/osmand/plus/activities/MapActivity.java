@@ -148,8 +148,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		settings = ((OsmandApplication) getApplication()).getSettings();		
-		// for voice navigation
-		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		// Full screen is not used here
 //	     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -750,6 +748,13 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			// can't return from this method we are not sure if activity will be recreated or not
 		}
 		currentScreenOrientation = getWindow().getWindowManager().getDefaultDisplay().getOrientation();
+		
+		// for voice navigation
+		if(settings.AUDIO_STREAM_GUIDANCE.get() != null){
+			setVolumeControlStream(settings.AUDIO_STREAM_GUIDANCE.get());
+		} else {
+			setVolumeControlStream(AudioManager.STREAM_MUSIC);
+		}
 		
 		mapLayers.updateMapSource(mapView, null);
 		updateApplicationModeSettings();
