@@ -2,6 +2,7 @@ package net.osmand.plus.views;
 
 import net.osmand.map.ITileSource;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -10,16 +11,17 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.FloatMath;
+import android.widget.Toast;
 
 public class MapTileLayer extends BaseMapLayer {
 
 	protected final int emptyTileDivisor = 16;
 	public static final int OVERZOOM_IN = 2;
 	
+	private final boolean mainMap;
 	protected ITileSource map = null;
 	
 	Paint paintBitmap;
-	
 	protected RectF tilesRect = new RectF();
 	protected RectF latlonRect = new RectF();
 	protected RectF bitmapToDraw = new RectF();
@@ -30,6 +32,11 @@ public class MapTileLayer extends BaseMapLayer {
 	protected ResourceManager resourceManager;
 	private OsmandSettings settings;
 	private boolean visible = true;
+
+	
+	public MapTileLayer(boolean mainMap){
+		this.mainMap = mainMap;
+	}
 	
 	@Override
 	public boolean drawInScreenPixels() {
@@ -93,19 +100,10 @@ public class MapTileLayer extends BaseMapLayer {
 					&& settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
 		int maxLevel = Math.min(view.getSettings().MAX_LEVEL_TO_DOWNLOAD_TILE.get(), map.getMaximumZoomSupported());
 		int tileSize = map.getTileSize();
+		boolean oneTileShown = false;
 
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-//				int leftPlusI = (int) FloatMath.floor((float) MapUtils
-//						.getTileNumberX(nzoom, MapUtils.getLongitudeFromTile(nzoom, left + i)));
-//				float topTileY;
-//				if(map.isEllipticYTile()){
-//					topTileY = (float) MapUtils.getTileEllipsoidNumberY(nzoom, MapUtils.getLatitudeFromEllipsoidTileY(nzoom, top + j));
-//				} else {
-//					topTileY = (float) MapUtils.getTileNumberY(nzoom, MapUtils.getLatitudeFromTile(nzoom, top + j));
-//				}
-//				int topPlusJ = (int) FloatMath.floor(topTileY);
-				
 				int leftPlusI = left + i;
 				int topPlusJ = top + j;
 				float x1 = (left + i - tileX) * ftileSize + w;
@@ -149,12 +147,21 @@ public class MapTileLayer extends BaseMapLayer {
 						bitmapToZoom.set(xZoom, yZoom, xZoom + tileSize / div, yZoom + tileSize / div);
 						bitmapToDraw.set(x1, y1, x1 + ftileSize, y1 + ftileSize);
 						canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
+						oneTileShown = true;
 					}
 				} else {
 					bitmapToZoom.set(0, 0, tileSize, tileSize);
 					bitmapToDraw.set(x1, y1, x1 + ftileSize, y1 + ftileSize);
 					canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
+					oneTileShown = true;
 				}
+			}
+		}
+		
+		if(mainMap && !oneTileShown && !useInternet && !warningToSwitchMapShown){
+			if(resourceManager.getRenderer().containsLatLonMapData(view.getLatitude(), view.getLongitude(), nzoom)){
+				Toast.makeText(view.getContext(), R.string.switch_to_vector_map_to_see, Toast.LENGTH_LONG).show();
+				warningToSwitchMapShown = true;
 			}
 		}
 	}

@@ -545,7 +545,7 @@ public class DownloadIndexActivity extends ListActivity {
 				is.close();
 			}
 		}
-		if(length != fileread){
+		if(length != fileread || length == 0){
 			throw new IOException("File was not fully read"); //$NON-NLS-1$
 		}
 		
@@ -643,6 +643,11 @@ public class DownloadIndexActivity extends ListActivity {
 				manager.indexingPoi(progress, warnings, toIndex);
 			} else if (toIndex.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 				warnings.addAll(manager.indexingMaps(progress));
+				if(warnings.isEmpty() && !OsmandSettings.getOsmandSettings(getApplicationContext()).MAP_VECTOR_DATA.get()){
+					warnings.add(getString(R.string.binary_map_download_success));
+					// Is it proper way to switch every tome to vector data?
+					OsmandSettings.getOsmandSettings(getApplicationContext()).MAP_VECTOR_DATA.set(true);
+				}
 			} else if (toIndex.getName().endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
 			}
 			if(dateModified != null){

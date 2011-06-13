@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-
+	<string name="switch_to_raster_map_to_see">Vector maps doesn\'t contain that place, you can switch source in menu (Layers -> Map Source... -> Vector OSM maps) to see the map.</string>
+	<string name="switch_to_vector_map_to_see">You can switch to vector maps using menu (Layers -> Map Source... -> Vector OSM maps) to see the map.</string>
+	<string name="binary_map_download_success">Successful. You can switch to vector maps on menu  Layers -> Map Source... -> Vector OSM maps.</string>
 	<string name="choose_audio_stream">Voice guidance stream</string>
 	<string name="choose_audio_stream_descr">Choose channel to provide voice guidance (depends on system configuration)</string>
 	<string name="voice_stream_voice_call">Voice call stream</string>

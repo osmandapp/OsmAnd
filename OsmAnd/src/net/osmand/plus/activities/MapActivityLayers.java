@@ -92,10 +92,10 @@ public class MapActivityLayers {
 		
 		RoutingHelper routingHelper = ((OsmandApplication) getApplication()).getRoutingHelper();
 		
-		underlayLayer = new MapTileLayer();
+		underlayLayer = new MapTileLayer(false);
 		// mapView.addLayer(underlayLayer, -0.5f);
 		
-		mapTileLayer = new MapTileLayer();
+		mapTileLayer = new MapTileLayer(true);
 		mapView.addLayer(mapTileLayer, 0.0f);
 		mapView.setMainLayer(mapTileLayer);
 		
@@ -103,7 +103,7 @@ public class MapActivityLayers {
 		mapVectorLayer = new MapVectorLayer(mapTileLayer);
 		mapView.addLayer(mapVectorLayer, 0.5f);
 		
-		overlayLayer = new MapTileLayer();
+		overlayLayer = new MapTileLayer(false);
 		// mapView.addLayer(overlayLayer, 0.7f);
 		
 		// 0.9 gpx layer
