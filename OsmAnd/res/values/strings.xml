@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-	<string name="warning_tile_layer_not_downloadable">Map layer %1$s is not downloadable by the application, please try to reinstall it.</string>
+	<string name="warning_tile_layer_not_downloadable">Application cannot downöload map layer %1$s, please try to reinstall it.</string>
 	<string name="overlay_transparency_descr">Modify overlay transparency</string>
 	<string name="overlay_transparency">Overlay transparency</string>
 	<string name="map_transparency_descr">Modify base map transparency</string>
-	<string name="map_transparency">Map transparency</string>
+	<string name="map_transparency">Base map transparency</string>
 	<string name="modify_transparency">Modify transparency</string>
 	<string name="layer_underlay">Underlay map...</string>
 	<string name="map_underlay">Underlay map</string>
@@ -13,46 +13,46 @@
 	<string name="default_none">None</string>
 	<string name="map_overlay">Overlay map</string>
 	<string name="map_overlay_descr">Choose overlay map</string>
-	<string name="map_vector_data">Vector maps</string>
+	<string name="map_vector_data">Offline vector maps</string>
 	<string name="map_vector_data_descr">Use downloaded vector maps</string>
 	<string name="tile_source_already_installed">Map is already installed, settings will be updated</string>
-	<string name="select_tile_source_to_install">Select maps to install or update</string>
+	<string name="select_tile_source_to_install">Select (tile) maps to install or update</string>
 	<string name="internet_not_available">Internet connection required for operation is not available</string>
 	<string name="more_external_layer">Install more...</string>
-	<string name="tip_update_index">Index updating</string>
-	<string name="tip_update_index_t">It is very important to have actual map data. Osmand is equipped with download manager with which you can easily check if your indexes can be updated.
-	\n\tFor checking updates go to \'Main Menu\'->\'Settings\'->\'Data for offline usage\'->\'Download offline data\'. After reloading index list from internet, select option \'Filter downloaded\' from context menu.
-	\nNow only downloaded indexes in your device are displayed  and they are highlighted with relevant color:
-	\n\t\'Green\' - indicates, that your indexes are actual with server
-	\n\t\'Blue\' - indicates, that your indexes can be updated from server</string>
+	<string name="tip_update_index">Update of offline data</string>
+	<string name="tip_update_index_t">Having up-to-date map data is essential. Osmand provides adownload manager which can check for available offline data updates.
+	\n\tFor checking updates go to \'Main Menu\'->\'Settings\'->\'Data for offline usage\'->\'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -> \'Filter downloaded\' to indicate updates only for data already on your device.
+	\n\tThe availability of updates  is depicted by the following colors:
+	\n\t\'Green\' - indicates data files identical on device and server
+	\n\t\'Blue\' - indicates available updates on server</string>
 	
-	<string name="level_to_switch_vector_raster_descr">Max zoom level to use vector rendering instead of raster</string>
-	<string name="level_to_switch_vector_raster">Zoom vector level</string>
+	<string name="level_to_switch_vector_raster_descr">Maximum zoom level to use vector rendering instead of raster (tiles)</string>
+	<string name="level_to_switch_vector_raster">Max vector zoom level</string>
 	<string name="tip_day_night_mode">Day/Night Mode</string>
-	<string name="tip_day_night_mode_t">You can switch map appearance according usage of Osmand in day(shiny light conditions) or night(dark light conditions).
-	\nWhen you are driving in night, is safer when the map colors are darker, because you are not so dazzled like with brighter colors on the display.
-	\n\tYou can set policy of mode switching in \'Main Menu\'->\'Settings\'->\'Map appearance\'->\'Day/night mode\'.
-	\nChoices are:
-	\n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of sun(default)
+	<string name="tip_day_night_mode_t">The map appearance can for some vector maps be changed between day (brighter) and night (darker).
+	\nNight colors are safer for night driving.
+	\n\tYou can set a policy for day/night switching in \'Main Menu\'->\'Settings\'->\'Map appearance\'->\'Day/night mode\'.
+	\n\tChoices are:
+	\n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of sun (default)
 	\n\t\'Day\' - always use day mode
 	\n\t\'Night\' - always use night mode 
-	\n\t\'Light sensor\' - map appearance is controlled by light sensor of your device(only if available)</string>	
-	<string name="tip_location_sharing">Location sharing</string>
-	<string name="tip_location_sharing_t">Do you find some interesting place on your trip and want to share it\'s location with your friends or family?
-	\nOsmAnd affords you to easily share any location you want.
-	\n\tYou can do that in \'Map context menu\'->\'Share location\' menu.
-	\nThen you should select way to share your location. The choices are: E-Mail, SMS or just copy location coordinates  to clipboard.</string>
-	<string name="tip_favorites">Favorite points</string>
-	<string name="tip_favorites_t">If you are tired to search for places that you are often visiting, you can easily add this places into Favorites and then use it only by some clicks.
-	\n\tFor creating Favorite point you must go to Map context menu, select option \'Add to favorites\' and enter adequate name for it. After saving it, then you can easily access it thru \'Main Menu\'->\'Favorites\' menu.
-	\n\tWith long tap on favorite point in \'Favorites\' menu you can Navigate to it, Edit or Delete it.
-	\n\tFor displaying all Favorite points directly on map, you can enable layer \'Favorites\' in \'Map context menu\'->\'Layers\'.</string>
-	<string name="tip_osm_improve">Openstreetmap improving</string>
-	<string name="tip_osm_improve_t">OsmAnd uses maps based on Openstreetmap.org data and it is designed not only for trips and routing but for improving and helping to Openstreetmap project too. You can easily create and upload new POI or OSM bug with just some clicks!
-\nAt first you need to enter login information in \'Main Menu\'->\'Settings\'->\'OSM\'.
-\n\tFor new POI adding you can use option \'Create POI\' in Map context menu. Then you can proceed with entering information about new POI in Create POI dialog and finally Commit it.
-\n\tIf you find some error in the map, you can report that and Openstreetmap community can then faster fix this problem.
-\n\tFor OSM bug adding you should use option \'Open OSM bug\' in Map context menu. Then is opened dialog, where you can enter detailed description of problem and finally post it with \'Add\' button.
+	\n\t\'Light sensor\' - map appearance is controlled by light sensor of your device (only if equipped)</string>	
+	<string name="tip_location_sharing">Location Sharing</string>
+	<string name="tip_location_sharing_t">You can share the location of interesting places on your trip  with family or friends.
+	\n\tTo share any location you want:
+	\n\tUse \'Map context menu\'->\'Share location\' menu.
+	\n\tThen select a way to share your location. The choices are: E-Mail, SMS(text), or just copy location coordinates to clipboard.</string>
+	<string name="tip_favorites">Favorite Points</string>
+	<string name="tip_favorites_t">Frequently used points can be saved as Favorites.
+	\n\tTo save a point as Favorite go to Map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Menu\'->\'Favorites\'.
+	\n\tLong pressing on a Favorite in \'Favorites\' menu provides options to Navigate to, Edit or Delete it.
+	\n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\'->\'Layers\'.</string>
+	<string name="tip_osm_improve">Improving OSM Data</string>
+	<string name="tip_osm_improve_t">OsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and routing- can be used to improve Openstreetmap data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks!
+\nFor this you need to first provide your OSM login information in \'Main Menu\'->\'Settings\'->\'OSM\'.
+\n\tTo add a new POI use option \'Create POI\' in Map context menu. Proceed with entering the information about the new POI in Create POI dialog and finally Commit it.
+\n\tErrors in maps can immediately be reported via OSM bug, and Openstreetmap community can then faster fix this problem.
+\n\tTo add a OSM bug use option \'Open OSM bug\' in Map context menu. Then enter detailed description of problem and finally post it using the \'Add\' button.
 \n\tDon\'t forget that you need internet connection to use this functions!</string>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
     <string name="error_doing_search">Error occurred in offline search</string>
@@ -61,38 +61,37 @@
 
 	<string name="system_locale">System</string>
 	<string name="preferred_locale_descr">Change display language</string>
-	<string name="preferred_locale">Preferred locale</string>
-	<string name="tip_map_switch">Map source</string>
-	<string name="tip_map_switch_t">The fastest way to change map source and layers is pressing \'Menu\'->\'Layers\' on map.
-\n\tUnder \'Map source...\' you can choose predefined tile sources or manually created using OsmAndMapCreator on PC.
-\n\tOsmAnd supports custom sources.</string>
-	<string name="tip_app_mode">Application mode</string>
-	<string name="tip_app_mode_t">OsmAnd supports different modes representing map for typical situations.
-\n\tYou can change mode in \'Menu\'->\'Settings\'->\'Application mode\'.</string>
+	<string name="preferred_locale">Display language</string>
+	<string name="tip_map_switch">Map Source</string>
+	<string name="tip_map_switch_t">The fastest way to change map source and layers is pressing \'Menu\'->\'Layers\' in map view.
+\n\tUnder \'Map source...\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources, or maps manually created using e.g. OsmAndMapCreator on a PC.
+\n\tOsmAnd also supports custom sources.</string>
+	<string name="tip_app_mode">Application Mode</string>
+	<string name="tip_app_mode_t">OsmAnd supports different application profiles for different use cases.
+\n\tYou can change a profiles in \'Menu\'->\'Settings\'->\'Application mode\', or when creating a route.</string>
 	<string name="tip_navigation">Navigation</string>
-	<string name="tip_navigation_t">To enable navigation you should select destination point first. After that press \'Menu\'->\'Directions\' on map and select navigation type.</string>
-	<string name="tip_select_destination_point">Select destination point</string>
-	<string name="tip_select_destination_point_t">You can select destination point in map context menu \'Navigate to\' or in search activities.
-\n\tYou can also navigate to favorite point by long pressing in \'Favorites\'.</string>
-	<string name="tip_search">Search activities</string>
-	<string name="tip_search_t">You can search place directly on map view or by address, by location, as poi or as predefined favorite.
-\n\tPressing \'Search\' on map opens search activities. There you have 2 options : \'Navigate to\' or \'Show on map\'.</string>
-	<string name="tip_map_context_menu">Map context menu</string>
-	<string name="tip_map_context_menu_t">\tMap context menu is available by long touching on map or by pressing track ball button.
-\n\tAfter touching box with coordinates appears, to open context menu dialog - tap on it, to hide box - long press on it. Also map context menu is available under \'Menu\' button on map.
-\n\tMap context menu consists of actions that use location as input.</string>
-	<string name="tip_desctination_point">Destination point</string>
-	<string name="tip_desctination_point_t">\tKey concept of OsmAnd is destination point that is marked as red point on map.
-\n\tYou can always see the distance to it and the direction (red triangle) on map. To mark any point as destination you should choose \'Navigate to\' point. 
-\n\tThat button is available on all search activities, in context menu of map and on long press for map items. 
-Destination point is widely used to measure distance and to straight forward navigation.</string>
-	<string name="tip_initial">Tips and tricks</string>
-	<string name="tip_initial_t">\tOsmAnd is navigation application that has variety of features. 
-\n\tTo better use them you can follow by tips and tricks available as link on main menu.</string>
+	<string name="tip_navigation_t">Before starting navigation (routing) you need to select a destination point first. After that press \'Menu\'->\'Directions\' on map and select navigation type.</string>
+	<string name="tip_select_destination_point">Select Destination Point</string>
+	<string name="tip_select_destination_point_t">You can select a destination point directly in the map (context menu, then \'Navigate to\'), or in all search activities.
+\n\tYou can also navigate to any favorite point via long pressing it in \'Favorites\'.</string>
+	<string name="tip_search">Searching</string>
+	<string name="tip_search_t">You can search places directly on the map, or by address, by location, as POI, or as predefined favorite.
+\n\tPressing \'Search\' in the main menu opens the search activities. For alls hits a context menu offers 2 options: \'Navigate to\' or \'Show on map\'.</string>
+	<string name="tip_map_context_menu">Map Context Menu</string>
+	<string name="tip_map_context_menu_t">\tThe map context menu is available by long pressing on the map or by pressing the trackball button.
+\n\tThis produces a box with point coordinates. To open the map context menu dialog, long press on it. (Or tap on it to hide the box again.) The map context menu is also available via the \'Menu\' button in map view.
+\n\tThe Map context menu contains als actions referring to a point (location).</string>
+	<string name="tip_desctination_point">Destination Point</string>
+	<string name="tip_desctination_point_t">\tA key element in OsmAnd is the destination point, marked as a red point on the map.
+\n\tOsmAnd displays the distance to it and the direction to it (red arrow) on the map.
+\n\tTo mark any point as destination select \'Navigate to\'. This option is available on all search hits and in the map context menu (long press for on any map item).</string>
+	<string name="tip_initial">Tips and Tricks</string>
+	<string name="tip_initial_t">\tOsmAnd is a navigation application with many features. 
+\n\tAs an basic introduction, some usage tips and tricks are linked on the main menu screen.</string>
 	<string name="next_button">Next</string>
 	<string name="previous_button">Previous</string>
 
-	<string name="unit_of_length_descr">Change unit of length and speed</string>
+	<string name="unit_of_length_descr">Change units of length and speed</string>
 	<string name="unit_of_length">Unit of length</string>
 	<string name="si_mi_foots">Miles/feet</string>
 	<string name="si_mi_yard">Miles/yards</string>
@@ -134,13 +133,13 @@ Destination point is widely used to measure distance and to straight forward nav
 	<string name="indexing_map">Indexing map</string>
 	<string name="indexing_poi">Indexing POI</string>
 	<string name="indexing_transport">Indexing transport</string>
-	<string name="input_output_error">Input output error occurred</string>
+	<string name="input_output_error">I/O error occurred</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>
-	<string name="old_map_index_is_not_supported">Deprecated format map data \'\'{0}\'\' is not supported</string>
+	<string name="old_map_index_is_not_supported">Deprecated map data format \'\'{0}\'\' is not supported</string>
 	<string name="poi_filter_car_aid">Car aid</string>
-	<string name="poi_filter_closest_poi">Closest poi</string>
+	<string name="poi_filter_closest_poi">Closest POI</string>
 	<string name="poi_filter_custom_filter">Custom filter</string>
 	<string name="poi_filter_food_shop">Food shop</string>
 	<string name="poi_filter_for_tourists">For tourists</string>
@@ -152,88 +151,88 @@ Destination point is widely used to measure distance and to straight forward nav
 					
 	<string name="use_osmand_routing_service">OsmAnd routing</string>
 	<string name="use_osmand_routing_service_descr">Use offline routing for long distances (experimental)</string>
-	<string name="osmand_routing_experimental">OsmAnd offline routing is experimental feature and it doesn\'t work for distance more than 20 km.\n Routing service is automatically switched to online Cloudmade.</string>
+	<string name="osmand_routing_experimental">OsmAnd offline routing is an experimental feature and it doesn\'t work for distances of more than about 20 km.\n Routing service is automatically switched to online Cloudmade.</string>
 	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
 	<string name="application_dir">Storage directory</string>
-	<string name="application_dir_change_warning">Changing storage directory will not move or delete the data. You must do it yourself! Do it at your own risk! Continue anyway?</string>
+	<string name="application_dir_change_warning">Changing the storage directory will not move or delete the data. This must be performed separately and outside OsmAnd. Continue anyway?</string>
 
-	<string name="osmand_net_previously_installed">You have installed previous OsmAnd version. All offline data will be supported by new application. Favorite points should be exported in old application and imported.</string>
+	<string name="osmand_net_previously_installed">A previous OsmAnd version is indtalled. All offline data will be supported by new the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
 	<string name="downloading_build">Downloading build...</string>
 	<string name="install_selected_build">Are you sure to install OsmAnd - {0} from {1} {2} MB.</string>
-	<string name="loading_builds_failed">Retrieving list of OsmAnd builds was failed </string>
+	<string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed </string>
 	<string name="loading_builds">Loading OsmAnd builds...</string>
-	<string name="select_build_to_install">Select one of the OsmAnd build to install</string>
+	<string name="select_build_to_install">Select one of the OsmAnd builds to install</string>
 	<string name="contribution_activity">Special activity for contribution version</string>
 	
 	<string name="gps_status_app_not_found">GPS status application not installed. Search in Market?</string>
 	
-	<string name="voice_is_not_available_msg">Voice guidance is not available. Please go to settings, choose preferrable voice data or download it.</string>
-	<string name="voice_is_not_available_title">Voice data is not specified</string>
+	<string name="voice_is_not_available_msg">Voice guidance is not available. Please go to settings, choose preferred voice data package, and download it.</string>
+	<string name="voice_is_not_available_title">No voice guidance selected</string>
 	<string name="trace_rendering_descr">Use this flag to check rendering performance</string>
-    <string name="trace_rendering">Trace rendering</string>
+    <string name="trace_rendering">Display rendering performance</string>
 	<string name="daynight_mode_day">Day</string>
 	<string name="daynight_mode_night">Night</string>
-	<string name="daynight_mode_auto">Sunrise/Sunset</string>
+	<string name="daynight_mode_auto">Sunrise/sunset</string>
 	<string name="daynight_mode_sensor">Light sensor</string>
 	<string name="daynight_descr">Choose day/night mode switching rule</string>
 	<string name="daynight">Day/night mode</string>
 
 	<string name="download_files_question">Download {0} files ({1} MB)?</string>
-	<string name="items_were_selected">{0} items were selected</string>
+	<string name="items_were_selected">{0} items selected</string>
 	<string name="filter_existing_indexes">Filter downloaded</string>
 	<string name="deselect_all">Deselect all</string>
 	<string name="select_all">Select all</string>
 	<string name="reload">Reload</string>
 	
-	<string name="general_settings_descr">Config internet usage, map rotation, screen orientation and other</string>
-    <string name="general_settings">General</string>
+	<string name="general_settings_descr">Config internet usage, map rotation, screen orientation and others</string>
+    <string name="general_settings">General Settings</string>
 	<string name="rendering_settings_descr">Config map source and appearance</string>
     <string name="rendering_settings">Map appearance</string>
     <string name="index_settings_descr">Get/update data for offline usage</string>
     <string name="index_settings">Data for offline usage</string>
 	<string name="osmand_service">Background service</string>
-	<string name="osmand_service_descr">Run background service to use OsmAnd while screen off</string>
+	<string name="osmand_service_descr">Run background service to use OsmAnd while screen is off</string>
 	<string name="fast_route_mode">Fastest route</string>
-	<string name="fast_route_mode_descr">Enable for calculate fastest route or disable for shortest route </string>
-	<string name="tiles_to_download_estimated_size">At zoom {0} download {1} tiles ({2} Mb )</string>
+	<string name="fast_route_mode_descr">Enable to calculate fastest route or disable for shortest route </string>
+	<string name="tiles_to_download_estimated_size">At zoom {0} download {1} tiles ({2} MB)</string>
 	<string name="context_menu_item_download_map">Download map</string>
-	<string name="select_max_zoom_preload_area">Select max zoom to preload visible area</string>
+	<string name="select_max_zoom_preload_area">Select maximum zoom to preload</string>
 	<string name="maps_could_not_be_downloaded">This map could not be downloaded</string>
 	
 	<string name="continuous_rendering">Continuous rendering</string>
-	<string name="continuous_rendering_descr">Choose show continuous rendering or whole image</string>
+	<string name="continuous_rendering_descr">Choose to show continuous rendering or complete image at once</string>
 	<string name="rendering_exception">Error occurred while rendering selected area</string>
 	<string name="rendering_out_of_memory">Not enough memory to display selected area</string>
 	<string name="show_point_options">Point options</string>
-	<string name="renderer_load_sucess">Renderer was sucessfully loaded</string>
+	<string name="renderer_load_sucess">Renderer sucessfully loaded</string>
 	<string name="renderer_load_exception">Exception occured: renderer was not loaded</string>
 	<string name="renderers">Vector renderer</string>
-	<string name="renderers_descr">Choose vector rendering style</string>
+	<string name="renderers_descr">Choose (offline) vector rendering style</string>
 
 	
-	<string name="poi_context_menu_website">See POI website</string>
+	<string name="poi_context_menu_website">Show POI website</string>
 	<string name="poi_context_menu_call">Show POI phone</string>
 	<string name="website">web site</string>
 	<string name="phone">phone</string>
 	<string name="download_type_to_filter">type to filter</string>
 	<string name="use_high_res_maps">High resolution map</string>
-	<string name="use_high_res_maps_descr">Use high resolution map for high density devices</string>
-	<string name="unknown_location">Location unknown yet</string>
+	<string name="use_high_res_maps_descr">Display high resolution map for high density devices</string>
+	<string name="unknown_location">Position unknown yet</string>
 	<string name="download_files">Download</string>
 	<string name="context_menu_item_search_transport">Search transport</string>
 	<string name="transport_searching_transport">Searching transport (no target)</string>
 	<string name="transport_searching_route">Searching transport ({0} for target)</string>
 	<string name="transport_search_none">none</string>
-	<string name="transport_search_again">Transport search again</string>
+	<string name="transport_search_again">Search transport again</string>
 
 	<string name="map_index">Map</string>
 	<string name="voice">Voice</string>
 	<string name="no_vector_map_loaded">Vector maps were not loaded</string>
 	<string name="gpx_reverse_route">Reverse route</string>
-	<string name="gpx_direct_route">Direct route</string>
+	<string name="gpx_direct_route">Original route</string>
 	<string name="map_route_by_gpx">Route using GPX</string>
-	<string name="gpx_files_not_found">GPX files were not found in /osmand/tracks directory</string>
+	<string name="gpx_files_not_found">GPX files not found in /tracks directory</string>
 	<string name="layer_gpx_layer">GPX tracks...</string>
 	<string name="error_reading_gpx">Error reading GPX data</string>
 
@@ -247,7 +246,7 @@ Destination point is widely used to measure distance and to straight forward nav
 	<string name="rotate_map_bearing_opt">To direction of movement</string>
     <string name="rotate_map_none_opt">Don\'t rotate</string>
 	<string name="rotate_map_to_bearing_descr">Select how to rotate map</string>
-    <string name="rotate_map_to_bearing">Rotate map</string>
+    <string name="rotate_map_to_bearing">Map rotation</string>
 	<string name="show_route">Show route</string>
 	<string name="fav_imported_sucessfully">Favorites succesfully imported</string>
 	<string name="fav_file_to_load_not_found">GPX file containing favorites is not found at {0}</string>
@@ -257,7 +256,7 @@ Destination point is widely used to measure distance and to straight forward nav
 	<string name="export_fav">Export</string>
 	<string name="error_occurred_loading_gpx">Error occurred while loading GPX</string>
 	<string name="send_report">Send report</string>
-	<string name="none_region_found">No regions found on SD card. Try to download regions from the Internet.</string>
+	<string name="none_region_found">No offline data for regions found on SD card. Download regions from the Internet.</string>
 	<string name="poi_namefinder_query_empty">Input search query to find POI</string>
 	<string name="any_poi">Any</string>
 	
@@ -276,8 +275,8 @@ Destination point is widely used to measure distance and to straight forward nav
 	<string name="context_menu_item_show_route">Route from</string>
 	<string name="use_trackball_descr">Use trackball to move map</string>
 	<string name="use_trackball">Use trackball</string>
-	<string name="background_service_wait_int_descr">Choose wait interval for determining location</string>
-	<string name="background_service_wait_int">Wait interval</string>
+	<string name="background_service_wait_int_descr">Choose waiting time for position fix</string>
+	<string name="background_service_wait_int">Waiting time</string>
 	<string name="service_stop_background_service">Switch off background navigation service</string>
 	<string name="where_am_i">Where am I?</string>
 	<string name="process_navigation_service">OsmAnd navigation service</string>
@@ -285,12 +284,12 @@ Destination point is widely used to measure distance and to straight forward nav
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">seconds</string>
 	<string name="int_min">min.</string>
-	<string name="background_service_int_descr">Choose interval to determine location for background service</string>
+	<string name="background_service_int_descr">Choose positioning interval to determine location for background service</string>
 	<string name="background_service_int">Positioning interval</string>
 	<string name="background_service_provider_descr">Choose location provider for background service</string>
 	<string name="background_service_provider">Location provider</string>
 	<string name="background_router_service_descr">Enable background service to track position in long time periods</string>
-	<string name="background_router_service">Router service</string>
+	<string name="background_router_service">Enable background service</string>
 	<string name="off_router_service_no_gps_available">The background routing service requires a location source to be turned on.</string>
 	<string name="routing_settings_descr">Specify routing options</string>
 	<string name="routing_settings">Routing</string>
@@ -305,9 +304,9 @@ Destination point is widely used to measure distance and to straight forward nav
 	<string name="voice_data_initializing">Initializing voice data...</string>
 	<string name="voice_data_not_supported">Unsupported version of voice data</string>
 	<string name="voice_data_corrupted">Specified voice data is corrupted</string>
-	<string name="voice_data_unavailable">Current voice data is not available</string>
+	<string name="voice_data_unavailable">Selected voice data is not available</string>
 	<string name="stop_routing">Stop routing</string>
-	<string name="sd_unmounted">SD card is not accessible.\nYou won\'t be able to see the map or find anything.</string>
+	<string name="sd_unmounted">SD card is not accessible.\nYou won\'t be able to see maps or find things.</string>
 	<string name="sd_mounted_ro">SD card is read-only.\nYou can only see the preloaded map and can\'t download from the Internet.</string>
 	<string name="unzipping_file">Unzipping file...</string>
 	<string name="route_tr">Turn right and go</string>
@@ -320,7 +319,7 @@ Destination point is widely used to measure distance and to straight forward nav
 	<string name="route_head">Head</string>
 	<string name="first_time_continue">Continue</string>
 	<string name="first_time_download">Download regions</string>
-	<string name="first_time_msg">Thank you for choosing OsmAnd. \nTo use all features of the application you need index files, which you can download (Settings -&gt; Data) or prepare yourself. Afterwards, you will be able to search by address, search for POIs, and search for public transport.</string>
+	<string name="first_time_msg">Thank you for choosing OsmAnd. \nTo use all features of the application you need some regional offline data, which you can download (Settings -&gt; Data) or prepare yourself. Afterwards, you will be able to search by address, search for POIs, and search for public transport.</string>
 	<string name="search_poi_location">Searching signal...</string>
 	<string name="search_near_map">Search near last map location</string>
 	<string name="search_nearby">Search nearby</string>
@@ -351,13 +350,13 @@ Destination point is widely used to measure distance and to straight forward nav
 	<string name="update_poi_success">POI data was updated successfully ({0} were loaded)</string>
 	<string name="update_poi_error_local">Error updating local indexes</string>
 	<string name="update_poi_error_loading">Error while loading data from server</string>
-	<string name="update_poi_no_offline_poi_index">No offline POI indexes available for this area</string>
+	<string name="update_poi_no_offline_poi_index">No offline POI data available for this area</string>
 	<string name="update_poi_is_not_available_for_zoom">Updating POIs is not available for small zoom levels</string>
 	<string name="context_menu_item_update_poi">Update POI</string>
-	<string name="context_menu_item_update_map_confirm">Are you sure about updating local data from the Internet?</string>
+	<string name="context_menu_item_update_map_confirm">Update local data via Internet?</string>
 	<string name="search_history_city">City: {0}</string>
 	<string name="search_history_street">Street: {0}, {1}</string>
-	<string name="search_history_int_streets">Intersection streets: {0} x {1} in {2}</string>
+	<string name="search_history_int_streets">Intersection: {0} x {1} in {2}</string>
 	<string name="search_history_building">Building: {0}, {1}, {2}</string>
 	<string name="search_history_navigate_to">Navigate to lat = {0}, lon = {1}</string>
 	<string name="favorite">Favorite</string>
@@ -365,25 +364,25 @@ Destination point is widely used to measure distance and to straight forward nav
 	<string name="history">History</string>
 	<string name="uploading_data">Uploading data...</string>
 	<string name="uploading">Uploading</string>
-	<string name="search_nothing_found">Nothing was found</string>
+	<string name="search_nothing_found">Nothing found</string>
 	<string name="searching">Searching</string>
 	<string name="searching_address">Searching address...</string>
 	<string name="search_osm_nominatim">Search address using OSM Nominatim</string>
 	<string name="hint_search_online">House number, street, city</string>
 	<string name="search_offline_address">Offline</string>
 	<string name="search_online_address">Internet</string>
-	<string name="max_level_download_tile">Max zoom level</string>
-	<string name="max_level_download_tile_descr">Choose max zoom level to download</string>
+	<string name="max_level_download_tile">Max zoom level to download</string>
+	<string name="max_level_download_tile_descr">Choose max zoom level to download online map (tiles)</string>
 	<string name="route_about">About route</string>
 	<string name="route_general_information">Total distance {0}, travelling time {1} h {2} m.</string>
 	<string name="router_service_descr">Choose routing service</string>
 	<string name="router_service">Routing</string>
-	<string name="sd_dir_not_accessible">Directory on SD card to save is not accessible</string>
+	<string name="sd_dir_not_accessible">Save directory on SD card not accessible</string>
 	<string name="download_question">Download {0} - {1} ?</string>
 	<string name="download_question_exist">Offline data for {0} already exists ({1}). Do you want to update it ({2}) ?</string>
 	<string name="address">Address</string>
 	<string name="download_index_success">Download successful</string>
-	<string name="error_io_error">Input/output error occured</string>
+	<string name="error_io_error">I/O error occured</string>
 	<string name="downloading_file">Downloading file...</string>
 	<string name="downloading">Downloading...</string>
 	<string name="downloading_list_indexes">Downloading list of available regions</string>
@@ -391,11 +390,11 @@ Destination point is widely used to measure distance and to straight forward nav
     <string name="select_index_file_to_download">If you can\'t find your region, you can make it yourself. See osmand.net</string>
 	<string name="show_poi_on_map">Show on map</string>
 	<string name="fav_points_edited">Favorite point was edited</string>
-	<string name="fav_points_not_exist">None of favorite points exist</string>
+	<string name="fav_points_not_exist">No favorite points exist</string>
 	<string name="update_existing">Replace</string>
 	<string name="only_show">Only show</string>
 	<string name="follow">Follow</string>
-	<string name="recalculate_route_to_your_location">Recalculate route according to your location</string>
+	<string name="recalculate_route_to_your_location">Recalculating route according to your location</string>
 	<string name="follow_route">Follow to the route</string>
 	<string name="mark_final_location_first">Please select destination first</string>
 	<string name="get_directions">Directions</string>
@@ -419,47 +418,47 @@ Destination point is widely used to measure distance and to straight forward nav
 	<string name="error_calculating_route_occured">Error occurred while calculating route</string>
 	<string name="empty_route_calculated">Empty route is calculated</string>									
 	<string name="new_route_calculated_dist">New route is calculated, distance</string>
-	<string name="arrived_at_destination">You arrived at the destination point</string>
+	<string name="arrived_at_destination">You arrived at the destination</string>
 	<string name="invalid_locations">Locations are invalid</string>
 	<string name="go_back_to_osmand">Go back to OsmAnd map</string>
 	<string name="close">Close</string>
 	<string name="loading_data">Loading data</string>
 	<string name="reading_indexes">Reading indices...</string>
-	<string name="previous_run_crashed">Previous application run was crashed. Log file is at {0}. Please raise the issue and attach log file.</string>
+	<string name="previous_run_crashed">Previous application run crashed. Log file is at {0}. Please report the issue and attach log file.</string>
 	<string name="saving_gpx_tracks">Saving GPX tracks to SD...</string>
 	<string name="finished_task">Finished</string>
-    <string name="reload_indexes_descr">Reload offline data from SD card</string>
-    <string name="reload_indexes">Reload offline data</string>
-    <string name="download_indexes_descr">Download data for offline usage from the Internet</string>
+    <string name="reload_indexes_descr">Re-read offline vector maps and indexes from SD card</string>
+    <string name="reload_indexes">Re-read offline data</string>
+    <string name="download_indexes_descr">Download or update data for offline usage from the Internet</string>
     <string name="download_indexes">Download offline data</string>
     <string name="use_online_routing_descr">Use Internet to calculate route</string>
     <string name="use_online_routing">Use online routing</string>
     <string name="user_password_descr">Your OSM password</string>
-    <string name="user_password">User password</string>
-    <string name="osm_settings_descr">Specify OSM settings: OSM login</string>
-    <string name="monitor_preferences_descr">Specify monitoring settings</string>
+    <string name="user_password">OSM password</string>
+    <string name="osm_settings_descr">Specify OSM settings (login)</string>
+    <string name="monitor_preferences_descr">Specify tracking settings</string>
     <string name="data_settings_descr">Specify language, download/reload data</string>
     <string name="data_settings">Data</string>
-    <string name="map_preferences_descr">Specify map settings: map source, rotation, center position, screen orientation</string>
+    <string name="map_preferences_descr">Specify map settings: map source, rotation, marker position, screen orientation</string>
     <string name="osm_settings">OSM</string>
     <string name="auto_zoom_map_descr">Auto zoom map according to your speed</string>
     <string name="auto_zoom_map">Auto zoom map</string>
     <string name="additional_settings">Additional settings</string>
-    <string name="settings_preset_descr">Select predefined settings</string>
+    <string name="settings_preset_descr">Select or define usage profiles</string>
     <string name="settings_preset">Application mode</string>
     <string name="settings">Settings</string>
-    <string name="save_current_track_descr">Save current track to SD</string>
+    <string name="save_current_track_descr">Save current track to SD now</string>
     <string name="save_current_track">Save current track</string>
     <string name="save_track_interval_descr">Choose time interval to save track</string>
     <string name="save_track_interval">Save track interval</string>
-    <string name="monitor_preferences">Monitoring</string>
+    <string name="monitor_preferences">Tracking</string>
     <string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
     <string name="save_track_to_gpx">Save track to GPX</string>
     <string name="navigate_to">Navigate to</string>
     <string name="update_tile">Update map</string>
     <string name="reload_tile">Reload tile</string>
     <string name="user_name_descr">Your OSM user name</string>
-    <string name="user_name">User name</string>
+    <string name="user_name">OSM user name</string>
     <string name="mark_point">Target</string>
     <string name="show_osm_bugs_descr">Show OpenStreetBugs on map</string>
     <string name="show_osm_bugs">Show OpenStreetBugs</string>
@@ -476,8 +475,8 @@ Destination point is widely used to measure distance and to straight forward nav
     <string name="position_on_map_descr">Choose position on the map</string>
     <string name="position_on_map">Position on the map</string>
     <string name="map_specify_point">Specify point</string>
-    <string name="show_view_angle_descr">Show aspect of view based on compass</string>
-    <string name="show_view_angle">Show aspect of view</string>
+    <string name="show_view_angle_descr">Display viewing direction based on compass</string>
+    <string name="show_view_angle">Display viewing direction</string>
     <string name="stop_navigation">Clear point</string>
     <string name="navigate_to_point">Mark point</string>
     <string name="map_view_3d_descr">Enable 3D view of the map</string>
@@ -485,7 +484,7 @@ Destination point is widely used to measure distance and to straight forward nav
     
     <string name="show_poi_over_map_description">Show POI over map (use last chosen filter)</string>
     <string name="show_poi_over_map">Show POI</string>
-    <string name="map_tile_source_descr">Choose the source of tiles: </string>
+    <string name="map_tile_source_descr">Choose the source of map tiles: </string>
     <string name="map_tile_source">Map tile source</string>
     <string name="map_source">Map source</string>
     <string name="use_internet">Use Internet</string>
@@ -515,7 +514,7 @@ Destination point is widely used to measure distance and to straight forward nav
 <string name="incremental_search_street">Search street incrementally</string>
 <string name="incremental_search_building">Search building incrementally</string>
 <string name="choose_available_region">Choose region from list</string>
-<string name="choose_intersected_street">Choose intersected street</string>
+<string name="choose_intersected_street">Choose intersecting street</string>
 <string name="Closest_Amenities">Closest amenities</string>
 <string name="app_mode_default">Default</string>
 <string name="app_mode_car">Car</string>
@@ -537,7 +536,7 @@ Destination point is widely used to measure distance and to straight forward nav
 <string name="search_address_street">Street</string>
 <string name="search_address_building">Building</string>
 <string name="search_address_building_option">Building</string>
-<string name="search_address_street_option">Intersected street</string>
+<string name="search_address_street_option">Intersecting street</string>
 
 <string name="search_tabs_location">Location</string>
 
@@ -581,11 +580,11 @@ Destination point is widely used to measure distance and to straight forward nav
 <string name="osb_close_dialog_title">Closing bug</string>
 <string name="osb_close_dialog_close_button">Close bug</string>
 <string name="osb_close_dialog_success">Bug was successfully closed</string>
-<string name="osb_close_dialog_error">Exception occured : bug was not closed</string>
+<string name="osb_close_dialog_error">Exception occured: bug was not closed</string>
 
 <string name="poi_edit_title">Edit POI</string>
 <string name="poi_create_title">Create POI</string>
-<string name="poi_error_poi_not_found">Node can not be found or amenity is not a single node</string>
+<string name="poi_error_poi_not_found">Node cannot be found or amenity is not a single node</string>
 <string name="poi_remove_confirm_template">Delete {0} (enter comment) ?</string>
 <string name="poi_remove_title">Delete POI</string>
 <string name="default_buttons_delete">Delete</string>
@@ -594,7 +593,7 @@ Destination point is widely used to measure distance and to straight forward nav
 <string name="poi_action_change">change</string>
 <string name="poi_action_succeded_template">Action {0} completed successfully.</string>
 <string name="poi_error_unexpected_template">Unexpected error occured while performing action {0}.</string>
-<string name="poi_error_io_error_template">Input/output error occured while performing action {0}.</string>
+<string name="poi_error_io_error_template">I/O error occured while performing action {0}.</string>
 
 <string name="poi_error_info_not_loaded">Info about node was not loaded</string>
 
