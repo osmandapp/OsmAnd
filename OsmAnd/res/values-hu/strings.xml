@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+  <string name="warning_tile_layer_not_downloadable">%1$s térkép réteget nem tudja az alkalmazás letölteni, újra kell telepíteni.</string>
+  <string name="overlay_transparency_descr">Rátét áttetszőség megváltoztatása</string>
+  <string name="overlay_transparency">Rátét áttetszőség</string>
+  <string name="map_transparency_descr">Alap térkép áttetszőség megváltoztatása</string>
+  <string name="map_transparency">Térkép áttetszőség</string>
+  <string name="modify_transparency">Áttetszőség megváltoztatása</string>
+  <string name="layer_underlay">Alátét térkép...</string>
+  <string name="map_underlay">Alátét térkép</string>
+  <string name="map_underlay_descr">Alátét térkép kiválasztás</string>
+  <string name="layer_overlay">Rátét térkép...</string>
+  <string name="default_none">Nincs</string>
+  <string name="map_overlay">Rátét térkép</string>
+  <string name="map_overlay_descr">Rátét térkép kiválasztás</string>
+  <string name="map_vector_data">Vektoros térképek</string>
+  <string name="map_vector_data_descr">Letöltött vektoros térképek használata</string>
+  <string name="tile_source_already_installed">A térkép már telepítve van, a beállítások frissítésre kerülnek</string>
+  <string name="select_tile_source_to_install">Térkép kiválasztása telepítéshez frissítéshez</string>
+  <string name="internet_not_available">A művelet elvégzéséhez Internet elérése szükséges</string>
+  <string name="more_external_layer">További telepítése...</string>
   <string name="tip_update_index">Index adatok frissítése</string>
   <string name="tip_update_index_t">Fontos az aktuális térképek megléte. Az Osmand program tartalmaz egy letöltéskezelőt amivel egyszerűen ellenőrizhető, hogy létezik-e frissebb a meglévő index adatokból.
 \n\tA frissítések ellenőrzéséhez a \'Főmenü\'->\'Beállítások\'->\'Adatok kapcsolat nélküli munkához\'->\'Index adatok letöltése\' menüpontot kell választani. Az index adatok internetről való frissítése után a \'Letöltöttek szűrése\' menüt kell választani.
