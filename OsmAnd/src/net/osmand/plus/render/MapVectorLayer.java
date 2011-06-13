@@ -1,6 +1,7 @@
 package net.osmand.plus.render;
 
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.views.BaseMapLayer;
@@ -12,6 +13,7 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.widget.Toast;
 
 public class MapVectorLayer extends BaseMapLayer {
 
@@ -99,7 +101,16 @@ public class MapVectorLayer extends BaseMapLayer {
 					pixRect.set(-view.getWidth()/3, -view.getHeight() / 4, 4 * view.getWidth() /3, 5 * view.getHeight() / 4);
 					updateRotatedTileBox();
 					resourceManager.updateRendererMap(rotatedTileBox);
+					// does it slow down Map refreshing ?
+					// Arguments : 1. Map request to read data slows whole process // 2. It works in operating memory
+					if(!warningToSwitchMapShown){
+						if(!resourceManager.getRenderer().containsLatLonMapData(view.getLatitude(), view.getLongitude(), view.getZoom())){
+							Toast.makeText(view.getContext(), R.string.switch_to_raster_map_to_see, Toast.LENGTH_LONG).show();
+							warningToSwitchMapShown = true;
+						}
+					}
 				}
+				
 			}
 			
 			MapRenderRepositories renderer = resourceManager.getRenderer();

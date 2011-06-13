@@ -28,6 +28,10 @@ public class YandexTrafficLayer extends MapTileLayer {
 	private long lastTimestampUpdated;
 	private String mTimestamp = null;
 	private boolean updateThreadRan = false;
+	
+	public YandexTrafficLayer() {
+		super(false);
+	}
 		
 	public void setVisible(boolean visible) {
 		if(isVisible() != visible){

@@ -142,6 +142,17 @@ public class MapRenderRepositories {
 		}
 	}
 	
+	public boolean containsLatLonMapData(double lat, double lon, int zoom) {
+		int x = MapUtils.get31TileNumberX(lon);
+		int y = MapUtils.get31TileNumberY(lat);
+		for (BinaryMapIndexReader reader : files.values()) {
+			if (reader.containsMapData(x, y, zoom)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public void clearAllResources(){
 		clearCache();
 		for(String f : new ArrayList<String>(files.keySet())){
