@@ -35,8 +35,8 @@
 	\n\t\'Green\' - indicates data files identical on device and server
 	\n\t\'Blue\' - indicates available updates on server</string>
 
-	<string name="level_to_switch_vector_raster_descr">Maximum zoom level to use vector rendering instead of map tiles</string>
-	<string name="level_to_switch_vector_raster">Max. vector zoom level</string>
+	<string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector rendering instead of map tiles</string>
+	<string name="level_to_switch_vector_raster">Min. vector zoom level</string>
 
 	<string name="tip_day_night_mode">Day/Night Mode</string>
 	<string name="tip_day_night_mode_t">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker).
@@ -205,7 +205,7 @@
 	<string name="select_all">Select all</string>
 	<string name="reload">Reload</string>
 
-	<string name="general_settings_descr">Config internet usage, map rotation, screen orientation and others</string>
+	<string name="general_settings_descr">Config internet usage, display options and more</string>
     <string name="general_settings">General Settings</string>
 	<string name="rendering_settings_descr">Config map source and appearance</string>
     <string name="rendering_settings">Map appearance</string>
@@ -229,7 +229,6 @@
 	<string name="renderer_load_exception">Exception occured: renderer was not loaded</string>
 	<string name="renderers">Vector renderer</string>
 	<string name="renderers_descr">Choose (offline) vector rendering style</string>
-
 
 	<string name="poi_context_menu_website">Show POI website</string>
 	<string name="poi_context_menu_call">Show POI phone</string>
