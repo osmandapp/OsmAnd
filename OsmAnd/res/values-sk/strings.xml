@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="switch_to_raster_map_to_see">Aktuálna pozícia nie je pokrytá Vašimi offline-ovými vektorovými mapami. Môžete prepnúť zdroj mapy cez menu (Vrstvy -> Zdroj mapy... ). Je potrebné stiahnuť dodatočné vektorové mapy.</string>
+	<string name="switch_to_vector_map_to_see">Môžete prepnúť na offline-ové vektorové mapy cez menu (Vrstvy -> Zdroj mapy... -> Vektorové OSM mapy) na zobrazenie mapy.</string>
+	<string name="binary_map_download_success">Úspech. Môžete prepnúť na offline-ové vektorové mapy v menu  Vrstvy -> Zdroj mapy... -> Vektorové OSM mapy.</string>
+	<string name="choose_audio_stream">Tok hlasových povelov</string>
+	<string name="choose_audio_stream_descr">Výber kanálu pre poskytnutie hlasových povelov (závisí od systémovej konfigurácie)</string>
+	<string name="voice_stream_voice_call">Tok pre hlasový hovor</string>
+	<string name="voice_stream_notification">Tok pre oznámenia</string>
+	<string name="voice_stream_music">Tok pre hudbu</string>
+	<string name="warning_tile_layer_not_downloadable">Aplikácia nemôže stiahnuť mapovú vrstvu %1$s, prosím skúste ju preinštalovať.</string>	
 	<string name="overlay_transparency_descr">Úprava priehľadnosti prekrývacej mapy</string>
 	<string name="overlay_transparency">Priehľadnosť prekrývacej mapy</string>
 	<string name="map_transparency_descr">Úprava priehľadnosti základnej mapy</string>
