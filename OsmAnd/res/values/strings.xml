@@ -491,8 +491,8 @@
     <string name="choose_street">Choose street</string>
     <string name="choose_city">Choose city</string>
     <string name="ChooseCountry">Choose country</string>
-    <string name="position_on_map_descr">Position marker</string>
-    <string name="position_on_map">Choose location of position marker on the map</string>
+    <string name="position_on_map_descr">Choose location of position marker on the map</string>
+    <string name="position_on_map">Position marker</string>
     <string name="map_specify_point">Specify point</string>
     <string name="show_view_angle_descr">Display viewing direction based on compass</string>
     <string name="show_view_angle">Display viewing direction</string>
@@ -511,7 +511,7 @@
     <string name="map_preferences">Map</string>
     <string name="settings_activity">Settings</string>
     <string name="show_gps_coordinates_text">Show GPS coordinates on map</string>
-    <string name="use_internet_to_download_tile">Use Internet to download missing tiles</string>
+    <string name="use_internet_to_download_tile">Use Internet to download missing map tiles</string>
     <string name="app_name">OsmAnd</string>
     <string name="app_description">Navigation application</string>
 
