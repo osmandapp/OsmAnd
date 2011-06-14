@@ -4,7 +4,7 @@
 	<string name="switch_to_vector_map_to_see">You can switch to offline vector maps using menu (Layers -> Map Source... -> Offline vector maps) to see the map.</string>
 	<string name="binary_map_download_success">Successful. You can switch to offline vector maps on menu  Layers -> Map Source... -> Offline vector maps.</string>
 	<string name="choose_audio_stream">Voice guidance stream</string>
-	<string name="choose_audio_stream_descr">Choose channel to provide voice guidance (depends on system configuration)</string>
+	<string name="choose_audio_stream_descr">Choose channel to play voice guidance (depends on system configuration)</string>
 	<string name="voice_stream_voice_call">Voice call stream</string>
 	<string name="voice_stream_notification">Notification stream</string>
 	<string name="voice_stream_music">Music stream</string>
@@ -30,7 +30,7 @@
 
 	<string name="tip_update_index">Update of Offline Data</string>
 	<string name="tip_update_index_t">\tHaving up-to-date map data is essential. Osmand provides a download manager which can check for available offline data updates.
-	\n\tTo check for updates go to \'Main Menu\'->\'Settings\'->\'Offline data\'->\'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -> \'Filter downloaded\' to indicate updates only for data already on your device.
+	\n\tTo check for updates go to \'Main Menu\' -> \'Settings\' -> \'Offline data\' -> \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -> \'Filter downloaded\' to indicate updates only for data already on your device.
 	\n\tThe availability of updates  is depicted by the following colors:
 	\n\t\'Green\' - indicates data files identical on device and server
 	\n\t\'Blue\' - indicates available updates on server</string>
@@ -41,7 +41,7 @@
 	<string name="tip_day_night_mode">Day/Night Mode</string>
 	<string name="tip_day_night_mode_t">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker).
 	\n\tNight colors are safer for night driving.
-	\n\tYou can set a policy for day/night switching in \'Main Menu\'->\'Settings\'->\'Map appearance\'->\'Day/night mode\'.
+	\n\tYou can set a policy for day/night switching in \'Main Menu\' -> \'Settings\' -> \'Maps\' ->\'Day/night mode\'.
 	\n\tChoices are:
 	\n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default)
 	\n\t\'Day\' - always use day mode
@@ -50,18 +50,18 @@
 	<string name="tip_location_sharing">Location Sharing</string>
 	<string name="tip_location_sharing_t">\tYou can share the location of interesting places on your trip  with family or friends.
 	\n\tTo share any location you want:
-	\n\tUse \'Map context menu\'->\'Share location\' menu.
+	\n\tUse \'Map context menu\' -> \'Share location\' menu.
 	\n\tThen select a way to share your location. The choices are: E-Mail, SMS(text), or just copy location coordinates to clipboard.</string>
 
 	<string name="tip_favorites">Favorite Points</string>
 	<string name="tip_favorites_t">\tFrequently used points can be saved as Favorites.
-	\n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Menu\'->\'Favorites\'.
+	\n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Menu\' -> \'Favorites\'.
 	\n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to Navigate to, Edit or Delete it.
-	\n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\'->\'Layers\'.</string>
+	\n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' ->\'Layers\'.</string>
 
 	<string name="tip_osm_improve">Improving OSM Data</string>
 	<string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and routing- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks!
-\n\tFor this you need to first provide your OSM login information in \'Main Menu\'->\'Settings\'->\'OSM\'.
+\n\tFor this you need to first provide your OSM login information in \'Main Menu\' -> \'Settings\' -> \'OSM\'.
 \n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it.
 \n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem.
 \n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button.
@@ -76,16 +76,16 @@
 	<string name="preferred_locale">Display language</string>
 
 	<string name="tip_map_switch">Map Source</string>
-	<string name="tip_map_switch_t">\tThe fastest way to change the map source and layers displayed is pressing \'Menu\'->\'Layers\' in map view.
+	<string name="tip_map_switch_t">\tThe fastest way to change the map source and layers displayed is pressing \'Menu\' -> \'Layers\' in map view.
 \n\tUnder \'Map source...\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources, or maps manually created using e.g. OsmAndMapCreator on a PC.
 \n\tOsmAnd also supports custom sources.</string>
 
 	<string name="tip_app_mode">Application Mode</string>
 	<string name="tip_app_mode_t">\tOsmAnd supports different application profiles for different use cases.
-\n\tYou can change profiles in \'Menu\'->\'Settings\'->\'Application mode\', or when creating a route.</string>
+\n\tYou can change profiles in \'Menu\' -> \'Settings\' -> \'Application mode\', or when creating a route.</string>
 
 	<string name="tip_navigation">Navigation</string>
-	<string name="tip_navigation_t">\tBefore starting navigation (routing) you need to select a destination point first. After that press \'Menu\'->\'Directions\' on map and select navigation type.</string>
+	<string name="tip_navigation_t">\tBefore starting navigation (routing) you need to select a destination point first. After that press \'Menu\' -> \'Directions\' on map and select navigation type.</string>
 
 	<string name="tip_select_destination_point">Select Destination Point</string>
 	<string name="tip_select_destination_point_t">\tYou can select a destination point directly in the map (context menu, then \'Navigate to\'), or in all search activities.
@@ -205,10 +205,10 @@
 	<string name="select_all">Select all</string>
 	<string name="reload">Reload</string>
 
-	<string name="general_settings_descr">Config internet usage, display options and more</string>
+	<string name="general_settings_descr">Config internet usage, display options, and more</string>
     <string name="general_settings">General Settings</string>
 	<string name="rendering_settings_descr">Config map source and appearance</string>
-    <string name="rendering_settings">Map appearance</string>
+    <string name="rendering_settings">Maps</string>
     <string name="index_settings_descr">Get/update data for offline usage</string>
     <string name="index_settings">Offline data</string>
 	<string name="osmand_service">Background service</string>
@@ -228,7 +228,7 @@
 	<string name="renderer_load_sucess">Renderer sucessfully loaded</string>
 	<string name="renderer_load_exception">Exception occured: renderer was not loaded</string>
 	<string name="renderers">Vector renderer</string>
-	<string name="renderers_descr">Choose (offline) vector rendering style</string>
+	<string name="renderers_descr">Choose (offline) vector map appearance</string>
 
 	<string name="poi_context_menu_website">Show POI website</string>
 	<string name="poi_context_menu_call">Show POI phone</string>
@@ -294,7 +294,7 @@
 	<string name="context_menu_item_show_route">Route from</string>
 	<string name="use_trackball_descr">Use trackball to move map</string>
 	<string name="use_trackball">Use trackball</string>
-	<string name="background_service_wait_int_descr">Choose waiting time for position fix</string>
+	<string name="background_service_wait_int_descr">Set waiting time for position fix</string>
 	<string name="background_service_wait_int">Waiting time</string>
 	<string name="service_stop_background_service">Switch off background navigation service</string>
 	<string name="where_am_i">Where am I?</string>
@@ -303,12 +303,12 @@
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">seconds</string>
 	<string name="int_min">min.</string>
-	<string name="background_service_int_descr">Choose positioning interval to determine location for background service</string>
+	<string name="background_service_int_descr">Set interval for location determination by background service</string>
 	<string name="background_service_int">Positioning interval</string>
 	<string name="background_service_provider_descr">Choose location provider for background service</string>
 	<string name="background_service_provider">Location provider</string>
 	<string name="background_router_service_descr">Enable background service to track position over long time periods</string>
-	<string name="background_router_service">Enable background service</string>
+	<string name="background_router_service">Use background service</string>
 	<string name="off_router_service_no_gps_available">The background routing service requires a location source to be turned on.</string>
 	<string name="routing_settings_descr">Specify routing options</string>
 	<string name="routing_settings">Navigation</string>
@@ -454,7 +454,7 @@
     <string name="use_online_routing">Use online routing</string>
     <string name="user_password_descr">Your OSM password</string>
     <string name="user_password">OSM password</string>
-    <string name="osm_settings_descr">Specify Openstreetmap.org settings needed for submissions</string>
+    <string name="osm_settings_descr">Specify Openstreetmap.org (OSM) settings needed for OSM submissions</string>
     <string name="monitor_preferences_descr">Specify tracking settings</string>
     <string name="data_settings_descr">Specify language, download/reload data</string>
     <string name="data_settings">Data</string>
@@ -472,7 +472,7 @@
     <string name="save_track_interval">Track interval</string>
     <string name="monitor_preferences">Tracking</string>
     <string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
-    <string name="save_track_to_gpx">Save track to GPX</string>
+    <string name="save_track_to_gpx">Log track to GPX</string>
     <string name="navigate_to">Navigate to</string>
     <string name="update_tile">Update map</string>
     <string name="reload_tile">Reload tile</string>
@@ -504,7 +504,7 @@
     <string name="show_poi_over_map_description">Show POI over map (use last chosen filter)</string>
     <string name="show_poi_over_map">Show POI</string>
     <string name="map_tile_source_descr">Choose the source of online or offline map tiles: </string>
-    <string name="map_tile_source">Map tile source</string>
+    <string name="map_tile_source">Tile map source</string>
     <string name="map_source">Map source</string>
     <string name="use_internet">Use Internet</string>
     <string name="show_location">Show location</string>
