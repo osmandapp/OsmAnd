@@ -614,7 +614,7 @@
 <string name="poi_action_change">ändern</string>
 <string name="poi_action_succeded_template">Aktion {0} erfolgreich abgeschlossen.</string>
 <string name="poi_error_unexpected_template">Unerwarteter Fehler während der Aktion {0} aufgetreten.</string>
-<string name="poi_error_io_error_template">IO Fehler während der Aktion {0} aufgetreten.</string>
+<string name="poi_error_io_error_template">I/O Fehler während der Aktion {0} aufgetreten.</string>
 
 <string name="poi_error_info_not_loaded">Informationen über den Knoten wurden nicht geladen</string>
 
