@@ -62,7 +62,7 @@
 	\n\tUm alle Favoriten in der Karte anzuzeigen, wählt man \'Favoriten\' unter \'Karten-Kontextmenü\' -> \'Darstellung\'.</string>
 
 	<string name="tip_osm_improve">OSM-Bearbeitung</string>
-	<string name="tip_osm_improve_t">\tOsmAnd verwendet Daten basierend auf Openstreetmap.org (OSM), und kann (neben Kartenanzeige und Navigation) auch zur Verbesserung der OSM-Daten verwendet werden. Man kann mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden.
+	<string name="tip_osm_improve_t">\tOsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM), und kann (neben Kartenanzeige und Navigation) auch zur Verbesserung der OSM-Daten verwendet werden. Man kann mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden.
 \n\tDazu muss man zunächst unter \'Hauptmenü\' -> \'Einstellungen\' -> \'OSM\' seine OSM Login-Daten hinterlegen.
 \n\tUm einen neuen POI zu erzeugen, vewendet man die Option \'POI erstellen\' im Karten-Kontextmenu. Danach werden die Informationen zum POI eingetragen und über die Menüführung zu OSM hochgeladen.
 \n\tGefundene Fehler auf den Karten kann man direkt berichten, und die Openstreetmap Community kann diese schneller beheben.
@@ -348,7 +348,7 @@
 	<string name="map_orientation_portrait">Hochfortmat</string>
 	<string name="map_orientation_landscape">Querformat</string>
 	<string name="map_screen_orientation">Anzeigeausrichtung</string>
-	<string name="map_screen_orientation_descr">Orientierung der Anzeige</string>
+	<string name="map_screen_orientation_descr">Ausrichtung der Landkartenzeige</string>
 	<string name="opening_hours_not_supported">Ändern von Öffnungszeiten wird nicht unterstüzt</string>
 	<string name="add_new_rule">Füge neue Regel hinzu</string>
 	<string name="transport_Routes">Strecken</string>
@@ -454,7 +454,7 @@
     <string name="download_indexes">Offline-Daten herunterladen</string>
     <string name="use_online_routing_descr">Internet zur Streckenberechnung verwenden</string>
     <string name="use_online_routing">Online Streckenberechnung</string>
-    <string name="user_password_descr">OpenStreetMap.org Kennwort</string>
+    <string name="user_password_descr">Persönliches Kennwort</string>
     <string name="user_password">OSM-Kennwort</string>
     <string name="osm_settings_descr">Einstellungen für OpenStreetMap.org (OSM) Beiträge</string>
     <string name="monitor_preferences_descr">Positions-Logging konfigurieren</string>
@@ -478,7 +478,7 @@
     <string name="navigate_to">Navigiere zu</string>
     <string name="update_tile">Karte (Kacheln) aktualisieren</string>
     <string name="reload_tile">Kartenteile (Kacheln) aktualisieren</string>
-    <string name="user_name_descr">OpenStreetMap.org Benutzername</string>
+    <string name="user_name_descr">Persönlicher Benutzername</string>
     <string name="user_name">OSM-Benutzername</string>
     <string name="mark_point">Ziel</string>
     <string name="show_osm_bugs_descr">OSM-Fehlerberichte anzeigen</string>
