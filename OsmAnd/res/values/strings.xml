@@ -41,7 +41,7 @@
 	<string name="tip_day_night_mode">Day/Night Mode</string>
 	<string name="tip_day_night_mode_t">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker).
 	\n\tNight colors are safer for night driving.
-	\n\tYou can set a policy for day/night switching in \'Main Menu\'->\'Settings\'->\'Map appearance\'->\'Day/night mode\'.
+	\n\tYou can set a policy for day/night switching in \'Main Menu\'->\'Settings\'->\'Maps\'->\'Day/night mode\'.
 	\n\tChoices are:
 	\n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default)
 	\n\t\'Day\' - always use day mode
@@ -257,7 +257,7 @@
 
 	<string name="vector_data">Offline vector maps</string>
 	<string name="transport_context_menu">Search transport at stop</string>
-	<string name="point_on_map">Point on map\n Lat {0,number,#.####}\n Lon {1,number,#.####}</string>
+	<string name="point_on_map">Point on map:\n Lat {0,number,#.####}\n Lon {1,number,#.####}</string>
 	<string name="osb_bug_name">Bug</string>
 	<string name="poi_context_menu_modify">Modify POI</string>
 	<string name="poi_context_menu_delete">Delete POI</string>
