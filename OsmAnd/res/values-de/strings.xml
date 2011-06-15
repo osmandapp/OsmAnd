@@ -4,7 +4,7 @@
 	<string name="switch_to_vector_map_to_see">Sie können in der Kartenansicht auf Offline-Vektor-Karten wechseln mittels Menü -> Layers -> Kartenquelle -> Offline-Vektor-Karten.</string>
 	<string name="binary_map_download_success">Download erfolgreich. Sie können in der Kartenansicht auf Offline-Vektor-Karten wechseln mittels Menu -> Darstellung -> Kartenquelle -> Offline-Vektor-Karten</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
-	<string name="choose_audio_stream_descr">Navigations-Sprachausgabe wählen (hängt von der Systemkonfiguration ab)</string>
+	<string name="choose_audio_stream_descr">Navigations-Sprachausgabe wählen (abhängig von Systemkonfiguration)</string>
 	<string name="voice_stream_voice_call">Anruf-Stream</string>
 	<string name="voice_stream_notification">Benachrichtgungs-Stream</string>
 	<string name="voice_stream_music">Musik-Stream</string>
@@ -43,7 +43,7 @@
 	<string name="tip_day_night_mode">Tag/Nacht Modus</string>
 	<string name="tip_day_night_mode_t">\tDie Anzeige von Offline-Vektor-Karten kann für einige Anzeigemodi zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden.
 	\n\tInsbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
-	\n\tDer Umschaltmechanismus kann in \'Hauptmenü\' -> \'Einstellungen\' -> \'Kartendarstellung\' -> \'Tag/Nacht Modus\' gewählt werden.
+	\n\tDer Umschaltmechanismus kann in \'Hauptmenü\' -> \'Einstellungen\' -> \'Landkarten\' -> \'Tag/Nacht Modus\' gewählt werden.
 	\n\tZur Auswahl stehen:
 	\n\t\'Sonnenaufgang/-untergang\' - automatischer Modus (Voreinstellung)
 	\n\t\'Tag\' - permanente Tagesansicht
@@ -113,7 +113,7 @@
 	<string name="next_button">Weiter</string>
 	<string name="previous_button">Zurück</string>
 
-	<string name="unit_of_length_descr">Verwendete Längen und Geschwindigkeitseinheiten</string>
+	<string name="unit_of_length_descr">Verwendete Längen- und Geschwindigkeitseinheiten</string>
 	<string name="unit_of_length">Längeneinheiten</string>
 	<string name="si_mi_foots">Meilen/Fuß</string>
 	<string name="si_mi_yard">Meilen/Yards</string>
@@ -210,13 +210,13 @@
 	<string name="general_settings_descr">Konfiguration der Internet-Verwendung, Anzeige und mehr</string>
     <string name="general_settings">Allgemein</string>
 	<string name="rendering_settings_descr">Konfiguration der Kartenquellen und -Darstellung</string>
-    <string name="rendering_settings">Kartendarstellung</string>
+    <string name="rendering_settings">Landkarten</string>
     <string name="index_settings_descr">Laden oder Aktualisieren der Daten für Offline-Verwendung</string>
     <string name="index_settings">Offline-Daten</string>
 	<string name="osmand_service">Hintergrund-Service</string>
 	<string name="osmand_service_descr">Zur Verwendung von OsmAnd bei ausgeschalterter Anzeige</string>
 	<string name="fast_route_mode">Schnellste Route</string>
-	<string name="fast_route_mode_descr">Auswählen für schnellste Route oder nicht auswählen für kürzeste Route</string>
+	<string name="fast_route_mode_descr">Auswählen für schnellste Route oder nicht für kürzeste Route</string>
 	<string name="tiles_to_download_estimated_size">Bei Zoomlevel {0} lade {1} Kacheln ({2} MB )</string>
 	<string name="context_menu_item_download_map">Karte herunterladen</string>
 	<string name="select_max_zoom_preload_area">Wähle maximale zu ladende Vergrößerung</string>
@@ -259,15 +259,15 @@
 
 	<string name="vector_data">Offline-Vektor-Karten</string>
 	<string name="transport_context_menu">Suche nach Verbindung an Haltestelle</string>
-	<string name="point_on_map">Punkt auf Karte\n Lat {0,number,#.####}\n Lon {1,number,#.####}</string>
+	<string name="point_on_map">Punkt auf Karte:\n Lat {0,number,#.####}\n Lon {1,number,#.####}</string>
 	<string name="osb_bug_name">OSM-Fehler</string>
 	<string name="poi_context_menu_modify">Bearbeite POI</string>
 	<string name="poi_context_menu_delete">Lösche POI</string>
 	<string name="rotate_map_compass_opt">Nach Kompass</string>
 	<string name="rotate_map_bearing_opt">Nach Bewegungsrichtung</string>
-    <string name="rotate_map_none_opt">Fix</string>
+    <string name="rotate_map_none_opt">Keine Rotation</string>
 	<string name="rotate_map_to_bearing_descr">Art der Kartenausrichtung wählen</string>
-    <string name="rotate_map_to_bearing">Kartenausrichtung</string>
+    <string name="rotate_map_to_bearing">Kartenrotation</string>
 	<string name="show_route">Route anzeigen</string>
 	<string name="fav_imported_sucessfully">Favoriten erfolgreich importiert</string>
 	<string name="fav_file_to_load_not_found">GPX Datei mit den Favoriten nicht gefunden unter {0}</string>
@@ -313,7 +313,7 @@
 	<string name="background_router_service">Hintergrund-Service</string>
 	<string name="off_router_service_no_gps_available">Hintergrunddienst zur Routenberechnung erfordert aktiviertes GPS.</string>
 	<string name="routing_settings_descr">Navigationsoptionen</string>
-	<string name="routing_settings">Navigieren</string>
+	<string name="routing_settings">Navigation</string>
 	<string name="hide_poi_filter">Filter verstecken</string>
 	<string name="show_poi_filter">Filter zeigen</string>
 	<string name="search_poi_filter">Filter</string>
@@ -347,8 +347,8 @@
 	<string name="map_orientation_default">je nach Geräteorientierung</string>
 	<string name="map_orientation_portrait">Hochfortmat</string>
 	<string name="map_orientation_landscape">Querformat</string>
-	<string name="map_screen_orientation">Kartenorientierung</string>
-	<string name="map_screen_orientation_descr">Wähle die Kartenorientierung</string>
+	<string name="map_screen_orientation">Anzeigeausrichtung</string>
+	<string name="map_screen_orientation_descr">Orientierung der Anzeige</string>
 	<string name="opening_hours_not_supported">Ändern von Öffnungszeiten wird nicht unterstüzt</string>
 	<string name="add_new_rule">Füge neue Regel hinzu</string>
 	<string name="transport_Routes">Strecken</string>
@@ -392,8 +392,8 @@
 	<string name="hint_search_online">Hausnummer, Straße, Ort</string>
 	<string name="search_offline_address">Offline</string>
 	<string name="search_online_address">Internet</string>
-	<string name="max_level_download_tile">Max. Online-Zoomi</string>
-	<string name="max_level_download_tile_descr">Maximale Vergößerung bis zu der online Karten-Daten (Kacheln) aus dem Internet geladen werden</string>
+	<string name="max_level_download_tile">Max. Online-Zoom</string>
+	<string name="max_level_download_tile_descr">Maximale Vergößerung bis zu der Online-Karten-Daten (Kacheln) aus dem Internet geladen werden</string>
 	<string name="route_about">Routeninformationen</string>
 	<string name="route_general_information">{0} Gesamtentfernung\n{1}:{2} Reisezeit</string>
 	<string name="router_service_descr">Online- oder Offline-Dienst zur Streckenberechnung wählen</string>
@@ -468,7 +468,7 @@
     <string name="settings_preset_descr">Vordefinierte Einstellungsprofile wählen und ändern</string>
     <string name="settings_preset">Applikationsmodus</string>
     <string name="settings">Einstellungen</string>
-    <string name="save_current_track_descr">Derzeitigen Track jetzt auf SD-Karte speichern</string>
+    <string name="save_current_track_descr">Aktuellen Track jetzt auf SD-Karte abspeichern</string>
     <string name="save_current_track">Track jetzt speichern</string>
     <string name="save_track_interval_descr">Intervall zwischen zwei Positionsbestimmungen</string>
     <string name="save_track_interval">Logging-Intervall</string>
@@ -493,7 +493,7 @@
     <string name="choose_street">Straße wählen</string>
     <string name="choose_city">Ort wählen </string>
     <string name="ChooseCountry">Staat wählen</string>
-    <string name="position_on_map_descr">Position des Markers auf der Karte auswählen</string>
+    <string name="position_on_map_descr">Position des Markers auf der Karte</string>
     <string name="position_on_map">Positionsmarker</string>
     <string name="map_specify_point">Punkt wählen</string>
     <string name="show_view_angle_descr">Blickrichtung gemäss Kompass anzeigen</string>
