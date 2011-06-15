@@ -205,11 +205,11 @@
 	<string name="select_all">Select all</string>
 	<string name="reload">Reload</string>
 
-	<string name="general_settings_descr">Config internet usage, display options, and more</string>
+	<string name="general_settings_descr">Config internet use, display options, and more</string>
     <string name="general_settings">General Settings</string>
 	<string name="rendering_settings_descr">Config map source and appearance</string>
     <string name="rendering_settings">Maps</string>
-    <string name="index_settings_descr">Get/update data for offline usage</string>
+    <string name="index_settings_descr">Get/update data for offline use</string>
     <string name="index_settings">Offline data</string>
 	<string name="osmand_service">Background service</string>
 	<string name="osmand_service_descr">Run background service to use OsmAnd while screen is off</string>
@@ -448,7 +448,7 @@
 	<string name="finished_task">Finished</string>
     <string name="reload_indexes_descr">Re-read offline vector maps and indexes from SD card</string>
     <string name="reload_indexes">Re-read offline data</string>
-    <string name="download_indexes_descr">Download or update data for offline usage from the Internet</string>
+    <string name="download_indexes_descr">Download or update data for offline use from the Internet</string>
     <string name="download_indexes">Download offline data</string>
     <string name="use_online_routing_descr">Use Internet to calculate route</string>
     <string name="use_online_routing">Use online routing</string>
