@@ -12,11 +12,7 @@ public class ToDoConstants {
 
 	// Map Refactoring
 //      Remove notification from OsmAndMapTileView (?)
-//      Allow to create over/under map layers
-//      Allow to config transparency filter
 //      Yandex Traffic make downloadable 
-//      allow to add own tile sources from OsmAnd (?) 
-//      allow to create sqlite sources from OsmAnd (?)	
 	
 
 //		=== Refactoring issues ===

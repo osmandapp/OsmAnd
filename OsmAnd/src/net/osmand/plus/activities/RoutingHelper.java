@@ -325,7 +325,7 @@ public class RoutingHelper {
 
 		lastFixedLocation = currentLocation;
 		if(calculateRoute){
-			calculateRoute(lastFixedLocation, finalLocation, currentGPXRoute);
+			recalculateRouteInBackground(lastFixedLocation, finalLocation, currentGPXRoute);
 		}
 	}
 	
@@ -422,13 +422,13 @@ public class RoutingHelper {
 		return 0;
 	}
 	
-	public void calculateRoute(final Location start, final LatLon end, final List<Location> currentGPXRoute){
-		if(start == null || end == null){
+	private void recalculateRouteInBackground(final Location start, final LatLon end, final List<Location> currentGPXRoute){
+		if (start == null || end == null) {
 			return;
 		}
 		
 		// temporary check while osmand offline router is not stable
-		RouteService serviceToUse= settings.ROUTER_SERVICE.get();
+		RouteService serviceToUse = settings.ROUTER_SERVICE.get();
 		if (serviceToUse == RouteService.OSMAND && !settings.USE_OSMAND_ROUTING_SERVICE_ALWAYS.get()) {
 			double distance = MapUtils.getDistance(end, start.getLatitude(), start.getLongitude());
 			if (distance > DISTANCE_TO_USE_OSMAND_ROUTER) {

@@ -196,11 +196,13 @@ public class RouteProvider {
 					l.setLatitude(end.getLatitude());
 					l.setLongitude(end.getLongitude());
 					minDist = Integer.MAX_VALUE;
-					for (int i = startI; i < gpxRoute.size(); i++) {
+					// get in reverse order taking into account cycle ways
+					for (int i = gpxRoute.size() - 1; i >= startI; i--) {
 						float d = gpxRoute.get(i).distanceTo(l);
 						if (d < minDist) {
 							endI = i + 1;
-							minDist = d;
+							// slightly modify to allow last point to be added
+							minDist = d + 10;
 						}
 					}
 					res = new RouteCalculationResult(new ArrayList<Location>(gpxRoute.subList(startI, endI)), null, start, end, null);
