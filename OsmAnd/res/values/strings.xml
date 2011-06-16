@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-	<string name="switch_to_raster_map_to_see">Current position not covered in your offline vector maps, you can switch map source in menu (Layers -> Map Source... ) need to download additional vector map.</string>
-	<string name="switch_to_vector_map_to_see">You can switch to offline vector maps using menu (Layers -> Map Source... -> Offline vector maps) to see the map.</string>
-	<string name="binary_map_download_success">Successful. You can switch to offline vector maps on menu  Layers -> Map Source... -> Offline vector maps.</string>
+	<string name="switch_to_raster_map_to_see">Current position not covered in your offline vector maps, you can switch map source in menu (Define view -> Map Source... ) need to download additional vector map.</string>
+	<string name="switch_to_vector_map_to_see">You can switch to offline vector maps using menu (Define view -> Map Source... -> Offline vector maps) to see the map.</string>
+	<string name="binary_map_download_success">Successful. You can switch to offline vector maps on menu  Define view -> Map Source... -> Offline vector maps.</string>
 	<string name="choose_audio_stream">Voice guidance stream</string>
 	<string name="choose_audio_stream_descr">Choose channel to play voice guidance (depends on system configuration)</string>
 	<string name="voice_stream_voice_call">Voice call stream</string>
 	<string name="voice_stream_notification">Notification stream</string>
 	<string name="voice_stream_music">Music stream</string>
-	<string name="warning_tile_layer_not_downloadable">Application cannot downöload map layer %1$s, please try to reinstall it.</string>
+	<string name="warning_tile_layer_not_downloadable">Application cannot download map layer %1$s, please try to reinstall it.</string>
 	<string name="overlay_transparency_descr">Modify overlay transparency</string>
 	<string name="overlay_transparency">Overlay transparency</string>
 	<string name="map_transparency_descr">Modify base map transparency</string>
@@ -57,7 +57,7 @@
 	<string name="tip_favorites_t">\tFrequently used points can be saved as Favorites.
 	\n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Menu\' -> \'Favorites\'.
 	\n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to Navigate to, Edit or Delete it.
-	\n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' ->\'Layers\'.</string>
+	\n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' ->\'Define view\'.</string>
 
 	<string name="tip_osm_improve">Improving OSM Data</string>
 	<string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and routing- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks!
@@ -76,7 +76,7 @@
 	<string name="preferred_locale">Display language</string>
 
 	<string name="tip_map_switch">Map Source</string>
-	<string name="tip_map_switch_t">\tThe fastest way to change the map source and layers displayed is pressing \'Menu\' -> \'Layers\' in map view.
+	<string name="tip_map_switch_t">\tThe fastest way to change the map source and layers displayed is pressing \'Menu\' -> \'Define view\' in map view.
 \n\tUnder \'Map source...\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources, or maps manually created using e.g. OsmAndMapCreator on a PC.
 \n\tOsmAnd also supports custom sources.</string>
 
@@ -288,7 +288,7 @@
 	<string name="layer_transport">Transport stops</string>
 	<string name="layer_poi">POI...</string>
 	<string name="layer_map">Map source...</string>
-	<string name="menu_layers">Layers</string>
+	<string name="menu_layers">Define view</string>
 	<string name="continue_follow_previous_route">Previous route was unfinished. Continue following it?</string>
 	<string name="context_menu_item_search_poi">Search POI</string>
 	<string name="context_menu_item_show_route">Route from</string>
