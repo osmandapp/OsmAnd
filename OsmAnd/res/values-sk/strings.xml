@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="gpx_option_reverse_route">Obrátiť GPX trasu</string>
+	<string name="gpx_option_destination_point">Použiť aktuálny cieľový bod</string>
+	<string name="gpx_option_from_start_point">Prejsť celú trasu</string>
 	<string name="tip_rotation_switching">Otáčanie mapy</string>
 	<string name="tip_rotation_switching_t">Môžete určiť ako bude otáčaná mapa cez \'Hlavné menu\' -> \'Nastavenia\' -> \'Všeobecné nastavenia\' -> \'Otáčanie mapy\'.
 	\nNa výber máte možnosti:
@@ -242,8 +245,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="map_index">Mapa</string>
 <string name="voice">Hlasové údaje</string>
 <string name="no_vector_map_loaded">Vektorové mapy neboli načítané</string>
-<string name="gpx_reverse_route">Obrátiť cestu</string>
-<string name="gpx_direct_route">Priama cesta</string>
+
 <string name="map_route_by_gpx">Cestovať použítim GPX</string>
 <string name="gpx_files_not_found">GPX súbory neboli nájdene v adresári /osmand/tracks</string>
 <string name="layer_gpx_layer">GPX záznamy</string>
