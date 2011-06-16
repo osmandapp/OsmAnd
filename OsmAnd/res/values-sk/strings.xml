@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="tip_rotation_switching">Otáčanie mapy</string>
+	<string name="tip_rotation_switching_t">Môžete určiť ako bude otáčaná mapa cez \'Hlavné menu\' -> \'Nastavenia\' -> \'Všeobecné nastavenia\' -> \'Otáčanie mapy\'.
+	\nNa výber máte možnosti:
+	\n\t\'Neotáčať\' - Mapa nebude otáčaná. Sever bude vždy hore.
+	\n\t\'Podľa smeru pohybu\' - Mapa sa bude otáčať podľa toho kam smerujete.
+	\n\t\'Podľa kompasu\' - Mapa sa bude otáčať podľa kompasu a Vášho otočenia.
+	\nPre rýchle prepnutie medzi otáčaním podľa kompasu a Vami zvoleným v nastaveniach, môžete ťuknúť na strelku kompasu počas zobrazenia mapy.</string>
 	<string name="switch_to_raster_map_to_see">Aktuálna pozícia nie je pokrytá Vašimi offline-ovými vektorovými mapami. Môžete prepnúť zdroj mapy cez menu (Zobrazenie -> Zdroj mapy... ). Je potrebné stiahnuť dodatočné vektorové mapy.</string>
 	<string name="switch_to_vector_map_to_see">Môžete prepnúť na offline-ové vektorové mapy cez menu (Zobrazenie -> Zdroj mapy... -> Vektorové OSM mapy) na zobrazenie mapy.</string>
 	<string name="binary_map_download_success">Úspech. Môžete prepnúť na offline-ové vektorové mapy v menu  Zobrazenie -> Zdroj mapy... -> Vektorové OSM mapy.</string>
@@ -69,7 +76,7 @@
 	
 	<string name="system_locale">Systémový</string>
 	<string name="preferred_locale_descr">Zmeniť zobrazovaný jazyk</string>
-	<string name="preferred_locale">Preferovaný jazyk</string>
+	<string name="preferred_locale">Jazyk zobrazenia</string>
 	<string name="tip_map_switch">Zdroj mapy</string>
 	<string name="tip_map_switch_t">Najrýchlejšia cesta ako zmeniť zdroj mapy a vrstvy je stlačením \'Menu\' -> \'Zobrazenie\' na mape.
 \n\tPoložkou \'Zdroj mapy...\' možete vybrať predefinovaný zdroj dlaždíc alebo ručne vytvorený s OsmAndMapCreator-om na PC.
@@ -194,7 +201,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="reload">Znovu načítať</string>
 
 <string name="general_settings_descr">Konfigurácia použitia internetu, otáčania mapy, orientácie obrazovky a iného</string>
-<string name="general_settings">Všeobecné</string>
+<string name="general_settings">Všeobecné nastavenia</string>
 <string name="rendering_settings_descr">Konfigurácia zdroja mapy a vzhľadu</string>
 <string name="rendering_settings">Mapy</string>
 <string name="index_settings_descr">Získanie/aktualizácia údajov pre offline použitie</string>
