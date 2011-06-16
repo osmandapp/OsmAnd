@@ -37,6 +37,7 @@ import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
@@ -1177,12 +1178,20 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			@Override
 			public boolean processResult(final GPXFileResult result) {
 				Builder builder = new AlertDialog.Builder(MapActivity.this);
-				builder.setItems(new String[]{getString(R.string.gpx_direct_route), getString(R.string.gpx_reverse_route)}, 
-						new DialogInterface.OnClickListener() {
-
+				final boolean[] props = new boolean[]{false, false, false};
+				builder.setMultiChoiceItems(new String[] { getString(R.string.gpx_option_reverse_route),
+						getString(R.string.gpx_option_destination_point), getString(R.string.gpx_option_from_start_point) }, props,
+						new OnMultiChoiceClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+								props[which] = isChecked;
+							}
+						});
+				builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						boolean reverse = which == 1;
+						boolean reverse = props[0];
+						boolean passWholeWay = props[2];
 						ArrayList<List<Location>> locations = result.locations;
 						List<Location> l = new ArrayList<Location>();
 						for(List<Location> s : locations){
@@ -1191,29 +1200,32 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 						if(reverse){
 							Collections.reverse(l);
 						}
+						
+						Location loc = getLastKnownLocation();
+						if(passWholeWay && loc != null){
+							l.add(0, loc);
+						}
 						Location startForRouting = getLastKnownLocation();
 						if(startForRouting == null && !l.isEmpty()){
 							startForRouting = l.get(0);
 						}
 						LatLon endPoint = endForRouting;
-						if(/*endForRouting == null && */!l.isEmpty()){
+						if((endPoint == null || !props[1]) && !l.isEmpty()){
 							LatLon point = new LatLon(l.get(l.size() - 1).getLatitude(), l.get(l.size() - 1).getLongitude());
 							settings.setPointToNavigate(point.getLatitude(), point.getLongitude());
 							endPoint = point;
 							mapLayers.getNavigationLayer().setPointToNavigate(point);
 						}
 						mapView.refreshMap();
-						if(endForRouting != null){
+						if(endPoint != null){
 							settings.FOLLOW_TO_THE_ROUTE.set(true);
 							routingHelper.setFollowingMode(true);
 							routingHelper.setFinalAndCurrentLocation(endPoint, startForRouting, l);
 							((OsmandApplication)getApplication()).showDialogInitializingCommandPlayer(MapActivity.this);
 						}
-						
-						
 					}
-				
 				});
+				builder.setNegativeButton(R.string.default_buttons_cancel, null);
 				builder.show();
 				return true;
 			}

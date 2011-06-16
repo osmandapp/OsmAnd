@@ -241,12 +241,14 @@ public class MapActivityLayers {
 		final OsmandSettings settings = getApplication().getSettings();
 		layersList.add(getString(R.string.layer_map));
 		layersList.add(getString(R.string.layer_poi));
-		layersList.add(getString(R.string.layer_transport));
-		layersList.add(getString(R.string.layer_osm_bugs));
 		layersList.add(getString(R.string.layer_favorites));
-		layersList.add(getString(R.string.layer_gpx_layer));
 		layersList.add(getString(R.string.layer_overlay));
 		layersList.add(getString(R.string.layer_underlay));
+		layersList.add(getString(R.string.layer_gpx_layer));
+		layersList.add(getString(R.string.layer_transport));
+		layersList.add(getString(R.string.layer_osm_bugs));
+		
+		
 		final int routeInfoInd = routeInfoLayer.couldBeVisible() ? layersList.size() : -1;
 		if(routeInfoLayer.couldBeVisible()){
 			layersList.add(getString(R.string.layer_route));
@@ -261,12 +263,12 @@ public class MapActivityLayers {
 		final boolean[] selected = new boolean[layersList.size()];
 		Arrays.fill(selected, true);
 		selected[1] = settings.SHOW_POI_OVER_MAP.get();
-		selected[2] = settings.SHOW_TRANSPORT_OVER_MAP.get();
-		selected[3] = settings.SHOW_OSM_BUGS.get();
-		selected[4] = settings.SHOW_FAVORITES.get();
+		selected[2] = settings.SHOW_FAVORITES.get();
+		selected[3] = overlayLayer.getMap() != null;
+		selected[4] = underlayLayer.getMap() != null;
 		selected[5] = gpxLayer.isVisible();
-		selected[6] = overlayLayer.getMap() != null;
-		selected[7] = underlayLayer.getMap() != null;
+		selected[6] = settings.SHOW_TRANSPORT_OVER_MAP.get();
+		selected[7] = settings.SHOW_OSM_BUGS.get();
 		selected[trafficInd] = trafficLayer.isVisible();
 		if(routeInfoInd != -1){
 			selected[routeInfoInd] = routeInfoLayer.isUserDefinedVisible(); 
@@ -289,11 +291,25 @@ public class MapActivityLayers {
 					}
 					settings.SHOW_POI_OVER_MAP.set(isChecked);
 				} else if(item == 2){
-					settings.SHOW_TRANSPORT_OVER_MAP.set(isChecked);
-				} else if(item == 3){
-					settings.SHOW_OSM_BUGS.set(isChecked);
-				} else if(item == 4){
 					settings.SHOW_FAVORITES.set(isChecked);
+				} else if(item == 3){
+					if(overlayLayer.getMap() != null){
+						settings.MAP_OVERLAY.set(null);
+						updateMapSource(mapView, null);
+					} else {
+						dialog.dismiss();
+						selectMapOverlayLayer(mapView, settings.MAP_OVERLAY, settings.MAP_OVERLAY_TRANSPARENCY, 
+								overlayLayer);
+					}
+				} else if(item == 4){
+					if(underlayLayer.getMap() != null){
+						settings.MAP_UNDERLAY.set(null);
+						updateMapSource(mapView, null);
+					} else {
+						dialog.dismiss();
+						selectMapOverlayLayer(mapView, settings.MAP_UNDERLAY,settings.MAP_TRANSPARENCY, 
+								mapTileLayer, mapVectorLayer);
+					}
 				} else if(item == 5){
 					if(gpxLayer.isVisible()){
 						getApplication().setGpxFileToDisplay(null);
@@ -303,23 +319,9 @@ public class MapActivityLayers {
 						showGPXFileLayer(mapView);
 					}
 				} else if(item == 6){
-					if(overlayLayer.getMap() != null){
-						settings.MAP_OVERLAY.set(null);
-						updateMapSource(mapView, null);
-					} else {
-						dialog.dismiss();
-						selectMapOverlayLayer(mapView, settings.MAP_OVERLAY, settings.MAP_OVERLAY_TRANSPARENCY, 
-								overlayLayer);
-					}
+					settings.SHOW_TRANSPORT_OVER_MAP.set(isChecked);
 				} else if(item == 7){
-					if(underlayLayer.getMap() != null){
-						settings.MAP_UNDERLAY.set(null);
-						updateMapSource(mapView, null);
-					} else {
-						dialog.dismiss();
-						selectMapOverlayLayer(mapView, settings.MAP_UNDERLAY,settings.MAP_TRANSPARENCY, 
-								mapTileLayer, mapVectorLayer);
-					}
+					settings.SHOW_OSM_BUGS.set(isChecked);
 				} else if(item == routeInfoInd){
 					routeInfoLayer.setVisible(isChecked);
 				} else if(item == transportRouteInfoInd){

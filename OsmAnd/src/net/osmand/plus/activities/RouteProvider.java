@@ -202,7 +202,7 @@ public class RouteProvider {
 						if (d < minDist) {
 							endI = i + 1;
 							// slightly modify to allow last point to be added
-							minDist = d + 10;
+							minDist = d - 40;
 						}
 					}
 					res = new RouteCalculationResult(new ArrayList<Location>(gpxRoute.subList(startI, endI)), null, start, end, null);
