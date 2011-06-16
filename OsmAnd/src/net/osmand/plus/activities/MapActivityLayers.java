@@ -8,14 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.Algoritms;
-import net.osmand.FavouritePoint;
+import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.OsmAndFormatter;
 import net.osmand.GPXUtilities.GPXFileResult;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.AmenityType;
 import net.osmand.map.ITileSource;
-import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.PoiFiltersHelper;
@@ -47,7 +45,6 @@ import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Looper;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -184,6 +181,7 @@ public class MapActivityLayers {
 				mapView.removeLayer(favoritesLayer);
 			}
 		}
+		updateGPXLayer();
 		trafficLayer.setVisible(settings.SHOW_YANDEX_TRAFFIC.get());
 	}
 	
@@ -298,11 +296,11 @@ public class MapActivityLayers {
 					settings.SHOW_FAVORITES.set(isChecked);
 				} else if(item == 5){
 					if(gpxLayer.isVisible()){
+						getApplication().setGpxFileToDisplay(null);
 						gpxLayer.clearCurrentGPX();
-						getApplication().getFavorites().setFavoritePointsFromGPXFile(null);
 					} else {
 						dialog.dismiss();
-						useGPXFileLayer(false, null, mapView);
+						showGPXFileLayer(mapView);
 					}
 				} else if(item == 6){
 					if(overlayLayer.getMap() != null){
@@ -336,7 +334,32 @@ public class MapActivityLayers {
 		builder.show();
 	}
 	
-	public void useGPXFileLayer(final boolean useRouting, final LatLon endForRouting, final OsmandMapTileView mapView) {
+	public void showGPXFileLayer(final OsmandMapTileView mapView){
+		final OsmandSettings settings = getApplication().getSettings();
+		selectGPXFileLayer(new CallbackWithObject<GPXFileResult>() {
+			@Override
+			public boolean processResult(GPXFileResult result) {
+				settings.SHOW_FAVORITES.set(true);
+				if (result != null) {
+					getApplication().setGpxFileToDisplay(result);
+					updateGPXLayer();
+					mapView.refreshMap();
+				}
+				return true;
+			}
+		});
+	}
+	
+	private void updateGPXLayer(){
+		GPXFileResult gpxFileToDisplay = getApplication().getGpxFileToDisplay();
+		if(gpxFileToDisplay == null){
+			gpxLayer.setTracks(null);
+		} else {
+			gpxLayer.setTracks(gpxFileToDisplay.locations);
+		}
+	}
+	
+	public void selectGPXFileLayer(final CallbackWithObject<GPXFileResult> callbackWithObject) {
 		final List<String> list = new ArrayList<String>();
 		final OsmandSettings settings = getApplication().getSettings();
 		final File dir = settings.extendOsmandPath(ResourceManager.APP_DIR + SavingTrackHelper.TRACKS_PATH);
@@ -379,7 +402,6 @@ public class MapActivityLayers {
 					new Thread(new Runnable() {
 						@Override
 						public void run() {
-							Looper.prepare();
 							final GPXFileResult res = GPXUtilities.loadGPXFile(activity, f);
 							if (res.error != null) {
 								activity.runOnUiThread(new Runnable() {
@@ -391,28 +413,13 @@ public class MapActivityLayers {
 
 							}
 							dlg.dismiss();
-							if(useRouting){
-								activity.runOnUiThread(new Runnable() {
-									@Override
-									public void run() {
-										activity.useGPXRouting(endForRouting, res);
-									}
-								});
-							} else {
-								settings.SHOW_FAVORITES.set(true);
-								List<FavouritePoint> pts = new ArrayList<FavouritePoint>();
-								for(WptPt p : res.wayPoints){
-									FavouritePoint pt = new FavouritePoint();
-									pt.setLatitude(p.lat);
-									pt.setLongitude(p.lon);
-									pt.setName(p.name);
-									pts.add(pt);
+							activity.runOnUiThread(new Runnable() {
+								@Override
+								public void run() {
+									callbackWithObject.processResult(res);
+									
 								}
-								getApplication().getFavorites().setFavoritePointsFromGPXFile(pts);
-								gpxLayer.setTracks(res.locations);
-							}
-							mapView.refreshMap();
-
+							});
 						}
 
 						
