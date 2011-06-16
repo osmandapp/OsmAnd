@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="gpx_option_reverse_route">Reverse GPX route</string>
+	<string name="gpx_option_destination_point">Use current destination point</string>
+	<string name="gpx_option_from_start_point">Pass whole track</string>
 	<string name="tip_rotation_switching">Map rotating</string>
 	<string name="tip_rotation_switching_t">You can choose how will be map rotated in  \'Main Menu\' -> \'Settings\' -> \'General Settings\' -> \'Map rotation\'.
 	\nThe choices are:
@@ -255,8 +258,7 @@
 	<string name="map_index">Map</string>
 	<string name="voice">Voice</string>
 	<string name="no_vector_map_loaded">Vector maps were not loaded</string>
-	<string name="gpx_reverse_route">Reverse route</string>
-	<string name="gpx_direct_route">Original route</string>
+	
 	<string name="map_route_by_gpx">Route using GPX</string>
 	<string name="gpx_files_not_found">GPX files not found in /tracks directory</string>
 	<string name="layer_gpx_layer">GPX tracks...</string>
