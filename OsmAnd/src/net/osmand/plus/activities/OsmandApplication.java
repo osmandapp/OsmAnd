@@ -6,11 +6,15 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import net.osmand.Algoritms;
+import net.osmand.FavouritePoint;
 import net.osmand.LogUtil;
+import net.osmand.GPXUtilities.GPXFileResult;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandSettings;
@@ -53,6 +57,7 @@ public class OsmandApplication extends Application {
 	private List<String> startingWarnings;
 	private ProgressDialog progressDlg;
 	private Handler uiHandler;
+	private GPXFileResult gpxFileToDisplay;
 	
 	private boolean applicationInitializing = false;
 	private Locale prefferedLocale = null;
@@ -87,6 +92,27 @@ public class OsmandApplication extends Application {
     		poiFilters = new PoiFiltersHelper(this);
     	}
 		return poiFilters;
+	}
+	
+	public void setGpxFileToDisplay(GPXFileResult gpxFileToDisplay) {
+		this.gpxFileToDisplay = gpxFileToDisplay;
+		if(gpxFileToDisplay == null){
+			getFavorites().setFavoritePointsFromGPXFile(null);
+		} else {
+			List<FavouritePoint> pts = new ArrayList<FavouritePoint>();
+			for (WptPt p : gpxFileToDisplay.wayPoints) {
+				FavouritePoint pt = new FavouritePoint();
+				pt.setLatitude(p.lat);
+				pt.setLongitude(p.lon);
+				pt.setName(p.name);
+				pts.add(pt);
+			}
+			getFavorites().setFavoritePointsFromGPXFile(pts);
+		}
+	}
+	
+	public GPXFileResult getGpxFileToDisplay() {
+		return gpxFileToDisplay;
 	}
     
     public FavouritesDbHelper getFavorites() {

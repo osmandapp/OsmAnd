@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import net.osmand.Algoritms;
+import net.osmand.CallbackWithObject;
 import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.GPXUtilities.GPXFileResult;
@@ -1006,7 +1007,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     		}
 			mapView.refreshMap();
     	} else if (item.getItemId() == R.id.map_gpx_routing) {
-			mapLayers.useGPXFileLayer(true, mapLayers.getNavigationLayer().getPointToNavigate(), mapView);
+			useGPXRouting();
 			return true;
     	} else if (item.getItemId() == R.id.map_show_point_options) {
 			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
@@ -1169,44 +1170,54 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		return ((OsmandApplication)getApplication()).getFavorites();
 	}
 	
-	public void useGPXRouting(final LatLon endForRouting, final GPXFileResult res) {
-		Builder builder = new AlertDialog.Builder(this);
-		builder.setItems(new String[]{getString(R.string.gpx_direct_route), getString(R.string.gpx_reverse_route)}, 
-				new DialogInterface.OnClickListener() {
-
+	private void useGPXRouting() {
+		final LatLon endForRouting = getPointToNavigate();
+		mapLayers.selectGPXFileLayer(new CallbackWithObject<GPXFileResult>() {
+			
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				boolean reverse = which == 1;
-				ArrayList<List<Location>> locations = res.locations;
-				List<Location> l = new ArrayList<Location>();
-				for(List<Location> s : locations){
-					l.addAll(s);
-				}
-				if(reverse){
-					Collections.reverse(l);
-				}
-				Location startForRouting = getLastKnownLocation();
-				if(startForRouting == null && !l.isEmpty()){
-					startForRouting = l.get(0);
-				}
-				LatLon endPoint = endForRouting;
-				if(/*endForRouting == null && */!l.isEmpty()){
-					LatLon point = new LatLon(l.get(l.size() - 1).getLatitude(), l.get(l.size() - 1).getLongitude());
-					settings.setPointToNavigate(point.getLatitude(), point.getLongitude());
-					endPoint = point;
-					mapLayers.getNavigationLayer().setPointToNavigate(point);
-				}
-				if(endForRouting != null){
-					settings.FOLLOW_TO_THE_ROUTE.set(true);
-					routingHelper.setFollowingMode(true);
-					routingHelper.setFinalAndCurrentLocation(endPoint, startForRouting, l);
-					((OsmandApplication)getApplication()).showDialogInitializingCommandPlayer(MapActivity.this);
-				}
+			public boolean processResult(final GPXFileResult result) {
+				Builder builder = new AlertDialog.Builder(MapActivity.this);
+				builder.setItems(new String[]{getString(R.string.gpx_direct_route), getString(R.string.gpx_reverse_route)}, 
+						new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						boolean reverse = which == 1;
+						ArrayList<List<Location>> locations = result.locations;
+						List<Location> l = new ArrayList<Location>();
+						for(List<Location> s : locations){
+							l.addAll(s);
+						}
+						if(reverse){
+							Collections.reverse(l);
+						}
+						Location startForRouting = getLastKnownLocation();
+						if(startForRouting == null && !l.isEmpty()){
+							startForRouting = l.get(0);
+						}
+						LatLon endPoint = endForRouting;
+						if(/*endForRouting == null && */!l.isEmpty()){
+							LatLon point = new LatLon(l.get(l.size() - 1).getLatitude(), l.get(l.size() - 1).getLongitude());
+							settings.setPointToNavigate(point.getLatitude(), point.getLongitude());
+							endPoint = point;
+							mapLayers.getNavigationLayer().setPointToNavigate(point);
+						}
+						mapView.refreshMap();
+						if(endForRouting != null){
+							settings.FOLLOW_TO_THE_ROUTE.set(true);
+							routingHelper.setFollowingMode(true);
+							routingHelper.setFinalAndCurrentLocation(endPoint, startForRouting, l);
+							((OsmandApplication)getApplication()).showDialogInitializingCommandPlayer(MapActivity.this);
+						}
+						
+						
+					}
 				
+				});
+				builder.show();
+				return true;
 			}
-		
 		});
-		builder.show();
 	}
 		
 	public void contextMenuPoint(final double latitude, final double longitude){
