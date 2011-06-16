@@ -10,9 +10,9 @@
 	\n\t\'Podľa smeru pohybu\' - Mapa sa bude otáčať podľa toho kam smerujete.
 	\n\t\'Podľa kompasu\' - Mapa sa bude otáčať podľa kompasu a Vášho otočenia.
 	\nPre rýchle prepnutie medzi otáčaním podľa kompasu a Vami zvoleným v nastaveniach, môžete ťuknúť na strelku kompasu počas zobrazenia mapy.</string>
-	<string name="switch_to_raster_map_to_see">Aktuálna pozícia nie je pokrytá Vašimi offline-ovými vektorovými mapami. Môžete prepnúť zdroj mapy cez menu (Zobrazenie -> Zdroj mapy... ). Je potrebné stiahnuť dodatočné vektorové mapy.</string>
-	<string name="switch_to_vector_map_to_see">Môžete prepnúť na offline-ové vektorové mapy cez menu (Zobrazenie -> Zdroj mapy... -> Vektorové OSM mapy) na zobrazenie mapy.</string>
-	<string name="binary_map_download_success">Úspech. Môžete prepnúť na offline-ové vektorové mapy v menu  Zobrazenie -> Zdroj mapy... -> Vektorové OSM mapy.</string>
+	<string name="switch_to_raster_map_to_see">Aktuálna pozícia nie je pokrytá Vašimi stiahnutými vektorovými mapami. Môžete prepnúť zdroj mapy cez menu (Zobrazenie -> Zdroj mapy... ). Je potrebné stiahnuť dodatočné vektorové mapy.</string>
+	<string name="switch_to_vector_map_to_see">Môžete prepnúť na stiahnuté vektorové mapy cez menu (Zobrazenie -> Zdroj mapy... -> Vektorové OSM mapy) na zobrazenie mapy.</string>
+	<string name="binary_map_download_success">Úspech. Môžete prepnúť na stiahnuté vektorové mapy v menu  Zobrazenie -> Zdroj mapy... -> Vektorové OSM mapy.</string>
 	<string name="choose_audio_stream">Tok hlasových povelov</string>
 	<string name="choose_audio_stream_descr">Výber kanálu pre prehrávanie hlasových povelov (závisí od systémovej konfigurácie)</string>
 	<string name="voice_stream_voice_call">Tok pre hlasový hovor</string>
@@ -75,7 +75,7 @@
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> mapová klasifikácia s obrázkami</string>
     <string name="error_doing_search">Prihodila sa chyba pri offline hľadaní</string>
     <string name="search_offline_geo_error">Nedá sa parsovať geo obsah:{0}</string>
-	<string name="search_osm_offline">Nájsť adresu použitím offline máp</string>
+	<string name="search_osm_offline">Nájsť adresu použitím stiahnutých máp</string>
 	
 	<string name="system_locale">Systémový</string>
 	<string name="preferred_locale_descr">Zmeniť zobrazovaný jazyk</string>
@@ -174,7 +174,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="specified_dir_doesnt_exist">Nedá sa nájsť určený adresár.</string>
 <string name="application_dir">Úložiskový adresár</string>
 <string name="application_dir_change_warning">Zmena úložiskového adresára nepresunie alebo nezmaže dát. Musíte to urobiť sami! Robíte to na vlastné riziko! Napriek tomu pokračovať?</string>
-<string name="osmand_net_previously_installed">Máte nainštalovanú predošlú verziu OsmAndu. Všetky offline dáta budú podporované novou aplikáciou. Obľúbené body môžu byť exportované v starej aplikácii a potom importované.</string>
+<string name="osmand_net_previously_installed">Máte nainštalovanú predošlú verziu OsmAndu. Všetky stiahnuté dáta budú podporované novou aplikáciou. Obľúbené body môžu byť exportované v starej aplikácii a potom importované.</string>
 <string name="build_installed">Zostava {0} úspešne nainštalovaná ({1}).</string>
 <string name="downloading_build">Sťahuje sa zostava...</string>
 <string name="install_selected_build">Naozaj chcete nainštalovať OsmAnd - {0} z {1} {2} MB.</string>
@@ -225,7 +225,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="renderer_load_sucess">Vykresľovač bol úspešne načítaný</string>
 <string name="renderer_load_exception">Nastala výnimka: vykresľovač nebol načítaný</string>
 <string name="renderers">Vektorový vykresľovač</string>
-<string name="renderers_descr">Výber vzhľadu (offline-ovej) vektorovej mapy</string>
+<string name="renderers_descr">Výber vzhľadu (stiahnutej) vektorovej mapy</string>
 <string name="poi_context_menu_website">Zobraziť web stránku POI</string>
 <string name="poi_context_menu_call">Zobraziť telefónny kontakt POI</string>
 <string name="website">Web stránka</string>
@@ -365,7 +365,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="update_poi_success">Údaje POI boli úspešne aktualizované ({0} bolo načítaných)</string>
 <string name="update_poi_error_local">Chyba počas aktualizácii lokálnych indexov</string>
 <string name="update_poi_error_loading">Chyba počas načítavania údajov zo servera</string>
-<string name="update_poi_no_offline_poi_index">Nie sú dostupné žiadne indexy offlinových POI pre túto oblasť</string>
+<string name="update_poi_no_offline_poi_index">Nie sú dostupné žiadne stiahnuté POI indexy pre túto oblasť</string>
 <string name="update_poi_is_not_available_for_zoom">Aktualizácia POI nie je dostupná pre nízke úrovne priblíženia</string>
 <string name="context_menu_item_update_poi">Aktualizovať POI</string>
 <string name="context_menu_item_update_map_confirm">Naozaj chcete aktualizovať lokálne údaje z internetu?</string>
@@ -442,8 +442,8 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="previous_run_crashed">Predošlé spustenie aplikácie zlyhalo. Záznamový súbor je v {0}. Prosím, oznámte to a priložte záznamový súbor.</string>
 <string name="saving_gpx_tracks">Ukladajú sa GPX stopy na SD kartu...</string>
 <string name="finished_task">Dokončené</string>
-<string name="reload_indexes_descr">Znovu načítanie offline údajov z SD karty</string>
-<string name="reload_indexes">Znovu načítať offline údaje</string>
+<string name="reload_indexes_descr">Znovu načítanie stiahnutých údajov z SD karty</string>
+<string name="reload_indexes">Znovu načítať stiahnuté údaje</string>
 <string name="download_indexes_descr">Stiahnutie údajov pre offline použitie z internetu</string>
 <string name="download_indexes">Stiahnuť offline údaje</string>
 <string name="use_online_routing_descr">Použitie internetu na výpočet cesty</string>
