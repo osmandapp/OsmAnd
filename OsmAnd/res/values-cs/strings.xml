@@ -55,7 +55,7 @@
   <string name="select_build_to_install">Vyberte balíček OsmAnd k nainstalování</string>
   <string name="contribution_activity">Speciální aktivita pro vývojovou verzi</string>
 
-  <string name="tip_update_index">Index updating</string>
+  <string name="tip_update_index">Aktualizace dat</string>
   <string name="tip_update_index_t">
     \t
 
@@ -193,15 +193,65 @@
 
     \n\t
 
-    Nezapomeňte, že pro tyto funkce potřebujete internetové připojení!
+    Pro tyto funkce potřebujete internetové připojení.
   </string>
 
+  <string name="tip_rotation_switching">Otáčení mapy</string>
+  <string name="tip_rotation_switching_t">
+    Můžete si zvolit, jak se mapa bude otáčet, pomocí menu
+    \Nastavení\' -> \Obecné\' -> \Otáčení mapy\'.
+
+    \n
+
+    Možosti jsou:
+
+    \n\t
+
+    \'Neotáčet\' - Mapa se nebude otáčet. Sever bude stále nahoře.
+
+    \n\t
+
+    \'Ve směru pohybu\' - Mapa se bude natáčet podle toho, kterým
+    směrem se pohybujete.
+
+    \n\t
+
+    \'Podle kompasu\' - Mapa se bude natáčet podle kompasu.
+
+    \n
+
+    Pro rychlé přepnutí na otáčení podle kompasu a zpět klepněte na
+    střelku kompasu na zobrazení mapy.
+  </string>
+  <string name="switch_to_raster_map_to_see">
+    Vektorové mapy toto místo neobsahují, zdroj map můžete přepnout v
+    menu (Layers -> Map Source...)
+  </string>
+  <string name="switch_to_vector_map_to_see">
+    Na vektorové mapy se můžete přepnout v menu (Layers -> Map
+    Source... -> Vector OSM maps)
+  </string>
+  <string name="binary_map_download_success">
+    Dokončeno. Na vektorové mapy se můžete přepnout v menu (Layers -> Map
+    Source... -> Vector OSM maps)
+  </string>
+  <string name="choose_audio_stream">Kanál pro navádění</string>
+  <string name="choose_audio_stream_descr">
+    Zvolte kanál poskytující hlasové navádění (závisí na systémové
+    konfiguraci)
+  </string>
+  <string name="voice_stream_voice_call">Kanál pro volání</string>
+  <string name="voice_stream_notification">Kanál pro upozornění</string>
+  <string name="voice_stream_music">Kanál pro hudbu</string>
+  <string name="warning_tile_layer_not_downloadable">
+    Data pro mapovou vrstvu {0} nelze stáhnout. Zkuste prosím vrstvu znovu nainstalovat.
+  </string>
   <string name="overlay_transparency_descr">
     Upravit průhlednost překryvné mapy
   </string>
   <string name="overlay_transparency">Průhlednost překryvu</string>
   <string name="map_transparency_descr">Upravit průhlednost základní mapy</string>
-  <string name="map_transparency">Průhlednost mapy</string>
+  <string name="map_transparency">Průhlednost základní mapy</string>
   <string name="modify_transparency">Upravit průhlednost</string>
   <string name="layer_underlay">Podkres mapy...</string>
   <string name="map_underlay">Podkresová mapa</string>
@@ -537,8 +587,8 @@
 
     \n
 
-    Abyste mohli využívat všech možností aplikace, potřebujete
-    indexové soubory, které si můžete stáhnout (Nastavení -&gt; Data)
+    Abyste mohli využívat všech možností aplikace, potřebujete soubory
+    s mapami a hlasem, které si můžete stáhnout (Nastavení -&gt; Data)
     nebo připravit sami. Poté budete moci hledat podle adres, hledat
     body zájmu (POI) a spojení veřejnou dopravou.
   </string>
