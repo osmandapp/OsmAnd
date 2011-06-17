@@ -6,7 +6,7 @@
 
 	<string name="tip_rotation_switching">Kartenrotation</string>
 	<string name="tip_rotation_switching_t">\tMan kann unter \'Einstellungen\' -> \'Allgemein\' -> \'Kartenrotation\' wählen, in welche Richtung die Anzeige der Landkarte ausgerichtet werden soll.
-	\nZur Wahl stehen:
+	\n\tZur Wahl stehen:
 	\n\t\'Keine Rotation\' - Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben
 	\n\t\'Nach Bewegungsrichtung\' - Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt
 	\n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt
