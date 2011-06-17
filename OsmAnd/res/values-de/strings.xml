@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="gpx_option_reverse_route">Entgegengesetzte Richtung</string>
+	<string name="gpx_option_destination_point">Derzeitigen Zielpunkt verwenden</string>
+	<string name="gpx_option_from_start_point">Gesamten Track durchlaufen</string>
+
+	<string name="tip_rotation_switching">Kartenrotation</string>
+	<string name="tip_rotation_switching_t">\tMan kann unter \'Einstellungen\' -> \'Allgemein\' -> \'Kartenrotation\' wählen, in welche Richtung die Anzeige der Landkarte ausgerichtet werden soll.
+	\nZur Wahl stehen:
+	\n\t\'Keine Rotation\' - Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben
+	\n\t\'Nach Bewegungsrichtung\' - Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt
+	\n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt
+	\n\tTipp: Um schnell zwischen der Kompassnachführung und der in den Einstellungen gewählten Option zu wechseln, kann man auf die Kompassnadel in der Kartenansicht drücken.</string>
+
 	<string name="switch_to_raster_map_to_see">Für die derzeitige Position ist auf Ihrem Gerät keine Offline-Vektor-Karte vorhanden. Sie können die Kartenquelle wechseln in der Kartenansicht unter Menu -> Darstellung, oder Sie können via Internet zusätzliche Vektor-Karten laden.</string>
 	<string name="switch_to_vector_map_to_see">Sie können in der Kartenansicht auf Offline-Vektor-Karten wechseln mittels Menü -> Layers -> Kartenquelle -> Offline-Vektor-Karten.</string>
 	<string name="binary_map_download_success">Download erfolgreich. Sie können in der Kartenansicht auf Offline-Vektor-Karten wechseln mittels Menu -> Darstellung -> Kartenquelle -> Offline-Vektor-Karten</string>
