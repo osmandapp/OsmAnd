@@ -4,7 +4,7 @@
 	<string name="gpx_option_destination_point">Use current destination point</string>
 	<string name="gpx_option_from_start_point">Pass whole track</string>
 	<string name="tip_rotation_switching">Map Rotation</string>
-	<string name="tip_rotation_switching_t">\tYou can choose whether and how the map display is rotated in  \'Main Menu\' -> \'Settings\' -> \'General Settings\' -> \'Map rotation\'.
+	<string name="tip_rotation_switching_t">\tYou can choose whether and how the map display is rotated in \'Settings\' -> \'General Settings\' -> \'Map rotation\'.
 	\nThe choices are:
 
 	\n\t\'Don\'t rotate\' - Map will be not rotated. North will be always up
