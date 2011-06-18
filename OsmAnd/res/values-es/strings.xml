@@ -191,10 +191,10 @@
 	<string name="layer_transport_route">Ruta de transporte</string>
 	<string name="layer_yandex_traffic">Tráfico Yandex</string>
 	<string name="list_index_files_was_not_loaded">Los archivos índices no son descargados de osmand.googlecode.com.</string>
-	<string name="loading">Cargando</string>
+	<string name="loading">Cargando...</string>
 	<string name="loading_cities">Cargando ciudades...</string>
-	<string name="loading_data">Cargando datos</string>
-	<string name="loading_poi_obj">cargando poi </string>
+	<string name="loading_data">Cargando datos...</string>
+	<string name="loading_poi_obj">Cargando POI.../string>
 	<string name="loading_postcodes">Cargando códigos postales...</string>
 	<string name="loading_streets">Cargando calles...</string>
 	<string name="loading_streets_buildings">Cargando calles/edificios...</string>
@@ -219,7 +219,7 @@
 	<string name="mark_point">Target</string>
 	<string name="max_level_download_tile">Máximo nivel de zoom</string>
 	<string name="max_level_download_tile_descr">Elija nivel máximo de zoom para descargar de internet</string>
-	<string name="menu_layers">Capas</string>
+	<string name="menu_layers">Representación</string>
 	<string name="menu_mute_off">Con sonido</string>
 	<string name="menu_mute_on">Mudo</string>
 	<string name="monitor_preferences">Monitoreo</string>
@@ -303,7 +303,7 @@
 	<string name="renderers_descr">Elegir estilo de visualización vectorial</string>
 	<string name="rendering_exception">Ocurrió un error al visualizar el área seleccionada</string>
 	<string name="rendering_out_of_memory">No hay suficiente memoria para mostrar el área seleccionada</string>
-	<string name="rendering_settings">apariencia del mapa</string>
+	<string name="rendering_settings">Mapas</string>
 	<string name="rendering_settings_descr">Configurar fuente del mapa y apariencia</string>
 	<string name="rotate_map_bearing_opt">A la dirección del movimiento</string>
 	<string name="rotate_map_compass_opt">A la brújula</string>
@@ -431,7 +431,7 @@
 	<string name="user_name">Nombre de usuario</string>
 	<string name="user_name_descr">Su usuario de OSM</string>
 	<string name="user_password">Clave</string>
-	<string name="user_password_descr">su clave OSM</string>
+	<string name="user_password_descr">Su clave OSM</string>
 	<string name="vector_data">mapas vectoriales de OSM</string>
 	<string name="voice">Voz</string>
 	<string name="voice_data_corrupted">El archivo de voz especificado está corrupto</string>
@@ -439,7 +439,7 @@
 	<string name="voice_data_not_supported">Los datos de voz difieren de la versión soportada por la aplicación</string>
 	<string name="voice_data_unavailable">Los datos de voz no están disponibles</string>
 	<string name="voice_not_use">No usar</string>
-	<string name="voice_provider">datos de voz</string>
+	<string name="voice_provider">Datos de voz</string>
 	<string name="voice_provider_descr">Escoger archivo de datos para ruteo</string>
 	<string name="website">Sitio web</string>
 	<string name="where_am_i">¿Dónde estoy?</string>
