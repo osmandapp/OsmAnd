@@ -194,7 +194,7 @@
 	<string name="loading">Cargando...</string>
 	<string name="loading_cities">Cargando ciudades...</string>
 	<string name="loading_data">Cargando datos...</string>
-	<string name="loading_poi_obj">Cargando POI.../string>
+	<string name="loading_poi_obj">Cargando POI...</string>
 	<string name="loading_postcodes">Cargando códigos postales...</string>
 	<string name="loading_streets">Cargando calles...</string>
 	<string name="loading_streets_buildings">Cargando calles/edificios...</string>
