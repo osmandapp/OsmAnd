@@ -187,8 +187,8 @@
 		<filter minzoom="15" textSize="10" textColor="#654321" textHaloRadius="1" textDy="9" textWrapWidth="20" tag="natural" value="cave_entrance" />
 		<filter minzoom="14" textSize="9" textColor="#654321" textHaloRadius="1" textDy="5" tag="natural" value="peak" />
 		<filter minzoom="16" textSize="8" textColor="#6699cc" textHaloRadius="1" textDy="10" textWrapWidth="20" tag="natural" value="spring" />
-		<filter minzoom="12" textSize="10" textColor="#6699cc" textHaloRadius="1" textWrapWidth="20" tag="natural" value="water" />
-		<filter minzoom="12" textSize="10" textColor="#6699cc" textHaloRadius="1" textWrapWidth="20" tag="natural" value="lake" />
+		<filter minzoom="6" textSize="10" textColor="#6699cc" textHaloRadius="1" textWrapWidth="20" tag="natural" value="water" />
+		<filter minzoom="6" textSize="10" textColor="#6699cc" textHaloRadius="1" textWrapWidth="20" tag="natural" value="lake" />
 		<filter minzoom="12" textSize="10" textColor="#ff000000" textHaloRadius="2" textWrapWidth="10" tag="natural" value="wood" />
 
 		<filter minzoom="15" textSize="8" textColor="#6699cc" textHaloRadius="1" textOnPath="true" tag="waterway" value="stream" />
@@ -309,7 +309,7 @@
 		<filter minzoom="12" textSize="9" textBold="true" textColor="#ffc0cb" textHaloRadius="1" textWrapWidth="10" tag="military" value="danger_area" />
 
 
-		<filter minzoom="4" textSize="10" textColor="#9d6c9d" textHaloRadius="1" textWrapWidth="20" tag="place" value="country" />
+		<filter minzoom="3" textSize="10" textColor="#9d6c9d" textHaloRadius="1" textWrapWidth="20" tag="place" value="country" />
 		<filter minzoom="4" maxzoom="7" textSize="9" textColor="#9d6c9d" textHaloRadius="1" textWrapWidth="20" tag="place" value="state" />
 		<filter minzoom="8" textSize="11" textColor="#9d6c9d" textHaloRadius="1" textWrapWidth="20" tag="place" value="state" />
 		<filter minzoom="4" maxzoom="7" textSize="9" textColor="#9d6c9d" textHaloRadius="1" textWrapWidth="20" tag="place" value="region" />
@@ -508,8 +508,8 @@
 
 		<filter color="#b5d0d0">
 			<filter minzoom="1" tag="natural" value="coastline" />
-			<filter minzoom="7" tag="natural" value="water" />
-			<filter minzoom="7" tag="natural" value="lake" />
+			<filter minzoom="4" tag="natural" value="water" />
+			<filter minzoom="4" tag="natural" value="lake" />
 		</filter>
 
 		<filter minzoom="8" shader="beach" tag="natural" value="beach" />
@@ -829,7 +829,7 @@
 			<case tag="waterway" value="river" />
 			<case tag="waterway" value="canal" />
 			<filter color="#b5d0d0" pathEffect_2="4_2" color_2="#ffffff">
-				<filter minzoom="9" maxzoom="9" strokeWidth="1" />
+				<filter minzoom="5" maxzoom="9" strokeWidth="1" />
 				<filter minzoom="10" maxzoom="12" strokeWidth="2" />
 
 				<filter minzoom="13" maxzoom="13" strokeWidth="3" />
@@ -974,9 +974,9 @@
 			<case tag="admin_level" value="3" />
 			<filter color="#800080">
 				<filter minzoom="2" maxzoom="3" strokeWidth="0.5" />
-				<filter minzoom="4" maxzoom="5" strokeWidth="1" />
-				<filter minzoom="6" maxzoom="9" strokeWidth="3" />
-				<filter minzoom="10" strokeWidth="6" />
+				<filter minzoom="4" maxzoom="6" strokeWidth="1" />
+				<filter minzoom="7" maxzoom="9" strokeWidth="2.5" />
+				<filter minzoom="10" strokeWidth="4" />
 			</filter>
 		</switch>
 

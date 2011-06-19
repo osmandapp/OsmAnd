@@ -33,7 +33,8 @@ public class FixLinkedCoastline {
 	public static void main(String[] args) throws IOException, SAXException, XMLStreamException {
 		String fileToRead = args != null && args.length > 0 ? args[0] : null; 
 		if(fileToRead == null) {
-			fileToRead = "/home/victor/projects/OsmAnd/download/basemap/10m_coastline.osm";
+//			fileToRead = "/home/victor/projects/OsmAnd/download/basemap/10m_coastline.osm";
+			fileToRead = "/home/victor/projects/OsmAnd/download/basemap/10m_lakes.osm";
 		}
 		File read = new File(fileToRead);
 		File write ;
