@@ -623,7 +623,9 @@ public class IndexCreator {
 		creator.setZoomWaySmothness(2);
 		creator.generateIndexes(new File(
 //				"/home/victor/projects/OsmAnd/download/basemap/10m_admin_level_out.osm"
-				"/home/victor/projects/OsmAnd/download/basemap/10m_populated_places_out.osm"
+//				"/home/victor/projects/OsmAnd/download/basemap/10m_populated_places_out.osm"
+//				"/home/victor/projects/OsmAnd/download/basemap/10m_lakes_out.osm"
+				"/home/victor/projects/OsmAnd/download/basemap/10m_rivers.osm"
 				), 
 				new ConsoleProgressImplementation(1), null, mapZooms, null);
 		

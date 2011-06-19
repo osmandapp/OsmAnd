@@ -128,6 +128,37 @@ public class MapUtils {
 		return new LatLon(latitude/count, longitude/count);
 	}
 	
+	
+	public static LatLon getMathWeightCenterForNodes(Collection<Node> nodes){
+		if (nodes.isEmpty()) {
+			return null;
+		}
+		double longitude = 0;
+		double latitude = 0;
+		double sumDist = 0;
+		Node prev = null;
+		for (Node n : nodes) {
+			if (n != null) {
+				if(prev == null){
+					prev = n;
+				} else {
+					double dist = MapUtils.getDistance(prev, n);
+					sumDist += dist;
+					longitude += (prev.getLongitude() + n.getLongitude()) * dist / 2;
+					latitude += (n.getLatitude() + n.getLatitude()) * dist / 2;
+					prev = n;
+				}
+			}
+		}
+		if (sumDist == 0) {
+			if(prev == null){
+				return null;
+			}
+			return prev.getLatLon();
+		}
+		return new LatLon(latitude/sumDist, longitude/sumDist);
+	}
+	
 	public static double checkLongitude(double longitude) {
 		while (longitude < -180 || longitude > 180) {
 			if (longitude < 0) {

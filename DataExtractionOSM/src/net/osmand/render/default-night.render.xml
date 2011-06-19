@@ -116,20 +116,14 @@
 		<filter minzoom="15" textSize="9" textColor="#888870" textHaloRadius="2" textWrapWidth="15" tag="leisure" />
 		<filter minzoom="15" textSize="9" textColor="#0000C0" textHaloRadius="1" textWrapWidth="30" tag="leisure" value="marina" />
 
-		<filter minzoom="6" maxzoom="8" textColor="#eae9e9"  textSize="8" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
-		<filter minzoom="9" maxzoom="10" textColor="#eae9e9"  textSize="11" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
-		<filter minzoom="10" maxzoom="14" textColor="#eae9e9"  textSize="13" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
-		<filter minzoom="14" maxzoom="16" textColor="#eae9e9"  textSize="14" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
-				
-		<filter minzoom="6" maxzoom="8"  textSize="8" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
-		<filter minzoom="9" maxzoom="10" textSize="11" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
-		<filter minzoom="11" textSize="14" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
+		<filter minzoom="4" maxzoom="6" textColor="#eae9e9" textSize="10" textDy="-8" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
+		<filter minzoom="7" maxzoom="8" textColor="#eae9e9" textSize="11" textDy="-8" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
+		<filter minzoom="9" maxzoom="10" textColor="#eae9e9" textSize="12" textDy="-8" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
+		<filter minzoom="11" textSize="14" textColor="#eae9e9" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
+		<filter minzoom="6" maxzoom="10" textColor="#eae9e9" textSize="10" textDy="-8" textHaloRadius="1" textWrapWidth="20" tag="place" value="town" />
+		<filter minzoom="11" maxzoom="13" textColor="#eae9e9" textSize="12" textDy="-8" textHaloRadius="1" textWrapWidth="20" tag="place" value="town" />
+		<filter minzoom="14" textSize="14" textColor="#eae9e9" textHaloRadius="1" textWrapWidth="20" tag="place" value="town" />
 		
-		<filter minzoom="9" maxzoom="10" textColor="#eae9e9" textSize="8" textHaloRadius="1" textWrapWidth="20" tag="place" value="town" />
-		<filter minzoom="11" maxzoom="13" textColor="#eae9e9" textSize="11" textHaloRadius="1" textWrapWidth="20" tag="place" value="town" />
-		<filter minzoom="14" textSize="13" textColor="#eae9e9" textHaloRadius="1" textWrapWidth="20" tag="place" value="town" />
-		<filter minzoom="12" maxzoom="14" textColor="#eae9e9" textSize="9" textHaloRadius="1" tag="place" value="village" />
-		<filter minzoom="15" textSize="12" textColor="#eae9e9" textHaloRadius="1" tag="place" value="village" />	
 		
 		<filter minzoom="12" maxzoom="14"  textColor="#a2a2a2" textSize="9" textHaloRadius="1" tag="place" value="hamlet" />
 		<filter minzoom="15" textSize="12" textColor="#bfbfbf" textHaloRadius="1" tag="place" value="hamlet" />	

@@ -31,6 +31,23 @@ cities/towns
 Example (replacing tags): 
 1. python ogr2osm/ogr2osm.py 10m-populated-places/10m_populated_places.shp
 Creates 10m_populated_places.osm
-2. less 10m_populated_places.osm | sed 's/MEGACITY/place/g;s/value="1"/value="city"/g;s/v="0"/v="town"/g;s/NAME/name/g'  > 10m_populated_places_out.osm
+2. less 10m_populated_places.osm | sed 's/MEGACITY/place/g;s/v="1"/v="city"/g;s/v="0"/v="town"/g;s/NAME/name/g'  > 10m_populated_places_out.osm
 3. Run IndexCreator
 
+-------------------------
+lakes
+Example (replacing tags): 
+1. perl ./shp2osm.pl 10m-lakes/10m_lakes.shp  |  sed 's/FeatureCla/natural/g;s/Lake/lake/g;s/Reservoir/water/g;s/Name1/name/g'  > 10m_lakes.osm
+Creates 10m_lakes.osm
+2. Run net.osmand.osm.util.FixLinkedCoastline from DataExtractionosm.jar with arg0=filename.
+3. Open in Josm and simply save
+4. Run IndexCreator
+
+-------------------------
+rivers
+Example (replacing tags): 
+1. perl ./shp2osm.pl 10m-rivers-lake-centerlines/10m_rivers_lake_centerlines.shp  |  sed 's/FeatureCla/waterway/g;s/River/river/g;s/Name/name/g' > 10m_rivers.osm
+Creates 10m_lakes.osm
+2. Run net.osmand.osm.util.FixLinkedCoastline from DataExtractionosm.jar with arg0=filename.
+3. Open in Josm and simply save
+4. Run IndexCreator

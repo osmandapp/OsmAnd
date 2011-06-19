@@ -15,6 +15,7 @@ import javax.xml.stream.XMLStreamException;
 import net.osmand.impl.ConsoleProgressImplementation;
 import net.osmand.osm.Entity;
 import net.osmand.osm.LatLon;
+import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.Way;
 import net.osmand.osm.Entity.EntityId;
@@ -68,7 +69,8 @@ public class FixAdminLevel0 {
 		for(String country : countryNames.keySet()){
 			List<Way> list = countryNames.get(country);
 			for(Way w : list){
-				LatLon latLon = w.getLatLon();
+				LatLon latLon = MapUtils.getMathWeightCenterForNodes(w.getNodes());
+//				LatLon latLon = w.getLatLon();
 				Node node = new Node(latLon.getLatitude(), latLon.getLongitude(), id--);
 				node.putTag("name", country);
 				node.putTag("place", "country");
@@ -96,14 +98,21 @@ public class FixAdminLevel0 {
 				countryNames.put(name, list);
 			} else {
 				List<Way> r = countryNames.get(name);
+				boolean skip = false;
 				for (int i = 0; i < r.size();) {
-					if (way.getNodes().size() > 4 * r.get(i).getNodes().size()) {
+					if (way.getNodes().size() > 2 * r.get(i).getNodes().size()) {
 						r.remove(i);
 					} else {
+						if (2 * way.getNodes().size() < r.get(i).getNodes().size()) {
+							skip = true;
+							break;
+						}
 						i++;
 					}
 				}
-				r.add(way);
+				if(!skip){
+					r.add(way);
+				}
 			}
 		}
 		
