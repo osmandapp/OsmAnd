@@ -310,6 +310,21 @@ public class MapRenderRepositories {
 	}
 		
 	
+	private void validateLatLonBox(RectF box){
+		if(box.top > 90){
+			box.top = 85.5f;
+		}
+		if(box.bottom < -90){
+			box.bottom = -85.5f;
+		}
+		if(box.left <= -180){
+			box.left = -179.5f;
+		}
+		if(box.right > 180){
+			box.right = 180.0f;
+		}
+	}
+	
 	public synchronized void loadMap(RotatedTileBox tileRect, List<IMapDownloaderCallback> notifyList) {
 		interrupted = false;
 		if(currentRenderingContext != null){
@@ -339,10 +354,11 @@ public class MapRenderRepositories {
 					dataBox.left -= wi;
 					dataBox.right += wi;
 				} else {
-					double hi = (dataBox.bottom - dataBox.top) * .2;
-					dataBox.top -= hi;
-					dataBox.bottom += hi;
+					double hi = (dataBox.top - dataBox.bottom) * .2;
+					dataBox.top += hi;
+					dataBox.bottom -= hi;
 				}
+				// validateLatLonBox(dataBox);
 				boolean loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingType);
 				if (!loaded || checkWhetherInterrupted()) {
 					return;

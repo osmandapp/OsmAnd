@@ -3,12 +3,34 @@
   sudo perl Makefile.PL 
   make
   make test
-
-2. Locate and run shp2osm.pl.
+USE smothness = 2
+-------------
+Coastlines
+1. Locate and run shp2osm.pl.
 Example (replacing tags): perl ./shp2osm.pl 10m-coastline/10m_coastline.shp | sed 's/FeatureCla/natural/g;s/Coastline/coastline/g' > 10m_coastline.osm 
-3. Fix manually all 180 degrees breaks (simply divide islands into 2 islands and add connect line on 180 degree) and make Antarctica cycled.
-4. Run net.osmand.osm.util.FixLinkedCoastline from DataExtractionosm.jar with arg0=filename.
-5. !Fix manually Caspey Sea !
-6. ! Check 2 ShriLanka islands (2 coastlines on one place)
+2. Fix manually all 180 degrees breaks (simply divide islands into 2 islands and add connect line on 180 degree) and make Antarctica cycled.
+3. Run net.osmand.osm.util.FixLinkedCoastline from DataExtractionosm.jar with arg0=filename.
+- Open JOSM -
+4. !Fix manually Caspey Sea !
+5. ! Check 2 ShriLanka islands (2 coastlines on one place)
 6. ! Check North America for bug!
 7. Run Index Creator.
+
+-------------------------
+admin level
+Example (replacing tags): 
+1. perl ./shp2osm.pl 10m-admin-0-countries/10m_admin_0_countries.shp |  sed 's/FeatureCla/admin_level/g;s/Adm-0 country/0/g;s/NAME/name/g'  > 10m_admin_level.osm
+2. Open in JOSM and remove or fix antarctica
+3. Run net.osmand.osm.util.FixAdminLevel0 from DataExtractionosm.jar with arg0=filename.
+   To create country tag="place" value="country"
+4. Open in Josm and simply save
+5. Run Index Creator
+
+-------------------------
+cities/towns
+Example (replacing tags): 
+1. python ogr2osm/ogr2osm.py 10m-populated-places/10m_populated_places.shp
+Creates 10m_populated_places.osm
+2. less 10m_populated_places.osm | sed 's/MEGACITY/place/g;s/value="1"/value="city"/g;s/v="0"/v="town"/g;s/NAME/name/g'  > 10m_populated_places_out.osm
+3. Run IndexCreator
+

@@ -556,7 +556,8 @@
 		<subtype id="11" point="true" polygon_center="true" tag="place" value="locality" minzoom="10" />
 		<subtype id="12" point="true" polygon_center="true" tag="place" value="island" minzoom="10" />
 		<!-- register(st, "boundary", "administrative", ADMINISTRATIVE, 15, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$  -->
-		<subtype id="21" polyline="true" tag="admin_level" value="1" minzoom="5" />
+		<subtype id="21" polyline="true" tag="admin_level" value="1" minzoom="2" />
+		<subtype id="21" point="true" polyline="true" tag="admin_level" value="0" minzoom="2" />
 		<subtype id="22" polyline="true" tag="admin_level" value="2" minzoom="5" />
 		<subtype id="23" polyline="true" tag="admin_level" value="3" minzoom="5" />
 		<subtype id="24" polyline="true" tag="admin_level" value="4" minzoom="5" />
@@ -628,10 +629,4 @@
 		<subtype id="50" point="true" tag="sport" minzoom="15" />
 	</type>
 	
-	<!-- Processing base map at the end to not override tag/values for decoding -->
-	<type id="25" name="administrative">
-		<!--  same as town/city -->
-		<subtype id="6" point="true" tag="MEGACITY" value="1" minzoom="4" nameNullTag="NAME"/>
-		<subtype id="7" point="true" tag="MEGACITY" value="0" minzoom="6" nameNullTag="NAME"/>
-	</type>
 </osmand_types>
