@@ -36,6 +36,10 @@
 			<filter tag="natural" order="1" />
 		</filter>
 		<filter orderType="line">
+			<!-- Below see level -->
+			<filter tag="admin_level" value="0" order="0"/>
+			<filter tag="admin_level" value="1" order="0"/>
+		
 			<filter tag="" layer="-1" order="10" />
 			<filter tag="" order="11" />
 			<filter tag="" layer="1" order="67" />
@@ -304,18 +308,19 @@
 
 		<filter minzoom="12" textSize="9" textBold="true" textColor="#ffc0cb" textHaloRadius="1" textWrapWidth="10" tag="military" value="danger_area" />
 
+
 		<filter minzoom="4" textSize="10" textColor="#9d6c9d" textHaloRadius="1" textWrapWidth="20" tag="place" value="country" />
 		<filter minzoom="4" maxzoom="7" textSize="9" textColor="#9d6c9d" textHaloRadius="1" textWrapWidth="20" tag="place" value="state" />
 		<filter minzoom="8" textSize="11" textColor="#9d6c9d" textHaloRadius="1" textWrapWidth="20" tag="place" value="state" />
 		<filter minzoom="4" maxzoom="7" textSize="9" textColor="#9d6c9d" textHaloRadius="1" textWrapWidth="20" tag="place" value="region" />
 		<filter minzoom="8" textSize="11" textColor="#9d6c9d" textHaloRadius="1" textWrapWidth="20" tag="place" value="region" />
 
-		<filter minzoom="4" maxzoom="6" textSize="10" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
-		<filter minzoom="7" maxzoom="8" textSize="11" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
-		<filter minzoom="9" maxzoom="10" textSize="12" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
+		<filter minzoom="4" maxzoom="6" textSize="10" textDy="-8" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
+		<filter minzoom="7" maxzoom="8" textSize="11" textDy="-8" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
+		<filter minzoom="9" maxzoom="10" textSize="12" textDy="-8" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
 		<filter minzoom="11" textSize="14" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
-		<filter minzoom="6" maxzoom="10" textSize="10" textHaloRadius="1" textWrapWidth="20" tag="place" value="town" />
-		<filter minzoom="11" maxzoom="13" textSize="12" textHaloRadius="1" textWrapWidth="20" tag="place" value="town" />
+		<filter minzoom="6" maxzoom="10" textSize="10" textDy="-8" textHaloRadius="1" textWrapWidth="20" tag="place" value="town" />
+		<filter minzoom="11" maxzoom="13" textSize="12" textDy="-8" textHaloRadius="1" textWrapWidth="20" tag="place" value="town" />
 		<filter minzoom="14" textSize="14" textColor="#777777" textHaloRadius="1" textWrapWidth="20" tag="place" value="town" />
 
 		<filter minzoom="12" maxzoom="14" textSize="9" textHaloRadius="1" tag="place" value="village" />
@@ -449,8 +454,8 @@
 		<filter minzoom="16" icon="geocache_found" tag="geocache" value="found" />
 		<filter minzoom="16" icon="geocache_not_found" tag="geocache" />
 		
-		<filter minzoom="4" maxzoom="12" icon="city" value="city" />
-		<filter minzoom="6" maxzoom="14" icon="city" value="town" />
+		<filter minzoom="4" maxzoom="10" tag="place" icon="city" value="city" />
+		<filter minzoom="6" maxzoom="12" tag="place" icon="city" value="town" />
 	</point>
 
 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
@@ -963,11 +968,14 @@
 
 		<!-- ADMIN LEVELS (boundaries) -->
 		<switch>
+			<case tag="admin_level" value="0" />
+			<case tag="admin_level" value="1" />
 			<case tag="admin_level" value="2" />
 			<case tag="admin_level" value="3" />
 			<filter color="#800080">
-				<filter minzoom="4" maxzoom="6" strokeWidth="2" />
-				<filter minzoom="7" maxzoom="9" strokeWidth="3" />
+				<filter minzoom="2" maxzoom="3" strokeWidth="0.5" />
+				<filter minzoom="4" maxzoom="5" strokeWidth="1" />
+				<filter minzoom="6" maxzoom="9" strokeWidth="3" />
 				<filter minzoom="10" strokeWidth="6" />
 			</filter>
 		</switch>

@@ -12,6 +12,9 @@ import net.osmand.osm.Way;
 public class MapAlgorithms {
 	
 	public static void simplifyDouglasPeucker(List<Node> n, int zoom, int epsilon, Way w){
+		if(zoom > 31){
+			zoom = 31;
+		}
 		ArrayList<Integer> l = new ArrayList<Integer>();
 		int first = 0;
 		while(first < n.size()){
@@ -27,11 +30,29 @@ public class MapAlgorithms {
 			}
 			last--;
 		}
+		if (last - first < 1) {
+			return;
+		}
+		// check for possible cycle
+		boolean checkCycle = true;
+		boolean cycle = false;
+		while (checkCycle && last > first) {
+			checkCycle = false;
+
+			double x1 = MapUtils.getTileNumberX(zoom, n.get(first).getLongitude());
+			double y1 = MapUtils.getTileNumberY(zoom, n.get(first).getLatitude());
+			double x2 = MapUtils.getTileNumberX(zoom, n.get(last).getLongitude());
+			double y2 = MapUtils.getTileNumberY(zoom, n.get(last).getLatitude());
+			if (Math.abs(x1 - x2) + Math.abs(y1 - y2) < 0.001) {
+				last--;
+				cycle = true;
+				checkCycle = true;
+			}
+		}
 		if(last - first < 1){
 			return;
 		}
-		boolean cycle = n.get(first).getId() == n.get(last).getId();
-		simplifyDouglasPeucker(n, zoom, epsilon, l, first, cycle ? last - 1: last);
+		simplifyDouglasPeucker(n, zoom, epsilon, l, first, last);
 		w.addNode(n.get(first));
 		for (int i = 0; i < l.size(); i++) {
 			w.addNode(n.get(l.get(i)));
@@ -63,9 +84,6 @@ public class MapAlgorithms {
 	}
 	
 	private static double orthogonalDistance(int zoom, Node nodeLineStart, Node nodeLineEnd, Node node) {
-		if(zoom > 31){
-			zoom = 31;
-		}
 		double x1 = MapUtils.getTileNumberX(zoom, nodeLineStart.getLongitude());
 		double y1 = MapUtils.getTileNumberY(zoom, nodeLineStart.getLatitude());
 		double x2 = MapUtils.getTileNumberX(zoom, nodeLineEnd.getLongitude());

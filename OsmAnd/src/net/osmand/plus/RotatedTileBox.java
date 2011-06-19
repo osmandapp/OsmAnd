@@ -105,6 +105,13 @@ public class RotatedTileBox {
 		float tx3 = calcPointTileX(0, tileHeight);
 		float minTileX = Math.min(Math.min(leftTileX, tx), Math.min(tx2, tx3)) ;
 		float maxTileX = Math.max(Math.max(leftTileX, tx), Math.max(tx2, tx3)) ;
+		int max = 1 << zoom;
+		if(minTileX < 0){
+			minTileX = 0;
+		}
+		if(maxTileX > max){
+			maxTileX = max;
+		}
 		
 		rectF.left = (float) MapUtils.getLongitudeFromTile(zoom, minTileX);
 		rectF.right = (float) MapUtils.getLongitudeFromTile(zoom, maxTileX);
@@ -115,6 +122,12 @@ public class RotatedTileBox {
 		
 		float minTileY = Math.min(Math.min(topTileY, ty), Math.min(ty2, ty3)) ;
 		float maxTileY = Math.max(Math.max(topTileY, ty), Math.max(ty2, ty3)) ;
+		if(minTileY < 0){
+			minTileY = 0;
+		}
+		if(maxTileY > max){
+			maxTileY = max;
+		}
 		
 		rectF.top = (float) MapUtils.getLatitudeFromTile(zoom, minTileY);
 		rectF.bottom = (float) MapUtils.getLatitudeFromTile(zoom, maxTileY);
