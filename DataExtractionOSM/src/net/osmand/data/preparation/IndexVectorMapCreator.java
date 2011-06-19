@@ -12,7 +12,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -67,6 +66,8 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	private int lowLevelWays = -1;
 	private RTree[] mapTree = null;
 	private Connection mapConnection;
+	
+	private int zoomWaySmothness = 0;
 
 
 	public IndexVectorMapCreator() {
@@ -354,10 +355,9 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 		boolean point = (type & 3) == MapRenderingTypes.POINT_TYPE;
 		RTree rtree = null;
-		int zoom;
 		long id = (baseId << 3) | ((level & 3) << 1);
 		rtree = mapTree[level];
-		zoom = mapZooms.getLevel(level).getMaxZoom() - 1;
+		
 		boolean skip = false;
 
 		String eName = renderingTypes.getEntityName(e);
@@ -368,11 +368,13 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		if (e.getTag(OSMTagKey.HIGHWAY) != null) {
 			highwayAttributes = MapRenderingTypes.getHighwayAttributes(e);
 		}
+		
 		if (e instanceof Way) {
 			id |= 1;
 			// simplify route
-			if (level > 0) {
-				e = simplifyWay((Way) e, id, hasMulti, zoom, eName, type, level);
+			int zoomToSimplify = mapZooms.getLevel(level).getMaxZoom() - 1;
+			if (zoomToSimplify  < 15) {
+				e = simplifyWay((Way) e, id, hasMulti, zoomToSimplify, eName, type, level);
 				skip = e == null;
 			}
 
@@ -443,12 +445,13 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		boolean cycle = originalE.getNodeIds().get(0).longValue() == originalE.getNodeIds().get(nodes.size() - 1).longValue();
 		long longType = encodeTypesToOneLong(type);
 
-		boolean skip = checkForSmallAreas(nodes, zoom, 3, 3);
-		if (skip && cycle/* || !hasMulti)*/) {
-			return null;
+		if (cycle) {
+			if(checkForSmallAreas(nodes, zoom + Math.min(zoomWaySmothness / 2, 3), 1, 4)){
+				return null;
+			}
 		}
 
-		MapAlgorithms.simplifyDouglasPeucker(nodes, zoom + 8, 3, way);
+		MapAlgorithms.simplifyDouglasPeucker(nodes, zoom + 8 + zoomWaySmothness, 3, way);
 		if (way.getNodes().size() < 2) {
 			return null;
 		}
@@ -575,12 +578,12 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 			boolean cycle = startNode == endNode;
 			boolean hasMulti = multiPolygonsWays[level].containsKey(id >> 3);
 			if(cycle || !hasMulti){
-				skip = checkForSmallAreas(wNodes, zoom - 1, 1, 4);
+				skip = checkForSmallAreas(wNodes, zoom - 1 + Math.min(zoomWaySmothness / 2, 3), 1, 4);
 			}
 			
 			if (!skip) {
 				Way newWs = new Way(id);
-				MapAlgorithms.simplifyDouglasPeucker(wNodes, zoom - 1 + 8, 3, newWs);
+				MapAlgorithms.simplifyDouglasPeucker(wNodes, zoom - 1 + 8 + zoomWaySmothness, 3, newWs);
 				
 				int type = decodeTypesFromOneLong(ltype);
 				insertBinaryMapRenderObjectIndex(mapTree[level], newWs, name, 
@@ -617,8 +620,9 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void initSettings(MapZooms mapZooms, MapRenderingTypes renderingTypes) {
+	public void initSettings(MapZooms mapZooms, MapRenderingTypes renderingTypes, int zoomWaySmothness) {
 		this.mapZooms = mapZooms;
+		this.zoomWaySmothness = zoomWaySmothness;
 		this.renderingTypes = renderingTypes;
 		// init map
 		multiPolygonsWays = new Map[mapZooms.size()];
@@ -633,9 +637,10 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		if (e instanceof Way || e instanceof Node) {
 			// manipulate what kind of way to load
 			ctx.loadEntityData(e, false);
-			boolean inverse = "-1".equals(e.getTag(OSMTagKey.ONEWAY)); //$NON-NLS-1$
+			boolean oneway = "-1".equals(e.getTag(OSMTagKey.ONEWAY)); //$NON-NLS-1$
 			for (int i = 0; i < mapZooms.size(); i++) {
-				writeBinaryEntityToMapDatabase(e, e.getId(), i == 0 ? inverse : false, i);
+				boolean inverse = i == 0 ? oneway : false;
+				writeBinaryEntityToMapDatabase(e, e.getId(), inverse, i);
 			}
 		}
 	}
@@ -921,5 +926,13 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		}
 		closeAllPreparedStatements();
 		
+	}
+	
+	public void setZoomWaySmothness(int zoomWaySmothness) {
+		this.zoomWaySmothness = zoomWaySmothness;
+	}
+	
+	public int getZoomWaySmothness() {
+		return zoomWaySmothness;
 	}
 }

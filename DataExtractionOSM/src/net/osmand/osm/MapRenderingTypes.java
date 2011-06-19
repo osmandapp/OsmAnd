@@ -137,17 +137,18 @@ public class MapRenderingTypes {
 		// val could be null means others for that tag
 		private Integer nullRule;
 		private Map<String, Integer> rules = new LinkedHashMap<String, Integer>();
-		private String nameNullTag;
+		private Map<String, String> nameNullTag = new LinkedHashMap<String, String>();
 		
 		public MapRulType(String tag, String nameNullTag){
 			this.tag = tag;
+			this.nameNullTag.put(null, nameNullTag);
 		}
 		
 		public String getTag() {
 			return tag;
 		}
 		
-		public String getNameNullTag() {
+		public Map<String, String> getNameNullTag() {
 			return nameNullTag;
 		}
 		
@@ -563,8 +564,10 @@ public class MapRenderingTypes {
 				for (String tag : tagKeySet) {
 					if (types.containsKey(tag)) {
 						MapRulType rType = types.get(tag);
-						if (rType.getNameNullTag() != null) {
-							name = e.getTag(rType.getNameNullTag());
+						String val = i == 1 ? null : e.getTag(tag);
+						String nameNullTag = rType.getNameNullTag().get(val);
+						if (nameNullTag != null) {
+							name = e.getTag(nameNullTag);
 							if (name != null) {
 								break;
 							}
@@ -765,10 +768,13 @@ public class MapRenderingTypes {
 		if(st == INIT_RULE_TYPES){
 			MapRulType rtype = types.get(tag);
 			if(rtype == null){
-				rtype = new MapRulType(tag, nameNullTag);
+				rtype = new MapRulType(tag, null);
 				types.put(tag, rtype);
 			}
 			rtype.registerType(minZoom, val, pointRule, polylineRule, polygonRule, type, subtype);
+			if(nameNullTag != null){
+				rtype.getNameNullTag().put(val, nameNullTag);
+			}
 		} else if(st == INIT_AMENITY_MAP){
 			if(pointRule == POINT_TYPE || polygonRule == POLYGON_WITH_CENTER_TYPE || polygonRule == POLYGON_TYPE){
 				registerAmenity(tag, val, type, subtype);

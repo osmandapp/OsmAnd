@@ -231,7 +231,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		registerListPreference(osmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE, screen, entries, intValues);
 		
-		startZoom = 3;
+		startZoom = 1;
 		endZoom = 18;
 		entries = new String[endZoom - startZoom + 1];
 		intValues = new Integer[endZoom - startZoom + 1];

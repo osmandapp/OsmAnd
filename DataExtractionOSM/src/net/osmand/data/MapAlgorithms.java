@@ -1,8 +1,10 @@
 package net.osmand.data;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.Way;
@@ -61,6 +63,9 @@ public class MapAlgorithms {
 	}
 	
 	private static double orthogonalDistance(int zoom, Node nodeLineStart, Node nodeLineEnd, Node node) {
+		if(zoom > 31){
+			zoom = 31;
+		}
 		double x1 = MapUtils.getTileNumberX(zoom, nodeLineStart.getLongitude());
 		double y1 = MapUtils.getTileNumberY(zoom, nodeLineStart.getLatitude());
 		double x2 = MapUtils.getTileNumberX(zoom, nodeLineEnd.getLongitude());
@@ -73,4 +78,138 @@ public class MapAlgorithms {
 		double D = y2 - y1;
 		return Math.abs(A * D - C * B) / Math.sqrt(C * C + D * D);
 	}
+	
+	public static boolean isClockwiseWay(Way w){
+		return isClockwiseWay(Collections.singletonList(w));
+		
+	}
+	
+	public static boolean isClockwiseWay(List<Way> ways){
+		if(ways.isEmpty()){
+			return true;
+		}
+		LatLon latLon = ways.get(0).getLatLon();
+		double lat = latLon.getLatitude();
+		double lon = 180;
+		double firstLon = -360;
+		boolean firstDirectionUp = false;
+		double previousLon = -360;
+		
+		double clockwiseSum = 0;
+		
+		Node prev = null;
+		boolean firstWay = true;
+		for(Way w : ways){
+			List<Node> ns = w.getNodes();
+			int startInd = 0;
+			if(firstWay && ns.size() > 0){
+				prev = ns.get(0);
+				startInd = 1;
+				firstWay = false;
+			}
+			for(int i = startInd; i < ns.size();i++) {
+				Node next = ns.get(i);
+				double rlon = ray_intersect_lon(prev, next, lat, lon);
+				if(rlon != - 360d){
+					boolean skipSameSide = (prev.getLatitude() <= lat) == (next.getLatitude() <= lat);
+					if(skipSameSide){
+						continue;
+					}
+					boolean directionUp = prev.getLatitude() <= lat;
+					if(firstLon == - 360){
+						firstDirectionUp = directionUp;
+						firstLon = rlon;
+					} else {
+						boolean clockwise = (!directionUp) == (previousLon < rlon);
+						if(clockwise){
+							clockwiseSum += Math.abs(previousLon - rlon);
+						} else {
+							clockwiseSum -= Math.abs(previousLon - rlon);
+						}
+					}
+					previousLon = rlon;
+				}
+				prev = next;
+			}
+		}
+		
+		if(firstLon != -360){
+			boolean clockwise = (!firstDirectionUp) == (previousLon < firstLon);
+			if(clockwise){
+				clockwiseSum += Math.abs(previousLon - firstLon);
+			} else {
+				clockwiseSum -= Math.abs(previousLon - firstLon);
+			}
+		}
+		
+		return clockwiseSum >= 0;
+		
+		
+	}
+	
+	public static double ray_intersect_lon(Node node, Node node2, double latitude, double longitude) {
+		// a node below
+		Node a = node.getLatitude() < node2.getLatitude() ? node : node2;
+		// b node above
+		Node b = a == node2 ? node : node2;
+		if (latitude == a.getLatitude() || latitude == b.getLatitude()) {
+			latitude += 0.00000001d;
+		}
+		if (latitude < a.getLatitude() || latitude > b.getLatitude()) {
+			return -360d;
+		} else {
+			if (longitude < Math.min(a.getLongitude(), b.getLongitude())) {
+				return -360d;
+			} else {
+				if (a.getLongitude() == b.getLongitude() && longitude == a.getLongitude()) {
+					// the node on the boundary !!!
+					return longitude;
+				}
+				// that tested on all cases (left/right)
+				double lon = b.getLongitude()+ 
+					(b.getLatitude() - latitude) * (b.getLongitude() - a.getLongitude()) / (b.getLatitude() - a.getLatitude());
+				if (lon <= longitude) {
+					return lon;
+				} else {
+					return -360d;
+				}
+			}
+		}
+
+	}
+	
+	// Try to intersect with ray from left to right
+	public static boolean ray_intersect(Node node, Node node2, double latitude, double longitude) {
+		// a node below 
+		Node a = node.getLatitude() < node2.getLatitude() ? node : node2;
+		// b node above
+		Node b = a == node2 ? node : node2;
+		if(latitude == a.getLatitude() || latitude == b.getLatitude()){
+			latitude += 0.00000001d;
+		}
+		if(latitude < a.getLatitude() || latitude > b.getLatitude()){
+			return false;
+		} else {
+			if(longitude > Math.max(a.getLongitude(), b.getLongitude())) {
+				return true;
+			} else if(longitude < Math.min(a.getLongitude(), b.getLongitude())){
+				return false;
+			} else {
+				if(a.getLongitude() == b.getLongitude()) {
+					// the node on the boundary !!!
+					return true;
+				}
+				// that tested on all cases (left/right)
+			    double mR = (b.getLatitude() - a.getLatitude()) / (b.getLongitude() - a.getLongitude());
+				double mB = (latitude - a.getLatitude()) / (longitude - a.getLongitude());
+				if(mB <= mR){
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+	}
+
+
 }

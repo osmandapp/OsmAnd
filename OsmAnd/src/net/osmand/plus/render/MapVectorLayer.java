@@ -93,24 +93,24 @@ public class MapVectorLayer extends BaseMapLayer {
 			tileLayer.drawTileMap(canvas, tilesRect);
 			resourceManager.getRenderer().interruptLoadingMap();
 		} else {
-			if (!view.isZooming()){
+			if (!view.isZooming()) {
 				pixRect.set(0, 0, view.getWidth(), view.getHeight());
 				updateRotatedTileBox();
-				if(resourceManager.updateRenderedMapNeeded(rotatedTileBox)){
+				if (resourceManager.updateRenderedMapNeeded(rotatedTileBox)) {
 					// pixRect.set(-view.getWidth(), -view.getHeight() / 2, 2 * view.getWidth(), 3 * view.getHeight() / 2);
-					pixRect.set(-view.getWidth()/3, -view.getHeight() / 4, 4 * view.getWidth() /3, 5 * view.getHeight() / 4);
+					pixRect.set(-view.getWidth() / 3, -view.getHeight() / 4, 4 * view.getWidth() / 3, 5 * view.getHeight() / 4);
 					updateRotatedTileBox();
 					resourceManager.updateRendererMap(rotatedTileBox);
 					// does it slow down Map refreshing ?
 					// Arguments : 1. Map request to read data slows whole process // 2. It works in operating memory
-					if(!warningToSwitchMapShown){
-						if(!resourceManager.getRenderer().containsLatLonMapData(view.getLatitude(), view.getLongitude(), view.getZoom())){
+					if (!warningToSwitchMapShown) {
+						if (!resourceManager.getRenderer().containsLatLonMapData(view.getLatitude(), view.getLongitude(), view.getZoom())) {
 							Toast.makeText(view.getContext(), R.string.switch_to_raster_map_to_see, Toast.LENGTH_LONG).show();
 							warningToSwitchMapShown = true;
 						}
 					}
 				}
-				
+
 			}
 			
 			MapRenderRepositories renderer = resourceManager.getRenderer();

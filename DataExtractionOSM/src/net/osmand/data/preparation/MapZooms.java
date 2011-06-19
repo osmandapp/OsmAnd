@@ -1,11 +1,14 @@
 package net.osmand.data.preparation;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MapZooms {
 	
 	public static class MapZoomPair {
+		public static int MAX_ALLOWED_ZOOM = 22;
 		private int minZoom;
 		private int maxZoom;
 		
@@ -22,6 +25,10 @@ public class MapZooms {
 			return maxZoom;
 		}
 		
+		@Override
+		public String toString() {
+			return "MapZoomPair : " + minZoom + " - "+ maxZoom;
+		}
 	}
 	
 	private List<MapZoomPair> levels = new ArrayList<MapZoomPair>();
@@ -33,6 +40,13 @@ public class MapZooms {
 	
 	public void setLevels(List<MapZoomPair> levels) {
 		this.levels = levels;
+		Collections.sort(levels, new Comparator<MapZoomPair>() {
+
+			@Override
+			public int compare(MapZoomPair o1, MapZoomPair o2) {
+				return -new Integer(o1.getMaxZoom()).compareTo(o2.getMaxZoom());
+			}
+		});
 	}
 	/**
 	 * @param zooms - could be 5-8;7-10;13-15;15
@@ -51,7 +65,7 @@ public class MapZooms {
 				list.add(0, new MapZoomPair(Integer.parseInt(s.substring(0, i)), Integer.parseInt(s.substring(i + 1))));
 			}
 		}
-		list.add(0, new MapZoomPair(zeroLevel, 22));
+		list.add(0, new MapZoomPair(zeroLevel, MapZoomPair.MAX_ALLOWED_ZOOM));
 		if(list.size() < 1 || list.size() > 4){
 			throw new IllegalArgumentException("Map zooms should have at least 1 level and less than 4 levels");
 		}

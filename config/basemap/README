@@ -1,0 +1,14 @@
+1. Find and install perl Geo-ShapeFile-2.52 
+  cd Geo-ShapeFile-2.52/
+  sudo perl Makefile.PL 
+  make
+  make test
+
+2. Locate and run shp2osm.pl.
+Example (replacing tags): perl ./shp2osm.pl 10m-coastline/10m_coastline.shp | sed 's/FeatureCla/natural/g;s/Coastline/coastline/g' > 10m_coastline.osm 
+3. Fix manually all 180 degrees breaks (simply divide islands into 2 islands and add connect line on 180 degree) and make Antarctica cycled.
+4. Run net.osmand.osm.util.FixLinkedCoastline from DataExtractionosm.jar with arg0=filename.
+5. !Fix manually Caspey Sea !
+6. ! Check 2 ShriLanka islands (2 coastlines on one place)
+6. ! Check North America for bug!
+7. Run Index Creator.

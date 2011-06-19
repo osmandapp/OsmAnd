@@ -164,9 +164,11 @@ public class MainMenuActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		boolean exit = false;
 		if(getIntent() != null){
 			Intent intent = getIntent();
 			if(intent.getExtras() != null && intent.getExtras().containsKey(APP_EXIT_KEY)){
+				exit = true;
 				finish();
 			}
 		}
@@ -222,10 +224,11 @@ public class MainMenuActivity extends Activity {
 				activity.startActivity(search);
 			}
 		});
+		if(exit){
+			return;
+		}
 		
-		((OsmandApplication)getApplication()).checkApplicationIsBeingInitialized(this);
-		
-		
+		((OsmandApplication)getApplication()).checkApplicationIsBeingInitialized(this);		
 		SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);
 		boolean firstTime = false;
 		if(!pref.contains(FIRST_TIME_APP_RUN)){
