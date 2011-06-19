@@ -37,7 +37,11 @@ public class Way extends Entity {
 		if(nodeIds == null){
 			return null;
 		}
-		return nodeIds.remove(i);
+		Long toReturn = nodeIds.remove(i);
+		if(nodes != null && nodes.size() > i){
+			nodes.remove(i);
+		}
+		return toReturn;
 	}
 	
 	public List<Long> getNodeIds(){

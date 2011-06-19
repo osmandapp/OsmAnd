@@ -685,8 +685,8 @@ public class OsmandRenderer {
 		rc.main.updatePaint(paint);
 		canvas.drawPath(path, paint);
 		// for test purpose
-	    // rc.second.strokeWidth = 1.5f;
-	    // rc.second.color = Color.BLACK;
+	    //  rc.second.strokeWidth = 1.5f;
+	    //  rc.second.color = Color.BLACK;
 	    
 		if (rc.second.strokeWidth != 0) {
 			rc.second.updatePaint(paint);

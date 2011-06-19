@@ -10,11 +10,13 @@ import java.io.RandomAccessFile;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.binary.BinaryMapIndexWriter;
 import net.osmand.data.IndexConstants;
+import net.osmand.data.preparation.MapZooms.MapZoomPair;
 import net.osmand.data.preparation.OsmDbAccessor.OsmDbVisitor;
 import net.osmand.impl.ConsoleProgressImplementation;
 import net.osmand.osm.Entity;
@@ -63,11 +65,14 @@ public class IndexCreator {
 
 	private boolean normalizeStreets = true; // true by default
 	private boolean saveAddressWays = true; // true by default
+	private int zoomWaySmothness = 0;
 
 	private String regionName;
 	private String poiFileName = null;
 	private String mapFileName = null;
 	private Long lastModifiedDate = null;
+	
+	
 
 	
 	private IndexTransportCreator indexTransportCreator;
@@ -115,6 +120,10 @@ public class IndexCreator {
 
 	public void setNormalizeStreets(boolean normalizeStreets) {
 		this.normalizeStreets = normalizeStreets;
+	}
+	
+	public void setZoomWaySmothness(int zoomWaySmothness) {
+		this.zoomWaySmothness = zoomWaySmothness;
 	}
 
 	public String getRegionName() {
@@ -351,7 +360,7 @@ public class IndexCreator {
 		this.accessor = new OsmDbAccessor();
 		
 
-		indexMapCreator.initSettings(mapZooms, renderingTypes);
+		indexMapCreator.initSettings(mapZooms, renderingTypes, zoomWaySmothness);
 
 		// init address
 		String[] normalizeDefaultSuffixes = null;
@@ -587,9 +596,9 @@ public class IndexCreator {
 		long time = System.currentTimeMillis();
 		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/data/osm-gen/")); //$NON-NLS-1$
 		creator.setIndexMap(true);
-		creator.setIndexAddress(true);
-		creator.setIndexPOI(true);
-		creator.setIndexTransport(true);
+//		creator.setIndexAddress(true);
+//		creator.setIndexPOI(true);
+//		creator.setIndexTransport(true);
 		// for NL
 //		creator.setCityAdminLevel("10");
 
@@ -597,11 +606,24 @@ public class IndexCreator {
 		creator.deleteDatabaseIndexes = true;
 		creator.deleteOsmDB = true;
 				
-		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/download/410/map.osm"), 
-				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), null);
+//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/download/410/map.osm"), 
+//				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), null);
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/minsk_around.osm"), 
 //				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), null);
 		
+		MapZooms mapZooms = new MapZooms();
+		MapZoomPair pair1 = new MapZooms.MapZoomPair(1, 3);
+		MapZoomPair pair2 = new MapZooms.MapZoomPair(4, 5);
+		MapZoomPair pair3 = new MapZooms.MapZoomPair(6, 7);
+		
+		mapZooms.setLevels(Arrays.asList(pair1, pair2, pair3));
+		creator.setZoomWaySmothness(2);
+		creator.generateIndexes(new File(
+				"/home/victor/projects/OsmAnd/download/basemap/10m_coastline_out.osm"
+//				"/home/victor/projects/OsmAnd/download/basemap/10-admin-0-countries.osm"
+//				"/home/victor/projects/OsmAnd/download/basemap/10m_populated_places.osm"
+				), 
+				new ConsoleProgressImplementation(1), null, mapZooms, null);
 		
 		
 //		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));

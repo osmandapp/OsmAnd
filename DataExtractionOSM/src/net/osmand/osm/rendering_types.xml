@@ -409,7 +409,7 @@
 
 
 	<type id="17" name="natural">
-		<subtype id="5" polygon="true" tag="natural" value="coastline" minzoom="5" />
+		<subtype id="5" polygon="true" tag="natural" value="coastline" minzoom="1" />
 		<subtype id="1" point="true" polygon="true" tag="natural" value="bay" minzoom="15" />
 		<subtype id="2" point="true" polygon="true" tag="natural" value="beach" minzoom="12" />
 		<subtype id="3" point="true" polygon_center="true" tag="natural" value="cave_entrance" minzoom="13" />
@@ -540,14 +540,16 @@
 	</type>
 
 
+
 	<type id="25" name="administrative">
+	
 		<subtype id="41" point="true" tag="place" value="continent" minzoom="5" />
 		<subtype id="42" point="true" tag="place" value="country" minzoom="5" />
 		<subtype id="43" point="true" tag="place" value="state" minzoom="5" />
 		<subtype id="44" point="true" tag="place" value="region" minzoom="5" />
 		<subtype id="45" point="true" tag="place" value="county" minzoom="5" />
-		<subtype id="6" point="true" polygon_center="true" tag="place" value="city" minzoom="6" />
-		<subtype id="7" point="true" polygon_center="true" tag="place" value="town" minzoom="7" />
+		<subtype id="6" point="true" polygon_center="true" tag="place" value="city" minzoom="4" />
+		<subtype id="7" point="true" polygon_center="true" tag="place" value="town" minzoom="6" />
 		<subtype id="8" point="true" polygon_center="true" tag="place" value="village" minzoom="10" />
 		<subtype id="9" point="true" polygon_center="true" tag="place" value="hamlet" minzoom="10" />
 		<subtype id="10" point="true" polygon_center="true" tag="place" value="suburb" minzoom="10" />
@@ -570,8 +572,10 @@
 		<subtype id="19" polyline="true" tag="boundary" value="national_park" minzoom="7" />
 		<subtype id="20" polyline="true" tag="boundary" value="protected_area" minzoom="7" />
 		<subtype id="33" point="true" tag="addr:housenumber" minzoom="15" />
+		
 	</type>
 
+	
 
 	<type id="27" name="sport">
 		<subtype id="1" point="true" tag="sport" value="9pin" minzoom="15" />
@@ -622,5 +626,12 @@
 		<subtype id="46" point="true" tag="sport" value="toboggan" minzoom="15" />
 		<subtype id="47" point="true" tag="sport" value="volleyball" minzoom="15" />
 		<subtype id="50" point="true" tag="sport" minzoom="15" />
+	</type>
+	
+	<!-- Processing base map at the end to not override tag/values for decoding -->
+	<type id="25" name="administrative">
+		<!--  same as town/city -->
+		<subtype id="6" point="true" tag="MEGACITY" value="1" minzoom="4" nameNullTag="NAME"/>
+		<subtype id="7" point="true" tag="MEGACITY" value="0" minzoom="6" nameNullTag="NAME"/>
 	</type>
 </osmand_types>
