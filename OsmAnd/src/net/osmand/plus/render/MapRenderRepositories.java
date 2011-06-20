@@ -269,7 +269,7 @@ public class MapRenderRepositories {
 			}
 			
 			for (String mapName : files.keySet()) {
-				if(basemapSearch && mapName.toLowerCase().contains(BASEMAP_NAME)){
+				if(basemapSearch && !mapName.toLowerCase().contains(BASEMAP_NAME)){
 					continue;
 				}
 				BinaryMapIndexReader c  = files.get(mapName);
