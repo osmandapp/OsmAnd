@@ -279,7 +279,17 @@ public class OsmandApplication extends Application {
 							synchronized (OsmandApplication.this) {
 								startDialog = null;
 								if (progressDlg != null) {
-									progressDlg.dismiss();
+									final ProgressDialog toDismiss = progressDlg;
+//									toDismiss.dismiss();
+									uiHandler.post(new Runnable() {
+										@Override
+										public void run() {
+											if(toDismiss.getOwnerActivity() != null){
+												toDismiss.dismiss();
+											}
+											
+										}
+									});
 									showWarnings(warnings, progressDlg.getContext());
 									progressDlg = null;
 								} else {
