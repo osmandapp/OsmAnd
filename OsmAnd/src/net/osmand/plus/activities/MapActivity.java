@@ -129,6 +129,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private Integer previousMapRotate = null;
 	
 	private boolean isMapLinkedToLocation = false;
+	private ProgressDialog startProgressDialog;
 	
 	private boolean isMapLinkedToLocation(){
 		return isMapLinkedToLocation;
@@ -154,19 +155,19 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		// Full screen is not used here
 //	     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
-		ProgressDialog dlg = ((OsmandApplication)getApplication()).checkApplicationIsBeingInitialized(this);
-		if(dlg != null){
-			// Do some action on close
-			dlg.setOnDismissListener(new DialogInterface.OnDismissListener(){
-				@Override
-				public void onDismiss(DialogInterface dialog) {
-					OsmandApplication app = ((OsmandApplication)getApplication());
-					if(settings.MAP_VECTOR_DATA.get() && app.getResourceManager().getRenderer().isEmpty()){
-						Toast.makeText(MapActivity.this, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
-					}
+		startProgressDialog = new ProgressDialog(this);
+		startProgressDialog.setCancelable(true);
+		((OsmandApplication) getApplication()).checkApplicationIsBeingInitialized(this, startProgressDialog);
+		// Do some action on close
+		startProgressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+			@Override
+			public void onDismiss(DialogInterface dialog) {
+				OsmandApplication app = ((OsmandApplication) getApplication());
+				if (settings.MAP_VECTOR_DATA.get() && app.getResourceManager().getRenderer().isEmpty()) {
+					Toast.makeText(MapActivity.this, getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
 				}
-			});
-		}
+			}
+		});
 		parseLaunchIntentLocation();
 		
 		mapView = (OsmandMapTileView) findViewById(R.id.MapView);
@@ -266,6 +267,14 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			
 		});
 		
+	}
+    
+    @Override
+	protected Dialog onCreateDialog(int id) {
+		if(id == OsmandApplication.PROGRESS_DIALOG){
+			return startProgressDialog;
+		}
+		return super.onCreateDialog(id);
 	}
     
     public void changeZoom(int newZoom){

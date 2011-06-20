@@ -54,6 +54,8 @@ public class MapRenderRepositories {
 	private Map<String, BinaryMapIndexReader> files = new LinkedHashMap<String, BinaryMapIndexReader>();
 	private OsmandRenderer renderer;
 
+	private static String BASEMAP_NAME = "basemap";
+	
 	
 	// lat/lon box of requested vector data 
 	private RectF cObjectsBox = new RectF();
@@ -255,8 +257,22 @@ public class MapRenderRepositories {
 
 				});
 			}
+			// search lower level zooms only in basemap for now :) before it was intersection of maps on zooms 5-7
+			boolean basemapSearch = false;
+			if (zoom < 8) {
+				for (String f : files.keySet()) {
+					if (f.toLowerCase().contains(BASEMAP_NAME)) {
+						basemapSearch = true;
+						break;
+					}
+				}
+			}
 			
-			for (BinaryMapIndexReader c : files.values()) {
+			for (String mapName : files.keySet()) {
+				if(basemapSearch && mapName.toLowerCase().contains(BASEMAP_NAME)){
+					continue;
+				}
+				BinaryMapIndexReader c  = files.get(mapName);
 				List<BinaryMapDataObject> res = c.searchMapIndex(searchRequest);
 				if (checkWhetherInterrupted()) {
 					return false;

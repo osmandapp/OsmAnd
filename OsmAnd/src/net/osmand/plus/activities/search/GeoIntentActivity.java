@@ -23,6 +23,7 @@ import net.osmand.plus.RegionAddressRepository;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandApplication;
+import android.app.Dialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -42,12 +43,14 @@ public class GeoIntentActivity extends ListActivity {
 
 	private ProgressDialog progressDlg;
 	private LatLon location;
+	private ProgressDialog startProgressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search_address_offline);
-		getMyApplication().checkApplicationIsBeingInitialized(this);
+		startProgressDialog = new ProgressDialog(this);
+		getMyApplication().checkApplicationIsBeingInitialized(this, startProgressDialog);
 		location = getMyApplication().getSettings().getLastKnownMapLocation();
 		final Intent intent = getIntent();
 		if (intent != null) {
@@ -87,6 +90,14 @@ public class GeoIntentActivity extends ListActivity {
 		// finish();
 	}
 
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		if(id == OsmandApplication.PROGRESS_DIALOG){
+			return startProgressDialog;
+		}
+		return super.onCreateDialog(id);
+	}
+	
 	private void showResult(final int warning, final List<MapObject> places) {
 		runOnUiThread(new Runnable() {
 			@Override
