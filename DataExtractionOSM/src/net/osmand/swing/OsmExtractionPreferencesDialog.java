@@ -29,6 +29,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 	private JTextField streetSuffixes;
 	private JTextField streetDefaultSuffixes;
 	private JTextField mapZooms;
+	private JTextField lineSmoothness;
 	private JTextField cityAdminLevel;
 	private JTextField renderingTypesFile;
 	private JTextField pathToObfRoutingFile;
@@ -221,13 +222,33 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		constr.gridy = 2;
 		l.setConstraints(mapZooms, constr);
 		
+		label = new JLabel("Line smoothness for low zooms (value 0-3) : "); 
+		panel.add(label);
+		constr = new GridBagConstraints();
+		constr.ipadx = 5;
+		constr.gridx = 0;
+		constr.gridy = 3;
+		constr.anchor = GridBagConstraints.WEST;
+		l.setConstraints(label, constr);
+		
+		lineSmoothness = new JTextField();
+		lineSmoothness.setText(DataExtractionSettings.getSettings().getLineSmoothness());
+		panel.add(lineSmoothness);
+		constr = new GridBagConstraints();
+		constr.weightx = 1;
+		constr.fill = GridBagConstraints.HORIZONTAL;
+		constr.ipadx = 5;
+		constr.gridx = 1;
+		constr.gridy = 3;
+		l.setConstraints(mapZooms, constr);
+		
 		
 		label = new JLabel("Rendering types (xml config to extract osm data) file path"); 
 		panel.add(label);
 		constr = new GridBagConstraints();
 		constr.ipadx = 5;
 		constr.gridx = 0;
-		constr.gridy = 3;
+		constr.gridy = 4;
 		constr.anchor = GridBagConstraints.WEST;
 		l.setConstraints(label, constr);
 		
@@ -239,7 +260,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		constr.fill = GridBagConstraints.HORIZONTAL;
 		constr.ipadx = 5;
 		constr.gridx = 1;
-		constr.gridy = 3;
+		constr.gridy = 4;
 		l.setConstraints(renderingTypesFile, constr);
 		
 		panel.setMaximumSize(new Dimension(Short.MAX_VALUE, panel.getPreferredSize().height));
@@ -276,6 +297,9 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 			settings.setUseInterentToLoadImages(useInternet.isSelected());
 		}
 		
+		if(!settings.getLineSmoothness().equals(lineSmoothness.getText())){
+			settings.setLineSmoothness(lineSmoothness.getText());
+		}
 		if(!settings.getMapZoomsValue().equals(mapZooms.getText())){
 			settings.setMapZooms(mapZooms.getText());
 		}

@@ -102,6 +102,16 @@ public class DataExtractionSettings {
 		preferences.put("map_zooms", zooms);
 	}
 	
+	public String getLineSmoothness(){
+		return preferences.get("line_smoothness", "0");
+	}
+	
+	public void setLineSmoothness(String smooth){
+		// check string
+		Integer.parseInt(smooth);
+		preferences.put("line_smoothness", smooth);
+	}
+	
 	
 	public String getMapRenderingTypesFile(){
 		return preferences.get("rendering_types_file", "");

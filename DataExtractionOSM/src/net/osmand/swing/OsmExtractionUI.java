@@ -438,6 +438,12 @@ public class OsmExtractionUI implements IMapLocationListener {
 							types = new MapRenderingTypes(fn);
 						}
 						RTree.clearCache();
+						int smoothness = 0;
+						try {
+							Integer.parseInt(DataExtractionSettings.getSettings().getLineSmoothness());
+						} catch (NumberFormatException e) {
+						}
+						creator.setZoomWaySmothness(smoothness);
 						creator.generateIndexes(f, dlg, filter, DataExtractionSettings.getSettings().getMapZooms(), types);
 					} catch (IOException e) {
 						throw new IllegalArgumentException(e);
