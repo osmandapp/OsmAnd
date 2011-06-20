@@ -4,6 +4,12 @@
   make
   make test
 USE smothness = 2
+
+I. Make all 5  files
+II. Merge them
+III. Run Index Creator
+
+I
 -------------
 Coastlines
 1. Locate and run shp2osm.pl.
@@ -14,7 +20,7 @@ Example (replacing tags): perl ./shp2osm.pl 10m-coastline/10m_coastline.shp | se
 4. !Fix manually Caspey Sea !
 5. ! Check 2 ShriLanka islands (2 coastlines on one place)
 6. ! Check North America for bug!
-7. Run Index Creator.
+// 7. Run Index Creator.
 
 -------------------------
 admin level
@@ -24,7 +30,7 @@ Example (replacing tags):
 3. Run net.osmand.osm.util.FixAdminLevel0 from DataExtractionosm.jar with arg0=filename.
    To create country tag="place" value="country"
 4. Open in Josm and simply save
-5. Run Index Creator
+// 5. Run Index Creator
 
 -------------------------
 cities/towns
@@ -32,7 +38,7 @@ Example (replacing tags):
 1. python ogr2osm/ogr2osm.py 10m-populated-places/10m_populated_places.shp
 Creates 10m_populated_places.osm
 2. less 10m_populated_places.osm | sed 's/MEGACITY/place/g;s/v="1"/v="city"/g;s/v="0"/v="town"/g;s/NAME/name/g'  > 10m_populated_places_out.osm
-3. Run IndexCreator
+// 3. Run IndexCreator
 
 -------------------------
 lakes
@@ -41,7 +47,7 @@ Example (replacing tags):
 Creates 10m_lakes.osm
 2. Run net.osmand.osm.util.FixLinkedCoastline from DataExtractionosm.jar with arg0=filename.
 3. Open in Josm and simply save
-4. Run IndexCreator
+// 4. Run IndexCreator
 
 -------------------------
 rivers
@@ -50,4 +56,57 @@ Example (replacing tags):
 Creates 10m_lakes.osm
 2. Run net.osmand.osm.util.FixLinkedCoastline from DataExtractionosm.jar with arg0=filename.
 3. Open in Josm and simply save
-4. Run IndexCreator
+// 4. Run IndexCreator
+
+
+--------------------------------------------------------------------------------
+II Merging
+BASH : 
+  echo "<?xml version='1.0' encoding='UTF-8'?>" > basemap_1.osm;
+  echo "<osm version='0.6' generator='JOSM'>" >> basemap_1.osm;
+
+  cat 10m_coastline_out.osm   | sed -r "s/'-([0-9]*)'/'-\11'/" | tail -n+3 | sed 's/<\/osm>//' >> basemap_1.osm;
+  cat 10m_admin_level_out.osm | sed -r "s/'-([0-9]*)'/'-\12'/" | tail -n+3 | sed 's/<\/osm>//' >> basemap_1.osm;
+  cat 10m_populated_places_out.osm | xmllint --format - | sed -r 's/"-([0-9]*)"/"-\13"/' | tail -n+3 | sed 's/<\/osm>//' >> basemap_1.osm;
+  cat 10m_rivers.osm          | sed -r "s/'-([0-9]*)'/'-\14'/" | tail -n+3 | sed 's/<\/osm>//' >> basemap_1.osm;
+  cat 10m_lakes_out.osm       | sed -r "s/'-([0-9]*)'/'-\15'/" | tail -n+3 | sed 's/<\/osm>//' >> basemap_1.osm;
+  echo '</osm>' >> basemap_1.osm;
+
+TEST : 
+  echo "<?xml version='1.0' encoding='UTF-8'?>" > basemap_1.osm;
+  echo "<osm version='0.6' generator='JOSM'>" >> basemap_1.osm;
+
+
+  echo '</osm>' >> basemap_1.osm;
+  cat 10m_rivers.osm          | sed -r "s/'-([0-9]*)'/'-\14'/" | tail -n+3 | sed 's/<\/osm>//' >> basemap_1.osm;
+
+READY : basemap_1.osm [1-3, 4-5,6-7].
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

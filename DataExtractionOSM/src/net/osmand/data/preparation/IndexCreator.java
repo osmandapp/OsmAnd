@@ -618,14 +618,9 @@ public class IndexCreator {
 		
 		mapZooms.setLevels(Arrays.asList(pair1, pair2, pair3));
 		// for coastline
-//		creator.setZoomWaySmothness(2);
-//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/download/basemap/10m_coastline_out.osm");
 		creator.setZoomWaySmothness(2);
 		creator.generateIndexes(new File(
-//				"/home/victor/projects/OsmAnd/download/basemap/10m_admin_level_out.osm"
-//				"/home/victor/projects/OsmAnd/download/basemap/10m_populated_places_out.osm"
-//				"/home/victor/projects/OsmAnd/download/basemap/10m_lakes_out.osm"
-				"/home/victor/projects/OsmAnd/download/basemap/10m_rivers.osm"
+				"/home/victor/projects/OsmAnd/download/basemap/basemap_1.osm"
 				), 
 				new ConsoleProgressImplementation(1), null, mapZooms, null);
 		
