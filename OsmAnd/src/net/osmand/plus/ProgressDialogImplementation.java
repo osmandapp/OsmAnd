@@ -139,6 +139,10 @@ public class ProgressDialogImplementation implements IProgress {
 	public boolean isInterrupted() {
 		return false;
 	}
+	
+	public ProgressDialog getDialog() {
+		return dialog;
+	}
 
 	
 

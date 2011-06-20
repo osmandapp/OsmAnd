@@ -11,6 +11,7 @@ import net.osmand.plus.activities.search.SearchActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -44,6 +45,8 @@ public class MainMenuActivity extends Activity {
 	
 	public static final int APP_EXIT_CODE = 4;
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
+	
+	private ProgressDialog startProgressDialog;
 
 	
 	public void checkPreviousRunsForExceptions(boolean firstTime) {
@@ -228,7 +231,8 @@ public class MainMenuActivity extends Activity {
 			return;
 		}
 		
-		((OsmandApplication)getApplication()).checkApplicationIsBeingInitialized(this);		
+		startProgressDialog = new ProgressDialog(this);
+		((OsmandApplication)getApplication()).checkApplicationIsBeingInitialized(this, startProgressDialog);		
 		SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);
 		boolean firstTime = false;
 		if(!pref.contains(FIRST_TIME_APP_RUN)){
@@ -274,6 +278,14 @@ public class MainMenuActivity extends Activity {
 			}
 		}
 		checkPreviousRunsForExceptions(firstTime);
+	}
+	
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		if(id == OsmandApplication.PROGRESS_DIALOG){
+			return startProgressDialog;
+		}
+		return super.onCreateDialog(id);
 	}
 	
 

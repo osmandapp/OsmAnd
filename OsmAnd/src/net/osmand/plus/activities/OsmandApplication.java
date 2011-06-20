@@ -24,6 +24,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.voice.CommandPlayer;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Application;
 import android.app.ProgressDialog;
@@ -55,7 +56,6 @@ public class OsmandApplication extends Application {
 	// start variables
 	private ProgressDialogImplementation startDialog;
 	private List<String> startingWarnings;
-	private ProgressDialog progressDlg;
 	private Handler uiHandler;
 	private GPXFileResult gpxFileToDisplay;
 	
@@ -158,19 +158,27 @@ public class OsmandApplication extends Application {
 		
 	}
 	
-	public ProgressDialog checkApplicationIsBeingInitialized(Context uiContext){
+ 
+	public static final int PROGRESS_DIALOG  = 5;
+
+	/**
+	 * @param activity that supports onCreateDialog({@link #PROGRESS_DIALOG}) and returns @param progressdialog
+	 * @param progressDialog - it should be exactly the same as onCreateDialog
+	 * @return
+	 */
+	public void checkApplicationIsBeingInitialized(Activity activity, ProgressDialog progressDialog){
 		// start application if it was previously closed
 		startApplication();
 		synchronized (OsmandApplication.this) {
 			if(startDialog != null){
-				progressDlg = ProgressDialog.show(uiContext, getString(R.string.loading_data), getString(R.string.reading_indexes), true);
-				startDialog.setDialog(progressDlg);
-				return progressDlg;
-			}  else if(startingWarnings != null){
-				showWarnings(startingWarnings, uiContext);
+				progressDialog.setTitle(getString(R.string.loading_data));
+				progressDialog.setMessage(getString(R.string.reading_indexes));
+				activity.showDialog(PROGRESS_DIALOG);
+				startDialog.setDialog(progressDialog);
+			} else if (startingWarnings != null) {
+					showWarnings(startingWarnings, activity);
 			}
 		}
-		return null;
 	}
 	
 	public boolean isApplicationInitializing(){
@@ -277,21 +285,25 @@ public class OsmandApplication extends Application {
 
 						} finally {
 							synchronized (OsmandApplication.this) {
+								final ProgressDialog toDismiss;
+								if(startDialog != null){
+									toDismiss = startDialog.getDialog();
+								} else {
+									toDismiss = null;
+								}
 								startDialog = null;
-								if (progressDlg != null) {
-									final ProgressDialog toDismiss = progressDlg;
-//									toDismiss.dismiss();
+								
+								if (toDismiss != null) {
 									uiHandler.post(new Runnable() {
 										@Override
 										public void run() {
 											if(toDismiss.getOwnerActivity() != null){
-												toDismiss.dismiss();
+												toDismiss.getOwnerActivity().dismissDialog(PROGRESS_DIALOG);
 											}
 											
 										}
 									});
-									showWarnings(warnings, progressDlg.getContext());
-									progressDlg = null;
+									showWarnings(warnings, toDismiss.getContext());
 								} else {
 									startingWarnings = warnings;
 								}
