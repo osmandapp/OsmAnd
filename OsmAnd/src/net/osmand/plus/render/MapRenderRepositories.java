@@ -752,7 +752,7 @@ public class MapRenderRepositories {
 						int csy = (int) (cni.get(0) & mask);
 						if (h % 4 == 0) {
 							// top
-							if (csy == topY && csx >= x - EVAL_DELTA) {
+							if (csy == topY && csx >= safelyAddDelta(x, - EVAL_DELTA)) {
 								if (mindiff == UNDEFINED_MIN_DIFF || (csx - x) <= mindiff) {
 									mindiff = (csx - x);
 									nextRingIndex = ni;
@@ -760,7 +760,7 @@ public class MapRenderRepositories {
 							}
 						} else if (h % 4 == 1) {
 							// right
-							if (csx == rightX && csy >= y - EVAL_DELTA) {
+							if (csx == rightX && csy >= safelyAddDelta(y, - EVAL_DELTA)) {
 								if (mindiff == UNDEFINED_MIN_DIFF || (csy - y) <= mindiff) {
 									mindiff = (csy - y);
 									nextRingIndex = ni;
@@ -768,7 +768,7 @@ public class MapRenderRepositories {
 							}
 						} else if (h % 4 == 2) {
 							// bottom
-							if (csy == bottomY && csx <= x + EVAL_DELTA) {
+							if (csy == bottomY && csx <= safelyAddDelta(x, EVAL_DELTA)) {
 								if (mindiff == UNDEFINED_MIN_DIFF || (x - csx) <= mindiff) {
 									mindiff = (x - csx);
 									nextRingIndex = ni;
@@ -776,7 +776,7 @@ public class MapRenderRepositories {
 							}
 						} else if (h % 4 == 3) {
 							// left
-							if (csx == leftX && csy <= y + EVAL_DELTA) {
+							if (csx == leftX && csy <= safelyAddDelta(y, EVAL_DELTA)) {
 								if (mindiff == UNDEFINED_MIN_DIFF || (y - csy) <= mindiff) {
 									mindiff = (y - csy);
 									nextRingIndex = ni;
@@ -828,6 +828,16 @@ public class MapRenderRepositories {
 			completedRings.add(i);
 			completedRingNames.add(name);
 		}
+	}
+	
+	private int safelyAddDelta(int number, int delta){
+		int res = number + delta;
+		if(delta > 0 && res < number){
+			return Integer.MAX_VALUE;
+		} else if(delta < 0 && res > number){
+			return Integer.MIN_VALUE;
+		}
+		return res;
 	}
 	
 	/**
