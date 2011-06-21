@@ -6,9 +6,9 @@ import java.util.List;
 
 import net.osmand.Algoritms;
 import net.osmand.CallbackWithObject;
+import net.osmand.GPXUtilities.GPXFileResult;
 import net.osmand.LogUtil;
 import net.osmand.Version;
-import net.osmand.GPXUtilities.GPXFileResult;
 import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
@@ -27,17 +27,17 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointLocationLayer;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
-import android.app.AlertDialog.Builder;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
@@ -66,8 +66,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
@@ -127,7 +127,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private OsmandSettings settings;
 	// Store previous map rotation settings for rotate button
 	private Integer previousMapRotate = null;
-	
+
 	private boolean isMapLinkedToLocation = false;
 	private ProgressDialog startProgressDialog;
 	
@@ -150,7 +150,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     @Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		settings = ((OsmandApplication) getApplication()).getSettings();		
+		settings = getMyApplication().getSettings();		
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		// Full screen is not used here
 //	     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -183,7 +183,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			@Override
 			public void tileDownloaded(DownloadRequest request) {
 				if(request != null && !request.error && request.fileToSave != null){
-					ResourceManager mgr = ((OsmandApplication)getApplication()).getResourceManager();
+					ResourceManager mgr = getMyApplication().getResourceManager();
 					mgr.tileDownloaded(request);
 				}
 				mapView.tileDownloaded(request);
@@ -193,7 +193,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 				
 		savingTrackHelper = new SavingTrackHelper(this);
-		routingHelper = ((OsmandApplication) getApplication()).getRoutingHelper();
+		routingHelper = getMyApplication().getRoutingHelper();
+		routingHelper.getVoiceRouter().onActivityInit(this);
 		
 		LatLon pointToNavigate = settings.getPointToNavigate();
 		// This situtation could be when navigation suddenly crashed and after restarting
@@ -213,7 +214,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						routingHelper.setFollowingMode(true);
-						((OsmandApplication)getApplication()).showDialogInitializingCommandPlayer(MapActivity.this);
+						getMyApplication().showDialogInitializingCommandPlayer(MapActivity.this);
 					}
 				});
 				builder.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener(){
@@ -267,6 +268,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			
 		});
 		
+	}
+
+	private OsmandApplication getMyApplication() {
+		return ((OsmandApplication) getApplication());
 	}
     
     @Override
@@ -334,7 +339,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			public void onClick(View v) {
 				dlg.dismiss();
 				
-				((OsmandApplication) getApplication()).closeApplication();
+				getMyApplication().closeApplication();
 				// 1. Work for almost all cases when user open apps from main menu
 				Intent newIntent = new Intent(MapActivity.this, MainMenuActivity.class);
 				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -427,6 +432,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     		mNotificationManager.cancel(APP_NOTIFICATION_ID);
     	}
     	MapTileDownloader.getInstance().removeDownloaderCallback(mapView);
+    	routingHelper.getVoiceRouter().onActivityStop(this);
     }
     
     
@@ -684,9 +690,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}
 	};
 	
-	
-
-	
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -699,8 +702,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		sensorRegistered = false;
 		currentLocationProvider = null;
 		routingHelper.setUiActivity(null);
+		routingHelper.getVoiceRouter().onActivityStop(this);
 		
-		((OsmandApplication)getApplication()).getDaynightHelper().onMapPause();
+		getMyApplication().getDaynightHelper().onMapPause();
 		
 		settings.setLastKnownMapLocation((float) mapView.getLatitude(), (float) mapView.getLongitude());
 		AnimateDraggingMapThread animatedThread = mapView.getAnimatedDraggingThread();
@@ -715,8 +719,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			wakeLock = null;
 		}
 		settings.MAP_ACTIVITY_ENABLED.set(false);
-		((OsmandApplication)getApplication()).getResourceManager().interruptRendering();
-		((OsmandApplication)getApplication()).getResourceManager().setBusyIndicator(null);
+		getMyApplication().getResourceManager().interruptRendering();
+		getMyApplication().getResourceManager().setBusyIndicator(null);
 	}
 	
 	private void updateApplicationModeSettings(){
@@ -781,7 +785,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}
 		
 		routingHelper.setUiActivity(this);
-
+		routingHelper.getVoiceRouter().onActivityInit(this);
 		
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		try {
@@ -831,10 +835,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 		View progress = findViewById(R.id.ProgressBar);
 		if(progress != null){
-			((OsmandApplication) getApplication()).getResourceManager().setBusyIndicator(new BusyIndicator(this, progress));
+			getMyApplication().getResourceManager().setBusyIndicator(new BusyIndicator(this, progress));
 		}
 		
-		((OsmandApplication)getApplication()).getDaynightHelper().onMapResume();
+		getMyApplication().getDaynightHelper().onMapResume();
 	}
 	
 	
@@ -937,8 +941,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		boolean val = super.onPrepareOptionsMenu(menu);
 		MenuItem navigateToPointMenu = menu.findItem(R.id.map_navigate_to_point);
 		if (navigateToPointMenu != null) {
-			navigateToPointMenu.setTitle(routingHelper.isRouteCalculated() ? R.string.stop_routing : R.string.stop_navigation);
 			if (settings.getPointToNavigate() != null) {
+				navigateToPointMenu.setTitle(routingHelper.isRouteCalculated() ? R.string.stop_routing : R.string.stop_navigation);
 				navigateToPointMenu.setVisible(true);
 			} else {
 				navigateToPointMenu.setVisible(false);
@@ -946,64 +950,73 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}
 		MenuItem muteMenu = menu.findItem(R.id.map_mute); 
 		if(muteMenu != null){
-			muteMenu.setTitle(routingHelper.getVoiceRouter().isMute() ? R.string.menu_mute_on : R.string.menu_mute_off);
 			if (routingHelper.getFinalLocation() != null && routingHelper.isFollowingMode()) {
+				muteMenu.setTitle(routingHelper.getVoiceRouter().isMute() ? R.string.menu_mute_on : R.string.menu_mute_off);
 				muteMenu.setVisible(true);
 			} else {
 				muteMenu.setVisible(false);
 			}
 		}
-		
 		return val;
 	}
 	
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.map_show_settings) {
-    		final Intent settings = new Intent(MapActivity.this, SettingsActivity.class);
-			startActivity(settings);
-    		return true;
-		} else if (item.getItemId() == R.id.map_where_am_i) {
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.map_show_settings:
+			final Intent intentSettings = new Intent(MapActivity.this,
+					SettingsActivity.class);
+			startActivity(intentSettings);
+			return true;
+		case R.id.map_where_am_i:
 			backToLocationImpl();
-        	return true;
-		} else if (item.getItemId() == R.id.map_show_gps_status) {
+			return true;
+		case R.id.map_show_gps_status:
 			Intent intent = new Intent();
-			intent.setComponent(new ComponentName(GPS_STATUS_COMPONENT, GPS_STATUS_ACTIVITY));
-			ResolveInfo resolved = getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
-			if(resolved != null){
+			intent.setComponent(new ComponentName(GPS_STATUS_COMPONENT,
+					GPS_STATUS_ACTIVITY));
+			ResolveInfo resolved = getPackageManager().resolveActivity(intent,
+					PackageManager.MATCH_DEFAULT_ONLY);
+			if (resolved != null) {
 				startActivity(intent);
 			} else {
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
 				builder.setMessage(getString(R.string.gps_status_app_not_found));
-				builder.setPositiveButton(getString(R.string.default_buttons_yes),
+				builder.setPositiveButton(
+						getString(R.string.default_buttons_yes),
 						new DialogInterface.OnClickListener() {
 							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:" + GPS_STATUS_COMPONENT));
+							public void onClick(DialogInterface dialog,
+									int which) {
+								Intent intent = new Intent(Intent.ACTION_VIEW,
+										Uri.parse("market://search?q=pname:"
+												+ GPS_STATUS_COMPONENT));
 								try {
 									startActivity(intent);
 								} catch (ActivityNotFoundException e) {
 								}
 							}
 						});
-				builder.setNegativeButton(getString(R.string.default_buttons_no), null);
+				builder.setNegativeButton(
+						getString(R.string.default_buttons_no), null);
 				builder.show();
 			}
 			return true;
-		} else if (item.getItemId() == R.id.map_get_directions) {
+		case R.id.map_get_directions:
 			getDirections(mapView.getLatitude(), mapView.getLongitude(), true);
 			return true;
-		} else if (item.getItemId() == R.id.map_layers) {
+		case R.id.map_layers:
 			mapLayers.openLayerSelectionDialog(mapView);
 			return true;
-		} else if (item.getItemId() == R.id.map_specify_point) {
+		case R.id.map_specify_point:
 			NavigatePointActivity dlg = new NavigatePointActivity(this);
 			dlg.showDialog();
 			return true;
-		} else if (item.getItemId() == R.id.map_mute) {
-			routingHelper.getVoiceRouter().setMute(!routingHelper.getVoiceRouter().isMute());
+		case R.id.map_mute:
+			routingHelper.getVoiceRouter().setMute(
+					!routingHelper.getVoiceRouter().isMute());
 			return true;
-    	}  else if (item.getItemId() == R.id.map_navigate_to_point) {
+		case R.id.map_navigate_to_point:
     		if(mapLayers.getNavigationLayer().getPointToNavigate() != null){
     			if(routingHelper.isRouteCalculated()){
     				routingHelper.setFinalAndCurrentLocation(null, null);
@@ -1016,16 +1029,18 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     			navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
     		}
 			mapView.refreshMap();
-    	} else if (item.getItemId() == R.id.map_gpx_routing) {
+			return true;
+		case R.id.map_gpx_routing:
 			useGPXRouting();
 			return true;
-    	} else if (item.getItemId() == R.id.map_show_point_options) {
+		case R.id.map_show_point_options:
 			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
-    		return true;
-    	}
-    	return super.onOptionsItemSelected(item);
-    }
-    
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+	
     private ApplicationMode getAppMode(ToggleButton[] buttons){
     	for(int i=0; i<buttons.length; i++){
     		if(buttons[i] != null && buttons[i].isChecked() && i < ApplicationMode.values().length){
@@ -1090,9 +1105,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				ApplicationMode mode = getAppMode(buttons);
-				Location map = new Location("map"); //$NON-NLS-1$
-				map.setLatitude(lat);
-				map.setLongitude(lon);
+				Location map = getLocationToStartFrom(lat, lon);
 				routingHelper.setAppMode(mode);
 				settings.FOLLOW_TO_THE_ROUTE.set(false);
 				routingHelper.setFollowingMode(false);
@@ -1111,19 +1124,13 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					mapView.refreshMap();
 				}
 				
-				Location location = getLastKnownLocation();
-				if(location == null){
-					location = new Location("map"); //$NON-NLS-1$
-					location.setLatitude(lat);
-					location.setLongitude(lon);
-				} 
+				Location location = getLocationToStartFrom(lat, lon); 
 				routingHelper.setAppMode(mode);
 				settings.FOLLOW_TO_THE_ROUTE.set(true);
 				routingHelper.setFollowingMode(true);
 				routingHelper.setFinalAndCurrentLocation(getPointToNavigate(), location);
-				
-				((OsmandApplication) getApplication()).showDialogInitializingCommandPlayer(MapActivity.this);
-				
+				dialog.dismiss();
+				getMyApplication().showDialogInitializingCommandPlayer(MapActivity.this);
 			}
     	};
     	DialogInterface.OnClickListener showRoute = new DialogInterface.OnClickListener(){
@@ -1177,7 +1184,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     }
 	
 	public FavouritesDbHelper getFavoritesHelper() {
-		return ((OsmandApplication)getApplication()).getFavorites();
+		return getMyApplication().getFavorites();
 	}
 	
 	private void useGPXRouting() {
@@ -1230,7 +1237,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 							settings.FOLLOW_TO_THE_ROUTE.set(true);
 							routingHelper.setFollowingMode(true);
 							routingHelper.setFinalAndCurrentLocation(endPoint, startForRouting, l);
-							((OsmandApplication)getApplication()).showDialogInitializingCommandPlayer(MapActivity.this);
+							getMyApplication().showDialogInitializingCommandPlayer(MapActivity.this);
 						}
 					}
 				});
@@ -1319,6 +1326,16 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+	}
+
+	private Location getLocationToStartFrom(final double lat, final double lon) {
+		Location location = getLastKnownLocation();
+		if(location == null){
+			location = new Location("map"); //$NON-NLS-1$
+			location.setLatitude(lat);
+			location.setLongitude(lon);
+		}
+		return location;
 	}
 
 }

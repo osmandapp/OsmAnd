@@ -7,33 +7,34 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.ProgressDialogImplementation;
-import net.osmand.plus.R;
-import net.osmand.plus.ResourceManager;
 import net.osmand.plus.OsmandSettings.DayNightMode;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.ProgressDialogImplementation;
+import net.osmand.plus.R;
+import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.RouteProvider.RouteService;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.views.SeekBarPreference;
+import net.osmand.plus.voice.CommandPlayer;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.DialogInterface.OnClickListener;
 import android.content.pm.ActivityInfo;
 import android.location.LocationManager;
 import android.media.AudioManager;
@@ -42,10 +43,10 @@ import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
@@ -315,8 +316,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     protected void onDestroy() {
     	super.onDestroy();
     	unregisterReceiver(broadcastReceiver);
+    	//we are initializing player in this activity, we must also stop it
+    	final CommandPlayer player = getMyApplication().getPlayer();
+    	if (player != null) {
+    		player.onActvitiyStop(this);
+    	}
     }
-    
     
     public void updateAllSettings(){
     	for(OsmandPreference<Boolean> b : booleanPreferences.values()){
@@ -396,7 +401,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		values[ki] = MORE_VALUE;
 		fill(tileSourcePreference, entries, values, value);
 	}
-    
+
+  
 	private void fill(ListPreference component, String[] list, String[] values, String selected) {
 		component.setEntries(list);
 		component.setEntryValues(values);
@@ -435,7 +441,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			// Specific actions after list preference changed
 			if (changed) {
 				if (listPref.getId().equals(osmandSettings.VOICE_PROVIDER.getId())) {
-					getMyApplication().initCommandPlayer();
+					getMyApplication().showDialogInitializingCommandPlayer(this);
 				} else if (listPref.getId().equals(osmandSettings.APPLICATION_MODE.getId())) {
 					updateAllSettings();
 				} else if (listPref.getId().equals(osmandSettings.PREFERRED_LOCALE.getId())) {
