@@ -446,6 +446,9 @@ public class RoutingHelper {
 					currentRunningJob = new Thread(new Runnable() {
 						@Override
 						public void run() {
+							if(service != RouteService.OSMAND && !settings.isInternetConnectionAvailable()){
+								showMessage(context.getString(R.string.internet_connection_required_for_online_route), Toast.LENGTH_LONG);
+							}
 							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, currentGPXRoute, fastRouteMode);
 							synchronized (RoutingHelper.this) {
 								if (res.isCalculated()) {
@@ -492,17 +495,20 @@ public class RoutingHelper {
 		return currentRunningJob != null;
 	}
 	
-	private void showMessage(final String msg){
+	private void showMessage(final String msg, final int length){
 		if (uiActivity != null) {
 			uiActivity.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
 					if(uiActivity != null){
-						Toast.makeText(uiActivity, msg, Toast.LENGTH_SHORT).show();
+						Toast.makeText(uiActivity, msg, length).show();
 					}
 				}
 			});
 		}
+	}
+	private void showMessage(final String msg){
+		showMessage(msg, Toast.LENGTH_SHORT);
 	}
 	
 	public boolean hasPointsToShow(){
