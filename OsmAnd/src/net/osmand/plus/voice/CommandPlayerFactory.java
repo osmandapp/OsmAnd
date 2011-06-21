@@ -7,6 +7,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.OsmandApplication;
 import android.app.Activity;
+import android.os.Build;
 
 public class CommandPlayerFactory 
 {
@@ -21,8 +22,10 @@ public class CommandPlayerFactory
 			}
 			if (MediaCommandPlayerImpl.isMyData(voiceDir)) {
 				return new MediaCommandPlayerImpl(osmandApplication, voiceProvider);
-			} else if (TTSCommandPlayerImpl.isMyData(voiceDir)) {
-				return new TTSCommandPlayerImpl(ctx, voiceProvider);
+			} else if (Integer.parseInt(Build.VERSION.SDK) >= 4) {
+				if (TTSCommandPlayerImpl.isMyData(voiceDir)) {
+					return new TTSCommandPlayerImpl(ctx, voiceProvider);
+				}
 			}
 			throw new CommandPlayerException(ctx.getString(R.string.voice_data_not_supported));
 		}

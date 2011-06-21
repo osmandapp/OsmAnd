@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
 	<string name="tts_language_not_supported_title">Language unsupported</string>
-	<string name="tts_language_not_supported">The selected language is not supported by the installed TTS engine. Do you want to go to market and search for other TTS engine?</string>
+	<string name="tts_language_not_supported">The selected language is not supported by the installed TTS engine. Do you want to go to market and search for other TTS engine? Else preset TTS language will be used.</string>
 	<string name="tts_missing_language_data_title">Missing data</string>
 	<string name="tts_missing_language_data">Data for selected language are not installed. Do you want to go market to install them?</string>
 

@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import net.osmand.Algoritms;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.SettingsActivity;
 import alice.tuprolog.Struct;
 import alice.tuprolog.Term;
 import android.app.Activity;
@@ -112,16 +113,19 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 								mTts.setLanguage(new Locale(language));
 								break;
 							case TextToSpeech.LANG_NOT_SUPPORTED:
-								internalClear();
-								builder = createAlertDialog(
-										R.string.tts_language_not_supported_title,
-										R.string.tts_language_not_supported,
-										new IntentStarter(
-												ctx,
-												Intent.ACTION_VIEW, Uri.parse("market://search?q=text to speech engine"
-													)),
-										ctx);
-								builder.show();
+								//maybe weird, but I didn't want to introduce parameter in around 5 methods just to do
+								//this if condition
+								if (ctx instanceof SettingsActivity) {
+									builder = createAlertDialog(
+											R.string.tts_language_not_supported_title,
+											R.string.tts_language_not_supported,
+											new IntentStarter(
+													ctx,
+													Intent.ACTION_VIEW, Uri.parse("market://search?q=text to speech engine"
+														)),
+											ctx);
+									builder.show();
+								}
 								break;
 						}
 					}

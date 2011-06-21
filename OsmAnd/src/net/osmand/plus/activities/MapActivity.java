@@ -6,6 +6,7 @@ import java.util.List;
 
 import net.osmand.Algoritms;
 import net.osmand.CallbackWithObject;
+import net.osmand.GPXUtilities.GPXFileResult;
 import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.data.MapTileDownloader;
@@ -35,8 +36,8 @@ import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
@@ -58,7 +59,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
-import android.provider.Settings.Secure;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -128,8 +128,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	// Store previous map rotation settings for rotate button
 	private Integer previousMapRotate = null;
 
-	private RouteAnimation routeAnimation = new RouteAnimation();
-	
 	private boolean isMapLinkedToLocation = false;
 	
 	private boolean isMapLinkedToLocation(){
@@ -421,7 +419,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     protected void onDestroy() {
     	super.onDestroy();
     	savingTrackHelper.close();
-    	routeAnimation.close();
     	if(mNotificationManager != null){
     		mNotificationManager.cancel(APP_NOTIFICATION_ID);
     	}
@@ -951,16 +948,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				muteMenu.setVisible(false);
 			}
 		}
-		MenuItem animateMenu = menu.findItem(R.id.map_animate_route);
-		if (animateMenu != null) {
-			animateMenu.setTitle(routeAnimation.isRouteAnimating() ? R.string.animate_route_off
-					: R.string.animate_route);
-			animateMenu.setVisible("1".equals(Secure.getString(
-					getContentResolver(), Secure.ALLOW_MOCK_LOCATION))
-					&& settings.getPointToNavigate() != null
-					&& routingHelper.isRouteCalculated());
-		}
-		
 		return val;
 	}
 	
@@ -1039,10 +1026,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			return true;
 		case R.id.map_show_point_options:
 			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
-			return true;
-		case R.id.map_animate_route:
-			//animate moving on route
-			routeAnimation.startStopRouteAnimation(routingHelper, this);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
