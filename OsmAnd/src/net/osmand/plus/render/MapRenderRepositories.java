@@ -1,6 +1,8 @@
 package net.osmand.plus.render;
 
+import gnu.trove.list.TLongList;
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TLongHashSet;
 
@@ -374,7 +376,7 @@ public class MapRenderRepositories {
 					dataBox.top += hi;
 					dataBox.bottom -= hi;
 				}
-				// validateLatLonBox(dataBox);
+				validateLatLonBox(dataBox);
 				boolean loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingType);
 				if (!loaded || checkWhetherInterrupted()) {
 					return;
@@ -472,8 +474,8 @@ public class MapRenderRepositories {
 	
 	public List<MultyPolygon> proccessMultiPolygons(Map<TagValuePair, List<BinaryMapDataObject>> multyPolygons, int leftX, int rightX, int bottomY, int topY, int zoom){
 		List<MultyPolygon> listPolygons = new ArrayList<MultyPolygon>(multyPolygons.size());
-		List<List<Long>> completedRings = new ArrayList<List<Long>>();
-		List<List<Long>> incompletedRings = new ArrayList<List<Long>>();
+		List<TLongList> completedRings = new ArrayList<TLongList>();
+		List<TLongList> incompletedRings = new ArrayList<TLongList>();
 		List<String> completedRingNames = new ArrayList<String>();
 		List<String> incompletedRingNames = new ArrayList<String>();
 		for (TagValuePair type : multyPolygons.keySet()) {
@@ -512,7 +514,7 @@ public class MapRenderRepositories {
 	}
 
 	private MultyPolygon processMultiPolygon(int leftX, int rightX, int bottomY, int topY, List<MultyPolygon> listPolygons,
-			List<List<Long>> completedRings, List<List<Long>> incompletedRings, List<String> completedRingNames, List<String> incompletedRingNames, 
+			List<TLongList> completedRings, List<TLongList> incompletedRings, List<String> completedRingNames, List<String> incompletedRingNames, 
 			TagValuePair type, List<BinaryMapDataObject> directList, List<BinaryMapDataObject> inverselist, int zoom) {
 		MultyPolygon pl = new MultyPolygon();
 		// delete direction last bit (to not show point)
@@ -528,7 +530,7 @@ public class MapRenderRepositories {
 					continue;
 				}
 				dbId = o.getId() >> 3;
-				List<Long> coordinates = new ArrayList<Long>(o.getPointsLength() / 2);
+				TLongList coordinates = new TLongArrayList(o.getPointsLength() / 2);
 				int px = o.getPoint31XTile(km == 0 ? 0 : len - 1); 
 				int py = o.getPoint31YTile(km == 0 ? 0 : len - 1);
 				int x = px;
@@ -546,7 +548,7 @@ public class MapRenderRepositories {
 						processMultipolygonLine(completedRings, incompletedRings, completedRingNames, incompletedRingNames, 
 								coordinates, o.getName());
 						// create new line if it goes outside
-						coordinates = new ArrayList<Long>();
+						coordinates = new TLongArrayList();
 					}
 					px = x;
 					py = y;
@@ -566,7 +568,7 @@ public class MapRenderRepositories {
 			if (zoom >= 13
 					|| ("natural".equals(type.tag) && "coastline".equals(type.value))) {  //$NON-NLS-1$//$NON-NLS-2$
 				boolean clockwiseFound = false;
-				for (List<Long> c : completedRings) {
+				for (TLongList c : completedRings) {
 					if (isClockwiseWay(c)) {
 						clockwiseFound = true;
 						break;
@@ -574,7 +576,7 @@ public class MapRenderRepositories {
 				}
 				if (!clockwiseFound) {
 					// add whole bound
-					List<Long> whole = new ArrayList<Long>(4);
+					TLongList whole = new TLongArrayList(4);
 					whole.add((((long) leftX) << 32) | ((long) topY));
 					whole.add((((long) rightX) << 32) | ((long) topY));
 					whole.add((((long) rightX) << 32) | ((long) bottomY));
@@ -588,7 +590,7 @@ public class MapRenderRepositories {
 		
 		long[][] lns = new long[completedRings.size()][];
 		for (int i = 0; i < completedRings.size(); i++) {
-			List<Long> ring = completedRings.get(i);
+			TLongList ring = completedRings.get(i);
 			lns[i] = new long[ring.size()];
 			for (int j = 0; j < lns[i].length; j++) {
 				lns[i][j] = ring.get(j);
@@ -599,7 +601,7 @@ public class MapRenderRepositories {
 		return pl;
 	}
 	
-	private boolean isClockwiseWay(List<Long> c){
+	private boolean isClockwiseWay(TLongList c){
 		double angle = 0;
 		double prevAng = 0;
 		int px = 0;
@@ -631,23 +633,23 @@ public class MapRenderRepositories {
 	}
 
 
-	private void processMultipolygonLine(List<List<Long>> completedRings, List<List<Long>> incompletedRings, 
-			List<String> completedRingsNames, List<String> incompletedRingsNames, List<Long> coordinates, String name) {
+	private void processMultipolygonLine(List<TLongList> completedRings, List<TLongList> incompletedRings, 
+			List<String> completedRingsNames, List<String> incompletedRingsNames, TLongList coordinates, String name) {
 		if (coordinates.size() > 0) {
-			if (coordinates.get(0).longValue() == coordinates.get(coordinates.size() - 1).longValue()) {
+			if (coordinates.get(0) == coordinates.get(coordinates.size() - 1)) {
 				completedRings.add(coordinates);
 				completedRingsNames.add(name);
 			} else {
 				boolean add = true;
 				for (int k = 0; k < incompletedRings.size();) {
 					boolean remove = false;
-					List<Long> i = incompletedRings.get(k);
+					TLongList i = incompletedRings.get(k);
 					String oldName = incompletedRingsNames.get(k);
-					if (coordinates.get(0).longValue() == i.get(i.size() - 1).longValue()) {
+					if (coordinates.get(0) == i.get(i.size() - 1)) {
 						i.addAll(coordinates.subList(1, coordinates.size()));
 						remove = true;
 						coordinates = i;
-					} else if (coordinates.get(coordinates.size() - 1).longValue() == i.get(0).longValue()) {
+					} else if (coordinates.get(coordinates.size() - 1) == i.get(0)) {
 						coordinates.addAll(i.subList(1, i.size()));
 						remove = true;
 					}
@@ -657,7 +659,7 @@ public class MapRenderRepositories {
 					} else {
 						k++;
 					}
-					if (coordinates.get(0).longValue() == coordinates.get(coordinates.size() - 1).longValue()) {
+					if (coordinates.get(0) == coordinates.get(coordinates.size() - 1)) {
 						completedRings.add(coordinates);
 						if(oldName != null){
 							completedRingsNames.add(oldName);
@@ -676,13 +678,13 @@ public class MapRenderRepositories {
 		}
 	}
 
-	private void unifyIncompletedRings(List<List<Long>> incompletedRings, List<List<Long>> completedRings, 
+	private void unifyIncompletedRings(List<TLongList> incompletedRings, List<TLongList> completedRings, 
 			List<String> completedRingNames, List<String> incompletedRingNames, 
 			int leftX, int rightX,	int bottomY, int topY, long dbId, int zoom) {
 		int mask = 0xffffffff;
 		Set<Integer> nonvisitedRings = new LinkedHashSet<Integer>();
 		for(int j = 0; j< incompletedRings.size(); j++){
-			List<Long> i = incompletedRings.get(j);
+			TLongList i = incompletedRings.get(j);
 			int x = (int) (i.get(i.size() - 1) >> 32);
 			int y = (int) (i.get(i.size() - 1) & mask);
 			int sx = (int) (i.get(0) >> 32);
@@ -716,7 +718,7 @@ public class MapRenderRepositories {
 			}
 		}
 		for(int j = 0; j< incompletedRings.size(); j++){
-			List<Long> i = incompletedRings.get(j);
+			TLongList i = incompletedRings.get(j);
 			String name = incompletedRingNames.get(j);
 			if(!nonvisitedRings.contains(j)){
 				continue;
@@ -745,7 +747,7 @@ public class MapRenderRepositories {
 					// BEGIN find closest nonvisited start (including current)
 					int mindiff = UNDEFINED_MIN_DIFF;
 					for (Integer ni : nonvisitedRings) {
-						List<Long> cni = incompletedRings.get(ni);
+						TLongList cni = incompletedRings.get(ni);
 						int csx = (int) (cni.get(0) >> 32);
 						int csy = (int) (cni.get(0) & mask);
 						if (h % 4 == 0) {
@@ -915,7 +917,7 @@ public class MapRenderRepositories {
 	}
 
 	private boolean calculateLineCoordinates(boolean inside, int x, int y, boolean pinside, int px, int py, int leftX, int rightX,
-			int bottomY, int topY, List<Long> coordinates) {
+			int bottomY, int topY, TLongList coordinates) {
 		boolean lineEnded = false;
 		if (pinside) {
 			if (!inside) {

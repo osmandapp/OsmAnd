@@ -440,7 +440,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 						RTree.clearCache();
 						int smoothness = 0;
 						try {
-							Integer.parseInt(DataExtractionSettings.getSettings().getLineSmoothness());
+							smoothness = Integer.parseInt(DataExtractionSettings.getSettings().getLineSmoothness());
 						} catch (NumberFormatException e) {
 						}
 						creator.setZoomWaySmothness(smoothness);
