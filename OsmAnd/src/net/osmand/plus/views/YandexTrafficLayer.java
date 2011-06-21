@@ -45,7 +45,9 @@ public class YandexTrafficLayer extends MapTileLayer {
 	
 	@Override
 	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode) {
-		updateTimeStamp();
+		if(isVisible()){
+			updateTimeStamp();
+		}
 		super.onDraw(canvas, latlonRect, tilesRect, nightMode);
 	}
 	

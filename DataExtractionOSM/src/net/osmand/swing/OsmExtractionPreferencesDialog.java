@@ -48,7 +48,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
     }
 	
 	public void showDialog(){
-		setSize(600, 380);
+		setSize(700, 380);
         double x = getParent().getBounds().getCenterX();
         double y = getParent().getBounds().getCenterY();
         setLocation((int) x - getWidth() / 2, (int) y - getHeight() / 2);
@@ -240,7 +240,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		constr.ipadx = 5;
 		constr.gridx = 1;
 		constr.gridy = 3;
-		l.setConstraints(mapZooms, constr);
+		l.setConstraints(lineSmoothness, constr);
 		
 		
 		label = new JLabel("Rendering types (xml config to extract osm data) file path"); 
