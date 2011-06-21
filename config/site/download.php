@@ -75,9 +75,10 @@ function update_count_of_downloads($file) {
    die(1);
  }
  $file = $_GET['file'];
- if(!isset($_SERVER['HTTP_RANGE']) ) {
-  update_count_of_downloads($file) ;
- }
+ //Victor says not needed if we have awstats statistics per file
+ //if(!isset($_SERVER['HTTP_RANGE']) ) {
+ // update_count_of_downloads($file) ;
+ //}
  set_time_limit(0);
  if(isset($_GET['direct']) or !url_exists('http://osmand.googlecode.com/files/'.$file)) {
     downloadFile('indexes/'.$file);
