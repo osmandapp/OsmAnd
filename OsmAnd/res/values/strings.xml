@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="installing_new_resources">Unpacking new data...</string>
 	<string name="internet_connection_required_for_online_route">You are about to use online routing but you do not have internet connection. You can try experimental offline routing (switch in settings).</string>
 	<string name="tts_language_not_supported_title">Language unsupported</string>
 	<string name="tts_language_not_supported">The selected language is not supported by the installed TTS engine. Do you want to go to market and search for other TTS engine? Else preset TTS language will be used.</string>

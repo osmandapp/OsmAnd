@@ -2,7 +2,10 @@ package net.osmand.plus;
 
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.text.Collator;
 import java.text.MessageFormat;
@@ -15,8 +18,10 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.TreeMap;
 
+import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
+import net.osmand.Version;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.IndexConstants;
@@ -34,6 +39,8 @@ import net.osmand.plus.views.POIMapLayer;
 
 import org.apache.commons.logging.Log;
 
+import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -347,6 +354,8 @@ public class ResourceManager {
 
 	public List<String> reloadIndexes(IProgress progress){
 		close();
+		// check we have some assets to copy to sdcard
+		checkAssets(progress);
 		initRenderers(progress);
 		// do it lazy
 		// indexingImageTiles(progress);
@@ -356,6 +365,48 @@ public class ResourceManager {
 		return warnings;
 	}
 	
+	private void checkAssets(IProgress progress) {
+		File file = context.getSettings().extendOsmandPath(APP_DIR);
+		file.mkdirs();
+		if(file.canWrite()){
+			if(!Version.APP_VERSION.equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get())){
+				try {
+					progress.startTask(context.getString(R.string.installing_new_resources), -1); 
+					AssetManager assetManager = context.getAssets();
+					copyingAssets(assetManager, "", file, progress);
+					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(Version.APP_VERSION);
+				} catch (IOException e) {
+					log.error(e.getMessage(), e);
+				}
+			}
+		}
+	}
+
+	private void copyingAssets(AssetManager assetManager, String ref, File dir, IProgress progress) throws IOException {
+		for(String asset : assetManager.list(ref)) {
+			boolean isDirectory = !asset.contains(".");
+			File file = new File(dir, asset);
+			String fullName = ref+asset;
+			if(isDirectory){
+				file.mkdirs();
+				copyingAssets(assetManager, fullName +"/", file , progress);
+			} else {
+				// asset descriptor can not be opened for some files
+				//	AssetFileDescriptor fd = assetManager.openFd(fullName);
+				//	long declaredLength = fd.getDeclaredLength();
+				//  fd.close();
+				//if(!file.exists() || file.length() != declaredLength){
+					InputStream is = assetManager.open(fullName, AssetManager.ACCESS_STREAMING);
+					FileOutputStream out = new FileOutputStream(file);
+					Algoritms.streamCopy(is, out);
+					out.close();
+					is.close();
+				//}
+			}
+		}
+		
+	}
+
 	private void initRenderers(IProgress progress) {
 		File file = context.getSettings().extendOsmandPath(APP_DIR + IndexConstants.RENDERERS_DIR);
 		file.mkdirs();
