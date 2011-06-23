@@ -371,7 +371,6 @@ public class ResourceManager {
 		File file = context.getSettings().extendOsmandPath(APP_DIR);
 		file.mkdirs();
 		if(file.canWrite()){
-			// TODO delete
 			if(!Version.APP_VERSION.equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get())){
 				try {
 					progress.startTask(context.getString(R.string.installing_new_resources), -1); 

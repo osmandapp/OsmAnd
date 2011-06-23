@@ -1,7 +1,10 @@
 package net.osmand.plus.views;
 
 import net.osmand.osm.LatLon;
+import net.osmand.plus.R;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -10,6 +13,7 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Paint.Style;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
@@ -25,15 +29,16 @@ public class PointNavigationLayer implements OsmandMapLayer {
 	private Path pathForDirection;
 	private float[] calculations = new float[2];
 	private DisplayMetrics dm;
+	private Bitmap targetPoint;
 	
 
 	private void initUI() {
 		point = new Paint();
-		point.setColor(Color.rgb(250, 80, 80));
 		point.setAntiAlias(true);
-		point.setStyle(Style.FILL);
+		targetPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.target_point);
 
 		pathForDirection = new Path();
+		
 	}
 	
 	public void initLayer(OsmandMapTileView view) {
@@ -52,10 +57,14 @@ public class PointNavigationLayer implements OsmandMapLayer {
 			return;
 		}
 		if (isLocationVisible()) {
+			int marginX = targetPoint.getWidth() / 3;
+			int marginY = 2 * targetPoint.getHeight() / 3;
 			int locationX = view.getMapXForPoint(pointToNavigate.getLongitude());
 			int locationY = view.getMapYForPoint(pointToNavigate.getLatitude());
-
-			canvas.drawCircle(locationX, locationY, RADIUS * dm.density, point);
+			canvas.rotate(-view.getRotate(), locationX, locationY);
+			Drawable drawable = view.getResources().getDrawable(R.drawable.target_point);
+			drawable.draw(canvas);
+			canvas.drawBitmap(targetPoint, locationX - marginX, locationY - marginY, point);
 		} else {
 			Location.distanceBetween(view.getLatitude(), view.getLongitude(), pointToNavigate.getLatitude(),
 					pointToNavigate.getLongitude(), calculations);
