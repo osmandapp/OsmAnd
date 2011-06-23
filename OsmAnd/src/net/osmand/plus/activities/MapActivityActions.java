@@ -130,6 +130,7 @@ public class MapActivityActions {
 				BaseMapLayer mainLayer = mapView.getMainLayer();
 				if(!(mainLayer instanceof MapTileLayer) || ((MapTileLayer) mainLayer).isVisible()){
 					Toast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
+					return;
 				}
 				final ITileSource mapSource = ((MapTileLayer) mainLayer).getMap();
 				if(mapSource == null || !mapSource.couldBeDownloadedFromInternet()){
