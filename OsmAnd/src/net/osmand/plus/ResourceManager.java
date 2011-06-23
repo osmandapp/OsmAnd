@@ -2,7 +2,6 @@ package net.osmand.plus;
 
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,7 +38,6 @@ import net.osmand.plus.views.POIMapLayer;
 
 import org.apache.commons.logging.Log;
 
-import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
