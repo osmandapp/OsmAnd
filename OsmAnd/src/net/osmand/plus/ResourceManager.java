@@ -10,6 +10,7 @@ import java.text.Collator;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -37,6 +38,9 @@ import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.views.POIMapLayer;
 
 import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
@@ -352,21 +356,22 @@ public class ResourceManager {
 
 	public List<String> reloadIndexes(IProgress progress){
 		close();
+		List<String> warnings = new ArrayList<String>();
 		// check we have some assets to copy to sdcard
-		checkAssets(progress);
+		warnings.addAll(checkAssets(progress));
 		initRenderers(progress);
 		// do it lazy
 		// indexingImageTiles(progress);
-		List<String> warnings = new ArrayList<String>();
 		warnings.addAll(indexingPoi(progress));
 		warnings.addAll(indexingMaps(progress));
 		return warnings;
 	}
 	
-	private void checkAssets(IProgress progress) {
+	private List<String> checkAssets(IProgress progress) {
 		File file = context.getSettings().extendOsmandPath(APP_DIR);
 		file.mkdirs();
 		if(file.canWrite()){
+			// TODO delete
 			if(!Version.APP_VERSION.equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get())){
 				try {
 					progress.startTask(context.getString(R.string.installing_new_resources), -1); 
@@ -375,32 +380,39 @@ public class ResourceManager {
 					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(Version.APP_VERSION);
 				} catch (IOException e) {
 					log.error(e.getMessage(), e);
+				} catch (XmlPullParserException e) {
+					log.error(e.getMessage(), e);
 				}
 			}
 		}
+		return Collections.emptyList();
 	}
 
-	private void copyingAssets(AssetManager assetManager, String ref, File dir, IProgress progress) throws IOException {
-		for(String asset : assetManager.list(ref)) {
-			boolean isDirectory = !asset.contains(".");
-			File file = new File(dir, asset);
-			String fullName = ref+asset;
-			if(isDirectory){
-				file.mkdirs();
-				copyingAssets(assetManager, fullName +"/", file , progress);
-			} else {
-				// asset descriptor can not be opened for some files
-				//	AssetFileDescriptor fd = assetManager.openFd(fullName);
-				//	long declaredLength = fd.getDeclaredLength();
-				//  fd.close();
-				//if(!file.exists() || file.length() != declaredLength){
-					InputStream is = assetManager.open(fullName, AssetManager.ACCESS_STREAMING);
-					FileOutputStream out = new FileOutputStream(file);
-					Algoritms.streamCopy(is, out);
-					out.close();
-					is.close();
-				//}
+	private void copyingAssets(AssetManager assetManager, String ref, File dir, IProgress progress) throws IOException, XmlPullParserException {
+		XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser(); 
+		
+		Map<String, String> resourcesToCopy = new LinkedHashMap<String, String>();
+		InputStream open = assetManager.open("distributed_assets.xml");
+		parser.setInput(open, "UTF-8");
+		int next = 0;
+		while((next = parser.next()) != XmlPullParser.END_DOCUMENT){
+			if(next == XmlPullParser.START_TAG && parser.getName().equals("asset")){
+				String in = parser.getAttributeValue(null, "name");
+				String out = parser.getAttributeValue(null, "destination");
+				resourcesToCopy.put(in, out);
 			}
+		}
+		open.close();
+		
+		for (String asset : resourcesToCopy.keySet()) {
+			String destination = resourcesToCopy.get(asset);
+			File file = new File(dir, destination);
+			file.mkdirs();
+			InputStream is = assetManager.open(asset, AssetManager.ACCESS_STREAMING);
+			FileOutputStream out = new FileOutputStream(file);
+			Algoritms.streamCopy(is, out);
+			out.close();
+			is.close();
 		}
 		
 	}

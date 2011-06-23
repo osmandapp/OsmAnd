@@ -61,6 +61,13 @@ public class Algoritms {
 		}
 	}
 	
+	public static void oneByteStreamCopy(InputStream in, OutputStream out) throws IOException{
+		int read;
+		while ((read = in.read()) != -1) {
+			out.write(read);
+		}
+	}
+	
 	public static void closeStream(Closeable stream){
 		try {
 			if(stream != null){
