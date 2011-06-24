@@ -65,7 +65,7 @@ public class IndexCreator {
 
 	private boolean normalizeStreets = true; // true by default
 	private boolean saveAddressWays = true; // true by default
-	private int zoomWaySmothness = 0;
+	private int zoomWaySmothness = 2;
 
 	private String regionName;
 	private String poiFileName = null;
@@ -596,9 +596,9 @@ public class IndexCreator {
 		long time = System.currentTimeMillis();
 		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/data/osm-gen/")); //$NON-NLS-1$
 		creator.setIndexMap(true);
-//		creator.setIndexAddress(true);
-//		creator.setIndexPOI(true);
-//		creator.setIndexTransport(true);
+		creator.setIndexAddress(true);
+		creator.setIndexPOI(true);
+		creator.setIndexTransport(true);
 		// for NL
 //		creator.setCityAdminLevel("10");
 
@@ -606,23 +606,25 @@ public class IndexCreator {
 		creator.deleteDatabaseIndexes = true;
 		creator.deleteOsmDB = true;
 				
-//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/download/410/map.osm"), 
-//				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), null);
+//		creator.setZoomWaySmothness(2);
+		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/germany_bayern_part.osm"), 
+				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), null);
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/minsk_around.osm"), 
 //				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), null);
 		
-		MapZooms mapZooms = new MapZooms();
-		MapZoomPair pair1 = new MapZooms.MapZoomPair(1, 3);
-		MapZoomPair pair2 = new MapZooms.MapZoomPair(4, 5);
-		MapZoomPair pair3 = new MapZooms.MapZoomPair(6, 7);
-		
-		mapZooms.setLevels(Arrays.asList(pair1, pair2, pair3));
-		// for coastline
-		creator.setZoomWaySmothness(2);
-		creator.generateIndexes(new File(
-				"/home/victor/projects/OsmAnd/download/basemap/basemap_1.osm"
-				), 
-				new ConsoleProgressImplementation(1), null, mapZooms, null);
+		// world generation
+//		MapZooms mapZooms = new MapZooms();
+//		MapZoomPair pair1 = new MapZooms.MapZoomPair(1, 3);
+//		MapZoomPair pair2 = new MapZooms.MapZoomPair(4, 5);
+//		MapZoomPair pair3 = new MapZooms.MapZoomPair(6, 7);
+//		
+//		mapZooms.setLevels(Arrays.asList(pair1, pair2, pair3));
+//		// for coastline
+//		creator.setZoomWaySmothness(2);
+//		creator.generateIndexes(new File(
+//				"/home/victor/projects/OsmAnd/download/basemap/basemap_1.osm"
+//				), 
+//				new ConsoleProgressImplementation(1), null, mapZooms, null);
 		
 		
 //		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));

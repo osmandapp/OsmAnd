@@ -80,6 +80,7 @@ public class IndexBatchCreator {
 	boolean generateIndexes = false;
 	boolean uploadIndexes = false;
 	MapZooms mapZooms = null;
+	Integer zoomWaySmoothness = null; 
 	MapRenderingTypes types = MapRenderingTypes.getDefault();
 	boolean deleteFilesAfterUploading = true;
 	
@@ -164,6 +165,11 @@ public class IndexBatchCreator {
 			mapZooms = MapZooms.getDefault();
 		} else {
 			mapZooms = MapZooms.parseZooms(zooms);
+		}
+		
+		String szoomWaySmoothness = process.getAttribute("zoomWaySmoothness");
+		if(szoomWaySmoothness != null){
+			zoomWaySmoothness = Integer.parseInt(szoomWaySmoothness);
 		}
 		
 		String f = process.getAttribute("renderingTypesFile");
@@ -433,6 +439,9 @@ public class IndexBatchCreator {
 			try {
 				alreadyGeneratedFiles.add(f.getName());
 				indexCreator.generateIndexes(f, new ConsoleProgressImplementation(3),  null, mapZooms, types);
+				if(zoomWaySmoothness != null){
+					indexCreator.setZoomWaySmothness(zoomWaySmoothness);
+				}
 				if (indexPOI) {
 					uploadIndex(new File(indexDirFiles, poiFileName), alreadyUploadedFiles);
 				}
