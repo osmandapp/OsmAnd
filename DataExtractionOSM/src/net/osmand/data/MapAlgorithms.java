@@ -184,7 +184,7 @@ public class MapAlgorithms {
 					return longitude;
 				}
 				// that tested on all cases (left/right)
-				double lon = b.getLongitude()+ 
+				double lon = b.getLongitude() -
 					(b.getLatitude() - latitude) * (b.getLongitude() - a.getLongitude()) / (b.getLatitude() - a.getLatitude());
 				if (lon <= longitude) {
 					return lon;
@@ -228,6 +228,6 @@ public class MapAlgorithms {
 			}
 		}
 	}
-
+	
 
 }

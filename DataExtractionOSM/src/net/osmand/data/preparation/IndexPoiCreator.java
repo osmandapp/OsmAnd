@@ -41,7 +41,9 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 			// load data for way (location etc...)
 			ctx.loadEntityData(e, false);
 			for (Amenity a : tempAmenityList) {
-				checkEntity(e);
+				// do not add that check because it is too much printing for batch creation
+				// by statistic < 1% creates maps manually
+				// checkEntity(e);
 				a.setEntity(e);
 				if (a.getLocation() != null) {
 					// do not convert english name

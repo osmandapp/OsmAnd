@@ -984,6 +984,11 @@ public class BinaryMapIndexReader {
 			result = prime * result + ((value == null) ? 0 : value.hashCode());
 			return result;
 		}
+		
+		@Override
+		public String toString() {
+			return "TagValuePair : " + tag + " - " + value;
+		}
 
 		@Override
 		public boolean equals(Object obj) {
