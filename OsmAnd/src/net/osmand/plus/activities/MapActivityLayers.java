@@ -39,7 +39,6 @@ import net.osmand.plus.views.RouteInfoLayer;
 import net.osmand.plus.views.RouteLayer;
 import net.osmand.plus.views.TransportInfoLayer;
 import net.osmand.plus.views.TransportStopsLayer;
-import net.osmand.plus.views.YandexTrafficLayer;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
@@ -62,7 +61,6 @@ public class MapActivityLayers {
 	private MapTileLayer underlayLayer;
 	private GPXLayer gpxLayer;
 	private RouteLayer routeLayer;
-	private YandexTrafficLayer trafficLayer;
 	private OsmBugsLayer osmBugsLayer;
 	private POIMapLayer poiMapLayer;
 	private FavoritesLayer favoritesLayer;
@@ -110,10 +108,6 @@ public class MapActivityLayers {
 		// 1. route layer
 		routeLayer = new RouteLayer(routingHelper);
 		mapView.addLayer(routeLayer, 1);
-		
-		// 1.5. traffic layer
-		trafficLayer = new YandexTrafficLayer();
-		mapView.addLayer(trafficLayer, 1.5f);
 		
 		// 2. osm bugs layer
 		osmBugsLayer = new OsmBugsLayer(activity);
@@ -182,7 +176,6 @@ public class MapActivityLayers {
 			}
 		}
 		updateGPXLayer();
-		trafficLayer.setVisible(settings.SHOW_YANDEX_TRAFFIC.get());
 	}
 	
 	public void updateMapSource(OsmandMapTileView mapView, CommonPreference<String> settingsToWarnAboutMap){
@@ -257,8 +250,6 @@ public class MapActivityLayers {
 		if(transportRouteInfoInd > -1){
 			layersList.add(getString(R.string.layer_transport_route));
 		}
-		final int trafficInd = layersList.size();
-		layersList.add(getString(R.string.layer_yandex_traffic));
 		
 		final boolean[] selected = new boolean[layersList.size()];
 		Arrays.fill(selected, true);
@@ -269,7 +260,6 @@ public class MapActivityLayers {
 		selected[5] = gpxLayer.isVisible();
 		selected[6] = settings.SHOW_TRANSPORT_OVER_MAP.get();
 		selected[7] = settings.SHOW_OSM_BUGS.get();
-		selected[trafficInd] = trafficLayer.isVisible();
 		if(routeInfoInd != -1){
 			selected[routeInfoInd] = routeInfoLayer.isUserDefinedVisible(); 
 		}
@@ -326,8 +316,6 @@ public class MapActivityLayers {
 					routeInfoLayer.setVisible(isChecked);
 				} else if(item == transportRouteInfoInd){
 					transportInfoLayer.setVisible(isChecked);
-				} else if(item == trafficInd){
-					settings.SHOW_YANDEX_TRAFFIC.set(isChecked);
 				}
 				updateLayers(mapView);
 				mapView.refreshMap();

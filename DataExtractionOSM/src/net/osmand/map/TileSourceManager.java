@@ -35,6 +35,7 @@ import bsh.Interpreter;
 public class TileSourceManager {
 	private static final Log log = LogUtil.getLog(TileSourceManager.class);
 	private static final String RULE_BEANSHELL = "beanshell";
+	public static final String RULE_YANDEX_TRAFFIC = "yandex_traffic";
 	private static final String RULE_WMS = "wms_tile";
 
 	public static class TileSourceTemplate implements ITileSource {
@@ -363,13 +364,14 @@ public class TileSourceManager {
 		TileSourceTemplate template = null;
 		String rule = attrs.get("rule");
 		if(rule == null){
-			template = createSimpleTileSourceTemplate(attrs);
+			template = createSimpleTileSourceTemplate(attrs, false);
 		} else if(RULE_BEANSHELL.equalsIgnoreCase(rule)){
 			template = createBeanshellTileSourceTemplate(attrs);
 		} else if (RULE_WMS.equalsIgnoreCase(rule)) {
 			template = createWmsTileSourceTemplate(attrs);
+		} else if (RULE_YANDEX_TRAFFIC.equalsIgnoreCase(rule)) {
+			template = createSimpleTileSourceTemplate(attrs, true);
 		} else {
-			// TODO rule == yandex_traffic
 			return null;
 		}
 		if(template != null){
@@ -400,13 +402,15 @@ public class TileSourceManager {
 	
 
 
-	private static TileSourceTemplate createSimpleTileSourceTemplate(Map<String, String> attributes) {
+	private static TileSourceTemplate createSimpleTileSourceTemplate(Map<String, String> attributes, boolean ignoreTemplate) {
 		String name = attributes.get("name");
 		String urlTemplate = attributes.get("url_template");
-		if (name == null || urlTemplate == null) {
+		if (name == null || (urlTemplate == null && !ignoreTemplate)) {
 			return null;
 		}
-		urlTemplate.replace("${x}", "{1}").replace("${y}", "{2}").replace("${z}", "{0}");
+		if(urlTemplate != null){
+			urlTemplate.replace("${x}", "{1}").replace("${y}", "{2}").replace("${z}", "{0}");
+		}
 		int maxZoom = parseInt(attributes, "max_zoom", 18);
 		int minZoom = parseInt(attributes, "min_zoom", 5);
 		int tileSize = parseInt(attributes, "tile_size", 256);

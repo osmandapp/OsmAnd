@@ -19,7 +19,7 @@ import android.graphics.Canvas;
 import android.graphics.RectF;
 import android.widget.Toast;
 
-public class YandexTrafficLayer extends MapTileLayer {
+public class YandexTrafficAdapter  extends MapTileAdapter {
 
 	private final static Log log = LogUtil.getLog(MapTileLayer.class);
 	private final static String YANDEX_PREFFIX = ".YandexTraffic_";
@@ -29,26 +29,14 @@ public class YandexTrafficLayer extends MapTileLayer {
 	private String mTimestamp = null;
 	private boolean updateThreadRan = false;
 	
-	public YandexTrafficLayer() {
-		super(false);
-	}
-		
-	public void setVisible(boolean visible) {
-		if(isVisible() != visible){
-			if(visible){
-				Toast.makeText(view.getContext(), R.string.thanks_yandex_traffic, Toast.LENGTH_LONG).show();
-			} 
-			super.setVisible(visible);
-			
-		}
+	
+	public void onInit() {
+		Toast.makeText(view.getContext(), R.string.thanks_yandex_traffic, Toast.LENGTH_LONG).show();
 	}
 	
 	@Override
 	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode) {
-		if(isVisible()){
-			updateTimeStamp();
-		}
-		super.onDraw(canvas, latlonRect, tilesRect, nightMode);
+		updateTimeStamp();
 	}
 	
 	protected void updateTimeStamp() {
@@ -97,7 +85,7 @@ public class YandexTrafficLayer extends MapTileLayer {
 							"http://jgo.maps.yandex.net/tiles?l=trf&x={1}&y={2}&z={0}&tm=" + mTimestamp, ".png", 17, 7, 256, 8, 18000);
 					template.setEllipticYTile(true);
 					clearCache();
-					this.map = template;
+					this.layer.setMapForMapTileAdapter(template, this);
 				}
 			} catch (IOException e) {
 				log.info("Exception while updating yandex traffic template", e);
@@ -106,8 +94,7 @@ public class YandexTrafficLayer extends MapTileLayer {
 	}
 
 	@Override
-	public void destroyLayer() {
-		super.destroyLayer();
+	public void onClear() {
 		clearCache();
 	}
 

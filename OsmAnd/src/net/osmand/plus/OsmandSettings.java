@@ -8,7 +8,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.Version;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -30,7 +29,6 @@ import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
-import android.provider.MediaStore.Audio;
 import android.widget.Toast;
 
 public class OsmandSettings {
@@ -450,9 +448,6 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DEBUG_RENDERING_INFO = new BooleanPreference("debug_rendering", false, true);
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> SHOW_YANDEX_TRAFFIC = new BooleanPreference("show_yandex_traffic", false, false);
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SHOW_FAVORITES = new BooleanPreference("show_favorites", false, false);

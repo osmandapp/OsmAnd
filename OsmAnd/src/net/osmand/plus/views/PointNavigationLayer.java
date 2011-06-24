@@ -23,6 +23,7 @@ public class PointNavigationLayer implements OsmandMapLayer {
 	protected final static int DIST_TO_SHOW = 120;
 
 	private Paint point;
+	private Paint bitmapPaint;
 	
 	protected LatLon pointToNavigate = null;
 	private OsmandMapTileView view;
@@ -31,10 +32,16 @@ public class PointNavigationLayer implements OsmandMapLayer {
 	private DisplayMetrics dm;
 	private Bitmap targetPoint;
 	
+	
 
 	private void initUI() {
+		
 		point = new Paint();
+		point.setColor(Color.rgb(250, 80, 80));
 		point.setAntiAlias(true);
+		point.setStyle(Style.FILL);
+
+		bitmapPaint = new Paint();
 		targetPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.target_point);
 
 		pathForDirection = new Path();
@@ -62,7 +69,7 @@ public class PointNavigationLayer implements OsmandMapLayer {
 			int locationX = view.getMapXForPoint(pointToNavigate.getLongitude());
 			int locationY = view.getMapYForPoint(pointToNavigate.getLatitude());
 			canvas.rotate(-view.getRotate(), locationX, locationY);
-			canvas.drawBitmap(targetPoint, locationX - marginX, locationY - marginY, point);
+			canvas.drawBitmap(targetPoint, locationX - marginX, locationY - marginY, bitmapPaint);
 		} else {
 			Location.distanceBetween(view.getLatitude(), view.getLongitude(), pointToNavigate.getLatitude(),
 					pointToNavigate.getLongitude(), calculations);
