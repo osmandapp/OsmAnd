@@ -26,7 +26,7 @@
 	<string name="choose_audio_stream_descr">Navigations-Sprachausgabe wählen (abhängig von Systemkonfiguration)</string>
 	<string name="voice_stream_voice_call">Anruf-Stream</string>
 	<string name="voice_stream_notification">Benachrichtgungs-Stream</string>
-	<string name="voice_stream_music">Musik-Stream</string>
+	<string name="voice_stream_music">Medien/Musik-Stream</string>
 
 	<string name="warning_tile_layer_not_downloadable">Karten-Schicht %1$s wurde nicht heruntergeladen, bitte nochmal laden.</string>
 	<string name="overlay_transparency_descr">Transparenz der Overlay-Karte ändern</string>
