@@ -234,7 +234,8 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 									Math.max(16, z), getString(R.string.poi)+" : " + poiSimpleFormat); //$NON-NLS-1$
 						} else if(which == 1){
 							LatLon l = amenity.getLocation();
-							settings.setPointToNavigate(l.getLatitude(), l.getLongitude());
+							String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.usingEnglishNames());
+							settings.setPointToNavigate(l.getLatitude(), l.getLongitude(), getString(R.string.poi)+" : " + poiSimpleFormat);
 						}
 						if(filter != null){
 							settings.setPoiFilterForMap(filter.getFilterId());

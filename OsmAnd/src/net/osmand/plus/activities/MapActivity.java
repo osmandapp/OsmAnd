@@ -568,7 +568,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 
 	public void navigateToPoint(LatLon point){
 		if(point != null){
-			settings.setPointToNavigate(point.getLatitude(), point.getLongitude());
+			settings.setPointToNavigate(point.getLatitude(), point.getLongitude(), null);
 		} else {
 			settings.clearPointToNavigate();
 		}
@@ -1228,7 +1228,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 						LatLon endPoint = endForRouting;
 						if((endPoint == null || !props[1]) && !l.isEmpty()){
 							LatLon point = new LatLon(l.get(l.size() - 1).getLatitude(), l.get(l.size() - 1).getLongitude());
-							settings.setPointToNavigate(point.getLatitude(), point.getLongitude());
+							settings.setPointToNavigate(point.getLatitude(), point.getLongitude(), null);
 							endPoint = point;
 							mapLayers.getNavigationLayer().setPointToNavigate(point);
 						}
