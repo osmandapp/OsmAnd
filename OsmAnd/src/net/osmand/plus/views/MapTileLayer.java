@@ -1,6 +1,8 @@
 package net.osmand.plus.views;
 
 import net.osmand.map.ITileSource;
+import net.osmand.map.TileSourceManager;
+import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -15,11 +17,13 @@ import android.widget.Toast;
 
 public class MapTileLayer extends BaseMapLayer {
 
+	
 	protected final int emptyTileDivisor = 16;
 	public static final int OVERZOOM_IN = 2;
 	
 	private final boolean mainMap;
 	protected ITileSource map = null;
+	protected MapTileAdapter mapTileAdapter = null;
 	
 	Paint paintBitmap;
 	protected RectF tilesRect = new RectF();
@@ -52,6 +56,10 @@ public class MapTileLayer extends BaseMapLayer {
 		paintBitmap = new Paint();
 		paintBitmap.setFilterBitmap(true);
 		paintBitmap.setAlpha(getAlpha());
+		
+		if(mapTileAdapter != null && view != null){
+			mapTileAdapter.initLayerAdapter(this, view);
+		}
 	}
 	
 	@Override
@@ -62,11 +70,51 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 	}
 	
+	public void setMapTileAdapter(MapTileAdapter mapTileAdapter) {
+		if(this.mapTileAdapter == mapTileAdapter){
+			return;
+		}
+		if(this.mapTileAdapter != null){
+			this.mapTileAdapter.onClear();
+		}
+		this.mapTileAdapter = mapTileAdapter;
+		if(mapTileAdapter != null && view != null){
+			mapTileAdapter.initLayerAdapter(this, view);
+			mapTileAdapter.onInit();
+		}
+	}
+	
+	public void setMapForMapTileAdapter(ITileSource map, MapTileAdapter mapTileAdapter) {
+		if(mapTileAdapter == this.mapTileAdapter){
+			this.map = map;
+		}
+	}
+	
+	public void setMap(ITileSource map) {
+		MapTileAdapter target = null;
+		if(map instanceof TileSourceTemplate){
+			if(TileSourceManager.RULE_YANDEX_TRAFFIC.equals(((TileSourceTemplate) map).getRule())){
+				map = null;
+				target = new YandexTrafficAdapter();
+			}
+			
+		}
+		this.map = map;
+		setMapTileAdapter(target);
+	}
+	
+	public MapTileAdapter getMapTileAdapter() {
+		return mapTileAdapter;
+	}
+	
 
 	@Override
 	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode) {
-		if (map == null || !visible) {
+		if ((map == null && mapTileAdapter == null) || !visible) {
 			return;
+		}
+		if(mapTileAdapter != null){
+			mapTileAdapter.onDraw(canvas, latlonRect, tilesRect, nightMode);
 		}
 		drawTileMap(canvas, tilesRect);
 	}
@@ -190,6 +238,7 @@ public class MapTileLayer extends BaseMapLayer {
 	@Override
 	public void destroyLayer() {
 		// TODO clear map cache
+		setMapTileAdapter(null);
 	}
 
 	public boolean isVisible() {
@@ -205,9 +254,7 @@ public class MapTileLayer extends BaseMapLayer {
 		return map;
 	}
 	
-	public void setMap(ITileSource map) {
-		this.map = map;
-	}
+
 
 	@Override
 	public boolean onLongPressEvent(PointF point) {

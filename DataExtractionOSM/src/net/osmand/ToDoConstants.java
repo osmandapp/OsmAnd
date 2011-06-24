@@ -12,7 +12,6 @@ public class ToDoConstants {
 
 	// Map Refactoring
 //      Remove notification from OsmAndMapTileView (?)
-//      Yandex Traffic make downloadable 
 	// Index version
 	// 1. POI inside obf
 	// 2. Multiple attributes for one point (amenity=circle, type=...)
