@@ -22,11 +22,11 @@
 	<string name="switch_to_raster_map_to_see">Current position not covered in your offline vector maps, you can switch map source in menu (Define view -> Map Source... ) need to download additional vector map.</string>
 	<string name="switch_to_vector_map_to_see">You can switch to offline vector maps using menu (Define view -> Map Source... -> Offline vector maps) to see the map.</string>
 	<string name="binary_map_download_success">Successful. You can switch to offline vector maps on menu  Define view -> Map Source... -> Offline vector maps.</string>
-	<string name="choose_audio_stream">Voice guidance stream</string>
+	<string name="choose_audio_stream">Voice guidance output</string>
 	<string name="choose_audio_stream_descr">Choose channel to play voice guidance (depends on system configuration)</string>
 	<string name="voice_stream_voice_call">Voice call stream</string>
 	<string name="voice_stream_notification">Notification stream</string>
-	<string name="voice_stream_music">Music stream</string>
+	<string name="voice_stream_music">Media/Music stream</string>
 	<string name="warning_tile_layer_not_downloadable">Application cannot download map layer %1$s, please try to reinstall it.</string>
 	<string name="overlay_transparency_descr">Modify overlay transparency</string>
 	<string name="overlay_transparency">Overlay transparency</string>
