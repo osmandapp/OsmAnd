@@ -20,10 +20,11 @@
 		 All these subprocess could be ran independently ! So you can create some files check them and after that try to upload on googlecode,
 		 or you can upload any file you have to googlecode (just put into 'directory_for_index_files')
 	 -->
+	 <!-- zoomWaySmoothness - 1-4, typical mapZooms - 8-10;11-12;13-14;15   -->
 	<process directory_for_osm_files="D:/android/batch_gen_osm" directory_for_index_files="D:/android/batch_gen_index"
 		downloadOsmFiles="true" generateIndexes="true" uploadIndexes="true" upload_osmand_googlecode="true"
 		deleteFilesAfterUploading="true" indexPOI="true" indexMap="true"
-		indexTransport="true" indexAddress="true" mapZooms="" renderingTypesFile=""
+		indexTransport="true" indexAddress="true" mapZooms="" renderingTypesFile="" zoomWaySmoothness=""
 		>
 		<!-- Add wget="C:/Program Files/GNUWin32/bin/wget.exe" to process, to use wget for download.
 			 On linux systems if wget is in your path it can be wget="wget" or you can make own script with wget command:
