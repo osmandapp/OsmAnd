@@ -129,7 +129,7 @@ public class NavigatePointActivity extends Activity {
 			double lon = convert(((TextView) findViewById(R.id.LongitudeEdit)).getText().toString());
 			
 			if(navigate){
-				OsmandSettings.getOsmandSettings(this).setPointToNavigate(lat, lon);
+				OsmandSettings.getOsmandSettings(this).setPointToNavigate(lat, lon, MessageFormat.format(getString(R.string.search_history_navigate_to), lat, lon));
 			} else {
 				// in case when it is dialog
 				if(activity != null) {

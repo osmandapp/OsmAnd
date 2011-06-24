@@ -202,7 +202,7 @@ public class SearchAddressActivity extends Activity {
 		}
 		if (l != null) {
 			if(navigateTo){
-				osmandSettings.setPointToNavigate(l.getLatitude(), l.getLongitude());
+				osmandSettings.setPointToNavigate(l.getLatitude(), l.getLongitude(), historyName);
 			} else {
 				osmandSettings.setMapLocationToShow(l.getLatitude(), l.getLongitude(), zoom, historyName);
 			}

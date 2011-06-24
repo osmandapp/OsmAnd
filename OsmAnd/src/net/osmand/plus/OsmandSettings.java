@@ -779,8 +779,14 @@ public class OsmandSettings {
 		return globalPreferences.edit().remove(POINT_NAVIGATE_LAT).remove(POINT_NAVIGATE_LON).commit();
 	}
 
-	public boolean setPointToNavigate(double latitude, double longitude) {
-		return globalPreferences.edit().putFloat(POINT_NAVIGATE_LAT, (float) latitude).putFloat(POINT_NAVIGATE_LON, (float) longitude).commit();
+	public boolean setPointToNavigate(double latitude, double longitude, String historyDescription) {
+		boolean add = globalPreferences.edit().putFloat(POINT_NAVIGATE_LAT, (float) latitude).putFloat(POINT_NAVIGATE_LON, (float) longitude).commit();
+		if(add){
+			if(historyDescription != null){
+				SearchHistoryHelper.getInstance().addNewItemToHistory(latitude, longitude, historyDescription, ctx);
+			}
+		}
+		return add;
 	}
 
 	public static final String LAST_SEARCHED_REGION = "last_searched_region"; //$NON-NLS-1$
