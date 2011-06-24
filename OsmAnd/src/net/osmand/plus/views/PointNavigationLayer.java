@@ -62,8 +62,6 @@ public class PointNavigationLayer implements OsmandMapLayer {
 			int locationX = view.getMapXForPoint(pointToNavigate.getLongitude());
 			int locationY = view.getMapYForPoint(pointToNavigate.getLatitude());
 			canvas.rotate(-view.getRotate(), locationX, locationY);
-			Drawable drawable = view.getResources().getDrawable(R.drawable.target_point);
-			drawable.draw(canvas);
 			canvas.drawBitmap(targetPoint, locationX - marginX, locationY - marginY, point);
 		} else {
 			Location.distanceBetween(view.getLatitude(), view.getLongitude(), pointToNavigate.getLatitude(),
