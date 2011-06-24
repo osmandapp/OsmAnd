@@ -4,7 +4,6 @@
 	<regions name="Europe">
 		<!-- Restrict download big files due to internet payments could be download from googlecode
 		<region name="Benelux_europe_1.obf.zip" size="294.8" date="01.04.2011" description="Map, Transport, Address data for Benelux europe" downloadCount="83"/> -->
-		<region name="Netherlands_europe_1.obf.zip" size="240.9" date="25.03.2011" description="Map, Transport, Address data for netherlands europe" downloadCount="2467"/>
         	<!-- !!! Restrict download big files due to internet payments -->      
 		<!--
 		<region name="France_europe_1.obf.zip" size="485.1" date="22.12.2010" description="Map, Transport, Address data for France europe"/> -->
