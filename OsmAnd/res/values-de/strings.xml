@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="installing_new_resources">Entpacke neue Daten...</string>
-	<string name="internet_connection_required_for_online_route">Es soll ein Online-Routing-Dienst verwendet werden, aber es besteht keine Internet-Verbindung. Es besteht die Möglichkeit, das (noch experimentelle) OsmAnd Offline-Routing zu verwenden, siehe 'Einstellungen' -> 'Navigation'.</string>
+	<string name="internet_connection_required_for_online_route">Es soll ein Online-Routing-Dienst verwendet werden, aber es besteht keine Internet-Verbindung. Es besteht die Möglichkeit, das (noch experimentelle) OsmAnd Offline-Routing zu verwenden, siehe \'Einstellungen\' -> \'Navigation\'.</string>
 	<string name="tts_language_not_supported_title">Sprache nicht unterstützt</string>
 	<string name="tts_language_not_supported">Die gewählte Sprache wird von der installierten Android TTS-Engine nicht unterstützt. Soll im Market nach einer anderen TTS-Engine gesucht werden? Andernfalls wird die voreingestellte Standard-Sprache verwendet.</string>
 	<string name="tts_missing_language_data_title">Fehlendes Sprachpaket</string>
