@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
 	<string name="choose_audio_stream">Голосовые инструкции</string>
 	<string name="choose_audio_stream_descr">Выберите канал для голосовых инструкций (зависит от системы)</string>
 	<string name="voice_stream_voice_call">Поток голосовых звонков</string>
