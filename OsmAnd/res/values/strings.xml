@@ -26,9 +26,9 @@
 	<string name="binary_map_download_success">Successful. You can switch to offline vector maps on menu  Define view -> Map Source... -> Offline vector maps.</string>
 	<string name="choose_audio_stream">Voice guidance output</string>
 	<string name="choose_audio_stream_descr">Choose channel to play voice guidance (depends on system configuration)</string>
-	<string name="voice_stream_voice_call">Voice call stream</string>
-	<string name="voice_stream_notification">Notification stream</string>
-	<string name="voice_stream_music">Media/Music stream</string>
+	<string name="voice_stream_voice_call">Phone audio</string>
+	<string name="voice_stream_notification">Notification audio</string>
+	<string name="voice_stream_music">Media/Music audio</string>
 	<string name="warning_tile_layer_not_downloadable">Application cannot download map layer %1$s, please try to reinstall it.</string>
 	<string name="overlay_transparency_descr">Modify overlay transparency</string>
 	<string name="overlay_transparency">Overlay transparency</string>
