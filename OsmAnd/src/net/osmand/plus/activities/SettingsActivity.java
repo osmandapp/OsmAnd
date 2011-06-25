@@ -217,10 +217,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerListPreference(osmandSettings.PREFERRED_LOCALE, screen, entries, entrieValues);
 		
 		Set<String> voiceFiles = getVoiceFiles();
-		entries = new String[voiceFiles.size() + 2];
-		entrieValues = new String[voiceFiles.size() + 2];
+		entries = new String[voiceFiles.size() + 1];
+		entrieValues = new String[voiceFiles.size() + 1];
 		int k = 0;
-		entries[k++] = getString(R.string.voice_not_specified);
+//		entries[k++] = getString(R.string.voice_not_specified);
 		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
 		entries[k++] = getString(R.string.voice_not_use);
 		for (String s : voiceFiles) {
