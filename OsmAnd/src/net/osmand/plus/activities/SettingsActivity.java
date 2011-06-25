@@ -211,9 +211,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerListPreference(osmandSettings.PREFERRED_LOCALE, screen, entries, entrieValues);
 		
 		Set<String> voiceFiles = getVoiceFiles();
-		entries = new String[voiceFiles.size() + 1];
-		entrieValues = new String[voiceFiles.size() + 1];
+		entries = new String[voiceFiles.size() + 2];
+		entrieValues = new String[voiceFiles.size() + 2];
 		int k = 0;
+		entries[k++] = getString(R.string.voice_not_specified);
+		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
 		entries[k++] = getString(R.string.voice_not_use);
 		for (String s : voiceFiles) {
 			entries[k] = s;
@@ -441,7 +443,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			// Specific actions after list preference changed
 			if (changed) {
 				if (listPref.getId().equals(osmandSettings.VOICE_PROVIDER.getId())) {
-					getMyApplication().showDialogInitializingCommandPlayer(this);
+					getMyApplication().showDialogInitializingCommandPlayer(this, false);
 				} else if (listPref.getId().equals(osmandSettings.APPLICATION_MODE.getId())) {
 					updateAllSettings();
 				} else if (listPref.getId().equals(osmandSettings.PREFERRED_LOCALE.getId())) {

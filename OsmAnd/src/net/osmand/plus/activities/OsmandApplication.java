@@ -197,31 +197,37 @@ public class OsmandApplication extends Application {
 	
 
 	public void showDialogInitializingCommandPlayer(final Activity uiContext){
+		showDialogInitializingCommandPlayer(uiContext, true);
+	}
+	public void showDialogInitializingCommandPlayer(final Activity uiContext, boolean warningNoneProvider){
 		String voiceProvider = osmandSettings.VOICE_PROVIDER.get();
-		if(voiceProvider == null){
-			Builder builder = new AlertDialog.Builder(uiContext);
-			builder.setCancelable(true);
-			builder.setNegativeButton(R.string.default_buttons_cancel, null);
-			builder.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					uiContext.startActivity(new Intent(uiContext, SettingsActivity.class));
-				}
-			});
-			builder.setTitle(R.string.voice_is_not_available_title);
-			builder.setMessage(R.string.voice_is_not_available_msg);
-			builder.show();
+		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
+			if (warningNoneProvider && voiceProvider == null) {
+				Builder builder = new AlertDialog.Builder(uiContext);
+				builder.setCancelable(true);
+				builder.setNegativeButton(R.string.default_buttons_cancel, null);
+				builder.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						uiContext.startActivity(new Intent(uiContext, SettingsActivity.class));
+					}
+				});
+				builder.setTitle(R.string.voice_is_not_available_title);
+				builder.setMessage(R.string.voice_is_not_available_msg);
+				builder.show();
+			}
+
 		} else {
 			if(player == null 
 					|| !Algoritms.objectEquals(voiceProvider, player.getCurrentVoice())){
-				initVoiceDataInDifferentThread(uiContext);
+				initVoiceDataInDifferentThread(uiContext, voiceProvider);
 			}
 		}
 		
 	}
 
-	private void initVoiceDataInDifferentThread(final Activity uiContext) {
+	private void initVoiceDataInDifferentThread(final Activity uiContext, final String voiceProvider) {
 		final ProgressDialog dlg = ProgressDialog.show(uiContext,
 				getString(R.string.loading_data),
 				getString(R.string.voice_data_initializing));
@@ -229,7 +235,11 @@ public class OsmandApplication extends Application {
 			@Override
 			public void run() {
 				try {
-					initCommandPlayer(uiContext);
+					if (player != null) {
+						player.clear();
+					}
+					player = CommandPlayerFactory.createCommandPlayer(voiceProvider, OsmandApplication.this, uiContext);
+					routingHelper.getVoiceRouter().setPlayer(player);
 					dlg.dismiss();
 				} catch (CommandPlayerException e) {
 					dlg.dismiss();
@@ -237,19 +247,6 @@ public class OsmandApplication extends Application {
 				}
 			}
 		}).start();
-	}
-	
-	public void initCommandPlayer(Activity ctx)
-		throws CommandPlayerException
-	{
-		final String voiceProvider = osmandSettings.VOICE_PROVIDER.get();
-		if (player == null || !Algoritms.objectEquals(voiceProvider, player.getCurrentVoice())) {
-			if (player != null) {
-				player.clear();
-			}
-			player = CommandPlayerFactory.createCommandPlayer(voiceProvider,OsmandApplication.this, ctx);
-			routingHelper.getVoiceRouter().setPlayer(player);
-		}
 	}
 	
 	public NavigationService getNavigationService() {

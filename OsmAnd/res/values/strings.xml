@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="voice_not_use">Not use</string>
+	<string name="voice_not_specified">None</string>
 	<string name="installing_new_resources">Unpacking new data...</string>
 	<string name="internet_connection_required_for_online_route">You are about to use an online routing service but there is no internet connection. You can try the (still experimental) OsmAnd offline routing service (select in \'Settings\' -> \'Navigation\'.</string>
 	<string name="tts_language_not_supported_title">Language not supported</string>
@@ -335,7 +337,6 @@
 	<string name="search_poi_filter">Filter</string>
 	<string name="menu_mute_off">Sound is on</string>
 	<string name="menu_mute_on">Sound is off</string>
-	<string name="voice_not_use">None</string>
 	<string name="voice_provider_descr">Select voice guidance for routing</string>
 	<string name="voice_provider">Voice guidance</string>
 	<string name="voice_data_initializing">Initializing voice data...</string>

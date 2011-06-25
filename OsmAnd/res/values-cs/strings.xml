@@ -561,7 +561,7 @@
   <string name="search_poi_filter">Filtr</string>
   <string name="menu_mute_off">Zvuk je zapnut</string>
   <string name="menu_mute_on">Zvuk je vypnut</string>
-  <string name="voice_not_use">Žádný</string>
+  <string name="voice_not_specified">Žádný</string>
   <string name="voice_provider_descr">Vybrat hlasová data pro navigaci</string>
   <string name="voice_provider">Hlasová data</string>
   <string name="voice_data_initializing">Inicializuji hlasová data...</string>
