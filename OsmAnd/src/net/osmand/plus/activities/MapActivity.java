@@ -137,7 +137,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	
 	private Notification getNotification(){
 		Intent notificationIndent = new Intent(this, MapActivity.class);
-		notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		Notification notification = new Notification(R.drawable.icon, "", //$NON-NLS-1$
 				System.currentTimeMillis());
 		notification.setLatestEventInfo(this, Version.APP_NAME,
@@ -359,6 +359,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			@Override
 			public void onClick(View v) {
 				final Intent search = new Intent(MapActivity.this, SearchActivity.class);
+				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				MapActivity.this.startActivity(search);
 				dlg.dismiss();
 			}
@@ -381,6 +382,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
 			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
+			newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			startActivity(newIntent);
             return true;
         }
@@ -1326,6 +1328,12 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+	}
+	
+	public static void launchMapActivityMoveToTop(Activity activity){
+		Intent newIntent = new Intent(activity, MapActivity.class);
+		newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+		activity.startActivity(newIntent);
 	}
 
 	private Location getLocationToStartFrom(final double lat, final double lon) {

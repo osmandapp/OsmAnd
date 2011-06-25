@@ -159,7 +159,7 @@ public class SearchAddressOnlineActivity extends ListActivity {
 		super.onListItemClick(l, v, position, id);
 		Place item = ((PlacesAdapter) getListAdapter()).getItem(position);
 		OsmandSettings.getOsmandSettings(this).setMapLocationToShow(item.lat, item.lon, getString(R.string.address)+ " : " + item.displayName); //$NON-NLS-1$
-		startActivity(new Intent(this, MapActivity.class));
+		MapActivity.launchMapActivityMoveToTop(this);
 	}
 	
 	private static class Place {

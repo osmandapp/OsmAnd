@@ -157,7 +157,7 @@ public class GeoIntentActivity extends ListActivity {
 		getMyApplication().getSettings().setMapLocationToShow(item.getLocation()
 				.getLatitude(), item.getLocation().getLongitude(),
 				getString(R.string.address) + " : " + item.toString()); //$NON-NLS-1$
-		startActivity(new Intent(this, MapActivity.class));
+		MapActivity.launchMapActivityMoveToTop(this);
 	}
 
 	@Override

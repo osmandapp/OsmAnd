@@ -207,7 +207,7 @@ public class SearchAddressActivity extends Activity {
 				osmandSettings.setMapLocationToShow(l.getLatitude(), l.getLongitude(), zoom, historyName);
 			}
 			
-			startActivity(new Intent(SearchAddressActivity.this, MapActivity.class));
+			MapActivity.launchMapActivityMoveToTop(SearchAddressActivity.this);
 		}
 	}
 	
