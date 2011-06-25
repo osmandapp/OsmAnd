@@ -99,15 +99,16 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 						switch (mTts.isLanguageAvailable(new Locale(language)))
 						{
 							case TextToSpeech.LANG_MISSING_DATA:
-								internalClear();
-								Builder builder = createAlertDialog(
-									R.string.tts_missing_language_data_title,
-									R.string.tts_missing_language_data,
-									new IntentStarter(
-											ctx,
-											TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA),
-									ctx);
-								builder.show();
+								if (isSettingsActivity(ctx)) {
+									Builder builder = createAlertDialog(
+										R.string.tts_missing_language_data_title,
+										R.string.tts_missing_language_data,
+										new IntentStarter(
+												ctx,
+												TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA),
+										ctx);
+									builder.show();
+								}
 								break;
 							case TextToSpeech.LANG_AVAILABLE:
 								mTts.setLanguage(new Locale(language));
@@ -115,8 +116,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 							case TextToSpeech.LANG_NOT_SUPPORTED:
 								//maybe weird, but I didn't want to introduce parameter in around 5 methods just to do
 								//this if condition
-								if (ctx instanceof SettingsActivity) {
-									builder = createAlertDialog(
+								if (isSettingsActivity(ctx)) {
+									Builder builder = createAlertDialog(
 											R.string.tts_language_not_supported_title,
 											R.string.tts_language_not_supported,
 											new IntentStarter(
@@ -131,7 +132,9 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 					}
 				}
 
-	
+				private boolean isSettingsActivity(final Activity ctx) {
+					return ctx instanceof SettingsActivity;
+				}
 			});
 		}
 	}
