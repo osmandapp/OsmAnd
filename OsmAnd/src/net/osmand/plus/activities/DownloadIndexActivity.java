@@ -272,11 +272,11 @@ public class DownloadIndexActivity extends ListActivity {
 				if (entry.fileToUnzip.isDirectory()) {
 					format = new MessageFormat("{0,date,dd.MM.yyyy}", Locale.US); //$NON-NLS-1$
 				} else {
-					format = new MessageFormat("{0,date,dd.MM.yyyy} : {1, number,##.#} MB", Locale.US); //$NON-NLS-1$
+					format = new MessageFormat("{0,date,dd.MM.yyyy}, {1, number,##.#} MB", Locale.US); //$NON-NLS-1$
 				}
 				String description = format.format(new Object[] { new Date(entry.fileToUnzip.lastModified()),
 						((float) entry.fileToUnzip.length() / MB) });
-				String descriptionEx = e.getDate() + " : " +e.getSize(); 
+				String descriptionEx = e.getDate() + ", " +e.getSize() + " MB"; 
 				builder.setMessage(MessageFormat.format(getString(R.string.download_question_exist), entry.baseName, description,
 						descriptionEx));
 
