@@ -124,8 +124,7 @@ public class FavouritesActivity extends ListActivity {
 		FavouritePoint point = favouritesAdapter.getItem(position);
 		OsmandSettings.getOsmandSettings(this).SHOW_FAVORITES.set( true);
 		OsmandSettings.getOsmandSettings(this).setMapLocationToShow(point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName()); //$NON-NLS-1$
-		Intent newIntent = new Intent(FavouritesActivity.this, MapActivity.class);
-		startActivity(newIntent);
+		MapActivity.launchMapActivityMoveToTop(FavouritesActivity.this);
 	}
 	
 	@Override
@@ -134,8 +133,7 @@ public class FavouritesActivity extends ListActivity {
 		final FavouritePoint point = (FavouritePoint) favouritesAdapter.getItem(menuInfo.position);
 		if (aItem.getItemId() == NAVIGATE_TO) {
 			OsmandSettings.getOsmandSettings(this).setPointToNavigate(point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName());
-			Intent newIntent = new Intent(FavouritesActivity.this, MapActivity.class);
-			startActivity(newIntent);
+			MapActivity.launchMapActivityMoveToTop(this);
 		} else if (aItem.getItemId() == EDIT_ITEM) {
 			Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle(R.string.favourites_edit_dialog_title);

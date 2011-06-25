@@ -84,8 +84,7 @@ public class SearchHistoryActivity extends ListActivity {
 							OsmandSettings.getOsmandSettings(SearchHistoryActivity.this).setPointToNavigate(entry.getLat(), entry.getLon(), null);
 						}
 
-						Intent newIntent = new Intent(SearchHistoryActivity.this, MapActivity.class);
-						startActivity(newIntent);
+						MapActivity.launchMapActivityMoveToTop(SearchHistoryActivity.this);
 
 					}
 
@@ -104,7 +103,7 @@ public class SearchHistoryActivity extends ListActivity {
 	private void selectModel(HistoryEntry model) {
 		helper.selectEntry(model, this);
 		OsmandSettings.getOsmandSettings(SearchHistoryActivity.this).setMapLocationToShow(model.getLat(), model.getLon());
-		startActivity(new Intent(this, MapActivity.class));
+		MapActivity.launchMapActivityMoveToTop(this);
 	}
 	
 	

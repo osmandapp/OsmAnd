@@ -189,8 +189,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 				if(/*searchNearBy && */location != null){
 					settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(), 15);
 				}
-				Intent newIntent = new Intent(SearchPOIActivity.this, MapActivity.class);
-				startActivity(newIntent);
+				MapActivity.launchMapActivityMoveToTop(SearchPOIActivity.this);
 			}
 		});
 		
@@ -242,8 +241,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 							settings.SHOW_POI_OVER_MAP.set(true);
 						}
 						
-						Intent newIntent = new Intent(SearchPOIActivity.this, MapActivity.class);
-						startActivity(newIntent);
+						MapActivity.launchMapActivityMoveToTop(SearchPOIActivity.this);
 						
 					}
 					
@@ -488,8 +486,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, this, settings.usingEnglishNames());
 		settings.setMapLocationToShow( amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 
 				Math.max(16, z), getString(R.string.poi)+" : " + poiSimpleFormat); //$NON-NLS-1$
-		Intent newIntent = new Intent(SearchPOIActivity.this, MapActivity.class);
-		startActivity(newIntent);
+		MapActivity.launchMapActivityMoveToTop(SearchPOIActivity.this);
 	}
 	
 	class DirectionDrawable extends Drawable {

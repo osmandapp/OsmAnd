@@ -224,6 +224,7 @@ public class MainMenuActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				final Intent search = new Intent(activity, SearchActivity.class);
+				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				activity.startActivity(search);
 			}
 		});
@@ -294,6 +295,7 @@ public class MainMenuActivity extends Activity {
         if (keyCode == KeyEvent.KEYCODE_SEARCH
                 && event.getRepeatCount() == 0) {
 			final Intent search = new Intent(MainMenuActivity.this, SearchActivity.class);
+			search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			startActivity(search);
             return true;
         }

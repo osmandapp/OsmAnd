@@ -68,8 +68,7 @@ public class NavigatePointActivity extends Activity {
 		if(dlg != null){
 			dlg.dismiss();
 		} else {
-			Intent newIntent = new Intent(this, MapActivity.class);
-			startActivity(newIntent);
+			MapActivity.launchMapActivityMoveToTop(this);
 		}
 	}
 	

@@ -50,6 +50,12 @@ import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
+	
+	public static final String INTENT_KEY_SETTINGS_SCREEN = "INTENT_KEY_SETTINGS_SCREEN";
+	public static final int SCREEN_GENERAL_SETTINGS = 1;
+	public static final int SCREEN_NAVIGATION_SETTINGS = 2;
+	public static final int SCREEN_MONITORING_SETTINGS = 3;
+	
 	private static final String MORE_VALUE = "MORE_VALUE";
 	
 	private Preference saveCurrentTrack;
@@ -300,6 +306,26 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			
 		};
 		registerReceiver(broadcastReceiver, new IntentFilter(NavigationService.OSMAND_STOP_SERVICE_ACTION));
+		
+		
+		Intent intent = getIntent();
+		if(intent != null && intent.getIntExtra(INTENT_KEY_SETTINGS_SCREEN, 0) != 0){
+			int s = intent.getIntExtra(INTENT_KEY_SETTINGS_SCREEN, 0);
+			String pref = null;
+			if(s == SCREEN_GENERAL_SETTINGS){
+				pref = "general_settings";
+			} else if(s == SCREEN_NAVIGATION_SETTINGS){
+				pref = "routing_settings";
+			} else if(s == SCREEN_MONITORING_SETTINGS){
+				pref = "monitor_settings";
+			} 
+			if(pref != null){
+				Preference toOpen = screen.findPreference(pref);
+				if(toOpen instanceof PreferenceScreen){
+					setPreferenceScreen((PreferenceScreen) toOpen);
+				}
+			}
+		}
     }
 
 	private void updateApplicationDirTextAndSummary() {
