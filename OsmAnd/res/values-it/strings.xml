@@ -70,7 +70,7 @@
 	<string name="stop_routing">Stop generazione percorso</string>
 	<string name="sd_unmounted">SD card attualmente non accessibile. \nImpossibile vedere mappe e cercare alcunche\'.</string>
 	<string name="sd_mounted_ro">SD card attualmente accessibile in sola lettura. \nImpossibile effettuare download da internet e solo le mappe precaricate sono visibili.</string>
-	<string name="unzipping_file">File in decompressione</string>
+	<string name="unzipping_file">File in decompressione...</string>
 	<string name="route_tr">Svoltare a destra e continuare</string>
 	<string name="route_tshr">Svoltare stretto a destra e continuare</string>
 	<string name="route_tslr">Svoltare leggermente a destra e continuare</string>
@@ -127,9 +127,9 @@
 	<string name="clear_all">Eliminare tutto</string>
 	<string name="history">Storia</string>
 	<string name="uploading_data">Invio dati...</string>
-	<string name="uploading">Invio</string>
+	<string name="uploading">Invio...</string>
 	<string name="search_nothing_found">Trovato nulla</string>
-	<string name="searching">Ricerca</string>
+	<string name="searching">Ricerca...</string>
 	<string name="searching_address">Ricerca indirizzo...</string>
 	<string name="search_osm_nominatim">Ricerca indirizzo con Osm Nominatim</string>
 	<string name="hint_search_online">Numero civico, strada, città</string>
@@ -142,8 +142,8 @@
 	<string name="router_service_descr">Scegliere il servizio di generazione percorso</string>
 	<string name="router_service">Generazione percorso</string>
 	<string name="sd_dir_not_accessible">Directory su SD card inaccessibile</string>
-	<string name="download_question">Scaricare {0} - {1} ?</string>
-	<string name="download_question_exist">L\'indice per {0} attualmente esistente ({1}). Aggiornare ({2}) ?</string>
+	<string name="download_question">Scaricare {0} - {1}?</string>
+	<string name="download_question_exist">L\'indice per {0} attualmente esistente ({1}). Aggiornare ({2})?</string>
 	<string name="address">Indirizzo</string>
 	<string name="download_index_success">Indice scaricato correttamente</string>
 	<string name="error_io_error">Errore di Input/Output.</string>
@@ -165,9 +165,9 @@
 	<string name="gps_status_app_not_found">Applicazione Gps status non trovata</string>
     <string name="show_gps_status">Visualizzare lo stato del gps</string>
 	<string name="opening_hours">Orari di apertura</string>
-	<string name="opening_changeset">Apertura</string>
-	<string name="closing_changeset">Chiusura</string>
-	<string name="commiting_node">Invio oggetto</string>
+	<string name="opening_changeset">Apertura...</string>
+	<string name="closing_changeset">Chiusura...</string>
+	<string name="commiting_node">Invio oggetto...</string>
 	<string name="loading_poi_obj">Caricamento POI...</string>
 	<string name="auth_failed">Autorizzazione fallita</string>
 	<string name="failed_op">fallito</string>
@@ -341,7 +341,7 @@
 <string name="poi_edit_title">Modifica POI</string>
 <string name="poi_create_title">Crea POI</string>
 <string name="poi_error_poi_not_found">L\'oggetto non è trovabile o l\'amenità non è un oggetto singolo</string>
-<string name="poi_remove_confirm_template">Si è sicuri di voler eliminare {0} (inserire commento) ?</string>
+<string name="poi_remove_confirm_template">Si è sicuri di voler eliminare {0} (inserire commento)?</string>
 <string name="poi_remove_title">Eleminazione POI</string>
 <string name="default_buttons_delete">Eliminare</string>
 <string name="poi_remove_success">POI eliminato correttamente</string>
