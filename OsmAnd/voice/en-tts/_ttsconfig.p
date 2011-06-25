@@ -46,23 +46,23 @@ go_ahead(Dist) == ['Drive for ', D]:- distance(Dist) == D.
 go_ahead == ['Continue straight ahead '].
 
 %% 
-nth(1, '1st ').
-nth(2, '2nd ').
-nth(3, '3rd ').
-nth(4, '4th ').
-nth(5, '5th ').
-nth(6, '6th ').
-nth(7, '7th ').
-nth(8, '8th ').
-nth(9, '9th ').
-nth(10, '10th ').
-nth(11, '11th ').
-nth(12, '12th ').
-nth(13, '13th ').
-nth(14, '14th ').
-nth(15, '15th ').
-nth(16, '16th ').
-nth(17, '17th ').
+nth(1, 'first ').
+nth(2, 'second ').
+nth(3, 'third ').
+nth(4, 'fourth ').
+nth(5, 'fifth ').
+nth(6, 'sixth ').
+nth(7, 'seventh ').
+nth(8, 'eight ').
+nth(9, 'nineth ').
+nth(10, 'tenth ').
+nth(11, 'eleventh ').
+nth(12, 'twelfth ').
+nth(13, 'thirteenth ').
+nth(14, 'fourteenth ').
+nth(15, 'fifteenth ').
+nth(16, 'sixteenth ').
+nth(17, 'seventeenth ').
 
 
 %%% distance measure
