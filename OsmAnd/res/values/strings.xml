@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-	<string name="voice_not_use">Not use</string>
+	<string name="voice_not_use">Do not use</string>
 	<string name="voice_not_specified">None</string>
 	<string name="installing_new_resources">Unpacking new data...</string>
 	<string name="internet_connection_required_for_online_route">You are about to use an online routing service but there is no internet connection. You can try the (still experimental) OsmAnd offline routing service (select in \'Settings\' -> \'Navigation\'.</string>
@@ -89,7 +89,7 @@
 \n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
     <string name="error_doing_search">Error occurred in offline search</string>
-    <string name="search_offline_geo_error">Could not parse geo intent:{0}</string>
+    <string name="search_offline_geo_error">Could not parse geo intent: {0}</string>
 	<string name="search_osm_offline">Search address using offline maps</string>
 
 	<string name="system_locale">System</string>
@@ -142,7 +142,7 @@
 	<string name="mile_per_hour">mph</string>
 	<string name="mile">mi</string>
 	<string name="send_location_way_choose_title">Share location using</string>
-	<string name="send_location_sms_pattern">I\'m here : {0}\n{1}</string>
+	<string name="send_location_sms_pattern">I\'m here: {0}, {1}</string>
 	<string name="send_location_email_pattern">To see location follow the web browser link {0} or android intent link {1}</string>
 	<string name="send_location">Send location</string>
 	<string name="context_menu_item_share_location">Share location</string>
@@ -170,10 +170,10 @@
 	<string name="amenity_type_sustenance">Sustenance</string>
 	<string name="amenity_type_tourism">Tourism</string>
 	<string name="amenity_type_transportation">Transportation</string>
-	<string name="indexing_address">Indexing address</string>
-	<string name="indexing_map">Indexing map</string>
-	<string name="indexing_poi">Indexing POI</string>
-	<string name="indexing_transport">Indexing transport</string>
+	<string name="indexing_address">Indexing address...</string>
+	<string name="indexing_map">Indexing map...</string>
+	<string name="indexing_poi">Indexing POI...</string>
+	<string name="indexing_transport">Indexing transport...</string>
 	<string name="input_output_error">I/O error occurred</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
@@ -201,7 +201,7 @@
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
 	<string name="downloading_build">Downloading build...</string>
 	<string name="install_selected_build">Are you sure to install OsmAnd - {0} from {1} {2} MB.</string>
-	<string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed </string>
+	<string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
 	<string name="loading_builds">Loading OsmAnd builds...</string>
 	<string name="select_build_to_install">Select one of the OsmAnd builds to install</string>
 	<string name="contribution_activity">Special activity for contribution version</string>
@@ -219,7 +219,7 @@
 	<string name="daynight_descr">Choose day/night mode switching rule</string>
 	<string name="daynight">Day/night mode</string>
 
-	<string name="download_files_question">Download {0} files ({1} MB)?</string>
+	<string name="download_files_question">Download {0} file(s) ({1} MB)?</string>
 	<string name="items_were_selected">{0} items selected</string>
 	<string name="filter_existing_indexes">Filter downloaded</string>
 	<string name="deselect_all">Deselect all</string>
@@ -261,8 +261,8 @@
 	<string name="unknown_location">Position unknown yet</string>
 	<string name="download_files">Download</string>
 	<string name="context_menu_item_search_transport">Search transport</string>
-	<string name="transport_searching_transport">Searching transport (no target)</string>
-	<string name="transport_searching_route">Searching transport ({0} for target)</string>
+	<string name="transport_searching_transport">Transport results (no target):</string>
+	<string name="transport_searching_route">Transport results ({0} to target):</string>
 	<string name="transport_search_none">none</string>
 	<string name="transport_search_again">Search transport again</string>
 
@@ -401,9 +401,9 @@
 	<string name="clear_all">Clear all</string>
 	<string name="history">History</string>
 	<string name="uploading_data">Uploading data...</string>
-	<string name="uploading">Uploading</string>
+	<string name="uploading">Uploading...</string>
 	<string name="search_nothing_found">Nothing found</string>
-	<string name="searching">Searching</string>
+	<string name="searching">Searching...</string>
 	<string name="searching_address">Searching address...</string>
 	<string name="search_osm_nominatim">Search address using OSM Nominatim</string>
 	<string name="hint_search_online">House number, street, city</string>
@@ -416,14 +416,14 @@
 	<string name="router_service_descr">Choose online or offline routing services</string>
 	<string name="router_service">Routing service</string>
 	<string name="sd_dir_not_accessible">Save directory on SD card not accessible</string>
-	<string name="download_question">Download {0} - {1} ?</string>
-	<string name="download_question_exist">Offline data for {0} already exists ({1}). Do you want to update it ({2}) ?</string>
+	<string name="download_question">Download {0} - {1}?</string>
+	<string name="download_question_exist">Offline data for {0} already exists ({1}). Do you want to update it ({2})?</string>
 	<string name="address">Address</string>
 	<string name="download_index_success">Download successful</string>
 	<string name="error_io_error">I/O error occured</string>
 	<string name="downloading_file">Downloading file...</string>
 	<string name="downloading">Downloading...</string>
-	<string name="downloading_list_indexes">Downloading list of available regions</string>
+	<string name="downloading_list_indexes">Downloading list of available regions...</string>
 	<string name="list_index_files_was_not_loaded">The list of regions was not retrieved from osmand.googlecode.com.</string>
     <string name="select_index_file_to_download">If you can\'t find your region, you can make it yourself. See osmand.net</string>
 	<string name="show_poi_on_map">Show on map</string>
@@ -438,7 +438,7 @@
 	<string name="get_directions">Directions</string>
     <string name="show_gps_status">Show GPS status</string>
 	<string name="opening_hours">Opening hours</string>
-	<string name="opening_changeset">Openging changeset...</string>
+	<string name="opening_changeset">Opening changeset...</string>
 	<string name="closing_changeset">Closing changeset...</string>
 	<string name="commiting_node">Committing node...</string>
 	<string name="loading_poi_obj">Loading POI...</string>
@@ -449,7 +449,7 @@
 	<string name="loading_postcodes">Loading postcodes...</string>
 	<string name="loading_streets">Loading streets...</string>
 	<string name="loading_cities">Loading cities...</string>
-	<string name="loading">Loading</string>
+	<string name="loading">Loading...</string>
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">Error while saving GPX</string>
 	<string name="error_calculating_route">Error calculating route</string>
@@ -599,7 +599,7 @@
 <string name="favourites_context_menu_delete">Delete favorite</string>
 <string name="favourites_edit_dialog_title">Rename favorite</string>
 
-<string name="favourites_remove_dialog_title">Are you sure about removing favourite point?</string>
+<string name="favourites_remove_dialog_title">Are you sure to remove favourite point?</string>
 <string name="favourites_remove_dialog_success">Favourite point {0} was succesfully deleted.</string>
 
 <string name="osb_add_dialog_title">Enter bug text</string>
@@ -623,7 +623,7 @@
 <string name="poi_edit_title">Edit POI</string>
 <string name="poi_create_title">Create POI</string>
 <string name="poi_error_poi_not_found">Node cannot be found or amenity is not a single node</string>
-<string name="poi_remove_confirm_template">Delete {0} (enter comment) ?</string>
+<string name="poi_remove_confirm_template">Delete {0} (enter comment)?</string>
 <string name="poi_remove_title">Delete POI</string>
 <string name="default_buttons_delete">Delete</string>
 <string name="poi_remove_success">POI was successfully deleted</string>
@@ -636,9 +636,9 @@
 <string name="poi_error_info_not_loaded">Info about node was not loaded</string>
 
 <string name="poi_dialog_name">Name</string>
-<string name="poi_dialog_opening_hours">Opened</string>
+<string name="poi_dialog_opening_hours">Open</string>
 <string name="poi_dialog_comment">Comment</string>
-<string name="poi_dialog_comment_default">POI changing</string>
+<string name="poi_dialog_comment_default">Change POI</string>
 <string name="poi_dialog_other_tags_message">All other tags are preserved</string>
 <string name="default_buttons_commit">Commit</string>
 <string name="default_buttons_reset">Reset</string>
