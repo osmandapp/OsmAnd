@@ -89,7 +89,7 @@
 \n\tFür alle OSM-Aktivitäten wird eine Internet-Verbindung benötigt.</string>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> Klassifizierung mit Bildern</string>
     <string name="error_doing_search">Fehler in der Offline-Suche aufgetreten</string>
-    <string name="search_offline_geo_error">Konnte geo intent nicht verarbeiten:{0}</string>
+    <string name="search_offline_geo_error">Konnte geo intent nicht verarbeiten: {0}</string>
 	<string name="search_osm_offline">Adressuche mit Offline-Daten</string>
 
 	<string name="system_locale">Systemeinstellung</string>
@@ -142,7 +142,7 @@
 	<string name="mile_per_hour">mph</string>
 	<string name="mile">mi</string>
 	<string name="send_location_way_choose_title">Position mitteilen mittels</string>
-	<string name="send_location_sms_pattern">Ich bin hier: {0}\n{1}</string>
+	<string name="send_location_sms_pattern">Ich bin hier: {0}, {1}</string>
 	<string name="send_location_email_pattern">Um die Position zu sehen, folge dem Web-Link {0} oder Android Intent Link {1}</string>
 	<string name="send_location">Position senden</string>
 	<string name="context_menu_item_share_location">Position mitteilen</string>
@@ -170,10 +170,10 @@
 	<string name="amenity_type_sustenance">Lebensunterhalt</string>
 	<string name="amenity_type_tourism">Touristik</string>
 	<string name="amenity_type_transportation">ÖPNV</string>
-	<string name="indexing_address">Indiziere Adressen</string>
-	<string name="indexing_map">Indiziere Karte</string>
-	<string name="indexing_poi">Indiziere POI</string>
-	<string name="indexing_transport">Indiziere ÖPNV</string>
+	<string name="indexing_address">Indiziere Adressen...</string>
+	<string name="indexing_map">Indiziere Karte...</string>
+	<string name="indexing_poi">Indiziere POI...</string>
+	<string name="indexing_transport">Indiziere ÖPNV...</string>
 	<string name="input_output_error">I/O Fehler aufgetreten</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
@@ -219,7 +219,7 @@
 	<string name="daynight_descr">Wähle das Kriterium für die Umschaltung der Tag/Nacht-Anzeige</string>
 	<string name="daynight">Tag/Nacht Modus</string>
 
-	<string name="download_files_question">Lade {0} Dateien ({1} MB)?</string>
+	<string name="download_files_question">Lade {0} Datei(en) ({1} MB)?</string>
 	<string name="items_were_selected">{0} Positionen ausgewählt</string>
 	<string name="filter_existing_indexes">Filter Gespeicherte</string>
 	<string name="deselect_all">Keine markieren</string>
@@ -403,9 +403,9 @@
 	<string name="clear_all">Alles löschen</string>
 	<string name="history">Verlauf</string>
 	<string name="uploading_data">Daten hochladen...</string>
-	<string name="uploading">Hochladen</string>
+	<string name="uploading">Hochladen...</string>
 	<string name="search_nothing_found">Kein Treffer</string>
-	<string name="searching">Suchen</string>
+	<string name="searching">Suchen...</string>
 	<string name="searching_address">Adresse suchen...</string>
 	<string name="search_osm_nominatim">Adresse suchen mit Osm Nominatim</string>
 	<string name="hint_search_online">Hausnummer, Straße, Ort</string>
@@ -418,14 +418,14 @@
 	<string name="router_service_descr">Online- oder Offline-Dienst zur Streckenberechnung wählen</string>
 	<string name="router_service">Routing-Dienst</string>
 	<string name="sd_dir_not_accessible"> Auf das Verzeichnis auf der SD-Karte kann nicht zugegriffen werden</string>
-	<string name="download_question">Herunterladen {0} - {1} ?</string>
-	<string name="download_question_exist">Offline Daten für {0} existieren schon ({1}). Wollen Sie die überschreiben ({2}) ?</string>
+	<string name="download_question">Herunterladen {0} - {1}?</string>
+	<string name="download_question_exist">Offline Daten für {0} existieren schon ({1}). Wollen Sie die überschreiben ({2})?</string>
 	<string name="address">Adresse</string>
 	<string name="download_index_success">Daten erfolgreich heruntergeladen</string>
 	<string name="error_io_error">I/O Fehler aufgetreten.</string>
 	<string name="downloading_file">Herunterladen der Datei...</string>
 	<string name="downloading">Herunterladen...</string>
-	<string name="downloading_list_indexes">Herunterladen einer Liste der verfügbaren Regionen</string>
+	<string name="downloading_list_indexes">Herunterladen einer Liste der verfügbaren Regionen...</string>
 	<string name="list_index_files_was_not_loaded">Die Liste der Regionen wurde von osmand.googlecode.com nicht geladen.</string>
     <string name="select_index_file_to_download">Wenn Sie ihre Region nicht finden dann können Sie diese selbst hinzufügen. Siehe osmand.net.</string>
 	<string name="show_poi_on_map">Auf Karte zeigen</string>
@@ -451,7 +451,7 @@
 	<string name="loading_postcodes">Lade Postleitzahlen...</string>
 	<string name="loading_streets">Lade Straßen...</string>
 	<string name="loading_cities">Lade Orte...</string>
-	<string name="loading">Laden</string>
+	<string name="loading">Laden...</string>
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">Fehler während des Speicherns aufgetreten</string>
 	<string name="error_calculating_route">Fehler während der Routenberechnung</string>
@@ -465,7 +465,7 @@
 	<string name="loading_data">Daten werden geladen...</string>
 	<string name="reading_indexes">Verarbeite Indizes...</string>
 	<string name="previous_run_crashed">Die vorherige Programminstanz war abgestürzt. Logdatei unter {0}. Fehler bitte melden und Logdatei anhängen.</string>
-	<string name="saving_gpx_tracks">GPX Pfad wird auf der SD-Karte gespeichern...</string>
+	<string name="saving_gpx_tracks">GPX Track wird auf der SD-Karte gespeichert...</string>
 	<string name="finished_task">Abgeschlossen</string>
     <string name="reload_indexes_descr">Offline-Vektor-Karten und Adressdaten von SD-Karte neu laden</string>
     <string name="reload_indexes">Offline-Daten erneut einbinden</string>
@@ -625,7 +625,7 @@
 <string name="poi_edit_title">POI bearbeiten</string>
 <string name="poi_create_title">POI erstellen</string>
 <string name="poi_error_poi_not_found">POI wurde nicht gefunden oder die Einrichtung ist kein einzelner Knoten</string>
-<string name="poi_remove_confirm_template">Sicher löschen: {0} (Kommentar eingeben) ?</string>
+<string name="poi_remove_confirm_template">Sicher löschen: {0} (Kommentar eingeben)?</string>
 <string name="poi_remove_title">POI löschen</string>
 <string name="default_buttons_delete">Löschen</string>
 <string name="poi_remove_success">POI wurde erfolgreich gelöscht</string>
