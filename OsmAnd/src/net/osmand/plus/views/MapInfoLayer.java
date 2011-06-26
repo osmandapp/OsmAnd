@@ -247,7 +247,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		}
 		
 		// draw ruler
-		drawRuler(canvas);
+		// drawRuler(canvas);
 	
 		// draw route information
 		drawRouteInfo(canvas);

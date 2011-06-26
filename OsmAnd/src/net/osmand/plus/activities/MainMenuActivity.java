@@ -204,8 +204,9 @@ public class MainMenuActivity extends Activity {
 		favouritesButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent settings = new Intent(activity, FavouritesActivity.class);
-				activity.startActivity(settings);
+				final Intent favorites = new Intent(activity, FavouritesActivity.class);
+				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				activity.startActivity(favorites);
 			}
 		});
 
