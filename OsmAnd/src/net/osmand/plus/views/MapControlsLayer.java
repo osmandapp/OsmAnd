@@ -1,5 +1,7 @@
 package net.osmand.plus.views;
 
+import net.londatiga.android.ActionItem;
+import net.londatiga.android.QuickAction;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.R;
@@ -19,6 +21,7 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -148,13 +151,40 @@ public class MapControlsLayer implements OsmandMapLayer {
 		
 	}
 	
+	private void onApplicationModePress() {
+		final QuickAction mQuickAction = new QuickAction(backToMenuButton);
+		int[] icons = new int[] { R.drawable.pedestrian_small, R.drawable.bicycle_small, R.drawable.car_small, R.drawable.pedestrian_small };
+		int[] values = new int[] { R.string.app_mode_default, R.string.app_mode_bicycle, R.string.app_mode_car,
+				R.string.app_mode_pedestrian };
+		final ApplicationMode[] modes = new ApplicationMode[] { ApplicationMode.DEFAULT, ApplicationMode.BICYCLE, ApplicationMode.CAR,
+				ApplicationMode.PEDESTRIAN };
+		for (int i = 0; i < 4; i++) {
+			final ActionItem action = new ActionItem();
+			action.setTitle(view.getResources().getString(values[i]));
+			action.setIcon(view.getResources().getDrawable(icons[i]));
+			final int j = i;
+			action.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					view.getSettings().APPLICATION_MODE.set(modes[j]);
+					activity.updateApplicationModeSettings();
+					view.refreshMap();
+					mQuickAction.dismiss();
+				}
+			});
+			mQuickAction.addActionItem(action);
+		}
+		mQuickAction.setAnimStyle(QuickAction.ANIM_AUTO);
+		mQuickAction.show();
+	}
+	
 	
 	private void drawZoomLevel(Canvas canvas) {
 		String zoomText = view.getZoom() + "";
 		float length = zoomTextPaint.measureText(zoomText);
 		if (zoomShadow.getBounds().width() == 0) {
-			zoomShadow.setBounds(zoomInButton.getLeft() - 2, zoomInButton.getTop() - (int) (18 * dm.density), zoomInButton.getRight()
-					, zoomInButton.getBottom());
+			zoomShadow.setBounds(zoomInButton.getLeft() - 2, zoomInButton.getTop() - (int) (18 * dm.density), zoomInButton.getRight(),
+					zoomInButton.getBottom());
 		}
 		zoomShadow.draw(canvas);
 				
@@ -184,6 +214,10 @@ public class MapControlsLayer implements OsmandMapLayer {
 
 	@Override
 	public boolean onTouchEvent(PointF point) {
+		if (modeShadow.getBounds().contains((int) point.x, (int) point.y)) {
+			onApplicationModePress();
+			return true;
+		}
 		return false;
 	}
 
