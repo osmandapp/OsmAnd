@@ -18,7 +18,7 @@
   <string name="tile_source_already_installed">A térkép már telepítve van, a beállítások frissítésre kerülnek</string>
   <string name="select_tile_source_to_install">Térkép kiválasztása telepítéshez frissítéshez</string>
   <string name="internet_not_available">A művelet elvégzéséhez Internet elérése szükséges</string>
-  <string name="more_external_layer">További telepítése...</string>
+  <string name="install_more">További telepítése...</string>
   <string name="tip_update_index">Index adatok frissítése</string>
   <string name="tip_update_index_t">Fontos az aktuális térképek megléte. Az Osmand program tartalmaz egy letöltéskezelőt amivel egyszerűen ellenőrizhető, hogy létezik-e frissebb a meglévő index adatokból.
 \n\tA frissítések ellenőrzéséhez a \'Főmenü\'->\'Beállítások\'->\'Adatok kapcsolat nélküli munkához\'->\'Index adatok letöltése\' menüpontot kell választani. Az index adatok internetről való frissítése után a \'Letöltöttek szűrése\' menüt kell választani.

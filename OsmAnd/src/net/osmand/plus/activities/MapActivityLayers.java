@@ -476,7 +476,7 @@ public class MapActivityLayers {
 			items[i++] = it;
 		}
 		
-		items[i] = getString(R.string.more_external_layer);
+		items[i] = getString(R.string.install_more);
 		builder.setItems(items, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -522,7 +522,7 @@ public class MapActivityLayers {
 			items[i++] = it;
 		}
 		
-		items[i] = getString(R.string.more_external_layer);
+		items[i] = getString(R.string.install_more);
 		builder.setItems(items, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

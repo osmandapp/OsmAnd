@@ -35,18 +35,18 @@ import net.osmand.IProgress;
 import net.osmand.LogUtil;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.DownloadOsmandIndexesHelper;
+import net.osmand.plus.DownloadOsmandIndexesHelper.IndexItem;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
-import net.osmand.plus.DownloadOsmandIndexesHelper.IndexItem;
 
 import org.apache.commons.logging.Log;
 
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -92,12 +92,13 @@ public class DownloadIndexActivity extends ListActivity {
         public void onTextChanged(CharSequence s, int start, int before,
                 int count) {
         	DownloadIndexAdapter adapter = ((DownloadIndexAdapter)getListAdapter());
-        	if(adapter != null){
-        		adapter.getFilter().filter(s);
-        	}
+			if(adapter != null){
+				adapter.getFilter().filter(s);
+			}
         }
 
     };
+	private EditText filterText;
 	
 	
 	@Override
@@ -116,9 +117,13 @@ public class DownloadIndexActivity extends ListActivity {
 		
 		indexFileNames = ((OsmandApplication)getApplication()).getResourceManager().getIndexFileNames();
 
-	    EditText filterText = (EditText) findViewById(R.id.search_box);
+	    filterText = (EditText) findViewById(R.id.search_box);
 		filterText.addTextChangedListener(textWatcher);
-
+		final String filter = getIntent().getExtras().getString(FILTER_KEY);
+		if (filter != null) {
+			filterText.setText(filter);
+		}
+		
 		if(downloadListIndexThread.getCachedIndexFiles() != null){
 			setListAdapter(new DownloadIndexAdapter(downloadListIndexThread.getCachedIndexFiles()));
 		} else {
@@ -459,7 +464,8 @@ public class DownloadIndexActivity extends ListActivity {
 		builder.show();
 	}
 	
-	private static final int BUFFER_SIZE = 32256; 
+	private static final int BUFFER_SIZE = 32256;
+	public static final String FILTER_KEY = "filter"; 
 	
 	private static class DownloadEntry {
 		public File fileToSave;
@@ -702,8 +708,6 @@ public class DownloadIndexActivity extends ListActivity {
 		return name.substring(0, l) + s;
 	}
 
-	
-	
 	protected class DownloadIndexAdapter extends ArrayAdapter<IndexItem> implements Filterable {
 		
 		private DownloadIndexFilter myFilter;
@@ -715,6 +719,7 @@ public class DownloadIndexActivity extends ListActivity {
 			for (Entry<String, IndexItem> entry : indexFiles.entrySet()) {
 				add(entry.getValue());
 			}
+			getFilter().filter(filterText.getText());
 		}
 
 		public Map<String, IndexItem> getIndexFiles() {
@@ -786,6 +791,8 @@ public class DownloadIndexActivity extends ListActivity {
 					List<IndexItem> filter = new ArrayList<IndexItem>();
 					for (IndexItem item : indexFiles.values()) {
 						if (item.getVisibleName().toLowerCase().contains(lowerCase)) {
+							filter.add(item);
+						} else if (item.getDescription().toLowerCase().contains(lowerCase)) {
 							filter.add(item);
 						}
 					}
