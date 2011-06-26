@@ -406,7 +406,10 @@ public class ResourceManager {
 		for (String asset : resourcesToCopy.keySet()) {
 			String destination = resourcesToCopy.get(asset);
 			File file = new File(dir, destination);
-			file.mkdirs();
+			if(file.exists()){
+				Algoritms.removeAllFiles(file);
+			}
+			file.getParentFile().mkdirs();
 			InputStream is = assetManager.open(asset, AssetManager.ACCESS_STREAMING);
 			FileOutputStream out = new FileOutputStream(file);
 			Algoritms.streamCopy(is, out);

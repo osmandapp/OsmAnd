@@ -4,6 +4,7 @@ import net.osmand.OsmAndFormatter;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -21,6 +22,7 @@ import android.view.WindowManager;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 
 public class MapControlsLayer implements OsmandMapLayer {
@@ -48,6 +50,7 @@ public class MapControlsLayer implements OsmandMapLayer {
 	private Drawable zoomShadow;
 	
 	private Button backToMenuButton;
+	private Drawable modeShadow;
 	
 	private Drawable rulerDrawable;
 	private TextPaint rulerTextPaint;
@@ -83,6 +86,7 @@ public class MapControlsLayer implements OsmandMapLayer {
 		initRuler(view, parent);
 		
 		initTransparencyBar(view, parent);
+		
 	}
 
 	@Override
@@ -101,6 +105,8 @@ public class MapControlsLayer implements OsmandMapLayer {
 			zoomOutButton.setEnabled(zoomOutEnabled);
 		}
 		
+		drawApplicationMode(canvas);
+		
 		if(view.isZooming()){
 			showZoomLevel = true;
 			showUIHandler.removeMessages(SHOW_ZOOM_LEVEL_MSG_ID);
@@ -117,6 +123,31 @@ public class MapControlsLayer implements OsmandMapLayer {
 	}
 
 
+	private ApplicationMode cacheApplicationMode = null;
+	private Drawable cacheAppModeIcon = null;
+	private void drawApplicationMode(Canvas canvas) {
+		ApplicationMode  appMode = view.getSettings().getApplicationMode();
+		if(appMode != cacheApplicationMode){
+			modeShadow.setBounds(backToMenuButton.getLeft() + (int) (2 * dm.density), backToMenuButton.getTop() - (int) (20 * dm.density),
+					backToMenuButton.getRight() - (int) (4 * dm.density), backToMenuButton.getBottom());
+			if(appMode == ApplicationMode.BICYCLE){
+				cacheAppModeIcon = view.getResources().getDrawable(R.drawable.bicycle_small);
+			} else if(appMode == ApplicationMode.CAR){
+				cacheAppModeIcon = view.getResources().getDrawable(R.drawable.car_small);
+			} else {
+				cacheAppModeIcon = view.getResources().getDrawable(R.drawable.pedestrian_small);
+			}
+			int l = modeShadow.getBounds().left + (modeShadow.getBounds().width() - cacheAppModeIcon.getMinimumWidth()) / 2;
+			int t = (int) (modeShadow.getBounds().top + 5 * dm.density);
+			cacheAppModeIcon.setBounds(l, t, l + cacheAppModeIcon.getMinimumWidth(), t + cacheAppModeIcon.getMinimumHeight());	
+		}
+		modeShadow.draw(canvas);
+		if(cacheAppModeIcon != null){
+			cacheAppModeIcon.draw(canvas);
+		}
+		
+	}
+	
 	
 	private void drawZoomLevel(Canvas canvas) {
 		String zoomText = view.getZoom() + "";
@@ -166,6 +197,8 @@ public class MapControlsLayer implements OsmandMapLayer {
 		parent.addView(backToMenuButton, params);
 		backToMenuButton.setEnabled(true);
 		
+		modeShadow = view.getResources().getDrawable(R.drawable.zoom_background);
+		
 		
 		backToMenuButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -187,6 +220,13 @@ public class MapControlsLayer implements OsmandMapLayer {
 	private void initZoomButtons(final OsmandMapTileView view, FrameLayout parent) {
 		int minimumWidth = view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumWidth();
 		
+		ImageView bottomShadow = new ImageView(view.getContext());
+		bottomShadow.setBackgroundResource(R.drawable.bottom_shadow);
+		android.widget.FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT,
+					Gravity.BOTTOM);
+		params.setMargins(0, 0, 0, 0);
+		parent.addView(bottomShadow, params);
+		
 		zoomTextPaint = new TextPaint();
 		zoomTextPaint.setTextSize(18 * dm.density);
 		zoomTextPaint.setAntiAlias(true);
@@ -196,7 +236,7 @@ public class MapControlsLayer implements OsmandMapLayer {
 		
 		zoomInButton = new Button(view.getContext());
 		zoomInButton.setBackgroundResource(R.drawable.map_zoom_in);
-		android.widget.FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
+		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 					Gravity.BOTTOM | Gravity.RIGHT);
 		params.setMargins(0, 0, 0, 0);
 		parent.addView(zoomInButton, params);
