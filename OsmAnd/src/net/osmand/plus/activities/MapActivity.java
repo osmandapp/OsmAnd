@@ -327,8 +327,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		favouritesButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent settings = new Intent(MapActivity.this, FavouritesActivity.class);
-				MapActivity.this.startActivity(settings);
+				final Intent favorites = new Intent(MapActivity.this, FavouritesActivity.class);
+				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				MapActivity.this.startActivity(favorites);
 				dlg.dismiss();
 			}
 		});
