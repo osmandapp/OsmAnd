@@ -3,7 +3,6 @@ package net.osmand.plus.views;
 import net.osmand.Algoritms;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RoutingHelper.RouteDirectionInfo;
@@ -246,9 +245,6 @@ public class MapInfoLayer implements OsmandMapLayer {
 					paintBlack);
 		}
 		
-		// draw ruler
-		// drawRuler(canvas);
-	
 		// draw route information
 		drawRouteInfo(canvas);
 		
@@ -260,61 +256,6 @@ public class MapInfoLayer implements OsmandMapLayer {
 	}
 	
 	
-	// cache values for ruler
-	int rulerDistPix = 0;
-	String rulerDistName = null;
-	int rulerBaseLine = 50;
-	float rulerTextLen = 0;
-	// cache properties
-	int rulerCZoom = 0;
-	double rulerCTileX = 0;
-	double rulerCTileY = 0;
-
-	
-	private void drawRuler(Canvas canvas) {
-		// occupy length over screen
-		double screenPercent = 0.2;
-		
-				
-		// update cache
-		if (view.isZooming()) {
-			rulerDistName = null;
-		} else if(view.getZoom() != rulerCZoom || 
-				Math.abs(view.getXTile() - rulerCTileX) +  Math.abs(view.getYTile() - rulerCTileY) > 1){
-			rulerCZoom = view.getZoom();
-			rulerCTileX = view.getXTile();
-			rulerCTileY = view.getYTile();
-			double latitude = view.getLatitude();
-			double tileNumberLeft = rulerCTileX - ((double) view.getWidth()) / (2d * view.getTileSize());
-			double tileNumberRight = rulerCTileX + ((double) view.getWidth()) / (2d * view.getTileSize());
-			double dist = MapUtils.getDistance(latitude, MapUtils.getLongitudeFromTile(view.getZoom(), tileNumberLeft), latitude,
-					MapUtils.getLongitudeFromTile(view.getZoom(), tileNumberRight));
-
-			dist *= screenPercent;
-			int baseDist = 5;
-			byte pointer = 0;
-			while (dist > baseDist) {
-				if (pointer++ % 3 == 2) {
-					baseDist = baseDist * 5 / 2;
-				} else {
-					baseDist *= 2;
-				}
-			}
-
-			rulerDistPix = (int) (view.getWidth() * screenPercent / dist * baseDist);
-			rulerDistName = OsmAndFormatter.getFormattedDistance(baseDist, map);
-			rulerBaseLine = (int) (view.getHeight() - 50 * dm.density);
-			rulerTextLen = paintBlack.measureText(rulerDistName);
-		} 
-		if (rulerDistName != null) {
-			int w2 = (int) (view.getWidth() - 5 * dm.density);
-			canvas.drawLine(w2 - rulerDistPix, rulerBaseLine, w2, rulerBaseLine, paintBlack);
-			canvas.drawLine(w2 - rulerDistPix, rulerBaseLine, w2 - rulerDistPix, rulerBaseLine - 10 * dm.density, paintBlack);
-			canvas.drawLine(w2, rulerBaseLine, w2, rulerBaseLine - 10 * dm.density, paintBlack);
-			canvas.drawText(rulerDistName, w2 - (rulerDistPix + rulerTextLen)/2 + 1, rulerBaseLine - 5 * dm.density, paintBlack);
-		}
-	}
-
 	private void drawRouteInfo(Canvas canvas) {
 		if(routeLayer != null && routeLayer.getHelper().isRouterEnabled()){
 			if (routeLayer.getHelper().isFollowingMode()) {
