@@ -11,11 +11,44 @@ import android.content.Context;
 
 public class OsmAndFormatter {
 	private final static float METERS_IN_KILOMETER = 1000f;
-	private final static float METERS_IN_MILE = 1609.344f; // 1609.344
-	private final static float YARDS_IN_METER = 1.0936f;
-	private final static float FOOTS_IN_METER = YARDS_IN_METER * 3f; 
+	private final static float METERS_IN_ONE_MILE = 1609.344f; // 1609.344
+	private final static float YARDS_IN_ONE_METER = 1.0936f;
+	private final static float FOOTS_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
 	
-	public static String getFormattedDistance(int meters, Context ctx) {
+	public static double calculateRoundedDist(double distInMeters, Context ctx) {
+		OsmandSettings settings = OsmandSettings.getOsmandSettings(ctx);
+		MetricsConstants mc = settings.METRIC_SYSTEM.get();
+		float mainUnitInMeter = 1;
+		float metersInSecondUnit = METERS_IN_KILOMETER; 
+		if (mc == MetricsConstants.MILES_AND_FOOTS) {
+			mainUnitInMeter = FOOTS_IN_ONE_METER;
+			metersInSecondUnit = METERS_IN_ONE_MILE;
+		} else if(mc == MetricsConstants.MILES_AND_YARDS){
+			mainUnitInMeter = YARDS_IN_ONE_METER;
+			metersInSecondUnit = METERS_IN_ONE_MILE ;
+		}
+		// 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000 ...
+		
+		int generator = 5;
+		byte pointer = 0;
+		float point = mainUnitInMeter;
+		while(distInMeters * point > generator){
+			if (pointer++ % 3 == 2) {
+				generator = generator * 5 / 2;
+			} else {
+				generator *= 2;
+			}
+			if(point == mainUnitInMeter && metersInSecondUnit * mainUnitInMeter * 0.9f <= generator ){
+				point = 1 / metersInSecondUnit;
+				generator = 1;
+				pointer = 1;
+			}
+		}
+		
+		return (generator / point);
+	}
+	
+	public static String getFormattedDistance(float meters, Context ctx) {
 		OsmandSettings settings = OsmandSettings.getOsmandSettings(ctx);
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		int mainUnitStr;
@@ -25,7 +58,7 @@ public class OsmAndFormatter {
 			mainUnitInMeters = METERS_IN_KILOMETER;
 		} else {
 			mainUnitStr = R.string.mile;
-			mainUnitInMeters = METERS_IN_MILE;
+			mainUnitInMeters = METERS_IN_ONE_MILE;
 		}
 
 		if (meters >= 100 * mainUnitInMeters) {
@@ -36,15 +69,15 @@ public class OsmAndFormatter {
 			return MessageFormat.format("{0,number,#.##} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters); //$NON-NLS-1$
 		} else {
 			if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
-				return meters + " " + ctx.getString(R.string.m); //$NON-NLS-1$
+				return ((int) meters) + " " + ctx.getString(R.string.m); //$NON-NLS-1$
 			} else if (mc == MetricsConstants.MILES_AND_YARDS) {
-				int yards = (int) (meters * YARDS_IN_METER);
+				int yards = (int) (meters * YARDS_IN_ONE_METER);
 				return yards + " " + ctx.getString(R.string.yard); //$NON-NLS-1$
-			} else if(mc == MetricsConstants.MILES_AND_FOOTS) {
-				int foots = (int) (meters * FOOTS_IN_METER);
+			} else if (mc == MetricsConstants.MILES_AND_FOOTS) {
+				int foots = (int) (meters * FOOTS_IN_ONE_METER);
 				return foots + " " + ctx.getString(R.string.foot); //$NON-NLS-1$
 			}
-			return meters + " " + ctx.getString(R.string.m); //$NON-NLS-1$
+			return ((int) meters) + " " + ctx.getString(R.string.m); //$NON-NLS-1$
 		}
 	}
 	
@@ -55,7 +88,7 @@ public class OsmAndFormatter {
 		if(mc == MetricsConstants.KILOMETERS_AND_METERS){
 			return ((int) kmh) + ctx.getString(R.string.km_h);
 		} else {
-			return ((int) (kmh * METERS_IN_KILOMETER / METERS_IN_MILE)) + ctx.getString(R.string.mile_per_hour);
+			return ((int) (kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE)) + ctx.getString(R.string.mile_per_hour);
 		}
 	}
 	

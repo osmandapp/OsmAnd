@@ -7,9 +7,10 @@ import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.activities.MapActivity;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextPaint;
@@ -20,7 +21,6 @@ import android.view.WindowManager;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.SeekBar;
 
 public class MapControlsLayer implements OsmandMapLayer {
@@ -29,26 +29,32 @@ public class MapControlsLayer implements OsmandMapLayer {
 	private static final int SHOW_SEEKBAR_DELAY = 7000;
 	private static final int SHOW_SEEKBAR_SECOND_DELAY = 25000;
 	
+	private static final int SHOW_ZOOM_LEVEL_MSG_ID = 3;
+	private static final int SHOW_ZOOM_LEVEL_DELAY = 2000;
+	
 
 	private OsmandMapTileView view;
 	private DisplayMetrics dm;
 	private final MapActivity activity;
 	private Handler showUIHandler;
 	
+	private boolean showZoomLevel = false;
+	
+	
 	private Button zoomInButton;
-	private int ZOOM_IN_LEFT_MARGIN = 2;
 	private Button zoomOutButton;
+	
 	private TextPaint zoomTextPaint;
+	private Drawable zoomShadow;
 	
 	private Button backToMenuButton;
 	
-	
-	// transparency bar
+	private Drawable rulerDrawable;
+	private TextPaint rulerTextPaint;
+	private final static double screenRulerPercent = 0.25;
 	private SeekBar transparencyBar;
 	private CommonPreference<Integer> settingsToTransparency;
 	private BaseMapLayer[] transparencyLayers;
-	
-	
 	
 
 	public MapControlsLayer(MapActivity activity){
@@ -74,10 +80,10 @@ public class MapControlsLayer implements OsmandMapLayer {
 
 		initBackToMenuButton(view, parent);
 		
+		initRuler(view, parent);
+		
 		initTransparencyBar(view, parent);
 	}
-
-
 
 	@Override
 	public void destroyLayer() {
@@ -95,10 +101,49 @@ public class MapControlsLayer implements OsmandMapLayer {
 			zoomOutButton.setEnabled(zoomOutEnabled);
 		}
 		
-		String zoomText = view.getZoom()+"";
+		if(view.isZooming()){
+			showZoomLevel = true;
+			showUIHandler.removeMessages(SHOW_ZOOM_LEVEL_MSG_ID);
+		} else {
+			if(showZoomLevel){
+				hideZoomLevelInTime();
+			}
+		}
+		if (showZoomLevel) {
+			drawZoomLevel(canvas);
+		} else {
+			drawRuler(canvas);
+		}
+	}
+
+
+	
+	private void drawZoomLevel(Canvas canvas) {
+		String zoomText = view.getZoom() + "";
 		float length = zoomTextPaint.measureText(zoomText);
-		canvas.drawText(zoomText, zoomInButton.getLeft() + (zoomInButton.getWidth() - length - (ZOOM_IN_LEFT_MARGIN * dm.density) ) / 2, zoomInButton.getTop() + 4 * dm.density,
-				zoomTextPaint);  
+		if (zoomShadow.getBounds().width() == 0) {
+			zoomShadow.setBounds(zoomInButton.getLeft() - 2, zoomInButton.getTop() - (int) (18 * dm.density), zoomInButton.getRight()
+					, zoomInButton.getBottom());
+		}
+		zoomShadow.draw(canvas);
+				
+		canvas.drawText(zoomText, zoomInButton.getLeft() + (zoomInButton.getWidth() - length - 2) / 2,
+				zoomInButton.getTop() + 4 * dm.density, zoomTextPaint);
+	}
+	
+	private void hideZoomLevelInTime(){
+		if (!showUIHandler.hasMessages(SHOW_ZOOM_LEVEL_MSG_ID)) {
+			Message msg = Message.obtain(showUIHandler, new Runnable() {
+				@Override
+				public void run() {
+					showZoomLevel = false;
+					view.refreshMap();
+				}
+
+			});
+			msg.what = SHOW_ZOOM_LEVEL_MSG_ID;
+			showUIHandler.sendMessageDelayed(msg, SHOW_ZOOM_LEVEL_DELAY);
+		}
 	}
 
 	@Override
@@ -130,25 +175,28 @@ public class MapControlsLayer implements OsmandMapLayer {
 		});
 	}
 	
+	private void initRuler(OsmandMapTileView view, FrameLayout parent) {
+		rulerTextPaint = new TextPaint();
+		rulerTextPaint.setTextSize(20 * dm.density);
+		rulerTextPaint.setAntiAlias(true);
+		
+		
+		rulerDrawable = view.getResources().getDrawable(R.drawable.ruler);
+	}
+	
 	private void initZoomButtons(final OsmandMapTileView view, FrameLayout parent) {
 		int minimumWidth = view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumWidth();
-		int minimumHeight = view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumHeight();
 		
 		zoomTextPaint = new TextPaint();
 		zoomTextPaint.setTextSize(18 * dm.density);
 		zoomTextPaint.setAntiAlias(true);
 		zoomTextPaint.setFakeBoldText(true);
 		
-		ImageView zoomShadow = new ImageView(view.getContext());
-		zoomShadow.setBackgroundResource(R.drawable.zoom_background);
-		android.widget.FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(minimumWidth + (int) (ZOOM_IN_LEFT_MARGIN * dm.density), 
-				minimumHeight + (int) (18 * dm.density), Gravity.BOTTOM | Gravity.RIGHT);
-		params.setMargins(0, 0, 0, 0);
-		parent.addView(zoomShadow, params);
+		zoomShadow = view.getResources().getDrawable(R.drawable.zoom_background);
 		
 		zoomInButton = new Button(view.getContext());
 		zoomInButton.setBackgroundResource(R.drawable.map_zoom_in);
-		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
+		android.widget.FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 					Gravity.BOTTOM | Gravity.RIGHT);
 		params.setMargins(0, 0, 0, 0);
 		parent.addView(zoomInButton, params);
@@ -244,62 +292,52 @@ public class MapControlsLayer implements OsmandMapLayer {
 	}
 	
 	
-	
-	
 	/////////////////////// Ruler ///////////////////
 	// cache values for ruler
-	int rulerDistPix = 0;
-	String rulerDistName = null;
-	int rulerBaseLine = 50;
-	float rulerTextLen = 0;
-	// cache properties
-	int rulerCZoom = 0;
-	double rulerCTileX = 0;
-	double rulerCTileY = 0;
+	String cacheRulerText = null;
+	int cacheRulerZoom = 0;
+	double cacheRulerTileX = 0;
+	double cacheRulerTileY = 0;
+	float cacheRulerTextLen = 0;	
 	
 	private void drawRuler(Canvas canvas) {
-		// occupy length over screen
-		double screenPercent = 0.2;
-		
-				
 		// update cache
 		if (view.isZooming()) {
-			rulerDistName = null;
-		} else if(view.getZoom() != rulerCZoom || 
-				Math.abs(view.getXTile() - rulerCTileX) +  Math.abs(view.getYTile() - rulerCTileY) > 1){
-			rulerCZoom = view.getZoom();
-			rulerCTileX = view.getXTile();
-			rulerCTileY = view.getYTile();
+			cacheRulerText = null;
+		} else if(view.getZoom() != cacheRulerZoom || 
+				Math.abs(view.getXTile() - cacheRulerTileX) +  Math.abs(view.getYTile() - cacheRulerTileY) > 1){
+			cacheRulerZoom = view.getZoom();
+			cacheRulerTileX = view.getXTile();
+			cacheRulerTileY = view.getYTile();
 			double latitude = view.getLatitude();
-			double tileNumberLeft = rulerCTileX - ((double) view.getWidth()) / (2d * view.getTileSize());
-			double tileNumberRight = rulerCTileX + ((double) view.getWidth()) / (2d * view.getTileSize());
+			double tileNumberLeft = cacheRulerTileX - ((double) view.getWidth()) / (2d * view.getTileSize());
+			double tileNumberRight = cacheRulerTileX + ((double) view.getWidth()) / (2d * view.getTileSize());
 			double dist = MapUtils.getDistance(latitude, MapUtils.getLongitudeFromTile(view.getZoom(), tileNumberLeft), latitude,
 					MapUtils.getLongitudeFromTile(view.getZoom(), tileNumberRight));
-
-			dist *= screenPercent;
-			int baseDist = 5;
-			byte pointer = 0;
-			while (dist > baseDist) {
-				if (pointer++ % 3 == 2) {
-					baseDist = baseDist * 5 / 2;
-				} else {
-					baseDist *= 2;
-				}
-			}
-
-			rulerDistPix = (int) (view.getWidth() * screenPercent / dist * baseDist);
-			rulerDistName = OsmAndFormatter.getFormattedDistance(baseDist, view.getContext());
-			rulerBaseLine = (int) (view.getHeight() - 50 * dm.density);
-			rulerTextLen = zoomTextPaint.measureText(rulerDistName);
+			double pixDensity = view.getWidth() / dist; 
+			
+			double roundedDist = OsmAndFormatter.calculateRoundedDist(dist * screenRulerPercent, view.getContext());
+			
+			int cacheRulerDistPix = (int) (pixDensity * roundedDist);
+			cacheRulerText = OsmAndFormatter.getFormattedDistance((float) roundedDist, view.getContext());
+			cacheRulerTextLen = zoomTextPaint.measureText(cacheRulerText);
+			
+			Rect bounds = rulerDrawable.getBounds();
+			bounds.right = (int) (view.getWidth() - 7 * dm.density);
+			bounds.bottom = (int) (view.getHeight() - view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumHeight());
+			bounds.top = bounds.bottom - rulerDrawable.getMinimumHeight();
+			bounds.left = bounds.right - cacheRulerDistPix;
+			rulerDrawable.setBounds(bounds);
 		} 
-		if (rulerDistName != null) {
-			int w2 = (int) (view.getWidth() - 5 * dm.density);
-			canvas.drawLine(w2 - rulerDistPix, rulerBaseLine, w2, rulerBaseLine, zoomTextPaint);
-			canvas.drawLine(w2 - rulerDistPix, rulerBaseLine, w2 - rulerDistPix, rulerBaseLine - 10 * dm.density, zoomTextPaint);
-			canvas.drawLine(w2, rulerBaseLine, w2, rulerBaseLine - 10 * dm.density, zoomTextPaint);
-			canvas.drawText(rulerDistName, w2 - (rulerDistPix + rulerTextLen)/2 + 1, rulerBaseLine - 5 * dm.density, zoomTextPaint);
+		if (cacheRulerText != null) {
+			rulerDrawable.draw(canvas);
+			Rect bounds = rulerDrawable.getBounds();
+			canvas.drawText(cacheRulerText, bounds.left + (bounds.width() - cacheRulerTextLen) / 2, bounds.bottom - 8 * dm.density,
+					rulerTextPaint);
 		}
 	}
+
+
 	
 
 }
