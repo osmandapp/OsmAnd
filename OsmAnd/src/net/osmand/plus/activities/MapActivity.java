@@ -289,23 +289,25 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     }
     
     
-    public void backToMainMenu(){
-    	final Dialog dlg = new Dialog(this, R.style.Dialog_Fullscreen);
-    	final View view = (View) getLayoutInflater().inflate(R.layout.menu, null);
-    	view.setBackgroundColor(Color.argb(200, 150, 150, 150));
-    	dlg.setContentView(view);
-    	MainMenuActivity.onCreateMainMenu(dlg.getWindow(), this);
+    
+    
+	public void backToMainMenu() {
+		final Dialog dlg = new Dialog(this, R.style.Dialog_Fullscreen);
+		final View menuView = (View) getLayoutInflater().inflate(R.layout.menu, null);
+		menuView.setBackgroundColor(Color.argb(200, 150, 150, 150));
+		dlg.setContentView(menuView);
+		MainMenuActivity.onCreateMainMenu(dlg.getWindow(), this);
 		Animation anim = new Animation() {
 			@Override
 			protected void applyTransformation(float interpolatedTime, Transformation t) {
-				ColorDrawable colorDraw = ((ColorDrawable) view.getBackground());
+				ColorDrawable colorDraw = ((ColorDrawable) menuView.getBackground());
 				colorDraw.setAlpha((int) (interpolatedTime * 200));
 			}
 		};
 		anim.setDuration(700);
 		anim.setInterpolator(new AccelerateInterpolator());
-		view.setAnimation(anim);
-		
+		menuView.setAnimation(anim);
+
 		View showMap = dlg.findViewById(R.id.MapButton);
 		showMap.setOnClickListener(new OnClickListener() {
 			@Override
@@ -322,7 +324,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				dlg.dismiss();
 			}
 		});
-		
+
 		View favouritesButton = dlg.findViewById(R.id.FavoritesButton);
 		favouritesButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -333,13 +335,13 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				dlg.dismiss();
 			}
 		});
-		
+
 		View closeButton = dlg.findViewById(R.id.CloseButton);
 		closeButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				dlg.dismiss();
-				
+
 				getMyApplication().closeApplication();
 				// 1. Work for almost all cases when user open apps from main menu
 				Intent newIntent = new Intent(MapActivity.this, MainMenuActivity.class);
@@ -347,14 +349,14 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				newIntent.putExtra(MainMenuActivity.APP_EXIT_KEY, MainMenuActivity.APP_EXIT_CODE);
 				startActivity(newIntent);
 				// 2. good analogue but user will come back to the current activity onResume()
-				// 	   so application is not reloaded !!!
+				// so application is not reloaded !!!
 				// moveTaskToBack(true);
 				// 3. bad results if user comes from favorites
-				//MapActivity.this.setResult(MainMenuActivity.APP_EXIT_CODE);
-				//MapActivity.this.finish();
+				// MapActivity.this.setResult(MainMenuActivity.APP_EXIT_CODE);
+				// MapActivity.this.finish();
 			}
 		});
-		
+
 		View searchButton = dlg.findViewById(R.id.SearchButton);
 		searchButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -365,19 +367,19 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				dlg.dismiss();
 			}
 		});
-		view.setOnClickListener(new OnClickListener() {
-			
+		menuView.setOnClickListener(new OnClickListener() {
+
 			@Override
 			public void onClick(View v) {
 				dlg.dismiss();
 			}
 		});
-		
+
 		dlg.show();
 		// Intent newIntent = new Intent(MapActivity.this, MainMenuActivity.class);
-		//newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		// startActivity(newIntent);    	
-    }
+		// newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		// startActivity(newIntent);
+	}
  
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -726,7 +728,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		getMyApplication().getResourceManager().setBusyIndicator(null);
 	}
 	
-	private void updateApplicationModeSettings(){
+	public void updateApplicationModeSettings(){
 		boolean currentShowingAngle = settings.SHOW_VIEW_ANGLE.get(); 
     	int currentMapRotation = settings.ROTATE_MAP.get();
 		if(currentMapRotation == OsmandSettings.ROTATE_MAP_NONE){

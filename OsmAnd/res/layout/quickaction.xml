@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+        
+     <FrameLayout
+  		android:layout_marginTop="10dip"
+        android:id="@+id/header2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/quickaction_top_frame"/>
+        
+  	<ImageView
+        android:id="@+id/arrow_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"	
+        android:src="@drawable/quickaction_arrow_up" />
+       
+    <HorizontalScrollView
+        android:id="@+id/scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:fadingEdgeLength="0dip"
+        android:layout_below="@id/header2"
+        android:paddingLeft="1dip"
+        android:background="@drawable/quickaction_slider_background"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/tracks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dip"
+            android:paddingBottom="4dip" 
+            android:orientation="horizontal">
+        
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/quickaction_slider_grip_left" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/quickaction_slider_grip_right" />
+                
+        </LinearLayout>
+            
+    </HorizontalScrollView>
+
+    <FrameLayout
+        android:id="@+id/footer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/scroll"
+        android:background="@drawable/quickaction_bottom_frame" />
+
+    <ImageView
+        android:id="@+id/arrow_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+    	android:layout_marginTop="-1dip"
+        android:layout_below="@id/footer"
+        android:src="@drawable/quickaction_arrow_down" />
+
+</RelativeLayout>
