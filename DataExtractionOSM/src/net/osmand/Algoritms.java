@@ -91,10 +91,10 @@ public class Algoritms {
 			
 	}
 	
-	public static boolean removeAllFiles(File f){
-		if(f.isDirectory()){
-			boolean deleted = true; 
-			for(File c : f.listFiles()){
+	public static boolean removeAllFiles(File f) {
+		if (f.isDirectory()) {
+			boolean deleted = true;
+			for (File c : f.listFiles()) {
 				deleted &= removeAllFiles(c);
 			}
 			return f.delete();
