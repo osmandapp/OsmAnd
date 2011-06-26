@@ -275,7 +275,7 @@
   <string name="internet_not_available">
     Internetové připojení není dostupné
   </string>
-  <string name="more_external_layer">Instalovat další...</string>
+  <string name="install_more">Instalovat další...</string>
   <string name="level_to_switch_vector_raster_descr">
     Úroveň zvětšení, od které se zobrazení přepne z rastrového na
     vektorové.

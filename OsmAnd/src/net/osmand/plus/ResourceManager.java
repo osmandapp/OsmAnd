@@ -368,10 +368,10 @@ public class ResourceManager {
 	}
 	
 	private List<String> checkAssets(IProgress progress) {
-		File file = context.getSettings().extendOsmandPath(APP_DIR);
-		file.mkdirs();
-		if(file.canWrite()){
-			if(!Version.APP_VERSION.equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get())){
+		if (!Version.APP_VERSION.equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get())) {
+			File file = context.getSettings().extendOsmandPath(APP_DIR);
+			file.mkdirs();
+			if(file.canWrite()){
 				try {
 					progress.startTask(context.getString(R.string.installing_new_resources), -1); 
 					AssetManager assetManager = context.getAssets();

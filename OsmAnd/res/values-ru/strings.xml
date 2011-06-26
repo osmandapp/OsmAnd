@@ -24,7 +24,7 @@
 	<string name="tile_source_already_installed">Карта уже установлена, настройки будут обновлены</string>
 	<string name="select_tile_source_to_install">Выберите карты для установки или обновления</string>
 	<string name="internet_not_available">Интернет соединение не доступно</string>
-	<string name="more_external_layer">Загрузить еще...</string>
+	<string name="install_more">Загрузить еще...</string>
 	<string name="level_to_switch_vector_raster_descr">Максимальный масштаб для использования векторных карт вместо растровых</string>
 	<string name="level_to_switch_vector_raster">Векторные карты</string>
 	

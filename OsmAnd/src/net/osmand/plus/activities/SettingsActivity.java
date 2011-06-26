@@ -216,20 +216,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		registerListPreference(osmandSettings.PREFERRED_LOCALE, screen, entries, entrieValues);
 		
-		Set<String> voiceFiles = getVoiceFiles();
-		entries = new String[voiceFiles.size() + 1];
-		entrieValues = new String[voiceFiles.size() + 1];
-		int k = 0;
-//		entries[k++] = getString(R.string.voice_not_specified);
-		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
-		entries[k++] = getString(R.string.voice_not_use);
-		for (String s : voiceFiles) {
-			entries[k] = s;
-			entrieValues[k] = s;
-			k++;
-		}
-		registerListPreference(osmandSettings.VOICE_PROVIDER, screen, entries, entrieValues);
-		
 		int startZoom = 12;
 		int endZoom = 19;
 		entries = new String[endZoom - startZoom + 1];
@@ -328,6 +314,26 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
     }
 
+	private void reloadVoiceListPreference(PreferenceScreen screen) {
+		String[] entries;
+		String[] entrieValues;
+		Set<String> voiceFiles = getVoiceFiles();
+		entries = new String[voiceFiles.size() + 2];
+		entrieValues = new String[voiceFiles.size() + 2];
+		int k = 0;
+//		entries[k++] = getString(R.string.voice_not_specified);
+		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
+		entries[k++] = getString(R.string.voice_not_use);
+		for (String s : voiceFiles) {
+			entries[k] = s;
+			entrieValues[k] = s;
+			k++;
+		}
+		entrieValues[k] = MORE_VALUE;
+		entries[k] = getString(R.string.install_more);
+		registerListPreference(osmandSettings.VOICE_PROVIDER, screen, entries, entrieValues);
+	}
+
 	private void updateApplicationDirTextAndSummary() {
 		String storageDir = osmandSettings.getExternalStorageDirectory().getAbsolutePath();
 		applicationDir.setText(storageDir);
@@ -362,6 +368,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     		pref.setValue(b.get());
     	}
     	
+    	reloadVoiceListPreference(getPreferenceScreen());
+    	
     	for(OsmandPreference<?> p : listPreferences.values()){
     		ListPreference listPref = (ListPreference) screenPreferences.get(p.getId());
     		Map<String, ?> prefValues = listPrefValues.get(p.getId());
@@ -385,7 +393,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     	
     	// Specific properties
 		routeServiceEnabled.setChecked(getMyApplication().getNavigationService() != null);
-		
 		
 		updateTileSourceSummary();
 		
@@ -425,7 +432,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			values[ki] = es.getKey();
 			ki++;
 		}
-		entries[ki] = getString(R.string.more_external_layer);
+		entries[ki] = getString(R.string.install_more);
 		values[ki] = MORE_VALUE;
 		fill(tileSourcePreference, entries, values, value);
 	}
@@ -464,12 +471,20 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			CharSequence entry = ((ListPreference) preference).getEntries()[ind];
 			Map<String, ?> map = listPrefValues.get(preference.getKey());
 			Object obj = map.get(entry);
+			final Object oldValue = listPref.get();
 			boolean changed = listPref.set(obj);
 			
 			// Specific actions after list preference changed
 			if (changed) {
 				if (listPref.getId().equals(osmandSettings.VOICE_PROVIDER.getId())) {
-					getMyApplication().showDialogInitializingCommandPlayer(this, false);
+					if (MORE_VALUE.equals(newValue)) {
+						listPref.set(oldValue); //revert the change..
+						final Intent intent = new Intent(this, DownloadIndexActivity.class);
+						intent.putExtra(DownloadIndexActivity.FILTER_KEY, "voice");
+						startActivity(intent);
+					} else {
+						getMyApplication().showDialogInitializingCommandPlayer(this, false);
+					}
 				} else if (listPref.getId().equals(osmandSettings.APPLICATION_MODE.getId())) {
 					updateAllSettings();
 				} else if (listPref.getId().equals(osmandSettings.PREFERRED_LOCALE.getId())) {
@@ -556,6 +571,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	}
 
 	public void reloadIndexes(){
+		reloadVoiceListPreference(getPreferenceScreen());
 		progressDlg = ProgressDialog.show(this, getString(R.string.loading_data), getString(R.string.reading_indexes), true);
 		final ProgressDialogImplementation impl = new ProgressDialogImplementation(progressDlg);
 		impl.setRunnable("Initializing app", new Runnable(){ //$NON-NLS-1$
