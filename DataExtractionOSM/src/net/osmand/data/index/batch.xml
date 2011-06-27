@@ -138,24 +138,17 @@
 
 		<!-- USA-AVAILABLE ON GEOFABRIK.DE [SOURCE: GEOFABRIK.DE] (REST OF USA IS BELOW FROM CLOUDMADE.COM) -->
 		<regions siteToDownload="http://download.geofabrik.de/osm/north-america/us/{0}.osm.pbf" skip="true" region_prefix="US_" region_suffix="_NorthAmerica">
-			<region name="california" esize=""/>
-			<region name="florida" esize=""/>
-			<region name="oregon" esize=""/>
-			<region name="texas" esize=""/>
-		</regions>
-		
-		<!-- USA [SOURCE: CLOUDMADE.COM]-->
-		<regions siteToDownload="http://downloads.cloudmade.com/americas/northern_america/united_states/{0}/{0}.osm.bz2" skip="true" region_prefix="US_" region_suffix="_NorthAmerica">
 			<region name="alabama" esize=""/>
 			<region name="alaska" esize=""/>
 			<region name="arizona" esize=""/>
 			<region name="arkansas" esize=""/>
+			<region name="california" esize=""/>
 			<region name="colorado" esize=""/>
 			<region name="connecticut" esize=""/>
 			<region name="delaware" esize=""/>
-			<region name="district_of_columbia" esize=""/>
+			<region name="district-of-columbia" esize=""/>
+			<region name="florida" esize=""/>
 			<region name="georgia" esize=""/>
-			<region name="guantanamo_bay" esize=""/> <!-- ??? -->
 			<region name="hawaii" esize=""/>
 			<region name="idaho" esize=""/>
 			<region name="illinois" esize=""/>
@@ -174,26 +167,35 @@
 			<region name="montana" esize=""/>
 			<region name="nebraska" esize=""/>
 			<region name="nevada" esize=""/>
-			<region name="new_hampshire" esize=""/>
-			<region name="new_jersey" esize=""/>
-			<region name="new_mexico" esize=""/>
-			<region name="new_york" esize=""/>
-			<region name="north_dakota" esize=""/>
+			<region name="newhampshire" esize=""/>
+			<region name="new-jersey" esize=""/>
+			<region name="new-mexico" esize=""/>
+			<region name="new-york" esize=""/>
+			<region name="north-carolina" esize=""/>
+			<region name="north-dakota" esize=""/>
 			<region name="ohio" esize=""/>
-			<region name="oklahoma" esize=""/>
+			<region name="oklahoma" esize=""/>			
+			<region name="oregon" esize=""/>
+			<region name="texas" esize=""/>
 			<region name="pennsylvania" esize=""/>
-			<region name="rhode_island" esize=""/>
-			<region name="south_carolina" esize=""/>
-			<region name="south_dakota" esize=""/>
+			<region name="rhode-island" esize=""/>
+			<region name="south-carolina" esize=""/>
+			<region name="south-dakota" esize=""/>
 			<region name="tennessee" esize=""/>
 			<region name="utah" esize=""/>
 			<region name="vermont" esize=""/>
+			<region name="virginia" esize=""/>
 			<region name="washington" esize=""/>
-			<region name="west_virginia" esize=""/>
+			<region name="west-virginia" esize=""/>
 			<region name="wisconsin" esize=""/>
 			<region name="wyoming" esize=""/>
-			<region name="virginia" esize=""/>
-			<region name="north_carolina" esize=""/>
+			
+		</regions>
+		
+		<!-- USA [SOURCE: CLOUDMADE.COM]-->
+		<regions siteToDownload="http://downloads.cloudmade.com/americas/northern_america/united_states/{0}/{0}.osm.bz2" skip="true" region_prefix="US_" region_suffix="_NorthAmerica">
+			
+			<region name="guantanamo_bay" esize=""/> <!-- ??? -->
 		</regions>
 		
 		<!-- USA MINOR OUTLYING ISLANDS [SOURCE: CLOUDMADE.COM] -->
@@ -209,29 +211,24 @@
 			<region name="wake" esize=""/>
 		</regions>
 		
-		<!-- CANADA-AVAILABLE ON GEOFABRIK.DE [SOURCE: GEOFABRIK.DE] (REST OF CANADA IS BELOW FROM CLOUDMADE.COM) -->
+		<!-- CANADA [SOURCE: GEOFABRIK.DE] -->
 		<regions siteToDownload="http://download.geofabrik.de/osm/north-america/canada/{0}.osm.pbf" region_prefix="Canada_" skip="true" region_suffix="_NorthAmerica">
-			<region name="ontario" esize=""/>
-			<region name="quebec" esize=""/>
-		</regions>
-		
-		
-		<!-- Canada [SOURCE: CLOUDMADE.COM]-->
-		<regions siteToDownload="http://downloads.cloudmade.com/americas/northern_america/canada/{0}/{0}.osm.bz2" region_prefix="Canada_" skip="true" region_suffix="_NorthAmerica">
 			<region name="alberta" esize="36"/>
-			<region name="british_columbia" esize=""/>
+			<region name="british-columbia" esize=""/>
 			<region name="manitoba" esize=""/>
-			<region name="new_brunswick" esize=""/>
-			<region name="newfoundland" esize=""/>
-			<region name="nova_scotia" esize=""/>
+			<region name="new-brunswick" esize=""/>
+			<region name="newfoundland-and-labrador" esize=""/>
+			<region name="northwest-territories" esize=""/>
+			<region name="nova-scotia" esize=""/>
 			<region name="nunavut" esize=""/>
-			<region name="nw_territories" esize=""/>
-			<region name="pr_edwrd_island" esize=""/>
+			<region name="ontario" esize=""/>
+			<region name="prince-edward-island" esize=""/>
+			<region name="quebec" esize=""/>
 			<region name="saskatchewan" esize=""/>
 			<region name="yukon" esize=""/>
-		</regions>
+			</regions>
 		
-		<!-- Russia [GIS-LAB.INFO]-->
+		<!-- Russia [GIS-LAB.INFO] -->
 		<regions siteToDownload="http://gis-lab.info/data/osm/{0}/{0}.osm.bz2" region_prefix="Russia_"  skip="true" region_suffix="_Asia">
 			<region name="adygeya" esize=""/>
 			<region name="altay" esize=""/>
