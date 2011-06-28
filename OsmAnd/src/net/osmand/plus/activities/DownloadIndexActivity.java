@@ -48,6 +48,7 @@ import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -119,9 +120,12 @@ public class DownloadIndexActivity extends ListActivity {
 
 	    filterText = (EditText) findViewById(R.id.search_box);
 		filterText.addTextChangedListener(textWatcher);
-		final String filter = getIntent().getExtras().getString(FILTER_KEY);
-		if (filter != null) {
-			filterText.setText(filter);
+		final Intent intent = getIntent();
+		if (intent != null && intent.getExtras() != null) {
+			final String filter = intent.getExtras().getString(FILTER_KEY);
+			if (filter != null) {
+				filterText.setText(filter);
+			}
 		}
 		
 		if(downloadListIndexThread.getCachedIndexFiles() != null){
