@@ -19,6 +19,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import net.osmand.data.preparation.MapZooms;
+import net.osmand.data.preparation.MapZooms.MapZoomPair;
+
 public class OsmExtractionPreferencesDialog extends JDialog {
 	
 	private static final long serialVersionUID = -4862884032977071296L;
@@ -202,7 +205,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		constr.gridy = 1;
 		l.setConstraints(streetDefaultSuffixes, constr);
 		
-		label = new JLabel("Map zooms (specify zoom levels in binary map <= 4)"); 
+		label = new JLabel("Map zooms (specify zoom levels in binary map) example - " + MapZooms.MAP_ZOOMS_DEFAULT); 
 		panel.add(label);
 		constr = new GridBagConstraints();
 		constr.ipadx = 5;

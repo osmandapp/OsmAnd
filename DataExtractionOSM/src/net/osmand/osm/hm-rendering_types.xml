@@ -249,78 +249,78 @@
 
 
  <type id="11" name="shop">
-  <subtype id="41" point="true" tag="shop" value="alcohol" minzoom="16" />
-  <subtype id="42" point="true" tag="shop" value="bakery" minzoom="16" />
-  <subtype id="43" point="true" tag="shop" value="beauty" minzoom="16" />
-  <subtype id="44" point="true" tag="shop" value="beverages" minzoom="16" />
-  <subtype id="45" point="true" tag="shop" value="bicycle" minzoom="16" />
-  <subtype id="46" point="true" tag="shop" value="books" minzoom="16" />
-  <subtype id="47" point="true" tag="shop" value="boutique" minzoom="16" />
-  <subtype id="48" point="true" tag="shop" value="butcher" minzoom="16" />
-  <subtype id="49" point="true" tag="shop" value="car" minzoom="16" />
-  <subtype id="50" point="true" tag="shop" value="car_repair" minzoom="16" />
-  <subtype id="11" point="true" tag="shop" value="charity" minzoom="16" />
-  <subtype id="12" point="true" tag="shop" value="chemist" minzoom="16" />
-  <subtype id="13" point="true" tag="shop" value="clothes" minzoom="16" />
-  <subtype id="13" point="true" tag="shop" value="fashion" minzoom="16" />
-  <subtype id="14" point="true" tag="shop" value="computer" minzoom="16" />
-  <subtype id="15" point="true" tag="shop" value="confectionery" minzoom="16" />
-  <subtype id="16" point="true" tag="shop" value="convenience" minzoom="16" />
-  <subtype id="17" point="true" tag="shop" value="department_store" minzoom="16" />
-  <subtype id="18" point="true" tag="shop" value="dry_cleaning" minzoom="16" />
-  <subtype id="19" point="true" tag="shop" value="doityourself" minzoom="16" />
-  <subtype id="20" point="true" tag="shop" value="electronics" minzoom="16" />
-  <subtype id="21" point="true" tag="shop" value="fabrics" minzoom="16" />
-  <subtype id="22" point="true" tag="shop" value="farm" minzoom="16" />
-  <subtype id="23" point="true" tag="shop" value="florist" minzoom="16" />
-  <subtype id="24" point="true" tag="shop" value="funeral_directors" minzoom="16" />
-  <subtype id="25" point="true" tag="shop" value="furniture" minzoom="16" />
-  <subtype id="26" point="true" tag="shop" value="garden_centre" minzoom="16" />
-  <subtype id="27" point="true" tag="shop" value="general" minzoom="16" />
-  <subtype id="28" point="true" tag="shop" value="gift" minzoom="16" />
-  <subtype id="29" point="true" tag="shop" value="glaziery" minzoom="16" />
-  <subtype id="30" point="true" tag="shop" value="greengrocer" minzoom="16" />
-  <subtype id="31" point="true" tag="shop" value="hairdresser" minzoom="16" />
-  <subtype id="32" point="true" tag="shop" value="hardware" minzoom="16" />
-  <subtype id="33" point="true" tag="shop" value="hearing_aids" minzoom="16" />
-  <subtype id="34" point="true" tag="shop" value="hifi" minzoom="16" />
-  <subtype id="35" point="true" tag="shop" value="ice_cream" minzoom="16" />
-  <subtype id="40" point="true" tag="shop" value="jewelry" minzoom="16" />
-  <subtype id="51" point="true" tag="shop" value="kiosk" minzoom="16" />
-  <subtype id="52" point="true" tag="shop" value="laundry" minzoom="16" />
-  <subtype id="53" point="true" tag="shop" value="mall" minzoom="16" />
-  <subtype id="54" point="true" tag="shop" value="massage" minzoom="16" />
-  <subtype id="55" point="true" tag="shop" value="money_lender" minzoom="16" />
-  <subtype id="56" point="true" tag="shop" value="motorcycle" minzoom="16" />
-  <subtype id="57" point="true" tag="shop" value="newsagent" minzoom="16" />
-  <subtype id="58" point="true" tag="shop" value="optician" minzoom="16" />
-  <subtype id="59" point="true" tag="shop" value="organic" minzoom="16" />
-  <subtype id="60" point="true" tag="shop" value="outdoor" minzoom="16" />
-  <subtype id="61" point="true" tag="shop" value="pawnbroker" minzoom="16" />
-  <subtype id="62" point="true" tag="shop" value="second_hand" minzoom="16" />
-  <subtype id="63" point="true" tag="shop" value="sports" minzoom="16" />
-  <subtype id="64" point="true" tag="shop" value="stationery" minzoom="16" />
-  <subtype id="65" point="true" tag="shop" value="supermarket" minzoom="16" />
-  <subtype id="66" point="true" tag="shop" value="shoes" minzoom="16" />
-  <subtype id="67" point="true" tag="shop" value="tattoo" minzoom="16" />
-  <subtype id="68" point="true" tag="shop" value="toys" minzoom="16" />
-  <subtype id="69" point="true" tag="shop" value="travel_agency" minzoom="16" />
-  <subtype id="70" point="true" tag="shop" value="variety_store" minzoom="16" />
-  <subtype id="71" point="true" tag="shop" value="video" minzoom="16" />
-  <subtype id="75" point="true" tag="shop" minzoom="16" />
+		<subtype id="41" point="true" tag="shop" value="alcohol" minzoom="15" />
+		<subtype id="42" point="true" tag="shop" value="bakery" minzoom="15" />
+		<subtype id="43" point="true" tag="shop" value="beauty" minzoom="15" />
+		<subtype id="44" point="true" tag="shop" value="beverages" minzoom="15" />
+		<subtype id="45" point="true" tag="shop" value="bicycle" minzoom="15" />
+		<subtype id="46" point="true" tag="shop" value="books" minzoom="15" />
+		<subtype id="47" point="true" tag="shop" value="boutique" minzoom="15" />
+		<subtype id="48" point="true" tag="shop" value="butcher" minzoom="15" />
+		<subtype id="49" point="true" tag="shop" value="car" minzoom="15" />
+		<subtype id="50" point="true" tag="shop" value="car_repair" minzoom="15" />
+		<subtype id="11" point="true" tag="shop" value="charity" minzoom="15" />
+		<subtype id="12" point="true" tag="shop" value="chemist" minzoom="15" />
+		<subtype id="13" point="true" tag="shop" value="clothes" minzoom="15" />
+		<subtype id="13" point="true" tag="shop" value="fashion" minzoom="15" />
+		<subtype id="14" point="true" tag="shop" value="computer" minzoom="15" />
+		<subtype id="15" point="true" tag="shop" value="confectionery" minzoom="15" />
+		<subtype id="16" point="true" tag="shop" value="convenience" minzoom="15" />
+		<subtype id="17" point="true" tag="shop" value="department_store" minzoom="15" />
+		<subtype id="18" point="true" tag="shop" value="dry_cleaning" minzoom="15" />
+		<subtype id="19" point="true" tag="shop" value="doityourself" minzoom="15" />
+		<subtype id="20" point="true" tag="shop" value="electronics" minzoom="15" />
+		<subtype id="21" point="true" tag="shop" value="fabrics" minzoom="15" />
+		<subtype id="22" point="true" tag="shop" value="farm" minzoom="15" />
+		<subtype id="23" point="true" tag="shop" value="florist" minzoom="15" />
+		<subtype id="24" point="true" tag="shop" value="funeral_directors" minzoom="15" />
+		<subtype id="25" point="true" tag="shop" value="furniture" minzoom="15" />
+		<subtype id="26" point="true" tag="shop" value="garden_centre" minzoom="15" />
+		<subtype id="27" point="true" tag="shop" value="general" minzoom="15" />
+		<subtype id="28" point="true" tag="shop" value="gift" minzoom="15" />
+		<subtype id="29" point="true" tag="shop" value="glaziery" minzoom="15" />
+		<subtype id="30" point="true" tag="shop" value="greengrocer" minzoom="15" />
+		<subtype id="31" point="true" tag="shop" value="hairdresser" minzoom="15" />
+		<subtype id="32" point="true" tag="shop" value="hardware" minzoom="15" />
+		<subtype id="33" point="true" tag="shop" value="hearing_aids" minzoom="15" />
+		<subtype id="34" point="true" tag="shop" value="hifi" minzoom="15" />
+		<subtype id="35" point="true" tag="shop" value="ice_cream" minzoom="15" />
+		<subtype id="40" point="true" tag="shop" value="jewelry" minzoom="15" />
+		<subtype id="51" point="true" tag="shop" value="kiosk" minzoom="15" />
+		<subtype id="52" point="true" tag="shop" value="laundry" minzoom="15" />
+		<subtype id="53" point="true" tag="shop" value="mall" minzoom="15" />
+		<subtype id="54" point="true" tag="shop" value="massage" minzoom="15" />
+		<subtype id="55" point="true" tag="shop" value="money_lender" minzoom="15" />
+		<subtype id="56" point="true" tag="shop" value="motorcycle" minzoom="15" />
+		<subtype id="57" point="true" tag="shop" value="newsagent" minzoom="15" />
+		<subtype id="58" point="true" tag="shop" value="optician" minzoom="15" />
+		<subtype id="59" point="true" tag="shop" value="organic" minzoom="15" />
+		<subtype id="60" point="true" tag="shop" value="outdoor" minzoom="15" />
+		<subtype id="61" point="true" tag="shop" value="pawnbroker" minzoom="15" />
+		<subtype id="62" point="true" tag="shop" value="second_hand" minzoom="15" />
+		<subtype id="63" point="true" tag="shop" value="sports" minzoom="15" />
+		<subtype id="64" point="true" tag="shop" value="stationery" minzoom="15" />
+		<subtype id="65" point="true" tag="shop" value="supermarket" minzoom="15" />
+		<subtype id="66" point="true" tag="shop" value="shoes" minzoom="15" />
+		<subtype id="67" point="true" tag="shop" value="tattoo" minzoom="15" />
+		<subtype id="68" point="true" tag="shop" value="toys" minzoom="15" />
+		<subtype id="69" point="true" tag="shop" value="travel_agency" minzoom="15" />
+		<subtype id="70" point="true" tag="shop" value="variety_store" minzoom="15" />
+		<subtype id="71" point="true" tag="shop" value="video" minzoom="15" />
+		<subtype id="75" point="true" tag="shop" minzoom="15" />
  </type>
 
 
  <type id="12" name="emergency">
-  <subtype id="1" building="true" tag="emergency" value="ambulance_station" minzoom="16" />
-  <subtype id="2" building="true" tag="emergency" value="ses_station" minzoom="16" />
-  <subtype id="3" point="true" tag="emergency" value="fire_extinguisher" minzoom="16" />
-  <subtype id="4" point="true" tag="emergency" value="fire_flapper" minzoom="16" />
-  <subtype id="5" point="true" tag="emergency" value="fire_hose" minzoom="16" />
-  <subtype id="6" point="true" tag="emergency" value="fire_hydrant" minzoom="16" />
-  <subtype id="7" point="true" tag="emergency" value="phone" minzoom="16" />
-  <subtype id="9" point="true" tag="emergency" value="siren" minzoom="16" />
-  <subtype id="10" point="true" tag="amenity" value="fire_station" minzoom="16" />
+		<subtype id="1" building="true" tag="emergency" value="ambulance_station" minzoom="15" />
+		<subtype id="2" building="true" tag="emergency" value="ses_station" minzoom="15" />
+		<subtype id="3" point="true" tag="emergency" value="fire_extinguisher" minzoom="15" />
+		<subtype id="4" point="true" tag="emergency" value="fire_flapper" minzoom="15" />
+		<subtype id="5" point="true" tag="emergency" value="fire_hose" minzoom="15" />
+		<subtype id="6" point="true" tag="emergency" value="fire_hydrant" minzoom="15" />
+		<subtype id="7" point="true" tag="emergency" value="phone" minzoom="15" />
+		<subtype id="9" point="true" tag="emergency" value="siren" minzoom="15" />
+		<subtype id="10" point="true" tag="amenity" value="fire_station" minzoom="15" />
  </type>
 
 
@@ -333,12 +333,12 @@
   <subtype id="7" point="true" polygon="true" tag="tourism" value="theme_park" minzoom="12" />
   <subtype id="8" point="true" polygon="true" tag="tourism" value="zoo" minzoom="12" />
   <subtype id="9" building="true" tag="tourism" value="alpine_hut" minzoom="14" />
-  <subtype id="10" building="true" tag="tourism" value="chalet" minzoom="16" />
-  <subtype id="11" building="true" tag="tourism" value="guest_house" minzoom="16" />
-  <subtype id="12" building="true" tag="tourism" value="hostel" minzoom="16" />
-  <subtype id="13" building="true" tag="tourism" value="hotel" minzoom="16" />
-  <subtype id="14" building="true" tag="tourism" value="motel" minzoom="16" />
-  <subtype id="15" building="true" tag="tourism" value="museum" minzoom="16" />
+		<subtype id="10" building="true" tag="tourism" value="chalet" minzoom="15" />
+		<subtype id="11" building="true" tag="tourism" value="guest_house" minzoom="15" />
+		<subtype id="12" building="true" tag="tourism" value="hostel" minzoom="15" />
+		<subtype id="13" building="true" tag="tourism" value="hotel" minzoom="15" />
+		<subtype id="14" building="true" tag="tourism" value="motel" minzoom="15" />
+		<subtype id="15" building="true" tag="tourism" value="museum" minzoom="15" />
   <subtype id="16" point="true" tag="tourism" value="information" minzoom="15" />
   <subtype id="17" point="true" tag="tourism" value="viewpoint" minzoom="15" />
   <subtype id="18" point="true" tag="tourism" minzoom="15" />

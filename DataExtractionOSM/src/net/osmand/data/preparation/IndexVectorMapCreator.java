@@ -49,7 +49,11 @@ import rtree.Rect;
 public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 	private static final Log log = LogFactory.getLog(IndexVectorMapCreator.class);
+	// map zoom levels <= 2^MAP_LEVELS
+	private static final int MAP_LEVELS_POWER = 3;  
+	private static final int MAP_LEVELS_MAX = 1 << MAP_LEVELS_POWER;
 	private MapRenderingTypes renderingTypes;
+	
 	
 	// MEMORY map : save it in memory while that is allowed
 	private Map<Long, Set<Integer>>[] multiPolygonsWays;
@@ -355,7 +359,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 		boolean point = (type & 3) == MapRenderingTypes.POINT_TYPE;
 		RTree rtree = null;
-		long id = (baseId << 3) | ((level & 3) << 1);
+		long id = convertBaseIdToGeneratedId(baseId, level);
 		rtree = mapTree[level];
 		
 		boolean skip = false;
@@ -682,6 +686,17 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 			throw new IllegalStateException(e);
 		}
 	}
+	
+	private long convertBaseIdToGeneratedId(long baseId, int level) {
+		if(level >= MAP_LEVELS_MAX){
+			throw new IllegalArgumentException("Number of zoom levels " + level + " exceeds allowed maximum : " + MAP_LEVELS_MAX);
+		}
+		return ((baseId << MAP_LEVELS_POWER) | level) << 1;
+	}
+	
+	public long convertGeneratedIdToObfWrite(long id){
+		return (id >> (MAP_LEVELS_POWER + 1)) + (id & 1);
+	}
 
 	public void writeBinaryMapTree(rtree.Node parent, RTree r, BinaryMapIndexWriter writer, PreparedStatement selectData) throws IOException, RTreeException, SQLException {
 		Element[] e = parent.getAllElements();
@@ -694,7 +709,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				ResultSet rs = selectData.executeQuery();
 				if (rs.next()) {
 					 // mapConnection.prepareStatement("SELECT nodes, types, name, highway, restrictions FROM binary_map_objects WHERE id = ?");
-					 writer.writeMapData(id, rs.getBytes(1), 
+					 writer.writeMapData(convertGeneratedIdToObfWrite(id), rs.getBytes(1), 
 							 rs.getBytes(2), rs.getString(3),  
 							 rs.getInt(4),  rs.getBytes(5));
 				} else {
