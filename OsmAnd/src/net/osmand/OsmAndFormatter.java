@@ -18,8 +18,8 @@ public class OsmAndFormatter {
 	public static double calculateRoundedDist(double distInMeters, Context ctx) {
 		OsmandSettings settings = OsmandSettings.getOsmandSettings(ctx);
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
-		float mainUnitInMeter = 1;
-		float metersInSecondUnit = METERS_IN_KILOMETER; 
+		double mainUnitInMeter = 1;
+		double metersInSecondUnit = METERS_IN_KILOMETER; 
 		if (mc == MetricsConstants.MILES_AND_FOOTS) {
 			mainUnitInMeter = FOOTS_IN_ONE_METER;
 			metersInSecondUnit = METERS_IN_ONE_MILE;
@@ -31,7 +31,7 @@ public class OsmAndFormatter {
 		
 		int generator = 5;
 		byte pointer = 0;
-		float point = mainUnitInMeter;
+		double point = mainUnitInMeter;
 		while(distInMeters * point > generator){
 			if (pointer++ % 3 == 2) {
 				generator = generator * 5 / 2;

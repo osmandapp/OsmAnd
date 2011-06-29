@@ -10,32 +10,32 @@
 	<!-- 3) In each type only 127 (7 bytes) all different subtypes available -->
 	<!-- TODO Try to not change id of types and subtypes, some of the constants are hardcoded (for rendering order, rendering). -->
 	<type name="highway" id="1">
-		<subtype id="2" polyline="true" tag="highway" value="motorway" minzoom="6" />
+		<subtype id="2" polyline="true" tag="highway" value="motorway" minzoom="5" />
 		<subtype id="2" polyline="true" tag="highway" value="motorway_link" minzoom="10" />
-		<subtype id="1" polyline="true" tag="highway" value="trunk" minzoom="6" />
+		<subtype id="1" polyline="true" tag="highway" value="trunk" minzoom="5" />
 		<subtype id="1" polyline="true" tag="highway" value="trunk_link" minzoom="10" />
 		<subtype id="3" polyline="true" tag="highway" value="primary" minzoom="7" />
 		<subtype id="3" polyline="true" tag="highway" value="primary_link" minzoom="10" />
-		<subtype id="4" polyline="true" tag="highway" value="secondary" minzoom="10" />
+		<subtype id="4" polyline="true" tag="highway" value="secondary" minzoom="9" />
 		<subtype id="4" polyline="true" tag="highway" value="secondary_link" minzoom="10" />
-		<subtype id="5" polyline="true" tag="highway" value="tertiary" minzoom="13" />
-		<subtype id="6" polygon="true" polyline="true" tag="highway" value="residential" minzoom="14" />
-		<subtype id="7" polygon="true" polyline="true" tag="highway" value="service" minzoom="15" />
+		<subtype id="5" polyline="true" tag="highway" value="tertiary" minzoom="10" />
+		<subtype id="6" polygon="true" polyline="true" tag="highway" value="residential" minzoom="12" />
+		<subtype id="7" polygon="true" polyline="true" tag="highway" value="service" minzoom="13" />
 
-		<subtype id="8" polyline="true" tag="highway" value="unclassified" minzoom="14" />
-		<subtype id="8" polyline="true" tag="highway" value="road" minzoom="14" />
-		<subtype id="9" polyline="true" tag="highway" value="track" minzoom="13" />
-		<subtype id="10" polyline="true" tag="highway" value="path" minzoom="14" />
-		<subtype id="11" polyline="true" tag="highway" value="living_street" minzoom="15" />
+		<subtype id="8" polyline="true" tag="highway" value="unclassified" minzoom="12" />
+		<subtype id="8" polyline="true" tag="highway" value="road" minzoom="12" />
+		<subtype id="9" polyline="true" tag="highway" value="track" minzoom="12" />
+		<subtype id="10" polyline="true" tag="highway" value="path" minzoom="12" />
+		<subtype id="11" polyline="true" tag="highway" value="living_street" minzoom="12" />
 
 
-		<subtype id="16" polygon="true" polyline="true" tag="highway" value="pedestrian" minzoom="15" />
-		<subtype id="17" polyline="true" tag="highway" value="cycleway" minzoom="14" />
-		<subtype id="18" polyline="true" tag="highway" value="byway" minzoom="14" />
-		<subtype id="19" polyline="true" tag="highway" value="footway" minzoom="15" />
-		<subtype id="20" polyline="true" tag="highway" value="steps" minzoom="15" />
-		<subtype id="21" polyline="true" tag="highway" value="bridleway" minzoom="14" />
-		<subtype id="22" polygon="true" point="true" tag="highway" value="services" minzoom="15" />
+		<subtype id="16" polygon="true" polyline="true" tag="highway" value="pedestrian" minzoom="12" />
+		<subtype id="17" polyline="true" tag="highway" value="cycleway" minzoom="12" />
+		<subtype id="18" polyline="true" tag="highway" value="byway" minzoom="12" />
+		<subtype id="19" polyline="true" tag="highway" value="footway" minzoom="12" />
+		<subtype id="20" polyline="true" tag="highway" value="steps" minzoom="14" />
+		<subtype id="21" polyline="true" tag="highway" value="bridleway" minzoom="12" />
+		<subtype id="22" polygon="true" point="true" tag="highway" value="services" minzoom="12" />
 		<!-- <subtype id="" polyline="true" tag="highway" value="bus_guideway" minzoom="15" />  -->
 
 		<subtype id="23" polyline="true" point="true" tag="highway" value="ford" minzoom="14" />
@@ -371,7 +371,7 @@
 		<subtype id="7" polygon="true" tag="landuse" value="farm" minzoom="12" />
 		<subtype id="7" polygon="true" tag="landuse" value="farmland" minzoom="12" />
 		<subtype id="9" polygon="true" tag="landuse" value="farmyard" minzoom="12" />
-		<subtype id="10" polygon="true" tag="landuse" value="forest" minzoom="10" />
+		<subtype id="10" polygon="true" tag="landuse" value="forest" minzoom="8" />
 		<subtype id="11" polygon="true" tag="landuse" value="garages" minzoom="12" />
 		<subtype id="12" polygon="true" tag="landuse" value="grass" minzoom="12" />
 		<subtype id="13" polygon="true" tag="landuse" value="greenfield" minzoom="12" />
