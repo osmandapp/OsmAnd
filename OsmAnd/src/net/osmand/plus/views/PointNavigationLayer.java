@@ -13,7 +13,6 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Paint.Style;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;

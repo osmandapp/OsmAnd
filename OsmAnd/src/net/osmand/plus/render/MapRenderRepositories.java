@@ -529,7 +529,7 @@ public class MapRenderRepositories {
 				if (len < 2) {
 					continue;
 				}
-				dbId = o.getId() >> 3;
+				dbId = o.getId() >> 1;
 				TLongList coordinates = new TLongArrayList(o.getPointsLength() / 2);
 				int px = o.getPoint31XTile(km == 0 ? 0 : len - 1); 
 				int py = o.getPoint31YTile(km == 0 ? 0 : len - 1);

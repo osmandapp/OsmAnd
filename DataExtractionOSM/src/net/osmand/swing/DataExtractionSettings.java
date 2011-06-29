@@ -103,7 +103,7 @@ public class DataExtractionSettings {
 	}
 	
 	public String getLineSmoothness(){
-		return preferences.get("line_smoothness", "0");
+		return preferences.get("line_smoothness", "2");
 	}
 	
 	public void setLineSmoothness(String smooth){

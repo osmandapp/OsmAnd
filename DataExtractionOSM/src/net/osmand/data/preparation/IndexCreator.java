@@ -10,13 +10,11 @@ import java.io.RandomAccessFile;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.binary.BinaryMapIndexWriter;
 import net.osmand.data.IndexConstants;
-import net.osmand.data.preparation.MapZooms.MapZoomPair;
 import net.osmand.data.preparation.OsmDbAccessor.OsmDbVisitor;
 import net.osmand.impl.ConsoleProgressImplementation;
 import net.osmand.osm.Entity;
@@ -604,11 +602,15 @@ public class IndexCreator {
 
 		creator.recreateOnlyBinaryFile = false;
 		creator.deleteDatabaseIndexes = true;
-		creator.deleteOsmDB = true;
+//		creator.deleteOsmDB = true;
 				
 //		creator.setZoomWaySmothness(2);
-		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/germany_bayern_part.osm"), 
+//		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/germany_bayern_part.osm"),
+		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/belarus-osm/belarus.osm.pbf"),
+				
 				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), null);
+		
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/minsk_around.osm"), 
 //				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), null);
 		
@@ -627,10 +629,6 @@ public class IndexCreator {
 //				new ConsoleProgressImplementation(1), null, mapZooms, null);
 		
 		
-//		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
-//		creator.generateIndexes(new File("e:/Information/OSM maps/belarus osm/minsk.osm"), new ConsoleProgressImplementation(3), null, MapZooms.getDefault(), null);
-		
-
 
 		System.out.println("WHOLE GENERATION TIME :  " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
 		 System.out.println("COORDINATES_SIZE " + BinaryMapIndexWriter.COORDINATES_SIZE + " count " + BinaryMapIndexWriter.COORDINATES_COUNT); //$NON-NLS-1$ //$NON-NLS-2$

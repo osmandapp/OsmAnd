@@ -38,9 +38,9 @@
 		<subtype id="22" polygon="true" point="true" tag="highway" value="services" minzoom="15" />
 		<!-- <subtype id="" polyline="true" tag="highway" value="bus_guideway" minzoom="15" />  -->
 
-		<subtype id="23" polyline="true" point="true" tag="highway" value="ford" minzoom="15" />
-		<subtype id="25" polyline="true" tag="highway" value="construction" minzoom="15" />
-		<subtype id="26" polyline="true" tag="highway" value="proposed" minzoom="15" />
+		<subtype id="23" polyline="true" point="true" tag="highway" value="ford" minzoom="14" />
+		<subtype id="25" polyline="true" tag="highway" value="construction" minzoom="14" />
+		<subtype id="26" polyline="true" tag="highway" value="proposed" minzoom="14" />
 
 		<!--  POINT SUBTYPES -->
 		<subtype id="35" point="true" tag="highway" value="mini_roundabout" minzoom="15" />
@@ -95,12 +95,12 @@
 
 	<type id="3" name="waterway">
 		<subtype id="1" polyline="true" tag="waterway" value="stream" minzoom="13" />
-		<subtype id="3" polygon="true" tag="waterway" value="riverbank" minzoom="9" />
+		<subtype id="3" polygon="true" tag="waterway" value="riverbank" minzoom="8" />
 		<subtype id="2" polyline="true" tag="waterway" value="river" minzoom="5" />
 		<subtype id="4" polyline="true" tag="waterway" value="canal" minzoom="10" />
-		<subtype id="5" polyline="true" tag="waterway" value="ditch" minzoom="15" />
-		<subtype id="6" polyline="true" tag="waterway" value="drain" minzoom="15" />
-		<subtype id="7" point="true" polygon_center="true" tag="waterway" value="dock" minzoom="13" />
+		<subtype id="5" polyline="true" tag="waterway" value="ditch" minzoom="13" />
+		<subtype id="6" polyline="true" tag="waterway" value="drain" minzoom="13" />
+		<subtype id="7" point="true" polygon_center="true" tag="waterway" value="dock" minzoom="10" />
 		<subtype id="8" point="true" tag="waterway" value="lock_gate" minzoom="15" />
 		<subtype id="8" point="true" tag="waterway" value="lock" minzoom="15" />
 		<subtype id="9" point="true" tag="waterway" value="turning_point" minzoom="15" />
@@ -139,10 +139,10 @@
 		<subtype id="1" point="true" polygon_center="true" tag="aeroway" value="aerodrome" minzoom="12" />
 		<subtype id="2" point="true" polygon_center="true" tag="aeroway" value="terminal" minzoom="15" />
 		<subtype id="3" point="true" polygon_center="true" tag="aeroway" value="helipad" minzoom="12" />
-		<subtype id="7" polyline="true" tag="aeroway" value="runway" minzoom="12" />
+		<subtype id="7" polyline="true" tag="aeroway" value="runway" minzoom="11" />
 		<subtype id="8" polyline="true" tag="aeroway" value="taxiway" minzoom="12" />
 		<subtype id="9" polygon="true" tag="aeroway" value="apron" minzoom="12" />
-		<subtype id="10" point="true" polygon_center="true" tag="aeroway" value="airport" minzoom="12" />
+		<subtype id="10" point="true" polygon_center="true" tag="aeroway" value="airport" minzoom="11" />
 		<subtype id="12" point="true" tag="aeroway" value="gate" minzoom="15" nameNullTag="ref"/>
 		<subtype id="13" point="true" tag="aeroway" value="windsock" minzoom="15" />
 	</type>
@@ -166,8 +166,8 @@
 		<subtype id="2" point="true" tag="power" value="pole" minzoom="15" />
 		<subtype id="3" polyline="true" tag="power" value="line" minzoom="13" />
 		<subtype id="4" polyline="true" tag="power" value="minor_line" minzoom="15" />
-		<subtype id="5" point="true" polygon="true" tag="power" value="station" minzoom="1" />
-		<subtype id="6" point="true" polygon="true" tag="power" value="sub_station" minzoom="1" />
+		<subtype id="5" point="true" polygon="true" tag="power" value="station" minzoom="13" />
+		<subtype id="6" point="true" polygon="true" tag="power" value="sub_station" minzoom="13" />
 		<subtype id="7" point="true" tag="power" value="generator" minzoom="15" />
 		<subtype id="8" point="true" tag="power" value="cable_distribution_cabinet" minzoom="15" />
 	</type>
@@ -206,22 +206,22 @@
 
 	<type id="9" name="leisure">
 		<subtype id="1" point="true" polygon="true" tag="leisure" value="dog_park" minzoom="15" />
-		<subtype id="2" point="true" polygon="true" tag="leisure" value="sports_centre" minzoom="15" />
-		<subtype id="3" point="true" polygon="true" tag="leisure" value="golf_course" minzoom="15" />
-		<subtype id="4" point="true" polygon="true" tag="leisure" value="stadium" minzoom="15" />
-		<subtype id="5" polyline="true" polygon="true" tag="leisure" value="track" minzoom="13" />
-		<subtype id="6" point="true" polygon="true" tag="leisure" value="pitch" minzoom="15" />
-		<subtype id="7" point="true" polygon="true" tag="leisure" value="water_park" minzoom="15" />
+		<subtype id="2" point="true" polygon="true" tag="leisure" value="sports_centre" minzoom="13" />
+		<subtype id="3" point="true" polygon="true" tag="leisure" value="golf_course" minzoom="12" />
+		<subtype id="4" point="true" polygon="true" tag="leisure" value="stadium" minzoom="13" />
+		<subtype id="5" polyline="true" polygon="true" tag="leisure" value="track" minzoom="12" />
+		<subtype id="6" point="true" polygon="true" tag="leisure" value="pitch" minzoom="12" />
+		<subtype id="7" point="true" polygon="true" tag="leisure" value="water_park" minzoom="13" />
 		<subtype id="8" point="true" polyline="true" tag="leisure" value="marina" minzoom="13" />
 		<subtype id="9" point="true" polygon="true" tag="leisure" value="slipway" minzoom="15" />
 		<subtype id="10" point="true" polygon="true" tag="leisure" value="fishing" minzoom="15" />
-		<subtype id="11" point="true" polygon="true" tag="leisure" value="nature_reserve" minzoom="9" />
-		<subtype id="12" point="true" polygon="true" tag="natural" value="park" minzoom="13" />
-		<subtype id="12" point="true" polygon="true" tag="leisure" value="park" minzoom="13" />
-		<subtype id="12" point="true" polygon="true" tag="leisure" value="recreation_ground" minzoom="13" />
+		<subtype id="11" point="true" polygon="true" tag="leisure" value="nature_reserve" minzoom="10" />
+		<subtype id="12" point="true" polygon="true" tag="natural" value="park" minzoom="12" />
+		<subtype id="12" point="true" polygon="true" tag="leisure" value="park" minzoom="12" />
+		<subtype id="12" point="true" polygon="true" tag="leisure" value="recreation_ground" minzoom="12" />
 		<subtype id="13" point="true" polygon="true" tag="leisure" value="playground" minzoom="15" />
-		<subtype id="14" point="true" polygon="true" tag="leisure" value="garden" minzoom="13" />
-		<subtype id="15" point="true" polygon="true" tag="leisure" value="common" minzoom="13" />
+		<subtype id="14" point="true" polygon="true" tag="leisure" value="garden" minzoom="12" />
+		<subtype id="15" point="true" polygon="true" tag="leisure" value="common" minzoom="12" />
 		<subtype id="16" point="true" polygon="true" tag="leisure" value="ice_rink" minzoom="15" />
 		<subtype id="17" point="true" polygon="true" tag="leisure" value="miniature_golf" minzoom="15" />
 		<subtype id="18" point="true" polygon="true" tag="leisure" value="dance" minzoom="15" />
@@ -326,12 +326,12 @@
 	<type id="13" name="tourism">
 		<subtype id="2" point="true" polygon="true" tag="tourism" value="attraction" minzoom="13" />
 		<subtype id="3" point="true" polygon="true" tag="tourism" value="artwork" minzoom="15" />
-		<subtype id="4" point="true" polygon="true" tag="tourism" value="camp_site" minzoom="15" />
-		<subtype id="5" point="true" polygon="true" tag="tourism" value="caravan_site" minzoom="15" />
-		<subtype id="6" point="true" polygon="true" tag="tourism" value="picnic_site" minzoom="15" />
-		<subtype id="7" point="true" polygon="true" tag="tourism" value="theme_park" minzoom="13" />
-		<subtype id="8" point="true" polygon="true" tag="tourism" value="zoo" minzoom="15" />
-		<subtype id="9" building="true" tag="tourism" value="alpine_hut" minzoom="15" />
+		<subtype id="4" point="true" polygon="true" tag="tourism" value="camp_site" minzoom="13" />
+		<subtype id="5" point="true" polygon="true" tag="tourism" value="caravan_site" minzoom="13" />
+		<subtype id="6" point="true" polygon="true" tag="tourism" value="picnic_site" minzoom="13" />
+		<subtype id="7" point="true" polygon="true" tag="tourism" value="theme_park" minzoom="12" />
+		<subtype id="8" point="true" polygon="true" tag="tourism" value="zoo" minzoom="12" />
+		<subtype id="9" building="true" tag="tourism" value="alpine_hut" minzoom="14" />
 		<subtype id="10" building="true" tag="tourism" value="chalet" minzoom="15" />
 		<subtype id="11" building="true" tag="tourism" value="guest_house" minzoom="15" />
 		<subtype id="12" building="true" tag="tourism" value="hostel" minzoom="15" />
@@ -361,80 +361,80 @@
 
 
 	<type id="15" name="landuse">
-		<subtype id="1" polygon="true" tag="landuse" value="allotments" minzoom="11" />
-		<subtype id="2" point="true" polygon="true" tag="landuse" value="basin" minzoom="11" />
-		<subtype id="3" point="true" polygon="true" tag="landuse" value="brownfield" minzoom="11" />
+		<subtype id="1" polygon="true" tag="landuse" value="allotments" minzoom="10" />
+		<subtype id="2" point="true" polygon="true" tag="landuse" value="basin" minzoom="10" />
+		<subtype id="3" point="true" polygon="true" tag="landuse" value="brownfield" minzoom="12" />
 		<subtype id="4" polygon="true" tag="landuse" value="cemetery" minzoom="11" />
 		<subtype id="4" polygon="true" tag="landuse" value="grave_yard" minzoom="15" />
-		<subtype id="5" polygon="true" tag="landuse" value="commercial" minzoom="11" />
-		<subtype id="6" point="true" polygon="true" tag="landuse" value="construction" minzoom="11" />
-		<subtype id="7" polygon="true" tag="landuse" value="farm" minzoom="11" />
-		<subtype id="7" polygon="true" tag="landuse" value="farmland" minzoom="11" />
-		<subtype id="9" polygon="true" tag="landuse" value="farmyard" minzoom="11" />
-		<subtype id="10" polygon="true" tag="landuse" value="forest" minzoom="8" />
-		<subtype id="11" polygon="true" tag="landuse" value="garages" minzoom="15" />
-		<subtype id="12" polygon="true" tag="landuse" value="grass" minzoom="11" />
-		<subtype id="13" polygon="true" tag="landuse" value="greenfield" minzoom="11" />
-		<subtype id="14" polygon="true" tag="landuse" value="greenhouse_horticulture" minzoom="11" />
-		<subtype id="15" polygon="true" tag="landuse" value="industrial" minzoom="11" />
-		<subtype id="16" polygon="true" tag="landuse" value="landfill" minzoom="11" />
-		<subtype id="17" point="true" polygon="true" tag="landuse" value="meadow" minzoom="11" />
+		<subtype id="5" polygon="true" tag="landuse" value="commercial" minzoom="10" />
+		<subtype id="6" point="true" polygon="true" tag="landuse" value="construction" minzoom="12" />
+		<subtype id="7" polygon="true" tag="landuse" value="farm" minzoom="12" />
+		<subtype id="7" polygon="true" tag="landuse" value="farmland" minzoom="12" />
+		<subtype id="9" polygon="true" tag="landuse" value="farmyard" minzoom="12" />
+		<subtype id="10" polygon="true" tag="landuse" value="forest" minzoom="10" />
+		<subtype id="11" polygon="true" tag="landuse" value="garages" minzoom="12" />
+		<subtype id="12" polygon="true" tag="landuse" value="grass" minzoom="12" />
+		<subtype id="13" polygon="true" tag="landuse" value="greenfield" minzoom="12" />
+		<subtype id="14" polygon="true" tag="landuse" value="greenhouse_horticulture" minzoom="12" />
+		<subtype id="15" polygon="true" tag="landuse" value="industrial" minzoom="10" />
+		<subtype id="16" polygon="true" tag="landuse" value="landfill" minzoom="12" />
+		<subtype id="17" point="true" polygon="true" tag="landuse" value="meadow" minzoom="12" />
 		<subtype id="18" polygon="true" tag="landuse" value="military" minzoom="10" />
-		<subtype id="19" polygon="true" tag="landuse" value="orchard" minzoom="11" />
-		<subtype id="20" polygon="true" tag="landuse" value="railway" minzoom="11" />
-		<subtype id="21" polygon="true" tag="landuse" value="recreation_ground" minzoom="11" />
-		<subtype id="21" polygon="true" tag="landuse" value="conservation" minzoom="11" />
-		<subtype id="21" polygon="true" tag="landuse" value="village_green" minzoom="11" />
+		<subtype id="19" polygon="true" tag="landuse" value="orchard" minzoom="12" />
+		<subtype id="20" polygon="true" tag="landuse" value="railway" minzoom="12" />
+		<subtype id="21" polygon="true" tag="landuse" value="recreation_ground" minzoom="12" />
+		<subtype id="21" polygon="true" tag="landuse" value="conservation" minzoom="10" />
+		<subtype id="21" polygon="true" tag="landuse" value="village_green" minzoom="12" />
 		<subtype id="22" point="true" polygon="true" tag="landuse" value="reservoir" minzoom="7" />
 		<subtype id="22" point="true" polygon="true" tag="landuse" value="water" minzoom="7" />
-		<subtype id="23" polygon="true" tag="landuse" value="residential" minzoom="11" />
-		<subtype id="24" polygon="true" tag="landuse" value="retail" minzoom="11" />
-		<subtype id="25" point="true" polygon="true" tag="landuse" value="salt_pond" minzoom="11" />
-		<subtype id="26" point="true" polygon="true" tag="landuse" value="quarry" minzoom="11" />
-		<subtype id="27" polygon="true" tag="landuse" value="vineyard" minzoom="11" />
-		<subtype id="28" polygon="true" tag="landuse" value="field" minzoom="11" />
-		<subtype id="28" polygon="true" tag="natural" value="field" minzoom="11" />
+		<subtype id="23" polygon="true" tag="landuse" value="residential" minzoom="10" />
+		<subtype id="24" polygon="true" tag="landuse" value="retail" minzoom="12" />
+		<subtype id="25" point="true" polygon="true" tag="landuse" value="salt_pond" minzoom="10" />
+		<subtype id="26" point="true" polygon="true" tag="landuse" value="quarry" minzoom="12" />
+		<subtype id="27" polygon="true" tag="landuse" value="vineyard" minzoom="12" />
+		<subtype id="28" polygon="true" tag="landuse" value="field" minzoom="12" />
+		<subtype id="28" polygon="true" tag="natural" value="field" minzoom="12" />
 	</type>
 
 
 	<type id="16" name="military">
-		<subtype id="1" point="true" polygon_center="true" tag="military" value="airfield" minzoom="15" />
+		<subtype id="1" point="true" polygon_center="true" tag="military" value="airfield" minzoom="12" />
 		<subtype id="2" point="true" polygon_center="true" tag="military" value="bunker" minzoom="15" />
-		<subtype id="3" polygon="true" tag="military" value="barracks" minzoom="15" />
-		<subtype id="4" point="true" polygon_center="true" tag="military" value="danger_area" minzoom="15" />
-		<subtype id="5" point="true" polygon="true" tag="military" value="range" minzoom="15" />
-		<subtype id="6" point="true" polygon="true" tag="military" value="naval_base" minzoom="15" />
-		<subtype id="7" point="true" polygon="true" tag="military" minzoom="15" />
+		<subtype id="3" polygon="true" tag="military" value="barracks" minzoom="13" />
+		<subtype id="4" point="true" polygon_center="true" tag="military" value="danger_area" minzoom="10" />
+		<subtype id="5" point="true" polygon="true" tag="military" value="range" minzoom="10" />
+		<subtype id="6" point="true" polygon="true" tag="military" value="naval_base" minzoom="12" />
+		<subtype id="7" point="true" polygon="true" tag="military" minzoom="12" />
 	</type>
 
 
 	<type id="17" name="natural">
 		<subtype id="5" polygon="true" tag="natural" value="coastline" minzoom="1" />
-		<subtype id="1" point="true" polygon="true" tag="natural" value="bay" minzoom="15" />
-		<subtype id="2" point="true" polygon="true" tag="natural" value="beach" minzoom="12" />
+		<subtype id="1" point="true" polygon="true" tag="natural" value="bay" minzoom="11" />
+		<subtype id="2" point="true" polygon="true" tag="natural" value="beach" minzoom="11" />
 		<subtype id="3" point="true" polygon_center="true" tag="natural" value="cave_entrance" minzoom="13" />
-		<subtype id="4" point="true" polyline="true" tag="natural" value="cliff" minzoom="15" />
-		<subtype id="6" point="true" polygon="true" tag="natural" value="fell" minzoom="15" />
+		<subtype id="4" point="true" polyline="true" tag="natural" value="cliff" minzoom="13" />
+		<subtype id="6" point="true" polygon="true" tag="natural" value="fell" minzoom="13" />
 		<subtype id="7" point="true" polygon="true" tag="natural" value="glacier" minzoom="7" />
-		<subtype id="8" point="true" polygon="true" tag="natural" value="heath" minzoom="13" />
-		<subtype id="9" point="true" polygon="true" tag="natural" value="land" minzoom="13" />
-		<subtype id="11" point="true" polygon="true" tag="natural" value="marsh" minzoom="13" />
-		<subtype id="12" point="true" polygon="true" tag="natural" value="mud" minzoom="13" />
-		<subtype id="13" point="true" tag="natural" value="peak" minzoom="12" nameNullTag="ele"/>
-		<subtype id="14" point="true" polygon="true" tag="natural" value="sand" minzoom="15" />
-		<subtype id="15" point="true" polygon="true" tag="natural" value="scree" minzoom="15" />
-		<subtype id="16" point="true" polygon="true" tag="natural" value="scrub" minzoom="13" />
-		<subtype id="17" point="true" tag="natural" value="spring" minzoom="15" />
+		<subtype id="8" point="true" polygon="true" tag="natural" value="heath" minzoom="11" />
+		<subtype id="9" point="true" polygon="true" tag="natural" value="land" minzoom="10" />
+		<subtype id="11" point="true" polygon="true" tag="natural" value="marsh" minzoom="11" />
+		<subtype id="12" point="true" polygon="true" tag="natural" value="mud" minzoom="11" />
+		<subtype id="13" point="true" tag="natural" value="peak" minzoom="11" nameNullTag="ele"/>
+		<subtype id="14" point="true" polygon="true" tag="natural" value="sand" minzoom="11" />
+		<subtype id="15" point="true" polygon="true" tag="natural" value="scree" minzoom="11" />
+		<subtype id="16" point="true" polygon="true" tag="natural" value="scrub" minzoom="11" />
+		<subtype id="17" point="true" tag="natural" value="spring" minzoom="14" />
 		<subtype id="18" point="true" tag="natural" value="stone" minzoom="15" />
 		<subtype id="19" point="true" tag="natural" value="tree" minzoom="15" />
 		<subtype id="20" point="true" tag="natural" value="volcano" minzoom="11" />
 		<subtype id="21" point="true" polygon="true" tag="natural" value="water" minzoom="4" />
 		<subtype id="21" point="true" polygon="true" tag="natural" value="lake" minzoom="4" />
-		<subtype id="22" point="true" polygon="true" tag="natural" value="wetland" minzoom="13" />
+		<subtype id="22" point="true" polygon="true" tag="natural" value="wetland" minzoom="10" />
 		<subtype id="23" point="true" polygon="true" tag="natural" value="wood" minzoom="8" />
 		<subtype id="23" point="true" polygon="true" tag="landuse" value="wood" minzoom="8" />
 
-		<subtype id="31" point="true" polygon="true" tag="natural" minzoom="15" />
+		<subtype id="31" point="true" polygon="true" tag="natural" minzoom="11" />
 	</type>
 
 
@@ -557,7 +557,7 @@
 		<!-- register(st, "boundary", "administrative", ADMINISTRATIVE, 15, POLYLINE_TYPE); //$NON-NLS-1$ //$NON-NLS-2$  -->
 		<subtype id="21" polyline="true" tag="admin_level" value="1" minzoom="2" />
 		<subtype id="21" point="true" polyline="true" tag="admin_level" value="0" minzoom="2" />
-		<subtype id="22" polyline="true" tag="admin_level" value="2" minzoom="5" />
+		<subtype id="22" polyline="true" tag="admin_level" value="2" minzoom="3" />
 		<subtype id="23" polyline="true" tag="admin_level" value="3" minzoom="5" />
 		<subtype id="24" polyline="true" tag="admin_level" value="4" minzoom="5" />
 		<subtype id="25" polyline="true" tag="admin_level" value="5" minzoom="6" />
