@@ -30,7 +30,7 @@ public class BinaryInspector {
 	public static void main(String[] args) throws IOException {
 		inspector(args);
 		// test cases show info
-		inspector(new String[]{"/home/victor/projects/OsmAnd/data/osm-gen/saved/Belarus-oldrt.obf"});
+		inspector(new String[]{"/home/victor/projects/OsmAnd/data/osm-gen/saved/Belarus-newzooms-new-rt.obf"});
 		
 		// test case extract parts
 //		inspector(new String[]{"-c", "E:\\Information\\OSM maps\\osmand\\Netherlands-addr-trans.map.obf", 

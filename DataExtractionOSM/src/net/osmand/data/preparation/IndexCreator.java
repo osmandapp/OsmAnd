@@ -605,7 +605,7 @@ public class IndexCreator {
 //		creator.deleteOsmDB = true;
 				
 //		creator.setZoomWaySmothness(2);
-//		creator.setNodesDBFile(new File("e:/Information/OSM maps/osmand/minsk.tmp.odb"));
+		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/germany_bayern_part.osm"),
 		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/belarus-osm/belarus.osm.pbf"),
 				
