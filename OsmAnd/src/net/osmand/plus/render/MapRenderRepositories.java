@@ -399,7 +399,6 @@ public class MapRenderRepositories {
 			
 			
 			Bitmap bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.RGB_565);
-			String renderingDebugInfo = currentRenderingContext.renderingDebugInfo;
 			
 			boolean stepByStep = prefs.USE_STEP_BY_STEP_RENDERING.get();
 			// 1. generate image step by step
@@ -412,11 +411,11 @@ public class MapRenderRepositories {
 			
 			renderer.generateNewBitmap(currentRenderingContext, cObjects, bmp, 
 					prefs.USE_ENGLISH_NAMES.get(), renderingType, stepByStep ? notifyList : null);
+			String renderingDebugInfo = currentRenderingContext.renderingDebugInfo;
 			if (checkWhetherInterrupted()) {
 				currentRenderingContext = null;
 				return;
 			}
-			final long renderingTime = System.currentTimeMillis() - now;
 			currentRenderingContext = null;
 			
 			// 2. replace whole image
@@ -425,7 +424,7 @@ public class MapRenderRepositories {
 				this.bmpLocation = tileRect;
 			}
 			if(prefs.DEBUG_RENDERING_INFO.get()){
-				String timeInfo = "Search done in "+ searchTime+" ms\nRendering done in "+ renderingTime+ " ms";    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+				String timeInfo = "Search done in "+ searchTime+" ms";    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 				if(renderingDebugInfo != null){
 					timeInfo += "\n"+renderingDebugInfo;
 				}
