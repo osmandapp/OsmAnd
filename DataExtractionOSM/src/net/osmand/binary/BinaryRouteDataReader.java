@@ -379,7 +379,7 @@ public class BinaryRouteDataReader {
 		long ls = (((long) startX) << 31) + (long) startY;
 		loadRoutes(ctx, (startX >> (31 - ZOOM_LOAD_TILES)), (startY >> (31 - ZOOM_LOAD_TILES)));
 		RouteSegment startNbs = ctx.routes.get(ls);
-		while(startNbs != null) { // startNbs.road.id >> 3, start.road.id >> 3
+		while(startNbs != null) { // startNbs.road.id >> 1, start.road.id >> 1
 			if(startNbs.road.id != start.road.id){
 				startNbs.parentRoute = start;
 				startNbs.parentSegmentEnd = start.segmentStart;
@@ -473,7 +473,7 @@ public class BinaryRouteDataReader {
 					// 3.2 calculate possible ways to put into priority queue 
 					while(next != null){
 						long nts = (next.road.id << 8l) + next.segmentStart;
-						/* next.road.id >> 3 != road.id >> 3 - used that line for debug with osm map */
+						/* next.road.id >> 1 != road.id >> 1 - used that line for debug with osm map */
 						// road.id could be equal on roundabout, but we should accept them
 						if(!visitedSegments.contains(nts)){
 							int type = -1;
@@ -579,7 +579,7 @@ public class BinaryRouteDataReader {
 			}
 			// do not add segments consists from 1 poitn 
 			if(res.startPointIndex != res.endPointIndex) {
-				System.out.println("id="+(res.object.id >> 3) + " start=" + res.startPointIndex + " end=" + res.endPointIndex);
+				System.out.println("id="+(res.object.id >> 1) + " start=" + res.startPointIndex + " end=" + res.endPointIndex);
 				result.add(0, res);
 			}
 			res.startPoint = convertPoint(res.object, res.startPointIndex);
@@ -621,7 +621,7 @@ public class BinaryRouteDataReader {
 			BinaryMapDataObject road = start.road;
 			TagValuePair pair = road.mapIndex.decodeType(road.getTypes()[0]);
 			System.out.println("ROAD TO START " + pair.tag + " " + pair.value + " " + road.name + " " + start.segmentStart + " "
-					+ (road.id >> 3));
+					+ (road.id >> 1));
 		}
 		
 		RouteSegment end = router.findRouteSegment(elat, elon, ctx);
@@ -629,7 +629,7 @@ public class BinaryRouteDataReader {
 			BinaryMapDataObject road = end.road;
 			TagValuePair pair = road.mapIndex.decodeType(road.getTypes()[0]);
 			System.out.println("ROAD TO END " + pair.tag + " " + pair.value + " " + road.name + " " + end.segmentStart + " "
-					+ (road.id >> 3));
+					+ (road.id >> 1));
 		}
 		
 		
@@ -662,7 +662,7 @@ public class BinaryRouteDataReader {
 //			if(r.name != null){
 //				System.out.println(pair.tag + " " + pair.value + " " + r.name );
 //			} else {
-//				System.out.println(pair.tag + " " + pair.value + " " + (r.id >> 3));
+//				System.out.println(pair.tag + " " + pair.value + " " + (r.id >>13));
 //			}
 //		}
 	}

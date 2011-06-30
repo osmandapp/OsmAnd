@@ -118,7 +118,7 @@ public class BinaryMapDataObject {
 	
 	public long getRestriction(int k){
 		long l = restrictions[k];
-		return (l & ~7l) | (id & 7l);
+		return ((l >> 3) << 1) | (id & 1l);
 	} 
 	
 
