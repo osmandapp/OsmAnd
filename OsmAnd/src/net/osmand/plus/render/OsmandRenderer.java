@@ -441,7 +441,7 @@ public class OsmandRenderer {
 				 // Paint.ascent is negative, so negate it.
 				int ascent = (int) Math.ceil(-paintText.ascent());
 				int descent = (int) Math.ceil(paintText.descent());
-				float textHeight = ascent + descent + (horizontalWayDisplay ? 0 : text.minDistance);
+				float textHeight = ascent + descent + (horizontalWayDisplay ? 0 : text.minDistance) + 5 * dm.density;
 				
 				
 				if(text.drawOnPath == null || horizontalWayDisplay){
