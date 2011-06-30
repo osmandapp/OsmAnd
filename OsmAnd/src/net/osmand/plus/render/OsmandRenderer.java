@@ -143,11 +143,13 @@ public class OsmandRenderer {
 		boolean textBold;
 		int textShield = 0;
 		
+		String renderingDebugInfo;
 		
 		RenderingPaintProperties main = new RenderingPaintProperties();
 		RenderingPaintProperties second = new RenderingPaintProperties();
 		RenderingPaintProperties third = new RenderingPaintProperties();
 		RenderingPaintProperties[] adds = null;
+
 		
 		public void clearText() {
 			showAnotherText = null;
@@ -389,8 +391,9 @@ public class OsmandRenderer {
 			notifyListeners(notifyList);
 			drawTextOverCanvas(rc, cv, useEnglishNames);
 			long time = System.currentTimeMillis() - now;
-			log.info(String.format("Rendering has been done in %s ms. (%s points, %s points inside, %s visile from %s)",//$NON-NLS-1$
-					time, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects));
+			rc.renderingDebugInfo = String.format("Rendering has been done in %s ms. (%s points, %s points inside, %s visile from %s)",//$NON-NLS-1$
+					time, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
+			log.info(rc.renderingDebugInfo);
 			
 		}
 		
