@@ -399,6 +399,7 @@ public class MapRenderRepositories {
 			
 			
 			Bitmap bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.RGB_565);
+			String renderingDebugInfo = currentRenderingContext.renderingDebugInfo;
 			
 			boolean stepByStep = prefs.USE_STEP_BY_STEP_RENDERING.get();
 			// 1. generate image step by step
@@ -425,8 +426,8 @@ public class MapRenderRepositories {
 			}
 			if(prefs.DEBUG_RENDERING_INFO.get()){
 				String timeInfo = "Search done in "+ searchTime+" ms\nRendering done in "+ renderingTime+ " ms";    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
-				if(currentRenderingContext.renderingDebugInfo != null){
-					timeInfo += "\n"+currentRenderingContext.renderingDebugInfo;
+				if(renderingDebugInfo != null){
+					timeInfo += "\n"+renderingDebugInfo;
 				}
 				final String msg = timeInfo;
 				handler.post(new Runnable(){
