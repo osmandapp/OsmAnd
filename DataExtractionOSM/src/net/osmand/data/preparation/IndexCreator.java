@@ -609,6 +609,12 @@ public class IndexCreator {
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/belarus-osm/belarus.osm.pbf"),
 //				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), null);
 		
+		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes3.tmp.odb"));
+		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/stadion-dynamo.osm"),
+				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), null);
+		
+		
+		
 		
 		
 		// world generation
