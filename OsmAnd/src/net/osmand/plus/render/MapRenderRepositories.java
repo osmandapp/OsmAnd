@@ -432,7 +432,7 @@ public class MapRenderRepositories {
 				handler.post(new Runnable(){
 					@Override
 					public void run() {
-						Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+						Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
 					}
 				});
 			}

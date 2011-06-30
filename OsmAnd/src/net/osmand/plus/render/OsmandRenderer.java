@@ -391,7 +391,7 @@ public class OsmandRenderer {
 			notifyListeners(notifyList);
 			drawTextOverCanvas(rc, cv, useEnglishNames);
 			long time = System.currentTimeMillis() - now;
-			rc.renderingDebugInfo = String.format("Rendering has been done in %s ms. (%s points, %s points inside, %s visile from %s)",//$NON-NLS-1$
+			rc.renderingDebugInfo = String.format("Rendering has been done in %s ms. (%s points, %s points inside, %s objects visile from %s)",//$NON-NLS-1$
 					time, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
 			log.info(rc.renderingDebugInfo);
 			
