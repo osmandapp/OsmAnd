@@ -1,4 +1,4 @@
-﻿<renderer name="all-purpose" depends="" defaultColor="#f1eee8">
+﻿<renderer name="hm" depends="" defaultColor="#f1eee8">
 	<!-- apparently renderer name must equal file name until first '.', or else automatic day/night switching fails -->
 
 	<!--
