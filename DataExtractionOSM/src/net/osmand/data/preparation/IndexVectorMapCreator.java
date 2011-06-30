@@ -146,7 +146,8 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 				for (List<Way> l : completedRings) {
 					boolean innerType = "inner".equals(entities.get(l.get(0))); //$NON-NLS-1$
-					boolean clockwise = MapSwingAlgorithms.isClockwiseWay(l);
+					boolean clockwise = MapAlgorithms.isClockwiseWay(l);
+					
 					// clockwise - outer (like coastline), anticlockwise - inner
 					boolean inverse = clockwise != !innerType;
 					for (Way way : l) {

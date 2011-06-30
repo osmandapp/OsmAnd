@@ -417,7 +417,11 @@ public class OsmandRenderer {
 			}
 			
 		};
-		next: for (int i = 0; i < size; i++) {
+		paint.setStyle(Style.STROKE);
+		paint.setTextSize(10);
+		paint.setColor(Color.BLACK);
+		
+		nextText: for (int i = 0; i < size; i++) {
 			TextDrawInfo text  = rc.textToDraw.get(i);
 			if(text.text != null){
 				int d = text.text.indexOf(MapRenderingTypes.DELIM_CHAR);
@@ -432,18 +436,20 @@ public class OsmandRenderer {
 				RectF bounds = new RectF();
 				paintText.setTextSize(text.textSize * dm.density);
 				paintText.setFakeBoldText(text.bold);
-				float mes = paintText.measureText(text.text);
-				if(text.drawOnPath == null || 
-						(text.pathRotate > 45 && text.pathRotate < 135) || (text.pathRotate > 225 && text.pathRotate < 315)){
-					bounds.set(text.centerX - mes / 2, text.centerY - 3 * text.textSize / 2 ,
-							text.centerX + mes / 2 , text.centerY + 3 * text.textSize / 2 );
+				boolean horizontalWayDisplay = (text.pathRotate > 45 && text.pathRotate < 135) || (text.pathRotate > 225 && text.pathRotate < 315);
+				float mes = paintText.measureText(text.text) + (!horizontalWayDisplay ? 0 : text.minDistance);
+				 // Paint.ascent is negative, so negate it.
+				int ascent = (int) Math.ceil(-paintText.ascent());
+				int descent = (int) Math.ceil(paintText.descent());
+				float textHeight = ascent + descent + (horizontalWayDisplay ? 0 : text.minDistance);
+				
+				
+				if(text.drawOnPath == null || horizontalWayDisplay){
+					bounds.set(text.centerX - mes / 2, text.centerY - textHeight / 2 ,
+							text.centerX + mes / 2 , text.centerY + textHeight / 2 );
 				} else {
-					bounds.set(text.centerX - 3 * text.textSize , text.centerY - mes, 
-							text.centerX + 3 * text.textSize , text.centerY + mes );
-				}
-				if(text.minDistance > 0){
-					bounds.set(bounds.left - text.minDistance / 2, bounds.top - text.minDistance / 2,
-							bounds.right + text.minDistance / 2, bounds.bottom + text.minDistance / 2);
+					bounds.set(text.centerX - textHeight / 2, text.centerY - mes / 2, 
+							text.centerX + textHeight / 2 , text.centerY + mes / 2);
 				}
 				List<RectF> boundsIntersect = text.drawOnPath == null || findAllTextIntersections? 
 						boundsNotPathIntersect : boundsPathIntersect;
@@ -480,19 +486,28 @@ public class OsmandRenderer {
 					if (st < 0) {
 						st = 0;
 					}
+					// test functionality
+					// cv.drawRect(bounds, paint);
+					// cv.drawText(text.text.substring(0, Math.min(5, text.text.length())), bounds.centerX(), bounds.centerY(), paint);
+					
 					for (int j = st; j < e; j++) {
 						RectF b = boundsIntersect.get(j);
 						float x = Math.min(bounds.right, b.right) - Math.max(b.left, bounds.left);
 						float y = Math.min(bounds.bottom, b.bottom) - Math.max(b.top, bounds.top);
 						if ((x > diff && y > diff2) || (x > diff2 && y > diff)) {
-							continue next;
+							continue nextText;
 						}
 					}
 					// store in list sorted by left boundary
-					if(text.minDistance > 0){
-						bounds.set(bounds.left + text.minDistance / 2, bounds.top + text.minDistance / 2,
-								bounds.right - text.minDistance / 2, bounds.bottom - text.minDistance / 2);
-					}
+//					if(text.minDistance > 0){
+//						if (verticalText) {
+//							bounds.set(bounds.left + text.minDistance / 2, bounds.top, 
+//									bounds.right - text.minDistance / 2, bounds.bottom);
+//						} else {
+//							bounds.set(bounds.left, bounds.top + text.minDistance / 2, bounds.right, 
+//									bounds.bottom - text.minDistance / 2);
+//						}
+//					}
 					boundsIntersect.add(index, bounds);
 				}
 				
@@ -899,11 +914,8 @@ public class OsmandRenderer {
 					rc.clearText();
 					ref = render.renderObjectText(ref, pair.tag, pair.value, rc, true);
 					TextDrawInfo text = new TextDrawInfo(ref);
-					if(!rc.showTextOnPath){
-						text.fillProperties(rc, middlePoint.x, middlePoint.y);
-					} else {
-						// TODO
-					}
+					text.fillProperties(rc, middlePoint.x, middlePoint.y);
+					text.pathRotate = pathRotate;
 					rc.textToDraw.add(text);
 					
 				}
@@ -917,7 +929,7 @@ public class OsmandRenderer {
 							text.fillProperties(rc, middlePoint.x, middlePoint.y);
 							rc.textToDraw.add(text);
 						} else {
-							if (paintText.measureText(obj.getName()) < Math.max(Math.abs(xLength), Math.abs(yLength))) {
+							if (paintText.measureText(obj.getName()) < Math.abs(xLength) + Math.abs(yLength)) {
 								if (inverse) {
 									path.rewind();
 									boolean st = true;
