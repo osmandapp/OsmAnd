@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-	<string name="gpx_option_reverse_route">Obrátiť GPX trasu</string>
+	<string name="voice_not_use">Nepoužívať</string>
+	<string name="voice_not_specified">Žiadny</string>
+	<string name="installing_new_resources">Rozbaľujú sa nové údaje...</string>	
+	<string name="internet_connection_required_for_online_route">Používate online rutovaciu službu ale nemáte pripojenie na internet. Môžete použiť (stále experimentálnu) OsmAnd offline rutovaciu službu (vyberte v \'Nastavenia\' -> \'Navigovanie\'.</string>
+	<string name="tts_language_not_supported_title">Nepodporovaný jazyk</string>
+	<string name="tts_language_not_supported">Zvolený jazyk nie je podporovaný nainštalovaným TTS (text-to-speech) v Androide. Chcete ísť na Market pozrieť iný TTS? Inak bude použitý prednastavený TTS jazyk.</string>
+	<string name="tts_missing_language_data_title">Chýbajúce údaje</string>
+	<string name="tts_missing_language_data">Nie sú nainštalované údaje pre zvolený jazyk. Chcete ich inštalovať z Marketu?</string>
+	
+	<string name="gpx_option_reverse_route">Obrátiť GPX smerovanie</string>
 	<string name="gpx_option_destination_point">Použiť aktuálny cieľový bod</string>
 	<string name="gpx_option_from_start_point">Prejsť celú trasu</string>
 	<string name="tip_rotation_switching">Otáčanie mapy</string>
@@ -13,11 +22,11 @@
 	<string name="switch_to_raster_map_to_see">Aktuálna pozícia nie je pokrytá Vašimi stiahnutými vektorovými mapami. Môžete prepnúť zdroj mapy cez menu (Zobrazenie -> Zdroj mapy... ). Je potrebné stiahnuť dodatočné vektorové mapy.</string>
 	<string name="switch_to_vector_map_to_see">Môžete prepnúť na stiahnuté vektorové mapy cez menu (Zobrazenie -> Zdroj mapy... -> Vektorové OSM mapy) na zobrazenie mapy.</string>
 	<string name="binary_map_download_success">Úspech. Môžete prepnúť na stiahnuté vektorové mapy v menu  Zobrazenie -> Zdroj mapy... -> Vektorové OSM mapy.</string>
-	<string name="choose_audio_stream">Tok hlasových povelov</string>
+	<string name="choose_audio_stream">Výstup hlasových povelov</string>
 	<string name="choose_audio_stream_descr">Výber kanálu pre prehrávanie hlasových povelov (závisí od systémovej konfigurácie)</string>
-	<string name="voice_stream_voice_call">Tok pre hlasový hovor</string>
-	<string name="voice_stream_notification">Tok pre oznámenia</string>
-	<string name="voice_stream_music">Tok pre hudbu</string>
+	<string name="voice_stream_voice_call">Telefónny hovor</string>
+	<string name="voice_stream_notification">Oznámenia</string>
+	<string name="voice_stream_music">Hudba/médiá</string>
 	<string name="warning_tile_layer_not_downloadable">Aplikácia nemôže stiahnuť mapovú vrstvu %1$s, prosím skúste ju preinštalovať.</string>	
 	<string name="overlay_transparency_descr">Úprava priehľadnosti prekrývacej mapy</string>
 	<string name="overlay_transparency">Priehľadnosť prekrývacej mapy</string>
@@ -36,7 +45,7 @@
 	<string name="tile_source_already_installed">Mapa je už nainštalovaná, nastavenia budú zaktualizované</string>
 	<string name="select_tile_source_to_install">Vyberte mapy na inštaláciu alebo aktualizáciu</string>
 	<string name="internet_not_available">Internetové pripojenie potrebné pre operáciu nie je dostupné</string>
-	<string name="install_more">Viac...</string>
+	<string name="install_more">Inštalovať viac...</string>
 	<string name="tip_update_index">Aktualizácia indexov</string>
 	<string name="tip_update_index_t">Veľmi dôležité je mať aktuálne mapové údaje. Osmand je vybavený sťahovacím manažérom, s ktorým môžete ľahko zistiť, či Vaše indexy môžu byť aktualizované.
 	\n\tNa kontrolu aktualizácií choďte do \'Hlavné menu\' -> \'Nastavenia\' -> \'Údaje pre offline použitie\' -> \'Stiahnuť offline údaje\'. Po načítaní zoznamu indexov z internetu, vyberte možnosť \'Zobraziť stiahnuté\' z kontextového menu.
@@ -74,7 +83,7 @@
 	
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> mapová klasifikácia s obrázkami</string>
     <string name="error_doing_search">Prihodila sa chyba pri offline hľadaní</string>
-    <string name="search_offline_geo_error">Nedá sa parsovať geo obsah:{0}</string>
+    <string name="search_offline_geo_error">Nedá sa parsovať geo obsah: {0}</string>
 	<string name="search_osm_offline">Nájsť adresu použitím stiahnutých máp</string>
 	
 	<string name="system_locale">Systémový</string>
@@ -120,7 +129,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 	<string name="mile_per_hour">mph</string>
 	<string name="mile">mi</string>
 	<string name="send_location_way_choose_title">Zdieľať umiestnenie cez</string>
-	<string name="send_location_sms_pattern">Ja som tu : {0}\n{1}</string>
+	<string name="send_location_sms_pattern">Ja som tu: {0}, {1}</string>
 	<string name="send_location_email_pattern">Na zobrazenie umiestnenia nasledujte webovský odkaz {0} alebo odkaz androidovského obsahu {1}</string>
 	<string name="send_location">Poslať umiestnenie</string>
 	<string name="context_menu_item_share_location">Zdieľať umiestnenie</string>
@@ -148,10 +157,10 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 	<string name="amenity_type_sustenance">Jedlo</string>
 	<string name="amenity_type_tourism">Turistika</string>
 	<string name="amenity_type_transportation">Doprava</string>
-	<string name="indexing_address">Indexovanie adries </string>
-	<string name="indexing_map">Indexovanie máp </string>
-	<string name="indexing_poi">Indexovanie POI </string>
-	<string name="indexing_transport">Indexovanie dopravy </string>
+	<string name="indexing_address">Indexovanie adries...</string>
+	<string name="indexing_map">Indexovanie máp...</string>
+	<string name="indexing_poi">Indexovanie POI...</string>
+	<string name="indexing_transport">Indexovanie dopravy...</string>
 	<string name="input_output_error">Vyskytla sa vstupno/výstupná chyba</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
@@ -313,7 +322,6 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="search_poi_filter">Filter</string>
 <string name="menu_mute_off">Zvuk zapnutý</string>
 <string name="menu_mute_on">Zvuk vypnutý</string>
-<string name="voice_not_use">Žiadny</string>
 <string name="voice_provider_descr">Výber hlasových údajov pre rutovanie</string>
 <string name="voice_provider">Hlasové údaje</string>
 <string name="voice_data_initializing">Inicializácia hlasových údajov...</string>
@@ -378,9 +386,9 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="clear_all">Zmazať všetko</string>
 <string name="history">História</string>
 <string name="uploading_data">Nahrávajú sa údaje...</string>
-<string name="uploading">Nahrávanie</string>
+<string name="uploading">Nahrávanie...</string>
 <string name="search_nothing_found">Nič sa nenašlo</string>
-<string name="searching">Vyhľadávanie</string>
+<string name="searching">Vyhľadávanie...</string>
 <string name="searching_address">Hľadá sa adresa...</string>
 <string name="search_osm_nominatim">Hľadanie adresy použiťím OSM Nominatim</string>
 <string name="hint_search_online">Číslo domu, ulica, mesto</string>
@@ -426,7 +434,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="loading_postcodes">Načítavajú sa PSČ...</string>
 <string name="loading_streets">Načítavajú sa ulice...</string>
 <string name="loading_cities">Naťítavajú sa mestá...</string>
-<string name="loading">Načítava sa</string>
+<string name="loading">Načítava sa...</string>
 <string name="poi">POI</string>
 <string name="error_occurred_saving_gpx">Chyba počas ukladania GPX</string>
 <string name="error_calculating_route">Chyba počas počítania cesty</string>
@@ -528,7 +536,7 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="choose_available_region">Vybrať oblasť zo zoznamu</string>
 <string name="choose_intersected_street">Vybrať pretínajúcu ulicu</string>
 <string name="Closest_Amenities">Najbližšie body záujmu</string>
-<string name="app_mode_default">Štandardný</string>
+<string name="app_mode_default">Štandardný(tiež nastaví štand. hodnoty)</string>
 <string name="app_mode_car">Automobil</string>
 <string name="app_mode_bicycle">Bicykel</string>
 <string name="app_mode_pedestrian">Chodec</string>
