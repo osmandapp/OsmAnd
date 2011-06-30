@@ -424,7 +424,11 @@ public class MapRenderRepositories {
 				this.bmpLocation = tileRect;
 			}
 			if(prefs.DEBUG_RENDERING_INFO.get()){
-				final String msg = "Search done in "+ searchTime+" ms\nRendering done in "+ renderingTime+ " ms";    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+				String timeInfo = "Search done in "+ searchTime+" ms\nRendering done in "+ renderingTime+ " ms";    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+				if(currentRenderingContext.renderingDebugInfo != null){
+					timeInfo += "\n"+currentRenderingContext.renderingDebugInfo;
+				}
+				final String msg = timeInfo;
 				handler.post(new Runnable(){
 					@Override
 					public void run() {
