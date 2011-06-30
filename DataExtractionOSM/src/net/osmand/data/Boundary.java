@@ -28,14 +28,14 @@ public class Boundary {
 		int intersections = 0;
 		for(Way w : outerWays){
 			for(int i=0; i<w.getNodes().size() - 1; i++){
-				if(MapAlgorithms.ray_intersect(w.getNodes().get(i), w.getNodes().get(i+1), latitude, longitude)){
+				if(MapAlgorithms.ray_intersect_lon(w.getNodes().get(i), w.getNodes().get(i+1), latitude, longitude) != -360d){
 					intersections ++;
 				}
 			}
 		}
 		for(Way w : innerWays){
 			for(int i=0; i<w.getNodes().size() - 1; i++){
-				if(MapAlgorithms.ray_intersect(w.getNodes().get(i), w.getNodes().get(i+1), latitude, longitude)){
+				if(MapAlgorithms.ray_intersect_lon(w.getNodes().get(i), w.getNodes().get(i+1), latitude, longitude) != -360d){
 					intersections ++;
 				}
 			}
