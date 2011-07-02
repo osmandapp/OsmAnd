@@ -1,21 +1,7 @@
 ﻿<renderer name="hm-night" depends="hm" defaultColor="#003333">
 	<!-- apparently renderer name must equal file name until first '.', or else automatic day/night switching fails -->
 
-	<!--
-		All Purpose Renderer (by Hardy Mueller), night version, v011. All area colors changed as follows:
-			default: 003333
 
-			built-up areas: 66004B
-			buildings: 560000
-
-			forest: 000034
-			other 'green' landuse: 004333
-
-			water: 330099
-
-			'white' roads: 9F9F9F 
-			leave other (colored) roads like day
-	--> 
 
 	<!-- input exact layer, orderType check tag, value -->
 	<order>
@@ -613,6 +599,7 @@
 		<filter minzoom="10" color="#66004B" tag="landuse" value="residential" />
 		<filter minzoom="12" maxzoom="14" color="#66004B" tag="landuse" value="retail" />
 		<filter minzoom="15" color="#66004B" color_2="#ff0000" strokeWidth_2="1" tag="landuse" value="retail" />
+		
 		<!-- filter minzoom="12" shader="quarry2" tag="landuse" value="quarry" / -->
 		<filter minzoom="12" color="#004333" tag="landuse" value="vineyard" />
 		<!-- filter minzoom="13" shader="vineyard" tag="landuse" value="vineyard" / -->
