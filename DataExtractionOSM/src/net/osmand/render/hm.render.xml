@@ -148,6 +148,9 @@
 
 		<!-- Highway text -->
 		<switch>
+		  <case nightMode="true" textColor="#000000" />
+  		  <case nightMode="false"/>
+		  <switch>
 			<case tag="highway" value="motorway" />
 			<case tag="highway" value="motorway_link" />
 			<case tag="highway" value="trunk" />
@@ -164,7 +167,7 @@
 				<filter minzoom="17" maxzoom="17" textSize="17" />
 				<filter minzoom="18" textSize="19" />
 			</filter>
-
+		  </switch>
 		</switch>
 
 		<switch>

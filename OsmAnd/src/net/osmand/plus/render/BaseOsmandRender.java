@@ -221,20 +221,8 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 
 
 	private boolean isObjectVisibleImpl(String tag, String val, int zoom, int type) {
-		if (rules[type] != null) {
-			Map<String, List<FilterState>> map = rules[type].get(tag);
-			if (map != null) {
-				List<FilterState> list = map.get(val);
-				if (list != null) {
-					for (FilterState f : list) {
-						if (f.minzoom <= zoom && (zoom <= f.maxzoom || f.maxzoom == -1)) {
-							return true;
-						}
-					}
-				}
-			}
-		}
-		return false;
+		FilterState fs = findBestFilterState(tag, val, zoom, false, 0, null, rules[type]);
+		return fs != null;
 	}
 
 	private float getObjectOrderImpl(String tag, String val, int type, int layer) {
@@ -253,68 +241,79 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 		}
 		return 0;
 	}
+	
 
 	private Integer getPointIconImpl(String tag, String val, int zoom) {
-		if (rules[OsmandRenderingRulesParser.POINT_STATE] != null) {
-			Map<String, List<FilterState>> map = rules[OsmandRenderingRulesParser.POINT_STATE].get(tag);
+		FilterState fs = findBestFilterState(tag, val, zoom, false, 0, null, rules[OsmandRenderingRulesParser.POINT_STATE]);
+		if (fs != null) {
+			Integer i = RenderingIcons.getIcons().get(fs.icon);
+			return i == null ? 0 : i;
+		}
+		return null;
+	}
+	
+	private FilterState findBestFilterState(String tag, String val, int zoom, boolean nightMode, int layer, Boolean ref,
+			Map<String, Map<String, List<FilterState>>> mapTag) {
+		if (mapTag != null) {
+			Map<String, List<FilterState>> map = mapTag.get(tag);
 			if (map != null) {
 				List<FilterState> list = map.get(val);
 				if (list != null) {
+					FilterState bestResult = null;
+					boolean prevDayNightMatches = false;
+					boolean prevLayerMatches = false;
 					for (FilterState f : list) {
 						if (f.minzoom <= zoom && (zoom <= f.maxzoom || f.maxzoom == -1)) {
-							Integer i = RenderingIcons.getIcons().get(f.icon);
-							return i == null ? 0 : i;
+							if(ref != null && !checkRefTextRule(f, ref.booleanValue())){
+								continue;
+							}
+							boolean dayNightMatches = (f.nightMode != null && f.nightMode.booleanValue() == nightMode) || 
+													(!nightMode && f.nightMode == null);
+							boolean layerMatches = f.layer == layer;
+							boolean defLayerMatches = f.layer == 0;
+							if (dayNightMatches || !prevDayNightMatches){
+								if(dayNightMatches && !prevDayNightMatches){
+									if(layerMatches || defLayerMatches){
+										prevDayNightMatches = true;
+										prevLayerMatches = false;
+									}
+								}
+								if(layerMatches){
+									prevLayerMatches = true;
+									bestResult = f;
+								} else if(defLayerMatches && !prevLayerMatches){
+									bestResult = f;
+								}
+							}
 						}
 					}
+					return bestResult;
 				}
 			}
 		}
 		return null;
 	}
-	
+
 	private boolean renderPolylineImpl(String tag, String val, int zoom, RenderingContext rc, OsmandRenderer o, int layer) {
-		if(rules[OsmandRenderingRulesParser.LINE_STATE] == null){
-			return false;
-		}
-		Map<String, List<FilterState>> map = rules[OsmandRenderingRulesParser.LINE_STATE].get(tag);
-		if (map != null) {
-			List<FilterState> list = map.get(val);
-			if (list != null) {
-				FilterState found = null;
-				for (FilterState f : list) {
-					if (f.minzoom <= zoom && (zoom <= f.maxzoom || f.maxzoom == -1) && f.layer == layer) {
-						found = f;
-						break;
-					}
-				}
-				if (found == null) {
-					for (FilterState f : list) {
-						if (f.minzoom <= zoom && (zoom <= f.maxzoom || f.maxzoom == -1) && f.layer == 0) {
-							found = f;
-							break;
-						}
-					}
-				}
-				if (found != null) {
-					// to not make transparent
-					rc.main.color = Color.BLACK;
-					if (found.shader != null) {
-						Integer i = RenderingIcons.getIcons().get(found.shader);
-						if (i != null) {
-							rc.main.shader = o.getShader(i);
-						}
-					}
-					rc.main.fillArea = false;
-					applyEffectAttributes(found.main, rc.main, o);
-					if (found.effectAttributes.size() > 0) {
-						applyEffectAttributes(found.effectAttributes.get(0), rc.second, o);
-						if (found.effectAttributes.size() > 1) {
-							applyEffectAttributes(found.effectAttributes.get(1), rc.third, o);
-						}
-					}
-					return true;
+		FilterState found = findBestFilterState(tag, val, zoom, false, layer, null, rules[OsmandRenderingRulesParser.LINE_STATE]);
+		if (found != null) {
+			// to not make transparent
+			rc.main.color = Color.BLACK;
+			if (found.shader != null) {
+				Integer i = RenderingIcons.getIcons().get(found.shader);
+				if (i != null) {
+					rc.main.shader = o.getShader(i);
 				}
 			}
+			rc.main.fillArea = false;
+			applyEffectAttributes(found.main, rc.main, o);
+			if (found.effectAttributes.size() > 0) {
+				applyEffectAttributes(found.effectAttributes.get(0), rc.second, o);
+				if (found.effectAttributes.size() > 1) {
+					applyEffectAttributes(found.effectAttributes.get(1), rc.third, o);
+				}
+			}
+			return true;
 		}
 		return false;
 	}
@@ -322,35 +321,25 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 	
 
 	private boolean renderPolygonImpl(String tag, String val, int zoom, RenderingContext rc, OsmandRenderer o) {
-		if(rules[OsmandRenderingRulesParser.POLYGON_STATE] == null){
-			return false;
-		}
-		Map<String, List<FilterState>> map = rules[OsmandRenderingRulesParser.POLYGON_STATE].get(tag);
-		if (map != null) {
-			List<FilterState> list = map.get(val);
-			if (list != null) {
-				for (FilterState f : list) {
-					if (f.minzoom <= zoom && (zoom <= f.maxzoom || f.maxzoom == -1)) {
-						if(f.shader != null){
-							Integer i = RenderingIcons.getIcons().get(f.shader);
-							if(i != null){
-								// to not make transparent
-								rc.main.color = Color.BLACK;
-								rc.main.shader = o.getShader(i);
-							}
-						}
-						rc.main.fillArea = true;
-						applyEffectAttributes(f.main, rc.main, o);
-						if(f.effectAttributes.size() > 0){
-							applyEffectAttributes(f.effectAttributes.get(0), rc.second, o);
-							if(f.effectAttributes.size() > 1){
-								applyEffectAttributes(f.effectAttributes.get(1), rc.third, o);
-							}
-						}
-						return true;
-					}
+		FilterState f = findBestFilterState(tag, val, zoom, false, 0, null, rules[OsmandRenderingRulesParser.POLYGON_STATE]);
+		if (f != null) {
+			if (f.shader != null) {
+				Integer i = RenderingIcons.getIcons().get(f.shader);
+				if (i != null) {
+					// to not make transparent
+					rc.main.color = Color.BLACK;
+					rc.main.shader = o.getShader(i);
 				}
 			}
+			rc.main.fillArea = true;
+			applyEffectAttributes(f.main, rc.main, o);
+			if (f.effectAttributes.size() > 0) {
+				applyEffectAttributes(f.effectAttributes.get(0), rc.second, o);
+				if (f.effectAttributes.size() > 1) {
+					applyEffectAttributes(f.effectAttributes.get(1), rc.third, o);
+				}
+			}
+			return true;
 		}
 		return false;
 	}
@@ -385,32 +374,12 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 	}
 
 	private String renderObjectTextImpl(String name, String tag, String val, RenderingContext rc, boolean ref) {
-		if(rules[OsmandRenderingRulesParser.TEXT_STATE] == null){
-			return null;
-		}
-		Map<String, List<FilterState>> map = rules[OsmandRenderingRulesParser.TEXT_STATE].get(tag);
-		if (map != null) {
-			List<FilterState> list = map.get(val);
-			if (list != null) {
-				// first find rule with same text length
-				for (FilterState f : list) {
-					if (f.minzoom <= rc.zoom && (rc.zoom <= f.maxzoom || f.maxzoom == -1) && checkRefTextRule(f, ref)) {
-						if(f.textLength == name.length()){
-							fillTextProperties(f, rc);
-							return name;
-						}
-					}
-				}
-				
-				for (FilterState f : list) {
-					if (f.minzoom <= rc.zoom && (rc.zoom <= f.maxzoom || f.maxzoom == -1) && checkRefTextRule(f, ref)) {
-						if(f.textLength == 0){
-							fillTextProperties(f, rc);
-							return name;
-						}
-					}
-				}
-			}
+		// TODO text length
+//			f.textLength == name.length()
+		FilterState fs = findBestFilterState(tag, val, rc.zoom, false, 0, ref, rules[OsmandRenderingRulesParser.TEXT_STATE]);
+		if(fs != null){
+			fillTextProperties(fs, rc);
+			return name;
 		}
 		return null;
 	}
