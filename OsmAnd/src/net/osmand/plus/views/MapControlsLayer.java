@@ -61,6 +61,7 @@ public class MapControlsLayer implements OsmandMapLayer {
 	private SeekBar transparencyBar;
 	private CommonPreference<Integer> settingsToTransparency;
 	private BaseMapLayer[] transparencyLayers;
+	private float scaleCoefficient;
 	
 
 	public MapControlsLayer(MapActivity activity){
@@ -79,6 +80,11 @@ public class MapControlsLayer implements OsmandMapLayer {
 		dm = new DisplayMetrics();
 		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
+		scaleCoefficient = dm.density;
+		if (Math.min(dm.widthPixels / (dm.density * 160), dm.heightPixels / (dm.density * 160)) > 2.5f) {
+			// large screen
+			scaleCoefficient *= 1.5f;
+		}
 		FrameLayout parent = (FrameLayout) view.getParent();
 		showUIHandler = new Handler();
 		
@@ -131,8 +137,8 @@ public class MapControlsLayer implements OsmandMapLayer {
 	private void drawApplicationMode(Canvas canvas) {
 		ApplicationMode  appMode = view.getSettings().getApplicationMode();
 		if(appMode != cacheApplicationMode){
-			modeShadow.setBounds(backToMenuButton.getLeft() + (int) (2 * dm.density), backToMenuButton.getTop() - (int) (20 * dm.density),
-					backToMenuButton.getRight() - (int) (4 * dm.density), backToMenuButton.getBottom());
+			modeShadow.setBounds(backToMenuButton.getLeft() + (int) (2 * scaleCoefficient), backToMenuButton.getTop() - (int) (20 * scaleCoefficient),
+					backToMenuButton.getRight() - (int) (4 * scaleCoefficient), backToMenuButton.getBottom());
 			if(appMode == ApplicationMode.BICYCLE){
 				cacheAppModeIcon = view.getResources().getDrawable(R.drawable.bicycle_small);
 			} else if(appMode == ApplicationMode.CAR){
@@ -141,7 +147,7 @@ public class MapControlsLayer implements OsmandMapLayer {
 				cacheAppModeIcon = view.getResources().getDrawable(R.drawable.pedestrian_small);
 			}
 			int l = modeShadow.getBounds().left + (modeShadow.getBounds().width() - cacheAppModeIcon.getMinimumWidth()) / 2;
-			int t = (int) (modeShadow.getBounds().top + 5 * dm.density);
+			int t = (int) (modeShadow.getBounds().top + 5 * scaleCoefficient);
 			cacheAppModeIcon.setBounds(l, t, l + cacheAppModeIcon.getMinimumWidth(), t + cacheAppModeIcon.getMinimumHeight());	
 		}
 		modeShadow.draw(canvas);
@@ -183,13 +189,13 @@ public class MapControlsLayer implements OsmandMapLayer {
 		String zoomText = view.getZoom() + "";
 		float length = zoomTextPaint.measureText(zoomText);
 		if (zoomShadow.getBounds().width() == 0) {
-			zoomShadow.setBounds(zoomInButton.getLeft() - 2, zoomInButton.getTop() - (int) (18 * dm.density), zoomInButton.getRight(),
+			zoomShadow.setBounds(zoomInButton.getLeft() - 2, zoomInButton.getTop() - (int) (18 * scaleCoefficient), zoomInButton.getRight(),
 					zoomInButton.getBottom());
 		}
 		zoomShadow.draw(canvas);
 				
 		canvas.drawText(zoomText, zoomInButton.getLeft() + (zoomInButton.getWidth() - length - 2) / 2,
-				zoomInButton.getTop() + 4 * dm.density, zoomTextPaint);
+				zoomInButton.getTop() + 4 * scaleCoefficient, zoomTextPaint);
 	}
 	
 	private void hideZoomLevelInTime(){
@@ -244,7 +250,7 @@ public class MapControlsLayer implements OsmandMapLayer {
 	
 	private void initRuler(OsmandMapTileView view, FrameLayout parent) {
 		rulerTextPaint = new TextPaint();
-		rulerTextPaint.setTextSize(20 * dm.density);
+		rulerTextPaint.setTextSize(20 * scaleCoefficient);
 		rulerTextPaint.setAntiAlias(true);
 		
 		
@@ -262,7 +268,7 @@ public class MapControlsLayer implements OsmandMapLayer {
 		parent.addView(bottomShadow, params);
 		
 		zoomTextPaint = new TextPaint();
-		zoomTextPaint.setTextSize(18 * dm.density);
+		zoomTextPaint.setTextSize(18 * scaleCoefficient);
 		zoomTextPaint.setAntiAlias(true);
 		zoomTextPaint.setFakeBoldText(true);
 		
@@ -315,7 +321,7 @@ public class MapControlsLayer implements OsmandMapLayer {
 		transparencyBar = new SeekBar(view.getContext());
 		transparencyBar.setVisibility(View.GONE);
 		transparencyBar.setMax(255);
-		params = new FrameLayout.LayoutParams((int) (dm.density * 100), LayoutParams.WRAP_CONTENT,
+		params = new FrameLayout.LayoutParams((int) (scaleCoefficient * 100), LayoutParams.WRAP_CONTENT,
 				Gravity.BOTTOM | Gravity.CENTER);
 		params.setMargins(0, 0, 0, minimumHeight + 3);
 		parent.addView(transparencyBar, params);
@@ -397,7 +403,7 @@ public class MapControlsLayer implements OsmandMapLayer {
 			cacheRulerTextLen = zoomTextPaint.measureText(cacheRulerText);
 			
 			Rect bounds = rulerDrawable.getBounds();
-			bounds.right = (int) (view.getWidth() - 7 * dm.density);
+			bounds.right = (int) (view.getWidth() - 7 * scaleCoefficient);
 			bounds.bottom = (int) (view.getHeight() - view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumHeight());
 			bounds.top = bounds.bottom - rulerDrawable.getMinimumHeight();
 			bounds.left = bounds.right - cacheRulerDistPix;
@@ -406,7 +412,7 @@ public class MapControlsLayer implements OsmandMapLayer {
 		if (cacheRulerText != null) {
 			rulerDrawable.draw(canvas);
 			Rect bounds = rulerDrawable.getBounds();
-			canvas.drawText(cacheRulerText, bounds.left + (bounds.width() - cacheRulerTextLen) / 2, bounds.bottom - 8 * dm.density,
+			canvas.drawText(cacheRulerText, bounds.left + (bounds.width() - cacheRulerTextLen) / 2, bounds.bottom - 8 * scaleCoefficient,
 					rulerTextPaint);
 		}
 	}
