@@ -105,6 +105,7 @@ public class OsmandRenderer {
 	
 	/*package*/ static class RenderingContext {
 		public boolean interrupted = false;
+		public boolean nightMode = false;
 		
 		List<TextDrawInfo> textToDraw = new ArrayList<TextDrawInfo>();
 		List<IconDrawInfo> iconsToDraw = new ArrayList<IconDrawInfo>();
@@ -270,14 +271,13 @@ public class OsmandRenderer {
 	
 	
 	public Bitmap generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, boolean useEnglishNames,
-			BaseOsmandRender renderer,
-			List<IMapDownloaderCallback> notifyList) {
+			BaseOsmandRender renderer, List<IMapDownloaderCallback> notifyList) {
 		long now = System.currentTimeMillis();
 		
 		// fill area
 		Canvas cv = new Canvas(bmp);
 		if(renderer != null){
-			int dc = renderer.getDefaultColor();
+			int dc = renderer.getDefaultColor(rc.nightMode);
 			if(dc != 0){
 				paintFillEmpty.setColor(dc);
 			}
@@ -669,7 +669,7 @@ public class OsmandRenderer {
 		rc.second.emptyLine();
 		rc.main.color = Color.rgb(245, 245, 245);
 		
-		boolean rendered = render.renderPolygon(tag, value, rc.zoom, rc, this);
+		boolean rendered = render.renderPolygon(tag, value, rc.zoom, rc, this, rc.nightMode);
 		if(!rendered){
 			return;
 		}
@@ -693,7 +693,7 @@ public class OsmandRenderer {
 				String name = ((MultyPolygon) obj).getName(i);
 				if (name != null) {
 					rc.clearText();
-					name = render.renderObjectText(name, tag, value, rc, false);
+					name = render.renderObjectText(name, tag, value, rc, false, rc.nightMode);
 					if (rc.textSize > 0 && name != null) {
 						TextDrawInfo info = new TextDrawInfo(name);
 						info.fillProperties(rc, xText / cnt, yText / cnt);
@@ -728,7 +728,7 @@ public class OsmandRenderer {
 		rc.second.emptyLine();
 		// rc.main.color = Color.rgb(245, 245, 245);
 		
-		boolean rendered = render.renderPolygon(pair.tag, pair.value, zoom, rc, this);
+		boolean rendered = render.renderPolygon(pair.tag, pair.value, zoom, rc, this, rc.nightMode);
 		if(!rendered){
 			return;
 		}
@@ -758,7 +758,7 @@ public class OsmandRenderer {
 			String name = obj.getName();
 			if(name != null){
 				rc.clearText();
-				name = render.renderObjectText(name, pair.tag, pair.value, rc, false);
+				name = render.renderObjectText(name, pair.tag, pair.value, rc, false, rc.nightMode);
 				if (rc.textSize > 0 && name != null) {
 					xText /= len;
 					yText /= len;
@@ -776,13 +776,13 @@ public class OsmandRenderer {
 			return;
 		}
 		
-		Integer resId = render.getPointIcon(pair.tag, pair.value, rc.zoom);
+		Integer resId = render.getPointIcon(pair.tag, pair.value, rc.zoom, rc.nightMode);
 		String name = null;
 		if (renderText) {
 			name = obj.getName();
 			if (name != null) {
 				rc.clearText();
-				name = render.renderObjectText(name, pair.tag, pair.value, rc, false);
+				name = render.renderObjectText(name, pair.tag, pair.value, rc, false, rc.nightMode);
 			}
 		}
 		if((resId == null || resId == 0) && name == null){
@@ -830,7 +830,7 @@ public class OsmandRenderer {
 		rc.second.emptyLine();
 		rc.third.emptyLine();
 		rc.adds = null;
-		boolean res = render.renderPolyline(pair.tag, pair.value, rc.zoom, rc, this, layer);
+		boolean res = render.renderPolyline(pair.tag, pair.value, rc.zoom, rc, this, layer, rc.nightMode);
 		if(rc.main.strokeWidth == 0 || !res){
 			return;
 		}
@@ -917,7 +917,7 @@ public class OsmandRenderer {
 				}
 				if(ref != null && ref.trim().length() > 0){
 					rc.clearText();
-					ref = render.renderObjectText(ref, pair.tag, pair.value, rc, true);
+					ref = render.renderObjectText(ref, pair.tag, pair.value, rc, true, rc.nightMode);
 					TextDrawInfo text = new TextDrawInfo(ref);
 					text.fillProperties(rc, middlePoint.x, middlePoint.y);
 					text.pathRotate = pathRotate;
@@ -927,7 +927,7 @@ public class OsmandRenderer {
 				
 				if(name != null && name.trim().length() > 0){
 					rc.clearText();
-					name = render.renderObjectText(name, pair.tag, pair.value, rc, false);
+					name = render.renderObjectText(name, pair.tag, pair.value, rc, false, rc.nightMode);
 					if (rc.textSize > 0) {
 						TextDrawInfo text = new TextDrawInfo(name);
 						if (!rc.showTextOnPath) {

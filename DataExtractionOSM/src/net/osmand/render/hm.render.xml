@@ -868,8 +868,8 @@
 		</switch>
 
         <switch>
-	      <case nightMode="false" color="#ffffff" color_2="#ffffff" shadowColor="#464646">
-	      <case nightMode="true" color="#9F9F9F" color_2="#9F9F9F" shadowColor="#666666">
+	      <case nightMode="false" color="#ffffff" color_2="#ffffff" shadowColor="#464646"/>
+	      <case nightMode="true" color="#9F9F9F" color_2="#9F9F9F" shadowColor="#666666"/>
 	  	  <switch>
 			<case tag="highway" value="residential" />
 			<case tag="highway" value="unclassified" />
@@ -901,15 +901,15 @@
 				</switch>
 				<!-- bridge -->
 				<switch>
-	              <case nightMode="false" color="#000000" >
-	              <case nightMode="true" color="#ffffff" >
-		   	  	  <filter layer="1"cap_2="SQUARE" >
-					<filter minzoom="13" maxzoom="14" strokeWidth="8" strokeWidth_2="6" />
-					<filter minzoom="15" maxzoom="15" strokeWidth="10" strokeWidth_2="8" />
-					<filter minzoom="16" maxzoom="16" strokeWidth="12" strokeWidth_2="10" />
-					<filter minzoom="17" maxzoom="17" strokeWidth="15" strokeWidth_2="13" />
-					<filter minzoom="18" strokeWidth="20" strokeWidth_2="18" />
-				   </filter>
+	              <case nightMode="false" color="#000000" />
+	              <case nightMode="true" color="#ffffff" />
+		   	  	  <filter layer="1" cap_2="SQUARE" >
+					 <filter minzoom="13" maxzoom="14" strokeWidth="8" strokeWidth_2="6" />
+					 <filter minzoom="15" maxzoom="15" strokeWidth="10" strokeWidth_2="8" />
+					 <filter minzoom="16" maxzoom="16" strokeWidth="12" strokeWidth_2="10" />
+					 <filter minzoom="17" maxzoom="17" strokeWidth="15" strokeWidth_2="13" />
+					 <filter minzoom="18" strokeWidth="20" strokeWidth_2="18" />
+				  </filter>
 				</switch>   
 			</filter>
 		  </switch>
@@ -933,8 +933,8 @@
 				</switch>
 				<!-- bridge -->
 				<switch>
-	              <case nightMode="false" color="#000000" >
-	              <case nightMode="true" color="#ffffff" >
+	              <case nightMode="false" color="#000000" />
+	              <case nightMode="true" color="#ffffff" />
 		   		  <filter layer="1" cap_2="SQUARE">
 					<filter minzoom="13" maxzoom="14" strokeWidth="5" strokeWidth_2="3" />
 					<filter minzoom="15" maxzoom="15" strokeWidth="6" strokeWidth_2="4" />
@@ -944,6 +944,7 @@
 				  </filter>
 				</switch>  
 			</filter>
+		  </switch>
 		</switch>
 
 		<filter tag="highway" value="cycleway">
@@ -960,8 +961,8 @@
 		</filter>
 
        <switch>
-	    <case nightMode="false" color="#000000">
-	    <case nightMode="true" color="#787878">
+	    <case nightMode="false" color="#000000"/>
+	    <case nightMode="true" color="#787878"/>
 		<filter minzoom="12" maxzoom="12" strokeWidth="0.5" pathEffect="6_3" tag="highway" value="path" />
 		<filter minzoom="13" strokeWidth="1" pathEffect="6_3" tag="highway" value="path" />
 	   </switch>	
@@ -1031,8 +1032,8 @@
 
 		<!-- waterway -->
 	   <switch>
-	    <case nightMode="false" color="#b5d0d0" color_2="#ffffff">
-	    <case nightMode="true" color="#330099" color_2="#7340D9">
+	    <case nightMode="false" color="#b5d0d0" color_2="#ffffff" />
+	    <case nightMode="true" color="#330099" color_2="#7340D9" />
 		
 		<filter minzoom="15" strokeWidth="2" tag="waterway" value="stream" />
 		<filter layer="-1" minzoom="15" strokeWidth="3" strokeWidth_2="1" pathEffect_2="4_2" tag="waterway"

@@ -27,20 +27,20 @@ public class RendererRegistry {
 	public final static String CAR_RENDER = "car";  //$NON-NLS-1$
 	public final static String BICYCLE_RENDER = "bicycle";  //$NON-NLS-1$
 	public final static String PEDESTRIAN_RENDER = "pedestrian";  //$NON-NLS-1$
-	public final static String NIGHT_SUFFIX = "-night"; //$NON-NLS-1$
-	public final static String DEFAULT_NIGHT_RENDER = DEFAULT_RENDER + NIGHT_SUFFIX; 
-	public final static String CAR_NIGHT_RENDER = CAR_RENDER + NIGHT_SUFFIX; 
+	//public final static String NIGHT_SUFFIX = "-night"; //$NON-NLS-1$
+//	public final static String DEFAULT_NIGHT_RENDER = DEFAULT_RENDER + NIGHT_SUFFIX; 
+//	public final static String CAR_NIGHT_RENDER = CAR_RENDER + NIGHT_SUFFIX; 
 
 	
 	
 	public RendererRegistry(){
 		internalRenderers.put(DEFAULT_RENDER, "default.render.xml"); //$NON-NLS-1$
-		internalRenderers.put(DEFAULT_NIGHT_RENDER, "default-night.render.xml"); //$NON-NLS-1$
+//		internalRenderers.put(DEFAULT_NIGHT_RENDER, "default-night.render.xml"); //$NON-NLS-1$
 		internalRenderers.put(CAR_RENDER, "car.render.xml"); //$NON-NLS-1$
-		internalRenderers.put(CAR_NIGHT_RENDER, "car-night.render.xml"); //$NON-NLS-1$
+//		internalRenderers.put(CAR_NIGHT_RENDER, "car-night.render.xml"); //$NON-NLS-1$
 		internalRenderers.put(BICYCLE_RENDER, "bicycle.render.xml"); //$NON-NLS-1$
 		internalRenderers.put("hm", "hm.render.xml"); //$NON-NLS-1$
-		internalRenderers.put("hm-night", "hm-night.render.xml"); //$NON-NLS-1$
+//		internalRenderers.put("hm-night", "hm-night.render.xml"); //$NON-NLS-1$
 	}
 	
 	private BaseOsmandRender defaultRender = null;
@@ -173,21 +173,6 @@ public class RendererRegistry {
 	
 	public void setCurrentSelectedRender(BaseOsmandRender currentSelectedRender) {
 		this.currentSelectedRender = currentSelectedRender;
-	}
-
-	/**
-	 * @return opposite renderer if exists otherwise return input
-	 */
-	public BaseOsmandRender getOppositeRendererForDayNight(BaseOsmandRender base) {
-		String oppositeName;
-		if (base.isDayRender()) {
-			oppositeName = base.name + NIGHT_SUFFIX;
-		} else {
-			oppositeName = base.name.substring(0, base.name.length() - NIGHT_SUFFIX.length());
-		}
-		
-		BaseOsmandRender opposite = getRenderer(oppositeName);
-		return opposite != null ? opposite : base;
 	}
 
 	
