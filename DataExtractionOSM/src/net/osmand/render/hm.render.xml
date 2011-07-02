@@ -375,7 +375,6 @@
        <switch>
 		<case nightMode="true" textColor="#ffffff"/>
 		<case nightMode="false"/>
-	
 		<filter minzoom="4" textSize="20" textDy="-8" textBold="true" textHaloRadius="1" textWrapWidth="20" tag="place" value="city" />
 		<filter minzoom="6" textSize="16" textDy="-8" textBold="true" textHaloRadius="1" textWrapWidth="20" tag="place" value="town" />
 		<filter minzoom="11" textSize="14" textHaloRadius="1" tag="place" value="village" />
@@ -956,7 +955,7 @@
 
 		<filter tag="highway" value="byway">
 			<filter minzoom="11" color="#ffcc00" strokeWidth="1" pathEffect="4_3" />
-			<filter layer="1" minzoom="14" color="#ffcc00" strokeWidth="2" pathEffect="4_3" />
+			<filter layer="1" minzoom="14" maxzoom="14" color="#ffcc00" strokeWidth="2" pathEffect="4_3" />
 			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="4" color_2="#ffcc00" strokeWidth_2="2" pathEffect_2="4_3" />
 		</filter>
 
