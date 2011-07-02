@@ -315,7 +315,7 @@ public class MapRenderRepositories {
 			
 			List<MultyPolygon> pMulti = proccessMultiPolygons(multiPolygons, leftX, rightX, bottomY, topY, zoom);
 			tempList.addAll(pMulti);
-			log.info(String.format("Search has been done in %s ms. %s results were found.", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
+			log.info(String.format("Search done in %s ms. %s results were found.", System.currentTimeMillis() - now, count)); //$NON-NLS-1$
 			
 			cObjects = tempList;
 			cObjectsBox = dataBox;

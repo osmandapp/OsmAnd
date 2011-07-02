@@ -355,6 +355,7 @@ public class OsmandRenderer {
 				}
 			}
 			notifyListeners(notifyList);
+			long beforeIconTextTime = System.currentTimeMillis() - now;
 			
 			int skewConstant = (int) (16 * dm.density);
 			
@@ -391,8 +392,9 @@ public class OsmandRenderer {
 			notifyListeners(notifyList);
 			drawTextOverCanvas(rc, cv, useEnglishNames);
 			long time = System.currentTimeMillis() - now;
-			rc.renderingDebugInfo = String.format("Rendering has been done in %s ms. (%s points, %s points inside, %s objects visile from %s)",//$NON-NLS-1$
-					time, rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
+			rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n" +
+					"(%s points, %s points inside, %s objects visile from %s)",//$NON-NLS-1$
+					time, time - beforeIconTextTime,rc.pointCount, rc.pointInsideCount, rc.visible, rc.allObjects);
 			log.info(rc.renderingDebugInfo);
 			
 		}
@@ -861,8 +863,8 @@ public class OsmandRenderer {
 				path = new Path();
 				path.moveTo(p.x, p.y);
 			} else {
-				xLength += p.x - xPrev; // not abs
-				yLength += p.y - yPrev; // not abs
+				xLength += (p.x - xPrev) * (p.x - xPrev); // not abs
+				yLength += (p.y - yPrev) * (p.y - yPrev); // not abs
 				if(i == middle){
 					middlePoint.set(p.x, p.y);
 					double rot = - Math.atan2(p.x - xPrev, p.y - yPrev) * 180 / Math.PI;
@@ -932,7 +934,7 @@ public class OsmandRenderer {
 							text.fillProperties(rc, middlePoint.x, middlePoint.y);
 							rc.textToDraw.add(text);
 						} else {
-							if (paintText.measureText(obj.getName()) < Math.abs(xLength) + Math.abs(yLength)) {
+							if (paintText.measureText(obj.getName()) < Math.sqrt(xLength + yLength) - 4) {
 								if (inverse) {
 									path.rewind();
 									boolean st = true;
