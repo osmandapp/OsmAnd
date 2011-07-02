@@ -210,7 +210,7 @@ public class MapRenderRepositories {
 		return false;
 	}
 	
-	private boolean loadVectorData(RectF dataBox, final int zoom, final BaseOsmandRender renderingType){
+	private boolean loadVectorData(RectF dataBox, final int zoom, final BaseOsmandRender renderingType, final boolean nightMode){
 		double cBottomLatitude = dataBox.bottom;
 		double cTopLatitude = dataBox.top;
 		double cLeftLongitude = dataBox.left;
@@ -246,11 +246,11 @@ public class MapRenderRepositories {
 							int type = types.get(j);
 							int mask = type & 3;
 							TagValuePair pair = root.decodeType(type);
-							if (pair != null &&  renderingType.isObjectVisible(pair.tag, pair.value, zoom, mask)) {
+							if (pair != null &&  renderingType.isObjectVisible(pair.tag, pair.value, zoom, mask, nightMode)) {
 								return true;
 							}
 							if(pair != null && mask == OsmandRenderingRulesParser.POINT_STATE && 
-									renderingType.isObjectVisible(pair.tag, pair.value, zoom, OsmandRenderingRulesParser.TEXT_STATE)){
+									renderingType.isObjectVisible(pair.tag, pair.value, zoom, OsmandRenderingRulesParser.TEXT_STATE, nightMode)){
 								return true;
 							}
 						}
@@ -352,10 +352,8 @@ public class MapRenderRepositories {
 			// find selected rendering type
 			OsmandApplication app = ((OsmandApplication)context.getApplicationContext());
 			Boolean renderDay = app.getDaynightHelper().getDayNightRenderer();
+			boolean nightMode = renderDay != null && !renderDay.booleanValue();
 			BaseOsmandRender renderingType = app.getRendererRegistry().getCurrentSelectedRenderer();
-			if(renderDay != null && renderingType != null && renderDay.booleanValue() != renderingType.isDayRender()){
-				renderingType = app.getRendererRegistry().getOppositeRendererForDayNight(renderingType);
-			}
 			
 			// prevent editing
 			requestedBox = new RotatedTileBox(tileRect);
@@ -377,7 +375,7 @@ public class MapRenderRepositories {
 					dataBox.bottom -= hi;
 				}
 				validateLatLonBox(dataBox);
-				boolean loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingType);
+				boolean loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingType, nightMode);
 				if (!loaded || checkWhetherInterrupted()) {
 					return;
 				}
@@ -391,6 +389,7 @@ public class MapRenderRepositories {
 			currentRenderingContext.rotate = requestedBox.getRotate();
 			currentRenderingContext.width = (int) (requestedBox.getTileWidth() * OsmandRenderer.TILE_SIZE);
 			currentRenderingContext.height = (int) (requestedBox.getTileHeight() * OsmandRenderer.TILE_SIZE);
+			currentRenderingContext.nightMode = nightMode;
 			if (checkWhetherInterrupted()) {
 				return;
 			}

@@ -76,18 +76,18 @@ public class DayNightHelper implements SensorEventListener {
 		} else // We are in auto mode!
 		if (dayNightMode.isAuto()) {
 			long currentTime = System.currentTimeMillis();
-			//allow recalculation each 5 seconds
-			if (currentTime - lastAutoCall > 5000) {
+			// allow recalculation each 60 seconds
+			if (currentTime - lastAutoCall > 60000) {
 				lastAutoCall = System.currentTimeMillis();
 				try {
 					Location lastKnownLocation = getLocation();
-					if(lastKnownLocation == null){
+					if (lastKnownLocation == null) {
 						return null;
 					}
 					double longitude = lastKnownLocation.getLongitude();
 					Date actualTime = new Date();
-					SunriseSunset daynightSwitch = new SunriseSunset(lastKnownLocation.getLatitude(), longitude < 0 ? 360 - longitude : longitude ,
-							actualTime, TimeZone.getDefault().getOffset(actualTime.getTime())/3600000);
+					SunriseSunset daynightSwitch = new SunriseSunset(lastKnownLocation.getLatitude(), longitude < 0 ? 360 - longitude
+							: longitude, actualTime, TimeZone.getDefault().getOffset(actualTime.getTime()) / 3600000);
 					boolean daytime = daynightSwitch.isDaytime();
 					log.debug("Sunrise/sunset setting to day: " + daytime); //$NON-NLS-1$
 					lastAutoValue = Boolean.valueOf(daytime);

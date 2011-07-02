@@ -34,6 +34,7 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 	
 	
 	private int defaultColor;
+	private int defaultNightColor;
 	
 	
 	public void init(InputStream is) throws IOException, SAXException{
@@ -46,14 +47,11 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 	public BaseOsmandRender() {
 	}
 
-	public boolean isDayRender() {
-		return !name.endsWith(RendererRegistry.NIGHT_SUFFIX);
-	}
-	
 	@Override
-	public void rendering(String name, String depends, int defaultColor) {
+	public void rendering(String name, String depends, int defaultColor, int defaultNightColor) {
 		this.name = name;
 		this.defaultColor = defaultColor;
+		this.defaultNightColor = defaultNightColor;
 		if(depends != null && depends.length() > 0){
 			for(String s : depends.split(",")) { //$NON-NLS-1$
 				if(s.trim().length() > 0){
@@ -63,11 +61,11 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 		}
 	}
 	
-	public int getDefaultColor() {
-		int r = defaultColor;
+	public int getDefaultColor(boolean nightMode) {
+		int r = nightMode ? defaultNightColor : defaultColor ;
 		if (r == 0) {
 			for (BaseOsmandRender d : dependRenderers) {
-				r = d.getDefaultColor();
+				r = d.getDefaultColor(nightMode);
 				if (r != 0) {
 					break;
 				}
@@ -99,14 +97,14 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 		}
 	}
 	
-	public Integer getPointIcon(String tag, String val, int zoom) {
-		Integer i = getPointIconImpl(tag, val, zoom);
+	public Integer getPointIcon(String tag, String val, int zoom, boolean nightMode) {
+		Integer i = getPointIconImpl(tag, val, zoom, nightMode);
 		if (i == null) {
-			i = getPointIconImpl(tag, null, zoom);
+			i = getPointIconImpl(tag, null, zoom, nightMode);
 		}
 		if (i == null) {
 			for (BaseOsmandRender d : dependRenderers) {
-				i = d.getPointIcon(tag, val, zoom);
+				i = d.getPointIcon(tag, val, zoom, nightMode);
 				if (i != null) {
 					break;
 				}
@@ -149,14 +147,14 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 		return f;
 	}
 	
-	public boolean renderPolyline(String tag, String val, int zoom, RenderingContext rc, OsmandRenderer o, int layer){
-		boolean r = renderPolylineImpl(tag,val, zoom, rc, o, layer);
+	public boolean renderPolyline(String tag, String val, int zoom, RenderingContext rc, OsmandRenderer o, int layer, boolean nightMode){
+		boolean r = renderPolylineImpl(tag,val, zoom, rc, o, layer, nightMode);
 		if(!r){
-			r = renderPolylineImpl(tag, null, zoom, rc, o, layer);
+			r = renderPolylineImpl(tag, null, zoom, rc, o, layer, nightMode);
 		}
 		if(!r){
 			for(BaseOsmandRender d : dependRenderers){
-				r = d.renderPolyline(tag, val, zoom, rc, o, layer);
+				r = d.renderPolyline(tag, val, zoom, rc, o, layer, nightMode);
 				if (r) {
 					break;
 				}
@@ -164,14 +162,14 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 		}
 		return r;
 	}
-	public boolean renderPolygon(String tag, String val, int zoom, RenderingContext rc, OsmandRenderer o){
-		boolean r = renderPolygonImpl(tag,val, zoom, rc, o);
+	public boolean renderPolygon(String tag, String val, int zoom, RenderingContext rc, OsmandRenderer o, boolean nightMode){
+		boolean r = renderPolygonImpl(tag,val, zoom, rc, o, nightMode);
 		if(!r){
-			r = renderPolygonImpl(tag, null, zoom, rc, o);
+			r = renderPolygonImpl(tag, null, zoom, rc, o, nightMode);
 		}
 		if(!r){
 			for(BaseOsmandRender d : dependRenderers){
-				r = d.renderPolygon(tag, val, zoom, rc, o);
+				r = d.renderPolygon(tag, val, zoom, rc, o, nightMode);
 				if (r) {
 					break;
 				}
@@ -180,17 +178,17 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 		return r;
 	}
 
-	public String renderObjectText(String name, String tag, String val, RenderingContext rc, boolean ref) {
+	public String renderObjectText(String name, String tag, String val, RenderingContext rc, boolean ref, boolean nightMode) {
 		if(name == null || name.length() == 0){
 			return null;
 		}
-		String ret = renderObjectTextImpl(name, tag, val, rc, ref);
+		String ret = renderObjectTextImpl(name, tag, val, rc, ref, nightMode);
 		if(ret == null){
-			ret = renderObjectTextImpl(name, tag, null, rc, ref);
+			ret = renderObjectTextImpl(name, tag, null, rc, ref, nightMode);
 		}
 		if(ret == null){
 			for(BaseOsmandRender d : dependRenderers){
-				ret = d.renderObjectText(name, tag, val, rc, ref);
+				ret = d.renderObjectText(name, tag, val, rc, ref, nightMode);
 				if (ret != null) {
 					break;
 				}
@@ -200,19 +198,19 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 		return ret;
 	}
 	
-	public boolean isObjectVisible(String tag, String val, int zoom, int type) {
+	public boolean isObjectVisible(String tag, String val, int zoom, int type, boolean nightMode) {
 		if (type == 0) {
 			// replace multipolygon with polygon
 			type = 3;
 		}
-		if (isObjectVisibleImpl(tag, val, zoom, type)) {
+		if (isObjectVisibleImpl(tag, val, zoom, type, nightMode)) {
 			return true;
 		}
-		if (isObjectVisibleImpl(tag, null, zoom, type)) {
+		if (isObjectVisibleImpl(tag, null, zoom, type, nightMode)) {
 			return true;
 		}
 		for (BaseOsmandRender d : dependRenderers) {
-			if (d.isObjectVisibleImpl(tag, val, zoom, type)) {
+			if (d.isObjectVisibleImpl(tag, val, zoom, type, nightMode)) {
 				return true;
 			}
 		}
@@ -220,8 +218,8 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 	}
 
 
-	private boolean isObjectVisibleImpl(String tag, String val, int zoom, int type) {
-		FilterState fs = findBestFilterState(tag, val, zoom, false, 0, null, rules[type]);
+	private boolean isObjectVisibleImpl(String tag, String val, int zoom, int type, boolean nightMode) {
+		FilterState fs = findBestFilterState(tag, val, zoom, nightMode, 0, null, 0, rules[type]);
 		return fs != null;
 	}
 
@@ -243,8 +241,8 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 	}
 	
 
-	private Integer getPointIconImpl(String tag, String val, int zoom) {
-		FilterState fs = findBestFilterState(tag, val, zoom, false, 0, null, rules[OsmandRenderingRulesParser.POINT_STATE]);
+	private Integer getPointIconImpl(String tag, String val, int zoom, boolean nightMode) {
+		FilterState fs = findBestFilterState(tag, val, zoom, nightMode, 0, null, 0, rules[OsmandRenderingRulesParser.POINT_STATE]);
 		if (fs != null) {
 			Integer i = RenderingIcons.getIcons().get(fs.icon);
 			return i == null ? 0 : i;
@@ -253,7 +251,7 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 	}
 	
 	private FilterState findBestFilterState(String tag, String val, int zoom, boolean nightMode, int layer, Boolean ref,
-			Map<String, Map<String, List<FilterState>>> mapTag) {
+			int nameLength, Map<String, Map<String, List<FilterState>>> mapTag) {
 		if (mapTag != null) {
 			Map<String, List<FilterState>> map = mapTag.get(tag);
 			if (map != null) {
@@ -265,6 +263,9 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 					for (FilterState f : list) {
 						if (f.minzoom <= zoom && (zoom <= f.maxzoom || f.maxzoom == -1)) {
 							if(ref != null && !checkRefTextRule(f, ref.booleanValue())){
+								continue;
+							}
+							if(f.textLength != nameLength){
 								continue;
 							}
 							boolean dayNightMatches = (f.nightMode != null && f.nightMode.booleanValue() == nightMode) || 
@@ -294,8 +295,8 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 		return null;
 	}
 
-	private boolean renderPolylineImpl(String tag, String val, int zoom, RenderingContext rc, OsmandRenderer o, int layer) {
-		FilterState found = findBestFilterState(tag, val, zoom, false, layer, null, rules[OsmandRenderingRulesParser.LINE_STATE]);
+	private boolean renderPolylineImpl(String tag, String val, int zoom, RenderingContext rc, OsmandRenderer o, int layer, boolean nightMode) {
+		FilterState found = findBestFilterState(tag, val, zoom, nightMode, layer, null, 0, rules[OsmandRenderingRulesParser.LINE_STATE]);
 		if (found != null) {
 			// to not make transparent
 			rc.main.color = Color.BLACK;
@@ -320,8 +321,8 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 	
 	
 
-	private boolean renderPolygonImpl(String tag, String val, int zoom, RenderingContext rc, OsmandRenderer o) {
-		FilterState f = findBestFilterState(tag, val, zoom, false, 0, null, rules[OsmandRenderingRulesParser.POLYGON_STATE]);
+	private boolean renderPolygonImpl(String tag, String val, int zoom, RenderingContext rc, OsmandRenderer o, boolean nightMode) {
+		FilterState f = findBestFilterState(tag, val, zoom, nightMode, 0, null, 0, rules[OsmandRenderingRulesParser.POLYGON_STATE]);
 		if (f != null) {
 			if (f.shader != null) {
 				Integer i = RenderingIcons.getIcons().get(f.shader);
@@ -373,14 +374,15 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 		}
 	}
 
-	private String renderObjectTextImpl(String name, String tag, String val, RenderingContext rc, boolean ref) {
-		// TODO text length
-//			f.textLength == name.length()
-		FilterState fs = findBestFilterState(tag, val, rc.zoom, false, 0, ref, rules[OsmandRenderingRulesParser.TEXT_STATE]);
+	private String renderObjectTextImpl(String name, String tag, String val, RenderingContext rc, boolean ref, boolean nightMode) {
+		FilterState fs = findBestFilterState(tag, val, rc.zoom, nightMode, 0, ref, name.length(), rules[OsmandRenderingRulesParser.TEXT_STATE]);
+		if(fs == null){
+			fs = findBestFilterState(tag, val, rc.zoom, nightMode, 0, ref, 0, rules[OsmandRenderingRulesParser.TEXT_STATE]);
+		}
 		if(fs != null){
 			fillTextProperties(fs, rc);
 			return name;
-		}
+		} 
 		return null;
 	}
 
