@@ -637,7 +637,9 @@
 
 		<!-- man made -->
 		<filter minzoom="16" color="#bca9a9" tag="building" />
+		       <filter nightMode="true" minzoom="16" color="#560000" tag="building" />		
 		<filter minzoom="16" color="#dddddd" tag="building" value="garages" />
+		       <filter nightMode="true" minzoom="16" color="#560000" tag="building" value="garages" />
 
 		<!-- leisure -->
 		<switch>
@@ -683,6 +685,7 @@
 		<filter minzoom="16" color="#bca9a9" tag="amenity" value="library" />
 				<filter minzoom="16" nightMode="true" color="#560000" tag="amenity" value="library" />
 		<filter minzoom="15" color="#f0f0d8" color_2="#d4a89e" strokeWidth_2="1" tag="amenity" value="university" />
+				<filter minzoom="15" nightMode="true" color="#66004B" color_2="#d4a89e" strokeWidth_2="1" tag="amenity" value="university" />
 		<filter minzoom="15" color="#f6eeb7" tag="amenity" value="parking" />
 				<filter minzoom="15" nightMode="true" color="#66004B" tag="amenity" value="parking" />
 		<filter minzoom="15" color="#f6eeb7" tag="amenity" value="bicycle_parking" />
@@ -826,6 +829,7 @@
 			<case tag="highway" value="secondary" />
 			<case tag="highway" value="secondary_link" />
 			<filter color="#fdd6a4">
+			    <!-- SW 3 -->
 				<filter minzoom="9" maxzoom="9" strokeWidth="2" />
 				<filter minzoom="10" maxzoom="10" strokeWidth="4" />
 				<filter minzoom="11" maxzoom="11" strokeWidth="5" />

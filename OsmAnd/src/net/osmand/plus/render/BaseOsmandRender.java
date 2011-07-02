@@ -210,7 +210,7 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 			return true;
 		}
 		for (BaseOsmandRender d : dependRenderers) {
-			if (d.isObjectVisibleImpl(tag, val, zoom, type, nightMode)) {
+			if (d.isObjectVisible(tag, val, zoom, type, nightMode)) {
 				return true;
 			}
 		}
