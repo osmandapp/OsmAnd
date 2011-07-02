@@ -60,6 +60,7 @@ public class OsmandRenderingRulesParser {
 		public int textLength = 0;
 		public float order = 0;
 		public int orderType = -1;
+		public Boolean nightMode = null;
 		
 		public String shader = null;
 		
@@ -220,6 +221,9 @@ public class OsmandRenderingRulesParser {
 			if(toMerge.minzoom != -1 && mergeInto.minzoom == -1){
 				mergeInto.minzoom = toMerge.minzoom;
 			}
+			if(toMerge.nightMode != null && mergeInto.nightMode == null){
+				mergeInto.nightMode = toMerge.nightMode;
+			}
 			if(toMerge.icon != null && mergeInto.icon == null){
 				mergeInto.icon = toMerge.icon;
 			}
@@ -337,6 +341,8 @@ public class OsmandRenderingRulesParser {
 					state.orderType = i1;
 				} else if(name.equals("order")){ //$NON-NLS-1$
 					state.order = Float.parseFloat(val);
+				} else if(name.equals("nightMode")){ //$NON-NLS-1$
+					state.nightMode = Boolean.parseBoolean(val);
 				} else if(name.equals("icon")){ //$NON-NLS-1$
 					state.icon = val;
 				} else if(name.equals("color")){ //$NON-NLS-1$
@@ -429,7 +435,7 @@ public class OsmandRenderingRulesParser {
     // TEST purpose 
 	public static void main(String[] args) throws IOException, SAXException {
 		OsmandRenderingRulesParser parser = new OsmandRenderingRulesParser();
-		parser.parseRenderingRules(OsmandRenderingRulesParser.class.getResourceAsStream("default.render.xml"),  //$NON-NLS-1$
+		parser.parseRenderingRules(OsmandRenderingRulesParser.class.getResourceAsStream("hm.render.xml"),  //$NON-NLS-1$
 				new RenderingRuleVisitor() {
 
 			@Override
@@ -439,6 +445,9 @@ public class OsmandRenderingRulesParser {
 
 			@Override
 			public void visitRule(int state, FilterState filter) {
+				if(filter.nightMode != null){
+					System.out.println(filter.minzoom +" " +filter.tag + " " + filter.val);
+				}
 				String gen = generateAttributes(state, filter);
 				if (gen != null) {
 					String res = ""; //$NON-NLS-1$
