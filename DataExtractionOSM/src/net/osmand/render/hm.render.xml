@@ -444,7 +444,7 @@
 		<filter minzoom="16" icon="shop_hairdresser" tag="shop" value="hairdresser" />
 		<filter minzoom="16" icon="department_store" tag="shop" value="mall" />
 		<filter minzoom="16" icon="shop_supermarket" tag="shop" value="supermarket" />
-		<filter minzoom="16" icon="semergency_phone" tag="emergency" value="phone" />
+		<filter minzoom="16" icon="emergency_phone" tag="emergency" value="phone" />
 		<filter minzoom="14" icon="camp_site" tag="tourism" value="camp_site" />
 		<filter minzoom="14" icon="caravan_park" tag="tourism" value="caravan_site" />
 		<filter minzoom="14" icon="picnic_site" tag="tourism" value="picnic_site" />
@@ -776,7 +776,7 @@
 		</filter>
 
 		<filter tag="highway" value="byway">
-			<filter layer="1" minzoom="11" color="#ffcc00" strokeWidth="1" pathEffect="4_3" />
+			<filter minzoom="11" color="#ffcc00" strokeWidth="1" pathEffect="4_3" />
 			<filter layer="1" minzoom="14" color="#ffcc00" strokeWidth="2" pathEffect="4_3" />
 			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="4" color_2="#ffcc00" strokeWidth_2="2" pathEffect_2="4_3" />
 		</filter>
@@ -798,7 +798,7 @@
 
 		<filter minzoom="12" maxzoom="12" color="#00ff00" strokeWidth="0.5" pathEffect="2_2" tag="highway" value="bridleway" />
 		<filter minzoom="13" color="#00ff00" strokeWidth="1" pathEffect="2_2" tag="highway" value="bridleway" />
-		<filter layer="1" minzoom="14" color="#00ff00" strokeWidth="1" pathEffect="2_2" tag="highway" value="bridleway" />
+		<filter layer="1" minzoom="14" maxzoom="14" color="#00ff00" strokeWidth="1" pathEffect="2_2" tag="highway" value="bridleway" />
 		<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="2" color_2="#00ff00" strokeWidth_2="2" pathEffect_2="2_2" tag="highway"
 			value="bridleway" />
 
