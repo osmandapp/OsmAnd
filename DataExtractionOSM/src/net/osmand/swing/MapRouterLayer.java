@@ -48,9 +48,15 @@ import org.xml.sax.SAXException;
 
 public class MapRouterLayer implements MapPanelLayer {
 
+	private /*final */ static boolean ANIMATE_CALCULATING_ROUTE = true;
+	private /*final */ static int SIZE_OF_ROUTES_TO_ANIMATE = 1;
+	
+	
 	private MapPanel map;
 	private LatLon startRoute;
 	private LatLon endRoute;
+	
+	
 	@Override
 	public void destroyLayer() {
 		
@@ -362,13 +368,16 @@ public class MapRouterLayer implements MapPanelLayer {
 				points.setZoom(11);
 				map.setPoints(points);
 				ctx.visitor = new RouteSegmentVisitor() {
-					private final static int F_SIZE = 10;
+					
 					private List<RouteSegment> cache = new ArrayList<RouteSegment>();
 					
 					@Override
 					public void visitSegment(RouteSegment s) {
+						if(!ANIMATE_CALCULATING_ROUTE){
+							return;
+						}
 						cache.add(s);
-						if(cache.size() < F_SIZE){
+						if(cache.size() < SIZE_OF_ROUTES_TO_ANIMATE){
 							return;
 						}
 						for (RouteSegment segment : cache) {
@@ -397,9 +406,11 @@ public class MapRouterLayer implements MapPanelLayer {
 					}
 				};
 				List<RouteSegmentResult> searchRoute = router.searchRoute(ctx, st, e);
-				try {
-					Thread.sleep(4000);
-				} catch (InterruptedException e1) {
+				if (ANIMATE_CALCULATING_ROUTE) {
+					try {
+						Thread.sleep(4000);
+					} catch (InterruptedException e1) {
+					}
 				}
 
 				for(RouteSegmentResult s : searchRoute){

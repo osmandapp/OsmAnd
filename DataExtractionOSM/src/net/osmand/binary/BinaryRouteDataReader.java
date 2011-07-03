@@ -30,7 +30,9 @@ import org.apache.commons.logging.Log;
 
 public class BinaryRouteDataReader {
 	
+	private final static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
 	private final BinaryMapIndexReader[] map;
+	private int HEURISTIC_COEFFICIENT = 3;
 	
 	private static final Log log = LogUtil.getLog(BinaryRouteDataReader.class);
 	
@@ -198,6 +200,7 @@ public class BinaryRouteDataReader {
 		
 		long timeToLoad = 0;
 		long timeToCalculate = 0;
+		int visitedSegments = 0;
 		
 		public Collection<BinaryMapDataObject> values(){
 			return idObjects.valueCollection();
@@ -337,6 +340,13 @@ public class BinaryRouteDataReader {
 		return road;
 	}
 	
+	public int roadPriorityComparator(double o1DistanceFromStart, double o1DistanceToEnd, 
+			double o2DistanceFromStart, double o2DistanceToEnd) {
+		// f(x) = g(x) + h(x)  --- g(x) - distanceFromStart, h(x) - distanceToEnd (not exact)
+		return Double.compare(o1DistanceFromStart + HEURISTIC_COEFFICIENT * o1DistanceToEnd, 
+				o2DistanceFromStart + HEURISTIC_COEFFICIENT *  o2DistanceToEnd);
+	}
+	
 	
 	// TODO write unit tests
 	// TODO add information about turns
@@ -350,19 +360,20 @@ public class BinaryRouteDataReader {
 	 * return list of segments
 	 */
 	public List<RouteSegmentResult> searchRoute(RoutingContext ctx, RouteSegment start, RouteSegment end) throws IOException {
-		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
+		
 		// measure time
 		ctx.timeToLoad = 0;
-		long now = System.nanoTime();
+		ctx.visitedSegments = 0;
+		long startNanoTime = System.nanoTime();
 
 		// Initializing priority queue to visit way segments 
-		PriorityQueue<RouteSegment> graphSegments = new PriorityQueue<RouteSegment>(50, new Comparator<RouteSegment>(){
+		Comparator<RouteSegment> segmentsComparator = new Comparator<RouteSegment>(){
 			@Override
 			public int compare(RouteSegment o1, RouteSegment o2) {
-				// f(x) = g(x) + h(x)  --- g(x) - distanceFromStart, h(x) - distanceToEnd (not exact)
-				return Double.compare(o1.distanceFromStart + o1.distanceToEnd, o2.distanceFromStart + o2.distanceToEnd);
+				return roadPriorityComparator(o1.distanceFromStart, o1.distanceToEnd, o2.distanceFromStart, o2.distanceToEnd);
 			}
-		});
+		};
+		PriorityQueue<RouteSegment> graphSegments = new PriorityQueue<RouteSegment>(50, segmentsComparator);
 		// initialize temporary lists to calculate not forbidden ways at way intersections 
 		ArrayList<RouteSegment> segmentsToVisitPrescricted = new ArrayList<RouteSegment>(5);
 		ArrayList<RouteSegment> segmentsToVisitNotForbidden = new ArrayList<RouteSegment>(5);
@@ -405,6 +416,7 @@ public class BinaryRouteDataReader {
 			RouteSegment segment = graphSegments.poll();
 			BinaryMapDataObject road = segment.road;
 			
+			ctx.visitedSegments ++;
 			// for debug purposes
 			if (ctx.visitor != null) {
 				ctx.visitor.visitSegment(segment);
@@ -522,8 +534,9 @@ public class BinaryRouteDataReader {
 								
 								double distanceToEnd = squareRootDist(x, y, endX, endY) / ctx.router.getMaxDefaultSpeed();
 								
-								if(next.parentRoute == null || next.distanceFromStart + next.distanceToEnd > 
-											distanceFromStart + distanceToEnd){
+								if(next.parentRoute == null || 
+										roadPriorityComparator(next.distanceFromStart, next.distanceToEnd, 
+												distanceFromStart, distanceToEnd) > 0){
 									next.distanceFromStart = distanceFromStart;
 									next.distanceToEnd = distanceToEnd;
 									if(next.parentRoute != null){
@@ -563,34 +576,49 @@ public class BinaryRouteDataReader {
 		
 		
 		// 4. Route is found : collect all segments and prepare result
-		
+		return prepareResult(ctx, start, end, startNanoTime, finalRoute);
+	}
+
+	
+	
+	private List<RouteSegmentResult> prepareResult(RoutingContext ctx, RouteSegment start, RouteSegment end, long startNanoTime,
+			RouteSegment finalRoute) {
+		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
 		// Try to define direction of last movement and reverse start and end point for end if needed
 		int parentSegmentEnd = finalRoute != null && finalRoute.segmentStart <= end.segmentStart ? 
 				end.segmentEnd : end.segmentStart;
 		RouteSegment segment = finalRoute;
 		
-		System.out.println("ROUTE : ");
-		System.out.println("Start lat=" + MapUtils.get31LatitudeY(start.road.getPoint31YTile(start.segmentEnd)) + 
-				" lon=" + MapUtils.get31LongitudeX(start.road.getPoint31XTile(start.segmentEnd)));
-		System.out.println("END lat=" + MapUtils.get31LatitudeY(end.road.getPoint31YTile(end.segmentStart)) + 
-				" lon=" + MapUtils.get31LongitudeX(end.road.getPoint31XTile(end.segmentStart)));
+		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
+			System.out.println("ROUTE : ");
+			System.out.println("Start lat=" + MapUtils.get31LatitudeY(start.road.getPoint31YTile(start.segmentEnd)) + " lon="
+					+ MapUtils.get31LongitudeX(start.road.getPoint31XTile(start.segmentEnd)));
+			System.out.println("END lat=" + MapUtils.get31LatitudeY(end.road.getPoint31YTile(end.segmentStart)) + " lon="
+					+ MapUtils.get31LongitudeX(end.road.getPoint31XTile(end.segmentStart)));
+		}
+		
 		while(segment != null){
 			RouteSegmentResult res = new RouteSegmentResult();
 			res.object = segment.road;
 			res.endPointIndex = parentSegmentEnd;
 			res.startPointIndex = segment.segmentStart;
 			parentSegmentEnd = segment.parentSegmentEnd;
-//			System.out.println(segment.road.name + " time to go " + 
-//					(segment.distanceFromStart  / 60) + " estimate time " + (segment.distanceToEnd  / 60));
+			if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
+				//			System.out.println(segment.road.name + " time to go " + 
+				//	(segment.distanceFromStart  / 60) + " estimate time " + (segment.distanceToEnd  / 60));
+			}
 			
 			segment = segment.parentRoute;
 			// reverse start and end point for start if needed
 			if(segment == null && res.startPointIndex >= res.endPointIndex){
 				res.startPointIndex = start.segmentEnd;
 			}
-			// do not add segments consists from 1 poitn 
+			// do not add segments consists from 1 point
 			if(res.startPointIndex != res.endPointIndex) {
-				System.out.println("id="+(res.object.id >> 1) + " start=" + res.startPointIndex + " end=" + res.endPointIndex);
+				if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
+					System.out.println("id=" + (res.object.id >> 1) + " start=" + res.startPointIndex + " end=" + res.endPointIndex);
+				}
+				
 				result.add(0, res);
 			}
 			res.startPoint = convertPoint(res.object, res.startPointIndex);
@@ -598,14 +626,17 @@ public class BinaryRouteDataReader {
 		}
 		
 		
-		ctx.timeToCalculate = (System.nanoTime() - now);
-		log.info("Time to calculate : " + ctx.timeToCalculate / 1e6 +", time to load : " + ctx.timeToLoad / 1e6	 + ", loaded tiles : " + ctx.loadedTiles.size());
+		ctx.timeToCalculate = (System.nanoTime() - startNanoTime);
+		log.info("Time to calculate : " + ctx.timeToCalculate / 1e6 +", time to load : " + ctx.timeToLoad / 1e6	 + ", loaded tiles : " + ctx.loadedTiles.size() + 
+				", visited segments " + ctx.visitedSegments );
 		return result;
 	}
 	
 	private LatLon convertPoint(BinaryMapDataObject o, int ind){
 		return new LatLon(MapUtils.get31LatitudeY(o.getPoint31YTile(ind)), MapUtils.get31LongitudeX(o.getPoint31XTile(ind)));
 	}
+	
+	
 	
 	public static void main(String[] args) throws IOException {
 		RandomAccessFile raf = new RandomAccessFile(new File("d:\\android\\data\\Belarus.obf"), "r"); //$NON-NLS-1$ //$NON-NLS-2$
