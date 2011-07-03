@@ -177,7 +177,7 @@ public class BinaryRoutePlanner {
 		};
 		PriorityQueue<RouteSegment> graphSegments = new PriorityQueue<RouteSegment>(50, segmentsComparator);
 		// initialize temporary lists to calculate not forbidden ways at way intersections 
-		ArrayList<RouteSegment> segmentsToVisitPrescricted = new ArrayList<RouteSegment>(5);
+		ArrayList<RouteSegment> segmentsToVisitPrescripted = new ArrayList<RouteSegment>(5);
 		ArrayList<RouteSegment> segmentsToVisitNotForbidden = new ArrayList<RouteSegment>(5);
 		
 		// Set to not visit one segment twice (stores road.id << X + segmentStart)
@@ -282,7 +282,7 @@ public class BinaryRoutePlanner {
 				RouteSegment next = ctx.routes.get(l);
 				if (next != null) {
 					
-					segmentsToVisitPrescricted.clear();
+					segmentsToVisitPrescripted.clear();
 					segmentsToVisitNotForbidden.clear();
 					boolean exclusiveRestriction = false;
 					
@@ -355,7 +355,7 @@ public class BinaryRoutePlanner {
 										// case exclusive restriction (only_right, only_straight, ...)
 										exclusiveRestriction = true;
 										segmentsToVisitNotForbidden.clear();
-										segmentsToVisitPrescricted.add(next);
+										segmentsToVisitPrescripted.add(next);
 									}
 								}
 									
@@ -369,7 +369,7 @@ public class BinaryRoutePlanner {
 					for(RouteSegment s : segmentsToVisitNotForbidden){
 						graphSegments.add(s);
 					}
-					for(RouteSegment s : segmentsToVisitPrescricted){
+					for(RouteSegment s : segmentsToVisitPrescripted){
 						graphSegments.add(s);
 					}
 				}
