@@ -1,4 +1,4 @@
-﻿﻿<renderer name="hm" depends="" defaultColor="#f1eee8" defaultNightColor="#003333">
+﻿﻿<renderer name="hm-all-purpose" depends="" defaultColor="#f1eee8" defaultNightColor="#003333">
 	<!-- apparently renderer name must equal file name until first '.', or else automatic day/night switching fails -->
 
 	<!--
@@ -15,7 +15,7 @@
 		 - z17 = Building details, street corner details.
 	--> 
 	<!--
-		    Night rendere
+		    Night renderer
 			default: 003333
 
 			built-up areas: 66004B
