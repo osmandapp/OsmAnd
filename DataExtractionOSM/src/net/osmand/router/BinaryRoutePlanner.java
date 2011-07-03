@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -32,7 +33,7 @@ public class BinaryRoutePlanner {
 	
 	private final static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
 	private final BinaryMapIndexReader[] map;
-	private static int DEFAULT_HEURISTIC_COEFFICIENT = 1;
+	private static int DEFAULT_HEURISTIC_COEFFICIENT = 3;
 	
 	private static final Log log = LogUtil.getLog(BinaryRoutePlanner.class);
 	
@@ -159,6 +160,7 @@ public class BinaryRoutePlanner {
 		// measure time
 		ctx.timeToLoad = 0;
 		ctx.visitedSegments = 0;
+		boolean reverseWaySearch = false;
 		long startNanoTime = System.nanoTime();
 
 		// Initializing priority queue to visit way segments 
@@ -174,6 +176,11 @@ public class BinaryRoutePlanner {
 		TLongHashSet visitedSegments = new TLongHashSet();
 		
 		
+		if(reverseWaySearch){
+			RouteSegment t = start;
+			start = end;
+			end = t;
+		}
 		int targetEndX = end.road.getPoint31XTile(end.segmentEnd);
 		int targetEndY = end.road.getPoint31YTile(end.segmentEnd);
 		int startX = start.road.getPoint31XTile(start.segmentStart);
@@ -220,37 +227,39 @@ public class BinaryRoutePlanner {
 			int middle = segment.segmentStart;
 			int middlex = road.getPoint31XTile(middle);
 			int middley = road.getPoint31YTile(middle);
-			// +/- diff from middle point
-			int d = 1;
 			
 			boolean oneway = ctx.router.isOneWay(road.getHighwayAttributes());
-			boolean minus = true;
-			boolean plus = true;
+			boolean minusAllowed =  !oneway || reverseWaySearch;
+			boolean plusAllowed =  !oneway || !reverseWaySearch;
 			
 			if(end.road.getId() == road.getId() && end.segmentStart == middle){
 				finalRoute = segment;
 			}
-			
+
+			// +/- diff from middle point
+			int d = plusAllowed ? 1 : -1;
 			// Go through all point of the way and find ways to continue
-			while(finalRoute == null && ((!oneway && minus) || plus)) {
+			while(finalRoute == null && (minusAllowed || plusAllowed)) {
 				// 1. calculate point not equal to middle
 				//	  (algorithm should visit all point on way if it is not oneway)
 				int j = middle + d;
-				if(oneway){
+				if (!minusAllowed && d > 0) {
 					d++;
+				} else if (!plusAllowed && d < 0) {
+					d--;
 				} else {
-					if(d <= 0){
+					if (d <= 0){
 						d = -d + 1;
 					} else {
 						d = -d;
 					}
 				}
 				if(j < 0){
-					minus = false;
+					minusAllowed = false;
 					continue;
 				}
 				if(j >= road.getPointsLength()){
-					plus = false;
+					plusAllowed = false;
 					continue;
 				}
 
@@ -281,7 +290,8 @@ public class BinaryRoutePlanner {
 		
 		
 		// 4. Route is found : collect all segments and prepare result
-		return prepareResult(ctx, start, end, startNanoTime, finalRoute);
+		return prepareResult(ctx, start, end, startNanoTime, finalRoute, !reverseWaySearch);
+		
 	}
 
 
@@ -380,7 +390,7 @@ public class BinaryRoutePlanner {
 	
 	
 	private List<RouteSegmentResult> prepareResult(RoutingContext ctx, RouteSegment start, RouteSegment end, long startNanoTime,
-			RouteSegment finalRoute) {
+			RouteSegment finalRoute, boolean reverseResult) {
 		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
 		// Try to define direction of last movement and reverse start and end point for end if needed
 		int parentSegmentEnd = finalRoute != null && finalRoute.segmentStart <= end.segmentStart ? 
@@ -401,10 +411,6 @@ public class BinaryRoutePlanner {
 			res.endPointIndex = parentSegmentEnd;
 			res.startPointIndex = segment.segmentStart;
 			parentSegmentEnd = segment.parentSegmentEnd;
-			if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
-				//			System.out.println(segment.road.name + " time to go " + 
-				//	(segment.distanceFromStart  / 60) + " estimate time " + (segment.distanceToEnd  / 60));
-			}
 			
 			segment = segment.parentRoute;
 			// reverse start and end point for start if needed
@@ -413,16 +419,22 @@ public class BinaryRoutePlanner {
 			}
 			// do not add segments consists from 1 point
 			if(res.startPointIndex != res.endPointIndex) {
-				if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
-					System.out.println("id=" + (res.object.getId() >> 1) + " start=" + res.startPointIndex + " end=" + res.endPointIndex);
-				}
-				
-				result.add(0, res);
+				result.add(res);
 			}
 			res.startPoint = convertPoint(res.object, res.startPointIndex);
 			res.endPoint = convertPoint(res.object, res.endPointIndex);
 		}
 		
+		
+		if(reverseResult){
+			Collections.reverse(result);
+		}
+		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
+			for (RouteSegmentResult res : result) {
+				System.out.println("id=" + (res.object.getId() >> 1) + " start=" + res.startPointIndex + " end=" + res.endPointIndex);
+				System.out.println("Name :" + res.object.getName());
+			}
+		}
 		
 		ctx.timeToCalculate = (System.nanoTime() - startNanoTime);
 		log.info("Time to calculate : " + ctx.timeToCalculate / 1e6 +", time to load : " + ctx.timeToLoad / 1e6	 + ", loaded tiles : " + ctx.loadedTiles.size() + 
