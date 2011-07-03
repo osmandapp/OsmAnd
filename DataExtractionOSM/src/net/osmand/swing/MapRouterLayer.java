@@ -27,16 +27,16 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryRouteDataReader;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
-import net.osmand.binary.BinaryRouteDataReader.RouteSegment;
-import net.osmand.binary.BinaryRouteDataReader.RouteSegmentResult;
-import net.osmand.binary.BinaryRouteDataReader.RouteSegmentVisitor;
-import net.osmand.binary.BinaryRouteDataReader.RoutingContext;
 import net.osmand.data.DataTileManager;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Way;
+import net.osmand.router.BinaryRoutePlanner;
+import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+import net.osmand.router.BinaryRoutePlanner.RouteSegmentResult;
+import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
+import net.osmand.router.BinaryRoutePlanner.RoutingContext;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -344,7 +344,7 @@ public class MapRouterLayer implements MapPanelLayer {
 					
 				}
 				
-				BinaryRouteDataReader router = new BinaryRouteDataReader(rs);
+				BinaryRoutePlanner router = new BinaryRoutePlanner(rs);
 				RoutingContext ctx = new RoutingContext();
 				
 				// find closest way

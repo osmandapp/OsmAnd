@@ -1,4 +1,4 @@
-package net.osmand.binary;
+package net.osmand.router;
 
 public class RouterTests {
 	//	
