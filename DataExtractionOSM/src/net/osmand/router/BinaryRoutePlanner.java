@@ -520,7 +520,7 @@ public class BinaryRoutePlanner {
 	public static class RoutingContext {
 		TLongObjectMap<BinaryMapDataObject> idObjects = new TLongObjectHashMap<BinaryMapDataObject>();
 		TLongObjectMap<RouteSegment> routes = new TLongObjectHashMap<RouteSegment>();
-		CarRouter router = new CarRouter();
+		public VehicleRouter router = new CarRouter();
 		
 		TIntSet loadedTiles = new TIntHashSet();
 		// set collection to not null to monitor visited ways

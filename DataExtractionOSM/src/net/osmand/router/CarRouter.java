@@ -8,7 +8,7 @@ import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 
-public class CarRouter {
+public class CarRouter extends VehicleRouter {
 		// no distinguish for speed in city/outside city (for now)
 		private Map<String, Double> autoNotDefinedValues = new LinkedHashMap<String, Double>();
 		private Map<String, Double> autoPriorityValues = new LinkedHashMap<String, Double>();
