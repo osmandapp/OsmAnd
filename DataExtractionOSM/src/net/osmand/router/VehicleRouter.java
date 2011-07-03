@@ -58,5 +58,5 @@ public abstract class VehicleRouter {
 	/**
 	 * Calculate turn time 
 	 */
-	public abstract double calculateTurnTime(int middley, int middlex, int x, int y, RouteSegment segment, RouteSegment next, int j) ;
+	public abstract double calculateTurnTime(RouteSegment segment, RouteSegment next, int segmentEnd) ;
 }

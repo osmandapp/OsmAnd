@@ -144,16 +144,17 @@ public class BicycleRouter extends VehicleRouter {
 		return 9;
 	}
 
-	public double calculateTurnTime(int middley, int middlex, int x, int y, RouteSegment segment, RouteSegment next, int j) {
-		boolean lineAreNotConnected = j < segment.road.getPointsLength() - 1 || next.segmentStart != 0;
-		if (lineAreNotConnected) {
-			return 5;
-		} else {
-			if (next.road.getPointsLength() > 1) {
+	public double calculateTurnTime(RouteSegment segment, RouteSegment next, int segmentEnd) {
+		boolean end = (segmentEnd == segment.road.getPointsLength() - 1 || segmentEnd == 0);
+		boolean start = next.segmentStart == 0;
+		if (end) {
+			if(!start){
 				return 5;
 			}
+			return 0;
+		} else {
+			return 5;
 		}
-		return 0;
 	}
 
 }
