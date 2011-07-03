@@ -1,8 +1,6 @@
 ﻿﻿<renderer name="all-purpose" depends="" defaultColor="#f1eee8" defaultNightColor="#003333">
-	<!-- apparently renderer name must equal file name until first '.', or else automatic day/night switching fails -->
-
 	<!--
-		All Purpose Renderer (by Hardy Mueller), v011:
+		All Purpose Renderer, essentially more details than default (by Hardy Mueller), v012:
 		Map rendering aligned to typical map use for all zoom levels/scales, hence always yields a complete and reliable map.
 		All features displayed at each zoom level (zX) are those for its typical use:
 		 - z7  = "Rough Country Level Overview": Shows motorways, trunks, primary roads and city names
@@ -21,7 +19,7 @@
 	-->
 
 	<!--
-		    Colors for night renderer
+		    Main colors for night renderer:
 			default: 003333
 			built-up areas: 66004B
 			buildings: 560000
