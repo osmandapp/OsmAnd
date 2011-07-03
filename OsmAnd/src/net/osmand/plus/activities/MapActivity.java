@@ -1008,7 +1008,12 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			}
 			return true;
 		case R.id.map_get_directions:
-			getDirections(mapView.getLatitude(), mapView.getLongitude(), true);
+			Location loc = getLastKnownLocation();
+			if(loc != null){
+				getDirections(loc.getLatitude(), loc.getLongitude(), true);
+			} else {
+				getDirections(mapView.getLatitude(), mapView.getLongitude(), true);
+			}
 			return true;
 		case R.id.map_layers:
 			mapLayers.openLayerSelectionDialog(mapView);
@@ -1110,11 +1115,13 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				ApplicationMode mode = getAppMode(buttons);
-				Location map = getLocationToStartFrom(lat, lon);
+				Location location = new Location("map"); //$NON-NLS-1$
+				location.setLatitude(lat);
+				location.setLongitude(lon);
 				routingHelper.setAppMode(mode);
 				settings.FOLLOW_TO_THE_ROUTE.set(false);
 				routingHelper.setFollowingMode(false);
-				routingHelper.setFinalAndCurrentLocation(getPointToNavigate(), map);
+				routingHelper.setFinalAndCurrentLocation(getPointToNavigate(), location);
 			}
     	};
     	
