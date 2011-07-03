@@ -302,7 +302,7 @@ public class BinaryRoutePlanner {
 		if (firstOfSegment) {
 			RouteSegment possibleObstacle = next;
 			while (possibleObstacle != null) {
-				obstaclesTime += ctx.router.defineObstacle(possibleObstacle.road, possibleObstacle.segmentStart);
+				/*obstaclesTime += */ctx.router.defineObstacle(possibleObstacle.road, possibleObstacle.segmentStart);
 				possibleObstacle = possibleObstacle.next;
 			}
 		}

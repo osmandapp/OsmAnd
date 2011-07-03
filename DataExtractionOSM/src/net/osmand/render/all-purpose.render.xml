@@ -285,7 +285,8 @@
 		<filter minzoom="14" maxzoom="14" textSize="12" textColor="#6666ff" textHaloRadius="1" textDy="-13" tag="aerialway" value="station" />
 		<filter minzoom="15" textSize="12" textColor="#6666ff" textHaloRadius="1" textDy="-13" tag="aerialway" value="station" />
 
-		<filter minzoom="16" maxzoom="17" textSize="13" textColor="#444444" textWrapWidth="16" tag="building" />
+		<filter minzoom="16" maxzoom="16" textSize="13" textColor="#444444" textWrapWidth="16" textMinDistance="40" tag="building" />
+		<filter minzoom="17" maxzoom="17" textSize="13" textColor="#444444" textWrapWidth="16" tag="building" />
 		<filter minzoom="18" textSize="15" textColor="#444444" textWrapWidth="16" tag="building" />
 
 		<filter minzoom="15" textSize="12" textColor="#000033" textHaloRadius="2" textDy="13" textWrapWidth="12" tag="man_made" value="lighthouse" />
