@@ -39,9 +39,9 @@ public class CarRouter extends VehicleRouter {
 		autoPriorityValues.put("primary_link", 1d);
 		autoPriorityValues.put("secondary", 1.0d);
 		autoPriorityValues.put("secondary_link", 1.0d);
-		autoPriorityValues.put("tertiary", 1.0d);
-		autoPriorityValues.put("tertiary_link", 1.0d);
-		autoPriorityValues.put("residential", 0.8d);
+		autoPriorityValues.put("tertiary", 0.85d);
+		autoPriorityValues.put("tertiary_link", 0.85d);
+		autoPriorityValues.put("residential", 0.7d);
 		autoPriorityValues.put("service", 0.6d);
 		autoPriorityValues.put("unclassified", 0.4d);
 		autoPriorityValues.put("road", 0.4d);
