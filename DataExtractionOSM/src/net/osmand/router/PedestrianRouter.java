@@ -144,7 +144,7 @@ public class PedestrianRouter extends VehicleRouter {
 		return 2;
 	}
 
-	public double calculateTurnTime(int middley, int middlex, int x, int y, RouteSegment segment, RouteSegment next, int j) {
+	public double calculateTurnTime(RouteSegment segment, RouteSegment next, int j) {
 		return 0;
 	}
 
