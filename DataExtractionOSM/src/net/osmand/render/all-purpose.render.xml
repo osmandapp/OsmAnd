@@ -1,4 +1,4 @@
-﻿﻿<renderer name="all-purpose" depends="" defaultColor="#f1eee8" defaultNightColor="#003333">
+<renderer name="all-purpose" depends="" defaultColor="#f1eee8" defaultNightColor="#003333">
 	<!--
 		All Purpose Renderer, essentially more details than default (by Hardy Mueller), v012:
 		Map rendering aligned to typical map use for all zoom levels/scales, hence always yields a complete and reliable map.
