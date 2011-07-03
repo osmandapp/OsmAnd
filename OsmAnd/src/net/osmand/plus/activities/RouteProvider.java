@@ -24,7 +24,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.activities.RoutingHelper.TurnType;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.router.BicycleRouter;
 import net.osmand.router.BinaryRoutePlanner;
+import net.osmand.router.PedestrianRouter;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RoutingContext;
@@ -493,11 +495,16 @@ public class RouteProvider {
 	}
 	
 	protected RouteCalculationResult findVectorMapsRoute(Location start, LatLon end, ApplicationMode mode, boolean fast, OsmandApplication app) throws IOException {
-		// TODO consider mode, fast/short mode
+		// TODO fast/short mode
 		MapRenderRepositories repositories = app.getResourceManager().getRenderer();
 		Collection<BinaryMapIndexReader> data = repositories.getVectorData();
 		BinaryRoutePlanner router = new BinaryRoutePlanner(data.toArray(new BinaryMapIndexReader[data.size()]));
 		RoutingContext ctx = new BinaryRoutePlanner.RoutingContext();
+		if(mode == ApplicationMode.BICYCLE){
+			ctx.router = new BicycleRouter();
+		} else if(mode == ApplicationMode.PEDESTRIAN){
+			ctx.router = new PedestrianRouter();
+		}
 		RouteSegment st= router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);
 		if (st == null) {
 			return new RouteCalculationResult("Start point is far from allowed road.");
