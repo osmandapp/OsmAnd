@@ -135,13 +135,27 @@ public class CarRouter extends VehicleRouter {
 	public double calculateTurnTime(RouteSegment segment, RouteSegment next, int segmentEnd) {
 		boolean end = (segmentEnd == segment.road.getPointsLength() - 1 || segmentEnd == 0);
 		boolean start = next.segmentStart == 0;
-		if (end) {
-			if(!start){
-				return 15;
+		// that addition highly affects to trunk roads !(prefer trunk/motorway)
+		if (end && start) {
+			if (next.road.getPointsLength() > 1) {
+				int x = segment.road.getPoint31XTile(segmentEnd);
+				int y = segment.road.getPoint31XTile(segmentEnd);
+				int prevSegmentEnd = segmentEnd - 1;
+				if(prevSegmentEnd < 0){
+					prevSegmentEnd = segmentEnd + 1;
+				}
+				int px = segment.road.getPoint31XTile(prevSegmentEnd);
+				int py = segment.road.getPoint31XTile(prevSegmentEnd);
+				double a1 = Math.atan2(y - py, x - px);
+				double a2 = Math.atan2(y - next.road.getPoint31YTile(1), x - next.road.getPoint31XTile(1));
+				double diff = Math.abs(a1 - a2);
+				if (diff > Math.PI / 2 && diff < 3 * Math.PI / 2) {
+					return 25;
+				}
 			}
 			return 0;
 		} else {
-			return 25;
+			return 15;
 		}
 	}
 

@@ -32,7 +32,7 @@ public class BinaryRoutePlanner {
 	
 	private final static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
 	private final BinaryMapIndexReader[] map;
-	private static int DEFAULT_HEURISTIC_COEFFICIENT = 3;
+	private static int DEFAULT_HEURISTIC_COEFFICIENT = 1;
 	
 	private static final Log log = LogUtil.getLog(BinaryRoutePlanner.class);
 	
@@ -302,7 +302,7 @@ public class BinaryRoutePlanner {
 		if (firstOfSegment) {
 			RouteSegment possibleObstacle = next;
 			while (possibleObstacle != null) {
-				/*obstaclesTime += */ctx.router.defineObstacle(possibleObstacle.road, possibleObstacle.segmentStart);
+				obstaclesTime += ctx.router.defineObstacle(possibleObstacle.road, possibleObstacle.segmentStart);
 				possibleObstacle = possibleObstacle.next;
 			}
 		}
@@ -310,7 +310,7 @@ public class BinaryRoutePlanner {
 		// 3.2 calculate possible ways to put into priority queue
 		while (next != null) {
 			long nts = (next.road.getId() << 8l) + next.segmentStart;
-			/* next.road.id >> 1 != road.id >> 1 - used that line for debug with osm map */
+			/* next.road.getId() >> 3 (1) != road.getId() >> 3 (1) - used that line for debug with osm map */
 			// road.id could be equal on roundabout, but we should accept them
 			if (!visitedSegments.contains(nts)) {
 				int type = -1;
