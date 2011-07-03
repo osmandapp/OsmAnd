@@ -1,12 +1,373 @@
-﻿<renderer name="hm" depends="default" defaultColor="#f1eee8" defaultNightColor="#003333">
+﻿﻿<renderer name="hm" depends="" defaultColor="#f1eee8" defaultNightColor="#003333">
 	<!-- apparently renderer name must equal file name until first '.', or else automatic day/night switching fails -->
 
+	<!--
+		All Purpose Renderer (by Hardy Mueller), v011:
+		Map rendering aligned to typical map use for all zoom levels/scales, hence always yields a complete and reliable map.
+		All features displayed at each zoom level (zX) are those for its typical use:
+		 - z7  = "Rough Country Level Overview": Shows motorways, trunks, primary roads and city names
+		 - z11 = "Country Road Atlas": Secondary roads (already from z9) and tertiary (already from z10).  Show large scale landuse like forest and residential areas (already from z10). Also all town names (already from z9) and now all other locality names. Shows mountain peaks for orientation.
+		 - z12 = "Detailed Country Road Atlas": Add all other public highways like residential, unclassified, roads. Add foot and bike tracks. Also tag mountain peaks.
+		 - z13 = "Regional Driving. Good Overview": Displays all driving as well as hiking connections. Show service, living street, pedestrian and footway highways.  Include all area landuse.
+		 - z14 = "Local Driving, also Hiking Map"
+		 - z15 = "City Driving": Display all details of interest for this.
+		 - z16 = "Walking, City tour": Outline and tag buildings
+		 - z17 = Building details, street corner details.
+	--> 
+	<!--
+		    Night rendere
+			default: 003333
+
+			built-up areas: 66004B
+			buildings: 560000
+
+			forest: 000034
+			other 'green' landuse: 004333
+
+			water: 330099
+
+			'white' roads: 9F9F9F 
+			leave other (colored) roads like day
+	--> 
+
+	<!--
+		Currently available icons : aerodrome, airport, alpine_hut, atm, bank, bar, beach, bollard, bus_station, bus_stop_small, bus_stop,
+		cable_car, cafe, camp_site, car_share, caravan_park, cave_entrance, chair_lift, cinema, cliff, cliff2, danger, department_store, embassy,
+		fast_food, firestation, food_drinkingtap, forest, fuel, gate2, glacier, grave_yard, guest_house, halt, hospital, hostel, hotel,
+		level_crossing, level_crossing2, library, liftgate, lighthouse, lock_gate, marsh, mast, memorial, mini_round, mud, museum, nr, orchard
+		parking, peak, pharmacy, place_of_worship, police, postbox, postoffice power_tower, power_wind, prison, pub, quarry2, recycling,
+		rental_bicycle restaurant, school, scrub, shelter, shop_bakery, shop_butcher, shop_clothes shop_convenience, shop_diy, shop_hairdresser,
+		shop_supermarket, sosphone, spring station_small, station, telephone, theatre, toilets, tower_water, traffic_light transport_ford, tree,
+		tree2, viewpoint, vineyard, windmill, zoo
+	-->
+
+	<!-- input exact layer, orderType check tag, value -->
+	<order>
+		<!-- point has order 128  -->
+		<filter orderType="polygon">
+			<filter tag="" layer="-1" order="0.5" />
+			<filter tag="" layer="1" order="64" />
+			<filter tag="" order="1" />
+
+			<filter tag="building" order="64" />
+			<filter tag="building" layer="-1" order="2" />
+
+			<filter tag="landuse" order="1" />
+			<filter tag="landuse" value="reservoir" order="5" />
+			<filter tag="landuse" value="water" order="5" />
+			<filter tag="natural" value="water" order="5" />
+			<filter tag="waterway" order="5" />
+
+			<filter tag="leisure" order="2" />
+			<filter tag="leisure" value="pitch" order="4" />
+
+			<filter tag="power" order="4" />
+
+			<filter tag="natural" value="coastline" order="0.5" />
+			<filter tag="natural" order="1" />
+		</filter>
+		<filter orderType="line">
+			<!-- Below see level -->
+			<filter tag="admin_level" value="0" order="0" />
+			<filter tag="admin_level" value="1" order="0" />
+			<filter tag="" layer="-1" order="10" />
+			<filter tag="" order="11" />
+			<filter tag="" layer="1" order="67" />
+
+			<filter tag="railway" layer="-1" order="58" />
+			<filter tag="railway" order="58" />
+
+			<!-- over buildings -->
+			<filter tag="aerialway" order="68" />
+			<filter tag="power" order="68" />
+			<filter tag="administrative" order="62" />
+			<filter tag="waterway" order="18" />
+
+			<filter tag="highway" value="motorway" order="57" />
+			<filter tag="highway" value="trunk" order="56" />
+			<filter tag="highway" value="primary" order="55" />
+			<filter tag="highway" value="secondary" order="54" />
+			<filter tag="highway" value="tertiary" order="53" />
+			<filter tag="highway" value="residential" order="52" />
+			<filter tag="highway" value="service" order="52" />
+			<filter tag="highway" value="unclassified" order="51" />
+			<filter tag="highway" value="road" order="51" />
+			<filter tag="highway" value="track" order="50" />
+			<filter tag="highway" value="path" order="48" />
+			<filter tag="highway" value="living_street" order="47" />
+
+			<filter tag="highway" value="construction" order="46" />
+			<filter tag="highway" value="proposed" order="45" />
+			<filter tag="highway" value="motorway_link" order="44" />
+			<filter tag="highway" value="trunk_link" order="43" />
+			<filter tag="highway" value="primary_link" order="42" />
+			<filter tag="highway" value="secondary_link" order="41" />
+
+			<filter tag="highway" value="pedestrian" order="40" />
+			<filter tag="highway" value="cycleway" order="39" />
+			<filter tag="highway" value="byway" order="38" />
+			<filter tag="highway" value="footway" order="37" />
+			<filter tag="highway" value="steps" order="36" />
+			<filter tag="highway" value="bridleway" order="35" />
+
+		</filter>
+	</order>
 
 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom], textLength, ref -->
 	<text>
+		<!-- Highway ref  -->
+		<filter minzoom="10" tag="highway" value="motorway" ref="only" textMinDistance="70" textColor="#ffffff" textSize="12" textBold="true">
+			<filter textLength="1" textShield="mot_shield1" />
+			<filter textLength="2" textShield="mot_shield2" />
+			<filter textLength="3" textShield="mot_shield3" />
+			<filter textLength="4" textShield="mot_shield4" />
+			<filter textLength="5" textShield="mot_shield5" />
+			<filter textLength="6" textShield="mot_shield6" />
+		</filter>
+
+		<filter minzoom="10" tag="highway" value="trunk" ref="only" textMinDistance="70" textColor="#ffffff" textSize="12" textBold="true">
+			<filter textLength="1" textShield="tru_shield1" />
+			<filter textLength="2" textShield="tru_shield2" />
+			<filter textLength="3" textShield="tru_shield3" />
+			<filter textLength="4" textShield="tru_shield4" />
+			<filter textLength="5" textShield="tru_shield5" />
+			<filter textLength="6" textShield="tru_shield6" />
+		</filter>
+
+		<filter minzoom="11" tag="highway" value="primary" ref="only" textMinDistance="70" textColor="#ffffff" textSize="12" textBold="true">
+			<filter textLength="1" textShield="pri_shield1" />
+			<filter textLength="2" textShield="pri_shield2" />
+			<filter textLength="3" textShield="pri_shield3" />
+			<filter textLength="4" textShield="pri_shield4" />
+			<filter textLength="5" textShield="pri_shield5" />
+			<filter textLength="6" textShield="pri_shield6" />
+		</filter>
+
+		<filter minzoom="13" tag="highway" value="secondary" ref="only" textMinDistance="70" textColor="#ffffff" textSize="12" textBold="true">
+			<filter textLength="1" textShield="sec_shield1" />
+			<filter textLength="2" textShield="sec_shield2" />
+			<filter textLength="3" textShield="sec_shield3" />
+			<filter textLength="4" textShield="sec_shield4" />
+			<filter textLength="5" textShield="sec_shield5" />
+			<filter textLength="6" textShield="sec_shield6" />
+		</filter>
+
+		<filter minzoom="14" tag="highway" value="tertiary" ref="only" textMinDistance="70" textColor="#ffffff" textSize="12" textBold="true">
+			<filter textLength="1" textShield="ter_shield1" />
+			<filter textLength="2" textShield="ter_shield2" />
+			<filter textLength="3" textShield="ter_shield3" />
+			<filter textLength="4" textShield="ter_shield4" />
+			<filter textLength="5" textShield="ter_shield5" />
+			<filter textLength="6" textShield="ter_shield6" />
+		</filter>
+
+		<!-- Highway text -->
+		  <switch>
+			<case tag="highway" value="motorway" />
+			<case tag="highway" value="motorway_link" />
+			<case tag="highway" value="trunk" />
+			<case tag="highway" value="trunk_link" />
+			<case tag="highway" value="primary" />
+			<case tag="highway" value="primary_link" />
+			<case tag="highway" value="secondary" />
+			<case tag="highway" value="secondary_link" />
+			<filter textOnPath="true">
+				<filter minzoom="13" maxzoom="13" textSize="12" />
+				<filter minzoom="14" maxzoom="14" textSize="13" />
+				<filter minzoom="15" maxzoom="15" textSize="14" />
+				<filter minzoom="16" maxzoom="16" textSize="15" />
+				<filter minzoom="17" maxzoom="17" textSize="17" />
+				<filter minzoom="18" textSize="19" />
+			</filter>
+		</switch>
+
+		<switch>
+			<case tag="highway" value="tertiary" />
+			<case tag="highway" value="tertiary_link" />
+			<case tag="highway" value="residential" />
+			<case tag="highway" value="service" />
+			<case tag="highway" value="unclassified" />
+			<case tag="highway" value="road" />
+
+			<case tag="highway" value="living_street" />
+			<case tag="highway" value="pedestrian" />
+
+			<case tag="highway" value="byway" />
+			<case tag="highway" value="footway" />
+			<case tag="highway" value="steps" />
+			<case tag="highway" value="bridleway" />
+			<case tag="highway" value="services" />
+			<case tag="highway" value="ford" />
+			<case tag="highway" value="construction" />
+			<case tag="highway" value="proposed" />
+			<filter textOnPath="true">
+				<filter minzoom="14" maxzoom="14" textSize="12" />
+				<filter minzoom="15" maxzoom="15" textSize="13" />
+				<filter minzoom="16" maxzoom="16" textSize="14" />
+				<filter minzoom="17" maxzoom="17" textSize="16" />
+				<filter minzoom="18" textSize="18" />
+			</filter>
+		</switch>
+		<switch>
+		  <case nightMode="true" textColor="#ffffff"/>
+		  <case nightMode="false" textColor="#000000"/>
+		   <switch>
+			<case tag="highway" value="track" />
+			<case tag="highway" value="path" />
+			<case tag="highway" value="cycleway" />
+			<filter textOnPath="true">
+				<filter minzoom="14" maxzoom="14" textSize="12" />
+				<filter minzoom="15" maxzoom="15" textSize="13" />
+				<filter minzoom="16" maxzoom="16" textSize="14" />
+				<filter minzoom="17" maxzoom="17" textSize="16" />
+				<filter minzoom="18" textSize="18" />
+			</filter>
+		   </switch>
+		</switch>  
+		
+
+		<!-- Natural -->
+		<filter minzoom="15" textSize="12" textColor="#09dd09" textHaloRadius="1" textWrapWidth="15" tag="natural" value="park" />
 	
+		<filter minzoom="14" textSize="12" textColor="#6699cc" textHaloRadius="1" textWrapWidth="20" tag="natural" value="beach" />
+		
+        <switch>
+		  <case nightMode="true" textColor="#CC3300"/>
+		  <case nightMode="false" textColor="#654321"/>
+		  <filter>
+		  <filter minzoom="15" textSize="12" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="natural" value="cave_entrance" />
+		  <filter minzoom="12" maxzoom="14" textSize="12" textHaloRadius="1" textDy="13" tag="natural" value="peak" />
+		  <filter minzoom="15" maxzoom="16" textSize="13" textHaloRadius="1" textDy="14" tag="natural" value="peak" />
+   		  <filter minzoom="17" textSize="16" textHaloRadius="1" textDy="17" tag="natural" value="peak" />
+   		  </filter>
+		</switch>  
+
+
+		<filter minzoom="15" textSize="12" textColor="#6699cc" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="natural" value="spring" />
+		<filter minzoom="6" textSize="12" textColor="#6699cc" textHaloRadius="1" textWrapWidth="20" tag="natural" value="water" />
+		<filter minzoom="6" textSize="12" textColor="#6699cc" textHaloRadius="1" textWrapWidth="20" tag="natural" value="lake" />
+		<filter minzoom="13" textSize="12" textColor="#ff000000" textHaloRadius="2" textWrapWidth="10" tag="natural" value="wood" />
+
 		<filter minzoom="13" textSize="12" textColor="#6699cc" textHaloRadius="1" textOnPath="true" tag="waterway" value="stream" />
-	
+		<filter minzoom="11" textSize="12" textColor="#6699cc" textHaloRadius="1" textOnPath="true" textMinDistance="70" tag="waterway"
+			value="river" />
+		<filter minzoom="13" textSize="12" textColor="#6699cc" textHaloRadius="1" textOnPath="true" textMinDistance="70" tag="waterway"
+			value="canal" />
+		<filter minzoom="15" textSize="12" textColor="#6699cc" textHaloRadius="1" textOnPath="true" tag="waterway" value="ditch" />
+		<filter minzoom="15" textSize="12" textColor="#6699cc" textHaloRadius="1" textOnPath="true" tag="waterway" value="drain" />
+		<filter minzoom="15" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="13" textWrapWidth="70" tag="waterway" value="lock_gate" />
+		<filter minzoom="15" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="13" textWrapWidth="70" tag="waterway" value="lock" />
+		<filter minzoom="15" textSize="12" textHaloRadius="1" tag="waterway" value="dam" />
+
+        <switch>
+		  <case nightMode="true" textColor="#CC3300"/>
+		  <case nightMode="false" textColor="#654321"/>
+		  <filter minzoom="16" textSize="12" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="historic" value="memorial" />
+		</switch>
+
+		<filter minzoom="14" maxzoom="14" textSize="12" textBold="true" textColor="#6666ff" textHaloRadius="1" textDy="-13" tag="railway"
+			value="station" />
+		<filter minzoom="15" textSize="13" textBold="true" textColor="#6666ff" textHaloRadius="1" textDy="-14" tag="railway" value="station" />
+		<filter minzoom="14" maxzoom="14" textSize="12" textColor="#6666ff" textHaloRadius="1" textDy="-13" tag="railway" value="halt" />
+		<filter minzoom="15" textSize="12" textColor="#6666ff" textHaloRadius="1" textDy="-13" tag="railway" value="halt" />
+		<filter minzoom="14" maxzoom="14" textSize="12" textColor="#6666ff" textHaloRadius="1" textDy="-13" tag="railway" value="tram_stop" />
+		<filter minzoom="15" textSize="12" textColor="#6666ff" textHaloRadius="1" textDy="-13" tag="railway" value="tram_stop" />
+
+		<filter minzoom="10" textSize="12" textColor="#6692da" textHaloRadius="1" textDy="-12" tag="aeroway" value="aerodrome" />
+		<filter minzoom="15" textSize="12" textColor="#333333" textHaloRadius="1" textOnPath="true" textMinDistance="50" tag="aeroway"
+			value="runway" ref="true" />
+		<filter minzoom="15" textSize="12" textColor="#333333" textHaloRadius="1" textOnPath="true" textMinDistance="50" tag="aeroway"
+			value="taxiway" ref="true" />
+		<filter minzoom="10" textSize="12" textBold="true" textColor="#6692da" textHaloRadius="1" textDy="-13" tag="aeroway" value="airport" />
+		<filter minzoom="17" textSize="12" textColor="#aa66cc" textHaloRadius="1" textWrapWidth="10" tag="aeroway" value="gate" ref="true" />
+
+
+		<filter minzoom="14" maxzoom="14" textSize="12" textColor="#6666ff" textHaloRadius="1" textDy="-13" tag="aerialway" value="station" />
+		<filter minzoom="15" textSize="12" textColor="#6666ff" textHaloRadius="1" textDy="-13" tag="aerialway" value="station" />
+
+		<filter minzoom="16" maxzoom="17" textSize="13" textColor="#444444" textWrapWidth="16" tag="building" />
+		<filter minzoom="18" textSize="15" textColor="#444444" textWrapWidth="16" tag="building" />
+
+		<filter minzoom="15" textSize="12" textColor="#000033" textHaloRadius="2" textDy="13" textWrapWidth="12" tag="man_made" value="lighthouse" />
+		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="man_made" value="windmill" />
+
+		<filter minzoom="15" textSize="12" textColor="#0000ff" textHaloRadius="1" textWrapWidth="30" tag="leisure" value="marina" />
+
+		<filter minzoom="15" textSize="12" textHaloRadius="2" textWrapWidth="15" tag="leisure" />
+
+		<filter minzoom="16" textSize="12" textColor="#734a08" textDy="13" textWrapWidth="30" tag="amenity" value="fire_station" />
+
+		<switch>
+			<case tag="amenity" value="restaurant" />
+			<case tag="amenity" value="cafe" />
+			<case tag="amenity" value="food_court" />
+			<case tag="amenity" value="fast_food" />
+			<case tag="amenity" value="pub" />
+			<case tag="amenity" value="bar" />
+			<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" textWrapWidth="34" />
+		</switch>
+
+		<filter minzoom="16" textSize="12" textColor="#000033" textWrapWidth="16" tag="amenity" value="kindergarten" />
+		<filter minzoom="16" textSize="12" textColor="#000033" textDy="13" textWrapWidth="16" tag="amenity" value="school" />
+		<filter minzoom="15" textSize="12" textColor="#000033" textDy="13" textWrapWidth="16" tag="amenity" value="college" />
+		<filter minzoom="17" textSize="12" textBold="true" textColor="#734a08" textWrapWidth="16" textDy="13" tag="amenity" value="library" />
+		<filter minzoom="15" textSize="12" textBold="true" textColor="#000033" textWrapWidth="16" tag="amenity" value="university" />
+
+		<filter minzoom="17" textSize="12" textColor="#0066ff" textDy="13" textWrapWidth="34" tag="amenity" value="parking" />
+		<filter minzoom="17" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="13" tag="amenity" value="fuel" />
+		<filter minzoom="17" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="13" tag="amenity" value="bus_station" />
+
+		<filter minzoom="17" textSize="12" textHaloRadius="1" textDy="13" tag="amenity" value="bank" />
+		<filter minzoom="17" textSize="12" textColor="#da0092" textHaloRadius="1" textDy="13" textWrapWidth="12" tag="amenity" value="pharmacy" />
+		<filter minzoom="16" textSize="12" textColor="#da0092" textHaloRadius="2" textDy="13" textWrapWidth="24" tag="amenity" value="hospital" />
+
+		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" textWrapWidth="15" tag="amenity" value="arts_centre" />
+		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" textWrapWidth="15" tag="amenity" value="cinema" />
+		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" textWrapWidth="15" tag="amenity" value="community_centre" />
+		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" textWrapWidth="15" tag="amenity" value="social_centre" />
+		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" textWrapWidth="15" tag="amenity" value="nightclub" />
+		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" textWrapWidth="15" tag="amenity" value="stripclub" />
+		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" textWrapWidth="15" tag="amenity" value="studio" />
+		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" textWrapWidth="15" tag="amenity" value="theatre" />
+		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" textWrapWidth="15" tag="amenity" value="sauna" />
+		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" textWrapWidth="15" tag="amenity" value="brothel" />
+
+		<filter minzoom="17" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="amenity" value="embassy" />
+		<filter minzoom="17" textSize="12" textColor="#734a08" textDy="13" textWrapWidth="30" tag="amenity" value="police" />
+		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="amenity" value="prison" />
+		<filter minzoom="16" textSize="12" textColor="#6699cc" textHaloRadius="1" textDy="13" tag="amenity" value="shelter" />
+		<filter minzoom="17" textSize="12" textColor="#000033" textDy="13" textWrapWidth="30" tag="amenity" value="place_of_worship" />
+
+		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="14" tag="shop" value="bakery" />
+		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="14" tag="shop" value="butcher" />
+		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="14" tag="shop" value="clothes" />
+		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="14" tag="shop" value="fashion" />
+		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="14" tag="shop" value="convenience" />
+		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="shop" value="department_store" />
+		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="14" tag="shop" value="doityourself" />
+		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="14" tag="shop" value="hairdresser" />
+		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="shop" value="supermarket" />
+
+		<filter minzoom="16" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="13" textWrapWidth="70" tag="tourism" value="camp_site" />
+		<filter minzoom="16" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="13" textWrapWidth="70" tag="tourism" value="caravan_site" />
+
+		<filter minzoom="15" textSize="12" textColor="#734a08" textHaloRadius="1" textWrapWidth="30" tag="tourism" value="theme_park" />
+		<filter minzoom="16" textSize="12" textColor="#6699cc" textHaloRadius="1" textDy="13" tag="tourism" value="alpine_hut" />
+		<filter minzoom="17" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="13" tag="tourism" value="guest_house" />
+		<filter minzoom="17" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="13" tag="tourism" value="hostel" />
+		<filter minzoom="17" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="13" tag="tourism" value="hotel" />
+		<filter minzoom="17" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="13" tag="tourism" value="motel" />
+		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" tag="tourism" value="museum" />
+
+
+		<!-- type not supported -->
+		<!-- <filter minzoom="15" textSize="13" textHaloRadius="2" textWrapWidth="10" tag="landuse" type="point" /> -->
+
+		<filter minzoom="13" textSize="12" textColor="#6699cc" textHaloRadius="1" textWrapWidth="20" tag="landuse" value="reservoir" />
+		<filter minzoom="13" textSize="12" textColor="#6699cc" textHaloRadius="1" textWrapWidth="20" tag="landuse" value="water" />
+
+		<filter minzoom="13" textSize="12" textBold="true" textColor="#ffc0cb" textHaloRadius="1" textWrapWidth="10" tag="military" value="danger_area" />
+
 		<filter minzoom="3" textSize="14" textColor="#9d6c9d" textHaloRadius="1" textWrapWidth="20" tag="place" value="country" />
 		<filter minzoom="4" textSize="14" textColor="#9d6c9d" textHaloRadius="1" textWrapWidth="20" tag="place" value="state" />
 		<filter minzoom="4" textSize="14" textColor="#9d6c9d" textHaloRadius="1" textWrapWidth="20" tag="place" value="region" />
@@ -18,11 +379,138 @@
 		<filter minzoom="6" textSize="16" textDy="-8" textBold="true" textHaloRadius="1" textWrapWidth="20" tag="place" value="town" />
 		<filter minzoom="11" textSize="14" textHaloRadius="1" tag="place" value="village" />
 	   </switch>
-	   	
+	   
+	   <switch>
+		<case nightMode="true" textColor="#D7D7D7"/>
+		<case nightMode="false" textColor="#777777"/>
+		
+		<filter minzoom="11" textSize="13" textHaloRadius="1" tag="place" value="hamlet" />
+		<filter minzoom="11" textSize="14" textHaloRadius="1" tag="place" value="suburb" />
+		<filter minzoom="11" textSize="13" textHaloRadius="1" tag="place" value="locality" />
+		<filter minzoom="11" textSize="14" textHaloRadius="1" tag="place" value="island" />
+		<filter minzoom="10" textSize="14" textBold="true" textColor="#99cc99" textHaloRadius="1" textWrapWidth="14" tag="boundary" value="national_park" />
+	   </switch>	
 	</text>
 
 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
 	<point>
+		<filter minzoom="13" icon="highway_ford" tag="highway" value="ford" />
+		<filter minzoom="15" icon="mini_roundabout" tag="highway" value="mini_roundabout" />
+		<filter minzoom="15" icon="helipad" tag="aeroway" value="helipad" />
+		<filter minzoom="17" icon="traffic_light" tag="highway" value="traffic_signals" />
+		<filter minzoom="16" maxzoom="16" icon="bus_stop_small" tag="highway" value="bus_stop" />
+		<filter minzoom="17" icon="bus_stop" tag="highway" value="bus_stop" />
+		<filter minzoom="15" icon="gate2" tag="highway" value="gate" />
+		<filter minzoom="15" icon="gate2" tag="barrier" value="gate" />
+		<filter minzoom="16" icon="liftgate" tag="barrier" value="lift_gate" />
+		<filter minzoom="16" icon="bollard" tag="barrier" value="sally_port" />
+		<filter minzoom="15" icon="cave_entrance" tag="natural" value="cave_entrance" />
+		<filter minzoom="11" icon="peak" tag="natural" value="peak" />
+		<filter minzoom="14" icon="spring" tag="natural" value="spring" />
+		<filter minzoom="16" maxzoom="16" icon="tree" tag="natural" value="tree" />
+		<filter minzoom="17" icon="tree2" tag="natural" value="tree" />
+		<filter minzoom="15" icon="volcano" tag="natural" value="volcano" />
+		<filter minzoom="16" icon="playground" tag="leisure" value="playground" />
+		<filter minzoom="15" icon="slipway" tag="leisure" value="slipway" />
+		<filter minzoom="16" icon="viewpoint" tag="historic" value="archaeological_site" />
+		<filter minzoom="16" icon="viewpoint" tag="historic" value="battlefield" />
+		<filter minzoom="16" icon="viewpoint" tag="historic" value="castle" />
+		<filter minzoom="16" icon="viewpoint" tag="historic" value="fort" />
+		<filter minzoom="16" icon="viewpoint" tag="historic" value="ruins" />
+		<filter minzoom="16" icon="viewpoint" tag="historic" value="monument" />
+		<filter minzoom="16" icon="viewpoint" tag="historic" value="boundary_stone" />
+		<filter minzoom="16" icon="memorial" tag="historic" value="memorial" />
+		<filter minzoom="16" icon="viewpoint" tag="historic" value="wayside_cross" />
+		<filter minzoom="16" icon="viewpoint" tag="historic" value="wayside_shrine" />
+		<filter minzoom="16" icon="viewpoint" tag="historic" value="wreck" />
+		<filter minzoom="15" icon="lock_gate" tag="waterway" value="lock_gate" />
+		<filter minzoom="15" icon="lock_gate" tag="waterway" value="lock" />
+		<filter minzoom="12" maxzoom="12" icon="halt" tag="railway" value="station" />
+		<filter minzoom="13" maxzoom="14" icon="station_small" tag="railway" value="station" />
+		<filter minzoom="15" icon="station" tag="railway" value="station" />
+		<filter minzoom="13" maxzoom="14" icon="halt" tag="railway" value="halt" />
+		<filter minzoom="15" icon="station_small" tag="railway" value="halt" />
+		<filter minzoom="13" maxzoom="14" icon="halt" tag="railway" value="tram_stop" />
+		<filter minzoom="15" icon="station_small" tag="railway" value="tram_stop" />
+		<filter minzoom="14" maxzoom="15" icon="level_crossing" tag="railway" value="level_crossing" />
+		<filter minzoom="16" icon="level_crossing2" tag="railway" value="level_crossing" />
+		<filter minzoom="16" icon="subway_entrance" tag="railway" value="subway_entrance" />
+		<filter minzoom="10" icon="aerodrome" tag="aeroway" value="aerodrome" />
+		<filter minzoom="9" icon="airport" tag="aeroway" value="airport" />
+		<filter minzoom="13" maxzoom="14" icon="halt" tag="aerialway" value="station" />
+		<filter minzoom="15" icon="station_small" tag="aerialway" value="station" />
+		<filter minzoom="15" icon="power_tower" tag="power" value="tower" />
+		<filter minzoom="15" icon="power_wind" tag="power" value="generator" />
+		<filter minzoom="15" icon="lighthouse" tag="man_made" value="lighthouse" />
+		<filter minzoom="16" icon="water_tower" tag="man_made" value="water_tower" />
+		<filter minzoom="16" icon="windmill" tag="man_made" value="windmill" />
+		<filter minzoom="16" icon="firestation" tag="amenity" value="fire_station" />
+		<filter minzoom="16" icon="restaurant" tag="amenity" value="restaurant" />
+		<filter minzoom="16" icon="cafe" tag="amenity" value="cafe" />
+		<filter minzoom="16" icon="fast_food" tag="amenity" value="fast_food" />
+		<filter minzoom="16" icon="pub" tag="amenity" value="pub" />
+		<filter minzoom="16" icon="bar" tag="amenity" value="bar" />
+		<filter minzoom="16" icon="biergarten" tag="amenity" value="biergarten" />
+		<filter minzoom="16" icon="drinking_water" tag="amenity" value="drinking_water" />
+		<filter minzoom="16" icon="school" tag="amenity" value="school" />
+		<filter minzoom="16" icon="school" tag="amenity" value="college" />
+		<filter minzoom="16" icon="library" tag="amenity" value="library" />
+		<filter minzoom="15" icon="parking" tag="amenity" value="parking" />
+		<filter minzoom="15" icon="parking" tag="amenity" value="bicycle_parking" />
+		<filter minzoom="14" icon="fuel" tag="amenity" value="fuel" />
+		<filter minzoom="17" icon="bicycle_rental" tag="amenity" value="bicycle_rental" />
+		<filter minzoom="14" icon="bus_station" tag="amenity" value="bus_station" />
+		<filter minzoom="16" icon="car_sharing" tag="amenity" value="car_sharing" />
+		<filter minzoom="17" icon="atm" tag="amenity" value="atm" />
+		<filter minzoom="16" icon="bank" tag="amenity" value="bank" />
+		<filter minzoom="16" icon="pharmacy" tag="amenity" value="pharmacy" />
+		<filter minzoom="15" icon="hospital" tag="amenity" value="hospital" />
+		<filter minzoom="15" icon="cinema" tag="amenity" value="cinema" />
+		<filter minzoom="15" icon="theatre" tag="amenity" value="theatre" />
+		<filter minzoom="17" icon="embassy" tag="amenity" value="embassy" />
+		<filter minzoom="17" icon="grave_yard" tag="amenity" value="grave_yard" />
+		<filter minzoom="16" icon="police" tag="amenity" value="police" />
+		<filter minzoom="17" icon="postbox" tag="amenity" value="post_box" />
+		<filter minzoom="16" icon="postoffice" tag="amenity" value="post_office" />
+		<filter minzoom="16" icon="prison" tag="amenity" value="prison" />
+		<filter minzoom="17" icon="recycling" tag="amenity" value="recycling" />
+		<filter minzoom="17" icon="shelter" tag="amenity" value="shelter" />
+		<filter minzoom="17" icon="telephone" tag="amenity" value="telephone" />
+		<filter minzoom="16" icon="toilets" tag="amenity" value="toilets" />
+		<filter minzoom="16" icon="place_of_worship" tag="amenity" value="place_of_worship" />
+		<filter minzoom="17" icon="shop_bakery" tag="shop" value="bakery" />
+		<filter minzoom="17" icon="shop_butcher" tag="shop" value="butcher" />
+		<filter minzoom="16" icon="shop_clothes" tag="shop" value="clothes" />
+		<filter minzoom="16" icon="shop_clothes" tag="shop" value="fashion" />
+		<filter minzoom="16" icon="shop_bicycle" tag="shop" value="bicycle" />
+		<filter minzoom="16" icon="shop_car" tag="shop" value="car" />
+		<filter minzoom="16" icon="shop_car_repair" tag="shop" value="car_repair" />
+		<filter minzoom="17" icon="shop_convenience" tag="shop" value="convenience" />
+		<filter minzoom="16" icon="department_store" tag="shop" value="department_store" />
+		<filter minzoom="17" icon="shop_diy" tag="shop" value="electronics" />
+		<filter minzoom="16" icon="shop_supermarket" tag="shop" value="general" />
+		<filter minzoom="16" icon="florist" tag="shop" value="florist" />
+		<filter minzoom="16" icon="shop_hairdresser" tag="shop" value="hairdresser" />
+		<filter minzoom="16" icon="department_store" tag="shop" value="mall" />
+		<filter minzoom="16" icon="shop_supermarket" tag="shop" value="supermarket" />
+		<filter minzoom="16" icon="emergency_phone" tag="emergency" value="phone" />
+		<filter minzoom="14" icon="camp_site" tag="tourism" value="camp_site" />
+		<filter minzoom="14" icon="caravan_park" tag="tourism" value="caravan_site" />
+		<filter minzoom="14" icon="picnic_site" tag="tourism" value="picnic_site" />
+		<filter minzoom="14" icon="alpine_hut" tag="tourism" value="alpine_hut" />
+		<filter minzoom="15" icon="chalet" tag="tourism" value="chalet" />
+		<filter minzoom="15" icon="guest_house" tag="tourism" value="guest_house" />
+		<filter minzoom="16" icon="hostel" tag="tourism" value="hostel" />
+		<filter minzoom="16" icon="hotel" tag="tourism" value="hotel" />
+		<filter minzoom="16" icon="motel" tag="tourism" value="motel" />
+		<filter minzoom="16" icon="museum" tag="tourism" value="museum" />
+		<filter minzoom="16" icon="information" tag="tourism" value="information" />
+		<filter minzoom="16" icon="viewpoint" tag="tourism" value="viewpoint" />
+		<filter minzoom="16" icon="geocache_found" tag="geocache" value="found" />
+		<filter minzoom="16" icon="geocache_not_found" tag="geocache" />
+
+		<filter minzoom="4" tag="place" icon="city" value="city" />
+		<filter minzoom="6" tag="place" icon="city" value="town" />
 	</point>
 
 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
@@ -42,6 +530,75 @@
 			<filter tag="highway" value="footway" />
 		</filter>
 
+	   <switch>
+		<case nightMode="true" color="#560000"/>
+		<case nightMode="false" color="#d4aaaa"/>
+			<filter minzoom="11" tag="railway" value="station" />
+       </switch>
+
+	   <switch>
+		<case nightMode="true" color="#330099"/>
+		<case nightMode="false" color="#b5d0d0"/>
+		<filter minzoom="8" tag="waterway" value="riverbank" />
+ 	   </switch>
+
+	   <switch>
+		<case nightMode="true" color="#330099"/>
+		<case nightMode="false" color="#b5d0d0"/>
+		<filter minzoom="10">
+			<filter tag="waterway" value="canal" />
+			<filter tag="waterway" value="dock" />
+			<filter tag="waterway" value="mill_pond" />
+		</filter>
+	   </switch>	
+
+		<!-- aeroway -->
+	    <switch>
+		  <case nightMode="true" color="#80B0B0B0"/>
+		  <case nightMode="false" color="#80cccccc"/>
+	      <filter minzoom="12" tag="aeroway">
+			 <filter value="aerodrome" />
+			 <filter value="airport" />
+		   </filter>
+		 </switch>  
+
+	    <switch>
+		  <case nightMode="true" color="#560000"/>
+		  <case nightMode="false" color="#cc99ff"/>
+ 		  <filter minzoom="14" tag="aeroway" value="terminal" />
+ 		</switch>
+ 		<switch>
+		  <case nightMode="true" color="#B0B0B0"/>
+		  <case nightMode="false" color="#e9d1ff"/>
+		  <filter minzoom="13" tag="aeroway" value="apron" />
+		</switch>  
+
+
+        <switch>
+		  <case nightMode="true" color="#560000"/>
+		  <case nightMode="false" color="#bbbbbb"/>
+		  <filter minzoom="13">
+			<filter tag="power" value="station" />
+			<filter tag="power" value="sub_station" />
+		  </filter>
+		</switch>  
+
+
+		<!-- natural -->
+		<switch>
+		  <case nightMode="true" color="#b0004333"/>
+		  <case nightMode="false" color="#b0b6fdb6"/>
+		  <filter minzoom="12"  tag="natural" value="park" />
+		</switch>  
+
+        <switch>
+		  <case nightMode="true" color="#330099"/>
+		  <case nightMode="false"  color="#b5d0d0"/>
+		  <filter minzoom="1" tag="natural" value="coastline" />
+		  <filter minzoom="4" tag="natural" value="water" />
+		  <filter minzoom="4" tag="natural" value="lake" />
+		</switch>
+
 		<filter minzoom="12" shader="beach" tag="natural" value="beach" />
 
         <switch>
@@ -50,21 +607,132 @@
 		  <filter minzoom="10" shader="glacier" strokeWidth_2="2" tag="natural" value="glacier" />
 		</switch>  
 
-     	<switch>
+        <switch>
+          <case nightMode="true" color="#004333"/>
+		  <case nightMode="false" color="#ffffc0"/>
+		  <filter minzoom="12" tag="natural" value="heath" />
+		</switch>  
+		<switch>
+          <case nightMode="true" color="#004333"/>
+		  <case nightMode="false" color="#f2efe9"/>
+		  <filter minzoom="10" tag="natural" value="land" />
+		</switch>  
+		<filter minzoom="12" shader="marsh" tag="natural" value="marsh" />
+		<filter minzoom="12" shader="mud" tag="natural" value="mud" />
+		<filter minzoom="12" shader="scrub" tag="natural" value="scrub" />
+
+		<filter minzoom="10" shader="marsh" tag="natural" value="wetland" />
+		<switch>
           <case nightMode="true" color="#000034"/>
 		  <case nightMode="false" color="#aed1a0"/>
 		  <filter minzoom="10" color="#aed1a0" tag="natural" value="wood" />
 		</switch>  
 
-	
+		<!-- man made -->
+		<filter minzoom="16" color="#bca9a9" tag="building" />
+		       <filter nightMode="true" minzoom="16" color="#560000" tag="building" />		
+		<filter minzoom="16" color="#dddddd" tag="building" value="garages" />
+		       <filter nightMode="true" minzoom="16" color="#560000" tag="building" value="garages" />
+
+		<!-- leisure -->
+		<switch>
+          <case nightMode="true" color="#560000"/>
+		  <case nightMode="false" color="#33cc99"/>
+		  <filter minzoom="13" tag="leisure" value="stadium">
+			<filter tag="leisure" value="sports_centre" />
+			<filter tag="leisure" value="stadium" />
+		  </filter>
+		</switch>  
+		<filter minzoom="12" color="#b5e3b5" tag="leisure" value="golf_course" />
+		       <filter nightMode="true" minzoom="12" color="#004333" tag="leisure" value="golf_course" />
+		<filter minzoom="12" color="#74dcba" color_2="#888888" strokeWidth_2="1" tag="leisure" value="track" />
+		       <filter nightMode="true" minzoom="12" color="#004333" color_2="#888888" strokeWidth_2="1" tag="leisure" value="track" />
+		<filter minzoom="12" color="#8ad3af" color_2="#888888" strokeWidth_2="1" tag="leisure" value="pitch" />
+		       <filter nightMode="true" minzoom="12" color="#004333" color_2="#888888" strokeWidth_2="1" tag="leisure" value="pitch" />
+
 		<filter minzoom="10" maxzoom="11" color="#abdf96" tag="leisure" value="nature_reserve" />
 				<filter minzoom="10" maxzoom="11" nightMode="true" color="#000034" tag="leisure" value="nature_reserve" />
 		<filter minzoom="12" shader="nr" tag="leisure" value="nature_reserve" />
+		<switch>
+          <case nightMode="true" color="#b0004333"/>
+		  <case nightMode="false" color="#b0b6fdb6"/>
+		  <filter minzoom="12">
+			<filter tag="leisure" value="park" />
+			<filter tag="leisure" value="recreation_ground" />
+		  </filter>
+		</switch>  
+		<filter minzoom="15" color="#ccfff1" tag="leisure" value="playground" />
+				<filter minzoom="15" nightMode="true" color="#004333" tag="leisure" value="playground" />
+		<filter minzoom="12" color="#cfeca8" tag="leisure" value="garden" />
+				<filter minzoom="12" nightMode="true" color="#004333" tag="leisure" value="garden" />
+		<filter minzoom="12" color="#cfeca8" tag="leisure" value="common" />
+				<filter minzoom="12" nightMode="true" color="#004333" tag="leisure" value="common" />
+
+		<!-- amenity -->
+		<filter minzoom="15" color="#f0f0d8" color_2="#d4a89e" strokeWidth_2="1" tag="amenity" value="kindergarten" />
+				<filter minzoom="15" nightMode="true" color="#66004B" color_2="#d4a89e" strokeWidth_2="1" tag="amenity" value="kindergarten" />
+		<filter minzoom="15" color="#f0f0d8" color_2="#d4a89e" strokeWidth_2="1" tag="amenity" value="school" />
+				<filter minzoom="15" nightMode="true" color="#66004B" color_2="#d4a89e" strokeWidth_2="1" tag="amenity" value="school" />
+		<filter minzoom="15" color="#f0f0d8" color_2="#d4a89e" strokeWidth_2="1" tag="amenity" value="college" />
+				<filter minzoom="15" nightMode="true" color="#66004B" color_2="#d4a89e" strokeWidth_2="1" tag="amenity" value="college" />
+		<filter minzoom="16" color="#bca9a9" tag="amenity" value="library" />
+				<filter minzoom="16" nightMode="true" color="#560000" tag="amenity" value="library" />
+		<filter minzoom="15" color="#f0f0d8" color_2="#d4a89e" strokeWidth_2="1" tag="amenity" value="university" />
+				<filter minzoom="15" nightMode="true" color="#66004B" color_2="#d4a89e" strokeWidth_2="1" tag="amenity" value="university" />
+		<filter minzoom="15" color="#f6eeb7" tag="amenity" value="parking" />
+				<filter minzoom="15" nightMode="true" color="#66004B" tag="amenity" value="parking" />
+		<filter minzoom="15" color="#f6eeb7" tag="amenity" value="bicycle_parking" />
+				<filter minzoom="15" nightMode="true" color="#66004B" tag="amenity" value="bicycle_parking" />
+		<filter minzoom="15" color="#f0f0d8" color_2="#d4a89e" strokeWidth_2="1" tag="amenity" value="hospital" />
+				<filter minzoom="15" nightMode="true" color="#560000" color_2="#d4a89e" strokeWidth_2="1" tag="amenity" value="hospital" />
+		<filter minzoom="15" color="#cc9999" tag="amenity" value="cinema" />
+				<filter minzoom="15" nightMode="true" color="#560000" tag="amenity" value="cinema" />
+
+		<!-- tourism -->
+		<filter minzoom="13" color="#f2caea" tag="tourism" value="attraction" />
+				<filter minzoom="13" nightMode="true" color="#66004B" tag="tourism" value="attraction" />
+		<filter minzoom="13" color="#a0ccff99" tag="tourism" value="camp_site" />
+				<filter minzoom="13" nightMode="true" color="#a0004333" tag="tourism" value="camp_site" />
+		<filter minzoom="13" color="#a0ccff99" tag="tourism" value="caravan_site" />
+				<filter minzoom="13" nightMode="true" color="#a0004333" tag="tourism" value="caravan_site" />
+		<filter minzoom="13" color="#a0ccff99" tag="tourism" value="picnic_site" />
+				<filter minzoom="13" nightMode="true" color="#a0004333" tag="tourism" value="picnic_site" />
 		
+		<filter minzoom="12" maxzoom="15" color="#f2caea" color_2="#734a08" strokeWidth_2="1" pathEffect_2="9_3" tag="tourism" value="theme_park" />
+		        <filter minzoom="12" maxzoom="15" nightMode="true" color="#66004B" color_2="#734a08" strokeWidth_2="1" pathEffect_2="9_3" tag="tourism" value="theme_park" />
+		<filter minzoom="16" color="#f2caea" color_2="#734a08" strokeWidth_2="2" pathEffect_2="9_3" tag="tourism" value="theme_park" />
+				<filter minzoom="16" nightMode="true" color="#66004B" color_2="#734a08" strokeWidth_2="2" pathEffect_2="9_3" tag="tourism" value="theme_park" />
+		<filter minzoom="12" shader="zoo" tag="tourism" value="zoo" />
+
+		<!-- military -->
+		<filter minzoom="12" color="#ff8f8f" tag="military" value="barracks" />
+				<filter minzoom="12" nightMode="true" color="#560000" tag="military" value="barracks" />
+		<filter minzoom="10" shader="danger" tag="military" value="danger_area" />
+
+		<!-- landuse -->
+		<filter minzoom="10" color="#c8b084" tag="landuse" value="allotments" />
+				<filter minzoom="10" nightMode="true" color="#66004B" tag="landuse" value="allotments" />
+		<filter minzoom="10" color="#b5d0d0" tag="landuse" value="basin" />
+				<filter minzoom="10" nightMode="true" color="#330099" tag="landuse" value="basin" />
+		<filter minzoom="12" color="#9d9d6c" tag="landuse" value="brownfield" />
+				<filter minzoom="12" nightMode="true" color="#004333" tag="landuse" value="brownfield" />
+		<filter minzoom="12" color="#aacbaf" tag="landuse" value="cemetery" />
+				<filter minzoom="12" nightMode="true" color="#004333" tag="landuse" value="cemetery" />
+		<filter minzoom="15" shader="grave_yard" tag="landuse" value="cemetery" />
+		<filter minzoom="12" maxzoom="14" color="#aacbaf" tag="landuse" value="grave_yard" />
+				<filter minzoom="12" maxzoom="14" nightMode="true" color="#004333" tag="landuse" value="grave_yard" />
+		<filter minzoom="15" shader="grave_yard" tag="landuse" value="grave_yard" />
 		
 		<filter minzoom="10" color="#efc8c8" tag="landuse" value="commercial" />
 				<filter minzoom="10" nightMode="true" color="#66004B" tag="landuse" value="commercial" />
-
+		<filter minzoom="12" color="#9d9d6c" tag="landuse" value="construction" />
+				<filter minzoom="12" nightMode="true" color="#66004B" tag="landuse" value="construction" />
+		<filter minzoom="12" color="#ead8bd" tag="landuse" value="farm" />
+				<filter minzoom="12" nightMode="true" color="#004333" tag="landuse" value="farm" />
+		<filter minzoom="12" color="#ead8bd" tag="landuse" value="farmland" />
+				<filter minzoom="12" nightMode="true" color="#004333" tag="landuse" value="farmland" />
+		<filter minzoom="12" color="#ddbf92" tag="landuse" value="farmyard" />
+				<filter minzoom="12" nightMode="true" color="#004333" tag="landuse" value="farmyard" />
 		<filter minzoom="10" maxzoom="12" color="#8dc56c" tag="landuse" value="forest" />
 		        <filter minzoom="10" maxzoom="12" nightMode="true" color="#000034" tag="landuse" value="forest" />
 		<filter minzoom="13" shader="forest" tag="landuse" value="forest" />
@@ -72,16 +740,131 @@
 
 		<filter minzoom="12" color="#dfd1d6" tag="landuse" value="garages" />
 				<filter minzoom="12" nightMode="true" color="#560000" tag="landuse" value="garages" />
-	
+		<filter minzoom="12" color="#cfeca8" tag="landuse" value="grass" />
+				<filter minzoom="12" nightMode="true" color="#004333" tag="landuse" value="grass" />
+		<filter minzoom="12" color="#9d9d6c" tag="landuse" value="greenfield" />
+				<filter minzoom="12" nightMode="true" color="#004333" tag="landuse" value="greenfield" />
 		<filter minzoom="10" color="#dfd1d6" tag="landuse" value="industrial" />
 				<filter minzoom="10" nightMode="true" color="#66004B" tag="landuse" value="industrial" />
+		<filter minzoom="12" color="#9d9d6c" tag="landuse" value="landfill" />
+				<filter minzoom="12" nightMode="true" color="#66004B" tag="landuse" value="landfill" />
+		<filter minzoom="12" color="#cfeca8" tag="landuse" value="meadow" />
+				<filter minzoom="12" nightMode="true" color="#004333" tag="landuse" value="meadow" />
+		<filter minzoom="10" color="#a0ffa8a8" tag="landuse" value="military" />
+		        <filter minzoom="10" nightMode="true" color="#a0560000" tag="landuse" value="military" />
+		<filter minzoom="12" shader="orchard" tag="landuse" value="orchard" />
 		
+		<filter minzoom="12" color="#dfd1d6" tag="landuse" value="railway" />
+		        <filter minzoom="12" nightMode="true" color="#66004B" tag="landuse" value="railway" />
+		<filter minzoom="12" color="#cfeca8" tag="landuse" value="recreation_ground" />
+         		<filter minzoom="12" nightMode="true" color="#004333" tag="landuse" value="recreation_ground" />
+		<filter minzoom="10" color="#cfeca8" tag="landuse" value="conservation" />
+		        <filter minzoom="10" nightMode="true" color="#004333" tag="landuse" value="conservation" />
+		<filter minzoom="12" color="#cfeca8" tag="landuse" value="village_green" />
+         		<filter minzoom="12" nightMode="true" color="#004333" tag="landuse" value="village_green" />
+		<filter minzoom="7" color="#b5d0d0" tag="landuse" value="reservoir" />
+        		<filter minzoom="7" nightMode="true" color="#330099" tag="landuse" value="reservoir" />
+		<filter minzoom="7" color="#b5d0d0" tag="landuse" value="water" />
+		        <filter minzoom="7" nightMode="true" color="#330099" tag="landuse" value="water" />
+		<filter minzoom="10" color="#CDCDCD" tag="landuse" value="residential" />
+        		<filter minzoom="10" nightMode="true" color="#66004B" tag="landuse" value="residential" />
+		
+		<filter minzoom="12" maxzoom="14" color="#cfeca8" tag="landuse" value="retail" />
+		        <filter minzoom="12" nightMode="true" maxzoom="14" color="#66004B" tag="landuse" value="retail" />
+		<filter minzoom="15" color="#cfeca8" color_2="#ff0000" strokeWidth_2="1" tag="landuse" value="retail" />
+        		<filter minzoom="15" nightMode="true" color="#66004B" color_2="#ff0000" strokeWidth_2="1" tag="landuse" value="retail" />
+		
+		<filter minzoom="12" shader="quarry2" tag="landuse" value="quarry" />
+		<filter minzoom="12" maxzoom="12" color="#abdf96" tag="landuse" value="vineyard" />
+		        <filter minzoom="12" maxzoom="12" nightMode="true" color="#004333" tag="landuse" value="vineyard" />
+		<filter minzoom="13" shader="vineyard" tag="landuse" value="vineyard" />	
+		<filter minzoom="12" maxzoom="13" color="#30666600" tag="natural" value="field" />
+		<filter minzoom="14" color="#30666600" color_2="#60666600" strokeWidth_2="1" tag="natural" value="field" />
 		<filter minzoom="10" color="#aed1a0" tag="landuse" value="wood" />
   		        <filter minzoom="10" nightMode="true" color="#000034" tag="landuse" value="wood" />
 	</polygon>
 
 	<!-- Priority input : tag, value, layer, zoom -->
 	<line>
+		<switch>
+			<case tag="highway" value="motorway" color="#a58dff" />
+			<case tag="highway" value="motorway_link" color="#a58dff" />
+			<case tag="highway" value="trunk" color="#ffaf80" />
+			<case tag="highway" value="trunk_link" color="#ffaf80" />
+			<filter>
+				<filter minzoom="5" maxzoom="9" strokeWidth="5" />
+				<filter minzoom="10" maxzoom="10" strokeWidth="6" />
+				<filter minzoom="11" maxzoom="11" strokeWidth="7" />
+				<filter minzoom="12" maxzoom="12" strokeWidth="8" />
+				<filter minzoom="13" maxzoom="13" strokeWidth="9" />
+			</filter>
+		</switch>
+
+		<switch>
+			<case tag="highway" value="primary" />
+			<case tag="highway" value="primary_link" />
+			<filter color="#eb989a">
+				<filter minzoom="7" maxzoom="9" strokeWidth="4" />
+				<filter minzoom="10" maxzoom="10" strokeWidth="5" />
+				<filter minzoom="11" maxzoom="11" strokeWidth="6" />
+				<filter minzoom="12" maxzoom="12" strokeWidth="7" />
+				<filter minzoom="13" maxzoom="13" strokeWidth="8" />
+			</filter>
+		</switch>
+		<switch>
+			<case tag="highway" value="secondary" />
+			<case tag="highway" value="secondary_link" />
+			<filter color="#fdd6a4">
+				<filter minzoom="9" maxzoom="9" strokeWidth="3" />
+				<filter minzoom="10" maxzoom="10" strokeWidth="4" />
+				<filter minzoom="11" maxzoom="11" strokeWidth="5" />
+				<filter minzoom="12" maxzoom="12" strokeWidth="6" />
+				<filter minzoom="13" maxzoom="13" strokeWidth="7" />
+			</filter>
+		</switch>
+
+		<switch>
+			<case tag="highway" value="motorway" color="#a58dff" color_2="#a58dff" />
+			<case tag="highway" value="motorway_link" color="#a58dff" color_2="#a58dff" />
+			<case tag="highway" value="trunk" color="#ffaf80" color_2="#ffaf80" />
+			<case tag="highway" value="trunk_link" color="#ffaf80" color_2="#ffaf80" />
+			<case tag="highway" value="primary" color="#eb989a" color_2="#eb989a" />
+			<case tag="highway" value="primary_link" color="#eb989a" color_2="#eb989a" />
+			<case tag="highway" value="secondary" color="#fdd6a4" color_2="#fdd6a4" />
+			<case tag="highway" value="secondary_link" color="#fdd6a4" color_2="#fdd6a4" />
+			<filter>
+				<switch>
+					<case layer="-1" pathEffect="4_4" />
+					<case /> <!-- all other cases -->
+					<filter shadowRadius="1">
+						<filter minzoom="14" maxzoom="14" strokeWidth="10" />
+						<filter minzoom="15" maxzoom="15" strokeWidth="12" />
+						<filter minzoom="16" maxzoom="16" strokeWidth="15" />
+						<filter minzoom="17" maxzoom="17" strokeWidth="19" shadowRadius="2" />
+						<filter minzoom="18" strokeWidth="24" shadowRadius="2" />
+					</filter>
+				</switch>
+				<!-- bridge -->
+				<filter layer="1" color="#000000" cap_2="SQUARE">
+					<filter minzoom="13" maxzoom="14" strokeWidth="12" strokeWidth_2="10" />
+					<filter minzoom="13" maxzoom="15" strokeWidth="14" strokeWidth_2="12" />
+					<filter minzoom="16" maxzoom="16" strokeWidth="17" strokeWidth_2="15" />
+					<filter minzoom="17" maxzoom="17" strokeWidth="21" strokeWidth_2="19" />
+					<filter minzoom="18" strokeWidth="26" strokeWidth_2="24" />
+				</filter>
+			</filter>
+		</switch>
+
+		<switch>
+			<case tag="highway" value="tertiary" />
+			<case tag="highway" value="tertiary_link" />
+			<filter color="#fefeb3" shadowColor="#bababa" shadowRadius="1">
+				<filter minzoom="10" maxzoom="10" strokeWidth="3" />
+				<filter minzoom="11" maxzoom="11" strokeWidth="4" />
+				<filter minzoom="12" maxzoom="12" strokeWidth="5" />
+				<filter minzoom="13" maxzoom="13" strokeWidth="6" />
+			</filter>
+		</switch>
 
         <switch>
 	      <case nightMode="false" color="#ffffff" color_2="#ffffff" shadowColor="#464646"/>
@@ -95,8 +878,8 @@
 				<filter minzoom="13" maxzoom="13" strokeWidth="4" />
 			</filter>
 		  </switch>
-		  
- 		  <switch>
+
+  		  <switch>
 			<case tag="highway" value="tertiary" color="#fefeb3" color_2="#fefeb3" shadowColor="#bababa" />
 			<case tag="highway" value="tertiary_link" color="#fefeb3" color_2="#fefeb3" shadowColor="#bababa" />
 			<case tag="highway" value="residential" />
@@ -120,16 +903,16 @@
 	              <case nightMode="false" color="#000000" />
 	              <case nightMode="true" color="#ffffff" />
 		   	  	  <filter layer="1" cap_2="SQUARE" >
-					<filter minzoom="13" maxzoom="14" strokeWidth="8" strokeWidth_2="6" />
-					<filter minzoom="15" maxzoom="15" strokeWidth="10" strokeWidth_2="8" />
-					<filter minzoom="16" maxzoom="16" strokeWidth="12" strokeWidth_2="10" />
-					<filter minzoom="17" maxzoom="17" strokeWidth="15" strokeWidth_2="13" />
-					<filter minzoom="18" strokeWidth="20" strokeWidth_2="18" />
-				</filter>
+					 <filter minzoom="13" maxzoom="14" strokeWidth="8" strokeWidth_2="6" />
+					 <filter minzoom="15" maxzoom="15" strokeWidth="10" strokeWidth_2="8" />
+					 <filter minzoom="16" maxzoom="16" strokeWidth="12" strokeWidth_2="10" />
+					 <filter minzoom="17" maxzoom="17" strokeWidth="15" strokeWidth_2="13" />
+					 <filter minzoom="18" strokeWidth="20" strokeWidth_2="18" />
+				  </filter>
 				</switch>   
 			</filter>
-		 </switch>
-		
+		  </switch>
+
 		  <switch>
 			<case tag="highway" value="service"  />
 			<case tag="highway" value="living_street"/>
@@ -164,14 +947,14 @@
 		</switch>
 
 		<filter tag="highway" value="cycleway">
-		    <filter minzoom="12" maxzoom="12" color="#0000ff" strokeWidth="0.5" pathEffect="2_2" />
+			<filter minzoom="12" maxzoom="12" color="#0000ff" strokeWidth="0.5" pathEffect="2_2" />
 			<filter minzoom="13" color="#0000ff" strokeWidth="1" pathEffect="2_2" />
 			<filter layer="1" minzoom="14" color="#0000ff" strokeWidth="1" pathEffect="2_2" />
 			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="2" color_2="#0000ff" strokeWidth_2="2" pathEffect_2="2_2" />
 		</filter>
 
 		<filter tag="highway" value="byway">
-			<filter minzoom="11" color="#ffcc00" strokeWidth="2" pathEffect="4_3" />
+			<filter minzoom="11" color="#ffcc00" strokeWidth="1" pathEffect="4_3" />
 			<filter layer="1" minzoom="14" maxzoom="14" color="#ffcc00" strokeWidth="2" pathEffect="4_3" />
 			<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="4" color_2="#ffcc00" strokeWidth_2="2" pathEffect_2="4_3" />
 		</filter>
@@ -192,10 +975,243 @@
 			value="footway" />
 
 		<filter minzoom="14" color="#fa8073" strokeWidth="4" pathEffect="1_2" tag="highway" value="steps" />
-		
+		<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="7" color_2="#fa8073" strokeWidth_2="5" pathEffect_2="1_2" tag="highway"
+			value="steps" />
+
 		<filter minzoom="12" maxzoom="12" color="#00ff00" strokeWidth="0.5" pathEffect="2_2" tag="highway" value="bridleway" />
-	
+		<filter minzoom="13" color="#00ff00" strokeWidth="1" pathEffect="2_2" tag="highway" value="bridleway" />
+		<filter layer="1" minzoom="14" maxzoom="14" color="#00ff00" strokeWidth="1" pathEffect="2_2" tag="highway" value="bridleway" />
+		<filter layer="1" minzoom="15" color="#88ffffff" strokeWidth="2" color_2="#00ff00" strokeWidth_2="2" pathEffect_2="2_2" tag="highway"
+			value="bridleway" />
+
+		<filter minzoom="14" color="#000000" strokeWidth="2" tag="highway" value="services" />
+
+		<filter minzoom="14" color="#000000" strokeWidth="2" tag="highway" value="ford" />
+
+		<filter minzoom="15" maxzoom="15" color="#99cccc" strokeWidth="6" color_2="#ffffff" strokeWidth_2="5" pathEffect_2="8_6" tag="highway"
+			value="construction" />
+		<filter minzoom="16" color="#99cccc" strokeWidth="8" color_2="#ffffff" strokeWidth_2="7" pathEffect_2="8_6" tag="highway" value="construction" />
+
+		<filter minzoom="15" maxzoom="15" color="#99cccc" strokeWidth="6" color_2="#ffffff" strokeWidth_2="5" pathEffect_2="8_6" tag="highway"
+			value="proposed" />
+		<filter minzoom="16" color="#99cccc" strokeWidth="8" color_2="#ffffff" strokeWidth_2="7" pathEffect_2="8_6" tag="highway" value="proposed" />
+
+
+
+		<!-- barrier -->
+		<filter minzoom="16" color="#000000" strokeWidth="1" tag="highway" value="gate" />
+		<filter minzoom="16" color="#aed1a0" strokeWidth="3" tag="barrier" value="hedge" />
+		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="fence" />
+		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="wall" />
+		<filter minzoom="16" color="#aed1a0" strokeWidth="3" tag="barrier" value="ditch" />
+		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="retaining_wall" />
+		<filter minzoom="14" maxzoom="14" color="#888888" strokeWidth="4" tag="barrier" value="city_wall" />
+		<filter minzoom="14" maxzoom="14" color="#888888" strokeWidth="4" tag="historic" value="city_walls" />
+		<filter minzoom="15" maxzoom="15" color="#888888" strokeWidth="6" tag="barrier" value="city_wall" />
+		<filter minzoom="15" maxzoom="15" color="#888888" strokeWidth="6" tag="historic" value="city_walls" />
+		<filter minzoom="16" color="#888888" strokeWidth="9" tag="barrier" value="city_wall" />
+		<filter minzoom="16" color="#888888" strokeWidth="9" tag="historic" value="city_walls" />
+		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="bollard" />
+		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="cycle_barrier" />
+		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="block" />
+		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="cattle_grid" />
+		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="toll_booth" />
+		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="entrance" />
+		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="gate" />
+		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="lift_gate" />
+		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="stile" />
+		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="horse_stile" />
+		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="kissing_gate" />
+		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="sally_port" />
+		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="turnstile" />
+		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="kent_carriage_gap" />
+		<filter minzoom="16" color="#aed1a0" strokeWidth="3" tag="natural" value="hedge" />
+		<filter minzoom="16" color="#000000" strokeWidth="1" tag="fenced" value="yes" />
+
+
+		<!-- waterway -->
+	   <switch>
+	    <case nightMode="false" color="#b5d0d0" color_2="#ffffff" />
+	    <case nightMode="true" color="#330099" color_2="#7340D9" />
 		
+		<filter minzoom="15" strokeWidth="2" tag="waterway" value="stream" />
+		<filter layer="-1" minzoom="15" strokeWidth="3" strokeWidth_2="1" pathEffect_2="4_2" tag="waterway"
+			value="stream" />
+
+		  <switch>
+			<case tag="waterway" value="river" />
+			<case tag="waterway" value="canal" />
+			<filter pathEffect_2="4_2" >
+				<filter minzoom="5" maxzoom="9" strokeWidth="1" />
+				<filter minzoom="10" maxzoom="12" strokeWidth="2" />
+
+				<filter minzoom="13" maxzoom="13" strokeWidth="3" />
+				<filter minzoom="14" maxzoom="14" strokeWidth="5" />
+				<filter minzoom="15" maxzoom="16" strokeWidth="6" />
+				<filter minzoom="17" maxzoom="17" strokeWidth="10" />
+				<filter minzoom="18" strokeWidth="12" />
+
+				<filter layer="-1" minzoom="13" maxzoom="13" strokeWidth="3" strokeWidth_2="1" />
+				<filter layer="-1" minzoom="14" maxzoom="14" strokeWidth="5" strokeWidth_2="3" />
+				<filter layer="-1" minzoom="15" maxzoom="16" strokeWidth="6" strokeWidth_2="4" />
+				<filter layer="-1" minzoom="17" maxzoom="17" strokeWidth="10" strokeWidth_2="8" />
+				<filter layer="-1" minzoom="18" strokeWidth="12" strokeWidth_2="10" />
+			</filter>
+		  </switch>
+
+		  <switch>
+			<case tag="waterway" value="ditch" />
+			<case tag="waterway" value="drain" />
+			   <filter>
+				 <filter minzoom="13" maxzoom="14" strokeWidth="1" />
+				 <filter minzoom="15" strokeWidth="3" />
+				 <filter layer="-1" minzoom="15" strokeWidth="3" pathEffect_2="4_2" strokeWidth_2="1" color_2="#ffffff" tag="waterway"
+					value="ditch" />
+			   </filter>	
+		   </switch>
+
+		  <filter minzoom="13" strokeWidth="2" tag="waterway" value="dam" />
+		</switch>
+		<filter minzoom="15" color="#aaaaaa" strokeWidth="2" tag="waterway" value="weir" />
+
+		<!-- railway -->
+		<filter color="#aaaaaa" tag="railway" value="rail">
+			<filter minzoom="7" maxzoom="7" strokeWidth="1" />
+			<filter minzoom="8" maxzoom="8" strokeWidth="1.5" />
+			<filter minzoom="9" maxzoom="12" strokeWidth="2" />
+			<filter minzoom="13" maxzoom="13" color="#999999" strokeWidth="3" color_2="#ffffff" strokeWidth_2="1" pathEffect_2="8_12" />
+			<filter minzoom="14" color="#999999" strokeWidth="3" color_2="#ffffff" strokeWidth_2="1" pathEffect_2="0_11_8_1" />
+			<filter layer="-1" minzoom="9" maxzoom="13" color="#aaaaaa" strokeWidth="2" pathEffect="5_2" />
+			<filter layer="-1" minzoom="14" color="#999999" strokeWidth="3" color_2="#ffffff" strokeWidth_2="3" pathEffect_2="4_4" />
+			<filter layer="1" minzoom="14" color="#000000" strokeWidth="5" color_2="#ffffff" strokeWidth_2="4" color_3="#999999"
+				strokeWidth_3="1" pathEffect_3="12_8_1_0" tag="railway" value="rail" />
+		</filter>
+
+		<filter color="#444444" tag="railway" value="tram">
+			<filter minzoom="13" maxzoom="14" strokeWidth="1" />
+			<filter minzoom="15" strokeWidth="2" />
+			<filter layer="-1" minzoom="13" maxzoom="14" strokeWidth="1" pathEffect="5_3" />
+			<filter layer="-1" minzoom="15" strokeWidth="2" pathEffect="5_3" />
+		</filter>
+
+		<filter minzoom="13" color="#999999" strokeWidth="2" tag="railway" value="subway" />
+		<filter layer="-1" minzoom="13" color="#999999" strokeWidth="2" pathEffect="5_3" tag="railway" value="subway" />
+
+		<filter minzoom="13" color="#666666" strokeWidth="2" tag="railway" value="light_rail" />
+		<filter layer="-1" minzoom="13" color="#666666" strokeWidth="2" pathEffect="5_3" tag="railway" value="light_rail" />
+
+		<switch>
+			<case tag="railway" value="abandoned" />
+			<case tag="railway" value="disused" />
+			<filter>
+				<filter minzoom="13" color="#888888" strokeWidth="2" pathEffect="4_2" />
+				<filter layer="1" minzoom="13" color="#000000" strokeWidth="4.5" color_2="#888888" strokeWidth_2="2" pathEffect_2="4_2" />
+			</filter>
+		</switch>
+
+		<filter minzoom="13" color="#999999" strokeWidth="3" color_2="#ffffff" strokeWidth_2="1" pathEffect_2="0_1_8_1" tag="railway"
+			value="preserved" />
+
+		<filter minzoom="15" color="#666666" strokeWidth="2" tag="railway" value="narrow_gauge" />
+		<filter layer="-1" minzoom="15" color="#666666" strokeWidth="5" pathEffect="5_3" color_2="#cccccc" strokeWidth_2="3" tag="railway"
+			value="narrow_gauge" />
+
+		<filter minzoom="13" color="#888888" strokeWidth="2" pathEffect="4_2" tag="railway" value="construction" />
+		<filter layer="1" minzoom="13" color="#000000" strokeWidth="4.5" color_2="#888888" strokeWidth_2="2" pathEffect_2="4_2" tag="railway"
+			value="construction" />
+
+		<filter minzoom="15" color="#777777" strokeWidth="3" pathEffect="2_3" tag="railway" value="monorail" />
+
+		<filter minzoom="15" color="#666666" strokeWidth="2" tag="railway" value="funicular" />
+		<filter layer="-1" minzoom="15" color="#666666" strokeWidth="5" pathEffect="5_3" color_2="#cccccc" strokeWidth_2="3" tag="railway"
+			value="funicular" />
+
+		<filter minzoom="15" color="#888888" strokeWidth="3" tag="railway" value="platform" />
+
+		<!-- aeroway -->
+		<filter tag="aeroway" value="runway" color="#bbbbcc">
+			<filter minzoom="11" maxzoom="11" strokeWidth="2" />
+			<filter minzoom="12" maxzoom="12" strokeWidth="4" />
+			<filter minzoom="13" maxzoom="13" strokeWidth="7" />
+			<filter minzoom="14" maxzoom="14" strokeWidth="12" />
+			<filter minzoom="15" color="#bbbbcc" strokeWidth="18" />
+			<filter layer="1" minzoom="13" maxzoom="13" color="#000000" strokeWidth="9" color_2="#bbbbcc" strokeWidth_2="7" cap_2="SQUARE" />
+			<filter layer="1" minzoom="14" maxzoom="14" color="#000000" strokeWidth="14" color_2="#bbbbcc" strokeWidth_2="12" cap_2="SQUARE" />
+			<filter layer="1" minzoom="15" color="#000000" strokeWidth="20" color_2="#bbbbcc" strokeWidth_2="18" cap_2="SQUARE" />
+		</filter>
+
+		<filter tag="aeroway" value="taxiway" color="#bbbbcc">
+			<filter minzoom="12" maxzoom="13" strokeWidth="1" />
+			<filter minzoom="14" maxzoom="14" strokeWidth="4" />
+			<filter minzoom="15" color="#bbbbcc" strokeWidth="6" />
+			<filter layer="1" minzoom="13" maxzoom="13" color="#000000" strokeWidth="3" color_2="#bbbbcc" strokeWidth_2="1" cap_2="SQUARE" />
+			<filter layer="1" minzoom="14" maxzoom="14" color="#000000" strokeWidth="6" color_2="#bbbbcc" strokeWidth_2="4" cap_2="SQUARE" />
+			<filter layer="1" minzoom="15" color="#000000" strokeWidth="8" color_2="#bbbbcc" strokeWidth_2="6" cap_2="SQUARE" />
+		</filter>
+
+
+		<filter minzoom="12" color="#bababa" strokeWidth="2" tag="aerialway" value="cable_car" />
+		<filter minzoom="12" color="#bababa" strokeWidth="2" tag="aerialway" value="gondola" />
+		<filter minzoom="12" color="#bababa" strokeWidth="2" tag="aerialway" value="chair_lift" />
+		<filter minzoom="12" color="#bababa" strokeWidth="2" tag="aerialway" value="mixed_lift" />
+		<filter minzoom="12" color="#bababa" strokeWidth="2" tag="aerialway" value="drag_lift" />
+
+		<!-- MAN MADE -->
+		<filter minzoom="14" maxzoom="14" color="#bababa" strokeWidth="1" tag="power" value="line" />
+		<filter minzoom="15" color="#bababa" strokeWidth="2" tag="power" value="line" />
+		<filter minzoom="14" color="#bababa" strokeWidth="1" tag="power" value="minor_line" />
+
+		<switch>
+			<case tag="man_made" value="groyne" />
+			<case tag="man_made" value="breakwater" />
+			<filter>
+				<filter minzoom="12" maxzoom="13" color="#aaaaaa" strokeWidth="1" />
+				<filter minzoom="14" maxzoom="15" color="#aaaaaa" strokeWidth="2" />
+				<filter minzoom="16" color="#aaaaaa" strokeWidth="4" />
+			</filter>
+		</switch>
+
+
+		<filter minzoom="12" maxzoom="13" color="#f2efe9" strokeWidth="1" tag="man_made" value="pier" />
+		<filter minzoom="14" maxzoom="15" color="#f2efe9" strokeWidth="3" tag="man_made" value="pier" />
+		<filter minzoom="16" color="#f2efe9" strokeWidth="6" tag="man_made" value="pier" />
+
+		<filter minzoom="13" color="#888888" strokeWidth="1" tag="leisure" value="track" />
+
+		<filter minzoom="13" maxzoom="15" color="#0000ff" strokeWidth="1" pathEffect="6_2" tag="leisure" value="marina" />
+		<filter minzoom="16" color="#0000ff" strokeWidth="2" pathEffect="6_2" tag="leisure" value="marina" />
+
+		<!-- ADMIN LEVELS (boundaries) -->
+		<switch>
+			<case tag="admin_level" value="0" />
+			<case tag="admin_level" value="1" />
+			<case tag="admin_level" value="2" />
+			<case tag="admin_level" value="3" />
+			<filter color="#800080">
+				<filter minzoom="2" maxzoom="3" strokeWidth="0.5" />
+				<filter minzoom="4" maxzoom="6" strokeWidth="1" />
+				<filter minzoom="7" maxzoom="9" strokeWidth="2.5" />
+				<filter minzoom="10" strokeWidth="4" />
+			</filter>
+		</switch>
+
+		<filter color="#800080" pathEffect="4_3" tag="admin_level" value="4">
+			<filter minzoom="4" maxzoom="6" strokeWidth="0.6" />
+			<filter minzoom="7" maxzoom="9" strokeWidth="2" />
+			<filter minzoom="11" strokeWidth="3" />
+		</filter>
+
+		<filter minzoom="11" color="#800080" strokeWidth="2" pathEffect="6_3_2_3_2_3" tag="admin_level" value="5" />
+		<filter minzoom="11" color="#800080" strokeWidth="2" pathEffect="6_3_2_3" tag="admin_level" value="6" />
+		<filter minzoom="12" color="#800080" strokeWidth="2" pathEffect="5_2" tag="admin_level" value="7" />
+		<filter minzoom="12" color="#800080" strokeWidth="2" pathEffect="5_2" tag="admin_level" value="8" />
+		<filter minzoom="13" maxzoom="16" color="#800080" strokeWidth="1" pathEffect="3_2" tag="admin_level" value="9" />
+		<filter minzoom="17" color="#800080" strokeWidth="2" pathEffect="3_2" tag="admin_level" value="9" />
+		<filter minzoom="13" maxzoom="16" color="#800080" strokeWidth="1" pathEffect="3_2" tag="admin_level" value="10" />
+		<filter minzoom="17" color="#800080" strokeWidth="2" pathEffect="3_2" tag="admin_level" value="10" />
+		<filter minzoom="7" maxzoom="9" color="#a009dd09" strokeWidth="1.5" pathEffect="4_2" tag="boundary" value="national_park" />
+		<filter minzoom="10" color="#a009dd09" strokeWidth="3" pathEffect="6_2" tag="boundary" value="national_park" />
+
 	</line>
 
 </renderer>

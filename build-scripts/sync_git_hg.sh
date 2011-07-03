@@ -12,7 +12,8 @@ if [ ! -d "$HG_DIR" ]; then
     hg clone ${GIT_URL} "${HG_DIR}"
 fi
 cd "${HG_DIR}"
-hg pull -r master "${GIT_URL}"
+# hg pull -r master "${GIT_URL}" # ambigious master
+hg pull "${GIT_URL}"
 hg update -c
 # First time add entries to .hgrc (!)
 # [paths]
