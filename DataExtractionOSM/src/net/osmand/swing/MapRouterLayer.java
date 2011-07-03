@@ -33,8 +33,8 @@ import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Way;
 import net.osmand.router.BinaryRoutePlanner;
+import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
-import net.osmand.router.BinaryRoutePlanner.RouteSegmentResult;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
 import net.osmand.router.BinaryRoutePlanner.RoutingContext;
 
@@ -48,8 +48,8 @@ import org.xml.sax.SAXException;
 
 public class MapRouterLayer implements MapPanelLayer {
 
-	private /*final */ static boolean ANIMATE_CALCULATING_ROUTE = true;
-	private /*final */ static int SIZE_OF_ROUTES_TO_ANIMATE = 1;
+	private /*final */ static boolean ANIMATE_CALCULATING_ROUTE = false;
+	private /*final */ static int SIZE_OF_ROUTES_TO_ANIMATE = 50;
 	
 	
 	private MapPanel map;
