@@ -34,7 +34,7 @@ public class RendererRegistry {
 		internalRenderers.put(DEFAULT_RENDER, "default.render.xml"); //$NON-NLS-1$
 		internalRenderers.put(CAR_RENDER, "car.render.xml"); //$NON-NLS-1$
 		internalRenderers.put(BICYCLE_RENDER, "bicycle.render.xml"); //$NON-NLS-1$
-		internalRenderers.put("hm", "hm.render.xml"); //$NON-NLS-1$
+		internalRenderers.put("all-purpose", "all-purpose.render.xml"); //$NON-NLS-1$
 	}
 	
 	private BaseOsmandRender defaultRender = null;
