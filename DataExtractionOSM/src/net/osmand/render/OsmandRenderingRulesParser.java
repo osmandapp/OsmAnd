@@ -153,7 +153,7 @@ public class OsmandRenderingRulesParser {
 				String dnc = attributes.getValue("defaultNightColor");
 				int defautNightColor = defaultColor;
 				if(dnc != null && dnc.length() > 0){
-					defautNightColor = parseColor(dc);
+					defautNightColor = parseColor(dnc);
 				}
 				visitor.rendering(attributes.getValue("name"), attributes.getValue("depends"), defaultColor, defautNightColor); //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
