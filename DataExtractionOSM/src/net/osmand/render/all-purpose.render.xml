@@ -15,19 +15,21 @@
 		 - z17 = Building details, street corner details.
 	--> 
 	<!--
-		    Night renderer
-			default: 003333
+	         Version History:
+                  (please document all changes in detail, and reason for change. This should facility later reconciliation with other renderers) 
+	         - v012: This is the one Victor produced from v011, with combining day/night renderer. Some optical deviations from former v011 contained. This one synced with default on master 2011-07-03
+	-->
 
+	<!--
+		    Colors for night renderer
+			default: 003333
 			built-up areas: 66004B
 			buildings: 560000
-
 			forest: 000034
 			other 'green' landuse: 004333
-
 			water: 330099
-
-			'white' roads: 9F9F9F 
-			leave other (colored) roads like day
+			'white' roads: 9F9F9F to darken high density areas sufficiently
+			leave other road colors like day, for easy recognition
 	--> 
 
 	<!--
