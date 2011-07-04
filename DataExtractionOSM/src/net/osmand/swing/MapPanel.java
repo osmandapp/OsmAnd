@@ -126,28 +126,30 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 			});
 		}
 		
-		for(final TileSourceTemplate l : downloaded){
-			if(l == null){
-				continue;
-			}
-			JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(l.getName());
-			downloadedMenu.add(menuItem);
-			items.put(l, menuItem);
-			menuItem.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					for (final Map.Entry<TileSourceTemplate, JCheckBoxMenuItem> es : items.entrySet()) {
-						es.getValue().setSelected(l.equals(es.getKey()));
-					}
-					File dir = new File(tilesDirectory, l.getName());
-					try {
-						dir.mkdirs();
-						TileSourceManager.createMetaInfoFile(dir, l, true);
-					} catch (IOException e1) {
-					}
-					panel.setMapName(l);
+		if (downloaded != null) {
+			for (final TileSourceTemplate l : downloaded) {
+				if (l == null) {
+					continue;
 				}
-			});
+				JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(l.getName());
+				downloadedMenu.add(menuItem);
+				items.put(l, menuItem);
+				menuItem.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						for (final Map.Entry<TileSourceTemplate, JCheckBoxMenuItem> es : items.entrySet()) {
+							es.getValue().setSelected(l.equals(es.getKey()));
+						}
+						File dir = new File(tilesDirectory, l.getName());
+						try {
+							dir.mkdirs();
+							TileSourceManager.createMetaInfoFile(dir, l, true);
+						} catch (IOException e1) {
+						}
+						panel.setMapName(l);
+					}
+				});
+			}
 		}
 
 		for (final Map.Entry<TileSourceTemplate, JCheckBoxMenuItem> em : items.entrySet()) {
