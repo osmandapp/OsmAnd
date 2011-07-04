@@ -1,6 +1,6 @@
 <renderer name="all-purpose" depends="" defaultColor="#f1eee8" defaultNightColor="#003333">
 	<!--
-		All Purpose Renderer (essentially more details than default) (by Hardy Mueller), v013f:
+		All Purpose Renderer (essentially more details than default) (by Hardy Mueller), v013h:
 		Map rendering aligned to typical map use for all zoom levels/scales, hence always yields a complete and reliable map.
 		All features displayed at each zoom level (zX) are those for its typical use:
 		 - z7  = "Rough Country Level Overview": Shows motorways, trunks, primary roads and city names
@@ -16,7 +16,7 @@
 	         Version History:
                   (please document all changes in detail, and reason for change. This should facility later reconciliation with other renderers) 
 	         - v012: This is the one Victor produced from v011, with combining day/night renderer. Some optical deviations from former v011 contained. This one synced with default on master 2011-07-03
-	         - v013: Fixed some bugs to re-instate functionality of v011: Fix night view for all shaders, cemetery,  vineyard, nature_reserve, forest. Fixed night view for field, orchard, quarry, marsh, mud, wetland, scrub, zoo. Fixed night view for white roads. Also brightened motorway and trunk highway colors again to what was requested in forum.
+	         - v013: Fixed some bugs to re-instate functionality of v011: Fix night view for all shaders, cemetery,  vineyard, nature_reserve, forest. Fixed night view for field, orchard, quarry, marsh, mud, wetland, scrub, zoo. Fixed night view for white roads. Also brightened motorway and trunk highway colors again to what was requested in forum. Fix night bridges.
 	-->
 
 	<!--
@@ -827,13 +827,17 @@
 					</filter>
 				</switch>
 				<!-- bridge -->
-				<filter layer="1" color="#000000" cap_2="SQUARE">
+				<switch>
+	              			<case nightMode="false" color="#000000" />
+	              			<case nightMode="true" color="#ffffff" />
+					<filter layer="1" cap_2="SQUARE">
 					<filter minzoom="13" maxzoom="14" strokeWidth="12" strokeWidth_2="10" />
 					<filter minzoom="13" maxzoom="15" strokeWidth="14" strokeWidth_2="12" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="17" strokeWidth_2="15" />
 					<filter minzoom="17" maxzoom="17" strokeWidth="21" strokeWidth_2="19" />
 					<filter minzoom="18" strokeWidth="26" strokeWidth_2="24" />
-				</filter>
+					</filter>
+				</switch>
 			</filter>
 		</switch>
 
@@ -915,13 +919,13 @@
 				<switch>
 	              			<case nightMode="false" color="#000000" />
 	              			<case nightMode="true" color="#ffffff" />
-		   		<filter layer="1" cap_2="SQUARE">
+		   			<filter layer="1" cap_2="SQUARE">
 					<filter minzoom="13" maxzoom="14" strokeWidth="5" strokeWidth_2="3" />
 					<filter minzoom="15" maxzoom="15" strokeWidth="6" strokeWidth_2="4" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="7" strokeWidth_2="5" />
 					<filter minzoom="17" maxzoom="17" strokeWidth="10" strokeWidth_2="8" />
 					<filter minzoom="18" strokeWidth="14" strokeWidth_2="12" />
-				</filter>
+					</filter>
 				</switch>  
 				</filter>
 			</switch>
