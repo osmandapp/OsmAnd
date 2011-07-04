@@ -5,7 +5,6 @@ import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.TIntSet;
 import gnu.trove.set.hash.TIntHashSet;
-import gnu.trove.set.hash.TLongHashSet;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +16,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
+import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
@@ -25,7 +25,6 @@ import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
-import net.osmand.LogUtil;
 
 import org.apache.commons.logging.Log;
 
@@ -33,7 +32,7 @@ public class BinaryRoutePlanner {
 	
 	private final static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
 	private final BinaryMapIndexReader[] map;
-	private static int DEFAULT_HEURISTIC_COEFFICIENT = 3;
+	private static int DEFAULT_HEURISTIC_COEFFICIENT = 1;
 	
 	private static final Log log = LogUtil.getLog(BinaryRoutePlanner.class);
 	
@@ -146,9 +145,9 @@ public class BinaryRoutePlanner {
 	
 	
 	// TODO write unit tests
-	// TODO add information about turns
+	// TODO add information about turns (?) - probably calculate additional information to show on map
 	// TODO think about u-turn
-	// TODO fix roundabout (?)
+	// TODO fix roundabout (?) - probably calculate additional information to show on map
 	// TODO access
 	// TODO fastest/shortest way
 	/**
@@ -160,7 +159,7 @@ public class BinaryRoutePlanner {
 		// measure time
 		ctx.timeToLoad = 0;
 		ctx.visitedSegments = 0;
-		boolean reverseWaySearch = false;
+
 		long startNanoTime = System.nanoTime();
 
 		// Initializing priority queue to visit way segments 
@@ -170,12 +169,20 @@ public class BinaryRoutePlanner {
 				return ctx.roadPriorityComparator(o1.distanceFromStart, o1.distanceToEnd, o2.distanceFromStart, o2.distanceToEnd);
 			}
 		};
+		
+		Comparator<RouteSegment> nonHeuristicSegmentsComparator = new Comparator<RouteSegment>(){
+			@Override
+			public int compare(RouteSegment o1, RouteSegment o2) {
+				return roadPriorityComparator(o1.distanceFromStart, o1.distanceToEnd, o2.distanceFromStart, o2.distanceToEnd, 1);
+			}
+		};
+		
 		PriorityQueue<RouteSegment> graphDirectSegments = new PriorityQueue<RouteSegment>(50, segmentsComparator);
 		PriorityQueue<RouteSegment> graphReverseSegments = new PriorityQueue<RouteSegment>(50, segmentsComparator);
 		
 		// Set to not visit one segment twice (stores road.id << X + segmentStart)
-		TLongHashSet visitedDirectSegments = new TLongHashSet();
-		TLongHashSet visitedOppositeSegments = new TLongHashSet();
+		TLongObjectHashMap<RouteSegment> visitedDirectSegments = new TLongObjectHashMap<RouteSegment>();
+		TLongObjectHashMap<RouteSegment> visitedOppositeSegments = new TLongObjectHashMap<RouteSegment>();
 		
 		
 //		if(reverseWaySearch){
@@ -199,11 +206,14 @@ public class BinaryRoutePlanner {
 		visitAllStartSegments(ctx, end, graphReverseSegments, visitedOppositeSegments, targetEndX, targetEndY);
 		
 		// final segment before end
-		RouteSegment finalRoute = null;
+		RouteSegment finalDirectRoute = null;
+		RouteSegment finalReverseRoute = null;
 		
-		// Extract & analyze segment with min(f(x)) from queue while final segment is not found 
-		while(!graphDirectSegments.isEmpty() && finalRoute == null){
-			RouteSegment segment = graphDirectSegments.poll();
+		// Extract & analyze segment with min(f(x)) from queue while final segment is not found
+		boolean inverse = false;
+		PriorityQueue<RouteSegment>  graphSegments = inverse ? graphReverseSegments : graphDirectSegments;
+		while(!graphSegments.isEmpty()){
+			RouteSegment segment = graphSegments.poll();
 			
 			
 			ctx.visitedSegments ++;
@@ -211,24 +221,50 @@ public class BinaryRoutePlanner {
 			if (ctx.visitor != null) {
 				ctx.visitor.visitSegment(segment);
 			}
-			
-			finalRoute = processRouteSegment(ctx, end, reverseWaySearch, graphDirectSegments, visitedDirectSegments, targetEndX, targetEndY,
-					segment, visitedOppositeSegments);
+			if (!inverse) {
+				finalDirectRoute = processRouteSegment(ctx, end, false, graphDirectSegments, visitedDirectSegments, targetEndX,
+						targetEndY, segment, visitedOppositeSegments);
+				if (finalDirectRoute != null) {
+					long nt = (finalDirectRoute.road.getId() << 8l) + finalDirectRoute.segmentEnd;
+					finalReverseRoute = visitedOppositeSegments.get(nt);
+					if(finalReverseRoute != null){
+						finalReverseRoute.segmentEnd = finalDirectRoute.segmentEnd;
+					}
+					break;
+				}
+			} else {
+				finalReverseRoute = processRouteSegment(ctx, start, true, graphReverseSegments, visitedOppositeSegments, startX,
+						startY, segment, visitedDirectSegments);
+				if (finalReverseRoute != null) {
+					long nt = (finalReverseRoute.road.getId() << 8l) + finalReverseRoute.segmentEnd;
+					finalDirectRoute = visitedDirectSegments.get(nt);
+					if(finalDirectRoute != null){
+						finalDirectRoute.segmentEnd = finalReverseRoute.segmentEnd;
+					}
+					break;
+				}
+			}
+			if(graphReverseSegments.isEmpty() || graphDirectSegments.isEmpty()){
+				break;
+			}
+			inverse = nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) > 0;
+//			inverse = !inverse;
+			graphSegments = inverse ? graphReverseSegments : graphDirectSegments;
 		}
 		
 		
 		// 4. Route is found : collect all segments and prepare result
-		return prepareResult(ctx, start, end, startNanoTime, finalRoute, !reverseWaySearch);
+		return prepareResult(ctx, start, end, startNanoTime, finalDirectRoute, finalReverseRoute);
 		
 	}
 
 
 
 	private void visitAllStartSegments(final RoutingContext ctx, RouteSegment start, PriorityQueue<RouteSegment> graphDirectSegments,
-			TLongHashSet visitedSegments, int startX, int startY) throws IOException {
+			TLongObjectHashMap<RouteSegment> visitedSegments, int startX, int startY) throws IOException {
 		// mark as visited code seems to be duplicated
 		long nt = (start.road.getId() << 8l) + start.segmentStart;
-		visitedSegments.add(nt);
+		visitedSegments.put(nt, start);
 		graphDirectSegments.add(start);
 		
 		loadRoutes(ctx, (startX >> (31 - ZOOM_LOAD_TILES)), (startY >> (31 - ZOOM_LOAD_TILES)));
@@ -242,7 +278,7 @@ public class BinaryRoutePlanner {
 
 				// duplicated to be sure start is added
 				nt = (startNbs.road.getId() << 8l) + startNbs.segmentStart;
-				visitedSegments.add(nt);
+				visitedSegments.put(nt, startNbs);
 				graphDirectSegments.add(startNbs);
 			}
 			startNbs = startNbs.next;
@@ -250,8 +286,8 @@ public class BinaryRoutePlanner {
 	}
 
 	private RouteSegment processRouteSegment(final RoutingContext ctx, RouteSegment end, boolean reverseWaySearch,
-			PriorityQueue<RouteSegment> graphSegments, TLongHashSet visitedSegments, int targetEndX, int targetEndY,
-			RouteSegment segment, TLongHashSet oppositeSegments) throws IOException {
+			PriorityQueue<RouteSegment> graphSegments, TLongObjectHashMap<RouteSegment> visitedSegments, int targetEndX, int targetEndY,
+            RouteSegment segment, TLongObjectHashMap<RouteSegment> oppositeSegments) throws IOException {
 		// Always start from segmentStart (!), not from segmentEnd
 		// It makes difference only for the first start segment
 		// Middle point will always be skipped from observation considering already visited
@@ -259,71 +295,70 @@ public class BinaryRoutePlanner {
 		final int middle = segment.segmentStart;
 		int middlex = road.getPoint31XTile(middle);
 		int middley = road.getPoint31YTile(middle);
-		
+
 		// 0. mark route segment as visited
 		long nt = (road.getId() << 8l) + middle;
-		visitedSegments.add(nt);
-		if(oppositeSegments.contains(nt)){
-//		if(end.road.getId() == road.getId() && end.segmentStart == middle){
+		visitedSegments.put(nt, segment);
+		if (oppositeSegments.contains(nt)) {
+			// if(end.road.getId() == road.getId() && end.segmentStart == middle){
 			segment.segmentEnd = middle;
 			return segment;
 		}
-		
-		
+
 		boolean oneway = ctx.router.isOneWay(road.getHighwayAttributes());
-		boolean minusAllowed =  !oneway || reverseWaySearch;
-		boolean plusAllowed =  !oneway || !reverseWaySearch;
-		
+		boolean minusAllowed = !oneway || reverseWaySearch;
+		boolean plusAllowed = !oneway || !reverseWaySearch;
+
 		// +/- diff from middle point
 		int d = plusAllowed ? 1 : -1;
 		// Go through all point of the way and find ways to continue
-		// ! Actually there is small bug when there is restriction to move forward on way (it doesn't take into account) 
-		while(minusAllowed || plusAllowed) {
+		// ! Actually there is small bug when there is restriction to move forward on way (it doesn't take into account)
+		while (minusAllowed || plusAllowed) {
 			// 1. calculate point not equal to middle
-			//	  (algorithm should visit all point on way if it is not oneway)
+			// (algorithm should visit all point on way if it is not oneway)
 			int segmentEnd = middle + d;
 			if (!minusAllowed && d > 0) {
 				d++;
 			} else if (!plusAllowed && d < 0) {
 				d--;
 			} else {
-				if (d <= 0){
+				if (d <= 0) {
 					d = -d + 1;
 				} else {
 					d = -d;
 				}
 			}
-			if(segmentEnd < 0){
+			if (segmentEnd < 0) {
 				minusAllowed = false;
 				continue;
 			}
-			if(segmentEnd >= road.getPointsLength()){
+			if (segmentEnd >= road.getPointsLength()) {
 				plusAllowed = false;
 				continue;
 			}
 
 			// if we found end point break cycle
 			long nts = (road.getId() << 8l) + segmentEnd;
-			if(oppositeSegments.contains(nts)){
-//			if(end.road.getId() == road.getId() && end.segmentStart == segmentEnd){
+			if (oppositeSegments.contains(nts)) {
+				// if(end.road.getId() == road.getId() && end.segmentStart == segmentEnd){
 				segment.segmentEnd = segmentEnd;
 				return segment;
 			}
-			visitedSegments.add(nts);
-			
+			visitedSegments.put(nts, segment);
+
 			// 2. calculate point and try to load neighbor ways if they are not loaded
 			int x = road.getPoint31XTile(segmentEnd);
 			int y = road.getPoint31YTile(segmentEnd);
 			loadRoutes(ctx, (x >> (31 - ZOOM_LOAD_TILES)), (y >> (31 - ZOOM_LOAD_TILES)));
 			long l = (((long) x) << 31) + (long) y;
 			RouteSegment next = ctx.routes.get(l);
-			
+
 			// 3. get intersected ways
 			if (next != null) {
 				double distOnRoadToPass = squareRootDist(x, y, middlex, middley);
 				double distToFinalPoint = squareRootDist(x, y, targetEndX, targetEndY);
-				processIntersectionsWithWays(ctx, graphSegments, visitedSegments, distOnRoadToPass, distToFinalPoint,
-					segment, road, d == 0, segmentEnd, next);
+				processIntersectionsWithWays(ctx, graphSegments, visitedSegments, distOnRoadToPass, distToFinalPoint, segment, road,
+						d == 0, segmentEnd, next);
 			}
 		}
 		return null;
@@ -332,7 +367,7 @@ public class BinaryRoutePlanner {
 
 
 	private void processIntersectionsWithWays(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments,
-			TLongHashSet visitedSegments, double distOnRoadToPass, double distToFinalPoint, 
+			TLongObjectHashMap<RouteSegment> visitedSegments, double distOnRoadToPass, double distToFinalPoint, 
 			RouteSegment segment, BinaryMapDataObject road, boolean firstOfSegment, int segmentEnd, RouteSegment next) {
 
 		// This variables can be in routing context
@@ -425,21 +460,9 @@ public class BinaryRoutePlanner {
 	
 	
 	private List<RouteSegmentResult> prepareResult(RoutingContext ctx, RouteSegment start, RouteSegment end, long startNanoTime,
-			RouteSegment finalRoute, boolean reverseResult) {
+			RouteSegment finalDirectRoute, RouteSegment finalReverseRoute) {
 		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
-		// Try to define direction of last movement and reverse start and end point for end if needed
-		int parentSegmentEnd = 0;
-		RouteSegment segment = finalRoute;
-		if(finalRoute != null){
-			if(finalRoute.getRoad().getId() == end.getRoad().getId()){
-				parentSegmentEnd = finalRoute.segmentStart <= end.segmentStart ? end.segmentEnd : end.segmentStart;
-			} else {
-				end.parentRoute = finalRoute;
-				end.parentSegmentEnd = finalRoute.segmentEnd;
-				parentSegmentEnd = end.segmentEnd;
-				segment = end;
-			}
-		}
+				
 		
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
 			System.out.println("ROUTE : ");
@@ -449,6 +472,32 @@ public class BinaryRoutePlanner {
 					+ MapUtils.get31LongitudeX(end.road.getPoint31XTile(end.segmentStart)));
 		}
 		
+		
+		RouteSegment segment = finalReverseRoute;
+		int parentSegmentStart = segment == null ? 0 : segment.segmentEnd; 
+		while(segment != null){
+			RouteSegmentResult res = new RouteSegmentResult();
+			res.object = segment.road;
+			res.endPointIndex = segment.segmentStart;
+			res.startPointIndex = parentSegmentStart;
+			parentSegmentStart = segment.parentSegmentEnd;
+			segment = segment.parentRoute;
+			// reverse start and end point for start if needed
+			// rely that point.segmentStart <= point.segmentEnd for end, start
+			if(segment == null && res.startPointIndex <= res.endPointIndex){
+				res.endPointIndex = end.segmentEnd;
+			}
+			// do not add segments consists from 1 point
+			if(res.startPointIndex != res.endPointIndex) {
+				result.add(res);
+			}
+			res.startPoint = convertPoint(res.object, res.startPointIndex);
+			res.endPoint = convertPoint(res.object, res.endPointIndex);
+		}
+		Collections.reverse(result);
+		
+		segment = finalDirectRoute;
+		int parentSegmentEnd = segment == null ? 0 : segment.segmentEnd;
 		while(segment != null){
 			RouteSegmentResult res = new RouteSegmentResult();
 			res.object = segment.road;
@@ -458,6 +507,7 @@ public class BinaryRoutePlanner {
 			
 			segment = segment.parentRoute;
 			// reverse start and end point for start if needed
+			// rely that point.segmentStart <= point.segmentEnd for end, start
 			if(segment == null && res.startPointIndex >= res.endPointIndex){
 				res.startPointIndex = start.segmentEnd;
 			}
@@ -468,14 +518,13 @@ public class BinaryRoutePlanner {
 			res.startPoint = convertPoint(res.object, res.startPointIndex);
 			res.endPoint = convertPoint(res.object, res.endPointIndex);
 		}
+		Collections.reverse(result);
 		
 		
-		if(reverseResult){
-			Collections.reverse(result);
-		}
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
 			for (RouteSegmentResult res : result) {
-				System.out.println("id=" + (res.object.getId() >> 1) + " start=" + res.startPointIndex + " end=" + res.endPointIndex);
+				// (res.object.getId() >> 1)
+				System.out.println("id=" + (res.object.getId() >> 3) + " start=" + res.startPointIndex + " end=" + res.endPointIndex);
 				System.out.println("Name :" + res.object.getName());
 			}
 		}
@@ -573,29 +622,34 @@ public class BinaryRoutePlanner {
 		// parameters of routing
 		public int heuristicCoefficient = DEFAULT_HEURISTIC_COEFFICIENT;
 		public VehicleRouter router = new CarRouter();
-		
+
 		// 
 		TLongObjectMap<BinaryMapDataObject> idObjects = new TLongObjectHashMap<BinaryMapDataObject>();
 		TLongObjectMap<RouteSegment> routes = new TLongObjectHashMap<RouteSegment>();
 		TIntSet loadedTiles = new TIntHashSet();
-		
+
 		// debug information
 		long timeToLoad = 0;
 		long timeToCalculate = 0;
 		int visitedSegments = 0;
 		// callback of processing segments
 		public RouteSegmentVisitor visitor = null;
-		
-		public Collection<BinaryMapDataObject> values(){
+
+		public Collection<BinaryMapDataObject> values() {
 			return idObjects.valueCollection();
 		}
-		
-		public int roadPriorityComparator(double o1DistanceFromStart, double o1DistanceToEnd, 
-				double o2DistanceFromStart, double o2DistanceToEnd) {
-			// f(x) = g(x) + h(x)  --- g(x) - distanceFromStart, h(x) - distanceToEnd (not exact)
-			return Double.compare(o1DistanceFromStart + heuristicCoefficient * o1DistanceToEnd, 
-					o2DistanceFromStart + heuristicCoefficient *  o2DistanceToEnd);
+
+		public int roadPriorityComparator(double o1DistanceFromStart, double o1DistanceToEnd, double o2DistanceFromStart,
+				double o2DistanceToEnd) {
+			return BinaryRoutePlanner.roadPriorityComparator(o1DistanceFromStart, o1DistanceToEnd, o2DistanceFromStart, o2DistanceToEnd, heuristicCoefficient);
 		}
+	}
+	
+	private static int roadPriorityComparator(double o1DistanceFromStart, double o1DistanceToEnd, 
+			double o2DistanceFromStart, double o2DistanceToEnd, double heuristicCoefficient ) {
+		// f(x) = g(x) + h(x)  --- g(x) - distanceFromStart, h(x) - distanceToEnd (not exact)
+		return Double.compare(o1DistanceFromStart + heuristicCoefficient * o1DistanceToEnd, 
+				o2DistanceFromStart + heuristicCoefficient *  o2DistanceToEnd);
 	}
 
 	public static class RouteSegment {
