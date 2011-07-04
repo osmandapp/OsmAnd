@@ -1,6 +1,6 @@
 <renderer name="all-purpose" depends="" defaultColor="#f1eee8" defaultNightColor="#003333">
 	<!--
-		All Purpose Renderer (essentially more details than default) (by Hardy Mueller), v013h:
+		All Purpose Renderer (essentially more details than default) (by Hardy Mueller), v013j:
 		Map rendering aligned to typical map use for all zoom levels/scales, hence always yields a complete and reliable map.
 		All features displayed at each zoom level (zX) are those for its typical use:
 		 - z7  = "Rough Country Level Overview": Shows motorways, trunks, primary roads and city names
@@ -193,10 +193,6 @@
 			<case tag="highway" value="living_street" />
 			<case tag="highway" value="pedestrian" />
 
-			<case tag="highway" value="byway" />
-			<case tag="highway" value="footway" />
-			<case tag="highway" value="steps" />
-			<case tag="highway" value="bridleway" />
 			<case tag="highway" value="services" />
 			<case tag="highway" value="ford" />
 			<case tag="highway" value="construction" />
@@ -216,6 +212,11 @@
 				<case tag="highway" value="track" />
 				<case tag="highway" value="path" />
 				<case tag="highway" value="cycleway" />
+
+				<case tag="highway" value="byway" />
+				<case tag="highway" value="footway" />
+				<case tag="highway" value="steps" />
+				<case tag="highway" value="bridleway" />
 					<filter textOnPath="true">
 					<filter minzoom="14" maxzoom="14" textSize="12" />
 					<filter minzoom="15" maxzoom="15" textSize="13" />
@@ -771,8 +772,8 @@
 		<switch>
 			<case tag="highway" value="motorway" color="#809BFF" />
 			<case tag="highway" value="motorway_link" color="#809BFF" />
-			<case tag="highway" value="trunk" color="#EF2356" />
-			<case tag="highway" value="trunk_link" color="#EF2356" />
+			<case tag="highway" value="trunk" color="#E71B4E" />
+			<case tag="highway" value="trunk_link" color="#E71B4E" />
 			<filter>
 				<filter minzoom="5" maxzoom="9" strokeWidth="5" />
 				<filter minzoom="10" maxzoom="10" strokeWidth="6" />
@@ -808,8 +809,8 @@
 		<switch>
 			<case tag="highway" value="motorway" color="#809BFF" color_2="#809BFF" />
 			<case tag="highway" value="motorway_link" color="#809BFF" color_2="#809BFF" />
-			<case tag="highway" value="trunk" color="#EF2356" color_2="#EF2356" />
-			<case tag="highway" value="trunk_link" color="#EF2356" color_2="#EF2356" />
+			<case tag="highway" value="trunk" color="#E71B4E" color_2="#E71B4E" />
+			<case tag="highway" value="trunk_link" color="#E71B4E" color_2="#E71B4E" />
 			<case tag="highway" value="primary" color="#eb989a" color_2="#eb989a" />
 			<case tag="highway" value="primary_link" color="#eb989a" color_2="#eb989a" />
 			<case tag="highway" value="secondary" color="#fdd6a4" color_2="#fdd6a4" />
