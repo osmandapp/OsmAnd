@@ -1,6 +1,6 @@
 <renderer name="all-purpose" depends="" defaultColor="#f1eee8" defaultNightColor="#003333">
 	<!--
-		All Purpose Renderer (essentially more details than default) (by Hardy Mueller), v013j:
+		All Purpose Renderer (essentially more details than default) (by Hardy Mueller), v014:
 		Map rendering aligned to typical map use for all zoom levels/scales, hence always yields a complete and reliable map.
 		All features displayed at each zoom level (zX) are those for its typical use:
 		 - z7  = "Rough Country Level Overview": Shows motorways, trunks, primary roads and city names
@@ -15,8 +15,9 @@
 	<!--
 	         Version History:
                   (please document all changes in detail, and reason for change. This should facility later reconciliation with other renderers) 
-	         - v012: This is the one Victor produced from v011, with combining day/night renderer. Some optical deviations from former v011 contained. This one synced with default on master 2011-07-03
+	         - v012: This is the one Victor produced from v011, with combining day/night renderer. Some optical deviations from former v011 contained. This one synced with default on master 2011-07-03.
 	         - v013: Fixed some bugs to re-instate functionality of v011: Fix night view for all shaders, cemetery,  vineyard, nature_reserve, forest. Fixed night view for field, orchard, quarry, marsh, mud, wetland, scrub, zoo. Fixed night view for white roads. Also brightened motorway and trunk highway colors again to what was requested in forum. Fix night bridges.
+	         - v014: functionality of v011 restored, with combined day+night view. Trunk highways slightly darker, white tags on all dotted paths at night.
 	-->
 
 	<!--
@@ -772,8 +773,8 @@
 		<switch>
 			<case tag="highway" value="motorway" color="#809BFF" />
 			<case tag="highway" value="motorway_link" color="#809BFF" />
-			<case tag="highway" value="trunk" color="#E71B4E" />
-			<case tag="highway" value="trunk_link" color="#E71B4E" />
+			<case tag="highway" value="trunk" color="#DF1346" />
+			<case tag="highway" value="trunk_link" color="#DF1346" />
 			<filter>
 				<filter minzoom="5" maxzoom="9" strokeWidth="5" />
 				<filter minzoom="10" maxzoom="10" strokeWidth="6" />
@@ -809,8 +810,8 @@
 		<switch>
 			<case tag="highway" value="motorway" color="#809BFF" color_2="#809BFF" />
 			<case tag="highway" value="motorway_link" color="#809BFF" color_2="#809BFF" />
-			<case tag="highway" value="trunk" color="#E71B4E" color_2="#E71B4E" />
-			<case tag="highway" value="trunk_link" color="#E71B4E" color_2="#E71B4E" />
+			<case tag="highway" value="trunk" color="#DF1346" color_2="#DF1346" />
+			<case tag="highway" value="trunk_link" color="#DF1346" color_2="#DF1346" />
 			<case tag="highway" value="primary" color="#eb989a" color_2="#eb989a" />
 			<case tag="highway" value="primary_link" color="#eb989a" color_2="#eb989a" />
 			<case tag="highway" value="secondary" color="#fdd6a4" color_2="#fdd6a4" />
