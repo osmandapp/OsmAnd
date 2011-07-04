@@ -1,6 +1,6 @@
 <renderer name="all-purpose" depends="" defaultColor="#f1eee8" defaultNightColor="#003333">
 	<!--
-		All Purpose Renderer (essentially more details than default) (by Hardy Mueller), v013-incomplete:
+		All Purpose Renderer (essentially more details than default) (by Hardy Mueller), v013c:
 		Map rendering aligned to typical map use for all zoom levels/scales, hence always yields a complete and reliable map.
 		All features displayed at each zoom level (zX) are those for its typical use:
 		 - z7  = "Rough Country Level Overview": Shows motorways, trunks, primary roads and city names
@@ -16,7 +16,7 @@
 	         Version History:
                   (please document all changes in detail, and reason for change. This should facility later reconciliation with other renderers) 
 	         - v012: This is the one Victor produced from v011, with combining day/night renderer. Some optical deviations from former v011 contained. This one synced with default on master 2011-07-03
-	         - v013: Fixed some bugs to re-instate functionality of v011: Move night view for cemetery,  vineyard, forest, nature_reserve after shader. Fixed night view for field, orchard, quarry, marsh, mud, wetland, scrub, zoo.  Also brightened motorway and trunk highway colors again.
+	         - v013: Fixed some bugs to re-instate functionality of v011: Fix night view for all shaders, cemetery,  vineyard, nature_reserve, forest. Fixed night view for field, orchard, quarry, marsh, mud, wetland, scrub, zoo. Fixed night view for white roads. Also brightened motorway and trunk highway colors again to what was requested in forum.
 	-->
 
 	<!--
@@ -595,20 +595,20 @@
 		<filter minzoom="12" shader="beach" tag="natural" value="beach" />
 
 		<filter minzoom="10" shader="glacier" color_2="#99ccff" strokeWidth_2="2" tag="natural" value="glacier" />
-			<filter nightMode="true" minzoom="10" color_2="#497CAF" strokeWidth_2="2" tag="natural" value="glacier" />
+			<filter nightMode="true" minzoom="10" shader="glacier" color_2="#497CAF" strokeWidth_2="2" tag="natural" value="glacier" />
 		<filter minzoom="12" color="#ffffc0" tag="natural" value="heath" />
 			<filter nightMode="true" minzoom="12" color="#004333" tag="natural" value="heath" />
 		<filter minzoom="10" color="#f2efe9" tag="natural" value="land" />
 			<filter nightMode="true" minzoom="10" color="#004333" tag="natural" value="land" />
 
 		<filter minzoom="12" shader="marsh" tag="natural" value="marsh" />
-			<filter nightMode="true" minzoom="12" color="#004333" tag="natural" value="marsh" />
+			<filter nightMode="true" minzoom="12" shader="marsh" color="#004333" tag="natural" value="marsh" />
 		<filter minzoom="12" shader="mud" tag="natural" value="mud" />
-			<filter nightMode="true" minzoom="12" color="#004333" tag="natural" value="mud" />
+			<filter nightMode="true" minzoom="12" shader="mud" color="#004333" tag="natural" value="mud" />
 		<filter minzoom="12" shader="scrub" tag="natural" value="scrub" />
-			<filter nightMode="true" minzoom="12" color="#004333" tag="natural" value="scrub" />
+			<filter nightMode="true" minzoom="12" shader="scrub" color="#004333" tag="natural" value="scrub" />
 		<filter minzoom="10" shader="marsh" tag="natural" value="wetland" />
-			<filter nightMode="true" minzoom="10" color="#004333" tag="natural" value="wetland" />
+			<filter nightMode="true" minzoom="10" shader="marsh" color="#004333" tag="natural" value="wetland" />
 
 		<filter minzoom="10" color="#aed1a0" tag="natural" value="wood" />
 			<filter nightMode="true" minzoom="10" color="#000034" tag="natural" value="wood" />
@@ -635,9 +635,8 @@
 		<filter minzoom="12" color="#8ad3af" color_2="#888888" strokeWidth_2="1" tag="leisure" value="pitch" />
 			<filter nightMode="true" minzoom="12" color="#004333" color_2="#888888" strokeWidth_2="1" tag="leisure" value="pitch" />
 
-		<filter minzoom="10" maxzoom="11" color="#abdf96" tag="leisure" value="nature_reserve" />
-		<filter minzoom="12" shader="nr" tag="leisure" value="nature_reserve" />
-			<filter minzoom="10" nightMode="true" color="#000034" tag="leisure" value="nature_reserve" />
+		<filter minzoom="10" shader="nr" color="#abdf96" tag="leisure" value="nature_reserve" />
+			<filter minzoom="10" nightMode="true" shader="nr" color="#000034" tag="leisure" value="nature_reserve" />
 		<switch>
 			<case nightMode="true" color="#b0004333"/>
 			<case nightMode="false" color="#b0b6fdb6"/>
@@ -688,7 +687,7 @@
 		<filter minzoom="16" color="#f2caea" color_2="#734a08" strokeWidth_2="2" pathEffect_2="9_3" tag="tourism" value="theme_park" />
 			<filter minzoom="16" nightMode="true" color="#66004B" color_2="#734a08" strokeWidth_2="2" pathEffect_2="9_3" tag="tourism" value="theme_park" />
 		<filter minzoom="12" shader="zoo" tag="tourism" value="zoo" />
-			<filter minzoom="12" nightMode="true" color="#66004B" color_2="#734a08" strokeWidth_2="2" pathEffect_2="9_3" tag="tourism" value="zoo" />
+			<filter minzoom="12" nightMode="true" shader="zoo" color="#66004B" color_2="#734a08" strokeWidth_2="2" pathEffect_2="9_3" tag="tourism" value="zoo" />
 
 		<!-- military -->
 		<filter minzoom="12" color="#ff8f8f" tag="military" value="barracks" />
@@ -702,12 +701,10 @@
 			<filter minzoom="10" nightMode="true" color="#330099" tag="landuse" value="basin" />
 		<filter minzoom="12" color="#9d9d6c" tag="landuse" value="brownfield" />
 			<filter minzoom="12" nightMode="true" color="#004333" tag="landuse" value="brownfield" />
-		<filter minzoom="12" color="#aacbaf" tag="landuse" value="cemetery" />
-		<filter minzoom="15" shader="grave_yard" tag="landuse" value="cemetery" />
-			<filter minzoom="12" nightMode="true" color="#004333" tag="landuse" value="cemetery" />
-		<filter minzoom="12" maxzoom="14" color="#aacbaf" tag="landuse" value="grave_yard" />
-		<filter minzoom="15" shader="grave_yard" tag="landuse" value="grave_yard" />
-			<filter minzoom="12" nightMode="true" color="#004333" tag="landuse" value="grave_yard" />
+		<filter minzoom="12" shader="grave_yard" color="#aacbaf" tag="landuse" value="cemetery" />
+			<filter minzoom="12" nightMode="true" shader="grave_yard" color="#004333" tag="landuse" value="cemetery" />
+		<filter minzoom="12" shader="grave_yard" color="#aacbaf" tag="landuse" value="grave_yard" />
+			<filter minzoom="12" nightMode="true" shader="grave_yard" color="#004333" tag="landuse" value="grave_yard" />
 		<filter minzoom="10" color="#efc8c8" tag="landuse" value="commercial" />
 			<filter minzoom="10" nightMode="true" color="#66004B" tag="landuse" value="commercial" />
 		<filter minzoom="12" color="#9d9d6c" tag="landuse" value="construction" />
@@ -718,9 +715,11 @@
 			<filter minzoom="12" nightMode="true" color="#004333" tag="landuse" value="farmland" />
 		<filter minzoom="12" color="#ddbf92" tag="landuse" value="farmyard" />
 			<filter minzoom="12" nightMode="true" color="#004333" tag="landuse" value="farmyard" />
+
 		<filter minzoom="10" maxzoom="12" color="#8dc56c" tag="landuse" value="forest" />
-		<filter minzoom="13" shader="forest" tag="landuse" value="forest" />
-			<filter minzoom="10" nightMode="true" color="#000034" tag="landuse" value="forest" />
+			<filter minzoom="10" maxzoom="12" nightMode="true" color="#000034" tag="landuse" value="forest" />
+		<filter minzoom="13" shader="forest" color="#8dc56c" tag="landuse" value="forest" />
+			<filter minzoom="13" nightMode="true" shader="forest" color="#000034" tag="landuse" value="forest" />
 
 		<filter minzoom="12" color="#dfd1d6" tag="landuse" value="garages" />
 			<filter minzoom="12" nightMode="true" color="#560000" tag="landuse" value="garages" />
@@ -735,10 +734,11 @@
 		<filter minzoom="12" color="#cfeca8" tag="landuse" value="meadow" />
 			<filter minzoom="12" nightMode="true" color="#004333" tag="landuse" value="meadow" />
 		<filter minzoom="10" color="#a0ffa8a8" tag="landuse" value="military" />
-		        <filter minzoom="10" nightMode="true" color="#a0560000" tag="landuse" value="military" />
+			<filter minzoom="10" nightMode="true" color="#a0560000" tag="landuse" value="military" />
 		<filter minzoom="12" shader="orchard" tag="landuse" value="orchard" />
-			<filter nightMode="true" minzoom="12" color="#004333" tag="landuse" value="orchard" />			<filter minzoom="12" color="#dfd1d6" tag="landuse" value="railway" />
-		        <filter minzoom="12" nightMode="true" color="#66004B" tag="landuse" value="railway" />
+			<filter nightMode="true" minzoom="12" shader="orchard" color="#004333" tag="landuse" value="orchard" />
+		<filter minzoom="12" color="#dfd1d6" tag="landuse" value="railway" />
+			<filter minzoom="12" nightMode="true" color="#66004B" tag="landuse" value="railway" />
 		<filter minzoom="12" color="#cfeca8" tag="landuse" value="recreation_ground" />
          		<filter minzoom="12" nightMode="true" color="#004333" tag="landuse" value="recreation_ground" />
 		<filter minzoom="10" color="#cfeca8" tag="landuse" value="conservation" />
@@ -756,10 +756,9 @@
         		<filter minzoom="15" nightMode="true" color="#66004B" color_2="#ff0000" strokeWidth_2="1" tag="landuse" value="retail" />
 			<filter minzoom="12" nightMode="true" maxzoom="14" color="#66004B" tag="landuse" value="retail" />		
 		<filter minzoom="12" shader="quarry2" tag="landuse" value="quarry" />
-			<filter nightMode="true" minzoom="12" color="#004333" tag="landuse" value="quarry" />
-		<filter minzoom="12" maxzoom="12" color="#abdf96" tag="landuse" value="vineyard" />
-		<filter minzoom="13" shader="vineyard" tag="landuse" value="vineyard" />	
-			<filter minzoom="12" nightMode="true" color="#004333" tag="landuse" value="vineyard" />
+			<filter nightMode="true" minzoom="12" shader="quarry2" color="#004333" tag="landuse" value="quarry" />
+		<filter minzoom="12" shader="vineyard" color="#abdf96" tag="landuse" value="vineyard" />	
+			<filter minzoom="12" nightMode="true" shader="vineyard" color="#004333" tag="landuse" value="vineyard" />
 		<filter minzoom="12" maxzoom="13" color="#30666600" tag="natural" value="field" />
 		<filter minzoom="14" color="#30666600" color_2="#60666600" strokeWidth_2="1" tag="natural" value="field" />
 			<filter nightMode="true" minzoom="12" color="#004333" tag="natural" value="field" />
@@ -772,8 +771,8 @@
 		<switch>
 			<case tag="highway" value="motorway" color="#809BFF" />
 			<case tag="highway" value="motorway_link" color="#809BFF" />
-			<case tag="highway" value="trunk" color="#F72B5E" />
-			<case tag="highway" value="trunk_link" color="#F72B5E" />
+			<case tag="highway" value="trunk" color="#EF2356" />
+			<case tag="highway" value="trunk_link" color="#EF2356" />
 			<filter>
 				<filter minzoom="5" maxzoom="9" strokeWidth="5" />
 				<filter minzoom="10" maxzoom="10" strokeWidth="6" />
@@ -809,8 +808,8 @@
 		<switch>
 			<case tag="highway" value="motorway" color="#809BFF" color_2="#809BFF" />
 			<case tag="highway" value="motorway_link" color="#809BFF" color_2="#809BFF" />
-			<case tag="highway" value="trunk" color="#F72B5E" color_2="#F72B5E" />
-			<case tag="highway" value="trunk_link" color="#F72B5E" color_2="#F72B5E" />
+			<case tag="highway" value="trunk" color="#EF2356" color_2="#EF2356" />
+			<case tag="highway" value="trunk_link" color="#EF2356" color_2="#EF2356" />
 			<case tag="highway" value="primary" color="#eb989a" color_2="#eb989a" />
 			<case tag="highway" value="primary_link" color="#eb989a" color_2="#eb989a" />
 			<case tag="highway" value="secondary" color="#fdd6a4" color_2="#fdd6a4" />
@@ -856,7 +855,7 @@
 				<case tag="highway" value="residential" />
 				<case tag="highway" value="unclassified" />
 				<case tag="highway" value="road" />
-					<filter color="#ffffff" shadowColor="#464646" shadowRadius="1">
+					<filter shadowRadius="1">
 					<filter minzoom="12" maxzoom="12" strokeWidth="3" />
 					<filter minzoom="13" maxzoom="13" strokeWidth="4" />
 				</filter>
@@ -1182,5 +1181,4 @@
 		<filter minzoom="10" color="#a009dd09" strokeWidth="3" pathEffect="6_2" tag="boundary" value="national_park" />
 
 	</line>
-
 </renderer>
