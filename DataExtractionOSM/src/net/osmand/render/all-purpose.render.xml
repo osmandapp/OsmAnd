@@ -111,7 +111,6 @@
 			<filter tag="highway" value="footway" order="37" />
 			<filter tag="highway" value="steps" order="36" />
 			<filter tag="highway" value="bridleway" order="35" />
-
 		</filter>
 	</order>
 
@@ -355,7 +354,6 @@
 		<filter minzoom="17" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="13" tag="tourism" value="hotel" />
 		<filter minzoom="17" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="13" tag="tourism" value="motel" />
 		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" tag="tourism" value="museum" />
-
 
 		<!-- type not supported -->
 		<!-- <filter minzoom="15" textSize="13" textHaloRadius="2" textWrapWidth="10" tag="landuse" type="point" /> -->
@@ -832,7 +830,7 @@
 				<switch>
 	              			<case nightMode="false" color="#000000" />
 	              			<case nightMode="true" color="#ffffff" />
-					<filter layer="1" cap_2="SQUARE">
+					<filter layer="1" cap_2="SQUARE" >
 					<filter minzoom="13" maxzoom="14" strokeWidth="12" strokeWidth_2="10" />
 					<filter minzoom="13" maxzoom="15" strokeWidth="14" strokeWidth_2="12" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="17" strokeWidth_2="15" />
@@ -919,7 +917,7 @@
 				</switch>
 				<!-- bridge -->
 				<switch>
-	              			<case nightMode="false" color="#000000" />
+	              			<case nightMode="false" color="#ffffff" />
 	              			<case nightMode="true" color="#ffffff" />
 		   			<filter layer="1" cap_2="SQUARE">
 					<filter minzoom="13" maxzoom="14" strokeWidth="5" strokeWidth_2="3" />
@@ -978,7 +976,6 @@
 		<filter minzoom="15" maxzoom="15" color="#99cccc" strokeWidth="6" color_2="#ffffff" strokeWidth_2="5" pathEffect_2="8_6" tag="highway" value="proposed" />
 		<filter minzoom="16" color="#99cccc" strokeWidth="8" color_2="#ffffff" strokeWidth_2="7" pathEffect_2="8_6" tag="highway" value="proposed" />
 
-
 		<!-- barrier -->
 		<filter minzoom="16" color="#000000" strokeWidth="1" tag="highway" value="gate" />
 		<filter minzoom="16" color="#aed1a0" strokeWidth="3" tag="barrier" value="hedge" />
@@ -1008,7 +1005,6 @@
 		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="kent_carriage_gap" />
 		<filter minzoom="16" color="#aed1a0" strokeWidth="3" tag="natural" value="hedge" />
 		<filter minzoom="16" color="#000000" strokeWidth="1" tag="fenced" value="yes" />
-
 
 		<!-- waterway -->
 		<switch>
@@ -1123,7 +1119,6 @@
 			<filter layer="1" minzoom="15" color="#000000" strokeWidth="8" color_2="#bbbbcc" strokeWidth_2="6" cap_2="SQUARE" />
 		</filter>
 
-
 		<filter minzoom="12" color="#bababa" strokeWidth="2" tag="aerialway" value="cable_car" />
 		<filter minzoom="12" color="#bababa" strokeWidth="2" tag="aerialway" value="gondola" />
 		<filter minzoom="12" color="#bababa" strokeWidth="2" tag="aerialway" value="chair_lift" />
@@ -1144,7 +1139,6 @@
 				<filter minzoom="16" color="#aaaaaa" strokeWidth="4" />
 			</filter>
 		</switch>
-
 
 		<filter minzoom="12" maxzoom="13" color="#f2efe9" strokeWidth="1" tag="man_made" value="pier" />
 		<filter minzoom="14" maxzoom="15" color="#f2efe9" strokeWidth="3" tag="man_made" value="pier" />
@@ -1185,6 +1179,5 @@
 		<filter minzoom="17" color="#800080" strokeWidth="2" pathEffect="3_2" tag="admin_level" value="10" />
 		<filter minzoom="7" maxzoom="9" color="#a009dd09" strokeWidth="1.5" pathEffect="4_2" tag="boundary" value="national_park" />
 		<filter minzoom="10" color="#a009dd09" strokeWidth="3" pathEffect="6_2" tag="boundary" value="national_park" />
-
 	</line>
 </renderer>
