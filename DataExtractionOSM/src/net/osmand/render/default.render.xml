@@ -859,8 +859,8 @@
 		</switch>
 
         		<switch>
-			<case nightMode="false" color="#ffffff" color_2="#ffffff" shadowColor="#464646"/>
 			<case nightMode="true" color="#9F9F9F" color_2="#9F9F9F" shadowColor="#666666"/>
+			<case nightMode="false" color="#ffffff" color_2="#ffffff" shadowColor="#464646"/>
 	  		<switch>
 				<case tag="highway" value="road" />
 				<case tag="highway" value="unclassified" />
