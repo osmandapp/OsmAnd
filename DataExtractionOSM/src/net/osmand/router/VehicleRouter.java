@@ -28,6 +28,16 @@ public abstract class VehicleRouter {
 		int attributes = road.getHighwayAttributes();
 		return MapRenderingTypes.isOneWayWay(attributes) || MapRenderingTypes.isRoundabout(attributes);
 	}
+	
+	/**
+	 * Used for algorithm of increasing road priorities (actually make sense only for car routing)
+	 * other routers can increase/decrease road priorities in the middle of route
+	 * @param road
+	 * @return
+	 */
+	public double getRoadPriority(BinaryMapDataObject road) {
+		return 1;
+	}
 
 	/**
 	 * return delay in seconds

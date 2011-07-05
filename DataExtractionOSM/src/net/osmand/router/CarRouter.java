@@ -95,6 +95,25 @@ public class CarRouter extends VehicleRouter {
 		}
 		return 0;
 	}
+	
+	@Override
+	public double getRoadPriority(BinaryMapDataObject road) {
+		TagValuePair pair = road.getTagValue(0);
+		boolean highway = "highway".equals(pair.tag);
+		double priority = highway && autoPriorityValues.containsKey(pair.value) ? autoPriorityValues.get(pair.value) : 0.5d;
+		if("motorway_link".equals(pair.value) || "trunk".equals(pair.value) ||
+				"trunk_link".equals(pair.value) || "motorway".equals(pair.value)) {
+			return 1.3d;
+		} else if(priority >= 1){
+			return 1;
+		} else if(priority >= 0.7){
+			return 0.7;
+		} else if(priority >= 0.5){
+			return 0.5;
+		} else {
+			return 0.3;
+		}
+	}
 
 	/**
 	 * return speed in m/s
@@ -103,7 +122,7 @@ public class CarRouter extends VehicleRouter {
 		TagValuePair pair = road.getTagValue(0);
 		double speed = MapRenderingTypes.getMaxSpeedIfDefined(road.getHighwayAttributes()) / 3.6d;
 		boolean highway = "highway".equals(pair.tag);
-		double priority = highway && autoPriorityValues.containsKey(pair.value) ? autoPriorityValues.get(pair.value) : 1d;
+		double priority = highway && autoPriorityValues.containsKey(pair.value) ? autoPriorityValues.get(pair.value) : 0.5d;
 		if (speed == 0 && highway) {
 			Double value = autoNotDefinedValues.get(pair.value);
 			if (value == null) {
