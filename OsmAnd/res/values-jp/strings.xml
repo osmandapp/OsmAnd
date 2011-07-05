@@ -1,0 +1,777 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+     <string name="installing_new_resources">新しいデータを解凍中...</string>
+     <string
+name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
+インターネット接続されていません。実験版のオフライン経路案内を利用できます(利用開始の設定が必要)。</string>
+     <string name="tts_language_not_supported_title">未サポート言語</string>
+     <string name="tts_language_not_supported">選択された言語は
+インストール済のTTSエンジンがサポートしていません。マーケットで
+他のTTSエンジンを探しますか？そうでなければプリセットされたTTS言語が使用されます。</string>
+     <string name="tts_missing_language_data_title">見つからないデータ</string>
+     <string name="tts_missing_language_data">選択された言語用のデータはインストールされて
+     いません。マーケットに行ってインストールしますか？</string>
+
+     <string name="gpx_option_reverse_route">GPX ルートを反転</string>
+     <string name="gpx_option_destination_point">現在の目的地点を使用</string>
+     <string name="gpx_option_from_start_point">トラック全体をパス</string>
+     <string name="tip_rotation_switching">マップ回転</string>
+     <string name="tip_rotation_switching_t">\tマップ表示の回転有無、あるいはその方法を
+選択できます\'設定\' ->
+\'設定全般\' -> \'マップ回転\'。
+     \n選択内容:
+
+     \n\t\'回転しない\' - マップは回転しません。常に北が上
+     \n\t\'移動方向へ\' - あなたの向かっている方向に合わせます
+     \n\t\'コンパスへ\' - マップは読み取ったコンパス装置で合わせます
+     \n\tヒント: マップビューでコンパスの針をタップするだけで、コンパスとそれ以外のあなたが設定で選んだ回転
+方法とを素早く切り替えられます。</string>
+
+     <string name="switch_to_raster_map_to_see">現在の位置は
+あなたのオフラインベクターマップではカバーされていません、
+追加でベクターマップをダウンロードする場合、メニュー(ビュー定義 -> マップソース...)
+でマップソースを切り替えられます。</string>
+     <string name="switch_to_vector_map_to_see">マップを見るには
+メニュー(ビュー定義 -> マップソース... -> オフラインベクターマップ)
+でオフラインベクターマップに切り替えられます。</string>
+     <string name="binary_map_download_success">成功。
+メニュー(ビュー定義 -> マップソース... -> オフラインベクターマップ)で
+オフラインベクターマップに切り替えられます。</string>
+     <string name="choose_audio_stream">音声案内ストリーム</string>
+     <string name="choose_audio_stream_descr">音声案内を再生するにはチャンネルを
+選んでください(システム構成によります)。</string>
+     <string name="voice_stream_voice_call">音声呼出ストリーム</string>
+     <string name="voice_stream_notification">通知ストリーム</string>
+     <string name="voice_stream_music">音楽ストリーム</string>
+     <string name="warning_tile_layer_not_downloadable">アプリケーションは
+マップレイヤー %1$s をダウンロードできません、インストールしてみてください。</string>
+     <string name="overlay_transparency_descr">オーバーレイ透過性を変更</string>
+     <string name="overlay_transparency">オーバーレイ透過性</string>
+     <string name="map_transparency_descr">ベースマップ透過性を変更</string>
+     <string name="map_transparency">ベースマップ透過性</string>
+     <string name="modify_transparency">透明度を変更</string>
+     <string name="layer_underlay">アンダーレイマップ...</string>
+     <string name="map_underlay">アンダーレイマップ</string>
+     <string name="map_underlay_descr">アンダーレイマップを選択</string>
+     <string name="layer_overlay">オーバーレイマップ...</string>
+     <string name="default_none">無し</string>
+     <string name="map_overlay">オーバーレイマップ</string>
+     <string name="map_overlay_descr">オーバーレイマップを選択</string>
+     <string name="map_vector_data">オフラインベクターマップ</string>
+     <string name="map_vector_data_descr">ダウンロードしたベクターマップを使用</string>
+     <string name="tile_source_already_installed">マップは既に
+インストール済です、設定を更新します</string>
+     <string name="select_tile_source_to_install">インストールまたは
+更新する(タイル)マップを選んでください</string>
+     <string name="internet_not_available">操作に必要なインターネット接続が
+利用できません</string>
+     <string name="more_external_layer">インストールを続ける...</string>
+
+     <string name="tip_update_index">オフラインデータの更新</string>
+     <string name="tip_update_index_t">\t最新のマップデータを持っていることは
+とても重要です。Osmand は利用できるオフラインデータの更新をチェックできる
+ダウンロードマネージャを提供しています。
+     \n\t更新をチェックするにはこちらへ。\'メインメニュー\' -> \'設定\'
+-> \'オフラインデータ\' -> \'オフラインデータのダウンロード\'。
+地域リストが参照されると、オプション(\'メニュー\' ->
+\'ダウンロード済フィルター\')からあなたの装置上にすでにある
+データだけの更新を通知するように選択できます。
+     \n\t更新の利用可否は次の色で表わされます:
+     \n\t\'緑\' - データファイルが端末装置とサーバで同一であることを表わします
+     \n\t\'青\' - サーバに利用可能な更新があることを表わします</string>
+
+     <string name="level_to_switch_vector_raster_descr">マップタイルの
+代わりにベクターレンダリングを利用するための最小ズームレベル</string>
+     <string name="level_to_switch_vector_raster">最小ベクターズームレベル</string>
+
+     <string name="tip_day_night_mode">日中/夜間 モード</string>
+     <string name="tip_day_night_mode_t">\tマップの外観を
+ベクターマップによって日中(明るく)と夜間(暗く)で変えることができます。
+     \n\t夜間用の色は夜間の運転用に安全です。
+- 元のメッセージを隠す -
+     \n\t \'メインメニュー\' -> \'設定\' -> \'マップ外観\' ->\'日中/夜間 モード\'で
+日中/夜間 切替用のポリシーをセットできます。
+     \n\t選択肢:
+     \n\t\'日の出/日の入\' - 自動モード、太陽の位置で制御(既定値)
+     \n\t\'日中\' - 常に日中モードを使用
+     \n\t\'夜間\' - 常に夜間モードを使用
+     \n\t\'ライトセンサー\' - マップ外観はあなたの端末装置のライトセンサーで制御(装備されていれば)</string>
+     <string name="tip_location_sharing">位置をシェア</string>
+     <string name="tip_location_sharing_t">\t旅行中の興味深い場所の位置を家族や友人とシェアできます。
+     \n\t位置をシェアする場合は:
+     \n\t \'マップコンテキストメニュー\' -> \'位置をシェア\' メニューを使用します。
+     \n\tそしてウェイを選択してあなたの位置をシェアしてください。次の方法があります:
+Eメール, SMS(テキスト), あるいはクリップボードに位置座標をコピー。</string>
+
+     <string name="tip_favorites">お気に入り地点</string>
+     <string name="tip_favorites_t">\tよく使われる地点はお気に入りに保存できます。
+     \n\t地点をお気に入りに保存するにはマップコンテキストメニューに移動して、
+\'Add to favorites\'オプションを選択してその名前を付けてください。
+お気に入り保存後は、\'メインメニュー\' -> \'お気に入り\'経由で使うことができます。
+     \n\t\'お気に入り\'メニュー内でお気に入りを長押しすると
+ナビゲート先のオプションが現れ、編集や削除を行えます。
+     \n\tマップ上に直接全てのお気に入り地点を表示するには、
+\'マップコンテキストメニュー\' ->\'ビュー定義\'内の\'お気に入り\'レイヤーを有効化してください。</string>
+- 元のメッセージを隠す -
+
+     <string name="tip_osm_improve">OSMデータ改善</string>
+     <string name="tip_osm_improve_t">\tOsmAndはOpenstreetmap.org (OSM)のマップを利用しています。
+-マップ閲覧や経路案内以外にも- OSMデータ品質の向上に使うことができます。
+新しいPOIやOSMバグレポートを数クリックで簡単に作成してアップロードすることができます！
+\n\tこのためには最初にOSMログイン情報を
+\'メインメニュー\' -> \'設定\' -> \'OSM\'で入力する必要があります。
+\n\t新しいPOIを登録するにはマップコンテキストメニュー内の
+\'POIを作成\' オプションを使ってください。
+\'POIを作成\'ダイアログ内の新しいPOIについての情報を入力して先に進み
+最後にコミットしてください。
+\n\tマップ内のエラーはOSMバグ経由で即座にレポートできるため、
+OSMコミュニティはこの問題をいち早く修正することができます。
+\n\tOSMバグを追加するにはマップコンテキストメニューの\'OSM バグをオープン\'
+オプションを使用してください。
+そして問題の詳細を記述し、最後に\'追加\'ボタンで投稿します。
+\n\tOSMのPOIとOSMバグ投稿にはインターネット接続が必要ですので
+ご注意ください。</string>
+     <string name="create_poi_link_to_osm_doc"><u>オンラインOSM</u>
+マップ分類、画像つき</string>
+ <string name="error_doing_search">オフライン検索でエラーが発生しました</string>
+ <string name="search_offline_geo_error">次のgeoインテントをパースできません:{0}</string>
+     <string name="search_osm_offline">オフラインマップで住所検索</string>
+
+     <string name="system_locale">システム</string>
+     <string name="preferred_locale_descr">表示言語を選択</string>
+     <string name="preferred_locale">表示言語</string>
+
+     <string name="tip_map_switch">マップソース</string>
+     <string name="tip_map_switch_t">\t表示中のマップソース及びレイヤーを変更する
+いちばん早い方法はマップメニューの\'メニュー\' -> \'ビュー定義\'を押すことです。
+\n\t\'マップソース...\'の下で、プリロード済オフラインベクターマップ、
+定義済(オンライン)タイルソース、PC上のOsmAndMapCreatorなどを使って手動作成されたマップ
+などを選択することができます。
+\n\tOsmAndはカスタムソースもサポートします。</string>
+
+     <string name="tip_app_mode">アプリケーションモード</string>
+     <string name="tip_app_mode_t">\tOsmAnd は用途に合わせて異なる
+アプリケーションプロファイルをサポートしています。
+\n\t\'メニュー\' -> \'設定\' -> \'アプリケーションモード\'
+で、またはルート作成時にプロファイルを変更できます。</string>
+
+     <string name="tip_navigation">ナビゲーション</string>
+     <string name="tip_navigation_t">\tナビゲーション(経路案内)を始める前に
+目的地点をまず選ぶ必要があります。その後でマップ上の
+\'メニュー\' -> \'方向\' を押してナビゲーションタイプを選んでください。</string>
+
+     <string name="tip_select_destination_point">目的地点を選択</string>
+     <string name="tip_select_destination_point_t">\t目的地点をマップ
+(コンテキストメニューから \'ナビゲート先\')で直接、あるいは全ての検索画面で
+選択することができます。
+\n\t\'お気に入り\'内で長押しすることで任意のお気に入り地点へナビゲート
+することができます</string>
+
+     <string name="tip_search">検索</string>
+     <string name="tip_search_t">\t場所をマップ上で直接、住所で、位置で、POIとして、
+定義済のお気に入りとして検索することができます。
+\n\tメインメニューで\'検索\'を押すと検索画面が開きます。
+全ての検索結果に対してコンテキストメニューは2つのオプションを提供します: \'ナビゲート先\' または
+\'マップに表示\'.</string>
+
+     <string name="tip_map_context_menu">マップコンテキストメニュー</string>
+     <string name="tip_map_context_menu_t">\tマップ上で長押しするか、
+トラックボールボタンを押すとマップコンテキストメニューが使えます。
+\n\tその地点の座標でボックスが作成されます。その上で長押しして
+(あるいはその上でタップするとボックスが再度隠れます)マップコンテキストメニュー
+ダイアログを開いてください。
+\n\tマップコンテキストメニューには地点(位置)に関する
+全ての操作があります。</string>
+
+     <string name="tip_desctination_point">目的地点</string>
+     <string name="tip_desctination_point_t">\tOsmAndのキー要素は
+目的地点であり、マップ上に赤い円盤としてマークされています。
+\n\tOsmAndではマップ上に目的地までの距離及び方向(赤矢印)が表示されます。
+\n\tある地点を目的地としてマークするには\'ナビゲート先\'
+を選んでください。このオプションは全ての検索結果及びマップコンテキストメニュー
+(任意のマップアイテム上で長押し)上で利用できます。</string>
+
+     <string name="tip_initial">ヒントとテクニック</string>
+- 元のメッセージを隠す -
+     <string name="tip_initial_t">\tOsmAndは多くの機能を持つナビゲーションアプリケーションです。
+\n\t基礎的な案内として、使い方のヒントとテクニックをいくつかメインメニュー画面からリンクしています。
+</string>
+     <string name="next_button">次へ</string>
+     <string name="previous_button">前へ</string>
+
+     <string name="unit_of_length_descr">長さと速度の単位を変更</string>
+     <string name="unit_of_length">長さの単位</string>
+     <string name="si_mi_foots">マイル/フィート</string>
+     <string name="si_mi_yard">マイル/ヤード</string>
+     <string name="si_km_m">キロ/メーター</string>
+     <string name="yard">yd</string>
+     <string name="foot">ft</string>
+     <string name="mile_per_hour">mph</string>
+     <string name="mile">mi</string>
+     <string name="send_location_way_choose_title">次の方法で位置をシェア</string>
+     <string name="send_location_sms_pattern">いまここ : {0}\n{1}</string>
+     <string name="send_location_email_pattern">位置を見るには
+次のWebブラウザ用リンク {0}、もしくはandroidインテントリンク{1}を参照</string>
+     <string name="send_location">位置を送信</string>
+     <string name="context_menu_item_share_location">位置をシェア</string>
+     <string name="add_waypoint_dialog_added">ウェイポイント \'\'{0}\'\'
+を追加しました</string>
+     <string name="add_waypoint_dialog_title">記録されたGPXトラックにウェイポイントを追加</string>
+     <string name="context_menu_item_add_waypoint">GPX ウェイポイントを追加</string>
+     <string name="amenity_type_administrative">行政区域(Administrative)</string>
+     <string name="amenity_type_barrier">バリアー(Barrier)</string>
+     <string name="amenity_type_education">教育(Education)</string>
+     <string name="amenity_type_emergency">救急(Emergency)</string>
+     <string name="amenity_type_entertainment">エンタメ(Entertainment)</string>
+     <string name="amenity_type_finance">金融機関(Finance)</string>
+     <string name="amenity_type_geocache">ジオキャッシュ(Geocache)</string>
+     <string name="amenity_type_healthcare">健康(Healthcare)</string>
+     <string name="amenity_type_historic">歴史(Historic)</string>
+     <string name="amenity_type_landuse">土地利用(Landuse)</string>
+     <string name="amenity_type_leisure">レジャー(Leisure)</string>
+     <string name="amenity_type_manmade">人工物(Man made)</string>
+     <string name="amenity_type_military">軍事施設(Military)</string>
+     <string name="amenity_type_natural">自然(Natural)</string>
+     <string name="amenity_type_office">オフィス(Office)</string>
+     <string name="amenity_type_other">その他(Other)</string>
+     <string name="amenity_type_shop">買い物(Shop)</string>
+     <string name="amenity_type_sport">スポーツ(Sport)</string>
+     <string name="amenity_type_sustenance">飲食店(Sustenance)</string>
+     <string name="amenity_type_tourism">観光(Tourism)</string>
+     <string name="amenity_type_transportation">交通機関(Transportation)</string>
+     <string name="indexing_address">住所を索引化</string>
+     <string name="indexing_map">マップを索引化</string>
+     <string name="indexing_poi">POIを索引化</string>
+     <string name="indexing_transport">交通機関を索引化</string>
+     <string name="input_output_error">I/O エラー発生</string>
+     <string name="km">km</string>
+     <string name="km_h">km/h</string>
+     <string name="m">m</string>
+     <string name="old_map_index_is_not_supported">重複したマップ
+データ形式 \'\'{0}\'\' はサポートされていません</string>
+     <string name="poi_filter_car_aid">自動車用施設</string>
+     <string name="poi_filter_closest_poi">近くのPOI</string>
+     <string name="poi_filter_custom_filter">カスタムフィルター</string>
+     <string name="poi_filter_food_shop">飲食(Food shop)</string>
+     <string name="poi_filter_for_tourists">観光(For tourists)</string>
+     <string name="poi_filter_fuel">燃料(Fuel)</string>
+     <string name="poi_filter_namefinder">オンラインNameFinder</string>
+     <string name="reading_cached_tiles">キャッシュ済タイル読み込み中...</string>
+     <string name="version_index_is_big_for_memory">The index
+\'\'{0}\'\' did not fit into memory</string>
+     <string name="version_index_is_not_supported">索引 \'\'{0}\'\' のバージョンは
+サポートされていません</string>
+
+     <string name="use_osmand_routing_service">OsmAnd 経路案内</string>
+     <string name="use_osmand_routing_service_descr">長距離のオフライン経路案内に
+OsmAndを使用(実験版)</string>
+     <string name="osmand_routing_experimental">OsmAndオフライン経路案内は実験的な機能であり
+20km以上の距離では動作しません。
+\n 経路案内サービスはオンラインのCloudmadeに自動的に切り替わります。</string>
+     <string name="specified_dir_doesnt_exist">指定されたディレクトリが見つかりません。</string>
+     <string name="application_dir">記憶領域のディレクトリ</string>
+     <string name="application_dir_change_warning">領域のディレクトリ変更は
+データを移動したり削除したりしません。別に、OsmAndの外で行う必要があります。
+構わず続行しますか？</string>
+
+     <string name="osmand_net_previously_installed">以前の
+OsmAnd バージョンがインストールされています。全てのオフラインデータは
+新しいアプリケーションでサポートされます。
+しかし、古いバージョン内のお気に入り地点はエクスポートして、後で
+新しい方にインポートしてください。</string>
+     <string name="build_installed">ビルド {0} はインストール
+されました ({1})。</string>
+     <string name="downloading_build">ビルドをダウンロード中...</string>
+     <string name="install_selected_build">本当にOsmAndをインストールしますか
+ - {0} from {1} {2} MB.</string>
+     <string name="loading_builds_failed">OsmAndビルドのリスト参照に失敗</string>
+     <string name="loading_builds">OsmAnd ビルドをロード中...</string>
+     <string name="select_build_to_install">インストールするOsmAndのビルドをひとつ
+選んでください</string>
+     <string name="contribution_activity">貢献バージョン用の特別な画面</string>
+
+     <string name="gps_status_app_not_found">GPSステータスアプリケーションが
+インストールされていません。マーケットで探しますか?</string>
+
+     <string name="voice_is_not_available_msg">音声案内は利用できません。
+設定で適切な音声データパッケージを選んでダウンロードしてください。</string>
+     <string name="voice_is_not_available_title">音声案内が選択されていません</string>
+     <string name="trace_rendering_descr">このフラグを選択してレンダリング効率をチェック</string>
+ <string name="trace_rendering">レンダリング速度を表示</string>
+     <string name="daynight_mode_day">日中</string>
+     <string name="daynight_mode_night">夜間</string>
+     <string name="daynight_mode_auto">日の出/日の入</string>
+     <string name="daynight_mode_sensor">ライトセンサー</string>
+     <string name="daynight_descr">日中/夜間 モード切替ルールを選択</string>
+     <string name="daynight">日中/夜間 モード</string>
+
+     <string name="download_files_question">{0} 件のファイル({1}
+MB)をダウンロードしますか?</string>
+     <string name="items_were_selected">{0} 件のアイテムを選択</string>
+     <string name="filter_existing_indexes">ダウンロードされたフィルタ</string>
+     <string name="deselect_all">全て選択解除</string>
+     <string name="select_all">全て選択</string>
+     <string name="reload">リロード</string>
+
+     <string name="general_settings_descr">インターネット利用、表示オプション、その他の構成</string>
+ <string name="general_settings">全般設定</string>
+     <string name="rendering_settings_descr">マップソースと外観の構成</string>
+ <string name="rendering_settings">マップ</string>
+ <string name="index_settings_descr">オフライン用のデータを取得/更新</string>
+ <string name="index_settings">オフラインデータ</string>
+     <string name="osmand_service">背景サービス</string>
+     <string name="osmand_service_descr">画面オフの間OsmAndを使うためのバックグラウンドサービスを実行</string>
+     <string name="fast_route_mode">最速ルート</string>
+     <string name="fast_route_mode_descr">有効化して最速ルートを計算するか
+無効化して最短ルートを採用</string>
+     <string name="tiles_to_download_estimated_size">ズームレベル {0}で
+{1} 件のタイル({2} MB)をダウンロード</string>
+     <string name="context_menu_item_download_map">マップをダウンロード</string>
+     <string name="select_max_zoom_preload_area">プリロードする最大ズームを選択</string>
+     <string
+name="maps_could_not_be_downloaded">このマップはダウンロードできませんでした</string>
+
+     <string name="continuous_rendering">連続レンダリング</string>
+     <string name="continuous_rendering_descr">一括画像の代わりに連続レンダリングを表示</string>
+     <string name="rendering_exception">選択したエリアのレンダリング中にエラー発生</string>
+     <string name="rendering_out_of_memory">選択したエリアの表示にはメモリが足りません</string>
+     <string name="show_point_options">地点オプション</string>
+     <string name="renderer_load_sucess">レンダラーはロードされました</string>
+     <string name="renderer_load_exception">例外発生: レンダラーはロードされませんでした</string>
+     <string name="renderers">ベクターレンダラー</string>
+     <string name="renderers_descr">(オフライン)ベクターマップの外観を選択</string>
+
+     <string name="poi_context_menu_website">POIのウェブサイトを表示</string>
+     <string name="poi_context_menu_call">POIの電話番号を表示</string>
+     <string name="website">ウェブサイト</string>
+     <string name="phone">電話番号</string>
+     <string name="download_type_to_filter">フィルタをかける種別</string>
+     <string name="use_high_res_maps">高解像度マップ</string>
+     <string name="use_high_res_maps_descr">高精細度装置向け高解像度マップを表示</string>
+     <string name="unknown_location">位置取得中</string>
+     <string name="download_files">ダウンロード</string>
+     <string name="context_menu_item_search_transport">交通機関を検索</string>
+     <string name="transport_searching_transport">交通機関を検索(ターゲットなし)</string>
+     <string name="transport_searching_route">交通機関を検索中(ターゲットは{0})</string>
+     <string name="transport_search_none">なし</string>
+     <string name="transport_search_again">交通機関を再検索</string>
+
+     <string name="map_index">マップ</string>
+     <string name="voice">音声</string>
+     <string name="no_vector_map_loaded">ベクターマップはロードされませんでした</string>
+
+     <string name="map_route_by_gpx">GPXを使ったルート</string>
+     <string name="gpx_files_not_found">GPXファイルが/tracks directory
+にありません</string>
+     <string name="layer_gpx_layer">GPXトラック...</string>
+     <string name="error_reading_gpx">GPXデータ読み込みエラー</string>
+
+     <string name="vector_data">オフラインベクターマップ</string>
+     <string name="transport_context_menu">交通機関を乗り場で探す</string>
+     <string name="point_on_map">マップ上の地点:\n 緯度
+{0,number,#.####}\n 経度 {1,number,#.####}</string>
+     <string name="osb_bug_name">バグ</string>
+     <string name="poi_context_menu_modify">POIを変更</string>
+     <string name="poi_context_menu_delete">POIを削除</string>
+     <string name="rotate_map_compass_opt">コンパスの向きへ</string>
+     <string name="rotate_map_bearing_opt">移動方向へ</string>
+ <string name="rotate_map_none_opt">回転しない</string>
+     <string name="rotate_map_to_bearing_descr">マップの回転方法を選択</string>
+ <string name="rotate_map_to_bearing">マップ回転</string>
+     <string name="show_route">ルート表示</string>
+     <string name="fav_imported_sucessfully">お気に入りのインポートは完了しました</string>
+     <string name="fav_file_to_load_not_found">{0}にはお気に入りを含むGPXファイルはありません</string>
+     <string name="fav_saved_sucessfully">お気に入りは{0}に保存されました</string>
+     <string name="no_fav_to_save">保存するお気に入りの地点がありません</string>
+     <string name="import_fav">インポート</string>
+     <string name="export_fav">エクスポート</string>
+     <string name="error_occurred_loading_gpx">GPXロード中にエラー発生</string>
+     <string name="send_report">レポートを送信</string>
+     <string name="none_region_found">SDカードにはこの地域のオフラインデータがありません。
+インターネットから地域をダウンロードしてください。</string>
+     <string name="poi_namefinder_query_empty">検索クエリを入力してPOIを探す</string>
+     <string name="any_poi">すべて</string>
+
+     <string name="layer_transport_route">交通機関ルート</string>
+     <string name="thanks_yandex_traffic">Yandexの交通情報に感謝します。</string>
+     <string name="layer_yandex_traffic">Yandex交通情報</string>
+     <string name="layer_route">ルート</string>
+     <string name="layer_favorites">お気に入り</string>
+     <string name="layer_osm_bugs">OSM bugs</string>
+     <string name="layer_transport">交通機関乗り場</string>
+     <string name="layer_poi">POI...</string>
+     <string name="layer_map">マップソース...</string>
+     <string name="menu_layers">ビュー定義</string>
+     <string name="continue_follow_previous_route">以前の経路案内が終わっていません。続けますか？</string>
+     <string name="context_menu_item_search_poi">POIを検索</string>
+     <string name="context_menu_item_show_route">ルート開始位置</string>
+     <string name="use_trackball_descr">トラックボールを使用してマップを動かす</string>
+     <string name="use_trackball">トラックボールを使用</string>
+     <string name="background_service_wait_int_descr">位置修正用の待ち時間をセット</string>
+     <string name="background_service_wait_int">待ち時間</string>
+     <string name="service_stop_background_service">背景ナビゲーションサービスを打ち切る</string>
+     <string name="where_am_i">現在地を表示</string>
+     <string name="process_navigation_service">OsmAnd ナビゲーションサービス</string>
+     <string name="network_provider">ネットワーク</string>
+     <string name="gps_provider">GPS</string>
+     <string name="int_seconds">秒</string>
+     <string name="int_min">分</string>
+     <string name="background_service_int_descr">バックグラウンドサービスの位置決定間隔をセット</string>
+     <string name="background_service_int">位置取得間隔</string>
+     <string name="background_service_provider_descr">バックグラウンドサービス用の位置プロバイダを選ぶ</string>
+     <string name="background_service_provider">位置プロバイダ</string>
+     <string name="background_router_service_descr">背景サービスを有効化して
+長期間位置を追跡する</string>
+     <string name="background_router_service">バックグラウンドサービスを使用</string>
+     <string name="off_router_service_no_gps_available">背景ルーティングサービスを動かすには
+位置ソースを動作させる必要があります。</string>
+     <string name="routing_settings_descr">ルーティングオプションを指定</string>
+     <string name="routing_settings">ナビゲーション</string>
+     <string name="hide_poi_filter">フィルタを非表示</string>
+     <string name="show_poi_filter">フィルタを表示</string>
+     <string name="search_poi_filter">フィルタ</string>
+     <string name="menu_mute_off">サウンドはオン</string>
+     <string name="menu_mute_on">サウンドはオフ</string>
+     <string name="voice_not_use">なし</string>
+     <string name="voice_provider_descr">経路案内用の音声案内を選択</string>
+     <string name="voice_provider">音声案内</string>
+     <string name="voice_data_initializing">音声データを初期化中...</string>
+     <string name="voice_data_not_supported">サポートしていない音声データのバージョン</string>
+     <string name="voice_data_corrupted">指定した音声データは破損しています</string>
+     <string name="voice_data_unavailable">選択した音声データは利用できません</string>
+     <string name="stop_routing">経路案内を停止</string>
+     <string name="sd_unmounted">SDカードにアクセスできません。\nマップを参照したり何かを探したりすることはできません。</string>
+     <string name="sd_mounted_ro">SDカードは読み取り専用です。
+\nプリロードマップだけを見ることができ、インターネットからのダウンロードはできません。</string>
+     <string name="unzipping_file">ファイルを解凍中...</string>
+     <string name="route_tr">右折して進む</string>
+     <string name="route_tshr">鋭く右折して進む</string>
+     <string name="route_tslr">ゆるやかに右折して進む</string>
+     <string name="route_tl">左折して進む</string>
+     <string name="route_tshl">鋭く左折して進む</string>
+     <string name="route_tsll">ゆるやかに左折して進む</string>
+     <string name="route_tu">Uターンして進む</string>
+     <string name="route_head">前方</string>
+     <string name="first_time_continue">続ける</string>
+     <string name="first_time_download">地域をダウンロード</string>
+     <string name="first_time_msg">OsmAndを選んでくれてありがとうございます。
+\nアプリケーションの全ての機能を使うには地域のオフラインデータが必要です、
+、これはダウンロード(設定 -&gt; データ) または自分で準備することができます。
+その後で、あなたは住所で検索したり、POIを検索したり、交通機関を検索したり
+することができます。</string>
+     <string name="search_poi_location">シグナルを探査中...</string>
+     <string name="search_near_map">前回のマップ位置近くを検索</string>
+     <string name="search_nearby">近くを検索</string>
+     <string name="map_orientation_default">端末装置と同じ</string>
+     <string name="map_orientation_portrait">タテ</string>
+     <string name="map_orientation_landscape">ヨコ</string>
+     <string name="map_screen_orientation">マップ画面方向</string>
+     <string name="map_screen_orientation_descr">画面の方向を選択</string>
+     <string name="opening_hours_not_supported">営業時間形式は編集ではサポートされません</string>
+     <string name="add_new_rule">新しいルールを追加</string>
+     <string name="transport_Routes">ルート</string>
+     <string name="transport_Stop">乗り場</string>
+     <string name="transport_stops">乗り場</string>
+
+     <string name="transport_search_after">次の後にルート検索</string>
+     <string name="transport_search_before">次の前にルート検索</string>
+     <string name="transport_finish_search">検索を終了</string>
+- 元のメッセージを隠す -
+     <string name="transport_stop_to_go_out">出かける乗り場を選ぶ</string>
+     <string name="transport_to_go_after">to go after</string>
+     <string name="transport_to_go_before">to go before</string>
+     <string name="transport_stops_to_pass">通過する乗り場</string>
+     <string name="transport_route_distance">ルートの距離</string>
+     <string name="transport">交通機関</string>
+     <string name="default_buttons_ok">OK</string>
+     <string name="show_transport_over_map_description">マップ上に公共交通機関乗り場を表示</string>
+     <string name="show_transport_over_map">交通機関乗り場を表示</string>
+     <string name="hello">ナビゲーションアプリケーション OsmAnd</string>
+     <string name="update_poi_success">POIデータは更新されました
+({0} がロードされました)</string>
+     <string name="update_poi_error_local">ローカルの索引更新中にエラー</string>
+     <string name="update_poi_error_loading">サーバからのデータをロード中にエラー</string>
+     <string name="update_poi_no_offline_poi_index">このエリアには利用可能なオフラインPOIデータが
+ありません</string>
+     <string name="update_poi_is_not_available_for_zoom">小さいズームレベルでは
+POIの更新は利用できません</string>
+     <string name="context_menu_item_update_poi">POIを更新</string>
+     <string name="context_menu_item_update_map_confirm">インターネット経由で
+ローカルデータを更新しますか?</string>
+     <string name="search_history_city">市町村: {0}</string>
+     <string name="search_history_street">町名: {0}, {1}</string>
+     <string name="search_history_int_streets">交差点: {0} x
+{1} in {2}</string>
+     <string name="search_history_building">建物: {0}, {1}, {2}</string>
+     <string name="search_history_navigate_to">緯度 = {0}, 経度 = {1}にナビゲート</string>
+     <string name="favorite">お気に入り</string>
+     <string name="clear_all">全てクリア</string>
+     <string name="history">履歴</string>
+     <string name="uploading_data">データをアップロード中...</string>
+     <string name="uploading">アップロード中</string>
+     <string name="search_nothing_found">何も見つかりません</string>
+     <string name="searching">検索中</string>
+     <string name="searching_address">住所を検索中...</string>
+     <string name="search_osm_nominatim">OSM Nominatimを使って住所を検索</string>
+     <string name="hint_search_online">番地、町名、市町村</string>
+     <string name="search_offline_address">オフライン</string>
+     <string name="search_online_address">インターネット</string>
+     <string name="max_level_download_tile">最大オンラインズーム</string>
+     <string name="max_level_download_tile_descr">オンラインマップタイル用にダウンロードする
+最大ズームレベルを選ぶ</string>
+     <string name="route_about">ルートについて</string>
+     <string name="route_general_information">総距離 {0},
+移動時間 {1} 時間 {2} 分。</string>
+     <string name="router_service_descr">オンラインまたはオフラインルーティングサービスを選択</string>
+     <string name="router_service">経路案内サービス</string>
+     <string name="sd_dir_not_accessible">SDカードの保存ディレクトリにアクセスできません</string>
+- 元のメッセージを隠す -
+     <string name="download_question">{0} - {1}をダウンロード?</string>
+     <string name="download_question_exist">{0}用のオフラインデータは
+既にあります({1})。更新しますか({2}) ?</string>
+     <string name="address">住所</string>
+     <string name="download_index_success">ダウンロード完了</string>
+     <string name="error_io_error">I/O エラー発生</string>
+     <string name="downloading_file">ファイルをダウンロード中...</string>
+     <string name="downloading">ダウンロード中...</string>
+     <string name="downloading_list_indexes">利用可能な地域のリストをダウンロード中</string>
+     <string name="list_index_files_was_not_loaded">地域のリストはosmand.googlecode.com 
+から参照されていません。</string>
+ <string name="select_index_file_to_download">自分の地域が見つからない場合、
+自分で作ることができます。osmand.net を参照</string>
+     <string name="show_poi_on_map">マップに表示</string>
+     <string name="fav_points_edited">お気に入り地点が編集されました</string>
+     <string name="fav_points_not_exist">お気に入り地点はありません</string>
+     <string name="update_existing">置換</string>
+     <string name="only_show">表示のみ</string>
+     <string name="follow">フォロー</string>
+     <string
+name="recalculate_route_to_your_location">現在地に従ってルートを再計算中</string>
+     <string name="follow_route">ルートをフォロー</string>
+     <string name="mark_final_location_first">最初に目的地を選んでください</string>
+     <string name="get_directions">方向</string>
+ <string name="show_gps_status">GPSステータスを表示</string>
+     <string name="opening_hours">営業時間</string>
+     <string name="opening_changeset">変更セットを開いています...</string>
+     <string name="closing_changeset">変更セットを閉じています...</string>
+     <string name="commiting_node">ノードをコミットしています...</string>
+     <string name="loading_poi_obj">POIをロード中...</string>
+     <string name="auth_failed">認証に失敗</string>
+     <string name="failed_op">失敗</string>
+     <string name="converting_names">現地/英語 名称を変換中...</string>
+     <string name="loading_streets_buildings">通り/建物をロード中...</string>
+     <string name="loading_postcodes">郵便番号をロード中...</string>
+     <string name="loading_streets">通りをロード中...</string>
+     <string name="loading_cities">市町村をロード中...</string>
+     <string name="loading">ロード中</string>
+     <string name="poi">POI</string>
+     <string name="error_occurred_saving_gpx">GPX保存中にエラー</string>
+     <string name="error_calculating_route">ルート計算中にエラー</string>
+     <string name="error_calculating_route_occured">ルート計算中にエラーが発生しました</string>
+     <string name="empty_route_calculated">空のルートが計算されました</string>
+     <string name="new_route_calculated_dist">新しいルートが計算されました、距離</string>
+     <string name="arrived_at_destination">目的地に到着しました</string>
+     <string name="invalid_locations">位置が不適切です</string>
+     <string name="go_back_to_osmand">OsmAnd マップに戻る</string>
+     <string name="close">閉じる</string>
+     <string name="loading_data">データをロード中...</string>
+     <string name="reading_indexes">索引を読み込み中...</string>
+     <string name="previous_run_crashed">前回のアプリケーション実行はクラッシュしました。
+ログファイルは{0}にあります。ログファイルを添付して問題をレポートしてください。</string>
+     <string name="saving_gpx_tracks">GPXトラックをSDに保存中...</string>
+     <string name="finished_task">終了</string>
+ <string name="reload_indexes_descr">オフラインベクターマップと索引をSDカードからリロード</string>
+ <string name="reload_indexes">オフラインデータをリロード</string>
+ <string name="download_indexes_descr">オフライン用にインターネットからデータをダウンロードまたは更新</string>
+ <string name="download_indexes">オフラインデータをダウンロード</string>
+ <string name="use_online_routing_descr">ルート計算にインターネットを使用</string>
+ <string name="use_online_routing">オンラインルーティングを使用</string>
+ <string name="user_password_descr">あなたのOSM パスワード</string>
+ <string name="user_password">OSM パスワード</string>
+ <string name="osm_settings_descr">OSM登録に必要なOpenstreetmap.org (OSM)設定を指定</string>
+ <string name="monitor_preferences_descr">トラッキングの設定を指定</string>
+ <string name="data_settings_descr">言語、データのダウンロード/リロードを指定</string>
+ <string name="data_settings">データ</string>
+ <string name="map_preferences_descr">マップ設定を指定: マップソース、回転、
+ マーカー位置、スクリーンの方向</string>
+ <string name="osm_settings">OSM</string>
+ <string name="auto_zoom_map_descr">移動速度に従ってマップを自動ズーム</string>
+ <string name="auto_zoom_map">マップを自動ズーム</string>
+ <string name="additional_settings">追加設定</string>
+ <string name="settings_preset_descr">利用形態プロファイルを選択または定義</string>
+ <string name="settings_preset">アプリケーションモード</string>
+ <string name="settings">設定</string>
+ <string name="save_current_track_descr">今すぐ現在のトラックをSDに保存</string>
+ <string name="save_current_track">現在のトラックを保存</string>
+ <string name="save_track_interval_descr">トラックの位置取得間隔を選択</string>
+ <string name="save_track_interval">トラック間隔</string>
+ <string name="monitor_preferences">トラッキング</string>
+ <string name="save_track_to_gpx_descrp">トラックは日ごとにグループ化されたトラック用ディレクトリに
+ 保存されます</string>
+ <string name="save_track_to_gpx">トラックをGPXにログ</string>
+ <string name="navigate_to">ナビゲート先</string>
+ <string name="update_tile">マップを更新</string>
+ <string name="reload_tile">タイルをリロード</string>
+ <string name="user_name_descr">あなたのOSM ユーザ名</string>
+ <string name="user_name">OSM ユーザ名</string>
+ <string name="mark_point">ターゲット</string>
+ <string name="show_osm_bugs_descr">OpenStreetBugs をマップに表示</string>
+ <string name="show_osm_bugs">OpenStreetBugsを表示</string>
+ <string name="favourites_activity">お気に入り地点のリスト</string>
+ <string name="add_to_favourite">お気に入りに追加</string>
+ <string name="use_english_names_descr">現地名または英語名を選択</string>
+ <string name="use_english_names">英語名を使用</string>
+ <string name="app_settings">アプリケーション設定</string>
+ <string name="search_address">住所を検索</string>
+ <string name="choose_building">建物を選ぶ</string>
+ <string name="choose_street">通りを選ぶ</string>
+ <string name="choose_city">市町村を選ぶ</string>
+ <string name="ChooseCountry">国を選ぶ</string>
+ <string name="position_on_map_descr">マップ上の位置マーカの位置を選ぶ</string>
+ <string name="position_on_map">位置マーカ</string>
+ <string name="map_specify_point">地点を指定</string>
+ <string name="show_view_angle_descr">コンパスに従って視線方向を表示</string>
+ <string name="show_view_angle">視線方向を表示</string>
+ <string name="stop_navigation">地点をクリア</string>
+ <string name="navigate_to_point">地点をマーク</string>
+ <string name="map_view_3d_descr">マップの3Dビューを有効化</string>
+ <string name="map_view_3d">マップビュー3D</string>
+
+ <string name="show_poi_over_map_description">マップ上にPOIを表示
+(前回選択したフィルタを使用)</string>
+ <string name="show_poi_over_map">POIを表示</string>
+ <string name="map_tile_source_descr">オンラインまたはオフラインマップタイルのソースを選ぶ: </string>
+ <string name="map_tile_source">タイルマップソース</string>
+ <string name="map_source">マップソース</string>
+ <string name="use_internet">インターネットを使用</string>
+ <string name="show_location">位置を表示</string>
+ <string name="map_preferences">マップ</string>
+ <string name="settings_activity">設定</string>
+ <string name="show_gps_coordinates_text">マップ上にGPS座標を表示</string>
+ <string name="use_internet_to_download_tile">見つからないマップタイルのダウンロードに
+インターネットを使用</string>
+ <string name="app_name">OsmAnd</string>
+ <string name="app_description">ナビゲーションアプリケーション</string>
+
+<string name="exit_Button">戻る</string>
+<string name="map_Button">マップ</string>
+<string name="settings_Button">設定</string>
+<string name="favorites_Button">お気に入り</string>
+<string name="search_button">検索</string>
+<color name="menu_background">#FF9030</color>
+<color name="color_light_gray">#d7d7d7</color>
+<color name="color_black">#000000</color>
+<color name="color_transparent">#00000000</color>
+<string name="search_activity">検索</string>
+<color name="color_white">#FFFFFF</color>
+<color name="color_red">#FF0000</color>
+<string name="searchpoi_activity">POIを選択</string>
+<string name="search_POI_level_btn">もっと探す</string>
+<string name="incremental_search_city">市町村内を漸次探す。都市/郵便番号を探すには、
+先頭3文字以上を入力してください。</string>
+<string name="incremental_search_street">都市を漸次探す</string>
+<string name="incremental_search_building">建物を漸次探す</string>
+<string name="choose_available_region">リストから地域を選ぶ</string>
+<string name="choose_intersected_street">交差する通りを選ぶ</string>
+<string name="Closest_Amenities">いちばん近い施設</string>
+<string name="app_mode_default">デフォルト(デフォルト値もセット)</string>
+<string name="app_mode_car">自動車</string>
+<string name="app_mode_bicycle">自転車</string>
+<string name="app_mode_pedestrian">歩行者</string>
+<string name="position_on_map_center">中央</string>
+<string name="position_on_map_bottom">下</string>
+<string name="navigate_point_top_text">選択した形式で緯度 &amp; 経度を入力
+(D - 度, M - 分, S - 秒)</string>
+<string name="navigate_point_latitude">緯度</string>
+<string name="navigate_point_longitude">経度</string>
+<string name="navigate_point_format_D">DDD.DDDDD</string>
+<string name="navigate_point_format_DM">DDD MM.MMMMM</string>
+<string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
+<string name="search_shown_on_map">マップ上に表示</string>
+<string name="navigate_point_cancel">キャンセル</string>
+<string name="search_address_top_text">住所を選択</string>
+<string name="search_address_region">地域</string>
+<string name="search_address_city">市町村</string>
+<string name="search_address_street">通り</string>
+<string name="search_address_building">建物</string>
+<string name="search_address_building_option">建物</string>
+<string name="search_address_street_option">交差する通り</string>
+
+<string name="search_tabs_location">位置</string>
+
+<string name="context_menu_item_navigate_point">地点へナビゲート</string>
+<string name="context_menu_item_add_favorite">お気に入りに追加</string>
+<string name="context_menu_item_update_map">マップを更新</string>
+<string name="context_menu_item_open_bug">OSM バグをオープン</string>
+<string name="context_menu_item_create_poi">POIを作成</string>
+
+<string name="default_buttons_yes">はい</string>
+<string name="default_buttons_cancel">キャンセル</string>
+<string name="default_buttons_apply">適用</string>
+<string name="default_buttons_add">追加</string>
+<string name="default_buttons_no">いいえ</string>
+<string name="add_favorite_dialog_top_text">お気に入りの名前を入力</string>
+<string name="add_favorite_dialog_default_favourite_name">お気に入り</string>
+<string name="add_favorite_dialog_favourite_added_template">お気に入り地点
+ \'\'{0}\'\' が追加されました。</string>
+
+<string name="favourites_context_menu_title">コンテキストメニュー</string>
+<string name="favourites_context_menu_navigate">ナビゲート先</string>
+<string name="favourites_context_menu_edit">お気に入りを編集</string>
+<string name="favourites_context_menu_delete">お気に入りを削除</string>
+<string name="favourites_edit_dialog_title">お気に入りをリネーム</string>
+
+<string name="favourites_remove_dialog_title">本当にお気に入り地点を削除しますか?</string>
+<string name="favourites_remove_dialog_success">お気に入り地点 {0}
+は削除されました。</string>
+
+<string name="osb_add_dialog_title">バグのテキストを入力</string>
+<string name="osb_add_dialog_success">バグ報告が作成されました</string>
+<string name="osb_add_dialog_error">例外発生: バグ報告は作成されませんでした</string>
+
+<string name="osb_comment_menu_item">コメントを追加</string>
+<string name="osb_comment_dialog_message">メッセージ</string>
+<string name="osb_comment_dialog_author">作成者名</string>
+<string name="osb_comment_dialog_title">バグにコメント追加中</string>
+<string name="osb_comment_dialog_add_button">コメントを追加</string>
+<string name="osb_comment_dialog_success">コメントが追加されました</string>
+<string name="osb_comment_dialog_error">例外発生: コメントは追加されませんでした</string>
+
+<string name="osb_close_menu_item">バグをクローズ</string>
+<string name="osb_close_dialog_title">バグをクローズ中</string>
+<string name="osb_close_dialog_close_button">バグをクローズ</string>
+<string name="osb_close_dialog_success">バグがクローズされました</string>
+<string name="osb_close_dialog_error">例外発生: バグはクローズされませんでした</string>
+
+<string name="poi_edit_title">POIの編集</string>
+<string name="poi_create_title">POIを作成</string>
+<string name="poi_error_poi_not_found">ノードが見つからないか、施設が
+単独ノードではありません</string>
+<string name="poi_remove_confirm_template">{0} を削除しますか(コメントを入力) ?</string>
+<string name="poi_remove_title">POIを削除</string>
+<string name="default_buttons_delete">削除</string>
+<string name="poi_remove_success">POIは削除されました</string>
+<string name="poi_action_add">追加</string>
+<string name="poi_action_change">変更</string>
+<string name="poi_action_succeded_template">操作 {0} は完了しました。</string>
+<string name="poi_error_unexpected_template">操作{0}実行中に予期せぬエラーが発生しました。</string>
+<string name="poi_error_io_error_template">操作{0}実行中にI/O エラーが発生しました。</string>
+
+<string name="poi_error_info_not_loaded">ノードに関する情報はロードされませんでした</string>
+
+<string name="poi_dialog_name">名前</string>
+<string name="poi_dialog_opening_hours">オープン日時</string>
+<string name="poi_dialog_comment">コメント</string>
+<string name="poi_dialog_comment_default">POI 変更</string>
+<string name="poi_dialog_other_tags_message">他のタグは全て保存されました</string>
+<string name="default_buttons_commit">コミット</string>
+<string name="default_buttons_reset">リセット</string>
+<string name="filter_current_poiButton">フィルタ</string>
+<string name="edit_filter_delete_menu_item">削除</string>
+<string name="edit_filter_save_as_menu_item">名前をつけて保存</string>
+<string name="edit_filter_delete_dialog_title">選択したフィルタを削除しますか?</string>
+<string name="edit_filter_delete_message">フィルタ {0} は削除されました</string>
+<string name="edit_filter_create_message">フィルタ {0} が作成されました</string>
+<string name="default_buttons_selectall">全て選択</string>
+
+</resources>
