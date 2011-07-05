@@ -88,7 +88,6 @@ name="internet_connection_required_for_online_route">オンライン経路案内
      <string name="tip_day_night_mode_t">\tマップの外観を
 ベクターマップによって日中(明るく)と夜間(暗く)で変えることができます。
      \n\t夜間用の色は夜間の運転用に安全です。
-- 元のメッセージを隠す -
      \n\t \'メインメニュー\' -> \'設定\' -> \'マップ外観\' ->\'日中/夜間 モード\'で
 日中/夜間 切替用のポリシーをセットできます。
      \n\t選択肢:
@@ -112,7 +111,6 @@ Eメール, SMS(テキスト), あるいはクリップボードに位置座標�
 ナビゲート先のオプションが現れ、編集や削除を行えます。
      \n\tマップ上に直接全てのお気に入り地点を表示するには、
 \'マップコンテキストメニュー\' ->\'ビュー定義\'内の\'お気に入り\'レイヤーを有効化してください。</string>
-- 元のメッセージを隠す -
 
      <string name="tip_osm_improve">OSMデータ改善</string>
      <string name="tip_osm_improve_t">\tOsmAndはOpenstreetmap.org (OSM)のマップを利用しています。
@@ -192,7 +190,6 @@ OSMコミュニティはこの問題をいち早く修正することができ�
 (任意のマップアイテム上で長押し)上で利用できます。</string>
 
      <string name="tip_initial">ヒントとテクニック</string>
-- 元のメッセージを隠す -
      <string name="tip_initial_t">\tOsmAndは多くの機能を持つナビゲーションアプリケーションです。
 \n\t基礎的な案内として、使い方のヒントとテクニックをいくつかメインメニュー画面からリンクしています。
 </string>
@@ -476,7 +473,6 @@ name="maps_could_not_be_downloaded">このマップはダウンロードでき�
      <string name="transport_search_after">次の後にルート検索</string>
      <string name="transport_search_before">次の前にルート検索</string>
      <string name="transport_finish_search">検索を終了</string>
-- 元のメッセージを隠す -
      <string name="transport_stop_to_go_out">出かける乗り場を選ぶ</string>
      <string name="transport_to_go_after">to go after</string>
      <string name="transport_to_go_before">to go before</string>
@@ -525,7 +521,6 @@ POIの更新は利用できません</string>
      <string name="router_service_descr">オンラインまたはオフラインルーティングサービスを選択</string>
      <string name="router_service">経路案内サービス</string>
      <string name="sd_dir_not_accessible">SDカードの保存ディレクトリにアクセスできません</string>
-- 元のメッセージを隠す -
      <string name="download_question">{0} - {1}をダウンロード?</string>
      <string name="download_question_exist">{0}用のオフラインデータは
 既にあります({1})。更新しますか({2}) ?</string>
