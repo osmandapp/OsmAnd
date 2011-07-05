@@ -66,6 +66,12 @@ public class PedestrianRouter extends VehicleRouter {
 		pedestrianPriorityValues.put("services", 1d);
 		pedestrianPriorityValues.put("steps", 1.2d);
 	}
+	
+	@Override
+	public boolean isOneWay(BinaryMapDataObject road) {
+		// for now all ways are bidirectional
+		return false;
+	}
 
 	public boolean acceptLine(TagValuePair pair) {
 		if (pair.tag.equals("highway")) {

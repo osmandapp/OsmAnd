@@ -49,7 +49,7 @@ import org.xml.sax.SAXException;
 public class MapRouterLayer implements MapPanelLayer {
 
 	private /*final */ static boolean ANIMATE_CALCULATING_ROUTE = false;
-	private /*final */ static int SIZE_OF_ROUTES_TO_ANIMATE = 250;
+	private /*final */ static int SIZE_OF_ROUTES_TO_ANIMATE = 50;
 	
 	
 	private MapPanel map;
@@ -413,14 +413,22 @@ public class MapRouterLayer implements MapPanelLayer {
 					}
 				}
 
-				for(RouteSegmentResult s : searchRoute){
-//					double dist = MapUtils.getDistance(s.startPoint, s.endPoint);
+				net.osmand.osm.Node prevWayNode = null;
+				for (RouteSegmentResult s : searchRoute) {
+					// double dist = MapUtils.getDistance(s.startPoint, s.endPoint);
 					Way way = new Way(-1);
 					boolean plus = s.startPointIndex < s.endPointIndex;
-					int i=s.startPointIndex;
+					int i = s.startPointIndex;
 					while (true) {
 						net.osmand.osm.Node n = new net.osmand.osm.Node(MapUtils.get31LatitudeY(s.object.getPoint31YTile(i)), MapUtils
 								.get31LongitudeX(s.object.getPoint31XTile(i)), -1);
+						if (prevWayNode != null) {
+							if (MapUtils.getDistance(prevWayNode, n) > 0) {
+								System.out.println("Warning not connected road " + " " + s.object.getName() + " dist "
+										+ MapUtils.getDistance(prevWayNode, n));
+							}
+							prevWayNode = null;
+						}
 						way.addNode(n);
 						if (i == s.endPointIndex) {
 							break;
@@ -430,6 +438,9 @@ public class MapRouterLayer implements MapPanelLayer {
 						} else {
 							i--;
 						}
+					}
+					if (way.getNodes().size() > 0) {
+						prevWayNode = way.getNodes().get(way.getNodes().size() - 1);
 					}
 					res.add(way);
 				}

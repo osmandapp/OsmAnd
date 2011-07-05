@@ -32,7 +32,7 @@ public class BinaryRoutePlanner {
 	
 	private final static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
 	private final BinaryMapIndexReader[] map;
-	private static int DEFAULT_HEURISTIC_COEFFICIENT = 1;
+	private static int DEFAULT_HEURISTIC_COEFFICIENT = 3;
 	
 	private static final Log log = LogUtil.getLog(BinaryRoutePlanner.class);
 	
@@ -159,7 +159,6 @@ public class BinaryRoutePlanner {
 		// measure time
 		ctx.timeToLoad = 0;
 		ctx.visitedSegments = 0;
-
 		long startNanoTime = System.nanoTime();
 
 		// Initializing priority queue to visit way segments 
@@ -183,13 +182,6 @@ public class BinaryRoutePlanner {
 		// Set to not visit one segment twice (stores road.id << X + segmentStart)
 		TLongObjectHashMap<RouteSegment> visitedDirectSegments = new TLongObjectHashMap<RouteSegment>();
 		TLongObjectHashMap<RouteSegment> visitedOppositeSegments = new TLongObjectHashMap<RouteSegment>();
-		
-		
-//		if(reverseWaySearch){
-//			RouteSegment t = start;
-//			start = end;
-//			end = t;
-//		}
 		
 		int targetEndX = end.road.getPoint31XTile(end.segmentStart);
 		int targetEndY = end.road.getPoint31YTile(end.segmentStart);
@@ -222,25 +214,19 @@ public class BinaryRoutePlanner {
 				ctx.visitor.visitSegment(segment);
 			}
 			if (!inverse) {
-				finalDirectRoute = processRouteSegment(ctx, end, false, graphDirectSegments, visitedDirectSegments, targetEndX,
+				RoutePair pair = processRouteSegment(ctx, end, false, graphDirectSegments, visitedDirectSegments, targetEndX,
 						targetEndY, segment, visitedOppositeSegments);
-				if (finalDirectRoute != null) {
-					long nt = (finalDirectRoute.road.getId() << 8l) + finalDirectRoute.segmentEnd;
-					finalReverseRoute = visitedOppositeSegments.get(nt);
-					if(finalReverseRoute != null){
-						finalReverseRoute.segmentEnd = finalDirectRoute.segmentEnd;
-					}
+				if (pair != null) {
+					finalDirectRoute = pair.a;
+					finalReverseRoute = pair.b;
 					break;
 				}
 			} else {
-				finalReverseRoute = processRouteSegment(ctx, start, true, graphReverseSegments, visitedOppositeSegments, startX,
+				RoutePair pair = processRouteSegment(ctx, start, true, graphReverseSegments, visitedOppositeSegments, startX,
 						startY, segment, visitedDirectSegments);
-				if (finalReverseRoute != null) {
-					long nt = (finalReverseRoute.road.getId() << 8l) + finalReverseRoute.segmentEnd;
-					finalDirectRoute = visitedDirectSegments.get(nt);
-					if(finalDirectRoute != null){
-						finalDirectRoute.segmentEnd = finalReverseRoute.segmentEnd;
-					}
+				if (pair != null) {
+					finalReverseRoute = pair.a;
+					finalDirectRoute = pair.b;
 					break;
 				}
 			}
@@ -257,8 +243,7 @@ public class BinaryRoutePlanner {
 		return prepareResult(ctx, start, end, startNanoTime, finalDirectRoute, finalReverseRoute);
 		
 	}
-
-
+	
 
 	private void visitAllStartSegments(final RoutingContext ctx, RouteSegment start, PriorityQueue<RouteSegment> graphDirectSegments,
 			TLongObjectHashMap<RouteSegment> visitedSegments, int startX, int startY) throws IOException {
@@ -285,7 +270,7 @@ public class BinaryRoutePlanner {
 		}
 	}
 
-	private RouteSegment processRouteSegment(final RoutingContext ctx, RouteSegment end, boolean reverseWaySearch,
+	private RoutePair processRouteSegment(final RoutingContext ctx, RouteSegment end, boolean reverseWaySearch,
 			PriorityQueue<RouteSegment> graphSegments, TLongObjectHashMap<RouteSegment> visitedSegments, int targetEndX, int targetEndY,
             RouteSegment segment, TLongObjectHashMap<RouteSegment> oppositeSegments) throws IOException {
 		// Always start from segmentStart (!), not from segmentEnd
@@ -300,12 +285,13 @@ public class BinaryRoutePlanner {
 		long nt = (road.getId() << 8l) + middle;
 		visitedSegments.put(nt, segment);
 		if (oppositeSegments.contains(nt)) {
-			// if(end.road.getId() == road.getId() && end.segmentStart == middle){
 			segment.segmentEnd = middle;
-			return segment;
+			RouteSegment opposite = oppositeSegments.get(nt);
+			opposite.segmentEnd = middle;
+			return new RoutePair(segment, opposite);
 		}
 
-		boolean oneway = ctx.router.isOneWay(road.getHighwayAttributes());
+		boolean oneway = ctx.router.isOneWay(road);
 		boolean minusAllowed = !oneway || reverseWaySearch;
 		boolean plusAllowed = !oneway || !reverseWaySearch;
 
@@ -340,9 +326,10 @@ public class BinaryRoutePlanner {
 			// if we found end point break cycle
 			long nts = (road.getId() << 8l) + segmentEnd;
 			if (oppositeSegments.contains(nts)) {
-				// if(end.road.getId() == road.getId() && end.segmentStart == segmentEnd){
 				segment.segmentEnd = segmentEnd;
-				return segment;
+				RouteSegment opposite = oppositeSegments.get(nts);
+				opposite.segmentEnd = segmentEnd;
+				return new RoutePair(segment, opposite);
 			}
 			visitedSegments.put(nts, segment);
 
@@ -357,8 +344,13 @@ public class BinaryRoutePlanner {
 			if (next != null) {
 				double distOnRoadToPass = squareRootDist(x, y, middlex, middley);
 				double distToFinalPoint = squareRootDist(x, y, targetEndX, targetEndY);
-				processIntersectionsWithWays(ctx, graphSegments, visitedSegments, distOnRoadToPass, distToFinalPoint, segment, road,
+				RouteSegment foundIntersection = processIntersectionsWithWays(ctx, graphSegments, visitedSegments, oppositeSegments,
+						distOnRoadToPass, distToFinalPoint, segment, road,
 						d == 0, segmentEnd, next);
+				if(foundIntersection != null){
+					segment.segmentEnd = segmentEnd;
+					return new RoutePair(segment, foundIntersection);
+				}
 			}
 		}
 		return null;
@@ -366,8 +358,9 @@ public class BinaryRoutePlanner {
 	
 
 
-	private void processIntersectionsWithWays(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments,
-			TLongObjectHashMap<RouteSegment> visitedSegments, double distOnRoadToPass, double distToFinalPoint, 
+	private RouteSegment processIntersectionsWithWays(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments,
+			TLongObjectHashMap<RouteSegment> visitedSegments, TLongObjectHashMap<RouteSegment> oppositeSegments,  
+			double distOnRoadToPass, double distToFinalPoint, 
 			RouteSegment segment, BinaryMapDataObject road, boolean firstOfSegment, int segmentEnd, RouteSegment next) {
 
 		// This variables can be in routing context
@@ -390,6 +383,11 @@ public class BinaryRoutePlanner {
 		// 3.2 calculate possible ways to put into priority queue
 		while (next != null) {
 			long nts = (next.road.getId() << 8l) + next.segmentStart;
+			if(oppositeSegments.containsKey(nts)){
+				RouteSegment oppSegment = oppositeSegments.get(nts);
+				oppSegment.segmentEnd = next.segmentStart;
+				return oppSegment;
+			}
 			/* next.road.getId() >> 3 (1) != road.getId() >> 3 (1) - used that line for debug with osm map */
 			// road.id could be equal on roundabout, but we should accept them
 			if (!visitedSegments.contains(nts)) {
@@ -455,6 +453,7 @@ public class BinaryRoutePlanner {
 		for (RouteSegment s : segmentsToVisitPrescripted) {
 			graphSegments.add(s);
 		}
+		return null;
 	}
 
 	
@@ -484,8 +483,9 @@ public class BinaryRoutePlanner {
 			segment = segment.parentRoute;
 			// reverse start and end point for start if needed
 			// rely that point.segmentStart <= point.segmentEnd for end, start
-			if(segment == null && res.startPointIndex <= res.endPointIndex){
-				res.endPointIndex = end.segmentEnd;
+			if(segment == null && res.startPointIndex >= res.endPointIndex && 
+					res.endPointIndex < res.object.getPointsLength() - 1){
+				res.endPointIndex ++;
 			}
 			// do not add segments consists from 1 point
 			if(res.startPointIndex != res.endPointIndex) {
@@ -508,8 +508,8 @@ public class BinaryRoutePlanner {
 			segment = segment.parentRoute;
 			// reverse start and end point for start if needed
 			// rely that point.segmentStart <= point.segmentEnd for end, start
-			if(segment == null && res.startPointIndex >= res.endPointIndex){
-				res.startPointIndex = start.segmentEnd;
+			if(segment == null && res.startPointIndex < res.endPointIndex){
+				res.startPointIndex ++;
 			}
 			// do not add segments consists from 1 point
 			if(res.startPointIndex != res.endPointIndex) {
@@ -672,7 +672,18 @@ public class BinaryRoutePlanner {
 			return road;
 		}
 	}
-	
+
+	private static class RoutePair {
+		RouteSegment a;
+		RouteSegment b;
+		public RoutePair(RouteSegment a, RouteSegment b) {
+			super();
+			this.a = a;
+			this.b = b;
+		}
+		
+		
+	}
 
 	
 }
