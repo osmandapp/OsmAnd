@@ -32,7 +32,7 @@ public class BinaryRoutePlanner {
 	
 	private final static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
 	private final BinaryMapIndexReader[] map;
-	private static int DEFAULT_HEURISTIC_COEFFICIENT = 3;
+	private static int DEFAULT_HEURISTIC_COEFFICIENT = 1;
 	
 	private static final Log log = LogUtil.getLog(BinaryRoutePlanner.class);
 	
@@ -418,6 +418,10 @@ public class BinaryRoutePlanner {
 					// next = next.next; continue;
 				} else {
 					double distanceToEnd = distToFinalPoint / ctx.router.getMaxDefaultSpeed();
+					if(ctx.isUseDynamicRoadPrioritising()){
+						double priority = ctx.router.getRoadPriority(next.road);
+						distanceToEnd /= priority;
+					}
 
 					// Using A* routing algorithm
 					// g(x) - calculate distance to that point and calculate time
@@ -638,8 +642,9 @@ public class BinaryRoutePlanner {
 		// null - 2 ways, true - direct way, false - reverse way
 		private Boolean planRoadDirection = null;
 		private VehicleRouter router = new CarRouter();
+		private boolean useDynamicRoadPrioritising = true;
 
-		// 
+		// INFO: Time to calculate : 1606.308703, time to load : 1554.770877, loaded tiles : 177, visited segments 6727
 		TLongObjectMap<BinaryMapDataObject> idObjects = new TLongObjectHashMap<BinaryMapDataObject>();
 		TLongObjectMap<RouteSegment> routes = new TLongObjectHashMap<RouteSegment>();
 		TIntSet loadedTiles = new TIntHashSet();
@@ -651,6 +656,10 @@ public class BinaryRoutePlanner {
 		// callback of processing segments
 		public RouteSegmentVisitor visitor = null;
 		
+		
+		public boolean isUseDynamicRoadPrioritising() {
+			return useDynamicRoadPrioritising;
+		}
 		
 		public void setRouter(VehicleRouter router) {
 			this.router = router;

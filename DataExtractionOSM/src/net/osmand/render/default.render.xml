@@ -222,7 +222,9 @@
 				</filter>
 		   	</switch>
 		</switch>  
-
+		<filter minzoom="15" textSize="14" textBold="true" textWrapWidth="12"
+				textMinDistance="20" tag="highway" value="motorway_junction"/>
+		
 		<!-- Natural -->
 		<filter minzoom="15" textSize="12" textColor="#09dd09" textHaloRadius="1" textWrapWidth="15" tag="natural" value="park" />
 
