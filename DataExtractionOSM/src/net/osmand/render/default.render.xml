@@ -922,7 +922,7 @@
 				</switch>
 				<!-- bridge -->
 				<switch>
-	              			<case nightMode="false" color="#000000" />
+	              			<case nightMode="false" color="#ffffff" />
 	              			<case nightMode="true" color="#ffffff" />
 		   			<filter layer="1" cap_2="SQUARE">
 <!--ZM						<filter minzoom="13" maxzoom="14" strokeWidth="5" strokeWidth_2="3" /> -->
