@@ -203,10 +203,12 @@ public class BinaryRoutePlanner {
 		
 		// Extract & analyze segment with min(f(x)) from queue while final segment is not found
 		boolean inverse = false;
+		double roadDirectPriority = 0;
+		double roadOppositePriority = 0;
+		
 		PriorityQueue<RouteSegment>  graphSegments = inverse ? graphReverseSegments : graphDirectSegments;
 		while(!graphSegments.isEmpty()){
 			RouteSegment segment = graphSegments.poll();
-			
 			
 			ctx.visitedSegments ++;
 			// for debug purposes
@@ -234,7 +236,8 @@ public class BinaryRoutePlanner {
 				break;
 			}
 			inverse = nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) > 0;
-//			inverse = !inverse;
+			// different strategy : use onedirectional graph
+//			inverse = true;
 			graphSegments = inverse ? graphReverseSegments : graphDirectSegments;
 		}
 		
@@ -388,9 +391,18 @@ public class BinaryRoutePlanner {
 				oppSegment.segmentEnd = next.segmentStart;
 				return oppSegment;
 			}
+			boolean processRoad = true;
+			if (ctx.useStrategyOfIncreasingRoadPriorities) {
+				double roadPriority = ctx.router.getRoadPriority(segment.road);
+				double nextRoadPriority = ctx.router.getRoadPriority(segment.road);
+				if (nextRoadPriority < roadPriority) {
+					processRoad = false;
+				}
+			} 
+			
 			/* next.road.getId() >> 3 (1) != road.getId() >> 3 (1) - used that line for debug with osm map */
 			// road.id could be equal on roundabout, but we should accept them
-			if (!visitedSegments.contains(nts)) {
+			if (!visitedSegments.contains(nts) && processRoad) {
 				int type = -1;
 				for (int i = 0; i < road.getRestrictionCount(); i++) {
 					if (road.getRestriction(i) == next.road.getId()) {
@@ -621,6 +633,7 @@ public class BinaryRoutePlanner {
 	public static class RoutingContext {
 		// parameters of routing
 		public int heuristicCoefficient = DEFAULT_HEURISTIC_COEFFICIENT;
+		public boolean useStrategyOfIncreasingRoadPriorities = true;
 		public VehicleRouter router = new CarRouter();
 
 		// 

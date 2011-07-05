@@ -84,6 +84,7 @@ public class BicycleRouter extends VehicleRouter {
 		}
 		return false;
 	}
+	
 
 	public boolean isOneWay(int highwayAttributes) {
 		return MapRenderingTypes.isOneWayWay(highwayAttributes) || MapRenderingTypes.isRoundabout(highwayAttributes);
