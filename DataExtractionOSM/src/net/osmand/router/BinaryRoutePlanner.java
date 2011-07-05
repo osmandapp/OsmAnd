@@ -73,11 +73,11 @@ public class BinaryRoutePlanner {
 					if (pair != null) {
 						int t = wholeType & 3;
 						if(t == MapRenderingTypes.POINT_TYPE){
-							if(ctx.router.acceptPoint(pair)){
+							if(ctx.getRouter().acceptPoint(pair)){
 								return true;
 							}
 						} else if(t == MapRenderingTypes.POLYLINE_TYPE){
-							if(ctx.router.acceptLine(pair)){
+							if(ctx.getRouter().acceptLine(pair)){
 								return true;
 							}
 						}
@@ -188,7 +188,7 @@ public class BinaryRoutePlanner {
 		int startX = start.road.getPoint31XTile(start.segmentStart);
 		int startY = start.road.getPoint31YTile(start.segmentStart);
 		// for start : f(start) = g(start) + h(start) = 0 + h(start) = h(start)
-		start.distanceToEnd = squareRootDist(startX, startY, targetEndX, targetEndY) / ctx.router.getMaxDefaultSpeed();
+		start.distanceToEnd = squareRootDist(startX, startY, targetEndX, targetEndY) / ctx.getRouter().getMaxDefaultSpeed();
 		end.distanceToEnd = start.distanceToEnd;
 		
 		// because first point of the start is not visited do the same as in cycle but only for one point
@@ -203,8 +203,6 @@ public class BinaryRoutePlanner {
 		
 		// Extract & analyze segment with min(f(x)) from queue while final segment is not found
 		boolean inverse = false;
-		double roadDirectPriority = 0;
-		double roadOppositePriority = 0;
 		
 		PriorityQueue<RouteSegment>  graphSegments = inverse ? graphReverseSegments : graphDirectSegments;
 		while(!graphSegments.isEmpty()){
@@ -235,9 +233,12 @@ public class BinaryRoutePlanner {
 			if(graphReverseSegments.isEmpty() || graphDirectSegments.isEmpty()){
 				break;
 			}
+			if(ctx.planRouteIn2Directions()){
 			inverse = nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) > 0;
-			// different strategy : use onedirectional graph
-//			inverse = true;
+			} else {
+				// different strategy : use onedirectional graph
+				inverse = !ctx.getPlanRoadDirection().booleanValue();
+			}
 			graphSegments = inverse ? graphReverseSegments : graphDirectSegments;
 		}
 		
@@ -294,7 +295,7 @@ public class BinaryRoutePlanner {
 			return new RoutePair(segment, opposite);
 		}
 
-		boolean oneway = ctx.router.isOneWay(road);
+		boolean oneway = ctx.getRouter().isOneWay(road);
 		boolean minusAllowed = !oneway || reverseWaySearch;
 		boolean plusAllowed = !oneway || !reverseWaySearch;
 
@@ -378,7 +379,7 @@ public class BinaryRoutePlanner {
 		if (firstOfSegment) {
 			RouteSegment possibleObstacle = next;
 			while (possibleObstacle != null) {
-				obstaclesTime += ctx.router.defineObstacle(possibleObstacle.road, possibleObstacle.segmentStart);
+				obstaclesTime += ctx.getRouter().defineObstacle(possibleObstacle.road, possibleObstacle.segmentStart);
 				possibleObstacle = possibleObstacle.next;
 			}
 		}
@@ -393,8 +394,8 @@ public class BinaryRoutePlanner {
 			}
 			boolean processRoad = true;
 			if (ctx.useStrategyOfIncreasingRoadPriorities) {
-				double roadPriority = ctx.router.getRoadPriority(segment.road);
-				double nextRoadPriority = ctx.router.getRoadPriority(segment.road);
+				double roadPriority = ctx.getRouter().getRoadPriority(segment.road);
+				double nextRoadPriority = ctx.getRouter().getRoadPriority(segment.road);
 				if (nextRoadPriority < roadPriority) {
 					processRoad = false;
 				}
@@ -632,9 +633,11 @@ public class BinaryRoutePlanner {
 	
 	public static class RoutingContext {
 		// parameters of routing
-		public int heuristicCoefficient = DEFAULT_HEURISTIC_COEFFICIENT;
-		public boolean useStrategyOfIncreasingRoadPriorities = true;
-		public VehicleRouter router = new CarRouter();
+		private int heuristicCoefficient = DEFAULT_HEURISTIC_COEFFICIENT;
+		private boolean useStrategyOfIncreasingRoadPriorities = true;
+		// null - 2 ways, true - direct way, false - reverse way
+		private Boolean planRoadDirection = null;
+		private VehicleRouter router = new CarRouter();
 
 		// 
 		TLongObjectMap<BinaryMapDataObject> idObjects = new TLongObjectHashMap<BinaryMapDataObject>();
@@ -647,6 +650,35 @@ public class BinaryRoutePlanner {
 		int visitedSegments = 0;
 		// callback of processing segments
 		public RouteSegmentVisitor visitor = null;
+		
+		
+		public void setRouter(VehicleRouter router) {
+			this.router = router;
+		}
+		
+		public VehicleRouter getRouter() {
+			return router;
+		}
+		
+		public boolean planRouteIn2Directions(){
+			return planRoadDirection == null;
+		}
+		
+		public Boolean getPlanRoadDirection() {
+			return planRoadDirection;
+		}
+		
+		public void setPlanRoadDirection(Boolean planRoadDirection) {
+			this.planRoadDirection = planRoadDirection;
+		}
+		
+		public boolean useStrategyOfIncreasingRoadPriorities(){
+			return planRouteIn2Directions() && useStrategyOfIncreasingRoadPriorities;
+		}
+		
+		public void setUseStrategyOfIncreasingRoadPriorities(boolean useStrategyOfIncreasingRoadPriorities) {
+			this.useStrategyOfIncreasingRoadPriorities = useStrategyOfIncreasingRoadPriorities;
+		}
 
 		public Collection<BinaryMapDataObject> values() {
 			return idObjects.valueCollection();
