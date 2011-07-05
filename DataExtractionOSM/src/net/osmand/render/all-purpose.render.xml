@@ -1,11 +1,11 @@
 <renderer name="all-purpose" depends="" defaultColor="#f1eee8" defaultNightColor="#003333">
 	<!--
-		All Purpose Renderer (essentially more details than default) (by Hardy Mueller), v014:
+		All Purpose Renderer (essentially more details than default) (by Hardy Mueller), v014c:
 		Map rendering aligned to typical map use for all zoom levels/scales, hence always yields a complete and reliable map.
 		All features displayed at each zoom level (zX) are those for its typical use:
 		 - z7  = "Rough Country Level Overview": Shows motorways, trunks, primary roads and city names
 		 - z11 = "Country Road Atlas": Secondary roads (already from z9) and tertiary (already from z10).  Show large scale landuse like forest and residential areas (already from z10). Also all town names (already from z9) and now all other locality names. Shows mountain peaks for orientation.
-		 - z12 = "Detailed Country Road Atlas": Add all other public highways like residential, unclassified, roads. Add foot and bike tracks. Also tag mountain peaks.
+		 - z12 = "Detailed Country Road Atlas": Add all other public highways like roads, unclassified. Add foot and bike tracks. Also tag mountain peaks.
 		 - z13 = "Regional Driving. Good Overview": Displays all driving as well as hiking connections. Show service, living street, pedestrian and footway highways.  Include all area landuse.
 		 - z14 = "Local Driving, also Hiking Map"
 		 - z15 = "City Driving": Display all details of interest for this.
@@ -18,6 +18,7 @@
 	         - v012: This is the one Victor produced from v011, with combining day/night renderer. Some optical deviations from former v011 contained. This one synced with default on master 2011-07-03.
 	         - v013: Fixed some bugs to re-instate functionality of v011: Fix night view for all shaders, cemetery,  vineyard, nature_reserve, forest. Fixed night view for field, orchard, quarry, marsh, mud, wetland, scrub, zoo. Fixed night view for white roads. Also brightened motorway and trunk highway colors again to what was requested in forum. Fix night bridges.
 	         - v014: functionality of v011 restored, with combined day+night view. Trunk highways slightly darker, white tags on all dotted paths at night.
+	         - v015: fixed several bugs with 'white' roads and their bridges at night
 	-->
 
 	<!--
@@ -28,7 +29,7 @@
 		- forest: 000034
 		- other 'green' landuse: 004333
 		- water: 330099
-		- 'white' roads: 9F9F9F to darken high density areas sufficiently
+		- 'white' roads: 9F9F9F with shadow 666666 to darken high density areas sufficiently
 		- leave other road colors like day, for easy recognition
 	--> 
 
@@ -90,13 +91,13 @@
 			<filter tag="highway" value="primary" order="55" />
 			<filter tag="highway" value="secondary" order="54" />
 			<filter tag="highway" value="tertiary" order="53" />
+			<filter tag="highway" value="road" order="51" />
+			<filter tag="highway" value="unclassified" order="51" />
 			<filter tag="highway" value="residential" order="52" />
 			<filter tag="highway" value="service" order="52" />
-			<filter tag="highway" value="unclassified" order="51" />
-			<filter tag="highway" value="road" order="51" />
+			<filter tag="highway" value="living_street" order="47" />
 			<filter tag="highway" value="track" order="50" />
 			<filter tag="highway" value="path" order="48" />
-			<filter tag="highway" value="living_street" order="47" />
 
 			<filter tag="highway" value="construction" order="46" />
 			<filter tag="highway" value="proposed" order="45" />
@@ -185,11 +186,11 @@
 		<switch>
 			<case tag="highway" value="tertiary" />
 			<case tag="highway" value="tertiary_link" />
-			<case tag="highway" value="residential" />
-			<case tag="highway" value="service" />
-			<case tag="highway" value="unclassified" />
 			<case tag="highway" value="road" />
+			<case tag="highway" value="unclassified" />
+			<case tag="highway" value="residential" />
 
+			<case tag="highway" value="service" />
 			<case tag="highway" value="living_street" />
 			<case tag="highway" value="pedestrian" />
 
@@ -510,16 +511,16 @@
 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
 	<polygon>
 		<switch>
-			<case nightMode="true" color_2="#9F9F9F" color="#666666"/>
+			<case nightMode="true" color_2="#9f9f9f" color="#666666"/>
 			<case nightMode="false" color_2="#464646" color="#ffffff"/>
 				<filter minzoom="12" strokeWidth_2="1">
-				<filter tag="highway" value="unclassified" />
 				<filter tag="highway" value="road" />
-				<filter tag="highway" value="service" />
+				<filter tag="highway" value="unclassified" />
 				<filter tag="highway" value="residential" />
 			</filter>
 		</switch>	
-		<filter minzoom="13" strokeWidth_2="0.5" color_2="#B0B0B0" color="#ECECEC">
+		<filter minzoom="13" strokeWidth_2="0.5" color_2="#b0b0b0" color="#ECECEC">
+			<filter tag="highway" value="service" />
 			<filter tag="highway" value="pedestrian" />
 			<filter tag="highway" value="footway" />
 		</filter>
@@ -856,9 +857,9 @@
 			<case nightMode="false" color="#ffffff" color_2="#ffffff" shadowColor="#464646"/>
 			<case nightMode="true" color="#9F9F9F" color_2="#9F9F9F" shadowColor="#666666"/>
 	  		<switch>
-				<case tag="highway" value="residential" />
-				<case tag="highway" value="unclassified" />
 				<case tag="highway" value="road" />
+				<case tag="highway" value="unclassified" />
+				<case tag="highway" value="residential" />
 					<filter shadowRadius="1">
 					<filter minzoom="12" maxzoom="12" strokeWidth="3" />
 					<filter minzoom="13" maxzoom="13" strokeWidth="4" />
@@ -867,9 +868,9 @@
   			<switch>
 				<case tag="highway" value="tertiary" color="#fefeb3" color_2="#fefeb3" shadowColor="#bababa" />
 				<case tag="highway" value="tertiary_link" color="#fefeb3" color_2="#fefeb3" shadowColor="#bababa" />
-				<case tag="highway" value="residential" />
-				<case tag="highway" value="unclassified" />
 				<case tag="highway" value="road"/>
+				<case tag="highway" value="unclassified" />
+				<case tag="highway" value="residential" />
 				<filter>
 					<switch>
 					<case layer="-1" pathEffect="4_4" />
@@ -897,38 +898,38 @@
 				</switch>   
 				</filter>
 		  	</switch>
+		</switch>
 
+		<switch>
+			<case tag="highway" value="service" color="#ececec" color_2="#ececec" shadowColor="#b0b0b0"  />
+			<case tag="highway" value="living_street" color="#ececec" color_2="#ececec" shadowColor="#b0b0b0" />
+			<case tag="highway" value="pedestrian" color="#ececec" color_2="#ececec" shadowColor="#b0b0b0" />
+			<filter>
 			<switch>
-				<case tag="highway" value="service"  />
-				<case tag="highway" value="living_street"/>
-				<case tag="highway" value="pedestrian" color="#ececec" color_2="#ececec" shadowColor="#b0b0b0" />
+				<case layer="-1" pathEffect="4_4" />
+				<case /> <!-- all other cases -->
 				<filter>
-				<switch>
-					<case layer="-1" pathEffect="4_4" />
-					<case /> <!-- all other cases -->
-					<filter>
-						<filter minzoom="13" maxzoom="13" strokeWidth="2" shadowRadius="1"/>
-						<filter minzoom="14" maxzoom="14" strokeWidth="3" shadowRadius="1"/>
-						<filter minzoom="15" maxzoom="15" strokeWidth="4" shadowRadius="1"/>
-						<filter minzoom="16" maxzoom="16" strokeWidth="5" />
-						<filter minzoom="17" maxzoom="17" strokeWidth="8"/>
-						<filter minzoom="18" strokeWidth="12"/>
-					</filter>
-				</switch>
-				<!-- bridge -->
-				<switch>
-	              			<case nightMode="false" color="#ffffff" />
-	              			<case nightMode="true" color="#ffffff" />
-		   			<filter layer="1" cap_2="SQUARE">
-					<filter minzoom="13" maxzoom="14" strokeWidth="5" strokeWidth_2="3" />
-					<filter minzoom="15" maxzoom="15" strokeWidth="6" strokeWidth_2="4" />
-					<filter minzoom="16" maxzoom="16" strokeWidth="7" strokeWidth_2="5" />
-					<filter minzoom="17" maxzoom="17" strokeWidth="10" strokeWidth_2="8" />
-					<filter minzoom="18" strokeWidth="14" strokeWidth_2="12" />
-					</filter>
-				</switch>  
+					<filter minzoom="13" maxzoom="13" strokeWidth="2" shadowRadius="1"/>
+					<filter minzoom="14" maxzoom="14" strokeWidth="3" shadowRadius="1"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth="4" shadowRadius="1"/>
+					<filter minzoom="16" maxzoom="16" strokeWidth="5" />
+					<filter minzoom="17" maxzoom="17" strokeWidth="8"/>
+					<filter minzoom="18" strokeWidth="12"/>
 				</filter>
 			</switch>
+			<!-- bridge -->
+			<switch>
+				<case nightMode="false" color="#000000" />
+				<case nightMode="true" color="#000000" />
+				<filter layer="1" cap_2="SQUARE">
+				<filter minzoom="13" maxzoom="14" strokeWidth="5" strokeWidth_2="3" />
+				<filter minzoom="15" maxzoom="15" strokeWidth="6" strokeWidth_2="4" />
+				<filter minzoom="16" maxzoom="16" strokeWidth="7" strokeWidth_2="5" />
+				<filter minzoom="17" maxzoom="17" strokeWidth="10" strokeWidth_2="8" />
+				<filter minzoom="18" strokeWidth="14" strokeWidth_2="12" />
+				</filter>
+			</switch>  
+			</filter>
 		</switch>
 
 		<filter tag="highway" value="cycleway">
