@@ -692,13 +692,7 @@ public class OsmandRenderer {
 			if (cnt > 0) {
 				String name = ((MultyPolygon) obj).getName(i);
 				if (name != null) {
-					rc.clearText();
-					name = render.renderObjectText(name, tag, value, rc, false, rc.nightMode);
-					if (rc.textSize > 0 && name != null) {
-						TextDrawInfo info = new TextDrawInfo(name);
-						info.fillProperties(rc, xText / cnt, yText / cnt);
-						rc.textToDraw.add(info);
-					}
+					drawPointText(render, rc, new TagValuePair(tag, value), xText / cnt, yText / cnt, name);
 				}
 			}
 		}
@@ -757,19 +751,45 @@ public class OsmandRenderer {
 			}
 			String name = obj.getName();
 			if(name != null){
-				rc.clearText();
-				name = render.renderObjectText(name, pair.tag, pair.value, rc, false, rc.nightMode);
-				if (rc.textSize > 0 && name != null) {
-					xText /= len;
-					yText /= len;
-					TextDrawInfo info = new TextDrawInfo(name);
-					info.fillProperties(rc, xText, yText);
-					rc.textToDraw.add(info);
-				}
+				drawPointText(render, rc, pair, xText / len, yText / len, name);
 			}
 		}
 		return;
 	}
+
+	private void drawPointText(BaseOsmandRender render, RenderingContext rc, TagValuePair pair, float xText, float yText, String name) {
+		rc.clearText();
+		String ref = null;
+		if (name.charAt(0) == MapRenderingTypes.REF_CHAR) {
+			ref = name.substring(1);
+			name = ""; //$NON-NLS-1$
+			for (int k = 0; k < ref.length(); k++) {
+				if (ref.charAt(k) == MapRenderingTypes.REF_CHAR) {
+					if (k < ref.length() - 1) {
+						name = ref.substring(k + 1);
+					}
+					ref = ref.substring(0, k);
+					break;
+				}
+			}
+		}
+
+		if (ref != null && ref.trim().length() > 0) {
+			rc.clearText();
+			ref = render.renderObjectText(ref, pair.tag, pair.value, rc, true, rc.nightMode);
+			TextDrawInfo text = new TextDrawInfo(ref);
+			text.fillProperties(rc, xText, yText);
+			rc.textToDraw.add(text);
+
+		}
+		name = render.renderObjectText(name, pair.tag, pair.value, rc, false, rc.nightMode);
+		if (rc.textSize > 0 && name != null) {
+			TextDrawInfo info = new TextDrawInfo(name);
+			info.fillProperties(rc, xText, yText);
+			rc.textToDraw.add(info);
+		}
+	}
+	
 	
 	private void drawPoint(BinaryMapDataObject obj, BaseOsmandRender render, Canvas canvas, RenderingContext rc, TagValuePair pair, boolean renderText) {
 		if(render == null || pair == null){
@@ -780,10 +800,6 @@ public class OsmandRenderer {
 		String name = null;
 		if (renderText) {
 			name = obj.getName();
-			if (name != null) {
-				rc.clearText();
-				name = render.renderObjectText(name, pair.tag, pair.value, rc, false, rc.nightMode);
-			}
 		}
 		if((resId == null || resId == 0) && name == null){
 			return;
@@ -808,10 +824,8 @@ public class OsmandRenderer {
 			ico.resId = resId;
 			rc.iconsToDraw.add(ico);
 		}
-		if (name != null && rc.textSize > 0) {
-			TextDrawInfo info = new TextDrawInfo(name);
-			info.fillProperties(rc, ps.x, ps.y);
-			rc.textToDraw.add(info);
+		if (name != null) {
+			drawPointText(render, rc, pair, ps.x, ps.y, name);
 		}
 			
 	}
