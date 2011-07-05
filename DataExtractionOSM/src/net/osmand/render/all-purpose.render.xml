@@ -5,7 +5,7 @@
 		All features displayed at each zoom level (zX) are those for its typical use:
 		 - z7  = "Rough Country Level Overview": Shows motorways, trunks, primary roads and city names
 		 - z11 = "Country Road Atlas": Secondary roads (already from z9) and tertiary (already from z10).  Show large scale landuse like forest and residential areas (already from z10). Also all town names (already from z9) and now all other locality names. Shows mountain peaks for orientation.
-		 - z12 = "Detailed Country Road Atlas": Add all other public highways like roads, unclassified. Add foot and bike tracks. Also tag mountain peaks.
+		 - z12 = "Detailed Country Road Atlas": Add all other public highways like road, unclassified, residential. Add foot and bike tracks. Also tag mountain peaks.
 		 - z13 = "Regional Driving. Good Overview": Displays all driving as well as hiking connections. Show service, living street, pedestrian and footway highways.  Include all area landuse.
 		 - z14 = "Local Driving, also Hiking Map"
 		 - z15 = "City Driving": Display all details of interest for this.
@@ -186,6 +186,7 @@
 		<switch>
 			<case tag="highway" value="tertiary" />
 			<case tag="highway" value="tertiary_link" />
+
 			<case tag="highway" value="road" />
 			<case tag="highway" value="unclassified" />
 			<case tag="highway" value="residential" />
