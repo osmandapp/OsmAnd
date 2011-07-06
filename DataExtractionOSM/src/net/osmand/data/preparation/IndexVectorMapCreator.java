@@ -696,7 +696,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	}
 	
 	public long convertGeneratedIdToObfWrite(long id){
-		return (id >> (MAP_LEVELS_POWER + 1)) + (id & 1);
+		return (id >> (MAP_LEVELS_POWER)) + (id & 1);
 	}
 
 	public void writeBinaryMapTree(rtree.Node parent, RTree r, BinaryMapIndexWriter writer, PreparedStatement selectData) throws IOException, RTreeException, SQLException {
