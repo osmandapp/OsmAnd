@@ -18,7 +18,8 @@
 	         - v012: This is the one Victor produced from v011, with combining day/night renderer. Some optical deviations from former v011 contained. This one synced with default on master 2011-07-03.
 	         - v013: Fixed some bugs to re-instate functionality of v011: Fix night view for all shaders, cemetery,  vineyard, nature_reserve, forest. Fixed night view for field, orchard, quarry, marsh, mud, wetland, scrub, zoo. Fixed night view for white roads. Also brightened motorway and trunk highway colors again to what was requested in forum. Fix night bridges.
 	         - v014: functionality of v011 restored, with combined day+night view. Trunk highways slightly darker, white tags on all dotted paths at night.
-	         - v015: Implement motorway_junction text. Separate tertiary and white roads to fix bridges in night view	-->
+	         - v015: Implement motorway_junction text. Separate tertiary and white roads to fix bridges in night view
+	-->
 
 	<!--
 		Main colors for night renderer:
