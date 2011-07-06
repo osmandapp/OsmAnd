@@ -14,14 +14,14 @@ public class PedestrianRouter extends VehicleRouter {
 	private Map<String, Double> pedestrianPriorityValues = new LinkedHashMap<String, Double>();
 	// in m/s
 	{
-		pedestrianNotDefinedValues.put("motorway", 1.8d);
-		pedestrianNotDefinedValues.put("motorway_link", 1.8d);
-		pedestrianNotDefinedValues.put("trunk", 1.8d);
-		pedestrianNotDefinedValues.put("trunk_link", 1.8d);
-		pedestrianNotDefinedValues.put("primary", 1.8d);
-		pedestrianNotDefinedValues.put("primary_link", 1.8d);
-		pedestrianNotDefinedValues.put("secondary", 1.8d);
-		pedestrianNotDefinedValues.put("secondary_link", 1.8d);
+		pedestrianNotDefinedValues.put("motorway", 1.2d);
+		pedestrianNotDefinedValues.put("motorway_link", 1.2d);
+		pedestrianNotDefinedValues.put("trunk", 1.2d);
+		pedestrianNotDefinedValues.put("trunk_link", 1.2d);
+		pedestrianNotDefinedValues.put("primary", 1.3d);
+		pedestrianNotDefinedValues.put("primary_link", 1.3d);
+		pedestrianNotDefinedValues.put("secondary", 1.4d);
+		pedestrianNotDefinedValues.put("secondary_link", 1.4d);
 		pedestrianNotDefinedValues.put("tertiary", 1.8d);
 		pedestrianNotDefinedValues.put("tertiary_link", 1.8d);
 		pedestrianNotDefinedValues.put("residential", 1.8d);
@@ -30,14 +30,14 @@ public class PedestrianRouter extends VehicleRouter {
 		pedestrianNotDefinedValues.put("unclassified", 1.8d);
 		pedestrianNotDefinedValues.put("track", 1.5d);
 		pedestrianNotDefinedValues.put("path", 1.5d);
-		pedestrianNotDefinedValues.put("living_street", 1.8d);
-		pedestrianNotDefinedValues.put("pedestrian", 1.8d);
-		pedestrianNotDefinedValues.put("footway", 1.8d);
+		pedestrianNotDefinedValues.put("living_street", 2d);
+		pedestrianNotDefinedValues.put("pedestrian", 2d);
+		pedestrianNotDefinedValues.put("footway", 2d);
 		pedestrianNotDefinedValues.put("byway", 1.8d);
 		pedestrianNotDefinedValues.put("cycleway", 1.8d);
 		pedestrianNotDefinedValues.put("bridleway", 1.8d);
 		pedestrianNotDefinedValues.put("services", 1.8d);
-		pedestrianNotDefinedValues.put("steps", 1.5d);
+		pedestrianNotDefinedValues.put("steps", 1.3d);
 		
 		
 
@@ -67,13 +67,13 @@ public class PedestrianRouter extends VehicleRouter {
 		pedestrianPriorityValues.put("steps", 1.2d);
 	}
 	
-	@Override
-	public double getRoadPriorityToCalculateRoute(BinaryMapDataObject road) {
-		TagValuePair pair = road.getTagValue(0);
-		boolean highway = "highway".equals(pair.tag);
-		double priority = highway && pedestrianPriorityValues.containsKey(pair.value) ? pedestrianPriorityValues.get(pair.value) : 1d;
-		return priority;
-	}
+		@Override
+		public double getRoadPriorityToCalculateRoute(BinaryMapDataObject road) {
+			TagValuePair pair = road.getTagValue(0);
+			boolean highway = "highway".equals(pair.tag);
+			double priority = highway && pedestrianPriorityValues.containsKey(pair.value) ? pedestrianPriorityValues.get(pair.value) : 1d;
+			return priority;
+		}
 	
 	@Override
 	public boolean isOneWay(BinaryMapDataObject road) {
@@ -155,7 +155,7 @@ public class PedestrianRouter extends VehicleRouter {
 	 * @return maximum speed to calculate shortest distance
 	 */
 	public double getMaxDefaultSpeed() {
-		return 2;
+		return 1.8;
 	}
 
 	public double calculateTurnTime(RouteSegment segment, RouteSegment next, int j) {

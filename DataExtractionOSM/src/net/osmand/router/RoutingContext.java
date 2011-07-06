@@ -22,7 +22,7 @@ public class RoutingContext {
 	private int zoomToLoadTileWithRoads = ZOOM_TO_LOAD_TILES;
 	private boolean useStrategyOfIncreasingRoadPriorities = true;
 	// null - 2 ways, true - direct way, false - reverse way
-	private Boolean planRoadDirection = true;
+	private Boolean planRoadDirection = null;
 	private VehicleRouter router = new CarRouter();
 	private boolean useDynamicRoadPrioritising = true;
 	private boolean usingShortestWay = false;
@@ -61,6 +61,10 @@ public class RoutingContext {
 		return useStrategyOfIncreasingRoadPriorities && planRoadDirection == null;
 	}
 	
+	public void setUseDynamicRoadPrioritising(boolean useDynamicRoadPrioritising) {
+		this.useDynamicRoadPrioritising = useDynamicRoadPrioritising;
+	}
+	
 	public void setUsingShortestWay(boolean usingShortestWay) {
 		this.usingShortestWay = usingShortestWay;
 	}
@@ -71,6 +75,10 @@ public class RoutingContext {
 
 	public void setRouter(VehicleRouter router) {
 		this.router = router;
+	}
+	
+	public void setHeuristicCoefficient(int heuristicCoefficient) {
+		this.heuristicCoefficient = heuristicCoefficient;
 	}
 
 	public VehicleRouter getRouter() {

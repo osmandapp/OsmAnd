@@ -503,10 +503,17 @@ public class RouteProvider {
 		ctx.setUsingShortestWay(!fast);
 		if(mode == ApplicationMode.BICYCLE){
 			ctx.setRouter(new BicycleRouter());
+			ctx.setUseStrategyOfIncreasingRoadPriorities(false);
+			ctx.setUseDynamicRoadPrioritising(true);
 		} else if(mode == ApplicationMode.PEDESTRIAN){
 			ctx.setRouter(new PedestrianRouter());
+			ctx.setUseStrategyOfIncreasingRoadPriorities(false);
+			ctx.setUseDynamicRoadPrioritising(false);
+			ctx.setHeuristicCoefficient(2);
 		} else {
 			ctx.setRouter(new CarRouter());
+			ctx.setUseStrategyOfIncreasingRoadPriorities(true);
+			ctx.setUseDynamicRoadPrioritising(true);
 		}
 		RouteSegment st= router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);
 		if (st == null) {

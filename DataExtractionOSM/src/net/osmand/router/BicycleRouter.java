@@ -150,7 +150,7 @@ public class BicycleRouter extends VehicleRouter {
 	 * @return maximum speed to calculate shortest distance
 	 */
 	public double getMaxDefaultSpeed() {
-		return 9;
+		return 6;
 	}
 
 	public double calculateTurnTime(RouteSegment segment, RouteSegment next, int segmentEnd) {

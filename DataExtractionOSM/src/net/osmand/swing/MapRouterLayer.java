@@ -49,7 +49,7 @@ import org.xml.sax.SAXException;
 public class MapRouterLayer implements MapPanelLayer {
 
 	private /*final */ static boolean ANIMATE_CALCULATING_ROUTE = false;
-	private /*final */ static int SIZE_OF_ROUTES_TO_ANIMATE = 250;
+	private /*final */ static int SIZE_OF_ROUTES_TO_ANIMATE = 50;
 	
 	
 	private MapPanel map;
