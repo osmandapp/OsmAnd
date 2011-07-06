@@ -45,8 +45,8 @@ public class CarRouter extends VehicleRouter {
 		autoPriorityValues.put("service", 0.6d);
 		autoPriorityValues.put("unclassified", 0.4d);
 		autoPriorityValues.put("road", 0.4d);
-		autoPriorityValues.put("track", 0.1d);
-		autoPriorityValues.put("path", 0.1d);
+		autoPriorityValues.put("track", 0.2d);
+		autoPriorityValues.put("path", 0.2d);
 		autoPriorityValues.put("living_street", 0.5d);
 	}
 
@@ -97,14 +97,16 @@ public class CarRouter extends VehicleRouter {
 	}
 	
 	@Override
-	public double getRoadPriority(BinaryMapDataObject road) {
+	public double getRoadPriorityHeuristicToIncrease(BinaryMapDataObject road) {
 		TagValuePair pair = road.getTagValue(0);
 		boolean highway = "highway".equals(pair.tag);
 		double priority = highway && autoPriorityValues.containsKey(pair.value) ? autoPriorityValues.get(pair.value) : 0.5d;
-		if("motorway_link".equals(pair.value) || "trunk".equals(pair.value) ||
-				"trunk_link".equals(pair.value) || "motorway".equals(pair.value)) {
-			return 1.3d;
-		} else if(priority >= 1){
+		// allow to get out from motorway to primary roads
+//		if("motorway_link".equals(pair.value) || "trunk".equals(pair.value) ||
+//				"trunk_link".equals(pair.value) || "motorway".equals(pair.value)) {
+//			return 1.3d;
+//		} else 
+		if(priority >= 1){
 			return 1;
 		} else if(priority >= 0.7){
 			return 0.7;
@@ -114,6 +116,13 @@ public class CarRouter extends VehicleRouter {
 			return 0.3;
 		}
 	}
+	
+	public double getRoadPriorityToCalculateRoute(BinaryMapDataObject road) {
+		TagValuePair pair = road.getTagValue(0);
+		boolean highway = "highway".equals(pair.tag);
+		double priority = highway && autoPriorityValues.containsKey(pair.value) ? autoPriorityValues.get(pair.value) : 0.5d;
+		return priority;
+	};
 
 	/**
 	 * return speed in m/s

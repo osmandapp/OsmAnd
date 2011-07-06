@@ -68,6 +68,14 @@ public class PedestrianRouter extends VehicleRouter {
 	}
 	
 	@Override
+	public double getRoadPriorityToCalculateRoute(BinaryMapDataObject road) {
+		TagValuePair pair = road.getTagValue(0);
+		boolean highway = "highway".equals(pair.tag);
+		double priority = highway && pedestrianPriorityValues.containsKey(pair.value) ? pedestrianPriorityValues.get(pair.value) : 1d;
+		return priority;
+	}
+	
+	@Override
 	public boolean isOneWay(BinaryMapDataObject road) {
 		// for now all ways are bidirectional
 		return false;

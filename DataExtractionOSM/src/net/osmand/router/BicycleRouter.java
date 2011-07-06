@@ -41,10 +41,10 @@ public class BicycleRouter extends VehicleRouter {
 		
 		
 
-		bicyclePriorityValues.put("motorway", 0.8);
-		bicyclePriorityValues.put("motorway_link", 0.8);
-		bicyclePriorityValues.put("trunk", 0.8);
-		bicyclePriorityValues.put("trunk_link", 0.8);
+		bicyclePriorityValues.put("motorway", 0.7);
+		bicyclePriorityValues.put("motorway_link", 0.7);
+		bicyclePriorityValues.put("trunk", 0.7);
+		bicyclePriorityValues.put("trunk_link", 0.7);
 		bicyclePriorityValues.put("primary", 0.9);
 		bicyclePriorityValues.put("primary_link", 0.9);
 		bicyclePriorityValues.put("secondary", 1d);
@@ -61,7 +61,7 @@ public class BicycleRouter extends VehicleRouter {
 		bicyclePriorityValues.put("pedestrian", 0.9d);
 		bicyclePriorityValues.put("footway", 0.9d);
 		bicyclePriorityValues.put("byway", 1d);
-		bicyclePriorityValues.put("cycleway", 1.5d);
+		bicyclePriorityValues.put("cycleway", 1.3d);
 		bicyclePriorityValues.put("bridleway", 1d);
 		bicyclePriorityValues.put("services", 1d);
 		bicyclePriorityValues.put("steps", 0.5d);
@@ -108,6 +108,14 @@ public class BicycleRouter extends VehicleRouter {
 			}
 		}
 		return 0;
+	}
+	
+	@Override
+	public double getRoadPriorityToCalculateRoute(BinaryMapDataObject road) {
+		TagValuePair pair = road.getTagValue(0);
+		boolean highway = "highway".equals(pair.tag);
+		double priority = highway && bicyclePriorityValues.containsKey(pair.value) ? bicyclePriorityValues.get(pair.value) : 1d;
+		return priority;
 	}
 
 	/**

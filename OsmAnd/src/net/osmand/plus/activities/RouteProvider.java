@@ -29,8 +29,8 @@ import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.CarRouter;
 import net.osmand.router.PedestrianRouter;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.router.RoutingContext;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
-import net.osmand.router.BinaryRoutePlanner.RoutingContext;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -496,11 +496,11 @@ public class RouteProvider {
 	}
 	
 	protected RouteCalculationResult findVectorMapsRoute(Location start, LatLon end, ApplicationMode mode, boolean fast, OsmandApplication app) throws IOException {
-		// TODO fast/short mode
 		MapRenderRepositories repositories = app.getResourceManager().getRenderer();
 		Collection<BinaryMapIndexReader> data = repositories.getVectorData();
 		BinaryRoutePlanner router = new BinaryRoutePlanner(data.toArray(new BinaryMapIndexReader[data.size()]));
-		RoutingContext ctx = new BinaryRoutePlanner.RoutingContext();
+		RoutingContext ctx = new RoutingContext();
+		ctx.setUsingShortestWay(!fast);
 		if(mode == ApplicationMode.BICYCLE){
 			ctx.setRouter(new BicycleRouter());
 		} else if(mode == ApplicationMode.PEDESTRIAN){
