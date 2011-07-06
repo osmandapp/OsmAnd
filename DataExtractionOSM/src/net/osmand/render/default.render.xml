@@ -898,7 +898,8 @@
 				<case nightMode="true" color="#9F9F9F" color_2="#9F9F9F" shadowColor="#666666"/>
 				<case nightMode="false" color="#ffffff" color_2="#ffffff" shadowColor="#464646"/>
 				<filter>
-					<!-- ZM <filter minzoom="12" maxzoom="12" strokeWidth="3" shadowRadius="1" /> -->					<filter minzoom="13" maxzoom="13" strokeWidth="4" shadowRadius="1" />
+					<!-- ZM <filter minzoom="12" maxzoom="12" strokeWidth="3" shadowRadius="1" /> -->
+					<filter minzoom="13" maxzoom="13" strokeWidth="4" shadowRadius="1" />
 				<switch>
 					<case layer="-1" pathEffect="4_4" />
 					<case /> <!-- all other cases -->
