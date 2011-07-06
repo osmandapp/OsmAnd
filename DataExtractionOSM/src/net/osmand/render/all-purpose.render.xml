@@ -215,7 +215,7 @@
 			<case nightMode="true" textColor="#ffffff"/>
 			<case nightMode="false" textColor="#000000"/>
 			<switch>
-				<case ta="highway" value="track" />
+				<case tag="highway" value="track" />
 				<case tag="highway" value="path" />
 				<case tag="highway" value="cycleway" />
 
