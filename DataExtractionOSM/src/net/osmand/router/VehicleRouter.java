@@ -35,7 +35,17 @@ public abstract class VehicleRouter {
 	 * @param road
 	 * @return
 	 */
-	public double getRoadPriority(BinaryMapDataObject road) {
+	public double getRoadPriorityHeuristicToIncrease(BinaryMapDataObject road) {
+		return 1;
+	}
+	
+	
+	/**
+	 * Used for algorithm to estimate end distance
+	 * @param road
+	 * @return
+	 */
+	public double getRoadPriorityToCalculateRoute(BinaryMapDataObject road) {
 		return 1;
 	}
 

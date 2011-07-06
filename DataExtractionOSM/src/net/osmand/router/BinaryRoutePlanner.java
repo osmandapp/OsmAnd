@@ -1,10 +1,7 @@
 package net.osmand.router;
 
 import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.set.TIntSet;
-import gnu.trove.set.hash.TIntHashSet;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,17 +29,13 @@ public class BinaryRoutePlanner {
 	
 	private final static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
 	private final BinaryMapIndexReader[] map;
-	private static int DEFAULT_HEURISTIC_COEFFICIENT = 1;
+	
 	
 	private static final Log log = LogUtil.getLog(BinaryRoutePlanner.class);
 	
 	public BinaryRoutePlanner(BinaryMapIndexReader... map){
 		this.map = map;
 	}
-	
-	
-	// 12 doesn't give result on the phone (?)
-	private final static int ZOOM_LOAD_TILES = 13;
 	
 	
 	private static double squareRootDist(int x1, int y1, int x2, int y2) {
@@ -55,15 +48,16 @@ public class BinaryRoutePlanner {
 
    
 	public void loadRoutes(final RoutingContext ctx, int tileX, int tileY) throws IOException {
-		int tileC = (tileX << ZOOM_LOAD_TILES) + tileY;
+		int tileC = (tileX << ctx.getZoomToLoadTileWithRoads()) + tileY;
 		if(ctx.loadedTiles.contains(tileC)){
 			return;
 		}
 		long now = System.nanoTime();
 		
-		SearchRequest<BinaryMapDataObject> request = BinaryMapIndexReader.buildSearchRequest(tileX << (31 - ZOOM_LOAD_TILES),
-				(tileX + 1) << (31 - ZOOM_LOAD_TILES), tileY << (31 - ZOOM_LOAD_TILES), 
-				(tileY + 1) << (31 - ZOOM_LOAD_TILES), 15);
+		int zoomToLoad = 31 - ctx.getZoomToLoadTileWithRoads();
+		SearchRequest<BinaryMapDataObject> request = BinaryMapIndexReader.buildSearchRequest(tileX << zoomToLoad,
+				(tileX + 1) << zoomToLoad, tileY << zoomToLoad, 
+				(tileY + 1) << zoomToLoad, 15);
 		request.setSearchFilter(new BinaryMapIndexReader.SearchFilter(){
 			@Override
 			public boolean accept(TIntArrayList types, MapIndex index) {
@@ -114,8 +108,8 @@ public class BinaryRoutePlanner {
 
 	
 	public RouteSegment findRouteSegment(double lat, double lon, RoutingContext ctx) throws IOException {
-		double tileX = MapUtils.getTileNumberX(ZOOM_LOAD_TILES, lon);
-		double tileY = MapUtils.getTileNumberY(ZOOM_LOAD_TILES, lat);
+		double tileX = MapUtils.getTileNumberX(ctx.getZoomToLoadTileWithRoads(), lon);
+		double tileY = MapUtils.getTileNumberY(ctx.getZoomToLoadTileWithRoads(), lat);
 		loadRoutes(ctx, (int) tileX , (int) tileY);
 		
 		RouteSegment road = null;
@@ -234,7 +228,9 @@ public class BinaryRoutePlanner {
 				break;
 			}
 			if(ctx.planRouteIn2Directions()){
-			inverse = nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) > 0;
+//				inverse = nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) > 0;
+				// make it more simmetrical with dynamic prioritizing it makes big sense
+				inverse = !inverse;
 			} else {
 				// different strategy : use onedirectional graph
 				inverse = !ctx.getPlanRoadDirection().booleanValue();
@@ -256,7 +252,7 @@ public class BinaryRoutePlanner {
 		visitedSegments.put(nt, start);
 		graphDirectSegments.add(start);
 		
-		loadRoutes(ctx, (startX >> (31 - ZOOM_LOAD_TILES)), (startY >> (31 - ZOOM_LOAD_TILES)));
+		loadRoutes(ctx, (startX >> (31 - ctx.getZoomToLoadTileWithRoads())), (startY >> (31 - ctx.getZoomToLoadTileWithRoads())));
 		long ls = (((long) startX) << 31) + (long) startY;
 		RouteSegment startNbs = ctx.routes.get(ls);
 		while(startNbs != null) { // startNbs.road.id >> 1, start.road.id >> 1
@@ -340,7 +336,7 @@ public class BinaryRoutePlanner {
 			// 2. calculate point and try to load neighbor ways if they are not loaded
 			int x = road.getPoint31XTile(segmentEnd);
 			int y = road.getPoint31YTile(segmentEnd);
-			loadRoutes(ctx, (x >> (31 - ZOOM_LOAD_TILES)), (y >> (31 - ZOOM_LOAD_TILES)));
+			loadRoutes(ctx, (x >> (31 - ctx.getZoomToLoadTileWithRoads())), (y >> (31 - ctx.getZoomToLoadTileWithRoads())));
 			long l = (((long) x) << 31) + (long) y;
 			RouteSegment next = ctx.routes.get(l);
 
@@ -393,9 +389,9 @@ public class BinaryRoutePlanner {
 				return oppSegment;
 			}
 			boolean processRoad = true;
-			if (ctx.useStrategyOfIncreasingRoadPriorities) {
-				double roadPriority = ctx.getRouter().getRoadPriority(segment.road);
-				double nextRoadPriority = ctx.getRouter().getRoadPriority(segment.road);
+			if (ctx.isUseStrategyOfIncreasingRoadPriorities()) {
+				double roadPriority = ctx.getRouter().getRoadPriorityHeuristicToIncrease(segment.road);
+				double nextRoadPriority = ctx.getRouter().getRoadPriorityHeuristicToIncrease(segment.road);
 				if (nextRoadPriority < roadPriority) {
 					processRoad = false;
 				}
@@ -417,22 +413,22 @@ public class BinaryRoutePlanner {
 						|| type == MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON || type == MapRenderingTypes.RESTRICTION_NO_U_TURN) {
 					// next = next.next; continue;
 				} else {
-					double distanceToEnd = distToFinalPoint / ctx.router.getMaxDefaultSpeed();
+					double distanceToEnd = distToFinalPoint / ctx.getRouter().getMaxDefaultSpeed();
 					if(ctx.isUseDynamicRoadPrioritising()){
-						double priority = ctx.router.getRoadPriority(next.road);
+						double priority = ctx.getRouter().getRoadPriorityToCalculateRoute(next.road);
 						distanceToEnd /= priority;
 					}
 
 					// Using A* routing algorithm
 					// g(x) - calculate distance to that point and calculate time
-					double speed = ctx.router.defineSpeed(road);
+					double speed = ctx.getRouter().defineSpeed(road);
 					if (speed == 0) {
-						speed = ctx.router.getMinDefaultSpeed();
+						speed = ctx.getRouter().getMinDefaultSpeed();
 					}
 
 					double distanceFromStart = segment.distanceFromStart + distOnRoadToPass / speed;
 					// calculate turn time
-					distanceFromStart += ctx.router.calculateTurnTime(segment, next, segmentEnd);
+					distanceFromStart += ctx.getRouter().calculateTurnTime(segment, next, segmentEnd);
 					// add obstacles time
 					distanceFromStart += obstaclesTime;
 
@@ -635,71 +631,9 @@ public class BinaryRoutePlanner {
 	}
 	
 	
-	public static class RoutingContext {
-		// parameters of routing
-		private int heuristicCoefficient = DEFAULT_HEURISTIC_COEFFICIENT;
-		private boolean useStrategyOfIncreasingRoadPriorities = true;
-		// null - 2 ways, true - direct way, false - reverse way
-		private Boolean planRoadDirection = null;
-		private VehicleRouter router = new CarRouter();
-		private boolean useDynamicRoadPrioritising = true;
-
-		// INFO: Time to calculate : 1606.308703, time to load : 1554.770877, loaded tiles : 177, visited segments 6727
-		TLongObjectMap<BinaryMapDataObject> idObjects = new TLongObjectHashMap<BinaryMapDataObject>();
-		TLongObjectMap<RouteSegment> routes = new TLongObjectHashMap<RouteSegment>();
-		TIntSet loadedTiles = new TIntHashSet();
-
-		// debug information
-		long timeToLoad = 0;
-		long timeToCalculate = 0;
-		int visitedSegments = 0;
-		// callback of processing segments
-		public RouteSegmentVisitor visitor = null;
-		
-		
-		public boolean isUseDynamicRoadPrioritising() {
-			return useDynamicRoadPrioritising;
-		}
-		
-		public void setRouter(VehicleRouter router) {
-			this.router = router;
-		}
-		
-		public VehicleRouter getRouter() {
-			return router;
-		}
-		
-		public boolean planRouteIn2Directions(){
-			return planRoadDirection == null;
-		}
-		
-		public Boolean getPlanRoadDirection() {
-			return planRoadDirection;
-		}
-		
-		public void setPlanRoadDirection(Boolean planRoadDirection) {
-			this.planRoadDirection = planRoadDirection;
-		}
-		
-		public boolean useStrategyOfIncreasingRoadPriorities(){
-			return planRouteIn2Directions() && useStrategyOfIncreasingRoadPriorities;
-		}
-		
-		public void setUseStrategyOfIncreasingRoadPriorities(boolean useStrategyOfIncreasingRoadPriorities) {
-			this.useStrategyOfIncreasingRoadPriorities = useStrategyOfIncreasingRoadPriorities;
-		}
-
-		public Collection<BinaryMapDataObject> values() {
-			return idObjects.valueCollection();
-		}
-
-		public int roadPriorityComparator(double o1DistanceFromStart, double o1DistanceToEnd, double o2DistanceFromStart,
-				double o2DistanceToEnd) {
-			return BinaryRoutePlanner.roadPriorityComparator(o1DistanceFromStart, o1DistanceToEnd, o2DistanceFromStart, o2DistanceToEnd, heuristicCoefficient);
-		}
-	}
 	
-	private static int roadPriorityComparator(double o1DistanceFromStart, double o1DistanceToEnd, 
+	
+	/*public */static int roadPriorityComparator(double o1DistanceFromStart, double o1DistanceToEnd, 
 			double o2DistanceFromStart, double o2DistanceToEnd, double heuristicCoefficient ) {
 		// f(x) = g(x) + h(x)  --- g(x) - distanceFromStart, h(x) - distanceToEnd (not exact)
 		return Double.compare(o1DistanceFromStart + heuristicCoefficient * o1DistanceToEnd, 

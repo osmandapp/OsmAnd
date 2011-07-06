@@ -34,9 +34,9 @@ import net.osmand.osm.MapUtils;
 import net.osmand.osm.Way;
 import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.router.RoutingContext;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
-import net.osmand.router.BinaryRoutePlanner.RoutingContext;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -367,7 +367,7 @@ public class MapRouterLayer implements MapPanelLayer {
 				final DataTileManager<Way> points = new DataTileManager<Way>();
 				points.setZoom(11);
 				map.setPoints(points);
-				ctx.visitor = new RouteSegmentVisitor() {
+				ctx.setVisitor(new RouteSegmentVisitor() {
 					
 					private List<RouteSegment> cache = new ArrayList<RouteSegment>();
 					
@@ -404,7 +404,7 @@ public class MapRouterLayer implements MapPanelLayer {
 							e.printStackTrace();
 						}
 					}
-				};
+				});
 				List<RouteSegmentResult> searchRoute = router.searchRoute(ctx, st, e);
 				if (ANIMATE_CALCULATING_ROUTE) {
 					try {
