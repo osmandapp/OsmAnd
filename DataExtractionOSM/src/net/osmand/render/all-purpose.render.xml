@@ -917,6 +917,7 @@
 			</switch>   
 			</filter>
 		</switch>
+
 		<switch>
 			<case tag="highway" value="service" color="#ececec" color_2="#ececec" shadowColor="#b0b0b0"  />
 			<case tag="highway" value="living_street" color="#ececec" color_2="#ececec" shadowColor="#b0b0b0" />
