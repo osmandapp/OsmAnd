@@ -206,7 +206,7 @@
 	<string name="select_build_to_install">Select one of the OsmAnd builds to install</string>
 	<string name="contribution_activity">Special activity for contribution version</string>
 
-	<string name="gps_status_app_not_found">GPS status application not installed. Search in Market?</string>
+	<string name="gps_status_app_not_found">GPS Status application not installed. Search in Market?</string>
 
 	<string name="voice_is_not_available_msg">Voice guidance is not available. Please go to settings, choose preferred voice data package, and download it.</string>
 	<string name="voice_is_not_available_title">No voice guidance selected</string>
@@ -436,7 +436,7 @@
 	<string name="follow_route">Follow to the route</string>
 	<string name="mark_final_location_first">Please select destination first</string>
 	<string name="get_directions">Directions</string>
-    <string name="show_gps_status">Show GPS status</string>
+    <string name="show_gps_status">Show GPS Status</string>
 	<string name="opening_hours">Opening hours</string>
 	<string name="opening_changeset">Opening changeset...</string>
 	<string name="closing_changeset">Closing changeset...</string>
