@@ -102,7 +102,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		constr.anchor = GridBagConstraints.WEST;
 		l.setConstraints(useInternet, constr);
 		
-		JLabel label = new JLabel("Path to obf file (test routing purpose) : ");
+		JLabel label = new JLabel("Path to obf files (test routing, comma separated) : ");
 		panel.add(label);
 		constr = new GridBagConstraints();
 		constr.ipadx = 5;

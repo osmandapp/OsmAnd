@@ -391,6 +391,7 @@ public class BinaryRoutePlanner {
 		}
 
 		// 3.2 calculate possible ways to put into priority queue
+		// next.getRoad().getId() >> 1
 		while (next != null) {
 			long nts = (next.road.getId() << 8l) + next.segmentStart;
 			if(oppositeSegments.containsKey(nts)){
