@@ -66,9 +66,9 @@
 				
 <LinearLayout  android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:layout_height="wrap_content"
 				android:gravity="right|bottom" >
-<Button android:layout_height="wrap_content" android:id="@+id/NavigateTo" android:text="@string/navigate_to" android:layout_width="wrap_content">
-</Button>
 <Button android:layout_height="wrap_content" android:id="@+id/ShowOnMap" android:text="@string/search_shown_on_map" android:layout_width="wrap_content">
+</Button>
+<Button android:layout_height="wrap_content" android:id="@+id/NavigateTo" android:text="@string/navigate_to" android:layout_width="wrap_content">
 </Button>
 </LinearLayout>
 </LinearLayout> 
