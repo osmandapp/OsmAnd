@@ -162,7 +162,7 @@
 	<string name="follow_route">Seguire il percorso</string>
 	<string name="mark_final_location_first">Selezionare prima un punto</string>
 	<string name="get_directions">Itinerari</string>
-	<string name="gps_status_app_not_found">Applicazione Gps status non trovata</string>
+	<string name="gps_status_app_not_found">Applicazione GPS Status non trovata</string>
     <string name="show_gps_status">Visualizzare lo stato del gps</string>
 	<string name="opening_hours">Orari di apertura</string>
 	<string name="opening_changeset">Apertura...</string>
