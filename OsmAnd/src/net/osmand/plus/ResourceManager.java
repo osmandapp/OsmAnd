@@ -95,6 +95,8 @@ public class ResourceManager {
 	
 	protected final Map<String, String> indexFileNames = new LinkedHashMap<String, String>();
 	
+	protected final Map<String, BinaryMapIndexReader> routingMapFiles = new LinkedHashMap<String, BinaryMapIndexReader>();
+	
 	protected final MapRenderRepositories renderer;
 	
 	public final AsyncLoadingThread asyncLoadingTiles = new AsyncLoadingThread();
@@ -459,6 +461,7 @@ public class ResourceManager {
 							indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$
 							for(String rName : index.getRegionNames()) {
 								// skip duplicate names (don't make collision between getName() and name in the map)
+								// it can be dangerous to use one file to different indexes if it is multithreaded
 								RegionAddressRepositoryBinary rarb = new RegionAddressRepositoryBinary(index, rName);
 								addressMap.put(rName, rarb);
 							}
@@ -472,6 +475,14 @@ public class ResourceManager {
 								}
 							}
 							if(index.containsMapData()){
+								try {
+									RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
+									routingMapFiles.put(f.getAbsolutePath(), new BinaryMapIndexReader(raf, true));
+								} catch (IOException e) {
+									log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
+									warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
+								}
+								
 								// that's not fully acceptable
 								// TODO
 //								try {
@@ -682,10 +693,31 @@ public class ResourceManager {
 		indexFileNames.clear();
 		renderer.clearAllResources();
 		closeAmenities();
+		closeRouteFiles();
 		closeAddresses();
 		closeTransport();
 	}
 	
+	
+	public BinaryMapIndexReader[] getRoutingMapFiles() {
+		return routingMapFiles.values().toArray(new BinaryMapIndexReader[routingMapFiles.size()]);
+	}
+	
+	public void closeRouteFiles() {
+		List<String> map = new ArrayList<String>(routingMapFiles.keySet());
+		for(String m : map){
+			try {
+				BinaryMapIndexReader ind = routingMapFiles.remove(m);
+				if(ind != null){
+					ind.getRaf().close();
+				}
+			} catch(IOException e){
+				log.error("Error closing resource " + m, e);
+			}
+		}
+		
+	}
+
 	public Map<String, String> getIndexFileNames() {
 		return indexFileNames;
 	}
