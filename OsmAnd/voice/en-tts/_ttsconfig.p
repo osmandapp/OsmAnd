@@ -24,7 +24,7 @@ turn(Turn) == M :- turn(Turn, M).
 prepare_make_ut(Dist) == ['Prepare to turn back after ', D] :- 
 		distance(Dist) == D.
 
-prepare_roundabout(Dist) == ['Prepare to enter roundabout after ', D] :- 
+prepare_roundabout(Dist) == ['Prepare to enter a roundabout after ', D] :- 
 		distance(Dist) == D.
 
 make_ut(Dist) == ['After ', D, ' turn back '] :- 
@@ -32,7 +32,7 @@ make_ut(Dist) == ['After ', D, ' turn back '] :-
 make_ut == ['Make U turn '].
 
 roundabout(Dist, _Angle, Exit) == ['After ', D, ' enter the roundabout, and take the ', E, 'exit'] :- distance(Dist) == D, nth(Exit, E).
-roundabout(_Angle, Exit) == ['taking the ', E, 'exit'] :- nth(Exit, E).
+roundabout(_Angle, Exit) == ['take the ', E, 'exit'] :- nth(Exit, E).
 
 and_arrive_destination == ['and arrive at your destination ']. % Miss and?
 then == ['then '].
@@ -67,7 +67,8 @@ nth(17, 'seventeenth ').
 
 %%% distance measure
 distance(Dist) == T :- Dist < 1000, dist(Dist, F), append(F, ' meters',T).
-dist(D, ['10 ']) :-  D < 20, !.
+dist(D, ['10 ']) :-  D < 15, !.
+dist(D, ['15 ']) :-  D < 20, !.
 dist(D, ['20 ']) :-  D < 30, !.
 dist(D, ['30 ']) :-  D < 40, !.
 dist(D, ['40 ']) :-  D < 50, !.
@@ -95,16 +96,16 @@ dist(D, ['850 ']) :-  D < 900, !.
 dist(D, ['900 ']) :-  D < 950, !.
 dist(D, ['950 ']) :-  !.
 
-distance(Dist) == ['more than 1 kilometer '] :- Dist < 1500.
-distance(Dist) == ['more than 2 kilometers '] :- Dist < 3000.
-distance(Dist) == ['more than 3 kilometers '] :- Dist < 4000.
-distance(Dist) == ['more than 4 kilometers '] :- Dist < 5000.
-distance(Dist) == ['more than 5 kilometers '] :- Dist < 6000.
-distance(Dist) == ['more than 6 kilometers '] :- Dist < 7000.
-distance(Dist) == ['more than 7 kilometers '] :- Dist < 8000.
-distance(Dist) == ['more than 8 kilometers '] :- Dist < 9000.
-distance(Dist) == ['more than 9 kilometers '] :- Dist < 10000.
-distance(Dist) == ['more than ', X, ' kilometers '] :- D is Dist/1000, dist(D, X).
+distance(Dist) == ['about 1 kilometer '] :- Dist < 1500.
+distance(Dist) == ['about 2 kilometers '] :- Dist < 2500.
+distance(Dist) == ['about 3 kilometers '] :- Dist < 3500.
+distance(Dist) == ['about 4 kilometers '] :- Dist < 4500.
+distance(Dist) == ['about 5 kilometers '] :- Dist < 5500.
+distance(Dist) == ['about 6 kilometers '] :- Dist < 6500.
+distance(Dist) == ['about 7 kilometers '] :- Dist < 7500.
+distance(Dist) == ['about 8 kilometers '] :- Dist < 8500.
+distance(Dist) == ['about 9 kilometers '] :- Dist < 9500.
+distance(Dist) == ['just over ', X, ' kilometers '] :- D is Dist/1000, dist(D, X).
 
 %% resolve command main method
 %% if you are familar with Prolog you can input specific to the whole mechanism,
