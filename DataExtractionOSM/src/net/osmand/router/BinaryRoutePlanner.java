@@ -40,9 +40,19 @@ public class BinaryRoutePlanner {
 	
 	private static double squareRootDist(int x1, int y1, int x2, int y2) {
 		// translate into meters 
-		double dy = (y1 - y2) * 0.01863d;
-		double dx = (x1 - x2) * 0.011d;
+		double dy = convert31YToMeters(y1, y2);
+		double dx = convert31XToMeters(x1, x2);
 		return Math.sqrt(dx * dx + dy * dy);
+	}
+	
+	private static double convert31YToMeters(int y1, int y2) {
+		// translate into meters 
+		return (y1 - y2) * 0.01863d;
+	}
+	
+	private static double convert31XToMeters(int x1, int x2) {
+		// translate into meters 
+		return (x1 - x2) * 0.011d;
 	}
 	
 
@@ -166,7 +176,7 @@ public class BinaryRoutePlanner {
 		Comparator<RouteSegment> nonHeuristicSegmentsComparator = new Comparator<RouteSegment>(){
 			@Override
 			public int compare(RouteSegment o1, RouteSegment o2) {
-				return roadPriorityComparator(o1.distanceFromStart, o1.distanceToEnd, o2.distanceFromStart, o2.distanceToEnd, 1);
+				return roadPriorityComparator(o1.distanceFromStart, o1.distanceToEnd, o2.distanceFromStart, o2.distanceToEnd, 0.5);
 			}
 		};
 		
@@ -228,9 +238,9 @@ public class BinaryRoutePlanner {
 				break;
 			}
 			if(ctx.planRouteIn2Directions()){
-//				inverse = nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) > 0;
+				inverse = nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) > 0;
 				// make it more simmetrical with dynamic prioritizing it makes big sense
-				inverse = !inverse;
+//				inverse = !inverse;
 			} else {
 				// different strategy : use onedirectional graph
 				inverse = !ctx.getPlanRoadDirection().booleanValue();

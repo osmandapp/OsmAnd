@@ -72,8 +72,9 @@ public class ResourceManager {
 	protected static ResourceManager manager = null;
 	
 	// it is not good investigated but no more than 64 (satellite images)
-	// Only 8 MB (from 16 Mb whole mem) available for images : image 64K * 128 = 8 MB (8 bit), 64 - 16 bit, 32 - 32 bit 
-	protected int maxImgCacheSize = 32;
+	// Only 8 MB (from 16 Mb whole mem) available for images : image 64K * 128 = 8 MB (8 bit), 64 - 16 bit, 32 - 32 bit
+	// at least 3*9?
+	protected int maxImgCacheSize = 28;
 	
 	protected Map<String, Bitmap> cacheOfImages = new LinkedHashMap<String, Bitmap>();
 	protected Map<String, Boolean> imagesOnFS = new LinkedHashMap<String, Boolean>() ;
