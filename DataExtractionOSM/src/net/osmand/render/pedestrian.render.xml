@@ -1,0 +1,26 @@
+<renderer name="car" depends="default" defaultColor="#f1eee8" defaultNightColor="#003333">
+
+	<order>
+        <filter orderType="line">
+            <filter tag="highway" value="pedestrian" order="60" />
+			<filter tag="highway" value="cycleway" order="45" />
+			<filter tag="highway" value="byway" order="62" />
+			<filter tag="highway" value="footway" order="65" />
+			<filter tag="highway" value="steps" order="66" />
+			<filter tag="highway" value="bridleway" order="59" />
+        </filter>
+    </order>
+	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom], textLength, ref -->
+	<polygon>
+	</polygon>
+	<text>
+	</text>
+	<line>
+				
+	</line>
+	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
+	<point>
+					
+	</point>		
+		
+</renderer>
