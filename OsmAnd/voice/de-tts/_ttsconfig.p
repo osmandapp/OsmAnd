@@ -67,7 +67,8 @@ nth(17, 'siebzehnte ').
 
 %%% distance measure
 distance(Dist) == T :- Dist < 1000, dist(Dist, F), append(F, ' meters',T).
-dist(D, ['10 ']) :-  D < 20, !.
+dist(D, ['10 ']) :-  D < 15, !.
+dist(D, ['15 ']) :-  D < 20, !.
 dist(D, ['20 ']) :-  D < 30, !.
 dist(D, ['30 ']) :-  D < 40, !.
 dist(D, ['40 ']) :-  D < 50, !.
