@@ -3,6 +3,7 @@
 
 	<ListPreference android:summary="@string/settings_preset_descr" android:title="@string/settings_preset" android:key="application_mode"></ListPreference>
 
+
 	<PreferenceScreen android:key="map_settings" android:title="@string/rendering_settings" android:summary="@string/rendering_settings_descr">
 		<CheckBoxPreference android:summary="@string/map_vector_data_descr" android:title="@string/map_vector_data"
 			android:key="map_vector_data"></CheckBoxPreference>
@@ -20,13 +21,36 @@
 		<CheckBoxPreference android:summary="@string/continuous_rendering_descr" android:title="@string/continuous_rendering"
 			android:key="use_step_by_step_rendering" />
 		<CheckBoxPreference android:key="use_high_res_maps" android:title="@string/use_high_res_maps" android:summary="@string/use_high_res_maps_descr"></CheckBoxPreference>
-		
-		
-		
+
 		<CheckBoxPreference android:summary="@string/trace_rendering_descr" android:title="@string/trace_rendering"
 			android:key="debug_rendering"></CheckBoxPreference>
-
 	</PreferenceScreen>
+
+
+	<PreferenceScreen android:key="index_settings" android:title="@string/index_settings" android:summary="@string/index_settings_descr">
+		<Preference android:title="@string/reload_indexes" android:key="reload_indexes" android:summary="@string/reload_indexes_descr"></Preference>
+		<Preference android:title="@string/download_indexes" android:key="download_indexes" android:summary="@string/download_indexes_descr"></Preference>
+	</PreferenceScreen>
+
+
+	<PreferenceScreen android:key = "monitor_settings" android:title="@string/monitor_preferences" android:summary="@string/monitor_preferences_descr">
+		<CheckBoxPreference android:summary="@string/save_track_to_gpx_descrp" android:title="@string/save_track_to_gpx"
+			android:key="save_track_to_gpx"></CheckBoxPreference>
+		<ListPreference android:summary="@string/save_track_interval_descr" android:title="@string/save_track_interval"
+			android:key="save_track_interval"></ListPreference>
+		<Preference android:summary="@string/save_current_track_descr" android:title="@string/save_current_track" android:key="save_current_track"></Preference>
+	</PreferenceScreen>
+
+
+	<PreferenceScreen android:title="@string/osmand_service" android:summary="@string/osmand_service_descr">
+		<CheckBoxPreference android:summary="@string/background_router_service_descr" android:title="@string/background_router_service"
+			android:key="service_off_enabled"></CheckBoxPreference>
+		<ListPreference android:key="service_off_provider" android:title="@string/background_service_provider" android:summary="@string/background_service_provider_descr"></ListPreference>
+		<ListPreference android:key="service_off_interval" android:title="@string/background_service_int" android:summary="@string/background_service_int_descr"></ListPreference>
+		<ListPreference android:key="service_off_wait_interval" android:title="@string/background_service_wait_int"
+			android:summary="@string/background_service_wait_int_descr"></ListPreference>
+	</PreferenceScreen>
+	
 
 	<PreferenceScreen android:key="routing_settings" android:title="@string/routing_settings" android:summary="@string/routing_settings_descr">
 		<ListPreference android:title="@string/router_service" android:key="router_service" android:summary="@string/router_service_descr"></ListPreference>
@@ -36,26 +60,9 @@
 		<ListPreference android:key="audio_stream" android:title="@string/choose_audio_stream"
 			android:summary="@string/choose_audio_stream_descr"></ListPreference>
 		<CheckBoxPreference android:summary="@string/use_osmand_routing_service_descr" android:title="@string/use_osmand_routing_service"
-			android:key="use_osmand_routing_service"></CheckBoxPreference>
-		
-	</PreferenceScreen>
-	
-	<PreferenceScreen android:key="index_settings" android:title="@string/index_settings" android:summary="@string/index_settings_descr">
-		<Preference android:title="@string/reload_indexes" android:key="reload_indexes" android:summary="@string/reload_indexes_descr"></Preference>
-		<Preference android:title="@string/download_indexes" android:key="download_indexes" android:summary="@string/download_indexes_descr"></Preference>
+			android:key="use_osmand_routing_service"></CheckBoxPreference>	
 	</PreferenceScreen>
 
-	<PreferenceScreen android:title="@string/osmand_service" android:summary="@string/osmand_service_descr">
-		<CheckBoxPreference android:summary="@string/background_router_service_descr" android:title="@string/background_router_service"
-			android:key="service_off_enabled"></CheckBoxPreference>
-		<ListPreference android:key="service_off_provider" android:title="@string/background_service_provider" android:summary="@string/background_service_provider_descr"></ListPreference>
-		<ListPreference android:key="service_off_interval" android:title="@string/background_service_int" android:summary="@string/background_service_int_descr"></ListPreference>
-		<ListPreference android:key="service_off_wait_interval" android:title="@string/background_service_wait_int"
-			android:summary="@string/background_service_wait_int_descr"></ListPreference>
-			
-			
-	</PreferenceScreen>
-	
 	
 	<PreferenceScreen android:key="general_settings" android:title="@string/general_settings" android:summary="@string/general_settings_descr">
 		<CheckBoxPreference android:key="use_internet_to_download_tiles" android:title="@string/use_internet" android:summary="@string/use_internet_to_download_tile"></CheckBoxPreference>
@@ -67,22 +74,13 @@
 		<ListPreference android:key="map_screen_orientation" android:title="@string/map_screen_orientation" android:summary="@string/map_screen_orientation_descr"></ListPreference>
 		<ListPreference android:title="@string/level_to_switch_vector_raster" android:summary="@string/level_to_switch_vector_raster_descr"
 			android:key="level_to_switch_vector_raster"></ListPreference>
-		<EditTextPreference android:title="@string/application_dir" android:key="external_storage_dir"></EditTextPreference>
 		<ListPreference android:key="default_metric_system" android:title="@string/unit_of_length" android:summary="@string/unit_of_length_descr"></ListPreference>
 		<ListPreference android:key="position_on_map" android:title="@string/position_on_map" android:summary="@string/position_on_map_descr"></ListPreference>
-		<ListPreference android:key="preferred_locale" android:title="@string/preferred_locale" android:summary="@string/preferred_locale_descr"></ListPreference>
 		<CheckBoxPreference android:key="use_trackball_for_movements" android:title="@string/use_trackball" android:summary="@string/use_trackball_descr"></CheckBoxPreference>
-		
+		<ListPreference android:key="preferred_locale" android:title="@string/preferred_locale" android:summary="@string/preferred_locale_descr"></ListPreference>
+		<EditTextPreference android:title="@string/application_dir" android:key="external_storage_dir"></EditTextPreference>
 	</PreferenceScreen>
 	
-
-	<PreferenceScreen android:key = "monitor_settings" android:title="@string/monitor_preferences" android:summary="@string/monitor_preferences_descr">
-		<CheckBoxPreference android:summary="@string/save_track_to_gpx_descrp" android:title="@string/save_track_to_gpx"
-			android:key="save_track_to_gpx"></CheckBoxPreference>
-		<ListPreference android:summary="@string/save_track_interval_descr" android:title="@string/save_track_interval"
-			android:key="save_track_interval"></ListPreference>
-		<Preference android:summary="@string/save_current_track_descr" android:title="@string/save_current_track" android:key="save_current_track"></Preference>
-	</PreferenceScreen>
 
 	<PreferenceScreen android:key = "osm_settings" android:title="@string/osm_settings" android:summary="@string/osm_settings_descr">
 		<!--
