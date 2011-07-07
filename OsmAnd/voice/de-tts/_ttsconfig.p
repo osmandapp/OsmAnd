@@ -21,10 +21,10 @@ turn(Turn, Dist) == ['Nach ', D, M] :-
 turn(Turn) == M :- turn(Turn, M).
 
 
-prepare_make_ut(Dist) == ['Vorbereiten zum Wender nach ', D] :- 
+prepare_make_ut(Dist) == ['Vorbereiten zum Wenden nach ', D] :- 
 		distance(Dist) == D.
 
-prepare_roundabout(Dist) == ['Vorbereiten für Kreisverkehr nach ', D] :- 
+prepare_roundabout(Dist) == ['Einbiegen in Kreisverkehr nach ', D] :- 
 		distance(Dist) == D.
 
 make_ut(Dist) == ['Nach ', D, ' wenden '] :- 
@@ -96,7 +96,7 @@ dist(D, ['850 ']) :-  D < 900, !.
 dist(D, ['900 ']) :-  D < 950, !.
 dist(D, ['950 ']) :-  !.
 
-distance(Dist) == ['zirka 1 Kilometer '] :- Dist < 1500.
+distance(Dist) == ['zirka ein Kilometer '] :- Dist < 1500.
 distance(Dist) == ['zirka 2 Kilometer '] :- Dist < 2500.
 distance(Dist) == ['zirka 3 Kilometer '] :- Dist < 3500.
 distance(Dist) == ['zirka 4 Kilometer '] :- Dist < 4500.
