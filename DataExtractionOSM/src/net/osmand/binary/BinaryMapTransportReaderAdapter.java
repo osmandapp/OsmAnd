@@ -103,7 +103,8 @@ public class BinaryMapTransportReaderAdapter {
 				IndexStringTable st = new IndexStringTable();
 				st.length = codedIS.readRawVarint32();
 				st.fileOffset = codedIS.getTotalBytesRead();
-				readStringTable(st, 0, 20, true);
+				// Do not cache for now save memory
+				//	readStringTable(st, 0, 20, true);
 				ind.stringTable = st;
 				codedIS.seek(st.length + st.fileOffset);
 				break;

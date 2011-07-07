@@ -49,7 +49,7 @@ import org.xml.sax.SAXException;
 public class MapRouterLayer implements MapPanelLayer {
 
 	private /*final */ static boolean ANIMATE_CALCULATING_ROUTE = false;
-	private /*final */ static int SIZE_OF_ROUTES_TO_ANIMATE = 50;
+	private /*final */ static int SIZE_OF_ROUTES_TO_ANIMATE = 250;
 	
 	
 	private MapPanel map;
@@ -340,7 +340,7 @@ public class MapRouterLayer implements MapPanelLayer {
 				BinaryMapIndexReader[] rs = new BinaryMapIndexReader[files.length];
 				for(int i=0; i<files.length; i++){
 					RandomAccessFile raf = new RandomAccessFile(files[i], "r"); //$NON-NLS-1$ //$NON-NLS-2$
-					rs[i] = new BinaryMapIndexReader(raf);
+					rs[i] = new BinaryMapIndexReader(raf, true);
 					
 				}
 				
