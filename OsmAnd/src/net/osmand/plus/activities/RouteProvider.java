@@ -496,9 +496,8 @@ public class RouteProvider {
 	}
 	
 	protected RouteCalculationResult findVectorMapsRoute(Location start, LatLon end, ApplicationMode mode, boolean fast, OsmandApplication app) throws IOException {
-		MapRenderRepositories repositories = app.getResourceManager().getRenderer();
-		Collection<BinaryMapIndexReader> data = repositories.getVectorData();
-		BinaryRoutePlanner router = new BinaryRoutePlanner(data.toArray(new BinaryMapIndexReader[data.size()]));
+		BinaryMapIndexReader[] files = app.getResourceManager().getRoutingMapFiles();
+		BinaryRoutePlanner router = new BinaryRoutePlanner(files);
 		RoutingContext ctx = new RoutingContext();
 		ctx.setUsingShortestWay(!fast);
 		if(mode == ApplicationMode.BICYCLE){

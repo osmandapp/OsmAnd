@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -126,11 +125,6 @@ public class MapRenderRepositories {
 			log.debug("Initializing db " + file.getAbsolutePath() + " " + (System.currentTimeMillis() - start) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		return reader;
-	}
-
-	
-	public Collection<BinaryMapIndexReader> getVectorData(){
-		return files.values();
 	}
 	
 	public RotatedTileBox getBitmapLocation() {
