@@ -106,10 +106,10 @@
 \n\tYou can change profiles in \'Menu\' -> \'Settings\' -> \'Application mode\', or when creating a route.</string>
 
 	<string name="tip_navigation">Navigation</string>
-	<string name="tip_navigation_t">\tBefore starting navigation (routing) you need to select a destination point first. After that press \'Menu\' -> \'Directions\' on map and select navigation type.</string>
+	<string name="tip_navigation_t">\tBefore starting navigation (routing) you need to specify a destination point first. After that press \'Menu\' -> \'Directions\' on map and select navigation type.</string>
 
-	<string name="tip_select_destination_point">Select Destination Point</string>
-	<string name="tip_select_destination_point_t">\tYou can select a destination point directly in the map (context menu, then \'Navigate to\'), or in all search activities.
+	<string name="tip_select_destination_point">Specify Destination Point</string>
+	<string name="tip_select_destination_point_t">\tYou can specify a destination point directly in the map (context menu, then \'Navigate to\'), or in all search activities.
 \n\tYou can also navigate to any favorite point via long pressing it in \'Favorites\'.</string>
 
 	<string name="tip_search">Searching</string>
@@ -434,7 +434,7 @@
 	<string name="follow">Follow</string>
 	<string name="recalculate_route_to_your_location">Recalculating route according to your location</string>
 	<string name="follow_route">Follow to the route</string>
-	<string name="mark_final_location_first">Please select destination first</string>
+	<string name="mark_final_location_first">Please specify destination first</string>
 	<string name="get_directions">Directions</string>
     <string name="show_gps_status">Show GPS Status</string>
 	<string name="opening_hours">Opening hours</string>
