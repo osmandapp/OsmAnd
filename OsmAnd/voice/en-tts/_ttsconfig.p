@@ -21,7 +21,7 @@ turn(Turn, Dist) == ['After ', D, M] :-
 turn(Turn) == M :- turn(Turn, M).
 
 
-prepare_make_ut(Dist) == ['Prepare after ', D, ' to turn back'] :- 
+prepare_make_ut(Dist) == ['Prepare to turn back after ', D] :- 
 		distance(Dist) == D.
 
 prepare_roundabout(Dist) == ['Prepare to enter roundabout after ', D] :- 
