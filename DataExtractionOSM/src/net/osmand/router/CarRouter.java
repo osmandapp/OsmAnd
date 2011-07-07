@@ -32,13 +32,13 @@ public class CarRouter extends VehicleRouter {
 		autoNotDefinedValues.put("living_street", 20d);
 
 		autoPriorityValues.put("motorway", 1.5);
-		autoPriorityValues.put("motorway_link", 1.0);
+		autoPriorityValues.put("motorway_link", 0.9);
 		autoPriorityValues.put("trunk", 1.5);
-		autoPriorityValues.put("trunk_link", 1d);
+		autoPriorityValues.put("trunk_link", 0.9);
 		autoPriorityValues.put("primary", 1.3d);
-		autoPriorityValues.put("primary_link", 1d);
-		autoPriorityValues.put("secondary", 1.0d);
-		autoPriorityValues.put("secondary_link", 1.0d);
+		autoPriorityValues.put("primary_link", 0.9d);
+		autoPriorityValues.put("secondary", 1.1d);
+		autoPriorityValues.put("secondary_link", 0.9d);
 		autoPriorityValues.put("tertiary", 0.85d);
 		autoPriorityValues.put("tertiary_link", 0.85d);
 		autoPriorityValues.put("residential", 0.7d);
@@ -121,6 +121,13 @@ public class CarRouter extends VehicleRouter {
 		TagValuePair pair = road.getTagValue(0);
 		boolean highway = "highway".equals(pair.tag);
 		double priority = highway && autoPriorityValues.containsKey(pair.value) ? autoPriorityValues.get(pair.value) : 0.5d;
+		// keep it in boundaries otherwise 
+		//  (it will use first founded exist for trunk even if it in another city and make Uturn there) 
+		if(priority > 1.4){
+			return 1.4d;
+		} else if(priority < 0.5d) {
+			return 0.5d;
+		}
 		return priority;
 	};
 
