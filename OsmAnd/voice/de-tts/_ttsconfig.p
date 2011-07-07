@@ -50,17 +50,17 @@ nth(1, 'erste ').
 nth(2, 'zweite ').
 nth(3, 'dritte ').
 nth(4, 'vierte ').
-nth(5, 'f�nfte ').
+nth(5, 'fünfte ').
 nth(6, 'sechste ').
 nth(7, 'siebte ').
 nth(8, 'achte ').
 nth(9, 'neunte ').
 nth(10, 'zehnte ').
 nth(11, 'elfte ').
-nth(12, 'zwlfte ').
+nth(12, 'zwölfte ').
 nth(13, 'dreizehnte ').
 nth(14, 'vierzehnte ').
-nth(15, 'f�nfzehnte ').
+nth(15, 'fünfzehnte ').
 nth(16, 'sechzehnte ').
 nth(17, 'siebzehnte ').
 
