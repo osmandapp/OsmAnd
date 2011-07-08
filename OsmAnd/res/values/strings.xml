@@ -2,12 +2,12 @@
 <resources>
 	<string name="tip_recent_changes">Recent changes</string>
 	<string name="tip_recent_changes_0_6_6_t">Recent changes for 0.6.6 : 
-- Text To Speech engine for voice navigation
-- Make map renderer more detailed
-- Basemap for whole world packaged with app
-- Tweak offline routing (still experimental)
-- GPX routing options
-- UI update and large bug fixing
+\n\t- Text To Speech engine for voice navigation
+\n\t- Make map renderer more detailed
+\n\t- Basemap for whole world packaged with app
+\n\t- Tweak offline routing (still experimental)
+\n\t- GPX routing options
+\n\t- UI update and large bug fixing
 	</string>
 	<string name="voice_not_use">Do not use</string>
 	<string name="voice_not_specified">None</string>
