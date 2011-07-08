@@ -89,6 +89,8 @@ public class EditingPOIActivity {
 	private static final String DELETE_ACTION = "delete";  //$NON-NLS-1$
 	private static final String MODIFY_ACTION = "modify"; //$NON-NLS-1$
 	private static final String CREATE_ACTION = "create";  //$NON-NLS-1$
+
+	private static final long NO_CHANGESET_ID = -1;
 	
 	private Dialog dlg;
 	private final Context ctx;
@@ -101,6 +103,10 @@ public class EditingPOIActivity {
 	private EditText openingHours;
 	private EntityInfo entityInfo;
 	private EditText commentText;
+
+	// reuse changeset
+	private long changeSetId = NO_CHANGESET_ID;
+	private long changeSetTimeStamp = NO_CHANGESET_ID;
 
 	private final static Log log = LogUtil.getLog(EditingPOIActivity.class);
 
@@ -539,7 +545,7 @@ public class EditingPOIActivity {
 		return null;
 	}
 	
-	public long openChangeSet(String comment,double lat, double lon) {
+	public long openChangeSet(String comment) {
 		long id = -1;
 		StringWriter writer = new StringWriter(256);
 		XmlSerializer ser = Xml.newSerializer();
@@ -650,9 +656,27 @@ public class EditingPOIActivity {
 			}
 		}, "EditingPoi").start(); //$NON-NLS-1$
 	}
+
+	private boolean isNewChangesetRequired() {
+		// first commit
+		if (changeSetId == NO_CHANGESET_ID){
+			return true;
+		}
+
+		long now = System.currentTimeMillis();
+		// changeset is idle for more than 30 minutes (1 hour according specification)
+		if (now - changeSetTimeStamp > 30 * 60 * 1000) {
+			return true;
+		}
+
+		return false;
+	}
 	
 	public boolean commitNodeImpl(String action, Node n, EntityInfo info, String comment){
-		long changeSetId = openChangeSet(comment, n.getLatitude(), n.getLongitude());
+		if (isNewChangesetRequired()){
+			changeSetId = openChangeSet(comment);
+			changeSetTimeStamp = System.currentTimeMillis();
+		}
 		if(changeSetId < 0){
 			return false;
 		}
@@ -696,11 +720,13 @@ public class EditingPOIActivity {
 					}
 				}
 				updateNodeInIndexes(action, n);
+				changeSetTimeStamp = System.currentTimeMillis();
 				return true;
 			}
 			return false;
 		} finally {
-			closeChangeSet(changeSetId);
+			// reuse changeset, do not close
+			//closeChangeSet(changeSetId);
 		}
 	}
 	
