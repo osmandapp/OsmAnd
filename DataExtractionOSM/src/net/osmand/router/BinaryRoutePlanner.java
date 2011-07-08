@@ -3,12 +3,9 @@ package net.osmand.router;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -55,6 +52,7 @@ public class BinaryRoutePlanner {
 		// translate into meters 
 		return (x1 - x2) * 0.011d;
 	}
+	
 	
 
    
@@ -116,7 +114,19 @@ public class BinaryRoutePlanner {
 		}
 	}
 	
-
+	// calculate distance from C to AB (distnace doesn't calculate 
+    private static double calculateDistance(int xA, int yA, int xB, int yB, int xC, int yC, double distAB){
+    	// Scalar multiplication between (AB', AC)
+    	double multiple = (-convert31YToMeters(yB, yA)) * convert31XToMeters(xC,xA) + convert31XToMeters(xB,xA) * convert31YToMeters(yC, yA);
+    	return multiple / distAB;
+    }
+    
+	private static double calculateProjection(int xA, int yA, int xB, int yB, int xC, int yC, double distAB) {
+		// Scalar multiplication between (AB, AC)
+		double multiple = convert31XToMeters(xB, xA) * convert31XToMeters(xC, xA) + convert31XToMeters(yB, yA) * convert31YToMeters(yC, yA);
+		return multiple / distAB;
+	}
+	
 	
 	public RouteSegment findRouteSegment(double lat, double lon, RoutingContext ctx) throws IOException {
 		double tileX = MapUtils.getTileNumberX(ctx.getZoomToLoadTileWithRoads(), lon);
@@ -129,18 +139,28 @@ public class BinaryRoutePlanner {
 		int py = MapUtils.get31TileNumberY(lat);
 		for(BinaryMapDataObject r : ctx.values()){
 			if(r.getPointsLength() > 1){
-				double prevDist = squareRootDist(r.getPoint31XTile(0), r.getPoint31YTile(0), px, py);
+				double priority = ctx.getRouter().getRoadPriorityToCalculateRoute(r);
 				for (int j = 1; j < r.getPointsLength(); j++) {
-					double cDist = squareRootDist(r.getPoint31XTile(j), r.getPoint31YTile(j), px, py);
 					double mDist = squareRootDist(r.getPoint31XTile(j), r.getPoint31YTile(j), r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1));
-					if (road == null || prevDist + cDist - mDist < dist) {
+					double projection = calculateProjection(r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1), r.getPoint31XTile(j), r.getPoint31YTile(j),
+							px, py, mDist);
+					double currentDist;
+					if(projection < 0){
+						currentDist = squareRootDist(r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1), px, py) / priority;
+					} else if(projection > mDist){
+						currentDist = squareRootDist(r.getPoint31XTile(j), r.getPoint31YTile(j), px, py) / priority;
+					} else {
+						currentDist = Math.abs(calculateDistance(r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1), r.getPoint31XTile(j), r.getPoint31YTile(j),
+								px, py, mDist)) / priority;
+					}
+					
+					if (road == null || currentDist < dist) {
 						road = new RouteSegment();
 						road.road = r;
 						road.segmentStart = j - 1;
 						road.segmentEnd = j;
-						dist = prevDist + cDist - mDist;
+						dist = currentDist;
 					}
-					prevDist = cDist;
 				}
 			}
 		}
@@ -502,9 +522,6 @@ public class BinaryRoutePlanner {
 	private List<RouteSegmentResult> prepareResult(RoutingContext ctx, RouteSegment start, RouteSegment end, long startNanoTime,
 			RouteSegment finalDirectRoute, RouteSegment finalReverseRoute) {
 		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
-				
-		
-		
 		
 		RouteSegment segment = finalReverseRoute;
 		int parentSegmentStart = segment == null ? 0 : segment.segmentEnd; 
