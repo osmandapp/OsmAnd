@@ -39,6 +39,7 @@ public class MainMenuActivity extends Activity {
 
 	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
 	private static final String TIPS_SHOW = "TIPS_SHOW"; //$NON-NLS-1$
+	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = ResourceManager.APP_DIR + "exception.log"; //$NON-NLS-1$
 	
 	private static final String CONTRIBUTION_VERSION_FLAG = "CONTRIBUTION_VERSION_FLAG";
@@ -153,7 +154,7 @@ public class MainMenuActivity extends Activity {
 			@Override
 			public void onClick(View widget) {
 				TipsAndTricksActivity tactivity = new TipsAndTricksActivity(activity);
-				Dialog dlg = tactivity.getDialogToShowTips(false);
+				Dialog dlg = tactivity.getDialogToShowTips(false, true);
 				dlg.show();
 			}
 		}, appLink.length() - 1, appLink.length(), 0);
@@ -240,6 +241,7 @@ public class MainMenuActivity extends Activity {
 		if(!pref.contains(FIRST_TIME_APP_RUN)){
 			firstTime = true;
 			pref.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
+			pref.edit().putString(VERSION_INSTALLED, Version.APP_VERSION).commit();
 			
 			boolean netOsmandWasInstalled = false;
 			try {
@@ -272,11 +274,17 @@ public class MainMenuActivity extends Activity {
 			int i = pref.getInt(TIPS_SHOW, 0);
 			if (i < 7){
 				pref.edit().putInt(TIPS_SHOW, ++i).commit();
-				if(i == 1 || i == 5){
-					TipsAndTricksActivity tipsActivity = new TipsAndTricksActivity(this);
-					Dialog dlg = tipsActivity.getDialogToShowTips(true);
-					dlg.show();
-				}
+			}
+			boolean appVersionChanged = false;
+			if(!Version.APP_VERSION.equals(pref.getString(VERSION_INSTALLED, ""))){
+				pref.edit().putString(VERSION_INSTALLED, Version.APP_VERSION).commit();
+				appVersionChanged = true;
+			}
+						
+			if (i == 1 || i == 5 || appVersionChanged) {
+				TipsAndTricksActivity tipsActivity = new TipsAndTricksActivity(this);
+				Dialog dlg = tipsActivity.getDialogToShowTips(!appVersionChanged, false);
+				dlg.show();
 			}
 		}
 		checkPreviousRunsForExceptions(firstTime);

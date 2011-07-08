@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="tip_recent_changes">Последние изменения</string>
+	<string name="tip_recent_changes_0_6_6_t">Изменения в 0.6.6 : 
+- Text To Speech может быть использован для голосовой навигации
+- Более детализированный рендеринг карты
+- Базовая карта для всего мира в приложении
+- Улучшение offline роутинга (все еще экспериментально)
+- Дополнительные опции при роутинге по GPX
+- Обновление графики и исправление ошибок
+- Yandex трафик слой теперь можно использовать как обычный слой покрытия (необходимо установить - Больше...) 
+	</string>
+	<string name="voice_not_use">Не использовать</string>
+	<string name="voice_not_specified">Нету</string>
+	<string name="installing_new_resources">Распаковываются новые данные...</string>
+	<string name="internet_connection_required_for_online_route">Вы собираетесь использовать интернет роутинг, но у вас нет активного интернет соединения. Вы можете попытаться использовать (экспериментальный) OsmAnd offline роутинг ( \'Настройки\' -> \'Навигация\') на короткие расстояния.</string>
+	<string name="tts_language_not_supported_title">Язык не поддерживается</string>
+	<string name="tts_language_not_supported">Выбранный язык не поддерживается Android TTS (text-to-speech). Хотите найти в маркте другой TTS? Иначе язык TTS по умолчанию будет использован.</string>
+	<string name="tts_missing_language_data_title">Данные отсутсвуют</string>
+	<string name="tts_missing_language_data">Для данного языка отсутсвуют TTS данные. Вы хотите загрузить их из Маркета?</string>
 
+	<string name="gpx_option_reverse_route">Выбрать обратное направление пути</string>
+	<string name="gpx_option_destination_point">Использовать текущую точку назначения</string>
+	<string name="gpx_option_from_start_point">Пройти весь путь от начала</string>
+
+	<string name="switch_to_raster_map_to_see">Для текущей позиции векторные данные не загружены, вы можете переключиться к растровым через меню (Слои -> Источник карты...) или загрузить необходимые данные.</string>
+	<string name="switch_to_vector_map_to_see">Вы можете переключиться к offline  векторным картам через меню (Слои -> Источник карты... -> Векторные карты), чтобы увидеть карту.</string>
+	<string name="binary_map_download_success">Загрузка успешна. Вы можете переключиться к offline векторным картам через меню Слои -> Источник карты... -> Векторные карты.</string>
 	<string name="choose_audio_stream">Голосовые инструкции</string>
 	<string name="choose_audio_stream_descr">Выберите канал для голосовых инструкций (зависит от системы)</string>
 	<string name="voice_stream_voice_call">Поток голосовых звонков</string>
@@ -268,7 +293,6 @@
 	<string name="search_poi_filter">Фильтр</string>
 	<string name="menu_mute_off">Без звука</string>
 	<string name="menu_mute_on">Звук</string>
-	<string name="voice_not_use">Не использовать</string>
 	<string name="voice_provider_descr">Выберите голос для маршрутизации</string>
 	<string name="voice_provider">Голосовые данные</string>
 	<string name="voice_data_initializing">Инициализируются голосовые данные...</string>

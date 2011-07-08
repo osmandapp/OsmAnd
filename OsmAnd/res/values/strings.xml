@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="tip_recent_changes">Recent changes</string>
+	<string name="tip_recent_changes_0_6_6_t">Recent changes for 0.6.6 : 
+- Text To Speech engine for voice navigation
+- Make map renderer more detailed
+- Basemap for whole world packaged with app
+- Tweak offline routing (still experimental)
+- GPX routing options
+- UI update and large bug fixing
+	</string>
 	<string name="voice_not_use">Do not use</string>
 	<string name="voice_not_specified">None</string>
 	<string name="installing_new_resources">Unpacking new data...</string>
