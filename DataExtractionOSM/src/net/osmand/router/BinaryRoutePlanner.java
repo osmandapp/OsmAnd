@@ -6,6 +6,7 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -293,8 +294,9 @@ public class BinaryRoutePlanner {
 
 		// 0. mark route segment as visited
 		long nt = (road.getId() << 8l) + middle;
-		visitedSegments.put(nt, segment);
-		if (oppositeSegments.contains(nt)) {
+		// avoid empty segments to connect but mark the point as visited
+		visitedSegments.put(nt, null);
+		if (oppositeSegments.contains(nt) && oppositeSegments.get(nt) != null) {
 			segment.segmentEnd = middle;
 			RouteSegment opposite = oppositeSegments.get(nt);
 			opposite.segmentEnd = middle;
@@ -335,7 +337,7 @@ public class BinaryRoutePlanner {
 
 			// if we found end point break cycle
 			long nts = (road.getId() << 8l) + segmentEnd;
-			if (oppositeSegments.contains(nts)) {
+			if (oppositeSegments.contains(nts) && oppositeSegments.get(nt) != null) {
 				segment.segmentEnd = segmentEnd;
 				RouteSegment opposite = oppositeSegments.get(nts);
 				opposite.segmentEnd = segmentEnd;
@@ -356,7 +358,7 @@ public class BinaryRoutePlanner {
 				double distToFinalPoint = squareRootDist(x, y, targetEndX, targetEndY);
 				RouteSegment foundIntersection = processIntersectionsWithWays(ctx, graphSegments, visitedSegments, oppositeSegments,
 						distOnRoadToPass, distToFinalPoint, segment, road,
-						d == 0, segmentEnd, next);
+						d == 0, segmentEnd, next, reverseWaySearch);
 				if(foundIntersection != null){
 					segment.segmentEnd = segmentEnd;
 					return new RoutePair(segment, foundIntersection);
@@ -371,7 +373,8 @@ public class BinaryRoutePlanner {
 	private RouteSegment processIntersectionsWithWays(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments,
 			TLongObjectHashMap<RouteSegment> visitedSegments, TLongObjectHashMap<RouteSegment> oppositeSegments,  
 			double distOnRoadToPass, double distToFinalPoint, 
-			RouteSegment segment, BinaryMapDataObject road, boolean firstOfSegment, int segmentEnd, RouteSegment next) {
+			RouteSegment segment, BinaryMapDataObject road, boolean firstOfSegment, int segmentEnd, RouteSegment next,
+			boolean reverseWay) {
 
 		// This variables can be in routing context
 		// initialize temporary lists to calculate not forbidden ways at way intersections
@@ -391,14 +394,11 @@ public class BinaryRoutePlanner {
 		}
 
 		// 3.2 calculate possible ways to put into priority queue
-		// next.getRoad().getId() >> 1
+		// for debug next.road.getId() >> 1 == 33911427 && road.getId() >> 1 == 33911442
 		while (next != null) {
 			long nts = (next.road.getId() << 8l) + next.segmentStart;
-			if(oppositeSegments.containsKey(nts)){
-				RouteSegment oppSegment = oppositeSegments.get(nts);
-				oppSegment.segmentEnd = next.segmentStart;
-				return oppSegment;
-			}
+			boolean oppositeConnectionFound = oppositeSegments.containsKey(nts) && oppositeSegments.get(nts) != null;
+			
 			boolean processRoad = true;
 			if (ctx.isUseStrategyOfIncreasingRoadPriorities()) {
 				double roadPriority = ctx.getRouter().getRoadPriorityHeuristicToIncrease(segment.road);
@@ -408,14 +408,23 @@ public class BinaryRoutePlanner {
 				}
 			} 
 			
-			/* next.road.getId() >> 3 (1) != road.getId() >> 3 (1) - used that line for debug with osm map */
+			/* next.road.getId() >> 3 (1) != road.getId() >> 1 (3) - used that line for debug with osm map */
 			// road.id could be equal on roundabout, but we should accept them
-			if (!visitedSegments.contains(nts) && processRoad) {
+			if ((!visitedSegments.contains(nts) && processRoad) || oppositeConnectionFound) {
 				int type = -1;
-				for (int i = 0; i < road.getRestrictionCount(); i++) {
-					if (road.getRestriction(i) == next.road.getId()) {
-						type = road.getRestrictionType(i);
-						break;
+				if (!reverseWay) {
+					for (int i = 0; i < road.getRestrictionCount(); i++) {
+						if (road.getRestriction(i) == next.road.getId()) {
+							type = road.getRestrictionType(i);
+							break;
+						}
+					}
+				} else {
+					for (int i = 0; i < next.road.getRestrictionCount(); i++) {
+						if (next.road.getRestriction(i) == road.getId()) {
+							type = next.road.getRestrictionType(i);
+							break;
+						}
 					}
 				}
 				if (type == -1 && exclusiveRestriction) {
@@ -424,6 +433,13 @@ public class BinaryRoutePlanner {
 						|| type == MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON || type == MapRenderingTypes.RESTRICTION_NO_U_TURN) {
 					// next = next.next; continue;
 				} else {
+					// no restriction can go out
+					if(oppositeConnectionFound){
+						RouteSegment oppSegment = oppositeSegments.get(nts);
+						oppSegment.segmentEnd = next.segmentStart;
+						return oppSegment;
+					}
+					
 					double distanceToEnd = distToFinalPoint / ctx.getRouter().getMaxDefaultSpeed();
 					if(ctx.isUseDynamicRoadPrioritising()){
 						double priority = ctx.getRouter().getRoadPriorityToCalculateRoute(next.road);
@@ -443,6 +459,7 @@ public class BinaryRoutePlanner {
 					// add obstacles time
 					distanceFromStart += obstaclesTime;
 
+					
 					if (next.parentRoute == null
 							|| ctx.roadPriorityComparator(next.distanceFromStart, next.distanceToEnd, distanceFromStart, distanceToEnd) > 0) {
 						next.distanceFromStart = distanceFromStart;
@@ -487,13 +504,6 @@ public class BinaryRoutePlanner {
 		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
 				
 		
-		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
-			System.out.println("ROUTE : ");
-			System.out.println("Start lat=" + MapUtils.get31LatitudeY(start.road.getPoint31YTile(start.segmentEnd)) + " lon="
-					+ MapUtils.get31LongitudeX(start.road.getPoint31XTile(start.segmentEnd)));
-			System.out.println("END lat=" + MapUtils.get31LatitudeY(end.road.getPoint31YTile(end.segmentStart)) + " lon="
-					+ MapUtils.get31LongitudeX(end.road.getPoint31XTile(end.segmentStart)));
-		}
 		
 		
 		RouteSegment segment = finalReverseRoute;
@@ -546,11 +556,20 @@ public class BinaryRoutePlanner {
 		
 		
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
+			System.out.println("ROUTE : ");
+			double startLat = MapUtils.get31LatitudeY(start.road.getPoint31YTile(start.segmentEnd));
+			double startLon = MapUtils.get31LongitudeX(start.road.getPoint31XTile(start.segmentEnd));
+			double endLat = MapUtils.get31LatitudeY(end.road.getPoint31YTile(end.segmentStart));
+			double endLon = MapUtils.get31LongitudeX(end.road.getPoint31XTile(end.segmentEnd));
+			System.out.println(MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"\" \n" +
+					"    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\">", 
+					startLat+"", startLon+"", endLat+"", endLon+""));
 			for (RouteSegmentResult res : result) {
 				// (res.object.getId() >> 1)
-				System.out.println("id=" + (res.object.getId() >> 3) + " start=" + res.startPointIndex + " end=" + res.endPointIndex);
-				System.out.println("Name :" + res.object.getName());
+				System.out.println(MessageFormat.format("\t<segment id=\"{0}\" start=\"{1}\" end=\"{2}\" name=\"{3}\"/>", 
+						(res.object.getId() >> 1)+"", res.startPointIndex, res.endPointIndex, (res.object.getName()+"").replace(MapRenderingTypes.REF_CHAR, ' ')));
 			}
+			System.out.println("</test>");
 		}
 		
 		ctx.timeToCalculate = (System.nanoTime() - startNanoTime);
@@ -564,78 +583,6 @@ public class BinaryRoutePlanner {
 	}
 	
 	
-	
-	public static void main(String[] args) throws IOException {
-		RandomAccessFile raf = new RandomAccessFile(new File("d:\\android\\data\\Belarus.obf"), "r"); //$NON-NLS-1$ //$NON-NLS-2$
-		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
-		BinaryRoutePlanner router = new BinaryRoutePlanner(reader);
-		
-		//double lon = 27.5967;
-		//double lat = 53.9204;
-		// akad
-//		double lon = 27.5993;
-//		double lat = 53.9186;
-		double lon = 27.6024;
-		double lat = 53.9141;
-		
-		double elon = 27.6018;
-		double elat = 53.9223;
-		
-		RoutingContext ctx = new RoutingContext();
-		
-		long ms = System.currentTimeMillis();
-		// find closest way
-		RouteSegment start = router.findRouteSegment(lat, lon, ctx);
-		if (start != null) {
-			BinaryMapDataObject road = start.road;
-			TagValuePair pair = road.getMapIndex().decodeType(road.getTypes()[0]);
-			System.out.println("ROAD TO START " + pair.tag + " " + pair.value + " " + road.getName() + " " + start.segmentStart + " "
-					+ (road.getId() >> 1));
-		}
-		
-		RouteSegment end = router.findRouteSegment(elat, elon, ctx);
-		if (end != null) {
-			BinaryMapDataObject road = end.road;
-			TagValuePair pair = road.getMapIndex().decodeType(road.getTypes()[0]);
-			System.out.println("ROAD TO END " + pair.tag + " " + pair.value + " " + road.getName() + " " + end.segmentStart + " "
-					+ (road.getId() >> 1));
-		}
-		
-		
-
-//		double tileX = Math.round(MapUtils.getTileNumberX(ZOOM_LOAD_TILES, lon));
-//		double tileY = Math.round(MapUtils.getTileNumberY(ZOOM_LOAD_TILES, lat));
-		// preload neighboors
-//		router.loadRoutes(ctx, (int) tileX, (int) tileY);
-//		router.loadRoutes(ctx, (int) tileX - 1, (int) tileY);
-//		router.loadRoutes(ctx, (int) tileX, (int) tileY - 1);
-//		router.loadRoutes(ctx, (int) tileX - 1, (int) tileY - 1);
-		  
-		
-		
-		for(RouteSegmentResult s : router.searchRoute(ctx, start, end)){
-			double dist = MapUtils.getDistance(s.startPoint, s.endPoint);
-			System.out.println("Street " + s.object.getName() + " distance " + dist);
-		}
-		
-		Collection<BinaryMapDataObject> res = ctx.values();
-		System.out.println(res.size() + " objects for " + (System.currentTimeMillis() - ms) + " ms");
-		
-		LatLon ls = new LatLon(0, 5);
-		LatLon le = new LatLon(1, 5);
-		System.out.println("X equator " + MapUtils.getDistance(ls, le) / (MapUtils.get31TileNumberX(ls.getLongitude()) - MapUtils.get31TileNumberX(le.getLongitude())));
-		System.out.println("Y equator " + MapUtils.getDistance(ls, le) / (MapUtils.get31TileNumberY(ls.getLatitude()) - MapUtils.get31TileNumberY(le.getLatitude())));
-		
-//		for(BinaryMapDataObject r : res){
-//			TagValuePair pair = r.mapIndex.decodeType(r.getTypes()[0]);
-//			if(r.name != null){
-//				System.out.println(pair.tag + " " + pair.value + " " + r.name );
-//			} else {
-//				System.out.println(pair.tag + " " + pair.value + " " + (r.id >>13));
-//			}
-//		}
-	}
-
 	public interface RouteSegmentVisitor {
 		
 		public void visitSegment(RouteSegment segment);

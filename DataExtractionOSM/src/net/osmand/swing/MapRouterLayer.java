@@ -49,12 +49,15 @@ import org.xml.sax.SAXException;
 public class MapRouterLayer implements MapPanelLayer {
 
 	private /*final */ static boolean ANIMATE_CALCULATING_ROUTE = false;
-	private /*final */ static int SIZE_OF_ROUTES_TO_ANIMATE = 250;
+	private /*final */ static int SIZE_OF_ROUTES_TO_ANIMATE = 1;
 	
 	
 	private MapPanel map;
-	private LatLon startRoute;
-	private LatLon endRoute;
+//	private LatLon startRoute;
+//	private LatLon endRoute;
+	// test route purpose
+	private LatLon startRoute = new LatLon(53.910886,27.579095);
+	private LatLon endRoute = new LatLon(53.95386,27.68131);
 	
 	
 	@Override
