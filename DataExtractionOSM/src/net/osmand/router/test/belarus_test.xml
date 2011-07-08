@@ -46,7 +46,7 @@
 		<segment id="30821143" start="0" end="4" name="null" />
 		<segment id="30821192" start="0" end="1" name="просп. Пушкина" />
 	</test>
-	<test regions="belarus" description="Straight forward way" best_percent="95" vehicle="car" start_lat="53.9202" start_lon="27.5878"
+	<test regions="belarus" description="Straight forward way" best_percent="95" vehicle="car" start_lat="53.9202" start_lon="27.5877"
 		target_lat="53.938582493008525" target_lon="27.605509757995605">
 		<segment id="38571368" start="2" end="6" name="ул. Якуба Коласа" />
 		<segment id="38571365" start="0" end="4" name="ул. Якуба Коласа" />
@@ -64,9 +64,8 @@
 	</test>
 
 	<test regions="belarus" description="Well known route" best_percent="60" vehicle="car" 
-		start_lat="53.910886" start_lon="27.579095" target_lat="53.95386"
+		start_lat="53.9113" start_lon="27.5795" target_lat="53.95386"
 		target_lon="27.68131">
-		<segment id="40885459" start="3" end="2" name="null" />
 		<segment id="40885456" start="1" end="5" name="null" />
 		<segment id="40885455" start="0" end="4" name="null" />
 		<segment id="37975292" start="2" end="4" name="Краснозвездная ул." />

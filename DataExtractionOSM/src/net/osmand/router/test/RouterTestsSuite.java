@@ -33,38 +33,6 @@ public class RouterTestsSuite {
 //	id=32032589 start=8 end=9
 //	id=32032656 start=0 end=18
 //	id=32031919 start=1 end=0
-	
-	// MINSK (good known way). The best at 70%
-//	Start lat=53.91088592425074 lon=27.579095363616943
-//	END lat=53.953863330122196 lon=27.68131971359253
-//	id=46724311 start=6 end=2
-//	id=60889993 start=0 end=9
-//	id=25225646 start=0 end=18
-//	id=25225916 start=0 end=22
-//	id=30854239 start=16 end=0
-//	id=30854243 start=1 end=0
-//	id=30854252 start=0 end=8
-//	id=30854254 start=0 end=1
-//	id=33912019 start=0 end=2
-//	id=33912004 start=0 end=5
-//	id=33911980 start=0 end=9
-//	id=33911977 start=0 end=1
-//	id=33911967 start=0 end=3
-//	id=31499010 start=0 end=8
-//	id=35566247 start=0 end=5
-//	id=35566202 start=0 end=2
-//	id=37700614 start=0 end=1
-//	id=33911493 start=0 end=1
-//	id=31279905 start=0 end=3
-//	id=33911472 start=0 end=2
-//	id=33911443 start=1 end=7
-//	id=31691782 start=1 end=0
-//	id=40885457 start=1 end=0
-//	id=40885456 start=1 end=0
-//	id=40885459 start=3 end=2
-	
-	
-	
 	public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
 		Properties properties = new Properties();
 		properties.load(RouterTestsSuite.class.getResourceAsStream("sources.properties"));
