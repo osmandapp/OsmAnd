@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 public class TipsAndTricksActivity {
 	private int[][] tipNamesAndDescriptions = new int[][] {
+			{R.string.tip_recent_changes,R.string.tip_recent_changes_0_6_6_t},
 			{R.string.tip_rotation_switching,R.string.tip_rotation_switching_t},
 			{R.string.tip_update_index,R.string.tip_update_index_t},
 			{R.string.tip_day_night_mode,R.string.tip_day_night_mode_t},
@@ -99,7 +100,7 @@ public class TipsAndTricksActivity {
 		return ctx.getString(tipNamesAndDescriptions[ind][1]);
 	}
 	
-	public Dialog getDialogToShowTips(boolean showFirst){
+	public Dialog getDialogToShowTips(boolean showFirst, boolean random){
 		
 		final Dialog dlg = new Dialog(ctx);
 		dlg.setContentView(R.layout.tips_and_tricks);
@@ -112,6 +113,12 @@ public class TipsAndTricksActivity {
 			dlg.setTitle(R.string.tip_initial);
 			tipDescription.setText(R.string.tip_initial_t);
 			historyInd[0] = -1;
+		} else if(!random){
+			nextInd = 0;
+			dlg.setTitle(getTipName(nextInd));
+			tipDescription.setText(getTipDescription(nextInd));
+			toShow.add(nextInd);
+			historyInd[0] = 0;
 		} else {
 			nextInd = getNextRandomTipToShow();
 			dlg.setTitle(getTipName(nextInd));
