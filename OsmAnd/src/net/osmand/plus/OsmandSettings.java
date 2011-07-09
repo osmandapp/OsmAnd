@@ -2,7 +2,9 @@ package net.osmand.plus;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -69,6 +71,7 @@ public class OsmandSettings {
 	private long lastTimeInternetConnectionChecked = 0;
 	private boolean internetConnectionAvailable = true;
 	private List<TileSourceTemplate> internetAvailableSourceTemplates = null;
+	private List<TileSourceTemplate> localAvailableSourceTemplates = null;
 	
 	// TODO make all layers profile preferenced????
 	private OsmandSettings(OsmandApplication ctx){
@@ -546,11 +549,31 @@ public class OsmandSettings {
 	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference("map_tile_sources",
 			TileSourceManager.getMapnikSource().getName(), true);
 	
-	public List<TileSourceTemplate> getInternetAvailableSourceTemplates(){
+	public List<TileSourceTemplate> getAvailableSourceTemplates() {
+		List<TileSourceTemplate> availableSourceTemplates = getInternetAvailableSourceTemplates();
+		availableSourceTemplates.addAll(getLocalAvailableSourceTemplates());
+		return availableSourceTemplates;
+	}
+	
+	public List<TileSourceTemplate> getLocalAvailableSourceTemplates() {
+		File tPath = extendOsmandPath(ResourceManager.TILES_PATH);
+		if (localAvailableSourceTemplates == null) {
+			localAvailableSourceTemplates = TileSourceManager.getLocalTileSourceTemplates(tPath);
+		}
+		if (localAvailableSourceTemplates != null) {
+			return new ArrayList<TileSourceTemplate>(localAvailableSourceTemplates);
+		}
+		return Collections.emptyList();
+	}
+	
+	public List<TileSourceTemplate> getInternetAvailableSourceTemplates() {
 		if(internetAvailableSourceTemplates == null && isInternetConnectionAvailable()){
 			internetAvailableSourceTemplates = TileSourceManager.downloadTileSourceTemplates();
 		}
-		return internetAvailableSourceTemplates;
+		if (internetAvailableSourceTemplates != null) {
+			return new ArrayList<TileSourceTemplate>(internetAvailableSourceTemplates);
+		}		
+		return Collections.emptyList();
 	}
 	
 	public final CommonPreference<String> PREVIOUS_INSTALLED_VERSION = new StringPreference("previous_installed_version", "0.6.5", true);
@@ -596,7 +619,7 @@ public class OsmandSettings {
 				return ret;
 			}
 			// try to find among other templates
-			ret = checkAmongAvailableTileSources(dir, getInternetAvailableSourceTemplates());
+			ret = checkAmongAvailableTileSources(dir, getAvailableSourceTemplates());
 			if (ret != null) {
 				return ret;
 			}
@@ -613,7 +636,7 @@ public class OsmandSettings {
 					t = ret;
 				} else {
 					// try to find among other templates
-					ret = checkAmongAvailableTileSources(dir, getInternetAvailableSourceTemplates());
+					ret = checkAmongAvailableTileSources(dir, getAvailableSourceTemplates());
 					if (ret != null) {
 						t = ret;
 					}

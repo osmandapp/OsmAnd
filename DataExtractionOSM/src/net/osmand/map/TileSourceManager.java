@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -317,13 +318,41 @@ public class TileSourceManager {
 		return new TileSourceTemplate("CycleMap", "http://b.tile.opencyclemap.org/cycle/{0}/{1}/{2}.png", ".png", 17, 0, 256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 	}
 
-
+	
 	public static List<TileSourceTemplate> downloadTileSourceTemplates() {
-		final List<TileSourceTemplate> templates = new ArrayList<TileSourceTemplate>();
 		try {
 			URLConnection connection = new URL("http://download.osmand.net//tile_sources.php").openConnection();
+			return createTileSourceTemplates(connection.getInputStream());
+			
+		} catch (IOException e) {
+			log.error("Exception while downloading tile sources", e);
+			return null;
+		}
+	}
+	
+	public static List<TileSourceTemplate> getLocalTileSourceTemplates(File tilesDir) {
+		try {
+			File customTiles = new File(tilesDir, "custom_tile_sources.xml");
+			return createTileSourceTemplates(new FileInputStream(customTiles));
+			
+		} catch (FileNotFoundException e) {
+			log.info("Geting local tile sources: No custom file specified (" + tilesDir.getAbsolutePath() + File.separator + "custom_tile_sources.xml" + ")");
+			return null;
+		}
+	}
+
+	/**
+	 * Create tile source template list from an input stream
+	 * 
+	 * @param inputStream
+	 * @return tile source template list
+	 */
+	private static List<TileSourceTemplate> createTileSourceTemplates(InputStream inputStream) {
+		final List<TileSourceTemplate> templates = new ArrayList<TileSourceTemplate>();
+		try {
+			
 			final SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
-			saxParser.parse(connection.getInputStream(), new DefaultHandler(){
+			saxParser.parse(inputStream, new DefaultHandler(){
 				@Override
 				public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 					String name = saxParser.isNamespaceAware() ? localName : qName;
@@ -348,13 +377,13 @@ public class TileSourceManager {
 				}
 			});
 		} catch (IOException e) {
-			log.error("Exception while downloading tile sources", e);
+			log.error("Exception while creating tile sources", e);
 			return null;
 		} catch (SAXException e) {
-			log.error("Exception while downloading tile sources", e);
+			log.error("Exception while creating tile sources", e);
 			return null;
 		} catch (ParserConfigurationException e) {
-			log.error("Exception while downloading tile sources", e);
+			log.error("Exception while creating tile sources", e);
 			return null;
 		}
 		return templates;

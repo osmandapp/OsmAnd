@@ -98,7 +98,14 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		final JMenu downloadedMenu = new JMenu("Additional"); //$NON-NLS-1$
 		final File tilesDirectory = DataExtractionSettings.getSettings().getTilesDirectory();
 		Map<String, TileSourceTemplate> udf = getCommonTemplates(tilesDirectory);
-		final List<TileSourceTemplate> downloaded = TileSourceManager.downloadTileSourceTemplates();
+		final List<TileSourceTemplate> tileSources = TileSourceManager.downloadTileSourceTemplates();
+		if (tileSources != null) {
+			List<TileSourceTemplate> localSources = TileSourceManager.getLocalTileSourceTemplates(tilesDirectory);
+			if (localSources != null) {
+				tileSources.addAll(localSources);
+			}
+		}
+		
 		final Map<TileSourceTemplate, JCheckBoxMenuItem> items = new IdentityHashMap<TileSourceTemplate, JCheckBoxMenuItem>();
 		
 		tiles.add(downloadedMenu);
@@ -126,8 +133,8 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 			});
 		}
 		
-		if (downloaded != null) {
-			for (final TileSourceTemplate l : downloaded) {
+		if (tileSources != null) {
+			for (final TileSourceTemplate l : tileSources) {
 				if (l == null) {
 					continue;
 				}
