@@ -631,6 +631,14 @@ public class BinaryRoutePlanner {
 		double distanceFromStart = 0;
 		double distanceToEnd = 0;
 		
+		public RouteSegment getNext() {
+			return next;
+		}
+		
+		public int getSegmentStart() {
+			return segmentStart;
+		}
+		
 		public BinaryMapDataObject getRoad() {
 			return road;
 		}

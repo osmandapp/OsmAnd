@@ -33,6 +33,17 @@ public class Way extends Entity {
 		nodes.add(n);
 	}
 	
+	public void addNode(Node n, int index){
+		if(nodeIds == null){
+			nodeIds = new ArrayList<Long>();
+		}
+		if(nodes == null){
+			nodes = new ArrayList<Node>();
+		}
+		nodeIds.add(index, n.getId());
+		nodes.add(index, n);
+	}
+	
 	public Long removeNodeByIndex(int i){
 		if(nodeIds == null){
 			return null;

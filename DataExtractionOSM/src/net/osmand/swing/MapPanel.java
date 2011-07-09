@@ -579,6 +579,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		addLayer(new MapInformationLayer());
 		addLayer(new MapRouterLayer());
 		addLayer(new MapPointsLayer());
+		addLayer(new MapClusterLayer());
 	}
 	
 	public void addLayer(MapPanelLayer l){
