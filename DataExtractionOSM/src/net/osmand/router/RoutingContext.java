@@ -45,6 +45,10 @@ public class RoutingContext {
 		return visitor;
 	}
 	
+	public TLongObjectMap<RouteSegment> getLoadedRoutes() {
+		return routes;
+	}
+	
 	public void setVisitor(RouteSegmentVisitor visitor) {
 		this.visitor = visitor;
 	}
