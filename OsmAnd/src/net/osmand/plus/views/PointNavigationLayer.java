@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
@@ -26,10 +25,11 @@ public class PointNavigationLayer implements OsmandMapLayer {
 	
 	protected LatLon pointToNavigate = null;
 	private OsmandMapTileView view;
-	private Path pathForDirection;
 	private float[] calculations = new float[2];
+	
 	private DisplayMetrics dm;
 	private Bitmap targetPoint;
+	private Bitmap arrowToDestination;
 	
 	
 
@@ -41,9 +41,12 @@ public class PointNavigationLayer implements OsmandMapLayer {
 		point.setStyle(Style.FILL);
 
 		bitmapPaint = new Paint();
+		bitmapPaint.setDither(true);
+		bitmapPaint.setAntiAlias(true);
+		bitmapPaint.setFilterBitmap(true);
 		targetPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.target_point);
+		arrowToDestination = BitmapFactory.decodeResource(view.getResources(), R.drawable.arrow_to_destination);
 
-		pathForDirection = new Path();
 		
 	}
 	
@@ -72,21 +75,12 @@ public class PointNavigationLayer implements OsmandMapLayer {
 		} else {
 			Location.distanceBetween(view.getLatitude(), view.getLongitude(), pointToNavigate.getLatitude(),
 					pointToNavigate.getLongitude(), calculations);
-			float bearing = calculations[1];
-			pathForDirection.reset();
-			pathForDirection.moveTo(0, 0);
-			pathForDirection.lineTo(0.5f, 1.5f);
-			pathForDirection.lineTo(-0.5f, 1.5f);
-			pathForDirection.lineTo(0, 0);
-			float radiusBearing = DIST_TO_SHOW;
-			Matrix m = new Matrix();
-			m.reset();
-			m.postScale(RADIUS * dm.density * 2, RADIUS * 2 * dm.density);
-			m.postTranslate(0, - radiusBearing * dm.density );
-			m.postTranslate(view.getCenterPointX(), view.getCenterPointY());
-			m.postRotate(bearing, view.getCenterPointX(), view.getCenterPointY());
-			pathForDirection.transform(m);
-			canvas.drawPath(pathForDirection, point);
+			float bearing = calculations[1] - 90;
+			float radiusBearing = DIST_TO_SHOW * dm.density;
+			canvas.rotate(bearing - view.getRotate(), view.getCenterPointX(), view.getCenterPointY());
+			canvas.translate(-24 * dm.density + radiusBearing, -22 * dm.density);
+			canvas.drawBitmap(arrowToDestination, view.getCenterPointX(), view.getCenterPointY(), bitmapPaint);
+			
 		}
 	}
 
