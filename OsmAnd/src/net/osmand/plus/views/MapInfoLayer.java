@@ -105,6 +105,7 @@ public class MapInfoLayer implements OsmandMapLayer {
 		
 		paintImg = new Paint();
 		paintImg.setDither(true);
+		paintImg.setFilterBitmap(true);
 		paintImg.setAntiAlias(true);
 		
 		paintAlphaGray = new Paint();
