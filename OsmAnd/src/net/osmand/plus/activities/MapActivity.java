@@ -233,7 +233,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 		mapView.setMapLocationListener(this);
 		mapLayers.createLayers(mapView);
-		mapLayers.getNavigationLayer().setPointToNavigate(pointToNavigate);
 		
 		if(!settings.isLastKnownMapLocation()){
 			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -767,6 +766,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
 			// can't return from this method we are not sure if activity will be recreated or not
 		}
+		mapLayers.getNavigationLayer().setPointToNavigate(settings.getPointToNavigate());
 		currentScreenOrientation = getWindow().getWindowManager().getDefaultDisplay().getOrientation();
 		
 		// for voice navigation
