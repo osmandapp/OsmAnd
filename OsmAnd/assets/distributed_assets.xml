@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <assets>
-	<asset name="basemap.obf.jpg" destination="basemap.obf"/>
+	<!-- <asset name="basemap.obf.jpg" destination="world_basemap.obf"/>  -->
 	<asset name="voice/en-tts/ttsconfig.p.jpg" destination="voice/en-tts/_ttsconfig.p"/>
 </assets>

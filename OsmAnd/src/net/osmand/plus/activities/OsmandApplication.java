@@ -178,7 +178,7 @@ public class OsmandApplication extends Application {
 				activity.showDialog(PROGRESS_DIALOG);
 				startDialog.setDialog(progressDialog);
 			} else if (startingWarnings != null) {
-					showWarnings(startingWarnings, activity);
+				showWarnings(startingWarnings, activity);
 			}
 		}
 	}
