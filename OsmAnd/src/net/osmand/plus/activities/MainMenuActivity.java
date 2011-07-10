@@ -135,7 +135,7 @@ public class MainMenuActivity extends Activity {
 		// prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
 		final TextView appName = (TextView) window.findViewById(R.id.AppName);
 		if (prefs.contains(CONTRIBUTION_VERSION_FLAG)) {
-			appName.setText("OsmAnd!");
+//			appName.setText("OsmAnd");
 			SpannableString content = new SpannableString(textVersion);
 			content.setSpan(new ClickableSpan() {
 				
@@ -148,19 +148,27 @@ public class MainMenuActivity extends Activity {
 			textVersionView.setText(content);
 			textVersionView.setMovementMethod(LinkMovementMethod.getInstance());
 		}
-		SpannableString appLink = new SpannableString(appName.getText());
-		appLink.setSpan(new ClickableSpan() {
-			
+//		SpannableString appLink = new SpannableString(appName.getText());
+//		appLink.setSpan(new ClickableSpan() {
+//			
+//			@Override
+//			public void onClick(View widget) {
+//				TipsAndTricksActivity tactivity = new TipsAndTricksActivity(activity);
+//				Dialog dlg = tactivity.getDialogToShowTips(false, true);
+//				dlg.show();
+//			}
+//		}, appLink.length() - 1, appLink.length(), 0);
+//		appName.setText(appLink);
+//		appName.setMovementMethod(LinkMovementMethod.getInstance());
+		View helpButton = window.findViewById(R.id.HelpButton);
+		helpButton.setOnClickListener(new OnClickListener() {
 			@Override
-			public void onClick(View widget) {
+			public void onClick(View v) {
 				TipsAndTricksActivity tactivity = new TipsAndTricksActivity(activity);
 				Dialog dlg = tactivity.getDialogToShowTips(false, true);
 				dlg.show();
 			}
-		}, appLink.length() - 1, appLink.length(), 0);
-		appName.setText(appLink);
-		appName.setMovementMethod(LinkMovementMethod.getInstance());
-		
+		});
 	}
 	
 	
