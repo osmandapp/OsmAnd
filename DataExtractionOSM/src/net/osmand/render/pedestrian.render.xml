@@ -26,7 +26,7 @@
 		<filter tag="highway" value="cycleway" minzoom="14" color="#0000ff" strokeWidth="2" pathEffect="10_3" />
 		<filter tag="highway" value="byway" minzoom="14" color="#ffcc00" strokeWidth="2" pathEffect="10_3" />
 		<filter tag="highway" value="footway" minzoom="14" color="#fa8073" strokeWidth="2" pathEffect="10_3" />
-		<filter tag="highway" value="steps" minzoom="14" color="#fa8073" strokeWidth="2" pathEffect="10_3" />
+		<filter tag="highway" value="steps" minzoom="14" color="#fa8073" strokeWidth="4" pathEffect="1_2" />
 		<filter tag="highway" value="bridleway" minzoom="14" color="#00ff00" strokeWidth="2" pathEffect="10_3" />
 	</line>
 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
