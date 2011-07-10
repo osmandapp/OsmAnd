@@ -229,7 +229,9 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 			if (map != null) {
 				List<FilterState> list = map.get(val);
 				if (list != null) {
-					for (FilterState f : list) {
+					int sz = list.size();
+					for (int i = 0; i < sz; i++) {
+						FilterState f = list.get(i);
 						if (f.orderType == type && f.layer == layer) {
 							return f.order;
 						}
@@ -260,7 +262,9 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 					FilterState bestResult = null;
 					boolean prevDayNightMatches = false;
 					boolean prevLayerMatches = false;
-					for (FilterState f : list) {
+					int sz = list.size();
+					for (int i = 0; i < sz; i++) {
+						FilterState f = list.get(i);
 						if (f.minzoom <= zoom && (zoom <= f.maxzoom || f.maxzoom == -1)) {
 							if(ref != null && !checkRefTextRule(f, ref.booleanValue())){
 								continue;
