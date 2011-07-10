@@ -2,6 +2,8 @@ package net.osmand.binary;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
+import gnu.trove.map.TIntObjectMap;
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.io.File;
 import java.io.IOException;
@@ -962,7 +964,7 @@ public class BinaryMapIndexReader {
 	public static class MapIndex extends BinaryIndexPart {
 		List<MapRoot> roots = new ArrayList<MapRoot>();
 		Map<String, Map<String, Integer>> encodingRules = new LinkedHashMap<String, Map<String, Integer>>();
-		Map<Integer, TagValuePair> decodingRules = new LinkedHashMap<Integer, TagValuePair>();
+		TIntObjectMap<TagValuePair> decodingRules = new TIntObjectHashMap<TagValuePair>();
 		
 		public List<MapRoot> getRoots() {
 			return roots;
