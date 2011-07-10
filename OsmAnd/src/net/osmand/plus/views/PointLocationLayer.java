@@ -1,13 +1,14 @@
 package net.osmand.plus.views;
 
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.ApplicationMode;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Paint.Style;
@@ -17,15 +18,11 @@ import android.view.WindowManager;
 
 public class PointLocationLayer implements OsmandMapLayer {
 	protected final static int RADIUS = 7;
-	protected final static int HEADING_RADIUS = 60;
 	protected final static float HEADING_ANGLE = 60;
 	
-	private Paint location;
-	private Paint bearing;
-	private Paint bearingOver;
+	private Paint locationPaint;
 	private Paint area;
 	private Paint headingPaint;
-	private Path pathForDirection;
 	
 	protected Location lastKnownLocation = null;
 	private DisplayMetrics dm;
@@ -34,14 +31,14 @@ public class PointLocationLayer implements OsmandMapLayer {
 	private Float heading = null;
 	
 	private ApplicationMode appMode;
-	
-	
+	private Bitmap bearingIcon;
+	private Bitmap locationIcon;
 
 	private void initUI() {
-		location = new Paint();
-		location.setColor(Color.BLUE);
-		location.setAlpha(150);
-		location.setAntiAlias(true);
+		locationPaint = new Paint();
+		locationPaint.setAntiAlias(true);
+		locationPaint.setFilterBitmap(true);
+		locationPaint.setDither(true);
 		
 		area = new Paint();
 		area.setColor(Color.BLUE);
@@ -53,18 +50,8 @@ public class PointLocationLayer implements OsmandMapLayer {
 		headingPaint.setAntiAlias(true);
 		headingPaint.setStyle(Style.FILL);
 		
-		bearing = new Paint();
-		bearing.setColor(Color.BLUE);
-		bearing.setAlpha(150);
-		bearing.setAntiAlias(true);
-		bearing.setStyle(Style.FILL);
+		checkAppMode(view.getSettings().getApplicationMode());
 		
-		bearingOver = new Paint();
-		bearingOver.setColor(Color.BLACK);
-		bearingOver.setAntiAlias(true);
-		bearingOver.setStyle(Style.STROKE);
-		
-		pathForDirection = new Path();
 	}
 	
 	public void initLayer(OsmandMapTileView view) {
@@ -92,58 +79,25 @@ public class PointLocationLayer implements OsmandMapLayer {
 			
 			int radius = MapUtils.getLengthXFromMeters(view.getZoom(), view.getLatitude(), view.getLongitude(), 
 					lastKnownLocation.getAccuracy(), view.getTileSize(), view.getWidth());
-
-			if(appMode == ApplicationMode.CAR){
-				if(!lastKnownLocation.hasBearing()){
-					canvas.drawCircle(locationX, locationY, RADIUS * 2.5f * dm.density, location);
-					canvas.drawCircle(locationX, locationY, RADIUS * 2.5f * dm.density, bearingOver);
-				}
-			} else {
-				canvas.drawCircle(locationX, locationY, RADIUS * dm.density, location);
-				canvas.drawCircle(locationX, locationY, RADIUS * dm.density, bearingOver);
+			boolean isBearing = lastKnownLocation.hasBearing();
+			if(!isBearing){
+				canvas.drawBitmap(locationIcon, locationX - locationIcon.getWidth() / 2, 
+						locationY - locationIcon.getHeight() / 2, locationPaint);
 			}
-			if (radius > RADIUS) {
+			if (radius > RADIUS * dm.density) {
 				canvas.drawCircle(locationX, locationY, radius, area);
 			}
+				
 			if(heading != null){
 				canvas.drawArc(getHeadingRect(locationX, locationY), 
 						heading - HEADING_ANGLE/ 2 - 90, HEADING_ANGLE, true, headingPaint);
 			}
 			
-			if(lastKnownLocation.hasBearing()){
+			if(isBearing){
 				float bearing = lastKnownLocation.getBearing();
-				int radiusBearing = (int) (30 * dm.density);
-				if(lastKnownLocation.hasSpeed() && appMode != ApplicationMode.CAR){
-					radiusBearing = 
-						Math.max(MapUtils.getLengthXFromMeters(view.getZoom(), view.getLatitude(), view.getLongitude(), 
-							lastKnownLocation.getSpeed(), view.getTileSize(), view.getWidth()) * 2, radiusBearing);
-					radiusBearing = Math.min(radiusBearing, view.getHeight() / 4);
-				}
-				radiusBearing += RADIUS * dm.density /2;
-				
-				pathForDirection.reset();
-				pathForDirection.moveTo(0, 0);
-				pathForDirection.lineTo((float) RADIUS, 1f);
-				pathForDirection.lineTo((float) -RADIUS, 1f);
-				pathForDirection.lineTo(0, 0);
-				Matrix m = new Matrix();
-				m.reset();
-				if(appMode == ApplicationMode.CAR){
-					m.postScale(2.5f * dm.density, radiusBearing * 1.5f);
-					m.postTranslate(0, -radiusBearing/2);
-				} else if(appMode == ApplicationMode.BICYCLE){
-					m.postScale(2 * dm.density, radiusBearing);
-					m.postTranslate(0, -radiusBearing/2);
-				} else {
-					m.postScale(dm.density, radiusBearing * 0.5f);
-					m.postTranslate(0, -radiusBearing);
-				}
-				m.postTranslate(locationX, locationY);
-				m.postRotate(bearing, locationX, locationY);
-				
-				pathForDirection.transform(m);
-				canvas.drawPath(pathForDirection, this.bearing);
-				canvas.drawPath(pathForDirection, this.bearingOver);
+				canvas.rotate(bearing - 90, locationX, locationY);
+				canvas.drawBitmap(bearingIcon, locationX - bearingIcon.getWidth() / 2, 
+						locationY - bearingIcon.getHeight() / 2, locationPaint);
 			}
 			
 		}
@@ -187,12 +141,18 @@ public class PointLocationLayer implements OsmandMapLayer {
 	public void checkAppMode(ApplicationMode appMode) {
 		if (appMode != this.appMode) {
 			this.appMode = appMode;
-			if (this.appMode == ApplicationMode.CAR || this.appMode == ApplicationMode.BICYCLE) {
-				this.bearing.setAlpha(180);
+			if (appMode == ApplicationMode.CAR) {
+				bearingIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.car_bearing);
+				locationIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.car_location);
+			} else if (appMode == ApplicationMode.BICYCLE) {
+				bearingIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.bicycle_bearing);
+				locationIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.bicycle_location);
 			} else {
-				this.bearing.setAlpha(150);
+				bearingIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.pedestrian_bearing);
+				locationIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.pedestrian_location);
 			}
 		}
+		
 	}
 	@Override
 	public boolean drawInScreenPixels() {

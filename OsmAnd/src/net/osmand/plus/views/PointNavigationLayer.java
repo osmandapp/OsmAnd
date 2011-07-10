@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Paint.Style;
@@ -17,8 +16,7 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 public class PointNavigationLayer implements OsmandMapLayer {
-	protected final static int RADIUS = 10;
-	protected final static int DIST_TO_SHOW = 120;
+	protected final static int DIST_TO_SHOW = 80;
 
 	private Paint point;
 	private Paint bitmapPaint;
@@ -77,7 +75,7 @@ public class PointNavigationLayer implements OsmandMapLayer {
 					pointToNavigate.getLongitude(), calculations);
 			float bearing = calculations[1] - 90;
 			float radiusBearing = DIST_TO_SHOW * dm.density;
-			canvas.rotate(bearing - view.getRotate(), view.getCenterPointX(), view.getCenterPointY());
+			canvas.rotate(bearing, view.getCenterPointX(), view.getCenterPointY());
 			canvas.translate(-24 * dm.density + radiusBearing, -22 * dm.density);
 			canvas.drawBitmap(arrowToDestination, view.getCenterPointX(), view.getCenterPointY(), bitmapPaint);
 			
