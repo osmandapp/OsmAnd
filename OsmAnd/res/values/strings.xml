@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="trace_rendering">Rendering Debug Info</string>
+	<string name="trace_rendering_descr">Display information on rendering performance for debugging purposes</string>
 	<string name="tip_recent_changes">Recent changes</string>
 	<string name="tip_recent_changes_0_6_6_t">Recent changes for 0.6.6 : 
 \n\t- Text To Speech engine for voice navigation
@@ -219,8 +221,6 @@
 
 	<string name="voice_is_not_available_msg">Voice guidance is not available. Please go to settings, choose preferred voice data package, and download it.</string>
 	<string name="voice_is_not_available_title">No voice guidance selected</string>
-	<string name="trace_rendering_descr">Select this flag to check rendering performance</string>
-    <string name="trace_rendering">Display rendering speed</string>
 	<string name="daynight_mode_day">Day</string>
 	<string name="daynight_mode_night">Night</string>
 	<string name="daynight_mode_auto">Sunrise/sunset</string>
