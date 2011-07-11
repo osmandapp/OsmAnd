@@ -3,7 +3,7 @@
 	android:layout_height="fill_parent" android:orientation="vertical" android:background="@color/color_light_gray">
 
 	<TextView android:text="" android:id="@+id/TipDescription" android:layout_marginLeft="4dp" android:scrollbars="vertical"
-		android:layout_width="fill_parent" android:layout_height="180dp" android:layout_marginRight="4dp"
+		android:layout_width="fill_parent" android:layout_height="170dp" android:layout_marginRight="4dp"
 		android:textColor="@color/color_black" android:textSize="18sp" android:gravity="fill_horizontal"
 		android:background=	"@drawable/textlines" />
 
