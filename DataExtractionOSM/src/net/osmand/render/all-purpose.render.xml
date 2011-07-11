@@ -1,6 +1,6 @@
 <renderer name="all-purpose" depends="" defaultColor="#f1eee8" defaultNightColor="#003333">
 	<!--
-		All Purpose Renderer (essentially more details than default) (by Hardy Mueller), v017:
+		All Purpose Renderer (essentially more details than default) (by Hardy Mueller), v018:
 		Map rendering aligned to typical map use for all zoom levels/scales, hence always yields a complete and reliable map.
 		All features displayed at each zoom level (zX) are those for its typical use:
 		 - z7  = "Rough Country Level Overview": Shows motorways, trunks, primary roads and city names
@@ -14,7 +14,7 @@
 	--> 
 
 	<!--
-		Version History:
+		VERSION HISTORY:
 		(please document all changes in detail, and reason for change. This should facility later reconciliation with other renderers) 
 		- v012: This is the one Victor produced from v011, with combining day/night renderer. Some optical deviations from former v011 contained. This one synced with default on master 2011-07-03.
 		- v013: Fixed some bugs to re-instate functionality of v011: Fix night view for all shaders, cemetery, vineyard, nature_reserve, forest. Fixed night view for field, orchard, quarry, marsh, mud, wetland, scrub, zoo. Fixed night view for white roads. Also brightened motorway and trunk highway colors again to what was requested in forum. Fix night bridges.
