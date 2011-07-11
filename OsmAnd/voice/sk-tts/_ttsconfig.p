@@ -29,7 +29,7 @@ turn(Turn, Dist) == ['o', D, M] :-
 turn(Turn) == M :- turn(Turn, M).
 
 
-prepare_make_ut(Dist) == ['o', D, 'sa budete otáčať naspäť'] :- 
+prepare_make_ut(Dist) == ['o', D, 'sa otočte naspäť'] :- 
 		distance(Dist) == D.
 
 prepare_roundabout(Dist) == ['o', D, 'vojdete na kruhový objazd'] :- 
@@ -76,45 +76,46 @@ nth(17, 'sedemnásty').
 
 %%% distance measure
 distance(Dist) == T :- Dist < 1000, dist(Dist, F), append(F, 'metrov',T).
-dist(D, ['10']) :-  D < 20, !.
-dist(D, ['20']) :-  D < 30, !.
-dist(D, ['30']) :-  D < 40, !.
-dist(D, ['40']) :-  D < 50, !.
-dist(D, ['50']) :-  D < 60, !.
-dist(D, ['60']) :-  D < 70, !.
-dist(D, ['70']) :-  D < 80, !.
-dist(D, ['80']) :-  D < 90, !.
-dist(D, ['90']) :-  D < 100, !.
-dist(D, ['100']) :-  D < 150, !.
-dist(D, ['150']) :-  D < 200, !.
-dist(D, ['200']) :-  D < 250, !.
-dist(D, ['250']) :-  D < 300, !.
-dist(D, ['300']) :-  D < 350, !.
-dist(D, ['350']) :-  D < 400, !.
-dist(D, ['400']) :-  D < 450, !.
-dist(D, ['450']) :-  D < 500, !.
-dist(D, ['500']) :-  D < 550, !.
-dist(D, ['550']) :-  D < 600, !.
-dist(D, ['600']) :-  D < 650, !.
-dist(D, ['650']) :-  D < 700, !.
-dist(D, ['700']) :-  D < 750, !.
-dist(D, ['750']) :-  D < 800, !.
-dist(D, ['800']) :-  D < 850, !.
-dist(D, ['850']) :-  D < 900, !.
-dist(D, ['900']) :-  D < 950, !.
-dist(D, ['950']) :-  !.
+dist(D, ['10 ']) :-  D < 15, !.
+dist(D, ['20 ']) :-  D < 25, !.
+dist(D, ['30 ']) :-  D < 35, !.
+dist(D, ['40 ']) :-  D < 45, !.
+dist(D, ['50 ']) :-  D < 55, !.
+dist(D, ['60 ']) :-  D < 65, !.
+dist(D, ['70 ']) :-  D < 75, !.
+dist(D, ['80 ']) :-  D < 85, !.
+dist(D, ['90 ']) :-  D < 95, !.
+dist(D, ['100 ']) :-  D < 125, !.
+dist(D, ['150 ']) :-  D < 175, !.
+dist(D, ['200 ']) :-  D < 225, !.
+dist(D, ['250 ']) :-  D < 275, !.
+dist(D, ['300 ']) :-  D < 325, !.
+dist(D, ['350 ']) :-  D < 375, !.
+dist(D, ['400 ']) :-  D < 425, !.
+dist(D, ['450 ']) :-  D < 475, !.
+dist(D, ['500 ']) :-  D < 525, !.
+dist(D, ['550 ']) :-  D < 575, !.
+dist(D, ['600 ']) :-  D < 625, !.
+dist(D, ['650 ']) :-  D < 675, !.
+dist(D, ['700 ']) :-  D < 725, !.
+dist(D, ['750 ']) :-  D < 775, !.
+dist(D, ['800 ']) :-  D < 825, !.
+dist(D, ['850 ']) :-  D < 875, !.
+dist(D, ['900 ']) :-  D < 925, !.
+dist(D, ['950 ']) :-  D < 975, !.
+dist(D, ['1000 ']) :-  !.
 
 
-distance(Dist) == ['viac ako jeden kilometer'] :- Dist < 1500.
-distance(Dist) == ['viac ako 2 kilometre'] :- Dist < 3000.
-distance(Dist) == ['viac ako 3 kilometre'] :- Dist < 4000.
-distance(Dist) == ['viac ako 4 kilometre'] :- Dist < 5000.
-distance(Dist) == ['viac ako 5 kilometrov'] :- Dist < 6000.
-distance(Dist) == ['viac ako 6 kilometrov'] :- Dist < 7000.
-distance(Dist) == ['viac ako 7 kilometrov'] :- Dist < 8000.
-distance(Dist) == ['viac ako 8 kilometrov'] :- Dist < 9000.
-distance(Dist) == ['viac ako 9 kilometrov'] :- Dist < 10000.
-distance(Dist) == ['viac ako', X, 'kilometrov'] :- D is Dist/1000, dist(D, X).
+distance(Dist) == ['približne jeden kilometer'] :- Dist < 1500.
+distance(Dist) == ['približne 2 kilometre'] :- Dist < 2500.
+distance(Dist) == ['približne 3 kilometre'] :- Dist < 3500.
+distance(Dist) == ['približne 4 kilometre'] :- Dist < 4500.
+distance(Dist) == ['približne 5 kilometrov'] :- Dist < 5500.
+distance(Dist) == ['približne 6 kilometrov'] :- Dist < 6500.
+distance(Dist) == ['približne 7 kilometrov'] :- Dist < 7500.
+distance(Dist) == ['približne 8 kilometrov'] :- Dist < 8500.
+distance(Dist) == ['približne 9 kilometrov'] :- Dist < 9500.
+distance(Dist) == ['približne', X, 'kilometrov'] :- D is Dist/1000, dist(D, X).
 
 
 
