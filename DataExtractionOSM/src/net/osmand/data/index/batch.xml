@@ -482,7 +482,7 @@
 			<region name="africa" esize=""/>
 		</regions>
 		<!-- 6. AFRICA [SOURCE: GEOFABRIK.DE] -->
-		<regions siteToDownload="http://http://download.geofabrik.de/osm/africa/{0}.osm.pbf" region_prefix="" region_suffix="_Africa"  skip="true">
+		<regions siteToDownload="http://download.geofabrik.de/osm/africa/{0}.osm.pbf" region_prefix="" region_suffix="_Africa"  skip="true">
 			<region name="canary_islands" esize="" />
 			<region name="ethiopia" esize="" />
 			<region name="guinea" esize="" />
