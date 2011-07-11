@@ -22,6 +22,7 @@
 		- v015: Implement motorway_junction text. Separate tertiary and white roads to fix bridges in night view
 		- v016: suppress shadowRadius for z16+ to avoid showing many dark lines (bugfix)
 		- v017: re-instate shadowRadius for all zooms again, due to bad visibility of white roads in some surroundings.
+		- v018: Add shadowRadius to secondary roads to increase visibility in agricultural areas (through fields).
 	-->
 
 	<!--
@@ -807,7 +808,7 @@
 		<switch>
 			<case tag="highway" value="secondary" />
 			<case tag="highway" value="secondary_link" />
-			<filter color="#fdd6a4">
+			<filter color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" shadowRadius="1" >
 				<filter minzoom="9" maxzoom="9" strokeWidth="3" />
 				<filter minzoom="10" maxzoom="10" strokeWidth="4" />
 				<filter minzoom="11" maxzoom="11" strokeWidth="5" />
@@ -823,8 +824,8 @@
 			<case tag="highway" value="trunk_link" color="#DF1346" color_2="#DF1346" />
 			<case tag="highway" value="primary" color="#eb989a" color_2="#eb989a" />
 			<case tag="highway" value="primary_link" color="#eb989a" color_2="#eb989a" />
-			<case tag="highway" value="secondary" color="#fdd6a4" color_2="#fdd6a4" />
-			<case tag="highway" value="secondary_link" color="#fdd6a4" color_2="#fdd6a4" />
+			<case tag="highway" value="secondary" color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" shadowRadius="1" />
+			<case tag="highway" value="secondary_link" color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" shadowRadius="1" />
 			<filter>
 				<switch>
 					<case layer="-1" pathEffect="4_4" />
