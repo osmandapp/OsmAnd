@@ -86,6 +86,7 @@ public class IndexBatchCreator {
 	
 	File osmDirFiles;
 	File indexDirFiles;
+	File backupUploadedFiles;
 	
 	boolean indexPOI = false;
 	boolean indexTransport = false;
@@ -189,6 +190,16 @@ public class IndexBatchCreator {
 			throw new IllegalArgumentException("Please specify directory with generated index files  as directory_for_index_files (attribute)"); //$NON-NLS-1$
 		}
 		indexDirFiles = new File(dir);
+		
+		dir = process.getAttribute("directory_for_uploaded_files");
+		if (dir != null) {
+			File file = new File(dir);
+			file.mkdirs();
+			if (file.exists()) {
+				backupUploadedFiles = file;
+			}
+		}
+		
 		
 		if(uploadIndexes){
 			list = doc.getElementsByTagName("authorization_info");
@@ -472,7 +483,7 @@ public class IndexBatchCreator {
 	
 	protected void uploadIndexes(Set<String> alreadyUploadedFiles){
 		for(File f : getSortedFiles(indexDirFiles)){
-			if(!alreadyUploadedFiles.contains(f.getName())){
+			if(!alreadyUploadedFiles.contains(f.getName()) && !f.isDirectory()){
 				uploadIndex(f, alreadyUploadedFiles);
 				if(!alreadyUploadedFiles.contains(f.getName())){
 					System.out.println("! NOT UPLOADED "  + f.getName());
@@ -580,13 +591,21 @@ public class IndexBatchCreator {
 		List<File> splittedFiles = Collections.emptyList(); 
 		try {
 			splittedFiles = splitFiles(toUpload);
-			boolean uploaded =true;
+			boolean uploaded = true;
 			for (File fs : splittedFiles) {
 				uploaded &= uploadFileToServer(fs, toUpload, summary);
 			}
 			// remove source file if file was splitted
-			if (uploaded &&  deleteFilesAfterUploading && toUpload.exists()) {
-				toUpload.delete();
+			if (uploaded) {
+				if (deleteFilesAfterUploading && toUpload.exists()) {
+					toUpload.delete();
+				} else if (backupUploadedFiles != null) {
+					File toBackup = new File(backupUploadedFiles, toUpload.getName());
+					if(toBackup.exists()){
+						toBackup.delete();
+					}
+					toUpload.renameTo(toBackup);
+				}
 			}
 			alreadyUploadedFiles.add(fileName);
 		} catch (IOException e) {
@@ -642,6 +661,18 @@ public class IndexBatchCreator {
 		if (uploadToOsmandGooglecode) {
 			try {
 				DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName(), token, pagegen, cookieHSID, cookieSID);
+				if(f.getName().endsWith("obf.zip") && f.length() / MB < 5){
+					// try to delete without .zip part
+					DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName().substring(0, f.getName().length() - 4), 
+							token, pagegen, cookieHSID, cookieSID);
+				} else if(f.getName().endsWith("poi.zip") && f.length() / MB < 5){
+					// try to delete without .zip part
+					DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName().substring(0, f.getName().length() - 3) +"odb", 
+							token, pagegen, cookieHSID, cookieSID);
+				} else if(f.getName().endsWith(".zip-1") && f.length() / MB < 10){
+					DownloaderIndexFromGoogleCode.deleteFileFromGoogleDownloads(f.getName().substring(0, f.getName().length() - 2),
+							token, pagegen, cookieHSID, cookieSID);
+				}
 				try {
 					Thread.sleep(4000);
 				} catch (InterruptedException e) {
