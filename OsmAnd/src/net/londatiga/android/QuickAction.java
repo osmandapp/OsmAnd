@@ -33,6 +33,8 @@ import net.osmand.plus.R;
 /**
  * Popup window, shows action list as icon and text (QuickContact / Twitter app). 
  * 
+ * test
+ * 
  * @author Lorensius. W. T
  */
 public class QuickAction extends CustomPopupWindow {
