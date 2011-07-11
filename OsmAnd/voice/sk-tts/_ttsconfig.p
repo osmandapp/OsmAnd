@@ -1,71 +1,81 @@
 :- op('==', xfy, 500).
 version(100).
-language(pl).
+language(sk).
+
 
 % before each announcement (beep)
 preamble - [].
 
-%% TURNS 
-turn('left', ['skręć w lewo ']).
-turn('left_sh', ['skręć ostro w lewo ']).
-turn('left_sl', ['skręć lekko w lewo ']).
-turn('right', ['skręć w prawo ']).
-turn('right_sh', ['skręć ostro w prawo ']).
-turn('right_sl', ['skręć lekko w prawo ']).
 
-prepare_turn(Turn, Dist) == ['Za ', D, M] :- 
-			distance(Dist) == D, turn(Turn, M).
-turn(Turn, Dist) == ['Za ', D, M] :- 
+%% TURNS 
+turn('left', ['odbočte doľava']).
+turn('left_sh', ['odbočte ostro doľava']).
+turn('left_sl', ['odbočte mierne doľava']).
+turn('right', ['odbočte doprava']).
+turn('right_sh', ['odbočte ostro doprava']).
+turn('right_sl', ['odbočte mierne doprava']).
+
+pturn('left', ['doľava']).
+pturn('left_sh', ['ostro doľava']).
+pturn('left_sl', ['mierne doľava']).
+pturn('right', ['doprava']).
+pturn('right_sh', ['ostro doprava']).
+pturn('right_sl', ['mierne doprava']).
+
+prepare_turn(Turn, Dist) == ['o', D, 'budete odbáčať', M] :-
+			distance(Dist) == D, pturn(Turn, M).
+turn(Turn, Dist) == ['o', D, M] :- 
 			distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
 
-prepare_make_ut(Dist) == ['Za ', D, ' zawróć'] :- 
+prepare_make_ut(Dist) == ['o', D, 'sa otočte naspäť'] :- 
 		distance(Dist) == D.
 
-prepare_roundabout(Dist) == ['Za ', D, ' wjedź na rondo'] :- 
+prepare_roundabout(Dist) == ['o', D, 'vojdete na kruhový objazd'] :- 
 		distance(Dist) == D.
 
-make_ut(Dist) ==  ['Za ', D, ' zawróć'] :-
+make_ut(Dist) == ['o', D, 'sa otočte naspäť'] :- 
 			distance(Dist) == D.
-make_ut == ['Zawróć '].
+make_ut == ['otočte sa naspäť'].
 
-roundabout(Dist, _Angle, Exit) == ['Za ', D, ' wjedź na rondo ', E, 'wyjazd'] :- distance(Dist) == D, nth(Exit, E).
-roundabout(_Angle, Exit) == [ E, ' wyjazd'] :- nth(Exit, E).
+roundabout(Dist, _Angle, Exit) == ['o', D, 'vojdite na kruhový objazd', 'a zvoľte', E, 'výjazd'] :- 
+		distance(Dist) == D, nth(Exit, E).
+roundabout(_Angle, Exit) == ['pôjdete cez', E, 'výjazd'] :- nth(Exit, E).
 
-and_arrive_destination == ['następnie dojedź do celu ']. % Miss and?
-then == ['następnie '].
-reached_destination == ['Cel został osiągnięty! '].
-bear_right == ['trzymaj się prawej '].
-bear_left == ['trzymaj się lewej '].
-route_recalc(_Dist) == []. % ['Wyznaczam nową trasę '].  %nothing to said possibly beep?	
-route_new_calc(Dist) == ['Długość trasy to ', D] :- distance(Dist) == D. % nothing to said possibly beep?
+and_arrive_destination == ['a dorazíte do cieľa']. % Miss and?
+then == ['potom'].
+reached_destination == ['dorazili ste do cieľa'].
+bear_right == ['držte sa vpravo'].
+bear_left == ['držte sa vľavo'].
+route_recalc(_Dist) == ['prepočítavam']. % nothing to said possibly beep?	
+route_new_calc(Dist) == ['cesta je dlhá', D] :- distance(Dist) == D. % nothing to said possibly beep?
 
-go_ahead(Dist) == ['Jedź prosto ', D]:- distance(Dist) == D.
-go_ahead == ['Jedź prosto '].
+go_ahead(Dist) == ['pokračujte', D]:- distance(Dist) == D.
+go_ahead == ['pokračujte rovno'].
 
 %% 
-nth(1, 'pierwszy ').
-nth(2, 'drugi ').
-nth(3, 'trzeci ').
-nth(4, 'czwarty ').
-nth(5, 'piąty ').
-nth(6, 'szósty ').
-nth(7, 'siódmy ').  
-nth(8, 'ósmy ').
-nth(9, 'dziewiąty ').
-nth(10, 'dziesiąty ').
-nth(11, 'jedenasty ').
-nth(12, 'dwunasty ').
-nth(13, 'trzynasty ').
-nth(14, 'czternasty ').
-nth(15, 'piętnasty ').
-nth(16, 'szestasty ').
-nth(17, 'siedemnasty ').
+nth(1, 'prvý').
+nth(2, 'druhý').
+nth(3, 'tretí').
+nth(4, 'štvrtý').
+nth(5, 'piaty').
+nth(6, 'šiesty').
+nth(7, 'siedmy').
+nth(8, 'ôsmy').
+nth(9, 'deviaty').
+nth(10, 'desiaty').
+nth(11, 'jedenásty').
+nth(12, 'dvanásty').
+nth(13, 'trinásty').
+nth(14, 'štrnásty').
+nth(15, 'pätnásty').
+nth(16, 'šestnásty').
+nth(17, 'sedemnásty').
 
 
 %%% distance measure
-distance(Dist) == T :- Dist < 1000, dist(Dist, F), append(F, ' metrów',T).
+distance(Dist) == T :- Dist < 1000, dist(Dist, F), append(F, 'metrov',T).
 dist(D, ['10 ']) :-  D < 15, !.
 dist(D, ['20 ']) :-  D < 25, !.
 dist(D, ['30 ']) :-  D < 35, !.
@@ -95,16 +105,19 @@ dist(D, ['900 ']) :-  D < 925, !.
 dist(D, ['950 ']) :-  D < 975, !.
 dist(D, ['1000 ']) :-  !.
 
-distance(Dist) == ['około jeden kilometr '] :- Dist < 1500.
-distance(Dist) == ['około dwa kilometry '] :- Dist < 2500.
-distance(Dist) == ['około trzy kilometry '] :- Dist < 3500.
-distance(Dist) == ['około cztery kilometry '] :- Dist < 4500.
-distance(Dist) == ['około pięć kilometrów '] :- Dist < 5500.
-distance(Dist) == ['około sześć kilometrów '] :- Dist < 6500.
-distance(Dist) == ['około siedem kilometrów '] :- Dist < 7500.
-distance(Dist) == ['około osiem kilometrów '] :- Dist < 8500.
-distance(Dist) == ['około dziewięć kilometrów '] :- Dist < 9500.
-distance(Dist) == ['około ', X, ' kilometrów '] :- D is Dist/1000, dist(D, X).
+
+distance(Dist) == ['približne jeden kilometer'] :- Dist < 1500.
+distance(Dist) == ['približne 2 kilometre'] :- Dist < 2500.
+distance(Dist) == ['približne 3 kilometre'] :- Dist < 3500.
+distance(Dist) == ['približne 4 kilometre'] :- Dist < 4500.
+distance(Dist) == ['približne 5 kilometrov'] :- Dist < 5500.
+distance(Dist) == ['približne 6 kilometrov'] :- Dist < 6500.
+distance(Dist) == ['približne 7 kilometrov'] :- Dist < 7500.
+distance(Dist) == ['približne 8 kilometrov'] :- Dist < 8500.
+distance(Dist) == ['približne 9 kilometrov'] :- Dist < 9500.
+distance(Dist) == ['približne', X, 'kilometrov'] :- D is Dist/1000, dist(D, X).
+
+
 
 %% resolve command main method
 %% if you are familar with Prolog you can input specific to the whole mechanism,
