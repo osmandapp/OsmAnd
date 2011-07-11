@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="trace_rendering">Rendering Debug Info</string>
+	<string name="trace_rendering_descr">Flag zur Prüfung der Rendering Performanz (Geschwindigkeit der Offline-Bildaufbaus)</string>
 	<string name="installing_new_resources">Entpacke neue Daten...</string>
 	<string name="internet_connection_required_for_online_route">Es soll ein Online-Routing-Dienst verwendet werden, aber es besteht keine Internet-Verbindung. Es besteht die Möglichkeit, das (noch experimentelle) OsmAnd Offline-Routing zu verwenden, siehe \'Einstellungen\' -> \'Navigation\'.</string>
 	<string name="tts_language_not_supported_title">Sprache nicht unterstützt</string>
@@ -210,8 +212,6 @@
 	
 	<string name="voice_is_not_available_msg">Keine Sprachansage verfügbar. Bitte unter Einstellungen ein Sprachpaket auswählen oder Herunterladen.</string>
 	<string name="voice_is_not_available_title">Keine Sprachansage ausgewählt</string>
-	<string name="trace_rendering_descr">Flag zur Prüfung der Rendering Performanz (Geschwindigkeit der Offline-Bildaufbaus)</string>
-    <string name="trace_rendering">Rendering-Zeiten</string>
 	<string name="daynight_mode_day">Tag</string>
 	<string name="daynight_mode_night">Nacht</string>
 	<string name="daynight_mode_auto">Sonnenaufgang/-untergang</string>
