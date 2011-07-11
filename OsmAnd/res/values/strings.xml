@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-	<string name="trace_rendering">Rendering Debug Info</string>
-	<string name="trace_rendering_descr">Display information on rendering performance for debugging purposes</string>
+	<string name="trace_rendering">Rendering debug info</string>
+	<string name="trace_rendering_descr">Display data on rendering performance for debugging purposes</string>
 	<string name="tip_recent_changes">Recent changes</string>
 	<string name="tip_recent_changes_0_6_6_t">Recent changes for 0.6.6 : 
 \n\t- Text To Speech engine for voice navigation
