@@ -25,9 +25,7 @@ pturn('right_sl', ['mierne doprava']).
 prepare_turn(Turn, Dist) == ['o', D, 'budete odbáčať', M] :-
 			distance(Dist) == D, pturn(Turn, M).
 turn(Turn, Dist) == ['o', D, M] :- 
-			distance(Dist) == D, turn(Turn, M).
-turn(Turn) == M :- turn(Turn, M).
-
+			distance(Dist) == D, turn(Turn, M).turn(Turn) == M :- turn(Turn, M).
 
 prepare_make_ut(Dist) == ['o', D, 'sa otočte naspäť'] :- 
 		distance(Dist) == D.
