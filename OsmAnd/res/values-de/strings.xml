@@ -21,7 +21,7 @@
 	\n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt
 	\n\tTipp: Um schnell zwischen der Kompassnachführung und der in den Einstellungen gewählten Option zu wechseln, kann man auf die Kompassnadel in der Kartenansicht drücken.</string>
 
-	<string name="switch_to_raster_map_to_see">Für die derzeitige Position ist auf Ihrem Gerät keine Offline-Vektor-Karte vorhanden. Sie können die Kartenquelle wechseln in der Kartenansicht unter Menu -> Darstellung, oder Sie können via Internet zusätzliche Vektor-Karten laden.</string>
+	<string name="switch_to_raster_map_to_see">Für die derzeitige Position ist auf Ihrem Gerät keine Offline-Vektor-Karte vorhanden. Sie können Sie können via Internet eine zusätzliche Vektor-Karte laden, oder die Kartenquelle wechseln in der Kartenansicht unter Menu -> Darstellung.</string>
 	<string name="switch_to_vector_map_to_see">Sie können in der Kartenansicht auf Offline-Vektor-Karten wechseln mittels Menü -> Layers -> Kartenquelle -> Offline-Vektor-Karten.</string>
 	<string name="binary_map_download_success">Download erfolgreich. Sie können in der Kartenansicht auf Offline-Vektor-Karten wechseln mittels Menu -> Darstellung -> Kartenquelle -> Offline-Vektor-Karten</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
