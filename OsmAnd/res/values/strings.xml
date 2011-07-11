@@ -32,7 +32,7 @@
 	\n\t\'To compass\' - Map will continuously be aligned with device compass reading
 	\n\tHint: To quickly change between the rotation to compass and the one you selected in settings, you can simply tap on the compass needle in map view.</string>
 
-	<string name="switch_to_raster_map_to_see">Current position not covered in your offline vector maps, you can switch map source in menu (Define view -> Map Source... ) need to download additional vector map.</string>
+	<string name="switch_to_raster_map_to_see">Current position not covered in your offline vector maps, you can switch map source in menu (Define view -> Map Source... ), or need to download additional vector map.</string>
 	<string name="switch_to_vector_map_to_see">You can switch to offline vector maps using menu (Define view -> Map Source... -> Offline vector maps) to see the map.</string>
 	<string name="binary_map_download_success">Successful. You can switch to offline vector maps on menu  Define view -> Map Source... -> Offline vector maps.</string>
 	<string name="choose_audio_stream">Voice guidance output</string>

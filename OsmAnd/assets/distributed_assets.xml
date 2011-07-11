@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <assets>
 	<!-- <asset name="basemap.obf.jpg" destination="world_basemap.obf"/>  -->
+	<asset name="custom_tile_sources.xml" destination="tiles/custom_tile_sources.xml"/>
 	<asset name="voice/en-tts/ttsconfig.p.jpg" destination="voice/en-tts/_ttsconfig.p"/>
 </assets>

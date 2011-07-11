@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandSettings;
@@ -678,23 +677,28 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			Toast.makeText(activity, R.string.internet_not_available, Toast.LENGTH_LONG).show();
 			return;
 		}
-		final List<TileSourceTemplate> downloaded = TileSourceManager.downloadTileSourceTemplates();
-		if(downloaded == null || downloaded.isEmpty()){
+		final List<TileSourceTemplate> tileSources = settings.getInternetAvailableSourceTemplates();
+		if (tileSources.isEmpty()) {
 			Toast.makeText(activity, R.string.error_io_error, Toast.LENGTH_SHORT).show();
+		}
+		tileSources.addAll(settings.getLocalAvailableSourceTemplates());
+		if (tileSources.isEmpty()) {
+			// Silently return, possibly no custom file
 			return;
 		}
+		
 		Builder builder = new AlertDialog.Builder(activity);
-		String[] names = new String[downloaded.size()];
+		String[] names = new String[tileSources.size()];
 		for(int i=0; i<names.length; i++){
-			names[i] = downloaded.get(i).getName();
+			names[i] = tileSources.get(i).getName();
 		}
-		final boolean[] selected = new boolean[downloaded.size()];
+		final boolean[] selected = new boolean[tileSources.size()];
 		builder.setMultiChoiceItems(names, selected, new DialogInterface.OnMultiChoiceClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 				selected[which] = isChecked;
-				if(entriesMap.containsKey(downloaded.get(which).getName()) && isChecked){
+				if(entriesMap.containsKey(tileSources.get(which).getName()) && isChecked){
 					Toast.makeText(activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
 				}
 			}
@@ -707,7 +711,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				List<TileSourceTemplate> toInstall = new ArrayList<TileSourceTemplate>();
 				for(int i=0; i<selected.length; i++){
 					if(selected[i]){
-						toInstall.add(downloaded.get(i));
+						toInstall.add(tileSources.get(i));
 					}
 				}
 				for(TileSourceTemplate ts : toInstall){

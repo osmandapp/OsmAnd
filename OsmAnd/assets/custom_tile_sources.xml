@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tile_sources>
+	<tile_source name="Midnight Commander Cloudmade" url_template="http://tile.cloudmade.com/7ded028e030c5929b28bf823486ce84f/999/256/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/>
+</tile_sources>
