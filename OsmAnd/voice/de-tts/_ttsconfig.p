@@ -8,11 +8,11 @@ preamble - [].
 
 %% TURNS 
 turn('left', ['links abbiegen ']).
-turn('left_sh', ['scharf links ']).
-turn('left_sl', ['leicht nach links ']).
+turn('left_sh', ['scharf links abbiegen ']).
+turn('left_sl', ['leicht nach links abbiegen ']).
 turn('right', ['rechts abbiegen ']).
-turn('right_sh', ['scharf rechts ']).
-turn('right_sl', ['leicht nach rechts ']).
+turn('right_sh', ['scharf rechts abbiegen ']).
+turn('right_sl', ['leicht nach rechts abbiegen ']).
 
 prepare_turn(Turn, Dist) == ['Nach ', D, M] :- 
 			distance(Dist) == D, turn(Turn, M).
@@ -34,7 +34,7 @@ make_ut == ['Bitte wenden '].
 roundabout(Dist, _Angle, Exit) == ['Nach ', D, ' in den Kreisverkehr einfahren, dann nehmen Sie die ', E, 'Ausfahrt'] :- distance(Dist) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['nehmen Sie die ', E, 'Ausfahrt'] :- nth(Exit, E).
 
-and_arrive_destination == ['und kommen and Ihrem Ziel an ']. % Miss and?
+and_arrive_destination == ['und kommen an Ihrem Ziel an ']. % Miss and?
 then == ['dann '].
 reached_destination == ['Ziel erreicht '].
 bear_right == ['rechts halten '].
