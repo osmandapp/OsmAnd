@@ -594,9 +594,9 @@ public class IndexCreator {
 		long time = System.currentTimeMillis();
 		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/data/osm-gen/")); //$NON-NLS-1$
 		creator.setIndexMap(true);
-		creator.setIndexAddress(true);
-		creator.setIndexPOI(true);
-		creator.setIndexTransport(true);
+//		creator.setIndexAddress(true);
+//		creator.setIndexPOI(true);
+//		creator.setIndexTransport(true);
 		// for NL
 //		creator.setCityAdminLevel("10");
 
@@ -605,9 +605,11 @@ public class IndexCreator {
 //		creator.deleteOsmDB = true;
 				
 		creator.setZoomWaySmothness(2);
+		MapRenderingTypes rt = new MapRenderingTypes("/home/victor/projects/OsmAnd/data/testdata/roads_rendering_types.xml");
+		MapZooms zooms = MapZooms.parseZooms("15-");
 		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
 		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/belarus-osm/belarus.osm.pbf"),
-				new ConsoleProgressImplementation(1), null, MapZooms.getDefault(), null);
+				new ConsoleProgressImplementation(1), null, zooms, rt);
 		
 //		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes3.tmp.odb"));
 //		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/stadion-dynamo.osm"),

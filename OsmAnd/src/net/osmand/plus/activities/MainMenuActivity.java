@@ -133,9 +133,7 @@ public class MainMenuActivity extends Activity {
 		
 		// only one commit should be with contribution version flag
 		// prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
-		final TextView appName = (TextView) window.findViewById(R.id.AppName);
 		if (prefs.contains(CONTRIBUTION_VERSION_FLAG)) {
-			appName.setText("OsmAnd!");
 			SpannableString content = new SpannableString(textVersion);
 			content.setSpan(new ClickableSpan() {
 				
@@ -148,19 +146,15 @@ public class MainMenuActivity extends Activity {
 			textVersionView.setText(content);
 			textVersionView.setMovementMethod(LinkMovementMethod.getInstance());
 		}
-		SpannableString appLink = new SpannableString(appName.getText());
-		appLink.setSpan(new ClickableSpan() {
-			
+		View helpButton = window.findViewById(R.id.HelpButton);
+		helpButton.setOnClickListener(new OnClickListener() {
 			@Override
-			public void onClick(View widget) {
+			public void onClick(View v) {
 				TipsAndTricksActivity tactivity = new TipsAndTricksActivity(activity);
 				Dialog dlg = tactivity.getDialogToShowTips(false, true);
 				dlg.show();
 			}
-		}, appLink.length() - 1, appLink.length(), 0);
-		appName.setText(appLink);
-		appName.setMovementMethod(LinkMovementMethod.getInstance());
-		
+		});
 	}
 	
 	
@@ -235,7 +229,7 @@ public class MainMenuActivity extends Activity {
 		}
 		
 		startProgressDialog = new ProgressDialog(this);
-		((OsmandApplication)getApplication()).checkApplicationIsBeingInitialized(this, startProgressDialog);		
+		((OsmandApplication)getApplication()).checkApplicationIsBeingInitialized(this, startProgressDialog);
 		SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);
 		boolean firstTime = false;
 		if(!pref.contains(FIRST_TIME_APP_RUN)){
@@ -285,9 +279,23 @@ public class MainMenuActivity extends Activity {
 				TipsAndTricksActivity tipsActivity = new TipsAndTricksActivity(this);
 				Dialog dlg = tipsActivity.getDialogToShowTips(!appVersionChanged, false);
 				dlg.show();
+			} else {
+				startProgressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						checkVectorIndexesDownloaded();
+					}
+				});
 			}
 		}
 		checkPreviousRunsForExceptions(firstTime);
+	}
+	
+	protected void checkVectorIndexesDownloaded() {
+		ResourceManager resourceManager = ((OsmandApplication) getApplication()).getResourceManager();
+//		resourceManager.getRenderer().get
+		// TODO show dialog with problems
+		
 	}
 	
 	@Override

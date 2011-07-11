@@ -233,7 +233,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 		mapView.setMapLocationListener(this);
 		mapLayers.createLayers(mapView);
-		mapLayers.getNavigationLayer().setPointToNavigate(pointToNavigate);
 		
 		if(!settings.isLastKnownMapLocation()){
 			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -767,6 +766,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
 			// can't return from this method we are not sure if activity will be recreated or not
 		}
+		mapLayers.getNavigationLayer().setPointToNavigate(settings.getPointToNavigate());
 		currentScreenOrientation = getWindow().getWindowManager().getDefaultDisplay().getOrientation();
 		
 		// for voice navigation
@@ -1274,8 +1274,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     	}
     	final int[] contextMenuStandardActions = new int[]{
     			R.string.context_menu_item_navigate_point,
-    			R.string.context_menu_item_search_poi,
     			R.string.context_menu_item_show_route,
+    			R.string.context_menu_item_search_poi,
     			R.string.context_menu_item_search_transport,
     			R.string.context_menu_item_add_favorite,
     			R.string.context_menu_item_share_location,
@@ -1300,14 +1300,14 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				int standardId = contextMenuStandardActions[which - sizeAdditional];
 				if(standardId == R.string.context_menu_item_navigate_point){
 					navigateToPoint(new LatLon(latitude, longitude));
+				} else if(standardId == R.string.context_menu_item_show_route){
+					getDirections(latitude, longitude, false);
 				} else if(standardId == R.string.context_menu_item_search_poi){
 					Intent intent = new Intent(MapActivity.this, SearchPoiFilterActivity.class);
 					intent.putExtra(SearchPoiFilterActivity.SEARCH_LAT, latitude);
 					intent.putExtra(SearchPoiFilterActivity.SEARCH_LON, longitude);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(intent);
-				} else if(standardId == R.string.context_menu_item_show_route){
-					getDirections(latitude, longitude, false);
 				} else if(standardId == R.string.context_menu_item_search_transport){
 					Intent intent = new Intent(MapActivity.this, SearchTransportActivity.class);
 					intent.putExtra(SearchTransportActivity.LAT_KEY, latitude);

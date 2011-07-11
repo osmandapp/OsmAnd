@@ -49,9 +49,10 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
  */
 public class FavouritesActivity extends ListActivity {
 
-	public static final int NAVIGATE_TO = 0;
-	public static final int DELETE_ITEM = 1;
-	public static final int EDIT_ITEM = 2;
+	public static final int SHOW_ON_MAP = 0;
+	public static final int NAVIGATE_TO = 1;
+	public static final int DELETE_ITEM = 2;
+	public static final int EDIT_ITEM = 3;
 	
 	public static final int EXPORT_ID = 0;
 	public static final int IMPORT_ID = 1;
@@ -78,11 +79,12 @@ public class FavouritesActivity extends ListActivity {
 			@Override
 			public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 				menu.setHeaderTitle(R.string.favourites_context_menu_title);
-				menu.add(0, NAVIGATE_TO, 0, R.string.favourites_context_menu_navigate);
+				menu.add(0, SHOW_ON_MAP, 0, R.string.show_poi_on_map);
+				menu.add(0, NAVIGATE_TO, 1, R.string.favourites_context_menu_navigate);
 				final FavouritePoint point = (FavouritePoint) favouritesAdapter.getItem(((AdapterContextMenuInfo)menuInfo).position);
 				if(point.isStored()){
-					menu.add(0, EDIT_ITEM, 1, R.string.favourites_context_menu_edit);
-					menu.add(0, DELETE_ITEM, 2, R.string.favourites_context_menu_delete);
+					menu.add(0, EDIT_ITEM, 2, R.string.favourites_context_menu_edit);
+					menu.add(0, DELETE_ITEM, 3, R.string.favourites_context_menu_delete);
 				}
 			}
         	
@@ -130,7 +132,11 @@ public class FavouritesActivity extends ListActivity {
 	public boolean onContextItemSelected(MenuItem aItem) {
 		AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) aItem.getMenuInfo();
 		final FavouritePoint point = (FavouritePoint) favouritesAdapter.getItem(menuInfo.position);
-		if (aItem.getItemId() == NAVIGATE_TO) {
+		if (aItem.getItemId() == SHOW_ON_MAP) {
+			OsmandSettings.getOsmandSettings(this).SHOW_FAVORITES.set( true);
+			OsmandSettings.getOsmandSettings(this).setMapLocationToShow(point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName());
+			MapActivity.launchMapActivityMoveToTop(this);
+		} else if (aItem.getItemId() == NAVIGATE_TO) {
 			OsmandSettings.getOsmandSettings(this).setPointToNavigate(point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName());
 			MapActivity.launchMapActivityMoveToTop(this);
 		} else if (aItem.getItemId() == EDIT_ITEM) {
