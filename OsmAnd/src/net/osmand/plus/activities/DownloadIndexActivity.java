@@ -27,6 +27,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.Map.Entry;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -187,7 +189,7 @@ public class DownloadIndexActivity extends ListActivity {
 					findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
 				}
 			} else if(item.getItemId() == FILTER_EXISTING_REGIONS){
-				final List<String> listAlreadyDownloaded = listAlreadyDownloadedWithAlternatives();
+				final Collection<String> listAlreadyDownloaded = listAlreadyDownloadedWithAlternatives();
 				final List<IndexItem> filtered = new ArrayList<IndexItem>();
 				for(String file : listAlreadyDownloaded) {
 					IndexItem fileItem = listAdapter.getIndexFiles().get(file);
@@ -315,8 +317,8 @@ public class DownloadIndexActivity extends ListActivity {
 		
 	}
 
-	private List<String> listAlreadyDownloadedWithAlternatives() {
-		List<String> files = new ArrayList<String>();
+	private Collection<String> listAlreadyDownloadedWithAlternatives() {
+		Set<String> files = new TreeSet<String>();
 		File externalStorageDirectory = OsmandSettings.getOsmandSettings(getApplicationContext()).getExternalStorageDirectory();
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.POI_PATH),POI_INDEX_EXT,POI_INDEX_EXT_ZIP,POI_TABLE_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.APP_DIR),BINARY_MAP_INDEX_EXT,BINARY_MAP_INDEX_EXT_ZIP,BINARY_MAP_VERSION));
@@ -332,9 +334,9 @@ public class DownloadIndexActivity extends ListActivity {
 				public boolean accept(File dir, String filename) {
 					if (filename.endsWith(ext)) {
 						files.add(filename);
-						files.add(filename.substring(0,filename.length()-ext.length())+"_"+version+ext);
+						files.add(filename.substring(0, filename.length() - ext.length()) + "_" + version + ext);
 						if (secondaryExt != null) {
-							files.add(filename.substring(0,filename.length()-ext.length())+"_"+version+secondaryExt);
+							files.add(filename.substring(0, filename.length() - ext.length()) + "_" + version + secondaryExt);
 						}
 					}
 					return filename.endsWith(ext);
