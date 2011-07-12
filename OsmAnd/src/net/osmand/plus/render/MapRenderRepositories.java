@@ -384,6 +384,7 @@ public class MapRenderRepositories {
 			currentRenderingContext.width = (int) (requestedBox.getTileWidth() * OsmandRenderer.TILE_SIZE);
 			currentRenderingContext.height = (int) (requestedBox.getTileHeight() * OsmandRenderer.TILE_SIZE);
 			currentRenderingContext.nightMode = nightMode;
+			currentRenderingContext.highResMode = prefs.USE_HIGH_RES_MAPS.get();
 			if (checkWhetherInterrupted()) {
 				return;
 			}

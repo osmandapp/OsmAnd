@@ -106,6 +106,7 @@ public class OsmandRenderer {
 	/*package*/ static class RenderingContext {
 		public boolean interrupted = false;
 		public boolean nightMode = false;
+		public boolean highResMode = false;
 		
 		List<TextDrawInfo> textToDraw = new ArrayList<TextDrawInfo>();
 		List<IconDrawInfo> iconsToDraw = new ArrayList<IconDrawInfo>();
@@ -357,7 +358,7 @@ public class OsmandRenderer {
 			notifyListeners(notifyList);
 			long beforeIconTextTime = System.currentTimeMillis() - now;
 			
-			int skewConstant = (int) (16 * dm.density);
+			int skewConstant = (int) getDensityValue(rc, 16);
 			
 			int iconsW = rc.width / skewConstant ;
 			int iconsH = rc.height / skewConstant;
@@ -410,6 +411,14 @@ public class OsmandRenderer {
 		}
 	}
 	private final static boolean findAllTextIntersections = true;
+	
+	private float getDensityValue(RenderingContext rc, float val) {
+		if (rc.highResMode) {
+			return val * dm.density;
+		} else {
+			return val;
+		}
+	}
 
 	public void drawTextOverCanvas(RenderingContext rc, Canvas cv, boolean useEnglishNames) {
 		List<RectF> boundsNotPathIntersect = new ArrayList<RectF>();
@@ -439,14 +448,18 @@ public class OsmandRenderer {
 					text.text = Junidecode.unidecode(text.text);
 				}
 				RectF bounds = new RectF();
-				paintText.setTextSize(text.textSize * dm.density);
+				if(!rc.highResMode){
+					paintText.setTextSize(getDensityValue(rc, text.textSize));
+				} else {
+					paintText.setTextSize(text.textSize);
+				}
 				paintText.setFakeBoldText(text.bold);
 				boolean horizontalWayDisplay = (text.pathRotate > 45 && text.pathRotate < 135) || (text.pathRotate > 225 && text.pathRotate < 315);
 				float mes = paintText.measureText(text.text) + (!horizontalWayDisplay ? 0 : text.minDistance);
 				 // Paint.ascent is negative, so negate it.
 				int ascent = (int) Math.ceil(-paintText.ascent());
 				int descent = (int) Math.ceil(paintText.descent());
-				float textHeight = ascent + descent + (horizontalWayDisplay ? 0 : text.minDistance) + 5 * dm.density;
+				float textHeight = ascent + descent + (horizontalWayDisplay ? 0 : text.minDistance) + getDensityValue(rc, 5);
 				
 				
 				if(text.drawOnPath == null || horizontalWayDisplay){
@@ -461,8 +474,8 @@ public class OsmandRenderer {
 				if(boundsIntersect.isEmpty()){
 					boundsIntersect.add(bounds);
 				} else {
-					final int diff = (int) (3 * dm.density);
-					final int diff2 = (int) (15 * dm.density);
+					final int diff = (int) (getDensityValue(rc, 3));
+					final int diff2 = (int) (getDensityValue(rc, 15));
 					// implement binary search 
 					int index = Collections.binarySearch(boundsIntersect, bounds, c);
 					if (index < 0) {
@@ -545,8 +558,8 @@ public class OsmandRenderer {
 						}
 						Bitmap ico = cachedIcons.get(text.shieldRes);
 						if (ico  != null) {
-							cv.drawBitmap(ico, text.centerX - ico.getWidth() / 2 - 0.5f * dm.density, 
-									text.centerY - text.textSize / 2 - 6.5f * dm.density,
+							cv.drawBitmap(ico, text.centerX - ico.getWidth() / 2 - getDensityValue(rc, 0.5f), 
+									text.centerY - text.textSize / 2 - getDensityValue(rc, 6.5f),
 									paintIcon);
 						}
 					}
