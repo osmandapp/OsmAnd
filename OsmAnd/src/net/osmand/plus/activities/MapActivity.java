@@ -387,7 +387,19 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			startActivity(newIntent);
             return true;
-        }
+		} else if (!routingHelper.isFollowingMode()) {
+			if (keyCode == KeyEvent.KEYCODE_VOLUME_UP && event.getRepeatCount() == 0) {
+				if (mapView.isZooming()) {
+					changeZoom(mapView.getZoom() + 2);
+				} else {
+					changeZoom(mapView.getZoom() + 1);
+				}
+				return true;
+			} else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN && event.getRepeatCount() == 0) {
+				changeZoom(mapView.getZoom() - 1);
+				return true;
+			}
+		}
         return super.onKeyDown(keyCode, event);
     }
     @Override
