@@ -12,6 +12,8 @@
 			android:key="use_english_names"></CheckBoxPreference>
 		<ListPreference android:key="renderer" android:title="@string/renderers" android:summary="@string/renderers_descr"></ListPreference>
 		<ListPreference android:key="daynight_mode" android:title="@string/daynight" android:summary="@string/daynight_descr"></ListPreference>
+		<ListPreference android:title="@string/level_to_switch_vector_raster" android:summary="@string/level_to_switch_vector_raster_descr"
+			android:key="level_to_switch_vector_raster"></ListPreference>
 		<ListPreference android:title="@string/map_overlay" android:summary="@string/map_overlay_descr" android:key="map_overlay"></ListPreference>
 		<net.osmand.plus.views.SeekBarPreference android:key="overlay_transparency" android:defaultValue="0" android:max="255" 
 			android:dialogMessage="@string/modify_transparency" android:title="@string/overlay_transparency" android:summary="@string/overlay_transparency_descr"/>
@@ -72,8 +74,6 @@
 		<CheckBoxPreference android:key="show_view_angle" android:title="@string/show_view_angle" android:summary="@string/show_view_angle_descr"></CheckBoxPreference>
 		<ListPreference android:key="rotate_map" android:title="@string/rotate_map_to_bearing" android:summary="@string/rotate_map_to_bearing_descr"></ListPreference>
 		<ListPreference android:key="map_screen_orientation" android:title="@string/map_screen_orientation" android:summary="@string/map_screen_orientation_descr"></ListPreference>
-		<ListPreference android:title="@string/level_to_switch_vector_raster" android:summary="@string/level_to_switch_vector_raster_descr"
-			android:key="level_to_switch_vector_raster"></ListPreference>
 		<ListPreference android:key="default_metric_system" android:title="@string/unit_of_length" android:summary="@string/unit_of_length_descr"></ListPreference>
 		<ListPreference android:key="position_on_map" android:title="@string/position_on_map" android:summary="@string/position_on_map_descr"></ListPreference>
 		<CheckBoxPreference android:key="use_trackball_for_movements" android:title="@string/use_trackball" android:summary="@string/use_trackball_descr"></CheckBoxPreference>

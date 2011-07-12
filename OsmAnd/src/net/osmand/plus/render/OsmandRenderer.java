@@ -505,8 +505,8 @@ public class OsmandRenderer {
 						st = 0;
 					}
 					// test functionality
-					// cv.drawRect(bounds, paint);
-					// cv.drawText(text.text.substring(0, Math.min(5, text.text.length())), bounds.centerX(), bounds.centerY(), paint);
+//					 cv.drawRect(bounds, paint);
+//					 cv.drawText(text.text.substring(0, Math.min(5, text.text.length())), bounds.centerX(), bounds.centerY(), paint);
 					
 					for (int j = st; j < e; j++) {
 						RectF b = boundsIntersect.get(j);
@@ -870,8 +870,7 @@ public class OsmandRenderer {
 		
 		Path path = null;
 		float pathRotate = 0;
-		float xLength = 0;
-		float yLength = 0;
+		float roadLength = 0;
 		boolean inverse = false;
 		float xPrev = 0;
 		float yPrev = 0;
@@ -890,8 +889,7 @@ public class OsmandRenderer {
 				path = new Path();
 				path.moveTo(p.x, p.y);
 			} else {
-				xLength += (p.x - xPrev) * (p.x - xPrev); // not abs
-				yLength += (p.y - yPrev) * (p.y - yPrev); // not abs
+				roadLength += Math.sqrt((p.x - xPrev) * (p.x - xPrev) + (p.y - yPrev) * (p.y - yPrev)); 
 				if(i == middle){
 					middlePoint.set(p.x, p.y);
 					double rot = - Math.atan2(p.x - xPrev, p.y - yPrev) * 180 / Math.PI;
@@ -961,7 +959,8 @@ public class OsmandRenderer {
 							text.fillProperties(rc, middlePoint.x, middlePoint.y);
 							rc.textToDraw.add(text);
 						} else {
-							if (paintText.measureText(obj.getName()) < Math.sqrt(xLength + yLength) - 4) {
+							paintText.setTextSize(text.textSize);
+							if (paintText.measureText(obj.getName()) < roadLength ) {
 								if (inverse) {
 									path.rewind();
 									boolean st = true;
