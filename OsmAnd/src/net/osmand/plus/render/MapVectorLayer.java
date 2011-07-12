@@ -103,10 +103,10 @@ public class MapVectorLayer extends BaseMapLayer {
 					resourceManager.updateRendererMap(rotatedTileBox);
 					// does it slow down Map refreshing ?
 					// Arguments : 1. Map request to read data slows whole process // 2. It works in operating memory
-					if (!warningToSwitchMapShown) {
+					if (warningToSwitchMapShown < 3) {
 						if (!resourceManager.getRenderer().containsLatLonMapData(view.getLatitude(), view.getLongitude(), view.getZoom())) {
 							Toast.makeText(view.getContext(), R.string.switch_to_raster_map_to_see, Toast.LENGTH_LONG).show();
-							warningToSwitchMapShown = true;
+							warningToSwitchMapShown++;
 						}
 					}
 				}

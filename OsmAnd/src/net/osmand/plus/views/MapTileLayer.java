@@ -206,10 +206,10 @@ public class MapTileLayer extends BaseMapLayer {
 			}
 		}
 		
-		if(mainMap && !oneTileShown && !useInternet && !warningToSwitchMapShown){
+		if(mainMap && !oneTileShown && !useInternet && warningToSwitchMapShown < 3){
 			if(resourceManager.getRenderer().containsLatLonMapData(view.getLatitude(), view.getLongitude(), nzoom)){
 				Toast.makeText(view.getContext(), R.string.switch_to_vector_map_to_see, Toast.LENGTH_LONG).show();
-				warningToSwitchMapShown = true;
+				warningToSwitchMapShown++;
 			}
 		}
 	}
