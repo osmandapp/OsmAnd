@@ -8,10 +8,10 @@ preamble - [].
 %% TURNS 
 turn('left', ['поверните налево ']).
 turn('left_sh', ['резко поверните налево ']).
-turn('left_sl', ['слегка поверните налево ']).
+turn('left_sl', ['плавно поверните налево ']).
 turn('right', ['поверните направо ']).
 turn('right_sh', ['резко поверните направо ']).
-turn('right_sl', ['слегка поверните направо ']).
+turn('right_sl', ['плавно поверните направо ']).
 
 prepare_turn(Turn, Dist) == ['Приготовьтесь через ', D, ' ', M] :- 
 			distance(Dist) == D, turn(Turn, M).
@@ -96,15 +96,15 @@ dist(D, ['950 ']) :-  D < 975, !.
 dist(D, ['1000 ']) :-  !.
 
 distance(Dist) == ['более одного километра '] :- Dist < 1500.
-distance(Dist) == ['более двух километров '] :- Dist < 2500.
-distance(Dist) == ['более трех километров '] :- Dist < 3500.
-distance(Dist) == ['более четырех километров '] :- Dist < 4500.
-distance(Dist) == ['более пяти километров '] :- Dist < 5500.
-distance(Dist) == ['более шести километров '] :- Dist < 6500.
-distance(Dist) == ['более семи километров '] :- Dist < 7500.
-distance(Dist) == ['более восьми километров '] :- Dist < 8500.
-distance(Dist) == ['более девяти километров '] :- Dist < 9500.
-distance(Dist) == ['более чем ', X, ' километов '] :- D is Dist/1000, dist(D, X).
+distance(Dist) == ['около двух километров '] :- Dist < 2500.
+distance(Dist) == ['около трех километров '] :- Dist < 3500.
+distance(Dist) == ['около четырех километров '] :- Dist < 4500.
+distance(Dist) == ['около пяти километров '] :- Dist < 5500.
+distance(Dist) == ['около шести километров '] :- Dist < 6500.
+distance(Dist) == ['около семи километров '] :- Dist < 7500.
+distance(Dist) == ['около восьми километров '] :- Dist < 8500.
+distance(Dist) == ['около девяти километров '] :- Dist < 9500.
+distance(Dist) == ['около ', X, ' километов '] :- D is Dist/1000, dist(D, X).
 
 %% resolve command main method
 %% if you are familar with Prolog you can input specific to the whole mechanism,
