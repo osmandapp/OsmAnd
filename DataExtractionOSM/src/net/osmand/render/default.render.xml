@@ -40,7 +40,8 @@
 		shop_supermarket, sosphone, spring station_small, station, telephone, theatre, toilets, tower_water, traffic_light transport_ford, tree,
 		tree2, viewpoint, vineyard, windmill, zoo, dentist, veterinary, doctors, optician, bureau_de_change, vending_machine, kiosk, outdoor, wreck, wyside_shrine,
 		wayside_cross, ruins, monument, battlefield, water_park, video, horse_racing, stadium, kindergarten, theme_par, baseball, archery, golf, swimming, diving,
-		canoe, skiing, soccer, tennis
+		canoe, skiing, soccer, tennis, greengorcer, mobile_phone, motorcycle, electronics, fishing, barrier_block, tobacco, townhall, barrier_kissing, barrier_toll,
+		laundry, copyshop 
 	-->
 
 	<!-- input exact layer, orderType check tag, value -->
@@ -347,11 +348,13 @@
 		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="14" tag="shop" value="butcher" />
 		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="14" tag="shop" value="clothes" />
 		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="14" tag="shop" value="fashion" />
+		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="14" tag="shop" value="boutique" />
 		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="14" tag="shop" value="convenience" />
 		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="shop" value="department_store" />
 		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="14" tag="shop" value="doityourself" />
 		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="14" tag="shop" value="hairdresser" />
 		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="shop" value="supermarket" />
+		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="shop" value="confectionery" />
 		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="14" tag="shop" value="vending_machine" />
 		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="shop" value="alcohol" />
 		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="shop" value="kiosk" />
@@ -385,7 +388,19 @@
 		<filter minzoom="17" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="13" tag="tourism" value="hotel" />
 		<filter minzoom="17" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="13" tag="tourism" value="motel" />
 		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" tag="tourism" value="museum" />
-
+		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="amenity" value="marketplace" />
+		<filter minzoom="15" textSize="12" textHaloRadius="1" textDy="13" tag="leisure" value="fishing" />
+		<filter minzoom="16" textSize="12" textHaloRadius="1" textDy="13" tag="amenity" value="townhall" />
+		<filter minzoom="16" textSize="12" textHaloRadius="1" textDy="13" tag="amenity" value="courthouse" />
+		<filter minzoom="16" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" textWrapWidth="15" tag="amenity" value="ice_cream" />
+		<filter minzoom="16" textSize="12" textHaloRadius="1" textDy="13" tag="leisure" value="sports_centre" />
+		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="shop" value="laundry" />
+		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="shop" value="tobacco" />
+		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="shop" value="motorcycle" />
+		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="shop" value="hardware" />
+		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="shop" value="copyshop" />
+		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="shop" value="greengrocer" />
+		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="shop" value="mobile_phone" />
 
 		<!-- type not supported -->
 		<!-- <filter minzoom="15" textSize="13" textHaloRadius="2" textWrapWidth="10" tag="landuse" type="point" /> -->
@@ -474,7 +489,7 @@
 		<filter minzoom="15" icon="lighthouse" tag="man_made" value="lighthouse" />
 		<filter minzoom="16" icon="water_tower" tag="man_made" value="water_tower" />
 		<filter minzoom="16" icon="windmill" tag="man_made" value="windmill" />
-		<filter minzoom="16" icon="firestation" tag="amenity" value="fire_station" />
+		<filter minzoom="16" icon="fire_station" tag="amenity" value="fire_station" />
 		<filter minzoom="16" icon="restaurant" tag="amenity" value="restaurant" />
 		<filter minzoom="16" icon="cafe" tag="amenity" value="cafe" />
 		<filter minzoom="16" icon="fast_food" tag="amenity" value="fast_food" />
@@ -515,12 +530,13 @@
 		<filter minzoom="17" icon="shop_butcher" tag="shop" value="butcher" />
 		<filter minzoom="16" icon="shop_clothes" tag="shop" value="clothes" />
 		<filter minzoom="16" icon="shop_clothes" tag="shop" value="fashion" />
+		<filter minzoom="16" icon="shop_clothes" tag="shop" value="boutique" />
 		<filter minzoom="16" icon="shop_bicycle" tag="shop" value="bicycle" />
 		<filter minzoom="16" icon="shop_car" tag="shop" value="car" />
 		<filter minzoom="16" icon="shop_car_repair" tag="shop" value="car_repair" />
 		<filter minzoom="17" icon="shop_convenience" tag="shop" value="convenience" />
 		<filter minzoom="16" icon="department_store" tag="shop" value="department_store" />
-		<filter minzoom="17" icon="shop_diy" tag="shop" value="electronics" />
+		<filter minzoom="17" icon="shop_electronics" tag="shop" value="electronics" />
 		<filter minzoom="16" icon="shop_supermarket" tag="shop" value="general" />
 		<filter minzoom="16" icon="florist" tag="shop" value="florist" />
 		<filter minzoom="16" icon="shop_hairdresser" tag="shop" value="hairdresser" />
@@ -564,7 +580,27 @@
 		<filter minzoom="16" icon="sport_diving" tag="sport" value="diving" />
 		<filter minzoom="16" icon="theme_park" tag="tourism" value="theme_park" />
 		<filter minzoom="16" icon="kindergarten" tag="amenity" value="kindergarten" />
-		
+		<filter minzoom="16" icon="amenity_bench" tag="amenity" value="bench" />
+		<filter minzoom="15" icon="amenity_fountain" tag="amenity" value="fountain" />
+		<filter minzoom="16" icon="amenity_marketplace" tag="amenity" value="marketplace" />
+		<filter minzoom="15" icon="barrier_entrance" tag="barrier" value="entrance" />
+		<filter minzoom="15" icon="barrier_entrance" tag="building" value="entrance" />
+		<filter minzoom="15" icon="shop_outdoor" tag="leisure" value="fishing" />
+		<filter minzoom="14" icon="barrier_block" tag="barrier" value="block" />
+		<filter minzoom="14" icon="barrier_kissing_gate" tag="barrier" value="kissing_gate" />
+		<filter minzoom="14" icon="barrier_toll_booth" tag="barrier" value="toll_booth" />
+		<filter minzoom="16" icon="townhall" tag="amenity" value="townhall" />
+		<filter minzoom="16" icon="amenity_court" tag="amenity" value="courthouse" />
+		<filter minzoom="16" icon="food_ice_cream" tag="amenity" value="ice_cream" />
+		<filter minzoom="16" icon="shop_confectionery" tag="shop" value="confectionery" />
+		<filter minzoom="16" icon="leisure_sports_centre" tag="leisure" value="sports_centre" />
+		<filter minzoom="16" icon="laundry" tag="shop" value="laundry" />
+		<filter minzoom="16" icon="shop_tobacco" tag="shop" value="tobacco" />
+		<filter minzoom="16" icon="shop_motorcycle" tag="shop" value="motorcycle" />
+		<filter minzoom="16" icon="shop_diy" tag="shop" value="hardware" />
+		<filter minzoom="16" icon="shop_copyshop" tag="shop" value="copyshop" />
+		<filter minzoom="16" icon="shop_greengrocer" tag="shop" value="greengrocer" />
+		<filter minzoom="16" icon="shop_mobile_phone" tag="shop" value="mobile_phone" />
 		
 		<filter minzoom="4" tag="place" icon="city" value="city" />
 		<filter minzoom="6" tag="place" icon="city" value="town" />
