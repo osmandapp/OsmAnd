@@ -97,18 +97,19 @@ dist(D, ['900 ']) :-  D < 925, !.
 dist(D, ['950 ']) :-  D < 975, !.
 dist(D, ['1000 ']) :-  !.
 
-distance(Dist, nominativ) == T :- (dist_km(Dist) == F), append(F, ' Kilometer ',T).
-distance(Dist, dativ) == T :- (dist_km(Dist) == F), append(F, ' Kilometern ',T).
-dist_km(Dist) == ['zirka ein'] :- Dist < 1500.
-dist_km(Dist) == ['zirka 2'] :- Dist < 2500.
-dist_km(Dist) == ['zirka 3'] :- Dist < 3500.
-dist_km(Dist) == ['zirka 4'] :- Dist < 4500.
-dist_km(Dist) == ['zirka 5'] :- Dist < 5500.
-dist_km(Dist) == ['zirka 6'] :- Dist < 6500.
-dist_km(Dist) == ['zirka 7'] :- Dist < 7500.
-dist_km(Dist) == ['zirka 8'] :- Dist < 8500.
-dist_km(Dist) == ['zirka 9'] :- Dist < 9500.
-dist_km(Dist) == ['zirka ', X] :- D is Dist/1000, dist(D, X).
+distance(Dist, nominativ) == T :- (dist_km(Dist, nominativ) == F), append(F, ' Kilometer ',T).
+distance(Dist, dativ) == T :- (dist_km(Dist, dativ) == F), append(F, ' Kilometern ',T).
+dist_km(Dist, nominativ) == ['zirka ein'] :- Dist < 1500.
+dist_km(Dist, dativ) == ['zirka einen'] :- Dist < 1500.
+dist_km(Dist, _) == ['zirka 2'] :- Dist < 2500.
+dist_km(Dist, _) == ['zirka 3'] :- Dist < 3500.
+dist_km(Dist, _) == ['zirka 4'] :- Dist < 4500.
+dist_km(Dist, _) == ['zirka 5'] :- Dist < 5500.
+dist_km(Dist, _) == ['zirka 6'] :- Dist < 6500.
+dist_km(Dist, _) == ['zirka 7'] :- Dist < 7500.
+dist_km(Dist, _) == ['zirka 8'] :- Dist < 8500.
+dist_km(Dist, _) == ['zirka 9'] :- Dist < 9500.
+dist_km(Dist, _) == ['zirka ', X] :- D is Dist/1000, dist(D, X).
 
 %% resolve command main method
 %% if you are familar with Prolog you can input specific to the whole mechanism,
