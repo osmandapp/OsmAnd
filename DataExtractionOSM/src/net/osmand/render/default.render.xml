@@ -346,7 +346,10 @@
 		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="14" tag="shop" value="doityourself" />
 		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="14" tag="shop" value="hairdresser" />
 		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="shop" value="supermarket" />
-
+		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="14" tag="shop" value="vending_machine" />
+		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="shop" value="alcohol" />
+		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="shop" value="kiosk" />
+		
 		<filter minzoom="16" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="13" textWrapWidth="70" tag="tourism" value="camp_site" />
 		<filter minzoom="16" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="13" textWrapWidth="70" tag="tourism" value="caravan_site" />
 
@@ -510,7 +513,10 @@
 		<filter minzoom="16" icon="viewpoint" tag="tourism" value="viewpoint" />
 		<filter minzoom="16" icon="geocache_found" tag="geocache" value="found" />
 		<filter minzoom="16" icon="geocache_not_found" tag="geocache" />
-	
+		<filter minzoom="17" icon="vending_machine" tag="amenity" value="vending_machine" />
+		<filter minzoom="16" icon="shop_alcohol" tag="shop" value="alcohol" />
+		<filter minzoom="16" icon="shop_kiosk" tag="shop" value="kiosk" />
+		
 		<filter minzoom="4" tag="place" icon="city" value="city" />
 		<filter minzoom="6" tag="place" icon="city" value="town" />
 	</point>
