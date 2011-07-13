@@ -38,7 +38,7 @@
 		parking, peak, pharmacy, place_of_worship, police, postbox, postoffice power_tower, power_wind, prison, pub, quarry2, recycling,
 		rental_bicycle restaurant, school, scrub, shelter, shop_bakery, shop_butcher, shop_clothes shop_convenience, shop_diy, shop_hairdresser,
 		shop_supermarket, sosphone, spring station_small, station, telephone, theatre, toilets, tower_water, traffic_light transport_ford, tree,
-		tree2, viewpoint, vineyard, windmill, zoo
+		tree2, viewpoint, vineyard, windmill, zoo, dentist, veterinary, doctors, optician, bureau_de_change, vending_machine, kiosk
 	-->
 
 	<!-- input exact layer, orderType check tag, value -->
@@ -317,8 +317,12 @@
 		<filter minzoom="17" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="13" tag="amenity" value="bus_station" />
 
 		<filter minzoom="17" textSize="12" textHaloRadius="1" textDy="13" tag="amenity" value="bank" />
+		<filter minzoom="17" textSize="12" textHaloRadius="1" textDy="13" tag="amenity" value="bureau_de_change" />
 		<filter minzoom="17" textSize="12" textColor="#da0092" textHaloRadius="1" textDy="13" textWrapWidth="12" tag="amenity" value="pharmacy" />
 		<filter minzoom="16" textSize="12" textColor="#da0092" textHaloRadius="2" textDy="13" textWrapWidth="24" tag="amenity" value="hospital" />
+		<filter minzoom="16" textSize="12" textColor="#da0092" textHaloRadius="2" textDy="13" textWrapWidth="24" tag="amenity" value="veterinary" />
+		<filter minzoom="16" textSize="12" textColor="#da0092" textHaloRadius="2" textDy="13" textWrapWidth="24" tag="amenity" value="doctors" />
+		<filter minzoom="16" textSize="12" textColor="#da0092" textHaloRadius="2" textDy="13" textWrapWidth="24" tag="amenity" value="dentist" />
 
 		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" textWrapWidth="15" tag="amenity" value="arts_centre" />
 		<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" textWrapWidth="15" tag="amenity" value="cinema" />
@@ -349,6 +353,8 @@
 		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="14" tag="shop" value="vending_machine" />
 		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="shop" value="alcohol" />
 		<filter minzoom="16" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="shop" value="kiosk" />
+		<filter minzoom="17" textSize="12" textColor="#993399" textHaloRadius="1" textDy="13" textWrapWidth="14" tag="shop" value="musical_instrument" />
+		<filter minzoom="16" textSize="12" textColor="#da0092" textHaloRadius="1" textDy="13" textWrapWidth="20" tag="shop" value="optician" />
 		
 		<filter minzoom="16" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="13" textWrapWidth="70" tag="tourism" value="camp_site" />
 		<filter minzoom="16" textSize="12" textColor="#0066ff" textHaloRadius="1" textDy="13" textWrapWidth="70" tag="tourism" value="caravan_site" />
@@ -470,6 +476,9 @@
 		<filter minzoom="16" icon="bank" tag="amenity" value="bank" />
 		<filter minzoom="16" icon="pharmacy" tag="amenity" value="pharmacy" />
 		<filter minzoom="15" icon="hospital" tag="amenity" value="hospital" />
+		<filter minzoom="15" icon="veterinary" tag="amenity" value="veterinary" />
+		<filter minzoom="15" icon="doctors" tag="amenity" value="doctors" />
+		<filter minzoom="15" icon="dentist" tag="amenity" value="dentist" />
 		<filter minzoom="15" icon="cinema" tag="amenity" value="cinema" />
 		<filter minzoom="15" icon="theatre" tag="amenity" value="theatre" />
 		<filter minzoom="17" icon="embassy" tag="amenity" value="embassy" />
@@ -516,6 +525,9 @@
 		<filter minzoom="17" icon="vending_machine" tag="amenity" value="vending_machine" />
 		<filter minzoom="16" icon="shop_alcohol" tag="shop" value="alcohol" />
 		<filter minzoom="16" icon="shop_kiosk" tag="shop" value="kiosk" />
+		<filter minzoom="17" icon="shop_musical_instrument" tag="shop" value="musical_instrument" />
+		<filter minzoom="16" icon="optician" tag="shop" value="optician" />
+		<filter minzoom="17" icon="bureau_de_change" tag="amenity" value="bureau_de_change" />
 		
 		<filter minzoom="4" tag="place" icon="city" value="city" />
 		<filter minzoom="6" tag="place" icon="city" value="town" />
