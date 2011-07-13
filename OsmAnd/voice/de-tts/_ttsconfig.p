@@ -15,23 +15,23 @@ turn('right_sh', ['scharf rechts abbiegen ']).
 turn('right_sl', ['leicht nach rechts abbiegen ']).
 
 prepare_turn(Turn, Dist) == ['Nach ', D, M] :- 
-			distance(Dist, plural) == D, turn(Turn, M).
+			distance(Dist, dativ) == D, turn(Turn, M).
 turn(Turn, Dist) == ['Nach ', D, M] :- 
-			distance(Dist, plural) == D, turn(Turn, M).
+			distance(Dist, dativ) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
 
 prepare_make_ut(Dist) == ['Vorbereiten zum Wenden nach ', D] :- 
-		distance(Dist, plural) == D.
+		distance(Dist, dativ) == D.
 
 prepare_roundabout(Dist) == ['Einbiegen in Kreisverkehr nach ', D] :- 
-		distance(Dist, plural) == D.
+		distance(Dist, dativ) == D.
 
 make_ut(Dist) == ['Nach ', D, ' wenden '] :- 
-			distance(Dist, plural) == D.
+			distance(Dist, dativ) == D.
 make_ut == ['Bitte wenden '].
 
-roundabout(Dist, _Angle, Exit) == ['Nach ', D, ' in den Kreisverkehr einfahren, dann nehmen Sie die ', E, 'Ausfahrt'] :- distance(Dist, plural) == D, nth(Exit, E).
+roundabout(Dist, _Angle, Exit) == ['Nach ', D, ' in den Kreisverkehr einfahren, dann nehmen Sie die ', E, 'Ausfahrt'] :- distance(Dist, dativ) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['nehmen Sie die ', E, 'Ausfahrt'] :- nth(Exit, E).
 
 and_arrive_destination == ['und kommen an Ihrem Ziel an ']. % Miss and?
@@ -40,9 +40,9 @@ reached_destination == ['Ziel erreicht '].
 bear_right == ['rechts halten '].
 bear_left == ['links halten '].
 route_recalc(_Dist) == []. % ['Route wird neu berechnet '].  %nothing to said possibly beep?	
-route_new_calc(Dist) == ['Die berechnete Strecke ist ', D, ' lang'] :- distance(Dist, single) == D. % nothing to said possibly beep?
+route_new_calc(Dist) == ['Die berechnete Strecke ist ', D, ' lang'] :- distance(Dist, nominativ) == D. % nothing to said possibly beep?
 
-go_ahead(Dist) == ['Fahren Sie für ', D]:- distance(Dist, single) == D.
+go_ahead(Dist) == ['Fahren Sie für ', D]:- distance(Dist, nominativ) == D.
 go_ahead == ['Weiter geradeaus '].
 
 %% 
@@ -66,8 +66,8 @@ nth(17, 'siebzehnte ').
 
 
 %%% distance measure
-distance(Dist, plural) == T :- Dist < 1000, dist(Dist, F), append(F, ' metern ',T).
-distance(Dist, single) == T :- Dist < 1000, dist(Dist, F), append(F, ' meter ',T).
+distance(Dist, nominativ) == T :- Dist < 1000, dist(Dist, F), append(F, ' meter ',T).
+distance(Dist, dativ) == T :- Dist < 1000, dist(Dist, F), append(F, ' metern ',T).
 dist(D, ['10 ']) :-  D < 15, !.
 dist(D, ['20 ']) :-  D < 25, !.
 dist(D, ['30 ']) :-  D < 35, !.
@@ -97,8 +97,8 @@ dist(D, ['900 ']) :-  D < 925, !.
 dist(D, ['950 ']) :-  D < 975, !.
 dist(D, ['1000 ']) :-  !.
 
-distance(Dist, plural) == T :- (dist_km(Dist) == F), append(F, ' Kilometern ',T).
-distance(Dist, single) == T :- (dist_km(Dist) == F), append(F, ' Kilometer ',T).
+distance(Dist, nominativ) == T :- (dist_km(Dist) == F), append(F, ' Kilometer ',T).
+distance(Dist, dativ) == T :- (dist_km(Dist) == F), append(F, ' Kilometern ',T).
 dist_km(Dist) == ['zirka ein'] :- Dist < 1500.
 dist_km(Dist) == ['zirka 2'] :- Dist < 2500.
 dist_km(Dist) == ['zirka 3'] :- Dist < 3500.
