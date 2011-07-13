@@ -97,19 +97,26 @@ dist(D, ['900 ']) :-  D < 925, !.
 dist(D, ['950 ']) :-  D < 975, !.
 dist(D, ['1000 ']) :-  !.
 
-distance(Dist, nominativ) == T :- (dist_km(Dist, nominativ) == F), append(F, ' Kilometer ',T).
-distance(Dist, dativ) == T :- (dist_km(Dist, dativ) == F), append(F, ' Kilometern ',T).
-dist_km(Dist, nominativ) == ['zirka ein'] :- Dist < 1500.
-dist_km(Dist, dativ) == ['zirka einen'] :- Dist < 1500.
-dist_km(Dist, _) == ['zirka 2'] :- Dist < 2500.
-dist_km(Dist, _) == ['zirka 3'] :- Dist < 3500.
-dist_km(Dist, _) == ['zirka 4'] :- Dist < 4500.
-dist_km(Dist, _) == ['zirka 5'] :- Dist < 5500.
-dist_km(Dist, _) == ['zirka 6'] :- Dist < 6500.
-dist_km(Dist, _) == ['zirka 7'] :- Dist < 7500.
-dist_km(Dist, _) == ['zirka 8'] :- Dist < 8500.
-dist_km(Dist, _) == ['zirka 9'] :- Dist < 9500.
-dist_km(Dist, _) == ['zirka ', X] :- D is Dist/1000, dist(D, X).
+distance(Dist, nominativ) == ['zirka einen Kilometer'] :- Dist < 1500.
+distance(Dist, dativ) == ['zirka einem Kilometer '] :- Dist < 1500.
+distance(Dist, nominativ) == ['zirka 2 Kilometer '] :- Dist < 2500.
+distance(Dist, dativ) == ['zirka 2 Kilometern '] :- Dist < 2500.
+distance(Dist, nominativ) == ['zirka 3 Kilometer '] :- Dist < 3500.
+distance(Dist, dativ) == ['zirka 3 Kilometern '] :- Dist < 3500.
+distance(Dist, nominativ) == ['zirka 4 Kilometer '] :- Dist < 4500.
+distance(Dist, dativ) == ['zirka 4 Kilometern '] :- Dist < 4500.
+distance(Dist, nominativ) == ['zirka 5 Kilometer '] :- Dist < 5500.
+distance(Dist, dativ) == ['zirka 5 Kilometern '] :- Dist < 5500.
+distance(Dist, nominativ) == ['zirka 6 Kilometer '] :- Dist < 6500.
+distance(Dist, dativ) == ['zirka 6 Kilometern '] :- Dist < 6500.
+distance(Dist, nominativ) == ['zirka 7 Kilometer '] :- Dist < 7500.
+distance(Dist, dativ) == ['zirka 7 Kilometern '] :- Dist < 7500.
+distance(Dist, nominativ) == ['zirka 8 Kilometer '] :- Dist < 8500.
+distance(Dist, dativ) == ['zirka 8 Kilometern '] :- Dist < 8500.
+distance(Dist, nominativ) == ['zirka 9 Kilometer '] :- Dist < 9500.
+distance(Dist, dativ) == ['zirka 9 Kilometern '] :- Dist < 9500.
+distance(Dist, nominativ) == ['zirka ', X, ' Kilometer '] :- D is Dist/1000, dist(D, X).
+distance(Dist, dativ) == ['zirka ', X, ' Kilometern '] :- D is Dist/1000, dist(D, X).
 
 %% resolve command main method
 %% if you are familar with Prolog you can input specific to the whole mechanism,
