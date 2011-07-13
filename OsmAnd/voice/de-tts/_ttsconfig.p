@@ -15,23 +15,23 @@ turn('right_sh', ['scharf rechts abbiegen ']).
 turn('right_sl', ['leicht nach rechts abbiegen ']).
 
 prepare_turn(Turn, Dist) == ['Nach ', D, M] :- 
-			distance(Dist) == D, turn(Turn, M).
+			distance(Dist, plural) == D, turn(Turn, M).
 turn(Turn, Dist) == ['Nach ', D, M] :- 
-			distance(Dist) == D, turn(Turn, M).
+			distance(Dist, plural) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
 
 prepare_make_ut(Dist) == ['Vorbereiten zum Wenden nach ', D] :- 
-		distance(Dist) == D.
+		distance(Dist, plural) == D.
 
 prepare_roundabout(Dist) == ['Einbiegen in Kreisverkehr nach ', D] :- 
-		distance(Dist) == D.
+		distance(Dist, plural) == D.
 
 make_ut(Dist) == ['Nach ', D, ' wenden '] :- 
-			distance(Dist) == D.
+			distance(Dist, plural) == D.
 make_ut == ['Bitte wenden '].
 
-roundabout(Dist, _Angle, Exit) == ['Nach ', D, ' in den Kreisverkehr einfahren, dann nehmen Sie die ', E, 'Ausfahrt'] :- distance(Dist) == D, nth(Exit, E).
+roundabout(Dist, _Angle, Exit) == ['Nach ', D, ' in den Kreisverkehr einfahren, dann nehmen Sie die ', E, 'Ausfahrt'] :- distance(Dist, plural) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['nehmen Sie die ', E, 'Ausfahrt'] :- nth(Exit, E).
 
 and_arrive_destination == ['und kommen an Ihrem Ziel an ']. % Miss and?
@@ -40,9 +40,9 @@ reached_destination == ['Ziel erreicht '].
 bear_right == ['rechts halten '].
 bear_left == ['links halten '].
 route_recalc(_Dist) == []. % ['Route wird neu berechnet '].  %nothing to said possibly beep?	
-route_new_calc(Dist) == ['Die berechnete Strecke ist ', D, ' lang'] :- distance(Dist) == D. % nothing to said possibly beep?
+route_new_calc(Dist) == ['Die berechnete Strecke ist ', D, ' lang'] :- distance(Dist, single) == D. % nothing to said possibly beep?
 
-go_ahead(Dist) == ['Fahren Sie für ', D]:- distance(Dist) == D.
+go_ahead(Dist) == ['Fahren Sie für ', D]:- distance(Dist, single) == D.
 go_ahead == ['Weiter geradeaus '].
 
 %% 
@@ -66,7 +66,8 @@ nth(17, 'siebzehnte ').
 
 
 %%% distance measure
-distance(Dist) == T :- Dist < 1000, dist(Dist, F), append(F, ' meter',T).
+distance(Dist, plural) == T :- Dist < 1000, dist(Dist, F), append(F, ' metern ',T).
+distance(Dist, single) == T :- Dist < 1000, dist(Dist, F), append(F, ' meter ',T).
 dist(D, ['10 ']) :-  D < 15, !.
 dist(D, ['20 ']) :-  D < 25, !.
 dist(D, ['30 ']) :-  D < 35, !.
@@ -96,16 +97,18 @@ dist(D, ['900 ']) :-  D < 925, !.
 dist(D, ['950 ']) :-  D < 975, !.
 dist(D, ['1000 ']) :-  !.
 
-distance(Dist) == ['zirka ein Kilometer '] :- Dist < 1500.
-distance(Dist) == ['zirka 2 Kilometer '] :- Dist < 2500.
-distance(Dist) == ['zirka 3 Kilometer '] :- Dist < 3500.
-distance(Dist) == ['zirka 4 Kilometer '] :- Dist < 4500.
-distance(Dist) == ['zirka 5 Kilometer '] :- Dist < 5500.
-distance(Dist) == ['zirka 6 Kilometer '] :- Dist < 6500.
-distance(Dist) == ['zirka 7 Kilometer '] :- Dist < 7500.
-distance(Dist) == ['zirka 8 Kilometer '] :- Dist < 8500.
-distance(Dist) == ['zirka 9 Kilometer '] :- Dist < 9500.
-distance(Dist) == ['zirka ', X, ' Kilometer '] :- D is Dist/1000, dist(D, X).
+distance(Dist, plural) == T :- (dist_km(Dist) == F), append(F, ' Kilometern ',T).
+distance(Dist, single) == T :- (dist_km(Dist) == F), append(F, ' Kilometer ',T).
+dist_km(Dist) == ['zirka ein'] :- Dist < 1500.
+dist_km(Dist) == ['zirka 2'] :- Dist < 2500.
+dist_km(Dist) == ['zirka 3'] :- Dist < 3500.
+dist_km(Dist) == ['zirka 4'] :- Dist < 4500.
+dist_km(Dist) == ['zirka 5'] :- Dist < 5500.
+dist_km(Dist) == ['zirka 6'] :- Dist < 6500.
+dist_km(Dist) == ['zirka 7'] :- Dist < 7500.
+dist_km(Dist) == ['zirka 8'] :- Dist < 8500.
+dist_km(Dist) == ['zirka 9'] :- Dist < 9500.
+dist_km(Dist) == ['zirka ', X] :- D is Dist/1000, dist(D, X).
 
 %% resolve command main method
 %% if you are familar with Prolog you can input specific to the whole mechanism,
