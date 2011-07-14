@@ -321,7 +321,7 @@ public class RoutingHelper {
 //				}
 			}
 		}
-		voiceRouter.updateStatus();
+		voiceRouter.updateStatus(currentLocation);
 
 		lastFixedLocation = currentLocation;
 		if(calculateRoute){
