@@ -306,7 +306,7 @@
 			<case tag="amenity" value="fast_food" />
 			<case tag="amenity" value="pub" />
 			<case tag="amenity" value="bar" />
-			<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" textWrapWidth="34" />
+			<filter minzoom="17" textSize="12" textColor="#734a08" textHaloRadius="1" textDy="13" textWrapWidth="34"  />
 		</switch>
 
 		<filter minzoom="16" textSize="12" textColor="#000033" textWrapWidth="16" tag="amenity" value="kindergarten" />

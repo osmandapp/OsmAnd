@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="map_text_size_descr">Select text size for names on the map</string>
+	<string name="map_text_size">Text size</string>
 	<string name="trace_rendering">Rendering debug info</string>
 	<string name="trace_rendering_descr">Show rendering performance data for debugging purposes</string>
 	<string name="tip_recent_changes">Recent changes</string>

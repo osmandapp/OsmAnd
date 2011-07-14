@@ -107,6 +107,7 @@ public class OsmandRenderer {
 		public boolean interrupted = false;
 		public boolean nightMode = false;
 		public boolean highResMode = false;
+		public float mapTextSize = 1;
 		
 		List<TextDrawInfo> textToDraw = new ArrayList<TextDrawInfo>();
 		List<IconDrawInfo> iconsToDraw = new ArrayList<IconDrawInfo>();
@@ -151,6 +152,7 @@ public class OsmandRenderer {
 		RenderingPaintProperties second = new RenderingPaintProperties();
 		RenderingPaintProperties third = new RenderingPaintProperties();
 		RenderingPaintProperties[] adds = null;
+		
 
 		
 		public void clearText() {
@@ -226,6 +228,7 @@ public class OsmandRenderer {
 
 		paintText = new TextPaint();
 		paintText.setStyle(Style.FILL);
+		paintText.setStrokeWidth(1);
 		paintText.setColor(Color.BLACK);
 		paintText.setTextAlign(Align.CENTER);
 		paintText.setTypeface(Typeface.create("Droid Serif", Typeface.NORMAL)); //$NON-NLS-1$
@@ -414,9 +417,9 @@ public class OsmandRenderer {
 	
 	private float getDensityValue(RenderingContext rc, float val) {
 		if (rc.highResMode) {
-			return val * dm.density;
+			return val * dm.density * rc.mapTextSize;
 		} else {
-			return val;
+			return val * rc.mapTextSize;
 		}
 	}
 
@@ -431,9 +434,6 @@ public class OsmandRenderer {
 			}
 			
 		};
-		paint.setStyle(Style.STROKE);
-		paint.setTextSize(10);
-		paint.setColor(Color.BLACK);
 		
 		nextText: for (int i = 0; i < size; i++) {
 			TextDrawInfo text  = rc.textToDraw.get(i);
@@ -447,76 +447,176 @@ public class OsmandRenderer {
 				if(useEnglishNames){
 					text.text = Junidecode.unidecode(text.text);
 				}
-				RectF bounds = new RectF();
-				if(!rc.highResMode){
-					paintText.setTextSize(getDensityValue(rc, text.textSize));
-				} else {
-					paintText.setTextSize(text.textSize);
-				}
+				
+				
+				// sest text size before finding intersection (it is used there)
+				float textSize = getDensityValue(rc, text.textSize);
+				paintText.setTextSize(textSize);
 				paintText.setFakeBoldText(text.bold);
-				boolean horizontalWayDisplay = (text.pathRotate > 45 && text.pathRotate < 135) || (text.pathRotate > 225 && text.pathRotate < 315);
-				float mes = paintText.measureText(text.text) + (!horizontalWayDisplay ? 0 : text.minDistance);
-				 // Paint.ascent is negative, so negate it.
-				int ascent = (int) Math.ceil(-paintText.ascent());
-				int descent = (int) Math.ceil(paintText.descent());
-				float textHeight = ascent + descent + (horizontalWayDisplay ? 0 : text.minDistance) + getDensityValue(rc, 5);
+				paintText.setColor(text.textColor);
+				// align center y
+				text.centerY += (-paintText.ascent());
 				
-				
-				if(text.drawOnPath == null || horizontalWayDisplay){
-					bounds.set(text.centerX - mes / 2, text.centerY - textHeight / 2 ,
-							text.centerX + mes / 2 , text.centerY + textHeight / 2 );
-				} else {
-					bounds.set(text.centerX - textHeight / 2, text.centerY - mes / 2, 
-							text.centerX + textHeight / 2 , text.centerY + mes / 2);
+				// calculate if there is intersection
+				boolean intersects = findTextIntersection(rc, boundsNotPathIntersect, boundsPathIntersect, c, text);
+				if(intersects){
+					continue nextText;
 				}
-				List<RectF> boundsIntersect = text.drawOnPath == null || findAllTextIntersections? 
-						boundsNotPathIntersect : boundsPathIntersect;
-				if(boundsIntersect.isEmpty()){
-					boundsIntersect.add(bounds);
+				
+				
+				if(text.drawOnPath != null){
+					if(text.textShadow > 0){
+						paintText.setColor(Color.WHITE);
+						paintText.setStyle(Style.STROKE);
+						paintText.setStrokeWidth(2 + text.textShadow);
+						cv.drawTextOnPath(text.text, text.drawOnPath, 0, text.vOffset, paintText);
+						// reset
+						paintText.setStyle(Style.FILL);
+						paintText.setStrokeWidth(2);
+						paintText.setColor(text.textColor);
+					}
+					cv.drawTextOnPath(text.text, text.drawOnPath, 0, text.vOffset, paintText);
 				} else {
-					final int diff = (int) (getDensityValue(rc, 3));
-					final int diff2 = (int) (getDensityValue(rc, 15));
-					// implement binary search 
-					int index = Collections.binarySearch(boundsIntersect, bounds, c);
-					if (index < 0) {
-						index = -(index + 1);
-					}
-					// find sublist that is appropriate
-					int e = index;
-					while (e < boundsIntersect.size()) {
-						if (boundsIntersect.get(e).left < bounds.right ) {
-							e++;
-						} else {
-							break;
+					if (text.shieldRes != 0) {
+						if (cachedIcons.get(text.shieldRes) == null) {
+							cachedIcons.put(text.shieldRes, BitmapFactory.decodeResource(context.getResources(), text.shieldRes));
+						}
+						Bitmap ico = cachedIcons.get(text.shieldRes);
+						if (ico != null) {
+							cv.drawBitmap(ico, text.centerX - ico.getWidth() / 2 - 0.5f, text.centerY
+									- ico.getHeight() / 2 - getDensityValue(rc, 4.5f) 
+									, paintIcon);
 						}
 					}
-					int st = index - 1;
-					while (st >= 0) {
-						// that's not exact algorithm that replace comparison rect with each other
-						// because of that comparison that is not obvious 
-						// (we store array sorted by left boundary, not by right) - that's euristic
-						if (boundsIntersect.get(st).right > bounds.left ) {
-							st--;
-						} else {
-							break;
-						}
+					
+					drawWrappedText(cv, text, textSize);
+				}
+			}
+		}
+	}
+
+	private void drawWrappedText(Canvas cv, TextDrawInfo text, float textSize) {
+		if(text.textWrap == 0){
+			// set maximum for all text
+			text.textWrap = 40;
+		}
+		
+		if(text.text.length() > text.textWrap){
+			int start = 0;
+			int end = text.text.length();
+			int lastSpace = -1;
+			int line = 0;
+			int pos = 0;
+			int limit = 0;
+			while(pos < end){
+				lastSpace = -1;
+				limit += text.textWrap;
+				while(pos < limit && pos < end){
+					if(!Character.isLetterOrDigit(text.text.charAt(pos))){
+						lastSpace = pos;
 					}
-					if (st < 0) {
-						st = 0;
-					}
-					// test functionality
+					pos++;
+				}
+				if(lastSpace == -1){
+					drawTextOnCanvas(cv, text.text.substring(start, pos), 
+							text.centerX, text.centerY + line * (textSize + 2), paintText, text.textShadow);
+					start = pos;
+				} else {
+					drawTextOnCanvas(cv, text.text.substring(start, lastSpace), 
+							text.centerX, text.centerY + line * (textSize + 2), paintText, text.textShadow); 
+					start = lastSpace + 1;
+					limit += (start - pos) - 1;
+				}
+				line++;
+				
+			}
+		} else {
+			drawTextOnCanvas(cv, text.text, text.centerX, text.centerY, paintText, text.textShadow);
+		}
+	}
+	
+	private void drawTextOnCanvas(Canvas cv, String text, float centerX, float centerY, Paint paint, float textShadow){
+		if(textShadow > 0){
+			int c = paintText.getColor();
+			paintText.setStyle(Style.STROKE);
+			paintText.setColor(Color.WHITE);
+			paintText.setStrokeWidth(2 + textShadow);
+			cv.drawText(text, centerX, centerY, paint);
+			cv.drawText(text, centerX, centerY, paint);
+			// reset
+			paintText.setStrokeWidth(2);
+			paintText.setStyle(Style.FILL);
+			paintText.setColor(c);
+		}
+		cv.drawText(text, centerX, centerY, paint);
+	}
+	
+
+	private boolean findTextIntersection(RenderingContext rc, List<RectF> boundsNotPathIntersect, List<RectF> boundsPathIntersect,
+			Comparator<RectF> c, TextDrawInfo text) {
+		boolean horizontalWayDisplay = (text.pathRotate > 45 && text.pathRotate < 135) || (text.pathRotate > 225 && text.pathRotate < 315);
+		float textWidth = paintText.measureText(text.text) + (!horizontalWayDisplay ? 0 : text.minDistance);
+		 // Paint.ascent is negative, so negate it.
+		int ascent = (int) Math.ceil(-paintText.ascent());
+		int descent = (int) Math.ceil(paintText.descent());
+		float textHeight = ascent + descent + (horizontalWayDisplay ? 0 : text.minDistance) + getDensityValue(rc, 5);
+		
+		RectF bounds = new RectF();
+		if(text.drawOnPath == null || horizontalWayDisplay){
+			bounds.set(text.centerX - textWidth / 2, text.centerY - textHeight / 2 ,
+					text.centerX + textWidth / 2 , text.centerY + textHeight / 2 );
+		} else {
+			bounds.set(text.centerX - textHeight / 2, text.centerY - textWidth / 2, 
+					text.centerX + textHeight / 2 , text.centerY + textWidth / 2);
+		}
+		List<RectF> boundsIntersect = text.drawOnPath == null || findAllTextIntersections? 
+				boundsNotPathIntersect : boundsPathIntersect;
+		if(boundsIntersect.isEmpty()){
+			boundsIntersect.add(bounds);
+		} else {
+			final int diff = (int) (getDensityValue(rc, 3));
+			final int diff2 = (int) (getDensityValue(rc, 15));
+			// implement binary search 
+			int index = Collections.binarySearch(boundsIntersect, bounds, c);
+			if (index < 0) {
+				index = -(index + 1);
+			}
+			// find sublist that is appropriate
+			int e = index;
+			while (e < boundsIntersect.size()) {
+				if (boundsIntersect.get(e).left < bounds.right ) {
+					e++;
+				} else {
+					break;
+				}
+			}
+			int st = index - 1;
+			while (st >= 0) {
+				// that's not exact algorithm that replace comparison rect with each other
+				// because of that comparison that is not obvious 
+				// (we store array sorted by left boundary, not by right) - that's euristic
+				if (boundsIntersect.get(st).right > bounds.left ) {
+					st--;
+				} else {
+					break;
+				}
+			}
+			if (st < 0) {
+				st = 0;
+			}
+			// test functionality
 //					 cv.drawRect(bounds, paint);
 //					 cv.drawText(text.text.substring(0, Math.min(5, text.text.length())), bounds.centerX(), bounds.centerY(), paint);
-					
-					for (int j = st; j < e; j++) {
-						RectF b = boundsIntersect.get(j);
-						float x = Math.min(bounds.right, b.right) - Math.max(b.left, bounds.left);
-						float y = Math.min(bounds.bottom, b.bottom) - Math.max(b.top, bounds.top);
-						if ((x > diff && y > diff2) || (x > diff2 && y > diff)) {
-							continue nextText;
-						}
-					}
-					// store in list sorted by left boundary
+			
+			for (int j = st; j < e; j++) {
+				RectF b = boundsIntersect.get(j);
+				float x = Math.min(bounds.right, b.right) - Math.max(b.left, bounds.left);
+				float y = Math.min(bounds.bottom, b.bottom) - Math.max(b.top, bounds.top);
+				if ((x > diff && y > diff2) || (x > diff2 && y > diff)) {
+					return true;
+				}
+			}
+			// store in list sorted by left boundary
 //					if(text.minDistance > 0){
 //						if (verticalText) {
 //							bounds.set(bounds.left + text.minDistance / 2, bounds.top, 
@@ -526,79 +626,9 @@ public class OsmandRenderer {
 //									bounds.bottom - text.minDistance / 2);
 //						}
 //					}
-					boundsIntersect.add(index, bounds);
-				}
-				
-				
-				// Shadow layer
-				// paintText.setShadowLayer(text.textShadow, 0, 0, Color.WHITE);
-//				if(text.textShadow > 0){
-//					paintText.setColor(Color.WHITE);
-//					paintText.setTextSize(text.textSize + text.textShadow * 2);
-//					if(text.drawOnPath != null){
-//						cv.drawTextOnPath(text.text, text.drawOnPath, 0, text.vOffset, paintText);
-//					} else {
-//						cv.drawText(text.text, text.centerX, text.centerY, paintText);
-//					}
-//					paintText.setTextSize(text.textSize);
-//				}
-				
-				
-				paintText.setColor(text.textColor);
-				if(text.drawOnPath != null){
-					cv.drawTextOnPath(text.text, text.drawOnPath, 0, text.vOffset, paintText);
-				} else {
-					if(text.textWrap == 0){
-						// set maximum for all text
-						text.textWrap = 40;
-					}
-					if(text.shieldRes != 0){
-						if(cachedIcons.get(text.shieldRes) == null){
-							cachedIcons.put(text.shieldRes, BitmapFactory.decodeResource(context.getResources(), text.shieldRes));
-						}
-						Bitmap ico = cachedIcons.get(text.shieldRes);
-						if (ico  != null) {
-							cv.drawBitmap(ico, text.centerX - ico.getWidth() / 2 - getDensityValue(rc, 0.5f), 
-									text.centerY - text.textSize / 2 - getDensityValue(rc, 6.5f),
-									paintIcon);
-						}
-					}
-					if(text.text.length() > text.textWrap){
-						int start = 0;
-						int end = text.text.length();
-						int lastSpace = -1;
-						int line = 0;
-						int pos = 0;
-						int limit = 0;
-						while(pos < end){
-							lastSpace = -1;
-							limit += text.textWrap;
-							while(pos < limit && pos < end){
-								if(!Character.isLetterOrDigit(text.text.charAt(pos))){
-									lastSpace = pos;
-								}
-								pos++;
-							}
-							if(lastSpace == -1){
-								cv.drawText(text.text.substring(start, pos), 
-										text.centerX, text.centerY + line * (text.textSize + 2), paintText);
-								start = pos;
-							} else {
-								cv.drawText(text.text.substring(start, lastSpace), 
-										text.centerX, text.centerY + line * (text.textSize + 2), paintText); 
-								start = lastSpace + 1;
-								limit += (start - pos) - 1;
-							}
-							line++;
-							
-						}
-						
-					} else {
-						cv.drawText(text.text, text.centerX, text.centerY, paintText);
-					}
-				}
-			}
+				boundsIntersect.add(index, bounds);
 		}
+		return false;
 	}
 
 	

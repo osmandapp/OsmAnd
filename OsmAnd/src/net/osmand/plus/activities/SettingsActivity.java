@@ -226,6 +226,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		registerListPreference(osmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE, screen, entries, intValues);
 		
+		Float[] floatValues = new Float[] {0.3f, 0.5f, 0.7f, 0.8f, 1.0f, 1.2f, 1.3f, 1.5f, 2.0f, 2.5f};
+		entries = new String[floatValues.length];
+		for (int i = 0; i < floatValues.length; i++) {
+			entries[i] = floatValues[i] +"";
+		}
+		registerListPreference(osmandSettings.MAP_TEXT_SIZE, screen, entries, floatValues);
+		
 		startZoom = 1;
 		endZoom = 18;
 		entries = new String[endZoom - startZoom + 1];

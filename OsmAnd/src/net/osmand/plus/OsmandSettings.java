@@ -299,6 +299,29 @@ public class OsmandSettings {
 
 	}
 	
+	private class FloatPreference extends CommonPreference<Float> {
+
+
+		private FloatPreference(String id, float defaultValue, boolean global) {
+			super(id, global, defaultValue);
+		}
+		
+		private FloatPreference(String id, float defaultValue, boolean global, boolean cache) {
+			super(id, global, cache, defaultValue);
+		}
+		
+		@Override
+		protected Float getValue(SharedPreferences prefs, Float defaultValue) {
+			return prefs.getFloat(getId(), defaultValue);
+		}
+
+		@Override
+		protected boolean setValue(SharedPreferences prefs, Float val) {
+			return prefs.edit().putFloat(getId(), val).commit();
+		}
+
+	}
+	
 	private class StringPreference extends CommonPreference<String> {
 
 		private StringPreference(String id, String defaultValue, boolean global) {
@@ -372,6 +395,10 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_HIGH_RES_MAPS =
 		new BooleanPreference("use_high_res_maps", false, false, true);
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Float> MAP_TEXT_SIZE =
+		new FloatPreference("map_text_size", 1.0f, false, true);
 	
 
 	// this value string is synchronized with settings_pref.xml preference name
