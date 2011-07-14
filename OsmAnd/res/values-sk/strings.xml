@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="map_text_size_descr">Výber veľkosti písma pre názvy na mape</string>
+	<string name="map_text_size">Veľkosť písma</string>
+	<string name="trace_rendering">Ladiace info vykresľovania</string>
+	<string name="trace_rendering_descr">Zobrazí údaje výkonu vykresľovania pre ladiace účely</string>
+	<string name="tip_recent_changes">Posledné zmeny</string>
+	<string name="tip_recent_changes_0_6_6_t">Posledné zmeny pre 0.6.6 : 
+\n\t- Text To Speech(Text na hlas) jadro pre hlasovú navigáciu
+\n\t- Viac detailný vykresľovač mapy
+\n\t- Základná mapa(Basemap) pre celý svet integrovaná do aplikácie
+\n\t- Vylepšenie offline rutovania (stále experimentálne)
+\n\t- Možností GPX rutovania
+\n\t- Aktualizácia užívateľského rozhrania a oprava veľa chýb
+	</string>
 	<string name="voice_not_use">Nepoužívať</string>
 	<string name="voice_not_specified">Žiadny</string>
 	<string name="installing_new_resources">Rozbaľujú sa nové údaje...</string>	
@@ -195,8 +208,6 @@ Cieľový bod je hlavne používaný na meranie vzdialenosti a napredovanú navi
 <string name="gps_status_app_not_found">Aplikácia pre stav GPS nie je nainštalovaná. Nájsť ju na Markete?</string>
 <string name="voice_is_not_available_msg">Hlasové navigovanie nie je dostupné. Prosím, choďte do nastavení a zvoľte alebo stiahnite preferované hlasové údaje.</string>
 <string name="voice_is_not_available_title">Hlasové údaje nie sú určené</string>
-<string name="trace_rendering_descr">Použiť na kontrolu vykresľovacieho výkonu</string>
-<string name="trace_rendering">Sledovač vykresľovania</string>
 
 <string name="daynight_mode_day">Denný režim</string>
 <string name="daynight_mode_night">Nočný režim</string>
