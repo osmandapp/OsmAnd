@@ -416,7 +416,7 @@ public class OsmandRenderer {
 	private final static boolean findAllTextIntersections = true;
 	
 	private float getDensityValue(RenderingContext rc, float val) {
-		if (rc.highResMode) {
+		if (rc.highResMode && dm.density > 1) {
 			return val * dm.density * rc.mapTextSize;
 		} else {
 			return val * rc.mapTextSize;
