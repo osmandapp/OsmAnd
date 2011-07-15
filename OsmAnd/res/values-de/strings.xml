@@ -91,7 +91,7 @@
 \n\tFür alle OSM-Aktivitäten wird eine Internet-Verbindung benötigt.</string>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> Klassifizierung mit Bildern</string>
     <string name="error_doing_search">Fehler in der Offline-Suche aufgetreten</string>
-    <string name="search_offline_geo_error">Konnte geo intent nicht verarbeiten: {0}</string>
+    <string name="search_offline_geo_error">Konnte geointent nicht verarbeiten: {0}</string>
 	<string name="search_osm_offline">Adressuche mit Offline-Daten</string>
 
 	<string name="system_locale">Systemeinstellung</string>
@@ -256,8 +256,8 @@
 	<string name="website">Internet-Seite</string>
 	<string name="phone">Telefon</string>
 	<string name="download_type_to_filter">Filtern nach Typ</string>
-	<string name="use_high_res_maps">Hochauflösende Karte</string>
-	<string name="use_high_res_maps_descr">Verwende hochauflösende Karte für hochauflösende Geräte</string>
+	<string name="use_high_res_maps">Hochauflösende Anzeige</string>
+	<string name="use_high_res_maps_descr">Verbesserte Kartenqualität für hochauflösende Geräte</string>
 	<string name="unknown_location">Position noch nicht ermittelt</string>
 	<string name="download_files">Laden</string>
 	<string name="context_menu_item_search_transport">Suche ÖPNV</string>
