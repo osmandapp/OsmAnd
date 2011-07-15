@@ -267,8 +267,8 @@
 	<string name="website">web site</string>
 	<string name="phone">phone</string>
 	<string name="download_type_to_filter">type to filter</string>
-	<string name="use_high_res_maps">High resolution map</string>
-	<string name="use_high_res_maps_descr">Display high resolution map for high density devices</string>
+	<string name="use_high_res_maps">High resolution display</string>
+	<string name="use_high_res_maps_descr">Increase map quality for high density devices</string>
 	<string name="unknown_location">Position unknown yet</string>
 	<string name="download_files">Download</string>
 	<string name="context_menu_item_search_transport">Search transport</string>
