@@ -220,10 +220,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				builder.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener(){
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						settings.FOLLOW_TO_THE_ROUTE.set(false);
 						settings.APPLICATION_MODE.set(ApplicationMode.DEFAULT);
 						updateApplicationModeSettings();
-						routingHelper.setFinalLocation(null);
+						settings.FOLLOW_TO_THE_ROUTE.set(false);
+						routingHelper.setFinalAndCurrentLocation(null, null);
 						mapView.refreshMap();
 					}
 				});
@@ -588,11 +588,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		} else {
 			settings.clearPointToNavigate();
 		}
-		routingHelper.setFinalAndCurrentLocation(point, null, routingHelper.getCurrentGPXRoute());
-		if(point == null){
-			routingHelper.setFollowingMode(false);
-			settings.FOLLOW_TO_THE_ROUTE.set(false);
-		}
+		routingHelper.setFinalAndCurrentLocation(point, routingHelper.getCurrentLocation(), routingHelper.getCurrentGPXRoute());
 		mapLayers.getNavigationLayer().setPointToNavigate(point);
 	}
 	
@@ -779,6 +775,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			// can't return from this method we are not sure if activity will be recreated or not
 		}
 		mapLayers.getNavigationLayer().setPointToNavigate(settings.getPointToNavigate());
+		
 		currentScreenOrientation = getWindow().getWindowManager().getDefaultDisplay().getOrientation();
 		
 		// for voice navigation
@@ -803,6 +800,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		
 		routingHelper.setUiActivity(this);
 		routingHelper.getVoiceRouter().onActivityInit(this);
+		if(routingHelper.isFollowingMode() && !Algoritms.objectEquals(settings.getPointToNavigate(), routingHelper.getFinalLocation())){
+			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(), routingHelper.getCurrentLocation());
+		}
 		
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		try {
@@ -989,35 +989,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			backToLocationImpl();
 			return true;
 		case R.id.map_show_gps_status:
-			Intent intent = new Intent();
-			intent.setComponent(new ComponentName(GPS_STATUS_COMPONENT,
-					GPS_STATUS_ACTIVITY));
-			ResolveInfo resolved = getPackageManager().resolveActivity(intent,
-					PackageManager.MATCH_DEFAULT_ONLY);
-			if (resolved != null) {
-				startActivity(intent);
-			} else {
-				AlertDialog.Builder builder = new AlertDialog.Builder(this);
-				builder.setMessage(getString(R.string.gps_status_app_not_found));
-				builder.setPositiveButton(
-						getString(R.string.default_buttons_yes),
-						new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								Intent intent = new Intent(Intent.ACTION_VIEW,
-										Uri.parse("market://search?q=pname:"
-												+ GPS_STATUS_COMPONENT));
-								try {
-									startActivity(intent);
-								} catch (ActivityNotFoundException e) {
-								}
-							}
-						});
-				builder.setNegativeButton(
-						getString(R.string.default_buttons_no), null);
-				builder.show();
-			}
+			startGpsStatusIntent();
 			return true;
 		case R.id.map_get_directions:
 			Location loc = getLastKnownLocation();
@@ -1039,15 +1011,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					!routingHelper.getVoiceRouter().isMute());
 			return true;
 		case R.id.map_navigate_to_point:
-    		if(mapLayers.getNavigationLayer().getPointToNavigate() != null){
-    			if(routingHelper.isRouteCalculated()){
-    				routingHelper.setFinalAndCurrentLocation(null, null);
-    				settings.FOLLOW_TO_THE_ROUTE.set(false);
-    				routingHelper.setFollowingMode(false);
-    			} else {
-    				navigateToPoint(null);
-    			}
-    		} else {
+			if (mapLayers.getNavigationLayer().getPointToNavigate() != null) {
+				navigateToPoint(null);
+			} else {
     			navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
     		}
 			mapView.refreshMap();
@@ -1060,6 +1026,38 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	private void startGpsStatusIntent() {
+		Intent intent = new Intent();
+		intent.setComponent(new ComponentName(GPS_STATUS_COMPONENT,
+				GPS_STATUS_ACTIVITY));
+		ResolveInfo resolved = getPackageManager().resolveActivity(intent,
+				PackageManager.MATCH_DEFAULT_ONLY);
+		if (resolved != null) {
+			startActivity(intent);
+		} else {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(getString(R.string.gps_status_app_not_found));
+			builder.setPositiveButton(
+					getString(R.string.default_buttons_yes),
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog,
+								int which) {
+							Intent intent = new Intent(Intent.ACTION_VIEW,
+									Uri.parse("market://search?q=pname:"
+											+ GPS_STATUS_COMPONENT));
+							try {
+								startActivity(intent);
+							} catch (ActivityNotFoundException e) {
+							}
+						}
+					});
+			builder.setNegativeButton(
+					getString(R.string.default_buttons_no), null);
+			builder.show();
 		}
 	}
 	

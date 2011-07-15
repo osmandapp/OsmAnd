@@ -88,26 +88,38 @@ public class RoutingHelper {
 	}
 	
 	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, Location currentLocation, List<Location> gpxRoute){
-		this.finalLocation = finalLocation;
-		this.routeNodes.clear();
-		listDistance = null;
-		directionInfo = null;
-		evalWaitInterval = 3000;
+		clearCurrentRoute(finalLocation);
 		currentGPXRoute = gpxRoute;
-		for(IRouteInformationListener l : listeners){
-			l.routeWasCancelled();
-		}
 		// to update route
 		setCurrentLocation(currentLocation);
 		
 	}
 	
-	public List<Location> getCurrentGPXRoute() {
-		return currentGPXRoute;
+	public void clearCurrentRoute(LatLon newFinalLocation){
+		this.routeNodes.clear();
+		listDistance = null;
+		directionInfo = null;
+		evalWaitInterval = 3000;
+		if(uiActivity != null){
+			uiActivity.runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					for(IRouteInformationListener l : listeners){
+						l.routeWasCancelled();
+					}
+				}
+			});
+		}
+		this.finalLocation = newFinalLocation;
+		if(newFinalLocation == null){
+			settings.FOLLOW_TO_THE_ROUTE.set(false);
+			this.isFollowingMode = false;
+		}
+		
 	}
 	
-	public void setFinalLocation(LatLon finalLocation){
-		setFinalAndCurrentLocation(finalLocation, getCurrentLocation());
+	public List<Location> getCurrentGPXRoute() {
+		return currentGPXRoute;
 	}
 	
 	public void setAppMode(ApplicationMode mode){
@@ -141,11 +153,8 @@ public class RoutingHelper {
 		if(currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < 60){
 			if(lastFixedLocation != null && lastFixedLocation.distanceTo(lastPoint) < 60){
 				showMessage(context.getString(R.string.arrived_at_destination));
-				settings.FOLLOW_TO_THE_ROUTE.set(false);
 				voiceRouter.arrivedDestinationPoint();
-				updateCurrentRoute(routeNodes.size() - 1);
-				// clear final location to prevent all time showing message
-				finalLocation = null;
+				clearCurrentRoute(null);
 				
 			}
 			lastFixedLocation = currentLocation;
