@@ -23,12 +23,12 @@ import org.xmlpull.v1.XmlPullParser;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,6 +42,8 @@ public class SearchAddressOnlineActivity extends ListActivity {
 	private ProgressDialog progressDlg;
 	private final static Log log = LogUtil.getLog(SearchAddressOnlineActivity.class);
 
+	private static PlacesAdapter lastResult = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,14 +60,33 @@ public class SearchAddressOnlineActivity extends ListActivity {
 			searchOffline.setVisibility(View.INVISIBLE);
 		}
 		
+		final EditText searchText = (EditText) findViewById(R.id.SearchText);
+		
+		Button clearSearch = (Button) findViewById(R.id.ClearSearch);
+		clearSearch.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				searchText.setText("");
+				lastResult = null;
+				setListAdapter(null);
+			}
+		});
+		
 		Button searchButton = (Button) findViewById(R.id.SearchButton);
 		searchButton.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				searchPlaces(((EditText) findViewById(R.id.SearchText)).getText().toString());
+				InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+				inputMethodManager.hideSoftInputFromWindow(searchText.getWindowToken(), 0); // Remove keyboard
+
+				searchPlaces(searchText.getText().toString());
 			}
 		});
 		location = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+		
+		if (lastResult != null) {
+			setListAdapter(lastResult);
+		}
 	}
 
 	protected void searchPlaces(final String search) {
@@ -138,7 +159,8 @@ public class SearchAddressOnlineActivity extends ListActivity {
 				if(places == null){
 					Toast.makeText(SearchAddressOnlineActivity.this, getString(warning), Toast.LENGTH_LONG).show();
 				} else {
-					setListAdapter(new PlacesAdapter(places));
+					lastResult = new PlacesAdapter(places);
+					setListAdapter(lastResult);
 				}
 			}
 		});
