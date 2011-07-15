@@ -32,10 +32,10 @@ public class BicycleRouter extends VehicleRouter {
 		bicycleNotDefinedValues.put("path", 4d);
 		bicycleNotDefinedValues.put("living_street", 5d);
 		bicycleNotDefinedValues.put("pedestrian", 3d);
-		bicycleNotDefinedValues.put("footway", 3d);
+		bicycleNotDefinedValues.put("footway", 4d);
 		bicycleNotDefinedValues.put("byway", 4d);
 		bicycleNotDefinedValues.put("cycleway", 6d);
-		bicycleNotDefinedValues.put("bridleway", 5d);
+		bicycleNotDefinedValues.put("bridleway", 3d);
 		bicycleNotDefinedValues.put("services", 5d);
 		bicycleNotDefinedValues.put("steps", 1d);
 		
@@ -62,9 +62,9 @@ public class BicycleRouter extends VehicleRouter {
 		bicyclePriorityValues.put("footway", 0.9d);
 		bicyclePriorityValues.put("byway", 1d);
 		bicyclePriorityValues.put("cycleway", 1.3d);
-		bicyclePriorityValues.put("bridleway", 1d);
+		bicyclePriorityValues.put("bridleway", 0.8d);
 		bicyclePriorityValues.put("services", 1d);
-		bicyclePriorityValues.put("steps", 0.5d);
+		bicyclePriorityValues.put("steps", 0.6d);
 	}
 
 	public boolean acceptLine(TagValuePair pair) {
