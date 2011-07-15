@@ -116,7 +116,7 @@ public class VoiceRouter {
 //			this.currentStatus = STATUS_800_PREPARE;
 //		} else
 		if(previousStatus != STATUS_TOLD){
-			this.currentStatus = previousStatus ++;
+			this.currentStatus = previousStatus + 1;
 		} else {
 			this.currentStatus = previousStatus;
 		}
