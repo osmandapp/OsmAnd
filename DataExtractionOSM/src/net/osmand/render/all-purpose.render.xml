@@ -244,16 +244,16 @@
 		<!-- Natural -->
 		<filter minzoom="15" textSize="12" textColor="#09dd09" textWrapWidth="15" tag="natural" value="park" />
 	
-		<filter minzoom="14" textSize="12" textColor="#6699cc" textWrapWidth="20" tag="natural" value="beach" />
+		<filter minzoom="14" textSize="12" textHaloRadius="1" textColor="#6699cc" textWrapWidth="20" tag="natural" value="beach" />
 		
 		<switch>
 			<case nightMode="true" textColor="#CC3300"/>
 			<case nightMode="false" textColor="#654321"/>
 			<filter>
 				<filter minzoom="15" textSize="12" textDy="13" textWrapWidth="20" tag="natural" value="cave_entrance" />
-				<filter minzoom="12" maxzoom="14" textSize="12" textHaloRadius="0.5" textDy="13" tag="natural" value="peak" />
-				<filter minzoom="15" maxzoom="16" textSize="13" textHaloRadius="0.5" textDy="14" tag="natural" value="peak" />
-				<filter minzoom="17" textSize="16" textHaloRadius="0.5" textDy="17" tag="natural" value="peak" />
+				<filter minzoom="12" maxzoom="14" textSize="12" textHaloRadius="1" textDy="13" tag="natural" value="peak" />
+				<filter minzoom="15" maxzoom="16" textSize="13" textHaloRadius="1" textDy="14" tag="natural" value="peak" />
+				<filter minzoom="17" textSize="16" textHaloRadius="1" textDy="17" tag="natural" value="peak" />
 			</filter>
 		</switch>
 
