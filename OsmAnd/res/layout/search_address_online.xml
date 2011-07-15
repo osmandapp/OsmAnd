@@ -15,7 +15,8 @@
 
 <LinearLayout  android:id="@+id/LinearLayout" android:layout_width="wrap_content" android:layout_height="wrap_content"  
 				android:layout_marginTop = "5dp" android:gravity="left|bottom">
-<Button android:text="@string/search_offline_address" android:id="@+id/SearchOffline" android:minWidth="120dp" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+	<Button android:text="@string/search_offline_address" android:id="@+id/SearchOffline" android:minWidth="120dp" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+	<Button android:text="@string/search_offline_clear_search" android:id="@+id/ClearSearch" android:minWidth="150dp" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
 </LinearLayout>
 
 </LinearLayout>

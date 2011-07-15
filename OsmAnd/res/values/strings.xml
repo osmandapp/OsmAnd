@@ -419,6 +419,7 @@
 	<string name="search_osm_nominatim">Search address using OSM Nominatim</string>
 	<string name="hint_search_online">House number, street, city</string>
 	<string name="search_offline_address">Offline</string>
+	<string name="search_offline_clear_search">Clear Search</string>
 	<string name="search_online_address">Internet</string>
 	<string name="max_level_download_tile">Max. online zoom</string>
 	<string name="max_level_download_tile_descr">Choose maximum zoom level to download for online map tiles</string>
