@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="search_offline_clear_search">Nové hľadanie</string>
 	<string name="map_text_size_descr">Výber veľkosti písma pre názvy na mape</string>
 	<string name="map_text_size">Veľkosť písma</string>
 	<string name="trace_rendering">Ladiace info vykresľovania</string>
