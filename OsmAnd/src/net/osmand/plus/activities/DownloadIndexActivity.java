@@ -443,7 +443,7 @@ public class DownloadIndexActivity extends ListActivity {
 									    String filename = filesToDownload.get(i);
 										DownloadEntry entry = entriesToDownload.get(filename);
 										if (entry != null) {
-											String indexOfAllFiles = filesToDownload.size() < 1 ? "" : (" ["+(i+1)+"/"+filesToDownload.size()+"]"); 
+											String indexOfAllFiles = filesToDownload.size() <= 1 ? "" : (" ["+(i+1)+"/"+filesToDownload.size()+"]"); 
 											if (downloadFile(filename, entry.fileToSave, entry.fileToUnzip, entry.unzip, impl, entry.dateModified,
 													entry.parts, filesToReindex, indexOfAllFiles)) {
 												entriesToDownload.remove(filename);
