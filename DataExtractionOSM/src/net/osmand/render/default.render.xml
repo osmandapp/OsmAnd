@@ -416,8 +416,8 @@
 		<switch>
 			<case nightMode="true" textColor="#ffffff"/>
 			<case nightMode="false"/>
-				<filter minzoom="4" textSize="20" textDy="7" textBold="true" textWrapWidth="20" tag="place" value="city" />
-				<filter minzoom="6" textSize="16" textDy="7" textBold="true" textWrapWidth="20" tag="place" value="town" />
+				<filter minzoom="4" textSize="20" textDy="1" textBold="true" textWrapWidth="20" tag="place" value="city" />
+				<filter minzoom="6" textSize="16" textDy="1" textBold="true" textWrapWidth="20" tag="place" value="town" />
 				<filter minzoom="11" textSize="14" tag="place" value="village" />
 		</switch>
 
