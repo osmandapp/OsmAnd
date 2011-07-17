@@ -255,7 +255,7 @@ public class MapRenderRepositories {
 			}
 			// search lower level zooms only in basemap for now :) before it was intersection of maps on zooms 5-7
 			boolean basemapSearch = false;
-			if (zoom < 7) {
+			if (zoom <= 7) {
 				for (String f : files.keySet()) {
 					if (f.toLowerCase().contains(BASEMAP_NAME)) {
 						basemapSearch = true;

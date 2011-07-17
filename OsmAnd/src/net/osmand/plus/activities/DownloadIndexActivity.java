@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Map.Entry;
 import java.util.zip.ZipEntry;
@@ -37,18 +38,18 @@ import net.osmand.IProgress;
 import net.osmand.LogUtil;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.DownloadOsmandIndexesHelper;
-import net.osmand.plus.DownloadOsmandIndexesHelper.IndexItem;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
+import net.osmand.plus.DownloadOsmandIndexesHelper.IndexItem;
 
 import org.apache.commons.logging.Log;
 
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -82,7 +83,7 @@ public class DownloadIndexActivity extends ListActivity {
 	private ProgressDialog progressFileDlg = null;
 	private ProgressDialog progressListDlg = null;
 	private Map<String, String> indexFileNames = null;
-	private LinkedHashMap<String, DownloadEntry> entriesToDownload = new LinkedHashMap<String, DownloadEntry>();
+	private TreeMap<String, DownloadEntry> entriesToDownload = new TreeMap<String, DownloadEntry>();
 	private TextWatcher textWatcher = new TextWatcher() {
 
         public void afterTextChanged(Editable s) {
@@ -436,12 +437,16 @@ public class DownloadIndexActivity extends ListActivity {
 							@Override
 							public void run() {
 								try {
-									for (String s : new ArrayList<String>(entriesToDownload.keySet())) {
-										DownloadEntry entry = entriesToDownload.get(s);
+									List<File> filesToReindex = new ArrayList<File>();
+									ArrayList<String> filesToDownload = new ArrayList<String>(entriesToDownload.keySet());
+									for(int i=0;i<filesToDownload.size(); i++) {
+									    String filename = filesToDownload.get(i);
+										DownloadEntry entry = entriesToDownload.get(filename);
 										if (entry != null) {
-											if (downloadFile(s, entry.fileToSave, entry.fileToUnzip, entry.unzip, impl, entry.dateModified,
-													entry.parts)) {
-												entriesToDownload.remove(s);
+											String indexOfAllFiles = filesToDownload.size() < 1 ? "" : (" ["+(i+1)+"/"+filesToDownload.size()+"]"); 
+											if (downloadFile(filename, entry.fileToSave, entry.fileToUnzip, entry.unzip, impl, entry.dateModified,
+													entry.parts, filesToReindex, indexOfAllFiles)) {
+												entriesToDownload.remove(filename);
 												runOnUiThread(new Runnable() {
 													@Override
 													public void run() {
@@ -450,6 +455,26 @@ public class DownloadIndexActivity extends ListActivity {
 													}
 												});
 											}
+										}
+									}
+									boolean vectorMapsToReindex = false;
+									for(File f : filesToReindex){
+										if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+											vectorMapsToReindex = true;
+											break;
+										}
+									}
+									// reindex vector maps all at one time
+									if (vectorMapsToReindex) {
+										ResourceManager manager = ((OsmandApplication) getApplication()).getResourceManager();
+										List<String> warnings = manager.indexingMaps(impl);
+										if(warnings.isEmpty() && !OsmandSettings.getOsmandSettings(getApplicationContext()).MAP_VECTOR_DATA.get()){
+											warnings.add(getString(R.string.binary_map_download_success));
+											// Is it proper way to switch every tome to vector data?
+											OsmandSettings.getOsmandSettings(getApplicationContext()).MAP_VECTOR_DATA.set(true);
+										}
+										if (!warnings.isEmpty()) {
+											showWarning(warnings.get(0));
 										}
 									}
 								} catch (InterruptedException e) {
@@ -487,7 +512,8 @@ public class DownloadIndexActivity extends ListActivity {
 	protected final long TIMEOUT_BETWEEN_DOWNLOADS = 8000;
 	private boolean interruptDownloading = false;
 	
-	protected void downloadFile(String fileName, FileOutputStream out, URL url, String part, IProgress progress) throws IOException, InterruptedException {
+	protected void downloadFile(String fileName, FileOutputStream out, URL url, String part, String indexOfAllFiles, 
+			IProgress progress) throws IOException, InterruptedException {
 		InputStream is = null;
 		
 		byte[] buffer = new byte[BUFFER_SIZE];
@@ -527,7 +553,7 @@ public class DownloadIndexActivity extends ListActivity {
 //					}
 					if (first) {
 						length = conn.getContentLength();
-						String taskName = getString(R.string.downloading_file) + " " + fileName;
+						String taskName = getString(R.string.downloading_file) + indexOfAllFiles +" " + fileName;
 						if(part != null){
 							taskName += part;
 						}
@@ -578,8 +604,8 @@ public class DownloadIndexActivity extends ListActivity {
 		progressFileDlg = null;
 	}
 	
-	protected boolean downloadFile(final String key, final File fileToDownload, final File fileToUnZip, final boolean unzipToDir,
-			IProgress progress, Long dateModified, int parts) throws InterruptedException {
+	protected boolean downloadFile(final String fileName, final File fileToDownload, final File fileToUnZip, final boolean unzipToDir,
+			IProgress progress, Long dateModified, int parts, List<File> toReIndex, String indexOfAllFiles) throws InterruptedException {
 		FileOutputStream out = null;
 		try {
 
@@ -587,12 +613,12 @@ public class DownloadIndexActivity extends ListActivity {
 			
 			try {
 				if(parts == 1){
-					URL url = new URL("http://download.osmand.net/download?file="+key);  //$NON-NLS-1$
-					downloadFile(key, out, url, null, progress);
+					URL url = new URL("http://download.osmand.net/download?file="+fileName);  //$NON-NLS-1$
+					downloadFile(fileName, out, url, null, indexOfAllFiles, progress);
 				} else {
 					for(int i=1; i<=parts; i++){
-						URL url = new URL("http://download.osmand.net/download?file="+key+"-"+i);  //$NON-NLS-1$
-						downloadFile(key, out, url, " ["+i+"/"+parts+"]", progress);
+						URL url = new URL("http://download.osmand.net/download?file="+fileName+"-"+i);  //$NON-NLS-1$
+						downloadFile(fileName, out, url, " ["+i+"/"+parts+"]", indexOfAllFiles, progress);
 					}
 				}
 			} finally {
@@ -652,20 +678,14 @@ public class DownloadIndexActivity extends ListActivity {
 				toIndex.setLastModified(dateModified);
 			}
 			if (toIndex.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
+				// update poi index immediately
 				manager.indexingPoi(progress, warnings, toIndex);
-			} else if (toIndex.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-				warnings.addAll(manager.indexingMaps(progress));
-				if(warnings.isEmpty() && !OsmandSettings.getOsmandSettings(getApplicationContext()).MAP_VECTOR_DATA.get()){
-					warnings.add(getString(R.string.binary_map_download_success));
-					// Is it proper way to switch every tome to vector data?
-					OsmandSettings.getOsmandSettings(getApplicationContext()).MAP_VECTOR_DATA.set(true);
-				}
-			} else if (toIndex.getName().endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
 			}
 			if(dateModified != null){
 				toIndex.setLastModified(dateModified);
 				manager.updateIndexLastDateModified(toIndex);
 			}
+			toReIndex.add(toIndex);
 			if (warnings.isEmpty()) {
 				showWarning(getString(R.string.download_index_success));
 			} else {
