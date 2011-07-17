@@ -545,7 +545,7 @@ public class RouteProvider {
 			}
 			return new RouteCalculationResult(res, null, start, end, null);
 		} catch (OutOfMemoryError e) {
-			return new RouteCalculationResult("No enough memory to calculate route.");
+			return new RouteCalculationResult("Not enough memory");
 		}
 	}
 	
