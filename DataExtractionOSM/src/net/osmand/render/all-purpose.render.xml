@@ -25,7 +25,7 @@
 		- v018: Add shadowRadius to secondary roads to increase visibility in agricultural areas (through fields).
 		- v019: synced with default on 2011-07-13: Added dentist, veterinary, doctors, optician, bureau_de_change, vending_machine, kiosk, outdoor, wreck, wayside_shrine, wayside_cross, ruins, monument, battlefield, water_park, video, horse_racing, stadium, kindergarten, theme_park, baseball, archery, golf, swimming, diving, canoe, skiing, soccer, tennis, greengorcer, mobile_phone, motorcycle, electronics, fishing, barrier_block, tobacco, townhall, barrier_kissing, barrier_toll, laundry, copyshop
 		- v020: Fixed textHaloRadius: Do not use at zoom levels used for driving or routing, obstructs important map details. Used now for all leisure and building tags (which mostly appear from z15 or higher).
-		- v021: Fixed textDy for new behavior: Textsize/2 + 1
+		- v021: Fixed textDy for new behavior: Textsize/2 + 1. =7 good enough for all cases, except use =1 for city/town icons (anomaly)
 	-->
 
 	<!--
@@ -253,8 +253,8 @@
 			<filter>
 				<filter minzoom="15" textSize="12" textDy="7" textWrapWidth="20" tag="natural" value="cave_entrance" />
 				<filter minzoom="12" maxzoom="14" textSize="12" textHaloRadius="1" textDy="7" tag="natural" value="peak" />
-				<filter minzoom="15" maxzoom="16" textSize="13" textHaloRadius="1" textDy="8" tag="natural" value="peak" />
-				<filter minzoom="17" textSize="16" textHaloRadius="1" textDy="9" tag="natural" value="peak" />
+				<filter minzoom="15" maxzoom="16" textSize="13" textHaloRadius="1" textDy="7" tag="natural" value="peak" />
+				<filter minzoom="17" textSize="16" textHaloRadius="1" textDy="7" tag="natural" value="peak" />
 			</filter>
 		</switch>
 
@@ -279,7 +279,7 @@
 		</switch>
 
 		<filter minzoom="14" maxzoom="14" textSize="12" textBold="true" textColor="#6666ff" textDy="7" tag="railway" value="station" />
-		<filter minzoom="15" textSize="13" textBold="true" textColor="#6666ff" textDy="8" tag="railway" value="station" />
+		<filter minzoom="15" textSize="13" textBold="true" textColor="#6666ff" textDy="7" tag="railway" value="station" />
 		<filter minzoom="14" maxzoom="14" textSize="12" textColor="#6666ff" textDy="7" tag="railway" value="halt" />
 		<filter minzoom="15" textSize="12" textColor="#6666ff" textDy="7" tag="railway" value="halt" />
 		<filter minzoom="14" maxzoom="14" textSize="12" textColor="#6666ff" textDy="7" tag="railway" value="tram_stop" />
@@ -425,8 +425,8 @@
 		<switch>
 			<case nightMode="true" textColor="#ffffff"/>
 			<case nightMode="false"/>
-				<filter minzoom="4" textSize="20" textDy="11" textBold="true" textWrapWidth="20" tag="place" value="city" />
-				<filter minzoom="6" textSize="16" textDy="9" textBold="true" textWrapWidth="20" tag="place" value="town" />
+				<filter minzoom="4" textSize="20" textDy="1" textBold="true" textWrapWidth="20" tag="place" value="city" />
+				<filter minzoom="6" textSize="16" textDy="1" textBold="true" textWrapWidth="20" tag="place" value="town" />
 				<filter minzoom="11" textSize="14" tag="place" value="village" />
 		</switch>
 
