@@ -1003,8 +1003,12 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			mapLayers.openLayerSelectionDialog(mapView);
 			return true;
 		case R.id.map_specify_point:
-			NavigatePointActivity dlg = new NavigatePointActivity(this);
-			dlg.showDialog();
+			// next 2 lines replaced for Issue 493, replaced by new 3 lines
+			// NavigatePointActivity dlg = new NavigatePointActivity(this);
+			// dlg.showDialog();
+			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
+			newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			startActivity(newIntent);
 			return true;
 		case R.id.map_mute:
 			routingHelper.getVoiceRouter().setMute(
