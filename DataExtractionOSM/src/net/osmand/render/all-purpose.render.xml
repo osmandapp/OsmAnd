@@ -1,6 +1,6 @@
 <renderer name="all-purpose" depends="" defaultColor="#f1eee8" defaultNightColor="#003333">
 	<!--
-		All Purpose Renderer (essentially more details than default) (by Hardy Mueller), v022:
+		All Purpose Renderer (essentially more details than default) (by Hardy Mueller), v021:
 		Map rendering aligned to typical map use for all zoom levels/scales, hence always yields a complete and reliable map.
 		All features displayed at each zoom level (zX) are those for its typical use:
 		 - z7  = "Rough Country Level Overview": Shows motorways, trunks, primary roads and city names
@@ -25,7 +25,7 @@
 		- v018: Add shadowRadius to secondary roads to increase visibility in agricultural areas (through fields).
 		- v019: synced with default on 2011-07-13: Added dentist, veterinary, doctors, optician, bureau_de_change, vending_machine, kiosk, outdoor, wreck, wayside_shrine, wayside_cross, ruins, monument, battlefield, water_park, video, horse_racing, stadium, kindergarten, theme_park, baseball, archery, golf, swimming, diving, canoe, skiing, soccer, tennis, greengorcer, mobile_phone, motorcycle, electronics, fishing, barrier_block, tobacco, townhall, barrier_kissing, barrier_toll, laundry, copyshop
 		- v020: Fixed textHaloRadius: Do not use at zoom levels used for driving or routing, obstructs important map details. Used now for all leisure and building tags (which mostly appear from z15 or higher).
-		- v021: Fixed textDy for new behavior: Textsize/2 + 1. Better: Use 7 uniformly.
+		- v021: Fixed textDy for new behavior: Textsize/2 + 1. =7 good enough for all cases, except use =1 for city/town icons (anomaly)
 	-->
 
 	<!--
@@ -425,8 +425,8 @@
 		<switch>
 			<case nightMode="true" textColor="#ffffff"/>
 			<case nightMode="false"/>
-				<filter minzoom="4" textSize="20" textDy="7" textBold="true" textWrapWidth="20" tag="place" value="city" />
-				<filter minzoom="6" textSize="16" textDy="7" textBold="true" textWrapWidth="20" tag="place" value="town" />
+				<filter minzoom="4" textSize="20" textDy="1" textBold="true" textWrapWidth="20" tag="place" value="city" />
+				<filter minzoom="6" textSize="16" textDy="1" textBold="true" textWrapWidth="20" tag="place" value="town" />
 				<filter minzoom="11" textSize="14" tag="place" value="village" />
 		</switch>
 
