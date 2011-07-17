@@ -9,9 +9,9 @@
 		All-Purpose Rennderer: Map rendering aligned to typical map use for all zoom levels/scales, hence always yields a complete and reliable map.
 		All features displayed at each zoom level (zX) are those for its typical use:
 		 - z7  = "Rough Country Level Overview": Shows motorways, trunks, primary roads and city names
-		 - z11 = "Country Road Atlas": Secondary roads (already from z9) and tertiary (already from z10).  Show large scale landuse like forest and residential areas (already from z10). Also all town names (already from z9) and now all other locality names. Shows mountain peaks for orientation.
+		 - z11 = "Country Road Atlas": Secondary roads (already from z9) and tertiary (already from z10). Show large scale landuse like forest and residential areas (already from z10). Also all town names (already from z9) and now all other locality names. Shows mountain peaks for orientation.
 		 - z12 = "Detailed Country Road Atlas": Add all other public highways like road, unclassified, residential. Add foot and bike tracks. Also tag mountain peaks.
-		 - z13 = "Regional Driving. Good Overview": Displays all driving as well as hiking connections. Show service, living street, pedestrian and footway highways.  Include all area landuse.
+		 - z13 = "Regional Driving. Good Overview": Displays all driving as well as hiking connections. Show service, living street, pedestrian and footway highways. Include all area landuse.
 		 - z14 = "Local Driving, also Hiking Map"
 		 - z15 = "City Driving": Display all details of interest for this.
 		 - z16 = "Walking, City tour": Outline and tag buildings
@@ -118,7 +118,7 @@
 
 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom], textLength, ref -->
 	<text>
-		<!-- Highway ref  -->
+		<!-- Highway ref -->
 		<filter minzoom="10" tag="highway" value="motorway" ref="only" textMinDistance="70" textColor="#ffffff" textSize="12" textBold="true">
 			<filter textLength="1" textShield="mot_shield1" />
 			<filter textLength="2" textShield="mot_shield2" />
@@ -1068,7 +1068,7 @@
 		<switch>
 			<case nightMode="false" color="#000000"/>
 			<case nightMode="true" color="#787878"/>
-			<!-- ZM  <filter minzoom="12" maxzoom="12" strokeWidth="0.5" pathEffect="6_3" tag="highway" value="path" /> -->
+			<!-- ZM <filter minzoom="12" maxzoom="12" strokeWidth="0.5" pathEffect="6_3" tag="highway" value="path" /> -->
 			<filter minzoom="13" strokeWidth="1" pathEffect="6_3" tag="highway" value="path" />
 		</switch>
 
