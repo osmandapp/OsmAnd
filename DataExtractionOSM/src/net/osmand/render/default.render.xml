@@ -244,8 +244,8 @@
 			<filter>
 				<filter minzoom="15" textSize="12" textDy="7" textWrapWidth="20" tag="natural" value="cave_entrance" />
 				<filter minzoom="12" maxzoom="14" textSize="12" textHaloRadius="1" textDy="7" tag="natural" value="peak" />
-				<filter minzoom="15" maxzoom="16" textSize="13" textHaloRadius="1" textDy="8" tag="natural" value="peak" />
-				<filter minzoom="17" textSize="16" textHaloRadius="1" textDy="9" tag="natural" value="peak" />
+				<filter minzoom="15" maxzoom="16" textSize="13" textHaloRadius="1" textDy="7" tag="natural" value="peak" />
+				<filter minzoom="17" textSize="16" textHaloRadius="1" textDy="7" tag="natural" value="peak" />
 			</filter>
 		</switch>
 
@@ -270,7 +270,7 @@
 		</switch>
 
 		<filter minzoom="14" maxzoom="14" textSize="12" textBold="true" textColor="#6666ff" textDy="7" tag="railway" value="station" />
-		<filter minzoom="15" textSize="13" textBold="true" textColor="#6666ff" textDy="8" tag="railway" value="station" />
+		<filter minzoom="15" textSize="13" textBold="true" textColor="#6666ff" textDy="7" tag="railway" value="station" />
 		<filter minzoom="14" maxzoom="14" textSize="12" textColor="#6666ff" textDy="7" tag="railway" value="halt" />
 		<filter minzoom="15" textSize="12" textColor="#6666ff" textDy="7" tag="railway" value="halt" />
 		<filter minzoom="14" maxzoom="14" textSize="12" textColor="#6666ff" textDy="7" tag="railway" value="tram_stop" />
@@ -416,8 +416,8 @@
 		<switch>
 			<case nightMode="true" textColor="#ffffff"/>
 			<case nightMode="false"/>
-				<filter minzoom="4" textSize="20" textDy="11" textBold="true" textWrapWidth="20" tag="place" value="city" />
-				<filter minzoom="6" textSize="16" textDy="9" textBold="true" textWrapWidth="20" tag="place" value="town" />
+				<filter minzoom="4" textSize="20" textDy="1" textBold="true" textWrapWidth="20" tag="place" value="city" />
+				<filter minzoom="6" textSize="16" textDy="1" textBold="true" textWrapWidth="20" tag="place" value="town" />
 				<filter minzoom="11" textSize="14" tag="place" value="village" />
 		</switch>
 
