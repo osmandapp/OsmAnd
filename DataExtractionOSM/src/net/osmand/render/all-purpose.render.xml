@@ -4,9 +4,9 @@
 		Map rendering aligned to typical map use for all zoom levels/scales, hence always yields a complete and reliable map.
 		All features displayed at each zoom level (zX) are those for its typical use:
 		 - z7  = "Rough Country Level Overview": Shows motorways, trunks, primary roads and city names
-		 - z11 = "Country Road Atlas": Secondary roads (already from z9) and tertiary (already from z10).  Show large scale landuse like forest and residential areas (already from z10). Also all town names (already from z9) and now all other locality names. Shows mountain peaks for orientation.
+		 - z11 = "Country Road Atlas": Secondary roads (already from z9) and tertiary (already from z10). Show large scale landuse like forest and residential areas (already from z10). Also all town names (already from z9) and now all other locality names. Shows mountain peaks for orientation.
 		 - z12 = "Detailed Country Road Atlas": Add all other public highways like road, unclassified, residential. Add foot and bike tracks. Also tag mountain peaks.
-		 - z13 = "Regional Driving. Good Overview": Displays all driving as well as hiking connections. Show service, living street, pedestrian and footway highways.  Include all area landuse.
+		 - z13 = "Regional Driving. Good Overview": Displays all driving as well as hiking connections. Show service, living street, pedestrian and footway highways. Include all area landuse.
 		 - z14 = "Local Driving, also Hiking Map"
 		 - z15 = "City Driving": Display all details of interest for this.
 		 - z16 = "Walking, City tour": Outline and tag buildings
@@ -23,7 +23,7 @@
 		- v016: suppress shadowRadius for z16+ to avoid showing many dark lines (bugfix)
 		- v017: re-instate shadowRadius for all zooms again, due to bad visibility of white roads in some surroundings.
 		- v018: Add shadowRadius to secondary roads to increase visibility in agricultural areas (through fields).
-		- v019: synced with default on 2011-07-13: Added  dentist, veterinary, doctors, optician, bureau_de_change, vending_machine, kiosk, outdoor, wreck, wayside_shrine, wayside_cross, ruins, monument, battlefield, water_park, video, horse_racing, stadium, kindergarten, theme_park, baseball, archery, golf, swimming, diving, canoe, skiing, soccer, tennis, greengorcer, mobile_phone, motorcycle, electronics, fishing, barrier_block, tobacco, townhall, barrier_kissing, barrier_toll, laundry, copyshop  
+		- v019: synced with default on 2011-07-13: Added dentist, veterinary, doctors, optician, bureau_de_change, vending_machine, kiosk, outdoor, wreck, wayside_shrine, wayside_cross, ruins, monument, battlefield, water_park, video, horse_racing, stadium, kindergarten, theme_park, baseball, archery, golf, swimming, diving, canoe, skiing, soccer, tennis, greengorcer, mobile_phone, motorcycle, electronics, fishing, barrier_block, tobacco, townhall, barrier_kissing, barrier_toll, laundry, copyshop
 		- v020: Fixed textHaloRadius: Do not use at zoom levels used for driving or routing, obstructs important map details. Used now for all leisure and building tags (which mostly appear from z15 or higher).
 		- v021: Fixed textDy for new behavior: Textsize/2 + 1
 	-->
@@ -127,7 +127,7 @@
 
 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom], textLength, ref -->
 	<text>
-		<!-- Highway ref  -->
+		<!-- Highway ref -->
 		<filter minzoom="10" tag="highway" value="motorway" ref="only" textMinDistance="70" textColor="#ffffff" textSize="12" textBold="true">
 			<filter textLength="1" textShield="mot_shield1" />
 			<filter textLength="2" textShield="mot_shield2" />
@@ -731,7 +731,7 @@
 				<filter tag="leisure" value="sports_centre" />
 				<filter tag="leisure" value="stadium" />
 			</filter>
-		</switch>  
+		</switch>
 
 		<filter minzoom="12" color="#b5e3b5" tag="leisure" value="golf_course" />
 			<filter nightMode="true" minzoom="12" color="#004333" tag="leisure" value="golf_course" />
@@ -987,7 +987,7 @@
 			<case tag="highway" value="unclassified" />
 			<case tag="highway" value="residential" />
 			<filter>
-	  		<switch>
+			<switch>
 				<case nightMode="true" color="#9F9F9F" color_2="#9F9F9F" shadowColor="#666666" shadowRadius="1" />
 				<case nightMode="false" color="#ffffff" color_2="#ffffff" shadowColor="#464646" shadowRadius="1" />
 				<filter>
@@ -1051,7 +1051,7 @@
 					<filter minzoom="17" maxzoom="17" strokeWidth="10" strokeWidth_2="8" />
 					<filter minzoom="18" strokeWidth="14" strokeWidth_2="12" />
 				</filter>
-			</switch>  
+			</switch>
 			</filter>
 		</switch>
 
