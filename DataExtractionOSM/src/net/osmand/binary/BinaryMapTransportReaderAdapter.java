@@ -195,7 +195,7 @@ public class BinaryMapTransportReaderAdapter {
 			if(startOffset < 0){
 				startOffset = 0;
 			}
-			lastRead = readStringTable(st, ind - IndexStringTable.WINDOW_SIZE / 4, IndexStringTable.WINDOW_SIZE, false);
+			lastRead = readStringTable(st, startOffset, IndexStringTable.WINDOW_SIZE, false);
 		}
 		return null;
 	}
