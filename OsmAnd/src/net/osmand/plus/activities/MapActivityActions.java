@@ -128,7 +128,7 @@ public class MapActivityActions {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				BaseMapLayer mainLayer = mapView.getMainLayer();
-				if(!(mainLayer instanceof MapTileLayer) || ((MapTileLayer) mainLayer).isVisible()){
+				if(!(mainLayer instanceof MapTileLayer) || !((MapTileLayer) mainLayer).isVisible()){
 					Toast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
 					return;
 				}
