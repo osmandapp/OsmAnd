@@ -451,7 +451,7 @@ public class BinaryMapAddressReaderAdapter {
 	
 	
 	
-	void readPostcodes(List<PostCode> postcodes) throws IOException{
+	void readPostcodes(List<PostCode> postcodes, StringMatcher nameMatcher) throws IOException{
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -462,7 +462,11 @@ public class BinaryMapAddressReaderAdapter {
 				int offset = codedIS.getTotalBytesRead();
 				int length = codedIS.readRawVarint32();
 				int oldLimit = codedIS.pushLimit(length);
-				postcodes.add(readPostcode(null, offset, false, null));
+				final PostCode postCode = readPostcode(null, offset, false, null);
+				//TODO support getEnName??
+				if (nameMatcher == null || nameMatcher.matches(postCode.getName())) {
+					postcodes.add(postCode);
+				}
 				codedIS.popLimit(oldLimit);
 				break;
 			default:

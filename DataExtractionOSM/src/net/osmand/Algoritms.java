@@ -202,4 +202,13 @@ public class Algoritms {
 		bytes[offset + 1] = (byte) (s & 0xff);
 		s >>= 8;
 	}
+
+	public static boolean containsDigit(String name) {
+		for (int i = 0; i < name.length(); i++) {
+			if (Character.isDigit(name.charAt(i))) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
