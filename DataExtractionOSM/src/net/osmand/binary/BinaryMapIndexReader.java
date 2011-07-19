@@ -24,8 +24,8 @@ import net.osmand.data.Street;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapRenderingTypes;
-import net.osmand.osm.MapUtils;
 import net.osmand.osm.MapRenderingTypes.MapRulType;
+import net.osmand.osm.MapUtils;
 import net.sf.junidecode.Junidecode;
 
 import org.apache.commons.logging.Log;
@@ -302,14 +302,14 @@ public class BinaryMapIndexReader {
 		throw new IllegalArgumentException(name);
 	}
 	
-	public List<PostCode> getPostcodes(String region) throws IOException {
+	public List<PostCode> getPostcodes(String region, StringMatcher nameMatcher) throws IOException {
 		List<PostCode> postcodes = new ArrayList<PostCode>();
 		AddressRegion r = getRegionByName(region);
 		if(r.postcodesOffset != -1){
 			codedIS.seek(r.postcodesOffset);
 			int len = readInt();
 			int old = codedIS.pushLimit(len);
-			addressAdapter.readPostcodes(postcodes);
+			addressAdapter.readPostcodes(postcodes,nameMatcher);
 			codedIS.popLimit(old);
 		}
 		return postcodes;

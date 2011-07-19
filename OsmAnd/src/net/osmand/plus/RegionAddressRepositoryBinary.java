@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Building;
@@ -136,15 +137,13 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		try {
 			// essentially index is created that cities towns are first in cities map
 			int ind = 0;
-			if (name.length() >= 2 &&
-					   Character.isDigit(name.charAt(0)) &&
-					   Character.isDigit(name.charAt(1))) {
+			if (name.length() >= 2 && Algoritms.containsDigit(name)) {
 				// also try to identify postcodes
 				String uName = name.toUpperCase();
-				for (PostCode code : file.getPostcodes(region)) {
-					if (code.getName().startsWith(uName)) {
+				for (PostCode code : file.getPostcodes(region,new ContainsStringMatcher(uName,collator))) {
+					if (cstartsWith(collator,code.getName(),uName)) {
 						citiesToFill.add(ind++, code);
-					} else if(code.getName().contains(uName)){
+					} else if(ccontains(collator,code.getName(),uName)){
 						citiesToFill.add(code);
 					}
 				}
