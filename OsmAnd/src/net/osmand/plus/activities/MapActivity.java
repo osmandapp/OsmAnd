@@ -23,6 +23,7 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchPoiFilterActivity;
 import net.osmand.plus.activities.search.SearchTransportActivity;
 import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointLocationLayer;
 import android.app.Activity;
@@ -1296,10 +1297,12 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     			R.string.context_menu_item_create_poi,
     			R.string.context_menu_item_add_waypoint,
     			R.string.context_menu_item_open_bug,
+    			//MapTileLayer menu actions
     			R.string.context_menu_item_update_map,
     			R.string.context_menu_item_download_map
     	};
-    	for(int j = 0; j<contextMenuStandardActions.length; j++){
+    	int actionsToUse = (mapView.getMainLayer() instanceof MapTileLayer) ? contextMenuStandardActions.length : contextMenuStandardActions.length - 2;
+    	for(int j = 0; j<actionsToUse; j++){
     		actions.add(getResources().getString(contextMenuStandardActions[j]));
     	}
     	
