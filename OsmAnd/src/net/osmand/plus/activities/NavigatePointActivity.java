@@ -49,8 +49,7 @@ public class NavigatePointActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// LatLon loc = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
-		LatLon loc = MapActivity.getMapLocation();
+		LatLon loc = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
 		setContentView(R.layout.navigate_point);
 		setTitle(R.string.map_specify_point);
 		initUI(loc.getLatitude(), loc.getLongitude());
