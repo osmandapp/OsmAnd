@@ -41,8 +41,7 @@ public class NavigatePointActivity extends Activity {
 	public void showDialog(){
 		dlg.setContentView(R.layout.navigate_point);
 		dlg.setTitle(R.string.map_specify_point);
-		// Try proper update for center of map   LatLon loc = activity.getMapLocation();
-		LatLon loc = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+		LatLon loc = activity.getMapLocation();
 		initUI(loc.getLatitude(), loc.getLongitude());
 		dlg.show();
 	}
@@ -50,7 +49,8 @@ public class NavigatePointActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		LatLon loc = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+		// LatLon loc = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+		LatLon loc = MapActivity.getMapLocation();
 		setContentView(R.layout.navigate_point);
 		setTitle(R.string.map_specify_point);
 		initUI(loc.getLatitude(), loc.getLongitude());
