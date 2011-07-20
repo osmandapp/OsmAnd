@@ -49,7 +49,8 @@ public class NavigatePointActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		LatLon loc = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+		// use actual map location instead, statement seems useless: LatLon loc = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+		LatLon loc = activity.getMapLocation();
 		setContentView(R.layout.navigate_point);
 		setTitle(R.string.map_specify_point);
 		initUI(loc.getLatitude(), loc.getLongitude());
