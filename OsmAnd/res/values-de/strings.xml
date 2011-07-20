@@ -432,10 +432,10 @@
 	<string name="fav_points_edited">Favorit wurde bearbeitet</string>
 	<string name="fav_points_not_exist">Keine Favoriten vorhanden</string>
 	<string name="update_existing">Ersetzen</string>
-	<string name="only_show">Nur zeigen</string>
+	<string name="only_show">Nur anzeigen</string>
 	<string name="follow">Folgen</string>
-	<string name="recalculate_route_to_your_location">Neuberechnung der Route von Ihrer aktuellen Position</string>
-	<string name="follow_route">Folgen Sie der Route</string>
+	<string name="recalculate_route_to_your_location">Transportmittel (optional) und Folgemodus wählen</string>
+	<string name="follow_route">Route bestimmen</string>
 	<string name="mark_final_location_first">Bitte erst ein Ziel wählen</string>
 	<string name="get_directions">Route</string>
     <string name="show_gps_status">GPS Status anzeigen</string>
