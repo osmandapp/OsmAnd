@@ -374,14 +374,14 @@
 	<string name="transport_Stop">Haltestelle</string>
 	<string name="transport_stops">Haltestellen</string>
 
-	<string name="transport_search_after">Suche Strecke nach</string>	
-	<string name="transport_search_before">Suche Strecke vor</string>
+	<string name="transport_search_after">Anschließende Route</string>	
+	<string name="transport_search_before">Vorherige Route</string>
 	<string name="transport_finish_search">Suche beenden</string>
 	<string name="transport_stop_to_go_out">Wähle Haltestelle zum aussteigen</string>
-	<string name="transport_to_go_after">zu gehen nach</string>
-	<string name="transport_to_go_before">zu gehen bevor</string>
-	<string name="transport_stops_to_pass">Haltestellen die noch zu passieren sind</string>
-	<string name="transport_route_distance">Streckenentfernung</string>
+	<string name="transport_to_go_after">anschließende Strecke</string>
+	<string name="transport_to_go_before">vorherige Strecke</string>
+	<string name="transport_stops_to_pass">zu passierende Haltestellen</string>
+	<string name="transport_route_distance">Streckenlänge</string>
 	<string name="transport">Öffentlicher Personenverkehr</string>
 	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">Zeige öffentliche Haltestellen auf der Karte</string>
