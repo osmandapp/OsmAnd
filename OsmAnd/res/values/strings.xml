@@ -384,12 +384,12 @@
 	<string name="transport_Stop">Stop</string>
 	<string name="transport_stops">stops</string>
 
-	<string name="transport_search_after">Search route after</string>	
-	<string name="transport_search_before">Search route before</string>
+	<string name="transport_search_after">Prior route</string>	
+	<string name="transport_search_before">Subsequent route</string>
 	<string name="transport_finish_search">Finish search</string>
-	<string name="transport_stop_to_go_out">Choose stop to go out</string>
-	<string name="transport_to_go_after">to go after</string>
-	<string name="transport_to_go_before">to go before</string>
+	<string name="transport_stop_to_go_out">Choose stop to get off</string>
+	<string name="transport_to_go_after">prior distance</string>
+	<string name="transport_to_go_before">subsequent distance</string>
 	<string name="transport_stops_to_pass">stops to pass</string>
 	<string name="transport_route_distance">Route distance</string>
 	<string name="transport">Transport</string>
