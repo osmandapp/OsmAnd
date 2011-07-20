@@ -444,8 +444,8 @@
 	<string name="update_existing">Replace</string>
 	<string name="only_show">Only show</string>
 	<string name="follow">Follow</string>
-	<string name="recalculate_route_to_your_location">Recalculating route according to your location</string>
-	<string name="follow_route">Follow to the route</string>
+	<string name="recalculate_route_to_your_location">Select mode of transportation (optional) and guidance mode</string>
+	<string name="follow_route">Routing directions</string>
 	<string name="mark_final_location_first">Please specify destination first</string>
 	<string name="get_directions">Directions</string>
     <string name="show_gps_status">Show GPS Status</string>
