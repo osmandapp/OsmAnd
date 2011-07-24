@@ -16,7 +16,7 @@
    
    <tile_source name="ÖPNV Transit" url_template="http://tile.xn--pnvkarte-m4a.de/tilegen/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/> 
    <tile_source name="OpenCycleMap" url_template="http://c.tile.opencyclemap.org/cycle/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/>
-   <tile_source name="HikeBikeMap DE" url_template="http://toolserver.org/tiles/hikebike/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="17" tile_size="256" img_density="8" avg_img_size="18000"/>
+   <tile_source name="Hike Bike Map" url_template="http://toolserver.org/tiles/hikebike/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="17" tile_size="256" img_density="8" avg_img_size="18000"/>
 
    <tile_source name="OpenAerialMap" url_template="http://tile.openaerialmap.org/tiles/1.0.0/openaerialmap-900913/{0}/{1}/{2}.jpg" ext=".jpg" min_zoom="1" max_zoom="13" tile_size="256" img_density="16" avg_img_size="18000"/>
    <tile_source name="OpenPisteMap" url_template="http://openpistemap.org/tiles/contours/{0}/{1}/{2}.png" ext=".png" min_zoom="5" max_zoom="17" tile_size="256" img_density="32" avg_img_size="18000"/>
