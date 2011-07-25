@@ -146,6 +146,10 @@
 			<region name="thueringen" esize="" />
 		</regions>
 
+ 	        <regions siteToDownload="http://planet.openstreetmap.nl/planet-{0}-latest.osm.pbf" region_prefix="" skip="true" region_suffix="_Europe">
+                       <region name="benelux" esize="6" />
+                </regions>
+
         <!-- 2. ASIA -->
 		<!-- 2.1 Russia [GIS-LAB.INFO] -->
 		<regions siteToDownload="http://gis-lab.info/data/osm/{0}/{0}.osm.bz2" region_prefix="Russia_"  skip="true" region_suffix="_Asia">
