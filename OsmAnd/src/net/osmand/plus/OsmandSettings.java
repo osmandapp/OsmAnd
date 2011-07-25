@@ -594,16 +594,18 @@ public class OsmandSettings {
 	}
 	
 	private TileSourceTemplate checkAmongAvailableTileSources(File dir, List<TileSourceTemplate> list){
-		for (TileSourceTemplate l : list) {
-			if (dir.getName().equals(l.getName())) {
-				try {
-					dir.mkdirs();
-					TileSourceManager.createMetaInfoFile(dir, l, true);
-				} catch (IOException e) {
+		if (list != null) {
+			for (TileSourceTemplate l : list) {
+				if (dir.getName().equals(l.getName())) {
+					try {
+						dir.mkdirs();
+						TileSourceManager.createMetaInfoFile(dir, l, true);
+					} catch (IOException e) {
+					}
+					return l;
 				}
-				return l;
+				
 			}
-			
 		}
 		return null;
 	}
