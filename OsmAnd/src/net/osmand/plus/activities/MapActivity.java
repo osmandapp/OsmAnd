@@ -822,7 +822,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			}
 		}
 		
-		LocationProvider  prov = service.getProvider(currentLocationProvider); 
+		LocationProvider  prov = currentLocationProvider != null ? service.getProvider(currentLocationProvider) : null; 
 		providerSupportsBearing = prov == null ? false : prov.supportsBearing() && !isRunningOnEmulator();
 		providerSupportsSpeed = prov == null ? false : prov.supportsSpeed() && !isRunningOnEmulator();
 		
