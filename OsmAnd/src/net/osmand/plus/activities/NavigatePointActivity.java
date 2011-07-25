@@ -14,7 +14,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
