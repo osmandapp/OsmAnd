@@ -29,8 +29,8 @@ public class OsmAndFormatter {
 		}
 		// 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000 ...
 		
-		int generator = 5;
-		byte pointer = 0;
+		int generator = 1;
+		byte pointer = 1;
 		double point = mainUnitInMeter;
 		while(distInMeters * point > generator){
 			if (pointer++ % 3 == 2) {
