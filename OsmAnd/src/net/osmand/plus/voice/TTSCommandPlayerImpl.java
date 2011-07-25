@@ -95,7 +95,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 				public void onInit(int status) {
 					if (status != TextToSpeech.SUCCESS) {
 						internalClear();
-					} else {
+					} else if (mTts != null) {
 						switch (mTts.isLanguageAvailable(new Locale(language)))
 						{
 							case TextToSpeech.LANG_MISSING_DATA:
