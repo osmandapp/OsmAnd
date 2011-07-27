@@ -103,7 +103,7 @@
 \n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
     <string name="error_doing_search">Error occurred in offline search</string>
-    <string name="search_offline_geo_error">Could not parse geo intent: {0}</string>
+    <string name="search_offline_geo_error">Could not parse geo intent {0}</string>
 	<string name="search_osm_offline">Search address using offline maps</string>
 
 	<string name="system_locale">System</string>
