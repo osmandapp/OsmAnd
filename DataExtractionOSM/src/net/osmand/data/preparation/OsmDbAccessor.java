@@ -17,6 +17,9 @@ import net.osmand.osm.Way;
 import net.osmand.osm.Entity.EntityId;
 import net.osmand.osm.Entity.EntityType;
 
+import com.anvisics.jleveldb.ext.DBAccessor;
+import com.anvisics.jleveldb.ext.ReadOptions;
+
 public class OsmDbAccessor implements OsmDbAccessorContext {
 	
 	private PreparedStatement pselectNode;
@@ -27,6 +30,9 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 	private int allWays;
 	private int allNodes;
 	private Connection dbConn;
+	private DBDialect dialect;
+	private DBAccessor accessor;
+	private ReadOptions opts;
 	
 	public interface OsmDbVisitor {
 		public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException;
@@ -35,19 +41,26 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 	public OsmDbAccessor(){
 	}
 	
-	public void initDatabase(Connection dbConn, int allNodes, int allWays, int allRelations) throws SQLException {
-		this.dbConn = dbConn;
-		this.allNodes = allNodes;
-		this.allWays = allWays;
-		this.allRelations = allRelations;
-		pselectNode = dbConn.prepareStatement("select n.latitude, n.longitude, t.skeys, t.value from node n left join tags t on n.id = t.id and t.type = 0 where n.id = ?"); //$NON-NLS-1$
-		pselectWay = dbConn.prepareStatement("select w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " + //$NON-NLS-1$
-				"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 inner join node n on w.node = n.id " + //$NON-NLS-1$
-				"where w.id = ? order by w.ord"); //$NON-NLS-1$
-		pselectRelation = dbConn.prepareStatement("select r.member, r.type, r.role, r.ord, t.skeys, t.value " + //$NON-NLS-1$
-				"from relations r left join tags t on r.id = t.id and t.type = 2 and r.ord = 0 " + //$NON-NLS-1$
-				"where r.id = ? order by r.ord"); //$NON-NLS-1$
-		pselectTags = dbConn.prepareStatement("select skeys, value from tags where id = ? and type = ?"); //$NON-NLS-1$
+	public void initDatabase(Object dbConnection, DBDialect dialect, int allNodes, int allWays, int allRelations) throws SQLException {
+		
+		this.dialect = dialect;
+		if(this.dialect == DBDialect.NOSQL){
+			opts = new ReadOptions();
+			accessor = (DBAccessor) dbConnection;
+		} else {
+			this.dbConn = (Connection) dbConnection;
+			this.allNodes = allNodes;
+			this.allWays = allWays;
+			this.allRelations = allRelations;
+			pselectNode = dbConn.prepareStatement("select n.latitude, n.longitude, t.skeys, t.value from node n left join tags t on n.id = t.id and t.type = 0 where n.id = ?"); //$NON-NLS-1$
+			pselectWay = dbConn.prepareStatement("select w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " + //$NON-NLS-1$
+					"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 inner join node n on w.node = n.id " + //$NON-NLS-1$
+					"where w.id = ? order by w.ord"); //$NON-NLS-1$
+			pselectRelation = dbConn.prepareStatement("select r.member, r.type, r.role, r.ord, t.skeys, t.value " + //$NON-NLS-1$
+					"from relations r left join tags t on r.id = t.id and t.type = 2 and r.ord = 0 " + //$NON-NLS-1$
+					"where r.id = ? order by r.ord"); //$NON-NLS-1$
+			pselectTags = dbConn.prepareStatement("select skeys, value from tags where id = ? and type = ?"); //$NON-NLS-1$
+		}
 	}
 	
 	public int getAllNodes() {
@@ -67,6 +80,10 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 			// do not load tags for nodes inside way
 			return;
 		}
+		if(dialect == DBDialect.NOSQL){
+			loadEntityDataNoSQL(e, loadTags);
+		}
+		
 		Map<EntityId, Entity> map = new LinkedHashMap<EntityId, Entity>();
 		if (e instanceof Relation && ((Relation) e).getMemberIds().isEmpty()) {
 			pselectRelation.setLong(1, e.getId());
@@ -169,7 +186,15 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 	}
 	
 	
+	private void loadEntityDataNoSQL(Entity e, boolean loadTags) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public int iterateOverEntities(IProgress progress, EntityType type, OsmDbVisitor visitor) throws SQLException {
+		if(dialect == DBDialect.NOSQL){
+			iterateOverEntitiesNoSQL(progress, type, visitor);
+		}
 		Statement statement = dbConn.createStatement();
 		String select;
 		int count = 0;
@@ -245,32 +270,29 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		return count;
 	}
 
-	public void loadEntityTags(EntityType type, Entity e) throws SQLException {
-		pselectTags.setLong(1, e.getId());
-		pselectTags.setByte(2, (byte) type.ordinal());
-		ResultSet rsTags = pselectTags.executeQuery();
-		while (rsTags.next()) {
-			e.putTag(rsTags.getString(1), rsTags.getString(2));
-		}
-		rsTags.close();
+
+	private void iterateOverEntitiesNoSQL(IProgress progress, EntityType type, OsmDbVisitor visitor) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public void closeReadingConnection() throws SQLException {
-		if (pselectNode != null) {
-			pselectNode.close();
-		}
-		if (pselectWay != null) {
-			pselectWay.close();
-		}
-		if (pselectRelation != null) {
-			pselectRelation.close();
-		}
-		if (pselectTags != null) {
-			pselectTags.close();
+		if (dialect != DBDialect.NOSQL) {
+			if (pselectNode != null) {
+				pselectNode.close();
+			}
+			if (pselectWay != null) {
+				pselectWay.close();
+			}
+			if (pselectRelation != null) {
+				pselectRelation.close();
+			}
+			if (pselectTags != null) {
+				pselectTags.close();
+			}
 		}
 		
 	}
-	
 
 	
 

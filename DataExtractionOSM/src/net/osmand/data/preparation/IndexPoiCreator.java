@@ -114,7 +114,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		}
 		poiIndexFile.getParentFile().mkdirs();
 		// creating connection
-		poiConnection = DBDialect.SQLITE.getDatabaseConnection(poiIndexFile.getAbsolutePath(), log);
+		poiConnection = (Connection) DBDialect.SQLITE.getDatabaseConnection(poiIndexFile.getAbsolutePath(), log);
 		
 		// create database structure
 		Statement stat = poiConnection.createStatement();

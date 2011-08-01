@@ -2,12 +2,8 @@ package net.osmand.data.preparation;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import net.osmand.osm.Entity;
@@ -22,11 +18,15 @@ import net.osmand.osm.io.OsmBaseStorage;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.anvisics.jleveldb.ext.DBAccessor;
+import com.anvisics.jleveldb.ext.DBWriteBatch;
+import com.anvisics.jleveldb.ext.WriteOptions;
+
 public class OsmDbCreator implements IOsmStorageFilter {
 
 	private static final Log log = LogFactory.getLog(OsmDbCreator.class);
 
-	public static final int BATCH_SIZE_OSM = 10000;
+	public static final int BATCH_SIZE_OSM = 100000;
 
 
 	DBDialect dialect;
@@ -47,122 +47,160 @@ public class OsmDbCreator implements IOsmStorageFilter {
 	private Connection dbConn;
 	private final IndexCreator indexCreator;
 
+	private DBAccessor database;
+	private DBWriteBatch batch;
+	private WriteOptions options;
+
 
 	public OsmDbCreator(IndexCreator indexCreator) {
 		this.indexCreator = indexCreator;
 	}
 
-	public void initDatabase(DBDialect dialect, Connection dbConn) throws SQLException {
-		this.dbConn = dbConn;
+	public void initDatabase(DBDialect dialect, Object databaseConn) throws SQLException {
+		
 		this.dialect = dialect;
-		// prepare tables
-		Statement stat = dbConn.createStatement();
-		dialect.deleteTableIfExists("node", stat);
-		stat.executeUpdate("create table node (id bigint primary key, latitude double, longitude double)"); //$NON-NLS-1$
-		stat.executeUpdate("create index IdIndex ON node (id)"); //$NON-NLS-1$
-		dialect.deleteTableIfExists("ways", stat);
-		stat.executeUpdate("create table ways (id bigint, node bigint, ord smallint, primary key (id, ord))"); //$NON-NLS-1$
-		stat.executeUpdate("create index IdWIndex ON ways (id)"); //$NON-NLS-1$
-		dialect.deleteTableIfExists("relations", stat);
-		stat.executeUpdate("create table relations (id bigint, member bigint, type smallint, role varchar(255), ord smallint, primary key (id, ord))"); //$NON-NLS-1$
-		stat.executeUpdate("create index IdRIndex ON relations (id)"); //$NON-NLS-1$
-		dialect.deleteTableIfExists("tags", stat);
-		stat.executeUpdate("create table tags (id bigint, type smallint, skeys varchar(255), value varchar(255), primary key (id, type, skeys))"); //$NON-NLS-1$
-		stat.executeUpdate("create index IdTIndex ON tags (id, type)"); //$NON-NLS-1$
-		stat.close();
+		if(dialect == DBDialect.NOSQL){
+			database = (DBAccessor) databaseConn;
+			batch = new DBWriteBatch();
+			options = new WriteOptions();
+		} else {
+			this.dbConn = (Connection) databaseConn;
+			// prepare tables
+			Statement stat = dbConn.createStatement();
+			dialect.deleteTableIfExists("node", stat);
+			stat.executeUpdate("create table node (id bigint primary key, latitude double, longitude double)"); //$NON-NLS-1$
+			stat.executeUpdate("create index IdIndex ON node (id)"); //$NON-NLS-1$
+			dialect.deleteTableIfExists("ways", stat);
+			stat.executeUpdate("create table ways (id bigint, node bigint, ord smallint, primary key (id, ord))"); //$NON-NLS-1$
+			stat.executeUpdate("create index IdWIndex ON ways (id)"); //$NON-NLS-1$
+			dialect.deleteTableIfExists("relations", stat);
+			stat.executeUpdate("create table relations (id bigint, member bigint, type smallint, role varchar(255), ord smallint, primary key (id, ord))"); //$NON-NLS-1$
+			stat.executeUpdate("create index IdRIndex ON relations (id)"); //$NON-NLS-1$
+			dialect.deleteTableIfExists("tags", stat);
+			stat.executeUpdate("create table tags (id bigint, type smallint, skeys varchar(255), value varchar(255), primary key (id, type, skeys))"); //$NON-NLS-1$
+			stat.executeUpdate("create index IdTIndex ON tags (id, type)"); //$NON-NLS-1$
+			stat.close();
 
-		prepNode = dbConn.prepareStatement("insert into node values (?, ?, ?)"); //$NON-NLS-1$
-		prepWays = dbConn.prepareStatement("insert into ways values (?, ?, ?)"); //$NON-NLS-1$
-		prepRelations = dbConn.prepareStatement("insert into relations values (?, ?, ?, ?, ?)"); //$NON-NLS-1$
-		prepTags = dbConn.prepareStatement("insert into tags values (?, ?, ?, ?)"); //$NON-NLS-1$
-		dbConn.setAutoCommit(false);
+			prepNode = dbConn.prepareStatement("insert into node values (?, ?, ?)"); //$NON-NLS-1$
+			prepWays = dbConn.prepareStatement("insert into ways values (?, ?, ?)"); //$NON-NLS-1$
+			prepRelations = dbConn.prepareStatement("insert into relations values (?, ?, ?, ?, ?)"); //$NON-NLS-1$
+			prepTags = dbConn.prepareStatement("insert into tags values (?, ?, ?, ?)"); //$NON-NLS-1$
+			dbConn.setAutoCommit(false);
+		}
 	}
 
 	public void finishLoading() throws SQLException {
-		if (currentCountNode > 0) {
-			prepNode.executeBatch();
+		if (dialect != DBDialect.NOSQL) {
+			if (currentCountNode > 0) {
+				prepNode.executeBatch();
+			}
+			prepNode.close();
+			if (currentWaysCount > 0) {
+				prepWays.executeBatch();
+			}
+			prepWays.close();
+			if (currentRelationsCount > 0) {
+				prepRelations.executeBatch();
+			}
+			prepRelations.close();
+			if (currentTagsCount > 0) {
+				prepTags.executeBatch();
+			}
+			prepTags.close();
+		} else {
+			database.Write(options, batch);
 		}
-		prepNode.close();
-		if (currentWaysCount > 0) {
-			prepWays.executeBatch();
-		}
-		prepWays.close();
-		if (currentRelationsCount > 0) {
-			prepRelations.executeBatch();
-		}
-		prepRelations.close();
-		if (currentTagsCount > 0) {
-			prepTags.executeBatch();
-		}
-		prepTags.close();
 	}
 
 	@Override
 	public boolean acceptEntityToLoad(OsmBaseStorage storage, EntityId entityId, Entity e) {
 		// put all nodes into temporary db to get only required nodes after loading all data
-		try {
+		if(dialect == DBDialect.NOSQL){
+			batch.Put(e.getId()+"", e.getTags() +"");
+			
+			currentCountNode++;
 			if (e instanceof Node) {
-				currentCountNode++;
 				if (!e.getTags().isEmpty()) {
 					allNodes++;
 				}
-				prepNode.setLong(1, e.getId());
-				prepNode.setDouble(2, ((Node) e).getLatitude());
-				prepNode.setDouble(3, ((Node) e).getLongitude());
-				prepNode.addBatch();
-				if (currentCountNode >= BATCH_SIZE_OSM) {
-					prepNode.executeBatch();
-					dbConn.commit(); // clear memory
-					currentCountNode = 0;
-				}
 			} else if (e instanceof Way) {
 				allWays++;
-				short ord = 0;
-				for (Long i : ((Way) e).getNodeIds()) {
-					currentWaysCount++;
-					prepWays.setLong(1, e.getId());
-					prepWays.setLong(2, i);
-					prepWays.setLong(3, ord++);
-					prepWays.addBatch();
-				}
-				if (currentWaysCount >= BATCH_SIZE_OSM) {
-					prepWays.executeBatch();
-					dbConn.commit(); // clear memory
-					currentWaysCount = 0;
-				}
 			} else {
-				allRelations++;
-				short ord = 0;
-				for (Entry<EntityId, String> i : ((Relation) e).getMembersMap().entrySet()) {
-					currentRelationsCount++;
-					prepRelations.setLong(1, e.getId());
-					prepRelations.setLong(2, i.getKey().getId());
-					prepRelations.setLong(3, i.getKey().getType().ordinal());
-					prepRelations.setString(4, i.getValue());
-					prepRelations.setLong(5, ord++);
-					prepRelations.addBatch();
+				allRelations ++;
+			}
+			if(currentCountNode > BATCH_SIZE_OSM){
+				database.Write(options, batch);
+				batch = new DBWriteBatch();
+				long usedMemory = Runtime.getRuntime().totalMemory() -  Runtime.getRuntime().freeMemory();
+				System.out.println(""+Runtime.getRuntime().totalMemory()/(1024*1024) +" MB Total " + 
+						(usedMemory  / (1024*1024)) + " MB used memory");
+				currentCountNode = 0;
+			}
+		} else {
+			try {
+				if (e instanceof Node) {
+					currentCountNode++;
+					if (!e.getTags().isEmpty()) {
+						allNodes++;
+					}
+					prepNode.setLong(1, e.getId());
+					prepNode.setDouble(2, ((Node) e).getLatitude());
+					prepNode.setDouble(3, ((Node) e).getLongitude());
+					prepNode.addBatch();
+					if (currentCountNode >= BATCH_SIZE_OSM) {
+						prepNode.executeBatch();
+						dbConn.commit(); // clear memory
+						currentCountNode = 0;
+					}
+				} else if (e instanceof Way) {
+					allWays++;
+					short ord = 0;
+					for (Long i : ((Way) e).getNodeIds()) {
+						currentWaysCount++;
+						prepWays.setLong(1, e.getId());
+						prepWays.setLong(2, i);
+						prepWays.setLong(3, ord++);
+						prepWays.addBatch();
+					}
+					if (currentWaysCount >= BATCH_SIZE_OSM) {
+						prepWays.executeBatch();
+						dbConn.commit(); // clear memory
+						currentWaysCount = 0;
+					}
+				} else {
+					allRelations++;
+					short ord = 0;
+					for (Entry<EntityId, String> i : ((Relation) e).getMembersMap().entrySet()) {
+						currentRelationsCount++;
+						prepRelations.setLong(1, e.getId());
+						prepRelations.setLong(2, i.getKey().getId());
+						prepRelations.setLong(3, i.getKey().getType().ordinal());
+						prepRelations.setString(4, i.getValue());
+						prepRelations.setLong(5, ord++);
+						prepRelations.addBatch();
+					}
+					if (currentRelationsCount >= BATCH_SIZE_OSM) {
+						prepRelations.executeBatch();
+						dbConn.commit(); // clear memory
+						currentRelationsCount = 0;
+					}
 				}
-				if (currentRelationsCount >= BATCH_SIZE_OSM) {
-					prepRelations.executeBatch();
+				for (Entry<String, String> i : e.getTags().entrySet()) {
+					currentTagsCount++;
+					prepTags.setLong(1, e.getId());
+					prepTags.setLong(2, EntityType.valueOf(e).ordinal());
+					prepTags.setString(3, i.getKey());
+					prepTags.setString(4, i.getValue());
+					prepTags.addBatch();
+				}
+				if (currentTagsCount >= BATCH_SIZE_OSM) {
+					prepTags.executeBatch();
 					dbConn.commit(); // clear memory
-					currentRelationsCount = 0;
+					currentTagsCount = 0;
 				}
+			} catch (SQLException ex) {
+				log.error("Could not save in db", ex); //$NON-NLS-1$
 			}
-			for (Entry<String, String> i : e.getTags().entrySet()) {
-				currentTagsCount++;
-				prepTags.setLong(1, e.getId());
-				prepTags.setLong(2, EntityType.valueOf(e).ordinal());
-				prepTags.setString(3, i.getKey());
-				prepTags.setString(4, i.getValue());
-				prepTags.addBatch();
-			}
-			if (currentTagsCount >= BATCH_SIZE_OSM) {
-				prepTags.executeBatch();
-				dbConn.commit(); // clear memory
-				currentTagsCount = 0;
-			}
-		} catch (SQLException ex) {
-			log.error("Could not save in db", ex); //$NON-NLS-1$
 		}
 		// do not add to storage
 		return false;
