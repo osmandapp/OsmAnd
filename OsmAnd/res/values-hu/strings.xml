@@ -14,7 +14,6 @@
 \n\t- GPX navigációs beállítások
 \n\t- Kezelő felület és egyéb hibajavítások
 	</string>
-	<string name="voice_not_use">Nem használ</string>
 	<string name="voice_not_specified">Nincs</string>
 	<string name="installing_new_resources">Új adatok kicsomagolása...</string>
 	<string name="internet_connection_required_for_online_route">Az Internetes navigáció használata az Internet kapcsolat hiánya miatt nem lehetséges. Használható a (még kísérleti) OsmAnd kapcsolat nélküli navigációt (\'Beállítások\' -> \'Útvonaltervezés\'.</string>
@@ -204,8 +203,6 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	
 	<string name="voice_is_not_available_msg">A beszéd alapú navigáció nem érhető el. A Beállításoknál kiválasztható vagy letölthető.</string>
 	<string name="voice_is_not_available_title">Nincs megadva hang adat</string>
-	<string name="trace_rendering_descr">Ezzel az opcióval a kirajzolás teljesítménye figyelhető</string>
-	<string name="trace_rendering">Kirajzolás nyomonkövetése</string>
 	<string name="daynight_mode_day">Nappal</string>
 	<string name="daynight_mode_night">Éjjel</string>
 	<string name="daynight_mode_auto">Napkelte/Napnyugta</string>
