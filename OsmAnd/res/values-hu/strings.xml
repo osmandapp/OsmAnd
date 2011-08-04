@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="search_offline_clear_search">Új keresés</string>
+	<string name="map_text_size_descr">Szövegméret beállítása a térképen megjelenő nevekhez</string>
+	<string name="map_text_size">Szöveg méret</string>
+	<string name="trace_rendering">Hibakeresési információ megjelenítéshez</string>
+	<string name="trace_rendering_descr">Megjelenítési sebesség adatok hibakeresési, nyomonkövetési célból</string>
+	<string name="tip_recent_changes">Legújabb változások</string>
+	<string name="tip_recent_changes_0_6_6_t">Legújabb változások a 0.6.6 verzióhoz: 
+\n\t- Text To Speech hang navigációhoz
+\n\t- Részletesebb térkép megjelenítés
+\n\t- Alap térkép az egész Földről az alkalmazásban
+\n\t- Javított kapcsolat nélküli navigáció (még kísérleti)
+\n\t- GPX navigációs beállítások
+\n\t- Kezelő felület és egyéb hibajavítások
+	</string>
+	<string name="voice_not_specified">Nincs</string>
+	<string name="installing_new_resources">Új adatok kicsomagolása...</string>
+	<string name="internet_connection_required_for_online_route">Az Internetes navigáció használata az Internet kapcsolat hiánya miatt nem lehetséges. Használható a (még kísérleti) OsmAnd kapcsolat nélküli navigációt (\'Beállítások\' -> \'Útvonaltervezés\'.</string>
+	<string name="tts_language_not_supported_title">Nem támogatott nyelv</string>
+	<string name="tts_language_not_supported">A kiválasztott nyelvet az Android TTS rendszere nem támogatja. A Market-ről letölthető másik TTS rendszer. Különben a jelenlegi TTS-t használja a program.</string>
+	<string name="tts_missing_language_data_title">Hiányzó adat</string>
+	<string name="tts_missing_language_data">Nincs telepített adat a kiválasztott nyelv használatához. A Market-ről letölthető.</string>
+
+	<string name="gpx_option_reverse_route">GPX irány megfordítása</string>
+	<string name="gpx_option_destination_point">Használd a jelenlegi cél pontot</string>
+	<string name="gpx_option_from_start_point">Végig az egész nyomvonalon</string>
+
+	<string name="tip_rotation_switching">Térkép elforgatás</string>
+	<string name="tip_rotation_switching_t">\tMegváltoztatható, hogy a térkép mikor és hogyan forogjon \'Beállítások\' -> \'Általános\' -> \'Térkép forgatása\'.
+	\n\tLehetőségek:
+	\n\t\'Ne forogjon\' - Térkép nem forog, felül mindíg észak van
+	\n\t\'Mozgás alapján\' - Térkép mindíg a mozgásnak megfelelően forog
+	\n\t\'Iránytű alapján\' - A telefon iránytűjének megfelelően forog a térkép
+	\n\tTipp: Térkép nézetben az iránytűt megérintve egyszerűen lehet váltani a kiválasztott mód és az iránytű szerinti forgatás között.</string>
+
+	<string name="switch_to_raster_map_to_see">A jelenlegi pozícióhoz nem tartozik hálózat nélkül használható vektoros térkép, a térkép forrás megváltoztatható a \'Beállítások\' -> \'Térkép megjelenítés\'-ben vagy le kell tölteni vektoros térképet.</string>
+	<string name="switch_to_vector_map_to_see">Hálózat nélkül használható vektoros térképre váltani a \'Beállítások\' -> \'Térkép megjelenítés\' -> \'Vektoros térképek\' menüponttal lehet.</string>
+	<string name="binary_map_download_success">Sikerült. Hálózat nélkül használható vektoros térképre váltani a \'Beállítások\' -> \'Térkép megjelenítés\' -> \'Vektoros térképek\' menüponttal lehet.</string>
+	<string name="choose_audio_stream">Hang navigáció kimenete</string>
+	<string name="choose_audio_stream_descr">Hang navigáció csatornájának kiválasztása (a rendszerkonfigurációtól függ)</string>
+	<string name="voice_stream_voice_call">Telefonhívás hangcsatorna</string>
+	<string name="voice_stream_notification">Üzenetjel hangcsatorna</string>
+	<string name="voice_stream_music">Zene hangcsatorna</string>
   <string name="warning_tile_layer_not_downloadable">%1$s térkép réteget nem tudja az alkalmazás letölteni, meg kell próbálni újratelepíteni.</string>
   <string name="overlay_transparency_descr">Rátét áttetszőség megváltoztatása</string>
   <string name="overlay_transparency">Rátét áttetszőség</string>
@@ -19,10 +61,10 @@
   <string name="select_tile_source_to_install">Térkép kiválasztása telepítéshez frissítéshez</string>
   <string name="internet_not_available">A művelet elvégzéséhez Internet elérése szükséges</string>
   <string name="install_more">További telepítése...</string>
-  <string name="tip_update_index">Index adatok frissítése</string>
-  <string name="tip_update_index_t">Fontos az aktuális térképek megléte. Az Osmand program tartalmaz egy letöltéskezelőt amivel egyszerűen ellenőrizhető, hogy létezik-e frissebb a meglévő index adatokból.
-\n\tA frissítések ellenőrzéséhez a \'Főmenü\'->\'Beállítások\'->\'Adatok kapcsolat nélküli munkához\'->\'Index adatok letöltése\' menüpontot kell választani. Az index adatok internetről való frissítése után a \'Letöltöttek szűrése\' menüt kell választani.
-\nÍgy most már csak a letöltött index adatok jelennek meg a következő színekkel jelölve:
+  <string name="tip_update_index">Térkép adatok frissítése</string>
+  <string name="tip_update_index_t">Fontos az aktuális térképek megléte. Az Osmand program tartalmaz egy letöltéskezelőt amivel egyszerűen ellenőrizhető, hogy létezik-e frissebb a meglévő térkép adatokból.
+\n\tA frissítések ellenőrzéséhez a \'Főmenü\'->\'Beállítások\'->\'Adatok kapcsolat nélküli munkához\'->\'Térkép adatok letöltése\' menüpontot kell választani. A térkép adatok internetről való frissítése után a \'Letöltöttek szűrése\' menüt kell választani.
+\nÍgy most már csak a letöltött térkép adatok jelennek meg a következő színekkel jelölve:
 \n\t\'Zöld\' - azt jelenti, hogy az index állomány megegyezik a szerveren lévővel
 \n\t\'Kék\' - azt jelenti, hogy újabb verzió tölthető le a szerverről</string>
 <string name="level_to_switch_vector_raster_descr">Maximális nagyítási szint vektoros megjelenítéshez raszteres helyett</string>
@@ -161,8 +203,6 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	
 	<string name="voice_is_not_available_msg">A beszéd alapú navigáció nem érhető el. A Beállításoknál kiválasztható vagy letölthető.</string>
 	<string name="voice_is_not_available_title">Nincs megadva hang adat</string>
-	<string name="trace_rendering_descr">Ezzel az opcióval a kirajzolás teljesítménye figyelhető</string>
-	<string name="trace_rendering">Kirajzolás nyomonkövetése</string>
 	<string name="daynight_mode_day">Nappal</string>
 	<string name="daynight_mode_night">Éjjel</string>
 	<string name="daynight_mode_auto">Napkelte/Napnyugta</string>
@@ -308,7 +348,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="route_tu">Fordulj meg</string>
 	<string name="route_head">Előre</string>
 	<string name="first_time_continue">Tovább</string>
-	<string name="first_time_download">Index adatok letöltése</string>
+	<string name="first_time_download">Térkép adatok letöltése</string>
 	<string name="first_time_msg">Köszönjük, hogy az OsmAndot választotta. \nHogy a program minden lehetőségét kihasználhassa index állományokra lesz szüksége amiket az Internetről letölthet (Beállítások -&gt; Adat) vagy előállíthat magának. Ezt követően képes lesz: címre keresni, POI-ra keresni és tömegközékedési eszközre keresni.</string>
 	<string name="search_poi_location">Kereső jelzés...</string>
 	<string name="search_near_map">Keresés az utolsó térkép pozíció közelében</string>
@@ -371,12 +411,12 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="download_question">Letöltés {0} - {1} ?</string>
 	<string name="download_question_exist">Már létezik index adat a(z) {0}-hoz/-hez ({1}). Szeretné frissíteni ({2}) ?</string>
 	<string name="address">Cím</string>
-	<string name="download_index_success">Sikeres az index adatok letöltése</string>
+	<string name="download_index_success">Sikeres a térkép adatok letöltése</string>
 	<string name="error_io_error">IO hiba történt</string>
 	<string name="downloading_file">Fájl letöltése...</string>
 	<string name="downloading">Letöltés...</string>
-	<string name="downloading_list_indexes">Elérhető index adatok listájának letöltése</string>
-	<string name="list_index_files_was_not_loaded">Nincs letöltve az index adatok listája a from osmand.googlecode.com-ról.</string>
+	<string name="downloading_list_indexes">Elérhető térkép adatok listájának letöltése</string>
+	<string name="list_index_files_was_not_loaded">Nincs letöltve a térkép adatok listája a from osmand.googlecode.com-ról.</string>
     <string name="select_index_file_to_download">Ha nem találja a régióját, elkészítheti magának. Lásd: osmand.net</string>
 	<string name="show_poi_on_map">Mutasd a térképen</string>
 	<string name="fav_points_edited">Kedvenc pontok szerkesztése kész</string>
@@ -413,20 +453,20 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="go_back_to_osmand">Vissza az OsmAnd térképhez</string>
 	<string name="close">Bezár</string>
 	<string name="loading_data">Adatok beolvasása</string>
-	<string name="reading_indexes">Index adatok olvasása...</string>
+	<string name="reading_indexes">Térkép adatok olvasása...</string>
 	<string name="previous_run_crashed">Az előző alkalmazás összeomlott. Naplófájl: {0}. Kérem küldjön egy hibajegyet és csatolja hozzá a naplófájlt.</string>
 	<string name="saving_gpx_tracks">GPX útvonalak mentése SD kártyára...</string>
 	<string name="finished_task">Befejezve</string>
-    <string name="reload_indexes_descr">Index adatok újraolvasása SD kártyáról</string>
-    <string name="reload_indexes">Index adatok újraolvasása</string>
-    <string name="download_indexes_descr">Index adatok letöltése Internetről</string>
-    <string name="download_indexes">Index adatok letöltése</string>
+    <string name="reload_indexes_descr">Térkép adatok újraolvasása SD kártyáról</string>
+    <string name="reload_indexes">Térkép adatok újraolvasása</string>
+    <string name="download_indexes_descr">Térkép adatok letöltése Internetről</string>
+    <string name="download_indexes">Térkép adatok letöltése</string>
     <string name="use_online_routing_descr">Internet használata útvonaltervezéshez</string>
     <string name="use_online_routing">Online útvonaltervezés</string>
     <string name="user_password_descr">OSM jelszó</string>
     <string name="user_password">Felhasználói jelszó</string>
     <string name="osm_settings_descr">OSM beállítás: OSM bejelentkezés</string>
-    <string name="monitor_preferences_descr">Megfigyelés beállítás: útvonal mentése</string>
+    <string name="monitor_preferences_descr">Nyomvonal beállítás: útvonal mentése</string>
     <string name="data_settings_descr">Nyelv kiválasztása, letölti/újraolvassa az adatokat</string>
     <string name="map_preferences_descr">Térkép beállítás: térkép forrása, forgatás, középpont, kijelző helyzete</string>
     <string name="data_settings">Adat</string>
@@ -441,7 +481,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
     <string name="save_current_track">Jelenlegi útvonal mentése</string>
     <string name="save_track_interval_descr">Idő intervallum választás az útvonal mentéshez</string>
     <string name="save_track_interval">Útvonal mentés intervalluma</string>
-    <string name="monitor_preferences">Megfigyelés</string>
+    <string name="monitor_preferences">Nyomvonalak</string>
     <string name="save_track_to_gpx_descrp">Az útvonalak napi csoportosításban kerülnek mentésre a track könyvtárba</string>
     <string name="save_track_to_gpx">Útvonal mentése GPX-be</string>
     <string name="navigate_to">Vezess ide</string>
