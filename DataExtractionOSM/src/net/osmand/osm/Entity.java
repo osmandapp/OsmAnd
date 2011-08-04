@@ -156,7 +156,6 @@ public abstract class Entity {
 	public boolean isVirtual(){
 		return id < 0;
 	}
-
 	
 	public String getOsmUrl() {
 		return EntityId.valueOf(this).getOsmUrl();
@@ -191,4 +190,5 @@ public abstract class Entity {
 		}
 		return true;
 	}
+	
 }

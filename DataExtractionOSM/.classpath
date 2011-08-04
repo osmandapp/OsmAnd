@@ -5,11 +5,10 @@
 	<classpathentry kind="lib" path="lib/bzip2-20090327.jar"/>
 	<classpathentry kind="lib" path="lib/sqlitejdbc-v056.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/junidecode-0.1.jar"/>
 	<classpathentry kind="lib" path="lib/json-20090211.jar"/>
 	<classpathentry kind="lib" path="lib/h2-latest.jar"/>
 	<classpathentry kind="lib" path="lib/bsh-core-2.0b4.jar"/>
-	<classpathentry kind="lib" path="lib/orient-commons-1.0rc3.jar"/>
-	<classpathentry kind="lib" path="lib/jleveldb.jar" sourcepath="/JavaLevelDB"/>
+	<classpathentry kind="lib" path="lib/jleveldb-v01.jar"/>
+	<classpathentry kind="lib" path="lib/junidecode-0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

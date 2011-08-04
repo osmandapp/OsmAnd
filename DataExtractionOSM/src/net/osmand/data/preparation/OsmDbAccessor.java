@@ -10,17 +10,25 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import net.osmand.IProgress;
+import net.osmand.osm.ArraySerializer;
 import net.osmand.osm.Entity;
 import net.osmand.osm.Node;
 import net.osmand.osm.Relation;
 import net.osmand.osm.Way;
+import net.osmand.osm.ArraySerializer.EntityValueTokenizer;
 import net.osmand.osm.Entity.EntityId;
 import net.osmand.osm.Entity.EntityType;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.json.JSONException;
+
 import com.anvisics.jleveldb.ext.DBAccessor;
+import com.anvisics.jleveldb.ext.DBIterator;
 import com.anvisics.jleveldb.ext.ReadOptions;
 
 public class OsmDbAccessor implements OsmDbAccessorContext {
+	private static final Log log = LogFactory.getLog(OsmDbAccessor.class);
 	
 	private PreparedStatement pselectNode;
 	private PreparedStatement pselectWay;
@@ -31,8 +39,12 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 	private int allNodes;
 	private Connection dbConn;
 	private DBDialect dialect;
+	
+	// leveldb
+	private ReadOptions randomAccessOptions;
+	
 	private DBAccessor accessor;
-	private ReadOptions opts;
+	
 	
 	public interface OsmDbVisitor {
 		public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException;
@@ -44,14 +56,15 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 	public void initDatabase(Object dbConnection, DBDialect dialect, int allNodes, int allWays, int allRelations) throws SQLException {
 		
 		this.dialect = dialect;
+		this.allNodes = allNodes;
+		this.allWays = allWays;
+		this.allRelations = allRelations;
 		if(this.dialect == DBDialect.NOSQL){
-			opts = new ReadOptions();
 			accessor = (DBAccessor) dbConnection;
+			randomAccessOptions = new ReadOptions();
 		} else {
 			this.dbConn = (Connection) dbConnection;
-			this.allNodes = allNodes;
-			this.allWays = allWays;
-			this.allRelations = allRelations;
+			
 			pselectNode = dbConn.prepareStatement("select n.latitude, n.longitude, t.skeys, t.value from node n left join tags t on n.id = t.id and t.type = 0 where n.id = ?"); //$NON-NLS-1$
 			pselectWay = dbConn.prepareStatement("select w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " + //$NON-NLS-1$
 					"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 inner join node n on w.node = n.id " + //$NON-NLS-1$
@@ -82,6 +95,7 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		}
 		if(dialect == DBDialect.NOSQL){
 			loadEntityDataNoSQL(e, loadTags);
+			return;
 		}
 		
 		Map<EntityId, Entity> map = new LinkedHashMap<EntityId, Entity>();
@@ -186,14 +200,11 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 	}
 	
 	
-	private void loadEntityDataNoSQL(Entity e, boolean loadTags) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	public int iterateOverEntities(IProgress progress, EntityType type, OsmDbVisitor visitor) throws SQLException {
 		if(dialect == DBDialect.NOSQL){
-			iterateOverEntitiesNoSQL(progress, type, visitor);
+			return iterateOverEntitiesNoSQL(progress, type, visitor);
 		}
 		Statement statement = dbConn.createStatement();
 		String select;
@@ -270,10 +281,155 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		return count;
 	}
 
-
-	private void iterateOverEntitiesNoSQL(IProgress progress, EntityType type, OsmDbVisitor visitor) {
-		// TODO Auto-generated method stub
+	
+	private void loadEntityDataNoSQL(Entity e, boolean loadTags) {
+		Collection<EntityId> ids = e instanceof Relation ? ((Relation) e).getMemberIds() : ((Way) e).getEntityIds();
+		Map<EntityId, Entity> map = new LinkedHashMap<EntityId, Entity>();
+		for (EntityId i : ids) {
+			char pr = i.getType() == EntityType.NODE ? '0' : (i.getType() == EntityType.WAY ? '1' : '2');
+			String key = pr + "" + i.getId();
+			String value = accessor.Get(randomAccessOptions, key);
+			if (value != null && value.length() > 0) {
+				try {
+					Entity es = loadEntityNoSqlFromValue(randomAccessOptions, key, value, loadTags, false);
+					map.put(i, es);
+				} catch (JSONException e1) {
+					log.warn(key + " - " + e1.getMessage() + " " + value + "("+value.length()+"]", e1);
+				}
+			}
+		}
+		e.initializeLinks(map);
+	}
+	
+	private void assertToken(int expected, int actual, String value){
+		if(expected != actual){
+			System.err.println("Expected token " + expected + " != " + actual +" actual for : " + value);
+		}
+	}
+	
+	private Entity loadEntityNoSqlFromValue(ReadOptions opts,
+			String key, String value, boolean loadTags, boolean skipIfEmptyTags) throws JSONException{
+		if(value == null){
+			return null;
+		}
+		Entity e = null;
+		long id = Long.parseLong(key.substring(1));
+		ArraySerializer.EntityValueTokenizer tokenizer = new EntityValueTokenizer();
+		tokenizer.tokenize(value);
+		assertToken(ArraySerializer.START_ARRAY, tokenizer.next(), value);
 		
+		int next = tokenizer.next();
+		if(next == ArraySerializer.ELEMENT && skipIfEmptyTags){
+			return null;
+		} 
+		
+		// create e 
+		if (key.charAt(0) == '0') {
+			e = new Node(0, 0, id);
+		} else if (key.charAt(0) == '1') {
+			e = new Way(id);
+		} else if (key.charAt(0) == '2') {
+			e = new Relation(id);
+		}
+		
+		// let's read tags
+		if(next == ArraySerializer.START_ARRAY){
+			int n = tokenizer.next();
+			while(n == ArraySerializer.ELEMENT){
+				String tagKey = tokenizer.value();
+				assertToken(ArraySerializer.ELEMENT, tokenizer.next(), value);
+				String tagValue = tokenizer.value();
+				e.putTag(tagKey, tagValue);
+				n = tokenizer.next();
+			}
+		}
+		
+		if (key.charAt(0) == '0') {
+			assertToken(ArraySerializer.ELEMENT, tokenizer.next(), value);
+			double lat = Double.parseDouble(tokenizer.value());
+			assertToken(ArraySerializer.ELEMENT, tokenizer.next(), value);
+			double lon = Double.parseDouble(tokenizer.value());
+			((Node)e).setLatitude(lat);
+			((Node)e).setLongitude(lon);
+		} else if (key.charAt(0) == '1') {
+			assertToken(ArraySerializer.START_ARRAY, tokenizer.next(), value);
+			int n = tokenizer.next();
+			while(n == ArraySerializer.ELEMENT){
+				String pointId = "0"+ tokenizer.value();
+				String pointVal = this.accessor.Get(opts, pointId);
+				Node node = (Node) loadEntityNoSqlFromValue(opts, pointId, pointVal, false, false);
+				if(node != null){
+					((Way) e).addNode(node);
+				}
+				n = tokenizer.next();
+			}
+		} else if (key.charAt(0) == '2') {
+			assertToken(ArraySerializer.START_ARRAY, tokenizer.next(), value);
+			int n = tokenizer.next();
+			while(n == ArraySerializer.ELEMENT){
+				String mkey = tokenizer.value();
+				EntityType t = null;
+				long mid = Long.parseLong(mkey.substring(1));
+				if(mkey.charAt(0) == '0'){
+					t = EntityType.NODE;
+				} else if(mkey.charAt(0) == '1'){
+					t = EntityType.WAY;
+				} else if(mkey.charAt(0) == '2'){
+					t = EntityType.RELATION;
+				}
+				assertToken(ArraySerializer.ELEMENT, tokenizer.next(), value);
+				String role = tokenizer.value();
+				((Relation) e).addMember(mid, t, role);
+				n = tokenizer.next();
+			}
+		}
+		
+		return e;
+	}
+
+	private int iterateOverEntitiesNoSQL(IProgress progress, EntityType type, OsmDbVisitor visitor) throws SQLException {
+		ReadOptions opts = new ReadOptions();
+		DBIterator iterator = accessor.NewIterator(opts);
+		String prefix = "0";
+		int count = 0;
+		if (type == EntityType.WAY) {
+			prefix = "1";
+		} else if (type == EntityType.RELATION) {
+			prefix = "2";
+		}
+		
+		iterator.Seek(prefix);
+		
+		while(iterator.Valid()){
+			String key = iterator.key();
+			if(!key.startsWith(prefix)){
+				break;
+			}
+			String value = iterator.value();
+			try {
+				Entity e = null;
+				if (type == EntityType.NODE) {
+					e = loadEntityNoSqlFromValue(opts, key, value, true, true);
+				} else if (type == EntityType.WAY) {
+					e = loadEntityNoSqlFromValue(opts, key, value, true, false);
+				} else {
+					e = loadEntityNoSqlFromValue(opts, key, value, true, false);
+				}
+				
+				if(e != null){
+					count++;
+					if (progress != null) {
+						progress.progress(1);
+					}
+					visitor.iterateEntity(e, this);
+				}
+			} catch (JSONException e) {
+				log.warn(key + " - " + e.getMessage() + " " + value + "("+value.length()+"]", e);
+			}
+			iterator.Next();
+		}
+		iterator.delete();
+		return count;
 	}
 
 	public void closeReadingConnection() throws SQLException {

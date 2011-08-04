@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Map;
 import java.util.Map.Entry;
 
+import net.osmand.osm.ArraySerializer;
 import net.osmand.osm.Entity;
 import net.osmand.osm.Node;
 import net.osmand.osm.Relation;
@@ -111,29 +113,77 @@ public class OsmDbCreator implements IOsmStorageFilter {
 			database.Write(options, batch);
 		}
 	}
+	
+	public static String serializeEntityWOId(Entity e){
+		StringBuilder builder = new StringBuilder();
+		
+		ArraySerializer.startArray(builder, true);
+		if(!e.getTags().isEmpty()){
+			ArraySerializer.startArray(builder, true);
+			boolean f = true;
+			for(Map.Entry<String, String> es : e.getTags().entrySet()){
+				ArraySerializer.value(builder, es.getKey(), f);
+				f = false;
+				ArraySerializer.value(builder, es.getValue(), f);
+			}
+			
+			ArraySerializer.endArray(builder);
+		}
+		if(e instanceof Node){
+			ArraySerializer.value(builder, ((Node)e).getLatitude() +"", false);
+			ArraySerializer.value(builder, ((Node)e).getLongitude() +"", false);
+		} else if(e instanceof Way){
+			ArraySerializer.startArray(builder, false);
+			boolean f = true;
+			for(Long l : ((Way)e).getNodeIds()) {
+				ArraySerializer.value(builder, l.longValue() +"", f);
+				 f = false;
+			}
+			ArraySerializer.endArray(builder);
+		} else {
+			
+			ArraySerializer.startArray(builder, false);
+			boolean f = true;
+			for(Entry<EntityId, String> l : ((Relation) e).getMembersMap().entrySet()) {
+				String k = l.getKey().getType() == EntityType.NODE ? "0" : (l.getKey().getType() == EntityType.WAY ? "1" : "2");
+				ArraySerializer.value(builder, k +""+l.getKey().getId(), f);
+				f = false;
+				ArraySerializer.value(builder, l.getValue(), f);
+			}
+			ArraySerializer.endArray(builder);
+			
+		}
+		
+		ArraySerializer.endArray(builder);
+		
+		return builder.toString();
+	}
 
 	@Override
 	public boolean acceptEntityToLoad(OsmBaseStorage storage, EntityId entityId, Entity e) {
 		// put all nodes into temporary db to get only required nodes after loading all data
-		if(dialect == DBDialect.NOSQL){
-			batch.Put(e.getId()+"", e.getTags() +"");
-			
+		if (dialect == DBDialect.NOSQL) {
+			String key;
 			currentCountNode++;
 			if (e instanceof Node) {
 				if (!e.getTags().isEmpty()) {
 					allNodes++;
 				}
+				key = "0" + e.getId();
 			} else if (e instanceof Way) {
 				allWays++;
+				key = "1" + e.getId();
 			} else {
-				allRelations ++;
+				allRelations++;
+				key = "2" + e.getId();
 			}
-			if(currentCountNode > BATCH_SIZE_OSM){
+			batch.Put(key, serializeEntityWOId(e));
+			if (currentCountNode > BATCH_SIZE_OSM) {
 				database.Write(options, batch);
 				batch = new DBWriteBatch();
-				long usedMemory = Runtime.getRuntime().totalMemory() -  Runtime.getRuntime().freeMemory();
-				System.out.println(""+Runtime.getRuntime().totalMemory()/(1024*1024) +" MB Total " + 
-						(usedMemory  / (1024*1024)) + " MB used memory");
+				long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+				System.out.println("" + Runtime.getRuntime().totalMemory() / (1024 * 1024) + " MB Total " + (usedMemory / (1024 * 1024))
+						+ " MB used memory");
 				currentCountNode = 0;
 			}
 		} else {

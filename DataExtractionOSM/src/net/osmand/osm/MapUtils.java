@@ -5,8 +5,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map.Entry;
 
 import net.osmand.data.MapObject;
+import net.osmand.osm.Entity.EntityType;
 
 
 /**
@@ -409,6 +411,29 @@ public class MapUtils {
 			rotate -= 360;
 		}
 		return rotate;
+	}
+	
+	/**
+	 * Serializes entity without id 
+	 */
+	public static String serializeEntityPlainString(Entity e){
+		for(Entry<String, String> es : e.getTags().entrySet()) {
+			// TODO
+		}
+		return null;
+		
+	}
+	
+	/**
+	 * Serializes entity without id 
+	 */
+	public static Entity derializeEntityPlainString(String value, long id, EntityType t, boolean skipIfEmptyTags){
+		if(t == EntityType.NODE){
+			
+		} else {
+			// TODO
+		}
+		return null;
 	}
 	
 
