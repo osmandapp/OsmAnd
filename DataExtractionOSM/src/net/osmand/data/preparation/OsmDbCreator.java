@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.osmand.osm.ArraySerializer;
 import net.osmand.osm.Entity;
 import net.osmand.osm.Node;
 import net.osmand.osm.Relation;
@@ -20,6 +19,7 @@ import net.osmand.osm.io.OsmBaseStorage;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.anvisics.jleveldb.ArraySerializer;
 import com.anvisics.jleveldb.ext.DBAccessor;
 import com.anvisics.jleveldb.ext.DBWriteBatch;
 import com.anvisics.jleveldb.ext.WriteOptions;
@@ -110,7 +110,7 @@ public class OsmDbCreator implements IOsmStorageFilter {
 			}
 			prepTags.close();
 		} else {
-			database.Write(options, batch);
+			database.write(options, batch);
 		}
 	}
 	
@@ -179,7 +179,7 @@ public class OsmDbCreator implements IOsmStorageFilter {
 			}
 			batch.Put(key, serializeEntityWOId(e));
 			if (currentCountNode > BATCH_SIZE_OSM) {
-				database.Write(options, batch);
+				database.write(options, batch);
 				batch = new DBWriteBatch();
 				long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 				System.out.println("" + Runtime.getRuntime().totalMemory() / (1024 * 1024) + " MB Total " + (usedMemory / (1024 * 1024))

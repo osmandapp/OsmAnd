@@ -10,12 +10,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import net.osmand.IProgress;
-import net.osmand.osm.ArraySerializer;
 import net.osmand.osm.Entity;
 import net.osmand.osm.Node;
 import net.osmand.osm.Relation;
 import net.osmand.osm.Way;
-import net.osmand.osm.ArraySerializer.EntityValueTokenizer;
 import net.osmand.osm.Entity.EntityId;
 import net.osmand.osm.Entity.EntityType;
 
@@ -23,6 +21,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONException;
 
+import com.anvisics.jleveldb.ArraySerializer;
+import com.anvisics.jleveldb.ArraySerializer.EntityValueTokenizer;
 import com.anvisics.jleveldb.ext.DBAccessor;
 import com.anvisics.jleveldb.ext.DBIterator;
 import com.anvisics.jleveldb.ext.ReadOptions;
@@ -288,7 +288,7 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		for (EntityId i : ids) {
 			char pr = i.getType() == EntityType.NODE ? '0' : (i.getType() == EntityType.WAY ? '1' : '2');
 			String key = pr + "" + i.getId();
-			String value = accessor.Get(randomAccessOptions, key);
+			String value = accessor.get(randomAccessOptions, key);
 			if (value != null && value.length() > 0) {
 				try {
 					Entity es = loadEntityNoSqlFromValue(randomAccessOptions, key, value, loadTags, false);
@@ -356,7 +356,7 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 			int n = tokenizer.next();
 			while(n == ArraySerializer.ELEMENT){
 				String pointId = "0"+ tokenizer.value();
-				String pointVal = this.accessor.Get(opts, pointId);
+				String pointVal = this.accessor.get(opts, pointId);
 				Node node = (Node) loadEntityNoSqlFromValue(opts, pointId, pointVal, false, false);
 				if(node != null){
 					((Way) e).addNode(node);
@@ -389,7 +389,7 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 
 	private int iterateOverEntitiesNoSQL(IProgress progress, EntityType type, OsmDbVisitor visitor) throws SQLException {
 		ReadOptions opts = new ReadOptions();
-		DBIterator iterator = accessor.NewIterator(opts);
+		DBIterator iterator = accessor.newIterator(opts);
 		String prefix = "0";
 		int count = 0;
 		if (type == EntityType.WAY) {
@@ -398,9 +398,9 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 			prefix = "2";
 		}
 		
-		iterator.Seek(prefix);
+		iterator.seek(prefix);
 		
-		while(iterator.Valid()){
+		while(iterator.valid()){
 			String key = iterator.key();
 			if(!key.startsWith(prefix)){
 				break;
@@ -426,7 +426,7 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 			} catch (JSONException e) {
 				log.warn(key + " - " + e.getMessage() + " " + value + "("+value.length()+"]", e);
 			}
-			iterator.Next();
+			iterator.next();
 		}
 		iterator.delete();
 		return count;

@@ -78,8 +78,8 @@ public enum DBDialect {
 		if (DBDialect.NOSQL == this) {
 			DBAccessor dbAccessor = LevelDBAccess.getDBAcessor();
 			Options opts = new Options();
-			opts.setCreate_if_missing(true);
-			Status status = dbAccessor.Open(opts, fileName);
+			opts.setCreateIfMissing(true);
+			Status status = dbAccessor.open(opts, fileName);
 			if(!status.ok()){
 				throw new SQLException(status.ToString());
 			}
