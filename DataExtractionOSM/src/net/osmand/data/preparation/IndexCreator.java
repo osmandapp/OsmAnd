@@ -32,6 +32,8 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.tools.bzip2.CBZip2InputStream;
 import org.xml.sax.SAXException;
 
+import com.anvisics.jleveldb.LevelDBAccess;
+
 import rtree.RTreeException;
 
 /**
@@ -45,9 +47,10 @@ import rtree.RTreeException;
 public class IndexCreator {
 	private static final Log log = LogFactory.getLog(IndexCreator.class);
 
-	// ONLY derby.jar needed for derby dialect
-	private final DBDialect dialect = DBDialect.SQLITE;
-	private final DBDialect mapDBDialect = DBDialect.SQLITE;
+	// ONLY derby.jar needed for derby dialect 
+	// (NOSQL is the fastest but is supported only on linux 32)
+	private static DBDialect dialect = DBDialect.SQLITE;
+	private static DBDialect mapDBDialect = DBDialect.SQLITE;
 
 	public static final int BATCH_SIZE = 5000;
 	public static final int BATCH_SIZE_OSM = 10000;
@@ -203,9 +206,6 @@ public class IndexCreator {
 	}
 	
 	/* ***** END OF GETTERS/SETTERS ***** */
-	public void generateIndexes(File readFile, IProgress progress, IOsmStorageFilter addFilter) throws IOException, SAXException, SQLException{
-		generateIndexes(readFile, progress, addFilter, null, null);
-	}
 	
 	private void iterateMainEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		if (indexPOI) {
@@ -338,6 +338,10 @@ public class IndexCreator {
 	
 	public void generateIndexes(File readFile, IProgress progress, IOsmStorageFilter addFilter, MapZooms mapZooms,
 			MapRenderingTypes renderingTypes) throws IOException, SAXException, SQLException {
+		if(LevelDBAccess.load()){
+			dialect = DBDialect.NOSQL;
+		}
+		
 		if (renderingTypes == null) {
 			renderingTypes = MapRenderingTypes.getDefault();
 		}

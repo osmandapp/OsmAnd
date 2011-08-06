@@ -129,9 +129,9 @@ public class OsmDbCreator implements IOsmStorageFilter {
 			
 			ArraySerializer.endArray(builder);
 		}
-		if(e instanceof Node){
-			ArraySerializer.value(builder, ((Node)e).getLatitude() +"", false);
-			ArraySerializer.value(builder, ((Node)e).getLongitude() +"", false);
+		if (e instanceof Node) {
+			ArraySerializer.value(builder, ((float) ((Node) e).getLatitude()) + "", false);
+			ArraySerializer.value(builder, ((float) ((Node) e).getLongitude()) + "", false);
 		} else if(e instanceof Way){
 			ArraySerializer.startArray(builder, false);
 			boolean f = true;

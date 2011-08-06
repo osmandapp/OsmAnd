@@ -255,11 +255,11 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 				e.putTag(rs.getString(2), rs.getString(3));
 			}
 			if (newEntity) {
-				count++;
 				if (progress != null) {
 					progress.progress(1);
 				}
 				if (prevEntity != null) {
+					count++;
 					visitor.iterateEntity(prevEntity, this);
 				}
 				prevEntity = e;
@@ -449,7 +449,5 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		}
 		
 	}
-
-	
 
 }
