@@ -85,8 +85,16 @@ public class OsmandSettings {
 //		}
 	}
 	
+	public static String getSharedPreferencesName(ApplicationMode mode){
+		if(mode == null){
+			return SHARED_PREFERENCES_NAME;
+		} else {
+			return SHARED_PREFERENCES_NAME + "." + mode.name().toLowerCase();
+		}
+	}
+	
 	private SharedPreferences getProfilePreferences(ApplicationMode mode){
-		return ctx.getSharedPreferences(SHARED_PREFERENCES_NAME + "." + mode.name().toLowerCase(), Context.MODE_WORLD_READABLE);
+		return ctx.getSharedPreferences(getSharedPreferencesName(mode), Context.MODE_WORLD_READABLE);
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name

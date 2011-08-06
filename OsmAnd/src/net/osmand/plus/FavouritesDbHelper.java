@@ -14,6 +14,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class FavouritesDbHelper extends SQLiteOpenHelper {
 
 	private static final int DATABASE_VERSION = 1;
+	public static final String FAVOURITE_DB_NAME = "favourite"; //$NON-NLS-1$
 	private static final String FAVOURITE_TABLE_NAME = "favourite"; //$NON-NLS-1$
 	private static final String FAVOURITE_COL_NAME = "name"; //$NON-NLS-1$
 	private static final String FAVOURITE_COL_LAT = "latitude"; //$NON-NLS-1$
@@ -26,7 +27,7 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 	private Map<String, FavouritePoint> favoritePoints = null;
 
 	public FavouritesDbHelper(Context context) {
-		super(context, FAVOURITE_TABLE_NAME, null, DATABASE_VERSION);
+		super(context, FAVOURITE_DB_NAME, null, DATABASE_VERSION);
 	}
 
 	public List<FavouritePoint> getFavoritePointsFromGPXFile() {
