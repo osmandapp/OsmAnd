@@ -112,7 +112,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private SavingTrackHelper savingTrackHelper;
 	private RoutingHelper routingHelper;
 	
-	private WakeLock wakeLock;
 	private boolean sensorRegistered = false;
 
 	// Notification status
@@ -727,10 +726,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}
 		
 		settings.setLastKnownMapZoom(mapView.getZoom());
-		if (wakeLock != null) {
-			wakeLock.release();
-			wakeLock = null;
-		}
 		settings.MAP_ACTIVITY_ENABLED.set(false);
 		getMyApplication().getResourceManager().interruptRendering();
 		getMyApplication().getResourceManager().setBusyIndicator(null);
@@ -832,12 +827,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			mapView.setZoom(settings.getLastKnownMapZoom());
 		}
 		
-		
-		if (wakeLock == null) {
-			PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
-			wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "net.osmand.map"); //$NON-NLS-1$
-			wakeLock.acquire();
-		}
 		
 		settings.MAP_ACTIVITY_ENABLED.set(true);
 		checkExternalStorage();
