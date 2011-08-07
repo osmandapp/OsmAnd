@@ -58,7 +58,9 @@ public class NavigationService extends Service implements LocationListener {
 	protected synchronized static PowerManager.WakeLock getLock(Context context) {
 		if (lockStatic == null) {
 			PowerManager mgr = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-			lockStatic = mgr.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "OsmandServiceLock");
+//			lockStatic = mgr.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "OsmandServiceLock");
+			// Require for TTS engine
+			lockStatic = mgr.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "OsmandServiceLock");
 		}
 		return lockStatic;
 	}
