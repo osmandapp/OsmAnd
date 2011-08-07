@@ -292,9 +292,7 @@ public class MainMenuActivity extends Activity {
 	}
 	
 	protected void checkVectorIndexesDownloaded() {
-		ResourceManager resourceManager = ((OsmandApplication) getApplication()).getResourceManager();
-//		resourceManager.getRenderer().get
-		// TODO show dialog with problems
+		// TODO show dialog with problems?
 		
 	}
 	
