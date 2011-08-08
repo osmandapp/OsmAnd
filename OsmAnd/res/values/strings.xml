@@ -116,7 +116,7 @@
 \n\tOsmAnd also supports custom sources.</string>
 
 	<string name="tip_app_mode">Application Mode</string>
-	<string name="tip_app_mode_t">\tOsmAnd supports different (customizeable) application profiles for different use cases.
+	<string name="tip_app_mode_t">\tOsmAnd supports different (customizable) application profiles for different use cases.
 \n\tYou can change profiles in \'Menu\' -> \'Settings\' -> \'Application mode\', or when creating a route.</string>
 
 	<string name="tip_navigation">Navigation</string>
