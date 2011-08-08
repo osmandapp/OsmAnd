@@ -104,7 +104,7 @@
 \n\tOsmAnd unterstützt auch selbst definierte Quellen.</string>
 
 	<string name="tip_app_mode">Applikationsmodus</string>
-	<string name="tip_app_mode_t">\tOsmAnd unterstützt verschiedene Profile für unterschiedliche Einsatzzwecke.
+	<string name="tip_app_mode_t">\tOsmAnd unterstützt verschiedene (einzeln anpassbare) Profile für unterschiedliche Einsatzzwecke.
 \n\tDas Profil wechselt unter \'Menü\' -> \'Einstellungen\' -> \'Applikationsmodus\', oder auch beim Berechnen einer Route.</string>
 
 	<string name="tip_navigation">Navigation</string>
@@ -484,7 +484,7 @@
     <string name="auto_zoom_map_descr">Kartenvergrößerung (Zoomlevel) automatisch der Geschwindigkeit anpassen</string>
     <string name="auto_zoom_map">Automatischer Zoom</string>
     <string name="additional_settings">Weitere Einstellungen</string>
-    <string name="settings_preset_descr">Vordefinierte Einstellungsprofile wählen und ändern</string>
+    <string name="settings_preset_descr">Vordefiniertes Verwendungsprofil wählen. (Spezifische Einstellungen unten werden für jedes Profil separat gespeichert.)</string>
     <string name="settings_preset">Applikationsmodus</string>
     <string name="settings">Einstellungen</string>
     <string name="save_current_track_descr">Aktuellen Track jetzt auf SD-Karte abspeichern</string>
