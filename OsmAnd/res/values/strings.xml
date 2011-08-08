@@ -494,7 +494,7 @@
     <string name="auto_zoom_map_descr">Auto zoom map according to your speed</string>
     <string name="auto_zoom_map">Auto zoom map</string>
     <string name="additional_settings">Additional settings</string>
-    <string name="settings_preset_descr">Select a usage profile. (Each profile\'s settings can be customized below.)</string>
+    <string name="settings_preset_descr">Select a use profile. (Each profile\'s settings can be customized below.)</string>
     <string name="settings_preset">Application mode</string>
     <string name="settings">Settings</string>
     <string name="save_current_track_descr">Save current track to SD now</string>
