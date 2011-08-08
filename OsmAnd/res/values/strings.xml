@@ -116,7 +116,7 @@
 \n\tOsmAnd also supports custom sources.</string>
 
 	<string name="tip_app_mode">Application Mode</string>
-	<string name="tip_app_mode_t">\tOsmAnd supports different application profiles for different use cases.
+	<string name="tip_app_mode_t">\tOsmAnd supports different (customizeable) application profiles for different use cases.
 \n\tYou can change profiles in \'Menu\' -> \'Settings\' -> \'Application mode\', or when creating a route.</string>
 
 	<string name="tip_navigation">Navigation</string>
@@ -494,7 +494,7 @@
     <string name="auto_zoom_map_descr">Auto zoom map according to your speed</string>
     <string name="auto_zoom_map">Auto zoom map</string>
     <string name="additional_settings">Additional settings</string>
-    <string name="settings_preset_descr">Select or define usage profiles</string>
+    <string name="settings_preset_descr">Select a usage profile. (Each profile\'s settings can be customized below.)</string>
     <string name="settings_preset">Application mode</string>
     <string name="settings">Settings</string>
     <string name="save_current_track_descr">Save current track to SD now</string>
