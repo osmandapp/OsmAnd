@@ -556,7 +556,7 @@
 <string name="choose_available_region">Wähle Region</string>
 <string name="choose_intersected_street">Wähle Querstraße</string>
 <string name="Closest_Amenities">Umliegende Einrichtungen</string>
-<string name="app_mode_default">Standard (setzt auch Standardwerte)</string>
+<string name="app_mode_default">Standard</string>
 <string name="app_mode_car">Auto</string>
 <string name="app_mode_bicycle">Fahrrad</string>
 <string name="app_mode_pedestrian">Fußgänger</string>
