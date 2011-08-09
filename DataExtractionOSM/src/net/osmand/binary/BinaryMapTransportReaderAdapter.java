@@ -416,7 +416,8 @@ public class BinaryMapTransportReaderAdapter {
 		}
 		if(nameEn != -1){
 			dataObject.setEnName(getStringFromStringTable(ind.stringTable, nameEn));
-		} else {
+		}
+		if(nameEn == -1 || dataObject.getEnName().length() == 0){
 			dataObject.setEnName(Junidecode.unidecode(dataObject.getName()));
 		}
 		
@@ -434,7 +435,8 @@ public class BinaryMapTransportReaderAdapter {
 				}
 				if (s.getEnName().length() > 0) {
 					s.setEnName(getStringFromStringTable(ind.stringTable, s.getEnName().charAt(0)));
-				} else {
+				}
+				if (s.getEnName().length() == 0) {
 					s.setEnName(Junidecode.unidecode(s.getName()));
 				}
 
