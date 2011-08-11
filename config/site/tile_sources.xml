@@ -4,7 +4,7 @@
    <tile_source name="OsmaRender" url_template="http://tah.openstreetmap.org/Tiles/tile/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="17" tile_size="256" img_density="16" avg_img_size="18000"/> 
    <tile_source name="Cloudmade" url_template="http://tile.cloudmade.com/7ded028e030c5929b28bf823486ce84f/1/256/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/> 
    <tile_source name="GoogleMaps" url_template="http://mt3.google.com/vt/v=w2.97&amp;x={1}&amp;y={2}&amp;z={0}" ext=".png" min_zoom="1" max_zoom="19" tile_size="256" img_density="16" avg_img_size="18000"/>
-   <tile_source name="GoogleMaps Satellite" url_template="http://khm1.google.com/kh/v=65&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="7" max_zoom="20" tile_size="256" img_density="32" avg_img_size="18000"/>
+   <tile_source name="GoogleMaps Satellite" url_template="http://khm1.google.com/kh/v=89&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="7" max_zoom="20" tile_size="256" img_density="32" avg_img_size="18000"/>
    <tile_source name="GoogleMaps Terrain" url_template="http://mt3.google.com/vt/v=w2p.111&amp;hl=en&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="5" max_zoom="15" tile_size="256" img_density="32" avg_img_size="18000"/>
 
    <tile_source rule="beanshell" name="Microsoft Maps" min_zoom="1" max_zoom="19" tile_size="256" img_density="16" avg_img_size="18000" ext="png"
