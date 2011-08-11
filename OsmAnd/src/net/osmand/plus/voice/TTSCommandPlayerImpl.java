@@ -23,15 +23,15 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 
 	private final class IntentStarter implements
 			DialogInterface.OnClickListener {
-		private final Activity ctx;
+		private final Context ctx;
 		private final String intentAction;
 		private final Uri intentData;
 
-		private IntentStarter(Activity ctx, String intentAction) {
+		private IntentStarter(Context ctx, String intentAction) {
 			this(ctx,intentAction, null);
 		}
 
-		private IntentStarter(Activity ctx, String intentAction, Uri intentData) {
+		private IntentStarter(Context ctx, String intentAction, Uri intentData) {
 			this.ctx = ctx;
 			this.intentAction = intentAction;
 			this.intentData = intentData;
@@ -65,7 +65,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			throw new CommandPlayerException(
 					ctx.getString(R.string.voice_data_corrupted));
 		}
-		onActivityInit(ctx);
+		initializeEngine(ctx.getApplicationContext(), ctx);
 	}
 
 	@Override
@@ -80,12 +80,9 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		}
 	}
 
-	@Override
-	public void onActivityInit(final Activity ctx) {
+	private void initializeEngine(final Context ctx, final Activity act)
+	{
 		if (mTts != null && mTtsContext != ctx) {
-			//clear only, if the mTts was initialized in another context.
-			//Unfortunately, for example from settings to map first the map is initialized than
-			//the settingsactivity is destroyed...
 			internalClear();
 		}
 		if (mTts == null) {
@@ -99,14 +96,14 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 						switch (mTts.isLanguageAvailable(new Locale(language)))
 						{
 							case TextToSpeech.LANG_MISSING_DATA:
-								if (isSettingsActivity(ctx)) {
+								if (isSettingsActivity(act)) {
 									Builder builder = createAlertDialog(
 										R.string.tts_missing_language_data_title,
 										R.string.tts_missing_language_data,
 										new IntentStarter(
 												ctx,
 												TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA),
-										ctx);
+										act);
 									builder.show();
 								}
 								break;
@@ -116,7 +113,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 							case TextToSpeech.LANG_NOT_SUPPORTED:
 								//maybe weird, but I didn't want to introduce parameter in around 5 methods just to do
 								//this if condition
-								if (isSettingsActivity(ctx)) {
+								if (isSettingsActivity(act)) {
 									Builder builder = createAlertDialog(
 											R.string.tts_language_not_supported_title,
 											R.string.tts_language_not_supported,
@@ -124,7 +121,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 													ctx,
 													Intent.ACTION_VIEW, Uri.parse("market://search?q=text to speech engine"
 														)),
-											ctx);
+											act);
 									builder.show();
 								}
 								break;
@@ -132,14 +129,15 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 					}
 				}
 
-				private boolean isSettingsActivity(final Activity ctx) {
+				private boolean isSettingsActivity(final Context ctx) {
 					return ctx instanceof SettingsActivity;
 				}
 			});
 		}
 	}
 	
-	private Builder createAlertDialog(int titleResID, int messageResID, IntentStarter intentStarter, final Activity ctx) {
+	private Builder createAlertDialog(int titleResID, int messageResID,
+			IntentStarter intentStarter, final Activity ctx) {
 		Builder builder = new AlertDialog.Builder(ctx);
 		builder.setCancelable(true);
 		builder.setNegativeButton(R.string.default_buttons_no, null);
@@ -147,16 +145,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		builder.setTitle(titleResID);
 		builder.setMessage(messageResID);
 		return builder;
-		}
-		
-	@Override
-	public void onActvitiyStop(Context ctx) {
-		//stop only when the context is the same
-		if (mTtsContext == ctx) {
-			internalClear();
-		}
 	}
-
+		
 	private void internalClear() {
 		if (mTts != null) {
 			mTts.shutdown();

@@ -23,7 +23,6 @@ import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.RouteProvider.RouteService;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.views.SeekBarPreference;
-import net.osmand.plus.voice.CommandPlayer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -357,11 +356,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
     protected void onDestroy() {
     	super.onDestroy();
     	unregisterReceiver(broadcastReceiver);
-    	//we are initializing player in this activity, we must also stop it
-    	final CommandPlayer player = getMyApplication().getPlayer();
-    	if (player != null) {
-    		player.onActvitiyStop(this);
-    	}
     }
     
     public void updateAllSettings(){

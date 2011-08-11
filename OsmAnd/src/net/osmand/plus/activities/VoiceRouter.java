@@ -5,7 +5,7 @@ import net.osmand.plus.activities.RoutingHelper.TurnType;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
-import android.app.Activity;
+import android.content.Context;
 import android.location.Location;
 
 
@@ -339,15 +339,10 @@ public class VoiceRouter {
 		}
 	}
 
-	public void onActivityInit(Activity activity) {
+	public void onApplicationTerminate(Context ctx)
+	{
 		if (player != null) {
-			player.onActivityInit(activity);
-		}
-	}
-
-	public void onActivityStop(Activity activity) {
-		if (player != null) {
-			player.onActvitiyStop(activity);
+			player.clear();
 		}
 	}
 

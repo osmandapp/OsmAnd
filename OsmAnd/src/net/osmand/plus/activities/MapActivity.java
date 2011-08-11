@@ -192,7 +192,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				
 		savingTrackHelper = new SavingTrackHelper(this);
 		routingHelper = getMyApplication().getRoutingHelper();
-		routingHelper.getVoiceRouter().onActivityInit(this);
 		
 		LatLon pointToNavigate = settings.getPointToNavigate();
 		// This situtation could be when navigation suddenly crashed and after restarting
@@ -446,7 +445,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     		mNotificationManager.cancel(APP_NOTIFICATION_ID);
     	}
     	MapTileDownloader.getInstance().removeDownloaderCallback(mapView);
-    	routingHelper.getVoiceRouter().onActivityStop(this);
     }
     
     
@@ -712,7 +710,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		sensorRegistered = false;
 		currentLocationProvider = null;
 		routingHelper.setUiActivity(null);
-		routingHelper.getVoiceRouter().onActivityStop(this);
 		
 		getMyApplication().getDaynightHelper().onMapPause();
 		
@@ -793,7 +790,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}
 		
 		routingHelper.setUiActivity(this);
-		routingHelper.getVoiceRouter().onActivityInit(this);
 		if(routingHelper.isFollowingMode() && !Algoritms.objectEquals(settings.getPointToNavigate(), routingHelper.getFinalLocation())){
 			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(), routingHelper.getCurrentLocation());
 		}

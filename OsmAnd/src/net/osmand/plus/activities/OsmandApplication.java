@@ -81,6 +81,15 @@ public class OsmandApplication extends Application {
     	}
 	}
     
+    @Override
+    public void onTerminate() {
+    	super.onTerminate();
+    	if (routingHelper != null) {
+    		routingHelper.getVoiceRouter().onApplicationTerminate(getApplicationContext());
+    	}
+    }
+    
+    
     public RendererRegistry getRendererRegistry() {
 		return rendererRegistry;
 	}
