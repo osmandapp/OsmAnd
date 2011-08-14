@@ -10,6 +10,7 @@ LOG_FILE="$LOG_DIR/${DATE}.log"
 mkdir $LOG_DIR
 touch $LOG_FILE
 
+git pull --rebase 2>&1 >>$LOG_FILE
 
 # 1. Update git directory
 "${DIRECTORY}/update_git.sh" 2>&1 >>$LOG_FILE
