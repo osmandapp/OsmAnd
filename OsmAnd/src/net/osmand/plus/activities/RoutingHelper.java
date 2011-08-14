@@ -113,6 +113,8 @@ public class RoutingHelper {
 		this.finalLocation = newFinalLocation;
 		if(newFinalLocation == null){
 			settings.FOLLOW_TO_THE_ROUTE.set(false);
+			// clear last fixed location
+			this.lastFixedLocation = null;
 			this.isFollowingMode = false;
 		}
 		
