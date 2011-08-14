@@ -14,7 +14,7 @@ git pull --rebase origin
 # [remote "google"]
 #	url = https://code.google.com/p/osmand/
 #       fetch = +refs/heads/*:refs/remotes/google/*
-git push --all --tags --force google
+git push --all --force google
 
 echo "Synchronization is ok"
 
