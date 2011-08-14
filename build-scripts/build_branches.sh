@@ -15,6 +15,9 @@ mkdir "$BUILD_DIR"
 rm -r "$LATESTS_DIR"
 mkdir "$LATESTS_DIR"
 cd "${GIT_DIR}"
+
+# clear old branches
+git remote prune origin
  
 git branch -r | grep origin | while read i 
 do
