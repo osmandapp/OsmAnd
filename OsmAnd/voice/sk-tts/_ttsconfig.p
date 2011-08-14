@@ -2,7 +2,6 @@
 version(100).
 language(sk).
 
-
 % before each announcement (beep)
 preamble - [].
 
@@ -27,7 +26,6 @@ prepare_turn(Turn, Dist) == ['o', D, 'budete odbáčať', M] :-
 turn(Turn, Dist) == ['o', D, M] :- 
 			distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
-
 
 prepare_make_ut(Dist) == ['o', D, 'sa otočte naspäť'] :- 
 		distance(Dist) == D.
@@ -73,51 +71,13 @@ nth(15, 'pätnásty').
 nth(16, 'šestnásty').
 nth(17, 'sedemnásty').
 
-
 %%% distance measure
-distance(Dist) == T :- Dist < 1000, dist(Dist, F), append(F, 'metrov',T).
-dist(D, ['10 ']) :-  D < 15, !.
-dist(D, ['20 ']) :-  D < 25, !.
-dist(D, ['30 ']) :-  D < 35, !.
-dist(D, ['40 ']) :-  D < 45, !.
-dist(D, ['50 ']) :-  D < 55, !.
-dist(D, ['60 ']) :-  D < 65, !.
-dist(D, ['70 ']) :-  D < 75, !.
-dist(D, ['80 ']) :-  D < 85, !.
-dist(D, ['90 ']) :-  D < 95, !.
-dist(D, ['100 ']) :-  D < 125, !.
-dist(D, ['150 ']) :-  D < 175, !.
-dist(D, ['200 ']) :-  D < 225, !.
-dist(D, ['250 ']) :-  D < 275, !.
-dist(D, ['300 ']) :-  D < 325, !.
-dist(D, ['350 ']) :-  D < 375, !.
-dist(D, ['400 ']) :-  D < 425, !.
-dist(D, ['450 ']) :-  D < 475, !.
-dist(D, ['500 ']) :-  D < 525, !.
-dist(D, ['550 ']) :-  D < 575, !.
-dist(D, ['600 ']) :-  D < 625, !.
-dist(D, ['650 ']) :-  D < 675, !.
-dist(D, ['700 ']) :-  D < 725, !.
-dist(D, ['750 ']) :-  D < 775, !.
-dist(D, ['800 ']) :-  D < 825, !.
-dist(D, ['850 ']) :-  D < 875, !.
-dist(D, ['900 ']) :-  D < 925, !.
-dist(D, ['950 ']) :-  D < 975, !.
-dist(D, ['1000 ']) :-  !.
-
-
+distance(Dist) == [ X, 'metrov'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
+distance(Dist) == [ X, 'metrov'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
 distance(Dist) == ['približne jeden kilometer'] :- Dist < 1500.
-distance(Dist) == ['približne 2 kilometre'] :- Dist < 2500.
-distance(Dist) == ['približne 3 kilometre'] :- Dist < 3500.
-distance(Dist) == ['približne 4 kilometre'] :- Dist < 4500.
-distance(Dist) == ['približne 5 kilometrov'] :- Dist < 5500.
-distance(Dist) == ['približne 6 kilometrov'] :- Dist < 6500.
-distance(Dist) == ['približne 7 kilometrov'] :- Dist < 7500.
-distance(Dist) == ['približne 8 kilometrov'] :- Dist < 8500.
-distance(Dist) == ['približne 9 kilometrov'] :- Dist < 9500.
-distance(Dist) == ['približne', X, 'kilometrov'] :- D is Dist/1000, dist(D, X).
-
-
+distance(Dist) == ['približne', X, 'kilometre'] :- Dist < 4500, D is round(Dist/1000), num_atom(D, X).
+distance(Dist) == ['približne', X, 'kilometrov'] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
+distance(Dist) == [ X, 'kilometrov'] :- D is round(Dist/1000), num_atom(D, X).
 
 %% resolve command main method
 %% if you are familar with Prolog you can input specific to the whole mechanism,
