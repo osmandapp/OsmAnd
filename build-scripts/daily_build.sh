@@ -24,6 +24,6 @@ touch $LOG_FILE
 "${DIRECTORY}/copyto_dir.sh" 2>&1 >>$LOG_FILE
 
 # 4. Synchronize github with googlecode mercurial
-"${DIRECTORY}/sync_git_hg.sh" 2>&1 >>$LOG_FILE
+"${DIRECTORY}/sync_git_google.sh" 2>&1 >>$LOG_FILE
 
 
