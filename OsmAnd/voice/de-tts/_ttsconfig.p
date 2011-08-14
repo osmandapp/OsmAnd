@@ -64,59 +64,17 @@ nth(15, 'fünfzehnte ').
 nth(16, 'sechzehnte ').
 nth(17, 'siebzehnte ').
 
-
 %%% distance measure
-distance(Dist, nominativ) == T :- Dist < 1000, dist(Dist, F), append(F, ' meter ',T).
-distance(Dist, dativ) == T :- Dist < 1000, dist(Dist, F), append(F, ' metern ',T).
-dist(D, ['10 ']) :-  D < 15, !.
-dist(D, ['20 ']) :-  D < 25, !.
-dist(D, ['30 ']) :-  D < 35, !.
-dist(D, ['40 ']) :-  D < 45, !.
-dist(D, ['50 ']) :-  D < 55, !.
-dist(D, ['60 ']) :-  D < 65, !.
-dist(D, ['70 ']) :-  D < 75, !.
-dist(D, ['80 ']) :-  D < 85, !.
-dist(D, ['90 ']) :-  D < 95, !.
-dist(D, ['100 ']) :-  D < 125, !.
-dist(D, ['150 ']) :-  D < 175, !.
-dist(D, ['200 ']) :-  D < 225, !.
-dist(D, ['250 ']) :-  D < 275, !.
-dist(D, ['300 ']) :-  D < 325, !.
-dist(D, ['350 ']) :-  D < 375, !.
-dist(D, ['400 ']) :-  D < 425, !.
-dist(D, ['450 ']) :-  D < 475, !.
-dist(D, ['500 ']) :-  D < 525, !.
-dist(D, ['550 ']) :-  D < 575, !.
-dist(D, ['600 ']) :-  D < 625, !.
-dist(D, ['650 ']) :-  D < 675, !.
-dist(D, ['700 ']) :-  D < 725, !.
-dist(D, ['750 ']) :-  D < 775, !.
-dist(D, ['800 ']) :-  D < 825, !.
-dist(D, ['850 ']) :-  D < 875, !.
-dist(D, ['900 ']) :-  D < 925, !.
-dist(D, ['950 ']) :-  D < 975, !.
-dist(D, ['1000 ']) :-  !.
-
-distance(Dist, nominativ) == ['zirka einen Kilometer'] :- Dist < 1500.
+distance(Dist, nominativ) == [ X, ' meter'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
+distance(Dist, dativ) == [ X, ' metern'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
+distance(Dist, nominativ) == [ X, ' meter'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist, dativ) == [ X, ' metern'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist, nominativ) == ['zirka einen Kilometer '] :- Dist < 1500.
 distance(Dist, dativ) == ['zirka einem Kilometer '] :- Dist < 1500.
-distance(Dist, nominativ) == ['zirka 2 Kilometer '] :- Dist < 2500.
-distance(Dist, dativ) == ['zirka 2 Kilometern '] :- Dist < 2500.
-distance(Dist, nominativ) == ['zirka 3 Kilometer '] :- Dist < 3500.
-distance(Dist, dativ) == ['zirka 3 Kilometern '] :- Dist < 3500.
-distance(Dist, nominativ) == ['zirka 4 Kilometer '] :- Dist < 4500.
-distance(Dist, dativ) == ['zirka 4 Kilometern '] :- Dist < 4500.
-distance(Dist, nominativ) == ['zirka 5 Kilometer '] :- Dist < 5500.
-distance(Dist, dativ) == ['zirka 5 Kilometern '] :- Dist < 5500.
-distance(Dist, nominativ) == ['zirka 6 Kilometer '] :- Dist < 6500.
-distance(Dist, dativ) == ['zirka 6 Kilometern '] :- Dist < 6500.
-distance(Dist, nominativ) == ['zirka 7 Kilometer '] :- Dist < 7500.
-distance(Dist, dativ) == ['zirka 7 Kilometern '] :- Dist < 7500.
-distance(Dist, nominativ) == ['zirka 8 Kilometer '] :- Dist < 8500.
-distance(Dist, dativ) == ['zirka 8 Kilometern '] :- Dist < 8500.
-distance(Dist, nominativ) == ['zirka 9 Kilometer '] :- Dist < 9500.
-distance(Dist, dativ) == ['zirka 9 Kilometern '] :- Dist < 9500.
-distance(Dist, nominativ) == ['zirka ', X, ' Kilometer '] :- D is Dist/1000, dist(D, X).
-distance(Dist, dativ) == ['zirka ', X, ' Kilometern '] :- D is Dist/1000, dist(D, X).
+distance(Dist, nominativ) == ['zirka ', X, ' Kilometer '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
+distance(Dist, dativ) == ['zirka ', X, 'Kilometern '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
+distance(Dist, nominativ) == [ X, ' Kilometer '] :- D is round(Dist/1000), num_atom(D, X).
+distance(Dist, dativ) == [ X, 'Kilometern '] :- D is round(Dist/1000), num_atom(D, X).
 
 %% resolve command main method
 %% if you are familar with Prolog you can input specific to the whole mechanism,
