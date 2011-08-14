@@ -63,11 +63,17 @@ nth(16, 'шестнадцатый ').
 nth(17, 'семнадцатый ').
 
 %%% distance measure
-distance(Dist) == [ X, ' meters'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist) == [ X, ' meters'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
-distance(Dist) == ['более одного километра '] :- Dist < 1500.
-distance(Dist) == ['около ', X, ' километов '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance(Dist) == [ X, ' километов '] :- D is round(Dist/1000), num_atom(D, X).
+distance(Dist) == [ X, ' метров'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
+distance(Dist) == [ X, ' метров'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist) == ['около одного километра '] :- Dist < 1500.
+distance(Dist) == ['около ', X, Km] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X),
+											plural_km(D, Km).
+
+plural_km(D, ' километр ') :- 1 is D mod 10.
+plural_km(D, ' километра ') :- Mod is D mod 10, Mod < 5.
+plural_km(_D, ' километров ').
+
+distance(Dist) == [ X, ' километров '] :- D is round(Dist/1000), num_atom(D, X).
 
 %% resolve command main method
 %% if you are familar with Prolog you can input specific to the whole mechanism,
