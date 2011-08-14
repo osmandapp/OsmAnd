@@ -75,6 +75,7 @@ nth(17, 'sedmnáctý').
 distance(Dist) == [ X, 'metrů'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
 distance(Dist) == [ X, 'metrů'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
 distance(Dist) == ['přibližně jeden kilometr'] :- Dist < 1500.
+distance(Dist) == ['přibližně', X, 'kilometry'] :- Dist < 4500, D is round(Dist/1000), num_atom(D, X).
 distance(Dist) == ['přibližně', X, 'kilometrů'] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
 distance(Dist) == [ X, 'kilometrů'] :- D is round(Dist/1000), num_atom(D, X).
 
