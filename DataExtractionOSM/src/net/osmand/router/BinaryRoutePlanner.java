@@ -26,7 +26,9 @@ import org.apache.commons.logging.Log;
 public class BinaryRoutePlanner {
 	
 	private final static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
+	private final int REVERSE_WAY_RESTRICTION_ONLY = 1024;
 	private final BinaryMapIndexReader[] map;
+	
 	
 	
 	private static final Log log = LogUtil.getLog(BinaryRoutePlanner.class);
@@ -393,7 +395,7 @@ public class BinaryRoutePlanner {
 	private RouteSegment processIntersectionsWithWays(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments,
 			TLongObjectHashMap<RouteSegment> visitedSegments, TLongObjectHashMap<RouteSegment> oppositeSegments,  
 			double distOnRoadToPass, double distToFinalPoint, 
-			RouteSegment segment, BinaryMapDataObject road, boolean firstOfSegment, int segmentEnd, RouteSegment next,
+			RouteSegment segment, BinaryMapDataObject road, boolean firstOfSegment, int segmentEnd, RouteSegment inputNext,
 			boolean reverseWay) {
 
 		// This variables can be in routing context
@@ -406,7 +408,7 @@ public class BinaryRoutePlanner {
 
 		// 3.1 calculate time for obstacles (bumps, traffic_signals, level_crossing)
 		if (firstOfSegment) {
-			RouteSegment possibleObstacle = next;
+			RouteSegment possibleObstacle = inputNext;
 			while (possibleObstacle != null) {
 				obstaclesTime += ctx.getRouter().defineObstacle(possibleObstacle.road, possibleObstacle.segmentStart);
 				possibleObstacle = possibleObstacle.next;
@@ -415,6 +417,7 @@ public class BinaryRoutePlanner {
 
 		// 3.2 calculate possible ways to put into priority queue
 		// for debug next.road.getId() >> 1 == 33911427 && road.getId() >> 1 == 33911442
+		RouteSegment next = inputNext;
 		while (next != null) {
 			long nts = (next.road.getId() << 8l) + next.segmentStart;
 			boolean oppositeConnectionFound = oppositeSegments.containsKey(nts) && oppositeSegments.get(nts) != null;
@@ -428,7 +431,7 @@ public class BinaryRoutePlanner {
 				}
 			} 
 			
-			/* next.road.getId() >> 3 (1) != road.getId() >> 1 (3) - used that line for debug with osm map */
+			/* next.road.getId() >> 1 (3) != road.getId() >> 1 (3) - used that line for debug with osm map */
 			// road.id could be equal on roundabout, but we should accept them
 			if ((!visitedSegments.contains(nts) && processRoad) || oppositeConnectionFound) {
 				int type = -1;
@@ -445,9 +448,24 @@ public class BinaryRoutePlanner {
 							type = next.road.getRestrictionType(i);
 							break;
 						}
+						// Check if there is restriction only to the current road
+						if (next.road.getRestrictionType(i) == MapRenderingTypes.RESTRICTION_ONLY_RIGHT_TURN
+								|| next.road.getRestrictionType(i) == MapRenderingTypes.RESTRICTION_ONLY_LEFT_TURN
+								|| next.road.getRestrictionType(i) == MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON) {
+							// check if that restriction applies to considered junk
+							RouteSegment foundNext = inputNext;
+							while(foundNext != null && foundNext.getRoad().getId() != next.road.getRestriction(i)){
+								foundNext = foundNext.next;
+							}
+							if(foundNext != null) {
+								type = REVERSE_WAY_RESTRICTION_ONLY; // special constant
+							}
+						}
 					}
 				}
-				if (type == -1 && exclusiveRestriction) {
+				if(type == REVERSE_WAY_RESTRICTION_ONLY){
+					// next = next.next; continue;
+				} else if (type == -1 && exclusiveRestriction) {
 					// next = next.next; continue;
 				} else if (type == MapRenderingTypes.RESTRICTION_NO_LEFT_TURN || type == MapRenderingTypes.RESTRICTION_NO_RIGHT_TURN
 						|| type == MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON || type == MapRenderingTypes.RESTRICTION_NO_U_TURN) {
@@ -479,7 +497,8 @@ public class BinaryRoutePlanner {
 					// add obstacles time
 					distanceFromStart += obstaclesTime;
 
-					
+
+					// segment.getRoad().getId() >> 1
 					if (next.parentRoute == null
 							|| ctx.roadPriorityComparator(next.distanceFromStart, next.distanceToEnd, distanceFromStart, distanceToEnd) > 0) {
 						next.distanceFromStart = distanceFromStart;
@@ -496,9 +515,16 @@ public class BinaryRoutePlanner {
 							segmentsToVisitNotForbidden.add(next);
 						} else {
 							// case exclusive restriction (only_right, only_straight, ...)
-							exclusiveRestriction = true;
-							segmentsToVisitNotForbidden.clear();
-							segmentsToVisitPrescripted.add(next);
+							// 1. in case we are going backward we should not consider only_restriction
+							// as exclusive because we have main "in" roads and one "out"
+							// 2. in case we are going forward we have one "in" and many "out"
+							if (!reverseWay) {
+								exclusiveRestriction = true;
+								segmentsToVisitNotForbidden.clear();
+								segmentsToVisitPrescripted.add(next);
+							} else {
+								segmentsToVisitNotForbidden.add(next);
+							}
 						}
 					}
 

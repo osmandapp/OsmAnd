@@ -38,6 +38,7 @@ public class RouterTestsSuite {
 		properties.load(RouterTestsSuite.class.getResourceAsStream("sources.properties"));
 		boolean allSuccess = true;
 		allSuccess &= test("belarus_test.xml", properties);
+		allSuccess &= test("germany_test.xml", properties);
 		if (allSuccess) {
 			System.out.println("All is successfull");
 		}
@@ -81,6 +82,12 @@ public class RouterTestsSuite {
 		RoutingContext ctx = new RoutingContext();
 		String vehicle = testCase.getAttribute("vehicle");
 		String testDescription = testCase.getAttribute("description");
+		String skip = testCase.getAttribute("skip_comment");
+		if (skip != null && skip.length() > 0) {
+			System.err.println("\n\n!! Skipped test case '" + testDescription + "' because '" + skip + "'\n\n" );
+			return;
+		}
+		
 		if("bicycle".equals(vehicle)){
 			ctx.setRouter(new BicycleRouter());
 		} else if("pedestrian".equals(vehicle)){

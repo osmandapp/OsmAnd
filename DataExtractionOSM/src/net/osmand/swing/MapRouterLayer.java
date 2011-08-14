@@ -48,16 +48,16 @@ import org.xml.sax.SAXException;
 
 public class MapRouterLayer implements MapPanelLayer {
 
-	private /*final */ static boolean ANIMATE_CALCULATING_ROUTE = false;
-	private /*final */ static int SIZE_OF_ROUTES_TO_ANIMATE = 50;
+	private /*final */ static boolean ANIMATE_CALCULATING_ROUTE = true;
+	private /*final */ static int SIZE_OF_ROUTES_TO_ANIMATE = 1;
 	
 	
 	private MapPanel map;
-	private LatLon startRoute;
-	private LatLon endRoute;
+//	private LatLon startRoute;
+//	private LatLon endRoute;
 	// test route purpose
-//	private LatLon startRoute = new LatLon(53.910886,27.579095);
-//	private LatLon endRoute = new LatLon(53.95386,27.68131);
+	private LatLon startRoute = new LatLon(53.9113, 27.5795);
+	private LatLon endRoute = new LatLon(53.95386, 27.68131);
 	
 	
 	@Override
@@ -349,6 +349,7 @@ public class MapRouterLayer implements MapPanelLayer {
 				
 				BinaryRoutePlanner router = new BinaryRoutePlanner(rs);
 				RoutingContext ctx = new RoutingContext();
+//				ctx.setPlanRoadDirection(true);
 				
 				// find closest way
 				RouteSegment st = router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);
@@ -411,7 +412,7 @@ public class MapRouterLayer implements MapPanelLayer {
 				List<RouteSegmentResult> searchRoute = router.searchRoute(ctx, st, e);
 				if (ANIMATE_CALCULATING_ROUTE) {
 					try {
-						Thread.sleep(4000);
+						Thread.sleep(2000);
 					} catch (InterruptedException e1) {
 					}
 				}

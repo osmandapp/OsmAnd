@@ -166,23 +166,46 @@ public class CarRouter extends VehicleRouter {
 	public double getMaxDefaultSpeed() {
 		return 30;
 	}
+	
+	private double directionRoute(RouteSegment segment, int segmentEnd, boolean opp){
+		boolean plus = segmentEnd == 0;
+		int x = segment.road.getPoint31XTile(segmentEnd);
+		int y = segment.road.getPoint31YTile(segmentEnd);
+		int nx = segmentEnd;
+		int px = x;
+		int py = y;
+		do {
+			if(plus){
+				nx++;
+				if(nx >= segment.road.getPointsLength()){
+					break;
+				}
+			} else {
+				nx--;
+				if(nx < 0){
+					break;
+				}
+			}
+			px = segment.road.getPoint31XTile(nx);
+			py = segment.road.getPoint31YTile(nx);
+		} while(Math.abs(px - x) + Math.abs(py - y) < 100);
+		
+		if(opp){
+			return Math.atan2(py - y, px - x);
+		} else {
+			return Math.atan2(y - py, x - px);
+		}
+	}
 
 	public double calculateTurnTime(RouteSegment segment, RouteSegment next, int segmentEnd) {
 		boolean end = (segmentEnd == segment.road.getPointsLength() - 1 || segmentEnd == 0);
-		boolean start = next.segmentStart == 0;
+		boolean start = next.segmentStart == 0 || next.segmentStart == next.getRoad().getPointsLength() - 1;
 		// that addition highly affects to trunk roads !(prefer trunk/motorway)
 		if (end && start) {
+			// next.road.getId() >> 1 != segment.road.getId() >> 1
 			if (next.road.getPointsLength() > 1) {
-				int x = segment.road.getPoint31XTile(segmentEnd);
-				int y = segment.road.getPoint31XTile(segmentEnd);
-				int prevSegmentEnd = segmentEnd - 1;
-				if(prevSegmentEnd < 0){
-					prevSegmentEnd = segmentEnd + 1;
-				}
-				int px = segment.road.getPoint31XTile(prevSegmentEnd);
-				int py = segment.road.getPoint31XTile(prevSegmentEnd);
-				double a1 = Math.atan2(y - py, x - px);
-				double a2 = Math.atan2(y - next.road.getPoint31YTile(1), x - next.road.getPoint31XTile(1));
+				double a1 = directionRoute(segment, segmentEnd, false);
+				double a2 = directionRoute(next, next.segmentStart, true);
 				double diff = Math.abs(a1 - a2);
 				if (diff > Math.PI / 2 && diff < 3 * Math.PI / 2) {
 					return 25;
