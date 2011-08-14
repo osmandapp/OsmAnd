@@ -603,18 +603,18 @@
 
 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
 	<polygon>
-	<!-- ZM 14 -->
+		<!-- ZM 14 -->
 		<switch>
 			<case nightMode="true" color_2="#9F9F9F" color="#666666"/>
 			<case nightMode="false" color_2="#464646" color="#ffffff"/>
-				<filter minzoom="12" strokeWidth_2="1">
+			<filter minzoom="12" strokeWidth_2="1">
 				<filter tag="highway" value="road" />
 				<filter tag="highway" value="unclassified" />
 				<filter tag="highway" value="residential" />
 			</filter>
 		</switch>
 
-	<!-- ZM 13 -->
+		<!-- ZM 13 -->
 		<filter minzoom="14" strokeWidth_2="0.5" color_2="#B0B0B0" color="#ECECEC">
 			<filter tag="highway" value="service" />
 			<filter tag="highway" value="pedestrian" />
