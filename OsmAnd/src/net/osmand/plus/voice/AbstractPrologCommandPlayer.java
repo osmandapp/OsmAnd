@@ -54,7 +54,8 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 		try {
 			this.ctx = ctx;
 			prologSystem = new Prolog(
-					new String[] { "alice.tuprolog.lib.BasicLibrary" }); //$NON-NLS-1$
+					new String[] { "alice.tuprolog.lib.BasicLibrary",
+							"alice.tuprolog.lib.ISOLibrary"}); //$NON-NLS-1$
 		} catch (InvalidLibraryException e) {
 			log.error("Initializing error", e); //$NON-NLS-1$
 			throw new RuntimeException(e);
