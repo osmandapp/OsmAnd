@@ -70,7 +70,7 @@ distance(Dist) == ['около ', X, Km] :- Dist < 10000, D is round(Dist/1000),
 											plural_km(D, Km).
 
 plural_km(D, ' километр ') :- 1 is D mod 10.
-plural_km(D, ' километра ') :- Mod is D mod 10, Mod < 5.
+plural_km(D, ' километра ') :- Mod is D mod 10, Mod < 5,  Mod > 1.
 plural_km(_D, ' километров ').
 
 distance(Dist) == [ X, ' километров '] :- D is round(Dist/1000), num_atom(D, X).
