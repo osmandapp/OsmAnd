@@ -9,7 +9,10 @@ if [ ! -d "$GIT_DIR" ]; then
     git clone ${GIT_URL} "${GIT_DIR}"
 fi
 cd "$GIT_DIR"
-git pull --rebase origin
+git checkout .
+git reset HEAD --hard
+git checkout master
+
 # First time add entries to .git/config (!) and add .netrc file
 # [remote "google"]
 #	url = https://code.google.com/p/osmand/
