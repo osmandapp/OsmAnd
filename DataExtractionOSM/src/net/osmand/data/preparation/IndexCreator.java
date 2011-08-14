@@ -49,8 +49,9 @@ public class IndexCreator {
 
 	// ONLY derby.jar needed for derby dialect 
 	// (NOSQL is the fastest but is supported only on linux 32)
-	private static DBDialect dialect = DBDialect.SQLITE;
-	private static DBDialect mapDBDialect = DBDialect.SQLITE;
+	// Sqlite better to use only for 32-bit machines 
+	public static DBDialect dialect = DBDialect.SQLITE;
+	public static DBDialect mapDBDialect = DBDialect.SQLITE;
 
 	public static final int BATCH_SIZE = 5000;
 	public static final int BATCH_SIZE_OSM = 10000;
@@ -612,7 +613,7 @@ public class IndexCreator {
 		MapRenderingTypes rt = MapRenderingTypes.getDefault();// new MapRenderingTypes("/home/victor/projects/OsmAnd/data/testdata/roads_rendering_types.xml");
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
 //		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
-		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/belarus-osm/belarus.osm.pbf"),
+		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/mecklenburg-vorpommern.osm.pbf"),
 				new ConsoleProgressImplementation(1), null, zooms, rt);
 		
 //		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes3.tmp.odb"));

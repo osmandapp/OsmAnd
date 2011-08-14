@@ -36,6 +36,8 @@ import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.IndexConstants;
+import net.osmand.data.index.ExtractGooglecodeAuthorization.GooglecodeUploadTokens;
+import net.osmand.data.preparation.DBDialect;
 import net.osmand.data.preparation.IndexCreator;
 import net.osmand.data.preparation.MapZooms;
 import net.osmand.impl.ConsoleProgressImplementation;
@@ -99,6 +101,7 @@ public class IndexBatchCreator {
 	
 	private String wget;
 	
+	String googlePassword = "";
 	String cookieHSID = "";
 	String cookieSID = "";
 	String pagegen = "";
@@ -123,6 +126,10 @@ public class IndexBatchCreator {
 				System.out.println("XML configuration file not found : " + name);
 				return;
 			}
+		}
+		
+		if(args.length >= 2 &&  args[1] != null && args[1].startsWith("-gp")){
+			creator.googlePassword = args[1].substring(3);
 		}
 				
 		try {
@@ -161,23 +168,11 @@ public class IndexBatchCreator {
 		indexMap = Boolean.parseBoolean(process.getAttribute("indexMap"));
 		indexTransport = Boolean.parseBoolean(process.getAttribute("indexTransport"));
 		indexAddress = Boolean.parseBoolean(process.getAttribute("indexAddress"));
-		String zooms = process.getAttribute("mapZooms");
-		if(zooms == null || zooms.length() == 0){
-			mapZooms = MapZooms.getDefault();
-		} else {
-			mapZooms = MapZooms.parseZooms(zooms);
-		}
+		parseProcessAttributes(process);
 		
-		String szoomWaySmoothness = process.getAttribute("zoomWaySmoothness");
-		if(szoomWaySmoothness != null && !szoomWaySmoothness.equals("")){
-			zoomWaySmoothness = Integer.parseInt(szoomWaySmoothness);
-		}
-		
-		String f = process.getAttribute("renderingTypesFile");
-		if(f == null || f.length() == 0){
-			types = MapRenderingTypes.getDefault();
-		} else {
-			types = new MapRenderingTypes(f);
+		list = doc.getElementsByTagName("process_attributes");
+		if(list.getLength() == 1){
+			parseProcessAttributes((Element) list.item(0));
 		}
 	
 		String dir = process.getAttribute("directory_for_osm_files");
@@ -207,14 +202,27 @@ public class IndexBatchCreator {
 				 throw new IllegalArgumentException("You should specify exactly 1 authorization_info element to upload indexes!");
 			}
 			Element authorization = (Element) list.item(0);
-			cookieHSID = authorization.getAttribute("cookieHSID");
-			cookieSID = authorization.getAttribute("cookieSID");
-			pagegen = authorization.getAttribute("pagegen");
-			token = authorization.getAttribute("token");
 			uploadToOsmandGooglecode = Boolean.parseBoolean(process.getAttribute("upload_osmand_googlecode"));
 			if(uploadToOsmandGooglecode){
 				user = authorization.getAttribute("google_code_user"); 
 				password = authorization.getAttribute("google_code_password");
+				
+				cookieHSID = authorization.getAttribute("cookieHSID");
+				cookieSID = authorization.getAttribute("cookieSID");
+				pagegen = authorization.getAttribute("pagegen");
+				token = authorization.getAttribute("token");
+				if(googlePassword.length() > 0){
+					ExtractGooglecodeAuthorization gca = new ExtractGooglecodeAuthorization();
+					try {
+						GooglecodeUploadTokens tokens = gca.getGooglecodeTokensForUpload(user, googlePassword);
+						cookieHSID = tokens.getHsid();
+						cookieSID = tokens.getSid();
+						pagegen = tokens.getPagegen();
+						token = tokens.getToken();
+					} catch (IOException e) {
+						log.error("Error retrieving google tokens", e);
+					}
+				}
 			} else {
 				user = authorization.getAttribute("osmand_download_user");
 				password = authorization.getAttribute("osmand_download_password");
@@ -257,6 +265,42 @@ public class IndexBatchCreator {
 		runBatch(countriesToDownload);
 		
 		
+	}
+
+	private void parseProcessAttributes(Element process) {
+		String zooms = process.getAttribute("mapZooms");
+		if(zooms == null || zooms.length() == 0){
+			mapZooms = MapZooms.getDefault();
+		} else {
+			mapZooms = MapZooms.parseZooms(zooms);
+		}
+		
+		String szoomWaySmoothness = process.getAttribute("zoomWaySmoothness");
+		if(szoomWaySmoothness != null && !szoomWaySmoothness.equals("")){
+			zoomWaySmoothness = Integer.parseInt(szoomWaySmoothness);
+		}
+		String f = process.getAttribute("renderingTypesFile");
+		if(f == null || f.length() == 0){
+			types = MapRenderingTypes.getDefault();
+		} else {
+			types = new MapRenderingTypes(f);
+		}
+		
+		String osmDbDialect = process.getAttribute("osmDbDialect");
+		if(osmDbDialect != null && osmDbDialect.length() > 0){
+			try {
+				IndexCreator.dialect = DBDialect.valueOf(osmDbDialect.toUpperCase());
+			} catch (RuntimeException e) {
+			}
+		}
+		
+		String mapDbDialect = process.getAttribute("mapDbDialect");
+		if (mapDbDialect != null && mapDbDialect.length() > 0) {
+			try {
+				IndexCreator.mapDBDialect = DBDialect.valueOf(mapDbDialect.toUpperCase());
+			} catch (RuntimeException e) {
+			}
+		}
 	}
 	
 	public void runBatch(List<RegionCountries> countriesToDownload ){
