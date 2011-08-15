@@ -101,7 +101,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 										R.string.tts_missing_language_data_title,
 										R.string.tts_missing_language_data,
 										new IntentStarter(
-												ctx,
+												act,
 												TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA),
 										act);
 									builder.show();
@@ -118,7 +118,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 											R.string.tts_language_not_supported_title,
 											R.string.tts_language_not_supported,
 											new IntentStarter(
-													ctx,
+													act,
 													Intent.ACTION_VIEW, Uri.parse("market://search?q=text to speech engine"
 														)),
 											act);
