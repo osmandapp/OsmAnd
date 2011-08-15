@@ -117,11 +117,16 @@ public class RoutingHelper {
 			this.lastFixedLocation = null;
 			this.isFollowingMode = false;
 		}
-		
 	}
 	
 	public List<Location> getCurrentGPXRoute() {
 		return currentGPXRoute;
+	}
+	
+	public List<Location> getCurrentRoute() {
+		return currentGPXRoute == null || currentGPXRoute.isEmpty() ? Collections
+				.unmodifiableList(routeNodes) : Collections
+				.unmodifiableList(currentGPXRoute);
 	}
 	
 	public void setAppMode(ApplicationMode mode){

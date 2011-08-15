@@ -10,6 +10,7 @@
 <!--  not visible by default -->
 <item android:id="@+id/map_navigate_to_point" android:title="@string/stop_navigation" android:visible="false" android:icon="@android:drawable/ic_menu_close_clear_cancel"></item>
 <item android:id="@+id/map_mute" android:title="@string/menu_mute_off" android:visible="false"></item>
+<item android:id="@+id/map_animate_route" android:title="@string/animate_route" android:visible="false"></item>
 
 <item android:id="@+id/map_get_directions" android:title="@string/get_directions" android:icon="@android:drawable/ic_menu_directions"></item>
 <item android:title="@string/map_specify_point" android:id="@+id/map_specify_point" android:icon="@android:drawable/ic_menu_search"></item>
