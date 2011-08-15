@@ -21,7 +21,7 @@ import android.media.MediaPlayer;
 public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	
 	private static final String CONFIG_FILE = "_config.p";
-	private static final int MEDIA_VOICE_VERSION = 0;
+	private static final int[] MEDIA_VOICE_VERSION = new int[] { 0 }; // MUST BE SORTED, list of supported versions
 
 	private static final Log log = LogUtil.getLog(MediaCommandPlayerImpl.class);
 	

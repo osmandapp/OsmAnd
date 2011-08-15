@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -44,12 +45,13 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 	public static final String A_RIGHT_SH = "right_sh";
 	public static final String A_RIGHT_SL = "right_sl";
 	protected static final String DELAY_CONST = "delay_";
-	private final int voiceVersion;
+	/** Must be sorted array! */
+	private final int[] sortedVoiceVersions;
 
-	protected AbstractPrologCommandPlayer(Context ctx, String voiceProvider, String configFile, int voiceVersion)
+	protected AbstractPrologCommandPlayer(Context ctx, String voiceProvider, String configFile, int[] sortedVoiceVersions)
 		throws CommandPlayerException 
 	{
-		this.voiceVersion = voiceVersion;
+		this.sortedVoiceVersions = sortedVoiceVersions;
 		long time = System.currentTimeMillis();
 		try {
 			this.ctx = ctx;
@@ -107,7 +109,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 				throw new CommandPlayerException(ctx.getString(R.string.voice_data_corrupted));
 			} else {
 				Term val = solveSimplePredicate(P_VERSION);
-				if (!(val instanceof Number) || ((Number)val).intValue() != voiceVersion) {
+				if (!(val instanceof Number) ||  Arrays.binarySearch(sortedVoiceVersions,((Number)val).intValue()) < 0) {
 					throw new CommandPlayerException(ctx.getString(R.string.voice_data_not_supported));
 				}
 			}

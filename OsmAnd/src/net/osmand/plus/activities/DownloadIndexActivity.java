@@ -7,7 +7,9 @@ import static net.osmand.data.IndexConstants.POI_INDEX_EXT;
 import static net.osmand.data.IndexConstants.POI_INDEX_EXT_ZIP;
 import static net.osmand.data.IndexConstants.POI_TABLE_VERSION;
 import static net.osmand.data.IndexConstants.VOICE_INDEX_EXT_ZIP;
+import static net.osmand.data.IndexConstants.TTSVOICE_INDEX_EXT_ZIP;
 import static net.osmand.data.IndexConstants.VOICE_VERSION;
+import static net.osmand.data.IndexConstants.TTSVOICE_VERSION;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -324,6 +326,7 @@ public class DownloadIndexActivity extends ListActivity {
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.POI_PATH),POI_INDEX_EXT,POI_INDEX_EXT_ZIP,POI_TABLE_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.APP_DIR),BINARY_MAP_INDEX_EXT,BINARY_MAP_INDEX_EXT_ZIP,BINARY_MAP_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.VOICE_PATH),"",VOICE_INDEX_EXT_ZIP, VOICE_VERSION));
+		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.VOICE_PATH),"",TTSVOICE_INDEX_EXT_ZIP, TTSVOICE_VERSION));
 		return files;
 	}
 	
@@ -339,8 +342,10 @@ public class DownloadIndexActivity extends ListActivity {
 						if (secondaryExt != null) {
 							files.add(filename.substring(0, filename.length() - ext.length()) + "_" + version + secondaryExt);
 						}
+						return true;
+					} else {
+						return false;
 					}
-					return filename.endsWith(ext);
 				}
 			});
 
@@ -375,6 +380,11 @@ public class DownloadIndexActivity extends ListActivity {
 		} else if(fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)){
 			parent = new File(externalStorageDirectory, ResourceManager.VOICE_PATH);
 			toSavePostfix = VOICE_INDEX_EXT_ZIP;
+			toCheckPostfix = ""; //$NON-NLS-1$
+			unzipDir = true;
+		} else if(fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)){
+			parent = new File(externalStorageDirectory, ResourceManager.VOICE_PATH);
+			toSavePostfix = TTSVOICE_INDEX_EXT_ZIP;
 			toCheckPostfix = ""; //$NON-NLS-1$
 			unzipDir = true;
 		}

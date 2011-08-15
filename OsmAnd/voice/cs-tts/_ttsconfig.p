@@ -1,5 +1,5 @@
 :- op('==', xfy, 500).
-version(100).
+version(101).
 language(cs).
 
 % before each announcement (beep)

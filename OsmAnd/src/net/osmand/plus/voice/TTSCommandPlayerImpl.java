@@ -49,7 +49,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	}
 
 	private static final String CONFIG_FILE = "_ttsconfig.p";
-	private static final int TTS_VOICE_VERSION = 100;
+	private static final int[] TTS_VOICE_VERSION = new int[] { 100, 101 }; // !! MUST BE SORTED
 	private TextToSpeech mTts;
 	private Context mTtsContext;
 	private String language;
