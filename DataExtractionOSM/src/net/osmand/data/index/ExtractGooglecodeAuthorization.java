@@ -111,7 +111,7 @@ public class ExtractGooglecodeAuthorization {
 		if (debug) {
 			System.out.println("Connected to:" + url.toString());
 			System.out.println("-- Data sent:\n" + data.toString());
-			System.our.ptintln("--");
+			System.out.ptintln("--");
 		}
 
 		// Get the response
@@ -187,7 +187,7 @@ public class ExtractGooglecodeAuthorization {
 		return conn;
 	}
 
-	private static StringBuilder readAnswer(InputStream input)
+	private StringBuilder readAnswer(InputStream input)
 			throws IOException, UnsupportedEncodingException {
 		StringBuilder responseBody = new StringBuilder();
 		InputStream i = input;
