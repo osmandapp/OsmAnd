@@ -56,6 +56,16 @@ public class ExtractGooglecodeAuthorization {
 		}
 	}
 
+	boolean debug = false;
+	
+	public ExtractGooglecodeAuthorization()	{
+		this(false);
+	}
+
+	public ExtractGooglecodeAuthorization(boolean debug)	{
+		this.debug = debug;
+	}
+
 	public GooglecodeUploadTokens getGooglecodeTokensForUpload(String user, String password) throws IOException {
 		final MyCookieStore cookies = new MyCookieStore(
 				new java.net.CookieManager().getCookieStore());
@@ -98,6 +108,11 @@ public class ExtractGooglecodeAuthorization {
 		writer.write(data.toString());
 		writer.flush();
 		conn.connect();
+		if (debug) {
+			System.out.println("Connected to:" + url.toString());
+			System.out.println("-- Data sent:\n" + data.toString());
+			System.our.ptintln("--");
+		}
 
 		// Get the response
 		responseBody = readAnswer(conn.getInputStream());
@@ -166,6 +181,9 @@ public class ExtractGooglecodeAuthorization {
 		conn.setRequestProperty("Connection", "keep-alive");
 		conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:5.0) Gecko/20100101 Firefox/5.0");
 		conn.connect();
+		if (debug) {
+			System.out.println("Connecting to:" + urlString);
+		}
 		return conn;
 	}
 
@@ -188,12 +206,20 @@ public class ExtractGooglecodeAuthorization {
 			}
 			i.close();
 		}
+		if (debug) {
+			System.out.println("Aswer from server:\n" + responseBody.toString());
+		}
 		return responseBody;
 	}
 	
 	public static void main(String[] args) throws IOException
 	{
-		System.out.println(new ExtractGooglecodeAuthorization().getGooglecodeTokensForUpload("google user", "google password").toString());
+		if (args.length < 2) {
+			System.out.println("Use: ExtractGooglecodeAuthorization gmailname gmailpassword");
+			return;
+		} else {
+			System.out.println(new ExtractGooglecodeAuthorization(true).getGooglecodeTokensForUpload(args[0], args[1]).toString());
+		}
 	}
 
 
