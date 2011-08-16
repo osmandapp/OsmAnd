@@ -345,12 +345,17 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		}
 		
 		if (key.charAt(0) == '0') {
-			assertToken(ArraySerializer.ELEMENT, tokenizer.next(), value);
-			double lat = Double.parseDouble(tokenizer.value());
-			assertToken(ArraySerializer.ELEMENT, tokenizer.next(), value);
-			double lon = Double.parseDouble(tokenizer.value());
-			((Node)e).setLatitude(lat);
-			((Node)e).setLongitude(lon);
+			try {
+				assertToken(ArraySerializer.ELEMENT, tokenizer.next(), value);
+				double lat = Double.parseDouble(tokenizer.value());
+				assertToken(ArraySerializer.ELEMENT, tokenizer.next(), value);
+				double lon = Double.parseDouble(tokenizer.value());
+				((Node)e).setLatitude(lat);
+				((Node)e).setLongitude(lon);
+			} catch (java.lang.NumberFormatException ex) {
+				log.warn("Cannot parse lat/log for Node with key:" + key + " value:" + value);
+				e = null;
+			}
 		} else if (key.charAt(0) == '1') {
 			assertToken(ArraySerializer.START_ARRAY, tokenizer.next(), value);
 			int n = tokenizer.next();
