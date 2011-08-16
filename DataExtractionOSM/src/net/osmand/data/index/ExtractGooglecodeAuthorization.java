@@ -111,7 +111,7 @@ public class ExtractGooglecodeAuthorization {
 		if (debug) {
 			System.out.println("Connected to:" + url.toString());
 			System.out.println("-- Data sent:\n" + data.toString());
-			System.out.ptintln("--");
+			System.out.println("--");
 		}
 
 		// Get the response
