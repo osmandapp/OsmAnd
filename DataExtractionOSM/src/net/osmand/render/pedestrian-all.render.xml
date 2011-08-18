@@ -1,4 +1,4 @@
-<renderer name="pedestrian" depends="default" defaultColor="#f1eee8" defaultNightColor="#003333">
+<renderer name="pedestrian" depends="all-purpose" defaultColor="#f1eee8" defaultNightColor="#003333">
 
 	<order>
 	<filter orderType="line">

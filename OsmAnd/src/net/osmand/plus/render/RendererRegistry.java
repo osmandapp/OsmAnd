@@ -36,6 +36,8 @@ public class RendererRegistry {
 		internalRenderers.put(BICYCLE_RENDER, "bicycle.render.xml"); //$NON-NLS-1$
 		internalRenderers.put(PEDESTRIAN_RENDER, "pedestrian.render.xml"); //$NON-NLS-1$
 		internalRenderers.put("all-purpose", "all-purpose.render.xml"); //$NON-NLS-1$
+		internalRenderers.put("bicycle-hm", "bicycle-all.render.xml"); //$NON-NLS-1$
+		internalRenderers.put("pedestrian-hm", "pedestrian-all.render.xml"); //$NON-NLS-1$
 	}
 	
 	private BaseOsmandRender defaultRender = null;
