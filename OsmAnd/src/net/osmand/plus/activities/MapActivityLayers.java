@@ -353,7 +353,7 @@ public class MapActivityLayers {
 	public void selectGPXFileLayer(final CallbackWithObject<GPXFileResult> callbackWithObject) {
 		final List<String> list = new ArrayList<String>();
 		final OsmandSettings settings = getApplication().getSettings();
-		final File dir = settings.extendOsmandPath(ResourceManager.APP_DIR + SavingTrackHelper.TRACKS_PATH);
+		final File dir = settings.extendOsmandPath(ResourceManager.GPX_PATH);
 		if (dir != null && dir.canRead()) {
 			File[] files = dir.listFiles();
 			if (files != null) {

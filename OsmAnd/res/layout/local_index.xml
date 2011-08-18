@@ -5,13 +5,13 @@
   android:layout_height="fill_parent" android:orientation="vertical">
   
 <LinearLayout android:id="@+id/LoadingPanel" android:layout_width="fill_parent" android:layout_height="wrap_content">
-   <ProgressBar android:paddingLeft="5dp" android:indeterminate="true" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-   <TextView  android:paddingLeft="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content" 
-	android:text="@string/loading_data" android:textSize="20sp" android:layout_gravity="center_vertical"></TextView>
-</LinearLayout>  
-
-<Button android:id="@+id/DownloadButton" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:text="@string/download_files"
+   <ProgressBar android:id="@+id/ProgressBar" android:paddingLeft="5dp" android:indeterminate="true" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+   <Button android:id="@+id/ReloadIndexes" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/local_index_reload"
 		android:layout_marginLeft = "3dp" android:layout_marginTop ="3dp" android:layout_marginRight = "3dp" android:visibility="gone"/>
+   <Button android:id="@+id/DownloadButton" android:layout_width="wrap_content" android:layout_gravity="right" android:layout_height="wrap_content" android:text="@string/local_index_download"
+		android:layout_marginLeft = "3dp" android:layout_marginTop ="3dp" android:layout_marginRight = "3dp"/>
+</LinearLayout>
+
 
 <ExpandableListView android:id="@android:id/list" android:layout_width="fill_parent" android:layout_weight="1" android:layout_height="wrap_content" 
 		android:layout_marginLeft="3dp" android:layout_marginTop="3dp" android:layout_marginRight="3dp" ></ExpandableListView>

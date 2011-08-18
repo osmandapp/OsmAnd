@@ -60,6 +60,7 @@ public class ResourceManager {
 	public static final String APP_DIR = "osmand/"; //$NON-NLS-1$
 	public static final String POI_PATH = APP_DIR + IndexConstants.POI_INDEX_DIR; 
 	public static final String VOICE_PATH = APP_DIR + IndexConstants.VOICE_INDEX_DIR;
+	public static final String GPX_PATH = APP_DIR + "tracks";
 	public static final String MAPS_PATH = APP_DIR;
 	public static final String BACKUP_PATH = APP_DIR + "backup/";
 	public static final String TILES_PATH = APP_DIR+"tiles/"; //$NON-NLS-1$
@@ -69,6 +70,7 @@ public class ResourceManager {
 	public static final int LIMIT_TRANSPORT = 200;
 	
 	private static final Log log = LogUtil.getLog(ResourceManager.class);
+	
 	
 	protected static ResourceManager manager = null;
 	
