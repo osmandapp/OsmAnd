@@ -67,7 +67,7 @@ public class BinaryMapIndexReader {
 		}
 		init();
 	}
-
+	
 	private void init() throws IOException {
 		boolean initCorrectly = false;
 		while(true){
