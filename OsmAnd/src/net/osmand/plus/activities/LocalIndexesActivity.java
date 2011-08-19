@@ -102,7 +102,6 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 
 		@Override
 		protected void onPreExecute() {
-			findViewById(R.id.ProgressBar).setVisibility(View.VISIBLE);
 		}
 
 		@Override
@@ -113,7 +112,6 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		@Override
 		protected void onPostExecute(LocalIndexInfo[] result) {
 			listAdapter.notifyDataSetChanged();
-			findViewById(R.id.ProgressBar).setVisibility(View.GONE);
 		}
 
 	}
@@ -123,6 +121,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		LocalIndexInfo item = listAdapter.getChild(groupPosition, childPosition);
 		item.setExpanded(!item.isExpanded());
 		if(item.isExpanded()){
+			descriptionLoader = new LoadLocalIndexDescriptionTask();
 			descriptionLoader.execute(item);
 		}
 		listAdapter.notifyDataSetInvalidated();
@@ -137,6 +136,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 			progressDlg = null;
 		}
 		asyncLoader.cancel(true);
+		descriptionLoader.cancel(true);
 	}
 
 	protected class LocalIndexesAdapter extends BaseExpandableListAdapter {

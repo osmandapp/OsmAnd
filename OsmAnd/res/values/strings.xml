@@ -17,9 +17,6 @@
 	<string name="local_indexes_cat_map">Map data</string>
 	<string name="local_indexes_cat_poi">POI data</string>
 	
-	<string name="local_indexes_view">View data</string>
-	<string name="local_indexes_view_descr">View currently installed offline data</string>
-	
 	<string name="ttsvoice">TTS Voice</string>
 	<string name="search_offline_clear_search">New Search</string>
 	<string name="map_text_size_descr">Select text size for names on the map</string>
