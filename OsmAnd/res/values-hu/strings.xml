@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="ttsvoice">TTS felolvasó hang</string>
+	
 	<string name="search_offline_clear_search">Új keresés</string>
 	<string name="map_text_size_descr">Szövegméret beállítása a térképen megjelenő nevekhez</string>
 	<string name="map_text_size">Szöveg méret</string>
@@ -16,7 +18,7 @@
 	</string>
 	<string name="voice_not_specified">Nincs</string>
 	<string name="installing_new_resources">Új adatok kicsomagolása...</string>
-	<string name="internet_connection_required_for_online_route">Az Internetes navigáció használata az Internet kapcsolat hiánya miatt nem lehetséges. Használható a (még kísérleti) OsmAnd kapcsolat nélküli navigációt (\'Beállítások\' -> \'Útvonaltervezés\'.</string>
+	<string name="internet_connection_required_for_online_route">Az internetes navigáció használata az internetkapcsolat hiánya miatt nem lehetséges. Használhatod a (még kísérleti) OsmAnd kapcsolat nélküli navigációt (\'Beállítások\' -> \'Útvonaltervezés\'.</string>
 	<string name="tts_language_not_supported_title">Nem támogatott nyelv</string>
 	<string name="tts_language_not_supported">A kiválasztott nyelvet az Android TTS rendszere nem támogatja. A Market-ről letölthető másik TTS rendszer. Különben a jelenlegi TTS-t használja a program.</string>
 	<string name="tts_missing_language_data_title">Hiányzó adat</string>
@@ -58,12 +60,12 @@
   <string name="map_vector_data">Vektoros térképek</string>
   <string name="map_vector_data_descr">Letöltött vektoros térképek használata</string>
   <string name="tile_source_already_installed">A térkép már telepítve van, a beállítások frissítésre kerülnek</string>
-  <string name="select_tile_source_to_install">Térkép kiválasztása telepítéshez frissítéshez</string>
-  <string name="internet_not_available">A művelet elvégzéséhez Internet elérése szükséges</string>
+  <string name="select_tile_source_to_install">Térkép kiválasztása telepítéshez, frissítéshez</string>
+  <string name="internet_not_available">A művelet elvégzéséhez internetelérés szükséges</string>
   <string name="install_more">További telepítése...</string>
   <string name="tip_update_index">Térkép adatok frissítése</string>
   <string name="tip_update_index_t">Fontos az aktuális térképek megléte. Az Osmand program tartalmaz egy letöltéskezelőt amivel egyszerűen ellenőrizhető, hogy létezik-e frissebb a meglévő térkép adatokból.
-\n\tA frissítések ellenőrzéséhez a \'Főmenü\'->\'Beállítások\'->\'Adatok kapcsolat nélküli munkához\'->\'Térkép adatok letöltése\' menüpontot kell választani. A térkép adatok internetről való frissítése után a \'Letöltöttek szűrése\' menüt kell választani.
+\n\tA frissítések ellenőrzéséhez a \'Főmenü\'->\'Beállítások\'->\'Offline adatok\'->\'Térkép adatok letöltése\' menüpontot kell választani. A térkép adatok internetről való frissítése után a \'Letöltöttek szűrése\' menüt kell választani.
 \nÍgy most már csak a letöltött térkép adatok jelennek meg a következő színekkel jelölve:
 \n\t\'Zöld\' - azt jelenti, hogy az index állomány megegyezik a szerveren lévővel
 \n\t\'Kék\' - azt jelenti, hogy újabb verzió tölthető le a szerverről</string>
@@ -151,7 +153,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 <string name="add_waypoint_dialog_title">Útpont hozzáadása a felvett GPX útvonalhoz</string>
 <string name="context_menu_item_add_waypoint">Gpx útpont hozzáadás</string>
 	<string name="amenity_type_administrative">Adminisztráció</string>
-	<string name="amenity_type_barrier">Határ</string>
+	<string name="amenity_type_barrier">Akadály</string>
 	<string name="amenity_type_education">Oktatás</string>
 	<string name="amenity_type_emergency">Vészhelyzet</string>
 	<string name="amenity_type_entertainment">Szórakoztatás</string>
@@ -180,7 +182,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="km_h">km/ó</string>
 	<string name="m">m</string>
 	<string name="old_map_index_is_not_supported">Az elavult térkép formátum \'\'{0}\'\' nem támogatott</string>
-	<string name="poi_filter_car_aid">Autó segítség</string>
+	<string name="poi_filter_car_aid">Autós segítség</string>
 	<string name="poi_filter_closest_poi">Közeli POI</string>
 	<string name="poi_filter_custom_filter">Egyéni szűrő</string>
 	<string name="poi_filter_food_shop">Élelmiszer üzlet</string>
@@ -188,15 +190,15 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="poi_filter_fuel">Üzemanyag</string>
 	<string name="poi_filter_namefinder">Online névkereső</string>
 	<string name="reading_cached_tiles">Elmentett térképszeletek olvasása...</string>
-	<string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
+	<string name="version_index_is_big_for_memory">A(z) \'\'{0}\'\' indexadat nem fér a memóriába</string>
 	<string name="version_index_is_not_supported">\'\'{0}\'\' index verziója nem támogatott</string>
-	<string name="osmand_net_previously_installed">Ön már telepített egy korbábbi OsmAnd verziót. Minden Internettől független adat használható az új alkalmazással. A Kedvenc pontokat a régi alkalmazásból érdemes kimenteni és az újba betölteni</string>
+	<string name="osmand_net_previously_installed">Ön már telepített egy korbábbi OsmAnd verziót. Minden internettől független adat használható az új alkalmazással. A Kedvenc pontokat a régi alkalmazásból érdemes kimenteni és az újba betölteni</string>
 	<string name="build_installed">OsmAnd verzió {0} sikeresen telepítve ({1}).</string>
 	<string name="downloading_build">OsmAnd verzió letöltése...</string>
 	<string name="install_selected_build">Biztos hogy telepíti az OsmAnd alkalmazást - {0} innen: {1} {2} MB.</string>
 	<string name="loading_builds_failed">OsmAnd verziók listájának letöltése nem sikerült </string>
 	<string name="loading_builds">OsmAnd verziók töltése...</string>
-	<string name="select_build_to_install">Select one of the OsmAnd build to install</string>
+	<string name="select_build_to_install">A telepítéshez válassz egy OsmAnd buildet</string>
 	<string name="contribution_activity">Special activity for contribution version</string>
 	
 	<string name="gps_status_app_not_found">"GPS status" alkalmazás nincs telepítve. Megkeresi a Market-en?</string>
@@ -212,16 +214,16 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 
 	<string name="download_files_question">{0} fájl letöltés ({1} MB)?</string>
 	<string name="items_were_selected">{0} elem lett kijelölve</string>
-	<string name="filter_existing_indexes">Szűrő letöltv</string>
+	<string name="filter_existing_indexes">Szűrő: letöltve</string>
 	<string name="deselect_all">Kijelölés megszüntetése</string>
 	<string name="select_all">Mindet kijelöl</string>
 	<string name="reload">Újratölt</string>
 	<string name="general_settings_descr">Internet használat, térkép forgatás, kijelző helyzet és egyéb beállítások</string>
     <string name="general_settings">Általános</string>
-	<string name="rendering_settings_descr">Térkép forrás és megjelenítés beállítás</string>
+	<string name="rendering_settings_descr">Térképforrás és megjelenítési beállítások</string>
     <string name="rendering_settings">Térkép megjelenítés</string>
-    <string name="index_settings_descr">Adat letöltés és frissítés kapcsolat nélküli használathoz</string>
-    <string name="index_settings">Adatok kapcsolat nélküli munkához</string>
+    <string name="index_settings_descr">Adatletöltés és -frissítés kapcsolat nélküli használathoz</string>
+    <string name="index_settings">Offline adatok</string>
 	<string name="osmand_service">Háttérszolgáltatás</string>
 	<string name="osmand_service_descr">Háttérszolgáltatás használata kikapcsolt képernyős használathoz</string>
 	<string name="fast_route_mode">Leggyorsabb útvonal</string>
@@ -258,7 +260,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 
 	<string name="map_index">Térkép</string>
 	<string name="voice">Hang</string>
-	<string name="no_vector_map_loaded">Nincs betöltött vektor térkép</string>
+	<string name="no_vector_map_loaded">Nincs betöltött vektoros térkép</string>
 	<string name="gpx_reverse_route">Útvonal visszafelé</string>
 	<string name="gpx_direct_route">Útvonal előrefelé</string>
 	<string name="map_route_by_gpx">Útvonal GPX alapján</string>
@@ -284,14 +286,14 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="no_fav_to_save">Nincs mentendő kedvenc pont</string>
 	<string name="import_fav">Betölt</string>
 	<string name="export_fav">Ment</string>
-	<string name="error_occurred_loading_gpx">Hiba történt a GPX fájl betöltésénél</string>
+	<string name="error_occurred_loading_gpx">Hiba történt a GPX fájl betöltésekor</string>
 	<string name="send_report">Jelentés küldése</string>
-	<string name="none_region_found">Nem található régió az SD kártyán. Próbálj az Internetről letölteni régiót.</string>
+	<string name="none_region_found">Nem található régió az SD kártyán. Próbálj az internetről letölteni régiót.</string>
 	<string name="poi_namefinder_query_empty">POI kiválasztáshoz írj be keresést</string>
 	<string name="any_poi">Bármely</string>
 	
 	<string name="layer_transport_route">Közlekedési útvonal</string>
-	<string name="thanks_yandex_traffic">Köszönet Yandexnek a forgalmi információkért.</string>
+	<string name="thanks_yandex_traffic">Köszönet a Yandexnek a forgalmi információkért.</string>
 	<string name="layer_yandex_traffic">Yandex forgalmi információ</string>
 	<string name="layer_route">Útvonal</string>
 	<string name="layer_favorites">Kedvencek</string>
@@ -312,7 +314,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="process_navigation_service">OsmAnd navigációs szolgáltatás</string>
 	<string name="network_provider">Hálózat</string>
 	<string name="gps_provider">GPS</string>
-	<string name="int_seconds">másodpercek</string>
+	<string name="int_seconds">másodperc</string>
 	<string name="int_min">min.</string>
 	<string name="background_service_int_descr">Helymeghatározási intervallum kiválasztása háttérszolgálatáshoz</string>
 	<string name="background_service_int">Pozicionálási intervallum</string>
@@ -327,17 +329,17 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="show_poi_filter">Szűrő megmutatáshoz</string>
 	<string name="search_poi_filter">Szűrő</string>
 	<string name="menu_mute_off">Hang be</string>
-	<string name="menu_mute_on">Hang ki</string>
-	<string name="voice_not_use">nem használunk beszéded</string>
+	<string name="menu_mute_on">Némítva</string>
+	<string name="voice_not_use">nem használunk beszédet</string>
 	<string name="voice_provider_descr">Beszéd kiválasztása irányításhoz</string>
-	<string name="voice_provider">Beszéd adat</string>
-	<string name="voice_data_initializing">Beszéd adat előkészítése...</string>
-	<string name="voice_data_not_supported">Nem támogatott beszéd adat</string>
-	<string name="voice_data_corrupted">A beállított beszéd adat hibás</string>
-	<string name="voice_data_unavailable">A jelenlegi beszéd adat elérhetetlen</string>
+	<string name="voice_provider">Beszédadat</string>
+	<string name="voice_data_initializing">Beszédadat előkészítése...</string>
+	<string name="voice_data_not_supported">Nem támogatott beszédadat</string>
+	<string name="voice_data_corrupted">A beállított beszédadat hibás</string>
+	<string name="voice_data_unavailable">A jelenlegi beszédadat nem elérhetető</string>
 	<string name="stop_routing">Útvonaltervezés megállítása</string>
-	<string name="sd_unmounted">Az SD kártya nem érhető el.\nÍgy a térkép nem jeleníthető meg és nem érhető el az Internet.</string>
-	<string name="sd_mounted_ro">Az SD kártya csak olvasható.\nÍgy csak előre letöltött térkép használható és nem lehet az Internetről letölteni sem.</string>
+	<string name="sd_unmounted">Az SD kártya nem érhető el.\nÍgy a térkép nem jeleníthető meg és nem érhető el az internet.</string>
+	<string name="sd_mounted_ro">Az SD kártya csak olvasható.\nÍgy csak előre letöltött térkép használható és nem lehet az internetről letölteni sem.</string>
 	<string name="unzipping_file">Fájl kitömörítése (unzip)...</string>
 	<string name="route_tr">Fordulj jobbra</string>
 	<string name="route_tshr">Fordulj élesen jobbra</string>
@@ -349,16 +351,16 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="route_head">Előre</string>
 	<string name="first_time_continue">Tovább</string>
 	<string name="first_time_download">Térkép adatok letöltése</string>
-	<string name="first_time_msg">Köszönjük, hogy az OsmAndot választotta. \nHogy a program minden lehetőségét kihasználhassa index állományokra lesz szüksége amiket az Internetről letölthet (Beállítások -&gt; Adat) vagy előállíthat magának. Ezt követően képes lesz: címre keresni, POI-ra keresni és tömegközékedési eszközre keresni.</string>
+	<string name="first_time_msg">Köszönjük, hogy az OsmAndot választotta. \nHogy a program minden lehetőségét kihasználhassa index állományokra lesz szüksége amiket az internetről letölthet (Beállítások -&gt; Offline adatok) vagy előállíthat magának. Ezt követően képes lesz: címre keresni, POI-ra keresni és tömegközékedési eszközre keresni.</string>
 	<string name="search_poi_location">Kereső jelzés...</string>
-	<string name="search_near_map">Keresés az utolsó térkép pozíció közelében</string>
+	<string name="search_near_map">Keresés az utolsó térképpozíció közelében</string>
 	<string name="search_nearby">Keresés a közelben</string>
 	<string name="map_orientation_default">Mint a készülék</string>
 	<string name="map_orientation_portrait">Függőleges</string>
 	<string name="map_orientation_landscape">Vízszintes</string>
-	<string name="map_screen_orientation">Térkép megjelenítés a kijelzőn</string>
+	<string name="map_screen_orientation">Térkép megjelenítése a kijelzőn</string>
 	<string name="map_screen_orientation_descr">Kijelző orientáció választás</string>
-	<string name="opening_hours_not_supported">Opening hours format is not supported for editing</string>
+	<string name="opening_hours_not_supported">Nyitvatartási időformátum szerkesztése nem támogatott</string>
 	<string name="add_new_rule">Új szabály felvétele</string>
 	<string name="transport_Routes">Útvonalak</string>
 	<string name="transport_Stop">Megálló</string>
@@ -383,13 +385,13 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="update_poi_no_offline_poi_index">Nincs helyi POI index adat ehhez a területhez</string>
 	<string name="update_poi_is_not_available_for_zoom">Nem lehet a POI-kat frissíteni kis nagyítás mellett</string>
 	<string name="context_menu_item_update_poi">POI-k frissítése</string>
-	<string name="context_menu_item_update_map_confirm">Biztos hogy a helyi adatokat Internetről frissíti?</string>
+	<string name="context_menu_item_update_map_confirm">Biztos, hogy a helyi adatokat internetről frissíti?</string>
 	<string name="search_history_city">Település: {0}</string>
 	<string name="search_history_street">Utca: {0}, {1}</string>
 	<string name="search_history_int_streets">Köztes utcák: {0} x {1} in {2}</string>
 	<string name="search_history_building">Épület: {0}, {1}, {2}</string>
 	<string name="search_history_navigate_to">Navigáció ide: szélesség = {0}, hosszúság = {1}</string>
-	<string name="favorite">Kedven</string>
+	<string name="favorite">Kedvenc</string>
 	<string name="clear_all">Mindent töröl</string>
 	<string name="history">Előzmény</string>
 	<string name="uploading_data">Adat feltöltése...</string>
@@ -403,24 +405,24 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="search_online_address">Internet</string>
 	<string name="max_level_download_tile">Max. nagyítási szint</string>
 	<string name="max_level_download_tile_descr">Max. nagyítási szint kiválasztása letöltéshez</string>
-	<string name="route_about">Útvonaltervről</string>
+	<string name="route_about">Útvonalterv</string>
 	<string name="route_general_information">Teljes távolság {0}, utazási idő {1} ó. {2} p.</string>
 	<string name="router_service_descr">Útvonaltervező szolgáltatás kiválasztása</string>
 	<string name="router_service">Útvonaltervezés</string>
 	<string name="sd_dir_not_accessible">Nem található könyvtár az SD kártyán mentésre</string>
 	<string name="download_question">Letöltés {0} - {1} ?</string>
-	<string name="download_question_exist">Már létezik index adat a(z) {0}-hoz/-hez ({1}). Szeretné frissíteni ({2}) ?</string>
+	<string name="download_question_exist">>Már létezik indexadat {0} régióhoz ({1}). Szeretné frissíteni ({2})?</string>
 	<string name="address">Cím</string>
-	<string name="download_index_success">Sikeres a térkép adatok letöltése</string>
+	<string name="download_index_success">Sikeres a térképadatok letöltése</string>
 	<string name="error_io_error">IO hiba történt</string>
 	<string name="downloading_file">Fájl letöltése...</string>
 	<string name="downloading">Letöltés...</string>
-	<string name="downloading_list_indexes">Elérhető térkép adatok listájának letöltése</string>
-	<string name="list_index_files_was_not_loaded">Nincs letöltve a térkép adatok listája a from osmand.googlecode.com-ról.</string>
+	<string name="downloading_list_indexes">Elérhető térképadatok listájának letöltése</string>
+	<string name="list_index_files_was_not_loaded">Nincs letöltve a térképadatok listája az osmand.googlecode.com-ról.</string>
     <string name="select_index_file_to_download">Ha nem találja a régióját, elkészítheti magának. Lásd: osmand.net</string>
 	<string name="show_poi_on_map">Mutasd a térképen</string>
 	<string name="fav_points_edited">Kedvenc pontok szerkesztése kész</string>
-	<string name="fav_points_not_exist">Nem léteznek kedvenc pontok</string>
+	<string name="fav_points_not_exist">Még nincsenek kedvenc pontok</string>
 	<string name="update_existing">Csere</string>
 	<string name="only_show">Csak mutat</string>
 	<string name="follow">Követ</string>
@@ -429,7 +431,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="mark_final_location_first">Először válassza ki a célt</string>
 	<string name="get_directions">Útirány</string>
     <string name="show_gps_status">GPS állapot mutatása</string>
-	<string name="opening_hours">Órák nyitása</string>
+	<string name="opening_hours">Nyitvatartás</string>
 	<string name="opening_changeset">Változások megnyitása...</string>
 	<string name="closing_changeset">Változások bezárása...</string>
 	<string name="commiting_node">Csomópont érvényesítése...</string>
@@ -457,10 +459,10 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="previous_run_crashed">Az előző alkalmazás összeomlott. Naplófájl: {0}. Kérem küldjön egy hibajegyet és csatolja hozzá a naplófájlt.</string>
 	<string name="saving_gpx_tracks">GPX útvonalak mentése SD kártyára...</string>
 	<string name="finished_task">Befejezve</string>
-    <string name="reload_indexes_descr">Térkép adatok újraolvasása SD kártyáról</string>
-    <string name="reload_indexes">Térkép adatok újraolvasása</string>
-    <string name="download_indexes_descr">Térkép adatok letöltése Internetről</string>
-    <string name="download_indexes">Térkép adatok letöltése</string>
+    <string name="reload_indexes_descr">Térképadatok újraolvasása SD kártyáról</string>
+    <string name="reload_indexes">Térképadatok újraolvasása</string>
+    <string name="download_indexes_descr">Térképadatok letöltése internetről</string>
+    <string name="download_indexes">Térképadatok letöltése</string>
     <string name="use_online_routing_descr">Internet használata útvonaltervezéshez</string>
     <string name="use_online_routing">Online útvonaltervezés</string>
     <string name="user_password_descr">OSM jelszó</string>
@@ -479,7 +481,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
     <string name="settings">Beállítások</string>
     <string name="save_current_track_descr">Jelenlegi útvonal SD kártyára mentése</string>
     <string name="save_current_track">Jelenlegi útvonal mentése</string>
-    <string name="save_track_interval_descr">Idő intervallum választás az útvonal mentéshez</string>
+    <string name="save_track_interval_descr">Időintervallum választás az útvonal mentéshez</string>
     <string name="save_track_interval">Útvonal mentés intervalluma</string>
     <string name="monitor_preferences">Nyomvonalak</string>
     <string name="save_track_to_gpx_descrp">Az útvonalak napi csoportosításban kerülnek mentésre a track könyvtárba</string>
@@ -498,10 +500,10 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
     <string name="use_english_names">Angol nevek használata</string>
     <string name="app_settings">Alkalmazás beállítása</string>
     <string name="search_address">Cím keresés</string>
-    <string name="choose_building">Épület kiválasztás</string>
-    <string name="choose_street">Utca kiválasztás</string>
-    <string name="choose_city">Település kiválasztás</string>
-    <string name="ChooseCountry">Ország kiválasztás</string>
+    <string name="choose_building">Épület kiválasztása</string>
+    <string name="choose_street">Utca kiválasztása</string>
+    <string name="choose_city">Település kiválasztása</string>
+    <string name="ChooseCountry">Ország kiválasztása</string>
     <string name="position_on_map_descr">Hely kiválasztás a térképen</string>
     <string name="position_on_map">Pozíció a térképen</string>
     <string name="map_specify_point">Pont meghatározása</string>
@@ -561,7 +563,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 <string name="search_address_region">Régió</string>
 <string name="search_address_city">Település</string>
 <string name="search_address_street">Utca</string>
-<string name="search_address_building">Épület</string>
+<string name="search_address_building">Házszám</string>
 <string name="search_address_building_option">Épület</string>
 <string name="search_address_street_option">Keresztező utca</string>
 
@@ -592,8 +594,8 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 <string name="favourites_remove_dialog_success">Kedvenc pont: {0} sikeresen törölve.</string>
 
 <string name="osb_add_dialog_title">Hiba leírása</string>
-<string name="osb_add_dialog_success">Sikeresen elkészített hiba</string>
-<string name="osb_add_dialog_error">Hiba történt a hiba elkészítésénél</string>
+<string name="osb_add_dialog_success">Sikeresen elkészített hibajelentés</string>
+<string name="osb_add_dialog_error">Hiba történt a hibajelentés elkészítésénél</string>
 
 <string name="osb_comment_menu_item">Megjegyzés hozzáfűzése</string>
 <string name="osb_comment_dialog_message">Üzenet</string>
@@ -611,15 +613,15 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 
 <string name="poi_edit_title">POI szerkesztése</string>
 <string name="poi_create_title">POI létrehozás</string>
-<string name="poi_error_poi_not_found">A csomópont nem található vagy a szórakozó vagy nem egy csomópont</string>
-<string name="poi_remove_confirm_template">{0} törlés (megjegyzés bevitele) ?</string>
+<string name="poi_error_poi_not_found">A csomópont nem található, vagy a szórakozás nem egy csomópont</string>
+<string name="poi_remove_confirm_template">{0} törlés (megjegyzés bevitele)?</string>
 <string name="poi_remove_title">POI törlés</string>
 <string name="default_buttons_delete">Törlés</string>
 <string name="poi_remove_success">POI törlése sikeres</string>
 <string name="poi_action_add">hozzáad</string>
 <string name="poi_action_change">módosít</string>
 <string name="poi_action_succeded_template">{0} művelet sikeresen befejeződött.</string>
-<string name="poi_error_unexpected_template">{0} művelet közben nem vár hiba történt.</string>
+<string name="poi_error_unexpected_template">{0} művelet közben nem várt hiba történt.</string>
 <string name="poi_error_io_error_template">{0} művelet közben input/output hiba történt.</string>
 
 <string name="poi_error_info_not_loaded">A csomópontról nincs letöltve információ</string>
