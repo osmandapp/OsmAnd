@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import net.osmand.IProgress;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
@@ -45,7 +46,6 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 
 	private AsyncTask<Activity, LocalIndexInfo, List<LocalIndexInfo>> asyncLoader;
 	private LocalIndexesAdapter listAdapter;
-	private ProgressDialog progressDlg;
 	private LoadLocalIndexDescriptionTask descriptionLoader;
 	private LocalIndexOperationTask operationTask;
 
@@ -151,6 +151,9 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		}
 		
 		private boolean move(File from, File to){
+			if(!to.getParentFile().exists()){
+				to.getParentFile().mkdirs();
+			}
 			return from.renameTo(to);
 		}
 		
@@ -254,6 +257,9 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 			descriptionLoader = new LoadLocalIndexDescriptionTask();
 			descriptionLoader.execute(item);
 		}
+		if(selectionMode){
+			selectedItems.add(item);
+		}
 		listAdapter.notifyDataSetInvalidated();
 		return true;
 	}
@@ -269,10 +275,6 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		if (progressDlg != null) {
-			progressDlg.dismiss();
-			progressDlg = null;
-		}
 		asyncLoader.cancel(true);
 		descriptionLoader.cancel(true);
 	}
@@ -401,43 +403,43 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 	
 
 	public void reloadIndexes() {
-		progressDlg = ProgressDialog.show(this, getString(R.string.loading_data), getString(R.string.reading_indexes), true);
-		final ProgressDialogImplementation impl = new ProgressDialogImplementation(progressDlg);
-		impl.setRunnable("Initializing app", new Runnable() { //$NON-NLS-1$
-					@Override
-					public void run() {
-						try {
-							showWarnings(((OsmandApplication) getApplication()).getResourceManager().reloadIndexes(impl));
-						} finally {
-							if (progressDlg != null) {
-								progressDlg.dismiss();
-								progressDlg = null;
-							}
+		AsyncTask<Void, String, List<String>> task = new AsyncTask<Void, String, List<String>>(){
+
+			@Override
+			protected void onPostExecute(List<String> warnings) {
+				findViewById(R.id.ProgressBar).setVisibility(View.INVISIBLE);
+				if (!warnings.isEmpty()) {
+					final StringBuilder b = new StringBuilder();
+					boolean f = true;
+					for (String w : warnings) {
+						if (f) {
+							f = false;
+						} else {
+							b.append('\n');
 						}
+						b.append(w);
 					}
-				});
-		impl.run();
+					Toast.makeText(LocalIndexesActivity.this, b.toString(), Toast.LENGTH_LONG).show();
+				}
+			}
+			
+			@Override
+			protected void onPreExecute() {
+				super.onPreExecute();
+				findViewById(R.id.ProgressBar).setVisibility(View.VISIBLE);
+			}
+			@Override
+			protected List<String> doInBackground(Void... params) {
+				return ((OsmandApplication) getApplication()).getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS);
+			}
+			
+		};
+		task.execute();
+		
 	}
 
 	protected void showWarnings(List<String> warnings) {
-		if (!warnings.isEmpty()) {
-			final StringBuilder b = new StringBuilder();
-			boolean f = true;
-			for (String w : warnings) {
-				if (f) {
-					f = false;
-				} else {
-					b.append('\n');
-				}
-				b.append(w);
-			}
-			runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					Toast.makeText(LocalIndexesActivity.this, b.toString(), Toast.LENGTH_LONG).show();
-				}
-			});
-		}
+		
 	}
 
 	

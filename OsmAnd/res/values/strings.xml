@@ -11,7 +11,7 @@
 	<string name="local_index_mi_delete">Delete</string>
 	<string name="local_index_mi_reload">Reload</string>
 	<string name="local_index_download">Download</string>
-	<string name="local_index_tile_data">Tile data %1$s - minimum zoom %2$d, maximum zoom %3$d</string>
+	<string name="local_index_tile_data">Tile data: \n %1$s - minimum zoom \n %2$d, maximum zoom %3$d</string>
 	<string name="local_index_poi_data">POI data</string>
 	<string name="local_index_address_data">Address data</string>
 	<string name="local_index_transport_data">Transport data</string>
