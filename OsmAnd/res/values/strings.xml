@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="local_index_gpx_info">Subtracks : %1$d\nTotal Points : %2$d\nWay points : %3$d</string>
+	<string name="local_index_installed">Installed</string>
 	<string name="local_index_items_backuped">%1$d items of %2$d were succesfully backuped.</string>
 	<string name="local_index_items_deleted">%1$d items of %2$d were succesfully deleted.</string>
 	<string name="local_index_items_restored">%1$d items of %2$d were succesfully restored.</string>
@@ -11,7 +13,7 @@
 	<string name="local_index_mi_delete">Delete</string>
 	<string name="local_index_mi_reload">Reload</string>
 	<string name="local_index_download">Download</string>
-	<string name="local_index_tile_data">Tile data: \n %1$s - minimum zoom \n %2$d, maximum zoom %3$d</string>
+	<string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable : %4$s \nZooms downloaded : %5$s</string>
 	<string name="local_index_poi_data">POI data</string>
 	<string name="local_index_address_data">Address data</string>
 	<string name="local_index_transport_data">Transport data</string>

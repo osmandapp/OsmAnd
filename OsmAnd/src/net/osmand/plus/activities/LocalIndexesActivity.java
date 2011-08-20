@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexInfo;
@@ -19,7 +19,6 @@ import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ExpandableListActivity;
-import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -166,7 +165,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 					boolean successfull = false;
 					if(operation == DELETE_OPERATION){
 						File f = new File(info.getPathToData());
-						successfull = f.delete();
+						successfull = Algoritms.removeAllFiles(f);
 					} else if(operation == RESTORE_OPERATION){
 						successfull = move(new File(info.getPathToData()), getFileToRestore(info));
 						if(successfull){
@@ -407,7 +406,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 
 			@Override
 			protected void onPostExecute(List<String> warnings) {
-				findViewById(R.id.ProgressBar).setVisibility(View.INVISIBLE);
+				findViewById(R.id.ProgressBar).setVisibility(View.GONE);
 				if (!warnings.isEmpty()) {
 					final StringBuilder b = new StringBuilder();
 					boolean f = true;
@@ -435,10 +434,6 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 			
 		};
 		task.execute();
-		
-	}
-
-	protected void showWarnings(List<String> warnings) {
 		
 	}
 

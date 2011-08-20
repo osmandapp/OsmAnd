@@ -3,18 +3,28 @@ package net.osmand.plus.activities;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFileResult;
 import net.osmand.binary.BinaryIndexPart;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
+import net.osmand.binary.BinaryMapIndexReader.MapRoot;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.data.IndexConstants;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -29,6 +39,8 @@ import android.os.Build;
 public class LocalIndexHelper {
 		
 	private final OsmandApplication app;
+	
+	private MessageFormat dateformat = new MessageFormat("{0,date,dd.MM.yyyy}", Locale.US);
 
 	public LocalIndexHelper(OsmandApplication app){
 		this.app = app;
@@ -38,16 +50,61 @@ public class LocalIndexHelper {
 		return getLocalIndexData(null, loadTask);
 	}
 	
+	public String getInstalledDate(File f){
+		return app.getString(R.string.local_index_installed) + " : " + dateformat.format(new Object[]{new Date(f.lastModified())});
+	}
 	
+	@SuppressWarnings("unchecked")
 	public void updateDescription(LocalIndexInfo info){
+		File f = new File(info.getPathToData());
 		if(info.getType() == LocalIndexType.MAP_DATA){
-			updateObfFileInformation(info, new File(info.getPathToData()));
+			updateObfFileInformation(info, f);
+			info.setDescription(info.getDescription() + getInstalledDate(f));
+		} else if(info.getType() == LocalIndexType.POI_DATA){
+			info.setDescription(getInstalledDate(f));
+		} else if(info.getType() == LocalIndexType.GPX_DATA){
+			GPXFileResult result = GPXUtilities.loadGPXFile(app, f);
+			if(result.error != null){
+				info.setCorrupted(true);
+				info.setDescription(result.error);
+			} else {
+				int points = 0;
+				for(int i =0; i< result.locations.size() ; i++){
+					points += result.locations.get(i).size();
+				}
+				info.setDescription(app.getString(R.string.local_index_gpx_info, result.locations.size(), points,
+						result.wayPoints.size()));
+			}
+		} else if(info.getType() == LocalIndexType.VOICE_DATA){
+			info.setDescription(getInstalledDate(f));
+		} else if(info.getType() == LocalIndexType.TTS_VOICE_DATA){
+			info.setDescription(getInstalledDate(f));
 		} else if(info.getType() == LocalIndexType.TILES_DATA){
-			File f = new File(info.getPathToData());
 			if(f.isDirectory() && TileSourceManager.isTileSourceMetaInfoExist(f)){
 				TileSourceTemplate template = TileSourceManager.createTileSourceTemplate(new File(info.getPathToData()));
+				Set<Integer> zooms = new TreeSet<Integer>();
+				for(String s : f.list()){
+					try {
+						zooms.add(Integer.parseInt(s));
+					} catch (NumberFormatException e) {
+					}
+				}
+				
 				String descr = app.getString(R.string.local_index_tile_data, 
-					template.getName(), template.getMinimumZoomSupported(), template.getMaximumZoomSupported());
+					template.getName(), template.getMinimumZoomSupported(), template.getMaximumZoomSupported(),
+					template.getUrlTemplate() != null, zooms.toString());
+				info.setDescription(descr);
+			} else if(f.isFile() && f.getName().endsWith(SQLiteTileSource.EXT)){
+				SQLiteTileSource template = new SQLiteTileSource(f, Collections.EMPTY_LIST);
+				Set<Integer> zooms = new TreeSet<Integer>();
+				for(int i=1; i<22; i++){
+					if(template.exists(i)){
+						zooms.add(i);
+					}
+				}
+				String descr = app.getString(R.string.local_index_tile_data, 
+						template.getName(), template.getMinimumZoomSupported(), template.getMaximumZoomSupported(),
+						template.couldBeDownloadedFromInternet(), zooms.toString());
 				info.setDescription(descr);
 			}
 		}
@@ -175,6 +232,16 @@ public class LocalIndexHelper {
 		}
 		
 	}
+	
+	private MessageFormat format = new MessageFormat("\t {0}, {1} NE \n\t {2}, {3} NE", Locale.US);
+
+	private String formatLatLonBox(int left, int right, int top, int bottom) {
+		double l = MapUtils.get31LongitudeX(left);
+		double r = MapUtils.get31LongitudeX(right);
+		double t = MapUtils.get31LatitudeY(top);
+		double b = MapUtils.get31LatitudeY(bottom);
+		return format.format(new Object[] { l, t, r, b });
+	}
 
 	private void updateObfFileInformation(LocalIndexInfo info, File mapFile) {
 		try {
@@ -189,10 +256,18 @@ public class LocalIndexHelper {
 					MapIndex mi = ((MapIndex) part);
 					builder.append(app.getString(R.string.local_index_map_data)).append(": ").
 						append(mi.getName()).append("\n");
+					if(mi.getRoots().size() > 0){
+						MapRoot mapRoot = mi.getRoots().get(0);
+						String box = formatLatLonBox(mapRoot.getLeft(), mapRoot.getRight(), mapRoot.getTop(), mapRoot.getBottom());
+						builder.append(box).append("\n");
+					}
 				} else if(part instanceof TransportIndex){
 					TransportIndex mi = ((TransportIndex) part);
+					int sh = (31 - BinaryMapIndexReader.TRANSPORT_STOP_ZOOM);
 					builder.append(app.getString(R.string.local_index_transport_data)).append(": ").
 						append(mi.getName()).append("\n");
+					String box = formatLatLonBox(mi.getLeft() << sh, mi.getRight() << sh, mi.getTop() << sh, mi.getBottom() << sh);
+					builder.append(box).append("\n");
 				} else if(part instanceof AddressRegion){
 					AddressRegion mi = ((AddressRegion) part);
 					builder.append(app.getString(R.string.local_index_address_data)).append(": ").
