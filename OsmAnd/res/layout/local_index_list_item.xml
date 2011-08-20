@@ -8,7 +8,7 @@ android:orientation="vertical">
 			android:gravity="center_vertical" android:focusable="false"/>
 	</LinearLayout>
 	<TextView android:id="@+id/local_index_name" android:gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:layout_weight="1" android:textSize="20sp"></TextView>
+		android:layout_weight="1" android:textSize="20sp" android:layout_marginLeft="8dp"></TextView>
 
 	<TextView android:id="@+id/local_index_size" android:layout_marginLeft="3dp" android:gravity="center_vertical" android:layout_width="75dp"
 		android:layout_height="wrap_content" android:textSize="16sp" ></TextView>

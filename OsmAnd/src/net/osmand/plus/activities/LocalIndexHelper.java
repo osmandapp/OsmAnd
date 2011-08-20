@@ -239,6 +239,7 @@ public class LocalIndexHelper {
 		private boolean notSupported = false;
 		private boolean loaded;
 		private String pathToData;
+		private String fileName;
 		private boolean singleFile;
 		private int kbSize = -1;
 		
@@ -247,6 +248,7 @@ public class LocalIndexHelper {
 		
 		public LocalIndexInfo(LocalIndexType type, File f, boolean backuped){
 			pathToData = f.getAbsolutePath();
+			fileName = f.getName();
 			name = formatName(f.getName());
 			this.type = type;
 			singleFile = !f.isDirectory();
@@ -275,6 +277,10 @@ public class LocalIndexHelper {
 			if(corrupted){
 				this.loaded = false;
 			}
+		}
+		
+		public void setBackupedData(boolean backupedData) {
+			this.backupedData = backupedData;
 		}
 		
 		public void setSize(int size) {
@@ -343,6 +349,10 @@ public class LocalIndexHelper {
 		
 		public String getDescription() {
 			return description;
+		}
+		
+		public String getFileName() {
+			return fileName;
 		}
 		
 	}
