@@ -2,7 +2,9 @@ package net.osmand.plus.activities;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
@@ -16,13 +18,20 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.View.OnClickListener;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class LocalIndexesActivity extends ExpandableListActivity {
 
@@ -30,6 +39,9 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 	private LocalIndexesAdapter listAdapter;
 	private ProgressDialog progressDlg;
 	private LoadLocalIndexDescriptionTask descriptionLoader;
+
+	private boolean selectionMode = false;
+	private Set<LocalIndexInfo> selectedItems = new LinkedHashSet<LocalIndexInfo>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +61,13 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 				startActivity(new Intent(LocalIndexesActivity.this, DownloadIndexActivity.class));
 			}
 		});
-		findViewById(R.id.ReloadIndexes).setOnClickListener(new View.OnClickListener() {
-
+		
+		((CheckBox)findViewById(R.id.SelectionMode)).setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
 			@Override
-			public void onClick(View v) {
-				reloadIndexes();
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				selectionMode = isChecked;
+				listAdapter.notifyDataSetInvalidated();
 			}
 		});
 		setListAdapter(listAdapter);
@@ -84,17 +98,18 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		@Override
 		protected void onPostExecute(List<LocalIndexInfo> result) {
 			findViewById(R.id.ProgressBar).setVisibility(View.GONE);
-			findViewById(R.id.ReloadIndexes).setVisibility(View.VISIBLE);
+			findViewById(R.id.SelectionMode).setVisibility(View.VISIBLE);
+			
 		}
 
 	}
-	
+
 	public class LoadLocalIndexDescriptionTask extends AsyncTask<LocalIndexInfo, LocalIndexInfo, LocalIndexInfo[]> {
 
 		@Override
 		protected LocalIndexInfo[] doInBackground(LocalIndexInfo... params) {
 			LocalIndexHelper helper = new LocalIndexHelper((OsmandApplication) LocalIndexesActivity.this.getApplication());
-			for(LocalIndexInfo i : params){
+			for (LocalIndexInfo i : params) {
 				helper.updateDescription(i);
 			}
 			return params;
@@ -115,12 +130,12 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		}
 
 	}
-	
+
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		LocalIndexInfo item = listAdapter.getChild(groupPosition, childPosition);
 		item.setExpanded(!item.isExpanded());
-		if(item.isExpanded()){
+		if (item.isExpanded()) {
 			descriptionLoader = new LoadLocalIndexDescriptionTask();
 			descriptionLoader.execute(item);
 		}
@@ -137,6 +152,27 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		}
 		asyncLoader.cancel(true);
 		descriptionLoader.cancel(true);
+	}
+	
+	private class SelectItemListener implements CompoundButton.OnCheckedChangeListener {
+		
+
+		private final LocalIndexInfo child;
+
+		public SelectItemListener(LocalIndexInfo child) {
+			this.child = child;
+		}
+
+		@Override
+		public void onCheckedChanged(CompoundButton v, boolean isChecked) {
+			if(isChecked){
+				selectedItems.add(child);
+			} else {
+				selectedItems.remove(child);
+			}
+		}
+
+		
 	}
 
 	protected class LocalIndexesAdapter extends BaseExpandableListAdapter {
@@ -183,7 +219,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 			View v = convertView;
 			LocalIndexInfo child = (LocalIndexInfo) getChild(groupPosition, childPosition);
-			if (v == null) {
+			if (v == null || selectionMode) {
 				LayoutInflater inflater = getLayoutInflater();
 				v = inflater.inflate(net.osmand.plus.R.layout.local_index_list_item, parent, false);
 			}
@@ -210,12 +246,19 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 				((TextView) v.findViewById(R.id.local_index_size)).setText("");
 			}
 			TextView descr = ((TextView) v.findViewById(R.id.local_index_descr));
-			if(child.isExpanded()){
+			if (child.isExpanded()) {
 				descr.setVisibility(View.VISIBLE);
 				descr.setText(child.getDescription());
 			} else {
 				descr.setVisibility(View.GONE);
 			}
+			CheckBox checkbox = (CheckBox) v.findViewById(R.id.check_local_index);
+			checkbox.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
+			if (selectionMode) {
+				checkbox.setSelected(selectedItems.contains(child));
+				checkbox.setOnCheckedChangeListener(new SelectItemListener(child));
+			}
+			
 
 			return v;
 		}
@@ -240,7 +283,6 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 			} else {
 				nameView.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 			}
-			
 
 			return v;
 		}
@@ -269,30 +311,89 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		public boolean hasStableIds() {
 			return false;
 		}
-		
+
 		@Override
 		public boolean isChildSelectable(int groupPosition, int childPosition) {
 			return true;
 		}
-
 	}
+	
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(0, R.string.local_index_mi_reload, 0, R.string.local_index_mi_reload);
+		menu.add(0, R.string.local_index_mi_delete, 0, R.string.local_index_mi_delete);
+		menu.add(0, R.string.local_index_mi_restore, 0, R.string.local_index_mi_restore);
+		menu.add(0, R.string.local_index_mi_backup, 0, R.string.local_index_mi_backup);
+		
+		return true;
+	}
+	
+	private void openSelectionMode(String actionButton){
+		selectionMode = true;
+		selectedItems.clear();
+		Button action = (Button) findViewById(R.id.ActionButton);
+		action.setVisibility(View.VISIBLE);
+		action.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+			}
+		});
+		Button cancel = (Button) findViewById(R.id.CancelButton);
+		cancel.setVisibility(View.VISIBLE);
+		cancel.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				closeSelectionMode();
+			}
+		});
+		findViewById(R.id.DownloadButton).setVisibility(View.GONE);
+		listAdapter.notifyDataSetChanged();
+	}
+	
+	private void closeSelectionMode(){
+		selectionMode = false;
+		findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+		findViewById(R.id.CancelButton).setVisibility(View.GONE);
+		findViewById(R.id.ActionButton).setVisibility(View.GONE);
+		listAdapter.notifyDataSetChanged();
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if(item.getItemId() == R.string.local_index_mi_reload){
+			reloadIndexes();
+		} else if(item.getItemId() == R.string.local_index_mi_delete){
+			openSelectionMode(getString(R.string.local_index_mi_delete));
+		} else if(item.getItemId() == R.string.local_index_mi_backup){
+			openSelectionMode(getString(R.string.local_index_mi_backup));
+		} else if(item.getItemId() == R.string.local_index_mi_restore){
+			openSelectionMode(getString(R.string.local_index_mi_restore));
+		} else {
+			return super.onOptionsItemSelected(item);
+		}
+		return true;
+	}
+	
 
 	public void reloadIndexes() {
 		progressDlg = ProgressDialog.show(this, getString(R.string.loading_data), getString(R.string.reading_indexes), true);
 		final ProgressDialogImplementation impl = new ProgressDialogImplementation(progressDlg);
 		impl.setRunnable("Initializing app", new Runnable() { //$NON-NLS-1$
-				@Override
-				public void run() {
-					try {
-						showWarnings(((OsmandApplication) getApplication()).getResourceManager().reloadIndexes(impl));
-					} finally {
-						if (progressDlg != null) {
-							progressDlg.dismiss();
-							progressDlg = null;
+					@Override
+					public void run() {
+						try {
+							showWarnings(((OsmandApplication) getApplication()).getResourceManager().reloadIndexes(impl));
+						} finally {
+							if (progressDlg != null) {
+								progressDlg.dismiss();
+								progressDlg = null;
+							}
 						}
 					}
-				}
-		});
+				});
 		impl.run();
 	}
 

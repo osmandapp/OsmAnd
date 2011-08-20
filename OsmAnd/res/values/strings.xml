@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-	
-	<string name="local_index_reload">Refresh locally</string>
-	<string name="local_index_download">Download New</string>
+	<string name="local_index_mi_restore">Restore</string>
+	<string name="local_index_mi_backup">Backup</string>
+	<string name="local_index_mi_delete">Delete</string>
+	<string name="local_index_mi_reload">Reload</string>
+	<string name="local_index_download">Download</string>
 	<string name="local_index_tile_data">Tile data %1$s - minimum zoom %2$d, maximum zoom %3$d</string>
 	<string name="local_index_poi_data">POI data</string>
 	<string name="local_index_address_data">Address data</string>
