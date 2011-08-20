@@ -155,7 +155,7 @@ public class SQLiteTileSource implements ITileSource {
 		if(db == null){
 			return false;
 		}
-		Cursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE z = ?", new String[] {(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		Cursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE z = ? LIMIT 1", new String[] {(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 		try {
 			boolean e = cursor.moveToFirst();
 			cursor.close();

@@ -95,16 +95,16 @@ public class LocalIndexHelper {
 					template.getUrlTemplate() != null, zooms.toString());
 				info.setDescription(descr);
 			} else if(f.isFile() && f.getName().endsWith(SQLiteTileSource.EXT)){
-				SQLiteTileSource template = new SQLiteTileSource(f, Collections.EMPTY_LIST);
-				Set<Integer> zooms = new TreeSet<Integer>();
-				for(int i=1; i<22; i++){
-					if(template.exists(i)){
-						zooms.add(i);
-					}
-				}
+				SQLiteTileSource template = new SQLiteTileSource(f, TileSourceManager.getKnownSourceTemplates());
+//				Set<Integer> zooms = new TreeSet<Integer>();
+//				for(int i=1; i<22; i++){
+//					if(template.exists(i)){
+//						zooms.add(i);
+//					}
+//				}
 				String descr = app.getString(R.string.local_index_tile_data, 
 						template.getName(), template.getMinimumZoomSupported(), template.getMaximumZoomSupported(),
-						template.couldBeDownloadedFromInternet(), zooms.toString());
+						template.couldBeDownloadedFromInternet(), "");
 				info.setDescription(descr);
 			}
 		}
