@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="local_index_gpx_info">Путей : %1$d\nВсего точек : %2$d\nОтмечено точек : %3$d</string>
+	<string name="local_index_installed">Установлено</string>
+	<string name="local_index_items_backuped">%1$d из %2$d объектов успешно архивированы.</string>
+	<string name="local_index_items_deleted">%1$d из %2$d объектов успешно удалены.</string>
+	<string name="local_index_items_restored">%1$d из %2$d объектов успешно восстановлены.</string>
+	<string name="local_index_no_items_to_do">Нет объектов, чтобы %1$s</string>	
+    <string name="local_index_action_do">Вы собириаетесь %1$s %2$s объектов. Вы уверены?</string>
+	<string name="local_index_description">Офлайн данные доступные на SD карточке. Вы можете загрузить новые, архивировать и удалить данные.</string>
+	<string name="local_index_mi_restore">Восстановить</string>
+	<string name="local_index_mi_backup">Архивировать</string>
+	<string name="local_index_mi_delete">Удалить</string>
+	<string name="local_index_mi_reload">Обновить данные</string>
+	<string name="local_index_download">Загрузить</string>
+	<string name="local_index_tile_data">Тайловые данные : %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable : %4$s \nZooms downloaded : %5$s</string>
+	<string name="local_index_poi_data">POI</string>
+	<string name="local_index_address_data">Адрес</string>
+	<string name="local_index_transport_data">Транспорт</string>
+	<string name="local_index_map_data">Карта</string>
+	<string name="local_index_items"></string>
+	<string name="local_indexes_cat_backup">Архив</string>
+	<string name="local_indexes_cat_tts">TTS голосовые данные</string>
+	<string name="local_indexes_cat_voice">Голосовые данные</string>
+	<string name="local_indexes_cat_gpx">GPX данные</string>
+	<string name="local_indexes_cat_tile">Растровые карты</string>
+	<string name="local_indexes_cat_map">Векторные карты</string>
+	<string name="local_indexes_cat_poi">POI данные</string>
+	
+	<string name="ttsvoice">TTS Голос</string>
+	<string name="search_offline_clear_search">Новый поиск</string>
+	<string name="map_text_size_descr">Выберите размер текста для наименований на карте</string>
+	<string name="map_text_size">Размер текста</string>
+
 	<string name="tip_recent_changes">Последние изменения</string>
 	<string name="tip_recent_changes_0_6_6_t">Изменения в 0.6.6 : 
 \n\t- Text To Speech может быть использован для голосовой навигации
