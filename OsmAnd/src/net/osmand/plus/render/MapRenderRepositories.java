@@ -1051,4 +1051,7 @@ public class MapRenderRepositories {
 	}
 
 
+	public Map<String, BinaryMapIndexReader> getMetaInfoFiles() {
+		return files;
+	}
 }

@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-	<string name="ttsvoice">TTS Voice</string>
+	<string name="local_index_gpx_info">Subtracks : %1$d\nTotal Points : %2$d\nWay points : %3$d</string>
+	<string name="local_index_installed">Installed</string>
+	<string name="local_index_items_backuped">%1$d items of %2$d were succesfully backuped.</string>
+	<string name="local_index_items_deleted">%1$d items of %2$d were succesfully deleted.</string>
+	<string name="local_index_items_restored">%1$d items of %2$d were succesfully restored.</string>
+	<string name="local_index_no_items_to_do">No items to %1$s</string>	
+    <string name="local_index_action_do">You are about to %1$s %2$s items. Are you sure?</string>
+	<string name="local_index_description">Offline data available on the phone.\n You can download new or backup and delete existing data.</string>
+	<string name="local_index_mi_restore">Restore</string>
+	<string name="local_index_mi_backup">Backup</string>
+	<string name="local_index_mi_delete">Delete</string>
+	<string name="local_index_mi_reload">Reload</string>
+	<string name="local_index_download">Download</string>
+	<string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable : %4$s \nZooms downloaded : %5$s</string>
+	<string name="local_index_poi_data">POI data</string>
+	<string name="local_index_address_data">Address data</string>
+	<string name="local_index_transport_data">Transport data</string>
+	<string name="local_index_map_data">Map data</string>
+	<string name="local_index_items">items</string>
+	<string name="local_indexes_cat_backup">Backup</string>
+	<string name="local_indexes_cat_tts">TTS data</string>
+	<string name="local_indexes_cat_voice">Voice data</string>
+	<string name="local_indexes_cat_gpx">GPX data</string>
+	<string name="local_indexes_cat_tile">Tile data</string>
+	<string name="local_indexes_cat_map">Map data</string>
+	<string name="local_indexes_cat_poi">POI data</string>
 	
+	<string name="ttsvoice">TTS Voice</string>
 	<string name="search_offline_clear_search">New Search</string>
 	<string name="map_text_size_descr">Select text size for names on the map</string>
 	<string name="map_text_size">Text size</string>

@@ -25,7 +25,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.text.format.DateFormat;
 
 public class SavingTrackHelper extends SQLiteOpenHelper {
-	public final static String TRACKS_PATH = "tracks"; //$NON-NLS-1$
 	
 	public final static String DATABASE_NAME = "tracks"; //$NON-NLS-1$
 	public final static int DATABASE_VERSION = 2;
@@ -116,7 +115,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		List<String> warnings = new ArrayList<String>();
 		File dir = OsmandSettings.getOsmandSettings(ctx).getExternalStorageDirectory();
 		if(db != null && dir.canWrite()){
-			dir = new File(dir, ResourceManager.APP_DIR + TRACKS_PATH);
+			dir = new File(dir, ResourceManager.GPX_PATH);
 			dir.mkdirs();
 			if (dir.exists()) {
 				

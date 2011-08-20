@@ -58,8 +58,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private static final String MORE_VALUE = "MORE_VALUE";
 	
 	private Preference saveCurrentTrack;
-	private Preference reloadIndexes;
-	private Preference downloadIndexes;
 
 	private EditTextPreference applicationDir;
 	private ListPreference tileSourcePreference;
@@ -278,10 +276,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		underlayPreference.setOnPreferenceChangeListener(this);
 		
 
-		reloadIndexes =(Preference) screen.findPreference(OsmandSettings.RELOAD_INDEXES);
-		reloadIndexes.setOnPreferenceClickListener(this);
-		downloadIndexes =(Preference) screen.findPreference(OsmandSettings.DOWNLOAD_INDEXES);
-		downloadIndexes.setOnPreferenceClickListener(this);
+		Preference localIndexes =(Preference) screen.findPreference(OsmandSettings.LOCAL_INDEXES);
+		localIndexes.setOnPreferenceClickListener(this);
 		saveCurrentTrack =(Preference) screen.findPreference(OsmandSettings.SAVE_CURRENT_TRACK);
 		saveCurrentTrack.setOnPreferenceClickListener(this);
 		routeServiceEnabled =(CheckBoxPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_ENABLED);
@@ -637,11 +633,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if(preference == downloadIndexes){
-			startActivity(new Intent(this, DownloadIndexActivity.class));
-			return true;
-		} else if(preference == reloadIndexes){
-			reloadIndexes();
+		if(preference.getKey().equals(OsmandSettings.LOCAL_INDEXES)){
+			startActivity(new Intent(this, LocalIndexesActivity.class));
 			return true;
 		} else if(preference == saveCurrentTrack){
 			SavingTrackHelper helper = new SavingTrackHelper(this);

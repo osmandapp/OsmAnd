@@ -26,5 +26,32 @@ public interface IProgress {
 	public boolean isIndeterminate();
 	
 	public boolean isInterrupted();
+	
+	public IProgress EMPTY_PROGRESS = new IProgress() {
+		
+		@Override
+		public void startWork(int work) {}
+		
+		@Override
+		public void startTask(String taskName, int work) {}
+		
+		@Override
+		public void setGeneralProgress(String genProgress) {}
+		
+		@Override
+		public void remaining(int remainingWork) {}
+		
+		@Override
+		public void progress(int deltaWork) {}
+		
+		@Override
+		public boolean isInterrupted() {return false;}
+		
+		@Override
+		public boolean isIndeterminate() {return false;}
+		
+		@Override
+		public void finishTask() {}
+	};  
 
 }

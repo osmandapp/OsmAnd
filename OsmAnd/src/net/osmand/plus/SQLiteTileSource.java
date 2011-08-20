@@ -150,6 +150,21 @@ public class SQLiteTileSource implements ITileSource {
 		return db;
 	}
 	
+	public boolean exists(int zoom) {
+		SQLiteDatabase db = getDatabase();
+		if(db == null){
+			return false;
+		}
+		Cursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE z = ?", new String[] {(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		try {
+			boolean e = cursor.moveToFirst();
+			cursor.close();
+			return e;
+		} catch (SQLiteDiskIOException e) {
+			return false;
+		}
+	}
+	
 	public boolean exists(int x, int y, int zoom) {
 		SQLiteDatabase db = getDatabase();
 		if(db == null){

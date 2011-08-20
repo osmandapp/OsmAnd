@@ -161,7 +161,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		internalClear();
 	}
 	
-	public static boolean isMyData(File voiceDir) throws CommandPlayerException {
+	public static boolean isMyData(File voiceDir) {
 		return new File(voiceDir, CONFIG_FILE).exists();
 	}
 

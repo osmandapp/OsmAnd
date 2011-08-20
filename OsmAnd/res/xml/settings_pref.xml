@@ -30,10 +30,7 @@
 	</PreferenceScreen>
 
 
-	<PreferenceScreen android:key="index_settings" android:title="@string/index_settings" android:summary="@string/index_settings_descr">
-		<Preference android:title="@string/reload_indexes" android:key="reload_indexes" android:summary="@string/reload_indexes_descr"></Preference>
-		<Preference android:title="@string/download_indexes" android:key="download_indexes" android:summary="@string/download_indexes_descr"></Preference>
-	</PreferenceScreen>
+	<Preference android:title="@string/index_settings" android:key="local_indexes" android:summary="@string/index_settings_descr"></Preference>
 
 
 	<PreferenceScreen android:key = "monitor_settings" android:title="@string/monitor_preferences" android:summary="@string/monitor_preferences_descr">
