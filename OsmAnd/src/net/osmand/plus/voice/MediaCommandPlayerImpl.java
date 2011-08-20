@@ -46,6 +46,11 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	}
 	
 	@Override
+	public String[] getLibraries() {
+		return new String[] { "alice.tuprolog.lib.BasicLibrary"};
+	}
+	
+	@Override
 	public void playCommands(CommandBuilder builder){
 		filesToPlay.addAll(builder.execute());
 		playQueue();

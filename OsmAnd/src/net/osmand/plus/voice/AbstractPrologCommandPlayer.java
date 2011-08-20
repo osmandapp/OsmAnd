@@ -55,9 +55,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 		long time = System.currentTimeMillis();
 		try {
 			this.ctx = ctx;
-			prologSystem = new Prolog(
-					new String[] { "alice.tuprolog.lib.BasicLibrary",
-							"alice.tuprolog.lib.ISOLibrary"}); //$NON-NLS-1$
+			prologSystem = new Prolog(getLibraries()); 
 		} catch (InvalidLibraryException e) {
 			log.error("Initializing error", e); //$NON-NLS-1$
 			throw new RuntimeException(e);
@@ -66,6 +64,11 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 			log.info("Initializing prolog system : " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
 		}
 		init(voiceProvider, configFile);
+	}
+	
+	public String[] getLibraries(){
+		return new String[] { "alice.tuprolog.lib.BasicLibrary",
+					"alice.tuprolog.lib.ISOLibrary"};
 	}
 
 	private void init(String voiceProvider, String configFile) throws CommandPlayerException {
