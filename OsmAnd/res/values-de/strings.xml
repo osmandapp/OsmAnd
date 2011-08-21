@@ -2,9 +2,9 @@
 <resources>
 	<string name="local_index_gpx_info">Subtracks : %1$d\nPunkte insgesamt : %2$d\nWegpunkte : %3$d</string>
 	<string name="local_index_installed">Installiert</string>
-	<string name="local_index_items_backuped">%1$d von %2$d Dateien wurden erfolgreich nach Backup verschoben.</string>
-	<string name="local_index_items_deleted">%1$d von %2$d Dateien wurden erfolgreich gelöscht.</string>
-	<string name="local_index_items_restored">%1$d von %2$d Dateien wurden erfolgreich aus dem Backup wiederhergestellt.</string>
+	<string name="local_index_items_backuped">%1$d von %2$d Dateien erfolgreich nach Backup verschoben.</string>
+	<string name="local_index_items_deleted">%1$d von %2$d Dateien erfolgreich gelöscht.</string>
+	<string name="local_index_items_restored">%1$d von %2$d Dateien erfolgreich aus dem Backup wiederhergestellt.</string>
 	<string name="local_index_no_items_to_do">Aktion %1$s: Keine Dateien vorhanden</string>
 	<string name="local_index_action_do">%1$s: %2$s Dateien. Fortfahren?</string>
 	<string name="local_index_description">Offline-Daten Manager:\nErmöglicht das Herunterladen neuer, Backup (\'Parken\'), oder Löschen existierender Daten.\nDerzeit im Gerät vorhandene Offline Dateien:</string>
@@ -20,11 +20,11 @@
 	<string name="local_index_map_data">Karten-Daten</string>
 	<string name="local_index_items">Dateien</string>
 	<string name="local_indexes_cat_backup">Backup</string>
-	<string name="local_indexes_cat_tts">Sprachansage-Daten (TTS)</string>
-	<string name="local_indexes_cat_voice">Sprachansage-Daten</string>
+	<string name="local_indexes_cat_tts">Sprachansagen (TTS)</string>
+	<string name="local_indexes_cat_voice">Sprachansagen (Aufnahmen)</string>
 	<string name="local_indexes_cat_gpx">GPX-Daten</string>
-	<string name="local_indexes_cat_tile">Kachel-Daten</string>
-	<string name="local_indexes_cat_map">Karten-Daten</string>
+	<string name="local_indexes_cat_tile">Karten-Daten (Kacheln)</string>
+	<string name="local_indexes_cat_map">Karten-Daten (Vektor)</string>
 	<string name="local_indexes_cat_poi">POI-Daten</string>
 	<string name="ttsvoice">TTS Sprachansage</string>
 	<string name="search_offline_clear_search">Neue Suche</string>
