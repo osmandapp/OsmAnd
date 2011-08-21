@@ -2,11 +2,11 @@
 
 	<!--
 		Based on All-Purpose Renderer (by Hardy Mueller), v017, but with the following differences:
-		- slightly less detail, some roads only rendered at higher zooms (ZM13) than described below for all-purpose renderer
+		- slightly less detail, some roads only rendered at higher zooms (see ZMxx comments) than described below for all-purpose renderer
 		- different motorway/trunk colors
-		- shadowRadius suppressed for white roads from z16, but this decreases visibility in some surroundings
+		- shadowRadius suppressed for white roads from z16, but this decreases visibility in some surroundings (reverted again later, due to bad visibility on some backgrounds)
 
-		All-Purpose Rennderer: Map rendering aligned to typical map use for all zoom levels/scales, hence always yields a complete and reliable map.
+		All-Purpose Renderer: Map rendering aligned to typical map use for all zoom levels/scales, hence always yields a complete and reliable map.
 		All features displayed at each zoom level (zX) are those for its typical use:
 		 - z7  = "Rough Country Level Overview": Shows motorways, trunks, primary roads and city names
 		 - z11 = "Country Road Atlas": Secondary roads (already from z9) and tertiary (already from z10). Show large scale landuse like forest and residential areas (already from z10). Also all town names (already from z9) and now all other locality names. Shows mountain peaks for orientation.
@@ -69,6 +69,7 @@
 			<filter tag="natural" value="coastline" order="0.5" />
 			<filter tag="natural" order="1" />
 		</filter>
+
 		<filter orderType="line">
 			<!-- Below see level -->
 			<filter tag="admin_level" value="0" order="0" />
@@ -112,7 +113,6 @@
 			<filter tag="highway" value="footway" order="37" />
 			<filter tag="highway" value="steps" order="36" />
 			<filter tag="highway" value="bridleway" order="35" />
-
 		</filter>
 	</order>
 
@@ -605,7 +605,7 @@
 	<polygon>
 		<!-- ZM 14 -->
 		<switch>
-			<case nightMode="true" color_2="#9F9F9F" color="#666666"/>
+			<case nightMode="true" color_2="#9f9f9f" color="#666666"/>
 			<case nightMode="false" color_2="#464646" color="#ffffff"/>
 			<filter minzoom="12" strokeWidth_2="1">
 				<filter tag="highway" value="road" />
@@ -615,7 +615,7 @@
 		</switch>
 
 		<!-- ZM 13 -->
-		<filter minzoom="14" strokeWidth_2="0.5" color_2="#B0B0B0" color="#ECECEC">
+		<filter minzoom="14" strokeWidth_2="0.5" color_2="#b0b0b0" color="#ECECEC">
 			<filter tag="highway" value="service" />
 			<filter tag="highway" value="pedestrian" />
 			<filter tag="highway" value="footway" />
@@ -647,7 +647,7 @@
 		<switch>
 			<case nightMode="true" color="#80B0B0B0"/>
 			<case nightMode="false" color="#80cccccc"/>
-				<filter minzoom="12" tag="aeroway">
+			<filter minzoom="12" tag="aeroway">
 				<filter value="aerodrome" />
 				<filter value="airport" />
 			</filter>
@@ -899,7 +899,7 @@
 		<switch>
 			<case tag="highway" value="secondary" />
 			<case tag="highway" value="secondary_link" />
-			<filter color="#fdd6a4">
+			<filter color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" shadowRadius="1" >
 				<filter minzoom="9" maxzoom="9" strokeWidth="3" />
 				<filter minzoom="10" maxzoom="10" strokeWidth="4" />
 				<filter minzoom="11" maxzoom="11" strokeWidth="5" />
@@ -915,8 +915,8 @@
 			<case tag="highway" value="trunk_link" color="#ffaf80" color_2="#ffaf80" />
 			<case tag="highway" value="primary" color="#eb989a" color_2="#eb989a" />
 			<case tag="highway" value="primary_link" color="#eb989a" color_2="#eb989a" />
-			<case tag="highway" value="secondary" color="#fdd6a4" color_2="#fdd6a4" />
-			<case tag="highway" value="secondary_link" color="#fdd6a4" color_2="#fdd6a4" />
+			<case tag="highway" value="secondary" color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" shadowRadius="1" />
+			<case tag="highway" value="secondary_link" color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" shadowRadius="1" />
 			<filter>
 				<switch>
 					<case layer="-1" pathEffect="4_4" />
@@ -947,19 +947,19 @@
 		<switch>
 			<case tag="highway" value="tertiary" />
 			<case tag="highway" value="tertiary_link" />
-			<filter color="#fefeb3" color_2="#fefeb3" shadowColor="#bababa" >
-				<filter minzoom="10" maxzoom="10" strokeWidth="3" shadowRadius="1" />
-				<filter minzoom="11" maxzoom="11" strokeWidth="4" shadowRadius="1" />
-				<filter minzoom="12" maxzoom="12" strokeWidth="5" shadowRadius="1" />
-				<filter minzoom="13" maxzoom="13" strokeWidth="6" shadowRadius="1" />
+			<filter color="#fefeb3" color_2="#fefeb3" shadowColor="#bababa"  shadowRadius="1" >
+				<filter minzoom="10" maxzoom="10" strokeWidth="3" />
+				<filter minzoom="11" maxzoom="11" strokeWidth="4" />
+				<filter minzoom="12" maxzoom="12" strokeWidth="5" />
+				<filter minzoom="13" maxzoom="13" strokeWidth="6" />
 				<switch>
 					<case layer="-1" pathEffect="4_4" />
 					<case /> <!-- all other cases -->
 					<filter>
-					<filter minzoom="14" maxzoom="14" strokeWidth="6" shadowRadius="1"/>
-					<filter minzoom="15" maxzoom="15" strokeWidth="8" shadowRadius="1"/>
+					<filter minzoom="14" maxzoom="14" strokeWidth="6" />
+					<filter minzoom="15" maxzoom="15" strokeWidth="8" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="10" />
-					<!-- radius 0 to avoid showing many black lines -->
+					<!-- radius 0 to avoid showing many black lines, but removed again due to bad visibility on some backgrounds -->
 					<filter minzoom="17" maxzoom="17" strokeWidth="13" />
 					<filter minzoom="18" strokeWidth="18" />
 					</filter>
@@ -985,19 +985,19 @@
 			<case tag="highway" value="residential" />
 			<filter>
 			<switch>
-				<case nightMode="true" color="#9F9F9F" color_2="#9F9F9F" shadowColor="#666666"/>
-				<case nightMode="false" color="#ffffff" color_2="#ffffff" shadowColor="#464646"/>
+				<case nightMode="true" color="#9F9F9F" color_2="#9F9F9F" shadowColor="#666666" shadowRadius="1" />
+				<case nightMode="false" color="#ffffff" color_2="#ffffff" shadowColor="#464646" shadowRadius="1" />
 				<filter>
-					<!-- ZM <filter minzoom="12" maxzoom="12" strokeWidth="3" shadowRadius="1" /> -->
-					<filter minzoom="13" maxzoom="13" strokeWidth="4" shadowRadius="1" />
+					<!-- ZM <filter minzoom="12" maxzoom="12" strokeWidth="3" /> -->
+					<filter minzoom="13" maxzoom="13" strokeWidth="4" />
 				<switch>
 					<case layer="-1" pathEffect="4_4" />
 					<case /> <!-- all other cases -->
 					<filter>
-						<filter minzoom="14" maxzoom="14" strokeWidth="6" shadowRadius="1"/>
-						<filter minzoom="15" maxzoom="15" strokeWidth="8" shadowRadius="1"/>
+						<filter minzoom="14" maxzoom="14" strokeWidth="6" />
+						<filter minzoom="15" maxzoom="15" strokeWidth="8" />
 						<filter minzoom="16" maxzoom="16" strokeWidth="10" />
-						<!-- radius 0 to avoid showing many black lines -->
+						<!-- radius 0 to avoid showing many black lines, but removed again due to bad visibility on some backgrounds -->
 						<filter minzoom="17" maxzoom="17" strokeWidth="13" />
 						<filter minzoom="18" strokeWidth="18" />
 					</filter>
@@ -1023,16 +1023,16 @@
 			<case tag="highway" value="service" color="#ececec" color_2="#ececec" shadowColor="#b0b0b0" />
 			<case tag="highway" value="living_street" color="#ececec" color_2="#ececec" shadowColor="#b0b0b0" />
 			<case tag="highway" value="pedestrian" color="#ececec" color_2="#ececec" shadowColor="#b0b0b0" />
-			<filter>
+			<filter shadowRadius="1">
 			<switch>
 				<case layer="-1" pathEffect="4_4" />
 				<case /> <!-- all other cases -->
 				<filter>
-					<!-- ZM <filter minzoom="13" maxzoom="13" strokeWidth="2" shadowRadius="1"/>
-					<filter minzoom="14" maxzoom="14" strokeWidth="3" shadowRadius="1"/>-->
-					<filter minzoom="15" maxzoom="15" strokeWidth="4" shadowRadius="1"/>
+					<!-- ZM <filter minzoom="13" maxzoom="13" strokeWidth="2" />
+					<filter minzoom="14" maxzoom="14" strokeWidth="3" />-->
+					<filter minzoom="15" maxzoom="15" strokeWidth="4" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="5" />
-					<filter minzoom="17" maxzoom="17" strokeWidth="8"/>
+					<filter minzoom="17" maxzoom="17" strokeWidth="8" />
 					<filter minzoom="18" strokeWidth="12"/>
 				</filter>
 			</switch>
@@ -1128,7 +1128,6 @@
 		<filter minzoom="16" color="#000000" strokeWidth="1" tag="barrier" value="kent_carriage_gap" />
 		<filter minzoom="16" color="#aed1a0" strokeWidth="3" tag="natural" value="hedge" />
 		<filter minzoom="16" color="#000000" strokeWidth="1" tag="fenced" value="yes" />
-
 
 		<!-- waterway -->
 		<switch>
@@ -1243,7 +1242,6 @@
 			<filter layer="1" minzoom="15" color="#000000" strokeWidth="8" color_2="#bbbbcc" strokeWidth_2="6" cap_2="SQUARE" />
 		</filter>
 
-
 		<filter minzoom="12" color="#bababa" strokeWidth="2" tag="aerialway" value="cable_car" />
 		<filter minzoom="12" color="#bababa" strokeWidth="2" tag="aerialway" value="gondola" />
 		<filter minzoom="12" color="#bababa" strokeWidth="2" tag="aerialway" value="chair_lift" />
@@ -1264,7 +1262,6 @@
 				<filter minzoom="16" color="#aaaaaa" strokeWidth="4" />
 			</filter>
 		</switch>
-
 
 		<filter minzoom="12" maxzoom="13" color="#f2efe9" strokeWidth="1" tag="man_made" value="pier" />
 		<filter minzoom="14" maxzoom="15" color="#f2efe9" strokeWidth="3" tag="man_made" value="pier" />
