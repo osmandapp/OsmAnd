@@ -11,9 +11,10 @@ public class FavouritePoint {
 	public FavouritePoint(){
 	}
 
-	public FavouritePoint(double latitude, double longitude, String name) {
+	public FavouritePoint(double latitude, double longitude, String name, String category) {
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.category = category;
 		this.name = name;
 	}
 

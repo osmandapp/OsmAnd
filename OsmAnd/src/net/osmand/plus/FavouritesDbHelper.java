@@ -40,17 +40,23 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(FAVOURITE_TABLE_CREATE);
+		createCategories(db);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		if(oldVersion == 1){
-			db.execSQL("ALTER TABLE " + FAVOURITE_TABLE_NAME +  " ADD COLUMN (" + FAVOURITE_COL_CATEGORY + " text)");
+			db.execSQL("ALTER TABLE " + FAVOURITE_TABLE_NAME +  " ADD " + FAVOURITE_COL_CATEGORY + " text");
+			createCategories(db);
 			db.execSQL("UPDATE " + FAVOURITE_TABLE_NAME + " SET category = ?", new Object[] { context.getString(R.string.favorite_default_category)}); //$NON-NLS-1$ //$NON-NLS-2$
-			addCategoryQuery(context.getString(R.string.favorite_home_category), db);
-			addCategoryQuery(context.getString(R.string.favorite_friends_category), db);
-			addCategoryQuery(context.getString(R.string.favorite_places_category), db);
 		}
+	}
+	
+	private void createCategories(SQLiteDatabase db){
+		addCategoryQuery(context.getString(R.string.favorite_home_category), db);
+		addCategoryQuery(context.getString(R.string.favorite_friends_category), db);
+		addCategoryQuery(context.getString(R.string.favorite_places_category), db);
+		addCategoryQuery(context.getString(R.string.favorite_default_category), db);
 	}
 
 	public List<FavouritePoint> getFavoritePointsFromGPXFile() {
@@ -77,6 +83,11 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 		return cachedFavoritePoints;
 	}
 	
+	public Map<String, List<FavouritePoint>> getFavoriteGroups() {
+		checkFavoritePoints();
+		return favoriteGroups;
+	}
+	
 
 	public boolean editFavouriteName(FavouritePoint p, String newName, String category) {
 		checkFavoritePoints();
@@ -88,6 +99,10 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 			p.setCategory(category);
 			if(!oldCategory.equals(category)){
 				favoriteGroups.get(oldCategory).remove(p);
+				if(!favoriteGroups.containsKey(category)){
+					addCategoryQuery(category, db);
+					favoriteGroups.put(category, new ArrayList<FavouritePoint>());
+				}
 				favoriteGroups.get(category).add(p);
 			}
 			return true;
@@ -133,9 +148,21 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 		}
 		return false;
 	}
+	
+	public boolean deleteGroup(String group){
+		checkFavoritePoints();
+		FavouritePoint fp = new FavouritePoint(0, 0, "", group);
+		if(deleteFavourite(fp)){
+			favoriteGroups.remove(group);
+		}
+		return false;
+	}
 
 	public boolean addFavourite(FavouritePoint p) {
 		checkFavoritePoints();
+		if(p.getName().equals("") && favoriteGroups.containsKey(p.getCategory())){
+			return true;
+		}
 		SQLiteDatabase db = getWritableDatabase();
 		if (db != null) {
 			// delete with same name before
@@ -144,10 +171,15 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 					" (" +FAVOURITE_COL_NAME +", " +FAVOURITE_COL_CATEGORY +", " +FAVOURITE_COL_LAT +", " +FAVOURITE_COL_LON + ")" +
 					" VALUES (?, ?, ?, ?)", new Object[] { p.getName(), p.getCategory(), p.getLatitude(), p.getLongitude() }); //$NON-NLS-1$ //$NON-NLS-2$
 			if(!favoriteGroups.containsKey(p.getCategory())){
+				if (!p.getName().equals("")) {
+					addFavourite(new FavouritePoint(0, 0, "", p.getCategory()));
+				}
 				favoriteGroups.put(p.getCategory(), new ArrayList<FavouritePoint>());
 			}
-			favoriteGroups.get(p.getCategory()).add(p);
-			cachedFavoritePoints.add(p);
+			if(!p.getName().equals("")){
+				favoriteGroups.get(p.getCategory()).add(p);
+				cachedFavoritePoints.add(p);
+			}
 			p.setStored(true);
 			return true;
 		}
@@ -172,7 +204,7 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 	private void checkFavoritePoints(){
 		if(favoriteGroups == null){
 			favoriteGroups = new LinkedHashMap<String, List<FavouritePoint>>();
-			SQLiteDatabase db = getReadableDatabase();
+			SQLiteDatabase db = getWritableDatabase();
 			if (db != null) {
 				Cursor query = db.rawQuery("SELECT " + FAVOURITE_COL_NAME + ", " + FAVOURITE_COL_CATEGORY + ", " + FAVOURITE_COL_LAT + "," + FAVOURITE_COL_LON + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ 
 						FAVOURITE_TABLE_NAME, null);

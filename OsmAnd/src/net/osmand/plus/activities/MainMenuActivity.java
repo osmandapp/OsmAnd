@@ -327,7 +327,7 @@ public class MainMenuActivity extends Activity {
 			builder.setNeutralButton(R.string.vector_map_not_needed, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					getPreferences(MODE_WORLD_WRITEABLE).edit().putBoolean(VECTOR_INDEXES_CHECK, false);
+					getPreferences(MODE_WORLD_WRITEABLE).edit().putBoolean(VECTOR_INDEXES_CHECK, false).commit();
 				}
 			});
 			builder.setNegativeButton(R.string.first_time_continue, null);

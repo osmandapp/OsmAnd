@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="favourites_delete_multiple_succesful">Favorite points deleted successfully.</string>
+	<string name="favorite_delete_multiple">You are going to delete %1$d favorites and %2$d groups. Are you sure?</string>
 	<string name="favorite_home_category">Home</string>
 	<string name="favorite_friends_category">Friends</string>
 	<string name="favorite_places_category">Places</string>

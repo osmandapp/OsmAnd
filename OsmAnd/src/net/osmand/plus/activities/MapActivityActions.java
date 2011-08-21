@@ -32,6 +32,9 @@ import android.text.ClipboardManager;
 import android.text.Html;
 import android.util.FloatMath;
 import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -43,21 +46,29 @@ public class MapActivityActions {
 		this.mapActivity = mapActivity;
 	}
 
+	@SuppressWarnings("unchecked")
 	protected void addFavouritePoint(final double latitude, final double longitude){
     	final Resources resources = mapActivity.getResources();
-    	final FavouritePoint p = new FavouritePoint(latitude, longitude, resources.getString(R.string.add_favorite_dialog_default_favourite_name));
-    	
+    	final FavouritePoint point = new FavouritePoint(latitude, longitude, resources.getString(R.string.add_favorite_dialog_default_favourite_name),
+    			resources.getString(R.string.favorite_default_category));
     	Builder builder = new AlertDialog.Builder(mapActivity);
-		builder.setTitle(R.string.add_favorite_dialog_top_text);
-		final EditText editText = new EditText(mapActivity);
-		builder.setView(editText);
+		builder.setTitle(R.string.favourites_edit_dialog_title);
+		final View v = mapActivity.getLayoutInflater().inflate(R.layout.favourite_edit_dialog, null, false);
+		final FavouritesDbHelper helper = ((OsmandApplication)mapActivity.getApplication()).getFavorites();
+		builder.setView(v);
+		final EditText editText =  (EditText) v.findViewById(R.id.Name);
+		editText.setText(point.getName());
+		final AutoCompleteTextView cat =  (AutoCompleteTextView) v.findViewById(R.id.Category);
+		cat.setText(point.getCategory());
+		cat.setAdapter(new ArrayAdapter(mapActivity, R.layout.list_textview, helper.getFavoriteGroups().keySet().toArray()));
+		
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setNeutralButton(R.string.update_existing, new DialogInterface.OnClickListener(){
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				Builder b = new AlertDialog.Builder(mapActivity);
-				final FavouritesDbHelper helper = ((OsmandApplication)mapActivity.getApplication()).getFavorites();
+				
 				final Collection<FavouritePoint> points = helper.getFavouritePoints();
 				final String[] names = new String[points.size()];
 				final FavouritePoint[] favs = new FavouritePoint[points.size()];
@@ -95,10 +106,11 @@ public class MapActivityActions {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				final FavouritesDbHelper helper = ((OsmandApplication)mapActivity.getApplication()).getFavorites();
-				p.setName(editText.getText().toString());
-				boolean added = helper.addFavourite(p);
+				point.setName(editText.getText().toString());
+				point.setCategory(cat.getText().toString());
+				boolean added = helper.addFavourite(point);
 				if (added) {
-					Toast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_favorite_dialog_favourite_added_template), p.getName()), Toast.LENGTH_SHORT)
+					Toast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_favorite_dialog_favourite_added_template), point.getName()), Toast.LENGTH_SHORT)
 							.show();
 				}
 				mapActivity.getMapView().refreshMap();
