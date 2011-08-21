@@ -2,12 +2,14 @@ package net.osmand.plus.activities;
 
 import java.io.File;
 import java.text.MessageFormat;
+import java.util.Random;
 
 import net.osmand.Version;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.render.MapRenderRepositories;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -38,6 +40,7 @@ import android.widget.TextView;
 public class MainMenuActivity extends Activity {
 
 	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
+	private static final String VECTOR_INDEXES_CHECK = "VECTOR_INDEXES_CHECK"; //$NON-NLS-1$
 	private static final String TIPS_SHOW = "TIPS_SHOW"; //$NON-NLS-1$
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = ResourceManager.APP_DIR + "exception.log"; //$NON-NLS-1$
@@ -237,33 +240,7 @@ public class MainMenuActivity extends Activity {
 			pref.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
 			pref.edit().putString(VERSION_INSTALLED, Version.APP_VERSION).commit();
 			
-			boolean netOsmandWasInstalled = false;
-			try {
-				ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo("net.osmand", PackageManager.GET_META_DATA);
-				netOsmandWasInstalled = applicationInfo != null;
-			} catch (NameNotFoundException e) {
-				netOsmandWasInstalled = false;
-			}
-			
-			if(netOsmandWasInstalled){
-				Builder builder = new AlertDialog.Builder(this);
-				builder.setMessage(R.string.osmand_net_previously_installed);
-				builder.setPositiveButton(R.string.default_buttons_ok, null);
-				builder.show();
-			} else {
-				Builder builder = new AlertDialog.Builder(this);
-				builder.setMessage(R.string.first_time_msg);
-				builder.setPositiveButton(R.string.first_time_download, new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						startActivity(new Intent(MainMenuActivity.this, DownloadIndexActivity.class));
-					}
-
-				});
-				builder.setNegativeButton(R.string.first_time_continue, null);
-				builder.show();
-			}
+			applicationInstalledFirstTime();
 		} else {
 			int i = pref.getInt(TIPS_SHOW, 0);
 			if (i < 7){
@@ -280,19 +257,82 @@ public class MainMenuActivity extends Activity {
 				Dialog dlg = tipsActivity.getDialogToShowTips(!appVersionChanged, false);
 				dlg.show();
 			} else {
-				startProgressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-					@Override
-					public void onDismiss(DialogInterface dialog) {
-						checkVectorIndexesDownloaded();
-					}
-				});
+				if (startProgressDialog.isShowing()) {
+					startProgressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+						@Override
+						public void onDismiss(DialogInterface dialog) {
+							checkVectorIndexesDownloaded();
+						}
+					});
+				} else {
+					checkVectorIndexesDownloaded();
+				}
 			}
 		}
 		checkPreviousRunsForExceptions(firstTime);
 	}
+
+	private void applicationInstalledFirstTime() {
+		boolean netOsmandWasInstalled = false;
+		try {
+			ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo("net.osmand", PackageManager.GET_META_DATA);
+			netOsmandWasInstalled = applicationInfo != null;
+		} catch (NameNotFoundException e) {
+			netOsmandWasInstalled = false;
+		}
+		
+		if(netOsmandWasInstalled){
+			Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(R.string.osmand_net_previously_installed);
+			builder.setPositiveButton(R.string.default_buttons_ok, null);
+			builder.show();
+		} else {
+			Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(R.string.first_time_msg);
+			builder.setPositiveButton(R.string.first_time_download, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					startActivity(new Intent(MainMenuActivity.this, DownloadIndexActivity.class));
+				}
+
+			});
+			builder.setNegativeButton(R.string.first_time_continue, null);
+			builder.show();
+		}
+	}
 	
 	protected void checkVectorIndexesDownloaded() {
-		// TODO show dialog with problems?
+		MapRenderRepositories maps = ((OsmandApplication) getApplication()).getResourceManager().getRenderer();
+		SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);
+		boolean check = pref.getBoolean(VECTOR_INDEXES_CHECK, true);
+		// do not show each time 
+		if (check && new Random().nextInt() % 5 == 1) {
+			Builder builder = new AlertDialog.Builder(this);
+			if(maps.isEmpty()){
+				builder.setMessage(R.string.vector_data_missing);
+			} else if(!maps.basemapExists()){
+				builder.setMessage(R.string.basemap_missing);
+			} else {
+				return;
+			}
+			builder.setPositiveButton(R.string.download_files, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					startActivity(new Intent(MainMenuActivity.this, DownloadIndexActivity.class));
+				}
+
+			});
+			builder.setNeutralButton(R.string.vector_map_not_needed, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					getPreferences(MODE_WORLD_WRITEABLE).edit().putBoolean(VECTOR_INDEXES_CHECK, false);
+				}
+			});
+			builder.setNegativeButton(R.string.first_time_continue, null);
+			builder.show();
+		}
 		
 	}
 	
