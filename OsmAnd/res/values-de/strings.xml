@@ -1,5 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="local_index_gpx_info">Subtracks : %1$d\nPunkte insgesamt : %2$d\nWegpunkte : %3$d</string>
+	<string name="local_index_installed">Installiert</string>
+	<string name="local_index_items_backuped">%1$d von %2$d Dateien wurden erfolgreich nach Backup verschoben.</string>
+	<string name="local_index_items_deleted">%1$d von %2$d Dateien wurden erfolgreich gelöscht.</string>
+	<string name="local_index_items_restored">%1$d von %2$d Dateien wurden erfolgreich aus dem Backup wiederhergestellt.</string>
+	<string name="local_index_no_items_to_do">Aktion %1$s: Keine Dateien vorhanden</string>
+	<string name="local_index_action_do">%1$s: %2$s Dateien. Fortfahren?</string>
+	<string name="local_index_description">Offline-Daten Manager:\nErmöglicht das Herunterladen neuer, Backup (\'Parken\'), oder Löschen existierender Daten.\nDerzeit im Gerät vorhandene Offline Dateien:</string>
+	<string name="local_index_mi_restore">Wiederherstellen</string>
+	<string name="local_index_mi_backup">Backup</string>
+	<string name="local_index_mi_delete">Löschen</string>
+	<string name="local_index_mi_reload">Neu laden</string>	
+	<string name="local_index_download">Herunterladen</string>
+	<string name="local_index_tile_data">Kachel-Daten: %1$s \nMinimale Vergrößerung : %2$d\nMaximale Vergößerung : %3$d\nHerunterladbar : %4$s \nHeruntegeladene Vergößerungen : %5$s</string>
+	<string name="local_index_poi_data">POI-Daten</string>
+	<string name="local_index_address_data">Address-Daten</string>
+	<string name="local_index_transport_data">ÖPNV-Daten</string>
+	<string name="local_index_map_data">Karten-Daten</string>
+	<string name="local_index_items">Dateien</string>
+	<string name="local_indexes_cat_backup">Backup</string>
+	<string name="local_indexes_cat_tts">Sprachansage-Daten (TTS)</string>
+	<string name="local_indexes_cat_voice">Sprachansage-Daten</string>
+	<string name="local_indexes_cat_gpx">GPX-Daten</string>
+	<string name="local_indexes_cat_tile">Kachel-Daten</string>
+	<string name="local_indexes_cat_map">Karten-Daten</string>
+	<string name="local_indexes_cat_poi">POI-Daten</string>
+	<string name="ttsvoice">TTS Sprachansage</string>
+	<string name="search_offline_clear_search">Neue Suche</string>
+	<string name="map_text_size_descr">Wähle Textgröße für Bezeichnungen in den Landkarten</string>
+	<string name="map_text_size">Textgröße</string>
+	<string name="tip_recent_changes">Neuerungen</string>
+	<string name="tip_recent_changes_0_6_6_t">Neuerngen in Version 0.6.6 : 
+\n\t- Text-To-Speech (TTS) Sprachansagensupport
+\n\t- Anzeige von mehr Details in den Landkarten
+\n\t- World_Basemap für die ganze Welt in der Apllikation enthalten
+\n\t- Verbesserungen im Offline Routing (immer noch experimentell)
+\n\t- GPX Routing Optionen
+\n\t- Update der Bedienoberläche und viele Bug-Fixes
+	</string>
+
+	<string name="voice_not_specified">Keine</string>
 	<string name="trace_rendering">Rendering Debug Info</string>
 	<string name="trace_rendering_descr">Flag zur Prüfung der Rendering Performanz (Geschwindigkeit der Offline-Bildaufbaus)</string>
 	<string name="installing_new_resources">Entpacke neue Daten...</string>
