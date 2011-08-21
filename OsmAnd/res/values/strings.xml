@@ -3,7 +3,11 @@
     <string name="vector_map_not_needed">Not needed</string>
 	<string name="basemap_missing">Base world map is missing. Please consider to download it in order to have proper environment.</string>
 	<string name="vector_data_missing">On board data is missing on SD card. Please consider to download it in order to use maps offline.</string>
-	<string name="local_index_gpx_info">Subtracks : %1$d\nTotal Points : %2$d\nWay points : %3$d</string>
+	<string name="local_index_gpx_info_show">\n\nLong click to show on map</string>
+	<string name="local_index_gpx_info_speed">\nAverage speed : %1$s \nMaximum speed : %2$s</string>
+	<string name="local_index_gpx_info_elevation">\nAverage altitude : %1$.0f meters\nElevation up : %2$.0f meters\nElevation down : %3$.0f meters</string>
+	<string name="local_index_gpx_info">Subtracks : %1$d\nTotal Points : %2$d\nWay points : %3$d\nTotal Distance : %4$s
+									   \nStart Time : %5$tD %5$tR\nEnd Time : %6$tD %6$tR</string>
 	<string name="local_index_installed">Installed</string>
 	<string name="local_index_items_backuped">%1$d items of %2$d succesfully backed up.</string>
 	<string name="local_index_items_deleted">%1$d items of %2$d succesfully deleted.</string>

@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 import net.osmand.Algoritms;
+import net.osmand.FavouritePoint;
 import net.osmand.IProgress;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -24,15 +25,18 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.AsyncTask.Status;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
@@ -40,6 +44,8 @@ import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 
 public class LocalIndexesActivity extends ExpandableListActivity {
 
@@ -72,6 +78,24 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 			public void onClick(View v) {
 				startActivity(new Intent(LocalIndexesActivity.this, DownloadIndexActivity.class));
 			}
+		});
+		
+		getExpandableListView().setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+			@Override
+			public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+				long packedPos = ((ExpandableListContextMenuInfo)menuInfo).packedPosition;
+				
+				final LocalIndexInfo point = (LocalIndexInfo) listAdapter.getChild(ExpandableListView.getPackedPositionGroup(packedPos),
+						ExpandableListView.getPackedPositionChild(packedPos));
+				if(point.getGpxFile() != null){
+					Location loc = point.getGpxFile().findFistLocation();
+					if(loc != null){
+						OsmandSettings.getOsmandSettings(LocalIndexesActivity.this).setMapLocationToShow(loc.getLatitude(),loc.getLongitude());						
+					}
+					((OsmandApplication) getApplication()).setGpxFileToDisplay(point.getGpxFile());
+					MapActivity.launchMapActivityMoveToTop(LocalIndexesActivity.this);
+				}
+			}	
 		});
 		
 		setListAdapter(listAdapter);
@@ -262,6 +286,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		listAdapter.notifyDataSetInvalidated();
 		return true;
 	}
+	
 	
 	@Override
 	protected void onPause() {

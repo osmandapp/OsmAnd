@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -14,6 +13,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import net.osmand.GPXUtilities;
+import net.osmand.OsmAndFormatter;
 import net.osmand.GPXUtilities.GPXFileResult;
 import net.osmand.binary.BinaryIndexPart;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -34,6 +34,7 @@ import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.location.Location;
 import android.os.Build;
 
 public class LocalIndexHelper {
@@ -54,7 +55,6 @@ public class LocalIndexHelper {
 		return app.getString(R.string.local_index_installed) + " : " + dateformat.format(new Object[]{new Date(f.lastModified())});
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void updateDescription(LocalIndexInfo info){
 		File f = new File(info.getPathToData());
 		if(info.getType() == LocalIndexType.MAP_DATA){
@@ -63,18 +63,7 @@ public class LocalIndexHelper {
 		} else if(info.getType() == LocalIndexType.POI_DATA){
 			info.setDescription(getInstalledDate(f));
 		} else if(info.getType() == LocalIndexType.GPX_DATA){
-			GPXFileResult result = GPXUtilities.loadGPXFile(app, f);
-			if(result.error != null){
-				info.setCorrupted(true);
-				info.setDescription(result.error);
-			} else {
-				int points = 0;
-				for(int i =0; i< result.locations.size() ; i++){
-					points += result.locations.get(i).size();
-				}
-				info.setDescription(app.getString(R.string.local_index_gpx_info, result.locations.size(), points,
-						result.wayPoints.size()));
-			}
+			updateGpxInfo(info, f);
 		} else if(info.getType() == LocalIndexType.VOICE_DATA){
 			info.setDescription(getInstalledDate(f));
 		} else if(info.getType() == LocalIndexType.TTS_VOICE_DATA){
@@ -107,6 +96,87 @@ public class LocalIndexHelper {
 						template.couldBeDownloadedFromInternet(), "");
 				info.setDescription(descr);
 			}
+		}
+	}
+
+	private void updateGpxInfo(LocalIndexInfo info, File f) {
+		if(info.getGpxFile() == null){
+			info.setGpxFile(GPXUtilities.loadGPXFile(app, f));
+		}
+		GPXFileResult result = info.getGpxFile();
+		if(result.error != null){
+			info.setCorrupted(true);
+			info.setDescription(result.error);
+		} else {
+			int totalDistance = 0;
+			long startTime = Long.MAX_VALUE;
+			long endTime = Long.MIN_VALUE;
+			
+			double diffElevationUp = 0;
+			double diffElevationDown = 0;
+			double totalElevation = 0;
+			
+			float maxSpeed = 0;
+			int speedCount = 0;
+			double totalSpeedSum = 0;
+			
+			int points = 0;
+			for(int i = 0; i< result.locations.size() ; i++){
+				List<Location> subtrack = result.locations.get(i);
+				points += subtrack.size();
+				int distance = 0;
+				for (int j = 0; j < subtrack.size(); j++) {
+					long time = subtrack.get(j).getTime();
+					if(time != 0){
+						startTime = Math.min(startTime, time);
+						endTime = Math.max(startTime, time);
+					}
+					float speed = subtrack.get(j).getSpeed();
+					if(speed > 0){
+						totalSpeedSum += speed;
+						maxSpeed = Math.max(speed, maxSpeed);
+						speedCount ++;
+					}
+					
+					totalElevation += subtrack.get(j).getAltitude();
+					if (j > 0) {
+						double diff = subtrack.get(j).getAltitude() - subtrack.get(j - 1).getAltitude();
+						if(diff > 0){
+							diffElevationUp += diff;
+						} else {
+							diffElevationDown -= diff;
+						}
+						distance += MapUtils.getDistance(subtrack.get(j - 1).getLatitude(), subtrack.get(j - 1).getLongitude(), subtrack
+								.get(j).getLatitude(), subtrack.get(j).getLongitude());
+					}
+				}
+				totalDistance += distance;
+			}
+			if(startTime == Long.MAX_VALUE){
+				startTime = f.lastModified();
+			}
+			if(endTime == Long.MIN_VALUE){
+				endTime = f.lastModified();
+			}
+			
+			info.setDescription(app.getString(R.string.local_index_gpx_info, result.locations.size(), points,
+					result.wayPoints.size(), OsmAndFormatter.getFormattedDistance(totalDistance, app),
+					startTime, endTime));
+			if(totalElevation != 0 || diffElevationUp != 0 || diffElevationDown != 0){
+				info.setDescription(info.getDescription() +  
+						app.getString(R.string.local_index_gpx_info_elevation,
+						totalElevation / points, diffElevationUp, diffElevationDown));
+			}
+			if(speedCount > 0){
+				info.setDescription(info.getDescription() +  
+						app.getString(R.string.local_index_gpx_info_speed,
+						OsmAndFormatter.getFormattedSpeed((float) (totalSpeedSum / speedCount), app),
+						OsmAndFormatter.getFormattedSpeed(maxSpeed, app)));
+				
+			}
+			
+			info.setDescription(info.getDescription() +  
+						app.getString(R.string.local_index_gpx_info_show));
 		}
 	}
 	
@@ -165,8 +235,6 @@ public class LocalIndexHelper {
 					
 					if(!TileSourceManager.isTileSourceMetaInfoExist(tileFile)){
 						info.setCorrupted(true);
-					} else {
-						// updateTileSourceInfo(tileFile, info);
 					}
 					result.add(info);
 					loadTask.loadFile(info);
@@ -321,6 +389,8 @@ public class LocalIndexHelper {
 		// UI state expanded
 		private boolean expanded;
 		
+		private GPXFileResult gpxFile;
+		
 		public LocalIndexInfo(LocalIndexType type, File f, boolean backuped){
 			pathToData = f.getAbsolutePath();
 			fileName = f.getName();
@@ -360,6 +430,14 @@ public class LocalIndexHelper {
 		
 		public void setSize(int size) {
 			this.kbSize = size;
+		}
+		
+		public void setGpxFile(GPXFileResult gpxFile) {
+			this.gpxFile = gpxFile;
+		}
+		
+		public GPXFileResult getGpxFile() {
+			return gpxFile;
 		}
 		
 		public boolean isExpanded() {

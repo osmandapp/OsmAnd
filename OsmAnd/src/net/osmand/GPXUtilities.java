@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -146,10 +147,23 @@ public class GPXUtilities {
 		// such as wpt. However they provide additional information into gpx.
 		public boolean cloudMadeFile;
 		public String error;
+		
+		public Location findFistLocation(){
+			for(List<Location> l : locations){
+				for(Location ls : l){
+					if(ls != null){
+						return ls;
+					}
+				}
+			}
+			return null;
+		}
 	}
 	
 	public static GPXFileResult loadGPXFile(Context ctx, File f){
 		GPXFileResult res = new GPXFileResult();
+		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT);
+		format.setTimeZone(TimeZone.getTimeZone("UTC"));
 		try {
 			boolean cloudMade = false;
 			XmlPullParser parser = Xml.newPullParser();
@@ -175,13 +189,35 @@ public class GPXUtilities {
 							current.setLongitude(Double.parseDouble(parser.getAttributeValue("", "lon"))); //$NON-NLS-1$ //$NON-NLS-2$
 						} catch (NumberFormatException e) {
 							current = null;
-
 						}
 					} else if (current != null && parser.getName().equals("name")) { //$NON-NLS-1$
 						if (parser.next() == XmlPullParser.TEXT) {
 							currentName = parser.getText();
 						}
+					} else if (current != null && parser.getName().equals("time")) { //$NON-NLS-1$
+						if (parser.next() == XmlPullParser.TEXT) {
+							try {
+								current.setTime(format.parse(parser.getText()).getTime());
+							} catch (ParseException e) {
+							}
+						}
+					} else if (current != null && parser.getName().equals("ele")) { //$NON-NLS-1$
+						if (parser.next() == XmlPullParser.TEXT) {
+							try {
+								current.setAltitude(Double.parseDouble(parser.getText()));
+							} catch (NumberFormatException e) {
+							}
+						}
+					} else if (current != null && parser.getName().equals("speed")) { //$NON-NLS-1$
+						if (parser.next() == XmlPullParser.TEXT) {
+							try {
+								current.setSpeed(Float.parseFloat(parser.getText()));
+							} catch (NumberFormatException e) {
+							}
+						}
 					}
+					
+					
 				} else if (tok == XmlPullParser.END_TAG) {
 					if (parser.getName().equals("wpt") || //$NON-NLS-1$
 							parser.getName().equals("trkpt") || (!cloudMade && parser.getName().equals("rtept"))) { //$NON-NLS-1$ //$NON-NLS-2$ 
