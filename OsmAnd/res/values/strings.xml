@@ -7,7 +7,7 @@
 	<string name="local_index_items_restored">%1$d items of %2$d succesfully restored.</string>
 	<string name="local_index_no_items_to_do">No items to %1$s</string>
 	<string name="local_index_action_do">You are about to %1$s %2$s items. Are you sure?</string>
-	<string name="local_index_description">Offline Data Manager:\nYou can download new, backup (\'park\'), or delete existing data.\nOffline data available on the phone:</string>
+	<string name="local_index_description">Offline Data Manager:\nYou can download new, backup (\'park\'), or delete existing data.\nCurrent offline data on the phone:</string>
 	<string name="local_index_mi_restore">Restore</string>
 	<string name="local_index_mi_backup">Backup</string>
 	<string name="local_index_mi_delete">Delete</string>
