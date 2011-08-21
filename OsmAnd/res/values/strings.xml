@@ -2,12 +2,12 @@
 <resources>
 	<string name="local_index_gpx_info">Subtracks : %1$d\nTotal Points : %2$d\nWay points : %3$d</string>
 	<string name="local_index_installed">Installed</string>
-	<string name="local_index_items_backuped">%1$d items of %2$d were succesfully backuped.</string>
-	<string name="local_index_items_deleted">%1$d items of %2$d were succesfully deleted.</string>
-	<string name="local_index_items_restored">%1$d items of %2$d were succesfully restored.</string>
-	<string name="local_index_no_items_to_do">No items to %1$s</string>	
-    <string name="local_index_action_do">You are about to %1$s %2$s items. Are you sure?</string>
-	<string name="local_index_description">Offline data available on the phone.\n You can download new or backup and delete existing data.</string>
+	<string name="local_index_items_backuped">%1$d items of %2$d succesfully backed up.</string>
+	<string name="local_index_items_deleted">%1$d items of %2$d succesfully deleted.</string>
+	<string name="local_index_items_restored">%1$d items of %2$d succesfully restored.</string>
+	<string name="local_index_no_items_to_do">No items to %1$s</string>
+	<string name="local_index_action_do">You are about to %1$s %2$s items. Are you sure?</string>
+	<string name="local_index_description">Offline Data Manager:\nYou can download new, backup (\'park\'), or delete existing data.\nOffline data available on the phone:</string>
 	<string name="local_index_mi_restore">Restore</string>
 	<string name="local_index_mi_backup">Backup</string>
 	<string name="local_index_mi_delete">Delete</string>
@@ -20,13 +20,13 @@
 	<string name="local_index_map_data">Map data</string>
 	<string name="local_index_items">items</string>
 	<string name="local_indexes_cat_backup">Backup</string>
-	<string name="local_indexes_cat_tts">TTS data</string>
-	<string name="local_indexes_cat_voice">Voice data</string>
+	<string name="local_indexes_cat_tts">Voice data (TTS)</string>
+	<string name="local_indexes_cat_voice">Voice data (media)</string>
 	<string name="local_indexes_cat_gpx">GPX data</string>
-	<string name="local_indexes_cat_tile">Tile data</string>
-	<string name="local_indexes_cat_map">Map data</string>
+	<string name="local_indexes_cat_tile">Map data (tiles)</string>
+	<string name="local_indexes_cat_map">Map data (vector)</string>
 	<string name="local_indexes_cat_poi">POI data</string>
-	
+
 	<string name="ttsvoice">TTS Voice</string>
 	<string name="search_offline_clear_search">New Search</string>
 	<string name="map_text_size_descr">Select text size for names on the map</string>
