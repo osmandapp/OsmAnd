@@ -59,23 +59,30 @@ public class MapActivityActions {
 				Builder b = new AlertDialog.Builder(mapActivity);
 				final FavouritesDbHelper helper = ((OsmandApplication)mapActivity.getApplication()).getFavorites();
 				final Collection<FavouritePoint> points = helper.getFavouritePoints();
-				final String[] ar = new String[points.size()];
+				final String[] names = new String[points.size()];
+				final FavouritePoint[] favs = new FavouritePoint[points.size()];
 				Iterator<FavouritePoint> it = points.iterator();
 				int i=0;
 				while(it.hasNext()){
-					ar[i++] = it.next().getName();
+					FavouritePoint fp = it.next();
+					// filter gpx points
+					if(fp.isStored()){
+						favs[i] = fp;
+						names[i] = fp.getName();
+						i++;
+					}
 				}
-				b.setItems(ar, new DialogInterface.OnClickListener(){
+				b.setItems(names, new DialogInterface.OnClickListener(){
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						FavouritePoint fv = helper.getFavoritePointByName(ar[which]);
+						FavouritePoint fv = favs[which];
 						if(helper.editFavourite(fv, latitude, longitude)){
 							Toast.makeText(mapActivity, getString(R.string.fav_points_edited), Toast.LENGTH_SHORT).show();
 						}
 						mapActivity.getMapView().refreshMap();
 					}
 				});
-				if(ar.length == 0){
+				if(names.length == 0){
 					Toast.makeText(mapActivity, getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
 					helper.close();
 				}  else {

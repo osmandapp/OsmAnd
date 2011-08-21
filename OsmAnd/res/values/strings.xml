@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="favorite_home_category">Home</string>
+	<string name="favorite_friends_category">Friends</string>
+	<string name="favorite_places_category">Places</string>
+	<string name="favorite_default_category">Others</string>
+	 
     <string name="vector_map_not_needed">Not needed</string>
 	<string name="basemap_missing">Base world map is missing. Please consider to download it in order to have proper environment.</string>
 	<string name="vector_data_missing">On board data is missing on SD card. Please consider to download it in order to use maps offline.</string>

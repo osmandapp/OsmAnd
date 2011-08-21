@@ -96,9 +96,6 @@ public class FavouritesActivity extends ListActivity {
 		super.onResume();
 		helper = ((OsmandApplication)getApplication()).getFavorites();
 		ArrayList<FavouritePoint> list = new ArrayList<FavouritePoint>(helper.getFavouritePoints());
-		if(helper.getFavoritePointsFromGPXFile() != null){
-			list.addAll(helper.getFavoritePointsFromGPXFile());
-		}
 		favouritesAdapter = new FavouritesAdapter(list);
 		final LatLon mapLocation = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
 		if(mapLocation != null){
@@ -149,7 +146,7 @@ public class FavouritesActivity extends ListActivity {
 			builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					boolean editied = helper.editFavouriteName(point, editText.getText().toString());
+					boolean editied = helper.editFavouriteName(point, editText.getText().toString(), point.getCategory());
 					if (editied) {
 						favouritesAdapter.notifyDataSetChanged();
 					}
