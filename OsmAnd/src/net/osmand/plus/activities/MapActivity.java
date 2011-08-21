@@ -521,8 +521,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     		Log.d(LogUtil.TAG, "Location changed " + location.getProvider()); //$NON-NLS-1$
     	}
     	if(location != null && settings.SAVE_TRACK_TO_GPX.get()){
-			savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), 
-					location.getAltitude(), location.getSpeed(), location.getTime(), settings);
+    		// write only with 50 meters accuracy
+			if (!location.hasAccuracy() || location.getAccuracy() < 50) {
+				savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(), location.getSpeed(),
+						location.getTime(), settings);
+			}
 		}
     	registerUnregisterSensor(location);
     	updateSpeedBearing(location);
