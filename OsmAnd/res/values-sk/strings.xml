@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+    <string name="vector_map_not_needed">Nepotrebné</string>
+	<string name="basemap_missing">Chýba základná mapa sveta. Prosím, zvážte jej stiahnutie pre správnu funkciu.</string>
+	<string name="vector_data_missing">Palubné údaje chýbajú na SD karte. Prosím, zvážte ich stiahnutie pre použitie máp bez internetu.</string>
+	<string name="local_index_gpx_info_show">\n\nDlhým kliknutím sa zobrazí na mape</string>
+	<string name="local_index_gpx_info_speed">\nPriemerná rýchlosť : %1$s \nMaximálna rýchlosť : %2$s</string>
+	<string name="local_index_gpx_info_elevation">\nPriemerná nadm. výška : %1$.0f metrov\nStúpanie hore : %2$.0f metrov\nStúpanie dole : %3$.0f metrov</string>
+	<string name="local_index_gpx_info">Pod-stopy : %1$d\nCelkovo bodov : %2$d\nWay-pointy : %3$d\nCelková vzdialenosť : %4$s
+									   \nČas spustenia : %5$tD %5$tR\nČas ukončenia : %6$tD %6$tR</string>
+	<string name="local_index_installed">Nainštalované</string>
+	<string name="local_index_items_backuped">%1$d položiek z %2$d úspešne zálohovaných.</string>
+	<string name="local_index_items_deleted">%1$d položiek z %2$d úspešne vymazaných.</string>
+	<string name="local_index_items_restored">%1$d položiek z %2$d úspešne obnovených.</string>
+	<string name="local_index_no_items_to_do">Žiadne položky pre akciu: %1$s</string>
+	<string name="local_index_action_do">Chcete %1$s %2$s položiek. Ste si istý?</string>
+	<string name="local_index_description">Správca offline údajov:\nMôžete stiahnuť nové, zálohovať (\'park\'), alebo vymazať existujúce údaje.\nAktuálne offline údaje v telefóne:</string>
+	<string name="local_index_mi_restore">Obnoviť</string>
+	<string name="local_index_mi_backup">Zálohovať</string>
+	<string name="local_index_mi_delete">Vymazať</string>
+	<string name="local_index_mi_reload">Znovu načítať</string>
+	<string name="local_index_download">Stiahnuť</string>
+	<string name="local_index_tile_data">Údaje dlaždíc : %1$s \nNajmenší zoom : %2$d\nNajväčší zoom : %3$d\nStiahnuteľné : %4$s \nStiahnuté zoomy : %5$s</string>
+	<string name="local_index_poi_data">POI údaje</string>
+	<string name="local_index_address_data">Adresné údaje</string>
+	<string name="local_index_transport_data">Dopravné údaje</string>
+	<string name="local_index_map_data">Mapové údaje</string>
+	<string name="local_index_items">položky/iek</string>
+	<string name="local_indexes_cat_backup">Záloha</string>
+	<string name="local_indexes_cat_tts">Hlasové údaje (TTS)</string>
+	<string name="local_indexes_cat_voice">Hlasové údaje (mediálne)</string>
+	<string name="local_indexes_cat_gpx">GPX údaje</string>
+	<string name="local_indexes_cat_tile">Mapové údaje (dlaždice)</string>
+	<string name="local_indexes_cat_map">Mapové údaje (vektorové)</string>
+	<string name="local_indexes_cat_poi">POI údaje</string>
+
+	<string name="ttsvoice">TTS hlas</string>
 	<string name="search_offline_clear_search">Nové hľadanie</string>
 	<string name="map_text_size_descr">Výber veľkosti písma pre názvy na mape</string>
 	<string name="map_text_size">Veľkosť písma</string>
