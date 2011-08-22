@@ -20,7 +20,7 @@
 	<string name="local_index_items_restored">%1$d von %2$d Dateien erfolgreich aus dem Backup wiederhergestellt.</string>
 	<string name="local_index_no_items_to_do">Aktion %1$s: Keine Dateien vorhanden</string>
 	<string name="local_index_action_do">%1$s: %2$s Dateien. Fortfahren?</string>
-	<string name="local_index_description">Offline-Daten Manager:\nErmöglicht das Herunterladen neuer, Backup (\'Parken\'), oder Löschen existierender Daten.\nLokal vorhandene Offline-Dateien:</string>
+	<string name="local_index_description">Offline-Daten Manager:\nHerunterladen neuer, Backup (\'Parken\'), oder Löschen vorhandener Daten.\nLokal vorhandene Offline-Dateien:</string>
 	<string name="local_index_mi_restore">Wiederherstellen...</string>
 	<string name="local_index_mi_backup">Backup...</string>
 	<string name="local_index_mi_delete">Löschen...</string>
@@ -481,7 +481,7 @@
 	<string name="downloading">Herunterladen...</string>
 	<string name="downloading_list_indexes">Herunterladen einer Liste der verfügbaren Regionen...</string>
 	<string name="list_index_files_was_not_loaded">Die Liste der Regionen wurde von osmand.googlecode.com nicht geladen.</string>
-    <string name="select_index_file_to_download">Wenn Sie ihre Region nicht finden dann können Sie diese selbst hinzufügen. Siehe osmand.net.</string>
+    <string name="select_index_file_to_download">Nicht vorhandene Regionen können selbst erstellt werden, siehe osmand.net.</string>
 	<string name="show_poi_on_map">Auf Karte zeigen</string>
 	<string name="fav_points_edited">Favorit wurde bearbeitet</string>
 	<string name="fav_points_not_exist">Keine Favoriten vorhanden</string>
@@ -538,7 +538,7 @@
     <string name="auto_zoom_map_descr">Kartenvergrößerung (Zoomlevel) automatisch der Geschwindigkeit anpassen</string>
     <string name="auto_zoom_map">Automatischer Zoom</string>
     <string name="additional_settings">Weitere Einstellungen</string>
-    <string name="settings_preset_descr">Verwendungsprofil wählen. (Viele Einstellungen unten werden für jedes Profil separat gespeichert.)</string>
+    <string name="settings_preset_descr">Anwendungsprofil wählen. (Viele Einstellungen unten werden für jedes Profil separat gespeichert.)</string>
     <string name="settings_preset">Applikationsmodus</string>
     <string name="settings">Einstellungen</string>
     <string name="save_current_track_descr">Aktuellen Track jetzt auf SD-Karte abspeichern</string>
