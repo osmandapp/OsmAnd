@@ -26,7 +26,7 @@
 	<string name="local_index_mi_backup">Backup...</string>
 	<string name="local_index_mi_delete">Delete...</string>
 	<string name="local_index_mi_reload">Re-initialize</string>
-	<string name="local_index_download">Download</string>
+	<string name="local_index_download">Download...</string>
 	<string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable : %4$s \nZooms downloaded : %5$s</string>
 	<string name="local_index_poi_data">POI data</string>
 	<string name="local_index_address_data">Address data</string>
