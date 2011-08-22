@@ -125,7 +125,7 @@ public class FavouritesActivity extends ExpandableListActivity {
 					Builder b = new AlertDialog.Builder(FavouritesActivity.this);
 					b.setMessage(getString(R.string.favorite_delete_multiple, favoritesToDelete.size(), 
 							groupsToDelete.size()));
-					b.setPositiveButton(R.string.local_index_mi_delete, new DialogInterface.OnClickListener() {
+					b.setPositiveButton(R.string.default_buttons_delete, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							cancelSelectingMode();
@@ -304,7 +304,7 @@ public class FavouritesActivity extends ExpandableListActivity {
 		item.setIcon(android.R.drawable.ic_menu_save);
 		item = menu.add(0, IMPORT_ID, 0, R.string.import_fav);
 		item.setIcon(android.R.drawable.ic_menu_upload);
-		item = menu.add(0, DELETE_ID, 0, R.string.default_buttons_delete);
+		item = menu.add(0, DELETE_ID, 0, R.string.local_index_mi_delete);
 		item.setIcon(android.R.drawable.ic_menu_delete);
 		return true;
 	}
