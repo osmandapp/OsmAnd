@@ -9,7 +9,7 @@
 
 	<string name="vector_map_not_needed">Not needed</string>
 	<string name="basemap_missing">Base world map (showing whole world at small zooms) is missing. Please consider downloading World-basemap.obf for a complete environment.</string>
-	<string name="vector_data_missing">On board ('offline') data is missing on SD card. Please consider to download it in order to use maps offline.</string>
+	<string name="vector_data_missing">On board (\'offline\') data is missing on SD card. Please consider to download it in order to use maps offline.</string>
 	<string name="local_index_gpx_info_show">\n\nLong click to show on map</string>
 	<string name="local_index_gpx_info_speed">\nAverage speed : %1$s \nMaximum speed : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nAverage altitude : %1$.0f meters\nElevation up : %2$.0f meters\nElevation down : %3$.0f meters</string>
