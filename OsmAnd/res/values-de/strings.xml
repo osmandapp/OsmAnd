@@ -11,7 +11,7 @@
 	<string name="local_index_mi_restore">Wiederherstellen</string>
 	<string name="local_index_mi_backup">Backup</string>
 	<string name="local_index_mi_delete">Löschen</string>
-	<string name="local_index_mi_reload">Neu laden</string>	
+	<string name="local_index_mi_reload">Re-initialisieren</string>	
 	<string name="local_index_download">Herunterladen</string>
 	<string name="local_index_tile_data">Kachel-Daten: %1$s \nMinimale Vergrößerung : %2$d\nMaximale Vergößerung : %3$d\nHerunterladbar : %4$s \nHeruntegeladene Vergößerungen : %5$s</string>
 	<string name="local_index_poi_data">POI-Daten</string>
@@ -265,13 +265,13 @@
 	<string name="filter_existing_indexes">Filter Gespeicherte</string>
 	<string name="deselect_all">Keine markieren</string>
 	<string name="select_all">Alle markieren</string>
-	<string name="reload">Neu laden</string>
+	<string name="reload">Re-initialisieren</string>
 	
 	<string name="general_settings_descr">Konfiguration der Internet-Verwendung, Anzeige und mehr</string>
     <string name="general_settings">Allgemein</string>
 	<string name="rendering_settings_descr">Konfiguration der Kartenquellen und -Darstellung</string>
     <string name="rendering_settings">Landkarten</string>
-    <string name="index_settings_descr">Laden oder Aktualisieren der Daten für Offline-Verwendung</string>
+    <string name="index_settings_descr">Laden und Verwalten von Landkarten und Daten für Offline-Verwendung</string>
     <string name="index_settings">Offline-Daten</string>
 	<string name="osmand_service">Hintergrund-Service</string>
 	<string name="osmand_service_descr">Zur Verwendung von OsmAnd bei ausgeschalterter Anzeige</string>
