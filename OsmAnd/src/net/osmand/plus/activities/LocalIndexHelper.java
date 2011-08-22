@@ -115,6 +115,8 @@ public class LocalIndexHelper {
 			double diffElevationUp = 0;
 			double diffElevationDown = 0;
 			double totalElevation = 0;
+			double minElevation = 0;
+			double maxElevation = 0;
 			
 			float maxSpeed = 0;
 			int speedCount = 0;
@@ -139,6 +141,8 @@ public class LocalIndexHelper {
 					}
 					
 					totalElevation += subtrack.get(j).getAltitude();
+					minElevation = Math.min(totalElevation, minElevation);
+					maxElevation = Math.max(totalElevation, maxElevation);
 					if (j > 0) {
 						double diff = subtrack.get(j).getAltitude() - subtrack.get(j - 1).getAltitude();
 						if(diff > 0){
@@ -165,7 +169,7 @@ public class LocalIndexHelper {
 			if(totalElevation != 0 || diffElevationUp != 0 || diffElevationDown != 0){
 				info.setDescription(info.getDescription() +  
 						app.getString(R.string.local_index_gpx_info_elevation,
-						totalElevation / points, diffElevationUp, diffElevationDown));
+						totalElevation / points, minElevation, maxElevation, diffElevationUp, diffElevationDown));
 			}
 			if(speedCount > 0){
 				info.setDescription(info.getDescription() +  
