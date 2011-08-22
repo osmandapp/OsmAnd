@@ -8,12 +8,12 @@
 	<string name="favorite_default_category">Andere</string>
 
 	<string name="vector_map_not_needed">Nicht verwendet</string>
-	<string name="basemap_missing">Offline Weltkarte für kleine Vergrößerungen noch nicht vorhanden. Bitte ggfls. World_basemap.obf herunterladen.</string>
+	<string name="basemap_missing">Offline Weltkarte für kleine Vergrößerungen noch nicht vorhanden. Bitte ggfls. World-basemap.obf herunterladen.</string>
 	<string name="vector_data_missing">Keine Offline-Daten vorhanden (SD-Karte). Bitte ggfls. herunterladen, damit Karten offline verwendet werden können.</string>
 	<string name="local_index_gpx_info_show">\n\nLang klicken für Anzeige in Karte</string>
 	<string name="local_index_gpx_info_speed">\nDurchschn.geschw. : %1$s \nMax. Geschw. : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nDurchschn.höhe : %1$.0f meter\nHöhe nach oben : %2$.0f meters\nHöhe nach unten : %3$.0f meters</string>
-	<string name="local_index_gpx_info">Subtracks : %1$d\nPunkte insgesamt : %2$d\nWegpunkte : %3$d</string>
+	<string name="local_index_gpx_info">Subtracks : %1$d\nPunkte insgesamt : %2$d\nWegpunkte : %3$d\nGesamtstrecke : %4$s\nStartzeit : %5$tD %5$tR\nEndzeit : %6$tD %6$tR</string>
 	<string name="local_index_installed">Installiert</string>
 	<string name="local_index_items_backuped">%1$d von %2$d Dateien erfolgreich nach Backup verschoben.</string>
 	<string name="local_index_items_deleted">%1$d von %2$d Dateien erfolgreich gelöscht.</string>
