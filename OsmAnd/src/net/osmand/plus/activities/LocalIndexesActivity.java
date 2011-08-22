@@ -309,9 +309,9 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(0, R.string.local_index_mi_backup, 0, R.string.local_index_mi_backup);
-		menu.add(0, R.string.local_index_mi_reload, 1, R.string.local_index_mi_reload);
+		menu.add(0, R.string.local_index_mi_restore, 1, R.string.local_index_mi_restore);
 		menu.add(0, R.string.local_index_mi_delete, 2, R.string.local_index_mi_delete);
-		menu.add(0, R.string.local_index_mi_restore, 3, R.string.local_index_mi_restore);
+		menu.add(0, R.string.local_index_mi_reload, 3, R.string.local_index_mi_reload);
 		return true;
 	}
 	
