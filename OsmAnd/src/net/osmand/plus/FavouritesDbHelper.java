@@ -21,8 +21,8 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 	private static final String FAVOURITE_COL_LAT = "latitude"; //$NON-NLS-1$
 	private static final String FAVOURITE_COL_LON = "longitude"; //$NON-NLS-1$
 	private static final String FAVOURITE_TABLE_CREATE = "CREATE TABLE " + FAVOURITE_TABLE_NAME + " (" + //$NON-NLS-1$ //$NON-NLS-2$
-			FAVOURITE_COL_NAME + " TEXT, " + FAVOURITE_COL_LAT + " double, " + //$NON-NLS-1$ //$NON-NLS-2$
-			FAVOURITE_COL_LON + " double);"; //$NON-NLS-1$
+			FAVOURITE_COL_NAME + " TEXT, " + FAVOURITE_COL_CATEGORY + " TEXT, " + //$NON-NLS-1$ //$NON-NLS-2$ 
+			FAVOURITE_COL_LAT + " double, " + FAVOURITE_COL_LON + " double);"; //$NON-NLS-1$ //$NON-NLS-2$
 	
 	// externalize ?
 	private static final String GPX_GROUP = "Gpx"; 
