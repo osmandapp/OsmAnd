@@ -16,9 +16,9 @@
 	<string name="local_index_gpx_info">Subtracks : %1$d\nTotal points : %2$d\nWay points : %3$d\nTotal distance : %4$s
 \nStart time : %5$tD %5$tR\nEnd time : %6$tD %6$tR</string>
 	<string name="local_index_installed">Installed</string>
-	<string name="local_index_items_backuped">%1$d of %2$d items succesfully backed up.</string>
-	<string name="local_index_items_deleted">%1$d of %2$d items succesfully deleted.</string>
-	<string name="local_index_items_restored">%1$d of %2$d items succesfully restored.</string>
+	<string name="local_index_items_backuped">%1$d of %2$d items successfully backed up.</string>
+	<string name="local_index_items_deleted">%1$d of %2$d items successfully deleted.</string>
+	<string name="local_index_items_restored">%1$d of %2$d items successfully restored.</string>
 	<string name="local_index_no_items_to_do">No items to %1$s</string>
 	<string name="local_index_action_do">You are about to %1$s %2$s items. Are you sure?</string>
 	<string name="local_index_description">Offline Data Manager:\nYou can download new, backup (\'park\'), or delete existing data.\nCurrent offline data on the device:</string>
