@@ -8,7 +8,7 @@
 	<string name="favorite_default_category">Others</string>
 
 	<string name="vector_map_not_needed">Not needed</string>
-	<string name="basemap_missing">Base world map (showing whole world at small zooms) is missing. Please consider downloading World-basemap.obf for a complete environment.</string>
+	<string name="basemap_missing">Base world map (covering whole world at small zooms) is missing. Please consider downloading World_basemap_x.obf for a complete environment.</string>
 	<string name="vector_data_missing">On board (\'offline\') data is missing on SD card. Please consider to download it in order to use maps offline.</string>
 	<string name="local_index_gpx_info_show">\n\nLong click to show on map</string>
 	<string name="local_index_gpx_info_speed">\nAverage speed : %1$s \nMaximum speed : %2$s</string>
