@@ -12,7 +12,7 @@
 	<string name="vector_data_missing">Keine Offline-Daten vorhanden (SD-Karte). Bitte ggfls. herunterladen, damit Karten offline verwendet werden können.</string>
 	<string name="local_index_gpx_info_show">\n\nLang klicken für Anzeige in Karte</string>
 	<string name="local_index_gpx_info_speed">\nDurchschn.geschw. : %1$s \nMax. Geschw. : %2$s</string>
-	<string name="local_index_gpx_info_elevation">\nDurchschn.höhe : %1$.0f meter\nHöhe nach oben : %2$.0f meters\nHöhe nach unten : %3$.0f meters</string>
+	<string name="local_index_gpx_info_elevation">\nDurchschn.höhe : %1$.0f m\nHöhe nach oben : %2$.0f m\nHöhe nach unten : %3$.0f m</string>
 	<string name="local_index_gpx_info">Subtracks : %1$d\nPunkte insgesamt : %2$d\nWegpunkte : %3$d\nGesamtstrecke : %4$s\nStartzeit : %5$tD %5$tR\nEndzeit : %6$tD %6$tR</string>
 	<string name="local_index_installed">Installiert</string>
 	<string name="local_index_items_backuped">%1$d von %2$d Dateien erfolgreich nach Backup verschoben.</string>
@@ -192,7 +192,7 @@
 	<string name="unit_of_length">Längeneinheiten</string>
 	<string name="si_mi_foots">Meilen/Fuß</string>
 	<string name="si_mi_yard">Meilen/Yards</string>
-	<string name="si_km_m">Kilometer/Meters</string>
+	<string name="si_km_m">Kilometer/Meter</string>
 	<string name="yard">yd</string>
 	<string name="foot">ft</string>
 	<string name="mile_per_hour">mph</string>
