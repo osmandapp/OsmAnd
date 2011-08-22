@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
 	<string name="favourites_delete_multiple_succesful">Favorite points deleted successfully.</string>
-	<string name="favorite_delete_multiple">You are going to delete %1$d favorites and %2$d groups. Are you sure?</string>
+	<string name="favorite_delete_multiple">You are going to delete %1$d favorites and %2$d favorite groups. Are you sure?</string>
 	<string name="favorite_home_category">Home</string>
 	<string name="favorite_friends_category">Friends</string>
 	<string name="favorite_places_category">Places</string>
 	<string name="favorite_default_category">Others</string>
-	 
-    <string name="vector_map_not_needed">Not needed</string>
-	<string name="basemap_missing">Base world map is missing. Please consider to download it in order to have proper environment.</string>
-	<string name="vector_data_missing">On board data is missing on SD card. Please consider to download it in order to use maps offline.</string>
+
+	<string name="vector_map_not_needed">Not needed</string>
+	<string name="basemap_missing">Base world map (showing whole world at small zooms) is missing. Please consider downloading World_basemap.obf for a complete environment.</string>
+	<string name="vector_data_missing">On board ('offline') data is missing on SD card. Please consider to download it in order to use maps offline.</string>
 	<string name="local_index_gpx_info_show">\n\nLong click to show on map</string>
 	<string name="local_index_gpx_info_speed">\nAverage speed : %1$s \nMaximum speed : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nAverage altitude : %1$.0f meters\nElevation up : %2$.0f meters\nElevation down : %3$.0f meters</string>
-	<string name="local_index_gpx_info">Subtracks : %1$d\nTotal Points : %2$d\nWay points : %3$d\nTotal Distance : %4$s
-									   \nStart Time : %5$tD %5$tR\nEnd Time : %6$tD %6$tR</string>
+	<string name="local_index_gpx_info">Subtracks : %1$d\nTotal points : %2$d\nWay points : %3$d\nTotal distance : %4$s
+\nStart time : %5$tD %5$tR\nEnd time : %6$tD %6$tR</string>
 	<string name="local_index_installed">Installed</string>
-	<string name="local_index_items_backuped">%1$d items of %2$d succesfully backed up.</string>
-	<string name="local_index_items_deleted">%1$d items of %2$d succesfully deleted.</string>
-	<string name="local_index_items_restored">%1$d items of %2$d succesfully restored.</string>
+	<string name="local_index_items_backuped">%1$d of %2$d items succesfully backed up.</string>
+	<string name="local_index_items_deleted">%1$d of %2$d items succesfully deleted.</string>
+	<string name="local_index_items_restored">%1$d of %2$d items succesfully restored.</string>
 	<string name="local_index_no_items_to_do">No items to %1$s</string>
 	<string name="local_index_action_do">You are about to %1$s %2$s items. Are you sure?</string>
 	<string name="local_index_description">Offline Data Manager:\nYou can download new, backup (\'park\'), or delete existing data.\nCurrent offline data on the phone:</string>
 	<string name="local_index_mi_restore">Restore</string>
 	<string name="local_index_mi_backup">Backup</string>
 	<string name="local_index_mi_delete">Delete</string>
-	<string name="local_index_mi_reload">Reload</string>
+	<string name="local_index_mi_reload">Re-initialize</string>
 	<string name="local_index_download">Download</string>
 	<string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable : %4$s \nZooms downloaded : %5$s</string>
 	<string name="local_index_poi_data">POI data</string>
@@ -278,13 +278,13 @@
 	<string name="filter_existing_indexes">Filter downloaded</string>
 	<string name="deselect_all">Deselect all</string>
 	<string name="select_all">Select all</string>
-	<string name="reload">Reload</string>
+	<string name="reload">Re-initialize</string>
 
 	<string name="general_settings_descr">Configure internet use, display options, and more</string>
     <string name="general_settings">General Settings</string>
 	<string name="rendering_settings_descr">Configure map source and appearance</string>
     <string name="rendering_settings">Maps</string>
-    <string name="index_settings_descr">Get/update data for offline use</string>
+    <string name="index_settings_descr">Download and manage offline maps and data</string>
     <string name="index_settings">Offline data</string>
 	<string name="osmand_service">Background service</string>
 	<string name="osmand_service_descr">Run background service to use OsmAnd while screen is off</string>
