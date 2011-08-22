@@ -115,7 +115,7 @@ public class LocalIndexHelper {
 			double diffElevationUp = 0;
 			double diffElevationDown = 0;
 			double totalElevation = 0;
-			double minElevation = 0;
+			double minElevation = 99999;
 			double maxElevation = 0;
 			
 			float maxSpeed = 0;
