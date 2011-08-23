@@ -115,6 +115,7 @@ public class LocalIndexHelper {
 			double diffElevationUp = 0;
 			double diffElevationDown = 0;
 			double totalElevation = 0;
+			double Elevation = 0;
 			double minElevation = 99999;
 			double maxElevation = 0;
 			
@@ -140,9 +141,10 @@ public class LocalIndexHelper {
 						speedCount ++;
 					}
 					
-					totalElevation += subtrack.get(j).getAltitude();
-					minElevation = Math.min(totalElevation, minElevation);
-					maxElevation = Math.max(totalElevation, maxElevation);
+					Elevation = subtrack.get(j).getAltitude();
+					totalElevation += Elevation;
+					minElevation = Math.min(Elevation, minElevation);
+					maxElevation = Math.max(Elevation, maxElevation);
 					if (j > 0) {
 						double diff = subtrack.get(j).getAltitude() - subtrack.get(j - 1).getAltitude();
 						if(diff > 0){
