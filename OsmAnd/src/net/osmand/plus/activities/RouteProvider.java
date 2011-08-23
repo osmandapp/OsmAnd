@@ -46,7 +46,7 @@ public class RouteProvider {
 	private static final org.apache.commons.logging.Log log = LogUtil.getLog(RouteProvider.class);
 	
 	public enum RouteService {
-		CLOUDMADE("CloudMade"), YOURS("YOURS"), OSMAND("OsmAnd"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		CLOUDMADE("CloudMade"), YOURS("YOURS"), OSMAND("OsmAnd (offline)"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		private final String name;
 		private RouteService(String name){
 			this.name = name;
