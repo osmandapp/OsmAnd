@@ -6,7 +6,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
@@ -23,7 +22,6 @@ import net.osmand.osm.MapUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.activities.RoutingHelper.TurnType;
-import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.router.BicycleRouter;
 import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.CarRouter;
@@ -180,35 +178,7 @@ public class RouteProvider {
 			try {
 				RouteCalculationResult res;
 				if(gpxRoute != null && !gpxRoute.isEmpty()){
-					// get the closest point to start and to end
-					float minDist = Integer.MAX_VALUE;
-					int startI = 0;
-					int endI = gpxRoute.size(); 
-					if (start != null) {
-						for (int i = 0; i < gpxRoute.size(); i++) {
-							float d = gpxRoute.get(i).distanceTo(start);
-							if (d < minDist) {
-								startI = i;
-								minDist = d;
-							}
-						}
-					} else {
-						start = gpxRoute.get(0);
-					}
-					Location l = new Location("temp"); //$NON-NLS-1$
-					l.setLatitude(end.getLatitude());
-					l.setLongitude(end.getLongitude());
-					minDist = Integer.MAX_VALUE;
-					// get in reverse order taking into account cycle ways
-					for (int i = gpxRoute.size() - 1; i >= startI; i--) {
-						float d = gpxRoute.get(i).distanceTo(l);
-						if (d < minDist) {
-							endI = i + 1;
-							// slightly modify to allow last point to be added
-							minDist = d - 40;
-						}
-					}
-					res = new RouteCalculationResult(new ArrayList<Location>(gpxRoute.subList(startI, endI)), null, start, end, null);
+					res = calculateGpxRoute(start, end, gpxRoute);
 					addMissingTurnsToRoute(res, start, end, mode, ctx);
 				} else if (type == RouteService.YOURS) {
 					res = findYOURSRoute(start, end, mode, fast);
@@ -234,6 +204,40 @@ public class RouteProvider {
 			}
 		}
 		return new RouteCalculationResult(null);
+	}
+
+	private RouteCalculationResult calculateGpxRoute(Location start, LatLon end, List<Location> gpxRoute) {
+		RouteCalculationResult res;
+		// get the closest point to start and to end
+		float minDist = Integer.MAX_VALUE;
+		int startI = 0;
+		int endI = gpxRoute.size(); 
+		if (start != null) {
+			for (int i = 0; i < gpxRoute.size(); i++) {
+				float d = gpxRoute.get(i).distanceTo(start);
+				if (d < minDist) {
+					startI = i;
+					minDist = d;
+				}
+			}
+		} else {
+			start = gpxRoute.get(0);
+		}
+		Location l = new Location("temp"); //$NON-NLS-1$
+		l.setLatitude(end.getLatitude());
+		l.setLongitude(end.getLongitude());
+		minDist = Integer.MAX_VALUE;
+		// get in reverse order taking into account cycle ways
+		for (int i = gpxRoute.size() - 1; i >= startI; i--) {
+			float d = gpxRoute.get(i).distanceTo(l);
+			if (d < minDist) {
+				endI = i + 1;
+				// slightly modify to allow last point to be added
+				minDist = d - 40;
+			}
+		}
+		res = new RouteCalculationResult(new ArrayList<Location>(gpxRoute.subList(startI, endI)), null, start, end, null);
+		return res;
 	}
 	
 	protected String getString(Context ctx, int resId){
@@ -579,7 +583,7 @@ public class RouteProvider {
 		URLConnection connection = url.openConnection();
 		DocumentBuilder dom = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		Document doc = dom.parse(new InputSource(new InputStreamReader(connection.getInputStream())));
-		// TODO how to find that error occurred ? API gpx doesn't say nothing
+		// TODO how to find that error occurred ? Gpx API doesn't say anything
 		NodeList list = doc.getElementsByTagName("wpt"); //$NON-NLS-1$
 		for (int i = 0; i < list.getLength(); i++) {
 			Element item = (Element) list.item(i);
