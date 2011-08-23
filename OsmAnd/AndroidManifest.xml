@@ -48,7 +48,7 @@
 			<data android:scheme="geo"></data>
 			</intent-filter>
 		</activity>
-		<activity android:name=".activities.LocalIndexesActivity" android:label="@string/local_index_description"></activity>
+		<activity android:name=".activities.LocalIndexesActivity" android:label="@string/local_index_descr_title"></activity>
 		<service android:process="net.osmand.plus" android:label="@string/process_navigation_service" android:name=".NavigationService">
 			<intent-filter><action android:name="net.osmand.plus.NavigationService"></action></intent-filter>
 		</service>
