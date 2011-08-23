@@ -20,7 +20,8 @@
 	<string name="local_index_items_restored">%1$d von %2$d Dateien erfolgreich aus dem Backup wiederhergestellt.</string>
 	<string name="local_index_no_items_to_do">Aktion %1$s: Keine Dateien vorhanden</string>
 	<string name="local_index_action_do">%1$s: %2$s Dateien. Fortfahren?</string>
-	<string name="local_index_description">Offline-Daten Manager:\nHerunterladen neuer und Verschieben nach Backup oder Löschen vorhandener Daten.\nLokal vorhandene Offline-Dateien:</string>
+	<string name="local_index_descr_title">Offline-Daten Manager:</string>
+	<string name="local_index_description">Herunterladen neuer und Verschieben nach Backup oder Löschen vorhandener Daten.\nLokal vorhandene Offline-Dateien:</string>
 	<string name="local_index_mi_restore">Wiederherstellen...</string>
 	<string name="local_index_mi_backup">Backup...</string>
 	<string name="local_index_mi_delete">Löschen...</string>
