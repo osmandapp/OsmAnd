@@ -32,7 +32,7 @@
 	<string name="local_index_address_data">Address-Daten</string>
 	<string name="local_index_transport_data">ÖPNV-Daten</string>
 	<string name="local_index_map_data">Karten-Daten</string>
-	<string name="local_index_items">Datei(en)</string>
+	<string name="local_index_items"></string>
 	<string name="local_indexes_cat_backup">Backup</string>
 	<string name="local_indexes_cat_tts">Sprachansagen (TTS)</string>
 	<string name="local_indexes_cat_voice">Sprachansagen (Aufnahmen)</string>
