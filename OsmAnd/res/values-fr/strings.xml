@@ -31,7 +31,7 @@
 	<string name="local_index_address_data">Données adresses</string>
 	<string name="local_index_transport_data">Données des transports</string>
 	<string name="local_index_map_data">Cartes</string>
-	<string name="local_index_items">eléments</string>
+	<string name="local_index_items"></string>
 	<string name="local_indexes_cat_backup">Sauvegarde</string>
 	<string name="local_indexes_cat_tts">Données voix (Synt.)</string>
 	<string name="local_indexes_cat_voice">Données voix (media)</string>
