@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="vector_map_not_needed">Není potřeba</string>
+        <string name="basemap_missing">Chybí základní mapa světa. Prosím stáhněte ji pro správnou funkci programu.</string>
+        <string name="vector_data_missing">Na SD kartě nejsou uložena žádná offline data. Prosím stáhněte je pro použití map v offline módu.</string>
+        <string name="local_index_gpx_info_show">\n\nDlouhým kliknutím zobrazíte na mapě</string>
+        <string name="local_index_gpx_info_speed">\nPrůměrná rychlost : %1$s \nMaximální rychlost : %2$s</string>
+        <string name="local_index_gpx_info_elevation">\nPrůměrná výška : %1$.0f metrů\nStoupání : %2$.0f metrů\nKlesání : %3$.0f metrů</string>
+        <string name="local_index_gpx_info">Podtrasy : %1$d\nCelkem bodů : %2$d\nTrasových bodů : %3$d\nCelková vzdálenost : %4$s
+                                                                           \nPočáteční čas : %5$tD %5$tR\nKoncový čas : %6$tD %6$tR</string>
+        <string name="local_index_installed">Instalováno</string>
+        <string name="local_index_items_backuped">Zálohováno %1$d položek z %2$d.</string>
+        <string name="local_index_items_deleted">Smazáno %1$d položek z %2$d.</string>
+        <string name="local_index_items_restored">Obnoveno %1$d položek z %2$d.</string>
+        <string name="local_index_no_items_to_do">Žádné položky pro akci %1$s</string>
+        <string name="local_index_action_do">Chystáte se %1$s %2$s položek. Jste si jisti?</string>
+        <string name="local_index_description">Správce offline dat:\nMůžete stáhnout, zálohovat (\'zaparkovat\'), nebo smazat existujíci data.\nV telefonu je momentálně uloženo:</string>
+        <string name="local_index_mi_restore">Obnovit</string>
+        <string name="local_index_mi_backup">Zálohovat</string>
+        <string name="local_index_mi_delete">Smazat</string>
+        <string name="local_index_mi_reload">Znovu nahrát</string>
+        <string name="local_index_download">Stáhnout</string>
+        <string name="local_index_tile_data">Zdroj map. dlaždic: %1$s \nMinimální zvětšení : %2$d\nMaximální zvětšení : %3$d\nStahovatelné : %4$s \nStažené zvětšení : %5$s</string>
+        <string name="local_index_poi_data">Data POI</string>
+        <string name="local_index_address_data">Addresy</string>
+        <string name="local_index_transport_data">Doprava</string>
+        <string name="local_index_map_data">Mapová data</string>
+        <string name="local_index_items">položek</string>
+        <string name="local_indexes_cat_backup">Záloha</string>
+        <string name="local_indexes_cat_tts">Hlasová data (TTS)</string>
+        <string name="local_indexes_cat_voice">Hlasová data (media)</string>
+        <string name="local_indexes_cat_gpx">GPX data</string>
+        <string name="local_indexes_cat_tile">Mapová data (dlaždice)</string>
+        <string name="local_indexes_cat_map">Mapová data (vektorová)</string>
+        <string name="local_indexes_cat_poi">Data POI</string>
+
+        <string name="ttsvoice">Hlasová data TTS</string>
 
 	<string name="amenity_type_administrative">Administrativa</string>
 	<string name="amenity_type_barrier">Překážky</string>
