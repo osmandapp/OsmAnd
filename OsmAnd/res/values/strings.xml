@@ -32,7 +32,7 @@
 	<string name="local_index_address_data">Address data</string>
 	<string name="local_index_transport_data">Transport data</string>
 	<string name="local_index_map_data">Map data</string>
-	<string name="local_index_items">item(s)</string>
+	<string name="local_index_items"></string>
 	<string name="local_indexes_cat_backup">Backup</string>
 	<string name="local_indexes_cat_tts">Voice data (TTS)</string>
 	<string name="local_indexes_cat_voice">Voice data (media)</string>
