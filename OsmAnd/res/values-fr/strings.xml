@@ -1,5 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="favourites_delete_multiple_succesful">Favoris correctement supprimés.</string>
+	<string name="favorite_delete_multiple">Vous allez supprimer %1$d favoris et %2$d groupes de favoris. Etes vous sûr?</string>
+	<string name="favorite_home_category">Maison</string>
+	<string name="favorite_friends_category">Amis</string>
+	<string name="favorite_places_category">Lieux</string>
+	<string name="favorite_default_category">Autres</string>
+	<string name="vector_map_not_needed">Pas nécessaire</string>
+	<string name="basemap_missing">La carte mondiale de base est absente (couvrant le monde entier à faible zoom).  Pensez à télécharger World_basemap_x.obf pour avoir un environnement complet.</string>
+	<string name="vector_data_missing">Il n\'y a pas de cartes (\'hors-ligne\') sur la carte SD. Pensez à en télécharger pour utiliser OsmAnd hors ligne.</string>
+	<string name="local_index_gpx_info_show">\n\nAppui long pour afficher sur la carte</string>
+	<string name="local_index_gpx_info_speed">\nVitesse moyenne : %1$s \nVitesse maximum : %2$s</string>
+	<string name="local_index_gpx_info_elevation">\nAltitude moyenne : %1$.0f m\nAltitude minimum : %2$.0f m\nAltitude maximum : %3$.0f m\nMontées : %4$.0f m\nDescentes : %5$.0f m</string>
+	<string name="local_index_gpx_info">Sections : %1$d\nPoints au total : %2$d\nPoints étapes : %3$d\nDistance totale : %4$s\nHeure de départ : %5$tD %5$tR\nHeure d\'arrivée : %6$tD %6$tR</string>
+	<string name="local_index_installed">Installé</string>
+	<string name="local_index_items_backuped">%1$d sur %2$d eléments sauvegardés.</string>
+	<string name="local_index_items_deleted">%1$d sur %2$d eléments supprimés.</string>
+	<string name="local_index_items_restored">%1$d sur %2$d eléments restaurés.</string>
+	<string name="local_index_no_items_to_do">Pas d\'eléments à %1$s</string>
+	<string name="local_index_action_do">Vous allez %1$s %2$s eléments. Continuer?</string>
+	<string name="local_index_descr_title">Gestionnaire de données hors ligne:</string>
+	<string name="local_index_description">Télécharger nouvelles données, sauvegarder ou supprimer données existantes.\nDonnées hors-ligne actuellement sur l\'appareil:</string>
+	<string name="local_index_mi_restore">Restorer...</string>
+	<string name="local_index_mi_backup">Sauvegarder...</string>
+	<string name="local_index_mi_delete">Supprimer...</string>
+	<string name="local_index_mi_reload">Re-initialiser</string>
+	<string name="local_index_download">Télécharger...</string>
+	<string name="local_index_tile_data">Cartes tuiles: %1$s \nZoom minimum : %2$d\nZoom maximum : %3$d\nTéléchargeable : %4$s \nZooms téléchargés : %5$s</string>
+	<string name="local_index_poi_data">Données PI</string>
+	<string name="local_index_address_data">Données adresses</string>
+	<string name="local_index_transport_data">Données des transports</string>
+	<string name="local_index_map_data">Cartes</string>
+	<string name="local_index_items">eléments</string>
+	<string name="local_indexes_cat_backup">Sauvegarde</string>
+	<string name="local_indexes_cat_tts">Données voix (Synt.)</string>
+	<string name="local_indexes_cat_voice">Données voix (media)</string>
+	<string name="local_indexes_cat_gpx">Données GPX</string>
+	<string name="local_indexes_cat_tile">Cartes (tuiles)</string>
+	<string name="local_indexes_cat_map">Cartes (vectorielles)</string>
+	<string name="local_indexes_cat_poi">Données PI</string>
+	<string name="ttsvoice">Voix synthétique</string>
 	<string name="search_offline_clear_search">Nouvelle Recherche</string>
 	<string name="map_text_size_descr">Choisir taille du texte pour les noms sur la carte</string>
 	<string name="map_text_size">Taille du texte</string>
