@@ -645,7 +645,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 				t.append("* ");
 			}
 			TextView nameView = ((TextView) v.findViewById(R.id.local_index_category_name));
-			t.append(" [").append(getChildrenCount(groupPosition)).append(" ").append(getString(R.string.local_index_items)).append("]");
+			t.append("  [").append(getChildrenCount(groupPosition)).append(" ").append(getString(R.string.local_index_items)).append("]");
 			nameView.setText(t.toString());
 			if (!group.isBackupedData()) {
 				nameView.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);

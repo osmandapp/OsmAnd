@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="favourites_delete_multiple_succesful">Favoriten erfolgreich gelöscht.</string>
 	<string name="favorite_delete_multiple">Es sollen %1$d Favoriten und %2$d Favoriten-Gruppen gelöscht werden. Fortfahren?</string>
@@ -32,7 +32,7 @@
 	<string name="local_index_address_data">Address-Daten</string>
 	<string name="local_index_transport_data">ÖPNV-Daten</string>
 	<string name="local_index_map_data">Karten-Daten</string>
-	<string name="local_index_items">Dateien</string>
+	<string name="local_index_items">Datei(en)</string>
 	<string name="local_indexes_cat_backup">Backup</string>
 	<string name="local_indexes_cat_tts">Sprachansagen (TTS)</string>
 	<string name="local_indexes_cat_voice">Sprachansagen (Aufnahmen)</string>
