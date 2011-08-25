@@ -65,7 +65,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		// requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.local_index);
 
 		LoadLocalIndexTask task = new LoadLocalIndexTask();
