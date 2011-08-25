@@ -107,6 +107,7 @@ public class OsmandRenderer {
 		public boolean interrupted = false;
 		public boolean nightMode = false;
 		public boolean highResMode = false;
+		public boolean moreDetail = false;
 		public float mapTextSize = 1;
 		
 		List<TextDrawInfo> textToDraw = new ArrayList<TextDrawInfo>();
