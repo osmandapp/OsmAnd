@@ -378,7 +378,7 @@ public class MapRenderRepositories {
 					dataBox.bottom -= hi;
 				}
 				validateLatLonBox(dataBox);
-				boolean loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingType, nightMode, moreDetail);
+				boolean loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingType, nightMode, prefs.SHOW_MORE_MAP_DETAIL.get());
 				if (!loaded || checkWhetherInterrupted()) {
 					return;
 				}
