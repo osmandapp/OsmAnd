@@ -10,6 +10,8 @@
 		<ListPreference android:title="@string/map_tile_source" android:summary="@string/map_tile_source_descr" android:key="map_tile_sources"></ListPreference>
 		<CheckBoxPreference android:summary="@string/use_english_names_descr" android:title="@string/use_english_names"
 			android:key="use_english_names"></CheckBoxPreference>
+		<CheckBoxPreference android:key="show_more_map_detail" android:title="@string/show_more_map_detail"
+			android:summary="@string/show_more_map_detail_descr"></CheckBoxPreference>
 		<ListPreference android:key="renderer" android:title="@string/renderers" android:summary="@string/renderers_descr"></ListPreference>
 		<ListPreference android:key="daynight_mode" android:title="@string/daynight" android:summary="@string/daynight_descr"></ListPreference>
 		<ListPreference android:title="@string/level_to_switch_vector_raster" android:summary="@string/level_to_switch_vector_raster_descr"
