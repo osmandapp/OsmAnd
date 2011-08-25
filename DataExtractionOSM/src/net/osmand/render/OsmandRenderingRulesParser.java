@@ -61,6 +61,7 @@ public class OsmandRenderingRulesParser {
 		public float order = 0;
 		public int orderType = -1;
 		public Boolean nightMode = null;
+		public Boolean moreDetail = null;
 		
 		public String shader = null;
 		
@@ -229,6 +230,9 @@ public class OsmandRenderingRulesParser {
 			if(toMerge.nightMode != null && mergeInto.nightMode == null){
 				mergeInto.nightMode = toMerge.nightMode;
 			}
+			if(toMerge.moreDetail != null && mergeInto.moreDetail == null){
+				mergeInto.moreDetail = toMerge.moreDetail;
+			}
 			if(toMerge.icon != null && mergeInto.icon == null){
 				mergeInto.icon = toMerge.icon;
 			}
@@ -348,6 +352,8 @@ public class OsmandRenderingRulesParser {
 					state.order = Float.parseFloat(val);
 				} else if(name.equals("nightMode")){ //$NON-NLS-1$
 					state.nightMode = Boolean.parseBoolean(val);
+				} else if(name.equals("moreDetail")){ //$NON-NLS-1$
+					state.moreDetail = Boolean.parseBoolean(val);
 				} else if(name.equals("icon")){ //$NON-NLS-1$
 					state.icon = val;
 				} else if(name.equals("color")){ //$NON-NLS-1$
