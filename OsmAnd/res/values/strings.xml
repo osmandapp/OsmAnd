@@ -15,11 +15,11 @@
 	<string name="local_index_gpx_info_elevation">\nAverage altitude : %1$.0f m\nMinimum altitude : %2$.0f m\nMaximum altitude : %3$.0f m\nAscents : %4$.0f m\nDescents : %5$.0f m</string>
 	<string name="local_index_gpx_info">Subtracks : %1$d\nTotal points : %2$d\nWay points : %3$d\nTotal distance : %4$s\nStart time : %5$tD %5$tR\nEnd time : %6$tD %6$tR</string>
 	<string name="local_index_installed">Installed</string>
-	<string name="local_index_items_backuped">%1$d of %2$d items successfully backed up.</string>
-	<string name="local_index_items_deleted">%1$d of %2$d items successfully deleted.</string>
-	<string name="local_index_items_restored">%1$d of %2$d items successfully restored.</string>
+	<string name="local_index_items_backuped">%1$d of %2$d item(s) successfully backed up.</string>
+	<string name="local_index_items_deleted">%1$d of %2$d item(s) successfully deleted.</string>
+	<string name="local_index_items_restored">%1$d of %2$d item(s) successfully restored.</string>
 	<string name="local_index_no_items_to_do">No items to %1$s</string>
-	<string name="local_index_action_do">You are about to %1$s %2$s items. Continue?</string>
+	<string name="local_index_action_do">You are about to %1$s %2$s item(s). Continue?</string>
 	<string name="local_index_descr_title">Offline Data Manager:</string>
 	<string name="local_index_description">Download new, or move to backup or delete existing data.\nCurrent offline data on device:</string>
 	<string name="local_index_mi_restore">Restore...</string>
@@ -32,7 +32,7 @@
 	<string name="local_index_address_data">Address data</string>
 	<string name="local_index_transport_data">Transport data</string>
 	<string name="local_index_map_data">Map data</string>
-	<string name="local_index_items">items</string>
+	<string name="local_index_items">item(s)</string>
 	<string name="local_indexes_cat_backup">Backup</string>
 	<string name="local_indexes_cat_tts">Voice data (TTS)</string>
 	<string name="local_indexes_cat_voice">Voice data (media)</string>
@@ -274,7 +274,7 @@
 	<string name="daynight">Day/night mode</string>
 
 	<string name="download_files_question">Download {0} file(s) ({1} MB)?</string>
-	<string name="items_were_selected">{0} items selected</string>
+	<string name="items_were_selected">{0} item(s) selected</string>
 	<string name="filter_existing_indexes">Filter downloaded</string>
 	<string name="deselect_all">Deselect all</string>
 	<string name="select_all">Select all</string>
