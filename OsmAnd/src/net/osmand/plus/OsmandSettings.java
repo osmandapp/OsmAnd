@@ -548,6 +548,9 @@ public class OsmandSettings {
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Boolean> SHOW_MORE_MAP_DETAIL = new BooleanPreference("show_more_map_detail", false, true);
+	
+	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> USE_STEP_BY_STEP_RENDERING = new BooleanPreference("use_step_by_step_rendering",
 			true, false);
 	{

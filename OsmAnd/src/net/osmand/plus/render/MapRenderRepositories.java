@@ -395,6 +395,7 @@ public class MapRenderRepositories {
 			currentRenderingContext.nightMode = nightMode;
 			currentRenderingContext.highResMode = prefs.USE_HIGH_RES_MAPS.get();
 			currentRenderingContext.mapTextSize = prefs.MAP_TEXT_SIZE.get();
+			currentRenderingContext.moreDetail = prefs.SHOW_MORE_MAP_DETAIL.get();
 			if (checkWhetherInterrupted()) {
 				return;
 			}
