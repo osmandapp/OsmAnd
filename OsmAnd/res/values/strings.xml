@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="show_more_map_detail">Show more map detail</string>
+	<string name="show_more_map_detail_descr">Show some vector map detail (roads etc.) at lower zooms already</string>
+
 	<string name="favourites_delete_multiple_succesful">Favorite points deleted successfully.</string>
 	<string name="favorite_delete_multiple">You are going to delete %1$d favorites and %2$d favorite groups. Are you sure?</string>
 	<string name="favorite_home_category">Home</string>
