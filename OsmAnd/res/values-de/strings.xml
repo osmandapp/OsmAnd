@@ -15,11 +15,11 @@
 	<string name="local_index_gpx_info_elevation">\nDurchschn.höhe : %1$.0f m\nMinimalhöhe : %2$.0f m\nMaximalhöhe : %3$.0f m\nAufstiege : %4$.0f m\nAbstiege : %5$.0f m</string>
 	<string name="local_index_gpx_info">Subtracks : %1$d\nPunkte insgesamt : %2$d\nWegpunkte : %3$d\nGesamtstrecke : %4$s\nStartzeit : %5$tD %5$tR\nEndzeit : %6$tD %6$tR</string>
 	<string name="local_index_installed">Installiert</string>
-	<string name="local_index_items_backuped">%1$d von %2$d Dateien erfolgreich nach Backup verschoben.</string>
-	<string name="local_index_items_deleted">%1$d von %2$d Dateien erfolgreich gelöscht.</string>
-	<string name="local_index_items_restored">%1$d von %2$d Dateien erfolgreich aus dem Backup wiederhergestellt.</string>
+	<string name="local_index_items_backuped">%1$d von %2$d Datei(en) erfolgreich nach Backup verschoben.</string>
+	<string name="local_index_items_deleted">%1$d von %2$d Datei(en) erfolgreich gelöscht.</string>
+	<string name="local_index_items_restored">%1$d von %2$d Datei(en) erfolgreich aus dem Backup wiederhergestellt.</string>
 	<string name="local_index_no_items_to_do">Aktion %1$s: Keine Dateien vorhanden</string>
-	<string name="local_index_action_do">%1$s: %2$s Dateien. Fortfahren?</string>
+	<string name="local_index_action_do">%1$s: %2$s Datei(en). Fortfahren?</string>
 	<string name="local_index_descr_title">Offline-Daten Manager:</string>
 	<string name="local_index_description">Herunterladen neuer und Verschieben nach Backup oder Löschen vorhandener Daten.\nLokal vorhandene Offline-Dateien:</string>
 	<string name="local_index_mi_restore">Wiederherstellen...</string>
