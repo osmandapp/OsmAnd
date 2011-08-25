@@ -213,7 +213,7 @@ public class MapRenderRepositories {
 		return false;
 	}
 	
-	private boolean loadVectorData(RectF dataBox, final int zoom, final BaseOsmandRender renderingType, final boolean nightMode){
+	private boolean loadVectorData(RectF dataBox, final int zoom, final BaseOsmandRender renderingType, final boolean nightMode, final boolean moreDetail){
 		double cBottomLatitude = dataBox.bottom;
 		double cTopLatitude = dataBox.top;
 		double cLeftLongitude = dataBox.left;
@@ -249,11 +249,11 @@ public class MapRenderRepositories {
 							int type = types.get(j);
 							int mask = type & 3;
 							TagValuePair pair = root.decodeType(type);
-							if (pair != null &&  renderingType.isObjectVisible(pair.tag, pair.value, zoom, mask, nightMode)) {
+							if (pair != null &&  renderingType.isObjectVisible(pair.tag, pair.value, zoom, mask, nightMode, moreDetail)) {
 								return true;
 							}
 							if(pair != null && mask == OsmandRenderingRulesParser.POINT_STATE && 
-									renderingType.isObjectVisible(pair.tag, pair.value, zoom, OsmandRenderingRulesParser.TEXT_STATE, nightMode)){
+									renderingType.isObjectVisible(pair.tag, pair.value, zoom, OsmandRenderingRulesParser.TEXT_STATE, nightMode, moreDetail)){
 								return true;
 							}
 						}
@@ -378,7 +378,7 @@ public class MapRenderRepositories {
 					dataBox.bottom -= hi;
 				}
 				validateLatLonBox(dataBox);
-				boolean loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingType, nightMode);
+				boolean loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingType, nightMode, moreDetail);
 				if (!loaded || checkWhetherInterrupted()) {
 					return;
 				}
@@ -393,9 +393,9 @@ public class MapRenderRepositories {
 			currentRenderingContext.width = (int) (requestedBox.getTileWidth() * OsmandRenderer.TILE_SIZE);
 			currentRenderingContext.height = (int) (requestedBox.getTileHeight() * OsmandRenderer.TILE_SIZE);
 			currentRenderingContext.nightMode = nightMode;
+			currentRenderingContext.moreDetail = prefs.SHOW_MORE_MAP_DETAIL.get();
 			currentRenderingContext.highResMode = prefs.USE_HIGH_RES_MAPS.get();
 			currentRenderingContext.mapTextSize = prefs.MAP_TEXT_SIZE.get();
-			currentRenderingContext.moreDetail = prefs.SHOW_MORE_MAP_DETAIL.get();
 			if (checkWhetherInterrupted()) {
 				return;
 			}
