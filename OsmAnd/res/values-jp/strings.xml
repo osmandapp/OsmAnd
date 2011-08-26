@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
      <string name="installing_new_resources">新しいデータを解凍中...</string>
      <string
@@ -65,7 +65,7 @@ name="internet_connection_required_for_online_route">オンライン経路案内
 更新する(タイル)マップを選んでください</string>
      <string name="internet_not_available">操作に必要なインターネット接続が
 利用できません</string>
-     <string name="more_external_layer">インストールを続ける...</string>
+     <string name="install_more">インストールを続ける...</string>
 
      <string name="tip_update_index">オフラインデータの更新</string>
      <string name="tip_update_index_t">\t最新のマップデータを持っていることは

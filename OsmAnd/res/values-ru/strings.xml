@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="local_index_gpx_info_show">\n\nДлинное нажатие для просмотра на карте</string>
     <string name="local_index_gpx_info_speed">\nСредняя скорость : %1$s \nМаксимальная скорость : %2$s</string>
@@ -264,8 +264,6 @@
 	<string name="map_index">Карта</string>
 	<string name="voice">Голосовые данные</string>
 	<string name="no_vector_map_loaded">Векторные карты не загружены в приложение</string>
-	<string name="gpx_reverse_route">Обратный путь</string>
-	<string name="gpx_direct_route">Прямой путь</string>
 	<string name="map_route_by_gpx">Навигация по GPX</string>
 	<string name="gpx_files_not_found">GPX файлы были не найдены в /osmand/tracks директории</string>
 	<string name="layer_gpx_layer">GPX треки...</string>

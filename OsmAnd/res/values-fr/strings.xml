@@ -101,7 +101,7 @@
 <string name="tile_source_already_installed">Carte déjà installée, paramètres seront mis à jour</string>
 <string name="select_tile_source_to_install">Selectioner les cartes à installer ou mettre à jour</string>
 <string name="internet_not_available">Connexion Internet nécessaire pour cette opération non disponible</string>
-<string name="more_external_layer">Installer plus...</string>
+<string name="install_more">Installer plus...</string>
 <string name="tip_update_index">Mise à jour des cartes locales</string>
 <string name="tip_update_index_t">Il est très important d\'avoir des données cartographiques à jour. Osmand a un gestionnaire de téléchargements qui permet de vérifier si les cartes locales peuvent être mises à jour.
 \n\tPour vérifier les mises à jour, aller à \'Menu Principal\'->\'Paramètres\'->\'Données hors-ligne\'->\'Télécharger du contenu\'. Sélectionner l\'option \'Filtrer téléchargé\' dans le menu contextuel.
@@ -297,8 +297,6 @@
 <string name="map_index">Carte</string>
 <string name="voice">Voix</string>
 <string name="no_vector_map_loaded">Aucune carte vectorielle n\'a été chargée</string>
-<string name="gpx_reverse_route">Itinéraire de retour</string>
-<string name="gpx_direct_route">Itinéraire d\'aller</string>
 <string name="map_route_by_gpx">Itinéraires GPX enregistrés</string>
 <string name="gpx_files_not_found">Aucun fichier GPX n\'a été trouvé dans le dossier /osmand/tracks</string>
 <string name="layer_gpx_layer">Traces GPX...</string>
@@ -662,5 +660,4 @@ navigate_point_format_D, DM & DMS
 <string name="edit_filter_delete_message">Filtre {0} effacé</string>
 <string name="edit_filter_create_message">Le filtre {0} a été créé</string>
 <string name="default_buttons_selectall">Tout sélectionner</string>
-<string name="daynight_none_descr">Sélectionner le moteur de rendu équivalent pour la nuit</string>
 </resources>

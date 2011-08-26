@@ -324,8 +324,6 @@
 	<string name="map_index">Karte</string>
 	<string name="voice">Ansagen</string>
 	<string name="no_vector_map_loaded">Offline-Daten wurden nicht geladen</string>
-	<string name="gpx_reverse_route">Umgekehrte Richtung</string>
-	<string name="gpx_direct_route">Original-Richtung</string>
 	<string name="map_route_by_gpx">Route mittels GPX</string>
 	<string name="gpx_files_not_found">Keine GPX Dateien gefunden in /tracks-Ordner</string>
 	<string name="layer_gpx_layer">GPX Tracks...</string>

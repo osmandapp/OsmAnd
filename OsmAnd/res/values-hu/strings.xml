@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
 	<string name="ttsvoice">TTS felolvasó hang</string>
 	
@@ -261,8 +261,6 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="map_index">Térkép</string>
 	<string name="voice">Hang</string>
 	<string name="no_vector_map_loaded">Nincs betöltött vektoros térkép</string>
-	<string name="gpx_reverse_route">Útvonal visszafelé</string>
-	<string name="gpx_direct_route">Útvonal előrefelé</string>
 	<string name="map_route_by_gpx">Útvonal GPX alapján</string>
 	<string name="gpx_files_not_found">Nem található GPX fálj /osmand/tracks könyvtárban</string>
 	<string name="layer_gpx_layer">GPX nyomok...</string>
