@@ -4,23 +4,24 @@
 	<polygon>
 	</polygon>
 	<text>
+		<filter minzoom="14" textSize="14" textBold="true" textWrapWidth="12" textMinDistance="20" tag="highway" value="motorway_junction"/>
 	</text>
 	<line>
 		<switch>
-	      <case nightMode="false" color="#ffffff" color_2="#ffffff" shadowColor="#464646"/>
-	      <case nightMode="true" color="#9F9F9F" color_2="#9F9F9F" shadowColor="#666666"/>
+			<case nightMode="false" color="#ffffff" color_2="#ffffff" shadowColor="#464646"/>
+			<case nightMode="true" color="#9F9F9F" color_2="#9F9F9F" shadowColor="#666666"/>
 	      <!-- ZM 
-	  	  <switch>
+	  	<switch>
 			<case tag="highway" value="residential" />
 			<case tag="highway" value="unclassified" />
 			<case tag="highway" value="road" />
 			<filter color="#ffffff" shadowColor="#464646" shadowRadius="1">
-                <filter minzoom="12" maxzoom="12" strokeWidth="3" /> 
+				<filter minzoom="12" maxzoom="12" strokeWidth="3" /> 
 				<filter minzoom="13" maxzoom="13" strokeWidth="4" />
 			</filter>
-		   </switch> -->
+		</switch> -->
 
-		   <switch>
+		<switch>
 			<case tag="highway" value="tertiary" color="#fefeb3" color_2="#fefeb3" shadowColor="#bababa" />
 			<case tag="highway" value="tertiary_link" color="#fefeb3" color_2="#fefeb3" shadowColor="#bababa" />
 			<case tag="highway" value="residential" />
@@ -41,9 +42,9 @@
 				</switch>
 				<!-- bridge -->
 				<switch>
-	              <case nightMode="false" color="#000000" />
-	              <case nightMode="true" color="#ffffff" />
-		   	  	  <filter layer="1" cap_2="SQUARE" >
+			<case nightMode="false" color="#000000" />
+			<case nightMode="true" color="#ffffff" />
+				<filter layer="1" cap_2="SQUARE" >
 					<filter minzoom="13" maxzoom="14" strokeWidth="8" strokeWidth_2="6" />
 					<filter minzoom="15" maxzoom="15" strokeWidth="10" strokeWidth_2="8" />
 					<filter minzoom="16" maxzoom="16" strokeWidth="12" strokeWidth_2="10" />
@@ -52,7 +53,7 @@
 				</filter>
 				</switch>   
 			</filter>
-		 </switch>
+		</switch>
 		</switch>
 				
 	</line>
