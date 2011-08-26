@@ -213,7 +213,7 @@ public class MapRenderRepositories {
 		return false;
 	}
 	
-	private boolean loadVectorData(RectF dataBox, final int zoom, final BaseOsmandRender renderingType, final boolean nightMode){
+	private boolean loadVectorData(RectF dataBox, final int zoom, final BaseOsmandRender renderingType, final boolean nightMode, final boolean moreDetail){
 		double cBottomLatitude = dataBox.bottom;
 		double cTopLatitude = dataBox.top;
 		double cLeftLongitude = dataBox.left;
@@ -378,7 +378,7 @@ public class MapRenderRepositories {
 					dataBox.bottom -= hi;
 				}
 				validateLatLonBox(dataBox);
-				boolean loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingType, nightMode);
+				boolean loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingType, nightMode, moreDetail);
 				if (!loaded || checkWhetherInterrupted()) {
 					return;
 				}
