@@ -141,15 +141,15 @@ public class IndexTransportCreator extends AbstractIndexPartCreator {
 	public void createDatabaseStructure(Connection conn, DBDialect dialect, String rtreeStopsFileName) throws SQLException, IOException{
 		Statement stat = conn.createStatement();
 		
-        stat.executeUpdate("create table transport_route (id bigint primary key, type varchar(255), operator varchar(255)," +
-        		"ref varchar(255), name varchar(255), name_en varchar(255), dist int)");
+        stat.executeUpdate("create table transport_route (id bigint primary key, type varchar(1024), operator varchar(1024)," +
+        		"ref varchar(1024), name varchar(1024), name_en varchar(1024), dist int)");
         stat.executeUpdate("create index transport_route_id on transport_route (id)");
         
         stat.executeUpdate("create table transport_route_stop (stop bigint, route bigint, ord int, direction smallint, primary key (route, ord, direction))");
         stat.executeUpdate("create index transport_route_stop_stop on transport_route_stop (stop)");
         stat.executeUpdate("create index transport_route_stop_route on transport_route_stop (route)");
         
-        stat.executeUpdate("create table transport_stop (id bigint primary key, latitude double, longitude double, name varchar(255), name_en varchar(255))");
+        stat.executeUpdate("create table transport_stop (id bigint primary key, latitude double, longitude double, name varchar(1024), name_en varchar(1024))");
         stat.executeUpdate("create index transport_stop_id on transport_stop (id)");
         stat.executeUpdate("create index transport_stop_location on transport_stop (latitude, longitude)");
         

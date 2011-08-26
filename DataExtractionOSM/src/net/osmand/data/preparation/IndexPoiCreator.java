@@ -119,8 +119,8 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		// create database structure
 		Statement stat = poiConnection.createStatement();
         stat.executeUpdate("create table " + IndexConstants.POI_TABLE +  //$NON-NLS-1$
-        		"(id bigint, x int, y int, name_en varchar(255), name varchar(255), " +
-        		"type varchar(255), subtype varchar(255), opening_hours varchar(255), phone varchar(255), site varchar(255)," +
+        		"(id bigint, x int, y int, name_en varchar(1024), name varchar(1024), " +
+        		"type varchar(1024), subtype varchar(1024), opening_hours varchar(1024), phone varchar(1024), site varchar(1024)," +
         		"primary key(id, type, subtype))");
         stat.executeUpdate("create index poi_loc on poi (x, y, type, subtype)");
         stat.executeUpdate("create index poi_id on poi (id, type, subtype)");
