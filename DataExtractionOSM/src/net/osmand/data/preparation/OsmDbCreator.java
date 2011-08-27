@@ -76,10 +76,10 @@ public class OsmDbCreator implements IOsmStorageFilter {
 			stat.executeUpdate("create table ways (id bigint, node bigint, ord smallint, primary key (id, ord))"); //$NON-NLS-1$
 			stat.executeUpdate("create index IdWIndex ON ways (id)"); //$NON-NLS-1$
 			dialect.deleteTableIfExists("relations", stat);
-			stat.executeUpdate("create table relations (id bigint, member bigint, type smallint, role varchar(255), ord smallint, primary key (id, ord))"); //$NON-NLS-1$
+			stat.executeUpdate("create table relations (id bigint, member bigint, type smallint, role varchar(1024), ord smallint, primary key (id, ord))"); //$NON-NLS-1$
 			stat.executeUpdate("create index IdRIndex ON relations (id)"); //$NON-NLS-1$
 			dialect.deleteTableIfExists("tags", stat);
-			stat.executeUpdate("create table tags (id bigint, type smallint, skeys varchar(255), value varchar(255), primary key (id, type, skeys))"); //$NON-NLS-1$
+			stat.executeUpdate("create table tags (id bigint, type smallint, skeys varchar(1024), value varchar(1024), primary key (id, type, skeys))"); //$NON-NLS-1$
 			stat.executeUpdate("create index IdTIndex ON tags (id, type)"); //$NON-NLS-1$
 			stat.close();
 

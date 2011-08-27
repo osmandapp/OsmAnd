@@ -12,13 +12,7 @@ import static net.osmand.data.IndexConstants.VOICE_VERSION;
 import static net.osmand.data.IndexConstants.TTSVOICE_VERSION;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,11 +27,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Map.Entry;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
 import net.osmand.IProgress;
-import net.osmand.LogUtil;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.DownloadOsmandIndexesHelper;
 import net.osmand.plus.OsmandSettings;
@@ -45,8 +36,8 @@ import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.DownloadOsmandIndexesHelper.IndexItem;
+import net.osmand.plus.activities.DownloadFileHelper.DownloadFileShowWarning;
 
-import org.apache.commons.logging.Log;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -55,6 +46,7 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -74,11 +66,13 @@ import android.widget.Toast;
 
 public class DownloadIndexActivity extends ListActivity {
 	
-	private final static Log log = LogUtil.getLog(DownloadIndexActivity.class);
 	private static final int RELOAD_ID = 0;
 	private static final int SELECT_ALL_ID = 1;
 	private static final int DESELECT_ALL_ID = 2;
 	private static final int FILTER_EXISTING_REGIONS = 3;
+	
+	private static final int MB = 1 << 20;
+    public static final String FILTER_KEY = "filter";
 	
 	private static DownloadIndexListThread downloadListIndexThread = new DownloadIndexListThread();
 
@@ -86,25 +80,11 @@ public class DownloadIndexActivity extends ListActivity {
 	private ProgressDialog progressListDlg = null;
 	private Map<String, String> indexFileNames = null;
 	private TreeMap<String, DownloadEntry> entriesToDownload = new TreeMap<String, DownloadEntry>();
-	private TextWatcher textWatcher = new TextWatcher() {
-
-        public void afterTextChanged(Editable s) {
-        }
-
-        public void beforeTextChanged(CharSequence s, int start, int count,
-                int after) {
-        }
-
-        public void onTextChanged(CharSequence s, int start, int before,
-                int count) {
-        	DownloadIndexAdapter adapter = ((DownloadIndexAdapter)getListAdapter());
-			if(adapter != null){
-				adapter.getFilter().filter(s);
-			}
-        }
-
-    };
+	 
+	
+    private TextWatcher textWatcher ;
 	private EditText filterText;
+	private DownloadFileHelper downloadFileHelper = null;
 	
 	
 	@Override
@@ -112,11 +92,12 @@ public class DownloadIndexActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		// recreation upon rotation is prevented in manifest file
 		setContentView(R.layout.download_index);
+		downloadFileHelper = new DownloadFileHelper(this);
 		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
-				downloadFiles();
+				downloadFilesConfirmation();
 			}
 			
 		});
@@ -124,6 +105,22 @@ public class DownloadIndexActivity extends ListActivity {
 		indexFileNames = ((OsmandApplication)getApplication()).getResourceManager().getIndexFileNames();
 
 	    filterText = (EditText) findViewById(R.id.search_box);
+	    textWatcher = new TextWatcher() {
+	        public void afterTextChanged(Editable s) {
+	        }
+	        public void beforeTextChanged(CharSequence s, int start, int count,
+	                int after) {
+	        }
+
+	        public void onTextChanged(CharSequence s, int start, int before,
+	                int count) {
+	        	DownloadIndexAdapter adapter = ((DownloadIndexAdapter)getListAdapter());
+				if(adapter != null){
+					adapter.getFilter().filter(s);
+				}
+	        }
+
+	    };
 		filterText.addTextChangedListener(textWatcher);
 		final Intent intent = getIntent();
 		if (intent != null && intent.getExtras() != null) {
@@ -251,11 +248,6 @@ public class DownloadIndexActivity extends ListActivity {
 	}
 	
 	
-	
-
-	
-	
-	private final static int MB = 1 << 20;
 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
@@ -420,7 +412,7 @@ public class DownloadIndexActivity extends ListActivity {
 		return entry;
 	}
 	
-	protected void downloadFiles() {
+	protected void downloadFilesConfirmation() {
 		Builder builder = new AlertDialog.Builder(this);
 		double sz = 0;
 		for(DownloadEntry es : entriesToDownload.values()){
@@ -430,181 +422,20 @@ public class DownloadIndexActivity extends ListActivity {
 		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				progressFileDlg = ProgressDialog.show(DownloadIndexActivity.this, getString(R.string.downloading),
-						getString(R.string.downloading_file), true, true);
-				interruptDownloading = false;
-				progressFileDlg.show();
-				final ProgressDialogImplementation impl = new ProgressDialogImplementation(progressFileDlg, true);
-				progressFileDlg.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-					@Override
-					public void onCancel(DialogInterface dialog) {
-						interruptDownloading = true;
-					}
-				});
-
-				impl.setRunnable("DownloadIndex", new Runnable() { //$NON-NLS-1$
-							@Override
-							public void run() {
-								try {
-									List<File> filesToReindex = new ArrayList<File>();
-									ArrayList<String> filesToDownload = new ArrayList<String>(entriesToDownload.keySet());
-									for(int i=0;i<filesToDownload.size(); i++) {
-									    String filename = filesToDownload.get(i);
-										DownloadEntry entry = entriesToDownload.get(filename);
-										if (entry != null) {
-											String indexOfAllFiles = filesToDownload.size() <= 1 ? "" : (" ["+(i+1)+"/"+filesToDownload.size()+"]"); 
-											if (downloadFile(filename, entry.fileToSave, entry.fileToUnzip, entry.unzip, impl, entry.dateModified,
-													entry.parts, filesToReindex, indexOfAllFiles)) {
-												entriesToDownload.remove(filename);
-												runOnUiThread(new Runnable() {
-													@Override
-													public void run() {
-														((DownloadIndexAdapter) getListAdapter()).notifyDataSetChanged();
-														findViewById(R.id.DownloadButton).setVisibility(entriesToDownload.isEmpty() ? View.GONE : View.VISIBLE);
-													}
-												});
-											}
-										}
-									}
-									boolean vectorMapsToReindex = false;
-									for(File f : filesToReindex){
-										if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-											vectorMapsToReindex = true;
-											break;
-										}
-									}
-									// reindex vector maps all at one time
-									if (vectorMapsToReindex) {
-										ResourceManager manager = ((OsmandApplication) getApplication()).getResourceManager();
-										List<String> warnings = manager.indexingMaps(impl);
-										if(warnings.isEmpty() && !OsmandSettings.getOsmandSettings(getApplicationContext()).MAP_VECTOR_DATA.get()){
-											warnings.add(getString(R.string.binary_map_download_success));
-											// Is it proper way to switch every tome to vector data?
-											OsmandSettings.getOsmandSettings(getApplicationContext()).MAP_VECTOR_DATA.set(true);
-										}
-										if (!warnings.isEmpty()) {
-											showWarning(warnings.get(0));
-										}
-									}
-								} catch (InterruptedException e) {
-									// do not dismiss dialog
-									progressFileDlg = null;
-								} finally {
-									if (progressFileDlg != null) {
-										progressFileDlg.dismiss();
-										progressFileDlg = null;
-									}
-								}
-							}
-						});
-				impl.run();
+				DownloadIndexesAsyncTask task = new DownloadIndexesAsyncTask();
+				task.execute(entriesToDownload.keySet().toArray(new String[0]));
 			}
 		});
 		builder.setNegativeButton(R.string.default_buttons_no, null);
 		builder.show();
 	}
 	
-	private static final int BUFFER_SIZE = 32256;
-	public static final String FILTER_KEY = "filter"; 
-	
-	private static class DownloadEntry {
-		public File fileToSave;
-		public File fileToUnzip;
-		public boolean unzip;
-		public Long dateModified;
-		public double sizeMB;
-		public String baseName;
-		public int parts;
-	}
-	
-	protected final int TRIES_TO_DOWNLOAD = 15;
-	protected final long TIMEOUT_BETWEEN_DOWNLOADS = 8000;
-	private boolean interruptDownloading = false;
-	
-	protected void downloadFile(String fileName, FileOutputStream out, URL url, String part, String indexOfAllFiles, 
-			IProgress progress) throws IOException, InterruptedException {
-		InputStream is = null;
-		
-		byte[] buffer = new byte[BUFFER_SIZE];
-		int read = 0;
-		int length = 0;
-		int fileread = 0;
-		int triesDownload = TRIES_TO_DOWNLOAD;
-		boolean first = true;
-		try {
-			while (triesDownload > 0) {
-				try {
-					if (!first) {
-						log.info("Reconnecting"); //$NON-NLS-1$
-						try {
-							Thread.sleep(TIMEOUT_BETWEEN_DOWNLOADS);
-						} catch (InterruptedException e) {
-						}
-					}
-					HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-					conn.setReadTimeout(30000);
-					if (fileread > 0) {
-						String range = "bytes="+fileread + "-" + (length -1); //$NON-NLS-1$ //$NON-NLS-2$
-						conn.setRequestProperty("Range", range);  //$NON-NLS-1$
-					}
-					conn.setConnectTimeout(30000);
-					log.info(conn.getResponseMessage() + " " + conn.getResponseCode()); //$NON-NLS-1$
-					if (conn.getResponseCode() != HttpURLConnection.HTTP_PARTIAL  && 
-							conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-						conn.disconnect();
-						triesDownload--;
-						continue;
-					}
-					is = conn.getInputStream();
-//					long skipped = 0;
-//					while (skipped < fileread) {
-//						skipped += is.skip(fileread - skipped);
-//					}
-					if (first) {
-						length = conn.getContentLength();
-						String taskName = getString(R.string.downloading_file) + indexOfAllFiles +" " + fileName;
-						if(part != null){
-							taskName += part;
-						}
-						progress.startTask(taskName, length); //$NON-NLS-1$
-					}
-
-					first = false;
-					while ((read = is.read(buffer)) != -1) {
-						 if(interruptDownloading){
-						 	throw new InterruptedException();
-						 }
-						out.write(buffer, 0, read);
-						progress.progress(read);
-						fileread += read;
-					}
-					if(length <= fileread){
-						triesDownload = 0;
-					}
-				} catch (IOException e) {
-					log.error("IOException", e); //$NON-NLS-1$
-					triesDownload--;
-				}
-
-			}
-		} finally {
-			if (is != null) {
-				is.close();
-			}
-		}
-		if(length != fileread || length == 0){
-			throw new IOException("File was not fully read"); //$NON-NLS-1$
-		}
-		
-	}
-
 	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		if(isFinishing()){
-			interruptDownloading = true;
+			downloadFileHelper.setInterruptDownloading(true);
 		}
 	    if (textWatcher != null) {
 	    	EditText filterText = (EditText) findViewById(R.id.search_box);
@@ -614,122 +445,6 @@ public class DownloadIndexActivity extends ListActivity {
 		progressFileDlg = null;
 	}
 	
-	protected boolean downloadFile(final String fileName, final File fileToDownload, final File fileToUnZip, final boolean unzipToDir,
-			IProgress progress, Long dateModified, int parts, List<File> toReIndex, String indexOfAllFiles) throws InterruptedException {
-		FileOutputStream out = null;
-		try {
-
-			out = new FileOutputStream(fileToDownload);
-			
-			try {
-				if(parts == 1){
-					URL url = new URL("http://download.osmand.net/download?file="+fileName);  //$NON-NLS-1$
-					downloadFile(fileName, out, url, null, indexOfAllFiles, progress);
-				} else {
-					for(int i=1; i<=parts; i++){
-						URL url = new URL("http://download.osmand.net/download?file="+fileName+"-"+i);  //$NON-NLS-1$
-						downloadFile(fileName, out, url, " ["+i+"/"+parts+"]", indexOfAllFiles, progress);
-					}
-				}
-			} finally {
-				out.close();
-				out = null;
-			}
-
-			File toIndex = fileToDownload;
-			if (fileToDownload.getName().endsWith(".zip")) { //$NON-NLS-1$
-				progress.startTask(getString(R.string.unzipping_file), -1);
-				if (!unzipToDir) {
-					toIndex = fileToUnZip;
-				} else {
-					fileToUnZip.mkdirs();
-				}
-				ZipInputStream zipIn = new ZipInputStream(new FileInputStream(fileToDownload));
-				ZipEntry entry = null;
-				boolean first = true;
-				while ((entry = zipIn.getNextEntry()) != null) {
-					File fs;
-					if (!unzipToDir) {
-						if (first) {
-							fs = toIndex;
-							first = false;
-						} else {
-							String name = entry.getName();
-							// small simplification
-							int ind = name.lastIndexOf('_');
-							if (ind > 0) {
-								// cut version
-								int i = name.indexOf('.', ind);
-								if (i > 0) {
-									name = name.substring(0, ind) + name.substring(i, name.length());
-								}
-							}
-							fs = new File(fileToUnZip.getParent(), name);
-							toIndex = fs;
-						}
-					} else {
-						fs = new File(fileToUnZip, entry.getName());
-					}
-					out = new FileOutputStream(fs);
-					int read;
-					byte[] buffer = new byte[BUFFER_SIZE];
-					while ((read = zipIn.read(buffer)) != -1) {
-						out.write(buffer, 0, read);
-					}
-					out.close();
-				}
-				zipIn.close();
-				fileToDownload.delete(); // zip is no needed more
-			}
-
-			ArrayList<String> warnings = new ArrayList<String>();
-			ResourceManager manager = ((OsmandApplication) getApplication()).getResourceManager();
-			if(dateModified != null){
-				toIndex.setLastModified(dateModified);
-			}
-			if (toIndex.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
-				// update poi index immediately
-				manager.indexingPoi(progress, warnings, toIndex);
-			}
-			if(dateModified != null){
-				toIndex.setLastModified(dateModified);
-				manager.updateIndexLastDateModified(toIndex);
-			}
-			toReIndex.add(toIndex);
-			if (warnings.isEmpty()) {
-				showWarning(getString(R.string.download_index_success));
-			} else {
-				showWarning(warnings.get(0));
-			}
-			return true;
-		} catch (IOException e) {
-			log.error("Exception ocurred", e); //$NON-NLS-1$
-			showWarning(getString(R.string.error_io_error));
-			if(out != null){
-				try {
-					out.close();
-				} catch (IOException e1) {
-				}
-			}
-			// Possibly file is corrupted
-			fileToDownload.delete();
-			return false;
-		} catch (InterruptedException e) {
-			// Possibly file is corrupted
-			fileToDownload.delete();
-			throw e;
-		}
-	}
-	
-	public void showWarning(final String messages){
-		runOnUiThread(new Runnable(){
-			@Override
-			public void run() {
-				Toast.makeText(DownloadIndexActivity.this, messages, Toast.LENGTH_LONG).show();
-			}
-			
-		});
-	}
 
 	private String convertServerFileNameToLocal(String name){
 		int l = name.lastIndexOf('_');
@@ -742,6 +457,124 @@ public class DownloadIndexActivity extends ListActivity {
 			s = ""; //$NON-NLS-1$
 		}
 		return name.substring(0, l) + s;
+	}
+	
+private class DownloadIndexesAsyncTask extends  AsyncTask<String, Object, String> implements DownloadFileShowWarning {
+		
+		private IProgress progress;
+
+		@Override
+		protected void onProgressUpdate(Object... values) {
+			for(Object o : values){
+				if(o instanceof DownloadEntry){
+					((DownloadIndexAdapter) getListAdapter()).notifyDataSetChanged();
+					findViewById(R.id.DownloadButton).setVisibility(
+							entriesToDownload.isEmpty() ? View.GONE : View.VISIBLE);
+				} else if(o instanceof String) {
+					Toast.makeText(DownloadIndexActivity.this, (String) o, Toast.LENGTH_LONG).show();
+				}
+			}
+			super.onProgressUpdate(values);
+		}
+		
+		@Override
+		protected void onPreExecute() {
+			progressFileDlg = ProgressDialog.show(DownloadIndexActivity.this, getString(R.string.downloading),
+					getString(R.string.downloading_file), true, true);
+			downloadFileHelper.setInterruptDownloading(false);
+			progressFileDlg.show();
+			progress = new ProgressDialogImplementation(progressFileDlg, true);
+			progressFileDlg.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					downloadFileHelper.setInterruptDownloading(true);
+				}
+			});
+			View mainView = findViewById(R.id.MainLayout);
+			if(mainView != null){
+				mainView.setKeepScreenOn(true);
+			}
+		}
+		
+		
+		@Override
+		protected void onPostExecute(String result) {
+			if(result != null){
+				Toast.makeText(DownloadIndexActivity.this, result, Toast.LENGTH_LONG).show();
+			}
+			View mainView = findViewById(R.id.MainLayout);
+			if(mainView != null){
+				mainView.setKeepScreenOn(false);
+			}
+		}
+		
+		@Override
+		protected String doInBackground(String... filesToDownload) {
+			try {
+				List<File> filesToReindex = new ArrayList<File>();
+				
+				for (int i = 0; i < filesToDownload.length; i++) {
+					String filename = filesToDownload[i];
+					DownloadEntry entry = entriesToDownload.get(filename);
+					if (entry != null) {
+						String indexOfAllFiles = filesToDownload.length <= 1 ? "" : (" [" + (i + 1) + "/"
+								+ filesToDownload.length + "]");
+						boolean result = downloadFileHelper.downloadFile(filename, 
+								entry.fileToSave, entry.fileToUnzip, entry.unzip, progress, entry.dateModified,
+								entry.parts, filesToReindex, indexOfAllFiles, this);
+						if (result) {
+							entriesToDownload.remove(filename);
+							publishProgress(entry);
+						}
+					}
+				}
+				boolean vectorMapsToReindex = false;
+				for (File f : filesToReindex) {
+					if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+						vectorMapsToReindex = true;
+						break;
+					}
+				}
+				// reindex vector maps all at one time
+				if (vectorMapsToReindex) {
+					ResourceManager manager = ((OsmandApplication) getApplication()).getResourceManager();
+					List<String> warnings = manager.indexingMaps(progress);
+					if (warnings.isEmpty() && !OsmandSettings.getOsmandSettings(getApplicationContext()).MAP_VECTOR_DATA.get()) {
+						warnings.add(getString(R.string.binary_map_download_success));
+						// Is it proper way to switch every tome to vector data?
+						OsmandSettings.getOsmandSettings(getApplicationContext()).MAP_VECTOR_DATA.set(true);
+					}
+					if (!warnings.isEmpty()) {
+						return warnings.get(0);
+					}
+				}
+			} catch (InterruptedException e) {
+				// do not dismiss dialog
+				progressFileDlg = null;
+			} finally {
+				if (progressFileDlg != null) {
+					progressFileDlg.dismiss();
+					progressFileDlg = null;
+				}
+			}
+			return null;
+		}
+
+		@Override
+		public void showWarning(String warning) {
+			publishProgress(warning);
+			
+		}
+	}
+	
+	private static class DownloadEntry {
+		public File fileToSave;
+		public File fileToUnzip;
+		public boolean unzip;
+		public Long dateModified;
+		public double sizeMB;
+		public String baseName;
+		public int parts;
 	}
 
 	protected class DownloadIndexAdapter extends ArrayAdapter<IndexItem> implements Filterable {

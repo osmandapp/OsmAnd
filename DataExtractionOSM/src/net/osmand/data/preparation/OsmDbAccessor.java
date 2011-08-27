@@ -210,9 +210,9 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		String select;
 		int count = 0;
 
-		// stat.executeUpdate("create table tags (id "+longType+", type smallint, skeys varchar(255), value varchar(255))");
+		// stat.executeUpdate("create table tags (id "+longType+", type smallint, skeys varchar(1024), value varchar(1024))");
 		// stat.executeUpdate("create table ways (id "+longType+", node "+longType+", ord smallint)");
-//		stat.executeUpdate("create table relations (id "+longType+", member "+longType+", type smallint, role varchar(255), ord smallint)");
+//		stat.executeUpdate("create table relations (id "+longType+", member "+longType+", type smallint, role varchar(1024), ord smallint)");
 		if (type == EntityType.NODE) {
 			// filter out all nodes without tags
 			select = "select n.id, n.latitude, n.longitude, t.skeys, t.value from node n inner join tags t on n.id = t.id and t.type = 0 order by n.id"; //$NON-NLS-1$

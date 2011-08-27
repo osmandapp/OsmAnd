@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -61,6 +62,7 @@ public class LocalIndexHelper {
 			updateObfFileInformation(info, f);
 			info.setDescription(info.getDescription() + getInstalledDate(f));
 		} else if(info.getType() == LocalIndexType.POI_DATA){
+			checkPoiFileVersion(info, f);
 			info.setDescription(getInstalledDate(f));
 		} else if(info.getType() == LocalIndexType.GPX_DATA){
 			updateGpxInfo(info, f);
@@ -210,7 +212,7 @@ public class LocalIndexHelper {
 
 	private void loadVoiceData(File voiceDir, List<LocalIndexInfo> result, boolean backup, LoadLocalIndexTask loadTask) {
 		if (voiceDir.canRead()) {
-			for (File voiceF : voiceDir.listFiles()) {
+			for (File voiceF : listFilesSorted(voiceDir)) {
 				if (voiceF.isDirectory()) {
 					LocalIndexInfo info = null;
 					if (MediaCommandPlayerImpl.isMyData(voiceF)) {
@@ -231,7 +233,7 @@ public class LocalIndexHelper {
 	
 	private void loadTilesData(File tilesPath, List<LocalIndexInfo> result, boolean backup, LoadLocalIndexTask loadTask) {
 		if (tilesPath.canRead()) {
-			for (File tileFile : tilesPath.listFiles()) {
+			for (File tileFile : listFilesSorted(tilesPath)) {
 				if (tileFile.isFile() && tileFile.getName().endsWith(SQLiteTileSource.EXT)) {
 					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TILES_DATA, tileFile, backup);
 					result.add(info);
@@ -253,7 +255,7 @@ public class LocalIndexHelper {
 	
 	private void loadObfData(File mapPath, List<LocalIndexInfo> result, boolean backup, LoadLocalIndexTask loadTask, Map<String, String> loadedMaps) {
 		if (mapPath.canRead()) {
-			for (File mapFile : mapPath.listFiles()) {
+			for (File mapFile : listFilesSorted(mapPath)) {
 				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.MAP_DATA, mapFile, backup);
 					if(loadedMaps.containsKey(mapFile.getName()) && !backup){
@@ -268,7 +270,7 @@ public class LocalIndexHelper {
 	
 	private void loadGPXData(File mapPath, List<LocalIndexInfo> result, boolean backup, LoadLocalIndexTask loadTask) {
 		if (mapPath.canRead()) {
-			for (File gpxFile : mapPath.listFiles()) {
+			for (File gpxFile : listFilesSorted(mapPath)) {
 				if (gpxFile.isFile() && gpxFile.getName().endsWith(".gpx")) {
 					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.GPX_DATA, gpxFile, backup);
 					result.add(info);
@@ -278,9 +280,15 @@ public class LocalIndexHelper {
 		}
 	}
 	
+	private File[] listFilesSorted(File dir){
+		File[] listFiles = dir.listFiles();
+		Arrays.sort(listFiles);
+		return listFiles;
+	}
+	
 	private void loadPoiData(File mapPath, List<LocalIndexInfo> result, boolean backup, LoadLocalIndexTask loadTask) {
 		if (mapPath.canRead()) {
-			for (File poiFile : mapPath.listFiles()) {
+			for (File poiFile : listFilesSorted(mapPath)) {
 				if (poiFile.isFile() && poiFile.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
 					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.POI_DATA, poiFile, backup);
 					if (!backup) {

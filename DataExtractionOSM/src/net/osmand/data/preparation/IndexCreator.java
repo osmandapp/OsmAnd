@@ -339,8 +339,8 @@ public class IndexCreator {
 	
 	public void generateIndexes(File readFile, IProgress progress, IOsmStorageFilter addFilter, MapZooms mapZooms,
 			MapRenderingTypes renderingTypes) throws IOException, SAXException, SQLException {
-		if(LevelDBAccess.load()){
-			dialect = DBDialect.NOSQL;
+		if(!LevelDBAccess.load() && dialect == DBDialect.NOSQL){
+			dialect = DBDialect.SQLITE;
 		}
 		
 		if (renderingTypes == null) {

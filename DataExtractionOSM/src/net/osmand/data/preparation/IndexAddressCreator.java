@@ -815,17 +815,17 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		Statement stat = conn.createStatement();
 		
         stat.executeUpdate("create table city (id bigint primary key, latitude double, longitude double, " +
-        			"name varchar(255), name_en varchar(255), city_type varchar(32))");
+        			"name varchar(1024), name_en varchar(1024), city_type varchar(32))");
         stat.executeUpdate("create index city_ind on city (id, city_type)");
         
         stat.executeUpdate("create table street (id bigint primary key, latitude double, longitude double, " +
-					"name varchar(255), name_en varchar(255), city bigint)");
+					"name varchar(1024), name_en varchar(1024), city bigint)");
         stat.executeUpdate("create index street_city on street (city)");
         stat.executeUpdate("create index street_id on street (id)");
         // create index on name ?
 
         stat.executeUpdate("create table building (id bigint, latitude double, longitude double, " +
-						"name varchar(255), name_en varchar(255), street bigint, postcode varchar(255), primary key(street, id))");
+						"name varchar(1024), name_en varchar(1024), street bigint, postcode varchar(1024), primary key(street, id))");
         stat.executeUpdate("create index building_postcode on building (postcode)");
         stat.executeUpdate("create index building_street on building (street)");
         stat.executeUpdate("create index building_id on building (id)");
