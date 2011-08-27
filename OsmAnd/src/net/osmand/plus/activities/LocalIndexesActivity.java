@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -260,7 +261,11 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		protected void onPostExecute(String result) {
 			findViewById(R.id.ProgressBar).setVisibility(View.GONE);
 			Toast.makeText(LocalIndexesActivity.this, result, Toast.LENGTH_LONG).show();
+			listAdapter.clear();
+			asyncLoader = new LoadLocalIndexTask();
+			asyncLoader.execute(LocalIndexesActivity.this);
 			reloadIndexes();
+			
 		}
 
 	}
@@ -367,6 +372,13 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		closeSelectionMode();
 	}
 	
+	private void collapseAllGroups() {
+		for (int i = 0; i < listAdapter.getGroupCount(); i++) {
+			getExpandableListView().collapseGroup(i);
+		}
+
+	}
+	
 	private void openSelectionMode(final int actionResId){
 		final String actionButton = getString(actionResId);
 		if(listAdapter.getGroupCount() == 0){
@@ -374,8 +386,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 			Toast.makeText(LocalIndexesActivity.this, getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
 			return;
 		}
-		
-		
+		collapseAllGroups();
 		selectionMode = true;
 		selectedItems.clear();
 		Button action = (Button) findViewById(R.id.ActionButton);
@@ -429,6 +440,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		findViewById(R.id.CancelButton).setVisibility(View.GONE);
 		findViewById(R.id.ActionButton).setVisibility(View.GONE);
 		listAdapter.cancelFilter();
+		collapseAllGroups();
 		listAdapter.notifyDataSetChanged();
 	}
 	
@@ -498,9 +510,16 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		private MessageFormat formatMb;
 
 		public LocalIndexesAdapter() {
-			formatMb = new MessageFormat("{0, number,##.#} MB");
+			formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
 		}
 		
+		public void clear() {
+			data.clear();
+			category.clear();
+			filterCategory = null;
+			notifyDataSetChanged();
+		}
+
 		public LocalIndexInfo findCategory(LocalIndexInfo val, boolean backuped){
 			for(LocalIndexInfo i : category){
 				if(i.isBackupedData() == backuped && val.getType() == i.getType() ){
@@ -671,7 +690,29 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 				t.append("* ");
 			}
 			TextView nameView = ((TextView) v.findViewById(R.id.local_index_category_name));
-			t.append("  [").append(getChildrenCount(groupPosition)).append(" ").append(getString(R.string.local_index_items)).append("]");
+			t.append("  [").append(getChildrenCount(groupPosition));
+			if(getString(R.string.local_index_items).length() > 0){
+				t.append(" ").append(getString(R.string.local_index_items));
+			}
+			if(getString(R.string.local_index_items).length() > 0){
+				t.append(" ").append(getString(R.string.local_index_items));
+			}
+			List<LocalIndexInfo> list = data.get(group);
+			int size = 0;
+			for(int i=0; i<list.size(); i++){
+				int sz = list.get(i).getSize();
+				if(sz < 0){
+					size = 0;
+					break;
+				} else {
+					size += sz;
+				}
+			}
+			size = size / (1 << 10);
+			if(size > 0){
+				t.append(" - ").append(size).append(" MB");
+			}
+			t.append("]");
 			nameView.setText(t.toString());
 			if (!group.isBackupedData()) {
 				nameView.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
