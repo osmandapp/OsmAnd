@@ -320,7 +320,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	// ////////////////////////////// DRAWING MAP PART /////////////////////////////////////////////
 
-	protected void drawEmptyTile(Canvas cvs, float x, float y, float ftileSize, boolean nightMode) {
+	protected void drawEmptyTile(Canvas cvs, float x, float y, float ftileSize, boolean nightMode, boolean moreDetail) {
 		float tileDiv = (ftileSize / emptyTileDivisor);
 		for (int k1 = 0; k1 < emptyTileDivisor; k1++) {
 			for (int k2 = 0; k2 < emptyTileDivisor; k2++) {
@@ -462,10 +462,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 //						for (int j = 0; j < height; j++) {
 //							float x1 = (i + left - tileX) * ftileSize + w;
 //							float y1 = (j + top - tileY) * ftileSize + h;
-//							drawEmptyTile(canvas, x1, y1, ftileSize, nightMode);
+//							drawEmptyTile(canvas, x1, y1, ftileSize, nightMode, moreDetail);
 //						}
 //					}
-					drawOverMap(canvas, latlonRect, tilesRect, nightMode);
+					drawOverMap(canvas, latlonRect, tilesRect, nightMode, moreDetail);
 					
 //					log.info("Draw with layers " + (System.currentTimeMillis() - time));
 				} finally {
@@ -475,7 +475,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 	}
 	
-	private void drawOverMap(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode) {
+	private void drawOverMap(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode, boolean moreDetail) {
 		int w = getCenterPointX();
 		int h = getCenterPointY();
 
@@ -489,7 +489,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				if (!layer.drawInScreenPixels()) {
 					canvas.rotate(rotate, w, h);
 				}
-				layer.onDraw(canvas, latlonRect, tilesRect, nightMode, moreDetail);
+				layer.onDraw(canvas, latlonRect, tilesRect, nightMode, prefs.SHOW_MORE_MAP_DETAIL.get());
 				canvas.restore();
 			} catch (IndexOutOfBoundsException e) {
 				// skip it
