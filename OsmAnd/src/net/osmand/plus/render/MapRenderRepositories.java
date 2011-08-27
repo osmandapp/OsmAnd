@@ -356,6 +356,7 @@ public class MapRenderRepositories {
 			OsmandApplication app = ((OsmandApplication)context.getApplicationContext());
 			Boolean renderDay = app.getDaynightHelper().getDayNightRenderer();
 			boolean nightMode = renderDay != null && !renderDay.booleanValue();
+			boolean moreDetail = prefs.SHOW_MORE_MAP_DETAIL.get();
 			BaseOsmandRender renderingType = app.getRendererRegistry().getCurrentSelectedRenderer();
 			
 			// prevent editing
@@ -378,7 +379,7 @@ public class MapRenderRepositories {
 					dataBox.bottom -= hi;
 				}
 				validateLatLonBox(dataBox);
-				boolean loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingType, nightMode, prefs.SHOW_MORE_MAP_DETAIL.get());
+				boolean loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingType, nightMode, moreDetail);
 				if (!loaded || checkWhetherInterrupted()) {
 					return;
 				}
