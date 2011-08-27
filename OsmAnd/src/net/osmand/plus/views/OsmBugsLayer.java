@@ -117,7 +117,7 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode, boolean moreDetail) {
 		if (view.getZoom() >= startZoom) {
 			// request to load
 			requestToLoad(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, view.getZoom());

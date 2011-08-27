@@ -70,7 +70,7 @@ public class PointLocationLayer implements OsmandMapLayer {
 	}
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode, boolean moreDetail) {
 		if (isLocationVisible(lastKnownLocation)) {
 			checkAppMode(view.getSettings().getApplicationMode());
 			

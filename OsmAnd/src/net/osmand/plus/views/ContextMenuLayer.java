@@ -93,7 +93,7 @@ public class ContextMenuLayer implements OsmandMapLayer {
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode, boolean moreDetail) {
 		if(latLon != null){
 			int x = view.getMapXForPoint(latLon.getLongitude());
 			int y = view.getMapYForPoint(latLon.getLatitude());

@@ -85,7 +85,7 @@ public class MapVectorLayer extends BaseMapLayer {
 	
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode, boolean moreDetail) {
 		if(!visible){
 			return;
 		}

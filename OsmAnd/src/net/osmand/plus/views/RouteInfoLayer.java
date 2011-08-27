@@ -162,7 +162,7 @@ public class RouteInfoLayer implements OsmandMapLayer, IRouteInformationListener
 
 	public final int shiftCenter = 55;
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode, boolean moreDetail) {
 		if(isVisible()){
 			border.set(layout.getLeft() - 10 * dm.density, layout.getTop() - 4 * dm.density, 
 					layout.getRight() - (shiftCenter - 5) * dm.density, layout.getBottom() + 4 * dm.density);

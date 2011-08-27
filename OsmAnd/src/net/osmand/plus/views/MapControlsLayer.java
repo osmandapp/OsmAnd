@@ -103,7 +103,7 @@ public class MapControlsLayer implements OsmandMapLayer {
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode, boolean moreDetail) {
 		BaseMapLayer mainLayer = view.getMainLayer();
 		boolean zoomInEnabled = mainLayer != null && view.getZoom() < mainLayer.getMaximumShownMapZoom();
 		boolean zoomOutEnabled = mainLayer != null && view.getZoom() > mainLayer.getMinimumShownMapZoom();

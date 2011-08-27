@@ -489,7 +489,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				if (!layer.drawInScreenPixels()) {
 					canvas.rotate(rotate, w, h);
 				}
-				layer.onDraw(canvas, latlonRect, tilesRect, nightMode);
+				layer.onDraw(canvas, latlonRect, tilesRect, nightMode, moreDetail);
 				canvas.restore();
 			} catch (IndexOutOfBoundsException e) {
 				// skip it

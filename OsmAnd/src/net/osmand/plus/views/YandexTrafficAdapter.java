@@ -35,7 +35,7 @@ public class YandexTrafficAdapter  extends MapTileAdapter {
 	}
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode, boolean moreDetail) {
 		updateTimeStamp();
 	}
 	

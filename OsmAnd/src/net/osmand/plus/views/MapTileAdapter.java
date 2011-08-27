@@ -18,7 +18,7 @@ public abstract class MapTileAdapter {
 		this.view = view;
 	}
 	
-	public abstract void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode);
+	public abstract void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode, boolean moreDetail);
 	
 	public abstract void onClear(); 
 
