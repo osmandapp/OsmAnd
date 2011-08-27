@@ -417,6 +417,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		handler.removeMessages(1);
 		
 		// long time = System.currentTimeMillis();
+		boolean moreDetail = getSettings().SHOW_MORE_MAP_DETAIL.get();
 
 		boolean useInternet = getSettings().USE_INTERNET_TO_DOWNLOAD_TILES.get();
 		if (useInternet) {
@@ -462,10 +463,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 //						for (int j = 0; j < height; j++) {
 //							float x1 = (i + left - tileX) * ftileSize + w;
 //							float y1 = (j + top - tileY) * ftileSize + h;
-//							drawEmptyTile(canvas, x1, y1, ftileSize, nightMode, nightMode);
+//							drawEmptyTile(canvas, x1, y1, ftileSize, nightMode, moreDetail);
 //						}
 //					}
-					drawOverMap(canvas, latlonRect, tilesRect, nightMode, nightMode);
+					drawOverMap(canvas, latlonRect, tilesRect, nightMode, moreDetail);
 					
 //					log.info("Draw with layers " + (System.currentTimeMillis() - time));
 				} finally {
@@ -480,6 +481,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		int h = getCenterPointY();
 
 		// long prev = System.currentTimeMillis();
+		boolean moreDetail = getSettings().SHOW_MORE_MAP_DETAIL.get();
+
 		for (int i = 0; i < layers.size(); i++) {
 			try {
 				
@@ -489,7 +492,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				if (!layer.drawInScreenPixels()) {
 					canvas.rotate(rotate, w, h);
 				}
-				layer.onDraw(canvas, latlonRect, tilesRect, nightMode, nightMode);
+				layer.onDraw(canvas, latlonRect, tilesRect, nightMode, moreDetail);
 				canvas.restore();
 			} catch (IndexOutOfBoundsException e) {
 				// skip it
