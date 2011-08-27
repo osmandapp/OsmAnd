@@ -320,7 +320,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	// ////////////////////////////// DRAWING MAP PART /////////////////////////////////////////////
 
-	protected void drawEmptyTile(Canvas cvs, float x, float y, float ftileSize, boolean nightMode, boolean moreDetail) {
+	protected void drawEmptyTile(Canvas cvs, float x, float y, float ftileSize, boolean nightMode) {
 		float tileDiv = (ftileSize / emptyTileDivisor);
 		for (int k1 = 0; k1 < emptyTileDivisor; k1++) {
 			for (int k2 = 0; k2 < emptyTileDivisor; k2++) {
@@ -462,10 +462,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 //						for (int j = 0; j < height; j++) {
 //							float x1 = (i + left - tileX) * ftileSize + w;
 //							float y1 = (j + top - tileY) * ftileSize + h;
-//							drawEmptyTile(canvas, x1, y1, ftileSize, nightMode, nightMode);
+//							drawEmptyTile(canvas, x1, y1, ftileSize, nightMode);
 //						}
 //					}
-					drawOverMap(canvas, latlonRect, tilesRect, nightMode, nightMode);
+					drawOverMap(canvas, latlonRect, tilesRect, nightMode);
 					
 //					log.info("Draw with layers " + (System.currentTimeMillis() - time));
 				} finally {
@@ -475,7 +475,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 	}
 	
-	private void drawOverMap(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode, boolean moreDetail) {
+	private void drawOverMap(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode) {
 		int w = getCenterPointX();
 		int h = getCenterPointY();
 
