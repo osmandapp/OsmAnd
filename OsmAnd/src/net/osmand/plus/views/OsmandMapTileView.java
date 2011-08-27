@@ -481,7 +481,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		int h = getCenterPointY();
 
 		// long prev = System.currentTimeMillis();
-		boolean moreDetail = getSettings().SHOW_MORE_MAP_DETAIL.get();
+		moreDetail = getSettings().SHOW_MORE_MAP_DETAIL.get();
 
 		for (int i = 0; i < layers.size(); i++) {
 			try {
