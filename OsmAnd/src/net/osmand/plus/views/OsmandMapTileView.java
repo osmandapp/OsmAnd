@@ -413,6 +413,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return settings;
 	}
 
+	private OsmandSettings prefs;
+
 	private void refreshMapInternal() {
 		handler.removeMessages(1);
 		
@@ -465,7 +467,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 //							drawEmptyTile(canvas, x1, y1, ftileSize, nightMode, moreDetail);
 //						}
 //					}
-					drawOverMap(canvas, latlonRect, tilesRect, nightMode, moreDetail);
+					drawOverMap(canvas, latlonRect, tilesRect, nightMode, prefs.SHOW_MORE_MAP_DETAIL.get());
 					
 //					log.info("Draw with layers " + (System.currentTimeMillis() - time));
 				} finally {
