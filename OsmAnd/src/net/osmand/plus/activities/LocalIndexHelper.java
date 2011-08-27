@@ -6,7 +6,6 @@ import java.io.RandomAccessFile;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -63,6 +62,7 @@ public class LocalIndexHelper {
 			updateObfFileInformation(info, f);
 			info.setDescription(info.getDescription() + getInstalledDate(f));
 		} else if(info.getType() == LocalIndexType.POI_DATA){
+			checkPoiFileVersion(info, f);
 			info.setDescription(getInstalledDate(f));
 		} else if(info.getType() == LocalIndexType.GPX_DATA){
 			updateGpxInfo(info, f);

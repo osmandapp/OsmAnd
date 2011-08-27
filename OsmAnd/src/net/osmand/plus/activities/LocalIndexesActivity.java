@@ -46,7 +46,7 @@ import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 
 public class LocalIndexesActivity extends ExpandableListActivity {
 
-	private AsyncTask<Activity, LocalIndexInfo, List<LocalIndexInfo>> asyncLoader;
+	private LoadLocalIndexTask asyncLoader;
 	private LocalIndexesAdapter listAdapter;
 	private LoadLocalIndexDescriptionTask descriptionLoader;
 	private LocalIndexOperationTask operationTask;
@@ -58,17 +58,23 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 	protected static int BACKUP_OPERATION = 2;
 	protected static int RESTORE_OPERATION = 3;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		// requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.local_index);
-
-		LoadLocalIndexTask task = new LoadLocalIndexTask();
-		asyncLoader = task.execute(this);
 		descriptionLoader = new LoadLocalIndexDescriptionTask();
 		listAdapter = new LocalIndexesAdapter();
+		Object indexes = getLastNonConfigurationInstance();
+		asyncLoader = new LoadLocalIndexTask();
+		if(indexes instanceof List<?>){
+			asyncLoader.setResult((List<LocalIndexInfo>) indexes);
+		} else {
+			asyncLoader.execute(this);
+		}
+		
 		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -102,12 +108,12 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 	}
 
 	public class LoadLocalIndexTask extends AsyncTask<Activity, LocalIndexInfo, List<LocalIndexInfo>> {
-		List<LocalIndexInfo> progress = new ArrayList<LocalIndexInfo>();
+
+		private List<LocalIndexInfo> result;
 
 		@Override
 		protected List<LocalIndexInfo> doInBackground(Activity... params) {
 			LocalIndexHelper helper = new LocalIndexHelper((OsmandApplication) getApplication());
-			progress.clear();
 			return helper.getAllLocalIndexData(this);
 		}
 
@@ -127,10 +133,24 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 			}
 			listAdapter.notifyDataSetChanged();
 		}
+		
+		public void setResult(List<LocalIndexInfo> result) {
+			this.result = result;
+			for (LocalIndexInfo v : result) {
+				listAdapter.addLocalIndexInfo(v);
+			}
+			listAdapter.notifyDataSetChanged();
+			onPostExecute(result);
+		}
 
 		@Override
 		protected void onPostExecute(List<LocalIndexInfo> result) {
+			this.result = result;
 			findViewById(R.id.ProgressBar).setVisibility(View.GONE);
+		}
+		
+		public List<LocalIndexInfo> getResult() {
+			return result;
 		}
 
 	}
@@ -303,7 +323,13 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		descriptionLoader.cancel(true);
 	}
 	
-	
+	@Override
+	public Object onRetainNonConfigurationInstance() {
+		if(asyncLoader != null){
+			return asyncLoader.getResult();
+		}
+		return super.onRetainNonConfigurationInstance();
+	}
 
 	
 	@Override
