@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Set;
 
 import net.osmand.Algoritms;
-import net.osmand.FavouritePoint;
 import net.osmand.IProgress;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -35,7 +34,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.widget.BaseExpandableListAdapter;
@@ -44,7 +42,6 @@ import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 
 public class LocalIndexesActivity extends ExpandableListActivity {
@@ -84,16 +81,19 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 			@Override
 			public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 				long packedPos = ((ExpandableListContextMenuInfo)menuInfo).packedPosition;
-				
-				final LocalIndexInfo point = (LocalIndexInfo) listAdapter.getChild(ExpandableListView.getPackedPositionGroup(packedPos),
-						ExpandableListView.getPackedPositionChild(packedPos));
-				if(point.getGpxFile() != null){
-					Location loc = point.getGpxFile().findFistLocation();
-					if(loc != null){
-						OsmandSettings.getOsmandSettings(LocalIndexesActivity.this).setMapLocationToShow(loc.getLatitude(),loc.getLongitude());						
+				int group = ExpandableListView.getPackedPositionGroup(packedPos);
+				int child = ExpandableListView.getPackedPositionChild(packedPos);
+				if (child >= 0 && group >= 0) {
+					final LocalIndexInfo point = (LocalIndexInfo) listAdapter.getChild(group, child);
+					if (point != null && point.getGpxFile() != null) {
+						Location loc = point.getGpxFile().findFistLocation();
+						if (loc != null) {
+							OsmandSettings.getOsmandSettings(LocalIndexesActivity.this).setMapLocationToShow(loc.getLatitude(),
+									loc.getLongitude());
+						}
+						((OsmandApplication) getApplication()).setGpxFileToDisplay(point.getGpxFile());
+						MapActivity.launchMapActivityMoveToTop(LocalIndexesActivity.this);
 					}
-					((OsmandApplication) getApplication()).setGpxFileToDisplay(point.getGpxFile());
-					MapActivity.launchMapActivityMoveToTop(LocalIndexesActivity.this);
 				}
 			}	
 		});
