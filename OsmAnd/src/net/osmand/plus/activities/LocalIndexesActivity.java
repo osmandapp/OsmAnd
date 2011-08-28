@@ -710,7 +710,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 			}
 			size = size / (1 << 10);
 			if(size > 0){
-				t.append(" - ").append(size).append(" MB");
+				t.append(", ").append(size).append(" MB");
 			}
 			t.append("]");
 			nameView.setText(t.toString());
