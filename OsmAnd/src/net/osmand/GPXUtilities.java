@@ -34,24 +34,19 @@ public class GPXUtilities {
 	
 	private final static NumberFormat latLonFormat = new DecimalFormat("0.00#####", new DecimalFormatSymbols(Locale.US));
 	
-	public static class TrkPt {
-		public double lat;
-		public double lon;
-		public double ele;
-		public double speed;
-		public long time;
-	}
-	
 	public static class WptPt {
 		public double lat;
 		public double lon;
-		public String name;
+		public String name = null;
 		// by default
 		public long time = 0;
+		public double ele = Double.NaN;
+		public double speed = 0;
+		public double hdop = Double.NaN;
 	}
 	
 	public static class TrkSegment {
-		public List<TrkPt> points = new ArrayList<TrkPt>();
+		public List<WptPt> points = new ArrayList<WptPt>();
 	}
 	
 	public static class Track {
@@ -85,23 +80,9 @@ public class GPXUtilities {
 				serializer.startTag(null, "trk"); //$NON-NLS-1$
 				for (TrkSegment segment : track.segments) {
 					serializer.startTag(null, "trkseg"); //$NON-NLS-1$
-					for (TrkPt p : segment.points) {
+					for (WptPt p : segment.points) {
 						serializer.startTag(null, "trkpt"); //$NON-NLS-1$
-						serializer.attribute(null, "lat", latLonFormat.format(p.lat)); //$NON-NLS-1$ //$NON-NLS-2$
-						serializer.attribute(null, "lon", latLonFormat.format(p.lon)); //$NON-NLS-1$ //$NON-NLS-2$
-						serializer.startTag(null, "ele"); //$NON-NLS-1$
-						serializer.text(p.ele + ""); //$NON-NLS-1$
-						serializer.endTag(null, "ele"); //$NON-NLS-1$
-						serializer.startTag(null, "time"); //$NON-NLS-1$
-						serializer.text(format.format(new Date(p.time)));
-						serializer.endTag(null, "time"); //$NON-NLS-1$
-						if (p.speed > 0) {
-							serializer.startTag(null, "extensions");
-							serializer.startTag(null, "speed"); //$NON-NLS-1$
-							serializer.text(p.speed + ""); //$NON-NLS-1$
-							serializer.endTag(null, "speed"); //$NON-NLS-1$
-							serializer.endTag(null, "extensions");
-						}
+						writeWpt(format, serializer, p);
 
 						serializer.endTag(null, "trkpt"); //$NON-NLS-1$
 					}
@@ -136,6 +117,39 @@ public class GPXUtilities {
 			return ctx.getString(R.string.error_occurred_saving_gpx);
 		}
 		return null;
+	}
+
+	private static void writeWpt(SimpleDateFormat format, XmlSerializer serializer, WptPt p) throws IOException {
+		serializer.attribute(null, "lat", latLonFormat.format(p.lat)); //$NON-NLS-1$ //$NON-NLS-2$
+		serializer.attribute(null, "lon", latLonFormat.format(p.lon)); //$NON-NLS-1$ //$NON-NLS-2$
+
+		if(!Double.isNaN(p.ele)){
+			serializer.startTag(null, "ele"); //$NON-NLS-1$
+			serializer.text(p.ele + ""); //$NON-NLS-1$
+			serializer.endTag(null, "ele"); //$NON-NLS-1$
+		}
+		if(p.name != null){
+			serializer.startTag(null, "name"); //$NON-NLS-1$
+			serializer.text(p.name);
+			serializer.endTag(null, "name"); //$NON-NLS-1$
+		}
+		if(!Double.isNaN(p.hdop)){
+			serializer.startTag(null, "hdop"); //$NON-NLS-1$
+			serializer.text(p.hdop +"");
+			serializer.endTag(null, "hdop"); //$NON-NLS-1$
+		}
+		if(p.time != 0){
+			serializer.startTag(null, "time"); //$NON-NLS-1$
+			serializer.text(format.format(new Date(p.time)));
+			serializer.endTag(null, "time"); //$NON-NLS-1$
+		}
+		if (p.speed > 0) {
+			serializer.startTag(null, "extensions");
+			serializer.startTag(null, "speed"); //$NON-NLS-1$
+			serializer.text(p.speed + ""); //$NON-NLS-1$
+			serializer.endTag(null, "speed"); //$NON-NLS-1$
+			serializer.endTag(null, "extensions");
+		}
 	}
 	
 	
@@ -201,6 +215,13 @@ public class GPXUtilities {
 							} catch (ParseException e) {
 							}
 						}
+					} else if (current != null && parser.getName().equals("hdop")) { //$NON-NLS-1$
+						if (parser.next() == XmlPullParser.TEXT) {
+							try {
+								current.setAccuracy(Float.parseFloat(parser.getText()));
+							} catch (NumberFormatException e) {
+							}
+						}
 					} else if (current != null && parser.getName().equals("ele")) { //$NON-NLS-1$
 						if (parser.next() == XmlPullParser.TEXT) {
 							try {
@@ -223,11 +244,7 @@ public class GPXUtilities {
 							parser.getName().equals("trkpt") || (!cloudMade && parser.getName().equals("rtept"))) { //$NON-NLS-1$ //$NON-NLS-2$ 
 						if (current != null) {
 							if (parser.getName().equals("wpt") && !cloudMade) { //$NON-NLS-1$
-								WptPt pt = new WptPt();
-								pt.lat = current.getLatitude();
-								pt.lon = current.getLongitude();
-								pt.name = currentName;
-								res.wayPoints.add(pt);
+								res.wayPoints.add(convertLocationToWayPoint(current, currentName));
 							} else {
 								if (res.locations.isEmpty()) {
 									res.locations.add(new ArrayList<Location>());
@@ -247,6 +264,24 @@ public class GPXUtilities {
 		}
 		
 		return res;
+	}
+	
+	private static WptPt convertLocationToWayPoint(Location current, String name){
+		WptPt pt = new WptPt();
+		pt.lat = current.getLatitude();
+		pt.lon = current.getLongitude();
+		if(current.hasAltitude()) {
+			pt.ele = current.getAltitude();
+		}
+		if(current.hasSpeed()) {
+			pt.speed = current.getSpeed();
+		}
+		if(current.hasAccuracy()) {
+			pt.hdop = current.getAccuracy();
+		}
+		pt.time = current.getTime();
+		pt.name = name;
+		return pt;
 	}
 
 }

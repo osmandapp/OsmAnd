@@ -10,7 +10,6 @@ import net.osmand.GPXUtilities;
 import net.osmand.LogUtil;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Track;
-import net.osmand.GPXUtilities.TrkPt;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandSettings;
@@ -27,7 +26,7 @@ import android.text.format.DateFormat;
 public class SavingTrackHelper extends SQLiteOpenHelper {
 	
 	public final static String DATABASE_NAME = "tracks"; //$NON-NLS-1$
-	public final static int DATABASE_VERSION = 2;
+	public final static int DATABASE_VERSION = 3;
 	
 	public final static String TRACK_NAME = "track"; //$NON-NLS-1$
 	public final static String TRACK_COL_DATE = "date"; //$NON-NLS-1$
@@ -35,6 +34,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public final static String TRACK_COL_LON = "lon"; //$NON-NLS-1$
 	public final static String TRACK_COL_ALTITUDE = "altitude"; //$NON-NLS-1$
 	public final static String TRACK_COL_SPEED = "speed"; //$NON-NLS-1$
+	public final static String TRACK_COL_HDOP = "hdop"; //$NON-NLS-1$
 	
 	public final static String POINT_NAME = "point"; //$NON-NLS-1$
 	public final static String POINT_COL_DATE = "date"; //$NON-NLS-1$
@@ -56,7 +56,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public SavingTrackHelper(Context ctx){
 		super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
 		this.ctx = ctx;
-		updateScript = "INSERT INTO " + TRACK_NAME + " VALUES (?, ?, ?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
+		updateScript = "INSERT INTO " + TRACK_NAME + 
+		" (" +TRACK_COL_LAT +", " +TRACK_COL_LON+", " +TRACK_COL_ALTITUDE+", " +TRACK_COL_SPEED
+			 +", " +TRACK_COL_HDOP+", " +TRACK_COL_DATE+ ")" +
+		" VALUES (?, ?, ?, ?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
 		updatePointsScript = "INSERT INTO " + POINT_NAME + " VALUES (?, ?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
@@ -81,6 +84,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		if(oldVersion < 2){
 			createTableForPoints(db);
+		}
+		if(oldVersion < 3){
+			db.execSQL("ALTER TABLE " + TRACK_NAME +  " ADD " + TRACK_COL_HDOP + " double");
 		}
 	}
 	
@@ -179,19 +185,20 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	
 	private void collectDBTracks(SQLiteDatabase db, Map<String, GPXFile> dataTracks) {
 		Cursor query = db.rawQuery("SELECT " + TRACK_COL_LAT + "," + TRACK_COL_LON + "," + TRACK_COL_ALTITUDE + "," //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-				+ TRACK_COL_SPEED + "," + TRACK_COL_DATE + " FROM " + TRACK_NAME +" ORDER BY " + TRACK_COL_DATE +" ASC", null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				+ TRACK_COL_SPEED + "," + TRACK_COL_HDOP + "," + TRACK_COL_DATE + " FROM " + TRACK_NAME +" ORDER BY " + TRACK_COL_DATE +" ASC", null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		long previousTime = 0;
 		long previousInterval = 0;
 		TrkSegment segment = null;
 		Track track = null;
 		if (query.moveToFirst()) {
 			do {
-				TrkPt pt = new TrkPt();
+				WptPt pt = new WptPt();
 				pt.lat = query.getDouble(0);
 				pt.lon = query.getDouble(1);
 				pt.ele = query.getDouble(2);
 				pt.speed = query.getDouble(3);
-				long time = query.getLong(4);
+				pt.hdop = query.getDouble(4);
+				long time = query.getLong(5);
 				pt.time = time;
 				long currentInterval = Math.abs(time - previousTime);
 				
@@ -226,11 +233,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		query.close();
 	}
 	
-	public void insertData(double lat, double lon, double alt, double speed, long time, OsmandSettings settings){
+	public void insertData(double lat, double lon, double alt, double speed, double hdop, long time, OsmandSettings settings){
 		if (time - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()*1000) {
 			SQLiteDatabase db = getWritableDatabase();
 			if (db != null) {
-				db.execSQL(updateScript, new Object[] { lat, lon, alt, speed, time });
+				db.execSQL(updateScript, new Object[] { lat, lon, alt, speed, hdop, time });
 			}
 			lastTimeUpdated = time;
 		}

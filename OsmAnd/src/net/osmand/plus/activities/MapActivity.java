@@ -524,7 +524,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     		// write only with 50 meters accuracy
 			if (!location.hasAccuracy() || location.getAccuracy() < 50) {
 				savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(), location.getSpeed(),
-						location.getTime(), settings);
+						location.getAccuracy(), location.getTime(), settings);
 			}
 		}
     	registerUnregisterSensor(location);
