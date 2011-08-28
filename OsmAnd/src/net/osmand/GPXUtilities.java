@@ -179,7 +179,7 @@ public class GPXUtilities {
 		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT);
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
 		try {
-			boolean cloudMade = false;
+			res.cloudMadeFile = false;
 			XmlPullParser parser = Xml.newPullParser();
 			parser.setInput(new FileInputStream(f), "UTF-8"); //$NON-NLS-1$
 			
@@ -189,12 +189,12 @@ public class GPXUtilities {
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
 					if (parser.getName().equals("copyright")) { //$NON-NLS-1$
-						cloudMade |= "cloudmade".equalsIgnoreCase(parser.getAttributeValue("", "author")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						res.cloudMadeFile |= "cloudmade".equalsIgnoreCase(parser.getAttributeValue("", "author")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 					} else if (parser.getName().equals("trkseg")) { //$NON-NLS-1$
 						res.locations.add(new ArrayList<Location>());
 					} else if (parser.getName().equals("wpt") || parser.getName().equals("trkpt") || //$NON-NLS-1$//$NON-NLS-2$
-							(!cloudMade && parser.getName().equals("rtept"))) { //$NON-NLS-1$
+							(!res.cloudMadeFile && parser.getName().equals("rtept"))) { //$NON-NLS-1$
 						// currently not distinguish different point represents all as a line
 						try {
 							currentName = ""; //$NON-NLS-1$
@@ -241,9 +241,9 @@ public class GPXUtilities {
 					
 				} else if (tok == XmlPullParser.END_TAG) {
 					if (parser.getName().equals("wpt") || //$NON-NLS-1$
-							parser.getName().equals("trkpt") || (!cloudMade && parser.getName().equals("rtept"))) { //$NON-NLS-1$ //$NON-NLS-2$ 
+							parser.getName().equals("trkpt") || (!res.cloudMadeFile && parser.getName().equals("rtept"))) { //$NON-NLS-1$ //$NON-NLS-2$ 
 						if (current != null) {
-							if (parser.getName().equals("wpt") && !cloudMade) { //$NON-NLS-1$
+							if (parser.getName().equals("wpt") && !res.cloudMadeFile) { //$NON-NLS-1$
 								res.wayPoints.add(convertLocationToWayPoint(current, currentName));
 							} else {
 								if (res.locations.isEmpty()) {
