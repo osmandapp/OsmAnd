@@ -1,10 +1,19 @@
 package net.osmand;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.zip.GZIPOutputStream;
 
 import net.osmand.LogUtil;
 
@@ -210,5 +219,84 @@ public class Algoritms {
 			}
 		}
 		return false;
+	}
+	
+	private static final String BOUNDARY = "CowMooCowMooCowCowCow"; //$NON-NLS-1$
+	public static String uploadFile(String urlText, File fileToUpload, String formName, boolean gzip){
+		URL url;
+		try {
+			log.info("Start uploading file to " + urlText + " " +fileToUpload.getName());
+			url = new URL(urlText);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+			conn.setRequestMethod("POST");
+			
+	        conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY); //$NON-NLS-1$ //$NON-NLS-2$
+	        conn.setRequestProperty("User-Agent", "Osmand"); //$NON-NLS-1$ //$NON-NLS-2$
+
+	        OutputStream ous = conn.getOutputStream();
+			ous.write(("--" + BOUNDARY+"\r\n").getBytes());
+			ous.write(("content-disposition: form-data; name=\""+formName+"\"; filename=\"" + fileToUpload.getName() + "\"\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
+	        ous.write(("Content-Type: application/octet-stream\r\n\r\n").getBytes()); //$NON-NLS-1$
+	        InputStream fis = new FileInputStream(fileToUpload);
+			BufferedInputStream bis = new BufferedInputStream(fis, 20 * 1024);
+			ous.flush();
+			if(gzip){
+				GZIPOutputStream gous = new GZIPOutputStream(ous, 1024);
+				Algoritms.streamCopy(bis, gous);
+				gous.flush();
+				gous.finish();
+			} else {
+				Algoritms.streamCopy(bis, ous);
+			}
+			
+	        ous.write(("\r\n--" + BOUNDARY + "--\r\n").getBytes()); //$NON-NLS-1$ //$NON-NLS-2$
+			ous.flush();
+			Algoritms.closeStream(bis);
+			Algoritms.closeStream(ous);
+
+			log.info("Finish uploading file " + fileToUpload.getName());
+			log.info("Response code and message : " + conn.getResponseCode() + " " + conn.getResponseMessage());
+			if(conn.getResponseCode() != 200){
+				return conn.getResponseMessage();
+			}
+			InputStream is = conn.getInputStream();
+			StringBuilder responseBody = new StringBuilder();
+			if (is != null) {
+				BufferedReader in = new BufferedReader(new InputStreamReader(is, "UTF-8")); //$NON-NLS-1$
+				String s;
+				boolean first = true;
+				while ((s = in.readLine()) != null) {
+					if(first){
+						first = false;
+					} else {
+						responseBody.append("\n"); //$NON-NLS-1$
+					}
+					responseBody.append(s);
+					
+				}
+				is.close();
+			}
+			String response = responseBody.toString();
+			log.info("Response : " + response);
+			if(response.startsWith("OK")){
+				return null;
+			}
+			return response;
+		} catch (IOException e) {
+			log.error(e.getMessage(), e);
+			return e.getMessage();
+		}
+	}
+
+	
+	private final static String URL_TO_UPLOAD_GPX = "http://download.osmand.net/upload_gpx.php";
+	public static void main(String[] args) throws UnsupportedEncodingException {
+		File file = new File("/home/victor/projects/OsmAnd/git/config/site/welcome.msg");
+		String url = URL_TO_UPLOAD_GPX + "?author=" + URLEncoder.encode("222", "UTF-8") + "&wd="
+				+ URLEncoder.encode("222", "UTF-8") + "&file="
+				+ URLEncoder.encode(file.getName(), "UTF-8");
+		Algoritms.uploadFile(url, file, "filename", true);
 	}
 }

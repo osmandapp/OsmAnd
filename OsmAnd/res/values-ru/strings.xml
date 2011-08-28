@@ -2,7 +2,7 @@
 <resources>
 	<string name="local_index_gpx_info_show">\n\nДлинное нажатие для просмотра на карте</string>
     <string name="local_index_gpx_info_speed">\nСредняя скорость : %1$s \nМаксимальная скорость : %2$s</string>
-	<string name="local_index_gpx_info_elevation">\nСредняя высота : %1$.0f метров\nMinimum altitude : %2$.0f метров\nMaximimu altitude : %3$.0f метров\nПодъем вверх : %4$.0f метров\nПодъем вниз : %5$.0f метров</string>
+	<string name="local_index_gpx_info_elevation">\nСредняя высота : %1$.0f метров\nМинимальная высота : %2$.0f метров\Максимальная высота : %3$.0f метров\nПодъем вверх : %4$.0f метров\nПодъем вниз : %5$.0f метров</string>
 	<string name="local_index_gpx_info">Путей : %1$d\nВсего точек : %2$d\nОтмечено точек : %3$d\nВсего расстояние : %4$s
 										\nНачало : %5$tD %5$tR\nОкончание : %6$tD %6$tR\n</string>
 	<string name="local_index_installed">Установлено</string>
@@ -11,14 +11,14 @@
 	<string name="local_index_items_restored">%1$d из %2$d объектов успешно восстановлены.</string>
 	<string name="local_index_no_items_to_do">Нет объектов, чтобы %1$s</string>	
     <string name="local_index_action_do">Вы собириаетесь %1$s %2$s объектов. Вы уверены?</string>
-	<string name="local_index_descr_title">Offline Data Manager:</string>
+	<string name="local_index_descr_title">Менеджер офлайн данных:</string>
 	<string name="local_index_description">Офлайн данные доступные на SD карточке. Вы можете загрузить новые, архивировать и удалить данные.</string>
 	<string name="local_index_mi_restore">Восстановить</string>
-	<string name="local_index_mi_backup">Архивировать</string>
+	<string name="local_index_mi_backup">Архив</string>
 	<string name="local_index_mi_delete">Удалить</string>
-	<string name="local_index_mi_reload">Обновить данные</string>
+	<string name="local_index_mi_reload">Обновить</string>
 	<string name="local_index_download">Загрузить</string>
-	<string name="local_index_tile_data">Тайловые данные : %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable : %4$s \nZooms downloaded : %5$s</string>
+	<string name="local_index_tile_data">Тайловые данные : %1$s \nМинимальный уровень : %2$d\nМаксимальный уровень : %3$d\nЗагружаемый : %4$s \nУровни загружены : %5$s</string>
 	<string name="local_index_poi_data">POI</string>
 	<string name="local_index_address_data">Адрес</string>
 	<string name="local_index_transport_data">Транспорт</string>

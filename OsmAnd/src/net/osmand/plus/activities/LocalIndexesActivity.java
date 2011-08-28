@@ -1,6 +1,8 @@
 package net.osmand.plus.activities;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -47,10 +49,12 @@ import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 
 public class LocalIndexesActivity extends ExpandableListActivity {
 
+	private final static String URL_TO_UPLOAD_GPX = "http://download.osmand.net/upload_gpx.php";
+		
 	private LoadLocalIndexTask asyncLoader;
 	private LocalIndexesAdapter listAdapter;
 	private LoadLocalIndexDescriptionTask descriptionLoader;
-	private LocalIndexOperationTask operationTask;
+	private AsyncTask<LocalIndexInfo, ?, ?> operationTask;
 
 	private boolean selectionMode = false;
 	private Set<LocalIndexInfo> selectedItems = new LinkedHashSet<LocalIndexInfo>();
@@ -236,6 +240,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 			} else if(operation == RESTORE_OPERATION){
 				return getString(R.string.local_index_items_restored, count, total);
 			}  
+			
 			return "";
 		}
 
@@ -266,6 +271,72 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 			asyncLoader.execute(LocalIndexesActivity.this);
 			reloadIndexes();
 			
+		}
+	}
+	
+	
+	public class UploadGPXFilesTask extends AsyncTask<LocalIndexInfo, String, String> {
+		
+		private OsmandSettings settings;
+
+		public UploadGPXFilesTask(){
+			settings = ((OsmandApplication) getApplication()).getSettings();
+		}
+		
+		
+		@Override
+		protected String doInBackground(LocalIndexInfo... params) {
+			int count = 0;
+			int total = 0;
+			for (LocalIndexInfo info : params) {
+				if (!isCancelled()) {
+					String warning = null;
+					try {
+						File file = new File(info.getPathToData());
+						String userName = settings.USER_NAME.get();
+						String pwd = settings.USER_PASSWORD.get();
+						String url = URL_TO_UPLOAD_GPX + "?author=" + URLEncoder.encode(userName, "UTF-8") + "&wd="
+								+ URLEncoder.encode(pwd, "UTF-8") + "&file="
+								+ URLEncoder.encode(file.getName(), "UTF-8");
+						warning = Algoritms.uploadFile(url, file, "filename", true);
+					} catch (UnsupportedEncodingException e) {
+						warning = e.getMessage();
+					}
+					total++;
+					if (warning == null) {
+						count++;
+					} else {
+						publishProgress(warning);
+					}
+				}
+			}
+			return getString(R.string.local_index_items_uploaded, count, total);
+		}
+
+
+		@Override
+		protected void onProgressUpdate(String... values) {
+			if (values.length > 0) {
+				StringBuilder b = new StringBuilder();
+				for (int i=0; i<values.length; i++) {
+					if(i > 0){
+						b.append("\n");
+					}
+					b.append(values[i]);
+				}
+				Toast.makeText(LocalIndexesActivity.this, b.toString(), Toast.LENGTH_LONG).show();
+			}
+		}
+		
+		@Override
+		protected void onPreExecute() {
+			findViewById(R.id.ProgressBar).setVisibility(View.VISIBLE);
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			findViewById(R.id.ProgressBar).setVisibility(View.GONE);
+			Toast.makeText(LocalIndexesActivity.this, result, Toast.LENGTH_LONG).show();
 		}
 
 	}
@@ -313,6 +384,8 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 	}
 	
 	
+
+
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -343,6 +416,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		menu.add(0, R.string.local_index_mi_restore, 1, R.string.local_index_mi_restore);
 		menu.add(0, R.string.local_index_mi_delete, 2, R.string.local_index_mi_delete);
 		menu.add(0, R.string.local_index_mi_reload, 3, R.string.local_index_mi_reload);
+		menu.add(0, R.string.local_index_mi_upload_gpx, 4, R.string.local_index_mi_upload_gpx);
 		return true;
 	}
 	
@@ -363,6 +437,8 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 			operationTask = new LocalIndexOperationTask(DELETE_OPERATION);
 		} else if(actionResId == R.string.local_index_mi_restore){
 			operationTask = new LocalIndexOperationTask(RESTORE_OPERATION);
+		} else if(actionResId == R.string.local_index_mi_upload_gpx){
+			operationTask = new UploadGPXFilesTask();
 		} else {
 			operationTask = null;
 		}
@@ -380,7 +456,11 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 	}
 	
 	private void openSelectionMode(final int actionResId){
-		final String actionButton = getString(actionResId);
+		String value = getString(actionResId);
+		if (value.endsWith("...")) {
+			value = value.substring(0, value.length() - 3);
+		}
+		final String actionButton = value;
 		if(listAdapter.getGroupCount() == 0){
 			listAdapter.cancelFilter();
 			Toast.makeText(LocalIndexesActivity.this, getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
@@ -425,9 +505,13 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 			}
 		});
 		findViewById(R.id.DownloadButton).setVisibility(View.GONE);
-		findViewById(R.id.DescriptionText).setVisibility(View.GONE);
 		findViewById(R.id.FillLayoutStart).setVisibility(View.VISIBLE);
 		findViewById(R.id.FillLayoutEnd).setVisibility(View.VISIBLE);
+		findViewById(R.id.DescriptionText).setVisibility(View.GONE);
+		if(R.string.local_index_mi_upload_gpx == actionResId){
+			((TextView) findViewById(R.id.DescriptionTextTop)).setText(R.string.local_index_upload_gpx_description);
+			((TextView) findViewById(R.id.DescriptionTextTop)).setVisibility(View.VISIBLE);
+		}
 		listAdapter.notifyDataSetChanged();
 	}
 	
@@ -439,6 +523,8 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		findViewById(R.id.FillLayoutEnd).setVisibility(View.GONE);
 		findViewById(R.id.CancelButton).setVisibility(View.GONE);
 		findViewById(R.id.ActionButton).setVisibility(View.GONE);
+		((TextView) findViewById(R.id.DescriptionTextTop)).setVisibility(View.GONE);
+		((TextView) findViewById(R.id.DescriptionText)).setText(R.string.local_index_description);
 		listAdapter.cancelFilter();
 		collapseAllGroups();
 		listAdapter.notifyDataSetChanged();
@@ -457,6 +543,9 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		} else if(item.getItemId() == R.string.local_index_mi_restore){
 			listAdapter.filterCategories(true);
 			openSelectionMode(R.string.local_index_mi_restore);
+		} else if(item.getItemId() == R.string.local_index_mi_upload_gpx){
+			listAdapter.filterCategories(LocalIndexType.GPX_DATA);
+			openSelectionMode(R.string.local_index_mi_upload_gpx);
 		} else {
 			return super.onOptionsItemSelected(item);
 		}
