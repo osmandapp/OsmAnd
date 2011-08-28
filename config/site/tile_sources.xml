@@ -31,7 +31,7 @@
    <tile_source name="MTB Map CZ" url_template="http://tchor.fi.muni.cz:8080/mtbmap_tiles/{0}/{1}/{2}.png" ext=".png" min_zoom="7" max_zoom="16" tile_size="256" img_density="32" avg_img_size="18000"/>
 
    <tile_source name="Yandex RU" url_template="http://vec01.maps.yandex.ru/tiles?l=map&amp;v=2.15.0&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000" ellipsoid="true"/>
-   <tile_source name="Yandex Satellite RU" url_template="http://sat01.maps.yandex.ru/tiles?l=sat&amp;v=1.19.0&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="1" max_zoom="18" tile_size="256" img_density="32" avg_img_size="18000" ellipsoid="true"/>
+   <tile_source name="Yandex Satellite RU" url_template="http://sat01.maps.yandex.net/tiles?l=sat&amp;v=1.26.0&amp;x={1}&amp;y={2}&amp;z={0}" ext=".jpg" min_zoom="1" max_zoom="16" tile_size="256" img_density="32" avg_img_size="18000" ellipsoid="true"/>
    <tile_source rule="yandex_traffic" name="Yandex Traffic RU"/>
 
    <tile_source name="OpenFietskaart (NL)" url_template="http://overlay.openstreetmap.nl/openfietskaart-overlay/{0}/{1}/{2}.png" ext=".png" min_zoom="7" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/> 
