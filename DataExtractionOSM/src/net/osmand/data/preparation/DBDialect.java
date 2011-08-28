@@ -9,6 +9,11 @@ import java.sql.Statement;
 import net.osmand.Algoritms;
 
 import org.apache.commons.logging.Log;
+import org.sqlite.SQLiteConfig;
+import org.sqlite.SQLiteConfig.JournalMode;
+import org.sqlite.SQLiteConfig.LockingMode;
+import org.sqlite.SQLiteConfig.SynchronousMode;
+import org.sqlite.SQLiteJDBCLoader;
 
 import com.anvisics.jleveldb.LevelDBAccess;
 import com.anvisics.jleveldb.ext.DBAccessor;
@@ -91,10 +96,15 @@ public enum DBDialect {
 				log.error("Illegal configuration", e);
 				throw new IllegalStateException(e);
 			}
+			SQLiteConfig config = new SQLiteConfig();
+			config.setCacheSize(10000); //size for number in file pages in memory, (disk cache)
+			config.setJournalMode(JournalMode.OFF); //no journal - on crash the db is not usabale
+			config.setSynchronous(SynchronousMode.OFF); // faster without synchronization
+			config.setLockingMode(LockingMode.EXCLUSIVE); // we are the only one using the file => no need to get/realease locks always => faster
+			config.setSharedCache(true); // => needed for readUncommited
+			config.setReadUncommited(true); // => faster queries (read also what is not commited yet, but is inserted)
 			Connection connection = DriverManager.getConnection("jdbc:sqlite:" + fileName);
-			Statement statement = connection.createStatement();
-			statement.executeUpdate("PRAGMA synchronous = 0");
-			statement.close();
+			System.out.println(String.format("SQLITE running in %s mode", SQLiteJDBCLoader.isNativeMode() ? "native" : "pure-java"));
 			return connection;
 		} else if (DBDialect.DERBY == this) {
 			try {

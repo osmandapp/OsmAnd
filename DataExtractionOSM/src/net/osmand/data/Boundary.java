@@ -1,6 +1,7 @@
 package net.osmand.data;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import net.osmand.osm.LatLon;
@@ -19,6 +20,7 @@ public class Boundary {
 	private List<Way> outerWays = new ArrayList<Way>();
 	private List<Way> innerWays = new ArrayList<Way>();
 	
+	private List<Boundary> subboundaries = new ArrayList<Boundary>();
 	
 	public boolean containsPoint(LatLon point) {
 		return containsPoint(point.getLatitude(), point.getLongitude());
@@ -88,5 +90,18 @@ public class Boundary {
 		this.adminLevel = adminLevel;
 	}
 	
+	public List<Boundary> getSubboundaries() {
+		return subboundaries;
+	}
 	
+	public void addSubBoundary(Boundary subBoundary) {
+		if (subBoundary != null) {
+			subboundaries.add(subBoundary);
+		}
+	}
+
+	public void addSubBoundaries(Collection<Boundary> subBoundaries) {
+		subboundaries.addAll(subBoundaries);
+	}
+
 }
