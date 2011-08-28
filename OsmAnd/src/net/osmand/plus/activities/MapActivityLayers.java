@@ -360,9 +360,9 @@ public class MapActivityLayers {
 				Arrays.sort(files, new Comparator<File>() {
 					@Override
 					public int compare(File object1, File object2) {
-						if (object1.lastModified() > object2.lastModified()) {
+						if (object1.getName() > object2.getName()) {
 							return -1;
-						} else if (object1.lastModified() == object2.lastModified()) {
+						} else if (object1.getName() == object2.getName()) {
 							return 0;
 						}
 						return 1;
