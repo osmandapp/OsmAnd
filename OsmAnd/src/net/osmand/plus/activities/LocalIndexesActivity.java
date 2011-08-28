@@ -687,7 +687,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 			}
 			StringBuilder t = new StringBuilder(group.getType().getHumanString(LocalIndexesActivity.this));
 			if (group.isBackupedData()) {
-				t.append("* ");
+				t.append(" - ").append(getString(R.string.local_indexes_cat_backup));
 			}
 			TextView nameView = ((TextView) v.findViewById(R.id.local_index_category_name));
 			t.append("  [").append(getChildrenCount(groupPosition));
