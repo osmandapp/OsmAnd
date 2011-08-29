@@ -27,4 +27,5 @@ git pull --rebase 2>&1 >>$LOG_FILE
 # 4. Synchronize github with googlecode mercurial
 "${DIRECTORY}/sync_git_google.sh" 2>&1 >>$LOG_FILE
 
-
+# 5. update site files 
+"${DIRECTORY}/update_site.sh" 2>&1 >>$LOG_FILE
