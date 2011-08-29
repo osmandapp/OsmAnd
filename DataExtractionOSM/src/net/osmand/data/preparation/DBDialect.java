@@ -9,6 +9,7 @@ import java.sql.Statement;
 import net.osmand.Algoritms;
 
 import org.apache.commons.logging.Log;
+import org.sqlite.SQLiteJDBCLoader;
 
 import com.anvisics.jleveldb.LevelDBAccess;
 import com.anvisics.jleveldb.ext.DBAccessor;
@@ -94,7 +95,14 @@ public enum DBDialect {
 			Connection connection = DriverManager.getConnection("jdbc:sqlite:" + fileName);
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("PRAGMA synchronous = 0");
+			//no journaling, saves some I/O access, but database can go corrupt
+			statement.executeQuery("PRAGMA journal_mode = OFF");
+			//we are exclusive, some speed increase ( no need to get and release logs
+			statement.executeQuery("PRAGMA locking_mode = EXCLUSIVE");
+			//increased cache_size, by default it is 2000 and we have quite huge files...
+			statement.executeUpdate("PRAGMA cache_size = 10000");
 			statement.close();
+			System.out.println(String.format("SQLITE running in %s mode", SQLiteJDBCLoader.isNativeMode() ? "native" : "pure-java"));
 			return connection;
 		} else if (DBDialect.DERBY == this) {
 			try {

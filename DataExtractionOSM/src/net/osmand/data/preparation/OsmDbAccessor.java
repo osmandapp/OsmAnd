@@ -8,14 +8,16 @@ import java.sql.Statement;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 import net.osmand.IProgress;
 import net.osmand.osm.Entity;
+import net.osmand.osm.Entity.EntityId;
+import net.osmand.osm.Entity.EntityType;
 import net.osmand.osm.Node;
 import net.osmand.osm.Relation;
 import net.osmand.osm.Way;
-import net.osmand.osm.Entity.EntityId;
-import net.osmand.osm.Entity.EntityType;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,6 +30,7 @@ import com.anvisics.jleveldb.ext.DBIterator;
 import com.anvisics.jleveldb.ext.ReadOptions;
 
 public class OsmDbAccessor implements OsmDbAccessorContext {
+	
 	private static final Log log = LogFactory.getLog(OsmDbAccessor.class);
 	
 	private PreparedStatement pselectNode;
@@ -37,6 +40,7 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 	private int allRelations ;
 	private int allWays;
 	private int allNodes;
+	private boolean realCounts = false;
 	private Connection dbConn;
 	private DBDialect dialect;
 	
@@ -202,86 +206,66 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 	
 	
 
-	public int iterateOverEntities(IProgress progress, EntityType type, OsmDbVisitor visitor) throws SQLException {
+	public int iterateOverEntities(IProgress progress, EntityType type, OsmDbVisitor visitor) throws SQLException, InterruptedException {
 		if(dialect == DBDialect.NOSQL){
 			return iterateOverEntitiesNoSQL(progress, type, visitor);
 		}
 		Statement statement = dbConn.createStatement();
 		String select;
 		int count = 0;
-
+		
 		// stat.executeUpdate("create table tags (id "+longType+", type smallint, skeys varchar(1024), value varchar(1024))");
 		// stat.executeUpdate("create table ways (id "+longType+", node "+longType+", ord smallint)");
 //		stat.executeUpdate("create table relations (id "+longType+", member "+longType+", type smallint, role varchar(1024), ord smallint)");
+		computeRealCounts(statement);
 		if (type == EntityType.NODE) {
 			// filter out all nodes without tags
 			select = "select n.id, n.latitude, n.longitude, t.skeys, t.value from node n inner join tags t on n.id = t.id and t.type = 0 order by n.id"; //$NON-NLS-1$
+			count = allNodes;
 		} else if (type == EntityType.WAY) {
 			select = "select w.id, w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " + //$NON-NLS-1$
 					"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 inner join node n on w.node = n.id " + //$NON-NLS-1$
 					"order by w.id, w.ord"; //$NON-NLS-1$
+			count = allWays;
 		} else {
 			select = "select r.id, t.skeys, t.value  from relations r inner join tags t on t.id = r.id and t.type = 2 and r.ord = 0"; //$NON-NLS-1$
+			count = allRelations;
 		}
-
-		ResultSet rs = statement.executeQuery(select);
-		Entity prevEntity = null;
-
-		long prevId = -1;
-		while (rs.next()) {
-			long curId = rs.getLong(1);
-			boolean newEntity = curId != prevId;
-			Entity e = prevEntity;
-			if (type == EntityType.NODE) {
-				if (newEntity) {
-					e = new Node(rs.getDouble(2), rs.getDouble(3), curId);
-				}
-				e.putTag(rs.getString(4), rs.getString(5));
-			} else if (type == EntityType.WAY) {
-				if (newEntity) {
-					e = new Way(curId);
-				}
-				int ord = rs.getInt(3);
-				if (ord == 0 && rs.getObject(4) != null) {
-					e.putTag(rs.getString(4), rs.getString(5));
-				}
-				if (newEntity || ord > 0) {
-					((Way) e).addNode(new Node(rs.getDouble(6), rs.getDouble(7), rs.getLong(2)));
-				}
-			} else {
-				if (newEntity) {
-					e = new Relation(curId);
-				}
-				e.putTag(rs.getString(2), rs.getString(3));
+		progress.startWork(count);
+		
+		BlockingQueue<Entity> toProcess = new ArrayBlockingQueue<Entity>(100000);
+		
+		//produce
+		EntityProducer entityProducer = new EntityProducer(toProcess, type, statement, select);
+		entityProducer.start();
+		
+		count = 0;
+		while (true) {
+			Entity entityToProcess = toProcess.take();
+			if (entityToProcess == entityProducer.getEndingEntity()) {
+				//the last entity...
+				break;
 			}
-			if (newEntity) {
-				if (progress != null) {
-					progress.progress(1);
-				}
-				if (prevEntity != null) {
-					count++;
-					visitor.iterateEntity(prevEntity, this);
-				}
-				prevEntity = e;
+			if (progress != null) {
+				progress.progress(1);
 			}
-			prevId = curId;
-		}
-		if (prevEntity != null) {
 			count++;
-			visitor.iterateEntity(prevEntity, this);
-		}
-		rs.close();
-		if(EntityType.NODE == type){
-			allNodes = count;
-		} else if(EntityType.WAY == type){
-			allWays = count;
-		} else if(EntityType.RELATION == type){
-			allRelations = count;
+			visitor.iterateEntity(entityToProcess, this);
 		}
 		return count;
 	}
 
 	
+	private void computeRealCounts(Statement statement) throws SQLException {
+		if (!realCounts) {
+			realCounts = true;
+			// filter out all nodes without tags
+			allNodes = statement.executeQuery("select count(*) from node n inner join tags t on n.id = t.id and t.type = 0 order by n.id").getInt(1); //$NON-NLS-1$
+			allWays = statement.executeQuery("select count(*) from ways w").getInt(1); //$NON-NLS-1$
+			allRelations = statement.executeQuery("select count(*) from relations r inner join tags t on t.id = r.id and t.type = 2 and r.ord = 0").getInt(1); //$NON-NLS-1$
+		}
+	}
+
 	private void loadEntityDataNoSQL(Entity e, boolean loadTags) {
 		Collection<EntityId> ids = e instanceof Relation ? ((Relation) e).getMemberIds() : ((Way) e).getEntityIds();
 		Map<EntityId, Entity> map = new LinkedHashMap<EntityId, Entity>();
@@ -454,5 +438,92 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		}
 		
 	}
+
+	public class EntityProducer extends Thread {
+
+		private final BlockingQueue<Entity> toProcess;
+		private final Statement statement;
+		private final String select;
+		private final EntityType type;
+		private final Entity endingEntity = new Node(0,0,0);
+		
+		public EntityProducer(BlockingQueue<Entity> toProcess, EntityType type,
+				Statement statement, String select) {
+					this.toProcess = toProcess;
+					this.type = type;
+					this.statement = statement;
+					this.select = select;
+					setDaemon(true);
+					setName("EntityProducer");
+		}
+
+		public Entity getEndingEntity() {
+			return endingEntity;
+		}
+		
+		@Override
+		public void run() {
+			ResultSet rs;
+			try {
+				rs = statement.executeQuery(select);
+//				rs.setFetchSize(1000); !! not working for SQLite would case troubles probably
+				Entity prevEntity = null;
+
+				long prevId = -1;
+				while (rs.next()) {
+					long curId = rs.getLong(1);
+					boolean newEntity = curId != prevId;
+					Entity e = prevEntity;
+					if (type == EntityType.NODE) {
+						if (newEntity) {
+							e = new Node(rs.getDouble(2), rs.getDouble(3),
+									curId);
+						}
+						e.putTag(rs.getString(4), rs.getString(5));
+					} else if (type == EntityType.WAY) {
+						if (newEntity) {
+							e = new Way(curId);
+						}
+						int ord = rs.getInt(3);
+						if (ord == 0 && rs.getObject(4) != null) {
+							e.putTag(rs.getString(4), rs.getString(5));
+						}
+						if (newEntity || ord > 0) {
+							((Way) e).addNode(new Node(rs.getDouble(6), rs
+									.getDouble(7), rs.getLong(2)));
+						}
+					} else {
+						if (newEntity) {
+							e = new Relation(curId);
+						}
+						e.putTag(rs.getString(2), rs.getString(3));
+					}
+					if (newEntity) {
+						if (prevEntity != null) {
+							toProcess.put(prevEntity);
+						}
+						prevEntity = e;
+					}
+					prevId = curId;
+				}
+				if (prevEntity != null) {
+					toProcess.put(prevEntity);
+				}
+				rs.close();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					toProcess.put(getEndingEntity());
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
+
 
 }
