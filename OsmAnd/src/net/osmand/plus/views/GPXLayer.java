@@ -50,7 +50,7 @@ public class GPXLayer implements OsmandMapLayer {
 	
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode, boolean moreDetail) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
 		if(points.isEmpty()){
 			return;
 		}

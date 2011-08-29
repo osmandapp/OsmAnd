@@ -121,7 +121,7 @@ public class TransportStopsLayer implements OsmandMapLayer, ContextMenuLayer.ICo
 
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode, boolean moreDetail) {
+	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode) {
 		if (view.getZoom() >= startZoom) {
 			objects.clear();
 			view.getApplication().getResourceManager().searchTransportAsync(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, view.getZoom(), objects);

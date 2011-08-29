@@ -109,12 +109,12 @@ public class MapTileLayer extends BaseMapLayer {
 	
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode, boolean moreDetail) {
+	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode) {
 		if ((map == null && mapTileAdapter == null) || !visible) {
 			return;
 		}
 		if(mapTileAdapter != null){
-			mapTileAdapter.onDraw(canvas, latlonRect, tilesRect, nightMode, moreDetail);
+			mapTileAdapter.onDraw(canvas, latlonRect, tilesRect, nightMode);
 		}
 		drawTileMap(canvas, tilesRect);
 	}
