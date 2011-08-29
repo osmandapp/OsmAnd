@@ -360,7 +360,7 @@ public class MapActivityLayers {
 				Arrays.sort(files, new Comparator<File>() {
 					@Override
 					public int compare(File object1, File object2) {
-						if (object1.getName()compareTo(object2.getName()) > 0) {
+						if (object1.getName().compareTo(object2.getName()) > 0) {
 							return -1;
 						} else if (object1.getName().equals(object2.getName())) {
 							return 0;
