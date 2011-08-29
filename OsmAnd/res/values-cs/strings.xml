@@ -1,6 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="vector_map_not_needed">Není potřeba</string>
+	<string name="local_index_upload_gpx_description">Nahrát GPX soubory do OSM komunity. Budou použity k vylepšení map.</string>
+	<string name="local_index_items_uploaded">%1$d z %2$d položek byla úspěšně nahrána.</string>
+	<string name="local_index_mi_upload_gpx">Přispět do OSM...</string>
+
+	<string name="show_more_map_detail">Více mapových detailů</string>
+	<string name="show_more_map_detail_descr">Zobrazit některé detaily vektorové mapy (silnice, atd.) již při menším zvětšení</string>
+
+	<string name="favourites_delete_multiple_succesful">Oblíbené body úspěšně smazány.</string>
+	<string name="favorite_delete_multiple">Chcete smazat %1$d oblíbených a %2$d skupin oblíbených. Opravdu?</string>
+	<string name="favorite_home_category">Doma</string>
+	<string name="favorite_friends_category">Přátelé</string>
+	<string name="favorite_places_category">Místa</string>
+	<string name="favorite_default_category">Ostatní</string>
+	
+    	<string name="vector_map_not_needed">Není potřeba</string>
         <string name="basemap_missing">Chybí základní mapa světa. Prosím stáhněte ji pro správnou funkci programu.</string>
         <string name="vector_data_missing">Na SD kartě nejsou uložena žádná offline data. Prosím stáhněte je pro použití map v offline módu.</string>
         <string name="local_index_gpx_info_show">\n\nDlouhým kliknutím zobrazíte na mapě</string>
@@ -14,7 +28,7 @@
         <string name="local_index_items_restored">Obnoveno %1$d položek z %2$d.</string>
         <string name="local_index_no_items_to_do">Žádné položky pro akci %1$s</string>
         <string name="local_index_action_do">Chystáte se %1$s %2$s položek. Jste si jisti?</string>
-        <string name="local_index_description">Správce offline dat:\nMůžete stáhnout, zálohovat (\'zaparkovat\'), nebo smazat existujíci data.\nV telefonu je momentálně uloženo:</string>
+        <string name="local_index_description">Správce offline dat:\nMůžete stáhnout, zálohovat, nebo smazat existujíci data.\nV telefonu je momentálně uloženo:</string>
         <string name="local_index_mi_restore">Obnovit</string>
         <string name="local_index_mi_backup">Zálohovat</string>
         <string name="local_index_mi_delete">Smazat</string>
