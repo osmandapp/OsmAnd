@@ -10,6 +10,7 @@ import java.io.RandomAccessFile;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
@@ -304,6 +305,15 @@ public class IndexCreator {
 				allWays = dbCreator.getAllWays();
 				allRelations = dbCreator.getAllRelations();
 			}
+		} else {
+			if (DBDialect.NOSQL != dialect) {
+				Connection dbc = (Connection) dbConn;
+				final Statement stmt = dbc.createStatement();
+				allRelations = stmt.executeQuery("select count(*) from relations").getInt(1);
+				allNodes = stmt.executeQuery("select count(*) from node").getInt(1);
+				allWays = stmt.executeQuery("select count(*) from ways").getInt(1);
+				stmt.close();
+			}
 		}
 		accessor.initDatabase(dbConn, dialect, allNodes, allWays, allRelations);
 		return loadFromExistingFile;
@@ -338,9 +348,9 @@ public class IndexCreator {
 
 	
 	public void generateIndexes(File readFile, IProgress progress, IOsmStorageFilter addFilter, MapZooms mapZooms,
-			MapRenderingTypes renderingTypes) throws IOException, SAXException, SQLException {
-		if(!LevelDBAccess.load() && dialect == DBDialect.NOSQL){
-			dialect = DBDialect.SQLITE;
+			MapRenderingTypes renderingTypes) throws IOException, SAXException, SQLException, InterruptedException {
+		if(LevelDBAccess.load()){
+			dialect = DBDialect.NOSQL;
 		}
 		
 		if (renderingTypes == null) {
@@ -594,7 +604,7 @@ public class IndexCreator {
 	}
 
 
-	public static void main(String[] args) throws IOException, SAXException, SQLException {
+	public static void main(String[] args) throws IOException, SAXException, SQLException, InterruptedException {
 		
 		long time = System.currentTimeMillis();
 		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/data/osm-gen/")); //$NON-NLS-1$

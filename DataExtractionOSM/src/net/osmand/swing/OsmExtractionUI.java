@@ -451,6 +451,8 @@ public class OsmExtractionUI implements IMapLocationListener {
 						throw new IllegalStateException(e);
 					} catch (SQLException e) {
 						throw new IllegalStateException(e);
+					} catch (InterruptedException e) {
+						throw new IllegalStateException(e);
 					}
 					regionName = creator.getRegionName();
 					StringBuilder msg = new StringBuilder();
