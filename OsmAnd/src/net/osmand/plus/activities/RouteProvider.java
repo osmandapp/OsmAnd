@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -16,6 +17,11 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.Route;
+import net.osmand.GPXUtilities.Track;
+import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -55,6 +61,72 @@ public class RouteProvider {
 	}
 	
 	public RouteProvider(){
+	}
+	
+	public static class GPXRouteParams {
+		List<Location> points = new ArrayList<Location>();
+	
+		public GPXRouteParams(GPXFile file, boolean reverse){
+			prepareEverything(file, reverse);
+		}
+		
+		public void setStartPoint(Location startPoint) {
+			points.add(0, startPoint);
+		}
+		
+		
+		public Location getStartPointForRoute(){
+			if(!points.isEmpty()){
+				return points.get(0);
+			}
+			return null;
+		}
+
+		public LatLon getLastPoint() {
+			if(!points.isEmpty()){
+				Location l = points.get(points.size() - 1);
+				LatLon point = new LatLon(l.getLatitude(), l.getLongitude());
+				return point;
+			}
+			return null;
+		}
+		
+		private Location createLocation(WptPt pt){
+			Location loc = new Location("OsmandRouteProvider");
+			loc.setLatitude(pt.lat);
+			loc.setLongitude(pt.lon);
+			loc.setSpeed((float) pt.speed);
+			loc.setAltitude(pt.ele);
+			loc.setAccuracy((float) pt.hdop);
+			return loc;
+		}
+		
+		private void prepareEverything(GPXFile file, boolean reverse){
+			if(file.isCloudmadeRouteFile()){
+				for(WptPt wp : file.points){
+					points.add(createLocation(wp));
+				}
+			} else {
+				// first of all check tracks
+				for(Track tr : file.tracks){
+					for(TrkSegment tkSeg : tr.segments){
+						for(WptPt pt : tkSeg.points){
+							points.add(createLocation(pt));
+						}
+					}
+				}
+				if(points.isEmpty()){
+					for(Route rte : file.routes){
+						for(WptPt pt : rte.points){
+							points.add(createLocation(pt));
+						}
+					}
+				}
+			}
+			if(reverse){
+				Collections.reverse(points);
+			}
+		}		
 	}
 	
 	
@@ -169,7 +241,7 @@ public class RouteProvider {
 	}
 
 	public RouteCalculationResult calculateRouteImpl(Location start, LatLon end, ApplicationMode mode, RouteService type, Context ctx,
-			List<Location> gpxRoute, boolean fast){
+			GPXRouteParams gpxRoute, boolean fast){
 		long time = System.currentTimeMillis();
 		if (start != null && end != null) {
 			if(log.isInfoEnabled()){
@@ -177,7 +249,7 @@ public class RouteProvider {
 			}
 			try {
 				RouteCalculationResult res;
-				if(gpxRoute != null && !gpxRoute.isEmpty()){
+				if(gpxRoute != null && !gpxRoute.points.isEmpty()){
 					res = calculateGpxRoute(start, end, gpxRoute);
 					addMissingTurnsToRoute(res, start, end, mode, ctx);
 				} else if (type == RouteService.YOURS) {
@@ -206,11 +278,12 @@ public class RouteProvider {
 		return new RouteCalculationResult(null);
 	}
 
-	private RouteCalculationResult calculateGpxRoute(Location start, LatLon end, List<Location> gpxRoute) {
+	private RouteCalculationResult calculateGpxRoute(Location start, LatLon end, GPXRouteParams params) {
 		RouteCalculationResult res;
 		// get the closest point to start and to end
 		float minDist = Integer.MAX_VALUE;
 		int startI = 0;
+		List<Location> gpxRoute = params.points;
 		int endI = gpxRoute.size(); 
 		if (start != null) {
 			for (int i = 0; i < gpxRoute.size(); i++) {
@@ -227,7 +300,7 @@ public class RouteProvider {
 		l.setLatitude(end.getLatitude());
 		l.setLongitude(end.getLongitude());
 		minDist = Integer.MAX_VALUE;
-		// get in reverse order taking into account cycle ways
+		// get in reverse order taking into account ways with cycle
 		for (int i = gpxRoute.size() - 1; i >= startI; i--) {
 			float d = gpxRoute.get(i).distanceTo(l);
 			if (d < minDist) {
@@ -554,24 +627,24 @@ public class RouteProvider {
 	}
 	
 	
-	protected RouteCalculationResult findCloudMadeRoute(Location start, LatLon end, ApplicationMode mode, Context ctx, boolean fast) throws MalformedURLException, IOException,
-	ParserConfigurationException, FactoryConfigurationError, SAXException {
+	protected RouteCalculationResult findCloudMadeRoute(Location start, LatLon end, ApplicationMode mode, Context ctx, boolean fast)
+			throws MalformedURLException, IOException, ParserConfigurationException, FactoryConfigurationError, SAXException {
 		List<Location> res = new ArrayList<Location>();
 		List<RouteDirectionInfo> directions = null;
 		StringBuilder uri = new StringBuilder();
 		// possibly hide that API key because it is privacy of osmand
 		uri.append("http://routes.cloudmade.com/A6421860EBB04234AB5EF2D049F2CD8F/api/0.3/"); //$NON-NLS-1$
-		uri.append(start.getLatitude()+"").append(","); //$NON-NLS-1$ //$NON-NLS-2$
-		uri.append(start.getLongitude()+"").append(","); //$NON-NLS-1$ //$NON-NLS-2$
-		uri.append(end.getLatitude()+"").append(",");  //$NON-NLS-1$//$NON-NLS-2$
-		uri.append(end.getLongitude()+"").append("/"); //$NON-NLS-1$ //$NON-NLS-2$
+		uri.append(start.getLatitude() + "").append(","); //$NON-NLS-1$ //$NON-NLS-2$
+		uri.append(start.getLongitude() + "").append(","); //$NON-NLS-1$ //$NON-NLS-2$
+		uri.append(end.getLatitude() + "").append(","); //$NON-NLS-1$//$NON-NLS-2$
+		uri.append(end.getLongitude() + "").append("/"); //$NON-NLS-1$ //$NON-NLS-2$
 
 		if (ApplicationMode.PEDESTRIAN == mode) {
 			uri.append("foot.gpx"); //$NON-NLS-1$
 		} else if (ApplicationMode.BICYCLE == mode) {
 			uri.append("bicycle.gpx"); //$NON-NLS-1$
 		} else {
-			if(fast){
+			if (fast) {
 				uri.append("car.gpx"); //$NON-NLS-1$
 			} else {
 				uri.append("car/shortest.gpx"); //$NON-NLS-1$
@@ -596,10 +669,8 @@ public class RouteProvider {
 			}
 		}
 
-
-		
 		list = doc.getElementsByTagName("rtept"); //$NON-NLS-1$
-		if(list.getLength() > 0){
+		if (list.getLength() > 0) {
 			directions = new ArrayList<RouteDirectionInfo>();
 		}
 		RouteDirectionInfo previous = null;
@@ -609,50 +680,50 @@ public class RouteProvider {
 				RouteDirectionInfo dirInfo = new RouteDirectionInfo();
 				dirInfo.descriptionRoute = getContentFromNode(item, "desc"); //$NON-NLS-1$
 				String stime = getContentFromNode(item, "time"); //$NON-NLS-1$
-				if(stime != null){
+				if (stime != null) {
 					dirInfo.expectedTime = Integer.parseInt(stime);
 				}
 				String stype = getContentFromNode(item, "turn"); //$NON-NLS-1$
-				if(stype != null){
+				if (stype != null) {
 					dirInfo.turnType = TurnType.valueOf(stype.toUpperCase());
 				} else {
 					dirInfo.turnType = TurnType.valueOf(TurnType.C);
 				}
 				String sturn = getContentFromNode(item, "turn-angle"); //$NON-NLS-1$
-				if(sturn != null){
+				if (sturn != null) {
 					dirInfo.turnType.setTurnAngle((float) Double.parseDouble(sturn));
 				}
-				
+
 				int offset = Integer.parseInt(getContentFromNode(item, "offset")); //$NON-NLS-1$
 				dirInfo.routePointOffset = offset;
-				
-				if(previous != null && previous.turnType != null && !TurnType.C.equals(previous.turnType.getValue())){
+
+				if (previous != null && previous.turnType != null && !TurnType.C.equals(previous.turnType.getValue())) {
 					// calculate angle
-					if(previous.routePointOffset > 0){
+					if (previous.routePointOffset > 0) {
 						float paz = res.get(previous.routePointOffset - 1).bearingTo(res.get(previous.routePointOffset));
 						float caz;
-						if(previous.turnType.isRoundAbout() && dirInfo.routePointOffset < res.size() - 1){
+						if (previous.turnType.isRoundAbout() && dirInfo.routePointOffset < res.size() - 1) {
 							caz = res.get(dirInfo.routePointOffset).bearingTo(res.get(dirInfo.routePointOffset + 1));
 						} else {
 							caz = res.get(dirInfo.routePointOffset - 1).bearingTo(res.get(dirInfo.routePointOffset));
 						}
-						float angle = caz  - paz; 
-						if(angle < 0){
+						float angle = caz - paz;
+						if (angle < 0) {
 							angle += 360;
-						} else if(angle > 360){
+						} else if (angle > 360) {
 							angle -= 360;
 						}
 						// that magic number helps to fix some errors for turn
 						angle += 75;
 
-						if(previous.turnType.getTurnAngle() < 0.5f){
+						if (previous.turnType.getTurnAngle() < 0.5f) {
 							previous.turnType.setTurnAngle(angle);
 						}
 					}
-				} 
-				
+				}
+
 				directions.add(dirInfo);
-				
+
 				previous = dirInfo;
 			} catch (NumberFormatException e) {
 				log.info("Exception", e); //$NON-NLS-1$
@@ -660,22 +731,21 @@ public class RouteProvider {
 				log.info("Exception", e); //$NON-NLS-1$
 			}
 		}
-		if(previous != null && previous.turnType != null && !TurnType.C.equals(previous.turnType.getValue())){
+		if (previous != null && previous.turnType != null && !TurnType.C.equals(previous.turnType.getValue())) {
 			// calculate angle
-			if(previous.routePointOffset > 0 && previous.routePointOffset < res.size() - 1){
+			if (previous.routePointOffset > 0 && previous.routePointOffset < res.size() - 1) {
 				float paz = res.get(previous.routePointOffset - 1).bearingTo(res.get(previous.routePointOffset));
-				float caz = res.get(previous.routePointOffset).bearingTo(res.get(res.size() -1));
-				float angle = caz  - paz;
-				if(angle < 0){
+				float caz = res.get(previous.routePointOffset).bearingTo(res.get(res.size() - 1));
+				float angle = caz - paz;
+				if (angle < 0) {
 					angle += 360;
 				}
-				if(previous.turnType.getTurnAngle() < 0.5f){
+				if (previous.turnType.getTurnAngle() < 0.5f) {
 					previous.turnType.setTurnAngle(angle);
 				}
 			}
 		}
-		
-		
+
 		return new RouteCalculationResult(res, directions, start, end, null);
 	}
 	

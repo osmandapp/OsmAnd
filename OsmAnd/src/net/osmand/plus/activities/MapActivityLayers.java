@@ -12,7 +12,7 @@ import java.util.Map.Entry;
 import net.osmand.Algoritms;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFileResult;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.OsmAndFormatter;
 import net.osmand.data.AmenityType;
 import net.osmand.map.ITileSource;
@@ -327,9 +327,9 @@ public class MapActivityLayers {
 	
 	public void showGPXFileLayer(final OsmandMapTileView mapView){
 		final OsmandSettings settings = getApplication().getSettings();
-		selectGPXFileLayer(new CallbackWithObject<GPXFileResult>() {
+		selectGPXFileLayer(new CallbackWithObject<GPXFile>() {
 			@Override
-			public boolean processResult(GPXFileResult result) {
+			public boolean processResult(GPXFile result) {
 				settings.SHOW_FAVORITES.set(true);
 				if (result != null) {
 					getApplication().setGpxFileToDisplay(result);
@@ -338,19 +338,19 @@ public class MapActivityLayers {
 				}
 				return true;
 			}
-		});
+		}, false);
 	}
 	
 	private void updateGPXLayer(){
-		GPXFileResult gpxFileToDisplay = getApplication().getGpxFileToDisplay();
+		GPXFile gpxFileToDisplay = getApplication().getGpxFileToDisplay();
 		if(gpxFileToDisplay == null){
 			gpxLayer.setTracks(null);
 		} else {
-			gpxLayer.setTracks(gpxFileToDisplay.locations);
+			gpxLayer.setTracks(gpxFileToDisplay.tracks);
 		}
 	}
 	
-	public void selectGPXFileLayer(final CallbackWithObject<GPXFileResult> callbackWithObject) {
+	public void selectGPXFileLayer(final CallbackWithObject<GPXFile> callbackWithObject, boolean forRouting) {
 		final List<String> list = new ArrayList<String>();
 		final OsmandSettings settings = getApplication().getSettings();
 		final File dir = settings.extendOsmandPath(ResourceManager.GPX_PATH);
@@ -393,12 +393,12 @@ public class MapActivityLayers {
 					new Thread(new Runnable() {
 						@Override
 						public void run() {
-							final GPXFileResult res = GPXUtilities.loadGPXFile(activity, f);
-							if (res.error != null) {
+							final GPXFile res = GPXUtilities.loadGPXFile(activity, f, true);
+							if (res.warning != null) {
 								activity.runOnUiThread(new Runnable() {
 									@Override
 									public void run() {
-										Toast.makeText(activity, res.error, Toast.LENGTH_LONG).show();
+										Toast.makeText(activity, res.warning, Toast.LENGTH_LONG).show();
 									}
 								});
 

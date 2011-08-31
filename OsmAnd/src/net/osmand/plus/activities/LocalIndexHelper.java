@@ -15,7 +15,10 @@ import java.util.TreeSet;
 
 import net.osmand.GPXUtilities;
 import net.osmand.OsmAndFormatter;
-import net.osmand.GPXUtilities.GPXFileResult;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.Track;
+import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.binary.BinaryIndexPart;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
@@ -35,7 +38,6 @@ import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.location.Location;
 import android.os.Build;
 
 public class LocalIndexHelper {
@@ -103,21 +105,21 @@ public class LocalIndexHelper {
 
 	private void updateGpxInfo(LocalIndexInfo info, File f) {
 		if(info.getGpxFile() == null){
-			info.setGpxFile(GPXUtilities.loadGPXFile(app, f));
+			info.setGpxFile(GPXUtilities.loadGPXFile(app, f, true));
 		}
-		GPXFileResult result = info.getGpxFile();
-		if(result.error != null){
+		GPXFile result = info.getGpxFile();
+		if(result.warning != null){
 			info.setCorrupted(true);
-			info.setDescription(result.error);
+			info.setDescription(result.warning);
 		} else {
 			int totalDistance = 0;
+			int totalTracks = 0;
 			long startTime = Long.MAX_VALUE;
 			long endTime = Long.MIN_VALUE;
 			
 			double diffElevationUp = 0;
 			double diffElevationDown = 0;
 			double totalElevation = 0;
-			double Elevation = 0;
 			double minElevation = 99999;
 			double maxElevation = 0;
 			
@@ -126,39 +128,50 @@ public class LocalIndexHelper {
 			double totalSpeedSum = 0;
 			
 			int points = 0;
-			for(int i = 0; i< result.locations.size() ; i++){
-				List<Location> subtrack = result.locations.get(i);
-				points += subtrack.size();
-				int distance = 0;
-				for (int j = 0; j < subtrack.size(); j++) {
-					long time = subtrack.get(j).getTime();
-					if(time != 0){
-						startTime = Math.min(startTime, time);
-						endTime = Math.max(startTime, time);
-					}
-					float speed = subtrack.get(j).getSpeed();
-					if(speed > 0){
-						totalSpeedSum += speed;
-						maxSpeed = Math.max(speed, maxSpeed);
-						speedCount ++;
+			for(int i = 0; i< result.tracks.size() ; i++){
+				Track subtrack = result.tracks.get(i);
+				for(TrkSegment segment : subtrack.segments){
+					totalTracks++;
+					int distance = 0;
+					points += segment.points.size();
+					for (int j = 0; j < segment.points.size(); j++) {
+						WptPt point = segment.points.get(j);
+						long time = point.time;
+						if(time != 0){
+							startTime = Math.min(startTime, time);
+							endTime = Math.max(startTime, time);
+						}
+						float speed = (float) point.speed;
+						if(speed > 0){
+							totalSpeedSum += speed;
+							maxSpeed = Math.max(speed, maxSpeed);
+							speedCount ++;
+						}
+						
+						double elevation = point.ele;
+						if (!Double.isNaN(elevation)) {
+							totalElevation += elevation;
+							minElevation = Math.min(elevation, minElevation);
+							maxElevation = Math.max(elevation, maxElevation);
+						}
+						if (j > 0) {
+							WptPt prev = segment.points.get(j - 1);
+							if (!Double.isNaN(point.ele) && !Double.isNaN(prev.ele)) {
+								double diff = point.ele - prev.ele;
+								if (diff > 0) {
+									diffElevationUp += diff;
+								} else {
+									diffElevationDown -= diff;
+								}
+							}
+							distance += MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon);
+						}
+						totalDistance += distance;
 					}
 					
-					Elevation = subtrack.get(j).getAltitude();
-					totalElevation += Elevation;
-					minElevation = Math.min(Elevation, minElevation);
-					maxElevation = Math.max(Elevation, maxElevation);
-					if (j > 0) {
-						double diff = subtrack.get(j).getAltitude() - subtrack.get(j - 1).getAltitude();
-						if(diff > 0){
-							diffElevationUp += diff;
-						} else {
-							diffElevationDown -= diff;
-						}
-						distance += MapUtils.getDistance(subtrack.get(j - 1).getLatitude(), subtrack.get(j - 1).getLongitude(), subtrack
-								.get(j).getLatitude(), subtrack.get(j).getLongitude());
-					}
 				}
-				totalDistance += distance;
+				
+				
 			}
 			if(startTime == Long.MAX_VALUE){
 				startTime = f.lastModified();
@@ -167,8 +180,8 @@ public class LocalIndexHelper {
 				endTime = f.lastModified();
 			}
 			
-			info.setDescription(app.getString(R.string.local_index_gpx_info, result.locations.size(), points,
-					result.wayPoints.size(), OsmAndFormatter.getFormattedDistance(totalDistance, app),
+			info.setDescription(app.getString(R.string.local_index_gpx_info, totalTracks, points,
+					result.points.size(), OsmAndFormatter.getFormattedDistance(totalDistance, app),
 					startTime, endTime));
 			if(totalElevation != 0 || diffElevationUp != 0 || diffElevationDown != 0){
 				info.setDescription(info.getDescription() +  
@@ -403,7 +416,7 @@ public class LocalIndexHelper {
 		// UI state expanded
 		private boolean expanded;
 		
-		private GPXFileResult gpxFile;
+		private GPXFile gpxFile;
 		
 		public LocalIndexInfo(LocalIndexType type, File f, boolean backuped){
 			pathToData = f.getAbsolutePath();
@@ -446,11 +459,11 @@ public class LocalIndexHelper {
 			this.kbSize = size;
 		}
 		
-		public void setGpxFile(GPXFileResult gpxFile) {
+		public void setGpxFile(GPXFile gpxFile) {
 			this.gpxFile = gpxFile;
 		}
 		
-		public GPXFileResult getGpxFile() {
+		public GPXFile getGpxFile() {
 			return gpxFile;
 		}
 		

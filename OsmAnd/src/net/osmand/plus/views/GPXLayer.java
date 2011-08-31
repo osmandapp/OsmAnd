@@ -3,6 +3,10 @@ package net.osmand.plus.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.GPXUtilities.Track;
+import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
+
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -12,14 +16,13 @@ import android.graphics.RectF;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
-import android.location.Location;
 
 public class GPXLayer implements OsmandMapLayer {
 
 	
 	private OsmandMapTileView view;
 	
-	private List<List<Location>> points = new ArrayList<List<Location>>();
+	private List<List<WptPt>> points = new ArrayList<List<WptPt>>();
 	private Paint paint;
 	
 
@@ -51,23 +54,24 @@ public class GPXLayer implements OsmandMapLayer {
 	
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, boolean nightMode, boolean moreDetail) {
+		List<List<WptPt>> points = this.points;
 		if(points.isEmpty()){
 			return;
 		}
 		
-		for (List<Location> l : points) {
+		for (List<WptPt> l : points) {
 			path.rewind();
 			int startIndex = -1;
 
 			for (int i = 0; i < l.size(); i++) {
-				Location ls = l.get(i);
+				WptPt ls = l.get(i);
 				if (startIndex == -1) {
-					if (ls.getLatitude() >= latLonBounds.bottom && ls.getLatitude() <= latLonBounds.top  && ls.getLongitude() >= latLonBounds.left 
-							&& ls.getLongitude() <= latLonBounds.right ) {
+					if (ls.lat >= latLonBounds.bottom && ls.lat <= latLonBounds.top  && ls.lon >= latLonBounds.left 
+							&& ls.lon <= latLonBounds.right ) {
 						startIndex = i > 0 ? i - 1 : i;
 					}
-				} else if (!(latLonBounds.left <= ls.getLongitude() + 0.03 && ls.getLongitude() - 0.03 <= latLonBounds.right
-						&& latLonBounds.bottom <= ls.getLatitude() + 0.03 && ls.getLatitude() - 0.03 <= latLonBounds.top)) {
+				} else if (!(latLonBounds.left <= ls.lon + 0.03 && ls.lon - 0.03 <= latLonBounds.right
+						&& latLonBounds.bottom <= ls.lat + 0.03 && ls.lat - 0.03 <= latLonBounds.top)) {
 					drawSegment(canvas, l, startIndex, i);
 					// do not continue make method more efficient (because it calls in UI thread)
 					// this break also has logical sense !
@@ -84,14 +88,14 @@ public class GPXLayer implements OsmandMapLayer {
 	}
 
 
-	private void drawSegment(Canvas canvas, List<Location> l, int startIndex, int endIndex) {
-		int px = view.getMapXForPoint(l.get(startIndex).getLongitude());
-		int py = view.getMapYForPoint(l.get(startIndex).getLatitude());
+	private void drawSegment(Canvas canvas, List<WptPt> l, int startIndex, int endIndex) {
+		int px = view.getMapXForPoint(l.get(startIndex).lon);
+		int py = view.getMapYForPoint(l.get(startIndex).lat);
 		path.moveTo(px, py);
 		for (int i = startIndex + 1; i <= endIndex; i++) {
-			Location p = l.get(i);
-			int x = view.getMapXForPoint(p.getLongitude());
-			int y = view.getMapYForPoint(p.getLatitude());
+			WptPt p = l.get(i);
+			int x = view.getMapXForPoint(p.lon);
+			int y = view.getMapYForPoint(p.lat);
 			path.lineTo(x, y);
 		}
 		canvas.drawPath(path, paint);
@@ -107,11 +111,18 @@ public class GPXLayer implements OsmandMapLayer {
 		points.clear();
 	}
 	
-	public void setTracks(List<List<Location>> tracks){
+	public void setTracks(List<Track> tracks){
 		if(tracks == null){
 			clearCurrentGPX();
 		} else {
-			points = tracks;
+			List<List<WptPt>> tpoints = new ArrayList<List<WptPt>>();
+			for (Track t : tracks) {
+				for (TrkSegment ts : t.segments) {
+					tpoints.add(ts.points);
+				}
+			}
+			points = tpoints;
+			
 		}
 	}
 	

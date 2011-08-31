@@ -8,6 +8,7 @@ import net.osmand.Algoritms;
 import net.osmand.CallbackWithObject;
 import net.osmand.LogUtil;
 import net.osmand.Version;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXFileResult;
 import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
@@ -19,6 +20,7 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
+import net.osmand.plus.activities.RouteProvider.GPXRouteParams;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchPoiFilterActivity;
 import net.osmand.plus.activities.search.SearchTransportActivity;
@@ -1203,10 +1205,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	
 	private void useGPXRouting() {
 		final LatLon endForRouting = getPointToNavigate();
-		mapLayers.selectGPXFileLayer(new CallbackWithObject<GPXFileResult>() {
+		mapLayers.selectGPXFileLayer(new CallbackWithObject<GPXFile>() {
 			
 			@Override
-			public boolean processResult(final GPXFileResult result) {
+			public boolean processResult(final GPXFile result) {
 				Builder builder = new AlertDialog.Builder(MapActivity.this);
 				final boolean[] props = new boolean[]{false, false, false};
 				builder.setMultiChoiceItems(new String[] { getString(R.string.gpx_option_reverse_route),
@@ -1222,35 +1224,35 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					public void onClick(DialogInterface dialog, int which) {
 						boolean reverse = props[0];
 						boolean passWholeWay = props[2];
-						ArrayList<List<Location>> locations = result.locations;
-						List<Location> l = new ArrayList<Location>();
-						for(List<Location> s : locations){
-							l.addAll(s);
-						}
-						if(reverse){
-							Collections.reverse(l);
-						}
+						boolean useDestination = props[1];
+						GPXRouteParams gpxRoute = new GPXRouteParams(result, reverse);
 						
 						Location loc = getLastKnownLocation();
 						if(passWholeWay && loc != null){
-							l.add(0, loc);
+							gpxRoute.setStartPoint(loc);
 						}
+						
 						Location startForRouting = getLastKnownLocation();
-						if(startForRouting == null && !l.isEmpty()){
-							startForRouting = l.get(0);
+						if(startForRouting == null){
+							startForRouting = gpxRoute.getStartPointForRoute();
 						}
+						
 						LatLon endPoint = endForRouting;
-						if((endPoint == null || !props[1]) && !l.isEmpty()){
-							LatLon point = new LatLon(l.get(l.size() - 1).getLatitude(), l.get(l.size() - 1).getLongitude());
-							settings.setPointToNavigate(point.getLatitude(), point.getLongitude(), null);
-							endPoint = point;
-							mapLayers.getNavigationLayer().setPointToNavigate(point);
+						if(endPoint == null || !useDestination){
+							LatLon point = gpxRoute.getLastPoint();
+							if(point != null){
+								endPoint = point;
+							}
+							if(endPoint != null) {
+								settings.setPointToNavigate(point.getLatitude(), point.getLongitude(), null);
+								mapLayers.getNavigationLayer().setPointToNavigate(point);
+							}
 						}
 						mapView.refreshMap();
 						if(endPoint != null){
 							settings.FOLLOW_TO_THE_ROUTE.set(true);
 							routingHelper.setFollowingMode(true);
-							routingHelper.setFinalAndCurrentLocation(endPoint, startForRouting, l);
+							routingHelper.setFinalAndCurrentLocation(endPoint, startForRouting, gpxRoute);
 							getMyApplication().showDialogInitializingCommandPlayer(MapActivity.this);
 						}
 					}
@@ -1259,7 +1261,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				builder.show();
 				return true;
 			}
-		});
+		}, true);
 	}
 		
 	public void contextMenuPoint(final double latitude, final double longitude){
