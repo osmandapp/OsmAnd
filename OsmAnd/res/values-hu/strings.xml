@@ -1,5 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+<string name="local_index_upload_gpx_description">GPX fájl feltöltése OSM-be. A térkép kibővítésére használják majd.</string>
+<string name="local_index_items_uploaded">%2$d darabból %1$d sikeresen feltöltve.</string>
+<string name="local_index_mi_upload_gpx">OSM hozzájárulás...</string>
+
+<string name="show_more_map_detail">Több térképrészlet mutatása</string>
+<string name="show_more_map_detail_descr">Több részlet megmutatása, mint pl. utak, vektoros térképen már alacsonyabb nagyítási szinten.</string>
+
+<string name="favourites_delete_multiple_succesful">Kedvenc pontok sikeresen törölve.</string>
+<string name="favorite_delete_multiple">%1$d kedvenc és %2$d kedvenc csoport törlése. Biztos?</string>
+<string name="favorite_home_category">Család</string>
+<string name="favorite_friends_category">Barátok</string>
+<string name="favorite_places_category">Helyek</string>
+<string name="favorite_default_category">Egyéb</string>
+
+<string name="vector_map_not_needed">Nem szükséges</string>
+<string name="basemap_missing">Hiányzik az alap világtérkép (alacsony nagyításon az egész Földet lefedi). A teljes környezethez le lehet tölteni a World_basemap_x.obf -et.</string>
+<string name="vector_data_missing">Hiányzanak a helyi (\'offline - kapcsolat nélküli\') adatok az SD kártyáról. Az offline - kapcsolat nélküli használathoz le kell tölteni azokat.</string>
+<string name="local_index_gpx_info_show">\n\nHosszan megnyomva megjelenik a térképen</string>
+<string name="local_index_gpx_info_speed">\nÁtlagsebesség : %1$s \nLegnagyobb sebesség : %2$s</string>
+<string name="local_index_gpx_info_elevation">\nÁtlagos magasság : %1$.0f m\nLegkisebb magasság : %2$.0f m\nLegnagyobb magasság : %3$.0f m\nEreszkedés : %4$.0f m\nEmelkedés : %5$.0f m</string>
+<string name="local_index_gpx_info">Rész nyomvonal : %1$d\nÖsszes pontok : %2$d\nÚt pontok : %3$d\nTeljes távolság : %4$s\nIndulás : %5$tD %5$tR\nÉrkezés : %6$tD %6$tR</string>
+<string name="local_index_installed">Telepítve</string>
+<string name="local_index_items_backuped">%2$d darabból %1$d sikeresen elmentve.</string>
+<string name="local_index_items_deleted">%2$d darabból %1$d sikeresen törölve.</string>
+<string name="local_index_items_restored">%2$d darabból %1$d sikeresen visszaállítva.</string>
+<string name="local_index_no_items_to_do">Nincs elem a művelethez: %1$s</string>
+<string name="local_index_action_do">%2$s darab elemen végrehajtjuk: %1$s. Biztos?</string>
+<string name="local_index_descr_title">Offline - kapcsolat nélküli adat kezelés:</string>
+<string name="local_index_description">Új letöltés, biztonsági mentés vagy meglévő adat törlése.\nAz eszközön lévő adatok:</string>
+<string name="local_index_mi_restore">Visszaállítás...</string>
+<string name="local_index_mi_backup">Biztonsági mentés...</string>
+<string name="local_index_mi_delete">Törlés...</string>
+<string name="local_index_mi_reload">Alaphelyzetbe állítás...</string>
+<string name="local_index_download">Letöltés</string>
+<string name="local_index_tile_data">Csempe adat: %1$s \nMinimális nagyítás : %2$d\nMaximális nagyítás : %3$d\nLetöltendő : %4$s \nNagyítások letöltve : %5$s</string>
+<string name="local_index_poi_data">POI adat</string>
+<string name="local_index_address_data">Cím adat</string>
+<string name="local_index_transport_data">Közlekedési eszköz adat</string>
+<string name="local_index_map_data">Térkép adat</string>
+<string name="local_index_items"></string>
+<string name="local_indexes_cat_backup">Mentés</string>
+<string name="local_indexes_cat_tts">Beszéd adat (TTS)</string>
+<string name="local_indexes_cat_voice">Beszéd adat (media)</string>
+<string name="local_indexes_cat_gpx">GPX adat</string>
+<string name="local_indexes_cat_tile">Térkép adat (csempék)</string>
+<string name="local_indexes_cat_map">Térkép adat (vektor)</string>
+<string name="local_indexes_cat_poi">POI adat</string>
+
+
 	<string name="ttsvoice">TTS felolvasó hang</string>
 	
 	<string name="search_offline_clear_search">Új keresés</string>
