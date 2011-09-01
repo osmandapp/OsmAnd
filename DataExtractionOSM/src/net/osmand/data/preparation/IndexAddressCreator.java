@@ -275,7 +275,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 					}
 				}
 			}
-		} else if (isBoundary(e) && hasGreaterCityAdminLevel(Integer.parseInt(cityAdminLevel),e)) {
+		} else if (isBoundary(e) && hasGreaterCityAdminLevel(cityAdminLevel,e)) {
 			//Any lower admin_level boundary is attached to the nearest city
 			Boundary boundary = extractBoundary(e, ctx);
 			if (boundary != null && boundary.getCenterPoint() != null) {
@@ -312,10 +312,10 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		return cityAdminLevel.equals(e.getTag(OSMTagKey.ADMIN_LEVEL));
 	}
 
-	private boolean hasGreaterCityAdminLevel(int admin_level, Entity e)
+	private boolean hasGreaterCityAdminLevel(String admin_level, Entity e)
 	{
 		try {
-			return admin_level < Integer.parseInt(e.getTag(OSMTagKey.ADMIN_LEVEL));
+			return Integer.parseInt(admin_level) < Integer.parseInt(e.getTag(OSMTagKey.ADMIN_LEVEL));
 		} catch (NumberFormatException ex) {
 			return false;
 		}
