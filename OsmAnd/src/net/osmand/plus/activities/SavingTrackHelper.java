@@ -76,8 +76,12 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 	
 	private void createTableForPoints(SQLiteDatabase db){
-		db.execSQL("CREATE TABLE " + POINT_NAME+ " ("+POINT_COL_LAT +" double, " + POINT_COL_LON+" double, " //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  
-				+ POINT_COL_DATE+" long, " + POINT_COL_DESCRIPTION+" text)" ); //$NON-NLS-1$ //$NON-NLS-2$ 
+		try {
+			db.execSQL("CREATE TABLE " + POINT_NAME+ " ("+POINT_COL_LAT +" double, " + POINT_COL_LON+" double, " //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  
+					+ POINT_COL_DATE+" long, " + POINT_COL_DESCRIPTION+" text)" ); //$NON-NLS-1$ //$NON-NLS-2$
+		} catch (RuntimeException e) {
+			// ignore if already exists
+		}
 	}
 
 	@Override
@@ -94,7 +98,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	
 		
 	public boolean hasDataToSave(){
-		SQLiteDatabase db = getReadableDatabase();
+		SQLiteDatabase db = getWritableDatabase();
 		if(db != null){
 			Cursor q = db.query(false, TRACK_NAME, new String[0], null, null, null, null, null, null);
                         boolean has = q.moveToFirst();
