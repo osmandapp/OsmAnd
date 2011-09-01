@@ -1,5 +1,19 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="local_index_upload_gpx_description">Nahranie GPX súborov do OSM komunity. Budú použité na vylepšenie máp.</string>
+	<string name="local_index_items_uploaded">%1$d z %2$d položky(iek) úspešne nahraných.</string>
+	<string name="local_index_mi_upload_gpx">Poskytnúť pre OSM...</string>
+	
+	<string name="show_more_map_detail">Zobraziť podrobnejšiu mapu</string>
+	<string name="show_more_map_detail_descr">Zobrazí viac detailov vektorovej mapy (cesty, atď.) už pri nižších priblíženiach</string>
+
+	<string name="favourites_delete_multiple_succesful">Obľúbené body úspešne zmazané.</string>
+	<string name="favorite_delete_multiple">Idete zmazať %1$d obľúbených bodov a %2$d skupín obľúbených. Ste si istý?</string>
+	<string name="favorite_home_category">Domov</string>
+	<string name="favorite_friends_category">Priatelia</string>
+	<string name="favorite_places_category">Miesta</string>
+	<string name="favorite_default_category">Iné</string>
+
     <string name="vector_map_not_needed">Nepotrebné</string>
 	<string name="basemap_missing">Chýba základná mapa sveta. Prosím, zvážte jej stiahnutie pre správnu funkciu.</string>
 	<string name="vector_data_missing">Palubné údaje chýbajú na SD karte. Prosím, zvážte ich stiahnutie pre použitie máp bez internetu.</string>
