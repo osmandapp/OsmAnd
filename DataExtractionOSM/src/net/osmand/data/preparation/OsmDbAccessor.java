@@ -260,7 +260,7 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 		if (!realCounts) {
 			realCounts = true;
 			// filter out all nodes without tags
-			allNodes = statement.executeQuery("select count(*) from node n inner join tags t on n.id = t.id and t.type = 0 order by n.id").getInt(1); //$NON-NLS-1$
+			allNodes = statement.executeQuery("select count(*) from node n inner join tags t on n.id = t.id and t.type = 0").getInt(1); //$NON-NLS-1$
 			allWays = statement.executeQuery("select count(*) from ways w").getInt(1); //$NON-NLS-1$
 			allRelations = statement.executeQuery("select count(*) from relations r inner join tags t on t.id = r.id and t.type = 2 and r.ord = 0").getInt(1); //$NON-NLS-1$
 		}
