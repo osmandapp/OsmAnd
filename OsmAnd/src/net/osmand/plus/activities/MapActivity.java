@@ -1,7 +1,6 @@
 package net.osmand.plus.activities;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import net.osmand.Algoritms;
@@ -9,7 +8,6 @@ import net.osmand.CallbackWithObject;
 import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXFileResult;
 import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;

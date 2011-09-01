@@ -642,6 +642,12 @@ public class RoutingHelper {
 		// location when you should action (turn or go ahead)
 		public int routePointOffset;
 		
+		// TODO add from parser
+		public String ref;
+		public String streetName;
+		// speed limit in m/s (should be array of speed limits?)
+		public float speedLimit; 
+		
 		// calculated vars
 		
 		// after action (excluding expectedTime)

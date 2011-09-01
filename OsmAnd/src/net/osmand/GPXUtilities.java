@@ -2,8 +2,10 @@ package net.osmand;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -270,12 +272,23 @@ public class GPXUtilities {
 	}
 	
 	public static GPXFile loadGPXFile(Context ctx, File f, boolean convertCloudmadeSource) {
+		try {
+			return loadGPXFile(ctx, new FileInputStream(f), convertCloudmadeSource);
+		} catch (FileNotFoundException e) {
+			GPXFile res = new GPXFile();
+			log.error("Error reading gpx", e); //$NON-NLS-1$
+			res.warning = ctx.getString(R.string.error_reading_gpx);
+			return res;
+		}
+	}
+	
+	public static GPXFile loadGPXFile(Context ctx, InputStream f, boolean convertCloudmadeSource) {
 		GPXFile res = new GPXFile();
 		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT);
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
 		try {
 			XmlPullParser parser = Xml.newPullParser();
-			parser.setInput(new FileInputStream(f), "UTF-8"); //$NON-NLS-1$
+			parser.setInput(f, "UTF-8"); //$NON-NLS-1$
 			Stack<Object> parserState = new Stack<Object>();
 			boolean extensionReadMode = false;
 			parserState.push(res);
@@ -390,6 +403,17 @@ public class GPXUtilities {
 						extensionReadMode = false;
 					}
 				}
+			}
+			if(convertCloudmadeSource && res.isCloudmadeRouteFile()){
+				Track tk = new Track();
+				res.tracks.add(tk);
+				TrkSegment segment = new TrkSegment();
+				tk.segments.add(segment);
+				
+				for(WptPt wp : res.points){
+					segment.points.add(wp);
+				}
+			    res.points.clear();
 			}
 		} catch (XmlPullParserException e) {
 			log.error("Error reading gpx", e); //$NON-NLS-1$
