@@ -90,11 +90,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private static final int SHOW_POSITION_DELAY = 2500;
 	
 	
-	private String currentLocationProvider = null;
-	private boolean providerSupportsBearing = false;
-	@SuppressWarnings("unused")
-	private boolean providerSupportsSpeed = false;
-	
 	
 	private long lastTimeAutoZooming = 0;
 	
@@ -509,8 +504,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				location.setSpeed(speed);
 			}
 		}
-    	if(!providerSupportsBearing && locationLayer.getLastKnownLocation() != null && location != null){
-    		if(locationLayer.getLastKnownLocation().distanceTo(location) > 10){
+    	if(locationLayer.getLastKnownLocation() != null && location != null && location.hasBearing()){
+    		if(locationLayer.getLastKnownLocation().distanceTo(location) > 10 && !isRunningOnEmulator()){
     			location.setBearing(locationLayer.getLastKnownLocation().bearingTo(location));
     		}
     	}
@@ -627,8 +622,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		public void onLocationChanged(Location location) {
 			// double check about use only gps
 			// that strange situation but it could happen?
-			if(!Algoritms.objectEquals(currentLocationProvider, LocationManager.GPS_PROVIDER) &&  
-					!useOnlyGPS()){
+			if(!useOnlyGPS()){
 				setLocation(location);
 			}
 		}
@@ -662,7 +656,15 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 
 		@Override
 		public void onProviderDisabled(String provider) {
-			setLocation(null);
+			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+			if (!useOnlyGPS() && service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+				Location loc = service.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+				if(loc != null && (System.currentTimeMillis() - loc.getTime()) < USE_ONLY_GPS_INTERVAL){
+					setLocation(loc);
+				}
+			} else {
+				setLocation(null);
+			}
 		}
 
 		@Override
@@ -672,30 +674,21 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		@Override
 		public void onStatusChanged(String provider, int status, Bundle extras) {
 			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-			LocationProvider prov = service.getProvider(LocationManager.NETWORK_PROVIDER);
-			// do not change provider for temporarily unavailable (possible bug for htc hero 2.1 ?)
-			if (LocationProvider.OUT_OF_SERVICE == status /*|| LocationProvider.TEMPORARILY_UNAVAILABLE == status*/) {
-				if(LocationProvider.OUT_OF_SERVICE == status){
-					setLocation(null);
-				}
+			if (LocationProvider.OUT_OF_SERVICE == status) {
 				// do not use it in routing
-				if (!useOnlyGPS() &&  
-						service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-					if (!Algoritms.objectEquals(currentLocationProvider, LocationManager.NETWORK_PROVIDER)) {
-						currentLocationProvider = LocationManager.NETWORK_PROVIDER;
-						service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
-						providerSupportsBearing = prov == null ? false : prov.supportsBearing() && !isRunningOnEmulator();
-						providerSupportsSpeed = prov == null ? false : prov.supportsSpeed() && !isRunningOnEmulator();
+				if (!useOnlyGPS() && service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+					// try enable network listener
+					try {
+						service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST,
+								networkListener);
+					} catch (IllegalArgumentException e) {
+						Log.d(LogUtil.TAG, "Network location provider not available"); //$NON-NLS-1$
 					}
+					// service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
 				}
 			} else if (LocationProvider.AVAILABLE == status) {
-				if (!Algoritms.objectEquals(currentLocationProvider, LocationManager.GPS_PROVIDER)) {
-					currentLocationProvider = LocationManager.GPS_PROVIDER;
-					service.removeUpdates(networkListener);
-					prov = service.getProvider(LocationManager.GPS_PROVIDER);
-					providerSupportsBearing = prov == null ? false : prov.supportsBearing() && !isRunningOnEmulator();
-					providerSupportsSpeed = prov == null ? false : prov.supportsSpeed() && !isRunningOnEmulator();
-				}
+				// Do not remove right now network listener
+				// service.removeUpdates(networkListener);
 			}
 
 		}
@@ -711,7 +704,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
 		sensorMgr.unregisterListener(this);
 		sensorRegistered = false;
-		currentLocationProvider = null;
 		routingHelper.setUiActivity(null);
 		
 		getMyApplication().getDaynightHelper().onMapPause();
@@ -800,7 +792,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 		try {
 			service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, gpsListener);
-			currentLocationProvider = LocationManager.GPS_PROVIDER;
 		} catch (IllegalArgumentException e) {
 			Log.d(LogUtil.TAG, "GPS location provider not available"); //$NON-NLS-1$
 		}
@@ -808,15 +799,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			// try to always  ask for network provide : it is faster way to find location
 			try {
 				service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, networkListener);
-				currentLocationProvider = LocationManager.NETWORK_PROVIDER;
 			} catch(IllegalArgumentException e) {
 				Log.d(LogUtil.TAG, "Network location provider not available"); //$NON-NLS-1$
 			}
 		}
 		
-		LocationProvider  prov = currentLocationProvider != null ? service.getProvider(currentLocationProvider) : null; 
-		providerSupportsBearing = prov == null ? false : prov.supportsBearing() && !isRunningOnEmulator();
-		providerSupportsSpeed = prov == null ? false : prov.supportsSpeed() && !isRunningOnEmulator();
 		
 		if(settings != null && settings.isLastKnownMapLocation()){
 			LatLon l = settings.getLastKnownMapLocation();
