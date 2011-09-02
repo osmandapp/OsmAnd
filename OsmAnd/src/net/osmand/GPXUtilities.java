@@ -402,6 +402,26 @@ public class GPXUtilities {
 					if (parse instanceof GPXExtensions && tag.equals("extensions")) {
 						extensionReadMode = false;
 					}
+					
+					if(tag.equals("trkpt")){
+						Object pop = parserState.pop();
+						assert pop instanceof WptPt;
+					} else if(tag.equals("wpt")){
+						Object pop = parserState.pop();
+						assert pop instanceof WptPt;
+					} else if(tag.equals("rtept")){
+						Object pop = parserState.pop();
+						assert pop instanceof WptPt;
+					} else if(tag.equals("trk")){
+						Object pop = parserState.pop();
+						assert pop instanceof Track;
+					} else if(tag.equals("rte")){
+						Object pop = parserState.pop();
+						assert pop instanceof Route;
+					} else if(tag.equals("trkseg")){
+						Object pop = parserState.pop();
+						assert pop instanceof TrkSegment;
+					} 
 				}
 			}
 			if(convertCloudmadeSource && res.isCloudmadeRouteFile()){
