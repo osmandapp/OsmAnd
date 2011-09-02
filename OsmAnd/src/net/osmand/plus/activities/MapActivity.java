@@ -1259,7 +1259,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				builder.show();
 				return true;
 			}
-		}, true);
+		}, false);
 	}
 		
 	public void contextMenuPoint(final double latitude, final double longitude){

@@ -338,7 +338,7 @@ public class MapActivityLayers {
 				}
 				return true;
 			}
-		}, false);
+		}, true);
 	}
 	
 	private void updateGPXLayer(){
@@ -350,7 +350,7 @@ public class MapActivityLayers {
 		}
 	}
 	
-	public void selectGPXFileLayer(final CallbackWithObject<GPXFile> callbackWithObject, boolean forRouting) {
+	public void selectGPXFileLayer(final CallbackWithObject<GPXFile> callbackWithObject, final boolean convertCloudmade) {
 		final List<String> list = new ArrayList<String>();
 		final OsmandSettings settings = getApplication().getSettings();
 		final File dir = settings.extendOsmandPath(ResourceManager.GPX_PATH);
@@ -393,22 +393,16 @@ public class MapActivityLayers {
 					new Thread(new Runnable() {
 						@Override
 						public void run() {
-							final GPXFile res = GPXUtilities.loadGPXFile(activity, f, true);
-							if (res.warning != null) {
-								activity.runOnUiThread(new Runnable() {
-									@Override
-									public void run() {
-										Toast.makeText(activity, res.warning, Toast.LENGTH_LONG).show();
-									}
-								});
-
-							}
+							final GPXFile res = GPXUtilities.loadGPXFile(activity, f, convertCloudmade);
 							dlg.dismiss();
 							activity.runOnUiThread(new Runnable() {
 								@Override
 								public void run() {
-									callbackWithObject.processResult(res);
-									
+									if(res.warning != null){
+										Toast.makeText(activity, res.warning, Toast.LENGTH_LONG).show();
+									} else {
+										callbackWithObject.processResult(res);
+									}
 								}
 							});
 						}

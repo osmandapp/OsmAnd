@@ -132,7 +132,6 @@ public class LocalIndexHelper {
 				Track subtrack = result.tracks.get(i);
 				for(TrkSegment segment : subtrack.segments){
 					totalTracks++;
-					int distance = 0;
 					points += segment.points.size();
 					for (int j = 0; j < segment.points.size(); j++) {
 						WptPt point = segment.points.get(j);
@@ -164,9 +163,8 @@ public class LocalIndexHelper {
 									diffElevationDown -= diff;
 								}
 							}
-							distance += MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon);
+							totalDistance += MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon);
 						}
-						totalDistance += distance;
 					}
 					
 				}

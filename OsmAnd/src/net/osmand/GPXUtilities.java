@@ -303,7 +303,7 @@ public class GPXUtilities {
 							((GPXExtensions) parse).getExtensionsToWrite().put(tag, value);
 							if (tag.equals("speed") && parse instanceof WptPt) {
 								try {
-									((WptPt) parse).speed = Float.parseFloat(parser.getText());
+									((WptPt) parse).speed = Float.parseFloat(value);
 								} catch (NumberFormatException e) {
 								}
 							}
@@ -319,7 +319,7 @@ public class GPXUtilities {
 							if (parser.getName().equals("trk")) {
 								Track track = new Track();
 								((GPXFile) parse).tracks.add(track);
-								parserState.push(new Track());
+								parserState.push(track);
 							}
 							if (parser.getName().equals("rte")) {
 								Route route = new Route();
@@ -336,7 +336,7 @@ public class GPXUtilities {
 								((Route) parse).name = readText(parser, "name");
 							}
 							if (parser.getName().equals("desc")) {
-								((Route) parse).name = readText(parser, "desc");
+								((Route) parse).desc = readText(parser, "desc");
 							}
 							if (parser.getName().equals("rtept")) {
 								WptPt wptPt = parseWptAttributes(parser);
@@ -348,7 +348,7 @@ public class GPXUtilities {
 								((Track) parse).name = readText(parser, "name");
 							}
 							if (parser.getName().equals("desc")) {
-								((Track) parse).name = readText(parser, "desc");
+								((Track) parse).desc = readText(parser, "desc");
 							}
 							if (parser.getName().equals("trkseg")) {
 								TrkSegment trkSeg = new TrkSegment();
@@ -366,7 +366,7 @@ public class GPXUtilities {
 							if (parser.getName().equals("name")) {
 								((WptPt) parse).name = readText(parser, "name");
 							} else if (parser.getName().equals("desc")) {
-								((WptPt) parse).name = readText(parser, "desc");
+								((WptPt) parse).desc = readText(parser, "desc");
 							} else if (parser.getName().equals("ele")) {
 								String text = readText(parser, "ele");
 								if (text != null) {
@@ -387,11 +387,10 @@ public class GPXUtilities {
 								String text = readText(parser, "time");
 								if (text != null) {
 									try {
-										((WptPt) parse).time = format.parse(parser.getText()).getTime();
+										((WptPt) parse).time = format.parse(text).getTime();
 									} catch (ParseException e) {
 									}
 								}
-								((WptPt) parse).name = readText(parser, "hdop");
 							}
 						}
 					}
@@ -451,7 +450,7 @@ public class GPXUtilities {
 		WptPt wpt = new WptPt();
 		try {
 			wpt.lat = Double.parseDouble(parser.getAttributeValue("", "lat")); //$NON-NLS-1$ //$NON-NLS-2$
-			wpt.lon= Double.parseDouble(parser.getAttributeValue("", "lon")); //$NON-NLS-1$ //$NON-NLS-2$
+			wpt.lon = Double.parseDouble(parser.getAttributeValue("", "lon")); //$NON-NLS-1$ //$NON-NLS-2$
 		} catch (NumberFormatException e) {
 		}
 		return wpt;
