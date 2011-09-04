@@ -10,6 +10,7 @@ import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.RouteProvider.GPXRouteParams;
 import net.osmand.plus.activities.RouteProvider.RouteCalculationResult;
 import net.osmand.plus.activities.RouteProvider.RouteService;
 import net.osmand.plus.voice.CommandPlayer;
@@ -30,6 +31,7 @@ public class RoutingHelper {
 		public void routeWasCancelled();
 	}
 	
+	
 	private final double DISTANCE_TO_USE_OSMAND_ROUTER = 20000;
 	
 	private List<IRouteInformationListener> listeners = new ArrayList<IRouteInformationListener>();
@@ -41,7 +43,7 @@ public class RoutingHelper {
 	
 	private boolean isFollowingMode = false;
 	
-	private List<Location> currentGPXRoute = null;
+	private GPXRouteParams currentGPXRoute = null;
 	// instead of this properties RouteCalculationResult could be used
 	private List<Location> routeNodes = new ArrayList<Location>();
 	private List<RouteDirectionInfo> directionInfo = null;
@@ -87,7 +89,7 @@ public class RoutingHelper {
 		setFinalAndCurrentLocation(finalLocation, currentLocation, null);
 	}
 	
-	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, Location currentLocation, List<Location> gpxRoute){
+	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, Location currentLocation, GPXRouteParams gpxRoute){
 		clearCurrentRoute(finalLocation);
 		currentGPXRoute = gpxRoute;
 		// to update route
@@ -120,7 +122,7 @@ public class RoutingHelper {
 		
 	}
 	
-	public List<Location> getCurrentGPXRoute() {
+	public GPXRouteParams getCurrentGPXRoute() {
 		return currentGPXRoute;
 	}
 	
@@ -433,7 +435,7 @@ public class RoutingHelper {
 		return 0;
 	}
 	
-	private void recalculateRouteInBackground(final Location start, final LatLon end, final List<Location> currentGPXRoute){
+	private void recalculateRouteInBackground(final Location start, final LatLon end, final GPXRouteParams gpxRoute){
 		if (start == null || end == null) {
 			return;
 		}
@@ -460,7 +462,7 @@ public class RoutingHelper {
 							if(service != RouteService.OSMAND && !settings.isInternetConnectionAvailable()){
 								showMessage(context.getString(R.string.internet_connection_required_for_online_route), Toast.LENGTH_LONG);
 							}
-							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, currentGPXRoute, fastRouteMode);
+							RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, gpxRoute, fastRouteMode);
 							synchronized (RoutingHelper.this) {
 								if (res.isCalculated()) {
 									setNewRoute(res);
@@ -639,6 +641,12 @@ public class RoutingHelper {
 		public TurnType turnType;
 		// location when you should action (turn or go ahead)
 		public int routePointOffset;
+		
+		// TODO add from parser
+		public String ref;
+		public String streetName;
+		// speed limit in m/s (should be array of speed limits?)
+		public float speedLimit; 
 		
 		// calculated vars
 		

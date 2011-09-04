@@ -16,7 +16,6 @@ import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
 import net.osmand.OsmAndFormatter;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXFileResult;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -377,15 +376,18 @@ public class FavouritesActivity extends ExpandableListActivity {
 								existedPoints.add(fp.getName() + "_" + fp.getCategory());
 							}
 						}
-						GPXFileResult res = GPXUtilities.loadGPXFile(FavouritesActivity.this, f);
-						if(res.error != null){
-							return res.error;
+						GPXFile res = GPXUtilities.loadGPXFile(FavouritesActivity.this, f, false);
+						if(res.warning != null){
+							return res.warning;
 						}
-						for(WptPt p : res.wayPoints){
+						for(WptPt p : res.points){
 							if(!existedPoints.contains(p.name)){
 								String categoryName = FavouritesActivity.this.getString(R.string.favorite_default_category);
 								int c;
 								String name = p.name;
+								if(name == null){
+									name = "";
+								}
 								if((c = p.name.lastIndexOf('_')) != -1){
 									categoryName = p.name.substring(c + 1);
 									name = p.name.substring(0, c);

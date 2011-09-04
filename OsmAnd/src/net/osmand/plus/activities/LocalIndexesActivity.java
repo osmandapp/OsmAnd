@@ -14,6 +14,7 @@ import java.util.Set;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -27,7 +28,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.AsyncTask.Status;
@@ -97,10 +97,10 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 				if (child >= 0 && group >= 0) {
 					final LocalIndexInfo point = (LocalIndexInfo) listAdapter.getChild(group, child);
 					if (point != null && point.getGpxFile() != null) {
-						Location loc = point.getGpxFile().findFistLocation();
+						WptPt loc = point.getGpxFile().findPointToShow();
 						if (loc != null) {
-							OsmandSettings.getOsmandSettings(LocalIndexesActivity.this).setMapLocationToShow(loc.getLatitude(),
-									loc.getLongitude());
+							OsmandSettings.getOsmandSettings(LocalIndexesActivity.this).setMapLocationToShow(loc.lat,
+									loc.lon);
 						}
 						((OsmandApplication) getApplication()).setGpxFileToDisplay(point.getGpxFile());
 						MapActivity.launchMapActivityMoveToTop(LocalIndexesActivity.this);
