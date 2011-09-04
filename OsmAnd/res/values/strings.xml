@@ -2,7 +2,7 @@
 <resources>
 	<string name="local_index_upload_gpx_description">Upload GPX files to OSM community. They will be used to improve maps.</string>
 	<string name="local_index_items_uploaded">%1$d of %2$d item(s) successfully uploaded.</string>
-	<string name="local_index_mi_upload_gpx">Contribute to OSM...</string>
+	<string name="local_index_mi_upload_gpx">Contribute\nto OSM...</string>
 	
 	<string name="show_more_map_detail">Show more map detail</string>
 	<string name="show_more_map_detail_descr">Show some vector map detail (roads etc.) at lower zooms already</string>
@@ -32,7 +32,7 @@
 	<string name="local_index_mi_restore">Restore...</string>
 	<string name="local_index_mi_backup">Backup...</string>
 	<string name="local_index_mi_delete">Delete...</string>
-	<string name="local_index_mi_reload">Re-initialize...</string>
+	<string name="local_index_mi_reload">Refresh...</string>
 	<string name="local_index_download">Download</string>
 	<string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable : %4$s \nZooms downloaded : %5$s</string>
 	<string name="local_index_poi_data">POI data</string>
@@ -282,10 +282,10 @@
 
 	<string name="download_files_question">Download {0} file(s) ({1} MB)?</string>
 	<string name="items_were_selected">{0} item(s) selected</string>
-	<string name="filter_existing_indexes">Filter downloaded</string>
+	<string name="filter_existing_indexes">Filter\ndownloaded</string>
 	<string name="deselect_all">Deselect all</string>
 	<string name="select_all">Select all</string>
-	<string name="reload">Re-initialize</string>
+	<string name="reload">Refresh</string>
 
 	<string name="general_settings_descr">Configure internet use, display options, and more</string>
     <string name="general_settings">General Settings</string>
