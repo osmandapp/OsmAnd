@@ -88,6 +88,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	
 	private static final int SHOW_POSITION_MSG_ID = 7;
 	private static final int SHOW_POSITION_DELAY = 2500;
+	private static final float ACCURACY_FOR_GPX_AND_ROUTING = 50;
 	
 	
 	
@@ -517,7 +518,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     	}
     	if(location != null && settings.SAVE_TRACK_TO_GPX.get()){
     		// write only with 50 meters accuracy
-			if (!location.hasAccuracy() || location.getAccuracy() < 50) {
+			if (!location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
 				savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(), location.getSpeed(),
 						location.getAccuracy(), location.getTime(), settings);
 			}
@@ -526,7 +527,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     	updateSpeedBearing(location);
     	mapLayers.getLocationLayer().setLastKnownLocation(location);
     	if(routingHelper.isFollowingMode()){
-    		routingHelper.setCurrentLocation(location);
+    		if(location == null || 
+    				!location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
+    			routingHelper.setCurrentLocation(location);
+    		}
     	}
     	if (location != null) {
 			if (isMapLinkedToLocation()) {
@@ -676,15 +680,13 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 			if (LocationProvider.OUT_OF_SERVICE == status) {
 				// do not use it in routing
-				if (!useOnlyGPS() && service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-					// try enable network listener
-					try {
-						service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST,
-								networkListener);
-					} catch (IllegalArgumentException e) {
-						Log.d(LogUtil.TAG, "Network location provider not available"); //$NON-NLS-1$
-					}
-					// service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
+				if (service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+//					try {
+//						service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST,
+//								networkListener);
+//					} catch (IllegalArgumentException e) {
+//						Log.d(LogUtil.TAG, "Network location provider not available"); //$NON-NLS-1$
+//					}
 				}
 			} else if (LocationProvider.AVAILABLE == status) {
 				// Do not remove right now network listener
@@ -795,13 +797,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		} catch (IllegalArgumentException e) {
 			Log.d(LogUtil.TAG, "GPS location provider not available"); //$NON-NLS-1$
 		}
-		if(!useOnlyGPS()){
-			// try to always  ask for network provide : it is faster way to find location
-			try {
-				service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, networkListener);
-			} catch(IllegalArgumentException e) {
-				Log.d(LogUtil.TAG, "Network location provider not available"); //$NON-NLS-1$
-			}
+		// try to always ask for network provide : it is faster way to find location
+		try {
+			service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, networkListener);
+		} catch (IllegalArgumentException e) {
+			Log.d(LogUtil.TAG, "Network location provider not available"); //$NON-NLS-1$
 		}
 		
 		
