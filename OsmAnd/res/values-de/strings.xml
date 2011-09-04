@@ -1,7 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="favourites_delete_multiple_succesful">Favoriten erfolgreich gelöscht.</string>
-	<string name="favorite_delete_multiple">Es sollen %1$d Favoriten und %2$d Favoriten-Gruppen gelöscht werden. Fortfahren?</string>
+	<string name="local_index_upload_gpx_description">GPX Dateien an OSM Community übermitteln. Die Dateien können dort zur Kartenverbesserung verwendet werden.</string>
+	<string name="local_index_items_uploaded">%1$d von %2$d Datei(en) erfolgreich hochgeladen.</string>
+	<string name="local_index_mi_upload_gpx">Senden an OSM...</string>
+	
+	<string name="show_more_map_detail">Mehr Kartendetails</string>
+	<string name="show_more_map_detail_descr">Einige Vektor-Daten (Straßen etc.) bereits bei kleineren Vergößerungen zeigen</string>
+
+	<string name="favourites_delete_multiple_succesful">Favorit(en) erfolgreich gelöscht.</string>
+	<string name="favorite_delete_multiple">Es soll(en) %1$d Favorit(en) und %2$d Favoriten-Gruppe(n) gelöscht werden. Fortfahren?</string>
 	<string name="favorite_home_category">Zu Hause</string>
 	<string name="favorite_friends_category">Freunde</string>
 	<string name="favorite_places_category">Orte</string>
