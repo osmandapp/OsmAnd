@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -196,6 +197,23 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		}
 	}
 	
+	public static class StreetAndDistrict {
+		private final Street street;
+		private final String district;
+
+		StreetAndDistrict(Street street, String district) {
+			this.street = street;
+			this.district = district;
+		}
+
+		public Street getStreet() {
+			return street;
+		}
+
+		public String getDistrict() {
+			return district;
+		}
+	}
 	
 	public IndexAddressCreator(){
 		streetDAO = loadInMemory ? new CachedDBStreetDAO() : new DBStreetDAO();
@@ -820,7 +838,6 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 
 		writer.startWriteAddressIndex(regionName);
 		List<City> cities = readCities(mapConnection);
-		List<Street> streets = new ArrayList<Street>();
 		Collections.sort(cities, new Comparator<City>() {
 
 			@Override
@@ -887,13 +904,12 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				writeCities = false;
 			}
 
-			streets.clear();
 			Map<Street, List<Node>> streetNodes = null;
 			if (readWayNodes) {
 				streetNodes = new LinkedHashMap<Street, List<Node>>();
 			}
 			long time = System.currentTimeMillis();
-			readStreetsBuildings(streetstat, c, streets, waynodesStat, streetNodes, listSuburbs);
+			List<Street> streets = readStreetsBuildings(streetstat, c, waynodesStat, streetNodes, listSuburbs);
 			long f = System.currentTimeMillis() - time;
 			writer.writeCityIndex(c, streets, streetNodes);
 			int bCount = 0;
@@ -1001,11 +1017,12 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
         stat.close();
 	}
 	
-	private List<Street> readStreetsBuildings(PreparedStatement streetBuildingsStat, City city, List<Street> streets,
+	private List<Street> readStreetsBuildings(PreparedStatement streetBuildingsStat, City city,
 			PreparedStatement waynodesStat, Map<Street, List<Node>> streetNodes, List<City> citySuburbs) throws SQLException {
 		TLongObjectHashMap<Street> visitedStreets = new TLongObjectHashMap<Street>();
-		HashSet<String> uniqueNames = new HashSet<String>();
-
+		Map<String,List<StreetAndDistrict>> uniqueNames = new HashMap<String,List<StreetAndDistrict>>();
+		Map<String,Street> streets = new HashMap<String,Street>();
+		
 		//read streets for city
 		readStreatsByBuildingsForCity(streetBuildingsStat, city, streets,
 				waynodesStat, streetNodes, visitedStreets, uniqueNames);
@@ -1015,15 +1032,15 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				readStreatsByBuildingsForCity(streetBuildingsStat, suburb, streets, waynodesStat, streetNodes, visitedStreets, uniqueNames);
 			}
 		}
-		return streets;
+		return new ArrayList<Street>(streets.values());
 	}
 
 
 	private void readStreatsByBuildingsForCity(
 			PreparedStatement streetBuildingsStat, City city,
-			List<Street> streets, PreparedStatement waynodesStat,
+			Map<String,Street> streets, PreparedStatement waynodesStat,
 			Map<Street, List<Node>> streetNodes,
-			TLongObjectHashMap<Street> visitedStreets, HashSet<String> uniqueNames) throws SQLException {
+			TLongObjectHashMap<Street> visitedStreets, Map<String,List<StreetAndDistrict>> uniqueNames) throws SQLException {
 		streetBuildingsStat.setLong(1, city.getId());
 		ResultSet set = streetBuildingsStat.executeQuery();
 		while (set.next()) {
@@ -1031,29 +1048,28 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			if (!visitedStreets.containsKey(streetId)) {
 				Street street = new Street(null);
 				String streetName = set.getString(2);
-				String district = "";
-				//There are more streets with same name in different districts. 
-				//Add district name to all other names. If sorting is right, the first street was the one in the city
-				if (uniqueNames.contains(streetName)) {
-					district = " (" + set.getString(12) + ")";
-				}
-				uniqueNames.add(streetName);
-				street.setName(streetName + district);
-				street.setEnName(set.getString(3) + district);
 				street.setLocation(set.getDouble(4), set.getDouble(5));
 				street.setId(streetId);
-				streets.add(street);
-				visitedStreets.put(streetId, street);
-				if (waynodesStat != null && streetNodes != null) {
-					ArrayList<Node> list = new ArrayList<Node>();
-					streetNodes.put(street, list);
-					waynodesStat.setLong(1, street.getId());
-					ResultSet rs = waynodesStat.executeQuery();
-					while (rs.next()) {
-						list.add(new Node(rs.getDouble(2), rs.getDouble(3), rs.getLong(1)));
+				//load the street nodes
+				loadStreetNodes(street, waynodesStat, streetNodes);
+				
+				//If there are more streets with same name in different districts. 
+				//Add district name to all other names. If sorting is right, the first street was the one in the city
+				String cityPart = " (" + set.getString(12) + ")";
+				String district = identifyBestDistrict(street, streetName, cityPart, uniqueNames, streetNodes);
+				street.setName(streetName + district);
+				street.setEnName(set.getString(3) + district);
+				//if for this street there is already same street, add just nodes to the street.
+				if (!streets.containsKey(street.getName())) {
+					streets.put(street.getName(),street);
+				} else {
+					//add the current streetNodes to the existing street
+					List<Node> firstStreetNodes = streetNodes.get(streets.get(street.getName()));
+					if (firstStreetNodes != null && streetNodes.get(street) != null) {
+						firstStreetNodes.addAll(streetNodes.get(street));
 					}
-					rs.close();
 				}
+				visitedStreets.put(streetId, street); //mark the street as visited
 			}
 			if (set.getObject(6) != null) {
 				Street s = visitedStreets.get(streetId);
@@ -1068,6 +1084,58 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		}
 
 		set.close();
+	}
+
+
+	private void loadStreetNodes(Street street, PreparedStatement waynodesStat, Map<Street, List<Node>> streetNodes)
+			throws SQLException {
+		if (waynodesStat != null && streetNodes != null) {
+			List<Node> list = streetNodes.get(street); 
+			if (list == null) {
+				list = new ArrayList<Node>();
+				streetNodes.put(street, list);
+			}
+			waynodesStat.setLong(1, street.getId());
+			ResultSet rs = waynodesStat.executeQuery();
+			while (rs.next()) {
+				list.add(new Node(rs.getDouble(2), rs.getDouble(3), rs.getLong(1)));
+			}
+			rs.close();
+		}
+	}
+
+
+	private String identifyBestDistrict(final Street street, final String streetName, final String district,
+			final Map<String, List<StreetAndDistrict>> uniqueNames, Map<Street, List<Node>> streetNodes) {
+		String result = "";
+		List<StreetAndDistrict> sameStreets = uniqueNames.get(streetName);
+		if (sameStreets == null) {
+			sameStreets = new ArrayList<StreetAndDistrict>(1);
+			uniqueNames.put(streetName, sameStreets);
+		} else {
+			result = district;
+			// not unique, try to find best matching street with district
+			// if not found, use the one that is assign to this street
+			similarStreets:	for (StreetAndDistrict ld : sameStreets) {
+				//try to find the closes nodes to each other!
+				if (streetNodes != null) {
+					for (Node n1 : streetNodes.get(street)) {
+						for (Node n2 : streetNodes.get(ld.getStreet())) {
+							if (MapUtils.getDistance(n1.getLatLon(), n2.getLatLon()) < 400) {
+								result = ld.getDistrict();
+								break similarStreets;
+							}
+						}
+					}
+				}
+				if (MapUtils.getDistance(ld.getStreet().getLocation(), street.getLocation()) < 400) {
+					result = ld.getDistrict();
+					break;
+				}
+			}
+		}
+		sameStreets.add(new StreetAndDistrict(street, result));
+		return result;
 	}
 	
 
