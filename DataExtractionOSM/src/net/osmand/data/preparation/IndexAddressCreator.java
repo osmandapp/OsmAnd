@@ -49,8 +49,8 @@ import org.apache.commons.logging.LogFactory;
 public class IndexAddressCreator extends AbstractIndexPartCreator{
 	
 	private static final Log log = LogFactory.getLog(IndexAddressCreator.class);
-	
-	
+
+
 	private PreparedStatement addressCityStat;
 	private PreparedStatement addressStreetStat;
 	private PreparedStatement addressBuildingStat;
@@ -611,7 +611,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 
 	private String findCityPart(City city, LatLon location) {
 		final Boundary cityBoundary = cityBoundaries.get(city);
-		int greatestBoudnaryLevel = Integer.parseInt(cityAdminLevel);
+		int greatestBoudnaryLevel = getParsedCityAdminLevel();
 		Boundary greatestBoundary = cityBoundary;
 		if (cityBoundary != null) {
 			for (Boundary subB : allSubBoundaries(cityBoundary)) {
@@ -622,6 +622,15 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			}
 		}
 		return greatestBoundary != cityBoundary ? findNearestCityOrSuburb(greatestBoundary, location) : city.getName();
+	}
+
+
+	private int getParsedCityAdminLevel() {
+		try {
+			return Integer.parseInt(cityAdminLevel);
+		} catch (NumberFormatException ex) {
+			return IndexCreator.DEFAULT_CITY_ADMIN_LEVEL;
+		}
 	}
 
 	private String findNearestCityOrSuburb(Boundary greatestBoundary,

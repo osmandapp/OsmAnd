@@ -95,7 +95,9 @@ public class IndexCreator {
 	private File mapFile;
 	private RandomAccessFile mapRAFile;
 	private Connection mapConnection;
-	private String cityAdminLevel = "8";
+
+	public static final int DEFAULT_CITY_ADMIN_LEVEL = 8;
+	private String cityAdminLevel = "" + DEFAULT_CITY_ADMIN_LEVEL;
 	
 
 	public IndexCreator(File workingDir) {
