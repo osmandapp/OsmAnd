@@ -6,6 +6,10 @@ import java.util.List;
 
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.Track;
+import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
@@ -23,6 +27,7 @@ import android.widget.Toast;
 public class RoutingHelper {
 	
 	private static final org.apache.commons.logging.Log log = LogUtil.getLog(RoutingHelper.class);
+	private static final String OSMAND_ROUTER = "OsmandRouter";
 	
 	public static interface IRouteInformationListener {
 		
@@ -558,7 +563,35 @@ public class RoutingHelper {
 		}
 	}
 	
-	
+	public GPXFile generateGPXFileWithRoute(){
+		GPXFile gpx = new GPXFile();
+		gpx.author = OSMAND_ROUTER;
+		Track track = new Track();
+		gpx.tracks.add(track);
+		TrkSegment trkSegment = new TrkSegment();
+		track.segments.add(trkSegment);
+		int cRoute = currentRoute;
+		int cDirInfo = currentDirectionInfo;
+		
+		for(int i = cRoute; i< routeNodes.size(); i++){
+			Location loc = routeNodes.get(i);
+			WptPt pt = new WptPt();
+			pt.lat = loc.getLatitude();
+			pt.lon = loc.getLongitude();
+			if(loc.hasSpeed()){
+				pt.speed = loc.getSpeed();
+			}
+			if(loc.hasAltitude()){
+				pt.ele = loc.getAltitude();
+			}
+			if(loc.hasAccuracy()){
+				pt.hdop = loc.getAccuracy();
+			}
+			trkSegment.points.add(pt);
+		}
+		// TODO save dir info
+		return gpx;
+	}
 
 	
 	public static class TurnType {

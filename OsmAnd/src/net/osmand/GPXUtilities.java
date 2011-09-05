@@ -203,11 +203,13 @@ public class GPXUtilities {
 	}
 	
 	private static void writeExtensions(XmlSerializer serializer, GPXExtensions p) throws IOException {
-		serializer.startTag(null, "extensions");
-		for(Map.Entry<String, String> s : p.getExtensionsToRead().entrySet()){
-			writeNotNullText(serializer, s.getKey(), s.getValue());
+		if (!p.getExtensionsToRead().isEmpty()) {
+			serializer.startTag(null, "extensions");
+			for (Map.Entry<String, String> s : p.getExtensionsToRead().entrySet()) {
+				writeNotNullText(serializer, s.getKey(), s.getValue());
+			}
+			serializer.endTag(null, "extensions");
 		}
-		serializer.endTag(null, "extensions");
 	}
 
 	private static void writeWpt(SimpleDateFormat format, XmlSerializer serializer, WptPt p) throws IOException {

@@ -4,11 +4,13 @@ import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.FavouritePoint;
+import net.osmand.GPXUtilities;
 import net.osmand.LogUtil;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.Amenity;
@@ -516,7 +518,8 @@ public class MapActivityActions {
 		dlg.setTitle(R.string.save_route_dialog_title);
 		dlg.setContentView(R.layout.save_directions_dialog);
 		final EditText edit = (EditText) dlg.findViewById(R.id.FileNameEdit);
-		edit.setText("");
+		
+		edit.setText(MessageFormat.format("{0,date,dd-MM-yyyy}", new Date()));
 		((Button) dlg.findViewById(R.id.Save)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -532,7 +535,8 @@ public class MapActivityActions {
 				if(toSave.exists()){
 					dlg.findViewById(R.id.DuplicateFileName).setVisibility(View.VISIBLE);					
 				} else {
-					new SaveDirectionsAsyncTask().execute(fileDir);
+					dlg.dismiss();
+					new SaveDirectionsAsyncTask().execute(toSave);
 				}
 			}
 		});
@@ -555,7 +559,8 @@ public class MapActivityActions {
 		protected String doInBackground(File... params) {
 			if (params.length > 0) {
 				File file = params[0];
-				
+				GPXFile gpx = mapActivity.getRoutingHelper().generateGPXFileWithRoute();
+				GPXUtilities.writeGpxFile(file, gpx, mapActivity);
 				return mapActivity.getString(R.string.route_successfully_saved_at, file.getName());
 			}
 			return null;
@@ -564,7 +569,7 @@ public class MapActivityActions {
 		@Override
 		protected void onPostExecute(String result) {
 			if(result != null){
-				Toast.makeText(mapActivity, result, Toast.LENGTH_SHORT);
+				Toast.makeText(mapActivity, result, Toast.LENGTH_LONG).show();
 			}
 		}
 		
