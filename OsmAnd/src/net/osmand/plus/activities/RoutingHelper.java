@@ -14,9 +14,9 @@ import net.osmand.plus.activities.RouteProvider.GPXRouteParams;
 import net.osmand.plus.activities.RouteProvider.RouteCalculationResult;
 import net.osmand.plus.activities.RouteProvider.RouteService;
 import net.osmand.plus.voice.CommandPlayer;
-import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
+import android.os.Handler;
 import android.util.FloatMath;
 import android.widget.Toast;
 
@@ -37,9 +37,6 @@ public class RoutingHelper {
 	private List<IRouteInformationListener> listeners = new ArrayList<IRouteInformationListener>();
 
 	private Context context;
-	
-	// activity to show messages & refresh map when route is calculated	
-	private Activity uiActivity;
 	
 	private boolean isFollowingMode = false;
 	
@@ -67,6 +64,8 @@ public class RoutingHelper {
 	private RouteProvider provider = new RouteProvider();
 	private VoiceRouter voiceRouter;
 
+	private Handler uiHandler;
+
 	
 	
 	
@@ -74,6 +73,7 @@ public class RoutingHelper {
 		this.settings = settings;
 		this.context = context;
 		voiceRouter = new VoiceRouter(this, player);
+		uiHandler = new Handler();
 	}
 	
 	public boolean isFollowingMode() {
@@ -97,29 +97,27 @@ public class RoutingHelper {
 		
 	}
 	
-	public void clearCurrentRoute(LatLon newFinalLocation){
+	public void clearCurrentRoute(LatLon newFinalLocation) {
 		this.routeNodes.clear();
 		listDistance = null;
 		directionInfo = null;
 		evalWaitInterval = 3000;
-		if(uiActivity != null){
-			uiActivity.runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					for(IRouteInformationListener l : listeners){
-						l.routeWasCancelled();
-					}
+		uiHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				for (IRouteInformationListener l : listeners) {
+					l.routeWasCancelled();
 				}
-			});
-		}
+			}
+		});
 		this.finalLocation = newFinalLocation;
-		if(newFinalLocation == null){
-			settings.FOLLOW_TO_THE_ROUTE.set(false);
+		if (newFinalLocation == null) {
+			settings.FOLLOW_THE_ROUTE.set(false);
+			settings.FOLLOW_THE_GPX_ROUTE.set(null);
 			// clear last fixed location
 			this.lastFixedLocation = null;
 			this.isFollowingMode = false;
 		}
-		
 	}
 	
 	public GPXRouteParams getCurrentGPXRoute() {
@@ -165,10 +163,6 @@ public class RoutingHelper {
 			return true;
 		}
 		return false;
-	}
-	
-	public void setUiActivity(Activity uiActivity) {
-		this.uiActivity = uiActivity;
 	}
 	
 	public Location getCurrentLocation() {
@@ -343,7 +337,7 @@ public class RoutingHelper {
 	}
 	
 	private synchronized void setNewRoute(RouteCalculationResult res){
-		boolean updateRoute = !routeNodes.isEmpty();
+		final boolean updateRoute = !routeNodes.isEmpty();
 		routeNodes = res.getLocations();
 		directionInfo = res.getDirections();
 		listDistance = res.getListDistance();
@@ -352,9 +346,15 @@ public class RoutingHelper {
 		if(isFollowingMode){
 			voiceRouter.newRouteIsCalculated(updateRoute);
 		} 
-		for(IRouteInformationListener l : listeners){
-			l.newRouteIsCalculated(updateRoute);
-		}
+		uiHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				for (IRouteInformationListener l : listeners) {
+					l.newRouteIsCalculated(updateRoute);
+				}
+			}
+		});
+		
 	}
 	
 	public synchronized int getLeftDistance(){
@@ -482,10 +482,6 @@ public class RoutingHelper {
 								int l = dist != null && dist.length > 0 ? dist[0] : 0;
 								showMessage(context.getString(R.string.new_route_calculated_dist)
 										+ " : " + OsmAndFormatter.getFormattedDistance(l, context)); //$NON-NLS-1$
-								if (uiActivity instanceof MapActivity) {
-									// be aware that is non ui thread
-									((MapActivity) uiActivity).getMapView().refreshMap();
-								}
 							} else {
 								if (res.getErrorMessage() != null) {
 									showMessage(context.getString(R.string.error_calculating_route) + " : " + res.getErrorMessage()); //$NON-NLS-1$
@@ -508,17 +504,13 @@ public class RoutingHelper {
 		return currentRunningJob != null;
 	}
 	
-	private void showMessage(final String msg, final int length){
-		if (uiActivity != null) {
-			uiActivity.runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					if(uiActivity != null){
-						Toast.makeText(uiActivity, msg, length).show();
-					}
-				}
-			});
-		}
+	private void showMessage(final String msg, final int length) {
+		uiHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				Toast.makeText(context, msg, length).show();
+			}
+		});
 	}
 	private void showMessage(final String msg){
 		showMessage(msg, Toast.LENGTH_SHORT);

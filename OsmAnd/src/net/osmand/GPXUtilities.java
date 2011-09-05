@@ -93,6 +93,7 @@ public class GPXUtilities {
 		public List<WptPt> points = new ArrayList<WptPt>();
 		public List<Route> routes = new ArrayList<Route>();
 		public String warning = null;
+		public String path = "";
 		
 		public boolean isCloudmadeRouteFile(){
 			return "cloudmade".equalsIgnoreCase(author);
@@ -273,9 +274,12 @@ public class GPXUtilities {
 	
 	public static GPXFile loadGPXFile(Context ctx, File f, boolean convertCloudmadeSource) {
 		try {
-			return loadGPXFile(ctx, new FileInputStream(f), convertCloudmadeSource);
+			GPXFile file = loadGPXFile(ctx, new FileInputStream(f), convertCloudmadeSource);
+			file.path = f.getAbsolutePath();
+			return file;
 		} catch (FileNotFoundException e) {
 			GPXFile res = new GPXFile();
+			res.path = f.getAbsolutePath();
 			log.error("Error reading gpx", e); //$NON-NLS-1$
 			res.warning = ctx.getString(R.string.error_reading_gpx);
 			return res;

@@ -975,7 +975,8 @@ public class OsmandSettings {
 	public final OsmandPreference<String> CONTRIBUTION_INSTALL_APP_DATE = new StringPreference("CONTRIBUTION_INSTALL_APP_DATE", null, true);
 	
 	
-	public final OsmandPreference<Boolean> FOLLOW_TO_THE_ROUTE = new BooleanPreference("follow_to_route", false, true);
+	public final OsmandPreference<Boolean> FOLLOW_THE_ROUTE = new BooleanPreference("follow_to_route", false, true);
+	public final OsmandPreference<String> FOLLOW_THE_GPX_ROUTE = new StringPreference("follow_gpx", null, true);
 	
 	public final OsmandPreference<Boolean> SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME = 
 		new BooleanPreference("show_arrival_time", true, true);
