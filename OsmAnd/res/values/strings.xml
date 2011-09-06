@@ -2,10 +2,10 @@
 <resources>
 	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7 :
 \n\t- Offline data manager (download, delete, backup offline data directly in Osmand)
-\n\t- Favorite points and groups (categorize, delete, manage favorites) 
-\n\t- GPX Explorer in application (see tracks, distance, average speed, elevation and etc)  
+\n\t- Favorite points and groups (categorize, delete, manage favorites)
+\n\t- GPX Explorer in application (see tracks, distance, average speed, elevation, etc.)
 \n\t- GPX navigation (useful options, continue navigation after crash, supports roundabouts)
-\n\t- Function to save route as GPX track to use it offline 
+\n\t- Function to save route as GPX track to use it offline
 \n\t- Improve GPX monitoring  (filter some inaccurate location and save accuracy/elevation/speed)
 \n\t- Upload GPX for OSM community (http://download.osmand.net/gpx/)
 \n\t- Improve vector rendering
@@ -13,7 +13,7 @@
 \n\t- Bug fixing
 	</string>
 	<string name="save_route_dialog_title">Save route as GPX track</string>
-	<string name="route_successfully_saved_at">Route is successfully saved at \'%1$s\'.</string>
+	<string name="route_successfully_saved_at">Route successfully saved as \'%1$s\'.</string>
 	<string name="filename_input">File name : </string>
 	<string name="file_with_name_already_exist">File with same name already exists.</string>
 	<string name="default_buttons_save">Save</string>

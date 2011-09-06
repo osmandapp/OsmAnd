@@ -1,5 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="tip_recent_changes_0_6_7_t">Verbesserungen in 0.6.7 :
+\n\t- Offline-Daten Manager (Herunterladen, Löschen und Verschieben nach Backup von Offline-Daten direkt in Osmand)
+\n\t- Favoriten und Favoritengruppen (Kategorisieren, Löschen, Managen von Favoriten)
+\n\t- GPX Explorer innerhalb der Applikation (Tracks und Track-Daten ansehen)
+\n\t- GPX Navigation (nützliche Optionen, Fortsetzung der Navigation nach Crash, unterstützt jetzt Kreisverkehre)
+\n\t- Abspeichern von Routen als GPX-Tracks zur Offline-Verwendung
+\n\t- Verbessertes GPX Tracking  (Filtern von ungenauen Positionen, Abspeichern von Genauigkeit, Höhe, Geschwindigkeit)
+\n\t- Funktion zum Upload von GPX Dateien zur OSM Community (http://download.osmand.net/gpx/)
+\n\t- Verbessertes Vektor-Rendering
+\n\t- Verbessserung der TTS-Ansagen (genaue Entferunugsansagen, optional auch in Meilen+Fuß)
+\n\t- Fehlerbehebung
+	</string>
+	<string name="save_route_dialog_title">Route als GPX-Track speichern</string>
+	<string name="route_successfully_saved_at">Route erfolgreich gespeichert als \'%1$s\'.</string>
+	<string name="filename_input">Dateiname : </string>
+	<string name="file_with_name_already_exist">Datei mit gleichem Namen besteht bereits.</string>
+	<string name="default_buttons_save">Speichern</string>
+	<string name="menu_save_directions">Route speichern</string>
 	<string name="local_index_upload_gpx_description">GPX Dateien an OSM Community übermitteln. Die Dateien können dort zur Kartenverbesserung verwendet werden.</string>
 	<string name="local_index_items_uploaded">%1$d von %2$d Datei(en) erfolgreich hochgeladen.</string>
 	<string name="local_index_mi_upload_gpx">Senden an OSM...</string>
