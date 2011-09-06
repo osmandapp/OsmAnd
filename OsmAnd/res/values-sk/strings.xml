@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="save_route_dialog_title">Uložiť cestu ako GPX stopu</string>
+	<string name="route_successfully_saved_at">Cesta je úspešne uložená v \'%1$s\'.</string>
+	<string name="filename_input">Názov súboru: </string>
+	<string name="file_with_name_already_exist">Súbor s takýmto názvom už existuje.</string>
+	<string name="default_buttons_save">Uložiť</string>
+	<string name="menu_save_directions">Uloženie pokynov</string>
 	<string name="local_index_upload_gpx_description">Nahranie GPX súborov do OSM komunity. Budú použité na vylepšenie máp.</string>
 	<string name="local_index_items_uploaded">%1$d z %2$d položky(iek) úspešne nahraných.</string>
 	<string name="local_index_mi_upload_gpx">Poskytnúť pre OSM...</string>
