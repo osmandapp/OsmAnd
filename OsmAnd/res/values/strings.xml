@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7 : 
+\n\t- Text To Speech engine for voice navigation
+\n\t- Make map renderer more detailed
+\n\t- Basemap for whole world packaged with app
+\n\t- Tweak offline routing (still experimental)
+\n\t- GPX routing options
+\n\t- UI update and large bug fixing
+	</string>
 	<string name="save_route_dialog_title">Save route as GPX track</string>
 	<string name="route_successfully_saved_at">Route is successfully saved at \'%1$s\'.</string>
 	<string name="filename_input">File name : </string>

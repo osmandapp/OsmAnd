@@ -1,5 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="tip_recent_changes_0_6_7_t">Изменения в 0.6.7 : 
+\n\t- Text To Speech может быть использован для голосовой навигации
+\n\t- Более детализированный рендеринг карты
+\n\t- Базовая карта для всего мира в приложении
+\n\t- Улучшение offline роутинга (все еще экспериментально)
+\n\t- Дополнительные опции при роутинге по GPX
+\n\t- Обновление графики и исправление ошибок
+\n\t- Yandex трафик слой теперь можно использовать как обычный слой покрытия (необходимо установить - Больше...) 
+	</string>
+	<string name="save_route_dialog_title">Сохранить маршрут как GPX путь</string>
+	<string name="route_successfully_saved_at">Маршрут успешно сохранен \'%1$s\'.</string>
+	<string name="filename_input">Имя файла : </string>
+	<string name="file_with_name_already_exist">Файл с данным именем уже существует.</string>
+	<string name="default_buttons_save">Сохранить</string>
+	<string name="menu_save_directions">Сохранить маршрут</string>
+	<string name="local_index_upload_gpx_description">Поделиться GPX файлами с OSM сообществом. Они будут использованы для улучшения карты и загружены в osm.org.</string>
+	<string name="local_index_items_uploaded">%1$d из %2$d объект(ов) успешно загружены.</string>
+	<string name="local_index_mi_upload_gpx">Отправить в OSM...</string>
+	
+	<string name="show_more_map_detail">Детализированная карта</string>
+	<string name="show_more_map_detail_descr">Показывать детали (дороги и др.), начиная с мелких масштабов.</string>
+
+	<string name="favourites_delete_multiple_succesful">Избранные точки удалены.</string>
+	<string name="favorite_delete_multiple">Вы собираетесь удалить %1$d избранных и %2$d групп. Вы уверены?</string>
+	<string name="favorite_home_category">Дома</string>
+	<string name="favorite_friends_category">Друзья</string>
+	<string name="favorite_places_category">Места</string>
+	<string name="favorite_default_category">Другое</string>
+
+	<string name="vector_map_not_needed">Не нужно</string>
+	<string name="basemap_missing">Базовая карта, покрывающая весь мир на мелком масштабе, отсутствует. Пожалуйста загрузите World_basemap_x.obf для полноценный работы приложения.</string>
+	<string name="vector_data_missing">Офлайн данные отсутствуют на SD карточке. Пожалуйста загрузите для того, чтобы использовать приложения без интернета.</string>
 	<string name="local_index_gpx_info_show">\n\nДлинное нажатие для просмотра на карте</string>
     <string name="local_index_gpx_info_speed">\nСредняя скорость : %1$s \nМаксимальная скорость : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nСредняя высота : %1$.0f метров\nМинимальная высота : %2$.0f метров\nМаксимальная высота : %3$.0f метров\nПодъем вверх : %4$.0f метров\nПодъем вниз : %5$.0f метров</string>
