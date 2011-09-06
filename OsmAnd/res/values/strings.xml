@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7 : 
-\n\t- Text To Speech engine for voice navigation
-\n\t- Make map renderer more detailed
-\n\t- Basemap for whole world packaged with app
-\n\t- Tweak offline routing (still experimental)
-\n\t- GPX routing options
-\n\t- UI update and large bug fixing
+	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7 :
+\n\t- Offline data manager (download, delete, backup offline data directly in Osmand)
+\n\t- Favorite points and groups (categorize, delete, manage favorites) 
+\n\t- GPX Explorer in application (see tracks, distance, average speed, elevation and etc)  
+\n\t- GPX navigation (useful options, continue navigation after crash, supports roundabouts)
+\n\t- Function to save route as GPX track to use it offline 
+\n\t- Improve GPX monitoring  (filter some inaccurate location and save accuracy/elevation/speed)
+\n\t- Upload GPX for OSM community (http://download.osmand.net/gpx/)
+\n\t- Improve vector rendering
+\n\t- Improvement of TTS engine (pronounce exact distance, enable miles)
+\n\t- Bug fixing
 	</string>
 	<string name="save_route_dialog_title">Save route as GPX track</string>
 	<string name="route_successfully_saved_at">Route is successfully saved at \'%1$s\'.</string>
