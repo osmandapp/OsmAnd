@@ -27,7 +27,6 @@ import android.widget.Toast;
 public class RoutingHelper {
 	
 	private static final org.apache.commons.logging.Log log = LogUtil.getLog(RoutingHelper.class);
-	private static final String OSMAND_ROUTER = "OsmandRouter";
 	
 	public static interface IRouteInformationListener {
 		
@@ -564,33 +563,7 @@ public class RoutingHelper {
 	}
 	
 	public GPXFile generateGPXFileWithRoute(){
-		GPXFile gpx = new GPXFile();
-		gpx.author = OSMAND_ROUTER;
-		Track track = new Track();
-		gpx.tracks.add(track);
-		TrkSegment trkSegment = new TrkSegment();
-		track.segments.add(trkSegment);
-		int cRoute = currentRoute;
-		int cDirInfo = currentDirectionInfo;
-		
-		for(int i = cRoute; i< routeNodes.size(); i++){
-			Location loc = routeNodes.get(i);
-			WptPt pt = new WptPt();
-			pt.lat = loc.getLatitude();
-			pt.lon = loc.getLongitude();
-			if(loc.hasSpeed()){
-				pt.speed = loc.getSpeed();
-			}
-			if(loc.hasAltitude()){
-				pt.ele = loc.getAltitude();
-			}
-			if(loc.hasAccuracy()){
-				pt.hdop = loc.getAccuracy();
-			}
-			trkSegment.points.add(pt);
-		}
-		// TODO save dir info
-		return gpx;
+		return provider.createOsmandRouterGPX(currentRoute, routeNodes, currentDirectionInfo, directionInfo);
 	}
 
 	
@@ -612,7 +585,7 @@ public class RoutingHelper {
 					return new TurnType(v);
 				}
 			}
-			if(s!= null && s.startsWith("EXIT")){ //$NON-NLS-1$
+			if (s != null && s.startsWith("EXIT")) { //$NON-NLS-1$
 				return getExitTurn(Integer.parseInt(s.substring(4)), 0);
 			}
 			return null;
