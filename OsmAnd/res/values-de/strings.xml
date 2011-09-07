@@ -54,7 +54,7 @@
 	<string name="local_index_download">Herunterladen...</string>
 	<string name="local_index_tile_data">Kachel-Daten: %1$s \nMinimale Vergrößerung : %2$d\nMaximale Vergrößerung : %3$d\nHerunterladbar : %4$s \nHeruntegeladene Vergrößerungen : %5$s</string>
 	<string name="local_index_poi_data">POI-Daten</string>
-	<string name="local_index_address_data">Address-Daten</string>
+	<string name="local_index_address_data">Adress-Daten</string>
 	<string name="local_index_transport_data">ÖPNV-Daten</string>
 	<string name="local_index_map_data">Karten-Daten</string>
 	<string name="local_index_items"></string>

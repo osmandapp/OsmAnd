@@ -72,7 +72,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private void createTableForTrack(SQLiteDatabase db){
 		db.execSQL("CREATE TABLE " + TRACK_NAME+ " ("+TRACK_COL_LAT +" double, " + TRACK_COL_LON+" double, " //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  
 				+ TRACK_COL_ALTITUDE+" double, " + TRACK_COL_SPEED+" double, "  //$NON-NLS-1$ //$NON-NLS-2$
-				+ TRACK_COL_DATE +" long )" ); //$NON-NLS-1$
+				+ TRACK_COL_HDOP +" double, " + TRACK_COL_DATE +" long )" ); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	private void createTableForPoints(SQLiteDatabase db){
@@ -97,42 +97,42 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	
 	
 		
-	public boolean hasDataToSave(){
+	public boolean hasDataToSave() {
 		SQLiteDatabase db = getWritableDatabase();
-		if(db != null){
+		if (db != null) {
 			Cursor q = db.query(false, TRACK_NAME, new String[0], null, null, null, null, null, null);
-                        boolean has = q.moveToFirst();
-                        q.close();
-			if(has) {
-                            return true;
-                        }
-                        q = db.query(false, POINT_NAME, new String[0], null, null, null, null, null, null);
+			boolean has = q.moveToFirst();
+			q.close();
+			if (has) {
+				return true;
+			}
+			q = db.query(false, POINT_NAME, new String[0], null, null, null, null, null, null);
 			has = q.moveToFirst();
-                        q.close();
-			if(has) {
-                            return true;
-                        }
+			q.close();
+			if (has) {
+				return true;
+			}
 		}
-		
+
 		return false;
 	}
 	
 	/**
 	 * @return warnings
 	 */
-	public List<String> saveDataToGpx(){
+	public List<String> saveDataToGpx() {
 		SQLiteDatabase db = getReadableDatabase();
 		List<String> warnings = new ArrayList<String>();
 		File dir = OsmandSettings.getOsmandSettings(ctx).getExternalStorageDirectory();
-		if(db != null && dir.canWrite()){
+		if (db != null && dir.canWrite()) {
 			dir = new File(dir, ResourceManager.GPX_PATH);
 			dir.mkdirs();
 			if (dir.exists()) {
-				
+
 				Map<String, GPXFile> data = new LinkedHashMap<String, GPXFile>();
 				collectDBPoints(db, data);
 				collectDBTracks(db, data);
-				
+
 				// save file
 				for (String f : data.keySet()) {
 
@@ -150,7 +150,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				}
 			}
 		}
-		
+
 		db = getWritableDatabase();
 		if (db != null && warnings.isEmpty()) {
 			// remove all from db
