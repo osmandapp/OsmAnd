@@ -9,7 +9,7 @@
 \n\t- Verbessertes GPX Tracking  (Filtern von ungenauen Positionen, Abspeichern von Genauigkeit, Höhe, Geschwindigkeit)
 \n\t- Funktion zum Upload von GPX Dateien zur OSM Community (http://download.osmand.net/gpx/)
 \n\t- Verbessertes Vektor-Rendering
-\n\t- Verbessserung der TTS-Ansagen (genaue Entferunugsansagen, optional auch in Meilen+Fuß)
+\n\t- Verbesserung der TTS-Ansagen (genaue Entferunugsansagen, optional auch in Meilen+Fuß)
 \n\t- Fehlerbehebung
 	</string>
 	<string name="save_route_dialog_title">Route als GPX-Track speichern</string>
@@ -23,7 +23,7 @@
 	<string name="local_index_mi_upload_gpx">Senden an OSM...</string>
 	
 	<string name="show_more_map_detail">Mehr Kartendetails</string>
-	<string name="show_more_map_detail_descr">Einige Vektor-Daten (Straßen etc.) bereits bei kleineren Vergößerungen zeigen</string>
+	<string name="show_more_map_detail_descr">Einige Vektor-Daten (Straßen etc.) bereits bei kleineren Vergrößerungen zeigen</string>
 
 	<string name="favourites_delete_multiple_succesful">Favorit(en) erfolgreich gelöscht.</string>
 	<string name="favorite_delete_multiple">Es soll(en) %1$d Favorit(en) und %2$d Favoriten-Gruppe(n) gelöscht werden. Fortfahren?</string>
@@ -70,18 +70,18 @@
 	<string name="map_text_size_descr">Wähle Textgröße für Bezeichnungen in den Landkarten</string>
 	<string name="map_text_size">Textgröße</string>
 	<string name="tip_recent_changes">Neuerungen</string>
-	<string name="tip_recent_changes_0_6_6_t">Neuerngen in Version 0.6.6 : 
+	<string name="tip_recent_changes_0_6_6_t">Neuerungen in Version 0.6.6 :
 \n\t- Text-To-Speech (TTS) Sprachansagensupport
 \n\t- Anzeige von mehr Details in den Landkarten
 \n\t- World_Basemap für die ganze Welt in der Applikation enthalten
 \n\t- Verbesserungen im Offline Routing (immer noch experimentell)
 \n\t- GPX Routing Optionen
-\n\t- Update der Bedienoberläche und viele Bug-Fixes
+\n\t- Update der Bedienoberfläche und viele Bug-Fixes
 	</string>
 
 	<string name="voice_not_specified">Keine</string>
 	<string name="trace_rendering">Rendering Debug Info</string>
-	<string name="trace_rendering_descr">Flag zur Prüfung der Rendering Performanz (Geschwindigkeit der Offline-Bildaufbaus)</string>
+	<string name="trace_rendering_descr">Flag zur Prüfung der Rendering Performance (Geschwindigkeit des Offline-Bildaufbaus)</string>
 	<string name="installing_new_resources">Entpacke neue Daten...</string>
 	<string name="internet_connection_required_for_online_route">Es soll ein Online-Routing-Dienst verwendet werden, aber es besteht keine Internet-Verbindung. Es besteht die Möglichkeit, das (noch experimentelle) OsmAnd Offline-Routing zu verwenden, siehe \'Einstellungen\' -> \'Navigation\'.</string>
 	<string name="tts_language_not_supported_title">Sprache nicht unterstützt</string>
@@ -133,7 +133,7 @@
 	<string name="tip_update_index">Update der Offline-Daten</string>
 	<string name="tip_update_index_t">\tAktuelle Kartendaten sind natürlich wichtig. OsmAnd bietet einen Download-Manager, mit dem man die Verfügbarkeit neuerer Offline-Daten prüfen kann.
 	\n\tUpdates sucht man via \'Hauptmenü\' -> \'Einstellungen\' -> \'Offline-Vektor-Karten\' -> \'Offline-Daten herunterladen\'.
-	\n\tNachdem die Liste verfügbarer Offline-Daten geladen ist, kann auf Wunsch mit der Option \'Menü\' -> \'Filter Gespeicherte\' auf Updates eingerenzt werden, zu denen auf dem Gerät bereits Vorgänger existieren.
+	\n\tNachdem die Liste verfügbarer Offline-Daten geladen ist, kann auf Wunsch mit der Option \'Menü\' -> \'Filter Gespeicherte\' auf Updates eingegrenzt werden, zu denen auf dem Gerät bereits Vorgänger existieren.
 	\n\tAngezeigt werden verfügbare Updates nach dem folgenden Farbschema:
 	\n\t\'Grün\' - zeigt Übereinstimmung der Offline-Daten mit dem Server an
 	\n\t\'Blau\' - zeigt an, dass Offline-Daten über Server aktualisiert werden können</string>
@@ -165,7 +165,7 @@
 	<string name="tip_osm_improve">OSM-Bearbeitung</string>
 	<string name="tip_osm_improve_t">\tOsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM), und kann (neben Kartenanzeige und Navigation) auch zur Verbesserung der OSM-Daten verwendet werden. Man kann mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden.
 \n\tDazu muss man zunächst unter \'Hauptmenü\' -> \'Einstellungen\' -> \'OSM\' seine OSM Login-Daten hinterlegen.
-\n\tUm einen neuen POI zu erzeugen, vewendet man die Option \'POI erstellen\' im Karten-Kontextmenu. Danach werden die Informationen zum POI eingetragen und über die Menüführung zu OSM hochgeladen.
+\n\tUm einen neuen POI zu erzeugen, verwendet man die Option \'POI erstellen\' im Karten-Kontextmenu. Danach werden die Informationen zum POI eingetragen und über die Menüführung zu OSM hochgeladen.
 \n\tGefundene Fehler auf den Karten kann man direkt berichten, und die Openstreetmap Community kann diese schneller beheben.
 \n\tOSM-Fehlerberichte erstellt man mit dem Menü \'OSM-Fehlerbericht einsenden\' im \'Karten-Kontextmenü\'.
 \n\tFür alle OSM-Aktivitäten wird eine Internet-Verbindung benötigt.</string>
@@ -188,7 +188,7 @@
 \n\tDas Profil wechselt unter \'Menü\' -> \'Einstellungen\' -> \'Applikationsmodus\', oder auch beim Berechnen einer Route.</string>
 
 	<string name="tip_navigation">Navigation</string>
-	<string name="tip_navigation_t">}tVor dem Starten der Navigationsfunktion (Routen) ist ein Zielpukt zu wählen. Danach wählt man \'Menu\' -> \'Route\' in der Karte, und wählt den Navigationstyp.</string>
+	<string name="tip_navigation_t">\tVor dem Starten der Navigationsfunktion (Routen) ist ein Zielpunkt zu wählen. Danach wählt man \'Menu\' -> \'Route\' in der Karte, und wählt den Navigationstyp.</string>
 
 	<string name="tip_select_destination_point">Zielpunkt wählen</string>
 	<string name="tip_select_destination_point_t">\tEin Zielpunkt kann direkt in der Karte (via Kontextmenü) gewählt werden (\'Navigiere zu\') oder in allen Such-Funktionen.
@@ -274,12 +274,12 @@
 					
 	<string name="use_osmand_routing_service">OsmAnd Routing</string>
 	<string name="use_osmand_routing_service_descr">OsmAnd Offline-Routing für große Entfernungen verwenden (experimentell)</string>
-	<string name="osmand_routing_experimental">OsmAnd Offline-Routing ist in experimentellem Stadium, funktioniert schlecht für Entfernungen über 20 km.\n Routing-Dienst wird automatisch zu online Cloudmade gewechselt.</string>
+	<string name="osmand_routing_experimental">OsmAnd Offline-Routing ist in einem experimentellen Stadium und funktioniert schlecht für Entfernungen über 20 km.\n Routing-Dienst wird automatisch zu online Cloudmade gewechselt.</string>
 	<string name="specified_dir_doesnt_exist">Angegebener Ordner kann nicht gefunden werden.</string>
 	<string name="application_dir">Speicher-Ordner</string>
-	<string name="application_dir_change_warning">Das Wechseln des Speicher-Ordners verschiebt oder löscht keine Daten. Dies muss separat ausserhalb von OsmAnd durchgeführt werden. Dennoch fortfahren?</string>
+	<string name="application_dir_change_warning">Das Wechseln des Speicher-Ordners verschiebt oder löscht keine Daten. Dies muss separat außerhalb von OsmAnd durchgeführt werden. Dennoch fortfahren?</string>
 
-	<string name="osmand_net_previously_installed">Eine Vorversion von OsmAnd ist installiert. Alle Offline-Daten werden weiter unterstützt. Favoriten müssen aber in der Vorversion exportiert werden und dann inneuer Version importiert.</string>
+	<string name="osmand_net_previously_installed">Eine Vorversion von OsmAnd ist installiert. Alle Offline-Daten werden weiter unterstützt. Favoriten müssen aber in der Vorversion exportiert und anschließend in die neue Version importiert werden.</string>
 	<string name="build_installed">Build {0} erfolgreich installiert ({1}).</string>
 	<string name="downloading_build">Lade Build...</string>
 	<string name="install_selected_build">Installation OsmAnd - {0} von {1} {2} MB. Fortfahren?</string>
@@ -313,9 +313,9 @@
     <string name="index_settings_descr">Laden und Verwalten von Landkarten und Daten für Offline-Verwendung</string>
     <string name="index_settings">Offline-Daten</string>
 	<string name="osmand_service">Hintergrund-Service</string>
-	<string name="osmand_service_descr">Zur Verwendung von OsmAnd bei ausgeschalterter Anzeige</string>
+	<string name="osmand_service_descr">Zur Verwendung von OsmAnd bei ausgeschalteter Anzeige</string>
 	<string name="fast_route_mode">Schnellste Route</string>
-	<string name="fast_route_mode_descr">Auswählen für schnellste Route oder nicht für kürzeste Route</string>
+	<string name="fast_route_mode_descr">Auswählen für schnellste Route oder deaktivieren für kürzeste Route</string>
 	<string name="tiles_to_download_estimated_size">Bei Zoomlevel {0} lade {1} Kacheln ({2} MB )</string>
 	<string name="context_menu_item_download_map">Karte herunterladen</string>
 	<string name="select_max_zoom_preload_area">Wähle maximale zu ladende Vergrößerung</string>
@@ -341,8 +341,8 @@
 	<string name="unknown_location">Position noch nicht ermittelt</string>
 	<string name="download_files">Laden</string>
 	<string name="context_menu_item_search_transport">Suche ÖPNV</string>
-	<string name="transport_searching_transport">Suche ÖPNV (kein Ziiel)</string>
-	<string name="transport_searching_route">Suche ÖPNV (Ziiel {0})</string>
+	<string name="transport_searching_transport">Suche ÖPNV (kein Ziel)</string>
+	<string name="transport_searching_route">Suche ÖPNV (Ziel {0})</string>
 	<string name="transport_search_none">kein</string>
 	<string name="transport_search_again">ÖPNV nochmal suchen</string>
 
@@ -428,7 +428,7 @@
 	<string name="sd_mounted_ro">Die SD-Karte befindet sich im Nur-Lesen Modus. \nSie können nur vorgeladene Karten sehen. Der Internetdownload ist deaktiviert.</string>
 	<string name="unzipping_file">Datei wird entpackt...</string>
 	<string name="route_tr">rechts abbiegen</string>
-	<string name="route_tshr">scharf rechts abbieten</string>
+	<string name="route_tshr">scharf rechts abbiegen</string>
 	<string name="route_tslr">halb rechts abbiegen</string>
 	<string name="route_tl">links abbiegen</string>
 	<string name="route_tshl">scharf links abbiegen</string>
@@ -437,16 +437,16 @@
 	<string name="route_head">Kopf</string>
 	<string name="first_time_continue">Weiter</string>
 	<string name="first_time_download">Offline-Daten herunterladen</string>
-	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. \nUm alle Funktkionen verwenden zu können, sind Offline-Daten verforderlich, die Sie in den Einstellungen unter Offline-Daten herunterladen können oder selbst erstellen können. Danach können Sie Adressen, POI und ÖPNV finden.</string>
+	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. \nUm alle Funktionen verwenden zu können, sind Offline-Daten erforderlich, die Sie in den Einstellungen unter Offline-Daten herunterladen oder selbst erstellen können. Danach können Sie Adressen, POI und ÖPNV finden.</string>
 	<string name="search_poi_location">Suche Signal...</string>
 	<string name="search_near_map">Suche um Kartenposition</string>
 	<string name="search_nearby">Suche um Aufenthaltsort</string>
 	<string name="map_orientation_default">je nach Geräteorientierung</string>
-	<string name="map_orientation_portrait">Hochfortmat</string>
+	<string name="map_orientation_portrait">Hochformat</string>
 	<string name="map_orientation_landscape">Querformat</string>
 	<string name="map_screen_orientation">Anzeigeausrichtung</string>
 	<string name="map_screen_orientation_descr">Ausrichtung der Landkartenzeige</string>
-	<string name="opening_hours_not_supported">Ändern von Öffnungszeiten wird nicht unterstüzt</string>
+	<string name="opening_hours_not_supported">Ändern von Öffnungszeiten wird nicht unterstützt</string>
 	<string name="add_new_rule">Füge neue Regel hinzu</string>
 	<string name="transport_Routes">Strecken</string>
 	<string name="transport_Stop">Haltestelle</string>
@@ -471,7 +471,7 @@
 	<string name="update_poi_no_offline_poi_index">Für dieses Gebiet sind keine POI gespeichert.</string>
 	<string name="update_poi_is_not_available_for_zoom">Update von POI ist für kleine Zoomeinstellungen nicht verfügbar</string>
 	<string name="context_menu_item_update_poi">POI aktualisieren</string>
-	<string name="context_menu_item_update_map_confirm">Wollen Sie die Daten via Internet zu aktualisieren?</string>
+	<string name="context_menu_item_update_map_confirm">Wollen Sie die Daten via Internet aktualisieren?</string>
 	<string name="search_history_city">Ort: {0}</string>
 	<string name="search_history_street">Straße: {0}, {1}</string>
 	<string name="search_history_int_streets">Querstraße : {0} x {1} in {2}</string>
@@ -525,7 +525,7 @@
 	<string name="auth_failed">Autorisierung fehlgeschlagen</string>
 	<string name="failed_op">fehlgeschlagen</string>
 	<string name="converting_names">Konvertiere einheimische/Englische Namen...</string>
-	<string name="loading_streets_buildings">Lade Staßen und Gebäude...</string>
+	<string name="loading_streets_buildings">Lade Straßen und Gebäude...</string>
 	<string name="loading_postcodes">Lade Postleitzahlen...</string>
 	<string name="loading_streets">Lade Straßen...</string>
 	<string name="loading_cities">Lade Orte...</string>
@@ -593,7 +593,7 @@
     <string name="position_on_map_descr">Position des Markers auf der Karte</string>
     <string name="position_on_map">Positionsmarker</string>
     <string name="map_specify_point">Punkt wählen</string>
-    <string name="show_view_angle_descr">Blickrichtung gemäss Kompass anzeigen</string>
+    <string name="show_view_angle_descr">Blickrichtung gemäß Kompass anzeigen</string>
     <string name="show_view_angle">Blickrichtung einblenden</string>
     <string name="stop_navigation">Lösche Punkt</string>
     <string name="navigate_to_point">Markiere Punkt</string>
@@ -640,7 +640,7 @@
 <string name="app_mode_pedestrian">Fußgänger</string>
 <string name="position_on_map_center">Mitte</string>
 <string name="position_on_map_bottom">Unten</string>
-<string name="navigate_point_top_text">Breiten- und Längengrad in folgendem Format angeben (D - Grad, M - Minuten, S - Sekunden)</string>
+<string name="navigate_point_top_text">Breiten- und Längengrad im folgenden Format angeben (D - Grad, M - Minuten, S - Sekunden)</string>
 <string name="navigate_point_latitude">Breitengrad</string>
 <string name="navigate_point_longitude">Längengrad</string>
 <string name="navigate_point_format_D">DDD.DDDDD</string>
