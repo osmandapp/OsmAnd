@@ -1,5 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+<string name="tip_recent_changes_0_6_7_t">0.6.7 verzió változásai:
+\n\t- Offline - kapcsolat nélküli - adat kezelés (letöltés, törlés, adatok biztonsági mentése közvetlenül az Osmandban)
+\n\t- Kedvenc pontok és csoportok (csoportosítás, törlés, kedvencek kezelése)
+\n\t- GPX Explorer in application (see tracks, distance, average speed, elevation, etc.)
+\n\t- GPX navigáció (hasznos opciók, összeomlás után utvonal folytatása, körforgalmak kezelése)
+\n\t- Utvonal mentése GPX nyomvonalként kapcsolat nélküli munkához
+\n\t- GPX adatok kibővítése (pontatlan adatok kiszűrése és pontosság/emelkedés/sebesség mentése)
+\n\t- GPX nyomvonal feltöltése az OSM közösséghez (http://download.osmand.net/gpx/)
+\n\t- Vektoros megjelenítés javítása
+\n\t- TTS javítások (pontos távolság kimondása, mérföld)
+\n\t- Hibajavítások
+</string>
+<string name="save_route_dialog_title">Útvonal mentése GPX nyomvonalként</string>
+<string name="route_successfully_saved_at">Az útvonal sikeresen mentve: \'%1$s\'.</string>
+<string name="filename_input">Fájl neve : </string>
+<string name="file_with_name_already_exist">Már létezik fájl ilyen névvel.</string>
+<string name="default_buttons_save">Mentés</string>
+<string name="menu_save_directions">Irányok mentése</string>
 <string name="local_index_upload_gpx_description">GPX fájl feltöltése OSM-be. A térkép kibővítésére használják majd.</string>
 <string name="local_index_items_uploaded">%2$d darabból %1$d sikeresen feltöltve.</string>
 <string name="local_index_mi_upload_gpx">OSM hozzájárulás...</string>
