@@ -1,11 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="tip_recent_changes_0_6_7_t">Changement pour 0.6.7 :
+\n\t- Gestionaire de données hors ligne (téléchargement, suppression, sauvegarde des données hors ligne directement dans Osmand)
+\n\t- Favoris et groupes (categorisation, suppression, gestion)
+\n\t- Explorateur GPX dans l\'application (voir les itinéraires, distance, vitesse moyenne, altitude, etc.)
+\n\t- Navigation GPX (options utiles, continuer un itinéraire après plantage, identification des rond-points)
+\n\t- Fonction d\'enregistrement des itinéraires au format GPX pour utilisation ultérieure hors ligne
+\n\t- Amélioration gestion GPX  (filtrage emplacements imprécis et enregistrement de la précision, altitude et vitesse)
+\n\t- Téléchargement des traces GPX à la communauté OSM (http://download.osmand.net/gpx/)
+\n\t- Améliorations du rendu vectoriel
+\n\t- Améliorations du moteur de synthèse vocale (distance exacte, support des miles)
+\n\t- Corrections de Bogues
+	</string>
+	<string name="save_route_dialog_title">Enregistrer l\'itinéraire au format GPX</string>
+	<string name="route_successfully_saved_at">Itinéraire correctement enregistré dans \'%1$s\'.</string>
+	<string name="filename_input">Nom du fichier : </string>
+	<string name="file_with_name_already_exist">Le même nom existe déjà.</string>
+	<string name="default_buttons_save">Enregistrer</string>
+	<string name="menu_save_directions">Enregistrer l\'itinéraire</string>
+	<string name="local_index_upload_gpx_description">Envoyer les fichiers GPX à la communauté OSM. Ils seront utilisés pour améliorer les cartes.</string>
+	<string name="local_index_items_uploaded">%1$d sur %2$d élement(s) envoyés avec succès.</string>
+	<string name="local_index_mi_upload_gpx">Envoyer à OSM...</string>     
+
+	<string name="show_more_map_detail">Afficher plus de détails</string>
+	<string name="show_more_map_detail_descr">Afficher plus de détails sur les cartes vectorielles (routes etc.) aux niveaux de zooms inférieurs</string>
+
 	<string name="favourites_delete_multiple_succesful">Favoris correctement supprimés.</string>
 	<string name="favorite_delete_multiple">Vous allez supprimer %1$d favoris et %2$d groupes de favoris. Etes vous sûr?</string>
 	<string name="favorite_home_category">Maison</string>
 	<string name="favorite_friends_category">Amis</string>
 	<string name="favorite_places_category">Lieux</string>
 	<string name="favorite_default_category">Autres</string>
+
 	<string name="vector_map_not_needed">Pas nécessaire</string>
 	<string name="basemap_missing">La carte mondiale de base est absente (couvrant le monde entier à faible zoom).  Pensez à télécharger World_basemap_x.obf pour avoir un environnement complet.</string>
 	<string name="vector_data_missing">Il n\'y a pas de cartes (\'hors-ligne\') sur la carte SD. Pensez à en télécharger pour utiliser OsmAnd hors ligne.</string>
@@ -39,6 +65,7 @@
 	<string name="local_indexes_cat_tile">Cartes (tuiles)</string>
 	<string name="local_indexes_cat_map">Cartes (vectorielles)</string>
 	<string name="local_indexes_cat_poi">Données PI</string>
+
 	<string name="ttsvoice">Voix synthétique</string>
 	<string name="search_offline_clear_search">Nouvelle Recherche</string>
 	<string name="map_text_size_descr">Choisir taille du texte pour les noms sur la carte</string>
