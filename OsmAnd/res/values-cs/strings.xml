@@ -1,5 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="tip_recent_changes_0_6_7_t">Poslední změny ve verzi 0.6.7 :
+\n\t- Správce offline dat (stáhnout, smazat, zálohovat přímo z Osmandu)
+\n\t- Oblíbené body a skupiny (uložení do kategorií, smazání, správa oblíbených)
+\n\t- GPX Explorer v aplikaci (zobrazit trasy, vzdálenost, prům. rychlost, nadm. výšku, atd.)
+\n\t- GPX navigace (užitečné nastavení, pokračovat navigaci po pádu aplikace, podpora kruhových objezdů)
+\n\t- Funkce na uložení trasy jako GPX track pro použití offline
+\n\t- Vylepšené monitorování GPX (vyfiltrování nepřesné polohy a uložení přesnosti/nadm. výšky/rychlosti)
+\n\t- Nahrání GPX do komunity (http://download.osmand.net/gpx/)
+\n\t- Vylepšený vektorový renderer
+\n\t- Vylepšený TTS engine (přesná vzdálenost, míle)
+\n\t- Oprava chyb
+	</string>
+	<string name="save_route_dialog_title">Uložit trasu jako GPX track</string>
+	<string name="route_successfully_saved_at">Trasa úspěšně uložena jako \'%1$s\'.</string>
+	<string name="filename_input">Jméno souboru : </string>
+	<string name="file_with_name_already_exist">Soubor s tímto jménem už existuje.</string>
+	<string name="default_buttons_save">Uložit</string>
+	<string name="menu_save_directions">Uložit pokyny</string>
 	<string name="local_index_upload_gpx_description">Nahrát GPX soubory do OSM komunity. Budou použity k vylepšení map.</string>
 	<string name="local_index_items_uploaded">%1$d z %2$d položek byla úspěšně nahrána.</string>
 	<string name="local_index_mi_upload_gpx">Přispět do OSM...</string>
@@ -664,7 +682,7 @@
   <string name="voice_data_unavailable">Současné hlasové údaje jsou nejsou dostupné</string>
   <string name="stop_routing">Zastavit navigaci</string>
   <string name="sd_unmounted">SD karta není dostupná.\nNeuvidíte mapu a nebudete moci ani nic najít.</string>
-  <string name="sd_mounted_ro">SD card je pouze pro čtení.\nMůžete prohlížet jen přednačtenou mapu a nelze stahovat mapy z internetu..</string>
+  <string name="sd_mounted_ro">SD karta má zakázaný zápis.\nMůžete prohlížet jen přednačtenou mapu a nelze stahovat mapy z internetu.</string>
   <string name="unzipping_file">Rozbaluji soubor...</string>
   <string name="route_tr">Odbočte vpravo a pokračujte</string>
   <string name="route_tshr">Odbočte ostře vpravo a pokračujte</string>
