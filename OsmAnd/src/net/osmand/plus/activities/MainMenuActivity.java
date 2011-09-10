@@ -215,6 +215,9 @@ public class MainMenuActivity extends Activity {
 				((OsmandApplication) activity.getApplication()).closeApplication();
 				//moveTaskToBack(true);
 				activity.finish();
+				//http://stackoverflow.com/questions/2092951/how-to-close-android-application
+				System.runFinalizersOnExit(true); //if any threads are running, they will prevent app from exit
+				System.exit(0); //exit
 			}
 		});
 
