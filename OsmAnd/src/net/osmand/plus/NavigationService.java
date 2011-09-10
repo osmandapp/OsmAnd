@@ -49,6 +49,7 @@ public class NavigationService extends Service implements LocationListener {
 
 	private static WakeLock lockStatic;
 	private PendingIntent pendingIntent;
+	private BroadcastReceiver broadcastReceiver;
 	
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -106,13 +107,14 @@ public class NavigationService extends Service implements LocationListener {
 		}
 			
 		// registering icon at top level
-		registerReceiver(new BroadcastReceiver() {
+		broadcastReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				NavigationService.this.stopSelf();
 			}
 
-		}, new IntentFilter(OSMAND_STOP_SERVICE_ACTION));
+		};
+		registerReceiver(broadcastReceiver, new IntentFilter(OSMAND_STOP_SERVICE_ACTION));
 		Intent notificationIntent = new Intent(OSMAND_STOP_SERVICE_ACTION);
 		Notification notification = new Notification(R.drawable.icon, "", //$NON-NLS-1$
 				System.currentTimeMillis());
@@ -150,6 +152,10 @@ public class NavigationService extends Service implements LocationListener {
 		// remove notification
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		mNotificationManager.cancel(NOTIFICATION_SERVICE_ID);
+		if (broadcastReceiver != null) {
+			unregisterReceiver(broadcastReceiver);
+			broadcastReceiver = null;
+		}
 	}
 
 
@@ -161,7 +167,10 @@ public class NavigationService extends Service implements LocationListener {
 				// unregister listener and wait next time
 				LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 				locationManager.removeUpdates(this);
-				getLock(this).release();
+				WakeLock lock = getLock(this);
+				if (lock.isHeld()) {
+					lock.release();
+				}
 			}
 			savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
 					location.getSpeed(), location.getAccuracy(), location.getTime(), settings);

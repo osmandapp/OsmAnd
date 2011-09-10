@@ -212,12 +212,15 @@ public class MainMenuActivity extends Activity {
 		closeButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				((OsmandApplication) activity.getApplication()).closeApplication();
+				getMyApplication().closeApplication();
 				//moveTaskToBack(true);
 				activity.finish();
-				//http://stackoverflow.com/questions/2092951/how-to-close-android-application
-				System.runFinalizersOnExit(true); //if any threads are running, they will prevent app from exit
-				System.exit(0); //exit
+				//TODO this is different from MapActivity close...
+				if (getMyApplication().getNavigationService() == null) {
+					//http://stackoverflow.com/questions/2092951/how-to-close-android-application
+					System.runFinalizersOnExit(true);
+					System.exit(0);
+				}
 			}
 		});
 
@@ -235,7 +238,7 @@ public class MainMenuActivity extends Activity {
 		}
 		
 		startProgressDialog = new ProgressDialog(this);
-		((OsmandApplication)getApplication()).checkApplicationIsBeingInitialized(this, startProgressDialog);
+		getMyApplication().checkApplicationIsBeingInitialized(this, startProgressDialog);
 		SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);
 		boolean firstTime = false;
 		if(!pref.contains(FIRST_TIME_APP_RUN)){
@@ -306,7 +309,7 @@ public class MainMenuActivity extends Activity {
 	}
 	
 	protected void checkVectorIndexesDownloaded() {
-		MapRenderRepositories maps = ((OsmandApplication) getApplication()).getResourceManager().getRenderer();
+		MapRenderRepositories maps = getMyApplication().getResourceManager().getRenderer();
 		SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);
 		boolean check = pref.getBoolean(VECTOR_INDEXES_CHECK, true);
 		// do not show each time 
@@ -337,6 +340,10 @@ public class MainMenuActivity extends Activity {
 			builder.show();
 		}
 		
+	}
+
+	private OsmandApplication getMyApplication() {
+		return (OsmandApplication) getApplication();
 	}
 	
 	@Override

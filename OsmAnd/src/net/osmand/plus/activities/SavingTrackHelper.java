@@ -239,20 +239,25 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	
 	public void insertData(double lat, double lon, double alt, double speed, double hdop, long time, OsmandSettings settings){
 		if (time - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()*1000) {
-			SQLiteDatabase db = getWritableDatabase();
-			if (db != null) {
-				db.execSQL(updateScript, new Object[] { lat, lon, alt, speed, hdop, time });
-			}
+			execWithClose(updateScript, new Object[] { lat, lon, alt, speed, hdop, time });
 			lastTimeUpdated = time;
 		}
 	}
 	
 	public void insertPointData(double lat, double lon, long time, String description) {
-		SQLiteDatabase db = getWritableDatabase();
-		if (db != null) {
-			db.execSQL(updatePointsScript, new Object[] { lat, lon, time, description });
-		}
+		execWithClose(updatePointsScript, new Object[] { lat, lon, time, description });
 	}
 	
-
+	private void execWithClose(String script, Object[] objects) {
+		SQLiteDatabase db = getWritableDatabase();
+		try {
+			if (db != null) {
+				db.execSQL(script, objects);
+			}
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+		}
+	}
 }
