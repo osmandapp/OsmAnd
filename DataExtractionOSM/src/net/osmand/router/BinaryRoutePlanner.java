@@ -24,47 +24,48 @@ import net.osmand.osm.MapUtils;
 import org.apache.commons.logging.Log;
 
 public class BinaryRoutePlanner {
-	
+
 	private final static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
 	private final int REVERSE_WAY_RESTRICTION_ONLY = 1024;
 	private final BinaryMapIndexReader[] map;
-	
-	
-	
+
 	private static final Log log = LogUtil.getLog(BinaryRoutePlanner.class);
-	
+
 	public BinaryRoutePlanner(BinaryMapIndexReader... map){
 		this.map = map;
 	}
-	
-	
+
 	private static double squareRootDist(int x1, int y1, int x2, int y2) {
 		// translate into meters 
 		double dy = convert31YToMeters(y1, y2);
 		double dx = convert31XToMeters(x1, x2);
 		return Math.sqrt(dx * dx + dy * dy);
 	}
-	
+
+	private static double squareDist(int x1, int y1, int x2, int y2) {
+		// translate into meters 
+		double dy = convert31YToMeters(y1, y2);
+		double dx = convert31XToMeters(x1, x2);
+		return dx * dx + dy * dy;
+	}
+
 	private static double convert31YToMeters(int y1, int y2) {
 		// translate into meters 
 		return (y1 - y2) * 0.01863d;
 	}
-	
+
 	private static double convert31XToMeters(int x1, int x2) {
 		// translate into meters 
 		return (x1 - x2) * 0.011d;
 	}
-	
-	
 
-   
 	public void loadRoutes(final RoutingContext ctx, int tileX, int tileY) throws IOException {
 		int tileC = (tileX << ctx.getZoomToLoadTileWithRoads()) + tileY;
 		if(ctx.loadedTiles.contains(tileC)){
 			return;
 		}
 		long now = System.nanoTime();
-		
+
 		int zoomToLoad = 31 - ctx.getZoomToLoadTileWithRoads();
 		SearchRequest<BinaryMapDataObject> request = BinaryMapIndexReader.buildSearchRequest(tileX << zoomToLoad,
 				(tileX + 1) << zoomToLoad, tileY << zoomToLoad, 
@@ -115,62 +116,68 @@ public class BinaryRoutePlanner {
 			ctx.timeToLoad += (System.nanoTime() - now);
 		}
 	}
-	
-	// calculate distance from C to AB (distnace doesn't calculate 
-    private static double calculateDistance(int xA, int yA, int xB, int yB, int xC, int yC, double distAB){
+
+	// calculate distance from C to AB (distance doesn't calculate 
+	private static double calculateDistance(int xA, int yA, int xB, int yB, int xC, int yC, double distAB) {
     	// Scalar multiplication between (AB', AC)
-    	double multiple = (-convert31YToMeters(yB, yA)) * convert31XToMeters(xC,xA) + convert31XToMeters(xB,xA) * convert31YToMeters(yC, yA);
-    	return multiple / distAB;
-    }
-    
-	private static double calculateProjection(int xA, int yA, int xB, int yB, int xC, int yC, double distAB) {
-		// Scalar multiplication between (AB, AC)
-		double multiple = convert31XToMeters(xB, xA) * convert31XToMeters(xC, xA) + convert31XToMeters(yB, yA) * convert31YToMeters(yC, yA);
+		double multiple = (-convert31YToMeters(yB, yA)) * convert31XToMeters(xC,xA) + convert31XToMeters(xB,xA) * convert31YToMeters(yC, yA);
 		return multiple / distAB;
 	}
-	
-	
+
+	// calculate square distance from C to AB (distance doesn't calculate 
+	private static double calculatesquareDistance(int xA, int yA, int xB, int yB, int xC, int yC, double distAB) {
+    	// Scalar multiplication between (AB', AC)
+		double multiple = (-convert31YToMeters(yB, yA)) * convert31XToMeters(xC,xA) + convert31XToMeters(xB,xA) * convert31YToMeters(yC, yA);
+		return (multiple * multiple) / (distAB * distAB);
+	}
+
+	private static double calculateProjection(int xA, int yA, int xB, int yB, int xC, int yC, double distAB) {
+		// Scalar multiplication between (AB, AC)
+		double multiple = convert31XToMeters(xB, xA) * convert31XToMeters(xC, xA) + convert31YToMeters(yB, yA) * convert31YToMeters(yC, yA);
+		return multiple / distAB;
+	}
+
 	public RouteSegment findRouteSegment(double lat, double lon, RoutingContext ctx) throws IOException {
 		double tileX = MapUtils.getTileNumberX(ctx.getZoomToLoadTileWithRoads(), lon);
 		double tileY = MapUtils.getTileNumberY(ctx.getZoomToLoadTileWithRoads(), lat);
 		loadRoutes(ctx, (int) tileX , (int) tileY);
-		
+
 		RouteSegment road = null;
-		double dist = 0; 
+		double sdist = 0; 
 		int px = MapUtils.get31TileNumberX(lon);
 		int py = MapUtils.get31TileNumberY(lat);
 		for(BinaryMapDataObject r : ctx.values()){
 			if(r.getPointsLength() > 1){
 				double priority = ctx.getRouter().getRoadPriorityToCalculateRoute(r);
 				for (int j = 1; j < r.getPointsLength(); j++) {
-					double mDist = squareRootDist(r.getPoint31XTile(j), r.getPoint31YTile(j), r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1));
+					double mDist = squareDist(r.getPoint31XTile(j), r.getPoint31YTile(j), r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1));
 					double projection = calculateProjection(r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1), r.getPoint31XTile(j), r.getPoint31YTile(j),
 							px, py, mDist);
-					double currentDist;
-					if(projection < 0){
-						currentDist = squareRootDist(r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1), px, py) / priority;
+					double currentsDist;
+					if(projection < 0){//TODO: first 2 and last 2 points of a route should be only near and not based on road priority (I.E. a motorway road node unreachable near my house)
+						currentsDist = squareDist(r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1), px, py) / (priority * priority);
 					} else if(projection > mDist){
-						currentDist = squareRootDist(r.getPoint31XTile(j), r.getPoint31YTile(j), px, py) / priority;
+						currentsDist = squareDist(r.getPoint31XTile(j), r.getPoint31YTile(j), px, py) / (priority * priority);
 					} else {
-						currentDist = Math.abs(calculateDistance(r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1), r.getPoint31XTile(j), r.getPoint31YTile(j),
-								px, py, mDist)) / priority;
+						currentsDist = calculatesquareDistance(r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1), r.getPoint31XTile(j), r.getPoint31YTile(j),
+								px, py, mDist) / (priority * priority);
 					}
-					
-					if (road == null || currentDist < dist) {
+
+					if (road == null || currentsDist < sdist) {
 						road = new RouteSegment();
 						road.road = r;
-						road.segmentStart = j - 1;
+						road.segmentStart = j - 1;//TODO: first 2 and last 2 segments should be based on projection. my start/finish point S/F, fake point P between j-1 & j -> SP, PJ; should end at finish point: JP,PF
 						road.segmentEnd = j;
-						dist = currentDist;
+						sdist = currentsDist;
 					}
 				}
 			}
 		}
 		return road;
 	}
-	
-	
-	
+
+
+
 	// TODO write unit tests
 	// TODO add information about turns (?) - probably calculate additional information to show on map
 	// TODO think about u-turn
@@ -182,7 +189,7 @@ public class BinaryRoutePlanner {
 	 * return list of segments
 	 */
 	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, RouteSegment start, RouteSegment end) throws IOException {
-		
+
 		// measure time
 		ctx.timeToLoad = 0;
 		ctx.visitedSegments = 0;
@@ -195,21 +202,21 @@ public class BinaryRoutePlanner {
 				return ctx.roadPriorityComparator(o1.distanceFromStart, o1.distanceToEnd, o2.distanceFromStart, o2.distanceToEnd);
 			}
 		};
-		
+
 		Comparator<RouteSegment> nonHeuristicSegmentsComparator = new Comparator<RouteSegment>(){
 			@Override
 			public int compare(RouteSegment o1, RouteSegment o2) {
 				return roadPriorityComparator(o1.distanceFromStart, o1.distanceToEnd, o2.distanceFromStart, o2.distanceToEnd, 0.5);
 			}
 		};
-		
+
 		PriorityQueue<RouteSegment> graphDirectSegments = new PriorityQueue<RouteSegment>(50, segmentsComparator);
 		PriorityQueue<RouteSegment> graphReverseSegments = new PriorityQueue<RouteSegment>(50, segmentsComparator);
-		
+
 		// Set to not visit one segment twice (stores road.id << X + segmentStart)
 		TLongObjectHashMap<RouteSegment> visitedDirectSegments = new TLongObjectHashMap<RouteSegment>();
 		TLongObjectHashMap<RouteSegment> visitedOppositeSegments = new TLongObjectHashMap<RouteSegment>();
-		
+
 		int targetEndX = end.road.getPoint31XTile(end.segmentStart);
 		int targetEndY = end.road.getPoint31YTile(end.segmentStart);
 		int startX = start.road.getPoint31XTile(start.segmentStart);
@@ -217,24 +224,24 @@ public class BinaryRoutePlanner {
 		// for start : f(start) = g(start) + h(start) = 0 + h(start) = h(start)
 		start.distanceToEnd = squareRootDist(startX, startY, targetEndX, targetEndY) / ctx.getRouter().getMaxDefaultSpeed();
 		end.distanceToEnd = start.distanceToEnd;
-		
+
 		// because first point of the start is not visited do the same as in cycle but only for one point
 		// it matters when start point is intersection of different roads
 		// add start segment to priority queue
 		visitAllStartSegments(ctx, start, graphDirectSegments, visitedDirectSegments, startX, startY);
 		visitAllStartSegments(ctx, end, graphReverseSegments, visitedOppositeSegments, targetEndX, targetEndY);
-		
+
 		// final segment before end
 		RouteSegment finalDirectRoute = null;
 		RouteSegment finalReverseRoute = null;
-		
+
 		// Extract & analyze segment with min(f(x)) from queue while final segment is not found
 		boolean inverse = false;
-		
+
 		PriorityQueue<RouteSegment>  graphSegments = inverse ? graphReverseSegments : graphDirectSegments;
 		while(!graphSegments.isEmpty()){
 			RouteSegment segment = graphSegments.poll();
-			
+
 			ctx.visitedSegments ++;
 			// for debug purposes
 			if (ctx.visitor != null) {
@@ -270,13 +277,13 @@ public class BinaryRoutePlanner {
 			}
 			graphSegments = inverse ? graphReverseSegments : graphDirectSegments;
 		}
-		
-		
+
+
 		// 4. Route is found : collect all segments and prepare result
 		return prepareResult(ctx, start, end, startNanoTime, finalDirectRoute, finalReverseRoute);
-		
+
 	}
-	
+
 
 	private void visitAllStartSegments(final RoutingContext ctx, RouteSegment start, PriorityQueue<RouteSegment> graphDirectSegments,
 			TLongObjectHashMap<RouteSegment> visitedSegments, int startX, int startY) throws IOException {
@@ -284,7 +291,7 @@ public class BinaryRoutePlanner {
 		long nt = (start.road.getId() << 8l) + start.segmentStart;
 		visitedSegments.put(nt, start);
 		graphDirectSegments.add(start);
-		
+
 		loadRoutes(ctx, (startX >> (31 - ctx.getZoomToLoadTileWithRoads())), (startY >> (31 - ctx.getZoomToLoadTileWithRoads())));
 		long ls = (((long) startX) << 31) + (long) startY;
 		RouteSegment startNbs = ctx.routes.get(ls);
@@ -342,11 +349,7 @@ public class BinaryRoutePlanner {
 			} else if (!plusAllowed && d < 0) {
 				d--;
 			} else {
-				if (d <= 0) {
-					d = -d + 1;
-				} else {
-					d = -d;
-				}
+				d = d <= 0 ? -d + 1 : -d;
 			}
 			if (segmentEnd < 0) {
 				minusAllowed = false;
@@ -389,7 +392,7 @@ public class BinaryRoutePlanner {
 		}
 		return null;
 	}
-	
+
 
 
 	private RouteSegment processIntersectionsWithWays(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments,
@@ -421,7 +424,7 @@ public class BinaryRoutePlanner {
 		while (next != null) {
 			long nts = (next.road.getId() << 8l) + next.segmentStart;
 			boolean oppositeConnectionFound = oppositeSegments.containsKey(nts) && oppositeSegments.get(nts) != null;
-			
+
 			boolean processRoad = true;
 			if (ctx.isUseStrategyOfIncreasingRoadPriorities()) {
 				double roadPriority = ctx.getRouter().getRoadPriorityHeuristicToIncrease(segment.road);
@@ -430,7 +433,7 @@ public class BinaryRoutePlanner {
 					processRoad = false;
 				}
 			} 
-			
+
 			/* next.road.getId() >> 1 (3) != road.getId() >> 1 (3) - used that line for debug with osm map */
 			// road.id could be equal on roundabout, but we should accept them
 			if ((!visitedSegments.contains(nts) && processRoad) || oppositeConnectionFound) {
@@ -477,7 +480,7 @@ public class BinaryRoutePlanner {
 						oppSegment.segmentEnd = next.segmentStart;
 						return oppSegment;
 					}
-					
+
 					double distanceToEnd = distToFinalPoint / ctx.getRouter().getMaxDefaultSpeed();
 					if(ctx.isUseDynamicRoadPrioritising()){
 						double priority = ctx.getRouter().getRoadPriorityToCalculateRoute(next.road);
@@ -543,12 +546,12 @@ public class BinaryRoutePlanner {
 		return null;
 	}
 
-	
-	
+
+
 	private List<RouteSegmentResult> prepareResult(RoutingContext ctx, RouteSegment start, RouteSegment end, long startNanoTime,
 			RouteSegment finalDirectRoute, RouteSegment finalReverseRoute) {
 		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
-		
+
 		RouteSegment segment = finalReverseRoute;
 		int parentSegmentStart = segment == null ? 0 : segment.segmentEnd; 
 		while(segment != null){
@@ -572,7 +575,7 @@ public class BinaryRoutePlanner {
 			res.endPoint = convertPoint(res.object, res.endPointIndex);
 		}
 		Collections.reverse(result);
-		
+
 		segment = finalDirectRoute;
 		int parentSegmentEnd = segment == null ? 0 : segment.segmentEnd;
 		while(segment != null){
@@ -581,7 +584,7 @@ public class BinaryRoutePlanner {
 			res.endPointIndex = parentSegmentEnd;
 			res.startPointIndex = segment.segmentStart;
 			parentSegmentEnd = segment.parentSegmentEnd;
-			
+
 			segment = segment.parentRoute;
 			// reverse start and end point for start if needed
 			// rely that point.segmentStart <= point.segmentEnd for end, start
@@ -596,8 +599,8 @@ public class BinaryRoutePlanner {
 			res.endPoint = convertPoint(res.object, res.endPointIndex);
 		}
 		Collections.reverse(result);
-		
-		
+
+
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
 			System.out.println("ROUTE : ");
 			double startLat = MapUtils.get31LatitudeY(start.road.getPoint31YTile(start.segmentEnd));
@@ -614,26 +617,26 @@ public class BinaryRoutePlanner {
 			}
 			System.out.println("</test>");
 		}
-		
+
 		ctx.timeToCalculate = (System.nanoTime() - startNanoTime);
 		log.info("Time to calculate : " + ctx.timeToCalculate / 1e6 +", time to load : " + ctx.timeToLoad / 1e6	 + ", loaded tiles : " + ctx.loadedTiles.size() + 
 				", visited segments " + ctx.visitedSegments );
 		return result;
 	}
-	
+
 	private LatLon convertPoint(BinaryMapDataObject o, int ind){
 		return new LatLon(MapUtils.get31LatitudeY(o.getPoint31YTile(ind)), MapUtils.get31LongitudeX(o.getPoint31XTile(ind)));
 	}
-	
-	
+
+
 	public interface RouteSegmentVisitor {
-		
+
 		public void visitSegment(RouteSegment segment);
 	}
-	
-	
-	
-	
+
+
+
+
 	/*public */static int roadPriorityComparator(double o1DistanceFromStart, double o1DistanceToEnd, 
 			double o2DistanceFromStart, double o2DistanceToEnd, double heuristicCoefficient ) {
 		// f(x) = g(x) + h(x)  --- g(x) - distanceFromStart, h(x) - distanceToEnd (not exact)
@@ -647,24 +650,24 @@ public class BinaryRoutePlanner {
 		BinaryMapDataObject road;
 		// needed to store intersection of routes
 		RouteSegment next = null;
-		
+
 		// search context (needed for searching route)
 		// Initially it should be null (!) because it checks was it segment visited before
 		RouteSegment parentRoute = null;
 		int parentSegmentEnd = 0;
-		
+
 		// distance measured in time (seconds)
 		double distanceFromStart = 0;
 		double distanceToEnd = 0;
-		
+
 		public RouteSegment getNext() {
 			return next;
 		}
-		
+
 		public int getSegmentStart() {
 			return segmentStart;
 		}
-		
+
 		public BinaryMapDataObject getRoad() {
 			return road;
 		}
@@ -678,9 +681,5 @@ public class BinaryRoutePlanner {
 			this.a = a;
 			this.b = b;
 		}
-		
-		
 	}
-
-	
 }
