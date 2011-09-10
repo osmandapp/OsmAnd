@@ -9,7 +9,7 @@
 \n\t- Verbessertes GPX Tracking  (Filtern von ungenauen Positionen, Abspeichern von Genauigkeit, Höhe, Geschwindigkeit)
 \n\t- Funktion zum Upload von GPX Dateien zur OSM Community (http://download.osmand.net/gpx/)
 \n\t- Verbessertes Vektor-Rendering
-\n\t- Verbesserung der TTS-Ansagen (genaue Entferunugsansagen, optional auch in Meilen+Fuß)
+\n\t- Verbesserung der TTS-Ansagen (genaue Entfernungsansagen, optional auch in Meilen+Fuß)
 \n\t- Fehlerbehebung
 	</string>
 	<string name="save_route_dialog_title">Route als GPX-Track speichern</string>
@@ -46,7 +46,7 @@
 	<string name="local_index_no_items_to_do">Aktion %1$s: Keine Dateien vorhanden</string>
 	<string name="local_index_action_do">%1$s: %2$s Datei(en). Fortfahren?</string>
 	<string name="local_index_descr_title">Offline-Daten Manager:</string>
-	<string name="local_index_description">Herunterladen neuer und Verschieben nach Backup oder Löschen vorhandener Daten.\nLokal vorhandene Offline-Dateien:</string>
+	<string name="local_index_description">Herunterladen, Verschieben (in Backup-Ordner), Löschen und Wiederherstellen von Daten.\nLokal vorhandene Offline-Dateien:</string>
 	<string name="local_index_mi_restore">Wiederherstellen...</string>
 	<string name="local_index_mi_backup">Backup...</string>
 	<string name="local_index_mi_delete">Löschen...</string>
@@ -99,9 +99,9 @@
 	\n\t\'Keine Rotation\' - Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben
 	\n\t\'Nach Bewegungsrichtung\' - Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt
 	\n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt
-	\n\tTipp: Um schnell zwischen der Kompassnachführung und der in den Einstellungen gewählten Option zu wechseln, kann man auf die Kompassnadel in der Kartenansicht drücken.</string>
+	\n\tTipp: Um schnell zwischen der Kompassnachführung und der in den Einstellungen gewählten Option zu wechseln, einfach auf die Kompassnadel in der Kartenansicht drücken.</string>
 
-	<string name="switch_to_raster_map_to_see">Für die derzeitige Position ist auf Ihrem Gerät keine Offline-Vektor-Karte vorhanden. Sie können Sie können via Internet eine zusätzliche Vektor-Karte laden, oder die Kartenquelle wechseln in der Kartenansicht unter Menu -> Darstellung.</string>
+	<string name="switch_to_raster_map_to_see">Für die derzeitige Position ist auf Ihrem Gerät keine Offline-Vektor-Karte vorhanden. Sie können via Internet eine zusätzliche Vektor-Karte laden, oder die Kartenquelle wechseln in der Kartenansicht unter Menu -> Darstellung.</string>
 	<string name="switch_to_vector_map_to_see">Sie können in der Kartenansicht auf Offline-Vektor-Karten wechseln mittels Menü -> Layers -> Kartenquelle -> Offline-Vektor-Karten.</string>
 	<string name="binary_map_download_success">Download erfolgreich. Sie können in der Kartenansicht auf Offline-Vektor-Karten wechseln mittels Menu -> Darstellung -> Kartenquelle -> Offline-Vektor-Karten</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
@@ -152,7 +152,7 @@
 	\n\t\'Umgebungslicht-Sensor\' - automatischer Modus gemäß Umgebungslicht des Gerätes (nur wenn Sensor vorhanden)</string>	
 	<string name="tip_location_sharing">Position mitteilen</string>
 	<string name="tip_location_sharing_t">\tWollen Sie eine interessante Position Freunden oder Familie mitteilen?
-	\n\tMit OsmAnd kann man jede Lokation leicht mit Anderen teilen.
+	\n\tMit OsmAnd kann man jeden Aufenthaltsort leicht mit Anderen teilen.
 	\n\tDies geschieht im \'Karten-Kontextmenü\' via \'Position mitteilen\'.
 	\n\tDann wählt man einen Übertragungsweg, zur Wahl stehen: E-Mail, SMS, oder man kann einfach die Lokationskoordinaten in die Ablage (Clipboard) kopieren.</string>
 
@@ -184,7 +184,7 @@
 \n\tOsmAnd unterstützt auch selbst definierte Quellen.</string>
 
 	<string name="tip_app_mode">Applikationsmodus</string>
-	<string name="tip_app_mode_t">\tOsmAnd unterstützt verschiedene (einzeln anpassbare) Profile für unterschiedliche Einsatzzwecke.
+	<string name="tip_app_mode_t">\tOsmAnd unterstützt verschiedene (individuell anpassbare) Profile für unterschiedliche Einsatzzwecke.
 \n\tDas Profil wechselt unter \'Menü\' -> \'Einstellungen\' -> \'Applikationsmodus\', oder auch beim Berechnen einer Route.</string>
 
 	<string name="tip_navigation">Navigation</string>
@@ -196,7 +196,7 @@
 
 	<string name="tip_search">Suchen</string>
 	<string name="tip_search_t">\tMan kann Orte direkt in der Karte suchen, oder über Adresse, Koordinaten, als POI, oder als abgespeicherter Favorit.
-\n\t\'Suche\' im Hauptmenu öffnet die Suchaktivitäten. Ein Kontextmenü für einen Treffer bietet 2 Optionen: \'Navigiere zu\' oder \'Zeige auf der Karte\'.</string>
+\n\t\'Suche\' im Hauptmenü öffnet die Suchaktivitäten. Ein Kontextmenü für einen Treffer bietet 2 Optionen: \'Navigiere zu\' oder \'Zeige auf der Karte\'.</string>
 
 	<string name="tip_map_context_menu">Kontextmenü in der Karte</string>
 	<string name="tip_map_context_menu_t">\tDas Karten-Kontextmenü wird aufgerufen über ein langes Drücken auf einen Punkt in der Karte oder das Drücken des Trackball-Knopfes in der Kartenansicht.
