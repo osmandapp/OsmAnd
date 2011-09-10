@@ -15,6 +15,11 @@ import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.NavigationService;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.PoiFiltersHelper;
+import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.LogUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.activities.DayNightHelper;
@@ -40,6 +45,8 @@ import android.os.Handler;
 import android.text.format.DateFormat;
 import android.widget.Toast;
 
+import com.bidforfix.andorid.BidForFixHelper;
+
 public class OsmandApplication extends Application {
 	public static final String EXCEPTION_PATH = ResourceManager.APP_DIR + "exception.log"; //$NON-NLS-1$
 	private static final org.apache.commons.logging.Log LOG = LogUtil.getLog(OsmandApplication.class);
@@ -59,7 +66,8 @@ public class OsmandApplication extends Application {
 	DayNightHelper daynightHelper;
 	NavigationService navigationService;
 	RendererRegistry rendererRegistry;
-
+	BidForFixHelper bidforfix;
+	
 	// start variables
 	private ProgressDialogImplementation startDialog;
 	private List<String> startingWarnings;
@@ -78,6 +86,7 @@ public class OsmandApplication extends Application {
 		routingHelper = new RoutingHelper(osmandSettings, this, player);
 		manager = new ResourceManager(this);
 		daynightHelper = new DayNightHelper(this);
+		bidforfix = new BidForFixHelper("osmand.net", getString(R.string.default_buttons_support), getString(R.string.default_buttons_cancel));
 		uiHandler = new Handler();
 		rendererRegistry = new RendererRegistry();
 		checkPrefferedLocale();
@@ -93,6 +102,9 @@ public class OsmandApplication extends Application {
 		if (routingHelper != null) {
 			routingHelper.getVoiceRouter().onApplicationTerminate(getApplicationContext());
 		}
+		if (bidforfix != null) {
+    		bidforfix.onDestroy();
+    	}
 	}
 
 	public RendererRegistry getRendererRegistry() {
@@ -304,6 +316,11 @@ public class OsmandApplication extends Application {
 	public void setNavigationService(NavigationService navigationService) {
 		this.navigationService = navigationService;
 	}
+	
+	public BidForFixHelper getBidForFix() {
+		return bidforfix;
+	}
+	
 
 	public synchronized void closeApplication() {
 		if (applicationInitializing) {
@@ -464,5 +481,4 @@ public class OsmandApplication extends Application {
 
 		}
 	}
-
 }

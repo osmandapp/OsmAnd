@@ -59,6 +59,8 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
+import com.bidforfix.andorid.BidForFixHelper;
+
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
 	
 	public static final String INTENT_KEY_SETTINGS_SCREEN = "INTENT_KEY_SETTINGS_SCREEN";
@@ -172,6 +174,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		String[] entrieValues;
 		PreferenceScreen screen = getPreferenceScreen();
 		osmandSettings = OsmandApplication.getSettings();
+
+		BidForFixHelper bidForFixHelper = getMyApplication().getBidForFix();
+		bidForFixHelper.generatePreferenceList(screen, getString(R.string.support_new_features), this);
 		
 		registerBooleanPreference(osmandSettings.SHOW_VIEW_ANGLE,screen); 
 		registerBooleanPreference(osmandSettings.USE_TRACKBALL_FOR_MOVEMENTS,screen);
