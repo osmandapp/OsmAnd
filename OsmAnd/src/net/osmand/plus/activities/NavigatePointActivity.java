@@ -12,6 +12,7 @@ import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;
 import android.app.Dialog;
@@ -25,7 +26,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-public class NavigatePointActivity extends Activity {
+public class NavigatePointActivity extends Activity implements SearchActivityChild {
 	Dialog dlg;
 	MapActivity activity; 
 	int currentFormat = Location.FORMAT_DEGREES;
@@ -65,16 +66,28 @@ public class NavigatePointActivity extends Activity {
 		LatLon loc = null;
 		Intent intent = getIntent();
 		if(intent != null){
-			float lat = intent.getFloatExtra(SEARCH_LAT, 0);
-			float lon = intent.getFloatExtra(SEARCH_LON, 0);
+			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
+			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
 			if(lat != 0 || lon != 0){
 				loc = new LatLon(lat, lon);
 			}
 		}
 		if (loc == null) {
+			loc = ((SearchActivity) getParent()).getSearchPoint();
+		}
+		if (loc == null) {
 			loc = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
 		}
 		initUI(loc.getLatitude(), loc.getLongitude());
+	}
+	
+	@Override
+	public void locationUpdate(LatLon loc) {
+		if(loc != null){
+			initUI(loc.getLatitude(), loc.getLongitude());
+		} else {
+			initUI(0, 0);
+		}
 	}
 	
 	@Override

@@ -22,7 +22,6 @@ import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.RouteProvider.GPXRouteParams;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchPoiFilterActivity;
-import net.osmand.plus.activities.search.SearchTransportActivity;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -1123,8 +1122,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     	final int[] contextMenuStandardActions = new int[]{
     			R.string.context_menu_item_navigate_point,
     			R.string.context_menu_item_show_route,
-    			R.string.context_menu_item_search_poi,
-    			R.string.context_menu_item_search_transport,
+    			R.string.context_menu_item_search,
     			R.string.context_menu_item_add_favorite,
     			R.string.context_menu_item_share_location,
     			R.string.context_menu_item_create_poi,
@@ -1152,16 +1150,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					navigateToPoint(new LatLon(latitude, longitude));
 				} else if(standardId == R.string.context_menu_item_show_route){
 					mapActions. getDirections(latitude, longitude, false);
-				} else if(standardId == R.string.context_menu_item_search_poi){
-					Intent intent = new Intent(MapActivity.this, SearchPoiFilterActivity.class);
-					intent.putExtra(SearchPoiFilterActivity.SEARCH_LAT, latitude);
-					intent.putExtra(SearchPoiFilterActivity.SEARCH_LON, longitude);
+				} else if(standardId == R.string.context_menu_item_search){
+					Intent intent = new Intent(MapActivity.this, SearchActivity.class);
+					intent.putExtra(SearchActivity.SEARCH_LAT, latitude);
+					intent.putExtra(SearchActivity.SEARCH_LON, longitude);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
-				} else if(standardId == R.string.context_menu_item_search_transport){
-					Intent intent = new Intent(MapActivity.this, SearchTransportActivity.class);
-					intent.putExtra(SearchTransportActivity.SEARCH_LAT, latitude);
-					intent.putExtra(SearchTransportActivity.SEARCH_LON, longitude);
 					startActivity(intent);
 				} else if(standardId == R.string.context_menu_item_add_favorite){
 					mapActions.addFavouritePoint(latitude, longitude);
