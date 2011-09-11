@@ -33,37 +33,33 @@ public class SearchActivity extends TabActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-	}
-	
-	@Override
-	protected void onResume() {
-		super.onResume();
 		Intent intent = getIntent();
 		int tabIndex = 0;
-		if(intent != null){
+		if (intent != null) {
 			tabIndex = intent.getIntExtra(TAB_INDEX_EXTRA, POI_TAB_INDEX);
 			float lat = intent.getFloatExtra(SEARCH_LAT, 0);
 			float lon = intent.getFloatExtra(SEARCH_LON, 0);
-			if(lat != 0 || lon != 0){
+			if (lat != 0 || lon != 0) {
 				searchPoint = new LatLon(lat, lon);
 			}
 		}
-		
-        TabHost host = getTabHost();  
-        // TODO investigate proper intent with lat/lon ?
-        host.addTab(host.newTabSpec("Search_POI").setIndicator(getString(R.string.poi)).setContent(new Intent(this, SearchPoiFilterActivity.class)));   //$NON-NLS-1$
-        
-        addressSpec = host.newTabSpec("Search_Address").setIndicator(getString(R.string.address));
-        setAddressSpecContent(searchPoint);
-        
-        host.addTab(addressSpec); 
-        host.addTab(host.newTabSpec("Search_Location").setIndicator(getString(R.string.search_tabs_location)).setContent(createIntent(NavigatePointActivity.class))); //$NON-NLS-1$
+
+		TabHost host = getTabHost();
+		// TODO investigate proper intent with lat/lon ?
+		host.addTab(host.newTabSpec("Search_POI").setIndicator(getString(R.string.poi)).setContent(new Intent(this, SearchPoiFilterActivity.class))); //$NON-NLS-1$
+
+		addressSpec = host.newTabSpec("Search_Address").setIndicator(getString(R.string.address));
+		setAddressSpecContent(searchPoint);
+
+		host.addTab(addressSpec);
+		host.addTab(host.newTabSpec("Search_Location").setIndicator(getString(R.string.search_tabs_location)).setContent(createIntent(NavigatePointActivity.class))); //$NON-NLS-1$
 		if (searchPoint != null) {
 			host.addTab(host.newTabSpec("Search_Transport").setIndicator(getString(R.string.transport)).setContent(createIntent(SearchTransportActivity.class))); //$NON-NLS-1$
 		}
-        host.addTab(host.newTabSpec("Search_History").setIndicator(getString(R.string.history)).setContent(createIntent(SearchHistoryActivity.class))); //$NON-NLS-1$
-        host.setCurrentTab(tabIndex);
+		host.addTab(host.newTabSpec("Search_History").setIndicator(getString(R.string.history)).setContent(createIntent(SearchHistoryActivity.class))); //$NON-NLS-1$
+		host.setCurrentTab(tabIndex);
 	}
+	
 	
 	private Intent createIntent(Class<? extends Activity> cl){
 		Intent intent = new Intent(this, cl);
