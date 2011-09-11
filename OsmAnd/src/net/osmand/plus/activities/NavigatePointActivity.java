@@ -11,9 +11,11 @@ import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +29,9 @@ public class NavigatePointActivity extends Activity {
 	Dialog dlg;
 	MapActivity activity; 
 	int currentFormat = Location.FORMAT_DEGREES;
+	
+	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
+	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
 	
 	// dialog constructor
 	public NavigatePointActivity(MapActivity activity){
@@ -48,11 +53,28 @@ public class NavigatePointActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		LatLon loc = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+		
 		setContentView(R.layout.navigate_point);
 		setTitle(R.string.map_specify_point);
-		initUI(loc.getLatitude(), loc.getLongitude());
 		((Button) findViewById(R.id.Cancel)).setText(getString(R.string.navigate_to));
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		LatLon loc = null;
+		Intent intent = getIntent();
+		if(intent != null){
+			float lat = intent.getFloatExtra(SEARCH_LAT, 0);
+			float lon = intent.getFloatExtra(SEARCH_LON, 0);
+			if(lat != 0 || lon != 0){
+				loc = new LatLon(lat, lon);
+			}
+		}
+		if (loc == null) {
+			loc = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+		}
+		initUI(loc.getLatitude(), loc.getLongitude());
 	}
 	
 	@Override

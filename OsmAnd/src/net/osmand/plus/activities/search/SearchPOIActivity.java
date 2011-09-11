@@ -24,7 +24,6 @@ import net.osmand.plus.activities.OsmandApplication;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -71,8 +70,8 @@ import android.widget.Toast;
 public class SearchPOIActivity extends ListActivity implements SensorEventListener {
 
 	public static final String AMENITY_FILTER = "net.osmand.amenity_filter"; //$NON-NLS-1$
-	public static final String SEARCH_LAT = "net.osmand.am_search_lat"; //$NON-NLS-1$
-	public static final String SEARCH_LON = "net.osmand.am_search_lon"; //$NON-NLS-1$
+	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT; //$NON-NLS-1$
+	public static final String SEARCH_LON = SearchActivity.SEARCH_LON; //$NON-NLS-1$
 	private static final int GPS_TIMEOUT_REQUEST = 1000;
 	private static final int GPS_DIST_REQUEST = 5;
 	private static final int MIN_DISTANCE_TO_RESEARCH = 70;

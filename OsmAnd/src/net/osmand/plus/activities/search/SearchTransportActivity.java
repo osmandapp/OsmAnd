@@ -23,6 +23,7 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -43,8 +44,8 @@ import android.widget.TextView;
  */
 public class SearchTransportActivity extends ListActivity {
 
-	public static final String LAT_KEY = "lat"; //$NON-NLS-1$
-	public static final String LON_KEY = "lon"; //$NON-NLS-1$
+	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
+	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
 
 	private Button searchTransportLevel;
 	
@@ -68,17 +69,20 @@ public class SearchTransportActivity extends ListActivity {
 	private OsmandSettings settings;
 	
 
-	
-
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		settings = OsmandSettings.getOsmandSettings(this);
-		Bundle extras = getIntent().getExtras();
-		if(extras != null && extras.containsKey(LAT_KEY) && extras.containsKey(LON_KEY)){
-			lastKnownMapLocation = new LatLon(extras.getDouble(LAT_KEY), extras.getDouble(LON_KEY));
-		} else {
-			lastKnownMapLocation = settings.getLastKnownMapLocation();
+		Intent intent = getIntent();
+		if(intent != null){
+			float lat = intent.getFloatExtra(SEARCH_LAT, 0);
+			float lon = intent.getFloatExtra(SEARCH_LON, 0);
+			if(lat != 0 || lon != 0){
+				lastKnownMapLocation = new LatLon(lat, lon);
+			}
+		}
+		if (lastKnownMapLocation == null) {
+			lastKnownMapLocation = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
 		}
 		setContentView(R.layout.search_transport);
 		searchTransportLevel = (Button) findViewById(R.id.SearchTransportLevelButton);

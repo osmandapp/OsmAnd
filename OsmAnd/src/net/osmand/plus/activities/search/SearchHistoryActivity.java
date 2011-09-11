@@ -1,5 +1,6 @@
 package net.osmand.plus.activities.search;
 
+
 import java.util.List;
 
 import net.osmand.OsmAndFormatter;
@@ -28,6 +29,8 @@ public class SearchHistoryActivity extends ListActivity {
 	private LatLon location;
 	private SearchHistoryHelper helper;
 	private Button clearButton;
+	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
+	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,17 @@ public class SearchHistoryActivity extends ListActivity {
 		lv.setId(android.R.id.list);
 		
 		setContentView(lv);
-		location = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+		Intent intent = getIntent();
+		if(intent != null){
+			float lat = intent.getFloatExtra(SEARCH_LAT, 0);
+			float lon = intent.getFloatExtra(SEARCH_LON, 0);
+			if(lat != 0 || lon != 0){
+				location = new LatLon(lat, lon);
+			}
+		}
+		if (location == null) {
+			location = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+		}
 		helper = SearchHistoryHelper.getInstance();
 		
 		

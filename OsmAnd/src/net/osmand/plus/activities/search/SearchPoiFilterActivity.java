@@ -36,8 +36,8 @@ import android.widget.TextView;
 public class SearchPoiFilterActivity extends ListActivity {
 
 	private Typeface typeFace;
-	public final static String SEARCH_LAT = "search_lat";  //$NON-NLS-1$
-	public final static String SEARCH_LON = "search_lon";  //$NON-NLS-1$
+	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
+	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
 	
 	private boolean searchNearBy = true;
 	private double latitude = 0;

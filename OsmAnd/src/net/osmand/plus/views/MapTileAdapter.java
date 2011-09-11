@@ -2,7 +2,6 @@ package net.osmand.plus.views;
 
 import android.graphics.Canvas;
 import android.graphics.RectF;
-import net.osmand.map.ITileSource;
 
 /**
  * This class is designed to represent adapter for specific map sources

@@ -454,6 +454,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			@Override
 			public void onClick(View v) {
 				final Intent search = new Intent(MapActivity.this, SearchActivity.class);
+				LatLon loc = getMapLocation();
+				search.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
+				search.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
 				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				MapActivity.this.startActivity(search);
 				dlg.dismiss();
@@ -478,6 +481,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
         if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
 			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
 			newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			LatLon loc = getMapLocation();
+			newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
+			newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
 			startActivity(newIntent);
             return true;
 		} else if (!routingHelper.isFollowingMode()) {
@@ -1012,6 +1018,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
 			newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			newIntent.putExtra(SearchActivity.TAB_INDEX_EXTRA, SearchActivity.LOCATION_TAB_INDEX);
+			LatLon mapLoc = getMapLocation();
+			newIntent.putExtra(SearchActivity.SEARCH_LAT, mapLoc.getLatitude());
+			newIntent.putExtra(SearchActivity.SEARCH_LON, mapLoc.getLongitude());
 			startActivity(newIntent);
 			return true;
 		case R.id.map_mute:
@@ -1151,8 +1160,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					startActivity(intent);
 				} else if(standardId == R.string.context_menu_item_search_transport){
 					Intent intent = new Intent(MapActivity.this, SearchTransportActivity.class);
-					intent.putExtra(SearchTransportActivity.LAT_KEY, latitude);
-					intent.putExtra(SearchTransportActivity.LON_KEY, longitude);
+					intent.putExtra(SearchTransportActivity.SEARCH_LAT, latitude);
+					intent.putExtra(SearchTransportActivity.SEARCH_LON, longitude);
 					startActivity(intent);
 				} else if(standardId == R.string.context_menu_item_add_favorite){
 					mapActions.addFavouritePoint(latitude, longitude);
