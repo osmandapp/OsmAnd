@@ -479,27 +479,13 @@ private class DownloadIndexesAsyncTask extends  AsyncTask<String, Object, String
 		
 		@Override
 		protected void onPreExecute() {
-			progressFileDlg = new ProgressDialog(DownloadIndexActivity.this);
-			progressFileDlg.setTitle(getString(R.string.downloading));
-			progressFileDlg.setMessage(getString(R.string.downloading_file));
-			progressFileDlg.setIndeterminate(false);
-			progressFileDlg.setCancelable(true);
-			// we'd prefer a plain progress bar without numbers,
-			// but that is only available starting from API level 11
-			try {
-				ProgressDialog.class
-					.getMethod("setProgressNumberFormat", new Class[] { String.class })
-					.invoke(progressFileDlg, (String)null);
-			} catch (NoSuchMethodException nsme) {
-				// failure, must be older device
-			} catch (IllegalAccessException nsme) {
-				// failure, must be older device
-			} catch (java.lang.reflect.InvocationTargetException nsme) {
-				// failure, must be older device
-			}
 			downloadFileHelper.setInterruptDownloading(false);
-			progressFileDlg.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-			progress = new ProgressDialogImplementation(progressFileDlg, true);
+			progress = ProgressDialogImplementation.createProgressDialog(
+				DownloadIndexActivity.this,
+				getString(R.string.downloading),
+				getString(R.string.downloading_file),
+				ProgressDialog.STYLE_HORIZONTAL);
+			progressFileDlg = ((ProgressDialogImplementation)progress).getDialog();
 			progressFileDlg.setOnCancelListener(new DialogInterface.OnCancelListener() {
 				@Override
 				public void onCancel(DialogInterface dialog) {

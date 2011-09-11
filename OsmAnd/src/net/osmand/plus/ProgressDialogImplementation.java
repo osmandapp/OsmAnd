@@ -48,12 +48,34 @@ public class ProgressDialogImplementation implements IProgress {
 	public ProgressDialogImplementation(ProgressDialog dlg, boolean cancelable){
 		this(dlg.getContext(), dlg, cancelable);
 	}
-	
-	
+
 	public ProgressDialogImplementation(final ProgressDialog dlg){
 		this(dlg, false);
 	}
-	
+
+	public static ProgressDialogImplementation createProgressDialog(Context ctx, String title, String message, int style) {
+		ProgressDialog dlg = new ProgressDialog(ctx);
+		dlg.setTitle(title);
+		dlg.setMessage(message);
+		dlg.setIndeterminate(style == ProgressDialog.STYLE_HORIZONTAL); // re-set in mViewUpdateHandler.handleMessage above
+		dlg.setCancelable(true);
+		// we'd prefer a plain progress bar without numbers,
+		// but that is only available starting from API level 11
+		try {
+			ProgressDialog.class
+				.getMethod("setProgressNumberFormat", new Class[] { String.class })
+				.invoke(dlg, (String)null);
+		} catch (NoSuchMethodException nsme) {
+			// failure, must be older device
+		} catch (IllegalAccessException nsme) {
+			// failure, must be older device
+		} catch (java.lang.reflect.InvocationTargetException nsme) {
+			// failure, must be older device
+		}
+		dlg.setProgressStyle(style);
+		return new ProgressDialogImplementation(dlg, true);
+	}
+
 	public void setDialog(ProgressDialog dlg){
 		if(dlg != null){
 			if(cancelable){
