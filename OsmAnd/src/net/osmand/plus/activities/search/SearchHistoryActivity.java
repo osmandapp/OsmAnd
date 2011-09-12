@@ -104,13 +104,13 @@ public class SearchHistoryActivity extends ListActivity implements SearchActivit
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						if (which == 0) {
-							OsmandSettings.getOsmandSettings(SearchHistoryActivity.this).setMapLocationToShow(entry.getLat(), entry.getLon());
+							OsmandSettings.getOsmandSettings(SearchHistoryActivity.this).setMapLocationToShow(entry.getLat(),
+									entry.getLon());
 						} else if (which == 1) {
-							OsmandSettings.getOsmandSettings(SearchHistoryActivity.this).setPointToNavigate(entry.getLat(), entry.getLon(), null);
+							OsmandSettings.getOsmandSettings(SearchHistoryActivity.this).setPointToNavigate(entry.getLat(), entry.getLon(),
+									null);
 						}
-
 						MapActivity.launchMapActivityMoveToTop(SearchHistoryActivity.this);
-
 					}
 
 				});

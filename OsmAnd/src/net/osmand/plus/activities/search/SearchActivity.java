@@ -1,13 +1,16 @@
 package net.osmand.plus.activities.search;
 
+import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 
+import net.osmand.FavouritePoint;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.FavouritesListActivity;
 import net.osmand.plus.activities.NavigatePointActivity;
 import android.app.Activity;
 import android.app.TabActivity;
@@ -36,12 +39,14 @@ public class SearchActivity extends TabActivity {
 	
 	protected static final int POSITION_CURRENT_LOCATION = 1;
 	protected static final int POSITION_LAST_MAP_VIEW = 2;
-	protected static final int POSITION_ADDRESS = 3;
-	protected static final int POSITION_FAVORITES = 4;
+	protected static final int POSITION_FAVORITES = 3;
+	protected static final int POSITION_ADDRESS = 4;
 	
 	private static final int GPS_TIMEOUT_REQUEST = 1000;
 	private static final int GPS_DIST_REQUEST = 5;
 	private static final int GPS_ACCURACY = 50; 
+	
+	private static final int REQUEST_FAVORITE_SELECT = 1;
 	
 	public static final String SEARCH_LAT = "net.osmand.search_lat"; //$NON-NLS-1$
 	public static final String SEARCH_LON = "net.osmand.search_lon"; //$NON-NLS-1$
@@ -76,7 +81,8 @@ public class SearchActivity extends TabActivity {
 						getString(R.string.search_position_current_location),
 						getString(R.string.search_position_map_view),
 						getString(R.string.search_position_favorites),
-						getString(R.string.search_position_address)
+						// Address is not yet implemented
+						// getString(R.string.search_position_address)
 					}))
 				);
 		
@@ -90,9 +96,8 @@ public class SearchActivity extends TabActivity {
 		host.addTab(addressSpec);
 		host.addTab(host.newTabSpec("Search_Location").setIndicator(getString(R.string.search_tabs_location)).setContent(createIntent(NavigatePointActivity.class))); //$NON-NLS-1$
 		TabSpec transportTab = host.newTabSpec("Search_Transport").setIndicator(getString(R.string.transport)).setContent(createIntent(SearchTransportActivity.class));
-		//if (searchPoint != null) {
-			host.addTab(transportTab); //$NON-NLS-1$
-		//}
+		host.addTab(transportTab); //$NON-NLS-1$
+		host.addTab(host.newTabSpec("Search_Favorites").setIndicator(getString(R.string.favorite)).setContent(createIntent(FavouritesListActivity.class))); //$NON-NLS-1$
 		host.addTab(host.newTabSpec("Search_History").setIndicator(getString(R.string.history)).setContent(createIntent(SearchHistoryActivity.class))); //$NON-NLS-1$
 		host.setCurrentTab(POI_TAB_INDEX);
 		
@@ -112,6 +117,11 @@ public class SearchActivity extends TabActivity {
 						if (position == POSITION_LAST_MAP_VIEW) {
 							OsmandSettings settings = OsmandSettings.getOsmandSettings(SearchActivity.this);
 							updateSearchPoint(settings.getLastKnownMapLocation(), getString(R.string.search_position_fixed), true);
+						} else if (position == POSITION_FAVORITES) {
+							Intent intent = new Intent(SearchActivity.this, FavouritesListActivity.class);
+							intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+							intent.putExtra(FavouritesListActivity.SELECT_FAVORITE_POINT_INTENT_KEY, (Serializable) null);
+							startActivityForResult(intent, REQUEST_FAVORITE_SELECT);
 						}
 					}
 				}
@@ -121,6 +131,18 @@ public class SearchActivity extends TabActivity {
 			public void onNothingSelected(AdapterView<?> parent) {
 			}
 		});
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode == REQUEST_FAVORITE_SELECT && resultCode == FavouritesListActivity.SELECT_FAVORITE_POINT_RESULT_OK){
+			FavouritePoint p = (FavouritePoint) data.getSerializableExtra(FavouritesListActivity.SELECT_FAVORITE_POINT_INTENT_KEY);
+			if (p != null) {
+				LatLon latLon = new LatLon(p.getLatitude(), p.getLongitude());
+				updateSearchPoint(latLon, p.getName(), false);
+			}
+		}
 	}
 	
 	
@@ -177,9 +199,12 @@ public class SearchActivity extends TabActivity {
 			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
 			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
 			if (lat != 0 || lon != 0) {
-				LatLon searchPoint = new LatLon(lat, lon);
-				updateSearchPoint(searchPoint, getString(R.string.search_position_fixed), true);
+				updateSearchPoint(new LatLon(lat, lon), getString(R.string.search_position_fixed), true);
 			}
+		}
+		if(searchPoint == null){
+			LatLon last = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+			updateSearchPoint(last, getString(R.string.search_position_fixed), true);
 		}
 	}
 	
@@ -189,12 +214,16 @@ public class SearchActivity extends TabActivity {
 		endSearchCurrentLocation();
 	}
 	
+	private String formatLatLon(LatLon searchPoint){
+		MessageFormat format = new MessageFormat(" ({0,number,#.##};{1,number,#.##})", Locale.US);
+		return format.format(new Object[]{searchPoint.getLatitude(), searchPoint.getLongitude()});
+	}
+	
 	public void updateSearchPoint(LatLon searchPoint, String message, boolean showLoc){
 		spinnerAdapter.remove(spinnerAdapter.getItem(0));
 		String suffix = "";
 		if(showLoc && searchPoint != null){
-			MessageFormat format = new MessageFormat(" ({0,number,#.##};{1,number,#.##})", Locale.US);
-			suffix = format.format(new Object[]{searchPoint.getLatitude(), searchPoint.getLongitude()});
+			suffix = formatLatLon(searchPoint);
 		}
 		spinnerAdapter.insert(message + suffix, 0);
 		this.searchPoint = searchPoint;

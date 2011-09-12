@@ -46,7 +46,7 @@
 	<string name="local_index_no_items_to_do">Нет объектов, чтобы %1$s</string>	
     <string name="local_index_action_do">Вы собириаетесь %1$s %2$s объектов. Вы уверены?</string>
 	<string name="local_index_descr_title">Менеджер офлайн данных:</string>
-	<string name="local_index_description">Офлайн данные доступные на SD карточке. Вы можете загрузить новые, архивировать и удалить данные.</string>
+	<string name="local_index_description">Офлайн данные доступные на SD карточке. Вы можете загрузить новые, архивировать и удалить данные. Доступно %1$s.</string>
 	<string name="local_index_mi_restore">Восстановить</string>
 	<string name="local_index_mi_backup">Архив</string>
 	<string name="local_index_mi_delete">Удалить</string>

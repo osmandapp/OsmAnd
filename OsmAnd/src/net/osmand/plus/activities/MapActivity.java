@@ -21,7 +21,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.RouteProvider.GPXRouteParams;
 import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.activities.search.SearchPoiFilterActivity;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;

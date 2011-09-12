@@ -30,6 +30,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StatFs;
 import android.os.AsyncTask.Status;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -62,7 +63,10 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 	protected static int DELETE_OPERATION = 1;
 	protected static int BACKUP_OPERATION = 2;
 	protected static int RESTORE_OPERATION = 3;
-
+	
+	MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
+	MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +114,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		});
 		
 		setListAdapter(listAdapter);
+		updateDescriptionTextWithSize();
 	}
 
 	public class LoadLocalIndexTask extends AsyncTask<Activity, LocalIndexInfo, List<LocalIndexInfo>> {
@@ -515,6 +520,17 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		listAdapter.notifyDataSetChanged();
 	}
 	
+	private void updateDescriptionTextWithSize(){
+		File dir = OsmandSettings.getOsmandSettings(this).extendOsmandPath("");
+		String size = formatGb.format(new Object[]{0});
+		if(dir.canRead()){
+			StatFs fs = new StatFs(dir.getAbsolutePath());
+			size = formatGb.format(new Object[]{(float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30) }); 
+		}
+		((TextView) findViewById(R.id.DescriptionText)).setText(
+				getString(R.string.local_index_description, size));
+	}
+	
 	private void closeSelectionMode(){
 		selectionMode = false;
 		findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
@@ -524,7 +540,10 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		findViewById(R.id.CancelButton).setVisibility(View.GONE);
 		findViewById(R.id.ActionButton).setVisibility(View.GONE);
 		((TextView) findViewById(R.id.DescriptionTextTop)).setVisibility(View.GONE);
-		((TextView) findViewById(R.id.DescriptionText)).setText(R.string.local_index_description);
+		
+		
+		;
+		updateDescriptionTextWithSize();
 		listAdapter.cancelFilter();
 		collapseAllGroups();
 		listAdapter.notifyDataSetChanged();
@@ -596,10 +615,8 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		List<LocalIndexInfo> category = new ArrayList<LocalIndexInfo>();
 		List<LocalIndexInfo> filterCategory = null;
 		
-		private MessageFormat formatMb;
 
 		public LocalIndexesAdapter() {
-			formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
 		}
 		
 		public void clear() {
