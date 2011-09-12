@@ -72,7 +72,7 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 				loc = new LatLon(lat, lon);
 			}
 		}
-		if (loc == null) {
+		if (loc == null && getParent() instanceof SearchActivity) {
 			loc = ((SearchActivity) getParent()).getSearchPoint();
 		}
 		if (loc == null) {

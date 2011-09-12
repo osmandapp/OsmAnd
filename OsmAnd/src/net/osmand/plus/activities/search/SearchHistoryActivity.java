@@ -9,6 +9,7 @@ import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.activities.search.SearchHistoryHelper.HistoryEntry;
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -25,7 +26,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class SearchHistoryActivity extends ListActivity {
+public class SearchHistoryActivity extends ListActivity implements SearchActivityChild {
 	private LatLon location;
 	private SearchHistoryHelper helper;
 	private Button clearButton;
@@ -39,17 +40,7 @@ public class SearchHistoryActivity extends ListActivity {
 		lv.setId(android.R.id.list);
 		
 		setContentView(lv);
-		Intent intent = getIntent();
-		if(intent != null){
-			float lat = intent.getFloatExtra(SEARCH_LAT, 0);
-			float lon = intent.getFloatExtra(SEARCH_LON, 0);
-			if(lat != 0 || lon != 0){
-				location = new LatLon(lat, lon);
-			}
-		}
-		if (location == null) {
-			location = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
-		}
+		
 		helper = SearchHistoryHelper.getInstance();
 		
 		
@@ -73,6 +64,21 @@ public class SearchHistoryActivity extends ListActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		Intent intent = getIntent();
+		if(intent != null){
+			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
+			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
+			if(lat != 0 || lon != 0){
+				location = new LatLon(lat, lon);
+			}
+		}
+		if(location == null && getParent() instanceof SearchActivity){
+			location = ((SearchActivity) getParent()).getSearchPoint();
+		}
+		if (location == null) {
+			location = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
+		}
+		
 		List<HistoryEntry> historyEntries = helper.getHistoryEntries(this);
 		
 		getListView().removeFooterView(clearButton);
@@ -80,6 +86,12 @@ public class SearchHistoryActivity extends ListActivity {
 			getListView().addFooterView(clearButton);
 		}
 		setListAdapter(new HistoryAdapter(historyEntries));
+	}
+	
+	@Override
+	public void locationUpdate(LatLon l) {
+		location = l;
+		((HistoryAdapter) getListAdapter()).notifyDataSetChanged();
 	}
 	
 	private boolean onItemLongClick(int pos) {

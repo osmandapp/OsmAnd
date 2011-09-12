@@ -49,6 +49,7 @@ public class SearchActivity extends TabActivity {
 	Button searchPOIButton;
 	private TabSpec addressSpec;
 	private LatLon searchPoint = null;
+	private boolean searchAroundCurrentLocation = false;
 
 	private static boolean searchOnLine = false;
 	private LocationListener locationListener = null;
@@ -104,7 +105,9 @@ public class SearchActivity extends TabActivity {
 				if (position != 0) {
 					if (position == POSITION_CURRENT_LOCATION) {
 						startSearchCurrentLocation();
+						searchAroundCurrentLocation = true;
 					} else {
+						searchAroundCurrentLocation = false;
 						endSearchCurrentLocation();
 						if (position == POSITION_LAST_MAP_VIEW) {
 							OsmandSettings settings = OsmandSettings.getOsmandSettings(SearchActivity.this);
@@ -207,6 +210,10 @@ public class SearchActivity extends TabActivity {
 		return searchPoint;
 	}
 	
+
+	public boolean isSearchAroundCurrentLocation() {
+		return searchAroundCurrentLocation;
+	}
 	
 	private Intent createIntent(Class<? extends Activity> cl){
 		Intent intent = new Intent(this, cl);

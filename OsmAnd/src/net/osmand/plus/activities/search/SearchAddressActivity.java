@@ -25,7 +25,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-public class SearchAddressActivity extends Activity {
+public class SearchAddressActivity extends Activity  {
 
 	private Button showOnMap;
 	private Button streetButton;
