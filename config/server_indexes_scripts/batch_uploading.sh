@@ -16,6 +16,8 @@ fi
 if [ -z "$JAVA_HOME" ] ; then
    export JAVA_HOME=/usr/lib/jvm/java-6-sun/
 fi
-"$JAVA_HOME/bin/java" -Djava.util.logging.config.file=logging.properties -Xms64M -Xmx768M -cp "OsmAndMapCreator/OsmAndMapCreator.jar:OsmAndMapCreator/lib/*.jar" net.osmand.data.index.IndexBatchCreator ./batch_server_upload.xml -gp
+"$JAVA_HOME/bin/java" -Djava.util.logging.config.file=logging.properties -Xms64M -Xmx768M -cp "OsmAndMapCreator/OsmAndMapCreator.jar:OsmAndMapCreator/lib/*.jar" net.osmand.data.index.IndexBatchCreator ./batch_server_upload.xml $@
+#send mail
+./uploading_finished_mail.sh
 # update the indexes
 wget "http://download.osmand.net/indexes.php?update=true" -O - > /dev/null

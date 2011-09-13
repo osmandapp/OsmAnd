@@ -16,5 +16,11 @@ fi
 if [ -z "$JAVA_HOME" ] ; then
    export JAVA_HOME=/usr/lib/jvm/java-6-openjdk/
 fi
-"$JAVA_HOME/bin/java" -Djava.util.logging.config.file=logging.properties -XX:+UseParallelGC -Xmx2048M -cp "OsmAndMapCreator/OsmAndMapCreator.jar:OsmAndMapCreator/lib/*.jar" net.osmand.data.index.IndexBatchCreator ./batch_server.xml 
+"$JAVA_HOME/bin/java" -Djava.util.logging.config.file=logging.properties \
+-Dcom.sun.management.jmxremote \
+-Dcom.sun.management.jmxremote.port=6789 \
+-Dcom.sun.management.jmxremote.authenticate=false \
+-Dcom.sun.management.jmxremote.ssl=false \
+-XX:+UseParallelGC -Xmx3048M -Xmn256M -cp "OsmAndMapCreator/OsmAndMapCreator.jar:OsmAndMapCreator/lib/*.jar" net.osmand.data.index.IndexBatchCreator ./batch_server.xml
+./gen_finished_mail.sh
 #./batch_uploading.sh > console.upload
