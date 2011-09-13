@@ -139,10 +139,10 @@ public class BinaryMapIndexReader {
 			for(MapIndex map : mapIndexes){
 				if(Algoritms.objectEquals(reg.name, map.name)){
 					if(map.getRoots().size() > 0){
-						MapRoot mapRoot = map.getRoots().get(0);
+						MapRoot mapRoot = map.getRoots().get(map.getRoots().size() - 1);
 						double cy = (MapUtils.get31LatitudeY(mapRoot.getBottom()) + MapUtils.get31LatitudeY(mapRoot.getTop())) / 2;
 						double cx = (MapUtils.get31LongitudeX(mapRoot.getLeft()) + MapUtils.get31LongitudeX(mapRoot.getRight())) / 2;
-						reg.calculatedCenter = new LatLon(cx, cy);
+						reg.calculatedCenter = new LatLon(cy, cx);
 						break;
 					}
 				}

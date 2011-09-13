@@ -54,7 +54,7 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 	
 	@Override
 	public void itemSelected(Building obj) {
-		settings.setLastSearchedBuilding(obj.getName(region.useEnglishNames()));
+		settings.setLastSearchedBuilding(obj.getName(region.useEnglishNames()), obj.getLocation());
 		finish();
 		
 	}

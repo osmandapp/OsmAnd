@@ -53,12 +53,12 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<MapOb
 	@Override
 	public void itemSelected(MapObject obj) {
 		if (obj instanceof City) {
-			settings.setLastSearchedCity(obj.getId(), obj.getName(region.useEnglishNames()));
+			settings.setLastSearchedCity(obj.getId(), obj.getName(region.useEnglishNames()), obj.getLocation());
 			if (region.getCityById(obj.getId()) == null) {
 				region.addCityToPreloadedList((City) obj);
 			}
 		} else if(obj instanceof PostCode){
-			settings.setLastSearchedPostcode(obj.getName(region.useEnglishNames()));
+			settings.setLastSearchedPostcode(obj.getName(region.useEnglishNames()), obj.getLocation());
 		}
 		finish();
 		

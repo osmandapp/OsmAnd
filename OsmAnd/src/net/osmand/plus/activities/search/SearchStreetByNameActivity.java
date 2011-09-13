@@ -49,7 +49,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	
 	@Override
 	public void itemSelected(Street obj) {
-		settings.setLastSearchedStreet(obj.getName(region.useEnglishNames()));
+		settings.setLastSearchedStreet(obj.getName(region.useEnglishNames()), obj.getLocation());
 		finish();
 		
 	}
