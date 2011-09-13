@@ -241,6 +241,10 @@
 			<region name="zabaikal" esize=""/>
 		</regions>
 		
+		<regions siteToDownload="http://downloads.cloudmade.com/asia/northern_asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia"  skip="true">
+      			<region name="russia" esize="820"/> 
+	        </regions>
+		
 		<!-- 2.2 ASIA-AVAILABLE ON GEOFABRIK.DE [SOURCE: GEOFABRIK.DE] (REST OF ASIA IS BELOW FROM CLOUDMADE.COM) -->
 		<regions siteToDownload="http://download.geofabrik.de/osm/asia/{0}.osm.pbf" region_prefix="" region_suffix="_Asia" skip="true">
 			<region name="azerbaijan" esize="15"/>
