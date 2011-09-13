@@ -24,6 +24,8 @@ public class BinaryMapAddressReaderAdapter {
 		int postcodesOffset = -1;
 		int villagesOffset = -1;
 		int citiesOffset = -1;
+		
+		LatLon calculatedCenter = null;
 	}
 	
 	private CodedInputStreamRAF codedIS;

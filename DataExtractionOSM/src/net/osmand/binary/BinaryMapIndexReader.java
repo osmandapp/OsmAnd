@@ -124,11 +124,28 @@ public class BinaryMapIndexReader {
 				break;
 			case OsmandOdb.OsmAndStructure.VERSIONCONFIRM_FIELD_NUMBER :
 				int cversion = codedIS.readUInt32();
+				calculateCenterPointForRegions();
 				initCorrectly = cversion == version;
 				break;
 			default:
 				skipUnknownField(t);
 				break;
+			}
+		}
+	}
+	
+	private void calculateCenterPointForRegions(){
+		for(AddressRegion reg : addressIndexes){
+			for(MapIndex map : mapIndexes){
+				if(Algoritms.objectEquals(reg.name, map.name)){
+					if(map.getRoots().size() > 0){
+						MapRoot mapRoot = map.getRoots().get(0);
+						double cy = (MapUtils.get31LatitudeY(mapRoot.getBottom()) + MapUtils.get31LatitudeY(mapRoot.getTop())) / 2;
+						double cx = (MapUtils.get31LongitudeX(mapRoot.getLeft()) + MapUtils.get31LongitudeX(mapRoot.getRight())) / 2;
+						reg.calculatedCenter = new LatLon(cx, cy);
+						break;
+					}
+				}
 			}
 		}
 	}
@@ -285,13 +302,20 @@ public class BinaryMapIndexReader {
 	/**
 	 * Address public methods
 	 */
-	
 	public List<String> getRegionNames(){
 		List<String> names = new ArrayList<String>();
 		for(AddressRegion r : addressIndexes){
 			names.add(r.name);
 		}
 		return names;
+	}
+	
+	public LatLon getRegionCenter(String name) {
+		AddressRegion rg = getRegionByName(name);
+		if (rg != null) {
+			return rg.calculatedCenter;
+		}
+		return null;
 	}
 	
 	private AddressRegion getRegionByName(String name){

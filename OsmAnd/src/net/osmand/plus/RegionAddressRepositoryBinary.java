@@ -320,7 +320,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 	@Override
 	public boolean arePostcodesPreloaded() {
-		// postcodes are always preloaded 
+		// postcodes are always preeloaded 
 		// do not load them into memory (just cache last used)
 		return true;
 	}
@@ -332,6 +332,9 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		
 	}
 
-
+	@Override
+	public LatLon getEstimatedRegionCenter() {
+		return file.getRegionCenter(region);
+	}
 
 }

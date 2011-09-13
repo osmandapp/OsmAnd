@@ -834,18 +834,43 @@ public class OsmandSettings {
 	public static final String LAST_SEARCHED_STREET = "last_searched_street"; //$NON-NLS-1$
 	public static final String LAST_SEARCHED_BUILDING = "last_searched_building"; //$NON-NLS-1$
 	public static final String LAST_SEARCHED_INTERSECTED_STREET = "last_searched_intersected_street"; //$NON-NLS-1$
+	public static final String LAST_SEARCHED_LAT = "last_searched_lat"; //$NON-NLS-1$
+	public static final String LAST_SEARCHED_LON = "last_searched_lon"; //$NON-NLS-1$
+	
+	public LatLon getLastSearchedPoint(){
+		if(globalPreferences.contains(LAST_SEARCHED_LAT) && globalPreferences.contains(LAST_SEARCHED_LON)){
+			return new LatLon(globalPreferences.getFloat(LAST_SEARCHED_LAT, 0), 
+					globalPreferences.getFloat(LAST_SEARCHED_LON, 0));
+		}
+		return null;
+	}
+	
+	public boolean setLastSearchedPoint(LatLon l){
+		if(l == null){
+			return globalPreferences.edit().remove(LAST_SEARCHED_LAT).remove(LAST_SEARCHED_LON).commit();
+		} else {
+			return setLastSearchedPoint(l.getLatitude(), l.getLongitude());
+		}
+	}
+	
+	public boolean setLastSearchedPoint(double lat, double lon){
+		return globalPreferences.edit().putFloat(LAST_SEARCHED_LAT, (float) lat).
+			putFloat(LAST_SEARCHED_LON, (float) lon).commit();
+	}
 
 	public String getLastSearchedRegion() {
 		return globalPreferences.getString(LAST_SEARCHED_REGION, ""); //$NON-NLS-1$
 	}
 
-	public boolean setLastSearchedRegion(String region) {
+	public boolean setLastSearchedRegion(String region, LatLon l) {
 		Editor edit = globalPreferences.edit().putString(LAST_SEARCHED_REGION, region).putLong(LAST_SEARCHED_CITY, -1).putString(LAST_SEARCHED_STREET,
 				"").putString(LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$ //$NON-NLS-2$
 		if (globalPreferences.contains(LAST_SEARCHED_INTERSECTED_STREET)) {
 			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
 		}
-		return edit.commit();
+		boolean res = edit.commit();
+		setLastSearchedPoint(l);
+		return res;
 	}
 	
 	public String getLastSearchedPostcode(){

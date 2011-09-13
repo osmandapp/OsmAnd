@@ -77,6 +77,9 @@ public interface RegionAddressRepository {
 	public void addCityToPreloadedList(City city);
 	
 	
+	public LatLon getEstimatedRegionCenter();
+	
+	
 	public boolean isMapRepository();
 	
 	// is called on low memory
