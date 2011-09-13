@@ -224,8 +224,8 @@
 	<string name="mile_per_hour">mph</string>
 	<string name="mile">mi</string>
 	<string name="send_location_way_choose_title">Position mitteilen mittels</string>
-	<string name="send_location_sms_pattern">Ich bin hier: {0}, {1}</string>
-	<string name="send_location_email_pattern">Um die Position zu sehen, folge dem Web-Link {0} oder Android Intent Link {1}</string>
+	<string name="send_location_sms_pattern">Ich bin hier: %1$s, %2$s</string>
+	<string name="send_location_email_pattern">Um die Position zu sehen, folge dem Web-Link %1$s oder Android Intent Link %2$s</string>
 	<string name="send_location">Position senden</string>
 	<string name="context_menu_item_share_location">Position mitteilen</string>
 	<string name="add_waypoint_dialog_added">Wegpunkt \'\'{0}\'\' erfolgreich hinzugefügt</string>
