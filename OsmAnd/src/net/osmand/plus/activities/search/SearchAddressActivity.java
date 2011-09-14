@@ -18,7 +18,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-public class SearchAddressActivity extends Activity  {
+public class SearchAddressActivity extends Activity {
 
 	private Button showOnMap;
 	private Button streetButton;
@@ -37,7 +37,6 @@ public class SearchAddressActivity extends Activity  {
 	private Button searchOnline;
 	
 	private OsmandSettings osmandSettings;
-	
 	private LatLon searchPoint = null;
 	
 
@@ -58,6 +57,27 @@ public class SearchAddressActivity extends Activity  {
 		attachListeners();
 	}
 	
+	private Intent createIntent(Class<?> cl){
+		LatLon location = null;
+		Intent intent = getIntent();
+		if(intent != null){
+			double lat = intent.getDoubleExtra(SearchActivity.SEARCH_LAT, 0);
+			double lon = intent.getDoubleExtra(SearchActivity.SEARCH_LON, 0);
+			if(lat != 0 || lon != 0){
+				location = new LatLon(lat, lon);
+			}
+		}
+		if (location == null && getParent() instanceof SearchActivity) {
+			location = ((SearchActivity) getParent()).getSearchPoint();
+		}
+		Intent newIntent = new Intent(SearchAddressActivity.this, cl);
+		if (location != null) {
+			newIntent.putExtra(SearchActivity.SEARCH_LAT, location.getLatitude());
+			newIntent.putExtra(SearchActivity.SEARCH_LON, location.getLongitude());
+		}
+		return newIntent;
+	}
+	
 	private void attachListeners() {
 		if (getParent() instanceof SearchActivity) {
 			searchOnline.setOnClickListener(new View.OnClickListener() {
@@ -72,28 +92,28 @@ public class SearchAddressActivity extends Activity  {
 		countryButton.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(SearchAddressActivity.this, SearchRegionByNameActivity.class));
+				startActivity(createIntent(SearchRegionByNameActivity.class));
 			}
 		});
 		cityButton.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(SearchAddressActivity.this, SearchCityByNameActivity.class));
+				startActivity(createIntent(SearchCityByNameActivity.class));
 			}
 		});
 		streetButton.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(SearchAddressActivity.this, SearchStreetByNameActivity.class));
+				startActivity(createIntent(SearchStreetByNameActivity.class));
 			}
 		});
 		buildingButton.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				if(radioBuilding){
-					startActivity(new Intent(SearchAddressActivity.this, SearchBuildingByNameActivity.class));
+					startActivity(createIntent(SearchBuildingByNameActivity.class));
 				} else {
-					startActivity(new Intent(SearchAddressActivity.this, SearchStreet2ByNameActivity.class));
+					startActivity(createIntent(SearchStreet2ByNameActivity.class));
 				}
 			}
 		});
@@ -113,6 +133,7 @@ public class SearchAddressActivity extends Activity  {
 			@Override
 			public void onClick(View v) {
 				building = null;
+				searchPoint = null;
 				updateUI();
 			}
 		 });
@@ -122,6 +143,7 @@ public class SearchAddressActivity extends Activity  {
 					street = null;
 					building = null;
 					street2 = null;
+					searchPoint = null;
 					updateUI();
 				}
 		 });
@@ -133,6 +155,7 @@ public class SearchAddressActivity extends Activity  {
 					street = null;
 					street2 = null;
 					building = null;
+					searchPoint = null;
 					updateUI();
 				}
 		 });
@@ -145,6 +168,7 @@ public class SearchAddressActivity extends Activity  {
 					street = null;
 					street2 = null;
 					building = null;
+					searchPoint = null;
 					updateUI();
 				}
 		 });
@@ -218,6 +242,8 @@ public class SearchAddressActivity extends Activity  {
 	}
 
 	protected void updateUI(){
+		showOnMap.setEnabled(searchPoint != null);
+		navigateTo.setEnabled(searchPoint != null);
 		findViewById(R.id.ResetCountry).setEnabled(!Algoritms.isEmpty(region));
 		if(Algoritms.isEmpty(region)){
 			countryButton.setText(R.string.ChooseCountry);
@@ -286,8 +312,6 @@ public class SearchAddressActivity extends Activity  {
 		super.onResume();
 
 		searchPoint = osmandSettings.getLastSearchedPoint();
-		showOnMap.setEnabled(searchPoint != null);
-		navigateTo.setEnabled(searchPoint != null);
 
 		region = null;
 		postcode = null;
@@ -297,23 +321,6 @@ public class SearchAddressActivity extends Activity  {
 		region = osmandSettings.getLastSearchedRegion();
 		loadData();
 		updateUI();
-
-		// TODO other can be moved to specific searches 
-//		if (region != null) {
-//			Long cityId = osmandSettings.getLastSearchedCity();
-//			String postcode = osmandSettings.getLastSearchedPostcode();
-//			if (!region.areCitiesPreloaded()) {
-//				progressMsg = getString(R.string.loading_cities);
-//			} else if (postcode != null && !region.arePostcodesPreloaded()) {
-//				progressMsg = getString(R.string.loading_postcodes);
-//			} else if (cityId != -1 && region.getCityById(cityId) != null && region.getCityById(cityId).isEmptyWithStreets()) {
-//				progressMsg = getString(R.string.loading_streets_buildings);
-//			} else if (postcode != null && region.getPostcode(postcode) != null && region.getPostcode(postcode).isEmptyWithStreets()) {
-//				progressMsg = getString(R.string.loading_streets_buildings);
-//			} else if (osmandSettings.USE_ENGLISH_NAMES.get() != region.useEnglishNames()) {
-//				progressMsg = getString(R.string.converting_names);
-//			}
-//		}
 		
 	}
 

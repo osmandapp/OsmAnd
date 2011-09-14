@@ -6,31 +6,46 @@ import java.util.List;
 import net.osmand.data.City;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
 import net.osmand.plus.activities.OsmandApplication;
-import android.os.Bundle;
+import android.os.AsyncTask;
+import android.view.View;
 import android.widget.TextView;
 
 public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Street> {
 	private RegionAddressRepository region;
 	private City city;
 	private PostCode postcode;
-	private OsmandSettings settings;
+	
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		settings = OsmandSettings.getOsmandSettings(this);
-		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
-		if(region != null){
-			postcode = region.getPostcode(settings.getLastSearchedPostcode());
-			if (postcode == null) {
-				city = region.getCityById(settings.getLastSearchedCity());
+	public AsyncTask<Object, ?, ?> getInitializeTask() {
+		return new AsyncTask<Object, Void, Void>(){
+			@Override
+			protected void onPostExecute(Void result) {
+				((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_street);
+				progress.setVisibility(View.INVISIBLE);
+				resetText();
 			}
-		}
-		super.onCreate(savedInstanceState);
-		((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_street);
+			
+			@Override
+			protected void onPreExecute() {
+				((TextView)findViewById(R.id.Label)).setText(R.string.loading_streets);
+				progress.setVisibility(View.VISIBLE);
+			}
+			@Override
+			protected Void doInBackground(Object... params) {
+				region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
+				if(region != null){
+					postcode = region.getPostcode(settings.getLastSearchedPostcode());
+					if (postcode == null) {
+						city = region.getCityById(settings.getLastSearchedCity());
+					}
+				}
+				return null;
+			}
+		};
 	}
 	
 	@Override

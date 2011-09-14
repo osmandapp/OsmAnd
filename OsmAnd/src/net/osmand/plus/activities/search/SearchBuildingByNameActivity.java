@@ -11,7 +11,8 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
 import net.osmand.plus.activities.OsmandApplication;
-import android.os.Bundle;
+import android.os.AsyncTask;
+import android.view.View;
 import android.widget.TextView;
 
 public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<Building> {
@@ -19,23 +20,38 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 	private City city;
 	private Street street;
 	private PostCode postcode;
-	private OsmandSettings settings;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		settings = OsmandSettings.getOsmandSettings(this);
-		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
-		if(region != null){
-			postcode = region.getPostcode(settings.getLastSearchedPostcode());
-			city = region.getCityById(settings.getLastSearchedCity());
-			if(postcode != null){
-				street = region.getStreetByName(postcode, settings.getLastSearchedStreet());
-			} else if(city != null){
-				street = region.getStreetByName(city, settings.getLastSearchedStreet());
+	public AsyncTask<Object, ?, ?> getInitializeTask() {
+		return new AsyncTask<Object, Void, Void>(){
+			@Override
+			protected void onPostExecute(Void result) {
+				((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_building);
+				progress.setVisibility(View.INVISIBLE);
+				resetText();
 			}
-		}
-		super.onCreate(savedInstanceState);
-		((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_building);
+			
+			@Override
+			protected void onPreExecute() {
+				((TextView)findViewById(R.id.Label)).setText(R.string.loading_streets_buildings);
+				progress.setVisibility(View.VISIBLE);
+			}
+			@Override
+			protected Void doInBackground(Object... params) {
+				region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
+				if(region != null){
+					postcode = region.getPostcode(settings.getLastSearchedPostcode());
+					city = region.getCityById(settings.getLastSearchedCity());
+					if(postcode != null){
+						street = region.getStreetByName(postcode, settings.getLastSearchedStreet());
+					} else if(city != null){
+						street = region.getStreetByName(city, settings.getLastSearchedStreet());
+					}
+				}
+				region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
+				return null;
+			}
+		};
 	}
 	
 	@Override
