@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.OsmAndFormatter;
+import net.osmand.ResultMatcher;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.PostCode;
@@ -13,6 +14,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
 import net.osmand.plus.activities.OsmandApplication;
+import net.osmand.plus.activities.search.SearchByNameAbstractActivity.SearchByNameTask;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -46,12 +48,18 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<MapOb
 	}
 	
 	@Override
-	public List<MapObject> getObjects(String filter) {
-		List<MapObject> l = new ArrayList<MapObject>();
+	public List<MapObject> getObjects(String filter, final SearchByNameTask task) {
 		if(region != null){
-			region.fillWithSuggestedCities(filter, l, locationToSearch);
+			region.fillWithSuggestedCities(filter, new ResultMatcher<MapObject>() {
+				
+				@Override
+				public boolean publish(MapObject object) {
+					task.progress(object);
+					return true;
+				}
+			}, locationToSearch);
 		}
-		return l;
+		return new ArrayList<MapObject>();
 	}
 	
 	@Override

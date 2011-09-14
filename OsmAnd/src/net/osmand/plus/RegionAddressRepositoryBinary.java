@@ -5,7 +5,9 @@ import static net.osmand.plus.CollatorStringMatcher.cstartsWith;
 
 import java.io.IOException;
 import java.text.Collator;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +15,7 @@ import java.util.TreeMap;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
+import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Building;
 import net.osmand.data.City;
@@ -47,18 +50,16 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		this.file = null;
 	}
 
-	@Override
-	public boolean isMapRepository() {
-		return true;
-	}
 
 	@Override
-	public void fillWithSuggestedBuildings(PostCode postcode, Street street, String name, List<Building> buildingsToFill) {
-		preloadBuildings(street);
-		if(name.length() == 0){
+	public List<Building> fillWithSuggestedBuildings(PostCode postcode, Street street, String name, ResultMatcher<Building> resultMatcher) {
+		List<Building> buildingsToFill = new ArrayList<Building>();
+		if (name.length() == 0) {
+			preloadBuildings(street, resultMatcher);
 			buildingsToFill.addAll(street.getBuildings());
-			return;
+			return buildingsToFill;
 		}
+		preloadBuildings(street, null);
 		name = name.toLowerCase();
 		int ind = 0;
 		for (Building building : street.getBuildings()) {
@@ -70,13 +71,14 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 				buildingsToFill.add(building);
 			}
 		}
+		return buildingsToFill;
 	}
 
 
-	private void preloadBuildings(Street street) {
+	private void preloadBuildings(Street street, ResultMatcher<Building> resultMatcher) {
 		if(street.getBuildings().isEmpty()){
 			try {
-				file.preloadBuildings(street);
+				file.preloadBuildings(street, resultMatcher);
 				street.sortBuildings();
 			} catch (IOException e) {
 				log.error("Disk operation failed" , e); //$NON-NLS-1$
@@ -86,33 +88,36 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 
 	@Override
-	public void fillWithSuggestedStreets(MapObject o, List<Street> streetsToFill, String... names) {
+	public List<Street> fillWithSuggestedStreets(MapObject o, ResultMatcher<Street> resultMatcher, String... names) {
 		assert o instanceof PostCode || o instanceof City;
 		City city = (City) (o instanceof City ? o : null); 
 		PostCode post = (PostCode) (o instanceof PostCode ? o : null);
-		preloadStreets(o);
-		Collection<Street> streets = post == null ? city.getStreets() : post.getStreets() ;
-		
+		List<Street> streetsToFill = new ArrayList<Street>();	
 		if(names.length == 0){
-			streetsToFill.addAll(streets);
-			return;
+			preloadStreets(o, resultMatcher);
+			streetsToFill.addAll(post == null ? city.getStreets() : post.getStreets());
+			return streetsToFill;
 		}
-		
+		preloadStreets(o, null);
 		int ind = 0;
-		for (Street s : streets) {
-			String sName = useEnglishNames ? s.getEnName() : s.getName(); //lower case not needed, collator ensures that
+		Collection<Street> streets = post == null ? city.getStreets() : post.getStreets() ;
+		Iterator<Street> iterator = streets.iterator();
+		while(iterator.hasNext()) {
+			Street s = iterator.next();
+			String sName = useEnglishNames ? s.getEnName() : s.getName(); // lower case not needed, collator ensures that
 			for (String name : names) {
-				if (cstartsWith(collator,sName,name)) {
+				if (cstartsWith(collator, sName, name)) {
 					streetsToFill.add(ind, s);
 					ind++;
-				} else if (ccontains(collator,name,sName) || ccontains(collator,sName,name)) {
+				} else if (ccontains(collator, name, sName) || ccontains(collator, sName, name)) {
 					streetsToFill.add(s);
 				}
 			}
 		}
+		return streetsToFill;
 	}
 
-	private void preloadStreets(MapObject o) {
+	private void preloadStreets(MapObject o, ResultMatcher<Street> resultMatcher) {
 		assert o instanceof PostCode || o instanceof City;
 		Collection<Street> streets = o instanceof PostCode ? ((PostCode) o).getStreets() : ((City) o).getStreets();
 		if(!streets.isEmpty()){
@@ -120,9 +125,9 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		}
 		try {
 			if(o instanceof PostCode){
-				file.preloadStreets((PostCode) o);
+				file.preloadStreets((PostCode) o, resultMatcher);
 			} else {
-				file.preloadStreets((City) o);
+				file.preloadStreets((City) o, resultMatcher);
 			}
 		} catch (IOException e) {
 			log.error("Disk operation failed" , e); //$NON-NLS-1$
@@ -132,18 +137,25 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	
 
 	@Override
-	public void fillWithSuggestedCities(String name, List<MapObject> citiesToFill, LatLon currentLocation) {
-		preloadCities();
+	public List<MapObject> fillWithSuggestedCities(String name, ResultMatcher<MapObject> resultMatcher, LatLon currentLocation) {
+		List<MapObject> citiesToFill = new ArrayList<MapObject>();
+		if (cities.isEmpty()) {
+			preloadCities(resultMatcher);
+			citiesToFill.addAll(cities.values());
+			return citiesToFill;
+		} else {
+			preloadCities(null);
+		}
 		try {
 			// essentially index is created that cities towns are first in cities map
 			int ind = 0;
 			if (name.length() >= 2 && Algoritms.containsDigit(name)) {
 				// also try to identify postcodes
 				String uName = name.toUpperCase();
-				for (PostCode code : file.getPostcodes(region,new ContainsStringMatcher(uName,collator))) {
-					if (cstartsWith(collator,code.getName(),uName)) {
+				for (PostCode code : file.getPostcodes(region, resultMatcher, new ContainsStringMatcher(uName, collator))) {
+					if (cstartsWith(collator, code.getName(), uName)) {
 						citiesToFill.add(ind++, code);
-					} else if(ccontains(collator,code.getName(),uName)){
+					} else if (ccontains(collator, code.getName(), uName)) {
 						citiesToFill.add(code);
 					}
 				}
@@ -156,26 +168,32 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 					name = name.toLowerCase();
 					for (City c : cities.values()) {
 						String cName = useEnglishNames ? c.getEnName() : c.getName(); //lower case not needed, collator ensures that
-						if (cstartsWith(collator,cName,name)) {
-							citiesToFill.add(c);
+						if (cstartsWith(collator, cName, name)) {
+							if (resultMatcher.publish(c)) {
+								citiesToFill.add(c);
+							}
 						}
 					}
 				}
 			} else {
 				name = name.toLowerCase();
-				Collection<City> src = cities.values();
-				for (City c : src) {
+				for (City c : cities.values()) {
 					String cName = useEnglishNames ? c.getEnName() : c.getName(); //lower case not needed, collator ensures that
 					if (cstartsWith(collator,cName,name)) {
-						citiesToFill.add(ind, c);
-						ind++;
+						if (resultMatcher.publish(c)) {
+							citiesToFill.add(ind, c);
+							ind++;
+						}
 					} else if (ccontains(collator,name,cName)) {
-						citiesToFill.add(c);
+						if (resultMatcher.publish(c)) {
+							citiesToFill.add(c);
+						}
 					}
 				}
+				
 				int initialsize = citiesToFill.size();
 				
-				for(City c : file.getVillages(region, new ContainsStringMatcher(name,collator), useEnglishNames )){
+				for(City c : file.getVillages(region, resultMatcher, new ContainsStringMatcher(name,collator), useEnglishNames )){
 					String cName = c.getName(useEnglishNames); //lower case not needed, collator ensures that
 					if (cstartsWith(collator,cName,name)) {
 						citiesToFill.add(ind, c);
@@ -189,13 +207,14 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		} catch (IOException e) {
 			log.error("Disk operation failed" , e); //$NON-NLS-1$
 		}
+		return citiesToFill;
 		
 	}
 
 	@Override
 	public void fillWithSuggestedStreetsIntersectStreets(City city, Street st, List<Street> streetsToFill) {
 		if(city != null){
-			preloadStreets(city);
+			preloadStreets(city, null);
 			try {
 				file.findIntersectedStreets(city, st, streetsToFill);
 			} catch (IOException e) {
@@ -208,7 +227,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	public LatLon findStreetIntersection(Street street, Street street2) {
 		City city = street.getCity();
 		if(city != null){
-			preloadStreets(city);
+			preloadStreets(city, null);
 			try {
 				return file.findStreetIntersection(city, street, street2);
 			} catch (IOException e) {
@@ -221,7 +240,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 	@Override
 	public Building getBuildingByName(Street street, String name) {
-		preloadBuildings(street);
+		preloadBuildings(street, null);
 		for (Building b : street.getBuildings()) {
 			String bName = useEnglishNames ? b.getEnName() : b.getName();
 			if (bName.equals(name)) {
@@ -249,15 +268,15 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			// do not preload cities for that case
 			return null;
 		}
-		preloadCities();
+		preloadCities(null);
 		return cities.get(id);
 	}
 
 
-	private void preloadCities() {
+	private void preloadCities(ResultMatcher<MapObject> resultMatcher) {
 		if (cities.isEmpty()) {
 			try {
-				List<City> cs = file.getCities(region);
+				List<City> cs = file.getCities(region, resultMatcher);
 				for (City c : cs) {
 					cities.put(c.getId(), c);
 				}
@@ -290,7 +309,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		City city = (City) (o instanceof City ? o : null);
 		PostCode post = (PostCode) (o instanceof PostCode ? o : null);
 		name = name.toLowerCase();
-		preloadStreets(o);
+		preloadStreets(o, null);
 		Collection<Street> streets = post == null ? city.getStreets() : post.getStreets();
 		for (Street s : streets) {
 			String sName = useEnglishNames ? s.getEnName() : s.getName(); //lower case not needed, collator ensures that

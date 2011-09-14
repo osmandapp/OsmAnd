@@ -4,6 +4,7 @@ import java.text.Collator;
 import java.util.Comparator;
 import java.util.List;
 
+import net.osmand.ResultMatcher;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
@@ -60,13 +61,13 @@ public interface RegionAddressRepository {
 	
 	public void setUseEnglishNames(boolean useEnglishNames);
 	
-	public void fillWithSuggestedBuildings(PostCode postcode, Street street, String name, List<Building> buildingsToFill);
+	public List<Building> fillWithSuggestedBuildings(PostCode postcode, Street street, String name, ResultMatcher<Building> resultMatcher) ;
 	
 	public void fillWithSuggestedStreetsIntersectStreets(City city, Street st, List<Street> streetsToFill);
 	
-	public void fillWithSuggestedStreets(MapObject cityOrPostcode, List<Street> streetsToFill, String... name);
+	public List<Street> fillWithSuggestedStreets(MapObject o, ResultMatcher<Street> resultMatcher, String... names);
 	
-	public void fillWithSuggestedCities(String name, List<MapObject> citiesToFill, LatLon currentLocation);
+	public List<MapObject> fillWithSuggestedCities(String name, ResultMatcher<MapObject> resultMatcher, LatLon currentLocation);
 
 	public LatLon findStreetIntersection(Street street, Street street2);
 
@@ -79,8 +80,6 @@ public interface RegionAddressRepository {
 	
 	public LatLon getEstimatedRegionCenter();
 	
-	
-	public boolean isMapRepository();
 	
 	// is called on low memory
 	public void clearCache();

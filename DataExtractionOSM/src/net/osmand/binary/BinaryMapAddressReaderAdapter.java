@@ -3,9 +3,11 @@ package net.osmand.binary;
 import java.io.IOException;
 import java.util.List;
 
+import net.osmand.ResultMatcher;
 import net.osmand.StringMatcher;
 import net.osmand.data.Building;
 import net.osmand.data.City;
+import net.osmand.data.MapObject;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.data.City.CityType;
@@ -83,7 +85,7 @@ public class BinaryMapAddressReaderAdapter {
 		}
 	}
 	
-	protected void readCities(List<City> cities, StringMatcher matcher, boolean useEn) throws IOException {
+	protected void readCities(List<City> cities, ResultMatcher<MapObject> resultMatcher, StringMatcher matcher, boolean useEn) throws IOException {
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -95,9 +97,11 @@ public class BinaryMapAddressReaderAdapter {
 				int length = codedIS.readRawVarint32();
 				
 				int oldLimit = codedIS.pushLimit(length);
-				City c = readCity(null, offset, false, matcher, useEn);
+				City c = readCity(null, offset, false, null, matcher, useEn);
 				if(c != null){
-					cities.add(c);
+					if (resultMatcher == null || resultMatcher.publish(c)) {
+						cities.add(c);
+					}
 				}
 				codedIS.popLimit(oldLimit);
 				break;
@@ -109,7 +113,7 @@ public class BinaryMapAddressReaderAdapter {
 	}
 	
 
-	protected PostCode readPostcode(PostCode p, int fileOffset, boolean loadStreets, String postcodeFilter) throws IOException{
+	protected PostCode readPostcode(PostCode p, int fileOffset, ResultMatcher<Street> resultMatcher, boolean loadStreets, String postcodeFilter) throws IOException{
 		int x = 0;
 		int y = 0;
 		while(true){
@@ -117,8 +121,6 @@ public class BinaryMapAddressReaderAdapter {
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				p.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
-				p.setFileOffset(fileOffset);
 				return p;
 			case OsmandOdb.PostcodeIndex.POSTCODE_FIELD_NUMBER :
 				String name = codedIS.readString();
@@ -128,6 +130,7 @@ public class BinaryMapAddressReaderAdapter {
 				}
 				if(p == null){
 					p = new PostCode(name);
+					p.setFileOffset(fileOffset);
 				}
 				p.setName(name);
 				break;
@@ -136,6 +139,12 @@ public class BinaryMapAddressReaderAdapter {
 				break;
 			case OsmandOdb.PostcodeIndex.Y_FIELD_NUMBER :
 				y = codedIS.readFixed32();
+				p.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
+				if(!loadStreets){
+					// skip everything
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+					return p;
+				}
 				break;
 			case OsmandOdb.PostcodeIndex.STREETS_FIELD_NUMBER :
 				int offset = codedIS.getTotalBytesRead();
@@ -144,8 +153,10 @@ public class BinaryMapAddressReaderAdapter {
 					Street s = new Street(null);
 					int oldLimit = codedIS.pushLimit(length);
 					s.setFileOffset(offset);
-					readStreet(s, true, x >> 7, y >> 7, p.getName());
-					p.registerStreet(s, false);
+					readStreet(s, null, true, x >> 7, y >> 7, p.getName());
+					if (resultMatcher == null || resultMatcher.publish(s)) {
+						p.registerStreet(s, false);
+					}
 					codedIS.popLimit(oldLimit);
 				} else {
 					codedIS.skipRawBytes(length);
@@ -159,7 +170,8 @@ public class BinaryMapAddressReaderAdapter {
 	}
 	
 	
-	protected City readCity(City c, int fileOffset,  boolean loadStreets, StringMatcher nameMatcher, boolean useEn) throws IOException{
+	protected City readCity(City c, int fileOffset, boolean loadStreets, ResultMatcher<Street> resultMatcher, 
+			StringMatcher nameMatcher, boolean useEn) throws IOException{
 		int x = 0;
 		int y = 0;
 		int streetInd = 0;
@@ -169,10 +181,6 @@ public class BinaryMapAddressReaderAdapter {
 			boolean englishNameMatched = false;
 			switch (tag) {
 			case 0:
-				c.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
-				if(c.getEnName().length() == 0){
-					c.setEnName(Junidecode.unidecode(c.getName()));
-				}
 				return c;
 			case OsmandOdb.CityIndex.CITY_TYPE_FIELD_NUMBER :
 				int type = codedIS.readUInt32();
@@ -221,6 +229,15 @@ public class BinaryMapAddressReaderAdapter {
 				break;
 			case OsmandOdb.CityIndex.Y_FIELD_NUMBER :
 				y = codedIS.readFixed32();
+				c.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
+				if(c.getEnName().length() == 0){
+					c.setEnName(Junidecode.unidecode(c.getName()));
+				}
+				if(!loadStreets){
+					// skip everything
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+					return c;
+				}
 				break;
 			case OsmandOdb.CityIndex.INTERSECTIONS_FIELD_NUMBER :
 				codedIS.skipRawBytes(codedIS.readRawVarint32());
@@ -233,8 +250,10 @@ public class BinaryMapAddressReaderAdapter {
 					int oldLimit = codedIS.pushLimit(length);
 					s.setFileOffset(offset);
 					s.setIndexInCity(streetInd++);
-					readStreet(s, false, x >> 7, y >> 7, null);
-					c.registerStreet(s);
+					readStreet(s, null, false, x >> 7, y >> 7, null);
+					if (resultMatcher == null || resultMatcher.publish(s)) {
+						c.registerStreet(s);
+					}
 					codedIS.popLimit(oldLimit);
 				} else {
 					codedIS.skipRawBytes(length);
@@ -247,7 +266,7 @@ public class BinaryMapAddressReaderAdapter {
 		}
 	}
 	
-	protected Street readStreet(Street s, boolean loadBuildings, int city24X, int city24Y, String postcodeFilter) throws IOException{
+	protected Street readStreet(Street s, ResultMatcher<Building> resultMatcher, boolean loadBuildings, int city24X, int city24Y, String postcodeFilter) throws IOException{
 		int x = 0;
 		int y = 0;
 		boolean loadLocation = city24X != 0 || city24Y != 0;
@@ -295,7 +314,9 @@ public class BinaryMapAddressReaderAdapter {
 					int oldLimit = codedIS.pushLimit(length);
 					Building b = readBuilding(offset, x, y);
 					if (postcodeFilter == null || postcodeFilter.equalsIgnoreCase(b.getPostcode())) {
-						s.registerBuilding(b);
+						if (resultMatcher == null || resultMatcher.publish(b)) {
+							s.registerBuilding(b);
+						}
 					}
 					codedIS.popLimit(oldLimit);
 				} else {
@@ -453,7 +474,7 @@ public class BinaryMapAddressReaderAdapter {
 	
 	
 	
-	void readPostcodes(List<PostCode> postcodes, StringMatcher nameMatcher) throws IOException{
+	protected void readPostcodes(List<PostCode> postcodes, ResultMatcher<MapObject> resultMatcher, StringMatcher nameMatcher) throws IOException{
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -464,10 +485,12 @@ public class BinaryMapAddressReaderAdapter {
 				int offset = codedIS.getTotalBytesRead();
 				int length = codedIS.readRawVarint32();
 				int oldLimit = codedIS.pushLimit(length);
-				final PostCode postCode = readPostcode(null, offset, false, null);
-				//TODO support getEnName??
+				final PostCode postCode = readPostcode(null, offset, null, false, null);
+				// support getEnName??
 				if (nameMatcher == null || nameMatcher.matches(postCode.getName())) {
-					postcodes.add(postCode);
+					if (resultMatcher == null || resultMatcher.publish(postCode)) {
+						postcodes.add(postCode);
+					}
 				}
 				codedIS.popLimit(oldLimit);
 				break;
@@ -478,7 +501,7 @@ public class BinaryMapAddressReaderAdapter {
 		}
 	}
 	
-	PostCode findPostcode(String name) throws IOException{
+	protected PostCode findPostcode(String name) throws IOException{
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -489,7 +512,7 @@ public class BinaryMapAddressReaderAdapter {
 				int offset = codedIS.getTotalBytesRead();
 				int length = codedIS.readRawVarint32();
 				int oldLimit = codedIS.pushLimit(length);
-				PostCode p = readPostcode(null, offset, true, name);
+				PostCode p = readPostcode(null, offset, null, false, name);
 				codedIS.popLimit(oldLimit);
 				if(p != null){
 					return p;

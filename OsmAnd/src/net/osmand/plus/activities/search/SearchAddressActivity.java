@@ -7,7 +7,9 @@ import net.osmand.Algoritms;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.RegionAddressRepository;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandApplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -319,6 +321,10 @@ public class SearchAddressActivity extends Activity {
 		street = null;
 		building = null;
 		region = osmandSettings.getLastSearchedRegion();
+		RegionAddressRepository reg = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(region);
+		if(reg.useEnglishNames() != osmandSettings.USE_ENGLISH_NAMES.get()){
+			reg.setUseEnglishNames(osmandSettings.USE_ENGLISH_NAMES.get());
+		}
 		loadData();
 		updateUI();
 		

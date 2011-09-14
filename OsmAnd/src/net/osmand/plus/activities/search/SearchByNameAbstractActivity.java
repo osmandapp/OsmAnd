@@ -1,5 +1,6 @@
 package net.osmand.plus.activities.search;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.osm.LatLon;
@@ -9,9 +10,6 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.os.AsyncTask.Status;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -30,8 +28,8 @@ import android.widget.TextView;
 public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 
 	private EditText searchText;
-	private Handler handlerToLoop;
 	private AsyncTask<Object, ?, ?> initializeTask;
+	protected SearchByNameTask searchTask = new SearchByNameTask();
 	
 	protected ProgressBar progress;
 	protected LatLon locationToSearch;
@@ -45,7 +43,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		
 		setContentView(R.layout.search_by_name);
-		NamesAdapter namesAdapter = new NamesAdapter(getObjects("")); //$NON-NLS-1$
+		NamesAdapter namesAdapter = new NamesAdapter(new ArrayList<T>()); //$NON-NLS-1$
 		setListAdapter(namesAdapter);
 		progress = (ProgressBar) findViewById(R.id.ProgressBar);
 		searchText = (EditText) findViewById(R.id.SearchText);
@@ -101,19 +99,6 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 		setText("");
 	}
 	
-	protected void updateUIList(final List<T> objects){
-		runOnUiThread(new Runnable(){
-			@Override
-			public void run() {
-				((NamesAdapter)getListAdapter()).setNotifyOnChange(false);
-				for(T o : objects){
-					((NamesAdapter)getListAdapter()).add(o);
-				}
-				((NamesAdapter)getListAdapter()).notifyDataSetChanged();
-				progress.setVisibility(View.INVISIBLE);
-			}
-		});
-	}
 	
 	public void setText(final String filter) {
 		if(isFilterableByDefault()){
@@ -121,38 +106,19 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 			return;
 		}
 		((NamesAdapter) getListAdapter()).clear();
-
-		if(handlerToLoop == null){
-			return;
+		Status status = searchTask.getStatus();
+		if(status == Status.FINISHED){
+			searchTask = new SearchByNameTask();
+		} else if(status == Status.RUNNING){
+			searchTask.cancel(true);
+			// TODO improve
+			searchTask = new SearchByNameTask();
 		}
-		handlerToLoop.removeMessages(1);
-		Message msg = Message.obtain(handlerToLoop, new Runnable() {
-			@Override
-			public void run() {
-				showProgress(View.VISIBLE);
-				List<T> loadedObjects = getObjects(filter);
-				if(handlerToLoop != null && !handlerToLoop.hasMessages(1)){
-					updateUIList(loadedObjects);
-				}
-			}
-		});
-		msg.what = 1;
-		handlerToLoop.sendMessageDelayed(msg, 150);
+		searchTask.execute(filter);
 	}
 	
-	private void showProgress(final int v){
-		runOnUiThread(new Runnable(){
 
-			@Override
-			public void run() {
-				progress.setVisibility(v);
-				
-			}
-			
-		});
-	}
-
-	public abstract List<T> getObjects(String filter);
+	public abstract List<T> getObjects(String filter, SearchByNameTask searchTask);
 
 	public abstract void updateTextView(T obj, TextView txt);
 	
@@ -168,19 +134,6 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		synchronized (this) {
-			if (handlerToLoop == null) {
-				new Thread("Filter data") { //$NON-NLS-1$
-					@Override
-					public void run() {
-						Looper.prepare();
-						handlerToLoop = new Handler();
-						Looper.loop();
-					}
-				}.start();
-			}
-			
-		}
 		Intent intent = getIntent();
 		if(intent != null){
 			if(intent.hasExtra(SearchActivity.SEARCH_LAT) && intent.hasExtra(SearchActivity.SEARCH_LON)){
@@ -198,19 +151,53 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		synchronized (this) {
-			if(handlerToLoop != null){
-				handlerToLoop.post(new Runnable(){
-					@Override
-					public void run() {
-						Looper.myLooper().quit();
-					}
-				});
-				handlerToLoop = null;
-			}
-		}
+		searchTask.cancel(true);
 	}
 	
+	
+	protected class SearchByNameTask extends AsyncTask<String, T, List<T>> {
+
+		@Override
+		protected List<T> doInBackground(String... params) {
+			if(params == null || params.length == 0){
+				return null;
+			}
+			String filter = params[0];
+			return getObjects(filter, this);
+		}
+		
+		public void progress(T... values){
+			publishProgress(values);
+		}
+		
+		protected void onProgressUpdate(T... values) {
+			for(T t :values){
+				((NamesAdapter) getListAdapter()).add(t);
+			}
+		};
+		
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			progress.setVisibility(View.VISIBLE);
+		}
+		
+		@Override
+		protected void onPostExecute(List<T> result) {
+			if (!isCancelled() && result != null) {
+				((NamesAdapter) getListAdapter()).setNotifyOnChange(false);
+				((NamesAdapter) getListAdapter()).clear();
+				for (T o : result) {
+					((NamesAdapter) getListAdapter()).add(o);
+				}
+				((NamesAdapter) getListAdapter()).notifyDataSetChanged();
+			}
+			if (!isCancelled()) {
+				progress.setVisibility(View.INVISIBLE);
+			}
+		}
+		
+	}
 
 	class NamesAdapter extends ArrayAdapter<T> {
 		NamesAdapter(List<T> list) {

@@ -3,6 +3,7 @@ package net.osmand.plus.activities.search;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.ResultMatcher;
 import net.osmand.data.City;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
@@ -49,12 +50,17 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	}
 	
 	@Override
-	public List<Street> getObjects(String filter) {
-		List<Street> l = new ArrayList<Street>();
+	public List<Street> getObjects(String filter, final SearchByNameTask task) {
 		if (city != null || postcode != null) {
-			region.fillWithSuggestedStreets(postcode == null ? city : postcode, l, filter);
+			return region.fillWithSuggestedStreets(postcode == null ? city : postcode, new ResultMatcher<Street>() {
+				@Override
+				public boolean publish(Street object) {
+					task.progress(object);
+					return true;
+				}
+			}, filter);
 		}
-		return l;
+		return new ArrayList<Street>();
 	}
 	
 	@Override

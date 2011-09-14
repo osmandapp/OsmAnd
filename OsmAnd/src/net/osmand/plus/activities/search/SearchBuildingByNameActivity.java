@@ -3,11 +3,11 @@ package net.osmand.plus.activities.search;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.ResultMatcher;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
 import net.osmand.plus.activities.OsmandApplication;
@@ -38,7 +38,6 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 			}
 			@Override
 			protected Void doInBackground(Object... params) {
-				region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
 				if(region != null){
 					postcode = region.getPostcode(settings.getLastSearchedPostcode());
 					city = region.getCityById(settings.getLastSearchedCity());
@@ -55,12 +54,17 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 	}
 	
 	@Override
-	public List<Building> getObjects(String filter) {
-		List<Building> l = new ArrayList<Building>();
+	public List<Building> getObjects(String filter, final SearchByNameTask task) {
 		if(street != null){
-			region.fillWithSuggestedBuildings(postcode, street, filter, l);
+			return region.fillWithSuggestedBuildings(postcode, street, filter, new ResultMatcher<Building>() {
+				@Override
+				public boolean publish(Building object) {
+					task.progress(object);
+					return true;
+				}
+			});
 		}
-		return l;
+		return new ArrayList<Building>();
 	}
 	
 	@Override

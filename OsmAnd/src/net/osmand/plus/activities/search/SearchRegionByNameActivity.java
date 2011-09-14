@@ -24,7 +24,7 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 	}
 	
 	@Override
-	public List<RegionAddressRepository> getObjects(String filter) {
+	public List<RegionAddressRepository> getObjects(String filter, SearchByNameTask task) {
 		return new ArrayList<RegionAddressRepository>(((OsmandApplication)getApplication()).getResourceManager().getAddressRepositories());
 	}
 	

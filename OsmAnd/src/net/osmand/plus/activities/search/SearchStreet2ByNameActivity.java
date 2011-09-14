@@ -6,12 +6,11 @@ import java.util.List;
 import net.osmand.data.City;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
 import net.osmand.plus.activities.OsmandApplication;
+import net.osmand.plus.activities.search.SearchByNameAbstractActivity.SearchByNameTask;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -29,7 +28,6 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 			@Override
 			protected void onPostExecute(Void result) {
 				((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_street);
-				((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_building);
 				progress.setVisibility(View.INVISIBLE);
 				resetText();
 			}
@@ -66,7 +64,7 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 	
 	
 	@Override
-	public List<Street> getObjects(String filter) {
+	public List<Street> getObjects(String filter, SearchByNameTask task) {
 		int ind = 0;
 		filter = filter.toLowerCase();
 		List<Street> filterList = new ArrayList<Street>();
