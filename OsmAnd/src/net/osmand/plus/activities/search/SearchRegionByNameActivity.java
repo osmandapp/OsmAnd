@@ -21,6 +21,8 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 		if(((OsmandApplication)getApplication()).getResourceManager().getAddressRepositories().isEmpty()){
 			Toast.makeText(this, R.string.none_region_found, Toast.LENGTH_LONG).show();
 		}
+		NamesAdapter namesAdapter = new NamesAdapter(getObjects("", null)); //$NON-NLS-1$
+		setListAdapter(namesAdapter);
 	}
 	
 	@Override

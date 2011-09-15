@@ -41,17 +41,19 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 		super.onCreate(savedInstanceState);
 		settings = OsmandSettings.getOsmandSettings(this);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		
 		setContentView(R.layout.search_by_name);
+		initializeTask = getInitializeTask();
 		NamesAdapter namesAdapter = new NamesAdapter(new ArrayList<T>()); //$NON-NLS-1$
 		setListAdapter(namesAdapter);
+		
+		
 		progress = (ProgressBar) findViewById(R.id.ProgressBar);
 		searchText = (EditText) findViewById(R.id.SearchText);
 		searchText.addTextChangedListener(new TextWatcher(){
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				if(initializeTask.getStatus() == Status.FINISHED){
+				if(initializeTask == null || initializeTask.getStatus() == Status.FINISHED){
 					setText(s.toString());
 				}
 			}
@@ -61,7 +63,6 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 			}
-			
 		});
 		searchText.requestFocus();
 		
@@ -69,13 +70,11 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 		findViewById(R.id.ResetButton).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				resetText();
+				searchText.setText("");
 			}
 			
 		});
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-		
-		initializeTask = getInitializeTask();
 		if(initializeTask != null){
 			initializeTask.execute();
 		}
@@ -86,7 +85,6 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 		return null;
 	}
 	
-	
 	public boolean isFilterableByDefault(){
 		return false;
 	}
@@ -95,28 +93,23 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 		return searchText.getText();
 	}
 	
-	public void resetText(){
-		setText("");
+	public void updateSearchText(){
+		setText(searchText.getText().toString());
 	}
 	
-	
 	public void setText(final String filter) {
-		if(isFilterableByDefault()){
+		if (isFilterableByDefault()) {
 			((NamesAdapter) getListAdapter()).getFilter().filter(filter);
 			return;
 		}
 		((NamesAdapter) getListAdapter()).clear();
 		Status status = searchTask.getStatus();
-		if(status == Status.FINISHED){
-			searchTask = new SearchByNameTask();
-		} else if(status == Status.RUNNING){
+		if (status != Status.FINISHED) {
 			searchTask.cancel(true);
-			// TODO improve
-			searchTask = new SearchByNameTask();
 		}
+		searchTask = new SearchByNameTask();
 		searchTask.execute(filter);
 	}
-	
 
 	public abstract List<T> getObjects(String filter, SearchByNameTask searchTask);
 
@@ -157,12 +150,16 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 	
 	protected class SearchByNameTask extends AsyncTask<String, T, List<T>> {
 
+		private String filter;
+		private long startTime;
+
 		@Override
 		protected List<T> doInBackground(String... params) {
 			if(params == null || params.length == 0){
 				return null;
 			}
-			String filter = params[0];
+			filter = params[0];
+			startTime = System.currentTimeMillis();
 			return getObjects(filter, this);
 		}
 		
@@ -184,6 +181,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 		
 		@Override
 		protected void onPostExecute(List<T> result) {
+			System.out.println("Search " + filter + " finished in " + (System.currentTimeMillis() - startTime));
 			if (!isCancelled() && result != null) {
 				((NamesAdapter) getListAdapter()).setNotifyOnChange(false);
 				((NamesAdapter) getListAdapter()).clear();

@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+
 import java.text.Collator;
 
 import net.osmand.StringMatcher;
@@ -10,17 +11,49 @@ import net.osmand.StringMatcher;
  * 
  * @author pavol.zibrita
  */
-public abstract class CollatorStringMatcher implements StringMatcher {
+public class CollatorStringMatcher implements StringMatcher {
 
 	private final Collator collator;
+	private final StringMatcherMode mode;
+	private final String part;
+	
+	public enum StringMatcherMode {
+		CHECK_ONLY_STARTS_WITH,
+		CHECK_STARTS_FROM_SPACE,
+		CHECK_STARTS_FROM_SPACE_NOT_BEGINNING,
+		CHECK_CONTAINS
+	}
 
-	public CollatorStringMatcher(Collator collator) {
+	public CollatorStringMatcher(Collator collator, String part, StringMatcherMode mode) {
 		this.collator = collator;
+		this.part = part;
+		this.mode = mode;
 	}
 
 	public Collator getCollator() {
 		return collator;
 	}
+	
+	@Override
+	public boolean matches(String name) {
+		return cmatches(collator, name, part, mode);
+	}
+	
+	
+	public static boolean cmatches(Collator collator, String base, String part, StringMatcherMode mode){
+		switch (mode) {
+		case CHECK_CONTAINS:
+			return ccontains(collator, base, part); 
+		case CHECK_STARTS_FROM_SPACE:
+			return cstartsWith(collator, base, part, true, true);
+		case CHECK_STARTS_FROM_SPACE_NOT_BEGINNING:
+			return cstartsWith(collator, base, part, false, true);
+		case CHECK_ONLY_STARTS_WITH:
+			return cstartsWith(collator, base, part, true, false);
+		}
+		return false;
+	}
+	
 	
 	/**
 	 * Check if part contains in base
@@ -30,7 +63,7 @@ public abstract class CollatorStringMatcher implements StringMatcher {
 	 * @param base String where to search
 	 * @return true if part is contained in base
 	 */
-	public static boolean ccontains(Collator collator, String part, String base) {
+	public static boolean ccontains(Collator collator, String base, String part) {
 		int pos = 0;
 		if (part.length() > 3) {
 			// improve searching by searching first 3 characters
@@ -56,17 +89,40 @@ public abstract class CollatorStringMatcher implements StringMatcher {
 	}
 
 	/**
-	 * Checks if string starts with another string
+	 * Checks if string starts with another string.
+	 * Special check try to find as well in the middle of name
 	 * 
 	 * @param collator
 	 * @param searchIn
 	 * @param theStart
 	 * @return true if searchIn starts with token
 	 */
-	public static boolean cstartsWith(Collator collator, String searchIn, String theStart) {
+	public static boolean cstartsWith(Collator collator, String searchIn, String theStart, 
+			boolean checkBeginning, boolean checkSpaces) {
+		int startLength = theStart.length();
+		int searchInLength = searchIn.length();
+		if (startLength == 0) {
+			return true;
+		}
+		if (startLength > searchInLength) {
+			return false;
+		}
 		// simulate starts with for collator
-		return collator.equals(
-				searchIn.substring(0,
-						Math.min(searchIn.length(), theStart.length())), theStart);
+		if (checkBeginning) {
+			boolean starts = collator.equals(searchIn.substring(0, startLength), theStart);
+			if (starts) {
+				return true;
+			}
+		}
+		if (checkSpaces) {
+			for (int i = 1; i <= searchInLength - startLength; i++) {
+				if (Character.isSpace(searchIn.charAt(i - 1)) && !Character.isSpace(searchIn.charAt(i))) {
+					if (collator.equals(searchIn.substring(i, i + startLength), theStart)) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 }

@@ -9,7 +9,6 @@ import net.osmand.data.Street;
 import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
 import net.osmand.plus.activities.OsmandApplication;
-import net.osmand.plus.activities.search.SearchByNameAbstractActivity.SearchByNameTask;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.TextView;
@@ -29,7 +28,7 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 			protected void onPostExecute(Void result) {
 				((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_street);
 				progress.setVisibility(View.INVISIBLE);
-				resetText();
+				updateSearchText();
 			}
 			
 			@Override
@@ -51,7 +50,7 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 					} else if(city != null){
 						street1 = region.getStreetByName(city, (settings.getLastSearchedStreet()));
 					}
-					if(city != null){
+					if(city != null && street1 != null){
 						List<Street> t = new ArrayList<Street>();
 						region.fillWithSuggestedStreetsIntersectStreets(city, street1, t);
 						initialList = t;

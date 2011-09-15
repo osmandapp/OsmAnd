@@ -28,7 +28,7 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 			protected void onPostExecute(Void result) {
 				((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_building);
 				progress.setVisibility(View.INVISIBLE);
-				resetText();
+				updateSearchText();
 			}
 			
 			@Override
@@ -38,6 +38,7 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 			}
 			@Override
 			protected Void doInBackground(Object... params) {
+				region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
 				if(region != null){
 					postcode = region.getPostcode(settings.getLastSearchedPostcode());
 					city = region.getCityById(settings.getLastSearchedCity());
@@ -47,7 +48,11 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 						street = region.getStreetByName(city, settings.getLastSearchedStreet());
 					}
 				}
-				region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
+				if(street != null){
+					// preload here to avoid concurrent modification
+					region.fillWithSuggestedBuildings(postcode, street, "", null);
+				}
+				
 				return null;
 			}
 		};
@@ -61,6 +66,10 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 				public boolean publish(Building object) {
 					task.progress(object);
 					return true;
+				}
+				@Override
+				public boolean isCancelled() {
+					return task.isCancelled();
 				}
 			});
 		}

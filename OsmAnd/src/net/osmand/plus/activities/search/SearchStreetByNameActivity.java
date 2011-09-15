@@ -22,12 +22,12 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	
 	@Override
 	public AsyncTask<Object, ?, ?> getInitializeTask() {
-		return new AsyncTask<Object, Void, Void>(){
+		return new AsyncTask<Object, Street, Void>(){
 			@Override
 			protected void onPostExecute(Void result) {
 				((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_street);
 				progress.setVisibility(View.INVISIBLE);
-				resetText();
+				updateSearchText();
 			}
 			
 			@Override
@@ -35,6 +35,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 				((TextView)findViewById(R.id.Label)).setText(R.string.loading_streets);
 				progress.setVisibility(View.VISIBLE);
 			}
+			
 			@Override
 			protected Void doInBackground(Object... params) {
 				region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
@@ -44,6 +45,8 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 						city = region.getCityById(settings.getLastSearchedCity());
 					}
 				}
+				// preload here to avoid concurrent modification
+				region.fillWithSuggestedStreets(postcode == null ? city : postcode, null);
 				return null;
 			}
 		};
@@ -57,6 +60,10 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 				public boolean publish(Street object) {
 					task.progress(object);
 					return true;
+				}
+				@Override
+				public boolean isCancelled() {
+					return task.isCancelled();
 				}
 			}, filter);
 		}

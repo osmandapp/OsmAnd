@@ -11,5 +11,10 @@ public interface ResultMatcher<T> {
 	 * @return true if result should be added to final list
 	 */
 	boolean publish(T object);
+	
+	/**
+	 * @returns true to stop processing
+	 */
+	boolean isCancelled();
 
 }

@@ -10,13 +10,10 @@ import net.osmand.data.MapObject;
 import net.osmand.data.PostCode;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
 import net.osmand.plus.activities.OsmandApplication;
-import net.osmand.plus.activities.search.SearchByNameAbstractActivity.SearchByNameTask;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,12 +23,12 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<MapOb
 	
 	@Override
 	public AsyncTask<Object, ?, ?> getInitializeTask() {
-		return new AsyncTask<Object, Void, Void>(){
+		return new AsyncTask<Object, MapObject, Void>(){
 			@Override
 			protected void onPostExecute(Void result) {
 				((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_city);
 				progress.setVisibility(View.INVISIBLE);
-				resetText();
+				updateSearchText();
 			}
 			
 			@Override
@@ -39,9 +36,35 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<MapOb
 				((TextView)findViewById(R.id.Label)).setText(R.string.loading_cities);
 				progress.setVisibility(View.VISIBLE);
 			}
+			
+			@Override
+			protected void onProgressUpdate(MapObject... values) {
+				if (hasWindowFocus()) {
+					for (MapObject t : values) {
+						((NamesAdapter) getListAdapter()).add(t);
+					}
+				}
+			}
+			
 			@Override
 			protected Void doInBackground(Object... params) {
 				region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
+				if(region != null){
+					// preload cities
+					region.fillWithSuggestedCities("", new ResultMatcher<MapObject>() {
+						
+						@Override
+						public boolean publish(MapObject object) {
+							publishProgress(object);
+							return true;
+						}
+						
+						@Override
+						public boolean isCancelled() {
+							return false;
+						}
+					}, locationToSearch);
+				}
 				return null;
 			}
 		};
@@ -50,12 +73,17 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<MapOb
 	@Override
 	public List<MapObject> getObjects(String filter, final SearchByNameTask task) {
 		if(region != null){
-			region.fillWithSuggestedCities(filter, new ResultMatcher<MapObject>() {
+			return region.fillWithSuggestedCities(filter, new ResultMatcher<MapObject>() {
 				
 				@Override
 				public boolean publish(MapObject object) {
 					task.progress(object);
 					return true;
+				}
+				
+				@Override
+				public boolean isCancelled() {
+					return task.isCancelled();
 				}
 			}, locationToSearch);
 		}

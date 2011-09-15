@@ -104,6 +104,9 @@ public class BinaryMapAddressReaderAdapter {
 					}
 				}
 				codedIS.popLimit(oldLimit);
+				if(resultMatcher != null && resultMatcher.isCancelled()){
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+				}
 				break;
 			default:
 				skipUnknownField(t);
@@ -441,7 +444,7 @@ public class BinaryMapAddressReaderAdapter {
 	}
 	
 	// do not preload streets in city
-	protected  LatLon findIntersectedStreets(City c, Street s, Street s2, List<Street> streets) throws IOException {
+	protected LatLon findIntersectedStreets(City c, Street s, Street s2, List<Street> streets) throws IOException {
 		if(s.getIndexInCity() == -1){
 			return null;
 		}
@@ -493,6 +496,9 @@ public class BinaryMapAddressReaderAdapter {
 					}
 				}
 				codedIS.popLimit(oldLimit);
+				if(resultMatcher != null && resultMatcher.isCancelled()){
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+				}
 				break;
 			default:
 				skipUnknownField(t);

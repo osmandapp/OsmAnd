@@ -1,13 +1,11 @@
 package net.osmand.plus;
 
-import static net.osmand.plus.CollatorStringMatcher.ccontains;
-import static net.osmand.plus.CollatorStringMatcher.cstartsWith;
+import static net.osmand.plus.CollatorStringMatcher.cmatches;
 
 import java.io.IOException;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +21,7 @@ import net.osmand.data.MapObject;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.osm.LatLon;
+import net.osmand.plus.CollatorStringMatcher.StringMatcherMode;
 
 import org.apache.commons.logging.Log;
 
@@ -61,13 +60,13 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		}
 		preloadBuildings(street, null);
 		name = name.toLowerCase();
-		int ind = 0;
 		for (Building building : street.getBuildings()) {
+			if(resultMatcher.isCancelled()){
+				return buildingsToFill;
+			}
 			String bName = useEnglishNames ? building.getEnName() : building.getName(); //lower case not needed, collator ensures that
-			if (cstartsWith(collator,bName,name)) { 
-				buildingsToFill.add(ind, building);
-				ind++;
-			} else if (ccontains(collator,name,bName)) {
+			if (cmatches(collator, bName, name, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+				resultMatcher.publish(building);
 				buildingsToFill.add(building);
 			}
 		}
@@ -87,6 +86,11 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	}
 
 
+	// not use ccontains It is really slow, takes about 10 times more than other steps
+	private StringMatcherMode[] streetsCheckMode = new StringMatcherMode[] {StringMatcherMode.CHECK_ONLY_STARTS_WITH,
+			StringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING};
+	
+	
 	@Override
 	public List<Street> fillWithSuggestedStreets(MapObject o, ResultMatcher<Street> resultMatcher, String... names) {
 		assert o instanceof PostCode || o instanceof City;
@@ -99,18 +103,22 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			return streetsToFill;
 		}
 		preloadStreets(o, null);
-		int ind = 0;
-		Collection<Street> streets = post == null ? city.getStreets() : post.getStreets() ;
-		Iterator<Street> iterator = streets.iterator();
-		while(iterator.hasNext()) {
-			Street s = iterator.next();
-			String sName = useEnglishNames ? s.getEnName() : s.getName(); // lower case not needed, collator ensures that
-			for (String name : names) {
-				if (cstartsWith(collator, sName, name)) {
-					streetsToFill.add(ind, s);
-					ind++;
-				} else if (ccontains(collator, name, sName) || ccontains(collator, sName, name)) {
-					streetsToFill.add(s);
+		
+		Collection<Street> streets = post == null ? city.getStreets() : post.getStreets();
+		
+		// 1st step loading by starts with
+		for (StringMatcherMode mode : streetsCheckMode) {
+			for (Street s : streets) {
+				if (resultMatcher.isCancelled()) {
+					return streetsToFill;
+				}
+				String sName = s.getName(useEnglishNames); // lower case not needed, collator ensures that
+				for (String name : names) {
+					boolean match = CollatorStringMatcher.cmatches(collator, sName, name, mode);
+					if (match) {
+						resultMatcher.publish(s);
+						streetsToFill.add(s);
+					}
 				}
 			}
 		}
@@ -143,72 +151,55 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			preloadCities(resultMatcher);
 			citiesToFill.addAll(cities.values());
 			return citiesToFill;
-		} else {
-			preloadCities(null);
+		}
+
+		preloadCities(null);
+		if (name.length() == 0) {
+			citiesToFill.addAll(cities.values());
+			return citiesToFill;
 		}
 		try {
 			// essentially index is created that cities towns are first in cities map
-			int ind = 0;
 			if (name.length() >= 2 && Algoritms.containsDigit(name)) {
 				// also try to identify postcodes
 				String uName = name.toUpperCase();
-				for (PostCode code : file.getPostcodes(region, resultMatcher, new ContainsStringMatcher(uName, collator))) {
-					if (cstartsWith(collator, code.getName(), uName)) {
-						citiesToFill.add(ind++, code);
-					} else if (ccontains(collator, code.getName(), uName)) {
-						citiesToFill.add(code);
+				for (PostCode code : file.getPostcodes(region, resultMatcher, new CollatorStringMatcher(collator, uName,
+						StringMatcherMode.CHECK_CONTAINS))) {
+					citiesToFill.add(code);
+					if (resultMatcher.isCancelled()) {
+						return citiesToFill;
 					}
 				}
-				
+
 			}
-			if (name.length() < 3) {
-				if (name.length() == 0) {
-					citiesToFill.addAll(cities.values());
-				} else {
-					name = name.toLowerCase();
-					for (City c : cities.values()) {
-						String cName = useEnglishNames ? c.getEnName() : c.getName(); //lower case not needed, collator ensures that
-						if (cstartsWith(collator, cName, name)) {
-							if (resultMatcher.publish(c)) {
-								citiesToFill.add(c);
-							}
-						}
-					}
-				}
-			} else {
-				name = name.toLowerCase();
-				for (City c : cities.values()) {
-					String cName = useEnglishNames ? c.getEnName() : c.getName(); //lower case not needed, collator ensures that
-					if (cstartsWith(collator,cName,name)) {
-						if (resultMatcher.publish(c)) {
-							citiesToFill.add(ind, c);
-							ind++;
-						}
-					} else if (ccontains(collator,name,cName)) {
-						if (resultMatcher.publish(c)) {
-							citiesToFill.add(c);
-						}
-					}
-				}
-				
-				int initialsize = citiesToFill.size();
-				
-				for(City c : file.getVillages(region, resultMatcher, new ContainsStringMatcher(name,collator), useEnglishNames )){
-					String cName = c.getName(useEnglishNames); //lower case not needed, collator ensures that
-					if (cstartsWith(collator,cName,name)) {
-						citiesToFill.add(ind, c);
-						ind++;
-					} else if (ccontains(collator,name, cName)) {
+			name = name.toLowerCase();
+			for (City c : cities.values()) {
+				String cName = c.getName(useEnglishNames); // lower case not needed, collator ensures that
+				if (cmatches(collator, cName, name, StringMatcherMode.CHECK_STARTS_FROM_SPACE)) {
+					if (resultMatcher.publish(c)) {
 						citiesToFill.add(c);
 					}
 				}
-				log.debug("Loaded citites " + (citiesToFill.size() - initialsize)); //$NON-NLS-1$
+				if (resultMatcher.isCancelled()) {
+					return citiesToFill;
+				}
 			}
+
+			int initialsize = citiesToFill.size();
+			if (name.length() >= 3) {
+				for (City c : file.getVillages(region, resultMatcher, new CollatorStringMatcher(collator, name,
+						StringMatcherMode.CHECK_STARTS_FROM_SPACE), useEnglishNames)) {
+					citiesToFill.add(c);
+					if (resultMatcher.isCancelled()) {
+						return citiesToFill;
+					}
+				}
+			}
+			log.debug("Loaded citites " + (citiesToFill.size() - initialsize)); //$NON-NLS-1$
 		} catch (IOException e) {
-			log.error("Disk operation failed" , e); //$NON-NLS-1$
+			log.error("Disk operation failed", e); //$NON-NLS-1$
 		}
 		return citiesToFill;
-		
 	}
 
 	@Override
@@ -253,6 +244,11 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	@Override
 	public String getName() {
 		return region;
+	}
+	
+	@Override
+	public String toString() {
+		return getName() + " repository";
 	}
 
 	@Override
@@ -356,4 +352,6 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		return file.getRegionCenter(region);
 	}
 
+	
+	
 }
