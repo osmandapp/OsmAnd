@@ -22,6 +22,11 @@ import android.widget.TextView;
 
 public class SearchAddressActivity extends Activity {
 
+	public static final String SELECT_ADDRESS_POINT_INTENT_KEY = "SELECT_ADDRESS_POINT_INTENT_KEY";
+	public static final int SELECT_ADDRESS_POINT_RESULT_OK = 1;	
+	public static final String SELECT_ADDRESS_POINT_LAT = "SELECT_ADDRESS_POINT_LAT";
+	public static final String SELECT_ADDRESS_POINT_LON = "SELECT_ADDRESS_POINT_LON";
+	
 	private Button showOnMap;
 	private Button streetButton;
 	private Button cityButton;
@@ -40,6 +45,8 @@ public class SearchAddressActivity extends Activity {
 	
 	private OsmandSettings osmandSettings;
 	private LatLon searchPoint = null;
+
+	private boolean selectAddressMode;
 	
 
 	@Override
@@ -195,32 +202,45 @@ public class SearchAddressActivity extends Activity {
 			return;
 		}
 		String historyName = null;
+		String objectName = "";
 		int zoom = 12;
 		if (!Algoritms.isEmpty(street2) && !Algoritms.isEmpty(street)) {
 			String cityName = !Algoritms.isEmpty(postcode) ? postcode : city;
+			objectName = street;
 			historyName = MessageFormat.format(getString(R.string.search_history_int_streets), street, street2,
 					cityName);
 			zoom = 16;
 		} else if (!Algoritms.isEmpty(building)) {
 			String cityName = !Algoritms.isEmpty(postcode) ? postcode : city;
+			objectName = street + " " + building;
 			historyName = MessageFormat.format(getString(R.string.search_history_building), building, street,
 					cityName);
 			zoom = 16;
 		} else if (!Algoritms.isEmpty(street)) {
 			String cityName = postcode != null ? postcode : city;
+			objectName = street;
 			historyName = MessageFormat.format(getString(R.string.search_history_street), street, cityName);
 			zoom = 15;
 		} else if (!Algoritms.isEmpty(city)) {
 			historyName = MessageFormat.format(getString(R.string.search_history_city), city);
+			objectName = city;
 			zoom = 13;
 		}
-		if (navigateTo) {
-			osmandSettings.setPointToNavigate(searchPoint.getLatitude(), searchPoint.getLongitude(), historyName);
+		if(selectAddressMode){
+			Intent intent = getIntent();
+			intent.putExtra(SELECT_ADDRESS_POINT_INTENT_KEY, objectName);
+			intent.putExtra(SELECT_ADDRESS_POINT_LAT, searchPoint.getLatitude());
+			intent.putExtra(SELECT_ADDRESS_POINT_LON, searchPoint.getLongitude());
+			setResult(SELECT_ADDRESS_POINT_RESULT_OK, intent);
+			finish();
 		} else {
-			osmandSettings.setMapLocationToShow(searchPoint.getLatitude(), searchPoint.getLongitude(), zoom, historyName);
+			if (navigateTo) {
+				osmandSettings.setPointToNavigate(searchPoint.getLatitude(), searchPoint.getLongitude(), historyName);
+			} else {
+				osmandSettings.setMapLocationToShow(searchPoint.getLatitude(), searchPoint.getLongitude(), zoom, historyName);
+			}
+			MapActivity.launchMapActivityMoveToTop(SearchAddressActivity.this);
 		}
-
-		MapActivity.launchMapActivityMoveToTop(SearchAddressActivity.this);
 	}
 	
 	
@@ -246,6 +266,15 @@ public class SearchAddressActivity extends Activity {
 	protected void updateUI(){
 		showOnMap.setEnabled(searchPoint != null);
 		navigateTo.setEnabled(searchPoint != null);
+		if(selectAddressMode) {
+			navigateTo.setText(R.string.search_select_point);
+			showOnMap.setVisibility(View.INVISIBLE);
+			findViewById(R.id.SearchOnline).setVisibility(View.INVISIBLE);
+		} else {
+			navigateTo.setText(R.string.navigate_to);
+			findViewById(R.id.SearchOnline).setVisibility(View.VISIBLE);
+			showOnMap.setVisibility(View.VISIBLE);
+		}
 		findViewById(R.id.ResetCountry).setEnabled(!Algoritms.isEmpty(region));
 		if(Algoritms.isEmpty(region)){
 			countryButton.setText(R.string.ChooseCountry);
@@ -314,6 +343,13 @@ public class SearchAddressActivity extends Activity {
 		super.onResume();
 
 		searchPoint = osmandSettings.getLastSearchedPoint();
+		
+		Intent intent = getIntent();
+		if (intent != null) {
+			selectAddressMode = intent.hasExtra(SELECT_ADDRESS_POINT_INTENT_KEY);
+		} else {
+			selectAddressMode = false;
+		}
 
 		region = null;
 		postcode = null;

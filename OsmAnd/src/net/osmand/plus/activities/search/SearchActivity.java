@@ -47,6 +47,7 @@ public class SearchActivity extends TabActivity {
 	private static final int GPS_ACCURACY = 50; 
 	
 	private static final int REQUEST_FAVORITE_SELECT = 1;
+	private static final int REQUEST_ADDRESS_SELECT = 2;
 	
 	public static final String SEARCH_LAT = "net.osmand.search_lat"; //$NON-NLS-1$
 	public static final String SEARCH_LON = "net.osmand.search_lon"; //$NON-NLS-1$
@@ -81,8 +82,7 @@ public class SearchActivity extends TabActivity {
 						getString(R.string.search_position_current_location),
 						getString(R.string.search_position_map_view),
 						getString(R.string.search_position_favorites),
-						// Address is not yet implemented
-						// getString(R.string.search_position_address)
+						getString(R.string.search_position_address)
 					}))
 				);
 		
@@ -122,6 +122,11 @@ public class SearchActivity extends TabActivity {
 							intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 							intent.putExtra(FavouritesListActivity.SELECT_FAVORITE_POINT_INTENT_KEY, (Serializable) null);
 							startActivityForResult(intent, REQUEST_FAVORITE_SELECT);
+						} else if (position == POSITION_ADDRESS) {
+							Intent intent = new Intent(SearchActivity.this, SearchAddressActivity.class);
+							intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+							intent.putExtra(SearchAddressActivity.SELECT_ADDRESS_POINT_INTENT_KEY, (String) null);
+							startActivityForResult(intent, REQUEST_ADDRESS_SELECT);
 						}
 					}
 				}
@@ -141,6 +146,16 @@ public class SearchActivity extends TabActivity {
 			if (p != null) {
 				LatLon latLon = new LatLon(p.getLatitude(), p.getLongitude());
 				updateSearchPoint(latLon, p.getName(), false);
+			}
+		} else if(requestCode == REQUEST_ADDRESS_SELECT && resultCode == SearchAddressActivity.SELECT_ADDRESS_POINT_RESULT_OK){
+			String name = data.getStringExtra(SearchAddressActivity.SELECT_ADDRESS_POINT_INTENT_KEY);
+			LatLon latLon = new LatLon(
+					data.getDoubleExtra(SearchAddressActivity.SELECT_ADDRESS_POINT_LAT, 0), 
+					data.getDoubleExtra(SearchAddressActivity.SELECT_ADDRESS_POINT_LON, 0));
+			if(name != null){
+				updateSearchPoint(latLon, name, false);
+			} else {
+				updateSearchPoint(latLon, getString(R.string.search_position_fixed), true);
 			}
 		}
 	}

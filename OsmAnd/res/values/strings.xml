@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="search_select_point">Select</string>
 	<string name="local_index_description">Download new, or move to backup or delete existing data. \nCurrent offline data on device (%1$s is available):</string>
 	<string name="search_position_current_location_search">Search location...</string>
 	<string name="search_position_current_location_found">Location [Found]</string>
