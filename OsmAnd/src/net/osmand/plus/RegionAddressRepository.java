@@ -57,7 +57,7 @@ public interface RegionAddressRepository {
 	
 	// TODO remove that method
 	public List<Street> fillWithSuggestedStreets(MapObject o, ResultMatcher<Street> resultMatcher, String... names);
-	// TODO remove that method
+	
 	public List<MapObject> fillWithSuggestedCities(String name, ResultMatcher<MapObject> resultMatcher, LatLon currentLocation);
 	
 	
