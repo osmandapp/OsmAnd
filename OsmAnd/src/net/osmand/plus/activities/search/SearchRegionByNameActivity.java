@@ -1,7 +1,6 @@
 package net.osmand.plus.activities.search;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -21,18 +20,15 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 		if(((OsmandApplication)getApplication()).getResourceManager().getAddressRepositories().isEmpty()){
 			Toast.makeText(this, R.string.none_region_found, Toast.LENGTH_LONG).show();
 		}
-		NamesAdapter namesAdapter = new NamesAdapter(getObjects("", null)); //$NON-NLS-1$
+		initialListToFilter = new ArrayList<RegionAddressRepository>(((OsmandApplication)getApplication()).getResourceManager().getAddressRepositories());
+		NamesAdapter namesAdapter = new NamesAdapter(new ArrayList<RegionAddressRepository>(initialListToFilter)); //$NON-NLS-1$
 		setListAdapter(namesAdapter);
 	}
 	
-	@Override
-	public List<RegionAddressRepository> getObjects(String filter, SearchByNameTask task) {
-		return new ArrayList<RegionAddressRepository>(((OsmandApplication)getApplication()).getResourceManager().getAddressRepositories());
-	}
 	
 	@Override
-	public void updateTextView(RegionAddressRepository obj, TextView txt) {
-		txt.setText(obj.getName());
+	public String getText(RegionAddressRepository obj) {
+		return obj.getName();
 	}
 
 	@Override
@@ -41,8 +37,4 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 		finish();
 	}
 	
-	@Override
-	public boolean isFilterableByDefault() {
-		return true;
-	}
 }

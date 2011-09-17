@@ -16,6 +16,52 @@ import net.osmand.osm.MapUtils;
 
 public interface RegionAddressRepository {
 	
+	public String getName();
+	
+	public LatLon getEstimatedRegionCenter();
+	
+	// is called on low memory
+	public void clearCache();
+	
+	// called to close resources
+	public void close();
+	
+	public boolean useEnglishNames();
+	
+	public void setUseEnglishNames(boolean useEnglishNames);
+	
+
+	
+	public void preloadCities(ResultMatcher<MapObject> resultMatcher);
+	
+	public void preloadBuildings(Street street, ResultMatcher<Building> resultMatcher);
+	
+	public void preloadStreets(MapObject o, ResultMatcher<Street> resultMatcher);
+	
+	
+	public List<MapObject> getLoadedCities();
+	
+	public PostCode getPostcode(String name);
+	
+	public City getCityById(Long id);
+	
+	public Street getStreetByName(MapObject cityOrPostcode, String name);
+	
+	public Building getBuildingByName(Street street, String name);
+	
+	public List<Street> getStreetsIntersectStreets(City city, Street st);
+	
+	void addCityToPreloadedList(City city);
+	
+	public LatLon findStreetIntersection(Street street, Street street2);
+	
+	// TODO remove that method
+	public List<Street> fillWithSuggestedStreets(MapObject o, ResultMatcher<Street> resultMatcher, String... names);
+	// TODO remove that method
+	public List<MapObject> fillWithSuggestedCities(String name, ResultMatcher<MapObject> resultMatcher, LatLon currentLocation);
+	
+	
+	
 	public static class MapObjectNameDistanceComparator implements Comparator<MapObject> {
 		
 		private final boolean useEnName;
@@ -44,47 +90,6 @@ public interface RegionAddressRepository {
 				return c;
 			}
 		}
-		
 	}
-	
-	public String getName();
-	
-	public PostCode getPostcode(String name);
-	
-	public City getCityById(Long id);
-	
-	public Street getStreetByName(MapObject cityOrPostcode, String name);
-	
-	public Building getBuildingByName(Street street, String name);
-	
-	public boolean useEnglishNames();
-	
-	public void setUseEnglishNames(boolean useEnglishNames);
-	
-	public List<Building> fillWithSuggestedBuildings(PostCode postcode, Street street, String name, ResultMatcher<Building> resultMatcher) ;
-	
-	public void fillWithSuggestedStreetsIntersectStreets(City city, Street st, List<Street> streetsToFill);
-	
-	public List<Street> fillWithSuggestedStreets(MapObject o, ResultMatcher<Street> resultMatcher, String... names);
-	
-	public List<MapObject> fillWithSuggestedCities(String name, ResultMatcher<MapObject> resultMatcher, LatLon currentLocation);
 
-	public LatLon findStreetIntersection(Street street, Street street2);
-
-	public boolean areCitiesPreloaded();
-
-	public boolean arePostcodesPreloaded();
-	
-	public void addCityToPreloadedList(City city);
-	
-	
-	public LatLon getEstimatedRegionCenter();
-	
-	
-	// is called on low memory
-	public void clearCache();
-	
-	// called to close resources
-	public void close();
-	
 }

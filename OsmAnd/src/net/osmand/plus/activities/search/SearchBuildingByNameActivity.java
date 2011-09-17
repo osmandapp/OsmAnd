@@ -1,6 +1,5 @@
 package net.osmand.plus.activities.search;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.ResultMatcher;
@@ -23,12 +22,12 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 	
 	@Override
 	public AsyncTask<Object, ?, ?> getInitializeTask() {
-		return new AsyncTask<Object, Void, Void>(){
+		return new AsyncTask<Object, Void, List<Building>>(){
 			@Override
-			protected void onPostExecute(Void result) {
+			protected void onPostExecute(List<Building> result) {
 				((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_building);
 				progress.setVisibility(View.INVISIBLE);
-				updateSearchText();
+				finishInitializing(result);
 			}
 			
 			@Override
@@ -37,7 +36,7 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 				progress.setVisibility(View.VISIBLE);
 			}
 			@Override
-			protected Void doInBackground(Object... params) {
+			protected List<Building> doInBackground(Object... params) {
 				region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
 				if(region != null){
 					postcode = region.getPostcode(settings.getLastSearchedPostcode());
@@ -50,35 +49,38 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 				}
 				if(street != null){
 					// preload here to avoid concurrent modification
-					region.fillWithSuggestedBuildings(postcode, street, "", null);
+					region.preloadBuildings(street, new ResultMatcher<Building>() {
+						@Override
+						public boolean isCancelled() {
+							return false;
+						}
+
+						@Override
+						public boolean publish(Building object) {
+							addObjectToInitialList(object);
+							return true;
+						}
+					});
+					return street.getBuildings();
 				}
-				
 				return null;
 			}
 		};
 	}
 	
+	
+	
 	@Override
-	public List<Building> getObjects(String filter, final SearchByNameTask task) {
-		if(street != null){
-			return region.fillWithSuggestedBuildings(postcode, street, filter, new ResultMatcher<Building>() {
-				@Override
-				public boolean publish(Building object) {
-					task.progress(object);
-					return true;
-				}
-				@Override
-				public boolean isCancelled() {
-					return task.isCancelled();
-				}
-			});
+	public boolean filterObject(Building obj, String filter) {
+		if (postcode != null && !postcode.getName().equalsIgnoreCase(obj.getPostcode())) {
+			return false;
 		}
-		return new ArrayList<Building>();
+		return super.filterObject(obj, filter);
 	}
 	
 	@Override
-	public void updateTextView(Building obj, TextView txt) {
-		txt.setText(obj.getName(region.useEnglishNames()));
+	public String getText(Building obj) {
+		return obj.getName(region.useEnglishNames());
 	}
 	
 	@Override
@@ -87,4 +89,7 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 		finish();
 		
 	}
+
+
+
 }

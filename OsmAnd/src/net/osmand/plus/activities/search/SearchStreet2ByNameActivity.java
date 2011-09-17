@@ -1,6 +1,5 @@
 package net.osmand.plus.activities.search;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.data.City;
@@ -18,17 +17,16 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 	private City city;
 	private PostCode postcode;
 	private Street street1;
-	private List<Street> initialList = new ArrayList<Street>();
 	
 	
 	@Override
 	public AsyncTask<Object, ?, ?> getInitializeTask() {
-		return new AsyncTask<Object, Void, Void>(){
+		return new AsyncTask<Object, Void, List<Street>>(){
 			@Override
-			protected void onPostExecute(Void result) {
+			protected void onPostExecute(List<Street> result) {
 				((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_street);
 				progress.setVisibility(View.INVISIBLE);
-				updateSearchText();
+				finishInitializing(result);
 			}
 			
 			@Override
@@ -37,7 +35,7 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 				progress.setVisibility(View.VISIBLE);
 			}
 			@Override
-			protected Void doInBackground(Object... params) {
+			protected List<Street> doInBackground(Object... params) {
 				region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
 				if(region != null){
 					postcode = region.getPostcode(settings.getLastSearchedPostcode());
@@ -51,9 +49,7 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 						street1 = region.getStreetByName(city, (settings.getLastSearchedStreet()));
 					}
 					if(city != null && street1 != null){
-						List<Street> t = new ArrayList<Street>();
-						region.fillWithSuggestedStreetsIntersectStreets(city, street1, t);
-						initialList = t;
+						return region.getStreetsIntersectStreets(city, street1);
 					}
 				}
 				return null;
@@ -62,31 +58,10 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 	}
 	
 	
-	@Override
-	public List<Street> getObjects(String filter, SearchByNameTask task) {
-		int ind = 0;
-		filter = filter.toLowerCase();
-		List<Street> filterList = new ArrayList<Street>();
-		if(filter.length() == 0){
-			filterList.addAll(initialList);
-			return filterList;
-		}
-		
-		for (Street s : initialList) {
-			String lowerCase = s.getName(region.useEnglishNames()).toLowerCase();
-			if (lowerCase.startsWith(filter)) {
-				filterList.add(ind, s);
-				ind++;
-			} else if (lowerCase.contains(filter)) {
-				filterList.add(s);
-			}
-		}
-		return filterList;
-	}
 	
 	@Override
-	public void updateTextView(Street obj, TextView txt) {
-		txt.setText(obj.getName(region.useEnglishNames()));
+	public String getText(Street obj) {
+		return obj.getName(region.useEnglishNames());
 	}
 	
 	@Override

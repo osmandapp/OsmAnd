@@ -1,6 +1,5 @@
 package net.osmand.plus.activities.search;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.OsmAndFormatter;
@@ -14,6 +13,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
 import net.osmand.plus.activities.OsmandApplication;
 import android.os.AsyncTask;
+import android.os.Message;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,12 +23,12 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<MapOb
 	
 	@Override
 	public AsyncTask<Object, ?, ?> getInitializeTask() {
-		return new AsyncTask<Object, MapObject, Void>(){
+		return new AsyncTask<Object, MapObject, List<MapObject>>(){
 			@Override
-			protected void onPostExecute(Void result) {
+			protected void onPostExecute(List<MapObject> result) {
 				((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_city);
 				progress.setVisibility(View.INVISIBLE);
-				updateSearchText();
+				finishInitializing(result);
 			}
 			
 			@Override
@@ -37,25 +37,17 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<MapOb
 				progress.setVisibility(View.VISIBLE);
 			}
 			
-			@Override
-			protected void onProgressUpdate(MapObject... values) {
-				if (hasWindowFocus()) {
-					for (MapObject t : values) {
-						((NamesAdapter) getListAdapter()).add(t);
-					}
-				}
-			}
 			
 			@Override
-			protected Void doInBackground(Object... params) {
+			protected List<MapObject> doInBackground(Object... params) {
 				region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
 				if(region != null){
 					// preload cities
-					region.fillWithSuggestedCities("", new ResultMatcher<MapObject>() {
+					region.preloadCities(new ResultMatcher<MapObject>() {
 						
 						@Override
 						public boolean publish(MapObject object) {
-							publishProgress(object);
+							addObjectToInitialList(object);
 							return true;
 						}
 						
@@ -63,7 +55,8 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<MapOb
 						public boolean isCancelled() {
 							return false;
 						}
-					}, locationToSearch);
+					});
+					return region.getLoadedCities();
 				}
 				return null;
 			}
@@ -71,33 +64,35 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<MapOb
 	}
 	
 	@Override
-	public List<MapObject> getObjects(String filter, final SearchByNameTask task) {
-		if(region != null){
-			return region.fillWithSuggestedCities(filter, new ResultMatcher<MapObject>() {
-				
-				@Override
-				public boolean publish(MapObject object) {
-					task.progress(object);
-					return true;
-				}
-				
+	protected void filterLoop(String query, List<MapObject> list) {
+		if(!initializeTaskIsFinished() || query.length() <= 2){
+			super.filterLoop(query, list);
+		} else {
+			region.fillWithSuggestedCities(query, new ResultMatcher<MapObject>() {
 				@Override
 				public boolean isCancelled() {
-					return task.isCancelled();
+					return namesFilter.isCancelled;
+				}
+
+				@Override
+				public boolean publish(MapObject object) {
+					Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, object);
+					msg.sendToTarget();
+					return true;
 				}
 			}, locationToSearch);
 		}
-		return new ArrayList<MapObject>();
 	}
+
 	
 	@Override
-	public void updateTextView(MapObject obj, TextView txt) {
+	public String getText(MapObject obj) {
 		LatLon l = obj.getLocation();
 		if (getFilter().length() > 2 && locationToSearch != null && l != null) {
-			txt.setText(obj.getName(region.useEnglishNames()) + " - " + //$NON-NLS-1$
-					OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(l, locationToSearch), this)); 
+			return obj.getName(region.useEnglishNames()) + " - " + //$NON-NLS-1$
+					OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(l, locationToSearch), this); 
 		} else {
-			txt.setText(obj.getName(region.useEnglishNames()));
+			return obj.getName(region.useEnglishNames());
 		}
 	}
 	

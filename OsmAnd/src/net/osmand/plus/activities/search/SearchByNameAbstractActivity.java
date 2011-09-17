@@ -1,15 +1,20 @@
 package net.osmand.plus.activities.search;
 
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.osm.LatLon;
+import net.osmand.plus.CollatorStringMatcher;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.CollatorStringMatcher.StringMatcherMode;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.AsyncTask.Status;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,6 +25,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -29,11 +35,18 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 
 	private EditText searchText;
 	private AsyncTask<Object, ?, ?> initializeTask;
-	protected SearchByNameTask searchTask = new SearchByNameTask();
+	
+	protected static final int MESSAGE_CLEAR_LIST = 1;
+	protected static final int MESSAGE_ADD_ENTITY = 2;
 	
 	protected ProgressBar progress;
 	protected LatLon locationToSearch;
 	protected OsmandSettings settings;
+	protected List<T> initialListToFilter = new ArrayList<T>();
+	protected Handler uiHandler;
+	protected Collator collator;
+	protected NamesFilter namesFilter;
+	private String currentFilter = "";
 	
 
 	@Override
@@ -42,10 +55,16 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 		settings = OsmandSettings.getOsmandSettings(this);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.search_by_name);
+
 		initializeTask = getInitializeTask();
+		uiHandler = new UIUpdateHandler();
+		namesFilter = new NamesFilter();
 		NamesAdapter namesAdapter = new NamesAdapter(new ArrayList<T>()); //$NON-NLS-1$
 		setListAdapter(namesAdapter);
 		
+		collator = Collator.getInstance();
+ 	    collator.setStrength(Collator.PRIMARY); //ignores also case
+ 	    
 		
 		progress = (ProgressBar) findViewById(R.id.ProgressBar);
 		searchText = (EditText) findViewById(R.id.SearchText);
@@ -53,9 +72,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				if(initializeTask == null || initializeTask.getStatus() == Status.FINISHED){
-					setText(s.toString());
-				}
+				querySearch(s.toString());
 			}
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -85,42 +102,54 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 		return null;
 	}
 	
-	public boolean isFilterableByDefault(){
-		return false;
-	}
-	
 	public Editable getFilter(){
 		return searchText.getText();
 	}
 	
-	public void updateSearchText(){
-		setText(searchText.getText().toString());
+	public boolean initializeTaskIsFinished(){
+		return initializeTask == null || initializeTask.getStatus() == Status.FINISHED;
 	}
 	
-	public void setText(final String filter) {
-		if (isFilterableByDefault()) {
-			((NamesAdapter) getListAdapter()).getFilter().filter(filter);
-			return;
-		}
-		((NamesAdapter) getListAdapter()).clear();
-		Status status = searchTask.getStatus();
-		if (status != Status.FINISHED) {
-			searchTask.cancel(true);
-		}
-		searchTask = new SearchByNameTask();
-		searchTask.execute(filter);
+	
+	public void querySearch(final String filter) {
+		currentFilter = filter;
+		progress.setVisibility(View.VISIBLE);
+		namesFilter.cancelPreviousFilter(filter);
+		namesFilter.filter(filter);
 	}
+	
+	protected void addObjectToInitialList(T initial){
+		initialListToFilter.add(initial);
+		if(!namesFilter.active){
+			if(filterObject(initial, currentFilter)) {
+				Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, initial);
+				msg.sendToTarget();
+			}
+		}
+	}
+	
+	protected void finishInitializing(List<T> list){
+		if(list != null){
+			initialListToFilter = list;
+		}
+		querySearch(searchText.getText().toString());
+	}
+	
 
-	public abstract List<T> getObjects(String filter, SearchByNameTask searchTask);
-
-	public abstract void updateTextView(T obj, TextView txt);
+	public abstract String getText(T obj);
 	
 	public abstract void itemSelected(T obj);
 	
-	@SuppressWarnings("unchecked")
+	public boolean filterObject(T obj, String filter){
+		if(filter == null || filter.length() == 0){
+			return true;
+		}
+		return CollatorStringMatcher.cmatches(collator, getText(obj), filter, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+	}
+	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		T repo = (T) getListAdapter().getItem(position);
+		T repo = getListAdapter().getItem(position);
 		itemSelected(repo);
 	}
 	
@@ -142,62 +171,89 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 	}
 	
 	@Override
+	public NamesAdapter getListAdapter() {
+		return (NamesAdapter) super.getListAdapter();
+	}
+	
+	@Override
 	protected void onPause() {
 		super.onPause();
-		searchTask.cancel(true);
+		namesFilter.cancelPreviousFilter(currentFilter);
 	}
 	
 	
-	protected class SearchByNameTask extends AsyncTask<String, T, List<T>> {
-
-		private String filter;
+	protected void filterLoop(String query, List<T> list) {
+		for (int i = 0; i < list.size(); i++) {
+			if(namesFilter.isCancelled){
+				break;
+			}
+			T obj = list.get(i);
+			if(filterObject(obj, query)){
+				Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, obj);
+				msg.sendToTarget();
+			}
+		}
+	}
+	
+	
+	class UIUpdateHandler extends Handler {
+		@SuppressWarnings("unchecked")
+		@Override
+		public void handleMessage(Message msg) {
+			if(msg.what == MESSAGE_CLEAR_LIST){
+				getListAdapter().clear();
+			} else if(msg.what == MESSAGE_ADD_ENTITY){
+				getListAdapter().add((T) msg.obj);
+			}
+		}
+	}
+	
+	class NamesFilter extends Filter {
+		
+		protected boolean isCancelled = false;
+		private String newFilter;
+		private boolean active = false;
 		private long startTime;
+		
+		protected void cancelPreviousFilter(String newFilter){
+			this.newFilter = newFilter;
+			isCancelled = true;
+		}
+		
+		
+		@Override
+		protected FilterResults performFiltering(CharSequence constraint) {
+			isCancelled = false;
+			String query = constraint.toString();
+			if(query.equals(newFilter)){
+				active = true;
+				startTime = System.currentTimeMillis();
+				uiHandler.sendEmptyMessage(MESSAGE_CLEAR_LIST);
+				// make link copy
+				List<T> list = initialListToFilter;
+				filterLoop(query, list);
+				active = false;
+			}
+			if(!isCancelled){
+				return new FilterResults();
+			}
+			
+			return null;
+		}
+
+
 
 		@Override
-		protected List<T> doInBackground(String... params) {
-			if(params == null || params.length == 0){
-				return null;
-			}
-			filter = params[0];
-			startTime = System.currentTimeMillis();
-			return getObjects(filter, this);
-		}
-		
-		public void progress(T... values){
-			publishProgress(values);
-		}
-		
-		protected void onProgressUpdate(T... values) {
-			for(T t :values){
-				((NamesAdapter) getListAdapter()).add(t);
-			}
-		};
-		
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			progress.setVisibility(View.VISIBLE);
-		}
-		
-		@Override
-		protected void onPostExecute(List<T> result) {
-			System.out.println("Search " + filter + " finished in " + (System.currentTimeMillis() - startTime));
-			if (!isCancelled() && result != null) {
-				((NamesAdapter) getListAdapter()).setNotifyOnChange(false);
-				((NamesAdapter) getListAdapter()).clear();
-				for (T o : result) {
-					((NamesAdapter) getListAdapter()).add(o);
-				}
-				((NamesAdapter) getListAdapter()).notifyDataSetChanged();
-			}
-			if (!isCancelled()) {
+		protected void publishResults(CharSequence constraint, FilterResults results) {
+			if(results != null && initializeTaskIsFinished()){
+				System.out.println("Search " + constraint + " finished in " + (System.currentTimeMillis() - startTime));
 				progress.setVisibility(View.INVISIBLE);
 			}
 		}
 		
 	}
 
-	class NamesAdapter extends ArrayAdapter<T> {
+	protected class NamesAdapter extends ArrayAdapter<T> {
 		NamesAdapter(List<T> list) {
 			super(SearchByNameAbstractActivity.this, R.layout.searchbyname_list, list);
 		}
@@ -211,7 +267,7 @@ public abstract class SearchByNameAbstractActivity<T> extends ListActivity {
 				row = inflater.inflate(R.layout.searchbyname_list, parent, false);
 			}
 			TextView label = (TextView) row.findViewById(R.id.NameLabel);
-			updateTextView(getItem(position), label);
+			label.setText(getText(getItem(position)));
 			return row;
 		}
 	}

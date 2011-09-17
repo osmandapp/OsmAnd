@@ -49,32 +49,22 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		this.file = null;
 	}
 
-
+	
 	@Override
-	public List<Building> fillWithSuggestedBuildings(PostCode postcode, Street street, String name, ResultMatcher<Building> resultMatcher) {
-		List<Building> buildingsToFill = new ArrayList<Building>();
-		if (name.length() == 0) {
-			preloadBuildings(street, resultMatcher);
-			buildingsToFill.addAll(street.getBuildings());
-			return buildingsToFill;
-		}
-		preloadBuildings(street, null);
-		name = name.toLowerCase();
-		for (Building building : street.getBuildings()) {
-			if(resultMatcher.isCancelled()){
-				return buildingsToFill;
-			}
-			String bName = useEnglishNames ? building.getEnName() : building.getName(); //lower case not needed, collator ensures that
-			if (cmatches(collator, bName, name, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
-				resultMatcher.publish(building);
-				buildingsToFill.add(building);
+	public synchronized void preloadCities(ResultMatcher<MapObject> resultMatcher) {
+		if (cities.isEmpty()) {
+			try {
+				List<City> cs = file.getCities(region, resultMatcher);
+				for (City c : cs) {
+					cities.put(c.getId(), c);
+				}
+			} catch (IOException e) {
+				log.error("Disk operation failed", e); //$NON-NLS-1$
 			}
 		}
-		return buildingsToFill;
 	}
 
-
-	private void preloadBuildings(Street street, ResultMatcher<Building> resultMatcher) {
+	public synchronized void preloadBuildings(Street street, ResultMatcher<Building> resultMatcher) {
 		if(street.getBuildings().isEmpty()){
 			try {
 				file.preloadBuildings(street, resultMatcher);
@@ -83,6 +73,33 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 				log.error("Disk operation failed" , e); //$NON-NLS-1$
 			}
 		}		
+	}
+	
+	@Override
+	public synchronized void addCityToPreloadedList(City city) {
+		cities.put(city.getId(), city);
+	}
+	
+	public synchronized List<MapObject> getLoadedCities(){
+		return new ArrayList<MapObject>(cities.values());
+	}
+	
+	public synchronized void preloadStreets(MapObject o, ResultMatcher<Street> resultMatcher) {
+		assert o instanceof PostCode || o instanceof City;
+		Collection<Street> streets = o instanceof PostCode ? ((PostCode) o).getStreets() : ((City) o).getStreets();
+		if(!streets.isEmpty()){
+			return;
+		}
+		try {
+			if(o instanceof PostCode){
+				file.preloadStreets((PostCode) o, resultMatcher);
+			} else {
+				file.preloadStreets((City) o, resultMatcher);
+			}
+		} catch (IOException e) {
+			log.error("Disk operation failed" , e); //$NON-NLS-1$
+		}
+		
 	}
 
 
@@ -125,24 +142,6 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		return streetsToFill;
 	}
 
-	private void preloadStreets(MapObject o, ResultMatcher<Street> resultMatcher) {
-		assert o instanceof PostCode || o instanceof City;
-		Collection<Street> streets = o instanceof PostCode ? ((PostCode) o).getStreets() : ((City) o).getStreets();
-		if(!streets.isEmpty()){
-			return;
-		}
-		try {
-			if(o instanceof PostCode){
-				file.preloadStreets((PostCode) o, resultMatcher);
-			} else {
-				file.preloadStreets((City) o, resultMatcher);
-			}
-		} catch (IOException e) {
-			log.error("Disk operation failed" , e); //$NON-NLS-1$
-		}
-		
-	}
-	
 
 	@Override
 	public List<MapObject> fillWithSuggestedCities(String name, ResultMatcher<MapObject> resultMatcher, LatLon currentLocation) {
@@ -203,15 +202,18 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	}
 
 	@Override
-	public void fillWithSuggestedStreetsIntersectStreets(City city, Street st, List<Street> streetsToFill) {
+	public List<Street> getStreetsIntersectStreets(City city, Street st) {
+		List<Street> streetsToFill = new ArrayList<Street>();
 		if(city != null){
 			preloadStreets(city, null);
 			try {
+				
 				file.findIntersectedStreets(city, st, streetsToFill);
 			} catch (IOException e) {
 				log.error("Disk operation failed" , e); //$NON-NLS-1$
 			}
 		}
+		return streetsToFill;
 	}
 	
 	@Override
@@ -233,7 +235,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	public Building getBuildingByName(Street street, String name) {
 		preloadBuildings(street, null);
 		for (Building b : street.getBuildings()) {
-			String bName = useEnglishNames ? b.getEnName() : b.getName();
+			String bName = b.getName(useEnglishNames);
 			if (bName.equals(name)) {
 				return b;
 			}
@@ -256,8 +258,6 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		return useEnglishNames;
 	}
 	
-
-
 	@Override
 	public City getCityById(Long id) {
 		if(id == -1){
@@ -269,18 +269,6 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	}
 
 
-	private void preloadCities(ResultMatcher<MapObject> resultMatcher) {
-		if (cities.isEmpty()) {
-			try {
-				List<City> cs = file.getCities(region, resultMatcher);
-				for (City c : cs) {
-					cities.put(c.getId(), c);
-				}
-			} catch (IOException e) {
-				log.error("Disk operation failed", e); //$NON-NLS-1$
-			}
-		}
-	}
 
 	@Override
 	public PostCode getPostcode(String name) {
@@ -321,23 +309,6 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	@Override
 	public void setUseEnglishNames(boolean useEnglishNames) {
 		this.useEnglishNames = useEnglishNames;
-	}
-
-	@Override
-	public void addCityToPreloadedList(City city) {
-		cities.put(city.getId(), city);
-	}
-
-	@Override
-	public boolean areCitiesPreloaded() {
-		return !cities.isEmpty();
-	}
-
-	@Override
-	public boolean arePostcodesPreloaded() {
-		// postcodes are always preeloaded 
-		// do not load them into memory (just cache last used)
-		return true;
 	}
 
 	@Override

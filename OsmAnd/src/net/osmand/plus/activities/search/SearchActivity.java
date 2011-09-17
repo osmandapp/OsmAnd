@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 
+import net.osmand.Algoritms;
 import net.osmand.FavouritePoint;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandSettings;
@@ -55,6 +56,7 @@ public class SearchActivity extends TabActivity {
 	Button searchPOIButton;
 	private TabSpec addressSpec;
 	private LatLon searchPoint = null;
+	private LatLon reqSearchPoint = null;
 	private boolean searchAroundCurrentLocation = false;
 
 	private static boolean searchOnLine = false;
@@ -122,11 +124,13 @@ public class SearchActivity extends TabActivity {
 							intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 							intent.putExtra(FavouritesListActivity.SELECT_FAVORITE_POINT_INTENT_KEY, (Serializable) null);
 							startActivityForResult(intent, REQUEST_FAVORITE_SELECT);
+							spinner.setSelection(0);
 						} else if (position == POSITION_ADDRESS) {
 							Intent intent = new Intent(SearchActivity.this, SearchAddressActivity.class);
 							intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 							intent.putExtra(SearchAddressActivity.SELECT_ADDRESS_POINT_INTENT_KEY, (String) null);
 							startActivityForResult(intent, REQUEST_ADDRESS_SELECT);
+							spinner.setSelection(0);
 						}
 					}
 				}
@@ -141,6 +145,7 @@ public class SearchActivity extends TabActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+		
 		if(requestCode == REQUEST_FAVORITE_SELECT && resultCode == FavouritesListActivity.SELECT_FAVORITE_POINT_RESULT_OK){
 			FavouritePoint p = (FavouritePoint) data.getSerializableExtra(FavouritesListActivity.SELECT_FAVORITE_POINT_INTENT_KEY);
 			if (p != null) {
@@ -214,12 +219,20 @@ public class SearchActivity extends TabActivity {
 			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
 			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
 			if (lat != 0 || lon != 0) {
-				updateSearchPoint(new LatLon(lat, lon), getString(R.string.search_position_fixed), true);
+				LatLon l = new LatLon(lat, lon);
+				if(!Algoritms.objectEquals(reqSearchPoint, l)){
+					reqSearchPoint = l;
+					updateSearchPoint(reqSearchPoint, getString(R.string.search_position_fixed), true);
+				}
 			}
 		}
+		
 		if(searchPoint == null){
 			LatLon last = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
-			updateSearchPoint(last, getString(R.string.search_position_fixed), true);
+			if(!Algoritms.objectEquals(reqSearchPoint, last)){
+				reqSearchPoint = last;
+				updateSearchPoint(last, getString(R.string.search_position_fixed), true);
+			}
 		}
 	}
 	
