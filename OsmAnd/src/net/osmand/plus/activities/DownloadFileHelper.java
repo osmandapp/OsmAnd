@@ -15,9 +15,6 @@ import java.util.zip.ZipInputStream;
 import org.apache.commons.logging.Log;
 
 import android.app.Activity;
-import android.graphics.drawable.Drawable.Callback;
-import android.os.AsyncTask;
-import android.widget.Toast;
 
 import net.osmand.IProgress;
 import net.osmand.LogUtil;

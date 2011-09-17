@@ -3,53 +3,108 @@ package net.osmand.plus.activities.search;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.ResultMatcher;
 import net.osmand.data.City;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.CollatorStringMatcher;
 import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
+import net.osmand.plus.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.plus.activities.OsmandApplication;
-import android.os.Bundle;
+import android.os.AsyncTask;
+import android.os.Message;
+import android.view.View;
 import android.widget.TextView;
 
 public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Street> {
 	private RegionAddressRepository region;
 	private City city;
 	private PostCode postcode;
-	private OsmandSettings settings;
+	
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		settings = OsmandSettings.getOsmandSettings(this);
-		region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
-		if(region != null){
-			postcode = region.getPostcode(settings.getLastSearchedPostcode());
-			if (postcode == null) {
-				city = region.getCityById(settings.getLastSearchedCity());
+	public AsyncTask<Object, ?, ?> getInitializeTask() {
+		return new AsyncTask<Object, Street, List<Street>>(){
+			@Override
+			protected void onPostExecute(List<Street> result) {
+				((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_street);
+				progress.setVisibility(View.INVISIBLE);
+				finishInitializing(result);
+			}
+			
+			@Override
+			protected void onPreExecute() {
+				((TextView)findViewById(R.id.Label)).setText(R.string.loading_streets);
+				progress.setVisibility(View.VISIBLE);
+			}
+			
+			@Override
+			protected List<Street> doInBackground(Object... params) {
+				region = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(settings.getLastSearchedRegion());
+				if(region != null){
+					postcode = region.getPostcode(settings.getLastSearchedPostcode());
+					if (postcode == null) {
+						city = region.getCityById(settings.getLastSearchedCity());
+					}
+					region.preloadStreets(postcode == null ? city : postcode, new ResultMatcher<Street>() {
+						@Override
+						public boolean publish(Street object) {
+							addObjectToInitialList(object);
+							return true;
+						}
+						@Override
+						public boolean isCancelled() {
+							return false;
+						}
+					});
+					if(postcode != null){
+						return new ArrayList<Street>(postcode.getStreets());
+					} else {
+						return new ArrayList<Street>(city.getStreets());
+					}
+				}
+				return null;
+			}
+		};
+	}
+	
+	
+	@Override
+	protected void filterLoop(String query, List<Street> list) {
+		boolean emptyQuery = query == null || query.length() == 0;
+		for (int i = 0; i < list.size(); i++) {
+			if (namesFilter.isCancelled) {
+				break;
+			}
+			Street obj = list.get(i);
+			if (emptyQuery || CollatorStringMatcher.cmatches(collator, getText(obj), query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+				Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, obj);
+				msg.sendToTarget();
 			}
 		}
-		super.onCreate(savedInstanceState);
-		((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_street);
-	}
-	
-	@Override
-	public List<Street> getObjects(String filter) {
-		List<Street> l = new ArrayList<Street>();
-		if (city != null || postcode != null) {
-			region.fillWithSuggestedStreets(postcode == null ? city : postcode, l, filter);
+		if (!emptyQuery) {
+			for (int i = 0; i < list.size(); i++) {
+				if (namesFilter.isCancelled) {
+					break;
+				}
+				Street obj = list.get(i);
+				if (CollatorStringMatcher.cmatches(collator, getText(obj), query, StringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING)) {
+					Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, obj);
+					msg.sendToTarget();
+				}
+			}
 		}
-		return l;
 	}
 	
 	@Override
-	public void updateTextView(Street obj, TextView txt) {
-		txt.setText(obj.getName(region.useEnglishNames()));
+	public String getText(Street obj) {
+		return obj.getName(region.useEnglishNames());
 	}
 	
 	@Override
 	public void itemSelected(Street obj) {
-		settings.setLastSearchedStreet(obj.getName(region.useEnglishNames()));
+		settings.setLastSearchedStreet(obj.getName(region.useEnglishNames()), obj.getLocation());
 		finish();
 		
 	}

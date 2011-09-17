@@ -24,7 +24,6 @@ import net.osmand.plus.activities.OsmandApplication;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -49,8 +48,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -59,6 +56,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -71,8 +69,8 @@ import android.widget.Toast;
 public class SearchPOIActivity extends ListActivity implements SensorEventListener {
 
 	public static final String AMENITY_FILTER = "net.osmand.amenity_filter"; //$NON-NLS-1$
-	public static final String SEARCH_LAT = "net.osmand.am_search_lat"; //$NON-NLS-1$
-	public static final String SEARCH_LON = "net.osmand.am_search_lon"; //$NON-NLS-1$
+	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT; //$NON-NLS-1$
+	public static final String SEARCH_LON = SearchActivity.SEARCH_LON; //$NON-NLS-1$
 	private static final int GPS_TIMEOUT_REQUEST = 1000;
 	private static final int GPS_DIST_REQUEST = 5;
 	private static final int MIN_DISTANCE_TO_RESEARCH = 70;
@@ -80,7 +78,8 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 
 
 	private Button searchPOILevel;
-	private Button showOnMap;
+	private ImageButton showOnMap;
+	private ImageButton showFilter;
 	private PoiFilter filter;
 	private AmenityAdapter amenityAdapter;
 	private TextView searchArea;
@@ -113,7 +112,8 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		searchArea = (TextView) findViewById(R.id.SearchAreaText);
 		searchFilter = (EditText) findViewById(R.id.SearchFilter);
 		searchFilterLayout = findViewById(R.id.SearchFilterLayout);
-		showOnMap = (Button) findViewById(R.id.ShowOnMap);
+		showOnMap = (ImageButton) findViewById(R.id.ShowOnMap);
+		showFilter = (ImageButton) findViewById(R.id.ShowFilter);
 		
 		settings = OsmandSettings.getOsmandSettings(this);
 		
@@ -142,6 +142,19 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 
 			}
 		});
+		showFilter.setVisibility(isNameFinderFilter() ? View.GONE : View.VISIBLE);
+		showFilter.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (searchFilterLayout.getVisibility() == View.GONE) {
+					searchFilterLayout.setVisibility(View.VISIBLE);
+				} else {
+					searchFilter.setText(""); //$NON-NLS-1$
+					searchFilterLayout.setVisibility(View.GONE);
+				}
+			}
+		});
+		
 		if(isNameFinderFilter()){
 			searchFilterLayout.setVisibility(View.VISIBLE);
 		}
@@ -298,30 +311,6 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		return filter instanceof NameFinderPoiFilter; 
 	}
 	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		boolean m = super.onCreateOptionsMenu(menu);
-		if (!isNameFinderFilter()) {
-			final MenuItem me = menu.add(R.string.show_poi_filter);
-			me.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					if (searchFilterLayout.getVisibility() == View.GONE) {
-						searchFilterLayout.setVisibility(View.VISIBLE);
-						me.setTitle(R.string.hide_poi_filter);
-					} else {
-						searchFilter.setText(""); //$NON-NLS-1$
-						searchFilterLayout.setVisibility(View.GONE);
-						me.setTitle(R.string.show_poi_filter);
-					}
-					return true;
-				}
-
-			});
-		}
-		return m;
-	}
 
 	// Working with location listeners
 	private LocationListener networkListener = new LocationListener(){

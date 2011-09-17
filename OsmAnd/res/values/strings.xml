@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="search_select_point">Select</string>
+	<string name="local_index_description">Download new, or move to backup or delete existing data. \nCurrent offline data on device (%1$s is available):</string>
+	<string name="search_position_current_location_search">Search location...</string>
+	<string name="search_position_current_location_found">Location [Found]</string>
+	<string name="search_position_address">Address...</string>
+	<string name="search_position_favorites">Favorites...</string>
+	<string name="search_position_undefined">Undefined</string>
+	<string name="search_position_fixed">Fixed</string>
+	<string name="search_position_current_location">Current location...</string>
+	<string name="search_position_map_view">Last map view</string>
+	
+	<string name="select_search_position">Search around :</string>
+	<string name="context_menu_item_search">Search</string>
 	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7 :
 \n\t- Offline data manager (download, delete, backup offline data directly in Osmand)
 \n\t- Favorite points and groups (categorize, delete, manage favorites)
@@ -46,7 +59,7 @@
 	<string name="local_index_no_items_to_do">No items to %1$s</string>
 	<string name="local_index_action_do">You are about to %1$s %2$s item(s). Continue?</string>
 	<string name="local_index_descr_title">Offline Data Manager:</string>
-	<string name="local_index_description">Download new, or move to backup or delete existing data.\nCurrent offline data on device:</string>
+	
 	<string name="local_index_mi_restore">Restore...</string>
 	<string name="local_index_mi_backup">Backup...</string>
 	<string name="local_index_mi_delete">Delete...</string>

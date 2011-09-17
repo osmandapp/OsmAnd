@@ -13,7 +13,6 @@ import net.osmand.plus.activities.RoutingHelper.RouteDirectionInfo;
 import net.osmand.plus.activities.RoutingHelper.TurnType;
 import net.osmand.plus.views.MapInfoLayer;
 import android.app.ListActivity;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;

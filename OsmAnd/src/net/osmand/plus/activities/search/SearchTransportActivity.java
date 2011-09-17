@@ -19,10 +19,12 @@ import net.osmand.plus.TransportIndexRepository;
 import net.osmand.plus.TransportIndexRepository.RouteInfoLocation;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.activities.TransportRouteHelper;
+import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -41,10 +43,10 @@ import android.widget.TextView;
  * @author Maxim Frolov
  * 
  */
-public class SearchTransportActivity extends ListActivity {
+public class SearchTransportActivity extends ListActivity implements SearchActivityChild {
 
-	public static final String LAT_KEY = "lat"; //$NON-NLS-1$
-	public static final String LON_KEY = "lon"; //$NON-NLS-1$
+	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
+	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
 
 	private Button searchTransportLevel;
 	
@@ -68,18 +70,11 @@ public class SearchTransportActivity extends ListActivity {
 	private OsmandSettings settings;
 	
 
-	
-
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		settings = OsmandSettings.getOsmandSettings(this);
-		Bundle extras = getIntent().getExtras();
-		if(extras != null && extras.containsKey(LAT_KEY) && extras.containsKey(LON_KEY)){
-			lastKnownMapLocation = new LatLon(extras.getDouble(LAT_KEY), extras.getDouble(LON_KEY));
-		} else {
-			lastKnownMapLocation = settings.getLastKnownMapLocation();
-		}
+		
 		setContentView(R.layout.search_transport);
 		searchTransportLevel = (Button) findViewById(R.id.SearchTransportLevelButton);
 		searchTransportLevel.setText(R.string.search_POI_level_btn);
@@ -131,13 +126,38 @@ public class SearchTransportActivity extends ListActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		LatLon pointToNavigate = settings.getPointToNavigate();
-		if(!Algoritms.objectEquals(pointToNavigate, this.destinationLocation)){
-			destinationLocation = pointToNavigate;
-			selectedDestinationLocation = destinationLocation;
-			searchTransport();			
+		Intent intent = getIntent();
+		LatLon startPoint = null;
+		if(intent != null){
+			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
+			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
+			if(lat != 0 || lon != 0){
+				startPoint = new LatLon(lat, lon);
+			}
+		}
+		if(startPoint == null && getParent() instanceof SearchActivity){
+			startPoint = ((SearchActivity) getParent()).getSearchPoint();
+		}
+		if (startPoint == null) {
+			startPoint = OsmandSettings.getOsmandSettings(this).getLastKnownMapLocation();
 		}
 		
+		LatLon pointToNavigate = settings.getPointToNavigate();
+		if(!Algoritms.objectEquals(pointToNavigate, this.destinationLocation) || 
+				!Algoritms.objectEquals(startPoint, this.lastKnownMapLocation)){
+			destinationLocation = pointToNavigate;
+			selectedDestinationLocation = destinationLocation;
+			lastKnownMapLocation = startPoint;
+			searchTransport();			
+		}
+	}
+	
+	@Override
+	public void locationUpdate(LatLon l) {
+		if(!Algoritms.objectEquals(l, this.lastKnownMapLocation)){
+			lastKnownMapLocation = l;
+			searchTransport();			
+		}
 	}
 	
 	public String getSearchArea(){

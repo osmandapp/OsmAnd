@@ -830,69 +830,108 @@ public class OsmandSettings {
 
 	public static final String LAST_SEARCHED_REGION = "last_searched_region"; //$NON-NLS-1$
 	public static final String LAST_SEARCHED_CITY = "last_searched_city"; //$NON-NLS-1$
+	public static final String LAST_SEARCHED_CITY_NAME = "last_searched_city_name"; //$NON-NLS-1$
 	public static final String lAST_SEARCHED_POSTCODE= "last_searched_postcode"; //$NON-NLS-1$
 	public static final String LAST_SEARCHED_STREET = "last_searched_street"; //$NON-NLS-1$
 	public static final String LAST_SEARCHED_BUILDING = "last_searched_building"; //$NON-NLS-1$
 	public static final String LAST_SEARCHED_INTERSECTED_STREET = "last_searched_intersected_street"; //$NON-NLS-1$
+	public static final String LAST_SEARCHED_LAT = "last_searched_lat"; //$NON-NLS-1$
+	public static final String LAST_SEARCHED_LON = "last_searched_lon"; //$NON-NLS-1$
+	
+	public LatLon getLastSearchedPoint(){
+		if(globalPreferences.contains(LAST_SEARCHED_LAT) && globalPreferences.contains(LAST_SEARCHED_LON)){
+			return new LatLon(globalPreferences.getFloat(LAST_SEARCHED_LAT, 0), 
+					globalPreferences.getFloat(LAST_SEARCHED_LON, 0));
+		}
+		return null;
+	}
+	
+	public boolean setLastSearchedPoint(LatLon l){
+		if(l == null){
+			return globalPreferences.edit().remove(LAST_SEARCHED_LAT).remove(LAST_SEARCHED_LON).commit();
+		} else {
+			return setLastSearchedPoint(l.getLatitude(), l.getLongitude());
+		}
+	}
+	
+	public boolean setLastSearchedPoint(double lat, double lon){
+		return globalPreferences.edit().putFloat(LAST_SEARCHED_LAT, (float) lat).
+			putFloat(LAST_SEARCHED_LON, (float) lon).commit();
+	}
 
 	public String getLastSearchedRegion() {
 		return globalPreferences.getString(LAST_SEARCHED_REGION, ""); //$NON-NLS-1$
 	}
 
-	public boolean setLastSearchedRegion(String region) {
-		Editor edit = globalPreferences.edit().putString(LAST_SEARCHED_REGION, region).putLong(LAST_SEARCHED_CITY, -1).putString(LAST_SEARCHED_STREET,
-				"").putString(LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$ //$NON-NLS-2$
+	public boolean setLastSearchedRegion(String region, LatLon l) {
+		Editor edit = globalPreferences.edit().putString(LAST_SEARCHED_REGION, region).putLong(LAST_SEARCHED_CITY, -1).
+			putString(LAST_SEARCHED_CITY_NAME, "").putString(lAST_SEARCHED_POSTCODE, "").
+			putString(LAST_SEARCHED_STREET,"").putString(LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$ //$NON-NLS-2$
 		if (globalPreferences.contains(LAST_SEARCHED_INTERSECTED_STREET)) {
 			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
 		}
-		return edit.commit();
+		boolean res = edit.commit();
+		setLastSearchedPoint(l);
+		return res;
 	}
 	
 	public String getLastSearchedPostcode(){
 		return globalPreferences.getString(lAST_SEARCHED_POSTCODE, null);	
 	}
 	
-	public boolean setLastSearchedPostcode(String postcode){
+	public boolean setLastSearchedPostcode(String postcode, LatLon point){
 		Editor edit = globalPreferences.edit().putLong(LAST_SEARCHED_CITY, -1).putString(LAST_SEARCHED_STREET, "").putString( //$NON-NLS-1$
 				LAST_SEARCHED_BUILDING, "").putString(lAST_SEARCHED_POSTCODE, postcode); //$NON-NLS-1$
 		if(globalPreferences.contains(LAST_SEARCHED_INTERSECTED_STREET)){
 			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
 		}
-		return edit.commit();
+		boolean res = edit.commit();
+		setLastSearchedPoint(point);
+		return res;
 	}
 
 	public Long getLastSearchedCity() {
 		return globalPreferences.getLong(LAST_SEARCHED_CITY, -1);
 	}
+	
+	public String getLastSearchedCityName() {
+		return globalPreferences.getString(LAST_SEARCHED_CITY_NAME, "");
+	}
 
-	public boolean setLastSearchedCity(Long cityId) {
-		Editor edit = globalPreferences.edit().putLong(LAST_SEARCHED_CITY, cityId).putString(LAST_SEARCHED_STREET, "").putString( //$NON-NLS-1$
-				LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$
+	public boolean setLastSearchedCity(Long cityId, String name, LatLon point) {
+		Editor edit = globalPreferences.edit().putLong(LAST_SEARCHED_CITY, cityId).putString(LAST_SEARCHED_CITY_NAME, name).
+				putString(LAST_SEARCHED_STREET, "").putString(LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$
 		edit.remove(lAST_SEARCHED_POSTCODE);
 		if(globalPreferences.contains(LAST_SEARCHED_INTERSECTED_STREET)){
 			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
 		}
-		return edit.commit();
+		boolean res = edit.commit();
+		setLastSearchedPoint(point);
+		return res;
 	}
 
 	public String getLastSearchedStreet() {
 		return globalPreferences.getString(LAST_SEARCHED_STREET, ""); //$NON-NLS-1$
 	}
 
-	public boolean setLastSearchedStreet(String street) {
+	public boolean setLastSearchedStreet(String street, LatLon point) {
 		Editor edit = globalPreferences.edit().putString(LAST_SEARCHED_STREET, street).putString(LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$
 		if (globalPreferences.contains(LAST_SEARCHED_INTERSECTED_STREET)) {
 			edit.putString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
 		}
-		return edit.commit();
+		boolean res = edit.commit();
+		setLastSearchedPoint(point);
+		return res;
 	}
 
 	public String getLastSearchedBuilding() {
 		return globalPreferences.getString(LAST_SEARCHED_BUILDING, ""); //$NON-NLS-1$
 	}
 
-	public boolean setLastSearchedBuilding(String building) {
-		return globalPreferences.edit().putString(LAST_SEARCHED_BUILDING, building).remove(LAST_SEARCHED_INTERSECTED_STREET).commit();
+	public boolean setLastSearchedBuilding(String building, LatLon point) {
+		boolean res = globalPreferences.edit().putString(LAST_SEARCHED_BUILDING, building).remove(LAST_SEARCHED_INTERSECTED_STREET).commit();
+		setLastSearchedPoint(point);
+		return res;
 	}
 
 	public String getLastSearchedIntersectedStreet() {
@@ -902,13 +941,11 @@ public class OsmandSettings {
 		return globalPreferences.getString(LAST_SEARCHED_INTERSECTED_STREET, ""); //$NON-NLS-1$
 	}
 
-	public boolean setLastSearchedIntersectedStreet(String street) {
+	public boolean setLastSearchedIntersectedStreet(String street, LatLon l) {
+		setLastSearchedPoint(l);
 		return globalPreferences.edit().putString(LAST_SEARCHED_INTERSECTED_STREET, street).commit();
 	}
 
-	public boolean removeLastSearchedIntersectedStreet() {
-		return globalPreferences.edit().remove(LAST_SEARCHED_INTERSECTED_STREET).commit();
-	}
 
 	public static final String SELECTED_POI_FILTER_FOR_MAP = "selected_poi_filter_for_map"; //$NON-NLS-1$
 
