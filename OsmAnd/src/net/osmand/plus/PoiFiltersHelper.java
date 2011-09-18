@@ -81,16 +81,12 @@ public class PoiFiltersHelper {
 		list = new LinkedHashSet<String>();
 		list.add("place_of_worship"); //$NON-NLS-1$
 		list.add("internet_access"); //$NON-NLS-1$
-		list.add("bench"); //$NON-NLS-1$
 		list.add("embassy"); //$NON-NLS-1$
 		list.add("emergency_phone"); //$NON-NLS-1$
 		list.add("marketplace"); //$NON-NLS-1$
 		list.add("post_office"); //$NON-NLS-1$
-		list.add("recycling"); //$NON-NLS-1$
 		list.add("telephone"); //$NON-NLS-1$
 		list.add("toilets"); //$NON-NLS-1$
-		list.add("waste_basket"); //$NON-NLS-1$
-		list.add("waste_disposal"); //$NON-NLS-1$
 		types.put(AmenityType.OTHER, list);
 		filters.add(new PoiFilter(application.getString(R.string.poi_filter_for_tourists), null, types, application)); //$NON-NLS-1$
 		types.clear();
