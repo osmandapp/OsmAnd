@@ -1027,7 +1027,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			return true;
 		case R.id.map_navigate_to_point:
 			if (mapLayers.getNavigationLayer().getPointToNavigate() != null) {
-				navigateToPoint(null);
+				if(routingHelper.isRouteCalculated()){
+					routingHelper.setFinalAndCurrentLocation(null, routingHelper.getCurrentLocation(), routingHelper.getCurrentGPXRoute());
+				} else {
+					navigateToPoint(null);
+				}
 			} else {
     			navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
     		}
