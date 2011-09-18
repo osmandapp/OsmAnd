@@ -13,7 +13,7 @@ public class Boundary {
 	
 	private long boundaryId;
 	private String name;
-	private String adminLevel;
+	private int adminLevel;
 	
 	
 	// not necessary ready rings
@@ -82,25 +82,25 @@ public class Boundary {
 		this.name = name;
 	}
 
-	public String getAdminLevel() {
+	public int getAdminLevel() {
 		return adminLevel;
 	}
 
-	public void setAdminLevel(String adminLevel) {
+	public void setAdminLevel(int adminLevel) {
 		this.adminLevel = adminLevel;
 	}
 	
-	public List<Boundary> getSubboundaries() {
+	private List<Boundary> getSubboundaries() {
 		return subboundaries;
 	}
 	
-	public void addSubBoundary(Boundary subBoundary) {
+	private void addSubBoundary(Boundary subBoundary) {
 		if (subBoundary != null) {
 			subboundaries.add(subBoundary);
 		}
 	}
 
-	public void addSubBoundaries(Collection<Boundary> subBoundaries) {
+	private void addSubBoundaries(Collection<Boundary> subBoundaries) {
 		subboundaries.addAll(subBoundaries);
 	}
 
