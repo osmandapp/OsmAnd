@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="search_select_point">Seleziona</string>
+	<string name="local_index_description">Scarica nuovi dati, sposta, salva o cancella dati esistenti. \nDati attualmente nel dispositivo (%1$s disponibile):</string>
+	<string name="search_position_current_location_search">Cerca posizione...</string>
+	<string name="search_position_current_location_found">Posizione [Trovata]</string>
+	<string name="search_position_address">Address...</string>
+	<string name="search_position_favorites">Favoriti...</string>
+	<string name="search_position_undefined">Non definito</string>
+	<string name="search_position_fixed">Punto</string>
+	<string name="search_position_current_location">Posizione corrente...</string>
+	<string name="search_position_map_view">Ultima vista mappa</string>
+
+	<string name="select_search_position">Cerca vicino :</string>
+	<string name="context_menu_item_search">Cerca</string>
 	<string name="tip_recent_changes_0_6_7_t">Modifiche recenti versione 0.6.7 :
 \n\t- Manager dati offline (scaricare, cancellare e backup di dati offlina direttamente da Osmand)
 \n\t- Punti e gruppi Favoriti (categorizza, cancella, gestisci favoriti)
@@ -314,7 +327,7 @@
 	<string name="osmand_service">Servizio in background</string>
 	<string name="osmand_service_descr">Attiva il servizio in background service per usare OsmAnd a schermo spento</string>
 	<string name="fast_route_mode">Percorso più Veloce</string>
-	<string name="fast_route_mode_descr">Abilita per calcolare il percorso più veloce o disabilita per il percorso più corto </string>
+	<string name="fast_route_mode_descr">Abilita per calc. il percorso più veloce; disabilita per il percorso più corto</string>
 	<string name="tiles_to_download_estimated_size">Per lo zoom {0} download {1} tiles ({2} MB)</string>
 	<string name="context_menu_item_download_map">Download mappa</string>
 	<string name="select_max_zoom_preload_area">Seleziona lo zoom massimo per il preload</string>
@@ -410,13 +423,13 @@
 	<string name="background_router_service">Servizio di ricerca percorso</string>
 	<string name="off_router_service_no_gps_available">Il servizio in background OsmAnd di generazione percorso necessita del sistema di posizionamento attivato.</string>
 	<string name="routing_settings_descr">Generazione percorso</string>
-	<string name="routing_settings">Navigation</string>
+	<string name="routing_settings">Navigazione</string>
 	<string name="hide_poi_filter">Nascondi il filtro</string>
 	<string name="show_poi_filter">Mostra il filtro</string>
 	<string name="search_poi_filter">Filtro</string>
 	<string name="menu_mute_off">Voce attiva</string>
 	<string name="menu_mute_on">Voce non attiva</string>
-	<string name="voice_provider_descr">Scegliere la voce per il percorso</string>
+	<string name="voice_provider_descr">Scegliere la voce da utilizzare</string>
 	<string name="voice_provider">Dati voce</string>
 	<string name="voice_data_initializing">Dati voce in preparazione...</string>
 	<string name="voice_data_not_supported">La versione dei dati vocali differisce dalla versione supportata dall\'applicazione</string>
@@ -562,7 +575,7 @@
     <string name="auto_zoom_map">Zoom automatico mappa</string>
     <string name="additional_settings">Impostazioni aggiuntive</string>
     <string name="settings_preset_descr">Selezionare impostazioni predefinite</string>
-    <string name="settings_preset">>Modo applicazione</string>
+    <string name="settings_preset">Modo applicazione</string>
     <string name="settings">Impostazioni</string>
     <string name="save_current_track_descr">Salvare la traccia corrente sulla scheda SD</string>
     <string name="save_current_track">Salvare la traccia corrente</string>
