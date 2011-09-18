@@ -281,8 +281,8 @@ public class MapActivityActions {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				String sms = MessageFormat.format(getString(R.string.send_location_sms_pattern), shortOsmUrl, appLink);
-				String email = MessageFormat.format(getString(R.string.send_location_email_pattern), shortOsmUrl, appLink );
+				String sms = mapActivity.getString(R.string.send_location_sms_pattern, shortOsmUrl, appLink);
+				String email = mapActivity.getString(R.string.send_location_email_pattern, shortOsmUrl, appLink);
 				if(which == 0){
 					Intent intent = new Intent(Intent.ACTION_SEND);
 					intent.setType("vnd.android.cursor.dir/email"); //$NON-NLS-1$
