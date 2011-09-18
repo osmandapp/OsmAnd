@@ -1,5 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+<string name="auto_follow_route_never">Никогда</string>
+	<string name="choose_auto_follow_route">Настройки автовозрата карты</string>
+	<string name="choose_auto_follow_route_descr">Выберите время, через которое карта вернется к текущей позиции</string>
+	<string name="search_select_point">Выбрать</string>
+	<string name="local_index_description">Офлайн данные доступные на SD карточке. Вы можете загрузить новые, архивировать и удалить данные. Доступно %1$s.</string>
+	<string name="search_position_current_location_search">Поиск позиции...</string>
+	<string name="search_position_current_location_found">Точка [Найдена]</string>
+	<string name="search_position_address">Адрес...</string>
+	<string name="search_position_favorites">Избранные...</string>
+	<string name="search_position_undefined">Неопределенно</string>
+	<string name="search_position_fixed">Точка</string>
+	<string name="search_position_current_location">Текущая точка...</string>
+	<string name="search_position_map_view">Вид карты</string>
+	
+	<string name="select_search_position">Искать рядом :</string>
+	<string name="context_menu_item_search">Искать</string>
 	<string name="tip_recent_changes_0_6_7_t">Изменения в 0.6.7 : 
 \n\t- Менеджер офлайн данных (просмотр, удаление, создание архива данных прямо в Osmand)
 \n\t- Избранные точки и группы (категоризация точек, удаление и т.п.) 
@@ -46,7 +62,7 @@
 	<string name="local_index_no_items_to_do">Нет объектов, чтобы %1$s</string>	
     <string name="local_index_action_do">Вы собириаетесь %1$s %2$s объектов. Вы уверены?</string>
 	<string name="local_index_descr_title">Менеджер офлайн данных:</string>
-	<string name="local_index_description">Офлайн данные доступные на SD карточке. Вы можете загрузить новые, архивировать и удалить данные. Доступно %1$s.</string>
+	
 	<string name="local_index_mi_restore">Восстановить</string>
 	<string name="local_index_mi_backup">Архив</string>
 	<string name="local_index_mi_delete">Удалить</string>

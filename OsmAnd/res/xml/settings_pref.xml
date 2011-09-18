@@ -59,6 +59,8 @@
 		<CheckBoxPreference android:summary="@string/fast_route_mode_descr" android:title="@string/fast_route_mode"
 			android:key="fast_route_mode"></CheckBoxPreference>
 		<ListPreference android:title="@string/voice_provider" android:key="voice_provider" android:summary="@string/voice_provider_descr"></ListPreference>
+		<ListPreference android:key="auto_follow_route" android:title="@string/choose_auto_follow_route"
+			android:summary="@string/choose_auto_follow_route_descr"></ListPreference>
 		<ListPreference android:key="audio_stream" android:title="@string/choose_audio_stream"
 			android:summary="@string/choose_audio_stream_descr"></ListPreference>
 		<CheckBoxPreference android:summary="@string/use_osmand_routing_service_descr" android:title="@string/use_osmand_routing_service"

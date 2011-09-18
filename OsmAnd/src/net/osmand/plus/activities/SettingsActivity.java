@@ -224,6 +224,15 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		registerListPreference(osmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE, screen, entries, intValues);
 		
+		
+		intValues = new Integer[] { 0, 5, 10, 15, 20, 25, 30, 45, 60, 90};
+		entries = new String[intValues.length];
+		entries[0] = getString(R.string.auto_follow_route_never);
+		for (int i = 1; i < intValues.length; i++) {
+			entries[i] = (int) intValues[i] + " " + getString(R.string.int_seconds);
+		}
+		registerListPreference(osmandSettings.AUTO_FOLLOW_ROUTE, screen, entries, intValues);
+		
 		Float[] floatValues = new Float[] {0.6f, 0.8f, 1.0f, 1.2f, 1.5f};
 		entries = new String[floatValues.length];
 		for (int i = 0; i < floatValues.length; i++) {
@@ -246,6 +255,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			entries[i] = RouteService.values()[i].getName();
 		}
 		registerListPreference(osmandSettings.ROUTER_SERVICE, screen, entries, RouteService.values());
+		
+		
 		
 		
 		entries = new String[]{getString(R.string.gps_provider), getString(R.string.network_provider)};

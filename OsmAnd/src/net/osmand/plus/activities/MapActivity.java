@@ -87,7 +87,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private static final int SHOW_POSITION_DELAY = 2500;
 	private static final float ACCURACY_FOR_GPX_AND_ROUTING = 50;
 	
-	
+	private static final int AUTO_FOLLOW_MSG_ID = 8; 
 	
 	private long lastTimeAutoZooming = 0;
 	
@@ -108,8 +108,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	// Notification status
 	private NotificationManager mNotificationManager;
 	private int APP_NOTIFICATION_ID;
-	// handler to show/hide trackball position 
-	private Handler mapPositionHandler = null;
+	// handler to show/hide trackball position and to link map with delay
+	private Handler uiHandler = new Handler();
 	// Current screen orientation
 	private int currentScreenOrientation;
 	// 
@@ -121,10 +121,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 
 	private boolean isMapLinkedToLocation = false;
 	private ProgressDialog startProgressDialog;
-	
-	private boolean isMapLinkedToLocation(){
-		return isMapLinkedToLocation;
-	}
 	
 	private Notification getNotification(){
 		Intent notificationIndent = new Intent(this, MapActivity.class);
@@ -250,12 +246,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		mapLayers.getPoiMapLayer().setFilter(settings.getPoiFilterForMap((OsmandApplication) getApplication()));
 
 		backToLocation.setVisibility(View.INVISIBLE);
-		isMapLinkedToLocation = false;
-		if (routingHelper.isFollowingMode()) {
-			// by default turn off causing unexpected movements due to network establishing
-			// best to show previous location
-			isMapLinkedToLocation = true;
-		}
+		// by default turn off causing unexpected movements due to network establishing
+		// best to show previous location
+		setMapLinkedToLocation(false);
 
 		// if destination point was changed try to recalculate route 
 		if (routingHelper.isFollowingMode() && !Algoritms.objectEquals(settings.getPointToNavigate(), routingHelper.getFinalLocation())) {
@@ -574,7 +567,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		backToLocation.setVisibility(View.INVISIBLE);
 		PointLocationLayer locationLayer = mapLayers.getLocationLayer();
 		if(!isMapLinkedToLocation()){
-			isMapLinkedToLocation = true;
+			setMapLinkedToLocation(true);
 			if(locationLayer.getLastKnownLocation() != null){
 				Location lastKnownLocation = locationLayer.getLastKnownLocation();
 				AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
@@ -881,10 +874,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	
 	public void showAndHideMapPosition() {
 		mapView.setShowMapPosition(true);
-		if (mapPositionHandler == null) {
-			mapPositionHandler = new Handler();
-		}
-		Message msg = Message.obtain(mapPositionHandler, new Runnable() {
+		Message msg = Message.obtain(uiHandler, new Runnable() {
 			@Override
 			public void run() {
 				if (mapView.isShowMapPosition()) {
@@ -895,8 +885,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 
 		});
 		msg.what = SHOW_POSITION_MSG_ID;
-		mapPositionHandler.removeMessages(SHOW_POSITION_MSG_ID);
-		mapPositionHandler.sendMessageDelayed(msg, SHOW_POSITION_DELAY);
+		uiHandler.removeMessages(SHOW_POSITION_MSG_ID);
+		uiHandler.sendMessageDelayed(msg, SHOW_POSITION_DELAY);
 	}
 	
 	
@@ -905,9 +895,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	public void locationChanged(double newLatitude, double newLongitude, Object source) {
 		// when user start dragging 
 		if(mapLayers.getLocationLayer().getLastKnownLocation() != null){
-			if(isMapLinkedToLocation()){
-				isMapLinkedToLocation = false;
-			}
+			setMapLinkedToLocation(false);
 			if (backToLocation.getVisibility() != View.VISIBLE) {
 				runOnUiThread(new Runnable() {
 					@Override
@@ -1200,5 +1188,27 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		activity.startActivity(newIntent);
 	}
 
+	
+	private boolean isMapLinkedToLocation(){
+		return isMapLinkedToLocation;
+	}
+	
+	public void setMapLinkedToLocation(boolean isMapLinkedToLocation) {
+		if(!isMapLinkedToLocation){
+			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
+			if(autoFollow > 0){
+				uiHandler.removeMessages(AUTO_FOLLOW_MSG_ID);
+				Message msg = Message.obtain(uiHandler, new Runnable() {
+					@Override
+					public void run() {
+						backToLocationImpl();
+					}
+				});
+				msg.what = AUTO_FOLLOW_MSG_ID;
+				uiHandler.sendMessageDelayed(msg, autoFollow * 1000);
+			}
+		}
+		this.isMapLinkedToLocation = isMapLinkedToLocation;
+	}
 
 }

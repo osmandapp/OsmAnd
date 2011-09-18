@@ -503,6 +503,15 @@ public class OsmandSettings {
 	{
 		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.CAR, true);
 	}
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	// seconds to auto_follow 
+	public final CommonPreference<Integer> AUTO_FOLLOW_ROUTE = new IntPreference("auto_follow_route", 0, false);
+	{
+		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.CAR, 20);
+		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.BICYCLE, 25);
+		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 30);
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final int ROTATE_MAP_NONE = 0;
