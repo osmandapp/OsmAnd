@@ -62,7 +62,6 @@
         <string name="local_index_items_restored">Obnoveno %1$d položek z %2$d.</string>
         <string name="local_index_no_items_to_do">Žádné položky pro akci %1$s</string>
         <string name="local_index_action_do">Chystáte se %1$s %2$s položek. Jste si jisti?</string>
-        <string name="local_index_description">Správce offline dat:\nMůžete stáhnout, zálohovat, nebo smazat existujíci data.\nV telefonu je momentálně uloženo:</string>
         <string name="local_index_mi_restore">Obnovit</string>
         <string name="local_index_mi_backup">Zálohovat</string>
         <string name="local_index_mi_delete">Smazat</string>

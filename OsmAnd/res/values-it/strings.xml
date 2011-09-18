@@ -59,7 +59,6 @@
 	<string name="local_index_no_items_to_do">Nessun oggetto da %1$s</string>
 	<string name="local_index_action_do">Stai per %1$s %2$s oggetti/i. Continuare?</string>
 	<string name="local_index_descr_title">Manager Dati Offline:</string>
-	<string name="local_index_description">Scarica nuovi, elimina, salva in backup dati esistenti.\nDati presenti sul dispositivo:</string>
 	<string name="local_index_mi_restore">Ripristina...</string>
 	<string name="local_index_mi_backup">Backup...</string>
 	<string name="local_index_mi_delete">Elimina...</string>
