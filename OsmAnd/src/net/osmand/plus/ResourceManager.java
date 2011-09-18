@@ -42,10 +42,13 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 /**
  * Resource manager is responsible to work with all resources 
@@ -111,7 +114,17 @@ public class ResourceManager {
 		this.context = context;
 		this.renderer = new MapRenderRepositories(context);
 		asyncLoadingTiles.start();
+		
 		resetStoreDirectory();
+		
+		WindowManager mgr = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+		DisplayMetrics dm = new DisplayMetrics();
+		mgr.getDefaultDisplay().getMetrics(dm);
+		// Only 8 MB (from 16 Mb whole mem) available for images : image 64K * 128 = 8 MB (8 bit), 64 - 16 bit, 32 - 32 bit
+		// at least 3*9?
+		float tiles = (dm.widthPixels / 256 + 2) * (dm.heightPixels / 256 + 2) * 3;
+		System.out.println("Tiles ! " + tiles);
+		maxImgCacheSize = (int) (tiles) ; 
 	}
 
 	public void resetStoreDirectory() {
@@ -220,51 +233,26 @@ public class ResourceManager {
 	}
 
 	// introduce cache in order save memory
-	private int insertString(char[] ar, int offset, String s) {
-		for (int j = 0; j < s.length(); j++) {
-			ar[offset++] = s.charAt(j);
-		}
-		return offset;
-	}
+	
 	protected StringBuilder builder = new StringBuilder(40);
 	protected char[] tileId = new char[120];
-	public synchronized String calculateTileId(ITileSource map, int x, int y, int zoom){
-		if(false){
-			// performance improve ?
-			int ind = 0;
-			String mapName = map == null ? TEMP_SOURCE_TO_LOAD : map.getName();
-			ind = insertString(tileId, ind, mapName);
-			if (map instanceof SQLiteTileSource) {
-				tileId[ind++] = '@';
-			} else {
-				tileId[ind++] = '/';
-			}
-			ind = insertString(tileId, ind, Integer.toString(zoom));
-			tileId[ind++] = '/';
-			ind = insertString(tileId, ind, Integer.toString(x));
-			tileId[ind++] = '/';
-			ind = insertString(tileId, ind, Integer.toString(y));
-			ind = insertString(tileId, ind, map == null ? ".jpg" : map.getTileFormat()); //$NON-NLS-1$
-			ind = insertString(tileId, ind, ".tile"); //$NON-NLS-1$
-			return new String(tileId, 0, ind);
+
+	public synchronized String calculateTileId(ITileSource map, int x, int y, int zoom) {
+		builder.setLength(0);
+		if (map == null) {
+			builder.append(TEMP_SOURCE_TO_LOAD);
 		} else {
-
-			builder.setLength(0);
-			if (map == null) {
-				builder.append(TEMP_SOURCE_TO_LOAD);
-			} else {
-				builder.append(map.getName());
-			}
-
-			if (map instanceof SQLiteTileSource) {
-				builder.append('@');
-			} else {
-				builder.append('/');
-			}
-			builder.append(zoom).append('/').append(x).append('/').append(y)
-					.append(map == null ? ".jpg" : map.getTileFormat()).append(".tile"); //$NON-NLS-1$ //$NON-NLS-2$
-			return builder.toString();
+			builder.append(map.getName());
 		}
+
+		if (map instanceof SQLiteTileSource) {
+			builder.append('@');
+		} else {
+			builder.append('/');
+		}
+		builder.append(zoom).append('/').append(x).append('/').append(y).
+				append(map == null ? ".jpg" : map.getTileFormat()).append(".tile"); //$NON-NLS-1$ //$NON-NLS-2$
+		return builder.toString();
 	}
 	
 
