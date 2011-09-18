@@ -60,7 +60,7 @@ public class AnimateDraggingMapThread {
 					tileView.rotateToAnimate(rotationDiff / 5 + tileView.getRotate());
 				}
 			}
-		} while (conditionToCountinue);
+		} while (conditionToCountinue && tileView.isMapRotateEnabled());
 	}
 	
 
