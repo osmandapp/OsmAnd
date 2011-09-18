@@ -17,19 +17,20 @@ public class CarRouter extends VehicleRouter {
 		autoNotDefinedValues.put("motorway_link", 80d);
 		autoNotDefinedValues.put("trunk", 100d);
 		autoNotDefinedValues.put("trunk_link", 80d);
-		autoNotDefinedValues.put("primary", 65d);
+		autoNotDefinedValues.put("primary", 65d);//generally linking larger towns.
 		autoNotDefinedValues.put("primary_link", 45d);
-		autoNotDefinedValues.put("secondary", 50d);
+		autoNotDefinedValues.put("secondary", 50d);//generally linking smaller towns and villages
 		autoNotDefinedValues.put("secondary_link", 40d);
-		autoNotDefinedValues.put("tertiary", 35d);
+		autoNotDefinedValues.put("tertiary", 35d);//important urban roads
 		autoNotDefinedValues.put("tertiary_link", 30d);
-		autoNotDefinedValues.put("residential", 30d);
-		autoNotDefinedValues.put("road", 30d);
-		autoNotDefinedValues.put("service", 20d);
-		autoNotDefinedValues.put("unclassified", 20d);
-		autoNotDefinedValues.put("track", 20d);
-		autoNotDefinedValues.put("path", 20d);
-		autoNotDefinedValues.put("living_street", 20d);
+		autoNotDefinedValues.put("unclassified", 30d);//lowest form of grid network, usually 90% of urban roads
+		autoNotDefinedValues.put("road", 30d);//road = no type, no review and may be not accurate
+		autoNotDefinedValues.put("residential", 20d);//primarily for access to properties, small roads with 1/2 intersections
+		autoNotDefinedValues.put("service", 15d);//parking + private roads
+		autoNotDefinedValues.put("track", 15d);//very bad roads
+		autoNotDefinedValues.put("path", 10d);//may not be usable by cars!!
+		autoNotDefinedValues.put("living_street", 10d);//too small for cars usually
+		//car are able to enter in highway=pedestrian with restrictions
 
 		autoPriorityValues.put("motorway", 1.5);
 		autoPriorityValues.put("motorway_link", 0.9);
@@ -41,13 +42,13 @@ public class CarRouter extends VehicleRouter {
 		autoPriorityValues.put("secondary_link", 0.9d);
 		autoPriorityValues.put("tertiary", 0.85d);
 		autoPriorityValues.put("tertiary_link", 0.85d);
-		autoPriorityValues.put("residential", 0.7d);
-		autoPriorityValues.put("service", 0.6d);
-		autoPriorityValues.put("unclassified", 0.4d);
+		autoPriorityValues.put("unclassified", 0.7d);
+		autoPriorityValues.put("residential", 0.4d);
 		autoPriorityValues.put("road", 0.4d);
+		autoPriorityValues.put("service", 0.2d);
 		autoPriorityValues.put("track", 0.2d);
-		autoPriorityValues.put("path", 0.2d);
-		autoPriorityValues.put("living_street", 0.5d);
+		autoPriorityValues.put("path", 0.1d);
+		autoPriorityValues.put("living_street", 0.1d);
 	}
 
 	public boolean acceptLine(TagValuePair pair) {
