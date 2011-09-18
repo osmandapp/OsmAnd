@@ -1,5 +1,30 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="search_select_point">Vybrať</string>
+	<string name="local_index_description">Stiahnite nové, zálohujte alebo zmažte existujúce údaje. \nAktuálne offline údaje v zariadení (%1$s dostupných):</string>
+	<string name="search_position_current_location_search">Hľadať umiestnenie...</string>
+	<string name="search_position_current_location_found">Umiestnenie [Nájdené]</string>
+	<string name="search_position_address">Adresa...</string>
+	<string name="search_position_favorites">Obľúbené...</string>
+	<string name="search_position_undefined">Neurčené</string>
+	<string name="search_position_fixed">Pevné</string>
+	<string name="search_position_current_location">Aktuálne umiestnenie...</string>
+	<string name="search_position_map_view">Posledné mapové zobrazenie</string>
+	
+	<string name="select_search_position">Hľadať v okolí:</string>
+	<string name="context_menu_item_search">Hľadať</string>
+	<string name="tip_recent_changes_0_6_7_t">Novinky vo verzii 0.6.7 :
+\n\t- Manažér offline údajov (sťahovanie, mazanie a záloha offline dát priamo v Osmande)
+\n\t- Obľúbené body a skupiny (kategorizácia, mazanie a organizácia obľúbených bodov)
+\n\t- GPX prieskumník v aplikácii (zobrazenie stôp, vzdialenosti, priemernej rýchlosti, stúpania, atď.)
+\n\t- GPX navigácia (užitočné možnosti, pokračovanie v navigovaní po páde, podpora kruhových objazdov)
+\n\t- Funkcia na uloženie cesty do GPX stopy, pre neskoršie použitie offline
+\n\t- Vylepšenie GPX stopovania  (filtrovanie niektorých nepresných umiestnení a uloženie presnosti/stúpania/rýchlosti)
+\n\t- Nahrávanie GPX pre OSM komunitu (http://download.osmand.net/gpx/)
+\n\t- Vylepšenie vektorového vykresľovania
+\n\t- Vylepšenie TTS jadra (oznamovanie presnej vzdialenosti, povolenie míľ)
+\n\t- Oprava chýb
+	</string>
 	<string name="save_route_dialog_title">Uložiť cestu ako GPX stopu</string>
 	<string name="route_successfully_saved_at">Cesta je úspešne uložená v \'%1$s\'.</string>
 	<string name="filename_input">Názov súboru: </string>
@@ -35,7 +60,6 @@
 	<string name="local_index_no_items_to_do">Žiadne položky pre akciu: %1$s</string>
 	<string name="local_index_action_do">Chcete %1$s %2$s položiek. Ste si istý?</string>
 	<string name="local_index_descr_title">Správca offline údajov:</string>
-	<string name="local_index_description">Stiahnite nové, zálohujte alebo vymažte existujúce údaje.\nAktuálne offline údaje v zariadení:</string>
 	<string name="local_index_mi_restore">Obnoviť</string>
 	<string name="local_index_mi_backup">Zálohovať</string>
 	<string name="local_index_mi_delete">Vymazať</string>
