@@ -870,13 +870,14 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		}
 
 		int j = 0;
-		for (; j < cities.size(); j++) {
+		int csize = cities.size(); 
+		for (; j < csize; j++) {
 			City c = cities.get(j);
 			if (c.getType() != CityType.CITY && c.getType() != CityType.TOWN) {
 				break;
 			}
 		}
-		progress.startTask(Messages.getString("IndexCreator.SERIALIZING_ADRESS"), j + ((cities.size() - j) / 100 + 1)); //$NON-NLS-1$
+		progress.startTask(Messages.getString("IndexCreator.SERIALIZING_ADRESS"), j + ((csize - j) / 100 + 1)); //$NON-NLS-1$
 
 		Map<String, Set<Street>> postcodes = new TreeMap<String, Set<Street>>();
 		boolean writeCities = true;
@@ -891,7 +892,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 
 		// write cities and after villages
 		writer.startCityIndexes(false);
-		for (int i = 0; i < cities.size(); i++) {
+		for (int i = 0; i < csize; i++) {
 			City c = cities.get(i);
 			List<City> listSuburbs = null;
 			for (City suburb : suburbs) {
@@ -904,7 +905,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			}
 			if (writeCities) {
 				progress.progress(1);
-			} else if ((cities.size() - i) % 100 == 0) {
+			} else if ((csize - i) % 100 == 0) {
 				progress.progress(1);
 			}
 			if (writeCities && c.getType() != CityType.CITY && c.getType() != CityType.TOWN) {
@@ -1166,7 +1167,4 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		stat.close();
 		return cities;
 	}
-
-
-
 }
