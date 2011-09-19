@@ -352,7 +352,7 @@ public class IndexCreator {
 	public void generateIndexes(File readFile, IProgress progress, IOsmStorageFilter addFilter, MapZooms mapZooms,
 			MapRenderingTypes renderingTypes) throws IOException, SAXException, SQLException, InterruptedException {
 		if(LevelDBAccess.load()){
-			dialect = DBDialect.NOSQL;
+//			dialect = DBDialect.NOSQL;
 		}
 		
 		if (renderingTypes == null) {
@@ -624,8 +624,10 @@ public class IndexCreator {
 		creator.setZoomWaySmothness(2);
 		MapRenderingTypes rt = MapRenderingTypes.getDefault();// new MapRenderingTypes("/home/victor/projects/OsmAnd/data/testdata/roads_rendering_types.xml");
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
-//		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
-		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/mecklenburg-vorpommern.osm.pbf"),
+		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
+//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/mecklenburg-vorpommern.osm.pbf"),
+//				new ConsoleProgressImplementation(1), null, zooms, rt);
+		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/download/RU-MOW.osm.bz2"),
 				new ConsoleProgressImplementation(1), null, zooms, rt);
 		
 //		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes3.tmp.odb"));

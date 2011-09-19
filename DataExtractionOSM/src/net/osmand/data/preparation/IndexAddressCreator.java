@@ -254,37 +254,49 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			int adminLevel = 8;
 			try {
 				String tag = e.getTag(OSMTagKey.ADMIN_LEVEL);
-				if(tag == null){
+				if (tag == null) {
 					return;
 				}
 				adminLevel = Integer.parseInt(tag);
 			} catch (NumberFormatException ex) {
 				return;
 			}
-			
+			if (adminLevel < 4) {
+				return;
+			}
+
 			Boundary boundary = extractBoundary(e, ctx);
 			if (boundary != null && boundary.getCenterPoint() != null && !Algoritms.isEmpty(boundary.getName())) {
 				boundary.setAdminLevel(adminLevel);
 				LatLon point = boundary.getCenterPoint();
-				boolean cityFound = false;
-				for (City c : cityManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
+				City cityFound = null;
+				List<City> citiesToSearch = new ArrayList<City>();
+				citiesToSearch.addAll(cityManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3));
+				citiesToSearch.addAll(cityVillageManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3));
+
+				String boundaryName = boundary.getName().toLowerCase();
+				for (City c : citiesToSearch) {
 					if (boundary.containsPoint(c.getLocation())) {
-						if (boundary.getName().equalsIgnoreCase(c.getName())) {
-							putCityBoundary(boundary, c);
-							cityFound = true;
+						if (boundaryName.equalsIgnoreCase(c.getName())) {
+							cityFound = c;
+							break;
 						}
 					}
 				}
-				// TODO mark all suburbs inside city as is_in tag (!) or use another solution
-				if (!cityFound) {
-					for (City c : cityVillageManager.getClosestObjects(point.getLatitude(), point.getLongitude(), 3)) {
+				if (cityFound != null) {
+					// try to find same name in the middle
+					for (City c : citiesToSearch) {
 						if (boundary.containsPoint(c.getLocation())) {
-							if (boundary.getName().equalsIgnoreCase(c.getName())) {
-								putCityBoundary(boundary, c);
-								cityFound = true;
+							String lower = c.getName().toLowerCase();
+							if (boundaryName.startsWith(lower) || boundaryName.endsWith(lower) || boundaryName.contains(" " + lower + " ")) {
+								cityFound = c;
+								break;
 							}
 						}
 					}
+				}
+				if (cityFound != null) {
+					putCityBoundary(boundary, cityFound);
 				}
 			}
 		}
@@ -293,27 +305,35 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	private void putCityBoundary(Boundary boundary, City c) {
 		final Boundary oldBoundary = cityBoundaries.get(c);
 		if (oldBoundary != null) {
-			if (oldBoundary.getAdminLevel() < boundary.getAdminLevel()) {
+			// try to found the biggest area (not small center district)
+			if (oldBoundary.getAdminLevel() > boundary.getAdminLevel()) {
 				cityBoundaries.put(c, boundary);
+			} else if(boundary.getName().equalsIgnoreCase(c.getName()) && 
+					!oldBoundary.getName().equalsIgnoreCase(c.getName())){
+				cityBoundaries.put(c, boundary);
+			} else if(oldBoundary.getAdminLevel() == boundary.getAdminLevel() && 
+					oldBoundary != boundary && boundary.getName().equalsIgnoreCase(oldBoundary.getName())){
+				if(!oldBoundary.isClosedWay() && !boundary.isClosedWay()){
+					oldBoundary.getInnerWays().addAll(boundary.getInnerWays());
+					oldBoundary.getOuterWays().addAll(boundary.getOuterWays());
+				}
 			}
 		} else {
 			cityBoundaries.put(c, boundary);
 		}
 	}
 
-
 	private boolean isBoundary(Entity e) {
 		return "administrative".equals(e.getTag(OSMTagKey.BOUNDARY)) && (e instanceof Relation || e instanceof Way);
 	}
 	
-
 	private Boundary extractBoundary(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		if (isBoundary(e)) {
 			Boundary boundary = null;
 			if (e instanceof Relation) {
 				Relation i = (Relation) e;
 				ctx.loadEntityData(i, true);
-				boundary = new Boundary();
+				boundary = new Boundary(true);
 				if (i.getTag(OSMTagKey.NAME) != null) {
 					boundary.setName(i.getTag(OSMTagKey.NAME));
 				}
@@ -336,15 +356,18 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				}
 			} else if (e instanceof Way) {
 				if (!visitedBoundaryWays.contains(e.getId())) {
-					boundary = new Boundary();
+					List<Long> nodeIds = ((Way) e).getNodeIds();
+					boolean closed = false;
+					if(nodeIds.size() > 0){
+						closed = Algoritms.objectEquals(nodeIds.get(0), nodeIds.get(nodeIds.size() - 1));
+					}
+					boundary = new Boundary(closed);
 					if (e.getTag(OSMTagKey.NAME) != null) {
 						boundary.setName(e.getTag(OSMTagKey.NAME));
 					}
 					boundary.setBoundaryId(e.getId());
 					boundary.getOuterWays().add((Way) e);
-
 				}
-
 			}
 			return boundary;
 		} else {
@@ -555,7 +578,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		nearestObjects.addAll(cityVillageManager.getClosestObjects(location.getLatitude(),location.getLongitude()));
 		for (City c : nearestObjects) {
 			Boundary boundary = cityBoundaries.get(c);
-			if (isInNames.contains(c.getName()) || boundary.containsPoint(location)) {
+			if (isInNames.contains(c.getName()) || (boundary != null && boundary.containsPoint(location))) {
 				result.add(c);
 			}
 		}

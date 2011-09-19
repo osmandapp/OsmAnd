@@ -58,7 +58,9 @@ public enum DBDialect {
 	
 	public void commitDatabase(Object connection) throws SQLException {
 		if(DBDialect.NOSQL != this){
-			((Connection) connection).commit();
+			if (!((Connection) connection).getAutoCommit()) {
+				((Connection) connection).commit();
+			}
 		} else {
 			
 		}

@@ -1116,7 +1116,7 @@ public class BinaryMapIndexReader {
 
 	
 	public static void main(String[] args) throws IOException {
-		RandomAccessFile raf = new RandomAccessFile(new File("/home/victor/projects/OsmAnd/download/384/Spain_europe_1.obf"), "r");
+		RandomAccessFile raf = new RandomAccessFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/Ru-mow.obf"), "r");
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
 		System.out.println("VERSION " + reader.getVersion()); //$NON-NLS-1$
 		long time = System.currentTimeMillis();
@@ -1141,11 +1141,16 @@ public class BinaryMapIndexReader {
 		List<City> cs = reader.getCities(reg, null);
 		for(City c : cs){
 			int buildings = 0;
-//			reader.preloadStreets(c);
-//			for(Street s : c.getStreets()){
+			reader.preloadStreets(c, null);
+			for(Street s : c.getStreets()){
+				if(s.getName().toLowerCase().startsWith("заре")){
+					System.out.println("  " + s.getName());
+				} else if(s.getName().toLowerCase().contains("инстит")){
+					System.out.println("  " + s.getName());
+				}
 //				reader.preloadBuildings(s);
 //				buildings += s.getBuildings().size();
-//			}
+			}
 			System.out.println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings + " " + c.getEnName());
 		}
 //		List<PostCode> postcodes = reader.getPostcodes(reg);
