@@ -10,11 +10,9 @@ import android.os.Message;
 
 public class ProgressDialogImplementation implements IProgress {
 	
-	private static final float deltaToChange = 0.023f;
 	private String taskName;
 	private int progress;
 	private int work;
-	private int deltaWork;
 	private String message = ""; //$NON-NLS-1$
 	
 	private Handler mViewUpdateHandler;
@@ -35,6 +33,13 @@ public class ProgressDialogImplementation implements IProgress {
 				super.handleMessage(msg);
 				if(dialog != null){
 					dialog.setMessage(message);
+					if (isIndeterminate()) {
+						dialog.setIndeterminate(true);
+					} else {
+						dialog.setIndeterminate(false);
+						dialog.setMax(work);
+					}
+					dialog.show();
 				}
 			}
 		};	
@@ -43,12 +48,34 @@ public class ProgressDialogImplementation implements IProgress {
 	public ProgressDialogImplementation(ProgressDialog dlg, boolean cancelable){
 		this(dlg.getContext(), dlg, cancelable);
 	}
-	
-	
+
 	public ProgressDialogImplementation(final ProgressDialog dlg){
 		this(dlg, false);
 	}
-	
+
+	public static ProgressDialogImplementation createProgressDialog(Context ctx, String title, String message, int style) {
+		ProgressDialog dlg = new ProgressDialog(ctx);
+		dlg.setTitle(title);
+		dlg.setMessage(message);
+		dlg.setIndeterminate(style == ProgressDialog.STYLE_HORIZONTAL); // re-set in mViewUpdateHandler.handleMessage above
+		dlg.setCancelable(true);
+		// we'd prefer a plain progress bar without numbers,
+		// but that is only available starting from API level 11
+		try {
+			ProgressDialog.class
+				.getMethod("setProgressNumberFormat", new Class[] { String.class })
+				.invoke(dlg, (String)null);
+		} catch (NoSuchMethodException nsme) {
+			// failure, must be older device
+		} catch (IllegalAccessException nsme) {
+			// failure, must be older device
+		} catch (java.lang.reflect.InvocationTargetException nsme) {
+			// failure, must be older device
+		}
+		dlg.setProgressStyle(style);
+		return new ProgressDialogImplementation(dlg, true);
+	}
+
 	public void setDialog(ProgressDialog dlg){
 		if(dlg != null){
 			if(cancelable){
@@ -80,35 +107,18 @@ public class ProgressDialogImplementation implements IProgress {
 
 	@Override
 	public void progress(int deltaWork) {
-		this.deltaWork += deltaWork;
-		if(change(progress + this.deltaWork)){
-			this.progress += this.deltaWork;
-			this.deltaWork = 0;
-			updateMessage();
+		this.progress += deltaWork;
+		if (!isIndeterminate() && dialog != null) {
+			dialog.setProgress(this.progress);
 		}
 	}
 	
-	private void updateMessage() {
-		message = taskName + String.format(" %.1f %%", this.progress * 100f / ((float) this.work)); //$NON-NLS-1$
-		mViewUpdateHandler.sendEmptyMessage(0);
-	}
-
-	public boolean change(int newProgress) {
-		if (newProgress < progress) {
-			return false;
-		}
-		if ((newProgress - progress) / ((float) work) < deltaToChange) {
-			return false;
-		}
-		return true;
-	}
 	@Override
 	public void remaining(int remainingWork) {
-		if(change(work - remainingWork)){
-			this.progress = work - remainingWork;
-			updateMessage();
+		this.progress = work - remainingWork;
+		if (!isIndeterminate() && dialog != null) {
+			dialog.setProgress(this.progress);
 		}
-		deltaWork = work - remainingWork - this.progress;
 	}
 	
 	public boolean isIndeterminate(){
@@ -121,19 +131,19 @@ public class ProgressDialogImplementation implements IProgress {
 			taskName = ""; //$NON-NLS-1$
 		}
 		message = taskName;
-		mViewUpdateHandler.sendEmptyMessage(0);
 		this.taskName = taskName;
 		startWork(work);
+		mViewUpdateHandler.sendEmptyMessage(0);
 	}
 
 	@Override
 	public void finishTask() {
+		work = -1;
+		progress = 0;
 		if (taskName != null) {
 			message = context.getResources().getString(R.string.finished_task) +" : "+ taskName; //$NON-NLS-1$
 			mViewUpdateHandler.sendEmptyMessage(0);
 		}
-		work = -1;
-		progress = 0;
 	}
 	@Override
 	public boolean isInterrupted() {
@@ -149,11 +159,10 @@ public class ProgressDialogImplementation implements IProgress {
 	@Override
 	public void startWork(int work) {
 		this.work = work;
-		if(this.work == 0){
+		if (this.work == 0) {
 			this.work = 1;
 		}
 		progress = 0;
-		deltaWork = 0;
 	}
 
 	@Override

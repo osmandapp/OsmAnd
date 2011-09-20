@@ -479,11 +479,13 @@ private class DownloadIndexesAsyncTask extends  AsyncTask<String, Object, String
 		
 		@Override
 		protected void onPreExecute() {
-			progressFileDlg = ProgressDialog.show(DownloadIndexActivity.this, getString(R.string.downloading),
-					getString(R.string.downloading_file), true, true);
 			downloadFileHelper.setInterruptDownloading(false);
-			progressFileDlg.show();
-			progress = new ProgressDialogImplementation(progressFileDlg, true);
+			progress = ProgressDialogImplementation.createProgressDialog(
+				DownloadIndexActivity.this,
+				getString(R.string.downloading),
+				getString(R.string.downloading_file),
+				ProgressDialog.STYLE_HORIZONTAL);
+			progressFileDlg = ((ProgressDialogImplementation)progress).getDialog();
 			progressFileDlg.setOnCancelListener(new DialogInterface.OnCancelListener() {
 				@Override
 				public void onCancel(DialogInterface dialog) {
