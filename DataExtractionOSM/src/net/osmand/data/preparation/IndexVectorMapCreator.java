@@ -282,7 +282,8 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 			List<Way> l = new ArrayList<Way>();
 			l.add(w);
 			boolean add = true;
-			for (int k = 0; k < incompletedRings.size();) {
+			int iRsize = incompletedRings.size();
+			for (int k = 0; k < iRsize;) {
 				boolean remove = false;
 				List<Way> i = incompletedRings.get(k);
 				Way last = i.get(i.size() - 1);
@@ -576,7 +577,8 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				fs.close();
 			}
 			List<Node> wNodes = new ArrayList<Node>();
-			for (int i = 0; i < wayNodes.size(); i += 2) {
+			int wNsize = wayNodes.size(); 
+			for (int i = 0; i < wNsize; i += 2) {
 				wNodes.add(new Node(wayNodes.get(i), wayNodes.get(i + 1), i == 0 ? startNode : endNode));
 			}
 			boolean skip = false;
@@ -605,7 +607,8 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		int minY = Integer.MAX_VALUE;
 		int maxY = Integer.MIN_VALUE;
 		int c = 0;
-		for (int i = 0; i < nodes.size(); i++) {
+		int nsize = nodes.size(); 
+		for (int i = 0; i < nsize; i++) {
 			if (nodes.get(i) != null) {
 				c++;
 				int x = (int) (MapUtils.getTileNumberX(zoom, nodes.get(i).getLongitude()) * 256d);

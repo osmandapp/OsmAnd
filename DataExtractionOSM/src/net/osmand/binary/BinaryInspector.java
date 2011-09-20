@@ -133,7 +133,8 @@ public class BinaryInspector {
 				BinaryIndexPart part = indexes[c].getIndexes().get(i);
 				if(part instanceof MapIndex){
 					List<MapRoot> roots = ((MapIndex) part).getRoots();
-					for(int j=0; j<roots.size(); j++){
+					int rsize = roots.size(); 
+					for(int j=0; j<rsize; j++){
 						partsSet[c].add((i+1f)+(j+1)/10f);
 					}
 				}
@@ -184,7 +185,8 @@ public class BinaryInspector {
 					List<MapRoot> toSkip = new ArrayList<MapRoot>();
 					int newL = 0;
 					int tagAndFieldSize = CodedOutputStream.computeTagSize(OsmandOdb.OsmAndMapIndex.LEVELS_FIELD_NUMBER) + 4;
-					for(int j=0; j<roots.size(); j++){
+					int rsize = roots.size(); 
+					for(int j=0; j<rsize; j++){
 						if (!partSet.contains(i + 1f + (j+1)*0.1f)) {
 							newL -= (roots.get(j).getLength() + tagAndFieldSize);
 							toSkip.add(roots.get(j));

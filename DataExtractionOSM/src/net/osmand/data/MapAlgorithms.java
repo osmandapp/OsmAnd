@@ -17,13 +17,14 @@ public class MapAlgorithms {
 		}
 		ArrayList<Integer> l = new ArrayList<Integer>();
 		int first = 0;
-		while(first < n.size()){
+		int nsize = n.size(); 
+		while(first < nsize){
 			if(n.get(first) != null){
 				break;
 			}
 			first++;
 		}
-		int last = n.size() - 1;
+		int last = nsize - 1;
 		while (last >= 0) {
 			if (n.get(last) != null) {
 				break;
@@ -54,7 +55,8 @@ public class MapAlgorithms {
 		}
 		simplifyDouglasPeucker(n, zoom, epsilon, l, first, last);
 		w.addNode(n.get(first));
-		for (int i = 0; i < l.size(); i++) {
+		int lsize = l.size();
+		for (int i = 0; i < lsize; i++) {
 			w.addNode(n.get(l.get(i)));
 		}
 		if (cycle) {
@@ -99,7 +101,6 @@ public class MapAlgorithms {
 	
 	public static boolean isClockwiseWay(Way w){
 		return isClockwiseWay(Collections.singletonList(w));
-		
 	}
 	
 	public static boolean isClockwiseWay(List<Way> ways){
@@ -120,12 +121,13 @@ public class MapAlgorithms {
 		for(Way w : ways){
 			List<Node> ns = w.getNodes();
 			int startInd = 0;
-			if(firstWay && ns.size() > 0){
+			int nssize = ns.size();
+			if(firstWay && nssize > 0){
 				prev = ns.get(0);
 				startInd = 1;
 				firstWay = false;
 			}
-			for(int i = startInd; i < ns.size();i++) {
+			for(int i = startInd; i < nssize;i++) {
 				Node next = ns.get(i);
 				double rlon = ray_intersect_lon(prev, next, lat, lon);
 				if(rlon != - 360d){
@@ -161,8 +163,6 @@ public class MapAlgorithms {
 		}
 		
 		return clockwiseSum >= 0;
-		
-		
 	}
 	
 	// try to intersect from left to right
@@ -194,8 +194,5 @@ public class MapAlgorithms {
 				}
 			}
 		}
-
 	}
-	
-
 }
