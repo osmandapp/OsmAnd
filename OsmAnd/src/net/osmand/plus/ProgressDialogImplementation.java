@@ -34,6 +34,7 @@ public class ProgressDialogImplementation implements IProgress {
 				if(dialog != null){
 					dialog.setMessage(message);
 					if (isIndeterminate()) {
+						dialog.setMax(0);
 						dialog.setIndeterminate(true);
 					} else {
 						dialog.setIndeterminate(false);
