@@ -21,6 +21,7 @@ import net.osmand.binary.OsmandOdb.StreetIndex;
 import net.osmand.binary.OsmandOdb.StreetIntersection;
 import net.osmand.binary.OsmandOdb.TransportRoute;
 import net.osmand.binary.OsmandOdb.TransportRouteStop;
+import net.osmand.binary.OsmandOdb.OsmAndCategoryTable.Builder;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.IndexConstants;
@@ -81,6 +82,8 @@ public class BinaryMapIndexWriter {
 	private final static int TRANSPORT_INDEX_INIT = 9;
 	private final static int TRANSPORT_STOPS_TREE = 10;
 	private final static int TRANSPORT_ROUTES = 11;
+	
+	private final static int POI_INDEX_INIT = 12;
 
 	public BinaryMapIndexWriter(final RandomAccessFile raf) throws IOException{
 		this.raf = raf;
@@ -731,6 +734,47 @@ public class BinaryMapIndexWriter {
 			st.addS(s);
 		}
 		codedOutStream.writeMessage(OsmAndTransportIndex.STRINGTABLE_FIELD_NUMBER, st.build());
+	}
+	
+	public void startWritePOIIndex(String name) throws IOException {
+		pushState(POI_INDEX_INIT, OSMAND_STRUCTURE_INIT);
+		codedOutStream.writeTag(OsmandOdb.OsmAndStructure.POIINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+		stackBounds.push(new Bounds(0, 0, 0, 0)); // for poi index tree
+		preserveInt32Size();
+		if(name != null){
+			codedOutStream.writeString(OsmandOdb.OsmAndTransportIndex.NAME_FIELD_NUMBER, name);
+		}
+	}
+	
+	public Map<String, Integer> writePOICategoriesTable(Map<String, Map<String, Integer>> categories) 
+					throws IOException {
+		checkPeekState(POI_INDEX_INIT);
+		Map<String, Integer> catIndexes  = new LinkedHashMap<String, Integer>();
+		int i = 0;
+		for(String cat : categories.keySet()){
+			Builder builder = OsmandOdb.OsmAndCategoryTable.newBuilder();
+			builder.setCategory(cat);
+			Map<String, Integer> subcatSource = categories.get(cat);
+			Map<String, Integer> subcats = new LinkedHashMap<String, Integer>(subcatSource);
+			int j = 0;
+			for (String s : subcats.keySet()) {
+				builder.addSubcategories(s);
+				subcatSource.put(s, j);
+				j++;
+			}
+			catIndexes.put(cat, i);
+			codedOutStream.writeMessage(OsmandOdb.OsmAndPoiIndex.CATEGORIESTABLE_FIELD_NUMBER, builder.build());
+			i++;
+		}
+		
+		return catIndexes;
+	}
+	
+	public void endWritePOIIndex() throws IOException {
+		popState(POI_INDEX_INIT);
+		int len = writeInt32Size();
+		stackBounds.pop();
+		System.out.println("POI INDEX SIZE : " + len);
 	}
 	
 	 

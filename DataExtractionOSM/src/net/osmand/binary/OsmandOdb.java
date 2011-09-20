@@ -10994,30 +10994,28 @@ public final class OsmandOdb {
     public boolean hasName() { return hasName; }
     public java.lang.String getName() { return name_; }
     
-    // required .StringTable categoryTable = 3;
-    public static final int CATEGORYTABLE_FIELD_NUMBER = 3;
-    private boolean hasCategoryTable;
-    private net.osmand.binary.OsmandOdb.StringTable categoryTable_;
-    public boolean hasCategoryTable() { return hasCategoryTable; }
-    public net.osmand.binary.OsmandOdb.StringTable getCategoryTable() { return categoryTable_; }
-    
-    // required .StringTable subcategoriesTable = 4;
-    public static final int SUBCATEGORIESTABLE_FIELD_NUMBER = 4;
-    private boolean hasSubcategoriesTable;
-    private net.osmand.binary.OsmandOdb.StringTable subcategoriesTable_;
-    public boolean hasSubcategoriesTable() { return hasSubcategoriesTable; }
-    public net.osmand.binary.OsmandOdb.StringTable getSubcategoriesTable() { return subcategoriesTable_; }
-    
-    // repeated .OsmAndPoiBox routes = 6;
-    public static final int ROUTES_FIELD_NUMBER = 6;
-    private java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiBox> routes_ =
+    // repeated .OsmAndCategoryTable categoriesTable = 3;
+    public static final int CATEGORIESTABLE_FIELD_NUMBER = 3;
+    private java.util.List<net.osmand.binary.OsmandOdb.OsmAndCategoryTable> categoriesTable_ =
       java.util.Collections.emptyList();
-    public java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiBox> getRoutesList() {
-      return routes_;
+    public java.util.List<net.osmand.binary.OsmandOdb.OsmAndCategoryTable> getCategoriesTableList() {
+      return categoriesTable_;
     }
-    public int getRoutesCount() { return routes_.size(); }
-    public net.osmand.binary.OsmandOdb.OsmAndPoiBox getRoutes(int index) {
-      return routes_.get(index);
+    public int getCategoriesTableCount() { return categoriesTable_.size(); }
+    public net.osmand.binary.OsmandOdb.OsmAndCategoryTable getCategoriesTable(int index) {
+      return categoriesTable_.get(index);
+    }
+    
+    // repeated .OsmAndPoiBox boxes = 6;
+    public static final int BOXES_FIELD_NUMBER = 6;
+    private java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiBox> boxes_ =
+      java.util.Collections.emptyList();
+    public java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiBox> getBoxesList() {
+      return boxes_;
+    }
+    public int getBoxesCount() { return boxes_.size(); }
+    public net.osmand.binary.OsmandOdb.OsmAndPoiBox getBoxes(int index) {
+      return boxes_.get(index);
     }
     
     // repeated .OsmAndPoiBoxData poiData = 7;
@@ -11033,14 +11031,13 @@ public final class OsmandOdb {
     }
     
     private void initFields() {
-      categoryTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
-      subcategoriesTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
     }
     public final boolean isInitialized() {
       if (!hasName) return false;
-      if (!hasCategoryTable) return false;
-      if (!hasSubcategoriesTable) return false;
-      for (net.osmand.binary.OsmandOdb.OsmAndPoiBox element : getRoutesList()) {
+      for (net.osmand.binary.OsmandOdb.OsmAndCategoryTable element : getCategoriesTableList()) {
+        if (!element.isInitialized()) return false;
+      }
+      for (net.osmand.binary.OsmandOdb.OsmAndPoiBox element : getBoxesList()) {
         if (!element.isInitialized()) return false;
       }
       return true;
@@ -11052,13 +11049,10 @@ public final class OsmandOdb {
       if (hasName()) {
         output.writeString(1, getName());
       }
-      if (hasCategoryTable()) {
-        output.writeMessage(3, getCategoryTable());
+      for (net.osmand.binary.OsmandOdb.OsmAndCategoryTable element : getCategoriesTableList()) {
+        output.writeMessage(3, element);
       }
-      if (hasSubcategoriesTable()) {
-        output.writeMessage(4, getSubcategoriesTable());
-      }
-      for (net.osmand.binary.OsmandOdb.OsmAndPoiBox element : getRoutesList()) {
+      for (net.osmand.binary.OsmandOdb.OsmAndPoiBox element : getBoxesList()) {
         output.writeMessage(6, element);
       }
       for (net.osmand.binary.OsmandOdb.OsmAndPoiBoxData element : getPoiDataList()) {
@@ -11077,15 +11071,11 @@ public final class OsmandOdb {
         size += com.google.protobuf.CodedOutputStream
           .computeStringSize(1, getName());
       }
-      if (hasCategoryTable()) {
+      for (net.osmand.binary.OsmandOdb.OsmAndCategoryTable element : getCategoriesTableList()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getCategoryTable());
+          .computeMessageSize(3, element);
       }
-      if (hasSubcategoriesTable()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getSubcategoriesTable());
-      }
-      for (net.osmand.binary.OsmandOdb.OsmAndPoiBox element : getRoutesList()) {
+      for (net.osmand.binary.OsmandOdb.OsmAndPoiBox element : getBoxesList()) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, element);
       }
@@ -11235,9 +11225,13 @@ public final class OsmandOdb {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
         }
-        if (result.routes_ != java.util.Collections.EMPTY_LIST) {
-          result.routes_ =
-            java.util.Collections.unmodifiableList(result.routes_);
+        if (result.categoriesTable_ != java.util.Collections.EMPTY_LIST) {
+          result.categoriesTable_ =
+            java.util.Collections.unmodifiableList(result.categoriesTable_);
+        }
+        if (result.boxes_ != java.util.Collections.EMPTY_LIST) {
+          result.boxes_ =
+            java.util.Collections.unmodifiableList(result.boxes_);
         }
         if (result.poiData_ != java.util.Collections.EMPTY_LIST) {
           result.poiData_ =
@@ -11262,17 +11256,17 @@ public final class OsmandOdb {
         if (other.hasName()) {
           setName(other.getName());
         }
-        if (other.hasCategoryTable()) {
-          mergeCategoryTable(other.getCategoryTable());
-        }
-        if (other.hasSubcategoriesTable()) {
-          mergeSubcategoriesTable(other.getSubcategoriesTable());
-        }
-        if (!other.routes_.isEmpty()) {
-          if (result.routes_.isEmpty()) {
-            result.routes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiBox>();
+        if (!other.categoriesTable_.isEmpty()) {
+          if (result.categoriesTable_.isEmpty()) {
+            result.categoriesTable_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndCategoryTable>();
           }
-          result.routes_.addAll(other.routes_);
+          result.categoriesTable_.addAll(other.categoriesTable_);
+        }
+        if (!other.boxes_.isEmpty()) {
+          if (result.boxes_.isEmpty()) {
+            result.boxes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiBox>();
+          }
+          result.boxes_.addAll(other.boxes_);
         }
         if (!other.poiData_.isEmpty()) {
           if (result.poiData_.isEmpty()) {
@@ -11310,27 +11304,15 @@ public final class OsmandOdb {
               break;
             }
             case 26: {
-              net.osmand.binary.OsmandOdb.StringTable.Builder subBuilder = net.osmand.binary.OsmandOdb.StringTable.newBuilder();
-              if (hasCategoryTable()) {
-                subBuilder.mergeFrom(getCategoryTable());
-              }
+              net.osmand.binary.OsmandOdb.OsmAndCategoryTable.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndCategoryTable.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
-              setCategoryTable(subBuilder.buildPartial());
-              break;
-            }
-            case 34: {
-              net.osmand.binary.OsmandOdb.StringTable.Builder subBuilder = net.osmand.binary.OsmandOdb.StringTable.newBuilder();
-              if (hasSubcategoriesTable()) {
-                subBuilder.mergeFrom(getSubcategoriesTable());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setSubcategoriesTable(subBuilder.buildPartial());
+              addCategoriesTable(subBuilder.buildPartial());
               break;
             }
             case 50: {
               net.osmand.binary.OsmandOdb.OsmAndPoiBox.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndPoiBox.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
-              addRoutes(subBuilder.buildPartial());
+              addBoxes(subBuilder.buildPartial());
               break;
             }
             case 58: {
@@ -11365,128 +11347,105 @@ public final class OsmandOdb {
         return this;
       }
       
-      // required .StringTable categoryTable = 3;
-      public boolean hasCategoryTable() {
-        return result.hasCategoryTable();
+      // repeated .OsmAndCategoryTable categoriesTable = 3;
+      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndCategoryTable> getCategoriesTableList() {
+        return java.util.Collections.unmodifiableList(result.categoriesTable_);
       }
-      public net.osmand.binary.OsmandOdb.StringTable getCategoryTable() {
-        return result.getCategoryTable();
+      public int getCategoriesTableCount() {
+        return result.getCategoriesTableCount();
       }
-      public Builder setCategoryTable(net.osmand.binary.OsmandOdb.StringTable value) {
+      public net.osmand.binary.OsmandOdb.OsmAndCategoryTable getCategoriesTable(int index) {
+        return result.getCategoriesTable(index);
+      }
+      public Builder setCategoriesTable(int index, net.osmand.binary.OsmandOdb.OsmAndCategoryTable value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        result.hasCategoryTable = true;
-        result.categoryTable_ = value;
+        result.categoriesTable_.set(index, value);
         return this;
       }
-      public Builder setCategoryTable(net.osmand.binary.OsmandOdb.StringTable.Builder builderForValue) {
-        result.hasCategoryTable = true;
-        result.categoryTable_ = builderForValue.build();
+      public Builder setCategoriesTable(int index, net.osmand.binary.OsmandOdb.OsmAndCategoryTable.Builder builderForValue) {
+        result.categoriesTable_.set(index, builderForValue.build());
         return this;
       }
-      public Builder mergeCategoryTable(net.osmand.binary.OsmandOdb.StringTable value) {
-        if (result.hasCategoryTable() &&
-            result.categoryTable_ != net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance()) {
-          result.categoryTable_ =
-            net.osmand.binary.OsmandOdb.StringTable.newBuilder(result.categoryTable_).mergeFrom(value).buildPartial();
-        } else {
-          result.categoryTable_ = value;
+      public Builder addCategoriesTable(net.osmand.binary.OsmandOdb.OsmAndCategoryTable value) {
+        if (value == null) {
+          throw new NullPointerException();
         }
-        result.hasCategoryTable = true;
+        if (result.categoriesTable_.isEmpty()) {
+          result.categoriesTable_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndCategoryTable>();
+        }
+        result.categoriesTable_.add(value);
         return this;
       }
-      public Builder clearCategoryTable() {
-        result.hasCategoryTable = false;
-        result.categoryTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
+      public Builder addCategoriesTable(net.osmand.binary.OsmandOdb.OsmAndCategoryTable.Builder builderForValue) {
+        if (result.categoriesTable_.isEmpty()) {
+          result.categoriesTable_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndCategoryTable>();
+        }
+        result.categoriesTable_.add(builderForValue.build());
+        return this;
+      }
+      public Builder addAllCategoriesTable(
+          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.OsmAndCategoryTable> values) {
+        if (result.categoriesTable_.isEmpty()) {
+          result.categoriesTable_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndCategoryTable>();
+        }
+        super.addAll(values, result.categoriesTable_);
+        return this;
+      }
+      public Builder clearCategoriesTable() {
+        result.categoriesTable_ = java.util.Collections.emptyList();
         return this;
       }
       
-      // required .StringTable subcategoriesTable = 4;
-      public boolean hasSubcategoriesTable() {
-        return result.hasSubcategoriesTable();
+      // repeated .OsmAndPoiBox boxes = 6;
+      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiBox> getBoxesList() {
+        return java.util.Collections.unmodifiableList(result.boxes_);
       }
-      public net.osmand.binary.OsmandOdb.StringTable getSubcategoriesTable() {
-        return result.getSubcategoriesTable();
+      public int getBoxesCount() {
+        return result.getBoxesCount();
       }
-      public Builder setSubcategoriesTable(net.osmand.binary.OsmandOdb.StringTable value) {
+      public net.osmand.binary.OsmandOdb.OsmAndPoiBox getBoxes(int index) {
+        return result.getBoxes(index);
+      }
+      public Builder setBoxes(int index, net.osmand.binary.OsmandOdb.OsmAndPoiBox value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        result.hasSubcategoriesTable = true;
-        result.subcategoriesTable_ = value;
+        result.boxes_.set(index, value);
         return this;
       }
-      public Builder setSubcategoriesTable(net.osmand.binary.OsmandOdb.StringTable.Builder builderForValue) {
-        result.hasSubcategoriesTable = true;
-        result.subcategoriesTable_ = builderForValue.build();
+      public Builder setBoxes(int index, net.osmand.binary.OsmandOdb.OsmAndPoiBox.Builder builderForValue) {
+        result.boxes_.set(index, builderForValue.build());
         return this;
       }
-      public Builder mergeSubcategoriesTable(net.osmand.binary.OsmandOdb.StringTable value) {
-        if (result.hasSubcategoriesTable() &&
-            result.subcategoriesTable_ != net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance()) {
-          result.subcategoriesTable_ =
-            net.osmand.binary.OsmandOdb.StringTable.newBuilder(result.subcategoriesTable_).mergeFrom(value).buildPartial();
-        } else {
-          result.subcategoriesTable_ = value;
-        }
-        result.hasSubcategoriesTable = true;
-        return this;
-      }
-      public Builder clearSubcategoriesTable() {
-        result.hasSubcategoriesTable = false;
-        result.subcategoriesTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
-        return this;
-      }
-      
-      // repeated .OsmAndPoiBox routes = 6;
-      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndPoiBox> getRoutesList() {
-        return java.util.Collections.unmodifiableList(result.routes_);
-      }
-      public int getRoutesCount() {
-        return result.getRoutesCount();
-      }
-      public net.osmand.binary.OsmandOdb.OsmAndPoiBox getRoutes(int index) {
-        return result.getRoutes(index);
-      }
-      public Builder setRoutes(int index, net.osmand.binary.OsmandOdb.OsmAndPoiBox value) {
+      public Builder addBoxes(net.osmand.binary.OsmandOdb.OsmAndPoiBox value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        result.routes_.set(index, value);
-        return this;
-      }
-      public Builder setRoutes(int index, net.osmand.binary.OsmandOdb.OsmAndPoiBox.Builder builderForValue) {
-        result.routes_.set(index, builderForValue.build());
-        return this;
-      }
-      public Builder addRoutes(net.osmand.binary.OsmandOdb.OsmAndPoiBox value) {
-        if (value == null) {
-          throw new NullPointerException();
+        if (result.boxes_.isEmpty()) {
+          result.boxes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiBox>();
         }
-        if (result.routes_.isEmpty()) {
-          result.routes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiBox>();
-        }
-        result.routes_.add(value);
+        result.boxes_.add(value);
         return this;
       }
-      public Builder addRoutes(net.osmand.binary.OsmandOdb.OsmAndPoiBox.Builder builderForValue) {
-        if (result.routes_.isEmpty()) {
-          result.routes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiBox>();
+      public Builder addBoxes(net.osmand.binary.OsmandOdb.OsmAndPoiBox.Builder builderForValue) {
+        if (result.boxes_.isEmpty()) {
+          result.boxes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiBox>();
         }
-        result.routes_.add(builderForValue.build());
+        result.boxes_.add(builderForValue.build());
         return this;
       }
-      public Builder addAllRoutes(
+      public Builder addAllBoxes(
           java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.OsmAndPoiBox> values) {
-        if (result.routes_.isEmpty()) {
-          result.routes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiBox>();
+        if (result.boxes_.isEmpty()) {
+          result.boxes_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndPoiBox>();
         }
-        super.addAll(values, result.routes_);
+        super.addAll(values, result.boxes_);
         return this;
       }
-      public Builder clearRoutes() {
-        result.routes_ = java.util.Collections.emptyList();
+      public Builder clearBoxes() {
+        result.boxes_ = java.util.Collections.emptyList();
         return this;
       }
       
@@ -11551,6 +11510,372 @@ public final class OsmandOdb {
     }
     
     // @@protoc_insertion_point(class_scope:OsmAndPoiIndex)
+  }
+  
+  public static final class OsmAndCategoryTable extends
+      com.google.protobuf.GeneratedMessage {
+    // Use OsmAndCategoryTable.newBuilder() to construct.
+    private OsmAndCategoryTable() {
+      initFields();
+    }
+    private OsmAndCategoryTable(boolean noInit) {}
+    
+    private static final OsmAndCategoryTable defaultInstance;
+    public static OsmAndCategoryTable getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public OsmAndCategoryTable getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return net.osmand.binary.OsmandOdb.internal_static_OsmAndCategoryTable_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return net.osmand.binary.OsmandOdb.internal_static_OsmAndCategoryTable_fieldAccessorTable;
+    }
+    
+    // required string category = 1;
+    public static final int CATEGORY_FIELD_NUMBER = 1;
+    private boolean hasCategory;
+    private java.lang.String category_ = "";
+    public boolean hasCategory() { return hasCategory; }
+    public java.lang.String getCategory() { return category_; }
+    
+    // repeated string subcategories = 3;
+    public static final int SUBCATEGORIES_FIELD_NUMBER = 3;
+    private java.util.List<java.lang.String> subcategories_ =
+      java.util.Collections.emptyList();
+    public java.util.List<java.lang.String> getSubcategoriesList() {
+      return subcategories_;
+    }
+    public int getSubcategoriesCount() { return subcategories_.size(); }
+    public java.lang.String getSubcategories(int index) {
+      return subcategories_.get(index);
+    }
+    
+    private void initFields() {
+    }
+    public final boolean isInitialized() {
+      if (!hasCategory) return false;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (hasCategory()) {
+        output.writeString(1, getCategory());
+      }
+      for (java.lang.String element : getSubcategoriesList()) {
+        output.writeString(3, element);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasCategory()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(1, getCategory());
+      }
+      {
+        int dataSize = 0;
+        for (java.lang.String element : getSubcategoriesList()) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeStringSizeNoTag(element);
+        }
+        size += dataSize;
+        size += 1 * getSubcategoriesList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static net.osmand.binary.OsmandOdb.OsmAndCategoryTable parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndCategoryTable parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndCategoryTable parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndCategoryTable parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndCategoryTable parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndCategoryTable parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndCategoryTable parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndCategoryTable parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndCategoryTable parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static net.osmand.binary.OsmandOdb.OsmAndCategoryTable parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndCategoryTable prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private net.osmand.binary.OsmandOdb.OsmAndCategoryTable result;
+      
+      // Construct using net.osmand.binary.OsmandOdb.OsmAndCategoryTable.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new net.osmand.binary.OsmandOdb.OsmAndCategoryTable();
+        return builder;
+      }
+      
+      protected net.osmand.binary.OsmandOdb.OsmAndCategoryTable internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new net.osmand.binary.OsmandOdb.OsmAndCategoryTable();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return net.osmand.binary.OsmandOdb.OsmAndCategoryTable.getDescriptor();
+      }
+      
+      public net.osmand.binary.OsmandOdb.OsmAndCategoryTable getDefaultInstanceForType() {
+        return net.osmand.binary.OsmandOdb.OsmAndCategoryTable.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public net.osmand.binary.OsmandOdb.OsmAndCategoryTable build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private net.osmand.binary.OsmandOdb.OsmAndCategoryTable buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public net.osmand.binary.OsmandOdb.OsmAndCategoryTable buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        if (result.subcategories_ != java.util.Collections.EMPTY_LIST) {
+          result.subcategories_ =
+            java.util.Collections.unmodifiableList(result.subcategories_);
+        }
+        net.osmand.binary.OsmandOdb.OsmAndCategoryTable returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof net.osmand.binary.OsmandOdb.OsmAndCategoryTable) {
+          return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndCategoryTable)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndCategoryTable other) {
+        if (other == net.osmand.binary.OsmandOdb.OsmAndCategoryTable.getDefaultInstance()) return this;
+        if (other.hasCategory()) {
+          setCategory(other.getCategory());
+        }
+        if (!other.subcategories_.isEmpty()) {
+          if (result.subcategories_.isEmpty()) {
+            result.subcategories_ = new java.util.ArrayList<java.lang.String>();
+          }
+          result.subcategories_.addAll(other.subcategories_);
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              setCategory(input.readString());
+              break;
+            }
+            case 26: {
+              addSubcategories(input.readString());
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // required string category = 1;
+      public boolean hasCategory() {
+        return result.hasCategory();
+      }
+      public java.lang.String getCategory() {
+        return result.getCategory();
+      }
+      public Builder setCategory(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasCategory = true;
+        result.category_ = value;
+        return this;
+      }
+      public Builder clearCategory() {
+        result.hasCategory = false;
+        result.category_ = getDefaultInstance().getCategory();
+        return this;
+      }
+      
+      // repeated string subcategories = 3;
+      public java.util.List<java.lang.String> getSubcategoriesList() {
+        return java.util.Collections.unmodifiableList(result.subcategories_);
+      }
+      public int getSubcategoriesCount() {
+        return result.getSubcategoriesCount();
+      }
+      public java.lang.String getSubcategories(int index) {
+        return result.getSubcategories(index);
+      }
+      public Builder setSubcategories(int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.subcategories_.set(index, value);
+        return this;
+      }
+      public Builder addSubcategories(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  if (result.subcategories_.isEmpty()) {
+          result.subcategories_ = new java.util.ArrayList<java.lang.String>();
+        }
+        result.subcategories_.add(value);
+        return this;
+      }
+      public Builder addAllSubcategories(
+          java.lang.Iterable<? extends java.lang.String> values) {
+        if (result.subcategories_.isEmpty()) {
+          result.subcategories_ = new java.util.ArrayList<java.lang.String>();
+        }
+        super.addAll(values, result.subcategories_);
+        return this;
+      }
+      public Builder clearSubcategories() {
+        result.subcategories_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:OsmAndCategoryTable)
+    }
+    
+    static {
+      defaultInstance = new OsmAndCategoryTable(true);
+      net.osmand.binary.OsmandOdb.internalForceInit();
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:OsmAndCategoryTable)
   }
   
   public static final class OsmAndPoiBox extends
@@ -13208,6 +13533,11 @@ public final class OsmandOdb {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_OsmAndPoiIndex_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_OsmAndCategoryTable_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_OsmAndCategoryTable_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_OsmAndPoiBox_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -13301,20 +13631,21 @@ public final class OsmandOdb {
       "\024OsmAndTransportIndex\022\014\n\004name\030\001 \001(\t\022 \n\006r" +
       "outes\030\003 \001(\0132\020.TransportRoutes\022\"\n\005stops\030\006" +
       " \001(\0132\023.TransportStopsTree\022!\n\013stringTable" +
-      "\030\t \002(\0132\014.StringTable\"\260\001\n\016OsmAndPoiIndex\022" +
-      "\014\n\004name\030\001 \002(\t\022#\n\rcategoryTable\030\003 \002(\0132\014.S" +
-      "tringTable\022(\n\022subcategoriesTable\030\004 \002(\0132\014" +
-      ".StringTable\022\035\n\006routes\030\006 \003(\0132\r.OsmAndPoi" +
-      "Box\022\"\n\007poiData\030\007 \003(\0132\021.OsmAndPoiBoxData\"",
-      "\266\001\n\014OsmAndPoiBox\022\014\n\004zoom\030\001 \002(\r\022\014\n\004left\030\002" +
-      " \002(\021\022\r\n\005right\030\003 \002(\021\022\013\n\003top\030\004 \002(\021\022\016\n\006bott" +
-      "om\030\005 \002(\021\022(\n\ncategories\030\006 \001(\0132\024.OsmAndPoi" +
-      "Categories\022\037\n\010subBoxes\030\007 \003(\0132\r.OsmAndPoi" +
-      "Box\022\023\n\013shiftToData\030\n \001(\r\")\n\023OsmAndPoiCat" +
-      "egories\022\022\n\ncategories\030\003 \003(\r\":\n\020OsmAndPoi" +
-      "BoxData\022&\n\007poiData\030\003 \003(\0132\025.OsmAndPoiBoxD" +
-      "ataAtom\"\026\n\024OsmAndPoiBoxDataAtomB\023\n\021net.o" +
-      "smand.binary"
+      "\030\t \002(\0132\014.StringTable\"\217\001\n\016OsmAndPoiIndex\022" +
+      "\014\n\004name\030\001 \002(\t\022-\n\017categoriesTable\030\003 \003(\0132\024" +
+      ".OsmAndCategoryTable\022\034\n\005boxes\030\006 \003(\0132\r.Os" +
+      "mAndPoiBox\022\"\n\007poiData\030\007 \003(\0132\021.OsmAndPoiB" +
+      "oxData\">\n\023OsmAndCategoryTable\022\020\n\010categor",
+      "y\030\001 \002(\t\022\025\n\rsubcategories\030\003 \003(\t\"\266\001\n\014OsmAn" +
+      "dPoiBox\022\014\n\004zoom\030\001 \002(\r\022\014\n\004left\030\002 \002(\021\022\r\n\005r" +
+      "ight\030\003 \002(\021\022\013\n\003top\030\004 \002(\021\022\016\n\006bottom\030\005 \002(\021\022" +
+      "(\n\ncategories\030\006 \001(\0132\024.OsmAndPoiCategorie" +
+      "s\022\037\n\010subBoxes\030\007 \003(\0132\r.OsmAndPoiBox\022\023\n\013sh" +
+      "iftToData\030\n \001(\r\")\n\023OsmAndPoiCategories\022\022" +
+      "\n\ncategories\030\003 \003(\r\":\n\020OsmAndPoiBoxData\022&" +
+      "\n\007poiData\030\003 \003(\0132\025.OsmAndPoiBoxDataAtom\"\026" +
+      "\n\024OsmAndPoiBoxDataAtomB\023\n\021net.osmand.bin" +
+      "ary"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -13502,11 +13833,19 @@ public final class OsmandOdb {
           internal_static_OsmAndPoiIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndPoiIndex_descriptor,
-              new java.lang.String[] { "Name", "CategoryTable", "SubcategoriesTable", "Routes", "PoiData", },
+              new java.lang.String[] { "Name", "CategoriesTable", "Boxes", "PoiData", },
               net.osmand.binary.OsmandOdb.OsmAndPoiIndex.class,
               net.osmand.binary.OsmandOdb.OsmAndPoiIndex.Builder.class);
-          internal_static_OsmAndPoiBox_descriptor =
+          internal_static_OsmAndCategoryTable_descriptor =
             getDescriptor().getMessageTypes().get(23);
+          internal_static_OsmAndCategoryTable_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_OsmAndCategoryTable_descriptor,
+              new java.lang.String[] { "Category", "Subcategories", },
+              net.osmand.binary.OsmandOdb.OsmAndCategoryTable.class,
+              net.osmand.binary.OsmandOdb.OsmAndCategoryTable.Builder.class);
+          internal_static_OsmAndPoiBox_descriptor =
+            getDescriptor().getMessageTypes().get(24);
           internal_static_OsmAndPoiBox_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndPoiBox_descriptor,
@@ -13514,7 +13853,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.OsmAndPoiBox.class,
               net.osmand.binary.OsmandOdb.OsmAndPoiBox.Builder.class);
           internal_static_OsmAndPoiCategories_descriptor =
-            getDescriptor().getMessageTypes().get(24);
+            getDescriptor().getMessageTypes().get(25);
           internal_static_OsmAndPoiCategories_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndPoiCategories_descriptor,
@@ -13522,7 +13861,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.OsmAndPoiCategories.class,
               net.osmand.binary.OsmandOdb.OsmAndPoiCategories.Builder.class);
           internal_static_OsmAndPoiBoxData_descriptor =
-            getDescriptor().getMessageTypes().get(25);
+            getDescriptor().getMessageTypes().get(26);
           internal_static_OsmAndPoiBoxData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndPoiBoxData_descriptor,
@@ -13530,7 +13869,7 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.OsmAndPoiBoxData.class,
               net.osmand.binary.OsmandOdb.OsmAndPoiBoxData.Builder.class);
           internal_static_OsmAndPoiBoxDataAtom_descriptor =
-            getDescriptor().getMessageTypes().get(26);
+            getDescriptor().getMessageTypes().get(27);
           internal_static_OsmAndPoiBoxDataAtom_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndPoiBoxDataAtom_descriptor,

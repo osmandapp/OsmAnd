@@ -32,6 +32,7 @@ public class BinaryInspector {
 		// test cases show info
 		inspector(new String[]{"/home/victor/projects/OsmAnd/data/osm-gen/saved/Belarus-newzooms-new-rt.obf"});
 		
+		
 		// test case extract parts
 //		inspector(new String[]{"-c", "E:\\Information\\OSM maps\\osmand\\Netherlands-addr-trans.map.obf", 
 //				"E:\\Information\\OSM maps\\osmand\\Netherlands.map.obf", "-1"});

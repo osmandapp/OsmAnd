@@ -264,20 +264,23 @@ message OsmAndPoiIndex {
     required string name = 1;
     
     
-    required StringTable categoryTable = 3;
-    
-    required StringTable subcategoriesTable = 4;
+    repeated OsmAndCategoryTable categoriesTable = 3;
     
     // leave space for other indexes
     
 	// encoded as fixed32 length delimited
-	repeated OsmAndPoiBox routes = 6; // children 
+	repeated OsmAndPoiBox boxes = 6; // children 
 
 	// encoded as fixed32 length delimited
 	repeated OsmAndPoiBoxData poiData = 7;
 	
 }
 
+message OsmAndCategoryTable {
+
+    required string category = 1;
+    repeated string subcategories = 3;
+}
 
 message OsmAndPoiBox {
    required uint32 zoom = 1; // delta encoded to parent
@@ -303,7 +306,6 @@ message OsmAndPoiCategories {
 }
 
 message OsmAndPoiBoxData {
-  
   repeated OsmAndPoiBoxDataAtom poiData = 3;
 }
 

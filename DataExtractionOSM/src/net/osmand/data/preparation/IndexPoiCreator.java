@@ -1,22 +1,47 @@
 package net.osmand.data.preparation;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import net.osmand.Algoritms;
+import net.osmand.IProgress;
+import net.osmand.binary.BinaryMapIndexWriter;
+import net.osmand.binary.OsmandOdb;
+import net.osmand.binary.OsmandOdb.OsmAndCategoryTable;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
+import net.osmand.data.Building;
+import net.osmand.data.City;
 import net.osmand.data.IndexConstants;
+import net.osmand.data.Street;
+import net.osmand.data.City.CityType;
+import net.osmand.impl.ConsoleProgressImplementation;
 import net.osmand.osm.Entity;
 import net.osmand.osm.MapUtils;
+import net.osmand.osm.Node;
 import net.osmand.osm.OSMSettings.OSMTagKey;
+import net.osmand.swing.Messages;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -135,6 +160,58 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		
 		
 		poiConnection.setAutoCommit(false);
+	}
+	
+
+	public void writeBinaryPoiIndex(BinaryMapIndexWriter writer, String regionName, IProgress progress) throws SQLException, IOException {
+		if(poiPreparedStatement != null){
+			closePreparedStatements(poiPreparedStatement);
+		}
+		poiConnection.commit();
+
+		Statement categoriesAndSubcategories = poiConnection.createStatement();
+		ResultSet rs = categoriesAndSubcategories.executeQuery("SELECT DISTINCT type, subtype FROM poi");
+		Map<String, Map<String, Integer>> categories = new LinkedHashMap<String, Map<String, Integer>>();
+		while (rs.next()) {
+			String category = rs.getString(1);
+			String subcategory = rs.getString(2).trim();
+			if (!categories.containsKey(category)) {
+				categories.put(category, new LinkedHashMap<String, Integer>());
+			}
+			if (subcategory.contains(";") || subcategory.contains(",")) {
+				String[] split = subcategory.split(",|;");
+				for (String sub : split) {
+					categories.get(category).put(sub.trim(), 0);
+				}
+			} else {
+				categories.get(category).put(subcategory.trim(), 0);
+			}
+		}
+		
+		rs.close();
+		categoriesAndSubcategories.close();
+
+		
+		writer.startWritePOIIndex(regionName);
+		Map<String, Integer> catIndexes = writer.writePOICategoriesTable(categories);
+		
+		for (String s : categories.keySet()) {
+			System.out.println(s + " " + categories.get(s).size());
+		}
+		
+		
+		writer.endWritePOIIndex();
+		
+	}
+	
+	
+	public static void main(String[] args) throws SQLException, FileNotFoundException, IOException {
+		IndexPoiCreator poiCreator = new IndexPoiCreator();
+		poiCreator.poiConnection  = (Connection) DBDialect.SQLITE.getDatabaseConnection("/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.odb", log);
+		BinaryMapIndexWriter writer = new BinaryMapIndexWriter(new RandomAccessFile("/home/victor/projects/OsmAnd/data/osm-gen/POI/Test-Ru.poi.obf", "rw"));
+		poiCreator.poiConnection.setAutoCommit(false);
+		poiCreator.writeBinaryPoiIndex(writer, "Ru-mow", new ConsoleProgressImplementation());
+		writer.close();
 	}
 	
 }
