@@ -20,9 +20,8 @@ yes | unzip OsmAndMapCreator-development.zip
 cd ..
 
 # remove backup and create new backup
-rm -rf backup
-mkdir backup
-# Not space enough - so that's commented right now
+# we should not rm, just do incremental updates for now! rm -rf backup 
+mkdir -p backup
 mv indexes/uploaded/*.* backup
 
 # remove all previous files
