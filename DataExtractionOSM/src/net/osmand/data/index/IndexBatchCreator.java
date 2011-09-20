@@ -49,6 +49,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+
 import rtree.RTree;
 
 
@@ -89,6 +90,7 @@ public class IndexBatchCreator {
 	File osmDirFiles;
 	File indexDirFiles;
 	File backupUploadedFiles;
+	File regionsFile;
 	
 	boolean indexPOI = false;
 	boolean indexTransport = false;
@@ -152,7 +154,7 @@ public class IndexBatchCreator {
 		}
 	}
 	
-	public void runBatch(Document doc){
+	public void runBatch(Document doc) throws SAXException, IOException, ParserConfigurationException{
 		NodeList list = doc.getElementsByTagName("process");
 		if(list.getLength() != 1){
 			 throw new IllegalArgumentException("You should specify exactly 1 process element!");
@@ -185,6 +187,15 @@ public class IndexBatchCreator {
 			throw new IllegalArgumentException("Please specify directory with generated index files  as directory_for_index_files (attribute)"); //$NON-NLS-1$
 		}
 		indexDirFiles = new File(dir);
+		if(downloadFiles){
+			dir = process.getAttribute("list_download_regions_file");
+			if(!Algoritms.isEmpty(dir)) {
+				regionsFile = new File(dir);
+				if(!regionsFile.exists()){
+					throw new IllegalArgumentException("Please specify file with regions to download as list_download_regions_file (attribute)"); //$NON-NLS-1$
+				}
+			} 
+		}
 		
 		dir = process.getAttribute("directory_for_uploaded_files");
 		if (dir != null) {
@@ -230,6 +241,18 @@ public class IndexBatchCreator {
 		}
 		
 		List<RegionCountries> countriesToDownload = new ArrayList<RegionCountries>();
+		parseCountriesToDownload(doc, countriesToDownload);
+		if(regionsFile != null){
+			Document innerDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(regionsFile);
+			parseCountriesToDownload(innerDoc, countriesToDownload);
+		}
+		
+		runBatch(countriesToDownload);
+		
+		
+	}
+
+	private void parseCountriesToDownload(Document doc, List<RegionCountries> countriesToDownload) {
 		NodeList regions = doc.getElementsByTagName("regions");
 		for(int i=0; i< regions.getLength(); i++){
 			Element el = (Element) regions.item(i);
@@ -261,10 +284,6 @@ public class IndexBatchCreator {
 				
 			}
 		}
-		
-		runBatch(countriesToDownload);
-		
-		
 	}
 
 	private void parseProcessAttributes(Element process) {
@@ -309,7 +328,7 @@ public class IndexBatchCreator {
 		if(downloadFiles){
 			downloadFilesAndGenerateIndex(countriesToDownload, alreadyGeneratedFiles, alreadyUploadedFiles);
 		}
-		if(generateIndexes){
+		if(generateIndexes && !downloadFiles){
 			generatedIndexes(alreadyGeneratedFiles, alreadyUploadedFiles);
 		}
 		if(uploadIndexes){
