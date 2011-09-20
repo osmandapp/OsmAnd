@@ -126,8 +126,7 @@ public class MinskTransReader {
 		Map<String, Node> correlated = new LinkedHashMap<String, Node>();
 		Map<Node, String> reverse = new LinkedHashMap<Node, String>();
 		List<TransportStop> stopsToCheck = new ArrayList<TransportStop>(stopsMap.values());
-		int sTCsize = stopsToCheck.size();
-		for(int k =0; k<sTCsize; k++){
+		for(int k =0; k<stopsToCheck.size(); k++){
 			TransportStop r = stopsToCheck.get(k);
 			List<Node> closestObjects = busStops.getClosestObjects(r.latitude, r.longitude, 0, 1);
 			// filter closest objects

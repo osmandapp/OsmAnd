@@ -282,8 +282,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 			List<Way> l = new ArrayList<Way>();
 			l.add(w);
 			boolean add = true;
-			int iRsize = incompletedRings.size();
-			for (int k = 0; k < iRsize;) {
+			for (int k = 0; k < incompletedRings.size();) {
 				boolean remove = false;
 				List<Way> i = incompletedRings.get(k);
 				Way last = i.get(i.size() - 1);
