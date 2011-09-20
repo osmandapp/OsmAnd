@@ -88,7 +88,7 @@ public class ExtractGooglecodeAuthorization {
 		StringBuilder data = buildPostData(user, password, dsh, galx);
 
 		// try authentification Request: https://www.google.com/accounts/ServiceLoginAuth");
-		URL url = new URL("https://www.google.com/accounts/ServiceLoginAuth");
+		URL url = new URL("https://accounts.google.com/ServiceLoginAuth");
 		conn = (HttpURLConnection) url.openConnection();
 		conn.setDoOutput(true);
 		conn.setRequestMethod("POST");
