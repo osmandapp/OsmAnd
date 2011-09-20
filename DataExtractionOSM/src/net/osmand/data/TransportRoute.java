@@ -8,7 +8,6 @@ import net.osmand.osm.MapUtils;
 import net.osmand.osm.Relation;
 import net.osmand.osm.Way;
 
-
 public class TransportRoute extends MapObject {
 	private List<Way> ways;
 	private List<TransportStop> forwardStops = new ArrayList<TransportStop>();
@@ -85,14 +84,14 @@ public class TransportRoute extends MapObject {
 	
 	public int getAvgBothDistance(){
 		int d = 0;
-		for(int i=1; i< backwardStops.size(); i++){
+		int bSsize = backwardStops.size(); 
+		int fSsize = forwardStops.size(); 
+		for(int i=1; i< bSsize; i++){
 			d += MapUtils.getDistance(backwardStops.get(i-1).getLocation(), backwardStops.get(i).getLocation());
 		}
-		for(int i=1; i< forwardStops.size(); i++){
+		for(int i=1; i< fSsize; i++){
 			d += MapUtils.getDistance(forwardStops.get(i-1).getLocation(), forwardStops.get(i).getLocation());
 		}
 		return d;
 	}
-	
-	
 }

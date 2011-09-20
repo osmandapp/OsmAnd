@@ -385,7 +385,8 @@ public class OsmBaseStorage extends DefaultHandler {
 			@Override
 			protected void parseNodes(List<crosby.binary.Osmformat.Node> n) {
 				EntityInfo info = null;
-				for(int i=0; i<n.size(); i++){
+				int nsize = n.size();
+				for(int i=0; i<nsize; i++){
 					crosby.binary.Osmformat.Node nod = n.get(i);
 					Node e = new Node(parseLat(nod.getLat()), parseLon(nod.getLon()), nod.getId());
 					for(int j=0; j<nod.getKeysCount(); j++){
@@ -398,13 +399,14 @@ public class OsmBaseStorage extends DefaultHandler {
 					}
 					registerEntity(EntityType.NODE, e, info);
 				}
-				updateProgress(n.size());
+				updateProgress(nsize);
 			}
 
 			@Override
 			protected void parseRelations(List<crosby.binary.Osmformat.Relation> r) {
 				EntityInfo info = null;
-				for(int i=0; i<r.size(); i++){
+				int rsize = r.size();
+				for(int i=0; i<rsize; i++){
 					crosby.binary.Osmformat.Relation rel = r.get(i);
 					Relation e = new Relation(rel.getId());
 					long id = 0;
@@ -430,13 +432,14 @@ public class OsmBaseStorage extends DefaultHandler {
 					}
 					registerEntity(EntityType.RELATION, e, info);
 				}
-				updateProgress(r.size());
+				updateProgress(rsize);
 			}
 
 			@Override
 			protected void parseWays(List<crosby.binary.Osmformat.Way> w) {
 				EntityInfo info = null;
-				for(int i=0; i<w.size(); i++){
+				int wsize = w.size();
+				for(int i=0; i<wsize; i++){
 					crosby.binary.Osmformat.Way way = w.get(i);
 					Way e = new Way(way.getId());
 					long id = 0;
@@ -454,7 +457,7 @@ public class OsmBaseStorage extends DefaultHandler {
 					}
 					registerEntity(EntityType.WAY, e, info);
 				}
-				updateProgress(w.size());
+				updateProgress(wsize);
 			}
 
 			@Override
