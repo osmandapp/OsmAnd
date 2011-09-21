@@ -11919,33 +11919,33 @@ public final class OsmandOdb {
     public boolean hasLeft() { return hasLeft; }
     public int getLeft() { return left_; }
     
-    // required sint32 right = 3;
-    public static final int RIGHT_FIELD_NUMBER = 3;
-    private boolean hasRight;
-    private int right_ = 0;
-    public boolean hasRight() { return hasRight; }
-    public int getRight() { return right_; }
-    
-    // required sint32 top = 4;
-    public static final int TOP_FIELD_NUMBER = 4;
+    // required sint32 top = 3;
+    public static final int TOP_FIELD_NUMBER = 3;
     private boolean hasTop;
     private int top_ = 0;
     public boolean hasTop() { return hasTop; }
     public int getTop() { return top_; }
     
-    // required sint32 bottom = 5;
-    public static final int BOTTOM_FIELD_NUMBER = 5;
-    private boolean hasBottom;
-    private int bottom_ = 0;
-    public boolean hasBottom() { return hasBottom; }
-    public int getBottom() { return bottom_; }
-    
-    // optional .OsmAndPoiCategories categories = 6;
-    public static final int CATEGORIES_FIELD_NUMBER = 6;
+    // optional .OsmAndPoiCategories categories = 4;
+    public static final int CATEGORIES_FIELD_NUMBER = 4;
     private boolean hasCategories;
     private net.osmand.binary.OsmandOdb.OsmAndPoiCategories categories_;
     public boolean hasCategories() { return hasCategories; }
     public net.osmand.binary.OsmandOdb.OsmAndPoiCategories getCategories() { return categories_; }
+    
+    // optional .StringTable includeNamesList = 5;
+    public static final int INCLUDENAMESLIST_FIELD_NUMBER = 5;
+    private boolean hasIncludeNamesList;
+    private net.osmand.binary.OsmandOdb.StringTable includeNamesList_;
+    public boolean hasIncludeNamesList() { return hasIncludeNamesList; }
+    public net.osmand.binary.OsmandOdb.StringTable getIncludeNamesList() { return includeNamesList_; }
+    
+    // optional .StringTable excludeNamesList = 6;
+    public static final int EXCLUDENAMESLIST_FIELD_NUMBER = 6;
+    private boolean hasExcludeNamesList;
+    private net.osmand.binary.OsmandOdb.StringTable excludeNamesList_;
+    public boolean hasExcludeNamesList() { return hasExcludeNamesList; }
+    public net.osmand.binary.OsmandOdb.StringTable getExcludeNamesList() { return excludeNamesList_; }
     
     // repeated .OsmAndPoiBox subBoxes = 7;
     public static final int SUBBOXES_FIELD_NUMBER = 7;
@@ -11968,13 +11968,13 @@ public final class OsmandOdb {
     
     private void initFields() {
       categories_ = net.osmand.binary.OsmandOdb.OsmAndPoiCategories.getDefaultInstance();
+      includeNamesList_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
+      excludeNamesList_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
     }
     public final boolean isInitialized() {
       if (!hasZoom) return false;
       if (!hasLeft) return false;
-      if (!hasRight) return false;
       if (!hasTop) return false;
-      if (!hasBottom) return false;
       for (net.osmand.binary.OsmandOdb.OsmAndPoiBox element : getSubBoxesList()) {
         if (!element.isInitialized()) return false;
       }
@@ -11990,17 +11990,17 @@ public final class OsmandOdb {
       if (hasLeft()) {
         output.writeSInt32(2, getLeft());
       }
-      if (hasRight()) {
-        output.writeSInt32(3, getRight());
-      }
       if (hasTop()) {
-        output.writeSInt32(4, getTop());
-      }
-      if (hasBottom()) {
-        output.writeSInt32(5, getBottom());
+        output.writeSInt32(3, getTop());
       }
       if (hasCategories()) {
-        output.writeMessage(6, getCategories());
+        output.writeMessage(4, getCategories());
+      }
+      if (hasIncludeNamesList()) {
+        output.writeMessage(5, getIncludeNamesList());
+      }
+      if (hasExcludeNamesList()) {
+        output.writeMessage(6, getExcludeNamesList());
       }
       for (net.osmand.binary.OsmandOdb.OsmAndPoiBox element : getSubBoxesList()) {
         output.writeMessage(7, element);
@@ -12025,21 +12025,21 @@ public final class OsmandOdb {
         size += com.google.protobuf.CodedOutputStream
           .computeSInt32Size(2, getLeft());
       }
-      if (hasRight()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeSInt32Size(3, getRight());
-      }
       if (hasTop()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeSInt32Size(4, getTop());
-      }
-      if (hasBottom()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeSInt32Size(5, getBottom());
+          .computeSInt32Size(3, getTop());
       }
       if (hasCategories()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, getCategories());
+          .computeMessageSize(4, getCategories());
+      }
+      if (hasIncludeNamesList()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, getIncludeNamesList());
+      }
+      if (hasExcludeNamesList()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, getExcludeNamesList());
       }
       for (net.osmand.binary.OsmandOdb.OsmAndPoiBox element : getSubBoxesList()) {
         size += com.google.protobuf.CodedOutputStream
@@ -12217,17 +12217,17 @@ public final class OsmandOdb {
         if (other.hasLeft()) {
           setLeft(other.getLeft());
         }
-        if (other.hasRight()) {
-          setRight(other.getRight());
-        }
         if (other.hasTop()) {
           setTop(other.getTop());
         }
-        if (other.hasBottom()) {
-          setBottom(other.getBottom());
-        }
         if (other.hasCategories()) {
           mergeCategories(other.getCategories());
+        }
+        if (other.hasIncludeNamesList()) {
+          mergeIncludeNamesList(other.getIncludeNamesList());
+        }
+        if (other.hasExcludeNamesList()) {
+          mergeExcludeNamesList(other.getExcludeNamesList());
         }
         if (!other.subBoxes_.isEmpty()) {
           if (result.subBoxes_.isEmpty()) {
@@ -12272,24 +12272,34 @@ public final class OsmandOdb {
               break;
             }
             case 24: {
-              setRight(input.readSInt32());
-              break;
-            }
-            case 32: {
               setTop(input.readSInt32());
               break;
             }
-            case 40: {
-              setBottom(input.readSInt32());
-              break;
-            }
-            case 50: {
+            case 34: {
               net.osmand.binary.OsmandOdb.OsmAndPoiCategories.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndPoiCategories.newBuilder();
               if (hasCategories()) {
                 subBuilder.mergeFrom(getCategories());
               }
               input.readMessage(subBuilder, extensionRegistry);
               setCategories(subBuilder.buildPartial());
+              break;
+            }
+            case 42: {
+              net.osmand.binary.OsmandOdb.StringTable.Builder subBuilder = net.osmand.binary.OsmandOdb.StringTable.newBuilder();
+              if (hasIncludeNamesList()) {
+                subBuilder.mergeFrom(getIncludeNamesList());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setIncludeNamesList(subBuilder.buildPartial());
+              break;
+            }
+            case 50: {
+              net.osmand.binary.OsmandOdb.StringTable.Builder subBuilder = net.osmand.binary.OsmandOdb.StringTable.newBuilder();
+              if (hasExcludeNamesList()) {
+                subBuilder.mergeFrom(getExcludeNamesList());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setExcludeNamesList(subBuilder.buildPartial());
               break;
             }
             case 58: {
@@ -12343,25 +12353,7 @@ public final class OsmandOdb {
         return this;
       }
       
-      // required sint32 right = 3;
-      public boolean hasRight() {
-        return result.hasRight();
-      }
-      public int getRight() {
-        return result.getRight();
-      }
-      public Builder setRight(int value) {
-        result.hasRight = true;
-        result.right_ = value;
-        return this;
-      }
-      public Builder clearRight() {
-        result.hasRight = false;
-        result.right_ = 0;
-        return this;
-      }
-      
-      // required sint32 top = 4;
+      // required sint32 top = 3;
       public boolean hasTop() {
         return result.hasTop();
       }
@@ -12379,25 +12371,7 @@ public final class OsmandOdb {
         return this;
       }
       
-      // required sint32 bottom = 5;
-      public boolean hasBottom() {
-        return result.hasBottom();
-      }
-      public int getBottom() {
-        return result.getBottom();
-      }
-      public Builder setBottom(int value) {
-        result.hasBottom = true;
-        result.bottom_ = value;
-        return this;
-      }
-      public Builder clearBottom() {
-        result.hasBottom = false;
-        result.bottom_ = 0;
-        return this;
-      }
-      
-      // optional .OsmAndPoiCategories categories = 6;
+      // optional .OsmAndPoiCategories categories = 4;
       public boolean hasCategories() {
         return result.hasCategories();
       }
@@ -12431,6 +12405,80 @@ public final class OsmandOdb {
       public Builder clearCategories() {
         result.hasCategories = false;
         result.categories_ = net.osmand.binary.OsmandOdb.OsmAndPoiCategories.getDefaultInstance();
+        return this;
+      }
+      
+      // optional .StringTable includeNamesList = 5;
+      public boolean hasIncludeNamesList() {
+        return result.hasIncludeNamesList();
+      }
+      public net.osmand.binary.OsmandOdb.StringTable getIncludeNamesList() {
+        return result.getIncludeNamesList();
+      }
+      public Builder setIncludeNamesList(net.osmand.binary.OsmandOdb.StringTable value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.hasIncludeNamesList = true;
+        result.includeNamesList_ = value;
+        return this;
+      }
+      public Builder setIncludeNamesList(net.osmand.binary.OsmandOdb.StringTable.Builder builderForValue) {
+        result.hasIncludeNamesList = true;
+        result.includeNamesList_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergeIncludeNamesList(net.osmand.binary.OsmandOdb.StringTable value) {
+        if (result.hasIncludeNamesList() &&
+            result.includeNamesList_ != net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance()) {
+          result.includeNamesList_ =
+            net.osmand.binary.OsmandOdb.StringTable.newBuilder(result.includeNamesList_).mergeFrom(value).buildPartial();
+        } else {
+          result.includeNamesList_ = value;
+        }
+        result.hasIncludeNamesList = true;
+        return this;
+      }
+      public Builder clearIncludeNamesList() {
+        result.hasIncludeNamesList = false;
+        result.includeNamesList_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
+        return this;
+      }
+      
+      // optional .StringTable excludeNamesList = 6;
+      public boolean hasExcludeNamesList() {
+        return result.hasExcludeNamesList();
+      }
+      public net.osmand.binary.OsmandOdb.StringTable getExcludeNamesList() {
+        return result.getExcludeNamesList();
+      }
+      public Builder setExcludeNamesList(net.osmand.binary.OsmandOdb.StringTable value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.hasExcludeNamesList = true;
+        result.excludeNamesList_ = value;
+        return this;
+      }
+      public Builder setExcludeNamesList(net.osmand.binary.OsmandOdb.StringTable.Builder builderForValue) {
+        result.hasExcludeNamesList = true;
+        result.excludeNamesList_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergeExcludeNamesList(net.osmand.binary.OsmandOdb.StringTable value) {
+        if (result.hasExcludeNamesList() &&
+            result.excludeNamesList_ != net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance()) {
+          result.excludeNamesList_ =
+            net.osmand.binary.OsmandOdb.StringTable.newBuilder(result.excludeNamesList_).mergeFrom(value).buildPartial();
+        } else {
+          result.excludeNamesList_ = value;
+        }
+        result.hasExcludeNamesList = true;
+        return this;
+      }
+      public Builder clearExcludeNamesList() {
+        result.hasExcludeNamesList = false;
+        result.excludeNamesList_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
         return this;
       }
       
@@ -13636,16 +13684,17 @@ public final class OsmandOdb {
       ".OsmAndCategoryTable\022\034\n\005boxes\030\006 \003(\0132\r.Os" +
       "mAndPoiBox\022\"\n\007poiData\030\007 \003(\0132\021.OsmAndPoiB" +
       "oxData\">\n\023OsmAndCategoryTable\022\020\n\010categor",
-      "y\030\001 \002(\t\022\025\n\rsubcategories\030\003 \003(\t\"\266\001\n\014OsmAn" +
-      "dPoiBox\022\014\n\004zoom\030\001 \002(\r\022\014\n\004left\030\002 \002(\021\022\r\n\005r" +
-      "ight\030\003 \002(\021\022\013\n\003top\030\004 \002(\021\022\016\n\006bottom\030\005 \002(\021\022" +
-      "(\n\ncategories\030\006 \001(\0132\024.OsmAndPoiCategorie" +
-      "s\022\037\n\010subBoxes\030\007 \003(\0132\r.OsmAndPoiBox\022\023\n\013sh" +
-      "iftToData\030\n \001(\r\")\n\023OsmAndPoiCategories\022\022" +
-      "\n\ncategories\030\003 \003(\r\":\n\020OsmAndPoiBoxData\022&" +
-      "\n\007poiData\030\003 \003(\0132\025.OsmAndPoiBoxDataAtom\"\026" +
-      "\n\024OsmAndPoiBoxDataAtomB\023\n\021net.osmand.bin" +
-      "ary"
+      "y\030\001 \002(\t\022\025\n\rsubcategories\030\003 \003(\t\"\347\001\n\014OsmAn" +
+      "dPoiBox\022\014\n\004zoom\030\001 \002(\r\022\014\n\004left\030\002 \002(\021\022\013\n\003t" +
+      "op\030\003 \002(\021\022(\n\ncategories\030\004 \001(\0132\024.OsmAndPoi" +
+      "Categories\022&\n\020includeNamesList\030\005 \001(\0132\014.S" +
+      "tringTable\022&\n\020excludeNamesList\030\006 \001(\0132\014.S" +
+      "tringTable\022\037\n\010subBoxes\030\007 \003(\0132\r.OsmAndPoi" +
+      "Box\022\023\n\013shiftToData\030\n \001(\r\")\n\023OsmAndPoiCat" +
+      "egories\022\022\n\ncategories\030\003 \003(\r\":\n\020OsmAndPoi" +
+      "BoxData\022&\n\007poiData\030\003 \003(\0132\025.OsmAndPoiBoxD" +
+      "ataAtom\"\026\n\024OsmAndPoiBoxDataAtomB\023\n\021net.o",
+      "smand.binary"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -13849,7 +13898,7 @@ public final class OsmandOdb {
           internal_static_OsmAndPoiBox_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndPoiBox_descriptor,
-              new java.lang.String[] { "Zoom", "Left", "Right", "Top", "Bottom", "Categories", "SubBoxes", "ShiftToData", },
+              new java.lang.String[] { "Zoom", "Left", "Top", "Categories", "IncludeNamesList", "ExcludeNamesList", "SubBoxes", "ShiftToData", },
               net.osmand.binary.OsmandOdb.OsmAndPoiBox.class,
               net.osmand.binary.OsmandOdb.OsmAndPoiBox.Builder.class);
           internal_static_OsmAndPoiCategories_descriptor =

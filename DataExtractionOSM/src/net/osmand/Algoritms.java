@@ -125,6 +125,8 @@ public class Algoritms {
 		return o;
 	}
 	
+	
+	
 	public static void putLongToBytes(byte[] bytes, int offset, long l){
 		bytes[offset] = (byte) (l & 0xff);
 		l >>= 8;

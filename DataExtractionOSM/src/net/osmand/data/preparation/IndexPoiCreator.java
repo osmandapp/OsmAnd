@@ -9,39 +9,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.binary.BinaryMapIndexWriter;
-import net.osmand.binary.OsmandOdb;
-import net.osmand.binary.OsmandOdb.OsmAndCategoryTable;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
-import net.osmand.data.Building;
-import net.osmand.data.City;
 import net.osmand.data.IndexConstants;
-import net.osmand.data.Street;
-import net.osmand.data.City.CityType;
 import net.osmand.impl.ConsoleProgressImplementation;
 import net.osmand.osm.Entity;
 import net.osmand.osm.MapUtils;
-import net.osmand.osm.Node;
 import net.osmand.osm.OSMSettings.OSMTagKey;
-import net.osmand.swing.Messages;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -53,6 +39,8 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 	private Connection poiConnection;
 	private File poiIndexFile;
 	private PreparedStatement poiPreparedStatement;
+	private static final int ZOOM_TO_SAVE_END = 14;
+	private static final int ZOOM_TO_SAVE_START = 6;
 	
 	private List<Amenity> tempAmenityList = new ArrayList<Amenity>();
 
@@ -169,8 +157,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		}
 		poiConnection.commit();
 
-		Statement categoriesAndSubcategories = poiConnection.createStatement();
-		ResultSet rs = categoriesAndSubcategories.executeQuery("SELECT DISTINCT type, subtype FROM poi");
+		ResultSet rs = poiConnection.createStatement().executeQuery("SELECT DISTINCT type, subtype FROM poi");
 		Map<String, Map<String, Integer>> categories = new LinkedHashMap<String, Map<String, Integer>>();
 		while (rs.next()) {
 			String category = rs.getString(1);
@@ -187,17 +174,48 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 				categories.get(category).put(subcategory.trim(), 0);
 			}
 		}
-		
+		Statement stat = rs.getStatement();
 		rs.close();
-		categoriesAndSubcategories.close();
-
+		stat.close();
 		
+		// 1. write header
 		writer.startWritePOIIndex(regionName);
+		
+		// 2. write categories table
 		Map<String, Integer> catIndexes = writer.writePOICategoriesTable(categories);
 		
-		for (String s : categories.keySet()) {
-			System.out.println(s + " " + categories.get(s).size());
+		// 3. write boxes
+		String selectZm = (31 - ZOOM_TO_SAVE_END) +"";
+		rs = poiConnection.createStatement().executeQuery("SELECT DISTINCT x>>"+selectZm +", y>>"+selectZm + " from poi");
+		Set<Long>[] zooms = new Set[ZOOM_TO_SAVE_END + 1];
+		int zoomToStart = ZOOM_TO_SAVE_START;
+		for(int i=zoomToStart; i<=ZOOM_TO_SAVE_END; i++){
+			zooms[i] = new TreeSet<Long>();
 		}
+		while(rs.next()){
+			int x = rs.getInt(1);
+			int y = rs.getInt(2);
+			for(int i=zoomToStart; i<=ZOOM_TO_SAVE_END; i++){
+				int shift = ZOOM_TO_SAVE_END - i;
+				long l = (((long)x >> shift) << 31) | ((long)y >> shift);
+				zooms[i].add(l);
+			}
+		}
+		
+		for (int i = zoomToStart; i < ZOOM_TO_SAVE_END; i++) {
+			if (zooms[i].size() > 4) {
+				break;
+			}
+			zoomToStart = i;
+		}
+		
+		for (int i = zoomToStart; i <= ZOOM_TO_SAVE_END; i++) {
+			System.out.println(i + " " + zooms[i].size());
+		}
+		
+		stat = rs.getStatement();
+		rs.close();
+		stat.close();
 		
 		
 		writer.endWritePOIIndex();
@@ -206,12 +224,14 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 	
 	
 	public static void main(String[] args) throws SQLException, FileNotFoundException, IOException {
+		long time = System.currentTimeMillis();
 		IndexPoiCreator poiCreator = new IndexPoiCreator();
 		poiCreator.poiConnection  = (Connection) DBDialect.SQLITE.getDatabaseConnection("/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.odb", log);
 		BinaryMapIndexWriter writer = new BinaryMapIndexWriter(new RandomAccessFile("/home/victor/projects/OsmAnd/data/osm-gen/POI/Test-Ru.poi.obf", "rw"));
 		poiCreator.poiConnection.setAutoCommit(false);
 		poiCreator.writeBinaryPoiIndex(writer, "Ru-mow", new ConsoleProgressImplementation());
 		writer.close();
+		System.out.println("TIME " + (System.currentTimeMillis() - time));
 	}
 	
 }

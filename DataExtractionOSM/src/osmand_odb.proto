@@ -263,7 +263,6 @@ message OsmAndTransportIndex {
 message OsmAndPoiIndex {
     required string name = 1;
     
-    
     repeated OsmAndCategoryTable categoriesTable = 3;
     
     // leave space for other indexes
@@ -284,16 +283,20 @@ message OsmAndCategoryTable {
 
 message OsmAndPoiBox {
    required uint32 zoom = 1; // delta encoded to parent
+   // size is one tile
    required sint32 left = 2; // delta encoded (zoom)
-   required sint32 right = 3; // delta encoded (zoom)
-   required sint32 top = 4; // delta encoded (zoom)
-   required sint32 bottom = 5; // delta encoded (zoom)
-    
-   optional OsmAndPoiCategories categories = 6; 
-   // encoded as fixed32 length delimited
-   repeated OsmAndPoiBox subBoxes = 7;
+   required sint32 top = 3; // delta encoded (zoom)
    
-   optional uint32 shiftToData = 10; // shift to OsmAndPoiBoxDataAtom
+   optional OsmAndPoiCategories categories = 4;
+   
+   optional StringTable includeNamesList = 5;
+   
+   optional StringTable excludeNamesList = 6;
+    
+   // encoded as fixed32 length delimited
+   repeated OsmAndPoiBox subBoxes = 10;
+   
+   optional uint32 shiftToData = 14; // shift to OsmAndPoiBoxDataAtom
                                    // TODO
    							// TransportStop.Message.start -  sizeof(TransportStop.Message.length) - routes[i] 
    							//				= TransportRoute.Message.start - sizeof(TransportRoute.Message.length)

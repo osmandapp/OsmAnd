@@ -84,6 +84,7 @@ public class BinaryMapIndexWriter {
 	private final static int TRANSPORT_ROUTES = 11;
 	
 	private final static int POI_INDEX_INIT = 12;
+	private final static int POI_BOX = 13;
 
 	public BinaryMapIndexWriter(final RandomAccessFile raf) throws IOException{
 		this.raf = raf;
@@ -768,6 +769,18 @@ public class BinaryMapIndexWriter {
 		}
 		
 		return catIndexes;
+	}
+	
+	
+	public void startWritePoiBox(int zoom) throws IOException {
+		pushState(POI_BOX, POI_INDEX_INIT);
+		codedOutStream.writeTag(OsmandOdb.OsmAndTransportIndex.ROUTES_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+		preserveInt32Size();
+	}
+	
+	public void endWritePoiBox() throws IOException {
+		popState(POI_BOX);
+		writeInt32Size();
 	}
 	
 	public void endWritePOIIndex() throws IOException {

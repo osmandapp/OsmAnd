@@ -259,12 +259,34 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	}
 	
 	@Override
-	public City getCityById(Long id) {
+	public City getCityById(final Long id) {
 		if(id == -1){
 			// do not preload cities for that case
 			return null;
 		}
 		preloadCities(null);
+		if (!cities.containsKey(id)) {
+			try {
+				file.getVillages(region, new ResultMatcher<MapObject>() {
+					boolean canceled = false;
+
+					@Override
+					public boolean isCancelled() {
+						return canceled;
+					}
+					@Override
+					public boolean publish(MapObject object) {
+						if (object.getId().longValue() == id.longValue()) {
+							addCityToPreloadedList((City) object);
+							canceled = true;
+						}
+						return false;
+					}
+				}, null, useEnglishNames);
+			} catch (IOException e) {
+				log.error("Disk operation failed", e); //$NON-NLS-1$
+			}
+		}
 		return cities.get(id);
 	}
 

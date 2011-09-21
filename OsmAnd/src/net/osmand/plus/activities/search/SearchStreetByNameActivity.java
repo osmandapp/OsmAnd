@@ -46,6 +46,9 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 					postcode = region.getPostcode(settings.getLastSearchedPostcode());
 					if (postcode == null) {
 						city = region.getCityById(settings.getLastSearchedCity());
+						if(city == null){
+							return null;
+						}
 					}
 					region.preloadStreets(postcode == null ? city : postcode, new ResultMatcher<Street>() {
 						@Override
