@@ -1,5 +1,7 @@
 package net.osmand.binary;
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
@@ -15,6 +17,7 @@ import net.osmand.Algoritms;
 import net.osmand.binary.OsmandOdb.CityIndex;
 import net.osmand.binary.OsmandOdb.InteresectedStreets;
 import net.osmand.binary.OsmandOdb.MapEncodingRule;
+import net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom;
 import net.osmand.binary.OsmandOdb.OsmAndTransportIndex;
 import net.osmand.binary.OsmandOdb.PostcodeIndex;
 import net.osmand.binary.OsmandOdb.StreetIndex;
@@ -37,6 +40,7 @@ import net.sf.junidecode.Junidecode;
 import com.google.protobuf.CodedOutputStream;
 import com.google.protobuf.WireFormat;
 import com.google.protobuf.WireFormat.FieldType;
+import com.sun.org.apache.bcel.internal.generic.ALOAD;
 
 public class BinaryMapIndexWriter {
 
@@ -85,6 +89,7 @@ public class BinaryMapIndexWriter {
 	
 	private final static int POI_INDEX_INIT = 12;
 	private final static int POI_BOX = 13;
+	private final static int POI_DATA = 14;
 
 	public BinaryMapIndexWriter(final RandomAccessFile raf) throws IOException{
 		this.raf = raf;
@@ -114,10 +119,12 @@ public class BinaryMapIndexWriter {
 	}
 	
 
-	private void preserveInt32Size() throws IOException {
+	private long preserveInt32Size() throws IOException {
 		codedOutStream.flush();
-		stackSizes.push(raf.getFilePointer());
+		long filePointer = raf.getFilePointer();
+		stackSizes.push(filePointer);
 		codedOutStream.writeFixed32NoTag(0);
+		return filePointer + 4;
 	}
 	
 	private int writeInt32Size() throws IOException{
@@ -737,14 +744,22 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeMessage(OsmAndTransportIndex.STRINGTABLE_FIELD_NUMBER, st.build());
 	}
 	
-	public void startWritePOIIndex(String name) throws IOException {
+	public long startWritePOIIndex(String name) throws IOException {
 		pushState(POI_INDEX_INIT, OSMAND_STRUCTURE_INIT);
 		codedOutStream.writeTag(OsmandOdb.OsmAndStructure.POIINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		stackBounds.push(new Bounds(0, 0, 0, 0)); // for poi index tree
-		preserveInt32Size();
+		long startPoiIndex = preserveInt32Size();
 		if(name != null){
-			codedOutStream.writeString(OsmandOdb.OsmAndTransportIndex.NAME_FIELD_NUMBER, name);
+			codedOutStream.writeString(OsmandOdb.OsmAndPoiIndex.NAME_FIELD_NUMBER, name);
 		}
+		return startPoiIndex;
+	}
+	
+	public void endWritePOIIndex() throws IOException {
+		popState(POI_INDEX_INIT);
+		int len = writeInt32Size();
+		stackBounds.pop();
+		System.out.println("POI INDEX SIZE : " + len);
 	}
 	
 	public Map<String, Integer> writePOICategoriesTable(Map<String, Map<String, Integer>> categories) 
@@ -771,23 +786,95 @@ public class BinaryMapIndexWriter {
 		return catIndexes;
 	}
 	
+	public void writePoiDataAtom(long id, int x24shift, int y24shift, String nameEn, String name, TIntArrayList types, String openingHours,
+			String site, String phone) throws IOException {
+		checkPeekState(POI_DATA);
+		
+		OsmAndPoiBoxDataAtom.Builder builder = OsmandOdb.OsmAndPoiBoxDataAtom.newBuilder();
+		builder.setDx(x24shift);
+		builder.setDy(y24shift);
+		for(int i=0; i < types.size(); i++){
+			int j = types.get(i);
+			builder.addCategories(j);
+		}
+		
+		if(!Algoritms.isEmpty(name)){
+			builder.setName(name);
+		}
+		if(!Algoritms.isEmpty(nameEn)){
+			builder.setNameEn(nameEn);
+		}
+		builder.setId(id);
+		if(!Algoritms.isEmpty(openingHours)){
+			builder.setOpeningHours(openingHours);
+		}
+		if(!Algoritms.isEmpty(site)){
+			builder.setSite(site);
+		}
+		if(!Algoritms.isEmpty(phone)){
+			builder.setPhone(phone);
+		}
+		
+		codedOutStream.writeMessage(OsmandOdb.OsmAndPoiBoxData.POIDATA_FIELD_NUMBER, builder.build());
+		
+	}
 	
-	public void startWritePoiBox(int zoom) throws IOException {
-		pushState(POI_BOX, POI_INDEX_INIT);
-		codedOutStream.writeTag(OsmandOdb.OsmAndTransportIndex.ROUTES_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+	public void startWritePoiData(int zoom, int x, int y, long fpPoiIndex, long fpPoiBox) throws IOException {
+		pushState(POI_DATA, POI_INDEX_INIT);
+		codedOutStream.writeTag(OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+		long startPoiData = preserveInt32Size();
+		// write shift to that data
+		long filePointer = raf.getFilePointer();
+		raf.seek(fpPoiBox);
+		raf.writeInt((int) (startPoiData - fpPoiIndex));
+		raf.seek(filePointer);
+		
+		codedOutStream.writeUInt32(OsmandOdb.OsmAndPoiBoxData.ZOOM_FIELD_NUMBER, zoom);
+		codedOutStream.writeUInt32(OsmandOdb.OsmAndPoiBoxData.X_FIELD_NUMBER, x);
+		codedOutStream.writeUInt32(OsmandOdb.OsmAndPoiBoxData.Y_FIELD_NUMBER, y);
+				
+	}
+	
+	public void endWritePoiData() throws IOException {
+		popState(POI_DATA);
+		writeInt32Size();
+	}
+	
+	public long startWritePoiBox(int zoom, int tileX, int tileY) throws IOException {
+		checkPeekState(POI_INDEX_INIT, POI_BOX);
+		if(state.peek() == POI_INDEX_INIT){
+			codedOutStream.writeTag(OsmandOdb.OsmAndPoiIndex.BOXES_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+		} else {
+			codedOutStream.writeTag(OsmandOdb.OsmAndPoiBox.SUBBOXES_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+		}
+		state.push(POI_BOX);
 		preserveInt32Size();
+		
+		Bounds bounds = stackBounds.peek();
+		int parentZoom = bounds.rightX;
+		int parentTileX = bounds.leftX;
+		int parentTileY = bounds.topY;
+		
+		int pTileX = parentTileX << (zoom - parentZoom);
+		int pTileY = parentTileY << (zoom - parentZoom);
+		
+		codedOutStream.writeSInt32(OsmandOdb.OsmAndPoiBox.LEFT_FIELD_NUMBER, tileX - pTileX);
+		codedOutStream.writeSInt32(OsmandOdb.OsmAndPoiBox.TOP_FIELD_NUMBER, tileY - pTileY);
+		codedOutStream.writeUInt32(OsmandOdb.OsmAndPoiBox.ZOOM_FIELD_NUMBER, (zoom - parentZoom));
+		stackBounds.push(new Bounds(tileX, zoom, tileY, 0 ));
+		
+		
+		codedOutStream.writeFixed32(OsmandOdb.OsmAndPoiBox.SHIFTTODATA_FIELD_NUMBER, 0);
+		codedOutStream.flush();
+		long filePointer = raf.getFilePointer() - 4;
+		
+		return filePointer;
 	}
 	
 	public void endWritePoiBox() throws IOException {
 		popState(POI_BOX);
 		writeInt32Size();
-	}
-	
-	public void endWritePOIIndex() throws IOException {
-		popState(POI_INDEX_INIT);
-		int len = writeInt32Size();
 		stackBounds.pop();
-		System.out.println("POI INDEX SIZE : " + len);
 	}
 	
 	 
@@ -823,6 +910,7 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeInt32(OsmandOdb.OsmAndStructure.VERSIONCONFIRM_FIELD_NUMBER, IndexConstants.BINARY_MAP_VERSION);
 		codedOutStream.flush();
 	}
+
 
 
 

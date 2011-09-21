@@ -542,7 +542,8 @@ public class IndexCreator {
 				if (indexPOI) {
 					progress.setGeneralProgress("[95 of 100]");
 					progress.startTask("Writing poi index to binary file...", -1);
-					indexPoiCreator.writeBinaryPoiIndex(writer, regionName, progress);
+					// TODO uncomment
+					// indexPoiCreator.writeBinaryPoiIndex(writer, regionName, progress);
 				}
 
 				if (indexTransport) {

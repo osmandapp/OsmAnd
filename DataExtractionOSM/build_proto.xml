@@ -1,10 +1,10 @@
 <!--  build JAR libraty -->
 <project name="OsmPDB" default="build" basedir=".">
-	<target name="build" >
-		<exec dir="." executable="protoc">
-			<arg value="src/osmand_odb.proto"/>
-			<arg value="--java_out=./src/"/>
-		</exec> 
+	<target name="build">
+		<exec dir="." executable="/usr/bin/protoc">
+			<arg value="src/osmand_odb.proto" />
+			<arg value="--java_out=./src/" />
+		</exec>
 	</target>
 </project>
 
