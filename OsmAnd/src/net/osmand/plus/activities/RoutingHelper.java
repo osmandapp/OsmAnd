@@ -173,11 +173,11 @@ public class RoutingHelper {
 	private void updateCurrentRoute(int currentRoute){
 		this.currentRoute = currentRoute;
 		if(directionInfo != null){
-			while(currentDirectionInfo < directionInfo.size() - 1 && 
+			int dIsize = directionInfo.size();
+			while(currentDirectionInfo < dIsize - 1 && 
 					directionInfo.get(currentDirectionInfo + 1).routePointOffset < currentRoute){
 				currentDirectionInfo ++;
 			}
-			
 		}
 	}
 	
@@ -196,14 +196,15 @@ public class RoutingHelper {
 		}
 		boolean calculateRoute  = false;
 		synchronized (this) {
-			if(routeNodes.isEmpty() || routeNodes.size() <= currentRoute){
+			int rNsize = routeNodes.size(); 
+			if(routeNodes.isEmpty() || rNsize <= currentRoute){
 				calculateRoute = true;
 			} else {
 				// Check whether user follow by route in correct direction
 				
 				// 1. try to mark passed route (move forward)
 				float dist = currentLocation.distanceTo(routeNodes.get(currentRoute));
-				while(currentRoute + 1 < routeNodes.size()){
+				while(currentRoute + 1 < rNsize){
 					float newDist = currentLocation.distanceTo(routeNodes.get(currentRoute + 1));
 					boolean proccesed = false;
 					if (newDist < dist){
@@ -240,8 +241,6 @@ public class RoutingHelper {
 									proccesed = true;
 								}
 							}
-							
-							
 						}
 					}
 					if(proccesed){
@@ -259,7 +258,7 @@ public class RoutingHelper {
 				}
 				
 				// 3. check if closest location already passed
-				if(currentRoute + 1 < routeNodes.size()){
+				if(currentRoute + 1 < rNsize){
 					float bearing = routeNodes.get(currentRoute).bearingTo(routeNodes.get(currentRoute + 1));
 					float bearingMovement = currentLocation.bearingTo(routeNodes.get(currentRoute));
 					// only 35 degrees for that case because it wrong catches sharp turns 
@@ -273,7 +272,7 @@ public class RoutingHelper {
 				
 				// 3.5 check that we already pass very sharp turn by missing one point (so our turn is sharper than expected)
 				// instead of that rule possible could be introduced another if the dist < 5m mark the location as already passed
-				if(currentRoute + 2 < routeNodes.size()){
+				if(currentRoute + 2 < rNsize){
 					float bearing = routeNodes.get(currentRoute + 1).bearingTo(routeNodes.get(currentRoute + 2));
 					float bearingMovement = currentLocation.bearingTo(routeNodes.get(currentRoute + 1));
 					// only 15 degrees for that case because it wrong catches sharp turns 
@@ -536,7 +535,8 @@ public class RoutingHelper {
 			}
 		}
 		
-		for (int i = currentRoute; i < routeNodes.size(); i++) {
+		int rNsize = routeNodes.size(); 
+		for (int i = currentRoute; i < rNsize; i++) {
 			Location ls = routeNodes.get(i);
 			if(leftLongitude <= ls.getLongitude() && ls.getLongitude() <= rightLongitude &&
 					bottomLatitude <= ls.getLatitude() && ls.getLatitude() <= topLatitude){
