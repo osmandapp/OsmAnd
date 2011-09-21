@@ -339,7 +339,8 @@ public class OsmandRenderer {
 			int objCount = 0;
 			for (int k = 0; k < keys.length; k++) {
 				TIntArrayList list = orderMap.get(keys[k]);
-				for (int j = 0; j < list.size(); j++) {
+				int lsize = list.size();
+				for (int j = 0; j < lsize(); j++) {
 					int i = list.get(j);
 					int ind = i >> 8;
 					int l = i & 0xff;
@@ -582,7 +583,8 @@ public class OsmandRenderer {
 			}
 			// find sublist that is appropriate
 			int e = index;
-			while (e < boundsIntersect.size()) {
+			int bisize = boundsIntersect.size();
+			while (e < bisize) {
 				if (boundsIntersect.get(e).left < bounds.right ) {
 					e++;
 				} else {
