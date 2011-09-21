@@ -11,12 +11,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
@@ -182,14 +184,15 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 			closePreparedStatements(poiPreparedStatement);
 		}
 		poiConnection.commit();
-
+		Collator collator = Collator.getInstance();
+		collator.setStrength(Collator.PRIMARY);
 		ResultSet rs = poiConnection.createStatement().executeQuery("SELECT DISTINCT type, subtype FROM poi");
 		Map<String, Map<String, Integer>> categories = new LinkedHashMap<String, Map<String, Integer>>();
 		while (rs.next()) {
 			String category = rs.getString(1);
 			String subcategory = rs.getString(2).trim();
 			if (!categories.containsKey(category)) {
-				categories.put(category, new LinkedHashMap<String, Integer>());
+				categories.put(category, new TreeMap<String, Integer>(collator));
 			}
 			if (subcategory.contains(";") || subcategory.contains(",")) {
 				String[] split = subcategory.split(",|;");

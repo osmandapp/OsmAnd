@@ -16,6 +16,7 @@ import java.util.Set;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.MapRoot;
+import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.data.City;
 import net.osmand.data.Street;
@@ -33,7 +34,7 @@ public class BinaryInspector {
 		inspector(args);
 		// test cases show info
 		//inspector(new String[]{"/home/victor/projects/OsmAnd/data/osm-gen/saved/Belarus-newzooms-new-rt.obf"});
-		//inspector(new String[]{"-v","C:\\Users\\tpd\\osmand\\Slovakia.obf "});
+		// inspector(new String[]{""});
 		
 		
 		// test case extract parts
@@ -238,6 +239,9 @@ public class BinaryInspector {
 					} else if (part instanceof TransportIndex) {
 						ous.writeTag(OsmandOdb.OsmAndStructure.TRANSPORTINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 						map = "Transport";
+					} else if (part instanceof PoiRegion) {
+						ous.writeTag(OsmandOdb.OsmAndStructure.POIINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+						map = "POI";
 					} else {
 						throw new UnsupportedOperationException();
 					}
@@ -306,6 +310,8 @@ public class BinaryInspector {
 					partname = "Map";
 				} else if(p instanceof TransportIndex){
 					partname = "Transport";
+				} else if(p instanceof PoiRegion){
+					partname = "Poi";
 				} else if(p instanceof AddressRegion){
 					partname = "Address";
 				}

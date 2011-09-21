@@ -18,6 +18,7 @@ import net.osmand.LogUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
+import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.data.Building;
 import net.osmand.data.City;
@@ -44,6 +45,7 @@ public class BinaryMapIndexReader {
 	private final RandomAccessFile raf;
 	private int version;
 	private List<MapIndex> mapIndexes = new ArrayList<MapIndex>();
+	private List<PoiRegion> poiIndexes = new ArrayList<PoiRegion>();
 	private List<AddressRegion> addressIndexes = new ArrayList<AddressRegion>();
 	private List<TransportIndex> transportIndexes = new ArrayList<TransportIndex>();
 	private List<BinaryIndexPart> indexes = new ArrayList<BinaryIndexPart>();
@@ -51,6 +53,7 @@ public class BinaryMapIndexReader {
 	protected CodedInputStreamRAF codedIS;
 	
 	private final BinaryMapTransportReaderAdapter transportAdapter;
+	private final BinaryMapPoiReaderAdapter poiAdapter;
 	private final BinaryMapAddressReaderAdapter addressAdapter;
 	
 	public BinaryMapIndexReader(final RandomAccessFile raf) throws IOException {
@@ -64,9 +67,11 @@ public class BinaryMapIndexReader {
 		if(!readOnlyMapData){
 			transportAdapter = new BinaryMapTransportReaderAdapter(this);
 			addressAdapter = new BinaryMapAddressReaderAdapter(this);
+			poiAdapter = new BinaryMapPoiReaderAdapter(this);
 		} else {
 			transportAdapter = null;
 			addressAdapter = null;
+			poiAdapter = null;
 		}
 		init();
 	}
@@ -124,6 +129,19 @@ public class BinaryMapIndexReader {
 					indexes.add(ind);
 				}
 				codedIS.seek(ind.filePointer + ind.length);
+				break;
+			case OsmandOdb.OsmAndStructure.POIINDEX_FIELD_NUMBER:
+				PoiRegion poiInd = new PoiRegion();
+				poiInd.length = readInt();
+				poiInd.filePointer = codedIS.getTotalBytesRead();
+				if (poiAdapter != null) {
+					oldLimit = codedIS.pushLimit(poiInd.length);
+					poiAdapter.readPoiIndex(poiInd);
+					codedIS.popLimit(oldLimit);
+					poiIndexes.add(poiInd);
+					indexes.add(poiInd);
+				}
+				codedIS.seek(poiInd.filePointer + poiInd.length);
 				break;
 			case OsmandOdb.OsmAndStructure.VERSIONCONFIRM_FIELD_NUMBER :
 				int cversion = codedIS.readUInt32();
@@ -895,6 +913,10 @@ public class BinaryMapIndexReader {
 	protected List<AddressRegion> getAddressIndexes() {
 		return addressIndexes;
 	}
+	
+	protected List<PoiRegion> getPoiIndexes() {
+		return poiIndexes;
+	}
 
 	
 	public static SearchRequest<BinaryMapDataObject> buildSearchRequest(int sleft, int sright, int stop, int sbottom, int zoom){
@@ -1066,8 +1088,6 @@ public class BinaryMapIndexReader {
 			return true;
 		}
 		
-		
-		
 	}
 	
 	
@@ -1116,57 +1136,26 @@ public class BinaryMapIndexReader {
 
 	
 	public static void main(String[] args) throws IOException {
-		RandomAccessFile raf = new RandomAccessFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/Ru-mow.obf"), "r");
+		RandomAccessFile raf = new RandomAccessFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/POI/Test-Ru.poi.obf"), "r");
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
 		System.out.println("VERSION " + reader.getVersion()); //$NON-NLS-1$
 		long time = System.currentTimeMillis();
-		
-		System.out.println(reader.mapIndexes.get(0).encodingRules);
-		
-		// test search
-//		int sleft = MapUtils.get31TileNumberX(27.596);
-//		int sright = MapUtils.get31TileNumberX(27.599);
-//		int stop = MapUtils.get31TileNumberY(53.921);
-//		int sbottom = MapUtils.get31TileNumberY(53.919);
-//		System.out.println("SEARCH " + sleft + " " + sright + " " + stop + " " + sbottom);
-//
-//		for (BinaryMapDataObject obj : reader.searchMapIndex(buildSearchRequest(sleft, sright, stop, sbottom, 8))) {
-//			if (obj.getName() != null) {
-//				System.out.println(" " + obj.getName());
-//			}
-//		}
-		
-		// test address index search
-		String reg = reader.getRegionNames().get(0);
-		List<City> cs = reader.getCities(reg, null);
-		for(City c : cs){
-			int buildings = 0;
-			reader.preloadStreets(c, null);
-			for(Street s : c.getStreets()){
-				if(s.getName().toLowerCase().startsWith("заре")){
-					System.out.println("  " + s.getName());
-				} else if(s.getName().toLowerCase().contains("инстит")){
-					System.out.println("  " + s.getName());
-				}
-//				reader.preloadBuildings(s);
-//				buildings += s.getBuildings().size();
-			}
-			System.out.println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings + " " + c.getEnName());
+
+		testMapSearch(reader);
+		testAddressSearch(reader);
+		testTransportSearch(reader);
+
+		PoiRegion poiRegion = reader.getPoiIndexes().get(0);
+		for (int i = 0; i < poiRegion.categories.size(); i++) {
+			System.out.println(poiRegion.categories.get(i));
+			System.out.println(" " + poiRegion.subcategories.get(i));
 		}
-//		List<PostCode> postcodes = reader.getPostcodes(reg);
-//		for(PostCode c : postcodes){
-//			reader.preloadStreets(c);
-//			System.out.println(c.getName());
-//		}
-//		List<City> villages = reader.getVillages(reg, new StringMatcher() {
-//			
-//			@Override
-//			public boolean matches(String name) {
-//				return false;
-//			}
-//		}, true);
-//		System.out.println("Villages " + villages.size());
-		
+
+		System.out.println("MEMORY " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())); //$NON-NLS-1$
+		System.out.println("Time " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
+	}
+
+	private static void testTransportSearch(BinaryMapIndexReader reader) {
 		// test transport
 //		for(TransportIndex i : reader.transportIndexes){
 //			System.out.println(i.left + " " + i.right + " " + i.top + " " + i.bottom);
@@ -1202,9 +1191,49 @@ public class BinaryMapIndexReader {
 //				}
 //			}
 //		}
-		
-		System.out.println("MEMORY " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())); //$NON-NLS-1$
-		System.out.println("Time " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
+	}
+
+	private static void testAddressSearch(BinaryMapIndexReader reader) throws IOException {
+		// test address index search
+//		String reg = reader.getRegionNames().get(0);
+//		List<City> cs = reader.getCities(reg, null);
+//		for(City c : cs){
+//			int buildings = 0;
+//			reader.preloadStreets(c, null);
+//			for(Street s : c.getStreets()){
+//				reader.preloadBuildings(s);
+//				buildings += s.getBuildings().size();
+//			}
+//			System.out.println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings + " " + c.getEnName());
+//		}
+//		List<PostCode> postcodes = reader.getPostcodes(reg);
+//		for(PostCode c : postcodes){
+//			reader.preloadStreets(c);
+//			System.out.println(c.getName());
+//		}
+//		List<City> villages = reader.getVillages(reg, new StringMatcher() {
+//			
+//			@Override
+//			public boolean matches(String name) {
+//				return false;
+//			}
+//		}, true);
+//		System.out.println("Villages " + villages.size());
+	}
+
+	private static void testMapSearch(BinaryMapIndexReader reader) throws IOException {
+//		System.out.println(reader.mapIndexes.get(0).encodingRules);
+//		int sleft = MapUtils.get31TileNumberX(27.596);
+//		int sright = MapUtils.get31TileNumberX(27.599);
+//		int stop = MapUtils.get31TileNumberY(53.921);
+//		int sbottom = MapUtils.get31TileNumberY(53.919);
+//		System.out.println("SEARCH " + sleft + " " + sright + " " + stop + " " + sbottom);
+//
+//		for (BinaryMapDataObject obj : reader.searchMapIndex(buildSearchRequest(sleft, sright, stop, sbottom, 8))) {
+//			if (obj.getName() != null) {
+//				System.out.println(" " + obj.getName());
+//			}
+//		}
 	}
 	
 }
