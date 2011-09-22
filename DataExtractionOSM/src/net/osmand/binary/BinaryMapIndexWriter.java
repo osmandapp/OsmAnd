@@ -40,7 +40,6 @@ import net.sf.junidecode.Junidecode;
 import com.google.protobuf.CodedOutputStream;
 import com.google.protobuf.WireFormat;
 import com.google.protobuf.WireFormat.FieldType;
-import com.sun.org.apache.bcel.internal.generic.ALOAD;
 
 public class BinaryMapIndexWriter {
 
