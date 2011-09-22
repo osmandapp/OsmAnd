@@ -186,8 +186,8 @@ public class RouteProvider {
 				}
 				
 				// check points for duplicates (it is very bad for routing) - cloudmade could return it 
-				for (int i = locations.size() - 1; i >= 0; ) {
-					if(locations.get(i).distanceTo(locations.get(i-1)) == 0){
+				for (int i = locations.size() - 1; i >= 0; i--) {
+					if(locations.get(i).distanceTo(locations.get(i-1)) == 0){//maybe a check if locations.get(i)==locations.get(i-1) is faster?
 						locations.remove(i);
 						if (directions != null) {
 							for (RouteDirectionInfo info : directions) {
@@ -196,21 +196,17 @@ public class RouteProvider {
 								}
 							}
 						}
-					} else {
-						i--;
 					}
 				}
 				// Remove unnecessary go straight from CloudMade 
 				// Remove also last direction because it will be added after
 				if(directions != null && directions.size() > 1){
-					for (int i = directions.size()-1; i > 0; ) {
+					for (int i = directions.size()-1; i > 0; i--) {
 						RouteDirectionInfo r = directions.get(i);
 						if(r.turnType.getValue().equals(TurnType.C)){
 							RouteDirectionInfo prev = directions.get(i-1);
 							prev.expectedTime += r.expectedTime;
 							directions.remove(i);
-						} else {
-							i--;
 						}
 					}
 				}
