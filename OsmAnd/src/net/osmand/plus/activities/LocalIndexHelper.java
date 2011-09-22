@@ -128,12 +128,14 @@ public class LocalIndexHelper {
 			double totalSpeedSum = 0;
 			
 			int points = 0;
-			for(int i = 0; i< result.tracks.size() ; i++){
+			int rtsize = result.tracks.size(); 
+			for(int i = 0; i< rtsize; i++){
 				Track subtrack = result.tracks.get(i);
 				for(TrkSegment segment : subtrack.segments){
 					totalTracks++;
-					points += segment.points.size();
-					for (int j = 0; j < segment.points.size(); j++) {
+					int spsize = segment.points.size(); 
+					points += spsize;
+					for (int j = 0; j < spsize; j++) {
 						WptPt point = segment.points.get(j);
 						long time = point.time;
 						if(time != 0){

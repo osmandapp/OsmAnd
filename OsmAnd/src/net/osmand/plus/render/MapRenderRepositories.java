@@ -245,7 +245,8 @@ public class MapRenderRepositories {
 
 					@Override
 					public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex root) {
-						for (int j = 0; j < types.size(); j++) {
+						int tsize = types.size(); 
+						for (int j = 0; j < tsize; j++) {
 							int type = types.get(j);
 							int mask = type & 3;
 							TagValuePair pair = root.decodeType(type);
@@ -259,7 +260,6 @@ public class MapRenderRepositories {
 						}
 						return false;
 					}
-
 				});
 			}
 			// search lower level zooms only in basemap for now :) before it was intersection of maps on zooms 5-7
@@ -291,8 +291,8 @@ public class MapRenderRepositories {
 						ids.add(r.getId());
 					}
 					count++;
-					
-					for(int i=0; i < r.getTypes().length; i++){
+					int rgTl = r.getTypes().length;
+					for(int i=0; i < rgTl; i++){
 						if ((r.getTypes()[i] & 0x3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
 							// multy polygon r.getId() >> 3
 							TagValuePair pair = r.getMapIndex().decodeType(MapRenderingTypes.getMainObjectType(r.getTypes()[i]),
@@ -596,33 +596,35 @@ public class MapRenderRepositories {
 
 			}
 		}
-		
-		long[][] lns = new long[completedRings.size()][];
-		for (int i = 0; i < completedRings.size(); i++) {
+		int cRsize = completedRings.size(); 
+		long[][] lns = new long[cRsize][];
+		for (int i = cRsize - 1; i >= 0; i--) {
 			TLongList ring = completedRings.get(i);
 			lns[i] = new long[ring.size()];
-			for (int j = 0; j < lns[i].length; j++) {
+			for (int j = lns[i].length - 1; j >= 0; j--) {
 				lns[i][j] = ring.get(j);
 			}
 		}
-		pl.setNames(completedRingNames.toArray(new String[completedRings.size()]));
+
+		pl.setNames(completedRingNames.toArray(new String[cRsize]));
 		pl.setLines(lns);
 		return pl;
 	}
 	
 	// Copied from MapAlgorithms
 	private boolean isClockwiseWay(TLongList c){
-		if(c.size() == 0){
+		int csize = c.size(); 
+		if(csize == 0){
 			return true;
 		}
 
 		// calculate middle Y
 		int mask = 0xffffffff;
 		long middleY = 0;
-		for(int i=0; i< c.size(); i++) {
+		for(int i=0; i< csize; i++) {
 			middleY += (c.get(i) & mask); 
 		}
-		middleY /= (long) c.size();
+		middleY /= (long) csize;
 		
 		double clockwiseSum = 0;
 
@@ -633,9 +635,10 @@ public class MapRenderRepositories {
 		int prevX = (int) (c.get(0) >> 32);
 		int prevY = (int) (c.get(0) & mask);
 		
-		for (int i = 1; i < c.size(); i++) {
-			int x = (int) (c.get(i) >> 32);
-			int y = (int) (c.get(i) & mask);
+		for (int i = 1; i < csize; i++) {
+			long ci = c.get(i);
+			int x = (int) (ci >> 32);
+			int y = (int) (ci & mask);
 			int rX = ray_intersect_x(prevX, prevY, x, y, (int) middleY);
 			if (rX != Integer.MIN_VALUE) {
 				boolean skipSameSide = (y <= middleY) == (prevY <= middleY);
@@ -707,9 +710,11 @@ public class MapRenderRepositories {
 		int px = 0;
 		int py = 0;
 		int mask = 0xffffffff;
-		for (int i = 0; i < c.size(); i++) {
-			int x = (int) (c.get(i) >> 32);
-			int y = (int) (c.get(i) & mask);
+		int csize = c.size();
+		for (int i = 0; i < csize; i++) {
+			long ci = c.get(i);
+			int x = (int) (ci >> 32);
+			int y = (int) (ci & mask);
 			if (i >= 1) {
 				double ang = Math.atan2(py - y, x - px);
 				if (i > 1) {
@@ -783,12 +788,16 @@ public class MapRenderRepositories {
 			int leftX, int rightX,	int bottomY, int topY, long dbId, int zoom) {
 		int mask = 0xffffffff;
 		Set<Integer> nonvisitedRings = new LinkedHashSet<Integer>();
-		for(int j = 0; j< incompletedRings.size(); j++){
+		int iRsize = incompletedRings.size();
+		for(int j = 0; j< iRsize; j++){
 			TLongList i = incompletedRings.get(j);
-			int x = (int) (i.get(i.size() - 1) >> 32);
-			int y = (int) (i.get(i.size() - 1) & mask);
-			int sx = (int) (i.get(0) >> 32);
-			int sy = (int) (i.get(0) & mask);
+			long igis = i.get(i.size() - 1);
+			long igz = i.get(0);
+
+			int x = (int) (igis >> 32);
+			int y = (int) (igis & mask);
+			int sx = (int) (igz >> 32);
+			int sy = (int) (igz & mask);
 			boolean st = y == topY || x == rightX || y == bottomY || x == leftX;
 			boolean end = sy == topY || sx == rightX || sy == bottomY || sx == leftX;
 			// something wrong here
@@ -817,15 +826,16 @@ public class MapRenderRepositories {
 				nonvisitedRings.add(j);
 			}
 		}
-		for(int j = 0; j< incompletedRings.size(); j++){
+		for(int j = 0; j< iRsize; j++){
 			TLongList i = incompletedRings.get(j);
 			String name = incompletedRingNames.get(j);
 			if(!nonvisitedRings.contains(j)){
 				continue;
 			}
 			
-			int x = (int) (i.get(i.size() - 1) >> 32);
-			int y = (int) (i.get(i.size() - 1) & mask);
+			long igis = i.get(i.size() - 1);
+			int x = (int) (igis >> 32);
+			int y = (int) (igis & mask);
 			// 31 - (zoom + 8)
 			int EVAL_DELTA = 6 << (23 - zoom); 
 			int UNDEFINED_MIN_DIFF = -1 - EVAL_DELTA;			
@@ -848,8 +858,9 @@ public class MapRenderRepositories {
 					int mindiff = UNDEFINED_MIN_DIFF;
 					for (Integer ni : nonvisitedRings) {
 						TLongList cni = incompletedRings.get(ni);
-						int csx = (int) (cni.get(0) >> 32);
-						int csy = (int) (cni.get(0) & mask);
+						long cniz = cni.get(0);
+						int csx = (int) (cniz >> 32);
+						int csy = (int) (cniz & mask);
 						if (h % 4 == 0) {
 							// top
 							if (csy == topY && csx >= safelyAddDelta(x, - EVAL_DELTA)) {
@@ -919,8 +930,9 @@ public class MapRenderRepositories {
 					i.addAll(incompletedRings.get(nextRingIndex));
 					nonvisitedRings.remove(nextRingIndex);
 					// get last point and start again going clockwise
-					x = (int) (i.get(i.size() - 1) >> 32);
-					y = (int) (i.get(i.size() - 1) & mask);
+					igis = i.get(i.size() - 1);
+					x = (int) (igis >> 32);
+					y = (int) (igis & mask);
 				}
 			}
 			

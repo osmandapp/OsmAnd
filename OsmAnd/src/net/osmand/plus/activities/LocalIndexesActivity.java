@@ -805,7 +805,8 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 			}
 			List<LocalIndexInfo> list = data.get(group);
 			int size = 0;
-			for(int i=0; i<list.size(); i++){
+			int lsize = list.size(); 
+			for(int i=0; i<lsize; i++){
 				int sz = list.get(i).getSize();
 				if(sz < 0){
 					size = 0;

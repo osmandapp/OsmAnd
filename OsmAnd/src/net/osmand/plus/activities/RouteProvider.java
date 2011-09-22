@@ -186,8 +186,8 @@ public class RouteProvider {
 				}
 				
 				// check points for duplicates (it is very bad for routing) - cloudmade could return it 
-				for (int i = 0; i < locations.size() - 1; ) {
-					if(locations.get(i).distanceTo(locations.get(i+1)) == 0){
+				for (int i = locations.size() - 1; i >= 0; i--) {
+					if(locations.get(i).distanceTo(locations.get(i-1)) == 0){//maybe a check if locations.get(i)==locations.get(i-1) is faster?
 						locations.remove(i);
 						if (directions != null) {
 							for (RouteDirectionInfo info : directions) {
@@ -196,21 +196,17 @@ public class RouteProvider {
 								}
 							}
 						}
-					} else {
-						i++;
 					}
 				}
 				// Remove unnecessary go straight from CloudMade 
 				// Remove also last direction because it will be added after
 				if(directions != null && directions.size() > 1){
-					for (int i = 1; i < directions.size(); ) {
+					for (int i = directions.size()-1; i > 0; i--) {
 						RouteDirectionInfo r = directions.get(i);
 						if(r.turnType.getValue().equals(TurnType.C)){
 							RouteDirectionInfo prev = directions.get(i-1);
 							prev.expectedTime += r.expectedTime;
 							directions.remove(i);
-						} else {
-							i++;
 						}
 					}
 				}
@@ -226,12 +222,14 @@ public class RouteProvider {
 			}
 			if (directions != null) {
 				int sum = 0;
-				for (int i = directions.size() - 1; i >= 0; i--) {
-					directions.get(i).afterLeftTime = sum;
-					sum += directions.get(i).expectedTime;
-					directions.get(i).distance = listDistance[directions.get(i).routePointOffset];
-					if(i < directions.size() - 1){
-						directions.get(i).distance -=listDistance[directions.get(i + 1).routePointOffset];
+				int dsize = directions.size(); 
+				for (int i = dsize - 1; i >= 0; i--) {
+					RouteDirectionInfo idirection = directions.get(i);
+					idirection.afterLeftTime = sum;
+					sum += idirection.expectedTime;
+					idirection.distance = listDistance[idirection.routePointOffset];
+					if(i < dsize - 1){
+						idirection.distance -=listDistance[directions.get(i + 1).routePointOffset];
 					}
 				}
 			}
@@ -292,7 +290,7 @@ public class RouteProvider {
 		List<Location> gpxRoute = params.points;
 		int endI = gpxRoute.size(); 
 		if (start != null) {
-			for (int i = 0; i < gpxRoute.size(); i++) {
+			for (int i = 0; i < endI; i++) {
 				float d = gpxRoute.get(i).distanceTo(start);
 				if (d < minDist) {
 					startI = i;
@@ -380,8 +378,8 @@ public class RouteProvider {
 		float previousBearing = 0;
 		int startTurnPoint = 0;
 		
-		
-		for (int i = 1; i < locations.size() - 1; i++) {
+		int lsize = locations.size(); 
+		for (int i = 1; i < lsize - 1; i++) {
 			
 			Location next = locations.get(i + 1);
 			Location current = locations.get(i);
@@ -412,7 +410,7 @@ public class RouteProvider {
 			}
 			
 			distForTurn += locations.get(i).distanceTo(locations.get(i + 1)); 
-			if (i < locations.size() - 1 &&  distForTurn < minDistanceForTurn) {
+			if (i < lsize - 1 &&  distForTurn < minDistanceForTurn) {
 				// For very smooth turn we try to accumulate whole distance
 				// simply skip that turn needed for situation
 				// 1) if you are going to have U-turn - not 2 left turns
@@ -475,19 +473,18 @@ public class RouteProvider {
 			info.distance = 0;
 			info.descriptionRoute = ""; //$NON-NLS-1$
 			info.turnType = TurnType.valueOf(TurnType.C);
-			info.routePointOffset = locations.size() - 1;
+			info.routePointOffset = lsize - 1;
 			directions.add(info);
 		}
-		
-
 		
 		if(res.directions == null || res.directions.isEmpty()){
 			res.directions = new ArrayList<RouteDirectionInfo>(directions);
 		} else {
 			int currentDirection= 0;
 			// one more
-			for (int i = 0; i <= res.directions.size() && currentDirection < directions.size(); i++) {
-				while(currentDirection < directions.size()){
+			int dirsize = directions.size();
+			for (int i = 0; i <= res.directions.size() && currentDirection < dirsize; i++) {
+				while(currentDirection < dirsize){
 					int distanceAfter = 0;
 					if (i < res.directions.size()) {
 						RouteDirectionInfo resInfo = res.directions.get(i);
@@ -529,13 +526,13 @@ public class RouteProvider {
 					currentDirection++;
 				}
 			}
-			
 		}
 		
 		int sum = 0;
 		for (int i = res.directions.size() - 1; i >= 0; i--) {
-			res.directions.get(i).afterLeftTime = sum;
-			sum += res.directions.get(i).expectedTime;
+			RouteDirectionInfo resInfo = res.directions.get(i);
+			resInfo.afterLeftTime = sum;
+			sum += resInfo.expectedTime;
 		}
 	}
 
@@ -795,7 +792,8 @@ public class RouteProvider {
 		int cRoute = currentRoute;
 		int cDirInfo = currentDirectionInfo;
 		
-		for(int i = cRoute; i< routeNodes.size(); i++){
+		int rNsize = routeNodes.size();
+		for(int i = cRoute; i< rNsize; i++){
 			Location loc = routeNodes.get(i);
 			WptPt pt = new WptPt();
 			pt.lat = loc.getLatitude();
@@ -813,7 +811,8 @@ public class RouteProvider {
 		}
 		Route route = new Route();
 		gpx.routes.add(route);
-		for (int i = cDirInfo; i < directionInfo.size(); i++) {
+		int dIsize = directionInfo.size();
+		for (int i = cDirInfo; i < dIsize; i++) {
 			RouteDirectionInfo dirInfo = directionInfo.get(i);
 			if (dirInfo.routePointOffset >= cRoute) {
 				Location loc = routeNodes.get(dirInfo.routePointOffset);
