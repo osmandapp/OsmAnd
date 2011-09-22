@@ -598,13 +598,14 @@ public class MapRenderRepositories {
 		}
 		int cRsize = completedRings.size(); 
 		long[][] lns = new long[cRsize][];
-		for (int i = 0; i < cRsize; i++) {
+		for (int i = cRsize - 1; i >= 0; i--) {
 			TLongList ring = completedRings.get(i);
 			lns[i] = new long[ring.size()];
-			for (int j = 0; j < lns[i].length; j++) {
+			for (int j = lns[i].length - 1; j >= 0; j--) {
 				lns[i][j] = ring.get(j);
 			}
 		}
+
 		pl.setNames(completedRingNames.toArray(new String[cRsize]));
 		pl.setLines(lns);
 		return pl;
@@ -635,8 +636,9 @@ public class MapRenderRepositories {
 		int prevY = (int) (c.get(0) & mask);
 		
 		for (int i = 1; i < csize; i++) {
-			int x = (int) (c.get(i) >> 32);
-			int y = (int) (c.get(i) & mask);
+			long ci = c.get(i);
+			int x = (int) (ci >> 32);
+			int y = (int) (ci & mask);
 			int rX = ray_intersect_x(prevX, prevY, x, y, (int) middleY);
 			if (rX != Integer.MIN_VALUE) {
 				boolean skipSameSide = (y <= middleY) == (prevY <= middleY);
@@ -710,8 +712,9 @@ public class MapRenderRepositories {
 		int mask = 0xffffffff;
 		int csize = c.size();
 		for (int i = 0; i < csize; i++) {
-			int x = (int) (c.get(i) >> 32);
-			int y = (int) (c.get(i) & mask);
+			long ci = c.get(i);
+			int x = (int) (ci >> 32);
+			int y = (int) (ci & mask);
 			if (i >= 1) {
 				double ang = Math.atan2(py - y, x - px);
 				if (i > 1) {
@@ -788,10 +791,13 @@ public class MapRenderRepositories {
 		int iRsize = incompletedRings.size();
 		for(int j = 0; j< iRsize; j++){
 			TLongList i = incompletedRings.get(j);
-			int x = (int) (i.get(i.size() - 1) >> 32);
-			int y = (int) (i.get(i.size() - 1) & mask);
-			int sx = (int) (i.get(0) >> 32);
-			int sy = (int) (i.get(0) & mask);
+			long igis = i.get(i.size() - 1);
+			long igz = i.get(0);
+
+			int x = (int) (igis >> 32);
+			int y = (int) (igis & mask);
+			int sx = (int) (igz >> 32);
+			int sy = (int) (igz & mask);
 			boolean st = y == topY || x == rightX || y == bottomY || x == leftX;
 			boolean end = sy == topY || sx == rightX || sy == bottomY || sx == leftX;
 			// something wrong here
@@ -827,8 +833,9 @@ public class MapRenderRepositories {
 				continue;
 			}
 			
-			int x = (int) (i.get(i.size() - 1) >> 32);
-			int y = (int) (i.get(i.size() - 1) & mask);
+			long igis = i.get(i.size() - 1);
+			int x = (int) (igis >> 32);
+			int y = (int) (igis & mask);
 			// 31 - (zoom + 8)
 			int EVAL_DELTA = 6 << (23 - zoom); 
 			int UNDEFINED_MIN_DIFF = -1 - EVAL_DELTA;			
@@ -851,8 +858,9 @@ public class MapRenderRepositories {
 					int mindiff = UNDEFINED_MIN_DIFF;
 					for (Integer ni : nonvisitedRings) {
 						TLongList cni = incompletedRings.get(ni);
-						int csx = (int) (cni.get(0) >> 32);
-						int csy = (int) (cni.get(0) & mask);
+						long cniz = cni.get(0);
+						int csx = (int) (cniz >> 32);
+						int csy = (int) (cniz & mask);
 						if (h % 4 == 0) {
 							// top
 							if (csy == topY && csx >= safelyAddDelta(x, - EVAL_DELTA)) {
@@ -922,8 +930,9 @@ public class MapRenderRepositories {
 					i.addAll(incompletedRings.get(nextRingIndex));
 					nonvisitedRings.remove(nextRingIndex);
 					// get last point and start again going clockwise
-					x = (int) (i.get(i.size() - 1) >> 32);
-					y = (int) (i.get(i.size() - 1) & mask);
+					igis = i.get(i.size() - 1);
+					x = (int) (igis >> 32);
+					y = (int) (igis & mask);
 				}
 			}
 			
