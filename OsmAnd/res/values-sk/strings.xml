@@ -5,12 +5,12 @@
 	<string name="choose_auto_follow_route_descr">Výber časového intervalu na nasledovanie pozície na mape</string>
 	<string name="search_select_point">Vybrať</string>
 	<string name="local_index_description">Stiahnite nové, zálohujte alebo zmažte existujúce údaje. \nAktuálne offline údaje v zariadení (%1$s dostupných):</string>
-	<string name="search_position_current_location_search">Hľadať umiestnenie...</string>
+	<string name="search_position_current_location_search">Hľadám umiestnenie...</string>
 	<string name="search_position_current_location_found">Umiestnenie [Nájdené]</string>
 	<string name="search_position_address">Adresa...</string>
 	<string name="search_position_favorites">Obľúbené...</string>
 	<string name="search_position_undefined">Neurčené</string>
-	<string name="search_position_fixed">Pevné</string>
+	<string name="search_position_fixed">Súradnice</string>
 	<string name="search_position_current_location">Aktuálne umiestnenie...</string>
 	<string name="search_position_map_view">Posledné mapové zobrazenie</string>
 	
