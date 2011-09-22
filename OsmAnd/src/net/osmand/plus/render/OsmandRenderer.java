@@ -303,7 +303,8 @@ public class OsmandRenderer {
 					put(orderMap, renderer.getObjectOrder(((MultyPolygon) o).getTag(), ((MultyPolygon) o).getValue(), 
 							mask, layer), sh, init);
 				} else {
-					for (int j = 0; j < o.getTypes().length; j++) {
+					int ogTl = o.getTypes().length;
+					for (int j = 0; j < ogTl; j++) {
 						// put(orderMap, BinaryMapDataObject.getOrder(o.getTypes()[j]), sh + j, init);
 						int wholeType = o.getTypes()[j];
 						int mask = wholeType & 3;
@@ -317,7 +318,6 @@ public class OsmandRenderer {
 						if (pair != null) {
 							put(orderMap, renderer.getObjectOrder(pair.tag, pair.value, mask, layer), sh + j, init);
 						}
-
 					}
 				}
 
@@ -332,7 +332,6 @@ public class OsmandRenderer {
 			rc.tileDivisor = (int) (1 << (31 - rc.zoom));
 			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
-			
 			
 			float[] keys = orderMap.keys();
 			Arrays.sort(keys);
@@ -433,7 +432,6 @@ public class OsmandRenderer {
 			public int compare(RectF object1, RectF object2) {
 				return Float.compare(object1.left, object2.left);
 			}
-			
 		};
 		
 		nextText: for (int i = 0; i < size; i++) {
@@ -448,7 +446,6 @@ public class OsmandRenderer {
 				if(useEnglishNames){
 					text.text = Junidecode.unidecode(text.text);
 				}
-				
 				
 				// sest text size before finding intersection (it is used there)
 				float textSize = getDensityValue(rc, text.textSize);
