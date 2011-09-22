@@ -24,6 +24,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.MapRoot;
+import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.data.IndexConstants;
 import net.osmand.map.TileSourceManager;
@@ -354,6 +355,12 @@ public class LocalIndexHelper {
 						String box = formatLatLonBox(mapRoot.getLeft(), mapRoot.getRight(), mapRoot.getTop(), mapRoot.getBottom());
 						builder.append(box).append("\n");
 					}
+				} else if(part instanceof PoiRegion){
+					PoiRegion mi = ((PoiRegion) part);
+					builder.append(app.getString(R.string.local_index_poi_data)).append(": ").
+						append(mi.getName()).append("\n");
+					String box = formatLatLonBox(mi.getLeft31X(), mi.getRight31X(), mi.getTop31Y(), mi.getBottom31Y());
+					builder.append(box).append("\n");
 				} else if(part instanceof TransportIndex){
 					TransportIndex mi = ((TransportIndex) part);
 					int sh = (31 - BinaryMapIndexReader.TRANSPORT_STOP_ZOOM);

@@ -32,6 +32,22 @@ public class BinaryMapPoiReaderAdapter {
 		int right31X;
 		int top31Y;
 		int bottom31Y;
+		
+		public int getLeft31X() {
+			return left31X;
+		}
+		
+		public int getRight31X() {
+			return right31X;
+		}
+		
+		public int getTop31Y() {
+			return top31Y;
+		}
+		
+		public int getBottom31Y() {
+			return bottom31Y;
+		}
 	}
 	
 	private CodedInputStreamRAF codedIS;
