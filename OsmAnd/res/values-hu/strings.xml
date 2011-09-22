@@ -1,5 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+<string name="auto_follow_route_never">Soha</string>
+<string name="choose_auto_follow_route">Automatikus követés beállításai </string>
+<string name="choose_auto_follow_route_descr">Idő intervallum beállítása az automatikus követéshez</string>
+<string name="search_select_point">Választás</string>
+<string name="local_index_description">Új adat letöltés, biztonsági mentés vagy az adatok törlése. \nJelenlegi kapcsolat nélküli - offline - adatok az eszközön (Elérhető: %1$s):</string>
+<string name="search_position_current_location_search">Hely keresés...</string>
+<string name="search_position_current_location_found">Hely [Megtalálva]</string>
+<string name="search_position_address">Cím...</string>
+<string name="search_position_favorites">Kedvencek...</string>
+<string name="search_position_undefined">Meghatározatlan</string>
+<string name="search_position_fixed">Meghatározott</string>
+<string name="search_position_current_location">Jelenlegi hely...</string>
+<string name="search_position_map_view">Utolsó térkép nézet</string>
+
+<string name="select_search_position">Keresés helye :</string>
+<string name="context_menu_item_search">Keresés</string>
 <string name="tip_recent_changes_0_6_7_t">0.6.7 verzió változásai:
 \n\t- Offline - kapcsolat nélküli - adat kezelés (letöltés, törlés, adatok biztonsági mentése közvetlenül az Osmandban)
 \n\t- Kedvenc pontok és csoportok (csoportosítás, törlés, kedvencek kezelése)
@@ -372,8 +388,8 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="context_menu_item_show_route">Útvonal innen</string>
 	<string name="use_trackball_descr">Trackball használata a térkép mozgatásához</string>
 	<string name="use_trackball">Trackball használata</string>
-	<string name="background_service_wait_int_descr">Várakozási intervallum kiválasztása a helyzet meghatározáshoz</string>
-	<string name="background_service_wait_int">Várakozási intervallum</string>
+	<string name="background_service_wait_int_descr">Idő amíg a sikeres helymeghatározásra várhatunk, ez után a helymeghatározó szolgáltatás újraindul.</string>
+	<string name="background_service_wait_int">Helymeghatározási időtúllépés</string>
 	<string name="service_stop_background_service">Háttér navigációs szolgáltatás kikapcsolása</string>
 	<string name="where_am_i">Hol vagyok?</string>
 	<string name="process_navigation_service">OsmAnd navigációs szolgáltatás</string>
