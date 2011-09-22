@@ -1150,6 +1150,7 @@ public class BinaryMapIndexReader {
 			System.out.println(poiRegion.categories.get(i));
 			System.out.println(" " + poiRegion.subcategories.get(i));
 		}
+		http://www.openstreetmap.org/?lat=55.81111&lon=37.72368&zoom=16&layers=M
 
 		System.out.println("MEMORY " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())); //$NON-NLS-1$
 		System.out.println("Time " + (System.currentTimeMillis() - time)); //$NON-NLS-1$

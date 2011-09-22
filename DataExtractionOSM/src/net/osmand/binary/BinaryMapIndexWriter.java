@@ -825,7 +825,7 @@ public class BinaryMapIndexWriter {
 		// write shift to that data
 		long filePointer = raf.getFilePointer();
 		raf.seek(fpPoiBox);
-		raf.writeInt((int) (startPoiData - fpPoiIndex));
+		raf.writeInt((int) (startPoiData - fpPoiIndex - 4));
 		raf.seek(filePointer);
 		
 		codedOutStream.writeUInt32(OsmandOdb.OsmAndPoiBoxData.ZOOM_FIELD_NUMBER, zoom);
