@@ -20,6 +20,7 @@ import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
+import net.osmand.data.Amenity;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
@@ -177,6 +178,34 @@ public class BinaryMapIndexReader {
 	
 	public boolean containsMapData(){
 		return mapIndexes.size() > 0;
+	}
+	
+	public boolean containsPoiData(){
+		return poiIndexes.size() > 0;
+	}
+	
+	public boolean containsPoiData(double latitude, double longitude) {
+		int x = MapUtils.get31TileNumberX(longitude);
+		int y = MapUtils.get31TileNumberY(latitude);
+		for (PoiRegion index : poiIndexes) {
+			if (index.right31X >= x && index.left31X <= x && index.top31Y <= y && index.bottom31Y >= y) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean containsPoiData(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
+		int leftX = MapUtils.get31TileNumberX(leftLongitude);
+		int rightX = MapUtils.get31TileNumberX(rightLongitude);
+		int bottomY = MapUtils.get31TileNumberY(bottomLatitude);
+		int topY = MapUtils.get31TileNumberY(topLatitude);
+		for (PoiRegion index : poiIndexes) {
+			if (index.right31X >= leftX && index.left31X <= rightX && index.top31Y <= bottomY && index.bottom31Y >= topY) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public boolean containsMapData(int tile31x, int tile31y, int zoom){
@@ -890,7 +919,23 @@ public class BinaryMapIndexReader {
 		}
 		
 	}
-
+	
+	public List<Amenity> searchPoi(SearchRequest<Amenity> req) throws IOException {
+		req.numberOfVisitedObjects = 0;
+		req.numberOfAcceptedObjects = 0;
+		req.numberOfAcceptedSubtrees = 0;
+		req.numberOfReadSubtrees = 0;
+		for (PoiRegion poiIndex : poiIndexes) {
+			codedIS.seek(poiIndex.filePointer);
+			int old = codedIS.pushLimit(poiIndex.length);
+			poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
+			codedIS.popLimit(old);
+		}
+		log.info("Search poi is done. Visit " + req.numberOfVisitedObjects + " objects. Read " + req.numberOfAcceptedObjects + " objects."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		log.info("Read " + req.numberOfReadSubtrees + " subtrees. Go through " + req.numberOfAcceptedSubtrees + " subtrees.");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+		return req.getSearchResults();
+	}
+	
 	private List<String> readStringTable() throws IOException{
 		List<String> list = new ArrayList<String>();
 		while(true){
@@ -921,6 +966,17 @@ public class BinaryMapIndexReader {
 	
 	public static SearchRequest<BinaryMapDataObject> buildSearchRequest(int sleft, int sright, int stop, int sbottom, int zoom){
 		SearchRequest<BinaryMapDataObject> request = new SearchRequest<BinaryMapDataObject>();
+		request.left = sleft;
+		request.right = sright;
+		request.top = stop;
+		request.bottom = sbottom;
+		request.zoom = zoom;
+		return request;
+	}
+	
+	
+	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int zoom){
+		SearchRequest<Amenity> request = new SearchRequest<Amenity>();
 		request.left = sleft;
 		request.right = sright;
 		request.top = stop;
@@ -1146,11 +1202,19 @@ public class BinaryMapIndexReader {
 		testTransportSearch(reader);
 
 		PoiRegion poiRegion = reader.getPoiIndexes().get(0);
-		for (int i = 0; i < poiRegion.categories.size(); i++) {
-			System.out.println(poiRegion.categories.get(i));
-			System.out.println(" " + poiRegion.subcategories.get(i));
+		System.out.println(poiRegion.left31X + " " + poiRegion.right31X + " " + poiRegion.bottom31Y +  " " + poiRegion.top31Y);
+//		for (int i = 0; i < poiRegion.categories.size(); i++) {
+//			System.out.println(poiRegion.categories.get(i));
+//			System.out.println(" " + poiRegion.subcategories.get(i));
+//		}
+		int sleft = MapUtils.get31TileNumberX(37.72);
+		int sright = MapUtils.get31TileNumberX(37.727);
+		int stop = MapUtils.get31TileNumberY(55.814);
+		int sbottom = MapUtils.get31TileNumberY(55.81);
+		List<Amenity> results = reader.searchPoi(buildSearchPoiRequest(sleft, sright, stop, sbottom, 15));
+		for(Amenity a : results){
+			System.out.println(a.getType() + " " + a.getSubType() + " " + a.getName() + " " + a.getLocation());
 		}
-		http://www.openstreetmap.org/?lat=55.81111&lon=37.72368&zoom=16&layers=M
 
 		System.out.println("MEMORY " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())); //$NON-NLS-1$
 		System.out.println("Time " + (System.currentTimeMillis() - time)); //$NON-NLS-1$

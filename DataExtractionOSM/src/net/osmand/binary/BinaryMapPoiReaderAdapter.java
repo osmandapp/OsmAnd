@@ -1,8 +1,6 @@
 package net.osmand.binary;
 
 import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.set.hash.TIntHashSet;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,6 +27,11 @@ public class BinaryMapPoiReaderAdapter {
 		List<String> categories = new ArrayList<String>();
 		List<AmenityType> categoriesType = new ArrayList<AmenityType>();
 		List<List<String>> subcategories = new ArrayList<List<String>>();
+		
+		int left31X;
+		int right31X;
+		int top31Y;
+		int bottom31Y;
 	}
 	
 	private CodedInputStreamRAF codedIS;
@@ -47,6 +50,32 @@ public class BinaryMapPoiReaderAdapter {
 		return map.readInt();
 	}
 	
+	protected void readPoiBoundariesIndex(PoiRegion region) throws IOException {
+		while(true){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return;
+			case OsmandOdb.OsmAndTileBox.LEFT_FIELD_NUMBER:
+				region.left31X = codedIS.readUInt32();
+				break;
+			case OsmandOdb.OsmAndTileBox.RIGHT_FIELD_NUMBER:
+				region.right31X = codedIS.readUInt32();
+				break;
+			case OsmandOdb.OsmAndTileBox.TOP_FIELD_NUMBER:
+				region.top31Y = codedIS.readUInt32();
+				break;
+			case OsmandOdb.OsmAndTileBox.BOTTOM_FIELD_NUMBER:
+				region.bottom31Y = codedIS.readUInt32();
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+	
 
 	protected void readPoiIndex(PoiRegion region) throws IOException {
 		while(true){
@@ -58,13 +87,19 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiIndex.NAME_FIELD_NUMBER :
 				region.name = codedIS.readString();
 				break;
-			case OsmandOdb.OsmAndPoiIndex.CATEGORIESTABLE_FIELD_NUMBER :
+			case OsmandOdb.OsmAndPoiIndex.BOUNDARIES_FIELD_NUMBER: {
 				int length = codedIS.readRawVarint32();
-				
+				int oldLimit = codedIS.pushLimit(length);
+				readPoiBoundariesIndex(region);
+				codedIS.popLimit(oldLimit);
+			}
+				break; 
+			case OsmandOdb.OsmAndPoiIndex.CATEGORIESTABLE_FIELD_NUMBER : {
+				int length = codedIS.readRawVarint32();
 				int oldLimit = codedIS.pushLimit(length);
 				readCategory(region);
 				codedIS.popLimit(oldLimit);
-				break;
+			} break;
 			case OsmandOdb.OsmAndPoiIndex.BOXES_FIELD_NUMBER :
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				return;
@@ -112,7 +147,7 @@ public class BinaryMapPoiReaderAdapter {
 			case 0:
 				return;
 			case OsmandOdb.OsmAndPoiIndex.BOXES_FIELD_NUMBER :
-				int length = codedIS.readFixed32();
+				int length = readInt();
 				int oldLimit = codedIS.pushLimit(length);
 				readBoxField(left31, right31, top31, bottom31, 0, 0, 0, offsets, req);
 				codedIS.popLimit(oldLimit);
@@ -121,7 +156,7 @@ public class BinaryMapPoiReaderAdapter {
 				offsets.sort();
 				for (int j = 0; j < offsets.size(); j++) {
 					codedIS.seek(offsets.get(j) + indexOffset);
-					int len = codedIS.readFixed32();
+					int len = readInt();
 					int oldLim = codedIS.pushLimit(len);
 					readPoiData(left31, right31, top31, bottom31, req, region);
 					codedIS.popLimit(oldLim);
@@ -159,14 +194,14 @@ public class BinaryMapPoiReaderAdapter {
 				zoom = codedIS.readUInt32();
 				break;
 			case OsmandOdb.OsmAndPoiBoxData.Y_FIELD_NUMBER :
-				y= codedIS.readUInt32();
+				y = codedIS.readUInt32();
 				break;
 			case OsmandOdb.OsmAndPoiBoxData.POIDATA_FIELD_NUMBER:
 				int len = codedIS.readRawVarint32();
 				int oldLim = codedIS.pushLimit(len);
 				readPoiPoint(left31, right31, top31, bottom31, x, y, zoom, req, region);
 				codedIS.popLimit(oldLim);
-				return;
+				break;
 			default:
 				skipUnknownField(t);
 				break;
@@ -188,13 +223,15 @@ public class BinaryMapPoiReaderAdapter {
 					am.setEnName(Junidecode.unidecode(am.getName()));
 				}
 				req.getSearchResults().add(am);
+				req.numberOfAcceptedObjects++;
 				return;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.DX_FIELD_NUMBER :
 				x = (codedIS.readSInt32() + (px << (24 - zoom))) << 7;
 				break;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.DY_FIELD_NUMBER :
 				y = (codedIS.readSInt32() + (py << (24 - zoom))) << 7;
-				if(left31 > x || right31 < x || top31 < y || bottom31 > y){
+				req.numberOfVisitedObjects++;
+				if(left31 > x || right31 < x || top31 > y || bottom31 < y){
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 					return;
 				}
@@ -202,7 +239,7 @@ public class BinaryMapPoiReaderAdapter {
 				am.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
 				break;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.CATEGORIES_FIELD_NUMBER :
-				// TODO add many amenities
+				// TODO support many amenities type
 				int cat = codedIS.readUInt32();
 				int subcatId = cat >> SHIFT_BITS_CATEGORY;
 				int catId = cat & CATEGORY_MASK;
@@ -210,7 +247,7 @@ public class BinaryMapPoiReaderAdapter {
 					am.setType(region.categoriesType.get(catId));
 					List<String> subcats = region.subcategories.get(catId);
 					if(subcatId < subcats.size()){
-						am.setSubType(subcats.get(catId));
+						am.setSubType(subcats.get(subcatId));
 					}
 				} else {
 					am.setType(AmenityType.OTHER);
@@ -243,20 +280,11 @@ public class BinaryMapPoiReaderAdapter {
 
 	private void readBoxField(int left31, int right31, int top31, int bottom31,
 			int px, int py, int pzoom, TIntArrayList offsets, SearchRequest<Amenity> req) throws IOException {
-		if(pzoom > 0){
-			int x1 = px << (31 - pzoom);
-			int x2 = (px + 1) << (31 - pzoom);
-			int y1 = py << (31 - pzoom);
-			int y2 = (py + 1) << (31 - pzoom);
-			// check intersection
-			if(!(left31 <= x2 && x1 <= right31 && bottom31 <= y2 && y1 <= top31)){
-				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-			}
-			
-		}
+		req.numberOfReadSubtrees++;
+		boolean checkBox = true;
 		int zoom = pzoom;
-		int y = py;
-		int x = px;
+		int dy = py;
+		int dx = px;
 		while(true){
 			if(req.isInterrupted()){
 				return;
@@ -270,21 +298,36 @@ public class BinaryMapPoiReaderAdapter {
 				zoom = codedIS.readUInt32() + pzoom;
 				break;
 			case OsmandOdb.OsmAndPoiBox.LEFT_FIELD_NUMBER :
-				x = codedIS.readSInt32() + px;
+				dx = codedIS.readSInt32();
 				break;
 			case OsmandOdb.OsmAndPoiBox.TOP_FIELD_NUMBER:
-				y = codedIS.readSInt32() + py;
+				dy = codedIS.readSInt32();
 				break;
 				
 			case OsmandOdb.OsmAndPoiBox.SUBBOXES_FIELD_NUMBER:
-				int length = codedIS.readFixed32();
+				int x = dx + (px << (zoom - pzoom));
+				int y = dy + (py << (zoom - pzoom));
+				if(checkBox){
+					int xL = x << (31 - zoom);
+					int xR = (x + 1) << (31 - zoom);
+					int yT = y << (31 - zoom);
+					int yB = (y + 1) << (31 - zoom);
+					// check intersection
+					if(left31 > xR || xL > right31 || bottom31 < yT || yB < top31){
+						codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+						return;
+					}
+					req.numberOfAcceptedSubtrees++;
+					checkBox = false;
+				}
+				int length = readInt();
 				int oldLimit = codedIS.pushLimit(length);
 				readBoxField(left31, right31, top31, bottom31, x, y, zoom, offsets, req);
 				codedIS.popLimit(oldLimit);
 				break;
 				
 			case OsmandOdb.OsmAndPoiBox.SHIFTTODATA_FIELD_NUMBER:
-				offsets.add(codedIS.readFixed32());
+				offsets.add(readInt());
 				break;
 			default:
 				skipUnknownField(t);

@@ -473,16 +473,15 @@ public class ResourceManager {
 									log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
 									warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 								}
-								
-								// that's not fully acceptable
-								// TODO
-//								try {
-//									RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
-//									amenityRepositories.add(new AmenityIndexRepositoryBinary(new BinaryMapIndexReader(raf)));
-//								} catch (IOException e) {
-//									log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
-//									warnings.add(MessageFormat.format(Messages.getMessage("version_index_is_not_supported"), f.getName())); //$NON-NLS-1$
-//								}
+							
+							if(index.containsPoiData())
+								try {
+									RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
+									amenityRepositories.add(new AmenityIndexRepositoryBinary(new BinaryMapIndexReader(raf)));
+								} catch (IOException e) {
+									log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
+									warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
+								}
 							}
 						}
 					} catch (SQLiteException e) {

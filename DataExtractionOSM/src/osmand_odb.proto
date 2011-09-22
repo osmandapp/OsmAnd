@@ -258,9 +258,19 @@ message OsmAndTransportIndex {
 	
 }
 
+message OsmAndTileBox {
+    // everything is encoded as 31 tile zoom
+    required uint32 left = 1;
+    required uint32 right = 2;
+    required uint32 top = 3;
+    required uint32 bottom = 4;
+
+}
 
 message OsmAndPoiIndex {
     required string name = 1;
+    
+    required OsmAndTileBox boundaries = 2;
     
     repeated OsmAndCategoryTable categoriesTable = 3;
     

@@ -23,6 +23,7 @@ import java.util.TreeMap;
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.binary.BinaryMapIndexWriter;
+import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.IndexConstants;
@@ -41,9 +42,9 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 	private Connection poiConnection;
 	private File poiIndexFile;
 	private PreparedStatement poiPreparedStatement;
-	private static final int ZOOM_TO_SAVE_END = 15;
+	private static final int ZOOM_TO_SAVE_END = 16;
 	private static final int ZOOM_TO_SAVE_START = 6;
-	private static final int SHIFT_BYTES_CATEGORY = 7;
+	
 
 	private List<Amenity> tempAmenityList = new ArrayList<Amenity>();
 
@@ -167,7 +168,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 				if (subcatInd == null) {
 					throw new IllegalArgumentException("Unknown subcategory " + sub + " category " + category);
 				}
-				types.add((subcatInd << SHIFT_BYTES_CATEGORY) | catInd);
+				types.add((subcatInd << BinaryMapPoiReaderAdapter.SHIFT_BITS_CATEGORY) | catInd);
 			}
 		} else {
 			subcategory = subcategory.trim();
@@ -175,7 +176,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 			if (subcatInd == null) {
 				throw new IllegalArgumentException("Unknown subcategory " + subcategory + " category " + category);
 			}
-			types.add((subcatInd << SHIFT_BYTES_CATEGORY) | catInd);
+			types.add((subcatInd << BinaryMapPoiReaderAdapter.SHIFT_BITS_CATEGORY) | catInd);
 		}
 	}
 
@@ -208,7 +209,14 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		stat.close();
 
 		// 1. write header
-		long startFpPoiIndex = writer.startWritePOIIndex(regionName);
+		rs = poiConnection.createStatement().executeQuery("SELECT max(x), min(x), max(y), min(y) FROM poi");
+		rs.next();
+		int right31 = rs.getInt(1);
+		int left31 = rs.getInt(2);
+		int bottom31 = rs.getInt(3);
+		int top31 = rs.getInt(4);
+		rs.close();
+		long startFpPoiIndex = writer.startWritePOIIndex(regionName, left31, right31, bottom31, top31);
 
 		// 2. write categories table
 		Map<String, Integer> catIndexes = writer.writePOICategoriesTable(categories);
@@ -309,8 +317,9 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		long l = tree.getNode();
 		int x = (int) (l >> 31);
 		int y = (int) (l & ((1 << 31) - 1));
-		long fp = writer.startWritePoiBox(zoom, x, y);
-		if (zoom < ZOOM_TO_SAVE_END) {
+		boolean end = zoom == ZOOM_TO_SAVE_END;
+		long fp = writer.startWritePoiBox(zoom, x, y, end);
+		if (!end) {
 			for (Tree<Long> subTree : tree.getSubtrees()) {
 				writePoiBoxes(writer, subTree, zoom + 1, fpToWriteSeeks);
 			}
