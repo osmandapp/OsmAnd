@@ -291,8 +291,8 @@ public class MapRenderRepositories {
 						ids.add(r.getId());
 					}
 					count++;
-					
-					for(int i=0; i < r.getTypes().length; i++){
+					int rgTl = r.getTypes().length;
+					for(int i=0; i < rgTl; i++){
 						if ((r.getTypes()[i] & 0x3) == MapRenderingTypes.MULTY_POLYGON_TYPE) {
 							// multy polygon r.getId() >> 3
 							TagValuePair pair = r.getMapIndex().decodeType(MapRenderingTypes.getMainObjectType(r.getTypes()[i]),
