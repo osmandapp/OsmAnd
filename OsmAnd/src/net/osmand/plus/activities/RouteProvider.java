@@ -224,11 +224,12 @@ public class RouteProvider {
 				int sum = 0;
 				int dsize = directions.size(); 
 				for (int i = dsize - 1; i >= 0; i--) {
-					directions.get(i).afterLeftTime = sum;
-					sum += directions.get(i).expectedTime;
-					directions.get(i).distance = listDistance[directions.get(i).routePointOffset];
+					RouteDirectionInfo idirection = directions.get(i);
+					idirection.afterLeftTime = sum;
+					sum += idirection.expectedTime;
+					idirection.distance = listDistance[idirection.routePointOffset];
 					if(i < dsize - 1){
-						directions.get(i).distance -=listDistance[directions.get(i + 1).routePointOffset];
+						idirection.distance -=listDistance[directions.get(i + 1).routePointOffset];
 					}
 				}
 			}
@@ -529,8 +530,9 @@ public class RouteProvider {
 		
 		int sum = 0;
 		for (int i = res.directions.size() - 1; i >= 0; i--) {
-			res.directions.get(i).afterLeftTime = sum;
-			sum += res.directions.get(i).expectedTime;
+			RouteDirectionInfo resInfo = res.directions.get(i);
+			resInfo.afterLeftTime = sum;
+			sum += resInfo.expectedTime;
 		}
 	}
 
