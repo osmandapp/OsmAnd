@@ -4,7 +4,6 @@
 <string name="choose_auto_follow_route">Automatikus követés beállításai </string>
 <string name="choose_auto_follow_route_descr">Idő intervallum beállítása az automatikus követéshez</string>
 <string name="search_select_point">Választás</string>
-<string name="local_index_description">Új adat letöltés, biztonsági mentés vagy az adatok törlése. \nJelenlegi kapcsolat nélküli - offline - adatok az eszközön (Elérhető: %1$s):</string>
 <string name="search_position_current_location_search">Hely keresés...</string>
 <string name="search_position_current_location_found">Hely [Megtalálva]</string>
 <string name="search_position_address">Cím...</string>
@@ -62,7 +61,7 @@
 <string name="local_index_no_items_to_do">Nincs elem a művelethez: %1$s</string>
 <string name="local_index_action_do">%2$s darab elemen végrehajtjuk: %1$s. Biztos?</string>
 <string name="local_index_descr_title">Offline - kapcsolat nélküli adat kezelés:</string>
-<string name="local_index_description">Új letöltés, biztonsági mentés vagy meglévő adat törlése.\nAz eszközön lévő adatok:</string>
+<string name="local_index_description">Új adat letöltés, biztonsági mentés vagy az adatok törlése. \nJelenlegi kapcsolat nélküli - offline - adatok az eszközön (Elérhető: %1$s):</string>
 <string name="local_index_mi_restore">Visszaállítás...</string>
 <string name="local_index_mi_backup">Biztonsági mentés...</string>
 <string name="local_index_mi_delete">Törlés...</string>
