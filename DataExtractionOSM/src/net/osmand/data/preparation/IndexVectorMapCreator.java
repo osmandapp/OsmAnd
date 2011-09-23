@@ -84,7 +84,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 	private void indexMultiPolygon(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		if (e instanceof Relation && "multipolygon".equals(e.getTag(OSMTagKey.TYPE))) { //$NON-NLS-1$
-			ctx.loadEntityData(e, true);
+			ctx.loadEntityData(e);
 			Map<Entity, String> entities = ((Relation) e).getMemberEntities();
 
 			boolean outerFound = false;
@@ -222,7 +222,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					type = MapRenderingTypes.RESTRICTION_ONLY_STRAIGHT_ON;
 				}
 				if (type != -1) {
-					ctx.loadEntityData(e, true);
+					ctx.loadEntityData(e);
 					Collection<EntityId> fromL = ((Relation) e).getMemberIds("from"); //$NON-NLS-1$
 					Collection<EntityId> toL = ((Relation) e).getMemberIds("to"); //$NON-NLS-1$
 					if (!fromL.isEmpty() && !toL.isEmpty()) {
@@ -643,7 +643,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	public void iterateMainEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		if (e instanceof Way || e instanceof Node) {
 			// manipulate what kind of way to load
-			ctx.loadEntityData(e, false);
+			ctx.loadEntityData(e);
 			boolean oneway = "-1".equals(e.getTag(OSMTagKey.ONEWAY)); //$NON-NLS-1$
 			for (int i = 0; i < mapZooms.size(); i++) {
 				boolean inverse = i == 0 ? oneway : false;

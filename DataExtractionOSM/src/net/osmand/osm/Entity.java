@@ -2,8 +2,10 @@ package net.osmand.osm;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import net.osmand.osm.OSMSettings.OSMTagKey;
 
@@ -98,6 +100,7 @@ public abstract class Entity {
 	// lazy initializing
 	private Map<String, String> tags = null;
 	private final long id;
+	private boolean dataLoaded;
 	
 	public Entity(long id) {
 		this.id = id;
@@ -190,5 +193,28 @@ public abstract class Entity {
 		}
 		return true;
 	}
+
+	public Set<String> getIsInNames() {
+		String values = getTag(OSMTagKey.IS_IN);
+		if (values == null) {
+			return Collections.emptySet();
+		}
+		if (values.indexOf(';') != -1) {
+			String[] splitted = values.split(";");
+			Set<String> set = new HashSet<String>(splitted.length);
+			for (int i = 0; i < splitted.length; i++) {
+				set.add(splitted[i].trim());
+			}
+			return set;
+		}
+		return Collections.singleton(values.trim());
+	}
+
+	public void entityDataLoaded() {
+		this.dataLoaded = true;
+	}
 	
+	public boolean isDataLoaded() {
+		return dataLoaded;
+	}
 }

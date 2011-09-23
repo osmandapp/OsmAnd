@@ -53,7 +53,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		tempAmenityList = Amenity.parseAmenities(e, tempAmenityList);
 		if (!tempAmenityList.isEmpty() && poiPreparedStatement != null) {
 			// load data for way (location etc...)
-			ctx.loadEntityData(e, false);
+			ctx.loadEntityData(e);
 			for (Amenity a : tempAmenityList) {
 				// do not add that check because it is too much printing for batch creation
 				// by statistic < 1% creates maps manually

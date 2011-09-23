@@ -261,7 +261,7 @@ public class IndexCreator {
 		// 1. Loading osm file
 		OsmDbCreator dbCreator = new OsmDbCreator(this);
 		try {
-			progress.setGeneralProgress("[35 / 100]"); //$NON-NLS-1$
+			progress.setGeneralProgress("[15 / 100]"); //$NON-NLS-1$
 			progress.startTask(Messages.getString("IndexCreator.LOADING_FILE") + readFile.getAbsolutePath(), -1); //$NON-NLS-1$
 			// 1 init database to store temporary data
 			dbCreator.initDatabase(dialect, dbConn);
@@ -311,9 +311,10 @@ public class IndexCreator {
 			if (DBDialect.NOSQL != dialect) {
 				Connection dbc = (Connection) dbConn;
 				final Statement stmt = dbc.createStatement();
-				allRelations = stmt.executeQuery("select count(*) from relations").getInt(1);
-				allNodes = stmt.executeQuery("select count(*) from node").getInt(1);
-				allWays = stmt.executeQuery("select count(*) from ways").getInt(1);
+				accessor.computeRealCounts(stmt);
+				allRelations = accessor.getAllRelations();
+				allNodes = accessor.getAllNodes();
+				allWays = accessor.getAllWays();
 				stmt.close();
 			}
 		}
@@ -419,7 +420,7 @@ public class IndexCreator {
 				
 				// 3.1 write all cities
 				if (indexAddress) {
-					progress.setGeneralProgress("[40 / 100]"); //$NON-NLS-1$
+					progress.setGeneralProgress("[20 / 100]"); //$NON-NLS-1$
 					progress.startTask(Messages.getString("IndexCreator.INDEX_CITIES"), accessor.getAllNodes()); //$NON-NLS-1$
 					if (loadFromExistingFile) {
 						// load cities names
@@ -441,7 +442,7 @@ public class IndexCreator {
 						@Override
 						public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 							if (indexAddress) {
-								indexAddressCreator.indexAddressRelation((Relation) e, ctx);
+								//indexAddressCreator.indexAddressRelation((Relation) e, ctx); streets needs loaded boundaries !!!
 								indexAddressCreator.indexBoundariesRelation((Relation) e, ctx);
 							}
 							if (indexMap) {
@@ -459,9 +460,17 @@ public class IndexCreator {
 							}
 						});
 
+						progress.setGeneralProgress("[45 / 100]"); //$NON-NLS-1$
+						progress.startTask(Messages.getString("IndexCreator.PREINDEX_ADRESS_MAP"), accessor.getAllRelations()); //$NON-NLS-1$
+						accessor.iterateOverEntities(progress, EntityType.RELATION, new OsmDbVisitor() {
+							@Override
+							public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
+								indexAddressCreator.indexAddressRelation((Relation) e, ctx);
+							}
+						});
+						
 						indexAddressCreator.commitToPutAllCities();
 					}
-
 				}
 
 				// 3.3 MAIN iterate over all entities
