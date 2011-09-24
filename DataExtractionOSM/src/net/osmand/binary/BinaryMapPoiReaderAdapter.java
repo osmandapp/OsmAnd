@@ -1,6 +1,7 @@
 package net.osmand.binary;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.set.hash.TLongHashSet;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class BinaryMapPoiReaderAdapter {
 	
 	public static final int SHIFT_BITS_CATEGORY = 7;
 	private static final int CATEGORY_MASK = (1 << SHIFT_BITS_CATEGORY) - 1 ;
+	private static final int ZOOM_TO_SKIP_FILTER = 3;
 	
 	public static class PoiRegion extends BinaryIndexPart {
 
@@ -170,11 +172,36 @@ public class BinaryMapPoiReaderAdapter {
 				break;
 			case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER :
 				offsets.sort();
+				TLongHashSet skipTiles = null;
+				List<Amenity> temporaryList = new ArrayList<Amenity>();
+				int zoomToSkip = 31;
+				if(req.zoom != -1){
+					skipTiles = new TLongHashSet();
+					zoomToSkip = req.zoom + ZOOM_TO_SKIP_FILTER;
+				}
+				
 				for (int j = 0; j < offsets.size(); j++) {
 					codedIS.seek(offsets.get(j) + indexOffset);
+					
 					int len = readInt();
 					int oldLim = codedIS.pushLimit(len);
-					readPoiData(left31, right31, top31, bottom31, req, region);
+					
+					if (skipTiles == null) {
+						readPoiData(left31, right31, top31, bottom31, req, req.getSearchResults(), region,  
+								skipTiles, zoomToSkip);
+					} else {
+						temporaryList.clear();
+						readPoiData(left31, right31, top31, bottom31, req, temporaryList, region, skipTiles, zoomToSkip);
+						for(Amenity a : temporaryList){
+							int x = (int) MapUtils.getTileNumberX(zoomToSkip, a.getLocation().getLongitude());
+							int y = (int) MapUtils.getTileNumberY(zoomToSkip, a.getLocation().getLatitude());
+							long val = (((long) x) << zoomToSkip) | y;
+							if(!skipTiles.contains(val)){
+								skipTiles.add(val);
+								req.getSearchResults().add(a);
+							}
+						}
+					}
 					codedIS.popLimit(oldLim);
 					if(req.isInterrupted()){
 						return;
@@ -190,7 +217,7 @@ public class BinaryMapPoiReaderAdapter {
 	}
 
 	private void readPoiData(int left31, int right31, int top31, int bottom31, 
-			SearchRequest<Amenity> req, PoiRegion region) throws IOException {
+			SearchRequest<Amenity> req, List<Amenity> result, PoiRegion region, TLongHashSet toSkip, int zSkip) throws IOException {
 		int x = 0;
 		int y = 0;
 		int zoom = 0;
@@ -213,9 +240,16 @@ public class BinaryMapPoiReaderAdapter {
 				y = codedIS.readUInt32();
 				break;
 			case OsmandOdb.OsmAndPoiBoxData.POIDATA_FIELD_NUMBER:
+				if (toSkip != null && zoom >= zSkip) {
+					long val = ((((long) x) >> (zoom - zSkip)) << zSkip) | (((long) y) >> (zoom - zSkip));
+					if (toSkip.contains(val)) {
+						codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+						return;
+					}
+				}
 				int len = codedIS.readRawVarint32();
 				int oldLim = codedIS.pushLimit(len);
-				readPoiPoint(left31, right31, top31, bottom31, x, y, zoom, req, region);
+				readPoiPoint(left31, right31, top31, bottom31, x, y, zoom, req, result, region);
 				codedIS.popLimit(oldLim);
 				break;
 			default:
@@ -226,7 +260,7 @@ public class BinaryMapPoiReaderAdapter {
 	}
 	
 	private void readPoiPoint(int left31, int right31, int top31, int bottom31, 
-			int px, int py, int zoom, SearchRequest<Amenity> req, PoiRegion region) throws IOException {
+			int px, int py, int zoom, SearchRequest<Amenity> req, List<Amenity> result, PoiRegion region) throws IOException {
 		Amenity am = null;
 		int x = 0;
 		int y = 0;
@@ -238,7 +272,7 @@ public class BinaryMapPoiReaderAdapter {
 				if(Algoritms.isEmpty(am.getEnName())){
 					am.setEnName(Junidecode.unidecode(am.getName()));
 				}
-				req.getSearchResults().add(am);
+				result.add(am);
 				req.numberOfAcceptedObjects++;
 				return;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.DX_FIELD_NUMBER :

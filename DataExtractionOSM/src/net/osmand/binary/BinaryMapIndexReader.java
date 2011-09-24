@@ -972,10 +972,9 @@ public class BinaryMapIndexReader {
 	}
 	
 	
-	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int limit, int zoom){
+	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int zoom){
 		SearchRequest<Amenity> request = new SearchRequest<Amenity>();
 		request.left = sleft;
-		request.limit = limit;
 		request.right = sright;
 		request.top = stop;
 		request.bottom = sbottom;
@@ -1224,7 +1223,7 @@ public class BinaryMapIndexReader {
 		int sright = MapUtils.get31TileNumberX(37.9);
 		int stop = MapUtils.get31TileNumberY(55.814);
 		int sbottom = MapUtils.get31TileNumberY(55.81);
-		SearchRequest<Amenity> req = buildSearchPoiRequest(sleft, sright, stop, sbottom, 15, -1);
+		SearchRequest<Amenity> req = buildSearchPoiRequest(sleft, sright, stop, sbottom, -1);
 		req.setPoiTypeFilter(new SearchPoiTypeFilter() {
 			@Override
 			public boolean accept(AmenityType type, String subcategory) {

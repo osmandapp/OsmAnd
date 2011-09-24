@@ -75,7 +75,7 @@ public class PoiFilter {
 	
 	public List<Amenity> searchFurther(double latitude, double longitude){
 		zoom --;
-		List<Amenity> amenityList = searchAmenities(this, latitude, longitude, zoom, -1);
+		List<Amenity> amenityList = searchAmenities(this, latitude, longitude);
 		MapUtils.sortListOfMapObject(amenityList, latitude, longitude);
 		
 		return amenityList;
@@ -104,7 +104,7 @@ public class PoiFilter {
 	
 	public List<Amenity> initializeNewSearch(double lat, double lon, int firstTimeLimit){
 		zoom = getInitialZoom();
-		List<Amenity> amenityList = searchAmenities(this, lat, lon, zoom, -1);
+		List<Amenity> amenityList = searchAmenities(this, lat, lon);
 		MapUtils.sortListOfMapObject(amenityList, lat, lon);
 		if (firstTimeLimit > 0) {
 			while (amenityList.size() > firstTimeLimit) {
@@ -114,7 +114,7 @@ public class PoiFilter {
 		return amenityList; 
 	}
 	
-	private List<Amenity> searchAmenities(PoiFilter poiFilter, double lat, double lon, int z, int limit) {
+	private List<Amenity> searchAmenities(PoiFilter poiFilter, double lat, double lon) {
 		double tileNumberX = MapUtils.getTileNumberX(zoom, lon);
 		double tileNumberY = MapUtils.getTileNumberY(zoom, lat);
 		double topLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY - 0.5);
@@ -122,17 +122,17 @@ public class PoiFilter {
 		double leftLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX - 0.5);
 		double rightLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX + 0.5);
 		
-		return searchAmenities(poiFilter, lat, lon, z, limit, topLatitude, bottomLatitude, leftLongitude, rightLongitude);
+		return searchAmenities(poiFilter, lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude);
 	}
 
-	protected List<Amenity> searchAmenities(PoiFilter poiFilter, double lat, double lon, int z, int limit, double topLatitude,
+	protected List<Amenity> searchAmenities(PoiFilter poiFilter, double lat, double lon, double topLatitude,
 			double bottomLatitude, double leftLongitude, double rightLongitude) {
 		return application.getResourceManager().searchAmenities(poiFilter, 
-				topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon, z, limit);
+				topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon);
 	}
 
 	public List<Amenity> searchAgain(double lat, double lon){
-		List<Amenity> amenityList = searchAmenities(this, lat, lon, zoom, -1);
+		List<Amenity> amenityList = searchAmenities(this, lat, lon);
 		MapUtils.sortListOfMapObject(amenityList, lat, lon);
 		return amenityList;
 	}

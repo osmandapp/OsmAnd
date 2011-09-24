@@ -34,7 +34,6 @@ import android.widget.Toast;
 
 public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMenuProvider {
 	private static final int startZoom = 10;
-	public static final int LIMIT_POI = 200;
 	public static final int TEXT_WRAP = 30;
 	public static final org.apache.commons.logging.Log log = LogUtil.getLog(POIMapLayer.class);
 	

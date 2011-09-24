@@ -41,7 +41,7 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 	
 	
 	private final String[] columns = new String[]{"id", "x", "y", "name", "name_en", "type", "subtype", "opening_hours", "phone", "site"};        //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$//$NON-NLS-5$//$NON-NLS-6$//$NON-NLS-7$//$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$
-	public List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int limit, PoiFilter filter, List<Amenity> amenities){
+	public List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom, PoiFilter filter, List<Amenity> amenities){
 		long now = System.currentTimeMillis();
 		String squery = "? < y AND y < ? AND ? < x AND x < ?"; //$NON-NLS-1$
 		
@@ -51,8 +51,10 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 				squery += " AND " + sql; //$NON-NLS-1$
 			}
 		}
-		if(limit != -1){
-			squery += " ORDER BY RANDOM() LIMIT " +limit; //$NON-NLS-1$
+		int limit = -1;
+		if(zoom != -1){
+			limit = 200;
+			squery += " ORDER BY RANDOM() LIMIT 200"; //$NON-NLS-1$
 		}
 		Cursor query = db.query(IndexConstants.POI_TABLE, columns, squery, 
 				new String[]{stop+"",  //$NON-NLS-1$
@@ -126,7 +128,7 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 		cFilterId = null;
 	}
 	
-	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, int limit,  PoiFilter filter, List<Amenity> toFill){
+	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom,  PoiFilter filter, List<Amenity> toFill){
 		cTopLatitude = topLatitude + (topLatitude -bottomLatitude);
 		cBottomLatitude = bottomLatitude - (topLatitude -bottomLatitude);
 		cLeftLongitude = leftLongitude - (rightLongitude - leftLongitude);
@@ -139,7 +141,7 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 		int sright = MapUtils.get31TileNumberX(cRightLongitude);
 		int sbottom = MapUtils.get31TileNumberY(cBottomLatitude);
 		int stop = MapUtils.get31TileNumberY(cTopLatitude);
-		searchAmenities(stop, sleft, sbottom, sright, limit, filter, tempList);
+		searchAmenities(stop, sleft, sbottom, sright, cZoom, filter, tempList);
 		synchronized (this) {
 			cachedObjects.clear();
 			cachedObjects.addAll(tempList);

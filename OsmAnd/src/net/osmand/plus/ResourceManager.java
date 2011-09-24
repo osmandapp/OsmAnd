@@ -35,7 +35,6 @@ import net.osmand.osm.MapUtils;
 import net.osmand.plus.activities.OsmandApplication;
 import net.osmand.plus.render.BaseOsmandRender;
 import net.osmand.plus.render.MapRenderRepositories;
-import net.osmand.plus.views.POIMapLayer;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -553,13 +552,12 @@ public class ResourceManager {
 	
 	public List<Amenity> searchAmenities(PoiFilter filter,
 			double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, 
-			double lat, double lon, int zoom, int limit) {
+			double lat, double lon) {
 		List<Amenity> amenities = new ArrayList<Amenity>();
 		for (AmenityIndexRepository index : amenityRepositories) {
 			if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
 				index.searchAmenities(MapUtils.get31TileNumberY(topLatitude), MapUtils.get31TileNumberX(leftLongitude), 
-						MapUtils.get31TileNumberY(bottomLatitude), MapUtils.get31TileNumberX(rightLongitude),
-						limit, filter, amenities);
+						MapUtils.get31TileNumberY(bottomLatitude), MapUtils.get31TileNumberX(rightLongitude), -1, filter, amenities);
 			}
 		}
 
@@ -845,7 +843,7 @@ public class ResourceManager {
 							if(!amenityLoaded){
 								AmenityLoadRequest r = (AmenityLoadRequest) req;
 								r.repository.evaluateCachedAmenities(r.topLatitude, r.leftLongitude, 
-										r.bottomLatitude, r.rightLongitude, r.zoom, POIMapLayer.LIMIT_POI, r.filter, null);
+										r.bottomLatitude, r.rightLongitude, r.zoom, r.filter, null);
 								amenityLoaded = true;
 							}
 						} else if(req instanceof TransportLoadRequest){

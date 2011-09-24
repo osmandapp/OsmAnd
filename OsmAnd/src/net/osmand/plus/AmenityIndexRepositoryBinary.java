@@ -47,10 +47,10 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	}
 	
 	@Override
-	public List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int limit,
+	public List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom, 
 			final PoiFilter filter, final List<Amenity> amenities) {
 		long now = System.currentTimeMillis();
-		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(sleft, sright, stop, sbottom, limit, 16);
+		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(sleft, sright, stop, sbottom, zoom);
 		req.setPoiTypeFilter(new SearchPoiTypeFilter(){
 			@Override
 			public boolean accept(AmenityType type, String subcategory) {
@@ -118,7 +118,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
 	@Override
 	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom,
-			int limitPoi, PoiFilter filter, List<Amenity> toFill) {
+			PoiFilter filter, List<Amenity> toFill) {
 		cTopLatitude = topLatitude + (topLatitude - bottomLatitude);
 		cBottomLatitude = bottomLatitude - (topLatitude - bottomLatitude);
 		cLeftLongitude = leftLongitude - (rightLongitude - leftLongitude);
@@ -131,7 +131,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		int sright = MapUtils.get31TileNumberX(cRightLongitude);
 		int sbottom = MapUtils.get31TileNumberY(cBottomLatitude);
 		int stop = MapUtils.get31TileNumberY(cTopLatitude);
-		searchAmenities(stop, sleft, sbottom, sright, limitPoi, filter, tempList);
+		searchAmenities(stop, sleft, sbottom, sright, zoom, filter, tempList);
 		synchronized (this) {
 			cachedObjects.clear();
 			cachedObjects.addAll(tempList);
