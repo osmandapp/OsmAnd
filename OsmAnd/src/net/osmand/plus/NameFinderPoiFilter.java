@@ -29,10 +29,11 @@ public class NameFinderPoiFilter extends PoiFilter {
 	
 
 	private String query = ""; //$NON-NLS-1$
+	private String lastError = ""; //$NON-NLS-1$
 	
 	public NameFinderPoiFilter(OsmandApplication application) {
 		super(null, application);
-		this.name = application.getString(R.string.poi_filter_namefinder); //$NON-NLS-1$
+		this.name = application.getString(R.string.poi_filter_nominatim); //$NON-NLS-1$
 		this.filterId = FILTER_ID;
 	}
 	
@@ -42,60 +43,53 @@ public class NameFinderPoiFilter extends PoiFilter {
 		return searchedAmenities;
 	}
 	
-	@Override
-	public String getSearchArea() {
-		return ""; //$NON-NLS-1$
+	public String getQuery() {
+		return query;
 	}
 	
-	@Override
-	public List<Amenity> initializeNewSearch(double lat, double lon, int firstTimeLimit) {
-		return searchFurther(lat, lon);
+	public void setQuery(String query) {
+		this.query = query;
 	}
-	@Override
-	public boolean isSearchFurtherAvailable() {
-		return true;
-	}
-	
-	@Override
-	public List<Amenity> searchFurther(double latitude, double longitude) {
-		searchOnline(latitude, longitude, query);
-		return searchedAmenities;
-	}
-	
-	
-	public String searchOnline(double latitude, double longitude, String filter){
+
+	protected List<Amenity> searchAmenities(PoiFilter poiFilter, double lat, double lon, int z, int limit, double topLatitude,
+			double bottomLatitude, double leftLongitude, double rightLongitude) {
 		searchedAmenities.clear();
-		query = filter;
-		String q = query +  " near " +latitude+","+longitude;  //$NON-NLS-1$//$NON-NLS-2$
+		
+		String viewbox = "viewboxlbrt="+((float) leftLongitude)+","+((float) bottomLatitude)+","+((float) rightLongitude)+","+((float) topLatitude);
 		try {
-			URL url = new URL("http://gazetteer.openstreetmap.org/namefinder/search.xml?find="+URLEncoder.encode(q)); //$NON-NLS-1$
+			lastError = "";
+			String urlq = "http://nominatim.openstreetmap.org/search/"+URLEncoder.encode(query)+ "?format=xml&addressdetails=1&limit=200&bounded=1&"+viewbox;
+			log.info(urlq);
+			URL url = new URL(urlq); //$NON-NLS-1$
 			InputStream stream = url.openStream();
 			XmlPullParser parser = Xml.newPullParser();
 			parser.setInput(stream, "UTF-8"); //$NON-NLS-1$
 			int eventType;
 			int namedDepth= 0;
+			Amenity a = null;
 			while ((eventType = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (eventType == XmlPullParser.START_TAG) {
 					if (parser.getName().equals("searchresults")) { //$NON-NLS-1$
 						String err = parser.getAttributeValue("", "error"); //$NON-NLS-1$ //$NON-NLS-2$
-						if (err != null) {
+						if (err != null && err.length() > 0) {
+							lastError = err;
 							stream.close();
-							return err;
+							return searchedAmenities;
 						}
 					}
-					if (parser.getName().equals("named")) { //$NON-NLS-1$
+					if (parser.getName().equals("place")) { //$NON-NLS-1$
 						namedDepth++;
 						if (namedDepth == 1) {
 							try {
-								Amenity a = new Amenity();
+								a = new Amenity();
 								a.setLocation(Double.parseDouble(parser.getAttributeValue("", "lat")), //$NON-NLS-1$//$NON-NLS-2$
 										Double.parseDouble(parser.getAttributeValue("", "lon"))); //$NON-NLS-1$//$NON-NLS-2$
-								a.setId(Long.parseLong(parser.getAttributeValue("", "id"))); //$NON-NLS-1$ //$NON-NLS-2$
-								String name = parser.getAttributeValue("", "name");  //$NON-NLS-1$//$NON-NLS-2$
+								a.setId(Long.parseLong(parser.getAttributeValue("", "place_id"))); //$NON-NLS-1$ //$NON-NLS-2$
+								String name = parser.getAttributeValue("", "display_name");  //$NON-NLS-1$//$NON-NLS-2$
 								a.setName(name);
 								a.setEnName(Junidecode.unidecode(name));
 								a.setType(AmenityType.OTHER);
-								a.setSubType(parser.getAttributeValue("", "category"));  //$NON-NLS-1$//$NON-NLS-2$
+								a.setSubType(parser.getAttributeValue("", "type"));  //$NON-NLS-1$//$NON-NLS-2$
 								searchedAmenities.add(a);
 							} catch (NullPointerException e) {
 								log.info("Invalid attributes", e); //$NON-NLS-1$
@@ -103,23 +97,38 @@ public class NameFinderPoiFilter extends PoiFilter {
 								log.info("Invalid attributes", e); //$NON-NLS-1$
 							}
 						}
+					} else if (a != null && parser.getName().equals(a.getSubType())) {
+						if (parser.next() == XmlPullParser.TEXT) {
+							String name = parser.getText();
+							if (name != null) {
+								a.setName(name);
+								a.setEnName(Junidecode.unidecode(name));
+							}
+						}
 					}
 				} else if (eventType == XmlPullParser.END_TAG) {
-					if (parser.getName().equals("named")) { //$NON-NLS-1$
+					if (parser.getName().equals("place")) { //$NON-NLS-1$
 						namedDepth--;
+						if(namedDepth == 0){
+							a = null;
+						}
 					}
 				}
 			}
 			stream.close();
 		} catch (IOException e) {
 			log.error("Error loading name finder poi", e); //$NON-NLS-1$
-			return getApplication().getString(R.string.input_output_error); //$NON-NLS-1$
+			lastError = getApplication().getString(R.string.input_output_error); //$NON-NLS-1$
 		} catch (XmlPullParserException e) {
 			log.error("Error parsing name finder poi", e); //$NON-NLS-1$
-			return getApplication().getString(R.string.input_output_error); //$NON-NLS-1$
+			lastError = getApplication().getString(R.string.input_output_error); //$NON-NLS-1$
 		}
-		MapUtils.sortListOfMapObject(searchedAmenities, latitude, longitude);
-		return null;
+		MapUtils.sortListOfMapObject(searchedAmenities, lat, lon);
+		return searchedAmenities;
+	}
+	
+	public String getLastError() {
+		return lastError;
 	}
 	
 	public List<Amenity> getSearchedAmenities() {

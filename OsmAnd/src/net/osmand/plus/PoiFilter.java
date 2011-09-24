@@ -121,6 +121,12 @@ public class PoiFilter {
 		double bottomLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY + 0.5);
 		double leftLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX - 0.5);
 		double rightLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX + 0.5);
+		
+		return searchAmenities(poiFilter, lat, lon, z, limit, topLatitude, bottomLatitude, leftLongitude, rightLongitude);
+	}
+
+	protected List<Amenity> searchAmenities(PoiFilter poiFilter, double lat, double lon, int z, int limit, double topLatitude,
+			double bottomLatitude, double leftLongitude, double rightLongitude) {
 		return application.getResourceManager().searchAmenities(poiFilter, 
 				topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon, z, limit);
 	}

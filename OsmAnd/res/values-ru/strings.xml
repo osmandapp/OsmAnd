@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="auto_follow_route_never">Никогда</string>
+	<string name="poi_filter_nominatim">Nominatim (интернет)</string>
+    <string name="auto_follow_route_never">Никогда</string>
 	<string name="choose_auto_follow_route">Настройки автовозрата карты</string>
 	<string name="choose_auto_follow_route_descr">Выберите время, через которое карта вернется к текущей позиции</string>
 	<string name="search_select_point">Выбрать</string>
