@@ -791,6 +791,21 @@ public class BinaryMapIndexWriter {
 		return catIndexes;
 	}
 	
+	public void writePOICategories(TIntArrayList categories) throws IOException {
+		checkPeekState(POI_BOX);
+		OsmandOdb.OsmAndPoiCategories.Builder builder = OsmandOdb.OsmAndPoiCategories.newBuilder();
+		int prev = 0;
+		categories.sort();
+		for (int i = 0; i < categories.size(); i++) {
+			// avoid duplicates
+			if (i > 0 && prev != categories.get(i)) {
+				builder.addCategories(categories.get(i));
+				prev = categories.get(i);
+			}
+		}
+		codedOutStream.writeMessage(OsmandOdb.OsmAndPoiBox.CATEGORIES_FIELD_NUMBER, builder.build());
+	}
+	
 	public void writePoiDataAtom(long id, int x24shift, int y24shift, String nameEn, String name, TIntArrayList types, String openingHours,
 			String site, String phone) throws IOException {
 		checkPeekState(POI_DATA);

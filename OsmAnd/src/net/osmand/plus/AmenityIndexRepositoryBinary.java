@@ -1,6 +1,5 @@
 package net.osmand.plus;
 
-import gnu.trove.list.array.TIntArrayList;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,14 +8,11 @@ import java.util.List;
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.MapIndex;
-import net.osmand.binary.BinaryMapIndexReader.SearchFilter;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
-import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -59,25 +55,11 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		int sbottom = MapUtils.get31TileNumberY(bottomLatitude);
 		int stop = MapUtils.get31TileNumberY(topLatitude);
 		
-		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(sleft, sright, stop, sbottom, 16);
-		// TODO types and filter and live results
-		req.setSearchFilter(new SearchFilter(){
-
+		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(sleft, sright, stop, sbottom, limit, 16);
+		req.setPoiTypeFilter(new SearchPoiTypeFilter(){
 			@Override
-			public boolean accept(TIntArrayList types, MapIndex root) {
-				for (int j = 0; j < types.size(); j++) {
-					int wholeType = types.get(j);
-					TagValuePair pair = root.decodeType(wholeType);
-					if (pair != null) {
-						AmenityType type = MapRenderingTypes.getAmenityType(pair.tag, pair.value);
-						if (type != null) {
-							if(filter.acceptTypeSubtype(type, MapRenderingTypes.getAmenitySubtype(pair.tag, pair.value))){
-								return true;
-							}
-						}
-					}
-				}
-				return false;
+			public boolean accept(AmenityType type, String subcategory) {
+				return filter.acceptTypeSubtype(type, subcategory);
 			}
 		});
 		try {

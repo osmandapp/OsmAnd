@@ -44,6 +44,8 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 	private PreparedStatement poiPreparedStatement;
 	private static final int ZOOM_TO_SAVE_END = 16;
 	private static final int ZOOM_TO_SAVE_START = 6;
+	private static final int ZOOM_TO_WRITE_CATEGORIES_START = 12;
+	private static final int ZOOM_TO_WRITE_CATEGORIES_END = 16;
 	
 
 	private List<Amenity> tempAmenityList = new ArrayList<Amenity>();
@@ -154,7 +156,6 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 
 	private void buildTypeIds(String category, String subcategory, Map<String, Map<String, Integer>> categories,
 			Map<String, Integer> catIndexes, TIntArrayList types) {
-		types.clear();
 		Map<String, Integer> map = categories.get(category);
 		if (map == null) {
 			throw new IllegalArgumentException("Unknown category " + category);
@@ -256,18 +257,21 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 			zoomToStart = zoomToStart + level;
 		}
 
-		// write tree using stack
+		// 3.2 write tree using stack
+		PreparedStatement prepareStatement = poiConnection.prepareStatement("SELECT DISTINCT type, subtype FROM poi WHERE x >= ? AND x < ? AND y >= ? AND y < ?");
 		Map<Long, Long> fpToWriteSeeks = new LinkedHashMap<Long, Long>();
 		for (Tree<Long> subs : rootZoomsTree.getSubtrees()) {
-			writePoiBoxes(writer, subs, zoomToStart, fpToWriteSeeks);
+			writePoiBoxes(writer, subs, zoomToStart, fpToWriteSeeks, prepareStatement,
+					categories, catIndexes);
 		}
 
 		stat = rs.getStatement();
 		rs.close();
 		stat.close();
+		prepareStatement.close();
 
 		// 4. write poi data
-		PreparedStatement prepareStatement = poiConnection
+		prepareStatement = poiConnection
 				.prepareStatement("SELECT id, x, y, name_en, name, type, subtype, opening_hours, site, phone from poi "
 						+ "where x >= ? AND x < ? AND y >= ? AND y < ?");
 		TIntArrayList types = new TIntArrayList();
@@ -293,6 +297,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 				String name = rs.getString(5);
 				String type = rs.getString(6);
 				String subtype = rs.getString(7);
+				types.clear();
 				buildTypeIds(type, subtype, categories, catIndexes, types);
 
 				String openingHours = rs.getString(8);
@@ -313,15 +318,32 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 
 	}
 
-	private void writePoiBoxes(BinaryMapIndexWriter writer, Tree<Long> tree, int zoom, Map<Long, Long> fpToWriteSeeks) throws IOException {
+	private void writePoiBoxes(BinaryMapIndexWriter writer, Tree<Long> tree, int zoom, Map<Long, Long> fpToWriteSeeks,
+			PreparedStatement categoriesGet, Map<String, Map<String, Integer>> categories, Map<String, Integer> catIndexes) throws IOException, SQLException {
 		long l = tree.getNode();
 		int x = (int) (l >> 31);
 		int y = (int) (l & ((1 << 31) - 1));
 		boolean end = zoom == ZOOM_TO_SAVE_END;
 		long fp = writer.startWritePoiBox(zoom, x, y, end);
+		if(zoom >= ZOOM_TO_WRITE_CATEGORIES_START && zoom <= ZOOM_TO_WRITE_CATEGORIES_END){
+			categoriesGet.setInt(1, x << (31 - zoom));
+			categoriesGet.setInt(2, (x + 1) << (31 - zoom));
+			categoriesGet.setInt(3, y << (31 - zoom));
+			categoriesGet.setInt(4, (y + 1) << (31 - zoom));
+			ResultSet rs = categoriesGet.executeQuery();
+			TIntArrayList types = new TIntArrayList();
+			while(rs.next()){
+				String cat = rs.getString(1);
+				String subcat = rs.getString(2);
+				buildTypeIds(cat, subcat, categories, catIndexes, types);
+			}
+			writer.writePOICategories(types);
+			rs.close();
+		}
+		
 		if (!end) {
 			for (Tree<Long> subTree : tree.getSubtrees()) {
-				writePoiBoxes(writer, subTree, zoom + 1, fpToWriteSeeks);
+				writePoiBoxes(writer, subTree, zoom + 1, fpToWriteSeeks, categoriesGet, categories, catIndexes);
 			}
 		} else {
 			fpToWriteSeeks.put(l, fp);
@@ -403,6 +425,9 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 	}
 
 	public static void main(String[] args) throws SQLException, FileNotFoundException, IOException {
+		// TODO support multiple reading amenity types!
+		// TODO support string trigramms
+		// TODO support live results
 		long time = System.currentTimeMillis();
 		IndexPoiCreator poiCreator = new IndexPoiCreator();
 		poiCreator.poiConnection = (Connection) DBDialect.SQLITE.getDatabaseConnection(

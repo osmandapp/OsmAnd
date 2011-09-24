@@ -21,6 +21,7 @@ import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.data.Amenity;
+import net.osmand.data.AmenityType;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
@@ -975,9 +976,10 @@ public class BinaryMapIndexReader {
 	}
 	
 	
-	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int zoom){
+	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int limit, int zoom){
 		SearchRequest<Amenity> request = new SearchRequest<Amenity>();
 		request.left = sleft;
+		request.limit = limit;
 		request.right = sright;
 		request.top = stop;
 		request.bottom = sbottom;
@@ -1015,6 +1017,12 @@ public class BinaryMapIndexReader {
 		
 	}
 	
+	public static interface SearchPoiTypeFilter {
+		
+		public boolean accept(AmenityType type, String subcategory);
+		
+	}
+	
 	public static class SearchRequest<T> {
 		// 31 zoom tiles
 		int left = 0;
@@ -1027,6 +1035,7 @@ public class BinaryMapIndexReader {
 		TIntArrayList cacheCoordinates = new TIntArrayList();
 		TIntArrayList cacheTypes = new TIntArrayList();
 		SearchFilter searchFilter = null;
+		SearchPoiTypeFilter poiTypeFilter = null;
 		
 		// TRACE INFO
 		int numberOfVisitedObjects = 0;
@@ -1043,6 +1052,14 @@ public class BinaryMapIndexReader {
 		}
 		public void setSearchFilter(SearchFilter searchFilter) {
 			this.searchFilter = searchFilter;
+		}
+		
+		public void setPoiTypeFilter(SearchPoiTypeFilter poiTypeFilter) {
+			this.poiTypeFilter = poiTypeFilter;
+		}
+		
+		public SearchPoiTypeFilter getPoiTypeFilter() {
+			return poiTypeFilter;
 		}
 		
 		public List<T> getSearchResults() {
@@ -1207,11 +1224,18 @@ public class BinaryMapIndexReader {
 //			System.out.println(poiRegion.categories.get(i));
 //			System.out.println(" " + poiRegion.subcategories.get(i));
 //		}
-		int sleft = MapUtils.get31TileNumberX(37.72);
-		int sright = MapUtils.get31TileNumberX(37.727);
+		int sleft = MapUtils.get31TileNumberX(37.5);
+		int sright = MapUtils.get31TileNumberX(37.9);
 		int stop = MapUtils.get31TileNumberY(55.814);
 		int sbottom = MapUtils.get31TileNumberY(55.81);
-		List<Amenity> results = reader.searchPoi(buildSearchPoiRequest(sleft, sright, stop, sbottom, 15));
+		SearchRequest<Amenity> req = buildSearchPoiRequest(sleft, sright, stop, sbottom, 15);
+		req.setPoiTypeFilter(new SearchPoiTypeFilter() {
+			@Override
+			public boolean accept(AmenityType type, String subcategory) {
+				return type == AmenityType.TRANSPORTATION && "fuel".equals(subcategory); 
+			}
+		});
+		List<Amenity> results = reader.searchPoi(req);
 		for(Amenity a : results){
 			System.out.println(a.getType() + " " + a.getSubType() + " " + a.getName() + " " + a.getLocation());
 		}

@@ -28,8 +28,7 @@ public class PoiFilter {
 	private final boolean isStandardFilter;
 	
 	private final static int finalZoom = 6;
-	private final static int initialZoom = 13;
-	private final static int maxInitialCount = 200;
+	private final static int initialZoom = 14;
 	private int zoom = initialZoom;
 	private final OsmandApplication application;
 	
@@ -105,7 +104,7 @@ public class PoiFilter {
 	
 	public List<Amenity> initializeNewSearch(double lat, double lon, int firstTimeLimit){
 		zoom = getInitialZoom();
-		List<Amenity> amenityList = application.getResourceManager().searchAmenities(this, lat, lon, zoom, maxInitialCount);
+		List<Amenity> amenityList = application.getResourceManager().searchAmenities(this, lat, lon, zoom, -1);
 		MapUtils.sortListOfMapObject(amenityList, lat, lon);
 		while (amenityList.size() > firstTimeLimit) {
 			amenityList.remove(amenityList.size() - 1);
@@ -115,11 +114,7 @@ public class PoiFilter {
 	}
 	
 	public List<Amenity> searchAgain(double lat, double lon){
-		int limit = -1;
-		if(zoom == getInitialZoom()){
-			limit = maxInitialCount;
-		}
-		List<Amenity> amenityList = application.getResourceManager().searchAmenities(this, lat, lon, zoom, limit);
+		List<Amenity> amenityList = application.getResourceManager().searchAmenities(this, lat, lon, zoom, -1);
 		MapUtils.sortListOfMapObject(amenityList, lat, lon);
 		return amenityList;
 	}
