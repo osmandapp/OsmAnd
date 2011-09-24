@@ -75,7 +75,7 @@ public class PoiFilter {
 	
 	public List<Amenity> searchFurther(double latitude, double longitude){
 		zoom --;
-		List<Amenity> amenityList = application.getResourceManager().searchAmenities(this, latitude, longitude, zoom, -1);
+		List<Amenity> amenityList = searchAmenities(this, latitude, longitude, zoom, -1);
 		MapUtils.sortListOfMapObject(amenityList, latitude, longitude);
 		
 		return amenityList;
@@ -104,17 +104,29 @@ public class PoiFilter {
 	
 	public List<Amenity> initializeNewSearch(double lat, double lon, int firstTimeLimit){
 		zoom = getInitialZoom();
-		List<Amenity> amenityList = application.getResourceManager().searchAmenities(this, lat, lon, zoom, -1);
+		List<Amenity> amenityList = searchAmenities(this, lat, lon, zoom, -1);
 		MapUtils.sortListOfMapObject(amenityList, lat, lon);
-		while (amenityList.size() > firstTimeLimit) {
-			amenityList.remove(amenityList.size() - 1);
+		if (firstTimeLimit > 0) {
+			while (amenityList.size() > firstTimeLimit) {
+				amenityList.remove(amenityList.size() - 1);
+			}
 		}
-		
 		return amenityList; 
 	}
 	
+	private List<Amenity> searchAmenities(PoiFilter poiFilter, double lat, double lon, int z, int limit) {
+		double tileNumberX = MapUtils.getTileNumberX(zoom, lon);
+		double tileNumberY = MapUtils.getTileNumberY(zoom, lat);
+		double topLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY - 0.5);
+		double bottomLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY + 0.5);
+		double leftLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX - 0.5);
+		double rightLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX + 0.5);
+		return application.getResourceManager().searchAmenities(poiFilter, 
+				topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon, z, limit);
+	}
+
 	public List<Amenity> searchAgain(double lat, double lon){
-		List<Amenity> amenityList = application.getResourceManager().searchAmenities(this, lat, lon, zoom, -1);
+		List<Amenity> amenityList = searchAmenities(this, lat, lon, zoom, -1);
 		MapUtils.sortListOfMapObject(amenityList, lat, lon);
 		return amenityList;
 	}

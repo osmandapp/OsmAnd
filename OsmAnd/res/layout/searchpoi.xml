@@ -11,6 +11,7 @@
 		<Button  android:text="@string/search_POI_level_btn"   
 		android:id="@+id/SearchPOILevelButton" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1"/>
 		<TextView android:layout_width="wrap_content" android:text="" android:id="@+id/SearchAreaText" android:layout_height="wrap_content"/>
+		<ProgressBar android:layout_width="wrap_content" android:text="" android:id="@+id/ProgressBar" android:layout_height="wrap_content" android:visibility="gone"/>
 	</LinearLayout>
 	
 	<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/SearchFilterLayout" android:visibility="gone">

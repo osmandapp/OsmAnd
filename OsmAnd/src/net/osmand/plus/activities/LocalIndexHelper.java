@@ -336,6 +336,10 @@ public class LocalIndexHelper {
 		double b = MapUtils.get31LatitudeY(bottom);
 		return format.format(new Object[] { l, t, r, b });
 	}
+	
+	private String formatLatLonBox(double l, double r, double t, double b) {
+		return format.format(new Object[] { l, t, r, b });
+	}
 
 	private void updateObfFileInformation(LocalIndexInfo info, File mapFile) {
 		try {
@@ -359,7 +363,8 @@ public class LocalIndexHelper {
 					PoiRegion mi = ((PoiRegion) part);
 					builder.append(app.getString(R.string.local_index_poi_data)).append(": ").
 						append(mi.getName()).append("\n");
-					String box = formatLatLonBox(mi.getLeft31X(), mi.getRight31X(), mi.getTop31Y(), mi.getBottom31Y());
+					String box = formatLatLonBox(mi.getLeftLongitude(), mi.getRightLongitude(), 
+							mi.getTopLatitude(), mi.getBottomLatitude());
 					builder.append(box).append("\n");
 				} else if(part instanceof TransportIndex){
 					TransportIndex mi = ((TransportIndex) part);

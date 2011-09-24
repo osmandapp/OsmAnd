@@ -551,20 +551,15 @@ public class ResourceManager {
 		return repos;
 	}
 	
-	public List<Amenity> searchAmenities(PoiFilter filter, double latitude, double longitude, int zoom, int limit) {
-		double tileNumberX = MapUtils.getTileNumberX(zoom, longitude);
-		double tileNumberY = MapUtils.getTileNumberY(zoom, latitude);
-		double topLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY - 0.5);
-		double bottomLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY + 0.5);
-		double leftLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX - 0.5);
-		double rightLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX + 0.5);
+	public List<Amenity> searchAmenities(PoiFilter filter,
+			double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, 
+			double lat, double lon, int zoom, int limit) {
 		List<Amenity> amenities = new ArrayList<Amenity>();
 		for (AmenityIndexRepository index : amenityRepositories) {
 			if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
-				if (!index.checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, filter.getFilterId(), 
-						amenities, false)) {
-					index.searchAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, limit, filter, amenities);
-				}
+				index.searchAmenities(MapUtils.get31TileNumberY(topLatitude), MapUtils.get31TileNumberX(leftLongitude), 
+						MapUtils.get31TileNumberY(bottomLatitude), MapUtils.get31TileNumberX(rightLongitude),
+						limit, filter, amenities);
 			}
 		}
 

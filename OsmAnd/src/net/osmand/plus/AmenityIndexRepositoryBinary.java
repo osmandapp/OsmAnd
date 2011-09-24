@@ -47,14 +47,9 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	}
 	
 	@Override
-	public List<Amenity> searchAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int limit,
+	public List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int limit,
 			final PoiFilter filter, final List<Amenity> amenities) {
 		long now = System.currentTimeMillis();
-		int sleft = MapUtils.get31TileNumberX(leftLongitude);
-		int sright = MapUtils.get31TileNumberX(rightLongitude);
-		int sbottom = MapUtils.get31TileNumberY(bottomLatitude);
-		int stop = MapUtils.get31TileNumberY(topLatitude);
-		
 		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(sleft, sright, stop, sbottom, limit, 16);
 		req.setPoiTypeFilter(new SearchPoiTypeFilter(){
 			@Override
@@ -75,7 +70,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		}
 		if (log.isDebugEnabled()) {
 			log.debug(String.format("Search for %s done in %s ms found %s.",  //$NON-NLS-1$
-					topLatitude + " " + leftLongitude, System.currentTimeMillis() - now, amenities.size())); //$NON-NLS-1$
+					MapUtils.get31LatitudeY(stop) + " " + MapUtils.get31LongitudeX(sleft), System.currentTimeMillis() - now, amenities.size())); //$NON-NLS-1$
 		}
 		return amenities;
 	}
@@ -132,7 +127,11 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		cZoom = zoom;
 		// first of all put all entities in temp list in order to not freeze other read threads
 		ArrayList<Amenity> tempList = new ArrayList<Amenity>();
-		searchAmenities(cTopLatitude, cLeftLongitude, cBottomLatitude, cRightLongitude, limitPoi, filter, tempList);
+		int sleft = MapUtils.get31TileNumberX(cLeftLongitude);
+		int sright = MapUtils.get31TileNumberX(cRightLongitude);
+		int sbottom = MapUtils.get31TileNumberY(cBottomLatitude);
+		int stop = MapUtils.get31TileNumberY(cTopLatitude);
+		searchAmenities(stop, sleft, sbottom, sright, limitPoi, filter, tempList);
 		synchronized (this) {
 			cachedObjects.clear();
 			cachedObjects.addAll(tempList);

@@ -186,10 +186,9 @@ public class BinaryMapIndexReader {
 	}
 	
 	public boolean containsPoiData(double latitude, double longitude) {
-		int x = MapUtils.get31TileNumberX(longitude);
-		int y = MapUtils.get31TileNumberY(latitude);
 		for (PoiRegion index : poiIndexes) {
-			if (index.right31X >= x && index.left31X <= x && index.top31Y <= y && index.bottom31Y >= y) {
+			if (index.rightLongitude >= longitude && index.leftLongitude <= longitude &&
+					index.topLatitude >= latitude && index.bottomLatitude <= latitude) {
 				return true;
 			}
 		}
@@ -197,12 +196,9 @@ public class BinaryMapIndexReader {
 	}
 	
 	public boolean containsPoiData(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
-		int leftX = MapUtils.get31TileNumberX(leftLongitude);
-		int rightX = MapUtils.get31TileNumberX(rightLongitude);
-		int bottomY = MapUtils.get31TileNumberY(bottomLatitude);
-		int topY = MapUtils.get31TileNumberY(topLatitude);
 		for (PoiRegion index : poiIndexes) {
-			if (index.right31X >= leftX && index.left31X <= rightX && index.top31Y <= bottomY && index.bottom31Y >= topY) {
+			if (index.rightLongitude >= leftLongitude && index.leftLongitude <= rightLongitude && 
+					index.topLatitude >= bottomLatitude && index.bottomLatitude <= topLatitude) {
 				return true;
 			}
 		}
@@ -1219,7 +1215,7 @@ public class BinaryMapIndexReader {
 		testTransportSearch(reader);
 
 		PoiRegion poiRegion = reader.getPoiIndexes().get(0);
-		System.out.println(poiRegion.left31X + " " + poiRegion.right31X + " " + poiRegion.bottom31Y +  " " + poiRegion.top31Y);
+		System.out.println(poiRegion.leftLongitude + " " + poiRegion.rightLongitude + " " + poiRegion.bottomLatitude +  " " + poiRegion.topLatitude);
 //		for (int i = 0; i < poiRegion.categories.size(); i++) {
 //			System.out.println(poiRegion.categories.get(i));
 //			System.out.println(" " + poiRegion.subcategories.get(i));
@@ -1228,7 +1224,7 @@ public class BinaryMapIndexReader {
 		int sright = MapUtils.get31TileNumberX(37.9);
 		int stop = MapUtils.get31TileNumberY(55.814);
 		int sbottom = MapUtils.get31TileNumberY(55.81);
-		SearchRequest<Amenity> req = buildSearchPoiRequest(sleft, sright, stop, sbottom, 15);
+		SearchRequest<Amenity> req = buildSearchPoiRequest(sleft, sright, stop, sbottom, 15, -1);
 		req.setPoiTypeFilter(new SearchPoiTypeFilter() {
 			@Override
 			public boolean accept(AmenityType type, String subcategory) {

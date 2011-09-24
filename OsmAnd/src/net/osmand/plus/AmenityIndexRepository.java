@@ -15,7 +15,7 @@ public interface AmenityIndexRepository {
 	/**
 	 * Search amenities in the specified box doesn't cache results 
 	 */
-	public List<Amenity> searchAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int limit,
+	public List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int limit,
 			PoiFilter filter, List<Amenity> amenities);
 
 

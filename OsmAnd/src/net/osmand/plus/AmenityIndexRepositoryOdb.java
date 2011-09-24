@@ -41,7 +41,7 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 	
 	
 	private final String[] columns = new String[]{"id", "x", "y", "name", "name_en", "type", "subtype", "opening_hours", "phone", "site"};        //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$//$NON-NLS-5$//$NON-NLS-6$//$NON-NLS-7$//$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$
-	public List<Amenity> searchAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int limit, PoiFilter filter, List<Amenity> amenities){
+	public List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int limit, PoiFilter filter, List<Amenity> amenities){
 		long now = System.currentTimeMillis();
 		String squery = "? < y AND y < ? AND ? < x AND x < ?"; //$NON-NLS-1$
 		
@@ -55,9 +55,9 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 			squery += " ORDER BY RANDOM() LIMIT " +limit; //$NON-NLS-1$
 		}
 		Cursor query = db.query(IndexConstants.POI_TABLE, columns, squery, 
-				new String[]{MapUtils.get31TileNumberY(topLatitude)+"",  //$NON-NLS-1$
-				MapUtils.get31TileNumberY(bottomLatitude)+"", MapUtils.get31TileNumberX(leftLongitude)+"",  //$NON-NLS-1$ //$NON-NLS-2$
-				MapUtils.get31TileNumberX(rightLongitude)+""}, null, null, null); //$NON-NLS-1$
+				new String[]{stop+"",  //$NON-NLS-1$
+				sbottom+"", sleft+"",  //$NON-NLS-1$ //$NON-NLS-2$
+				sright+""}, null, null, null); //$NON-NLS-1$
 		if(query.moveToFirst()){
 			do {
 				Amenity am = new Amenity();
@@ -84,7 +84,7 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 		
 		if (log.isDebugEnabled()) {
 			log.debug(String.format("Search for %s done in %s ms found %s.",  //$NON-NLS-1$
-					topLatitude + " " + leftLongitude, System.currentTimeMillis() - now, amenities.size())); //$NON-NLS-1$
+					MapUtils.get31LatitudeY(stop) + " " + MapUtils.get31LongitudeX(sleft), System.currentTimeMillis() - now, amenities.size())); //$NON-NLS-1$
 		}
 		return amenities;
 	}
@@ -135,7 +135,11 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 		cZoom = zoom;
 		// first of all put all entities in temp list in order to not freeze other read threads
 		ArrayList<Amenity> tempList = new ArrayList<Amenity>();
-		searchAmenities(cTopLatitude, cLeftLongitude, cBottomLatitude, cRightLongitude, limit, filter, tempList);
+		int sleft = MapUtils.get31TileNumberX(cLeftLongitude);
+		int sright = MapUtils.get31TileNumberX(cRightLongitude);
+		int sbottom = MapUtils.get31TileNumberY(cBottomLatitude);
+		int stop = MapUtils.get31TileNumberY(cTopLatitude);
+		searchAmenities(stop, sleft, sbottom, sright, limit, filter, tempList);
 		synchronized (this) {
 			cachedObjects.clear();
 			cachedObjects.addAll(tempList);

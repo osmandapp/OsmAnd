@@ -1201,7 +1201,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				Message msg = Message.obtain(uiHandler, new Runnable() {
 					@Override
 					public void run() {
-						backToLocationImpl();
+						if (settings.MAP_ACTIVITY_ENABLED.get()) {
+							backToLocationImpl();
+						}
 					}
 				});
 				msg.what = AUTO_FOLLOW_MSG_ID;
