@@ -629,7 +629,9 @@ public class IndexBatchCreator {
 			try {
 				ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(zFile));
 				zout.setLevel(9);
-				zout.putNextEntry(new ZipEntry(fileName));
+				ZipEntry zEntry = new ZipEntry(fileName);
+				zEntry.setSize(f.length());
+				zout.putNextEntry(zEntry);
 				FileInputStream is = new FileInputStream(f);
 				byte[] BUFFER = new byte[8192];
 				int read = 0;
