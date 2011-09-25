@@ -59,6 +59,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 
 	private boolean selectionMode = false;
 	private Set<LocalIndexInfo> selectedItems = new LinkedHashSet<LocalIndexInfo>();
+	private OsmandSettings settings;
 	
 	protected static int DELETE_OPERATION = 1;
 	protected static int BACKUP_OPERATION = 2;
@@ -66,6 +67,8 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 	
 	MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
 	MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
+
+	
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -74,6 +77,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 
 		// requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.local_index);
+		settings = OsmandSettings.getOsmandSettings(this);
 		descriptionLoader = new LoadLocalIndexDescriptionTask();
 		listAdapter = new LocalIndexesAdapter();
 		Object indexes = getLastNonConfigurationInstance();
@@ -100,21 +104,81 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 				int child = ExpandableListView.getPackedPositionChild(packedPos);
 				if (child >= 0 && group >= 0) {
 					final LocalIndexInfo point = (LocalIndexInfo) listAdapter.getChild(group, child);
-					if (point != null && point.getGpxFile() != null) {
-						WptPt loc = point.getGpxFile().findPointToShow();
-						if (loc != null) {
-							OsmandSettings.getOsmandSettings(LocalIndexesActivity.this).setMapLocationToShow(loc.lat,
-									loc.lon);
-						}
-						((OsmandApplication) getApplication()).setGpxFileToDisplay(point.getGpxFile());
-						MapActivity.launchMapActivityMoveToTop(LocalIndexesActivity.this);
-					}
+					showContextMenu(point);
 				}
-			}	
+			}
 		});
 		
 		setListAdapter(listAdapter);
 		updateDescriptionTextWithSize();
+	}
+	
+	private void showContextMenu(final LocalIndexInfo info) {
+		Builder builder = new AlertDialog.Builder(this);
+		final List<Integer> menu = new ArrayList<Integer>();
+		if(info.getGpxFile() != null && info.getType() == LocalIndexType.GPX_DATA){
+			menu.add(R.string.show_gpx_route);
+			menu.add(R.string.local_index_mi_upload_gpx);
+		}
+		if(info.getType() == LocalIndexType.MAP_DATA || info.getType() == LocalIndexType.POI_DATA){
+			if(!info.isBackupedData()){
+				menu.add(R.string.local_index_mi_backup);
+			}
+		}
+		if(info.isBackupedData()){
+			menu.add(R.string.local_index_mi_restore);
+		}
+		menu.add(R.string.local_index_mi_rename);
+		menu.add(R.string.local_index_mi_delete);
+		if (!menu.isEmpty()) {
+			String[] values = new String[menu.size()];
+			for (int i = 0; i < values.length; i++) {
+				values[i] = getString(menu.get(i));
+			}
+			builder.setItems(values, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					int resId = menu.get(which);
+					if (resId == R.string.show_gpx_route) {
+						if (info != null && info.getGpxFile() != null) {
+							WptPt loc = info.getGpxFile().findPointToShow();
+							if (loc != null) {
+								OsmandSettings.getOsmandSettings(LocalIndexesActivity.this).setMapLocationToShow(loc.lat, loc.lon);
+							}
+							((OsmandApplication) getApplication()).setGpxFileToDisplay(info.getGpxFile());
+							MapActivity.launchMapActivityMoveToTop(LocalIndexesActivity.this);
+						}
+					} else if (resId == R.string.local_index_mi_rename) {
+						// TODO
+					} else if (resId == R.string.local_index_mi_restore) {
+						boolean successfull = move(new File(info.getPathToData()), getFileToRestore(info));
+						if(successfull){
+							info.setBackupedData(false);
+							reloadIndexes();
+						}
+						listAdapter.move(new LocalIndexInfo[] {info}, true);
+					} else if (resId == R.string.local_index_mi_delete) {
+						File f = new File(info.getPathToData());
+						boolean successfull = Algoritms.removeAllFiles(f);
+						if(successfull){
+							listAdapter.delete(new LocalIndexInfo[] {info});
+							reloadIndexes();
+						}
+					} else if (resId == R.string.local_index_mi_backup) {
+						boolean successfull = move(new File(info.getPathToData()), getFileToBackup(info));
+						if(successfull){
+							info.setBackupedData(true);
+							reloadIndexes();
+						}
+						listAdapter.move(new LocalIndexInfo[] {info}, false);
+					} else if (resId == R.string.local_index_mi_upload_gpx) {
+						// TODO
+					}
+				}
+			});
+
+		}
+		builder.show();
 	}
 
 	public class LoadLocalIndexTask extends AsyncTask<Activity, LocalIndexInfo, List<LocalIndexInfo>> {
@@ -165,50 +229,49 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 
 	}
 	
+	private File getFileToRestore(LocalIndexInfo i){
+		if(i.isBackupedData()){
+			File parent = new File(i.getPathToData()).getParentFile();
+			if(i.getType() == LocalIndexType.GPX_DATA){
+				parent = settings.extendOsmandPath(ResourceManager.GPX_PATH);
+			} else if(i.getType() == LocalIndexType.MAP_DATA){
+				parent = settings.extendOsmandPath(ResourceManager.MAPS_PATH);
+			} else if(i.getType() == LocalIndexType.POI_DATA){
+				parent = settings.extendOsmandPath(ResourceManager.POI_PATH);
+			} else if(i.getType() == LocalIndexType.TILES_DATA){
+				parent = settings.extendOsmandPath(ResourceManager.TILES_PATH);
+			} else if(i.getType() == LocalIndexType.VOICE_DATA){
+				parent = settings.extendOsmandPath(ResourceManager.VOICE_PATH);
+			} else if(i.getType() == LocalIndexType.TTS_VOICE_DATA){
+				parent = settings.extendOsmandPath(ResourceManager.VOICE_PATH);
+			}
+			return new File(parent, i.getFileName());
+		}
+		return new File(i.getPathToData());
+	}
+	
+	private File getFileToBackup(LocalIndexInfo i) {
+		if(!i.isBackupedData()){
+			return new File(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), i.getFileName());
+		}
+		return new File(i.getPathToData());
+	}
+	
+	private boolean move(File from, File to){
+		if(!to.getParentFile().exists()){
+			to.getParentFile().mkdirs();
+		}
+		return from.renameTo(to);
+	}
+	
 	public class LocalIndexOperationTask extends AsyncTask<LocalIndexInfo, LocalIndexInfo, String> {
 		
 		private final int operation;
-		private OsmandSettings settings;
 
 		public LocalIndexOperationTask(int operation){
 			this.operation = operation;
-			settings = ((OsmandApplication) getApplication()).getSettings();
 		}
 		
-		public File getFileToRestore(LocalIndexInfo i){
-			if(i.isBackupedData()){
-				File parent = new File(i.getPathToData()).getParentFile();
-				if(i.getType() == LocalIndexType.GPX_DATA){
-					parent = settings.extendOsmandPath(ResourceManager.GPX_PATH);
-				} else if(i.getType() == LocalIndexType.MAP_DATA){
-					parent = settings.extendOsmandPath(ResourceManager.MAPS_PATH);
-				} else if(i.getType() == LocalIndexType.POI_DATA){
-					parent = settings.extendOsmandPath(ResourceManager.POI_PATH);
-				} else if(i.getType() == LocalIndexType.TILES_DATA){
-					parent = settings.extendOsmandPath(ResourceManager.TILES_PATH);
-				} else if(i.getType() == LocalIndexType.VOICE_DATA){
-					parent = settings.extendOsmandPath(ResourceManager.VOICE_PATH);
-				} else if(i.getType() == LocalIndexType.TTS_VOICE_DATA){
-					parent = settings.extendOsmandPath(ResourceManager.VOICE_PATH);
-				}
-				return new File(parent, i.getFileName());
-			}
-			return new File(i.getPathToData());
-		}
-		
-		private File getFileToBackup(LocalIndexInfo i) {
-			if(!i.isBackupedData()){
-				return new File(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), i.getFileName());
-			}
-			return new File(i.getPathToData());
-		}
-		
-		private boolean move(File from, File to){
-			if(!to.getParentFile().exists()){
-				to.getParentFile().mkdirs();
-			}
-			return from.renameTo(to);
-		}
 		
 		@Override
 		protected String doInBackground(LocalIndexInfo... params) {
