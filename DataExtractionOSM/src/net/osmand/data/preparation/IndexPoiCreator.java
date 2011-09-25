@@ -427,13 +427,19 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 	public static void main(String[] args) throws SQLException, FileNotFoundException, IOException {
 		// TODO support multiple reading amenity types!
 		// TODO support string trigramms
-		// TODO support live results
 		long time = System.currentTimeMillis();
 		IndexPoiCreator poiCreator = new IndexPoiCreator();
+		String fileSqlte = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.odb";
+		String outFile = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Test-Ru.poi.obf";
+//		String fileSqlte = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Netherlands_europe.poi.odb";
+//		String outFile = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Netherlands.poi.obf";
+		
 		poiCreator.poiConnection = (Connection) DBDialect.SQLITE.getDatabaseConnection(
-				"/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.odb", log);
+				fileSqlte, log);
 		BinaryMapIndexWriter writer = new BinaryMapIndexWriter(new RandomAccessFile(
-				"/home/victor/projects/OsmAnd/data/osm-gen/POI/Test-Ru.poi.obf", "rw"));
+				outFile, "rw"));
+		
+		
 		poiCreator.poiConnection.setAutoCommit(false);
 		poiCreator.writeBinaryPoiIndex(writer, "Ru-mow", new ConsoleProgressImplementation());
 		writer.close();

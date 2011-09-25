@@ -151,28 +151,13 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 					} else if (resId == R.string.local_index_mi_rename) {
 						// TODO
 					} else if (resId == R.string.local_index_mi_restore) {
-						boolean successfull = move(new File(info.getPathToData()), getFileToRestore(info));
-						if(successfull){
-							info.setBackupedData(false);
-							reloadIndexes();
-						}
-						listAdapter.move(new LocalIndexInfo[] {info}, true);
+						new LocalIndexOperationTask(RESTORE_OPERATION).execute(info);
 					} else if (resId == R.string.local_index_mi_delete) {
-						File f = new File(info.getPathToData());
-						boolean successfull = Algoritms.removeAllFiles(f);
-						if(successfull){
-							listAdapter.delete(new LocalIndexInfo[] {info});
-							reloadIndexes();
-						}
+						new LocalIndexOperationTask(DELETE_OPERATION).execute(info);
 					} else if (resId == R.string.local_index_mi_backup) {
-						boolean successfull = move(new File(info.getPathToData()), getFileToBackup(info));
-						if(successfull){
-							info.setBackupedData(true);
-							reloadIndexes();
-						}
-						listAdapter.move(new LocalIndexInfo[] {info}, false);
+						new LocalIndexOperationTask(BACKUP_OPERATION).execute(info);
 					} else if (resId == R.string.local_index_mi_upload_gpx) {
-						// TODO
+						new UploadGPXFilesTask().execute(info);
 					}
 				}
 			});
@@ -345,11 +330,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 	
 	public class UploadGPXFilesTask extends AsyncTask<LocalIndexInfo, String, String> {
 		
-		private OsmandSettings settings;
 
-		public UploadGPXFilesTask(){
-			settings = ((OsmandApplication) getApplication()).getSettings();
-		}
 		
 		
 		@Override

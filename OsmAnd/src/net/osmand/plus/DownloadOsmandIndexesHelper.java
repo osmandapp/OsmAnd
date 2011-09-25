@@ -106,6 +106,12 @@ public class DownloadOsmandIndexesHelper {
 					}
 					s += ctx.getString(R.string.map_index);
 				}
+				if (lowerCase.contains("poi")) { //$NON-NLS-1$
+					if (s.length() > 0) {
+						s += ", "; //$NON-NLS-1$
+					}
+					s += ctx.getString(R.string.poi);
+				}
 				if (lowerCase.contains("transport")) { //$NON-NLS-1$
 					if (s.length() > 0) {
 						s += ", "; //$NON-NLS-1$

@@ -64,7 +64,7 @@ public class BinaryMapIndexReader {
 	
 	public BinaryMapIndexReader(final RandomAccessFile raf, boolean readOnlyMapData) throws IOException {
 		this.raf = raf;
-		codedIS = CodedInputStreamRAF.newInstance(raf, 1024);
+		codedIS = CodedInputStreamRAF.newInstance(raf, 1024 * 5);
 		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
 		if(!readOnlyMapData){
 			transportAdapter = new BinaryMapTransportReaderAdapter(this);
@@ -928,8 +928,9 @@ public class BinaryMapIndexReader {
 			poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
 			codedIS.popLimit(old);
 		}
-		log.info("Search poi is done. Visit " + req.numberOfVisitedObjects + " objects. Read " + req.numberOfAcceptedObjects + " objects."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		log.info("Read " + req.numberOfReadSubtrees + " subtrees. Go through " + req.numberOfAcceptedSubtrees + " subtrees.");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+		log.info("Search poi is done. Visit " + req.numberOfVisitedObjects + " objects. Read " + req.numberOfAcceptedObjects + " objects."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		
 		return req.getSearchResults();
 	}
 	
@@ -972,13 +973,14 @@ public class BinaryMapIndexReader {
 	}
 	
 	
-	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int zoom){
+	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int zoom, int limit){
 		SearchRequest<Amenity> request = new SearchRequest<Amenity>();
 		request.left = sleft;
 		request.right = sright;
 		request.top = stop;
 		request.bottom = sbottom;
 		request.zoom = zoom;
+		request.limit = limit;
 		return request;
 	}
 	
@@ -1223,7 +1225,7 @@ public class BinaryMapIndexReader {
 		int sright = MapUtils.get31TileNumberX(37.9);
 		int stop = MapUtils.get31TileNumberY(55.814);
 		int sbottom = MapUtils.get31TileNumberY(55.81);
-		SearchRequest<Amenity> req = buildSearchPoiRequest(sleft, sright, stop, sbottom, -1);
+		SearchRequest<Amenity> req = buildSearchPoiRequest(sleft, sright, stop, sbottom, -1, 200);
 		req.setPoiTypeFilter(new SearchPoiTypeFilter() {
 			@Override
 			public boolean accept(AmenityType type, String subcategory) {

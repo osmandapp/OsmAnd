@@ -50,7 +50,8 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	public List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom, 
 			final PoiFilter filter, final List<Amenity> amenities) {
 		long now = System.currentTimeMillis();
-		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(sleft, sright, stop, sbottom, zoom);
+		int limit = zoom > 0 ? 200 : -1;
+		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(sleft, sright, stop, sbottom, zoom, limit);
 		req.setPoiTypeFilter(new SearchPoiTypeFilter(){
 			@Override
 			public boolean accept(AmenityType type, String subcategory) {
