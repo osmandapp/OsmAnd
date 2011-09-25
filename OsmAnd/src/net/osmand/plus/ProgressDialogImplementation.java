@@ -1,8 +1,10 @@
 package net.osmand.plus;
 
 import net.osmand.IProgress;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.os.Handler;
@@ -20,11 +22,17 @@ public class ProgressDialogImplementation implements IProgress {
 	private Context context;
 	private ProgressDialog dialog = null;
 	private final boolean cancelable;
+	private Activity activity;
 	
 
 	public ProgressDialogImplementation(Context ctx, ProgressDialog dlg, boolean cancelable){
 		this.cancelable = cancelable;
 		context = ctx;
+		if (context instanceof Activity) {
+			activity = (Activity)context;
+		} else if (ctx instanceof ContextWrapper && ((ContextWrapper)ctx).getBaseContext() instanceof Activity) {
+			activity = (Activity)((ContextWrapper)ctx).getBaseContext();
+		}
 		setDialog(dlg);
 		
 		mViewUpdateHandler = new Handler(){
@@ -34,7 +42,7 @@ public class ProgressDialogImplementation implements IProgress {
 				if(dialog != null){
 					dialog.setMessage(message);
 					if (isIndeterminate()) {
-						dialog.setMax(0);
+						dialog.setMax(1);
 						dialog.setIndeterminate(true);
 					} else {
 						dialog.setIndeterminate(false);
@@ -109,8 +117,18 @@ public class ProgressDialogImplementation implements IProgress {
 	@Override
 	public void progress(int deltaWork) {
 		this.progress += deltaWork;
+		final int prg = progress;
 		if (!isIndeterminate() && dialog != null) {
-			dialog.setProgress(this.progress);
+			if (activity != null) {
+				activity.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						dialog.setProgress(prg);
+					}
+				});
+			} else {
+				dialog.setProgress(prg);
+			}
 		}
 	}
 	

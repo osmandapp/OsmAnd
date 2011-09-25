@@ -89,13 +89,23 @@ public class DownloadFileHelper {
 					}
 
 					first = false;
+					int prg = 0;
 					while ((read = is.read(buffer)) != -1) {
 						 if(interruptDownloading){
 						 	throw new InterruptedException();
 						 }
 						out.write(buffer, 0, read);
-						progress.progress(read);
+						if (length > -1) {
+							prg += read;
+							if (prg > length / 100) {
+								progress.progress(prg);
+								prg = 0;
+							}
+						}
 						fileread += read;
+					}
+					if (prg > 0) {
+						progress.progress(prg);
 					}
 					if(length <= fileread){
 						triesDownload = 0;
@@ -142,7 +152,6 @@ public class DownloadFileHelper {
 
 			File toIndex = fileToDownload;
 			if (fileToDownload.getName().endsWith(".zip")) { //$NON-NLS-1$
-				progress.startTask(ctx.getString(R.string.unzipping_file), -1);
 				if (!unzipToDir) {
 					toIndex = fileToUnZip;
 				} else {
@@ -152,6 +161,8 @@ public class DownloadFileHelper {
 				ZipEntry entry = null;
 				boolean first = true;
 				while ((entry = zipIn.getNextEntry()) != null) {
+					int size = (int)entry.getSize();
+					progress.startTask(ctx.getString(R.string.unzipping_file), size);
 					File fs;
 					if (!unzipToDir) {
 						if (first) {
@@ -177,8 +188,19 @@ public class DownloadFileHelper {
 					out = new FileOutputStream(fs);
 					int read;
 					byte[] buffer = new byte[BUFFER_SIZE];
+					int prg = 0;
 					while ((read = zipIn.read(buffer)) != -1) {
 						out.write(buffer, 0, read);
+						if (size > -1) {
+							prg += read;
+							if (prg > size/100) {
+								progress.progress(prg);
+								prg = 0;
+							}
+						}
+					}
+					if (prg > 0) {
+						progress.progress(prg);
 					}
 					out.close();
 				}
