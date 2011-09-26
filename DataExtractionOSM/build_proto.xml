@@ -1,5 +1,5 @@
 <!--  build JAR libraty -->
-<project name="OsmPDB" default="build" basedir=".">
+<project name="DataExtractionOsm" default="build" basedir=".">
 	<target name="build">
 		<exec dir="." executable="/usr/bin/protoc">
 			<arg value="src/osmand_odb.proto" />

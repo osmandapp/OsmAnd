@@ -270,9 +270,14 @@ public class BinaryMapPoiReaderAdapter {
 		Amenity am = null;
 		int x = 0;
 		int y = 0;
+		AmenityType amenityType = null;
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
+			if(amenityType == null && (tag > OsmandOdb.OsmAndPoiBoxDataAtom.CATEGORIES_FIELD_NUMBER || tag == 0)) {
+				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+				return null;
+			}
 			switch (tag) {
 			case 0:
 				if(Algoritms.isEmpty(am.getEnName())){
@@ -294,7 +299,6 @@ public class BinaryMapPoiReaderAdapter {
 				am.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
 				break;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.CATEGORIES_FIELD_NUMBER :
-				// TODO support many amenities type !!
 				int cat = codedIS.readUInt32();
 				int subcatId = cat >> SHIFT_BITS_CATEGORY;
 				int catId = cat & CATEGORY_MASK;
@@ -307,12 +311,16 @@ public class BinaryMapPoiReaderAdapter {
 						subtype = subcats.get(subcatId);
 					}
 				}
-				if (req.poiTypeFilter != null && !req.poiTypeFilter.accept(type, subtype)) {
-					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-					return null;
+				if (req.poiTypeFilter == null || req.poiTypeFilter.accept(type, subtype)) {
+					if (amenityType == null) {
+						amenityType = type;
+						am.setSubType(subtype);
+						am.setType(amenityType);
+					} else {
+						am.setSubType(am.getSubType() + ";" + subtype);
+					}
 				}
-				am.setSubType(subtype);
-				am.setType(type);
+				
 				break;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.ID_FIELD_NUMBER :
 				am.setId(codedIS.readUInt64());

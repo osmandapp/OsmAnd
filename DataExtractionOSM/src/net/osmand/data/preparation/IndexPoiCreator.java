@@ -18,7 +18,9 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
@@ -31,6 +33,7 @@ import net.osmand.impl.ConsoleProgressImplementation;
 import net.osmand.osm.Entity;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.OSMSettings.OSMTagKey;
+import net.sf.junidecode.Junidecode;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -180,7 +183,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 			types.add((subcatInd << BinaryMapPoiReaderAdapter.SHIFT_BITS_CATEGORY) | catInd);
 		}
 	}
-
+	
 	public void writeBinaryPoiIndex(BinaryMapIndexWriter writer, String regionName, IProgress progress) throws SQLException, IOException {
 		if (poiPreparedStatement != null) {
 			closePreparedStatements(poiPreparedStatement);
@@ -188,62 +191,79 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		poiConnection.commit();
 		Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.PRIMARY);
-		ResultSet rs = poiConnection.createStatement().executeQuery("SELECT DISTINCT type, subtype FROM poi");
-		Map<String, Map<String, Integer>> categories = new LinkedHashMap<String, Map<String, Integer>>();
-		while (rs.next()) {
-			String category = rs.getString(1);
-			String subcategory = rs.getString(2).trim();
-			if (!categories.containsKey(category)) {
-				categories.put(category, new TreeMap<String, Integer>(collator));
-			}
-			if (subcategory.contains(";") || subcategory.contains(",")) {
-				String[] split = subcategory.split(",|;");
-				for (String sub : split) {
-					categories.get(category).put(sub.trim(), 0);
-				}
-			} else {
-				categories.get(category).put(subcategory.trim(), 0);
-			}
-		}
-		Statement stat = rs.getStatement();
-		rs.close();
-		stat.close();
-
-		// 1. write header
-		rs = poiConnection.createStatement().executeQuery("SELECT max(x), min(x), max(y), min(y) FROM poi");
-		rs.next();
-		int right31 = rs.getInt(1);
-		int left31 = rs.getInt(2);
-		int bottom31 = rs.getInt(3);
-		int top31 = rs.getInt(4);
-		rs.close();
-		long startFpPoiIndex = writer.startWritePOIIndex(regionName, left31, right31, bottom31, top31);
-
-		// 2. write categories table
-		Map<String, Integer> catIndexes = writer.writePOICategoriesTable(categories);
-
-		// 3. write boxes
-		String selectZm = (31 - ZOOM_TO_SAVE_END) + "";
-		rs = poiConnection.createStatement().executeQuery("SELECT DISTINCT x>>" + selectZm + ", y>>" + selectZm + " from poi");
-		Tree<Long> rootZoomsTree = new Tree<Long>();
+		
+		// 0. process all entities
+		ResultSet rs = poiConnection.createStatement().executeQuery("SELECT x,y,name,name_en,type,subtype from poi");
 		int zoomToStart = ZOOM_TO_SAVE_START;
+		Tree<PoiBox> rootZoomsTree = new Tree<PoiBox>();
+		rootZoomsTree.setNode(new PoiBox());
+		int minX = Integer.MAX_VALUE;
+		int maxX = 0;
+		int minY = Integer.MAX_VALUE;
+		int maxY = 0;
+		int count = 0;
 		while (rs.next()) {
 			int x = rs.getInt(1);
 			int y = rs.getInt(2);
-			Tree<Long> prevTree = rootZoomsTree;
-			for (int i = zoomToStart; i <= ZOOM_TO_SAVE_END; i++) {
-				int shift = ZOOM_TO_SAVE_END - i;
-				long l = (((long) x >> shift) << 31) | ((long) y >> shift);
+			minX = Math.min(x, minX);
+			maxX = Math.max(x, maxX);
+			minY = Math.min(y, minY);
+			maxY = Math.max(y, maxY);
+			if(count++ > 10000){
+				count = 0;
+				log.info("proccess 10000 entities");
+			}
 
-				Tree<Long> subtree = prevTree.getSubtreeByNode(l);
+			String name = rs.getString(3);
+			String nameEn = rs.getString(4);
+			String type = rs.getString(5);
+			String subtype = rs.getString(6);
+
+			Tree<PoiBox> prevTree = rootZoomsTree;
+			rootZoomsTree.getNode().addCategory(type, subtype);
+			rootZoomsTree.getNode().addNamePrefix(name, nameEn);
+			for (int i = zoomToStart; i <= ZOOM_TO_SAVE_END; i++) {
+				int xs = x >> (31 - i);
+				int ys = y >> (31 - i);
+				Tree<PoiBox> subtree = null;
+				for (Tree<PoiBox> sub : prevTree.getSubtrees()) {
+					if (sub.getNode().x == xs && sub.getNode().y == ys && sub.getNode().zoom == i) {
+						subtree = sub;
+						break;
+					}
+				}
 				if (subtree == null) {
-					subtree = new Tree<Long>();
-					subtree.setNode(l);
+					subtree = new Tree<PoiBox>();
+					PoiBox poiBox = new PoiBox();
+					subtree.setNode(poiBox);
+					poiBox.x = xs;
+					poiBox.y = ys;
+					poiBox.zoom = i;
+
 					prevTree.addSubTree(subtree);
 				}
+				subtree.getNode().addCategory(type, subtype);
+				subtree.getNode().addNamePrefix(name, nameEn);
+
 				prevTree = subtree;
 			}
 		}
+		log.info("Poi processing finishied");
+		// Finish process all entities
+		
+		// 1. write header
+		int right31 = maxX;
+		int left31 = minX;
+		int bottom31 = maxY;
+		int top31 = minY;
+		long startFpPoiIndex = writer.startWritePOIIndex(regionName, left31, right31, bottom31, top31);
+
+		// 2. write categories table
+		Map<String, Map<String, Integer>> categories = rootZoomsTree.node.categories;
+		Map<String, Integer> catIndexes = writer.writePOICategoriesTable(categories);
+
+		// 3. write boxes
+		log.info("Poi box processing finishied");
 		int level = 0;
 		for (; level < (ZOOM_TO_SAVE_END - zoomToStart); level++) {
 			int subtrees = rootZoomsTree.getSubTreesOnLevel(level);
@@ -258,28 +278,21 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		}
 
 		// 3.2 write tree using stack
-		PreparedStatement prepareStatement = poiConnection.prepareStatement("SELECT DISTINCT type, subtype FROM poi WHERE x >= ? AND x < ? AND y >= ? AND y < ?");
-		Map<Long, Long> fpToWriteSeeks = new LinkedHashMap<Long, Long>();
-		for (Tree<Long> subs : rootZoomsTree.getSubtrees()) {
-			writePoiBoxes(writer, subs, zoomToStart, fpToWriteSeeks, prepareStatement,
-					categories, catIndexes);
+		Map<PoiBox, Long> fpToWriteSeeks = new LinkedHashMap<PoiBox, Long>();
+		for (Tree<PoiBox> subs : rootZoomsTree.getSubtrees()) {
+			writePoiBoxes(writer, subs, fpToWriteSeeks, categories, catIndexes);
 		}
 
-		stat = rs.getStatement();
-		rs.close();
-		stat.close();
-		prepareStatement.close();
-
 		// 4. write poi data
-		prepareStatement = poiConnection
+		// not so effictive probably better to load in memory one time
+		PreparedStatement prepareStatement = poiConnection
 				.prepareStatement("SELECT id, x, y, name_en, name, type, subtype, opening_hours, site, phone from poi "
 						+ "where x >= ? AND x < ? AND y >= ? AND y < ?");
 		TIntArrayList types = new TIntArrayList();
-		for (Map.Entry<Long, Long> entry : fpToWriteSeeks.entrySet()) {
-			long l = entry.getKey();
-			int z = ZOOM_TO_SAVE_END;
-			int x = (int) (l >> 31);
-			int y = (int) (l & ((1 << 31) - 1));
+		for (Map.Entry<PoiBox, Long> entry : fpToWriteSeeks.entrySet()) {
+			int z = entry.getKey().zoom;
+			int x = entry.getKey().x;
+			int y = entry.getKey().y;
 			writer.startWritePoiData(z, x, y, startFpPoiIndex, entry.getValue());
 
 			prepareStatement.setInt(1, x << (31 - z));
@@ -318,37 +331,64 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 
 	}
 
-	private void writePoiBoxes(BinaryMapIndexWriter writer, Tree<Long> tree, int zoom, Map<Long, Long> fpToWriteSeeks,
-			PreparedStatement categoriesGet, Map<String, Map<String, Integer>> categories, Map<String, Integer> catIndexes) throws IOException, SQLException {
-		long l = tree.getNode();
-		int x = (int) (l >> 31);
-		int y = (int) (l & ((1 << 31) - 1));
+	private void writePoiBoxes(BinaryMapIndexWriter writer, Tree<PoiBox> tree, Map<PoiBox, Long> fpToWriteSeeks,
+			Map<String, Map<String, Integer>> categories, Map<String, Integer> catIndexes) throws IOException, SQLException {
+		int x = tree.getNode().x;
+		int y = tree.getNode().y;
+		int zoom = tree.getNode().zoom;
 		boolean end = zoom == ZOOM_TO_SAVE_END;
 		long fp = writer.startWritePoiBox(zoom, x, y, end);
 		if(zoom >= ZOOM_TO_WRITE_CATEGORIES_START && zoom <= ZOOM_TO_WRITE_CATEGORIES_END){
-			categoriesGet.setInt(1, x << (31 - zoom));
-			categoriesGet.setInt(2, (x + 1) << (31 - zoom));
-			categoriesGet.setInt(3, y << (31 - zoom));
-			categoriesGet.setInt(4, (y + 1) << (31 - zoom));
-			ResultSet rs = categoriesGet.executeQuery();
 			TIntArrayList types = new TIntArrayList();
-			while(rs.next()){
-				String cat = rs.getString(1);
-				String subcat = rs.getString(2);
-				buildTypeIds(cat, subcat, categories, catIndexes, types);
+			for(Map.Entry<String, Map<String, Integer>> cats : tree.getNode().categories.entrySet()) {
+				for(String subcat : cats.getValue().keySet()){
+					String cat = cats.getKey();
+					buildTypeIds(cat, subcat, categories, catIndexes, types);
+				}
 			}
 			writer.writePOICategories(types);
-			rs.close();
 		}
 		
 		if (!end) {
-			for (Tree<Long> subTree : tree.getSubtrees()) {
-				writePoiBoxes(writer, subTree, zoom + 1, fpToWriteSeeks, categoriesGet, categories, catIndexes);
+			for (Tree<PoiBox> subTree : tree.getSubtrees()) {
+				writePoiBoxes(writer, subTree, fpToWriteSeeks, categories, catIndexes);
 			}
 		} else {
-			fpToWriteSeeks.put(l, fp);
+			fpToWriteSeeks.put(tree.getNode(), fp);
 		}
 		writer.endWritePoiBox();
+	}
+	
+	private static class PoiBox {
+		int x;
+		int y;
+		int zoom;
+		Map<String, Map<String, Integer>> categories = new LinkedHashMap<String, Map<String, Integer>>();
+		Set<String> startsName = new TreeSet<String>();
+		
+		private void addCategory(String cat, String subCat){
+			if(!categories.containsKey(cat)){
+				categories.put(cat, new TreeMap<String, Integer>());
+			}
+			if (subCat.contains(";") || subCat.contains(",")) {
+				String[] split = subCat.split(",|;");
+				for (String sub : split) {
+					categories.get(cat).put(sub.trim(), 0);
+				}
+			} else {
+				categories.get(cat).put(subCat.trim(), 0);
+			}
+			categories.get(cat).put(subCat, 0);
+		}
+
+		public void addNamePrefix(String name, String nameEn) {
+			if(Algoritms.isEmpty(nameEn)){
+				nameEn = Junidecode.unidecode(name);
+			}
+			// TODO split by 3 characters and save here
+			
+			
+		}
 	}
 
 	private static class Tree<T> {
@@ -411,28 +451,19 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 			}
 		}
 
-		public Tree<T> getSubtreeByNode(T node) {
-			if (subtrees == null) {
-				return null;
-			}
-			for (Tree<T> s : subtrees) {
-				if (node.equals(s.getNode())) {
-					return s;
-				}
-			}
-			return null;
-		}
 	}
 
 	public static void main(String[] args) throws SQLException, FileNotFoundException, IOException {
-		// TODO support multiple reading amenity types!
+		// TODO support multiple reading amenity types! +/-
+		// TODO support proper POI editing
 		// TODO support string trigramms
+		// TODO support cancelling poi search request! Do it in another thread
 		long time = System.currentTimeMillis();
 		IndexPoiCreator poiCreator = new IndexPoiCreator();
-		String fileSqlte = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.odb";
-		String outFile = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Test-Ru.poi.obf";
-//		String fileSqlte = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Netherlands_europe.poi.odb";
-//		String outFile = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Netherlands.poi.obf";
+//		String fileSqlte = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.odb";
+//		String outFile = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.obf";
+		String fileSqlte = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Netherlands_europe.poi.odb";
+		String outFile = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Netherlands.poi.obf";
 		
 		poiCreator.poiConnection = (Connection) DBDialect.SQLITE.getDatabaseConnection(
 				fileSqlte, log);

@@ -516,10 +516,11 @@ public class IndexBatchCreator {
 				if(zoomWaySmoothness != null){
 					indexCreator.setZoomWaySmothness(zoomWaySmoothness);
 				}
-				if (indexPOI) {
-					uploadIndex(new File(indexDirFiles, poiFileName), alreadyUploadedFiles);
-				}
-				if (indexMap || indexAddress || indexTransport) {
+				// Do not upload poi files any more
+//				if (indexPOI) {
+//					uploadIndex(new File(indexDirFiles, poiFileName), alreadyUploadedFiles);
+//				}
+				if (indexMap || indexAddress || indexTransport || indexPOI) {
 					uploadIndex(new File(indexDirFiles, mapFileName), alreadyUploadedFiles);
 				}
 			} catch (Exception e) {
@@ -575,6 +576,7 @@ public class IndexBatchCreator {
 			boolean addr = indexAddress;
 			boolean trans = indexTransport;
 			boolean map = indexMap;
+			boolean poi = indexPOI;
 			RandomAccessFile raf = null;
 			if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 				try {
@@ -583,6 +585,7 @@ public class IndexBatchCreator {
 					trans = reader.hasTransportData();
 					map = reader.containsMapData();
 					addr = reader.containsAddressData();
+					poi = reader.containsPoiData();
 					reader.close();
 				} catch (Exception e) {
 					log.info("Exception", e);
@@ -602,6 +605,10 @@ public class IndexBatchCreator {
 			}
 			if (trans) {
 				summary = "Transport" + (fir ? "" : ", ") + summary;
+				fir = false;
+			}
+			if (poi) {
+				summary = "POI" + (fir ? "" : ", ") + summary;
 				fir = false;
 			}
 			if (map) {

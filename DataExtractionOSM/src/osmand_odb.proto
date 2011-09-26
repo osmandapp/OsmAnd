@@ -337,11 +337,11 @@ message OsmAndPoiBoxDataAtom {
   required sint32 dx = 2; // delta encoded to OsmAndPoiBox on 24 zoom
   required sint32 dy = 3; // delta encoded to OsmAndPoiBox on 24 zoom
 
-  optional uint64 id = 4;  
-  optional string name = 5;
-  optional string nameEn = 6;
-  
-  repeated uint32 categories = 7;
+  repeated uint32 categories = 4;
+
+  optional string name = 6;
+  optional string nameEn = 7;
+  optional uint64 id = 8;  
   
   optional string openingHours = 10;
   optional string site = 11;

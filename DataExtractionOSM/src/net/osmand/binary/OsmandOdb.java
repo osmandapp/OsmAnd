@@ -14306,29 +14306,8 @@ public final class OsmandOdb {
     public boolean hasDy() { return hasDy; }
     public int getDy() { return dy_; }
     
-    // optional uint64 id = 4;
-    public static final int ID_FIELD_NUMBER = 4;
-    private boolean hasId;
-    private long id_ = 0L;
-    public boolean hasId() { return hasId; }
-    public long getId() { return id_; }
-    
-    // optional string name = 5;
-    public static final int NAME_FIELD_NUMBER = 5;
-    private boolean hasName;
-    private java.lang.String name_ = "";
-    public boolean hasName() { return hasName; }
-    public java.lang.String getName() { return name_; }
-    
-    // optional string nameEn = 6;
-    public static final int NAMEEN_FIELD_NUMBER = 6;
-    private boolean hasNameEn;
-    private java.lang.String nameEn_ = "";
-    public boolean hasNameEn() { return hasNameEn; }
-    public java.lang.String getNameEn() { return nameEn_; }
-    
-    // repeated uint32 categories = 7;
-    public static final int CATEGORIES_FIELD_NUMBER = 7;
+    // repeated uint32 categories = 4;
+    public static final int CATEGORIES_FIELD_NUMBER = 4;
     private java.util.List<java.lang.Integer> categories_ =
       java.util.Collections.emptyList();
     public java.util.List<java.lang.Integer> getCategoriesList() {
@@ -14338,6 +14317,27 @@ public final class OsmandOdb {
     public int getCategories(int index) {
       return categories_.get(index);
     }
+    
+    // optional string name = 6;
+    public static final int NAME_FIELD_NUMBER = 6;
+    private boolean hasName;
+    private java.lang.String name_ = "";
+    public boolean hasName() { return hasName; }
+    public java.lang.String getName() { return name_; }
+    
+    // optional string nameEn = 7;
+    public static final int NAMEEN_FIELD_NUMBER = 7;
+    private boolean hasNameEn;
+    private java.lang.String nameEn_ = "";
+    public boolean hasNameEn() { return hasNameEn; }
+    public java.lang.String getNameEn() { return nameEn_; }
+    
+    // optional uint64 id = 8;
+    public static final int ID_FIELD_NUMBER = 8;
+    private boolean hasId;
+    private long id_ = 0L;
+    public boolean hasId() { return hasId; }
+    public long getId() { return id_; }
     
     // optional string openingHours = 10;
     public static final int OPENINGHOURS_FIELD_NUMBER = 10;
@@ -14384,17 +14384,17 @@ public final class OsmandOdb {
       if (hasDy()) {
         output.writeSInt32(3, getDy());
       }
-      if (hasId()) {
-        output.writeUInt64(4, getId());
+      for (int element : getCategoriesList()) {
+        output.writeUInt32(4, element);
       }
       if (hasName()) {
-        output.writeString(5, getName());
+        output.writeString(6, getName());
       }
       if (hasNameEn()) {
-        output.writeString(6, getNameEn());
+        output.writeString(7, getNameEn());
       }
-      for (int element : getCategoriesList()) {
-        output.writeUInt32(7, element);
+      if (hasId()) {
+        output.writeUInt64(8, getId());
       }
       if (hasOpeningHours()) {
         output.writeString(10, getOpeningHours());
@@ -14425,18 +14425,6 @@ public final class OsmandOdb {
         size += com.google.protobuf.CodedOutputStream
           .computeSInt32Size(3, getDy());
       }
-      if (hasId()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(4, getId());
-      }
-      if (hasName()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(5, getName());
-      }
-      if (hasNameEn()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeStringSize(6, getNameEn());
-      }
       {
         int dataSize = 0;
         for (int element : getCategoriesList()) {
@@ -14445,6 +14433,18 @@ public final class OsmandOdb {
         }
         size += dataSize;
         size += 1 * getCategoriesList().size();
+      }
+      if (hasName()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(6, getName());
+      }
+      if (hasNameEn()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(7, getNameEn());
+      }
+      if (hasId()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(8, getId());
       }
       if (hasOpeningHours()) {
         size += com.google.protobuf.CodedOutputStream
@@ -14630,8 +14630,11 @@ public final class OsmandOdb {
         if (other.hasDy()) {
           setDy(other.getDy());
         }
-        if (other.hasId()) {
-          setId(other.getId());
+        if (!other.categories_.isEmpty()) {
+          if (result.categories_.isEmpty()) {
+            result.categories_ = new java.util.ArrayList<java.lang.Integer>();
+          }
+          result.categories_.addAll(other.categories_);
         }
         if (other.hasName()) {
           setName(other.getName());
@@ -14639,11 +14642,8 @@ public final class OsmandOdb {
         if (other.hasNameEn()) {
           setNameEn(other.getNameEn());
         }
-        if (!other.categories_.isEmpty()) {
-          if (result.categories_.isEmpty()) {
-            result.categories_ = new java.util.ArrayList<java.lang.Integer>();
-          }
-          result.categories_.addAll(other.categories_);
+        if (other.hasId()) {
+          setId(other.getId());
         }
         if (other.hasOpeningHours()) {
           setOpeningHours(other.getOpeningHours());
@@ -14691,28 +14691,28 @@ public final class OsmandOdb {
               break;
             }
             case 32: {
-              setId(input.readUInt64());
-              break;
-            }
-            case 42: {
-              setName(input.readString());
-              break;
-            }
-            case 50: {
-              setNameEn(input.readString());
-              break;
-            }
-            case 56: {
               addCategories(input.readUInt32());
               break;
             }
-            case 58: {
+            case 34: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               while (input.getBytesUntilLimit() > 0) {
                 addCategories(input.readUInt32());
               }
               input.popLimit(limit);
+              break;
+            }
+            case 50: {
+              setName(input.readString());
+              break;
+            }
+            case 58: {
+              setNameEn(input.readString());
+              break;
+            }
+            case 64: {
+              setId(input.readUInt64());
               break;
             }
             case 82: {
@@ -14772,67 +14772,7 @@ public final class OsmandOdb {
         return this;
       }
       
-      // optional uint64 id = 4;
-      public boolean hasId() {
-        return result.hasId();
-      }
-      public long getId() {
-        return result.getId();
-      }
-      public Builder setId(long value) {
-        result.hasId = true;
-        result.id_ = value;
-        return this;
-      }
-      public Builder clearId() {
-        result.hasId = false;
-        result.id_ = 0L;
-        return this;
-      }
-      
-      // optional string name = 5;
-      public boolean hasName() {
-        return result.hasName();
-      }
-      public java.lang.String getName() {
-        return result.getName();
-      }
-      public Builder setName(java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  result.hasName = true;
-        result.name_ = value;
-        return this;
-      }
-      public Builder clearName() {
-        result.hasName = false;
-        result.name_ = getDefaultInstance().getName();
-        return this;
-      }
-      
-      // optional string nameEn = 6;
-      public boolean hasNameEn() {
-        return result.hasNameEn();
-      }
-      public java.lang.String getNameEn() {
-        return result.getNameEn();
-      }
-      public Builder setNameEn(java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  result.hasNameEn = true;
-        result.nameEn_ = value;
-        return this;
-      }
-      public Builder clearNameEn() {
-        result.hasNameEn = false;
-        result.nameEn_ = getDefaultInstance().getNameEn();
-        return this;
-      }
-      
-      // repeated uint32 categories = 7;
+      // repeated uint32 categories = 4;
       public java.util.List<java.lang.Integer> getCategoriesList() {
         return java.util.Collections.unmodifiableList(result.categories_);
       }
@@ -14863,6 +14803,66 @@ public final class OsmandOdb {
       }
       public Builder clearCategories() {
         result.categories_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // optional string name = 6;
+      public boolean hasName() {
+        return result.hasName();
+      }
+      public java.lang.String getName() {
+        return result.getName();
+      }
+      public Builder setName(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasName = true;
+        result.name_ = value;
+        return this;
+      }
+      public Builder clearName() {
+        result.hasName = false;
+        result.name_ = getDefaultInstance().getName();
+        return this;
+      }
+      
+      // optional string nameEn = 7;
+      public boolean hasNameEn() {
+        return result.hasNameEn();
+      }
+      public java.lang.String getNameEn() {
+        return result.getNameEn();
+      }
+      public Builder setNameEn(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasNameEn = true;
+        result.nameEn_ = value;
+        return this;
+      }
+      public Builder clearNameEn() {
+        result.hasNameEn = false;
+        result.nameEn_ = getDefaultInstance().getNameEn();
+        return this;
+      }
+      
+      // optional uint64 id = 8;
+      public boolean hasId() {
+        return result.hasId();
+      }
+      public long getId() {
+        return result.getId();
+      }
+      public Builder setId(long value) {
+        result.hasId = true;
+        result.id_ = value;
+        return this;
+      }
+      public Builder clearId() {
+        result.hasId = false;
+        result.id_ = 0L;
         return this;
       }
       
@@ -15207,9 +15207,9 @@ public final class OsmandOdb {
       "\r\"^\n\020OsmAndPoiBoxData\022\014\n\004zoom\030\001 \001(\r\022\t\n\001x" +
       "\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\022&\n\007poiData\030\005 \003(\0132\025.Osm" +
       "AndPoiBoxDataAtom\"\255\001\n\024OsmAndPoiBoxDataAt" +
-      "om\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\n\n\002id\030\004 \001(\004\022\014" +
-      "\n\004name\030\005 \001(\t\022\016\n\006nameEn\030\006 \001(\t\022\022\n\ncategori" +
-      "es\030\007 \003(\r\022\024\n\014openingHours\030\n \001(\t\022\014\n\004site\030\013" +
+      "om\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\022\n\ncategories" +
+      "\030\004 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006nameEn\030\007 \001(\t\022\n\n\002" +
+      "id\030\010 \001(\004\022\024\n\014openingHours\030\n \001(\t\022\014\n\004site\030\013" +
       " \001(\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004note\030\r \001(\tB\023\n\021net",
       ".osmand.binary"
     };
@@ -15455,7 +15455,7 @@ public final class OsmandOdb {
           internal_static_OsmAndPoiBoxDataAtom_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndPoiBoxDataAtom_descriptor,
-              new java.lang.String[] { "Dx", "Dy", "Id", "Name", "NameEn", "Categories", "OpeningHours", "Site", "Phone", "Note", },
+              new java.lang.String[] { "Dx", "Dy", "Categories", "Name", "NameEn", "Id", "OpeningHours", "Site", "Phone", "Note", },
               net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom.class,
               net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom.Builder.class);
           return null;

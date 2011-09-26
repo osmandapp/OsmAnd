@@ -817,7 +817,6 @@ public class BinaryMapIndexWriter {
 			int j = types.get(i);
 			builder.addCategories(j);
 		}
-		
 		if(!Algoritms.isEmpty(name)){
 			builder.setName(name);
 		}
@@ -825,6 +824,7 @@ public class BinaryMapIndexWriter {
 			builder.setNameEn(nameEn);
 		}
 		builder.setId(id);
+		
 		if(!Algoritms.isEmpty(openingHours)){
 			builder.setOpeningHours(openingHours);
 		}
