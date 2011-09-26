@@ -49,6 +49,9 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 	private static final int ZOOM_TO_SAVE_START = 6;
 	private static final int ZOOM_TO_WRITE_CATEGORIES_START = 12;
 	private static final int ZOOM_TO_WRITE_CATEGORIES_END = 16;
+	private static final int ZOOM_TO_WRITE_NAME_START = 9;
+	private static final int ZOOM_TO_WRITE_NAME_END = 11;
+	private boolean useInMemoryCreator = true; 
 	
 
 	private List<Amenity> tempAmenityList = new ArrayList<Amenity>();
@@ -193,7 +196,12 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		collator.setStrength(Collator.PRIMARY);
 		
 		// 0. process all entities
-		ResultSet rs = poiConnection.createStatement().executeQuery("SELECT x,y,name,name_en,type,subtype from poi");
+		ResultSet rs;
+		if(useInMemoryCreator) {
+			rs = poiConnection.createStatement().executeQuery("SELECT x,y,name,name_en,type,subtype, id, opening_hours, site, phone from poi");
+		} else {
+			rs = poiConnection.createStatement().executeQuery("SELECT x,y,name,name_en,type,subtype from poi");
+		}
 		int zoomToStart = ZOOM_TO_SAVE_START;
 		Tree<PoiBox> rootZoomsTree = new Tree<PoiBox>();
 		rootZoomsTree.setNode(new PoiBox());
@@ -247,6 +255,24 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 
 				prevTree = subtree;
 			}
+			if (useInMemoryCreator) {
+				if (prevTree.getNode().poiData == null) {
+					prevTree.getNode().poiData = new ArrayList<PoiData>();
+				}
+				PoiData poiData = new PoiData();
+				poiData.x = x;
+				poiData.y = y;
+				poiData.name = name;
+				poiData.nameEn = nameEn;
+				poiData.type = type;
+				poiData.subtype = subtype;
+				poiData.id = rs.getLong(7); 
+				poiData.openingHours = rs.getString(8);
+				poiData.site = rs.getString(9);
+				poiData.phone = rs.getString(10);
+				prevTree.getNode().poiData.add(poiData);
+				
+			}
 		}
 		log.info("Poi processing finishied");
 		// Finish process all entities
@@ -280,7 +306,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		// 3.2 write tree using stack
 		Map<PoiBox, Long> fpToWriteSeeks = new LinkedHashMap<PoiBox, Long>();
 		for (Tree<PoiBox> subs : rootZoomsTree.getSubtrees()) {
-			writePoiBoxes(writer, subs, fpToWriteSeeks, categories, catIndexes);
+			writePoiBoxes(writer, subs, fpToWriteSeeks, categories, catIndexes, rootZoomsTree.getNode().startsName);
 		}
 
 		// 4. write poi data
@@ -295,34 +321,50 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 			int y = entry.getKey().y;
 			writer.startWritePoiData(z, x, y, startFpPoiIndex, entry.getValue());
 
-			prepareStatement.setInt(1, x << (31 - z));
-			prepareStatement.setInt(2, (x + 1) << (31 - z));
-			prepareStatement.setInt(3, y << (31 - z));
-			prepareStatement.setInt(4, (y + 1) << (31 - z));
-			rs = prepareStatement.executeQuery();
-			while (rs.next()) {
-				long id = rs.getLong(1);
-				int x31 = rs.getInt(2);
-				int y31 = rs.getInt(3);
-				int x24shift = (x31 >> 7) - (x << (24 - z));
-				int y24shift = (y31 >> 7) - (y << (24 - z));
-				String nameEn = rs.getString(4);
-				String name = rs.getString(5);
-				String type = rs.getString(6);
-				String subtype = rs.getString(7);
-				types.clear();
-				buildTypeIds(type, subtype, categories, catIndexes, types);
+			if(useInMemoryCreator){
+				List<PoiData> poiData = entry.getKey().poiData;
+				
+				for(PoiData poi : poiData){
+					int x31 = poi.x;
+					int y31 = poi.y;
+					String type = poi.type;
+					String subtype = poi.subtype;
+					types.clear();
+					buildTypeIds(type, subtype, categories, catIndexes, types);
+					int x24shift = (x31 >> 7) - (x << (24 - z));
+					int y24shift = (y31 >> 7) - (y << (24 - z));
+					writer.writePoiDataAtom(poi.id, x24shift, y24shift, poi.nameEn, poi.name, types, poi.openingHours, poi.site, poi.phone);	
+				}
+				
+			} else {
+				prepareStatement.setInt(1, x << (31 - z));
+				prepareStatement.setInt(2, (x + 1) << (31 - z));
+				prepareStatement.setInt(3, y << (31 - z));
+				prepareStatement.setInt(4, (y + 1) << (31 - z));
+				ResultSet rset = prepareStatement.executeQuery();
+				while (rset.next()) {
+					long id = rset.getLong(1);
+					int x31 = rset.getInt(2);
+					int y31 = rset.getInt(3);
+					int x24shift = (x31 >> 7) - (x << (24 - z));
+					int y24shift = (y31 >> 7) - (y << (24 - z));
+					String nameEn = rset.getString(4);
+					String name = rset.getString(5);
+					String type = rset.getString(6);
+					String subtype = rset.getString(7);
 
-				String openingHours = rs.getString(8);
-				String site = rs.getString(9);
-				String phone = rs.getString(10);
+					types.clear();
+					buildTypeIds(type, subtype, categories, catIndexes, types);
 
-				writer.writePoiDataAtom(id, x24shift, y24shift, nameEn, name, types, openingHours, site, phone);
+					String openingHours = rset.getString(8);
+					String site = rset.getString(9);
+					String phone = rset.getString(10);
 
+					writer.writePoiDataAtom(id, x24shift, y24shift, nameEn, name, types, openingHours, site, phone);
+				}
+				rset.close();
 			}
 			writer.endWritePoiData();
-			rs.close();
-
 		}
 
 		prepareStatement.close();
@@ -332,7 +374,8 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 	}
 
 	private void writePoiBoxes(BinaryMapIndexWriter writer, Tree<PoiBox> tree, Map<PoiBox, Long> fpToWriteSeeks,
-			Map<String, Map<String, Integer>> categories, Map<String, Integer> catIndexes) throws IOException, SQLException {
+			Map<String, Map<String, Integer>> categories, Map<String, Integer> catIndexes,
+			Set<String> parentNames) throws IOException, SQLException {
 		int x = tree.getNode().x;
 		int y = tree.getNode().y;
 		int zoom = tree.getNode().zoom;
@@ -348,15 +391,40 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 			}
 			writer.writePOICategories(types);
 		}
+		if(zoom >= ZOOM_TO_WRITE_NAME_START && zoom <= ZOOM_TO_WRITE_NAME_END){
+			Set<String> names = tree.getNode().startsName;
+			if (names.size() > 0) {
+				if (zoom == ZOOM_TO_WRITE_NAME_START || parentNames.size() - names.size() > names.size()) {
+					System.out.println("I" + names.size() + " " + zoom);
+					writer.writePoiIncludedStrings(names);
+				} else {
+					System.out.println("E" + (parentNames.size() - names.size()) + " " + zoom);
+					writer.writePoiExcludedStrings(parentNames, names);
+				}
+			}
+		}
 		
 		if (!end) {
 			for (Tree<PoiBox> subTree : tree.getSubtrees()) {
-				writePoiBoxes(writer, subTree, fpToWriteSeeks, categories, catIndexes);
+				writePoiBoxes(writer, subTree, fpToWriteSeeks, categories, catIndexes, tree.getNode().startsName);
 			}
 		} else {
 			fpToWriteSeeks.put(tree.getNode(), fp);
 		}
 		writer.endWritePoiBox();
+	}
+	
+	private static class PoiData {
+		int x;
+		int y;
+		String name;
+		String nameEn;
+		String type;
+		String subtype;
+		long id;
+		String openingHours;
+		String phone;
+		String site;
 	}
 	
 	private static class PoiBox {
@@ -365,6 +433,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		int zoom;
 		Map<String, Map<String, Integer>> categories = new LinkedHashMap<String, Map<String, Integer>>();
 		Set<String> startsName = new TreeSet<String>();
+		List<PoiData> poiData = null;
 		
 		private void addCategory(String cat, String subCat){
 			if(!categories.containsKey(cat)){
@@ -385,8 +454,29 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 			if(Algoritms.isEmpty(nameEn)){
 				nameEn = Junidecode.unidecode(name);
 			}
-			// TODO split by 3 characters and save here
-			
+			parsePrefix(name);
+			parsePrefix(nameEn);
+		}
+
+		private void parsePrefix(String name) {
+			int prev = -1;
+			for (int i = 0; i <= name.length(); i++) {
+				if (i == name.length() || (!Character.isLetter(name.charAt(i)) && 
+						!Character.isDigit(name.charAt(i)))) {
+					if (prev != -1) {
+						String substr = name.substring(prev, i);
+						if (substr.length() > 3) {
+							substr = substr.substring(0, 3);
+						}
+						startsName.add(substr.toLowerCase());
+						prev = -1;
+					}
+				} else {
+					if(prev == -1){
+						prev = i;
+					}
+				}
+			}
 			
 		}
 	}
@@ -460,10 +550,10 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		// TODO support cancelling poi search request! Do it in another thread
 		long time = System.currentTimeMillis();
 		IndexPoiCreator poiCreator = new IndexPoiCreator();
-//		String fileSqlte = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.odb";
-//		String outFile = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.obf";
-		String fileSqlte = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Netherlands_europe.poi.odb";
-		String outFile = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Netherlands.poi.obf";
+		String fileSqlte = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.odb";
+		String outFile = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.obf";
+//		String fileSqlte = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Netherlands_europe.poi.odb";
+//		String outFile = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Netherlands.poi.obf";
 		
 		poiCreator.poiConnection = (Connection) DBDialect.SQLITE.getDatabaseConnection(
 				fileSqlte, log);

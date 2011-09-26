@@ -12020,20 +12020,32 @@ public final class OsmandOdb {
     public boolean hasPrefix() { return hasPrefix; }
     public java.lang.String getPrefix() { return prefix_; }
     
-    // repeated string s = 3;
-    public static final int S_FIELD_NUMBER = 3;
-    private java.util.List<java.lang.String> s_ =
+    // repeated string key = 3;
+    public static final int KEY_FIELD_NUMBER = 3;
+    private java.util.List<java.lang.String> key_ =
       java.util.Collections.emptyList();
-    public java.util.List<java.lang.String> getSList() {
-      return s_;
+    public java.util.List<java.lang.String> getKeyList() {
+      return key_;
     }
-    public int getSCount() { return s_.size(); }
-    public java.lang.String getS(int index) {
-      return s_.get(index);
+    public int getKeyCount() { return key_.size(); }
+    public java.lang.String getKey(int index) {
+      return key_.get(index);
     }
     
-    // repeated .IndexedStringTable subtables = 6;
-    public static final int SUBTABLES_FIELD_NUMBER = 6;
+    // repeated uint32 val = 4;
+    public static final int VAL_FIELD_NUMBER = 4;
+    private java.util.List<java.lang.Integer> val_ =
+      java.util.Collections.emptyList();
+    public java.util.List<java.lang.Integer> getValList() {
+      return val_;
+    }
+    public int getValCount() { return val_.size(); }
+    public int getVal(int index) {
+      return val_.get(index);
+    }
+    
+    // repeated .IndexedStringTable subtables = 5;
+    public static final int SUBTABLES_FIELD_NUMBER = 5;
     private java.util.List<net.osmand.binary.OsmandOdb.IndexedStringTable> subtables_ =
       java.util.Collections.emptyList();
     public java.util.List<net.osmand.binary.OsmandOdb.IndexedStringTable> getSubtablesList() {
@@ -12056,11 +12068,14 @@ public final class OsmandOdb {
       if (hasPrefix()) {
         output.writeString(1, getPrefix());
       }
-      for (java.lang.String element : getSList()) {
+      for (java.lang.String element : getKeyList()) {
         output.writeString(3, element);
       }
+      for (int element : getValList()) {
+        output.writeUInt32(4, element);
+      }
       for (net.osmand.binary.OsmandOdb.IndexedStringTable element : getSubtablesList()) {
-        output.writeMessage(6, element);
+        output.writeMessage(5, element);
       }
       getUnknownFields().writeTo(output);
     }
@@ -12077,16 +12092,25 @@ public final class OsmandOdb {
       }
       {
         int dataSize = 0;
-        for (java.lang.String element : getSList()) {
+        for (java.lang.String element : getKeyList()) {
           dataSize += com.google.protobuf.CodedOutputStream
             .computeStringSizeNoTag(element);
         }
         size += dataSize;
-        size += 1 * getSList().size();
+        size += 1 * getKeyList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int element : getValList()) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(element);
+        }
+        size += dataSize;
+        size += 1 * getValList().size();
       }
       for (net.osmand.binary.OsmandOdb.IndexedStringTable element : getSubtablesList()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, element);
+          .computeMessageSize(5, element);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -12230,9 +12254,13 @@ public final class OsmandOdb {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
         }
-        if (result.s_ != java.util.Collections.EMPTY_LIST) {
-          result.s_ =
-            java.util.Collections.unmodifiableList(result.s_);
+        if (result.key_ != java.util.Collections.EMPTY_LIST) {
+          result.key_ =
+            java.util.Collections.unmodifiableList(result.key_);
+        }
+        if (result.val_ != java.util.Collections.EMPTY_LIST) {
+          result.val_ =
+            java.util.Collections.unmodifiableList(result.val_);
         }
         if (result.subtables_ != java.util.Collections.EMPTY_LIST) {
           result.subtables_ =
@@ -12257,11 +12285,17 @@ public final class OsmandOdb {
         if (other.hasPrefix()) {
           setPrefix(other.getPrefix());
         }
-        if (!other.s_.isEmpty()) {
-          if (result.s_.isEmpty()) {
-            result.s_ = new java.util.ArrayList<java.lang.String>();
+        if (!other.key_.isEmpty()) {
+          if (result.key_.isEmpty()) {
+            result.key_ = new java.util.ArrayList<java.lang.String>();
           }
-          result.s_.addAll(other.s_);
+          result.key_.addAll(other.key_);
+        }
+        if (!other.val_.isEmpty()) {
+          if (result.val_.isEmpty()) {
+            result.val_ = new java.util.ArrayList<java.lang.Integer>();
+          }
+          result.val_.addAll(other.val_);
         }
         if (!other.subtables_.isEmpty()) {
           if (result.subtables_.isEmpty()) {
@@ -12299,10 +12333,23 @@ public final class OsmandOdb {
               break;
             }
             case 26: {
-              addS(input.readString());
+              addKey(input.readString());
               break;
             }
-            case 50: {
+            case 32: {
+              addVal(input.readUInt32());
+              break;
+            }
+            case 34: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              while (input.getBytesUntilLimit() > 0) {
+                addVal(input.readUInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 42: {
               net.osmand.binary.OsmandOdb.IndexedStringTable.Builder subBuilder = net.osmand.binary.OsmandOdb.IndexedStringTable.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addSubtables(subBuilder.buildPartial());
@@ -12334,47 +12381,81 @@ public final class OsmandOdb {
         return this;
       }
       
-      // repeated string s = 3;
-      public java.util.List<java.lang.String> getSList() {
-        return java.util.Collections.unmodifiableList(result.s_);
+      // repeated string key = 3;
+      public java.util.List<java.lang.String> getKeyList() {
+        return java.util.Collections.unmodifiableList(result.key_);
       }
-      public int getSCount() {
-        return result.getSCount();
+      public int getKeyCount() {
+        return result.getKeyCount();
       }
-      public java.lang.String getS(int index) {
-        return result.getS(index);
+      public java.lang.String getKey(int index) {
+        return result.getKey(index);
       }
-      public Builder setS(int index, java.lang.String value) {
+      public Builder setKey(int index, java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  result.s_.set(index, value);
+  result.key_.set(index, value);
         return this;
       }
-      public Builder addS(java.lang.String value) {
+      public Builder addKey(java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  if (result.s_.isEmpty()) {
-          result.s_ = new java.util.ArrayList<java.lang.String>();
+  if (result.key_.isEmpty()) {
+          result.key_ = new java.util.ArrayList<java.lang.String>();
         }
-        result.s_.add(value);
+        result.key_.add(value);
         return this;
       }
-      public Builder addAllS(
+      public Builder addAllKey(
           java.lang.Iterable<? extends java.lang.String> values) {
-        if (result.s_.isEmpty()) {
-          result.s_ = new java.util.ArrayList<java.lang.String>();
+        if (result.key_.isEmpty()) {
+          result.key_ = new java.util.ArrayList<java.lang.String>();
         }
-        super.addAll(values, result.s_);
+        super.addAll(values, result.key_);
         return this;
       }
-      public Builder clearS() {
-        result.s_ = java.util.Collections.emptyList();
+      public Builder clearKey() {
+        result.key_ = java.util.Collections.emptyList();
         return this;
       }
       
-      // repeated .IndexedStringTable subtables = 6;
+      // repeated uint32 val = 4;
+      public java.util.List<java.lang.Integer> getValList() {
+        return java.util.Collections.unmodifiableList(result.val_);
+      }
+      public int getValCount() {
+        return result.getValCount();
+      }
+      public int getVal(int index) {
+        return result.getVal(index);
+      }
+      public Builder setVal(int index, int value) {
+        result.val_.set(index, value);
+        return this;
+      }
+      public Builder addVal(int value) {
+        if (result.val_.isEmpty()) {
+          result.val_ = new java.util.ArrayList<java.lang.Integer>();
+        }
+        result.val_.add(value);
+        return this;
+      }
+      public Builder addAllVal(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        if (result.val_.isEmpty()) {
+          result.val_ = new java.util.ArrayList<java.lang.Integer>();
+        }
+        super.addAll(values, result.val_);
+        return this;
+      }
+      public Builder clearVal() {
+        result.val_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // repeated .IndexedStringTable subtables = 5;
       public java.util.List<net.osmand.binary.OsmandOdb.IndexedStringTable> getSubtablesList() {
         return java.util.Collections.unmodifiableList(result.subtables_);
       }
@@ -15192,26 +15273,26 @@ public final class OsmandOdb {
       "me\030\001 \002(\t\022\"\n\nboundaries\030\002 \002(\0132\016.OsmAndTil" +
       "eBox\022-\n\017categoriesTable\030\003 \003(\0132\024.OsmAndCa",
       "tegoryTable\022\034\n\005boxes\030\006 \003(\0132\r.OsmAndPoiBo" +
-      "x\022\"\n\007poiData\030\t \003(\0132\021.OsmAndPoiBoxData\"W\n" +
-      "\022IndexedStringTable\022\016\n\006prefix\030\001 \001(\t\022\t\n\001s" +
-      "\030\003 \003(\t\022&\n\tsubtables\030\006 \003(\0132\023.IndexedStrin" +
-      "gTable\">\n\023OsmAndCategoryTable\022\020\n\010categor" +
-      "y\030\001 \002(\t\022\025\n\rsubcategories\030\003 \003(\t\"\365\001\n\014OsmAn" +
-      "dPoiBox\022\014\n\004zoom\030\001 \002(\r\022\014\n\004left\030\002 \002(\021\022\013\n\003t" +
-      "op\030\003 \002(\021\022(\n\ncategories\030\004 \001(\0132\024.OsmAndPoi" +
-      "Categories\022-\n\020includeNamesList\030\005 \001(\0132\023.I" +
-      "ndexedStringTable\022-\n\020excludeNamesList\030\006 ",
-      "\001(\0132\023.IndexedStringTable\022\037\n\010subBoxes\030\n \003" +
-      "(\0132\r.OsmAndPoiBox\022\023\n\013shiftToData\030\016 \001(\007\")" +
-      "\n\023OsmAndPoiCategories\022\022\n\ncategories\030\003 \003(" +
-      "\r\"^\n\020OsmAndPoiBoxData\022\014\n\004zoom\030\001 \001(\r\022\t\n\001x" +
-      "\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\022&\n\007poiData\030\005 \003(\0132\025.Osm" +
-      "AndPoiBoxDataAtom\"\255\001\n\024OsmAndPoiBoxDataAt" +
-      "om\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\022\n\ncategories" +
-      "\030\004 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006nameEn\030\007 \001(\t\022\n\n\002" +
-      "id\030\010 \001(\004\022\024\n\014openingHours\030\n \001(\t\022\014\n\004site\030\013" +
-      " \001(\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004note\030\r \001(\tB\023\n\021net",
-      ".osmand.binary"
+      "x\022\"\n\007poiData\030\t \003(\0132\021.OsmAndPoiBoxData\"f\n" +
+      "\022IndexedStringTable\022\016\n\006prefix\030\001 \001(\t\022\013\n\003k" +
+      "ey\030\003 \003(\t\022\013\n\003val\030\004 \003(\r\022&\n\tsubtables\030\005 \003(\013" +
+      "2\023.IndexedStringTable\">\n\023OsmAndCategoryT" +
+      "able\022\020\n\010category\030\001 \002(\t\022\025\n\rsubcategories\030" +
+      "\003 \003(\t\"\365\001\n\014OsmAndPoiBox\022\014\n\004zoom\030\001 \002(\r\022\014\n\004" +
+      "left\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022(\n\ncategories\030\004 " +
+      "\001(\0132\024.OsmAndPoiCategories\022-\n\020includeName" +
+      "sList\030\005 \001(\0132\023.IndexedStringTable\022-\n\020excl",
+      "udeNamesList\030\006 \001(\0132\023.IndexedStringTable\022" +
+      "\037\n\010subBoxes\030\n \003(\0132\r.OsmAndPoiBox\022\023\n\013shif" +
+      "tToData\030\016 \001(\007\")\n\023OsmAndPoiCategories\022\022\n\n" +
+      "categories\030\003 \003(\r\"^\n\020OsmAndPoiBoxData\022\014\n\004" +
+      "zoom\030\001 \001(\r\022\t\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\022&\n\007poiD" +
+      "ata\030\005 \003(\0132\025.OsmAndPoiBoxDataAtom\"\255\001\n\024Osm" +
+      "AndPoiBoxDataAtom\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(" +
+      "\021\022\022\n\ncategories\030\004 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006n" +
+      "ameEn\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\024\n\014openingHours\030" +
+      "\n \001(\t\022\014\n\004site\030\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004no",
+      "te\030\r \001(\tB\023\n\021net.osmand.binary"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -15415,7 +15496,7 @@ public final class OsmandOdb {
           internal_static_IndexedStringTable_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_IndexedStringTable_descriptor,
-              new java.lang.String[] { "Prefix", "S", "Subtables", },
+              new java.lang.String[] { "Prefix", "Key", "Val", "Subtables", },
               net.osmand.binary.OsmandOdb.IndexedStringTable.class,
               net.osmand.binary.OsmandOdb.IndexedStringTable.Builder.class);
           internal_static_OsmAndCategoryTable_descriptor =

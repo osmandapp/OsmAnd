@@ -806,6 +806,27 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeMessage(OsmandOdb.OsmAndPoiBox.CATEGORIES_FIELD_NUMBER, builder.build());
 	}
 	
+	public void writePoiIncludedStrings(Set<String> includes) throws IOException {
+		checkPeekState(POI_BOX);
+		OsmandOdb.IndexedStringTable.Builder builder = OsmandOdb.IndexedStringTable.newBuilder();
+		for(String s : includes){
+			builder.addKey(s);
+		}
+		codedOutStream.writeMessage(OsmandOdb.OsmAndPoiBox.INCLUDENAMESLIST_FIELD_NUMBER, builder.build());
+	}
+	
+	public void writePoiExcludedStrings(Set<String> parentNames, Set<String> includes) throws IOException {
+		checkPeekState(POI_BOX);
+		OsmandOdb.IndexedStringTable.Builder builder = OsmandOdb.IndexedStringTable.newBuilder();
+		for(String s : parentNames){
+			if(!includes.contains(s)){
+				builder.addKey(s);
+			}
+		}
+		codedOutStream.writeMessage(OsmandOdb.OsmAndPoiBox.EXCLUDENAMESLIST_FIELD_NUMBER, builder.build());
+		
+	}
+	
 	public void writePoiDataAtom(long id, int x24shift, int y24shift, String nameEn, String name, TIntArrayList types, String openingHours,
 			String site, String phone) throws IOException {
 		checkPeekState(POI_DATA);
@@ -930,6 +951,8 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeInt32(OsmandOdb.OsmAndStructure.VERSIONCONFIRM_FIELD_NUMBER, IndexConstants.BINARY_MAP_VERSION);
 		codedOutStream.flush();
 	}
+
+	
 
 
 }
