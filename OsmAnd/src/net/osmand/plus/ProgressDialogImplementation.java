@@ -14,6 +14,7 @@ public class ProgressDialogImplementation implements IProgress {
 	
 	private String taskName;
 	private int progress;
+	private int deltaProgress;
 	private int work;
 	private String message = ""; //$NON-NLS-1$
 	
@@ -116,18 +117,23 @@ public class ProgressDialogImplementation implements IProgress {
 
 	@Override
 	public void progress(int deltaWork) {
-		this.progress += deltaWork;
-		final int prg = progress;
 		if (!isIndeterminate() && dialog != null) {
-			if (activity != null) {
-				activity.runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						dialog.setProgress(prg);
-					}
-				});
-			} else {
-				dialog.setProgress(prg);
+			this.deltaProgress += deltaWork;
+			//update only each percent
+			if ((deltaProgress > (work / 100)) || ((progress + deltaProgress) >= work)) {
+				this.progress += deltaProgress;
+				this.deltaProgress = 0;
+				final int prg = progress;
+				if (activity != null) {
+					activity.runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							dialog.setProgress(prg);
+						}
+					});
+				} else {
+					dialog.setProgress(prg);
+				}
 			}
 		}
 	}
@@ -182,6 +188,7 @@ public class ProgressDialogImplementation implements IProgress {
 			this.work = 1;
 		}
 		progress = 0;
+		deltaProgress = 0;
 	}
 
 	@Override
