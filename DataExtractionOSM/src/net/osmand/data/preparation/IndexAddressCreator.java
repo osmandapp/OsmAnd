@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -70,6 +71,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	private DataTileManager<City> cityManager = new DataTileManager<City>(10);
 	private List<Relation> postalCodeRelations = new ArrayList<Relation>();
 	private Map<City, Boundary> cityBoundaries = new HashMap<City, Boundary>();
+	private Set<Boundary> allBoundaries = new HashSet<Boundary>();
 	private TLongHashSet visitedBoundaryWays = new TLongHashSet();
 	
 	private boolean normalizeStreets; 
@@ -81,6 +83,8 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	// TODO
 	Connection mapConnection;
 	DBStreetDAO streetDAO;
+
+
 
 	public class DBStreetDAO
 	{
@@ -267,12 +271,13 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 					}
 				}
 			}
+			//We should not look for similarities, this can be 'very' wrong....
 			if (cityFound.isEmpty()) {
 				// try to find same name in the middle
 				for (City c : citiesToSearch) {
 					if (boundary.containsPoint(c.getLocation())) {
 						String lower = c.getName().toLowerCase();
-						if (boundaryName.startsWith(lower) || boundaryName.endsWith(lower) || boundaryName.contains(" " + lower + " ")) {
+						if (boundaryName.startsWith(lower + " ") || boundaryName.endsWith(lower + " ") || boundaryName.contains(" " + lower + " ")) {
 							cityFound.add(c);
 							break;
 						}
@@ -299,9 +304,43 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				//we can have more cities in one boundary!! (suburbs...)
 				putCityBoundary(boundary, cityFound);
 			}
+			allBoundaries.add(boundary);
 		}
 	}
 
+	public void bindCitiesWithBoundaries() {
+		Iterator<Boundary> iter = allBoundaries.iterator();
+		while (iter.hasNext()) {
+			Boundary b = iter.next();
+			if (!b.computeIsClosedWay()) {
+				System.out.println("Removing not closed boundary: " + b.getName() + " alevel:" + b.getAdminLevel());
+				iter.remove();
+			}
+		}
+		
+		//for cities without boundaries, try to find the right one
+		for (City c : cities.values()) {
+			Boundary cityB = cityBoundaries.get(c);
+			int smallestAdminLevel = 8; //TODO start at level 8 for now...
+			if (cityB == null) {
+				LatLon location = c.getLocation();
+				Boundary smallestoundary = null;
+				//try to found boundary
+				for (Boundary b : allBoundaries) {
+					if (b.containsPoint(location.getLatitude(), location.getLongitude())) {
+						//the bigger the admin level, the smaller the boundary :-)
+						if (b.getAdminLevel() > smallestAdminLevel) {
+							smallestAdminLevel = b.getAdminLevel();
+							smallestoundary = b;
+						}
+					}
+				}
+				if (smallestoundary != null) {
+					putCityBoundary(smallestoundary, Collections.singletonList(c));
+				}
+			}
+		}
+	}
 
 	private int extractBoundaryAdminLevel(Entity e) {
 		int adminLevel = -1;
@@ -605,12 +644,6 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 				result.add(city);
 			}
 		}
-//		for (Entry<City,Boundary> cb : cityBoundaries.entrySet()) {
-//			if (cb.getValue().containsPoint(location)) {
-//				result.add(cb.getKey());
-//			}
-//		}
-		
 		return registerStreetInCities(name, nameEn, location, result);
 	}
 
@@ -626,13 +659,21 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		Set<Long> values = new TreeSet<Long>();
 		for (City city : result) {
 			String cityPart = city.getName();
+			boolean found = false;
 			for(City subpart : result){
 				if(subpart != city){
 					Boundary subBoundary = cityBoundaries.get(subpart);
 					Boundary b = cityBoundaries.get(city);
-					if(b != null && subBoundary != null && subBoundary.getAdminLevel() > b.getAdminLevel()){
-						cityPart = subpart.getName();
+					if(b != null && subBoundary != null &&  subBoundary.getAdminLevel() > b.getAdminLevel()){
+						cityPart = findNearestCityOrSuburb(subBoundary, location); //subpart.getName();
+						found = true;
 					}
+				}
+			}
+			if (!found) {
+				Boundary b = cityBoundaries.get(city);
+				if (b != null) {
+					cityPart = findNearestCityOrSuburb(b, location);
 				}
 			}
 			Long foundId = streetDAO.findStreet(name, city, cityPart);
@@ -647,6 +688,24 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 		return values;
 	}
 
+	private String findNearestCityOrSuburb(Boundary greatestBoundary,
+			LatLon location) {
+		String result = greatestBoundary.getName();
+		List<City> nearestObjects = new ArrayList<City>();
+		nearestObjects.addAll(cityManager.getClosestObjects(location.getLatitude(),location.getLongitude()));
+		nearestObjects.addAll(cityVillageManager.getClosestObjects(location.getLatitude(),location.getLongitude()));
+		double dist = Double.MAX_VALUE;
+		for (City c : nearestObjects) {
+			if (greatestBoundary.containsPoint(c.getLocation())) {
+				double actualDistance = MapUtils.getDistance(location, c.getLocation());
+				if (actualDistance < dist) {
+					result = c.getName();
+					dist = actualDistance;
+				}
+			}
+		}
+		return result;
+	}
 
 
 	public City getClosestCity(LatLon point, Set<String> isInNames) {
@@ -764,11 +823,12 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 	
 	private long streetIdSequence = 0;
 	
+	private boolean debugFullNames = false; //true to see atached cityPart and boundaries to the street names
+	
 	private long insertStreetData(PreparedStatement addressStreetStat, //long id, 
 			String name, String nameEn, double latitude,
 			double longitude, Long cityId, String cityPart) throws SQLException {
 		long streetId = streetIdSequence++;
-//		addressStreetStat.setLong(1, id);
 		addressStreetStat.setLong(1, streetId);
 		addressStreetStat.setString(4, name);
 		addressStreetStat.setString(5, nameEn);
@@ -1092,7 +1152,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 
 	private String identifyBestDistrict(final Street street, final String streetName, final String district,
 			final Map<String, List<StreetAndDistrict>> uniqueNames, Map<Street, List<Node>> streetNodes) {
-		String result = "";
+		String result = debugFullNames ?  district : ""; //TODO make it an option
 		List<StreetAndDistrict> sameStreets = uniqueNames.get(streetName);
 		if (sameStreets == null) {
 			sameStreets = new ArrayList<StreetAndDistrict>(1);
@@ -1137,6 +1197,12 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 			city.setId(set.getLong(1));
 			cities.add(city);
 			
+			if (debugFullNames) { //TODO make it an option...
+				Boundary cityB = cityBoundaries.get(city);
+				if (cityB != null) {
+					city.setName(city.getName() + " " + cityB.getAdminLevel() + ":" + cityB.getName());
+				}
+			}
 		}
 		set.close();
 		stat.close();

@@ -1,6 +1,7 @@
 package net.osmand.data;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import net.osmand.osm.LatLon;
@@ -28,6 +29,59 @@ public class Boundary {
 		return closedWay;
 	}
 	
+	public boolean computeIsClosedWay()
+	{
+		//now we try to merge the ways until we have only one
+		int oldSize = 0;
+		while (getOuterWays().size() != oldSize) {
+			oldSize = getOuterWays().size();
+			mergeOuterWays();
+		}
+		//there is one way and last element is equal to the first...
+		return getOuterWays().size() == 1 && getOuterWays().get(0).getNodes().get(0).getId() == getOuterWays().get(0).getNodes().get(getOuterWays().get(0).getNodes().size()-1).getId();
+	}
+	
+	
+	private void mergeOuterWays() {
+		Way way = getOuterWays().get(0);
+		List<Node> nodes = way.getNodes();
+		if (!nodes.isEmpty()) {
+			int nodesSize = nodes.size();
+			Node first = nodes.get(0);
+			Node last = nodes.get(nodesSize-1);
+			int size = getOuterWays().size();
+			for (int i = size-1; i >= 1; i--) {
+				//try to find way, that matches the one ...
+				Way anotherWay = getOuterWays().get(i);
+				if (anotherWay.getNodes().isEmpty()) {
+					//remove empty one...
+					getOuterWays().remove(i);
+				} else {
+					if (anotherWay.getNodes().get(0).getId() == first.getId()) {
+						//reverese this way and add it to the actual
+						Collections.reverse(anotherWay.getNodes());
+						way.getNodes().addAll(0,anotherWay.getNodes());
+						getOuterWays().remove(i);
+					} else if (anotherWay.getNodes().get(0).getId() == last.getId()) {
+						way.getNodes().addAll(anotherWay.getNodes());
+						getOuterWays().remove(i);
+					} else if (anotherWay.getNodes().get(anotherWay.getNodes().size()-1).getId() == first.getId()) {
+						//add at begging
+						way.getNodes().addAll(0,anotherWay.getNodes());
+						getOuterWays().remove(i);
+					} else if (anotherWay.getNodes().get(anotherWay.getNodes().size()-1).getId() == last.getId()) {
+						Collections.reverse(anotherWay.getNodes());
+						way.getNodes().addAll(anotherWay.getNodes());
+						getOuterWays().remove(i);
+					}
+				}
+			}
+		} else {
+			//remove way with no nodes!
+			getOuterWays().remove(0);
+		}
+	}
+
 	public boolean containsPoint(LatLon point) {
 		return containsPoint(point.getLatitude(), point.getLongitude());
 	}

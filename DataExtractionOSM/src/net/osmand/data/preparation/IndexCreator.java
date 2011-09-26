@@ -460,6 +460,9 @@ public class IndexCreator {
 							}
 						});
 
+						//finish up the boundaries and cities
+						indexAddressCreator.bindCitiesWithBoundaries();
+						
 						progress.setGeneralProgress("[45 / 100]"); //$NON-NLS-1$
 						progress.startTask(Messages.getString("IndexCreator.PREINDEX_ADRESS_MAP"), accessor.getAllRelations()); //$NON-NLS-1$
 						accessor.iterateOverEntities(progress, EntityType.RELATION, new OsmDbVisitor() {
