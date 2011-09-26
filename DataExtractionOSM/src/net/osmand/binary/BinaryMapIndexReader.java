@@ -42,6 +42,7 @@ import com.google.protobuf.WireFormat;
 public class BinaryMapIndexReader {
 	
 	public final static int TRANSPORT_STOP_ZOOM = 24;
+	protected static final int SHIFT_COORDINATES = 5;
 	private final static Log log = LogUtil.getLog(BinaryMapIndexReader.class);
 	
 	private final RandomAccessFile raf;
@@ -807,7 +808,7 @@ public class BinaryMapIndexReader {
 		}
 	}
 	
-	private int MASK_TO_READ = ~((1 << BinaryMapIndexWriter.SHIFT_COORDINATES) - 1);
+	private int MASK_TO_READ = ~((1 << SHIFT_COORDINATES) - 1);
 	private BinaryMapDataObject readMapDataObject(int left, int right, int top, int bottom, SearchRequest<BinaryMapDataObject> req, 
 			MapIndex root) throws IOException {
 		int tag = WireFormat.getTagFieldNumber(codedIS.readTag());
@@ -826,8 +827,8 @@ public class BinaryMapIndexReader {
 		int maxY = 0;
 		req.numberOfVisitedObjects++;
 		while(codedIS.getBytesUntilLimit() > 0){
-			int x = (codedIS.readSInt32() << BinaryMapIndexWriter.SHIFT_COORDINATES) + px;
-			int y = (codedIS.readSInt32() << BinaryMapIndexWriter.SHIFT_COORDINATES) + py;
+			int x = (codedIS.readSInt32() << SHIFT_COORDINATES) + px;
+			int y = (codedIS.readSInt32() << SHIFT_COORDINATES) + py;
 			req.cacheCoordinates.add(x);
 			req.cacheCoordinates.add(y);
 			px = x;

@@ -1,6 +1,8 @@
 package net.osmand.binary;
 
+import gnu.trove.list.TLongList;
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -18,6 +20,8 @@ import net.osmand.binary.OsmandOdb.CityIndex;
 import net.osmand.binary.OsmandOdb.InteresectedStreets;
 import net.osmand.binary.OsmandOdb.MapEncodingRule;
 import net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom;
+import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexData;
+import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom;
 import net.osmand.binary.OsmandOdb.OsmAndTransportIndex;
 import net.osmand.binary.OsmandOdb.PostcodeIndex;
 import net.osmand.binary.OsmandOdb.StreetIndex;
@@ -31,6 +35,7 @@ import net.osmand.data.IndexConstants;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.data.TransportStop;
+import net.osmand.data.preparation.IndexPoiCreator.PoiTileBox;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
@@ -38,6 +43,7 @@ import net.osmand.osm.MapRenderingTypes.MapRulType;
 import net.sf.junidecode.Junidecode;
 
 import com.google.protobuf.CodedOutputStream;
+import com.google.protobuf.MessageLite;
 import com.google.protobuf.WireFormat;
 import com.google.protobuf.WireFormat.FieldType;
 
@@ -45,7 +51,7 @@ public class BinaryMapIndexWriter {
 
 	private RandomAccessFile raf;
 	private CodedOutputStream codedOutStream;
-	protected static final int SHIFT_COORDINATES = 5;
+	protected static final int SHIFT_COORDINATES = BinaryMapIndexReader.SHIFT_COORDINATES;
 	
 	private static class Bounds {
 		public Bounds(int leftX, int rightX, int topY, int bottomY) {
@@ -806,27 +812,75 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeMessage(OsmandOdb.OsmAndPoiBox.CATEGORIES_FIELD_NUMBER, builder.build());
 	}
 	
-	public void writePoiIncludedStrings(Set<String> includes) throws IOException {
-		checkPeekState(POI_BOX);
-		OsmandOdb.IndexedStringTable.Builder builder = OsmandOdb.IndexedStringTable.newBuilder();
-		for(String s : includes){
-			builder.addKey(s);
-		}
-		codedOutStream.writeMessage(OsmandOdb.OsmAndPoiBox.INCLUDENAMESLIST_FIELD_NUMBER, builder.build());
-	}
-	
-	public void writePoiExcludedStrings(Set<String> parentNames, Set<String> includes) throws IOException {
-		checkPeekState(POI_BOX);
-		OsmandOdb.IndexedStringTable.Builder builder = OsmandOdb.IndexedStringTable.newBuilder();
-		for(String s : parentNames){
-			if(!includes.contains(s)){
-				builder.addKey(s);
+	public Map<PoiTileBox, TLongList> writePoiNameIndex(Map<String, List<PoiTileBox>> namesIndex, long fpPoiIndex) throws IOException {
+		checkPeekState(POI_INDEX_INIT);
+		codedOutStream.writeTag(OsmandOdb.OsmAndPoiIndex.NAMEINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+		preserveInt32Size();
+		
+		Map<String, MessageLite> message = new LinkedHashMap<String, MessageLite>();
+		Map<String, Integer> indexedTable = new LinkedHashMap<String, Integer>();
+		Map<PoiTileBox, TLongList> fpToWriteSeeks = new LinkedHashMap<PoiTileBox, TLongList>();
+		int previousSize = 0;
+		for(Map.Entry<String, List<PoiTileBox>> e : namesIndex.entrySet()) {
+			OsmandOdb.OsmAndPoiNameIndexData.Builder builder = OsmandOdb.OsmAndPoiNameIndexData.newBuilder();
+			List<PoiTileBox> tileBoxes = e.getValue();
+			for(PoiTileBox box : tileBoxes) {
+				OsmandOdb.OsmAndPoiNameIndexDataAtom.Builder bs = OsmandOdb.OsmAndPoiNameIndexDataAtom.newBuilder();
+				bs.setX(box.getX());
+				bs.setY(box.getY());
+				bs.setZoom(box.getZoom());
+				bs.setShiftTo(0);
+				OsmAndPoiNameIndexDataAtom atom = bs.build();
+				builder.addAtoms(atom);
+			}
+			OsmAndPoiNameIndexData msg = builder.build();
+			message.put(e.getKey(), msg);
+			indexedTable.put(e.getKey(), previousSize);
+			
+			previousSize  += CodedOutputStream.computeMessageSize(OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER, msg);
+			int accumulateSize = 4;
+			for (int i = tileBoxes.size() - 1; i >= 0; i--) {
+				PoiTileBox box = tileBoxes.get(i);
+				if (!fpToWriteSeeks.containsKey(box)) {
+					fpToWriteSeeks.put(box, new TLongArrayList());
+				}
+				fpToWriteSeeks.get(box).add(previousSize - accumulateSize);
+				accumulateSize += CodedOutputStream.computeMessageSize(
+						OsmandOdb.OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER, msg.getAtoms(i));
+
 			}
 		}
-		codedOutStream.writeMessage(OsmandOdb.OsmAndPoiBox.EXCLUDENAMESLIST_FIELD_NUMBER, builder.build());
+		writeIndexedTable(OsmandOdb.OsmAndPoiNameIndex.TABLE_FIELD_NUMBER, indexedTable);
+		codedOutStream.flush();
+		int diff = (int) (raf.getFilePointer() - fpPoiIndex);
+		for (TLongList es : fpToWriteSeeks.values()) {
+			for (int i = 0; i < es.size(); i++) {
+				es.set(i, es.get(i) + diff);
+			}
+		}
 		
+		for(Map.Entry<String, MessageLite> s : message.entrySet()) {
+			codedOutStream.writeMessage(OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER, s.getValue());
+		}
+		
+		
+		
+		writeInt32Size();
+		return fpToWriteSeeks;
 	}
 	
+	
+
+	private void writeIndexedTable(int tag, Map<String, Integer> indexedTable) throws IOException {
+		codedOutStream.writeTag(tag, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+		preserveInt32Size();
+		for(Map.Entry<String, Integer> e : indexedTable.entrySet()){
+			codedOutStream.writeString(OsmandOdb.IndexedStringTable.KEY_FIELD_NUMBER, e.getKey());
+			codedOutStream.writeUInt32(OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER, e.getValue());
+		}
+		writeInt32Size();
+	}
+
 	public void writePoiDataAtom(long id, int x24shift, int y24shift, String nameEn, String name, TIntArrayList types, String openingHours,
 			String site, String phone) throws IOException {
 		checkPeekState(POI_DATA);
@@ -860,14 +914,16 @@ public class BinaryMapIndexWriter {
 		
 	}
 	
-	public void startWritePoiData(int zoom, int x, int y, long fpPoiIndex, long fpPoiBox) throws IOException {
+	public void startWritePoiData(int zoom, int x, int y, long fpPoiIndex, TLongList fpPoiBox) throws IOException {
 		pushState(POI_DATA, POI_INDEX_INIT);
 		codedOutStream.writeTag(OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		long startPoiData = preserveInt32Size();
 		// write shift to that data
 		long filePointer = raf.getFilePointer();
-		raf.seek(fpPoiBox);
-		raf.writeInt((int) (startPoiData - fpPoiIndex - 4));
+		for (int i = 0; i < fpPoiBox.size(); i++) {
+			raf.seek(fpPoiBox.get(i));
+			raf.writeInt((int) (startPoiData - fpPoiIndex - 4));
+		}
 		raf.seek(filePointer);
 		
 		codedOutStream.writeUInt32(OsmandOdb.OsmAndPoiBoxData.ZOOM_FIELD_NUMBER, zoom);
