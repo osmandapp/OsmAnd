@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="local_index_mi_rename">Premenovať</string>
+	<string name="show_gpx_route">Zobraziť na mape</string>
+	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="auto_follow_route_never">Nikdy</string>
 	<string name="choose_auto_follow_route">Vybrať nastavenia automatického nasledovania</string>
 	<string name="choose_auto_follow_route_descr">Výber časového intervalu na nasledovanie pozície na mape</string>
