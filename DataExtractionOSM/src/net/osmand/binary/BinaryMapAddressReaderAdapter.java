@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.osmand.ResultMatcher;
 import net.osmand.StringMatcher;
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
@@ -85,7 +86,7 @@ public class BinaryMapAddressReaderAdapter {
 		}
 	}
 	
-	protected void readCities(List<City> cities, ResultMatcher<MapObject> resultMatcher, StringMatcher matcher, boolean useEn) throws IOException {
+	protected void readCities(List<City> cities, SearchRequest<MapObject> resultMatcher, StringMatcher matcher, boolean useEn) throws IOException {
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -116,7 +117,7 @@ public class BinaryMapAddressReaderAdapter {
 	}
 	
 
-	protected PostCode readPostcode(PostCode p, int fileOffset, ResultMatcher<Street> resultMatcher, boolean loadStreets, String postcodeFilter) throws IOException{
+	protected PostCode readPostcode(PostCode p, int fileOffset, SearchRequest<Street> resultMatcher, boolean loadStreets, String postcodeFilter) throws IOException{
 		int x = 0;
 		int y = 0;
 		while(true){
@@ -173,7 +174,7 @@ public class BinaryMapAddressReaderAdapter {
 	}
 	
 	
-	protected City readCity(City c, int fileOffset, boolean loadStreets, ResultMatcher<Street> resultMatcher, 
+	protected City readCity(City c, int fileOffset, boolean loadStreets, SearchRequest<Street> resultMatcher, 
 			StringMatcher nameMatcher, boolean useEn) throws IOException{
 		int x = 0;
 		int y = 0;
@@ -269,7 +270,7 @@ public class BinaryMapAddressReaderAdapter {
 		}
 	}
 	
-	protected Street readStreet(Street s, ResultMatcher<Building> resultMatcher, boolean loadBuildings, int city24X, int city24Y, String postcodeFilter) throws IOException{
+	protected Street readStreet(Street s, SearchRequest<Building> resultMatcher, boolean loadBuildings, int city24X, int city24Y, String postcodeFilter) throws IOException{
 		int x = 0;
 		int y = 0;
 		boolean loadLocation = city24X != 0 || city24Y != 0;
@@ -477,7 +478,7 @@ public class BinaryMapAddressReaderAdapter {
 	
 	
 	
-	protected void readPostcodes(List<PostCode> postcodes, ResultMatcher<MapObject> resultMatcher, StringMatcher nameMatcher) throws IOException{
+	protected void readPostcodes(List<PostCode> postcodes, SearchRequest<MapObject> resultMatcher, StringMatcher nameMatcher) throws IOException{
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);

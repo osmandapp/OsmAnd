@@ -63,7 +63,7 @@ public class BinaryMapTransportReaderAdapter {
 		IndexStringTable stringTable = null;
 	}
 
-	private static class IndexStringTable {
+	protected static class IndexStringTable {
 		private static final int SIZE_OFFSET_ARRAY = 100;
 		private static final int WINDOW_SIZE = 25;
 		int fileOffset = 0;
@@ -262,7 +262,7 @@ public class BinaryMapTransportReaderAdapter {
 		int cbottom = 0;
 		req.numberOfReadSubtrees++;
 		while(true){
-			if(req.isInterrupted()){
+			if(req.isCancelled()){
 				return;
 			}
 			int t = codedIS.readTag();
@@ -300,13 +300,12 @@ public class BinaryMapTransportReaderAdapter {
 				int length = codedIS.readRawVarint32();
 				int oldLimit = codedIS.pushLimit(length);
 				if(lastIndexResult == -1){
-					lastIndexResult = req.searchResults.size();
+					lastIndexResult = req.getSearchResults().size();
 				}
 				req.numberOfVisitedObjects++;
 				TransportStop transportStop = readTransportStop(stopOffset, cleft, cright, ctop, cbottom, req);
 				if(transportStop != null){
-					req.searchResults.add(transportStop);
-					
+					req.publish(transportStop);
 				}
 				codedIS.popLimit(oldLimit);
 				break;
@@ -314,7 +313,7 @@ public class BinaryMapTransportReaderAdapter {
 				// left, ... already initialized 
 				length = readInt();
 				int filePointer = codedIS.getTotalBytesRead();
-				if (req.limit == -1 || req.limit >= req.searchResults.size()) {
+				if (req.limit == -1 || req.limit >= req.getSearchResults().size()) {
 					oldLimit = codedIS.pushLimit(length);
 					searchTransportTreeBounds(cleft, cright, ctop, cbottom, req);
 					codedIS.popLimit(oldLimit);
@@ -328,8 +327,8 @@ public class BinaryMapTransportReaderAdapter {
 			case OsmandOdb.TransportStopsTree.BASEID_FIELD_NUMBER :
 				long baseId = codedIS.readUInt64();
 				if (lastIndexResult != -1) {
-					for (int i = lastIndexResult; i < req.searchResults.size(); i++) {
-						TransportStop rs = req.searchResults.get(i);
+					for (int i = lastIndexResult; i < req.getSearchResults().size(); i++) {
+						TransportStop rs = req.getSearchResults().get(i);
 						rs.setId(rs.getId() + baseId);
 					}
 				}

@@ -54,7 +54,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	public synchronized void preloadCities(ResultMatcher<MapObject> resultMatcher) {
 		if (cities.isEmpty()) {
 			try {
-				List<City> cs = file.getCities(region, resultMatcher);
+				List<City> cs = file.getCities(region, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
 				for (City c : cs) {
 					cities.put(c.getId(), c);
 				}
@@ -67,7 +67,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	public synchronized void preloadBuildings(Street street, ResultMatcher<Building> resultMatcher) {
 		if(street.getBuildings().isEmpty()){
 			try {
-				file.preloadBuildings(street, resultMatcher);
+				file.preloadBuildings(street, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
 				street.sortBuildings();
 			} catch (IOException e) {
 				log.error("Disk operation failed" , e); //$NON-NLS-1$
@@ -92,9 +92,9 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		}
 		try {
 			if(o instanceof PostCode){
-				file.preloadStreets((PostCode) o, resultMatcher);
+				file.preloadStreets((PostCode) o, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
 			} else {
-				file.preloadStreets((City) o, resultMatcher);
+				file.preloadStreets((City) o, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
 			}
 		} catch (IOException e) {
 			log.error("Disk operation failed" , e); //$NON-NLS-1$
@@ -162,8 +162,8 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			if (name.length() >= 2 && Algoritms.containsDigit(name)) {
 				// also try to identify postcodes
 				String uName = name.toUpperCase();
-				for (PostCode code : file.getPostcodes(region, resultMatcher, new CollatorStringMatcher(collator, uName,
-						StringMatcherMode.CHECK_CONTAINS))) {
+				for (PostCode code : file.getPostcodes(region, BinaryMapIndexReader.buildAddressRequest(resultMatcher), 
+						new CollatorStringMatcher(collator, uName, StringMatcherMode.CHECK_CONTAINS))) {
 					citiesToFill.add(code);
 					if (resultMatcher.isCancelled()) {
 						return citiesToFill;
@@ -186,8 +186,8 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 			int initialsize = citiesToFill.size();
 			if (name.length() >= 3) {
-				for (City c : file.getVillages(region, resultMatcher, new CollatorStringMatcher(collator, name,
-						StringMatcherMode.CHECK_STARTS_FROM_SPACE), useEnglishNames)) {
+				for (City c : file.getVillages(region, BinaryMapIndexReader.buildAddressRequest(resultMatcher),
+						new CollatorStringMatcher(collator, name,StringMatcherMode.CHECK_STARTS_FROM_SPACE), useEnglishNames)) {
 					citiesToFill.add(c);
 					if (resultMatcher.isCancelled()) {
 						return citiesToFill;
@@ -267,7 +267,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		preloadCities(null);
 		if (!cities.containsKey(id)) {
 			try {
-				file.getVillages(region, new ResultMatcher<MapObject>() {
+				file.getVillages(region, BinaryMapIndexReader.buildAddressRequest(new ResultMatcher<MapObject>() {
 					boolean canceled = false;
 
 					@Override
@@ -282,7 +282,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 						}
 						return false;
 					}
-				}, null, useEnglishNames);
+				}), null, useEnglishNames);
 			} catch (IOException e) {
 				log.error("Disk operation failed", e); //$NON-NLS-1$
 			}

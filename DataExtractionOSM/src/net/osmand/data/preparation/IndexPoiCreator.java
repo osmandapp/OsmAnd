@@ -18,8 +18,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import net.osmand.Algoritms;
@@ -49,6 +51,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 	private static final int ZOOM_TO_SAVE_START = 6;
 	private static final int ZOOM_TO_WRITE_CATEGORIES_START = 12;
 	private static final int ZOOM_TO_WRITE_CATEGORIES_END = 16;
+	private static final int CHARACTERS_TO_BUILD = 4;
 	private boolean useInMemoryCreator = true; 
 	
 
@@ -193,7 +196,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.PRIMARY);
 		
-		Map<String, List<PoiTileBox>> namesIndex = new LinkedHashMap<String, List<PoiTileBox>>();
+		Map<String, Set<PoiTileBox>> namesIndex = new TreeMap<String, Set<PoiTileBox>>();
 		
 		// 0. process all entities
 		ResultSet rs;
@@ -289,7 +292,8 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		Map<String, Integer> catIndexes = writer.writePOICategoriesTable(categories);
 		
 		// 2.5 write names table
-		Map<PoiTileBox, TLongList> fpToWriteSeeks = writer.writePoiNameIndex(namesIndex, startFpPoiIndex);
+		//Map<PoiTileBox, TLongList> fpToWriteSeeks = new LinkedHashMap<PoiTileBox, TLongList>();
+		Map<PoiTileBox, TLongList> fpToWriteSeeks = writer.writePoiNameIndex(namesIndex);
 
 		// 3. write boxes
 		log.info("Poi box processing finishied");
@@ -375,7 +379,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 
 	}
 	
-	public void addNamePrefix(String name, String nameEn, PoiTileBox data, Map<String, List<PoiTileBox>> poiData) {
+	public void addNamePrefix(String name, String nameEn, PoiTileBox data, Map<String, Set<PoiTileBox>> poiData) {
 		if(Algoritms.isEmpty(nameEn)){
 			nameEn = Junidecode.unidecode(name);
 		}
@@ -383,19 +387,19 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		parsePrefix(nameEn, data, poiData);
 	}
 
-	private void parsePrefix(String name, PoiTileBox data, Map<String, List<PoiTileBox>> poiData) {
+	private void parsePrefix(String name, PoiTileBox data, Map<String, Set<PoiTileBox>> poiData) {
 		int prev = -1;
 		for (int i = 0; i <= name.length(); i++) {
 			if (i == name.length() || (!Character.isLetter(name.charAt(i)) && 
 					!Character.isDigit(name.charAt(i)))) {
 				if (prev != -1) {
 					String substr = name.substring(prev, i);
-					if (substr.length() > 3) {
-						substr = substr.substring(0, 3);
+					if (substr.length() > CHARACTERS_TO_BUILD) {
+						substr = substr.substring(0, CHARACTERS_TO_BUILD);
 					}
 					String val = substr.toLowerCase();
 					if(!poiData.containsKey(val)){
-						poiData.put(val, new ArrayList<PoiTileBox>());
+						poiData.put(val, new LinkedHashSet<PoiTileBox>());
 					}
 					poiData.get(val).add(data);
 					prev = -1;
@@ -554,13 +558,14 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		// TODO support multiple reading amenity types! +/-
 		// TODO support proper POI editing
 		// TODO support string trigramms
-		// TODO support cancelling poi search request! Do it in another thread
+		// TODO support cancelling poi search request! Do it in another thread (Check is cancelled()!!!)
+		// TODO support fully functional indexed string table and pass name matcher
 		long time = System.currentTimeMillis();
 		IndexPoiCreator poiCreator = new IndexPoiCreator();
-		String fileSqlte = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.odb";
-		String outFile = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.obf";
-//		String fileSqlte = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Netherlands_europe.poi.odb";
-//		String outFile = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Netherlands.poi.obf";
+//		String fileSqlte = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.odb";
+//		String outFile = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.obf";
+		String fileSqlte = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Netherlands_europe.poi.odb";
+		String outFile = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Netherlands.poi.obf";
 		
 		poiCreator.poiConnection = (Connection) DBDialect.SQLITE.getDatabaseConnection(
 				fileSqlte, log);

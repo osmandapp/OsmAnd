@@ -1,9 +1,11 @@
 package net.osmand.binary;
 
+import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntLongHashMap;
 import gnu.trove.set.hash.TLongHashSet;
 
 import java.io.IOException;
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +13,9 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 
 import net.osmand.Algoritms;
+import net.osmand.CollatorStringMatcher;
 import net.osmand.LogUtil;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
@@ -156,6 +160,184 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 	
+	protected void searchPoiByName( PoiRegion region, SearchRequest<Amenity> req) throws IOException {
+		TIntArrayList offsets = new TIntArrayList();
+		Collator instance = Collator.getInstance();
+		instance.setStrength(Collator.PRIMARY);
+		CollatorStringMatcher matcher = new CollatorStringMatcher(instance, req.nameQuery, 
+				StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+		long time = System.currentTimeMillis();
+		int indexOffset = codedIS.getTotalBytesRead();
+		while(true){
+			if(req.isCancelled()){
+				return;
+			}
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return;
+			case OsmandOdb.OsmAndPoiIndex.NAMEINDEX_FIELD_NUMBER :
+				int length = readInt();
+				int oldLimit = codedIS.pushLimit(length);
+				offsets = readPoiNameIndex(instance, req.nameQuery, req);
+				codedIS.popLimit(oldLimit);
+				break;
+			case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER :
+				// also offsets can be randomly skipped by limit
+				offsets.sort();
+				LOG.info("Searched poi structure in "+(System.currentTimeMillis() - time) + 
+						"ms. Found " + offsets.size() +" subtress");
+				for (int j = 0; j < offsets.size(); j++) {
+					codedIS.seek(offsets.get(j) + indexOffset);
+					int len = readInt();
+					int oldLim = codedIS.pushLimit(len);
+					readPoiData(matcher, req, region);
+					codedIS.popLimit(oldLim);
+					if(req.isCancelled()){
+						return;
+					}
+				}
+				LOG.info("Whole poi by name search is done in "+(System.currentTimeMillis() - time) + 
+						"ms. Found " + req.getSearchResults().size());
+				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+				return;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+	
+	private TIntArrayList readPoiNameIndex(Collator instance, String query, SearchRequest<Amenity> req) throws IOException {
+		TIntArrayList offsets = new TIntArrayList();
+		TIntArrayList dataOffsets = null;
+		while(true){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return offsets;
+			case OsmandOdb.OsmAndPoiNameIndex.TABLE_FIELD_NUMBER : {
+				int length = readInt();
+				int oldLimit = codedIS.pushLimit(length);
+				dataOffsets = readIndexedStringTable(instance, query);
+				codedIS.popLimit(oldLimit);
+				break; }
+			case OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER : {
+				if(dataOffsets != null){
+					dataOffsets.sort();
+					int offset = codedIS.getTotalBytesRead();
+					for (int i = 0; i < dataOffsets.size(); i++) {
+						codedIS.seek(dataOffsets.get(i) + offset);
+						int len = codedIS.readRawVarint32();
+						int oldLim = codedIS.pushLimit(len);
+						readPoiNameIndexData(offsets);
+						codedIS.popLimit(oldLim);
+						if (req.isCancelled()) {
+							codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+							return offsets;
+						}
+					}
+				}
+				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+				return offsets; }
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+		
+	}
+
+	private void readPoiNameIndexData(TIntArrayList offsets) throws IOException {
+		while(true){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return;
+			case OsmandOdb.OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER :
+				int len = codedIS.readRawVarint32();
+				int oldLim = codedIS.pushLimit(len);
+				readPoiNameIndexDataAtom(offsets);
+				codedIS.popLimit(oldLim);
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+		
+	}
+
+	private void readPoiNameIndexDataAtom(TIntArrayList offsets) throws IOException {
+		while(true){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return;
+			case OsmandOdb.OsmAndPoiNameIndexDataAtom.X_FIELD_NUMBER :
+				/*int x = */codedIS.readUInt32();
+				break;
+			case OsmandOdb.OsmAndPoiNameIndexDataAtom.Y_FIELD_NUMBER :
+				/*int y = */codedIS.readUInt32();
+				break;
+			case OsmandOdb.OsmAndPoiNameIndexDataAtom.ZOOM_FIELD_NUMBER :
+				/*int zoom = */codedIS.readUInt32();
+				break;
+			case OsmandOdb.OsmAndPoiNameIndexDataAtom.SHIFTTO_FIELD_NUMBER :
+				offsets.add(readInt());
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+
+	private TIntArrayList readIndexedStringTable(Collator instance, String query) throws IOException {
+		// TODO support fully functional indexed string table
+		TIntArrayList list = new TIntArrayList();
+		int charMatches = 0;
+		boolean keyMatches = false;
+		while(true){
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return list;
+			case OsmandOdb.IndexedStringTable.KEY_FIELD_NUMBER :
+				String key = codedIS.readString();
+				keyMatches = false;
+				int i=0;
+				for(; i<query.length(); i++){
+					if (i >= key.length() || instance.compare(key.substring(i, i + 1), query.substring(i, i + 1)) != 0) {
+						break;
+					}
+				}
+				if(i >= charMatches && i > 0){
+					if(i > charMatches){
+						list.clear();
+						charMatches = i;
+					}
+					keyMatches = true;
+				}
+				break;
+			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER :
+				int val = codedIS.readUInt32();
+				if (keyMatches) {
+					list.add(val);
+				}
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+
 	protected void searchPoiIndex(int left31, int right31, int top31, int bottom31,
 			SearchRequest<Amenity> req, PoiRegion region) throws IOException {
 		int indexOffset = codedIS.getTotalBytesRead();
@@ -168,7 +350,7 @@ public class BinaryMapPoiReaderAdapter {
 		}
 		TIntLongHashMap offsetsMap = new TIntLongHashMap();
 		while(true){
-			if(req.isInterrupted()){
+			if(req.isCancelled()){
 				return;
 			}
 			int t = codedIS.readTag();
@@ -199,7 +381,7 @@ public class BinaryMapPoiReaderAdapter {
 					int oldLim = codedIS.pushLimit(len);
 					readPoiData(left31, right31, top31, bottom31, req, req.getSearchResults(), region, skipTiles, zoomToSkip);
 					codedIS.popLimit(oldLim);
-					if(req.isInterrupted()){
+					if(req.isCancelled()){
 						return;
 					}
 				}
@@ -211,14 +393,13 @@ public class BinaryMapPoiReaderAdapter {
 			}
 		}
 	}
-
-	private void readPoiData(int left31, int right31, int top31, int bottom31, 
-			SearchRequest<Amenity> req, List<Amenity> result, PoiRegion region, TLongHashSet toSkip, int zSkip) throws IOException {
+	
+	private void readPoiData(CollatorStringMatcher matcher, SearchRequest<Amenity> req, PoiRegion region) throws IOException {
 		int x = 0;
 		int y = 0;
 		int zoom = 0;
 		while(true){
-			if(req.isInterrupted()){
+			if(req.isCancelled()){
 				return;
 			}
 			int t = codedIS.readTag();
@@ -238,7 +419,48 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiBoxData.POIDATA_FIELD_NUMBER:
 				int len = codedIS.readRawVarint32();
 				int oldLim = codedIS.pushLimit(len);
-				Amenity am = readPoiPoint(left31, right31, top31, bottom31, x, y, zoom, req, region);
+				Amenity am = readPoiPoint(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, x, y, zoom, req, region, false);
+				codedIS.popLimit(oldLim);
+				if (am != null) {
+					if(matcher.matches(am.getName(false)) || matcher.matches(am.getName(true))) {
+						req.publish(am);
+					}
+				}
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
+	}
+
+	private void readPoiData(int left31, int right31, int top31, int bottom31, 
+			SearchRequest<Amenity> req, List<Amenity> result, PoiRegion region, TLongHashSet toSkip, int zSkip) throws IOException {
+		int x = 0;
+		int y = 0;
+		int zoom = 0;
+		while(true){
+			if(req.isCancelled()){
+				return;
+			}
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return;
+			case OsmandOdb.OsmAndPoiBoxData.X_FIELD_NUMBER :
+				x = codedIS.readUInt32();
+				break;
+			case OsmandOdb.OsmAndPoiBoxData.ZOOM_FIELD_NUMBER :
+				zoom = codedIS.readUInt32();
+				break;
+			case OsmandOdb.OsmAndPoiBoxData.Y_FIELD_NUMBER :
+				y = codedIS.readUInt32();
+				break;
+			case OsmandOdb.OsmAndPoiBoxData.POIDATA_FIELD_NUMBER:
+				int len = codedIS.readRawVarint32();
+				int oldLim = codedIS.pushLimit(len);
+				Amenity am = readPoiPoint(left31, right31, top31, bottom31, x, y, zoom, req, region, true);
 				codedIS.popLimit(oldLim);
 				if (am != null) {
 					if (toSkip != null) {
@@ -266,7 +488,7 @@ public class BinaryMapPoiReaderAdapter {
 	}
 	
 	private Amenity readPoiPoint(int left31, int right31, int top31, int bottom31, 
-			int px, int py, int zoom, SearchRequest<Amenity> req, PoiRegion region) throws IOException {
+			int px, int py, int zoom, SearchRequest<Amenity> req, PoiRegion region, boolean checkBounds) throws IOException {
 		Amenity am = null;
 		int x = 0;
 		int y = 0;
@@ -291,9 +513,11 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiBoxDataAtom.DY_FIELD_NUMBER :
 				y = (codedIS.readSInt32() + (py << (24 - zoom))) << 7;
 				req.numberOfVisitedObjects++;
-				if(left31 > x || right31 < x || top31 > y || bottom31 < y){
-					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-					return null;
+				if (checkBounds) {
+					if (left31 > x || right31 < x || top31 > y || bottom31 < y) {
+						codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+						return null;
+					}
 				}
 				am = new Amenity();
 				am.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
@@ -392,7 +616,7 @@ public class BinaryMapPoiReaderAdapter {
 		int dy = py;
 		int dx = px;
 		while(true){
-			if(req.isInterrupted()){
+			if(req.isCancelled()){
 				return false;
 			}
 			int t = codedIS.readTag();

@@ -7,6 +7,7 @@ import gnu.trove.list.array.TLongArrayList;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -812,7 +813,7 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeMessage(OsmandOdb.OsmAndPoiBox.CATEGORIES_FIELD_NUMBER, builder.build());
 	}
 	
-	public Map<PoiTileBox, TLongList> writePoiNameIndex(Map<String, List<PoiTileBox>> namesIndex, long fpPoiIndex) throws IOException {
+	public Map<PoiTileBox, TLongList> writePoiNameIndex(Map<String, Set<PoiTileBox>> namesIndex) throws IOException {
 		checkPeekState(POI_INDEX_INIT);
 		codedOutStream.writeTag(OsmandOdb.OsmAndPoiIndex.NAMEINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		preserveInt32Size();
@@ -821,9 +822,9 @@ public class BinaryMapIndexWriter {
 		Map<String, Integer> indexedTable = new LinkedHashMap<String, Integer>();
 		Map<PoiTileBox, TLongList> fpToWriteSeeks = new LinkedHashMap<PoiTileBox, TLongList>();
 		int previousSize = 0;
-		for(Map.Entry<String, List<PoiTileBox>> e : namesIndex.entrySet()) {
+		for(Map.Entry<String, Set<PoiTileBox>> e : namesIndex.entrySet()) {
 			OsmandOdb.OsmAndPoiNameIndexData.Builder builder = OsmandOdb.OsmAndPoiNameIndexData.newBuilder();
-			List<PoiTileBox> tileBoxes = e.getValue();
+			List<PoiTileBox> tileBoxes = new ArrayList<PoiTileBox>(e.getValue());
 			for(PoiTileBox box : tileBoxes) {
 				OsmandOdb.OsmAndPoiNameIndexDataAtom.Builder bs = OsmandOdb.OsmAndPoiNameIndexDataAtom.newBuilder();
 				bs.setX(box.getX());
@@ -852,10 +853,10 @@ public class BinaryMapIndexWriter {
 		}
 		writeIndexedTable(OsmandOdb.OsmAndPoiNameIndex.TABLE_FIELD_NUMBER, indexedTable);
 		codedOutStream.flush();
-		int diff = (int) (raf.getFilePointer() - fpPoiIndex);
+		long l = raf.getFilePointer();
 		for (TLongList es : fpToWriteSeeks.values()) {
 			for (int i = 0; i < es.size(); i++) {
-				es.set(i, es.get(i) + diff);
+				es.set(i, es.get(i) + l);
 			}
 		}
 		

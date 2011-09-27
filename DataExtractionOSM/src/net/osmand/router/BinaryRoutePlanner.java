@@ -15,6 +15,7 @@ import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
+import net.osmand.binary.BinaryMapIndexReader.SearchFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.osm.LatLon;
@@ -66,10 +67,7 @@ public class BinaryRoutePlanner {
 		long now = System.nanoTime();
 		
 		int zoomToLoad = 31 - ctx.getZoomToLoadTileWithRoads();
-		SearchRequest<BinaryMapDataObject> request = BinaryMapIndexReader.buildSearchRequest(tileX << zoomToLoad,
-				(tileX + 1) << zoomToLoad, tileY << zoomToLoad, 
-				(tileY + 1) << zoomToLoad, 15);
-		request.setSearchFilter(new BinaryMapIndexReader.SearchFilter(){
+		SearchFilter searchFilter = new BinaryMapIndexReader.SearchFilter(){
 			@Override
 			public boolean accept(TIntArrayList types, MapIndex index) {
 				for (int j = 0; j < types.size(); j++) {
@@ -90,7 +88,10 @@ public class BinaryRoutePlanner {
 				}
 				return false;
 			}
-		});
+		};
+		SearchRequest<BinaryMapDataObject> request = BinaryMapIndexReader.buildSearchRequest(tileX << zoomToLoad,
+				(tileX + 1) << zoomToLoad, tileY << zoomToLoad, 
+				(tileY + 1) << zoomToLoad, 15, searchFilter);
 		for (BinaryMapIndexReader r : map) {
 			r.searchMapIndex(request);
 			for (BinaryMapDataObject o : request.getSearchResults()) {

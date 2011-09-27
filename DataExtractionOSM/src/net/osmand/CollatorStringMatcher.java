@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand;
 
 
 import java.text.Collator;
@@ -116,7 +116,7 @@ public class CollatorStringMatcher implements StringMatcher {
 		}
 		if (checkSpaces) {
 			for (int i = 1; i <= searchInLength - startLength; i++) {
-				if (considerAsSpace(searchIn.charAt(i - 1)) && !considerAsSpace(searchIn.charAt(i))) {
+				if (isSpace(searchIn.charAt(i - 1)) && !isSpace(searchIn.charAt(i))) {
 					if (collator.equals(searchIn.substring(i, i + startLength), theStart)) {
 						return true;
 					}
@@ -126,7 +126,7 @@ public class CollatorStringMatcher implements StringMatcher {
 		return false;
 	}
 	
-	private static boolean considerAsSpace(char c){
-		return !Character.isLetter(c) && !Character.isDigit(c);  
+	private static boolean isSpace(char c){
+		return !Character.isLetter(c) && !Character.isDigit(c);
 	}
 }
