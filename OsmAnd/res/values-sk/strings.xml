@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="button_upgrade_osmandplus">Aktualizovať Osmand+</string>
+	<string name="map_version_changed_info">Na serveri sú nekompatibilné mapové súbory s Vašou aktuálnou verziou aplikácie. Na ich stiahnutie a použitie, prosím, aktualizujte aplikáciu na novšiu verziu.</string>
 	<string name="local_index_mi_rename">Premenovať</string>
 	<string name="show_gpx_route">Zobraziť na mape</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
