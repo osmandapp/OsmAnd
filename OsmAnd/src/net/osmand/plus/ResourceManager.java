@@ -55,7 +55,6 @@ import android.view.WindowManager;
  * Such as indexes, tiles.
  * Also it is responsible to create cache for that resources if they
  *  can't be loaded fully into memory & clear them on request. 
- *SQLITE
  */
 public class ResourceManager {
 
@@ -72,6 +71,7 @@ public class ResourceManager {
 	public static final int LIMIT_TRANSPORT = 200;
 	
 	private static final Log log = LogUtil.getLog(ResourceManager.class);
+	private static final String MINE_POI_DB = APP_DIR + "mine"+ IndexConstants.POI_INDEX_EXT;
 	
 	
 	protected static ResourceManager manager = null;
@@ -98,6 +98,7 @@ public class ResourceManager {
 	
 	protected final List<TransportIndexRepository> transportRepositories = new ArrayList<TransportIndexRepository>();
 	
+	
 	protected final Map<String, String> indexFileNames = new LinkedHashMap<String, String>();
 	
 	protected final Map<String, BinaryMapIndexReader> routingMapFiles = new LinkedHashMap<String, BinaryMapIndexReader>();
@@ -107,6 +108,8 @@ public class ResourceManager {
 	public final AsyncLoadingThread asyncLoadingTiles = new AsyncLoadingThread();
 	
 	protected boolean internetIsNotAccessible = false;
+	
+	protected AmenityIndexRepositoryOdb updatablePoiDb = null;
 	
 	
 	public ResourceManager(OsmandApplication context) {
@@ -355,8 +358,8 @@ public class ResourceManager {
 		initRenderers(progress);
 		// do it lazy
 		// indexingImageTiles(progress);
-		warnings.addAll(indexingPoi(progress));
 		warnings.addAll(indexingMaps(progress));
+		warnings.addAll(indexingPoi(progress));
 		return warnings;
 	}
 	
@@ -499,29 +502,82 @@ public class ResourceManager {
 	}
 	
 	// POI INDEX //
-	public List<String> indexingPoi(final IProgress progress) {
+	private List<String> indexingPoi(final IProgress progress) {
 		File file = context.getSettings().extendOsmandPath(POI_PATH);
 		file.mkdirs();
 		List<String> warnings = new ArrayList<String>();
-		closeAmenities();
 		if (file.exists() && file.canRead()) {
 			for (File f : file.listFiles()) {
 				indexingPoi(progress, warnings, f);
 			}
 		}
+		File updatablePoiDbFile = context.getSettings().extendOsmandPath(MINE_POI_DB);
+		if(updatablePoiDbFile.exists() && file.canRead()){
+			try {
+				AmenityIndexRepositoryOdb odb = new AmenityIndexRepositoryOdb();
+				boolean initialize = odb.initialize(progress, updatablePoiDbFile);
+				if(initialize){
+					this.updatablePoiDb = odb;
+				}
+			} catch (SQLiteException e) {
+			}
+		}
 		return warnings;
+	}
+	
+	public AmenityIndexRepositoryOdb getUpdatablePoiDb() {
+		if (updatablePoiDb == null) {
+			File updatablePoiDbFile = context.getSettings().extendOsmandPath(MINE_POI_DB);
+			if (!tryToOpenUpdatablePoiDb(updatablePoiDbFile)) {
+				if (updatablePoiDbFile.exists()) {
+					updatablePoiDbFile.delete();
+				}
+				AmenityIndexRepositoryOdb.createAmenityIndexRepository(updatablePoiDbFile);
+				tryToOpenUpdatablePoiDb(updatablePoiDbFile);
+			}
+		}
+		return updatablePoiDb;
+	}
+
+	private boolean tryToOpenUpdatablePoiDb(File updatablePoiDbFile) {
+		try {
+			AmenityIndexRepositoryOdb odb = new AmenityIndexRepositoryOdb();
+			boolean initialize = odb.initialize(IProgress.EMPTY_PROGRESS, updatablePoiDbFile);
+			if (initialize) {
+				amenityRepositories.add(odb);
+				this.updatablePoiDb = odb;
+				return true;
+			}
+		} catch (SQLiteException e) {
+		}
+		return false;
 	}
 	
 	public void indexingPoi(final IProgress progress, List<String> warnings, File f) {
 		if (f.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
 			AmenityIndexRepositoryOdb repository = new AmenityIndexRepositoryOdb();
-			
 			progress.startTask(context.getString(R.string.indexing_poi) + " " +  f.getName(), -1); //$NON-NLS-1$
 			try {
 				boolean initialized = repository.initialize(progress, f);
 				if (initialized) {
-					amenityRepositories.add(repository);
-					indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$
+					boolean covered = false;
+					for(AmenityIndexRepository r :  amenityRepositories){
+						if(r instanceof AmenityIndexRepositoryBinary){
+							double latC = (repository.dataBottomLatitude + repository.dataTopLatitude )/ 2;
+							double lonC = (repository.dataLeftLongitude + repository.dataRightLongitude) / 2;
+							if(r.checkContains(latC, lonC)){
+								covered = true;
+								break;
+							}
+						}
+					}
+					if(covered){
+						repository.close();
+						warnings.add(context.getString(R.string.old_poi_file_should_be_deleted, f.getName())); //$NON-NLS-1$
+					} else {
+						amenityRepositories.add(repository);
+						indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$
+					}
 				} else {
 					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 				}
@@ -540,16 +596,6 @@ public class ResourceManager {
 	
 	
 	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
-	public List<AmenityIndexRepository> searchAmenityRepositories(double latitude, double longitude) {
-		List<AmenityIndexRepository> repos = new ArrayList<AmenityIndexRepository>();
-		for (AmenityIndexRepository index : amenityRepositories) {
-			if (index.checkContains(latitude,longitude)) {
-				repos.add(index);
-			}
-		}
-		return repos;
-	}
-	
 	public List<Amenity> searchAmenities(PoiFilter filter,
 			double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, 
 			double lat, double lon) {
@@ -647,6 +693,7 @@ public class ResourceManager {
 			r.close();
 		}
 		amenityRepositories.clear();
+		updatablePoiDb = null;
 	}
 	
 	public void closeAddresses(){

@@ -17,7 +17,6 @@ import net.osmand.data.Amenity;
 import net.osmand.map.ITileSource;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
-import net.osmand.plus.AmenityIndexRepository;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandSettings;
@@ -208,11 +207,13 @@ public class MapActivityActions {
     		Toast.makeText(mapActivity, getString(R.string.update_poi_is_not_available_for_zoom), Toast.LENGTH_SHORT).show();
     		return;
     	}
-    	final List<AmenityIndexRepository> repos = ((OsmandApplication) mapActivity.getApplication()).
-    								getResourceManager().searchAmenityRepositories(latitude, longitude);
-    	if(repos.isEmpty()){
+    	final AmenityIndexRepositoryOdb repo = ((OsmandApplication) mapActivity.getApplication()).
+    								getResourceManager().getUpdatablePoiDb();
+    	if(repo == null){
     		Toast.makeText(mapActivity, getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_SHORT).show();
     		return;
+    	} else {
+    		Toast.makeText(mapActivity, getString(R.string.update_poi_does_not_change_indexes), Toast.LENGTH_SHORT).show();
     	}
     	final OsmandMapTileView mapView = mapActivity.getMapView();
     	Rect pixRect = new Rect(-mapView.getWidth()/2, -mapView.getHeight()/2, 3*mapView.getWidth()/2, 3*mapView.getHeight()/2);
@@ -235,11 +236,7 @@ public class MapActivityActions {
 					if(!loadingPOIs){
 						showToast(getString(R.string.update_poi_error_loading));
 					} else {
-						for(AmenityIndexRepository r  : repos){
-							if(r instanceof AmenityIndexRepositoryOdb){
-								((AmenityIndexRepositoryOdb) r).updateAmenities(amenities, leftLon, topLat, rightLon, bottomLat);
-							}
-						}
+						repo.updateAmenities(amenities, leftLon, topLat, rightLon, bottomLat);
 						showToast(MessageFormat.format(getString(R.string.update_poi_success), amenities.size()));
 						mapView.refreshMap();
 					}

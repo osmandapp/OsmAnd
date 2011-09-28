@@ -44,6 +44,10 @@ public class BaseLocationIndexRepository<T extends MapObject> {
 		cZoom = 0;
 	}
 	
+	protected String getMetaLocation(String tableLocation) {
+		return "loc_meta_" + tableLocation;
+	}
+	
 	public boolean initialize(final IProgress progress, File file, int version, String tableLocation, boolean searchX31) {
 		long start = System.currentTimeMillis();
 		if(db != null){
@@ -57,7 +61,7 @@ public class BaseLocationIndexRepository<T extends MapObject> {
 			db = null;
 			return false;
 		}
-		String metaTable = "loc_meta_"+tableLocation; //$NON-NLS-1$
+		String metaTable = getMetaLocation(tableLocation); 
 		Cursor cursor = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='"+metaTable+"'", null); //$NON-NLS-1$ //$NON-NLS-2$
 		boolean dbExist = cursor.moveToFirst();
 		cursor.close();
@@ -109,13 +113,19 @@ public class BaseLocationIndexRepository<T extends MapObject> {
 				query.close();
 			}
 			if (write) {
-				db.execSQL("INSERT INTO " + metaTable + " VALUES (?, ?, ? ,?)", new Double[]{dataTopLatitude, dataRightLongitude, dataBottomLatitude, dataLeftLongitude}); //$NON-NLS-1$ //$NON-NLS-2$
+				updateMaxMinBoundaries(tableLocation);
 			}
 		}
 		if (log.isDebugEnabled()) {
 			log.debug("Initializing db " + file.getAbsolutePath() + " " + (System.currentTimeMillis() - start) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		return true;
+	}
+	
+	protected void updateMaxMinBoundaries(String tableLocation){
+		String metatable = getMetaLocation(tableLocation);
+		db.execSQL("DELETE FROM " + metatable + " WHERE 1= 1" ) ;
+		db.execSQL("INSERT INTO " + metatable + " VALUES (?, ?, ? ,?)", new Double[]{dataTopLatitude, dataRightLongitude, dataBottomLatitude, dataLeftLongitude}); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	public synchronized void close() {
@@ -164,7 +174,7 @@ public class BaseLocationIndexRepository<T extends MapObject> {
 	}
 
 	public boolean checkContains(double latitude, double longitude){
-		if(latitude < dataTopLatitude && latitude > dataBottomLatitude && longitude > dataLeftLongitude && longitude < dataRightLongitude){
+		if(latitude <= dataTopLatitude && latitude >= dataBottomLatitude && longitude >= dataLeftLongitude && longitude <= dataRightLongitude){
 			return true;
 		}
 		return false;

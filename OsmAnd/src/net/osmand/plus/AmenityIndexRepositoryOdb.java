@@ -29,6 +29,7 @@ import org.apache.commons.logging.Log;
 import org.xml.sax.SAXException;
 
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
 public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Amenity> implements AmenityIndexRepository {
@@ -91,37 +92,6 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 		return amenities;
 	}
 	
-	public boolean addAmenity(Amenity a){
-		insertAmenities(Collections.singleton(a));
-		return true;
-	}
-	
-	public boolean updateAmenity(Amenity a){
-		StringBuilder b = new StringBuilder();
-		b.append("UPDATE " + IndexConstants.POI_TABLE + " SET "); //$NON-NLS-1$ //$NON-NLS-2$
-		b.append(" x = ?, "). //$NON-NLS-1$
-		  append(" y = ?, "). //$NON-NLS-1$
-		  append(" opening_hours = ?, "). //$NON-NLS-1$
-		  append(" name = ?, "). //$NON-NLS-1$
-		  append(" name_en = ?, ").//$NON-NLS-1$
-		  append(" type = ?, "). //$NON-NLS-1$
-		  append(" subtype = ? "). //$NON-NLS-1$
-		  append(" site = ? "). //$NON-NLS-1$
-		  append(" phone = ? "). //$NON-NLS-1$
-		  append(" WHERE append( id = ?"); //$NON-NLS-1$
-		
-		db.execSQL(b.toString(),			
-				new Object[] { MapUtils.get31TileNumberX(a.getLocation().getLongitude()), MapUtils.get31TileNumberY(a.getLocation().getLatitude()),  
-			a.getOpeningHours(), a.getName(), a.getEnName(), AmenityType.valueToString(a.getType()), a.getSubType(),
-			a.getSite(), a.getPhone(),  a.getId()});
-		return true;
-	}
-	
-	public boolean deleteAmenities(long id){
-		db.execSQL("DELETE FROM " + IndexConstants.POI_TABLE+ " WHERE id="+id); //$NON-NLS-1$ //$NON-NLS-2$
-		return true;
-	}
-	
 	
 	public synchronized void clearCache(){
 		super.clearCache();
@@ -176,6 +146,37 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 		return super.initialize(progress, file, IndexConstants.POI_TABLE_VERSION, IndexConstants.POI_TABLE, true);
 	}
 	
+	// Update functionality
+	public boolean addAmenity(Amenity a){
+		insertAmenities(Collections.singleton(a));
+		return true;
+	}
+	
+	public boolean updateAmenity(Amenity a){
+		StringBuilder b = new StringBuilder();
+		b.append("UPDATE " + IndexConstants.POI_TABLE + " SET "); //$NON-NLS-1$ //$NON-NLS-2$
+		b.append(" x = ?, "). //$NON-NLS-1$
+		  append(" y = ?, "). //$NON-NLS-1$
+		  append(" opening_hours = ?, "). //$NON-NLS-1$
+		  append(" name = ?, "). //$NON-NLS-1$
+		  append(" name_en = ?, ").//$NON-NLS-1$
+		  append(" type = ?, "). //$NON-NLS-1$
+		  append(" subtype = ? "). //$NON-NLS-1$
+		  append(" site = ? "). //$NON-NLS-1$
+		  append(" phone = ? "). //$NON-NLS-1$
+		  append(" WHERE append( id = ?"); //$NON-NLS-1$
+		
+		db.execSQL(b.toString(),			
+				new Object[] { MapUtils.get31TileNumberX(a.getLocation().getLongitude()), MapUtils.get31TileNumberY(a.getLocation().getLatitude()),  
+			a.getOpeningHours(), a.getName(), a.getEnName(), AmenityType.valueToString(a.getType()), a.getSubType(),
+			a.getSite(), a.getPhone(),  a.getId()});
+		return true;
+	}
+	
+	public boolean deleteAmenities(long id){
+		db.execSQL("DELETE FROM " + IndexConstants.POI_TABLE+ " WHERE id="+id); //$NON-NLS-1$ //$NON-NLS-2$
+		return true;
+	}
 	
 	
 	public boolean updateAmenities(List<Amenity> amenities, double leftLon, double topLat, double rightLon, double bottomLat){
@@ -204,6 +205,10 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 			stat.bindLong(1, a.getId());
 			stat.bindDouble(2, MapUtils.get31TileNumberX(a.getLocation().getLongitude()));
 			stat.bindDouble(3, MapUtils.get31TileNumberY(a.getLocation().getLatitude()));
+			dataBottomLatitude = Math.min(a.getLocation().getLatitude(), dataBottomLatitude); 
+			dataTopLatitude = Math.max(a.getLocation().getLatitude(), dataTopLatitude);
+			dataLeftLongitude = Math.min(a.getLocation().getLongitude(), dataLeftLongitude);
+			dataRightLongitude = Math.max(a.getLocation().getLongitude(), dataRightLongitude);
 			bindString(stat, 4, a.getEnName());
 			bindString(stat, 5, a.getName());
 			bindString(stat, 6, AmenityType.valueToString(a.getType()));
@@ -214,9 +219,23 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 			stat.execute();
 		}
 		stat.close();
+		updateMaxMinBoundaries(IndexConstants.POI_TABLE);
+		
 	}
 
 	private final static String SITE_API = "http://api.openstreetmap.org/"; //$NON-NLS-1$
+	
+	public static void createAmenityIndexRepository(File file) {
+		SQLiteDatabase db = SQLiteDatabase.openDatabase(file.getAbsolutePath(), null, SQLiteDatabase.CREATE_IF_NECESSARY);
+		db.execSQL("create table " + IndexConstants.POI_TABLE + //$NON-NLS-1$
+				"(id bigint, x int, y int, name_en varchar(1024), name varchar(1024), "
+				+ "type varchar(1024), subtype varchar(1024), opening_hours varchar(1024), phone varchar(1024), site varchar(1024),"
+				+ "primary key(id, type, subtype))");
+		db.execSQL("create index poi_loc on poi (x, y, type, subtype)");
+		db.execSQL("create index poi_id on poi (id, type, subtype)");
+		db.setVersion(IndexConstants.POI_TABLE_VERSION);
+		db.close();
+	}
 	
 	public static boolean loadingPOIs(List<Amenity> amenities, double leftLon, double topLat, double righLon, double bottomLat) {
 		try {

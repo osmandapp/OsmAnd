@@ -221,7 +221,8 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiNameIndex.TABLE_FIELD_NUMBER : {
 				int length = readInt();
 				int oldLimit = codedIS.pushLimit(length);
-				dataOffsets = readIndexedStringTable(instance, query);
+				dataOffsets = new TIntArrayList();
+				readIndexedStringTable(instance, query, "", dataOffsets, 0);
 				codedIS.popLimit(oldLimit);
 				break; }
 			case OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER : {
@@ -297,39 +298,58 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
-	private TIntArrayList readIndexedStringTable(Collator instance, String query) throws IOException {
-		// TODO support fully functional indexed string table
-		TIntArrayList list = new TIntArrayList();
-		int charMatches = 0;
-		boolean keyMatches = false;
+	private int readIndexedStringTable(Collator instance, String query, String prefix, TIntArrayList list, int charMatches) throws IOException {
+		String key = null;
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				return list;
+				return charMatches;
 			case OsmandOdb.IndexedStringTable.KEY_FIELD_NUMBER :
-				String key = codedIS.readString();
-				keyMatches = false;
-				int i=0;
-				for(; i<query.length(); i++){
-					if (i >= key.length() || instance.compare(key.substring(i, i + 1), query.substring(i, i + 1)) != 0) {
-						break;
-					}
+				key = codedIS.readString();
+				if(prefix.length() > 0){
+					key = prefix + key;
 				}
-				if(i >= charMatches && i > 0){
-					if(i > charMatches){
-						list.clear();
-						charMatches = i;
+				// check query is part of key (the best matching)
+				if(CollatorStringMatcher.cmatches(instance, key, query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)){
+					if(query.length() >= charMatches){
+						if(query.length() > charMatches){
+							charMatches = key.length();
+							list.clear();
+						}
+					} else {
+						key = null;
 					}
-					keyMatches = true;
+					// check key is part of query
+				} else if (CollatorStringMatcher.cmatches(instance, query, key, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+					if (key.length() >= charMatches) {
+						if (key.length() > charMatches) {
+							charMatches = key.length();
+							list.clear();
+						}
+					} else {
+						key = null;
+					}
+				} else {
+					key = null;
 				}
 				break;
 			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER :
 				int val = codedIS.readUInt32();
-				if (keyMatches) {
+				if (key != null) {
 					list.add(val);
 				}
+				break;
+			case OsmandOdb.IndexedStringTable.SUBTABLES_FIELD_NUMBER :
+				int len = codedIS.readRawVarint32();
+				int oldLim = codedIS.pushLimit(len);
+				if (key != null) {
+					charMatches = readIndexedStringTable(instance, query, key, list, charMatches);
+				} else {
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+				}
+				codedIS.popLimit(oldLim);
 				break;
 			default:
 				skipUnknownField(t);
