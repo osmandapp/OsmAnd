@@ -61,7 +61,6 @@ public class MapActivityActions {
 		this.mapActivity = mapActivity;
 	}
 
-	@SuppressWarnings("unchecked")
 	protected void addFavouritePoint(final double latitude, final double longitude){
     	final Resources resources = mapActivity.getResources();
     	final FavouritePoint point = new FavouritePoint(latitude, longitude, resources.getString(R.string.add_favorite_dialog_default_favourite_name),
@@ -75,7 +74,7 @@ public class MapActivityActions {
 		editText.setText(point.getName());
 		final AutoCompleteTextView cat =  (AutoCompleteTextView) v.findViewById(R.id.Category);
 		cat.setText(point.getCategory());
-		cat.setAdapter(new ArrayAdapter(mapActivity, R.layout.list_textview, helper.getFavoriteGroups().keySet().toArray()));
+		cat.setAdapter(new ArrayAdapter<String>(mapActivity, R.layout.list_textview, helper.getFavoriteGroups().keySet().toArray(new String[] {})));
 		
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setNeutralButton(R.string.update_existing, new DialogInterface.OnClickListener(){
