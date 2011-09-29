@@ -205,10 +205,10 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 			stat.bindLong(1, a.getId());
 			stat.bindDouble(2, MapUtils.get31TileNumberX(a.getLocation().getLongitude()));
 			stat.bindDouble(3, MapUtils.get31TileNumberY(a.getLocation().getLatitude()));
-			dataBottomLatitude = Math.min(a.getLocation().getLatitude(), dataBottomLatitude); 
-			dataTopLatitude = Math.max(a.getLocation().getLatitude(), dataTopLatitude);
-			dataLeftLongitude = Math.min(a.getLocation().getLongitude(), dataLeftLongitude);
-			dataRightLongitude = Math.max(a.getLocation().getLongitude(), dataRightLongitude);
+			dataBottomLatitude = Math.min(a.getLocation().getLatitude() - 0.5, dataBottomLatitude); 
+			dataTopLatitude = Math.max(a.getLocation().getLatitude() + 0.5, dataTopLatitude);
+			dataLeftLongitude = Math.min(a.getLocation().getLongitude() - 0.5, dataLeftLongitude);
+			dataRightLongitude = Math.max(a.getLocation().getLongitude() + 0.5, dataRightLongitude);
 			bindString(stat, 4, a.getEnName());
 			bindString(stat, 5, a.getName());
 			bindString(stat, 6, AmenityType.valueToString(a.getType()));

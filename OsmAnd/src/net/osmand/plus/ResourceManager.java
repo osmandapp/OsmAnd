@@ -512,15 +512,8 @@ public class ResourceManager {
 			}
 		}
 		File updatablePoiDbFile = context.getSettings().extendOsmandPath(MINE_POI_DB);
-		if(updatablePoiDbFile.exists() && file.canRead()){
-			try {
-				AmenityIndexRepositoryOdb odb = new AmenityIndexRepositoryOdb();
-				boolean initialize = odb.initialize(progress, updatablePoiDbFile);
-				if(initialize){
-					this.updatablePoiDb = odb;
-				}
-			} catch (SQLiteException e) {
-			}
+		if(updatablePoiDbFile.exists() && updatablePoiDbFile.canRead()){
+			tryToOpenUpdatablePoiDb(updatablePoiDbFile);
 		}
 		return warnings;
 	}

@@ -614,10 +614,10 @@ public class EditingPOIActivity {
 			@Override
 			public void run() {
 				if (repo == null) {
-					Toast.makeText(app, app.getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_SHORT).show();
+					Toast.makeText(app, app.getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_LONG).show();
 					return;
 				} else {
-					Toast.makeText(app, app.getString(R.string.update_poi_does_not_change_indexes), Toast.LENGTH_SHORT).show();
+					Toast.makeText(app, app.getString(R.string.update_poi_does_not_change_indexes), Toast.LENGTH_LONG).show();
 				}
 			}
 		});

@@ -125,6 +125,8 @@ public class PoiFiltersHelper {
 			cacheUserDefinedFilters = new ArrayList<PoiFilter>();
 			PoiFilter filter = new PoiFilter(application.getString(R.string.poi_filter_custom_filter), PoiFilter.CUSTOM_FILTER_ID, new LinkedHashMap<AmenityType, LinkedHashSet<String>>(), application); //$NON-NLS-1$
 			cacheUserDefinedFilters.add(filter);
+			filter = new PoiFilter(application.getString(R.string.poi_filter_by_name), PoiFilter.BY_NAME_FILTER_ID, new LinkedHashMap<AmenityType, LinkedHashSet<String>>(), application); //$NON-NLS-1$
+			cacheUserDefinedFilters.add(filter);
 			PoiFilterDbHelper helper = openDbHelper();
 			cacheUserDefinedFilters.addAll(helper.getFilters());
 			helper.close();
@@ -153,7 +155,8 @@ public class PoiFiltersHelper {
 	}
 	
 	public boolean removePoiFilter(PoiFilter filter){
-		if(filter.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)){
+		if(filter.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID) || 
+				filter.getFilterId().equals(PoiFilter.BY_NAME_FILTER_ID)){
 			return false;
 		}
 		PoiFilterDbHelper helper = openDbHelper();
@@ -184,7 +187,8 @@ public class PoiFiltersHelper {
 	
 	
 	public boolean editPoiFilter(PoiFilter filter) {
-		if (filter.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)) {
+		if (filter.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID) || 
+				filter.getFilterId().equals(PoiFilter.BY_NAME_FILTER_ID)) {
 			return false;
 		}
 		PoiFilterDbHelper helper = openDbHelper();

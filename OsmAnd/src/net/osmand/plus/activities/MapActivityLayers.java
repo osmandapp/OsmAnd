@@ -423,8 +423,10 @@ public class MapActivityLayers {
 		
 		final PoiFiltersHelper poiFilters = ((OsmandApplication)getApplication()).getPoiFilters();
 		for (PoiFilter f : poiFilters.getUserDefinedPoiFilters()) {
-			userDefined.add(f);
-			list.add(f.getName());
+			if(!f.getFilterId().equals(PoiFilter.BY_NAME_FILTER_ID)){
+				userDefined.add(f);
+				list.add(f.getName());
+			}
 		}
 		for(AmenityType t : AmenityType.values()){
 			list.add(OsmAndFormatter.toPublicString(t, activity));

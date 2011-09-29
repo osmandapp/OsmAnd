@@ -210,10 +210,10 @@ public class MapActivityActions {
     	final AmenityIndexRepositoryOdb repo = ((OsmandApplication) mapActivity.getApplication()).
     								getResourceManager().getUpdatablePoiDb();
     	if(repo == null){
-    		Toast.makeText(mapActivity, getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_SHORT).show();
+    		Toast.makeText(mapActivity, getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_LONG).show();
     		return;
     	} else {
-    		Toast.makeText(mapActivity, getString(R.string.update_poi_does_not_change_indexes), Toast.LENGTH_SHORT).show();
+    		Toast.makeText(mapActivity, getString(R.string.update_poi_does_not_change_indexes), Toast.LENGTH_LONG).show();
     	}
     	final OsmandMapTileView mapView = mapActivity.getMapView();
     	Rect pixRect = new Rect(-mapView.getWidth()/2, -mapView.getHeight()/2, 3*mapView.getWidth()/2, 3*mapView.getHeight()/2);

@@ -19,6 +19,7 @@ public class PoiFilter {
 	public final static String STD_PREFIX = "std_"; //$NON-NLS-1$
 	public final static String USER_PREFIX = "user_"; //$NON-NLS-1$
 	public final static String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id"; //$NON-NLS-1$
+	public final static String BY_NAME_FILTER_ID = USER_PREFIX + "by_name"; //$NON-NLS-1$
 	
 	private Map<AmenityType, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<AmenityType, LinkedHashSet<String>>();
 	private String filterByName = null;

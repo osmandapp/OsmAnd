@@ -555,9 +555,8 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 	}
 
 	public static void main(String[] args) throws SQLException, FileNotFoundException, IOException {
-		// TODO support multiple reading amenity types! +/-
-		// TODO support proper POI editing
 		// TODO support cancelling poi search request! Do it in another thread (Check is cancelled()!!!)
+		// TODO implement activity searching by name
 		long time = System.currentTimeMillis();
 		IndexPoiCreator poiCreator = new IndexPoiCreator();
 //		String fileSqlte = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.odb";
