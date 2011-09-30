@@ -43,7 +43,7 @@ import com.google.protobuf.WireFormat;
 public class BinaryMapIndexReader {
 	
 	public final static int TRANSPORT_STOP_ZOOM = 24;
-	protected static final int SHIFT_COORDINATES = 5;
+	public static final int SHIFT_COORDINATES = 5;
 	private final static Log log = LogUtil.getLog(BinaryMapIndexReader.class);
 	
 	private final RandomAccessFile raf;
