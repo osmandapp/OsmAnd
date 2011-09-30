@@ -433,6 +433,7 @@
 		<subtype id="22" point="true" polygon="true" tag="natural" value="wetland" minzoom="10" />
 		<subtype id="23" point="true" polygon="true" tag="natural" value="wood" minzoom="8" />
 		<subtype id="23" point="true" polygon="true" tag="landuse" value="wood" minzoom="8" />
+		<subtype id="30" polyline="true" tag="contour" value="elevation" minzoom="8" />
 
 		<subtype id="31" point="true" polygon="true" tag="natural" minzoom="11" />
 	</type>
