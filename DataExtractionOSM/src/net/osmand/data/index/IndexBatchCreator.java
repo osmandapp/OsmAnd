@@ -90,7 +90,6 @@ public class IndexBatchCreator {
 	File osmDirFiles;
 	File indexDirFiles;
 	File backupUploadedFiles;
-	File regionsFile;
 	
 	boolean indexPOI = false;
 	boolean indexTransport = false;
@@ -108,6 +107,7 @@ public class IndexBatchCreator {
 	String cookieSID = "";
 	String pagegen = "";
 	String token = "";
+	private boolean local;
 	
 	
 	public static void main(String[] args) {
@@ -121,6 +121,7 @@ public class IndexBatchCreator {
 		InputStream stream;
 		if(name.equals("-local")){
 			stream = IndexBatchCreator.class.getResourceAsStream("batch.xml");
+			creator.setLocal(true);
 		} else {
 			try {
 				stream = new FileInputStream(name);
@@ -154,6 +155,10 @@ public class IndexBatchCreator {
 		}
 	}
 	
+	private void setLocal(boolean local) {
+		this.local = local;
+	}
+
 	public void runBatch(Document doc) throws SAXException, IOException, ParserConfigurationException{
 		NodeList list = doc.getElementsByTagName("process");
 		if(list.getLength() != 1){
@@ -187,12 +192,20 @@ public class IndexBatchCreator {
 			throw new IllegalArgumentException("Please specify directory with generated index files  as directory_for_index_files (attribute)"); //$NON-NLS-1$
 		}
 		indexDirFiles = new File(dir);
+		InputStream regionsStream = null;
 		if(downloadFiles){
 			dir = process.getAttribute("list_download_regions_file");
 			if(!Algoritms.isEmpty(dir)) {
-				regionsFile = new File(dir);
+				File regionsFile = new File(dir);
 				if(!regionsFile.exists()){
-					throw new IllegalArgumentException("Please specify file with regions to download as list_download_regions_file (attribute)"); //$NON-NLS-1$
+					if (local) {
+						regionsStream = IndexBatchCreator.class.getResourceAsStream("regions.xml");
+					}
+					if (regionsStream == null) {
+						throw new IllegalArgumentException("Please specify file with regions to download as list_download_regions_file (attribute)"); //$NON-NLS-1$
+					}
+				} else {
+					regionsStream = new FileInputStream(regionsFile);
 				}
 			} 
 		}
@@ -242,8 +255,8 @@ public class IndexBatchCreator {
 		
 		List<RegionCountries> countriesToDownload = new ArrayList<RegionCountries>();
 		parseCountriesToDownload(doc, countriesToDownload);
-		if(regionsFile != null){
-			Document innerDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(regionsFile);
+		if(regionsStream != null){
+			Document innerDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(regionsStream);
 			parseCountriesToDownload(innerDoc, countriesToDownload);
 		}
 		
