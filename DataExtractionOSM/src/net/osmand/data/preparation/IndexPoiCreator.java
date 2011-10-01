@@ -556,7 +556,6 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 
 	public static void main(String[] args) throws SQLException, FileNotFoundException, IOException {
 		// TODO support cancelling poi search request! Do it in another thread (Check is cancelled()!!!)
-		// TODO make more discrete POI Filter
 		// TODO implement UI to show matching by name subcategories
 		long time = System.currentTimeMillis();
 		IndexPoiCreator poiCreator = new IndexPoiCreator();

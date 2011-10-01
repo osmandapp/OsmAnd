@@ -21,6 +21,7 @@ public class SearchByNameFilter extends PoiFilter {
 	
 	public SearchByNameFilter(OsmandApplication application) {
 		super(application.getString(R.string.poi_filter_by_name), FILTER_ID, new LinkedHashMap<AmenityType, LinkedHashSet<String>>(), application);
+		this.distanceToSearchValues = new double[] {100, 1000, 5000};
 	}
 	
 	@Override
@@ -37,22 +38,6 @@ public class SearchByNameFilter extends PoiFilter {
 		this.query = query;
 	}
 	
-	@Override
-	protected int getInitialZoom() {
-		return 9;
-	}
-
-	@Override
-	public boolean isSearchFurtherAvailable() {
-		return zoom >= 3;
-	}
-
-	@Override
-	public List<Amenity> searchFurther(double latitude, double longitude, ResultMatcher<Amenity> matcher) {
-		zoom -= 3;
-		return super.searchFurther(latitude, longitude, matcher);
-	}
-
 	@Override
 	protected List<Amenity> searchAmenities(PoiFilter poiFilter, double lat, double lon, double topLatitude,
 			double bottomLatitude, double leftLongitude, double rightLongitude, ResultMatcher<Amenity> matcher) {

@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -202,15 +201,17 @@ public class BinaryMapPoiReaderAdapter {
 							return Double.compare(foffsets.get(object1), foffsets.get(object2));
 						}
 					});
-					int p = 0;
-					for (int i = BUCKET_SEARCH_BY_NAME;; i += BUCKET_SEARCH_BY_NAME) {
-						if (i > offKeys.length) {
-							Arrays.sort(offKeys, p, offKeys.length);
-							break;
-						} else {
-							Arrays.sort(offKeys, p, i);
+					int p = BUCKET_SEARCH_BY_NAME * 3 ;
+					if (p < offKeys.length) {
+						for (int i = p + BUCKET_SEARCH_BY_NAME;; i += BUCKET_SEARCH_BY_NAME) {
+							if (i > offKeys.length) {
+								Arrays.sort(offKeys, p, offKeys.length);
+								break;
+							} else {
+								Arrays.sort(offKeys, p, i);
+							}
+							p = i;
 						}
-						p = i;
 					}
 				}
 				

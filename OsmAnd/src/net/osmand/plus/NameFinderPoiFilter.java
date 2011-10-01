@@ -36,6 +36,7 @@ public class NameFinderPoiFilter extends PoiFilter {
 	public NameFinderPoiFilter(OsmandApplication application) {
 		super(null, application);
 		this.name = application.getString(R.string.poi_filter_nominatim); //$NON-NLS-1$
+		this.distanceToSearchValues = new double[] {1, 2, 5, 10, 20, 30, 100, 250 };
 		this.filterId = FILTER_ID;
 	}
 	
