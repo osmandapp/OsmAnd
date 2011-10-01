@@ -14,6 +14,7 @@ import java.util.Map;
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
+import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.IndexConstants;
@@ -42,7 +43,8 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 	
 	
 	private final String[] columns = new String[]{"id", "x", "y", "name", "name_en", "type", "subtype", "opening_hours", "phone", "site"};        //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$//$NON-NLS-5$//$NON-NLS-6$//$NON-NLS-7$//$NON-NLS-8$ //$NON-NLS-9$ //$NON-NLS-10$
-	public List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom, PoiFilter filter, List<Amenity> amenities){
+	public List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom, PoiFilter filter, 
+			List<Amenity> amenities, ResultMatcher<Amenity> matcher){
 		long now = System.currentTimeMillis();
 		String squery = "? < y AND y < ? AND ? < x AND x < ?"; //$NON-NLS-1$
 		
@@ -77,7 +79,9 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 				am.setOpeningHours(query.getString(7));
 				am.setPhone(query.getString(8));
 				am.setSite(query.getString(9));
-				amenities.add(am);
+				if (matcher == null || matcher.publish(am)) {
+					amenities.add(am);
+				}
 				if(limit != -1 && amenities.size() >= limit){
 					break;
 				}
@@ -111,7 +115,7 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 		int sright = MapUtils.get31TileNumberX(cRightLongitude);
 		int sbottom = MapUtils.get31TileNumberY(cBottomLatitude);
 		int stop = MapUtils.get31TileNumberY(cTopLatitude);
-		searchAmenities(stop, sleft, sbottom, sright, cZoom, filter, tempList);
+		searchAmenities(stop, sleft, sbottom, sright, cZoom, filter, tempList, null);
 		synchronized (this) {
 			cachedObjects.clear();
 			cachedObjects.addAll(tempList);

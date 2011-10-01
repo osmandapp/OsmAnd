@@ -315,7 +315,7 @@ public class BinaryMapPoiReaderAdapter {
 				if(CollatorStringMatcher.cmatches(instance, key, query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)){
 					if(query.length() >= charMatches){
 						if(query.length() > charMatches){
-							charMatches = key.length();
+							charMatches = query.length();
 							list.clear();
 						}
 					} else {

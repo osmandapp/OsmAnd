@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.LogUtil;
+import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.MapUtils;
@@ -24,6 +25,7 @@ public class NameFinderPoiFilter extends PoiFilter {
 
 	public static final String FILTER_ID = "name_finder"; //$NON-NLS-1$
 	private static final Log log = LogUtil.getLog(NameFinderPoiFilter.class);
+	private static final int LIMIT = 300;
 	
 	List<Amenity> searchedAmenities = new ArrayList<Amenity>();
 	
@@ -53,13 +55,13 @@ public class NameFinderPoiFilter extends PoiFilter {
 
 	@Override
 	protected List<Amenity> searchAmenities(PoiFilter poiFilter, double lat, double lon, double topLatitude,
-			double bottomLatitude, double leftLongitude, double rightLongitude) {
+			double bottomLatitude, double leftLongitude, double rightLongitude, ResultMatcher<Amenity> matcher) {
 		searchedAmenities.clear();
 		
 		String viewbox = "viewboxlbrt="+((float) leftLongitude)+","+((float) bottomLatitude)+","+((float) rightLongitude)+","+((float) topLatitude);
 		try {
 			lastError = "";
-			String urlq = "http://nominatim.openstreetmap.org/search/"+URLEncoder.encode(query)+ "?format=xml&addressdetails=1&limit=200&bounded=1&"+viewbox;
+			String urlq = "http://nominatim.openstreetmap.org/search/"+URLEncoder.encode(query)+ "?format=xml&addressdetails=1&limit="+LIMIT+"&bounded=1&"+viewbox;
 			log.info(urlq);
 			URL url = new URL(urlq); //$NON-NLS-1$
 			InputStream stream = url.openStream();
@@ -91,7 +93,9 @@ public class NameFinderPoiFilter extends PoiFilter {
 								a.setEnName(Junidecode.unidecode(name));
 								a.setType(AmenityType.OTHER);
 								a.setSubType(parser.getAttributeValue("", "type"));  //$NON-NLS-1$//$NON-NLS-2$
-								searchedAmenities.add(a);
+								if (matcher == null || matcher.publish(a)) {
+									searchedAmenities.add(a);
+								}
 							} catch (NullPointerException e) {
 								log.info("Invalid attributes", e); //$NON-NLS-1$
 							} catch (NumberFormatException e) {

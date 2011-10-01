@@ -21,6 +21,7 @@ import java.util.TreeMap;
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
+import net.osmand.ResultMatcher;
 import net.osmand.Version;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
@@ -591,13 +592,41 @@ public class ResourceManager {
 	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
 	public List<Amenity> searchAmenities(PoiFilter filter,
 			double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, 
-			double lat, double lon) {
+			double lat, double lon, ResultMatcher<Amenity> matcher) {
 		List<Amenity> amenities = new ArrayList<Amenity>();
 		for (AmenityIndexRepository index : amenityRepositories) {
 			if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
 				index.searchAmenities(MapUtils.get31TileNumberY(topLatitude), MapUtils.get31TileNumberX(leftLongitude), 
-						MapUtils.get31TileNumberY(bottomLatitude), MapUtils.get31TileNumberX(rightLongitude), -1, filter, amenities);
+						MapUtils.get31TileNumberY(bottomLatitude), MapUtils.get31TileNumberX(rightLongitude), -1, filter, amenities, matcher);
 			}
+		}
+
+		return amenities;
+	}
+	
+	public List<Amenity> searchAmenitiesByName(String searchQuery,
+			double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, 
+			double lat, double lon, ResultMatcher<Amenity> matcher) {
+		List<Amenity> amenities = new ArrayList<Amenity>();
+		List<AmenityIndexRepositoryBinary> list = new ArrayList<AmenityIndexRepositoryBinary>();
+		for (AmenityIndexRepository index : amenityRepositories) {
+			if (index instanceof AmenityIndexRepositoryBinary) {
+				if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
+					if(index.checkContains(lat, lon)){
+						list.add(0, (AmenityIndexRepositoryBinary) index);
+					} else {
+						list.add((AmenityIndexRepositoryBinary) index);
+					}
+					
+				}
+			}
+		}
+		for (AmenityIndexRepositoryBinary index : list) {
+			if (matcher != null && matcher.isCancelled()) {
+				break;
+			}
+			List<Amenity> result = index.searchAmenitiesByName(MapUtils.get31TileNumberX(lon), MapUtils.get31TileNumberY(lat), searchQuery, matcher);
+			amenities.addAll(result);
 		}
 
 		return amenities;

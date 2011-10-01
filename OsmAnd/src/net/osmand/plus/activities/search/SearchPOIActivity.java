@@ -3,6 +3,8 @@
  */
 package net.osmand.plus.activities.search;
 
+import gnu.trove.set.hash.TLongHashSet;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -12,6 +14,7 @@ import java.util.List;
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
+import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.OpeningHoursParser;
@@ -20,6 +23,7 @@ import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
+import net.osmand.plus.SearchByNameFilter;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandApplication;
 import android.app.AlertDialog;
@@ -122,14 +126,19 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			@Override
 			public void onClick(View v) {
 				String query = searchFilter.getText().toString();
-				if (query.length() == 0 && isNameFinderFilter()) {
+				if (query.length() < 2 && (isNameFinderFilter() || isSearchByNameFilter())) {
 					Toast.makeText(SearchPOIActivity.this, R.string.poi_namefinder_query_empty, Toast.LENGTH_LONG).show();
 					return;
 				}
-				if(filter instanceof NameFinderPoiFilter && 
+				if(isNameFinderFilter() && 
 						!Algoritms.objectEquals(((NameFinderPoiFilter) filter).getQuery(), query)){
 					filter.clearPreviousZoom();
 					((NameFinderPoiFilter) filter).setQuery(query);
+					runNewSearchQuery(SearchAmenityRequest.buildRequest(location, SearchAmenityRequest.NEW_SEARCH_INIT));
+				} else if(isSearchByNameFilter() && 
+						!Algoritms.objectEquals(((SearchByNameFilter) filter).getQuery(), query)){
+					filter.clearPreviousZoom();
+					((SearchByNameFilter) filter).setQuery(query);
 					runNewSearchQuery(SearchAmenityRequest.buildRequest(location, SearchAmenityRequest.NEW_SEARCH_INIT));
 				} else {
 					runNewSearchQuery(SearchAmenityRequest.buildRequest(location, SearchAmenityRequest.SEARCH_FURTHER));
@@ -152,10 +161,11 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		searchFilter.addTextChangedListener(new TextWatcher(){
 			@Override
 			public void afterTextChanged(Editable s) {
-				if(!isNameFinderFilter()){
+				if(!isNameFinderFilter() && !isSearchByNameFilter()){
 					amenityAdapter.getFilter().filter(s);
 				} else {
 					searchPOILevel.setEnabled(true);
+					searchPOILevel.setText(R.string.search_button);
 				}
 			}
 			@Override
@@ -223,13 +233,14 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			clearSearchQuery();
 		}
 		
-		if(isNameFinderFilter()){
+		if(isNameFinderFilter() || isSearchByNameFilter() ){
 			showFilter.setVisibility(View.GONE);
 			searchFilterLayout.setVisibility(View.VISIBLE);
 		} else {
 			showFilter.setVisibility(View.VISIBLE);
 			showOnMap.setEnabled(filter != null);
 		}
+		showOnMap.setVisibility(isSearchByNameFilter() ? View.INVISIBLE : View.VISIBLE);
 		
 		if (filter != null) {
 			searchArea.setText(filter.getSearchArea());
@@ -255,7 +266,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		if(location == null){
 			searchPOILevel.setText(R.string.search_poi_location);
 			searchPOILevel.setEnabled(false);
-		} else if (!isNameFinderFilter()) {
+		} else if (!isNameFinderFilter() && !isSearchByNameFilter()) {
 			searchPOILevel.setText(R.string.search_POI_level_btn);
 			searchPOILevel.setEnabled(currentSearchTask.getStatus() != Status.RUNNING &&
 					filter.isSearchFurtherAvailable());
@@ -273,7 +284,7 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			Location searchedLocation = getSearchedLocation();
 			if (searchedLocation == null) {
   				searchedLocation = l;
-				if (!isNameFinderFilter()) {
+				if (!isNameFinderFilter() && !isSearchByNameFilter()) {
 					runNewSearchQuery(SearchAmenityRequest.buildRequest(l, SearchAmenityRequest.NEW_SEARCH_INIT));
 				}
 				handled = true;
@@ -361,6 +372,10 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 	
 	public boolean isNameFinderFilter(){
 		return filter instanceof NameFinderPoiFilter; 
+	}
+	
+	public boolean isSearchByNameFilter(){
+		return filter != null && PoiFilter.BY_NAME_FILTER_ID.equals(filter.getFilterId()); 
 	}
 	
 
@@ -459,9 +474,11 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		}
 	}
 	
-	class SearchAmenityTask extends AsyncTask<Void, String, List<Amenity>> {
+	class SearchAmenityTask extends AsyncTask<Void, Amenity, List<Amenity>> implements ResultMatcher<Amenity> {
 		
 		private SearchAmenityRequest request;
+		private TLongHashSet existingObjects = null;
+		private final static int LIMIT_TO_LIVE_SEARCH = 150;
 		
 		public SearchAmenityTask(SearchAmenityRequest request){
 			this.request = request;
@@ -477,6 +494,17 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			findViewById(R.id.ProgressBar).setVisibility(View.VISIBLE);
 			findViewById(R.id.SearchAreaText).setVisibility(View.GONE);
 			searchPOILevel.setEnabled(false);
+			if(request.type == SearchAmenityRequest.NEW_SEARCH_INIT){
+				amenityAdapter.clear();
+			} else if (request.type == SearchAmenityRequest.SEARCH_FURTHER) {
+				List<Amenity> list = amenityAdapter.getOriginalAmenityList();
+				if (list.size() < LIMIT_TO_LIVE_SEARCH) {
+					existingObjects = new TLongHashSet();
+					for (Amenity a : list) {
+						existingObjects.add(a.getId());
+					}
+				}
+			}
 		}
 		
 		@Override
@@ -484,17 +512,26 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			findViewById(R.id.ProgressBar).setVisibility(View.GONE);
 			findViewById(R.id.SearchAreaText).setVisibility(View.VISIBLE);
 			searchPOILevel.setEnabled(filter.isSearchFurtherAvailable());
-			if(isNameFinderFilter()){
-				if(!Algoritms.isEmpty(((NameFinderPoiFilter) filter).getLastError())){
-					Toast.makeText(SearchPOIActivity.this, ((NameFinderPoiFilter) filter).getLastError(), 
-							Toast.LENGTH_LONG).show();
+			searchPOILevel.setText(R.string.search_POI_level_btn);
+			if (isNameFinderFilter()) {
+				if (!Algoritms.isEmpty(((NameFinderPoiFilter) filter).getLastError())) {
+					Toast.makeText(SearchPOIActivity.this, ((NameFinderPoiFilter) filter).getLastError(), Toast.LENGTH_LONG).show();
 				}
 				amenityAdapter.setNewModel(result, "");
 				showOnMap.setEnabled(amenityAdapter.getCount() > 0);
+			} else if (isSearchByNameFilter()) {
+				amenityAdapter.setNewModel(result, "");
 			} else {
 				amenityAdapter.setNewModel(result, searchFilter.getText().toString());
 			}
 			searchArea.setText(filter.getSearchArea());
+		}
+		
+		@Override
+		protected void onProgressUpdate(Amenity... values) {
+			for(Amenity a : values){
+				amenityAdapter.add(a);
+			}
 		}
 
 
@@ -502,14 +539,27 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		protected List<Amenity> doInBackground(Void... params) {
 			if (request.location != null) {
 				if (request.type == SearchAmenityRequest.NEW_SEARCH_INIT) {
-					return filter.initializeNewSearch(request.location.getLatitude(), request.location.getLongitude(), -1);
+					return filter.initializeNewSearch(request.location.getLatitude(), request.location.getLongitude(), -1, this);
 				} else if (request.type == SearchAmenityRequest.SEARCH_FURTHER) {
-					return filter.searchFurther(request.location.getLatitude(), request.location.getLongitude());
+					return filter.searchFurther(request.location.getLatitude(), request.location.getLongitude(), this);
 				} else if (request.type == SearchAmenityRequest.SEARCH_AGAIN) {
 					return filter.searchAgain(request.location.getLatitude(), request.location.getLongitude());
 				}
 			}
 			return Collections.emptyList();
+		}
+
+		@Override
+		public boolean publish(Amenity object) {
+			if(request.type == SearchAmenityRequest.NEW_SEARCH_INIT){
+				publishProgress(object);
+			} else if (request.type == SearchAmenityRequest.SEARCH_FURTHER) {
+				if(existingObjects != null && !existingObjects.contains(object.getId())){
+					publishProgress(object);
+				}
+			}
+			
+			return true;
 		}
 		
 	}
@@ -522,6 +572,10 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			super(SearchPOIActivity.this, R.layout.searchpoi_list, list);
 			originalAmenityList = new ArrayList<Amenity>(list);
 			this.setNotifyOnChange(false);
+		}
+		
+		public List<Amenity> getOriginalAmenityList() {
+			return originalAmenityList;
 		}
 
 		public void setNewModel(List<Amenity> amenityList, String filter) {
@@ -610,17 +664,19 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		}
 		
 		private final class AmenityFilter extends Filter {
+			
 			@Override
 			protected FilterResults performFiltering(CharSequence constraint) {
 				FilterResults results = new FilterResults();
+				List<Amenity> listToFilter = originalAmenityList;
 				if (constraint == null || constraint.length() == 0) {
-					results.values = originalAmenityList;
-					results.count = originalAmenityList.size();
+					results.values = listToFilter;
+					results.count = listToFilter.size();
 				} else {
 					String lowerCase = constraint.toString()
 							.toLowerCase();
 					List<Amenity> filter = new ArrayList<Amenity>();
-					for (Amenity item : originalAmenityList) {
+					for (Amenity item : listToFilter) {
 						String lower = OsmAndFormatter.getPoiStringWithoutType(item, settings.usingEnglishNames()).toLowerCase();
 						if(lower.indexOf(lowerCase) != -1){
 							filter.add(item);

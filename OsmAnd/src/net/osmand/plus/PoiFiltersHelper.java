@@ -125,7 +125,7 @@ public class PoiFiltersHelper {
 			cacheUserDefinedFilters = new ArrayList<PoiFilter>();
 			PoiFilter filter = new PoiFilter(application.getString(R.string.poi_filter_custom_filter), PoiFilter.CUSTOM_FILTER_ID, new LinkedHashMap<AmenityType, LinkedHashSet<String>>(), application); //$NON-NLS-1$
 			cacheUserDefinedFilters.add(filter);
-			filter = new PoiFilter(application.getString(R.string.poi_filter_by_name), PoiFilter.BY_NAME_FILTER_ID, new LinkedHashMap<AmenityType, LinkedHashSet<String>>(), application); //$NON-NLS-1$
+			filter = new SearchByNameFilter(application);
 			cacheUserDefinedFilters.add(filter);
 			PoiFilterDbHelper helper = openDbHelper();
 			cacheUserDefinedFilters.addAll(helper.getFilters());

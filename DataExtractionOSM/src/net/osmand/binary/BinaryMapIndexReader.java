@@ -197,6 +197,7 @@ public class BinaryMapIndexReader {
 		return false;
 	}
 	
+	
 	public boolean containsPoiData(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
 		for (PoiRegion index : poiIndexes) {
 			if (index.rightLongitude >= leftLongitude && index.leftLongitude <= rightLongitude && 
@@ -919,7 +920,7 @@ public class BinaryMapIndexReader {
 		
 	}
 	
-	public void searchPoiByName(SearchRequest<Amenity> req) throws IOException {
+	public List<Amenity> searchPoiByName(SearchRequest<Amenity> req) throws IOException {
 		if (req.nameQuery == null || req.nameQuery.length() == 0) {
 			throw new IllegalArgumentException();
 		}
@@ -929,6 +930,7 @@ public class BinaryMapIndexReader {
 			poiAdapter.searchPoiByName(poiIndex, req);
 			codedIS.popLimit(old);
 		}
+		return req.getSearchResults();
 	}
 	
 	public List<Amenity> searchPoi(SearchRequest<Amenity> req) throws IOException {
@@ -994,7 +996,8 @@ public class BinaryMapIndexReader {
 	}
 	
 	
-	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int zoom, SearchPoiTypeFilter poiTypeFilter){
+	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int zoom, 
+			SearchPoiTypeFilter poiTypeFilter, ResultMatcher<Amenity> matcher){
 		SearchRequest<Amenity> request = new SearchRequest<Amenity>();
 		request.left = sleft;
 		request.right = sright;
@@ -1002,15 +1005,16 @@ public class BinaryMapIndexReader {
 		request.bottom = sbottom;
 		request.zoom = zoom;
 		request.poiTypeFilter = poiTypeFilter;
+		request.resultMatcher = matcher;
 		
 		return request;
 	}
 	
-	public static SearchRequest<Amenity> buildSearchPoiRequest(int x, int y, String nameFilter, SearchPoiTypeFilter poiTypeFilter){
+	public static SearchRequest<Amenity> buildSearchPoiRequest(int x, int y, String nameFilter, ResultMatcher<Amenity> resultMatcher){
 		SearchRequest<Amenity> request = new SearchRequest<Amenity>();
 		request.x = x;
 		request.y = y;
-		request.poiTypeFilter = poiTypeFilter;
+		request.resultMatcher = resultMatcher;
 		request.nameQuery = nameFilter;
 		return request;
 	}
@@ -1295,7 +1299,7 @@ public class BinaryMapIndexReader {
 				public boolean accept(AmenityType type, String subcategory) {
 					return type == AmenityType.TRANSPORTATION && "fuel".equals(subcategory);
 				}
-			});
+			}, null);
 			List<Amenity> results = reader.searchPoi(req);
 			for (Amenity a : results) {
 				System.out.println(a.getType() + " " + a.getSubType() + " " + a.getName() + " " + a.getLocation());
