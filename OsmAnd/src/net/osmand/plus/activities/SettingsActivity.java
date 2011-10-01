@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import net.osmand.ResultMatcher;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.NavigationService;
@@ -529,10 +530,16 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		} else if (preference == tileSourcePreference  || preference == overlayPreference 
 				|| preference == underlayPreference) {
 			if(MORE_VALUE.equals(newValue)){
-				SettingsActivity.installMapLayers(this, new DialogInterface.OnClickListener() {
+				SettingsActivity.installMapLayers(this, new ResultMatcher<TileSourceTemplate>() {
 					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						updateTileSourceSummary();							
+					public boolean isCancelled() { return false;}
+
+					@Override
+					public boolean publish(TileSourceTemplate object) {
+						if(object == null){
+							updateTileSourceSummary();
+						}
+						return true;
 					}
 				});
 			} else if(preference == tileSourcePreference){
@@ -677,7 +684,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		return false;
 	}
 	
-	public static void installMapLayers(final Activity activity, final DialogInterface.OnClickListener onClickListener){
+	public static void installMapLayers(final Activity activity, final ResultMatcher<TileSourceTemplate> result){
 		final OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
 		final Map<String, String> entriesMap = settings.getTileSourceEntries();
 		if(!settings.isInternetConnectionAvailable(true)){
@@ -717,10 +724,15 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					}
 				}
 				for(TileSourceTemplate ts : toInstall){
-					settings.installTileSource(ts);
+					if(settings.installTileSource(ts)){
+						if(result != null){
+							result.publish(ts);
+						}
+					}
 				}
-				if(onClickListener != null){
-					onClickListener.onClick(dialog, which);
+				// at the end publish null to show end of process
+				if (!toInstall.isEmpty() && result != null) {
+					result.publish(null);
 				}
 			}
 		});
