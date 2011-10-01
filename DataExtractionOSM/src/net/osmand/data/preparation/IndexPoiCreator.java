@@ -558,8 +558,6 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		// TODO support cancelling poi search request! Do it in another thread (Check is cancelled()!!!)
 		// TODO make more discrete POI Filter
 		// TODO implement UI to show matching by name subcategories
-		// TODO Warning if there is no poi files to search by name
-		// TODO sort blocks by distance in binary reader
 		long time = System.currentTimeMillis();
 		IndexPoiCreator poiCreator = new IndexPoiCreator();
 //		String fileSqlte = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.odb";

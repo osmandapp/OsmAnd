@@ -7,10 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.osm.LatLon;
+import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;
+import net.osmand.plus.ResourceManager;
+import net.osmand.plus.SearchByNameFilter;
 import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.OsmandApplication;
 import android.app.ListActivity;
@@ -25,6 +28,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -108,6 +112,13 @@ public class SearchPoiFilterActivity extends ListActivity {
 		if (filter.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)) {
 			showEditActivity(filter);
 			return;
+		}
+		if(!(filter instanceof NameFinderPoiFilter)){
+			ResourceManager rm = ((OsmandApplication) getApplication()).getResourceManager();
+			if(!rm.containsAmenityRepositoryToSearch(filter instanceof SearchByNameFilter)){
+				Toast.makeText(this, R.string.data_to_search_poi_not_available, Toast.LENGTH_LONG);
+				return;
+			}
 		}
 		final Intent newIntent = new Intent(SearchPoiFilterActivity.this, SearchPOIActivity.class);
 		newIntent.putExtra(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());

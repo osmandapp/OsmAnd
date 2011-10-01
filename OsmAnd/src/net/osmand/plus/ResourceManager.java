@@ -604,6 +604,19 @@ public class ResourceManager {
 		return amenities;
 	}
 	
+	public boolean containsAmenityRepositoryToSearch(boolean searchByName){
+		for (AmenityIndexRepository index : amenityRepositories) {
+			if(searchByName){
+				if(index instanceof AmenityIndexRepositoryBinary){
+					return true;
+				}
+			} else {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public List<Amenity> searchAmenitiesByName(String searchQuery,
 			double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, 
 			double lat, double lon, ResultMatcher<Amenity> matcher) {
