@@ -1,0 +1,14 @@
+<renderer name="hiking" depends="all-purpose (more detail)" defaultColor="#f1eee8">
+<order>
+<filter orderType="line">
+<filter tag="countour" order="15" />
+</filter>
+</order>
+<line>
+<filter minzoom="14" color="#ff4900" strokeWidth="1" tag="contour" value="elevation" />
+</line>
+<text>
+<filter minzoom="14" maxzoom="16" textSize="12" textOnPath="true" tag="contour"/>
+</text>
+</renderer>
+

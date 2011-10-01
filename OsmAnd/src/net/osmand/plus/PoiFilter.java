@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import net.osmand.OsmAndFormatter;
+import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.IndexConstants;
@@ -19,6 +20,7 @@ public class PoiFilter {
 	public final static String STD_PREFIX = "std_"; //$NON-NLS-1$
 	public final static String USER_PREFIX = "user_"; //$NON-NLS-1$
 	public final static String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id"; //$NON-NLS-1$
+	public final static String BY_NAME_FILTER_ID = USER_PREFIX + "by_name"; //$NON-NLS-1$
 	
 	private Map<AmenityType, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<AmenityType, LinkedHashSet<String>>();
 	private String filterByName = null;
@@ -27,10 +29,11 @@ public class PoiFilter {
 	protected String name;
 	private final boolean isStandardFilter;
 	
-	private final static int finalZoom = 6;
-	private final static int initialZoom = 14;
-	private int zoom = initialZoom;
-	private final OsmandApplication application;
+	protected final OsmandApplication application;
+	
+	protected int distanceInd = 1;
+	// in kilometers
+	protected double[] distanceToSearchValues = new double[] {1, 2, 3, 5, 10, 30, 100, 250 };
 	
 	
 	// constructor for standard filters
@@ -66,45 +69,41 @@ public class PoiFilter {
 		for(AmenityType t : AmenityType.values()){
 			acceptedTypes.put(t, null);
 		}
+		distanceToSearchValues = new double[] {0.5, 1, 2, 3, 5, 10, 15, 30, 100};
 	}
 	
 	
 	public boolean isSearchFurtherAvailable(){
-		return zoom > finalZoom;
+		return distanceInd < distanceToSearchValues.length - 1;
 	}
 	
-	public List<Amenity> searchFurther(double latitude, double longitude){
-		zoom --;
-		List<Amenity> amenityList = searchAmenities(this, latitude, longitude);
+	
+	public List<Amenity> searchFurther(double latitude, double longitude, ResultMatcher<Amenity> matcher){
+		if(distanceInd < distanceToSearchValues.length - 1){
+			distanceInd ++;
+		}
+		List<Amenity> amenityList = searchAmenities(this, latitude, longitude, matcher);
 		MapUtils.sortListOfMapObject(amenityList, latitude, longitude);
 		
 		return amenityList;
 	}
 	
 	public String getSearchArea(){
-		if(zoom <= 14){
-			int d = (int) (1 * (1 << (14 - zoom)));
-			return " < " + d + " " + application.getString(R.string.km);  //$NON-NLS-1$//$NON-NLS-2$
+		double val = distanceToSearchValues[distanceInd];
+		if(val >= 1){
+			return " < " + ((int) val)+ " " + application.getString(R.string.km);  //$NON-NLS-1$//$NON-NLS-2$
 		} else {
 			return " < 500 " + application.getString(R.string.m);  //$NON-NLS-1$
 		}
 	}
 	
 	public void clearPreviousZoom(){
-		zoom = getInitialZoom();
+		distanceInd = 0;
 	}
 	
-	private int getInitialZoom(){
-		int zoom = initialZoom;
-		if(areAllTypesAccepted()){
-			zoom += 1;
-		}
-		return zoom; 
-	}
-	
-	public List<Amenity> initializeNewSearch(double lat, double lon, int firstTimeLimit){
-		zoom = getInitialZoom();
-		List<Amenity> amenityList = searchAmenities(this, lat, lon);
+	public List<Amenity> initializeNewSearch(double lat, double lon, int firstTimeLimit, ResultMatcher<Amenity> matcher){
+		clearPreviousZoom();
+		List<Amenity> amenityList = searchAmenities(this, lat, lon, matcher);
 		MapUtils.sortListOfMapObject(amenityList, lat, lon);
 		if (firstTimeLimit > 0) {
 			while (amenityList.size() > firstTimeLimit) {
@@ -114,25 +113,27 @@ public class PoiFilter {
 		return amenityList; 
 	}
 	
-	private List<Amenity> searchAmenities(PoiFilter poiFilter, double lat, double lon) {
-		double tileNumberX = MapUtils.getTileNumberX(zoom, lon);
-		double tileNumberY = MapUtils.getTileNumberY(zoom, lat);
-		double topLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY - 0.5);
-		double bottomLatitude = MapUtils.getLatitudeFromTile(zoom, tileNumberY + 0.5);
-		double leftLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX - 0.5);
-		double rightLongitude = MapUtils.getLongitudeFromTile(zoom, tileNumberX + 0.5);
+	private List<Amenity> searchAmenities(PoiFilter poiFilter, double lat, double lon, ResultMatcher<Amenity> matcher) {
+		double baseDistY = MapUtils.getDistance(lat, lon, lat - 1, lon);
+		double baseDistX = MapUtils.getDistance(lat, lon, lat, lon - 1);
+		double distance = distanceToSearchValues[distanceInd] * 1000;
 		
-		return searchAmenities(poiFilter, lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude);
+		double topLatitude = lat + (distance/ baseDistY );
+		double bottomLatitude = lat - (distance/ baseDistY );
+		double leftLongitude = lon - (distance / baseDistX);
+		double rightLongitude = lon + (distance/ baseDistX);
+		
+		return searchAmenities(poiFilter, lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude, matcher);
 	}
 
 	protected List<Amenity> searchAmenities(PoiFilter poiFilter, double lat, double lon, double topLatitude,
-			double bottomLatitude, double leftLongitude, double rightLongitude) {
+			double bottomLatitude, double leftLongitude, double rightLongitude, ResultMatcher<Amenity> matcher) {
 		return application.getResourceManager().searchAmenities(poiFilter, 
-				topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon);
+				topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon, matcher);
 	}
 
-	public List<Amenity> searchAgain(double lat, double lon){
-		List<Amenity> amenityList = searchAmenities(this, lat, lon);
+	public List<Amenity> searchAgain(double lat, double lon) {
+		List<Amenity> amenityList = searchAmenities(this, lat, lon, null);
 		MapUtils.sortListOfMapObject(amenityList, lat, lon);
 		return amenityList;
 	}

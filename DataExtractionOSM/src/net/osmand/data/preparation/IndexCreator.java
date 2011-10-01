@@ -14,7 +14,6 @@ import java.sql.Statement;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
-import net.osmand.binary.BinaryMapIndexWriter;
 import net.osmand.data.IndexConstants;
 import net.osmand.data.preparation.OsmDbAccessor.OsmDbVisitor;
 import net.osmand.impl.ConsoleProgressImplementation;
@@ -554,8 +553,7 @@ public class IndexCreator {
 				if (indexPOI) {
 					progress.setGeneralProgress("[95 of 100]");
 					progress.startTask("Writing poi index to binary file...", -1);
-					// TODO uncomment
-					// indexPoiCreator.writeBinaryPoiIndex(writer, regionName, progress);
+					indexPoiCreator.writeBinaryPoiIndex(writer, regionName, progress);
 				}
 
 				if (indexTransport) {

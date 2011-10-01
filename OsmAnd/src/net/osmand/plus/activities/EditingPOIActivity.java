@@ -37,7 +37,6 @@ import net.osmand.osm.OSMSettings.OSMTagKey;
 import net.osmand.osm.OpeningHoursParser.BasicDayOpeningHourRule;
 import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
 import net.osmand.osm.io.OsmBaseStorage;
-import net.osmand.plus.AmenityIndexRepository;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -109,6 +108,7 @@ public class EditingPOIActivity {
 	private long changeSetTimeStamp = NO_CHANGESET_ID;
 
 	private final static Log log = LogUtil.getLog(EditingPOIActivity.class);
+
 
 	
 
@@ -608,26 +608,31 @@ public class EditingPOIActivity {
 	}
 	
 	private void updateNodeInIndexes(String action, Node n) {
-		List<AmenityIndexRepository> repos = app.getResourceManager().searchAmenityRepositories(n.getLatitude(), n.getLongitude());
-		// delete all amenities with same id
-		if (DELETE_ACTION.equals(action) || MODIFY_ACTION.equals(action)) {
-			for (AmenityIndexRepository r : repos) {
-				if (r instanceof AmenityIndexRepositoryOdb) {
-					((AmenityIndexRepositoryOdb) r).deleteAmenities(n.getId() << 1);
-					((AmenityIndexRepositoryOdb) r).clearCache();
+		final AmenityIndexRepositoryOdb repo = app.getResourceManager().getUpdatablePoiDb();
+		view.post(new Runnable() {
+			
+			@Override
+			public void run() {
+				if (repo == null) {
+					Toast.makeText(app, app.getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_LONG).show();
+					return;
+				} else {
+					Toast.makeText(app, app.getString(R.string.update_poi_does_not_change_indexes), Toast.LENGTH_LONG).show();
 				}
 			}
+		});
+		
+		// delete all amenities with same id
+		if (DELETE_ACTION.equals(action) || MODIFY_ACTION.equals(action)) {
+			repo.deleteAmenities(n.getId() << 1);
+			repo.clearCache();
 		}
 		// add amenities
 		if (!DELETE_ACTION.equals(action)) {
 			List<Amenity> ams = Amenity.parseAmenities(n, new ArrayList<Amenity>());
 			for (Amenity a : ams) {
-				for (AmenityIndexRepository r : repos) {
-					if (r instanceof AmenityIndexRepositoryOdb) {
-						((AmenityIndexRepositoryOdb) r).addAmenity(a);
-						((AmenityIndexRepositoryOdb) r).clearCache();
-					}
-				}
+				repo.addAmenity(a);
+				repo.clearCache();
 			}
 		}
 

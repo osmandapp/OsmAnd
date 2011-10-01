@@ -1,4 +1,4 @@
-package net.osmand.binary;
+package net.osmand.data.preparation;
 
 import gnu.trove.list.TLongList;
 import gnu.trove.list.array.TIntArrayList;
@@ -17,6 +17,8 @@ import java.util.Set;
 import java.util.Stack;
 
 import net.osmand.Algoritms;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.OsmandOdb;
 import net.osmand.binary.OsmandOdb.CityIndex;
 import net.osmand.binary.OsmandOdb.InteresectedStreets;
 import net.osmand.binary.OsmandOdb.MapEncodingRule;

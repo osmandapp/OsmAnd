@@ -15,7 +15,6 @@ public class IndexFileList implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	TreeMap<String, IndexItem> indexFiles = new TreeMap<String, IndexItem>(new Comparator<String>(){
-		@SuppressWarnings("unused")
 		private static final long serialVersionUID = 1L;
 		
 		@Override

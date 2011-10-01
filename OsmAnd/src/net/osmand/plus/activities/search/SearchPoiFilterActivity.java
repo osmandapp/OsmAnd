@@ -7,15 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.osm.LatLon;
+import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;
+import net.osmand.plus.ResourceManager;
+import net.osmand.plus.SearchByNameFilter;
 import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.OsmandApplication;
-import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -35,7 +37,6 @@ import android.widget.TextView;
  */
 public class SearchPoiFilterActivity extends ListActivity {
 
-	private Typeface typeFace;
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
 	
@@ -46,7 +47,6 @@ public class SearchPoiFilterActivity extends ListActivity {
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		setContentView(R.layout.searchpoilist);
-		typeFace = Typeface.create((String)null, Typeface.ITALIC);
 		
 		// ListActivity has a ListView, which you can get with:
 		ListView lv = getListView();
@@ -113,6 +113,13 @@ public class SearchPoiFilterActivity extends ListActivity {
 			showEditActivity(filter);
 			return;
 		}
+		if(!(filter instanceof NameFinderPoiFilter)){
+			ResourceManager rm = ((OsmandApplication) getApplication()).getResourceManager();
+			if(!rm.containsAmenityRepositoryToSearch(filter instanceof SearchByNameFilter)){
+				Toast.makeText(this, R.string.data_to_search_poi_not_available, Toast.LENGTH_LONG);
+				return;
+			}
+		}
 		final Intent newIntent = new Intent(SearchPoiFilterActivity.this, SearchPOIActivity.class);
 		newIntent.putExtra(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
 		updateIntentToLaunch(newIntent);
@@ -133,8 +140,11 @@ public class SearchPoiFilterActivity extends ListActivity {
 			ImageView icon = (ImageView) row.findViewById(R.id.folder_icon);
 			PoiFilter model = getItem(position);
 			label.setText(model.getName());
-			if(model.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)){
-				label.setTypeface(typeFace);
+			if(model.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID) || 
+					model.getFilterId().equals(PoiFilter.BY_NAME_FILTER_ID)){
+				label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+			} else {
+				label.setTypeface(Typeface.DEFAULT);
 			}
 			icon.setImageResource(model.isStandardFilter() ? R.drawable.folder : R.drawable.favorites);
 			return (row);

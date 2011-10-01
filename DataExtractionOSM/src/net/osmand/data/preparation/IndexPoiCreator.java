@@ -26,7 +26,6 @@ import java.util.TreeMap;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
-import net.osmand.binary.BinaryMapIndexWriter;
 import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
@@ -555,11 +554,8 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 	}
 
 	public static void main(String[] args) throws SQLException, FileNotFoundException, IOException {
-		// TODO support multiple reading amenity types! +/-
-		// TODO support proper POI editing
-		// TODO support string trigramms
 		// TODO support cancelling poi search request! Do it in another thread (Check is cancelled()!!!)
-		// TODO support fully functional indexed string table and pass name matcher
+		// TODO implement UI to show matching by name subcategories
 		long time = System.currentTimeMillis();
 		IndexPoiCreator poiCreator = new IndexPoiCreator();
 //		String fileSqlte = "/home/victor/projects/OsmAnd/data/osm-gen/POI/Ru-mow.poi.odb";

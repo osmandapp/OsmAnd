@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -32,6 +33,7 @@ public class BinaryMapPoiReaderAdapter {
 	public static final int SHIFT_BITS_CATEGORY = 7;
 	private static final int CATEGORY_MASK = (1 << SHIFT_BITS_CATEGORY) - 1 ;
 	private static final int ZOOM_TO_SKIP_FILTER = 3;
+	private static final int BUCKET_SEARCH_BY_NAME = 5;
 	
 	public static class PoiRegion extends BinaryIndexPart {
 
@@ -161,7 +163,7 @@ public class BinaryMapPoiReaderAdapter {
 	}
 	
 	protected void searchPoiByName( PoiRegion region, SearchRequest<Amenity> req) throws IOException {
-		TIntArrayList offsets = new TIntArrayList();
+		TIntLongHashMap offsets = new TIntLongHashMap();
 		Collator instance = Collator.getInstance();
 		instance.setStrength(Collator.PRIMARY);
 		CollatorStringMatcher matcher = new CollatorStringMatcher(instance, req.nameQuery, 
@@ -180,16 +182,44 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiIndex.NAMEINDEX_FIELD_NUMBER :
 				int length = readInt();
 				int oldLimit = codedIS.pushLimit(length);
+				// here offsets are sorted by distance
 				offsets = readPoiNameIndex(instance, req.nameQuery, req);
 				codedIS.popLimit(oldLimit);
 				break;
 			case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER :
 				// also offsets can be randomly skipped by limit
-				offsets.sort();
+				Integer[] offKeys = new Integer[offsets.size()];
+				if (offsets.size() > 0) {
+					int[] keys = offsets.keys();
+					for (int i = 0; i < keys.length; i++) {
+						offKeys[i] = keys[i];
+					}
+					final TIntLongHashMap foffsets = offsets;
+					Arrays.sort(offKeys, new Comparator<Integer>() {
+						@Override
+						public int compare(Integer object1, Integer object2) {
+							return Double.compare(foffsets.get(object1), foffsets.get(object2));
+						}
+					});
+					int p = BUCKET_SEARCH_BY_NAME * 3 ;
+					if (p < offKeys.length) {
+						for (int i = p + BUCKET_SEARCH_BY_NAME;; i += BUCKET_SEARCH_BY_NAME) {
+							if (i > offKeys.length) {
+								Arrays.sort(offKeys, p, offKeys.length);
+								break;
+							} else {
+								Arrays.sort(offKeys, p, i);
+							}
+							p = i;
+						}
+					}
+				}
+				
+				
 				LOG.info("Searched poi structure in "+(System.currentTimeMillis() - time) + 
-						"ms. Found " + offsets.size() +" subtress");
-				for (int j = 0; j < offsets.size(); j++) {
-					codedIS.seek(offsets.get(j) + indexOffset);
+						"ms. Found " + offKeys.length +" subtress");
+				for (int j = 0; j < offKeys.length; j++) {
+					codedIS.seek(offKeys[j] + indexOffset);
 					int len = readInt();
 					int oldLim = codedIS.pushLimit(len);
 					readPoiData(matcher, req, region);
@@ -209,8 +239,8 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 	
-	private TIntArrayList readPoiNameIndex(Collator instance, String query, SearchRequest<Amenity> req) throws IOException {
-		TIntArrayList offsets = new TIntArrayList();
+	private TIntLongHashMap readPoiNameIndex(Collator instance, String query, SearchRequest<Amenity> req) throws IOException {
+		TIntLongHashMap offsets = new TIntLongHashMap();
 		TIntArrayList dataOffsets = null;
 		while(true){
 			int t = codedIS.readTag();
@@ -221,7 +251,8 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiNameIndex.TABLE_FIELD_NUMBER : {
 				int length = readInt();
 				int oldLimit = codedIS.pushLimit(length);
-				dataOffsets = readIndexedStringTable(instance, query);
+				dataOffsets = new TIntArrayList();
+				readIndexedStringTable(instance, query, "", dataOffsets, 0);
 				codedIS.popLimit(oldLimit);
 				break; }
 			case OsmandOdb.OsmAndPoiNameIndex.DATA_FIELD_NUMBER : {
@@ -232,7 +263,7 @@ public class BinaryMapPoiReaderAdapter {
 						codedIS.seek(dataOffsets.get(i) + offset);
 						int len = codedIS.readRawVarint32();
 						int oldLim = codedIS.pushLimit(len);
-						readPoiNameIndexData(offsets);
+						readPoiNameIndexData(offsets, req);
 						codedIS.popLimit(oldLim);
 						if (req.isCancelled()) {
 							codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
@@ -250,7 +281,7 @@ public class BinaryMapPoiReaderAdapter {
 		
 	}
 
-	private void readPoiNameIndexData(TIntArrayList offsets) throws IOException {
+	private void readPoiNameIndexData(TIntLongHashMap offsets, SearchRequest<Amenity> req) throws IOException {
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -260,7 +291,7 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER :
 				int len = codedIS.readRawVarint32();
 				int oldLim = codedIS.pushLimit(len);
-				readPoiNameIndexDataAtom(offsets);
+				readPoiNameIndexDataAtom(offsets, req);
 				codedIS.popLimit(oldLim);
 				break;
 			default:
@@ -271,24 +302,28 @@ public class BinaryMapPoiReaderAdapter {
 		
 	}
 
-	private void readPoiNameIndexDataAtom(TIntArrayList offsets) throws IOException {
+	private void readPoiNameIndexDataAtom(TIntLongHashMap offsets, SearchRequest<Amenity> req) throws IOException {
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
+			int x = 0;
+			int y = 0;
+			int zoom = 15;
 			switch (tag) {
 			case 0:
 				return;
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.X_FIELD_NUMBER :
-				/*int x = */codedIS.readUInt32();
+				x = codedIS.readUInt32();
 				break;
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.Y_FIELD_NUMBER :
-				/*int y = */codedIS.readUInt32();
+				y = codedIS.readUInt32();
 				break;
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.ZOOM_FIELD_NUMBER :
-				/*int zoom = */codedIS.readUInt32();
+				zoom = codedIS.readUInt32();
 				break;
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.SHIFTTO_FIELD_NUMBER :
-				offsets.add(readInt());
+				long d = Math.abs(req.x - (x << (31 - zoom))) + Math.abs(req.y - (y << (31 - zoom))); 
+				offsets.put(readInt(), d);
 				break;
 			default:
 				skipUnknownField(t);
@@ -297,39 +332,58 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 
-	private TIntArrayList readIndexedStringTable(Collator instance, String query) throws IOException {
-		// TODO support fully functional indexed string table
-		TIntArrayList list = new TIntArrayList();
-		int charMatches = 0;
-		boolean keyMatches = false;
+	private int readIndexedStringTable(Collator instance, String query, String prefix, TIntArrayList list, int charMatches) throws IOException {
+		String key = null;
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				return list;
+				return charMatches;
 			case OsmandOdb.IndexedStringTable.KEY_FIELD_NUMBER :
-				String key = codedIS.readString();
-				keyMatches = false;
-				int i=0;
-				for(; i<query.length(); i++){
-					if (i >= key.length() || instance.compare(key.substring(i, i + 1), query.substring(i, i + 1)) != 0) {
-						break;
-					}
+				key = codedIS.readString();
+				if(prefix.length() > 0){
+					key = prefix + key;
 				}
-				if(i >= charMatches && i > 0){
-					if(i > charMatches){
-						list.clear();
-						charMatches = i;
+				// check query is part of key (the best matching)
+				if(CollatorStringMatcher.cmatches(instance, key, query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)){
+					if(query.length() >= charMatches){
+						if(query.length() > charMatches){
+							charMatches = query.length();
+							list.clear();
+						}
+					} else {
+						key = null;
 					}
-					keyMatches = true;
+					// check key is part of query
+				} else if (CollatorStringMatcher.cmatches(instance, query, key, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+					if (key.length() >= charMatches) {
+						if (key.length() > charMatches) {
+							charMatches = key.length();
+							list.clear();
+						}
+					} else {
+						key = null;
+					}
+				} else {
+					key = null;
 				}
 				break;
 			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER :
 				int val = codedIS.readUInt32();
-				if (keyMatches) {
+				if (key != null) {
 					list.add(val);
 				}
+				break;
+			case OsmandOdb.IndexedStringTable.SUBTABLES_FIELD_NUMBER :
+				int len = codedIS.readRawVarint32();
+				int oldLim = codedIS.pushLimit(len);
+				if (key != null) {
+					charMatches = readIndexedStringTable(instance, query, key, list, charMatches);
+				} else {
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+				}
+				codedIS.popLimit(oldLim);
 				break;
 			default:
 				skipUnknownField(t);
