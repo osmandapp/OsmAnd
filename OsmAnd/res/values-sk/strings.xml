@@ -1,9 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="data_to_search_poi_not_available">Miestne údaje na hľadanie POI nie sú dostupné.</string>
+	<string name="poi_filter_by_name">Hľadať podľa názvu</string>
+	<string name="old_poi_file_should_be_deleted">Súbor POI údajov \'%1$s\' je neschválený a môže byť vymazaný.</string>
+	<string name="update_poi_file_not_found">Miestný súbor na udržiavanie POI zmien sa nenašiel a nemôže byť vytvorený.</string>
+	<string name="update_poi_does_not_change_indexes">Zmeny POI v aplikácii neovplyvnia stiahnuté mapové súbory, ale budú zozbierané v miestnom súbore.</string>
 	<string name="button_upgrade_osmandplus">Aktualizovať Osmand+</string>
 	<string name="map_version_changed_info">Na serveri sú nekompatibilné mapové súbory s Vašou aktuálnou verziou aplikácie. Na ich stiahnutie a použitie, prosím, aktualizujte aplikáciu na novšiu verziu.</string>
+	
 	<string name="local_index_mi_rename">Premenovať</string>
 	<string name="show_gpx_route">Zobraziť na mape</string>
+	
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="auto_follow_route_never">Nikdy</string>
 	<string name="choose_auto_follow_route">Vybrať nastavenia automatického nasledovania</string>
