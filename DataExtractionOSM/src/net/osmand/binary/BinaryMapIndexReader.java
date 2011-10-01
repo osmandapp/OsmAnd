@@ -936,9 +936,8 @@ public class BinaryMapIndexReader {
 		return req.getSearchResults();
 	}
 	
-	public Map<AmenityType, List<String>> searchPoiCategoriesByName(SearchRequest<Amenity> req, Map<AmenityType, List<String>> map) 
-				throws IOException {
-		if (req.nameQuery == null || req.nameQuery.length() == 0) {
+	public Map<AmenityType, List<String>> searchPoiCategoriesByName(String query, Map<AmenityType, List<String>> map) {
+		if (query == null || query.length() == 0) {
 			throw new IllegalArgumentException();
 		}
 		Collator collator = Collator.getInstance();
@@ -947,12 +946,12 @@ public class BinaryMapIndexReader {
 			for(int i= 0; i< poiIndex.categories.size(); i++){
 				String cat = poiIndex.categories.get(i);
 				AmenityType catType = poiIndex.categoriesType.get(i);
-				if(CollatorStringMatcher.cmatches(collator, cat, req.nameQuery, StringMatcherMode.CHECK_STARTS_FROM_SPACE)){
+				if(CollatorStringMatcher.cmatches(collator, cat, query, StringMatcherMode.CHECK_STARTS_FROM_SPACE)){
 					map.put(catType, null);
 				} else {
 					List<String> subcats = poiIndex.subcategories.get(i);
 					for(int j=0; j< subcats.size(); j++){
-						if(CollatorStringMatcher.cmatches(collator, subcats.get(j), req.nameQuery, StringMatcherMode.CHECK_STARTS_FROM_SPACE)){
+						if(CollatorStringMatcher.cmatches(collator, subcats.get(j), query, StringMatcherMode.CHECK_STARTS_FROM_SPACE)){
 							if(!map.containsKey(catType)){
 								map.put(catType, new ArrayList<String>());
 							}

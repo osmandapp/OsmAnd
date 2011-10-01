@@ -40,7 +40,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * @author Frolov
  * 
  */
 public class EditPOIFilterActivity extends ListActivity {

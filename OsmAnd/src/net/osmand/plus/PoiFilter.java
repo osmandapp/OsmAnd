@@ -1,11 +1,13 @@
 package net.osmand.plus;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import net.osmand.OsmAndFormatter;
 import net.osmand.ResultMatcher;
@@ -168,6 +170,10 @@ public class PoiFilter {
 		return set.contains(subtype);
 	}
 	
+	public void clearFilter(){
+		acceptedTypes = new LinkedHashMap<AmenityType, LinkedHashSet<String>>();
+	}
+	
 	public boolean areAllTypesAccepted(){
 		if(AmenityType.values().length == acceptedTypes.size()){
 			for(AmenityType a : acceptedTypes.keySet()){
@@ -186,6 +192,19 @@ public class PoiFilter {
 			acceptedTypes.put(type, new LinkedHashSet<String>());
 		} else {
 			acceptedTypes.remove(type);
+		}
+	}
+	
+	public void setMapToAccept(Map<AmenityType, List<String>> newMap) {
+		Iterator<Entry<AmenityType, List<String>>> iterator = newMap.entrySet().iterator();
+		acceptedTypes.clear();
+		while(iterator.hasNext()){
+			Entry<AmenityType, List<String>> e = iterator.next();
+			if(e.getValue() == null){
+				acceptedTypes.put(e.getKey(), null);
+			} else {
+				acceptedTypes.put(e.getKey(), new LinkedHashSet<String>(e.getValue()));
+			}
 		}
 	}
 	

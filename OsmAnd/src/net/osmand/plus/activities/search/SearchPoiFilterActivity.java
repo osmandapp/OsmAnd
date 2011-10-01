@@ -110,6 +110,7 @@ public class SearchPoiFilterActivity extends ListActivity {
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		final PoiFilter filter = ((AmenityAdapter) getListAdapter()).getItem(position);
 		if (filter.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)) {
+			filter.clearFilter();
 			showEditActivity(filter);
 			return;
 		}

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
@@ -46,6 +47,11 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	@Override
 	public boolean checkContains(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
 		return index.containsPoiData(topLatitude, leftLongitude, bottomLatitude, rightLongitude);
+	}
+	
+	
+	public Map<AmenityType, List<String>> searchAmenityCategoriesByName(String query, Map<AmenityType, List<String>> map) {
+		return index.searchPoiCategoriesByName(query, map);
 	}
 	
 	
