@@ -1,6 +1,5 @@
 package net.osmand.plus;
 
-import static net.osmand.plus.CollatorStringMatcher.cmatches;
 
 import java.io.IOException;
 import java.text.Collator;
@@ -12,8 +11,10 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import net.osmand.Algoritms;
+import net.osmand.CollatorStringMatcher;
 import net.osmand.LogUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Building;
 import net.osmand.data.City;
@@ -21,7 +22,6 @@ import net.osmand.data.MapObject;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
 import net.osmand.osm.LatLon;
-import net.osmand.plus.CollatorStringMatcher.StringMatcherMode;
 
 import org.apache.commons.logging.Log;
 
@@ -174,7 +174,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			name = name.toLowerCase();
 			for (City c : cities.values()) {
 				String cName = c.getName(useEnglishNames); // lower case not needed, collator ensures that
-				if (cmatches(collator, cName, name, StringMatcherMode.CHECK_STARTS_FROM_SPACE)) {
+				if (CollatorStringMatcher.cmatches(collator, cName, name, StringMatcherMode.CHECK_STARTS_FROM_SPACE)) {
 					if (resultMatcher.publish(c)) {
 						citiesToFill.add(c);
 					}

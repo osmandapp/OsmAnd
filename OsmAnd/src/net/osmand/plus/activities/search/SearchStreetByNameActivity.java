@@ -1,16 +1,17 @@
 package net.osmand.plus.activities.search;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.CollatorStringMatcher;
 import net.osmand.ResultMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.data.City;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
-import net.osmand.plus.CollatorStringMatcher;
 import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
-import net.osmand.plus.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.plus.activities.OsmandApplication;
 import android.os.AsyncTask;
 import android.os.Message;
