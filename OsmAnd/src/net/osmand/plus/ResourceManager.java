@@ -25,6 +25,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.Version;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
+import net.osmand.data.AmenityType;
 import net.osmand.data.IndexConstants;
 import net.osmand.data.MapTileDownloader;
 import net.osmand.data.TransportStop;
@@ -643,6 +644,18 @@ public class ResourceManager {
 		}
 
 		return amenities;
+	}
+	
+	public Map<AmenityType, List<String>> searchAmenityCategoriesByName(String searchQuery, double lat, double lon) {
+		Map<AmenityType, List<String>> map = new LinkedHashMap<AmenityType, List<String>>();
+		for (AmenityIndexRepository index : amenityRepositories) {
+			if (index instanceof AmenityIndexRepositoryBinary) {
+				if (index.checkContains(lat, lon)) {
+					((AmenityIndexRepositoryBinary) index).searchAmenityCategoriesByName(searchQuery, map);
+				}
+			}
+		}
+		return map;
 	}
 	
 	public void searchAmenitiesAsync(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, PoiFilter filter, List<Amenity> toFill){

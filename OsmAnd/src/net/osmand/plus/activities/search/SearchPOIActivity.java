@@ -3,19 +3,24 @@
  */
 package net.osmand.plus.activities.search;
 
+
 import gnu.trove.set.hash.TLongHashSet;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
+import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.OpeningHoursParser;
 import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
@@ -24,11 +29,13 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.SearchByNameFilter;
+import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandApplication;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -70,8 +77,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * @author Maxim Frolov
- * 
+ * Search poi activity
  */
 public class SearchPOIActivity extends ListActivity implements SensorEventListener {
 
@@ -137,7 +143,9 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 					runNewSearchQuery(SearchAmenityRequest.buildRequest(location, SearchAmenityRequest.NEW_SEARCH_INIT));
 				} else if(isSearchByNameFilter() && 
 						!Algoritms.objectEquals(((SearchByNameFilter) filter).getQuery(), query)){
+					showFilter.setVisibility(View.INVISIBLE);
 					filter.clearPreviousZoom();
+					showPoiCategoriesByNameFilter(query, location);
 					((SearchByNameFilter) filter).setQuery(query);
 					runNewSearchQuery(SearchAmenityRequest.buildRequest(location, SearchAmenityRequest.NEW_SEARCH_INIT));
 				} else {
@@ -149,11 +157,21 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		showFilter.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (searchFilterLayout.getVisibility() == View.GONE) {
-					searchFilterLayout.setVisibility(View.VISIBLE);
+				if(isSearchByNameFilter()){
+					Intent newIntent = new Intent(SearchPOIActivity.this, EditPOIFilterActivity.class);
+					newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, PoiFilter.CUSTOM_FILTER_ID);
+					if(location != null) {
+						newIntent.putExtra(EditPOIFilterActivity.SEARCH_LAT, location.getLatitude());
+						newIntent.putExtra(EditPOIFilterActivity.SEARCH_LON, location.getLongitude());
+					}
+					startActivity(newIntent);
 				} else {
-					searchFilter.setText(""); //$NON-NLS-1$
-					searchFilterLayout.setVisibility(View.GONE);
+					if (searchFilterLayout.getVisibility() == View.GONE) {
+						searchFilterLayout.setVisibility(View.VISIBLE);
+					} else {
+						searchFilter.setText(""); //$NON-NLS-1$
+						searchFilterLayout.setVisibility(View.GONE);
+					}
 				}
 			}
 		});
@@ -233,14 +251,17 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 			clearSearchQuery();
 		}
 		
-		if(isNameFinderFilter() || isSearchByNameFilter() ){
+		if(isNameFinderFilter()){
 			showFilter.setVisibility(View.GONE);
+			searchFilterLayout.setVisibility(View.VISIBLE);
+		} else if(isSearchByNameFilter() ){
+			showFilter.setVisibility(View.INVISIBLE);
 			searchFilterLayout.setVisibility(View.VISIBLE);
 		} else {
 			showFilter.setVisibility(View.VISIBLE);
 			showOnMap.setEnabled(filter != null);
 		}
-		showOnMap.setVisibility(isSearchByNameFilter() ? View.INVISIBLE : View.VISIBLE);
+		showOnMap.setVisibility(isSearchByNameFilter() ? View.GONE : View.VISIBLE);
 		
 		if (filter != null) {
 			searchArea.setText(filter.getSearchArea());
@@ -261,7 +282,47 @@ public class SearchPOIActivity extends ListActivity implements SensorEventListen
 		}
 	}
 	
+	private void showPoiCategoriesByNameFilter(String query, Location loc){
+		OsmandApplication app = (OsmandApplication) getApplication();
+		if(loc != null){
+			Map<AmenityType, List<String>> map = app.getResourceManager().searchAmenityCategoriesByName(query, loc.getLatitude(), loc.getLongitude());
+			if(!map.isEmpty()){
+				PoiFilter filter = ((OsmandApplication)getApplication()).getPoiFilters().getFilterById(PoiFilter.CUSTOM_FILTER_ID);
+				if(filter != null){
+					showFilter.setVisibility(View.VISIBLE);
+					filter.setMapToAccept(map);
+				}
+				
+				String s = typesToString(map);
+				Toast.makeText(this, getString(R.string.poi_query_by_name_matches_categories) + s, Toast.LENGTH_LONG).show();
+			}
+		}
+	}
 	
+	private String typesToString(Map<AmenityType, List<String>> map) {
+		StringBuilder b = new StringBuilder();
+		int count = 0;
+		Iterator<Entry<AmenityType, List<String>>> iterator = map.entrySet().iterator();
+		while(iterator.hasNext() && count < 4){
+			Entry<AmenityType, List<String>> e = iterator.next();
+			b.append("\n").append(OsmAndFormatter.toPublicString(e.getKey(), this)).append(" - ");
+			if(e.getValue() == null){
+				b.append("...");
+			} else {
+				for(int j=0; j<e.getValue().size() && j < 3; j++){
+					if(j > 0){
+						b.append(", ");
+					}
+					b.append(e.getValue().get(j));
+				}
+			}
+		}
+		if(iterator.hasNext()){
+			b.append("\n...");
+		}
+		return b.toString();
+	}
+
 	private void updateSearchPoiTextButton(){
 		if(location == null){
 			searchPOILevel.setText(R.string.search_poi_location);
