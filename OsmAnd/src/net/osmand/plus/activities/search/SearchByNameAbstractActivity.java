@@ -4,11 +4,11 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.CollatorStringMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.osm.LatLon;
-import net.osmand.plus.CollatorStringMatcher;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.CollatorStringMatcher.StringMatcherMode;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.AsyncTask;

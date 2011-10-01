@@ -8,6 +8,7 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -15,9 +16,11 @@ import java.util.Locale;
 import java.util.Map;
 
 import net.osmand.Algoritms;
+import net.osmand.CollatorStringMatcher;
 import net.osmand.LogUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.StringMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
@@ -931,6 +934,39 @@ public class BinaryMapIndexReader {
 			codedIS.popLimit(old);
 		}
 		return req.getSearchResults();
+	}
+	
+	public Map<AmenityType, List<String>> searchPoiCategoriesByName(SearchRequest<Amenity> req, Map<AmenityType, List<String>> map) 
+				throws IOException {
+		if (req.nameQuery == null || req.nameQuery.length() == 0) {
+			throw new IllegalArgumentException();
+		}
+		Collator collator = Collator.getInstance();
+		collator.setStrength(Collator.PRIMARY);
+		for (PoiRegion poiIndex : poiIndexes) {
+			for(int i= 0; i< poiIndex.categories.size(); i++){
+				String cat = poiIndex.categories.get(i);
+				AmenityType catType = poiIndex.categoriesType.get(i);
+				if(CollatorStringMatcher.cmatches(collator, cat, req.nameQuery, StringMatcherMode.CHECK_STARTS_FROM_SPACE)){
+					map.put(catType, null);
+				} else {
+					List<String> subcats = poiIndex.subcategories.get(i);
+					for(int j=0; j< subcats.size(); j++){
+						if(CollatorStringMatcher.cmatches(collator, subcats.get(j), req.nameQuery, StringMatcherMode.CHECK_STARTS_FROM_SPACE)){
+							if(!map.containsKey(catType)){
+								map.put(catType, new ArrayList<String>());
+							}
+							List<String> list = map.get(catType);
+							if(list != null){
+								list.add(subcats.get(j));
+							}
+						}
+						
+					}
+				}
+			}
+		}
+		return map;
 	}
 	
 	public List<Amenity> searchPoi(SearchRequest<Amenity> req) throws IOException {
