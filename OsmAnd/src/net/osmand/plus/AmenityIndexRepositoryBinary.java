@@ -141,11 +141,11 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
 	@Override
 	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom,
-			PoiFilter filter, List<Amenity> toFill) {
-		cTopLatitude = topLatitude + (topLatitude - bottomLatitude);
-		cBottomLatitude = bottomLatitude - (topLatitude - bottomLatitude);
-		cLeftLongitude = leftLongitude - (rightLongitude - leftLongitude);
-		cRightLongitude = rightLongitude + (rightLongitude - leftLongitude);
+			PoiFilter filter) {
+		cTopLatitude = topLatitude ;
+		cBottomLatitude = bottomLatitude ;
+		cLeftLongitude = leftLongitude ;
+		cRightLongitude = rightLongitude ;
 		cFilterId = filter == null ? null : filter.getFilterId();
 		cZoom = zoom;
 		// first of all put all entities in temp list in order to not freeze other read threads
@@ -159,8 +159,6 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 			cachedObjects.clear();
 			cachedObjects.addAll(tempList);
 		}
-
-		checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, cZoom, filter.getFilterId(), toFill, true);
 
 	}
 

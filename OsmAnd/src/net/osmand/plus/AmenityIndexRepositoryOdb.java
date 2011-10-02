@@ -102,11 +102,11 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 		cFilterId = null;
 	}
 	
-	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom,  PoiFilter filter, List<Amenity> toFill){
-		cTopLatitude = topLatitude + (topLatitude -bottomLatitude);
-		cBottomLatitude = bottomLatitude - (topLatitude -bottomLatitude);
-		cLeftLongitude = leftLongitude - (rightLongitude - leftLongitude);
-		cRightLongitude = rightLongitude + (rightLongitude - leftLongitude);
+	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom,  PoiFilter filter){
+		cTopLatitude = topLatitude ;
+		cBottomLatitude = bottomLatitude ;
+		cLeftLongitude = leftLongitude ;
+		cRightLongitude = rightLongitude ;
 		cFilterId = filter == null? null :filter.getFilterId();
 		cZoom = zoom;
 		// first of all put all entities in temp list in order to not freeze other read threads
@@ -120,8 +120,6 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 			cachedObjects.clear();
 			cachedObjects.addAll(tempList);
 		}
-		
-		checkCachedAmenities(topLatitude, leftLongitude, bottomLatitude, rightLongitude, cZoom, filter.getFilterId(), toFill);
 	}
 
 	public synchronized boolean checkCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, String filterId, List<Amenity> toFill, boolean fillFound){
