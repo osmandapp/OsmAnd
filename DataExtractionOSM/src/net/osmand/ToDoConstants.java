@@ -9,11 +9,15 @@ public class ToDoConstants {
 	
 	
 //	    == Osmand application (TODO 127) ==
+	
+	// TODO support cancelling poi search request! Do it in another thread (Check is cancelled()!!!) TODO transport progress
+	// TODO redesign Directions using GPX file! (One menu directions <-> switch 'Route')
+	// TODO test if voice properly inititialized (first command!)
+	// TODO prepare C++ version of routing algorithm
 
 	// Map Refactoring
 //      Remove notification from OsmAndMapTileView (?)
 	// Index version
-	// 1. POI inside obf
 	// 2. Multiple attributes for one point (amenity=circle, type=...)
 	
 
@@ -21,13 +25,9 @@ public class ToDoConstants {
 //	    !|| 125 || Introduce service layer rather than singletons and put all related into new package (services). Review architecture. Split some big classes. ||
 	
 //		=== Common issues ===
-//	    || 104 || Add activity to show current loaded indexes and information about them (Issue 366) ||
-//      || 123 || Improve gpx file showing (very slow for big files) (Issue 412) ||
 //      || 110 || Use android voice for pronounce command (could be used in future to pronounce street) (Issue 70) ||
-//		|| 97 || For voice navigation consider current speed of vehicle. Especially when speed > 50 pronounce more than 200 m (Issue 420) ||
 //      || 111 || Investigate showing street name while driving (Issue 286) ||  
 //      || 86 || Allow to add/edit custom tags to POI objects (Issue 44) ||
-//		|| 92 || Support poi index with standard map index and unify POI categories (unify done +, works very slow) (Issue 417) ||
 //		|| 113 || Calculate speed cameras/bumps on the road (announce about them) (Issue 418) ||
 
 
@@ -43,13 +43,16 @@ public class ToDoConstants {
 
 	///////////////////////////   DONE //////////////////////////////
 	// DONE ANDROID :
+//  || 104 || Add activity to show current loaded indexes and information about them (Issue 366) ||
 //	|| 112 || Investigate exiting/minimizing app (Issue 214) ||
 //  || 122 || Frozen sqlite db images (bug?). When images are loaded into sqlite the whole map is frozen (issue 413) || 	
 //  || 120 || Show icons over poi circle (issue 414) ||
 //  || 119 || Dialog on main screen tips and tricks (Issue 415) ||
 //  || 118 || Config switching between maps on different zoom levels <14 (using raster), > 14 vector (Issue 419) ||
 //  || 124 || Animated transition using only raster images (?) - skip animations (!) - don not render vectoring for animations (Issue 238) ||
-	
+//	|| 92 || Support poi index with standard map index and unify POI categories (unify done +, works very slow) (Issue 417) ||
+//	|| 97 || For voice navigation consider current speed of vehicle. Especially when speed > 50 pronounce more than 200 m (Issue 420) ||
+//  || 123 || Improve gpx file showing (very slow for big files) (Issue 412) ||
 	// DONE SWING
 	
 }

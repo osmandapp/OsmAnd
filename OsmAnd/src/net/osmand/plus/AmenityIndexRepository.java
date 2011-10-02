@@ -26,6 +26,6 @@ public interface AmenityIndexRepository {
 			String filterId, List<Amenity> toFill, boolean fillFound);
 
 	public void evaluateCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom,
-			PoiFilter filter, List<Amenity> toFill);
+			PoiFilter filter, ResultMatcher<Amenity> matcher);
 	
 }

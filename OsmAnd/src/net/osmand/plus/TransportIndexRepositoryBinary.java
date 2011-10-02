@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.LogUtil;
+import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.TransportRoute;
@@ -43,10 +44,12 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 		return file.containTransportData(topLatitude, leftLongitude, bottomLatitude, rightLongitude);
 	}
 	
+	@Override
 	public boolean checkCachedObjects(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, List<TransportStop> toFill){
 		return checkCachedObjects(topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, toFill, false);
 	}
 	
+	@Override
 	public synchronized boolean checkCachedObjects(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, List<TransportStop> toFill, boolean fillFound){
 		boolean inside = cTopLatitude >= topLatitude && cLeftLongitude <= leftLongitude && cRightLongitude >= rightLongitude
 				&& cBottomLatitude <= bottomLatitude && cZoom == zoom;
@@ -64,7 +67,7 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 	}
 
 	public List<TransportStop> searchTransportStops(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude,
-			int limit, List<TransportStop> stops) {
+			int limit, List<TransportStop> stops, ResultMatcher<TransportStop> matcher) {
 		long now = System.currentTimeMillis();
 		try {
 			file.searchTransportIndex(BinaryMapIndexReader.buildSearchTransportRequest(MapUtils.get31TileNumberX(leftLongitude),
@@ -88,6 +91,7 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 	 *            0} - ref, {1} - type, {2} - name, {3} - name_en
 	 * @return null if something goes wrong
 	 */
+	@Override
 	public List<String> getRouteDescriptionsForStop(TransportStop stop, String format) {
 		assert acceptTransportStop(stop);
 		long now = System.currentTimeMillis();
@@ -114,8 +118,9 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 		return res;
 	}
 
+	@Override
 	public void evaluateCachedTransportStops(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude,
-			int zoom, int limit, List<TransportStop> toFill) {
+			int zoom, int limit, ResultMatcher<TransportStop> matcher) {
 		cTopLatitude = topLatitude + (topLatitude - bottomLatitude);
 		cBottomLatitude = bottomLatitude - (topLatitude - bottomLatitude);
 		cLeftLongitude = leftLongitude - (rightLongitude - leftLongitude);
@@ -123,16 +128,15 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 		cZoom = zoom;
 		// first of all put all entities in temp list in order to not freeze other read threads
 		ArrayList<TransportStop> tempList = new ArrayList<TransportStop>();
-		searchTransportStops(cTopLatitude, cLeftLongitude, cBottomLatitude, cRightLongitude, limit, tempList);
+		searchTransportStops(cTopLatitude, cLeftLongitude, cBottomLatitude, cRightLongitude, limit, tempList, matcher);
 		synchronized (this) {
 			cachedObjects.clear();
 			cachedObjects.addAll(tempList);
 		}
 
-		checkCachedObjects(topLatitude, leftLongitude, bottomLatitude, rightLongitude, cZoom, toFill);
 	}
 
-
+	@Override
 	public List<RouteInfoLocation> searchTransportRouteStops(double latitude, double longitude, LatLon locationToGo, int zoom) {
 		long now = System.currentTimeMillis();
 		final LatLon loc = new LatLon(latitude, longitude);

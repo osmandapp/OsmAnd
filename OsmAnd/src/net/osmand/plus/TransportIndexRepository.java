@@ -2,6 +2,7 @@ package net.osmand.plus;
 
 import java.util.List;
 
+import net.osmand.ResultMatcher;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.LatLon;
@@ -27,7 +28,8 @@ public interface TransportIndexRepository {
 	public List<String> getRouteDescriptionsForStop(TransportStop stop, String format);
 	
 	
-	public void evaluateCachedTransportStops(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, int limit,  List<TransportStop> toFill);
+	public void evaluateCachedTransportStops(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, int limit,  
+			ResultMatcher<TransportStop> matcher);
 	
 	
 	public List<RouteInfoLocation> searchTransportRouteStops(double latitude, double longitude, LatLon locationToGo, int zoom);

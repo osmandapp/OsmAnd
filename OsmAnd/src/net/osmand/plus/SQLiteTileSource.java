@@ -34,7 +34,6 @@ public class SQLiteTileSource implements ITileSource {
 	private final File file;
 	private int minZoom = 1;
 	private int maxZoom = 17;
-	private boolean locked = false;
 	
 	public SQLiteTileSource(File f, List<TileSourceTemplate> toFindUrl){
 		this.file = f;
@@ -185,7 +184,11 @@ public class SQLiteTileSource implements ITileSource {
 	}
 	
 	public boolean isLocked() {
-		return locked;
+		SQLiteDatabase db = getDatabase();
+		if(db == null){
+			return false;
+		}
+		return db.isDbLockedByOtherThreads();
 	}
 
 	public Bitmap getImage(int x, int y, int zoom) {
@@ -219,36 +222,35 @@ public class SQLiteTileSource implements ITileSource {
 
 	private final int BUF_SIZE = 1024;
 	
-	public void insertImage(int x, int y, int zoom, File fileToSave) throws IOException {
+	/**
+	 * Makes method synchronized to give a little more time for get methods and 
+	 * let all writing attempts to wait outside of this method   
+	 */
+	public synchronized void insertImage(int x, int y, int zoom, File fileToSave) throws IOException {
 		SQLiteDatabase db = getDatabase();
-		if(db == null || db.isReadOnly()){
+		if (db == null || db.isReadOnly()) {
 			return;
 		}
-		if(exists(x, y, zoom)){
+		if (exists(x, y, zoom)) {
 			return;
 		}
-		try {
-			locked = true;
-			ByteBuffer buf = ByteBuffer.allocate((int) fileToSave.length());
-			FileInputStream is = new FileInputStream(fileToSave);
-			int i = 0;
-			byte[] b = new byte[BUF_SIZE];
-			while ((i = is.read(b, 0, BUF_SIZE)) > -1) {
-				buf.put(b, 0, i);
-			}
+		ByteBuffer buf = ByteBuffer.allocate((int) fileToSave.length());
+		FileInputStream is = new FileInputStream(fileToSave);
+		int i = 0;
+		byte[] b = new byte[BUF_SIZE];
+		while ((i = is.read(b, 0, BUF_SIZE)) > -1) {
+			buf.put(b, 0, i);
+		}
 
-			SQLiteStatement statement = db.compileStatement("INSERT INTO tiles VALUES(?, ?, ?, ?, ?)"); //$NON-NLS-1$
-			statement.bindLong(1, x);
-			statement.bindLong(2, y);
-			statement.bindLong(3, 17 - zoom);
-			statement.bindLong(4, 0);
-			statement.bindBlob(5, buf.array());
-			statement.execute();
-			statement.close();
-		} finally {
-			locked = false;
-		}
-		
+		SQLiteStatement statement = db.compileStatement("INSERT INTO tiles VALUES(?, ?, ?, ?, ?)"); //$NON-NLS-1$
+		statement.bindLong(1, x);
+		statement.bindLong(2, y);
+		statement.bindLong(3, 17 - zoom);
+		statement.bindLong(4, 0);
+		statement.bindBlob(5, buf.array());
+		statement.execute();
+		statement.close();
+
 	}
 	
 	public void closeDB(){
