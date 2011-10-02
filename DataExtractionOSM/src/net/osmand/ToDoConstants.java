@@ -9,16 +9,13 @@ public class ToDoConstants {
 	
 	
 //	    == Osmand application (TODO 127) ==
-	
-	// TODO support cancelling poi search request! Do it in another thread (Check is cancelled()!!!) TODO transport progress
 	// TODO redesign Directions using GPX file! (One menu directions <-> switch 'Route')
 	// TODO test if voice properly inititialized (first command!)
 	// TODO prepare C++ version of routing algorithm
+	// TODO make transport search faster (cancellable.. )
 
 	// Map Refactoring
 //      Remove notification from OsmAndMapTileView (?)
-	// Index version
-	// 2. Multiple attributes for one point (amenity=circle, type=...)
 	
 
 //		=== Refactoring issues ===

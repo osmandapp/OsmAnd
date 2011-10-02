@@ -100,7 +100,6 @@ public class ResourceManager {
 	
 	protected final List<TransportIndexRepository> transportRepositories = new ArrayList<TransportIndexRepository>();
 	
-	
 	protected final Map<String, String> indexFileNames = new LinkedHashMap<String, String>();
 	
 	protected final Map<String, BinaryMapIndexReader> routingMapFiles = new LinkedHashMap<String, BinaryMapIndexReader>();
@@ -125,7 +124,7 @@ public class ResourceManager {
 		// Only 8 MB (from 16 Mb whole mem) available for images : image 64K * 128 = 8 MB (8 bit), 64 - 16 bit, 32 - 32 bit
 		// at least 3*9?
 		float tiles = (dm.widthPixels / 256 + 2) * (dm.heightPixels / 256 + 2) * 3;
-		System.out.println("Tiles ! " + tiles);
+		System.out.println("Tiles to load in memory : " + tiles);
 		maxImgCacheSize = (int) (tiles) ; 
 	}
 

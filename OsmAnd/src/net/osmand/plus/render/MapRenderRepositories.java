@@ -278,7 +278,7 @@ public class MapRenderRepositories {
 					continue;
 				}
 				BinaryMapIndexReader c  = files.get(mapName);
-				searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom, null);
+				searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom, searchFilter);
 				List<BinaryMapDataObject> res = c.searchMapIndex(searchRequest);
 				for (BinaryMapDataObject r : res) {
 					if (PerformanceFlags.checkForDuplicateObjectIds) {
