@@ -67,9 +67,9 @@
    <tile_source name="Eniro Nautical (NO,SE)" rule="beanshell" ext=".png" min_zoom="5" max_zoom="16" tile_size="256" img_density="32" avg_img_size="18000"
    		url_template='String getTileUrl(int z, int x, int y) {return "http://map.eniro.com/geowebcache/service/tms1.0.0/nautical/"+z+"/"+x+"/"+((1 &lt;&lt; z) - 1 - y) + ".png";}'/>	
    
-   <tile_source name="Freemap.sk-atlas" url_template="http://t1.freemap.sk/A/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="16" tile_size="256" img_density="16" avg_img_size="18000">
-   <tile_source name="Freemap.sk-hiking" url_template="http://t1.freemap.sk/T/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="16" tile_size="256" img_density="16" avg_img_size="18000">
-   <tile_source name="Freemap.sk-cycle" url_template="http://t1.freemap.sk/C/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="16" tile_size="256" img_density="16" avg_img_size="18000">
+   <tile_source name="Freemap.sk-atlas" url_template="http://t1.freemap.sk/A/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="16" tile_size="256" img_density="16" avg_img_size="18000" />
+   <tile_source name="Freemap.sk-hiking" url_template="http://t1.freemap.sk/T/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="16" tile_size="256" img_density="16" avg_img_size="18000" />
+   <tile_source name="Freemap.sk-cycle" url_template="http://t1.freemap.sk/C/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="16" tile_size="256" img_density="16" avg_img_size="18000" />
 <!--
    <tile_source rule="wms_tile" url_template="http://wms.latlon.org" name="Genshtab (BLR)" layer="gshtab" ext=".jpg" min_zoom="5" max_zoom="17" tile_size="256" img_density="32" avg_img_size="18000"/>  NOT WORK ?-->
 
