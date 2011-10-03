@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import net.osmand.LogUtil;
+import net.osmand.Version;
 import net.osmand.data.IndexConstants;
 
 import org.apache.commons.logging.Log;
@@ -21,7 +22,7 @@ public class DownloadOsmandIndexesHelper {
 			log.debug("Start loading list of index files"); //$NON-NLS-1$
 			IndexFileList result = new IndexFileList();
 			try {
-				URL url = new URL("http://download.osmand.net/get_indexes"); //$NON-NLS-1$
+				URL url = new URL("http://download.osmand.net/get_indexes?" + Version.getVersionAsURLParam()); //$NON-NLS-1$
 				XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
 				parser.setInput(url.openStream(), "UTF-8"); //$NON-NLS-1$
 				int next;

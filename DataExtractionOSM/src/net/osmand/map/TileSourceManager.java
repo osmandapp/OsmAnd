@@ -23,6 +23,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import net.osmand.LogUtil;
+import net.osmand.Version;
 
 import org.apache.commons.logging.Log;
 import org.xml.sax.Attributes;
@@ -321,7 +322,7 @@ public class TileSourceManager {
 	public static List<TileSourceTemplate> downloadTileSourceTemplates() {
 		final List<TileSourceTemplate> templates = new ArrayList<TileSourceTemplate>();
 		try {
-			URLConnection connection = new URL("http://download.osmand.net//tile_sources.php").openConnection();
+			URLConnection connection = new URL("http://download.osmand.net//tile_sources.php?" + Version.getVersionAsURLParam()).openConnection();
 			final SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
 			saxParser.parse(connection.getInputStream(), new DefaultHandler(){
 				@Override

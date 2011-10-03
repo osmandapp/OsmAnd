@@ -18,6 +18,7 @@ import android.app.Activity;
 
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
+import net.osmand.Version;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -127,11 +128,11 @@ public class DownloadFileHelper {
 			
 			try {
 				if(parts == 1){
-					URL url = new URL("http://download.osmand.net/download?file="+fileName);  //$NON-NLS-1$
+					URL url = new URL("http://download.osmand.net/download?file="+fileName + "&" + Version.getVersionAsURLParam());  //$NON-NLS-1$
 					downloadFile(fileName, out, url, null, indexOfAllFiles, progress);
 				} else {
 					for(int i=1; i<=parts; i++){
-						URL url = new URL("http://download.osmand.net/download?file="+fileName+"-"+i);  //$NON-NLS-1$
+						URL url = new URL("http://download.osmand.net/download?file="+fileName+"-"+i + "&" + Version.getVersionAsURLParam());  //$NON-NLS-1$
 						downloadFile(fileName, out, url, " ["+i+"/"+parts+"]", indexOfAllFiles, progress);
 					}
 				}
