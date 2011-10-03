@@ -1,5 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+<string name="poi_query_by_name_matches_categories">Keresésnek megfelelő POI kategóriák :</string>
+<string name="data_to_search_poi_not_available">POI kereséhez nem található helyi adat.</string>
+<string name="poi_filter_by_name">Név szerinti keresés</string>
+<string name="old_poi_file_should_be_deleted">A POI adat fájl \'%1$s\' elavult és törölhető.</string>
+<string name="update_poi_file_not_found">A POI változások tárolásához nem hozható létre és nem található helyi fájl.</string>
+<string name="update_poi_does_not_change_indexes">POI-k változtatásai helyileg tárolódnak a letöltött térkép adatok nem változnak.</string>
+
+<string name="button_upgrade_osmandplus">Osmand+ frissítése</string>
+<string name="map_version_changed_info">A szerveren ezen Osmand verzióval nem kompatibilis térképek vannak. Letöltésükhöz és használatukhoz frissíteni kell a térkép szoftvert.</string>
+
+<string name="local_index_mi_rename">Átnevez</string>
+<string name="show_gpx_route">Térképen mutasd</string>
+<string name="poi_filter_nominatim">Online Nominatim</string>
 <string name="auto_follow_route_never">Soha</string>
 <string name="choose_auto_follow_route">Automatikus követés beállításai </string>
 <string name="choose_auto_follow_route_descr">Idő intervallum beállítása az automatikus követéshez</string>
