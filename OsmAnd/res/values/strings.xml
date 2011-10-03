@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="gpx_navigation">GPX route</string>
 	<string name="poi_query_by_name_matches_categories">Some poi categories matching to the query were found :</string>
 	<string name="data_to_search_poi_not_available">Local data to search POI is not present.</string>
 	<string name="poi_filter_by_name">Search by name</string>

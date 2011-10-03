@@ -303,6 +303,30 @@ public class MapActivityActions {
     }
     
     
+    protected void aboutRoute() {
+    	DialogInterface.OnClickListener showRoute = new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent intent = new Intent(mapActivity, ShowRouteInfoActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				mapActivity.startActivity(intent);
+			}
+		};
+		DialogInterface.OnClickListener saveDirections = new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				saveDirections();
+			}
+		};
+		Builder builder = new AlertDialog.Builder(mapActivity);
+		builder.setTitle(R.string.show_route);
+		builder.setMessage(mapActivity.getRoutingHelper().getGeneralRouteInformation());
+		builder.setPositiveButton(R.string.default_buttons_save, saveDirections);
+		builder.setNeutralButton(R.string.route_about, showRoute);
+		builder.setNegativeButton(R.string.close, null);
+		builder.show();
+    }
+    
     protected void getDirections(final double lat, final double lon, boolean followEnabled){
     	MapActivityLayers mapLayers = mapActivity.getMapLayers();
     	final OsmandSettings settings = OsmandSettings.getOsmandSettings(mapActivity);
@@ -393,12 +417,13 @@ public class MapActivityActions {
 				getMyApplication().showDialogInitializingCommandPlayer(mapActivity);
 			}
     	};
-    	DialogInterface.OnClickListener showRoute = new DialogInterface.OnClickListener(){
+    	
+		
+		DialogInterface.OnClickListener useGpxNavigation = new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Intent intent = new Intent(mapActivity, ShowRouteInfoActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				mapActivity.startActivity(intent);
+				ApplicationMode mode = getAppMode(buttons, settings);
+				navigateUsingGPX(mode);
 			}
 		};
     	
@@ -406,9 +431,7 @@ public class MapActivityActions {
     	if (followEnabled) {
     		builder.setTitle(R.string.follow_route);
 			builder.setPositiveButton(R.string.follow, followCall);
-			if (routingHelper.isRouterEnabled() && routingHelper.isRouteCalculated()) {
-				builder.setNeutralButton(R.string.route_about, showRoute);
-			}
+			builder.setNeutralButton(R.string.gpx_navigation, useGpxNavigation);
 			builder.setNegativeButton(R.string.only_show, onlyShowCall);
 		} else {
 			builder.setTitle(R.string.show_route);
@@ -433,7 +456,7 @@ public class MapActivityActions {
 		return location;
 	}
     
-    public void navigateUsingGPX() {
+    public void navigateUsingGPX(final ApplicationMode appMode) {
 		final LatLon endForRouting = mapActivity.getPointToNavigate();
 		final MapActivityLayers mapLayers = mapActivity.getMapLayers();
 		final OsmandSettings settings = OsmandSettings.getOsmandSettings(mapActivity);
@@ -480,6 +503,11 @@ public class MapActivityActions {
 								settings.setPointToNavigate(point.getLatitude(), point.getLongitude(), null);
 								mapLayers.getNavigationLayer().setPointToNavigate(point);
 							}
+						}
+						// change global settings
+						boolean changed = settings.APPLICATION_MODE.set(appMode);
+						if (changed) {
+							mapActivity.updateApplicationModeSettings();	
 						}
 						mapActivity.getMapView().refreshMap();
 						if(endPoint != null){

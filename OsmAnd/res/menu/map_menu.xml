@@ -12,11 +12,9 @@
 <item android:id="@+id/map_mute" android:title="@string/menu_mute_off" android:visible="false"></item>
 
 <item android:id="@+id/map_get_directions" android:title="@string/get_directions" android:icon="@android:drawable/ic_menu_directions"></item>
-<item android:id="@+id/map_save_directions" android:title="@string/menu_save_directions" android:icon="@android:drawable/ic_menu_save" visible="false"></item>
 <item android:title="@string/context_menu_item_search" android:id="@+id/map_specify_point" android:icon="@android:drawable/ic_menu_search"></item>
 
 <item android:title="@string/show_gps_status" android:id="@+id/map_show_gps_status" android:icon="@android:drawable/ic_menu_compass"></item> 
-<item android:title="@string/map_route_by_gpx" android:id="@+id/map_gpx_routing"></item>
 <item android:id="@+id/map_show_point_options" android:title="@string/show_point_options"></item>
 </group>
 

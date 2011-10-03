@@ -83,9 +83,9 @@ public class AsyncLoadingThread extends Thread {
 			progress = BusyIndicator.STATUS_BLUE;
 		} else if (!requests.isEmpty()) {
 			progress = BusyIndicator.STATUS_BLACK;
-		} else if(poiLoadRequest != null && !poiLoadRequest.isFinished()) {
+		} else if(poiLoadRequest != null && poiLoadRequest.isRunning()) {
 			progress = BusyIndicator.STATUS_BLACK;
-		} else if(transportLoadRequest != null && !transportLoadRequest.isFinished()) {
+		} else if(transportLoadRequest != null && transportLoadRequest.isRunning()) {
 			progress = BusyIndicator.STATUS_BLACK;
 		}
 		return progress;
@@ -211,7 +211,7 @@ public class AsyncLoadingThread extends Thread {
 		protected double leftLongitude;
 		protected double rightLongitude;
 		protected boolean cancelled = false;
-		protected volatile boolean finished = false;
+		protected volatile boolean running = false;
 
 		public boolean isContains(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
 			boolean inside = this.topLatitude >= topLatitude && this.leftLongitude <= leftLongitude
@@ -226,12 +226,16 @@ public class AsyncLoadingThread extends Thread {
 			this.rightLongitude = rightLongitude;
 		}
 		
-		public boolean isFinished() {
-			return finished;
+		public boolean isRunning() {
+			return running && !cancelled;
+		}
+		
+		public void start() {
+			running = true;
 		}
 		
 		public void finish() {
-			finished = true;
+			running = false;
 			// use downloader callback
 			for (IMapDownloaderCallback c : downloader.getDownloaderCallbacks()) {
 				c.tileDownloaded(null);
@@ -271,11 +275,15 @@ public class AsyncLoadingThread extends Thread {
 			return new Runnable() {
 				@Override
 				public void run() {
-					for (AmenityIndexRepository repository : res) {
-						repository.evaluateCachedAmenities(ntopLatitude, nleftLongitude, nbottomLatitude, nrightLongitude, zoom, filter,
-								AmenityLoadRequest.this);
+					start();
+					try {
+						for (AmenityIndexRepository repository : res) {
+							repository.evaluateCachedAmenities(ntopLatitude, nleftLongitude, nbottomLatitude, nrightLongitude, zoom,
+									filter, AmenityLoadRequest.this);
+						}
+					} finally {
+						finish();
 					}
-					finish();
 				}
 			};
 		}
@@ -308,11 +316,15 @@ public class AsyncLoadingThread extends Thread {
 			return new Runnable() {
 				@Override
 				public void run() {
-					for (TransportIndexRepository repository : repos) {
-						repository.evaluateCachedTransportStops(ntopLatitude, nleftLongitude, nbottomLatitude, nrightLongitude, zoom,
-								LIMIT_TRANSPORT, TransportLoadRequest.this);
+					start();
+					try {
+						for (TransportIndexRepository repository : repos) {
+							repository.evaluateCachedTransportStops(ntopLatitude, nleftLongitude, nbottomLatitude, nrightLongitude, zoom,
+									LIMIT_TRANSPORT, TransportLoadRequest.this);
+						}
+					} finally {
+						finish();
 					}
-					finish();
 				}
 			};
 		}

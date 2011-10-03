@@ -961,9 +961,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				muteMenu.setVisible(false);
 			}
 		}
-		MenuItem saveMenu = menu.findItem(R.id.map_save_directions);
-		if(saveMenu != null){
-			saveMenu.setVisible(routingHelper.isRouteCalculated());
+		MenuItem directions = menu.findItem(R.id.map_get_directions);
+		if(routingHelper.isRouteCalculated()){
+			directions.setTitle(R.string.show_route);
+		} else {
+			directions.setTitle(R.string.get_directions);
 		}
 		
 		return val;
@@ -984,18 +986,19 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			startGpsStatusIntent();
 			return true;
 		case R.id.map_get_directions:
-			Location loc = getLastKnownLocation();
-			if(loc != null){
-				mapActions.getDirections(loc.getLatitude(), loc.getLongitude(), true);
+			if(routingHelper.isRouteCalculated()){
+				mapActions.aboutRoute();
 			} else {
-				mapActions.getDirections(mapView.getLatitude(), mapView.getLongitude(), true);
+				Location loc = getLastKnownLocation();
+				if (loc != null) {
+					mapActions.getDirections(loc.getLatitude(), loc.getLongitude(), true);
+				} else {
+					mapActions.getDirections(mapView.getLatitude(), mapView.getLongitude(), true);
+				}
 			}
 			return true;
 		case R.id.map_layers:
 			mapLayers.openLayerSelectionDialog(mapView);
-			return true;
-		case R.id.map_save_directions :
-			mapActions.saveDirections();
 			return true;
 		case R.id.map_specify_point:
 			// next 2 lines replaced for Issue 493, replaced by new 3 lines
@@ -1024,9 +1027,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     			navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
     		}
 			mapView.refreshMap();
-			return true;
-		case R.id.map_gpx_routing:
-			mapActions.navigateUsingGPX();
 			return true;
 		case R.id.map_show_point_options:
 			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
@@ -1140,7 +1140,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				if(standardId == R.string.context_menu_item_navigate_point){
 					navigateToPoint(new LatLon(latitude, longitude));
 				} else if(standardId == R.string.context_menu_item_show_route){
-					mapActions. getDirections(latitude, longitude, false);
+					mapActions.getDirections(latitude, longitude, false);
 				} else if(standardId == R.string.context_menu_item_search){
 					Intent intent = new Intent(MapActivity.this, SearchActivity.class);
 					intent.putExtra(SearchActivity.SEARCH_LAT, latitude);

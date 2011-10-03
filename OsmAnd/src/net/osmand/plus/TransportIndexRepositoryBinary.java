@@ -121,10 +121,10 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 	@Override
 	public void evaluateCachedTransportStops(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude,
 			int zoom, int limit, ResultMatcher<TransportStop> matcher) {
-		cTopLatitude = topLatitude + (topLatitude - bottomLatitude);
-		cBottomLatitude = bottomLatitude - (topLatitude - bottomLatitude);
-		cLeftLongitude = leftLongitude - (rightLongitude - leftLongitude);
-		cRightLongitude = rightLongitude + (rightLongitude - leftLongitude);
+		cTopLatitude = topLatitude ;
+		cBottomLatitude = bottomLatitude ;
+		cLeftLongitude = leftLongitude ;
+		cRightLongitude = rightLongitude ;
 		cZoom = zoom;
 		// first of all put all entities in temp list in order to not freeze other read threads
 		ArrayList<TransportStop> tempList = new ArrayList<TransportStop>();

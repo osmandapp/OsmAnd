@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -368,6 +369,14 @@ public class RoutingHelper {
 			return dist;
 		}
 		return 0;
+	}
+	
+	public String getGeneralRouteInformation(){
+		int dist = getLeftDistance();
+		int hours = getLeftTime() / (60 * 60);
+		int minutes = (getLeftTime() / 60) % 60;
+		return MessageFormat.format(context.getString(R.string.route_general_information), OsmAndFormatter.getFormattedDistance(dist, context),
+				hours, minutes);
 	}
 	
 	public Location getLocationFromRouteDirection(RouteDirectionInfo i){
