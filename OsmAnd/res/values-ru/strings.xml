@@ -1,5 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+   <string name="tip_recent_changes_0_6_8_t">Изменения в 0.6.8 :
+\n\t- Полностью обновленный поиск (POI, Адрес)! Поиск по адресу более отзывчивый и быстрый. Единственная кнопка поиска с множественными вкладками.
+\n\t- Поиск POI по имени на больших территориях (страна)  в новых картах  
+\n\t- Исправление ошибки мерцающей краты (Issue 641)
+\n\t- Автовозврат карты (Issue 356)
+\n\t- GPX навигация перемещена в \'Маршруты\' и сохранение маршрута перенесено в \'О маршруте\'
+\n\t- POI данные внутри .obf файла (поддерживаются карты старше 01/10/11) 
+\n\t- Исправление голосовых подсказок (потеря GPS сигнала) 
+\n\t- Небольшие улучшения
+	</string>
+    <string name="gpx_navigation">GPX маршрут</string>
+	<string name="poi_query_by_name_matches_categories">Некоторые poi категории соответствуют запросу, можете использовать их для создания фильтра :</string>
+	<string name="data_to_search_poi_not_available">Локальные данные для поиска POI по имени не найдены.</string>
+	<string name="poi_filter_by_name">Поиск по имени</string>
+	<string name="old_poi_file_should_be_deleted">POI данные \'%1$s\' устарели и могут быть удалены.</string>
+	<string name="update_poi_file_not_found">Локальный файл, который содержит обновляемые данные POI (при создании, удалении) не найден и не может быть создан.</string>
+	<string name="update_poi_does_not_change_indexes">Измение POI в приложении не меняет POI данные загруженные из интернета, все изменения однако собираются в локальный файл.</string>
+
+	<string name="button_upgrade_osmandplus">Обновить Osmand+</string>
+	<string name="map_version_changed_info">На сервере данных были найдены файлы новее данной версии программы, чтобы использовать их, пожалуйста, обновите приложение.</string>
+	
+	<string name="local_index_mi_rename">Переименовать</string>
+	<string name="show_gpx_route">Показать на карте</string>
 	<string name="poi_filter_nominatim">Nominatim (интернет)</string>
     <string name="auto_follow_route_never">Никогда</string>
 	<string name="choose_auto_follow_route">Настройки автовозрата карты</string>
@@ -28,7 +51,9 @@
 \n\t- Улучшенный векторный рендеринг
 \n\t- Улучшенное использование TTS 
 \n\t- Исправление ошибок
-	</string>	<string name="save_route_dialog_title">Сохранить маршрут как GPX путь</string>
+	</string>	
+	
+	<string name="save_route_dialog_title">Сохранить маршрут как GPX путь</string>
 	<string name="route_successfully_saved_at">Маршрут успешно сохранен \'%1$s\'.</string>
 	<string name="filename_input">Имя файла : </string>
 	<string name="file_with_name_already_exist">Файл с данным именем уже существует.</string>

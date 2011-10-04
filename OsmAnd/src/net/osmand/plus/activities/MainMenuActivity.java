@@ -215,7 +215,7 @@ public class MainMenuActivity extends Activity {
 				getMyApplication().closeApplication();
 				//moveTaskToBack(true);
 				activity.finish();
-				//TODO this is different from MapActivity close...
+				// this is different from MapActivity close...
 				if (getMyApplication().getNavigationService() == null) {
 					//http://stackoverflow.com/questions/2092951/how-to-close-android-application
 					System.runFinalizersOnExit(true);

@@ -43,6 +43,7 @@ import android.view.View.OnClickListener;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -116,9 +117,11 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 	private void showContextMenu(final LocalIndexInfo info) {
 		Builder builder = new AlertDialog.Builder(this);
 		final List<Integer> menu = new ArrayList<Integer>();
-		if(info.getGpxFile() != null && info.getType() == LocalIndexType.GPX_DATA){
+		if(info.getType() == LocalIndexType.GPX_DATA){
 			menu.add(R.string.show_gpx_route);
 			menu.add(R.string.local_index_mi_upload_gpx);
+			descriptionLoader = new LoadLocalIndexDescriptionTask();
+			descriptionLoader.execute(info);
 		}
 		if(info.getType() == LocalIndexType.MAP_DATA || info.getType() == LocalIndexType.POI_DATA){
 			if(!info.isBackupedData()){
@@ -149,7 +152,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 							MapActivity.launchMapActivityMoveToTop(LocalIndexesActivity.this);
 						}
 					} else if (resId == R.string.local_index_mi_rename) {
-						// TODO
+						renameFile(info);
 					} else if (resId == R.string.local_index_mi_restore) {
 						new LocalIndexOperationTask(RESTORE_OPERATION).execute(info);
 					} else if (resId == R.string.local_index_mi_delete) {
@@ -160,10 +163,43 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 						new UploadGPXFilesTask().execute(info);
 					}
 				}
+
 			});
 
 		}
 		builder.show();
+	}
+	
+	private void renameFile(LocalIndexInfo info) {
+		final File f = new File(info.getPathToData());
+		Builder b = new AlertDialog.Builder(this);
+		if(f.exists()){
+			final EditText editText = new EditText(this);
+			editText.setText(f.getName());
+			b.setView(editText);
+			b.setPositiveButton(R.string.default_buttons_save, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					String newName = editText.getText().toString();
+					File dest = new File(f.getParentFile(), newName);
+					if (dest.exists()) {
+						Toast.makeText(LocalIndexesActivity.this, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
+					} else {
+						if(f.renameTo(dest)){
+							asyncLoader = new LoadLocalIndexTask();
+							asyncLoader.execute(LocalIndexesActivity.this);
+							reloadIndexes();
+						} else {
+							Toast.makeText(LocalIndexesActivity.this, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
+						}
+					}
+					
+				}
+			});
+			b.setNegativeButton(R.string.default_buttons_cancel, null);
+			b.show();
+		}
 	}
 
 	public class LoadLocalIndexTask extends AsyncTask<Activity, LocalIndexInfo, List<LocalIndexInfo>> {
@@ -329,10 +365,7 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 	
 	
 	public class UploadGPXFilesTask extends AsyncTask<LocalIndexInfo, String, String> {
-		
 
-		
-		
 		@Override
 		protected String doInBackground(LocalIndexInfo... params) {
 			int count = 0;
