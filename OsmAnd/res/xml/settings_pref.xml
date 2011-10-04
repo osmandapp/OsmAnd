@@ -26,9 +26,7 @@
 			android:key="use_step_by_step_rendering" />
 		<ListPreference android:key="map_text_size" android:title="@string/map_text_size" android:summary="@string/map_text_size_descr"/>
 		<CheckBoxPreference android:key="use_high_res_maps" android:title="@string/use_high_res_maps" android:summary="@string/use_high_res_maps_descr"></CheckBoxPreference>
-
-		<CheckBoxPreference android:summary="@string/trace_rendering_descr" android:title="@string/trace_rendering"
-			android:key="debug_rendering"></CheckBoxPreference>
+		
 	</PreferenceScreen>
 
 
@@ -92,6 +90,13 @@
 		<EditTextPreference android:title="@string/user_name" android:summary="@string/user_name_descr" android:key="user_name"></EditTextPreference>
 		<EditTextPreference android:title="@string/user_password" android:password="true" android:summary="@string/user_password_descr"
 			android:key="user_password"></EditTextPreference>
+	</PreferenceScreen>
+	
+	<PreferenceScreen android:key="development" android:title="OsmAnd Development" android:summary="Development activities and experimental features">
+		<CheckBoxPreference android:summary="@string/trace_rendering_descr" android:title="@string/trace_rendering"
+			android:key="debug_rendering"></CheckBoxPreference>
+		<CheckBoxPreference android:key="animate_routing" android:title="Animate Routing" android:summary="Enable osmand animate routing"></CheckBoxPreference>
+		<Preference android:key="test_voice_commands" android:summary="Test currently selected voice routing" android:title="Test Voice Commands"></Preference>
 	</PreferenceScreen>
 
 </PreferenceScreen>
