@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="animate_route_off">Animate off</string>
+	<string name="animate_route">Animate on</string>
+	
 	<string name="tip_recent_changes_0_6_8_t">Changes in 0.6.8 :
 \n\t- Completely redesigned search (POI, Address)! Make address search much faster and responsiveness. Leave one search with many different search aspects.
 \n\t- Implement search POI by name big areas (countries)  
@@ -60,6 +63,7 @@
 	<string name="file_with_name_already_exist">File with same name already exists.</string>
 	<string name="default_buttons_save">Save</string>
 	<string name="menu_save_directions">Save directions</string>
+	
 	<string name="local_index_upload_gpx_description">Upload GPX files to OSM community. They will be used to improve maps.</string>
 	<string name="local_index_items_uploaded">%1$d of %2$d item(s) successfully uploaded.</string>
 	<string name="local_index_mi_upload_gpx">Send to OSM...</string>

@@ -19,7 +19,6 @@ import net.osmand.plus.voice.CommandPlayer;
 import android.content.Context;
 import android.location.Location;
 import android.os.Handler;
-import android.os.Message;
 import android.util.FloatMath;
 import android.widget.Toast;
 
@@ -125,6 +124,12 @@ public class RoutingHelper {
 	
 	public GPXRouteParams getCurrentGPXRoute() {
 		return currentGPXRoute;
+	}
+	
+	public List<Location> getCurrentRoute() {
+		return currentGPXRoute == null || currentGPXRoute.points.isEmpty() ? Collections
+				.unmodifiableList(routeNodes) : Collections
+				.unmodifiableList(currentGPXRoute.points);
 	}
 	
 	public void setAppMode(ApplicationMode mode){

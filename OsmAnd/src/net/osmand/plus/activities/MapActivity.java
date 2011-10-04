@@ -27,12 +27,12 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointLocationLayer;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
-import android.app.AlertDialog.Builder;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.DialogInterface;
@@ -57,6 +57,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings.Secure;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -64,8 +65,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
@@ -120,6 +121,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private OsmandSettings settings;
 	// Store previous map rotation settings for rotate button
 	private Integer previousMapRotate = null;
+
+	private RouteAnimation routeAnimation = new RouteAnimation();
 
 	private boolean isMapLinkedToLocation = false;
 	private ProgressDialog startProgressDialog;
@@ -536,6 +539,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     protected void onDestroy() {
     	super.onDestroy();
     	savingTrackHelper.close();
+    	routeAnimation.close();
     	if(mNotificationManager != null){
     		mNotificationManager.cancel(APP_NOTIFICATION_ID);
     	}
@@ -986,6 +990,21 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			directions.setTitle(R.string.get_directions);
 		}
 		
+		MenuItem animateMenu = menu.findItem(R.id.map_animate_route);
+		
+		if (animateMenu != null) {
+			if(settings.TEST_ANIMATE_ROUTING.get()){
+				animateMenu.setTitle(routeAnimation.isRouteAnimating() ? R.string.animate_route_off
+					: R.string.animate_route);
+				animateMenu.setVisible("1".equals(Secure.getString(
+					getContentResolver(), Secure.ALLOW_MOCK_LOCATION))
+					&& settings.getPointToNavigate() != null
+					&& routingHelper.isRouteCalculated());
+				animateMenu.setVisible(true);
+			} else {
+				animateMenu.setVisible(false);
+			}
+		}
 		return val;
 	}
 	
@@ -1049,6 +1068,10 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		case R.id.map_show_point_options:
 			contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 			return true;
+		case R.id.map_animate_route:
+			//animate moving on route
+			routeAnimation.startStopRouteAnimation(routingHelper, this);
+			return true;			
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -1086,7 +1109,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		}
 	}
 	
-    
+        
     protected void parseLaunchIntentLocation(){
     	Intent intent = getIntent();
     	if(intent != null && intent.getData() != null){
