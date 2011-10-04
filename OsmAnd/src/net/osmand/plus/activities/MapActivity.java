@@ -88,6 +88,8 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	private static final float ACCURACY_FOR_GPX_AND_ROUTING = 50;
 	
 	private static final int AUTO_FOLLOW_MSG_ID = 8; 
+	private static final int LOST_LOCATION_MSG_ID = 10;
+	private static final long LOST_LOCATION_CHECK_DELAY = 20000;
 	
 	private long lastTimeAutoZooming = 0;
 	
@@ -626,9 +628,25 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     	if(routingHelper.isFollowingMode()){
     		if(location == null || 
     				!location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
+    			// Update routing position  
     			routingHelper.setCurrentLocation(location);
+    			// Check with delay that gps location is not lost
+    			if(location != null && routingHelper.getLeftDistance() > 0){
+    				Message msg = Message.obtain(uiHandler, new Runnable() {
+    					@Override
+    					public void run() {
+							if (routingHelper.getLeftDistance() > 0 && settings.MAP_ACTIVITY_ENABLED.get()) {
+								routingHelper.getVoiceRouter().gpsLocationLost();
+							}
+    					}
+    				});
+    				msg.what = LOST_LOCATION_MSG_ID;
+    				uiHandler.removeMessages(LOST_LOCATION_MSG_ID);
+    				uiHandler.sendMessageDelayed(msg, LOST_LOCATION_CHECK_DELAY);
+    			}
     		}
     	}
+    	
     	if (location != null) {
 			if (isMapLinkedToLocation()) {
 				if(settings.AUTO_ZOOM_MAP.get() && location.hasSpeed()){

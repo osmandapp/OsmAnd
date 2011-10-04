@@ -10,7 +10,7 @@ import android.location.Location;
 
 
 public class VoiceRouter {
-	// 0 - unknown, 1 - notify prepare, 2 - notify to turn after , 3 - notify to turn
+	// 0 - unknown, 1 - notify to prepare, 2 - notify to turn in , 3 - notify to turn
 	private final int STATUS_UNKNOWN = 0;
 	private final int STATUS_3000_PREPARE = 1;
 	private final int STATUS_800_PREPARE = 2;
@@ -38,6 +38,8 @@ public class VoiceRouter {
 	protected int TURN_IN_DISTANCE = 0;
 	protected int TURN_IN_DISTANCE_END = 0;
 	protected int TURN_DISTANCE = 0;
+	
+	protected VoiceCommandPending pendingCommand = null;
 
 
 	public VoiceRouter(RoutingHelper router, CommandPlayer player) {
@@ -48,6 +50,13 @@ public class VoiceRouter {
 	
 	public void setPlayer(CommandPlayer player) {
 		this.player = player;
+		if(pendingCommand != null && player != null){
+			CommandBuilder newCommand = getNewCommandPlayerToPlay();
+			if (newCommand != null) {
+				pendingCommand.play(newCommand);
+			}
+			pendingCommand = null;
+		}
 	}
 	
 	
@@ -318,6 +327,13 @@ public class VoiceRouter {
 		}
 		return null;
 	}
+	
+	public void gpsLocationLost(){
+		CommandBuilder play = getNewCommandPlayerToPlay();
+		if (play != null) {
+			play.gpsLocationLost().play();
+		}
+	}
 
 	public void newRouteIsCalculated(boolean updateRoute) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
@@ -327,6 +343,9 @@ public class VoiceRouter {
 			} else {
 				play.newRouteCalculated(router.getLeftDistance()).play();
 			}
+		} else if(player == null){
+			pendingCommand = new VoiceCommandPending(updateRoute ? 
+					VoiceCommandPending.ROUTE_RECALCULATED : VoiceCommandPending.ROUTE_CALCULATED, this);
 		}
 		currentDirection = router.currentDirectionInfo;
 		currentStatus = 0;
@@ -339,10 +358,39 @@ public class VoiceRouter {
 		}
 	}
 
-	public void onApplicationTerminate(Context ctx)
-	{
+	public void onApplicationTerminate(Context ctx) {
 		if (player != null) {
 			player.clear();
+		}
+	}
+	
+	/**
+	 * Command to wait until voice player is initialized 
+	 */
+	private static class VoiceCommandPending {
+		public static final int ROUTE_CALCULATED = 1;
+		public static final int ROUTE_RECALCULATED = 2;
+		protected final long timestamp;
+		protected final int type;
+		private final VoiceRouter voiceRouter;
+		
+		public VoiceCommandPending(int type, VoiceRouter voiceRouter){
+			this.type = type;
+			this.voiceRouter = voiceRouter;
+			timestamp = System.currentTimeMillis();
+		}
+
+		public void play(CommandBuilder newCommand) {
+			int left = voiceRouter.router.getLeftDistance();
+			if (left > 0) {
+				if (type == ROUTE_CALCULATED) {
+					newCommand.newRouteCalculated(left).play();
+				} else if (type == ROUTE_RECALCULATED) {
+					newCommand.routeRecalculated(left).play();
+				}
+			}
+			// TODO Auto-generated method stub
+			
 		}
 	}
 

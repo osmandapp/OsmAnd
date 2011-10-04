@@ -9,10 +9,11 @@ public class ToDoConstants {
 	
 	
 //	    == Osmand application (TODO 127) ==
-	// TODO redesign Directions using GPX file! (One menu directions <-> switch 'Route')
-	// TODO test if voice properly inititialized (first command!)
+	// TODO replace icon for default mode (???)
 	// TODO prepare C++ version of routing algorithm
 	// TODO make transport search faster (cancellable.. )
+
+	// TODO Test Voice activity
 
 	// Map Refactoring
 //      Remove notification from OsmAndMapTileView (?)
@@ -40,16 +41,7 @@ public class ToDoConstants {
 
 	///////////////////////////   DONE //////////////////////////////
 	// DONE ANDROID :
-//  || 104 || Add activity to show current loaded indexes and information about them (Issue 366) ||
-//	|| 112 || Investigate exiting/minimizing app (Issue 214) ||
-//  || 122 || Frozen sqlite db images (bug?). When images are loaded into sqlite the whole map is frozen (issue 413) || 	
-//  || 120 || Show icons over poi circle (issue 414) ||
-//  || 119 || Dialog on main screen tips and tricks (Issue 415) ||
-//  || 118 || Config switching between maps on different zoom levels <14 (using raster), > 14 vector (Issue 419) ||
-//  || 124 || Animated transition using only raster images (?) - skip animations (!) - don not render vectoring for animations (Issue 238) ||
-//	|| 92 || Support poi index with standard map index and unify POI categories (unify done +, works very slow) (Issue 417) ||
-//	|| 97 || For voice navigation consider current speed of vehicle. Especially when speed > 50 pronounce more than 200 m (Issue 420) ||
-//  || 123 || Improve gpx file showing (very slow for big files) (Issue 412) ||
+
 	// DONE SWING
 	
 }

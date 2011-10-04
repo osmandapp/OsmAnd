@@ -19,6 +19,7 @@ import net.osmand.plus.voice.CommandPlayer;
 import android.content.Context;
 import android.location.Location;
 import android.os.Handler;
+import android.os.Message;
 import android.util.FloatMath;
 import android.widget.Toast;
 
@@ -195,6 +196,7 @@ public class RoutingHelper {
 		if(finalLocation == null || currentLocation == null){
 			return;
 		}
+		
 		boolean calculateRoute  = false;
 		synchronized (this) {
 			if(routeNodes.isEmpty() || routeNodes.size() <= currentRoute){
