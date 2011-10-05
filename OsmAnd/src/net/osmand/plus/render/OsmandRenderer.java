@@ -25,6 +25,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
@@ -62,6 +63,8 @@ public class OsmandRenderer {
 	private Map<Integer, Bitmap> cachedIcons = new LinkedHashMap<Integer, Bitmap>();
 
 	private final Context context;
+	//for street shadows
+	private Canvas streetcv;
 
 	private DisplayMetrics dm;
 	
@@ -280,6 +283,12 @@ public class OsmandRenderer {
 		
 		// fill area
 		Canvas cv = new Canvas(bmp);
+		
+		//needed for better street shadows
+		Bitmap streetbmp = Bitmap.createBitmap(cv.getWidth(), cv.getHeight(), Bitmap.Config.ARGB_8888);
+		streetcv = new Canvas(streetbmp);
+		
+		
 		if(renderer != null){
 			int dc = renderer.getDefaultColor(rc.nightMode);
 			if(dc != 0){
@@ -394,6 +403,10 @@ public class OsmandRenderer {
 				}
 			}
 			notifyListeners(notifyList);
+			
+			//Draw streets here
+			drawStreetsWithShadow(cv, streetbmp);
+			
 			drawTextOverCanvas(rc, cv, useEnglishNames);
 			long time = System.currentTimeMillis() - now;
 			rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n" +
@@ -404,6 +417,18 @@ public class OsmandRenderer {
 		}
 		
 		return bmp;
+	}
+	
+	// Draw nice shadow under all streets 
+	//but also other linear objects which is not very good
+	
+	private void drawStreetsWithShadow(Canvas cv, Bitmap streetbmp){
+		Paint shadowpaint = new Paint();
+		shadowpaint.setColor(Color.BLACK);
+		shadowpaint.setMaskFilter(new BlurMaskFilter(1, BlurMaskFilter.Blur.SOLID));
+		Bitmap shadowImage = streetbmp.extractAlpha();
+		cv.drawBitmap(shadowImage, 0, 0, shadowpaint);// <----
+		cv.drawBitmap(streetbmp, 0, 0, null);
 	}
 
 	private void notifyListeners(List<IMapDownloaderCallback> notifyList) {
@@ -874,6 +899,8 @@ public class OsmandRenderer {
 	
 
 	
+	
+	
 	private void drawPolyline(BinaryMapDataObject obj, BaseOsmandRender render, Canvas canvas, RenderingContext rc, TagValuePair pair, int layer) {
 		if(render == null || pair == null){
 			return;
@@ -938,19 +965,21 @@ public class OsmandRenderer {
 		}
 		if (path != null) {
 			rc.main.updatePaint(paint);
-			canvas.drawPath(path, paint);
+			
+			//changed canvas to the global one for streets
+			streetcv.drawPath(path, paint);
 			if (rc.second.strokeWidth != 0) {
 				rc.second.updatePaint(paint);
-				canvas.drawPath(path, paint);
+				streetcv.drawPath(path, paint);
 				if (rc.third.strokeWidth != 0) {
 					rc.third.updatePaint(paint);
-					canvas.drawPath(path, paint);
+					streetcv.drawPath(path, paint);
 				}
 			}
 			if (rc.adds != null) {
 				for (int i = 0; i < rc.adds.length; i++) {
 					rc.adds[i].updatePaint(paint);
-					canvas.drawPath(path, paint);
+					streetcv.drawPath(path, paint);
 				}
 			}
 			if (obj.getName() != null && obj.getName().length() > 0) {
@@ -1016,6 +1045,11 @@ public class OsmandRenderer {
 			}
 		}
 	}
+
+	
+	
+	
+	
 	private static RenderingPaintProperties[] oneWay = null;
 	public static RenderingPaintProperties[] getOneWayProperties(){
 		if(oneWay == null){
