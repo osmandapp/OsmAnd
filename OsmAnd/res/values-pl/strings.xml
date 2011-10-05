@@ -133,7 +133,7 @@
 <string name="choose_audio_stream">Wyjście głosu nawigatora</string>
 <string name="choose_audio_stream_descr">Wybierz kanał do odtwarzania głosu nawigatora (zależne od możliwości systemu)</string>
 <string name="voice_stream_voice_call">Kanał głosowy</string>
-<string name="voice_stream_notification">Kanał powiadomień/string>
+<string name="voice_stream_notification">Kanał powiadomień</string>
 <string name="voice_stream_music">Kanał media/music</string>
 <string name="warning_tile_layer_not_downloadable">Program nie może pobrać warstwy %1$s, spróbuj ją przeinstalować.</string>
 <string name="overlay_transparency_descr">Zmień przezroczystość warstwy</string>
@@ -667,7 +667,7 @@
 <string name="search_address_top_text">Wybierz adres</string>
 <string name="search_address_region">Region</string>
 <string name="search_address_city">Miejscowość</string>
-<string name="search_address_street">Ulica/string>
+<string name="search_address_street">Ulica</string>
 <string name="search_address_building">Budynek</string>
 <string name="search_address_building_option">Budynek</string>
 <string name="search_address_street_option">Przecinająca ulica (przecznica)</string>
