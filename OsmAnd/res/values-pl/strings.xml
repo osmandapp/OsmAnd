@@ -28,12 +28,12 @@
     <string name="select_search_position">Pozycja:</string>
     <string name="context_menu_item_search">Znajdź</string>
     <string name="tip_recent_changes_0_6_7_t">Zmiany dla wersji 0.6.7:
-\n\t- możliwość pobrania map bezpośrednio z poziomu aplikacji  Offline data manager (download, delete, backup offline data directly in Osmand)
-\n\t- Favorite points and groups (categorize, delete, manage favorites)
-\n\t- GPX Explorer w aplikacji (see tracks, distance, average speed, elevation, etc.)
-\n\t- nawigacja w oparciu o track GPX (useful options, continue navigation after crash, supports roundabouts)
+\n\t- możliwość pobrania map bezpośrednio z poziomu aplikacji  Offline data manager (pobierz, usuń, zrób kopię zapasową danych bezpośrednio w Osmand)
+\n\t- ulubione punkty i grupy (kategoryzuj, usuń, zarządzaj ulubionymi)
+\n\t- GPX Explorer w aplikacji (zobacz szlaki, odległość, średnią prędkość, wysokość nad poziomem morza, itd.)
+\n\t- nawigacja w oparciu o track GPX (przydatne opcje, kontynuuj nawigację po przerwie, działa z rondami)
 \n\t- możliwość zapisania trasy jako ślad GPX do wykorzystania w trybie offline
-\n\t- Improve GPX monitoring  (filter some inaccurate location and save accuracy/elevation/speed)
+\n\t- ulepszone monitorowanie GPX (filtruje niektóre nieprecyzyjne położenia i zapisuje precyzję/wysokość/prędkość)
 \n\t- możliwość wysłania śladu GPX dla społeczności OSM (http://download.osmand.net/gpx/)
 \n\t- usprawnienie rendera wektorowego
 \n\t- usprawnienie mechanizmu TTS (dokładny dystans)
@@ -52,7 +52,7 @@
     <string name="show_more_map_detail">Pokaż więcej szczegółów na mapie</string>
     <string name="show_more_map_detail_descr">Pokazuje więcej szczegółów na mapie wektorowej na niższych poziomach powiększenia</string>
     <string name="favourites_delete_multiple_succesful">Ulubiony punkt został skasowany.</string>
-    <string name="favorite_delete_multiple">Zamierzasz usunąć %1$d ulubiony punkt i %2$d grupę ulubionych. Czy na pewno?</string>
+    <string name="favorite_delete_multiple">Zamierzasz usunąć %1$d ulubiony punkt i %2$d grupę ulubionych. Jesteś pewny?</string>
     <string name="favorite_home_category">Start</string>
     <string name="favorite_friends_category">Znajomi</string>
     <string name="favorite_places_category">Miejsca</string>
@@ -60,7 +60,7 @@
 
     <string name="vector_map_not_needed">Niepotrzebne</string>
     <string name="basemap_missing">Podstawowa mapa świata jest niezainstalowana. Pobierz plik World_basemap_x.obf.</string>
-    <string name="vector_data_missing">Brak danych (\'offline\') w urządzeniu na karcie SD. Musisz je najpierw pobrać, by używać map offline.</string>
+    <string name="vector_data_missing">Brak danych (\'offline\') w urządzeniu na karcie SD. Musisz je najpierw pobrać, by używać mapy offline.</string>
     <string name="local_index_gpx_info_show">\n\nPrzytrzymaj dłużej, by pokazać na mapie</string>
     <string name="local_index_gpx_info_speed">\nŚrednia prędkość: %1$s \nMaksymalna prędkość: %2$s</string>
     <string name="local_index_gpx_info_elevation">\nŚrednia wysokość: %1$.0f m\nMinimalna wysokość: %2$.0f m\nMaksymalna wysokość: %3$.0f m\nWzniosy: %4$.0f m\nSpadki: %5$.0f m</string>
@@ -81,7 +81,7 @@
     <string name="local_index_tile_data">Dane kafelkowe: %1$s \nMinimalny zoom: %2$d\nMaksymalny zoom: %3$d\nMożliwe do pobrania: %4$s \nPobrano zoomów: %5$s</string>
     <string name="local_index_poi_data">Dane POI</string>
     <string name="local_index_address_data">Dane adresowe</string>
-    <string name="local_index_transport_data">Transport data</string>
+    <string name="local_index_transport_data">Dane transportu</string>
     <string name="local_index_map_data">Dane mapowe</string>
     <string name="local_index_items"/>
     <string name="local_indexes_cat_backup">Kopia zapasowa</string>
@@ -101,10 +101,10 @@
     <string name="tip_recent_changes">Ostatnie zmiany</string>
     <string name="tip_recent_changes_0_6_6_t">Zmiany dla 0.6.6: 
 \n\t- wyszukiwanie głosowe w nawigacji za pomocą TTS
-\n\t- render mapy pokazuje więcej szczegółów
+\n\t- renderowanie mapy pokazuje więcej szczegółów
 \n\t- mapa podstawowa zawarta w aplikacji
-\n\t- podręcenie routingu offline (ciągle experymentalny)
-\n\t- opecje routingu dla GPX
+\n\t- ulepszenie routingu offline (ciągle experymentalny)
+\n\t- opcje routingu dla GPX
 \n\t- aktualizacja interfejsu i poprawka wielu błędów
     </string>
     <string name="voice_not_use">Nie używaj</string>
@@ -119,16 +119,16 @@
     <string name="gpx_option_reverse_route">Odwróć kierunek GPX</string>
     <string name="gpx_option_destination_point">Użyj bieżącego celu</string>
     
-	<string name="tip_rotation_switching">Map Rotation</string>
-	<string name="tip_rotation_switching_t">\tYou can choose whether and how the map display is rotated in \'Settings\' -&gt; \'General Settings\' -&gt; \'Map rotation\'.
-	\n\tThe choices are:
-	\n\t\'Don\'t rotate\' - Map will not be rotated. North will be always up
-	\n\t\'To direction of movement\' - Map will continuously be aligned with your heading
-	\n\t\'To compass\' - Map will continuously be aligned with device compass reading
-	\n\tHint: To quickly change between rotation by compass and the one you selected in settings, you can simply tap on the compass needle in map view.</string>
+	<string name="tip_rotation_switching">Rotacja mapy</string>
+	<string name="tip_rotation_switching_t">\tMożesz wybrać czy i jak mapa ma być obracana w \'Settings\' -&gt; \'General Settings\' -&gt; \'Map rotation\'.
+	\n\tDo wyboru stoją:
+	\n\t\'Nie obracaj' - Mapa nie będzie obracana. Północ zawsze będzie na górze.
+	\n\t\'Do kierunku ruchu\' - Mapa będzie ciągle wyrównana z twoim kierunkiem poruszania.
+	\n\t\'Do kompasu\' - Mapa będzie ciągle wyrównana z kierunkiem wskazywanym przez kompas w urządzeniu.
+	\n\tSugestia: Żeby szybko zmieniać pomiędzy rotacją za pomocą kompasu i tą wybraną w opcjach, możesz poprostu nacisnąć igłę kompasu w rogu mapy.</string>
 
-	<string name="switch_to_raster_map_to_see">Current position not covered in your offline vector maps, you can switch map source in menu \'Define view\' -&gt; \'Map Source...\' or need to download additional vector map.</string>
-	<string name="switch_to_vector_map_to_see">You can switch to offline vector maps using menu (Define view -&gt; Map Source... -&gt; Offline vector maps) to see the map.</string>
+	<string name="switch_to_raster_map_to_see">Obecna pozycja nie jest pokryta w twoich zapisanych mapach wektorowych, możesz zmienić źródło map w menu \'Define view\' -&gt; \'Map Source...\' albo pobrać dodatkowe mapy wektorowe.</string>
+	<string name="switch_to_vector_map_to_see">Możesz przełączyć na mapy wektorowe używając menu (Define view -&gt; Map Source... -&gt; Offline vector maps) żeby je zobaczyć.</string>
 	<string name="binary_map_download_success">Successful. You can switch to offline vector maps on menu  Define view -&gt; Map Source... -&gt; Offline vector maps.</string>
 	<string name="choose_audio_stream">Voice guidance output</string>
 	<string name="choose_audio_stream_descr">Choose channel to play voice guidance (system-dependent)</string>
@@ -150,8 +150,8 @@
 	<string name="map_overlay_descr">Choose overlay map</string>
 	<string name="map_vector_data">Wektorowe mapy offline</string>
 	<string name="map_vector_data_descr">Użyj pobranych map wektorowych</string>
-	<string name="tile_source_already_installed">Map is already installed, settings will be updated</string>
-	<string name="select_tile_source_to_install">Select (tile) maps to install or update</string>
+	<string name="tile_source_already_installed">Mapa jest już zainstalowana, ustawienia będą zaaktualizowane</string>
+	<string name="select_tile_source_to_install">Wybierz (tile) mapy do instalacji/aktualizacji</string>
 	<string name="internet_not_available">Połączenie internetowe, wymagane dla tej operacji, jest niedostępne</string>
 	<string name="install_more">Zainstaluj więcej...</string>
 
@@ -238,7 +238,7 @@
 	<string name="next_button">Następny</string>
 	<string name="previous_button">Poprzedni</string>
 
-	<string name="unit_of_length_descr">Change units of length and speed</string>
+	<string name="unit_of_length_descr">Zmiana jednostek długości i prędkości</string>
 	<string name="unit_of_length">Jednostki długości</string>
 	<string name="si_mi_foots">Mile/stopy</string>
 	<string name="si_mi_yard">Mile/jardy</string>
@@ -494,14 +494,14 @@
 	<string name="update_poi_error_loading">Error while loading data from server</string>
 	<string name="update_poi_no_offline_poi_index">No offline POI data available for this area</string>
 	<string name="update_poi_is_not_available_for_zoom">Updating POIs is not available for small zoom levels</string>
-	<string name="context_menu_item_update_poi">Update POI</string>
+	<string name="context_menu_item_update_poi">Aktualizacja POI</string>
 	<string name="context_menu_item_update_map_confirm">Update local data via Internet?</string>
 	<string name="search_history_city">Miejscowość: {0}</string>
 	<string name="search_history_street">Ulica: {0}, {1}</string>
 	<string name="search_history_int_streets">Przecięcie: {0} x {1} in {2}</string>
 	<string name="search_history_building">Budynek: {0}, {1}, {2}</string>
 	<string name="search_history_navigate_to">Naviguj do lat = {0}, lon = {1}</string>
-	<string name="favorite">Favorite</string>
+	<string name="favorite">Ulubione</string>
 	<string name="clear_all">Wyczyść wszystko</string>
 	<string name="history">History</string>
 	<string name="uploading_data">Wysyłanie danych...</string>
@@ -510,7 +510,7 @@
 	<string name="searching">Szukanie...</string>
 	<string name="searching_address">Szukanie adresu...</string>
 	<string name="search_osm_nominatim">Znajdź adres używają wyszukiwarki OSM Nominatim</string>
-	<string name="hint_search_online">House number, street, city</string>
+	<string name="hint_search_online">Numer domu, ulica, miejscowość</string>
 	<string name="search_offline_address">Offline</string>
 	<string name="search_online_address">Internet</string>
 	<string name="max_level_download_tile">Max. online zoom</string>
