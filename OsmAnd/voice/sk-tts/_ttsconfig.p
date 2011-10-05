@@ -37,8 +37,7 @@ make_ut(Dist) == ['o', D, 'sa otočte naspäť'] :-
 			distance(Dist) == D.
 make_ut == ['otočte sa naspäť'].
 
-roundabout(Dist, _Angle, Exit) == ['o', D, 'vojdite na kruhový objazd', 'a zvoľte', E, 'výjazd'] :- 
-		distance(Dist) == D, nth(Exit, E).
+roundabout(Dist, _Angle, Exit) == ['o', D, 'vojdite na kruhový objazd', 'a zvoľte', E, 'výjazd'] :- distance(Dist) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['pôjdete cez', E, 'výjazd'] :- nth(Exit, E).
 
 and_arrive_destination == ['a dorazíte do cieľa']. % Miss and?
@@ -46,8 +45,8 @@ then == ['potom'].
 reached_destination == ['dorazili ste do cieľa'].
 bear_right == ['držte sa vpravo'].
 bear_left == ['držte sa vľavo'].
-route_recalc(_Dist) == ['prepočítavam']. % nothing to said possibly beep?	
-route_new_calc(Dist) == ['cesta je dlhá', D] :- distance(Dist) == D. % nothing to said possibly beep?
+route_recalc(_Dist) == []. % ['prepočítava sa cesta '].  %nothing to said possibly beep?	
+route_new_calc(Dist) == ['Cesta je dlhá ', D] :- distance(Dist) == D. % nothing to said possibly beep?	
 
 go_ahead(Dist) == ['pokračujte', D]:- distance(Dist) == D.
 go_ahead == ['pokračujte rovno'].
@@ -72,12 +71,11 @@ nth(16, 'šestnásty').
 nth(17, 'sedemnásty').
 
 %%% distance measure
-distance(Dist) == [ X, 'metrov'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist) == [ X, 'metrov'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
-distance(Dist) == ['približne jeden kilometer'] :- Dist < 1500.
-distance(Dist) == ['približne', X, 'kilometre'] :- Dist < 4500, D is round(Dist/1000), num_atom(D, X).
-distance(Dist) == ['približne', X, 'kilometrov'] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance(Dist) == [ X, 'kilometrov'] :- D is round(Dist/1000), num_atom(D, X).
+distance(Dist) == [ X, ' metrov'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
+distance(Dist) == [ X, ' metrov'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist) == ['približne jeden kilometer '] :- Dist < 1500.
+distance(Dist) == ['približne ', X, ' kilometrov '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
+distance(Dist) == [ X, ' kilometrov '] :- D is round(Dist/1000), num_atom(D, X).
 
 %% resolve command main method
 %% if you are familar with Prolog you can input specific to the whole mechanism,
