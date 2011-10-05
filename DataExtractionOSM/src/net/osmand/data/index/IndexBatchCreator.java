@@ -169,6 +169,7 @@ public class IndexBatchCreator {
 		generateIndexes = Boolean.parseBoolean(process.getAttribute("generateIndexes"));
 		uploadIndexes = Boolean.parseBoolean(process.getAttribute("uploadIndexes"));
 		deleteFilesAfterUploading = Boolean.parseBoolean(process.getAttribute("deleteFilesAfterUploading"));
+		IndexCreator.REMOVE_POI_DB = !Boolean.parseBoolean(process.getAttribute("keepPoiOdb"));
 		wget = process.getAttribute("wget");
 		
 		indexPOI = Boolean.parseBoolean(process.getAttribute("indexPOI"));
