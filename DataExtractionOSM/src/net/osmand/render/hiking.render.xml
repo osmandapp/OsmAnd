@@ -1,4 +1,4 @@
-<renderer name="hiking" depends="all-purpose (more detail)" defaultColor="#f1eee8">
+<renderer name="hiking" depends="default" defaultColor="#f1eee8">
 <order>
 <filter orderType="line">
 <filter tag="countour" order="15" />
