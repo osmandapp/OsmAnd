@@ -60,6 +60,10 @@ public class VoiceRouter {
 	}
 	
 	
+	public CommandPlayer getPlayer() {
+		return player;
+	}
+	
 	public void setMute(boolean mute) {
 		this.mute = mute;
 	}

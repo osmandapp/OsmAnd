@@ -59,6 +59,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private static final String MORE_VALUE = "MORE_VALUE";
 	
 	private Preference saveCurrentTrack;
+	private Preference testVoiceCommands;
 
 	private EditTextPreference applicationDir;
 	private ListPreference tileSourcePreference;
@@ -294,6 +295,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		localIndexes.setOnPreferenceClickListener(this);
 		saveCurrentTrack =(Preference) screen.findPreference(OsmandSettings.SAVE_CURRENT_TRACK);
 		saveCurrentTrack.setOnPreferenceClickListener(this);
+		testVoiceCommands =(Preference) screen.findPreference("test_voice_commands");
+		testVoiceCommands.setOnPreferenceClickListener(this);
 		routeServiceEnabled =(CheckBoxPreference) screen.findPreference(OsmandSettings.SERVICE_OFF_ENABLED);
 		routeServiceEnabled.setOnPreferenceChangeListener(this);
 		applicationDir = (EditTextPreference) screen.findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
@@ -656,33 +659,40 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		if(preference.getKey().equals(OsmandSettings.LOCAL_INDEXES)){
 			startActivity(new Intent(this, LocalIndexesActivity.class));
 			return true;
+		} else if(preference == testVoiceCommands){
+			startActivity(new Intent(this, TestVoiceActivity.class));
+			return true;
 		} else if(preference == saveCurrentTrack){
 			SavingTrackHelper helper = new SavingTrackHelper(this);
 			if (helper.hasDataToSave()) {
-				progressDlg = ProgressDialog.show(this, getString(R.string.saving_gpx_tracks), getString(R.string.saving_gpx_tracks), true);
-				final ProgressDialogImplementation impl = new ProgressDialogImplementation(progressDlg);
-				impl.setRunnable("SavingGPX", new Runnable() { //$NON-NLS-1$
-					@Override
-					public void run() {
-							try {
-								SavingTrackHelper helper = new SavingTrackHelper(SettingsActivity.this);
-								helper.saveDataToGpx();
-								helper.close();
-							} finally {
-								if (progressDlg != null) {
-									progressDlg.dismiss();
-									progressDlg = null;
-								}
-							}
-						}
-					});
-				impl.run();
+				saveCurrentTracks();
 			} else {
 				helper.close();
 			}
 			return true;
 		}
 		return false;
+	}
+
+	private void saveCurrentTracks() {
+		progressDlg = ProgressDialog.show(this, getString(R.string.saving_gpx_tracks), getString(R.string.saving_gpx_tracks), true);
+		final ProgressDialogImplementation impl = new ProgressDialogImplementation(progressDlg);
+		impl.setRunnable("SavingGPX", new Runnable() { //$NON-NLS-1$
+					@Override
+					public void run() {
+						try {
+							SavingTrackHelper helper = new SavingTrackHelper(SettingsActivity.this);
+							helper.saveDataToGpx();
+							helper.close();
+						} finally {
+							if (progressDlg != null) {
+								progressDlg.dismiss();
+								progressDlg = null;
+							}
+						}
+					}
+				});
+		impl.run();
 	}
 	
 	public static void installMapLayers(final Activity activity, final ResultMatcher<TileSourceTemplate> result){
