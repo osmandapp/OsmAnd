@@ -34,8 +34,6 @@ public class TestVoiceActivity extends Activity {
 		
 		
 		final OsmandApplication app = ((OsmandApplication) getApplication());
-		app.showDialogInitializingCommandPlayer(this, true);
-		
 		
 		LinearLayout gl = new LinearLayout(this);
 		gl.setOrientation(LinearLayout.VERTICAL);
@@ -55,43 +53,37 @@ public class TestVoiceActivity extends Activity {
 		
 		// add buttons
 		setContentView(gl);
-		
-		new AsyncTask<Void, Void, CommandPlayer>() {
-
-			private ProgressDialog dlg;
+		app.showDialogInitializingCommandPlayer(this, true, new Runnable(){
 
 			@Override
-			protected void onPreExecute() {
-				super.onPreExecute();
-				dlg = ProgressDialog.show(TestVoiceActivity.this, "Loading", "Initializing voice player...", true, false); 
-			}
-			@Override
-			protected CommandPlayer doInBackground(Void... params) {
-				try {
-					return CommandPlayerFactory.createCommandPlayer(app.getSettings().VOICE_PROVIDER.get(), app, TestVoiceActivity.this);
-				} catch (CommandPlayerException e) {
-					return null;
-				}
-			}
-			
-			@Override
-			protected void onPostExecute(CommandPlayer p) {
-				dlg.dismiss();
+			public void run() {
+				CommandPlayer p = app.getRoutingHelper().getVoiceRouter().getPlayer();
 				if (p == null) {
 					Toast.makeText(TestVoiceActivity.this, "Voice player not initialized", Toast.LENGTH_SHORT).show();
 				} else {
 					addButtons(ll, p);
-					
 				}
 			}
-		}.execute((Void)null);
+			
+		});
 	}
 	
 	private void addButtons(final LinearLayout ll, CommandPlayer p) {
 		addButton(ll, "New route is calculated (15350 m)", builder(p).newRouteCalculated(15350));
 		addButton(ll, "Prepare 400 m make UT", builder(p).prepareMakeUT(400));
 		addButton(ll, "Prepare 320 m make right turn", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 320));
-		addButton(ll, "In 370 m make right sharp turn", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, 320));
+		addButton(ll, "In 370 m make right sharp turn", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, 370));
+		addButton(ll, "In 1050 m make left slight turn", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SL, 1050));
+		addButton(ll, "Make left turn", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT));
+		addButton(ll, "Prepare right SL turn in 850 and then bear right", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT_SL, 850).then().bearRight());
+		addButton(ll, "Go ahead 800 and arrive at destination", builder(p).goAhead(800).andArriveAtDestination());
+		addButton(ll, "Arrive at destination", builder(p).arrivedAtDestination());
+		addButton(ll, "Gps location lost", builder(p).gpsLocationLost());
+		addButton(ll, "Make UT in 640", builder(p).makeUT(640));
+		addButton(ll, "Route recalculated 23150", builder(p).routeRecalculated(23150));
+		addButton(ll, "Prepare roundabout 750", builder(p).prepareRoundAbout(750));
+		addButton(ll, "Roundabout 3 exit", builder(p).roundAbout(0, 3));
+		addButton(ll, "In 450 roundabout 1 exit", builder(p).roundAbout(450, 0, 1));
 		ll.forceLayout();
 	}
 	

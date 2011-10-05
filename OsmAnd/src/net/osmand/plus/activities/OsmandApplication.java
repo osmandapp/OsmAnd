@@ -211,7 +211,11 @@ public class OsmandApplication extends Application {
 	public void showDialogInitializingCommandPlayer(final Activity uiContext){
 		showDialogInitializingCommandPlayer(uiContext, true);
 	}
+	
 	public void showDialogInitializingCommandPlayer(final Activity uiContext, boolean warningNoneProvider){
+		showDialogInitializingCommandPlayer(uiContext, warningNoneProvider, null);
+	}
+	public void showDialogInitializingCommandPlayer(final Activity uiContext, boolean warningNoneProvider, Runnable run){
 		String voiceProvider = osmandSettings.VOICE_PROVIDER.get();
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			if (warningNoneProvider && voiceProvider == null) {
@@ -235,13 +239,13 @@ public class OsmandApplication extends Application {
 		} else {
 			if(player == null 
 					|| !Algoritms.objectEquals(voiceProvider, player.getCurrentVoice())){
-				initVoiceDataInDifferentThread(uiContext, voiceProvider);
+				initVoiceDataInDifferentThread(uiContext, voiceProvider, run);
 			}
 		}
 		
 	}
 
-	private void initVoiceDataInDifferentThread(final Activity uiContext, final String voiceProvider) {
+	private void initVoiceDataInDifferentThread(final Activity uiContext, final String voiceProvider, final Runnable run) {
 		final ProgressDialog dlg = ProgressDialog.show(uiContext,
 				getString(R.string.loading_data),
 				getString(R.string.voice_data_initializing));
@@ -255,6 +259,9 @@ public class OsmandApplication extends Application {
 					player = CommandPlayerFactory.createCommandPlayer(voiceProvider, OsmandApplication.this, uiContext);
 					routingHelper.getVoiceRouter().setPlayer(player);
 					dlg.dismiss();
+					if(run != null && uiContext != null){
+						uiContext.runOnUiThread(run);
+					}
 				} catch (CommandPlayerException e) {
 					dlg.dismiss();
 					showWarning(uiContext, e.getError());
