@@ -1,8 +1,25 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+	<string name="animate_route_off">Animácia vypnutá</string>
+	<string name="animate_route">Animácia zapnutá</string>
+	
+	<string name="tip_recent_changes_0_6_8_t">Zmeny v 0.6.8 :
+\n\t- Kompletne prerobené vyhľadávanie (POI, adresy)! Hľadanie adries je oveľa rýchlejšie a prístupnejšie. Zanecháva jedno hľadanie s mnohými rozdielnymi hľadacími aspektami.
+\n\t- Implementácia vyhľadávania POI podľa názvu vo veľkých oblastiach (krajinách)  
+\n\t- Oprava blikania mapovej obrazovky na tabletoch(Issue 641)
+\n\t- Možnosť automatického nasledovania trasy (Issue 356)
+\n\t- GPX navigácia premiestnená do ponuky \'Pokyny\' a \'Uložiť pokyny\' premiestnené do ponuky \'O ceste\'
+\n\t- POI údaje sú v .obf súbore (stiahnuté indexy po 01.10.11) 
+\n\t- Opravy hlasových pokynov (o GPS umiestnení a o prvom použití) 
+\n\t- Menšie vylepšenia
+	</string>
+	<string name="file_can_not_be_renamed">Súbor nemôže byť premenovaný.</string>
+	<string name="file_with_name_already_exists">Súbor s týmto názvom už existuje.</string>
+	<string name="gpx_navigation">GPX trasa</string>
+	<string name="poi_query_by_name_matches_categories">Boli nájdené nejaké kategórie POI vyhovujúce požiadavke:</string>
 	<string name="data_to_search_poi_not_available">Miestne údaje na hľadanie POI nie sú dostupné.</string>
 	<string name="poi_filter_by_name">Hľadať podľa názvu</string>
-	<string name="old_poi_file_should_be_deleted">Súbor POI údajov \'%1$s\' je neschválený a môže byť vymazaný.</string>
+	<string name="old_poi_file_should_be_deleted">Súbor POI údajov \'%1$s\' je zbytočný a môže byť vymazaný.</string>
 	<string name="update_poi_file_not_found">Miestný súbor na udržiavanie POI zmien sa nenašiel a nemôže byť vytvorený.</string>
 	<string name="update_poi_does_not_change_indexes">Zmeny POI v aplikácii neovplyvnia stiahnuté mapové súbory, ale budú zozbierané v miestnom súbore.</string>
 	<string name="button_upgrade_osmandplus">Aktualizovať Osmand+</string>
@@ -45,7 +62,7 @@
 	<string name="filename_input">Názov súboru: </string>
 	<string name="file_with_name_already_exist">Súbor s takýmto názvom už existuje.</string>
 	<string name="default_buttons_save">Uložiť</string>
-	<string name="menu_save_directions">Uloženie pokynov</string>
+	<string name="menu_save_directions">Uložiť pokyny</string>
 	<string name="local_index_upload_gpx_description">Nahranie GPX súborov do OSM komunity. Budú použité na vylepšenie máp.</string>
 	<string name="local_index_items_uploaded">%1$d z %2$d položky(iek) úspešne nahraných.</string>
 	<string name="local_index_mi_upload_gpx">Poskytnúť pre OSM...</string>
@@ -131,8 +148,8 @@
 	<string name="switch_to_raster_map_to_see">Aktuálna pozícia nie je pokrytá Vašimi stiahnutými vektorovými mapami. Môžete prepnúť zdroj mapy cez menu (Zobrazenie -> Zdroj mapy... ). Je potrebné stiahnuť dodatočné vektorové mapy.</string>
 	<string name="switch_to_vector_map_to_see">Môžete prepnúť na stiahnuté vektorové mapy cez menu (Zobrazenie -> Zdroj mapy... -> Vektorové OSM mapy) na zobrazenie mapy.</string>
 	<string name="binary_map_download_success">Úspech. Môžete prepnúť na stiahnuté vektorové mapy v menu  Zobrazenie -> Zdroj mapy... -> Vektorové OSM mapy.</string>
-	<string name="choose_audio_stream">Výstup hlasových povelov</string>
-	<string name="choose_audio_stream_descr">Výber kanálu pre prehrávanie hlasových povelov (závisí od systémovej konfigurácie)</string>
+	<string name="choose_audio_stream">Výstup hlasových pokynov</string>
+	<string name="choose_audio_stream_descr">Výber kanálu pre prehrávanie hlasových pokynov (závisí od systémovej konfigurácie)</string>
 	<string name="voice_stream_voice_call">Telefónny hovor</string>
 	<string name="voice_stream_notification">Oznámenia</string>
 	<string name="voice_stream_music">Hudba/médiá</string>
