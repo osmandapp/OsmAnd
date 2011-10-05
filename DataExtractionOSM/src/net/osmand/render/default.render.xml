@@ -904,7 +904,7 @@
 		<switch>
 			<case tag="highway" value="secondary" />
 			<case tag="highway" value="secondary_link" />
-			<filter color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" shadowRadius="1" >
+			<filter color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" shadowRadius="0" >
 				<filter minzoom="9" maxzoom="9" strokeWidth="3" />
 				<filter minzoom="10" maxzoom="10" strokeWidth="4" />
 				<filter minzoom="11" maxzoom="11" strokeWidth="5" />
@@ -914,24 +914,24 @@
 		</switch>
 
 		<switch>
-			<case tag="highway" value="motorway" color="#a58dff" color_2="#a58dff" />
-			<case tag="highway" value="motorway_link" color="#a58dff" color_2="#a58dff" />
-			<case tag="highway" value="trunk" color="#ffaf80" color_2="#ffaf80" />
-			<case tag="highway" value="trunk_link" color="#ffaf80" color_2="#ffaf80" />
-			<case tag="highway" value="primary" color="#eb989a" color_2="#eb989a" />
-			<case tag="highway" value="primary_link" color="#eb989a" color_2="#eb989a" />
-			<case tag="highway" value="secondary" color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" shadowRadius="1" />
-			<case tag="highway" value="secondary_link" color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" shadowRadius="1" />
+			<case tag="highway" value="motorway" color="#a58dff" color_2="#a58dff" cap="ROUND" />
+			<case tag="highway" value="motorway_link" color="#a58dff" color_2="#a58dff" cap="ROUND" />
+			<case tag="highway" value="trunk" color="#ffaf80" color_2="#ffaf80" cap="ROUND" />
+			<case tag="highway" value="trunk_link" color="#ffaf80" color_2="#ffaf80" cap="ROUND" />
+			<case tag="highway" value="primary" color="#eb989a" color_2="#eb989a" cap="ROUND" />
+			<case tag="highway" value="primary_link" color="#eb989a" color_2="#eb989a" cap="ROUND" />
+			<case tag="highway" value="secondary" color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" cap="ROUND" shadowRadius="0" />
+			<case tag="highway" value="secondary_link" color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" cap="ROUND" shadowRadius="0" />
 			<filter>
 				<switch>
 					<case layer="-1" pathEffect="4_4" />
 					<case /> <!-- all other cases -->
-					<filter shadowRadius="1">
+					<filter shadowRadius="0">
 						<filter minzoom="14" maxzoom="14" strokeWidth="10" />
 						<filter minzoom="15" maxzoom="15" strokeWidth="12" />
 						<filter minzoom="16" maxzoom="16" strokeWidth="15" />
-						<filter minzoom="17" maxzoom="17" strokeWidth="19" shadowRadius="2" />
-						<filter minzoom="18" strokeWidth="24" shadowRadius="2" />
+						<filter minzoom="17" maxzoom="17" strokeWidth="19" shadowRadius="0" />
+						<filter minzoom="18" strokeWidth="24" shadowRadius="0" />
 					</filter>
 				</switch>
 				<!-- bridge -->
@@ -952,7 +952,7 @@
 		<switch>
 			<case tag="highway" value="tertiary" />
 			<case tag="highway" value="tertiary_link" />
-			<filter color="#fefeb3" color_2="#fefeb3" shadowColor="#bababa"  shadowRadius="1" >
+			<filter color="#fefeb3" color_2="#fefeb3" shadowColor="#bababa" cap="ROUND" shadowRadius="0" >
 				<filter minzoom="10" maxzoom="10" strokeWidth="3" />
 				<filter minzoom="11" maxzoom="11" strokeWidth="4" />
 				<filter minzoom="12" maxzoom="12" strokeWidth="5" />
@@ -990,8 +990,8 @@
 			<case tag="highway" value="residential" />
 			<filter>
 			<switch>
-				<case nightMode="true" color="#9F9F9F" color_2="#9F9F9F" shadowColor="#666666" shadowRadius="1" />
-				<case nightMode="false" color="#ffffff" color_2="#ffffff" shadowColor="#464646" shadowRadius="1" />
+				<case nightMode="true" color="#9F9F9F" color_2="#9F9F9F" shadowColor="#666666" shadowRadius="0" />
+				<case nightMode="false" color="#ffffff" color_2="#ffffff" shadowColor="#464646" cap="ROUND" shadowRadius="0"/>
 				<filter>
 					<!-- ZM <filter minzoom="12" maxzoom="12" strokeWidth="3" /> -->
 					<filter minzoom="13" maxzoom="13" strokeWidth="4" />
@@ -1028,7 +1028,7 @@
 			<case tag="highway" value="service" color="#ececec" color_2="#ececec" shadowColor="#b0b0b0" />
 			<case tag="highway" value="living_street" color="#ececec" color_2="#ececec" shadowColor="#b0b0b0" />
 			<case tag="highway" value="pedestrian" color="#ececec" color_2="#ececec" shadowColor="#b0b0b0" />
-			<filter shadowRadius="1">
+			<filter shadowRadius="0">
 			<switch>
 				<case layer="-1" pathEffect="4_4" />
 				<case /> <!-- all other cases -->
