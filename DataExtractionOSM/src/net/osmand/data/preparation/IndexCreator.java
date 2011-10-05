@@ -351,9 +351,9 @@ public class IndexCreator {
 	
 	public void generateIndexes(File readFile, IProgress progress, IOsmStorageFilter addFilter, MapZooms mapZooms,
 			MapRenderingTypes renderingTypes) throws IOException, SAXException, SQLException, InterruptedException {
-		if(LevelDBAccess.load()){
+//		if(LevelDBAccess.load()){
 //			dialect = DBDialect.NOSQL;
-		}
+//		}
 		
 		if (renderingTypes == null) {
 			renderingTypes = MapRenderingTypes.getDefault();

@@ -3,7 +3,6 @@
  */
 package net.osmand.plus.activities;
 
-import net.osmand.plus.R;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
@@ -28,7 +27,6 @@ import android.widget.LinearLayout.LayoutParams;
 public class TestVoiceActivity extends Activity {
 
 
-	private CommandPlayer player;
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -56,6 +54,8 @@ public class TestVoiceActivity extends Activity {
 				android.view.ViewGroup.LayoutParams.FILL_PARENT));
 		
 		// add buttons
+		setContentView(gl);
+		
 		new AsyncTask<Void, Void, CommandPlayer>() {
 
 			private ProgressDialog dlg;
@@ -63,7 +63,7 @@ public class TestVoiceActivity extends Activity {
 			@Override
 			protected void onPreExecute() {
 				super.onPreExecute();
-				dlg = ProgressDialog.show(app, "Loading", "Initializing voice player...", true, false); 
+				dlg = ProgressDialog.show(TestVoiceActivity.this, "Loading", "Initializing voice player...", true, false); 
 			}
 			@Override
 			protected CommandPlayer doInBackground(Void... params) {
@@ -85,10 +85,6 @@ public class TestVoiceActivity extends Activity {
 				}
 			}
 		}.execute((Void)null);
-		
-		
-		
-		setContentView(gl);
 	}
 	
 	private void addButtons(final LinearLayout ll, CommandPlayer p) {
