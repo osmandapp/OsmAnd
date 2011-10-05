@@ -291,12 +291,11 @@ public class OsmandRenderer {
 
 		// fill area
 		Canvas cv = new Canvas(bmp);
-
+		
 		//needed for better street shadows
 		Bitmap streetbmp = Bitmap.createBitmap(cv.getWidth(), cv.getHeight(), Bitmap.Config.ARGB_8888);
 		streetcv = new Canvas(streetbmp);
-
-
+		
 		if(renderer != null){
 			int dc = renderer.getDefaultColor(rc.nightMode);
 			if(dc != 0){
@@ -418,7 +417,10 @@ public class OsmandRenderer {
 				}
 			}
 			notifyListeners(notifyList);
-
+			
+			//Draw streets here
+			drawStreetsWithShadow(cv, streetbmp);
+			
 			drawTextOverCanvas(rc, cv, useEnglishNames);
 			long time = System.currentTimeMillis() - now;
 			rc.renderingDebugInfo = String.format("Rendering done in %s (%s text) ms\n" +
@@ -429,6 +431,18 @@ public class OsmandRenderer {
 		}
 
 		return bmp;
+	}
+	
+	// Draw nice shadow under all streets 
+	//but also other linear objects which is not very good
+	
+	private void drawStreetsWithShadow(Canvas cv, Bitmap streetbmp){
+		Paint shadowpaint = new Paint();
+		shadowpaint.setColor(Color.BLACK);
+		shadowpaint.setMaskFilter(new BlurMaskFilter(1, BlurMaskFilter.Blur.SOLID));
+		Bitmap shadowImage = streetbmp.extractAlpha();
+		cv.drawBitmap(shadowImage, 0, 0, shadowpaint);// <----
+		cv.drawBitmap(streetbmp, 0, 0, null);
 	}
 
 	// Draw nice shadow for all streets 
@@ -913,16 +927,10 @@ public class OsmandRenderer {
 
 	}
 
-
-	private void drawStreet(Canvas canvas, Path path, float order){
-		if((order < 58) && (order > 46)) {
-			streetcv.drawPath(path, paint);
-		}
-		else canvas.drawPath(path, paint);
-	}
-
-
-	private void drawPolyline(BinaryMapDataObject obj, BaseOsmandRender render, Canvas canvas, RenderingContext rc, TagValuePair pair, int layer, float order) {
+	
+	
+	
+	private void drawPolyline(BinaryMapDataObject obj, BaseOsmandRender render, Canvas canvas, RenderingContext rc, TagValuePair pair, int layer) {
 		if(render == null || pair == null){
 			return;
 		}
@@ -986,22 +994,20 @@ public class OsmandRenderer {
 		}
 		if (path != null) {
 			rc.main.updatePaint(paint);
-
-			drawStreet(canvas, path, order);
-
+			//changed canvas to the global one for streets
+			streetcv.drawPath(path, paint);
 			if (rc.second.strokeWidth != 0) {
 				rc.second.updatePaint(paint);
-				drawStreet(canvas, path, order);
-
+				streetcv.drawPath(path, paint);
 				if (rc.third.strokeWidth != 0) {
 					rc.third.updatePaint(paint);
-					drawStreet(canvas, path, order);
+					streetcv.drawPath(path, paint);
 				}
 			}
 			if (rc.adds != null) {
 				for (int i = 0; i < rc.adds.length; i++) {
 					rc.adds[i].updatePaint(paint);
-					drawStreet(canvas, path, order);
+					streetcv.drawPath(path, paint);
 				}
 			}
 			if (obj.getName() != null && obj.getName().length() > 0) {
@@ -1067,10 +1073,6 @@ public class OsmandRenderer {
 			}
 		}
 	}
-
-
-
-
 
 	private static RenderingPaintProperties[] oneWay = null;
 	public static RenderingPaintProperties[] getOneWayProperties(){
