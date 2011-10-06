@@ -53,7 +53,7 @@ public class TestVoiceActivity extends Activity {
 		
 		// add buttons
 		setContentView(gl);
-		app.showDialogInitializingCommandPlayer(this, true, new Runnable(){
+		Runnable r = new Runnable(){
 
 			@Override
 			public void run() {
@@ -65,7 +65,12 @@ public class TestVoiceActivity extends Activity {
 				}
 			}
 			
-		});
+		};
+		if (app.getRoutingHelper().getVoiceRouter().getPlayer() != null) {
+			r.run();
+		} else {
+			app.showDialogInitializingCommandPlayer(this, true, r);
+		}
 	}
 	
 	private void addButtons(final LinearLayout ll, CommandPlayer p) {

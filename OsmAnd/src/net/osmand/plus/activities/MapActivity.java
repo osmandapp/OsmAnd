@@ -1043,7 +1043,6 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			// dlg.showDialog();
 			Intent newIntent = new Intent(MapActivity.this, SearchActivity.class);
 			newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-			newIntent.putExtra(SearchActivity.TAB_INDEX_EXTRA, SearchActivity.LOCATION_TAB_INDEX);
 			LatLon mapLoc = getMapLocation();
 			newIntent.putExtra(SearchActivity.SEARCH_LAT, mapLoc.getLatitude());
 			newIntent.putExtra(SearchActivity.SEARCH_LON, mapLoc.getLongitude());
