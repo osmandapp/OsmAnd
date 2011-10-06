@@ -1,5 +1,8 @@
 package net.osmand.data.preparation;
 
+import gnu.trove.list.TLongList;
+import gnu.trove.list.array.TLongArrayList;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +19,7 @@ import net.osmand.osm.Entity;
 import net.osmand.osm.Entity.EntityId;
 import net.osmand.osm.Entity.EntityType;
 import net.osmand.osm.Node;
+import net.osmand.osm.OSMSettings.OSMTagKey;
 import net.osmand.osm.Relation;
 import net.osmand.osm.Way;
 
@@ -37,7 +41,8 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 	private PreparedStatement pselectWay;
 	private PreparedStatement pselectRelation;
 	private PreparedStatement pselectTags;
-	private int allRelations ;
+	private int allRelations;
+	private int allBoundaries;
 	private int allWays;
 	private int allNodes;
 	private boolean realCounts = false;
@@ -54,8 +59,9 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 	private PreparedStatement iterateWays;
 
 	private PreparedStatement iterateRelations;
-	
-	
+
+	private PreparedStatement iterateWayBoundaries;
+
 	public interface OsmDbVisitor {
 		public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException;
 	}
@@ -88,6 +94,7 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 			iterateWays  = dbConn.prepareStatement("select w.id, w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " + //$NON-NLS-1$
 					"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 inner join node n on w.node = n.id " + //$NON-NLS-1$
 					"order by w.id, w.ord"); //$NON-NLS-1$
+			iterateWayBoundaries = dbConn.prepareStatement("select t.id from tags t where t.skeys = \"" + OSMTagKey.BOUNDARY.getValue() + "\""); //$NON-NLS-1$
 			iterateRelations = dbConn.prepareStatement("select r.id, t.skeys, t.value  from relations r inner join tags t on t.id = r.id and t.type = 2 and r.ord = 0"); //$NON-NLS-1$
 		}
 	}
@@ -237,33 +244,38 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 //		stat.executeUpdate("create table relations (id "+longType+", member "+longType+", type smallint, role varchar(1024), ord smallint)");
 		computeRealCounts(statement);
 		statement.close();
-		if (type == EntityType.NODE) {
-			// filter out all nodes without tags
-			select = iterateNodes;
-			count = allNodes;
-		} else if (type == EntityType.WAY) {
-			select = iterateWays;
-			count = allWays;
+		
+		BlockingQueue<Entity> toProcess = new ArrayBlockingQueue<Entity>(100000);
+		AbstractProducer entityProducer = null;
+		if (type == EntityType.WAY_BOUNDARY) {
+			select = iterateWayBoundaries;
+			count = allBoundaries;
+			entityProducer = new BoundaryProducer(toProcess, select);
 		} else {
-			select = iterateRelations;
-			count = allRelations;
+			if (type == EntityType.NODE) {
+				// filter out all nodes without tags
+				select = iterateNodes;
+				count = allNodes;
+			} else if (type == EntityType.WAY) {
+				select = iterateWays;
+				count = allWays;
+			} else {
+				select = iterateRelations;
+				count = allRelations;
+			}
+			entityProducer = new EntityProducer(toProcess, type, select);
 		}
 		progress.startWork(count);
 		
-		BlockingQueue<Entity> toProcess = new ArrayBlockingQueue<Entity>(100000);
-		
 		//produce
-		EntityProducer entityProducer = new EntityProducer(toProcess, type, select);
 		entityProducer.start();
 		
-		int counter = 0;
 		Entity entityToProcess = null;
 		Entity endEntity = entityProducer.getEndingEntity();
 		while ((entityToProcess = toProcess.take())  != endEntity) {
 			if (progress != null) {
 				progress.progress(1);
 			}
-			counter++;
 			visitor.iterateEntity(entityToProcess, this);
 		}
 		return count;
@@ -275,8 +287,9 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 			realCounts = true;
 			// filter out all nodes without tags
 			allNodes = statement.executeQuery("select count(distinct n.id) from node n inner join tags t on n.id = t.id and t.type = 0").getInt(1); //$NON-NLS-1$
-			allWays = statement.executeQuery("select count(distinct w.id) from ways w").getInt(1); //$NON-NLS-1$
+			allWays = statement.executeQuery("select count(*) from ways w where w.ord = 0").getInt(1); //$NON-NLS-1$
 			allRelations = statement.executeQuery("select count(distinct r.id) from relations r inner join tags t on t.id = r.id and t.type = 2 and r.ord = 0").getInt(1); //$NON-NLS-1$
+			allBoundaries = statement.executeQuery("select count(distinct t.id) from tags t where t.skeys = \"" + OSMTagKey.BOUNDARY.getValue() + "\"").getInt(1); //$NON-NLS-1$
 		}
 	}
 
@@ -458,29 +471,103 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 			if (iterateWays != null) {
 				iterateWays.close();
 			}
+			if (iterateWayBoundaries != null) {
+				iterateWayBoundaries.close();
+			}
 		}
 		
 	}
 
-	public class EntityProducer extends Thread {
+	public class AbstractProducer extends Thread {
+		private final Entity endingEntity = new Node(0,0,0);
+		
+		public Entity getEndingEntity() {
+			return endingEntity;
+		}
+	}
+	
+	public class BoundaryProducer extends AbstractProducer {
+		private final BlockingQueue<Entity> toProcess;
+		private final PreparedStatement select;
+		
+		public BoundaryProducer(BlockingQueue<Entity> toProcess, PreparedStatement selectIds) {
+					this.toProcess = toProcess;
+					this.select = selectIds;
+					setDaemon(true);
+					setName("BoundaryProducer");
+		}
+		
+		@Override
+		public void run() {
+			ResultSet rs;
+			try {
+				select.execute();
+				rs = select.getResultSet();
+				TLongArrayList boundariesToLoad = new TLongArrayList();
+				while (rs.next()) {
+					boundariesToLoad.add(rs.getLong(1));
+				}
+				rs.close();
+				PreparedStatement iterateWaysByIds = null;
+				int idsSize = 0;
+
+				while (!boundariesToLoad.isEmpty()) {
+					int chunk = Math.min(100, boundariesToLoad.size());
+					if (chunk != idsSize) {
+						if (iterateWaysByIds != null) {
+							iterateWaysByIds.close();
+						}
+						StringBuilder b = new StringBuilder();
+						for (int i = 0; i <= chunk; i++) {
+							b.append('?').append(',');
+						}
+						b.deleteCharAt(b.length()-1);
+						iterateWaysByIds =  dbConn.prepareStatement("select w.id, w.node, w.ord, t.skeys, t.value, n.latitude, n.longitude " + //$NON-NLS-1$
+								"from ways w left join tags t on w.id = t.id and t.type = 1 and w.ord = 0 inner join node n on w.node = n.id where w.id in (" + b.toString() + //$NON-NLS-1$
+								") order by w.id, w.ord"); //$NON-NLS-1$
+						idsSize = chunk;
+					}
+					TLongList subList = boundariesToLoad.subList(0, chunk);
+					for (int i = 0; i < chunk; i++) {
+						iterateWaysByIds.setLong(i+1, subList.get(i));
+					}
+					boundariesToLoad.remove(0, chunk);
+					//load the ways
+					new EntityProducer(toProcess, EntityType.WAY, iterateWaysByIds,false).run();
+				}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			} finally {
+				try {
+					toProcess.put(getEndingEntity());
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
+	
+	public class EntityProducer extends AbstractProducer {
 
 		private final BlockingQueue<Entity> toProcess;
 		private final PreparedStatement select;
 		private final EntityType type;
-		private final Entity endingEntity = new Node(0,0,0);
+		private final boolean putEndingEntity;
+
+		public EntityProducer(BlockingQueue<Entity> toProcess, EntityType type, PreparedStatement select) {
+			this(toProcess,type,select,true);
+		}
 		
-		public EntityProducer(BlockingQueue<Entity> toProcess, EntityType type, PreparedStatement select2) {
+		public EntityProducer(BlockingQueue<Entity> toProcess, EntityType type, PreparedStatement select, boolean putEndingEntity) {
 					this.toProcess = toProcess;
 					this.type = type;
-					this.select = select2;
+					this.select = select;
+					this.putEndingEntity = putEndingEntity;
 					setDaemon(true);
 					setName("EntityProducer");
 		}
 
-		public Entity getEndingEntity() {
-			return endingEntity;
-		}
-		
 		@Override
 		public void run() {
 			ResultSet rs;
@@ -536,10 +623,12 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} finally {
-				try {
-					toProcess.put(getEndingEntity());
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+				if (putEndingEntity) {
+					try {
+						toProcess.put(getEndingEntity());
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}

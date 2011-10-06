@@ -18,10 +18,10 @@ import net.osmand.data.IndexConstants;
 import net.osmand.data.preparation.OsmDbAccessor.OsmDbVisitor;
 import net.osmand.impl.ConsoleProgressImplementation;
 import net.osmand.osm.Entity;
-import net.osmand.osm.MapRenderingTypes;
-import net.osmand.osm.Relation;
 import net.osmand.osm.Entity.EntityId;
 import net.osmand.osm.Entity.EntityType;
+import net.osmand.osm.MapRenderingTypes;
+import net.osmand.osm.Relation;
 import net.osmand.osm.io.IOsmStorageFilter;
 import net.osmand.osm.io.OsmBaseStorage;
 import net.osmand.swing.DataExtractionSettings;
@@ -31,8 +31,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.tools.bzip2.CBZip2InputStream;
 import org.xml.sax.SAXException;
-
-import com.anvisics.jleveldb.LevelDBAccess;
 
 import rtree.RTreeException;
 
@@ -287,6 +285,7 @@ public class IndexCreator {
 	}
 	
 	private boolean createPlainOsmDb(IProgress progress, File readFile, IOsmStorageFilter addFilter) throws SQLException, FileNotFoundException, IOException, SAXException{
+//		dbFile = new File(workingDir, TEMP_NODES_DB);
 		// initialize db file
 		boolean loadFromExistingFile = dbFile != null && dialect.databaseFileExists(dbFile);
 		if (dbFile == null) {
@@ -437,7 +436,7 @@ public class IndexCreator {
 				// 3.2 index address relations
 				if (indexAddress || indexMap) {
 					progress.setGeneralProgress("[30 / 100]"); //$NON-NLS-1$
-					progress.startTask(Messages.getString("IndexCreator.PREINDEX_ADRESS_MAP"), accessor.getAllRelations()); //$NON-NLS-1$
+					progress.startTask(Messages.getString("IndexCreator.PREINDEX_BOUNDARIES_RELATIONS"), accessor.getAllRelations()); //$NON-NLS-1$
 					accessor.iterateOverEntities(progress, EntityType.RELATION, new OsmDbVisitor() {
 						@Override
 						public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
@@ -452,16 +451,18 @@ public class IndexCreator {
 					});
 					if (indexAddress) {
 						progress.setGeneralProgress("[40 / 100]"); //$NON-NLS-1$
-						progress.startTask(Messages.getString("IndexCreator.PREINDEX_ADRESS_MAP"), accessor.getAllWays()); //$NON-NLS-1$
-						accessor.iterateOverEntities(progress, EntityType.WAY, new OsmDbVisitor() {
+						progress.startTask(Messages.getString("IndexCreator.PREINDEX_BOUNDARIES_WAYS"), accessor.getAllWays()); //$NON-NLS-1$
+						accessor.iterateOverEntities(progress, EntityType.WAY_BOUNDARY, new OsmDbVisitor() {
 							@Override
 							public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 								indexAddressCreator.indexBoundariesRelation(e, ctx);
 							}
 						});
 
+						progress.setGeneralProgress("[42 / 100]"); //$NON-NLS-1$
+						progress.startTask(Messages.getString("IndexCreator.BIND_CITIES_AND_BOUNDARIES"), 100); //$NON-NLS-1$
 						//finish up the boundaries and cities
-						indexAddressCreator.bindCitiesWithBoundaries();
+						indexAddressCreator.bindCitiesWithBoundaries(progress);
 						
 						progress.setGeneralProgress("[45 / 100]"); //$NON-NLS-1$
 						progress.startTask(Messages.getString("IndexCreator.PREINDEX_ADRESS_MAP"), accessor.getAllRelations()); //$NON-NLS-1$

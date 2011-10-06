@@ -14,7 +14,8 @@ public abstract class Entity {
 	public enum EntityType {
 		NODE,
 		WAY,
-		RELATION;
+		RELATION,
+		WAY_BOUNDARY;
 		
 		public static EntityType valueOf(Entity e){
 			if(e instanceof Node){

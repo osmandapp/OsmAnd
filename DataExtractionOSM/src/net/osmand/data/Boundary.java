@@ -17,9 +17,9 @@ public class Boundary {
 	
 	
 	// not necessary ready rings
-	private List<Way> outerWays = new ArrayList<Way>();
-	private List<Way> innerWays = new ArrayList<Way>();
-	private final boolean closedWay;
+	private List<Way> outerWays = new ArrayList<Way>(1);
+	private List<Way> innerWays = new ArrayList<Way>(0);
+	private boolean closedWay;
 	
 	public Boundary(boolean closedWay){
 		this.closedWay = closedWay;
@@ -29,16 +29,21 @@ public class Boundary {
 		return closedWay;
 	}
 	
+	public void setClosedWay(boolean closedWay) {
+		this.closedWay = closedWay;
+	}
+	
 	public boolean computeIsClosedWay()
 	{
 		//now we try to merge the ways until we have only one
 		int oldSize = 0;
-		while (getOuterWays().size() != oldSize) {
+		while (getOuterWays().size() != 0 && getOuterWays().size() != oldSize) {
 			oldSize = getOuterWays().size();
 			mergeOuterWays();
 		}
 		//there is one way and last element is equal to the first...
-		return getOuterWays().size() == 1 && getOuterWays().get(0).getNodes().get(0).getId() == getOuterWays().get(0).getNodes().get(getOuterWays().get(0).getNodes().size()-1).getId();
+		closedWay = getOuterWays().size() == 1 && getOuterWays().get(0).getNodes().get(0).getId() == getOuterWays().get(0).getNodes().get(getOuterWays().get(0).getNodes().size()-1).getId();
+		return closedWay;
 	}
 	
 	
@@ -150,5 +155,9 @@ public class Boundary {
 		this.adminLevel = adminLevel;
 	}
 	
+	@Override
+	public String toString() {
+		return  getName() + " alevel:" + getAdminLevel() + " type: relation closed:" + isClosedWay();
+	}
 
 }
