@@ -4,28 +4,44 @@ DIRECTORY=$(cd `dirname $0` && pwd)
 ## VARIABLES ###
 LOG_DIR="$DIRECTORY"/logs
 DATE=$(date +%d-%m-%y)
-LOG_FILE="$LOG_DIR/${DATE}.log"
+CLOG_FILE="$LOG_DIR/${DATE}.log"
+LOG_FILE="$LOG_DIR/tmp.log"
 
+mkdir -p $LOG_DIR
+echo > $LOG_FILE
+touch  $CLOG_FILE
 
-mkdir $LOG_DIR
-touch $LOG_FILE
-
-git pull --rebase 2>&1 >>$LOG_FILE
+#git pull --rebase 2>&1 >>$LOG_FILE
 
 # 1. Update git directory
-"${DIRECTORY}/update_git.sh" 2>&1 >>$LOG_FILE
+"${DIRECTORY}/update_git.sh" >>$LOG_FILE 2>&1
 
 # 2. Go through branches and generates builds
-"${DIRECTORY}/build_branches.sh" 2>&1 >>$LOG_FILE
+"${DIRECTORY}/build_branches.sh" >>$LOG_FILE 2>&1
 
 # 3. upload to ftp server 
 #"${DIRECTORY}/upload_ftp.sh" 2>&1 >>$LOG_FILE
 
 # 3. upload to ftp server 
-"${DIRECTORY}/copyto_dir.sh" 2>&1 >>$LOG_FILE
+"${DIRECTORY}/copyto_dir.sh" >>$LOG_FILE 2>&1
 
 # 4. Synchronize github with googlecode mercurial
-"${DIRECTORY}/sync_git_google.sh" 2>&1 >>$LOG_FILE
+"${DIRECTORY}/sync_git_google.sh" >>$LOG_FILE 2>&1
 
 # 5. update site files 
-"${DIRECTORY}/update_site.sh" 2>&1 >>$LOG_FILE
+"${DIRECTORY}/update_site.sh" >>$LOG_FILE 2>&1
+
+cat $LOG_FILE >> $CLOG_FILE
+BUILD=`grep FAILED $LOG_FILE | wc -l`
+if [ ! $BUILD -eq 0 ]; then
+  # if some failure, print out complete log
+  echo "BUILD FAILED:"
+  echo "-------------"
+  cat $LOG_FILE
+  touch last_build_failed
+else
+  if [ -f last_build_failed ]; then
+     echo "Build fixed"
+     rm last_build_failed
+  fi
+fi
