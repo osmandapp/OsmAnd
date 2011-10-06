@@ -734,7 +734,7 @@
 <string name="poi_dialog_name">Nazwa</string>
 <string name="poi_dialog_opening_hours">Otwarte</string>
 <string name="poi_dialog_comment">Komentarz</string>
-<string name="poi_dialog_comment_default">Zmiana POI/string>
+<string name="poi_dialog_comment_default">Zmiana POI</string>
 <string name="poi_dialog_other_tags_message">Wszystkie pozostałe tagi pozostają bez zmian</string>
 <string name="default_buttons_commit">Wyślij</string>
 <string name="default_buttons_reset">Reset</string>
