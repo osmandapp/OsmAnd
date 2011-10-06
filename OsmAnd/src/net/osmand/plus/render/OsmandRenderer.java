@@ -355,7 +355,7 @@ public class OsmandRenderer {
 					int ind = i >> 8;
 				int l = i & 0xff;
 				BinaryMapDataObject obj = objects.get(ind);
-				
+
 				//draw streets with shadow when all have been drawn
 				if(keys[k] > 57 && !streetsdrawn){
 					drawStreetsShadow(cv, streetbmp);
@@ -899,7 +899,12 @@ public class OsmandRenderer {
 	}
 
 
-
+	private void drawStreet(Canvas canvas, Path path, float order){
+		if((order < 58) && (order > 46)) {
+			streetcv.drawPath(path, paint);
+		}
+		else canvas.drawPath(path, paint);
+	}
 
 
 	private void drawPolyline(BinaryMapDataObject obj, BaseOsmandRender render, Canvas canvas, RenderingContext rc, TagValuePair pair, int layer, float order) {
@@ -967,32 +972,21 @@ public class OsmandRenderer {
 		if (path != null) {
 			rc.main.updatePaint(paint);
 
-			//changed canvas to the global one for streets
-			if((order < 58) && (order > 46)) {
-				streetcv.drawPath(path, paint);
-			}
-			else canvas.drawPath(path, paint);
+			drawStreet(canvas, path, order);
+
 			if (rc.second.strokeWidth != 0) {
 				rc.second.updatePaint(paint);
-				if((order < 58) && (order > 46)) {
-					streetcv.drawPath(path, paint);
-				}
-				else canvas.drawPath(path, paint);
+				drawStreet(canvas, path, order);
+
 				if (rc.third.strokeWidth != 0) {
 					rc.third.updatePaint(paint);
-					if((order < 58) && (order > 46)) {
-						streetcv.drawPath(path, paint);
-					}
-					else canvas.drawPath(path, paint);
+					drawStreet(canvas, path, order);
 				}
 			}
 			if (rc.adds != null) {
 				for (int i = 0; i < rc.adds.length; i++) {
 					rc.adds[i].updatePaint(paint);
-					if((order < 58) && (order > 46)) {
-						streetcv.drawPath(path, paint);
-					}
-					else canvas.drawPath(path, paint);
+					drawStreet(canvas, path, order);
 				}
 			}
 			if (obj.getName() != null && obj.getName().length() > 0) {
