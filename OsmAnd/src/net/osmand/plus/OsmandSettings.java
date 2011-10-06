@@ -508,9 +508,9 @@ public class OsmandSettings {
 	// seconds to auto_follow 
 	public final CommonPreference<Integer> AUTO_FOLLOW_ROUTE = new IntPreference("auto_follow_route", 0, false);
 	{
-		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.CAR, 20);
-		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.BICYCLE, 25);
-		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 30);
+		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.CAR, 10);
+		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.BICYCLE, 15);
+		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 20);
 	}
 
 	// this value string is synchronized with settings_pref.xml preference name

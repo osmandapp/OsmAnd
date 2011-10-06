@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+	<string name="auto_follow_location_enabled">Auto follow settings are enabled.</string>
 	<string name="animate_route_off">Animate off</string>
 	<string name="animate_route">Animate on</string>
 	

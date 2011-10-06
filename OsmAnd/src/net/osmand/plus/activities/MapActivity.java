@@ -1244,6 +1244,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 					@Override
 					public void run() {
 						if (settings.MAP_ACTIVITY_ENABLED.get()) {
+							Toast.makeText(MapActivity.this, R.string.auto_follow_location_enabled, Toast.LENGTH_SHORT).show();
 							backToLocationImpl();
 						}
 					}
