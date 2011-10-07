@@ -27,6 +27,7 @@ import net.osmand.plus.ResourceManager;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.MapVectorLayer;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.FavoritesLayer;

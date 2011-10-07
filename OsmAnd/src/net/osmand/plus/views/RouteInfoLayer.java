@@ -3,10 +3,10 @@ package net.osmand.plus.views;
 import java.util.List;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.RoutingHelper;
 import net.osmand.plus.activities.ShowRouteInfoActivity;
-import net.osmand.plus.activities.RoutingHelper.IRouteInformationListener;
-import net.osmand.plus.activities.RoutingHelper.RouteDirectionInfo;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
+import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;

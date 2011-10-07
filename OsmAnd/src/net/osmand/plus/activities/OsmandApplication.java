@@ -23,6 +23,7 @@ import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.voice.CommandPlayerFactory;

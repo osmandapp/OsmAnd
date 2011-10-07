@@ -1,4 +1,4 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.routing;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,8 +28,10 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.RoutingHelper.RouteDirectionInfo;
-import net.osmand.plus.activities.RoutingHelper.TurnType;
+import net.osmand.plus.activities.ApplicationMode;
+import net.osmand.plus.activities.OsmandApplication;
+import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
+import net.osmand.plus.routing.RoutingHelper.TurnType;
 import net.osmand.router.BicycleRouter;
 import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.CarRouter;

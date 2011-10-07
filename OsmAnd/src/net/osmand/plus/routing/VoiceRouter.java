@@ -1,7 +1,8 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.routing;
 
-import net.osmand.plus.activities.RoutingHelper.RouteDirectionInfo;
-import net.osmand.plus.activities.RoutingHelper.TurnType;
+import net.osmand.plus.activities.ApplicationMode;
+import net.osmand.plus.routing.RoutingHelper.RouteDirectionInfo;
+import net.osmand.plus.routing.RoutingHelper.TurnType;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
@@ -374,14 +375,14 @@ public class VoiceRouter {
 	private static class VoiceCommandPending {
 		public static final int ROUTE_CALCULATED = 1;
 		public static final int ROUTE_RECALCULATED = 2;
-		protected final long timestamp;
+//		protected final long timestamp;
 		protected final int type;
 		private final VoiceRouter voiceRouter;
 		
 		public VoiceCommandPending(int type, VoiceRouter voiceRouter){
 			this.type = type;
 			this.voiceRouter = voiceRouter;
-			timestamp = System.currentTimeMillis();
+//			timestamp = System.currentTimeMillis();
 		}
 
 		public void play(CommandBuilder newCommand) {
@@ -393,8 +394,6 @@ public class VoiceRouter {
 					newCommand.routeRecalculated(left).play();
 				}
 			}
-			// TODO Auto-generated method stub
-			
 		}
 	}
 

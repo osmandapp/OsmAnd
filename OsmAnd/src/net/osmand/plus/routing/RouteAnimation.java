@@ -1,9 +1,10 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.routing;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.LatLonUtils;
+import net.osmand.plus.activities.MapActivity;
 import android.location.Location;
 
 public class RouteAnimation {

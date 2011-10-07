@@ -1,4 +1,4 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.routing;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -12,9 +12,10 @@ import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.RouteProvider.GPXRouteParams;
-import net.osmand.plus.activities.RouteProvider.RouteCalculationResult;
-import net.osmand.plus.activities.RouteProvider.RouteService;
+import net.osmand.plus.activities.ApplicationMode;
+import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
+import net.osmand.plus.routing.RouteProvider.RouteCalculationResult;
+import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.voice.CommandPlayer;
 import android.content.Context;
 import android.location.Location;
