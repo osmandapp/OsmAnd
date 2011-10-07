@@ -1,11 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+<string name="animate_route_off">Animate off</string>
+<string name="animate_route">Animate on</string>
+	
+<string name="tip_recent_changes_0_6_8_t">A 0.6.8 verzió változásai:
+\n\t- Teljesen újratervezett kereső (POI, cím)! Az új kereső sokkal gyorsabb és lehetőséget ad különféle kiindulópontok szerinti kereséshez.
+\n\t- Név szerinti POI keresés nagy területekre (akár országnyi)
+\n\t- Javítva a képernyő villódzása tableteken (641-es hiba)
+\n\t- Útvonal automatikus követése beállítás (356-os hiba)
+\n\t- GPX navigáció áthelyezve az \'Útirány\' és az \'Útvonal mentése\' az \'Útvonal mutatása\' alá
+\n\t- POI adatok becsomagolva az .obf fájlba (tölts le 2011. 10. 01 után indexadatokat) 
+\n\t- Hangutasítás javítások (a GPS pozícióval és a parancs első kimondásával kapcsolatban) 
+\n\t- Apró fejlesztések
+</string>
+<string name="file_can_not_be_renamed">Fájl nem átnevezhető.</string>
+<string name="file_with_name_already_exists">Már létezik ilyen néven fájl.</string>
+<string name="gpx_navigation">GPX útvonal</string>
 <string name="poi_query_by_name_matches_categories">Keresésnek megfelelő POI kategóriák:</string>
 <string name="data_to_search_poi_not_available">POI kereséshez nem található helyi adat.</string>
 <string name="poi_filter_by_name">Név szerinti keresés</string>
 <string name="old_poi_file_should_be_deleted">A(z) \'%1$s\' POI adat fájl elavult és törölhető.</string>
 <string name="update_poi_file_not_found">A POI változások tárolásához nem található és nem hozható létre helyi fájl.</string>
-<string name="update_poi_does_not_change_indexes">POI-k változtatásai helyileg tárolódnak, a letöltött térkép adatok nem változnak.</string>
+<string name="update_poi_does_not_change_indexes">POI-k változtatásai helyileg tárolódnak, a letöltött térképadatok nem változnak.</string>
 
 <string name="button_upgrade_osmandplus">Osmand+ frissítése</string>
 <string name="map_version_changed_info">A szerveren található térképek nem kompatibilisek az Osmand ezen verziójával. Letöltésükhöz és használatukhoz frissíteni kell az alkalmazást.</string>
@@ -84,15 +100,15 @@
 <string name="local_index_poi_data">POI adat</string>
 <string name="local_index_address_data">Cím adat</string>
 <string name="local_index_transport_data">Közlekedési eszköz adat</string>
-<string name="local_index_map_data">Térkép adat</string>
+<string name="local_index_map_data">Térképadat</string>
 <string name="local_index_items"></string>
 <string name="local_indexes_cat_backup">Mentés</string>
-<string name="local_indexes_cat_tts">Beszéd adat (TTS)</string>
-<string name="local_indexes_cat_voice">Beszéd adat (média)</string>
-<string name="local_indexes_cat_gpx">GPX adat</string>
-<string name="local_indexes_cat_tile">Térkép adat (csempék)</string>
-<string name="local_indexes_cat_map">Térkép adat (vektor)</string>
-<string name="local_indexes_cat_poi">POI adat</string>
+<string name="local_indexes_cat_tts">Beszédadat (TTS)</string>
+<string name="local_indexes_cat_voice">Beszédadat (média)</string>
+<string name="local_indexes_cat_gpx">GPX-adat</string>
+<string name="local_indexes_cat_tile">Térképadat (csempék)</string>
+<string name="local_indexes_cat_map">Térképadat (vektor)</string>
+<string name="local_indexes_cat_poi">POI-adat</string>
 
 
 	<string name="ttsvoice">TTS felolvasó hang</string>
@@ -158,10 +174,10 @@
   <string name="select_tile_source_to_install">Térkép kiválasztása telepítéshez, frissítéshez</string>
   <string name="internet_not_available">A művelet elvégzéséhez internetelérés szükséges</string>
   <string name="install_more">További telepítése...</string>
-  <string name="tip_update_index">Térkép adatok frissítése</string>
-  <string name="tip_update_index_t">Fontos az aktuális térképek megléte. Az Osmand program tartalmaz egy letöltéskezelőt amivel egyszerűen ellenőrizhető, hogy létezik-e frissebb a meglévő térkép adatokból.
-\n\tA frissítések ellenőrzéséhez a \'Főmenü\'->\'Beállítások\'->\'Offline adatok\'->\'Térkép adatok letöltése\' menüpontot kell választani. A térkép adatok internetről való frissítése után a \'Letöltöttek szűrése\' menüt kell választani.
-\nÍgy most már csak a letöltött térkép adatok jelennek meg a következő színekkel jelölve:
+  <string name="tip_update_index">Térképadatok frissítése</string>
+  <string name="tip_update_index_t">Fontos az aktuális térképek megléte. Az Osmand program tartalmaz egy letöltéskezelőt amivel egyszerűen ellenőrizhető, hogy létezik-e frissebb a meglévő térképadatokból.
+\n\tA frissítések ellenőrzéséhez a \'Főmenü\'->\'Beállítások\'->\'Offline adatok\'->\'Térképadatok letöltése\' menüpontot kell választani. A térképadatok internetről való frissítése után a \'Letöltöttek szűrése\' menüt kell választani.
+\nÍgy most már csak a letöltött térképadatok jelennek meg a következő színekkel jelölve:
 \n\t\'Zöld\' - azt jelenti, hogy az index állomány megegyezik a szerveren lévővel
 \n\t\'Kék\' - azt jelenti, hogy újabb verzió tölthető le a szerverről</string>
 <string name="level_to_switch_vector_raster_descr">Maximális nagyítási szint vektoros megjelenítéshez raszteres helyett</string>
@@ -443,8 +459,8 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="route_tu">Fordulj meg</string>
 	<string name="route_head">Előre</string>
 	<string name="first_time_continue">Tovább</string>
-	<string name="first_time_download">Térkép adatok letöltése</string>
-	<string name="first_time_msg">Köszönjük, hogy az OsmAndot választotta. \nHogy a program minden lehetőségét kihasználhassa index állományokra lesz szüksége amiket az internetről letölthet (Beállítások -&gt; Offline adatok) vagy előállíthat magának. Ezt követően képes lesz: címre keresni, POI-ra keresni és tömegközékedési eszközre keresni.</string>
+	<string name="first_time_download">Térképadatok letöltése</string>
+	<string name="first_time_msg">Köszönjük, hogy az OsmAndot választotta. \nHogy a program minden lehetőségét kihasználhassa index állományokra lesz szüksége amiket az internetről letölthet (Beállítások -&gt; Offline adatok) vagy előállíthat magának. Ezt követően képes lesz: címre keresni, POI-ra keresni és tömegközlekedési eszközre keresni.</string>
 	<string name="search_poi_location">Kereső jelzés...</string>
 	<string name="search_near_map">Keresés az utolsó térképpozíció közelében</string>
 	<string name="search_nearby">Keresés a közelben</string>
@@ -459,8 +475,8 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="transport_Stop">Megálló</string>
 	<string name="transport_stops">megállók</string>
 	
-	<string name="transport_search_after">Keresés előtte</string>	
-	<string name="transport_search_before">Folytatás keresése</string>
+	<string name="transport_search_after">Keresés utána</string>	
+	<string name="transport_search_before">Keresés előtte</string>
 	<string name="transport_finish_search">Keresés vége</string>
 	<string name="transport_stop_to_go_out">Hol szeretnél leszállni?</string>
 	<string name="transport_to_go_after">utána gyalog</string>
@@ -475,7 +491,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="update_poi_success">POI adatok sikeresen frissítve ({0} db betöltve)</string>
 	<string name="update_poi_error_local">Hiba a helyi index állományok frissítésénél</string>
 	<string name="update_poi_error_loading">Hiba az adatok szerverről való letöltésekor</string>
-	<string name="update_poi_no_offline_poi_index">Nincs helyi POI index adat ehhez a területhez</string>
+	<string name="update_poi_no_offline_poi_index">Nincs helyi POI indexadat ehhez a területhez</string>
 	<string name="update_poi_is_not_available_for_zoom">Nem lehet a POI-kat frissíteni kis nagyítás mellett</string>
 	<string name="context_menu_item_update_poi">POI-k frissítése</string>
 	<string name="context_menu_item_update_map_confirm">Biztos, hogy a helyi adatokat internetről frissíti?</string>
@@ -548,7 +564,7 @@ A cél megadása sokszor távolságmérésre használatos vagy az egyenes odanav
 	<string name="go_back_to_osmand">Vissza az OsmAnd térképhez</string>
 	<string name="close">Bezár</string>
 	<string name="loading_data">Adatok beolvasása</string>
-	<string name="reading_indexes">Térkép adatok olvasása...</string>
+	<string name="reading_indexes">Térképadatok olvasása...</string>
 	<string name="previous_run_crashed">Az előző alkalmazás összeomlott. Naplófájl: {0}. Kérem küldjön egy hibajegyet és csatolja hozzá a naplófájlt.</string>
 	<string name="saving_gpx_tracks">GPX útvonalak mentése SD kártyára...</string>
 	<string name="finished_task">Befejezve</string>
