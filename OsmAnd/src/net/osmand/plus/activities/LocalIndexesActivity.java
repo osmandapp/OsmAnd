@@ -71,7 +71,6 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 
 	
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,18 +80,13 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		settings = OsmandSettings.getOsmandSettings(this);
 		descriptionLoader = new LoadLocalIndexDescriptionTask();
 		listAdapter = new LocalIndexesAdapter();
-		Object indexes = getLastNonConfigurationInstance();
-		asyncLoader = new LoadLocalIndexTask();
-		if(indexes instanceof List<?>){
-			asyncLoader.setResult((List<LocalIndexInfo>) indexes);
-		} else {
-			asyncLoader.execute(this);
-		}
+		
 		
 		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
+				asyncLoader.setResult(null);
 				startActivity(new Intent(LocalIndexesActivity.this, DownloadIndexActivity.class));
 			}
 		});
@@ -112,6 +106,20 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		
 		setListAdapter(listAdapter);
 		updateDescriptionTextWithSize();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (asyncLoader == null || asyncLoader.getResult() == null) {
+			Object indexes = getLastNonConfigurationInstance();
+			asyncLoader = new LoadLocalIndexTask();
+			if (indexes instanceof List<?>) {
+				asyncLoader.setResult((List<LocalIndexInfo>) indexes);
+			} else {
+				asyncLoader.execute(this);
+			}
+		}
 	}
 	
 	private void showContextMenu(final LocalIndexInfo info) {
@@ -231,11 +239,15 @@ public class LocalIndexesActivity extends ExpandableListActivity {
 		
 		public void setResult(List<LocalIndexInfo> result) {
 			this.result = result;
-			for (LocalIndexInfo v : result) {
-				listAdapter.addLocalIndexInfo(v);
+			if(result == null){
+				listAdapter.clear();
+			} else {
+				for (LocalIndexInfo v : result) {
+					listAdapter.addLocalIndexInfo(v);
+				}
+				listAdapter.notifyDataSetChanged();
+				onPostExecute(result);
 			}
-			listAdapter.notifyDataSetChanged();
-			onPostExecute(result);
 		}
 
 		@Override

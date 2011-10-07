@@ -713,15 +713,25 @@ private class DownloadIndexesAsyncTask extends  AsyncTask<String, Object, String
 					results.values = indexFiles.values();
 					results.count = indexFiles.size();
 				} else {
-					CharSequence lowerCase = constraint.toString()
-							.toLowerCase();
+					String[] vars = constraint.toString().split("\\s");
+					for(int i=0; i< vars.length; i++){
+						vars[i] = vars[i].trim().toLowerCase();
+					}
 					List<IndexItem> filter = new ArrayList<IndexItem>();
 					for (IndexItem item : indexFiles.values()) {
-						if (item.getVisibleName().toLowerCase().contains(lowerCase)) {
-							filter.add(item);
-						} else if (item.getDescription().toLowerCase().contains(lowerCase)) {
+						boolean add = true;
+						for (String var : vars) {
+							if (var.length() > 0) {
+								if (!item.getVisibleName().toLowerCase().contains(var)
+										&& !item.getDescription().toLowerCase().contains(var)) {
+									add = false;
+								}
+							}
+						}
+						if(add){
 							filter.add(item);
 						}
+							
 					}
 					results.values = filter;
 					results.count = filter.size();
