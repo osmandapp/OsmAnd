@@ -85,10 +85,14 @@ public class TestVoiceActivity extends Activity {
 		addButton(ll, "Arrive at destination", builder(p).arrivedAtDestination());
 		addButton(ll, "Gps location lost", builder(p).gpsLocationLost());
 		addButton(ll, "Make UT in 640", builder(p).makeUT(640));
+		addButton(ll, "Make UT", builder(p).makeUT());
 		addButton(ll, "Route recalculated 23150", builder(p).routeRecalculated(23150));
 		addButton(ll, "Prepare roundabout 750", builder(p).prepareRoundAbout(750));
 		addButton(ll, "Roundabout 3 exit", builder(p).roundAbout(0, 3));
+		addButton(ll, "Go ahead", builder(p).goAhead());
+		addButton(ll, "Go ahead 2350 m", builder(p).goAhead(2350));
 		addButton(ll, "In 450 roundabout 1 exit", builder(p).roundAbout(450, 0, 1));
+		addButton(ll, "Rright sharp turn and then bear left", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH).then().bearLeft());
 		ll.forceLayout();
 	}
 	
