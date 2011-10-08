@@ -1,17 +1,19 @@
 package net.osmand.plus.activities;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import net.osmand.GPXUtilities;
-import net.osmand.LogUtil;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.LogUtil;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ResourceManager;
 
@@ -137,9 +139,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				for (String f : data.keySet()) {
 
 					File fout = new File(dir, f + ".gpx"); //$NON-NLS-1$
-					int ind = 1;
-					while (fout.exists()) {
-						fout = new File(dir, f + "_" + (++ind) + ".gpx"); //$NON-NLS-1$ //$NON-NLS-2$
+					if (fout.exists() && !data.get(f).isEmpty()) {
+						fout = new File(dir, f + "." + new SimpleDateFormat("HHmmss.EEEE").format(new Date(data.get(f).findPointToShow().time)) + ".gpx"); //$NON-NLS-1$ //$NON-NLS-2$
 					}
 
 					String warn = GPXUtilities.writeGpxFile(fout, data.get(f), ctx);
