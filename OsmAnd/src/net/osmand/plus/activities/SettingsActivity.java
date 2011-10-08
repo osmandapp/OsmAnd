@@ -162,6 +162,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	    registerBooleanPreference(osmandSettings.USE_ENGLISH_NAMES,screen); 
 	    registerBooleanPreference(osmandSettings.SHOW_MORE_MAP_DETAIL,screen); 
 	    registerBooleanPreference(osmandSettings.AUTO_ZOOM_MAP,screen); 
+	    registerBooleanPreference(osmandSettings.AUTO_FOLLOW_ROUTE_NAV,screen);
 	    registerBooleanPreference(osmandSettings.SAVE_TRACK_TO_GPX,screen); 
 	    registerBooleanPreference(osmandSettings.DEBUG_RENDERING_INFO,screen); 
 	    registerBooleanPreference(osmandSettings.USE_STEP_BY_STEP_RENDERING,screen); 

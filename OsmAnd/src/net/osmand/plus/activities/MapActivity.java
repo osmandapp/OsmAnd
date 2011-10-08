@@ -1238,7 +1238,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	public void setMapLinkedToLocation(boolean isMapLinkedToLocation) {
 		if(!isMapLinkedToLocation){
 			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
-			if(autoFollow > 0){
+			if(autoFollow > 0 && (!settings.AUTO_FOLLOW_ROUTE_NAV.get() || routingHelper.isFollowingMode())){
 				uiHandler.removeMessages(AUTO_FOLLOW_MSG_ID);
 				Message msg = Message.obtain(uiHandler, new Runnable() {
 					@Override
