@@ -524,7 +524,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 
 	private Set<Long> registerStreetInCities(String name, String nameEn, LatLon location, Collection<City> result) throws SQLException {
 		if (result.isEmpty()) {
-			return null;
+			return Collections.emptySet();
 		}
 		if (Algoritms.isEmpty(nameEn)) {
 			nameEn = Junidecode.unidecode(name);

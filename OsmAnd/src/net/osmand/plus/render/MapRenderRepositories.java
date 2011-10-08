@@ -68,6 +68,11 @@ public class MapRenderRepositories {
 	private RotatedTileBox requestedBox = null;
 
 	// location of rendered bitmap
+	private RotatedTileBox prevBmpLocation = null;
+	// already rendered  bitmap
+	private Bitmap prevBmp;
+	
+	// location of rendered bitmap
 	private RotatedTileBox bmpLocation = null;
 	// already rendered  bitmap
 	private Bitmap bmp;
@@ -129,6 +134,10 @@ public class MapRenderRepositories {
 	
 	public RotatedTileBox getBitmapLocation() {
 		return bmpLocation;
+	}
+	
+	public RotatedTileBox getPrevBmpLocation() {
+		return prevBmpLocation;
 	}
 	
 	protected void closeConnection(BinaryMapIndexReader c, String file){
@@ -403,6 +412,8 @@ public class MapRenderRepositories {
 			boolean stepByStep = prefs.USE_STEP_BY_STEP_RENDERING.get();
 			// 1. generate image step by step
 			if (stepByStep) {
+				this.prevBmp = this.bmp;
+				this.prevBmpLocation = this.bmpLocation;
 				this.bmp = bmp;
 				this.bmpLocation = tileRect;
 			}
@@ -422,6 +433,9 @@ public class MapRenderRepositories {
 			if (!stepByStep) {
 				this.bmp = bmp;
 				this.bmpLocation = tileRect;
+			} else {
+				this.prevBmpLocation = null;
+				this.prevBmp = null;
 			}
 			if(prefs.DEBUG_RENDERING_INFO.get()){
 				String timeInfo = "Search done in "+ searchTime+" ms";    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
@@ -463,14 +477,16 @@ public class MapRenderRepositories {
 		return bmp;
 	}
 	
+	public Bitmap getPrevBitmap() {
+		return prevBmp;
+	}
+	
 	
 	public synchronized void clearCache() {
 		cObjects = new ArrayList<BinaryMapDataObject>();
 		cObjectsBox = new RectF();
-		if(bmp != null){
-			bmp = null;
-		}
-		requestedBox = bmpLocation = null;
+	    prevBmp =  bmp = null;
+		requestedBox = prevBmpLocation = bmpLocation = null;
 	}
 
 	

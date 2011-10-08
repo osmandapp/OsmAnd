@@ -564,11 +564,11 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> USE_STEP_BY_STEP_RENDERING = new BooleanPreference("use_step_by_step_rendering",
-			false, false);
+			true, false);
 	{
-		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.CAR, false);
-		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.BICYCLE, false);
-		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
+		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.CAR, true);
+		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.BICYCLE, true);
+		USE_STEP_BY_STEP_RENDERING.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
