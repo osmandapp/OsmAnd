@@ -36,6 +36,7 @@ public class OsmandRenderingRulesParser {
 	
 	public static class TextAttributes {
 		public int textColor = 0;
+		public int textOrder = 0;
 		public float textSize = 0;
 		public boolean textBold = false;
 		public String textShield = null;
@@ -260,6 +261,9 @@ public class OsmandRenderingRulesParser {
 				if(toMerge.text.textSize != 0 && mergeInto.text.textSize == 0){
 					mergeInto.text.textSize = toMerge.text.textSize;
 				}
+				if(toMerge.text.textOrder != 0 && mergeInto.text.textOrder == 0){
+					mergeInto.text.textOrder = toMerge.text.textOrder;
+				}
 				if(toMerge.text.textBold && !mergeInto.text.textBold){
 					mergeInto.text.textBold = toMerge.text.textBold;
 				}
@@ -386,6 +390,8 @@ public class OsmandRenderingRulesParser {
 					state.text.ref = val;
 				} else if(name.equals("textSize")){ //$NON-NLS-1$
 					state.text.textSize = Float.parseFloat(val);
+				} else if(name.equals("textOrder")){ //$NON-NLS-1$
+					state.text.textOrder = Integer.parseInt(val);
 				} else if(name.equals("textBold")){ //$NON-NLS-1$
 					state.text.textBold = Boolean.parseBoolean(val);
 				} else if(name.equals("textColor")){ //$NON-NLS-1$
@@ -509,6 +515,9 @@ public class OsmandRenderingRulesParser {
 		if(s.text != null){
 			if(s.text.textSize != 0){
 				res+= " textSize="+s.text.textSize; //$NON-NLS-1$
+			}
+			if(s.text.textOrder != 0){
+				res+= " textOrder="+s.text.textOrder; //$NON-NLS-1$
 			}
 			if(s.text.ref != null){
 				res+= " ref="+s.text.ref; //$NON-NLS-1$

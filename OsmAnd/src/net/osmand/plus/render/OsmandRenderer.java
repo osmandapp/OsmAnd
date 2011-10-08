@@ -71,17 +71,6 @@ public class OsmandRenderer {
 			this.text = text;
 		}
 		
-		public void fillProperties(RenderingContext rc, float centerX, float centerY){
-			this.centerX = centerX + rc.textDx;
-			this.centerY = centerY + rc.textDy;
-			textColor = rc.textColor;
-			textSize = rc.textSize;
-			textShadow = (int) rc.textHaloRadius;
-			textWrap = rc.textWrapWidth;
-			bold = rc.textBold;
-			minDistance = rc.textMinDistance;
-			shieldRes = rc.textShield;
-		}
 		String text = null;
 		Path drawOnPath = null;
 		float vOffset = 0;
@@ -95,6 +84,22 @@ public class OsmandRenderer {
 		int textWrap = 0;
 		boolean bold = false;
 		int shieldRes = 0;
+		int textOrder = 20;
+		
+		public void fillProperties(RenderingContext rc, float centerX, float centerY){
+			this.centerX = centerX + rc.textDx;
+			this.centerY = centerY + rc.textDy;
+			textColor = rc.textColor;
+			textSize = rc.textSize;
+			textShadow = (int) rc.textHaloRadius;
+			textWrap = rc.textWrapWidth;
+			bold = rc.textBold;
+			minDistance = rc.textMinDistance;
+			shieldRes = rc.textShield;
+			if(rc.textOrder >= 0){
+				textOrder = rc.textOrder;
+			}
+		}
 	}
 	
 	private static class IconDrawInfo {
@@ -145,6 +150,7 @@ public class OsmandRenderer {
 		float textHaloRadius = 0;
 		boolean textBold;
 		int textShield = 0;
+		int textOrder = -1;
 		
 		String renderingDebugInfo;
 		
@@ -160,6 +166,7 @@ public class OsmandRenderer {
 			showTextOnPath = false;
 			textSize = 0;
 			textColor = 0;
+			textOrder = -1;
 			textMinDistance = 0;
 			textWrapWidth = 0;
 			textDx = 0;
@@ -435,6 +442,14 @@ public class OsmandRenderer {
 			
 		};
 		
+		// 1. Sort text using text order 
+		Collections.sort(rc.textToDraw, new Comparator<TextDrawInfo>() {
+			@Override
+			public int compare(TextDrawInfo object1, TextDrawInfo object2) {
+				return object1.textOrder - object2.textOrder;
+			}
+		});
+		
 		nextText: for (int i = 0; i < size; i++) {
 			TextDrawInfo text  = rc.textToDraw.get(i);
 			if(text.text != null){
@@ -554,6 +569,7 @@ public class OsmandRenderer {
 	private boolean findTextIntersection(RenderingContext rc, List<RectF> boundsNotPathIntersect, List<RectF> boundsPathIntersect,
 			Comparator<RectF> c, TextDrawInfo text) {
 		boolean horizontalWayDisplay = (text.pathRotate > 45 && text.pathRotate < 135) || (text.pathRotate > 225 && text.pathRotate < 315);
+//		text.minDistance = 0;
 		float textWidth = paintText.measureText(text.text) + (!horizontalWayDisplay ? 0 : text.minDistance);
 		 // Paint.ascent is negative, so negate it.
 		int ascent = (int) Math.ceil(-paintText.ascent());

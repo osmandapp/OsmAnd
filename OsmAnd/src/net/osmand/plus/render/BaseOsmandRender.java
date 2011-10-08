@@ -393,7 +393,7 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 	private void fillTextProperties(FilterState f, RenderingContext rc) {
 		rc.textSize = f.text.textSize;
 		rc.textColor = f.text.textColor == 0 ? Color.BLACK : f.text.textColor;
-		rc.textSize = f.text.textSize;
+		rc.textOrder = f.text.textOrder;
 		rc.textMinDistance = f.text.textMinDistance;
 		rc.showTextOnPath = f.text.textOnPath;
 		Integer i = RenderingIcons.getIcons().get(f.text.textShield);
