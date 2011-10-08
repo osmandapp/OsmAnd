@@ -1,6 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="tip_recent_changes_0_6_7_t">Changement pour 0.6.7 :
+ <string name="animate_route_off">Arrêt animation</string>
+ <string name="animate_route">Démarrage animation</string>
+        <string name="tip_recent_changes_0_6_8_t">Changements en 0.6.8 :
+\n\t- Refonte totale de la recherche (POI, Adresse)! Rend la recherche d\'adresses plus rapide. Possibilité de rechercher selon différents critères.
+\n\t- Possibilité de chercher les POI par nom sur grande zone (pays)
+\n\t- Résolution clignotement écran sur tablettes(Bug 641)
+\n\t- Option d\'auto-suivi (Bug 356)
+\n\t- Itinéraires GPX déplacés dans le menu \'Directions\' et \'Enregistrer Directions\' déplacé dans \'A propos itinéraire\'
+\n\t- Données POI  dans un fichier .obf (téléchargements après le 01/10/11) 
+\n\t- Corrections des instructions vocales (sur l\'emplacement GPS et supprimer la première instruction) 
+\n\t- Petites améliorations diverses
+  </string>
+  <string name="local_index_description">Télécharger nouveau, déplacer ou supprimer données actuelles. \nDonnées hors ligne actuellement présente sur l\'appareil (%1$s is available):</string>
+  <string name="file_can_not_be_renamed">Fichier ne peut être renommé.</string>
+  <string name="file_with_name_already_exists">Un fichier avec ce nom existe déjà.</string>
+  <string name="gpx_navigation">Itinéraire GPX</string>
+  <string name="poi_query_by_name_matches_categories">Des catégories de poi correspondantes à la recherche ont été trouvées :</string>
+  <string name="data_to_search_poi_not_available">Pas de données de POI en local pour effectuer une recherche.</string>
+  <string name="poi_filter_by_name">Recherche par nom</string>
+  <string name="old_poi_file_should_be_deleted">Le fichier de poi \'%1$s\' est obsolète et peut être supprimé.</string>
+  <string name="update_poi_file_not_found">Fichier local de gestion des modifications de poi introuvable, et ne peut être créé.</string>
+  <string name="update_poi_does_not_change_indexes">La modification d\'un poi dans l\'application ne modifie pas les fichiers téléchargés mais récolte les modifications dans un fichier en local.</string>
+  <string name="button_upgrade_osmandplus">Mettre à jour Osmand+</string>
+  <string name="map_version_changed_info">Les fichiers de cartes sur le serveur sont incompatibles avec votre version de l\'application. Pour les télécharger et les utiliser, installez une version plus récente de votre application</string>
+  <string name="local_index_mi_rename">Renommer</string>
+  <string name="show_gpx_route">Afficher sur la carte</string>
+  <string name="poi_filter_nominatim">Nominatim en ligne</string>
+  <string name="auto_follow_route_never">Jamais</string>
+  <string name="choose_auto_follow_route">Choisir les paramètres de suivi automatique</string>
+  <string name="choose_auto_follow_route_descr">Choisir le temps pendant lequel l\'application extrapole la position en mouvement</string>
+  <string name="search_select_point">Sélectionner</string>
+  <string name="search_position_current_location_search">Recherche dans emplacement...</string>
+  <string name="search_position_current_location_found">Emplacement[Trouvé]</string>
+  <string name="search_position_address">Adresse...</string>
+  <string name="search_position_favorites">Favoris...</string>
+  <string name="search_position_undefined">Non défini</string>
+  <string name="search_position_fixed">Fixé</string>
+  <string name="search_position_current_location">Emplacement actuel...</string>
+  <string name="search_position_map_view">Dernière vue</string>
+  <string name="select_search_position">Recherche autour de :</string>
+  <string name="context_menu_item_search">Recherche</string>
+  
+  <string name="tip_recent_changes_0_6_7_t">Changement pour 0.6.7 :
 \n\t- Gestionaire de données hors ligne (téléchargement, suppression, sauvegarde des données hors ligne directement dans Osmand)
 \n\t- Favoris et groupes (categorisation, suppression, gestion)
 \n\t- Explorateur GPX dans l\'application (voir les itinéraires, distance, vitesse moyenne, altitude, etc.)
@@ -46,7 +88,6 @@
 	<string name="local_index_no_items_to_do">Pas d\'eléments à %1$s</string>
 	<string name="local_index_action_do">Vous allez %1$s %2$s eléments. Continuer?</string>
 	<string name="local_index_descr_title">Gestionnaire de données hors ligne:</string>
-	<string name="local_index_description">Télécharger nouvelles données, sauvegarder ou supprimer données existantes.\nDonnées hors-ligne actuellement sur l\'appareil:</string>
 	<string name="local_index_mi_restore">Restorer...</string>
 	<string name="local_index_mi_backup">Sauvegarder...</string>
 	<string name="local_index_mi_delete">Supprimer...</string>
