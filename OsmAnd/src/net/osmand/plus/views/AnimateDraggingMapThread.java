@@ -22,7 +22,7 @@ public class AnimateDraggingMapThread {
 	private final static float DRAGGING_ANIMATION_TIME = 1900f;
 	private final static float ZOOM_ANIMATION_TIME = 800f;
 	private final static float ZOOM_MOVE_ANIMATION_TIME = 650f;
-	private final static float MOVE_MOVE_ANIMATION_TIME = 2000f;
+	private final static float MOVE_MOVE_ANIMATION_TIME = 100f;
 	private final static int DEFAULT_SLEEP_TO_REDRAW = 55;
 	
 	private volatile boolean stopped;
