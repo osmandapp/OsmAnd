@@ -65,6 +65,9 @@ public class OsmandRenderer {
 
 	private DisplayMetrics dm;
 	
+	private int[] shadowarray;
+	private int shadownum;
+	
 	private static class TextDrawInfo {
 		
 		public TextDrawInfo(String text){
@@ -182,7 +185,7 @@ public class OsmandRenderer {
 	/* package*/ static class RenderingPaintProperties {
 		int color;
 		float strokeWidth;
-		int shadowLayer;
+		int shadowRadius;
 		int shadowColor;
 		boolean fillArea;
 		PathEffect pathEffect; 
@@ -197,7 +200,7 @@ public class OsmandRenderer {
 			fillArea = false;
 			shader = null;
 			shadowColor = 0;
-			shadowLayer = 0;
+			shadowRadius = 0;
 		}
 		
 		public void updatePaint(Paint p){
@@ -205,9 +208,9 @@ public class OsmandRenderer {
 			p.setColor(color);
 			p.setShader(shader);
 			if(shadowColor == 0){
-				shadowLayer = 0;
+				shadowRadius = 0;
 			}
-			p.setShadowLayer(shadowLayer, 0, 0, shadowColor);
+			p.setShadowLayer(shadowRadius, 0, 0, shadowColor);
 			p.setStrokeWidth(strokeWidth);
 			p.setStrokeCap(cap);
 			if (!fillArea) {
@@ -223,7 +226,7 @@ public class OsmandRenderer {
 			shader = null;
 			pathEffect = null;
 			shadowColor = 0;
-			shadowLayer = 0;
+			shadowRadius = 0;
 		}
 	}
 	
@@ -340,12 +343,28 @@ public class OsmandRenderer {
 			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			
+			//int shadow = 0; // no shadow (minumum CPU)
+			//int shadow = 1; // classic shadow (the implementaton in master)
+			//int shadow = 2; // blur shadow (most CPU, but still reasonable)
+			int shadow = 3; // solid border (CPU use like classic version or even smaller)
+			boolean repeat = false;
 			
 			float[] keys = orderMap.keys();
 			Arrays.sort(keys);
 			int objCount = 0;
+			
+			shadowarray = new int[keys.length];
+			shadownum = 0;
+			
 			for (int k = 0; k < keys.length; k++) {
+				
+				if(repeat == true && shadowarray[shadownum] == k){
+					shadownum++;
+					continue;
+				}
+				
 				TIntArrayList list = orderMap.get(keys[k]);
+				
 				for (int j = 0; j < list.size(); j++) {
 					int i = list.get(j);
 					int ind = i >> 8;
@@ -353,8 +372,8 @@ public class OsmandRenderer {
 					BinaryMapDataObject obj = objects.get(ind);
 
 					// show text only for main type
-					drawObj(obj, renderer, cv, rc, l, l == 0);
-					
+					drawObj(obj, renderer, cv, rc, l, l == 0, shadow, k);
+						
 					objCount++;
 				}
 				if(objCount > 25){
@@ -363,6 +382,14 @@ public class OsmandRenderer {
 				}
 				if(rc.interrupted){
 					return null;
+				}
+				
+				// order = 57 should be set as limit for shadows 
+				if(keys[k] > 57 && repeat == false && shadow > 1){
+					shadow = 0;
+					shadownum = 0;
+					k = shadowarray[0];
+					repeat = true;
 				}
 			}
 			notifyListeners(notifyList);
@@ -647,7 +674,8 @@ public class OsmandRenderer {
 	}
 
 	
-	protected void drawObj(BinaryMapDataObject obj, BaseOsmandRender render, Canvas canvas, RenderingContext rc, int l, boolean renderText) {
+	protected void drawObj(BinaryMapDataObject obj, BaseOsmandRender render, Canvas canvas, RenderingContext rc, int l, boolean renderText
+			, int shadow, int index) {
 		rc.allObjects++;
 		if (obj instanceof MultyPolygon) {
 			drawMultiPolygon(obj, render,canvas, rc);
@@ -661,7 +689,7 @@ public class OsmandRenderer {
 				drawPoint(obj, render, canvas, rc, pair, renderText);
 			} else if (t == MapRenderingTypes.POLYLINE_TYPE) {
 				int layer = MapRenderingTypes.getNegativeWayLayer(mainType);
-				drawPolyline(obj, render, canvas, rc, pair, layer);
+				drawPolyline(obj, render, canvas, rc, pair, layer, shadow, index);
 			} else if (t == MapRenderingTypes.POLYGON_TYPE) {
 				drawPolygon(obj, render, canvas, rc, pair);
 			} else {
@@ -888,9 +916,33 @@ public class OsmandRenderer {
 			
 	}
 	
-
+private void drawPolylineWithShadow(Canvas canvas, Path path, int shadow, int shadowRadius, int index){
+	// option shadow = 1 ,2 don't need any changes in first draw
+	// option shadow = 0 without any shadows
+	if(shadow == 0) paint.setShadowLayer(0, 0, 0, 0);
+	// option shadow = 3 with solid border
+	if(shadow == 3){
+		paint.setShadowLayer(0, 0, 0, 0);
+		paint.setStrokeWidth(paint.getStrokeWidth() + 2);
+		paint.setColor(0xffbababa);
+	}
+	canvas.drawPath(path, paint);
 	
-	private void drawPolyline(BinaryMapDataObject obj, BaseOsmandRender render, Canvas canvas, RenderingContext rc, TagValuePair pair, int layer) {
+	//check for shadow and save index in array
+	if(shadowRadius > 0 && shadow > 1){
+		if(shadownum == 0){
+		shadowarray[shadownum] = index;
+		shadownum++;
+		}
+		if (shadowarray[shadownum-1] != index){
+			shadowarray[shadownum] = index;
+			shadownum++;
+		}
+	}
+}
+	
+	private void drawPolyline(BinaryMapDataObject obj, BaseOsmandRender render, Canvas canvas, RenderingContext rc, TagValuePair pair, int layer,
+			int shadow, int index) {
 		if(render == null || pair == null){
 			return;
 		}
@@ -954,19 +1006,19 @@ public class OsmandRenderer {
 		}
 		if (path != null) {
 			rc.main.updatePaint(paint);
-			canvas.drawPath(path, paint);
+			drawPolylineWithShadow(canvas, path, shadow, rc.main.shadowRadius, index);
 			if (rc.second.strokeWidth != 0) {
 				rc.second.updatePaint(paint);
-				canvas.drawPath(path, paint);
+				drawPolylineWithShadow(canvas, path, shadow, rc.second.shadowRadius, index);
 				if (rc.third.strokeWidth != 0) {
 					rc.third.updatePaint(paint);
-					canvas.drawPath(path, paint);
+					drawPolylineWithShadow(canvas, path, shadow, rc.third.shadowRadius, index);
 				}
 			}
 			if (rc.adds != null) {
 				for (int i = 0; i < rc.adds.length; i++) {
 					rc.adds[i].updatePaint(paint);
-					canvas.drawPath(path, paint);
+					drawPolylineWithShadow(canvas, path, shadow, rc.adds[i].shadowRadius, index);
 				}
 			}
 			if (obj.getName() != null && obj.getName().length() > 0) {
