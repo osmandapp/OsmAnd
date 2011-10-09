@@ -59,6 +59,7 @@
 			<filter tag="landuse" value="reservoir" order="5" />
 			<filter tag="landuse" value="water" order="5" />
 			<filter tag="natural" value="water" order="5" />
+			<filter tag="natural" value="bay" order="5" />
 			<filter tag="waterway" order="5" />
 
 			<filter tag="leisure" order="2" />
@@ -691,6 +692,7 @@
 			<filter minzoom="1" tag="natural" value="coastline" />
 			<filter minzoom="4" tag="natural" value="water" />
 			<filter minzoom="4" tag="natural" value="lake" />
+			<filter minzoom="4" tag="natural" value="bay" />
 		</switch>
 	<!-- ZM 12 -->
 		<filter minzoom="11" shader="beach" tag="natural" value="beach" />

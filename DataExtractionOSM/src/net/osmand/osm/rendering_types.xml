@@ -411,7 +411,7 @@
 
 	<type id="17" name="natural">
 		<subtype id="5" polygon="true" tag="natural" value="coastline" minzoom="1" />
-		<subtype id="1" point="true" polygon="true" tag="natural" value="bay" minzoom="11" />
+		<subtype id="1" point="true" polygon="true" tag="natural" value="bay" minzoom="5" />
 		<subtype id="2" point="true" polygon="true" tag="natural" value="beach" minzoom="11" />
 		<subtype id="3" point="true" polygon_center="true" tag="natural" value="cave_entrance" minzoom="13" />
 		<subtype id="4" point="true" polyline="true" tag="natural" value="cliff" minzoom="13" />
