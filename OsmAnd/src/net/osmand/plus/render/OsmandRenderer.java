@@ -25,7 +25,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
-import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
@@ -442,17 +441,6 @@ public class OsmandRenderer {
 		return bmp;
 	}
 	
-	// Draw nice shadow under all streets 
-	//but also other linear objects which is not very good
-	
-	private void drawStreetsWithShadow(Canvas cv, Bitmap streetbmp){
-		Paint shadowpaint = new Paint();
-		shadowpaint.setColor(Color.BLACK);
-		shadowpaint.setMaskFilter(new BlurMaskFilter(1, BlurMaskFilter.Blur.SOLID));
-		Bitmap shadowImage = streetbmp.extractAlpha();
-		cv.drawBitmap(shadowImage, 0, 0, shadowpaint);// <----
-		cv.drawBitmap(streetbmp, 0, 0, null);
-	}
 
 	private void notifyListeners(List<IMapDownloaderCallback> notifyList) {
 		if (notifyList != null) {
