@@ -365,7 +365,7 @@ public class BaseOsmandRender implements RenderingRuleVisitor {
 		}
 		if(ef.shadowColor != 0 && ef.shadowRadius > 0){
 			props.shadowColor = ef.shadowColor;
-			props.shadowLayer = (int) ef.shadowRadius;
+			props.shadowRadius = (int) ef.shadowRadius;
 		}
 	}
 	
