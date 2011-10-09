@@ -275,11 +275,11 @@
 		</switch>
 
 		<filter minzoom="14" maxzoom="14" textSize="12" textBold="true" textColor="#6666ff" textDy="7" tag="railway" value="station" />
-		<filter minzoom="15" textSize="13" textBold="true" textColor="#6666ff" textDy="7" tag="railway" value="station" />
+		<filter minzoom="15" textSize="13" textHaloRadius="1" textBold="true" textColor="#6666ff" textDy="7" tag="railway" value="station" />
 		<filter minzoom="14" maxzoom="14" textSize="12" textColor="#6666ff" textDy="7" tag="railway" value="halt" />
-		<filter minzoom="15" textSize="12" textColor="#6666ff" textDy="7" tag="railway" value="halt" />
+		<filter minzoom="15" textSize="12" textHaloRadius="1"  textColor="#6666ff" textDy="7" tag="railway" value="halt" />
 		<filter minzoom="14" maxzoom="14" textSize="12" textColor="#6666ff" textDy="7" tag="railway" value="tram_stop" />
-		<filter minzoom="15" textSize="12" textColor="#6666ff" textDy="7" tag="railway" value="tram_stop" />
+		<filter minzoom="15" textSize="12" textHaloRadius="1" textColor="#6666ff" textDy="7" tag="railway" value="tram_stop" />
 
 		<filter minzoom="10" textSize="12" textColor="#6692da" textDy="7" tag="aeroway" value="aerodrome" />
 		<filter minzoom="15" textSize="12" textColor="#333333" textOnPath="true" textMinDistance="50" tag="aeroway" value="runway" ref="true" />
