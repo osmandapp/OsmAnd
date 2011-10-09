@@ -10,10 +10,13 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.text.Collator;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import net.osmand.Algoritms;
 import net.osmand.CollatorStringMatcher;
@@ -31,12 +34,12 @@ import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.PostCode;
 import net.osmand.data.Street;
+import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapRenderingTypes.MapRulType;
 import net.osmand.osm.MapUtils;
-import net.sf.junidecode.Junidecode;
 
 import org.apache.commons.logging.Log;
 
@@ -276,12 +279,59 @@ public class BinaryMapIndexReader {
 	/**
 	 * Transport public methods
 	 */
-	public net.osmand.data.TransportRoute getTransportRoute(int filePointer) throws IOException {
-		TransportIndex ind = getTransportIndex(filePointer);
+	public TIntObjectHashMap<TransportRoute> getTransportRoutes(int[] filePointers) throws IOException {
+		TIntObjectHashMap<TransportRoute> result = new TIntObjectHashMap<TransportRoute>();
+		Map<TransportIndex, TIntArrayList> groupPoints = new HashMap<TransportIndex, TIntArrayList>();
+		for(int filePointer : filePointers){
+			TransportIndex ind = getTransportIndex(filePointer);
+			if (ind != null) {
+				if (!groupPoints.containsKey(ind)) {
+					groupPoints.put(ind, new TIntArrayList());
+				}
+				groupPoints.get(ind).add(filePointer);
+			}
+		}
+		Iterator<Entry<TransportIndex, TIntArrayList>> it = groupPoints.entrySet().iterator();
+		if(it.hasNext()){
+			Entry<TransportIndex, TIntArrayList> e = it.next();
+			TransportIndex ind = e.getKey();
+			TIntArrayList pointers = e.getValue();
+			pointers.sort();
+			TIntObjectHashMap<String> stringTable = new TIntObjectHashMap<String>();
+			for (int i = 0; i < pointers.size(); i++) {
+				int filePointer = pointers.get(i);
+				TransportRoute transportRoute = transportAdapter.getTransportRoute(filePointer, stringTable, false);
+				result.put(filePointer, transportRoute);
+			}
+			transportAdapter.initializeStringTable(ind, stringTable);
+			for(TransportRoute r : result.values(new TransportRoute[result.size()])){
+				transportAdapter.initializeNames(false, r, stringTable);
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * Transport public methods
+	 */
+	public List<net.osmand.data.TransportRoute> getTransportRouteDescriptions(TransportStop stop) throws IOException {
+		TransportIndex ind = getTransportIndex(stop.getFileOffset());
 		if(ind == null){
 			return null;
 		}
-		return transportAdapter.getTransportRoute(filePointer, ind);
+		List<net.osmand.data.TransportRoute> list = new ArrayList<TransportRoute>();
+		TIntObjectHashMap<String> stringTable = new TIntObjectHashMap<String>();
+		for(int filePointer : stop.getReferencesToRoutes()){
+			TransportRoute tr = transportAdapter.getTransportRoute(filePointer, stringTable, true);
+			if(tr != null){
+				list.add(tr);				
+			}
+		}
+		transportAdapter.initializeStringTable(ind, stringTable);
+		for(TransportRoute route : list){
+			transportAdapter.initializeNames(true, route, stringTable);
+		}
+		return list;
 	}
 	
 	public boolean transportStopBelongsTo(TransportStop s){
@@ -334,16 +384,11 @@ public class BinaryMapIndexReader {
 			int offset = req.searchResults.size();
 			transportAdapter.searchTransportTreeBounds(0, 0, 0, 0, req);
 			codedIS.popLimit(oldLimit);
-			for (int i = offset; i < req.searchResults.size(); i++) {
-				TransportStop st = req.searchResults.get(i);
-				if (st.getName().length() != 0) {
-					st.setName(transportAdapter.getStringFromStringTable(index.stringTable, st.getName().charAt(0)));
-				}
-				if (st.getEnName().length() != 0) {
-					st.setEnName(transportAdapter.getStringFromStringTable(index.stringTable, st.getEnName().charAt(0)));
-				} 
-				if(st.getEnName().length() == 0) {
-					st.setEnName(Junidecode.unidecode(st.getName()));
+			if (req.stringTable != null) {
+				transportAdapter.initializeStringTable(index, req.stringTable);
+				for (int i = offset; i < req.searchResults.size(); i++) {
+					TransportStop st = req.searchResults.get(i);
+					transportAdapter.initializeNames(req.stringTable, st);
 				}
 			}
 		}
@@ -1112,10 +1157,14 @@ public class BinaryMapIndexReader {
 		SearchFilter searchFilter = null;
 		
 		SearchPoiTypeFilter poiTypeFilter = null;
-
+		
+		// internal read information
+		TIntObjectHashMap<String> stringTable = null;
+		
 		// cache information
 		TIntArrayList cacheCoordinates = new TIntArrayList();
 		TIntArrayList cacheTypes = new TIntArrayList();
+		
 		
 		// TRACE INFO
 		int numberOfVisitedObjects = 0;
@@ -1356,9 +1405,7 @@ public class BinaryMapIndexReader {
 		// test transport
 		for (TransportIndex i : reader.transportIndexes) {
 			System.out.println(i.left + " " + i.right + " " + i.top + " " + i.bottom);
-			System.out.println(i.stringTable.cacheOfStrings);
 			System.out.println(i.stringTable.offsets);
-			System.out.println(i.stringTable.window);
 		}
 		{
 			int sleft = MapUtils.get31TileNumberX(27.573);
@@ -1367,8 +1414,8 @@ public class BinaryMapIndexReader {
 			int sbottom = MapUtils.get31TileNumberY(53.908);
 			for (TransportStop s : reader.searchTransportIndex(buildSearchTransportRequest(sleft, sright, stop, sbottom, 15, null))) {
 				System.out.println(s.getName());
-				for (int i : s.getReferencesToRoutes()) {
-					net.osmand.data.TransportRoute route = reader.getTransportRoute(i);
+				TIntObjectHashMap<TransportRoute> routes = reader.getTransportRoutes(s.getReferencesToRoutes());
+				for (net.osmand.data.TransportRoute  route : routes.values()) {
 					System.out.println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
 							+ route.getAvgBothDistance());
 				}
@@ -1381,8 +1428,8 @@ public class BinaryMapIndexReader {
 			int sbottom = MapUtils.get31TileNumberY(53.708);
 			for (TransportStop s : reader.searchTransportIndex(buildSearchTransportRequest(sleft, sright, stop, sbottom, 16, null))) {
 				System.out.println(s.getName());
-				for (int i : s.getReferencesToRoutes()) {
-					net.osmand.data.TransportRoute route = reader.getTransportRoute(i);
+				TIntObjectHashMap<TransportRoute> routes = reader.getTransportRoutes(s.getReferencesToRoutes());
+				for (net.osmand.data.TransportRoute  route : routes.values()) {
 					System.out.println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
 							+ route.getAvgBothDistance());
 				}
