@@ -1,9 +1,11 @@
 package net.osmand.osm;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class Node extends Entity {
+public class Node extends Entity implements Serializable {
 
+	private static final long serialVersionUID = -2981499160640211082L;
 	private double latitude;
 	private double longitude;
 	// currently not used

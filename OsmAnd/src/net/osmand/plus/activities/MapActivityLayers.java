@@ -116,7 +116,7 @@ public class MapActivityLayers {
 		// 2. osm bugs layer
 		osmBugsLayer = new OsmBugsLayer(activity);
 		// 3. poi layer
-		poiMapLayer = new POIMapLayer();
+		poiMapLayer = new POIMapLayer(activity);
 		// 4. favorites layer
 		favoritesLayer = new FavoritesLayer();
 		// 5. transport layer

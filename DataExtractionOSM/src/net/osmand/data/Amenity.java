@@ -12,7 +12,7 @@ import net.osmand.osm.OSMSettings.OSMTagKey;
 
 public class Amenity extends MapObject {
 
-	
+	private static final long serialVersionUID = 132083949926339552L;
 	private String subType;
 	private AmenityType type;
 	private String openingHours;

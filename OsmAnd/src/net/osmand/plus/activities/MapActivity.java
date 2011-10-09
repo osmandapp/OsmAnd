@@ -6,9 +6,9 @@ import java.util.List;
 
 import net.osmand.Algoritms;
 import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.LogUtil;
 import net.osmand.Version;
-import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
@@ -21,8 +21,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.routing.RouteAnimation;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -100,8 +100,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	
     /** Called when the activity is first created. */
 	private OsmandMapTileView mapView;
-	private MapActivityActions mapActions = new MapActivityActions(this);
-	private MapActivityLayers mapLayers = new MapActivityLayers(this);
+	final private MapActivityActions mapActions = new MapActivityActions(this);
+	private EditingPOIActivity poiActions;
+	final private MapActivityLayers mapLayers = new MapActivityLayers(this);
 	
 	private ImageButton backToLocation;
 	
@@ -128,6 +129,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 
 	private boolean isMapLinkedToLocation = false;
 	private ProgressDialog startProgressDialog;
+	private List<DialogProvider> dialogProviders = new ArrayList<DialogProvider>(2);
 	
 	private Notification getNotification(){
 		Intent notificationIndent = new Intent(this, MapActivity.class);
@@ -173,6 +175,7 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 			}
 
 		});
+		poiActions = new EditingPOIActivity(this);
 		MapTileDownloader.getInstance().addDownloaderCallback(new IMapDownloaderCallback(){
 			@Override
 			public void tileDownloaded(DownloadRequest request) {
@@ -227,6 +230,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				backToLocationImpl();
 			}
 		});
+		dialogProviders.add(mapActions);
+		dialogProviders.add(poiActions);
+		dialogProviders.add(mapLayers.getOsmBugsLayer());
 	}
     
     @Override
@@ -364,13 +370,36 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 		return ((OsmandApplication) getApplication());
 	}
     
+	public void addDialogProvider(DialogProvider dp) {
+		dialogProviders.add(dp);
+	}
+	
     @Override
 	protected Dialog onCreateDialog(int id) {
 		if(id == OsmandApplication.PROGRESS_DIALOG){
 			return startProgressDialog;
 		}
-		return super.onCreateDialog(id);
+		return null;
 	}
+    
+    @Override
+    protected Dialog onCreateDialog(int id, Bundle args) {
+    	Dialog dialog = null;
+    	for (DialogProvider dp : dialogProviders) {
+    		dialog = dp.onCreateDialog(id,args);
+    		if (dialog != null) {
+    			return dialog;
+    		}
+    	}
+    	return dialog;
+    }
+    
+    @Override
+    protected void onPrepareDialog(int id, Dialog dialog, Bundle args) {
+    	for (DialogProvider dp : dialogProviders) {
+    		dp.onPrepareDialog(id, dialog, args);
+    	}
+    }
     
     public void changeZoom(int newZoom){
     	boolean changeLocation = settings.AUTO_ZOOM_MAP.get();
@@ -1194,12 +1223,11 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 				} else if(standardId == R.string.context_menu_item_share_location){
 					mapActions.shareLocation(latitude, longitude, mapView.getZoom());
 				} else if(standardId == R.string.context_menu_item_create_poi){
-					EditingPOIActivity activity = new EditingPOIActivity(MapActivity.this, (OsmandApplication) getApplication(), mapView);
-					activity.showCreateDialog(latitude, longitude);
+					getPoiActions().showCreateDialog(latitude, longitude);
 				} else if(standardId == R.string.context_menu_item_add_waypoint){
-					mapActions.addWaypoint(latitude, longitude, savingTrackHelper);
+					mapActions.addWaypoint(latitude, longitude);
 				} else if(standardId == R.string.context_menu_item_open_bug){
-					mapLayers.getOsmBugsLayer().openBug(MapActivity.this, getLayoutInflater(), mapView, latitude, longitude);
+					mapLayers.getOsmBugsLayer().openBug(latitude, longitude);
 				} else if(standardId == R.string.context_menu_item_update_map){
 					mapActions.reloadTile(mapView.getZoom(), latitude, longitude);
 				} else if(standardId == R.string.context_menu_item_download_map){
@@ -1215,11 +1243,19 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
     public MapActivityActions getMapActions() {
 		return mapActions;
 	}
+    
+    public EditingPOIActivity getPoiActions() {
+		return poiActions;
+	}
 	
 	public MapActivityLayers getMapLayers() {
 		return mapLayers;
 	}
     
+	public SavingTrackHelper getSavingTrackHelper() {
+		return savingTrackHelper;
+	}
+	
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 	}

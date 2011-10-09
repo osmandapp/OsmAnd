@@ -13,6 +13,7 @@ import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.EditingPOIActivity;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.render.UnscaledBitmapLoader;
 import android.content.Context;
@@ -49,7 +50,12 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 	private PoiFilter filter;
 	private DisplayMetrics dm;
 	private Map<Integer, Bitmap> cachedIcons = new LinkedHashMap<Integer, Bitmap>();
+	private final MapActivity activity;
 	
+	public POIMapLayer(MapActivity activity) {
+		this.activity = activity;
+	}
+
 	@Override
 	public boolean onLongPressEvent(PointF point) {
 		return false;
@@ -274,7 +280,7 @@ public class POIMapLayer implements OsmandMapLayer, ContextMenuLayer.IContextMen
 		if(a.getSite() != null){
 			actionsList.add(this.view.getResources().getString(R.string.poi_context_menu_website));
 		}
-		final EditingPOIActivity edit = new EditingPOIActivity(view.getContext(), view.getApplication(), view);
+		final EditingPOIActivity edit = activity.getPoiActions();
 		return new DialogInterface.OnClickListener(){
 
 			@Override

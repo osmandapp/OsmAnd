@@ -40,7 +40,6 @@ import net.osmand.osm.io.OsmBaseStorage;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
 import org.apache.http.HttpResponse;
@@ -62,17 +61,16 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.util.Xml;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -80,7 +78,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class EditingPOIActivity {
+public class EditingPOIActivity implements DialogProvider {
 	
 //	private final static String SITE_API = "http://api06.dev.openstreetmap.org/";
 	private final static String SITE_API = "http://api.openstreetmap.org/"; //$NON-NLS-1$
@@ -91,10 +89,7 @@ public class EditingPOIActivity {
 
 	private static final long NO_CHANGESET_ID = -1;
 	
-	private Dialog dlg;
-	private final Context ctx;
-	private final OsmandMapTileView view;
-	private final OsmandApplication app;
+	private final MapActivity ctx;
 	private AutoCompleteTextView typeText;
 	private EditText nameText;
 	private Button typeButton;
@@ -109,33 +104,43 @@ public class EditingPOIActivity {
 
 	private final static Log log = LogUtil.getLog(EditingPOIActivity.class);
 
+	/* dialog stuff */
+	private static final int DIALOG_CREATE_POI = 200;
+	private static final int DIALOG_EDIT_POI = 201;
+	protected static final int DIALOG_SUB_CATEGORIES = 202;
+	protected static final int DIALOG_POI_TYPES = 203;
+	private static final int DIALOG_DELETE_POI = 204;
+	private static final int DIALOG_OPENING_HOURS = 205;
 
-	
+	private static final String KEY_AMENITY_NODE = "amenity_node";
+	private static final String KEY_AMENITY = "amenity";
 
+	private Bundle dialogBundle = new Bundle();
 
-	public EditingPOIActivity(Context uiContext, OsmandApplication app, OsmandMapTileView view){
-		this.app = app;
+	public EditingPOIActivity(MapActivity uiContext){
 		this.ctx = uiContext;
-		this.view = view;
 	}
 	
-	public void showEditDialog(Amenity a){
-		Node n = loadNode(a);
+	public void showEditDialog(Amenity editA){
+		Node n = loadNode(editA);
 		if(n != null){
-			dlg = new Dialog(ctx);
-			dlg.setTitle(R.string.poi_edit_title);
-			showDialog(n, a.getType(), a.getSubType());
+			showPOIDialog(DIALOG_EDIT_POI, n, editA.getType(), editA.getSubType());
 		} else {
 			Toast.makeText(ctx, ctx.getString(R.string.poi_error_poi_not_found), Toast.LENGTH_SHORT).show();
 		}
 	}
 	
 	public void showCreateDialog(double latitude, double longitude){
-		dlg = new Dialog(ctx);
 		Node n = new Node(latitude, longitude, -1);
 		n.putTag(OSMTagKey.OPENING_HOURS.getValue(), ""); //$NON-NLS-1$
-		dlg.setTitle(R.string.poi_create_title);
-		showDialog(n, AmenityType.OTHER, ""); //$NON-NLS-1$
+		showPOIDialog(DIALOG_CREATE_POI, n, AmenityType.OTHER, "");
+	}
+
+	private void showPOIDialog(int dialogID, Node n, AmenityType type, String subType) {
+		Amenity a = new Amenity(n, type, subType);
+		dialogBundle.putSerializable(KEY_AMENITY, a);
+		dialogBundle.putSerializable(KEY_AMENITY_NODE, n);
+		ctx.showDialog(dialogID, dialogBundle);
 	}
 	
 	public void showDeleteDialog(Amenity a){
@@ -144,10 +149,20 @@ public class EditingPOIActivity {
 			Toast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
 			return;
 		}
-		
-		Builder builder = new AlertDialog.Builder(ctx);
-		builder.setTitle(MessageFormat.format(this.view.getResources().getString(R.string.poi_remove_confirm_template), 
+		dialogBundle.putSerializable(KEY_AMENITY, a);
+		dialogBundle.putSerializable(KEY_AMENITY_NODE, n);
+		ctx.showDialog(DIALOG_DELETE_POI, dialogBundle);
+	}
+	
+	private void prepareDeleteDialog(Dialog dlg, Bundle args) {
+		Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
+		dlg.setTitle(MessageFormat.format(this.ctx.getMapView().getResources().getString(R.string.poi_remove_confirm_template), 
 				OsmAndFormatter.getPoiStringWithoutType(a, OsmandSettings.getOsmandSettings(ctx).usingEnglishNames())));
+	}
+	
+	private Dialog createDeleteDialog(final Bundle args) {
+		Builder builder = new AlertDialog.Builder(ctx);
+		builder.setTitle(R.string.poi_remove_title);
 		final EditText comment = new EditText(ctx);
 		comment.setText(R.string.poi_remove_title);
 		builder.setView(comment);
@@ -155,35 +170,43 @@ public class EditingPOIActivity {
 		builder.setPositiveButton(R.string.default_buttons_delete, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				Node n = (Node) args.getSerializable(KEY_AMENITY_NODE);
 				String c = comment.getText().toString();
 				commitNode(DELETE_ACTION, n, entityInfo, c, new Runnable(){
 					@Override
 					public void run() {
 						Toast.makeText(ctx, ctx.getResources().getString(R.string.poi_remove_success), Toast.LENGTH_LONG).show();
-						if(view != null){
-							view.refreshMap();
+						if(ctx.getMapView() != null){
+							ctx.getMapView().refreshMap();
 						}						
 					}
 				});
 			}
 		});
-		builder.show();
+		return builder.create();
+	}
+
+	private void preparePOIDialog(Dialog dlg, Bundle args, int title) {
+		Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
+		dlg.setTitle(title);
+		EditText nameText = ((EditText)dlg.findViewById(R.id.Name));
+		nameText.setText(a.getName());
+		EditText openingHours = ((EditText)dlg.findViewById(R.id.OpeningHours));
+		openingHours.setText(a.getOpeningHours());
+		updateType(a);
 	}
 	
-	private void showDialog(final Node n, AmenityType type, String subtype){
-		final Amenity a = new Amenity(n, type, subtype);
+	private Dialog createPOIDialog(final int dialogID, final Bundle args) {
+		Dialog dlg = new Dialog(ctx);
 		dlg.setContentView(R.layout.editing_poi);
-		nameText =((EditText)dlg.findViewById(R.id.Name));
-		nameText.setText(a.getName());
+		nameText = ((EditText)dlg.findViewById(R.id.Name));
+		openingHours = ((EditText)dlg.findViewById(R.id.OpeningHours));
 		typeText = ((AutoCompleteTextView)dlg.findViewById(R.id.Type));
 		typeButton = ((Button)dlg.findViewById(R.id.TypeButton));
 		openHoursButton = ((Button)dlg.findViewById(R.id.OpenHoursButton));
-		openingHours = ((EditText)dlg.findViewById(R.id.OpeningHours));
-		openingHours.setText(a.getOpeningHours());
 		typeText = ((AutoCompleteTextView)dlg.findViewById(R.id.Type));
 		typeText.setThreshold(1);
 		commentText = ((EditText)dlg.findViewById(R.id.Comment));
-		updateType(a);
 		
 		TextView linkToOsmDoc = (TextView) dlg.findViewById(R.id.LinkToOsmDoc);
 		linkToOsmDoc.setOnClickListener(new View.OnClickListener() {
@@ -196,38 +219,31 @@ public class EditingPOIActivity {
 		linkToOsmDoc.setMovementMethod(LinkMovementMethod.getInstance());
 		
 		
-		// show on focuse with empty text predefined list of subcategories
-		typeText.setOnFocusChangeListener(new OnFocusChangeListener() {
-			
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if(hasFocus && typeText.getText().length() == 0 && a.getType() != null){
-					Builder builder = new AlertDialog.Builder(ctx);
-					final String[] subCats = AmenityType.getSubCategories(a.getType(), MapRenderingTypes.getDefault()).toArray(new String[0]);
-					builder.setItems(subCats, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							typeText.setText(subCats[which]);
-							a.setSubType(subCats[which]);
-						}
-					});
-					builder.show();
-				}
-			}
-		});
-		
-		openHoursButton.setOnClickListener(new View.OnClickListener(){
-
+		// DO NOT show on focus with empty text predefined list of subcategories - problems when rotating
+		typeText.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				editOpenHoursDlg();
+				showSubCategory(args);
 			}
-			
+		});
+		typeText.setOnLongClickListener(new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View v) {
+				showSubCategory(args);
+				return true;
+			}
+		});
+		openHoursButton.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				ctx.showDialog(DIALOG_OPENING_HOURS, args);
+			}
 		});
 		typeText.addTextChangedListener(new TextWatcher(){
 
 			@Override
 			public void afterTextChanged(Editable s) {
+				Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
 				String str = s.toString();
 				a.setSubType(str);
 				AmenityType t = MapRenderingTypes.getDefault().getAmenityNameToType().get(str);
@@ -248,40 +264,24 @@ public class EditingPOIActivity {
 			}
 		});
 
-		
-		
 		typeButton.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				Builder builder = new AlertDialog.Builder(ctx);
-				String[] vals = new String[AmenityType.values().length];
-				for(int i=0; i<vals.length; i++){
-					vals[i] = OsmAndFormatter.toPublicString(AmenityType.values()[i], ctx); 
-				}
-				builder.setItems(vals, new Dialog.OnClickListener(){
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						AmenityType aType = AmenityType.values()[which];
-						if(aType != a.getType()){
-							a.setType(aType);
-							a.setSubType(""); //$NON-NLS-1$
-							updateType(a);
-						}
-					}
-				});
-				builder.show();
+				ctx.showDialog(DIALOG_POI_TYPES, args);
 			}
 		});
 		
 		((Button)dlg.findViewById(R.id.Cancel)).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				dlg.dismiss();
+				ctx.dismissDialog(dialogID);
 			}
 		});
 		((Button)dlg.findViewById(R.id.Commit)).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
+				final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
+				final Node n = (Node) args.getSerializable(KEY_AMENITY_NODE);
 				Resources resources = v.getResources();
 				final String msg = n.getId() == -1 ? resources.getString(R.string.poi_action_add) : resources
 						.getString(R.string.poi_action_change);
@@ -318,20 +318,25 @@ public class EditingPOIActivity {
 					public void run() {
 						Toast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_action_succeded_template), msg),
 								Toast.LENGTH_LONG).show();
-						if (view != null) {
-							view.refreshMap();
+						if (ctx.getMapView() != null) {
+							ctx.getMapView().refreshMap();
 						}
-						dlg.dismiss();
-
+						ctx.dismissDialog(dialogID);
 					}
 				});
 			}
 		});
 		
-		
-		dlg.show();
+		return dlg;
 	}
-	
+
+	private void showSubCategory(final Bundle args) {
+		final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
+		if(typeText.getText().length() == 0 && a.getType() != null){
+			ctx.showDialog(DIALOG_SUB_CATEGORIES,args);
+		}
+	}
+
 	private void updateSubTypesAdapter(AmenityType t){
 		
 		Set<String> subCategories = new LinkedHashSet<String>(AmenityType.getSubCategories(t, MapRenderingTypes.getDefault()));
@@ -351,23 +356,24 @@ public class EditingPOIActivity {
 	}
 	
 	private void showWarning(final String msg){
-		view.post(new Runnable(){
+		ctx.getMapView().post(new Runnable(){
 			@Override
 			public void run() {
 				Toast.makeText(ctx, msg, Toast.LENGTH_LONG).show();
 			}
-			
 		});
 	}
 	
 
-	
-
-	
-	private void editOpenHoursDlg(){
+	private Dialog createOpenHoursDlg(){
 		List<OpeningHoursRule> time = OpeningHoursParser.parseOpenedHours(openingHours.getText().toString());
+		if(time == null){
+			Toast.makeText(ctx, ctx.getString(R.string.opening_hours_not_supported), Toast.LENGTH_LONG).show();
+			return null;
+		}
+		
 		List<BasicDayOpeningHourRule> simple = null;
-		if(time  != null){
+		if(time != null){
 			simple = new ArrayList<BasicDayOpeningHourRule>();
 			for(OpeningHoursRule r : time){
 				if(r instanceof BasicDayOpeningHourRule){
@@ -379,12 +385,6 @@ public class EditingPOIActivity {
 			}
 		}
 		
-		
-		if(time == null){
-			Toast.makeText(ctx, ctx.getString(R.string.opening_hours_not_supported), Toast.LENGTH_LONG).show();
-			return;
-		}
-		
 		Builder builder = new AlertDialog.Builder(ctx);
 		final OpeningHoursView v = new OpeningHoursView(ctx);
 		builder.setView(v.createOpeningHoursEditView(simple));
@@ -392,10 +392,16 @@ public class EditingPOIActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				openingHours.setText(OpeningHoursParser.toStringOpenedHours(v.getTime()));
+				ctx.removeDialog(DIALOG_OPENING_HOURS);
 			}
 		});
-		builder.setNegativeButton(ctx.getString(R.string.default_buttons_cancel), null);
-		builder.show();
+		builder.setNegativeButton(ctx.getString(R.string.default_buttons_cancel), new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				ctx.removeDialog(DIALOG_OPENING_HOURS);
+			}
+		});
+		return builder.create();
 	}
 	
 	
@@ -608,8 +614,9 @@ public class EditingPOIActivity {
 	}
 	
 	private void updateNodeInIndexes(String action, Node n) {
+		final OsmandApplication app = ctx.getMyApplication();
 		final AmenityIndexRepositoryOdb repo = app.getResourceManager().getUpdatablePoiDb();
-		view.post(new Runnable() {
+		ctx.getMapView().post(new Runnable() {
 			
 			@Override
 			public void run() {
@@ -651,7 +658,7 @@ public class EditingPOIActivity {
 			public void run() {
 				try {
 					if (commitNodeImpl(action, n, info, comment)) {
-						view.post(successAction);
+						ctx.getMapView().post(successAction);
 					}
 				} finally {
 					progress.dismiss();
@@ -765,6 +772,80 @@ public class EditingPOIActivity {
 		return null;
 	}
 	
-	
+	public Dialog onCreateDialog(int id, Bundle args) {
+		switch (id) {
+			case DIALOG_CREATE_POI:
+			case DIALOG_EDIT_POI:
+				return createPOIDialog(id,args);
+			case DIALOG_DELETE_POI:
+				return createDeleteDialog(args);
+			case DIALOG_SUB_CATEGORIES: {
+				Builder builder = new AlertDialog.Builder(ctx);
+				final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
+				final String[] subCats = AmenityType.getSubCategories(a.getType(), MapRenderingTypes.getDefault()).toArray(new String[0]);
+				builder.setItems(subCats, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						typeText.setText(subCats[which]);
+						a.setSubType(subCats[which]);
+						ctx.removeDialog(DIALOG_SUB_CATEGORIES);
+					}
+				});
+				builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						ctx.removeDialog(DIALOG_SUB_CATEGORIES);
+					}
+				});
+				return builder.create();
+			}
+			case DIALOG_POI_TYPES: {
+				final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
+				Builder builder = new AlertDialog.Builder(ctx);
+				String[] vals = new String[AmenityType.values().length];
+				for(int i=0; i<vals.length; i++){
+					vals[i] = OsmAndFormatter.toPublicString(AmenityType.values()[i], ctx); 
+				}
+				builder.setItems(vals, new Dialog.OnClickListener(){
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						AmenityType aType = AmenityType.values()[which];
+						if(aType != a.getType()){
+							a.setType(aType);
+							a.setSubType(""); //$NON-NLS-1$
+							updateType(a);
+						}
+						ctx.removeDialog(DIALOG_POI_TYPES);
+					}
+				});
+				builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+					@Override
+					public void onCancel(DialogInterface dialog) {
+						ctx.removeDialog(DIALOG_POI_TYPES);
+					}
+				});
+				return builder.create();
+			}
+			case DIALOG_OPENING_HOURS: {
+				return createOpenHoursDlg();
+			}
+		}
+		return null;
+	}
+
+	public void onPrepareDialog(int id, Dialog dialog, Bundle args) {
+		switch (id) {
+			case DIALOG_CREATE_POI:
+				preparePOIDialog(dialog,args,R.string.poi_create_title);
+				break;
+			case DIALOG_EDIT_POI:
+				preparePOIDialog(dialog,args,R.string.poi_edit_title);
+				break;
+			case DIALOG_DELETE_POI:
+				prepareDeleteDialog(dialog,args);
+				break;
+		}
+	}
+
 }
 

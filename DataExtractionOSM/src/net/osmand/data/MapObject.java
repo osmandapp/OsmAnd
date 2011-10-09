@@ -1,5 +1,6 @@
 package net.osmand.data;
 
+import java.io.Serializable;
 import java.text.Collator;
 
 import net.osmand.osm.Entity;
@@ -10,8 +11,9 @@ import net.osmand.osm.Entity.EntityType;
 import net.osmand.osm.OSMSettings.OSMTagKey;
 
 
-public abstract class MapObject implements Comparable<MapObject> {
+public abstract class MapObject implements Comparable<MapObject>, Serializable {
 	
+	private static final long serialVersionUID = -9222073549356615466L;
 	protected String name = null;
 	protected String enName = null;
 	protected LatLon location = null;
