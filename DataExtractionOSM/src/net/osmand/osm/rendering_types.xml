@@ -19,6 +19,7 @@
 		<subtype id="4" polyline="true" tag="highway" value="secondary" minzoom="9" />
 		<subtype id="4" polyline="true" tag="highway" value="secondary_link" minzoom="10" />
 		<subtype id="5" polyline="true" tag="highway" value="tertiary" minzoom="10" />
+		<subtype id="5" polyline="true" tag="highway" value="tertiary_link" minzoom="11" />
 		<subtype id="6" polygon="true" polyline="true" tag="highway" value="residential" minzoom="12" />
 		<subtype id="7" polygon="true" polyline="true" tag="highway" value="service" minzoom="13" />
 
