@@ -881,7 +881,7 @@
 			<case tag="highway" value="motorway_link" color="#a58dff" />
 			<case tag="highway" value="trunk" color="#ffaf80" />
 			<case tag="highway" value="trunk_link" color="#ffaf80" />
-			<filter cap="ROUND">
+			<filter shadowColor="#464646" shadowRadius="1" cap="ROUND">
 				<filter minzoom="5" maxzoom="9" strokeWidth="5" />
 				<filter minzoom="10" maxzoom="10" strokeWidth="6" />
 				<filter minzoom="11" maxzoom="11" strokeWidth="7" />
@@ -893,7 +893,7 @@
 		<switch>
 			<case tag="highway" value="primary" />
 			<case tag="highway" value="primary_link" />
-			<filter color="#eb989a" cap="ROUND">
+			<filter color="#eb989a" shadowColor="#464646" shadowRadius="1" cap="ROUND">
 				<filter minzoom="7" maxzoom="9" strokeWidth="4" />
 				<filter minzoom="10" maxzoom="10" strokeWidth="5" />
 				<filter minzoom="11" maxzoom="11" strokeWidth="6" />
@@ -905,7 +905,7 @@
 		<switch>
 			<case tag="highway" value="secondary" />
 			<case tag="highway" value="secondary_link" />
-			<filter color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" shadowRadius="1" cap="ROUND" >
+			<filter color="#fdd6a4" color_2="#fdd6a4" shadowColor="#464646" shadowRadius="1" cap="ROUND">
 				<filter minzoom="9" maxzoom="9" strokeWidth="3" />
 				<filter minzoom="10" maxzoom="10" strokeWidth="4" />
 				<filter minzoom="11" maxzoom="11" strokeWidth="5" />
