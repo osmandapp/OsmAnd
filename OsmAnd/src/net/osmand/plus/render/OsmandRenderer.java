@@ -358,10 +358,13 @@ public class OsmandRenderer {
 
 			for (int k = 0; k < keys.length; k++) {
 
-				/*if(repeat == true && shadowarray[shadownum] == k){
-					shadownum++;
+				if(repeat == true && shadowarray[shadownum] != k && shadowarray[shadownum] != -1){
 					continue;
-				}*/
+				}
+				
+				if(repeat == true && shadowarray[shadownum] == k){
+					shadownum++;
+				}
 
 				TIntArrayList list = orderMap.get(keys[k]);
 
