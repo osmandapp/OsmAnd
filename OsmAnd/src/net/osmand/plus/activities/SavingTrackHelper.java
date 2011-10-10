@@ -140,7 +140,12 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 					File fout = new File(dir, f + ".gpx"); //$NON-NLS-1$
 					if (fout.exists() && !data.get(f).isEmpty()) {
-						fout = new File(dir, f + "." + new SimpleDateFormat("HHmmss.EEEE").format(new Date(data.get(f).findPointToShow().time)) + ".gpx"); //$NON-NLS-1$ //$NON-NLS-2$
+						f = f + "_" + new SimpleDateFormat("HH-mm.EEEE").format(new Date(data.get(f).findPointToShow().time)); //$NON-NLS-1$
+						fout = new File(dir, f + ".gpx"); //$NON-NLS-1$
+						int ind = 1;
+						while (fout.exists()) {
+							fout = new File(dir, f + "_" + (++ind) + ".gpx"); //$NON-NLS-1$ //$NON-NLS-2$
+						}
 					}
 
 					String warn = GPXUtilities.writeGpxFile(fout, data.get(f), ctx);
