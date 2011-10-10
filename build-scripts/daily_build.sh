@@ -32,16 +32,14 @@ touch  $CLOG_FILE
 "${DIRECTORY}/update_site.sh" >>$LOG_FILE 2>&1
 
 cat $LOG_FILE >> $CLOG_FILE
-BUILD=`grep FAILED $LOG_FILE | wc -l`
+BUILD=`ls *.fixed *.failed 2> /dev/null | wc -l`
 if [ ! $BUILD -eq 0 ]; then
-  # if some failure, print out complete log
-  echo "BUILD FAILED:"
+  # if some status change, print out complete log
+  echo "Builds status changed"
+  echo "-------------"
+  echo `ls *.fixed *.failed`
+  echo "-------------"
+  echo "Complete log file:"
   echo "-------------"
   cat $LOG_FILE
-  touch last_build_failed
-else
-  if [ -f last_build_failed ]; then
-     echo "Build fixed"
-     rm last_build_failed
-  fi
 fi

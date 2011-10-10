@@ -58,13 +58,28 @@ do
         if [ ! -d assets ]; then
           mkdir assets
         fi
-        ant clean debug
+        ant clean debug &> $DIRECTORY/build.log
 	if [ "$BRANCH" = "release" ]; then
            cp bin/OsmAnd-debug.apk "$LATESTS_DIR/OsmAnd-stable.apk"
         elif [ "$BRANCH" = "master" ]; then
            cp bin/OsmAnd-debug.apk "$LATESTS_DIR/OsmAnd-development.apk"
         fi
-        mv bin/OsmAnd-debug.apk "$BUILD_DIR/OsmAnd-$BRANCH-nb-$DATE.apk" 
+        mv bin/OsmAnd-debug.apk "$BUILD_DIR/OsmAnd-$BRANCH-nb-$DATE.apk"
+
+	#clear success status
+	rm -f $DIRECTORY/$BRANCH.fixed
+        #put the log to std out
+	cat $DIRECTORY/build.log
+	BUILD=`grep FAILED $DIRECTORY/build.log | wc -l`
+	if [ ! $BUILD -eq 0 ]; then
+	  touch $DIRECTORY/$BRANCH.failed
+	else
+	  if [ -f $DIRECTORY/$BRANCH.failed ]; then
+	     echo "Build fixed"
+	     rm $DIRECTORY/$BRANCH.failed
+	     touch $DIRECTORY/$BRANCH.fixed
+	  fi
+	fi
      fi
   fi
 done
