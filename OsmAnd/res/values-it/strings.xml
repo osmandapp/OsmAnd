@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="layer_poi_label">POI labels</string>
-	<string name="auto_follow_route_navigation_descr">Abilita l'auto-follow solo durante la navigazione.</string>
+	<string name="auto_follow_route_navigation_descr">Abilita l\'auto-follow solo durante la navigazione.</string>
 	<string name="auto_follow_route_navigation">Navigazione auto-follow</string>
 	<string name="auto_follow_location_enabled">Auto follow e\' attivo.</string>
 	<string name="animate_route_off">Animazione off</string>
@@ -25,10 +25,10 @@
 	<string name="poi_filter_by_name">Ricerca per nome</string>
 	<string name="old_poi_file_should_be_deleted">Il file dati PDI \'%1$s\' non e\' piu\' in uso e puo\' essere cancellato.</string>
 	<string name="update_poi_file_not_found">File per registrare i cambiamenti ai PDI non e\' stato trovato ne\' creato.</string>
-	<string name="update_poi_does_not_change_indexes">Cambiare PDI nell'applicazione non modifica i file scaricati, ma le modifiche sono salvate in un file apposito.</string>
+	<string name="update_poi_does_not_change_indexes">Cambiare PDI nell\'applicazione non modifica i file scaricati, ma le modifiche sono salvate in un file apposito.</string>
 
 	<string name="button_upgrade_osmandplus">Aggiorna Osmand+</string>
-	<string name="map_version_changed_info">Sul server ci sono file mappa incompatibili con l'attuale versione utilizzata. Per scaricarli ed utilizzarli aggiorna l'applicazione.</string>
+	<string name="map_version_changed_info">Sul server ci sono file mappa incompatibili con l\'attuale versione utilizzata. Per scaricarli ed utilizzarli aggiorna l\'applicazione.</string>
 
 	<string name="local_index_mi_rename">Rinomina</string>
 	<string name="show_gpx_route">Visualizza</string>
