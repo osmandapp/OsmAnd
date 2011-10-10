@@ -405,7 +405,8 @@ public interface TLongObjectMap<V> {
      * @param o object to be compared for equality with this map
      * @return <tt>true</tt> if the specified object is equal to this map
      */
-    boolean equals( Object o );
+    @Override
+	boolean equals( Object o );
 
 
     /**
@@ -421,5 +422,6 @@ public interface TLongObjectMap<V> {
      * @see Object#equals(Object)
      * @see #equals(Object)
      */
-    int hashCode();
+    @Override
+	int hashCode();
 }

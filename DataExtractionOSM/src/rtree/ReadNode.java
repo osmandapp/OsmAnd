@@ -86,54 +86,65 @@ class ReadNode extends Node
      @return thengaa!
      XXX : This is till not correct.
   */
-  public void deleteElement(int index, boolean force)
+  @Override
+public void deleteElement(int index, boolean force)
     throws IllegalValueException, NodeWriteException
   {
     throw new UnsupportedOperationException("operation not supported");
   }
-  public void insertElement(Element elmt) 
+  @Override
+public void insertElement(Element elmt) 
     throws NodeWriteException, NodeFullException
   {
     throw new UnsupportedOperationException("operation not supported");
   }
-  public void insertElement(Element[] elmts, boolean updateChldrn)
+  @Override
+public void insertElement(Element[] elmts, boolean updateChldrn)
     throws NodeWriteException, NodeFullException
   {
     throw new UnsupportedOperationException("operation not supported");
   }
-  public int getElementType()
+  @Override
+public int getElementType()
   {
     return super.getElementType();
   }
-  public long getNodeIndex()//for new nodes
+  @Override
+public long getNodeIndex()//for new nodes
   {
     return super.getNodeIndex();
   }
-  Rect[] getAllRectangles()
+  @Override
+Rect[] getAllRectangles()
     throws  IllegalValueException
   {
     return super.getAllRectangles();
   }
-  public Element getLeastEnlargement(Element elmt)
+  @Override
+public Element getLeastEnlargement(Element elmt)
     throws NodeEmptyException, IllegalValueException, NodeWriteException
   {
     return super.getLeastEnlargement(elmt);
   }
-  boolean isInsertPossible()
+  @Override
+boolean isInsertPossible()
   {
     return super.isInsertPossible();
   }
 
-  public Node[] splitNode(Element elmtM1, long slotIndex)
+  @Override
+public Node[] splitNode(Element elmtM1, long slotIndex)
     throws RTreeException, NodeWriteException
   {
     throw new UnsupportedOperationException("operation not supported");
   }
-  public long getParent()
+  @Override
+public long getParent()
   {
     return super.getParent();
   }
-  public int getElementIndex(long ptr/*Object ptr*/)
+  @Override
+public int getElementIndex(long ptr/*Object ptr*/)
   {
     return super.getElementIndex(ptr);
   }
@@ -141,7 +152,8 @@ class ReadNode extends Node
      Used to overwrite the old Element with the new one.
      It modifies the element in the disk as well as in the local variables.
   */
-  public void modifyElement(int index,Element elmt)
+  @Override
+public void modifyElement(int index,Element elmt)
     throws  IllegalValueException,IOException, NodeWriteException
   {
     throw new UnsupportedOperationException("operation not supported");
@@ -149,7 +161,8 @@ class ReadNode extends Node
   /**
      Overloaded
   */
-  public void modifyElement(int index,long pointer)
+  @Override
+public void modifyElement(int index,long pointer)
     throws  IllegalValueException,IOException, NodeWriteException
   {
     throw new UnsupportedOperationException("operation not supported");
@@ -157,7 +170,8 @@ class ReadNode extends Node
   /**
      Overloaded
   */
-  public void modifyElement(int index,Rect rect)
+  @Override
+public void modifyElement(int index,Rect rect)
     throws  IllegalValueException,IOException, NodeWriteException
   {
     throw new UnsupportedOperationException("operation not supported");
@@ -168,7 +182,8 @@ class ReadNode extends Node
      then it is better to calculate MBR in that loop without calling this method.
      @throws IllegalValueException When there are no elements in the node.
   */
-  public Rect getNodeMBR()
+  @Override
+public Rect getNodeMBR()
     throws  IllegalValueException
   {
     return super.getNodeMBR();
@@ -176,12 +191,14 @@ class ReadNode extends Node
   /**
      No error echecking at all.
   */
-  public void setParent(long /*int*/ prnt)
+  @Override
+public void setParent(long /*int*/ prnt)
     throws IOException, NodeWriteException
   {
     throw new UnsupportedOperationException("operation not supported");
   }
-  public int getTotalElements()
+  @Override
+public int getTotalElements()
   {
     return super.getTotalElements();
   }
@@ -191,11 +208,13 @@ class ReadNode extends Node
      </b>. Instead use <code>getTotalElements()</code>.
      @return An element Array.
   */
-  public Element[] getAllElements()
+  @Override
+public Element[] getAllElements()
   {
     return super.getAllElements();
   }
-  Element getElement(int index)
+  @Override
+Element getElement(int index)
     throws  IllegalValueException
   {
     return super.getElement(index);
@@ -207,7 +226,8 @@ class ReadNode extends Node
      If the node is the only node then it updates the file header as well.
      </br><i><b>Once called, there is no turning back!</b></i>.
   */
-  public void deleteNode()
+  @Override
+public void deleteNode()
     throws NodeWriteException
   {
     throw new UnsupportedOperationException("operation not supported");
@@ -215,7 +235,8 @@ class ReadNode extends Node
   /**
    * This method is added to sort the elements in this node to help sweepline algorithm.
    */
-  void sweepSort()//check out for null elements
+  @Override
+void sweepSort()//check out for null elements
   {
     super.sweepSort();
   }//sweepSort
@@ -224,16 +245,19 @@ class ReadNode extends Node
      required.
      @return true if needed write and written or false (not dirty).
   */
-  public boolean flush()
+  @Override
+public boolean flush()
     throws NodeWriteException
   {
     throw new UnsupportedOperationException("operation not supported");
   }
-  void setDirty(boolean val)
+  @Override
+void setDirty(boolean val)
   {
     throw new UnsupportedOperationException("operation not supported");
   }
-  public boolean isDirty()
+  @Override
+public boolean isDirty()
   {
     throw new UnsupportedOperationException("operation not supported");
   }

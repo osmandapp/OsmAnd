@@ -311,7 +311,8 @@ public class FileHdr
   {
     return rootIndex;
   }
-  protected void finalize() throws Throwable 
+  @Override
+protected void finalize() throws Throwable 
   {
     try {
       flush();
@@ -480,7 +481,8 @@ public class FileHdr
   /**
      This method will return only internal varaibles.
   */
-  public String toString()
+  @Override
+public String toString()
   {
     try{
       String str = new String();
@@ -523,7 +525,8 @@ class ThreadInfo
     this.t = t;
     this.lockType = lockType;
   }
-  public String toString()
+  @Override
+public String toString()
   {
     String str = new String("\nThreadInfo");
     str += "\n lockType : "+ lockType;

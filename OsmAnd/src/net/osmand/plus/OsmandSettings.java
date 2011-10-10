@@ -99,6 +99,7 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<ApplicationMode> APPLICATION_MODE = new OsmandPreference<ApplicationMode>(){
+		@Override
 		public String getId() {
 			return "application_mode";
 		};
@@ -440,6 +441,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<DayNightMode> DAYNIGHT_MODE = 
 		new EnumIntPreference<DayNightMode>("daynight_mode", DayNightMode.AUTO, false, DayNightMode.values()) {
+		@Override
 		protected boolean setValue(SharedPreferences prefs, DayNightMode val) {
 			ctx.getDaynightHelper().setDayNightMode(val);
 			return super.setValue(prefs, val);
@@ -984,6 +986,7 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> RENDERER = new StringPreference("renderer", RendererRegistry.DEFAULT_RENDER, false) {
+		@Override
 		protected boolean setValue(SharedPreferences prefs, String val) {
 			if(val == null){
 				val = RendererRegistry.DEFAULT_RENDER;

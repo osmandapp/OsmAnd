@@ -280,6 +280,7 @@ public class MapPanel extends JPanel implements IMapDownloaderCallback {
 		downloader.addDownloaderCallback(this);
 		setFocusable(true);
 		addComponentListener(new ComponentAdapter(){
+			@Override
 			public void componentResized(ComponentEvent e) {
 				prepareImage();
 			}

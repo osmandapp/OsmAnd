@@ -114,13 +114,16 @@ public class DownloadIndexActivity extends ListActivity {
 
 	    filterText = (EditText) findViewById(R.id.search_box);
 	    textWatcher = new TextWatcher() {
-	        public void afterTextChanged(Editable s) {
+	        @Override
+			public void afterTextChanged(Editable s) {
 	        }
-	        public void beforeTextChanged(CharSequence s, int start, int count,
+	        @Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
 	                int after) {
 	        }
 
-	        public void onTextChanged(CharSequence s, int start, int before,
+	        @Override
+			public void onTextChanged(CharSequence s, int start, int before,
 	                int count) {
 	        	DownloadIndexAdapter adapter = ((DownloadIndexAdapter)getListAdapter());
 				if(adapter != null){

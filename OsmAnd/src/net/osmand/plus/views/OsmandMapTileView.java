@@ -534,6 +534,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 	}
 
+	@Override
 	public void tileDownloaded(DownloadRequest request) {
 		// force to refresh map because image can be loaded from different threads
 		// and threads can block each other especially for sqlite images when they

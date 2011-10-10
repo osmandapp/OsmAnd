@@ -225,6 +225,7 @@ public class SearchAddressOnlineActivity extends ListActivity implements SearchA
 			super(SearchAddressOnlineActivity.this, R.layout.search_address_online_list_item, places);
 		}
 		
+		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {

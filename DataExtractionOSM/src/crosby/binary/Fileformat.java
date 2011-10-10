@@ -21,7 +21,8 @@ public final class Fileformat {
       return defaultInstance;
     }
     
-    public Blob getDefaultInstanceForType() {
+    @Override
+	public Blob getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -30,7 +31,8 @@ public final class Fileformat {
       return crosby.binary.Fileformat.internal_static_Blob_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return crosby.binary.Fileformat.internal_static_Blob_fieldAccessorTable;
     }
@@ -72,11 +74,13 @@ public final class Fileformat {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasRaw()) {
@@ -98,7 +102,8 @@ public final class Fileformat {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -196,11 +201,13 @@ public final class Fileformat {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(crosby.binary.Fileformat.Blob prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -215,11 +222,13 @@ public final class Fileformat {
         return builder;
       }
       
-      protected crosby.binary.Fileformat.Blob internalGetResult() {
+      @Override
+	protected crosby.binary.Fileformat.Blob internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -228,23 +237,28 @@ public final class Fileformat {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return crosby.binary.Fileformat.Blob.getDescriptor();
       }
       
-      public crosby.binary.Fileformat.Blob getDefaultInstanceForType() {
+      @Override
+	public crosby.binary.Fileformat.Blob getDefaultInstanceForType() {
         return crosby.binary.Fileformat.Blob.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public crosby.binary.Fileformat.Blob build() {
+      @Override
+	public crosby.binary.Fileformat.Blob build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -260,7 +274,8 @@ public final class Fileformat {
         return buildPartial();
       }
       
-      public crosby.binary.Fileformat.Blob buildPartial() {
+      @Override
+	public crosby.binary.Fileformat.Blob buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -270,7 +285,8 @@ public final class Fileformat {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof crosby.binary.Fileformat.Blob) {
           return mergeFrom((crosby.binary.Fileformat.Blob)other);
         } else {
@@ -300,7 +316,8 @@ public final class Fileformat {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -473,7 +490,8 @@ public final class Fileformat {
       return defaultInstance;
     }
     
-    public BlockHeader getDefaultInstanceForType() {
+    @Override
+	public BlockHeader getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -482,7 +500,8 @@ public final class Fileformat {
       return crosby.binary.Fileformat.internal_static_BlockHeader_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return crosby.binary.Fileformat.internal_static_BlockHeader_fieldAccessorTable;
     }
@@ -510,13 +529,15 @@ public final class Fileformat {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasType) return false;
       if (!hasDatasize) return false;
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasType()) {
@@ -532,7 +553,8 @@ public final class Fileformat {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -622,11 +644,13 @@ public final class Fileformat {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(crosby.binary.Fileformat.BlockHeader prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -641,11 +665,13 @@ public final class Fileformat {
         return builder;
       }
       
-      protected crosby.binary.Fileformat.BlockHeader internalGetResult() {
+      @Override
+	protected crosby.binary.Fileformat.BlockHeader internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -654,23 +680,28 @@ public final class Fileformat {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return crosby.binary.Fileformat.BlockHeader.getDescriptor();
       }
       
-      public crosby.binary.Fileformat.BlockHeader getDefaultInstanceForType() {
+      @Override
+	public crosby.binary.Fileformat.BlockHeader getDefaultInstanceForType() {
         return crosby.binary.Fileformat.BlockHeader.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public crosby.binary.Fileformat.BlockHeader build() {
+      @Override
+	public crosby.binary.Fileformat.BlockHeader build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -686,7 +717,8 @@ public final class Fileformat {
         return buildPartial();
       }
       
-      public crosby.binary.Fileformat.BlockHeader buildPartial() {
+      @Override
+	public crosby.binary.Fileformat.BlockHeader buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -696,7 +728,8 @@ public final class Fileformat {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof crosby.binary.Fileformat.BlockHeader) {
           return mergeFrom((crosby.binary.Fileformat.BlockHeader)other);
         } else {
@@ -720,7 +753,8 @@ public final class Fileformat {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -857,7 +891,8 @@ public final class Fileformat {
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+        @Override
+		public com.google.protobuf.ExtensionRegistry assignDescriptors(
             com.google.protobuf.Descriptors.FileDescriptor root) {
           descriptor = root;
           internal_static_Blob_descriptor =

@@ -81,6 +81,7 @@ public class PedestrianRouter extends VehicleRouter {
 		return false;
 	}
 
+	@Override
 	public boolean acceptLine(TagValuePair pair) {
 		if (pair.tag.equals("highway")) {
 			return pedestrianNotDefinedValues.containsKey(pair.value);
@@ -88,6 +89,7 @@ public class PedestrianRouter extends VehicleRouter {
 		return false;
 	}
 
+	@Override
 	public boolean acceptPoint(TagValuePair pair) {
 		if (pair.tag.equals("highway") && pair.value.equals("traffic_signals")) {
 			return true;
@@ -106,6 +108,7 @@ public class PedestrianRouter extends VehicleRouter {
 	/**
 	 * return delay in seconds
 	 */
+	@Override
 	public double defineObstacle(BinaryMapDataObject road, int point) {
 		if ((road.getTypes()[0] & 3) == MapRenderingTypes.POINT_TYPE) {
 			// possibly not only first type needed ?
@@ -126,6 +129,7 @@ public class PedestrianRouter extends VehicleRouter {
 	/**
 	 * return speed in m/s
 	 */
+	@Override
 	public double defineSpeed(BinaryMapDataObject road) {
 		TagValuePair pair = road.getTagValue(0);
 		double speed = 1.5d;
@@ -145,6 +149,7 @@ public class PedestrianRouter extends VehicleRouter {
 	 * 
 	 * @return minimal speed at road
 	 */
+	@Override
 	public double getMinDefaultSpeed() {
 		return 1;
 	}
@@ -154,10 +159,12 @@ public class PedestrianRouter extends VehicleRouter {
 	 * 
 	 * @return maximum speed to calculate shortest distance
 	 */
+	@Override
 	public double getMaxDefaultSpeed() {
 		return 1.8;
 	}
 
+	@Override
 	public double calculateTurnTime(RouteSegment segment, RouteSegment next, int j) {
 		return 0;
 	}

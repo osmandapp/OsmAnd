@@ -78,6 +78,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer {
 						mediaPlayer.setDataSource(file.getAbsolutePath());
 						mediaPlayer.prepare();
 						mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+							@Override
 							public void onCompletion(MediaPlayer mp) {
 								mp.release();
 								mediaPlayer = new MediaPlayer();

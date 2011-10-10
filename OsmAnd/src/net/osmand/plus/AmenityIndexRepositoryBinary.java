@@ -111,6 +111,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	protected double cRightLongitude;
 	protected int cZoom;
 	
+	@Override
 	public synchronized boolean checkCachedAmenities(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, 
 			int zoom, String filterId, List<Amenity> toFill, boolean fillFound){
 		boolean inside = cTopLatitude >= topLatitude && cLeftLongitude <= leftLongitude && cRightLongitude >= rightLongitude

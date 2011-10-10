@@ -47,7 +47,8 @@ public interface TPrimitiveIterator extends TIterator {
      *
      * @return a <code>boolean</code> value
      */
-    public boolean hasNext();
+    @Override
+	public boolean hasNext();
 
 
     /**
@@ -56,6 +57,7 @@ public interface TPrimitiveIterator extends TIterator {
      * will leave the underlying data structure in a confused
      * state.
      */
-    public void remove();
+    @Override
+	public void remove();
 
 } // TPrimitiveIterator

@@ -772,6 +772,7 @@ public class EditingPOIActivity implements DialogProvider {
 		return null;
 	}
 	
+	@Override
 	public Dialog onCreateDialog(int id, Bundle args) {
 		switch (id) {
 			case DIALOG_CREATE_POI:
@@ -833,6 +834,7 @@ public class EditingPOIActivity implements DialogProvider {
 		return null;
 	}
 
+	@Override
 	public void onPrepareDialog(int id, Dialog dialog, Bundle args) {
 		switch (id) {
 			case DIALOG_CREATE_POI:

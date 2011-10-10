@@ -48,6 +48,7 @@ public class PointNavigationLayer implements OsmandMapLayer {
 		
 	}
 	
+	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 		dm = new DisplayMetrics();

@@ -66,7 +66,8 @@ public class OsmandApplication extends Application {
 	private Locale prefferedLocale = null;
 
 	
-    public void	onCreate(){
+    @Override
+	public void	onCreate(){
     	super.onCreate();
     	long timeToStart = System.currentTimeMillis();
     	osmandSettings = OsmandSettings.getOsmandSettings(this);

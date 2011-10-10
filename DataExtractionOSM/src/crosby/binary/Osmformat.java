@@ -21,7 +21,8 @@ public final class Osmformat {
       return defaultInstance;
     }
     
-    public HeaderBlock getDefaultInstanceForType() {
+    @Override
+	public HeaderBlock getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -30,7 +31,8 @@ public final class Osmformat {
       return crosby.binary.Osmformat.internal_static_HeaderBlock_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return crosby.binary.Osmformat.internal_static_HeaderBlock_fieldAccessorTable;
     }
@@ -83,14 +85,16 @@ public final class Osmformat {
     private void initFields() {
       bbox_ = crosby.binary.Osmformat.HeaderBBox.getDefaultInstance();
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (hasBbox()) {
         if (!getBbox().isInitialized()) return false;
       }
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasBbox()) {
@@ -112,7 +116,8 @@ public final class Osmformat {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -220,11 +225,13 @@ public final class Osmformat {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(crosby.binary.Osmformat.HeaderBlock prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -239,11 +246,13 @@ public final class Osmformat {
         return builder;
       }
       
-      protected crosby.binary.Osmformat.HeaderBlock internalGetResult() {
+      @Override
+	protected crosby.binary.Osmformat.HeaderBlock internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -252,23 +261,28 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return crosby.binary.Osmformat.HeaderBlock.getDescriptor();
       }
       
-      public crosby.binary.Osmformat.HeaderBlock getDefaultInstanceForType() {
+      @Override
+	public crosby.binary.Osmformat.HeaderBlock getDefaultInstanceForType() {
         return crosby.binary.Osmformat.HeaderBlock.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public crosby.binary.Osmformat.HeaderBlock build() {
+      @Override
+	public crosby.binary.Osmformat.HeaderBlock build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -284,7 +298,8 @@ public final class Osmformat {
         return buildPartial();
       }
       
-      public crosby.binary.Osmformat.HeaderBlock buildPartial() {
+      @Override
+	public crosby.binary.Osmformat.HeaderBlock buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -302,7 +317,8 @@ public final class Osmformat {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof crosby.binary.Osmformat.HeaderBlock) {
           return mergeFrom((crosby.binary.Osmformat.HeaderBlock)other);
         } else {
@@ -338,7 +354,8 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -573,7 +590,8 @@ public final class Osmformat {
       return defaultInstance;
     }
     
-    public HeaderBBox getDefaultInstanceForType() {
+    @Override
+	public HeaderBBox getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -582,7 +600,8 @@ public final class Osmformat {
       return crosby.binary.Osmformat.internal_static_HeaderBBox_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return crosby.binary.Osmformat.internal_static_HeaderBBox_fieldAccessorTable;
     }
@@ -617,7 +636,8 @@ public final class Osmformat {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasLeft) return false;
       if (!hasRight) return false;
       if (!hasTop) return false;
@@ -625,7 +645,8 @@ public final class Osmformat {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasLeft()) {
@@ -644,7 +665,8 @@ public final class Osmformat {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -738,11 +760,13 @@ public final class Osmformat {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(crosby.binary.Osmformat.HeaderBBox prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -757,11 +781,13 @@ public final class Osmformat {
         return builder;
       }
       
-      protected crosby.binary.Osmformat.HeaderBBox internalGetResult() {
+      @Override
+	protected crosby.binary.Osmformat.HeaderBBox internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -770,23 +796,28 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return crosby.binary.Osmformat.HeaderBBox.getDescriptor();
       }
       
-      public crosby.binary.Osmformat.HeaderBBox getDefaultInstanceForType() {
+      @Override
+	public crosby.binary.Osmformat.HeaderBBox getDefaultInstanceForType() {
         return crosby.binary.Osmformat.HeaderBBox.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public crosby.binary.Osmformat.HeaderBBox build() {
+      @Override
+	public crosby.binary.Osmformat.HeaderBBox build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -802,7 +833,8 @@ public final class Osmformat {
         return buildPartial();
       }
       
-      public crosby.binary.Osmformat.HeaderBBox buildPartial() {
+      @Override
+	public crosby.binary.Osmformat.HeaderBBox buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -812,7 +844,8 @@ public final class Osmformat {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof crosby.binary.Osmformat.HeaderBBox) {
           return mergeFrom((crosby.binary.Osmformat.HeaderBBox)other);
         } else {
@@ -839,7 +872,8 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -978,7 +1012,8 @@ public final class Osmformat {
       return defaultInstance;
     }
     
-    public PrimitiveBlock getDefaultInstanceForType() {
+    @Override
+	public PrimitiveBlock getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -987,7 +1022,8 @@ public final class Osmformat {
       return crosby.binary.Osmformat.internal_static_PrimitiveBlock_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return crosby.binary.Osmformat.internal_static_PrimitiveBlock_fieldAccessorTable;
     }
@@ -1042,7 +1078,8 @@ public final class Osmformat {
     private void initFields() {
       stringtable_ = crosby.binary.Osmformat.StringTable.getDefaultInstance();
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasStringtable) return false;
       for (crosby.binary.Osmformat.PrimitiveGroup element : getPrimitivegroupList()) {
         if (!element.isInitialized()) return false;
@@ -1050,7 +1087,8 @@ public final class Osmformat {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasStringtable()) {
@@ -1075,7 +1113,8 @@ public final class Osmformat {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -1177,11 +1216,13 @@ public final class Osmformat {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(crosby.binary.Osmformat.PrimitiveBlock prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -1196,11 +1237,13 @@ public final class Osmformat {
         return builder;
       }
       
-      protected crosby.binary.Osmformat.PrimitiveBlock internalGetResult() {
+      @Override
+	protected crosby.binary.Osmformat.PrimitiveBlock internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -1209,23 +1252,28 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return crosby.binary.Osmformat.PrimitiveBlock.getDescriptor();
       }
       
-      public crosby.binary.Osmformat.PrimitiveBlock getDefaultInstanceForType() {
+      @Override
+	public crosby.binary.Osmformat.PrimitiveBlock getDefaultInstanceForType() {
         return crosby.binary.Osmformat.PrimitiveBlock.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public crosby.binary.Osmformat.PrimitiveBlock build() {
+      @Override
+	public crosby.binary.Osmformat.PrimitiveBlock build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -1241,7 +1289,8 @@ public final class Osmformat {
         return buildPartial();
       }
       
-      public crosby.binary.Osmformat.PrimitiveBlock buildPartial() {
+      @Override
+	public crosby.binary.Osmformat.PrimitiveBlock buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -1255,7 +1304,8 @@ public final class Osmformat {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof crosby.binary.Osmformat.PrimitiveBlock) {
           return mergeFrom((crosby.binary.Osmformat.PrimitiveBlock)other);
         } else {
@@ -1291,7 +1341,8 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -1533,7 +1584,8 @@ public final class Osmformat {
       return defaultInstance;
     }
     
-    public PrimitiveGroup getDefaultInstanceForType() {
+    @Override
+	public PrimitiveGroup getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -1542,7 +1594,8 @@ public final class Osmformat {
       return crosby.binary.Osmformat.internal_static_PrimitiveGroup_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return crosby.binary.Osmformat.internal_static_PrimitiveGroup_fieldAccessorTable;
     }
@@ -1605,7 +1658,8 @@ public final class Osmformat {
     private void initFields() {
       dense_ = crosby.binary.Osmformat.DenseNodes.getDefaultInstance();
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       for (crosby.binary.Osmformat.Node element : getNodesList()) {
         if (!element.isInitialized()) return false;
       }
@@ -1621,7 +1675,8 @@ public final class Osmformat {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       for (crosby.binary.Osmformat.Node element : getNodesList()) {
@@ -1643,7 +1698,8 @@ public final class Osmformat {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -1741,11 +1797,13 @@ public final class Osmformat {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(crosby.binary.Osmformat.PrimitiveGroup prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -1760,11 +1818,13 @@ public final class Osmformat {
         return builder;
       }
       
-      protected crosby.binary.Osmformat.PrimitiveGroup internalGetResult() {
+      @Override
+	protected crosby.binary.Osmformat.PrimitiveGroup internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -1773,23 +1833,28 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return crosby.binary.Osmformat.PrimitiveGroup.getDescriptor();
       }
       
-      public crosby.binary.Osmformat.PrimitiveGroup getDefaultInstanceForType() {
+      @Override
+	public crosby.binary.Osmformat.PrimitiveGroup getDefaultInstanceForType() {
         return crosby.binary.Osmformat.PrimitiveGroup.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public crosby.binary.Osmformat.PrimitiveGroup build() {
+      @Override
+	public crosby.binary.Osmformat.PrimitiveGroup build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -1805,7 +1870,8 @@ public final class Osmformat {
         return buildPartial();
       }
       
-      public crosby.binary.Osmformat.PrimitiveGroup buildPartial() {
+      @Override
+	public crosby.binary.Osmformat.PrimitiveGroup buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -1831,7 +1897,8 @@ public final class Osmformat {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof crosby.binary.Osmformat.PrimitiveGroup) {
           return mergeFrom((crosby.binary.Osmformat.PrimitiveGroup)other);
         } else {
@@ -1873,7 +1940,8 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -2198,7 +2266,8 @@ public final class Osmformat {
       return defaultInstance;
     }
     
-    public StringTable getDefaultInstanceForType() {
+    @Override
+	public StringTable getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -2207,7 +2276,8 @@ public final class Osmformat {
       return crosby.binary.Osmformat.internal_static_StringTable_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return crosby.binary.Osmformat.internal_static_StringTable_fieldAccessorTable;
     }
@@ -2226,11 +2296,13 @@ public final class Osmformat {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       for (com.google.protobuf.ByteString element : getSList()) {
@@ -2240,7 +2312,8 @@ public final class Osmformat {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -2327,11 +2400,13 @@ public final class Osmformat {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(crosby.binary.Osmformat.StringTable prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -2346,11 +2421,13 @@ public final class Osmformat {
         return builder;
       }
       
-      protected crosby.binary.Osmformat.StringTable internalGetResult() {
+      @Override
+	protected crosby.binary.Osmformat.StringTable internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -2359,23 +2436,28 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return crosby.binary.Osmformat.StringTable.getDescriptor();
       }
       
-      public crosby.binary.Osmformat.StringTable getDefaultInstanceForType() {
+      @Override
+	public crosby.binary.Osmformat.StringTable getDefaultInstanceForType() {
         return crosby.binary.Osmformat.StringTable.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public crosby.binary.Osmformat.StringTable build() {
+      @Override
+	public crosby.binary.Osmformat.StringTable build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -2391,7 +2473,8 @@ public final class Osmformat {
         return buildPartial();
       }
       
-      public crosby.binary.Osmformat.StringTable buildPartial() {
+      @Override
+	public crosby.binary.Osmformat.StringTable buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -2405,7 +2488,8 @@ public final class Osmformat {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof crosby.binary.Osmformat.StringTable) {
           return mergeFrom((crosby.binary.Osmformat.StringTable)other);
         } else {
@@ -2426,7 +2510,8 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -2521,7 +2606,8 @@ public final class Osmformat {
       return defaultInstance;
     }
     
-    public Info getDefaultInstanceForType() {
+    @Override
+	public Info getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -2530,7 +2616,8 @@ public final class Osmformat {
       return crosby.binary.Osmformat.internal_static_Info_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return crosby.binary.Osmformat.internal_static_Info_fieldAccessorTable;
     }
@@ -2572,11 +2659,13 @@ public final class Osmformat {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasVersion()) {
@@ -2598,7 +2687,8 @@ public final class Osmformat {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -2696,11 +2786,13 @@ public final class Osmformat {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(crosby.binary.Osmformat.Info prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -2715,11 +2807,13 @@ public final class Osmformat {
         return builder;
       }
       
-      protected crosby.binary.Osmformat.Info internalGetResult() {
+      @Override
+	protected crosby.binary.Osmformat.Info internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -2728,23 +2822,28 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return crosby.binary.Osmformat.Info.getDescriptor();
       }
       
-      public crosby.binary.Osmformat.Info getDefaultInstanceForType() {
+      @Override
+	public crosby.binary.Osmformat.Info getDefaultInstanceForType() {
         return crosby.binary.Osmformat.Info.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public crosby.binary.Osmformat.Info build() {
+      @Override
+	public crosby.binary.Osmformat.Info build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -2760,7 +2859,8 @@ public final class Osmformat {
         return buildPartial();
       }
       
-      public crosby.binary.Osmformat.Info buildPartial() {
+      @Override
+	public crosby.binary.Osmformat.Info buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -2770,7 +2870,8 @@ public final class Osmformat {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof crosby.binary.Osmformat.Info) {
           return mergeFrom((crosby.binary.Osmformat.Info)other);
         } else {
@@ -2800,7 +2901,8 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -2961,7 +3063,8 @@ public final class Osmformat {
       return defaultInstance;
     }
     
-    public DenseInfo getDefaultInstanceForType() {
+    @Override
+	public DenseInfo getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -2970,7 +3073,8 @@ public final class Osmformat {
       return crosby.binary.Osmformat.internal_static_DenseInfo_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return crosby.binary.Osmformat.internal_static_DenseInfo_fieldAccessorTable;
     }
@@ -3042,11 +3146,13 @@ public final class Osmformat {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (getVersionList().size() > 0) {
@@ -3088,7 +3194,8 @@ public final class Osmformat {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -3236,11 +3343,13 @@ public final class Osmformat {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(crosby.binary.Osmformat.DenseInfo prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -3255,11 +3364,13 @@ public final class Osmformat {
         return builder;
       }
       
-      protected crosby.binary.Osmformat.DenseInfo internalGetResult() {
+      @Override
+	protected crosby.binary.Osmformat.DenseInfo internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -3268,23 +3379,28 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return crosby.binary.Osmformat.DenseInfo.getDescriptor();
       }
       
-      public crosby.binary.Osmformat.DenseInfo getDefaultInstanceForType() {
+      @Override
+	public crosby.binary.Osmformat.DenseInfo getDefaultInstanceForType() {
         return crosby.binary.Osmformat.DenseInfo.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public crosby.binary.Osmformat.DenseInfo build() {
+      @Override
+	public crosby.binary.Osmformat.DenseInfo build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -3300,7 +3416,8 @@ public final class Osmformat {
         return buildPartial();
       }
       
-      public crosby.binary.Osmformat.DenseInfo buildPartial() {
+      @Override
+	public crosby.binary.Osmformat.DenseInfo buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -3330,7 +3447,8 @@ public final class Osmformat {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof crosby.binary.Osmformat.DenseInfo) {
           return mergeFrom((crosby.binary.Osmformat.DenseInfo)other);
         } else {
@@ -3375,7 +3493,8 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -3661,7 +3780,8 @@ public final class Osmformat {
       return defaultInstance;
     }
     
-    public ChangeSet getDefaultInstanceForType() {
+    @Override
+	public ChangeSet getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -3670,7 +3790,8 @@ public final class Osmformat {
       return crosby.binary.Osmformat.internal_static_ChangeSet_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return crosby.binary.Osmformat.internal_static_ChangeSet_fieldAccessorTable;
     }
@@ -3684,12 +3805,14 @@ public final class Osmformat {
     
     private void initFields() {
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasId) return false;
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasId()) {
@@ -3699,7 +3822,8 @@ public final class Osmformat {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -3781,11 +3905,13 @@ public final class Osmformat {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(crosby.binary.Osmformat.ChangeSet prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -3800,11 +3926,13 @@ public final class Osmformat {
         return builder;
       }
       
-      protected crosby.binary.Osmformat.ChangeSet internalGetResult() {
+      @Override
+	protected crosby.binary.Osmformat.ChangeSet internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -3813,23 +3941,28 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return crosby.binary.Osmformat.ChangeSet.getDescriptor();
       }
       
-      public crosby.binary.Osmformat.ChangeSet getDefaultInstanceForType() {
+      @Override
+	public crosby.binary.Osmformat.ChangeSet getDefaultInstanceForType() {
         return crosby.binary.Osmformat.ChangeSet.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public crosby.binary.Osmformat.ChangeSet build() {
+      @Override
+	public crosby.binary.Osmformat.ChangeSet build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -3845,7 +3978,8 @@ public final class Osmformat {
         return buildPartial();
       }
       
-      public crosby.binary.Osmformat.ChangeSet buildPartial() {
+      @Override
+	public crosby.binary.Osmformat.ChangeSet buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -3855,7 +3989,8 @@ public final class Osmformat {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof crosby.binary.Osmformat.ChangeSet) {
           return mergeFrom((crosby.binary.Osmformat.ChangeSet)other);
         } else {
@@ -3873,7 +4008,8 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -3946,7 +4082,8 @@ public final class Osmformat {
       return defaultInstance;
     }
     
-    public Node getDefaultInstanceForType() {
+    @Override
+	public Node getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -3955,7 +4092,8 @@ public final class Osmformat {
       return crosby.binary.Osmformat.internal_static_Node_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return crosby.binary.Osmformat.internal_static_Node_fieldAccessorTable;
     }
@@ -4017,14 +4155,16 @@ public final class Osmformat {
     private void initFields() {
       info_ = crosby.binary.Osmformat.Info.getDefaultInstance();
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasId) return false;
       if (!hasLat) return false;
       if (!hasLon) return false;
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasId()) {
@@ -4057,7 +4197,8 @@ public final class Osmformat {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -4179,11 +4320,13 @@ public final class Osmformat {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(crosby.binary.Osmformat.Node prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -4198,11 +4341,13 @@ public final class Osmformat {
         return builder;
       }
       
-      protected crosby.binary.Osmformat.Node internalGetResult() {
+      @Override
+	protected crosby.binary.Osmformat.Node internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -4211,23 +4356,28 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return crosby.binary.Osmformat.Node.getDescriptor();
       }
       
-      public crosby.binary.Osmformat.Node getDefaultInstanceForType() {
+      @Override
+	public crosby.binary.Osmformat.Node getDefaultInstanceForType() {
         return crosby.binary.Osmformat.Node.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public crosby.binary.Osmformat.Node build() {
+      @Override
+	public crosby.binary.Osmformat.Node build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -4243,7 +4393,8 @@ public final class Osmformat {
         return buildPartial();
       }
       
-      public crosby.binary.Osmformat.Node buildPartial() {
+      @Override
+	public crosby.binary.Osmformat.Node buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -4261,7 +4412,8 @@ public final class Osmformat {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof crosby.binary.Osmformat.Node) {
           return mergeFrom((crosby.binary.Osmformat.Node)other);
         } else {
@@ -4300,7 +4452,8 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -4557,7 +4710,8 @@ public final class Osmformat {
       return defaultInstance;
     }
     
-    public DenseNodes getDefaultInstanceForType() {
+    @Override
+	public DenseNodes getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -4566,7 +4720,8 @@ public final class Osmformat {
       return crosby.binary.Osmformat.internal_static_DenseNodes_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return crosby.binary.Osmformat.internal_static_DenseNodes_fieldAccessorTable;
     }
@@ -4633,11 +4788,13 @@ public final class Osmformat {
     private void initFields() {
       denseinfo_ = crosby.binary.Osmformat.DenseInfo.getDefaultInstance();
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (getIdList().size() > 0) {
@@ -4675,7 +4832,8 @@ public final class Osmformat {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -4813,11 +4971,13 @@ public final class Osmformat {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(crosby.binary.Osmformat.DenseNodes prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -4832,11 +4992,13 @@ public final class Osmformat {
         return builder;
       }
       
-      protected crosby.binary.Osmformat.DenseNodes internalGetResult() {
+      @Override
+	protected crosby.binary.Osmformat.DenseNodes internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -4845,23 +5007,28 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return crosby.binary.Osmformat.DenseNodes.getDescriptor();
       }
       
-      public crosby.binary.Osmformat.DenseNodes getDefaultInstanceForType() {
+      @Override
+	public crosby.binary.Osmformat.DenseNodes getDefaultInstanceForType() {
         return crosby.binary.Osmformat.DenseNodes.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public crosby.binary.Osmformat.DenseNodes build() {
+      @Override
+	public crosby.binary.Osmformat.DenseNodes build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -4877,7 +5044,8 @@ public final class Osmformat {
         return buildPartial();
       }
       
-      public crosby.binary.Osmformat.DenseNodes buildPartial() {
+      @Override
+	public crosby.binary.Osmformat.DenseNodes buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -4903,7 +5071,8 @@ public final class Osmformat {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof crosby.binary.Osmformat.DenseNodes) {
           return mergeFrom((crosby.binary.Osmformat.DenseNodes)other);
         } else {
@@ -4945,7 +5114,8 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -5230,7 +5400,8 @@ public final class Osmformat {
       return defaultInstance;
     }
     
-    public Way getDefaultInstanceForType() {
+    @Override
+	public Way getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -5239,7 +5410,8 @@ public final class Osmformat {
       return crosby.binary.Osmformat.internal_static_Way_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return crosby.binary.Osmformat.internal_static_Way_fieldAccessorTable;
     }
@@ -5300,12 +5472,14 @@ public final class Osmformat {
     private void initFields() {
       info_ = crosby.binary.Osmformat.Info.getDefaultInstance();
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasId) return false;
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasId()) {
@@ -5339,7 +5513,8 @@ public final class Osmformat {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -5467,11 +5642,13 @@ public final class Osmformat {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(crosby.binary.Osmformat.Way prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -5486,11 +5663,13 @@ public final class Osmformat {
         return builder;
       }
       
-      protected crosby.binary.Osmformat.Way internalGetResult() {
+      @Override
+	protected crosby.binary.Osmformat.Way internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -5499,23 +5678,28 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return crosby.binary.Osmformat.Way.getDescriptor();
       }
       
-      public crosby.binary.Osmformat.Way getDefaultInstanceForType() {
+      @Override
+	public crosby.binary.Osmformat.Way getDefaultInstanceForType() {
         return crosby.binary.Osmformat.Way.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public crosby.binary.Osmformat.Way build() {
+      @Override
+	public crosby.binary.Osmformat.Way build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -5531,7 +5715,8 @@ public final class Osmformat {
         return buildPartial();
       }
       
-      public crosby.binary.Osmformat.Way buildPartial() {
+      @Override
+	public crosby.binary.Osmformat.Way buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -5553,7 +5738,8 @@ public final class Osmformat {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof crosby.binary.Osmformat.Way) {
           return mergeFrom((crosby.binary.Osmformat.Way)other);
         } else {
@@ -5592,7 +5778,8 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -5852,7 +6039,8 @@ public final class Osmformat {
       return defaultInstance;
     }
     
-    public Relation getDefaultInstanceForType() {
+    @Override
+	public Relation getDefaultInstanceForType() {
       return defaultInstance;
     }
     
@@ -5861,7 +6049,8 @@ public final class Osmformat {
       return crosby.binary.Osmformat.internal_static_Relation_descriptor;
     }
     
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return crosby.binary.Osmformat.internal_static_Relation_fieldAccessorTable;
     }
@@ -5874,7 +6063,8 @@ public final class Osmformat {
       ;
       
       
-      public final int getNumber() { return value; }
+      @Override
+	public final int getNumber() { return value; }
       
       public static MemberType valueOf(int value) {
         switch (value) {
@@ -5892,16 +6082,19 @@ public final class Osmformat {
       private static com.google.protobuf.Internal.EnumLiteMap<MemberType>
           internalValueMap =
             new com.google.protobuf.Internal.EnumLiteMap<MemberType>() {
-              public MemberType findValueByNumber(int number) {
+              @Override
+			public MemberType findValueByNumber(int number) {
                 return MemberType.valueOf(number)
       ;        }
             };
       
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+      @Override
+	public final com.google.protobuf.Descriptors.EnumValueDescriptor
           getValueDescriptor() {
         return getDescriptor().getValues().get(index);
       }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
+      @Override
+	public final com.google.protobuf.Descriptors.EnumDescriptor
           getDescriptorForType() {
         return getDescriptor();
       }
@@ -6017,12 +6210,14 @@ public final class Osmformat {
     private void initFields() {
       info_ = crosby.binary.Osmformat.Info.getDefaultInstance();
     }
-    public final boolean isInitialized() {
+    @Override
+	public final boolean isInitialized() {
       if (!hasId) return false;
       return true;
     }
     
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
+    @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
       if (hasId()) {
@@ -6070,7 +6265,8 @@ public final class Osmformat {
     }
     
     private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
+    @Override
+	public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
     
@@ -6224,11 +6420,13 @@ public final class Osmformat {
     }
     
     public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
+    @Override
+	public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(crosby.binary.Osmformat.Relation prototype) {
       return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    @Override
+	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> {
@@ -6243,11 +6441,13 @@ public final class Osmformat {
         return builder;
       }
       
-      protected crosby.binary.Osmformat.Relation internalGetResult() {
+      @Override
+	protected crosby.binary.Osmformat.Relation internalGetResult() {
         return result;
       }
       
-      public Builder clear() {
+      @Override
+	public Builder clear() {
         if (result == null) {
           throw new IllegalStateException(
             "Cannot call clear() after build().");
@@ -6256,23 +6456,28 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder clone() {
+      @Override
+	public Builder clone() {
         return create().mergeFrom(result);
       }
       
-      public com.google.protobuf.Descriptors.Descriptor
+      @Override
+	public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return crosby.binary.Osmformat.Relation.getDescriptor();
       }
       
-      public crosby.binary.Osmformat.Relation getDefaultInstanceForType() {
+      @Override
+	public crosby.binary.Osmformat.Relation getDefaultInstanceForType() {
         return crosby.binary.Osmformat.Relation.getDefaultInstance();
       }
       
-      public boolean isInitialized() {
+      @Override
+	public boolean isInitialized() {
         return result.isInitialized();
       }
-      public crosby.binary.Osmformat.Relation build() {
+      @Override
+	public crosby.binary.Osmformat.Relation build() {
         if (result != null && !isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -6288,7 +6493,8 @@ public final class Osmformat {
         return buildPartial();
       }
       
-      public crosby.binary.Osmformat.Relation buildPartial() {
+      @Override
+	public crosby.binary.Osmformat.Relation buildPartial() {
         if (result == null) {
           throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -6318,7 +6524,8 @@ public final class Osmformat {
         return returnMe;
       }
       
-      public Builder mergeFrom(com.google.protobuf.Message other) {
+      @Override
+	public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof crosby.binary.Osmformat.Relation) {
           return mergeFrom((crosby.binary.Osmformat.Relation)other);
         } else {
@@ -6369,7 +6576,8 @@ public final class Osmformat {
         return this;
       }
       
-      public Builder mergeFrom(
+      @Override
+	public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -6835,7 +7043,8 @@ public final class Osmformat {
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+        @Override
+		public com.google.protobuf.ExtensionRegistry assignDescriptors(
             com.google.protobuf.Descriptors.FileDescriptor root) {
           descriptor = root;
           internal_static_HeaderBlock_descriptor =

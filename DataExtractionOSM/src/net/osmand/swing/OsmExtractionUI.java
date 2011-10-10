@@ -537,6 +537,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 
 	
 	public class ExitListener extends WindowAdapter {
+		@Override
 		public void windowClosing(WindowEvent event) {
 			exit();
 		}

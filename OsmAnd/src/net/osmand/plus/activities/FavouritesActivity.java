@@ -150,14 +150,17 @@ public class FavouritesActivity extends ExpandableListActivity {
 	private void deleteFavorites() {
 		new AsyncTask<Void, Object, String>(){
 
+			@Override
 			protected void onPreExecute() {
 				showProgressBar();
 			};
+			@Override
 			protected void onPostExecute(String result) {
 				hideProgressBar();
 				favouritesAdapter.synchronizeGroups();
 			};
 			
+			@Override
 			protected void onProgressUpdate(Object... values) {
 				for(Object o : values){
 					if(o instanceof FavouritePoint){
@@ -345,10 +348,12 @@ public class FavouritesActivity extends ExpandableListActivity {
 						return GPXUtilities.writeGpxFile(f, gpx, FavouritesActivity.this);
 					}
 					
+					@Override
 					protected void onPreExecute() {
 						showProgressBar();
 					};
 					
+					@Override
 					protected void onPostExecute(String warning) {
 						hideProgressBar();
 						if(warning == null){
@@ -401,16 +406,19 @@ public class FavouritesActivity extends ExpandableListActivity {
 						return null;
 					}
 					
+					@Override
 					protected void onProgressUpdate(FavouritePoint... values) {
 						for(FavouritePoint p : values){
 							favouritesAdapter.addFavoritePoint(p);
 						}
 					};
 					
+					@Override
 					protected void onPreExecute() {
 						showProgressBar();
 					};
 					
+					@Override
 					protected void onPostExecute(String warning) {
 						hideProgressBar();
 						if(warning == null){

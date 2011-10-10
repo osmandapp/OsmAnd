@@ -47,7 +47,8 @@ import java.util.Map;
  */
 public abstract class AbstractMessage extends AbstractMessageLite
                                       implements Message {
-  @SuppressWarnings("unchecked")
+  @Override
+@SuppressWarnings("unchecked")
   public boolean isInitialized() {
     // Check that all required fields are present.
     for (final FieldDescriptor field : getDescriptorForType().getFields()) {
@@ -85,7 +86,8 @@ public abstract class AbstractMessage extends AbstractMessageLite
     return TextFormat.printToString(this);
   }
 
-  public void writeTo(final CodedOutputStream output) throws IOException {
+  @Override
+public void writeTo(final CodedOutputStream output) throws IOException {
     final boolean isMessageSet =
         getDescriptorForType().getOptions().getMessageSetWireFormat();
 
@@ -112,7 +114,8 @@ public abstract class AbstractMessage extends AbstractMessageLite
 
   private int memoizedSize = -1;
 
-  public int getSerializedSize() {
+  @Override
+public int getSerializedSize() {
     int size = memoizedSize;
     if (size != -1) {
       return size;
@@ -187,7 +190,8 @@ public abstract class AbstractMessage extends AbstractMessageLite
     @Override
     public abstract BuilderType clone();
 
-    public BuilderType clear() {
+    @Override
+	public BuilderType clear() {
       for (final Map.Entry<FieldDescriptor, Object> entry :
            getAllFields().entrySet()) {
         clearField(entry.getKey());
@@ -195,7 +199,8 @@ public abstract class AbstractMessage extends AbstractMessageLite
       return (BuilderType) this;
     }
 
-    public BuilderType mergeFrom(final Message other) {
+    @Override
+	public BuilderType mergeFrom(final Message other) {
       if (other.getDescriptorForType() != getDescriptorForType()) {
         throw new IllegalArgumentException(
           "mergeFrom(Message) can only merge messages of the same type.");
@@ -532,7 +537,8 @@ public abstract class AbstractMessage extends AbstractMessageLite
       }
     }
 
-    public BuilderType mergeUnknownFields(final UnknownFieldSet unknownFields) {
+    @Override
+	public BuilderType mergeUnknownFields(final UnknownFieldSet unknownFields) {
       setUnknownFields(
         UnknownFieldSet.newBuilder(getUnknownFields())
                        .mergeFrom(unknownFields)

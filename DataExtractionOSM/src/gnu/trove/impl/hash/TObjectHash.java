@@ -85,12 +85,14 @@ abstract public class TObjectHash<T> extends THash {
     }
 
 
-    public int capacity() {
+    @Override
+	public int capacity() {
         return _set.length;
     }
 
 
-    protected void removeAt( int index ) {
+    @Override
+	protected void removeAt( int index ) {
         _set[index] = REMOVED;
         super.removeAt( index );
     }
@@ -102,7 +104,8 @@ abstract public class TObjectHash<T> extends THash {
      * @param initialCapacity an <code>int</code> value
      * @return an <code>int</code> value
      */
-    public int setUp( int initialCapacity ) {
+    @Override
+	public int setUp( int initialCapacity ) {
         int capacity;
 
         capacity = super.setUp( initialCapacity );

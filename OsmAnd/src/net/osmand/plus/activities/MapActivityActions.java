@@ -674,6 +674,7 @@ public class MapActivityActions implements DialogProvider {
 		
 	}
 
+	@Override
 	public Dialog onCreateDialog(int id, Bundle args) {
 		switch (id) {
 			case DIALOG_ADD_FAVORITE:
@@ -694,6 +695,7 @@ public class MapActivityActions implements DialogProvider {
 		return null;
 	}
 
+	@Override
 	public void onPrepareDialog(int id, Dialog dialog, Bundle args) {
 		switch (id) {
 			case DIALOG_ADD_FAVORITE:

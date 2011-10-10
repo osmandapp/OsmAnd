@@ -125,6 +125,7 @@ public class GeoIntentActivity extends ListActivity {
 					R.layout.search_address_offline_list_item, places);
 		}
 
+		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {
@@ -322,6 +323,7 @@ public class GeoIntentActivity extends ListActivity {
 					point.setName("Lat: " + latitude + ",Lon:" + longitude);
 				} catch (NumberFormatException e) {
 					runOnUiThread(new Runnable() {
+						@Override
 						public void run() {
 							Toast.makeText(GeoIntentActivity.this,
 									getString(R.string.search_offline_geo_error, geo),

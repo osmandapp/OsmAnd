@@ -155,7 +155,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
      * @param initialCapacity an <code>int</code> value
      * @return the actual capacity chosen
      */
-    protected int setUp( int initialCapacity ) {
+    @Override
+	protected int setUp( int initialCapacity ) {
         int capacity;
 
         capacity = super.setUp( initialCapacity );
@@ -170,7 +171,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
      * @param newCapacity an <code>int</code> value
      */
      /** {@inheritDoc} */
-    protected void rehash( int newCapacity ) {
+    @Override
+	protected void rehash( int newCapacity ) {
         int oldCapacity = _set.length;
         
         int oldKeys[] = _set;
@@ -194,14 +196,16 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
     /** {@inheritDoc} */
-    public long put( int key, long value ) {
+    @Override
+	public long put( int key, long value ) {
         int index = insertionIndex( key );
         return doPut( key, value, index );
     }
 
 
     /** {@inheritDoc} */
-    public long putIfAbsent( int key, long value ) {
+    @Override
+	public long putIfAbsent( int key, long value ) {
         int index = insertionIndex( key );
         if (index < 0)
             return _values[-index - 1];
@@ -231,7 +235,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
     /** {@inheritDoc} */
-    public void putAll( Map<? extends Integer, ? extends Long> map ) {
+    @Override
+	public void putAll( Map<? extends Integer, ? extends Long> map ) {
         ensureCapacity( map.size() );
         // could optimize this for cases when map instanceof THashMap
         for ( Map.Entry<? extends Integer, ? extends Long> entry : map.entrySet() ) {
@@ -241,7 +246,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
     
 
     /** {@inheritDoc} */
-    public void putAll( TIntLongMap map ) {
+    @Override
+	public void putAll( TIntLongMap map ) {
         ensureCapacity( map.size() );
         TIntLongIterator iter = map.iterator();
         while ( iter.hasNext() ) {
@@ -252,14 +258,16 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
     /** {@inheritDoc} */
-    public long get( int key ) {
+    @Override
+	public long get( int key ) {
         int index = index( key );
         return index < 0 ? no_entry_value : _values[index];
     }
 
 
     /** {@inheritDoc} */
-    public void clear() {
+    @Override
+	public void clear() {
         super.clear();
         Arrays.fill( _set, 0, _set.length, no_entry_key );
         Arrays.fill( _values, 0, _values.length, no_entry_value );
@@ -268,13 +276,15 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
     /** {@inheritDoc} */
-    public boolean isEmpty() {
+    @Override
+	public boolean isEmpty() {
         return 0 == _size;
     }
 
 
     /** {@inheritDoc} */
-    public long remove( int key ) {
+    @Override
+	public long remove( int key ) {
         long prev = no_entry_value;
         int index = index( key );
         if ( index >= 0 ) {
@@ -286,20 +296,23 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
     /** {@inheritDoc} */
-    protected void removeAt( int index ) {
+    @Override
+	protected void removeAt( int index ) {
         _values[index] = no_entry_value;
         super.removeAt( index );  // clear key, state; adjust size
     }
 
 
     /** {@inheritDoc} */
-    public TIntSet keySet() {
+    @Override
+	public TIntSet keySet() {
         return new TKeyView();
     }
 
 
     /** {@inheritDoc} */
-    public int[] keys() {
+    @Override
+	public int[] keys() {
         int[] keys = new int[size()];
         int[] k = _set;
         byte[] states = _states;
@@ -314,7 +327,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
     /** {@inheritDoc} */
-    public int[] keys( int[] array ) {
+    @Override
+	public int[] keys( int[] array ) {
         int size = size();
         if ( array.length < size ) {
             array = new int[size];
@@ -333,13 +347,15 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
     /** {@inheritDoc} */
-    public TLongCollection valueCollection() {
+    @Override
+	public TLongCollection valueCollection() {
         return new TValueView();
     }
 
 
     /** {@inheritDoc} */
-    public long[] values() {
+    @Override
+	public long[] values() {
         long[] vals = new long[size()];
         long[] v = _values;
         byte[] states = _states;
@@ -354,7 +370,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
     /** {@inheritDoc} */
-    public long[] values( long[] array ) {
+    @Override
+	public long[] values( long[] array ) {
         int size = size();
         if ( array.length < size ) {
             array = new long[size];
@@ -373,7 +390,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
     /** {@inheritDoc} */
-    public boolean containsValue( long val ) {
+    @Override
+	public boolean containsValue( long val ) {
         byte[] states = _states;
         long[] vals = _values;
 
@@ -387,25 +405,29 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
     /** {@inheritDoc} */
-    public boolean containsKey( int key ) {
+    @Override
+	public boolean containsKey( int key ) {
         return contains( key );
     }
 
 
     /** {@inheritDoc} */
-    public TIntLongIterator iterator() {
+    @Override
+	public TIntLongIterator iterator() {
         return new TIntLongHashIterator( this );
     }
 
 
     /** {@inheritDoc} */
-    public boolean forEachKey( TIntProcedure procedure ) {
+    @Override
+	public boolean forEachKey( TIntProcedure procedure ) {
         return forEach( procedure );
     }
 
 
     /** {@inheritDoc} */
-    public boolean forEachValue( TLongProcedure procedure ) {
+    @Override
+	public boolean forEachValue( TLongProcedure procedure ) {
         byte[] states = _states;
         long[] values = _values;
         for ( int i = values.length; i-- > 0; ) {
@@ -418,7 +440,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
     /** {@inheritDoc} */
-    public boolean forEachEntry( TIntLongProcedure procedure ) {
+    @Override
+	public boolean forEachEntry( TIntLongProcedure procedure ) {
         byte[] states = _states;
         int[] keys = _set;
         long[] values = _values;
@@ -432,7 +455,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
     /** {@inheritDoc} */
-    public void transformValues( TLongFunction function ) {
+    @Override
+	public void transformValues( TLongFunction function ) {
         byte[] states = _states;
         long[] values = _values;
         for ( int i = values.length; i-- > 0; ) {
@@ -444,7 +468,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
     /** {@inheritDoc} */
-    public boolean retainEntries( TIntLongProcedure procedure ) {
+    @Override
+	public boolean retainEntries( TIntLongProcedure procedure ) {
         boolean modified = false;
         byte[] states = _states;
         int[] keys = _set;
@@ -470,13 +495,15 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
     /** {@inheritDoc} */
-    public boolean increment( int key ) {
+    @Override
+	public boolean increment( int key ) {
         return adjustValue( key, ( long ) 1 );
     }
 
 
     /** {@inheritDoc} */
-    public boolean adjustValue( int key, long amount ) {
+    @Override
+	public boolean adjustValue( int key, long amount ) {
         int index = index( key );
         if (index < 0) {
             return false;
@@ -488,7 +515,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
     /** {@inheritDoc} */
-    public long adjustOrPutValue( int key, long adjust_amount, long put_amount ) {
+    @Override
+	public long adjustOrPutValue( int key, long adjust_amount, long put_amount ) {
         int index = insertionIndex( key );
         final boolean isNewMapping;
         final long newValue;
@@ -517,43 +545,50 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
     protected class TKeyView implements TIntSet {
 
         /** {@inheritDoc} */
-        public TIntIterator iterator() {
+        @Override
+		public TIntIterator iterator() {
             return new TIntLongKeyHashIterator( TIntLongHashMap.this );
         }
 
 
         /** {@inheritDoc} */
-        public int getNoEntryValue() {
+        @Override
+		public int getNoEntryValue() {
             return no_entry_key;
         }
 
 
         /** {@inheritDoc} */
-        public int size() {
+        @Override
+		public int size() {
             return _size;
         }
 
 
         /** {@inheritDoc} */
-        public boolean isEmpty() {
+        @Override
+		public boolean isEmpty() {
             return 0 == _size;
         }
 
 
         /** {@inheritDoc} */
-        public boolean contains( int entry ) {
+        @Override
+		public boolean contains( int entry ) {
             return TIntLongHashMap.this.contains( entry );
         }
 
 
         /** {@inheritDoc} */
-        public int[] toArray() {
+        @Override
+		public int[] toArray() {
             return TIntLongHashMap.this.keys();
         }
 
 
         /** {@inheritDoc} */
-        public int[] toArray( int[] dest ) {
+        @Override
+		public int[] toArray( int[] dest ) {
             return TIntLongHashMap.this.keys( dest );
         }
 
@@ -563,19 +598,22 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
          * <p/>
          * {@inheritDoc}
          */
-        public boolean add( int entry ) {
+        @Override
+		public boolean add( int entry ) {
             throw new UnsupportedOperationException();
         }
 
 
         /** {@inheritDoc} */
-        public boolean remove( int entry ) {
+        @Override
+		public boolean remove( int entry ) {
             return no_entry_value != TIntLongHashMap.this.remove( entry );
         }
 
 
         /** {@inheritDoc} */
-        public boolean containsAll( Collection<?> collection ) {
+        @Override
+		public boolean containsAll( Collection<?> collection ) {
             for ( Object element : collection ) {
                 if ( element instanceof Integer ) {
                     int ele = ( ( Integer ) element ).intValue();
@@ -591,7 +629,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
         /** {@inheritDoc} */
-        public boolean containsAll( TIntCollection collection ) {
+        @Override
+		public boolean containsAll( TIntCollection collection ) {
             TIntIterator iter = collection.iterator();
             while ( iter.hasNext() ) {
                 if ( ! TIntLongHashMap.this.containsKey( iter.next() ) ) {
@@ -603,7 +642,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
         /** {@inheritDoc} */
-        public boolean containsAll( int[] array ) {
+        @Override
+		public boolean containsAll( int[] array ) {
             for ( int element : array ) {
                 if ( ! TIntLongHashMap.this.contains( element ) ) {
                     return false;
@@ -618,7 +658,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
          * <p/>
          * {@inheritDoc}
          */
-        public boolean addAll( Collection<? extends Integer> collection ) {
+        @Override
+		public boolean addAll( Collection<? extends Integer> collection ) {
             throw new UnsupportedOperationException();
         }
 
@@ -628,7 +669,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
          * <p/>
          * {@inheritDoc}
          */
-        public boolean addAll( TIntCollection collection ) {
+        @Override
+		public boolean addAll( TIntCollection collection ) {
             throw new UnsupportedOperationException();
         }
 
@@ -638,13 +680,15 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
          * <p/>
          * {@inheritDoc}
          */
-        public boolean addAll( int[] array ) {
+        @Override
+		public boolean addAll( int[] array ) {
             throw new UnsupportedOperationException();
         }
 
 
         /** {@inheritDoc} */
-        @SuppressWarnings({"SuspiciousMethodCalls"})
+        @Override
+		@SuppressWarnings({"SuspiciousMethodCalls"})
         public boolean retainAll( Collection<?> collection ) {
             boolean modified = false;
             TIntIterator iter = iterator();
@@ -659,7 +703,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
         /** {@inheritDoc} */
-        public boolean retainAll( TIntCollection collection ) {
+        @Override
+		public boolean retainAll( TIntCollection collection ) {
             if ( this == collection ) {
                 return false;
             }
@@ -676,7 +721,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
         /** {@inheritDoc} */
-        public boolean retainAll( int[] array ) {
+        @Override
+		public boolean retainAll( int[] array ) {
             boolean changed = false;
             Arrays.sort( array );
             int[] set = _set;
@@ -693,7 +739,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
         /** {@inheritDoc} */
-        public boolean removeAll( Collection<?> collection ) {
+        @Override
+		public boolean removeAll( Collection<?> collection ) {
             boolean changed = false;
             for ( Object element : collection ) {
                 if ( element instanceof Integer ) {
@@ -708,7 +755,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
         /** {@inheritDoc} */
-        public boolean removeAll( TIntCollection collection ) {
+        @Override
+		public boolean removeAll( TIntCollection collection ) {
             if ( this == collection ) {
                 clear();
                 return true;
@@ -726,7 +774,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
         /** {@inheritDoc} */
-        public boolean removeAll( int[] array ) {
+        @Override
+		public boolean removeAll( int[] array ) {
             boolean changed = false;
             for ( int i = array.length; i-- > 0; ) {
                 if ( remove( array[i] ) ) {
@@ -738,13 +787,15 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
         /** {@inheritDoc} */
-        public void clear() {
+        @Override
+		public void clear() {
             TIntLongHashMap.this.clear();
         }
 
 
         /** {@inheritDoc} */
-        public boolean forEach( TIntProcedure procedure ) {
+        @Override
+		public boolean forEach( TIntProcedure procedure ) {
             return TIntLongHashMap.this.forEachKey( procedure );
         }
 
@@ -788,7 +839,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
                 private boolean first = true;
 
 
-                public boolean execute( int key ) {
+                @Override
+				public boolean execute( int key ) {
                     if ( first ) {
                         first = false;
                     } else {
@@ -809,55 +861,64 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
     protected class TValueView implements TLongCollection {
 
         /** {@inheritDoc} */
-        public TLongIterator iterator() {
+        @Override
+		public TLongIterator iterator() {
             return new TIntLongValueHashIterator( TIntLongHashMap.this );
         }
 
 
         /** {@inheritDoc} */
-        public long getNoEntryValue() {
+        @Override
+		public long getNoEntryValue() {
             return no_entry_value;
         }
 
 
         /** {@inheritDoc} */
-        public int size() {
+        @Override
+		public int size() {
             return _size;
         }
 
 
         /** {@inheritDoc} */
-        public boolean isEmpty() {
+        @Override
+		public boolean isEmpty() {
             return 0 == _size;
         }
 
 
         /** {@inheritDoc} */
-        public boolean contains( long entry ) {
+        @Override
+		public boolean contains( long entry ) {
             return TIntLongHashMap.this.containsValue( entry );
         }
 
 
         /** {@inheritDoc} */
-        public long[] toArray() {
+        @Override
+		public long[] toArray() {
             return TIntLongHashMap.this.values();
         }
 
 
         /** {@inheritDoc} */
-        public long[] toArray( long[] dest ) {
+        @Override
+		public long[] toArray( long[] dest ) {
             return TIntLongHashMap.this.values( dest );
         }
 
 
 
-        public boolean add( long entry ) {
+        @Override
+		public boolean add( long entry ) {
             throw new UnsupportedOperationException();
         }
 
 
         /** {@inheritDoc} */
-        public boolean remove( long entry ) {
+        @Override
+		public boolean remove( long entry ) {
             long[] values = _values;
             int[] set = _set;
 
@@ -872,7 +933,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
         /** {@inheritDoc} */
-        public boolean containsAll( Collection<?> collection ) {
+        @Override
+		public boolean containsAll( Collection<?> collection ) {
             for ( Object element : collection ) {
                 if ( element instanceof Long ) {
                     long ele = ( ( Long ) element ).longValue();
@@ -888,7 +950,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
         /** {@inheritDoc} */
-        public boolean containsAll( TLongCollection collection ) {
+        @Override
+		public boolean containsAll( TLongCollection collection ) {
             TLongIterator iter = collection.iterator();
             while ( iter.hasNext() ) {
                 if ( ! TIntLongHashMap.this.containsValue( iter.next() ) ) {
@@ -900,7 +963,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
         /** {@inheritDoc} */
-        public boolean containsAll( long[] array ) {
+        @Override
+		public boolean containsAll( long[] array ) {
             for ( long element : array ) {
                 if ( ! TIntLongHashMap.this.containsValue( element ) ) {
                     return false;
@@ -911,25 +975,29 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
         /** {@inheritDoc} */
-        public boolean addAll( Collection<? extends Long> collection ) {
+        @Override
+		public boolean addAll( Collection<? extends Long> collection ) {
             throw new UnsupportedOperationException();
         }
 
 
         /** {@inheritDoc} */
-        public boolean addAll( TLongCollection collection ) {
+        @Override
+		public boolean addAll( TLongCollection collection ) {
             throw new UnsupportedOperationException();
         }
 
 
         /** {@inheritDoc} */
-        public boolean addAll( long[] array ) {
+        @Override
+		public boolean addAll( long[] array ) {
             throw new UnsupportedOperationException();
         }
 
 
         /** {@inheritDoc} */
-        @SuppressWarnings({"SuspiciousMethodCalls"})
+        @Override
+		@SuppressWarnings({"SuspiciousMethodCalls"})
         public boolean retainAll( Collection<?> collection ) {
             boolean modified = false;
             TLongIterator iter = iterator();
@@ -944,7 +1012,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
         /** {@inheritDoc} */
-        public boolean retainAll( TLongCollection collection ) {
+        @Override
+		public boolean retainAll( TLongCollection collection ) {
             if ( this == collection ) {
                 return false;
             }
@@ -961,7 +1030,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
         /** {@inheritDoc} */
-        public boolean retainAll( long[] array ) {
+        @Override
+		public boolean retainAll( long[] array ) {
             boolean changed = false;
             Arrays.sort( array );
             long[] values = _values;
@@ -978,7 +1048,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
         /** {@inheritDoc} */
-        public boolean removeAll( Collection<?> collection ) {
+        @Override
+		public boolean removeAll( Collection<?> collection ) {
             boolean changed = false;
             for ( Object element : collection ) {
                 if ( element instanceof Long ) {
@@ -993,7 +1064,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
         /** {@inheritDoc} */
-        public boolean removeAll( TLongCollection collection ) {
+        @Override
+		public boolean removeAll( TLongCollection collection ) {
             if ( this == collection ) {
                 clear();
                 return true;
@@ -1011,7 +1083,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
         /** {@inheritDoc} */
-        public boolean removeAll( long[] array ) {
+        @Override
+		public boolean removeAll( long[] array ) {
             boolean changed = false;
             for ( int i = array.length; i-- > 0; ) {
                 if ( remove( array[i] ) ) {
@@ -1023,13 +1096,15 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
         /** {@inheritDoc} */
-        public void clear() {
+        @Override
+		public void clear() {
             TIntLongHashMap.this.clear();
         }
 
 
         /** {@inheritDoc} */
-        public boolean forEach( TLongProcedure procedure ) {
+        @Override
+		public boolean forEach( TLongProcedure procedure ) {
             return TIntLongHashMap.this.forEachValue( procedure );
         }
 
@@ -1041,7 +1116,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
             forEachValue( new TLongProcedure() {
                 private boolean first = true;
 
-                public boolean execute( long value ) {
+                @Override
+				public boolean execute( long value ) {
                     if ( first ) {
                         first = false;
                     } else {
@@ -1070,13 +1146,15 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
         }
 
         /** {@inheritDoc} */
-        public int next() {
+        @Override
+		public int next() {
             moveToNextIndex();
             return _set[_index];
         }
 
         /** @{inheritDoc} */
-        public void remove() {
+        @Override
+		public void remove() {
             if ( _expectedSize != _hash.size() ) {
                 throw new ConcurrentModificationException();
             }
@@ -1108,13 +1186,15 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
         }
 
         /** {@inheritDoc} */
-        public long next() {
+        @Override
+		public long next() {
             moveToNextIndex();
             return _values[_index];
         }
 
         /** @{inheritDoc} */
-        public void remove() {
+        @Override
+		public void remove() {
             if ( _expectedSize != _hash.size() ) {
                 throw new ConcurrentModificationException();
             }
@@ -1145,29 +1225,34 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
         }
 
         /** {@inheritDoc} */
-        public void advance() {
+        @Override
+		public void advance() {
             moveToNextIndex();
         }
 
         /** {@inheritDoc} */
-        public int key() {
+        @Override
+		public int key() {
             return _set[_index];
         }
 
         /** {@inheritDoc} */
-        public long value() {
+        @Override
+		public long value() {
             return _values[_index];
         }
 
         /** {@inheritDoc} */
-        public long setValue( long val ) {
+        @Override
+		public long setValue( long val ) {
             long old = value();
             _values[_index] = val;
             return old;
         }
 
         /** @{inheritDoc} */
-        public void remove() {
+        @Override
+		public void remove() {
             if ( _expectedSize != _hash.size() ) {
                 throw new ConcurrentModificationException();
             }
@@ -1235,7 +1320,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
         final StringBuilder buf = new StringBuilder( "{" );
         forEachEntry( new TIntLongProcedure() {
             private boolean first = true;
-            public boolean execute( int key, long value ) {
+            @Override
+			public boolean execute( int key, long value ) {
                 if ( first ) first = false;
                 else buf.append( ", " );
 
@@ -1251,7 +1337,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
     /** {@inheritDoc} */
-    public void writeExternal(ObjectOutput out) throws IOException {
+    @Override
+	public void writeExternal(ObjectOutput out) throws IOException {
         // VERSION
     	out.writeByte( 0 );
 
@@ -1272,7 +1359,8 @@ public class TIntLongHashMap extends TIntLongHash implements TIntLongMap, Extern
 
 
     /** {@inheritDoc} */
-    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    @Override
+	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         // VERSION
     	in.readByte();
 

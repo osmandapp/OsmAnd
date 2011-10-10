@@ -45,7 +45,8 @@ public interface TLongList extends TLongCollection, Serializable {
      *
      * @return the value that represents null
      */
-    public long getNoEntryValue();
+    @Override
+	public long getNoEntryValue();
 
 
     /**
@@ -53,7 +54,8 @@ public interface TLongList extends TLongCollection, Serializable {
      *
      * @return the number of values in the list.
      */
-    public int size();
+    @Override
+	public int size();
 
 
     /**
@@ -61,7 +63,8 @@ public interface TLongList extends TLongCollection, Serializable {
      *
      * @return true if the list is empty.
      */
-    public boolean isEmpty();
+    @Override
+	public boolean isEmpty();
 
 
     /**
@@ -70,7 +73,8 @@ public interface TLongList extends TLongCollection, Serializable {
      * @param val an <code>long</code> value
      * @return true if the list was modified by the add operation 
      */
-    public boolean add(long val);
+    @Override
+	public boolean add(long val);
 
 
     /**
@@ -187,7 +191,8 @@ public interface TLongList extends TLongCollection, Serializable {
      * Flushes the internal state of the list, resetting the capacity
      * to the default.
      */
-    public void clear();
+    @Override
+	public void clear();
 
 
     /**
@@ -196,7 +201,8 @@ public interface TLongList extends TLongCollection, Serializable {
      * @param value an <code>long</code> value
      * @return true if the list was modified by the remove operation.
      */
-    public boolean remove( long value );
+    @Override
+	public boolean remove( long value );
 
 
     /**
@@ -268,7 +274,8 @@ public interface TLongList extends TLongCollection, Serializable {
      *
      * @return an <code>long[]</code> value
      */
-    public long[] toArray();
+    @Override
+	public long[] toArray();
 
 
     /**
@@ -298,7 +305,8 @@ public interface TLongList extends TLongCollection, Serializable {
      * @param dest the array to copy into.
      * @return the array passed in.
      */
-    public long[] toArray( long[] dest );
+    @Override
+	public long[] toArray( long[] dest );
 
 
     /**
@@ -331,7 +339,8 @@ public interface TLongList extends TLongCollection, Serializable {
      * @param procedure a <code>TLongProcedure</code> value
      * @return true if the procedure did not terminate prematurely.
      */
-    public boolean forEach( TLongProcedure procedure );
+    @Override
+	public boolean forEach( TLongProcedure procedure );
 
 
     /**
@@ -466,7 +475,8 @@ public interface TLongList extends TLongCollection, Serializable {
      * @param value an <code>long</code> value
      * @return true if value is in the list.
      */
-    public boolean contains( long value );
+    @Override
+	public boolean contains( long value );
 
 
     /**

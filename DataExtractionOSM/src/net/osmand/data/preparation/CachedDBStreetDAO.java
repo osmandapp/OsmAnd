@@ -25,6 +25,7 @@ public class CachedDBStreetDAO extends DBStreetDAO
 		return addressStreetLocalMap.get(createStreetUniqueName(name, city, cityPart)); //$NON-NLS-1$
 	}
 
+	@Override
 	public SimpleStreet findStreet(String name, City city) {
 		return addressStreetLocalMap.get(createStreetUniqueName(name, city)); //$NON-NLS-1$
 	}

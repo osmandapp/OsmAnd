@@ -70,6 +70,7 @@ public class ShowRouteInfoActivity extends ListActivity {
 		setListAdapter(new RouteInfoAdapter(((OsmandApplication)getApplication()).getRoutingHelper().getRouteDirections()));
 	}
 
+	@Override
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		if(position == 0){
 			return;
@@ -138,6 +139,7 @@ public class ShowRouteInfoActivity extends ListActivity {
 		}
 
 
+		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {

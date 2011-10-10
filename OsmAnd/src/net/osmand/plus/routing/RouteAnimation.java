@@ -19,6 +19,7 @@ public class RouteAnimation {
 			final MapActivity ma) {
 		if (!isRouteAnimating()) {
 			routeAnimation = new Thread() {
+				@Override
 				public void run() {
 					final List<Location> directions = new ArrayList<Location>(
 							routingHelper.getCurrentRoute());

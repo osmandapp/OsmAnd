@@ -21,7 +21,8 @@ import java.util.List;
 public class IntersectPred extends Predicate
 {
   public IntersectPred(){}
-  public void relate(Element event, int from, Element[] others, List pairs, int evtSide)
+  @Override
+public void relate(Element event, int from, Element[] others, List pairs, int evtSide)
   {
     //System.out.println("SweepLine.internalLoop : before pairs size : " + pairs.size());
     for(int i=from; 
@@ -38,7 +39,8 @@ public class IntersectPred extends Predicate
     }//for
     //System.out.println("SweepLine.internalLoop : after pairs size : " + pairs.size());
   }
-  public boolean relateMismatch(Element ltElmt, Element rtElmt, int side)
+  @Override
+public boolean relateMismatch(Element ltElmt, Element rtElmt, int side)
   {
     try{
       return ltElmt.getRect().overlaps(rtElmt.getRect());

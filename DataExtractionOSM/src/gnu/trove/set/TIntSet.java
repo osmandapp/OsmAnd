@@ -53,7 +53,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      *
      * @return the value that represents null
      */
-    int getNoEntryValue();
+    @Override
+	int getNoEntryValue();
 
 
     /**
@@ -63,7 +64,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      *
      * @return the number of elements in this set (its cardinality)
      */
-    int size();
+    @Override
+	int size();
 
     
     /**
@@ -71,7 +73,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      *
      * @return <tt>true</tt> if this set contains no elements
      */
-    boolean isEmpty();
+    @Override
+	boolean isEmpty();
 
 
     /**
@@ -80,7 +83,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      * @param entry an <code>int</code> value
      * @return true if the set contains the specified element.
      */
-    boolean contains( int entry );
+    @Override
+	boolean contains( int entry );
 
 
     /**
@@ -89,7 +93,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      *
      * @return an <code>TIntIterator</code> value
      */
-    TIntIterator iterator();
+    @Override
+	TIntIterator iterator();
 
 
     /**
@@ -108,7 +113,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      *
      * @return an array containing all the elements in this set
      */
-    int[] toArray();
+    @Override
+	int[] toArray();
 
 
     /**
@@ -134,7 +140,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      * @return an <tt>int[]</tt> containing all the elements in this set
      * @throws NullPointerException if the specified array is null
      */
-    int[] toArray( int[] dest );
+    @Override
+	int[] toArray( int[] dest );
 
 
     /**
@@ -143,7 +150,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      * @param entry a <code>int</code> value
      * @return true if the set was modified by the add operation
      */
-    boolean add( int entry );
+    @Override
+	boolean add( int entry );
 
 
     /**
@@ -152,7 +160,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      * @param entry an <code>int</code> value
      * @return true if the set was modified by the remove operation.
      */
-    boolean remove( int entry );
+    @Override
+	boolean remove( int entry );
 
 
     /**
@@ -162,7 +171,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      * @param collection a <code>Collection</code> value
      * @return true if all elements were present in the set.
      */
-    boolean containsAll( Collection<?> collection );
+    @Override
+	boolean containsAll( Collection<?> collection );
 
 
     /**
@@ -172,7 +182,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      * @param collection a <code>TIntCollection</code> value
      * @return true if all elements were present in the set.
      */
-    boolean containsAll( TIntCollection collection );
+    @Override
+	boolean containsAll( TIntCollection collection );
 
 
     /**
@@ -182,7 +193,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      * @param array as <code>array</code> of int primitives.
      * @return true if all elements were present in the set.
      */
-    boolean containsAll( int[] array );
+    @Override
+	boolean containsAll( int[] array );
 
 
     /**
@@ -191,7 +203,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      * @param collection a <code>Collection</code> value
      * @return true if the set was modified by the add all operation.
      */
-    boolean addAll( Collection<? extends Integer> collection );
+    @Override
+	boolean addAll( Collection<? extends Integer> collection );
 
 
     /**
@@ -200,7 +213,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      * @param collection a <code>TIntCollection</code> value
      * @return true if the set was modified by the add all operation.
      */
-    boolean addAll( TIntCollection collection );
+    @Override
+	boolean addAll( TIntCollection collection );
 
 
     /**
@@ -209,7 +223,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      * @param array a <code>array</code> of int primitives.
      * @return true if the set was modified by the add all operation.
      */
-    boolean addAll( int[] array );
+    @Override
+	boolean addAll( int[] array );
 
 
     /**
@@ -219,7 +234,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      * @param collection a <code>Collection</code> value
      * @return true if the set was modified by the retain all operation
      */
-    boolean retainAll( Collection<?> collection );
+    @Override
+	boolean retainAll( Collection<?> collection );
 
 
     /**
@@ -229,7 +245,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      * @param collection a <code>TIntCollection</code> value
      * @return true if the set was modified by the retain all operation
      */
-    boolean retainAll( TIntCollection collection );
+    @Override
+	boolean retainAll( TIntCollection collection );
 
 
     /**
@@ -239,7 +256,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      * @param array an <code>array</code> of int primitives.
      * @return true if the set was modified by the retain all operation
      */
-    boolean retainAll( int[] array );
+    @Override
+	boolean retainAll( int[] array );
 
 
     /**
@@ -248,7 +266,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      * @param collection a <code>Collection</code> value
      * @return true if the set was modified by the remove all operation.
      */
-    boolean removeAll( Collection<?> collection );
+    @Override
+	boolean removeAll( Collection<?> collection );
 
 
     /**
@@ -257,7 +276,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      * @param collection a <code>TIntCollection</code> value
      * @return true if the set was modified by the remove all operation.
      */
-    boolean removeAll( TIntCollection collection );
+    @Override
+	boolean removeAll( TIntCollection collection );
 
 
     /**
@@ -266,13 +286,15 @@ public interface TIntSet extends TIntCollection, Serializable {
      * @param array an <code>array</code> of int primitives.
      * @return true if the set was modified by the remove all operation.
      */
-    public boolean removeAll( int[] array );
+    @Override
+	public boolean removeAll( int[] array );
 
 
     /**
      * Empties the set.
      */
-    void clear();
+    @Override
+	void clear();
 
 
     /**
@@ -282,7 +304,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      * @return false if the loop over the set terminated because
      * the procedure returned false for some value.
      */
-    boolean forEach( TIntProcedure procedure );
+    @Override
+	boolean forEach( TIntProcedure procedure );
 
 
     // Comparison and hashing
@@ -299,7 +322,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      * @param o object to be compared for equality with this set
      * @return <tt>true</tt> if the specified object is equal to this set
      */
-    boolean equals( Object o );
+    @Override
+	boolean equals( Object o );
 
 
     /**
@@ -314,7 +338,8 @@ public interface TIntSet extends TIntCollection, Serializable {
      * @see Object#equals(Object)
      * @see Set#equals(Object)
      */
-    int hashCode();
+    @Override
+	int hashCode();
 
 
 } // THashSet

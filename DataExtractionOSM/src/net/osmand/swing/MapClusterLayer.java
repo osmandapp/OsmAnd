@@ -61,6 +61,7 @@ public class MapClusterLayer implements MapPanelLayer {
 		Action clustering= new AbstractAction("Clustering roads") {
 			private static final long serialVersionUID = 444678942490247133L;
 
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				clusteringRoadActions(true);
 			}
@@ -71,6 +72,7 @@ public class MapClusterLayer implements MapPanelLayer {
 		clustering= new AbstractAction("Clustering roads with tertiary") {
 			private static final long serialVersionUID = 444678942490247134L;
 
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				clusteringRoadActions(false);
 			}

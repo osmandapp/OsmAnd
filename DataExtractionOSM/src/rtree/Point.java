@@ -32,11 +32,13 @@ public class Point implements Cloneable
   {
     return Y;
   }
-  public Object clone()
+  @Override
+public Object clone()
   {
     return new Point(X,Y);
   }
-  public String toString()
+  @Override
+public String toString()
   {
     String ret;
     ret = "\nThe Point:-";

@@ -45,6 +45,7 @@ public class GPXLayer implements OsmandMapLayer {
 		path = new Path();
 	}
 	
+	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 		initUI();

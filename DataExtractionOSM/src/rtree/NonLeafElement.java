@@ -39,12 +39,14 @@ public class NonLeafElement extends Element
   //  {
   //    return(new Integer(nodePtr));
   //  }
-  public long getPtr()//this is an integer object
+  @Override
+public long getPtr()//this is an integer object
   {
     return nodePtr;
   }
   
-  public int getElementType()
+  @Override
+public int getElementType()
   {
     return Node.NONLEAF_NODE;
   }
@@ -55,11 +57,13 @@ public class NonLeafElement extends Element
   //      throw new IllegalValueException("rtree.NonLeafElement.setPtr: pointer shoild be Integer");
   //    nodePtr = ((Integer)ptr).intValue();
   //  }
-  public void setPtr(long ptr)
+  @Override
+public void setPtr(long ptr)
   {
     nodePtr = ptr;
   }
-  public String toString()
+  @Override
+public String toString()
   {
     return (super.toString()+"\n\tnodePointer: "+nodePtr);
   }
@@ -141,7 +145,8 @@ public class NonLeafElement extends Element
       return ((elmt.getRect().getMaxY() 
                + elmt.getRect().getMinY())/2);
   }
-  public Object clone()
+  @Override
+public Object clone()
   {
     try{
       return new NonLeafElement(new Rect(Rectangle.getMinX(), Rectangle.getMinY(), 
