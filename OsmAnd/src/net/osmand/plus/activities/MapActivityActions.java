@@ -77,7 +77,8 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	protected void addFavouritePoint(final double latitude, final double longitude){
-		mapActivity.showDialog(DIALOG_ADD_FAVORITE,enhance(dialogBundle,latitude,longitude));
+		enhance(dialogBundle,latitude,longitude);
+		mapActivity.showDialog(DIALOG_ADD_FAVORITE);
 	}
 	
 	private Bundle enhance(Bundle aBundle, double latitude,	double longitude) {
@@ -119,7 +120,7 @@ public class MapActivityActions implements DialogProvider {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				mapActivity.showDialog(DIALOG_REPLACE_FAVORITE, dialogBundle);
+				mapActivity.showDialog(DIALOG_REPLACE_FAVORITE);
 			}
 			
 		});
@@ -179,7 +180,8 @@ public class MapActivityActions implements DialogProvider {
 	}
 	
     protected void addWaypoint(final double latitude, final double longitude){
-    	mapActivity.showDialog(DIALOG_ADD_WAYPOINT, enhance(dialogBundle,latitude,longitude));
+    	enhance(dialogBundle,latitude,longitude);
+    	mapActivity.showDialog(DIALOG_ADD_WAYPOINT);
     }
     
     private Dialog createAddWaypointDialog(final Bundle args) {
@@ -204,7 +206,8 @@ public class MapActivityActions implements DialogProvider {
     }
     
     protected void reloadTile(final int zoom, final double latitude, final double longitude){
-    	mapActivity.showDialog(DIALOG_RELOAD_TITLE, enhance(enhance(dialogBundle,latitude,longitude),zoom));
+    	enhance(enhance(dialogBundle,latitude,longitude),zoom);
+    	mapActivity.showDialog(DIALOG_RELOAD_TITLE);
     }
 
     
@@ -322,7 +325,8 @@ public class MapActivityActions implements DialogProvider {
     }
     
     protected void shareLocation(final double latitude, final double longitude, int zoom){
-    	mapActivity.showDialog(DIALOG_SHARE_LOCATION, enhance(enhance(dialogBundle,latitude,longitude),zoom));
+    	enhance(enhance(dialogBundle,latitude,longitude),zoom);
+    	mapActivity.showDialog(DIALOG_SHARE_LOCATION);
     }
     
     private Dialog createShareLocationDialog(final Bundle args) {
@@ -367,7 +371,7 @@ public class MapActivityActions implements DialogProvider {
     }
     
     protected void aboutRoute() {
-    	mapActivity.showDialog(DIALOG_ABOUT_ROUTE,dialogBundle);
+    	mapActivity.showDialog(DIALOG_ABOUT_ROUTE);
     }
     
     private void prepareAboutRouteDialog(Dialog dlg, Bundle args) {
@@ -607,7 +611,7 @@ public class MapActivityActions implements DialogProvider {
     }
 
 	public void saveDirections() {
-		mapActivity.showDialog(DIALOG_SAVE_DIRECTIONS,dialogBundle);
+		mapActivity.showDialog(DIALOG_SAVE_DIRECTIONS);
 	}
 	
 	private Dialog createSaveDirections() {
@@ -675,7 +679,8 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	@Override
-	public Dialog onCreateDialog(int id, Bundle args) {
+	public Dialog onCreateDialog(int id) {
+		Bundle args = dialogBundle;
 		switch (id) {
 			case DIALOG_ADD_FAVORITE:
 				return createAddFavouriteDialog(args);
@@ -696,7 +701,8 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	@Override
-	public void onPrepareDialog(int id, Dialog dialog, Bundle args) {
+	public void onPrepareDialog(int id, Dialog dialog) {
+		Bundle args = dialogBundle;
 		switch (id) {
 			case DIALOG_ADD_FAVORITE:
 				prepareAddFavouriteDialog(dialog,args);

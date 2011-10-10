@@ -376,6 +376,13 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	
     @Override
 	protected Dialog onCreateDialog(int id) {
+    	Dialog dialog = null;
+    	for (DialogProvider dp : dialogProviders) {
+    		dialog = dp.onCreateDialog(id);
+    		if (dialog != null) {
+    			return dialog;
+    		}
+    	}
 		if(id == OsmandApplication.PROGRESS_DIALOG){
 			return startProgressDialog;
 		}
@@ -383,21 +390,9 @@ public class MapActivity extends Activity implements IMapLocationListener, Senso
 	}
     
     @Override
-    protected Dialog onCreateDialog(int id, Bundle args) {
-    	Dialog dialog = null;
+    protected void onPrepareDialog(int id, Dialog dialog) {
     	for (DialogProvider dp : dialogProviders) {
-    		dialog = dp.onCreateDialog(id,args);
-    		if (dialog != null) {
-    			return dialog;
-    		}
-    	}
-    	return dialog;
-    }
-    
-    @Override
-    protected void onPrepareDialog(int id, Dialog dialog, Bundle args) {
-    	for (DialogProvider dp : dialogProviders) {
-    		dp.onPrepareDialog(id, dialog, args);
+    		dp.onPrepareDialog(id, dialog);
     	}
     }
     

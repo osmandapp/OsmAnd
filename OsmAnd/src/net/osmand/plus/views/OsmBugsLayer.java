@@ -332,7 +332,7 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 		dialogBundle.putDouble(KEY_LONGITUDE, longitude);
 		dialogBundle.putString(KEY_MESSAGE, message);
 		dialogBundle.putString(KEY_AUTHOR, authorName);
-		activity.showDialog(DIALOG_OPEN_BUG, dialogBundle);
+		activity.showDialog(DIALOG_OPEN_BUG);
 	}
 	
 	private void prepareOpenBugDialog(Dialog dlg, Bundle args) {
@@ -379,7 +379,7 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 	
 	public void commentBug(final OpenStreetBug bug){
 		dialogBundle.putSerializable(KEY_BUG, bug);
-		activity.showDialog(DIALOG_COMMENT_BUG, dialogBundle);
+		activity.showDialog(DIALOG_COMMENT_BUG);
 	}
 	
 	private Dialog createCommentBugDialog(final Bundle args) {
@@ -413,7 +413,7 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 	
 	public void closeBug(final OpenStreetBug bug){
 		dialogBundle.putSerializable(KEY_BUG, bug);
-		activity.showDialog(DIALOG_CLOSE_BUG, dialogBundle);
+		activity.showDialog(DIALOG_CLOSE_BUG);
 	}
 	
 	private Dialog createCloseBugDialog(final Bundle args) {
@@ -480,7 +480,8 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 	}
 
 	@Override
-	public Dialog onCreateDialog(int id, Bundle args) {
+	public Dialog onCreateDialog(int id) {
+		Bundle args = dialogBundle;
 		switch (id) {
 			case DIALOG_OPEN_BUG:
 				return createOpenBugDialog(args);
@@ -493,7 +494,8 @@ public class OsmBugsLayer implements OsmandMapLayer, ContextMenuLayer.IContextMe
 	}
 
 	@Override
-	public void onPrepareDialog(int id, Dialog dialog, Bundle args) {
+	public void onPrepareDialog(int id, Dialog dialog) {
+		Bundle args = dialogBundle;
 		switch (id) {
 			case DIALOG_OPEN_BUG: 
 				prepareOpenBugDialog(dialog, args);

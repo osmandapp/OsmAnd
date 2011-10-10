@@ -140,7 +140,7 @@ public class EditingPOIActivity implements DialogProvider {
 		Amenity a = new Amenity(n, type, subType);
 		dialogBundle.putSerializable(KEY_AMENITY, a);
 		dialogBundle.putSerializable(KEY_AMENITY_NODE, n);
-		ctx.showDialog(dialogID, dialogBundle);
+		ctx.showDialog(dialogID);
 	}
 	
 	public void showDeleteDialog(Amenity a){
@@ -151,7 +151,7 @@ public class EditingPOIActivity implements DialogProvider {
 		}
 		dialogBundle.putSerializable(KEY_AMENITY, a);
 		dialogBundle.putSerializable(KEY_AMENITY_NODE, n);
-		ctx.showDialog(DIALOG_DELETE_POI, dialogBundle);
+		ctx.showDialog(DIALOG_DELETE_POI); //TODO from android 2.0 use showDialog(id,bundle)
 	}
 	
 	private void prepareDeleteDialog(Dialog dlg, Bundle args) {
@@ -236,7 +236,7 @@ public class EditingPOIActivity implements DialogProvider {
 		openHoursButton.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				ctx.showDialog(DIALOG_OPENING_HOURS, args);
+				ctx.showDialog(DIALOG_OPENING_HOURS);
 			}
 		});
 		typeText.addTextChangedListener(new TextWatcher(){
@@ -267,7 +267,7 @@ public class EditingPOIActivity implements DialogProvider {
 		typeButton.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				ctx.showDialog(DIALOG_POI_TYPES, args);
+				ctx.showDialog(DIALOG_POI_TYPES);
 			}
 		});
 		
@@ -333,7 +333,7 @@ public class EditingPOIActivity implements DialogProvider {
 	private void showSubCategory(final Bundle args) {
 		final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
 		if(typeText.getText().length() == 0 && a.getType() != null){
-			ctx.showDialog(DIALOG_SUB_CATEGORIES,args);
+			ctx.showDialog(DIALOG_SUB_CATEGORIES);
 		}
 	}
 
@@ -773,7 +773,8 @@ public class EditingPOIActivity implements DialogProvider {
 	}
 	
 	@Override
-	public Dialog onCreateDialog(int id, Bundle args) {
+	public Dialog onCreateDialog(int id) {
+		Bundle args = dialogBundle;
 		switch (id) {
 			case DIALOG_CREATE_POI:
 			case DIALOG_EDIT_POI:
@@ -835,7 +836,8 @@ public class EditingPOIActivity implements DialogProvider {
 	}
 
 	@Override
-	public void onPrepareDialog(int id, Dialog dialog, Bundle args) {
+	public void onPrepareDialog(int id, Dialog dialog) {
+		Bundle args = dialogBundle;
 		switch (id) {
 			case DIALOG_CREATE_POI:
 				preparePOIDialog(dialog,args,R.string.poi_create_title);

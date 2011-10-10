@@ -15,9 +15,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
+//import javax.xml.transform.TransformerFactory;
+//import javax.xml.transform.dom.DOMSource;
+//import javax.xml.transform.stream.StreamResult;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -58,7 +58,8 @@ public class RouteProvider {
 	private static final String OSMAND_ROUTER = "OsmandRouter";
 	
 	public enum RouteService {
-		CLOUDMADE("CloudMade"), YOURS("YOURS"), ORS("OpenRouteService"),  OSMAND("OsmAnd (offline)"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		CLOUDMADE("CloudMade"), YOURS("YOURS"), OSMAND("OsmAnd (offline)"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		//ORS("OpenRouteService"),  
 		private final String name;
 		private RouteService(String name){
 			this.name = name;
@@ -267,9 +268,9 @@ public class RouteProvider {
 				} else if (type == RouteService.YOURS) {
 					res = findYOURSRoute(start, end, mode, fast);
 					addMissingTurnsToRoute(res, start, end, mode, ctx);
-				} else if (type == RouteService.ORS) {
-					res = findORSRoute(start, end, mode, fast);
-					addMissingTurnsToRoute(res, start, end, mode, ctx);
+//				} else if (type == RouteService.ORS) {
+//					res = findORSRoute(start, end, mode, fast);
+//					addMissingTurnsToRoute(res, start, end, mode, ctx);
 				} else if (type == RouteService.OSMAND) {
 					res = findVectorMapsRoute(start, end, mode, fast, (OsmandApplication)ctx.getApplicationContext());
 					addMissingTurnsToRoute(res, start, end, mode, ctx);
@@ -792,127 +793,127 @@ public class RouteProvider {
 		return directions;
 	}
 	
-	protected RouteCalculationResult findORSRoute(Location start, LatLon end,
-			ApplicationMode mode, boolean fast) throws MalformedURLException,
-			IOException, ParserConfigurationException,
-			FactoryConfigurationError, SAXException {
-		List<Location> res = new ArrayList<Location>();
-
-		String rpref = "Fastest";
-		if (ApplicationMode.PEDESTRIAN == mode) {
-			rpref = "Pedestrian";
-		} else if (ApplicationMode.BICYCLE == mode) {
-			rpref = "Bicycle";
-//		} else if (ApplicationMode.LOWTRAFFIC == mode) {
-//			rpref = "BicycleSafety";
-//		} else if (ApplicationMode.RACEBIKE == mode) {
-//			rpref = "BicycleRacer";
-//		} else if (ApplicationMode.TOURBIKE == mode) {
-//			rpref = "BicycleRoute";
-//		} else if (ApplicationMode.MTBIKE == mode) {
-//			rpref = "BicycleMTB";
-		} else if (!fast) {
-			rpref = "Shortest";
-		}
-
-		DocumentBuilder dom = DocumentBuilderFactory.newInstance()
-				.newDocumentBuilder();
-		Document doc = dom.newDocument();
-		Element e = (Element) doc.appendChild(doc.createElement("xls:XLS"));
-		e.setAttribute("xmlns:xls", "http://www.opengis.net/xls");
-		e.setAttribute("xmlns:sch", "http://www.ascc.net/xml/schematron");
-		e.setAttribute("xmlns:gml", "http://www.opengis.net/gml");
-		e.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
-		e.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-		e.setAttribute("xsi:schemaLocation",
-				"http://schemas.opengis.net/ols/1.1.0/RouteService.xsd");
-		e.setAttribute("xls:lang", "de");
-		e.setAttribute("version", "1.1");
-		e.appendChild(doc.createElement("xls:RequestHeader"));
-
-		e = (Element) e.appendChild(doc.createElement("xls:Request"));
-		e.setAttribute("methodName", "RouteRequest");
-		e.setAttribute("requestID", "123456789");
-		e.setAttribute("version", "1.1");
-		e = (Element) e.appendChild(doc
-				.createElement("xls:DetermineRouteRequest"));
-		e.setAttribute("distanceUnit", "KM");
-		e = (Element) e.appendChild(doc.createElement("xls:RoutePlan"));
-		e = (Element) e.appendChild(doc.createElement("xls:RoutePreference"));
-		e.appendChild(doc.createTextNode(rpref));
-
-		Element wpl = (Element) e.getParentNode().appendChild(
-				doc.createElement("xls:WayPointList"));
-		e = (Element) wpl.appendChild(doc.createElement("xls:StartPoint"));
-		e = (Element) e.appendChild(doc.createElement("xls:Position"));
-		e = (Element) e.appendChild(doc.createElement("gml:Point"));
-		e.setAttribute("srsName", "EPSG:4326");
-		e = (Element) e.appendChild(doc.createElement("gml:pos"));
-		e.appendChild(doc.createTextNode(start.getLongitude() + " "
-				+ start.getLatitude()));
-
-		e = (Element) wpl.appendChild(doc.createElement("xls:EndPoint"));
-		e = (Element) e.appendChild(doc.createElement("xls:Position"));
-		e = (Element) e.appendChild(doc.createElement("gml:Point"));
-		e.setAttribute("srsName", "EPSG:4326");
-		e = (Element) e.appendChild(doc.createElement("gml:pos"));
-		e.appendChild(doc.createTextNode(end.getLongitude() + " "
-				+ end.getLatitude()));
-
-		e = (Element) wpl.getParentNode().appendChild(
-				doc.createElement("xls:AvoidList"));
-
-		Element dRR = (Element) wpl.getParentNode().getParentNode();
-		// e = (Element) dRR.appendChild("xls:RouteInstructionsRequest");
-		// e.setAttribute("provideGeometry", "true");
-		e = (Element) dRR.appendChild(doc
-				.createElement("xls:RouteGeometryRequest"));
-
-		StringBuilder uri = new StringBuilder();
-		uri.append("http://openls.geog.uni-heidelberg.de/osm/eu/routing"); //$NON-NLS-1$
-		URL url = new URL(uri.toString());
-		URLConnection connection = url.openConnection();
-		connection.setDoOutput(true);
-
-		try {
-			TransformerFactory
-					.newInstance()
-					.newTransformer()
-					.transform(new DOMSource(doc),
-							new StreamResult(connection.getOutputStream()));
-		} catch (Exception te) {
-		}
-
-		dom = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		doc = dom.parse(new InputSource(new InputStreamReader(connection
-				.getInputStream())));
-		NodeList list = doc.getElementsByTagName("xls:RouteGeometry"); //$NON-NLS-1$
-		for (int i = 0; i < list.getLength(); i++) {
-			NodeList poslist = ((Element) list.item(i))
-					.getElementsByTagName("gml:pos"); //$NON-NLS-1$
-			for (int j = 0; j < poslist.getLength(); j++) {
-				String text = poslist.item(j).getFirstChild().getNodeValue();
-				int s = text.indexOf(' ');
-				try {
-					double lon = Double.parseDouble(text.substring(0, s));
-					double lat = Double.parseDouble(text.substring(s + 1));
-					Location l = new Location("router"); //$NON-NLS-1$
-					l.setLatitude(lat);
-					l.setLongitude(lon);
-					res.add(l);
-				} catch (NumberFormatException nfe) {
-				}
-			}
-		}
-		if (list.getLength() == 0) {
-			if (doc.getChildNodes().getLength() == 1) {
-				Node item = doc.getChildNodes().item(0);
-				return new RouteCalculationResult(item.getNodeValue());
-
-			}
-		}
-		return new RouteCalculationResult(res, null, start, end, null);
-	}
+//	protected RouteCalculationResult findORSRoute(Location start, LatLon end,
+//			ApplicationMode mode, boolean fast) throws MalformedURLException,
+//			IOException, ParserConfigurationException,
+//			FactoryConfigurationError, SAXException {
+//		List<Location> res = new ArrayList<Location>();
+//
+//		String rpref = "Fastest";
+//		if (ApplicationMode.PEDESTRIAN == mode) {
+//			rpref = "Pedestrian";
+//		} else if (ApplicationMode.BICYCLE == mode) {
+//			rpref = "Bicycle";
+////		} else if (ApplicationMode.LOWTRAFFIC == mode) {
+////			rpref = "BicycleSafety";
+////		} else if (ApplicationMode.RACEBIKE == mode) {
+////			rpref = "BicycleRacer";
+////		} else if (ApplicationMode.TOURBIKE == mode) {
+////			rpref = "BicycleRoute";
+////		} else if (ApplicationMode.MTBIKE == mode) {
+////			rpref = "BicycleMTB";
+//		} else if (!fast) {
+//			rpref = "Shortest";
+//		}
+//
+//		DocumentBuilder dom = DocumentBuilderFactory.newInstance()
+//				.newDocumentBuilder();
+//		Document doc = dom.newDocument();
+//		Element e = (Element) doc.appendChild(doc.createElement("xls:XLS"));
+//		e.setAttribute("xmlns:xls", "http://www.opengis.net/xls");
+//		e.setAttribute("xmlns:sch", "http://www.ascc.net/xml/schematron");
+//		e.setAttribute("xmlns:gml", "http://www.opengis.net/gml");
+//		e.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
+//		e.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+//		e.setAttribute("xsi:schemaLocation",
+//				"http://schemas.opengis.net/ols/1.1.0/RouteService.xsd");
+//		e.setAttribute("xls:lang", "de");
+//		e.setAttribute("version", "1.1");
+//		e.appendChild(doc.createElement("xls:RequestHeader"));
+//
+//		e = (Element) e.appendChild(doc.createElement("xls:Request"));
+//		e.setAttribute("methodName", "RouteRequest");
+//		e.setAttribute("requestID", "123456789");
+//		e.setAttribute("version", "1.1");
+//		e = (Element) e.appendChild(doc
+//				.createElement("xls:DetermineRouteRequest"));
+//		e.setAttribute("distanceUnit", "KM");
+//		e = (Element) e.appendChild(doc.createElement("xls:RoutePlan"));
+//		e = (Element) e.appendChild(doc.createElement("xls:RoutePreference"));
+//		e.appendChild(doc.createTextNode(rpref));
+//
+//		Element wpl = (Element) e.getParentNode().appendChild(
+//				doc.createElement("xls:WayPointList"));
+//		e = (Element) wpl.appendChild(doc.createElement("xls:StartPoint"));
+//		e = (Element) e.appendChild(doc.createElement("xls:Position"));
+//		e = (Element) e.appendChild(doc.createElement("gml:Point"));
+//		e.setAttribute("srsName", "EPSG:4326");
+//		e = (Element) e.appendChild(doc.createElement("gml:pos"));
+//		e.appendChild(doc.createTextNode(start.getLongitude() + " "
+//				+ start.getLatitude()));
+//
+//		e = (Element) wpl.appendChild(doc.createElement("xls:EndPoint"));
+//		e = (Element) e.appendChild(doc.createElement("xls:Position"));
+//		e = (Element) e.appendChild(doc.createElement("gml:Point"));
+//		e.setAttribute("srsName", "EPSG:4326");
+//		e = (Element) e.appendChild(doc.createElement("gml:pos"));
+//		e.appendChild(doc.createTextNode(end.getLongitude() + " "
+//				+ end.getLatitude()));
+//
+//		e = (Element) wpl.getParentNode().appendChild(
+//				doc.createElement("xls:AvoidList"));
+//
+//		Element dRR = (Element) wpl.getParentNode().getParentNode();
+//		// e = (Element) dRR.appendChild("xls:RouteInstructionsRequest");
+//		// e.setAttribute("provideGeometry", "true");
+//		e = (Element) dRR.appendChild(doc
+//				.createElement("xls:RouteGeometryRequest"));
+//
+//		StringBuilder uri = new StringBuilder();
+//		uri.append("http://openls.geog.uni-heidelberg.de/osm/eu/routing"); //$NON-NLS-1$
+//		URL url = new URL(uri.toString());
+//		URLConnection connection = url.openConnection();
+//		connection.setDoOutput(true);
+//
+//		try {
+//			TransformerFactory
+//					.newInstance()
+//					.newTransformer()
+//					.transform(new DOMSource(doc),
+//							new StreamResult(connection.getOutputStream()));
+//		} catch (Exception te) {
+//		}
+//
+//		dom = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+//		doc = dom.parse(new InputSource(new InputStreamReader(connection
+//				.getInputStream())));
+//		NodeList list = doc.getElementsByTagName("xls:RouteGeometry"); //$NON-NLS-1$
+//		for (int i = 0; i < list.getLength(); i++) {
+//			NodeList poslist = ((Element) list.item(i))
+//					.getElementsByTagName("gml:pos"); //$NON-NLS-1$
+//			for (int j = 0; j < poslist.getLength(); j++) {
+//				String text = poslist.item(j).getFirstChild().getNodeValue();
+//				int s = text.indexOf(' ');
+//				try {
+//					double lon = Double.parseDouble(text.substring(0, s));
+//					double lat = Double.parseDouble(text.substring(s + 1));
+//					Location l = new Location("router"); //$NON-NLS-1$
+//					l.setLatitude(lat);
+//					l.setLongitude(lon);
+//					res.add(l);
+//				} catch (NumberFormatException nfe) {
+//				}
+//			}
+//		}
+//		if (list.getLength() == 0) {
+//			if (doc.getChildNodes().getLength() == 1) {
+//				Node item = doc.getChildNodes().item(0);
+//				return new RouteCalculationResult(item.getNodeValue());
+//
+//			}
+//		}
+//		return new RouteCalculationResult(res, null, start, end, null);
+//	}
 	
 	public GPXFile createOsmandRouterGPX(int currentRoute, List<Location> routeNodes, int currentDirectionInfo, List<RouteDirectionInfo> directionInfo){
 		GPXFile gpx = new GPXFile();
