@@ -24,6 +24,7 @@ public class RouteAnimation {
 					final List<Location> directions = new ArrayList<Location>(
 							routingHelper.getCurrentRoute());
 					Location current = null;
+					Location prev = null;
 					float meters = 20.0f;
 					while (!directions.isEmpty() && routeAnimation != null) {
 						if (current == null) {
@@ -38,12 +39,22 @@ public class RouteAnimation {
 						}
 						current.setSpeed(meters);
 						current.setTime(System.currentTimeMillis());
-						ma.setLocation(current);
+						if (prev != null) {
+							current.setBearing(prev.bearingTo(current));
+						}
+						final Location toset = current;
+						ma.runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								ma.setLocation(toset);
+							}
+						});
 						try {
 							Thread.sleep(1000);
 						} catch (InterruptedException e) {
 							// do nothing
 						}
+						prev = current;
 					}
 					RouteAnimation.this.stop();
 				};
