@@ -141,6 +141,7 @@ public class MapVectorLayer extends BaseMapLayer {
 			if(!bmp.isRecycled()){
 				canvas.drawBitmap(bmp, null, destImage, paintImg);
 			}
+			canvas.rotate(rot, view.getCenterPointX(), view.getCenterPointY());
 		}
 	}
 
