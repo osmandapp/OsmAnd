@@ -178,10 +178,10 @@ public class BinaryMapAddressReaderAdapter {
 		int x = 0;
 		int y = 0;
 		int streetInd = 0;
+		boolean englishNameMatched = false;
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
-			boolean englishNameMatched = false;
 			switch (tag) {
 			case 0:
 				return c;

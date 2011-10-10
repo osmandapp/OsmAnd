@@ -12,14 +12,20 @@ option java_package = "net.osmand.binary";
  // The main difference that size of that messages is not var int and is always fixed int size
 message OsmAndStructure {
    required uint32 version = 1;
-   // encoded as fixed32 length delimited
-   repeated OsmAndMapIndex mapIndex = 2;
+
+   // first version of map index was 3.
    // encoded as fixed32 length delimited  
-   repeated OsmAndAddressIndex addressIndex = 3;
+   repeated OsmAndAddressIndex addressIndex = 7;
+   
     // encoded as fixed32 length delimited  
    repeated OsmAndTransportIndex transportIndex = 4;
+   
    // encoded as fixed32 length delimited  
    repeated OsmAndPoiIndex poiIndex = 5;
+   
+    // first version of map index was 2.
+   // encoded as fixed32 length delimited
+   repeated OsmAndMapIndex mapIndex = 6;
    
    // last field should version again (to check consistency)
    required uint32 versionConfirm = 32;
@@ -112,66 +118,79 @@ message MapData {
 }
 
 /// Address messages
-
 message OsmAndAddressIndex {
 	
 	required string name = 1;
 	optional string name_en = 2;
 	
 	// encoded as fixed32 length delimited
-	optional CitiesIndex cities = 5; // cities and towns 
-
-	// encoded as fixed32 length delimited
-	optional PostcodesIndex postcodes = 6;
+	optional OsmAndAddressNameIndexData nameIndex = 3;
 	
 	// encoded as fixed32 length delimited
-	optional CitiesIndex villages = 7; // suburbs and villages
+	// 1) cities and towns - type 1,  2) postcodes - type 2, 3) villages - type 3
+	repeated CitiesIndex cities = 5;  
 }
+
+message OsmAndAddressNameIndexData {
+    // shift to data starting from first AddressNameIndexData message
+    // encoded as fixed32 length delimited
+    required IndexedStringTable table = 4;
+   
+    repeated AddressNameIndexData data = 5;
+}
+
+message AddressNameIndexData {
+
+    repeated AddressNameIndexDataAtom = 4; 
+}
+
+message AddressNameIndexDataAtom {
+     required string name = 1;
+     optional string nameEn = 2;
+     // 1 - city, 2 - postcode, 3 - village,  4 - street
+     required uint32 type = 3; 
+
+     // shift from start AddressNameIndexDataAtom to ...Index      
+     repeated uint32 shiftToIndex;
+     // optional used in case of type=street
+     repeated string shiftToCityIndex; 
+}
+
 
 message CitiesIndex {
-	// encoded as fixed32 length delimited
-    repeated CityIndex cities = 1;
+    // cities and towns - type 1,  postcodes - type 2, villages - type 3
+    required uint32 type = 2;
+    
+    // the list cities and blocks are synchronized by order (so even empty block will be written)
+    repeated CityIndex cities = 5;
+    
+    // encoded as fixed32 length delimited
+    repeated CityBlockIndex blocks = 7;
 }
 
-message PostcodesIndex {
-	// encoded as fixed32 length delimited
-    repeated PostcodeIndex postcodes = 1;
-}
 
 message CityIndex {
-	// should be written the first
-    required uint32 city_type = 1; // 0-5 enum CityType
+	// should be written the first (for city), for postcode is optional
+    optional uint32 city_type = 1; // 0-5 enum CityType
     
 	required string name = 2;
 	optional string name_en = 3;
 	optional uint64 id = 4;
 	
-	required fixed32 x = 5; // x tile of 31 zoom
-	required fixed32 y = 6; // y tile of 31 zoom
+	required uint32 x = 5; // x tile of 24 zoom
+	required uint32 y = 6; // y tile of 24 zoom
 	
-	optional InteresectedStreets intersections = 14;
+	// shift from start CityIndex to cityBlockIndex
+	optional fixed32 shiftToCityBlockIndex = 10;
+	
+}
+
+message CityBlockIndex {
+
+	// buildings that doesn't belong to the street
+	repeated BuildingIndex buildings = 16;
 	
 	repeated StreetIndex streets = 18; 
-}
-
-message InteresectedStreets {
-    repeated StreetIntersection intersections = 5;
-}
-
-message StreetIntersection {
-	required uint32 intersectedStreet1 = 2; // index of street in parent list
-	required uint32 intersectedStreet2 = 3; // index of street in parent list
-	required sint32 intersectedX = 4; // delta encoded to parent x 24 zoom
-	required sint32 intersectedY = 5; // delta encoded to parent y 24 zoom
-}
-
-
-
-message PostcodeIndex {
-    required string postcode = 1;
-    required fixed32 x = 2; // x tile of 31 zoom
-	required fixed32 y = 3; // y tile of 31 zoom
-    repeated StreetIndex streets = 5;
 }
 
 message StreetIndex {
@@ -183,19 +202,40 @@ message StreetIndex {
 	
 	optional uint64 id = 6;
 	
+	repeated BuildingIndex buildings = 12;
 	
-	repeated BuildingIndex buildings = 18;
+	repeated StreetIntersection intersections = 5;
+}
+
+message StreetIntersection {
+	required string name = 2;
+	optional string name_en = 3;
+	
+	required sint32 intersectedX = 4; // delta encoded to parent street x 24 zoom
+	required sint32 intersectedY = 5; // delta encoded to parent street y 24 zoom
 } 
 
 message BuildingIndex {
 	required string name = 1;
 	optional string name_en = 2;
-	optional uint64 id = 5;
-	optional string postcode = 6;
 	
-	required sint32 x = 3; // delta encoded to street 24 zoom
-	required sint32 y = 4; // delta encoded to street 24 zoom
+	// used for interpolation
+	optional string name2 = 3;
+	optional string name_en2 = 4;
 	
+	// special values 0 means - nothing, -1 - all, -2 - even, -3 - odd, -4, alphabetic
+	// positive - just positive interpolation 
+	optional sint32 interpolation = 5;
+	
+	required sint32 x = 7; // delta encoded to parent 24 zoom
+	required sint32 y = 8; // delta encoded to parent 24 zoom
+	
+	// used for interpolation
+	optional sint32 x2 = 9; // delta encoded to parent 24 zoom
+	optional sint32 y2 = 10; // delta encoded to parent 24 zoom
+	
+	optional uint64 id = 13;
+	optional string postcode = 14;
 }
 
 // transport messages

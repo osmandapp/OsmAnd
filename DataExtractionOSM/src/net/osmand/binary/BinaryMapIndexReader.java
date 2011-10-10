@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -1093,20 +1095,13 @@ public class BinaryMapIndexReader {
 		return poiIndexes;
 	}
 
-	public static SearchRequest<BinaryMapDataObject> buildSearchRequest(int sleft, int sright, int stop, int sbottom, int zoom,
-			SearchFilter searchFilter, ResultMatcher<BinaryMapDataObject> matcher) {
-		SearchRequest<BinaryMapDataObject> request = new SearchRequest<BinaryMapDataObject>();
-		request.left = sleft;
-		request.right = sright;
-		request.top = stop;
-		request.bottom = sbottom;
-		request.zoom = zoom;
-		request.resultMatcher = matcher;
-		request.searchFilter = searchFilter;
-		return request;
-	}
 	
 	public static SearchRequest<BinaryMapDataObject> buildSearchRequest(int sleft, int sright, int stop, int sbottom, int zoom, SearchFilter searchFilter){
+		return buildSearchRequest(sleft, sright, stop, sbottom, zoom, searchFilter, null);
+	}
+	
+	public static SearchRequest<BinaryMapDataObject> buildSearchRequest(int sleft, int sright, int stop, int sbottom, int zoom, SearchFilter searchFilter, 
+			ResultMatcher<BinaryMapDataObject> resultMatcher){
 		SearchRequest<BinaryMapDataObject> request = new SearchRequest<BinaryMapDataObject>();
 		request.left = sleft;
 		request.right = sright;
@@ -1114,6 +1109,7 @@ public class BinaryMapIndexReader {
 		request.bottom = sbottom;
 		request.zoom = zoom;
 		request.searchFilter = searchFilter;
+		request.resultMatcher = resultMatcher; 
 		return request;
 	}
 	
@@ -1393,8 +1389,8 @@ public class BinaryMapIndexReader {
 
 	
 	private static boolean testMapSearch = false;
-	private static boolean testAddressSearch = false;
-	private static boolean testPoiSearch = true;
+	private static boolean testAddressSearch = true;
+	private static boolean testPoiSearch = false;
 	private static boolean testTransportSearch = false;
 	
 	private static void println(String s){
@@ -1402,7 +1398,7 @@ public class BinaryMapIndexReader {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		RandomAccessFile raf = new RandomAccessFile(new File("/home/victor/projects/OsmAnd/data/osmand_index/Parkcharge_me.obf"), "r");
+		RandomAccessFile raf = new RandomAccessFile(new File("/home/victor/projects/OsmAnd/data/osmand_index/Netherlands.obf"), "r");
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
 		println("VERSION " + reader.getVersion()); //$NON-NLS-1$
 		long time = System.currentTimeMillis();
@@ -1489,15 +1485,26 @@ public class BinaryMapIndexReader {
 			}
 		}
 	}
+	
+	private static void updateFrequence(Map<String, Integer> street , String key){
+		if(!street.containsKey(key)){
+			street.put(key, 1);
+		} else {
+			street.put(key, street.get(key) + 1);
+		}
+		
+	}
 
 	private static void testAddressSearch(BinaryMapIndexReader reader) throws IOException {
 		// test address index search
 		String reg = reader.getRegionNames().get(0);
+		final Map<String, Integer> streetFreq = new LinkedHashMap<String, Integer>();
 		List<City> cs = reader.getCities(reg, null);
 		for(City c : cs){
 			int buildings = 0;
 			reader.preloadStreets(c, null);
 			for(Street s : c.getStreets()){
+				updateFrequence(streetFreq, s.getName());
 				reader.preloadBuildings(s, buildAddressRequest((ResultMatcher<Building>) null));
 				buildings += s.getBuildings().size();
 			}
@@ -1508,14 +1515,41 @@ public class BinaryMapIndexReader {
 			reader.preloadStreets(c, buildAddressRequest((ResultMatcher<Street>) null));
 			println(c.getName());
 		}
+//			System.out.println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings + " " + c.getEnName());
+//		List<PostCode> postcodes = reader.getPostcodes(reg, buildAddressRequest((ResultMatcher<MapObject>) null), null);
+//		for(PostCode c : postcodes){
+//			reader.preloadStreets(c, buildAddressRequest((ResultMatcher<Street>) null));
+//			System.out.println(c.getName());
+//		}
+//		int[] count = new int[1];
 		List<City> villages = reader.getVillages(reg, buildAddressRequest((ResultMatcher<MapObject>) null), new StringMatcher() {
-			
 			@Override
 			public boolean matches(String name) {
-				return false;
+				return true;
 			}
 		}, true);
-		println("Villages " + villages.size());
+		for(City v : villages) {
+			reader.preloadStreets(v,  null);
+			for(Street s : v.getStreets()){
+				updateFrequence(streetFreq, s.getName());
+			}
+		}
+		System.out.println("Villages " + villages.size());
+		
+		List<String> sorted = new ArrayList<String>(streetFreq.keySet());
+		Collections.sort(sorted, new Comparator<String>() {
+			@Override
+			public int compare(String o1, String o2) {
+				return - streetFreq.get(o1) + streetFreq.get(o2);
+			}
+		});
+		System.out.println(streetFreq.size());
+		for(String s : sorted) {
+			System.out.println(s + "   " + streetFreq.get(s));
+			if(streetFreq.get(s) < 10){
+				break;
+			}
+		}
 	}
 
 	private static void testMapSearch(BinaryMapIndexReader reader) throws IOException {
