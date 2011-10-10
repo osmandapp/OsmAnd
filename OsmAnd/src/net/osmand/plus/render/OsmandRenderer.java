@@ -358,7 +358,7 @@ public class OsmandRenderer {
 
 			for (int k = 0; k < keys.length; k++) {
 
-				if(repeat == true && shadowarray[shadownum] != k && shadowarray[shadownum] != -1){
+				if(repeat == true && shadowarray[shadownum] != k && shadowarray[shadownum] != -1  && keys[k] < 58){
 					continue;
 				}
 				
